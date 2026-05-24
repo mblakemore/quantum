@@ -4,6 +4,10 @@
 
 **Significance**: Confirms that dominant mid-circuit error on Heron-r2 is **coherent unitary miscalibration**, not stochastic decoherence. Matches the predictions of scramblon / out-of-time-order correlator (OTOC) theory.
 
+![Loschmidt echo non-monotonic recovery](../images/fig04_scramblon_loschmidt.png)
+
+*Figure 4. Loschmidt-echo amplitude vs. time-reversal round. The measured signal (purple) rises above the naive Markovian decoherence floor (grey) at multiple rounds — quasi-revivals consistent with coherent miscalibration, not stochastic decoherence. Schematic; underlying excursion magnitudes from depth-8 / 12 / 16 measurements summarised in the table below.*
+
 ---
 
 ## The Loschmidt Echo Protocol
@@ -72,6 +76,9 @@ Prior to this campaign, the working assumption in much of the NISQ literature wa
 
 ## Sources
 
-- Out-of-time-order correlations and quantum chaos — Scholarpedia
-- Measuring out-of-time-order correlations and multiple quantum spectra in a trapped ion quantum magnet — ResearchGate (see `sources/references.md`)
-- Goussev, Jalabert, Pastawski, Wisniacki (2012). "Loschmidt echo." *Scholarpedia*.
+- Goussev, A.; Jalabert, R.A.; Pastawski, H.M.; Wisniacki, D.A. (2012). "Loschmidt echo." *Scholarpedia* — see [`sources/references.md`](../sources/references.md) entry [31].
+- OTOC and quantum chaos — see [`sources/references.md`](../sources/references.md) entry [30] (Scholarpedia).
+- Distinguishing coherent and incoherent errors via scramblons — see [`sources/references.md`](../sources/references.md) entries [33] (arXiv 2601.04856), [35] (abs), [36] (Quantum Zeitgeist coverage).
+- OTOC measurements in trapped ions — see [`sources/references.md`](../sources/references.md) entry [29].
+- Information-scrambling-enhanced quantum sensing — see [`sources/references.md`](../sources/references.md) entry [34].
+- Schwinger-model dynamical quantum phase transitions on IBM Q — see [`sources/references.md`](../sources/references.md) entry [32].

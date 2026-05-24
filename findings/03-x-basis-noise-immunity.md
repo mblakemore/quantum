@@ -6,6 +6,10 @@
 
 **Confidence**: HIGH — three independent confirmations on `ibm_marrakesh`, mechanism identified via Pearl causal DAG, validated by Zero-Noise Extrapolation experiments.
 
+![X-basis vs Z-basis observable error, 3 confirmations](../images/fig03_x_basis_immunity.png)
+
+*Figure 3. Three independent confirmations of X-basis noise immunity. The "×" annotation is the ZZ/XX error ratio per run — consistently ~3× across distinct circuit families (Bell ZNE C3650, GHZ-3 + XX-threshold C3651, Lyla Bell baseline C3670). Absolute error values are illustrative of the relative ratio; the underlying campaign data fix the ZNE scaling exponents reported in the table below (γ_ZZ ≈ 1.197, γ_XX flat, γ_YY ≈ 0.707 for the Bell case), not absolute observable errors.*
+
 ---
 
 ## What "Immunity" Means Here
@@ -72,5 +76,8 @@ Hardware-aware compilation should:
 ## Sources
 
 - Pearl, J. (2009). *Causality: Models, Reasoning, and Inference* (2nd ed.). Cambridge University Press.
-- Folding-Free ZNE: A Comprehensive Quantum Zero-Noise Extrapolation Approach (IEEE Xplore, see `sources/references.md`).
-- Hardware noise mitigation literature index in `sources/references.md`.
+- Folding-Free ZNE — see [`sources/references.md`](../sources/references.md) entries [21] (IEEE Xplore), [51] (arXiv 2603.13949).
+- ZNE theory — see [`sources/references.md`](../sources/references.md) entries [45] (QEM Zoo), [54] (Mitiq docs), [55] (PennyLane).
+- Hardware noise channel structure — see [`sources/references.md`](../sources/references.md) entries [8] (floating coupler), [4] (Heron-r2 tunable coupler), [11] (disorder in superconducting materials).
+- Symmetry-based mitigation — see [`sources/references.md`](../sources/references.md) entry [27] (noise mitigation via Hamiltonian symmetry decays).
+- Physics-informed error attribution — see [`sources/references.md`](../sources/references.md) entry [28] (arXiv:2602.21253).

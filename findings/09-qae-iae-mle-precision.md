@@ -4,6 +4,10 @@
 
 **Significance**: Demonstrates that **statistical post-processing of Grover oscillation patterns** is a genuine, hardware-validated route to high-precision QAE on NISQ devices. This is a finding distinct from the rest of the campaign because it is a **constructive result**: not "what doesn't work," but "what does."
 
+![IAE-MLE vs naive best-k](../images/fig09_qae_iae_mle.png)
+
+*Figure 9. Absolute amplitude-estimation error per volatility regime: naive best-k (red) vs. IAE-MLE (green). Joint-likelihood scan across k=1..4 resolves the sin² inversion ambiguity that breaks naive k=1 at the edges of [0,1]. All values from C3671 real-hardware runs on `ibm_marrakesh`.*
+
 ---
 
 ## Background: QAE on NISQ
@@ -117,6 +121,11 @@ This is the same broad principle as VQE (see [Finding 08](08-vqe-h2-chemical-acc
 
 ## Sources
 
-- Brassard, Høyer, Mosca, Tapp (2002). "Quantum Amplitude Amplification and Estimation." *Contemporary Mathematics* 305, 53–74.
-- Suzuki, Uno, Raymond, Tanaka, Onodera, Yamamoto (2020). "Amplitude estimation without phase estimation." *Quantum Information Processing* 19, 75 — original IAE paper.
-- Tanaka, Suzuki, Uno (2021). "Amplitude estimation via maximum likelihood on noisy quantum computer." *Quantum Information Processing* 20, 293 — IAE-MLE method this implementation follows.
+- Brassard, G.; Høyer, P.; Mosca, M.; Tapp, A. (2002). "Quantum Amplitude Amplification and Estimation." *Contemporary Mathematics* 305, 53–74.
+- Suzuki, Y.; Uno, S.; Raymond, R.; Tanaka, T.; Onodera, T.; Yamamoto, N. (2020). "Amplitude estimation without phase estimation." *Quantum Information Processing* 19, 75 — original IAE paper.
+- Tanaka, T.; Suzuki, Y.; Uno, S. (2021). "Amplitude estimation via maximum likelihood on noisy quantum computer." *Quantum Information Processing* 20, 293 — IAE-MLE method this implementation follows.
+- Grover, L.K. (1996). "A fast quantum mechanical algorithm for database search." *Proc. STOC* 96.
+- Heavy-hex routing for amplitude-amplification circuits — see [`sources/references.md`](../sources/references.md) entries [12], [13], [14].
+- IBM Quantum runtime and Sampler primitive — see [`sources/references.md`](../sources/references.md) entry [44].
+- Quantum-enhanced sensing via scrambling — see [`sources/references.md`](../sources/references.md) entry [34] (arXiv:2512.21157).
+- Volatility / option-pricing precedent — Stamatopoulos, N.; Egger, D.J.; Sun, Y.; Zoufal, C.; Iten, R.; Shen, N.; Woerner, S. (2020). "Option Pricing using Quantum Computers." *Quantum* 4, 291.

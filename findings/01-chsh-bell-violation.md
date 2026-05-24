@@ -4,6 +4,10 @@
 
 **Significance**: ~37σ violation of local realism. ~96.8% of maximum theoretical quantum fidelity. Establishes the baseline "decoherence tax" of the substrate at depth 1.
 
+![CHSH violation chart](../images/fig01_chsh.png)
+
+*Figure 1. Measured CHSH parameter on ibm_marrakesh against the classical bound (2.0) and the Tsirelson bound (2√2). Data: C3670 Bell-state job. Reproduce via [`scripts/generate_figures.py`](../scripts/generate_figures.py).*
+
 ---
 
 ## What CHSH Tests
@@ -47,6 +51,7 @@ This finding anchors the more dramatic structural noise immunity discovered late
 
 ## Sources
 
-- Clauser, Horne, Shimony, Holt (1969). "Proposed Experiment to Test Local Hidden-Variable Theories." *Phys. Rev. Lett.* 23, 880.
+- Clauser, J.F.; Horne, M.A.; Shimony, A.; Holt, R.A. (1969). "Proposed Experiment to Test Local Hidden-Variable Theories." *Phys. Rev. Lett.* 23, 880.
 - Tsirelson, B.S. (1980). "Quantum generalizations of Bell's inequality." *Lett. Math. Phys.* 4, 93.
-- IBM Quantum heavy-hex lattice documentation (see `sources/references.md`).
+- IBM Quantum heavy-hex lattice — see [`sources/references.md`](../sources/references.md) entries [12], [16].
+- IBM Heron-r2 architecture — see [`sources/references.md`](../sources/references.md) entries [4], [5], [16], [20].

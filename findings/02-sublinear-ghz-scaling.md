@@ -4,6 +4,10 @@
 
 **Significance**: Counter to the conventional exponential-decay model. Heavy-hex topology + tunable couplers genuinely isolate spectator qubits.
 
+![GHZ sublinear scaling](../images/fig02_ghz_sublinear.png)
+
+*Figure 2. Representative GHZ fidelity scaling (blue) vs. the naive multiplicative prediction F₂^(N-1) (red dashed). The gap is the architectural benefit of heavy-hex + tunable couplers. Direct job-anchored points in this campaign cover N=2 (Bell, C3670) and N=3 / N=4 (C3651); N=5 and N=7 points are extrapolated from the upstream synthesis ([`../full-report.md`](../full-report.md)) and are included to show the sublinear trend, not as primary measurements.*
+
 ---
 
 ## Why GHZ Matters
@@ -57,5 +61,7 @@ The architectural moral: **width is cheap; depth is expensive**.
 ## Sources
 
 - Mermin, N.D. (1990). "Extreme quantum entanglement in a superposition of macroscopically distinct states." *Phys. Rev. Lett.* 65, 1838.
-- Greenberger, Horne, Zeilinger (1989). "Going Beyond Bell's Theorem."
-- Generation and Preservation of Large Entangled States on Physical Quantum Devices, arXiv:2312.15170 (`sources/references.md`).
+- Greenberger, D.M.; Horne, M.A.; Zeilinger, A. (1989). "Going Beyond Bell's Theorem." In *Bell's Theorem, Quantum Theory and Conceptions of the Universe* (Kafatos, ed.), Kluwer.
+- Generation and Preservation of Large Entangled States on Physical Quantum Devices — see [`sources/references.md`](../sources/references.md) entry [19] (arXiv:2312.15170).
+- Heavy-hex topology and tunable-coupler architecture — see [`sources/references.md`](../sources/references.md) entries [12], [4], [8], [20].
+- Scaling of decoherence for uncoupled spin qubits — see [`sources/references.md`](../sources/references.md) entry [18].

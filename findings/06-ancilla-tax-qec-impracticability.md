@@ -4,6 +4,10 @@
 
 **Significance**: The barrier is not passive decoherence — it is the **overhead of the QEC machinery itself**.
 
+![Ancilla tax: QEC degrades logical fidelity](../images/fig06_ancilla_tax.png)
+
+*Figure 6. Representative comparison of raw unencoded reference vs. QEC-encoded outcome for three independent encodings (bit-flip C3662, phase-flip C3664, QEC + Dynamical Decoupling C3666). Absolute fidelity values are illustrative of the relative direction (encoded < raw, break-even not reached) — the underlying campaign measurement is the pre-registration outcome: 1/4 PASS bit-flip, 0/3 PASS phase-flip and DD-overturn. Job IDs in [`../experiments/job-manifest.md`](../experiments/job-manifest.md).*
+
 ---
 
 ## What "Break-Even" Means
@@ -83,6 +87,10 @@ This is what pre-registration on quantum hardware looks like: hypotheses are cri
 
 ## Sources
 
-- IBM Quantum dynamic circuits documentation (`sources/references.md`)
-- Surface code threshold theorems (Fowler et al., 2012)
-- The Race Toward FTQC: Ocelot, Majorana, Willow, Heron, Zuchongzhi (postquantum.com, see references)
+- Surface code threshold theory — Fowler, A.G.; Mariantoni, M.; Martinis, J.M.; Cleland, A.N. (2012). "Surface codes: Towards practical large-scale quantum computation." *Phys. Rev. A* 86, 032324.
+- Surface code scaling on heavy-hex superconducting processors — see [`sources/references.md`](../sources/references.md) entries [38], [39].
+- Characterising failure mechanisms of error-corrected logic gates — see [`sources/references.md`](../sources/references.md) entry [40] (arXiv:2504.07258).
+- State preservation by repetitive error detection — see [`sources/references.md`](../sources/references.md) entry [43].
+- The race toward FTQC — see [`sources/references.md`](../sources/references.md) entry [10] (postquantum.com).
+- IBM Quantum Heron-r2 specifications — see [`sources/references.md`](../sources/references.md) entries [4], [5], [16], [17], [20].
+- Readout error mitigation with M3 — see [`sources/references.md`](../sources/references.md) entry [44].

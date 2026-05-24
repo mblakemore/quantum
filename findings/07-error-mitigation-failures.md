@@ -4,6 +4,14 @@
 
 **Significance**: Software-level mitigation cannot rescue an algorithm from a thermodynamically volatile substrate. The path forward is **hardware-aware compilation** (locking seeds, choosing immune bases, minimizing depth), not algorithmic correction layers.
 
+![All four mitigation strategies failed](../images/fig07_mitigation_failures.png)
+
+*Figure 7. Δ fidelity (percentage points) and statistical significance for the four mitigation techniques attempted in cycles C3666–C3669. All four landed below zero — each technique was a net detractor at the measured shot counts.*
+
+![Calibration drift: identical circuit, ±7pp in 24h](../images/fig10_calibration_drift.png)
+
+*Figure 7b. The substrate "weather" — same circuit, same `seed_transpiler=42`, 24 hours apart, +7.3pp drift with no algorithmic explanation. Any 1–3pp improvement claim that does not control for this drift envelope is suspect.*
+
 ---
 
 ## The Four Failures
@@ -101,7 +109,10 @@ Given that DD, PT, TREM, and ZNE all under-perform, the productive replacements 
 
 ## Sources
 
-- Folding-Free ZNE: A Comprehensive Quantum Zero-Noise Extrapolation Approach (IEEE Xplore)
-- IBM Quantum DD/Pauli twirling documentation
-- TLS defect literature: "Effects of disorder in superconducting materials on qubit coherence" (PMC PMC12003810)
-- Full citation list in `sources/references.md`
+- ZNE theory and folding-free approaches — see [`sources/references.md`](../sources/references.md) entries [21], [51], [45], [54], [55].
+- IBM Quantum dynamical-decoupling pass manager — see [`sources/references.md`](../sources/references.md) entries [46], [47], [48], [49] (Qiskit docs + source).
+- TLS / dielectric-defect literature — see [`sources/references.md`](../sources/references.md) entry [11] (PMC12003810), entry [16] (IBM TLS mitigation).
+- Calibration-drift datasets — see [`sources/references.md`](../sources/references.md) entries [52] (Hugging Face qiskit-calibration-drift), [53] (few-shot cross-device transfer).
+- Approximate compilation and proton-transfer kinetics — see [`sources/references.md`](../sources/references.md) entry [50].
+- Pauli-twirling symmetrization — Wallman, J.J.; Emerson, J. (2016). "Noise tailoring for scalable quantum computation via randomized compiling." *Phys. Rev. A* 94, 052325.
+- Readout error mitigation (M3) — see [`sources/references.md`](../sources/references.md) entry [44].

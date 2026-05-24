@@ -4,6 +4,10 @@
 
 **Significance**: When the algorithm respects the hardware's constraints (shallow depth, hardware-immune basis observables, hybrid quantum-classical structure), Heron-r2 produces **genuinely useful scientific results**. The hardware is not just characterizable — it is *usable*.
 
+![VQE H2 convergence to chemical accuracy](../images/fig08_vqe_h2.png)
+
+*Figure 8. Schematic VQE iteration trajectory converging on the FCI ground-state energy of H₂. The shaded band is the ±1 mHa chemical-accuracy window. Iteration-by-iteration trajectory shape is illustrative (the per-iteration parameter-update history is not preserved in the published artifact). The final converged offset of 0.001 Ha vs. FCI and the converged total energy −1.138 Ha are the actual C3652 measurements (job `d895ai2s46sc73fa64ag`).*
+
 ---
 
 ## What VQE Does
@@ -88,6 +92,11 @@ This framing is what motivated the per-Pauli-term error analysis and revealed th
 
 ## Sources
 
-- Peruzzo et al. (2014). "A variational eigenvalue solver on a photonic quantum processor." *Nature Communications* 5:4213.
-- McClean et al. (2016). "The theory of variational hybrid quantum-classical algorithms." *New J. Phys.* 18, 023023.
-- Full reference list in `sources/references.md`.
+- Peruzzo, A.; McClean, J.; Shadbolt, P.; *et al.* (2014). "A variational eigenvalue solver on a photonic quantum processor." *Nature Communications* 5:4213.
+- McClean, J.; Romero, J.; Babbush, R.; Aspuru-Guzik, A. (2016). "The theory of variational hybrid quantum-classical algorithms." *New J. Phys.* 18, 023023.
+- Kandala, A.; *et al.* (2017). "Hardware-efficient variational quantum eigensolver for small molecules and quantum magnets." *Nature* 549, 242–246.
+- Quantum molecular geometry via many-body nuclear spin echoes — see [`sources/references.md`](../sources/references.md) entry [37] (arXiv:2510.19550).
+- Variational Quantum Algorithms with large-scale integrated photonics — see [`sources/references.md`](../sources/references.md) entry [23].
+- Approximate quantum circuit compilation for proton-transfer kinetics — see [`sources/references.md`](../sources/references.md) entry [50].
+- Pancreatic-cancer data classification with QML — see [`sources/references.md`](../sources/references.md) entry [25].
+- Pearl framing — Pearl, J. (2009). *Causality* (2nd ed.). Cambridge University Press.

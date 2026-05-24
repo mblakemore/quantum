@@ -4,6 +4,10 @@
 
 **Significance**: Establishes a quantitative "event horizon" for algorithm design on Heron-r2. Width is cheap; depth is the wall.
 
+![Depth phase transition](../images/fig05_depth_phase_transition.png)
+
+*Figure 5. Position variance ⟨x²⟩ vs. walk depth d — schematic illustration of the regime change. Ideal ballistic scaling is ∝ d² (grey dashed). The phase transition (red shaded) is the operational claim; the schematic x-axis is in arbitrary depth units chosen for readability. The quantitative measured data is in the table beneath: at C3655 the transition occurs between N=4 (154 post-transpile CZ gates) and N=5 (874 CZ), and the C3655 commit anchors the variance numbers to job `d89ftt1789is73938rpg`.*
+
 ---
 
 ## The Shallow vs Deep Algorithmic Dichotomy
@@ -60,6 +64,9 @@ The transition from N=4 to N=5 is the **phase transition**. The output goes from
 
 ## Sources
 
-- Lights Out Problem benchmarking on real quantum hardware (arXiv:2602.16014).
-- Bernstein-Vazirani algorithm literature index in `sources/references.md`.
-- Hadamard Quantum Walk theory references.
+- Lights Out Problem benchmarking on real quantum hardware — see [`sources/references.md`](../sources/references.md) entry [3] (arXiv:2602.16014).
+- 1D cluster state generation on superconducting hardware — see [`sources/references.md`](../sources/references.md) entry [22] (arXiv:2508.21798).
+- Heavy-hex routing and SWAP overhead — see [`sources/references.md`](../sources/references.md) entries [12], [13], [14].
+- CLOPS and execution capacity context — see [`sources/references.md`](../sources/references.md) entries [4], [16] (IBM Quantum documentation).
+- Bernstein, E.; Vazirani, U. (1997). "Quantum complexity theory." *SIAM J. Comput.* 26(5), 1411.
+- Aharonov, D.; Ambainis, A.; Kempe, J.; Vazirani, U. (2001). "Quantum walks on graphs." *Proc. STOC*.
