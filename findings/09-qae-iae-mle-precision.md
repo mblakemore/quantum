@@ -4,6 +4,8 @@
 
 **Significance**: Demonstrates that **statistical post-processing of Grover oscillation patterns** is a genuine, hardware-validated route to high-precision QAE on NISQ devices. This is a finding distinct from the rest of the campaign because it is a **constructive result**: not "what doesn't work," but "what does."
 
+> **ELI5 — Plain English**: Quantum Amplitude Estimation (QAE) is the quantum trick behind faster Monte Carlo / option pricing — you can estimate a probability roughly *quadratically faster* than a classical sampler. But on a noisy chip, the textbook readout of QAE **completely fails**: when the probability you're trying to measure is near 0 or near 1, the answer can be off by **77% (basically as wrong as the right answer)**. Why? The math is many-to-one — multiple different probabilities give the same measurement, and the noise makes you pick the wrong one. **The fix**: run the algorithm at several different "depths" (k=1, 2, 3, 4), and use a *maximum-likelihood estimator* to find the single probability that explains all the measurements at once. The ambiguity disappears. On real hardware, this brought our error from up to 77% down to **under 0.5%** — a 344× tightening. Practical: QAE on real chips works **today** — if you do the readout right.
+
 ![IAE-MLE vs naive best-k](../images/fig09_qae_iae_mle.png)
 
 *Figure 9. Absolute amplitude-estimation error per volatility regime: naive best-k (red) vs. IAE-MLE (green). Joint-likelihood scan across k=1..4 resolves the sin² inversion ambiguity that breaks naive k=1 at the edges of [0,1]. All values from C3671 real-hardware runs on `ibm_marrakesh`.*

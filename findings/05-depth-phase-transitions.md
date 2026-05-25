@@ -4,6 +4,8 @@
 
 **Significance**: Establishes a quantitative "event horizon" for algorithm design on Heron-r2. Width is cheap; depth is the wall.
 
+> **ELI5 — Plain English**: Quantum circuits have two dimensions: **width** (how many qubits) and **depth** (how many gate operations in sequence). It turns out width isn't really the constraint — depth is. We watched a quantum walk algorithm work fine at 150 gates deep, struggle at 800 gates deep, and **completely die** at 1000+ gates: past that wall, the chip's output is statistically indistinguishable from random coin flips. You're not computing anymore — you're just generating noise. This is a **hard ceiling** on what today's algorithms can do on this chip. Bottom line for algorithm designers: count the two-qubit gates in your compiled circuit. If it's more than ~1000, redesign. There's no software fix.
+
 ![Depth phase transition](../images/fig05_depth_phase_transition.png)
 
 *Figure 5. Position variance ⟨x²⟩ vs. walk depth d — schematic illustration of the regime change. Ideal ballistic scaling is ∝ d² (grey dashed). The phase transition (red shaded) is the operational claim; the schematic x-axis is in arbitrary depth units chosen for readability. The quantitative measured data is in the table beneath: at C3655 the transition occurs between N=4 (154 post-transpile CZ gates) and N=5 (874 CZ), and the C3655 commit anchors the variance numbers to job `d89ftt1789is73938rpg`.*

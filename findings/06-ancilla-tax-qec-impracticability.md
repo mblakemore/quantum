@@ -4,6 +4,8 @@
 
 **Significance**: The barrier is not passive decoherence — it is the **overhead of the QEC machinery itself**.
 
+> **ELI5 — Plain English**: Quantum data is fragile. The standard plan is to add **extra "spy" qubits** that periodically check your data qubits for errors and signal "all good" or "fix this one." Sounds great — except on this chip, *each check* requires 8 extra two-qubit gates, and each gate adds a tiny bit of noise. We measured it: the act of checking adds about **2,000× more noise than the check could possibly remove**. In control runs where we deliberately introduced *no* errors, the error-correction machinery itself dragged data fidelity from 85% down to 78%. The corrective machinery was more toxic than the noise it was correcting. Until chip gate errors drop another ~100×, the textbook plan for protecting quantum data **doesn't work** on this hardware. The barrier isn't "qubits decohere too fast" — it's "the protection is heavier than what it's protecting."
+
 ![Ancilla tax: QEC degrades logical fidelity](../images/fig06_ancilla_tax.png)
 
 *Figure 6. Representative comparison of raw unencoded reference vs. QEC-encoded outcome for three independent encodings (bit-flip C3662, phase-flip C3664, QEC + Dynamical Decoupling C3666). Absolute fidelity values are illustrative of the relative direction (encoded < raw, break-even not reached) — the underlying campaign measurement is the pre-registration outcome: 1/4 PASS bit-flip, 0/3 PASS phase-flip and DD-overturn. Job IDs in [`../experiments/job-manifest.md`](../experiments/job-manifest.md).*

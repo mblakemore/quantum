@@ -4,6 +4,8 @@
 
 **Significance**: Confirms that dominant mid-circuit error on Heron-r2 is **coherent unitary miscalibration**, not stochastic decoherence. Matches the predictions of scramblon / out-of-time-order correlator (OTOC) theory.
 
+> **ELI5 — Plain English**: Run a circuit forward, then run it perfectly backward. In a perfect quantum computer, you should get the *exact same state you started with* — like rewinding a movie. If the chip's noise were truly random ("white noise"), you'd expect the rewind to fade smoothly to a coin-flip distribution. Instead, we saw the rewind drop **below random** and then bounce back up later — a smooth oscillation, like a pendulum. That's the fingerprint of noise that's *not random at all* — it's a tiny systematic miscalibration in some of the chip's couplers, accumulating coherently across many gates. Practical takeaway: the chip's mid-circuit errors aren't "fix it with longer-coherence qubits" type errors — they're "recalibrate the couplers" type errors. Different problem, different solution.
+
 ![Loschmidt echo non-monotonic recovery](../images/fig04_scramblon_loschmidt.png)
 
 *Figure 4. Loschmidt-echo amplitude vs. time-reversal round. The measured signal (purple) rises above the naive Markovian decoherence floor (grey) at multiple rounds — quasi-revivals consistent with coherent miscalibration, not stochastic decoherence. Schematic; underlying excursion magnitudes from depth-8 / 12 / 16 measurements summarised in the table below.*

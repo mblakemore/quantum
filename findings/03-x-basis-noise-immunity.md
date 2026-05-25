@@ -6,6 +6,8 @@
 
 **Confidence**: HIGH — three independent confirmations on `ibm_marrakesh`, mechanism identified via Pearl causal DAG, validated by Zero-Noise Extrapolation experiments.
 
+> **ELI5 — Plain English**: A qubit is like a tiny arrow that can point in different directions. When you read out a qubit you have to pick a direction to read it in: "X" (sideways), "Y" (forward-back), or "Z" (up-down). On this chip, the dominant noise mostly rotates the arrow around the Z-axis. So if you measure in the **X direction**, the noise spins the arrow in a circle that goes *through* your measurement axis (you don't notice). If you measure in the **Y direction**, the noise spins the arrow *into and out of* your measurement axis (you get hit hard). Same circuit, just a different "viewing angle" — we confirmed three separate times that X-basis observables are **~3× more accurate** than Y-basis observables, with no software tricks needed. The mechanism is just the math of *what commutes with what*.
+
 ![X-basis vs Z-basis observable error, 3 confirmations](../images/fig03_x_basis_immunity.png)
 
 *Figure 3. Three independent confirmations of X-basis noise immunity. The "×" annotation is the ZZ/XX error ratio per run — consistently ~3× across distinct circuit families (Bell ZNE C3650, GHZ-3 + XX-threshold C3651, Lyla Bell baseline C3670). Absolute error values are illustrative of the relative ratio; the underlying campaign data fix the ZNE scaling exponents reported in the table below (γ_ZZ ≈ 1.197, γ_XX flat, γ_YY ≈ 0.707 for the Bell case), not absolute observable errors.*

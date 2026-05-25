@@ -4,6 +4,8 @@
 
 **Significance**: Software-level mitigation cannot rescue an algorithm from a thermodynamically volatile substrate. The path forward is **hardware-aware compilation** (locking seeds, choosing immune bases, minimizing depth), not algorithmic correction layers.
 
+> **ELI5 — Plain English**: The quantum-computing community has a toolbox of clever software tricks that are supposed to *undo* the effects of chip noise after the fact — Dynamical Decoupling (DD), Pauli Twirling (PT), Twirled Readout Mitigation (TREM), and Zero-Noise Extrapolation (ZNE). We tried all four on this chip. **All four made things worse, not better.** Why? Each trick was invented for an older generation of chips with different dominant noise. On *this* chip, the trick adds more noise than it removes. Meanwhile, we discovered the chip's day-to-day variation is **±7 percentage points** (same circuit, same seed, 24 hours apart) — so any tiny "1–2pp improvement" from software tricks is **lost in the chip's natural wobble**. Bottom line: stop spending engineering effort on noise-cleanup software for this generation of hardware. Spend it on making your circuits *shorter* and on choosing the chip's "easy direction" (Finding 3) instead.
+
 ![All four mitigation strategies failed](../images/fig07_mitigation_failures.png)
 
 *Figure 7. Δ fidelity (percentage points) and statistical significance for the four mitigation techniques attempted in cycles C3666–C3669. All four landed below zero — each technique was a net detractor at the measured shot counts.*

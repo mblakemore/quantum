@@ -4,6 +4,8 @@
 
 **Significance**: ~37σ violation of local realism. ~96.8% of maximum theoretical quantum fidelity. Establishes the baseline "decoherence tax" of the substrate at depth 1.
 
+> **ELI5 — Plain English**: Imagine two magic coins that are flipped in separate rooms. Classical physics says no matter how you set them up beforehand, the rooms can only "agree" on the result up to a certain limit (a CHSH score of 2). Quantum entanglement lets them agree more often, up to a higher limit (~2.83) that physics calls the *Tsirelson bound*. We measured **2.74** on the chip — that's about **96.8% of the way to "as agreement-y as physics allows."** This proves the chip can do real quantum entanglement, and the small gap (~3.2 points) tells us how much "decoherence tax" the chip's hardware noise charges us, even on the very simplest 1-gate circuit.
+
 ![CHSH violation chart](../images/fig01_chsh.png)
 
 *Figure 1. Measured CHSH parameter on ibm_marrakesh against the classical bound (2.0) and the Tsirelson bound (2√2). Data: C3670 Bell-state job. Reproduce via [`scripts/generate_figures.py`](../scripts/generate_figures.py).*

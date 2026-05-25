@@ -6,6 +6,12 @@ This repository documents an autonomous, multi-agent network's exhaustive charac
 
 The findings constitute novel discoveries about the operational behavior of modern superconducting NISQ hardware: structural noise immunity tied to commutation relations, sub-noise-floor coherent error excursions driven by scramblon dynamics, qualitative phase transitions in algorithmic scaling, and the mathematical impossibility of break-even error correction on current substrates.
 
+> **ELI5 — In plain English** *(see also [`ELI5_SUMMARY.md`](ELI5_SUMMARY.md) for a self-contained one-page version):*
+>
+> An AI-agent network ran 22 experiments on IBM's newest 156-qubit quantum chip, using a real budget of 10 minutes of quantum-computer time. We found: the chip can do "quantum entanglement" almost as well as physics allows it to (Finding 1). It is surprisingly resilient to entangling small groups of qubits (Finding 2). It has a hidden "easy direction" and "hard direction" for reading qubits — using the easy one makes circuits about 3× more reliable (Finding 3). When you run a circuit forward and then backward you can see information rippling through the chip in shapes the textbook didn't predict (Finding 4). Past about 1000 gate operations, the chip just outputs random noise — a hard ceiling for today's algorithms (Finding 5). The standard plan for protecting quantum data from noise actually adds *more* noise than it removes on this chip (Finding 6). Popular "error mitigation" software tricks made things worse, not better (Finding 7). **But** — when algorithms are written to respect the chip's actual physics (instead of pretending it's perfect), we hit chemistry-grade precision on a real molecule (Finding 8) and recovered a useful financial-style quantum-speedup measurement on real hardware (Finding 9).
+>
+> **Bottom line**: This hardware is real, it's bounded, and the bound is harder than any current software trick can soften — but smart, hardware-aware algorithm design still extracts genuine quantum value within it.
+
 ---
 
 ## TL;DR — Headline Findings
@@ -21,6 +27,17 @@ The findings constitute novel discoveries about the operational behavior of mode
 | 7 | **Error mitigation is largely futile** | DD, Pauli twirling, TREM all degraded signal; ±7pp daily calibration drift dwarfs any mitigation gain |
 | 8 | **VQE H₂ at chemical accuracy** | 0.001 Ha error vs FCI — hardware is genuinely useful when algorithms are hardware-aware |
 | 9 | **IAE-MLE QAE precision: 344× over naive** | Maximum-likelihood best-k selector across Grover oscillations recovers amplitude estimation on real HW |
+
+> **ELI5 per finding** (one-liner each):
+> 1. *Two entangled qubits agree more often than non-quantum physics would ever allow — 96.8% of the way to the maximum a perfect quantum system could reach.*
+> 2. *Entangling more qubits gets worse less rapidly than the textbook says — small "GHZ" groups stay surprisingly clean.*
+> 3. *Reading qubits one way (X) avoids the dominant chip noise; reading the other way (Z) doesn't. Same circuit, different "viewing angle," ≈3× more reliable. Confirmed three independent times.*
+> 4. *Run a circuit forward then backward. A perfectly random chip would just smooth out. We see ripples — the noise has hidden structure (scramblon dynamics).*
+> 5. *There's a brick wall around ~1000 two-qubit gates: past it, the chip's output is statistically indistinguishable from coin flips. A hard depth ceiling for today's algorithms.*
+> 6. *Quantum error correction needs "spy" qubits to detect errors. On this chip, adding the spy qubits creates ~1000× more noise than it removes. NISQ-era QEC doesn't break even.*
+> 7. *Standard software tricks to undo hardware noise (DD, Pauli twirling, TREM) all made things worse on this chip. The chip's day-to-day drift (±7 percentage points) dwarfs anything the tricks can fix.*
+> 8. *We computed the ground-state energy of the hydrogen molecule to "chemical accuracy" (0.001 Hartree, the threshold chemists actually use). Real scientific value — when algorithms respect the hardware.*
+> 9. *Quantum amplitude estimation gives a square-root speedup for measuring probabilities. The naive readout fails on real hardware (errors up to 77%). A maximum-likelihood estimator over multiple Grover depths brings errors below 0.5% — 344× tighter.*
 
 ---
 
@@ -41,6 +58,7 @@ The findings constitute novel discoveries about the operational behavior of mode
 ```
 .
 ├── README.md                    ← you are here
+├── ELI5_SUMMARY.md              ← plain-English summary of all 9 findings (shareable)
 ├── full-report.md               ← complete synthesis (the Gemini deep-research source doc)
 ├── findings/                    ← one-per-discovery deep dives
 │   ├── 01-chsh-bell-violation.md
@@ -116,6 +134,57 @@ If you can repeat the same circuit on the same backend within the same calibrati
 - **NISQ-era characterization**: These findings describe the operational behavior of 2026-era superconducting hardware. They are not claims about the long-term limits of quantum computing — they are claims about *this generation* of substrate.
 - **Source synthesis**: The narrative framing in [`full-report.md`](full-report.md) is a Gemini deep-research synthesis of the underlying experimental data. The findings documents in `findings/` are written directly from the experimental record (cycle commits, job IDs, raw measurements) and are the primary source of truth.
 - **Figure provenance**: Figures in [`images/`](images/) are generated by [`scripts/generate_figures.py`](scripts/generate_figures.py) from the same cycle-data constants the findings cite. Where the underlying measurement was a small number of discrete data points (e.g., the QAE error table at p=0.2, 0.5, 0.8), the figure is the literal data. Where the figure illustrates a *shape* without continuous measurement support (e.g., the VQE convergence trajectory, the Loschmidt round axis), the caption marks it as representative/schematic, and the script source makes the synthetic portion explicit.
+
+---
+
+## Next Steps — What Can Be Done Now, What's Open
+
+This section is *practical*: what should an algorithm designer, a quantum-software engineer, or a researcher do *tomorrow* with these findings — and what questions remain open for the next campaign.
+
+### What You Can Use Today (actionable)
+
+1. **Pick X-basis measurement when the algorithm allows it.** Finding 03 has three independent confirmations of ~3× fidelity improvement. This is the cheapest, most reliable win in this whole report — a compile-time choice, not a runtime cost.
+   > *ELI5: When you can choose which "direction" to read your qubits, choose X. It's free, and the chip noise mostly misses you.*
+
+2. **Cap circuit depth around 500–800 two-qubit gates.** Past Finding 05's phase transition (~800–1000 CZ gates), output is statistically uniform. Algorithm designers should design with a hard depth budget and refuse to compile past it.
+   > *ELI5: Pretend the chip has a strict word limit. Stay under it; past it, your output is gibberish.*
+
+3. **Stop spending engineering effort on standard error mitigation (DD, PT, TREM) for NISQ workloads on this substrate.** Finding 07 shows all four mitigation strategies degraded signal in our tests. The engineering cycles are better spent on circuit-depth reduction or hardware-aware ansatz design.
+   > *ELI5: The "smart" software patches actively made things worse. Spend that time making circuits shorter instead.*
+
+4. **For chemistry-scale problems (small molecules, ≤ ~6 qubits): Heron-r2 hits chemical accuracy on H₂.** Finding 08 shows VQE with hardware-aware ansatz achieved 0.001 Ha error vs FCI ground truth. Practical, today, on real hardware.
+   > *ELI5: For small chemistry simulations, the chip already works well enough to be scientifically useful.*
+
+5. **For financial / Monte-Carlo amplitude-estimation workloads: use IAE-MLE, not naive QAE readout.** Finding 09's maximum-likelihood best-k selector across Grover oscillations recovers a 344× precision improvement on real hardware vs the naive single-k readout. Production-grade.
+   > *ELI5: For option-pricing-style quantum speedups, the standard textbook readout is broken on real chips. The MLE-over-multiple-depths fix works — use it.*
+
+6. **Pin transpiler seeds when reporting reproducible benchmarks.** Without `seed_transpiler` pinning, topological routing artifacts are confounded with substrate behavior. (Lesson learned the hard way across the C3650-C3671 cycle.)
+   > *ELI5: Always pin the seed. Without it, the compiler picks a slightly different qubit layout each run, and you can't tell whether your result changed because the chip changed or because the layout changed.*
+
+7. **Treat ±7 percentage-point daily calibration drift (Finding 07) as the dominant variance.** Reproductions of any single absolute number should be benchmarked against the calibration date in the job manifest, not against the abstract published value.
+   > *ELI5: The chip's "score" naturally wobbles by ±7 percentage points day to day. If you try to repeat our result on a different day, expect to land within that window.*
+
+### Open Research Questions (next campaigns)
+
+1. **Does X-basis immunity generalize across the heavy-hex family?** Replicate Finding 03 on `ibm_torino`, `ibm_kingston`, and any future Heron-r3 backend. If yes → upgrade from substrate-specific observation to architectural principle. (Pre-reg gate: ≥2× X/Z fidelity ratio on at least one independent backend.)
+
+2. **What is the optimal mid-circuit depth for productive Loschmidt-echo error spectroscopy?** Finding 04's scramblon ripples suggest a *useful* diagnostic regime exists between the trivial-shallow and statistically-uniform extremes. Mapping it would give experimentalists a new, non-Markovian noise-characterization tool.
+
+3. **Can the ancilla-tax problem be inverted?** Finding 06 says ancillas are too noisy to be used as syndrome qubits for QEC. But can they be used as *continuous-monitoring probes* — accepting that the probe noise is high but using the probe correlations to extract information that's otherwise unreachable? (Speculative; would need a clean theoretical framing.)
+
+4. **Is the ~1000-CZ phase transition (Finding 05) substrate-specific or universal?** Compare against trapped-ion (low gate count, very low error per gate) and neutral-atom platforms. If the transition is universal at a similar *information-theoretic* threshold (Holevo bound, scrambling time), this is a deep result. If it varies dramatically by substrate, it's an engineering target.
+
+5. **What is the cross-platform reproducibility of Finding 03 (X-basis immunity)?** Heavy-hex CZ noise is Z-biased by construction. On trapped-ion (Mølmer-Sørensen native gate) or photonic (linear-optical) substrates, the dominant noise channel is different. Predict: X-basis immunity should *not* generalize cross-platform — testing this falsifies or confirms the mechanism.
+
+6. **Hardware-aware QAOA depth ceiling.** Finding 05's 800–1000 CZ wall implies a hard ceiling on QAOA `p`. Empirically map `p_max` for the standard MaxCut and portfolio-optimization benchmarks. (Pre-reg gate: identify the `p` value at which output entropy crosses 0.95× uniform.)
+
+7. **Is the X-basis immunity a special case of a broader "commutation-aligned compilation" principle?** Finding 03's mechanism is that Hadamard commutes with the dominant Z-dephasing channel. Generalize: for any noise channel, find the measurement basis that commutes with it, and design compilation passes that route observables there. (This is a *theory* extension, but each Pauli channel has its own commuting basis — there may be a whole compilation discipline buried in this observation.)
+
+### What This Repository Does Not Settle
+
+- **Universality across processor generations**: All findings are anchored to `ibm_marrakesh` (Heron-r2). Heron-r3, Condor, or post-Condor architectures may show different phase-transition depths, different ancilla taxes, and different drift envelopes. The methodology generalizes; the absolute numbers do not.
+- **Long-term limits**: Nothing here speaks to fault-tolerant quantum computing. These are claims about *NISQ-era operational behavior*, not about the asymptotic possibility of useful quantum computing.
+- **Cross-substrate noise immunity**: Finding 03's X-basis immunity is mechanistically tied to the Z-biased CZ channel on heavy-hex. The *principle* of "align observables with noise-commuting bases" may transfer; the *specific* X-vs-Z asymmetry will not transfer to platforms with different native dominant noise channels.
 
 ---
 

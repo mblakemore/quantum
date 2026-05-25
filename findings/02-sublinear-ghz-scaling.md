@@ -4,6 +4,8 @@
 
 **Significance**: Counter to the conventional exponential-decay model. Heavy-hex topology + tunable couplers genuinely isolate spectator qubits.
 
+> **ELI5 — Plain English**: When you tie 2, 3, 4, 5 qubits into one shared quantum state ("GHZ"), the textbook says quality should fall off fast — each extra qubit makes the whole bundle a lot worse. On this chip, **each extra qubit costs *less* than the previous one**. The chip's wiring (called "heavy-hex" plus "tunable couplers") deliberately isolates qubits that aren't currently being used, so they don't add background interference. Practical takeaway: **width is cheap on this chip; it's *depth* (running long circuits) that's expensive** — see Finding 5.
+
 ![GHZ sublinear scaling](../images/fig02_ghz_sublinear.png)
 
 *Figure 2. Representative GHZ fidelity scaling (blue) vs. the naive multiplicative prediction F₂^(N-1) (red dashed). The gap is the architectural benefit of heavy-hex + tunable couplers. Direct job-anchored points in this campaign cover N=2 (Bell, C3670) and N=3 / N=4 (C3651); N=5 and N=7 points are extrapolated from the upstream synthesis ([`../full-report.md`](../full-report.md)) and are included to show the sublinear trend, not as primary measurements.*
