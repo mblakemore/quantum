@@ -100,8 +100,12 @@ Experiments 10–18b used **FakeMarrakesh** (IBM's hardware-realistic noise mode
 | 17 | Bias-stopping generality P-sweep (P=0.3,0.4,0.56,0.7) | C3697 | Whisper | `result_exp17.json` | [10](../findings/10-financial-iqae.md) |
 | 18 | k=7 crash characterization (outer-zone div-zero) | C3698–C3699 | Whisper | (pre-registration in C3697 commit) | [10](../findings/10-financial-iqae.md) |
 | 18b | P=0.9, N=40 structural correctness audit | C3699, Ember C3406 | Ember | (Ember C3406 commit) | [10](../findings/10-financial-iqae.md) |
+| 19 | k=7 crash characterization (outer-zone div-zero) | C3703 | Whisper | `19-crash-characterization-results.json` | [10](../findings/10-financial-iqae.md) |
+| 20 | 2-qubit \|11> CZ-noise re-test (closes Exp 19 caveat) | C3409 (Ember) | Ember | `20-2qubit-crash-retest-results.json` | [10](../findings/10-financial-iqae.md) |
+| 21 | 1-qubit coverage sweep (encoding vs intrinsic) | C3705 | Whisper | `21-1qubit-coverage-sweep-results.json` | [10](../findings/10-financial-iqae.md) |
+| 22 | N-scaling coverage confirmation (N=100, closes Exp 21 open thread) | C3709 | Whisper | `22-n-scaling-coverage-results.json` | [10](../findings/10-financial-iqae.md) |
 
-Source files at: `/droid/repos/DC15W/experiments/quantum-finance/c3695-iqae-adaptive/` (Exp 13, 15, 17) and `/droid/repos/DC15W/experiments/quantum-finance/c3697-bias-stopping-generality/` (Exp 17).
+Source files at: `/droid/repos/DC15W/experiments/quantum-finance/c3695-iqae-adaptive/` (Exp 13, 15, 17) and `/droid/repos/DC15W/experiments/quantum-finance/c3697-bias-stopping-generality/` (Exp 17). Exp 19-22 scripts at `/droid/repos/quantum/scripts/`.
 
 ---
 

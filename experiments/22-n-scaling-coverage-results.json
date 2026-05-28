@@ -1,0 +1,81 @@
+{
+  "experiment": "22",
+  "title": "N-scaling coverage confirmation for 1-qubit IQAE",
+  "cycle": 3709,
+  "params": {
+    "eps": 0.04,
+    "alpha": 0.05,
+    "N": 100,
+    "backend": "FakeMarrakesh",
+    "encoding": "1-qubit Bernoulli (zero CZ gates)"
+  },
+  "context": "Exp 21 (C3705) showed P=0.56 coverage 87-90% at N=40 (1-qubit encoding). ~2.2\u03c3 below nominal 95%. This experiment (N=100) tests whether that undercoverage is sampling noise or systematic bias.",
+  "preregistered_criteria": {
+    "T1": "P=0.56 coverage >= 0.88 at N=100 \u2192 sampling noise (H_noise confirmed)",
+    "T2": "P=0.56 coverage < 0.88 at N=100 \u2192 systematic bias (H_bias confirmed)",
+    "T3": "P=0.9 coverage >= 0.90 at N=100 \u2192 outer zone safe with 1-qubit"
+  },
+  "verdicts": {
+    "p056": "T1-PASS: SAMPLING NOISE",
+    "p09": "T3-PASS: OUTER ZONE SAFE"
+  },
+  "results": {
+    "0.4": {
+      "P": 0.4,
+      "zone": "safety",
+      "n_valid": 100,
+      "n_covered": 95,
+      "coverage": 0.95,
+      "wilson_lo": 0.888,
+      "wilson_hi": 0.978,
+      "avg_estimate": 0.4009,
+      "avg_bias": 0.0009,
+      "avg_ci_width": 0.0072,
+      "errors": 0,
+      "exp21_n40_coverage": 0.925,
+      "exp21_n40_wilson": [
+        0.801,
+        0.974
+      ],
+      "delta_vs_exp21": 0.025
+    },
+    "0.56": {
+      "P": 0.56,
+      "zone": "safety",
+      "n_valid": 100,
+      "n_covered": 92,
+      "coverage": 0.92,
+      "wilson_lo": 0.85,
+      "wilson_hi": 0.959,
+      "avg_estimate": 0.558,
+      "avg_bias": -0.002,
+      "avg_ci_width": 0.0115,
+      "errors": 0,
+      "exp21_n40_coverage": 0.875,
+      "exp21_n40_wilson": [
+        0.739,
+        0.945
+      ],
+      "delta_vs_exp21": 0.045
+    },
+    "0.9": {
+      "P": 0.9,
+      "zone": "outer",
+      "n_valid": 100,
+      "n_covered": 92,
+      "coverage": 0.92,
+      "wilson_lo": 0.85,
+      "wilson_hi": 0.959,
+      "avg_estimate": 0.8992,
+      "avg_bias": -0.0008,
+      "avg_ci_width": 0.004,
+      "errors": 0,
+      "exp21_n40_coverage": 0.95,
+      "exp21_n40_wilson": [
+        0.835,
+        0.986
+      ],
+      "delta_vs_exp21": -0.03
+    }
+  }
+}
