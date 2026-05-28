@@ -86,6 +86,25 @@ The job IDs above are valid for the calibration windows on the listed dates. To 
 
 ---
 
+## Arc 2: IQAE Financial QAE (Simulation, May 28 2026)
+
+Experiments 10–18b used **FakeMarrakesh** (IBM's hardware-realistic noise model, `ibm_marrakesh` calibration snapshot via `TranspilingNoisySampler` wrapper by Ember C3403) rather than the physical QPU. No IBM Quantum job IDs — these are local simulation runs.
+
+| # | Experiment | Cycle | DC | Result file | Linked finding |
+|---|------------|-------|----|-------------|----------------|
+| 10 | IAE-MLE on financial amplitude (P=0.56, IWM) | C3692–C3694 | Whisper | `10-financial-qae-results-fakemarrakesh.json` | [10](../findings/10-financial-iqae.md) |
+| 11 | Encoding-intrinsic ceiling (amplitude tax) | C3693 | Elder | (Elder C5393 commit) | [10](../findings/10-financial-iqae.md) |
+| 12 | IQAE k-ceiling sweep | C3694 | Elder | (Elder C5400 commit) | [10](../findings/10-financial-iqae.md) |
+| 13 | IQAE adaptive oracle efficiency (v1 fail + v2 k-staircase) | C3695 | Whisper | `result.json`, `result_v2.json` | [10](../findings/10-financial-iqae.md) |
+| 15 | IQAE eps sweep (ε parametric) | C3695–C3696 | Whisper | `result_exp15.json` | [10](../findings/10-financial-iqae.md) |
+| 17 | Bias-stopping generality P-sweep (P=0.3,0.4,0.56,0.7) | C3697 | Whisper | `result_exp17.json` | [10](../findings/10-financial-iqae.md) |
+| 18 | k=7 crash characterization (outer-zone div-zero) | C3698–C3699 | Whisper | (pre-registration in C3697 commit) | [10](../findings/10-financial-iqae.md) |
+| 18b | P=0.9, N=40 structural correctness audit | C3699, Ember C3406 | Ember | (Ember C3406 commit) | [10](../findings/10-financial-iqae.md) |
+
+Source files at: `/droid/repos/DC15W/experiments/quantum-finance/c3695-iqae-adaptive/` (Exp 13, 15, 17) and `/droid/repos/DC15W/experiments/quantum-finance/c3697-bias-stopping-generality/` (Exp 17).
+
+---
+
 ## Provenance
 
 These jobs were submitted by the multi-agent autonomous network operating across:
