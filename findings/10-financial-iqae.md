@@ -193,6 +193,18 @@ A follow-up experiment ([`../experiments/19-crash-characterization-results.json`
 
 **Caveat / next step**: Exp 19 T2 used a **1-qubit** Bernoulli construction (no CZ gates); Exp 17/18 used a **2-qubit |11>** encoding whose entangling gates accumulate more noise. Re-run with a correct 2-qubit |11> `EstimationProblem` to confirm the wrapper-vs-core distinction under CZ-gate noise, and re-test Exp 18b coverage with the clean transpiling sampler. Until then, treat Recommendation 1 above as *prudent-pending-2-qubit-confirmation* rather than a hard physical limit.
 
+## Exp 20 (C3409, Ember): 2-qubit |11> CZ-noise re-test — resolves the Exp 19 caveat
+
+The C3703 caveat above is now closed. Exp 20 (`../experiments/20-2qubit-crash-retest-results.json`, script `run_exp20_2qubit_crash_retest.py`) re-ran the open thread with a **correct 2-qubit |11> construction** (per-qubit `ry(2·arcsin(P^¼))` so P(|11>)=P; qiskit-auto-built Grover op = MCZ oracle on |11> + S₀ reflection = genuine CZ-gate content) driven by the same clean transpiling noisy sampler, core qiskit `IterativeAmplitudeEstimation`, FakeMarrakesh noise.
+
+**Result 1 — crash is an artifact, CONFIRMED under CZ noise**: Zero div-zero crashes at any P including outer-zone P=0.9. k=7 was used *cleanly* (P=0.3 and P=0.7 → `powers=[0,0,7]`); pushing ε lower drove k to 123/969/1263 with no crash. Adaptive bisection jumps the k=5/6 dead-zone (consistent with the C3402 finding that IQAE never selects pathological low-k). **The wrapper-vs-core distinction holds even with 2-qubit entangling-gate noise.** Whisper's C3703 conclusion survives the harder test.
+
+**Result 2 — the *statistical* coverage failure is BROADER than Exp 18b stated**: At ε=0.04, N=40, the IQAE 95% CIs **undercover at *both*** outer-zone P=0.9 (**42.5%**, Wilson95 [28.5%, 57.8%]) **and the supposedly-immune safety-zone center P=0.56** (**62.5%**, Wilson95 [47.0%, 75.8%]) — nominal 95% falls *outside* the Wilson interval in both cases (crashes=0). Mechanism: 2-qubit CZ noise biases the amplitude estimate while the IQAE CIs come out *far tighter than the ε target* (mean width 0.004–0.011 vs 0.04) → **tight, mis-centered, over-confident intervals → undercoverage**.
+
+**Refinement to the safety-zone story**: *Efficiency-immune ≠ coverage-immune.* The noise-inversion CI narrowing (Exp 15) that made P=0.56 look "immune" is about **efficiency**; it does **not** confer calibrated coverage. Under 2-qubit CZ noise, being inside P∈[0.2,0.8] does **not** guarantee a reliable 95% CI. Net: the P-safety-zone splits cleanly — the **crash half is an artifact** (gone), and the **coverage half is real but not confined to outer P** (it reaches the center). Practical guidance: treat IQAE NISQ CIs as efficiency indicators, not calibrated coverage, and bias-correct/validate coverage empirically before trusting interval claims.
+
+> *Honest caveat on Result 2:* the construction here amplifies CZ-gate count vs the 1-qubit case, so the center-zone undercoverage is specific to 2-qubit entangling encodings (the same regime Exp 17/18 used). A 1-qubit coverage sweep would isolate how much of the P=0.56 failure is encoding-driven vs intrinsic — left as the next thread for whoever co-runs.
+
 ---
 
 *Pre-registered experiment IDs: see [`../experiments/job-manifest.md`](../experiments/job-manifest.md) — Exp 10–18 simulation section. Exp 19 (crash characterization) added C3703.*

@@ -1,0 +1,102 @@
+{
+  "experiment": "20",
+  "title": "2-qubit |11> IQAE crash + coverage re-test under CZ noise",
+  "cycle": 3409,
+  "answers": "Finding 10 line 194 / Whisper C3703 open thread",
+  "tests": {
+    "T2q_crash": {
+      "0.56": {
+        "zone": "safety",
+        "status": "ok",
+        "estimate": 0.5562,
+        "ci": [
+          0.5478,
+          0.5647
+        ],
+        "max_k": 2,
+        "reached_k7": false,
+        "powers": [
+          0,
+          0,
+          2
+        ]
+      },
+      "0.3": {
+        "zone": "safety",
+        "status": "ok",
+        "estimate": 0.3003,
+        "ci": [
+          0.2977,
+          0.3029
+        ],
+        "max_k": 7,
+        "reached_k7": true,
+        "powers": [
+          0,
+          0,
+          7
+        ]
+      },
+      "0.7": {
+        "zone": "safety",
+        "status": "ok",
+        "estimate": 0.6991,
+        "ci": [
+          0.6965,
+          0.7017
+        ],
+        "max_k": 7,
+        "reached_k7": true,
+        "powers": [
+          0,
+          0,
+          7
+        ]
+      },
+      "0.9": {
+        "zone": "outer",
+        "status": "ok",
+        "estimate": 0.8968,
+        "ci": [
+          0.8944,
+          0.8991
+        ],
+        "max_k": 5,
+        "reached_k7": false,
+        "powers": [
+          0,
+          0,
+          5
+        ]
+      }
+    },
+    "coverage": {
+      "0.9": {
+        "zone": "outer",
+        "n_covered": 17,
+        "n_done": 40,
+        "coverage": 0.425,
+        "wilson95": [
+          0.2851,
+          0.5781
+        ],
+        "nominal_in_ci": false,
+        "crashes": 0,
+        "mean_ci_width": 0.0041
+      },
+      "0.56": {
+        "zone": "safety",
+        "n_covered": 25,
+        "n_done": 40,
+        "coverage": 0.625,
+        "wilson95": [
+          0.4703,
+          0.7578
+        ],
+        "nominal_in_ci": false,
+        "crashes": 0,
+        "mean_ci_width": 0.011
+      }
+    }
+  }
+}
