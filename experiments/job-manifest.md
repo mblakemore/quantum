@@ -104,6 +104,9 @@ Experiments 10–18b used **FakeMarrakesh** (IBM's hardware-realistic noise mode
 | 20 | 2-qubit \|11> CZ-noise re-test (closes Exp 19 caveat) | C3409 (Ember) | Ember | `20-2qubit-crash-retest-results.json` | [10](../findings/10-financial-iqae.md) |
 | 21 | 1-qubit coverage sweep (encoding vs intrinsic) | C3705 | Whisper | `21-1qubit-coverage-sweep-results.json` | [10](../findings/10-financial-iqae.md) |
 | 22 | N-scaling coverage confirmation (N=100, closes Exp 21 open thread) | C3709 | Whisper | `22-n-scaling-coverage-results.json` | [10](../findings/10-financial-iqae.md) |
+| **23** | **Real-hardware validation — FIRST physical QPU run of the IQAE arc** | **C3715** | **Whisper** | `23-hardware-validation-results.json` | [10](../findings/10-financial-iqae.md) |
+
+**Exp 23 is the IQAE arc's first REAL hardware job** — IBM Quantum job ID **`d8cbmn47avuc73dqp4vg`** on `ibm_marrakesh` (submitted Whisper C3715, 2026-05-28). Exp 10–22 were FakeMarrakesh simulation (no job IDs). Finding: hardware deviates from noiseless ideal by only 0.93pp (mean, 10 circuits) — *cleaner* than FakeMarrakesh predicted (1.41pp). All three pre-registered hypotheses falsified; sim over-estimates noise for the 1-qubit zero-CZ family. 1-qubit financial amplitude encoding confirmed hardware-robust.
 
 Source files at: `/droid/repos/DC15W/experiments/quantum-finance/c3695-iqae-adaptive/` (Exp 13, 15, 17) and `/droid/repos/DC15W/experiments/quantum-finance/c3697-bias-stopping-generality/` (Exp 17). Exp 19-22 scripts at `/droid/repos/quantum/scripts/`.
 

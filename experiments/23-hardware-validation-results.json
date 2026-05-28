@@ -1,0 +1,143 @@
+{
+  "experiment": "23",
+  "title": "Real-hardware validation of the 1-qubit IQAE financial arc",
+  "cycle": 3715,
+  "backend": "ibm_marrakesh",
+  "job_id": "d8cbmn47avuc73dqp4vg",
+  "params": {
+    "shots": 4096,
+    "P_values": [
+      0.56,
+      0.9
+    ],
+    "k_values": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "seed_transpiler": 42,
+    "encoding": "1-qubit Bernoulli (zero CZ gates)",
+    "schedule": "fixed Grover amplification (single batched job)"
+  },
+  "preregistered_criteria": {
+    "T1": "mean dev_hw_sim < mean dev_hw_ideal AND mean dev_hw_sim < 0.05 -> SIM-FAITHFUL",
+    "T2": "mean dev_hw_ideal - mean dev_sim_ideal > 0.05 -> SIM-OPTIMISTIC",
+    "T3": "dev_hw_ideal(k=4) > dev_hw_ideal(k=0)+0.05 -> DEPTH-DEGRADATION"
+  },
+  "rows": [
+    {
+      "P": 0.56,
+      "k": 0,
+      "ideal_p1": 0.56,
+      "sim_p1": 0.543,
+      "hw_p1": 0.5789,
+      "dev_sim_ideal": 0.017,
+      "dev_hw_sim": 0.0359,
+      "dev_hw_ideal": 0.0189
+    },
+    {
+      "P": 0.56,
+      "k": 1,
+      "ideal_p1": 0.3235,
+      "sim_p1": 0.333,
+      "hw_p1": 0.3342,
+      "dev_sim_ideal": 0.0096,
+      "dev_hw_sim": 0.0012,
+      "dev_hw_ideal": 0.0108
+    },
+    {
+      "P": 0.56,
+      "k": 2,
+      "ideal_p1": 0.7829,
+      "sim_p1": 0.7969,
+      "hw_p1": 0.7864,
+      "dev_sim_ideal": 0.014,
+      "dev_hw_sim": 0.0105,
+      "dev_hw_ideal": 0.0035
+    },
+    {
+      "P": 0.56,
+      "k": 3,
+      "ideal_p1": 0.127,
+      "sim_p1": 0.1357,
+      "hw_p1": 0.1392,
+      "dev_sim_ideal": 0.0087,
+      "dev_hw_sim": 0.0034,
+      "dev_hw_ideal": 0.0122
+    },
+    {
+      "P": 0.56,
+      "k": 4,
+      "ideal_p1": 0.9416,
+      "sim_p1": 0.9277,
+      "hw_p1": 0.9392,
+      "dev_sim_ideal": 0.0139,
+      "dev_hw_sim": 0.0115,
+      "dev_hw_ideal": 0.0024
+    },
+    {
+      "P": 0.9,
+      "k": 0,
+      "ideal_p1": 0.9,
+      "sim_p1": 0.8809,
+      "hw_p1": 0.894,
+      "dev_sim_ideal": 0.0191,
+      "dev_hw_sim": 0.0132,
+      "dev_hw_ideal": 0.006
+    },
+    {
+      "P": 0.9,
+      "k": 1,
+      "ideal_p1": 0.324,
+      "sim_p1": 0.3457,
+      "hw_p1": 0.3496,
+      "dev_sim_ideal": 0.0217,
+      "dev_hw_sim": 0.0039,
+      "dev_hw_ideal": 0.0256
+    },
+    {
+      "P": 0.9,
+      "k": 2,
+      "ideal_p1": 0.0014,
+      "sim_p1": 0.0117,
+      "hw_p1": 0.0066,
+      "dev_sim_ideal": 0.0103,
+      "dev_hw_sim": 0.0051,
+      "dev_hw_ideal": 0.0052
+    },
+    {
+      "P": 0.9,
+      "k": 3,
+      "ideal_p1": 0.3968,
+      "sim_p1": 0.3828,
+      "hw_p1": 0.3972,
+      "dev_sim_ideal": 0.014,
+      "dev_hw_sim": 0.0144,
+      "dev_hw_ideal": 0.0004
+    },
+    {
+      "P": 0.9,
+      "k": 4,
+      "ideal_p1": 0.9408,
+      "sim_p1": 0.9277,
+      "hw_p1": 0.9326,
+      "dev_sim_ideal": 0.013,
+      "dev_hw_sim": 0.0049,
+      "dev_hw_ideal": 0.0082
+    }
+  ],
+  "summary": {
+    "mean_dev_hw_sim": 0.0104,
+    "mean_dev_hw_ideal": 0.0093,
+    "mean_dev_sim_ideal": 0.0141,
+    "dev_hw_ideal_k0": 0.0124,
+    "dev_hw_ideal_k4": 0.0053
+  },
+  "verdicts": {
+    "T1": "FAIL",
+    "T2": "FAIL: sim not optimistic",
+    "T3": "FAIL: no significant depth degradation"
+  }
+}
