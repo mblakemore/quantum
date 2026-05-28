@@ -1,0 +1,107 @@
+{
+  "experiment": "21",
+  "title": "1-qubit IQAE coverage sweep \u2014 encoding vs intrinsic undercoverage",
+  "cycle": 3705,
+  "params": {
+    "eps": 0.04,
+    "alpha": 0.05,
+    "N": 40,
+    "backend": "FakeMarrakesh",
+    "encoding": "1-qubit Bernoulli (zero CZ gates)"
+  },
+  "context": "Ember Exp 20 found 62.5% coverage at P=0.56 (2-qubit), 42.5% at P=0.9. This sweep isolates encoding vs intrinsic.",
+  "results": {
+    "0.1": {
+      "P": 0.1,
+      "zone": "outer",
+      "n_valid": 40,
+      "n_covered": 38,
+      "coverage": 0.95,
+      "wilson_lo": 0.835,
+      "wilson_hi": 0.986,
+      "avg_estimate": 0.1004,
+      "avg_bias": 0.0004,
+      "avg_ci_width": 0.0042,
+      "errors": 0
+    },
+    "0.3": {
+      "P": 0.3,
+      "zone": "safety",
+      "n_valid": 40,
+      "n_covered": 38,
+      "coverage": 0.95,
+      "wilson_lo": 0.835,
+      "wilson_hi": 0.986,
+      "avg_estimate": 0.3004,
+      "avg_bias": 0.0004,
+      "avg_ci_width": 0.0058,
+      "errors": 0
+    },
+    "0.4": {
+      "P": 0.4,
+      "zone": "safety",
+      "n_valid": 40,
+      "n_covered": 37,
+      "coverage": 0.925,
+      "wilson_lo": 0.801,
+      "wilson_hi": 0.974,
+      "avg_estimate": 0.4005,
+      "avg_bias": 0.0005,
+      "avg_ci_width": 0.0074,
+      "errors": 0
+    },
+    "0.56": {
+      "P": 0.56,
+      "zone": "safety",
+      "n_valid": 40,
+      "n_covered": 35,
+      "coverage": 0.875,
+      "wilson_lo": 0.739,
+      "wilson_hi": 0.945,
+      "avg_estimate": 0.5581,
+      "avg_bias": -0.0019,
+      "avg_ci_width": 0.0113,
+      "errors": 0,
+      "ember_exp20_coverage": 0.625,
+      "ember_exp20_wilson": [
+        0.47,
+        0.758
+      ],
+      "delta_vs_ember": 0.25,
+      "encoding_vs_intrinsic": "ENCODING-DRIVEN"
+    },
+    "0.7": {
+      "P": 0.7,
+      "zone": "safety",
+      "n_valid": 40,
+      "n_covered": 39,
+      "coverage": 0.975,
+      "wilson_lo": 0.871,
+      "wilson_hi": 0.996,
+      "avg_estimate": 0.6996,
+      "avg_bias": -0.0004,
+      "avg_ci_width": 0.006,
+      "errors": 0
+    },
+    "0.9": {
+      "P": 0.9,
+      "zone": "outer",
+      "n_valid": 40,
+      "n_covered": 38,
+      "coverage": 0.95,
+      "wilson_lo": 0.835,
+      "wilson_hi": 0.986,
+      "avg_estimate": 0.8994,
+      "avg_bias": -0.0006,
+      "avg_ci_width": 0.004,
+      "errors": 0,
+      "ember_exp20_coverage": 0.425,
+      "ember_exp20_wilson": [
+        0.285,
+        0.578
+      ],
+      "delta_vs_ember": 0.525,
+      "encoding_vs_intrinsic": "ENCODING-DRIVEN"
+    }
+  }
+}

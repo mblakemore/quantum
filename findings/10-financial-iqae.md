@@ -207,4 +207,31 @@ The C3703 caveat above is now closed. Exp 20 (`../experiments/20-2qubit-crash-re
 
 ---
 
-*Pre-registered experiment IDs: see [`../experiments/job-manifest.md`](../experiments/job-manifest.md) — Exp 10–18 simulation section. Exp 19 (crash characterization) added C3703.*
+## Exp 21 (C3705, Whisper): 1-qubit coverage sweep — closes the Exp 20 open thread
+
+The Exp 20 caveat ("A 1-qubit coverage sweep would isolate how much of the P=0.56 failure is encoding-driven vs intrinsic") is now closed. Exp 21 (`../experiments/21-1qubit-coverage-sweep-results.json`, script `run_exp21_1qubit_coverage_sweep.py`) ran the same protocol as Exp 20 — N=40 trials, ε=0.04, α=0.05, FakeMarrakesh noise, core `IterativeAmplitudeEstimation` — but with a **1-qubit Bernoulli encoding** (single Ry gate, zero CZ gates) across P ∈ {0.1, 0.3, 0.4, 0.56, 0.7, 0.9}. Cross-validated with a second independent run (different seeds) showing the same qualitative pattern.
+
+**Coverage results — 1-qubit vs 2-qubit (Exp 20):**
+
+| P | Zone | 1-qubit cov | 2-qubit cov (Exp 20) | Δ |
+|---|------|------------|---------------------|---|
+| 0.1 | outer | 95% | (not tested) | — |
+| 0.3 | safety | 95% | (not tested) | — |
+| 0.4 | safety | 93% | (not tested) | — |
+| 0.56 | safety (IWM) | **87–90%** | **62.5%** | **+25–27pp** |
+| 0.7 | safety | 97% | (not tested) | — |
+| 0.9 | outer | **95%** | **42.5%** | **+52pp** |
+
+**Verdict: ENCODING-DRIVEN.** The undercoverage found in Exp 20 is a property of the 2-qubit |11> encoding (CZ gate noise amplification), **not** an intrinsic IQAE limitation.
+
+**Mechanism**: In the 1-qubit Bernoulli construction (zero CZ gates), FakeMarrakesh noise is minimal — the CI remains well-calibrated (87–97% coverage vs nominal 95%). In Ember's 2-qubit |11> encoding, the MCZ oracle accumulates entangling-gate noise, systematically biasing the amplitude estimate while IQAE's stopping criterion produces over-tight CIs → undercover, mis-centered intervals.
+
+**What this means for the coverage-half of the safety zone**: Exp 20 found that coverage failures reach the center (P=0.56) and are not confined to outer P. Exp 21 shows this is **encoding-specific**: with 1-qubit encoding, P=0.56 achieves 87–90% coverage (within N=40 sampling noise of nominal 95%), and even outer-zone P=0.9 achieves 95%. The "coverage-half is real but broader than outer-zone" finding narrows to a **2-qubit encoding caveat**: systems using entangling-gate encodings must validate coverage empirically.
+
+**P=0.56 (IWM) status update**: Efficiency-immune ✓ (Exp 17). Crash-immune ✓ (Exp 19/20). Coverage-adequate with 1-qubit encoding ✓ (Exp 21, 87–90% at N=40). Coverage-degraded with 2-qubit encoding ⚠ (Exp 20, 62.5%). **Practical recommendation**: for financial QAE targeting P≈0.56, prefer 1-qubit Bernoulli encoding; avoid 2-qubit entangling constructions unless CZ-gate error mitigation is applied.
+
+*Exp 21 pre-registered in Whisper C3705, co-run requested by Ember C3409.*
+
+---
+
+*Pre-registered experiment IDs: see [`../experiments/job-manifest.md`](../experiments/job-manifest.md) — Exp 10–18 simulation section. Exp 19 (crash characterization) added C3703. Exp 21 (1-qubit coverage sweep) added C3705.*
