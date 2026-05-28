@@ -1,0 +1,145 @@
+{
+  "experiment": "24",
+  "title": "Real-hardware validation of the 2-qubit |11> CZ-encoding (Exp 20 caveat on hardware)",
+  "cycle": 3716,
+  "backend": "ibm_marrakesh",
+  "job_id": "d8ccg0j8amns73bjbls0",
+  "params": {
+    "shots": 4096,
+    "P_values": [
+      0.56,
+      0.9
+    ],
+    "k_values": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "seed_transpiler": 42,
+    "encoding": "2-qubit |11> Bernoulli (CZ-heavy Grover op, depth grows with k)",
+    "schedule": "fixed Grover amplification (single batched job)",
+    "controlled_comparison": "same ideal trajectory as Exp 23; only CZ-gate content differs"
+  },
+  "preregistered_criteria": {
+    "T1": "mean dev_hw_sim < mean dev_hw_ideal AND mean dev_hw_sim < 0.05 -> SIM-FAITHFUL",
+    "T2": "mean dev_hw_ideal - mean dev_sim_ideal > 0.05 -> SIM-OPTIMISTIC",
+    "T3": "dev_hw_ideal(k=4) > dev_hw_ideal(k=0)+0.05 -> CZ-DEPTH-DEGRADATION (KEY)"
+  },
+  "preregistered_expectation": "T3 expected to PASS (CZ noise real), unlike Exp 23 zero-CZ flat result",
+  "rows": [
+    {
+      "P": 0.56,
+      "k": 0,
+      "ideal_p11": 0.56,
+      "sim_p11": 0.5615,
+      "hw_p11": 0.5718,
+      "dev_sim_ideal": 0.0015,
+      "dev_hw_sim": 0.0103,
+      "dev_hw_ideal": 0.0118
+    },
+    {
+      "P": 0.56,
+      "k": 1,
+      "ideal_p11": 0.3235,
+      "sim_p11": 0.3262,
+      "hw_p11": 0.3074,
+      "dev_sim_ideal": 0.0027,
+      "dev_hw_sim": 0.0188,
+      "dev_hw_ideal": 0.0161
+    },
+    {
+      "P": 0.56,
+      "k": 2,
+      "ideal_p11": 0.7829,
+      "sim_p11": 0.7891,
+      "hw_p11": 0.7524,
+      "dev_sim_ideal": 0.0061,
+      "dev_hw_sim": 0.0366,
+      "dev_hw_ideal": 0.0305
+    },
+    {
+      "P": 0.56,
+      "k": 3,
+      "ideal_p11": 0.127,
+      "sim_p11": 0.1445,
+      "hw_p11": 0.1335,
+      "dev_sim_ideal": 0.0175,
+      "dev_hw_sim": 0.011,
+      "dev_hw_ideal": 0.0065
+    },
+    {
+      "P": 0.56,
+      "k": 4,
+      "ideal_p11": 0.9416,
+      "sim_p11": 0.8916,
+      "hw_p11": 0.8921,
+      "dev_sim_ideal": 0.05,
+      "dev_hw_sim": 0.0005,
+      "dev_hw_ideal": 0.0495
+    },
+    {
+      "P": 0.9,
+      "k": 0,
+      "ideal_p11": 0.9,
+      "sim_p11": 0.8916,
+      "hw_p11": 0.8677,
+      "dev_sim_ideal": 0.0084,
+      "dev_hw_sim": 0.0239,
+      "dev_hw_ideal": 0.0323
+    },
+    {
+      "P": 0.9,
+      "k": 1,
+      "ideal_p11": 0.324,
+      "sim_p11": 0.3389,
+      "hw_p11": 0.3667,
+      "dev_sim_ideal": 0.0149,
+      "dev_hw_sim": 0.0278,
+      "dev_hw_ideal": 0.0427
+    },
+    {
+      "P": 0.9,
+      "k": 2,
+      "ideal_p11": 0.0014,
+      "sim_p11": 0.0156,
+      "hw_p11": 0.0564,
+      "dev_sim_ideal": 0.0142,
+      "dev_hw_sim": 0.0408,
+      "dev_hw_ideal": 0.055
+    },
+    {
+      "P": 0.9,
+      "k": 3,
+      "ideal_p11": 0.3968,
+      "sim_p11": 0.4043,
+      "hw_p11": 0.3586,
+      "dev_sim_ideal": 0.0075,
+      "dev_hw_sim": 0.0457,
+      "dev_hw_ideal": 0.0382
+    },
+    {
+      "P": 0.9,
+      "k": 4,
+      "ideal_p11": 0.9408,
+      "sim_p11": 0.9072,
+      "hw_p11": 0.8035,
+      "dev_sim_ideal": 0.0335,
+      "dev_hw_sim": 0.1038,
+      "dev_hw_ideal": 0.1373
+    }
+  ],
+  "summary": {
+    "mean_dev_hw_sim": 0.0319,
+    "mean_dev_hw_ideal": 0.042,
+    "mean_dev_sim_ideal": 0.0156,
+    "dev_hw_ideal_k0": 0.0221,
+    "dev_hw_ideal_k4": 0.0934
+  },
+  "verdicts": {
+    "T1": "PASS: SIM-FAITHFUL",
+    "T2": "FAIL: sim not optimistic",
+    "T3": "PASS: CZ-DEPTH-DEGRADATION (CZ noise accumulates -> Exp 20 caveat CONFIRMED on HW)"
+  }
+}

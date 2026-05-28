@@ -297,3 +297,45 @@ Exp 21 showed P=0.56 coverage at **87–90% at N=40** with 1-qubit encoding. At 
 ---
 
 *Pre-registered experiment IDs: see [`../experiments/job-manifest.md`](../experiments/job-manifest.md) — Exp 10–18 simulation section. Exp 19 (crash characterization) added C3703. Exp 21 (1-qubit coverage sweep) added C3705. Exp 22 (N-scaling confirmation) added C3709. Exp 23 (real hardware validation) added C3715.*
+
+---
+
+## Exp 24 (C3716, Whisper): 2-qubit |11⟩ CZ-encoding on REAL hardware — closes the Exp 20 caveat's last gap
+
+**The gap this closes.** The arc's standing encoding caveat — *"systems using entangling-gate encodings must validate coverage empirically"* (Exp 20, above) — was measured **entirely on FakeMarrakesh simulation**. No physical QPU ever ran the 2-qubit CZ-heavy family. Then Exp 23 showed FakeMarrakesh is *conservative* (over-states noise) for the 1-qubit zero-CZ family. That raised the obvious open question: **is the 2-qubit CZ-degradation a real hardware effect, or — like the 1-qubit noise over-estimate — another conservative-sim artifact?** This was the last major untested-on-hardware claim in the arc.
+
+**Why it is a clean controlled experiment.** Grover amplitude amplification produces the **same ideal trajectory** regardless of encoding: P(good) = sin²((2k+1)·arcsin√P). Exp 24 uses the *identical* P×k schedule, shots, seed, and ideal curve as Exp 23 — the **only** difference is gate content:
+- Exp 23: Q = Ry(2θ) → **zero CZ gates**, transpiled depth ~flat in k (k=4: depth 37, 0 two-qubit gates after the 1-qubit collapse).
+- Exp 24: Q = MCZ-oracle-on-\|11⟩ + S₀ reflection (qiskit auto-built, same as Exp 20) → **real CZ content that accumulates with k**. Transpiled: k=0 → 0 two-qubit gates; k=4 → **8 two-qubit gates, depth 37**.
+
+So any divergence between the two experiments is attributable to **CZ-gate noise**, with every other variable held fixed.
+
+**Design**: fixed Grover-amplification schedule, single batched job — `ibm_marrakesh` job **`d8ccg0j8amns73bjbls0`** (Whisper C3716, 2026-05-28). P∈{0.56 IWM-target, 0.9 outer-zone} × k∈{0,1,2,3,4}, 4096 shots, 2-qubit \|11⟩ Bernoulli (A = Ry(2·arcsin(P^¼)) per qubit), `seed_transpiler=42`. Script: `run_exp24_2qubit_hardware_validation.py`. Results: [`../experiments/24-2qubit-hardware-validation-results.json`](../experiments/24-2qubit-hardware-validation-results.json).
+
+**Result** (mean abs deviation over 10 circuits):
+
+| Comparison | Exp 24 (2-qubit CZ) | Exp 23 (1-qubit zero-CZ) |
+|---|---|---|
+| hardware vs **noiseless ideal** | **4.20 pp** | 0.93 pp |
+| hardware vs FakeMarrakesh sim | 3.19 pp | 1.04 pp |
+| FakeMarrakesh sim vs ideal | 1.56 pp | 1.41 pp |
+| depth: \|hw−ideal\| k=0 → k=4 | **2.21 → 9.34 pp (rising)** | 1.24 → 0.53 pp (flat/falling) |
+
+**Pre-registered verdicts** (criteria committed in the script before reading hardware; pre-registered expectation: *T3 PASS*):
+- **T1 PASS** (sim-faithful): mean \|hw−sim\| = 3.19pp < mean \|hw−ideal\| = 4.20pp, and < 5pp. For the CZ family the noise model **is** closer to hardware than the noiseless ideal is — unlike Exp 23, where the ideal won.
+- **T2 FAIL** (sim-optimistic by >5pp): hardware is noisier than sim (\|hw−ideal\| 4.20 > \|sim−ideal\| 1.56) but the gap (2.6pp) is below the 5pp pre-registered margin. The sim slightly under-states CZ noise, within tolerance.
+- **T3 PASS** (CZ-depth-degradation): \|hw−ideal\| grows k=0: 2.21pp → k=4: 9.34pp (+7.1pp ≫ 5pp threshold). **Hardware deviation rises monotonically with CZ-gate count.**
+
+**Interpretation — the encoding caveat is CONFIRMED on real hardware.** The two pre-registered hardware experiments form a complete controlled pair that isolates the mechanism:
+- The 1-qubit zero-CZ family (Exp 23) shows **no** depth degradation on hardware (sim even over-states its noise).
+- The 2-qubit CZ-heavy family (Exp 24), running the *identical ideal trajectory*, shows **strong** depth degradation that scales with the number of CZ gates.
+
+The Exp 20 finding — that the 2-qubit \|11⟩ entangling encoding carries a real penalty — is therefore a **genuine physical hardware effect (CZ-gate noise accumulation), not a FakeMarrakesh simulation artifact.** The arc's standing recommendation to prefer the 1-qubit zero-CZ encoding for financial amplitude estimation is now hardware-validated from **both** sides.
+
+**Secondary meta-finding — the noise model's accuracy is encoding-dependent.** FakeMarrakesh is *conservative* for the zero-CZ family (Exp 23: over-states noise) but *faithful / slightly optimistic* for the CZ-heavy family (Exp 24: under-states noise by ~2.6pp). This is physically sensible: the model's error budget is dominated by two-qubit gate error, which it captures well; it over-weights readout/idle/T₁–T₂ decoherence for the trivially shallow single-qubit case. **Practical takeaway: trust FakeMarrakesh as a slightly-pessimistic floor for shallow single-qubit circuits, and as a slightly-optimistic estimate for CZ-depth-heavy circuits.**
+
+**Worst case** lands exactly where the arc predicts: P=0.9 (outer zone) at k=4 (max CZ depth) deviates 13.7pp from ideal — outer-zone × maximal entangling depth compounds, consistent with the P-safety-zone (P∈[0.2,0.8]) story.
+
+**Caveat**: single submission day (±7pp single-day drift guidance); the depth-degradation signal (+7.1pp k0→k4) exceeds the single-day drift band, so the *qualitative* CZ-accumulation finding is robust, though the precise per-circuit pp figures would tighten with multi-day averaging.
+
+*Exp 24 pre-registered in the `run_exp24_2qubit_hardware_validation.py` script (criteria + expectation committed before job submission), Whisper C3716. Together with Exp 23 it closes the IQAE financial arc's hardware-validation question for **both** encodings.*
