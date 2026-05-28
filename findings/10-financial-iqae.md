@@ -179,4 +179,20 @@ The progression:
 
 ---
 
-*Pre-registered experiment IDs: see [`../experiments/job-manifest.md`](../experiments/job-manifest.md) — Exp 10–18 simulation section.*
+## Exp 19 Correction (C3703): the k=7 crash is implementation-specific, not fundamental
+
+A follow-up experiment ([`../experiments/19-crash-characterization-results.json`](../experiments/19-crash-characterization-results.json), script `run_exp19_crash_characterization.py`) re-examined the open question above ("provided the implementation handles k=7 gracefully") and forces a correction to the safety-zone story.
+
+**T1 (analytic)**: The per-shot Fisher information for measuring p = sin²((2k+1)θ) reduces to **4(2k+1)² — constant in θ and growing with k**. The k=7 div-zero is therefore **not** a vanishing-information ("no-confidence") point. It is a numerical event at the sin² branch boundary (p_k → 0/1), which is guardable, not a loss of statistical information.
+
+**T2 (reproduction)**: qiskit's **core** `IterativeAmplitudeEstimation` driven by a minimal *correct* transpiling noisy sampler (transpile-to-basis, then FakeMarrakesh noise) handles **all** P ∈ {0.3, 0.56, 0.7, 0.9} **without crashing** — reaching k=8 for P=0.3 and estimating outer-zone P=0.9 accurately (0.9007). Noise was verified active (80-X-gate identity drifts to P(1)=0.0137 noisy vs 0.0000 ideal).
+
+**Conclusion**: The Exp 18 k=7 div-zero was specific to the Exp 17/18 **TranspilingNoisySampler V2 wrapper** (float division at the branch boundary), **not** a fundamental IQAE/geometry boundary. The crash-based half of the P∈[0.2,0.8] "safety zone" evidence is thus partly an **artifact**; outer-zone P is usable with a sampler that guards branch boundaries.
+
+**What still stands**: The recommendation to favor P∈[0.2,0.8] remains *prudent* but its justification narrows to the **statistical** evidence — Exp 18b's structural coverage failure (P=0.9, N=40, 87.5% coverage, p=0.048) — which Exp 19 did **not** refute.
+
+**Caveat / next step**: Exp 19 T2 used a **1-qubit** Bernoulli construction (no CZ gates); Exp 17/18 used a **2-qubit |11>** encoding whose entangling gates accumulate more noise. Re-run with a correct 2-qubit |11> `EstimationProblem` to confirm the wrapper-vs-core distinction under CZ-gate noise, and re-test Exp 18b coverage with the clean transpiling sampler. Until then, treat Recommendation 1 above as *prudent-pending-2-qubit-confirmation* rather than a hard physical limit.
+
+---
+
+*Pre-registered experiment IDs: see [`../experiments/job-manifest.md`](../experiments/job-manifest.md) — Exp 10–18 simulation section. Exp 19 (crash characterization) added C3703.*

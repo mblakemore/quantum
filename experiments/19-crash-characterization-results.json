@@ -1,0 +1,169 @@
+{
+  "experiment": "19",
+  "title": "IQAE k=7 outer-zone crash characterization",
+  "cycle": 3703,
+  "tests": {
+    "T1_fisher": {
+      "claim": "Fisher info = 4(2k+1)^2, constant in theta, grows with k",
+      "implication": "k=7 crash is NOT Fisher-information vanishing; it is a p_k->0/1 branch-boundary numerical event (guardable)",
+      "rows": [
+        {
+          "P": 0.3,
+          "k": 0,
+          "theta": 0.57964,
+          "p_k": 0.3,
+          "fisher_numeric": 4.0,
+          "fisher_analytic_4(2k+1)^2": 4
+        },
+        {
+          "P": 0.3,
+          "k": 3,
+          "theta": 0.57964,
+          "p_k": 0.62901,
+          "fisher_numeric": 196.0,
+          "fisher_analytic_4(2k+1)^2": 196
+        },
+        {
+          "P": 0.3,
+          "k": 7,
+          "theta": 0.57964,
+          "p_k": 0.4449,
+          "fisher_numeric": 900.0,
+          "fisher_analytic_4(2k+1)^2": 900
+        },
+        {
+          "P": 0.56,
+          "k": 0,
+          "theta": 0.84554,
+          "p_k": 0.56,
+          "fisher_numeric": 4.0,
+          "fisher_analytic_4(2k+1)^2": 4
+        },
+        {
+          "P": 0.56,
+          "k": 3,
+          "theta": 0.84554,
+          "p_k": 0.127,
+          "fisher_numeric": 196.0,
+          "fisher_analytic_4(2k+1)^2": 196
+        },
+        {
+          "P": 0.56,
+          "k": 7,
+          "theta": 0.84554,
+          "p_k": 0.01357,
+          "fisher_numeric": 900.0,
+          "fisher_analytic_4(2k+1)^2": 900
+        },
+        {
+          "P": 0.7,
+          "k": 0,
+          "theta": 0.99116,
+          "p_k": 0.7,
+          "fisher_numeric": 4.0,
+          "fisher_analytic_4(2k+1)^2": 4
+        },
+        {
+          "P": 0.7,
+          "k": 3,
+          "theta": 0.99116,
+          "p_k": 0.37099,
+          "fisher_numeric": 196.0,
+          "fisher_analytic_4(2k+1)^2": 196
+        },
+        {
+          "P": 0.7,
+          "k": 7,
+          "theta": 0.99116,
+          "p_k": 0.5551,
+          "fisher_numeric": 900.0,
+          "fisher_analytic_4(2k+1)^2": 900
+        },
+        {
+          "P": 0.9,
+          "k": 0,
+          "theta": 1.24905,
+          "p_k": 0.9,
+          "fisher_numeric": 4.0,
+          "fisher_analytic_4(2k+1)^2": 4
+        },
+        {
+          "P": 0.9,
+          "k": 3,
+          "theta": 1.24905,
+          "p_k": 0.39681,
+          "fisher_numeric": 196.0,
+          "fisher_analytic_4(2k+1)^2": 196
+        },
+        {
+          "P": 0.9,
+          "k": 7,
+          "theta": 1.24905,
+          "p_k": 0.01291,
+          "fisher_numeric": 900.0,
+          "fisher_analytic_4(2k+1)^2": 900
+        }
+      ]
+    },
+    "T2_core_iqae": {
+      "0.56": {
+        "zone": "safety",
+        "status": "ok",
+        "estimate": 0.5578,
+        "max_k": 3,
+        "powers": [
+          0,
+          0,
+          3
+        ]
+      },
+      "0.3": {
+        "zone": "safety",
+        "status": "ok",
+        "estimate": 0.2999,
+        "max_k": 8,
+        "powers": [
+          0,
+          0,
+          8
+        ]
+      },
+      "0.7": {
+        "zone": "safety",
+        "status": "ok",
+        "estimate": 0.7042,
+        "max_k": 4,
+        "powers": [
+          0,
+          0,
+          4
+        ]
+      },
+      "0.9": {
+        "zone": "outer",
+        "status": "ok",
+        "estimate": 0.9007,
+        "max_k": 5,
+        "powers": [
+          0,
+          0,
+          5
+        ]
+      }
+    }
+  },
+  "noise_sanity_check": {
+    "test": "80 X-gates (ideal identity) through FakeMarrakesh noise model",
+    "ideal_P1": 0.0,
+    "noisy_P1": 0.0137,
+    "verdict": "noise IS applied; FakeMarrakesh Heron-r2 single-qubit error is low"
+  },
+  "conclusions": {
+    "headline": "The Exp 18 k=7 div-zero crash is IMPLEMENTATION-specific (TranspilingNoisySampler V2 wrapper), NOT fundamental IQAE geometry.",
+    "T1_finding": "Fisher info per shot = 4(2k+1)^2 \u2014 constant in theta, grows with k. The k=7 div-zero is NOT a vanishing-information point; it is a p_k->0/1 branch-boundary numerical event (guardable).",
+    "T2_finding": "qiskit CORE IterativeAmplitudeEstimation + a minimal correct transpiling noisy sampler handles ALL P in {0.3,0.56,0.7,0.9} WITHOUT crash, reaching k up to 8 (P=0.3) and estimating outer-zone P=0.9 accurately (0.9007). No k=7 div-zero in core.",
+    "implication_for_finding10": "The crash-based half of the P-safety-zone (P in [0.2,0.8]) evidence is partly an ARTIFACT of the wrapper bug, not a hard physical boundary. Outer-zone P is usable with a correct transpiling sampler that guards branch boundaries.",
+    "caveat": "T2 used a 1-qubit Bernoulli construction; Ember Exp 17/18 used a 2-qubit |11> encoding with entangling (CZ) gates that accumulate more noise. The STRUCTURAL coverage failure (Exp 18b: P=0.9, N=40, 87.5% coverage, p=0.048) is a SEPARATE statistical claim not refuted here and may still hold.",
+    "next_step": "Re-run with a correct 2-qubit |11> EstimationProblem (proper Grover reflection about |11>) to confirm the wrapper-vs-core distinction under CZ-gate noise, and re-examine Exp 18b coverage with the clean transpiling sampler."
+  }
+}
