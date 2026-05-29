@@ -91,6 +91,46 @@ Specifically: a reference circuit on C3664 measured **88.1%** fidelity. The *ide
 
 This is the most operationally important finding in the entire campaign for anyone deploying quantum algorithms in production: **the substrate is the noise floor, and the substrate moves**. Real-time hardware characterization must precede any high-stakes algorithmic execution.
 
+## Refinement (C3725–C3726): the "futile" verdict was confounded — here is the law underneath it
+
+Finding 7's own caveat (cross-day, cross-circuit; ±7pp drift) means its blanket "mitigation
+is futile" verdict was confounded by its own standard. Two co-submitted, deconfounded
+experiments (matched-pairs, one calibration snapshot — the C3723 design) resolved it.
+
+**Exp 28 — the Gate-Overhead Sign Rule (CONFIRMED, job `d8cievj8ch0s738uujsg`).**
+Holding the *target* fixed (readout error) and varying *only* the mechanism, on the same
+circuits under one calibration snapshot: REM (M⁻¹ post-processing, **0** added gates)
+*helped* (−0.68pp), while TREM (X-twirl, **injects** gates, same readout target) was *null*
+(−0.19pp). The **sign** of a technique's effect is set by its residual payload-gate
+overhead, **not** the error channel it targets. Finding 7 is **refined, not overturned**:
+gate-*injecting* mitigation is futile on Heron-r2; *zero-gate-overhead* mitigation
+(post-processing REM, extrapolate-away ZNE) extracts genuine value.
+
+**Exp 29 — the Gate-Overhead Dose-Response Law (CONFIRMED, job `d8cj4k2jki0s73arbrg0`).**
+The strongest form of the test: inject `D` logically-**identity** CZ-pairs (`CZ·CZ = I`,
+barrier-fenced) into the payload and vary only `D ∈ {0,2,4,6}` pairs → `{0,4,8,12}` added
+2q-gates. Identity injection targets *nothing*, so any degradation is **pure gate
+overhead** — the confound-free limit of Exp 28 (which still *targeted* readout). Result on
+live `ibm_marrakesh`, perfectly monotone:
+
+| Injected identity CZ-pairs | Added 2q-gates | Raw mean error | REM mean error |
+|---|---|---|---|
+| 0 | 0 | 2.83pp | 2.01pp |
+| 2 | 4 | 3.60pp | 2.84pp |
+| 4 | 8 | 4.72pp | 3.90pp |
+| 6 | 12 | 5.98pp | 5.19pp |
+
+Spearman `ρ(D, error) = +1.000`; OLS slope **+0.264pp of estimator error per added
+2q-gate**. The REM-corrected slope (+0.265pp/gate) is *identical* to the raw slope —
+readout is a constant offset; the per-gate cost is the **gates themselves**, not readout.
+
+**The law underneath the Sign Rule:** residual payload-gate count is a *continuous* cause
+of degradation, costing ≈0.26pp per added 2-qubit gate on this substrate. This is *why*
+every gate-injecting technique (TREM, DD pulse trains, PT framing) lands net-negative — each
+added gate costs more than the passive error it was designed to remove. Mitigation is not
+"futile"; it is **governed by a gate-overhead budget**, and only techniques that spend zero
+residual payload gates can come out ahead.
+
 ## The Working Strategy: Hardware-Aware Compilation
 
 Given that DD, PT, TREM, and ZNE all under-perform, the productive replacements are:
