@@ -1,0 +1,12 @@
+{
+    "available": true,
+    "backend_name": "ibm_marrakesh",
+    "last_update_date": "2026-05-29T20:54:03+00:00",
+    "device_median": {
+        "T1_s": 0.00017766835834217805,
+        "T2_s": 9.920516516641667e-05,
+        "readout_error": 0.012939453125,
+        "n_qubits": 156
+    },
+    "snapshot_phase": "submit"
+}

@@ -3,7 +3,7 @@
     "title": "Portfolio-QAOA Depth Ceiling: CZ-count-governed vs p-governed wall (ORQ #6 leftover)",
     "cycle": 3747,
     "backend": "ibm_marrakesh",
-    "job_id": "FakeMarrakesh-sim",
+    "job_id": "d8d0bcdmdsks73d36850",
     "open_research_question": "Does the QAOA utility wall track TOTAL transpiled CZ count (Finding 05, ~800-1000) or nominal depth p? Dense fully-connected portfolio QUBO breaks the path-graph proportionality to discriminate.",
     "hypotheses": {
         "H_A_cz_count_governed": "lower nominal p_max than MaxCut but same ~800-1000 transpiled CZ",
@@ -61,17 +61,25 @@
         "G4": "noise_wall_p < 96 AND cz@wall in 500-1500 (CZ-governed, not p-governed)"
     },
     "calibration": {
-        "available": false,
-        "note": "no submit-time snapshot found"
+        "available": true,
+        "backend_name": "ibm_marrakesh",
+        "last_update_date": "2026-05-29T20:54:03+00:00",
+        "device_median": {
+            "T1_s": 0.00017766835834217805,
+            "T2_s": 9.920516516641667e-05,
+            "readout_error": 0.012939453125,
+            "n_qubits": 156
+        },
+        "snapshot_phase": "submit"
     },
     "summary": {
         "noise_wall_p": 16,
         "cz_at_wall": 1002,
-        "noise_excess_at_wall_bits": 3.2946,
+        "noise_excess_at_wall_bits": 3.5878,
         "ideal_ratio_at_wall": 0.3814,
         "p_converge": 16,
         "cz_at_converge": 1002,
-        "top_ratio": 0.9864,
+        "top_ratio": 0.9288,
         "exp33_maxcut_pmax": 96,
         "exp33_maxcut_cz": 960,
         "G1": "PASS",
@@ -84,65 +92,65 @@
         {
             "p": 4,
             "cz": 255,
-            "H_hw_bits": 5.9104,
+            "H_hw_bits": 5.8742,
             "H_ideal_bits": 5.9068,
-            "ratio_hw": 0.9851,
+            "ratio_hw": 0.979,
             "ideal_ratio": 0.9845,
-            "noise_excess_bits": 0.0037
+            "noise_excess_bits": -0.0326
         },
         {
             "p": 8,
             "cz": 504,
-            "H_hw_bits": 5.8789,
+            "H_hw_bits": 5.9449,
             "H_ideal_bits": 5.2643,
-            "ratio_hw": 0.9798,
+            "ratio_hw": 0.9908,
             "ideal_ratio": 0.8774,
-            "noise_excess_bits": 0.6146
+            "noise_excess_bits": 0.6807
         },
         {
             "p": 12,
             "cz": 750,
-            "H_hw_bits": 5.7747,
+            "H_hw_bits": 5.9195,
             "H_ideal_bits": 5.1859,
-            "ratio_hw": 0.9625,
+            "ratio_hw": 0.9866,
             "ideal_ratio": 0.8643,
-            "noise_excess_bits": 0.5888
+            "noise_excess_bits": 0.7335
         },
         {
             "p": 16,
             "cz": 1002,
-            "H_hw_bits": 5.5832,
+            "H_hw_bits": 5.8764,
             "H_ideal_bits": 2.2886,
-            "ratio_hw": 0.9305,
+            "ratio_hw": 0.9794,
             "ideal_ratio": 0.3814,
-            "noise_excess_bits": 3.2946
+            "noise_excess_bits": 3.5878
         },
         {
             "p": 24,
             "cz": 1515,
-            "H_hw_bits": 5.8243,
+            "H_hw_bits": 5.7837,
             "H_ideal_bits": 1.4614,
-            "ratio_hw": 0.9707,
+            "ratio_hw": 0.9639,
             "ideal_ratio": 0.2436,
-            "noise_excess_bits": 4.3629
+            "noise_excess_bits": 4.3223
         },
         {
             "p": 32,
             "cz": 2007,
-            "H_hw_bits": 5.9086,
+            "H_hw_bits": 5.6853,
             "H_ideal_bits": 1.4416,
-            "ratio_hw": 0.9848,
+            "ratio_hw": 0.9475,
             "ideal_ratio": 0.2403,
-            "noise_excess_bits": 4.467
+            "noise_excess_bits": 4.2437
         },
         {
             "p": 48,
             "cz": 3075,
-            "H_hw_bits": 5.9187,
+            "H_hw_bits": 5.5729,
             "H_ideal_bits": 1.4275,
-            "ratio_hw": 0.9864,
+            "ratio_hw": 0.9288,
             "ideal_ratio": 0.2379,
-            "noise_excess_bits": 4.4912
+            "noise_excess_bits": 4.1453
         }
     ]
 }
