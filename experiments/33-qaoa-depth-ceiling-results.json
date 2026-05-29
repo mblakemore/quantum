@@ -1,0 +1,139 @@
+{
+    "experiment": "33",
+    "title": "Hardware-Aware QAOA Depth Ceiling (ORQ #6)",
+    "cycle": 3739,
+    "backend": "ibm_marrakesh",
+    "job_id": "d8cujgvd0j8c73f3eit0",
+    "open_research_question": "Map p_max for QAOA MaxCut: the p at which output entropy crosses 0.95x uniform (Finding 05 800-1000 CZ wall -> QAOA p ceiling).",
+    "graph": {
+        "type": "path",
+        "n_nodes": 6,
+        "edges": [
+            [
+                0,
+                1
+            ],
+            [
+                1,
+                2
+            ],
+            [
+                2,
+                3
+            ],
+            [
+                3,
+                4
+            ],
+            [
+                4,
+                5
+            ]
+        ],
+        "two_q_per_layer": 10
+    },
+    "params": {
+        "shots": 8192,
+        "T_anneal": 10.0,
+        "p_sweep": [
+            8,
+            16,
+            24,
+            32,
+            48,
+            64,
+            96
+        ],
+        "angle_mode": "fixed_annealing_ramp",
+        "seed_transpiler": 42,
+        "uniform_max_bits": 6.0,
+        "ratio_gate": 0.95
+    },
+    "preregistered_criteria": {
+        "p_max": "smallest swept p with H_hw(p)/n_qubits >= 0.95",
+        "G1": "p_max found OR top ratio >= 0.90 (ceiling exists/approaching)",
+        "G2": "noise excess (H_hw - H_ideal) >= 0.5 bit at p_max (crossing is noise-driven)",
+        "G3": "2q-gate count at p_max in 500-1500 (consistent with Finding 05 ~800-1000 CZ wall)"
+    },
+    "calibration": {
+        "available": true,
+        "backend_name": "ibm_marrakesh",
+        "last_update_date": "2026-05-29T18:48:48+00:00",
+        "device_median": {
+            "T1_s": 0.0001746465793752002,
+            "T2_s": 7.67465088505554e-05,
+            "readout_error": 0.01171875,
+            "n_qubits": 156
+        },
+        "snapshot_phase": "submit"
+    },
+    "summary": {
+        "p_max": 96,
+        "cz_at_p_max": 960,
+        "noise_excess_at_p_max_bits": 3.9144,
+        "top_ratio": 0.9763,
+        "monotone": true,
+        "G1": "PASS",
+        "G2": "PASS",
+        "G3": "PASS",
+        "verdict": "QAOA depth ceiling MAPPED on ibm_marrakesh: output entropy crosses 0.95x uniform at p=96 (960 2q gates). Consistent with Finding 05's 800-1000 CZ wall."
+    },
+    "rows": [
+        {
+            "p": 8,
+            "cz": 80,
+            "H_hw_bits": 3.8579,
+            "H_ideal_bits": 2.9482,
+            "ratio_hw": 0.643,
+            "noise_excess_bits": 0.9096
+        },
+        {
+            "p": 16,
+            "cz": 160,
+            "H_hw_bits": 3.7717,
+            "H_ideal_bits": 2.0255,
+            "ratio_hw": 0.6286,
+            "noise_excess_bits": 1.7462
+        },
+        {
+            "p": 24,
+            "cz": 240,
+            "H_hw_bits": 4.1693,
+            "H_ideal_bits": 1.969,
+            "ratio_hw": 0.6949,
+            "noise_excess_bits": 2.2003
+        },
+        {
+            "p": 32,
+            "cz": 320,
+            "H_hw_bits": 4.6647,
+            "H_ideal_bits": 1.9528,
+            "ratio_hw": 0.7774,
+            "noise_excess_bits": 2.7118
+        },
+        {
+            "p": 48,
+            "cz": 480,
+            "H_hw_bits": 5.4083,
+            "H_ideal_bits": 1.9443,
+            "ratio_hw": 0.9014,
+            "noise_excess_bits": 3.464
+        },
+        {
+            "p": 64,
+            "cz": 640,
+            "H_hw_bits": 5.6603,
+            "H_ideal_bits": 1.9428,
+            "ratio_hw": 0.9434,
+            "noise_excess_bits": 3.7175
+        },
+        {
+            "p": 96,
+            "cz": 960,
+            "H_hw_bits": 5.8576,
+            "H_ideal_bits": 1.9432,
+            "ratio_hw": 0.9763,
+            "noise_excess_bits": 3.9144
+        }
+    ]
+}

@@ -1,0 +1,130 @@
+{
+    "experiment": "32",
+    "title": "Transient-Floor Spectroscopy (Exp31 confound -> signal)",
+    "cycle": 3739,
+    "backend": "ibm_kingston",
+    "job_id": "FakeMarrakesh-sim",
+    "answers_creator_questions": {
+        "Q1_map": "ARM A (SPAM) + ARM B (layout) decompose the floor by source",
+        "Q2_before_after": "submit + finalize calibration snapshots + ARM C bookends",
+        "Q3_collide": "ARM D coherent-phase collision separates coherent vs incoherent"
+    },
+    "exp31_reference_bell_floor_pp": 20.36,
+    "params": {
+        "shots": 8192,
+        "n_layout_pairs": 3,
+        "phase_thetas_deg": [
+            0,
+            45,
+            90,
+            135,
+            180,
+            225,
+            270,
+            315
+        ],
+        "spam_states": [
+            "00",
+            "01",
+            "10",
+            "11"
+        ],
+        "seed_transpiler": 42
+    },
+    "arm_A_spam": {
+        "per_state": {
+            "00": {
+                "p_correct": 0.99316,
+                "readout_err_pp": 0.684
+            },
+            "01": {
+                "p_correct": 0.99023,
+                "readout_err_pp": 0.977
+            },
+            "10": {
+                "p_correct": 0.9873,
+                "readout_err_pp": 1.27
+            },
+            "11": {
+                "p_correct": 0.9873,
+                "readout_err_pp": 1.27
+            }
+        },
+        "readout_floor_pp": 1.05,
+        "spam_share_of_bell": 0.052
+    },
+    "arm_B_layout": {
+        "rows": [
+            {
+                "pair_idx": 0,
+                "pair": [
+                    13,
+                    14
+                ],
+                "zz": 0.98242,
+                "floor_err_pp": 1.758,
+                "recorded_cz_err": null,
+                "recorded_readout_err": null
+            },
+            {
+                "pair_idx": 1,
+                "pair": [
+                    27,
+                    28
+                ],
+                "zz": 0.93164,
+                "floor_err_pp": 6.836,
+                "recorded_cz_err": null,
+                "recorded_readout_err": null
+            },
+            {
+                "pair_idx": 2,
+                "pair": [
+                    153,
+                    154
+                ],
+                "zz": -0.05859,
+                "floor_err_pp": 94.141,
+                "recorded_cz_err": null,
+                "recorded_readout_err": null
+            }
+        ],
+        "corr_floor_vs_recorded_cz": null,
+        "floor_uniform_high": false
+    },
+    "arm_C_drift": {
+        "err_first_pp": 2.734,
+        "err_last_pp": 2.539,
+        "drift_pp": 0.195
+    },
+    "arm_D_collision": {
+        "thetas_rad": [
+            0.0,
+            0.7854,
+            1.5708,
+            2.3562,
+            3.1416,
+            3.927,
+            4.7124,
+            5.4978
+        ],
+        "xx_vals": [
+            0.97852,
+            0.73242,
+            -0.00781,
+            -0.66602,
+            -0.9707,
+            -0.72852,
+            -0.01953,
+            0.71094
+        ],
+        "fit_amplitude_A": 0.98914,
+        "coherent_phase_rad": -0.018,
+        "incoherent_floor_pp": 1.086
+    },
+    "calibration_submit": {},
+    "calibration_before_after": null,
+    "verdict_classes": [
+        "incoherent/depolarizing floor, no single dominant identified source"
+    ]
+}
