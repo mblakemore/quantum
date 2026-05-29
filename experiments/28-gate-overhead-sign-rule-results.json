@@ -1,0 +1,236 @@
+{
+    "experiment": "28",
+    "title": "The Gate-Overhead Sign Rule for NISQ Error Mitigation",
+    "cycle": 3724,
+    "backend": "ibm_marrakesh",
+    "job_id": "FakeMarrakesh-sim",
+    "hypothesis": "Sign of a mitigation's effect is governed by residual payload-gate overhead, not the targeted error source. Controlled test holds target (readout) fixed, varies mechanism (Raw/REM/TREM) under one calib snapshot.",
+    "params": {
+        "shots": 4096,
+        "P_values": [
+            0.56,
+            0.9
+        ],
+        "k_values": [
+            0,
+            1,
+            2,
+            3,
+            4
+        ],
+        "scale_factors": [
+            1,
+            3
+        ],
+        "trem_masks": [
+            "11"
+        ],
+        "circuits_total": 34
+    },
+    "preregistered_criteria": {
+        "T1": "mean_err(REM) < mean_err(Raw)",
+        "T2": "mean_err(TREM) > mean_err(REM)  [headline: isolates gate injection]",
+        "T3": "mean_err(TREM) >= mean_err(Raw) - 0.30pp",
+        "reconciliation": "T1 AND T2 => Finding 7 refined (gate-injecting futile; zero-gate-overhead works, under matched calibration)",
+        "falsification": "T2 FAIL (TREM <= REM) => rule rejected"
+    },
+    "calibration": {
+        "available": false,
+        "note": "no submit-time snapshot found"
+    },
+    "readout_calibration": {
+        "M": [
+            [
+                0.9834,
+                0.0117,
+                0.0039,
+                0.0
+            ],
+            [
+                0.0146,
+                0.9844,
+                0.0,
+                0.0049
+            ],
+            [
+                0.002,
+                0.0,
+                0.9824,
+                0.0098
+            ],
+            [
+                0.0,
+                0.0039,
+                0.0137,
+                0.9854
+            ]
+        ],
+        "readout_p11_accuracy": 0.9854,
+        "false_positive_rate": 0.0
+    },
+    "summary": {
+        "mean_raw_pp": 1.41,
+        "mean_rem_pp": 0.97,
+        "mean_trem_pp": 1.64,
+        "mean_zne_pp": 1.01,
+        "mean_zne_rem_pp": 0.87,
+        "rem_minus_raw_pp": -0.44,
+        "trem_minus_raw_pp": 0.22,
+        "T1": "PASS",
+        "T2": "PASS",
+        "T3": "PASS",
+        "reconciliation_confirmed": true
+    },
+    "rows": [
+        {
+            "P": 0.56,
+            "k": 0,
+            "ideal": 0.56,
+            "raw_p11": 0.5596,
+            "rem_p11": 0.5645,
+            "trem_p11": 0.563,
+            "zne_p11": 0.5581,
+            "zne_rem_p11": 0.5629,
+            "err_raw": 0.0004,
+            "err_rem": 0.0045,
+            "err_trem": 0.003,
+            "err_zne": 0.0019,
+            "err_zne_rem": 0.0029
+        },
+        {
+            "P": 0.56,
+            "k": 1,
+            "ideal": 0.3235,
+            "raw_p11": 0.3203,
+            "rem_p11": 0.3199,
+            "trem_p11": 0.3257,
+            "zne_p11": 0.3257,
+            "zne_rem_p11": 0.3253,
+            "err_raw": 0.0031,
+            "err_rem": 0.0036,
+            "err_trem": 0.0022,
+            "err_zne": 0.0022,
+            "err_zne_rem": 0.0018
+        },
+        {
+            "P": 0.56,
+            "k": 2,
+            "ideal": 0.7829,
+            "raw_p11": 0.7646,
+            "rem_p11": 0.7745,
+            "trem_p11": 0.7598,
+            "zne_p11": 0.7812,
+            "zne_rem_p11": 0.7916,
+            "err_raw": 0.0183,
+            "err_rem": 0.0085,
+            "err_trem": 0.0232,
+            "err_zne": 0.0017,
+            "err_zne_rem": 0.0087
+        },
+        {
+            "P": 0.56,
+            "k": 3,
+            "ideal": 0.127,
+            "raw_p11": 0.123,
+            "rem_p11": 0.1181,
+            "trem_p11": 0.1309,
+            "zne_p11": 0.1162,
+            "zne_rem_p11": 0.1109,
+            "err_raw": 0.004,
+            "err_rem": 0.0089,
+            "err_trem": 0.0039,
+            "err_zne": 0.0108,
+            "err_zne_rem": 0.0161
+        },
+        {
+            "P": 0.56,
+            "k": 4,
+            "ideal": 0.9416,
+            "raw_p11": 0.9014,
+            "rem_p11": 0.9143,
+            "trem_p11": 0.9009,
+            "zne_p11": 0.9219,
+            "zne_rem_p11": 0.9353,
+            "err_raw": 0.0402,
+            "err_rem": 0.0273,
+            "err_trem": 0.0407,
+            "err_zne": 0.0197,
+            "err_zne_rem": 0.0063
+        },
+        {
+            "P": 0.9,
+            "k": 0,
+            "ideal": 0.9,
+            "raw_p11": 0.8799,
+            "rem_p11": 0.8919,
+            "trem_p11": 0.8804,
+            "zne_p11": 0.874,
+            "zne_rem_p11": 0.8858,
+            "err_raw": 0.0201,
+            "err_rem": 0.0081,
+            "err_trem": 0.0196,
+            "err_zne": 0.026,
+            "err_zne_rem": 0.0142
+        },
+        {
+            "P": 0.9,
+            "k": 1,
+            "ideal": 0.324,
+            "raw_p11": 0.3213,
+            "rem_p11": 0.3199,
+            "trem_p11": 0.3242,
+            "zne_p11": 0.3193,
+            "zne_rem_p11": 0.3178,
+            "err_raw": 0.0027,
+            "err_rem": 0.0041,
+            "err_trem": 0.0002,
+            "err_zne": 0.0047,
+            "err_zne_rem": 0.0062
+        },
+        {
+            "P": 0.9,
+            "k": 2,
+            "ideal": 0.0014,
+            "raw_p11": 0.0176,
+            "rem_p11": 0.0093,
+            "trem_p11": 0.0171,
+            "zne_p11": 0.0156,
+            "zne_rem_p11": 0.0072,
+            "err_raw": 0.0161,
+            "err_rem": 0.0079,
+            "err_trem": 0.0156,
+            "err_zne": 0.0142,
+            "err_zne_rem": 0.0058
+        },
+        {
+            "P": 0.9,
+            "k": 3,
+            "ideal": 0.3968,
+            "raw_p11": 0.3984,
+            "rem_p11": 0.3992,
+            "trem_p11": 0.4116,
+            "zne_p11": 0.4121,
+            "zne_rem_p11": 0.4132,
+            "err_raw": 0.0016,
+            "err_rem": 0.0024,
+            "err_trem": 0.0148,
+            "err_zne": 0.0153,
+            "err_zne_rem": 0.0164
+        },
+        {
+            "P": 0.9,
+            "k": 4,
+            "ideal": 0.9408,
+            "raw_p11": 0.9062,
+            "rem_p11": 0.9191,
+            "trem_p11": 0.9004,
+            "zne_p11": 0.936,
+            "zne_rem_p11": 0.9496,
+            "err_raw": 0.0345,
+            "err_rem": 0.0216,
+            "err_trem": 0.0404,
+            "err_zne": 0.0047,
+            "err_zne_rem": 0.0088
+        }
+    ]
+}
