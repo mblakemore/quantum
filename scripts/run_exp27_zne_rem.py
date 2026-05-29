@@ -87,6 +87,7 @@ SEED_TRANSPILER = 42
 BACKEND_NAME = "ibm_marrakesh"
 RESULT_PATH = f"experiments/{EXPERIMENT}-zne-rem-results.json"
 JOBID_PATH = f"experiments/{EXPERIMENT}-jobid.txt"
+CALIB_PATH = f"experiments/{EXPERIMENT}-calibration.json"  # C3723: per-submit calib snapshot
 N_MAIN = len(P_VALUES) * len(K_VALUES) * len(SCALE_FACTORS)  # 20
 
 # Historical baselines from Exp 23 (1-qubit raw) and Exp 25b (ZNE-only best)
@@ -296,6 +297,24 @@ def submit_hardware(schedule_items, backend):
     job_id = job.job_id()
     with open(JOBID_PATH, "w") as f:
         f.write(job_id + "\n")
+    # C3723: snapshot the day's calibration AT SUBMIT TIME (backend may recalibrate
+    # before we fetch results). Sidecar file; analyze() folds it into results JSON.
+    # Deconfounds absolute metrics (T2) against day-to-day drift. Zero QPU time.
+    try:
+        from calibration_snapshot import capture_calibration
+        phys = None
+        try:
+            qc0 = schedule_items[0][4]
+            phys = qc0.layout.final_index_layout()
+        except Exception:
+            phys = None
+        snap = capture_calibration(backend, physical_qubits=phys)
+        with open(CALIB_PATH, "w") as f:
+            json.dump(snap, f, indent=4, default=str)
+        print(f"  Calibration snapshot saved to {CALIB_PATH} "
+              f"(updated {snap.get('last_update_date')})")
+    except Exception as e:
+        print(f"  [warn] calibration snapshot skipped: {e}")
     print(f"\n  SUBMITTED. job_id = {job_id}")
     print(f"  Total circuits: {len(circuits)} ({N_MAIN} main + 4 cal)")
     print(f"  Saved to {JOBID_PATH}")
@@ -339,6 +358,18 @@ def get_counts_from_fakemarrakesh(schedule_items, backend):
         counts = getattr(data, reg_name).get_counts()
         all_counts.append(counts)
     return all_counts
+
+
+def _load_calibration_snapshot():
+    """Load the submit-time calibration sidecar if present (C3723)."""
+    try:
+        import os
+        if os.path.exists(CALIB_PATH):
+            with open(CALIB_PATH) as f:
+                return json.load(f)
+    except Exception:
+        pass
+    return {"available": False, "note": "no submit-time snapshot found"}
 
 
 def analyze(schedule_items, all_counts, job_id=None):
@@ -498,6 +529,7 @@ def analyze(schedule_items, all_counts, job_id=None):
             "T2": "ZNE+REM mean error < 1.00pp (approaches 1-qubit raw threshold)",
             "T3": "ZNE-only mean error < REM-only mean error at k>=2 (gate error dominates at depth)",
         },
+        "calibration": _load_calibration_snapshot(),
         "readout_calibration": {
             "M": M.round(4).tolist(),
             "M_inv": M_inv.round(6).tolist(),
