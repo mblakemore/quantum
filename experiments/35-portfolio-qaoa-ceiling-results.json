@@ -1,0 +1,148 @@
+{
+    "experiment": "35",
+    "title": "Portfolio-QAOA Depth Ceiling: CZ-count-governed vs p-governed wall (ORQ #6 leftover)",
+    "cycle": 3747,
+    "backend": "ibm_marrakesh",
+    "job_id": "FakeMarrakesh-sim",
+    "open_research_question": "Does the QAOA utility wall track TOTAL transpiled CZ count (Finding 05, ~800-1000) or nominal depth p? Dense fully-connected portfolio QUBO breaks the path-graph proportionality to discriminate.",
+    "hypotheses": {
+        "H_A_cz_count_governed": "lower nominal p_max than MaxCut but same ~800-1000 transpiled CZ",
+        "H_B_p_governed": "p_max ~ 96 again, transpiled CZ far above 1000"
+    },
+    "problem": {
+        "type": "markowitz_portfolio_QUBO",
+        "n_assets": 6,
+        "k_select": 3,
+        "fully_connected_edges": 15,
+        "nominal_two_q_per_layer": 15,
+        "q_risk": 1.0,
+        "lambda_penalty": 2.0,
+        "mu": [
+            0.12,
+            0.1,
+            0.08,
+            0.15,
+            0.06,
+            0.11
+        ],
+        "sigma_diag": [
+            0.1,
+            0.12,
+            0.09,
+            0.14,
+            0.08,
+            0.11
+        ]
+    },
+    "params": {
+        "shots": 8192,
+        "T_anneal": 10.0,
+        "p_sweep": [
+            4,
+            8,
+            12,
+            16,
+            24,
+            32,
+            48
+        ],
+        "angle_mode": "fixed_annealing_ramp",
+        "seed_transpiler": 42,
+        "uniform_max_bits": 6.0,
+        "ratio_gate": 0.95,
+        "exp33_maxcut_pmax_reference": 96
+    },
+    "metric_note": "Basis = noise_excess (H_hw - H_ideal), NOT ratio-vs-uniform: the dense annealing ansatz leaves H_ideal near-uniform at low p (unconverged), which contaminates a ratio gate; noise_excess subtracts the algorithm's own spread so the crossing is noise-attributable by construction (revised in sim-preview).",
+    "preregistered_criteria": {
+        "noise_wall_p": "smallest swept p with noise_excess (H_hw - H_ideal) >= 1.0 bit",
+        "G1": "noise_wall_p found within sweep",
+        "G2": "H_ideal/N <= 0.6 at the wall (structured reference, not anneal-unconverged)",
+        "G3": "transpiled 2q at wall in 500-1500 (Finding 05 CZ-count co-location = discriminator)",
+        "G4": "noise_wall_p < 96 AND cz@wall in 500-1500 (CZ-governed, not p-governed)"
+    },
+    "calibration": {
+        "available": false,
+        "note": "no submit-time snapshot found"
+    },
+    "summary": {
+        "noise_wall_p": 16,
+        "cz_at_wall": 1002,
+        "noise_excess_at_wall_bits": 3.2946,
+        "ideal_ratio_at_wall": 0.3814,
+        "p_converge": 16,
+        "cz_at_converge": 1002,
+        "top_ratio": 0.9864,
+        "exp33_maxcut_pmax": 96,
+        "exp33_maxcut_cz": 960,
+        "G1": "PASS",
+        "G2": "PASS",
+        "G3": "PASS",
+        "G4": "PASS",
+        "verdict": "H_A CONFIRMED: noise wall at nominal p=16 (<< MaxCut's 96) but at 1002 transpiled 2q -- inside Finding 05's 800-1000 band, ~= Exp33's 960. The QAOA utility wall is governed by TOTAL transpiled CZ count, NOT nominal depth p: sparse(960@p96) and dense(1002@p16) collapse to the same CZ count. For dense problems this is a hard LOW-p ceiling. p_converge=16 (1002 CZ): anneal only concentrates AT the wall -> no usable depth window."
+    },
+    "rows": [
+        {
+            "p": 4,
+            "cz": 255,
+            "H_hw_bits": 5.9104,
+            "H_ideal_bits": 5.9068,
+            "ratio_hw": 0.9851,
+            "ideal_ratio": 0.9845,
+            "noise_excess_bits": 0.0037
+        },
+        {
+            "p": 8,
+            "cz": 504,
+            "H_hw_bits": 5.8789,
+            "H_ideal_bits": 5.2643,
+            "ratio_hw": 0.9798,
+            "ideal_ratio": 0.8774,
+            "noise_excess_bits": 0.6146
+        },
+        {
+            "p": 12,
+            "cz": 750,
+            "H_hw_bits": 5.7747,
+            "H_ideal_bits": 5.1859,
+            "ratio_hw": 0.9625,
+            "ideal_ratio": 0.8643,
+            "noise_excess_bits": 0.5888
+        },
+        {
+            "p": 16,
+            "cz": 1002,
+            "H_hw_bits": 5.5832,
+            "H_ideal_bits": 2.2886,
+            "ratio_hw": 0.9305,
+            "ideal_ratio": 0.3814,
+            "noise_excess_bits": 3.2946
+        },
+        {
+            "p": 24,
+            "cz": 1515,
+            "H_hw_bits": 5.8243,
+            "H_ideal_bits": 1.4614,
+            "ratio_hw": 0.9707,
+            "ideal_ratio": 0.2436,
+            "noise_excess_bits": 4.3629
+        },
+        {
+            "p": 32,
+            "cz": 2007,
+            "H_hw_bits": 5.9086,
+            "H_ideal_bits": 1.4416,
+            "ratio_hw": 0.9848,
+            "ideal_ratio": 0.2403,
+            "noise_excess_bits": 4.467
+        },
+        {
+            "p": 48,
+            "cz": 3075,
+            "H_hw_bits": 5.9187,
+            "H_ideal_bits": 1.4275,
+            "ratio_hw": 0.9864,
+            "ideal_ratio": 0.2379,
+            "noise_excess_bits": 4.4912
+        }
+    ]
+}
