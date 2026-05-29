@@ -1,0 +1,361 @@
+{
+    "experiment": "34",
+    "title": "X-Basis Noise Immunity \u2014 Calibration-Gated Retest (ORQ #1)",
+    "cycle": 3746,
+    "backend": "ibm_kingston",
+    "job_id": "d8d00ta4gq0s73apha60",
+    "selected_pair": [
+        44,
+        45
+    ],
+    "pair_selection_audit": {
+        "gate": {
+            "RO_MAX": 0.05,
+            "CZ_MAX": 0.01,
+            "scoring": "argmin cz_error + 0.25*(ro_a+ro_b)"
+        },
+        "n_edges_scanned": 176,
+        "n_eligible": 148,
+        "rejects": {
+            "readout": 23,
+            "tnull": 2,
+            "cz": 3,
+            "nocz": 0
+        },
+        "top5": [
+            {
+                "pair": [
+                    44,
+                    45
+                ],
+                "cz_gate": "cz",
+                "cz_error": 0.0016669547809819163,
+                "readout_a": 0.006103515625,
+                "readout_b": 0.005859375,
+                "t1_a": 0.00016589629628646778,
+                "t2_a": 0.00017214336774069386,
+                "t1_b": 0.0002046905807703121,
+                "t2_b": 0.00014037100827446738,
+                "score": 0.004657677437231916
+            },
+            {
+                "pair": [
+                    152,
+                    151
+                ],
+                "cz_gate": "cz",
+                "cz_error": 0.0014981224225234235,
+                "readout_a": 0.007080078125,
+                "readout_b": 0.005615234375,
+                "t1_a": 0.00020546441231385885,
+                "t2_a": 8.414075651090412e-05,
+                "t1_b": 0.00022045206698132405,
+                "t2_b": 0.0001966797919016389,
+                "score": 0.0046719505475234235
+            },
+            {
+                "pair": [
+                    59,
+                    55
+                ],
+                "cz_gate": "cz",
+                "cz_error": 0.0015634803544055664,
+                "readout_a": 0.006103515625,
+                "readout_b": 0.00634765625,
+                "t1_a": 0.00017433866915128192,
+                "t2_a": 0.00022950261272956094,
+                "t1_b": 0.00022551080542105353,
+                "t2_b": 8.573409453885583e-05,
+                "score": 0.004676273323155566
+            },
+            {
+                "pair": [
+                    148,
+                    149
+                ],
+                "cz_gate": "cz",
+                "cz_error": 0.002550408891440259,
+                "readout_a": 0.003173828125,
+                "readout_b": 0.005615234375,
+                "t1_a": 0.00016567513902915164,
+                "t2_a": 0.00013630325341501323,
+                "t1_b": 0.0002216173328994755,
+                "t2_b": 0.00024304118368442622,
+                "score": 0.004747674516440259
+            },
+            {
+                "pair": [
+                    154,
+                    155
+                ],
+                "cz_gate": "cz",
+                "cz_error": 0.0017460926539349386,
+                "readout_a": 0.00537109375,
+                "readout_b": 0.0068359375,
+                "t1_a": 0.0001923189727780407,
+                "t2_a": 0.00011924189263687295,
+                "t1_b": 0.0001766438169071258,
+                "t2_b": 0.0001649230595541793,
+                "score": 0.004797850466434939
+            }
+        ]
+    },
+    "open_research_question": "Does X-basis immunity (Finding 03) generalize across the heavy-hex family? Pre-reg gate: >=2x X/Z fidelity ratio on an independent backend. (Calibration-gated retest of Exp31.)",
+    "marrakesh_reference": {
+        "note": "Finding 03 Bell C3650: <XX> immune (flat), <ZZ> gamma~1.197 accel, <YY> gamma~0.707; ZZ/XX err ratio ~3x. Exp31 kingston INCONCLUSIVE (20.36pp floor); Exp32 -> floor is layout-dominated, good pair ~9pp."
+    },
+    "params": {
+        "shots": 4096,
+        "bases": [
+            "XX",
+            "YY",
+            "ZZ"
+        ],
+        "scale_factors": [
+            1,
+            3,
+            5
+        ],
+        "circuits_total": 9,
+        "seed_transpiler": 42,
+        "calibration_gate": {
+            "RO_MAX": 0.05,
+            "CZ_MAX": 0.01
+        }
+    },
+    "preregistered_criteria": {
+        "T1": "eZZ/eXX >= 2.0 AND eXX < eZZ  [headline: README >=2x gate]",
+        "T2": "eYY > eXX with eYY-eXX >= 0.02  [S-dagger injection signature]",
+        "T3": "gamma_ZZ > gamma_XX  [Z-basis scales steeper under ZNE]",
+        "T1_PASS": "Finding 03 = heavy-hex architectural principle (ORQ#1 upgrade met)",
+        "T1_FAIL": "clean falsification on good pair: marrakesh substrate-specific"
+    },
+    "calibration": {
+        "available": true,
+        "backend_name": "ibm_kingston",
+        "last_update_date": "2026-05-29T20:53:52+00:00",
+        "device_median": {
+            "T1_s": 0.0001736180854475194,
+            "T2_s": 0.0001136362312484401,
+            "readout_error": 0.011474609375,
+            "n_qubits": 156
+        },
+        "per_qubit": {
+            "44": {
+                "T1_s": 0.00016589629628646778,
+                "T2_s": 0.00017214336774069386,
+                "readout_error": 0.006103515625
+            },
+            "45": {
+                "T1_s": 0.0002046905807703121,
+                "T2_s": 0.00014037100827446738,
+                "readout_error": 0.005859375
+            }
+        },
+        "two_qubit_gate_error": {
+            "cz_44_45": 0.0016669547809819163
+        },
+        "selected_pair": [
+            44,
+            45
+        ],
+        "pair_selection_audit": {
+            "gate": {
+                "RO_MAX": 0.05,
+                "CZ_MAX": 0.01,
+                "scoring": "argmin cz_error + 0.25*(ro_a+ro_b)"
+            },
+            "n_edges_scanned": 176,
+            "n_eligible": 148,
+            "rejects": {
+                "readout": 23,
+                "tnull": 2,
+                "cz": 3,
+                "nocz": 0
+            },
+            "top5": [
+                {
+                    "pair": [
+                        44,
+                        45
+                    ],
+                    "cz_gate": "cz",
+                    "cz_error": 0.0016669547809819163,
+                    "readout_a": 0.006103515625,
+                    "readout_b": 0.005859375,
+                    "t1_a": 0.00016589629628646778,
+                    "t2_a": 0.00017214336774069386,
+                    "t1_b": 0.0002046905807703121,
+                    "t2_b": 0.00014037100827446738,
+                    "score": 0.004657677437231916
+                },
+                {
+                    "pair": [
+                        152,
+                        151
+                    ],
+                    "cz_gate": "cz",
+                    "cz_error": 0.0014981224225234235,
+                    "readout_a": 0.007080078125,
+                    "readout_b": 0.005615234375,
+                    "t1_a": 0.00020546441231385885,
+                    "t2_a": 8.414075651090412e-05,
+                    "t1_b": 0.00022045206698132405,
+                    "t2_b": 0.0001966797919016389,
+                    "score": 0.0046719505475234235
+                },
+                {
+                    "pair": [
+                        59,
+                        55
+                    ],
+                    "cz_gate": "cz",
+                    "cz_error": 0.0015634803544055664,
+                    "readout_a": 0.006103515625,
+                    "readout_b": 0.00634765625,
+                    "t1_a": 0.00017433866915128192,
+                    "t2_a": 0.00022950261272956094,
+                    "t1_b": 0.00022551080542105353,
+                    "t2_b": 8.573409453885583e-05,
+                    "score": 0.004676273323155566
+                },
+                {
+                    "pair": [
+                        148,
+                        149
+                    ],
+                    "cz_gate": "cz",
+                    "cz_error": 0.002550408891440259,
+                    "readout_a": 0.003173828125,
+                    "readout_b": 0.005615234375,
+                    "t1_a": 0.00016567513902915164,
+                    "t2_a": 0.00013630325341501323,
+                    "t1_b": 0.0002216173328994755,
+                    "t2_b": 0.00024304118368442622,
+                    "score": 0.004747674516440259
+                },
+                {
+                    "pair": [
+                        154,
+                        155
+                    ],
+                    "cz_gate": "cz",
+                    "cz_error": 0.0017460926539349386,
+                    "readout_a": 0.00537109375,
+                    "readout_b": 0.0068359375,
+                    "t1_a": 0.0001923189727780407,
+                    "t2_a": 0.00011924189263687295,
+                    "t1_b": 0.0001766438169071258,
+                    "t2_b": 0.0001649230595541793,
+                    "score": 0.004797850466434939
+                }
+            ]
+        }
+    },
+    "per_basis": {
+        "XX": {
+            "mean_err_pp": 5.941,
+            "gamma": -0.00427,
+            "errs": [
+                0.06738,
+                0.06055,
+                0.05029
+            ]
+        },
+        "YY": {
+            "mean_err_pp": 9.066,
+            "gamma": 0.00281,
+            "errs": [
+                0.07324,
+                0.11426,
+                0.08447
+            ]
+        },
+        "ZZ": {
+            "mean_err_pp": 7.064,
+            "gamma": 0.00293,
+            "errs": [
+                0.04785,
+                0.10449,
+                0.05957
+            ]
+        }
+    },
+    "summary": {
+        "mean_err_XX_pp": 5.941,
+        "mean_err_YY_pp": 9.066,
+        "mean_err_ZZ_pp": 7.064,
+        "ZZ_over_XX_ratio": 1.189,
+        "gamma_XX": -0.00427,
+        "gamma_ZZ": 0.00293,
+        "T1": "FAIL",
+        "T2": "PASS",
+        "T3": "PASS",
+        "verdict": "On a calibration-verified-good pair, X-basis immunity does NOT meet the >=2x gate -> CLEAN falsification (not a floor confound): the effect is marrakesh substrate/calibration-specific, NOT architectural. Finding 03 framing needs downgrade."
+    },
+    "rows": [
+        {
+            "basis": "XX",
+            "lambda": 1,
+            "expval": 0.93262,
+            "ideal": 1.0,
+            "err": 0.06738
+        },
+        {
+            "basis": "XX",
+            "lambda": 3,
+            "expval": 0.93945,
+            "ideal": 1.0,
+            "err": 0.06055
+        },
+        {
+            "basis": "XX",
+            "lambda": 5,
+            "expval": 0.94971,
+            "ideal": 1.0,
+            "err": 0.05029
+        },
+        {
+            "basis": "YY",
+            "lambda": 1,
+            "expval": -0.92676,
+            "ideal": -1.0,
+            "err": 0.07324
+        },
+        {
+            "basis": "YY",
+            "lambda": 3,
+            "expval": -0.88574,
+            "ideal": -1.0,
+            "err": 0.11426
+        },
+        {
+            "basis": "YY",
+            "lambda": 5,
+            "expval": -0.91553,
+            "ideal": -1.0,
+            "err": 0.08447
+        },
+        {
+            "basis": "ZZ",
+            "lambda": 1,
+            "expval": 0.95215,
+            "ideal": 1.0,
+            "err": 0.04785
+        },
+        {
+            "basis": "ZZ",
+            "lambda": 3,
+            "expval": 0.89551,
+            "ideal": 1.0,
+            "err": 0.10449
+        },
+        {
+            "basis": "ZZ",
+            "lambda": 5,
+            "expval": 0.94043,
+            "ideal": 1.0,
+            "err": 0.05957
+        }
+    ]
+}
