@@ -3,7 +3,7 @@
     "title": "Transient-Floor Spectroscopy (Exp31 confound -> signal)",
     "cycle": 3739,
     "backend": "ibm_kingston",
-    "job_id": "FakeMarrakesh-sim",
+    "job_id": "d8culgdmdsks73d337gg",
     "answers_creator_questions": {
         "Q1_map": "ARM A (SPAM) + ARM B (layout) decompose the floor by source",
         "Q2_before_after": "submit + finalize calibration snapshots + ARM C bookends",
@@ -34,57 +34,57 @@
     "arm_A_spam": {
         "per_state": {
             "00": {
-                "p_correct": 0.99316,
-                "readout_err_pp": 0.684
+                "p_correct": 0.99048,
+                "readout_err_pp": 0.952
             },
             "01": {
-                "p_correct": 0.99023,
-                "readout_err_pp": 0.977
+                "p_correct": 0.98376,
+                "readout_err_pp": 1.624
             },
             "10": {
-                "p_correct": 0.9873,
-                "readout_err_pp": 1.27
+                "p_correct": 0.96252,
+                "readout_err_pp": 3.748
             },
             "11": {
-                "p_correct": 0.9873,
-                "readout_err_pp": 1.27
+                "p_correct": 0.95349,
+                "readout_err_pp": 4.651
             }
         },
-        "readout_floor_pp": 1.05,
-        "spam_share_of_bell": 0.052
+        "readout_floor_pp": 2.744,
+        "spam_share_of_bell": 0.135
     },
     "arm_B_layout": {
         "rows": [
             {
                 "pair_idx": 0,
                 "pair": [
-                    13,
-                    14
+                    73,
+                    74
                 ],
-                "zz": 0.98242,
-                "floor_err_pp": 1.758,
+                "zz": 0.92163,
+                "floor_err_pp": 7.837,
                 "recorded_cz_err": null,
                 "recorded_readout_err": null
             },
             {
                 "pair_idx": 1,
                 "pair": [
-                    27,
-                    28
+                    69,
+                    78
                 ],
-                "zz": 0.93164,
-                "floor_err_pp": 6.836,
+                "zz": 0.90991,
+                "floor_err_pp": 9.009,
                 "recorded_cz_err": null,
                 "recorded_readout_err": null
             },
             {
                 "pair_idx": 2,
                 "pair": [
-                    153,
-                    154
+                    146,
+                    147
                 ],
-                "zz": -0.05859,
-                "floor_err_pp": 94.141,
+                "zz": 0.00903,
+                "floor_err_pp": 99.097,
                 "recorded_cz_err": null,
                 "recorded_readout_err": null
             }
@@ -93,8 +93,8 @@
         "floor_uniform_high": false
     },
     "arm_C_drift": {
-        "err_first_pp": 2.734,
-        "err_last_pp": 2.539,
+        "err_first_pp": 7.08,
+        "err_last_pp": 6.885,
         "drift_pp": 0.195
     },
     "arm_D_collision": {
@@ -109,21 +109,147 @@
             5.4978
         ],
         "xx_vals": [
-            0.97852,
-            0.73242,
-            -0.00781,
-            -0.66602,
-            -0.9707,
-            -0.72852,
-            -0.01953,
-            0.71094
+            0.927,
+            0.6897,
+            0.04858,
+            -0.6377,
+            -0.92188,
+            -0.68457,
+            -0.02856,
+            0.64136
         ],
-        "fit_amplitude_A": 0.98914,
-        "coherent_phase_rad": -0.018,
-        "incoherent_floor_pp": 1.086
+        "fit_amplitude_A": 0.93196,
+        "coherent_phase_rad": -0.0388,
+        "incoherent_floor_pp": 6.804
     },
-    "calibration_submit": {},
-    "calibration_before_after": null,
+    "calibration_submit": {
+        "available": true,
+        "backend_name": "ibm_kingston",
+        "last_update_date": "2026-05-29T19:14:50+00:00",
+        "device_median": {
+            "T1_s": 0.0001736180854475194,
+            "T2_s": 0.0001136362312484401,
+            "readout_error": 0.011474609375,
+            "n_qubits": 156
+        },
+        "per_qubit": {
+            "73": {
+                "T1_s": 0.0002109058308430096,
+                "T2_s": 0.0001632203033817813,
+                "readout_error": 0.031494140625
+            },
+            "74": {
+                "T1_s": 0.00020997387166715376,
+                "T2_s": 0.0001482280428549485,
+                "readout_error": 0.005615234375
+            }
+        },
+        "two_qubit_gate_error": {
+            "cz_73_74": 0.001089289845137481
+        },
+        "snapshot_phase": "submit",
+        "layout_pairs": [
+            [
+                73,
+                74
+            ],
+            [
+                69,
+                78
+            ],
+            [
+                146,
+                147
+            ]
+        ],
+        "per_pair": {
+            "pair0": {
+                "available": true,
+                "backend_name": "ibm_kingston",
+                "last_update_date": "2026-05-29T19:14:50+00:00",
+                "device_median": {
+                    "T1_s": 0.0001736180854475194,
+                    "T2_s": 0.0001136362312484401,
+                    "readout_error": 0.011474609375,
+                    "n_qubits": 156
+                },
+                "per_qubit": {
+                    "73": {
+                        "T1_s": 0.0002109058308430096,
+                        "T2_s": 0.0001632203033817813,
+                        "readout_error": 0.031494140625
+                    },
+                    "74": {
+                        "T1_s": 0.00020997387166715376,
+                        "T2_s": 0.0001482280428549485,
+                        "readout_error": 0.005615234375
+                    }
+                },
+                "two_qubit_gate_error": {
+                    "cz_73_74": 0.001089289845137481
+                }
+            },
+            "pair1": {
+                "available": true,
+                "backend_name": "ibm_kingston",
+                "last_update_date": "2026-05-29T19:14:50+00:00",
+                "device_median": {
+                    "T1_s": 0.0001736180854475194,
+                    "T2_s": 0.0001136362312484401,
+                    "readout_error": 0.011474609375,
+                    "n_qubits": 156
+                },
+                "per_qubit": {
+                    "69": {
+                        "T1_s": 0.00018916850479248378,
+                        "T2_s": 0.00015021177072651917,
+                        "readout_error": 0.009033203125
+                    },
+                    "78": {
+                        "T1_s": 0.0001734271918824774,
+                        "T2_s": 2.8813383189045473e-05,
+                        "readout_error": 0.0322265625
+                    }
+                },
+                "two_qubit_gate_error": {
+                    "cz_69_78": 0.002289719055345224
+                }
+            },
+            "pair2": {
+                "available": true,
+                "backend_name": "ibm_kingston",
+                "last_update_date": "2026-05-29T19:14:50+00:00",
+                "device_median": {
+                    "T1_s": 0.0001736180854475194,
+                    "T2_s": 0.0001136362312484401,
+                    "readout_error": 0.011474609375,
+                    "n_qubits": 156
+                },
+                "per_qubit": {
+                    "146": {
+                        "T1_s": null,
+                        "T2_s": null,
+                        "readout_error": 0.51806640625
+                    },
+                    "147": {
+                        "T1_s": 0.00020301820935172797,
+                        "T2_s": 6.974755873566583e-05,
+                        "readout_error": 0.008056640625
+                    }
+                },
+                "two_qubit_gate_error": {
+                    "cz_146_147": 1
+                }
+            }
+        }
+    },
+    "calibration_before_after": {
+        "submit_update": "2026-05-29T19:14:50+00:00",
+        "finalize_update": "2026-05-29T19:30:06+00:00",
+        "readout_err_submit": null,
+        "readout_err_finalize": null,
+        "recalibrated_during_run": true
+    },
     "verdict_classes": [
         "incoherent/depolarizing floor, no single dominant identified source"
     ]
