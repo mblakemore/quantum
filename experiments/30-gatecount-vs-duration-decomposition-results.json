@@ -1,0 +1,88 @@
+{
+    "experiment": "30",
+    "title": "Gate-Count vs Duration: Decomposing the Exp 29 Dose-Response Law",
+    "cycle": 3734,
+    "backend": "ibm_marrakesh",
+    "job_id": "FakeMarrakesh-sim",
+    "audits": "Exp 29 (C3726) gate-overhead dose-response law for count-vs-duration confound",
+    "hypothesis": "Exp29's rho=1.0 dose trend confounds gate-COUNT with circuit-DURATION (collinear r=1). IDLE arm holds duration fixed at matched added wall-time with 0 added gates; GATE-IDLE excess identifies the gate-count-specific cost.",
+    "params": {
+        "shots": 4096,
+        "P_values": [
+            0.56,
+            0.9
+        ],
+        "k_values": [
+            0,
+            1,
+            2,
+            3,
+            4
+        ],
+        "doses": [
+            0,
+            2,
+            4,
+            6
+        ],
+        "cz_duration_dt": 17,
+        "dt_s": 4e-09,
+        "added_duration_ns_by_dose": {
+            "D0": 0.0,
+            "D2": 272.0,
+            "D4": 544.0,
+            "D6": 816.0
+        },
+        "circuits_total": 74
+    },
+    "preregistered_criteria": {
+        "T1": "slope_idle>0 AND mean_err_idle(D6)-mean_err_idle(D0)>0.30pp (duration is a cause)",
+        "T2": "mean_err_gate(D6)-mean_err_idle(D6)>0.30pp AND slope_gate>slope_idle (gate-specific excess)",
+        "T3": "REM gate-vs-idle excess at D6 > 0 (gate-induced, not readout)",
+        "verdict_map": "T2 PASS=>law survives; T2 FAIL&T1 PASS=>duration law (C3726 over-claimed); T1 FAIL&T2 PASS=>pure gate-count",
+        "void_check": "IDLE vs GATE added-duration must match within 5% at each dose else VOID"
+    },
+    "calibration": {
+        "available": false,
+        "note": "no submit-time snapshot found"
+    },
+    "readout_calibration": {
+        "readout_p11_accuracy": 0.9844,
+        "false_positive_rate": 0.0
+    },
+    "summary": {
+        "gate_err_raw_pp_by_dose": {
+            "D0": 2.01,
+            "D2": 1.68,
+            "D4": 1.92,
+            "D6": 2.67
+        },
+        "idle_err_raw_pp_by_dose": {
+            "D0": 2.01,
+            "D2": 1.8,
+            "D4": 2.06,
+            "D6": 2.47
+        },
+        "gate_err_rem_pp_by_dose": {
+            "D0": 1.4,
+            "D2": 1.05,
+            "D4": 1.29,
+            "D6": 2.19
+        },
+        "idle_err_rem_pp_by_dose": {
+            "D0": 1.4,
+            "D2": 1.14,
+            "D4": 1.43,
+            "D6": 1.93
+        },
+        "slope_gate_pp_per_us": 0.822,
+        "slope_idle_pp_per_us": 0.602,
+        "gate_specific_excess_slope_pp_per_us": 0.22,
+        "excess_top_dose_pp": 0.21,
+        "excess_top_dose_rem_pp": 0.26,
+        "T1": "PASS",
+        "T2": "FAIL",
+        "T3": "PASS",
+        "verdict": "EXP29 LAW NOT IDENTIFIED AS GATE-COUNT \u2014 degradation is substantially a DURATION/decoherence law; C3726 'gate-overhead' label over-claimed the mechanism."
+    }
+}
