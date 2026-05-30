@@ -1,0 +1,622 @@
+{
+    "experiment": "36",
+    "title": "Commutation-Aligned Compilation Principle \u2014 basis-angle sweep (ORQ#7)",
+    "cycle": 3755,
+    "backend": "ibm_marrakesh",
+    "job_id": "d8d6tdgv14cs73dhvahg",
+    "selected_pair": [
+        6,
+        5
+    ],
+    "pair_selection_audit": {
+        "gate": {
+            "RO_MAX": 0.05,
+            "CZ_MAX": 0.01,
+            "scoring": "argmin cz_error + 0.25*(ro_a+ro_b)"
+        },
+        "n_edges_scanned": 176,
+        "n_eligible": 116,
+        "rejects": {
+            "readout": 54,
+            "tnull": 0,
+            "cz": 6,
+            "nocz": 0
+        },
+        "top5": [
+            {
+                "pair": [
+                    6,
+                    5
+                ],
+                "cz_gate": "cz",
+                "cz_error": 0.0012986058705931058,
+                "readout_a": 0.003173828125,
+                "readout_b": 0.002685546875,
+                "t1_a": 0.0003173552025958037,
+                "t2_a": 0.0002715028901036353,
+                "t1_b": 0.0002529996404671585,
+                "t2_b": 0.00012626191201185697,
+                "score": 0.002763449620593106
+            },
+            {
+                "pair": [
+                    7,
+                    6
+                ],
+                "cz_gate": "cz",
+                "cz_error": 0.0010938758694866713,
+                "readout_a": 0.007568359375,
+                "readout_b": 0.003173828125,
+                "t1_a": 0.0002576702928866992,
+                "t2_a": 0.00013384140491616835,
+                "t1_b": 0.0003173552025958037,
+                "t2_b": 0.0002715028901036353,
+                "score": 0.0037794227444866713
+            },
+            {
+                "pair": [
+                    15,
+                    19
+                ],
+                "cz_gate": "cz",
+                "cz_error": 0.001407426128744782,
+                "readout_a": 0.0050048828125,
+                "readout_b": 0.0062255859375,
+                "t1_a": 0.00036792892168842936,
+                "t2_a": 3.0172550235299535e-05,
+                "t1_b": 0.0001457572267547437,
+                "t2_b": 6.061053922346393e-05,
+                "score": 0.004215043316244782
+            },
+            {
+                "pair": [
+                    132,
+                    133
+                ],
+                "cz_gate": "cz",
+                "cz_error": 0.0017167235727224561,
+                "readout_a": 0.0032958984375,
+                "readout_b": 0.007080078125,
+                "t1_a": 0.0003952031229806656,
+                "t2_a": 0.00011156426446835689,
+                "t1_b": 0.00040386118235457484,
+                "t2_b": 0.00011340214437155346,
+                "score": 0.004310717713347456
+            },
+            {
+                "pair": [
+                    4,
+                    5
+                ],
+                "cz_gate": "cz",
+                "cz_error": 0.0023731369282741777,
+                "readout_a": 0.0054931640625,
+                "readout_b": 0.002685546875,
+                "t1_a": 0.00013032387431441292,
+                "t2_a": 0.0001725900975949123,
+                "t1_b": 0.0002529996404671585,
+                "t2_b": 0.00012626191201185697,
+                "score": 0.004417814662649178
+            }
+        ]
+    },
+    "open_research_question": "ORQ#7: is X-basis immunity a special case of a broader commutation-aligned compilation principle? Does measurement error follow an overlap law in the basis-axis angle?",
+    "finding03_reference": {
+        "note": "Finding 03 (C3650/C3746): err XX<ZZ<YY; good-pair floor XX~5.9 ZZ~7.1 YY~9.1pp; gamma_ZZ>gamma_XX. Exp36 generalizes the 3 points to a continuous gamma(theta) overlap-law curve."
+    },
+    "design": {
+        "meridian_XZ": "|Phi+>, n(eta)=(sin eta,0,cos eta), ideal <nn>=+1 flat, eta:0=Z..90=X",
+        "meridian_XY": "|Psi+>, n(phi)=(cos phi,sin phi,0), ideal <nn>=+1 flat, phi:0=X..90=Y",
+        "angles_deg": [
+            0,
+            15,
+            30,
+            45,
+            60,
+            75,
+            90
+        ],
+        "scale_factors": [
+            1,
+            3,
+            5
+        ],
+        "shots": 4096,
+        "circuits_total": 42,
+        "seed_transpiler": 42,
+        "calibration_gate": {
+            "RO_MAX": 0.05,
+            "CZ_MAX": 0.01
+        }
+    },
+    "preregistered_criteria": {
+        "G1": "both meridians gamma(theta) overlap-law R2>=0.90 AND >= linear-in-angle R2",
+        "G2": "Spearman rho(gamma, overlap) >= +0.9 each meridian",
+        "G3": "b_XY > b_XZ AND both b>0 (Y dirtier than Z; reproduces eYY>eZZ as amplitude)",
+        "G4": "|gamma_X(merid1) - gamma_X(merid2)| < 0.03 (X-endpoint consistency)",
+        "G5": "transpiled 2q count constant across angles within a meridian (gate-invariance)",
+        "CONFIRM": "G1&G2&G3 PASS -> commutation-aligned compilation principle"
+    },
+    "calibration": {
+        "available": true,
+        "backend_name": "ibm_marrakesh",
+        "last_update_date": "2026-05-30T03:15:22+00:00",
+        "device_median": {
+            "T1_s": 0.00017766835834217805,
+            "T2_s": 9.920516516641667e-05,
+            "readout_error": 0.0142822265625,
+            "n_qubits": 156
+        },
+        "per_qubit": {
+            "6": {
+                "T1_s": 0.0003173552025958037,
+                "T2_s": 0.0002715028901036353,
+                "readout_error": 0.003173828125
+            },
+            "5": {
+                "T1_s": 0.0002529996404671585,
+                "T2_s": 0.00012626191201185697,
+                "readout_error": 0.002685546875
+            }
+        },
+        "two_qubit_gate_error": {
+            "cz_6_5": 0.0012986058705931058
+        },
+        "selected_pair": [
+            6,
+            5
+        ],
+        "pair_selection_audit": {
+            "gate": {
+                "RO_MAX": 0.05,
+                "CZ_MAX": 0.01,
+                "scoring": "argmin cz_error + 0.25*(ro_a+ro_b)"
+            },
+            "n_edges_scanned": 176,
+            "n_eligible": 116,
+            "rejects": {
+                "readout": 54,
+                "tnull": 0,
+                "cz": 6,
+                "nocz": 0
+            },
+            "top5": [
+                {
+                    "pair": [
+                        6,
+                        5
+                    ],
+                    "cz_gate": "cz",
+                    "cz_error": 0.0012986058705931058,
+                    "readout_a": 0.003173828125,
+                    "readout_b": 0.002685546875,
+                    "t1_a": 0.0003173552025958037,
+                    "t2_a": 0.0002715028901036353,
+                    "t1_b": 0.0002529996404671585,
+                    "t2_b": 0.00012626191201185697,
+                    "score": 0.002763449620593106
+                },
+                {
+                    "pair": [
+                        7,
+                        6
+                    ],
+                    "cz_gate": "cz",
+                    "cz_error": 0.0010938758694866713,
+                    "readout_a": 0.007568359375,
+                    "readout_b": 0.003173828125,
+                    "t1_a": 0.0002576702928866992,
+                    "t2_a": 0.00013384140491616835,
+                    "t1_b": 0.0003173552025958037,
+                    "t2_b": 0.0002715028901036353,
+                    "score": 0.0037794227444866713
+                },
+                {
+                    "pair": [
+                        15,
+                        19
+                    ],
+                    "cz_gate": "cz",
+                    "cz_error": 0.001407426128744782,
+                    "readout_a": 0.0050048828125,
+                    "readout_b": 0.0062255859375,
+                    "t1_a": 0.00036792892168842936,
+                    "t2_a": 3.0172550235299535e-05,
+                    "t1_b": 0.0001457572267547437,
+                    "t2_b": 6.061053922346393e-05,
+                    "score": 0.004215043316244782
+                },
+                {
+                    "pair": [
+                        132,
+                        133
+                    ],
+                    "cz_gate": "cz",
+                    "cz_error": 0.0017167235727224561,
+                    "readout_a": 0.0032958984375,
+                    "readout_b": 0.007080078125,
+                    "t1_a": 0.0003952031229806656,
+                    "t2_a": 0.00011156426446835689,
+                    "t1_b": 0.00040386118235457484,
+                    "t2_b": 0.00011340214437155346,
+                    "score": 0.004310717713347456
+                },
+                {
+                    "pair": [
+                        4,
+                        5
+                    ],
+                    "cz_gate": "cz",
+                    "cz_error": 0.0023731369282741777,
+                    "readout_a": 0.0054931640625,
+                    "readout_b": 0.002685546875,
+                    "t1_a": 0.00013032387431441292,
+                    "t2_a": 0.0001725900975949123,
+                    "t1_b": 0.0002529996404671585,
+                    "t2_b": 0.00012626191201185697,
+                    "score": 0.004417814662649178
+                }
+            ]
+        }
+    },
+    "fits": {
+        "XZ": {
+            "overlap_law": {
+                "form": "a+b*cos^2(eta)",
+                "a": 0.00558,
+                "b": 0.01779,
+                "R2": 0.9709
+            },
+            "linear_in_angle": {
+                "a": 0.02436,
+                "b_per_deg": -0.00022,
+                "R2": 0.933
+            },
+            "spearman_rho_gamma_vs_overlap": 1.0,
+            "gamma_by_angle": {
+                "0": 0.02209,
+                "15": 0.02136,
+                "30": 0.02039,
+                "45": 0.01648,
+                "60": 0.01001,
+                "75": 0.00586,
+                "90": 0.00513
+            }
+        },
+        "XY": {
+            "overlap_law": {
+                "form": "a+b*sin^2(phi)",
+                "a": 0.0101,
+                "b": 0.0137,
+                "R2": 0.8968
+            },
+            "linear_in_angle": {
+                "a": 0.00926,
+                "b_per_deg": 0.000171,
+                "R2": 0.8792
+            },
+            "spearman_rho_gamma_vs_overlap": 0.9286,
+            "gamma_by_angle": {
+                "0": 0.01135,
+                "15": 0.01123,
+                "30": 0.01294,
+                "45": 0.01636,
+                "60": 0.01685,
+                "75": 0.02539,
+                "90": 0.02454
+            }
+        }
+    },
+    "summary": {
+        "b_overlap_XZ": 0.01779,
+        "R2_overlap_XZ": 0.9709,
+        "rho_XZ": 1.0,
+        "b_overlap_XY": 0.0137,
+        "R2_overlap_XY": 0.8968,
+        "rho_XY": 0.9286,
+        "gamma_X_endpoint_merid1": 0.00513,
+        "gamma_X_endpoint_merid2": 0.01135,
+        "G1": "FAIL",
+        "G2": "PASS",
+        "G3": "FAIL",
+        "G4": "PASS",
+        "principle_confirmed": false,
+        "verdict": "ORDERED BUT NOT OVERLAP-GOVERNED: gamma rises monotonically with basis-axis overlap (G2) but the cos^2/sin^2 law does not fit (G1 FAIL) -> the channel has higher-order angular structure a single overlap term cannot capture. The 3-point ordering is real; the clean continuous law is not. ORQ#7 reframed."
+    },
+    "rows": [
+        {
+            "meridian": "XZ",
+            "angle_deg": 0,
+            "lambda": 1,
+            "expval": 0.97656,
+            "err": 0.02344
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 0,
+            "lambda": 3,
+            "expval": 0.93701,
+            "err": 0.06299
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 0,
+            "lambda": 5,
+            "expval": 0.88818,
+            "err": 0.11182
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 15,
+            "lambda": 1,
+            "expval": 0.96777,
+            "err": 0.03223
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 15,
+            "lambda": 3,
+            "expval": 0.93652,
+            "err": 0.06348
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 15,
+            "lambda": 5,
+            "expval": 0.88232,
+            "err": 0.11768
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 30,
+            "lambda": 1,
+            "expval": 0.96338,
+            "err": 0.03662
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 30,
+            "lambda": 3,
+            "expval": 0.9375,
+            "err": 0.0625
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 30,
+            "lambda": 5,
+            "expval": 0.88184,
+            "err": 0.11816
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 45,
+            "lambda": 1,
+            "expval": 0.96973,
+            "err": 0.03027
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 45,
+            "lambda": 3,
+            "expval": 0.95459,
+            "err": 0.04541
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 45,
+            "lambda": 5,
+            "expval": 0.90381,
+            "err": 0.09619
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 60,
+            "lambda": 1,
+            "expval": 0.96973,
+            "err": 0.03027
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 60,
+            "lambda": 3,
+            "expval": 0.95703,
+            "err": 0.04297
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 60,
+            "lambda": 5,
+            "expval": 0.92969,
+            "err": 0.07031
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 75,
+            "lambda": 1,
+            "expval": 0.96875,
+            "err": 0.03125
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 75,
+            "lambda": 3,
+            "expval": 0.96484,
+            "err": 0.03516
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 75,
+            "lambda": 5,
+            "expval": 0.94531,
+            "err": 0.05469
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 90,
+            "lambda": 1,
+            "expval": 0.9707,
+            "err": 0.0293
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 90,
+            "lambda": 3,
+            "expval": 0.96582,
+            "err": 0.03418
+        },
+        {
+            "meridian": "XZ",
+            "angle_deg": 90,
+            "lambda": 5,
+            "expval": 0.9502,
+            "err": 0.0498
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 0,
+            "lambda": 1,
+            "expval": 0.97607,
+            "err": 0.02393
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 0,
+            "lambda": 3,
+            "expval": 0.95068,
+            "err": 0.04932
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 0,
+            "lambda": 5,
+            "expval": 0.93066,
+            "err": 0.06934
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 15,
+            "lambda": 1,
+            "expval": 0.98535,
+            "err": 0.01465
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 15,
+            "lambda": 3,
+            "expval": 0.9585,
+            "err": 0.0415
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 15,
+            "lambda": 5,
+            "expval": 0.94043,
+            "err": 0.05957
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 30,
+            "lambda": 1,
+            "expval": 0.97998,
+            "err": 0.02002
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 30,
+            "lambda": 3,
+            "expval": 0.95459,
+            "err": 0.04541
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 30,
+            "lambda": 5,
+            "expval": 0.92822,
+            "err": 0.07178
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 45,
+            "lambda": 1,
+            "expval": 0.96924,
+            "err": 0.03076
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 45,
+            "lambda": 3,
+            "expval": 0.94971,
+            "err": 0.05029
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 45,
+            "lambda": 5,
+            "expval": 0.90381,
+            "err": 0.09619
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 60,
+            "lambda": 1,
+            "expval": 0.96484,
+            "err": 0.03516
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 60,
+            "lambda": 3,
+            "expval": 0.93213,
+            "err": 0.06787
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 60,
+            "lambda": 5,
+            "expval": 0.89746,
+            "err": 0.10254
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 75,
+            "lambda": 1,
+            "expval": 0.96875,
+            "err": 0.03125
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 75,
+            "lambda": 3,
+            "expval": 0.92822,
+            "err": 0.07178
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 75,
+            "lambda": 5,
+            "expval": 0.86719,
+            "err": 0.13281
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 90,
+            "lambda": 1,
+            "expval": 0.9668,
+            "err": 0.0332
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 90,
+            "lambda": 3,
+            "expval": 0.92773,
+            "err": 0.07227
+        },
+        {
+            "meridian": "XY",
+            "angle_deg": 90,
+            "lambda": 5,
+            "expval": 0.86865,
+            "err": 0.13135
+        }
+    ]
+}
