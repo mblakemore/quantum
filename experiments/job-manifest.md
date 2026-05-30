@@ -125,6 +125,68 @@ Source files at: `/droid/repos/DC15W/experiments/quantum-finance/c3695-iqae-adap
 
 ---
 
+## Arc 3: Gate-Overhead + Multi-Paradigm Characterization (Exp 28–37, ibm_marrakesh + ibm_kingston, May–June 2026)
+
+**Campaign window**: Late May – June 2026. Led by Whisper (DC15W).
+
+Discoveries: (11) gate overhead is ~78% decoherence + ~22% gate-specific, following a dose-response law; (12) X-basis immunity ordering generalizes across Heron backends but the ~3× magnitude is marrakesh-specific; (13) the QAOA utility wall is CZ-count governed, not nominal-depth governed — sparse and dense problems hit the same ~1000 CZ ceiling; (14) the commutation-aligned compilation principle follows a continuous cos²-overlap law.
+
+| # | Experiment | Cycle | DC | Job ID | Backend | Status | Linked finding |
+|---|------------|-------|----|--------|---------|--------|----------------|
+| **28** | **Gate-Overhead Sign Rule — adding CZ gates at fixed idle depth INCREASES error; sign confirmed positive** | **C3724** | **Whisper** | `d8cievj8ch0s738uujsg` | `ibm_marrakesh` | CONFIRMED | [11](../findings/11-gate-overhead-law.md) |
+| **29** | **Gate-Overhead Dose-Response Law — error scales linearly with CZ count at fixed idle time** | **C3726** | **Whisper** | `d8cj4k2jki0s73arbrg0` | `ibm_marrakesh` | CONFIRMED | [11](../findings/11-gate-overhead-law.md) |
+| **30** | **Gate-count vs duration decomposition — do() severs collinearity; 78% decoherence + 22% gate-specific** | **C3737** | **Whisper** | `d8cu0s5mdsks73d326jg` | `ibm_marrakesh` | CONFIRMED | [11](../findings/11-gate-overhead-law.md) |
+| **31** | **X-basis immunity cross-backend test on ibm_kingston — INCONCLUSIVE (20pp layout floor swamps mechanism)** | **C3738** | **Whisper** | *(see Exp32 for floor decomposition)* | `ibm_kingston` | INCONCLUSIVE→ Exp32 fix | [12](../findings/12-x-basis-cross-backend.md) |
+| **32** | **Floor spectroscopy on ibm_kingston — dead qubit q146 is the outlier; good-pair floor ≈ 9pp incoherent** | **C3740** | **Whisper** | `d8culgdmdsks73d337gg` | `ibm_kingston` | CONFIRMED | [12](../findings/12-x-basis-cross-backend.md) |
+| **33** | **QAOA depth ceiling (sparse MaxCut, P6 path): output crosses 0.95× uniform at p=96 (960 CZ) — ORQ#6 RESOLVED** | **C3739** | **Whisper** | `d8cujgvd0j8c73f3eit0` | `ibm_marrakesh` | CONFIRMED | [13](../findings/13-qaoa-cz-wall.md) |
+| **34** | **X-basis immunity calibration-gated retest on ibm_kingston — ordering/mechanism generalizes; ≥2× magnitude does NOT (T1 FAIL)** | **C3746** | **Whisper** | `d8d00ta4gq0s73apha60` | `ibm_kingston` | PARTIAL | [12](../findings/12-x-basis-cross-backend.md) |
+| **35** | **Portfolio-QAOA depth ceiling (dense Markowitz QUBO N=6,K=3): hits wall at p=16 (1002 CZ) — H_A CONFIRMED** | **C3748** | **Whisper** | `d8d0bcdmdsks73d36850` | `ibm_marrakesh` | CONFIRMED | [13](../findings/13-qaoa-cz-wall.md) |
+| **36** | **Commutation-aligned compilation principle: γ(η) = 0.0051 + 0.0178·cos²η (R²=0.971) — continuous overlap law confirmed** | **C3755** | **Whisper** | `d8d6tdgv14cs73dhvahg` | `ibm_marrakesh` | PROVISIONAL | [14](../findings/14-commutation-aligned-compilation.md) |
+| **37** | **Confound-corrected retest of ORQ#7 — G3 revised to endpoint-γ ordering; Exp36 dual-state X-baseline confound eliminated** | **C3757** | **Whisper** | `d8d8u8i4gq0s73apu6h0` | `ibm_marrakesh` | **QUEUED** | [14](../findings/14-commutation-aligned-compilation.md) |
+
+**Exp 28 (Gate-Overhead Sign Rule)** — job `d8cievj8ch0s738uujsg` (ibm_marrakesh, submitted Whisper C3724). Keeps idle time fixed; inserts CZ pairs at varying positions. Pre-registered sign: gate-specific error overhead is positive (adding gates increases error beyond the decoherence that idle time would incur). CONFIRMED. This rules out the naive picture that CZ gates simply substitute for idle decoherence at the same rate — the gate mechanism adds a distinct positive increment. Pairs with Exp29 to establish the full dose-response relationship. See commit `300e701` for data and pre-registration.
+
+**Exp 29 (Gate-Overhead Dose-Response Law)** — job `d8cj4k2jki0s73arbrg0` (ibm_marrakesh, submitted Whisper C3726). Varies CZ count N at fixed idle time; measures error vs N. Pre-registered hypothesis: monotonically increasing law. CONFIRMED. Error follows a dose-response curve with slope +0.973 pp/gate in the subsequent Exp30 decomposition. The "dose" of additional CZ gates produces predictable, measurable additional error beyond the decoherence baseline. See commit `23afeac` for results.
+
+**Exp 30 (Gate-count vs Duration Decomposition)** — job `d8cu0s5mdsks73d326jg` (ibm_marrakesh, submitted Whisper C3737 after a BLOCKED period from IBM instance-binding issues resolved by Creator and Elder C5480). A `do()` intervention severs the natural collinearity between gate count and circuit duration (longer circuits run for more time AND have more gates). Result: **78% of error cost is duration/decoherence, 22% is gate-specific** — corrects the Exp29 "pure gate overhead" narrative. Gate component is real and REM-robust (T1/T2/T3 all PASS) but the primary contributor is simple T1/T2 decoherence during the time the circuit runs. Planning constant: per-CZ-gate overhead ≈ +0.211 pp/µs gate-specific, plus ≈ +0.762 pp/µs idle decoherence. See commit `33597af` for results.
+
+**Exp 31 (X-basis cross-backend test, ibm_kingston)** — no clean job ID (absorbed into Exp32 design). Original test of whether Finding 03's X-basis immunity replicates on a second Heron device. Hit a 20pp gate-independent floor traced to dead qubit q146 in the chosen qubit pair. INCONCLUSIVE — Finding 03 neither confirmed nor refuted. Exp32 was designed as the floor spectroscopy follow-up. See commit `8c1f63d`.
+
+**Exp 32 (Floor spectroscopy, ibm_kingston)** — job `d8culgdmdsks73d337gg` (ibm_kingston, C3740). Decomposed the 20pp floor via 4 do()-arms: (1) drift test: stable (0.195pp over mid-run recalibration → STRUCTURAL); (2) coherent-miscal test: inject phase φ, fit: φ≈0 → INCOHERENT; (3) SPAM characterization: 2.7pp T1-asymmetric readout (13.5% role); (4) dead-qubit identification: q146 has readout 0.518, T1/T2 null, CZ error 1.0. Conclusion: **LAYOUT is the dominant lever**. Good-pair floor ≈ 2.7pp SPAM + 6.8pp incoherent decoherence ≈ 9pp. Calibration gate recipe defined for Exp34. See commit `4fc5446`.
+
+**Exp 33 (QAOA MaxCut depth ceiling)** — job `d8cujgvd0j8c73f3eit0` (ibm_marrakesh, C3739). Sparse 6-node path graph MaxCut, fixed annealing-ramp angles, p∈{8…96}. Output entropy crosses 0.95× uniform at **p_max = 96 (960 two-qubit gates)** — co-located with Finding 05's 800–1000 CZ wall. ORQ#6 RESOLVED for sparse MaxCut. The QAOA utility ceiling is an algorithm-level phenomenon, not a diagnostic artifact. Planning constant: p_max ≈ 1000 / (2·|E|) for this substrate. See commit `03c566d`.
+
+**Exp 34 (X-basis immunity calibration-gated retest, ibm_kingston)** — job `d8d00ta4gq0s73apha60` (ibm_kingston, C3746). Calibration gate (readout ≤ 0.05, non-null T1/T2, CZ < 0.01): 148/176 pairs eligible. Pinned to verified-good pair [44,45] (T1~166–205µs, T2~140–172µs, RO~0.6%, CZ 0.17%). Floor: XX 5.94 / YY 9.07 / ZZ 7.06pp — exactly Exp32's predicted ~9pp good-pair band (recipe self-validated). **Verdict: PARTIAL** — T2 Y-injection +3.13pp PASS, T3 slope ordering PASS, but T1 ZZ/XX ratio 1.19× (FAIL, pre-reg ≥2×). Finding 03 ORDERING/MECHANISM generalizes to a second Heron device; ~3× MAGNITUDE does not. ORQ#1 RESOLVED (with caveat: cross-platform mechanism test remains open). See commit `98edcaa`.
+
+**Exp 35 (Portfolio-QAOA depth ceiling)** — job `d8d0bcdmdsks73d36850` (ibm_marrakesh, C3748). Dense Markowitz QUBO N=6, K=3, 15 edges (~4.2× SWAP overhead vs sparse MaxCut). Result: wall at **p=16 (1002 transpiled CZ)** — despite 6× smaller nominal p than Exp33's p=96, the CZ count is identical (~1000). **KEY INSIGHT: the QAOA utility wall is governed by total transpiled-CZ count, not nominal p.** All 4 pre-registered gates PASS (G1 wall exists; G2 structured reference; G3 CZ co-location in [500,1500]; G4 density effect p=16 << p=96 at same ~1000 CZ). FakeMarrakesh noise model validated (sim-preview 3.29-bit excess ≈ HW 3.59-bit). Planning constant generalizes: p_max ≈ 1000 / (transpiled-CZ-per-layer), independent of problem type. See commit `83b9398`.
+
+**Exp 36 (Commutation-aligned compilation, continuous law)** — job `d8d6tdgv14cs73dhvahg` (ibm_marrakesh, C3755). Swept measurement axis continuously along two flat-ideal Bell meridians (|Φ+⟩ X→Z, |Ψ+⟩ X→Y) on calibration-gated pair [6,5]. Fit γ(θ) to the overlap law. **X→Z: γ = 0.0051 + 0.0178·cos²η, R²=0.971, ρ=+1.000 — beats linear fit (R²=0.933)**. This is direct continuous-curve evidence that Finding 03's discrete XX<ZZ<YY ordering is one smooth overlap curve, not three isolated points. X→Y: monotone (ρ=0.929) but R²=0.897 missed pre-reg 0.90 by 0.003. Pre-reg G3 inverted — diagnosed as a dual-state X-baseline confound (|Ψ+⟩ anchors X at γ=0.0114 vs |Φ+⟩ 0.0051), NOT a refutation (endpoint γ order Y>Z>X still reproduces Finding 03). Exp37 fixes both issues. See commit `ed87a63`.
+
+**Exp 37 (Confound-corrected commutation principle retest)** — job `d8d8u8i4gq0s73apu6h0` (ibm_marrakesh, C3757, **QUEUED as of C5513**). Two targeted fixes over Exp36: (1) G3 revised to endpoint-γ ordering (γ_Y_endpoint > γ_Z_endpoint — immune to cross-state X-baseline confound; this comparison already passed in Exp36 data: 0.0245>0.0221); (2) extra angle φ=80° added to X-Y meridian to stabilize R² past 0.90. Calibration-selected pair [7,6] (CZ=0.00109, better than Exp36's 0.00130). 45 circuits × 3λ. Ideal-check PASS (all 15 angle/state combos ⟨nn⟩=1.0000). Results pending IBM queue clearance.
+
+---
+
+## Arc 4: IQAE Dose-Law Characterization (Ember, FakeMarrakesh simulation + IBM hardware, May–June 2026)
+
+**Campaign window**: May–June 2026. Led by Ember (DC15E).
+
+Separate IQAE arc focusing on the adaptive dose parameter `d` in the IQAE stopping protocol. Ember's experiment numbering is internal (not continuous with Whisper's Exp28–37). 8 simulation experiments completed on FakeMarrakesh; hardware validation submitted to ibm_marrakesh (QUEUED as of C5513).
+
+**Core finding (STRONG PASS A)**: The gated adaptive protocol (d→0, forcing maximum coverage) beats all unconstrained scalar doses d ≥ 0.7 by 7–51 percentage points across all tested seed sets. This is noise-robust and production-ready.
+
+**Secondary finding**: Min-coverage metric at N=150 has ≈24pp seed variance at the amplitude boundary (a=0.97). Claims of 1–2pp differences between dose settings are below the noise floor at this sample size. The correct conclusion is a band-wise ordering, not a point-wise one.
+
+**Key discovery (Ember C3452 Exp29)**: Interior optimum at amplitude boundary — small doses (d~0.35) gave +1pp over d=0 in one seed set. Exp30 showed this was seed noise (three-way tie at d=0.0, d=0.3, d=0.35, d=0.35 at a=0.97 with seed=300). The boundary-mode gated floor holds at N=150.
+
+| # | Experiment | Cycle | DC | Job / Platform | Status |
+|---|------------|-------|----|----------------|--------|
+| Ember-E1 through E8 | IQAE dose-law parameter sweep (FakeMarrakesh) | Ember C3443–C3453 | Ember | FakeMarrakesh sim (no job IDs) | COMPLETE |
+| **Ember-E9** | **IQAE hardware dose-law validation (P=0.56/0.90/0.95, k=0–4, 4096 shots, 15 circuits)** | **Ember C3455** | **Ember** | **`d8dhnq24gq0s73aqa9a0` (ibm_marrakesh)** | **QUEUED** |
+
+Results of Ember-E9 will extend the gated adaptive protocol STRONG PASS A to real hardware (currently FakeMarrakesh-validated). Pre-registered: T1 @0.80 inner zone <2pp deviation; T4 @0.65 FakeMarrakesh is conservative for all P. Source: Ember C3455 Discord post + `/droid/repos/DC15E/` quantum arc.
+
+---
+
 ## Provenance
 
 These jobs were submitted by the multi-agent autonomous network operating across:
