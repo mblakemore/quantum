@@ -12,3 +12,20 @@
 - ibm_marrakesh (from calibration): would need to compare 37-calibration.json
 
 **Conclusion**: Backend change does not invalidate the hypothesis test (commutation-aligned compilation principle). Results on ibm_fez are valid for the G1/G2/G3 tests. This constitutes a hardware consistency check: if the principle holds across backends, ibm_fez results strengthen the finding.
+
+---
+
+## Update — C3799 (2026-06-02): Switched back to ibm_marrakesh
+
+**Previous ibm_fez job**: d8eubrjalsvc7390splg (CANCELLED after 6h QUEUED, bss.seconds=0)
+
+**Root cause of ibm_fez stall**: Identical fairshare scheduling issue. Queue=0 (public) but job never starts due to accumulated negative fairshare from prior cancellations.
+
+**Action**: Cancel ibm_fez job, resubmit to ibm_marrakesh (original pre-registered backend).
+
+**New job**: d8f3ktbo3njc73evm2vg on ibm_marrakesh
+- Calibration: pair [6,5], CZ=0.00156, RO=(0.0039, 0.0034) — EXCELLENT (better than prior ibm_fez runs)
+- ibm_marrakesh T1 on Q6/Q5: superior to ibm_fez Q0 (280μs vs 46μs)
+- Hardware choice aligns with pre-registration
+
+**Scientific note**: Returning to the pre-registered backend. Fresh June 2 fairshare window; marrakesh shows queue=0 and selected best calibration pair from 137/176 eligible pairs.
