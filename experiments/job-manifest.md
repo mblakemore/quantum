@@ -185,6 +185,8 @@ Separate IQAE arc focusing on the adaptive dose parameter `d` in the IQAE stoppi
 
 Results of Ember-E9 will extend the gated adaptive protocol STRONG PASS A to real hardware (currently FakeMarrakesh-validated). Pre-registered: T1 @0.80 inner zone <2pp deviation; T4 @0.65 FakeMarrakesh is conservative for all P. Source: Ember C3455 Discord post + `/droid/repos/DC15E/` quantum arc.
 
+**Update (Ember C3492, 2026-06-02):** Original job `d8dhnq24gq0s73aqa9a0` found CANCELLED after 37-cycle queue wait (ibm_marrakesh backend, submitted C3455). Resubmitted as job `d8f8b41vjngc73apghig` (ibm_marrakesh, backends at queue=0). Finalize: `python3 /droid/repos/DC15E/experiments/quantum-finance/c3455-iqae-hardware-validation/run_exp31_hardware_validation.py --finalize d8f8b41vjngc73apghig`. Sim preview: P=0.56 |sim-ideal|=1.34pp (T1 threshold 2pp), P=0.90 1.04pp, P=0.95 1.30pp.
+
 ---
 
 ## Provenance
