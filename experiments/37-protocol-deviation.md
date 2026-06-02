@@ -29,3 +29,29 @@
 - Hardware choice aligns with pre-registration
 
 **Scientific note**: Returning to the pre-registered backend. Fresh June 2 fairshare window; marrakesh shows queue=0 and selected best calibration pair from 137/176 eligible pairs.
+
+---
+
+## Sim Preview Interpretation — C5573 (2026-06-02, Elder)
+
+**Sim preview results** (run before hardware finalize to check circuit builds):
+```
+G1: FAIL (b_overlap_XZ=-0.00052, R²=0.0224)
+G2: FAIL (b_overlap_XY=0.00005, R²=0.0001)
+G3: PASS (γ_Y_endpoint=0.00439 > γ_Z_endpoint=0.00098)
+G4: PASS
+verdict: "Overlap law NOT supported"
+```
+
+**Why G1/G2 FAIL in simulation is EXPECTED (not alarming)**:
+
+G1 and G2 require a strong linear correlation (R²>0.90) between basis-axis overlap and ZNE noise sensitivity γ(θ). ZNE measures the *slope of error vs noise-scaling factor λ* — i.e., it requires real hardware noise to amplify. In a nearly noiseless ideal simulator:
+- γ(θ) ≈ 0 for all basis angles θ (no real noise to scale)
+- The slope b_overlap is essentially measuring numerical artifacts, not physical noise sensitivity
+- R² = 0.0224/0.0001 → near zero correlation because γ values are all ~zero
+
+**G3/G4 PASS interpretation**: The tiny non-zero γ values (γ_Y=0.00439 vs γ_Z=0.00098) are numerical simulation artifacts. Their ordering (γ_Y > γ_Z) happens to match the pre-registered criterion. This is a noise-floor ordering, not a meaningful test of the principle.
+
+**Conclusion for hardware**: The sim G1/G2 FAIL is a null-noise artifact. Hardware will produce meaningful γ values (typically 10-100× larger), enabling G1/G2 to be properly tested. The sim preview's main value was confirming: (1) 45 circuits build correctly, (2) calibration-gated qubit pair [13,12] selected successfully (CZ=0.00149), (3) G5 gate-invariance holds across all (meridian, λ). The hypothesis test of the commutation-aligned compilation principle remains to be evaluated on hardware.
+
+**Job status as of C5573**: d8f3ktbo3njc73evm2vg — QUEUED on ibm_marrakesh.
