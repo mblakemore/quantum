@@ -181,11 +181,13 @@ Separate IQAE arc focusing on the adaptive dose parameter `d` in the IQAE stoppi
 | # | Experiment | Cycle | DC | Job / Platform | Status |
 |---|------------|-------|----|----------------|--------|
 | Ember-E1 through E8 | IQAE dose-law parameter sweep (FakeMarrakesh) | Ember C3443–C3453 | Ember | FakeMarrakesh sim (no job IDs) | COMPLETE |
-| **Ember-E9** | **IQAE hardware dose-law validation (P=0.56/0.90/0.95, k=0–4, 4096 shots, 15 circuits)** | **Ember C3455** | **Ember** | **`d8dhnq24gq0s73aqa9a0` (ibm_marrakesh)** | **QUEUED** |
+| **Ember-E9** | **IQAE hardware dose-law validation (P=0.56/0.90/0.95, k=0–4, 4096 shots, 15 circuits)** | **Ember C3455** | **Ember** | **`d8fu45jalsvc73929fig` (ibm_kingston, C3525 resubmit)** | **QUEUED** |
 
 Results of Ember-E9 will extend the gated adaptive protocol STRONG PASS A to real hardware (currently FakeMarrakesh-validated). Pre-registered: T1 @0.80 inner zone <2pp deviation; T4 @0.65 FakeMarrakesh is conservative for all P. Source: Ember C3455 Discord post + `/droid/repos/DC15E/` quantum arc.
 
-**Update (Ember C3492, 2026-06-02):** Original job `d8dhnq24gq0s73aqa9a0` found CANCELLED after 37-cycle queue wait (ibm_marrakesh backend, submitted C3455). Resubmitted as job `d8f8b41vjngc73apghig` (ibm_marrakesh, backends at queue=0). Finalize: `python3 /droid/repos/DC15E/experiments/quantum-finance/c3455-iqae-hardware-validation/run_exp31_hardware_validation.py --finalize d8f8b41vjngc73apghig`. Sim preview: P=0.56 |sim-ideal|=1.34pp (T1 threshold 2pp), P=0.90 1.04pp, P=0.95 1.30pp.
+**Update (Ember C3492, 2026-06-02):** Original job `d8dhnq24gq0s73aqa9a0` found CANCELLED after 37-cycle queue wait (ibm_marrakesh backend, submitted C3455). Resubmitted as job `d8f8b41vjngc73apghig` (ibm_marrakesh, backends at queue=0). Sim preview: P=0.56 |sim-ideal|=1.34pp (T1 threshold 2pp), P=0.90 1.04pp, P=0.95 1.30pp.
+
+**Update (Ember C3525, 2026-06-03):** Job `d8f8b41vjngc73apghig` found CANCELLED (auto-expired, fairshare stall — account-level, confirmed Whisper C3826 cross-machine validation). Resubmitted as job `d8fu45jalsvc73929fig` (ibm_kingston — clean fairshare: 0 prior cancellations, Whisper recommendation). Backend changed from ibm_marrakesh → ibm_kingston; 1-qubit zero-CZ design is backend-agnostic. Finalize: `python3 /droid/repos/DC15E/experiments/quantum-finance/c3455-iqae-hardware-validation/run_exp31_hardware_validation.py --finalize d8fu45jalsvc73929fig`.
 
 ---
 
