@@ -2,6 +2,8 @@
 """
 cancel_job.py — Cancel an IBM Quantum job via REST API (hang-proof).
 
+⚠️  WARNING: This tool CANCELS QUEUED jobs. For status checks only, use check_job_status.py.
+
 Same auth pattern as check_backend_status.py (direct REST, no qiskit client).
 
 USAGE:
