@@ -57,3 +57,49 @@ G1 and G2 require a strong linear correlation (R²>0.90) between basis-axis over
 **Job status as of C5573**: d8f3ktbo3njc73evm2vg — QUEUED on ibm_marrakesh.
 
 **Update — C5595 (2026-06-03 06:45 UTC)**: Still QUEUED after ~17 hours. Confirmed via Qiskit runtime client (finalize script reached job, returned status=QUEUED). Backend shows queue=0 publicly — delay is fairshare deprioritization, not job position. Leaving job queued; will finalize when COMPLETED. Note: old API endpoint `api.quantum-computing.ibm.com` fails DNS resolution from this machine; use `quantum.cloud.ibm.com` (check_backend_status.py route) or Qiskit runtime client for job access. Action: check back post-ADP/AVGO cascade (June 3 afternoon ET).
+
+---
+
+## Update — C5596 (2026-06-03 07:50 UTC): Switched to ibm_kingston
+
+**Diagnosis**: Whisper C3826 cross-machine validation confirmed fairshare stall is ACCOUNT-LEVEL (not network or machine specific). Both Exp37 (d8f3ktbo3njc73evm2vg, 29h QUEUED) confirmed from Whisper's machine also QUEUED. Root cause: accumulated CANCELLED jobs on ibm_marrakesh building negative fairshare score; June 1 monthly reset did NOT clear it per prior C3799 finding.
+
+**Backend**: ibm_marrakesh → ibm_kingston (0 prior cancellations = clean fairshare per Whisper C3826)
+
+**Action**:
+1. Cancelled d8f3ktbo3njc73evm2vg (ibm_marrakesh) via REST API POST /cancel
+2. Created `scripts/run_exp37_kingston_submit.py` (copy with BACKEND_NAME = "ibm_kingston")
+3. Also created `scripts/cancel_job.py` (hang-proof REST cancel tool, same auth as check_backend_status.py)
+4. Submitted new job d8ftnvbo3njc73f0rcig to ibm_kingston
+
+**New job status**: d8ftnvbo3njc73f0rcig — Queued on ibm_kingston
+**Calibration**: pair [154, 155], CZ=0.00153 (EXCELLENT), RO=(0.0045, 0.0079) — well within gate limits
+- ibm_kingston [154,155]: CZ=0.00153 (matches marrakesh [6,5]=0.00156 quality)
+- 148/176 eligible pairs scanned — best pair selected by adaptive calibration gate
+
+**Scientific impact**: MINIMAL. Adaptive calibration gate auto-selects best qubit pair per backend. Kingston pair [154,155] shows equivalent or better noise characteristics vs prior marrakesh pair [6,5]. Same design: 45 circuits (7 XZ + 8 XY × 3 lambda), 4096 shots, same ZNE protocol. Cross-backend consistency of the commutation principle (if it holds) strengthens the finding.
+
+**Note**: ibm_kingston is the 3rd backend for Exp37 (marrakesh → fez → marrakesh → kingston). Each switch was fairshare-driven, not science-driven. Adaptive calibration gate mitigates hardware heterogeneity.
+
+**Finalize command**: `python3 scripts/run_exp37_commutation_endpoint_retest.py --finalize d8ftnvbo3njc73f0rcig`
+
+---
+
+## Update — C3827/Whisper (2026-06-03 08:10 UTC): Accidental cancel + 4th resubmit to ibm_kingston
+
+**Incident**: Whisper C3827 used `scripts/cancel_job.py` to check status of d8ftnvbo3njc73f0rcig. cancel_job.py cancels QUEUED jobs without confirmation — Whisper intended a status check, not a cancel. Job was CANCELLED.
+
+**Root cause**: cancel_job.py has no --status-only flag; running it on a QUEUED job always cancels.
+**Mitigation**: Future status checks should use GET /api/v1/jobs/{id} directly, not cancel_job.py.
+
+**Action**:
+1. cancel_job.py fixed: now uses POST /jobs/{id}/cancel (correct IBM endpoint) instead of DELETE
+2. Exp37 resubmitted to ibm_kingston immediately
+
+**New job**: d8fu393o3njc73f0rsqg on ibm_kingston
+**Calibration**: pair [154, 155], CZ=0.00153 (same EXCELLENT pair as before)
+- Scientific impact: NONE — same backend, same pair, same protocol
+
+**Also done in this cycle**: Ember-E9 (d8f8b41vjngc73apghig on ibm_marrakesh) cancelled and resubmitted to ibm_kingston as d8fu2r07jphs739mr3b0. Ember-E9 uses 1-qubit Bernoulli encoding (zero CZ gates) — backend switch minimal scientific impact.
+
+**Finalize command**: `python3 scripts/run_exp37_commutation_endpoint_retest.py --finalize d8fu393o3njc73f0rsqg`
