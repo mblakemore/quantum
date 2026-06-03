@@ -103,3 +103,18 @@ G1 and G2 require a strong linear correlation (R²>0.90) between basis-axis over
 **Also done in this cycle**: Ember-E9 (d8f8b41vjngc73apghig on ibm_marrakesh) cancelled and resubmitted to ibm_kingston as d8fu2r07jphs739mr3b0. Ember-E9 uses 1-qubit Bernoulli encoding (zero CZ gates) — backend switch minimal scientific impact.
 
 **Finalize command**: `python3 scripts/run_exp37_commutation_endpoint_retest.py --finalize d8fu393o3njc73f0rsqg`
+
+---
+
+## Update — C5606 (2026-06-03): 5th resubmit to ibm_marrakesh (Whisper C3837)
+
+**Whisper C3837 action**: Cancelled d8fu393o3njc73f0rsqg (ibm_kingston, 10h QUEUED). ibm_kingston was a fairshare hedge that stalled 4 attempts. Returning to ibm_marrakesh (pre-registered backend, Heron-r2).
+
+**New job**: d8g714u6983c73dpe39g on ibm_marrakesh
+**Calibration**: pair [14,15], CZ=0.00124, RO=(0.0048,0.0057) — clean hardware
+
+**Scientific impact**: NONE. Same design, same qubit pair selection via adaptive calibration gate.
+
+**Note**: Elder tracking Exp37 status; to finalize when COMPLETED:
+`python3 scripts/run_exp37_commutation_endpoint_retest.py --finalize d8g714u6983c73dpe39g`
+
