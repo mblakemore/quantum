@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 """
-cancel_job.py — Cancel an IBM Quantum job via REST API (hang-proof).
+cancel_job.py — Cancel or status-check an IBM Quantum job via REST API (hang-proof).
 
-⚠️  WARNING: This tool CANCELS QUEUED jobs. For status checks only, use check_job_status.py.
+⚠️  WARNING: Default mode CANCELS QUEUED jobs. Use --status for status-check only.
+    Ember C3526 / Whisper C3827 lesson: accidental cancel from "status check" is a real hazard.
 
 Same auth pattern as check_backend_status.py (direct REST, no qiskit client).
 
 USAGE:
-  python3 scripts/cancel_job.py <job_id>
-  python3 scripts/cancel_job.py d8f3ktbo3njc73evm2vg
+  python3 scripts/cancel_job.py --status <job_id>     # ✅ STATUS CHECK ONLY (no cancel)
+  python3 scripts/cancel_job.py <job_id>              # ⚠️  CANCEL job (destructive)
 
 EXIT CODES:
-  0 = job cancelled successfully (or was already terminal)
-  1 = cancel failed (job not found, already done, permission error)
+  0 = success (cancelled or status shown)
+  1 = failed (job not found, already done, permission error)
   2 = credential / network / API error
 """
 import json
@@ -72,12 +73,22 @@ def _iam_token(api_key):
 
 
 def main():
-    if len(sys.argv) < 2 or sys.argv[1].startswith("--"):
-        print("Usage: python3 scripts/cancel_job.py <job_id>")
+    # Parse --status flag (Ember C3526 safety fix: status-check ≠ cancel)
+    status_only = False
+    args = sys.argv[1:]
+    if args and args[0] == "--status":
+        status_only = True
+        args = args[1:]
+    if not args:
+        print("Usage: python3 scripts/cancel_job.py --status <job_id>   # status check only")
+        print("       python3 scripts/cancel_job.py <job_id>            # CANCEL (destructive)")
         return 1
 
-    job_id = sys.argv[1].strip()
-    print(f"Cancelling IBM Quantum job: {job_id}")
+    job_id = args[0].strip()
+    if status_only:
+        print(f"Checking IBM Quantum job: {job_id}")
+    else:
+        print(f"⚠️  CANCELLING IBM Quantum job: {job_id}  (use --status for status check only)")
 
     try:
         token, crn = _load_account()
@@ -92,8 +103,20 @@ def main():
     try:
         status_data = _get(f"{API_BASE}/jobs/{job_id}", hdr)
         status = status_data.get("status", "unknown")
-        print(f"  Current status: {status}")
-        if status in ("DONE", "ERROR", "CANCELLED"):
+        backend = status_data.get("backend", "unknown")
+        created = status_data.get("created", "N/A")
+        bss = status_data.get("estimated_start_time", "N/A")
+        print(f"  Status:  {status}")
+        print(f"  Backend: {backend}")
+        print(f"  Created: {created}")
+        print(f"  BSS:     {bss}")
+        if status == "Queued":
+            print(f"  ⏳ Queued, estimated wait: {bss}s")
+        elif status == "Running":
+            print(f"  🔄 Running")
+        elif status in ("DONE", "Completed"):
+            print(f"  ✅ Completed")
+        if status in ("DONE", "ERROR", "CANCELLED", "Completed", "Failed", "Cancelled"):
             print(f"  Job is already terminal ({status}) — no cancel needed.")
             return 0
     except urllib.error.HTTPError as e:
@@ -102,6 +125,10 @@ def main():
             return 1
         print(f"❌ Status check failed: {e}")
         return 2
+
+    # If --status only, stop here
+    if status_only:
+        return 0
 
     # Cancel — IBM Quantum requires POST /jobs/{id}/cancel, not DELETE /jobs/{id}
     try:
