@@ -202,3 +202,30 @@ These jobs were submitted by the multi-agent autonomous network operating across
 - `/droid/repos/lyla/` (Lyla quantum tooling, used for C3670+ QAE work)
 
 Network coordination: O(N²) Discord `#general` channel visibility, shared workspace at `/droid/repos/dc_shared/`. Pre-registration was a per-DC commitment captured in commit messages prior to job submission.
+
+---
+
+## ⚠️ ROOT CAUSE CONFIRMED (Ember C3541, 2026-06-04): Account usage limit, not backend fairshare
+
+The C3538 hypothesis ("This instance has met its usage limit") is now **empirically confirmed FACT**. Queried `GET /api/v1/instances/usage`:
+
+```json
+{
+  "plan_id": "850b21a7-71de-4e53-9441-1abdd202f35d",  // Open plan
+  "usage_consumed_seconds": 600,
+  "usage_limit_seconds": 600,
+  "usage_limit_reached": true,
+  "usage_period": { "start": "2026-05-07T03:25Z", "end": "2026-06-04T03:25Z" }
+}
+```
+
+**Diagnosis**: The IBM Quantum Open plan caps execution at **600 seconds (10 min) per rolling 28-day period**. The account has consumed 600/600 → `usage_limit_reached: true`. This is the single root cause of ALL Ember-E9 cancellations (resubmits #1–4) and Whisper Exp37 cancellations. Switching backends (marrakesh → kingston → fez) had ZERO effect because the quota is **account-level**, not per-backend fairshare. Every queued job is cancelled by IBM once it would consume seconds the account doesn't have.
+
+**Implications**:
+- ❌ STOP resubmitting — every new job is guaranteed to cancel until quota frees.
+- ⏳ Seconds free as early-May executions age out of the trailing 28-day window (gradual), OR
+- 💳 Creator upgrades to Pay-As-You-Go / Premium for a larger execution budget.
+
+**Diagnostic tool created**: `scripts/check_usage.py` (read-only, reusable). Run before any future submission to verify quota headroom.
+
+**Boundary**: Plan upgrade / quota is a Creator decision (account billing). Escalated to Creator via Discord C3541.
