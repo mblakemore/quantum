@@ -1,0 +1,183 @@
+{
+  "experiment": "39",
+  "title": "X-Basis QAOA Budget Sweep \u2014 Commutation Advantage Under COBYLA Constraints",
+  "backend": "FakeMarrakesh",
+  "problem": "4-qubit MaxCut",
+  "edges": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      0,
+      3
+    ]
+  ],
+  "n_qubits": 4,
+  "max_cut": 4,
+  "shots": 256,
+  "n_restarts": 2,
+  "p_values": [
+    1,
+    4
+  ],
+  "budget_levels": [
+    4,
+    6,
+    8,
+    12,
+    16,
+    20,
+    30,
+    50
+  ],
+  "standard_qaoa": {
+    "1": {
+      "4": 0.681640625,
+      "6": 0.775390625,
+      "8": 0.7578125,
+      "12": 0.76953125,
+      "16": 0.75,
+      "20": 0.732421875,
+      "30": 0.767578125,
+      "50": 0.6875
+    },
+    "4": {
+      "4": 0.8984375,
+      "6": 0.75,
+      "8": 0.744140625,
+      "12": 0.90625,
+      "16": 0.853515625,
+      "20": 0.82421875,
+      "30": 0.931640625,
+      "50": 0.96484375
+    }
+  },
+  "xbasis_qaoa": {
+    "1": {
+      "4": 0.4921875,
+      "6": 0.517578125,
+      "8": 0.5234375,
+      "12": 0.51953125,
+      "16": 0.5234375,
+      "20": 0.52734375,
+      "30": 0.5234375,
+      "50": 0.533203125
+    },
+    "4": {
+      "4": 0.474609375,
+      "6": 0.56640625,
+      "8": 0.6015625,
+      "12": 0.5859375,
+      "16": 0.603515625,
+      "20": 0.677734375,
+      "30": 0.6953125,
+      "50": 0.669921875
+    }
+  },
+  "entropy_standard": {
+    "1": 0.9994028762874906,
+    "4": 0.6168077378530286
+  },
+  "entropy_xbasis": {
+    "1": 0.9996438197348216,
+    "4": 0.7985574188282679
+  },
+  "goals": {
+    "G1": {
+      "criterion": "r_xbasis > r_standard by \u22650.05 at budget=1 or budget=2 (any p)",
+      "data": {
+        "p1_b1": {
+          "r_std": 0,
+          "r_xb": 0,
+          "diff": 0
+        },
+        "p1_b2": {
+          "r_std": 0,
+          "r_xb": 0,
+          "diff": 0
+        },
+        "p4_b1": {
+          "r_std": 0,
+          "r_xb": 0,
+          "diff": 0
+        },
+        "p4_b2": {
+          "r_std": 0,
+          "r_xb": 0,
+          "diff": 0
+        }
+      },
+      "result": "FAIL"
+    },
+    "G2": {
+      "criterion": "Standard QAOA overtakes X-basis at some budget N* \u2265 10 (confirming compensation exists)",
+      "crossover_budgets": {
+        "p1": 12,
+        "p4": 12
+      },
+      "result": "PASS"
+    },
+    "G3": {
+      "criterion": "X-basis entropy < Standard entropy at all p-levels (replication of Exp38 G3)",
+      "data": {
+        "p1": {
+          "e_std": 0.9994028762874906,
+          "e_xb": 0.9996438197348216,
+          "xbasis_lower": false
+        },
+        "p4": {
+          "e_std": 0.6168077378530286,
+          "e_xb": 0.7985574188282679,
+          "xbasis_lower": false
+        }
+      },
+      "result": "FAIL"
+    },
+    "G4": {
+      "criterion": "X-basis advantage (xbasis-standard diff) narrows monotonically as budget increases (\u22641 violation)",
+      "data": {
+        "p1": {
+          "diffs": [
+            -0.189,
+            -0.258,
+            -0.234,
+            -0.25,
+            -0.227,
+            -0.205,
+            -0.244,
+            -0.154
+          ],
+          "monotone": false
+        },
+        "p4": {
+          "diffs": [
+            -0.424,
+            -0.184,
+            -0.143,
+            -0.32,
+            -0.25,
+            -0.146,
+            -0.236,
+            -0.295
+          ],
+          "monotone": false
+        }
+      },
+      "result": "FAIL"
+    }
+  },
+  "verdict": {
+    "goals_passed": "1/4",
+    "primary_hypothesis_G1": "NOT SUPPORTED",
+    "conclusion": "X-basis structural advantage does NOT translate to low-budget performance \u2014 commutation and optimization landscape are decoupled"
+  }
+}
