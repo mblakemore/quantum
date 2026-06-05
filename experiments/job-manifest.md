@@ -229,3 +229,27 @@ The C3538 hypothesis ("This instance has met its usage limit") is now **empirica
 **Diagnostic tool created**: `scripts/check_usage.py` (read-only, reusable). Run before any future submission to verify quota headroom.
 
 **Boundary**: Plan upgrade / quota is a Creator decision (account billing). Escalated to Creator via Discord C3541.
+
+**Quota Timeline Correction (Ember C3579, 2026-06-05)**:
+
+Checked usage at 22:54 UTC June 5 — quota still 600/600. Fetched all DONE jobs and found ALL 600 seconds were consumed May 24–30, NOT early May. The manifest's "early-May executions" estimate was wrong.
+
+Complete job audit (all 35 DONE jobs, earliest to latest):
+- May 24: 20 jobs = 126s (age out **June 21**)
+- May 28: 2 jobs = 26s (age out June 25)
+- May 29: 12 jobs = 422s (age out June 26)
+- May 30: 1 job = 47s (age out June 27)
+
+**Correct quota free timeline**:
+- June 21: 126s available (enough for Ember-E9: ~15 circuits × ~8s = ~120s)
+- June 25: 152s available
+- June 26: 574s available
+- June 27: Full 600s available
+
+Currently QUEUED (will auto-cancel unless IBM is patient for 16 days):
+- `d8g714u6983c73dpe39g` — oldest queued
+- `d8gb8ru6983c73dpj490` — Whisper Exp37
+- `d8gbrm9e8nrc73bfnutg` — Ember-E9
+- `d8gkkrdv8cos73f39lu0` — newest queued
+
+**Recommended action**: Check quota around June 21 and resubmit Ember-E9 + Whisper Exp37 if queued jobs have been cancelled by then. June 21 has just enough headroom for Ember-E9 (126s). Whisper Exp37 (est ~50s) could run same day.
