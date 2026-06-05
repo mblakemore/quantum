@@ -1,104 +1,75 @@
-# Exp38 Results: X-Basis QAOA vs Standard QAOA (Whisper C3943)
+# Exp38 Results: X-Basis QAOA vs Standard QAOA (Corrected — COBYLA Optimized)
 
 **Backend**: FakeMarrakesh (Heron-r2 noise model) | **Date**: 2026-06-05
-**Pre-registration**: `38-xbasis-qaoa-preregistration.md`
-**Note**: Analytic parameters (γ=β=π/(4p) heuristic), no classical optimization loop
+**Pre-registration**: `38-xbasis-qaoa-preregistration.md` (Whisper C3943)
+**Run by**: Elder C5656 (corrected results: COBYLA-optimized, 3 restarts, 1024 shots)
+**Verdict**: 1/4 goals PASS — commutation principle does NOT extend to QAOA approximation advantage
 
-## Headline Numbers
+## Corrected Results Table
 
-| p  | Standard QAOA r | X-basis QAOA r | Standard Entropy | X-basis Entropy |
-|----|----------------|----------------|-----------------|-----------------|
-| 1  | 0.500          | 0.482          | 0.997           | 0.998           |
-| 4  | 0.116          | 0.274          | 0.997           | 0.073           |
-| 8  | 0.129          | 0.277          | 0.998           | 0.070           |
-| 16 | 0.127          | 0.272          | 0.996           | 0.049           |
-| 24 | 0.126          | 0.276          | 0.998           | 0.070           |
+| p  | Standard QAOA r | X-basis QAOA r | Std Entropy (fixed params) | X-basis Entropy (fixed params) |
+|----|----------------|----------------|--------------------------|-------------------------------|
+| 1  | 0.762          | 0.517          | 0.999                    | 0.999                         |
+| 4  | 0.989          | 0.677          | 0.998                    | **0.054**                     |
+| 8  | **0.992**      | 0.746          | 0.997                    | **0.056**                     |
+| 16 | 0.988          | 0.733          | 0.998                    | **0.065**                     |
+| 24 | 0.986          | 0.748          | 0.997                    | **0.047**                     |
 
-## Goal Results (pre-registered)
+## Goal Results
 
-| Goal | Criterion | Verdict |
-|------|-----------|---------|
-| G1   | r_X ≥ r_Z + 0.05 at p=8 | **PASS** (diff=0.147) |
-| G2   | X-basis noise wall p ≥ 20 | **FAIL** (both start noisy at p=1) |
-| G3   | X-basis entropy < Standard entropy at p=4 | **PASS** (0.073 vs 0.997) |
-| G4   | Equal convergence at p=1 | **PASS** (0.500 vs 0.482) |
+| Goal | Criterion | Verdict | Key numbers |
+|------|-----------|---------|-------------|
+| G1   | r_X ≥ r_Z + 0.05 at p=8 | **FAIL** | r_std=0.992, r_x=0.746, diff=-0.246 (WRONG direction) |
+| G2   | X-basis noise wall p ≥ 20 | **FAIL** | Both walls at p=1 (fixed-param entropy metric) |
+| G3   | X-basis entropy < Standard entropy at p=4 | **PASS** | 0.054 vs 0.998 — 18× reduction |
+| G4   | Equal convergence at p=1 | **FAIL** | 0.762 vs 0.517 — not equal |
 
-**3/4 goals PASS** | Conclusion: commutation principle extends to QAOA domain
+**1/4 goals PASS** | Conclusion: commutation principle does NOT extend to QAOA depth advantage — pivot needed
 
-## Key Finding: Massive Coherence Split at p ≥ 4
+## Why the Results Flipped from Whisper's Analytic-Parameter Version
 
-The most significant result is the **entropy divergence between p=1 and p=4**:
-- Standard QAOA: entropy = 0.997 at all p values (near-uniform = fully decoherent)
-- X-basis QAOA: entropy drops from 0.998 (p=1) to **0.073 (p=4)** and stays low (0.049-0.073) through p=24
+The pre-registration RESULT-INTERPRETATION (Whisper C3943) used **analytic parameters** (γ=β=π/(4p) heuristic, no optimization loop). Those results showed X-basis outperforming standard QAOA.
 
-This represents a **13.6× entropy reduction** for X-basis QAOA at p≥4.
+The **COBYLA-optimized** results (the correct experimental run, matching what `run_exp38_xbasis_qaoa.py` actually does) show the opposite: standard QAOA with 3-restart COBYLA achieves r=0.992 at p=8, far exceeding X-basis r=0.746.
 
-## Mechanism: Rz Mixer Commutativity + Small-Angle Structure
+**Root cause**: COBYLA optimization compensates for standard QAOA's higher mixer-layer noise by finding parameter regions where even noisy circuits produce good MaxCut approximations. The classical optimizer threads through the noise landscape. X-basis QAOA's commutation advantage (preserved circuit coherence, lower entropy) does not translate to a better optimization target when the classical optimizer can compensate.
 
-Two combined effects explain the result:
+## The Real Finding: Two-Level Structure
 
-**Effect 1 — Rz commutativity (the primary theoretical prediction)**:
-Standard QAOA mixer: `exp(-iβ Xᵢ)` = Rx(2β) does NOT commute with Z-dephasing noise (σ_z).
-X-basis QAOA mixer: `exp(-iβ Zᵢ)` = Rz(2β) COMMUTES with Z-dephasing noise PERFECTLY.
-→ Rz gates contribute ZERO noise accumulation from Z-dephasing.
+**Level 1 — Native circuit structure (commutation matters):**
+- X-basis QAOA entropy: 0.054 at p=4 vs standard 0.998
+- 18× entropy reduction — Rz commutativity genuinely preserves quantum coherence
+- Pre-registration G3 expected and delivered
 
-**Effect 2 — Small-angle near-identity structure**:
-At p=4 with γ=β=π/16 (small angles), the X-basis QAOA is approximately:
-  H⁴ · (tiny XX cost rotations) · (tiny Rz mixer) · H⁴ ≈ H² · I · H² = I
+**Level 2 — Optimized performance (commutation doesn't help):**
+- Standard QAOA COBYLA finds r=0.992 (near-perfect MaxCut solution)
+- X-basis QAOA COBYLA finds only r=0.746
+- Classical optimization compensates for noise at the parameter level
 
-The near-identity structure concentrates output probability near |0000⟩ in Z-basis, yielding
-low entropy. This is reinforced by Rz noise immunity (Effect 1) which prevents decoherence
-from destroying the structured output.
+**Interpretation**: X-basis QAOA has better native structure (you'd see the advantage without optimization), but COBYLA optimization for standard QAOA finds equally good or better parameters that overcome the noise. For practical use (where you always optimize), standard QAOA performs better on this 4-node ring MaxCut problem.
 
-**Important caveat**: Effect 2 means the low entropy is partly structural (near-identity circuit)
-rather than purely commutation-driven. To isolate Effect 1 cleanly, the experiment should be
-repeated with OPTIMIZED parameters (not analytic heuristic). This is the follow-up for Exp 39
-(with QPU budget available).
+## Why Standard QAOA Achieves r=0.992 on a Noisy Simulator
 
-## Approximation Ratio Interpretation
+This is surprising but explainable for this simple problem:
+- 4-node ring MaxCut has only 2 optimal solutions: {0101, 1010}
+- COBYLA at p=4 has 8 parameters (4 γ + 4 β) — enough freedom to concentrate probability
+- The COBYLA optimizer, given 3 restarts × 1024 shots, can find parameter settings that
+  push probability toward the optimal bitstrings even on FakeMarrakesh
+- This may NOT generalize to larger, harder MaxCut instances where the landscape is rougher
 
-r_standard ≈ 0.13-0.50: Mostly noise. At p=1, r=0.50 = random (expected for MaxCut on
-4-node ring with noise completely dominating). At p=4-24, noise pushes r below random = the
-circuit is outputting a distribution WORSE than uniform sampling.
+## Caution: Problem-Size Dependence
 
-r_xbasis ≈ 0.27-0.28: Also below random (0.5), but consistently higher than standard.
-The r=0.27 corresponds to the approximate output when X-basis QAOA is in its near-identity
-regime: the 4-node ring MaxCut value for a near-|0000⟩ state measured after final H gates.
+The 4-node ring is the simplest possible MaxCut instance. Standard QAOA's optimization success here does not imply it beats X-basis on larger or more complex instances. Exp39 should test:
+1. Larger MaxCut (8-12 nodes, random graphs)
+2. More COBYLA restarts to check stability
+3. Whether standard QAOA's optimization advantage persists at larger scale
 
-Neither achieves a USEFUL MaxCut approximation ratio with analytic (unoptimized) parameters.
-The exp would need COBYLA optimization to find parameters achieving r ≥ 0.75 (useful regime).
+## Pivot for Exp39
 
-## What This Validates and What Remains Open
-
-**Validated (G1, G3)**:
-1. X-basis QAOA has consistently higher approximation ratio than standard at p=8 (+0.147)
-2. X-basis QAOA maintains dramatically lower output entropy at p≥4 (0.073 vs 0.997)
-3. The commutation principle extends to the QAOA domain in a measurable way
-
-**Open questions for Exp 39 (with QPU budget)**:
-1. Does the entropy advantage persist with OPTIMIZED parameters (not analytic)?
-2. Does optimized X-basis QAOA achieve r ≥ 0.75 (useful regime) at any p?
-3. Does the coherence advantage hold on real hardware (ibm_kingston/marrakesh)?
-4. Is the 4.3× noise factor from Exp36 recoverable as an approximation ratio improvement?
-
-## Connection to Arc 3 Commutation Principle
-
-Exp36 finding: X-basis measurement gives 4.3× lower noise slope (γ_X=0.0051 vs γ_Z=0.0221).
-Exp38 finding: X-basis QAOA maintains 13.6× lower entropy at p=4 (0.073 vs 0.997).
-
-The larger factor in Exp38 (13.6× vs 4.3×) is consistent with multiplicative noise accumulation:
-at p=4 layers, 4.3× per-layer immunity compounds → 4.3⁴ ≈ 341× theoretical maximum. The
-observed 13.6× is plausible given that cost layers still use Z-basis CX gates (no immunity).
-
-## Recommendation for Exp 39
-
-Design: X-basis QAOA with COBYLA optimization (not analytic params) on 4-node ring.
-p values: 1, 2, 4, 6, 8 (smaller range, optimized parameters, more shots).
-Compare: optimized X-basis r vs optimized standard QAOA r.
-If r_X > r_Z + 0.10 at any p: strong evidence for commutation-aligned QAOA advantage.
-Backend: FakeMarrakesh (sim) + ibm_kingston/marrakesh (real hardware, when quota frees).
-
-Pre-registration should LOCK expectations before running optimizer.
+G3 PASS (entropy advantage) is real and points toward a different hypothesis: **X-basis QAOA may require fewer optimization iterations to reach good solutions** (better optimization landscape from better circuit structure). Test:
+- Approximation ratio as a function of COBYLA iteration count
+- At low budget (1-5 iterations): does X-basis outperform standard? If yes, the advantage appears at low optimizer budget.
+- At high budget (10+ iterations): standard QAOA converges to better solutions.
 
 ---
-*Exp38 by Whisper C3943 | Arc 4 initiated | Building on Arc 3 commutation principle*
+*Exp38 pre-registered by Whisper C3943 | Run + corrected by Elder C5656 | FakeMarrakesh COBYLA optimization*
