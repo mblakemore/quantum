@@ -1,0 +1,65 @@
+{
+  "experiment": "Exp42",
+  "cycle": "C3598",
+  "date": "2026-06-06",
+  "graded_cycle": "C5685",
+  "graded_date": "2026-06-06",
+  "backend": "FakeMarrakesh",
+  "shots": 512,
+  "n_restarts": 2,
+  "max_iter": 40,
+  "p_values": [
+    4,
+    8
+  ],
+  "graph": {
+    "n_qubits": 12,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6],
+      [6, 7], [7, 8], [8, 9], [9, 10], [10, 11], [11, 0],
+      [0, 4], [1, 7], [2, 9], [3, 6], [5, 10], [8, 11]
+    ],
+    "max_cut": 16
+  },
+  "results_12node": {
+    "problem": "12-node-random",
+    "n_qubits": 12,
+    "n_edges": 18,
+    "max_cut": 16,
+    "p_values": [4, 8],
+    "data": {
+      "standard": {
+        "4": {"approx_ratio": 0.8546142578125, "entropy_uniform": 0.9317388866133394, "runtime_s": 84.19299674034119},
+        "8": {"approx_ratio": 0.835693359375, "entropy_uniform": 0.9297821388613706, "runtime_s": 85.34472393989563}
+      },
+      "xbasis": {
+        "4": {"approx_ratio": 0.7115478515625, "entropy_uniform": 0.8418195788381642, "runtime_s": 85.10212135314941},
+        "8": {"approx_ratio": 0.7559814453125, "entropy_uniform": 0.840165058227606, "runtime_s": 85.9214186668396}
+      },
+      "compiled": {
+        "4": {"approx_ratio": 0.5723876953125, "entropy_uniform": 0.06684695406297496, "runtime_s": 84.660640001297},
+        "8": {"approx_ratio": 0.573974609375, "entropy_uniform": 0.06349734791993679, "runtime_s": 85.04356026649475}
+      }
+    }
+  },
+  "goals": {
+    "gap_p8": 0.0797119140625,
+    "G1": {"description": "12-node p=8 gap intermediate: 0.013 < gap < 0.096", "result": "PASS", "value": 0.0797, "pass": true},
+    "G2": {"description": "X-basis p=8 >= 0.75 (practically competitive)", "result": "PASS", "value": 0.7560, "pass": true},
+    "G3": {"description": "X-basis monotone improvement p=4 to p=8 (barren plateau avoidance)", "result": "PASS", "p4": 0.7115, "p8": 0.7560, "pass": true},
+    "G4": {"description": "Compiled p=8 < 0.65 (structural failure replicates)", "result": "PASS", "value": 0.5740, "pass": true},
+    "score": "4/4",
+    "hypothesis_confirmed": "H1 (Gradual Transition)"
+  },
+  "pearl_causal_validation": {
+    "standard_plateau_12node_pct": -2.2,
+    "note": "Standard QAOA shows mild plateau at 12-node (0.8546 to 0.8357 = -2.2%). Between 8-node STRONG (-12.8%) and 16-node NONE (+3.8%). Gap (0.080) tracks inverse of plateau severity across all three scales. Pearl causal model (Whisper C3966) cross-validated.",
+    "gap_vs_plateau_severity": [
+      {"scale": "8-node", "plateau_pct": -12.8, "gap": 0.0126},
+      {"scale": "12-node", "plateau_pct": -2.2, "gap": 0.0797},
+      {"scale": "16-node", "plateau_pct": 3.8, "gap": 0.0964}
+    ]
+  },
+  "finding": "Finding 18",
+  "finding_file": "findings/18-xbasis-gradual-transition-pearl-validated.md"
+}

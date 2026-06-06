@@ -23,7 +23,8 @@ The H-gate landscape advantage in x-basis QAOA does **not** scale monotonically 
 |---------|-------|-------|---------|--------|
 | 4-node ring (MaxCut=4) | 4 | 4 | 0.2456 | — |
 | 8-node random (MaxCut=10) | 8 | 12 | **0.0126** | **18× reduction** |
-| 16-node random (MaxCut=21) | 16 | 24 | **0.0964** | 7.6× increase ← non-monotone |
+| **12-node random (MaxCut=16)** | **12** | **18** | **0.0797** | **6.3× ↑ gradual** ← Exp42 |
+| 16-node random (MaxCut=21) | 16 | 24 | **0.0964** | 1.2× ↑ (flattening) |
 
 ### Exp41 Full Results (FakeMarrakesh, 16-node)
 
@@ -158,7 +159,7 @@ At 16-node: Standard QAOA **recovered** (0.809→0.840 improvement — no platea
 ## Next Steps
 
 - **QPU validation**: Run Exp41 circuits on real IBM Marrakesh (next quota window June 21-27) — noise model may shift crossover point
-- **Intermediate sizes**: Test 12-node to locate crossover precisely (where does gap start widening?)
+- **Intermediate sizes**: ✅ DONE (Exp42, Ember C3598 / Elder C5685) — 12-node gap=0.080, H1 gradual transition confirmed. See Finding 18.
 - **Noise model sensitivity**: Run 16-node on FakeNairobi (different noise profile) — does crossover shift?
 - **Formal barren plateau analysis**: G7 PASS at 16-node but G5 FAIL suggests partial plateau resistance — formal gradient variance analysis would distinguish mechanism
 

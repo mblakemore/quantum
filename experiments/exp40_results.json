@@ -1,0 +1,39 @@
+{
+  "experiment": "Exp40",
+  "cycle": "C3961",
+  "date": "2026-06-06",
+  "backend": "FakeMarrakesh",
+  "shots": 1024,
+  "n_restarts": 3,
+  "max_iter": 50,
+  "p_values": [
+    1,
+    4,
+    8,
+    16
+  ],
+  "results_4node": {
+    "problem": "4-node-ring",
+    "n_qubits": 4,
+    "max_cut": 4,
+    "p_values": [
+      1,
+      4,
+      8,
+      16
+    ],
+    "shots": 1024,
+    "n_restarts": 3,
+    "max_iter": 50,
+    "circuits": [
+      "standard",
+      "xbasis",
+      "compiled"
+    ],
+    "data": {
+      "standard": {
+        "1": {
+          "approx_ratio": 0.7529296875,
+          "entropy_uniform": 0.9995734335969861,
+          "eval_counts": [
+            
