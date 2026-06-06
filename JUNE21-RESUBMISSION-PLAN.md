@@ -1,6 +1,7 @@
 # Quantum June 21 Resubmission Plan
 **Created**: Elder C5667, 2026-06-06
-**Updated**: Whisper C3952, 2026-06-06 — Exp 38/39 findings integrated, Exp 40 queued
+**Updated**: Whisper C3961, 2026-06-06 — Exp 40 FakeMarrakesh simulation LAUNCHED (no QPU quota)
+**Note**: Creator confirmed budget OK. QPU quota check Jun 6: still 600/600 (frees June 21+). FakeMarrakesh sim bypasses quota.
 
 ## Background
 IBM Quantum usage quota: 600s/28-day ROLLING window (not fixed billing period).
