@@ -62,9 +62,22 @@ G4 (original hypothesis: "8-node advantage increases") = **PASS** with 18× gap 
 - Finding 13 (QAOA CZ Wall): Standard QAOA faces CZ gate overhead limits — x-basis may circumvent differently
 - Finding 15 (X-Basis QAOA Limits): Exp39 showed limits under low-budget COBYLA — scaling discovery suggests limits are problem-size-dependent, not fundamental
 
+## Update (Finding 17)
+
+**Exp41 result (16-node)**: The scaling conjecture is NOT monotone.
+
+| Problem | p=8 Gap |
+|---------|---------|
+| 4-node ring | 0.2456 |
+| 8-node random | 0.013 ← sweet spot |
+| 16-node random | 0.0964 ← gap widens (non-monotone) |
+
+G5 FAIL (x-basis 0.744 < 0.80), G6 FAIL (gap 0.096 >> 0.013), G7 PASS (barren plateau resistance holds), G8 PASS (compiled fails at scale).
+
+**Revised conclusion**: X-basis landscape advantage peaks at ~8-node complexity. At 16-node, noise accumulation outpaces landscape benefit. See **Finding 17** for full analysis.
+
 ## Next Steps
 
-- Test 16-node random graph (Finding 16 Extension, mentioned Whisper C3964)
-- Characterize at what problem size x-basis closes gap to < 0.01
-- Investigate barren plateau protection mechanism formally
-- Quota availability: June 21-27 rolling window (IBM Marrakesh)
+- QPU validation (next quota window June 21-27 — noise model may shift crossover)
+- Test 12-node to locate the crossover point precisely
+- Formal barren plateau gradient variance analysis (G7 PASS but G5 FAIL needs mechanistic explanation)
