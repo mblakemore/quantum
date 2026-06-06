@@ -107,6 +107,46 @@ This is not a refutation of Finding 16 — it is a refinement:
 
 ---
 
+## Causal Mechanism Analysis (Whisper C3966 — Pearl Framework)
+
+The empirical non-monotone pattern has a deeper causal structure. The observed "gap" is not simply `landscape_benefit(N) - noise_penalty(N)`. It is:
+
+```
+Gap(N) = Standard_performance(N) - Xbasis_performance(N)
+       = [Standard_performance(N, barren_plateau_factor(N))] - [landscape(N) - noise(N)]
+```
+
+**Critical confound**: Standard QAOA's own barren plateau susceptibility is NOT monotone in problem size:
+
+| Scale | Standard p=8 | Barren plateau? |
+|-------|-------------|-----------------|
+| 4-node ring | 0.987 | None (too small) |
+| 8-node random | 0.824 (**↓ from 0.940 at p=4**) | YES — depth plateau |
+| 16-node random | 0.840 (**↑ from 0.809 at p=4**) | NO — monotone improvement |
+
+**Pearl causal structure (DAG)**:
+
+```
+Graph_Topology → [Standard_Plateau_Risk, Landscape_Alignment]
+N_qubits → [H_gate_count_per_layer → Noise_Accumulation, Standard_Depth_Capacity]
+
+Gap = f(Landscape_Alignment - Noise_Accumulation, Standard_Plateau_Risk)
+```
+
+At 8-node: Standard QAOA **hit a barren plateau** (0.940→0.824 decline). This suppressed the denominator, making x-basis appear to "win" by comparison. The landscape benefit was real — but the gap collapse was partly a standard QAOA failure, not just an x-basis success.
+
+At 16-node: Standard QAOA **recovered** (0.809→0.840 improvement — no plateau). The comparison baseline rose. X-basis still improved (0.734→0.744) but the gap widened because standard improved faster. This means x-basis wasn't getting worse in absolute terms — standard was getting better.
+
+**Implication**: The "sweet spot" at 8-node is causally mediated by two independent factors that happened to align:
+1. Standard QAOA's 8-node barren plateau (problem-topology-specific, NOT size-monotone)
+2. X-basis landscape benefit peaking at intermediate graph complexity
+
+**Prediction**: If we find a 16-node topology where standard QAOA hits a barren plateau, x-basis should recover competitive advantage. The crossover is not purely size-driven — it is topology-and-depth driven. Formal test: hold N=16, vary graph topology (random dense vs. sparse ring vs. complete) and measure whether standard plateau behavior reappears.
+
+**Rival hypothesis status**: H_rival ("barren plateaus hit x-basis too") partially confirmed for x-basis absolute performance, but missed the causal structure. Standard QAOA's OWN plateau non-monotone behavior is the main driver of gap shape.
+
+---
+
 ## Connection to Prior Findings
 
 - **Finding 16** (parent): H-gate dual role + 18× gap reduction 4→8 node
