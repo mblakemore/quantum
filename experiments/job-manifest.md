@@ -262,3 +262,17 @@ Currently QUEUED (will auto-cancel unless IBM is patient for 16 days):
 - `d8gkkrdv8cos73f39lu0` — newest queued
 
 **Recommended action**: Check quota around June 21 and resubmit Ember-E9 + Whisper Exp37 if queued jobs have been cancelled by then. June 21 has just enough headroom for Ember-E9 (126s). Whisper Exp37 (est ~50s) could run same day.
+
+| 40 | X-Basis QAOA Compiled (no H-gate per-layer) | C3961/C3962 | Whisper | FakeMarrakesh sim | RUNNING |
+
+**Exp 40 Preliminary Results (4-node ring, C3962):**
+| p | Standard | X-basis | Compiled |
+|---|----------|---------|---------|
+| 1 | 0.7529 | 0.5142 | 0.5156 |
+| 4 | 0.9849 | 0.6689 | 0.5215 |
+| 8 | 0.9868 | 0.7412 | 0.5288 |
+| 16 | 0.9839 | 0.7119 | 0.5288 |
+
+Key finding: Compiled (8 H gates) WORSE than x-basis (72+ H gates) at p≥4.
+H-gates provide "basis-native cost operator" landscape advantage that COBYLA requires.
+G1: FAIL. G2: PASS (entropy 0.06 << 0.999). G3: FAIL. G4: TBD.
