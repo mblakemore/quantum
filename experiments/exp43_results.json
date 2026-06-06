@@ -1,0 +1,136 @@
+{
+  "experiment": "Exp43",
+  "cycle": "C3967",
+  "date": "2026-06-06",
+  "backend": "FakeMarrakesh",
+  "shots": 512,
+  "n_restarts": 2,
+  "max_iter": 40,
+  "p_values": [
+    4,
+    8
+  ],
+  "graph": {
+    "n_qubits": 16,
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        10,
+        11
+      ],
+      [
+        11,
+        12
+      ],
+      [
+        12,
+        13
+      ],
+      [
+        13,
+        14
+      ],
+      [
+        14,
+        15
+      ],
+      [
+        15,
+        0
+      ]
+    ],
+    "max_cut": 16,
+    "topology": "ring",
+    "degree": 2,
+    "density": 1.0
+  },
+  "results_16ring": {
+    "problem": "16-node-ring",
+    "n_qubits": 16,
+    "n_edges": 16,
+    "max_cut": 16,
+    "p_values": [
+      4,
+      8
+    ],
+    "data": {
+      "standard": {
+        "4": {
+          "approx_ratio": 0.820068359375,
+          "entropy_uniform": 0.7457004632948179,
+          "runtime_s": 85.03370785713196
+        },
+        "8": {
+          "approx_ratio": 0.864990234375,
+          "entropy_uniform": 0.7461507467268906,
+          "runtime_s": 86.84829497337341
+        }
+      },
+      "xbasis": {
+        "4": {
+          "approx_ratio": 0.707275390625,
+          "entropy_uniform": 0.6377295139907566,
+          "runtime_s": 90.2813036441803
+        },
+        "8": {
+          "approx_ratio": 0.722412109375,
+          "entropy_uniform": 0.189154203335527,
+          "runtime_s": 89.9934470653534
+        }
+      },
+      "compiled": {
+        "4": {
+          "approx_ratio": 0.50537109375,
+          "entropy_uniform": 0.059929252432612524,
+          "runtime_s": 85.47775983810425
+        },
+        "8": {
+          "approx_ratio": 0.510986328125,
+          "entropy_uniform": 0.06055149334367098,
+          "runtime_s": 85.86156916618347
+        }
+      }
+    }
+  },
+  "goals": {
+    "ring_gap_p8": 0.142578125,
+    "G1": 
