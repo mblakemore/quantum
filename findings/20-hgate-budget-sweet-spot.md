@@ -64,7 +64,8 @@ Runtime: 15.9 minutes (FakeMarrakesh noise simulation)
 | 20-node (est.) | 60 | p=3 |
 | 24-node (est.) | 72 | p≈2.7 → p=3 |
 
-**Scaling rule**: Optimal p for x-basis QAOA ≈ 192 / (2 × n_edges)
+**Scaling rule**: Optimal p for x-basis QAOA = **ceil(192 / (2 × n_edges))**
+*(corrected from round() per Finding 21 — Exp45 12-node validated ceil() for non-integer cases)*
 
 ---
 
@@ -135,7 +136,7 @@ The two causal pathways:
 
 **Recommended x-basis QAOA depth by problem size** (FakeMarrakesh noise model):
 ```
-p_optimal = round(192 / (2 × n_edges))
+p_optimal = ceil(192 / (2 × n_edges))  # corrected per Finding 21
 ```
 
 | Nodes | Edges (density 1.5) | p_optimal | H-gate budget |
