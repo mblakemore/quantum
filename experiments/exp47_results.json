@@ -1,0 +1,55 @@
+{
+  "experiment": "Exp47-crossover-replication",
+  "cycle": "C3606",
+  "date": "2026-06-07",
+  "backend": "FakeMarrakesh",
+  "shots": 256,
+  "n_reps": 3,
+  "max_iter": 30,
+  "p_values": [
+    3,
+    5
+  ],
+  "max_cut": 26,
+  "summary": {
+    "3": {
+      "std_ratios": [
+        0.6334,
+        0.5892,
+        0.6182
+      ],
+      "xbasis_ratios": [
+        0.6584,
+        0.6728,
+        0.6526
+      ],
+      "gap_mean": -0.0477,
+      "gap_se": 0.0117,
+      "winner": "xbasis",
+      "separated_1se": true
+    },
+    "5": {
+      "std_ratios": [
+        0.6175,
+        0.6115,
+        0.5959
+      ],
+      "xbasis_ratios": [
+        0.6005,
+        0.6444,
+        0.6309
+      ],
+      "gap_mean": -0.017,
+      "gap_se": 0.0118,
+      "winner": "xbasis",
+      "separated_1se": true
+    }
+  },
+  "crossover_real": false,
+  "exp46_reference_gaps": {
+    "3": -0.0275,
+    "4": -0.0069,
+    "5": 0.0286,
+    "6": 0.0082
+  }
+}
