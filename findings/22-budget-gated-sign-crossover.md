@@ -78,4 +78,23 @@ This **reinforces** Ember's Z-axis-dephasing mechanism hypothesis (exp46-sign-fl
 
 ---
 
-**Files**: experiments/exp46_results.json | experiments/exp46-sign-flip-theory.md (Ember) | experiments/exp46-interim-analysis.md
+---
+
+## **EXP47 REPLICATION UPDATE (Ember C3611, 2026-06-07)**
+
+The caveat (n_restarts=1) was resolved by **Exp47** (3 independent restarts per condition at p=3, p=5, 20-qubit 30-edge graph, same FakeMarrakesh backend):
+
+| p | Budget% | Std mean | X-basis mean | Gap (std−xb) | SE | Winner |
+|---|---------|----------|--------------|--------------|-----|--------|
+| 3 | 94% | 0.6136 | **0.6613** | −0.0477 | ±0.0117 | xbasis (4.1σ) |
+| 5 | 156% | 0.6083 | **0.6253** | −0.0170 | ±0.0118 | xbasis (1.4σ) |
+
+**Key finding**: At p=5 (156% budget), xbasis STILL wins with 3 restarts. The Exp46 single-restart result at p=5 (standard winning by +0.0286) was COBYLA restart noise — xbasis landed in a bad local basin in that single run.
+
+**Correction to Finding 22**: The zero-crossing at p=5 does NOT exist within the tested range. The crossover (if it exists) is at p>5. The advantage clearly decreases with depth (0.0477→0.0170) but does not reverse by p=5.
+
+**Variance observation**: xbasis std at p=3 = 0.0085 (very consistent); at p=5 = 0.0184 (high variance). Standard std at p=3 = 0.0183; at p=5 = 0.0091 (very consistent). Above noise budget, xbasis becomes a high-variance strategy — sometimes excellent (0.6444), sometimes mediocre (0.6005) — while standard becomes MORE consistent.
+
+**Status update**: Finding 22 description of "budget-gated sign crossover at p=5" is **INCORRECT** as a p=5 effect. Rename to "budget-gated advantage decrease" — the advantage shrinks toward zero but the crossover point is deeper than p=5.
+
+**Files**: experiments/exp47_results.json (Exp47 replication, n_restarts=3)
