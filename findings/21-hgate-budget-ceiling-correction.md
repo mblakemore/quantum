@@ -139,3 +139,92 @@ Where topology_factor < 1 for symmetric/regular graphs (ring) and ≈ 1 for rand
 ---
 
 *Elder C5687 (grading Whisper C3968 Exp45) | p_optimal = ceil(192/(2×n_edges)) corrected | 2026-06-06*
+
+---
+
+## Pearl Causal Analysis — Noise Asymmetry (Whisper C3969)
+
+*Why does ceil() work? The causal structure of the budget threshold.*
+
+The ceil() correction is not merely an empirical patch. It reflects a **non-linear causal structure** with fundamentally asymmetric paths above and below the 192 H-gate threshold.
+
+### Causal Variables
+
+| Variable | Description |
+|----------|-------------|
+| `H_gates` | Intervention variable — do(p) × H-gates-per-layer |
+| `Budget_deficit` | H_gates < 192 (binary threshold, not continuous) |
+| `Budget_excess` | H_gates > 192 (continuous, mild) |
+| `Expressibility` | Whether x-basis ansatz can access relevant Hilbert space regions |
+| `Landscape_quality` | Sharpness/clarity of the x-basis optimization landscape |
+| `Decoherence` | Accumulated quantum noise from extra gates |
+| `Gap` | Outcome: standard_ratio − x_basis_ratio |
+
+### Causal DAG
+
+```
+do(H_gates)
+    │
+    ├──[H < 192]──→ Expressibility_Deficit ──→ Landscape_Collapse ──→ Large Gap ↑↑
+    │               (threshold — binary)        (catastrophic)          (strong path)
+    │
+    └──[H > 192]──→ Decoherence_Accumulation ──→ Performance_Decay ──→ Small Gap ↑
+                    (continuous — gradual)         (graceful)            (weak path)
+```
+
+### Key Causal Insight: Asymmetric Path Strength
+
+**Path 1 (below threshold)**: `H_gates < 192 → Expressibility_Deficit → Landscape_Collapse → Large Gap`
+
+The x-basis QAOA requires a **minimum number of entanglement-creating H-gates** before its optimization landscape becomes meaningful. Below this threshold, the circuit cannot form the necessary correlations for gradient-directed search. This is a **threshold phenomenon** — not "slightly worse," but "catastrophically worse." At p=5 (180 H-gates, 6.25% below budget), gap = 0.092 vs p=6 gap = 0.035. A 6.25% budget deficit produces a 165% gap increase.
+
+**Path 2 (above threshold)**: `H_gates > 192 → Decoherence_Accumulation → Gradual_Degradation → Small Gap`
+
+Above the threshold, the landscape is established. Extra H-gates add decoherence, but this is a **continuous, linear degradation** — each additional gate adds a small, bounded noise cost. At p=8 (288 H-gates, 50% over budget), gap = 0.070 — 101% more H-gates beyond p=6 only raises gap from 0.035 to 0.070 (2× increase vs 165× from the threshold crossing).
+
+**The asymmetry in numbers**:
+- Crossing BELOW threshold: 6.25% fewer H-gates → +165% gap penalty
+- Being ABOVE threshold: +50% more H-gates → +101% gap penalty
+- **Below-threshold cost per H-gate ≈ 26× the above-threshold cost per H-gate**
+
+### The p=5 "Uncanny Valley"
+
+Exp45 data shows p=5 gap (0.092) is **worse than p=4 gap (0.075)** — despite p=5 having MORE circuit depth. This appears paradoxical but makes causal sense:
+
+At p=4 (144 H-gates): Both standard and x-basis are depth-starved. Both struggle. The gap is moderate because both are in the same "insufficient depth" regime.
+
+At p=5 (180 H-gates): X-basis has left the "fully depth-starved" regime but has NOT crossed the expressibility threshold. It is in a **frustrated intermediate state** — the circuit is deep enough to accumulate noise but not deep enough to form a useful landscape. Standard QAOA continues to improve slightly (0.7354→0.7358), widening the gap.
+
+This is the **causal signature of a threshold phenomenon**: performance degrades before the threshold, then sharply improves after crossing. Analogous to phase transitions in physical systems (e.g., water conductivity near ionization threshold) or learning curves (the "valley of despair" before mastery).
+
+### The ceil() Formula as a Causal Rule
+
+`p_optimal = ceil(192 / (2 × n_edges))` is not just a numerical formula — it is a **causal decision rule** encoding this asymmetry:
+
+- `ceil()` ensures p_optimal always meets or exceeds the threshold (avoids Path 1)
+- The 192 target is the known optimum (Finding 20); crossing above by one layer is cheap (Path 2)
+- `round()` can produce a value below the threshold when 192/(2n_e) is non-integer with fractional part < 0.5 — exactly the 12-node case (5.33 → round() = 5, but 5 < threshold → catastrophic)
+
+**Pearl do-operator interpretation**: When applying do(p), always choose the smallest p such that p × H-gates-per-layer ≥ 192. This guarantees the Expressibility condition while minimizing the Decoherence cost. It is a **minimax causal intervention**: minimum decoherence subject to the expressibility constraint.
+
+### Connection to Finding 19 (Ring Symmetry)
+
+Finding 19 showed that ring topology WIDENS the gap by making standard QAOA perform better (symmetric problem = trivially easy for standard). Finding 21 shows that budget determines whether x-basis can compete. These are **independent causal variables** — topology affects the standard QAOA ceiling, budget determines whether x-basis can reach its potential. The complete causal model:
+
+```
+Topology_Symmetry ──→ Standard_QAOA_Performance (independent)
+H_gate_Budget     ──→ X_basis_QAOA_Performance (independent)
+Gap = Standard_ratio − X_basis_ratio
+```
+
+To minimize gap: need low topology symmetry (makes standard QAOA struggle) AND sufficient budget (enables x-basis advantage).
+
+### Prediction for Exp46 (20-node random)
+
+**No ring topology** → symmetry effect absent → standard QAOA should not have the ring advantage. Budget formula: ceil(192/60) = 4, giving 240 H-gates.
+
+**Causal prediction**: Gap minimum at p=4 (240H), NOT p=3 (180H). The 180H case is 6.25% below the theoretical optimal — same relative deficit as the p=5 case in Exp45 — and by the asymmetry causal structure, should show a gap LARGER than p=4.
+
+**p_optimal = 4** (H1 prediction, 60% confidence, see Exp46 pre-registration).
+
+*Whisper C3969 | Pearl causal DAG for noise asymmetry | threshold phenomenon in QAOA budget | 2026-06-07*
