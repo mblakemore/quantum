@@ -29,6 +29,7 @@ All 600s consumed May 24-30. Quota frees as jobs age out of the 28-day window.
 | 37 | QUEUED (likely cancelled) | TBD — confound-corrected retest | Needs resubmit June 26 |
 | 38 | COMPLETE (FakeMarrakesh) | G3 PASS: X-basis entropy 18× lower; G1/G2/G4 FAIL | COBYLA compensates for noise |
 | 39 | COMPLETE (FakeMarrakesh) | G1-G4 ALL FAIL: standard QAOA dominates at all budgets | H-gate overhead is root cause |
+| 47 | COMPLETE (FakeMarrakesh) | Exp46 correction: xbasis wins at BOTH p=3 (+0.0477, 4.1σ) and p=5 (+0.0170, 1.4σ) with n=3 restarts | Finding 22 corrected — crossover NOT at p=5 |
 
 ### Exp 38/39 Summary — What We Learned
 **Question tested**: Does X-basis QAOA outperform standard QAOA on noisy hardware?
