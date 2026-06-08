@@ -1,0 +1,134 @@
+{
+  "experiment": "Exp48-variance-depth-profile",
+  "continuation": true,
+  "continuation_cycle": "C3990",
+  "original_cycle": "C3613",
+  "date": "2026-06-08",
+  "backend": "FakeMarrakesh",
+  "shots": 256,
+  "n_reps": 5,
+  "max_iter": 30,
+  "p_values": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "max_cut": 26,
+  "p2_p3_source": "seeded from prior run log (Jun 7 13:53 UTC)",
+  "summary": {
+    "2": {
+      "std_ratios": [
+        0.6363,
+        0.6077,
+        0.5747,
+        0.6071,
+        0.6286
+      ],
+      "xbasis_ratios": [
+        0.5568,
+        0.645,
+        0.6418,
+        0.6907,
+        0.5975
+      ],
+      "std_mean": 0.6109,
+      "std_std": 0.0239,
+      "xb_mean": 0.6264,
+      "xb_std": 0.051,
+      "gap_mean": 0.0155,
+      "gap_se": 0.0252,
+      "xbasis_wins_mean": true,
+      "variance_crossover": true
+    },
+    "3": {
+      "std_ratios": [
+        0.5981,
+        0.6196,
+        0.5941,
+        0.6274,
+        0.6318
+      ],
+      "xbasis_ratios": [
+        0.5751,
+        0.595,
+        0.5924,
+        0.6671,
+        0.6735
+      ],
+      "std_mean": 0.6142,
+      "std_std": 0.0171,
+      "xb_mean": 0.6206,
+      "xb_std": 0.046,
+      "gap_mean": 0.0064,
+      "gap_se": 0.022,
+      "xbasis_wins_mean": true,
+      "variance_crossover": true
+    },
+    "4": {
+      "std_ratios": [
+        0.6089,
+        0.5972,
+        0.6152,
+        0.6058,
+        0.5895
+      ],
+      "xbasis_ratios": [
+        0.5916,
+        0.684,
+        0.5916,
+        0.6774,
+        0.5993
+      ],
+      "std_mean": 0.6033,
+      "std_std": 0.0101,
+      "xb_mean": 0.6288,
+      "xb_std": 0.0476,
+      "gap_mean": 0.0255,
+      "gap_se": 0.0217,
+      "xbasis_wins_mean": true,
+      "variance_crossover": true
+    },
+    "5": {
+      "std_ratios": [
+        0.5957,
+        0.6082,
+        0.5968,
+        0.5874,
+        0.5977
+      ],
+      "xbasis_ratios": [
+        0.6737,
+        0.582,
+        0.5931,
+        0.6581,
+        0.6101
+      ],
+      "std_mean": 0.5972,
+      "std_std": 0.0074,
+      "xb_mean": 0.6234,
+      "xb_std": 0.0404,
+      "gap_mean": 0.0262,
+      "gap_se": 0.0184,
+      "xbasis_wins_mean": true,
+      "variance_crossover": true
+    }
+  },
+  "hypothesis_verdicts": {
+    "H1_xbasis_var_increases": false,
+    "H2_standard_var_decreases": true,
+    "H3_variance_crossover_exists": true,
+    "H4_xbasis_wins_mean_all_depths": true,
+    "variance_crossover_depths": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "bimodal_reference": {
+    "mu_trapped": 0.5875,
+    "mu_escaped": 0.6703
+  },
+  "runtime_continuation_sec": 19084.7
+}

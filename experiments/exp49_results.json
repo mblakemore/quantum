@@ -1,0 +1,65 @@
+{
+  "experiment": "exp49_seed_locked_escape",
+  "author": "Elder C5733 (continuation of C5727)",
+  "date": "2026-06-08",
+  "note": "Original run timed out at seed 49. This continuation adds seeds 49-51.",
+  "settings": {
+    "p_values": [
+      3,
+      5
+    ],
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "escape_threshold": 0.64,
+    "shots": 256,
+    "max_iter": 30,
+    "n_qubits": 20,
+    "n_edges": 30
+  },
+  "results": {
+    "3": {
+      "42": 0.6846,
+      "43": 0.6538,
+      "44": 0.6755,
+      "45": 0.6507,
+      "46": 0.6839,
+      "47": 0.683,
+      "48": 0.6875,
+      "49": 0.669,
+      "50": 0.6908,
+      "51": 0.6599
+    },
+    "5": {
+      "42": 0.598,
+      "43": 0.6391,
+      "44": 0.6442,
+      "45": 0.5928,
+      "46": 0.6376,
+      "47": 0.6345,
+      "48": 0.6553,
+      "49": 0.5866887019230769,
+      "50": 0.6876502403846154,
+      "51": 0.5973557692307693
+    }
+  },
+  "analysis": {
+    "pearson_r": 0.571979490607146,
+    "pearson_p": 0.08404602100476095,
+    "consistency_rate": 0.3,
+    "consistent_count": 3,
+    "n_seeds": 10
+  },
+  "verdict": "H3 SUPPORTED (partial)",
+  "interpretation": "Mixed mechanism. r=0.572 in partial range.",
+  "runtime_seconds_continuation": 3117.8
+}
