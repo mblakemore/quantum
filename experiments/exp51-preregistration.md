@@ -57,23 +57,28 @@ p = 3 (6 parameters — same as Exp49 p=3 to enable direct comparison with Findi
 **Phase C** (optional, if budget allows): COBYLA, p=3, MAX_ITER=30, shots=1024, seeds 42-51 → H3 test
 
 ### Cross-Experiment Control
-Run Phase A first to verify COBYLA still produces ~40% (controls for any code changes between Exp50c and Exp51).
-If Phase A shows significantly different result from Exp50c (e.g., <30% or >60%), investigate before running SPSA.
+Run Phase A first to verify COBYLA still produces ~70% (updated from 40% baseline: Exp50c Phase C final = 7/10=70% at p=3, C3690).
+If Phase A shows <50% → investigate code changes. If Phase A shows >80% → shot-noise was particularly favorable, note as baseline.
+
+**BASELINE UPDATE (C3690)**: Exp50c Phase C COMPLETE (7/10=70%). Original preregistration assumed 40% COBYLA baseline. Updated expected baseline: ~70%. All thresholds revised below.
 
 ---
 
-## Pre-Registered Outcomes
+## Pre-Registered Outcomes (REVISED C3690 — updated baseline 70%)
 
 | Outcome | H1 result | What it means |
 |---------|-----------|---------------|
-| SPSA ≥ 60% escape | H1 CONFIRMED | Algorithm matters more than shots; SPSA recommended for future work |
-| SPSA 40-55% escape | H1 PARTIAL | SPSA marginal improvement; shots may be the bottleneck |
-| SPSA ≤ 40% escape | H1 REFUTED | The 40% is landscape-determined; optimizer doesn't matter; need more shots |
+| SPSA ≥ 80% escape | H1 CONFIRMED | SPSA outperforms COBYLA at same shots; algorithm design matters |
+| SPSA 65-79% escape | H1 PARTIAL | Marginal improvement; shot-noise remains dominant factor |
+| SPSA ≤ 65% escape | H1 REFUTED | Algorithm doesn't matter; 70% is landscape floor for p=3 at 256 shots |
 
 | Outcome | H3 result | What it means |
 |---------|-----------|---------------|
-| COBYLA/1024-shot ≥ 70% | H3 CONFIRMED | Shots, not algorithm — use COBYLA + more shots |
-| COBYLA/1024-shot ~40% | H3 REFUTED | Even high-shot COBYLA cannot escape; SPSA + shots needed |
+| COBYLA/1024-shot ≥ 85% | H3 CONFIRMED (strong) | More shots substantially raise escape rate; shot-depression real |
+| COBYLA/1024-shot 75-84% | H3 CONFIRMED (weak) | Modest shot improvement; law of diminishing returns |
+| COBYLA/1024-shot ≤ 74% | H3 REFUTED | Shots don't help much; algorithm is the bottleneck |
+
+Note: H3 threshold raised from ≥70% to ≥85% because COBYLA at 256-shots already achieves 70%. 1024 shots (4×) should produce meaningful improvement if shot-depression hypothesis is correct.
 
 ---
 
