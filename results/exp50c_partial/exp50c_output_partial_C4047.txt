@@ -1,0 +1,29 @@
+Exp50c: COBYLA Best-Tracking Fix — Clean H1_budget Test
+Graph: 20 qubits, 30 edges
+Seeds: [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+Escape threshold: 0.64
+Fix: optimize_with_cached_circuit_v2 (best-ever, not final position)
+
+MaxCut = 26
+
+=== PHASE A: p=5, MAX_ITER=30 (Exp49 replication with best-tracking) ===
+  [A 01/10] p=5 seed=42 iter=30 ... 0.6492 [ESCAPED]  Exp49=0.5980[T] delta=+0.0512  2303s
+  [A 02/10] p=5 seed=43 iter=30 ... 0.5928 [trapped]  Exp49=0.6391[T] delta=-0.0463  1874s
+  [A 03/10] p=5 seed=44 iter=30 ... 0.6785 [ESCAPED]  Exp49=0.6442[E] delta=+0.0343  1133s
+  [A 04/10] p=5 seed=45 iter=30 ... 0.6079 [trapped]  Exp49=0.5928[T] delta=+0.0151  1072s
+  [A 05/10] p=5 seed=46 iter=30 ... 0.6300 [trapped]  Exp49=0.6376[T] delta=-0.0076  1077s
+  [A 06/10] p=5 seed=47 iter=30 ... 0.6206 [trapped]  Exp49=0.6345[T] delta=-0.0139  1080s
+  [A 07/10] p=5 seed=48 iter=30 ... 0.5882 [trapped]  Exp49=0.6553[E] delta=-0.0671  1064s
+  [A 08/10] p=5 seed=49 iter=30 ... 0.6902 [ESCAPED]  Exp49=0.5867[T] delta=+0.1035  1038s
+  [A 09/10] p=5 seed=50 iter=30 ... 0.6840 [ESCAPED]  Exp49=0.6877[E] delta=-0.0037  1038s
+  [A 10/10] p=5 seed=51 iter=30 ... 0.6531 [ESCAPED]  Exp49=0.5974[T] delta=+0.0557  1039s
+
+Phase A escape rate: 4/10 = 40%  (Exp49 baseline: 30%)
+Phase A total time: 12693s
+
+=== PHASE B: p=5, MAX_ITER=50 (clean H1_budget test) ===
+  [B 01/10] p=5 seed=42 iter=50 ... 0.5930 [trapped]  PhaseA=0.6372[T] delta=-0.0442  1737s
+  [B 02/10] p=5 seed=43 iter=50 ... 0.6824 [ESCAPED]  PhaseA=0.5928[T] delta=+0.0895  1732s
+  [B 03/10] p=5 seed=44 iter=50 ... 0.5972 [trapped]  PhaseA=0.6785[E] delta=-0.0813  1759s
+  [B 04/10] p=5 seed=45 iter=50 ... 0.6074 [trapped]  PhaseA=0.6079[T] delta=-0.0005  1746s
+  [B 05/10] p=5 seed=46 iter=50 ... 0.6702 [ESCAPED]  PhaseA=0.6300[T] delta=+0.0403  2669s
