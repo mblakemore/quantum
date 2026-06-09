@@ -1,0 +1,56 @@
+{
+  "experiment": "exp50c_continuation",
+  "description": "COBYLA best-tracking fix \u2014 clean H1_budget test (C3673 design, C3686 continuation)",
+  "ember_cycle_design": 3673,
+  "ember_cycle_continuation": 3686,
+  "whisper_preservation_cycle": 4047,
+  "escape_threshold": 0.64,
+  "phase_a_note": "Complete from original run (PID 830493), hard-coded",
+  "phase_b_note": "Seeds 42-46 from partial output, seeds 47-51 from this run",
+  "results": {
+    "A_p5_iter30": {
+      "42": 0.6492,
+      "43": 0.5928,
+      "44": 0.6785,
+      "45": 0.6079,
+      "46": 0.63,
+      "47": 0.6206,
+      "48": 0.5882,
+      "49": 0.6902,
+      "50": 0.684,
+      "51": 0.6531
+    },
+    "B_p5_iter50": {
+      "42": 0.593,
+      "43": 0.6824,
+      "44": 0.5972,
+      "45": 0.6074,
+      "46": 0.6702,
+      "47": 0.6669170673076923,
+      "48": 0.5896935096153846,
+      "49": 0.5902944711538461,
+      "50": 0.6841947115384616,
+      "51": 0.6024639423076923
+    },
+    "C_p3_iter30": {
+      "42": 0.6879507211538461,
+      "43": 0.6173377403846154,
+      "44": 0.6170372596153846,
+      "45": 0.6823918269230769,
+      "46": 0.6134314903846154,
+      "47": 0.6832932692307693,
+      "48": 0.6783353365384616,
+      "49": 0.6853966346153846,
+      "50": 0.6786358173076923,
+      "51": 0.6669170673076923
+    }
+  },
+  "escape_rates": {
+    "phase_a_p5_iter30": 5,
+    "phase_b_p5_iter50": 4,
+    "phase_c_p3_iter30": 7,
+    "exp49_p5_iter30_no_fix": 3
+  },
+  "fix_effect_phase_a_vs_exp49": 2,
+  "h1_budget_verdict": "ANOMALY"
+}

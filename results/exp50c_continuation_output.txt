@@ -1,0 +1,49 @@
+Exp50c Phase B+C Continuation — Ember C3686
+Resuming from PID 830493 kill (Whisper C4047 preservation)
+Phase A: DONE 4/10 = 40% escape (hard-coded)
+Phase B: seeds 42-46 DONE 2/5 partial, running seeds [47, 48, 49, 50, 51]
+Phase C: ALL 10 seeds pending (p=3, MAX_ITER=30)
+
+MaxCut = 26
+
+=== PHASE B CONTINUATION: seeds 47-51 (p=5, MAX_ITER=50) ===
+  (Seeds 42-46 hard-coded: 2/5 escaped)
+  [B 06/10] p=5 seed=47 iter=50 ... 0.6669 [ESCAPED]  PhaseA=0.6206[T] delta=+0.0463  1726s
+  [B 07/10] p=5 seed=48 iter=50 ... 0.5897 [trapped]  PhaseA=0.5882[T] delta=+0.0015  1730s
+  [B 08/10] p=5 seed=49 iter=50 ... 0.5903 [trapped]  PhaseA=0.6902[E] delta=-0.0999  1728s
+  [B 09/10] p=5 seed=50 iter=50 ... 0.6842 [ESCAPED]  PhaseA=0.6840[E] delta=+0.0002  1729s
+  [B 10/10] p=5 seed=51 iter=50 ... 0.6025 [trapped]  PhaseA=0.6531[E] delta=-0.0506  1727s
+
+Phase B escape rate: 4/10 = 40%  (Phase A: 40%, H1_budget: should exceed)
+  [2/5 from partial + 2/5 from continuation = 4/10]
+
+=== PHASE C: p=3, MAX_ITER=30 (Exp49 replication — expected ~100% escape) ===
+  [C 01/10] p=3 seed=42 iter=30 ... 0.6880 [ESCAPED]  681s
+  [C 02/10] p=3 seed=43 iter=30 ... 0.6173 [trapped]  680s
+  [C 03/10] p=3 seed=44 iter=30 ... 0.6170 [trapped]  682s
+  [C 04/10] p=3 seed=45 iter=30 ... 0.6824 [ESCAPED]  682s
+  [C 05/10] p=3 seed=46 iter=30 ... 0.6134 [trapped]  680s
+  [C 06/10] p=3 seed=47 iter=30 ... 0.6833 [ESCAPED]  681s
+  [C 07/10] p=3 seed=48 iter=30 ... 0.6783 [ESCAPED]  683s
+  [C 08/10] p=3 seed=49 iter=30 ... 0.6854 [ESCAPED]  680s
+  [C 09/10] p=3 seed=50 iter=30 ... 0.6786 [ESCAPED]  682s
+  [C 10/10] p=3 seed=51 iter=30 ... 0.6669 [ESCAPED]  682s
+
+Phase C escape rate: 7/10 = 70%  (Exp49 p=3 baseline: 100%)
+Phase C total time: 6814s
+
+=================================================================
+EXP50C COMPLETE — RESULTS SUMMARY
+=================================================================
+Phase A (p=5, iter=30, best-tracking):  5/10 = 50%
+Phase B (p=5, iter=50, best-tracking):  4/10 = 40%
+Phase C (p=3, iter=30, best-tracking):  7/10 = 70%
+Exp49   (p=5, iter=30, NO best-track):  3/10 = 30% [reference]
+
+FIX EFFECT (Phase A vs Exp49):           +20% (best-tracking alone)
+
+VERDICT: ANOMALY — Phase B < Phase A despite best-tracking monotonicity
+  Investigate: initialization variance or theta_init reproducibility issue?
+
+Results saved to: /mnt/droid/repos/quantum/scripts/../findings/exp50c_results.json
+Exp50c COMPLETE.
