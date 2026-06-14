@@ -1,0 +1,32 @@
+=================================================================
+Exp51: SPSA vs COBYLA — Optimizer Noise Robustness Test
+Ember C3691 | 2026-06-11 21:15:18 UTC
+Phases: ['B']
+=================================================================
+
+MaxCut = 26
+
+=== PHASE B: SPSA p=3, MAX_ITER=50, shots=256 (H1 test) ===
+    (Each iteration = 2 function evals. Max evals = 100.)
+  [B 01/10] p=3 seed=42 iter=50 shots=256 ... 0.6002 [trapped]  PhaseA=N/A  2287s
+  [B 02/10] p=3 seed=43 iter=50 shots=256 ... 0.6119 [trapped]  PhaseA=N/A  2302s
+  [B 03/10] p=3 seed=44 iter=50 shots=256 ... 0.6026 [trapped]  PhaseA=N/A  2289s
+  [B 04/10] p=3 seed=45 iter=50 shots=256 ... 0.5742 [trapped]  PhaseA=N/A  2282s
+  [B 05/10] p=3 seed=46 iter=50 shots=256 ... 0.6866 [ESCAPED]  PhaseA=N/A  2288s
+  [B 06/10] p=3 seed=47 iter=50 shots=256 ... 0.6271 [trapped]  PhaseA=N/A  2286s
+  [B 07/10] p=3 seed=48 iter=50 shots=256 ... 0.6199 [trapped]  PhaseA=N/A  2285s
+  [B 08/10] p=3 seed=49 iter=50 shots=256 ... 0.6526 [ESCAPED]  PhaseA=N/A  2282s
+  [B 09/10] p=3 seed=50 iter=50 shots=256 ... 0.6843 [ESCAPED]  PhaseA=N/A  2281s
+  [B 10/10] p=3 seed=51 iter=50 shots=256 ... 0.5847 [trapped]  PhaseA=N/A  2284s
+
+Phase B (SPSA) escape rate: 3/10 = 30%  (H1: >= 80% = CONFIRMED, 65-79% = PARTIAL, <= 64% = REFUTED)
+
+=================================================================
+EXP51 SUMMARY
+=================================================================
+Phase B (SPSA, p=3, 50iter, shots=256):    3/10 = 30%  (H1 threshold: >= 80%)
+
+VERDICT H1: H1 REFUTED: SPSA no better than COBYLA — landscape-determined floor
+
+Results saved to: /mnt/droid/repos/quantum/scripts/../results/exp51_results.json
+Exp51 COMPLETE.

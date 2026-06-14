@@ -1,0 +1,29 @@
+=================================================================
+Exp51: SPSA vs COBYLA — Optimizer Noise Robustness Test
+Ember C3691 | 2026-06-09 12:56:33 UTC
+Phases: ['A']
+=================================================================
+
+MaxCut = 26
+
+=== PHASE A: COBYLA p=3, MAX_ITER=30, shots=256 (control) ===
+  [A 01/10] p=3 seed=42 iter=30 shots=256 ... 0.6851 [ESCAPED]  Exp50c=0.6880[E]  684s
+  [A 02/10] p=3 seed=43 iter=30 shots=256 ... 0.6202 [trapped]  Exp50c=0.6173[T]  682s
+  [A 03/10] p=3 seed=44 iter=30 shots=256 ... 0.6786 [ESCAPED]  Exp50c=0.6170[T]  682s
+  [A 04/10] p=3 seed=45 iter=30 shots=256 ... 0.5931 [trapped]  Exp50c=0.6824[E]  683s
+  [A 05/10] p=3 seed=46 iter=30 shots=256 ... 0.6803 [ESCAPED]  Exp50c=0.6134[T]  682s
+  [A 06/10] p=3 seed=47 iter=30 shots=256 ... 0.6098 [trapped]  Exp50c=0.6833[E]  682s
+  [A 07/10] p=3 seed=48 iter=30 shots=256 ... 0.6755 [ESCAPED]  Exp50c=0.6783[E]  681s
+  [A 08/10] p=3 seed=49 iter=30 shots=256 ... 0.6812 [ESCAPED]  Exp50c=0.6854[E]  681s
+  [A 09/10] p=3 seed=50 iter=30 shots=256 ... 0.6800 [ESCAPED]  Exp50c=0.6786[E]  681s
+  [A 10/10] p=3 seed=51 iter=30 shots=256 ... 0.5918 [trapped]  Exp50c=0.6669[E]  682s
+
+Phase A escape rate: 6/10 = 60%  (Exp50c Phase C baseline: 70%)
+
+=================================================================
+EXP51 SUMMARY
+=================================================================
+Phase A (COBYLA, p=3, 30iter, shots=256):  6/10 = 60%  (Exp50c baseline: 70%)
+
+Results saved to: /mnt/droid/repos/quantum/scripts/../results/exp51_results.json
+Exp51 COMPLETE.
