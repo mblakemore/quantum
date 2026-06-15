@@ -1,6 +1,6 @@
 # Exp37 Pre-Registration: Expected Results (C5603)
 **Pre-registered**: June 3, 2026 | Job: d8fu393o3njc73f0rsqg (ibm_kingston)
-**Status**: QUEUED — predictions locked before results available
+**Status**: ORIGINAL JOB CANCELLED (Jun 3). Replacement job d8gkkrdv8cos73f39lu0 on ibm_kingston QUEUED (Jun 4, 45 circuits confirmed = same Exp37 design). Pre-registered predictions apply to replacement job. Check: service.job('d8gkkrdv8cos73f39lu0').status(). Updated C4091.
 
 ## Pre-Registered Expectations
 
