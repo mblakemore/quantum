@@ -1,0 +1,56 @@
+======================================================================
+EXP52: Shot Budget Curve + SPSA Parity Test
+Ember C3708 | FakeMarrakesh (AerSimulator) | Seeds: [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+Escape threshold: 0.64
+======================================================================
+
+REUSED FROM EXP51:
+  cobyla_256sh: 6/10 = 0.60 (Exp51 Phase A)
+  spsa_256sh: 3/10 = 0.30 (Exp51 Phase B)
+  cobyla_1024sh: 9/10 = 0.90 (Exp51 Phase C)
+
+
+============================================================
+ARM: COBYLA_128sh | optimizer=COBYLA | shots=128 | seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+============================================================
+  seed=42: ratio=0.6541 ✓ ESCAPED (355.5s)
+  seed=43: ratio=0.6647 ✓ ESCAPED (355.5s)
+  seed=44: ratio=0.6827 ✓ ESCAPED (355.4s)
+  seed=45: ratio=0.6629 ✓ ESCAPED (355.2s)
+  seed=46: ratio=0.6136 ✗ trapped (355.6s)
+  seed=47: ratio=0.6884 ✓ ESCAPED (355.1s)
+  seed=48: ratio=0.6842 ✓ ESCAPED (355.2s)
+  seed=49: ratio=0.5925 ✗ trapped (355.2s)
+  seed=50: ratio=0.6899 ✓ ESCAPED (355.4s)
+  seed=51: ratio=0.6019 ✗ trapped (355.8s)
+
+  ARM RESULT: 7/10 = 0.70 escape rate
+
+============================================================
+ARM: COBYLA_512sh | optimizer=COBYLA | shots=512 | seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+============================================================
+  seed=42: ratio=0.6831 ✓ ESCAPED (1341.4s)
+  seed=43: ratio=0.6910 ✓ ESCAPED (1336.7s)
+  seed=44: ratio=0.6915 ✓ ESCAPED (1336.4s)
+  seed=45: ratio=0.5807 ✗ trapped (1339.8s)
+  seed=46: ratio=0.6814 ✓ ESCAPED (1336.8s)
+  seed=47: ratio=0.5895 ✗ trapped (1335.6s)
+  seed=48: ratio=0.6852 ✓ ESCAPED (1341.5s)
+  seed=49: ratio=0.6840 ✓ ESCAPED (1336.2s)
+  seed=50: ratio=0.6831 ✓ ESCAPED (1336.1s)
+  seed=51: ratio=0.6799 ✓ ESCAPED (1337.9s)
+
+  ARM RESULT: 8/10 = 0.80 escape rate
+
+============================================================
+ARM: COBYLA_2048sh | optimizer=COBYLA | shots=2048 | seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+============================================================
+  seed=42: ratio=0.6834 ✓ ESCAPED (5232.6s)
+  seed=43: ratio=0.6867 ✓ ESCAPED (5225.5s)
+  seed=44: ratio=0.6884 ✓ ESCAPED (5222.5s)
+  seed=45: ratio=0.6867 ✓ ESCAPED (5226.4s)
+  seed=46: ratio=0.6829 ✓ ESCAPED (5223.0s)
+  seed=47: ratio=0.6719 ✓ ESCAPED (5229.7s)
+  seed=48: ratio=0.6803 ✓ ESCAPED (5236.3s)
+  seed=49: ratio=0.6837 ✓ ESCAPED (5250.5s)
+  seed=50: ratio=0.6843 ✓ ESCAPED (5258.1s)

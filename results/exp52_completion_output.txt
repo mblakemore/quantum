@@ -1,0 +1,28 @@
+======================================================================
+EXP52 COMPLETION — Ember C3725
+Running: COBYLA_2048sh seed=51 + SPSA_512sh + SPSA_1024sh
+======================================================================
+
+============================================================
+COMPLETING ARM: COBYLA_2048sh (seed=51 only)
+============================================================
+  [COBYLA_2048sh] seed=51: ratio=0.5984 ✗ trapped (5265.2s)
+
+  COBYLA_2048sh FINAL: 9/10 = 0.90 escape rate
+
+============================================================
+ARM: SPSA_512sh | optimizer=SPSA | shots=512 | seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+============================================================
+Traceback (most recent call last):
+  File "/mnt/droid/repos/quantum/scripts/run_exp52_completion.py", line 253, in <module>
+    main()
+  File "/mnt/droid/repos/quantum/scripts/run_exp52_completion.py", line 144, in main
+    spsa_512_results, spsa_512_escaped, spsa_512_rate = run_arm(
+                                                        ^^^^^^^^
+  File "/mnt/droid/repos/quantum/scripts/run_exp52_completion.py", line 107, in run_arm
+    ratio, escaped = run_single_seed(
+                     ^^^^^^^^^^^^^^^^
+  File "/mnt/droid/repos/quantum/scripts/run_exp52_completion.py", line 87, in run_single_seed
+    ratio = optimize_spsa(
+            ^^^^^^^^^^^^^^
+TypeError: optimize_spsa() missing 1 required positional argument: 'max_iter'
