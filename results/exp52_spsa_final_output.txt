@@ -9,3 +9,56 @@ ARM: SPSA_512sh | optimizer=SPSA | shots=512 | seeds=[42, 43, 44, 45, 46, 47, 48
 ============================================================
   [SPSA_512sh] seed=42: ratio=0.5886 ✗ trapped (2690.6s)
   [SPSA_512sh] seed=43: ratio=0.6028 ✗ trapped (2678.9s)
+  [SPSA_512sh] seed=44: ratio=0.6027 ✗ trapped (2942.5s)
+  [SPSA_512sh] seed=45: ratio=0.5620 ✗ trapped (5350.8s)
+  [SPSA_512sh] seed=46: ratio=0.6623 ✓ ESCAPED (5372.1s)
+  [SPSA_512sh] seed=47: ratio=0.6253 ✗ trapped (5373.9s)
+  [SPSA_512sh] seed=48: ratio=0.6117 ✗ trapped (5355.2s)
+  [SPSA_512sh] seed=49: ratio=0.6316 ✗ trapped (5433.3s)
+  [SPSA_512sh] seed=50: ratio=0.6831 ✓ ESCAPED (5384.1s)
+  [SPSA_512sh] seed=51: ratio=0.5781 ✗ trapped (5548.4s)
+
+  ARM RESULT: 2/10 = 0.20 escape rate
+
+============================================================
+ARM: SPSA_1024sh | optimizer=SPSA | shots=1024 | seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+============================================================
+Traceback (most recent call last):
+  File "/mnt/droid/repos/quantum/scripts/run_exp52_spsa_final.py", line 189, in <module>
+    main()
+  File "/mnt/droid/repos/quantum/scripts/run_exp52_spsa_final.py", line 105, in main
+    spsa_1024_results, spsa_1024_escaped, spsa_1024_rate = run_spsa_arm(
+                                                           ^^^^^^^^^^^^^
+  File "/mnt/droid/repos/quantum/scripts/run_exp52_spsa_final.py", line 72, in run_spsa_arm
+    ratio = optimize_spsa(
+            ^^^^^^^^^^^^^^
+  File "/mnt/droid/repos/quantum/scripts/run_exp51_spsa_vs_cobyla.py", line 109, in optimize_spsa
+    f_minus = evaluate_with_transpiled(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/droid/repos/quantum/scripts/run_exp46_fast.py", line 126, in evaluate_with_transpiled
+    counts = job.result().get_counts()
+             ^^^^^^^^^^^^
+  File "/home/mike/.local/lib/python3.12/site-packages/qiskit_aer/jobs/utils.py", line 38, in _wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mike/.local/lib/python3.12/site-packages/qiskit_aer/jobs/aerjob.py", line 96, in result
+    return self._future.result(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mike/.local/lib/python3.12/site-packages/qiskit_aer/backends/aerbackend.py", line 474, in _execute_circuits_job
+    output = self._execute_circuits(aer_circuits, noise_model, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mike/.local/lib/python3.12/site-packages/qiskit_aer/backends/aer_simulator.py", line 906, in _execute_circuits
+    ret = cpp_execute_circuits(self._controller, aer_circuits, noise_model, config)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mike/.local/lib/python3.12/site-packages/qiskit_aer/backends/backend_utils.py", line 446, in cpp_execute_circuits
+    return controller.execute(aer_circuits, noise_model, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: QuantumError: invalid probability vector total (1.000000!= 1)

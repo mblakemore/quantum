@@ -1,0 +1,15 @@
+============================================================
+EXP53: Depth vs Shots Tradeoff (p=5 COBYLA, FakeMarrakesh)
+Author: Elder C5852 | Pre-reg: C5846
+P_DEPTH=5, MAX_ITER=50, SEEDS=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+============================================================
+
+Reused baselines (no rerun):
+  cobyla_p3_256sh: 6/10 = 60% (Exp51 Phase A)
+  cobyla_p3_1024sh: 9/10 = 90% (Exp51 Phase C)
+
+============================================================
+ARM: Arm-C (p=5, 256sh) | p=5 | shots=256 | seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+============================================================
+Graph: 20n, 30e | MaxCut=26 | Threshold=16.6
+Circuit: 20q, depth=363, CX/CZ=300

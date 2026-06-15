@@ -40,6 +40,32 @@ SEEDS = list(range(42, 52))  # Same as Exp51/52
 OPT_LEVEL = 1
 MAX_ITER_P5 = 50  # More iterations for p=5 (10 params vs 6)
 
+# C5860: per-seed checkpoint for observability + resume. The original launch ran
+# 15h+ block-buffered (zero output, no checkpoint) and any session-kill lost ALL
+# work. p=5 noisy-trajectory sim is far heavier than the 2-4h pre-reg estimate, so
+# results are now flushed to disk after EVERY seed — a dead/killed run resumes from
+# the last completed seed instead of restarting from zero.
+CHECKPOINT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               "..", "results", "exp53_checkpoint.json")
+
+
+def _load_checkpoint():
+    if os.path.exists(CHECKPOINT_PATH):
+        try:
+            with open(CHECKPOINT_PATH) as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError):
+            return {}
+    return {}
+
+
+def _save_checkpoint(ckpt):
+    os.makedirs(os.path.dirname(CHECKPOINT_PATH), exist_ok=True)
+    tmp = CHECKPOINT_PATH + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(ckpt, f, indent=2)
+    os.replace(tmp, CHECKPOINT_PATH)  # atomic — never leaves a half-written file
+
 # ============================================================
 # REUSED DATA FROM EXP51 (p=3, verified same seeds/threshold/noise)
 # ============================================================
@@ -51,10 +77,16 @@ EXP51_REUSED = {
 
 def run_arm_depth(arm_label, p, shots, seeds, max_iter=30):
     """Run one arm. Returns (results_list, escaped_count, rate)."""
-    print(f"\n{'='*60}")
+    print(f"\n{'='*60}", flush=True)
     print(f"ARM: {arm_label} | p={p} | shots={shots} | seeds={seeds}")
     print(f"Escape threshold: {ESCAPE_THRESHOLD} | max_iter={max_iter}")
-    print(f"{'='*60}")
+    print(f"{'='*60}", flush=True)
+
+    # Resume: skip seeds already completed in a prior (possibly killed) run.
+    ckpt = _load_checkpoint()
+    done = {int(r["seed"]): r for r in ckpt.get(arm_label, {}).get("data", [])}
+    if done:
+        print(f"  [resume] {len(done)} seed(s) already done: {sorted(done)}", flush=True)
 
     fake_backend = FakeMarrakesh()
     noise_model = NoiseModel.from_backend(fake_backend)
@@ -68,12 +100,14 @@ def run_arm_depth(arm_label, p, shots, seeds, max_iter=30):
     transpiled_qc = transpile(qc, backend=sim, optimization_level=OPT_LEVEL)
 
     print(f"  Circuit depth (transpiled): {transpiled_qc.depth()}")
-    print(f"  Parameters: {len(gamma_params) + len(beta_params)} ({len(gamma_params)} gammas + {len(beta_params)} betas)")
+    print(f"  Parameters: {len(gamma_params) + len(beta_params)} ({len(gamma_params)} gammas + {len(beta_params)} betas)", flush=True)
 
-    results = []
-    escaped_count = 0
+    results = [done[s] for s in seeds if s in done]
+    escaped_count = sum(1 for r in results if r["escaped"])
 
     for seed in seeds:
+        if seed in done:
+            continue
         np.random.seed(seed)
         t0 = time.time()
 
@@ -88,7 +122,7 @@ def run_arm_depth(arm_label, p, shots, seeds, max_iter=30):
 
         elapsed = time.time() - t0
         status = "✓ ESCAPED" if escaped else "✗ trapped"
-        print(f"  seed={seed}: ratio={ratio:.4f} {status} ({elapsed:.1f}s)")
+        print(f"  seed={seed}: ratio={ratio:.4f} {status} ({elapsed:.1f}s)", flush=True)
 
         results.append({
             "seed": seed,
@@ -97,8 +131,18 @@ def run_arm_depth(arm_label, p, shots, seeds, max_iter=30):
             "elapsed_s": float(elapsed)
         })
 
+        # Checkpoint after EVERY seed (atomic) so progress survives any kill.
+        ckpt = _load_checkpoint()
+        ckpt[arm_label] = {
+            "p": p, "shots": shots, "max_iter": max_iter,
+            "escaped": escaped_count, "completed": len(results),
+            "rate_so_far": escaped_count / len(results),
+            "data": results,
+        }
+        _save_checkpoint(ckpt)
+
     rate = escaped_count / len(seeds)
-    print(f"\n  ARM RESULT: {escaped_count}/{len(seeds)} = {rate:.2f} escape rate")
+    print(f"\n  ARM RESULT: {escaped_count}/{len(seeds)} = {rate:.2f} escape rate", flush=True)
     return results, escaped_count, rate
 
 

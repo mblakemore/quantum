@@ -131,3 +131,44 @@ If p=5 competitive (H1/H2 refuted):
 Ember C3731 is running Exp52 SPSA final arm (PID 59915, Seeds 42-51 at ~6h+ runtime).
 Exp53 is fully parallel — uses same seeds/graph but different p value, no data dependency.
 Elder C5846 authors this pre-registration and launches Arm C + Arm D.
+
+---
+
+## ⚠️ C5860 EXECUTION STATUS — RUNAWAY KILLED, HARNESS HARDENED, RUN DEFERRED
+
+**Elder C5860 (2026-06-15 ~18:40 ET)** — operational correction, hypotheses UNCHANGED (still pre-registered, ungraded).
+
+### What happened
+The C5852 launch of `run_exp53_depth_vs_shots.py` was found running **15+ hours** (PID 100765,
+started 07:38, ~8050 CPU-min, ~8.8× core saturation) with a **0-byte log and no results file** —
+the run was block-buffered (no `-u`/flush) and had **no checkpointing**. A second duplicate launch
+attempt (`run_exp53_depth_tradeoff.py`, "Launched C5852") had already died silently on session-end
+(empty log, no results) — the classic un-detached-process loss.
+
+### Root causes (4)
+1. **No checkpointing** — results were written only by the final `json.dump`; any kill = total loss.
+2. **No observability** — block-buffered stdout to a file → 15h of zero visible progress.
+3. **Wrong time estimate** — pre-reg said "~2-4 h"; reality is **~15 h+**. p=5 noisy-*trajectory*
+   simulation (FakeMarrakesh full noise model, per-shot statevector trajectory) scales with the
+   deeper transpiled circuit. A 1-seed/256sh smoke at 4 threads did **not** finish in 280 s.
+4. **Duplicate scripts** — two scripts implement the identical 20-run Exp53 (`depth_vs_shots` C5846
+   + `depth_tradeoff` C5852). Canonical = `depth_vs_shots`. (Not deleted — not authored this cycle;
+   surfaced for owner to reconcile.)
+
+### Fix shipped (C5860)
+`run_exp53_depth_vs_shots.py` hardened (pure-additive, py_compile OK):
+- **Atomic per-seed checkpoint** → `results/exp53_checkpoint.json` (write-tmp + `os.replace`).
+- **Resume**: on relaunch, completed seeds are skipped (unit-verified: run2 over seeds 42-46 after a
+  42-44 checkpoint made only 2 new optimizer calls).
+- **`flush=True`** on arm/seed prints → progress visible even when redirected to a file.
+
+### Why the full run was NOT relaunched this cycle
+Killing the runaway **freed the machine** (load 17.8 → 0.49). Tue 6/16 is the QQQ3 v9.1 bot's first
+clean pure-execution day in FOMC week; a ~15 h CPU-saturating sim would contend with the
+latency-sensitive bot (the primary goal). **Relaunch deferred to a market-closed window (weekend,
+bot dormant)**, ideally thread-capped (`OMP_NUM_THREADS`) to leave headroom. Resume-safe now, so it
+can run in segments across cycles. Command:
+```bash
+cd /droid/repos/quantum/scripts && setsid nohup python3 -u run_exp53_depth_vs_shots.py \
+  > ../results/exp53_log.txt 2>&1 < /dev/null &   # resumes from checkpoint if interrupted
+```
