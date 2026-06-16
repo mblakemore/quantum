@@ -192,6 +192,24 @@ This section is *practical*: what should an algorithm designer, a quantum-softwa
 7. **Treat ±7 percentage-point daily calibration drift (Finding 07) as the dominant variance.** Reproductions of any single absolute number should be benchmarked against the calibration date in the job manifest, not against the abstract published value.
    > *ELI5: The chip's "score" naturally wobbles by ±7 percentage points day to day. If you try to repeat our result on a different day, expect to land within that window.*
 
+### Strategic Frontier — Three Prioritized Open Questions (next iterations)
+
+*Added C4108 (Whisper). The tactical ORQ list below (items 1–8) tracks specific follow-ups to individual
+findings. This layer sits above it: three **greater questions** chosen because our proven capability envelope —
+shallow circuits, hybrid quantum/classical, width-cheap/depth-walled, and **structured (not random) noise** —
+makes them tractable here, where most framings assume fault-tolerant hardware we don't have. Each is matched
+to an existing evidence base and targeted at a concrete next experiment.*
+
+| Priority | Greater question | Why tractable *here* | Builds on | First iteration |
+|----------|------------------|----------------------|-----------|-----------------|
+| **P1 — Noise-as-Resource** | Can the chip's **structured** noise be a *computational resource* that helps QAOA escape optimization traps, rather than only a penalty to remove? | Findings 06/07 proved removal backfires; Finding 04 proved the noise is coherent/structured; the live Exp49–53 arc is all about trap-escape. The contrarian, falsifiable bet: noise lowers the *ceiling* but raises the *floor* (escape probability on trapped instances). | Findings 04, 06, 07; Exp49–53 (Findings 24–27) | **Exp55** — pre-registered: [`exp55-noise-assisted-escape-preregistration.md`](experiments/exp55-noise-assisted-escape-preregistration.md). Noiseless vs structured vs matched-depolarizing on trapped seeds; H3 noiseless re-eval guards against variance artifacts. Shallow p=3, simulator-first, hardware tier budget-gated. |
+| **P2 — Quantum Causal Structure** | Does causal reasoning need a *new calculus* on quantum systems — can we empirically witness **indefinite causal order** (the "quantum switch") as a resource Pearl's do-calculus cannot represent? | Low-depth (our sweet spot); we already ran CHSH/Bell at 2.74 (Finding 01). Connects the network's causal-reasoning layer to physics; tests the boundary of classical causal inference on real silicon. | Finding 01 (CHSH 96.8%); Pearl do-calculus | **Exp56 (proposed)** — quantum-switch causal-witness circuit on a calibration-gated pair; measure causal nonseparability witness vs a definite-order control. Pre-reg gate: witness > 0 beyond ±7pp drift. *Pre-registration not yet drafted.* |
+| **P3 — NISQ Replication Audit** | **How much of the published NISQ "quantum-advantage" literature replicates** on real hardware under honest, pre-registered, budgeted conditions? | This network's method (pre-registration + adversarial verification + real-hardware budgets) is uniquely suited; we've already refuted QEC benefit (F06) and all four mitigation tricks (F07). Answers *where the real boundary of useful quantum computing is today.* | Findings 06, 07; full methodology | **Exp57 (proposed)** — select 3–5 high-citation NISQ advantage claims with reproducible circuits; re-run under the repo's pre-reg + job-manifest discipline; report replicate / partial / fails-to-replicate. *Scoping pass needed to pick targets.* |
+
+**Sequencing**: P1 is **active next** (pre-registered, slots after Exp54 warm-start, reuses the Exp53 harness). P2 and P3 are **proposed** and need pre-registrations drafted; P2 is the deepest (new physics-adjacent ground), P3 is the highest service-to-field (reproducibility). All three are bounded to this hardware generation by design — the ambition is sharp, real-silicon, pre-registered contributions, not universal claims.
+
+---
+
 ### Open Research Questions (next campaigns)
 
 1. **Does X-basis immunity generalize across the heavy-hex family?** Replicate Finding 03 on `ibm_torino`, `ibm_kingston`, and any future Heron-r3 backend. If yes → upgrade from substrate-specific observation to architectural principle. (Pre-reg gate: ≥2× X/Z fidelity ratio on at least one independent backend.)
