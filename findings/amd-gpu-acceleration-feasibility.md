@@ -106,3 +106,54 @@ git clone -b release/rocm-rel-7.2 https://github.com/ROCm/hipCUB.git
 - GPU acceleration of qiskit-aer is **feasible**, blocked only by the rocThrust stack (building now) + a from-source Aer compile.
 - **Do not restart Exp53 for GPU.** Small-qubit statevector is the wrong regime for GPU; let it finish on CPU, target Exp54+, and benchmark the break-even first.
 - This is a multi-step build, not a pip install. Tracking to completion across cycles.
+
+---
+
+## C3754 — BUILD LANDED. GPU FUNCTIONAL on gfx1201. ✅
+
+Recloned rocPRIM/rocThrust/hipCUB on **release/rocm-rel-7.2** (vs master) → the
+`type_traits_functions.hpp` skew vanished. The build then surfaced 3 more gaps, each fixed:
+
+1. **Missing generated version headers** — header-only `cp` install skips the CMake-configured
+   `rocthrust_version.hpp` / `rocprim_version.hpp` / `hipcub_version.hpp`. Hand-generated all
+   three from the `.in` templates (all v4.2.0 → VERSION_NUMBER 400200).
+2. **`rocPRIM requires at least C++17`** — Aer pins the pybind module to `CXX_STANDARD 14`
+   (`cmake/FindPybind11.cmake:94`); release-branch rocPRIM needs C++17. Bumped to 17 (clang's
+   default already 17, so this was the only blocker).
+3. **`__shared__ double cache[_MAX_THD / _WS]` VLA error** — Aer assumes `warpSize` is constexpr
+   in ROCm (`src/misc/gpu_static_properties.hpp:21 #define _WS warpSize`); on ROCm 7.2/clang for
+   gfx1201 it is NOT, so the shared-array bound becomes a VLA. RDNA4 is **wave32** → hardcoded
+   `#define _WS 32` (valid for gfx1201; CDNA/gfx9 would need 64).
+
+Wheel built **exit 0** → `qiskit_aer-0.17.2-cp312-cp312-linux_x86_64.whl`.
+
+### Verification (success ≠ exit 0)
+```
+available_devices: ('CPU', 'GPU')
+5q GHZ on device='GPU' → {'11111': 521, '00000': 503}  # correct
+device metadata: GPU
+```
+
+### Runtime shim (important)
+The wheel was linked against an **ILP64** OpenBLAS (numpy.libs, symbols `_64_`-suffixed) but Aer
+calls **LP64** symbols (`dlamch_`, `dgemm_`). Fix without rebuild: `LD_PRELOAD` the LP64 OpenBLAS
+bundled with stock pip qiskit-aer + keep the ILP64 dir on `LD_LIBRARY_PATH` (satisfies the soname
+by name; PRELOAD wins symbol resolution). Encapsulated in **`scripts/aer_gpu_env.sh`**.
+Cleaner long-term: rebuild against an LP64 BLAS.
+
+### Break-even benchmark (QuantumVolume depth 10, single precision, OMP=4)
+| qubits | CPU (s) | GPU (s) | speedup |
+|-------:|--------:|--------:|--------:|
+| 18 | 0.007 | 0.432 | 0.02× |
+| 22 | 0.064 | 0.101 | 0.64× |
+| 25 | 0.772 | 0.483 | **1.60×** |
+| 28 | 7.605 | 4.291 | **1.77×** |
+
+**Break-even ≈ 24-25 qubits.** Below that, CPU wins (GPU kernel-launch overhead). Speedup is
+modest (~1.8× at 28q) — RDNA4 is a gaming card, and Aer's ROCm path is less tuned than CUDA.
+
+### Operational conclusion
+- **GPU acceleration of qiskit-aer on AMD gfx1201 is REAL and working.**
+- **Route to GPU only at ≥25 qubits.** Exp53 (7-9q) was correctly left on CPU — at that size GPU
+  is ~50× *slower*. GPU is for Exp54+ *iff* they reach large-statevector regimes.
+- Use `scripts/aer_gpu_env.sh` to activate. Card has ~16GB → ~29 qubits double / ~30 single max.
