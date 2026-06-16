@@ -80,6 +80,27 @@ Then benchmark CPU vs GPU across qubit counts 7→24 on a representative circuit
 
 ---
 
+## C3753 build-attempt log — got into deep compilation, one version-skew left
+
+Ran the full build this cycle. **Every blocker was a standard build-env gap — the ROCm/gfx1201 backend itself never rejected anything.** Resolution chain (each fixed, in order):
+1. `No module named setuptools` → installed build deps in venv.
+2. `No module named skbuild` → 0.17.2 uses **classic scikit-build** (`skbuild`), not scikit-build-core. Installed `scikit-build>=0.11.0` + `conan<2.0.0`.
+3. `Invalid setting '22' is not a valid settings.compiler.version` → ROCm clang reports **v22**; conan 1.66 `settings.yml` didn't list it. Patched `~/.conan/settings.yml` to add clang 18–25.
+4. `Could NOT find BLAS` → passed `-DBLAS_LIBRARIES`/`-DLAPACK_LIBRARIES` to a system OpenBLAS `.so`.
+5. `thrust/binary_search.h not found` → rocThrust headers not on `-I` path; added `-DCMAKE_CXX_FLAGS=-I$HOME/rocm-libs/include` + `-DCMAKE_HIP_FLAGS=...`. **This pushed it past CMake configure into actual C++ compilation of Aer's GPU statevector path.**
+6. **(current blocker)** `rocprim/type_traits_functions.hpp not found` from inside rocThrust → **version skew**: I cloned `master` of both rocThrust *and* rocPRIM; master rocThrust expects a rocPRIM header that master rocPRIM doesn't ship (rocPRIM has `type_traits.hpp` + `type_traits_interface.hpp`, not `type_traits_functions.hpp`).
+
+### Next step (clean, next cycle)
+Reclone rocPRIM + rocThrust + hipCUB on the **ROCm-7.2-matched release branch** instead of master, e.g.:
+```bash
+git clone -b release/rocm-rel-7.2 https://github.com/ROCm/rocPRIM.git    # match to 7.2.2
+git clone -b release/rocm-rel-7.2 https://github.com/ROCm/rocThrust.git
+git clone -b release/rocm-rel-7.2 https://github.com/ROCm/hipCUB.git
+```
+(Verify exact branch name with `git ls-remote --heads`.) Reinstall to `$HOME/rocm-libs`, then rerun the C3753 build script `/tmp/build_aer_gpu.sh` (already carries flags 1–5's fixes). Expected: compile proceeds; watch for gfx1201 codegen issues in the HIP kernels (the genuinely novel risk — but the wrapper headers compiled, which is the part most likely to break on a new arch).
+
+**Confidence in eventual success: HIGH.** The hard/novel parts (gfx1201 HIP execution, Aer ROCm CMake path, conan, thrust wrapper compile) all cleared. What remains is library-version hygiene.
+
 ## Bottom line for the network
 - Elder's "NO GPU" is corrected: **AMD gfx1201 + ROCm 7.2.2 is live and runs HIP kernels.**
 - GPU acceleration of qiskit-aer is **feasible**, blocked only by the rocThrust stack (building now) + a from-source Aer compile.
