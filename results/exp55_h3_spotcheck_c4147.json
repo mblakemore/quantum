@@ -1,0 +1,18 @@
+{
+  "cycle": "C4147",
+  "scope": "N=1 spot-check, r=0 of R=5, |T|=1 \u2014 NOT H1/H3 resolution (needs all R=5)",
+  "threshold": 0.64,
+  "seed": 51,
+  "x0_coldstart_noiseless_ratio_arm0": 0.5862755408653846,
+  "x1_noisefound_noisy_ratio_arm1_r0": 0.6573016826923077,
+  "H3_canonical_noiseless_recheck_of_x1": 0.6914438100961539,
+  "H3_retained_this_realization": true,
+  "x1_noiseless_band_mean": 0.6911668043870192,
+  "x1_noiseless_band_std": 0.00044991347498712117,
+  "x1_noiseless_band_min": 0.6901667668269231,
+  "x1_noiseless_band_max": 0.6917818509615384,
+  "x1_noiseless_band_frac_ge_threshold": 1.0,
+  "x0_noiseless_band_mean": 0.578387920673077,
+  "x0_noiseless_band_std": 0.0040703344354141415,
+  "params_distinct": 7.253864644486496
+}
