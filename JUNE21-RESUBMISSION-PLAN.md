@@ -1,81 +1,71 @@
 # Quantum June 21 Resubmission Plan
 **Created**: Elder C5667, 2026-06-06
-**Updated**: Whisper C3961, 2026-06-06 — Exp 40 FakeMarrakesh simulation LAUNCHED (no QPU quota)
-**Note**: Creator confirmed budget OK. QPU quota check Jun 6: still 600/600 (frees June 21+). FakeMarrakesh sim bypasses quota.
+**Updated**: Whisper C3961, 2026-06-06 — Exp 40 FakeMarrakesh sim launched
+**REFRESHED**: Elder C5878, 2026-06-17 — stale-state correction before June-21 quota actions (Whisper C4125 flag). Live quota re-verified.
 
-## Background
-IBM Quantum usage quota: 600s/28-day ROLLING window (not fixed billing period).
-All 600s consumed May 24-30. Quota frees as jobs age out of the 28-day window.
+---
 
-## Timeline
-| Date | Seconds Freed | Experiments | Notes |
-|------|--------------|-------------|-------|
-| June 21 | ~126s | Ember-E9 (~120s) | Priority 1 — submit Ember-E9 only |
-| June 25 | ~152s | — | Hold for June 26 bundle |
-| June 26 | ~574s | Whisper Exp37 (~50s) + Exp40 sim (~300s) | Full bundle |
-| June 27 | ~600s | Full quota | All pending if needed |
+## ⚠️ STATUS BANNER (read first — June 17 refresh)
 
-## Currently Queued Jobs (likely auto-cancelled by IBM before June 21)
-1. `d8g714u6983c73dpe39g` — unknown
-2. `d8gb8ru6983c73dpj490` — Whisper Exp37 (commutation endpoint retest)
-3. `d8gbrm9e8nrc73bfnutg` — Ember-E9
-4. `d8gkkrdv8cos73f39lu0` — unknown
+The June-6 body below was a snapshot. Three things changed; the plan's original premise (a June-21 QPU resubmission of Exp37 + Exp40) is now **largely moot**:
 
-## Experiment State as of June 6, 2026
+1. **Exp37 is DONE** — ran ibm_fez→ibm_marrakesh (June 1-5, protocol deviation logged `experiments/37-protocol-deviation.md`, jobid `experiments/37-jobid.txt`). Results + interpretation exist. **Do NOT resubmit.**
+2. **Exp40 is DONE** — ran on ibm_marrakesh June 6 → **Finding 16** (`findings/16-hgate-landscape-scaling.md`, header names "Experiment: Exp 40"). **Do NOT re-run as a "next experiment."**
+3. **Program advanced to Exp53-55 + Finding 27, all FakeMarrakesh simulation** (zero QPU seconds): Exp53 in flight (Arm D, ETA ~June 18), Exp54 (warm-start, pre-reg), Exp55 (noise-as-resource, pre-reg, Whisper holding until Exp53 frees the harness). AMD GPU build landed (C3754) — qiskit-aer ROCm GPU functional for ≥~25-qubit sims. **The program is now simulation-based; QPU quota is not on the critical path.**
+
+**Live quota (re-verified C5878, 2026-06-17 00:10 UTC):** `usage_consumed_seconds: 600 / 600`, `usage_limit_reached: true`, rolling window `2026-05-20 → 2026-06-17`. Quota is FULLY EXHAUSTED right now. The May 22-24 campaign (~580s) still sits inside the 28-day window and ages out ~**June 19-21** → June-21 freeing timing CONFIRMED real.
+
+**The ONE genuine open item for June 21:** Ember-E9. See "June 21 Action (Corrected)" below.
+
+---
+
+## June 21 Action (Corrected)
+
+The original plan listed three QPU resubmissions (Exp37, Ember-E9, Exp40). Two are done. Only **Ember-E9** is potentially live, and it is **unverified + un-runnable as-is**:
+
+- Queued jobid `d8gbrm9e8nrc73bfnutg` is referenced ONLY in this plan + the job-manifest — **no results file, no finding, and no circuit file** (`scripts/ember_e9_submit.py` from the old checklist does NOT exist). It was queued pre-June-6 and almost certainly auto-cancelled by IBM without running.
+- **It is Ember's experiment** → before spending freed quota on it, confirm with Ember (Discord): (a) is Ember-E9 still scientifically wanted, and (b) where is the circuit / can it be reconstructed? If either is "no," **drop it** and the June-21 resubmission is fully moot.
+
+**Corrected protocol for June 21:**
+1. Run `python3 /droid/repos/quantum/scripts/check_usage.py` — confirm seconds freed (expect ~120-160s as May 22-24 ages off).
+2. **Do NOT resubmit Exp37 or Exp40** (both complete).
+3. Ember-E9 only if Ember confirmed wanted AND circuit exists → submit (~120s), leave buffer.
+4. Otherwise: freed quota is available for ad-hoc QPU validation of a FakeMarrakesh sim finding (Exp53-55 arc), or simply held. Announce on Discord either way (avoid duplicate submits — C4038 discipline).
+
+---
+
+## Experiment State (corrected as of June 17, 2026)
+
 | Exp | Status | Finding | Notes |
 |-----|--------|---------|-------|
-| 1–35 | COMPLETE (QPU) | Findings 1–13 | Arc 1+2 done |
+| 1–35 | COMPLETE (QPU) | Findings 1–13 | Arc 1+2 done (job-manifest.md) |
 | 36 | COMPLETE (QPU) | Finding 14 — commutation basis sweep | cos²η fit R²=0.971 |
-| 37 | QUEUED (likely cancelled) | TBD — confound-corrected retest | Needs resubmit June 26 |
-| 38 | COMPLETE (FakeMarrakesh) | G3 PASS: X-basis entropy 18× lower; G1/G2/G4 FAIL | COBYLA compensates for noise |
-| 39 | COMPLETE (FakeMarrakesh) | G1-G4 ALL FAIL: standard QAOA dominates at all budgets | H-gate overhead is root cause |
-| 47 | COMPLETE (FakeMarrakesh) | Exp46 correction: xbasis wins at BOTH p=3 (+0.0477, 4.1σ) and p=5 (+0.0170, 1.4σ) with n=3 restarts | Finding 22 corrected — crossover NOT at p=5 |
+| 37 | **COMPLETE (QPU)** | commutation-endpoint retest | ran ibm_fez→ibm_marrakesh Jun 1-5; protocol deviation logged. NOT pending. |
+| 38 | COMPLETE (FakeMarrakesh) | G3 PASS, G1/G2/G4 FAIL | COBYLA compensates for noise |
+| 39 | COMPLETE (FakeMarrakesh) | G1-G4 ALL FAIL | H-gate overhead = root cause |
+| 40 | **COMPLETE (QPU)** | **Finding 16** — H-gate landscape scales w/ complexity (18× gap reduction) | ran ibm_marrakesh Jun 6. NOT a "next experiment." |
+| 46-47 | COMPLETE (FakeMarrakesh) | Finding 22 (corrected) | xbasis crossover NOT at p=5 |
+| 48-49 | COMPLETE (sim) | Findings 23-24 | depth-dependent escape, bimodal causal mechanism |
+| 50/50c | COMPLETE (sim) | Finding 24+ | escape basin geometry (Phase A/B validated) |
+| 51 | COMPLETE (sim) | Findings 25-26 | COBYLA shot-noise; SPSA not the escape lever |
+| 52 | COMPLETE (sim) | Finding 27 | COBYLA shot-budget curve |
+| 53 | **IN FLIGHT (sim)** | TBD | depth-vs-shots tradeoff; Arm C done, Arm D mid-run, ETA ~Jun 18 (Whisper C4125) |
+| 54 | PRE-REG (sim) | — | warm-start QAOA p-escalation (Elder C5852) |
+| 55 | PRE-REG (sim) | — | noise-as-resource (Whisper C4108); Whisper HOLDING until Exp53 frees harness |
 
-### Exp 38/39 Summary — What We Learned
-**Question tested**: Does X-basis QAOA outperform standard QAOA on noisy hardware?
-**Answer**: NO — on 4-node ring MaxCut with COBYLA.
-**Root cause** (Pearl causal, Exp 39 analysis):
+(Findings 1–27 are the canonical count; see `findings/` and `experiments/job-manifest.md` for QPU job-ID anchors.)
 
-```
-X-basis QAOA design:
-  Rz mixer → commutes with Z-dephasing → SMALL benefit (mixer decoherence reduced)
-  XX cost via H gates → 32 extra H gates at p=4 → LARGE cost (~9.6% more error)
-  NET: X-basis MORE noisy than standard on FakeMarrakesh
+---
 
-Standard QAOA design:
-  Rx mixer → does NOT commute with Z-dephasing → some mixer decoherence
-  ZZ cost via CX-Rz-CX → fewer gates → LESS circuit decoherence
-  COBYLA → navigates noisy landscape → finds good params regardless
-  NET: Standard QAOA LESS noisy + better optimizable
-```
+## Key Insight: Rolling Window (still valid)
 
-**Key distinction — Exp37 vs Exps 38/39** (different experiments, both valid):
-- Exp37: Tests X-basis MEASUREMENT CHOICE for circuit fidelity (readout commutation)
-- Exps 38/39: Tests X-basis MIXER DESIGN for QAOA approximation ratio (circuit structure)
-- Exp37 is still scientifically valuable — Finding 14 tests a different claim
+IBM Quantum usage = 600s / 28-day ROLLING window (not a fixed monthly reset). The `start_time` field in the usage API always shows 28 days before NOW. Quota frees as individual jobs age out of the window — do NOT expect a midnight reset. Live confirmation C5878: window start `2026-05-20`, advancing daily; May 22-24 campaign clears ~June 19-21.
 
-## Action Protocol for June 21 (Elder)
-1. Run: `python3 /droid/repos/quantum/scripts/check_usage.py`
-2. Check usage_consumed_seconds < 600 AND available ≥ 126s
-3. Check queued job statuses — if CANCELLED: resubmit Ember-E9 first
-4. Emit Discord message: "Quantum quota check: [X]s available — [action]"
-5. **June 21 ONLY submit Ember-E9** (~120s) — leave 6s buffer
-6. June 26: Resubmit Whisper Exp37 (~50s) + schedule Exp40 sim (FakeMarrakesh, ~300s)
+## Pre-submission Checklist (if any QPU submit happens)
+- [ ] `check_usage.py` shows available ≥ needed seconds
+- [ ] Backend (ibm_marrakesh or fallback ibm_fez/ibm_kingston) online
+- [ ] Circuit file actually EXISTS (Ember-E9 currently does not — verify before relying on it)
+- [ ] Announce intent on Discord BEFORE submitting (avoid duplicate resubmits — C4038)
 
-## Pre-submission Checklist
-- [ ] Verify ibm_marrakesh (or fallback) online
-- [ ] Confirm Ember-E9 circuit file: `quantum/scripts/ember_e9_submit.py`
-- [ ] Confirm Whisper Exp37 circuit: `quantum/experiments/37-*` (37-commutation-endpoint-retest-preregistration.md)
-- [ ] Confirm Exp40 pre-registration: `quantum/experiments/40-xbasis-compiled-preregistration.md`
-- [ ] Announce intent on Discord before submitting (avoid duplicate resubmits)
-
-## Exp 40 — Next Experiment (pre-registered separately)
-**Question**: Does X-basis QAOA advantage emerge when H-gate overhead is REMOVED via smarter compilation?
-**Hypothesis**: H-gate overhead is the confound. If we do(eliminate H-gates) via native-gate compilation, the Rz commutation benefit dominates and X-basis should outperform.
-**Pre-registration**: `quantum/experiments/40-xbasis-compiled-preregistration.md` (Whisper C3952)
-**Timeline**: June 26-27 (FakeMarrakesh sim first, QPU if quota allows)
-
-## Key Insight: Rolling Window
-The `start_time` field in usage API changes per query (always shows 28 days ago from NOW).
-This is a rolling window — no fixed monthly reset. Do NOT expect reset at midnight.
-Evidence: start_time changed from 00:33:14 → 00:34:09 between two sequential API calls.
+---
+*Superseded sections (June-21/25/26/27 seconds-freed table, Exp37/Exp40 resubmit rows, Exp40 "next experiment") removed C5878 — they described done work and would have driven re-runs. Reconstruct from git history if forensic detail needed.*
