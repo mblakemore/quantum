@@ -45,7 +45,12 @@ different landscape:
 - **Optimizer identical**: both best-tracking COBYLA, max_iter=50, rhobeg=0.5, threshold 0.64,
   EDGES_20.
 
-The **sole operative difference is the shot-noise realization** in the objective (`seed_simulator`).
+The **sole operative difference is inferred to be the shot-noise realization** in the objective
+(`seed_simulator`). This inference rests on (i) transpilation preserving the unitary → identical
+ideal landscape, and (ii) Elder's Exp53 `sim` being noiseless — the latter assumed, not yet
+verified. The *within-harness* finding (Step 3) does **not** depend on this reconciliation; if
+seed-43 or later data complicates the cross-harness story, the Elder-inversion explanation can be
+dropped without touching the core result.
 
 ## Step 3 — mechanism test (the finding)
 
@@ -61,10 +66,12 @@ seed 47 seed_sim=2005: 0.7060 ESC
 => seed 47: 5/6 ESC, 1/6 TRAP  -> FLIPS across noise realizations
 ```
 
-**5 of 6 realizations ESCAPE; the lone TRAP is `seed_sim=1000` — the exact realization my live
-Arm-0 used to define T={47}.** So my entire trapped subset rests on the 1-in-6 minority draw. Seed
-47 is *not* a robust trap; it escapes noiselessly in 5/6 realizations and my Arm-0 happened to draw
-the rare trapping one. The trap/escape **label flips with the shot-noise realization alone.** COBYLA optimizes a
+**5 of these 6 realizations ESCAPE; the lone TRAP is `seed_sim=1000` — the exact realization my live
+Arm-0 used to define T={47}.** So my trapped subset rests on the 1-in-6 minority draw. The trap/escape
+**label flips with the shot-noise realization alone.** (Scope: these 6 realizations are Arm-0's plus
+Arm-1's sampled set — the operationally relevant sample, not a random/general escape-rate estimate
+for seed 47. The claim is "fragile across the realizations my experiment samples," not a universal
+property of the seed.) COBYLA optimizes a
 1024-shot *noisy* objective; the noise realization steers the early simplex into different basins,
 and the converged basin (hence the trap label) is realization-dependent. Once converged, the basin
 point itself re-scores stably (Step 1) — so a single-realization "trap" looks solid in isolation
@@ -78,15 +85,17 @@ Whisper/Elder inversion: seed 47 escaped for Elder because his realization diffe
 
 ## Implications
 
-1. **My live Arm-1 substrate is a minority-realization artifact — its rate claim is confounded.**
-   T={47} was fixed from `seed_sim=1000`, the 1/6 realization where seed 47 traps; it escapes in the
-   other 5/6. Arm 1 then applies FakeMarrakesh noise at `seed_sim=2000+r` — so any "noise rescued the
-   trap" reading confounds the *noise model* with the *change of realization*, on a seed that mostly
-   escapes noiselessly anyway. The running data is salvageable only when re-analyzed against the
-   matched noiseless across-realization baseline (this test), not as a clean noise-toggle.
-   Live proc left untouched (C4038 — diagnosis, not relaunch); checkpointed and resumable. The
-   honest verdict: **the optionA_p5 substrate fails the robustness gate below and the rate result
-   should not be reported as a noise-assisted-escape rate.**
+1. **My live Arm-1 noise-toggle on seed 47 is VACUOUS — a clean null, not merely "confounded."**
+   Arm 0 fixed T={47} from `seed_sim=1000` (the 1/6 realization where 47 traps). Arm 1 applies
+   FakeMarrakesh noise at `seed_sim=2000+r`, r=0..4 → realizations {2000,2001,2002,2003,2004}. My
+   mechanism test already evaluated the *noiseless* objective at {2001,2002,2003,2004} (4 of those 5)
+   and every one **escapes (~0.70)**. So at the realizations Arm 1 samples there is **no trap for
+   noise to rescue** — the noise-assisted-escape premise is false, and the toggle answers a
+   null question. (Only sim=2000 is untested noiselessly; 4/5 is already decisive.) The running
+   process is therefore buying at most a marginal noise-*magnitude* characterization, not any
+   noise-assisted-escape signal. Live proc left untouched (C4038 — diagnosis, not relaunch),
+   checkpointed/resumable. Verdict: **the optionA_p5 substrate fails the robustness gate below; its
+   Arm-1 output must NOT be reported as a noise-assisted-escape rate (premise false → toggle vacuous).**
 2. **Corrected robustness gate (pre-registered for the next COLD Exp55 run):** a seed qualifies as
    trap-substrate only if **(a)** it traps in **≥⌈2/3·K⌉ of K independent noiseless `seed_simulator`
    realizations** (cross-realization robustness, K≥3), **(b)** the basin re-scores stably at high
