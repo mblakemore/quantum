@@ -1,0 +1,118 @@
+{
+  "p5_COBYLA_256sh": {
+    "p": 5,
+    "shots": 256,
+    "max_iter": 50,
+    "escaped": 7,
+    "completed": 10,
+    "rate_so_far": 0.7,
+    "data": [
+      {
+        "seed": 42,
+        "ratio": 0.6325120192307693,
+        "escaped": false,
+        "elapsed_s": 3336.696821451187
+      },
+      {
+        "seed": 43,
+        "ratio": 0.6012620192307693,
+        "escaped": false,
+        "elapsed_s": 3343.6046526432037
+      },
+      {
+        "seed": 44,
+        "ratio": 0.6413762019230769,
+        "escaped": true,
+        "elapsed_s": 3337.4731743335724
+      },
+      {
+        "seed": 45,
+        "ratio": 0.642578125,
+        "escaped": true,
+        "elapsed_s": 3338.0264246463776
+      },
+      {
+        "seed": 46,
+        "ratio": 0.6155348557692307,
+        "escaped": false,
+        "elapsed_s": 3339.3363468647003
+      },
+      {
+        "seed": 47,
+        "ratio": 0.6903545673076923,
+        "escaped": true,
+        "elapsed_s": 3338.2814626693726
+      },
+      {
+        "seed": 48,
+        "ratio": 0.6427283653846154,
+        "escaped": true,
+        "elapsed_s": 3342.117009162903
+      },
+      {
+        "seed": 49,
+        "ratio": 0.6607572115384616,
+        "escaped": true,
+        "elapsed_s": 3340.739325284958
+      },
+      {
+        "seed": 50,
+        "ratio": 0.6884014423076923,
+        "escaped": true,
+        "elapsed_s": 3348.78790640831
+      },
+      {
+        "seed": 51,
+        "ratio": 0.6813401442307693,
+        "escaped": true,
+        "elapsed_s": 3339.6718571186066
+      }
+    ]
+  },
+  "p5_COBYLA_1024sh": {
+    "p": 5,
+    "shots": 1024,
+    "max_iter": 50,
+    "escaped": 5,
+    "completed": 6,
+    "rate_so_far": 0.8333333333333334,
+    "data": [
+      {
+        "seed": 42,
+        "ratio": 0.6400991586538461,
+        "escaped": true,
+        "elapsed_s": 13200.514449119568
+      },
+      {
+        "seed": 43,
+        "ratio": 0.599609375,
+        "escaped": false,
+        "elapsed_s": 13205.696362495422
+      },
+      {
+        "seed": 44,
+        "ratio": 0.6930964543269231,
+        "escaped": true,
+        "elapsed_s": 13221.208035945892
+      },
+      {
+        "seed": 45,
+        "ratio": 0.6416391225961539,
+        "escaped": true,
+        "elapsed_s": 13298.273380994797
+      },
+      {
+        "seed": 46,
+        "ratio": 0.6657902644230769,
+        "escaped": true,
+        "elapsed_s": 13281.334753036499
+      },
+      {
+        "seed": 47,
+        "ratio": 0.6960637019230769,
+        "escaped": true,
+        "elapsed_s": 14416.102236032486
+      }
+    ]
+  }
+}

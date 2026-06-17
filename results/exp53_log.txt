@@ -1,15 +1,42 @@
-============================================================
-EXP53: Depth vs Shots Tradeoff (p=5 COBYLA, FakeMarrakesh)
-Author: Elder C5852 | Pre-reg: C5846
-P_DEPTH=5, MAX_ITER=50, SEEDS=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
-============================================================
+======================================================================
+EXP53: Depth vs Shots Tradeoff (p=3 vs p=5)
+Elder C5846 | FakeMarrakesh (AerSimulator) | Seeds: [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+Escape threshold: 0.64
+======================================================================
 
-Reused baselines (no rerun):
-  cobyla_p3_256sh: 6/10 = 60% (Exp51 Phase A)
-  cobyla_p3_1024sh: 9/10 = 90% (Exp51 Phase C)
+REUSED FROM EXP51/52 (p=3 baseline):
+  p3_cobyla_256sh: 6/10 = 0.60 (Exp51 Phase A)
+  p3_cobyla_1024sh: 9/10 = 0.90 (Exp51 Phase C)
+
 
 ============================================================
-ARM: Arm-C (p=5, 256sh) | p=5 | shots=256 | seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+ARM: p5_COBYLA_256sh | p=5 | shots=256 | seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+Escape threshold: 0.64 | max_iter=50
 ============================================================
-Graph: 20n, 30e | MaxCut=26 | Threshold=16.6
-Circuit: 20q, depth=363, CX/CZ=300
+  Circuit depth (transpiled): 363
+  Parameters: 10 (5 gammas + 5 betas)
+  seed=42: ratio=0.6325 ✗ trapped (3336.7s)
+  seed=43: ratio=0.6013 ✗ trapped (3343.6s)
+  seed=44: ratio=0.6414 ✓ ESCAPED (3337.5s)
+  seed=45: ratio=0.6426 ✓ ESCAPED (3338.0s)
+  seed=46: ratio=0.6155 ✗ trapped (3339.3s)
+  seed=47: ratio=0.6904 ✓ ESCAPED (3338.3s)
+  seed=48: ratio=0.6427 ✓ ESCAPED (3342.1s)
+  seed=49: ratio=0.6608 ✓ ESCAPED (3340.7s)
+  seed=50: ratio=0.6884 ✓ ESCAPED (3348.8s)
+  seed=51: ratio=0.6813 ✓ ESCAPED (3339.7s)
+
+  ARM RESULT: 7/10 = 0.70 escape rate
+
+============================================================
+ARM: p5_COBYLA_1024sh | p=5 | shots=1024 | seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+Escape threshold: 0.64 | max_iter=50
+============================================================
+  Circuit depth (transpiled): 363
+  Parameters: 10 (5 gammas + 5 betas)
+  seed=42: ratio=0.6401 ✓ ESCAPED (13200.5s)
+  seed=43: ratio=0.5996 ✗ trapped (13205.7s)
+  seed=44: ratio=0.6931 ✓ ESCAPED (13221.2s)
+  seed=45: ratio=0.6416 ✓ ESCAPED (13298.3s)
+  seed=46: ratio=0.6658 ✓ ESCAPED (13281.3s)
+  seed=47: ratio=0.6961 ✓ ESCAPED (14416.1s)
