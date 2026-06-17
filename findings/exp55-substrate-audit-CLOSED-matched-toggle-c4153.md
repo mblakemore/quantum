@@ -55,7 +55,12 @@ Arm-1 NOISY (from the live log) for the same seed/realizations: r=0 0.6573 ESC, 
    is *not* the defined trap T (x0=seed51) — it is a different basin that happens to be sub-threshold
    at this realization. So it is an anecdote of the mechanism, **not** a rate, and carries no
    inferential weight on the noise-as-resource question (consistent with the C4128/C4148 |T|=1
-   underpower flag).
+   underpower flag). **Sharper caveat (do NOT lift "C4153 found noise helped at r=1" as a positive
+   result):** r=1 is a *single* noiseless COBYLA run (0.600) vs a *single* noisy run (0.680), and
+   this audit's central lesson is that COBYLA trajectories are hyper-sensitive to the shot-noise
+   realization. The 0.600→0.680 gap could itself be trajectory noise, not a noise-model effect. r=1
+   is therefore a **candidate to retest under G1** (repeated noiseless AND noisy runs at fixed
+   x0+realization), not a confirmed instance of noise-assisted escape.
 
 **Net:** Exp55's Arm-1 output is **not a valid noise-as-resource measurement** as instrumented. When
 the live run reaches `_finalize`, its H1 "pass/fail" must be annotated: the escape rate conflates
