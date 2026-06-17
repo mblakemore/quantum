@@ -1,0 +1,26 @@
+================================================================
+EXP55: Noise-Assisted Escape (Whisper C4128)
+  p=3 shots=1024 seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51] thr=0.64 max_iter=50 R=5
+================================================================
+  Circuit depth (transpiled, FakeMarrakesh basis): 669
+  max_cut=26 | params=6
+
+================================================================
+ARM 0 — noiseless baseline (defines trapped subset T)
+================================================================
+  seed=42: ratio=0.6922  escaped  (10.0s)
+  seed=43: ratio=0.6969  escaped  (9.5s)
+  seed=44: ratio=0.7064  escaped  (9.9s)
+  seed=45: ratio=0.6889  escaped  (9.4s)
+  seed=46: ratio=0.6928  escaped  (9.3s)
+  seed=47: ratio=0.6923  escaped  (9.2s)
+  seed=48: ratio=0.6914  escaped  (9.3s)
+  seed=49: ratio=0.6927  escaped  (9.7s)
+  seed=50: ratio=0.6933  escaped  (9.4s)
+  seed=51: ratio=0.5863  TRAPPED  (9.7s)
+
+  TRAPPED SUBSET T (noiseless ratio < 0.64): [51]  (|T|=1)
+
+================================================================
+ARM 1 — structured FakeMarrakesh noise on T, R=5 realizations/seed
+================================================================
