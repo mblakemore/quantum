@@ -1,7 +1,7 @@
 # Exp56 (staged): Noise-as-Resource — Real-Hardware Validation of the Exp48–55 QAOA Arc
 
 **Staged**: Whisper C4158, 2026-06-17 (~13:00 ET, pre-2pm FOMC; FOMC-orthogonal lane)
-**Status**: ⏸ **BLOCKED ON QUOTA** — live-verified `usage_consumed_seconds: 600/600`, `usage_limit_reached: true` (check_usage.py, 2026-06-17 17:00 UTC). Fires the moment quota frees (rolling window → ~6/19–21, per JUNE21-RESUBMISSION-PLAN) **or Creator adds time** (Creator C-msg: "API budget is OK / I will add more time if it runs out").
+**Status**: ✅ **VERIFIED FIRE-READY**, ⏸ **BLOCKED ON QUOTA ONLY** — params saved, circuit transpiled, cost measured (~seconds, fits). Live-verified `usage_consumed_seconds: 600/600`, `usage_limit_reached: true` (check_usage.py, 2026-06-17 17:00 UTC). Fires the moment quota frees (rolling window → ~6/19–21, per JUNE21-RESUBMISSION-PLAN) **or Creator adds time** (Creator C-msg: "API budget is OK / I will add more time if it runs out").
 **Genre**: experiment-design (real hardware). Not sim-analysis (that arc is topic-saturated) — this is the QPU step the whole arc has deferred.
 
 ---
@@ -41,9 +41,19 @@ Let `r_hw(p)` = ratio on real `ibm_marrakesh` for param vector `p`; `r_sim(p)` =
 - **H_real-rescue (strongest, the genuine resource claim):** `r_hw(x1_escape) ≥ 0.640` **AND** `r_hw(x0_trapped) < 0.640`. → on the *real* device the escape params clear the threshold the trapped params do not. This is the model-independent statement that "structured noise → escape" is a hardware phenomenon, not a FakeMarrakesh artifact.
 - **NULL / sim-optimistic:** controls miss by >0.05, or `r_hw(x1_escape) < 0.640`. → escape is a property of the *model*, not the device. (This is a legitimate, publishable outcome — it bounds every Exp48–55 claim to "in FakeMarrakesh.")
 
-## Quota fit + the gating uncertainty
+### ⚠ Scope guard — what this CANNOT claim (pre-registered C4158)
 
-≈8–10 circuits × 1024 shots, one batched job. **But:** unlike Exp23 (1-qubit, zero-CZ, trivially cheap), this is **20-qubit QAOA p=3** — deeper transpiled circuits, more two-qubit gates → materially more QPU seconds per circuit. **This is the one number to verify before firing.** Estimate transpiled duration first (`calibration_snapshot.py` / a local transpile + `circuit.duration`) and confirm `8–10 × est < freed_seconds`. If it exceeds freed quota, trim to {x1_escape, x0_trapped, 2 controls} (4 circuits) — the H_real-rescue test only strictly needs #1+#2; controls are the fidelity bonus.
+Evaluation-only tests whether the noise-**found** endpoint is **real-device-robust** (an H3-style claim: the discovered solution survives real hardware). It does **NOT** test whether noise was **necessary to find it** — the H1 "noise-as-resource" / noise-as-search-mechanism claim requires the closed-loop optimization arm (Arm 0 vs Arm 1 on-device), which is infeasible on quota. **Do not write up or Discord-frame a PASS as "noise-as-resource confirmed on hardware."** The honest PASS statement is: *"the FakeMarrakesh-noise-discovered solution is valid on the real ibm_marrakesh device, and the trapped cold-start is not."* The resource/necessity claim stays scoped to simulation pending a future on-device optimization experiment.
+
+## Quota fit — VERIFIED (Whisper C4158, quota-free local transpile)
+
+The "20q is deeper than Exp23's 1q, might not fit" worry was **measured and overblown** — Creator's "wall-time overestimates QPU time" was correct. Bound the seed-51 cold-start params, `transpile(qc, FakeMarrakesh, opt_level=1, seed_transpiler=42, scheduling_method="alap")`:
+
+- transpiled **depth 597, 504 two-qubit gates, 2544 ops**, backend `dt = 4e-9 s`
+- **schedule duration ≈ 23.9 µs / circuit-execution**
+- 10 circuits × 1024 shots, **execution-only ≈ 245 ms** (excl. init/readout/queue/runtime overhead)
+
+Even with generous IBM-runtime active-time overhead, billed QPU usage for the full 8–10 circuit batch is **order single-digit seconds** — comfortably inside the ~120–160 s the rolling window frees. **No trim needed; the full set fits.** (Trim to {x1_escape, x0_trapped, 2 controls} remains the fallback only if a calibration snapshot at fire time shows unexpectedly long durations.) Creator-facing ask is therefore concrete: *costs ~seconds of QPU, please top up.*
 
 ## Fire procedure (when unblocked)
 
