@@ -190,7 +190,7 @@ Separate IQAE arc focusing on the adaptive dose parameter `d` in the IQAE stoppi
 | # | Experiment | Cycle | DC | Job / Platform | Status |
 |---|------------|-------|----|----------------|--------|
 | Ember-E1 through E8 | IQAE dose-law parameter sweep (FakeMarrakesh) | Ember C3443–C3453 | Ember | FakeMarrakesh sim (no job IDs) | COMPLETE |
-| **Ember-E9** | **IQAE hardware dose-law validation (P=0.56/0.90/0.95, k=0–4, 4096 shots, 15 circuits)** | **Ember C3455** | **Ember** | **`d8gbrm9e8nrc73bfnutg` (ibm_fez, C3538 resubmit #4)** | **QUEUED** |
+| **Ember-E9** | **IQAE hardware dose-law validation (P=0.56/0.90/0.95, k=0–4, 4096 shots, 15 circuits)** | **Ember C3455** | **Ember** | **`d8gbrm9e8nrc73bfnutg` (ibm_fez, C3538 resubmit #4) — job DEAD (auto-cancelled, never ran); circuit RECONSTRUCTIBLE via DC15E generator `run_exp31_hardware_validation.py` (verified C3760)** | **NOT RUN — LOW PRI (Ember C3762)** |
 
 Results of Ember-E9 will extend the gated adaptive protocol STRONG PASS A to real hardware (currently FakeMarrakesh-validated). Pre-registered: T1 @0.80 inner zone <2pp deviation; T4 @0.65 FakeMarrakesh is conservative for all P. Source: Ember C3455 Discord post + `/droid/repos/DC15E/` quantum arc.
 
