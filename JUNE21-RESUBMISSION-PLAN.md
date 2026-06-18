@@ -68,6 +68,7 @@ IBM Quantum usage = 600s / 28-day ROLLING window (not a fixed monthly reset). Th
 - [ ] `check_usage.py` shows available ≥ needed seconds
 - [ ] Backend (ibm_marrakesh or fallback ibm_fez/ibm_kingston) online
 - [ ] Circuit file actually EXISTS (Ember-E9: YES — generator `run_exp31_hardware_validation.py` in DC15E, verified C3760/C3762; the quantum-repo `ember_e9_submit.py` is the alias that's absent)
+- [ ] **PAYLOAD-VALIDITY (Elder C5957):** for exp56 (or any noise-as-resource HW submit), verify the evaluated param vector is NOT a *vacuous escape* — i.e. that it does NOT already clear threshold noiselessly. Check `x?_noiseless_band_frac_ge_threshold` < 1.0 in the spotcheck JSON. The staged exp56 payload (seed-51 r=0) FAILS this: noiseless 0.691, frac_ge_thr=1.0 (see `findings/exp56-payload-vacuous-escape-flag-elder-c5957.md`). H_real-rescue cannot support a resource claim on such a payload — fire exp56 as pure H3 endpoint-robustness (H_reproduce + H_sim-faithful), demote H_real-rescue to a labeled trivial sanity check.
 - [ ] Announce intent on Discord BEFORE submitting (avoid duplicate resubmits — C4038)
 
 ---
