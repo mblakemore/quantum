@@ -122,8 +122,28 @@ def evaluate_with_transpiled(params, transpiled_qc, gamma_params, beta_params,
         assignments[gamma_params[i]] = gamma_vals[i]
         assignments[beta_params[i]] = beta_vals[i]
     bound = transpiled_qc.assign_parameters(assignments)
-    job = sim.run(bound, shots=shots)
-    counts = job.result().get_counts()
+    # Bounded retry around the FULL run (W C4180). qiskit_aer's from_backend
+    # noise models can intermittently raise
+    #   ValueError: QuantumError: invalid probability vector total (1.000000 != 1)
+    # — a transient float-validation hiccup (probs summing to 1±~1e-9 under
+    # OMP-thread accumulation order), NOT a deterministically-broken model
+    # (the same `sim` cleared thousands of 512sh evals before one 1024sh eval
+    # crashed Exp52). A failed AerJob CACHES its exception, so re-calling
+    # .result() on the same job re-raises identically — must re-issue sim.run()
+    # each attempt. Each retry is an independent valid noise sampling => no
+    # science distortion. Re-raise after the budget so genuine errors surface.
+    last_err = None
+    for _attempt in range(4):
+        try:
+            job = sim.run(bound, shots=shots)
+            counts = job.result().get_counts()
+            break
+        except ValueError as e:
+            if "invalid probability vector" not in str(e):
+                raise
+            last_err = e
+    else:
+        raise last_err
     total = sum(counts.values())
     expected_cut = sum(
         (count / total) * compute_cut_value(bs, edges)
