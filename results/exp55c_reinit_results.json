@@ -1,0 +1,364 @@
+{
+  "experiment": "exp55c_reinit_control",
+  "cycle": "C4183",
+  "purpose": "attribution control: isolate init-sensitivity from noise effect in Exp55 Arm 1",
+  "p": 3,
+  "shots": 1024,
+  "threshold": 0.64,
+  "R": 5,
+  "x0_schedule": "np.random.seed(seed*100+r) [matches Arm 1], evaluated NOISELESSLY",
+  "n_seeds": 29,
+  "control_escape_rate_realizations": 0.6827586206896552,
+  "seeds_with_any_escape": 29,
+  "per_seed": [
+    {
+      "seed": 51,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.6817,
+        0.5836,
+        0.6869,
+        0.692,
+        0.699
+      ]
+    },
+    {
+      "seed": 53,
+      "n": 5,
+      "escaped": 5,
+      "ratios": [
+        0.6879,
+        0.6842,
+        0.6915,
+        0.6914,
+        0.6855
+      ]
+    },
+    {
+      "seed": 54,
+      "n": 5,
+      "escaped": 3,
+      "ratios": [
+        0.6802,
+        0.5902,
+        0.578,
+        0.6902,
+        0.6919
+      ]
+    },
+    {
+      "seed": 55,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.6866,
+        0.6936,
+        0.6934,
+        0.691,
+        0.6164
+      ]
+    },
+    {
+      "seed": 58,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.6913,
+        0.6919,
+        0.6809,
+        0.6159,
+        0.6553
+      ]
+    },
+    {
+      "seed": 59,
+      "n": 5,
+      "escaped": 2,
+      "ratios": [
+        0.6008,
+        0.5916,
+        0.5995,
+        0.6926,
+        0.7016
+      ]
+    },
+    {
+      "seed": 61,
+      "n": 5,
+      "escaped": 2,
+      "ratios": [
+        0.684,
+        0.5963,
+        0.6921,
+        0.6076,
+        0.5898
+      ]
+    },
+    {
+      "seed": 62,
+      "n": 5,
+      "escaped": 3,
+      "ratios": [
+        0.6197,
+        0.588,
+        0.68,
+        0.6896,
+        0.6919
+      ]
+    },
+    {
+      "seed": 65,
+      "n": 5,
+      "escaped": 3,
+      "ratios": [
+        0.6874,
+        0.6962,
+        0.6919,
+        0.6067,
+        0.6079
+      ]
+    },
+    {
+      "seed": 68,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.5788,
+        0.6925,
+        0.696,
+        0.6868,
+        0.6931
+      ]
+    },
+    {
+      "seed": 70,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.6951,
+        0.6922,
+        0.6901,
+        0.692,
+        0.5968
+      ]
+    },
+    {
+      "seed": 71,
+      "n": 5,
+      "escaped": 3,
+      "ratios": [
+        0.5725,
+        0.7006,
+        0.6924,
+        0.5863,
+        0.6845
+      ]
+    },
+    {
+      "seed": 74,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.689,
+        0.6573,
+        0.6816,
+        0.6883,
+        0.613
+      ]
+    },
+    {
+      "seed": 75,
+      "n": 5,
+      "escaped": 2,
+      "ratios": [
+        0.5699,
+        0.5815,
+        0.6889,
+        0.6917,
+        0.5826
+      ]
+    },
+    {
+      "seed": 76,
+      "n": 5,
+      "escaped": 5,
+      "ratios": [
+        0.6907,
+        0.6913,
+        0.6617,
+        0.6967,
+        0.6558
+      ]
+    },
+    {
+      "seed": 81,
+      "n": 5,
+      "escaped": 3,
+      "ratios": [
+        0.5743,
+        0.6925,
+        0.6071,
+        0.6875,
+        0.6916
+      ]
+    },
+    {
+      "seed": 82,
+      "n": 5,
+      "escaped": 3,
+      "ratios": [
+        0.581,
+        0.5774,
+        0.6839,
+        0.6925,
+        0.6892
+      ]
+    },
+    {
+      "seed": 87,
+      "n": 5,
+      "escaped": 3,
+      "ratios": [
+        0.5971,
+        0.6904,
+        0.6916,
+        0.6923,
+        0.5984
+      ]
+    },
+    {
+      "seed": 94,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.6955,
+        0.6902,
+        0.6026,
+        0.6918,
+        0.6924
+      ]
+    },
+    {
+      "seed": 95,
+      "n": 5,
+      "escaped": 2,
+      "ratios": [
+        0.6904,
+        0.6854,
+        0.6033,
+        0.6017,
+        0.5919
+      ]
+    },
+    {
+      "seed": 97,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.6926,
+        0.5913,
+        0.6857,
+        0.692,
+        0.6896
+      ]
+    },
+    {
+      "seed": 103,
+      "n": 5,
+      "escaped": 2,
+      "ratios": [
+        0.6936,
+        0.5949,
+        0.6919,
+        0.582,
+        0.5743
+      ]
+    },
+    {
+      "seed": 106,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.6886,
+        0.6736,
+        0.6077,
+        0.6927,
+        0.692
+      ]
+    },
+    {
+      "seed": 107,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.5802,
+        0.6919,
+        0.6495,
+        0.6451,
+        0.6922
+      ]
+    },
+    {
+      "seed": 111,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.6724,
+        0.6958,
+        0.6892,
+        0.6912,
+        0.574
+      ]
+    },
+    {
+      "seed": 113,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.5813,
+        0.692,
+        0.6477,
+        0.6619,
+        0.6934
+      ]
+    },
+    {
+      "seed": 114,
+      "n": 5,
+      "escaped": 4,
+      "ratios": [
+        0.6866,
+        0.692,
+        0.6917,
+        0.558,
+        0.6922
+      ]
+    },
+    {
+      "seed": 123,
+      "n": 5,
+      "escaped": 3,
+      "ratios": [
+        0.5971,
+        0.6931,
+        0.6927,
+        0.5837,
+        0.6886
+      ]
+    },
+    {
+      "seed": 129,
+      "n": 5,
+      "escaped": 3,
+      "ratios": [
+        0.6916,
+        0.5935,
+        0.5844,
+        0.6861,
+        0.6949
+      ]
+    }
+  ],
+  "interpretation_rule": "If this noiseless re-init escape rate ~= Arm 1 noise-escape rate -> escape is INIT-SENSITIVITY (noise arm uninterpretable, NO-GO). If this stays trapped while Arm 1 escapes -> genuine NOISE effect (GO on powered subsample, R=2-3 x more seeds)."
+}
