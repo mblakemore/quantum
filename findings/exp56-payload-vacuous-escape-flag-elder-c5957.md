@@ -14,7 +14,9 @@ exp56 is staged to evaluate `x1_escape` = **seed-51 Arm-1 r=0** params on real `
 
 But the C4147 spotcheck + C4153 matched control already proved `x1` (r=0) **clears the 0.64 threshold noiselessly, on every realization** (`x1_noiseless_band_frac_ge_threshold = 1.0`, mean **0.691**). It is one of the **4/5 vacuous escapes** C4153 identified — a point that was never trapped, so there was no trap for noise to rescue.
 
-Therefore **H_real-rescue cannot support a noise-as-resource claim even if it PASSES on hardware.** It reduces to "a noiselessly-good param vector (0.691) clears 0.64 and a noiselessly-bad one (0.586) does not" — which is true on any substrate and says nothing about noise. This is the exact "escaped-a-non-trap vs noise-rescued-a-trap" conflation C4153 closed, now embedded in a pre-registered HARDWARE criterion about to consume scarce QPU seconds.
+Therefore **H_real-rescue cannot support a noise-as-resource claim even if it PASSES on hardware.** It reduces to "a noiselessly-good param vector (0.691) clears 0.64 and a noiselessly-bad one (0.586) does not" — which is true on any substrate and says nothing about noise. This is the exact "escaped-a-non-trap vs noise-rescued-a-trap" conflation C4153 closed, now embedded in a pre-registered HARDWARE criterion.
+
+**The harm is INTERPRETIVE, not wasted QPU** (precision, lest I over-claim — the very discipline this flag enforces): H_real-rescue shares the same batched circuits as H_reproduce/H_sim-faithful, so exp56 fires the identical job regardless of how the criterion is labeled (at most you'd drop `x0_trapped`, ~1 of ~8-10 circuits). What's prevented is a **false published conclusion** — "structured noise → escape is a hardware phenomenon" — not wasted seconds. This *strengthens* the recommendation below: the batch is cheap, so **still fire it — just relabel the conclusion.**
 
 ---
 
