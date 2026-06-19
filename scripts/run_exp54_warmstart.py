@@ -205,6 +205,17 @@ def main():
         print(f"  p={p}: transpiled depth={circuits[p][0].depth()}", flush=True)
 
     ckpt = _load_ckpt()
+    # Mode/arms guard (Ember C3835): resume only when the checkpoint matches THIS run.
+    # A SMOKE checkpoint (128sh/maxiter10) silently reused in a FULL run would skip
+    # already-"done" seeds and contaminate the 1024sh campaign with sanity-only numbers.
+    ck_mode, ck_arms = ckpt.get("mode"), ckpt.get("arms")
+    if ckpt.get("data") and (ck_mode != mode or ck_arms != arms):
+        bak = CKPT + f".stale-{ck_mode}-{''.join(ck_arms or [])}.bak"
+        os.replace(CKPT, bak)
+        print(f"  [reset] checkpoint was mode={ck_mode} arms={ck_arms} "
+              f"!= this run mode={mode} arms={arms} — not resuming; backed up to {bak}",
+              flush=True)
+        ckpt = {}
     done = {int(r["seed"]): r for r in ckpt.get("data", [])}
     if done:
         print(f"  [resume] {len(done)} seed(s) done: {sorted(done)}", flush=True)
