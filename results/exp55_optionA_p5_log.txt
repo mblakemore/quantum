@@ -1,0 +1,26 @@
+================================================================
+EXP55 Option A (p=5): Noise-Assisted Escape re-scope (Whisper C4148, Elder C5899 substrate note)
+  p=5 shots=1024 seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51] thr=0.64 max_iter=50 R=5
+================================================================
+  Circuit depth (transpiled, FakeMarrakesh basis): 1070
+  max_cut=26 | params=10
+
+================================================================
+ARM 0 — noiseless baseline (defines trapped subset T)
+================================================================
+  seed=42: ratio=0.6943  escaped  (100.2s)
+  seed=43: ratio=0.6967  escaped  (96.7s)
+  seed=44: ratio=0.7043  escaped  (101.3s)
+  seed=45: ratio=0.7013  escaped  (101.6s)
+  seed=46: ratio=0.7166  escaped  (94.1s)
+  seed=47: ratio=0.6258  TRAPPED  (81.8s)
+  seed=48: ratio=0.6607  escaped  (96.1s)
+  seed=49: ratio=0.6955  escaped  (101.0s)
+  seed=50: ratio=0.6887  escaped  (99.2s)
+  seed=51: ratio=0.7027  escaped  (96.5s)
+
+  TRAPPED SUBSET T (noiseless ratio < 0.64): [47]  (|T|=1)
+
+================================================================
+ARM 1 — structured FakeMarrakesh noise on T, R=5 realizations/seed
+================================================================

@@ -24,3 +24,19 @@ ARM 0 — noiseless baseline (defines trapped subset T)
 ================================================================
 ARM 1 — structured FakeMarrakesh noise on T, R=5 realizations/seed
 ================================================================
+  seed=51 r=0: ratio=0.6573  ESCAPED  (17632.6s)
+  seed=51 r=1: ratio=0.6805  ESCAPED  (19814.3s)
+  seed=51 r=2: ratio=0.6785  ESCAPED  (26148.1s)
+  seed=51 r=3: ratio=0.6625  ESCAPED  (26933.8s)
+  seed=51 r=4: ratio=0.6802  ESCAPED  (25584.0s)
+
+================================================================
+EXP55 RESULTS
+================================================================
+  |T| = 1  T = [51]
+  H1 escape-rate on T = 100%  (rescued [51])  => PASS (thr 20%)
+  H3 noiseless-retention = 100% (5/5)  => PASS (thr 50%)
+  mean ratio change on T = 0.0855 (expect <0: noise lowers ceiling)
+  VERDICT: NOISE-ASSISTED ESCAPE IS REAL -> evaluate H2 (Arm 2 follow-on)
+
+  written -> /mnt/droid/repos/quantum/scripts/../results/exp55_results.json

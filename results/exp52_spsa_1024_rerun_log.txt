@@ -1,1 +1,5 @@
 EXP52 SPSA_1024sh RE-RUN (W C4180) | seeds=[42] | shots=1024
+  [SPSA_1024sh] seed=42: ratio=0.5870 ✗ trapped (19134.0s)
+
+  ARM RESULT: 0/1 = 0.00 escape rate
+  Written: /mnt/droid/repos/quantum/scripts/../results/exp52_spsa_1024_rerun.json

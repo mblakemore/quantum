@@ -1,4 +1,84 @@
 {
+  "experiment": "Exp55 Noise-Assisted Escape",
+  "author": "Whisper C4128",
+  "config": {
+    "p": 3,
+    "shots": 1024,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "threshold": 0.64,
+    "max_iter": 50,
+    "R": 5,
+    "seed_transpiler": 42
+  },
+  "T": [
+    51
+  ],
+  "T_size": 1,
+  "H1": {
+    "rescued_seeds": [
+      51
+    ],
+    "rate": 1.0,
+    "threshold": 0.2,
+    "pass": true
+  },
+  "H3": {
+    "escapes_total": 5,
+    "retained": 5,
+    "rate": 1.0,
+    "threshold": 0.5,
+    "pass": true,
+    "detail": [
+      {
+        "seed": 51,
+        "r": 0,
+        "noisy_ratio": 0.6573016826923077,
+        "noiseless_recheck": 0.6914438100961539,
+        "retained": true
+      },
+      {
+        "seed": 51,
+        "r": 1,
+        "noisy_ratio": 0.6804762620192307,
+        "noiseless_recheck": 0.6955754206730769,
+        "retained": true
+      },
+      {
+        "seed": 51,
+        "r": 2,
+        "noisy_ratio": 0.6785231370192307,
+        "noiseless_recheck": 0.6891150841346154,
+        "retained": true
+      },
+      {
+        "seed": 51,
+        "r": 3,
+        "noisy_ratio": 0.6625225360576923,
+        "noiseless_recheck": 0.6870868389423077,
+        "retained": true
+      },
+      {
+        "seed": 51,
+        "r": 4,
+        "noisy_ratio": 0.6802133413461539,
+        "noiseless_recheck": 0.6976787860576923,
+        "retained": true
+      }
+    ]
+  },
+  "mean_ratio_change_on_T": 0.08553185096153848,
+  "verdict": "NOISE-ASSISTED ESCAPE IS REAL -> evaluate H2 (Arm 2 follow-on)",
   "arm0": {
     "42": {
       "seed": 42,
@@ -131,9 +211,6 @@
       ]
     }
   },
-  "T": [
-    51
-  ],
   "arm1": {
     "51": {
       "seed": 51,
