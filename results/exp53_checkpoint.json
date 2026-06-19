@@ -73,9 +73,9 @@
     "p": 5,
     "shots": 1024,
     "max_iter": 50,
-    "escaped": 5,
-    "completed": 6,
-    "rate_so_far": 0.8333333333333334,
+    "escaped": 7,
+    "completed": 10,
+    "rate_so_far": 0.7,
     "data": [
       {
         "seed": 42,
@@ -112,6 +112,30 @@
         "ratio": 0.6960637019230769,
         "escaped": true,
         "elapsed_s": 14416.102236032486
+      },
+      {
+        "seed": 48,
+        "ratio": 0.5954777644230769,
+        "escaped": false,
+        "elapsed_s": 13838.483344316483
+      },
+      {
+        "seed": 49,
+        "ratio": 0.6842698317307693,
+        "escaped": true,
+        "elapsed_s": 21707.488744974136
+      },
+      {
+        "seed": 50,
+        "ratio": 0.6931715745192307,
+        "escaped": true,
+        "elapsed_s": 22234.54888319969
+      },
+      {
+        "seed": 51,
+        "ratio": 0.5946514423076923,
+        "escaped": false,
+        "elapsed_s": 23211.54186487198
       }
     ]
   }

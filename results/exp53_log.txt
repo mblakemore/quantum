@@ -40,3 +40,42 @@ Escape threshold: 0.64 | max_iter=50
   seed=45: ratio=0.6416 ✓ ESCAPED (13298.3s)
   seed=46: ratio=0.6658 ✓ ESCAPED (13281.3s)
   seed=47: ratio=0.6961 ✓ ESCAPED (14416.1s)
+  seed=48: ratio=0.5955 ✗ trapped (13838.5s)
+  seed=49: ratio=0.6843 ✓ ESCAPED (21707.5s)
+  seed=50: ratio=0.6932 ✓ ESCAPED (22234.5s)
+  seed=51: ratio=0.5947 ✗ trapped (23211.5s)
+
+  ARM RESULT: 7/10 = 0.70 escape rate
+
+======================================================================
+FULL RESULTS TABLE (depth × shots)
+======================================================================
+Arm                          p  Shots  Escaped   Rate  Source
+----------------------------------------------------------------------
+p3_cobyla_256sh              3    256     6/10   0.60  Exp51 Phase A
+p3_cobyla_1024sh             3   1024     9/10   0.90  Exp51 Phase C
+p5_cobyla_256sh (NEW)        5    256     7/10 0.70  Exp53 Arm C
+p5_cobyla_1024sh (NEW)       5   1024     7/10 0.70  Exp53 Arm D
+
+============================================================
+HYPOTHESIS EVALUATION
+============================================================
+
+H1 (Depth penalty at 1024sh): CONFIRMED
+  p=3 1024sh: 0.90 | p=5 1024sh: 0.70 | gap: +0.20
+  Threshold for CONFIRMED: p5_1024sh < 0.80
+
+H2 (Depth penalty at 256sh): REFUTED
+  p=3 256sh: 0.60 | p=5 256sh: 0.70 | gap: -0.10
+  Threshold for CONFIRMED: p5_256sh < 0.50
+
+H3 (Gap widens with shots): CONFIRMED
+  gap_256=-0.10 | gap_1024=+0.20
+  CONFIRMED if gap_1024 > gap_256
+
+✓ Results saved to: /mnt/droid/repos/quantum/experiments/exp53_results.json
+
+======================================================================
+SUMMARY: 2/3 hypotheses CONFIRMED
+H1: CONFIRMED | H2: REFUTED | H3: CONFIRMED
+======================================================================
