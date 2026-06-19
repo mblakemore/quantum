@@ -11,6 +11,15 @@ HYPOTHESES (from pre-reg):
   H2 (mechanism): warm-start benefit concentrates on seeds cold-start MISSES (rescue diversity)
   H3 (escalation): 3→4→5 escalation > 3→5 direct jump
 
+INTERPRETATION SCOPE (added C3836; full text in pred_c3835_001 record):
+  H1 is a WITHIN-QAOA initialization comparison (warm-start vs cold-start, SAME substrate),
+  NOT a QAOA-vs-classical claim — a positive H1 is not structural quantum advantage (true by
+  construction; do NOT invoke Omega(sqrt N) — that bound is for unstructured search, not this).
+  EDGES_20 is a SINGLE random instance (numpy seed=46); the 10 seeds vary only x0, not the graph,
+  so H1 speaks only to warm-start convergence-under-noise ON THIS INSTANCE. Separating exploitable
+  STRUCTURE from optimization-landscape convenience (Elder C5972, N&C Ch6) needs a structured-
+  instance arm — future work (Exp56-class), not built here.
+
 DESIGN (matches Exp53 substrate exactly — same EDGES_20, FakeMarrakesh noise, seeds 42-51,
 ESCAPE_THRESHOLD 0.640, COBYLA, transpile-once):
   Per seed:
