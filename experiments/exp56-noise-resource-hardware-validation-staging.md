@@ -63,6 +63,7 @@ Even with generous IBM-runtime active-time overhead, billed QPU usage for the fu
 4. Estimate transpiled QPU duration; trim circuit set if needed to fit freed seconds + buffer.
 5. Submit ONE batched `Sampler.run([...])` to `ibm_marrakesh` (fallback `ibm_fez`/`ibm_kingston`) via the Exp23/`ibm_quantum_submit.py` pattern. Record jobid → `experiments/job-manifest.md`.
 6. On completion: compute ratios, evaluate the 4 pre-registered criteria, write `findings/`.
+7. **Crash recovery (Elder C5966 fill-step class):** the submit script fetches synchronously via `job.result()`, so result-fill is automatic *within a surviving run*. The only residual exposure is process-death during a long QPU queue — recoverable, not silent, because the job_id is persisted to `job-manifest.md` at step 5 **before** the blocking wait. If that happens, retrieve via `QiskitRuntimeService().job(<job_id>).result()` using the manifest id. (No standing tool: this is a one-time recoverable event, not a silently-accumulating null-outcome collector — distinct from Elder's cron'd record-now/fill-later class.)
 
 ## Provenance / no-collision
 
