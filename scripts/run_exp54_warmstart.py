@@ -28,6 +28,15 @@ ESCAPE_THRESHOLD 0.640, COBYLA, transpile-once):
     3. Exp54B: pad p3→p4, COBYLA → pad p4→p5, COBYLA → escape@p5 (escalation)
   Baseline: p=5 cold-start rate from Exp53 (0.667 @1024sh) — NOT re-run here.
 
+SHOT-ELASTICITY ADDENDUM (Ember C3840, re: Whisper P-C4208-a conf 0.60 / Finding 28):
+  This runner is FIXED-1024sh → it yields ESCAPE-RATE, not shot-elasticity (Δratio/Δshots).
+  Its warm-start ArmA 1024sh ratios ARE the UPPER anchor of the elasticity curve Whisper needs.
+  To grade P-C4208-a ("warm-start moves p5 OFF the zero-elasticity floor, elasticity ≥ +0.10
+  over Exp53's 256→1024 range") add ONE matched level: warm-start ArmA @256sh, then
+  elasticity = ratio(1024) − ratio(256). Comparable to Finding-28 cold-start p5 zero (0.70→0.70).
+  BUILD-OR-RESCOPE = Whisper's call (her pre-reg); if greenlit, add the 256sh warm-start arm
+  the moment Exp54 frees the harness (~C3855). At Exp54 resolution, surface this.
+
 PADDING (pre-reg conservative scheme): append zeros for new layers (identity warm-start).
   p=3 vector convention (evaluate_with_transpiled): params[:p]=gammas, params[p:]=betas
   → [γ1,γ2,γ3, β1,β2,β3]  pad→p5  [γ1,γ2,γ3,0,0, β1,β2,β3,0,0]
