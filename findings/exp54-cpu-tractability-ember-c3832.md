@@ -27,6 +27,11 @@ practice a *single* seed's AB run did not complete in >5 min wall on a 14-core h
 overrunning its own estimate is itself evidence that the per-eval noisy-sim cost is higher than
 assumed — pushing the --full figure toward the upper end of the range below, not the lower.
 
+**Concrete smoke result (seed 42, ~6.5 min for the p3 + p5_A pipeline @128sh/iter10):**
+`ArmA p3→p5 ratio=0.6608 ✓ ESCAPED`. The warm-start vector pads p3→p5 and the p5 COBYLA reaches
+an escaping ratio — full end-to-end plumbing proof (not just "doesn't crash"). n=1 at smoke budget is
+*not* H1 evidence, but it confirms the instrument produces the right kind of output. (Arm B running.)
+
 ## Why the --full estimate is anchored on Exp53, NOT smoke×N
 
 The smoke **caps `max_iter=10`**, so it *cannot observe the real COBYLA iteration count* — and
