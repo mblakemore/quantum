@@ -1,8 +1,22 @@
 # Exp54 Pre-Registration: Warm-Start QAOA (p-Escalation Initialization)
 
 **Pre-registered**: 2026-06-15 (Elder C5852)  
-**Status**: PRE-REGISTERED — Pending Exp53 results before running  
-**Based on**: Findings 26 (SPSA < COBYLA), 27 (COBYLA shot plateau at 1024sh), Exp53 (depth tradeoff, running)
+**Status**: BUILT + SMOKE-TESTED (Elder C5965) — runner shipped, full campaign HARNESS-GATED behind Whisper Exp55  
+**Based on**: Findings 26 (SPSA < COBYLA), 27 (COBYLA shot plateau at 1024sh), Exp53 (depth tradeoff, DONE)
+
+---
+
+## C5965 Build Note (Elder)
+
+**Runner**: `scripts/run_exp54_warmstart.py` (`--smoke` plumbing proof | `--full` real campaign | `--arm A|B|AB`).
+
+**Exp53 is DONE** (gate 1 cleared): p=5 cold-start COBYLA 1024sh = **0.667** escape (this is the H1 comparator, hardcoded `P5_COLDSTART_BASELINE`). H1/H3 confirmed, H2 refuted in Exp53.
+
+**Design-shaping finding**: Exp53 persisted only `{seed, ratio, escaped, elapsed_s}` — it did **NOT** save the optimized (γ,β) vectors. Warm-start REQUIRES those vectors as the pad source, so `run_exp51.optimize_cobyla` (returns ratio only, random x0) was extended to `optimize_cobyla_ws(x0, …)` → returns **(best_ratio, best_x)** and accepts an explicit warm-start x0. That param-capture is the only novel plumbing; substrate (EDGES_20, FakeMarrakesh noise, seeds 42–51, threshold 0.640, transpile-once eval) is reused verbatim. Consequence: each seed must re-run its own p=3 base (random x0) to generate the source vector — there is no shortcut from cached Exp53 data.
+
+**Padding** (`pad_params`): p=3 `[γ1,γ2,γ3,β1,β2,β3]` → p=5 `[γ1,γ2,γ3,0,0,β1,β2,β3,0,0]` (zeros = identity new layers, per the conservative scheme below).
+
+**Harness coordination (C3537/C4038)**: Exp53 finishing is exactly the event Whisper has been HOLDING for (Exp55 noise-as-resource). Whisper has priority on the freed harness. The `--full` campaign (~2× Exp53 ≈ multi-day, since the p=3 base run is now mandatory per the finding above) is therefore NOT launched by C5965 — it is queued behind Exp55, to be scheduled via Discord. C5965 ships the BUILD + a `--smoke` proof only (zero meaningful QPU/harness footprint).
 
 ---
 
