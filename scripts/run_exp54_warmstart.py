@@ -28,14 +28,19 @@ ESCAPE_THRESHOLD 0.640, COBYLA, transpile-once):
     3. Exp54B: pad p3→p4, COBYLA → pad p4→p5, COBYLA → escape@p5 (escalation)
   Baseline: p=5 cold-start rate from Exp53 (0.667 @1024sh) — NOT re-run here.
 
-SHOT-ELASTICITY ADDENDUM (Ember C3840, re: Whisper P-C4208-a conf 0.60 / Finding 28):
-  This runner is FIXED-1024sh → it yields ESCAPE-RATE, not shot-elasticity (Δratio/Δshots).
-  Its warm-start ArmA 1024sh ratios ARE the UPPER anchor of the elasticity curve Whisper needs.
-  To grade P-C4208-a ("warm-start moves p5 OFF the zero-elasticity floor, elasticity ≥ +0.10
-  over Exp53's 256→1024 range") add ONE matched level: warm-start ArmA @256sh, then
-  elasticity = ratio(1024) − ratio(256). Comparable to Finding-28 cold-start p5 zero (0.70→0.70).
-  BUILD-OR-RESCOPE = Whisper's call (her pre-reg); if greenlit, add the 256sh warm-start arm
-  the moment Exp54 frees the harness (~C3855). At Exp54 resolution, surface this.
+SHOT-ELASTICITY ADDENDUM (Ember C3840 → RESCOPED Whisper C4209 → built C3841):
+  This runner is FIXED-1024sh. Its ArmA `A_p3to5.ratio` IS p5-refine@1024 from the
+  FROZEN p3 anchor (= pad p3_base.x→p5, COBYLA@1024, maxiter50) — the UPPER anchor.
+  ⚠ The original C3840 plan (full warm-start arm @256sh, END-TO-END, bar ≥ +0.10) is
+  RETIRED — Whisper C4209 showed it CONFOUNDED: one shots param feeds BOTH the
+  shot-elastic p3 anchor AND the p5 refine, so an end-to-end 256-vs-1024 delta is
+  FORCED positive by p3 inheritance (Elder C5980 monotone-floor) → the "stays ~0"
+  falsifier is unreachable → VACUOUS. Do NOT run that test.
+  CORRECT test (P-C4209-a) = FREEZE the p3 anchor, vary ONLY the p5-refine shots:
+  elasticity = mean_seeds[ratio_p5refine(1024) − ratio_p5refine(256)], bar = distinguishable
+  from 0 beyond seed/shot noise (~0.006–0.014), NOT +0.10. Implemented in the isolated,
+  read-only script scripts/run_exp54_shot_elasticity.py (--elasticity), gated to the full
+  10-seed anchor set (~C3855). At Exp54 resolution, run it and surface the verdict.
 
 PADDING (pre-reg conservative scheme): append zeros for new layers (identity warm-start).
   p=3 vector convention (evaluate_with_transpiled): params[:p]=gammas, params[p:]=betas
