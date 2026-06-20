@@ -1,0 +1,7 @@
+# Python bytecode (never track — caused recurring per-cycle noise, C3864)
+__pycache__/
+*.pyc
+
+# Stale/backup checkpoint snapshots
+*.bak
+*.stale-*
