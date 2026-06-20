@@ -1,0 +1,40 @@
+======================================================================
+Exp57 Instance-Generalization — PILOT
+instances=['EDGES_20_ref', 'rand_seed101', 'rand_seed202', 'rand_seed303']
+opt_seeds=[42, 43, 44] shots=256 maxiter=20
+metric = lift = r_warm_p5 - r_cold_p5 (instance-agnostic; 0.640 NOT used)
+======================================================================
+
+--- instance EDGES_20_ref: max_cut=26, p3depth=241 p5depth=363 ---
+  [EDGES_20_ref] seed=42  cold=0.6116  p3=0.6424  warm=0.6686  lift=+0.0569  (3907s)
+  [EDGES_20_ref] seed=43  cold=0.6130  p3=0.6191  warm=0.6785  lift=+0.0655  (3839s)
+  [EDGES_20_ref] seed=44  cold=0.6355  p3=0.5819  warm=0.5751  lift=-0.0604  (3878s)
+
+--- instance rand_seed101: max_cut=26, p3depth=259 p5depth=411 ---
+  [rand_seed101] seed=42  cold=0.6061  p3=0.6478  warm=0.6816  lift=+0.0756  (3864s)
+  [rand_seed101] seed=43  cold=0.5879  p3=0.6313  warm=0.7356  lift=+0.1477  (3857s)
+  [rand_seed101] seed=44  cold=0.6641  p3=0.5688  warm=0.5700  lift=-0.0941  (3896s)
+
+--- instance rand_seed202: max_cut=25, p3depth=253 p5depth=393 ---
+  [rand_seed202] seed=42  cold=0.6164  p3=0.6308  warm=0.7142  lift=+0.0978  (3841s)
+  [rand_seed202] seed=43  cold=0.6023  p3=0.6122  warm=0.6427  lift=+0.0403  (3911s)
+  [rand_seed202] seed=44  cold=0.6783  p3=0.5923  warm=0.6083  lift=-0.0700  (3904s)
+
+--- instance rand_seed303: max_cut=26, p3depth=256 p5depth=396 ---
+  [rand_seed303] seed=42  cold=0.6046  p3=0.5787  warm=0.5850  lift=-0.0195  (3984s)
+  [rand_seed303] seed=43  cold=0.6023  p3=0.6185  warm=0.6196  lift=+0.0173  (3991s)
+  [rand_seed303] seed=44  cold=0.6128  p3=0.5730  warm=0.5706  lift=-0.0422  (3922s)
+
+======================================================================
+SUMMARY — per-instance warm-start lift (delta = mean r_warm - mean r_cold)
+======================================================================
+  EDGES_20_ref     n=3  cold=0.6200  warm=0.6407  delta=+0.0207
+  rand_seed101     n=3  cold=0.6193  warm=0.6624  delta=+0.0431
+  rand_seed202     n=3  cold=0.6323  warm=0.6551  delta=+0.0227
+  rand_seed303     n=3  cold=0.6066  warm=0.5917  delta=-0.0148
+
+  reference EDGES_20 delta = +0.0207
+  new instances with delta>0: 2/3  (H1 supported if majority > 0)
+  H1 verdict: SUPPORTED
+
+  Wrote /mnt/droid/repos/quantum/scripts/../experiments/exp57_results.json
