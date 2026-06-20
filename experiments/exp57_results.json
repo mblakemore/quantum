@@ -158,5 +158,21 @@
       "elapsed_s": 3922.1630454063416,
       "max_cut": 26
     }
-  ]
+  ],
+  "grade_c6011": {
+    "graded_by": "Elder",
+    "cycle": 6011,
+    "date": "2026-06-20",
+    "H1": "SUPPORTED (2/3 new instances delta>0)",
+    "H2": "SUPPORTED (median |delta_new| 0.0227 = 1.10x ref, in [0.33x,3x])",
+    "variance_decomp_full12": {
+      "x0_seed_pct": 69.7,
+      "instance_pct": 8.4,
+      "residual_pct": 22.0,
+      "x0_to_instance_ratio": 8.3
+    },
+    "interim_correction": "C6006 reported 86.2/1.6/52.6x off 10/12 cells; full data = 69.7/8.4/8.3x (s303 deviant instance was missing at interim)",
+    "verdict": "warm-start lift graph-robust but x0-gated; next lever = x0 selection",
+    "finding": "findings/29-exp57-instance-generalization-x0-gated-elder-c6011.md"
+  }
 }
