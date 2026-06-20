@@ -360,5 +360,18 @@
       ]
     }
   ],
-  "interpretation_rule": "If this noiseless re-init escape rate ~= Arm 1 noise-escape rate -> escape is INIT-SENSITIVITY (noise arm uninterpretable, NO-GO). If this stays trapped while Arm 1 escapes -> genuine NOISE effect (GO on powered subsample, R=2-3 x more seeds)."
+  "interpretation_rule": "If this noiseless re-init escape rate ~= Arm 1 noise-escape rate -> escape is INIT-SENSITIVITY (noise arm uninterpretable, NO-GO). If this stays trapped while Arm 1 escapes -> genuine NOISE effect (GO on powered subsample, R=2-3 x more seeds).",
+  "verdict": {
+    "stamped_cycle": "C4217",
+    "bottom_line": "INIT-SENSITIVITY CONFIRMED AT n=29 — noiseless re-init escapes pervasively (68.3% of realizations; 29/29 seeds escape >=1x) at Arm-1 own x0 schedule (seed*100+r). Generalizes the C4153 seed-51 matched-toggle finding from |T|=1 to n=29: the init-sensitivity confound is STRUCTURAL, not a single-seed artifact.",
+    "interpretation": "Noise-as-resource remains UNINTERPRETABLE as instrumented. NO-GO for relaunch without the C4153 G1-G4 fixed-toggle spec (same x0 AND same seed_simulator; noise the only variable).",
+    "scope_caveat": "This is a RE-INIT control (matches Arm-1 x0 schedule, noise OFF) — NOT a fixed-x0 noise toggle. It does NOT by itself resolve the C4153 r=1 candidate-positive (single noiseless 0.600 trap vs noisy 0.680 escape); that still requires the G1 fixed-toggle retest.",
+    "cross_refs": [
+      "C4153 (CLOSED matched-toggle, seed 51 p=3, findings/exp55-substrate-audit-CLOSED-matched-toggle-c4153.md)",
+      "C4190 (re-init-sufficiency confound)",
+      "C4194 (Exp55 optionA noise arm KILLED)",
+      "Elder C5957 (payload-vacuity HW gate, findings/exp56-payload-vacuous-escape-flag-elder-c5957.md)",
+      "Ember C3848 (independent convergent re-derivation, pre-data; caught 2 of the 3 moving variables: x0 + noise, not the shot-sim-seed 2000+r)"
+    ]
+  }
 }

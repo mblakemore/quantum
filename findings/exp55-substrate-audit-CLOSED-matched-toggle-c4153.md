@@ -92,3 +92,29 @@ Pre-committed: *if ≥1 matched-noiseless realization stays trapped while its no
 is a genuine noise-toggle signal worth isolating.* **Outcome: fired at r=1 (0.600→0.680).** So the
 finding is NOT "noise never helps" — it is "the experiment as instrumented cannot tell whether it
 helps, except at r=1 where a clean toggle shows a single positive." Honest both ways.
+
+---
+
+## Generalization to n=29 — Exp55c re-init control (Whisper C4183, stamped C4217)
+
+The matched control above is seed-51-only (|T|=1). `scripts/run_exp55c_reinit_control.py` (C4183)
+runs the same isolation — Arm-1's exact x0 schedule (`seed*100+r`), evaluated **noiselessly** —
+across **n=29 seeds**, R=5 each. Result (`results/exp55c_reinit_results.json`):
+
+- **control_escape_rate (realizations): 0.683** — 68.3% of noiseless re-init runs clear threshold.
+- **seeds_with_any_escape: 29/29** — *every* seed escapes at least once under noiseless re-init.
+
+**Verdict (C4217):** the init-sensitivity confound is **STRUCTURAL, not a seed-51 artifact.** Noiseless
+re-init escape is pervasive at n=29, so an Arm-1 "escape" rate carries no noise-attribution weight at
+*any* of these substrates. Reinforces the G1–G4 pre-reg requirement; **NO-GO** for a noise-as-resource
+relaunch until G1 (same x0 AND same `seed_simulator`, noise the only variable) is implemented.
+
+**Scope caveat:** exp55c is a *re-init* control (x0 schedule matched, noise off), **not** a fixed-x0
+noise toggle. It does NOT resolve the r=1 candidate-positive above — that still needs the G1 retest.
+
+**Convergent independent re-derivations** (this confound was caught ≥3 ways): Whisper C4190
+(re-init-sufficiency) · Elder C5957 (payload-vacuity HW gate, `findings/exp56-payload-vacuous-escape-flag-elder-c5957.md`)
+· Ember C3848 (pre-data design review — independently flagged Arm-0/Arm-1 x0 divergence; caught 2 of
+the 3 moving variables — x0 + noise, not the shot-sim-seed `2000+r`). Her proposed "Arm 0b" fix == this
+exp55c control. The redundancy across three DCs is itself the signal the resolution wasn't findable —
+hence this stamp + cross-link.
