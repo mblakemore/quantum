@@ -9,11 +9,23 @@ quota is exhausted, causing queued jobs to be cancelled regardless of backend.
 This script confirms or denies that hypothesis empirically by querying the
 platform usage endpoint(s). Read-only — never submits or cancels.
 
+WHAT THE NUMBER MEANS (Whisper C4245 — ends a recurring ambiguity):
+  `instances/usage.usage_consumed_seconds` is billed QPU-SECONDS (quantum
+  runtime actually executed on hardware), NOT wall-clock. The Open-plan cap is
+  600 QPU-seconds (~10 min) over a ROLLING 28-day window. Two consequences that
+  burned prior cycles re-litigating "is 600/600 stale?":
+    1. Local classical simulations (e.g. exp54/exp55/exp57 warm-start runs) do
+       NOT consume this budget — they eat wall-time, not QPU-seconds.
+    2. `usage_limit_reached: true` at 600/600 is therefore the REAL depletion
+       signal, not the inflated wall-clock metric. When it says reached, it is
+       genuinely reached — the lever is a Creator top-up, not "wait, it's stale."
+
 USAGE:
   python3 scripts/check_usage.py
 
 EXIT CODES:
-  0 = success (usage data retrieved)
+  0 = budget available (usage_limit_reached false)
+  1 = budget exhausted (usage_limit_reached true) — hardware jobs will be blocked
   2 = credential / network / API error
 """
 import json
@@ -73,6 +85,34 @@ def _try(label, url, hdr):
     return None
 
 
+def _summarize(usage):
+    """Human-readable verdict from instances/usage. Returns exit code (0/1)."""
+    print("\n=== SUMMARY (QPU-seconds, NOT wall-clock) ===")
+    if not isinstance(usage, dict):
+        print("  ⚠ Could not retrieve instances/usage — see errors above.")
+        return 2
+    consumed = usage.get("usage_consumed_seconds")
+    limit = usage.get("usage_limit_seconds")
+    reached = usage.get("usage_limit_reached")
+    period = usage.get("usage_period", {})
+    try:
+        pct = 100.0 * float(consumed) / float(limit) if limit else float("nan")
+        pct_s = f"{pct:.0f}%"
+        remaining = max(0.0, float(limit) - float(consumed))
+    except (TypeError, ValueError):
+        pct_s, remaining = "?", "?"
+    print(f"  Consumed : {consumed} / {limit} QPU-seconds ({pct_s})")
+    print(f"  Remaining: {remaining} QPU-seconds")
+    print(f"  Window   : {period.get('start_time', '?')} → {period.get('end_time', '?')} (rolling ~28d)")
+    if reached:
+        print("  VERDICT  : 🔴 EXHAUSTED — hardware jobs will be blocked/cancelled.")
+        print("             This is the REAL QPU-second counter, not stale wall-time.")
+        print("             Lever = Creator top-up (standing offer). Local sims unaffected.")
+        return 1
+    print("  VERDICT  : 🟢 AVAILABLE — hardware submission permitted.")
+    return 0
+
+
 def main():
     try:
         token, crn = _load_account()
@@ -84,12 +124,11 @@ def main():
     hdr = {"Authorization": f"Bearer {bearer}", "Service-CRN": crn}
     print(f"Instance CRN: {crn[:60]}...")
 
-    # The platform exposes usage at the instance level. Endpoint names have
-    # shifted across API versions; probe the known candidates read-only.
-    _try("usage", f"{API_BASE}/usage", hdr)
+    # instances/usage is the authoritative QPU-second counter (confirmed C4245).
+    # The old /usage probe is a confirmed 404 and has been dropped.
     _try("instances/configuration", f"{API_BASE}/instances/configuration", hdr)
-    _try("instances/usage", f"{API_BASE}/instances/usage", hdr)
-    return 0
+    usage = _try("instances/usage", f"{API_BASE}/instances/usage", hdr)
+    return _summarize(usage)
 
 
 if __name__ == "__main__":
