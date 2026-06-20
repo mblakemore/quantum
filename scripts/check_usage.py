@@ -19,6 +19,17 @@ WHAT THE NUMBER MEANS (Whisper C4245 — ends a recurring ambiguity):
     2. `usage_limit_reached: true` at 600/600 is therefore the REAL depletion
        signal, not the inflated wall-clock metric. When it says reached, it is
        genuinely reached — the lever is a Creator top-up, not "wait, it's stale."
+    3. ROLLING-WINDOW FREE-UP DATE IS LOW-VALUE, NOT WORTH COMPUTING (Whisper
+       C4248). The 600s do roll off ~28d after each job ran, so the budget
+       self-heals without a top-up. Computing WHEN requires per-job QPU-second
+       timestamps. The `/jobs` LIST endpoint returns HTTP 403 for this
+       account/token, BUT `/jobs/{id}` single-fetch IS permitted and HW job IDs
+       are harvestable from the repo result logs — so a free-up date is
+       derivable in principle (C4111: a 403 on one route ≠ data unavailable).
+       It is simply NOT WORTH IT: the Creator top-up is the standing lever and
+       dominates a ~weeks-out trickle. Do NOT speculate a date from the bare
+       600/600; if a future cycle ever needs it, harvest job IDs from logs +
+       single-fetch usage. Default: top-up is the plan, roll-off is a bonus.
 
 USAGE:
   python3 scripts/check_usage.py
