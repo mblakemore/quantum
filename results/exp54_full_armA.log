@@ -23,3 +23,4 @@ Threshold=0.64 | p5 cold-start baseline (Exp53)=0.667
         ArmA p3→p5  ratio=0.6836 ✓ ESCAPED
   seed=50 p3-base ratio=0.6819 ✓
         ArmA p3→p5  ratio=0.6818 ✓ ESCAPED
+  seed=51 p3-base ratio=0.6023 ✗

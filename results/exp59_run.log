@@ -1,0 +1,6 @@
+======================================================================
+Exp59 x0-Selection — RUN
+instance=EDGES_20  opt_seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]  shots=256  maxiter=20
+metric = lift = r_warm_p5 - r_cold_p5 ; decompose anchor(p3) vs cold-luck
+======================================================================
+--- EDGES_20: max_cut=26, p3depth=241 p5depth=363 ---
