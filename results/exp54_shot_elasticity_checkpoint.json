@@ -1,0 +1,39 @@
+{
+  "mode": "VALIDATE",
+  "shots": 1024,
+  "max_iter": 50,
+  "rows": [
+    {
+      "seed": 42,
+      "ratio_p5refine": 0.6736403245192307,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.6856971153846154,
+      "elapsed_s": 7034.065496444702,
+      "reproduction_delta": -0.012056790865384692
+    },
+    {
+      "seed": 43,
+      "ratio_p5refine": 0.6905799278846154,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.6864858774038461,
+      "elapsed_s": 7022.504163265228,
+      "reproduction_delta": 0.0040940504807692735
+    },
+    {
+      "seed": 44,
+      "ratio_p5refine": 0.615234375,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.65625,
+      "elapsed_s": 7042.185031414032,
+      "reproduction_delta": -0.041015625
+    },
+    {
+      "seed": 45,
+      "ratio_p5refine": 0.6886643629807693,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.6861102764423077,
+      "elapsed_s": 7047.7938532829285,
+      "reproduction_delta": 0.002554086538461564
+    }
+  ]
+}

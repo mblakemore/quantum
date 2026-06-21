@@ -1,10 +1,1 @@
-d8gkkrdv8cos73f39lu0
-
-# Status updates:
-# 2026-06-04 09:50: Job submitted to ibm_kingston, started QUEUED
-# 2026-06-05 10:50 UTC: IBM Quantum rolling 28-day budget (600s) RESET
-# 2026-06-05 11:00-12:00 UTC: Jobs still QUEUED (queue time ~hours, normal)
-# Will monitor post-NFP (~10 AM ET) for RUNNING/COMPLETED status
-# 2026-06-05 16:35 UTC: Still QUEUED on ibm_kingston. Rolling 28-day quota API shows 600/600.
-#   Note: All prior experiment jobs' usage still within the 28-day window — quota clears
-#   as older jobs roll off (~June 8-10 for May 2026 experiments). Exp38 sim confirmed meanwhile.
+d8rjemekodhs7384gpfg

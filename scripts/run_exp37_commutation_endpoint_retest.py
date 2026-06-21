@@ -376,6 +376,13 @@ def get_counts_from_job(job_id, n_circuits):
     from qiskit_ibm_runtime import QiskitRuntimeService
     service = QiskitRuntimeService()
     job = service.job(job_id)
+    actual_backend = job.backend().name
+    if actual_backend != BACKEND_NAME:
+        print(f"  ⚠️  BACKEND MISMATCH: job ran on '{actual_backend}' but this "
+              f"script's BACKEND_NAME='{BACKEND_NAME}'. Finalize with the script whose "
+              f"BACKEND_NAME matches the job, else metadata (backend/selected_pair) is "
+              f"MISLABELED (C4263 wrong-script-finalize trap). Aborting.")
+        return None, f"BACKEND_MISMATCH:{actual_backend}"
     status = str(job.status())
     print(f"  job {job_id} status: {status}")
     if status not in ("DONE", "JobStatus.DONE"):

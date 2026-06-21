@@ -1,8 +1,31 @@
 {
+  "experiment": "Exp54",
+  "title": "Warm-Start QAOA p-escalation",
+  "author": "Elder",
   "mode": "FULL",
   "arms": [
     "A"
   ],
+  "escape_threshold": 0.64,
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "shots": 1024,
+  "p5_coldstart_baseline": 0.667,
+  "summary": {
+    "p3_base_rate": 0.7,
+    "A_rate": 0.8,
+    "B_rate": null
+  },
   "data": [
     {
       "seed": 42,

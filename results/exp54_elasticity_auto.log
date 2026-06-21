@@ -1,1 +1,13 @@
 === wait_then_elasticity START 2026-06-20T13:56:18+00:00 waiting on PID 2132934 ===
+PID 2132934 exited at 2026-06-20T17:41:18+00:00 after 46 polls
+checkpoint mtime: 2026-06-20 17:41:03.394011366 +0000
+=== --validate 2026-06-20T17:41:18+00:00 ===
+================================================================
+Exp54 SHOT-ELASTICITY (frozen anchor) — VALIDATE | shots=1024 maxiter=50
+Anchored seeds available: [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+================================================================
+  p=5 transpiled depth=363
+  seed=42  p5refine@1024=0.6736  Δvs-campaign-1024 = -0.0121
+  seed=43  p5refine@1024=0.6906  Δvs-campaign-1024 = +0.0041
+  seed=44  p5refine@1024=0.6152  Δvs-campaign-1024 = -0.0410
+  seed=45  p5refine@1024=0.6887  Δvs-campaign-1024 = +0.0026
