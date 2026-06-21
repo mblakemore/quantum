@@ -1,0 +1,25 @@
+======================================================================
+Exp60 Anchor-Transfer — PILOT
+n_qubits=12 n_edges=18 K=4 seeds=[300, 301, 302, 303] shots=256 maxiter=15
+metric = transfer matrix r_xfer[S][T] = eval(pad(anchor_p3(S)) on T) ; xfer_lift = r_xfer - r_cold(T)
+======================================================================
+  inst seed=300 n=12: r_p3=0.6164 r_cold=0.6112 r_self=0.6052 self_lift=-0.0060 (255s)
+  inst seed=301 n=12: r_p3=0.6496 r_cold=0.6610 r_self=0.6576 self_lift=-0.0033 (266s)
+  inst seed=302 n=12: r_p3=0.6339 r_cold=0.6240 r_self=0.6398 self_lift=+0.0159 (263s)
+  inst seed=303 n=12: r_p3=0.6555 r_cold=0.6156 r_self=0.6549 self_lift=+0.0393 (261s)
+
+--- transfer matrix (direct evals, no re-optimization) ---
+  T=seed300 r_cold=0.6112 | r_xfer[S->T]: 0.6125 0.5776 0.5786 0.5516
+  T=seed301 r_cold=0.6610 | r_xfer[S->T]: 0.6440 0.6443 0.7093 0.8064
+  T=seed302 r_cold=0.6240 | r_xfer[S->T]: 0.5995 0.5865 0.6247 0.6523
+  T=seed303 r_cold=0.6156 | r_xfer[S->T]: 0.5854 0.5724 0.6141 0.6484
+
+======================================================================
+RESULTS (PILOT)
+  H1 mean off-diag xfer_lift = -0.0048 (positive frac 0.25) -> NULL/NEG (overfit)
+  H2 mean transfer efficiency = -0.67 (self_lift>0 targets only)
+  H3 rho(headroom, xfer_in) = -1.0  vs  rho(src_quality, xfer_out) = 0.39999999999999997
+  p5 ceiling (max r_self) = 0.6576
+  total elapsed = 1150s
+  saved -> /mnt/droid/repos/quantum/scripts/../results/exp60_anchor_transfer_results.json
+======================================================================

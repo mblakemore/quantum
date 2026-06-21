@@ -1,0 +1,94 @@
+{
+  "experiment": "Exp54-shot-elasticity",
+  "method": "frozen-anchor p5-refine",
+  "grades": "Whisper P-C4209-a",
+  "mode": "VALIDATE",
+  "shots": 1024,
+  "max_iter": 50,
+  "noise_band": [
+    0.006,
+    0.014
+  ],
+  "rows": [
+    {
+      "seed": 42,
+      "ratio_p5refine": 0.6736403245192307,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.6856971153846154,
+      "elapsed_s": 7034.065496444702,
+      "reproduction_delta": -0.012056790865384692
+    },
+    {
+      "seed": 43,
+      "ratio_p5refine": 0.6905799278846154,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.6864858774038461,
+      "elapsed_s": 7022.504163265228,
+      "reproduction_delta": 0.0040940504807692735
+    },
+    {
+      "seed": 44,
+      "ratio_p5refine": 0.615234375,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.65625,
+      "elapsed_s": 7042.185031414032,
+      "reproduction_delta": -0.041015625
+    },
+    {
+      "seed": 45,
+      "ratio_p5refine": 0.6886643629807693,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.6861102764423077,
+      "elapsed_s": 7047.7938532829285,
+      "reproduction_delta": 0.002554086538461564
+    },
+    {
+      "seed": 46,
+      "ratio_p5refine": 0.6909555288461539,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.6912560096153846,
+      "elapsed_s": 7051.414895296097,
+      "reproduction_delta": -0.00030048076923072653
+    },
+    {
+      "seed": 47,
+      "ratio_p5refine": 0.6814903846153846,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.59716796875,
+      "elapsed_s": 7038.317243099213,
+      "reproduction_delta": 0.08432241586538458
+    },
+    {
+      "seed": 48,
+      "ratio_p5refine": 0.6801382211538461,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.6809269831730769,
+      "elapsed_s": 7004.534937381744,
+      "reproduction_delta": -0.0007887620192307265
+    },
+    {
+      "seed": 49,
+      "ratio_p5refine": 0.6837815504807693,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.6836313100961539,
+      "elapsed_s": 7012.251984357834,
+      "reproduction_delta": 0.00015024038461541878
+    },
+    {
+      "seed": 50,
+      "ratio_p5refine": 0.6790114182692307,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.6818284254807693,
+      "elapsed_s": 6995.496174097061,
+      "reproduction_delta": -0.002817007211538547
+    },
+    {
+      "seed": 51,
+      "ratio_p5refine": 0.6068960336538461,
+      "shots": 1024,
+      "ratio_1024_campaign": 0.6056189903846154,
+      "elapsed_s": 7006.44238948822,
+      "reproduction_delta": 0.0012770432692307265
+    }
+  ]
+}
