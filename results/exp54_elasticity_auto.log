@@ -11,3 +11,31 @@ Anchored seeds available: [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
   seed=43  p5refine@1024=0.6906  Δvs-campaign-1024 = +0.0041
   seed=44  p5refine@1024=0.6152  Δvs-campaign-1024 = -0.0410
   seed=45  p5refine@1024=0.6887  Δvs-campaign-1024 = +0.0026
+  seed=46  p5refine@1024=0.6910  Δvs-campaign-1024 = -0.0003
+  seed=47  p5refine@1024=0.6815  Δvs-campaign-1024 = +0.0843
+  seed=48  p5refine@1024=0.6801  Δvs-campaign-1024 = -0.0008
+  seed=49  p5refine@1024=0.6838  Δvs-campaign-1024 = +0.0002
+  seed=50  p5refine@1024=0.6790  Δvs-campaign-1024 = -0.0028
+  seed=51  p5refine@1024=0.6069  Δvs-campaign-1024 = +0.0013
+
+================================================================
+SUMMARY — VALIDATE
+================================================================
+  mean |Δ| vs campaign 1024 = 0.0149 over 10 seed(s)
+  → substrate match OK (expect ≲0.01 shot noise; >0.015 = x0/maxiter/noise mismatch)
+
+  Wrote /mnt/droid/repos/quantum/scripts/../experiments/exp54_shot_elasticity_results.json
+=== --elasticity 2026-06-21T13:12:19+00:00 ===
+================================================================
+Exp54 SHOT-ELASTICITY (frozen anchor) — ELASTICITY | shots=256 maxiter=50
+Anchored seeds available: [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+================================================================
+  p=5 transpiled depth=363
+  seed=42  p5refine@256=0.6767  elasticity(1024−256) = +0.0090
+  seed=43  p5refine@256=0.6846  elasticity(1024−256) = +0.0018
+  seed=44  p5refine@256=0.6244  elasticity(1024−256) = +0.0319
+  seed=45  p5refine@256=0.6887  elasticity(1024−256) = -0.0026
+  seed=46  p5refine@256=0.6949  elasticity(1024−256) = -0.0036
+  seed=47  p5refine@256=0.6495  elasticity(1024−256) = -0.0523
+  seed=48  p5refine@256=0.6830  elasticity(1024−256) = -0.0021
+  seed=49  p5refine@256=0.6877  elasticity(1024−256) = -0.0040

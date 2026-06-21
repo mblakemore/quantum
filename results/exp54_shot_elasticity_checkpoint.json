@@ -1,39 +1,71 @@
 {
-  "mode": "VALIDATE",
-  "shots": 1024,
+  "mode": "ELASTICITY",
+  "shots": 256,
   "max_iter": 50,
   "rows": [
     {
       "seed": 42,
-      "ratio_p5refine": 0.6736403245192307,
-      "shots": 1024,
+      "ratio_p5refine": 0.6766826923076923,
+      "shots": 256,
       "ratio_1024_campaign": 0.6856971153846154,
-      "elapsed_s": 7034.065496444702,
-      "reproduction_delta": -0.012056790865384692
+      "elapsed_s": 1852.289419412613,
+      "elasticity": 0.009014423076923128
     },
     {
       "seed": 43,
-      "ratio_p5refine": 0.6905799278846154,
-      "shots": 1024,
+      "ratio_p5refine": 0.6846454326923077,
+      "shots": 256,
       "ratio_1024_campaign": 0.6864858774038461,
-      "elapsed_s": 7022.504163265228,
-      "reproduction_delta": 0.0040940504807692735
+      "elapsed_s": 1847.1366884708405,
+      "elasticity": 0.001840444711538436
     },
     {
       "seed": 44,
-      "ratio_p5refine": 0.615234375,
-      "shots": 1024,
+      "ratio_p5refine": 0.6243990384615384,
+      "shots": 256,
       "ratio_1024_campaign": 0.65625,
-      "elapsed_s": 7042.185031414032,
-      "reproduction_delta": -0.041015625
+      "elapsed_s": 1844.3614854812622,
+      "elasticity": 0.031850961538461564
     },
     {
       "seed": 45,
-      "ratio_p5refine": 0.6886643629807693,
-      "shots": 1024,
+      "ratio_p5refine": 0.6887019230769231,
+      "shots": 256,
       "ratio_1024_campaign": 0.6861102764423077,
-      "elapsed_s": 7047.7938532829285,
-      "reproduction_delta": 0.002554086538461564
+      "elapsed_s": 1847.779479265213,
+      "elasticity": -0.0025916466346154188
+    },
+    {
+      "seed": 46,
+      "ratio_p5refine": 0.6948617788461539,
+      "shots": 256,
+      "ratio_1024_campaign": 0.6912560096153846,
+      "elapsed_s": 1851.7845120429993,
+      "elasticity": -0.0036057692307692735
+    },
+    {
+      "seed": 47,
+      "ratio_p5refine": 0.6494891826923077,
+      "shots": 256,
+      "ratio_1024_campaign": 0.59716796875,
+      "elapsed_s": 1846.6253945827484,
+      "elasticity": -0.05232121394230771
+    },
+    {
+      "seed": 48,
+      "ratio_p5refine": 0.6829927884615384,
+      "shots": 256,
+      "ratio_1024_campaign": 0.6809269831730769,
+      "elapsed_s": 1843.3315868377686,
+      "elasticity": -0.002065805288461564
+    },
+    {
+      "seed": 49,
+      "ratio_p5refine": 0.6876502403846154,
+      "shots": 256,
+      "ratio_1024_campaign": 0.6836313100961539,
+      "elapsed_s": 1927.0395064353943,
+      "elasticity": -0.004018930288461564
     }
   ]
 }

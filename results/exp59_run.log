@@ -4,3 +4,5 @@ instance=EDGES_20  opt_seeds=[42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]  s
 metric = lift = r_warm_p5 - r_cold_p5 ; decompose anchor(p3) vs cold-luck
 ======================================================================
 --- EDGES_20: max_cut=26, p3depth=241 p5depth=363 ---
+  seed=42  cold=0.6035  p3=0.6292  warm=0.6870  lift=+0.0835  (39155s)
+  seed=43  cold=0.5971  p3=0.6235  warm=0.6303  lift=+0.0332  (36018s)

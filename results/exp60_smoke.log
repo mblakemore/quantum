@@ -1,0 +1,25 @@
+======================================================================
+Exp60 Anchor-Transfer — SMOKE
+n_qubits=10 n_edges=15 K=2 seeds=[200, 201] shots=128 maxiter=6
+metric = transfer matrix r_xfer[S][T] = eval(pad(anchor_p3(S)) on T) ; xfer_lift = r_xfer - r_cold(T)
+======================================================================
+/home/mike/.local/lib/python3.12/site-packages/scipy/_lib/pyprima/common/preproc.py:68: UserWarning: COBYLA: Invalid MAXFUN; it should be at least num_vars + 2; it is set to 8
+  warn(f'{solver}: Invalid MAXFUN; it should be at least {min_maxfun_str}; it is set to {maxfun}')
+/home/mike/.local/lib/python3.12/site-packages/scipy/_lib/pyprima/common/preproc.py:68: UserWarning: COBYLA: Invalid MAXFUN; it should be at least num_vars + 2; it is set to 12
+  warn(f'{solver}: Invalid MAXFUN; it should be at least {min_maxfun_str}; it is set to {maxfun}')
+  inst seed=200 n=10: r_p3=0.6302 r_cold=0.6504 r_self=0.6283 self_lift=-0.0221 (77s)
+  inst seed=201 n=10: r_p3=0.6471 r_cold=0.6517 r_self=0.6380 self_lift=-0.0137 (77s)
+
+--- transfer matrix (direct evals, no re-optimization) ---
+  T=seed200 r_cold=0.6504 | r_xfer[S->T]: 0.6335 0.6250
+  T=seed201 r_cold=0.6517 | r_xfer[S->T]: 0.6022 0.6035
+
+======================================================================
+RESULTS (SMOKE)
+  H1 mean off-diag xfer_lift = -0.0374 (positive frac 0.00) -> NULL/NEG (overfit)
+  H2 mean transfer efficiency = None (self_lift>0 targets only)
+  H3 rho(headroom, xfer_in) = None  vs  rho(src_quality, xfer_out) = None
+  p5 ceiling (max r_self) = 0.6380
+  total elapsed = 163s
+  saved -> /mnt/droid/repos/quantum/scripts/../results/exp60_anchor_transfer_results.json
+======================================================================
