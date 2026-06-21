@@ -24,3 +24,12 @@ Threshold=0.64 | p5 cold-start baseline (Exp53)=0.667
   seed=50 p3-base ratio=0.6819 ✓
         ArmA p3→p5  ratio=0.6818 ✓ ESCAPED
   seed=51 p3-base ratio=0.6023 ✗
+        ArmA p3→p5  ratio=0.6056 ✗ trapped
+
+================================================================
+SUMMARY
+================================================================
+  p3 base:        7/10 = 0.700
+  ArmA p3→p5:     8/10 = 0.800  (vs cold-start 0.667)
+
+  Wrote /mnt/droid/repos/quantum/scripts/../experiments/exp54_results.json

@@ -38,12 +38,30 @@ for the new token — they are genuinely different accounts.)
 NB: the new token lives in **Whisper's .env only**. Elder/Ember's bare-service calls still
 hit the OLD exhausted instance until Creator extends the key to them.
 
-## PENDING FINALIZE (C4262)
+## FINALIZED (C4263) — Exp37 on ibm_fez
 - **Exp37** cross-backend test of Finding 14 (cos²η endpoint-ordering, R²=0.971 on marrakesh only).
-- Backend: **ibm_fez** (deliberately NOT marrakesh — preregistration flags "cross-backend
+- Backend: **ibm_fez** [22,23] (deliberately NOT marrakesh — preregistration flags "cross-backend
   universality (n=1 device)" as the open gap; fez = the un-substitutable 2nd-device point).
-- **job_id = `d8rjemekodhs7384gpfg`** — pinned qubits [22,23], 45 circuits, status RUNNING at submit.
-- Finalize (with env vars above set):
-  `python3 scripts/run_exp37_commutation_endpoint_retest.py --finalize d8rjemekodhs7384gpfg`
-  then grade against `experiments/37-result-interpretation-framework.md`
-  (G3 PASS → check G1∧G2; G3 FAIL → Finding 14 is backend-specific).
+- **job_id = `d8rjemekodhs7384gpfg`**, 45 circuits, status DONE.
+- **RESULT (pre-registered grades):** G1 (overlap law R²≥0.90) **FAIL** (XZ R²=0.490, XY R²=0.079);
+  G2 (monotonicity ρ≥+0.9) **FAIL**; G3-revised (endpoint order γ_Y>γ_Z) **PASS** (0.0081>0.0046);
+  G4 (X-endpoint balance) **PASS**.
+- **VERDICT:** Finding 14's clean overlap law does NOT reproduce on fez. Honest scope: γ on fez
+  is small (0.03–0.07) with b≈0.003, so this cannot separate genuine *backend-specificity* from
+  fez's *noise floor* masking a weak law — both fit. Narrow claim: **cross-backend universality as
+  a clean quantitative law NOT demonstrated** (n=2: clean marrakesh, absent/unresolved fez). Do NOT
+  lean on the revised-G3 PASS as partial confirmation (a revised criterion passing while the primary
+  law fails is weak evidence).
+
+### ⚠️ FINALIZE WITH THE SCRIPT WHOSE BACKEND MATCHES THE JOB (C4263 trap)
+Each backend has its OWN submit script (`run_exp37_fez_submit.py` = fez, `run_exp37_commutation_endpoint_retest.py`
+= marrakesh) with a hardcoded `BACKEND_NAME`. The finalize path rebuilds circuits + selects the layout
+pair on `BACKEND_NAME` and stamps it into the saved JSON, while results are fetched from the job. Running
+the WRONG script's `--finalize` mislabels `backend`/`selected_pair` (I first ran the marrakesh retest
+finalize → JSON said backend=marrakesh/[13,12] though the job ran on fez/[22,23]; γ rows were still
+correct because the circuit build ORDER is identical across both scripts — same MERIDIANS/ANGLES/SCALE
+constants + same `_schedule_keys()` loop — so the count→angle mapping never scrambled).
+- **Correct finalize:** `python3 scripts/run_exp37_fez_submit.py --finalize d8rjemekodhs7384gpfg`
+- **Guard added (C4263):** `get_counts_from_job()` now asserts `job.backend().name == BACKEND_NAME`
+  and aborts with a loud MISMATCH message before writing any record. Verified: the marrakesh script
+  now refuses to finalize the fez job.
