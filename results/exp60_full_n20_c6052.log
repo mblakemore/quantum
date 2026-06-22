@@ -1,0 +1,27 @@
+======================================================================
+Exp60 Anchor-Transfer — FULL
+n_qubits=20 n_edges=30 K=5 seeds=[400, 401, 402, 403, 404] shots=512 maxiter=20
+metric = transfer matrix r_xfer[S][T] = eval(pad(anchor_p3(S)) on T) ; xfer_lift = r_xfer - r_cold(T)
+======================================================================
+  inst seed=400 n=20: r_p3=0.6178 r_cold=0.5711 r_self=0.6209 self_lift=+0.0498 (3636s)
+  inst seed=401 n=20: r_p3=0.5567 r_cold=0.5554 r_self=0.5529 self_lift=-0.0025 (3618s)
+  inst seed=402 n=20: r_p3=0.6298 r_cold=0.6408 r_self=0.6282 self_lift=-0.0126 (3630s)
+  inst seed=403 n=20: r_p3=0.6061 r_cold=0.6079 r_self=0.6541 self_lift=+0.0462 (3610s)
+  inst seed=404 n=20: r_p3=0.5980 r_cold=0.5956 r_self=0.6001 self_lift=+0.0045 (3585s)
+
+--- transfer matrix (direct evals, no re-optimization) ---
+  T=seed400 r_cold=0.5711 | r_xfer[S->T]: 0.6135 0.5524 0.5540 0.5519 0.6017
+  T=seed401 r_cold=0.5554 | r_xfer[S->T]: 0.5342 0.5448 0.5626 0.5568 0.5276
+  T=seed402 r_cold=0.6408 | r_xfer[S->T]: 0.6235 0.5542 0.6139 0.6165 0.6204
+  T=seed403 r_cold=0.6079 | r_xfer[S->T]: 0.6238 0.5573 0.6043 0.5985 0.6112
+  T=seed404 r_cold=0.5956 | r_xfer[S->T]: 0.5958 0.5478 0.5827 0.5782 0.5942
+
+======================================================================
+RESULTS (FULL)
+  H1 mean off-diag xfer_lift = -0.0163 (positive frac 0.30) -> NULL/NEG (overfit)
+  H2 mean transfer efficiency = -1.541 (self_lift>0 targets only)
+  H3 rho(headroom, xfer_in) = 0.49999999999999994  vs  rho(src_quality, xfer_out) = 0.3
+  p5 ceiling (max r_self) = 0.6541
+  total elapsed = 19787s
+  saved -> /mnt/droid/repos/quantum/scripts/../results/exp60_anchor_transfer_results.json
+======================================================================
