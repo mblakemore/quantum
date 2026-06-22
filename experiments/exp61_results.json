@@ -1,0 +1,229 @@
+{
+  "experiment": "Exp61",
+  "title": "Best-of-k p3 anchor selection (interventional warm-start)",
+  "author": "Elder",
+  "cycle": "C6065",
+  "mode": "RUN",
+  "instance": "EDGES_20",
+  "opt_seeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48
+  ],
+  "k": 3,
+  "shots": 256,
+  "maxiter": 20,
+  "interim_note": "REGENERATED from N=7 checkpoint at C6077 (seed 49 in flight; N>=6/8 grade trigger met). Replaces stale 15:33 SMOKE results.json. RUN will overwrite with canonical N=8 at completion; H1 mathematically cannot flip (seed49 would need d_lift<=-0.317).",
+  "graded_at_cycle": 6077,
+  "graded_N": 7,
+  "summary": {
+    "n": 7,
+    "k": 3,
+    "mean": {
+      "lift_single": 0.0026184752747252676,
+      "lift_best": 0.04794814560439561,
+      "d_lift": 0.04532967032967034,
+      "d_r_p3": 0.06207074175824174,
+      "d_r_warm": 0.04532967032967034
+    },
+    "std": {
+      "lift_single": 0.04030507454539679,
+      "lift_best": 0.02794418402719476,
+      "d_lift": 0.039077662609387165
+    },
+    "dlift_pos": 6,
+    "selection_inert": 1,
+    "H1": {
+      "mean_lift_best": 0.04794814560439561,
+      "mean_lift_single": 0.0026184752747252676,
+      "mean_d_lift": 0.04532967032967034,
+      "d_lift_pos": 6,
+      "vote_need": 5,
+      "supported": true
+    },
+    "H2": {
+      "rho_dp3_dwarm": 0.642857142857143,
+      "flag": "significant",
+      "supported": true
+    },
+    "H3": {
+      "rho_single_dlift": -0.7500000000000002,
+      "flag": "significant",
+      "supported": true
+    },
+    "H4": {
+      "extra_p3_per_trial": 2,
+      "mean_d_lift": 0.04532967032967034,
+      "gain_per_extra_anchor": 0.02266483516483517,
+      "p3_evals_per_trial": 60
+    },
+    "sig_crit_n12": 0.587
+  },
+  "data": [
+    {
+      "seed": 42,
+      "k": 3,
+      "r_cold_p5": 0.6077223557692307,
+      "r_p3_anchors": [
+        0.626953125,
+        0.5883413461538461,
+        0.6792367788461539
+      ],
+      "best_idx": 2,
+      "r_p3_single": 0.626953125,
+      "r_p3_best": 0.6792367788461539,
+      "r_warm_single": 0.65625,
+      "r_warm_best": 0.6813401442307693,
+      "lift_single": 0.048527644230769273,
+      "lift_best": 0.07361778846153855,
+      "d_lift": 0.025090144230769273,
+      "d_r_p3": 0.052283653846153855,
+      "d_r_warm": 0.025090144230769273,
+      "selection_inert": false,
+      "elapsed_s": 3479.3203864097595,
+      "max_cut": 26
+    },
+    {
+      "seed": 43,
+      "k": 3,
+      "r_cold_p5": 0.5963040865384616,
+      "r_p3_anchors": [
+        0.6687199519230769,
+        0.6388221153846154,
+        0.5805288461538461
+      ],
+      "best_idx": 0,
+      "r_p3_single": 0.6687199519230769,
+      "r_p3_best": 0.6687199519230769,
+      "r_warm_single": 0.6586538461538461,
+      "r_warm_best": 0.6586538461538461,
+      "lift_single": 0.06234975961538458,
+      "lift_best": 0.06234975961538458,
+      "d_lift": 0.0,
+      "d_r_p3": 0.0,
+      "d_r_warm": 0.0,
+      "selection_inert": true,
+      "elapsed_s": 2790.304712533951,
+      "max_cut": 26
+    },
+    {
+      "seed": 44,
+      "k": 3,
+      "r_cold_p5": 0.6451322115384616,
+      "r_p3_anchors": [
+        0.5763221153846154,
+        0.6739783653846154,
+        0.6802884615384616
+      ],
+      "best_idx": 2,
+      "r_p3_single": 0.5763221153846154,
+      "r_p3_best": 0.6802884615384616,
+      "r_warm_single": 0.5773737980769231,
+      "r_warm_best": 0.6798377403846154,
+      "lift_single": -0.06775841346153844,
+      "lift_best": 0.034705528846153855,
+      "d_lift": 0.10246394230769229,
+      "d_r_p3": 0.10396634615384615,
+      "d_r_warm": 0.10246394230769229,
+      "selection_inert": false,
+      "elapsed_s": 3489.475424051285,
+      "max_cut": 26
+    },
+    {
+      "seed": 45,
+      "k": 3,
+      "r_cold_p5": 0.6694711538461539,
+      "r_p3_anchors": [
+        0.5794771634615384,
+        0.6879507211538461,
+        0.6574519230769231
+      ],
+      "best_idx": 1,
+      "r_p3_single": 0.5794771634615384,
+      "r_p3_best": 0.6879507211538461,
+      "r_warm_single": 0.6586538461538461,
+      "r_warm_best": 0.6795372596153846,
+      "lift_single": -0.01081730769230771,
+      "lift_best": 0.010066105769230727,
+      "d_lift": 0.020883413461538436,
+      "d_r_p3": 0.10847355769230771,
+      "d_r_warm": 0.020883413461538436,
+      "selection_inert": false,
+      "elapsed_s": 3497.995689868927,
+      "max_cut": 26
+    },
+    {
+      "seed": 46,
+      "k": 3,
+      "r_cold_p5": 0.6299579326923077,
+      "r_p3_anchors": [
+        0.6143329326923077,
+        0.6583533653846154,
+        0.6780348557692307
+      ],
+      "best_idx": 2,
+      "r_p3_single": 0.6143329326923077,
+      "r_p3_best": 0.6780348557692307,
+      "r_warm_single": 0.6102764423076923,
+      "r_warm_best": 0.6766826923076923,
+      "lift_single": -0.01968149038461542,
+      "lift_best": 0.04672475961538458,
+      "d_lift": 0.06640625,
+      "d_r_p3": 0.06370192307692302,
+      "d_r_warm": 0.06640625,
+      "selection_inert": false,
+      "elapsed_s": 3487.1201317310333,
+      "max_cut": 26
+    },
+    {
+      "seed": 47,
+      "k": 3,
+      "r_cold_p5": 0.6624098557692307,
+      "r_p3_anchors": [
+        0.6712740384615384,
+        0.6072716346153846,
+        0.6838942307692307
+      ],
+      "best_idx": 2,
+      "r_p3_single": 0.6712740384615384,
+      "r_p3_best": 0.6838942307692307,
+      "r_warm_single": 0.6709735576923077,
+      "r_warm_best": 0.6783353365384616,
+      "lift_single": 0.008563701923076983,
+      "lift_best": 0.015925480769230838,
+      "d_lift": 0.007361778846153855,
+      "d_r_p3": 0.01262019230769229,
+      "d_r_warm": 0.007361778846153855,
+      "selection_inert": false,
+      "elapsed_s": 3455.4828367233276,
+      "max_cut": 26
+    },
+    {
+      "seed": 48,
+      "k": 3,
+      "r_cold_p5": 0.5949519230769231,
+      "r_p3_anchors": [
+        0.5929987980769231,
+        0.6864483173076923,
+        0.6374699519230769
+      ],
+      "best_idx": 1,
+      "r_p3_single": 0.5929987980769231,
+      "r_p3_best": 0.6864483173076923,
+      "r_warm_single": 0.5920973557692307,
+      "r_warm_best": 0.6871995192307693,
+      "lift_single": -0.0028545673076924016,
+      "lift_best": 0.09224759615384615,
+      "d_lift": 0.09510216346153855,
+      "d_r_p3": 0.09344951923076916,
+      "d_r_warm": 0.09510216346153855,
+      "selection_inert": false,
+      "elapsed_s": 3464.188490152359,
+      "max_cut": 26
+    }
+  ]
+}
