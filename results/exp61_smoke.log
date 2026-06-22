@@ -1,0 +1,40 @@
+======================================================================
+Exp61 Best-of-3 Anchor Selection — SMOKE
+instance=EDGES_20 opt_seeds=[42, 43, 44] k=3 shots=128 maxiter=8
+metric = paired Dlift = lift_best - lift_single (interventional best-of-k)
+======================================================================
+--- EDGES_20: max_cut=26, p3depth=241 p5depth=363 (p3/p5 depth ratio 0.664) ---
+/home/mike/.local/lib/python3.12/site-packages/scipy/_lib/pyprima/common/preproc.py:68: UserWarning: COBYLA: Invalid MAXFUN; it should be at least num_vars + 2; it is set to 12
+  warn(f'{solver}: Invalid MAXFUN; it should be at least {min_maxfun_str}; it is set to {maxfun}')
+  seed=42 cold=0.5901 p3[0.600,0.605,0.608] best#2=0.6082 warm_s=0.6310 warm_b=0.6007 lift_s=+0.0409 lift_b=+0.0105 Dlift=-0.0303 (932s)
+  seed=43 cold=0.5944 p3[0.598,0.615,0.593] best#1=0.6154 warm_s=0.6184 warm_b=0.6298 lift_s=+0.0240 lift_b=+0.0355 Dlift=+0.0114 (955s)
+  seed=44 cold=0.6013 p3[0.558,0.656,0.672] best#2=0.6722 warm_s=0.5643 warm_b=0.6758 lift_s=-0.0370 lift_b=+0.0745 Dlift=+0.1115 (957s)
+
+======================================================================
+SUMMARY — Exp61 best-of-3 anchor selection, N=3 seeds on EDGES_20
+======================================================================
+  lift_single mean=+0.0093 std=0.0334 (pos 2/3)
+  lift_best   mean=+0.0402 std=0.0263 (pos 3/3)
+  Dlift       mean=+0.0308 std=0.0595 (pos 2/3)
+  selection inert (best==single): 0/3
+
+  -- H1 PRIMARY (best-of-k recovers lift, interventional) --
+     mean(lift_best)=+0.0402 vs mean(lift_single)=+0.0093
+     mean(Dlift)=+0.0308  Dlift>0: 2/3 (need >=2)
+     H1 verdict: SUPPORTED
+
+  -- H2 MECHANISM (anchor advantage survives p5 re-opt) --
+     rho(Dr_p3, Dr_warm) = 1.0  [significant]
+     (note: 0/3 trials had Dr_p3=0 -> selection inert; mean Dr_p3=+0.0465 mean Dr_warm=+0.0308)
+     H2 verdict: SUPPORTED (direction)
+
+  -- H3 RESCUE STRUCTURE (value concentrates on bad single anchors) --
+     rho(r_p3_single, Dlift) = -1.0  [significant]
+     H3 verdict: SUPPORTED (direction)
+
+  -- H4 COST (reported, not thresholded) --
+     extra p3 optimizations/trial = 2; mean Dlift = +0.0308
+     lift-gain per extra anchor   = +0.01542
+     (depth ratio printed at build; lift is NOT free — bought with k* anchor compute)
+
+  Wrote /mnt/droid/repos/quantum/scripts/../experiments/exp61_results.json
