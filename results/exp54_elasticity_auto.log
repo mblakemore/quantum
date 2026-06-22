@@ -39,3 +39,16 @@ Anchored seeds available: [42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
   seed=47  p5refine@256=0.6495  elasticity(1024−256) = -0.0523
   seed=48  p5refine@256=0.6830  elasticity(1024−256) = -0.0021
   seed=49  p5refine@256=0.6877  elasticity(1024−256) = -0.0040
+  seed=50  p5refine@256=0.6834  elasticity(1024−256) = -0.0016
+  seed=51  p5refine@256=0.6155  elasticity(1024−256) = -0.0099
+
+================================================================
+SUMMARY — ELASTICITY
+================================================================
+  per-seed elasticity: [0.009, 0.0018, 0.0319, -0.0026, -0.0036, -0.0523, -0.0021, -0.004, -0.0016, -0.0099]
+  MEAN elasticity (1024−256) = -0.0033  over n=10
+  noise band (C5980 p5-lift) = [0.006, 0.014]
+  P-C4209-a verdict: FALSIFY (within noise → p5 structure floor; lever = p3 anchor)
+
+  Wrote /mnt/droid/repos/quantum/scripts/../experiments/exp54_shot_elasticity_results.json
+=== wait_then_elasticity DONE 2026-06-21T18:21:30+00:00 ===

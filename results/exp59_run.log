@@ -6,3 +6,39 @@ metric = lift = r_warm_p5 - r_cold_p5 ; decompose anchor(p3) vs cold-luck
 --- EDGES_20: max_cut=26, p3depth=241 p5depth=363 ---
   seed=42  cold=0.6035  p3=0.6292  warm=0.6870  lift=+0.0835  (39155s)
   seed=43  cold=0.5971  p3=0.6235  warm=0.6303  lift=+0.0332  (36018s)
+  seed=44  cold=0.6433  p3=0.5711  warm=0.5768  lift=-0.0666  (15295s)
+  seed=45  cold=0.6541  p3=0.6095  warm=0.6803  lift=+0.0261  (1840s)
+  seed=46  cold=0.6166  p3=0.6122  warm=0.6182  lift=+0.0017  (1839s)
+  seed=47  cold=0.6214  p3=0.6143  warm=0.6696  lift=+0.0482  (1843s)
+  seed=48  cold=0.6373  p3=0.6005  warm=0.6052  lift=-0.0322  (1844s)
+  seed=49  cold=0.6641  p3=0.5814  warm=0.5774  lift=-0.0867  (1842s)
+  seed=50  cold=0.6215  p3=0.6483  warm=0.6558  lift=+0.0343  (1843s)
+  seed=51  cold=0.6056  p3=0.6436  warm=0.6499  lift=+0.0443  (1844s)
+  seed=52  cold=0.6022  p3=0.6717  warm=0.6630  lift=+0.0608  (1844s)
+  seed=53  cold=0.6023  p3=0.6842  warm=0.6846  lift=+0.0823  (1845s)
+
+======================================================================
+SUMMARY — Exp59 x0-selection, N=12 seeds on EDGES_20
+======================================================================
+  cold  mean=0.6224 std=0.0215
+  p3    mean=0.6241 std=0.0323
+  warm  mean=0.6415 std=0.0379
+  lift  mean=+0.0191 std=0.0527  (pos 9/12)
+
+  -- H1 MEDIATION (warm-anchor drives lift) --
+     rho(r_p3_base, r_warm_p5) = 0.6713286713286714
+     rho(r_p3_base, lift)      = 0.8531468531468532
+     H1 verdict: SUPPORTED
+
+  -- H2 PATH DOMINANCE (warm-anchor vs cold-luck) --
+     Var(lift)=0.00278  Var(warm)=0.00144  Var(cold)=0.00046  Cov(w,c)=-0.00048
+     variance share: warm=0.7572308727075412  cold=0.24276912729245886  -> dominant path: warm-anchor
+     (secondary diag) |rho(r_warm,lift)|=0.8741258741258742  |rho(r_cold,lift)|=0.7202797202797203
+
+  -- H3 A-PRIORI x0 STAT predicts r_p3_base? --
+     rho(x0_p3.mean, r_p3_base) = -0.2517482517482518
+     rho(x0_p3.std, r_p3_base) = -0.3846153846153847
+     rho(x0_p3.abs_dist_pi_mean, r_p3_base) = 0.0
+     H3 verdict: A-PRIORI SIGNAL FOUND
+
+  Wrote /mnt/droid/repos/quantum/scripts/../experiments/exp59_results.json

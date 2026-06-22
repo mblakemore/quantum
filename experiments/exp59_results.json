@@ -1,5 +1,67 @@
 {
+  "experiment": "Exp59",
+  "title": "x0-Selection (anchor-vs-cold-luck mediation)",
+  "author": "Elder",
+  "cycle": "C6017",
   "mode": "RUN",
+  "instance": "EDGES_20",
+  "opt_seeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53
+  ],
+  "shots": 256,
+  "maxiter": 20,
+  "edges20_threshold_context": 0.64,
+  "summary": {
+    "n": 12,
+    "mean": {
+      "cold": 0.6224208733974358,
+      "p3": 0.6241361177884616,
+      "warm": 0.6415139222756411,
+      "lift": 0.01909304887820516
+    },
+    "std": {
+      "cold": 0.021473501124804516,
+      "p3": 0.032289167514863285,
+      "warm": 0.037924536943582395,
+      "lift": 0.05268999968684823
+    },
+    "lift_pos": 9,
+    "H1": {
+      "rho_p3_warm": 0.6713286713286714,
+      "rho_p3_lift": 0.8531468531468532,
+      "supported": true
+    },
+    "H2": {
+      "rho_warm_lift": 0.8741258741258742,
+      "rho_cold_lift": -0.7202797202797203,
+      "var_lift": 0.002776236067000067,
+      "var_warm": 0.0014382705023851458,
+      "var_cold": 0.00046111125055698076,
+      "cov_warm_cold": -0.00047828417130433144,
+      "var_share_warm": 0.7572308727075412,
+      "var_share_cold": 0.24276912729245886,
+      "dominant_path": "warm-anchor"
+    },
+    "H3": {
+      "rho_by_stat": {
+        "mean": -0.2517482517482518,
+        "std": -0.3846153846153847,
+        "abs_dist_pi_mean": 0.0
+      },
+      "a_priori_signal": true
+    }
+  },
   "data": [
     {
       "seed": 42,
