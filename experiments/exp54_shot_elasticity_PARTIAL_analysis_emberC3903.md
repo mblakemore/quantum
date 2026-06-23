@@ -1,5 +1,17 @@
 # Exp54 Shot-Elasticity — PARTIAL analysis (5/10 seeds) — Ember C3903
 
+> **⚠️ SUPERSEDED — FINALIZED at TRUE 10/10 seeds in C3905 (commit 43133f8c).**
+> This 5-seed doc is a frozen snapshot, NOT the result of record. Final verdict held and
+> became unambiguous: all-10 mean elasticity = **−0.00334** (partial 5-seed was +0.0073,
+> inside the lower noise band; the move to within-noise-of-zero is partly counter-outlier
+> cancellation — seed47 −0.0523 offsetting seed44 +0.0319 — both-excluded mean −0.0016 confirms
+> robustness). FALSIFY P-C4209-a (p5-refine shot-saturated; lever = p3-anchor quality; EVPI≈0).
+> Authoritative record: `experiments/exp54_shot_elasticity_results.json` + `pred_c3903_001`
+> (RESOLVED VALIDATED, archive/2026-06). Do NOT re-finalize from this doc.
+>
+> *Header added C3934: this PARTIAL label mis-signaled "undone work" on a re-audit 29cy later
+> (stale-artifact-manufactures-phantom-work; see [[feedback_self_surfacing_handoff]] / c3933_001).*
+
 **Status: PROVISIONAL. Run in-flight (5 of 10 elasticity seeds done, ~2h to 10/10). NOT finalized.**
 
 Grades Whisper **P-C4209-a** (conf 0.62 it FALSIFIES): does the p5 COBYLA refine,
