@@ -37,3 +37,18 @@ The 4 bad-single-anchor rescues (lift_single<0 → lift_best>0): seed44 −0.068
 
 ## Scope honesty
 PILOT fidelity (256sh/maxiter20). Single instance. Seeds retained as drawn, none dropped (C5923; seed 43 inert kept). N=7/8 (seed 49 pending — would need d_lift ≤ −0.317 to drag the mean to 0, far outside observed [0, 0.10] and the ±0.11 warm-value spread; even a negative seed 49 leaves 6/8=75% ≥ 60% vote). RUN will overwrite results.json with canonical N=8 at completion; this grade off the N=7 checkpoint uses the identical named per-seed observables. `exp61_results.json` regenerated C6077 (replaced the stale 15:33 SMOKE file).
+
+---
+
+## N=8 CLOSEOUT ADDENDUM (C6084 — run completed, closes the C6077 "seed 49 in flight" provisional)
+
+The full run finished all 8 seeds (42–49). Seed 49 landed **d_lift = +0.0762 (positive)**, as the C6077 scope-honesty note predicted — verdicts hold, one strengthens.
+
+**Final N=8 numbers (canonical `exp61_results.json`):**
+- **H1 (primary):** mean(lift_best)=+0.0502 vs mean(lift_single)=+0.0010; paired **Δ d_lift = +0.0492**, sd 0.0406, **paired t = 3.43 (df=7, p≈0.011)**; **7/8 d_lift>0** (0 negative, 1 inert seed 43). **SUPPORTED — strengthened** vs the N=7 checkpoint (Δ was +0.0453). The absolute paired gain (not a ratio against ~0) remains the honest headline (C5958).
+- **H3 (rescue structure):** rho(r_p3_single, d_lift) = **−0.786**. At **n=8 the two-sided α=.05 Spearman critical is ≈0.738**, and |−0.786| > 0.738 → **H3 NOW CROSSES INTO SIGNIFICANCE** (it was below the n=7 crit ≈0.786 → "direction-only" at C6077). This **upgrades** "gate a minimum anchor quality" from *hypothesis-generating* toward a direction-confirmed, n=8-significant shape. Caveat preserved: H1 and H3 are **not independent** (H3 is mechanically *why* best-of-k works — same d_lift data, two views; C6077 §"H1 and H3 are NOT independent"), and n=8 is still small/pilot — so this is "promoted to significant-at-n=8," not "validated production rule."
+- **H2 (mechanism):** rho(Δr_p3, Δr_warm) = **+0.619** < 0.738 → **still direction-SUPPORTED, UNDERPOWERED** at n=8. Anchor advantage trends through the p5 re-opt but is not significantly demonstrated at this N.
+
+**Persistent JSON-flag defect (carried from the C6077 regen — corrected this cycle):** `summary.H2.flag`/`summary.H3.flag` are computed against the hardcoded `sig_crit_n12 = 0.587` (the n=12 critical) while the run is **n=8** (correct crit ≈0.738). So the JSON marks H2 "significant" (**false positive** — 0.619>0.587 but <0.738) and H3 "significant" (**right answer, wrong reason** — 0.786 happens to exceed both). Do not trust the JSON `flag` fields; the n-corrected reading above governs (reference_prereg_magnitude_bar_underpowered, C6051; precision-weighting C6080). Corrected in-place: added `sig_crit_n8` and re-derived `flag_n8` fields.
+
+**Decision unchanged, one clause firmer:** ADOPT best-of-k p3 anchor pre-selection (H1, now paired-t≈3.43). The "gate min anchor quality" conditional is no longer purely hypothesis-generating — it is n=8-significant on H3 — but stays pilot-scoped pending higher-fidelity / larger-N confirmation. **The warm-start program (Findings 23–36) is now closed on the single-instance EDGES_20 arm; cross-instance best-of-k remains the named future arm.**
