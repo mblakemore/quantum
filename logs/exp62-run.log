@@ -1,0 +1,44 @@
+======================================================================
+Exp62 Cross-instance Best-of-3 Anchor Selection — RUN
+instances=['EDGES_20_ref', 'rand_seed101', 'rand_seed202', 'rand_seed303'] opt_seeds=[42, 43, 44] k=3 shots=256 maxiter=20
+metric = paired Dlift = lift_best - lift_single (reuses Exp61.run_seed verbatim)
+H2 ref = EDGES_20 Exp61 mean Dlift +0.049
+======================================================================
+--- EDGES_20_ref: max_cut=26, p3depth=241 p5depth=363 ---
+  seed=42 cold=0.6650 p3[0.645,0.611,0.615] best#0=0.6450 warm_s=0.6453 warm_b=0.6453 lift_s=-0.0197 lift_b=-0.0197 Dlift=+0.0000 (2782s)
+  seed=43 cold=0.6543 p3[0.682,0.612,0.591] best#0=0.6824 warm_s=0.6773 warm_b=0.6773 lift_s=+0.0230 lift_b=+0.0230 Dlift=+0.0000 (2762s)
+  seed=44 cold=0.6188 p3[0.571,0.671,0.682] best#2=0.6822 warm_s=0.5778 warm_b=0.6819 lift_s=-0.0410 lift_b=+0.0631 Dlift=+0.1041 (3462s)
+--- rand_seed101: max_cut=26, p3depth=259 p5depth=411 ---
+  seed=42 cold=0.6245 p3[0.704,0.581,0.584] best#0=0.7039 warm_s=0.7097 warm_b=0.7097 lift_s=+0.0852 lift_b=+0.0852 Dlift=+0.0000 (2710s)
+  seed=43 cold=0.7145 p3[0.611,0.584,0.602] best#0=0.6107 warm_s=0.7142 warm_b=0.7142 lift_s=-0.0003 lift_b=-0.0003 Dlift=+0.0000 (2712s)
+  seed=44 cold=0.6683 p3[0.561,0.726,0.763] best#2=0.7628 warm_s=0.5832 warm_b=0.7616 lift_s=-0.0850 lift_b=+0.0933 Dlift=+0.1783 (3393s)
+--- rand_seed202: max_cut=25, p3depth=253 p5depth=393 ---
+  seed=42 cold=0.6188 p3[0.608,0.618,0.599] best#1=0.6178 warm_s=0.6094 warm_b=0.6120 lift_s=-0.0094 lift_b=-0.0067 Dlift=+0.0027 (3468s)
+  seed=43 cold=0.6158 p3[0.628,0.635,0.605] best#1=0.6355 warm_s=0.6562 warm_b=0.6373 lift_s=+0.0405 lift_b=+0.0216 Dlift=-0.0189 (3467s)
+  seed=44 cold=0.6659 p3[0.575,0.680,0.715] best#2=0.7145 warm_s=0.7064 warm_b=0.7117 lift_s=+0.0405 lift_b=+0.0458 Dlift=+0.0053 (3460s)
+--- rand_seed303: max_cut=26, p3depth=256 p5depth=396 ---
+  seed=42 cold=0.6074 p3[0.574,0.573,0.678] best#2=0.6785 warm_s=0.5730 warm_b=0.6761 lift_s=-0.0344 lift_b=+0.0687 Dlift=+0.1031 (3456s)
+  seed=43 cold=0.6236 p3[0.587,0.595,0.586] best#1=0.5948 warm_s=0.6815 warm_b=0.5971 lift_s=+0.0578 lift_b=-0.0266 Dlift=-0.0844 (3452s)
+  seed=44 cold=0.6179 p3[0.580,0.672,0.688] best#2=0.6881 warm_s=0.5859 warm_b=0.6873 lift_s=-0.0320 lift_b=+0.0694 Dlift=+0.1014 (3452s)
+
+======================================================================
+SUMMARY — Exp62 cross-instance best-of-3, instances=['EDGES_20_ref', 'rand_seed101', 'rand_seed202', 'rand_seed303']
+======================================================================
+  EDGES_20_ref     N=3 meanDlift=+0.0347 (pos 1/3) liftB=+0.0221 liftS=-0.0126 inert=2
+  rand_seed101     N=3 meanDlift=+0.0594 (pos 1/3) liftB=+0.0594 liftS=-0.0001 inert=2
+  rand_seed202     N=3 meanDlift=-0.0036 (pos 2/3) liftB=+0.0202 liftS=+0.0239 inert=0
+  rand_seed303     N=3 meanDlift=+0.0400 (pos 2/3) liftB=+0.0372 liftS=-0.0029 inert=0
+
+  -- H1 PRIMARY (best-of-k lift generalizes off EDGES_20_ref) --
+     NEW instances with mean Dlift>0: 2/3 (need majority >= 2) -> ['rand_seed101', 'rand_seed303']
+     H1 verdict: SUPPORTED
+
+  -- H2 MAGNITUDE (new-instance Dlift same order as EDGES_20 +0.049) --
+     pooled new-instance mean Dlift = +0.0319; band [+0.0162,+0.1476]
+     H2 verdict: SUPPORTED (same order)
+
+  -- H3 RESCUE STRUCTURE replicates (pooled, worse single -> bigger rescue) --
+     rho(r_p3_single, Dlift) pooled N=12 = -0.7762237762237763  [significant]
+     H3 verdict: SUPPORTED (direction)
+
+  Wrote /mnt/droid/repos/quantum/scripts/../experiments/exp62_results.json
