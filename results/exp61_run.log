@@ -1,0 +1,44 @@
+======================================================================
+Exp61 Best-of-3 Anchor Selection — RUN
+instance=EDGES_20 opt_seeds=[42, 43, 44, 45, 46, 47, 48, 49] k=3 shots=256 maxiter=20
+metric = paired Dlift = lift_best - lift_single (interventional best-of-k)
+======================================================================
+  [reset] checkpoint mode SMOKE != RUN; backed up to /mnt/droid/repos/quantum/scripts/../results/exp61_checkpoint.json.stale-SMOKE.bak
+--- EDGES_20: max_cut=26, p3depth=241 p5depth=363 (p3/p5 depth ratio 0.664) ---
+  seed=42 cold=0.6077 p3[0.627,0.588,0.679] best#2=0.6792 warm_s=0.6562 warm_b=0.6813 lift_s=+0.0485 lift_b=+0.0736 Dlift=+0.0251 (3479s)
+  seed=43 cold=0.5963 p3[0.669,0.639,0.581] best#0=0.6687 warm_s=0.6587 warm_b=0.6587 lift_s=+0.0623 lift_b=+0.0623 Dlift=+0.0000 (2790s)
+  seed=44 cold=0.6451 p3[0.576,0.674,0.680] best#2=0.6803 warm_s=0.5774 warm_b=0.6798 lift_s=-0.0678 lift_b=+0.0347 Dlift=+0.1025 (3489s)
+  seed=45 cold=0.6695 p3[0.579,0.688,0.657] best#1=0.6880 warm_s=0.6587 warm_b=0.6795 lift_s=-0.0108 lift_b=+0.0101 Dlift=+0.0209 (3498s)
+  seed=46 cold=0.6300 p3[0.614,0.658,0.678] best#2=0.6780 warm_s=0.6103 warm_b=0.6767 lift_s=-0.0197 lift_b=+0.0467 Dlift=+0.0664 (3487s)
+  seed=47 cold=0.6624 p3[0.671,0.607,0.684] best#2=0.6839 warm_s=0.6710 warm_b=0.6783 lift_s=+0.0086 lift_b=+0.0159 Dlift=+0.0074 (3455s)
+  seed=48 cold=0.5950 p3[0.593,0.686,0.637] best#1=0.6864 warm_s=0.5921 warm_b=0.6872 lift_s=-0.0029 lift_b=+0.0922 Dlift=+0.0951 (3464s)
+  seed=49 cold=0.5868 p3[0.577,0.581,0.638] best#2=0.6376 warm_s=0.5763 warm_b=0.6525 lift_s=-0.0105 lift_b=+0.0657 Dlift=+0.0762 (3467s)
+
+======================================================================
+SUMMARY — Exp61 best-of-3 anchor selection, N=8 seeds on EDGES_20
+======================================================================
+  lift_single mean=+0.0010 std=0.0380 (pos 3/8)
+  lift_best   mean=+0.0502 std=0.0268 (pos 8/8)
+  Dlift       mean=+0.0492 std=0.0380 (pos 7/8)
+  selection inert (best==single): 1/8
+
+  -- H1 PRIMARY (best-of-k recovers lift, interventional) --
+     mean(lift_best)=+0.0502 vs mean(lift_single)=+0.0010
+     mean(Dlift)=+0.0492  Dlift>0: 7/8 (need >=5)
+     H1 verdict: SUPPORTED
+
+  -- H2 MECHANISM (anchor advantage survives p5 re-opt) --
+     rho(Dr_p3, Dr_warm) = 0.6190476190476191  [significant]
+     (note: 1/8 trials had Dr_p3=0 -> selection inert; mean Dr_p3=+0.0619 mean Dr_warm=+0.0492)
+     H2 verdict: SUPPORTED (direction)
+
+  -- H3 RESCUE STRUCTURE (value concentrates on bad single anchors) --
+     rho(r_p3_single, Dlift) = -0.7857142857142858  [significant]
+     H3 verdict: SUPPORTED (direction)
+
+  -- H4 COST (reported, not thresholded) --
+     extra p3 optimizations/trial = 2; mean Dlift = +0.0492
+     lift-gain per extra anchor   = +0.02459
+     (depth ratio printed at build; lift is NOT free — bought with k* anchor compute)
+
+  Wrote /mnt/droid/repos/quantum/scripts/../experiments/exp61_results.json

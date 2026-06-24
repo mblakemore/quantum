@@ -1,0 +1,192 @@
+{
+  "experiment": "Exp63",
+  "title": "k-adaptive escalation of best-of-k warm-start anchor selection",
+  "author": "Elder",
+  "cycle": "C6115",
+  "compute": "NONE (replay over Exp61+Exp62)",
+  "k_fixed": 3,
+  "capture_bar": 0.8,
+  "tau_star": 0.6036658653846154,
+  "tau_rule": "median(r_p3_single | train)",
+  "train": {
+    "source": "exp61_results.json EDGES_20 seeds 42-49",
+    "n": 8,
+    "D_fixed": 0.04918494591346155,
+    "D_adaptive": 0.03682767427884616,
+    "capture": 0.7487590683466971,
+    "mean_k_used": 2.0,
+    "escalate_frac": 0.5,
+    "mean_lift_single": 0.0009765625,
+    "mean_lift_best": 0.05016150841346155,
+    "mean_adaptive_lift": 0.03780423677884616
+  },
+  "test": {
+    "source": "exp62_results.json fresh instances rand101/202/303",
+    "n": 9,
+    "D_fixed": 0.03193776709401708,
+    "D_adaptive": 0.03374332264957263,
+    "capture": 1.05653355634539,
+    "mean_k_used": 2.111111111111111,
+    "escalate_frac": 0.5555555555555556,
+    "mean_lift_single": 0.006983173076923076,
+    "mean_lift_best": 0.03892094017094015,
+    "mean_adaptive_lift": 0.040726495726495705
+  },
+  "test_compute_saving_frac": 0.2962962962962963,
+  "verdicts": {
+    "H1_supported": true,
+    "H3_supported": true,
+    "test_D_fixed_near_zero": false
+  },
+  "frontier_train": [
+    {
+      "tau": null,
+      "tau_kind": "-inf",
+      "capture": 0.0,
+      "mean_k_used": 1.0,
+      "escalate_frac": 0.0
+    },
+    {
+      "tau": 0.57632,
+      "tau_kind": "finite",
+      "capture": 0.2604047346315386,
+      "mean_k_used": 1.25,
+      "escalate_frac": 0.125
+    },
+    {
+      "tau": 0.57707,
+      "tau_kind": "finite",
+      "capture": 0.4539900725467734,
+      "mean_k_used": 1.5,
+      "escalate_frac": 0.25
+    },
+    {
+      "tau": 0.57948,
+      "tau_kind": "finite",
+      "capture": 0.5070637647957233,
+      "mean_k_used": 1.75,
+      "escalate_frac": 0.375
+    },
+    {
+      "tau": 0.593,
+      "tau_kind": "finite",
+      "capture": 0.7487590683466971,
+      "mean_k_used": 2.0,
+      "escalate_frac": 0.5
+    },
+    {
+      "tau": 0.61433,
+      "tau_kind": "finite",
+      "capture": 0.9175257731958761,
+      "mean_k_used": 2.25,
+      "escalate_frac": 0.625
+    },
+    {
+      "tau": 0.62695,
+      "tau_kind": "finite",
+      "capture": 0.9812905689194349,
+      "mean_k_used": 2.5,
+      "escalate_frac": 0.75
+    },
+    {
+      "tau": 0.66872,
+      "tau_kind": "finite",
+      "capture": 0.9812905689194349,
+      "mean_k_used": 2.75,
+      "escalate_frac": 0.875
+    },
+    {
+      "tau": 0.67128,
+      "tau_kind": "finite",
+      "capture": 1.0,
+      "mean_k_used": 3.0,
+      "escalate_frac": 1.0
+    },
+    {
+      "tau": null,
+      "tau_kind": "+inf",
+      "capture": 1.0,
+      "mean_k_used": 3.0,
+      "escalate_frac": 1.0
+    }
+  ],
+  "frontier_test": [
+    {
+      "tau": null,
+      "tau_kind": "-inf",
+      "capture": 0.0,
+      "mean_k_used": 1.0,
+      "escalate_frac": 0.0
+    },
+    {
+      "tau": 0.56085,
+      "tau_kind": "finite",
+      "capture": 0.6204265105582272,
+      "mean_k_used": 1.2222222222222223,
+      "escalate_frac": 0.1111111111111111
+    },
+    {
+      "tau": 0.57437,
+      "tau_kind": "finite",
+      "capture": 0.9789880827932262,
+      "mean_k_used": 1.4444444444444444,
+      "escalate_frac": 0.2222222222222222
+    },
+    {
+      "tau": 0.57531,
+      "tau_kind": "finite",
+      "capture": 0.9974702069830652,
+      "mean_k_used": 1.6666666666666667,
+      "escalate_frac": 0.3333333333333333
+    },
+    {
+      "tau": 0.57978,
+      "tau_kind": "finite",
+      "capture": 1.350282249634121,
+      "mean_k_used": 1.8888888888888888,
+      "escalate_frac": 0.4444444444444444
+    },
+    {
+      "tau": 0.58699,
+      "tau_kind": "finite",
+      "capture": 1.05653355634539,
+      "mean_k_used": 2.111111111111111,
+      "escalate_frac": 0.5555555555555556
+    },
+    {
+      "tau": 0.6075,
+      "tau_kind": "finite",
+      "capture": 1.0657746184403096,
+      "mean_k_used": 2.3333333333333335,
+      "escalate_frac": 0.6666666666666666
+    },
+    {
+      "tau": 0.61073,
+      "tau_kind": "finite",
+      "capture": 1.0657746184403096,
+      "mean_k_used": 2.5555555555555554,
+      "escalate_frac": 0.7777777777777778
+    },
+    {
+      "tau": 0.62766,
+      "tau_kind": "finite",
+      "capture": 1.0,
+      "mean_k_used": 2.7777777777777777,
+      "escalate_frac": 0.8888888888888888
+    },
+    {
+      "tau": 0.70388,
+      "tau_kind": "finite",
+      "capture": 1.0,
+      "mean_k_used": 3.0,
+      "escalate_frac": 1.0
+    },
+    {
+      "tau": null,
+      "tau_kind": "+inf",
+      "capture": 1.0,
+      "mean_k_used": 3.0,
+      "escalate_frac": 1.0
+    }
+  ]
+}
