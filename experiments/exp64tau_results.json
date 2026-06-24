@@ -1,0 +1,146 @@
+{
+ "experiment": "Exp64-tau",
+ "title": "tau-calibration of k-adaptive escalation via LOO-CV",
+ "author": "Elder",
+ "cycle": "C6128",
+ "compute": "NONE (replay over Exp61+Exp62)",
+ "pool_N": 17,
+ "tau_full_pool_median": 0.592999,
+ "loo_cv": {
+  "q25": {
+   "capture": 0.713177,
+   "mean_k_used": 1.588235,
+   "escalate_frac": 0.294118,
+   "sum_adapt": 0.53601,
+   "sum_best": 0.751581
+  },
+  "median": {
+   "capture": 0.890087,
+   "mean_k_used": 2.058824,
+   "escalate_frac": 0.529412,
+   "sum_adapt": 0.668972,
+   "sum_best": 0.751581
+  },
+  "q75": {
+   "capture": 0.981977,
+   "mean_k_used": 2.411765,
+   "escalate_frac": 0.705882,
+   "sum_adapt": 0.738035,
+   "sum_best": 0.751581
+  }
+ },
+ "median_rule_capture_ci95": [
+  0.435,
+  1.0082
+ ],
+ "quantile_capture_range": 0.2688,
+ "descriptive_frontier_HAIRCUT_FLAGGED": [
+  {
+   "tau": null,
+   "capture": 0.094,
+   "escalate_frac": 0.0
+  },
+  {
+   "tau": 0.560847,
+   "capture": 0.3313,
+   "escalate_frac": 0.0588
+  },
+  {
+   "tau": 0.574369,
+   "capture": 0.4684,
+   "escalate_frac": 0.1176
+  },
+  {
+   "tau": 0.575313,
+   "capture": 0.4755,
+   "escalate_frac": 0.1765
+  },
+  {
+   "tau": 0.576322,
+   "capture": 0.6118,
+   "escalate_frac": 0.2353
+  },
+  {
+   "tau": 0.577073,
+   "capture": 0.7132,
+   "escalate_frac": 0.2941
+  },
+  {
+   "tau": 0.579477,
+   "capture": 0.741,
+   "escalate_frac": 0.3529
+  },
+  {
+   "tau": 0.579778,
+   "capture": 0.8759,
+   "escalate_frac": 0.4118
+  },
+  {
+   "tau": 0.586989,
+   "capture": 0.7636,
+   "escalate_frac": 0.4706
+  },
+  {
+   "tau": 0.592999,
+   "capture": 0.8901,
+   "escalate_frac": 0.5294
+  },
+  {
+   "tau": 0.6075,
+   "capture": 0.8936,
+   "escalate_frac": 0.5882
+  },
+  {
+   "tau": 0.610727,
+   "capture": 0.8936,
+   "escalate_frac": 0.6471
+  },
+  {
+   "tau": 0.614333,
+   "capture": 0.982,
+   "escalate_frac": 0.7059
+  },
+  {
+   "tau": 0.626953,
+   "capture": 1.0154,
+   "escalate_frac": 0.7647
+  },
+  {
+   "tau": 0.627656,
+   "capture": 0.9902,
+   "escalate_frac": 0.8235
+  },
+  {
+   "tau": 0.66872,
+   "capture": 0.9902,
+   "escalate_frac": 0.8824
+  },
+  {
+   "tau": 0.671274,
+   "capture": 1.0,
+   "escalate_frac": 0.9412
+  },
+  {
+   "tau": 0.703876,
+   "capture": 1.0,
+   "escalate_frac": 1.0
+  },
+  {
+   "tau": null,
+   "capture": 1.0,
+   "escalate_frac": 1.0
+  }
+ ],
+ "pool_argmax_tau_NOT_THE_FINDING": {
+  "tau": 0.626953,
+  "capture": 1.0154,
+  "escalate_frac": 0.7647
+ },
+ "verdicts": {
+  "P1_capture>=0.80": true,
+  "P2_saves_compute": true,
+  "P3_beats_cost_matched_random": true,
+  "P4_tau_robust_range<=0.20": false
+ },
+ "brier_score": 0.1156
+}
