@@ -1,0 +1,44 @@
+======================================================================
+Exp52 NOISELESS PROBE | Ember C3963 | pred_c3961 mechanism test
+Seeds [42, 43, 44, 45, 46] | shots [256, 1024, 2048] | NO noise model | local AerSimulator
+======================================================================
+
+============================================================
+NOISELESS COBYLA | shots=256 | seeds=[42, 43, 44, 45, 46]
+============================================================
+  seed=42: ratio=0.6596 ✓ ESCAPED (1.8s)
+  seed=43: ratio=0.7009 ✓ ESCAPED (2.7s)
+  seed=44: ratio=0.6276 ✗ trapped (2.6s)
+  seed=45: ratio=0.7000 ✓ ESCAPED (1.5s)
+  seed=46: ratio=0.6179 ✗ trapped (1.8s)
+
+  NOISELESS 256sh: 3/5 = 0.60  (noisy ref 0.6)
+
+============================================================
+NOISELESS COBYLA | shots=1024 | seeds=[42, 43, 44, 45, 46]
+============================================================
+  seed=42: ratio=0.6904 ✓ ESCAPED (1.7s)
+  seed=43: ratio=0.6964 ✓ ESCAPED (1.9s)
+  seed=44: ratio=0.6986 ✓ ESCAPED (1.8s)
+  seed=45: ratio=0.6877 ✓ ESCAPED (1.7s)
+  seed=46: ratio=0.7005 ✓ ESCAPED (2.1s)
+
+  NOISELESS 1024sh: 5/5 = 1.00  (noisy ref 0.9)
+
+============================================================
+NOISELESS COBYLA | shots=2048 | seeds=[42, 43, 44, 45, 46]
+============================================================
+  seed=42: ratio=0.6904 ✓ ESCAPED (1.8s)
+  seed=43: ratio=0.6964 ✓ ESCAPED (1.6s)
+  seed=44: ratio=0.7013 ✓ ESCAPED (1.6s)
+  seed=45: ratio=0.6767 ✓ ESCAPED (1.7s)
+  seed=46: ratio=0.6910 ✓ ESCAPED (1.6s)
+
+  NOISELESS 2048sh: 5/5 = 1.00  (noisy ref 0.9)
+
+======================================================================
+VERDICT: noiseless curve 256=0.60 1024=1.00 2048=1.00
+  beats noisy 90% plateau @2048: True
+  reaches 100% ceiling @2048:    True
+======================================================================
+Saved -> results/exp52_noiseless_probe.json
