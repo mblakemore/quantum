@@ -1,0 +1,53 @@
+======================================================================
+Exp66 Part A — Noiseless granular escalation — RUN
+cells=17 k_max=3 shots=256 maxiter=20
+Simulator: AerSimulator (NOISELESS — no noise model)
+Baseline: Exp64 FakeMarrakesh granular cap_k=0.5625
+Pre-reg: experiments/exp66-noiseless-vs-noisy-granular-preregistration.md
+======================================================================
+  [reset] stale checkpoint mode SMOKE → backed up
+--- EDGES_20: max_cut=26 ---
+  seed=42 cold=0.6520 p3[0.661,0.591,0.581] bestfirst[0, 0, 0] warm[0.667,0.667,0.667] lift[+0.015,+0.015,+0.015] (5s)
+  seed=43 cold=0.6058 p3[0.619,0.622,0.589] bestfirst[0, 1, 1] warm[0.624,0.636,0.636] lift[+0.018,+0.031,+0.031] (7s)
+  seed=44 cold=0.5993 p3[0.559,0.686,0.694] bestfirst[0, 1, 2] warm[0.577,0.685,0.693] lift[-0.022,+0.086,+0.094] (9s)
+  seed=45 cold=0.5978 p3[0.599,0.691,0.587] bestfirst[0, 1, 1] warm[0.687,0.695,0.695] lift[+0.089,+0.098,+0.098] (9s)
+  seed=46 cold=0.6137 p3[0.592,0.667,0.686] bestfirst[0, 1, 2] warm[0.594,0.683,0.692] lift[-0.020,+0.069,+0.078] (10s)
+  seed=47 cold=0.6379 p3[0.615,0.684,0.583] bestfirst[0, 1, 1] warm[0.668,0.686,0.686] lift[+0.030,+0.049,+0.049] (8s)
+  seed=48 cold=0.6454 p3[0.594,0.692,0.676] bestfirst[0, 1, 1] warm[0.606,0.692,0.692] lift[-0.039,+0.046,+0.046] (8s)
+  seed=49 cold=0.6855 p3[0.579,0.581,0.662] bestfirst[0, 1, 2] warm[0.577,0.575,0.657] lift[-0.108,-0.110,-0.028] (10s)
+--- rand_seed101: max_cut=26 ---
+  seed=42 cold=0.5844 p3[0.728,0.589,0.584] bestfirst[0, 0, 0] warm[0.738,0.738,0.738] lift[+0.154,+0.154,+0.154] (6s)
+  seed=43 cold=0.6303 p3[0.639,0.590,0.582] bestfirst[0, 0, 0] warm[0.716,0.716,0.716] lift[+0.086,+0.086,+0.086] (6s)
+  seed=44 cold=0.6666 p3[0.568,0.739,0.767] bestfirst[0, 1, 2] warm[0.585,0.742,0.768] lift[-0.082,+0.075,+0.101] (9s)
+--- rand_seed202: max_cut=25 ---
+  seed=42 cold=0.6211 p3[0.629,0.613,0.677] bestfirst[0, 0, 2] warm[0.710,0.710,0.684] lift[+0.089,+0.089,+0.062] (7s)
+  seed=43 cold=0.6142 p3[0.619,0.672,0.608] bestfirst[0, 1, 1] warm[0.633,0.689,0.689] lift[+0.018,+0.075,+0.075] (8s)
+  seed=44 cold=0.6134 p3[0.607,0.676,0.721] bestfirst[0, 1, 2] warm[0.601,0.682,0.720] lift[-0.012,+0.068,+0.107] (9s)
+--- rand_seed303: max_cut=26 ---
+  seed=42 cold=0.6065 p3[0.571,0.594,0.586] bestfirst[0, 1, 1] warm[0.576,0.596,0.596] lift[-0.030,-0.010,-0.010] (7s)
+  seed=43 cold=0.6067 p3[0.650,0.585,0.576] bestfirst[0, 0, 0] warm[0.655,0.655,0.655] lift[+0.048,+0.048,+0.048] (6s)
+  seed=44 cold=0.6221 p3[0.569,0.674,0.687] bestfirst[0, 1, 2] warm[0.580,0.683,0.688] lift[-0.042,+0.061,+0.066] (9s)
+
+======================================================================
+EXP66 PART A — NOISELESS vs FAKEMARRAKESH COMPARISON
+======================================================================
+  Cells: 17 | K_max=3
+
+  NOISELESS RESULTS:
+    Granular LOO capture : 0.8625 (Exp64 FakeMarrakesh: 0.9600)
+    Granular mean k_used : 1.647 (Exp64: 1.706)
+    Granular capture/k   : 0.5236 (Exp64: 0.5625)
+    Binary capture/k     : 0.4582 (Exp64: 0.5025)
+    Bootstrap 95% CI     : [0.723, 0.998]
+
+  NOISE EROSION:
+    Ratio noiseless/FakeMarrakesh: 0.931
+    H1 (noiseless capk > 0.5625):  INVALIDATE
+    H2 (ratio > 1.20):              INVALIDATE
+    H3 (Pareto-efficient noiseless):VALIDATE
+
+  PRED_C3980_001 IMPLICATION (QPU test, Part B):
+    No erosion in FakeMarrakesh direction. QPU <0.40 harder to justify mechanistically.
+======================================================================
+
+  Wrote /mnt/droid/repos/quantum/scripts/../experiments/exp66_results.json
