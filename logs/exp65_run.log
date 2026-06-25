@@ -1,0 +1,26 @@
+  built 4reg_0: edges=40 cmax=32 AR*(donor)=0.8153 AR_cold=0.6250
+  built 4reg_1: edges=40 cmax=32 AR*(donor)=0.8093 AR_cold=0.6289
+  built 4reg_2: edges=40 cmax=32 AR*(donor)=0.8123 AR_cold=0.6334
+  built 4reg_3: edges=40 cmax=34 AR*(donor)=0.7590 AR_cold=0.5685
+  built 4reg_4: edges=40 cmax=32 AR*(donor)=0.8123 AR_cold=0.6280
+  built 4reg_5: edges=40 cmax=34 AR*(donor)=0.7793 AR_cold=0.6035
+  built 3reg_0: edges=30 cmax=26 AR*(donor)=0.7808 AR_cold=0.5597
+  built 3reg_1: edges=30 cmax=26 AR*(donor)=0.7866 AR_cold=0.5648
+  built 3reg_2: edges=30 cmax=26 AR*(donor)=0.7808 AR_cold=0.5841
+  built 3reg_3: edges=30 cmax=28 AR*(donor)=0.7419 AR_cold=0.5443
+  built 3reg_4: edges=30 cmax=28 AR*(donor)=0.7361 AR_cold=0.5143
+  built 3reg_5: edges=30 cmax=26 AR*(donor)=0.7927 AR_cold=0.5539
+
+======================================================================
+EXP65 SUMMARY — p=1 parity-controlled warm-start transfer
+======================================================================
+  same_4reg  n=30 mean_lift=+0.1830 std=0.0057 pos=1.00 [+0.1744,+0.1905]
+  same_3reg  n=30 mean_lift=+0.2160 std=0.0149 pos=1.00 [+0.1956,+0.2388]
+  opp_4to3   n=36 mean_lift=+0.0714 std=0.1976 pos=0.67 [-0.2357,+0.2340]
+  opp_3to4   n=36 mean_lift=+0.0484 std=0.1829 pos=0.67 [-0.2226,+0.1856]
+
+  donor-quality balance: 4reg AR*=0.7979 3reg AR*=0.7698 gap=+0.0281
+
+  H1 (opp both<0 AND same both>=0): False  ->  VERDICT: INVALIDATE
+  elapsed 990.5s
+  results -> /mnt/droid/repos/quantum/scripts/../experiments/exp65_results.json
