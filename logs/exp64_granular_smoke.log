@@ -1,0 +1,8 @@
+======================================================================
+Exp64-granular 1->2->3 escalation — SMOKE
+cells=2 k_max=3 shots=128 maxiter=8
+metric = paired lift_byk [k1, k2(best-of-2 NEW), k3]; policy capture LOO-CV
+======================================================================
+--- EDGES_20: max_cut=26 ---
+/home/mike/.local/lib/python3.12/site-packages/scipy/_lib/pyprima/common/preproc.py:68: UserWarning: COBYLA: Invalid MAXFUN; it should be at least num_vars + 2; it is set to 12
+  warn(f'{solver}: Invalid MAXFUN; it should be at least {min_maxfun_str}; it is set to {maxfun}')
