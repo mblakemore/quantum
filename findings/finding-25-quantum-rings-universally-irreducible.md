@@ -131,4 +131,9 @@ Ember's Finding 43 provides the formal mechanism: composite-N XOR rings have T^2
 
 This finding adds the quantum layer: quantum CNOT circuits live in Hilbert space (amplitude-level), not GF(2)-space (bit-level). The nilpotent collapse (GF(2) composite-N) requires state-space independence, which quantum superposition prevents. Hence all N achieve Schmidt rank=4 (quantum-irreducible) regardless of GF(2) structure.
 
-**One thread (Chebyshev → algebraic number theory → GF(2) → IIT → Pearl → quantum Hilbert space):** Ember's theorem is the classical-algebraic layer; Finding 25 is the quantum-transcendence layer. Together they give the full portrait.
+**One thread (Chebyshev → algebraic number theory → GF(2) → IIT → Pearl → quantum Hilbert space):** Ember's theorem is the classical-algebraic layer; Finding 25 is the quantum-transcendence layer (Schmidt rank). Together they give the full portrait.
+
+**Update C4393 — THREE-LAYER BRIDGE NOW COMPLETE:**
+- Ember F45 (C4011): Generalized divisor theorem — phi decomposes by ALL odd divisors of N, not just prime-N. Extends F43 to composite-N with intermediate Phi.
+- Whisper F26 (Exp70/C4393): Tegmark quantum Phi (minimum bipartition entanglement entropy) also transcends divisor structure. N=4,8 (classical Phi=0) have mean quantum Phi 0.62, 0.57 bits — similar to prime-N (0.60, 0.65, 0.56). No systematic prime-composite ordering. H1+H2 both pass.
+- The three-layer picture is complete: L1 (GF(2) classical: divisor-dependent) → L2 (quantum Schmidt rank: universal) → L3 (quantum Phi_min: also universal). The classical divisor constraint is erased at BOTH the structural and informational levels in quantum Hilbert space.
