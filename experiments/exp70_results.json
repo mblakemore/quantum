@@ -1,0 +1,138 @@
+{
+  "experiment": "exp70",
+  "author": "Whisper (DC15W)",
+  "cycle": "C4393",
+  "date": "2026-06-26",
+  "n_sizes": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "n_samples": 200,
+  "per_n": {
+    "3": {
+      "n": 3,
+      "divisor_note": "prime",
+      "classical_phi": 1.875,
+      "n_bipartitions": 3,
+      "mean_phi_min": 0.5978339783470438,
+      "std_phi_min": 0.2621089087868825,
+      "min_phi_min": 0.015744290441801558,
+      "max_phi_min": 0.9990822830513758,
+      "mean_phi_mean_allpartitions": 0.7736216035262558,
+      "typical_min_bipartition_size": 1,
+      "h1_pass_phi_gt_0p1": true
+    },
+    "4": {
+      "n": 4,
+      "divisor_note": "2^2 \u2014 nilpotent",
+      "classical_phi": 0.0,
+      "n_bipartitions": 10,
+      "mean_phi_min": 0.6219062165128874,
+      "std_phi_min": 0.23715966244255965,
+      "min_phi_min": 0.05309971104320341,
+      "max_phi_min": 0.9971200685750357,
+      "mean_phi_mean_allpartitions": 1.0701364692593147,
+      "typical_min_bipartition_size": 1,
+      "h1_pass_phi_gt_0p1": true
+    },
+    "5": {
+      "n": 5,
+      "divisor_note": "prime",
+      "classical_phi": 15.156,
+      "n_bipartitions": 15,
+      "mean_phi_min": 0.6456370475794742,
+      "std_phi_min": 0.23147962399192956,
+      "min_phi_min": 0.009304197333824074,
+      "max_phi_min": 0.9834314618868979,
+      "mean_phi_mean_allpartitions": 1.205849951928331,
+      "typical_min_bipartition_size": 1,
+      "h1_pass_phi_gt_0p1": true
+    },
+    "6": {
+      "n": 6,
+      "divisor_note": "2\u00b73 \u2014 two odd-divisor blocks",
+      "classical_phi": 1.875,
+      "n_bipartitions": 41,
+      "mean_phi_min": 0.6224184790076481,
+      "std_phi_min": 0.23984374723342816,
+      "min_phi_min": 0.03971311848787305,
+      "max_phi_min": 0.9889997432464104,
+      "mean_phi_mean_allpartitions": 1.4574334922009107,
+      "typical_min_bipartition_size": 1,
+      "h1_pass_phi_gt_0p1": true
+    },
+    "7": {
+      "n": 7,
+      "divisor_note": "prime",
+      "classical_phi": 49.609,
+      "n_bipartitions": 63,
+      "mean_phi_min": 0.5552636608508442,
+      "std_phi_min": 0.2262333934302116,
+      "min_phi_min": 0.015028538699772899,
+      "max_phi_min": 0.9848462365606893,
+      "mean_phi_mean_allpartitions": 1.6023260859400132,
+      "typical_min_bipartition_size": 2,
+      "h1_pass_phi_gt_0p1": true
+    },
+    "8": {
+      "n": 8,
+      "divisor_note": "2^3 \u2014 nilpotent",
+      "classical_phi": 0.0,
+      "n_bipartitions": 162,
+      "mean_phi_min": 0.5719633678127406,
+      "std_phi_min": 0.2436164257631563,
+      "min_phi_min": 0.0140244705333034,
+      "max_phi_min": 0.9897964318528643,
+      "mean_phi_mean_allpartitions": 1.8934619890949491,
+      "typical_min_bipartition_size": 2,
+      "h1_pass_phi_gt_0p1": true
+    },
+    "9": {
+      "n": 9,
+      "divisor_note": "3^2 \u2014 one odd-divisor block (repeated)",
+      "classical_phi": null,
+      "n_bipartitions": 255,
+      "mean_phi_min": 0.5137159693950032,
+      "std_phi_min": 0.2632115137342592,
+      "min_phi_min": 0.01076078071942208,
+      "max_phi_min": 0.9667017334771831,
+      "mean_phi_mean_allpartitions": 2.035650021055929,
+      "typical_min_bipartition_size": 2,
+      "h1_pass_phi_gt_0p1": true
+    }
+  },
+  "grading": {
+    "h1_all_phi_gt_0p1": true,
+    "h2_prime_comparisons": [
+      [
+        3,
+        4
+      ],
+      [
+        5,
+        4
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        7,
+        6
+      ],
+      [
+        7,
+        8
+      ]
+    ],
+    "h2_prime_beats": 2,
+    "h2_total": 5,
+    "h2_pass": true,
+    "summary": "QUANTUM PHI TRANSCENDS DIVISOR STRUCTURE"
+  }
+}
