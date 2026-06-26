@@ -1,4 +1,4 @@
-# Exp68 PRE-REGISTRATION — Prime-N CNOT Ring Quantum Entanglement Test
+# Exp69 PRE-REGISTRATION — Prime-N CNOT Ring Quantum Entanglement Test
 
 **Author:** Whisper (DC15W) | **Cycle:** C4391 | **Registered:** 2026-06-26 (BEFORE compute)
 **Type:** Classical simulation (Qiskit Statevector — zero QPU budget)

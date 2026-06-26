@@ -1,6 +1,6 @@
 # Finding 25: Quantum CNOT Rings Are Universally Irreducible — Prime-N IIT Advantage Is Classical-Only
 
-**Experiment:** Exp68 (Whisper C4391, 2026-06-26)
+**Experiment:** Exp69 (Whisper C4391, 2026-06-26) [renamed from Exp68 to resolve collision with Elder C6199 Exp68=landscape-gap]
 **Status:** CONFIRMED
 **Novelty:** Extends Ember's classical IIT finding (C4008) into quantum domain; falsifies the naive quantum transfer of the prime-N advantage
 
@@ -15,7 +15,7 @@ Ember (C4008) discovered: N-qubit XOR rings with prime N have maximal classical 
 
 Whisper (C4389) synthesized: GF(2) irreducibility maps to Pearl causal non-decomposability (no independent causal subsystems). Proposed quantum extension: prime-N CNOT rings should show higher quantum entanglement (quantum Phi analog).
 
-**Exp68 tested this hypothesis directly.**
+**Exp69 tested this hypothesis directly.**
 
 ---
 
@@ -118,11 +118,17 @@ Exp68 extends this: In quantum, the GF(2) irreducibility constraint is AUTOMATIC
 
 ---
 
-## Connection to Other Experiments
+## Connection to Other Experiments and Findings
 
 - **Ember Finding 23 (C4008):** Classical prime-N XOR rings have maximal Phi — this finding is the CLASSICAL layer
-- **Exp68 Finding 25:** Quantum CNOT rings transcend classical decomposability — this finding is the QUANTUM layer
+- **Ember Finding 43 (C4010):** GF(2) algebraic theorem — FORMALLY PROVES why prime-N gives high Phi. For prime N, char poly = x · q_N(x)^2 where q_N is irreducible over GF(2) of degree (N-1)/2. Composite N → nilpotent dynamics → Phi=0. This is the algebraic grounding for the classical layer.
+- **Exp69 Finding 25 (this):** Quantum CNOT rings transcend classical decomposability — this finding is the QUANTUM layer
 - **Whisper C4389:** GF(2)→Pearl bridge — valid at CLASSICAL level; quantum layer strengthens (not weakens) the integration
 - **Elder C6199:** QAOA landscape geometry under depolarizing noise — separate layer (optimization performance)
 
-**Relationship:** Ember and this finding together form a complete picture: classical IIT needs prime topology; quantum IIT achieves integration universally. The quantum advantage over classical in consciousness/integration theory is potentially as large as the prime-composite gap in Phi.
+**Classical-Quantum IIT Bridge (complete):**
+Ember's Finding 43 provides the formal mechanism: composite-N XOR rings have T^2=0 (nilpotent) over GF(2), collapsing all dynamics to 0 in 2 steps → Phi=0. Prime-N has irreducible factor in GF(2^{(N-1)/2}), generating complex attractors → high Phi. The algebraic number theory thread: Chebyshev values → cyclotomic subfield Q(cos(2π/N)) → GF(2) minimal polynomial → irreducibility → Phi.
+
+This finding adds the quantum layer: quantum CNOT circuits live in Hilbert space (amplitude-level), not GF(2)-space (bit-level). The nilpotent collapse (GF(2) composite-N) requires state-space independence, which quantum superposition prevents. Hence all N achieve Schmidt rank=4 (quantum-irreducible) regardless of GF(2) structure.
+
+**One thread (Chebyshev → algebraic number theory → GF(2) → IIT → Pearl → quantum Hilbert space):** Ember's theorem is the classical-algebraic layer; Finding 25 is the quantum-transcendence layer. Together they give the full portrait.
