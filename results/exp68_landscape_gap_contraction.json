@@ -1,0 +1,316 @@
+{
+  "experiment": "exp68_landscape_gap_contraction",
+  "cycle": 6199,
+  "author": "elder",
+  "n_qubits": 8,
+  "edges": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      6
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      0
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      6
+    ],
+    [
+      4,
+      7
+    ]
+  ],
+  "max_cut": 10,
+  "meancut": 6.0,
+  "qaoa_p": 2,
+  "seed": 42,
+  "anchor_cost": 9.248048519386348,
+  "cold_cost": 5.999999999999999,
+  "dC_pure": 3.248048519386349,
+  "anchor_cut_ratio": 0.9248048519386348,
+  "P1_global": {
+    "pass": true,
+    "point_independent": true,
+    "rows": [
+      {
+        "p": 0.0,
+        "ratio": 1.0,
+        "expected_1mp": 1.0,
+        "abs_err": 0.0
+      },
+      {
+        "p": 0.1,
+        "ratio": 0.8999999999999981,
+        "expected_1mp": 0.9,
+        "abs_err": 1.887379141862766e-15
+      },
+      {
+        "p": 0.2,
+        "ratio": 0.7999999999999974,
+        "expected_1mp": 0.8,
+        "abs_err": 2.6645352591003757e-15
+      },
+      {
+        "p": 0.3,
+        "ratio": 0.6999999999999977,
+        "expected_1mp": 0.7,
+        "abs_err": 2.220446049250313e-15
+      },
+      {
+        "p": 0.4,
+        "ratio": 0.6000000000000036,
+        "expected_1mp": 0.6,
+        "abs_err": 3.6637359812630166e-15
+      },
+      {
+        "p": 0.5,
+        "ratio": 0.5000000000000012,
+        "expected_1mp": 0.5,
+        "abs_err": 1.2212453270876722e-15
+      },
+      {
+        "p": 0.6,
+        "ratio": 0.3999999999999972,
+        "expected_1mp": 0.4,
+        "abs_err": 2.831068712794149e-15
+      },
+      {
+        "p": 0.7,
+        "ratio": 0.2999999999999984,
+        "expected_1mp": 0.30000000000000004,
+        "abs_err": 1.6653345369377348e-15
+      },
+      {
+        "p": 0.8,
+        "ratio": 0.19999999999999957,
+        "expected_1mp": 0.19999999999999996,
+        "abs_err": 3.885780586188048e-16
+      },
+      {
+        "p": 0.9,
+        "ratio": 0.10000000000000019,
+        "expected_1mp": 0.09999999999999998,
+        "abs_err": 2.0816681711721685e-16
+      }
+    ]
+  },
+  "P2_local": {
+    "pass": true,
+    "any_anti_contract": false,
+    "monotone": true,
+    "rows": [
+      {
+        "p1": 0.0,
+        "p2": 0.0,
+        "ratio": 1.0
+      },
+      {
+        "p1": 0.0002,
+        "p2": 0.002,
+        "ratio": 0.9643375856996262
+      },
+      {
+        "p1": 0.0005,
+        "p2": 0.005,
+        "ratio": 0.9131992598586809
+      },
+      {
+        "p1": 0.001,
+        "p2": 0.01,
+        "ratio": 0.833887581962817
+      },
+      {
+        "p1": 0.003,
+        "p2": 0.03,
+        "ratio": 0.5794827255732552
+      },
+      {
+        "p1": 0.01,
+        "p2": 0.1,
+        "ratio": 0.16058070832382326
+      },
+      {
+        "p1": 0.03,
+        "p2": 0.3,
+        "ratio": 0.0032798755926402735
+      }
+    ]
+  },
+  "P2_robustness": {
+    "ember_high_dose": {
+      "p1": 0.001,
+      "p2": 0.01
+    },
+    "degen_threshold": 0.1,
+    "p2_literal_never_anti": true,
+    "genuine_anti_contraction": false,
+    "n_anti_total": 0,
+    "n_anti_degenerate": 0,
+    "meaningful_ratio_range": [
+      0.6213466584564002,
+      0.8685686209518051
+    ],
+    "rows": [
+      {
+        "dC0": 0.5777855925296995,
+        "ratio": 0.7593962495735258,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": 0.5564889328267313,
+        "ratio": 0.7195767427513788,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": -2.1911093086688433,
+        "ratio": 0.8466283477127108,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": -1.7530096472450438,
+        "ratio": 0.8205948707120247,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": 1.0615618503785829,
+        "ratio": 0.7401116766439034,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": 1.2387473472516453,
+        "ratio": 0.7708534016711521,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": 3.23298014109535,
+        "ratio": 0.8353756541175748,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": -5.0557973326137216,
+        "ratio": 0.8246383804091326,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": -0.5399702856792112,
+        "ratio": 0.8685686209518051,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": 2.1654530072679297,
+        "ratio": 0.8304785611104596,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": -0.23391922163249923,
+        "ratio": 0.6213466584564002,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": 1.2631426191911794,
+        "ratio": 0.8432943798787859,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": 0.5426047452510483,
+        "ratio": 0.8233534523606264,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": -1.7208634812591628,
+        "ratio": 0.8087345118418197,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": -0.22049792688049497,
+        "ratio": 0.769834888736648,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": 0.12433821327395211,
+        "ratio": 0.7546546642534087,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": 0.19831072489710078,
+        "ratio": 0.8351455621552202,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": -1.871052539687768,
+        "ratio": 0.8457303895997944,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": 1.4098356982177966,
+        "ratio": 0.8388732109444578,
+        "degenerate": false,
+        "anti": false
+      },
+      {
+        "dC0": -1.4523539453569683,
+        "ratio": 0.7897634874753171,
+        "degenerate": false,
+        "anti": false
+      }
+    ]
+  },
+  "verdict": {
+    "P1_global_exact_1mp": true,
+    "P2_local_contracts_anchor_vs_cold": true,
+    "P2_literal_never_anti_REFUTED": false,
+    "P2_mechanism_contracts_meaningful_gaps": true,
+    "P3_anti_contraction_is_optimization_not_landscape_in_warmstart_regime": true
+  }
+}
