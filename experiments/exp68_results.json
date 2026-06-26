@@ -1,0 +1,247 @@
+{
+  "experiment": "exp68",
+  "version": "v2_entangling_power",
+  "cycle": "C4391",
+  "author": "Whisper (DC15W)",
+  "date": "2026-06-26",
+  "design_note": "Revised: |+>^N invariant under CNOT; using entangling power over random product states",
+  "hypothesis_grades": {
+    "H1_entangling_power": {
+      "verdict": "PASS",
+      "detail": "N=5 vs N=4: 1.6753 vs 1.5851 \u2192 PASS | N=7 vs N=6: 1.7181 vs 1.7054 \u2192 PASS"
+    },
+    "H2_schmidt_rank": {
+      "verdict": "FAIL",
+      "detail": "N=5 vs N=4 Schmidt rank: 4.00 vs 4.00 \u2192 FAIL | N=7 vs N=6: 4.00 vs 4.00 \u2192 FAIL"
+    },
+    "H3_exploratory": {
+      "verdict": "PASS",
+      "detail": "Max Q at N=7: 1.7181"
+    }
+  },
+  "entangling_power_results": {
+    "3": {
+      "n": 3,
+      "is_prime": true,
+      "n_samples": 500,
+      "entangling_power_Q": 1.409300042053159,
+      "mean_output_Q": 1.409300042053159,
+      "std_output_Q": 0.38571540635922474,
+      "mean_output_entropy": 0.7557501153630011,
+      "std_output_entropy": 0.17251069389071885,
+      "mean_input_Q": 6.661338147750938e-17,
+      "fraction_Q_above_0.5": 0.96
+    },
+    "4": {
+      "n": 4,
+      "is_prime": false,
+      "n_samples": 500,
+      "entangling_power_Q": 1.5851133478269421,
+      "mean_output_Q": 1.5851133478269421,
+      "std_output_Q": 0.3080856858210973,
+      "mean_output_entropy": 0.8321511736927756,
+      "std_output_entropy": 0.13491761321541465,
+      "mean_input_Q": 1.0147438445073931e-16,
+      "fraction_Q_above_0.5": 0.992
+    },
+    "5": {
+      "n": 5,
+      "is_prime": true,
+      "n_samples": 500,
+      "entangling_power_Q": 1.6753018587809803,
+      "mean_output_Q": 1.67530185878098,
+      "std_output_Q": 0.25178855001924316,
+      "mean_output_entropy": 0.8704596934738917,
+      "std_output_entropy": 0.1074204035003397,
+      "mean_input_Q": -6.910028105266976e-17,
+      "fraction_Q_above_0.5": 0.998
+    },
+    "6": {
+      "n": 6,
+      "is_prime": false,
+      "n_samples": 500,
+      "entangling_power_Q": 1.705432942110831,
+      "mean_output_Q": 1.705432942110831,
+      "std_output_Q": 0.22595938053586978,
+      "mean_output_entropy": 0.8826265495824784,
+      "std_output_entropy": 0.09624535078353343,
+      "mean_input_Q": 4.559315887793974e-17,
+      "fraction_Q_above_0.5": 0.998
+    },
+    "7": {
+      "n": 7,
+      "is_prime": true,
+      "n_samples": 500,
+      "entangling_power_Q": 1.718076333235741,
+      "mean_output_Q": 1.7180763332357407,
+      "std_output_Q": 0.19104189803920302,
+      "mean_output_entropy": 0.887043388079863,
+      "std_output_entropy": 0.08180765248916377,
+      "mean_input_Q": -5.849289306882251e-17,
+      "fraction_Q_above_0.5": 1.0
+    }
+  },
+  "operator_structure": {
+    "3": {
+      "n": 3,
+      "is_prime": true,
+      "bipartition_ranks": [
+        {
+          "qubit": 0,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 1,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 2,
+          "operator_schmidt_rank": 4
+        }
+      ],
+      "min_operator_schmidt_rank": 4,
+      "max_operator_schmidt_rank": 4,
+      "mean_operator_schmidt_rank": 4.0,
+      "is_product_unitary": false
+    },
+    "4": {
+      "n": 4,
+      "is_prime": false,
+      "bipartition_ranks": [
+        {
+          "qubit": 0,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 1,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 2,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 3,
+          "operator_schmidt_rank": 4
+        }
+      ],
+      "min_operator_schmidt_rank": 4,
+      "max_operator_schmidt_rank": 4,
+      "mean_operator_schmidt_rank": 4.0,
+      "is_product_unitary": false
+    },
+    "5": {
+      "n": 5,
+      "is_prime": true,
+      "bipartition_ranks": [
+        {
+          "qubit": 0,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 1,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 2,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 3,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 4,
+          "operator_schmidt_rank": 4
+        }
+      ],
+      "min_operator_schmidt_rank": 4,
+      "max_operator_schmidt_rank": 4,
+      "mean_operator_schmidt_rank": 4.0,
+      "is_product_unitary": false
+    },
+    "6": {
+      "n": 6,
+      "is_prime": false,
+      "bipartition_ranks": [
+        {
+          "qubit": 0,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 1,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 2,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 3,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 4,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 5,
+          "operator_schmidt_rank": 4
+        }
+      ],
+      "min_operator_schmidt_rank": 4,
+      "max_operator_schmidt_rank": 4,
+      "mean_operator_schmidt_rank": 4.0,
+      "is_product_unitary": false
+    },
+    "7": {
+      "n": 7,
+      "is_prime": true,
+      "bipartition_ranks": [
+        {
+          "qubit": 0,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 1,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 2,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 3,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 4,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 5,
+          "operator_schmidt_rank": 4
+        },
+        {
+          "qubit": 6,
+          "operator_schmidt_rank": 4
+        }
+      ],
+      "min_operator_schmidt_rank": 4,
+      "max_operator_schmidt_rank": 4,
+      "mean_operator_schmidt_rank": 4.0,
+      "is_product_unitary": false
+    }
+  },
+  "classical_phi": {
+    "3": 1.875,
+    "4": 0.0,
+    "5": 15.156,
+    "6": 1.875,
+    "7": 49.609
+  },
+  "correlations": {
+    "phi_vs_mean_Q_out": 0.5178389697397716,
+    "phi_vs_schmidt_rank": NaN
+  }
+}
