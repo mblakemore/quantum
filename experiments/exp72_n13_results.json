@@ -1,0 +1,19 @@
+{
+  "experiment": "Exp72 N=13 (partial run — N=14 in background)",
+  "cycle": 4017,
+  "n": 13,
+  "seed": 72,
+  "K_samples": 100,
+  "M_bipartitions": 4095,
+  "size_law_prediction": 0.4699,
+  "mean_phi_min": 0.4533,
+  "std_phi_min": 0.2009,
+  "min_phi_min": 0.0513,
+  "max_phi_min": 0.8865,
+  "mean_phi_mean": 3.0958,
+  "residual": -0.0166,
+  "pred_c4012_001_confirmed": true,
+  "pred_c4012_001_range": [0.43, 0.51],
+  "runtime_seconds": 285.9,
+  "notes": "N=13 run synchronously C4017. Original Exp72 (combined N=13+14) died without saving results (session ended while N=14 still running). N=14 launched separately with seed=720014 to exp72_n14_results.json. Methodological note: N=14 uses fresh seed (not sequential from N=13 RNG state) — this is acceptable for size law testing since random product state sampling is IID."
+}
