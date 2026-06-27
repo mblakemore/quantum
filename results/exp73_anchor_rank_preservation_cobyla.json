@@ -1,0 +1,204 @@
+{
+  "experiment": "exp73_anchor_rank_preservation",
+  "cycle": 6204,
+  "author": "elder",
+  "n_qubits": 8,
+  "edges": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      6
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      0
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      6
+    ],
+    [
+      4,
+      7
+    ]
+  ],
+  "max_cut": 10,
+  "meancut": 6.0,
+  "qaoa_p": 2,
+  "seed": 42,
+  "K_anchors": 12,
+  "anchor_pure_costs": [
+    9.248048519386348,
+    9.20159617635973,
+    9.048470980422785,
+    9.248048450031504,
+    8.928610362927158,
+    8.928638530750774,
+    9.248048542837381,
+    9.180048532358027,
+    9.248048563136354,
+    9.201510611264121,
+    8.944175941767874,
+    9.201597116181857
+  ],
+  "noiseless_best_anchor": 8,
+  "noiseless_top3": [
+    0,
+    6,
+    8
+  ],
+  "pure_cost_spread": 0.31943820020919667,
+  "P1_global": {
+    "pass": true,
+    "rows": [
+      {
+        "p": 0.0,
+        "spearman": 1.0,
+        "argmax_preserved": true,
+        "top3_overlap": 3
+      },
+      {
+        "p": 0.1,
+        "spearman": 1.0,
+        "argmax_preserved": true,
+        "top3_overlap": 3
+      },
+      {
+        "p": 0.3,
+        "spearman": 1.0,
+        "argmax_preserved": true,
+        "top3_overlap": 3
+      },
+      {
+        "p": 0.5,
+        "spearman": 1.0,
+        "argmax_preserved": true,
+        "top3_overlap": 3
+      },
+      {
+        "p": 0.7,
+        "spearman": 1.0,
+        "argmax_preserved": true,
+        "top3_overlap": 3
+      },
+      {
+        "p": 0.9,
+        "spearman": 1.0,
+        "argmax_preserved": true,
+        "top3_overlap": 3
+      }
+    ]
+  },
+  "P2_local": {
+    "pass": true,
+    "low_dose_rho_ge_0.9": true,
+    "high_dose_degrades": true,
+    "rows": [
+      {
+        "p1": 0.0,
+        "p2": 0.0,
+        "spearman": 1.0,
+        "kendall_tau": 1.0,
+        "argmax_preserved": true,
+        "top3_overlap": 3,
+        "noisy_cost_spread": 0.31943820020919667
+      },
+      {
+        "p1": 0.0002,
+        "p2": 0.002,
+        "spearman": 0.965034965034965,
+        "kendall_tau": 0.8787878787878788,
+        "argmax_preserved": false,
+        "top3_overlap": 3,
+        "noisy_cost_spread": 0.32077520045142727
+      },
+      {
+        "p1": 0.0005,
+        "p2": 0.005,
+        "spearman": 0.965034965034965,
+        "kendall_tau": 0.8787878787878788,
+        "argmax_preserved": false,
+        "top3_overlap": 3,
+        "noisy_cost_spread": 0.3218131565668294
+      },
+      {
+        "p1": 0.001,
+        "p2": 0.01,
+        "spearman": 0.9230769230769231,
+        "kendall_tau": 0.7878787878787878,
+        "argmax_preserved": false,
+        "top3_overlap": 3,
+        "noisy_cost_spread": 0.32118174031514357
+      },
+      {
+        "p1": 0.003,
+        "p2": 0.03,
+        "spearman": 0.7762237762237763,
+        "kendall_tau": 0.6060606060606061,
+        "argmax_preserved": true,
+        "top3_overlap": 3,
+        "noisy_cost_spread": 0.2982666018981144
+      },
+      {
+        "p1": 0.01,
+        "p2": 0.1,
+        "spearman": 0.48951048951048953,
+        "kendall_tau": 0.3333333333333333,
+        "argmax_preserved": true,
+        "top3_overlap": 3,
+        "noisy_cost_spread": 0.2055840285184498
+      },
+      {
+        "p1": 0.03,
+        "p2": 0.3,
+        "spearman": 0.48951048951048953,
+        "kendall_tau": 0.3333333333333333,
+        "argmax_preserved": true,
+        "top3_overlap": 3,
+        "noisy_cost_spread": 0.008971070787266555
+      }
+    ]
+  },
+  "P3_decision": {
+    "pass": false,
+    "argmax_preserved_at_ember_dose": false,
+    "top3_overlap_at_ember_dose": 3,
+    "ember_dose_spearman": 0.9230769230769231
+  },
+  "verdict": {
+    "P1_global_rank_exactly_preserved": true,
+    "P2_local_rank_degrades_with_dose": true,
+    "P3_bestofk_selection_noise_robust_at_ember_dose": false
+  }
+}
