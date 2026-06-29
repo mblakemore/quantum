@@ -5,3 +5,6 @@ __pycache__/
 # Stale/backup checkpoint snapshots
 *.bak
 *.stale-*
+
+# Auth/credential operational notes — contain account identifiers, keep local only
+NEW-INSTANCE-AUTH.md
