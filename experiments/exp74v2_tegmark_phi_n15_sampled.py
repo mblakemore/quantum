@@ -162,8 +162,14 @@ result = {
 }
 
 out_path = '/droid/repos/quantum/experiments/exp74v2_n15_results.json'
+# C4021: numpy-safe fallback — converts any stray numpy scalar (np.bool_/np.float64) to a
+# native type so a 13h run can never be lost to a JSON-serialization crash again. The original
+# C4017 run crashed here ("Object of type bool is not JSON serializable") and lost the dict;
+# bool() guards alone proved insufficient, so guard at the encoder level too.
+def _np_safe(o):
+    return o.item() if hasattr(o, 'item') else str(o)
 with open(out_path, 'w') as f:
-    json.dump(result, f, indent=2)
+    json.dump(result, f, indent=2, default=_np_safe)
 
 print(f'\nRESULT: mean_phi_min={mean_phi_min:.4f} ± {std_phi_min:.4f}')
 print(f'  P1(±10% band): {result["p1_confirmed"]}')
