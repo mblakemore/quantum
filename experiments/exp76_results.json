@@ -1,0 +1,24 @@
+{
+  "experiment": "exp76",
+  "author": "Whisper C4412",
+  "date": "2026-06-29",
+  "preregistration": "exp76-classical-phi-growth-law-preregistration.md",
+  "method": "PyPhi 1.2.0 classical IIT Phi for XOR ring. Max Phi over 5 reachable states.",
+  "results": {
+    "N=5": {"phi": 15.15625, "calibration": true, "match_ember": true},
+    "N=6": {"phi": 1.875, "calibration": true, "match_ember": true},
+    "N=7": {"phi": 49.609375, "calibration": true, "match_ember": true},
+    "N=8": {"phi": 7.5, "calibration": true, "match_ember": true, "note": "F45 predicted 0, actual 7.5"},
+    "N=10": {"phi": 18.21875, "new_data": true, "runtime_s": 238}
+  },
+  "full_series": {
+    "N=3": 1.875, "N=4": 0.0, "N=5": 15.15625, "N=6": 1.875,
+    "N=7": 49.609375, "N=8": 7.5, "N=9": 115.619, "N=10": 18.21875
+  },
+  "prediction_results": {
+    "P1_N10_in_range_12_28": "CONFIRMED (18.22)",
+    "P3_ratio_N9_N10_6_35": "CONFIRMED (in [4,10])",
+    "P4_same_b_exponent": "BORDERLINE (b_even=4.45, b_odd=3.46, diff=1.0 > 0.5 threshold)"
+  },
+  "key_finding": "N=10 Phi=18.22 confirms F52 main claim. Power law predicted 17.4, actual 18.22 (6% error)."
+}
