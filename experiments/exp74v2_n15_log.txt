@@ -1,0 +1,46 @@
+=== Exp74v2: N=15 CNOT-ring Tegmark Phi (K=100, STRATIFIED SAMPLING) ===
+Protocol amendment: full enum killed (50-100h); stratified sample ~5h
+N=15: M_full=16383, M_sampled=1375 (8.4% coverage)
+Size law prediction (using M_full): 0.4227 bits
+  k=1: 15/15 bipartitions (100%)
+  k=2: 105/105 bipartitions (100%)
+  k=3: 455/455 bipartitions (100%)
+  k=4: 200/1365 bipartitions (15%)
+  k=5: 200/3003 bipartitions (7%)
+  k=6: 200/5005 bipartitions (4%)
+  k=7: 200/6435 bipartitions (3%)
+k=5/100 t=29390s phi_min_so_far=0.5284 eta=558409s
+k=10/100 t=44202s phi_min_so_far=0.4985 eta=397819s
+k=15/100 t=44299s phi_min_so_far=0.4980 eta=251026s
+k=20/100 t=44392s phi_min_so_far=0.5051 eta=177569s
+k=25/100 t=44489s phi_min_so_far=0.4745 eta=133466s
+k=30/100 t=44585s phi_min_so_far=0.4847 eta=104031s
+k=35/100 t=44682s phi_min_so_far=0.4941 eta=82981s
+k=40/100 t=44780s phi_min_so_far=0.4915 eta=67170s
+k=45/100 t=44963s phi_min_so_far=0.4870 eta=54955s
+k=50/100 t=45192s phi_min_so_far=0.5006 eta=45192s
+k=55/100 t=45289s phi_min_so_far=0.4879 eta=37055s
+k=60/100 t=45388s phi_min_so_far=0.4928 eta=30259s
+k=65/100 t=45523s phi_min_so_far=0.4969 eta=24512s
+k=70/100 t=45623s phi_min_so_far=0.4906 eta=19553s
+k=75/100 t=45723s phi_min_so_far=0.4993 eta=15241s
+k=80/100 t=45821s phi_min_so_far=0.5052 eta=11455s
+k=85/100 t=45916s phi_min_so_far=0.5089 eta=8103s
+k=90/100 t=46012s phi_min_so_far=0.5011 eta=5112s
+k=95/100 t=46108s phi_min_so_far=0.4989 eta=2427s
+k=100/100 t=46208s phi_min_so_far=0.4988 eta=0s
+Traceback (most recent call last):
+  File "/mnt/droid/repos/quantum/experiments/exp74v2_tegmark_phi_n15_sampled.py", line 166, in <module>
+    json.dump(result, f, indent=2)
+  File "/usr/lib/python3.12/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "/usr/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool is not JSON serializable

@@ -1,0 +1,10 @@
+=================================================================
+EXP74: Tegmark Phi N=15 (Whisper DC15W C4402)
+=================================================================
+N=15: M_bipartitions=16,383, State dim=2^15=32,768
+Size law prediction: 0.4227 bits (slope=-0.0236, R²~0.97)
+P1 range: [0.3827, 0.4627]
+Seed: 74 | K_samples: 100
+Max DM class: 2^7×2^7 = 128×128 (same as N=14)
+
+Computing 16,383 bipartitions...

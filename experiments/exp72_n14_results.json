@@ -1,0 +1,15 @@
+{
+  "n": 14,
+  "M_bipartitions": 9907,
+  "size_law_prediction": 0.4398,
+  "mean_phi_min": 0.4399621027406775,
+  "std_phi_min": 0.2379400090021766,
+  "min_phi_min": 0.0902907806783059,
+  "max_phi_min": 0.9455437673634006,
+  "mean_phi_mean": 3.398997676066715,
+  "residual": 0.0001,
+  "p2_confirmed": true,
+  "p3_confirmed": true,
+  "runtime_seconds": 49596.05,
+  "seed": 720014
+}

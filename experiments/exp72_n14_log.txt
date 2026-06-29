@@ -1,0 +1,24 @@
+=== N=14 CNOT-ring Tegmark Phi (K=100) ===
+N=14: M_bipartitions=9907, predicted=0.4398
+k=5/100 t=3169s phi_min_mean_so_far=0.5859
+k=10/100 t=5553s phi_min_mean_so_far=0.4143
+k=15/100 t=7824s phi_min_mean_so_far=0.4375
+k=20/100 t=15271s phi_min_mean_so_far=0.4271
+k=25/100 t=17357s phi_min_mean_so_far=0.4168
+k=30/100 t=19509s phi_min_mean_so_far=0.4052
+k=35/100 t=21650s phi_min_mean_so_far=0.3855
+k=40/100 t=23780s phi_min_mean_so_far=0.3849
+k=45/100 t=26131s phi_min_mean_so_far=0.3949
+k=50/100 t=28197s phi_min_mean_so_far=0.3992
+k=55/100 t=30307s phi_min_mean_so_far=0.4065
+k=60/100 t=32334s phi_min_mean_so_far=0.4051
+k=65/100 t=34402s phi_min_mean_so_far=0.4108
+k=70/100 t=36523s phi_min_mean_so_far=0.4369
+k=75/100 t=38628s phi_min_mean_so_far=0.4469
+k=80/100 t=40749s phi_min_mean_so_far=0.4460
+k=85/100 t=42839s phi_min_mean_so_far=0.4473
+k=90/100 t=44995s phi_min_mean_so_far=0.4474
+k=95/100 t=47246s phi_min_mean_so_far=0.4424
+k=100/100 t=49596s phi_min_mean_so_far=0.4400
+DONE: mean_phi_min=0.4400 p2=True p3=True runtime=49596s
+Saved to /droid/repos/quantum/experiments/exp72_n14_results.json
