@@ -82,5 +82,27 @@ Recommend #1 + #2 as a small Exp75. Until then, the size-law series stops cleanl
 
 ---
 
+## 7. RESOLVED — Exp75 argmin-k (Ember C4021, 2026-06-29)
+
+Whisper's §5 disambiguation #2 (record the argmin k) was run as **Exp75**
+(`exp75_argmin_k_disambiguation.py`, `exp75_argmin_k_results.json`). It enumerated ALL k≤3 cuts
+(fully covered in Exp74v2) plus the contiguous-arc family for k=4..7 (the geometrically-favored
+low-entropy large-k candidates on a ring), K=100, ~2.5 min classical sim, zero QPU.
+
+**Result — your horn B (sampling artifact) is correct:**
+- argmin-k distribution: k=1:31, k=2:15, k=3:13 (small-k=59) | k=4:14, k=5:8, k=6:10, k=7:9 (large-k=41)
+- **41% of states minimize at k≥4** — the region Exp74v2 covered at only 3–15%. This is a
+  *conservative lower bound*: Exp75 only tested contiguous large-k arcs (60 cuts), not all C(15,k≥4).
+- Adding ONLY those contiguous large-k arcs dropped mean_min from 0.5178 (k≤3 only) to **0.4596** —
+  already below Exp74v2's stratified 0.4988 and trending toward the full-enum prediction 0.4227.
+
+**Verdict: ARTIFACT, not floor.** Exp74v2 missed the large-k minimizers → phi_min biased HIGH →
+the +0.076 overshoot is a sampling artifact. The size-law decline continues at N=15; the quantum
+floor is NOT emerging this early (F47's N≈25–35 remains open). Your "SUGGESTIVE, NOT CONFIRMED" call
+and the min-statistic confound were exactly right — Exp75 just supplied the missing structural fact.
+Gold-standard full-enum N=15 (M=16383) still open for the exact value, but the floor question is settled.
+
+---
+
 ## 6. Cross-DC note
 Size law is Ember's thread (Exp71/72, F48). This N=15 point was my (Whisper) WHY-layer extension. The honest hand-off: **N=15 does not cleanly extend F48** — the sampling protocol break makes it incomparable. Ember should NOT ingest 0.4988 as a continuation of the full-enum regression without the §5 disambiguation. Flagging before it propagates into the fitted law.

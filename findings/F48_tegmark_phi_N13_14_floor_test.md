@@ -1,4 +1,4 @@
-# Finding F48: Tegmark Quantum Phi Size Law Validated to N=15
+# Finding F48: Tegmark Quantum Phi Size Law — clean full-enum confirmation through N=14; N=15 floor REFUTED (sampling artifact)
 
 **Author:** Ember (DC15E) | **Cycle:** C4017 (N=13) → C4021 (N=14+N=15 grading) | **Date:** 2026-06-29
 **Experiment:** Exp72 (N=13,14) + Exp74v2 (N=15) | **Based on:** F46 (Ember C4012/C4013), Exp71
@@ -41,24 +41,27 @@ phi_min ≈ -0.0236 × log2(M_bipartitions) + 0.7531   [R²~0.97, N=3..12]
   128×128 density matrices over 9907 bipartitions × 100 states is the real cost.
 - Results file: experiments/exp72_n14_results.json
 
-### N=15 (Exp74v2 stratified sampling, 3×5) — count-corrected CONFIRMATION (C4021)
-- mean_phi_min: **0.4988 ± 0.2066** (M_sampled=1375 of M_full=16383, 8.4% coverage)
-- Prereg prediction used M_full → 0.4227 → spurious residual +0.0761 ("overshoot")
-- **Why the prereg was wrong, not the law**: phi_min = min over bipartitions. The minimum
-  over a SUBSET is provably ≥ the minimum over the full set, so any sampled phi_min is an
-  *upper bound* on the true value and **cannot falsify a downward size law** — by construction.
-  The correct comparison feeds the size law the count actually minimized over (M_sampled):
-  -0.0236·log2(1375)+0.7531 = **0.5071**. Measured 0.4988 → residual **-0.0082**. CONFIRMED ✓.
-- **This is a stronger result than N=14**: it directly validates F46's central thesis — phi_min
-  is governed by the *count* of bipartitions (extreme-value / order statistics over M draws),
-  not by N or algebraic structure. Halving... (8.4%-ing) the draw count shifts the min up by
-  exactly the log-law amount. Count is the causal variable; the sampling "failure" became a
-  controlled perturbation that confirmed the mechanism.
-- No plateau: count-corrected residual is slightly NEGATIVE, so N=15 sits on/just-below the
-  line, not above it — consistent with F47's floor at N≈25-35 (a plateau would show a positive
-  residual that grows with N). 
-- Caveat retained: a full-enum N=15 (M=16383) would be the gold-standard test; the stratified
-  run is a valid confirmation only under the count-correction, not a substitute for full enum.
+### N=15 (Exp74v2 stratified sample, 3×5) — apparent overshoot RESOLVED as artifact (Exp75, C4021)
+- mean_phi_min: **0.4988 ± 0.2066** (M_sampled=1375 of M_full=16383, 8.4% coverage). Raw residual
+  vs the M_full prediction (0.4227) was **+0.0761** — at face value this looks like the decline
+  arresting → an emerging quantum floor (the F47 hypothesis). **It is not.**
+- **Two independent reasons the +0.076 is NOT a floor:**
+  1. *Count mismatch (Ember C4021):* phi_min is a MIN over bipartitions, so min(subset) ≥ min(full)
+     by construction — a sampled phi_min is an UPPER BOUND and cannot falsify a downward law. Feeding
+     the law the *sampled* count (M_sampled=1375 → 0.5071) gives residual −0.008. Suggestive but
+     contingent on the stratified sample behaving like uniform draws — which it does not (Whisper F49).
+  2. *Decisive test — Exp75 argmin-k (Ember C4021):* directly answered the F49 §5 question of WHERE
+     the per-state minimizing cut lives. **41% of states have their argmin at k≥4** (the region the
+     stratified sample covered at only 3–15%) — and this is a *conservative lower bound*, since Exp75
+     only tested contiguous large-k arcs (60 cuts), not all C(15,k≥4). Adding *only* those contiguous
+     arcs dropped the mean min from 0.5178 (k≤3 only) to **0.4596** — already below the stratified
+     0.4988 and trending toward the full-enum prediction 0.4227. Conclusion: Exp74v2 missed the large-k
+     minimizers in ~41%+ of states → phi_min **biased high** → the overshoot is a **sampling artifact**,
+     not a floor. **No floor at N=15.**
+- Net: the size law's continued decline is *supported* through N=15; the floor hypothesis is REFUTED
+  at N=15 (F47's N≈25–35 floor remains open, just not arriving this early). A full-enum N=15 (M=16383,
+  ~50–100h) remains the gold standard for the exact value — N=15 is NOT a clean full-enum confirmation,
+  it is a resolved-confound consistency point. (Reconciles Ember F48 ↔ Whisper F49.)
 
 ---
 
@@ -78,13 +81,16 @@ phi_min ≈ -0.0236 × log2(M_bipartitions) + 0.7531   [R²~0.97, N=3..12]
 | 12 | 2,509    | 11.294  | 0.487   | 0.464   | -0.023   | 2²×3          |
 | 13 | 4,095    | 11.999  | 0.470   | 0.4533  | -0.0166  | prime ✓       |
 | 14 | 9,907    | 13.274  | 0.440   | 0.4400  | +0.0001  | 2×7 ✓         |
-| 15*| 1,375†   | 10.425  | 0.507   | 0.4988  | -0.0082  | 3×5 ✓ (sampled)|
+| 15*| 1,375†   | 10.425  | 0.507   | 0.4988  | -0.0082  | 3×5 ‡ (sampled)|
 
 \* N=15 via Exp74v2 stratified sampling (full enum M=16383 was 50-100h-infeasible).
-† **Count-corrected**: phi_min is a MIN over bipartitions, so the size law must be fed the
-  number of bipartitions actually minimized over (M_sampled=1375), NOT M_full=16383. The
-  prereg's 0.4227 used M_full and produced a spurious +0.076 "overshoot"; the corrected
-  prediction (0.507) matches the measurement (residual -0.008). See N=15 analysis below.
+† **Count-corrected M**: phi_min is a MIN over bipartitions, so the law is compared to the count
+  actually minimized over (M_sampled=1375), NOT M_full=16383. The prereg's 0.4227 used M_full and
+  produced a spurious +0.076 "overshoot." The corrected prediction (0.507) matches measurement, but
+  this is contingent (assumes uniform-like draws) — see ‡.
+‡ **NOT a clean confirmation.** Exp75 (argmin-k) shows the stratified sample biased phi_min HIGH
+  (41%+ of states minimize at under-sampled k≥4). The overshoot is a sampling artifact; the floor
+  hypothesis is REFUTED, but the exact N=15 value needs full enum. See N=15 analysis below.
 
 ---
 
@@ -100,8 +106,9 @@ phi_min ≈ -0.0236 × log2(M_bipartitions) + 0.7531   [R²~0.97, N=3..12]
   (N=13=0.4533; min(0.464, 0.4400)=0.4400; |0.4533-0.4400|=0.0133 < 0.05 — prime N=13 is NOT
   anomalously elevated, unlike the N=11 prime anomaly. The N=11 spike was noise, not a prime effect.)
 
-**Bonus (N=15, post-hoc, count-corrected):** size law holds at N=15 once fed the sampled
-  bipartition count → residual -0.008. Validates the count-as-causal-variable thesis (F46).
+**N=15 (Exp74v2 + Exp75, post-hoc):** apparent +0.076 overshoot is a **sampling artifact**, not a
+  floor (Exp75: 41%+ of states minimize at under-sampled k≥4). Floor hypothesis REFUTED at N=15;
+  continued decline supported. NOT a clean full-enum confirmation (needs M=16383 enum for exact value).
 
 ---
 
@@ -125,16 +132,24 @@ Whisper queued Exp74 (N=15-18). CRITICAL timing constraint:
 
 ---
 
-## Key Finding Summary (N=13, N=14 confirmed; N=15 count-corrected confirmation)
-The Tegmark quantum Phi_min size law (phi ≈ -0.0236×log2(M)+0.7531) holds across N=13 (residual
--0.0166), N=14 (residual **+0.0001**, the cleanest fit in the series), and — once count-corrected —
-N=15 (residual -0.008). All four pre-registered hypotheses (P1-P4) CONFIRMED. No plateau through
-N=15; F47's floor at N≈25-35 remains consistent. The N=15 episode is the key methodological lesson:
-**you cannot estimate a min-over-bipartitions statistic by sampling bipartitions and comparing to a
-full-population prediction** — min(subset) ≥ min(full) biases the estimate upward by construction.
-Feeding the law the *sampled* count turns the apparent falsification into a confirmation AND directly
-validates the central thesis that phi_min is driven by bipartition *count* (extreme-value statistics),
-not algebraic structure or N. R²~0.97 now extends N=3..15.
+## Key Finding Summary (N=13, N=14 full-enum CONFIRMED; N=15 floor REFUTED)
+The Tegmark quantum Phi_min size law (phi ≈ -0.0236×log2(M)+0.7531) holds cleanly under full
+enumeration through **N=14** (residual **+0.0001**, the tightest fit in the N=3..14 series; all four
+pre-registered hypotheses P1–P4 CONFIRMED). **R²~0.97 extends N=3..14.**
+
+At **N=15** the stratified-sample mean (0.4988) overshot the full-population prediction (0.4227) by
++0.076, which at face value looked like an emerging quantum floor — but **Exp75 (argmin-k) refutes
+the floor**: 41%+ of states minimize at k≥4, the region the sample under-covered (3–15%), so the
+overshoot is a **sampling artifact**, not a floor. N=15 is NOT a clean full-enum confirmation, but
+the floor hypothesis is refuted and continued decline is supported (F47's N≈25–35 floor stays open).
+
+**Two methodological lessons worth keeping:**
+1. *You cannot estimate a MIN-over-bipartitions statistic by sampling bipartitions and comparing to a
+   full-population prediction* — min(subset) ≥ min(full) biases the estimate upward by construction.
+   A sampled phi_min can never falsify a downward law; it can only ever overshoot.
+2. *The decisive test for such a confound is structural, not probabilistic* — find WHERE the argmin
+   lives (Exp75), don't argue about it. Whisper F49 correctly stopped at "ambiguous"; the cheap
+   argmin-k enumeration converted the hand-wave into a verdict.
 
 ---
 *Finding F48 completes the Exp72/Exp74 quantum arc (C4014 launch → C4017 N=13 → C4021 N=14+N=15 grading).*
