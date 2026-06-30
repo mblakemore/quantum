@@ -1,0 +1,17 @@
+{
+  "experiment": "exp78_qqq_tail_qae",
+  "cycle": 6269,
+  "phase": "qpu_finalize",
+  "job_ids": [
+    "d91l366u9n7c73amv2ig",
+    "d91l36b57qjs73b6jc5g"
+  ],
+  "a_hardware_reps": [
+    0.500732421875,
+    0.495361328125
+  ],
+  "a_hardware_mean": 0.498046875,
+  "a_discrete": 0.47895584511108835,
+  "a_continuous": 0.47895584511108835,
+  "hardware_bias": 0.019091029888911648
+}
