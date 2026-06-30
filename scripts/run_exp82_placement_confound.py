@@ -181,12 +181,39 @@ def main():
 
         if g_best and g_default:
             shift = g_best["transfer_ratio"] - g_default["transfer_ratio"]
-            ideal = 1.0  # FakeMarrakesh-normalized ideal transfer ratio
-            verdict = ("CONFOUND CONFIRMED: BEST shifts transfer_ratio toward FakeMarrakesh ideal"
-                       if g_best["transfer_ratio"] > g_default["transfer_ratio"] + 0.05
-                       else "CONFOUND NOT SUPPORTED: BEST does not move transfer_ratio meaningfully vs DEFAULT")
+            # HONESTY BOUNDS (added post-submission, advisor-caught C4414 -- do NOT replace with a
+            # binary verdict before reading these):
+            #   1. ASYMMETRIC INFERENCE: BEST's transpile adds depth (1139 vs DEFAULT's 1070 gates --
+            #      quiet_qubits.pick() greedily walks the hardware coupling map, which does not match
+            #      the QAOA interaction graph, forcing extra SWAPs). A null/negative BEST result is
+            #      THEREFORE UNINTERPRETABLE -- cannot distinguish "placement doesn't matter" from
+            #      "placement helped but added SWAP depth ate the benefit." Only a CLEAR POSITIVE shift
+            #      (BEST notably closer to the FakeMarrakesh-normalized ideal of 1.0 than DEFAULT) is a
+            #      clean, assertable outcome.
+            #   2. NOISE FLOOR: single seed, 128 shots/circuit. transfer_ratio = lift_qpu / 0.0748 where
+            #      lift_qpu is a difference of two 128-shot ratio estimates -- back-of-envelope SE is
+            #      ~0.3-0.4 in transfer_ratio units (consistent with F50's own 4-seed range of
+            #      [-0.33, +0.17]). A small shift is statistically indistinguishable from noise; do not
+            #      read precision into a single-seed number.
+            #   3. OBJECTIVE MISMATCH: quiet_qubits.pick(objective=True) optimizes ONE answer-bit's
+            #      readout (correct for F57's QQQ-loader use case). QAOA MaxCut reads out all 20 qubits
+            #      and depends on the full 2q interaction graph -- "BEST" here is quiet_qubits' best for
+            #      a different circuit class, not necessarily optimal for this one.
+            # Net: report raw numbers, do not auto-assert CONFIRMED/NOT-SUPPORTED. A large positive
+            # shift (BEST >> DEFAULT, both well outside the ~0.35 noise band) is evidence the confound
+            # is real. Anything else (null, negative, or small shift) is INCONCLUSIVE given (1) and (2)
+            # -- it does NOT support "F50's irreducible-noise interpretation was right," it just means
+            # this one underpowered, depth-handicapped, possibly-mistargeted test didn't resolve it.
+            # A real resolution needs multi-seed + a depth-matched placement control.
             print(f"\n  transfer_ratio BEST={g_best['transfer_ratio']:+.4f} DEFAULT={g_default['transfer_ratio']:+.4f} "
-                  f"shift={shift:+.4f}")
+                  f"shift={shift:+.4f}  (BEST depth=1139 vs DEFAULT depth=1070 -- see honesty bounds above)")
+            if shift > 0.35:
+                verdict = ("SUGGESTIVE POSITIVE: shift exceeds rough single-seed noise floor (~0.35) -- "
+                            "consistent with placement being a real confound, but N=1 seed, needs replication")
+            else:
+                verdict = ("INCONCLUSIVE: shift within single-seed noise floor AND/OR BEST's depth handicap "
+                            "could mask a real effect -- does NOT confirm F50's irreducible-noise reading either; "
+                            "needs multi-seed + depth-matched control to resolve")
             print(f"  VERDICT: {verdict}")
             result = {"seed": SEED, "best": g_best, "default": g_default, "shift": shift,
                       "verdict": verdict, "local_record": rec_for_grade,
