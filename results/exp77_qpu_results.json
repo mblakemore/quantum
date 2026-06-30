@@ -1,0 +1,68 @@
+{
+  "experiment": "exp77_anchor_rank_qpu",
+  "cycle": 6268,
+  "phase": "qpu_finalize",
+  "job_ids": [
+    "d91km2357qjs73b6ies0",
+    "d91km2eu9n7c73amu5ng"
+  ],
+  "replicates": [
+    {
+      "tag": "QPU_A",
+      "argmax_preserved": true,
+      "true_best": 4,
+      "meas_best": 4,
+      "top3_overlap": 3,
+      "spearman": 1.0,
+      "rank_distortion": 0.0,
+      "measured_ratio": [
+        0.41689453125,
+        0.4861328125,
+        0.59609375,
+        0.6625,
+        0.7732421875
+      ],
+      "true_ratio": [
+        0.2608332699413805,
+        0.41231310335537075,
+        0.5643227756890157,
+        0.7164991247136835,
+        0.8682699405272765
+      ]
+    },
+    {
+      "tag": "QPU_B",
+      "argmax_preserved": true,
+      "true_best": 4,
+      "meas_best": 4,
+      "top3_overlap": 3,
+      "spearman": 1.0,
+      "rank_distortion": 0.0,
+      "measured_ratio": [
+        0.4107421875,
+        0.48720703125,
+        0.60947265625,
+        0.66416015625,
+        0.780078125
+      ],
+      "true_ratio": [
+        0.2608332699413805,
+        0.41231310335537075,
+        0.5643227756890157,
+        0.7164991247136835,
+        0.8682699405272765
+      ]
+    }
+  ],
+  "argmax_both": true,
+  "top3_both": true,
+  "mean_hw_rank_distortion": 0.0,
+  "true_costs": [
+    2.608332699413805,
+    4.123131033553707,
+    5.643227756890156,
+    7.164991247136835,
+    8.682699405272764
+  ],
+  "max_cut": 10
+}

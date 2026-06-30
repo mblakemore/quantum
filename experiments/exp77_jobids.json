@@ -1,0 +1,18 @@
+{
+  "experiment": "exp77",
+  "backend": "ibm_marrakesh",
+  "k_anchors": 5,
+  "shots": 1024,
+  "job_ids": [
+    "d91km2357qjs73b6ies0",
+    "d91km2eu9n7c73amu5ng"
+  ],
+  "true_costs": [
+    2.608332699413805,
+    4.123131033553707,
+    5.643227756890156,
+    7.164991247136835,
+    8.682699405272764
+  ],
+  "max_cut": 10
+}
