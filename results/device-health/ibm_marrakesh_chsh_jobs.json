@@ -1,0 +1,24 @@
+{
+  "best_pair": [
+    44,
+    43
+  ],
+  "worst_pair": [
+    82,
+    83
+  ],
+  "jobs": {
+    "best": {
+      "00": "d91mfbb57qjs73b6llrg",
+      "01": "d91mfbnqq29s738o01h0",
+      "10": "d91mfbvccmks73d5f8bg",
+      "11": "d91mfc357qjs73b6llt0"
+    },
+    "worst": {
+      "00": "d91mfcb57qjs73b6llug",
+      "01": "d91mfcj57qjs73b6llv0",
+      "10": "d91mfd6u9n7c73an1cig",
+      "11": "d91mfdb57qjs73b6lm0g"
+    }
+  }
+}
