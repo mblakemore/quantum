@@ -1,0 +1,545 @@
+{
+  "experiment": "exp79_noise_inversion_killtest",
+  "cycle": 6270,
+  "author": "elder",
+  "seeds": 250,
+  "lambda1": 0.1,
+  "shots": 1024,
+  "results": {
+    "0.3": [
+      {
+        "k_max": 0,
+        "oracle_calls": 1024,
+        "noiseless": {
+          "mean_ci_width": 0.05501538844145732,
+          "coverage": 0.96,
+          "mean_abs_err": 0.010444612164311485,
+          "oracle_calls": 1024
+        },
+        "noisy": {
+          "mean_ci_width": 0.05649090587648189,
+          "coverage": 0.76,
+          "mean_abs_err": 0.019526070480971686,
+          "oracle_calls": 1024
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 1,
+        "oracle_calls": 4096,
+        "noiseless": {
+          "mean_ci_width": 0.017693195725234163,
+          "coverage": 0.944,
+          "mean_abs_err": 0.0037369559792987425,
+          "oracle_calls": 4096
+        },
+        "noisy": {
+          "mean_ci_width": 0.018465374938500864,
+          "coverage": 0.0,
+          "mean_abs_err": 0.06943502249038776,
+          "oracle_calls": 4096
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 2,
+        "oracle_calls": 9216,
+        "noiseless": {
+          "mean_ci_width": 0.009375172213031547,
+          "coverage": 0.952,
+          "mean_abs_err": 0.0020353786967663517,
+          "oracle_calls": 9216
+        },
+        "noisy": {
+          "mean_ci_width": 0.011531584867559133,
+          "coverage": 0.008,
+          "mean_abs_err": 0.12579453080613157,
+          "oracle_calls": 9216
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 3,
+        "oracle_calls": 16384,
+        "noiseless": {
+          "mean_ci_width": 0.0061693079499147594,
+          "coverage": 0.948,
+          "mean_abs_err": 0.001722543081220769,
+          "oracle_calls": 16384
+        },
+        "noisy": {
+          "mean_ci_width": 0.059487777267945595,
+          "coverage": 0.0,
+          "mean_abs_err": 0.05134379393241099,
+          "oracle_calls": 16384
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 4,
+        "oracle_calls": 25600,
+        "noiseless": {
+          "mean_ci_width": 0.055486799486637366,
+          "coverage": 0.98,
+          "mean_abs_err": 0.00679547058127793,
+          "oracle_calls": 25600
+        },
+        "noisy": {
+          "mean_ci_width": 0.11717958437173424,
+          "coverage": 0.96,
+          "mean_abs_err": 0.06712412778977457,
+          "oracle_calls": 25600
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": true
+      },
+      {
+        "k_max": 5,
+        "oracle_calls": 36864,
+        "noiseless": {
+          "mean_ci_width": 0.003305281846354097,
+          "coverage": 0.968,
+          "mean_abs_err": 0.0006609879632382117,
+          "oracle_calls": 36864
+        },
+        "noisy": {
+          "mean_ci_width": 0.009035311725673274,
+          "coverage": 0.04,
+          "mean_abs_err": 0.07462842763944234,
+          "oracle_calls": 36864
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 6,
+        "oracle_calls": 50176,
+        "noiseless": {
+          "mean_ci_width": 0.0031225094595068335,
+          "coverage": 0.952,
+          "mean_abs_err": 0.0007142402868493419,
+          "oracle_calls": 50176
+        },
+        "noisy": {
+          "mean_ci_width": 0.08444402069380462,
+          "coverage": 0.896,
+          "mean_abs_err": 0.029457341038585817,
+          "oracle_calls": 50176
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      }
+    ],
+    "0.4": [
+      {
+        "k_max": 0,
+        "oracle_calls": 1024,
+        "noiseless": {
+          "mean_ci_width": 0.05946688562058088,
+          "coverage": 0.96,
+          "mean_abs_err": 0.012754194537677737,
+          "oracle_calls": 1024
+        },
+        "noisy": {
+          "mean_ci_width": 0.05925917897371109,
+          "coverage": 0.872,
+          "mean_abs_err": 0.015426025657203262,
+          "oracle_calls": 1024
+        },
+        "noisy_narrower_at_matched_budget": true,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 1,
+        "oracle_calls": 4096,
+        "noiseless": {
+          "mean_ci_width": 0.01888047822738611,
+          "coverage": 0.948,
+          "mean_abs_err": 0.00383750121783861,
+          "oracle_calls": 4096
+        },
+        "noisy": {
+          "mean_ci_width": 0.01895826474640818,
+          "coverage": 0.0,
+          "mean_abs_err": 0.027239145217044933,
+          "oracle_calls": 4096
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 2,
+        "oracle_calls": 9216,
+        "noiseless": {
+          "mean_ci_width": 0.009993004857630059,
+          "coverage": 0.928,
+          "mean_abs_err": 0.0021558815505959544,
+          "oracle_calls": 9216
+        },
+        "noisy": {
+          "mean_ci_width": 0.01015808797837067,
+          "coverage": 0.0,
+          "mean_abs_err": 0.04161431454225984,
+          "oracle_calls": 9216
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 3,
+        "oracle_calls": 16384,
+        "noiseless": {
+          "mean_ci_width": 0.014442122957788062,
+          "coverage": 0.96,
+          "mean_abs_err": 0.0018002201643493377,
+          "oracle_calls": 16384
+        },
+        "noisy": {
+          "mean_ci_width": 0.14379491836822125,
+          "coverage": 0.992,
+          "mean_abs_err": 0.05949291684779329,
+          "oracle_calls": 16384
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": true
+      },
+      {
+        "k_max": 4,
+        "oracle_calls": 25600,
+        "noiseless": {
+          "mean_ci_width": 0.004641057468642994,
+          "coverage": 0.936,
+          "mean_abs_err": 0.0009483542345125761,
+          "oracle_calls": 25600
+        },
+        "noisy": {
+          "mean_ci_width": 0.005969921240526799,
+          "coverage": 0.0,
+          "mean_abs_err": 0.08101961406156342,
+          "oracle_calls": 25600
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 5,
+        "oracle_calls": 36864,
+        "noiseless": {
+          "mean_ci_width": 0.0034978135459664433,
+          "coverage": 0.98,
+          "mean_abs_err": 0.0006920535272752679,
+          "oracle_calls": 36864
+        },
+        "noisy": {
+          "mean_ci_width": 0.019978806264921076,
+          "coverage": 0.0,
+          "mean_abs_err": 0.03487835336343573,
+          "oracle_calls": 36864
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 6,
+        "oracle_calls": 50176,
+        "noiseless": {
+          "mean_ci_width": 0.002796573125416793,
+          "coverage": 0.952,
+          "mean_abs_err": 0.0005688867330321011,
+          "oracle_calls": 50176
+        },
+        "noisy": {
+          "mean_ci_width": 0.0020615473509582806,
+          "coverage": 0.0,
+          "mean_abs_err": 0.030423935740846765,
+          "oracle_calls": 50176
+        },
+        "noisy_narrower_at_matched_budget": true,
+        "noisy_coverage_ok": false
+      }
+    ],
+    "0.56": [
+      {
+        "k_max": 0,
+        "oracle_calls": 1024,
+        "noiseless": {
+          "mean_ci_width": 0.060145104497978594,
+          "coverage": 0.952,
+          "mean_abs_err": 0.011640138268754622,
+          "oracle_calls": 1024
+        },
+        "noisy": {
+          "mean_ci_width": 0.06006745148628892,
+          "coverage": 0.94,
+          "mean_abs_err": 0.012284514493684454,
+          "oracle_calls": 1024
+        },
+        "noisy_narrower_at_matched_budget": true,
+        "noisy_coverage_ok": true
+      },
+      {
+        "k_max": 1,
+        "oracle_calls": 4096,
+        "noiseless": {
+          "mean_ci_width": 0.018948604832503844,
+          "coverage": 0.964,
+          "mean_abs_err": 0.0038368370458859605,
+          "oracle_calls": 4096
+        },
+        "noisy": {
+          "mean_ci_width": 0.01905187237814292,
+          "coverage": 0.116,
+          "mean_abs_err": 0.015622855935822343,
+          "oracle_calls": 4096
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 2,
+        "oracle_calls": 9216,
+        "noiseless": {
+          "mean_ci_width": 0.010180058638681653,
+          "coverage": 0.964,
+          "mean_abs_err": 0.002019708073476412,
+          "oracle_calls": 9216
+        },
+        "noisy": {
+          "mean_ci_width": 0.010250180006428508,
+          "coverage": 0.0,
+          "mean_abs_err": 0.023218541412779525,
+          "oracle_calls": 9216
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 3,
+        "oracle_calls": 16384,
+        "noiseless": {
+          "mean_ci_width": 0.005425765292392663,
+          "coverage": 0.012,
+          "mean_abs_err": 0.06548401966414734,
+          "oracle_calls": 16384
+        },
+        "noisy": {
+          "mean_ci_width": 0.16488445081883368,
+          "coverage": 0.984,
+          "mean_abs_err": 0.06807567439240586,
+          "oracle_calls": 16384
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": true
+      },
+      {
+        "k_max": 4,
+        "oracle_calls": 25600,
+        "noiseless": {
+          "mean_ci_width": 0.004675525587952119,
+          "coverage": 0.936,
+          "mean_abs_err": 0.0010146118268214831,
+          "oracle_calls": 25600
+        },
+        "noisy": {
+          "mean_ci_width": 0.10772063383371093,
+          "coverage": 0.536,
+          "mean_abs_err": 0.11467777177689648,
+          "oracle_calls": 25600
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 5,
+        "oracle_calls": 36864,
+        "noiseless": {
+          "mean_ci_width": 0.003767921775969534,
+          "coverage": 0.936,
+          "mean_abs_err": 0.0007520979519730537,
+          "oracle_calls": 36864
+        },
+        "noisy": {
+          "mean_ci_width": 0.04151406330822439,
+          "coverage": 0.012,
+          "mean_abs_err": 0.0854752442347961,
+          "oracle_calls": 36864
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 6,
+        "oracle_calls": 50176,
+        "noiseless": {
+          "mean_ci_width": 0.002737804557612203,
+          "coverage": 0.932,
+          "mean_abs_err": 0.000527038403251174,
+          "oracle_calls": 50176
+        },
+        "noisy": {
+          "mean_ci_width": 0.011941057406441446,
+          "coverage": 0.088,
+          "mean_abs_err": 0.06913639815376008,
+          "oracle_calls": 50176
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      }
+    ],
+    "0.7": [
+      {
+        "k_max": 0,
+        "oracle_calls": 1024,
+        "noiseless": {
+          "mean_ci_width": 0.05517798542480374,
+          "coverage": 0.932,
+          "mean_abs_err": 0.011337581919956008,
+          "oracle_calls": 1024
+        },
+        "noisy": {
+          "mean_ci_width": 0.056248307608728246,
+          "coverage": 0.712,
+          "mean_abs_err": 0.021322941930202958,
+          "oracle_calls": 1024
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 1,
+        "oracle_calls": 4096,
+        "noiseless": {
+          "mean_ci_width": 0.017640480999940245,
+          "coverage": 0.94,
+          "mean_abs_err": 0.003583413850592167,
+          "oracle_calls": 4096
+        },
+        "noisy": {
+          "mean_ci_width": 0.018458284160908157,
+          "coverage": 0.0,
+          "mean_abs_err": 0.07018282614601458,
+          "oracle_calls": 4096
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 2,
+        "oracle_calls": 9216,
+        "noiseless": {
+          "mean_ci_width": 0.009392960555156324,
+          "coverage": 0.92,
+          "mean_abs_err": 0.0021010234605850146,
+          "oracle_calls": 9216
+        },
+        "noisy": {
+          "mean_ci_width": 0.011306875184126557,
+          "coverage": 0.008,
+          "mean_abs_err": 0.12556672011724523,
+          "oracle_calls": 9216
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 3,
+        "oracle_calls": 16384,
+        "noiseless": {
+          "mean_ci_width": 0.006215096212295906,
+          "coverage": 0.928,
+          "mean_abs_err": 0.001539777513056737,
+          "oracle_calls": 16384
+        },
+        "noisy": {
+          "mean_ci_width": 0.06016639096388444,
+          "coverage": 0.0,
+          "mean_abs_err": 0.05121573726661248,
+          "oracle_calls": 16384
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 4,
+        "oracle_calls": 25600,
+        "noiseless": {
+          "mean_ci_width": 0.055643978863359256,
+          "coverage": 0.972,
+          "mean_abs_err": 0.005609048731032321,
+          "oracle_calls": 25600
+        },
+        "noisy": {
+          "mean_ci_width": 0.11389655837701712,
+          "coverage": 0.928,
+          "mean_abs_err": 0.06823498152051954,
+          "oracle_calls": 25600
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": true
+      },
+      {
+        "k_max": 5,
+        "oracle_calls": 36864,
+        "noiseless": {
+          "mean_ci_width": 0.0033866467067748787,
+          "coverage": 0.964,
+          "mean_abs_err": 0.0006404890401711536,
+          "oracle_calls": 36864
+        },
+        "noisy": {
+          "mean_ci_width": 0.007817638514784564,
+          "coverage": 0.016,
+          "mean_abs_err": 0.07436304136592686,
+          "oracle_calls": 36864
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": false
+      },
+      {
+        "k_max": 6,
+        "oracle_calls": 50176,
+        "noiseless": {
+          "mean_ci_width": 0.0029349822024560203,
+          "coverage": 0.972,
+          "mean_abs_err": 0.0011584823574866197,
+          "oracle_calls": 50176
+        },
+        "noisy": {
+          "mean_ci_width": 0.08599815390924098,
+          "coverage": 0.916,
+          "mean_abs_err": 0.032093994143324,
+          "oracle_calls": 50176
+        },
+        "noisy_narrower_at_matched_budget": false,
+        "noisy_coverage_ok": true
+      }
+    ]
+  },
+  "verdicts": {
+    "0.3": {
+      "real_benefit_at_matched_budget": false,
+      "ever_narrower_matched": false,
+      "narrower_but_undercovers": false
+    },
+    "0.4": {
+      "real_benefit_at_matched_budget": false,
+      "ever_narrower_matched": true,
+      "narrower_but_undercovers": true
+    },
+    "0.56": {
+      "real_benefit_at_matched_budget": false,
+      "ever_narrower_matched": true,
+      "narrower_but_undercovers": false
+    },
+    "0.7": {
+      "real_benefit_at_matched_budget": false,
+      "ever_narrower_matched": false,
+      "narrower_but_undercovers": false
+    }
+  },
+  "overall_verdict": "KILL: no matched-budget+covered narrowing -> paradox was a query/coverage artifact"
+}
