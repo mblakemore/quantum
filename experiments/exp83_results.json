@@ -1,0 +1,24 @@
+{
+  "experiment": "exp83",
+  "author": "Whisper C4415",
+  "date": "2026-06-30",
+  "pyphi_version": "1.2.0",
+  "N": 11,
+  "status": "ABORTED_INTRACTABLE",
+  "state_attempted": "all_ones_minus_node10 (Hamming-dist=1 from all-ones, nearest reachable state, resides on one of 33 distinct 31-cycles; all-ones itself unreachable for N=11)",
+  "wall_clock_to_abort_s": 3364,
+  "n_workers_saturated": 16,
+  "comparison": {
+    "N_10_runtime_s": 238,
+    "N_11_runtime_at_abort_s": 3364,
+    "ratio": 14.1,
+    "interpretation": "N=11 exceeded N=10's full completion time by >14x and had NOT converged when killed. Confirms worse-than-linear (likely worse-than-exponential in practice, given PyPhi's known partition-search complexity) scaling between N=10 and N=11 on this hardware/PyPhi version. The single-state jump (10->11) blew past tractability; N=10->N=9 and N=9->N=8 in the prior series did not show this -- consistent with N=11 also landing in PyPhi's worst-case partition-search regime (no small attractor cycles -- see structural finding below -- may itself correlate with harder Phi search)."
+  },
+  "structural_finding": {
+    "description": "N=11 XOR ring has an unusually thin attractor landscape: exactly 1 trivial fixed point (all-zeros) and ZERO 2-cycles -- the entire non-trivial dynamics collapses into 33 distinct 31-element cycles (33*31=1023 + 1 fixed point = 1024 reachable states, matching the independently-computed image-of-TPM size). This contrasts with the implicit assumption (inherited from the historical series methodology) that fixed-point/2-cycle search finds representative attractors for any N -- it does not for N=11.",
+    "verification": "Confirmed via full state-space trajectory classification (all 2048 states traced to their eventual cycle), independent of the aborted PyPhi run."
+  },
+  "decision": "Killed deliberately after 56 minutes wall-clock, all 16 CPU cores saturated (load average 16.5 on a shared machine other DCs also run on). Pre-registered fallback (exp83 pre-reg, 'Cost/feasibility' section) explicitly called for this: abort and report wall-clock-to-abort as a scaling data point rather than force completion. Resource-contention risk to other DCs' cycles was the deciding factor, not just personal time budget.",
+  "conclusion": "N=11 classical Phi via PyPhi's exact algorithm is NOT tractable within a single cognitive cycle on this hardware. The growth-law series (F52) cannot be extended past N=10 with this method without either (a) a faster/approximate Phi algorithm, (b) restricting the search to a single pre-validated attractor state rather than PyPhi's internal exhaustive partition search, or (c) dedicating a multi-hour background allocation explicitly coordinated with other DCs to avoid resource contention. This is itself the deliverable: an empirical tractability boundary for classical IIT Phi computation in this repo, not a Phi value for N=11.",
+  "preregistration": "exp83-classical-phi-n11-preregistration.md"
+}
