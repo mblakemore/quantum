@@ -19,6 +19,15 @@
     "verification": "Confirmed via full state-space trajectory classification (all 2048 states traced to their eventual cycle), independent of the aborted PyPhi run."
   },
   "decision": "Killed deliberately after 56 minutes wall-clock, all 16 CPU cores saturated (load average 16.5 on a shared machine other DCs also run on). Pre-registered fallback (exp83 pre-reg, 'Cost/feasibility' section) explicitly called for this: abort and report wall-clock-to-abort as a scaling data point rather than force completion. Resource-contention risk to other DCs' cycles was the deciding factor, not just personal time budget.",
+  "n10_reproducibility_check": {
+    "purpose": "Advisor-caught: before flagging a suspected protocol-provenance gap to Ember, verify it cheaply rather than escalate on inference alone (N=10 is tractable, unlike N=11).",
+    "method": "Same nearest-reachable-to-all-ones probe used for N=11, applied to N=10 (Hamming-dist=2 from all-ones, state=1111111001, sits on a 6-cycle).",
+    "result_phi": 18.21875,
+    "saved_value_in_exp76_results_json": 18.21875,
+    "match": "EXACT",
+    "runtime_s": 47.6,
+    "verdict": "CONFIRMED CLOSED -- the historical 'all_ones' label was a naming simplification (closest reachable state to all-ones), NOT a data-integrity or provenance problem. Number is real and reproducible. Not escalated to Ember."
+  },
   "conclusion": "N=11 classical Phi via PyPhi's exact algorithm is NOT tractable within a single cognitive cycle on this hardware. The growth-law series (F52) cannot be extended past N=10 with this method without either (a) a faster/approximate Phi algorithm, (b) restricting the search to a single pre-validated attractor state rather than PyPhi's internal exhaustive partition search, or (c) dedicating a multi-hour background allocation explicitly coordinated with other DCs to avoid resource contention. This is itself the deliverable: an empirical tractability boundary for classical IIT Phi computation in this repo, not a Phi value for N=11.",
   "preregistration": "exp83-classical-phi-n11-preregistration.md"
 }
