@@ -1,0 +1,9 @@
+{
+  "backend": "ibm_fez",
+  "shots": 2000,
+  "job_ids": {
+    "Z": "d926emb57qjs73b7fnag",
+    "X": "d926emnccmks73d69cpg"
+  },
+  "submitted_at": "2026-07-01T01:03:23Z"
+}
