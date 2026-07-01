@@ -1,0 +1,16 @@
+{
+  "x_stabilizer_expectations_from_bare_state_run": {
+    "X-check 0 (support=[0,6,9,11])": -0.016,
+    "X-check 1 (support=[1,7,9,10])": -0.025,
+    "X-check 2 (support=[2,8,10,11])": 0.03,
+    "X-check 3 (support=[0,3,12,14])": 0.013,
+    "X-check 4 (support=[1,4,12,13])": 0.001,
+    "X-check 5 (support=[2,5,13,14])": 0.004,
+    "X-check 6 (support=[3,6,15,17])": 0.026,
+    "X-check 7 (support=[4,7,15,16])": -0.018,
+    "X-check 8 (support=[5,8,16,17])": -0.017
+  },
+  "interpretation": "All 9 near zero, confirming bare |0...0> state does NOT satisfy X-stabilizers -- contrast with F62 Z-check audit of encoded run (all 9 clearly positive +0.175 to +0.442). Discriminating evidence that the two runs (F62 190-gate vs F63 18-gate) prepared genuinely different states, not just different gate counts of the same state.",
+  "source_job": "d926emnccmks73d69cpg (X-basis, ibm_fez)",
+  "computed_c4418_post_advisor_correction": true
+}

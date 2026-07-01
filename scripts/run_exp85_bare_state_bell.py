@@ -13,7 +13,17 @@ works identically, and |0...0> (the default hardware reset state) already has it
 
 VERIFIED (noiseless sim, this cycle): witness = exactly 2.0000 with ZERO state-prep gates,
 matching the full-encoder result bit-for-bit. Real ibm_fez transpile: 18 2q-gates (down from
-190) -- landing in the same ballpark as the author's reported ~14 total.
+190) -- landing in the same ballpark as the author's reported ~14 total (numeric proximity only;
+we don't know their actual method).
+
+CAUTION -- this changes TWO variables vs the full encoder, not one: gate count AND whether the
+prepared state is an encoded superposition (all 8 stabilizers satisfied) or a bare product state
+(only 2/8 satisfied). Real-hardware X-stabilizer check on the 6 skipped checks came back ~0 (not
++1), confirming this is genuinely a different, less-protected state, not just a cheaper version
+of the same one. So a witness improvement here is NOT a clean isolation of gate count as the
+cause -- see findings/F63 "What this shows" for the corrected framing. Demonstrates entanglement
+of the unencoded logical operators, a weaker claim than F62's/the author's protected-codeword
+claim -- does not "beat" or supersede either.
 
 HONESTY BOUND (do not lose this when reading results): this is NOT a "fault-tolerant encoded"
 preparation in the full sense -- it deliberately skips the other 6 stabilizers, which round-0
