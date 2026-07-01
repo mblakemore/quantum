@@ -1,0 +1,11 @@
+{
+  "rounds": 1,
+  "placement": "none",
+  "backend": "ibm_fez",
+  "shots": 2000,
+  "job_ids": {
+    "Z": "d9263c7qq29s738opnn0",
+    "X": "d9263ceu9n7c73anr800"
+  },
+  "submitted_at": "2026-07-01T00:39:13Z"
+}
