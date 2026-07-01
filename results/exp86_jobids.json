@@ -1,0 +1,53 @@
+{
+  "backend": "ibm_fez",
+  "shots": 2000,
+  "job_id": "d92ckp7ccmks73d6ipp0",
+  "pub_meta": [
+    {
+      "opt": 2,
+      "seed": 100,
+      "basis": "Z",
+      "twoq": 158,
+      "label_twoq_Z": 158
+    },
+    {
+      "opt": 2,
+      "seed": 100,
+      "basis": "X",
+      "twoq": 158,
+      "label_twoq_Z": 158
+    },
+    {
+      "opt": 3,
+      "seed": 7,
+      "basis": "Z",
+      "twoq": 178,
+      "label_twoq_Z": 178
+    },
+    {
+      "opt": 3,
+      "seed": 7,
+      "basis": "X",
+      "twoq": 178,
+      "label_twoq_Z": 178
+    },
+    {
+      "opt": 1,
+      "seed": 31337,
+      "basis": "Z",
+      "twoq": 208,
+      "label_twoq_Z": 208
+    },
+    {
+      "opt": 1,
+      "seed": 31337,
+      "basis": "X",
+      "twoq": 208,
+      "label_twoq_Z": 208
+    }
+  ],
+  "f62_reference_gates": 190,
+  "f62_witness": 0.57,
+  "f63_product_witness": 1.499,
+  "submitted_at": "2026-07-01T08:05:56Z"
+}
