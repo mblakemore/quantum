@@ -28,6 +28,7 @@ CLI:
   python3 quiet_qubits.py --health [--sim]            # CHSH benchmark (sim validates S≈2.83)
 """
 import sys, os, json, math, argparse
+from datetime import datetime, timezone
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -112,6 +113,10 @@ def map_summary(backend):
 def snapshot(backend, cycle=None, ts=None):
     """Append a calibration snapshot to the per-backend drift log (seeds drift tracking)."""
     s = map_summary(backend)
+    # C6289: default ts to capture time. A drift log with no timestamps can't measure
+    # drift RATE — the F58 seed logged ts=None, making the interval between points
+    # unknowable. Stamp UTC-now when the caller doesn't supply one.
+    ts = ts or datetime.now(timezone.utc).isoformat()
     rec = {"backend": backend.name, "cycle": cycle, "ts": ts, "summary": s,
            "best_pick_n2": pick(backend, 2)["qubits"], "best_pick_n3": pick(backend, 3)["qubits"]}
     path = os.path.join(HEALTH_DIR, f"{backend.name}.jsonl")
