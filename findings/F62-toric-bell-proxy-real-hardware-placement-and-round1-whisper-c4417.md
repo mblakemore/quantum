@@ -55,9 +55,16 @@ reproduced on a different code and a different circuit.
 `ibm_fez`, default placement, 2000 shots (matching the author's own shot count), round-0 (state
 prep + entangle + readout only):
 
-**Witness = 0.570** (ZZ=0.235, XX_cond=0.335) — **below the separable bound of 1.0**, and well
-below both our FakeMarrakesh prediction (1.32–1.40) and the author's own reported hardware
-result (1.121).
+**Witness = 0.570** (ZZ=0.235, XX_cond=0.335) — **below the separable bound of 1.0**.
+
+There are two DIFFERENT gaps here, with two DIFFERENT causes (advisor-caught: an earlier draft
+of this section conflated them into one "compounding" story — wrong, they explain two separate
+comparisons, not one shortfall):
+
+| Comparison | What differs | What's held constant |
+|---|---|---|
+| Sim (1.32–1.40) vs our hardware (0.570) | noise model | same circuit, same 190 gates |
+| Our hardware (0.570) vs author's hardware (1.121) | circuit (190 vs ~14 gates) | same backend family, both real |
 
 ### Ruled out a bug before concluding anything
 
@@ -74,56 +81,67 @@ than the sim assumed, or (c) something structural. Checked (a) first, directly:
   (a mathematical property of this ground state, verified in F61). Real result: **every single
   check came back clearly positive** (+0.175 to +0.442, none near zero, none negative) — a
   9-for-9 consistent signature that would be extremely unlikely from a broken/scrambled circuit
-  (a bug would produce checks scattered near zero, not uniformly positive). **This rules out a
-  decode/circuit bug** — the circuit is genuinely running correctly; the state has real,
-  substantial, if heavily degraded, structure.
+  (a bug would produce checks scattered near zero, not uniformly positive). Independently
+  confirmed on the X side: `xx_b0=+0.315`, `xx_b1=−0.356` — correctly opposite signs for Φ⁺/Φ⁻,
+  exactly the structural signature a working (if noisy) circuit should produce, not noise.
+  **This rules out a decode/circuit bug** with high confidence — the circuit is genuinely
+  running correctly; the state has real, substantial, if heavily degraded, structure.
 
-### Two real (not mutually exclusive) explanations for the shortfall
+### Gap 1 (sim vs our hardware, 1.32→0.570): noise-model mismatch
 
-1. **`FakeMarrakesh` is a stale/mismatched noise proxy.** It's a snapshot of `ibm_marrakesh`
-   calibration, used here as a "same Heron-r2 chip family" stand-in for `ibm_fez` — flagged as
-   a caveat in F61 §5 already. The Z-check degradation (average ~0.30, far below the sim's
-   implied per-gate fidelity) shows live `ibm_fez` noise right now is meaningfully worse than
-   that snapshot predicted. This is the SAME lesson this repo's `quiet_qubits.py` was built to
-   address (noise drifts, static assumptions go stale) — now confirmed the hard way, by a
-   simulation-vs-reality gap rather than a same-backend drift measurement.
-2. **Our proxy's state-prep gate cost is much higher than the author's actual protocol.** Our
-   validated CSS encoder needs 34 raw CX (→190 after routing) just to prepare `|0_L,0_L⟩` before
-   any entangling gates. The author reported **14 total Bell CX** for their whole circuit — if
-   that figure includes their state prep, their code's logical-zero state was reachable far more
-   cheaply than ours (plausible if their custom code's structure needs little or no
-   stabilizer-based encoding circuit, unlike the toric code's non-trivial 8-generator encoder).
-   This is a genuine, disclosed limitation of the toric-code substitution choice (F61 §5 already
-   flagged this as "not a literal reproduction"): it buys mathematical certainty at the cost of
-   a much larger gate budget than whatever the author's undisclosed code allowed.
+Same circuit, same 190 gates, both actually run — the only thing that differed is the noise
+applied. This gap is entirely explained by `FakeMarrakesh` being a stale/mismatched proxy: a
+snapshot of `ibm_marrakesh` calibration, used here as a "same Heron-r2 chip family" stand-in for
+`ibm_fez` (flagged as a caveat in F61 §5 already). The Z-check degradation (average ~0.30, far
+below the sim's implied per-gate fidelity) shows live `ibm_fez` noise right now is meaningfully
+worse than that snapshot predicted — the same lesson this repo's `quiet_qubits.py` exists to
+address (noise drifts, static assumptions go stale), now confirmed by a simulation-vs-reality
+gap rather than a same-backend drift measurement. Gate count cannot explain this gap (it was
+identical on both sides) — this comparison is pure noise-model error.
 
-Both effects point the same direction and likely compound: worse-than-modeled real noise acting
-on a circuit that already pays a higher gate-count entry cost than the comparison point.
+### Gap 2 (our hardware vs author's hardware, 0.570→1.121): the informative comparison
+
+Both real, same backend family, noise-model quality isn't in play here — the author cleared the
+bound on the SAME class of chip. That's strong evidence the hardware *can* do this, and what
+differs is the circuit: **our validated CSS encoder needs 34 raw CX (→190 after routing) just
+to prepare `|0_L,0_L⟩`, vs the author's reported 14 total Bell CX.** If that 14 includes their
+state prep, their code's logical-zero state was reachable far more cheaply than ours (plausible
+if their custom code needs little or no stabilizer-based encoding circuit, unlike the toric
+code's non-trivial 8-generator encoder). **This is the PRIMARY, leading hypothesis for why our
+run fell short where theirs succeeded** — not co-equal with Gap 1's noise-model story, since
+Gap 1 is already fully explained without invoking gate count at all. This is a genuine,
+disclosed limitation of the toric-code substitution (F61 §5 already flagged it as "not a
+literal reproduction"): it buys mathematical certainty at the cost of a much larger gate budget
+than whatever the author's undisclosed code allowed.
 
 ## 4. Honest bottom line
 
-- **The underlying physics is confirmed real on both sides of this comparison**: the author's
-  hardware result (1.121, clearing the bound) and our own Z-check-level analysis of our own
-  "failed" run (9-for-9 positive, structured, not noise) both show genuine logical-qubit
-  correlation surviving real hardware, at round 0. Our specific attempt didn't clear the
-  separable-state bound this time, but that's a statement about THIS circuit's gate-efficiency
-  and THIS moment's `ibm_fez` calibration, not a refutation of the underlying claim.
+- **The underlying physics is confirmed real on both sides**: the author's hardware result
+  (1.121, clearing the bound) and our own Z-check-level analysis of our own "failed" run
+  (9-for-9 positive on Z, correct Φ⁺/Φ⁻ sign split on X, structured not noise) both show genuine
+  logical-qubit correlation surviving real hardware, at round 0.
+- **Why ours fell short where theirs succeeded (leading hypothesis): gate count.** Our validated
+  encoder costs ~190 real gates vs their apparent ~14 — a same-hardware, same-family comparison
+  where noise-model quality isn't a confound. This is the actionable lever, not "the hardware
+  can't do it" or "our sim was wrong" (the sim being wrong is a separate, already-explained gap
+  to `FakeMarrakesh` staleness, not evidence about the hardware itself).
 - **Round-1 replicated cleanly**: independent confirmation, different code, that active
   syndrome-extraction rounds are currently net-negative at this scale on Heron-r2 hardware.
 - **Noise-aware placement, naively applied, would have made round-0 worse, not better** — a
   useful negative result that prevented wasting QPU budget on a doomed configuration.
 - Cost: 12 QPU-sec for all 4 jobs (201/600 consumed, 399 remaining, still GREEN).
 
-## 5. Open items (not executed, for a future cycle if pursued)
+## 5. Open items (not executed — reporting back to Creator for direction, not spending more QPU speculatively)
 
-1. Test noise-aware placement on **real** `ibm_fez` specifically (not `FakeMarrakesh`) — the
-   gate-count penalty was measured on a stale noise model; live device topology/calibration
-   could change the tradeoff.
-2. Reduce state-prep gate cost: investigate whether a cheaper (non-full-ground-state) `|0_L⟩`
-   preparation exists for this specific circuit's needs, closing the gap to the author's
-   apparent 14-CX total.
-3. Re-run round-0 at a different time (calibration drift check) to see if the shortfall is
-   reproducible or was a bad-calibration-window artifact.
+1. **Primary lever**: reduce state-prep gate cost — investigate whether a cheaper
+   (non-full-ground-state) `|0_L⟩` preparation exists for this specific circuit's needs, closing
+   the gap to the author's apparent 14-CX total. This is the comparison that actually explains
+   the shortfall (Gap 2), so it's the highest-value next step if this thread continues.
+2. Secondary: test noise-aware placement on **real** `ibm_fez` specifically (not
+   `FakeMarrakesh`) — the gate-count penalty was measured on a stale noise model; live
+   device topology/calibration could change the tradeoff, though this doesn't address Gap 2.
+3. Re-run round-0 at a different time (calibration drift check) — informative for Gap 1
+   (noise-model mismatch), not for Gap 2 (gate count).
 
 ## 6. Reversibility / scope
 
