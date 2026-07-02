@@ -1,0 +1,35 @@
+{
+  "experiment": "exp93-classical-mixture-control",
+  "cycle": "C6328",
+  "shots": 20000,
+  "disc": {
+    "switch": {
+      "ideal": 2.0,
+      "noisy": 1.929
+    },
+    "definite": {
+      "ideal": 0.0,
+      "noisy": 0.0017000000000000348
+    },
+    "mixture": {
+      "ideal": -0.0004000000000000002,
+      "noisy": -0.0026
+    }
+  },
+  "W1_switch_vs_definite": {
+    "ideal": 2.0,
+    "noisy": 1.9273
+  },
+  "W2_switch_vs_mixture": {
+    "ideal": 2.0004,
+    "noisy": 1.9316
+  },
+  "prereg_checks": {
+    "H1_disc_switch_ge_1p90": true,
+    "H2_abs_disc_mixture_le_0p05": true,
+    "H3_W2_gt_0p07": true,
+    "H2fake_abs_disc_mixture_noisy_le_0p20": true,
+    "H3fake_W2_noisy_gt_0p07": true
+  },
+  "sim_verdict": "PASS"
+}
