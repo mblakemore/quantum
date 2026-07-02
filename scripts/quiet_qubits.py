@@ -183,12 +183,53 @@ def _run_chsh_pair(backend, qa, qb, label, service):
     return jobmap
 
 
+def _counts_from_pub(res_pub):
+    """Extract counts from a SamplerV2 PrimitiveResult pub, register-name agnostic."""
+    db = res_pub.data
+    try:
+        arr = list(db.values())[0]          # DataBin mapping interface (newer qiskit)
+    except Exception:
+        arr = getattr(db, "c")              # default classical register name fallback
+    return arr.get_counts()
+
+
+def health_finalize(service, jobs_path):
+    """Retrieve a submitted CHSH health run, compute S per pair. Grades the submit-and-later gap.
+
+    Reads {backend}_chsh_jobs.json (best/worst pairs, 4 job_ids each), pulls counts,
+    computes E[i][j] and S = E00 - E01 + E10 + E11 per pair. Writes a sibling _results.json.
+    PASS discrimination = S_best clears the classical bound 2 while S_worst does not.
+    """
+    spec = json.load(open(jobs_path))
+    out = {"best_pair": spec.get("best_pair"), "worst_pair": spec.get("worst_pair"),
+           "shots": SHOTS, "results": {}}
+    for label, jobmap in spec["jobs"].items():
+        E = [[None, None], [None, None]]
+        for key, jid in jobmap.items():
+            i, j = int(key[0]), int(key[1])
+            counts = _counts_from_pub(service.job(jid).result()[0])
+            E[i][j] = _corr(counts)
+        S = _S_from_corrs(E)
+        out["results"][label] = {"E": E, "S": S,
+                                 "violates_classical_bound": abs(S) > 2.0}
+    b = out["results"].get("best", {}).get("S")
+    w = out["results"].get("worst", {}).get("S")
+    if b is not None and w is not None:
+        out["discriminates"] = bool(abs(b) > 2.0 and abs(w) <= 2.0)
+        out["S_gap_best_minus_worst"] = abs(b) - abs(w)
+    rpath = jobs_path.replace(".json", "_results.json")
+    json.dump(out, open(rpath, "w"), indent=2)
+    return out, rpath
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pick", type=int, metavar="N")
     ap.add_argument("--worst", action="store_true")
     ap.add_argument("--snapshot", action="store_true")
     ap.add_argument("--health", action="store_true")
+    ap.add_argument("--health-finalize", dest="health_finalize", action="store_true")
+    ap.add_argument("--jobs-file", default=None, help="path to a _chsh_jobs.json to finalize")
     ap.add_argument("--sim", action="store_true")
     ap.add_argument("--cycle", type=int, default=None)
     ap.add_argument("--backend", default="ibm_marrakesh")
@@ -201,7 +242,20 @@ def main():
         return
 
     from run_exp66_qpu_partb import _get_ibm_service
-    service = _get_ibm_service(); backend = service.backend(args.backend)
+    service = _get_ibm_service()
+
+    if args.health_finalize:
+        jpath = args.jobs_file or os.path.join(HEALTH_DIR, f"{args.backend}_chsh_jobs.json")
+        out, rpath = health_finalize(service, jpath)
+        for label, r in out["results"].items():
+            flag = "✅ >2 (quantum)" if r["violates_classical_bound"] else "classical (≤2)"
+            print(f"  {label:5s} pair={out[label+'_pair'] if label+'_pair' in out else ''} S = {r['S']:+.4f}  {flag}", flush=True)
+        if "discriminates" in out:
+            print(f"  discriminates (best>2 & worst≤2): {out['discriminates']}  | S-gap = {out['S_gap_best_minus_worst']:+.4f}", flush=True)
+        print(f"  results -> {rpath}", flush=True)
+        return
+
+    backend = service.backend(args.backend)
 
     if args.pick:
         p = pick(backend, args.pick, mode="worst" if args.worst else "best")
