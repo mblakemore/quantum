@@ -1,0 +1,88 @@
+{
+  "backend": "ibm_fez",
+  "shots": 2000,
+  "job_id": "d939an247v0s7381nd2g",
+  "pub_meta": [
+    {
+      "axis": "anchor",
+      "label": "anchor158",
+      "basis": "Z",
+      "twoq": 158
+    },
+    {
+      "axis": "anchor",
+      "label": "anchor158",
+      "basis": "X",
+      "twoq": 158
+    },
+    {
+      "axis": "cz",
+      "label": "cz178",
+      "basis": "Z",
+      "twoq": 178,
+      "folds": 10,
+      "target": 178
+    },
+    {
+      "axis": "cz",
+      "label": "cz178",
+      "basis": "X",
+      "twoq": 178,
+      "folds": 10,
+      "target": 178
+    },
+    {
+      "axis": "cz",
+      "label": "cz208",
+      "basis": "Z",
+      "twoq": 208,
+      "folds": 25,
+      "target": 208
+    },
+    {
+      "axis": "cz",
+      "label": "cz208",
+      "basis": "X",
+      "twoq": 208,
+      "folds": 25,
+      "target": 208
+    },
+    {
+      "axis": "swap",
+      "label": "swap176",
+      "basis": "Z",
+      "twoq": 176,
+      "n_pairs": 3
+    },
+    {
+      "axis": "swap",
+      "label": "swap176",
+      "basis": "X",
+      "twoq": 176,
+      "n_pairs": 3
+    },
+    {
+      "axis": "swap",
+      "label": "swap206",
+      "basis": "Z",
+      "twoq": 206,
+      "n_pairs": 8
+    },
+    {
+      "axis": "swap",
+      "label": "swap206",
+      "basis": "X",
+      "twoq": 206,
+      "n_pairs": 8
+    }
+  ],
+  "base_opt": 2,
+  "base_seed": 100,
+  "base_twoq": 158,
+  "ref": {
+    "exp89_anchor_158": 1.1321,
+    "exp89_fix_208": 1.1501,
+    "exp87_cz_178": 0.904
+  },
+  "submitted_at": "2026-07-02T16:44:12Z"
+}

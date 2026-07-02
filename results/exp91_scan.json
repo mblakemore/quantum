@@ -1,0 +1,82 @@
+{
+  "meta": [
+    {
+      "axis": "anchor",
+      "label": "anchor158",
+      "basis": "Z",
+      "twoq": 158
+    },
+    {
+      "axis": "anchor",
+      "label": "anchor158",
+      "basis": "X",
+      "twoq": 158
+    },
+    {
+      "axis": "cz",
+      "label": "cz178",
+      "basis": "Z",
+      "twoq": 178,
+      "folds": 10,
+      "target": 178
+    },
+    {
+      "axis": "cz",
+      "label": "cz178",
+      "basis": "X",
+      "twoq": 178,
+      "folds": 10,
+      "target": 178
+    },
+    {
+      "axis": "cz",
+      "label": "cz208",
+      "basis": "Z",
+      "twoq": 208,
+      "folds": 25,
+      "target": 208
+    },
+    {
+      "axis": "cz",
+      "label": "cz208",
+      "basis": "X",
+      "twoq": 208,
+      "folds": 25,
+      "target": 208
+    },
+    {
+      "axis": "swap",
+      "label": "swap176",
+      "basis": "Z",
+      "twoq": 176,
+      "n_pairs": 3
+    },
+    {
+      "axis": "swap",
+      "label": "swap176",
+      "basis": "X",
+      "twoq": 176,
+      "n_pairs": 3
+    },
+    {
+      "axis": "swap",
+      "label": "swap206",
+      "basis": "Z",
+      "twoq": 206,
+      "n_pairs": 8
+    },
+    {
+      "axis": "swap",
+      "label": "swap206",
+      "basis": "X",
+      "twoq": 206,
+      "n_pairs": 8
+    }
+  ],
+  "n_pubs": 10,
+  "ref": {
+    "exp89_anchor_158": 1.1321,
+    "exp89_fix_208": 1.1501,
+    "exp87_cz_178": 0.904
+  }
+}
