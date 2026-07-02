@@ -1,0 +1,53 @@
+{
+  "rows": [
+    {
+      "basis": "Z",
+      "folds": 0,
+      "twoq": 158,
+      "target": 158,
+      "base_twoq": 158
+    },
+    {
+      "basis": "Z",
+      "folds": 10,
+      "twoq": 178,
+      "target": 178,
+      "base_twoq": 158
+    },
+    {
+      "basis": "Z",
+      "folds": 25,
+      "twoq": 208,
+      "target": 208,
+      "base_twoq": 158
+    },
+    {
+      "basis": "X",
+      "folds": 0,
+      "twoq": 158,
+      "target": 158,
+      "base_twoq": 158
+    },
+    {
+      "basis": "X",
+      "folds": 10,
+      "twoq": 178,
+      "target": 178,
+      "base_twoq": 158
+    },
+    {
+      "basis": "X",
+      "folds": 25,
+      "twoq": 208,
+      "target": 208,
+      "base_twoq": 158
+    }
+  ],
+  "base_opt": 2,
+  "base_seed": 100,
+  "exp86_reference": {
+    "158": 1.064,
+    "178": 0.904,
+    "208": 0.785
+  }
+}

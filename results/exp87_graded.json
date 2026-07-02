@@ -1,0 +1,74 @@
+{
+  "points": [
+    {
+      "twoq": 158,
+      "folds": 0,
+      "witness": 1.1080876922722736,
+      "exp86_witness": 1.064
+    },
+    {
+      "twoq": 178,
+      "folds": 10,
+      "witness": 1.0836776352660484,
+      "exp86_witness": 0.904
+    },
+    {
+      "twoq": 208,
+      "folds": 25,
+      "witness": 1.0001080222557612,
+      "exp86_witness": 0.785
+    }
+  ],
+  "reference": {
+    "backend": "ibm_fez",
+    "shots": 2000,
+    "job_id": "d92rkt247v0s73816mhg",
+    "pub_meta": [
+      {
+        "folds": 0,
+        "basis": "Z",
+        "twoq": 158,
+        "target_twoq": 158
+      },
+      {
+        "folds": 0,
+        "basis": "X",
+        "twoq": 158,
+        "target_twoq": 158
+      },
+      {
+        "folds": 10,
+        "basis": "Z",
+        "twoq": 178,
+        "target_twoq": 178
+      },
+      {
+        "folds": 10,
+        "basis": "X",
+        "twoq": 178,
+        "target_twoq": 178
+      },
+      {
+        "folds": 25,
+        "basis": "Z",
+        "twoq": 208,
+        "target_twoq": 208
+      },
+      {
+        "folds": 25,
+        "basis": "X",
+        "twoq": 208,
+        "target_twoq": 208
+      }
+    ],
+    "base_opt": 2,
+    "base_seed": 100,
+    "base_twoq": 158,
+    "exp86_reference": {
+      "158": 1.064,
+      "178": 0.904,
+      "208": 0.785
+    },
+    "submitted_at": "2026-07-02T01:10:12Z"
+  }
+}
