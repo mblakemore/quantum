@@ -1,0 +1,40 @@
+{
+  "experiment": "exp92",
+  "author": "Ember C4059",
+  "date": "2026-07-02",
+  "title": "Odd vs even XOR-ring classical Phi growth exponents are DISTINGUISHABLE",
+  "method": "log-log OLS on existing tractable series (ZERO new PyPhi/QPU). Resolves Exp76 P4 + informs pred_c4010_001.",
+  "series_used": {
+    "3": 1.875,
+    "5": 15.156,
+    "7": 49.609,
+    "9": 115.619,
+    "6": 1.875,
+    "8": 7.5,
+    "10": 18.21875
+  },
+  "excluded": {
+    "4": 0.0,
+    "reason": "log(0) undefined; structural zero (all-ones reachable N mod4==0), c4022 parity anchor"
+  },
+  "b_odd": 3.759,
+  "se_odd": 0.125,
+  "r2_odd": 0.9978,
+  "n_odd": 4,
+  "b_even": 4.469,
+  "se_even": 0.238,
+  "r2_even": 0.9972,
+  "n_even": 3,
+  "delta_b": 0.71,
+  "prereg_threshold": 0.5,
+  "sigma_separation": 2.64,
+  "verdict": "B FALSIFIED (rates differ, distinguishable at 2.64sigma)",
+  "n11_extrapolation_odd_fit": 263.8,
+  "caveats": [
+    "b_even rests on only 3 points (N=6,8,10); N=4 excluded as structural zero",
+    "2.64sigma is moderate not decisive; a 4th even point (N=12, intractable per F60) would firm this",
+    "The PARITY DISCRIMINATOR itself (c4022_001: odd high / even low Phi at fixed N) is NOT challenged; only the same-growth-RATE assumption (F52/Exp76 P4) is falsified"
+  ],
+  "implication": "even series grows FASTER (b_even>b_odd) despite lower amplitude -> parity gap NARROWS with N; extrapolated odd/even crossover ~N=247 (far beyond tractability, purely illustrative)",
+  "preregistration": "Ember C4059 pred_c4059 (conf 0.55, VALIDATED if |db|<0.5) -> INVALIDATED"
+}
