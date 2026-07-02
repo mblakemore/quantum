@@ -1,0 +1,149 @@
+{
+  "backend": "ibm_fez",
+  "shots": 2000,
+  "job_id": "d9342knd07jc73e01jpg",
+  "pub_meta": [
+    {
+      "axis": "anchor",
+      "label": 158,
+      "folds": 0,
+      "basis": "Z",
+      "twoq": 158
+    },
+    {
+      "axis": "anchor",
+      "label": 158,
+      "folds": 0,
+      "basis": "X",
+      "twoq": 158
+    },
+    {
+      "axis": "fix",
+      "label": 208,
+      "folds": 25,
+      "basis": "Z",
+      "twoq": 208
+    },
+    {
+      "axis": "fix",
+      "label": 208,
+      "folds": 25,
+      "basis": "X",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 31337,
+      "basis": "Z",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 31337,
+      "basis": "X",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 11,
+      "basis": "Z",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 11,
+      "basis": "X",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 101,
+      "basis": "Z",
+      "twoq": 205
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 101,
+      "basis": "X",
+      "twoq": 205
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 271,
+      "basis": "Z",
+      "twoq": 196
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 271,
+      "basis": "X",
+      "twoq": 196
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 1618,
+      "basis": "Z",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 1618,
+      "basis": "X",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 9001,
+      "basis": "Z",
+      "twoq": 172
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 9001,
+      "basis": "X",
+      "twoq": 172
+    }
+  ],
+  "base_opt": 2,
+  "base_seed": 100,
+  "base_twoq": 158,
+  "var_seeds": [
+    31337,
+    11,
+    101,
+    271,
+    1618,
+    9001
+  ],
+  "var_opt": 1,
+  "exp88_ref": {
+    "anchor_158": 1.1861,
+    "fix_208": 1.1339,
+    "var_208_seed31337": 0.99
+  },
+  "submitted_at": "2026-07-02T10:45:38Z"
+}

@@ -1,0 +1,143 @@
+{
+  "meta": [
+    {
+      "axis": "anchor",
+      "label": 158,
+      "folds": 0,
+      "basis": "Z",
+      "twoq": 158
+    },
+    {
+      "axis": "anchor",
+      "label": 158,
+      "folds": 0,
+      "basis": "X",
+      "twoq": 158
+    },
+    {
+      "axis": "fix",
+      "label": 208,
+      "folds": 25,
+      "basis": "Z",
+      "twoq": 208
+    },
+    {
+      "axis": "fix",
+      "label": 208,
+      "folds": 25,
+      "basis": "X",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 31337,
+      "basis": "Z",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 31337,
+      "basis": "X",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 11,
+      "basis": "Z",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 11,
+      "basis": "X",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 101,
+      "basis": "Z",
+      "twoq": 205
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 101,
+      "basis": "X",
+      "twoq": 205
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 271,
+      "basis": "Z",
+      "twoq": 196
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 271,
+      "basis": "X",
+      "twoq": 196
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 1618,
+      "basis": "Z",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 1618,
+      "basis": "X",
+      "twoq": 208
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 9001,
+      "basis": "Z",
+      "twoq": 172
+    },
+    {
+      "axis": "var",
+      "label": 208,
+      "opt": 1,
+      "seed": 9001,
+      "basis": "X",
+      "twoq": 172
+    }
+  ],
+  "n_pubs": 16,
+  "exp88_ref": {
+    "anchor_158": 1.1861,
+    "fix_208": 1.1339,
+    "var_208_seed31337": 0.99
+  },
+  "var_seeds": [
+    31337,
+    11,
+    101,
+    271,
+    1618,
+    9001
+  ],
+  "var_opt": 1
+}
