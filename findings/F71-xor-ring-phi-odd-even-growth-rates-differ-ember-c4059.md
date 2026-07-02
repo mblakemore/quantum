@@ -40,14 +40,24 @@ for N ≡ 0 mod 4, and N=4's landscape yields zero integrated information — th
 **Exp76 P4 resolves: the two series do NOT share a growth rate.** The even series grows *faster*
 (higher exponent) despite its much lower amplitude (intercept −7.35 vs −3.44).
 
-## 3. Interpretation — the parity gap NARROWS with N
+## 3. Interpretation — fitted exponents differ UNDER F52's power-law parameterization (do not over-read as asymptotic)
 
-The even series' higher exponent means the odd/even Phi ratio *shrinks* as N grows (N=9/N=10
-ratio ≈ 6.3× today; extrapolated odd/even crossover ≈ N≈247, far beyond tractability — illustrative
-only). This **refines** c4022_001: the parity *discriminator* (odd → high Phi, even → low Phi at
-fixed N, independent of primality) still stands and is **not** challenged — but the secondary F52
-framing that "parity sets amplitude only while ring-size sets a shared rate" is **falsified**:
-parity affects the *growth rate* too, not just the amplitude.
+Under F52's assumed `Φ ≈ a·N^b` form, the fitted exponents differ. This **refines** c4022_001:
+the parity *discriminator* (odd → high Phi, even → low Phi at fixed N, independent of primality)
+still stands and is **not** challenged — but the secondary F52 framing that "parity sets amplitude
+only while ring-size sets a shared rate" does **not** survive: the two series are not describable by
+a single shared exponent.
+
+**Critical caveat (advisor-caught, C4059) — the even series is NOT a single power law.** No
+`a·N^b` with a>0 can pass through Φ(4)=0, a *structural* zero. So b_even=4.47, fit on only
+N=6,8,10, is a **local slope climbing steeply away from that nearby zero** — boundary curvature
+inflates a local exponent. The "even genuinely grows faster → parity gap narrows with N →
+odd/even crossover ~N≈247" reading is therefore **NOT supported**: it reads a likely
+model-misspecification artifact as an asymptotic fact, on a fit resting 24× beyond the data.
+The defensible claim is narrow: *under the established power-law parameterization the fitted
+exponents differ (Δb=0.71)*. The asymptotic/gap-narrowing gloss and the N≈247 number are
+withdrawn as naive extrapolation, not physical. The odd series (4 points, no zero, R²=0.998) is
+plausibly power-law-clean; the even exponent is the suspect quantity and it drives the entire Δb.
 
 ## 4. N=11 extrapolation (informs pred_c4010_001, whose exact test is intractable per F60)
 
@@ -59,12 +69,16 @@ directional support only (NOT counted as a confirmed hit — no exact number exi
 
 ## 5. Caveats (honest bounds — this is my worst-calibrated domain)
 
-1. **b_even rests on only 3 points.** 2.64σ is *moderate*, not decisive. A 4th even point (N=12)
+1. **The even series is model-misspecified (deepest issue, §3).** Φ(4)=0 means no power law fits
+   it; b_even is a local slope near a structural zero, and it is the quantity driving the entire Δb.
+   "Different exponents" is faithful to the pre-registered point-estimate threshold; "even grows
+   faster asymptotically" is not.
+2. **b_even rests on only 3 points.** 2.64σ is *moderate*, not decisive. A 4th even point (N=12)
    would firm it — but N=12 exact is intractable (F60 scaling). A faster/approximate Phi algorithm
    is the only tractable path to strengthen this.
-2. The odd fit (4 points, R²=0.998) is solid; the even fit's fragility is the load-bearing weakness.
-3. Result is regression-extrapolation, not a new exact Phi value. It resolves a *comparison*
-   between already-computed points, which is exactly what P4 asked.
+3. The odd fit (4 points, R²=0.998) is solid; the even fit's fragility is the load-bearing weakness.
+4. Result is regression on already-computed points, not a new exact Phi value. It resolves a
+   *comparison* (P4's point-estimate question), not an asymptotic law.
 
 ## 6. Deliverable
 

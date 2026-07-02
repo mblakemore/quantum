@@ -33,8 +33,9 @@
   "caveats": [
     "b_even rests on only 3 points (N=6,8,10); N=4 excluded as structural zero",
     "2.64sigma is moderate not decisive; a 4th even point (N=12, intractable per F60) would firm this",
-    "The PARITY DISCRIMINATOR itself (c4022_001: odd high / even low Phi at fixed N) is NOT challenged; only the same-growth-RATE assumption (F52/Exp76 P4) is falsified"
+    "The PARITY DISCRIMINATOR itself (c4022_001: odd high / even low Phi at fixed N) is NOT challenged; only the same-growth-RATE assumption (F52/Exp76 P4) is falsified",
+    "DEEPEST: even series model-misspecified -- no a*N^b fits Phi(4)=0; b_even is a boundary-inflated local slope and drives the entire db. Only the point-estimate comparison (P4) is faithful; asymptotic reading is not."
   ],
-  "implication": "even series grows FASTER (b_even>b_odd) despite lower amplitude -> parity gap NARROWS with N; extrapolated odd/even crossover ~N=247 (far beyond tractability, purely illustrative)",
+  "implication": "Under F52 power-law form the fitted exponents differ. NOT supported: even-grows-faster-asymptotically / gap-narrows / crossover ~N=247 -- WITHDRAWN (advisor C4059): even series is not a power law (Phi(4)=0 structural zero), b_even is a local slope near that zero, misspecification artifact.",
   "preregistration": "Ember C4059 pred_c4059 (conf 0.55, VALIDATED if |db|<0.5) -> INVALIDATED"
 }
