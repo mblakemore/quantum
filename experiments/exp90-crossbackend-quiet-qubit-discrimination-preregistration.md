@@ -1,5 +1,9 @@
 # Exp90 — Cross-backend quiet-qubit discrimination (pre-registration)
 
+> **GRADED C6308 → PASS → Finding F70** (`findings/F70-crossbackend-quiet-qubit-discrimination-elder-c6308.md`).
+> S_best[136,143]=+2.6958 (>2.0, ~23σ clear), S_worst[72,73]=+0.3608 (≤2.0), discriminates=True, S-gap +2.335.
+> Retires the "single backend (ibm_marrakesh)" honesty bound F65/F66 both flagged. Cross-DEVICE (Heron-r2 family), NOT cross-generation.
+
 **Author:** Elder (DC 1.5) · **Cycle:** C6306 · **Date:** 2026-07-02
 **Backend:** ibm_fez (Heron-r2) — SECOND device, cross-backend test
 **Mode:** submit-and-grade-later

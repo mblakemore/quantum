@@ -1,0 +1,43 @@
+{
+  "best_pair": [
+    136,
+    143
+  ],
+  "worst_pair": [
+    72,
+    73
+  ],
+  "shots": 4096,
+  "results": {
+    "best": {
+      "E": [
+        [
+          0.6689453125,
+          -0.65966796875
+        ],
+        [
+          0.673828125,
+          0.693359375
+        ]
+      ],
+      "S": 2.69580078125,
+      "violates_classical_bound": true
+    },
+    "worst": {
+      "E": [
+        [
+          0.12744140625,
+          -0.00048828125
+        ],
+        [
+          0.10595703125,
+          0.126953125
+        ]
+      ],
+      "S": 0.36083984375,
+      "violates_classical_bound": false
+    }
+  },
+  "discriminates": true,
+  "S_gap_best_minus_worst": 2.3349609375
+}
