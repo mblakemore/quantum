@@ -1,0 +1,53 @@
+{
+  "experiment": "exp91-quantum-switch-causal-witness",
+  "cycle": "C6315",
+  "backend": "ibm_marrakesh",
+  "shots": 6000,
+  "pair": [
+    15,
+    19
+  ],
+  "pair_cost": 0.011088200511120222,
+  "twoq_gate": "cz",
+  "job_id": "d939bmooamcc73dbv9b0",
+  "pub_order": [
+    "switch_commute",
+    "definite_commute",
+    "switch_anticommute",
+    "definite_anticommute"
+  ],
+  "metas": [
+    {
+      "label": "switch_commute",
+      "A": "X",
+      "B": "X",
+      "definite": false,
+      "depth": 22,
+      "twoq": 6
+    },
+    {
+      "label": "definite_commute",
+      "A": "X",
+      "B": "X",
+      "definite": true,
+      "depth": 7,
+      "twoq": 1
+    },
+    {
+      "label": "switch_anticommute",
+      "A": "X",
+      "B": "Z",
+      "definite": false,
+      "depth": 21,
+      "twoq": 6
+    },
+    {
+      "label": "definite_anticommute",
+      "A": "X",
+      "B": "Z",
+      "definite": true,
+      "depth": 7,
+      "twoq": 1
+    }
+  ]
+}
