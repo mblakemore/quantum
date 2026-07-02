@@ -2,20 +2,20 @@
   "experiment": "exp92",
   "author": "Ember C4059",
   "date": "2026-07-02",
-  "title": "Odd vs even XOR-ring classical Phi growth exponents are DISTINGUISHABLE",
+  "title": "Odd vs even XOR-ring classical Phi growth exponents: point estimates differ (|db|=0.71) but UNDERPOWERED/not distinguishable (revised C4060 per Whisper F72). Amplitude split IS solid.",
   "method": "log-log OLS on existing tractable series (ZERO new PyPhi/QPU). Resolves Exp76 P4 + informs pred_c4010_001.",
   "series_used": {
     "3": 1.875,
     "5": 15.156,
-    "7": 49.609,
-    "9": 115.619,
     "6": 1.875,
+    "7": 49.609,
     "8": 7.5,
+    "9": 115.619,
     "10": 18.21875
   },
   "excluded": {
-    "4": 0.0,
-    "reason": "log(0) undefined; structural zero (all-ones reachable N mod4==0), c4022 parity anchor"
+    "4": 0,
+    "reason": "log(0) undefined; Phi(4)=0. NOTE (C4060): this is the ONLY zero in tractable range -- N=8 (also N mod4==0) is Phi=7.5, NOT zero. So the earlier gloss (all-ones reachable when N mod4==0) is FALSIFIED; N=4=0 is a single small-N boundary artifact, not a modular family of zeros."
   },
   "b_odd": 3.759,
   "se_odd": 0.125,
@@ -28,7 +28,7 @@
   "delta_b": 0.71,
   "prereg_threshold": 0.5,
   "sigma_separation": 2.64,
-  "verdict": "B FALSIFIED (rates differ, distinguishable at 2.64sigma)",
+  "verdict": "UNRESOLVED/UNDERPOWERED (revised C4060 per Whisper F72): point estimate leans rates-differ (|db|=0.71) but NOT significant -- interaction t=2.41/df=3/p=0.095, Welch p=0.151. Original 2.64sigma used naive Gaussian reference (wrong df). SOLID: amplitude/intercept split (parity_shift t=-6.6, p=0.007).",
   "n11_extrapolation_odd_fit": 263.8,
   "caveats": [
     "b_even rests on only 3 points (N=6,8,10); N=4 excluded as structural zero",
@@ -37,5 +37,12 @@
     "DEEPEST: even series model-misspecified -- no a*N^b fits Phi(4)=0; b_even is a boundary-inflated local slope and drives the entire db. Only the point-estimate comparison (P4) is faithful; asymptotic reading is not."
   ],
   "implication": "Under F52 power-law form the fitted exponents differ. NOT supported: even-grows-faster-asymptotically / gap-narrows / crossover ~N=247 -- WITHDRAWN (advisor C4059): even series is not a power law (Phi(4)=0 structural zero), b_even is a local slope near that zero, misspecification artifact.",
-  "preregistration": "Ember C4059 pred_c4059 (conf 0.55, VALIDATED if |db|<0.5) -> INVALIDATED"
+  "preregistration": "Ember C4059 pred_c4059 (conf 0.55, VALIDATED if |db|<0.5) -> INVALIDATED",
+  "revision_c4060": {
+    "by": "Ember C4060",
+    "basis": "Whisper F72 C4458, independently reproduced",
+    "exp76_p4_status": "UNRESOLVED/underpowered (was: rates-differ/resolved)",
+    "solid_claim": "amplitude split (t=-6.6)",
+    "pred_c4059_grade": "kept invalidated (point-estimate |db|=0.71>=0.5 is a genuine miss of the 0.55 same-rate bet; finding-level over-read corrected, prediction grade faithful)"
+  }
 }

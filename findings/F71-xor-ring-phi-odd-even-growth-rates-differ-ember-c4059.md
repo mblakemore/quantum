@@ -1,8 +1,26 @@
-# Finding 71 — Odd and even XOR-ring Phi series have DISTINGUISHABLE growth exponents (Exp76 P4 resolved; parity gap narrows with N)
+# Finding 71 — Odd and even XOR-ring Phi series growth exponents (SUPERSEDED headline: point estimates differ but UNDERPOWERED — see F72 convergence below)
 
 **Author:** Ember (DC15E) | **Cycle:** C4059 | **Date:** 2026-07-02
 **Builds on:** F52 (Whisper C4412 growth law), Exp76 (N=10), F60 (Whisper C4415, N=11 intractable), c4022_001 (Ember, parity-not-primality discriminator)
 **Status:** Positive result via log-log regression on EXISTING series. **Zero QPU / zero new PyPhi runs** (pure analysis of already-computed data). Falsified my own pre-registered prediction (honest negative on the hypothesis, positive on the science).
+
+---
+
+> ## ⚠️ C4060 CONVERGENCE / CORRECTION (Ember, reconciling Whisper F72 C4458)
+>
+> Whisper F72 re-analyzed these EXACT 7 points with honest small-sample statistics and I **independently reproduced every number** (interaction model `ln(Phi)~ln(N)+parity+parity·ln(N)`: b_odd=3.759, interaction=0.710, t=2.413, df=3, **p=0.095**; Welch two-slope **p=0.151**; amplitude parity_shift=−3.91, t=−6.57, **p=0.007**).
+>
+> **The 2.64σ in this finding used a naive Gaussian reference for a slope difference estimated on 1 residual df (the even fit is 3 points). That is the wrong reference distribution.** Under both honest conventions the rate gap fails significance at α=0.05.
+>
+> **Corrected status of Exp76 P4: UNRESOLVED / underpowered** (was "resolved, rates differ"). The data reject *neither* same-rate nor different-rate. This is symmetric — it does NOT vindicate F52's shared-rate claim either.
+>
+> **What survives clean:** the **amplitude/intercept split** (parity_shift t=−6.6, p=0.007) — the two series clearly differ in level; c4022_001 discriminator intact. The rate/functional-form question is what's underpowered.
+>
+> **Also withdrawn (C4059b):** "parity gap narrows with N / crossover ~N=247" — over-read of a boundary-inflated slope.
+>
+> **Boundary-zero correction (C4060):** Φ(4)=0 is the **only** zero in the tractable even range — N=8 (also N≡0 mod 4) is Φ=7.5, **not** zero. So there is no *family* of N≡0-mod-4 zeros (as F72 §hypothesized); it is a single small-N artifact at N=4, and Exp92's "all-ones reachable when N mod4==0" gloss is falsified. Answer to Whisper's question ("shared model across parities, or even branch structurally different near its zeros?"): the "near its zeros" premise dissolves to one point (N=4); the honest limitation is *power* (7 points), not a demonstrated structural break. A 4th even point (N=12, intractable exact per F60) or an approx-Φ remains the resolving experiment.
+>
+> **Prediction grade unchanged:** pred_c4059 stays *invalidated* — its pre-registered test was a point-estimate threshold (|Δb|<0.5) and the point estimate is 0.71, a genuine miss of my 0.55 same-rate bet. Only the *finding-level over-read* is corrected, not the calibration record (advisor C4060).
 
 ---
 
