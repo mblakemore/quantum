@@ -1,0 +1,220 @@
+{
+  "W": {
+    "anchor_None": 1.132080433245208,
+    "fix_None": 1.150091168384639,
+    "var_31337": 0.9969662874605993,
+    "var_11": 0.8690527528440455,
+    "var_101": 0.8530216086434574,
+    "var_271": 0.9947208412848918,
+    "var_1618": 0.9070416281406231,
+    "var_9001": 0.8860838521461096
+  },
+  "gate_only": -0.01801073513943119,
+  "draws": [
+    {
+      "seed": 31337,
+      "W": 0.9969662874605993,
+      "placement_i": 0.15312488092403975,
+      "twoq": 208,
+      "d2q": 0,
+      "gate_contaminated": false
+    },
+    {
+      "seed": 11,
+      "W": 0.8690527528440455,
+      "placement_i": 0.2810384155405936,
+      "twoq": 208,
+      "d2q": 0,
+      "gate_contaminated": false
+    },
+    {
+      "seed": 101,
+      "W": 0.8530216086434574,
+      "placement_i": 0.29706955974118165,
+      "twoq": 205,
+      "d2q": -3,
+      "gate_contaminated": false
+    },
+    {
+      "seed": 271,
+      "W": 0.9947208412848918,
+      "placement_i": 0.1553703270997473,
+      "twoq": 196,
+      "d2q": -12,
+      "gate_contaminated": false
+    },
+    {
+      "seed": 1618,
+      "W": 0.9070416281406231,
+      "placement_i": 0.24304954024401604,
+      "twoq": 208,
+      "d2q": 0,
+      "gate_contaminated": false
+    },
+    {
+      "seed": 9001,
+      "W": 0.8860838521461096,
+      "placement_i": 0.26400731623852947,
+      "twoq": 172,
+      "d2q": -36,
+      "gate_contaminated": true
+    }
+  ],
+  "placement_mean": 0.23227667329801796,
+  "placement_std": 0.05755910922029649,
+  "placement_min": 0.15312488092403975,
+  "placement_max": 0.29706955974118165,
+  "n_reversed_tie": 0,
+  "n_strict_reversed": 0,
+  "gatecount_corr": 0.09210151279923703,
+  "verdict": "BRANCH 1 DRAW-ROBUST \u2014 placement dominates every draw; mean placement > gate-only",
+  "reference": {
+    "backend": "ibm_fez",
+    "shots": 2000,
+    "job_id": "d9342knd07jc73e01jpg",
+    "pub_meta": [
+      {
+        "axis": "anchor",
+        "label": 158,
+        "folds": 0,
+        "basis": "Z",
+        "twoq": 158
+      },
+      {
+        "axis": "anchor",
+        "label": 158,
+        "folds": 0,
+        "basis": "X",
+        "twoq": 158
+      },
+      {
+        "axis": "fix",
+        "label": 208,
+        "folds": 25,
+        "basis": "Z",
+        "twoq": 208
+      },
+      {
+        "axis": "fix",
+        "label": 208,
+        "folds": 25,
+        "basis": "X",
+        "twoq": 208
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 31337,
+        "basis": "Z",
+        "twoq": 208
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 31337,
+        "basis": "X",
+        "twoq": 208
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 11,
+        "basis": "Z",
+        "twoq": 208
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 11,
+        "basis": "X",
+        "twoq": 208
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 101,
+        "basis": "Z",
+        "twoq": 205
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 101,
+        "basis": "X",
+        "twoq": 205
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 271,
+        "basis": "Z",
+        "twoq": 196
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 271,
+        "basis": "X",
+        "twoq": 196
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 1618,
+        "basis": "Z",
+        "twoq": 208
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 1618,
+        "basis": "X",
+        "twoq": 208
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 9001,
+        "basis": "Z",
+        "twoq": 172
+      },
+      {
+        "axis": "var",
+        "label": 208,
+        "opt": 1,
+        "seed": 9001,
+        "basis": "X",
+        "twoq": 172
+      }
+    ],
+    "base_opt": 2,
+    "base_seed": 100,
+    "base_twoq": 158,
+    "var_seeds": [
+      31337,
+      11,
+      101,
+      271,
+      1618,
+      9001
+    ],
+    "var_opt": 1,
+    "exp88_ref": {
+      "anchor_158": 1.1861,
+      "fix_208": 1.1339,
+      "var_208_seed31337": 0.99
+    },
+    "submitted_at": "2026-07-02T10:45:38Z"
+  }
+}
