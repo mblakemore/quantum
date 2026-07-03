@@ -1,0 +1,110 @@
+{
+  "W": {
+    "anchor_158": 1.1860730926779315,
+    "fix_178": 1.1818066815033383,
+    "fix_208": 1.1338889139195514,
+    "var_178": 0.8701733812056951,
+    "var_208": 0.9900259756493912
+  },
+  "total_decline": 0.19604711702854027,
+  "gate_only": 0.052184178758380106,
+  "placement": 0.14386293827016017,
+  "gate_frac": 0.2661818217443269,
+  "placement_frac": 0.7338181782556731,
+  "verdict": "PLACEMENT DOMINATES (F67 confirmed as measurement)",
+  "reference": {
+    "backend": "ibm_fez",
+    "shots": 2000,
+    "job_id": "d92u0k5958jc73bsa6qg",
+    "pub_meta": [
+      {
+        "axis": "anchor",
+        "label_twoq_Z": 158,
+        "folds": 0,
+        "basis": "Z",
+        "twoq": 158
+      },
+      {
+        "axis": "anchor",
+        "label_twoq_Z": 158,
+        "folds": 0,
+        "basis": "X",
+        "twoq": 158
+      },
+      {
+        "axis": "fix",
+        "label_twoq_Z": 178,
+        "folds": 10,
+        "basis": "Z",
+        "twoq": 178
+      },
+      {
+        "axis": "fix",
+        "label_twoq_Z": 178,
+        "folds": 10,
+        "basis": "X",
+        "twoq": 178
+      },
+      {
+        "axis": "fix",
+        "label_twoq_Z": 208,
+        "folds": 25,
+        "basis": "Z",
+        "twoq": 208
+      },
+      {
+        "axis": "fix",
+        "label_twoq_Z": 208,
+        "folds": 25,
+        "basis": "X",
+        "twoq": 208
+      },
+      {
+        "axis": "var",
+        "label_twoq_Z": 178,
+        "opt": 3,
+        "seed": 7,
+        "basis": "Z",
+        "twoq": 178
+      },
+      {
+        "axis": "var",
+        "label_twoq_Z": 178,
+        "opt": 3,
+        "seed": 7,
+        "basis": "X",
+        "twoq": 178
+      },
+      {
+        "axis": "var",
+        "label_twoq_Z": 208,
+        "opt": 1,
+        "seed": 31337,
+        "basis": "Z",
+        "twoq": 208
+      },
+      {
+        "axis": "var",
+        "label_twoq_Z": 208,
+        "opt": 1,
+        "seed": 31337,
+        "basis": "X",
+        "twoq": 208
+      }
+    ],
+    "base_opt": 2,
+    "base_seed": 100,
+    "base_twoq": 158,
+    "exp87_fix_ref": {
+      "158": 1.108,
+      "178": 1.084,
+      "208": 1.0
+    },
+    "exp86_var_ref": {
+      "158": 1.064,
+      "178": 0.904,
+      "208": 0.785
+    },
+    "submitted_at": "2026-07-02T03:51:45Z"
+  }
+}

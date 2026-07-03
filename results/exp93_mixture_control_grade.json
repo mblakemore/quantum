@@ -1,0 +1,33 @@
+{
+  "experiment": "exp93-classical-mixture-control-hardware-arm",
+  "cycle_graded": "C6342",
+  "job_id": "d93p3cnu62ks73953cvg",
+  "backend": "ibm_marrakesh",
+  "shots": 6000,
+  "control_target_ancilla": [
+    53,
+    39,
+    54
+  ],
+  "xvals": {
+    "switch_commute": 0.9626666666666667,
+    "switch_anticommute": -0.9373333333333334,
+    "definite_commute": 0.995,
+    "definite_anticommute": 0.992,
+    "mixture_commute": 0.021,
+    "mixture_anticommute": -0.014333333333333333
+  },
+  "DISC_switch": 1.9,
+  "DISC_definite": 0.0030000000000000027,
+  "DISC_mixture": 0.035333333333333335,
+  "W1": 1.8969999999999998,
+  "W2": 1.8646666666666665,
+  "W2_sigma_above_0": 72.21822946228096,
+  "SE_disc": 0.01825741858350554,
+  "SE_w": 0.025819888974716113,
+  "H_HW1_pass": true,
+  "H_HW2_pass": true,
+  "H_HW3_pass": true,
+  "H_HW4_pass": true,
+  "verdict": "PASS \u2014 on ibm_marrakesh in ONE calibration window, the coherent quantum switch is distinguished from a classical mixture of definite orders (W2 >= +0.40). Causal-SEPARABILITY loophole closed on silicon, same-device, drift-free."
+}
