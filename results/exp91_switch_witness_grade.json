@@ -1,0 +1,20 @@
+{
+  "experiment": "exp91-quantum-switch-causal-witness",
+  "cycle_graded": "C6337",
+  "job_id": "d939bmooamcc73dbv9b0",
+  "backend": "ibm_marrakesh",
+  "xvals": {
+    "switch_commute": 0.865,
+    "definite_commute": 0.8636666666666667,
+    "switch_anticommute": -0.9053333333333333,
+    "definite_anticommute": 0.8743333333333333
+  },
+  "DISC_switch": 1.7703333333333333,
+  "DISC_definite": -0.010666666666666602,
+  "W": 1.781,
+  "H1_pass": true,
+  "H2_pass": true,
+  "H3_pass": true,
+  "verdict": "PASS \u2014 causal witness fires: switch discriminates commutation, definite-order cannot",
+  "graded_at": "2026-07-03T07:35Z"
+}
