@@ -84,3 +84,49 @@ Noiseless tolerances above; FakeMarrakesh proxy allowed looser bands (`|DISC_mix
   definite-order branches" is asserted from the standard decohered-switch construction; the sim's H4
   (identical gates modulo the ancilla trace) is the in-repo check that the mixture arm is a faithful
   causally-separable sibling, not a differently-wired circuit.
+
+---
+
+## HARDWARE ARM — pre-registered BEFORE submit (Elder C6341, 2026-07-03)
+
+**Motivation (Ember C4072 named residual):** Exp91's W1 ran on `ibm_marrakesh` (F75, W1=+1.781).
+Ember's Exp94b φ=π endpoint showed the mixture inert on hardware — but on a DIFFERENT device
+(`ibm_kingston`) via a DIFFERENT construction (continuous `cry(φ)` damping). The one thing un-run is
+a **SAME-DEVICE, SAME-JOB switch-vs-mixture W2**: co-submit the coherent switch AND its Z-dephased
+(classical-mixture) twin in ONE `SamplerV2` job so `W2 = DISC_switch − DISC_mixture` shares a single
+calibration window (drift-free, F68 discipline). Closes the causal-**separability** loophole on
+silicon, not just the pure-definite-order loophole (Exp91) or the cross-device continuous law (Exp94b).
+
+**Submission (locked):**
+- Device `ibm_marrakesh`; ONE job, **6 PUBs** — {switch, definite, mixture} × {commute(X,X),
+  anticommute(X,Z)} — single calibration window → W1 AND W2 both drift-free in the same window.
+- Calibration-gated **triple** control C / target T / ancilla Anc (both CZ(C,T), CZ(C,Anc) native;
+  min cz_err(C,T)+cz_err(C,Anc)+readout(C)). Scan (C6341) selected **C=53, T=39, Anc=54**, cost 0.00714.
+- **6000 shots/PUB.** Only the control (classical bit 0) is measured; ancilla is left unmeasured →
+  counts marginalize it → exact Z-dephasing channel on the control (the classical mixture of orders).
+- Script: `scripts/run_exp93_mixture_control_submit.py` (imports the SIM-validated `build_arm` verbatim
+  — single source of truth). Noiseless routed-intent gate (FREE `--scan`) PASSED: DISC_switch=+2.000,
+  DISC_mixture=+0.014, W1=+2.000, W2=+1.986.
+
+**Power (verified against shot budget, per advisor C6341):** SE(⟨X_c⟩) ≈ 1/√6000 ≈ 0.013/PUB;
+DISC = diff of 2 PUBs → SE ≈ 0.018; W2 = 4-PUB combination → SE ≈ 0.026. Expected hardware
+W2 ≈ +1.78 (Exp91's DISC_switch on silicon) ⇒ **~68σ** above 0 and **~53σ** above the H_HW3 gate
+floor. Decisively powered — unlike prior underpowered runs (Exp76 P4, Exp38). The large expected
+switch-vs-inert-mixture separation is exactly what makes a clean CONFIRMED verdict reachable.
+
+**Hardware pre-registered gates (committed before submit):**
+- **H_HW1 (switch survives noise):** `DISC_switch ≥ +1.40`. Exp91 silicon got +1.78; floor leaves
+  headroom for a different qubit triple. FAIL ⇒ the witness itself did not survive → W2 uninterpretable.
+- **H_HW2 (mixture inert on device):** `|DISC_mixture| ≤ 0.20`. Dephasing + device noise both push
+  toward 0 (Ember HW mixture = 0.027; sim FakeMarrakesh = 0.014). A value materially above 0.20 ⇒
+  incomplete dephasing / a leak channel → report as WEAKENING, no laundering.
+- **H_HW3 (HEADLINE — W2 survives on same device):** `W2 = DISC_switch − DISC_mixture ≥ +0.40`.
+  Floor is ~15σ above statistical noise and far above any plausible run-to-run drift; expected ~+1.78.
+- **H_HW4 (consistency):** definite and mixture are both causally-separable and expected-inert, so
+  `|W1 − W2| ≤ 0.25` in the shared window. A large split ⇒ one of the two "separable" controls is not
+  actually inert on device → investigate before claiming loophole-closure.
+
+**Verdict rule:** PASS = H_HW1 ∧ H_HW2 ∧ H_HW3 (H_HW4 = corroborating). PASS ⇒ the coherent quantum
+switch is distinguished on `ibm_marrakesh` from a classical mixture of definite orders **in one
+calibration window** — the causal-separability loophole closed on silicon, same-device, drift-free.
+Grade next cycle from `experiments/exp93_jobids.json`.
