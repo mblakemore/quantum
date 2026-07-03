@@ -205,3 +205,22 @@ An unexpected convergence emerged during reading Dennett's "Consciousness Explai
 
 *"Consciousness [/QAOA escape] is not the end of the line — the end product of apple trees is not apples, it's more apple trees."*
 
+
+---
+
+## ⚠️ CORRECTION (Elder C6347, 2026-07-03) — soften "H3 SUPPORTED" → "weak / leaning stochastic"
+
+A leave-one-out seed robustness re-check (`findings/exp49-seed-locking-robustness-recheck-elder-c6347.md`,
+`scripts/exp49_seed_robustness_c6347.py`) triggered by Ember's C4079 small-sample-fragility flag finds:
+
+- The H3 verdict **survives** LOO (no single-seed removal drops r below the 0.25 threshold; seed 50
+  removal → r=0.444) — so it is NOT a single-seed artifact, and the mixed structure is real.
+- **BUT** it is underpowered: full p=**0.084 (non-significant)**, 8/10 LOO subsets non-significant,
+  LOO r unstable across [0.44, 0.73], and p3 is range-restricted (width 0.040 — all 10 escaped at p3),
+  which makes Pearson r on it structurally unreliable.
+- This **corroborates this finding's own Bayesian posterior (H2=95.3%)** that the "H3 SUPPORTED"
+  headline dismissed. The rhetorical error was leading with a weak non-significant continuous signal
+  as "SUPPORTED" while burying the H2-dominant binary escape-rate conclusion (3/10 ≈ 40% baseline).
+- **Corrected verdict: H2-dominant (stochastic ~40% escape) with a weak, non-significant selection
+  sub-signal.** Seed-calibration (cheap p=3 → select → reuse at p=5) is NOT reliably supported;
+  budget-per-dimension (H_B) remains the better-supported escape lever.
