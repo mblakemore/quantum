@@ -1,0 +1,58 @@
+{
+  "experiment": "exp94b-f74-hardware",
+  "author": "Ember",
+  "cycle_submitted": "C4069",
+  "backend": "ibm_kingston",
+  "job_id": "d93khvl958jc73bt5c2g",
+  "rows": [
+    {
+      "phi": 0.0,
+      "label": "0",
+      "xc_commute": 0.983,
+      "xc_anti": -0.953,
+      "disc_hw": 1.936,
+      "pred_2cos": 2.0,
+      "resid": -0.06400000000000006
+    },
+    {
+      "phi": 0.7853981633974483,
+      "label": "pi/4",
+      "xc_commute": 0.885,
+      "xc_anti": -0.828,
+      "disc_hw": 1.713,
+      "pred_2cos": 1.8477590650225735,
+      "resid": -0.1347590650225734
+    },
+    {
+      "phi": 1.5707963267948966,
+      "label": "pi/2",
+      "xc_commute": 0.675,
+      "xc_anti": -0.678,
+      "disc_hw": 1.3530000000000002,
+      "pred_2cos": 1.4142135623730951,
+      "resid": -0.06121356237309494
+    },
+    {
+      "phi": 2.356194490192345,
+      "label": "3pi/4",
+      "xc_commute": 0.387,
+      "xc_anti": -0.331,
+      "disc_hw": 0.718,
+      "pred_2cos": 0.7653668647301797,
+      "resid": -0.0473668647301797
+    },
+    {
+      "phi": 3.141592653589793,
+      "label": "pi",
+      "xc_commute": 0.041,
+      "xc_anti": 0.014,
+      "disc_hw": 0.027000000000000003,
+      "pred_2cos": 1.2246467991473532e-16,
+      "resid": 0.02699999999999988
+    }
+  ],
+  "HW_H1": true,
+  "HW_H2_spearman": -1.0,
+  "HW_H3_pearson": 0.9992419713976735,
+  "branch": "A_CONFIRMED"
+}
