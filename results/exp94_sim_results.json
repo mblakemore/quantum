@@ -1,0 +1,59 @@
+{
+  "experiment": "exp94-dephasing-dose-response",
+  "author": "Ember",
+  "cycle": "C4066",
+  "shots": 20000,
+  "builds_on": "exp93/F73 (Elder C6328)",
+  "law_tested": "DISC(phi) = 2*cos(phi/2)",
+  "rows": [
+    {
+      "phi": 0.0,
+      "label": "0",
+      "disc_ideal": 2.0,
+      "disc_noisy": 1.9625,
+      "pred_2cos": 2.0,
+      "resid": 0.0
+    },
+    {
+      "phi": 0.7853981633974483,
+      "label": "pi/4",
+      "disc_ideal": 1.8496000000000001,
+      "disc_noisy": 1.8012000000000001,
+      "pred_2cos": 1.8477590650225735,
+      "resid": 0.001840934977426656
+    },
+    {
+      "phi": 1.5707963267948966,
+      "label": "pi/2",
+      "disc_ideal": 1.4202,
+      "disc_noisy": 1.3751,
+      "pred_2cos": 1.4142135623730951,
+      "resid": 0.0059864376269047614
+    },
+    {
+      "phi": 2.356194490192345,
+      "label": "3pi/4",
+      "disc_ideal": 0.7585,
+      "disc_noisy": 0.7261,
+      "pred_2cos": 0.7653668647301797,
+      "resid": -0.0068668647301797225
+    },
+    {
+      "phi": 3.141592653589793,
+      "label": "pi",
+      "disc_ideal": -0.0195,
+      "disc_noisy": 0.0017000000000000001,
+      "pred_2cos": 1.2246467991473532e-16,
+      "resid": -0.01950000000000012
+    }
+  ],
+  "pearson_noisy_vs_2cos": 0.9999110236104989,
+  "max_abs_resid_ideal": 0.01950000000000012,
+  "prereg_checks": {
+    "H1_endpoints": true,
+    "H2_monotone_noiseless": true,
+    "H3_cosine_law_resid_le_0p06": true,
+    "H4_noise_monotone_and_pearson_ge_0p97": true
+  },
+  "sim_verdict": "PASS"
+}
