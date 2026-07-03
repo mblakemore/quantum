@@ -1,6 +1,6 @@
 # What We Found On a Real Quantum Computer (In Plain English)
 
-*A shareable, jargon-free summary of the 22-experiment characterization of IBM's Heron-r2 quantum chip (`ibm_marrakesh`, May 2026). For the technical version with job IDs and source citations, see [`README.md`](README.md).*
+*A shareable, jargon-free summary of the ORIGINAL 22-experiment characterization of IBM's Heron-r2 quantum chip (`ibm_marrakesh`, May 2026) — the campaign's Arc 1, Findings 1–9. The campaign has continued well past this snapshot (nearly 100 experiments across three real chips as of July 2026, including an indefinite-causal-order demonstration at ≥72σ); for the full, current picture see the plain-English sections of [`README.md`](README.md). This page is kept as the self-contained Arc-1 one-pager.*
 
 ---
 

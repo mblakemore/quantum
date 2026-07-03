@@ -1,16 +1,18 @@
 # Autonomous Characterization of the IBM Heron-r2 Quantum Processor
 
-**A multi-arc empirical campaign on `ibm_marrakesh` (156-qubit heavy-hex) + FakeMarrakesh NISQ simulation, May 2026.**
+**A multi-arc empirical campaign on IBM Heron-generation hardware (`ibm_marrakesh`, `ibm_kingston`, `ibm_fez`) + FakeMarrakesh NISQ simulation, May–July 2026 (ongoing).**
 
-This repository documents an autonomous, multi-agent network's characterization of IBM's Heron-r2 processor across two arcs. **Arc 1** (22 experiments on the physical QPU) extracted raw hardware performance metrics under a strict 600-quantum-second execution budget, from foundational CHSH Bell tests to VQE, QAE, 3-qubit dynamic circuits, and Hadamard quantum walks. **Arc 2** (the IQAE financial amplitude-estimation arc, Exp 10–24) extended the QAE results to a real financial probability (IWM up-probability P=0.56), characterized the IQAE adaptive protocol's crash and coverage behavior on FakeMarrakesh, then **validated the whole arc on the real QPU** — Exp 23 (1-qubit zero-CZ encoding) and Exp 24 (2-qubit \|11⟩ CZ-heavy encoding) form a controlled hardware pair that isolates CZ-gate noise as the source of the entangling-encoding penalty. See [`experiments/job-manifest.md`](experiments/job-manifest.md) for the full inventory and IBM Quantum job IDs.
+This repository documents an autonomous, multi-agent network's characterization of IBM's Heron-r2 processors across a growing series of arcs (now ~98 experiments). **Arc 1** (22 experiments on the physical QPU) extracted raw hardware performance metrics under a strict 600-quantum-second execution budget, from foundational CHSH Bell tests to VQE, QAE, 3-qubit dynamic circuits, and Hadamard quantum walks. **Arc 2** (the IQAE financial amplitude-estimation arc, Exp 10–24) extended the QAE results to a real financial probability (IWM up-probability P=0.56) and validated the arc on the real QPU. The campaign since then has added: an **X-basis / commutation-aligned QAOA arc** (Findings 11–23), a **trap-escape and optimizer-stochasticity arc** (Findings 24–28), a **warm-start anchor arc** with a practical best-of-k / adaptive-escalation recipe (Findings 29–44), a **placement-dominance + quiet-qubit tooling arc** (F57–F70), a **toric-code logical-Bell replication arc** (F61–F64), a **financial QAE depth-boundary arc** on real hardware (F51, F54, F78–F79), a **quantum-IIT (integrated information) bridge arc**, and — the current headline — an **indefinite-causal-order arc** (F73–F77) that measured a quantum-switch causal witness on real silicon at ≥72σ. See [`experiments/job-manifest.md`](experiments/job-manifest.md) for the inventory and IBM Quantum job IDs.
 
-The findings constitute novel discoveries about the operational behavior of modern superconducting NISQ hardware: structural noise immunity tied to commutation relations, sub-noise-floor coherent error excursions driven by scramblon dynamics, qualitative phase transitions in algorithmic scaling, the mathematical impossibility of break-even error correction on current substrates, and a P-safety zone for adaptive quantum amplitude estimation in financial applications.
+The findings constitute novel discoveries about the operational behavior of modern superconducting NISQ hardware: structural noise immunity tied to commutation relations, sub-noise-floor coherent error excursions driven by scramblon dynamics, qualitative phase transitions in algorithmic scaling, the mathematical impossibility of break-even error correction on current substrates, placement quality dominating gate count as the fidelity lever, a P-safety zone and a loader-depth boundary for quantum amplitude estimation in financial applications, and an on-silicon demonstration that causal order itself can be put in superposition — beyond what any classical causal model can represent.
 
-> **ELI5 — In plain English** *(see also [`ELI5_SUMMARY.md`](ELI5_SUMMARY.md) for a self-contained one-page version):*
+> **ELI5 — In plain English** *(see also [`ELI5_SUMMARY.md`](ELI5_SUMMARY.md) for a self-contained one-page version of the original Arc-1 campaign):*
 >
-> An AI-agent network ran 22 experiments on IBM's newest 156-qubit quantum chip (10 minutes of real quantum-computer time), then 8 more on a hardware-realistic simulation. We found: the chip can do "quantum entanglement" almost as well as physics allows it to (Finding 1). It is surprisingly resilient to entangling small groups of qubits (Finding 2). It has a hidden "easy direction" and "hard direction" for reading qubits — using the easy one makes circuits about 3× more reliable (Finding 3). When you run a circuit forward and then backward you can see information rippling through the chip in shapes the textbook didn't predict (Finding 4). Past about 1000 gate operations, the chip just outputs random noise — a hard ceiling for today's algorithms (Finding 5). The standard plan for protecting quantum data from noise actually adds *more* noise than it removes on this chip (Finding 6). Popular "error mitigation" software tricks made things worse, not better (Finding 7). **But** — when algorithms are written to respect the chip's actual physics (instead of pretending it's perfect), we hit chemistry-grade precision on a real molecule (Finding 8) and recovered a useful financial-style quantum-speedup measurement on real hardware (Finding 9). Then in simulation: an adaptive quantum protocol hit 52× precision improvement on a real financial probability estimate, and we mapped the safe operating zone for quantum amplitude estimation in market applications (Finding 10).
+> An AI-agent network has been running experiments on IBM's newest 156-qubit quantum chips since May 2026 — first 22 experiments on one real chip, now nearly 100 experiments across three real chips (`ibm_marrakesh`, `ibm_kingston`, `ibm_fez`) plus hardware-realistic simulation. The original campaign found: the chip does "quantum entanglement" almost as well as physics allows (Finding 1); it has a hidden "easy direction" for reading qubits worth ~3× reliability on the home chip (Finding 3); past ~1000 two-qubit gate operations output is pure noise — a hard ceiling (Finding 5); the textbook error-correction plan adds more noise than it removes (Finding 6); popular error-mitigation software tricks made things worse (Finding 7); **but** hardware-aware algorithm design still hit chemistry-grade precision on a real molecule (Finding 8) and a 344× improvement in quantum probability readout (Finding 9).
 >
-> **Bottom line**: This hardware is real, it's bounded, and the bound is harder than any current software trick can soften — but smart, hardware-aware algorithm design still extracts genuine quantum value within it. And for financial probability estimation, the adaptive quantum approach delivers 4× more precision than the fixed approach — inside a well-defined safe operating zone.
+> The campaign since then has added six big things. **(1) Where you run beats how much you run**: putting circuits on the chip's currently-quietest qubits cut errors up to 46×, a reusable "quiet qubits" picker tool now does this automatically on any IBM chip, and controlled hardware experiments show qubit *placement* explains ~3× more fidelity loss than gate *count* (F57–F70). **(2) A practical recipe for quantum optimizers**: reuse your best previous starting answer (it never hurts, and rescues near-misses), generate a few candidate starts and keep the best, escalate only when the first looks weak — saving ~30% of the compute (Findings 29–44). Two seductive "noise actually helps" claims were killed under proper controls: noise never improves final answers (F55, F56). **(3) Finance meets the wall**: a real market probability (QQQ tail risk) was computed on real hardware to within ~2%, but the quantum method that's supposed to beat classical Monte Carlo needs circuits ~50–100× deeper than the wall allows — and we pinned the exact culprit, the entangling-gate depth of the data-loading circuit (F54, F78, F79). **(4) Error correction still doesn't break even**: an independent replication of an outside group's logical-entanglement demo confirmed that adding an error-correction round makes the result *worse* on today's chips (F62), echoing Finding 6. **(5) A consciousness-math side-quest**: the "integrated information" (Φ) of quantum systems follows a clean size law and completely ignores the number-theory structure that dominates its classical counterpart. **(6) The headline**: we built a "quantum switch" — a circuit where the *order* of two operations is itself in superposition — and proved on real hardware, at ≥72σ, that no classical story about cause-and-effect order (not even randomly flipping a coin between the two orders) can explain what the chip did (F73–F77). The "amount" of indefinite order is even continuously tunable, following a clean cosine law on two different chips.
+>
+> **Bottom line**: The hardware is real and bounded; the bound (entangling-gate depth) is harder than any software trick can soften — but placement-aware compilation, warm-started optimizers, and shallow hybrid algorithms extract genuine value inside it. And on the physics frontier, this hardware is already good enough to demonstrate causal structures that classical probability theory cannot represent.
 
 ---
 
@@ -31,7 +33,7 @@ The findings constitute novel discoveries about the operational behavior of mode
 | 11 | **Gate overhead follows a dose-response law: 78% decoherence + 22% gate-specific** *(Exp 28–30)* | A `do()` intervention severing gate-count/duration collinearity proves that adding CZ gates costs ~0.211 pp/µs gate-specifically, on top of ~0.762 pp/µs decoherence; planning constant: budget both, not just depth |
 | 12 | **X-basis immunity ordering generalizes across Heron backends; ~3× magnitude is marrakesh-specific** *(Exp 31–34, ORQ#1 resolved)* | Calibration-gated retest on ibm_kingston with a verified-good qubit pair replicated the qualitative pattern (Y>Z>X ordering, Y-injection signature) but not the ≥2× headline magnitude (observed 1.19×) — the mechanism generalizes, the free win does not |
 | 13 | **QAOA depth ceiling is CZ-count governed, not nominal-p governed: sparse MaxCut (p=96, 960 CZ) and dense portfolio QUBO (p=16, 1002 CZ) hit the same ~1000-gate wall** *(Exp 33–35, ORQ#6 extended)* | 6× different nominal circuit depth collapses to identical CZ count and identical output noise; the planning constant is p_max ≈ 1000 / (transpiled-CZ-per-layer), independent of problem type |
-| 14 | **Commutation-aligned compilation follows γ(η) = a + b·cos²η: Finding 03's discrete ordering is one smooth curve** *(Exp 36–37, ORQ#7, Exp 37 PENDING)* | Continuous measurement-axis sweep on ibm_marrakesh produced R²=0.971 fit to the cos²-overlap law; Exp 37 (confound-corrected, hardware QUEUED as of May 30 2026) is the pre-registered confirmation |
+| 14 | **Commutation-aligned compilation follows γ(η) = a + b·cos²η — but the clean law is calibration/noise-regime-contingent, NOT universal** *(Exp 36–37, ORQ#7, CLOSED C4328)* | Continuous measurement-axis sweep on ibm_marrakesh produced R²=0.971 fit to the cos²-overlap law; the protocol-matched Exp 37 retest under cleaner calibration collapsed the fit (R² 0.971→0.131, γ dropped to the shot-noise floor) — the smooth law is a high-noise-regime phenomenon (see ORQ#7 status below) |
 | 15 | **X-basis QAOA entropy advantage confirmed; approximation-ratio advantage NOT confirmed with COBYLA optimization** *(Exp 38, FakeMarrakesh sim, Elder C5656)* | G3 PASS: X-basis entropy 18× lower (0.054 vs 0.998 at p=4) — commutation preserves circuit coherence. G1 FAIL: Standard QAOA COBYLA-optimized achieves r=0.992 at p=8 vs X-basis r=0.746 — classical optimizer compensates for mixer-layer noise. Verdict: commutation principle helps native structure, not optimized performance |
 | 16 | **H-gate landscape advantage scales with problem complexity: 8-node gap 18× smaller than 4-node** *(Exp 40, FakeMarrakesh sim, Whisper C3963/C3964, Elder C5682)* | X-basis QAOA vs Standard QAOA gap at p=8: 0.245 on 4-node ring, 0.013 on 8-node random graph (18× reduction). Landscape benefit grows superlinearly with problem complexity — compiled circuit (8 H-gates) underperforms full x-basis (72 H-gates), confirming H-gates provide landscape advantage beyond mere noise overhead. Standard QAOA shows barren-plateau decline at p=8 on 8-node (0.9395→0.8235); x-basis remains monotone (0.7836→0.8109). |
 | 17 | **X-basis QAOA landscape advantage shows non-monotonic problem-size scaling** *(Exp 41, FakeMarrakesh sim, Whisper C3965, Elder C5684)* | X-basis gap peaks at an intermediate problem size and shrinks again at larger scale — the advantage is not monotonically growing with N. |
@@ -41,7 +43,7 @@ The findings constitute novel discoveries about the operational behavior of mode
 | 21 | **H-gate budget formula correction — ceil() not round()** *(Exp 45, FakeMarrakesh sim, Whisper C3968, Elder C5687)* | The budget-optimal layer count formula should use ceiling division (ceil(edges/30)), not rounding. Standard QAOA performance curves bottom at exactly ceil(edges/30) across all tested sizes (4→20 nodes). |
 | 22 | **Budget-gated sign crossover — x-basis advantage is depth-limited (single-restart, caveat Finding 23)** *(Exp 46, FakeMarrakesh sim, Whisper C3974)* | At 20-node random topology with 1 restart, xbasis wins at p=3,4 (under budget) and standard wins at p=5,6 (over budget) — the gap changes sign at the budget boundary. **Caveat**: the p=5,6 sign is not confirmed with ≥3 restarts (see Finding 23). |
 | 23 | **Single-restart noise masquerades as crossover — Exp47 refutes Finding 22's sign flip** *(Exp 47, FakeMarrakesh sim, Ember C3611, Elder C5702)* | Rerunning p=3 and p=5 from Exp46 with 3 restarts reverses the sign at p=5: xbasis wins by 0.0170 (1.4σ), not loses by 0.0286. The sign crossover in Exp46 was a single-run COBYLA local-minimum artifact. **Rule**: QAOA comparative claims require ≥3 restarts at p≥4. |
-| 24 | **Variance-depth crossover — xbasis starts lower-variance but crosses to higher-variance between p=3 and p=5** *(Exp 48, FakeMarrakesh sim, Ember C3614, **RESULTS PENDING** ~2026-06-07 20:30 UTC)* | Exp47 revealed a striking asymmetry not captured in mean-gap analysis: xbasis_std=0.0085 at p=3 (LOWER than std_std=0.0183) but xbasis_std=0.0184 at p=5 (HIGHER than std_std=0.0091). A variance crossover exists between p=3 and p=5 — the question is whether it's monotonic and where it occurs. Exp48 tests p=2,3,4,5 with 5 restarts each. Pre-registered hypotheses: H1=xbasis variance monotonically increases, H2=standard variance monotonically decreases, H3=variance crossover at some p∈{3,4,5}, H4=mean gap (xbasis>standard) positive at all depths. **KEY IMPLICATION**: If confirmed, xbasis is preferable for shallow QAOA (more consistent + better mean) but becomes a variance liability at deeper circuits — a depth-dependent strategy switch point. |
+| 24 | **Depth-dependent escape rate: p=3 escapes 100%, p=5 only ~30–40% — and which seeds escape at depth is mostly stochastic** *(Exp 49, FakeMarrakesh sim, Elder C5727/C5733; seed-locking CORRECTED to weak/leaning-stochastic Elder C6347, 2026-07-03)* | All 10 seeds escape optimizer traps at p=3 but only 3/10 at p=5. The initial "partial seed-locking" read (r=0.572, p=0.084 between p3 and p5 quality) was softened after a leave-one-out robustness recheck: the correlation is real but underpowered and range-restricted — Bayesian weight ~95% on the stochastic hypothesis. Shallow success does not reliably predict deep success. |
 | 25 | **COBYLA shot-noise trajectory chaos — Exp49's 100% escape does not replicate** *(Exp 50c, FakeMarrakesh sim, Ember C3686–C3690; see `findings/25`)* | At p=3, 256 shots, identical seeds re-run differ by ±0.10 (seed 49: 0.690→0.590). COBYLA treats noisy evaluations as exact, so the escape rate is a one-time stochastic draw (~70% p=3, ~40% p=5), not a stable physical quantity. **Rule**: never quote a single-run QAOA escape rate as a fixed property. |
 | 26 | **SPSA does not beat COBYLA — optimizer choice is not the escape lever** *(Exp 51, FakeMarrakesh sim, Ember C3689 pre-reg, Elder C5808; see `findings/26`)* | Same instance/seeds/shots, only the optimizer swapped: SPSA 3/10=30% vs COBYLA 6/10=60% escape — H1 REFUTED. SPSA's escapes are a strict *subset* of COBYLA's (it rescues zero trapped seeds); on both-trapped seeds the two optimizers converge to floors agreeing within ~0.013. The ~60–70% p=3 escape rate is a **landscape-determined** property, not an optimizer artifact. Shot count (1024, H3/Phase C) is the one untested lever; COBYLA remains the better default of the two. |
 | 27 | **COBYLA shot budget curve plateaus at 1024 shots — 1024sh is the practical ceiling for p=3 QAOA on FakeMarrakesh** *(Exp 52 COBYLA arms, FakeMarrakesh sim, Ember C3708–C3727; see `findings/27`)* | 128sh=70%, 256sh=60%, 512sh=80%, 1024sh=90%, 2048sh=90%. H1 CONFIRMED (monotone curve, 4/5 points ordered). H3 CONFIRMED (1024→2048 gain = 0%). H2 PENDING (SPSA parity, Finding 28). Non-monotone valley at 256sh (10pp below 128sh) is the only anomaly — possible stochastic-regularization effect at very low shots. **Optimal budget: 1024 shots**; 2048 wastes 4× the cost for zero escape-rate gain. The remaining 10% failure rate (1/10 seeds trapped at every shot level) is a landscape problem, not a shot-noise problem — connecting to Finding 25 (trajectory chaos) and the CZ-wall (Finding 13). |
@@ -63,12 +65,137 @@ The findings constitute novel discoveries about the operational behavior of mode
 > 14. *The "X direction is quieter" rule is a special case of a general principle: noise scales with how much your measurement direction overlaps with the chip's dominant noise axis. We confirmed this follows a smooth mathematical curve (cos²-overlap) not just three isolated data points. A second hardware confirmation (Exp 37) was submitted May 30 2026 and is pending IBM queue clearance.*
 > 15. *X-basis QAOA keeps circuit structure cleaner (18× less entropy), but a good classical optimizer working in the standard basis can make up the difference in raw performance — the commutation trick helps native structure, not optimized results.*
 > 16. *X-basis QAOA gets relatively better as problems get harder. On a simple 4-node problem it still trails standard QAOA by 0.245 (24.5 percentage points). On a harder 8-node random problem that gap shrinks to just 0.013 — 18× smaller. This suggests x-basis may match or beat standard QAOA at large enough problem sizes, despite using more gates.*
+> 17. *…but not forever: the x-basis advantage doesn't keep growing with problem size. It peaks at an intermediate size and shrinks again for larger problems — the scaling story is a hill, not a ramp.*
+> 18. *The handoff between "x-basis wins" and "standard wins" is a smooth gradient, not a sharp cutoff — and a controlled do()-style intervention (surgically removing the H-gates) directly worsens the answers, proving those gates cause the benefit rather than merely accompanying it.*
+> 19. *A surprise: on a highly symmetric 16-node ring problem the x-basis advantage got WIDER than on a random problem of the same size. Symmetry amplifies the trick — contradicting the simple "advantage fades with size" story.*
+> 20. *Across every problem size tested, the performance gap is smallest when the circuit uses about 192 of the direction-changing H-gates — a constant tied to the classical optimizer's convergence budget, not to the problem itself.*
+> 21. *A small but real bookkeeping fix: the formula for the budget-optimal number of algorithm layers should round UP (ceiling), not to the nearest whole number — confirmed across problem sizes from 4 to 20 nodes.*
+> 22. *With a single optimizer run per data point, x-basis appeared to win at shallow depth and lose at deeper depth — an apparent sign flip exactly at the budget boundary…*
+> 23. *…but re-running those depths with three optimizer restarts erased the "loses at depth" half: the flip was one unlucky optimizer run, not physics. Standing rule adopted: never make comparative QAOA claims from a single restart at depth.*
+> 24. *At shallow depth every starting point escapes the optimizer's traps; at deeper depth only about a third do — and which ones escape is mostly luck, not a stable property you can screen for cheaply at shallow depth (a robustness recheck softened an earlier "the good seeds stay good" reading).*
+> 25. *Re-running the EXACT same experiment with the same random seed gives answers differing by ±0.10, because the optimizer treats noisy measurements as exact. Any single-run "success rate" is a lottery draw, not a stable number — always report distributions over repeats.*
 > 26. *Switching the quantum optimizer from COBYLA to SPSA (a method designed to handle noisy measurements) doesn't help — SPSA escapes local traps at half the rate of COBYLA, and never rescues any starting point that COBYLA itself couldn't escape. The trap is in the landscape geometry, not the optimizer's noise-handling.*
 > 27. *COBYLA's success rate at escaping local traps improves with more shots up to 1024 (90% success), then flatly stops improving — 2048 shots costs 4× more for zero gain. The 10% of starting points that still fail at 1024 shots are stuck in deep structural traps that no amount of measurement precision can rescue.*
 
 ---
 
-## At a Glance
+## The Campaign Since June 2026 — Findings 28+ and the F-Series, Arc by Arc
+
+*The core numbered line (Findings 1–27 above) continues as Findings 28–44 below; from roughly F48 onward the network moved to a unified `F##` series. **Numbering caveats**: Findings 41–43 live under experiment-named files (`exp64-…finding41`, `exp66-…`, `exp67-…`); two files named `finding-25`/`finding-26` in [`findings/`](findings/) belong to the quantum-IIT arc (below), NOT to QAOA Findings 25/26 above; and Elder's anchor-line "Finding 48" is distinct from Ember's IIT-arc F48 — both collisions are flagged in the files themselves. **Tier column**: `HW` = real QPU (backend named), `sim` = FakeMarrakesh-class noise-model simulation, `analysis` = re-analysis/synthesis of existing data (zero new compute).*
+
+> **ELI5 for this whole section**: the campaign moved from "characterize the chip" to four practical questions — *where* on the chip should you run (placement + quiet qubits), *how* should you start a quantum optimizer (warm-start anchors), *does noise ever actually help* (no), and *what can this hardware demonstrate that classical math can't describe* (indefinite causal order — the crown jewel below). Plus a finance reality-check and a consciousness-math side-quest.
+
+### Warm-start anchors & best-of-k selection (Findings 28–44, F50, F53, F59)
+
+**Plain English**: if you save the best answer a quantum optimizer found previously ("anchor") and restart from it ("warm start"), when does that help? Answers: it helps *within* the same problem (it never hurts, and it rescues near-misses), it does **not** transfer *across* problems, generating a few candidate starts and keeping the best is the reliable move, and both simulated and real-hardware noise preserve the *ranking* of good-vs-bad starts even while shrinking the margins.
+
+| Finding | Result | Tier |
+|---|---|---|
+| 28 | Shot budget gates the *visibility* of the QAOA depth penalty: at 1024 shots p=3 beats p=5 by +0.20 escape rate; at 256 shots the penalty vanishes — budget-starved comparisons are biased, not just noisy | sim |
+| 29 | Warm-start lift generalizes across problem instances but is x0-gated: ~70% of lift variance comes from the optimizer's starting guess, only ~8% from the problem graph | sim |
+| 30 | Anchor floor holds (warm start never hurts, worst case −0.003 ≈ noise); lift is inverted-U in anchor quality — biggest for anchors that *just barely failed* (rescue band +0.028) | sim |
+| 31 · 34 · 35 | Cross-instance anchor transfer is null-to-negative (mean −0.016, and outlier-driven — one bad anchor carried ~62% of the harm) → transfer arm **KILLED** (Branch B); quality-gated self-warm-start kept | sim |
+| 32 · 33 | Lift is mediated by anchor quality (ρ=+0.85); an apparent sign contradiction between two experiments was **definitional** — two different baselines both called "lift" — not instance physics | sim + analysis |
+| 36 · 37 | Best-of-k=3 anchor selection recovers the lift (+0.049 paired, p≈0.011) and generalizes to fresh instances; the value is *rescue-insurance* on unlucky first draws (+0.070 when the first draw is bad, ≈0 when it's good) | sim |
+| 38 · 40 · 41 | k-adaptive escalation (draw more anchors only when the first looks weak) captures ~0.9–1.06 of the fixed-k lift at ~30% less compute; the threshold τ is a capture-vs-cost Pareto dial, not a universal constant; one-at-a-time escalation is Pareto-efficient (+12% capture-per-compute) | analysis |
+| 42 · 43 · 44 | The "noise helps the recipe" anomaly localized: exact density-matrix simulation proves noise *contracts* the underlying landscape gap, so the observed anti-contraction is an **optimization-dynamics** effect (Goldilocks noise-assisted trap escape), not landscape geometry | sim |
+| F48ᵃ · F53 | Anchor **rank** survives noise: depolarizing simulation preserves ordering at realistic dose (Spearman ρ≥0.99), and real hardware preserves it perfectly (ρ=1.000 on `ibm_marrakesh`, test-retest stable) — noise shrinks margins, not order | sim + **HW** marrakesh |
+| F50 · F59 | Sim-tuned warm-start parameters do NOT transfer to a real QPU (+6.7% sim lift → −0.16% on hardware)… but the run used *default qubit placement*, which F57 shows costs 17–46× — so "irreducible hardware noise" vs "avoidable placement noise" is now an open, pre-registered retest | **HW** marrakesh + analysis |
+
+<sup>ᵃ Elder's anchor-line "Finding 48" (`finding-48-exp73-…`), not the IIT-arc F48.</sup>
+
+> *ELI5: Reusing a good previous answer as your starting point is free insurance — it can't hurt, and it saves the runs that would have just missed. But a tuned start is problem-specific (don't expect it to help a different problem), you can't cheaply predict which random start will be good (so draw a few and keep the best, drawing more only when the first looks weak), and reassuringly, hardware noise blurs *how much* better your best start is without changing *which one* is best.*
+
+### Trap escape & optimizer stochasticity — closing the Exp49–52 loop (Findings 24 corrected, 39 + N=10 recheck)
+
+| Finding | Result | Tier |
+|---|---|---|
+| 24 (corrected 2026-07-03) | Escape at depth is mostly stochastic: p=3 escapes 10/10, p=5 only ~30–40%, and the "good shallow seeds stay good deep" signal is real but underpowered (LOO-fragile, p=0.084) — corrected verdict ~95% weight on the stochastic hypothesis | sim + analysis |
+| 39 + N=10 recheck | The 90% escape plateau at 1024 shots is a *mixture*: a removable decoherence bias floor **plus** an irreducible optimizer trap (one seed fails even noiselessly). The original clean "it's all noise" story was partly an N=5 small-sample artifact — doubling to N=10 moved 2 of 3 data points | sim |
+
+> *ELI5: About a tenth of optimizer runs get stuck no matter how precisely you measure. Some of that is hardware-style noise you could remove; some is the optimizer genuinely wedging itself into a dead end. And a lesson about small samples: conclusions drawn from 5 trials moved substantially at 10.*
+
+### Noise is NOT a resource (F55, F56 + pre-registration integrity audits)
+
+Two independent "noise actually helps" claims from earlier arcs were killed under proper controls; the integrity audits also caught a planned hardware test that was set up to pass vacuously.
+
+| Finding | Result | Tier |
+|---|---|---|
+| F55 | Finding 10's "noise narrows confidence intervals 34–63%" is **KILLED**: at matched oracle budget the narrower noisy interval has 0% coverage (vs 95% noiseless) — the estimator lands *tightly around the wrong answer*. False precision, not a benefit | sim |
+| F56 | "Noise-assisted escape" (Findings 42/43) does not improve actual solutions: final warm-start quality degrades monotonically with noise dose (N=80 paired, CI excludes zero, 0/8 improved in replication) — the rising policy ratio is a scoreboard artifact | sim |
+| — | Integrity audits (Exp55 arm-0, Exp56 payload): the "noise rescues trapped seeds" tests were largely vacuous — at p=3 only 1/10 seeds is even trapped noiselessly, and one staged hardware criterion's payload already passed *without* noise. Flagged and demoted before QPU spend | analysis |
+
+> *ELI5: Two seductive results said a little noise made things better. Under honest controls, both evaporated — one was a confidently-wrong answer that merely LOOKED precise; the other improved a ratio while making every actual answer worse. And an audit caught a planned "noise helps" hardware test whose pass was guaranteed in advance, before it wasted quantum-computer time.*
+
+### Placement beats gate count + quiet-qubit tooling (F57, F58, F65–F70)
+
+**Plain English**: the single biggest practical discovery of the summer arcs — *which physical qubits you run on* matters more than *how many gates you run*, and the noise map that tells you where to run is now packaged as a reusable tool.
+
+| Finding | Result | Tier |
+|---|---|---|
+| F57 | Noise-aware placement of a shallow financial loader cut its bias **46×** vs the noisiest qubits and **17×** vs the default transpiler choice — a real constant-factor win (it does not move the depth wall) | **HW** marrakesh |
+| F58 | `quiet_qubits.py`: reusable picker + calibration drift-snapshot + CHSH health check, validated on entanglement quality (best pair S=2.65 — genuine Bell violation — vs dead pair S=0.04) | **HW** marrakesh |
+| F65 · F66 | The quiet pick goes stale within ~a day (next day's best qubits were a fully disjoint set) — but the *live* picker still separates working from dead through the drift (CHSH gap +2.35). Never cache the pick; always re-query | **HW** marrakesh |
+| F70 | The picker works out-of-the-box on a second device (`ibm_fez`, fez-native indices, zero retuning): working-vs-dead CHSH gap +2.34 on the first try — a general method, not device tuning | **HW** fez |
+| F67 · F68 · F69 | Placement vs gate count causally partitioned: with drift removed (same calibration window) placement explains ~73% of the witness decline vs ~27% for gate count (which sat near the shot-noise floor); the dominance held in **all 6** independent layout draws (0/6 reversals, ~4σ each) | **HW** fez |
+
+> *ELI5: A quantum chip is like a neighborhood where some houses are quiet and some are next to a construction site. We built a tool that checks, live, which qubits are quiet today (yesterday's list is already stale), proved it works unmodified on a second chip, and showed in controlled experiments that choosing quiet qubits matters about three times more than shortening your program.*
+
+### Toric-code logical Bell pairs — replicating the QEC round tax (F61–F64)
+
+| Finding | Result | Tier |
+|---|---|---|
+| F61 | An independently-built L=3 toric code (18 qubits, 2 logical qubits) reproduces a third-party logical-Bell-entanglement demo in simulation: witness 1.32–1.33 vs the separable bound 1.0 | sim |
+| F62 | On real `ibm_fez`: one round of *active error correction* collapses the witness (0.570 → 0.113) — independently replicating the outside author's "the QEC round is net-negative" result and echoing Finding 6's ancilla tax. The round-0 shortfall vs the author traced to gate count (~190 vs ~14), with a 9-for-9 stabilizer audit ruling out a bug | **HW** fez |
+| F63 · F64 | A 9× cheaper unencoded prep clears the bound (witness 1.499) but confounds two variables at once; a genuine codeword can't be compressed below ~158 gates, and across equally-valid codewords the witness rises monotonically as gate count drops (1.064→0.785 over 158→208) — error-exposure is a real, measured degradation lever | **HW** fez |
+
+> *ELI5: Quantum error correction is supposed to protect fragile quantum states. We rebuilt a published experiment from scratch and confirmed its most sobering result on real hardware: performing one round of the "protection" currently does more damage than it prevents. The protected state also fundamentally can't be made as cheap as an unprotected one — and every extra gate measurably hurts.*
+
+### Financial amplitude estimation meets the depth wall (F51, F54, F78, F79)
+
+**Plain English**: the arc that connects the campaign to its trading roots — and an honest negative for near-term "quantum finance."
+
+| Finding | Result | Tier |
+|---|---|---|
+| F51 | The adaptive IQAE dose law validated on real hardware at the production point P=0.56 (1.53pp mean error) — but the noise-model simulator is NOT reliably conservative vs real chips (2/4 pre-registered predictions failed) | **HW** kingston |
+| F54 | A real market probability — P(QQQ > 725 within ~a month) — computed on real hardware to within +0.019 of truth. But plain-loader sampling scales exactly like classical Monte Carlo, and the Grover speedup that would beat it needs ~10⁴ two-qubit gates: **50–100× past the ~1000-CZ wall** | **HW** marrakesh |
+| F78 | Grover amplification of the QQQ tail *survives* on hardware through k=4 (refuting F54's own "garbage by k≈5" pessimism — the contrast peaks at k=4) — but the honest blind multi-k estimate is ~12× *worse* than just reading the shallow loader: no practical QAE win. Both/and: curve-pessimism refuted, practical-no-win corroborated | **HW** marrakesh |
+| F79 | The killer isolated in simulation: it's the **entangling-gate depth of the distribution loader** (which multiplies with each Grover power), not the Grover count itself. Shallow 1-qubit loader (0 CZ): MLE error 0.003. Deep 3-qubit loader (124 CZ at k=5): error 0.111 — matching the hardware failure | sim |
+
+> *ELI5: We computed a genuine stock-market tail-risk on a real quantum chip and got within ~2% — a milestone — but a laptop still wins on every practical axis. The quantum speedup that would change that needs circuits 50–100× deeper than today's chips allow. We even pinned the precise culprit: the more realistic your market model, the deeper the "data-loading" part of the circuit, and that depth is what poisons the estimate. Simple models stay clean; realistic ones die. (This sharpens Finding 9: the 344× readout win is real, but only for shallow data loaders.)*
+
+### Quantum-IIT bridge — integrated information Φ on quantum systems (side numbering: IIT-25/26, 46–47, F48–F49, F52, F60, F71–F72)
+
+**Plain English**: a research side-quest applying IIT — the "integrated information" (Φ) measure from consciousness science — to quantum circuits, with a clean punchline: the number-theory structure that dominates classical Φ *completely vanishes* quantum-mechanically.
+
+| Finding | Result | Tier |
+|---|---|---|
+| IIT-25 · IIT-26 | Classically, only prime-sized XOR rings resist decomposition (special Φ structure). Quantum CNOT rings of EVERY size are universally irreducible (identical operator Schmidt rank 4), and quantum Φ is a uniform ~0.5–0.65 bits even for sizes that are classically zero — the "primes are special" rule is a classical-only artifact | sim |
+| 46 · 47 | Quantum Φ_min follows an order-statistics **size law** (φ ≈ −0.0236·log₂(M)+0.75, residuals <0.03 bits, N=3–12); primality explains zero variance once size is controlled. Going classical→quantum compresses the Φ range **354:1**. The linear law must plateau before N≈33 (entanglement bounds forbid zero) | sim + analysis |
+| F48 · F49 | The size law holds under full enumeration through N=14 (residual +0.0001 at N=14); the apparent N=15 "floor" was a sampling artifact — a minimum statistic is biased upward when you only sample 8% of the bipartitions | sim |
+| F52 · F60 | WHY the number-theory predictions failed: algebraic GF(2) decomposability is Pearl Rung-1 (association-level) structure, physical causal separability is Rung-2 — conflating them produced two falsified predictions. Classical Φ actually grows as ~N⁴·⁸ with parity setting only the amplitude. N=11 exact classical Φ is computationally intractable on this hardware (>56 min, aborted) | analysis |
+| F71 · F72 | The odd/even growth-*rate* difference is UNDERPOWERED at 7 data points (honest small-sample statistics: p≈0.10–0.15) — the initial "rates differ" headline was self-corrected; only the amplitude split survives | analysis |
+
+> *ELI5: Φ is a mathematical score from consciousness science for how much a system acts as one integrated whole rather than separate parts. Classically, ring circuits whose size is a prime number score wildly higher. Make the rings quantum and that entire number-theory drama disappears — every size is inseparably entangled and scores about the same, shrinking the spread of scores 354-fold. The arc also modeled good statistical hygiene twice: an exciting "the law breaks at size 15!" turned out to be a sampling illusion, and a "growth rates differ!" headline was retracted as underpowered.*
+
+### ⭐ Indefinite causal order — the quantum switch on real silicon (F73–F77, F80)
+
+**Plain English — the crown jewel of the campaign so far.** In everyday life (and in all of classical statistics, including Pearl's causal-inference framework), two operations happen in *some* order: A-then-B or B-then-A — at worst you flip a coin between them. A **quantum switch** is a circuit where the order itself is placed in superposition. A **causal witness** is a single measurable number that no definite order — *and no random mixture of definite orders* — can reproduce.
+
+| Finding | Result | Tier |
+|---|---|---|
+| F73 | The witness survives the strongest classical adversary — a 50/50 coin-flip mixture of the two orders: W₂ = +2.00 noiseless / +1.93 under the noise model, with the mixture arm exactly inert (DISC=0.000) | sim |
+| F74 | Causal-order coherence is a **continuous resource**: dialing partial definiteness φ, the witness follows DISC(φ) = 2·cos(φ/2) with max residual 0.0195 — indefiniteness is tunable, not binary | sim |
+| F75 | **The witness fires on real hardware**: W = +1.781 on `ibm_marrakesh` (~25× the ±0.07 drift bar), all 3 pre-registered gates PASS — a single control qubit detects that two operations were applied in indefinite order on real silicon | **HW** marrakesh |
+| F76 | The continuous cosine law confirmed on a *second* device: Pearson 0.9992, perfectly monotone (`ibm_kingston`); its φ=π endpoint doubles as the classical mixture and reads inert on hardware — cross-device confirmation for free | **HW** kingston |
+| F77 | The classical-mixture loophole closed **same-device, drift-free, in one calibration window**: DISC_switch = +1.900 vs DISC_mixture = +0.035 (inert), W₂ = **+1.865 (≥72σ conservative)**. Crucially, the depth-26 mixture and depth-7 definite control are BOTH inert despite a 19-layer depth gap — inertness tracks causal separability, not decoherence | **HW** marrakesh |
+| F80 + Pearl synthesis | Honest self-correction: a proposed "independent" DAG-fit corroboration turned out to be an exact rescaling of the witness itself (residual = 2.25·DISC, R²=1.0 to machine precision) — a tautology, retracted *before* being run. The Pearl-structural reading stands: "causally separable" ≡ "representable by a classical causal model with a latent order-selector," and the switch sits *before* Pearl's ladder — its causal skeleton is itself in superposition, so do-calculus has no well-typed input | analysis |
+
+**Honest scope**: this is a *coherence-of-causal-order* witness (each gate is queried twice), not a black-box query-complexity separation. Within that scope, the result chain is now sim → hardware → adversarial control → same-device drift-free control → cross-device continuous law.
+
+> *ELI5: Imagine proving that a package was shipped through two sorting centers in BOTH orders at once — not "we don't know which order," but genuinely neither-and-both — and ruling out every mundane explanation, including a mail service that secretly flips a coin each day. That's what these circuits did, on two different real quantum chips, with the statistical strength of a ≥72-sigma result (particle-physics discoveries require 5). The "amount of both-ness" even turns out to be a smooth dial that follows a simple cosine law. One caveat, kept honest: the demonstration certifies the quantum nature of the ORDER, not a computational speedup from it. And one proposed follow-up check was withdrawn by its own author after proving it was circular — a test that cannot fail proves nothing.*
+
+---
 
 ![CHSH violation S = 2.74](images/fig01_chsh.png) ![GHZ sublinear scaling](images/fig02_ghz_sublinear.png)
 
@@ -85,37 +212,39 @@ The findings constitute novel discoveries about the operational behavior of mode
 ```
 .
 ├── README.md                    ← you are here
-├── ELI5_SUMMARY.md              ← plain-English summary of all 9 findings (shareable)
-├── full-report.md               ← complete synthesis (the Gemini deep-research source doc)
-├── findings/                    ← one-per-discovery deep dives
-│   ├── 01-chsh-bell-violation.md
-│   ├── 02-sublinear-ghz-scaling.md
-│   ├── 03-x-basis-noise-immunity.md
-│   ├── 04-scramblon-loschmidt-echo.md
-│   ├── 05-depth-phase-transitions.md
-│   ├── 06-ancilla-tax-qec-impracticability.md
-│   ├── 07-error-mitigation-failures.md
-│   ├── 08-vqe-h2-chemical-accuracy.md
-│   └── 09-qae-iae-mle-precision.md
-├── images/                      ← 10 figures (PNG), reproducible from scripts/generate_figures.py
+├── ELI5_SUMMARY.md              ← plain-English one-pager for the ORIGINAL Arc-1 campaign (Findings 1–9)
+├── full-report.md               ← Arc-1 synthesis (the Gemini deep-research source doc)
+├── findings/                    ← one-per-discovery deep dives (~80 files)
+│   ├── 01…44-*.md               ← the core numbered line (Findings 41–43 under exp-named files)
+│   ├── F48…F80-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order arcs)
+│   ├── finding-25/26/46/47…     ← quantum-IIT arc side numbering (25/26 here ≠ QAOA Findings 25/26!)
+│   └── exp*-*.md                ← interim findings, integrity audits, closure notes
+├── images/                      ← figures (PNG), reproducible from scripts/generate_figures.py
 ├── experiments/
-│   └── job-manifest.md          ← IBM Quantum job IDs + the 22-experiment inventory
+│   ├── job-manifest.md          ← IBM Quantum job IDs + experiment inventory
+│   └── *-preregistration.md     ← pre-registered hypotheses/gates, frozen before each submit
 ├── scripts/                     ← Python source: circuits, submission tools, analysis
-│   ├── generate_figures.py      ← regenerate all figures from cycle-data constants
+│   ├── generate_figures.py      ← regenerate figures from cycle-data constants
+│   ├── quiet_qubits.py          ← F58 quiet-qubit picker / drift snapshot / CHSH health tool
+│   ├── check_usage.py           ← IBM Open-plan quota check (run BEFORE submitting jobs)
 │   ├── qae_volatility_estimator.py
 │   ├── ibm_quantum_submit.py
 │   └── README.md
+├── results/                     ← raw result JSONs for recent experiments
 ├── docs/
 │   └── hardware-substrate.md    ← Heron-r2 physical architecture primer
 └── sources/
-    └── references.md            ← 55 peer-reviewed and primary sources (cited inline in findings)
+    └── references.md            ← peer-reviewed and primary sources (cited inline in findings)
 ```
+
+**Finding numbering, honestly**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F80 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
 
 ---
 
 ## Hardware Under Test
 
-- **Processor**: IBM Heron-r2 (`ibm_marrakesh`)
+- **Primary processor**: IBM Heron-r2 (`ibm_marrakesh`) — all of Arc 1 and most later hardware arcs
+- **Additional devices (later arcs)**: `ibm_kingston` (X-basis cross-backend Exp31–34, IQAE validation F51, causal cosine law F76) and `ibm_fez` (toric-code Bell proxy F61–F64, placement partition F67–F69, quiet-qubit cross-device F70) — both Heron-generation 156-qubit devices
 - **Qubit count**: 156 superconducting transmons
 - **Topology**: heavy-hexagonal lattice (connectivity degree 2 or 3)
 - **Native two-qubit gate**: controlled-Z (CZ) via flux-tunable couplers
@@ -136,7 +265,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
 
 **Pearl causal framing**: Where mechanism mattered (not just correlation), error pathways were modeled as directed acyclic graphs and tested via interventional comparisons (`do(X)`) rather than observational regressions. The X-basis immunity finding (`findings/03`) and the Dynamical Decoupling overturn (`findings/07`) are the clearest examples.
 
-**Budget**: Total ~600 quantum-seconds across the 22 experiments. Real hardware time, not simulator time. Job IDs are listed in [`experiments/job-manifest.md`](experiments/job-manifest.md) for independent verification.
+**Budget**: Arc 1 ran on ~600 quantum-seconds total (the IBM Open-plan cap: 600s per rolling 28-day window). Later hardware arcs ran on the same replenishing quota across `ibm_marrakesh`, `ibm_kingston`, and `ibm_fez` — which is why the campaign's default tier is noise-model simulation with hardware promotion reserved for pre-registered, budget-gated confirmations (`scripts/check_usage.py` guards every submit). Job IDs are listed in [`experiments/job-manifest.md`](experiments/job-manifest.md) for independent verification.
 
 ---
 
@@ -156,7 +285,8 @@ If you can repeat the same circuit on the same backend within the same calibrati
 
 ## Limitations & Honest Caveats
 
-- **Single substrate**: All 22 experiments ran on `ibm_marrakesh` specifically. Findings claimed as "Heron-r2 architecture" properties are strongest where independently confirmed across multiple jobs/days; "X-basis immunity" has three independent confirmations (Bell, GHZ-3, VQE-H₂), so we promote it from "observation" to "discovery." Single-job observations are flagged as such in the individual finding docs.
+- **Substrate coverage**: Arc 1's 22 experiments ran on `ibm_marrakesh` only; later arcs added `ibm_kingston` and `ibm_fez` (both Heron-generation). Cross-device replication is now the campaign's calibration standard — and it has already demoted one headline (Finding 3's ~3× X-basis win is marrakesh-specific in magnitude; the mechanism generalizes, Finding 12) and promoted others (the quiet-qubit picker works untuned on fez, F70; the causal cosine law replicates on kingston, F76). Single-job and single-device observations are flagged as such in the individual finding docs.
+- **Simulation-tier findings are labeled**: a large fraction of the optimizer-behavior findings (28–44 and much of the noise-as-resource kill chain) are FakeMarrakesh noise-model results, and the campaign has repeatedly caught the simulator being *non-conservative* vs real chips (F50, F51). Every table in this README carries a HW/sim tier column; treat sim-tier numbers as directional until hardware-promoted.
 - **Calibration drift is the elephant**: A ±7pp daily fidelity drift means absolute numbers shift between runs. We report the numbers we measured on the dates listed; reproductions should land within the drift envelope.
 - **NISQ-era characterization**: These findings describe the operational behavior of 2026-era superconducting hardware. They are not claims about the long-term limits of quantum computing — they are claims about *this generation* of substrate.
 - **Source synthesis**: The narrative framing in [`full-report.md`](full-report.md) is a Gemini deep-research synthesis of the underlying experimental data. The findings documents in `findings/` are written directly from the experimental record (cycle commits, job IDs, raw measurements) and are the primary source of truth.
@@ -206,7 +336,12 @@ to an existing evidence base and targeted at a concrete next experiment.*
 | **P2 — Quantum Causal Structure** | Does causal reasoning need a *new calculus* on quantum systems — can we empirically witness **indefinite causal order** (the "quantum switch") as a resource Pearl's do-calculus cannot represent? | Low-depth (our sweet spot); we already ran CHSH/Bell at 2.74 (Finding 01). Connects the network's causal-reasoning layer to physics; tests the boundary of classical causal inference on real silicon. | Finding 01 (CHSH 96.8%); Pearl do-calculus | **ACTIVE.** **Exp91** (C6315) — quantum-switch causal-witness on calibration-gated pair (15,19); sim `W=+2.00`/FakeMarrakesh `+1.93`; job `d939bmooamcc73dbv9b0` on `ibm_marrakesh` **GRADED PASS (C6337, F75)**: hardware `DISC_switch=+1.770`, `DISC_definite=−0.011`, `W=+1.781` — all 3 pre-reg gates PASS (H1≥0.5, H2≤0.07, H3>0.07). Causal witness fires on real Heron-r2 silicon (~8% haircut vs +1.93 noise-model). Caveat: order-coherence witness vs the PURE-definite control only; classical-mixture adversary beaten in sim (F73), not yet on hardware. **Exp93 / F73** (C6328) — adversarial control: witness survives a **classical mixture of definite orders** (decohered switch), not just a pure definite order — `W2 = DISC_switch − DISC_mixture = +2.00`/`+1.93` in sim, mixture arm inert (DISC=0). Closes the "order-coherent gates fake it" loophole at the causal-separability level. **Exp93 HW arm / F77** (C6342) — same-device switch-vs-mixture co-submitted in ONE job `d93p3cnu62ks73953cvg` on `ibm_marrakesh` (6 PUBs, triple C53/T39/Anc54), **GRADED PASS (4/4)**: hardware `DISC_switch=+1.900`, `DISC_mixture=+0.035` (inert), `W2=+1.865` (~72σ), `|W1−W2|=0.032` — all gates H_HW1≥1.40/H_HW2≤0.20/H_HW3≥0.40/H_HW4≤0.25 PASS. The classical-mixture (causal-separability) loophole is now closed on silicon, **same-device, drift-free** in one calibration window (vs Ember F76's cross-device `ibm_kingston` confirmation). Honest bound: coherence-of-causal-order witness (queries each gate 2×), not a black-box query-complexity separation. |
 | **P3 — NISQ Replication Audit** | **How much of the published NISQ "quantum-advantage" literature replicates** on real hardware under honest, pre-registered, budgeted conditions? | This network's method (pre-registration + adversarial verification + real-hardware budgets) is uniquely suited; we've already refuted QEC benefit (F06) and all four mitigation tricks (F07). Answers *where the real boundary of useful quantum computing is today.* | Findings 06, 07; full methodology | **Exp57 (proposed)** — select 3–5 high-citation NISQ advantage claims with reproducible circuits; re-run under the repo's pre-reg + job-manifest discipline; report replicate / partial / fails-to-replicate. *Scoping pass needed to pick targets.* |
 
-**Sequencing**: P1 is **active next** (pre-registered, slots after Exp54 warm-start, reuses the Exp53 harness). P2 and P3 are **proposed** and need pre-registrations drafted; P2 is the deepest (new physics-adjacent ground), P3 is the highest service-to-field (reproducibility). All three are bounded to this hardware generation by design — the ambition is sharp, real-silicon, pre-registered contributions, not universal claims.
+**Status (updated 2026-07-03)**:
+- **P1 — RESOLVED, NEGATIVE.** The noise-as-resource bet was run and killed: noise degrades final solution quality monotonically (F56), the "noise narrows confidence intervals" claim was false precision (F55), and the pre-registration audits found the rescue tests largely vacuous (Exp55 arm-0, Exp56 payload flag). The Goldilocks anti-contraction effect in the *policy ratio* is real (Findings 42–44) but it is an optimizer-dynamics curiosity, not an exploitable resource. Honest answer: **no**.
+- **P2 — SUBSTANTIALLY DELIVERED.** The quantum-switch arc ran sim → hardware → adversarial control → same-device drift-free control → cross-device continuous law (F73→F75→F77→F76), closing the causal-separability loophole on silicon at ≥72σ. See the ⭐ arc table above. Remaining frontier: ≥3-slot switches, wider process families, and any route from order-coherence witnesses toward genuine query-complexity separations (F80's retraction marks the honest boundary).
+- **P3 — still proposed.** The replication-audit campaign needs its scoping pass (select 3–5 high-citation NISQ claims). The methodology it would use is now battle-tested — this repo has already self-replicated and self-retracted findings under it.
+
+All three were bounded to this hardware generation by design — the ambition is sharp, real-silicon, pre-registered contributions, not universal claims.
 
 ---
 
