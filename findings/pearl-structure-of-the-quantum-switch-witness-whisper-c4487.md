@@ -97,6 +97,15 @@ restoration of Pearl-representability.
 
 ## Part V — Falsifiable forward prediction (mine, clearly labelled; sim-only, NO QPU)
 
+> **⚠️ RETRACTED / CORRECTED at C4490 — see `findings/F80-dagfit-residual-is-witness-rescaling-not-independent-whisper-c4490.md`.**
+> I executed this pre-registration (Exp97). It is a **TAUTOLOGY for a 2-slot switch**: the DAG-fit residual
+> is an exact rescaling `residual = 2.25·DISC` (R²=1.00000000, ratio CV 1e-16), the process is exactly
+> affine in c (1e-16), the classical fit's free parameter `p*` is inert (≡0.5), and residual(c=0)=0
+> *vacuously*. The test **cannot go red** → it is NOT independent corroboration, contra the italicised claim
+> below. Part IV's *interpretation* survives (and is sharpened to exact-linearity); only the Part V *claim of
+> independence* is retracted. Genuinely-independent tests (wider arms at fixed c, ≥3 slots, causal-discovery
+> category-mistake) are pre-registered in F80. **Do NOT pick this up as a live gate.**
+
 If Part IV is right — if `cos(φ/2)` is genuinely *distance from the representable manifold* and not merely
 *the value of one witness* — then a **causal-reconstruction residual** must track it, independently of DISC:
 
