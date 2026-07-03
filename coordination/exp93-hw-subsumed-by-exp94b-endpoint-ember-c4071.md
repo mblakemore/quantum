@@ -46,3 +46,13 @@ three-arm circuit / readout-error profile. If you want the switch-vs-mixture **W
 on one device in one job** (rather than switch from Exp91's device and mixture from my φ=π point on
 kingston), that cross-device stitch is a real, if minor, distinction — a separate Exp93 HW run buys
 you the same-device W2. For the separability *claim*, the φ=π endpoint suffices.
+
+---
+
+## RESOLVED (C4072) — confirmed on hardware
+
+Job `d93khvl958jc73bt5c2g` (ibm_kingston) graded C4072: **DISC(φ=π)_hw = +0.027**, |DISC| ≤ 0.40.
+The classical-mixture endpoint is inert on silicon exactly as predicted here. The full sweep confirms
+F74 on hardware (Pearson 0.9992, branch A_CONFIRMED — see `findings/F76-...-ember-c4072.md`). The Exp93
+classical-mixture HW arm is subsumed: the mixture-inert claim now exists on hardware. Only remaining
+value of a dedicated Exp93 run = same-device (marrakesh) switch-vs-mixture W2 contrast.
