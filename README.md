@@ -139,6 +139,8 @@ Two independent "noise actually helps" claims from earlier arcs were killed unde
 | F70 | The picker works out-of-the-box on a second device (`ibm_fez`, fez-native indices, zero retuning): working-vs-dead CHSH gap +2.34 on the first try — a general method, not device tuning | **HW** fez |
 | F67 · F68 · F69 | Placement vs gate count causally partitioned: with drift removed (same calibration window) placement explains ~73% of the witness decline vs ~27% for gate count (which sat near the shot-noise floor); the dominance held in **all 6** independent layout draws (0/6 reversals, ~4σ each) | **HW** fez |
 
+![Placement beats gate count — F57 bias arms and F68/F69 drift-free partition](images/fig13_placement_dominance.png)
+
 > *ELI5: A quantum chip is like a neighborhood where some houses are quiet and some are next to a construction site. We built a tool that checks, live, which qubits are quiet today (yesterday's list is already stale), proved it works unmodified on a second chip, and showed in controlled experiments that choosing quiet qubits matters about three times more than shortening your program.*
 
 ### Toric-code logical Bell pairs — replicating the QEC round tax (F61–F64)
@@ -161,6 +163,8 @@ Two independent "noise actually helps" claims from earlier arcs were killed unde
 | F54 | A real market probability — P(QQQ > 725 within ~a month) — computed on real hardware to within +0.019 of truth. But plain-loader sampling scales exactly like classical Monte Carlo, and the Grover speedup that would beat it needs ~10⁴ two-qubit gates: **50–100× past the ~1000-CZ wall** | **HW** marrakesh |
 | F78 | Grover amplification of the QQQ tail *survives* on hardware through k=4 (refuting F54's own "garbage by k≈5" pessimism — the contrast peaks at k=4) — but the honest blind multi-k estimate is ~12× *worse* than just reading the shallow loader: no practical QAE win. Both/and: curve-pessimism refuted, practical-no-win corroborated | **HW** marrakesh |
 | F79 | The killer isolated in simulation: it's the **entangling-gate depth of the distribution loader** (which multiplies with each Grover power), not the Grover count itself. Shallow 1-qubit loader (0 CZ): MLE error 0.003. Deep 3-qubit loader (124 CZ at k=5): error 0.111 — matching the hardware failure | sim |
+
+![QQQ-tail Grover on hardware — contrast survives to k=4, estimator does not](images/fig14_qqq_grover_depth.png)
 
 > *ELI5: We computed a genuine stock-market tail-risk on a real quantum chip and got within ~2% — a milestone — but a laptop still wins on every practical axis. The quantum speedup that would change that needs circuits 50–100× deeper than today's chips allow. We even pinned the precise culprit: the more realistic your market model, the deeper the "data-loading" part of the circuit, and that depth is what poisons the estimate. Simple models stay clean; realistic ones die. (This sharpens Finding 9: the 344× readout win is real, but only for shallow data loaders.)*
 
@@ -191,6 +195,10 @@ Two independent "noise actually helps" claims from earlier arcs were killed unde
 | F77 | The classical-mixture loophole closed **same-device, drift-free, in one calibration window**: DISC_switch = +1.900 vs DISC_mixture = +0.035 (inert), W₂ = **+1.865 (≥72σ conservative)**. Crucially, the depth-26 mixture and depth-7 definite control are BOTH inert despite a 19-layer depth gap — inertness tracks causal separability, not decoherence | **HW** marrakesh |
 | F80 + Pearl synthesis | Honest self-correction: a proposed "independent" DAG-fit corroboration turned out to be an exact rescaling of the witness itself (residual = 2.25·DISC, R²=1.0 to machine precision) — a tautology, retracted *before* being run. The Pearl-structural reading stands: "causally separable" ≡ "representable by a classical causal model with a latent order-selector," and the switch sits *before* Pearl's ladder — its causal skeleton is itself in superposition, so do-calculus has no well-typed input | analysis |
 
+![Quantum-switch causal witness on ibm_marrakesh — switch fires, both classical controls inert](images/fig11_causal_witness.png)
+
+![Causal-order coherence follows 2cos(φ/2) on ibm_kingston](images/fig12_causal_cosine_law.png)
+
 **Honest scope**: this is a *coherence-of-causal-order* witness (each gate is queried twice), not a black-box query-complexity separation. Within that scope, the result chain is now sim → hardware → adversarial control → same-device drift-free control → cross-device continuous law.
 
 > *ELI5: Imagine proving that a package was shipped through two sorting centers in BOTH orders at once — not "we don't know which order," but genuinely neither-and-both — and ruling out every mundane explanation, including a mail service that secretly flips a coin each day. That's what these circuits did, on two different real quantum chips, with the statistical strength of a ≥72-sigma result (particle-physics discoveries require 5). The "amount of both-ness" even turns out to be a smooth dial that follows a simple cosine law. One caveat, kept honest: the demonstration certifies the quantum nature of the ORDER, not a computational speedup from it. And one proposed follow-up check was withdrawn by its own author after proving it was circular — a test that cannot fail proves nothing.*
@@ -203,7 +211,7 @@ Two independent "noise actually helps" claims from earlier arcs were killed unde
 
 ![All four mitigation strategies failed](images/fig07_mitigation_failures.png) ![IAE-MLE 344× better than naive](images/fig09_qae_iae_mle.png)
 
-*All figures in [`images/`](images/) are reproducible from [`scripts/generate_figures.py`](scripts/generate_figures.py) — every data point traces back to a specific cycle's measured value (commit history in the upstream Whisper / Elder / Lyla repos) or to the cited job ID in [`experiments/job-manifest.md`](experiments/job-manifest.md). Where a figure is partly schematic — e.g., the time-axis shape in the VQE convergence trajectory or the Loschmidt-echo round axis — this is explicitly called out in the figure caption of the linked finding.*
+*All figures in [`images/`](images/) — including the newer-arc figures (fig11–fig14) shown inline in the arc sections above — are reproducible from [`scripts/generate_figures.py`](scripts/generate_figures.py) — every data point traces back to a specific cycle's measured value (commit history in the upstream Whisper / Elder / Lyla repos) or to the cited job ID in [`experiments/job-manifest.md`](experiments/job-manifest.md). Where a figure is partly schematic — e.g., the time-axis shape in the VQE convergence trajectory or the Loschmidt-echo round axis — this is explicitly called out in the figure caption of the linked finding.*
 
 ---
 

@@ -297,6 +297,160 @@ def fig_10_calibration_drift():
     save("fig10_calibration_drift.png")
 
 
+# ---------------------------------------------------------------------------
+# Fig 11 — Quantum-switch causal witness on real hardware (F75/F77)
+# Data: findings/F77 (job d93p3cnu62ks73953cvg, ibm_marrakesh, 6000 shots/PUB,
+# single calibration window). Ideal reference from findings/F73 sim.
+# ---------------------------------------------------------------------------
+def fig_11_causal_witness():
+    fig, ax = plt.subplots(figsize=(6.2, 3.8))
+    labels = ["Coherent switch\n(order in superposition)",
+              "Definite order\n(pure control)",
+              "Classical 50/50 mixture\nof the two orders"]
+    vals = [1.900, 0.003, 0.035]  # DISC per arm, F77 hardware table
+    colors = ["#1f77b4", "#888", "#888"]
+    bars = ax.bar(labels, vals, color=colors, width=0.55,
+                  edgecolor="black", linewidth=0.6)
+    for bar, v in zip(bars, vals):
+        ax.text(bar.get_x() + bar.get_width() / 2, v + 0.05, f"{v:+.3f}",
+                ha="center", fontsize=10, fontweight="bold")
+    ax.axhline(2.0, color="#2ca02c", linestyle="--", linewidth=1.0)
+    ax.text(2.42, 2.02, "ideal (noiseless) = +2.000", color="#2ca02c",
+            fontsize=8, ha="right", va="bottom")
+    ax.annotate("", xy=(2, 1.75), xytext=(2, 0.12),
+                arrowprops=dict(arrowstyle="<->", color="#d62728", lw=1.4))
+    ax.text(2.06, 0.95, "W₂ = +1.865\n(≥72σ above 0)",
+            color="#d62728", fontsize=9, fontweight="bold", va="center")
+    ax.set_ylabel("Causal-order witness  DISC")
+    ax.set_ylim(-0.15, 2.25)
+    ax.set_title("F75/F77 — Indefinite causal order fires on ibm_marrakesh;\n"
+                 "both classical controls are inert (same device, one calibration window)")
+    ax.grid(axis="y", alpha=0.3)
+    save("fig11_causal_witness.png")
+
+
+# ---------------------------------------------------------------------------
+# Fig 12 — Causal-order coherence is a continuous resource: DISC(phi)=2cos(phi/2)
+# Data: findings/F76 (job d93khvl958jc73bt5c2g, ibm_kingston, 2000 shots/PUB).
+# ---------------------------------------------------------------------------
+def fig_12_causal_cosine_law():
+    phi = np.array([0, np.pi / 4, np.pi / 2, 3 * np.pi / 4, np.pi])
+    disc_hw = np.array([1.936, 1.713, 1.353, 0.718, 0.027])  # F76 hardware table
+    phi_th = np.linspace(0, np.pi, 200)
+
+    fig, ax = plt.subplots(figsize=(6.2, 3.8))
+    ax.plot(phi_th, 2 * np.cos(phi_th / 2), "-", color="#2ca02c", linewidth=2,
+            label=r"theory  $2\cos(\varphi/2)$")
+    ax.plot(phi, disc_hw, "o", color="#1f77b4", markersize=9,
+            markeredgecolor="black", markeredgewidth=0.6, linestyle="none",
+            label="measured (ibm_kingston)")
+    for x, y in zip(phi[:-1], disc_hw[:-1]):
+        ax.annotate(f"{y:+.3f}", (x, y), textcoords="offset points",
+                    xytext=(10, 6), fontsize=8)
+    ax.annotate(f"{disc_hw[-1]:+.3f}", (phi[-1], disc_hw[-1]),
+                textcoords="offset points", xytext=(-40, 10), fontsize=8)
+    ax.annotate("$\\varphi=\\pi$ endpoint IS the classical\nmixture → inert on hardware",
+                xy=(np.pi - 0.03, 0.06), xytext=(1.35, 0.42), fontsize=8,
+                arrowprops=dict(arrowstyle="->", color="#555", lw=0.9))
+    ax.text(0.04, 0.15, "Pearson r = 0.9992\nSpearman = −1.000 (monotone)",
+            fontsize=9, fontweight="bold", color="#1f77b4",
+            transform=ax.transAxes)
+    ax.set_xlabel(r"order-dephasing angle  $\varphi$  (0 = fully indefinite order, $\pi$ = classical mixture)")
+    ax.set_ylabel(r"witness  DISC($\varphi$)")
+    ax.set_xticks([0, np.pi / 4, np.pi / 2, 3 * np.pi / 4, np.pi])
+    ax.set_xticklabels(["0", r"$\pi/4$", r"$\pi/2$", r"$3\pi/4$", r"$\pi$"])
+    ax.set_title("F74/F76 — Causal-order coherence is a continuous, tunable resource\n"
+                 "(cosine law confirmed on a second device)")
+    ax.legend(loc="upper right", fontsize=9)
+    save("fig12_causal_cosine_law.png")
+
+
+# ---------------------------------------------------------------------------
+# Fig 13 — Placement beats gate count (F57 + F68/F69, real hardware)
+# Panel A: findings/F57 (ibm_marrakesh, 8192 shots, 6 jobs) QQQ-loader bias.
+# Panel B: findings/F69 (job d9342knd07jc73e01jpg, ibm_fez, one calibration
+# window, 16 PUBs) per-draw placement contribution vs gate-count-only.
+# ---------------------------------------------------------------------------
+def fig_13_placement_dominance():
+    fig, (axa, axb) = plt.subplots(1, 2, figsize=(9.6, 3.8))
+
+    # Panel A — F57 bias by placement arm
+    labels = ["Quietest qubits\n(noise-aware)", "Default\ntranspiler",
+              "Noisiest qubits\n(dead q82 in path)"]
+    bias = [0.0025, 0.043, 0.116]
+    colors = ["#2ca02c", "#1f77b4", "#d62728"]
+    bars = axa.bar(labels, bias, color=colors, width=0.55,
+                   edgecolor="black", linewidth=0.6)
+    for bar, v in zip(bars, bias):
+        axa.text(bar.get_x() + bar.get_width() / 2, v + 0.003, f"+{v:.4f}",
+                 ha="center", fontsize=9, fontweight="bold")
+    axa.annotate("46× smaller", xy=(0.18, 0.02), xytext=(0.55, 0.075),
+                 fontsize=10, fontweight="bold", color="#2ca02c",
+                 arrowprops=dict(arrowstyle="->", color="#2ca02c", lw=1.2))
+    axa.set_ylabel("QQQ tail-probability bias")
+    axa.set_title("F57 — Same shallow circuit, three placements\n(ibm_marrakesh)")
+    axa.grid(axis="y", alpha=0.3)
+
+    # Panel B — F69 draw distribution vs gate-count-only, one window
+    draws = [0.1531, 0.1554, 0.2430, 0.2640, 0.2810, 0.2971]  # placement_i, K=6
+    gate_only = -0.018   # W(158) - W(FIX 208), same window
+    axb.scatter([0] * len(draws), draws, s=70, color="#1f77b4", zorder=3,
+                edgecolor="black", linewidth=0.6, label="placement (6 layout draws)")
+    axb.scatter([1], [gate_only], s=90, color="#d62728", zorder=3, marker="s",
+                edgecolor="black", linewidth=0.6, label="gate count only (158→208)")
+    axb.axhspan(-0.08, 0.08, color="grey", alpha=0.18)
+    axb.text(1.52, 0.055, "shot-noise tie floor ±0.08", fontsize=8,
+             color="#555", ha="right")
+    axb.axhline(np.mean(draws), color="#1f77b4", linestyle="--", linewidth=1.0)
+    axb.text(0.13, np.mean(draws) + 0.008, f"mean +{np.mean(draws):.3f}",
+             color="#1f77b4", fontsize=9, fontweight="bold")
+    axb.set_xlim(-0.6, 1.6)
+    axb.set_xticks([0, 1])
+    axb.set_xticklabels(["placement varied\n(gates held ~208)",
+                         "gates varied\n(placement held)"])
+    axb.set_ylabel("witness contribution ΔW")
+    axb.set_title("F68/F69 — Drift-free partition: placement\ndominates in all 6 draws (ibm_fez)")
+    axb.legend(loc="center right", fontsize=8)
+    axb.grid(axis="y", alpha=0.3)
+
+    fig.tight_layout()
+    save("fig13_placement_dominance.png")
+
+
+# ---------------------------------------------------------------------------
+# Fig 14 — QQQ-tail Grover on hardware: amplification survives, estimation doesn't
+# Data: findings/F78 (job d93s1fkql68s73c8oong, ibm_marrakesh, 4096 shots x 7 PUBs).
+# ---------------------------------------------------------------------------
+def fig_14_qqq_grover_depth():
+    k = np.array([0, 1, 2, 3, 4, 5])
+    hw = np.array([0.0334, 0.0354, 0.0752, 0.0830, 0.1335, 0.0696])
+    ideal = np.array([0.0210, 0.0630, 0.1045, 0.1452, 0.1850, 0.2234])
+
+    fig, ax = plt.subplots(figsize=(6.4, 3.8))
+    ax.plot(k, ideal, "s--", color="#2ca02c", linewidth=1.5, markersize=6,
+            label="ideal (noiseless) contrast")
+    ax.plot(k, hw, "o-", color="#1f77b4", linewidth=2, markersize=8,
+            label="measured (ibm_marrakesh)")
+    ax.annotate("peak at k=4:\nGrover amplification\nvisibly working",
+                xy=(4, 0.1335), xytext=(2.05, 0.150), fontsize=8,
+                fontweight="bold", color="#1f77b4",
+                arrowprops=dict(arrowstyle="->", color="#1f77b4", lw=1.0))
+    ax.annotate("collapse at k=5\n(124 two-qubit gates:\nloader depth wall, F79)",
+                xy=(5, 0.0696), xytext=(4.05, 0.024), fontsize=8, color="#d62728",
+                arrowprops=dict(arrowstyle="->", color="#d62728", lw=1.0))
+    ax.text(0.02, 0.97,
+            "But no blind estimation win: multi-k MLE err 0.154\n"
+            "vs plain k=0 read err 0.012 (~12× worse)",
+            transform=ax.transAxes, fontsize=8, va="top",
+            bbox=dict(boxstyle="round,pad=0.3", fc="#fff3f3", ec="#d62728", lw=0.8))
+    ax.set_xlabel("Grover power k  (oracle queries = 2k+1)")
+    ax.set_ylabel("signal contrast  |P(MSB=1) − 0.5|")
+    ax.set_title("F78 — QQQ tail-risk Grover on real hardware:\n"
+                 "the curve survives to k=4, the estimator does not")
+    ax.legend(loc="center left", fontsize=8)
+    save("fig14_qqq_grover_depth.png")
+
+
 def main():
     print("Generating figures from C3650-C3671 cycle data...")
     fig_01_chsh()
@@ -309,6 +463,11 @@ def main():
     fig_08_vqe_h2()
     fig_09_qae_iae_mle()
     fig_10_calibration_drift()
+    print("Generating figures for the May-July arcs (F-series findings)...")
+    fig_11_causal_witness()
+    fig_12_causal_cosine_law()
+    fig_13_placement_dominance()
+    fig_14_qqq_grover_depth()
     print("Done. Figures in ../images/fig*.png")
 
 
