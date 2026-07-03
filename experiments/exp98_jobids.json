@@ -1,0 +1,185 @@
+{
+  "experiment": "exp98",
+  "cycle": 6357,
+  "backend": "ibm_marrakesh",
+  "shots": 4096,
+  "job_id": "d93vso6vtlqs73ftmqhg",
+  "pub_spec": [
+    [
+      "QQQ",
+      0
+    ],
+    [
+      "QQQ",
+      1
+    ],
+    [
+      "QQQ",
+      2
+    ],
+    [
+      "QQQ",
+      3
+    ],
+    [
+      "QQQ",
+      4
+    ],
+    [
+      "QQQ",
+      5
+    ],
+    [
+      "IWM",
+      0
+    ],
+    [
+      "IWM",
+      1
+    ],
+    [
+      "IWM",
+      2
+    ],
+    [
+      "IWM",
+      3
+    ],
+    [
+      "IWM",
+      4
+    ],
+    [
+      "IWM",
+      5
+    ],
+    [
+      "QQQ",
+      0
+    ],
+    [
+      "IWM",
+      0
+    ]
+  ],
+  "pub_labels": [
+    "QQQ_k0",
+    "QQQ_k1",
+    "QQQ_k2",
+    "QQQ_k3",
+    "QQQ_k4",
+    "QQQ_k5",
+    "IWM_k0",
+    "IWM_k1",
+    "IWM_k2",
+    "IWM_k3",
+    "IWM_k4",
+    "IWM_k5",
+    "QQQ_k0_retest",
+    "IWM_k0_retest"
+  ],
+  "depths": [
+    {
+      "label": "QQQ_k0",
+      "loader": "QQQ",
+      "k": 0,
+      "depth": 32,
+      "n2q": 7
+    },
+    {
+      "label": "QQQ_k1",
+      "loader": "QQQ",
+      "k": 1,
+      "depth": 112,
+      "n2q": 28
+    },
+    {
+      "label": "QQQ_k2",
+      "loader": "QQQ",
+      "k": 2,
+      "depth": 201,
+      "n2q": 52
+    },
+    {
+      "label": "QQQ_k3",
+      "loader": "QQQ",
+      "k": 3,
+      "depth": 283,
+      "n2q": 76
+    },
+    {
+      "label": "QQQ_k4",
+      "loader": "QQQ",
+      "k": 4,
+      "depth": 369,
+      "n2q": 100
+    },
+    {
+      "label": "QQQ_k5",
+      "loader": "QQQ",
+      "k": 5,
+      "depth": 451,
+      "n2q": 124
+    },
+    {
+      "label": "IWM_k0",
+      "loader": "IWM",
+      "k": 0,
+      "depth": 5,
+      "n2q": 0
+    },
+    {
+      "label": "IWM_k1",
+      "loader": "IWM",
+      "k": 1,
+      "depth": 5,
+      "n2q": 0
+    },
+    {
+      "label": "IWM_k2",
+      "loader": "IWM",
+      "k": 2,
+      "depth": 5,
+      "n2q": 0
+    },
+    {
+      "label": "IWM_k3",
+      "loader": "IWM",
+      "k": 3,
+      "depth": 5,
+      "n2q": 0
+    },
+    {
+      "label": "IWM_k4",
+      "loader": "IWM",
+      "k": 4,
+      "depth": 5,
+      "n2q": 0
+    },
+    {
+      "label": "IWM_k5",
+      "loader": "IWM",
+      "k": 5,
+      "depth": 5,
+      "n2q": 0
+    },
+    {
+      "label": "QQQ_k0_retest",
+      "loader": "QQQ",
+      "k": 0,
+      "depth": 32,
+      "n2q": 7
+    },
+    {
+      "label": "IWM_k0_retest",
+      "loader": "IWM",
+      "k": 0,
+      "depth": 5,
+      "n2q": 0
+    }
+  ],
+  "a_true": {
+    "QQQ": 0.47895584511108835,
+    "IWM": 0.56
+  }
+}

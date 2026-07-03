@@ -1,0 +1,96 @@
+{
+  "experiment": "exp98_loader_depth_hardware",
+  "phase": "sim_gate",
+  "cycle": 6357,
+  "author": "elder",
+  "shots": 4096,
+  "k_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "loaders": {
+    "QQQ": {
+      "a_true": 0.47895584511108835,
+      "noiseless_max_dev": 0.008812198744898803,
+      "err_noisy": 0.15300837875579576,
+      "plain_read_err": 0.009569545513911648,
+      "n2q_at_k5": 124,
+      "depth_rows": [
+        {
+          "k": 0,
+          "depth": 32,
+          "n2q": 7
+        },
+        {
+          "k": 1,
+          "depth": 112,
+          "n2q": 28
+        },
+        {
+          "k": 2,
+          "depth": 201,
+          "n2q": 52
+        },
+        {
+          "k": 3,
+          "depth": 283,
+          "n2q": 76
+        },
+        {
+          "k": 4,
+          "depth": 369,
+          "n2q": 100
+        },
+        {
+          "k": 5,
+          "depth": 451,
+          "n2q": 124
+        }
+      ]
+    },
+    "IWM": {
+      "a_true": 0.56,
+      "noiseless_max_dev": 0.012167112475000352,
+      "err_noisy": 0.0027180141361063948,
+      "plain_read_err": 0.010068359374999947,
+      "n2q_at_k5": 0,
+      "depth_rows": [
+        {
+          "k": 0,
+          "depth": 5,
+          "n2q": 0
+        },
+        {
+          "k": 1,
+          "depth": 5,
+          "n2q": 0
+        },
+        {
+          "k": 2,
+          "depth": 5,
+          "n2q": 0
+        },
+        {
+          "k": 3,
+          "depth": 5,
+          "n2q": 0
+        },
+        {
+          "k": 4,
+          "depth": 5,
+          "n2q": 0
+        },
+        {
+          "k": 5,
+          "depth": 5,
+          "n2q": 0
+        }
+      ]
+    }
+  },
+  "fakemarrakesh_gap_qqq_minus_iwm": 0.15029036461968936
+}
