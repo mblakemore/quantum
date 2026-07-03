@@ -1,0 +1,96 @@
+{
+  "backend": "ibm_kingston",
+  "meta": [
+    {
+      "phi": 0.0,
+      "phi_label": "0",
+      "arm": "commute",
+      "A": "X",
+      "B": "X",
+      "depth": 22,
+      "twoq": 4
+    },
+    {
+      "phi": 0.0,
+      "phi_label": "0",
+      "arm": "anticommute",
+      "A": "X",
+      "B": "Z",
+      "depth": 21,
+      "twoq": 4
+    },
+    {
+      "phi": 0.7853981633974483,
+      "phi_label": "pi/4",
+      "arm": "commute",
+      "A": "X",
+      "B": "X",
+      "depth": 31,
+      "twoq": 6
+    },
+    {
+      "phi": 0.7853981633974483,
+      "phi_label": "pi/4",
+      "arm": "anticommute",
+      "A": "X",
+      "B": "Z",
+      "depth": 30,
+      "twoq": 6
+    },
+    {
+      "phi": 1.5707963267948966,
+      "phi_label": "pi/2",
+      "arm": "commute",
+      "A": "X",
+      "B": "X",
+      "depth": 31,
+      "twoq": 6
+    },
+    {
+      "phi": 1.5707963267948966,
+      "phi_label": "pi/2",
+      "arm": "anticommute",
+      "A": "X",
+      "B": "Z",
+      "depth": 30,
+      "twoq": 6
+    },
+    {
+      "phi": 2.356194490192345,
+      "phi_label": "3pi/4",
+      "arm": "commute",
+      "A": "X",
+      "B": "X",
+      "depth": 31,
+      "twoq": 6
+    },
+    {
+      "phi": 2.356194490192345,
+      "phi_label": "3pi/4",
+      "arm": "anticommute",
+      "A": "X",
+      "B": "Z",
+      "depth": 30,
+      "twoq": 6
+    },
+    {
+      "phi": 3.141592653589793,
+      "phi_label": "pi",
+      "arm": "commute",
+      "A": "X",
+      "B": "X",
+      "depth": 28,
+      "twoq": 6
+    },
+    {
+      "phi": 3.141592653589793,
+      "phi_label": "pi",
+      "arm": "anticommute",
+      "A": "X",
+      "B": "Z",
+      "depth": 27,
+      "twoq": 6
+    }
+  ],
+  "n_pubs": 10
+}
