@@ -1,0 +1,102 @@
+{
+  "experiment": "exp93-classical-mixture-control",
+  "cycle": "C6341",
+  "backend": "ibm_marrakesh",
+  "shots": 6000,
+  "triple_control_target_ancilla": [
+    53,
+    39,
+    54
+  ],
+  "triple_cost": 0.007139164931378866,
+  "twoq_gate": "cz",
+  "job_id": "d93p3cnu62ks73953cvg",
+  "pub_order": [
+    "switch_commute",
+    "switch_anticommute",
+    "definite_commute",
+    "definite_anticommute",
+    "mixture_commute",
+    "mixture_anticommute"
+  ],
+  "metas": [
+    {
+      "label": "switch_commute",
+      "A": "X",
+      "B": "X",
+      "mode": "switch",
+      "layout": [
+        53,
+        39
+      ],
+      "depth": 22,
+      "twoq": 6
+    },
+    {
+      "label": "switch_anticommute",
+      "A": "X",
+      "B": "Z",
+      "mode": "switch",
+      "layout": [
+        53,
+        39
+      ],
+      "depth": 21,
+      "twoq": 6
+    },
+    {
+      "label": "definite_commute",
+      "A": "X",
+      "B": "X",
+      "mode": "definite",
+      "layout": [
+        53,
+        39
+      ],
+      "depth": 7,
+      "twoq": 1
+    },
+    {
+      "label": "definite_anticommute",
+      "A": "X",
+      "B": "Z",
+      "mode": "definite",
+      "layout": [
+        53,
+        39
+      ],
+      "depth": 7,
+      "twoq": 1
+    },
+    {
+      "label": "mixture_commute",
+      "A": "X",
+      "B": "X",
+      "mode": "mixture",
+      "layout": [
+        53,
+        39,
+        54
+      ],
+      "depth": 26,
+      "twoq": 5
+    },
+    {
+      "label": "mixture_anticommute",
+      "A": "X",
+      "B": "Z",
+      "mode": "mixture",
+      "layout": [
+        53,
+        39,
+        54
+      ],
+      "depth": 25,
+      "twoq": 5
+    }
+  ],
+  "witnesses": {
+    "W1": "DISC_switch - DISC_definite",
+    "W2": "DISC_switch - DISC_mixture (headline)"
+  }
+}
