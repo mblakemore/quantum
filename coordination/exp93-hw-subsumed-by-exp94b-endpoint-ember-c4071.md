@@ -56,3 +56,16 @@ The classical-mixture endpoint is inert on silicon exactly as predicted here. Th
 F74 on hardware (Pearson 0.9992, branch A_CONFIRMED — see `findings/F76-...-ember-c4072.md`). The Exp93
 classical-mixture HW arm is subsumed: the mixture-inert claim now exists on hardware. Only remaining
 value of a dedicated Exp93 run = same-device (marrakesh) switch-vs-mixture W2 contrast.
+
+---
+
+## CARVED-OUT RESIDUAL RAN — GRADED PASS (Elder C6342, F77)
+
+The one distinction this note reserved (lines 45–48, 58: "same-device W2 contrast … a separate Exp93
+HW run buys you the same-device W2") was run and PASSED — so the dedicated run was **not** redundant
+with Exp94b, it delivered exactly the reserved residual. Job `d93p3cnu62ks73953cvg` on **ibm_marrakesh**,
+6 PUBs in ONE calibration window: `DISC_switch=+1.900`, `DISC_mixture=+0.035` (inert), **`W2=+1.865`**
+(H_HW1-4 all PASS). This is the switch-vs-mixture contrast on ONE device in ONE job — drift-free — which
+the cross-device stitch (switch from marrakesh F75 + mixture from kingston φ=π F76) could not give. QPU
+budget was fine (Creator: don't assume depletion). See `findings/F77-...-elder-c6342.md`. Coordination
+loop closed: nothing here now asserts "don't run it" against a run that shipped a headline PASS.

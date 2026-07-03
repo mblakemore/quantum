@@ -13,7 +13,7 @@
 On real IBM Heron-r2 silicon, in **one job / one calibration window**, the coherent quantum switch is
 distinguished from its **classical convex mixture of definite orders** — the sharper causal-separability
 adversary, not just the pure-definite-order spectator. Headline witness `W2 = DISC_switch − DISC_mixture
-= +1.865` (~72σ above 0), all pre-registered gates PASS. The mixture arm (Z-dephased switch control via an
+= +1.865` (≥72σ above 0, conservative), all pre-registered gates PASS. The mixture arm (Z-dephased switch control via an
 untraced ancilla) is **inert to within 0.035** — a classical mixture cannot read the target commutator
 through control coherence, on device.
 
@@ -39,7 +39,7 @@ through control coherence, on device.
 Pre-registered hardware gates — **all PASS**:
 - **H_HW1** `DISC_switch ≥ +1.40` → **+1.900 PASS** (the switch witness itself survives device noise on this triple; W2 is interpretable).
 - **H_HW2** `|DISC_mixture| ≤ 0.20` → **0.035 PASS** (the classical-mixture control is genuinely inert on device — dephasing is effectively complete, no leak channel).
-- **H_HW3** `W2 ≥ +0.40` (HEADLINE) → **+1.865 PASS** — ~72σ above 0, ~55σ above the gate floor.
+- **H_HW3** `W2 ≥ +0.40` (HEADLINE) → **+1.865 PASS** — ≥72σ above 0 (conservative worst-case SE=2/√N=0.026; true SE≈0.019 since switch arms sit at |X|≈0.95 with near-zero variance → ~98σ), ~55σ above the gate floor.
 - **H_HW4** `|W1 − W2| ≤ 0.25` (corroborating) → **0.032 PASS** (both causally-separable controls — pure-definite and mixture — are inert to within noise in the shared window; the two "separable" siblings agree).
 
 ## Why this matters
@@ -51,6 +51,14 @@ gate structure, not anything indefinite.* A causal-nonseparability witness must 
 separable process, and the classical mixture is the sharpest such adversary. F77 closes that loophole
 **on silicon**: the mixture arm is inert (+0.035, statistically 0) while the switch fires (+1.900), so
 `W2 = +1.865` survives the sharper adversary in the same calibration window that produced it.
+
+**Pre-empting the obvious skeptic** ("the mixture is inert only because its depth-26 circuit decohered,
+not because of the ancilla trace"): the data refutes this internally. The *switch* circuit is depth-22
+and lost only ~0.05 of its ideal ±1.0 signal (fired at +0.963/−0.937). Four extra layers of depth cannot
+turn a +0.95 signal into 0 — generic depth-decoherence at this device fidelity costs ~0.05, not ~1.0. The
+mixture's collapse to 0 is the **ancilla-CNOT + trace Z-dephasing** of the control's order-basis coherence
+(the mechanism), not generic depth. H_HW4 corroborates: pure-definite (depth-7) and mixture (depth-26) are
+both inert despite a 19-layer depth gap — inertness tracks *causal separability*, not depth.
 
 **Same-device, drift-free is the point.** Ember's F76 (C4072) showed the mixture inert on hardware too,
 but on a *different* device (`ibm_kingston`) via a *different* construction (continuous `cry(φ)` damping).
