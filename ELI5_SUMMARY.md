@@ -1,6 +1,6 @@
 # What We Found On a Real Quantum Computer (In Plain English)
 
-*A shareable, jargon-free summary of the ORIGINAL 22-experiment characterization of IBM's Heron-r2 quantum chip (`ibm_marrakesh`, May 2026) — the campaign's Arc 1, Findings 1–9. The campaign has continued well past this snapshot (nearly 100 experiments across three real chips as of July 2026, including an indefinite-causal-order demonstration at ≥72σ); for the full, current picture see the plain-English sections of [`README.md`](README.md). This page is kept as the self-contained Arc-1 one-pager.*
+*A shareable, jargon-free summary of an ongoing autonomous research campaign on IBM's Heron-generation quantum chips (May–July 2026, nearly 100 experiments across three real devices). The first section covers the original 22-experiment characterization (Arc 1, Findings 1–9); the "Since Then" section covers the arcs that followed, including the indefinite-causal-order demonstration. For the technical version with job IDs and source citations, see [`README.md`](README.md).*
 
 ---
 
@@ -11,6 +11,8 @@ An AI-agent network ran **22 experiments on a real IBM quantum computer** — a 
 **They mostly don't. But a few do, and one approach hits chemistry-grade accuracy on a real molecule.**
 
 The chip is **bounded** (there are walls today's algorithms can't pass), but those bounds are **knowable**, and inside them there's **real, usable quantum value** — if you respect the hardware instead of pretending it's perfect.
+
+The campaign then kept going: ~75 more experiments across three real chips, culminating in a demonstration that **the order of two operations can itself be put in quantum superposition** — verified on real hardware at overwhelming statistical strength (see "Since Then" below).
 
 ---
 
@@ -45,6 +47,33 @@ Quantum Amplitude Estimation (QAE) is the quantum trick that powers faster Monte
 
 ---
 
+## Since Then: The May–July Arcs (2 More Minutes)
+
+*The campaign continued past the original characterization — nearly 100 experiments total, now spanning three real chips (`ibm_marrakesh`, `ibm_kingston`, `ibm_fez`) plus hardware-realistic simulation. Simulation-tier results are labeled as such in the README; everything below marked "on real hardware" ran on a physical chip.*
+
+### 10. Location Beats Length: Run on the Quiet Qubits
+The biggest *practical* discovery of the later arcs. A quantum chip is like a neighborhood — some qubits are quiet, some are next to a construction site, and the map changes daily. Placing a circuit on the currently-quietest qubits cut errors up to **46×** (on real hardware), and controlled experiments showed **which qubits you use matters ~3× more than how many operations you run**. A reusable tool now reads the chip's live calibration data and picks the quiet qubits automatically — it worked unmodified on a second chip on the first try. One rule: never cache the pick; yesterday's quiet qubits are already stale.
+
+### 11. A Practical Recipe for Quantum Optimizers
+Quantum optimizers (like QAOA) start from a guess and iterate. A long experimental arc produced a simple, tested recipe: **reuse your best previous answer as the starting point** (it never hurts, and it rescues runs that would have just barely failed) — but only *within* the same problem; a tuned start does **not** transfer to a different problem. You can't cheaply predict which random start will be good, so **generate a few candidates and keep the best**, drawing more only when the first looks weak (that laziness saves ~30% of the compute at almost no cost). Reassuringly, hardware noise blurs *how much better* your best start is without changing *which one* is best.
+
+### 12. Noise Never Actually Helps (We Checked, Twice)
+Two seductive earlier results suggested a little noise *improved* things — sharper estimates in one case, better trap-escape in another. Under honest controls, **both evaporated**. The "sharper estimate" was a confidently-wrong answer that merely looked precise (its error bars excluded the true value 100% of the time). The "better escape" improved a bookkeeping ratio while making every actual answer worse. An audit also caught a planned "noise helps" hardware test whose pass was guaranteed in advance — flagged and cancelled before it wasted quantum-computer time. Standing verdict: on this hardware, noise is a cost, never a resource.
+
+### 13. A Real Market Probability on a Real Chip — and Why Quantum Finance Isn't Here Yet
+The network computed a genuine financial quantity — the probability of a QQQ (Nasdaq ETF) price move — **on real hardware, accurate to about 2%**. That's a milestone. But an ordinary laptop still wins on every practical axis, and the quantum speedup that would change that needs circuits **50–100× deeper** than the chip's ~1000-gate wall allows. The later arcs pinned the precise culprit: the more realistic your market model, the deeper the "data-loading" part of the circuit — and that loading depth, not the quantum algorithm itself, is what poisons the answer. Simple models stay clean; realistic ones die at the wall.
+
+### 14. Error Correction Still Doesn't Break Even (Independent Replication)
+The team rebuilt an outside group's quantum-error-correction experiment from scratch — a "toric code" storing two protected logical qubits — and confirmed its most sobering result on real hardware: **performing one round of error correction made the result worse, not better** (the same "the protection is more toxic than the noise" effect as Finding 6, now confirmed in a second, independent setting). Every extra gate measurably hurt, and the protected state fundamentally can't be made as cheap as an unprotected one.
+
+### 15. A Consciousness-Math Side Quest
+A research detour applied Φ ("integrated information" — a score from consciousness science for how much a system acts as one unified whole) to quantum circuits. Classically, ring-shaped circuits whose size is a **prime number** score wildly higher than others. Make the rings quantum, and that entire number-theory drama **vanishes** — every size becomes inseparably entangled and scores about the same, compressing the spread of scores 354-fold. The arc also modeled good scientific hygiene: two exciting preliminary claims ("the law breaks at size 15!", "odd and even rings grow at different rates!") were retracted after honest statistical rechecks.
+
+### 16. **The Headline: Cause-and-Effect Order Can Be Put in Superposition**
+In everyday life — and in all of classical statistics — two operations happen in *some* order: A-then-B, or B-then-A, or at worst a coin flip between them. The network built a **quantum switch**: a circuit where the order itself is placed in superposition, and a single measurable "witness" number that no definite order — *and no coin-flip mixture of orders* — can reproduce. On real hardware, the witness fired decisively: the result excludes every classical ordering story at **≥72 standard deviations** (particle-physics discoveries require 5), verified on the same device in a single calibration window to rule out drift, and replicated on a second chip. The "amount" of indefiniteness even turns out to be a smooth dial that follows a clean cosine law. Honest caveat: this certifies that the *order* was genuinely quantum — it is not a computational speedup. One proposed follow-up check was withdrawn by its own author after proving it was circular: a test that cannot fail proves nothing.
+
+---
+
 ## The Bigger Picture (60 seconds)
 
 There are three things people commonly believe about quantum computers that this campaign **refines**:
@@ -61,7 +90,8 @@ There are three things people commonly believe about quantum computers that this
 
 - **Every single number** in this report traces back to a specific IBM Quantum job ID (a permanent record on IBM's servers), a calibration date, and a Python script. The full inventory is in [`experiments/job-manifest.md`](experiments/job-manifest.md).
 - **Pre-registration discipline**: every experiment defined falsifiable pass/fail criteria *before* the job ran. Failed pre-regs are reported as honestly as passed ones — the campaign treats "the data refuted our hypothesis" as a first-class result, not a failure to hide.
-- **No simulators, no extrapolations**: all 22 experiments ran on physical quantum hardware (`ibm_marrakesh`, a 156-qubit Heron-r2 chip).
+- **Hardware where it counts**: all 22 original experiments ran on physical quantum hardware (`ibm_marrakesh`, a 156-qubit Heron-r2 chip). Later arcs use a mix of real chips (three devices) and hardware-realistic simulation — and every result is labeled which tier it ran on, because the campaign itself caught the simulator being *optimistic* about real chips more than once.
+- **Self-correcting**: several of the campaign's own earlier claims were later killed or retracted by the campaign itself under better controls (a "noise helps" result, a sampling illusion, an underpowered statistics claim, a circular test caught before it ran). Failed ideas are documented as thoroughly as successes.
 - **Honest scope**: these findings describe **this generation** of superconducting NISQ hardware. They are not claims about the long-term ceiling of quantum computing. The methodology generalizes; the absolute numbers may not.
 
 ---

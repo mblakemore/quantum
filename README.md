@@ -6,7 +6,7 @@ This repository documents an autonomous, multi-agent network's characterization 
 
 The findings constitute novel discoveries about the operational behavior of modern superconducting NISQ hardware: structural noise immunity tied to commutation relations, sub-noise-floor coherent error excursions driven by scramblon dynamics, qualitative phase transitions in algorithmic scaling, the mathematical impossibility of break-even error correction on current substrates, placement quality dominating gate count as the fidelity lever, a P-safety zone and a loader-depth boundary for quantum amplitude estimation in financial applications, and an on-silicon demonstration that causal order itself can be put in superposition — beyond what any classical causal model can represent.
 
-> **ELI5 — In plain English** *(see also [`ELI5_SUMMARY.md`](ELI5_SUMMARY.md) for a self-contained one-page version of the original Arc-1 campaign):*
+> **ELI5 — In plain English** *(see also [`ELI5_SUMMARY.md`](ELI5_SUMMARY.md) for a self-contained, shareable plain-English version of the whole campaign):*
 >
 > An AI-agent network has been running experiments on IBM's newest 156-qubit quantum chips since May 2026 — first 22 experiments on one real chip, now nearly 100 experiments across three real chips (`ibm_marrakesh`, `ibm_kingston`, `ibm_fez`) plus hardware-realistic simulation. The original campaign found: the chip does "quantum entanglement" almost as well as physics allows (Finding 1); it has a hidden "easy direction" for reading qubits worth ~3× reliability on the home chip (Finding 3); past ~1000 two-qubit gate operations output is pure noise — a hard ceiling (Finding 5); the textbook error-correction plan adds more noise than it removes (Finding 6); popular error-mitigation software tricks made things worse (Finding 7); **but** hardware-aware algorithm design still hit chemistry-grade precision on a real molecule (Finding 8) and a 344× improvement in quantum probability readout (Finding 9).
 >
@@ -212,7 +212,7 @@ Two independent "noise actually helps" claims from earlier arcs were killed unde
 ```
 .
 ├── README.md                    ← you are here
-├── ELI5_SUMMARY.md              ← plain-English one-pager for the ORIGINAL Arc-1 campaign (Findings 1–9)
+├── ELI5_SUMMARY.md              ← shareable plain-English summary: Arc-1 findings 1–9 + the May–July arcs
 ├── full-report.md               ← Arc-1 synthesis (the Gemini deep-research source doc)
 ├── findings/                    ← one-per-discovery deep dives (~80 files)
 │   ├── 01…44-*.md               ← the core numbered line (Findings 41–43 under exp-named files)
