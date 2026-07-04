@@ -1,0 +1,42 @@
+{
+  "analysis": "exp98_calibration_forensics",
+  "question": "Did IBM's published calibration data predict the good vs bad window?",
+  "cycle": 6378,
+  "author": "elder",
+  "method": "backend.properties(datetime=...) historical snapshots at each job's execution time, qubits [53,54,55], ibm_marrakesh",
+  "windows": {
+    "bad_exp95": {
+      "executed_utc": "2026-07-03T14:48:08Z",
+      "calibration_last_update": "2026-07-03T13:29:08Z",
+      "minutes_after_calibration": 79,
+      "cz_53_54": 0.00185, "cz_54_55": 0.00205,
+      "readout_err": {"q53": 0.0056, "q54": 0.0020, "q55": 0.0078},
+      "p10_q55": 0.0127,
+      "t1_us": {"q53": 270.2, "q54": 249.6, "q55": 187.7},
+      "t2_us": {"q53": 218.6, "q54": 321.0, "q55": 76.3}
+    },
+    "good_exp98": {
+      "executed_utc": "2026-07-04T01:59:06Z",
+      "calibration_last_update": "2026-07-04T01:21:07Z",
+      "minutes_after_calibration": 38,
+      "cz_53_54": 0.00134, "cz_54_55": 0.00203,
+      "readout_err": {"q53": 0.0044, "q54": 0.0044, "q55": 0.0051},
+      "p10_q55": 0.0095,
+      "t1_us": {"q53": 270.2, "q54": 249.6, "q55": 187.7},
+      "t2_us": {"q53": 218.6, "q54": 321.0, "q55": 76.3}
+    }
+  },
+  "prediction_vs_observation": {
+    "k5_contrast_retention_predicted_from_published_cz": {"bad": 0.785, "good": 0.811, "note": "exp(-62*(e1+e2)) depolarizing model, 124 CZ split across two pairs"},
+    "k5_contrast_retention_observed": {"bad": 0.33, "good": 0.99},
+    "predicted_window_ratio": 1.03,
+    "observed_window_ratio": 3.0
+  },
+  "verdict": "NO. Published calibration is essentially flat across the two windows (predicts a 3% k5-contrast difference; observed 3x, i.e. ~100x larger effect than predicted). Both windows are ALSO mispredicted in absolute terms in OPPOSITE directions: bad window much worse than its published numbers imply, good window much better (observed 0.99 vs predicted 0.81). The k0 systematic (-0.045) in the good window likewise exceeds published readout error (~0.005-0.01) by ~5x. Whatever drifted between windows is not captured by published RB gate errors, readout errors, or T1/T2.",
+  "implications": [
+    "The 'free window picker from published calibration' shortcut is DEAD as-is: published numbers cannot qualify or disqualify a window (mirrors the FakeMarrakesh 400x miss, which is built from the same published data).",
+    "Same-session measured sentinel remains the ONLY validated window gate (F81 Rec#5 rule).",
+    "Weak residual hypothesis, untested: time-since-calibration (38min vs 79min) or unpublished coherent-error alignment; would need the window-distribution accumulation probes to test.",
+    "T1/T2 identical across snapshots = those fields were not re-measured between calibrations; they carry no window information at this cadence."
+  ]
+}

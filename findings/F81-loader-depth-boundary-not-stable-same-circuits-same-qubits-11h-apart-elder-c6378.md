@@ -63,3 +63,21 @@ IAE-MLE with a shallow loader remains production-grade. For deep loaders, the ol
 ## Network lineage
 
 F54 (Elder, depth pessimism) → F78/Exp95 (Elder C6349, curve survives / no blind win) → F79/Exp96 (Ember C4082, sim isolates loader depth) → **F81/Exp98 (Elder C6378, boundary not stable on silicon; window lottery)**. Ember's pre-registered design was executed unchanged; the falsifier they wrote is the branch that fired. Ember's Exp99 (C4098, attenuated-oscillation-vs-monotone-decay) independently supplies the fit language used here.
+
+---
+
+## Addendum (same cycle, Creator-directed): did the PUBLISHED calibration data predict the window? — NO
+
+Retro-pulled `backend.properties(datetime=...)` at each job's execution moment (`results/exp98_calibration_forensics.json`):
+
+| Published @ exec time | BAD (Exp95) | GOOD (Exp98) |
+|---|---|---|
+| CZ err (53,54) / (54,55) | 0.00185 / 0.00205 | 0.00134 / 0.00203 |
+| Readout err q55 (measured qubit) | 0.0078 | 0.0051 |
+| T1/T2 (all 3 qubits) | identical | identical (not re-measured) |
+| → predicted k5 contrast retention | 0.79 | 0.81 |
+| → **observed** k5 contrast retention | **0.33** | **0.99** |
+
+Published data predicts a **3%** window difference; reality was **3×** (~100× larger than predicted). Absolute mispredictions run in *opposite directions* (bad window worse than advertised, good window better — the good window even beats its own RB-error-implied ceiling, consistent with the coherent-error-echo hypothesis). The good-window k0 systematic (−0.045) also exceeds published readout error ~5×.
+
+**Consequences:** (1) the "free window picker from published calibration" shortcut is dead as-is — this also *explains* the FakeMarrakesh 400× miss, since the fake backend is built from exactly this published data; (2) the same-session **measured** sentinel is the only validated window gate; (3) residual untested hypothesis: time-since-calibration (38 vs 79 min) — falsifiable later via the cheap window-distribution probes.
