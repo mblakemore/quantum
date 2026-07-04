@@ -6,6 +6,8 @@ This repository documents an autonomous, multi-agent network's characterization 
 
 The findings constitute novel discoveries about the operational behavior of modern superconducting NISQ hardware: structural noise immunity tied to commutation relations, sub-noise-floor coherent error excursions driven by scramblon dynamics, qualitative phase transitions in algorithmic scaling, the mathematical impossibility of break-even error correction on current substrates, placement quality dominating gate count as the fidelity lever, a P-safety zone and a loader-depth boundary for quantum amplitude estimation in financial applications, and an on-silicon demonstration that causal order itself can be put in superposition — beyond what any classical causal model can represent.
 
+> 🔀 **[Interactive demo — the Quantum Switch on real silicon →](https://mblakemore.github.io/quantum/demo/)** &nbsp; Drag to drain order-coherence and watch the ≥72σ causal witness trace our measured cosine law. Runs in any browser; all numbers are real F73–F77 hardware data. ([source](demo/index.html))
+
 > **ELI5 — In plain English** *(see also [`ELI5_SUMMARY.md`](ELI5_SUMMARY.md) for a self-contained, shareable plain-English version of the whole campaign):*
 >
 > An AI-agent network has been running experiments on IBM's newest 156-qubit quantum chips since May 2026 — first 22 experiments on one real chip, now nearly 100 experiments across three real chips (`ibm_marrakesh`, `ibm_kingston`, `ibm_fez`) plus hardware-realistic simulation. The original campaign found: the chip does "quantum entanglement" almost as well as physics allows (Finding 1); it has a hidden "easy direction" for reading qubits worth ~3× reliability on the home chip (Finding 3); past ~1000 two-qubit gate operations output is pure noise — a hard ceiling (Finding 5); the textbook error-correction plan adds more noise than it removes (Finding 6); popular error-mitigation software tricks made things worse (Finding 7); **but** hardware-aware algorithm design still hit chemistry-grade precision on a real molecule (Finding 8) and a 344× improvement in quantum probability readout (Finding 9).
@@ -187,6 +189,14 @@ Two independent "noise actually helps" claims from earlier arcs were killed unde
 
 **Plain English — the crown jewel of the campaign so far.** In everyday life (and in all of classical statistics, including Pearl's causal-inference framework), two operations happen in *some* order: A-then-B or B-then-A — at worst you flip a coin between them. A **quantum switch** is a circuit where the order itself is placed in superposition. A **causal witness** is a single measurable number that no definite order — *and no random mixture of definite orders* — can reproduce.
 
+> ### 🔀 [**Try the interactive demo →**](https://mblakemore.github.io/quantum/demo/)
+> A self-contained, play-first web demo of this arc, grounded 100% in the F73–F77 hardware data
+> below. Drag a slider to drain the control's order-coherence and watch the witness trace the
+> **measured** `DISC(φ) = 2·cos(φ/2)` law (Pearson 0.9992 on `ibm_kingston`); flip commute vs
+> anticommute and watch the real `⟨X_c⟩` swing +0.865 ↔ −0.905 on `ibm_marrakesh`; see the ≥72σ
+> three-arm loophole closure. Source: [`demo/index.html`](demo/index.html) · plan + design notes:
+> [`demo/quantum-switch-demo-plan.md`](demo/quantum-switch-demo-plan.md).
+
 | Finding | Result | Tier |
 |---|---|---|
 | F73 | The witness survives the strongest classical adversary — a 50/50 coin-flip mixture of the two orders: W₂ = +2.00 noiseless / +1.93 under the noise model, with the mixture arm exactly inert (DISC=0.000) | sim |
@@ -221,6 +231,9 @@ Two independent "noise actually helps" claims from earlier arcs were killed unde
 ```
 .
 ├── README.md                    ← you are here
+├── demo/                         ← 🔀 interactive Quantum-Switch demo (GitHub Pages → /demo/)
+│   ├── index.html               ← self-contained, live at mblakemore.github.io/quantum/demo/
+│   └── quantum-switch-demo-plan.md
 ├── ELI5_SUMMARY.md              ← shareable plain-English summary: Arc-1 findings 1–9 + the May–July arcs
 ├── full-report.md               ← Arc-1 synthesis (the Gemini deep-research source doc)
 ├── findings/                    ← one-per-discovery deep dives (~80 files)
