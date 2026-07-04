@@ -1,0 +1,40 @@
+======================================================================
+Exp99 — Grover attenuated-OSCILLATION vs monotone-DECAY
+======================================================================
+
+--- N=4  M=1 (theta=30deg, clean textbook) ---
+  theta=30.0deg  M/N=0.250  optimal R~1.00
+   k :   ideal | clean(Aer) | noisy(Aer)
+   0:  0.250 |     0.249 |     0.246  <-- ideal DIPS below 0.5
+   1:  1.000 |     1.000 |     0.986
+   2:  0.250 |     0.246 |     0.253  <-- ideal DIPS below 0.5
+   3:  0.250 |     0.250 |     0.252  <-- ideal DIPS below 0.5
+   4:  1.000 |     1.000 |     0.987
+   5:  0.250 |     0.251 |     0.254  <-- ideal DIPS below 0.5
+   6:  0.250 |     0.247 |     0.236  <-- ideal DIPS below 0.5
+  noiseless max|dev from ideal| = 0.004   sub-0.5 dips reproduced: True
+  FIT RSS  monotone-decay=0.7619   attenuated-oscillation=0.0005   -> OSCILLATION wins
+
+--- N=16 M=7 (theta=41.5deg, near Exp95 half-fill) ---
+  theta=41.4deg  M/N=0.438  optimal R~0.59
+   k :   ideal | clean(Aer) | noisy(Aer)
+   0:  0.438 |     0.438 |     0.442  <-- ideal DIPS below 0.5
+   1:  0.684 |     0.687 |     0.548
+   2:  0.207 |     0.203 |     0.385  <-- ideal DIPS below 0.5
+   3:  0.885 |     0.881 |     0.494
+   4:  0.048 |     0.046 |     0.421  <-- ideal DIPS below 0.5
+   5:  0.991 |     0.990 |     0.462
+   6:  0.001 |     0.001 |     0.431  <-- ideal DIPS below 0.5
+  noiseless max|dev from ideal| = 0.004   sub-0.5 dips reproduced: True
+  FIT RSS  monotone-decay=0.0161   attenuated-oscillation=0.0150   -> OSCILLATION wins
+
+======================================================================
+SUMMARY
+======================================================================
+  OSCILLATION | noiseless-dev 0.004 dips True | RSS decay 0.7619 osc 0.0005
+  OSCILLATION | noiseless-dev 0.004 dips True | RSS decay 0.0161 osc 0.0150
+
+  Attenuated-oscillation model wins 2/2 regimes.
+  => Non-monotonic (sub-0.5 dips at even k) is the IDEAL Grover rotation,
+     NOT noise-induced collapse. Fitting monotone decay MISREADS the signal.
+     (This is the exact lossy-recall error C4096 corrected on my own Exp95.)
