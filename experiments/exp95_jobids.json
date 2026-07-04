@@ -1,0 +1,62 @@
+{
+  "experiment": "exp95",
+  "backend": "ibm_marrakesh",
+  "shots": 4096,
+  "job_id": "d93s1fkql68s73c8oong",
+  "circuits_k": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    0
+  ],
+  "pub_labels": [
+    "k0",
+    "k1",
+    "k2",
+    "k3",
+    "k4",
+    "k5",
+    "k0_retest"
+  ],
+  "depths": [
+    {
+      "k": 0,
+      "depth": 32,
+      "n2q": 7
+    },
+    {
+      "k": 1,
+      "depth": 112,
+      "n2q": 28
+    },
+    {
+      "k": 2,
+      "depth": 201,
+      "n2q": 52
+    },
+    {
+      "k": 3,
+      "depth": 283,
+      "n2q": 76
+    },
+    {
+      "k": 4,
+      "depth": 369,
+      "n2q": 100
+    },
+    {
+      "k": 5,
+      "depth": 451,
+      "n2q": 124
+    },
+    {
+      "k": 0,
+      "depth": 32,
+      "n2q": 7
+    }
+  ],
+  "a_discrete": 0.47895584511108835
+}

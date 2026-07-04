@@ -1,0 +1,136 @@
+{
+  "experiment": "exp98_loader_depth_hardware",
+  "phase": "qpu_finalize",
+  "cycle": 6357,
+  "author": "elder",
+  "job_id": "d93vso6vtlqs73ftmqhg",
+  "backend": "ibm_marrakesh",
+  "shots": 4096,
+  "per_pub": [
+    {
+      "i": 0,
+      "loader": "QQQ",
+      "k": 0,
+      "p": 0.436279296875
+    },
+    {
+      "i": 1,
+      "loader": "QQQ",
+      "k": 1,
+      "p": 0.549072265625
+    },
+    {
+      "i": 2,
+      "loader": "QQQ",
+      "k": 2,
+      "p": 0.39990234375
+    },
+    {
+      "i": 3,
+      "loader": "QQQ",
+      "k": 3,
+      "p": 0.630859375
+    },
+    {
+      "i": 4,
+      "loader": "QQQ",
+      "k": 4,
+      "p": 0.296875
+    },
+    {
+      "i": 5,
+      "loader": "QQQ",
+      "k": 5,
+      "p": 0.711669921875
+    },
+    {
+      "i": 6,
+      "loader": "IWM",
+      "k": 0,
+      "p": 0.560791015625
+    },
+    {
+      "i": 7,
+      "loader": "IWM",
+      "k": 1,
+      "p": 0.33642578125
+    },
+    {
+      "i": 8,
+      "loader": "IWM",
+      "k": 2,
+      "p": 0.7822265625
+    },
+    {
+      "i": 9,
+      "loader": "IWM",
+      "k": 3,
+      "p": 0.1318359375
+    },
+    {
+      "i": 10,
+      "loader": "IWM",
+      "k": 4,
+      "p": 0.9384765625
+    },
+    {
+      "i": 11,
+      "loader": "IWM",
+      "k": 5,
+      "p": 0.0146484375
+    },
+    {
+      "i": 12,
+      "loader": "QQQ",
+      "k": 0,
+      "p": 0.43115234375
+    },
+    {
+      "i": 13,
+      "loader": "IWM",
+      "k": 0,
+      "p": 0.5576171875
+    }
+  ],
+  "grade": {
+    "QQQ": {
+      "a_true": 0.47895584511108835,
+      "mle": 0.4792856108973101,
+      "mle_err": 0.00032976578622173625,
+      "plain_read_err": 0.04267654823608835,
+      "k0_retest_spread": 0.005126953125,
+      "n2q_at_k5": 124
+    },
+    "IWM": {
+      "a_true": 0.56,
+      "mle": 0.5595491920907383,
+      "mle_err": 0.0004508079092617745,
+      "plain_read_err": 0.0007910156249999467,
+      "k0_retest_spread": 0.003173828125,
+      "n2q_at_k5": 0
+    }
+  },
+  "HW1_depth_boundary": {
+    "errQ": 0.00032976578622173625,
+    "errI": 0.0004508079092617745,
+    "gap": -0.00012104212304003825,
+    "threshold": 0.03,
+    "pass": false
+  },
+  "HW2_shallow_clean": {
+    "errI": 0.0004508079092617745,
+    "abs_thresh": 0.05,
+    "plainI": 0.0007910156249999467,
+    "mult": 3.0,
+    "pass": true
+  },
+  "HW3_2q_mechanism": {
+    "n2qQ": 124,
+    "n2qI": 0,
+    "mult": 3.0,
+    "pass": true
+  },
+  "pred_c6357_001_confirmed": false,
+  "f78_hw_anchor": 0.154,
+  "fakemarrakesh_anchor": 0.111
+}

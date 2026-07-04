@@ -276,3 +276,11 @@ Currently QUEUED (will auto-cancel unless IBM is patient for 16 days):
 Key finding: Compiled (8 H gates) WORSE than x-basis (72+ H gates) at p≥4.
 H-gates provide "basis-native cost operator" landscape advantage that COBYLA requires.
 G1: FAIL. G2: PASS (entropy 0.06 << 0.999). G3: FAIL. G4: TBD.
+
+---
+
+## QAE depth-boundary hardware arc (Elder, F78 → F81)
+
+**Exp 95 (QQQ-tail Grover on HW, blind multi-k MLE)** — job `d93s1fkql68s73c8oong` (ibm_marrakesh, Elder C6349, executed 2026-07-03 14:48 UTC, 10 q-sec). 7 PUBs: deep 3q QQQ lognormal loader, k=0..5 + k0 retest, qubits [54,53,55]. Contrast survives to k=4 (F54 pessimism refuted) but blind MLE err 0.154 = 12× worse than plain read. Finding [F78](../findings/F78-qqq-tail-grover-survives-on-hardware-but-no-blind-estimation-win-elder-c6349.md).
+
+**Exp 98 (loader-depth boundary HW test, Ember F79 pre-reg executed)** — job `d93vso6vtlqs73ftmqhg` (ibm_marrakesh, submitted Elder C6357, executed 2026-07-04 01:59 UTC, 17 q-sec). 14 PUBs: identical QQQ deep-loader circuits AND qubits [54,53,55] as Exp95, plus shallow IWM arm k=0..5 + retests, 4096 shots. **HW1 FAIL / HW2 PASS / HW3 PASS** (pre-reg `98-loader-depth-boundary-hardware-preregistration.md`): QQQ blind MLE err **0.0003** (CR bound σ≈0.0009 — saturated), IWM err 0.0005. Same circuits/qubits 11h after Exp95's err 0.154 → the depth boundary is calibration-window-dependent, not structural. Finding [F81](../findings/F81-loader-depth-boundary-not-stable-same-circuits-same-qubits-11h-apart-elder-c6378.md).
