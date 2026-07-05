@@ -66,3 +66,22 @@ with end-of-circuit permutation absorbed). Probes are ~5% deeper than anchors at
 Ruling (pinned now): probes stay pinned-layout — probe↔probe identity across windows is the
 primary controlled variable for H-TSC. Anchor rows are retained but are *slightly milder*
 circuits; the mandatory with/without-anchors sensitivity line covers this. R5 thresholds unchanged.
+
+## Observation O1 (C6393, 2026-07-05 — after probes #1–#4 finalized; NO gate changes)
+
+All four probes (submitted 17:33 / 23:16 / 01:45 / 05:56 UTC — 12.4h of submit spread) executed
+in one queue drain at ~09:18 UTC 7/5, all at **tsc ≈ 45.5–45.7 min** post the same calibration.
+
+1. **Queue batching collapses submit-spread**: varied submit times do NOT yield varied tsc.
+   tsc spread across all 6 rows (incl. anchors 38/79 min) = 41 min, far below the 180-min gate.
+   The path to spread is multiple *drain events* on different days, not intra-day submit variety.
+   Gates unchanged; this may slow N-accrual toward a gradeable set.
+2. **Accidental replicate set — minutes-scale drift bound**: at fixed tsc (≈45.6 min), fixed
+   pinned layout, executions minutes apart: R5 = 0.609 / 0.378 / 0.473 / 0.265 (spread 0.344).
+   Shot-noise σ on R5 ≈ 0.035 (4096 shots, R5 = (p−0.5)/(ideal−0.5), ideal−0.5 = 0.2234) →
+   observed spread ≈ 10σ. This is REAL device fluctuation with calibration age held constant,
+   and upper-bounds tsc's explanatory power: within-window variance already spans the
+   MID/BAD class boundary. Consistent with F81 (calibration-window lottery), sharpened from
+   11h → **minutes** timescale.
+3. H-BASE running tally: 6 rows, 1 GOOD (F81 anchor 0.99), 1 MID, 4 BAD.
+4. Ember pred_c4099 side-note: ρ(k0_err, R5) ≈ −0.4 at n=4 probe rows (not gradeable, noted only).
