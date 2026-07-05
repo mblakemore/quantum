@@ -1,0 +1,61 @@
+[
+  {
+    "job_id": "d94t6ncql68s73c9ut5g",
+    "submitted_utc": "2026-07-05T03:45:34.125524+00:00",
+    "backend": "ibm_marrakesh",
+    "shots": 4096,
+    "pubs": [
+      {
+        "label": "std_t3",
+        "t": 3,
+        "y": 5
+      },
+      {
+        "label": "ipe_t3",
+        "t": 3,
+        "y": 5
+      },
+      {
+        "label": "std_t4",
+        "t": 4,
+        "y": 11
+      },
+      {
+        "label": "ipe_t4",
+        "t": 4,
+        "y": 11
+      },
+      {
+        "label": "std_t5",
+        "t": 5,
+        "y": 21
+      },
+      {
+        "label": "ipe_t5",
+        "t": 5,
+        "y": 21
+      }
+    ],
+    "accounting": {
+      "t3": {
+        "twoq_full": 21,
+        "twoq_no_readout": 6,
+        "twoq_ipe": 6,
+        "readout_share": 0.7143
+      },
+      "t4": {
+        "twoq_full": 41,
+        "twoq_no_readout": 14,
+        "twoq_ipe": 8,
+        "readout_share": 0.6585
+      },
+      "t5": {
+        "twoq_full": 63,
+        "twoq_no_readout": 16,
+        "twoq_ipe": 10,
+        "readout_share": 0.746
+      }
+    },
+    "prereg": "pred_c4106_001 (t=4 gap >= +5pp)"
+  }
+]
