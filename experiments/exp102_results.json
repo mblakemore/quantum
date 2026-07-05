@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "cycle": 4105,
+    "shots": 4000,
+    "basis": [
+      "cz",
+      "rz",
+      "sx",
+      "x",
+      "id"
+    ],
+    "p1": 0.0002,
+    "ro": 0.01,
+    "p2_sweep": [
+      0.0,
+      0.002,
+      0.005,
+      0.01,
+      0.02,
+      0.03
+    ],
+    "seeds": [
+      11,
+      22,
+      33,
+      44,
+      55
+    ],
+    "prereg": "pred_c4105_001 (t=4, p2=0.01: readout share >=50% AND IPE gap >=8pp)"
+  },
+  "toy": {
+    "t3": {
+      "cz_full_median": 27,
+      "cz_no_readout_median": 9,
+      "cz_ipe_median": 6,
+      "cz_full_all": [
+        27,
+        27,
+        27,
+        27,
+        27
+      ],
+      "cz_no_readout_all": [
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "readout_share": 0.6667,
+      "sweep": [
+        {
+          "p2": 0.0,
+          "std_success": 0.9663,
+          "ipe_success": 0.9716,
+          "gap_pp": 0.53
+        },
+        {
+          "p2": 0.002,
+          "std_success": 0.9295,
+          "ipe_success": 0.9633,
+          "gap_pp": 3.38
+        },
+        {
+          "p2": 0.005,
+          "std_success": 0.8807,
+          "ipe_success": 0.9553,
+          "gap_pp": 7.45
+        },
+        {
+          "p2": 0.01,
+          "std_success": 0.8062,
+          "ipe_success": 0.9384,
+          "gap_pp": 13.23
+        },
+        {
+          "p2": 0.02,
+          "std_success": 0.6774,
+          "ipe_success": 0.9062,
+          "gap_pp": 22.88
+        },
+        {
+          "p2": 0.03,
+          "std_success": 0.5678,
+          "ipe_success": 0.875,
+          "gap_pp": 30.72
+        }
+      ],
+      "phis_tested": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "t4": {
+      "cz_full_median": 47,
+      "cz_no_readout_median": 14,
+      "cz_ipe_median": 8,
+      "cz_full_all": [
+        47,
+        47,
+        47,
+        47,
+        47
+      ],
+      "cz_no_readout_all": [
+        14,
+        14,
+        14,
+        14,
+        14
+      ],
+      "readout_share": 0.7021,
+      "sweep": [
+        {
+          "p2": 0.0,
+          "std_success": 0.9518,
+          "ipe_success": 0.9596,
+          "gap_pp": 0.78
+        },
+        {
+          "p2": 0.002,
+          "std_success": 0.8898,
+          "ipe_success": 0.9473,
+          "gap_pp": 5.75
+        },
+        {
+          "p2": 0.005,
+          "std_success": 0.8075,
+          "ipe_success": 0.937,
+          "gap_pp": 12.95
+        },
+        {
+          "p2": 0.01,
+          "std_success": 0.6851,
+          "ipe_success": 0.914,
+          "gap_pp": 22.89
+        },
+        {
+          "p2": 0.02,
+          "std_success": 0.5066,
+          "ipe_success": 0.8703,
+          "gap_pp": 36.37
+        },
+        {
+          "p2": 0.03,
+          "std_success": 0.381,
+          "ipe_success": 0.8312,
+          "gap_pp": 45.02
+        }
+      ],
+      "phis_tested": [
+        1,
+        4,
+        7,
+        10,
+        13
+      ]
+    },
+    "t5": {
+      "cz_full_median": 84,
+      "cz_no_readout_median": 19,
+      "cz_ipe_median": 10,
+      "cz_full_all": [
+        84,
+        84,
+        75,
+        75,
+        84
+      ],
+      "cz_no_readout_all": [
+        19,
+        19,
+        19,
+        19,
+        19
+      ],
+      "readout_share": 0.7738,
+      "sweep": [
+        {
+          "p2": 0.0,
+          "std_success": 0.9338,
+          "ipe_success": 0.9509,
+          "gap_pp": 1.71
+        },
+        {
+          "p2": 0.002,
+          "std_success": 0.827,
+          "ipe_success": 0.9318,
+          "gap_pp": 10.48
+        },
+        {
+          "p2": 0.005,
+          "std_success": 0.6906,
+          "ipe_success": 0.9158,
+          "gap_pp": 22.52
+        },
+        {
+          "p2": 0.01,
+          "std_success": 0.5167,
+          "ipe_success": 0.8876,
+          "gap_pp": 37.09
+        },
+        {
+          "p2": 0.02,
+          "std_success": 0.2988,
+          "ipe_success": 0.8286,
+          "gap_pp": 52.98
+        },
+        {
+          "p2": 0.03,
+          "std_success": 0.1822,
+          "ipe_success": 0.7766,
+          "gap_pp": 59.44
+        }
+      ],
+      "phis_tested": [
+        1,
+        7,
+        13,
+        19,
+        25
+      ]
+    }
+  },
+  "counting": {
+    "cz_full_median": 3480,
+    "cz_no_readout_median": 3438,
+    "readout_share": 0.0121,
+    "cz_full_all": [
+      3480,
+      3474,
+      3492
+    ],
+    "cz_no_readout_all": [
+      3435,
+      3438,
+      3438
+    ]
+  }
+}
