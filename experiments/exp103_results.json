@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "cycle_graded": "C4106+",
+    "job_id": "d94t6ncql68s73c9ut5g",
+    "backend": "ibm_marrakesh",
+    "shots": 4096,
+    "accounting": {
+      "t3": {
+        "twoq_full": 21,
+        "twoq_no_readout": 6,
+        "twoq_ipe": 6,
+        "readout_share": 0.7143
+      },
+      "t4": {
+        "twoq_full": 41,
+        "twoq_no_readout": 14,
+        "twoq_ipe": 8,
+        "readout_share": 0.6585
+      },
+      "t5": {
+        "twoq_full": 63,
+        "twoq_no_readout": 16,
+        "twoq_ipe": 10,
+        "readout_share": 0.746
+      }
+    },
+    "prereg": "pred_c4106_001 (t=4 gap >= +5pp)",
+    "verdict_t4": "BRANCH A (gap >= +5pp: survives feedforward)"
+  },
+  "per_pub": {
+    "std_t3": {
+      "y": 5,
+      "t": 3,
+      "success": 0.7068
+    },
+    "ipe_t3": {
+      "y": 5,
+      "t": 3,
+      "success": 0.9011
+    },
+    "std_t4": {
+      "y": 11,
+      "t": 4,
+      "success": 0.595
+    },
+    "ipe_t4": {
+      "y": 11,
+      "t": 4,
+      "success": 0.8474
+    },
+    "std_t5": {
+      "y": 21,
+      "t": 5,
+      "success": 0.5007
+    },
+    "ipe_t5": {
+      "y": 21,
+      "t": 5,
+      "success": 0.8193
+    }
+  },
+  "gaps": {
+    "t3": 19.43,
+    "t4": 25.24,
+    "t5": 31.86
+  }
+}
