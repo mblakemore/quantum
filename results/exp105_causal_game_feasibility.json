@@ -1,0 +1,927 @@
+{
+ "experiment": "exp105_causal_game_feasibility",
+ "cycle": 4116,
+ "author": "ember",
+ "shots": 20000,
+ "seed": 42,
+ "gate_a_transpile_audit": {
+  "pass": true,
+  "max_twoq": 4,
+  "twoq_histogram": {
+   "4": 33,
+   "2": 18,
+   "0": 1
+  },
+  "rows": [
+   {
+    "pair": "((X+Y)/r2,(X+Y)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 22,
+    "ok": true
+   },
+   {
+    "pair": "((X+Y)/r2,(X-Y)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 24,
+    "ok": true
+   },
+   {
+    "pair": "((X+Y)/r2,1)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 18,
+    "ok": true
+   },
+   {
+    "pair": "((X+Y)/r2,Z)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 21,
+    "ok": true
+   },
+   {
+    "pair": "((X+Z)/r2,(X+Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 26,
+    "ok": true
+   },
+   {
+    "pair": "((X+Z)/r2,(X-Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 30,
+    "ok": true
+   },
+   {
+    "pair": "((X+Z)/r2,1)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 22,
+    "ok": true
+   },
+   {
+    "pair": "((X+Z)/r2,Y)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 26,
+    "ok": true
+   },
+   {
+    "pair": "((X-Y)/r2,(X+Y)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 24,
+    "ok": true
+   },
+   {
+    "pair": "((X-Y)/r2,(X-Y)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 22,
+    "ok": true
+   },
+   {
+    "pair": "((X-Y)/r2,1)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 18,
+    "ok": true
+   },
+   {
+    "pair": "((X-Y)/r2,Z)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 21,
+    "ok": true
+   },
+   {
+    "pair": "((X-Z)/r2,(X+Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 30,
+    "ok": true
+   },
+   {
+    "pair": "((X-Z)/r2,(X-Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 26,
+    "ok": true
+   },
+   {
+    "pair": "((X-Z)/r2,1)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 22,
+    "ok": true
+   },
+   {
+    "pair": "((X-Z)/r2,Y)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 26,
+    "ok": true
+   },
+   {
+    "pair": "((Y+Z)/r2,(Y+Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 26,
+    "ok": true
+   },
+   {
+    "pair": "((Y+Z)/r2,(Y-Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 30,
+    "ok": true
+   },
+   {
+    "pair": "((Y+Z)/r2,1)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 22,
+    "ok": true
+   },
+   {
+    "pair": "((Y+Z)/r2,X)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 27,
+    "ok": true
+   },
+   {
+    "pair": "((Y-Z)/r2,(Y+Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 30,
+    "ok": true
+   },
+   {
+    "pair": "((Y-Z)/r2,(Y-Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 26,
+    "ok": true
+   },
+   {
+    "pair": "((Y-Z)/r2,1)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 22,
+    "ok": true
+   },
+   {
+    "pair": "((Y-Z)/r2,X)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 27,
+    "ok": true
+   },
+   {
+    "pair": "(1,(X+Y)/r2)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 18,
+    "ok": true
+   },
+   {
+    "pair": "(1,(X+Z)/r2)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 22,
+    "ok": true
+   },
+   {
+    "pair": "(1,(X-Y)/r2)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 18,
+    "ok": true
+   },
+   {
+    "pair": "(1,(X-Z)/r2)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 22,
+    "ok": true
+   },
+   {
+    "pair": "(1,(Y+Z)/r2)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 22,
+    "ok": true
+   },
+   {
+    "pair": "(1,(Y-Z)/r2)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 22,
+    "ok": true
+   },
+   {
+    "pair": "(1,1)",
+    "twoq": 0,
+    "expected_max": 0,
+    "depth": 7,
+    "ok": true
+   },
+   {
+    "pair": "(1,X)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 18,
+    "ok": true
+   },
+   {
+    "pair": "(1,Y)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 17,
+    "ok": true
+   },
+   {
+    "pair": "(1,Z)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 11,
+    "ok": true
+   },
+   {
+    "pair": "(X,(Y+Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 27,
+    "ok": true
+   },
+   {
+    "pair": "(X,(Y-Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 27,
+    "ok": true
+   },
+   {
+    "pair": "(X,1)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 18,
+    "ok": true
+   },
+   {
+    "pair": "(X,X)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 22,
+    "ok": true
+   },
+   {
+    "pair": "(X,Y)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 23,
+    "ok": true
+   },
+   {
+    "pair": "(X,Z)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 21,
+    "ok": true
+   },
+   {
+    "pair": "(Y,(X+Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 27,
+    "ok": true
+   },
+   {
+    "pair": "(Y,(X-Z)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 27,
+    "ok": true
+   },
+   {
+    "pair": "(Y,1)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 17,
+    "ok": true
+   },
+   {
+    "pair": "(Y,X)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 24,
+    "ok": true
+   },
+   {
+    "pair": "(Y,Y)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 21,
+    "ok": true
+   },
+   {
+    "pair": "(Y,Z)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 20,
+    "ok": true
+   },
+   {
+    "pair": "(Z,(X+Y)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 23,
+    "ok": true
+   },
+   {
+    "pair": "(Z,(X-Y)/r2)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 23,
+    "ok": true
+   },
+   {
+    "pair": "(Z,1)",
+    "twoq": 2,
+    "expected_max": 2,
+    "depth": 10,
+    "ok": true
+   },
+   {
+    "pair": "(Z,X)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 23,
+    "ok": true
+   },
+   {
+    "pair": "(Z,Y)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 21,
+    "ok": true
+   },
+   {
+    "pair": "(Z,Z)",
+    "twoq": 4,
+    "expected_max": 4,
+    "depth": 14,
+    "ok": true
+   }
+  ]
+ },
+ "gate_b_sim_feasibility": {
+  "pass": true,
+  "sim_gate": 0.87,
+  "success_qstar": 0.9828535601,
+  "se_qstar": 0.00014010394910732714,
+  "success_qstar_ideal": 1.000008,
+  "success_uniform52": 0.9831326923076924,
+  "se_uniform52": 0.000126267136996746,
+  "success_class_balanced": 0.9831119047619047,
+  "se_class_balanced": 0.00012679640861097983,
+  "definite_null_arm_qstar": 0.6139140300000003,
+  "margins_over_bounds": {
+   "qstar": 0.11382582022600751,
+   "uniform": 0.07924473649917863,
+   "balanced": 0.07332713956978754
+  },
+  "bounds": {
+   "qstar": 0.8690277398739925,
+   "uniform52": 0.9038879558085138,
+   "class_balanced": 0.9097847651921172
+  }
+ },
+ "per_pair": {
+  "((X+Y)/r2,(X+Y)/r2)": {
+   "A": "(X+Y)/r2",
+   "B": "(X+Y)/r2",
+   "q": 0.039117,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9807,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9807
+  },
+  "((X+Y)/r2,(X-Y)/r2)": {
+   "A": "(X+Y)/r2",
+   "B": "(X-Y)/r2",
+   "q": 0.024795,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01765,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9823500000000001
+  },
+  "((X+Y)/r2,1)": {
+   "A": "(X+Y)/r2",
+   "B": "1",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9839,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9839
+  },
+  "((X+Y)/r2,Z)": {
+   "A": "(X+Y)/r2",
+   "B": "Z",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01725,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98275
+  },
+  "((X+Z)/r2,(X+Z)/r2)": {
+   "A": "(X+Z)/r2",
+   "B": "(X+Z)/r2",
+   "q": 0.039117,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9824,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9824
+  },
+  "((X+Z)/r2,(X-Z)/r2)": {
+   "A": "(X+Z)/r2",
+   "B": "(X-Z)/r2",
+   "q": 0.024795,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01755,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98245
+  },
+  "((X+Z)/r2,1)": {
+   "A": "(X+Z)/r2",
+   "B": "1",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.98485,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98485
+  },
+  "((X+Z)/r2,Y)": {
+   "A": "(X+Z)/r2",
+   "B": "Y",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0174,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9826
+  },
+  "((X-Y)/r2,(X+Y)/r2)": {
+   "A": "(X-Y)/r2",
+   "B": "(X+Y)/r2",
+   "q": 0.024795,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01765,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9823500000000001
+  },
+  "((X-Y)/r2,(X-Y)/r2)": {
+   "A": "(X-Y)/r2",
+   "B": "(X-Y)/r2",
+   "q": 0.039117,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9807,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9807
+  },
+  "((X-Y)/r2,1)": {
+   "A": "(X-Y)/r2",
+   "B": "1",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9839,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9839
+  },
+  "((X-Y)/r2,Z)": {
+   "A": "(X-Y)/r2",
+   "B": "Z",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01725,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98275
+  },
+  "((X-Z)/r2,(X+Z)/r2)": {
+   "A": "(X-Z)/r2",
+   "B": "(X+Z)/r2",
+   "q": 0.024795,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01655,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98345
+  },
+  "((X-Z)/r2,(X-Z)/r2)": {
+   "A": "(X-Z)/r2",
+   "B": "(X-Z)/r2",
+   "q": 0.039117,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.98105,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98105
+  },
+  "((X-Z)/r2,1)": {
+   "A": "(X-Z)/r2",
+   "B": "1",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.98415,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98415
+  },
+  "((X-Z)/r2,Y)": {
+   "A": "(X-Z)/r2",
+   "B": "Y",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0164,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9836
+  },
+  "((Y+Z)/r2,(Y+Z)/r2)": {
+   "A": "(Y+Z)/r2",
+   "B": "(Y+Z)/r2",
+   "q": 0.039117,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9824,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9824
+  },
+  "((Y+Z)/r2,(Y-Z)/r2)": {
+   "A": "(Y+Z)/r2",
+   "B": "(Y-Z)/r2",
+   "q": 0.024795,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01755,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98245
+  },
+  "((Y+Z)/r2,1)": {
+   "A": "(Y+Z)/r2",
+   "B": "1",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.98485,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98485
+  },
+  "((Y+Z)/r2,X)": {
+   "A": "(Y+Z)/r2",
+   "B": "X",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0174,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9826
+  },
+  "((Y-Z)/r2,(Y+Z)/r2)": {
+   "A": "(Y-Z)/r2",
+   "B": "(Y+Z)/r2",
+   "q": 0.024795,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01655,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98345
+  },
+  "((Y-Z)/r2,(Y-Z)/r2)": {
+   "A": "(Y-Z)/r2",
+   "B": "(Y-Z)/r2",
+   "q": 0.039117,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.98105,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98105
+  },
+  "((Y-Z)/r2,1)": {
+   "A": "(Y-Z)/r2",
+   "B": "1",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.98415,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98415
+  },
+  "((Y-Z)/r2,X)": {
+   "A": "(Y-Z)/r2",
+   "B": "X",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0164,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9836
+  },
+  "(1,(X+Y)/r2)": {
+   "A": "1",
+   "B": "(X+Y)/r2",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9838,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9838
+  },
+  "(1,(X+Z)/r2)": {
+   "A": "1",
+   "B": "(X+Z)/r2",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.98475,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98475
+  },
+  "(1,(X-Y)/r2)": {
+   "A": "1",
+   "B": "(X-Y)/r2",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9838,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9838
+  },
+  "(1,(X-Z)/r2)": {
+   "A": "1",
+   "B": "(X-Z)/r2",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.98375,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98375
+  },
+  "(1,(Y+Z)/r2)": {
+   "A": "1",
+   "B": "(Y+Z)/r2",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.98475,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98475
+  },
+  "(1,(Y-Z)/r2)": {
+   "A": "1",
+   "B": "(Y-Z)/r2",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.98375,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98375
+  },
+  "(1,1)": {
+   "A": "1",
+   "B": "1",
+   "q": 0.0,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9876,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9876
+  },
+  "(1,X)": {
+   "A": "1",
+   "B": "X",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9838,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9838
+  },
+  "(1,Y)": {
+   "A": "1",
+   "B": "Y",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9838,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9838
+  },
+  "(1,Z)": {
+   "A": "1",
+   "B": "Z",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9847,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9847
+  },
+  "(X,(Y+Z)/r2)": {
+   "A": "X",
+   "B": "(Y+Z)/r2",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0177,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9823
+  },
+  "(X,(Y-Z)/r2)": {
+   "A": "X",
+   "B": "(Y-Z)/r2",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0177,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9823
+  },
+  "(X,1)": {
+   "A": "X",
+   "B": "1",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9839,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9839
+  },
+  "(X,X)": {
+   "A": "X",
+   "B": "X",
+   "q": 0.017634,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9807,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9807
+  },
+  "(X,Y)": {
+   "A": "X",
+   "B": "Y",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01765,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9823500000000001
+  },
+  "(X,Z)": {
+   "A": "X",
+   "B": "Z",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01725,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98275
+  },
+  "(Y,(X+Z)/r2)": {
+   "A": "Y",
+   "B": "(X+Z)/r2",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0177,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9823
+  },
+  "(Y,(X-Z)/r2)": {
+   "A": "Y",
+   "B": "(X-Z)/r2",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0177,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9823
+  },
+  "(Y,1)": {
+   "A": "Y",
+   "B": "1",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9839,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9839
+  },
+  "(Y,X)": {
+   "A": "Y",
+   "B": "X",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01765,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9823500000000001
+  },
+  "(Y,Y)": {
+   "A": "Y",
+   "B": "Y",
+   "q": 0.017634,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9807,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9807
+  },
+  "(Y,Z)": {
+   "A": "Y",
+   "B": "Z",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.01725,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.98275
+  },
+  "(Z,(X+Y)/r2)": {
+   "A": "Z",
+   "B": "(X+Y)/r2",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0164,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9836
+  },
+  "(Z,(X-Y)/r2)": {
+   "A": "Z",
+   "B": "(X-Y)/r2",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0164,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9836
+  },
+  "(Z,1)": {
+   "A": "Z",
+   "B": "1",
+   "q": 0.018274,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.9849,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9849
+  },
+  "(Z,X)": {
+   "A": "Z",
+   "B": "X",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0164,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9836
+  },
+  "(Z,Y)": {
+   "A": "Z",
+   "B": "Y",
+   "q": 0.013039,
+   "commuting": false,
+   "p_plus_ideal": 0.0,
+   "p_plus_noisy": 0.0164,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.9836
+  },
+  "(Z,Z)": {
+   "A": "Z",
+   "B": "Z",
+   "q": 0.017634,
+   "commuting": true,
+   "p_plus_ideal": 1.0,
+   "p_plus_noisy": 0.982,
+   "succ_ideal": 1.0,
+   "succ_noisy": 0.982
+  }
+ },
+ "verdict_pass": true
+}
