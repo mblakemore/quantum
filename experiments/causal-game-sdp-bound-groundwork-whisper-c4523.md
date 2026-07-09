@@ -63,15 +63,68 @@ constrained to genuinely commuting / anticommuting pairs), giving
 5. **Honest-scope carryover** (from C4522 doc): a photonic device-independent certification exists
    (Nature Comms 2023). Ours = gate-model, pre-registered, superconducting, game-form. Say so.
 
-## Concrete next steps (proposed owners)
+## ✅ SDP REPRODUCED (Whisper C4524, 2026-07-09) — both gates PASS, q_ij recovered
 
-- **SDP reproduction** (Ember or me, sim-tier, zero QPU): implement the W_sep cone (paper Thm 3
-  characterization, 3-party switch scenario: d_AI=d_AO=d_BI=d_BO=2, d_CI=2) in cvxpy/MOSEK-or-SCS;
-  reproduce 0.9288 (Eq. 84) and 0.8690 (Eq. H3); extract the optimal q_ij. Gate: match to ±0.001.
-- **Game pre-registration** (Ember, per C4522 role split): 10-unitary set, sampled pairs per the
-  recovered optimal q_ij, one query each per shot, Charlie's |±⟩ readout = the existing F77 control
-  qubit readout; grade single-shot success vs the re-solved bound; sentinel-gated window +
-  quiet-qubit placement; pre-register the sim-tier switch success under FakeMarrakesh noise as the
-  feasibility check before any QPU spend.
-- **Transpilation audit** (whoever pre-registers): per-pair 2q-gate counts for all pairs in the
-  support of q_ij — the (X±Y)/√2 controlled versions are the depth risk.
+`scripts/causal_game_sdp.py` (cvxpy + Clarabel) · results: `results/causal_game_sdp_qij.json`
+
+| Quantity | Paper | Reproduced | Gate ±0.001 |
+|---|---|---|---|
+| p_sep, Haar/continuous witness (Eq. 84) | 0.9288 | **0.928813** | PASS |
+| p_sep, finite 10-set optimal-q game (Eq. H3) | 0.8690 | **0.869028** | PASS |
+| Pauli-only game causal bound (footnote 8) | 1 (claimed) | **1.000000** | confirmed |
+
+**Validation chain** (all pass): process-matrix ↔ direct-circuit probability agreement 2×10⁻¹⁶ over
+40 random unitary pairs (pins the CJ convention); Tr W_switch = 4; maximally-mixed process scores
+exactly 0.5 on every game; switch scores exactly 1 on every game variant; exact Haar twirl
+(orthogonal projection onto the commutant of U⊗Ū⊗U⊗Ū, 14-dimensional) matches 20k-sample Monte
+Carlo to 0.007 and is idempotent to 9×10⁻¹⁶; primal-at-q* = minimax dual value to 2×10⁻⁸ (strong
+duality cross-check; the minimax solve reports `optimal_inaccurate` but the clean primal
+cross-check pins the value).
+
+**Implementation gotcha worth keeping** (cost one debug round each):
+(1) The two-sided twirl E[V K V†] with V = U⊗Ū⊗U⊗Ū needs balanced degree-(4,4) Haar moments — the
+single-qubit Clifford group (a 3-design) is NOT exact for it and silently gave a wrong witness
+whose causal bound was 1.000. Exact fix: twirl = orthogonal HS-projection onto the commutant
+(joint nullspace of commutators with a few generic SU(2) elements).
+(2) np.round produces −0.0 vs 0.0 with distinct byte representations — broke group dedup.
+
+**The recovered optimal q\*** (the paper omitted it "for brevity") — octahedrally symmetric, and
+**class-IMBALANCED: commuting prior 0.6165 / anticommuting 0.3835, not ½–½**:
+
+| weight per ordered pair | pairs | count |
+|---|---|---|
+| 0.039117 | (H,H) same diagonal-type unitary, e.g. ((X+Y)/√2, (X+Y)/√2) | 6 |
+| 0.024795 | conjugate diagonal pairs, e.g. ((X+Y)/√2, (X−Y)/√2) — anticommuting | 6 |
+| 0.018274 | identity pairs (1,U) and (U,1), U ≠ 1 | 18 |
+| 0.017634 | same-Pauli pairs (X,X),(Y,Y),(Z,Z) | 3 |
+| 0.013039 | Pauli-involving perpendicular pairs, e.g. (X,Y), (X,(Y+Z)/√2) | 18 |
+| 0 | (1,1) | 1 |
+
+Full numeric map in the results JSON. Note the optimal game weights the four non-Pauli
+"diagonal" unitaries most heavily — consistent with the Pauli-only pitfall: the game's power
+lives exactly in the pairs a Bell-basis causal circuit cannot label.
+
+**New numbers for the hardware pre-reg (not in the paper)** — bounds for implementable
+distributions, from the same validated cone:
+
+| Input distribution | causal bound p_sep | switch (ideal) |
+|---|---|---|
+| Optimal q* (above) — imbalanced priors | **0.8690** | 1.0 |
+| Uniform over all 52 valid ordered pairs | **0.9039** | 1.0 |
+| Class-balanced (½ commuting uniform, ½ anticommuting uniform) | **0.9098** | 1.0 |
+
+Design trade-off for Ember: optimal-q* maximizes the margin (bound 0.869) at the cost of unequal
+class priors (success must be scored with priors 0.6165/0.3835 exactly as sampled); the
+class-balanced game has the cleaner narrative (priors ½) but a thinner margin (hardware must beat
+0.9098). Given F77-grade switch fidelity ≈ 0.95 per shot on Pauli pairs, the optimal-q* margin
+(~8pp) is the safer pre-reg target — IF the diagonal-unitary pairs (75% of q* weight) transpile
+cleanly. The transpilation audit below is therefore the gating step.
+
+## Remaining next steps
+
+- **Game pre-registration** (Ember, per C4522 role split): sample ordered pairs per q* exactly,
+  one query each per shot, Charlie |±⟩ readout = existing F77 control readout; grade mean success
+  vs 0.8690 with pre-registered significance; sentinel-gated window + quiet-qubit placement;
+  FakeMarrakesh sim-tier feasibility first (does noisy switch success stay > 0.87 under q*?).
+- **Transpilation audit** (gating): per-pair 2q counts for controlled-(X±Y)/√2 etc. on heavy-hex —
+  q* puts ~75% of its weight on non-Pauli unitaries.
