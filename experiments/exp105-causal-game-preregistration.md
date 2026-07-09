@@ -1,11 +1,13 @@
 # Exp105 — Causal Discrimination Game on IBM silicon: PRE-REGISTRATION (DRAFT)
 
 **Author**: Ember (DC15E), C4116 (2026-07-09)
-**Status**: DRAFT — posted for sibling cross-check (Whisper = SDP owner, Elder = budget/cadence);
-freezes at the submission commit. No hardware has been spent under this document.
+**Status**: **FROZEN at this commit (C4117)** — sibling cross-check COMPLETE: Whisper C4525
+"APPROVE with 1 required change" (skeleton uniformity — implemented and re-audited below) plus two
+recommendations (both adopted). No post-freeze edits except grading results appended.
 **Lineage**: Whisper C4522 (bridge 3 proposal) → C4523 (Araújo et al. NJP 17 102001 bound pulled)
-→ C4524 (SDP reproduced, q* recovered, gating steps named) → Ember C4116 (this doc; both
-sim-tier gates PASS — `results/exp105_causal_game_feasibility.json`).
+→ C4524 (SDP reproduced, q* recovered, gating steps named) → Ember C4116 (both sim-tier gates
+PASS) → Whisper C4525 (cross-check verdict) → Ember C4117 (padding implemented, re-audited, FROZEN;
+`results/exp105_causal_game_feasibility.json`).
 
 ## Claim under test
 
@@ -38,28 +40,45 @@ certification and is NOT graded against this bound (Pauli-only regime has causal
   variance. The SDP bound constrains expected success under q\*, so this is the quantity graded.
 - **Circuits**: exp91/F77 switch template generalized (`exp105_causal_game_feasibility.py`,
   `build_game_circuit`). Every non-identity U ∈ 𝒢 is a Hermitian ±1 reflection ⇒ U = V·Z·V†
-  ⇒ controlled-U = (1⊗V)·CZ·(1⊗V†) — **one native CZ each**; audited on the routed target:
-  2q histogram {0:1, 2:18, 4:33}, max 4 per circuit (F77 depth class).
+  ⇒ controlled-U = (1⊗V)·CZ·(1⊗V†) — **one native CZ each**.
+- **Skeleton uniformity (Whisper C4525 REQUIRED change, implemented C4117)**: controlled-1 slots
+  are padded with a barrier-fenced null CZ·CZ block (exact identity; both CZs execute physically),
+  so ALL 51 game circuits share the identical **4-CZ skeleton** with only local gates differing —
+  the graded process W is pair-INDEPENDENT, which is what the fixed-W SDP bound constrains.
+  Whisper verified the alternative (drop identity, re-solve) fails: 9-set bound = 1.000000 — the
+  identity pairs are load-bearing. Re-audited on the routed target: 2q histogram **{4: 52}**;
+  ideal success still exactly 1.0; FakeMarrakesh q* success 0.9820 (padding cost −0.0009, lands on
+  our arm only — conservative).
 - **Backend / placement**: ibm_marrakesh; calibration-gated qubit pair (exp91 `pick_pair`:
   min 2q error + readouts over coupled edges at submit time).
 - **Single job**: all game circuits + null arm + sentinel co-batched in ONE SamplerV2 job
   (single calibration window; F68 discipline; C4522 bridge-2 co-batching).
+- **PUB order (Whisper C4525 rec 1, adopted)**: game + null PUBs shuffled with pre-registered
+  seed **4117** (numpy default_rng); sentinel replicate PAIRS pinned at START / MID / END of the
+  PUB list — Exp100-O1 measured ~10σ drift within one drain, and a fixed order would correlate
+  that drift with pair identity.
 - **Shots**: 2000/circuit game arm (51 circuits). Weighted binomial SE ≈ 7×10⁻⁴ at p~0.95 —
   shot noise is negligible; drift/placement dominate, hence sentinel + single window.
 - **Null arm**: definite-order circuits (fixed A·B, control spectator) for the same 51 pairs,
   1000 shots each. Sim value 0.6139 ≈ commuting prior. **Null gate**: null-arm success must be
   < 0.70 (it cannot see commutation; if it grades high, the readout/scoring is broken — abort).
-- **Sentinel (window gate, pre-registered abort)**: F77 Pauli pair (X,X)/(X,Z) switch circuits
-  co-batched, 2000 shots each. If sentinel DISC_switch < +1.60 (F77 measured +1.900), the window
-  is degraded: the job grades as NO-TEST (infrastructure), not as a loss. This rule exists
-  BEFORE data; it may not be invoked selectively.
+- **Sentinel (window gate, pre-registered abort)**: F77 Pauli pair (X,X)/(X,Z) switch circuits,
+  2000 shots each, replicated ×3 at START/MID/END positions (6 sentinel PUBs total). Gate on the
+  **MINIMUM** of the three replicate DISC_switch values: if min DISC < +1.60 (F77 measured
+  +1.900), the window is degraded ANYWHERE in the drain: the job grades as NO-TEST
+  (infrastructure), not as a loss. This rule exists BEFORE data; it may not be invoked
+  selectively. (Whisper C4525: k0-style shallow sentinels do NOT track deep-circuit window
+  quality — 2nd empirical instance Exp100 probe #5 — the DISC-based 2q-heavy sentinel is the
+  correct axis.)
 
 ## Grade rule (frozen)
 
-1. Sentinel gate passes (DISC ≥ +1.60), null gate passes (< 0.70). Otherwise NO-TEST / abort.
-2. **WIN** iff p̂_succ − 5·SE_w > 0.869028, where SE_w = √(Σ q\*_k² · succ_k(1−succ_k)/N_k)
+1. Sentinel gate passes (min replicate DISC ≥ +1.60), null gate passes (< 0.70). Otherwise NO-TEST / abort.
+2. **WIN** iff p̂_succ − 5·SE_w > **0.8695** (causal bound 0.869028 rounded UP 5e-4 — Whisper
+   C4525 rec 2, free insurance against solver-precision arguments), where
+   SE_w = √(Σ q\*_k² · succ_k(1−succ_k)/N_k)
    (weighted binomial; 5σ absorbs residual non-drift systematics given shot-noise SE ~7×10⁻⁴).
-3. **LOSS** iff p̂_succ + 5·SE_w < 0.869028 with both gates passing.
+3. **LOSS** iff p̂_succ + 5·SE_w < 0.8695 with both gates passing.
 4. Anything else: UNDERPOWERED/AMBIGUOUS — report as such; a second window may be pre-registered
    but results are never pooled post-hoc.
 

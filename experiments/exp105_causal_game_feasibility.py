@@ -92,10 +92,29 @@ def reflection_eigenbasis(U):
 EIGBASIS = {name: reflection_eigenbasis(U) for name, U in UNITARIES.items() if name != '1'}
 
 
-def apply_ctrl_unitary(qc, name, ctrl, tgt, ctrl_state):
-    """ctrl-U with U = V Z Vdag: local Vdag on tgt, CZ, local V. Identity: no-op.
-    ctrl_state=0 realized by X-sandwich on the control (exp91 template)."""
+def apply_ctrl_unitary(qc, name, ctrl, tgt, ctrl_state, pad_identity=False):
+    """ctrl-U with U = V Z Vdag: local Vdag on tgt, CZ, local V.
+    ctrl_state=0 realized by X-sandwich on the control (exp91 template).
+
+    Identity operand (SKELETON UNIFORMITY, Whisper C4525 required change): when
+    pad_identity=True, controlled-1 emits a NULL CZ.CZ block (barrier between the
+    two CZs stops transpiler cancellation; physically both execute) — so every game
+    circuit shares the identical 4-CZ skeleton and only local gates differ, keeping
+    the graded process W pair-INDEPENDENT. The identity operand emits its whole
+    4-CZ share at its FIRST slot (pad here), nothing at its second slot: net
+    operator per branch is exactly U_other (or I for (1,1)), verified in main().
+    Without padding the 18 identity-involving circuits (0.329 of q* weight) ran a
+    different skeleton — a skeptic reads that as 51 pair-dependent processes.
+    Extra noise lands on OUR arm only (conservative)."""
     if name == '1':
+        if pad_identity:
+            # barrier-fence BOTH edges: neighbouring CZs (e.g. (1,1) back-to-back pads,
+            # or c-Z whose locals are identity) otherwise cancel against the pad
+            qc.barrier(ctrl, tgt)
+            qc.cz(ctrl, tgt)
+            qc.barrier(ctrl, tgt)
+            qc.cz(ctrl, tgt)
+            qc.barrier(ctrl, tgt)
         return
     V = EIGBASIS[name]
     if ctrl_state == 0:
@@ -112,11 +131,12 @@ def build_game_circuit(a_name, b_name, definite=False):
     qc = QuantumCircuit(2, 1)
     qc.h(0)
     if not definite:
-        apply_ctrl_unitary(qc, a_name, 0, 1, 0)   # A if c==0 (first for c=0)
-        apply_ctrl_unitary(qc, b_name, 0, 1, 1)   # B if c==1 (first for c=1)
+        # pad_identity=True at each operand's FIRST slot only (see apply_ctrl_unitary)
+        apply_ctrl_unitary(qc, a_name, 0, 1, 0, pad_identity=True)    # A if c==0 (first for c=0)
+        apply_ctrl_unitary(qc, b_name, 0, 1, 1, pad_identity=True)    # B if c==1 (first for c=1)
         qc.barrier()
-        apply_ctrl_unitary(qc, b_name, 0, 1, 0)   # B if c==0 (second for c=0)
-        apply_ctrl_unitary(qc, a_name, 0, 1, 1)   # A if c==1 (second for c=1)
+        apply_ctrl_unitary(qc, b_name, 0, 1, 0, pad_identity=False)   # B if c==0 (second for c=0)
+        apply_ctrl_unitary(qc, a_name, 0, 1, 1, pad_identity=False)   # A if c==1 (second for c=1)
     else:
         # fixed order A then B on target, control spectator (F77 null arm)
         if a_name != '1':
@@ -201,16 +221,15 @@ def main():
         twoq = sum(1 for inst in tqc.data
                    if inst.operation.num_qubits == 2
                    and inst.operation.name not in ('barrier',))
-        n_nonid = (info['A'] != '1') + (info['B'] != '1')
-        expected = 2 * n_nonid
-        ok = twoq <= max(expected, 0) and twoq <= 4
+        # SKELETON UNIFORMITY (Whisper C4525): every circuit must be EXACTLY 4 CZ
+        ok = twoq == 4
         audit_pass &= ok
         tqcs[key] = tqc
-        audit_rows.append({'pair': key, 'twoq': twoq, 'expected_max': expected,
+        audit_rows.append({'pair': key, 'twoq': twoq, 'expected': 4,
                            'depth': tqc.depth(), 'ok': bool(ok)})
     worst = max(audit_rows, key=lambda r: r['twoq'])
     print(f"  circuits: {len(audit_rows)} | max 2q count: {worst['twoq']} ({worst['pair']}) | "
-          f"all within 2-per-controlled-U and <=4: {audit_pass}")
+          f"all EXACTLY 4 (uniform skeleton, C4525): {audit_pass}")
     by_class = {}
     for r in audit_rows:
         by_class.setdefault(r['twoq'], 0)
@@ -279,7 +298,7 @@ def main():
 
     print("\n" + "=" * 78)
     print(f"GATE (a) transpile audit:  {'PASS' if audit_pass else 'FAIL'}"
-          f"  (max 2q {worst['twoq']}, all <= 2 per controlled-U)")
+          f"  (all circuits exactly 4 CZ — uniform skeleton per Whisper C4525)")
     print(f"GATE (b) sim feasibility:  {'PASS' if gate_b else 'FAIL'}"
           f"  (q* success {s_qstar:.4f} {'>' if gate_b else '<='} {SIM_GATE})")
     margins = {
