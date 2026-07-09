@@ -1,0 +1,1105 @@
+{
+ "experiment": "exp105-causal-game",
+ "cycle": "C4117-ember",
+ "backend": "ibm_fez",
+ "tag": "exp105b",
+ "prereg": "experiments/exp105-causal-game-preregistration.md",
+ "grade_constant": 0.8695,
+ "sentinel_min_disc": 1.6,
+ "null_gate_max": 0.7,
+ "shuffle_seed": 4117,
+ "shots": {
+  "game": 2000,
+  "null": 1000,
+  "sentinel": 2000
+ },
+ "pair": [
+  22,
+  23
+ ],
+ "pair_cost": 0.010699446623857134,
+ "twoq_gate": "cz",
+ "job_id": "d982qssqp3as739sdmmg",
+ "metas": [
+  {
+   "label": "sent_start_commute",
+   "kind": "sentinel",
+   "shots": 2000,
+   "depth": 22,
+   "twoq": 4,
+   "pair": "(X,X)",
+   "commuting": true,
+   "replicate": "start"
+  },
+  {
+   "label": "sent_start_anticommute",
+   "kind": "sentinel",
+   "shots": 2000,
+   "depth": 21,
+   "twoq": 4,
+   "pair": "(X,Z)",
+   "commuting": false,
+   "replicate": "start"
+  },
+  {
+   "label": "null((Y+Z)/r2,1)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((Y+Z)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "game(1,(Y+Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 27,
+   "twoq": 4,
+   "pair": "(1,(Y+Z)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "game(X,(Y+Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 27,
+   "twoq": 4,
+   "pair": "(X,(Y+Z)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game((X+Y)/r2,(X+Y)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 22,
+   "twoq": 4,
+   "pair": "((X+Y)/r2,(X+Y)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "game((X+Z)/r2,Y)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 26,
+   "twoq": 4,
+   "pair": "((X+Z)/r2,Y)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null(X,Y)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(X,Y)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game((X+Z)/r2,1)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 24,
+   "twoq": 4,
+   "pair": "((X+Z)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null(Y,X)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Y,X)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(Z,(X+Y)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 23,
+   "twoq": 4,
+   "pair": "(Z,(X+Y)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null((X+Y)/r2,(X+Y)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X+Y)/r2,(X+Y)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "null((X+Y)/r2,Z)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X+Y)/r2,Z)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game((X-Y)/r2,1)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 20,
+   "twoq": 4,
+   "pair": "((X-Y)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "game(1,(Y-Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 27,
+   "twoq": 4,
+   "pair": "(1,(Y-Z)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "game((X+Y)/r2,(X-Y)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 24,
+   "twoq": 4,
+   "pair": "((X+Y)/r2,(X-Y)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "game((Y+Z)/r2,X)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 27,
+   "twoq": 4,
+   "pair": "((Y+Z)/r2,X)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game((X-Z)/r2,(X+Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 30,
+   "twoq": 4,
+   "pair": "((X-Z)/r2,(X+Z)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "game((X-Y)/r2,(X+Y)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 24,
+   "twoq": 4,
+   "pair": "((X-Y)/r2,(X+Y)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "game((Y-Z)/r2,X)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 27,
+   "twoq": 4,
+   "pair": "((Y-Z)/r2,X)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null((X-Z)/r2,Y)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X-Z)/r2,Y)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game((Y-Z)/r2,(Y-Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 26,
+   "twoq": 4,
+   "pair": "((Y-Z)/r2,(Y-Z)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "null(1,Y)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(1,Y)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null(Y,(X-Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Y,(X-Z)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(Y,(X+Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 27,
+   "twoq": 4,
+   "pair": "(Y,(X+Z)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game((X+Z)/r2,(X+Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 26,
+   "twoq": 4,
+   "pair": "((X+Z)/r2,(X+Z)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "game((X-Z)/r2,(X-Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 26,
+   "twoq": 4,
+   "pair": "((X-Z)/r2,(X-Z)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "null(1,(X-Y)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(1,(X-Y)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "game((Y+Z)/r2,(Y+Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 26,
+   "twoq": 4,
+   "pair": "((Y+Z)/r2,(Y+Z)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "null(1,(X-Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(1,(X-Z)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null(X,X)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(X,X)",
+   "q": 0.017634,
+   "commuting": true
+  },
+  {
+   "label": "game(1,(X-Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 27,
+   "twoq": 4,
+   "pair": "(1,(X-Z)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "game(1,(X-Y)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 23,
+   "twoq": 4,
+   "pair": "(1,(X-Y)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((X-Y)/r2,1)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X-Y)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null(Y,Y)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Y,Y)",
+   "q": 0.017634,
+   "commuting": true
+  },
+  {
+   "label": "game((Y+Z)/r2,(Y-Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 30,
+   "twoq": 4,
+   "pair": "((Y+Z)/r2,(Y-Z)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "null((Y-Z)/r2,(Y-Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((Y-Z)/r2,(Y-Z)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "game(1,Y)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 21,
+   "twoq": 4,
+   "pair": "(1,Y)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "game(Y,Y)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 21,
+   "twoq": 4,
+   "pair": "(Y,Y)",
+   "q": 0.017634,
+   "commuting": true
+  },
+  {
+   "label": "game(1,X)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 23,
+   "twoq": 4,
+   "pair": "(1,X)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "game((X+Y)/r2,Z)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 21,
+   "twoq": 4,
+   "pair": "((X+Y)/r2,Z)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(Z,X)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 23,
+   "twoq": 4,
+   "pair": "(Z,X)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null(1,(X+Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(1,(X+Z)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((Y-Z)/r2,1)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((Y-Z)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((X+Y)/r2,(X-Y)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X+Y)/r2,(X-Y)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "game(1,(X+Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 27,
+   "twoq": 4,
+   "pair": "(1,(X+Z)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((X+Z)/r2,(X+Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X+Z)/r2,(X+Z)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "null(Z,Y)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Z,Y)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(1,(X+Y)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 23,
+   "twoq": 4,
+   "pair": "(1,(X+Y)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((Y-Z)/r2,X)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((Y-Z)/r2,X)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null(Y,1)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Y,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null(X,Z)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(X,Z)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game((Y+Z)/r2,1)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 24,
+   "twoq": 4,
+   "pair": "((Y+Z)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "sent_mid_commute",
+   "kind": "sentinel",
+   "shots": 2000,
+   "depth": 22,
+   "twoq": 4,
+   "pair": "(X,X)",
+   "commuting": true,
+   "replicate": "mid"
+  },
+  {
+   "label": "sent_mid_anticommute",
+   "kind": "sentinel",
+   "shots": 2000,
+   "depth": 21,
+   "twoq": 4,
+   "pair": "(X,Z)",
+   "commuting": false,
+   "replicate": "mid"
+  },
+  {
+   "label": "null((X+Z)/r2,(X-Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X+Z)/r2,(X-Z)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "game((Y-Z)/r2,(Y+Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 30,
+   "twoq": 4,
+   "pair": "((Y-Z)/r2,(Y+Z)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "null(Z,(X-Y)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Z,(X-Y)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(Z,(X-Y)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 23,
+   "twoq": 4,
+   "pair": "(Z,(X-Y)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game((X-Y)/r2,(X-Y)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 22,
+   "twoq": 4,
+   "pair": "((X-Y)/r2,(X-Y)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "null((X+Y)/r2,1)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X+Y)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((X-Z)/r2,(X-Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X-Z)/r2,(X-Z)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "game(Z,Z)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 14,
+   "twoq": 4,
+   "pair": "(Z,Z)",
+   "q": 0.017634,
+   "commuting": true
+  },
+  {
+   "label": "game((X+Y)/r2,1)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 20,
+   "twoq": 4,
+   "pair": "((X+Y)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null(1,(Y+Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(1,(Y+Z)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((Y+Z)/r2,(Y-Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((Y+Z)/r2,(Y-Z)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "game(X,(Y-Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 27,
+   "twoq": 4,
+   "pair": "(X,(Y-Z)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(X,1)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 20,
+   "twoq": 4,
+   "pair": "(X,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((X-Z)/r2,1)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X-Z)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "game((Y-Z)/r2,1)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 24,
+   "twoq": 4,
+   "pair": "((Y-Z)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null(X,(Y+Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(X,(Y+Z)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(Y,(X-Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 27,
+   "twoq": 4,
+   "pair": "(Y,(X-Z)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null(Z,X)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Z,X)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(Z,Y)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 21,
+   "twoq": 4,
+   "pair": "(Z,Y)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(X,X)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 22,
+   "twoq": 4,
+   "pair": "(X,X)",
+   "q": 0.017634,
+   "commuting": true
+  },
+  {
+   "label": "null(Z,Z)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Z,Z)",
+   "q": 0.017634,
+   "commuting": true
+  },
+  {
+   "label": "game(X,Z)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 21,
+   "twoq": 4,
+   "pair": "(X,Z)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null(1,Z)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(1,Z)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((X-Y)/r2,(X-Y)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X-Y)/r2,(X-Y)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "null((Y+Z)/r2,(Y+Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((Y+Z)/r2,(Y+Z)/r2)",
+   "q": 0.039117,
+   "commuting": true
+  },
+  {
+   "label": "game((X-Z)/r2,Y)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 26,
+   "twoq": 4,
+   "pair": "((X-Z)/r2,Y)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null(X,1)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(X,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((X+Z)/r2,Y)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X+Z)/r2,Y)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null(1,(Y-Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(1,(Y-Z)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "game((X-Y)/r2,Z)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 21,
+   "twoq": 4,
+   "pair": "((X-Y)/r2,Z)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null(1,(X+Y)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(1,(X+Y)/r2)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((X+Z)/r2,1)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X+Z)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((X-Y)/r2,(X+Y)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X-Y)/r2,(X+Y)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "game(Z,1)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 12,
+   "twoq": 4,
+   "pair": "(Z,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((X-Y)/r2,Z)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X-Y)/r2,Z)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null(Z,(X+Y)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Z,(X+Y)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(Y,X)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 24,
+   "twoq": 4,
+   "pair": "(Y,X)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game((X-Z)/r2,1)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 24,
+   "twoq": 4,
+   "pair": "((X-Z)/r2,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null(Y,Z)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Y,Z)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(Y,1)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 19,
+   "twoq": 4,
+   "pair": "(Y,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null((X-Z)/r2,(X+Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((X-Z)/r2,(X+Z)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "game(Y,Z)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 20,
+   "twoq": 4,
+   "pair": "(Y,Z)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game((X+Z)/r2,(X-Z)/r2)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 30,
+   "twoq": 4,
+   "pair": "((X+Z)/r2,(X-Z)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "null((Y+Z)/r2,X)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((Y+Z)/r2,X)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null(Z,1)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Z,1)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null(1,X)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(1,X)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "null(Y,(X+Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(Y,(X+Z)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null(X,(Y-Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "(X,(Y-Z)/r2)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "game(1,Z)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 13,
+   "twoq": 4,
+   "pair": "(1,Z)",
+   "q": 0.018274,
+   "commuting": true
+  },
+  {
+   "label": "game(X,Y)",
+   "kind": "game",
+   "shots": 2000,
+   "depth": 23,
+   "twoq": 4,
+   "pair": "(X,Y)",
+   "q": 0.013039,
+   "commuting": false
+  },
+  {
+   "label": "null((Y-Z)/r2,(Y+Z)/r2)",
+   "kind": "null",
+   "shots": 1000,
+   "depth": 7,
+   "twoq": 0,
+   "pair": "((Y-Z)/r2,(Y+Z)/r2)",
+   "q": 0.024795,
+   "commuting": false
+  },
+  {
+   "label": "sent_end_commute",
+   "kind": "sentinel",
+   "shots": 2000,
+   "depth": 22,
+   "twoq": 4,
+   "pair": "(X,X)",
+   "commuting": true,
+   "replicate": "end"
+  },
+  {
+   "label": "sent_end_anticommute",
+   "kind": "sentinel",
+   "shots": 2000,
+   "depth": 21,
+   "twoq": 4,
+   "pair": "(X,Z)",
+   "commuting": false,
+   "replicate": "end"
+  }
+ ]
+}
