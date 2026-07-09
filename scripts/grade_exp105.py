@@ -14,14 +14,18 @@ Conventions from Ember's frozen code (exp105_causal_game_feasibility.py):
   else 1-P(+);  <X_c> = 2*P(+)-1;  replicate DISC = <X_c>_commute - <X_c>_anticommute.
 All weights/constants read from the job manifest (results/exp105_jobids.json).
 """
+import argparse
 import json
 import math
 import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-MANIFEST = os.path.join(HERE, "..", "results", "exp105_jobids.json")
-OUT = os.path.join(HERE, "..", "results", "exp105_hw_results.json")
+_ap = argparse.ArgumentParser()
+_ap.add_argument("--tag", default="exp105", help="manifest tag (exp105b = fez replication)")
+_ARGS = _ap.parse_args()
+MANIFEST = os.path.join(HERE, "..", "results", f"{_ARGS.tag}_jobids.json")
+OUT = os.path.join(HERE, "..", "results", f"{_ARGS.tag}_hw_results.json")
 
 
 def get_counts(pub_result):
@@ -124,7 +128,7 @@ def main():
         print(f"  worst: {r['pair']:24s} succ={s:.4f} (q={r['q']})")
 
     out = {
-        "job_id": jid, "graded_by": "whisper-C4526 (frozen rule, mechanical)",
+        "job_id": jid, "graded_by": f"whisper (frozen rule, mechanical, tag={_ARGS.tag})",
         "sentinel_disc": discs, "sentinel_min": min_disc, "sentinel_pass": sent_pass,
         "null_weighted_success": p_null, "null_pass": null_pass,
         "p_hat": p_hat, "se_w": se_w, "p_hat_minus_5se": lo5,
