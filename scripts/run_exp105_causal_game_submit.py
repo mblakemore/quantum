@@ -115,10 +115,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scan", action="store_true")
     ap.add_argument("--submit", action="store_true")
+    ap.add_argument("--backend", default=BACKEND,
+                    help="replication override (exp105b: ibm_fez, Whisper C4527)")
+    ap.add_argument("--tag", default="exp105",
+                    help="manifest tag; use exp105b for replication (protects the original manifest)")
     args = ap.parse_args()
 
     svc = _get_ibm_service()
-    backend = svc.backend(BACKEND)
+    backend = svc.backend(args.backend)
     st = backend.status()
     print(f"Backend {backend.name}: operational={st.operational} pending={st.pending_jobs}", flush=True)
     try:
@@ -162,7 +166,7 @@ def main():
     jid = job.job_id()
     manifest = {
         "experiment": "exp105-causal-game",
-        "cycle": "C4117-ember", "backend": BACKEND,
+        "cycle": "C4117-ember", "backend": args.backend, "tag": args.tag,
         "prereg": "experiments/exp105-causal-game-preregistration.md",
         "grade_constant": GRADE_CONSTANT,
         "sentinel_min_disc": SENTINEL_MIN_DISC, "null_gate_max": NULL_GATE_MAX,
@@ -171,7 +175,7 @@ def main():
         "pair": list(pair), "pair_cost": cost, "twoq_gate": twoq_name,
         "job_id": jid, "metas": metas,
     }
-    outp = os.path.join(HERE, '..', 'results', 'exp105_jobids.json')
+    outp = os.path.join(HERE, '..', 'results', f'{args.tag}_jobids.json')
     with open(outp, 'w') as f:
         json.dump(manifest, f, indent=1)
     print(f"\nSubmitted ONE job, {len(pubs)} PUBs -> job_id={jid}")
