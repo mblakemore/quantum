@@ -1,144 +1,319 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Interrogation You Cannot Win — Casebook of Detective Whisper</title>
+<title>The Interrogation You Cannot Win — a game with a mathematically proven ceiling</title>
+<meta name="description" content="A playable detective game whose difficulty ceiling is a theorem: no strategy under normal cause-and-effect can beat 91% — and the quantum switch, measured on real hardware, scores 97.8%.">
 <style>
- :root{--bg:#0d0d13;--panel:#17171f;--ink:#e9e9f1;--dim:#9a9ab0;--red:#ff5470;--gold:#e8c268;--q:#7ee8a2;}
- *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,serif}
- .wrap{max-width:900px;margin:0 auto;padding:18px}
- h1{font-size:1.45em;margin:4px 0 2px} .sub{color:var(--dim);font-style:italic;margin:0 0 12px}
- .stage{display:flex;gap:14px;flex-wrap:wrap}
- .panel{background:var(--panel);border-radius:10px;padding:14px;flex:1;min-width:300px}
- .suspects{display:flex;gap:14px;justify-content:center;margin:10px 0}
- .sil{width:92px;height:120px;border-radius:8px;background:linear-gradient(#222,#0a0a0f);
-      display:flex;align-items:flex-end;justify-content:center;font-size:40px;color:#333;
-      border:1px solid #333;position:relative;overflow:hidden}
- .sil.revealed{color:#cfcfe0;font-size:0.75em;align-items:center;text-align:center;padding:4px}
- .kitrow button{margin:4px;background:#23232f;color:var(--ink);border:1px solid #444;
-      border-radius:8px;padding:8px 12px;font:inherit;cursor:pointer}
- .kitrow button:hover{border-color:#999} .kitrow button.sel{border-color:var(--gold);color:var(--gold)}
- .report{min-height:2em;font-family:'Courier New',monospace;margin:8px 0;color:var(--gold)}
- .callrow button{background:#2a1f33;border:1px solid #665;color:var(--ink);border-radius:8px;
-      padding:10px 18px;margin:4px;font:inherit;cursor:pointer;font-size:1.05em}
- .meter{position:relative;height:26px;background:#23232f;border-radius:8px;margin:10px 0;overflow:visible}
- .meter>i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#557,#88b);border-radius:8px 0 0 8px;transition:width .3s}
- .meter .ceil{position:absolute;left:91%;top:-6px;bottom:-6px;width:3px;background:var(--red)}
- .meter .lbl{position:absolute;left:91%;top:-22px;transform:translateX(-50%);color:var(--red);font-size:0.72em;font-family:'Courier New',monospace;white-space:nowrap}
- .meter .zone{position:absolute;left:91%;right:0;top:0;bottom:0;background:rgba(255,84,112,.12);border-radius:0 8px 8px 0}
- .stat{font-family:'Courier New',monospace;font-size:0.88em;color:var(--dim)}
- .badge{display:none;background:#132a1c;border:1px solid var(--q);border-radius:10px;padding:10px;margin:10px 0}
- .badge.on{display:block} .badge b{color:var(--q)}
- .log{font-family:'Courier New',monospace;font-size:0.78em;color:var(--dim);height:110px;overflow-y:auto;
-      background:#0a0a10;border-radius:6px;padding:6px;margin-top:8px}
- .truth{background:#101018;border:1px solid #333;border-radius:8px;padding:10px 12px;font-size:0.86em;color:var(--dim);margin-top:14px}
- .truth b{color:var(--ink)} a{color:#9ecbff}
- .auto{background:#23232f;border:1px solid #444;color:var(--ink);border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit}
-</style></head><body><div class="wrap">
- <h1>🕵️ THE INTERROGATION YOU CANNOT WIN</h1>
- <p class="sub">Case 2 from the Casebook of Detective Whisper. Two machine-suspects per case:
- <b>PARTNERS</b> (stories agree in any order) or <b>RIVALS</b> (stories come out opposite).
- You may question each <b>once</b> — through a kit. Then call it. Identities stay hidden until
- you call: your kit is your only instrument.</p>
+ :root{ --bg:#0d0d14; --panel:#1a1a26; --panel2:#12121c; --ink:#f0f0f6; --dim:#b9b9cf;
+        --red:#ff6b85; --redline:#e0405e; --q:#8af0ae; --gold:#e8c268;
+        --edge:#3a3a4e; --focus:#ffd166; }
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;
+      font-size:17px;line-height:1.55}
+ .wrap{max-width:960px;margin:0 auto;padding:20px 18px 40px}
+ header h1{font-size:1.7em;margin:6px 0 4px;line-height:1.2}
+ .tagline{color:var(--dim);font-size:1.05em;margin:0 0 18px}
+ h2{font-size:1.25em;margin:26px 0 8px;border-bottom:2px solid var(--edge);padding-bottom:4px}
+ h3{font-size:1.02em;margin:12px 0 4px}
+ a{color:#9ecbff} a:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+ .cards{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+ .card{flex:1;min-width:240px;background:var(--panel);border:1px solid var(--edge);
+       border-radius:10px;padding:12px 14px}
+ .card .n{display:inline-block;width:1.7em;height:1.7em;border-radius:50%;background:#2c2c40;
+       text-align:center;line-height:1.7em;font-weight:bold;margin-right:6px}
+ .why{background:#1c1524;border:1px solid #4a3a5e;border-radius:10px;padding:12px 16px;margin:14px 0}
+ .why b{color:var(--red)}
+ ul.rules{margin:8px 0 8px 4px;padding-left:20px} ul.rules li{margin:7px 0}
+ .keyfact{background:var(--panel2);border-left:4px solid var(--gold);padding:8px 12px;margin:10px 0;
+          font-size:0.95em}
+ fieldset{border:1px solid var(--edge);border-radius:10px;padding:12px 14px;margin:14px 0}
+ legend{padding:0 8px;font-weight:bold}
+ .ctlrow{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}
+ .ctl{flex:1;min-width:210px}
+ .ctl .desc{font-size:0.82em;color:var(--dim);margin-top:4px;line-height:1.35}
+ button{background:#2a2a3c;color:var(--ink);border:1.5px solid #565672;border-radius:9px;
+        padding:11px 16px;font:inherit;cursor:pointer;min-height:44px}
+ button:hover{border-color:#9a9ac0}
+ button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+ button.primary{background:#3d2547;border-color:#b08a5a;font-weight:bold}
+ button:disabled{opacity:.45;cursor:not-allowed}
+ button.sel{border-color:var(--gold);color:var(--gold)}
+ .stage{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0}
+ .panel{background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:14px;
+        flex:1;min-width:300px}
+ .steps{font-size:0.85em;color:var(--dim);margin:0 0 8px}
+ .steps b{color:var(--ink)}
+ .suspects{display:flex;gap:16px;justify-content:center;margin:12px 0}
+ .sil{width:96px;height:124px;border-radius:8px;background:linear-gradient(#23232f,#0a0a0f);
+      display:flex;align-items:flex-end;justify-content:center;font-size:44px;color:#3a3a4e;
+      border:1px solid var(--edge);padding:4px;text-align:center}
+ .sil.revealed{color:#d8d8e8;font-size:0.78em;align-items:center;line-height:1.25}
+ .report{min-height:2.6em;font-family:'Courier New',monospace;margin:8px 0;color:var(--gold);
+      font-size:0.95em}
+ .callrow button.call{background:#2a1f33;border-color:#665;font-size:1.02em}
+ .meterwrap{margin:8px 0}
+ .meter{position:relative;height:26px;background:#26263a;border-radius:8px}
+ .meter>i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#4a4a6e,#8888c0);
+      border-radius:8px 0 0 8px;transition:width .3s}
+ @media (prefers-reduced-motion: reduce){ .meter>i{transition:none} }
+ .meter .zone{position:absolute;left:91%;right:0;top:0;bottom:0;background:rgba(255,107,133,.15);
+      border-radius:0 8px 8px 0}
+ .meter .ceil{position:absolute;left:91%;top:-5px;bottom:-5px;width:3px;background:var(--redline)}
+ .meterlbl{font-size:0.78em;color:var(--dim);margin-top:14px}
+ .meterlbl b{color:var(--red)}
+ .stat{font-family:'Courier New',monospace;font-size:0.92em;margin:6px 0 2px}
+ .badge{display:none;background:#13301e;border:1.5px solid var(--q);border-radius:10px;
+      padding:10px 14px;margin:10px 0}
+ .badge.show{display:block} .badge b{color:var(--q)}
+ .log{font-family:'Courier New',monospace;font-size:0.85em;color:var(--dim);max-height:150px;
+      overflow-y:auto;background:#0a0a10;border:1px solid var(--edge);border-radius:8px;
+      padding:8px;margin-top:8px}
+ .truth{background:var(--panel2);border:1px solid var(--edge);border-radius:10px;
+        padding:4px 16px 14px;margin-top:18px;font-size:0.95em}
+ .truth code{font-family:'Courier New',monospace;font-size:0.9em;background:#1f1f2e;
+        padding:1px 5px;border-radius:4px}
+ footer{margin-top:22px;font-size:0.85em;color:var(--dim);border-top:1px solid var(--edge);padding-top:10px}
+ .skip{position:absolute;left:-999px;top:0;background:var(--focus);color:#000;padding:8px 14px;z-index:10}
+ .skip:focus{left:8px}
+</style></head><body>
+<a class="skip" href="#game">Skip to the game</a>
+<div class="wrap">
 
+<header>
+ <h1>🕵️ The Interrogation You Cannot Win</h1>
+ <p class="tagline">A detective game whose difficulty ceiling is not a setting — it's a
+ <strong>theorem</strong>. And then you get the one tool that breaks it, with odds
+ <strong>measured on a real quantum computer</strong>.</p>
+</header>
+
+<section aria-labelledby="setup-h">
+ <h2 id="setup-h">The setup, in three steps</h2>
+ <div class="cards">
+  <div class="card"><span class="n" aria-hidden="true">1</span><strong>Suspects come in
+   pairs.</strong> Every case is two machine-suspects who are secretly either
+   <strong>PARTNERS</strong> (their stories agree no matter who is questioned first) or
+   <strong>RIVALS</strong> (their stories come out exactly opposite depending on order).
+   Your job: say which.</div>
+  <div class="card"><span class="n" aria-hidden="true">2</span><strong>One question
+   each.</strong> You may question each suspect exactly once, through an interrogation kit.
+   Here's the wall: mathematics proves that <em>no kit that exists and no kit anyone will ever
+   invent</em> can average above <strong>91%</strong> on this task. Not "hard to beat" —
+   proven impossible, the way perpetual motion is impossible.</div>
+  <div class="card"><span class="n" aria-hidden="true">3</span><strong>The forbidden
+   zone.</strong> A quantum computer can question both suspects <em>in a superposition of both
+   orders at once</em> — a physically different kind of question. Measured score:
+   <strong>97.8%</strong>. You'll earn that kit after ten honest rounds.</div>
+ </div>
+ <div class="why"><b>Why this matters:</b> the 91% ceiling binds every strategy under normal
+  cause-and-effect — every gadget, every entangled trick, every adaptive scheme, as long as the
+  two questions happen in <em>some</em> order. Beating it isn't better detective work; it
+  requires the order of events itself to be quantum. When your accuracy crosses the red line,
+  you're holding statistics that ordinary causality provably cannot produce.</div>
+</section>
+
+<section aria-labelledby="rules-h">
+ <h2 id="rules-h">Game rules</h2>
+ <ul class="rules">
+  <li>Each round, a case is dealt: two suspects, <strong>hidden as silhouettes</strong>.
+      (If you could see who they are, you could memorize the answer key — the ceiling is a
+      theorem about detectives who <em>can't</em> see inside the boxes. Identities are revealed
+      after you call.)</li>
+  <li>PARTNERS and RIVALS are dealt 50/50, so guessing blindly scores 50%.</li>
+  <li>Choose a kit, then press <strong>Interrogate</strong>. The kit questions each suspect once
+      and reports its verdict: "PARTNERS" or "RIVALS."</li>
+  <li>Kits are honest but imperfect — each has a real, physics-derived success rate
+      <em>per case</em>. The <strong>Rookie Kit</strong> (separate standard interviews) averages
+      57.5%. The <strong>Entangled Casefile</strong> (a linked two-part file each suspect stamps
+      once) averages 75% — the strongest kit we know how to build.</li>
+  <li>You make the final call — trust your kit or override it. Correct call = 1 point.</li>
+  <li>After <strong>10 rounds</strong> you earn the <strong>⚡ Switch Badge</strong>: the same
+      cases resolved with the measured odds of the real quantum switch. Watch the meter cross
+      the line the theorem draws.</li>
+ </ul>
+ <p class="keyfact">A detective's tip: your best kit has a <em>blind spot</em> — a kind of
+ suspect it is reliably, perfectly wrong about. You'll find it the honest way: by losing.
+ The reveal log will tell you why. (It's real physics, not a gimmick — the same feature that
+ makes this game winnable at all.)</p>
+</section>
+
+<section id="game" aria-labelledby="game-h">
+ <h2 id="game-h">The interrogation room</h2>
  <div class="stage">
-  <div class="panel" style="flex:2">
-   <div class="stat" id="casehdr">CASE #— · suspects unidentified</div>
-   <div class="suspects"><div class="sil" id="s1">?</div><div class="sil" id="s2">?</div></div>
-   <div class="kitrow" id="kits">
-    choose your kit:
-    <button data-k="rookie">ROOKIE KIT</button>
-    <button data-k="bell" class="sel">ENTANGLED CASEFILE</button>
-    <button data-k="switch" id="kswitch" style="display:none">⚡ SWITCH BADGE</button>
+  <div class="panel" style="flex:1.6">
+   <p class="steps">How a round works: <b>1</b> pick a kit → <b>2</b> Interrogate →
+      <b>3</b> read the kit's report → <b>4</b> make your call → the case file opens.</p>
+   <p class="stat" id="casehdr" role="status">CASE #— · suspects unidentified</p>
+   <div class="suspects">
+    <div class="sil" id="s1" role="img" aria-label="Unidentified suspect one, shown as a silhouette">?</div>
+    <div class="sil" id="s2" role="img" aria-label="Unidentified suspect two, shown as a silhouette">?</div>
    </div>
-   <div class="report" id="report">— pick a kit, then interrogate —</div>
+   <fieldset>
+    <legend>Your kit</legend>
+    <div class="ctlrow">
+     <div class="ctl">
+      <button data-k="rookie" id="krookie" aria-describedby="rookie-d">ROOKIE KIT</button>
+      <p class="desc" id="rookie-d">Interview each suspect separately with the standard
+      question. Simple, honest, averages 57.5% — and it is <em>confidently wrong</em> about
+      certain suspects.</p>
+     </div>
+     <div class="ctl">
+      <button data-k="bell" id="kbell" class="sel" aria-describedby="bell-d">ENTANGLED CASEFILE</button>
+      <p class="desc" id="bell-d">One case-file in two linked halves; each suspect stamps their
+      half once, then you compare. The best kit ordinary causality allows in practice —
+      averages 75%. Mind the blind spot.</p>
+     </div>
+     <div class="ctl">
+      <button data-k="switch" id="kswitch" hidden aria-describedby="switch-d">⚡ SWITCH BADGE</button>
+      <p class="desc" id="switch-d" hidden>Question both suspects in a superposition of orders.
+      Measured average: 97.8% (ibm_marrakesh; replicated on ibm_fez at 97.4%).</p>
+     </div>
+    </div>
+   </fieldset>
+   <p class="report" id="report" role="status">— choose a kit, then press Interrogate —</p>
    <div class="callrow">
-    <button id="interro">INTERROGATE</button>
-    <button id="callP" disabled>call PARTNERS</button>
-    <button id="callR" disabled>call RIVALS</button>
-    <button class="auto" id="auto">AUTO ×10</button>
+    <button class="primary" id="interro" aria-describedby="int-d">🔍 Interrogate</button>
+    <button class="call" id="callP" disabled>Call PARTNERS</button>
+    <button class="call" id="callR" disabled>Call RIVALS</button>
+    <button id="auto" aria-describedby="auto-d">Auto-play ×10</button>
    </div>
+   <p class="desc" id="int-d">Runs your chosen kit on this case (one question per suspect,
+   enforced). Then the call buttons unlock.</p>
+   <p class="desc" id="auto-d">Plays ten rounds automatically, always trusting the kit —
+   the fastest way to feel each kit's true average.</p>
   </div>
   <div class="panel">
-   <div class="stat">your running accuracy</div>
-   <div class="meter"><i id="acc" style="width:0%"></i><span class="zone"></span>
-     <span class="ceil"></span><span class="lbl">THE CEILING · 91% · proven</span></div>
-   <div class="stat" id="score">0 correct / 0 played · —%</div>
-   <div class="stat" id="kitstats" style="margin-top:6px"></div>
-   <div class="badge" id="badge"><b>⚡ SWITCH BADGE EARNED.</b> There is one interrogation room
-    where the order of questioning is never decided. Its odds were not designed — they were
-    <b>measured</b>: ibm_marrakesh, job d9826lkqp3as739sd2lg (replicated on ibm_fez).
-    The SWITCH kit is now on your belt.</div>
-   <div class="log" id="log"></div>
+   <h3 id="meter-h">Your accuracy</h3>
+   <div class="meterwrap">
+    <div class="meter" role="img" aria-labelledby="meter-h" aria-describedby="meter-d">
+     <i id="acc" style="width:0%"></i><span class="zone"></span><span class="ceil"></span>
+    </div>
+    <p class="meterlbl" id="meter-d">The <b>red line at 91%</b> is THE CEILING — the proven
+    maximum for any kit, ever, under definite causal order. The shaded region beyond it is the
+    forbidden zone: only the switch reaches it.</p>
+   </div>
+   <p class="stat" id="score" role="status">0 correct of 0 played · —</p>
+   <p class="stat" id="kitstats"></p>
+   <div class="badge" id="badge" role="status"><b>⚡ SWITCH BADGE EARNED.</b> Ten rounds played.
+    There is one interrogation room where the order of questioning is never decided — its odds
+    were not designed, they were <b>measured</b>. The SWITCH kit is now on your belt: select it
+    and step into the forbidden zone.</div>
+   <h3 id="log-h">Case log</h3>
+   <div class="log" id="log" role="log" aria-live="polite" aria-labelledby="log-h"></div>
   </div>
  </div>
+</section>
 
- <div class="truth">🔍 <b>What's really true here.</b> Suspects are hidden pairs of quantum
- operations; PARTNERS = commuting, RIVALS = anticommuting, dealt 50/50 from a 20-case deck.
- Kit reports resolve against <b>honest theory</b> odds per case (Rookie: separate interviews;
- Casefile: the entangled comparison — the strongest kit we know, deck average 75%, and it is
- <i>always wrong when a do-nothing suspect is involved</i>; you'll meet that as unexplained
- losses, and the reveal will show you why). <b>THE CEILING</b>: no kit that queries each suspect
- once — including every kit not yet invented — can average above <b>91%</b> on this game. That is
- a theorem (Araújo et&nbsp;al. 2015; bound re-derived and machine-verified in
- <a href="https://github.com/mblakemore/quantum">this repo</a>). The ⚡ SWITCH column is the
- measured performance of a real quantum computer questioning both suspects in a superposition of
- orders: deck average <b>97.8%</b>. Sibling demos:
- <a href="../static-duel/">STATIC duel</a> · <a href="../">the switch itself</a> ·
- <a href="../casebook-pnp/">print &amp; play</a>.</div>
+<section class="truth" aria-labelledby="truth-h">
+ <h2 id="truth-h">🔍 What's really true here</h2>
+ <p><strong>The suspects are quantum operations.</strong> PARTNERS = commuting, RIVALS =
+ anticommuting, dealt 50/50 from a 20-case deck. Kit reports resolve against honest
+ physics-derived odds per case; the Casefile's blind spot (the "do-nothing" suspect) is a real
+ structural fact — remove those cases and the theorem's ceiling silently rises to 100%, which is
+ why they're load-bearing.</p>
+ <p><strong>The ceiling is a theorem.</strong> For this balanced game the causally-separable
+ bound is 0.9098 (Araújo et&nbsp;al. 2015; re-derived from scratch and machine-verified in the
+ <a href="https://github.com/mblakemore/quantum">repository</a>, including the optimal input
+ distribution the original paper omitted). It covers fixed orders, random mixtures of orders,
+ and orders chosen adaptively mid-game — everything except <em>no definite order at all</em>.</p>
+ <p><strong>The switch column is a measurement.</strong> The real experiment scored
+ <code>p̂ = 0.9769 ± 0.0005</code> — 216.8σ above the ceiling — on <code>ibm_marrakesh</code>
+ (job <code>d9826lkqp3as739sd2lg</code>, frozen pre-registration), and replicated the next day
+ on <code>ibm_fez</code>, a chip it had never touched, at 0.9738. Even the single worst case in
+ the deck beats the ceiling on its own.</p>
+</section>
+
+<footer>
+ Part of the <a href="../../">quantum characterization campaign</a> ·
+ <a href="../">the quantum switch demo</a> ·
+ <a href="../static-duel/">STATIC: classic bot vs quantum bot</a> ·
+ <a href="../casebook-pnp/">print &amp; play tabletop version</a> ·
+ <a href="https://github.com/mblakemore/quantum">findings, pre-registrations &amp; job IDs</a>
+</footer>
 </div>
+
 <script>
 const DECK = [{"case": 1, "chars": "The Mirror & The Mirror", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 99}, {"case": 2, "chars": "The Twist & The Twist", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 99}, {"case": 3, "chars": "The Judge & The Judge", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 99}, {"case": 4, "chars": "Blend East & Blend East", "truth": "PARTNERS", "rookie": 50, "bell": 100, "switch": 99}, {"case": 5, "chars": "Blend Dawn & Blend Dawn", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 98}, {"case": 6, "chars": "The Nobody & The Mirror", "truth": "PARTNERS", "rookie": 100, "bell": 0, "switch": 98}, {"case": 7, "chars": "The Nobody & The Twist", "truth": "PARTNERS", "rookie": 0, "bell": 0, "switch": 98}, {"case": 8, "chars": "The Nobody & The Judge", "truth": "PARTNERS", "rookie": 0, "bell": 0, "switch": 98}, {"case": 9, "chars": "Blend South & The Nobody", "truth": "PARTNERS", "rookie": 50, "bell": 0, "switch": 97}, {"case": 10, "chars": "Blend Dusk & The Nobody", "truth": "PARTNERS", "rookie": 0, "bell": 0, "switch": 97}, {"case": 11, "chars": "The Mirror & The Twist", "truth": "RIVALS", "rookie": 100, "bell": 100, "switch": 97}, {"case": 12, "chars": "The Mirror & The Judge", "truth": "RIVALS", "rookie": 100, "bell": 100, "switch": 97}, {"case": 13, "chars": "The Twist & The Judge", "truth": "RIVALS", "rookie": 0, "bell": 100, "switch": 97}, {"case": 14, "chars": "Blend East & Blend West", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 98}, {"case": 15, "chars": "Blend North & Blend South", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 97}, {"case": 16, "chars": "Blend Dawn & Blend Dusk", "truth": "RIVALS", "rookie": 0, "bell": 100, "switch": 97}, {"case": 17, "chars": "The Judge & Blend East", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 98}, {"case": 18, "chars": "The Mirror & Blend Dusk", "truth": "RIVALS", "rookie": 100, "bell": 100, "switch": 97}, {"case": 19, "chars": "The Twist & Blend North", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 97}, {"case": 20, "chars": "Blend West & The Judge", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 98}];
-let kit='bell', played=0, correct=0, cur=null, pending=null, badge=false;
-const kstats={rookie:[0,0],bell:[0,0],switch:[0,0]};
-const el=id=>document.getElementById(id);
-function draw(){ cur = DECK[Math.floor(Math.random()*DECK.length)];
-  el('casehdr').textContent = `CASE #${1000+Math.floor(Math.random()*9000)} · suspects unidentified`;
-  ['s1','s2'].forEach(id=>{const s=el(id); s.className='sil'; s.textContent='?';});
-  el('report').textContent='— pick a kit, then interrogate —';
-  el('interro').disabled=false; el('callP').disabled=true; el('callR').disabled=true; pending=null;
+let kit = 'bell', played = 0, correct = 0, cur = null, pending = null, badge = false;
+const kstats = { rookie: [0, 0], bell: [0, 0], switch: [0, 0] };
+const el = id => document.getElementById(id);
+const KITNAME = { rookie: 'ROOKIE KIT', bell: 'ENTANGLED CASEFILE', switch: '⚡ SWITCH' };
+
+function draw() {
+  cur = DECK[Math.floor(Math.random() * DECK.length)];
+  el('casehdr').textContent = `CASE #${1000 + Math.floor(Math.random() * 9000)} · suspects unidentified`;
+  ['s1', 's2'].forEach((id, i) => {
+    const s = el(id); s.className = 'sil'; s.textContent = '?';
+    s.setAttribute('aria-label', `Unidentified suspect ${i + 1}, shown as a silhouette`);
+  });
+  el('report').textContent = '— choose a kit, then press Interrogate —';
+  el('interro').disabled = false; el('callP').disabled = true; el('callR').disabled = true;
+  pending = null;
 }
-function interrogate(){
-  if(!cur||pending) return;
-  const p = cur[kit]/100;
-  const pointsCorrect = Math.random()<p;
-  const truthP = cur.truth==='PARTNERS';
+function interrogate() {
+  if (!cur || pending) return;
+  const p = cur[kit] / 100;
+  const pointsCorrect = Math.random() < p;
+  const truthP = cur.truth === 'PARTNERS';
   const says = pointsCorrect ? truthP : !truthP;
-  pending = {says, pointsCorrect};
-  el('report').textContent = `your ${kit==='bell'?'CASEFILE':kit.toUpperCase()} says: ${says?'PARTNERS':'RIVALS'}`;
-  el('callP').disabled=false; el('callR').disabled=false; el('interro').disabled=true;
+  pending = { says };
+  el('report').textContent = `your ${KITNAME[kit]} reports: "${says ? 'PARTNERS' : 'RIVALS'}" — trust it, or override?`;
+  el('callP').disabled = false; el('callR').disabled = false; el('interro').disabled = true;
 }
-function call(guessP){
-  if(!pending) return;
-  const truthP = cur.truth==='PARTNERS';
-  const ok = guessP===truthP;
-  played++; if(ok) correct++;
-  kstats[kit][0]+=ok?1:0; kstats[kit][1]++;
-  ['s1','s2'].forEach((id,i)=>{const s=el(id); s.className='sil revealed';
-    s.textContent=cur.chars.split(' & ')[i];});
-  log(`${cur.chars} → ${cur.truth}. you called ${guessP?'PARTNERS':'RIVALS'} ${ok?'✓':'✗'}`+
-      (kit==='bell'&&cur.bell===0?'  (your casefile met a Nobody — it is ALWAYS wrong there)':''));
+function call(guessP) {
+  if (!pending) return;
+  const truthP = cur.truth === 'PARTNERS';
+  const ok = guessP === truthP;
+  played++; if (ok) correct++;
+  kstats[kit][0] += ok ? 1 : 0; kstats[kit][1]++;
+  ['s1', 's2'].forEach((id, i) => {
+    const s = el(id); s.className = 'sil revealed';
+    const name = cur.chars.split(' & ')[i];
+    s.textContent = name;
+    s.setAttribute('aria-label', `Suspect ${i + 1} revealed: ${name}`);
+  });
+  let line = `${cur.chars} → ${cur.truth}. you called ${guessP ? 'PARTNERS' : 'RIVALS'}: ${ok ? 'correct ✓' : 'wrong ✗'}`;
+  if (kit === 'bell' && cur.bell === 0)
+    line += ' — your Casefile met a Nobody: it is ALWAYS wrong when a do-nothing suspect is involved. That blind spot is the load-bearing physics.';
+  if (kit === 'rookie' && cur.rookie === 0)
+    line += ' — the Rookie Kit is deterministically wrong about this suspect type.';
+  log(line);
   upd();
-  setTimeout(draw, 900);
+  setTimeout(draw, 950);
 }
-function upd(){
-  const pct = played? (100*correct/played):0;
-  el('acc').style.width=Math.min(100,pct)+'%';
-  el('score').textContent=`${correct} correct / ${played} played · ${pct.toFixed(1)}%`;
-  el('kitstats').innerHTML = Object.entries(kstats).map(([k,v])=>
-    v[1]?`${k}: ${v[0]}/${v[1]}`:'').filter(Boolean).join(' · ');
-  if(!badge && played>=10){ badge=true; el('badge').classList.add('on');
-    el('kswitch').style.display='inline-block';
-    log('⚡ SWITCH BADGE unlocked — try the forbidden zone.'); }
+function upd() {
+  const pct = played ? (100 * correct / played) : 0;
+  el('acc').style.width = Math.min(100, pct) + '%';
+  el('score').textContent = `${correct} correct of ${played} played · ${played ? pct.toFixed(1) + '%' : '—'}`;
+  el('kitstats').textContent = Object.entries(kstats)
+    .filter(([, v]) => v[1]).map(([k, v]) => `${KITNAME[k]}: ${v[0]}/${v[1]}`).join(' · ');
+  const m = document.querySelector('.meter');
+  m.setAttribute('aria-label', `Accuracy ${played ? pct.toFixed(0) : 0} percent of the way along a scale whose proven ceiling is 91 percent` + (pct > 91 ? ' — you are inside the forbidden zone' : ''));
+  if (!badge && played >= 10) {
+    badge = true; el('badge').classList.add('show');
+    el('kswitch').hidden = false; el('switch-d').hidden = false;
+    log('⚡ SWITCH BADGE unlocked — select it and step into the forbidden zone.');
+  }
 }
-function log(m){const L=el('log');L.innerHTML+=m+'<br>';L.scrollTop=L.scrollHeight;}
-document.querySelectorAll('#kits button').forEach(b=>b.onclick=()=>{
-  kit=b.dataset.k; document.querySelectorAll('#kits button').forEach(x=>x.classList.remove('sel'));
-  b.classList.add('sel');});
-el('interro').onclick=interrogate;
-el('callP').onclick=()=>call(true); el('callR').onclick=()=>call(false);
-el('auto').onclick=()=>{ let n=10; const t=setInterval(()=>{ if(n--<=0){clearInterval(t);return;}
-  if(!pending) interrogate();
-  // auto-player trusts the kit
-  call(pending.says); }, 260); };
+function log(m) {
+  const L = el('log'); const d = document.createElement('div');
+  d.textContent = m; L.appendChild(d); L.scrollTop = L.scrollHeight;
+}
+document.querySelectorAll('fieldset button[data-k]').forEach(b => b.onclick = () => {
+  kit = b.dataset.k;
+  document.querySelectorAll('fieldset button[data-k]').forEach(x => x.classList.remove('sel'));
+  b.classList.add('sel');
+  if (!pending) el('report').textContent = `${KITNAME[kit]} selected — press Interrogate.`;
+});
+el('interro').onclick = interrogate;
+el('callP').onclick = () => call(true);
+el('callR').onclick = () => call(false);
+el('auto').onclick = () => {
+  let n = 10;
+  const t = setInterval(() => {
+    if (n-- <= 0) { clearInterval(t); return; }
+    if (!pending) interrogate();
+    call(pending.says);
+  }, 290);
+};
 draw();
 </script></body></html>
