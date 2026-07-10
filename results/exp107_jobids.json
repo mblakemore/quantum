@@ -1,0 +1,2414 @@
+{
+ "experiment": "exp107-cyclic3-capacity",
+ "cycle": "C4532-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp107",
+ "prereg": "experiments/exp107-cyclic3-capacity-preregistration.md",
+ "gates": {
+  "sentinel_min_disc": 1.6,
+  "deep_min_p000": 0.55,
+  "null_D_band": 0.05,
+  "win_floor": 0.1
+ },
+ "shuffle_seed": 4532,
+ "pair": [
+  7,
+  17
+ ],
+ "triple": [
+  7,
+  17,
+  6
+ ],
+ "job_id": "d9845dif47jc73a7ehe0",
+ "metas": [
+  {
+   "label": "sent_start_commute",
+   "kind": "sentinel",
+   "pair": "(X,X)",
+   "commuting": true,
+   "replicate": "start",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "sent_start_anticommute",
+   "kind": "sentinel",
+   "pair": "(X,Z)",
+   "commuting": false,
+   "replicate": "start",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "deep_start",
+   "kind": "deep_sentinel",
+   "replicate": "start",
+   "shots": 1500,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "sw(X11)b1",
+   "kind": "switch",
+   "ops": "X11",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 140
+  },
+  {
+   "label": "sw(ZZZ)b0",
+   "kind": "switch",
+   "ops": "ZZZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 415
+  },
+  {
+   "label": "nu(XXY)b1",
+   "kind": "null",
+   "ops": "XXY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(Y1Y)b1",
+   "kind": "switch",
+   "ops": "Y1Y",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 278
+  },
+  {
+   "label": "nu(YXY)b0",
+   "kind": "null",
+   "ops": "YXY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(YY1)b1",
+   "kind": "null",
+   "ops": "YY1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(YXX)b1",
+   "kind": "switch",
+   "ops": "YXX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 406
+  },
+  {
+   "label": "sw(1ZX)b1",
+   "kind": "switch",
+   "ops": "1ZX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 280
+  },
+  {
+   "label": "nu(ZXY)b0",
+   "kind": "null",
+   "ops": "ZXY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(Y1Y)b0",
+   "kind": "null",
+   "ops": "Y1Y",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(ZYZ)b1",
+   "kind": "null",
+   "ops": "ZYZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(YYY)b0",
+   "kind": "switch",
+   "ops": "YYY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 410
+  },
+  {
+   "label": "nu(1YY)b1",
+   "kind": "null",
+   "ops": "1YY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(Z1X)b0",
+   "kind": "null",
+   "ops": "Z1X",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(ZXX)b1",
+   "kind": "null",
+   "ops": "ZXX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "sw(ZXX)b0",
+   "kind": "switch",
+   "ops": "ZXX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 411
+  },
+  {
+   "label": "sw(XZ1)b1",
+   "kind": "switch",
+   "ops": "XZ1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 279
+  },
+  {
+   "label": "nu(ZYZ)b0",
+   "kind": "null",
+   "ops": "ZYZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(YXZ)b0",
+   "kind": "null",
+   "ops": "YXZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(X1Z)b1",
+   "kind": "null",
+   "ops": "X1Z",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(111)b1",
+   "kind": "switch",
+   "ops": "111",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 2,
+   "depth": 19
+  },
+  {
+   "label": "sw(Y1X)b0",
+   "kind": "switch",
+   "ops": "Y1X",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 274
+  },
+  {
+   "label": "nu(1XZ)b1",
+   "kind": "null",
+   "ops": "1XZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(Y1X)b1",
+   "kind": "null",
+   "ops": "Y1X",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(ZYY)b0",
+   "kind": "null",
+   "ops": "ZYY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(1ZZ)b0",
+   "kind": "null",
+   "ops": "1ZZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(XYY)b0",
+   "kind": "switch",
+   "ops": "XYY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 404
+  },
+  {
+   "label": "sw(11X)b0",
+   "kind": "switch",
+   "ops": "11X",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 144
+  },
+  {
+   "label": "sw(1Z1)b1",
+   "kind": "switch",
+   "ops": "1Z1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 142
+  },
+  {
+   "label": "nu(XZY)b0",
+   "kind": "null",
+   "ops": "XZY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(YXX)b1",
+   "kind": "null",
+   "ops": "YXX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(1ZY)b1",
+   "kind": "null",
+   "ops": "1ZY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(YZY)b1",
+   "kind": "null",
+   "ops": "YZY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(1YZ)b0",
+   "kind": "null",
+   "ops": "1YZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(XXX)b1",
+   "kind": "null",
+   "ops": "XXX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(1YZ)b1",
+   "kind": "null",
+   "ops": "1YZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(XXY)b0",
+   "kind": "null",
+   "ops": "XXY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(ZZX)b0",
+   "kind": "null",
+   "ops": "ZZX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(1Z1)b0",
+   "kind": "null",
+   "ops": "1Z1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(Z1X)b1",
+   "kind": "switch",
+   "ops": "Z1X",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 279
+  },
+  {
+   "label": "sw(1XZ)b0",
+   "kind": "switch",
+   "ops": "1XZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 279
+  },
+  {
+   "label": "nu(1XX)b1",
+   "kind": "null",
+   "ops": "1XX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(XY1)b1",
+   "kind": "switch",
+   "ops": "XY1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 274
+  },
+  {
+   "label": "nu(1ZX)b0",
+   "kind": "null",
+   "ops": "1ZX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(YZZ)b1",
+   "kind": "null",
+   "ops": "YZZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(11X)b1",
+   "kind": "switch",
+   "ops": "11X",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 144
+  },
+  {
+   "label": "nu(Z1Y)b1",
+   "kind": "null",
+   "ops": "Z1Y",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(X1X)b1",
+   "kind": "switch",
+   "ops": "X1X",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 284
+  },
+  {
+   "label": "nu(ZZY)b1",
+   "kind": "null",
+   "ops": "ZZY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(Z1Z)b1",
+   "kind": "switch",
+   "ops": "Z1Z",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 281
+  },
+  {
+   "label": "sw(1X1)b0",
+   "kind": "switch",
+   "ops": "1X1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 142
+  },
+  {
+   "label": "sw(YZX)b1",
+   "kind": "switch",
+   "ops": "YZX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 403
+  },
+  {
+   "label": "nu(XXZ)b0",
+   "kind": "null",
+   "ops": "XXZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(YY1)b1",
+   "kind": "switch",
+   "ops": "YY1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 278
+  },
+  {
+   "label": "nu(1ZY)b0",
+   "kind": "null",
+   "ops": "1ZY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(ZX1)b0",
+   "kind": "switch",
+   "ops": "ZX1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 280
+  },
+  {
+   "label": "sw(XX1)b1",
+   "kind": "switch",
+   "ops": "XX1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 284
+  },
+  {
+   "label": "sw(X1Y)b0",
+   "kind": "switch",
+   "ops": "X1Y",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 276
+  },
+  {
+   "label": "nu(XZY)b1",
+   "kind": "null",
+   "ops": "XZY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(YZY)b0",
+   "kind": "null",
+   "ops": "YZY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(Y1Z)b0",
+   "kind": "switch",
+   "ops": "Y1Z",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "nu(X11)b1",
+   "kind": "null",
+   "ops": "X11",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(Z1Z)b0",
+   "kind": "null",
+   "ops": "Z1Z",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(ZYY)b0",
+   "kind": "switch",
+   "ops": "ZYY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "nu(1Z1)b1",
+   "kind": "null",
+   "ops": "1Z1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(Y1X)b0",
+   "kind": "null",
+   "ops": "Y1X",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(XY1)b1",
+   "kind": "null",
+   "ops": "XY1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(11X)b1",
+   "kind": "null",
+   "ops": "11X",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(1Y1)b0",
+   "kind": "switch",
+   "ops": "1Y1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 138
+  },
+  {
+   "label": "sw(ZZY)b0",
+   "kind": "switch",
+   "ops": "ZZY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 406
+  },
+  {
+   "label": "sw(1Z1)b0",
+   "kind": "switch",
+   "ops": "1Z1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 142
+  },
+  {
+   "label": "sw(Y1X)b1",
+   "kind": "switch",
+   "ops": "Y1X",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 274
+  },
+  {
+   "label": "sw(YZZ)b0",
+   "kind": "switch",
+   "ops": "YZZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 408
+  },
+  {
+   "label": "nu(YX1)b1",
+   "kind": "null",
+   "ops": "YX1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(ZZ1)b1",
+   "kind": "null",
+   "ops": "ZZ1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(YYX)b1",
+   "kind": "switch",
+   "ops": "YYX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 404
+  },
+  {
+   "label": "nu(ZXY)b1",
+   "kind": "null",
+   "ops": "ZXY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(XYX)b1",
+   "kind": "switch",
+   "ops": "XYX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 406
+  },
+  {
+   "label": "sw(YYZ)b0",
+   "kind": "switch",
+   "ops": "YYZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 407
+  },
+  {
+   "label": "sw(ZXX)b1",
+   "kind": "switch",
+   "ops": "ZXX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 411
+  },
+  {
+   "label": "sw(XX1)b0",
+   "kind": "switch",
+   "ops": "XX1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 284
+  },
+  {
+   "label": "sw(Z1Y)b1",
+   "kind": "switch",
+   "ops": "Z1Y",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "sw(ZYX)b0",
+   "kind": "switch",
+   "ops": "ZYX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "sw(ZXY)b1",
+   "kind": "switch",
+   "ops": "ZXY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 403
+  },
+  {
+   "label": "nu(YX1)b0",
+   "kind": "null",
+   "ops": "YX1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(YYX)b0",
+   "kind": "null",
+   "ops": "YYX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(Y1Z)b0",
+   "kind": "null",
+   "ops": "Y1Z",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(XYX)b0",
+   "kind": "null",
+   "ops": "XYX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(Y11)b1",
+   "kind": "null",
+   "ops": "Y11",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(X1X)b1",
+   "kind": "null",
+   "ops": "X1X",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(YYY)b0",
+   "kind": "null",
+   "ops": "YYY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(11Y)b1",
+   "kind": "null",
+   "ops": "11Y",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(ZZX)b0",
+   "kind": "switch",
+   "ops": "ZZX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 410
+  },
+  {
+   "label": "sw(YZY)b0",
+   "kind": "switch",
+   "ops": "YZY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "sw(ZZ1)b0",
+   "kind": "switch",
+   "ops": "ZZ1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 281
+  },
+  {
+   "label": "sw(1XZ)b1",
+   "kind": "switch",
+   "ops": "1XZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 279
+  },
+  {
+   "label": "sw(X1Y)b1",
+   "kind": "switch",
+   "ops": "X1Y",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 276
+  },
+  {
+   "label": "sw(YY1)b0",
+   "kind": "switch",
+   "ops": "YY1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 278
+  },
+  {
+   "label": "sw(X1X)b0",
+   "kind": "switch",
+   "ops": "X1X",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 284
+  },
+  {
+   "label": "nu(ZYX)b1",
+   "kind": "null",
+   "ops": "ZYX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(ZX1)b0",
+   "kind": "null",
+   "ops": "ZX1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "sw(1ZY)b0",
+   "kind": "switch",
+   "ops": "1ZY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "sw(1X1)b1",
+   "kind": "switch",
+   "ops": "1X1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 142
+  },
+  {
+   "label": "sw(XZY)b1",
+   "kind": "switch",
+   "ops": "XZY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "sw(YYY)b1",
+   "kind": "switch",
+   "ops": "YYY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 410
+  },
+  {
+   "label": "sw(Z11)b0",
+   "kind": "switch",
+   "ops": "Z11",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 142
+  },
+  {
+   "label": "nu(XYY)b1",
+   "kind": "null",
+   "ops": "XYY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(YXY)b0",
+   "kind": "switch",
+   "ops": "YXY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 404
+  },
+  {
+   "label": "nu(ZY1)b0",
+   "kind": "null",
+   "ops": "ZY1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(YZ1)b1",
+   "kind": "null",
+   "ops": "YZ1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(ZZZ)b0",
+   "kind": "null",
+   "ops": "ZZZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(YZY)b1",
+   "kind": "switch",
+   "ops": "YZY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "sw(1ZZ)b0",
+   "kind": "switch",
+   "ops": "1ZZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 281
+  },
+  {
+   "label": "nu(XYZ)b1",
+   "kind": "null",
+   "ops": "XYZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(1Y1)b1",
+   "kind": "null",
+   "ops": "1Y1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(Z11)b1",
+   "kind": "switch",
+   "ops": "Z11",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 142
+  },
+  {
+   "label": "nu(X1X)b0",
+   "kind": "null",
+   "ops": "X1X",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(11X)b0",
+   "kind": "null",
+   "ops": "11X",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(11Z)b1",
+   "kind": "switch",
+   "ops": "11Z",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 144
+  },
+  {
+   "label": "sw(YZ1)b1",
+   "kind": "switch",
+   "ops": "YZ1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "nu(111)b0",
+   "kind": "null",
+   "ops": "111",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(ZZY)b0",
+   "kind": "null",
+   "ops": "ZZY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(YYY)b1",
+   "kind": "null",
+   "ops": "YYY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(ZY1)b0",
+   "kind": "switch",
+   "ops": "ZY1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "sw(ZYY)b1",
+   "kind": "switch",
+   "ops": "ZYY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "nu(ZY1)b1",
+   "kind": "null",
+   "ops": "ZY1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(YZX)b0",
+   "kind": "null",
+   "ops": "YZX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(X11)b0",
+   "kind": "switch",
+   "ops": "X11",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 140
+  },
+  {
+   "label": "sent_mid_commute",
+   "kind": "sentinel",
+   "pair": "(X,X)",
+   "commuting": true,
+   "replicate": "mid",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "sent_mid_anticommute",
+   "kind": "sentinel",
+   "pair": "(X,Z)",
+   "commuting": false,
+   "replicate": "mid",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "deep_mid",
+   "kind": "deep_sentinel",
+   "replicate": "mid",
+   "shots": 1500,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "nu(11Z)b1",
+   "kind": "null",
+   "ops": "11Z",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "sw(1YY)b1",
+   "kind": "switch",
+   "ops": "1YY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 278
+  },
+  {
+   "label": "sw(XYZ)b1",
+   "kind": "switch",
+   "ops": "XYZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "nu(XZZ)b0",
+   "kind": "null",
+   "ops": "XZZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(Z1Z)b1",
+   "kind": "null",
+   "ops": "Z1Z",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(XZ1)b0",
+   "kind": "null",
+   "ops": "XZ1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "sw(1XY)b1",
+   "kind": "switch",
+   "ops": "1XY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 274
+  },
+  {
+   "label": "sw(ZZZ)b1",
+   "kind": "switch",
+   "ops": "ZZZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 415
+  },
+  {
+   "label": "nu(XZX)b0",
+   "kind": "null",
+   "ops": "XZX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(YZZ)b0",
+   "kind": "null",
+   "ops": "YZZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(1XY)b0",
+   "kind": "null",
+   "ops": "1XY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(YY1)b0",
+   "kind": "null",
+   "ops": "YY1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(XZZ)b1",
+   "kind": "switch",
+   "ops": "XZZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 412
+  },
+  {
+   "label": "nu(1Y1)b0",
+   "kind": "null",
+   "ops": "1Y1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(XX1)b0",
+   "kind": "null",
+   "ops": "XX1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(XX1)b1",
+   "kind": "null",
+   "ops": "XX1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(1YX)b0",
+   "kind": "switch",
+   "ops": "1YX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 276
+  },
+  {
+   "label": "nu(ZYX)b0",
+   "kind": "null",
+   "ops": "ZYX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(YXY)b1",
+   "kind": "null",
+   "ops": "YXY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(1X1)b0",
+   "kind": "null",
+   "ops": "1X1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(ZXX)b0",
+   "kind": "null",
+   "ops": "ZXX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(1YY)b0",
+   "kind": "null",
+   "ops": "1YY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(ZZX)b1",
+   "kind": "switch",
+   "ops": "ZZX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 410
+  },
+  {
+   "label": "sw(Z1X)b0",
+   "kind": "switch",
+   "ops": "Z1X",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 279
+  },
+  {
+   "label": "sw(X1Z)b0",
+   "kind": "switch",
+   "ops": "X1Z",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 280
+  },
+  {
+   "label": "nu(XYZ)b0",
+   "kind": "null",
+   "ops": "XYZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(1Y1)b1",
+   "kind": "switch",
+   "ops": "1Y1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 138
+  },
+  {
+   "label": "nu(YXZ)b1",
+   "kind": "null",
+   "ops": "YXZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(YXX)b0",
+   "kind": "null",
+   "ops": "YXX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(X11)b0",
+   "kind": "null",
+   "ops": "X11",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(YZX)b1",
+   "kind": "null",
+   "ops": "YZX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(Y11)b1",
+   "kind": "switch",
+   "ops": "Y11",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 137
+  },
+  {
+   "label": "nu(YYX)b1",
+   "kind": "null",
+   "ops": "YYX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(ZXY)b0",
+   "kind": "switch",
+   "ops": "ZXY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 403
+  },
+  {
+   "label": "sw(XXX)b0",
+   "kind": "switch",
+   "ops": "XXX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 416
+  },
+  {
+   "label": "nu(XZX)b1",
+   "kind": "null",
+   "ops": "XZX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "sw(11Y)b1",
+   "kind": "switch",
+   "ops": "11Y",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 140
+  },
+  {
+   "label": "sw(XY1)b0",
+   "kind": "switch",
+   "ops": "XY1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 274
+  },
+  {
+   "label": "sw(XXX)b1",
+   "kind": "switch",
+   "ops": "XXX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 416
+  },
+  {
+   "label": "nu(YZ1)b0",
+   "kind": "null",
+   "ops": "YZ1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(XYZ)b0",
+   "kind": "switch",
+   "ops": "XYZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "nu(XZZ)b1",
+   "kind": "null",
+   "ops": "XZZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(11Z)b0",
+   "kind": "null",
+   "ops": "11Z",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(XYX)b1",
+   "kind": "null",
+   "ops": "XYX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(1ZY)b1",
+   "kind": "switch",
+   "ops": "1ZY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "sw(1ZZ)b1",
+   "kind": "switch",
+   "ops": "1ZZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 281
+  },
+  {
+   "label": "nu(X1Y)b1",
+   "kind": "null",
+   "ops": "X1Y",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "sw(ZXZ)b0",
+   "kind": "switch",
+   "ops": "ZXZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 412
+  },
+  {
+   "label": "sw(11Y)b0",
+   "kind": "switch",
+   "ops": "11Y",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 140
+  },
+  {
+   "label": "nu(XYY)b0",
+   "kind": "null",
+   "ops": "XYY",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(Y1Z)b1",
+   "kind": "switch",
+   "ops": "Y1Z",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "nu(1YX)b0",
+   "kind": "null",
+   "ops": "1YX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(XZ1)b1",
+   "kind": "null",
+   "ops": "XZ1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(ZZ1)b1",
+   "kind": "switch",
+   "ops": "ZZ1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 281
+  },
+  {
+   "label": "sw(XZY)b0",
+   "kind": "switch",
+   "ops": "XZY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "sw(XYY)b1",
+   "kind": "switch",
+   "ops": "XYY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 404
+  },
+  {
+   "label": "sw(YYX)b0",
+   "kind": "switch",
+   "ops": "YYX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 404
+  },
+  {
+   "label": "sw(YXZ)b1",
+   "kind": "switch",
+   "ops": "YXZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 407
+  },
+  {
+   "label": "sw(XZZ)b0",
+   "kind": "switch",
+   "ops": "XZZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 412
+  },
+  {
+   "label": "sw(1XX)b1",
+   "kind": "switch",
+   "ops": "1XX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 284
+  },
+  {
+   "label": "nu(X1Z)b0",
+   "kind": "null",
+   "ops": "X1Z",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(Z11)b0",
+   "kind": "null",
+   "ops": "Z11",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(1ZZ)b1",
+   "kind": "null",
+   "ops": "1ZZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(ZXZ)b0",
+   "kind": "null",
+   "ops": "ZXZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(ZZ1)b0",
+   "kind": "null",
+   "ops": "ZZ1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(1YX)b1",
+   "kind": "switch",
+   "ops": "1YX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 276
+  },
+  {
+   "label": "sw(1YY)b0",
+   "kind": "switch",
+   "ops": "1YY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 278
+  },
+  {
+   "label": "sw(ZXZ)b1",
+   "kind": "switch",
+   "ops": "ZXZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 412
+  },
+  {
+   "label": "nu(XY1)b0",
+   "kind": "null",
+   "ops": "XY1",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(XXY)b0",
+   "kind": "switch",
+   "ops": "XXY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 406
+  },
+  {
+   "label": "nu(1XZ)b0",
+   "kind": "null",
+   "ops": "1XZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(Y1Z)b1",
+   "kind": "null",
+   "ops": "Y1Z",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(1X1)b1",
+   "kind": "null",
+   "ops": "1X1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(YYZ)b0",
+   "kind": "null",
+   "ops": "YYZ",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(YX1)b0",
+   "kind": "switch",
+   "ops": "YX1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 276
+  },
+  {
+   "label": "nu(1YX)b1",
+   "kind": "null",
+   "ops": "1YX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "sw(ZX1)b1",
+   "kind": "switch",
+   "ops": "ZX1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 280
+  },
+  {
+   "label": "sw(111)b0",
+   "kind": "switch",
+   "ops": "111",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 2,
+   "depth": 19
+  },
+  {
+   "label": "nu(XXX)b0",
+   "kind": "null",
+   "ops": "XXX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(1XX)b0",
+   "kind": "switch",
+   "ops": "1XX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 284
+  },
+  {
+   "label": "sw(11Z)b0",
+   "kind": "switch",
+   "ops": "11Z",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 144
+  },
+  {
+   "label": "sw(YYZ)b1",
+   "kind": "switch",
+   "ops": "YYZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 407
+  },
+  {
+   "label": "nu(X1Y)b0",
+   "kind": "null",
+   "ops": "X1Y",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(Y1Y)b0",
+   "kind": "switch",
+   "ops": "Y1Y",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 278
+  },
+  {
+   "label": "nu(ZZX)b1",
+   "kind": "null",
+   "ops": "ZZX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(X1Z)b1",
+   "kind": "switch",
+   "ops": "X1Z",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 280
+  },
+  {
+   "label": "nu(Z1X)b1",
+   "kind": "null",
+   "ops": "Z1X",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(1XX)b0",
+   "kind": "null",
+   "ops": "1XX",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "nu(YYZ)b1",
+   "kind": "null",
+   "ops": "YYZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "sw(XZX)b1",
+   "kind": "switch",
+   "ops": "XZX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 411
+  },
+  {
+   "label": "nu(ZX1)b1",
+   "kind": "null",
+   "ops": "ZX1",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(1XY)b1",
+   "kind": "null",
+   "ops": "1XY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(11Y)b0",
+   "kind": "null",
+   "ops": "11Y",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(Z11)b1",
+   "kind": "null",
+   "ops": "Z11",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(1ZX)b1",
+   "kind": "null",
+   "ops": "1ZX",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(Y11)b0",
+   "kind": "switch",
+   "ops": "Y11",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 41,
+   "depth": 137
+  },
+  {
+   "label": "sw(YZ1)b0",
+   "kind": "switch",
+   "ops": "YZ1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "nu(Y1Y)b1",
+   "kind": "null",
+   "ops": "Y1Y",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "nu(ZZZ)b1",
+   "kind": "null",
+   "ops": "ZZZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "sw(1YZ)b1",
+   "kind": "switch",
+   "ops": "1YZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "sw(XXZ)b1",
+   "kind": "switch",
+   "ops": "XXZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 413
+  },
+  {
+   "label": "sw(YZX)b0",
+   "kind": "switch",
+   "ops": "YZX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 403
+  },
+  {
+   "label": "nu(ZYY)b1",
+   "kind": "null",
+   "ops": "ZYY",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "sw(ZYX)b1",
+   "kind": "switch",
+   "ops": "ZYX",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 405
+  },
+  {
+   "label": "sw(ZY1)b1",
+   "kind": "switch",
+   "ops": "ZY1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "sw(ZYZ)b1",
+   "kind": "switch",
+   "ops": "ZYZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 408
+  },
+  {
+   "label": "sw(XYX)b0",
+   "kind": "switch",
+   "ops": "XYX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 406
+  },
+  {
+   "label": "sw(Z1Y)b0",
+   "kind": "switch",
+   "ops": "Z1Y",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "sw(1YZ)b0",
+   "kind": "switch",
+   "ops": "1YZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 275
+  },
+  {
+   "label": "nu(Z1Y)b0",
+   "kind": "null",
+   "ops": "Z1Y",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(YX1)b1",
+   "kind": "switch",
+   "ops": "YX1",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 276
+  },
+  {
+   "label": "nu(XXZ)b1",
+   "kind": "null",
+   "ops": "XXZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "nu(ZXZ)b1",
+   "kind": "null",
+   "ops": "ZXZ",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sw(YZZ)b1",
+   "kind": "switch",
+   "ops": "YZZ",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 408
+  },
+  {
+   "label": "sw(YXZ)b0",
+   "kind": "switch",
+   "ops": "YXZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 407
+  },
+  {
+   "label": "sw(YXY)b1",
+   "kind": "switch",
+   "ops": "YXY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 404
+  },
+  {
+   "label": "sw(XXY)b1",
+   "kind": "switch",
+   "ops": "XXY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 406
+  },
+  {
+   "label": "sw(1ZX)b0",
+   "kind": "switch",
+   "ops": "1ZX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 280
+  },
+  {
+   "label": "sw(Z1Z)b0",
+   "kind": "switch",
+   "ops": "Z1Z",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 281
+  },
+  {
+   "label": "sw(ZYZ)b0",
+   "kind": "switch",
+   "ops": "ZYZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 408
+  },
+  {
+   "label": "sw(ZZY)b1",
+   "kind": "switch",
+   "ops": "ZZY",
+   "input_bit": 1,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 406
+  },
+  {
+   "label": "sw(XXZ)b0",
+   "kind": "switch",
+   "ops": "XXZ",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 413
+  },
+  {
+   "label": "sw(XZ1)b0",
+   "kind": "switch",
+   "ops": "XZ1",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 279
+  },
+  {
+   "label": "sw(YXX)b0",
+   "kind": "switch",
+   "ops": "YXX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 406
+  },
+  {
+   "label": "sw(1XY)b0",
+   "kind": "switch",
+   "ops": "1XY",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 74,
+   "depth": 274
+  },
+  {
+   "label": "nu(111)b1",
+   "kind": "null",
+   "ops": "111",
+   "input_bit": 1,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "sw(XZX)b0",
+   "kind": "switch",
+   "ops": "XZX",
+   "input_bit": 0,
+   "shots": 800,
+   "twoq": 110,
+   "depth": 411
+  },
+  {
+   "label": "nu(Y11)b0",
+   "kind": "null",
+   "ops": "Y11",
+   "input_bit": 0,
+   "shots": 500,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "sent_end_commute",
+   "kind": "sentinel",
+   "pair": "(X,X)",
+   "commuting": true,
+   "replicate": "end",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "sent_end_anticommute",
+   "kind": "sentinel",
+   "pair": "(X,Z)",
+   "commuting": false,
+   "replicate": "end",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "deep_end",
+   "kind": "deep_sentinel",
+   "replicate": "end",
+   "shots": 1500,
+   "twoq": 110,
+   "depth": 405
+  }
+ ]
+}
