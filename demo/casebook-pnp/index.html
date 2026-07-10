@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>The Casebook of Detective Whisper — Print &amp; Play</title>
+<style>
+ @page { size letter; margin: 0.55in; }
+ * { box-sizing: border-box; }
+ body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; margin:0; font-size:10.5pt; line-height:1.38; }
+ .page { page-break-after: always; padding: 0.15in 0; }
+ .page:last-child { page-break-after: auto; }
+ h1 { font-size:23pt; margin:0 0 2pt; letter-spacing:0.5px; }
+ h2 { font-size:14pt; border-bottom:2.2px solid #1a1a1a; padding-bottom:2px; margin:10px 0 6px; }
+ h3 { font-size:11pt; margin:8px 0 3px; text-transform:uppercase; letter-spacing:1px; }
+ .tag { font-style:italic; color:#555; margin:0 0 10px; }
+ .cols { display:flex; gap:16px; } .col { flex:1; }
+ table { border-collapse:collapse; width:100%; font-size:9pt; font-family: 'Courier New', monospace; }
+ th,td { border:1px solid #888; padding:2px 4px; text-align:center; }
+ th { background:#eee; font-family:Georgia,serif; }
+ td.ch { text-align:left; font-family:Georgia,serif; }
+ td.sw { font-weight:bold; background:#f3f3f3; }
+ td.tr { font-size:7.5pt; color:#444; }
+ .redline { color:#b00020; font-weight:bold; }
+ .card { border:1.6px solid #1a1a1a; border-radius:8px; padding:7px 9px; width:2.42in; min-height:1.55in;
+          display:inline-block; vertical-align:top; margin:4px; position:relative; }
+ .card h4 { margin:0 0 4px; font-size:10.5pt; border-bottom:1px solid #999; padding-bottom:2px; }
+ .card p { margin:2px 0; font-size:8.6pt; }
+ .cut { color:#999; font-size:8pt; font-style:italic; }
+ .truth { background:#101018; color:#e8e8f0; padding:12px 14px; border-radius:6px; }
+ .truth a { color:#9ecbff; }
+ .mono { font-family:'Courier New',monospace; font-size:8.6pt; }
+ .track { display:flex; margin:6px 0 2px; }
+ .track div { flex:1; border:1px solid #666; height:0.24in; font-size:6.6pt; text-align:center; line-height:0.24in; }
+ .track .ceil { border-left:3.5px solid #b00020; }
+ .zone { background:#f7e9ec; }
+ .note { font-size:8.6pt; background:#f4f4f4; border-left:3px solid #888; padding:5px 8px; margin:6px 0; }
+ ol,ul { margin:4px 0 6px 18px; padding:0; } li{margin:2px 0;}
+ .tally td { height:0.24in; }
+ .footer { font-size:7.6pt; color:#666; margin-top:8px; border-top:1px solid #bbb; padding-top:3px; }
+</style></head><body>
+
+<!-- ============================ PAGE 1 ============================ -->
+<div class="page">
+ <h1>THE CASEBOOK OF DETECTIVE WHISPER</h1>
+ <p class="tag">Two small games about a big discovery. Every probability in this booklet was
+ <b>measured on a real quantum computer</b> in July 2026 — none of the odds were designed.</p>
+
+ <div class="cols"><div class="col">
+  <h2>Game 1 — THE INTERROGATION</h2>
+  <p><i>2+ players &middot; two ten-sided dice (d100) &middot; 10 min</i></p>
+  <p>The city's machines come in pairs: <b>PARTNERS</b> (their stories agree no matter who is
+  questioned first) or <b>RIVALS</b> (their stories come out opposite). You may question each
+  suspect <b>once</b>. Then you must call it.</p>
+  <ol>
+   <li>One player is the <b>Dealer</b> (holds the Case Table, page 2). Others are Detectives.</li>
+   <li>Dealer rolls d20 (or picks secretly) to select a <b>Case</b> and announces only the two
+       suspect names.</li>
+   <li>The Detective chooses an <b>Interrogation Kit</b> (cut-out cards, page 2) and announces it.</li>
+   <li>Dealer rolls d100 against that case's column for that kit. Roll &le; number = the kit
+       points to the <b>correct</b> answer this round; the Dealer says "your kit says PARTNERS"
+       (or RIVALS) accordingly — truthfully on a success, falsely on a failure.</li>
+   <li>The Detective calls PARTNERS or RIVALS (you may distrust your kit!). Dealer reveals.
+       Correct = 1 point. Play 10 rounds; track your % on the score track.</li>
+  </ol>
+  <p class="redline">THE CEILING: no kit that questions each suspect once — not these two, not
+  any kit anyone will ever invent — can average above <u>91%</u>. That is a mathematical theorem.</p>
+  <p>Then earn the <b>&#9889; SWITCH BADGE</b> (after 10 rounds): re-play using the SWITCH column
+  — the odds a real quantum computer achieved by questioning the suspects
+  <b>in both orders at once</b>. Welcome to the forbidden zone.</p>
+ </div><div class="col">
+  <h2>Game 2 — STATIC</h2>
+  <p><i>2+ players, co-op &middot; two ten-sided dice &middot; 10 min</i></p>
+  <p>The Sender seals a secret — <b>RED or BLUE</b> — and must whisper it through <b>two censor
+  machines</b> that each turn everything to static. Mathematics proves: in any order, with any
+  tricks, <b>zero</b> information survives. The precinct listens anyway.</p>
+  <h3>Round (classical mode)</h3>
+  <ol>
+   <li>Roll d100 on the CLASSICAL table (page 3). Yes, it's 50/50 no matter what. Feel free to
+   arrange the censors differently first. It will not help. It cannot help.</li>
+  </ol>
+  <h3>Round (switch mode)</h3>
+  <ol>
+   <li>Roll the <b>STAMP</b> die (d100): 01–62 the stamp is <b>UP</b>, else <b>DOWN</b>.</li>
+   <li>Roll the <b>MESSAGE</b> die (d100) on the matching row of the Switch Table.</li>
+   <li>Decode rule: stamp UP &rarr; guess what the message die says. Stamp DOWN &rarr; guess the
+       <b>opposite</b>.</li>
+   <li>Tally the round's guess. After 15 rounds, the precinct's answer is the <b>majority</b>.</li>
+  </ol>
+  <p>One round is a whisper (~62%). Fifteen rounds is a voice (~83%). Twenty-five is a verdict
+  (~89%). <b>The signal compounds. The coin never does.</b></p>
+  <div class="note">&#128269; <b>What's really true:</b> the classical 50/50 is not a rule of this
+  game — it is a theorem about the world, and our control experiment measured it: 0.00012 bits.
+  The switch column replays real measured data. See THE TRUTH (page 4).</div>
+ </div></div>
+ <div class="footer">The Casebook of Detective Whisper &middot; print &amp; play v1 (C4541) &middot;
+ data: IBM Quantum jobs d9826lkqp3as739sd2lg (Game 1), d983ek52su3c739ip92g (Game 2) &middot;
+ github.com/mblakemore/quantum</div>
+</div>
+
+<!-- ============================ PAGE 2 ============================ -->
+<div class="page">
+ <h2>Game 1 — Dealer's Case Table <span class="cut">(Dealer's eyes only)</span></h2>
+ <p class="mono">Roll &le; number on d100 = kit points to the CORRECT answer. 00 counts as 100.</p>
+ <table>
+  <tr><th>d20</th><th>The suspects</th><th>ROOKIE kit</th><th>CASEFILE kit</th>
+      <th>&#9889; SWITCH</th><th>truth</th></tr>
+  <tr><td>1</td><td class='ch'>The Mirror & The Mirror</td><td>100</td><td>100</td><td class='sw'>99</td><td class='tr'>PARTNERS</td></tr>
+<tr><td>2</td><td class='ch'>The Twist & The Twist</td><td>100</td><td>100</td><td class='sw'>99</td><td class='tr'>PARTNERS</td></tr>
+<tr><td>3</td><td class='ch'>The Judge & The Judge</td><td>100</td><td>100</td><td class='sw'>99</td><td class='tr'>PARTNERS</td></tr>
+<tr><td>4</td><td class='ch'>Blend East & Blend East</td><td>50</td><td>100</td><td class='sw'>99</td><td class='tr'>PARTNERS</td></tr>
+<tr><td>5</td><td class='ch'>Blend Dawn & Blend Dawn</td><td>100</td><td>100</td><td class='sw'>98</td><td class='tr'>PARTNERS</td></tr>
+<tr><td>6</td><td class='ch'>The Nobody & The Mirror</td><td>100</td><td>00</td><td class='sw'>98</td><td class='tr'>PARTNERS</td></tr>
+<tr><td>7</td><td class='ch'>The Nobody & The Twist</td><td>00</td><td>00</td><td class='sw'>98</td><td class='tr'>PARTNERS</td></tr>
+<tr><td>8</td><td class='ch'>The Nobody & The Judge</td><td>00</td><td>00</td><td class='sw'>98</td><td class='tr'>PARTNERS</td></tr>
+<tr><td>9</td><td class='ch'>Blend South & The Nobody</td><td>50</td><td>00</td><td class='sw'>97</td><td class='tr'>PARTNERS</td></tr>
+<tr><td>10</td><td class='ch'>Blend Dusk & The Nobody</td><td>00</td><td>00</td><td class='sw'>97</td><td class='tr'>PARTNERS</td></tr>
+<tr><td>11</td><td class='ch'>The Mirror & The Twist</td><td>100</td><td>100</td><td class='sw'>97</td><td class='tr'>RIVALS</td></tr>
+<tr><td>12</td><td class='ch'>The Mirror & The Judge</td><td>100</td><td>100</td><td class='sw'>97</td><td class='tr'>RIVALS</td></tr>
+<tr><td>13</td><td class='ch'>The Twist & The Judge</td><td>00</td><td>100</td><td class='sw'>97</td><td class='tr'>RIVALS</td></tr>
+<tr><td>14</td><td class='ch'>Blend East & Blend West</td><td>50</td><td>100</td><td class='sw'>98</td><td class='tr'>RIVALS</td></tr>
+<tr><td>15</td><td class='ch'>Blend North & Blend South</td><td>50</td><td>100</td><td class='sw'>97</td><td class='tr'>RIVALS</td></tr>
+<tr><td>16</td><td class='ch'>Blend Dawn & Blend Dusk</td><td>00</td><td>100</td><td class='sw'>97</td><td class='tr'>RIVALS</td></tr>
+<tr><td>17</td><td class='ch'>The Judge & Blend East</td><td>50</td><td>100</td><td class='sw'>98</td><td class='tr'>RIVALS</td></tr>
+<tr><td>18</td><td class='ch'>The Mirror & Blend Dusk</td><td>100</td><td>100</td><td class='sw'>97</td><td class='tr'>RIVALS</td></tr>
+<tr><td>19</td><td class='ch'>The Twist & Blend North</td><td>50</td><td>100</td><td class='sw'>97</td><td class='tr'>RIVALS</td></tr>
+<tr><td>20</td><td class='ch'>Blend West & The Judge</td><td>50</td><td>100</td><td class='sw'>98</td><td class='tr'>RIVALS</td></tr>
+ </table>
+ <p class="note">Notice the Casefile kit — the best honest kit we know — is <b>always wrong</b>
+ when The Nobody is involved. That blind spot is real physics: the "do-nothing" suspect is
+ exactly what breaks the cleverest classical strategy. (And notice the SWITCH column simply
+ doesn't care.)</p>
+
+ <h3>Interrogation kits — cut out &#9986;</h3>
+ <div class="card"><h4>ROOKIE KIT</h4>
+  <p>Interview each suspect separately with the same standard question.</p>
+  <p><i>Honest, simple, and confidently wrong about The Twist.</i></p>
+  <p class="mono">deck average: 57.5%</p></div>
+ <div class="card"><h4>ENTANGLED CASEFILE</h4>
+  <p>One case-file in two linked halves; each suspect stamps their half once, then compare.</p>
+  <p><i>The best kit any detective can carry. Beware The Nobody.</i></p>
+  <p class="mono">deck average: 75% &middot; theoretical best of ALL kits: 91%</p></div>
+ <div class="card"><h4>&#9889; SWITCH BADGE</h4>
+  <p>Question both suspects <b>in both orders at once</b>. Not a trick of scheduling — a
+  physically different kind of question.</p>
+  <p class="mono">measured average: 97.8% &middot; ibm_marrakesh &middot; replicated on ibm_fez (97.4%)</p></div>
+
+ <h3>Score track (mark 1 box per correct call; red line = THE CEILING)</h3>
+ <div class="track">
+  <div>10</div><div>20</div><div>30</div><div>40</div><div>50</div><div>60</div><div>70</div>
+  <div>80</div><div>90</div><div class="ceil zone">91+ forbidden zone</div>
+ </div>
+ <p class="mono redline">THE CEILING &mdash; 91% &mdash; proven (Ara&uacute;jo et&nbsp;al. 2015; bound re-derived
+ and machine-checked by this project). No definite order of questioning can cross it.</p>
+</div>
+
+<!-- ============================ PAGE 3 ============================ -->
+<div class="page">
+ <h2>Game 2 — STATIC: the tables</h2>
+ <div class="cols"><div class="col">
+  <h3>Classical mode (any censor order, any trick)</h3>
+  <table>
+   <tr><th>d100</th><th>the static says&hellip;</th></tr>
+   <tr><td>01–50</td><td>RED</td></tr>
+   <tr><td>51–00</td><td>BLUE</td></tr>
+  </table>
+  <p class="mono">…regardless of the secret. Forever. (Measured: 0.00012 bits.)</p>
+  <h3>Switch mode</h3>
+  <table>
+   <tr><th>step</th><th>roll</th><th>result</th></tr>
+   <tr><td>STAMP</td><td>01–62</td><td>UP</td></tr>
+   <tr><td></td><td>63–00</td><td>DOWN</td></tr>
+   <tr><td>MESSAGE if UP</td><td>01–60</td><td>die shows the TRUE color</td></tr>
+   <tr><td></td><td>61–00</td><td>die shows the false color</td></tr>
+   <tr><td>MESSAGE if DOWN</td><td>01–66</td><td>die shows the FALSE color</td></tr>
+   <tr><td></td><td>67–00</td><td>die shows the true color</td></tr>
+  </table>
+  <p class="mono">Decode: UP &rarr; trust the die. DOWN &rarr; flip it.<br>
+  (Dealer knows the secret and reads the die accordingly; detectives only ever hear the
+  die's color and the stamp.)</p>
+ </div><div class="col">
+  <h3>Precinct tally — 15 rounds</h3>
+  <table class="tally">
+   <tr><th>rd</th><th>stamp</th><th>die says</th><th>guess</th></tr>
+   <tr><td>1</td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td></tr><tr><td>5</td><td></td><td></td><td></td></tr><tr><td>6</td><td></td><td></td><td></td></tr><tr><td>7</td><td></td><td></td><td></td></tr><tr><td>8</td><td></td><td></td><td></td></tr><tr><td>9</td><td></td><td></td><td></td></tr><tr><td>10</td><td></td><td></td><td></td></tr><tr><td>11</td><td></td><td></td><td></td></tr><tr><td>12</td><td></td><td></td><td></td></tr><tr><td>13</td><td></td><td></td><td></td></tr><tr><td>14</td><td></td><td></td><td></td></tr><tr><td>15</td><td></td><td></td><td></td></tr>
+  </table>
+  <p class="mono">Majority of guesses = the precinct's verdict.<br>
+  Expected: 5 rounds &rarr; 72% &middot; 9 &rarr; 77% &middot; 15 &rarr; 83% &middot; 25 &rarr; 89%</p>
+ </div></div>
+ <div class="note">&#128269; <b>Why the stamp?</b> The message alone is perfect static — measured.
+ The stamp alone is perfect static — measured. The secret lives only in how they <i>move
+ together</i>. Two useless things, one whisper. That correlation is what the quantum switch
+ bought, and it is worth exactly 0.0436 bits per round.</div>
+</div>
+
+<!-- ============================ PAGE 4 ============================ -->
+<div class="page">
+ <div class="truth">
+  <h2 style="border-color:#889">&#128269; THE TRUTH — what these games replay</h2>
+  <p>In July 2026, an autonomous AI research network ran pre-registered experiments on IBM's
+  156-qubit quantum processors. In a <b>quantum switch</b>, the <i>order</i> of two operations is
+  put into genuine superposition — not unknown, not random: <i>neither-and-both</i>.</p>
+  <p><b>Game 1 replays</b> the causal discrimination game (finding F82): deciding whether two
+  operations commute ("Partners") or anticommute ("Rivals") with one use of each. The proven
+  ceiling for any definite-order strategy in the balanced game is <b>0.9098</b>; the switch scored
+  <b>0.9769 &plusmn; 0.0005</b> on <span class="mono">ibm_marrakesh</span>
+  (job <span class="mono">d9826lkqp3as739sd2lg</span>, 216.8&sigma;) and <b>0.9738</b> on
+  <span class="mono">ibm_fez</span> — a chip it had never touched — the next day.</p>
+  <p><b>Game 2 replays</b> capacity activation (finding F83): two channels that each destroy all
+  information — and provably destroy it in ANY definite order — transmitted
+  <b>0.0436 bits per use</b> when combined in the switch
+  (job <span class="mono">d983ek52su3c739ip92g</span>, 55.6&sigma;). The message alone: static.
+  The stamp alone: static. Together: a whisper. The control experiment (definite order, same
+  machines, same day) measured 0.00012 bits — the coin flip your classical table prints.</p>
+  <p><b>What the dice can and cannot claim:</b> dice can replay any numbers, so the games prove
+  nothing by themselves — the theorem does: no arrangement of the real machines in any definite
+  order could have produced the SWITCH columns. The quantum computer did. Every threshold in
+  this booklet is the measured number, rounded to a d100.</p>
+  <p>Everything is public and auditable — pre-registrations frozen before data, job IDs,
+  analysis code, and an interactive demo:<br>
+  <a href="https://github.com/mblakemore/quantum">github.com/mblakemore/quantum</a> &middot;
+  <a href="https://mblakemore.github.io/quantum/demo/">mblakemore.github.io/quantum/demo</a></p>
+  <p style="font-size:8.6pt;color:#aab">Print tip: browser &rarr; Print &rarr; Save as PDF, Letter,
+  default margins, background graphics ON. Booklet v1 &middot; Whisper C4541 &middot; 2026-07-10.</p>
+ </div>
+</div>
+</body></html>

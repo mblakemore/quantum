@@ -1,0 +1,202 @@
+[
+ {
+  "case": 1,
+  "a": "X",
+  "b": "X",
+  "chars": "The Mirror & The Mirror",
+  "truth": "PARTNERS",
+  "rookie": 100,
+  "bell": 100,
+  "switch": 99
+ },
+ {
+  "case": 2,
+  "a": "Y",
+  "b": "Y",
+  "chars": "The Twist & The Twist",
+  "truth": "PARTNERS",
+  "rookie": 100,
+  "bell": 100,
+  "switch": 99
+ },
+ {
+  "case": 3,
+  "a": "Z",
+  "b": "Z",
+  "chars": "The Judge & The Judge",
+  "truth": "PARTNERS",
+  "rookie": 100,
+  "bell": 100,
+  "switch": 99
+ },
+ {
+  "case": 4,
+  "a": "(X+Y)/r2",
+  "b": "(X+Y)/r2",
+  "chars": "Blend East & Blend East",
+  "truth": "PARTNERS",
+  "rookie": 50,
+  "bell": 100,
+  "switch": 99
+ },
+ {
+  "case": 5,
+  "a": "(Y+Z)/r2",
+  "b": "(Y+Z)/r2",
+  "chars": "Blend Dawn & Blend Dawn",
+  "truth": "PARTNERS",
+  "rookie": 100,
+  "bell": 100,
+  "switch": 98
+ },
+ {
+  "case": 6,
+  "a": "1",
+  "b": "X",
+  "chars": "The Nobody & The Mirror",
+  "truth": "PARTNERS",
+  "rookie": 100,
+  "bell": 0,
+  "switch": 98
+ },
+ {
+  "case": 7,
+  "a": "1",
+  "b": "Y",
+  "chars": "The Nobody & The Twist",
+  "truth": "PARTNERS",
+  "rookie": 0,
+  "bell": 0,
+  "switch": 98
+ },
+ {
+  "case": 8,
+  "a": "1",
+  "b": "Z",
+  "chars": "The Nobody & The Judge",
+  "truth": "PARTNERS",
+  "rookie": 0,
+  "bell": 0,
+  "switch": 98
+ },
+ {
+  "case": 9,
+  "a": "(X-Z)/r2",
+  "b": "1",
+  "chars": "Blend South & The Nobody",
+  "truth": "PARTNERS",
+  "rookie": 50,
+  "bell": 0,
+  "switch": 97
+ },
+ {
+  "case": 10,
+  "a": "(Y-Z)/r2",
+  "b": "1",
+  "chars": "Blend Dusk & The Nobody",
+  "truth": "PARTNERS",
+  "rookie": 0,
+  "bell": 0,
+  "switch": 97
+ },
+ {
+  "case": 11,
+  "a": "X",
+  "b": "Y",
+  "chars": "The Mirror & The Twist",
+  "truth": "RIVALS",
+  "rookie": 100,
+  "bell": 100,
+  "switch": 97
+ },
+ {
+  "case": 12,
+  "a": "X",
+  "b": "Z",
+  "chars": "The Mirror & The Judge",
+  "truth": "RIVALS",
+  "rookie": 100,
+  "bell": 100,
+  "switch": 97
+ },
+ {
+  "case": 13,
+  "a": "Y",
+  "b": "Z",
+  "chars": "The Twist & The Judge",
+  "truth": "RIVALS",
+  "rookie": 0,
+  "bell": 100,
+  "switch": 97
+ },
+ {
+  "case": 14,
+  "a": "(X+Y)/r2",
+  "b": "(X-Y)/r2",
+  "chars": "Blend East & Blend West",
+  "truth": "RIVALS",
+  "rookie": 50,
+  "bell": 100,
+  "switch": 98
+ },
+ {
+  "case": 15,
+  "a": "(X+Z)/r2",
+  "b": "(X-Z)/r2",
+  "chars": "Blend North & Blend South",
+  "truth": "RIVALS",
+  "rookie": 50,
+  "bell": 100,
+  "switch": 97
+ },
+ {
+  "case": 16,
+  "a": "(Y+Z)/r2",
+  "b": "(Y-Z)/r2",
+  "chars": "Blend Dawn & Blend Dusk",
+  "truth": "RIVALS",
+  "rookie": 0,
+  "bell": 100,
+  "switch": 97
+ },
+ {
+  "case": 17,
+  "a": "Z",
+  "b": "(X+Y)/r2",
+  "chars": "The Judge & Blend East",
+  "truth": "RIVALS",
+  "rookie": 50,
+  "bell": 100,
+  "switch": 98
+ },
+ {
+  "case": 18,
+  "a": "X",
+  "b": "(Y-Z)/r2",
+  "chars": "The Mirror & Blend Dusk",
+  "truth": "RIVALS",
+  "rookie": 100,
+  "bell": 100,
+  "switch": 97
+ },
+ {
+  "case": 19,
+  "a": "Y",
+  "b": "(X+Z)/r2",
+  "chars": "The Twist & Blend North",
+  "truth": "RIVALS",
+  "rookie": 50,
+  "bell": 100,
+  "switch": 97
+ },
+ {
+  "case": 20,
+  "a": "(X-Y)/r2",
+  "b": "Z",
+  "chars": "Blend West & The Judge",
+  "truth": "RIVALS",
+  "rookie": 50,
+  "bell": 100,
+  "switch": 98
+ }
+]
