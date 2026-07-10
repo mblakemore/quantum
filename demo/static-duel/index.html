@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STATIC — Classic Bot vs Quantum Bot</title>
+<style>
+ :root { --bg:#0e0e14; --panel:#181822; --ink:#e8e8f0; --dim:#9a9ab0; --red:#ff5470;
+         --q:#7ee8a2; --c:#ffb86b; --you:#8fb8ff; }
+ * { box-sizing:border-box; }
+ body { margin:0; background:var(--bg); color:var(--ink);
+        font-family:Georgia,'Times New Roman',serif; }
+ .wrap { max-width:980px; margin:0 auto; padding:18px; }
+ h1 { font-size:1.5em; margin:4px 0 2px; } .sub { color:var(--dim); font-style:italic; margin:0 0 14px; }
+ .lanes { display:flex; gap:12px; flex-wrap:wrap; }
+ .lane { flex:1; min-width:280px; background:var(--panel); border-radius:10px; padding:12px; }
+ .lane h2 { margin:0 0 6px; font-size:1.05em; }
+ .lane.c h2 { color:var(--c); } .lane.q h2 { color:var(--q); } .lane.you h2 { color:var(--you); }
+ canvas.tv { width:100%; height:84px; background:#000; border-radius:6px; display:block; }
+ .stat { font-family:'Courier New',monospace; font-size:0.9em; margin:6px 0 2px; }
+ .bar { height:12px; background:#26263a; border-radius:6px; overflow:hidden; margin:4px 0; position:relative; }
+ .bar > i { display:block; height:100%; transition:width .25s; }
+ .lane.c .bar>i { background:var(--c);} .lane.q .bar>i{ background:var(--q);} .lane.you .bar>i{background:var(--you);}
+ .bar .half { position:absolute; left:50%; top:-2px; bottom:-2px; width:2px; background:var(--red); }
+ .ctr { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin:14px 0; }
+ button { background:#26263a; color:var(--ink); border:1px solid #444; border-radius:8px;
+          padding:8px 14px; font:inherit; cursor:pointer; }
+ button:hover { border-color:#888; } button.primary { background:#3a2440; border-color:#a85; }
+ select,input[type=range] { background:#26263a; color:var(--ink); border:1px solid #444; border-radius:6px; padding:4px; }
+ .youpanel { display:none; margin-top:8px; background:#12121c; padding:8px; border-radius:8px; }
+ .youpanel.on { display:block; }
+ .chip { display:inline-block; padding:2px 10px; border-radius:12px; font-family:'Courier New',monospace;
+         font-size:0.85em; background:#26263a; margin:2px; }
+ .truth { background:#101018; border:1px solid #333; border-radius:8px; padding:10px 12px;
+          font-size:0.88em; color:var(--dim); margin-top:16px; }
+ .truth b { color:var(--ink); }
+ .mode { font-family:'Courier New',monospace; font-size:0.8em; color:var(--dim); }
+ .live-ok { color:var(--q); } .live-bad { color:var(--red); }
+ .log { font-family:'Courier New',monospace; font-size:0.78em; color:var(--dim); height:64px;
+        overflow-y:auto; background:#0a0a10; border-radius:6px; padding:6px; margin-top:6px; }
+ a { color:#9ecbff; }
+</style></head><body><div class="wrap">
+ <h1>STATIC — Classic Bot vs Quantum Bot</h1>
+ <p class="sub">A secret (RED or BLUE) is whispered through two censors that each erase everything.
+ The classic bot hears a coin. The quantum bot hears a whisper — with odds measured on a real
+ quantum computer (Exp106, ibm_marrakesh, job d983ek52su3c739ip92g).</p>
+
+ <div class="ctr">
+  <button class="primary" id="race">▶ Race: first to decode 5 secrets</button>
+  <button id="step">Step one round</button>
+  <button id="reset">Reset</button>
+  <label>speed <input type="range" id="speed" min="1" max="60" value="14"></label>
+  <label><input type="checkbox" id="youplay"> you play too</label>
+  <span class="mode" id="mode">MODE: REPLAY (measured July 2026)</span>
+  <button id="golive" title="needs the local shot server — see The Truth below">try LIVE</button>
+ </div>
+
+ <div class="lanes">
+  <div class="lane c"><h2>CLASSIC BOT</h2>
+   <canvas class="tv" id="tvc"></canvas>
+   <div class="stat" id="sc">rounds 0 · this-secret votes —</div>
+   <div class="bar"><i id="bc" style="width:0%"></i><span class="half"></span></div>
+   <div class="stat" id="dc">secrets decoded: 0 ✓ / 0 ✗</div>
+  </div>
+  <div class="lane q"><h2>QUANTUM BOT</h2>
+   <canvas class="tv" id="tvq"></canvas>
+   <div class="stat" id="sq">rounds 0 · this-secret votes —</div>
+   <div class="bar"><i id="bq" style="width:0%"></i><span class="half"></span></div>
+   <div class="stat" id="dq">secrets decoded: 0 ✓ / 0 ✗</div>
+  </div>
+  <div class="lane you" id="youlane" style="display:none"><h2>YOU (quantum decode rule)</h2>
+   <canvas class="tv" id="tvy"></canvas>
+   <div class="stat" id="sy">stamp — · die — → your call?</div>
+   <div class="youpanel on">
+    <button data-g="0">call RED</button> <button data-g="1">call BLUE</button>
+    <span class="chip">rule: stamp UP → trust the die · DOWN → flip it</span>
+   </div>
+   <div class="stat" id="dy">secrets decoded: 0 ✓ / 0 ✗</div>
+  </div>
+ </div>
+ <div class="log" id="log"></div>
+
+ <div class="truth">
+  🔍 <b>What's really true here.</b> Both bots face the same stream of secrets. The classic bot's
+  table is 50/50 <i>by theorem</i> — every definite ordering of the two censors carries exactly
+  zero information (our control measured 0.00012 bits). The quantum bot's per-round odds are the
+  <b>measured</b> switch statistics: stamp UP with p=0.6214; given UP the die agrees with the
+  truth with p≈0.595; given DOWN it <i>disagrees</i> with p≈0.657. Decode = majority over 15
+  rounds per secret (≈83% per secret; the classic bot stays at 50% forever).
+  <br><br><b>Playing against a real quantum opponent (LIVE mode):</b> click "try LIVE" while
+  running the local shot server — <span class="mode">python3 scripts/quantum_duel_server.py
+  --serve</span> — and every roll the quantum bot makes consumes <i>one actual measured shot</i>
+  from a fresh job on ibm_marrakesh (job ID displayed; ~2–3 QPU-seconds buys thousands of
+  rounds). Without the server this page stays in REPLAY mode: same physics, July's shots.
+  <br><br>Repo &amp; pre-registrations: <a href="https://github.com/mblakemore/quantum">github.com/mblakemore/quantum</a>
+ </div>
+</div>
+<script>
+// measured parameters (exp106_hw_results.json, ibm_marrakesh)
+const P_UP = 0.6214, P_AGREE_UP = 0.5944, P_DISAGREE_DOWN = 0.6573;
+const ROUNDS_PER_SECRET = 15, RACE_TARGET = 5;
+let live = null; // {shots:[{s,m}...], job:''} when LIVE
+let S = null;
+function fresh() {
+  S = { secret: Math.random()<0.5?0:1, round:0,
+        c:{votes:[0,0], ok:0, bad:0}, q:{votes:[0,0], ok:0, bad:0},
+        y:{votes:[0,0], ok:0, bad:0, pending:null}, racing:false };
+  ['sc','sq','sy','dc','dq','dy'].forEach(id=>el(id).textContent=el(id).textContent.replace(/\d+/g,'0'));
+  drawTV('tvc',0); drawTV('tvq',0); drawTV('tvy',0); upd();
+}
+const el = id => document.getElementById(id);
+function drawTV(id, corr) { // corr in [0,1]: how much of the secret's hue bleeds through
+  const cv = el(id), ctx = cv.getContext('2d');
+  const w = cv.width = cv.clientWidth, h = cv.height = 84;
+  const img = ctx.createImageData(w,h);
+  const hueR = S && S.secret===0;
+  for (let i=0;i<img.data.length;i+=4){
+    const v = Math.random()*255;
+    let r=v,g=v,b=v;
+    if (Math.random()<corr){ if(hueR){r=Math.min(255,v+90);} else {b=Math.min(255,v+90);} }
+    img.data[i]=r; img.data[i+1]=g; img.data[i+2]=b; img.data[i+3]=255;
+  }
+  ctx.putImageData(img,0,0);
+}
+function quantumRound(){ // returns {stamp:0up/1down, msg:0red/1blue} honestly from params or live shots
+  if (live && live.shots.length){ const sh = live.shots.pop();
+    return {stamp: sh.s, msg: sh.m ^ (S.secret===1?0:0) ^ (sh.t!==S.secret ? 1:0)}; }
+  const up = Math.random() < P_UP;
+  let agree = up ? (Math.random()<P_AGREE_UP) : !(Math.random()<P_DISAGREE_DOWN);
+  return { stamp: up?0:1, msg: agree ? S.secret : 1-S.secret };
+}
+function decode(stamp,msg){ return stamp===0 ? msg : 1-msg; }
+function stepRound(youCall){
+  if (S.round >= ROUNDS_PER_SECRET) return settle();
+  // classic: coin
+  const cGuess = Math.random()<0.5?0:1; S.c.votes[cGuess]++;
+  // quantum bot
+  const r = quantumRound(); S.q.votes[decode(r.stamp,r.msg)]++;
+  // you
+  if (el('youplay').checked){
+    if (youCall===undefined){ // present the evidence, wait for the call
+      const r2 = quantumRound(); S.y.pending = r2;
+      el('sy').textContent = `stamp ${r2.stamp===0?'UP':'DOWN'} · die says ${r2.msg===0?'RED':'BLUE'} → your call?`;
+      upd(false); return; // round completes when you call
+    }
+    S.y.votes[youCall]++; S.y.pending=null;
+  }
+  S.round++;
+  upd();
+  if (S.round >= ROUNDS_PER_SECRET) settle();
+}
+function settle(){
+  const maj = v => v[0]===v[1] ? (Math.random()<0.5?0:1) : (v[0]>v[1]?0:1);
+  const truth = S.secret, names=['RED','BLUE'];
+  const cWin = maj(S.c.votes)===truth, qWin = maj(S.q.votes)===truth;
+  S.c[cWin?'ok':'bad']++; S.q[qWin?'ok':'bad']++;
+  let msg = `secret was ${names[truth]} — classic ${cWin?'✓':'✗'} · quantum ${qWin?'✓':'✗'}`;
+  if (el('youplay').checked){ const yWin = maj(S.y.votes)===truth; S.y[yWin?'ok':'bad']++; msg += ` · you ${yWin?'✓':'✗'}`; }
+  log(msg);
+  el('dc').textContent = `secrets decoded: ${S.c.ok} ✓ / ${S.c.bad} ✗`;
+  el('dq').textContent = `secrets decoded: ${S.q.ok} ✓ / ${S.q.bad} ✗`;
+  el('dy').textContent = `secrets decoded: ${S.y.ok} ✓ / ${S.y.bad} ✗`;
+  if (S.racing && (S.c.ok>=RACE_TARGET || S.q.ok>=RACE_TARGET)){
+    S.racing=false;
+    log(S.q.ok>S.c.ok ? '🏆 QUANTUM BOT wins the race.' : (S.c.ok>S.q.ok?'🎲 CLASSIC BOT wins (coins get lucky sometimes — replay!)':'dead heat'));
+    return;
+  }
+  const keep = S.racing; const wasChecked = el('youplay').checked;
+  const prev = {c:S.c, q:S.q, y:S.y};
+  S.secret = Math.random()<0.5?0:1; S.round=0;
+  S.c={...prev.c, votes:[0,0]}; S.q={...prev.q, votes:[0,0]}; S.y={...prev.y, votes:[0,0], pending:null};
+  S.racing = keep;
+}
+function upd(clearY=true){
+  el('sc').textContent = `rounds ${S.round} · this-secret votes R${S.c.votes[0]}:B${S.c.votes[1]}`;
+  el('sq').textContent = `rounds ${S.round} · this-secret votes R${S.q.votes[0]}:B${S.q.votes[1]}`;
+  const frac = v => (v[0]+v[1]) ? Math.max(v[0],v[1])/(v[0]+v[1]) : 0.5;
+  el('bc').style.width = (frac(S.c.votes)*100)+'%';
+  el('bq').style.width = (frac(S.q.votes)*100)+'%';
+  drawTV('tvc', 0);                                   // classic sees pure static, always
+  drawTV('tvq', Math.min(0.6, S.round/ROUNDS_PER_SECRET*0.55)); // signal emerges with rounds
+  if (el('youplay').checked && clearY) drawTV('tvy', Math.min(0.6, S.round/ROUNDS_PER_SECRET*0.55));
+}
+function log(m){ const L=el('log'); L.innerHTML += m+'<br>'; L.scrollTop=L.scrollHeight; }
+let timer=null;
+el('race').onclick = ()=>{ fresh(); S.racing=true; clearInterval(timer);
+  timer = setInterval(()=>{ if(!S.racing){clearInterval(timer);return;}
+    if(!(el('youplay').checked && S.y.pending)) stepRound(); }, 1000/el('speed').value); };
+el('step').onclick = ()=>stepRound();
+el('reset').onclick = ()=>{ clearInterval(timer); fresh(); el('log').innerHTML=''; };
+el('youplay').onchange = e=>{ el('youlane').style.display = e.target.checked?'block':'none'; };
+document.querySelectorAll('.youpanel button').forEach(b=>b.onclick=()=>{ if(S.y.pending) stepRound(+b.dataset.g); });
+el('golive').onclick = async ()=>{
+  try {
+    const r = await fetch('http://localhost:8787/shots?n=4000'); const j = await r.json();
+    live = j; el('mode').innerHTML = `MODE: <span class="live-ok">LIVE</span> — fresh shots, job ${j.job} (${j.shots.length} rolls banked)`;
+    log(`LIVE: ${j.shots.length} real shots loaded from ${j.job}`);
+  } catch(e){ el('mode').innerHTML = 'MODE: REPLAY — <span class="live-bad">no local shot server found</span> (see The Truth)'; }
+};
+fresh();
+</script></body></html>
