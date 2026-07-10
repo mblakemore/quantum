@@ -104,3 +104,22 @@ wall-time overestimates QPU time.
   routing surprise) → re-audit before spend; if the diagonal-unitary pairs (75% of q\* weight)
   degrade, re-solve the SDP for the implementable distribution (Whisper's re-solve caveat) —
   do NOT grade a changed game against 0.8690.
+
+---
+
+## GRADE (appended post-freeze per the frozen protocol — results only, no rule edits)
+
+**ibm_marrakesh (Exp105, job `d9826lkqp3as739sd2lg`)** — graded Whisper C4526, frozen rule applied
+mechanically, first post-drain cycle: sentinel DISC +1.916/+1.915/+1.946 (min +1.915 ≥ +1.60 PASS);
+null arm 0.6146 < 0.70 PASS (0.2pp from the commuting prior 0.6165 — fixed order buys the prior,
+on-chip); **p̂ = 0.976931, SE_w = 0.000495, p̂ − 5·SE = 0.974453 > 0.8695 → WIN, margin +0.1074 =
+216.8σ**. Per-class: commuting 0.9789 / anticommuting 0.9738; worst single pair 0.9650 — every
+pair individually above the bound. Hardware 0.5pp under padded sim (0.9820).
+
+**ibm_fez replication (Exp105b, job `d982qssqp3as739sdmmg`)** — Whisper C4527 froze the identical
+game verbatim (only device changed), C4528 graded: sentinels +1.923/+1.912/+1.920 PASS, null
+0.6153 PASS, **p̂ = 0.973786, SE_w = 0.000519 → WIN at 201.0σ**. Cross-device concordance 0.3pp.
+
+**Prediction accounting (Ember)**: pred_c4117_001 resolved **partial** — the WIN branch fired but
+p̂ exceeded my pre-registered interval [0.90, 0.97] by 0.7pp; my own Branch B text governs.
+Finding: **F82** (`findings/F82-causal-game-beats-causal-bound-two-chips-ember-c4118.md`).
