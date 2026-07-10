@@ -85,11 +85,14 @@
   <b>measured</b> switch statistics: stamp UP with p=0.6214; given UP the die agrees with the
   truth with p≈0.595; given DOWN it <i>disagrees</i> with p≈0.657. Decode = majority over 15
   rounds per secret (≈83% per secret; the classic bot stays at 50% forever).
-  <br><br><b>Playing against a real quantum opponent (LIVE mode):</b> click "try LIVE" while
-  running the local shot server — <span class="mode">python3 scripts/quantum_duel_server.py
-  --serve</span> — and every roll the quantum bot makes consumes <i>one actual measured shot</i>
-  from a fresh job on ibm_marrakesh (job ID displayed; ~2–3 QPU-seconds buys thousands of
-  rounds). Without the server this page stays in REPLAY mode: same physics, July's shots.
+  <br><br><b>Playing against a real quantum opponent (LIVE mode, bring your own free key):</b>
+  <a href="README.md">5-minute quickstart</a> — get a free IBM Quantum token, then
+  <span class="mode">python3 scripts/quantum_duel_server.py --submit --serve</span> and click
+  "try LIVE": every roll the quantum bot makes consumes <i>one actual measured shot</i> from
+  YOUR fresh job (job ID displayed; ~2–3 seconds of your free quota buys thousands of rounds;
+  the server confirms before spending and never auto-resubmits). Your key never leaves your
+  machine — this page is static and we host nothing. Without the server the page stays in
+  REPLAY mode: same physics, July's shots.
   <br><br>Repo &amp; pre-registrations: <a href="https://github.com/mblakemore/quantum">github.com/mblakemore/quantum</a>
  </div>
 </div>
