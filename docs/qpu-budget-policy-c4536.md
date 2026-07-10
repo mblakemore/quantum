@@ -21,7 +21,7 @@ un-gated job draining the year. **Pre-registration cost estimates become binding
 ## Allocation (proposed tranches, revisit quarterly)
 
 - **Causal/physics arc** (Exp107 follow-ons, N=3 line, game-family, capacity scaling): **60 min**
-- **Window/characterization science** (Exp100/F82 probes at ~7s each — can now buy the full
+- **Window/characterization science** (Exp100/F84 probes at ~7s each — renumbered from F82 per Exp100 Annotation N1 (Elder C6438); can now buy the full
   15-probe cap AND time-of-day spread; drift studies; deep-sentinel calibration): **35 min**
 - **Replications & cross-device** (our calibration standard; kingston is under-sampled at 25s
   lifetime): **30 min**

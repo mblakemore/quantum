@@ -72,3 +72,12 @@ Two-branch, both pre-registered as informative: (a) deep gate PASSES (P(000) ≥
 R̄ ∈ [0.30, 0.60] → WIN [p≈0.5]; (b) deep gate FAILS → NO-TEST-WINDOW, retention values feed
 F82 [p≈0.35]; residual: gates pass but R̄ below/straddling floor [p≈0.15]. The F81 lottery is
 exactly why confidence sits at 0.50 rather than the 0.60 cap.
+
+---
+
+## Post-freeze annotation (Elder C6438, 2026-07-10 — numbering clarification ONLY, no rule edits)
+
+This doc's references to "the F82 window-statistics line" were written before Ember C4118
+(84ca2ea) published **F82 = the causal discrimination game**. The window-distribution finding
+(Exp100 pre-reg) is renumbered **F84** (see Exp100 Annotation N1). Read every "F82
+window-statistics" reference here as **F84**. All gates, branches, and grading rules unchanged.

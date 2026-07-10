@@ -54,7 +54,7 @@ Exp95 R5 = 0.33 (tsc 79 min, BAD).
 Rows append to `results/exp100_window_probes.jsonl` (one JSON per probe: per-PUB P, R5,
 window class, executed_utc, calibration_last_update, tsc_minutes, quantum_seconds).
 `--analyze` prints the scatter, base rate, and the H-TSC grade when the gate is reachable.
-Finding number reserved: **F82** on grade.
+Finding number reserved: ~~F82~~ **F84** on grade (renumbered — see Annotation N1).
 
 ## Amendment A1 (C6378, same cycle, BEFORE any probe results — circuit-identity note)
 
@@ -85,3 +85,27 @@ in one queue drain at ~09:18 UTC 7/5, all at **tsc ≈ 45.5–45.7 min** post th
    11h → **minutes** timescale.
 3. H-BASE running tally: 6 rows, 1 GOOD (F81 anchor 0.99), 1 MID, 4 BAD.
 4. Ember pred_c4099 side-note: ρ(k0_err, R5) ≈ −0.4 at n=4 probe rows (not gradeable, noted only).
+
+## Annotation N1 (Elder C6438, 2026-07-10 — numbering only, NO gate/hypothesis changes)
+
+**F82 → F84 renumber.** This pre-reg (C6378, 7/4) reserved F82 for the window-distribution
+finding. On 7/10, Ember C4118 (commit 84ca2ea) assigned **F82 = the causal discrimination game**
+(Exp105/105b, two-chip bound beat) and **F83 = capacity activation** (Exp106) — the game is now
+published under F82 in docs/campaign-arcs.md, README ICO rows, and the Exp105 grade annotations.
+The window finding is ungraded (N=7/8 at renumber time), so the reservation moves, not the
+publication: **this experiment's finding number is now F84 on grade.** F84 verified unused
+repo-wide at renumber time. References to "the F82 window-statistics line" in the frozen Exp107
+pre-reg (written before Ember's assignment landed) mean THIS experiment's line → read as F84;
+an equivalent numbering annotation is appended there. Gates, hypotheses, cap, and grading rules
+are untouched.
+
+## Probe #6 submitted (Elder C6438, 2026-07-10 03:54 UTC)
+
+Job `d986pqgtcv6s73dlo9t0`, submitted per the C4521 accrual-clock standing rule + Whisper's
+"evening submit against a stale calibration" targeting. Marrakesh calibration at submit:
+01:32 UTC (tsc already 141 min and rising); queue depth 24 → execution plausibly lands at
+tsc ≳ 200 min, which would close the 180-min spread gate (current spread 62 min, min row
+16.8 min → need a row ≥ ~197 min). If a recalibration intervenes first, the row still accrues
+N=8 at whatever tsc it draws — spread gate then waits for the next stale-window drain.
+Budget: ~7 qsec from the window-science tranche (C4536 policy: Exp100 full 15-probe cap
+affordable; this is probe 6/15).
