@@ -54,6 +54,9 @@
       font-size:0.95em}
  .callrow button.call{background:#2a1f33;border-color:#665;font-size:1.02em}
  .autorow{margin-top:18px}
+ .actiongrid{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+ .actiongrid>.acol{flex:1;min-width:250px}
+ .acol .colhead{font-weight:bold;margin:0 0 6px;font-size:1.0em;border-bottom:1px solid var(--edge);padding-bottom:3px}
  .meterwrap{margin:8px 0}
  .meter{position:relative;height:26px;background:#26263a;border-radius:8px}
  .meter>i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#4a4a6e,#8888c0);
@@ -143,8 +146,8 @@
  <h2 id="game-h">The interrogation room</h2>
  <div class="stage">
   <div class="panel" style="flex:1.6">
-   <p class="steps">How a round works: <b>1</b> pick a kit → <b>2</b> Interrogate →
-      <b>3</b> read the kit's report → <b>4</b> make your call → the case file opens.</p>
+   <p class="steps">How a round works: <b>1</b> press a kit (that IS the interrogation) →
+      <b>2</b> read its report → <b>3</b> make your call → the case file opens.</p>
    <p class="stat" id="casehdr" role="status">CASE #— · suspects unidentified</p>
    <div class="suspects">
     <div class="sil"><img id="s1img" src="img/silhouette.png"
@@ -154,45 +157,50 @@
       alt="Unidentified suspect two: a featureless backlit silhouette under an interrogation lamp.">
       <span class="nm" id="s2nm" aria-hidden="true">?</span></div>
    </div>
-   <fieldset>
-    <legend>Your kit</legend>
-    <div class="ctlrow">
-     <div class="ctl">
-      <button data-k="rookie" id="krookie" aria-describedby="rookie-d">ROOKIE KIT</button>
-      <p class="desc" id="rookie-d">Interview each suspect separately with the standard
-      question. Simple, honest, averages 57.5% — and it is <em>confidently wrong</em> about
-      certain suspects.</p>
-     </div>
-     <div class="ctl">
-      <button data-k="bell" id="kbell" class="sel" aria-describedby="bell-d">ENTANGLED CASEFILE</button>
-      <p class="desc" id="bell-d">One case-file in two linked halves; each suspect stamps their
-      half once, then you compare. The best kit ordinary causality allows in practice —
-      averages 75%. Mind the blind spot.</p>
-     </div>
-     <div class="ctl">
-      <button data-k="switch" id="kswitch" disabled aria-describedby="switch-d">🔒 SWITCH BADGE</button>
-      <p class="desc" id="switch-d"><span id="switch-lock">🔒 <strong>Locked</strong> — finish 10
-      rounds to earn it.</span> This kit questions both suspects <em>in a superposition of
-      orders</em>. It's named for the <a href="https://mblakemore.github.io/quantum/demo/">quantum
-      switch</a> — the circuit where a control qubit decides which operation happens first and
-      genuinely stays undecided (see it measured live in that demo). Measured average here:
-      97.8% (ibm_marrakesh; replicated on ibm_fez at 97.4%).</p>
-     </div>
+   <div class="actiongrid">
+    <div class="acol">
+     <fieldset>
+      <legend>Interrogate with a kit</legend>
+      <p class="desc" style="margin-top:0">Pressing a kit <strong>runs the interrogation</strong> —
+      it questions each suspect once and reports on the right. Kits lock until you make your call.</p>
+      <div>
+       <button data-k="rookie" id="krookie" aria-describedby="rookie-d">ROOKIE KIT</button>
+       <p class="desc" id="rookie-d">Separate standard interviews. Simple, honest, averages
+       57.5% — and it is <em>confidently wrong</em> about certain suspects.</p>
+      </div>
+      <div>
+       <button data-k="bell" id="kbell" class="sel" aria-describedby="bell-d">ENTANGLED CASEFILE</button>
+       <p class="desc" id="bell-d">One case-file in two linked halves; each suspect stamps their
+       half once, then you compare. The best kit ordinary causality allows — averages 75%.
+       Mind the blind spot.</p>
+      </div>
+      <div>
+       <button data-k="switch" id="kswitch" disabled aria-describedby="switch-d">🔒 SWITCH BADGE</button>
+       <p class="desc" id="switch-d"><span id="switch-lock">🔒 <strong>Locked</strong> — finish 10
+       rounds to earn it.</span> This kit questions both suspects <em>in a superposition of
+       orders</em>. It's named for the <a href="https://mblakemore.github.io/quantum/demo/">quantum
+       switch</a> — the circuit where a control qubit decides which operation happens first and
+       genuinely stays undecided (see it measured live in that demo). Measured average here:
+       97.8% (ibm_marrakesh; replicated on ibm_fez at 97.4%).</p>
+      </div>
+      <div class="autorow">
+       <button id="auto" aria-describedby="auto-d">Auto-play ×10</button>
+      </div>
+      <p class="desc" id="auto-d"><strong>Auto-play</strong> runs your selected kit on ten cases
+      in a row, always trusting its report — the fastest way to feel each kit's true average.</p>
+     </fieldset>
     </div>
-   </fieldset>
-   <p class="report" id="report" role="status">— choose a kit, then press Interrogate —</p>
-   <div class="callrow">
-    <button class="primary" id="interro" aria-describedby="int-d">🔍 Interrogate</button>
-    <button class="call" id="callP" disabled>Call PARTNERS</button>
-    <button class="call" id="callR" disabled>Call RIVALS</button>
+    <div class="acol">
+     <p class="colhead" id="call-h">Make your call</p>
+     <p class="report" id="report" role="status">— press a kit to interrogate —</p>
+     <div class="callrow" aria-labelledby="call-h">
+      <button class="call" id="callP" disabled>Call PARTNERS</button>
+      <button class="call" id="callR" disabled>Call RIVALS</button>
+     </div>
+     <p class="desc">The kit's report is honest but imperfect — trust it, or override it with
+     your hunch. Your call is what scores.</p>
+    </div>
    </div>
-   <p class="desc" id="int-d"><strong>Interrogate</strong> runs your chosen kit on this case
-   (one question per suspect, enforced), then unlocks the call buttons.</p>
-   <div class="autorow">
-    <button id="auto" aria-describedby="auto-d">Auto-play ×10</button>
-   </div>
-   <p class="desc" id="auto-d"><strong>Auto-play</strong> runs your chosen kit on ten cases in a
-   row, always trusting its report — the fastest way to feel each kit's true average.</p>
   </div>
   <div class="panel">
    <h3 id="meter-h">Your accuracy</h3>
@@ -269,8 +277,13 @@ const ALT = {
   'Blend Dawn': 'Blend Dawn: silver spiraling hair over a judicial collar, lit by a warm sunrise glow.',
   'Blend Dusk': 'Blend Dusk: the estranged twin — half spiral-glass face, cold dusk-purple glow.' };
 
+function setKits(on) {
+  el('krookie').disabled = !on; el('kbell').disabled = !on;
+  el('kswitch').disabled = !on || !badge;
+}
 function draw() {
   revealing = false;
+  setKits(true);
   cur = DECK[Math.floor(Math.random() * DECK.length)];
   el('casehdr').textContent = `CASE #${1000 + Math.floor(Math.random() * 9000)} · suspects unidentified`;
   [1, 2].forEach(i => {
@@ -278,8 +291,8 @@ function draw() {
     el(`s${i}img`).alt = `Unidentified suspect ${i}: a featureless backlit silhouette under an interrogation lamp.`;
     el(`s${i}nm`).textContent = '?';
   });
-  el('report').textContent = '— choose a kit, then press Interrogate —';
-  el('interro').disabled = false; el('callP').disabled = true; el('callR').disabled = true;
+  el('report').textContent = '— press a kit to interrogate —';
+  el('callP').disabled = true; el('callR').disabled = true;
   pending = null;
 }
 function interrogate() {
@@ -289,8 +302,9 @@ function interrogate() {
   const truthP = cur.truth === 'PARTNERS';
   const says = pointsCorrect ? truthP : !truthP;
   pending = { says };
+  setKits(false);
   el('report').textContent = `your ${KITNAME[kit]} reports: "${says ? 'PARTNERS' : 'RIVALS'}" — trust it, or override?`;
-  el('callP').disabled = false; el('callR').disabled = false; el('interro').disabled = true;
+  el('callP').disabled = false; el('callR').disabled = false;
 }
 function call(guessP) {
   if (!pending) return;
@@ -323,7 +337,7 @@ function upd() {
   m.setAttribute('aria-label', `Accuracy ${played ? pct.toFixed(0) : 0} percent of the way along a scale whose proven ceiling is 91 percent` + (pct > 91 ? ' — you are inside the forbidden zone' : ''));
   if (!badge && played >= 10) {
     badge = true; el('badge').classList.add('show');
-    el('kswitch').disabled = false;
+    if (!pending && !revealing) el('kswitch').disabled = false;
     el('kswitch').textContent = '⚡ SWITCH BADGE';
     el('switch-lock').innerHTML = '⚡ <strong>Unlocked.</strong>';
     log('⚡ SWITCH BADGE unlocked — select it and step into the forbidden zone.');
@@ -337,9 +351,8 @@ document.querySelectorAll('fieldset button[data-k]').forEach(b => b.onclick = ()
   kit = b.dataset.k;
   document.querySelectorAll('fieldset button[data-k]').forEach(x => x.classList.remove('sel'));
   b.classList.add('sel');
-  if (!pending) el('report').textContent = `${KITNAME[kit]} selected — press Interrogate.`;
+  if (!autoRunning) interrogate();   // pressing a kit IS the interrogation
 });
-el('interro').onclick = interrogate;
 el('callP').onclick = () => call(true);
 el('callR').onclick = () => call(false);
 el('auto').onclick = () => {
