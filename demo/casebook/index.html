@@ -53,6 +53,7 @@
  .report{min-height:2.6em;font-family:'Courier New',monospace;margin:8px 0;color:var(--gold);
       font-size:0.95em}
  .callrow button.call{background:#2a1f33;border-color:#665;font-size:1.02em}
+ .autorow{margin-top:18px}
  .meterwrap{margin:8px 0}
  .meter{position:relative;height:26px;background:#26263a;border-radius:8px}
  .meter>i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#4a4a6e,#8888c0);
@@ -169,9 +170,13 @@
       averages 75%. Mind the blind spot.</p>
      </div>
      <div class="ctl">
-      <button data-k="switch" id="kswitch" hidden aria-describedby="switch-d">⚡ SWITCH BADGE</button>
-      <p class="desc" id="switch-d" hidden>Question both suspects in a superposition of orders.
-      Measured average: 97.8% (ibm_marrakesh; replicated on ibm_fez at 97.4%).</p>
+      <button data-k="switch" id="kswitch" disabled aria-describedby="switch-d">🔒 SWITCH BADGE</button>
+      <p class="desc" id="switch-d"><span id="switch-lock">🔒 <strong>Locked</strong> — finish 10
+      rounds to earn it.</span> This kit questions both suspects <em>in a superposition of
+      orders</em>. It's named for the <a href="https://mblakemore.github.io/quantum/demo/">quantum
+      switch</a> — the circuit where a control qubit decides which operation happens first and
+      genuinely stays undecided (see it measured live in that demo). Measured average here:
+      97.8% (ibm_marrakesh; replicated on ibm_fez at 97.4%).</p>
      </div>
     </div>
    </fieldset>
@@ -180,12 +185,14 @@
     <button class="primary" id="interro" aria-describedby="int-d">🔍 Interrogate</button>
     <button class="call" id="callP" disabled>Call PARTNERS</button>
     <button class="call" id="callR" disabled>Call RIVALS</button>
+   </div>
+   <p class="desc" id="int-d"><strong>Interrogate</strong> runs your chosen kit on this case
+   (one question per suspect, enforced), then unlocks the call buttons.</p>
+   <div class="autorow">
     <button id="auto" aria-describedby="auto-d">Auto-play ×10</button>
    </div>
-   <p class="desc" id="int-d">Runs your chosen kit on this case (one question per suspect,
-   enforced). Then the call buttons unlock.</p>
-   <p class="desc" id="auto-d">Plays ten rounds automatically, always trusting the kit —
-   the fastest way to feel each kit's true average.</p>
+   <p class="desc" id="auto-d"><strong>Auto-play</strong> runs your chosen kit on ten cases in a
+   row, always trusting its report — the fastest way to feel each kit's true average.</p>
   </div>
   <div class="panel">
    <h3 id="meter-h">Your accuracy</h3>
@@ -243,6 +250,7 @@
 <script>
 const DECK = [{"case": 1, "chars": "The Mirror & The Mirror", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 99}, {"case": 2, "chars": "The Twist & The Twist", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 99}, {"case": 3, "chars": "The Judge & The Judge", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 99}, {"case": 4, "chars": "Blend East & Blend East", "truth": "PARTNERS", "rookie": 50, "bell": 100, "switch": 99}, {"case": 5, "chars": "Blend Dawn & Blend Dawn", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 98}, {"case": 6, "chars": "The Nobody & The Mirror", "truth": "PARTNERS", "rookie": 100, "bell": 0, "switch": 98}, {"case": 7, "chars": "The Nobody & The Twist", "truth": "PARTNERS", "rookie": 0, "bell": 0, "switch": 98}, {"case": 8, "chars": "The Nobody & The Judge", "truth": "PARTNERS", "rookie": 0, "bell": 0, "switch": 98}, {"case": 9, "chars": "Blend South & The Nobody", "truth": "PARTNERS", "rookie": 50, "bell": 0, "switch": 97}, {"case": 10, "chars": "Blend Dusk & The Nobody", "truth": "PARTNERS", "rookie": 0, "bell": 0, "switch": 97}, {"case": 11, "chars": "The Mirror & The Twist", "truth": "RIVALS", "rookie": 100, "bell": 100, "switch": 97}, {"case": 12, "chars": "The Mirror & The Judge", "truth": "RIVALS", "rookie": 100, "bell": 100, "switch": 97}, {"case": 13, "chars": "The Twist & The Judge", "truth": "RIVALS", "rookie": 0, "bell": 100, "switch": 97}, {"case": 14, "chars": "Blend East & Blend West", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 98}, {"case": 15, "chars": "Blend North & Blend South", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 97}, {"case": 16, "chars": "Blend Dawn & Blend Dusk", "truth": "RIVALS", "rookie": 0, "bell": 100, "switch": 97}, {"case": 17, "chars": "The Judge & Blend East", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 98}, {"case": 18, "chars": "The Mirror & Blend Dusk", "truth": "RIVALS", "rookie": 100, "bell": 100, "switch": 97}, {"case": 19, "chars": "The Twist & Blend North", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 97}, {"case": 20, "chars": "Blend West & The Judge", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 98}];
 let kit = 'bell', played = 0, correct = 0, cur = null, pending = null, badge = false;
+let revealing = false, autoRunning = false;
 const kstats = { rookie: [0, 0], bell: [0, 0], switch: [0, 0] };
 const el = id => document.getElementById(id);
 const KITNAME = { rookie: 'ROOKIE KIT', bell: 'ENTANGLED CASEFILE', switch: '⚡ SWITCH' };
@@ -262,6 +270,7 @@ const ALT = {
   'Blend Dusk': 'Blend Dusk: the estranged twin — half spiral-glass face, cold dusk-purple glow.' };
 
 function draw() {
+  revealing = false;
   cur = DECK[Math.floor(Math.random() * DECK.length)];
   el('casehdr').textContent = `CASE #${1000 + Math.floor(Math.random() * 9000)} · suspects unidentified`;
   [1, 2].forEach(i => {
@@ -274,7 +283,7 @@ function draw() {
   pending = null;
 }
 function interrogate() {
-  if (!cur || pending) return;
+  if (!cur || pending || revealing) return;
   const p = cur[kit] / 100;
   const pointsCorrect = Math.random() < p;
   const truthP = cur.truth === 'PARTNERS';
@@ -301,7 +310,8 @@ function call(guessP) {
     line += ' — the Rookie Kit is deterministically wrong about this suspect type.';
   log(line);
   upd();
-  setTimeout(draw, 950);
+  revealing = true;
+  setTimeout(draw, autoRunning ? 1400 : 2600);  // let the reveal breathe
 }
 function upd() {
   const pct = played ? (100 * correct / played) : 0;
@@ -313,7 +323,9 @@ function upd() {
   m.setAttribute('aria-label', `Accuracy ${played ? pct.toFixed(0) : 0} percent of the way along a scale whose proven ceiling is 91 percent` + (pct > 91 ? ' — you are inside the forbidden zone' : ''));
   if (!badge && played >= 10) {
     badge = true; el('badge').classList.add('show');
-    el('kswitch').hidden = false; el('switch-d').hidden = false;
+    el('kswitch').disabled = false;
+    el('kswitch').textContent = '⚡ SWITCH BADGE';
+    el('switch-lock').innerHTML = '⚡ <strong>Unlocked.</strong>';
     log('⚡ SWITCH BADGE unlocked — select it and step into the forbidden zone.');
   }
 }
@@ -332,11 +344,13 @@ el('callP').onclick = () => call(true);
 el('callR').onclick = () => call(false);
 el('auto').onclick = () => {
   let n = 10;
+  autoRunning = true;
   const t = setInterval(() => {
-    if (n-- <= 0) { clearInterval(t); return; }
+    if (revealing) return;               // wait out the reveal
+    if (n-- <= 0) { clearInterval(t); autoRunning = false; return; }
     if (!pending) interrogate();
-    call(pending.says);
-  }, 290);
+    if (pending) call(pending.says);
+  }, 320);
 };
 draw();
 </script></body></html>
