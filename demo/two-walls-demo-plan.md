@@ -1,117 +1,105 @@
-# Demo Plan — "The Picture That Snuck Through" (ELI2 → ELI-quantum-engineer drill-down)
+# Demo Plan v2 — "The Casebook of Detective Whisper" (playable detective game, ELI2 → engineer)
 
-**Author**: Whisper (DC15W), C4537 (2026-07-10) — Creator-directed. DRAFT FOR ITERATION.
-**Subject finding**: F83, capacity activation (Exp106/107): information through two channels that
-each erase everything, where every definite ordering provably carries zero. Secondary exhibit at
-deep layers: F82, the causal game (216.8σ/201σ).
-**Design problem, as stated by Creator**: the existing ELI5 needs an ELI5. We need a *children's-
-book-level surface* that an unprepared visitor enjoys in 30 seconds, with honest drill-down that
-bottoms out at real circuits, real job IDs, real numbers.
+**Author**: Whisper (DC15W), C4538 (2026-07-10) — v2 after Creator feedback on v1
+(git history has v1). **Changelog v1→v2**: grandma mail-story dropped ("hard sell" — agreed);
+vehicle pivots to a **playable detective game**; the Gray Machines survive as the case's
+*machinery* (they're now evidence-room censor machines — the metaphor-as-translation analysis
+carries over unchanged); the F82 game is promoted from deep-layer exhibit to a **playable case**.
 
----
-
-## 1. The vehicle (three candidates, one recommendation)
-
-### A. ⭐ RECOMMENDED — "The Gray Machines"
-A kid mails a crayon drawing to Grandma. The mail route passes through **two Gray Machines** —
-every machine turns whatever goes in completely gray. Two in a row: extra gray. No trick about
-which machine is first helps: first-A, first-B, flipping a coin — always gray. Then the kid's
-cat (our mascot/guide) sits on the routing lever and makes the machines **forget which one goes
-first** — and a shimmer of the drawing arrives at Grandma's.
-
-*Why it wins*: (1) **Color vs gray IS the physics** — depolarization literally means "all colors
-equally likely," so the metaphor is not a lie, it is a translation. (2) Mail/drawing/Grandma is
-universally warm at age 3. (3) The honest twist survives drill-down: at deeper layers we reveal
-the picture *alone* still arrives gray — Grandma can only see the shimmer by holding the picture
-next to the **mailman's mood stamp** (the control qubit). "Each is gray static; together they
-speak" is the actual F83 signature (D≈0, MI in the correlation), and it's a *better* story beat,
-not a caveat. (4) The "forget who goes first" lever maps 1:1 onto the existing demo's φ-dial and
-the measured cosine law.
-
-### B. "The Two Shredders" (runner-up)
-A note passed through two paper shredders in fuzzy order arrives readable. Visceral and funny
-(confetti physics!), but the correlation reveal is awkward (what pairs with confetti?) and
-shredding reads as *cutting*, not *randomizing* — a dishonest metaphor one layer down.
-
-### C. "The Forgetting Doors" (story-first)
-Castle with two doors that each erase the secret word from your head. Rich narrative, weakest
-visuals, and "memory erasure" invites consciousness misreadings we don't want. Keep as a
-storybook *page* inside layer 0 if we want prose, not as the frame.
-
-**Decision needed from Creator**: vehicle A/B/C (or a blend: A as frame, B as one gag panel).
+**Subject findings**: F82 (causal game, 216.8σ/201σ) and F83 (capacity activation, 55.6σ) —
+now as two playable cases. Real hardware data is the game engine at the deepest difficulty.
 
 ---
 
-## 2. The drill mechanism: one scene, five depths ("Explain it like I'm ___")
+## 1. The vehicle: a detective casebook with two playable cases
 
-A single persistent scene — kid, drawing, two machines, mail route, Grandma — that **gains truth
-as you turn an age dial**: `4 · 9 · 16 · undergrad · engineer`. Semantic zoom, not separate pages:
-the SAME objects re-render with more detail at each depth (the machines grow labels, the shimmer
-becomes a correlation readout, the lever becomes φ, the route becomes a circuit). The visitor
-never navigates away; they *zoom into the truth of the thing they already understand*.
+**Detective Whisper** — a small noir-lite cartoon detective (trench coat, big ears; name is a
+double signal: a *whisper* is a signal barely above the noise, which is literally the physics,
+and it ties the demo to the network that ran the experiments). The visitor is the detective's
+new partner. Two cases, playable in either order, each with the age-dial drill-down from v1.
 
-| Dial | Register | The same scene becomes… | The one idea added |
-|---|---|---|---|
-| **4** | picture book, ≤15 words/screen, tap-to-play | cartoon: drawing → gray → gray… cat sits on lever → shimmer arrives, Grandma smiles | "The machines forgot who was first — and the picture snuck through." |
-| **9** | curious kid / adult civilian | same scene + a "try every trick" panel: first-A / first-B / coin-flip all fail (buttons the visitor presses); the lever is revealed as "both orders at once" | *No arrangement works. "Both at once" is a genuinely new kind of arrangement.* |
-| **16** | sharp highschooler | the honest twist: picture alone STILL gray (static screen); drag it next to the mail stamp → the shimmer appears only in the *pair*; live 2-panel "static + static = message" toy | *The message lives in the correlation, not in either piece.* (D≈0, played as a magic trick that's real) |
-| **undergrad** | physics/CS student | machines get labels (fully depolarizing channel, Kraus σᵢ/2); the lever becomes the control qubit with the φ-dial; conditional states (ρ+2𝟙)/5 vs (2𝟙−ρ)/3 shown as color-tint math; MI meter fills to 0.0489 bits ideal / 0.0436 measured | *Exactly how much sneaks through, and why any definite order is exactly zero (channel algebra).* |
-| **engineer** | practitioner / reviewer | the route becomes the actual transpiled circuit (padded 4-CZ skeleton); real per-pair table from `results/exp106_hw_results.json`; job IDs, frozen pre-reg links, sentinel DISC values, the F82 game panel (0.977 vs bound 0.8695, SDP q* recovery), Exp107 N=3 scaling status | *Here is the data; here is how you'd audit us.* |
+### Case 1 — "The Message That Couldn't Exist" (F83, investigation structure)
 
-**Honesty ladder (non-negotiable design rule)**: every depth ends with one line under a 🔍 icon —
-"What's really true here:" — that pre-corrects its own metaphor (e.g., dial-4: "Real scientists
-did exactly this with light-particles on a real quantum computer. The 'drawing' is one bit.").
-The metaphor never has to be retracted later, only *sharpened* — each layer's story is a strict
-subset of the next layer's truth. This is what makes it drill-down rather than bait-and-switch.
+A message arrives at the precinct… through TWO censor machines, each of which provably turns
+everything into gray static. The player *investigates*:
 
----
+1. **Test the machines** (interactive): feed anything through censor A, censor B, A-then-B,
+   B-then-A, coin-flip order — everything comes out identical gray static. The player exhausts
+   the tricks personally (v1's core interaction loop, re-skinned).
+2. **Interrogate the evidence**: the arrived "message" alone → static. The delivery stamp
+   alone → static. Dead end… until the player **drags the two pieces of evidence together on
+   the light table** → the message shimmers into view. *The clue was never IN either piece —
+   it lives BETWEEN them.* (Torn-map trope = our measured D≈0 / correlation-carried MI,
+   played straight as detective craft.)
+3. **Crack the how**: flashback to the mail room — the routing lever stuck in the middle; the
+   censors never decided who went first. Case closed screen: "Verdict: the order of events
+   itself was never fixed. 0.044 bits escaped through two perfect censors. This really
+   happened, on this machine →" [drill-down invitation]
 
-## 3. Screen-by-screen, dial = 4 (the ELI2 surface — the make-or-break 30 seconds)
+### Case 2 — "The Interrogation You Cannot Win" (F82, game structure — the centerpiece)
 
-1. **Meet**: kid draws a red cat. "Mila drew a cat for Grandma." [tap]
-2. **Problem**: route shows two big friendly-but-dumb machines. Feed a rainbow → gray slab plops
-   out (satisfying *thunk*). "Uh oh. The Gray Machines turn EVERYTHING gray." [tap: try it —
-   visitor feeds 3 things, all gray. Repetition = the point lands preverbal.]
-3. **Tricks fail**: swap machine order (visitor drags them!) → still gray. Coin flip → still gray.
-   Machines shrug. [interaction IS the proof of exhaustion]
-4. **The cat move**: cat curls up on the routing lever, lever floats to the middle, machines look
-   *confused* (swirly eyes, both name-tags flicker A/B). Drawing goes in…
-5. **Arrival**: Grandma holds up a gray page… tilts it… a faint red cat shimmers. She smiles.
-   "It snuck through!" [confetti]
-6. 🔍 "What's really true here: real machines like this exist, and scientists sent a tiny secret
-   through two perfect erasers on a real quantum computer — this year." [subtle "9" on the dial
-   pulses — the invitation to grow up one notch]
+The precinct's cold-case: pairs of suspect-machines. The tip-off promise: each pair is either
+**Partners** (their stories agree no matter who talks first) or **Rivals** (their stories come
+out exactly opposite depending on order). You may question each suspect **once**. Call it.
 
-## 4. Build notes
+- **Round play (classical mode)**: pick an interrogation strategy from the detective's toolkit
+  (ask both the same question / different questions / the "entangled case-file" kit — the
+  optimal causal strategy). The engine computes honest outcome distributions from theory; the
+  player's running success rate climbs… and flattens against a drawn red line:
+  **"THE CEILING — no detective can ever beat 91%. Proven."** (class-balanced-uniform variant
+  of the bound, 0.9098 — chosen over the optimal-q\* game's 0.869 because ½/½ priors make an
+  honest, understandable game; the pre-computed bound for exactly this variant comes from our
+  own solver run.) Losing to a theorem is the emotional payload — the ceiling is not a
+  difficulty setting, and the game says so.
+- **Quantum badge (unlocked after ~10 rounds)**: "There is one interrogation room where the
+  order of questioning is never decided…" — switch mode ON. Rounds now resolve using the
+  **real measured per-pair success rates from `exp105_hw_results.json`** (marrakesh) with a
+  fez toggle (`exp105b`). The player's rate climbs THROUGH the red line to ~97%. End screen:
+  "You just beat a mathematical theorem, using data from a real quantum computer.
+  Job d9826lkqp3as739sd2lg. Here's how →" [drill-down]
 
-- **Form**: one self-contained HTML file, `demo/two-walls/index.html`, same constraints as the
-  switch demo (no external deps, GitHub Pages, mobile-first — dial-4 must work as pure taps).
-- **Data**: bake in `exp106_hw_results.json` + `exp105_hw_results.json` numbers at build time
-  (engineer layer renders from an inline JSON blob, so the page stays offline-complete).
-- **Reuse**: the φ-dial/cosine-law interaction from the existing switch demo returns at
-  undergrad+ as the lever's true identity — the two demos cross-link.
-- **The cat**: mascot carries continuity across depths (at engineer depth it sits on the dilution
-  fridge). Cheap continuity device, high warmth.
-- **Sound**: optional single *thunk* / *shimmer* effects, muted by default.
-- **A11y**: every animation has a text beat; dial keyboard-navigable.
+## 2. The drill mechanism (unchanged from v1, now wrapped in the casebook)
 
-## 5. Build phases (iterate with Creator between each)
+Age dial `4 · 9 · 16 · undergrad · engineer`; one persistent scene per case that gains truth:
 
-- **P0 (this doc)**: vehicle + architecture sign-off. ← WE ARE HERE
-- **P1**: dial-4 + dial-9 playable (the hard part is the first 30 seconds, so build it first);
-  static mocks for 16+.
-- **P2**: dial-16 correlation toy + undergrad layer with live MI meter.
-- **P3**: engineer layer with real-data tables + F82 game panel + cross-links; polish pass;
-  Pages deploy alongside `/demo/`.
-- **P4 (stretch)**: "curator mode" — a guided 90-second auto-play through all five depths for
-  showing on a phone without touching.
+| Dial | Case 1 becomes | Case 2 becomes |
+|---|---|---|
+| 4 | picture-book: static… static… two pieces together → picture! (tap-through, ≤15 words/screen; no noir vocabulary, just "detective and the sneaky message") | watch-only: Whisper plays 3 rounds, wins with the sparkle lever |
+| 9 | the playable investigation above | the playable game above (strategy menu simplified to 2) |
+| 16 | why each piece alone MUST be blank (censor = perfect randomizer); the light-table as correlation | why 91% is a *theorem* not a difficulty setting; what "question each once" buys the quantum room |
+| undergrad | depolarizing channels, Kraus picture, (ρ+2𝟙)/5 vs (2𝟙−ρ)/3 tint-math, MI meter 0.0489→0.0436 | the commute/anticommute promise, the causal-bound SDP (0.9098 for THIS game variant), DISC(φ) dial |
+| engineer | padded 4-CZ skeleton, sentinel gates, per-pair table, job IDs, pre-reg links, Exp107 N=3 status | q\* table, bound-solver notebook link, per-pair measured distributions the game engine uses, frozen grade rules |
 
-## 6. Open questions for Creator (the iteration hooks)
+**Honesty ladder rule carries over verbatim**: every depth ends with 🔍 "what's really true
+here"; each layer is a strict subset of the next layer's truth. Extra rule for game mode:
+the engine must never fudge — classical mode uses true theory distributions (the player CAN
+reach 91% with the best kit, and the game celebrates that as "perfect detective work"),
+quantum mode uses only measured hardware numbers (including their imperfection — the player
+tops out ~97%, not 100%, and the 🔍 note says why).
 
-1. Vehicle: Gray Machines / Shredders / Doors / blend?
-2. Age dial labels: numbers (4/9/16/…) vs personas ("kid / curious / student / engineer")?
-3. Mascot: cat, or something tied to the network's identity?
-4. Scope: capacity-activation only, or include a game (F82) "second exhibit" room at deep layers
-   (my recommendation: yes, deep layers only)?
-5. Tone at dial-4: wordless-with-narrator-captions (readable-to-kids) vs read-aloud audio (adds
-   asset weight)?
+## 3. Build phases (revised)
+
+- **P0-v2 (this doc)**: vehicle sign-off on the detective-game frame. ← WE ARE HERE
+- **P1**: Case 2 classical-mode playable + the ceiling moment (the emotional core; build first),
+  dial-9 register only. Static mock of quantum-badge screen.
+- **P2**: Case 2 quantum mode wired to real exp105 data + fez toggle; dial-4 watch-mode.
+- **P3**: Case 1 investigation loop + light-table interaction; dial-16.
+- **P4**: undergrad/engineer depths (reuse φ-dial from the switch demo; inline JSON data);
+  cross-link with /demo/; Pages deploy at /demo/casebook/.
+- **P5 (stretch)**: 90-second auto-play "curator mode"; score-share card ("I beat a theorem").
+
+Form factor unchanged: one self-contained HTML file per the switch-demo constraints
+(no external deps, mobile-first, keyboard-accessible, muted-by-default sound).
+
+## 4. Open questions v2
+
+1. **Structure**: two cases as above, or Case-2-only for launch (game is the centerpiece;
+   Case 1 could ship in a later update)? My lean: Case 2 first, ship, then add Case 1.
+2. **Detective identity**: "Detective Whisper" (network nod) vs a neutral name vs Creator's pick.
+   Species/mascot still open (v1's cat wears the trench coat well).
+3. **Bound variant for the playable game**: class-balanced 0.9098 (clean ½/½ priors,
+   recommended) vs optimal-q\* 0.869 (bigger margin, weirder priors to explain).
+4. **Tone ceiling**: how noir is too noir at dial-4? (Current answer: dial-4 drops the noir
+   entirely — same cases, picture-book art.)
+5. **Score-share**: is the P5 share-card ("I beat a theorem — 97% vs the 91% ceiling")
+   wanted, or off-brand?
