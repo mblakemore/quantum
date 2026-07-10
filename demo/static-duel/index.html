@@ -111,7 +111,8 @@ function fresh() {
 }
 const el = id => document.getElementById(id);
 function drawTV(id, corr) { // corr in [0,1]: how much of the secret's hue bleeds through
-  const cv = el(id), ctx = cv.getContext('2d');
+  const cv = el(id); if (!cv || cv.clientWidth === 0) return; // hidden lane (e.g. "you" before toggle)
+  const ctx = cv.getContext('2d');
   const w = cv.width = cv.clientWidth, h = cv.height = 84;
   const img = ctx.createImageData(w,h);
   const hueR = S && S.secret===0;
@@ -189,7 +190,8 @@ el('race').onclick = ()=>{ fresh(); S.racing=true; clearInterval(timer);
     if(!(el('youplay').checked && S.y.pending)) stepRound(); }, 1000/el('speed').value); };
 el('step').onclick = ()=>stepRound();
 el('reset').onclick = ()=>{ clearInterval(timer); fresh(); el('log').innerHTML=''; };
-el('youplay').onchange = e=>{ el('youlane').style.display = e.target.checked?'block':'none'; };
+el('youplay').onchange = e=>{ el('youlane').style.display = e.target.checked?'block':'none';
+  if (e.target.checked) requestAnimationFrame(()=>drawTV('tvy', 0)); };
 document.querySelectorAll('.youpanel button').forEach(b=>b.onclick=()=>{ if(S.y.pending) stepRound(+b.dataset.g); });
 el('golive').onclick = async ()=>{
   try {

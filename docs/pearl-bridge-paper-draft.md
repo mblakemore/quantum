@@ -1,7 +1,7 @@
 # Causal Structure Beyond the Ladder: Hardware Experiments Where do-Calculus Has No Input
 
-**DRAFT v0.1 (Whisper C4545, 2026-07-10) — §1 and §5 drafted in full; §2–§4, §6–§7 are
-data-complete stubs. Outline: `pearl-bridge-paper-outline-whisper-c4533.md`. Audience:
+**DRAFT v0.2 (Whisper C4546, 2026-07-10) — §1–§5 drafted in full; §6–§7 data-complete stubs;
+figures fig15/fig16 rendered. Outline: `pearl-bridge-paper-outline-whisper-c4533.md`. Audience:
 causal-inference (UAI / Journal of Causal Inference / perspective venue).**
 
 > **Abstract (working).** Pearl's ladder of causation rests on an assumption it never needs to
@@ -74,36 +74,103 @@ the absence of a fact-of-the-matter about structure.
 observables — the discrimination game and capacity activation — deferring apparatus detail to
 §2–§4.)*
 
-## §2. The witness chain — sim → hardware → adversarial controls → cross-device law [STUB]
+## §2. The witness chain — from simulation to a cross-device law
 
-Data inventory: F73 (mixture-adversary witness, sim, W₂=+2.00/+1.93); F75 (hardware witness
-fires, W=+1.781, all pre-reg gates); F77 (same-device drift-free switch-vs-mixture, one
-calibration window, DISC_switch=+1.900 vs mixture +0.035, W₂=+1.865, ≥72σ); F76 (continuous
-cosine law DISC(φ)=2cos(φ/2) on a second device, Pearson 0.9992); F80 (a proposed corroboration
-retracted by its own author as circular — kept as a methods exhibit).
+The apparatus is small enough to describe completely. A control qubit is prepared in an equal
+superposition; conditioned on the control, a target qubit passes through the two local
+operations in one order or the other; the control is then read out in the superposition basis.
+If the two operations commute, an ideal switch leaves the control unchanged; if they
+anticommute, it flips it. The witness observable DISC — the difference in the control's
+expectation between a commuting and an anticommuting pair — reaches 2 for an ideal switch,
+while any *causally separable* process (§1) is bounded far below.
 
-## §3. From witness to game — a provable ceiling, beaten [STUB]
+The evidential chain was built in the order a skeptic would demand. In simulation, the witness
+separates the switch from the strongest classical adversary — not merely a fixed order but a
+50/50 *mixture* of the two orders, the physical realization of the latent selector λ — with the
+mixture arm exactly inert (F73). On hardware, the witness fired at W = +1.781 against
+pre-registered gates (F75). The decisive control came next: switch and mixture arms co-compiled
+into a single job on one device in one calibration window, eliminating drift as an explanation —
+DISC_switch = +1.900 versus DISC_mixture = +0.035, a separation of ≥72σ (F77). A second device
+then reproduced not a number but a *law*: dialing the coherence of the order-control through
+angle φ traces DISC(φ) = 2·cos(φ/2) with Pearson correlation 0.9992 (F76) — causal definiteness
+behaves as a continuous resource, and its φ = π endpoint doubles as the classical mixture,
+closing the loop between the two devices. One proposed corroboration — an "independent" fit of
+the data to classical DAG families — was retracted by its own author before running, after
+proving to be an exact rescaling of the witness itself (F80); we keep the retraction in the
+record because a test that cannot fail proves nothing, and the discipline is part of the result.
 
-Data inventory: the Araújo et al. (2015) bound family (Pauli-only pairs: ceiling 1 — no game;
-Haar: 0.9288; the finite 10-unitary game with optimal input distribution: 0.869028, re-derived
-from scratch, validated primal=dual to 2×10⁻⁸, optimal q\* recovered — class-imbalanced 0.6165,
-75% of weight on non-Pauli reflections); the identity operands proven load-bearing (drop them
-and the ceiling returns to 1); frozen pre-registration with skeleton padding after the
-transpiler silently cancelled null CZ·CZ blocks; Exp105 WIN p̂=0.976931±0.000495 (216.8σ over
-the bound) on `ibm_marrakesh`; Exp105b replication on `ibm_fez`, a device with no prior switch
-history, p̂=0.9738 — 0.3pp concordance, same frozen design, next day.
+For a causal-inference reader, the chain's shape matters more than its numbers: it is the same
+escalation used in the best Bell experiments — beat the straw man, then beat the strongest
+classical model (the λ-mixture), then close the loopholes your own apparatus could open (drift,
+device-specificity) — but aimed at the *structure axis* rather than the locality axis.
 
-## §4. Information through causally-forbidden structure [STUB]
+## §3. From witness to game — a provable ceiling, beaten twice
 
-Data inventory: Exp106 capacity activation — two completely depolarizing channels (every causal
-composition exactly zero-capacity by channel algebra, distribution-free) transmit 0.0436
-bits/use in the switch (55.6σ); the pre-registered signature confirmed: the target *alone* is
-exactly depolarized even in the switch arm (D=+0.004) — the bit lives only in the control–target
-correlation; the null arm measured 0.00012 bits. Exp107, N=3 cyclic orders: WIN at 61.7σ
-(0.0260 bits through *three* total censors) **and** the honest scaling twist: ideal capacity
-grows with N (0.0489→0.0833) while measured capacity falls (0.0436→0.0260) — the depth cost of
-the larger switch exceeds the scaling gain on this hardware generation. Theory scales; practice
-inverts; both measured under one pre-registration.
+A witness certifies; a *game* quantifies. Chiribella's discrimination task turns the same
+apparatus into an operational question with a scoreboard: two operations are promised either to
+commute ("partners") or anticommute ("rivals"), each may be used exactly once, and the player
+must say which. The classical value of this game — the maximum average success of ANY causally
+separable strategy, over all fixed orders, latent-selector mixtures, and dynamical orders — is
+computable by semidefinite programming.
+
+Three properties of that bound shaped the experiment, and each is a small lesson in its own
+right. First, the bound is *measure-dependent*: on Pauli-only operation pairs it equals 1 —
+there is no game at all, because a causally ordered circuit (apply both operations to half an
+entangled pair, then measure in the Bell basis) decides those cases perfectly. Second, on the
+standard finite set of ten operations with an optimized input distribution, the bound is
+0.869028; we re-derived it from the primary source rather than citing it, reproducing both
+published values to 3×10⁻⁵ and recovering the optimal input distribution the original paper
+omitted — which turned out to carry design-critical structure (class-imbalanced priors; 75% of
+the weight on non-Pauli operations). Third, the *identity* operands are load-bearing: delete
+them to simplify the hardware and the bound silently returns to 1 — the game's hardness lives in
+its most trivial-looking cases. Each of these facts was caught by re-solving the bound before
+spending hardware time; the general rule — a classical optimum is a function of the input
+distribution, not of the task's name — will be familiar to anyone who has quoted a benchmark
+computed on someone else's population.
+
+The hardware protocol was frozen before data: fifty-one game circuits sharing one identical
+compiled skeleton (after a review catch in which the transpiler silently optimized away the
+padding that guaranteed pair-independence), sentinel circuits at the start, middle, and end of
+the batch, a definite-order null arm, and a grading rule fixed to the constant 0.8695. The
+switch scored p̂ = 0.9769 ± 0.0005 — 216.8σ above the ceiling — while the null arm scored
+0.6146, statistically indistinguishable from the game's class prior of 0.6165: on the same chip,
+in the same window, a definite order buys exactly what Pearl says it buys, and nothing more.
+The following day the identical frozen design ran on a second processor with no prior history of
+switch circuits and returned p̂ = 0.9738 — a 0.3-percentage-point concordance across devices,
+same verdict, 201σ. (Figure: fig15 — the per-pair measured successes sitting wholly inside the
+forbidden zone above the ceiling, with the classical kits' averages below it.)
+
+## §4. Information through causally-forbidden structure
+
+The discrimination game bounds a *decision*; the capacity experiment bounds a *resource*. Take a
+completely depolarizing channel — a mechanism that outputs uniform noise regardless of input.
+One such channel transmits zero information. Two in sequence transmit zero in either order, in
+any mixture of orders, under any adaptive scheme: the algebra is closed, the causal value is
+exactly 0, and — unlike §3 — no optimization is needed to prove it. This is the cleanest
+inequality in the paper: the entire causally separable set sits at a single point.
+
+On hardware, the switch of two such channels transmitted 0.0436 ± 0.0005 bits per use — 55.6σ
+from zero — with the definite-order null arm measuring 0.00012 bits (the theorem, on a chip).
+The pre-registered signature is the part we most want causal-inference readers to see: the
+*target alone* remains exactly depolarized even in the switch configuration (measured
+D = +0.004). All of the transmitted information lives in the correlation between the message
+and the order-control — each marginal is noise; jointly they carry the bit. A reader who has
+taught graduate students that "marginal independence does not imply joint ignorance" will
+recognize the shape; here the principle funds a communication channel through two perfect
+erasers.
+
+Scaling the switch to three channels in a superposition of the three cyclic orders tests
+whether the resource grows. In theory it does: the ideal transmitted information rises from
+0.0489 to 0.0833 bits. On hardware the experiment won again — 0.0260 bits, 61.7σ from the
+causal zero — but *less* than the two-channel result: the deeper circuit (110 versus 4
+entangling gates) costs more fidelity than the larger superposition gains. Theory scales;
+practice inverts; both facts were measured under a single pre-registration, and the inversion
+is the more useful number, because it locates the current hardware generation's frontier
+(Figure: fig16 — the capacity ladder with the inversion annotated). The run also field-tested a
+methodological answer developed earlier in the campaign: circuit quality at this depth is a
+lottery that cannot be forecast from calibration metadata (a pre-registered null of its own,
+F84), so the experiment carried a same-depth sentinel that measured its own window in-run —
+detection replacing forecasting.
 
 ## §5. What this means for the ladder
 

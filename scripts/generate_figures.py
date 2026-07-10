@@ -451,6 +451,72 @@ def fig_14_qqq_grover_depth():
     save("fig14_qqq_grover_depth.png")
 
 
+
+
+def fig_15_causal_game_ceiling():
+    """F82 (Exp105/105b): the causal-game ceiling and the measured forbidden zone.
+    Per-pair points from results/exp105_hw_results.json (job d9826lkqp3as739sd2lg);
+    fez replicate p_hat from exp105b (d982qssqp3as739sdmmg); classical-kit deck
+    averages computed at C4541 (theory); ceiling = class-balanced causally-separable
+    bound 0.9098 (SDP, re-derived C4524; optimal-q* game graded vs 0.8695)."""
+    import json as _json
+    rows = _json.load(open(os.path.join(OUT, "..", "results",
+                                        "exp105_hw_results.json")))["rows"]
+    succ = sorted((r["p_plus"] if r["commuting"] else 1 - r["p_plus"])
+                  for r in rows if r["kind"] == "game")
+    fig, ax = plt.subplots(figsize=(7.2, 4.4))
+    ax.axhspan(0.9098, 1.005, color="#ffccd5", alpha=0.55, zorder=0,
+               label="forbidden zone (no definite order)")
+    ax.axhline(0.9098, color="#b00020", lw=2,
+               label="THE CEILING: causally-separable bound 0.9098")
+    ax.axhline(0.75, color="#888", ls="--", lw=1.2,
+               label="best classical kit (entangled casefile), deck avg 0.75")
+    ax.axhline(0.575, color="#bbb", ls=":", lw=1.2, label="rookie kit, deck avg 0.575")
+    ax.scatter(range(len(succ)), succ, s=22, color="#1b7f4d", zorder=3,
+               label="measured per-pair success, ibm_marrakesh (51 pairs)")
+    ax.axhline(0.976931, color="#1b7f4d", lw=1.4, alpha=0.9)
+    ax.text(0.5, 0.9860, "marrakesh p̂ = 0.9769 (216.8σ)", fontsize=8, color="#1b7f4d")
+    ax.axhline(0.973786, color="#2b5fad", lw=1.4, alpha=0.9)
+    ax.text(0.5, 0.9330, "fez replication p̂ = 0.9738 (201σ)", fontsize=8, color="#2b5fad")
+    ax.set_xlabel("game pairs, sorted by measured success")
+    ax.set_ylabel("probability of a correct call")
+    ax.set_ylim(0.5, 1.005)
+    ax.set_title("The interrogation you cannot win — except in superposition of orders")
+    ax.legend(loc="lower right", fontsize=7.5)
+    save("fig15_causal_game_ceiling.png")
+
+
+def fig_16_capacity_ladder():
+    """F83 + Exp107: capacity activation ladder N=1,2,3 — ideal scales, hardware inverts.
+    Ideal MI from exact noiseless simulation (C4529/C4531); measured from
+    exp106 (d983ek52su3c739ip92g) and exp107 (d9845dif47jc73a7ehe0)."""
+    import numpy as _np
+    N = [1, 2, 3]
+    ideal = [0.0, 0.0489, 0.0833]
+    measured = [0.0, 0.0436, 0.0260]
+    x = _np.arange(3)
+    w = 0.36
+    fig, ax = plt.subplots(figsize=(6.4, 4.2))
+    ax.bar(x - w / 2, ideal, w, color="#9db8e8", label="ideal switch (exact simulation)")
+    ax.bar(x + w / 2, measured, w, color="#1b7f4d", label="measured on hardware")
+    ax.axhline(0, color="#b00020", lw=2)
+    ax.text(-0.44, 0.0022, "causal value: exactly 0 for ANY definite order "
+            "(null arms measured 0.00012 / 0.00001 bits)", fontsize=7.5, color="#b00020")
+    ax.set_ylim(0, 0.097)
+    ax.annotate("theory scales", xy=(2 - w / 2, 0.0833), xytext=(0.85, 0.0905),
+                fontsize=8, color="#456",
+                arrowprops=dict(arrowstyle="->", color="#456"))
+    ax.annotate("practice inverts\n(4→110 CZ depth cost)", xy=(2 + w / 2, 0.0262),
+                xytext=(2.05, 0.055), fontsize=8, color="#1b7f4d",
+                arrowprops=dict(arrowstyle="->", color="#1b7f4d"))
+    ax.set_xticks(x, ["1 censor\n(trivial)", "2 censors\nsuperposed (F83)",
+                      "3 censors, cyclic\n(Exp107)"])
+    ax.set_ylabel("classical information transmitted (bits / use)")
+    ax.set_title("Information through total censors: the N-scaling inversion")
+    ax.legend(loc="upper left", fontsize=8)
+    save("fig16_capacity_ladder.png")
+
+
 def main():
     print("Generating figures from C3650-C3671 cycle data...")
     fig_01_chsh()
@@ -468,6 +534,9 @@ def main():
     fig_12_causal_cosine_law()
     fig_13_placement_dominance()
     fig_14_qqq_grover_depth()
+    print("Generating figures for the causal-advantage arc (F82/F83/Exp107)...")
+    fig_15_causal_game_ceiling()
+    fig_16_capacity_ladder()
     print("Done. Figures in ../images/fig*.png")
 
 
