@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Interrogation You Cannot Win — Casebook of Detective Whisper</title>
+<style>
+ :root{--bg:#0d0d13;--panel:#17171f;--ink:#e9e9f1;--dim:#9a9ab0;--red:#ff5470;--gold:#e8c268;--q:#7ee8a2;}
+ *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,serif}
+ .wrap{max-width:900px;margin:0 auto;padding:18px}
+ h1{font-size:1.45em;margin:4px 0 2px} .sub{color:var(--dim);font-style:italic;margin:0 0 12px}
+ .stage{display:flex;gap:14px;flex-wrap:wrap}
+ .panel{background:var(--panel);border-radius:10px;padding:14px;flex:1;min-width:300px}
+ .suspects{display:flex;gap:14px;justify-content:center;margin:10px 0}
+ .sil{width:92px;height:120px;border-radius:8px;background:linear-gradient(#222,#0a0a0f);
+      display:flex;align-items:flex-end;justify-content:center;font-size:40px;color:#333;
+      border:1px solid #333;position:relative;overflow:hidden}
+ .sil.revealed{color:#cfcfe0;font-size:0.75em;align-items:center;text-align:center;padding:4px}
+ .kitrow button{margin:4px;background:#23232f;color:var(--ink);border:1px solid #444;
+      border-radius:8px;padding:8px 12px;font:inherit;cursor:pointer}
+ .kitrow button:hover{border-color:#999} .kitrow button.sel{border-color:var(--gold);color:var(--gold)}
+ .report{min-height:2em;font-family:'Courier New',monospace;margin:8px 0;color:var(--gold)}
+ .callrow button{background:#2a1f33;border:1px solid #665;color:var(--ink);border-radius:8px;
+      padding:10px 18px;margin:4px;font:inherit;cursor:pointer;font-size:1.05em}
+ .meter{position:relative;height:26px;background:#23232f;border-radius:8px;margin:10px 0;overflow:visible}
+ .meter>i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#557,#88b);border-radius:8px 0 0 8px;transition:width .3s}
+ .meter .ceil{position:absolute;left:91%;top:-6px;bottom:-6px;width:3px;background:var(--red)}
+ .meter .lbl{position:absolute;left:91%;top:-22px;transform:translateX(-50%);color:var(--red);font-size:0.72em;font-family:'Courier New',monospace;white-space:nowrap}
+ .meter .zone{position:absolute;left:91%;right:0;top:0;bottom:0;background:rgba(255,84,112,.12);border-radius:0 8px 8px 0}
+ .stat{font-family:'Courier New',monospace;font-size:0.88em;color:var(--dim)}
+ .badge{display:none;background:#132a1c;border:1px solid var(--q);border-radius:10px;padding:10px;margin:10px 0}
+ .badge.on{display:block} .badge b{color:var(--q)}
+ .log{font-family:'Courier New',monospace;font-size:0.78em;color:var(--dim);height:110px;overflow-y:auto;
+      background:#0a0a10;border-radius:6px;padding:6px;margin-top:8px}
+ .truth{background:#101018;border:1px solid #333;border-radius:8px;padding:10px 12px;font-size:0.86em;color:var(--dim);margin-top:14px}
+ .truth b{color:var(--ink)} a{color:#9ecbff}
+ .auto{background:#23232f;border:1px solid #444;color:var(--ink);border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit}
+</style></head><body><div class="wrap">
+ <h1>🕵️ THE INTERROGATION YOU CANNOT WIN</h1>
+ <p class="sub">Case 2 from the Casebook of Detective Whisper. Two machine-suspects per case:
+ <b>PARTNERS</b> (stories agree in any order) or <b>RIVALS</b> (stories come out opposite).
+ You may question each <b>once</b> — through a kit. Then call it. Identities stay hidden until
+ you call: your kit is your only instrument.</p>
+
+ <div class="stage">
+  <div class="panel" style="flex:2">
+   <div class="stat" id="casehdr">CASE #— · suspects unidentified</div>
+   <div class="suspects"><div class="sil" id="s1">?</div><div class="sil" id="s2">?</div></div>
+   <div class="kitrow" id="kits">
+    choose your kit:
+    <button data-k="rookie">ROOKIE KIT</button>
+    <button data-k="bell" class="sel">ENTANGLED CASEFILE</button>
+    <button data-k="switch" id="kswitch" style="display:none">⚡ SWITCH BADGE</button>
+   </div>
+   <div class="report" id="report">— pick a kit, then interrogate —</div>
+   <div class="callrow">
+    <button id="interro">INTERROGATE</button>
+    <button id="callP" disabled>call PARTNERS</button>
+    <button id="callR" disabled>call RIVALS</button>
+    <button class="auto" id="auto">AUTO ×10</button>
+   </div>
+  </div>
+  <div class="panel">
+   <div class="stat">your running accuracy</div>
+   <div class="meter"><i id="acc" style="width:0%"></i><span class="zone"></span>
+     <span class="ceil"></span><span class="lbl">THE CEILING · 91% · proven</span></div>
+   <div class="stat" id="score">0 correct / 0 played · —%</div>
+   <div class="stat" id="kitstats" style="margin-top:6px"></div>
+   <div class="badge" id="badge"><b>⚡ SWITCH BADGE EARNED.</b> There is one interrogation room
+    where the order of questioning is never decided. Its odds were not designed — they were
+    <b>measured</b>: ibm_marrakesh, job d9826lkqp3as739sd2lg (replicated on ibm_fez).
+    The SWITCH kit is now on your belt.</div>
+   <div class="log" id="log"></div>
+  </div>
+ </div>
+
+ <div class="truth">🔍 <b>What's really true here.</b> Suspects are hidden pairs of quantum
+ operations; PARTNERS = commuting, RIVALS = anticommuting, dealt 50/50 from a 20-case deck.
+ Kit reports resolve against <b>honest theory</b> odds per case (Rookie: separate interviews;
+ Casefile: the entangled comparison — the strongest kit we know, deck average 75%, and it is
+ <i>always wrong when a do-nothing suspect is involved</i>; you'll meet that as unexplained
+ losses, and the reveal will show you why). <b>THE CEILING</b>: no kit that queries each suspect
+ once — including every kit not yet invented — can average above <b>91%</b> on this game. That is
+ a theorem (Araújo et&nbsp;al. 2015; bound re-derived and machine-verified in
+ <a href="https://github.com/mblakemore/quantum">this repo</a>). The ⚡ SWITCH column is the
+ measured performance of a real quantum computer questioning both suspects in a superposition of
+ orders: deck average <b>97.8%</b>. Sibling demos:
+ <a href="../static-duel/">STATIC duel</a> · <a href="../">the switch itself</a> ·
+ <a href="../casebook-pnp/">print &amp; play</a>.</div>
+</div>
+<script>
+const DECK = [{"case": 1, "chars": "The Mirror & The Mirror", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 99}, {"case": 2, "chars": "The Twist & The Twist", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 99}, {"case": 3, "chars": "The Judge & The Judge", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 99}, {"case": 4, "chars": "Blend East & Blend East", "truth": "PARTNERS", "rookie": 50, "bell": 100, "switch": 99}, {"case": 5, "chars": "Blend Dawn & Blend Dawn", "truth": "PARTNERS", "rookie": 100, "bell": 100, "switch": 98}, {"case": 6, "chars": "The Nobody & The Mirror", "truth": "PARTNERS", "rookie": 100, "bell": 0, "switch": 98}, {"case": 7, "chars": "The Nobody & The Twist", "truth": "PARTNERS", "rookie": 0, "bell": 0, "switch": 98}, {"case": 8, "chars": "The Nobody & The Judge", "truth": "PARTNERS", "rookie": 0, "bell": 0, "switch": 98}, {"case": 9, "chars": "Blend South & The Nobody", "truth": "PARTNERS", "rookie": 50, "bell": 0, "switch": 97}, {"case": 10, "chars": "Blend Dusk & The Nobody", "truth": "PARTNERS", "rookie": 0, "bell": 0, "switch": 97}, {"case": 11, "chars": "The Mirror & The Twist", "truth": "RIVALS", "rookie": 100, "bell": 100, "switch": 97}, {"case": 12, "chars": "The Mirror & The Judge", "truth": "RIVALS", "rookie": 100, "bell": 100, "switch": 97}, {"case": 13, "chars": "The Twist & The Judge", "truth": "RIVALS", "rookie": 0, "bell": 100, "switch": 97}, {"case": 14, "chars": "Blend East & Blend West", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 98}, {"case": 15, "chars": "Blend North & Blend South", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 97}, {"case": 16, "chars": "Blend Dawn & Blend Dusk", "truth": "RIVALS", "rookie": 0, "bell": 100, "switch": 97}, {"case": 17, "chars": "The Judge & Blend East", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 98}, {"case": 18, "chars": "The Mirror & Blend Dusk", "truth": "RIVALS", "rookie": 100, "bell": 100, "switch": 97}, {"case": 19, "chars": "The Twist & Blend North", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 97}, {"case": 20, "chars": "Blend West & The Judge", "truth": "RIVALS", "rookie": 50, "bell": 100, "switch": 98}];
+let kit='bell', played=0, correct=0, cur=null, pending=null, badge=false;
+const kstats={rookie:[0,0],bell:[0,0],switch:[0,0]};
+const el=id=>document.getElementById(id);
+function draw(){ cur = DECK[Math.floor(Math.random()*DECK.length)];
+  el('casehdr').textContent = `CASE #${1000+Math.floor(Math.random()*9000)} · suspects unidentified`;
+  ['s1','s2'].forEach(id=>{const s=el(id); s.className='sil'; s.textContent='?';});
+  el('report').textContent='— pick a kit, then interrogate —';
+  el('interro').disabled=false; el('callP').disabled=true; el('callR').disabled=true; pending=null;
+}
+function interrogate(){
+  if(!cur||pending) return;
+  const p = cur[kit]/100;
+  const pointsCorrect = Math.random()<p;
+  const truthP = cur.truth==='PARTNERS';
+  const says = pointsCorrect ? truthP : !truthP;
+  pending = {says, pointsCorrect};
+  el('report').textContent = `your ${kit==='bell'?'CASEFILE':kit.toUpperCase()} says: ${says?'PARTNERS':'RIVALS'}`;
+  el('callP').disabled=false; el('callR').disabled=false; el('interro').disabled=true;
+}
+function call(guessP){
+  if(!pending) return;
+  const truthP = cur.truth==='PARTNERS';
+  const ok = guessP===truthP;
+  played++; if(ok) correct++;
+  kstats[kit][0]+=ok?1:0; kstats[kit][1]++;
+  ['s1','s2'].forEach((id,i)=>{const s=el(id); s.className='sil revealed';
+    s.textContent=cur.chars.split(' & ')[i];});
+  log(`${cur.chars} → ${cur.truth}. you called ${guessP?'PARTNERS':'RIVALS'} ${ok?'✓':'✗'}`+
+      (kit==='bell'&&cur.bell===0?'  (your casefile met a Nobody — it is ALWAYS wrong there)':''));
+  upd();
+  setTimeout(draw, 900);
+}
+function upd(){
+  const pct = played? (100*correct/played):0;
+  el('acc').style.width=Math.min(100,pct)+'%';
+  el('score').textContent=`${correct} correct / ${played} played · ${pct.toFixed(1)}%`;
+  el('kitstats').innerHTML = Object.entries(kstats).map(([k,v])=>
+    v[1]?`${k}: ${v[0]}/${v[1]}`:'').filter(Boolean).join(' · ');
+  if(!badge && played>=10){ badge=true; el('badge').classList.add('on');
+    el('kswitch').style.display='inline-block';
+    log('⚡ SWITCH BADGE unlocked — try the forbidden zone.'); }
+}
+function log(m){const L=el('log');L.innerHTML+=m+'<br>';L.scrollTop=L.scrollHeight;}
+document.querySelectorAll('#kits button').forEach(b=>b.onclick=()=>{
+  kit=b.dataset.k; document.querySelectorAll('#kits button').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel');});
+el('interro').onclick=interrogate;
+el('callP').onclick=()=>call(true); el('callR').onclick=()=>call(false);
+el('auto').onclick=()=>{ let n=10; const t=setInterval(()=>{ if(n--<=0){clearInterval(t);return;}
+  if(!pending) interrogate();
+  // auto-player trusts the kit
+  call(pending.says); }, 260); };
+draw();
+</script></body></html>
