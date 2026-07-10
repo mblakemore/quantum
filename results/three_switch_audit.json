@@ -1,0 +1,92 @@
+{
+ "cost_table": [
+  {
+   "construction": "cyclic3",
+   "backend": "FakeMarrakesh",
+   "opt": 1,
+   "twoq": 110,
+   "depth": 397
+  },
+  {
+   "construction": "full6",
+   "backend": "FakeMarrakesh",
+   "opt": 1,
+   "twoq": 411,
+   "depth": 1788
+  },
+  {
+   "construction": "cyclic3",
+   "backend": "FakeMarrakesh",
+   "opt": 3,
+   "twoq": 92,
+   "depth": 332
+  },
+  {
+   "construction": "full6",
+   "backend": "FakeMarrakesh",
+   "opt": 3,
+   "twoq": 341,
+   "depth": 1323
+  },
+  {
+   "construction": "cyclic3",
+   "backend": "FakeFez",
+   "opt": 1,
+   "twoq": 110,
+   "depth": 397
+  },
+  {
+   "construction": "full6",
+   "backend": "FakeFez",
+   "opt": 1,
+   "twoq": 411,
+   "depth": 1788
+  },
+  {
+   "construction": "cyclic3",
+   "backend": "FakeFez",
+   "opt": 3,
+   "twoq": 92,
+   "depth": 338
+  },
+  {
+   "construction": "full6",
+   "backend": "FakeFez",
+   "opt": 3,
+   "twoq": 341,
+   "depth": 1341
+  }
+ ],
+ "noiseless": {
+  "switch": {
+   "Rbar": 0.6729970451223488,
+   "SE": 0.002632158620500555,
+   "mi_bits": 0.08328800722492039,
+   "p_c0_b0": 0.495296875,
+   "p_c0_b1": 0.495296875
+  },
+  "null": {
+   "Rbar": 0.0,
+   "SE": 0.7071081622531308,
+   "mi_bits": 0.0,
+   "p_c0_b0": 1.0,
+   "p_c0_b1": 1.0
+  }
+ },
+ "fakemarrakesh": {
+  "switch": {
+   "Rbar": 0.5183194610343702,
+   "SE": 0.005420706938817074,
+   "mi_bits": 0.04852852611595523,
+   "p_c0_b0": 0.441796875,
+   "p_c0_b1": 0.446640625
+  },
+  "null": {
+   "Rbar": 0.0,
+   "SE": 0.022994886328044167,
+   "mi_bits": 3.2034265038149167e-16,
+   "p_c0_b0": 0.985,
+   "p_c0_b1": 0.985
+  }
+ }
+}
