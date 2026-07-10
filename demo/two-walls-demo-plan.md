@@ -103,3 +103,72 @@ Form factor unchanged: one self-contained HTML file per the switch-demo constrai
    entirely — same cases, picture-book art.)
 5. **Score-share**: is the P5 share-card ("I beat a theorem — 97% vs the 91% ceiling")
    wanted, or off-brand?
+
+---
+
+# v3 addendum — TABLETOP TRACK (Creator: "card, dice, or board game?") — C4540
+
+**Answer: yes, and the fit is unusually honest.** Our results arrive as per-pair success
+probabilities — which ARE dice tables. Proof of concept (generated from real data this cycle):
+
+```
+D100 RESOLUTION TABLE — measured on ibm_marrakesh, job d9826lkqp3as739sd2lg
+(X,X)      Partners  0.9880  → correct on 01–99
+(X,Y)      Rivals    0.9720  → correct on 01–97
+(1,Z)      Partners  0.9765  → correct on 01–98
+…all 51 pairs; unweighted avg 0.9761. Classical ceiling: 91.
+```
+
+**The product hook**: *a game whose odds were measured, not designed.* Every number on every
+card traces to an IBM job ID (printed inside the box lid / PDF footer). No fair classical
+arrangement can produce the switch column — that's a theorem; a quantum computer produced it.
+
+## Tabletop Game 1 — "THE INTERROGATION" (Case 2 as a card game)
+
+- **Components**: 10 Suspect character cards (The Nobody 𝟙, The Mirror X, The Twist Y, The
+  Judge Z, six Blends); 51 Case cards (hidden pair on front, TWO resolution columns on back:
+  CLASSICAL-by-strategy from theory, SWITCH from measured data); 3 Strategy cards (Same
+  Question / Different Questions / The Entangled Casefile = the optimal causal kit); 2×d10;
+  a 0–100 score track with a printed red line at **91 — THE CEILING (proven)** and the
+  91–100 zone marked *"no definite order can reach here."*
+- **Flow**: draw case → commit strategy → roll d100 vs the honest classical column → score.
+  Ten rounds; the best kit converges toward the red line and never through it. Earn the
+  **Switch badge** → same cases, roll vs the measured column → live in the forbidden zone.
+- **Table drama note**: per-10-rounds the 91→97 gap is subtle (~0.7 rounds); the drama is the
+  ARTIFACT — cards that PRINT impossible odds — plus long-track scoring. The visceral gap
+  belongs to Game 2.
+
+## Tabletop Game 2 — "STATIC" (Case 1 as a co-op dice game — the visceral one)
+
+- Sender seals a secret (RED/BLUE card). Precinct must decode it through the two censors.
+- **Classical mode**: the printed receiving table is 01–50 / 51–00 *regardless of anything* —
+  pure coin flip, provably forever. The precinct FEELS the nothing for a few rounds.
+- **Switch mode**: two-die procedure per round from measured exp106 data — roll STAMP die
+  (UP on 01–62; P(+)=0.620 measured), then TARGET die from the conditional column; decode
+  rule: stamp UP → guess target, stamp DOWN → guess opposite. Per-round edge ≈ 0.627
+  (measured), so the whisper is inaudible in one round and undeniable by fifteen: majority
+  vote after 15 rounds decodes the secret ~84% of the time (~90% by 25). *The signal
+  compounds; the coin never does.* Secretly also a signal-vs-noise lesson.
+- 🔍 box-lid honesty: "These dice replay what the real machine did. The claim is not that
+  dice are quantum — it's that no definite ordering of the two censors could have produced
+  the switch column. That is a theorem (and our null arm measured 0.00012 bits, i.e., the
+  coin)."
+
+## Format & integration
+
+- **Print-and-play PDF** (2–3 pages: cards, tables, rules, job-ID footer) = the physical
+  ELI2–ELI9 artifact — demoable at a kitchen table, no screen.
+- The **digital Casebook demo embeds both games** (auto-roll, running score vs ceiling,
+  drill-down from any card to the data). Tabletop and digital share ONE rules text and ONE
+  data source (`exp105/exp106_hw_results.json`) — no divergence.
+- Full board game: unnecessary — the score track IS the board. (Noted, not pursued.)
+
+## v3 open questions
+
+1. Track priority: digital Casebook first with tabletop PDF as P2, or PnP PDF first (it's
+   cheaper — no code) as the fast shareable artifact? My lean: **PnP PDF first** — it tests
+   the vehicle at a real table for the cost of a page layout.
+2. Game 2's two-die procedure: as-is (honest, slightly fiddly) vs a pre-combined single-die
+   table (simpler, hides the beautiful stamp/target correlation)? My lean: two dice — the
+   correlation IS the physics.
+3. Component art: mascot detective on the cards? Commission style?
