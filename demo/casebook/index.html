@@ -38,9 +38,9 @@
  button.primary{background:#3d2547;border-color:#b08a5a;font-weight:bold}
  button:disabled{opacity:.45;cursor:not-allowed}
  button.sel{border-color:var(--gold);color:var(--gold)}
- .stage{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0}
- .panel{background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:14px;
-        flex:1;min-width:300px}
+ .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+ @media (max-width:760px){ .grid2{grid-template-columns:1fr} }
+ .panel{background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:14px}
  .steps{font-size:0.85em;color:var(--dim);margin:0 0 8px}
  .steps b{color:var(--ink)}
  .suspects{display:flex;gap:16px;justify-content:center;margin:12px 0}
@@ -54,9 +54,7 @@
       font-size:0.95em}
  .callrow button.call{background:#2a1f33;border-color:#665;font-size:1.02em}
  .autorow{margin-top:18px}
- .actiongrid{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
- .actiongrid>.acol{flex:1;min-width:250px}
- .acol .colhead{font-weight:bold;margin:0 0 6px;font-size:1.0em;border-bottom:1px solid var(--edge);padding-bottom:3px}
+ .colhead{font-weight:bold;margin:0 0 6px;font-size:1.0em;border-bottom:1px solid var(--edge);padding-bottom:3px}
  .meterwrap{margin:8px 0}
  .meter{position:relative;height:26px;background:#26263a;border-radius:8px}
  .meter>i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#4a4a6e,#8888c0);
@@ -144,9 +142,10 @@
 
 <section id="game" aria-labelledby="game-h">
  <h2 id="game-h">The interrogation room</h2>
- <div class="stage">
-  <div class="panel" style="flex:1.6">
-   <p class="steps">How a round works: <b>1</b> press a kit (that IS the interrogation) →
+ <div class="grid2">
+  <div class="panel">
+   <p class="colhead">How a round works</p>
+   <p class="steps"><b>1</b> press a kit (that IS the interrogation) →
       <b>2</b> read its report → <b>3</b> make your call → the case file opens.</p>
    <p class="stat" id="casehdr" role="status">CASE #— · suspects unidentified</p>
    <div class="suspects">
@@ -157,10 +156,27 @@
       alt="Unidentified suspect two: a featureless backlit silhouette under an interrogation lamp.">
       <span class="nm" id="s2nm" aria-hidden="true">?</span></div>
    </div>
-   <div class="actiongrid">
-    <div class="acol">
-     <fieldset>
-      <legend>Interrogate with a kit</legend>
+  </div>
+  <div class="panel">
+   <h3 id="meter-h" style="margin-top:0">Your accuracy</h3>
+   <div class="meterwrap">
+    <div class="meter" role="img" aria-labelledby="meter-h" aria-describedby="meter-d">
+     <i id="acc" style="width:0%"></i><span class="zone"></span><span class="ceil"></span>
+    </div>
+    <p class="meterlbl" id="meter-d">The <b>red line at 91%</b> is THE CEILING — the proven
+    maximum for any kit, ever, under definite causal order. The shaded region beyond it is the
+    forbidden zone: only the switch reaches it.</p>
+   </div>
+   <p class="stat" id="score" role="status">0 correct of 0 played · —</p>
+   <p class="stat" id="kitstats"></p>
+   <div class="badge" id="badge" role="status"><b>⚡ SWITCH BADGE EARNED.</b> Ten rounds played.
+    There is one interrogation room where the order of questioning is never decided — its odds
+    were not designed, they were <b>measured</b>. The SWITCH kit is now on your belt: select it
+    and step into the forbidden zone.</div>
+  </div>
+  <div class="panel">
+     <fieldset style="border:none;padding:0;margin:0">
+      <legend class="colhead" style="padding:0">Interrogate with a kit</legend>
       <p class="desc" style="margin-top:0">Pressing a kit <strong>runs the interrogation</strong> —
       it questions each suspect once and reports on the right. Kits lock until you make your call.</p>
       <div>
@@ -189,8 +205,8 @@
       <p class="desc" id="auto-d"><strong>Auto-play</strong> runs your selected kit on ten cases
       in a row, always trusting its report — the fastest way to feel each kit's true average.</p>
      </fieldset>
-    </div>
-    <div class="acol">
+  </div>
+  <div class="panel">
      <p class="colhead" id="call-h">Make your call</p>
      <p class="report" id="report" role="status">— press a kit to interrogate —</p>
      <div class="callrow" aria-labelledby="call-h">
@@ -199,26 +215,10 @@
      </div>
      <p class="desc">The kit's report is honest but imperfect — trust it, or override it with
      your hunch. Your call is what scores.</p>
-    </div>
-   </div>
   </div>
-  <div class="panel">
-   <h3 id="meter-h">Your accuracy</h3>
-   <div class="meterwrap">
-    <div class="meter" role="img" aria-labelledby="meter-h" aria-describedby="meter-d">
-     <i id="acc" style="width:0%"></i><span class="zone"></span><span class="ceil"></span>
-    </div>
-    <p class="meterlbl" id="meter-d">The <b>red line at 91%</b> is THE CEILING — the proven
-    maximum for any kit, ever, under definite causal order. The shaded region beyond it is the
-    forbidden zone: only the switch reaches it.</p>
-   </div>
-   <p class="stat" id="score" role="status">0 correct of 0 played · —</p>
-   <p class="stat" id="kitstats"></p>
-   <div class="badge" id="badge" role="status"><b>⚡ SWITCH BADGE EARNED.</b> Ten rounds played.
-    There is one interrogation room where the order of questioning is never decided — its odds
-    were not designed, they were <b>measured</b>. The SWITCH kit is now on your belt: select it
-    and step into the forbidden zone.</div>
-   <h3 id="log-h">Case log</h3>
+ </div>
+
+ <h3 id="log-h">Case log</h3>
    <div class="log" id="log" role="log" aria-live="polite" aria-labelledby="log-h"></div>
   </div>
  </div>
