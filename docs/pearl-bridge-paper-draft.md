@@ -1,7 +1,7 @@
 # Causal Structure Beyond the Ladder: Hardware Experiments Where do-Calculus Has No Input
 
-**DRAFT v0.2 (Whisper C4546, 2026-07-10) — §1–§5 drafted in full; §6–§7 data-complete stubs;
-figures fig15/fig16 rendered. Outline: `pearl-bridge-paper-outline-whisper-c4533.md`. Audience:
+**DRAFT v0.3 (Whisper C4549, 2026-07-10) — ALL SECTIONS DRAFTED (§1–§7); figures fig15/fig16
+rendered; remaining: sibling review of the §5 hinge arms, related-work polish, venue call. Outline: `pearl-bridge-paper-outline-whisper-c4533.md`. Audience:
 causal-inference (UAI / Journal of Causal Inference / perspective venue).**
 
 > **Abstract (working).** Pearl's ladder of causation rests on an assumption it never needs to
@@ -231,21 +231,67 @@ process-matrix community has the objects; the causal-inference community has the
 discipline. The gap between them is now an experimental quantity with error bars, which in our
 experience is the kind of gap that gets closed.
 
-## §6. Methods as a contribution [STUB]
+## §6. Methods as a contribution
 
-Pre-registration with frozen grade rules (all six hardware experiments); adversarial sibling
-review (five consecutive experiments where review caught a real defect pre-spend: measure-
-dependent bound / class-imbalanced q\* / skeleton non-uniformity + the vacuous no-identity game /
-transpiler pad-cancellation / null-observable starvation); cross-device replication as standard;
-sentinel-gated calibration windows (the lottery is detectable, not forecastable: F81, F84,
-Exp107's load-bearing deep sentinel); ~3.5 QPU-minutes total for the results in §3–§4.
+The empirical practices in this paper were imported from forecasting-tournament and
+pre-registration culture into hardware quantum information, and we believe the import is itself
+a contribution — in both directions.
 
-## §7. Honest scope [STUB]
+**Frozen rules, graded mechanically.** Every hardware experiment shipped with a pre-registration
+committed to a public repository before submission: hypotheses, grading thresholds, abort
+conditions, and the exact analysis conventions. Grading was performed by whichever agent's cycle
+followed the job's completion, applying the frozen rule with constants read from the submission
+manifest — grader and experiment-owner routinely differed, and no analyst degree of freedom
+survived the freeze. Failed gates grade as NO-TEST (infrastructure) rather than silently
+becoming losses or quietly re-run; one experiment in this arc (the N=3 window gate) carried a
+pre-registered branch in which failure itself was the deliverable.
 
-Device-characterized (not DI; cite photonic DI line). Coherence-of-order witnesses query each
-operation twice — not a black-box query-complexity separation. NISQ-generation claims only;
-the N-scaling inversion (§4) is itself evidence of the generation boundary. All job IDs,
-pre-registrations, code, and raw results are public in the repository.
+**Adversarial sibling review, with receipts.** Across the five hardware experiments reported
+here, pre-submission review by a second agent (or, absent one, a checklist self-application)
+caught a real defect *every time*: a bound that did not apply to the planned instance class
+(Pauli pairs, where the causal ceiling is 1); an "obvious simplification" that would have made
+the game vacuous (removing the identity operands); a compiled-circuit skeleton that varied with
+the hidden pair, weakening the fixed-process reading (fixed by padding); a transpiler that
+silently optimized the padding away (fixed by barrier fences); and a null observable that was
+starved of samples on the very arm it was meant to certify. We report the catches because the
+pattern generalizes: the review stage was not overhead but the highest-yield instrument in the
+pipeline.
+
+**Detection, not forecasting, of device quality.** Deep-circuit fidelity on this hardware is a
+"calibration-window lottery": a pre-registered study (nine windows, frozen Spearman gate) found
+that time-since-calibration does *not* predict window quality — its own null — while quality
+clustered by queue-drain episode. The operational consequence is a design rule used in the N=3
+experiment: co-batch a *same-depth-class sentinel* whose ideal output is known, and gate the
+experiment on the sentinel's in-run reading. The sentinel both passed the gate and quantified
+the noise-model's optimism in the same run.
+
+**Cost.** The entire §2–§4 evidence chain — witness, game, replication, capacity, N=3 —
+consumed roughly 3.5 minutes of quantum-processor time, on free-tier quota. The binding
+resource was review discipline, not hardware.
+
+## §7. Honest scope
+
+**Device-characterized, not device-independent.** Our claims trust that the compiled circuits
+implement the stated local operations — the same trust the quantum-executed causal-inference
+literature (§1, related work) places in its encodings, and the standard trust of gate-model
+experiments generally. A photonic device-independent certification of causal nonseparability
+exists (Nature Communications, 2023); nothing here competes with it on assumptions. Our
+contribution is orthogonal: the game-form, provable-ceiling, pre-registered version, with the
+executed classical controls that make the comparison to SCM predictions quantitative.
+
+**Witness scope.** The switch experiments query each operation twice (once per branch); they
+certify coherence of causal order, not a black-box query-complexity separation. A proposed
+corroboration that would have blurred this line was retracted before running (§2).
+
+**Generation-bounded claims.** Every number is a statement about 2026 Heron-class
+superconducting hardware. The N-scaling inversion (§4) is itself the sharpest evidence of the
+boundary: the resource's theoretical scaling is real, and this hardware generation cannot yet
+cash it. We expect the inversion to be temporary; the theorems are not.
+
+**Reproducibility.** All pre-registrations (frozen pre-submission), job identifiers, analysis
+code, raw result files, the SDP bound solver, and two interactive demonstrations (one of which
+lets a reader replay the capacity experiment against fresh shots from their own free hardware
+account) are public in the project repository.
 
 ---
 
