@@ -44,10 +44,12 @@
  .steps{font-size:0.85em;color:var(--dim);margin:0 0 8px}
  .steps b{color:var(--ink)}
  .suspects{display:flex;gap:16px;justify-content:center;margin:12px 0}
- .sil{width:96px;height:124px;border-radius:8px;background:linear-gradient(#23232f,#0a0a0f);
-      display:flex;align-items:flex-end;justify-content:center;font-size:44px;color:#3a3a4e;
-      border:1px solid var(--edge);padding:4px;text-align:center}
- .sil.revealed{color:#d8d8e8;font-size:0.78em;align-items:center;line-height:1.25}
+ .sil{width:110px;border-radius:8px;border:1px solid var(--edge);background:#0a0a0f;
+      overflow:hidden;text-align:center}
+ .sil img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover}
+ .sil .nm{display:block;font-size:0.72em;color:#d8d8e8;padding:3px 2px;min-height:2.2em;line-height:1.15}
+ .mascot{float:right;width:84px;border-radius:10px;margin:0 0 6px 12px}
+ @media (max-width:520px){ .mascot{width:64px} }
  .report{min-height:2.6em;font-family:'Courier New',monospace;margin:8px 0;color:var(--gold);
       font-size:0.95em}
  .callrow button.call{background:#2a1f33;border-color:#665;font-size:1.02em}
@@ -144,8 +146,12 @@
       <b>3</b> read the kit's report → <b>4</b> make your call → the case file opens.</p>
    <p class="stat" id="casehdr" role="status">CASE #— · suspects unidentified</p>
    <div class="suspects">
-    <div class="sil" id="s1" role="img" aria-label="Unidentified suspect one, shown as a silhouette">?</div>
-    <div class="sil" id="s2" role="img" aria-label="Unidentified suspect two, shown as a silhouette">?</div>
+    <div class="sil"><img id="s1img" src="img/silhouette.png"
+      alt="Unidentified suspect one: a featureless backlit silhouette under an interrogation lamp.">
+      <span class="nm" id="s1nm" aria-hidden="true">?</span></div>
+    <div class="sil"><img id="s2img" src="img/silhouette.png"
+      alt="Unidentified suspect two: a featureless backlit silhouette under an interrogation lamp.">
+      <span class="nm" id="s2nm" aria-hidden="true">?</span></div>
    </div>
    <fieldset>
     <legend>Your kit</legend>
@@ -227,7 +233,10 @@
  <a href="../">the quantum switch demo</a> ·
  <a href="../static-duel/">STATIC: classic bot vs quantum bot</a> ·
  <a href="../casebook-pnp/">print &amp; play tabletop version</a> ·
- <a href="https://github.com/mblakemore/quantum">findings, pre-registrations &amp; job IDs</a>
+ <a href="https://github.com/mblakemore/quantum">findings, pre-registrations &amp; job IDs</a><br>
+ Suspect portraits generated with Google Gemini (2026), art-directed from the project's
+ <a href="art-prompts.md">prompt pack</a>; one shared silhouette by design (see
+ <a href="art-spec.md">art spec</a>).
 </footer>
 </div>
 
@@ -237,13 +246,28 @@ let kit = 'bell', played = 0, correct = 0, cur = null, pending = null, badge = f
 const kstats = { rookie: [0, 0], bell: [0, 0], switch: [0, 0] };
 const el = id => document.getElementById(id);
 const KITNAME = { rookie: 'ROOKIE KIT', bell: 'ENTANGLED CASEFILE', switch: '⚡ SWITCH' };
+const PORTRAIT = { 'The Nobody':'nobody', 'The Mirror':'mirror', 'The Twist':'twist',
+  'The Judge':'judge', 'Blend East':'east', 'Blend West':'west', 'Blend North':'north',
+  'Blend South':'south', 'Blend Dawn':'dawn', 'Blend Dusk':'dusk' };
+const ALT = {
+  'The Nobody': 'The Nobody: an empty trench coat and floating bowler hat with only pale mist where a head should be.',
+  'The Mirror': 'The Mirror: a dapper figure with a perfectly symmetric polished-chrome face.',
+  'The Twist': 'The Twist: a sly, slightly translucent figure with a spiral pompadour and violet accents.',
+  'The Judge': 'The Judge: a stern elderly figure in a high-collared black robe with a crimson balance-scale pin.',
+  'Blend East': 'Blend East: a twin with half chrome face, half spiral glass, amber tie, confident smirk.',
+  'Blend West': 'Blend West: the estranged twin — spiral glass on the opposite side, teal tie, wary scowl.',
+  'Blend North': 'Blend North: a silver-haired figure in a judicial robe with a gold balance-scale pin, chin raised.',
+  'Blend South': 'Blend South: the estranged twin — steel-blue pin, chin lowered, eyes closed.',
+  'Blend Dawn': 'Blend Dawn: silver spiraling hair over a judicial collar, lit by a warm sunrise glow.',
+  'Blend Dusk': 'Blend Dusk: the estranged twin — half spiral-glass face, cold dusk-purple glow.' };
 
 function draw() {
   cur = DECK[Math.floor(Math.random() * DECK.length)];
   el('casehdr').textContent = `CASE #${1000 + Math.floor(Math.random() * 9000)} · suspects unidentified`;
-  ['s1', 's2'].forEach((id, i) => {
-    const s = el(id); s.className = 'sil'; s.textContent = '?';
-    s.setAttribute('aria-label', `Unidentified suspect ${i + 1}, shown as a silhouette`);
+  [1, 2].forEach(i => {
+    el(`s${i}img`).src = 'img/silhouette.png';
+    el(`s${i}img`).alt = `Unidentified suspect ${i}: a featureless backlit silhouette under an interrogation lamp.`;
+    el(`s${i}nm`).textContent = '?';
   });
   el('report').textContent = '— choose a kit, then press Interrogate —';
   el('interro').disabled = false; el('callP').disabled = true; el('callR').disabled = true;
@@ -265,11 +289,10 @@ function call(guessP) {
   const ok = guessP === truthP;
   played++; if (ok) correct++;
   kstats[kit][0] += ok ? 1 : 0; kstats[kit][1]++;
-  ['s1', 's2'].forEach((id, i) => {
-    const s = el(id); s.className = 'sil revealed';
-    const name = cur.chars.split(' & ')[i];
-    s.textContent = name;
-    s.setAttribute('aria-label', `Suspect ${i + 1} revealed: ${name}`);
+  cur.chars.split(' & ').forEach((name, i) => {
+    el(`s${i + 1}img`).src = `img/${PORTRAIT[name]}.png`;
+    el(`s${i + 1}img`).alt = `Suspect ${i + 1} revealed — ${ALT[name]}`;
+    el(`s${i + 1}nm`).textContent = name;
   });
   let line = `${cur.chars} → ${cur.truth}. you called ${guessP ? 'PARTNERS' : 'RIVALS'}: ${ok ? 'correct ✓' : 'wrong ✗'}`;
   if (kit === 'bell' && cur.bell === 0)
