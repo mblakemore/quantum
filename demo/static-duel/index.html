@@ -1,204 +1,391 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>STATIC — Classic Bot vs Quantum Bot</title>
+<title>STATIC — can a message survive two perfect erasers? Classic bot vs quantum bot</title>
+<meta name="description" content="A playable demonstration of quantum capacity activation: information transmitted through two channels that each provably destroy everything — with odds measured on a real quantum computer.">
 <style>
- :root { --bg:#0e0e14; --panel:#181822; --ink:#e8e8f0; --dim:#9a9ab0; --red:#ff5470;
-         --q:#7ee8a2; --c:#ffb86b; --you:#8fb8ff; }
- * { box-sizing:border-box; }
- body { margin:0; background:var(--bg); color:var(--ink);
-        font-family:Georgia,'Times New Roman',serif; }
- .wrap { max-width:980px; margin:0 auto; padding:18px; }
- h1 { font-size:1.5em; margin:4px 0 2px; } .sub { color:var(--dim); font-style:italic; margin:0 0 14px; }
- .lanes { display:flex; gap:12px; flex-wrap:wrap; }
- .lane { flex:1; min-width:280px; background:var(--panel); border-radius:10px; padding:12px; }
- .lane h2 { margin:0 0 6px; font-size:1.05em; }
- .lane.c h2 { color:var(--c); } .lane.q h2 { color:var(--q); } .lane.you h2 { color:var(--you); }
- canvas.tv { width:100%; height:84px; background:#000; border-radius:6px; display:block; }
- .stat { font-family:'Courier New',monospace; font-size:0.9em; margin:6px 0 2px; }
- .bar { height:12px; background:#26263a; border-radius:6px; overflow:hidden; margin:4px 0; position:relative; }
- .bar > i { display:block; height:100%; transition:width .25s; }
- .lane.c .bar>i { background:var(--c);} .lane.q .bar>i{ background:var(--q);} .lane.you .bar>i{background:var(--you);}
- .bar .half { position:absolute; left:50%; top:-2px; bottom:-2px; width:2px; background:var(--red); }
- .ctr { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin:14px 0; }
- button { background:#26263a; color:var(--ink); border:1px solid #444; border-radius:8px;
-          padding:8px 14px; font:inherit; cursor:pointer; }
- button:hover { border-color:#888; } button.primary { background:#3a2440; border-color:#a85; }
- select,input[type=range] { background:#26263a; color:var(--ink); border:1px solid #444; border-radius:6px; padding:4px; }
- .youpanel { display:none; margin-top:8px; background:#12121c; padding:8px; border-radius:8px; }
- .youpanel.on { display:block; }
- .chip { display:inline-block; padding:2px 10px; border-radius:12px; font-family:'Courier New',monospace;
-         font-size:0.85em; background:#26263a; margin:2px; }
- .truth { background:#101018; border:1px solid #333; border-radius:8px; padding:10px 12px;
-          font-size:0.88em; color:var(--dim); margin-top:16px; }
- .truth b { color:var(--ink); }
- .mode { font-family:'Courier New',monospace; font-size:0.8em; color:var(--dim); }
- .live-ok { color:var(--q); } .live-bad { color:var(--red); }
- .log { font-family:'Courier New',monospace; font-size:0.78em; color:var(--dim); height:64px;
-        overflow-y:auto; background:#0a0a10; border-radius:6px; padding:6px; margin-top:6px; }
- a { color:#9ecbff; }
-</style></head><body><div class="wrap">
- <h1>STATIC — Classic Bot vs Quantum Bot</h1>
- <p class="sub">A secret (RED or BLUE) is whispered through two censors that each erase everything.
- The classic bot hears a coin. The quantum bot hears a whisper — with odds measured on a real
- quantum computer (Exp106, ibm_marrakesh, job d983ek52su3c739ip92g).</p>
+ :root{ --bg:#0d0d14; --panel:#1a1a26; --panel2:#12121c; --ink:#f0f0f6; --dim:#b9b9cf;
+        --red:#ff6b85; --redline:#e0405e; --q:#8af0ae; --c:#ffc07a; --you:#a4c6ff;
+        --edge:#3a3a4e; --focus:#ffd166; }
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;
+      font-size:17px;line-height:1.55}
+ .wrap{max-width:960px;margin:0 auto;padding:20px 18px 40px}
+ header h1{font-size:1.7em;margin:6px 0 4px;line-height:1.2}
+ .tagline{color:var(--dim);font-size:1.05em;margin:0 0 18px}
+ h2{font-size:1.25em;margin:26px 0 8px;border-bottom:2px solid var(--edge);padding-bottom:4px}
+ h3{font-size:1.02em;margin:12px 0 4px}
+ a{color:#9ecbff} a:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+ .cards{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+ .card{flex:1;min-width:240px;background:var(--panel);border:1px solid var(--edge);
+       border-radius:10px;padding:12px 14px}
+ .card .n{display:inline-block;width:1.7em;height:1.7em;border-radius:50%;background:#2c2c40;
+       text-align:center;line-height:1.7em;font-weight:bold;margin-right:6px}
+ .why{background:#1c1524;border:1px solid #4a3a5e;border-radius:10px;padding:12px 16px;margin:14px 0}
+ .why b{color:var(--red)}
+ ul.rules{margin:8px 0 8px 4px;padding-left:20px} ul.rules li{margin:7px 0}
+ .keyfact{background:var(--panel2);border-left:4px solid var(--q);padding:8px 12px;margin:10px 0;
+          font-size:0.95em}
+ fieldset{border:1px solid var(--edge);border-radius:10px;padding:12px 14px;margin:14px 0}
+ legend{padding:0 8px;font-weight:bold}
+ .ctlrow{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}
+ .ctl{flex:1;min-width:200px}
+ .ctl .desc{font-size:0.82em;color:var(--dim);margin-top:4px;line-height:1.35}
+ button{background:#2a2a3c;color:var(--ink);border:1.5px solid #565672;border-radius:9px;
+        padding:11px 16px;font:inherit;cursor:pointer;min-height:44px}
+ button:hover{border-color:#9a9ac0}
+ button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+ button.primary{background:#3d2547;border-color:#b08a5a;font-weight:bold}
+ button:disabled{opacity:.45;cursor:not-allowed}
+ label.chk{display:inline-flex;gap:8px;align-items:center;cursor:pointer;min-height:44px}
+ input[type=checkbox]{width:20px;height:20px;accent-color:var(--q)}
+ input[type=range]{width:150px;accent-color:#9ecbff;height:28px}
+ .mode{font-family:'Courier New',monospace;font-size:0.85em;color:var(--dim)}
+ .live-ok{color:var(--q);font-weight:bold} .live-bad{color:var(--red)}
+ .lanes{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0}
+ .lane{flex:1;min-width:290px;background:var(--panel);border:1px solid var(--edge);
+       border-radius:10px;padding:14px}
+ .lane h3{margin:0 0 2px;font-size:1.1em}
+ .lane.c h3{color:var(--c)} .lane.q h3{color:var(--q)} .lane.you h3{color:var(--you)}
+ .lane .how{font-size:0.83em;color:var(--dim);min-height:3.4em;margin:2px 0 8px}
+ canvas.tv{width:100%;height:84px;background:#000;border-radius:6px;display:block}
+ .tvcap{font-size:0.8em;color:var(--dim);font-style:italic;margin:4px 0 8px;min-height:2.4em}
+ .stat{font-family:'Courier New',monospace;font-size:0.92em;margin:6px 0 2px}
+ .bar{height:16px;background:#26263a;border-radius:8px;overflow:hidden;margin:4px 0;position:relative}
+ .bar>i{display:block;height:100%;transition:width .25s}
+ @media (prefers-reduced-motion: reduce){ .bar>i{transition:none} }
+ .lane.c .bar>i{background:var(--c)} .lane.q .bar>i{background:var(--q)} .lane.you .bar>i{background:var(--you)}
+ .bar .half{position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--redline)}
+ .barlbl{font-size:0.78em;color:var(--dim)}
+ .youpanel{margin-top:8px;background:var(--panel2);padding:10px;border-radius:8px}
+ .chip{display:inline-block;padding:3px 10px;border-radius:12px;font-family:'Courier New',monospace;
+       font-size:0.85em;background:#2a2a3c;margin:2px}
+ .log{font-family:'Courier New',monospace;font-size:0.85em;color:var(--dim);max-height:130px;
+      overflow-y:auto;background:#0a0a10;border:1px solid var(--edge);border-radius:8px;
+      padding:8px;margin-top:8px}
+ .banner{display:none;font-size:1.05em;background:#13301e;border:1.5px solid var(--q);
+      border-radius:10px;padding:10px 14px;margin:10px 0}
+ .banner.show{display:block}
+ .truth{background:var(--panel2);border:1px solid var(--edge);border-radius:10px;
+        padding:4px 16px 14px;margin-top:18px;font-size:0.95em}
+ .truth code{font-family:'Courier New',monospace;font-size:0.9em;background:#1f1f2e;
+        padding:1px 5px;border-radius:4px}
+ footer{margin-top:22px;font-size:0.85em;color:var(--dim);border-top:1px solid var(--edge);padding-top:10px}
+ .skip{position:absolute;left:-999px;top:0;background:var(--focus);color:#000;padding:8px 14px;z-index:10}
+ .skip:focus{left:8px}
+</style></head><body>
+<a class="skip" href="#game">Skip to the game</a>
+<div class="wrap">
 
- <div class="ctr">
-  <button class="primary" id="race">▶ Race: first to decode 5 secrets</button>
-  <button id="step">Step one round</button>
-  <button id="reset">Reset</button>
-  <label>speed <input type="range" id="speed" min="1" max="60" value="14"></label>
-  <label><input type="checkbox" id="youplay"> you play too</label>
-  <span class="mode" id="mode">MODE: REPLAY (measured July 2026)</span>
-  <button id="golive" title="needs the local shot server — see The Truth below">try LIVE</button>
+<header>
+ <h1>📺 STATIC — can a message survive two perfect erasers?</h1>
+ <p class="tagline">A tiny game about a big experiment: information transmitted through two
+ machines that each <em>provably destroy everything</em> — with every probability in this page
+ <strong>measured on a real quantum computer</strong>, not designed.</p>
+</header>
+
+<section aria-labelledby="setup-h">
+ <h2 id="setup-h">The setup, in three steps</h2>
+ <div class="cards">
+  <div class="card"><span class="n" aria-hidden="true">1</span><strong>A secret is chosen</strong> —
+   RED or BLUE — and sent through <em>two censor machines</em>. Each censor turns whatever enters
+   it into pure random static. Two in a row: static of static.</div>
+  <div class="card"><span class="n" aria-hidden="true">2</span><strong>Mathematics slams the
+   door.</strong> Run the censors in either order, alternate them, flip coins between orders — a
+   theorem says <em>exactly zero</em> information survives. Not "very little": zero. Our control
+   experiment measured it: 0.00012 bits.</div>
+  <div class="card"><span class="n" aria-hidden="true">3</span><strong>The quantum
+   loophole.</strong> A quantum computer can run the two censors in a <em>superposition of both
+   orders at once</em> — genuinely neither-first-and-both. Then a whisper of the secret survives:
+   <strong>0.0436 bits per try, measured</strong>, 55 standard deviations away from "impossible."</div>
  </div>
+ <div class="why"><b>Why this matters:</b> the classic bot below isn't weak — it is
+  <em>as good as any machine, strategy, or intelligence can ever be</em> under normal
+  cause-and-effect, and that best-possible score is a coin flip. The quantum bot's edge doesn't
+  come from cleverness; it comes from the <em>order of events itself</em> being quantum. When it
+  pulls ahead, you're watching statistics that ordinary cause-and-effect provably cannot produce.</div>
+</section>
+
+<section aria-labelledby="rules-h">
+ <h2 id="rules-h">Game rules</h2>
+ <ul class="rules">
+  <li>Each <strong>secret</strong> is RED or BLUE, chosen at random. Both bots try to decode the
+      same secret from what leaks out of the censors.</li>
+  <li>A secret lasts <strong>15 rounds</strong>. In each round, every bot casts one vote —
+      RED or BLUE — based on what it heard that round.</li>
+  <li>After 15 rounds each bot answers with its <strong>majority vote</strong>. A correct answer
+      scores one decoded secret. Then a new secret is drawn.</li>
+  <li>The <strong>classic bot</strong> hears only static, so each of its votes is a fair coin —
+      the provable best. It will hover around 50% forever.</li>
+  <li>The <strong>quantum bot</strong> hears two things per round: a <em>stamp</em> (the
+      order-control qubit: UP or DOWN) and a <em>die</em> (the message qubit: RED or BLUE).
+      Its rule — measured, not invented: <strong>stamp UP → trust the die; stamp DOWN → flip
+      it</strong>. That's a ~62% vote, and 15 votes at 62% make an ~83% answer.</li>
+  <li>First bot to <strong>5 decoded secrets</strong> wins the race. The coin gets lucky in short
+      races sometimes — replay and watch the long run take over. <em>The signal compounds; the
+      coin never does.</em></li>
+ </ul>
+ <p class="keyfact">The strangest measured fact: the message qubit <em>by itself</em> is still
+ perfect static (we measured that too — no trace of the secret). So is the stamp. The secret
+ lives only in <strong>how they move together</strong> — which is why the quantum bot must read
+ both.</p>
+</section>
+
+<section id="game" aria-labelledby="game-h">
+ <h2 id="game-h">The duel</h2>
+ <fieldset>
+  <legend>Controls</legend>
+  <div class="ctlrow">
+   <div class="ctl">
+    <button class="primary" id="race" aria-describedby="race-d">▶ Start the race</button>
+    <p class="desc" id="race-d">Runs secrets automatically until one bot decodes 5. About a
+    minute at default speed.</p>
+   </div>
+   <div class="ctl">
+    <button id="step" aria-describedby="step-d">Step one round</button>
+    <p class="desc" id="step-d">Advance a single round, to watch one vote happen at a time.</p>
+   </div>
+   <div class="ctl">
+    <button id="reset" aria-describedby="reset-d">Reset</button>
+    <p class="desc" id="reset-d">Clear all scores and start fresh.</p>
+   </div>
+   <div class="ctl">
+    <label for="speed">Speed</label><br>
+    <input type="range" id="speed" min="1" max="60" value="14"
+           aria-describedby="speed-d" aria-valuetext="14 rounds per second">
+    <p class="desc" id="speed-d">How fast automatic rounds play (left = slower).</p>
+   </div>
+   <div class="ctl">
+    <label class="chk"><input type="checkbox" id="youplay" aria-describedby="you-d">
+     <span><strong>You play too</strong></span></label>
+    <p class="desc" id="you-d">Adds a third lane where <em>you</em> receive the same stamp + die
+    as the quantum bot and make each call yourself — use its rule, or your hunch.</p>
+   </div>
+   <div class="ctl">
+    <button id="golive" aria-describedby="live-d">Try LIVE mode</button>
+    <p class="desc" id="live-d">Normally the quantum bot replays odds measured in July 2026.
+    LIVE mode makes every roll consume <em>one fresh measured shot</em> from your own free IBM
+    Quantum job — <a href="README.md">5-minute setup</a>. Without the local server, this button
+    simply reports that replay mode continues.</p>
+   </div>
+  </div>
+  <p class="mode" id="mode" role="status">MODE: REPLAY — odds measured July&nbsp;2026 on
+   ibm_marrakesh (job d983ek52su3c739ip92g)</p>
+ </fieldset>
+
+ <div class="banner" id="banner" role="status"></div>
 
  <div class="lanes">
-  <div class="lane c"><h2>CLASSIC BOT</h2>
-   <canvas class="tv" id="tvc"></canvas>
-   <div class="stat" id="sc">rounds 0 · this-secret votes —</div>
-   <div class="bar"><i id="bc" style="width:0%"></i><span class="half"></span></div>
-   <div class="stat" id="dc">secrets decoded: 0 ✓ / 0 ✗</div>
+  <div class="lane c">
+   <h3>🎲 Classic bot</h3>
+   <p class="how">Hears pure static. Votes by coin flip — the <em>provable maximum</em> for any
+    definite order of the censors.</p>
+   <canvas class="tv" id="tvc" role="img"
+     aria-label="Television static with no visible pattern — the classic bot's view"></canvas>
+   <p class="tvcap">Pure static, always. No number of rounds changes this picture.</p>
+   <p class="stat" id="sc">round 0 of 15 · votes: RED 0 · BLUE 0</p>
+   <div class="bar" role="img" aria-labelledby="bc-lbl"><i id="bc" style="width:50%"></i><span class="half"></span></div>
+   <p class="barlbl" id="bc-lbl">Vote agreement this secret — the red marker is 50%; a coin lives there.</p>
+   <p class="stat" id="dc">secrets decoded: 0 correct, 0 wrong</p>
   </div>
-  <div class="lane q"><h2>QUANTUM BOT</h2>
-   <canvas class="tv" id="tvq"></canvas>
-   <div class="stat" id="sq">rounds 0 · this-secret votes —</div>
-   <div class="bar"><i id="bq" style="width:0%"></i><span class="half"></span></div>
-   <div class="stat" id="dq">secrets decoded: 0 ✓ / 0 ✗</div>
+  <div class="lane q">
+   <h3>⚛️ Quantum bot</h3>
+   <p class="how">Reads the stamp <em>and</em> the die each round, then trusts or flips
+    accordingly. Measured odds: ~62% per round.</p>
+   <canvas class="tv" id="tvq" role="img"
+     aria-label="Television static — the secret's color will faintly emerge as rounds accumulate"></canvas>
+   <p class="tvcap" id="qcap">Starts as the same static — the secret's color slowly bleeds
+    through as votes accumulate.</p>
+   <p class="stat" id="sq">round 0 of 15 · votes: RED 0 · BLUE 0</p>
+   <div class="bar" role="img" aria-labelledby="bq-lbl"><i id="bq" style="width:50%"></i><span class="half"></span></div>
+   <p class="barlbl" id="bq-lbl">Vote agreement this secret — pulling past the marker means a real lean.</p>
+   <p class="stat" id="dq">secrets decoded: 0 correct, 0 wrong</p>
   </div>
-  <div class="lane you" id="youlane" style="display:none"><h2>YOU (quantum decode rule)</h2>
-   <canvas class="tv" id="tvy"></canvas>
-   <div class="stat" id="sy">stamp — · die — → your call?</div>
-   <div class="youpanel on">
-    <button data-g="0">call RED</button> <button data-g="1">call BLUE</button>
-    <span class="chip">rule: stamp UP → trust the die · DOWN → flip it</span>
+  <div class="lane you" id="youlane" hidden>
+   <h3>🕵️ You</h3>
+   <p class="how">Same evidence as the quantum bot. Rule: <strong>stamp UP → trust the die ·
+    stamp DOWN → flip it</strong>. Or follow your hunch.</p>
+   <canvas class="tv" id="tvy" role="img" aria-label="Television static — your view of the message"></canvas>
+   <p class="stat" id="sy" role="status">press "Step one round" to receive evidence</p>
+   <div class="youpanel">
+    <button data-g="0" id="callred">Call RED</button>
+    <button data-g="1" id="callblue">Call BLUE</button>
+    <span class="chip">your votes: <span id="yv">RED 0 · BLUE 0</span></span>
    </div>
-   <div class="stat" id="dy">secrets decoded: 0 ✓ / 0 ✗</div>
+   <p class="stat" id="dy">secrets decoded: 0 correct, 0 wrong</p>
   </div>
  </div>
- <div class="log" id="log"></div>
 
- <div class="truth">
-  🔍 <b>What's really true here.</b> Both bots face the same stream of secrets. The classic bot's
-  table is 50/50 <i>by theorem</i> — every definite ordering of the two censors carries exactly
-  zero information (our control measured 0.00012 bits). The quantum bot's per-round odds are the
-  <b>measured</b> switch statistics: stamp UP with p=0.6214; given UP the die agrees with the
-  truth with p≈0.595; given DOWN it <i>disagrees</i> with p≈0.657. Decode = majority over 15
-  rounds per secret (≈83% per secret; the classic bot stays at 50% forever).
-  <br><br><b>Playing against a real quantum opponent (LIVE mode, bring your own free key):</b>
-  <a href="README.md">5-minute quickstart</a> — get a free IBM Quantum token, then
-  <span class="mode">python3 scripts/quantum_duel_server.py --submit --serve</span> and click
-  "try LIVE": every roll the quantum bot makes consumes <i>one actual measured shot</i> from
-  YOUR fresh job (job ID displayed; ~2–3 seconds of your free quota buys thousands of rounds;
-  the server confirms before spending and never auto-resubmits). Your key never leaves your
-  machine — this page is static and we host nothing. Without the server the page stays in
-  REPLAY mode: same physics, July's shots.
-  <br><br>Repo &amp; pre-registrations: <a href="https://github.com/mblakemore/quantum">github.com/mblakemore/quantum</a>
- </div>
+ <h3 id="log-h">Case log</h3>
+ <div class="log" id="log" role="log" aria-live="polite" aria-labelledby="log-h"></div>
+</section>
+
+<section class="truth" aria-labelledby="truth-h">
+ <h2 id="truth-h">🔍 What's really true here</h2>
+ <p><strong>The numbers are measurements.</strong> Quantum-bot odds per round: stamp UP with
+ probability 0.6214; given UP, the die matches the secret with probability ≈0.595; given DOWN it
+ <em>mismatches</em> with probability ≈0.657 — all from experiment Exp106 on
+ <code>ibm_marrakesh</code> (job <code>d983ek52su3c739ip92g</code>, pre-registered, 55.6σ).
+ The classic bot's 50/50 is not a game rule — it is a theorem about the world, and the control
+ arm of the same experiment measured it: 0.00012 bits.</p>
+ <p><strong>What this demo can and cannot claim.</strong> A web page can replay any numbers, so
+ the demo itself proves nothing — the theorem does: no definite ordering of the two censors, no
+ mixture, no adaptive scheme could have produced the quantum column. A real quantum computer
+ did. Every threshold traces to a public job ID and a frozen pre-registration in the
+ <a href="https://github.com/mblakemore/quantum">repository</a>.</p>
+ <p><strong>LIVE mode</strong> (bring your own free key): <a href="README.md">quickstart</a> —
+ run <code>python3 scripts/quantum_duel_server.py --submit --serve</code>, then press "Try LIVE
+ mode". Every quantum-bot roll then consumes one fresh measured shot from <em>your</em> job
+ (~2–3 seconds of your free monthly quota buys thousands of rounds; the server prints the cost
+ and asks before spending, and never re-spends on its own). Your key never leaves your machine —
+ this page is static and we host nothing.</p>
+</section>
+
+<footer>
+ Part of the <a href="../../">quantum characterization campaign</a> ·
+ <a href="../">the quantum switch demo</a> ·
+ <a href="../casebook/">the interrogation game</a> ·
+ <a href="../casebook-pnp/">print &amp; play tabletop version</a> ·
+ <a href="https://github.com/mblakemore/quantum">findings, pre-registrations &amp; job IDs</a>
+</footer>
 </div>
+
 <script>
-// measured parameters (exp106_hw_results.json, ibm_marrakesh)
+// measured parameters (exp106_hw_results.json, ibm_marrakesh, job d983ek52su3c739ip92g)
 const P_UP = 0.6214, P_AGREE_UP = 0.5944, P_DISAGREE_DOWN = 0.6573;
 const ROUNDS_PER_SECRET = 15, RACE_TARGET = 5;
-let live = null; // {shots:[{s,m}...], job:''} when LIVE
-let S = null;
-function fresh() {
-  S = { secret: Math.random()<0.5?0:1, round:0,
-        c:{votes:[0,0], ok:0, bad:0}, q:{votes:[0,0], ok:0, bad:0},
-        y:{votes:[0,0], ok:0, bad:0, pending:null}, racing:false };
-  ['sc','sq','sy','dc','dq','dy'].forEach(id=>el(id).textContent=el(id).textContent.replace(/\d+/g,'0'));
-  drawTV('tvc',0); drawTV('tvq',0); drawTV('tvy',0); upd();
-}
+let live = null, S = null, timer = null;
 const el = id => document.getElementById(id);
-function drawTV(id, corr) { // corr in [0,1]: how much of the secret's hue bleeds through
-  const cv = el(id); if (!cv || cv.clientWidth === 0) return; // hidden lane (e.g. "you" before toggle)
+const NAME = ['RED', 'BLUE'];
+
+function fresh(keepScores) {
+  const prev = S;
+  S = { secret: Math.random() < 0.5 ? 0 : 1, round: 0, racing: false,
+        c: { votes: [0, 0], ok: 0, bad: 0 }, q: { votes: [0, 0], ok: 0, bad: 0 },
+        y: { votes: [0, 0], ok: 0, bad: 0, pending: null } };
+  if (keepScores && prev) {
+    ['c', 'q', 'y'].forEach(k => { S[k].ok = prev[k].ok; S[k].bad = prev[k].bad; });
+    S.racing = prev.racing;
+  }
+  upd();
+}
+function drawTV(id, corr) {
+  const cv = el(id); if (!cv || cv.clientWidth === 0) return; // hidden lane guard
   const ctx = cv.getContext('2d');
   const w = cv.width = cv.clientWidth, h = cv.height = 84;
-  const img = ctx.createImageData(w,h);
-  const hueR = S && S.secret===0;
-  for (let i=0;i<img.data.length;i+=4){
-    const v = Math.random()*255;
-    let r=v,g=v,b=v;
-    if (Math.random()<corr){ if(hueR){r=Math.min(255,v+90);} else {b=Math.min(255,v+90);} }
-    img.data[i]=r; img.data[i+1]=g; img.data[i+2]=b; img.data[i+3]=255;
+  const img = ctx.createImageData(w, h);
+  const hueR = S && S.secret === 0;
+  for (let i = 0; i < img.data.length; i += 4) {
+    const v = Math.random() * 255; let r = v, g = v, b = v;
+    if (Math.random() < corr) { if (hueR) r = Math.min(255, v + 95); else b = Math.min(255, v + 95); }
+    img.data[i] = r; img.data[i + 1] = g; img.data[i + 2] = b; img.data[i + 3] = 255;
   }
-  ctx.putImageData(img,0,0);
+  ctx.putImageData(img, 0, 0);
+  if (id === 'tvq') cv.setAttribute('aria-label', corr < 0.08
+    ? 'Television static with no visible pattern yet'
+    : `Television static with a faint ${NAME[S.secret]} tint emerging, signal strength ${(corr * 100).toFixed(0)} percent`);
 }
-function quantumRound(){ // returns {stamp:0up/1down, msg:0red/1blue} honestly from params or live shots
-  if (live && live.shots.length){ const sh = live.shots.pop();
-    return {stamp: sh.s, msg: sh.m ^ (S.secret===1?0:0) ^ (sh.t!==S.secret ? 1:0)}; }
+function quantumRound() {
+  if (live && live.shots.length) {
+    const sh = live.shots.pop();
+    const agree = sh.m === sh.t;
+    return { stamp: sh.s, msg: agree ? S.secret : 1 - S.secret };
+  }
   const up = Math.random() < P_UP;
-  let agree = up ? (Math.random()<P_AGREE_UP) : !(Math.random()<P_DISAGREE_DOWN);
-  return { stamp: up?0:1, msg: agree ? S.secret : 1-S.secret };
+  const agree = up ? (Math.random() < P_AGREE_UP) : !(Math.random() < P_DISAGREE_DOWN);
+  return { stamp: up ? 0 : 1, msg: agree ? S.secret : 1 - S.secret };
 }
-function decode(stamp,msg){ return stamp===0 ? msg : 1-msg; }
-function stepRound(youCall){
-  if (S.round >= ROUNDS_PER_SECRET) return settle();
-  // classic: coin
-  const cGuess = Math.random()<0.5?0:1; S.c.votes[cGuess]++;
-  // quantum bot
-  const r = quantumRound(); S.q.votes[decode(r.stamp,r.msg)]++;
-  // you
-  if (el('youplay').checked){
-    if (youCall===undefined){ // present the evidence, wait for the call
+const decode = (stamp, msg) => stamp === 0 ? msg : 1 - msg;
+
+function stepRound(youCall) {
+  if (S.round >= ROUNDS_PER_SECRET) return;
+  if (el('youplay').checked && youCall === undefined) {
+    if (!S.y.pending) {
       const r2 = quantumRound(); S.y.pending = r2;
-      el('sy').textContent = `stamp ${r2.stamp===0?'UP':'DOWN'} · die says ${r2.msg===0?'RED':'BLUE'} → your call?`;
-      upd(false); return; // round completes when you call
+      el('sy').textContent = `evidence: stamp ${r2.stamp === 0 ? 'UP' : 'DOWN'} · die says ${NAME[r2.msg]} — make your call`;
     }
-    S.y.votes[youCall]++; S.y.pending=null;
+    return; // round completes when the human calls
+  }
+  S.c.votes[Math.random() < 0.5 ? 0 : 1]++;
+  const r = quantumRound(); S.q.votes[decode(r.stamp, r.msg)]++;
+  if (el('youplay').checked) {
+    S.y.votes[youCall]++; S.y.pending = null;
+    el('sy').textContent = 'press "Step one round" (or run the race) for the next evidence';
   }
   S.round++;
   upd();
   if (S.round >= ROUNDS_PER_SECRET) settle();
 }
-function settle(){
-  const maj = v => v[0]===v[1] ? (Math.random()<0.5?0:1) : (v[0]>v[1]?0:1);
-  const truth = S.secret, names=['RED','BLUE'];
-  const cWin = maj(S.c.votes)===truth, qWin = maj(S.q.votes)===truth;
-  S.c[cWin?'ok':'bad']++; S.q[qWin?'ok':'bad']++;
-  let msg = `secret was ${names[truth]} — classic ${cWin?'✓':'✗'} · quantum ${qWin?'✓':'✗'}`;
-  if (el('youplay').checked){ const yWin = maj(S.y.votes)===truth; S.y[yWin?'ok':'bad']++; msg += ` · you ${yWin?'✓':'✗'}`; }
-  log(msg);
-  el('dc').textContent = `secrets decoded: ${S.c.ok} ✓ / ${S.c.bad} ✗`;
-  el('dq').textContent = `secrets decoded: ${S.q.ok} ✓ / ${S.q.bad} ✗`;
-  el('dy').textContent = `secrets decoded: ${S.y.ok} ✓ / ${S.y.bad} ✗`;
-  if (S.racing && (S.c.ok>=RACE_TARGET || S.q.ok>=RACE_TARGET)){
-    S.racing=false;
-    log(S.q.ok>S.c.ok ? '🏆 QUANTUM BOT wins the race.' : (S.c.ok>S.q.ok?'🎲 CLASSIC BOT wins (coins get lucky sometimes — replay!)':'dead heat'));
-    return;
+function settle() {
+  const maj = v => v[0] === v[1] ? (Math.random() < 0.5 ? 0 : 1) : (v[0] > v[1] ? 0 : 1);
+  const truth = S.secret;
+  const cOK = maj(S.c.votes) === truth, qOK = maj(S.q.votes) === truth;
+  S.c[cOK ? 'ok' : 'bad']++; S.q[qOK ? 'ok' : 'bad']++;
+  let msg = `secret was ${NAME[truth]} — classic bot ${cOK ? 'correct ✓' : 'wrong ✗'} · quantum bot ${qOK ? 'correct ✓' : 'wrong ✗'}`;
+  if (el('youplay').checked) {
+    const yOK = maj(S.y.votes) === truth; S.y[yOK ? 'ok' : 'bad']++;
+    msg += ` · you ${yOK ? 'correct ✓' : 'wrong ✗'}`;
   }
-  const keep = S.racing; const wasChecked = el('youplay').checked;
-  const prev = {c:S.c, q:S.q, y:S.y};
-  S.secret = Math.random()<0.5?0:1; S.round=0;
-  S.c={...prev.c, votes:[0,0]}; S.q={...prev.q, votes:[0,0]}; S.y={...prev.y, votes:[0,0], pending:null};
-  S.racing = keep;
+  log(msg);
+  if (S.racing && (S.c.ok >= RACE_TARGET || S.q.ok >= RACE_TARGET)) {
+    const b = el('banner'); b.classList.add('show');
+    if (S.q.ok > S.c.ok) b.innerHTML = '🏆 <strong>The quantum bot wins the race</strong> — a 62% whisper, compounded, beats a coin. Press Reset and run it again.';
+    else if (S.c.ok > S.q.ok) b.innerHTML = '🎲 <strong>The classic bot got lucky this time!</strong> Coins win short races occasionally — that is honest randomness. Replay: the long run belongs to the signal.';
+    else b.innerHTML = '🤝 A dead heat — replay to break it.';
+    S.racing = false; clearInterval(timer); upd(); return;
+  }
+  fresh(true);
 }
-function upd(clearY=true){
-  el('sc').textContent = `rounds ${S.round} · this-secret votes R${S.c.votes[0]}:B${S.c.votes[1]}`;
-  el('sq').textContent = `rounds ${S.round} · this-secret votes R${S.q.votes[0]}:B${S.q.votes[1]}`;
-  const frac = v => (v[0]+v[1]) ? Math.max(v[0],v[1])/(v[0]+v[1]) : 0.5;
-  el('bc').style.width = (frac(S.c.votes)*100)+'%';
-  el('bq').style.width = (frac(S.q.votes)*100)+'%';
-  drawTV('tvc', 0);                                   // classic sees pure static, always
-  drawTV('tvq', Math.min(0.6, S.round/ROUNDS_PER_SECRET*0.55)); // signal emerges with rounds
-  if (el('youplay').checked && clearY) drawTV('tvy', Math.min(0.6, S.round/ROUNDS_PER_SECRET*0.55));
+function upd() {
+  el('sc').textContent = `round ${S.round} of ${ROUNDS_PER_SECRET} · votes: RED ${S.c.votes[0]} · BLUE ${S.c.votes[1]}`;
+  el('sq').textContent = `round ${S.round} of ${ROUNDS_PER_SECRET} · votes: RED ${S.q.votes[0]} · BLUE ${S.q.votes[1]}`;
+  el('yv').textContent = `RED ${S.y.votes[0]} · BLUE ${S.y.votes[1]}`;
+  const frac = v => (v[0] + v[1]) ? Math.max(v[0], v[1]) / (v[0] + v[1]) : 0.5;
+  el('bc').style.width = (frac(S.c.votes) * 100) + '%';
+  el('bq').style.width = (frac(S.q.votes) * 100) + '%';
+  el('dc').textContent = `secrets decoded: ${S.c.ok} correct, ${S.c.bad} wrong`;
+  el('dq').textContent = `secrets decoded: ${S.q.ok} correct, ${S.q.bad} wrong`;
+  el('dy').textContent = `secrets decoded: ${S.y.ok} correct, ${S.y.bad} wrong`;
+  drawTV('tvc', 0);
+  drawTV('tvq', Math.min(0.5, S.round / ROUNDS_PER_SECRET * 0.45));
+  if (el('youplay').checked) drawTV('tvy', Math.min(0.5, S.round / ROUNDS_PER_SECRET * 0.45));
 }
-function log(m){ const L=el('log'); L.innerHTML += m+'<br>'; L.scrollTop=L.scrollHeight; }
-let timer=null;
-el('race').onclick = ()=>{ fresh(); S.racing=true; clearInterval(timer);
-  timer = setInterval(()=>{ if(!S.racing){clearInterval(timer);return;}
-    if(!(el('youplay').checked && S.y.pending)) stepRound(); }, 1000/el('speed').value); };
-el('step').onclick = ()=>stepRound();
-el('reset').onclick = ()=>{ clearInterval(timer); fresh(); el('log').innerHTML=''; };
-el('youplay').onchange = e=>{ el('youlane').style.display = e.target.checked?'block':'none';
-  if (e.target.checked) requestAnimationFrame(()=>drawTV('tvy', 0)); };
-document.querySelectorAll('.youpanel button').forEach(b=>b.onclick=()=>{ if(S.y.pending) stepRound(+b.dataset.g); });
-el('golive').onclick = async ()=>{
+function log(m) {
+  const L = el('log'); const d = document.createElement('div');
+  d.textContent = m; L.appendChild(d); L.scrollTop = L.scrollHeight;
+}
+
+el('race').onclick = () => {
+  el('banner').classList.remove('show'); fresh(false); S.racing = true;
+  el('log').innerHTML = ''; log('race started — first to 5 decoded secrets.');
+  clearInterval(timer);
+  timer = setInterval(() => {
+    if (!S.racing) { clearInterval(timer); return; }
+    if (!(el('youplay').checked && S.y.pending)) stepRound();
+  }, 1000 / el('speed').value);
+};
+el('step').onclick = () => stepRound();
+el('reset').onclick = () => {
+  clearInterval(timer); el('banner').classList.remove('show');
+  el('log').innerHTML = ''; fresh(false);
+};
+el('speed').oninput = e =>
+  e.target.setAttribute('aria-valuetext', e.target.value + ' rounds per second');
+el('youplay').onchange = e => {
+  el('youlane').hidden = !e.target.checked;
+  if (e.target.checked) requestAnimationFrame(() => drawTV('tvy', 0));
+};
+el('callred').onclick = () => { if (S.y.pending) stepRound(0); };
+el('callblue').onclick = () => { if (S.y.pending) stepRound(1); };
+el('golive').onclick = async () => {
   try {
     const r = await fetch('http://localhost:8787/shots?n=4000'); const j = await r.json();
-    live = j; el('mode').innerHTML = `MODE: <span class="live-ok">LIVE</span> — fresh shots, job ${j.job} (${j.shots.length} rolls banked)`;
-    log(`LIVE: ${j.shots.length} real shots loaded from ${j.job}`);
-  } catch(e){ el('mode').innerHTML = 'MODE: REPLAY — <span class="live-bad">no local shot server found</span> (see The Truth)'; }
+    live = j;
+    el('mode').innerHTML = `MODE: <span class="live-ok">LIVE</span> — every quantum-bot roll now consumes one fresh measured shot · job ${j.job} · ${j.shots.length} shots banked`;
+    log(`LIVE mode on: ${j.shots.length} real shots loaded from job ${j.job}`);
+  } catch (e) {
+    el('mode').innerHTML = 'MODE: REPLAY — <span class="live-bad">no local shot server detected.</span> The game continues with July\'s measured odds. To go LIVE, see the setup link under the "Try LIVE mode" button.';
+  }
 };
-fresh();
+fresh(false);
 </script></body></html>
