@@ -37,7 +37,10 @@
  button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
  button.primary{background:#3d2547;border-color:#b08a5a;font-weight:bold}
  button:disabled{opacity:.45;cursor:not-allowed}
- button.sel{border-color:var(--gold);color:var(--gold)}
+ button.kit{border-color:var(--gold);color:var(--gold);background:#2e2837;font-weight:bold}
+ button.kit:hover:not(:disabled){background:#3a3145}
+ button.kit.sel{background:#4a3a1e;color:#ffe9b3;box-shadow:inset 0 0 0 1.5px var(--gold)}
+ button.kit.sel::after{content:" ✓";font-weight:normal}
  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
  @media (max-width:760px){ .grid2{grid-template-columns:1fr} }
  .panel{background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:14px}
@@ -180,18 +183,18 @@
       <p class="desc" style="margin-top:0">Pressing a kit <strong>runs the interrogation</strong> —
       it questions each suspect once and reports on the right. Kits lock until you make your call.</p>
       <div>
-       <button data-k="rookie" id="krookie" aria-describedby="rookie-d">ROOKIE KIT</button>
+       <button data-k="rookie" id="krookie" class="kit" aria-describedby="rookie-d">ROOKIE KIT</button>
        <p class="desc" id="rookie-d">Separate standard interviews. Simple, honest, averages
        57.5% — and it is <em>confidently wrong</em> about certain suspects.</p>
       </div>
       <div>
-       <button data-k="bell" id="kbell" class="sel" aria-describedby="bell-d">ENTANGLED CASEFILE</button>
+       <button data-k="bell" id="kbell" class="kit sel" aria-describedby="bell-d">ENTANGLED CASEFILE</button>
        <p class="desc" id="bell-d">One case-file in two linked halves; each suspect stamps their
        half once, then you compare. The best kit ordinary causality allows — averages 75%.
        Mind the blind spot.</p>
       </div>
       <div>
-       <button data-k="switch" id="kswitch" disabled aria-describedby="switch-d">🔒 SWITCH BADGE</button>
+       <button data-k="switch" id="kswitch" class="kit" disabled aria-describedby="switch-d">🔒 SWITCH BADGE</button>
        <p class="desc" id="switch-d"><span id="switch-lock">🔒 <strong>Locked</strong> — finish 10
        rounds to earn it.</span> This kit questions both suspects <em>in a superposition of
        orders</em>. It's named for the <a href="https://mblakemore.github.io/quantum/demo/">quantum
