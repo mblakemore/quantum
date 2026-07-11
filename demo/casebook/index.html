@@ -18,9 +18,10 @@
  a{color:#9ecbff} a:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
  .cards{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
  .card{flex:1;min-width:240px;background:var(--panel);border:1px solid var(--edge);
-       border-radius:10px;padding:12px 14px}
- .card .setupimg{width:100%;display:block;border-radius:8px;border:1px solid var(--edge);
-       margin:0 0 10px;background:#0a0a0f}
+       border-radius:10px;padding:12px 14px;display:flex;flex-direction:column}
+ .card .cardtxt{margin:0 0 12px}
+ .card .setupimg{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;display:block;
+       border-radius:8px;border:1px solid var(--edge);background:#0a0a0f;margin-top:auto}
  .card .n{display:inline-block;width:1.7em;height:1.7em;border-radius:50%;background:#2c2c40;
        text-align:center;line-height:1.7em;font-weight:bold;margin-right:6px}
  .why{background:#1c1524;border:1px solid #4a3a5e;border-radius:10px;padding:12px 16px;margin:14px 0}
@@ -161,28 +162,28 @@
  <h2 id="setup-h">The setup, in three steps</h2>
  <div class="cards">
   <div class="card">
-   <img class="setupimg" src="img/setup1.png" width="800" height="597"
-    alt="Two identical silhouette case-cards under an interrogation lamp, joined by a single gold thread — tied in a neat knot on one side, fraying apart on the other.">
-   <span class="n" aria-hidden="true">1</span><strong>Suspects come in
+   <p class="cardtxt"><span class="n" aria-hidden="true">1</span><strong>Suspects come in
    pairs.</strong> Every case is two machine-suspects who are secretly either
    <strong>PARTNERS</strong> (their stories agree no matter who is questioned first) or
    <strong>RIVALS</strong> (their stories come out exactly opposite depending on order).
-   Your job: say which.</div>
+   Your job: say which.</p>
+   <img class="setupimg" src="img/setup1.png" width="750" height="500"
+    alt="Two identical silhouette case-cards under an interrogation lamp, joined by a single gold thread — tied in a neat knot on one side, fraying apart on the other."></div>
   <div class="card">
-   <img class="setupimg" src="img/setup2.png" width="800" height="597"
-    alt="Three violet bars stop well below a glowing red line; one taller mint-green bar passes through the line, its top rising into the red haze above.">
-   <span class="n" aria-hidden="true">2</span><strong>One question
+   <p class="cardtxt"><span class="n" aria-hidden="true">2</span><strong>One question
    each.</strong> You may question each suspect exactly once, through an interrogation kit.
    Here's the wall: mathematics proves that <em>no kit that exists and no kit anyone will ever
    invent</em> can average above <strong>91%</strong> on this task. Not "hard to beat" —
-   proven impossible, the way perpetual motion is impossible.</div>
+   proven impossible, the way perpetual motion is impossible.</p>
+   <img class="setupimg" src="img/setup2.png" width="750" height="500"
+    alt="Three violet bars stop well below a glowing red line; one taller mint-green bar passes through the line, its top rising into the red haze above."></div>
   <div class="card">
-   <img class="setupimg" src="img/setup3.png" width="800" height="436"
-    alt="A gold, tiered quantum-computer chandelier hanging under a lamp in a dark laboratory, its lowest stage glowing mint green.">
-   <span class="n" aria-hidden="true">3</span><strong>The forbidden
+   <p class="cardtxt"><span class="n" aria-hidden="true">3</span><strong>The forbidden
    zone.</strong> A quantum computer can question both suspects <em>in a superposition of both
    orders at once</em> — a physically different kind of question. Measured score:
-   <strong>97.8%</strong>. You'll earn that kit after ten honest rounds.</div>
+   <strong>97.8%</strong>. You'll earn that kit after ten honest rounds.</p>
+   <img class="setupimg" src="img/setup3.png" width="750" height="500"
+    alt="A gold, tiered quantum-computer chandelier hanging under a lamp in a dark laboratory, its lowest stage glowing mint green."></div>
  </div>
  <div class="why"><b>Why this matters:</b> the 91% ceiling binds every strategy under normal
   cause-and-effect — every gadget, every entangled trick, every adaptive scheme, as long as the
