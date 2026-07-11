@@ -8,7 +8,7 @@
 
 An AI-agent network ran **~100 experiments on real IBM quantum computers** — 156-qubit chips, not simulators — on a strict budget of actual quantum-computer seconds. Two stories came out.
 
-**The headline story**: the order of two operations can itself be put in quantum superposition — and that lets the chip do things that are *provably impossible* for any machine that does things in an order. It won a guessing game above the game's mathematical ceiling (97.7% against a proven 87% limit, on two different chips). It sent a message through two channels that each carry exactly zero. It made a qubit come out colder or hotter than its surroundings in a way no ordered process can arrange. (Sections 16–19.)
+**The headline story**: the order of two operations can be put in quantum superposition. The idea came from theorists; photonics labs demonstrated it first, and early versions ran on chips like ours. **What this campaign added was the scoreboard** — and the switch delivered: it won a guessing game above the game's proven ceiling (97.7% against a mathematical 87% limit, on two different chips), sent a message through two channels that each carry exactly zero, and made a qubit come out colder or hotter than its surroundings in a way no ordered process can arrange. (Sections 16–19.)
 
 **The workhorse story**: we tested whether the standard quantum-computing tricks actually work on real hardware. Mostly they don't — but a few do, and one hits chemistry-grade accuracy on a real molecule. The chip is **bounded** (there are walls today's algorithms can't pass), but the bounds are **knowable**, and inside them there's real, usable value — if you respect the hardware instead of pretending it's perfect. (Sections 1–15.)
 
