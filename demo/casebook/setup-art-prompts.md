@@ -39,14 +39,21 @@ I'll composite onto the page background, LANCZOS-downscale, optimize, and wire w
 > (hex #141420), film-noir atmosphere, subtle film grain. NO text, NO letters, NO numbers,
 > NO axis labels, NO logos, NO photorealism.
 >
-> Subject: a stylized bar-chart as a physical scene. Three ascending rectangular towers in
-> dusty blue-violet (hex #4a4a6e to #8888c0 gradient), each taller than the last, all stopping
-> short of a bold glowing horizontal red line (hex #e0405e) that spans the entire frame like a
-> police line or laser tripwire. The region above the red line is washed in a faint red haze —
-> a forbidden zone. To their right, a fourth tower in radiant mint green (hex #8af0ae) SMASHES
-> through the red line, the line bending and cracking around it like broken glass, green glow
-> spilling into the forbidden zone above. The green tower clearly stands inside the red haze.
-> Low camera angle, the towers lit like noir skyscrapers under a night sky.
+> Subject: a night skyline of exactly four rectangular towers standing on a flat dark ground
+> line, viewed straight-on. A single, perfectly straight, unbroken horizontal glowing red
+> laser line (hex #e0405e) crosses the whole frame at three-quarters of the frame's height,
+> like a tripwire. The first three towers, on the left, are dusty blue-violet (hex #4a4a6e to
+> #8888c0): they are SHORT — the tallest of the three reaches only about two-thirds of the way
+> up to the red line, and none of them comes close to touching it. The fourth tower, on the
+> right, is radiant mint green (hex #8af0ae) and intact from base to top: it is much taller
+> than the red line, so the red line simply passes BEHIND it, and the green tower's upper
+> third rises above the line into a faint red haze that fills the sky above the line. The
+> green tower is whole, straight, and undamaged; nothing is broken anywhere in the image.
+> Soft green glow around the green tower's top. Only the green tower crosses the line;
+> everything else in the image stays below it.
+>
+> *(v2 — replaced C4569's "smashes through / cracking glass" draft: violence verbs made the
+> model break the tower or float extra bars; plain geometry with explicit heights holds.)*
 
 *The card text supplies "91%"; the image's job is only: three stop below the line, one breaks it.*
 
