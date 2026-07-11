@@ -1,0 +1,150 @@
+{
+ "version": 1,
+ "cycle": "C4564-whisper",
+ "rows": [
+  {
+   "exp": "exp91/F75",
+   "observable": "witness W",
+   "family": "amplitude",
+   "depth": 4,
+   "delays": false,
+   "ideal": 2.0,
+   "preview": 1.934,
+   "measured": 1.781,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "F75 finding table (sim/noise-model/hardware)",
+   "ratio_preview": 0.967,
+   "ratio_hw": 0.8905,
+   "optimism_ln": 0.08241539272357795
+  },
+  {
+   "exp": "exp93/F77",
+   "observable": "DISC_switch (same-window)",
+   "family": "amplitude",
+   "depth": 4,
+   "delays": false,
+   "ideal": 2.0,
+   "preview": 1.93,
+   "measured": 1.9,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "F77 finding + ORQ P2 table",
+   "ratio_preview": 0.965,
+   "ratio_hw": 0.95,
+   "optimism_ln": 0.015666116744399456
+  },
+  {
+   "exp": "exp105",
+   "observable": "game score",
+   "family": "probability",
+   "depth": 4,
+   "delays": false,
+   "ideal": 1.0,
+   "preview": null,
+   "measured": 0.9769,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "exp105_hw_results.json (no FakeMarrakesh game preview banked -> no optimism stat)"
+  },
+  {
+   "exp": "exp106/F83",
+   "observable": "capacity Rbar",
+   "family": "amplitude",
+   "depth": 4,
+   "delays": false,
+   "ideal": 0.5333333333333333,
+   "preview": 0.51,
+   "measured": 0.5034,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "exp106 prereg sim gates + exp106_hw_results.json",
+   "ratio_preview": 0.95625,
+   "ratio_hw": 0.9438749999999999,
+   "optimism_ln": 0.013025643017156061
+  },
+  {
+   "exp": "exp107/F85",
+   "observable": "capacity Rbar (N=3)",
+   "family": "amplitude",
+   "depth": 110,
+   "delays": false,
+   "ideal": 0.673,
+   "preview": 0.518,
+   "measured": 0.3817,
+   "sent_hw": 0.669,
+   "sent_prev": 0.744,
+   "source": "F85 finding (preview R~0.518, deep sentinel 0.744 vs 0.671/0.655/0.681)",
+   "ratio_preview": 0.7696879643387815,
+   "ratio_hw": 0.5671619613670134,
+   "optimism_ln": 0.30534028250829887
+  },
+  {
+   "exp": "exp107 deep sentinel",
+   "observable": "retention P(000)",
+   "family": "probability",
+   "depth": 110,
+   "delays": false,
+   "ideal": 1.0,
+   "preview": 0.744,
+   "measured": 0.669,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "F85 finding",
+   "ratio_preview": 0.744,
+   "ratio_hw": 0.669,
+   "optimism_ln": 0.10625697470486331
+  },
+  {
+   "exp": "exp108",
+   "observable": "thermal Delta",
+   "family": "amplitude",
+   "depth": 22,
+   "delays": false,
+   "ideal": 0.2319,
+   "preview": 0.2275,
+   "measured": 0.1796,
+   "sent_hw": 0.856,
+   "sent_prev": 0.9575,
+   "source": "exp108_feasibility.json + exp108_grade.json",
+   "ratio_preview": 0.9810263044415697,
+   "ratio_hw": 0.7744717550668392,
+   "optimism_ln": 0.23641808252290583
+  },
+  {
+   "exp": "exp108 retention",
+   "observable": "retention P(c=+,t=0)",
+   "family": "probability",
+   "depth": 22,
+   "delays": false,
+   "ideal": 1.0,
+   "preview": 0.9575,
+   "measured": 0.856,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "exp108 grade",
+   "ratio_preview": 0.9575,
+   "ratio_hw": 0.856,
+   "optimism_ln": 0.11205534491305896
+  }
+ ],
+ "optimism_by_depth_class": {
+  "shallow (<=8 CZ)": {
+   "n": 3,
+   "mean": 0.03703571749504449,
+   "spread": 0.0693897497064219
+  },
+  "mid (9-50 CZ)": {
+   "n": 2,
+   "mean": 0.17423671371798238,
+   "spread": 0.12436273760984687
+  },
+  "deep (>50 CZ)": {
+   "n": 2,
+   "mean": 0.2057986286065811,
+   "spread": 0.19908330780343556
+  }
+ },
+ "headline": "The noise model under-predicts the ideal->hardware haircut by a depth-growing factor: ~1-9% shallow, ~11-24% mid, ~11-31% deep (ln units); within-class spread is window-dominated (F81), so corrections should be SENTINEL-ANCHORED, not global constants.",
+ "growth_rule": "append one row per graded experiment, in the grade cycle."
+}

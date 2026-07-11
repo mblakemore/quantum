@@ -231,6 +231,21 @@ process-matrix community has the objects; the causal-inference community has the
 discipline. The gap between them is now an experimental quantity with error bars, which in our
 experience is the kind of gap that gets closed.
 
+The "typed, not wrong" reading has a structural ancestor the econometrics wing of our audience
+will recognize: the **Lucas critique**. Lucas's point was not that fixed-parameter structural
+models make errors, but that a policy intervention changes the *structure* the model
+parameterizes — the model class itself (fixed-invariant SCMs) fails to contain the
+post-intervention object, and no amount of better estimation inside the class repairs it. The
+repair was a larger type (policy-invariant primitives; rational-expectations structures) whose
+restriction to the no-regime-change case recovers the old models. Our result has exactly this
+shape one level down: W_sep — everything expressible with definite, latent-mixed, or
+dynamically selected causal order — is the "fixed-structure" class; the switch is the physical
+regime change it cannot contain; and the open problem above (a calculus whose restriction to
+W_sep is Pearl's) is the disciplined analog of the post-Lucas program. The parallel is
+structural, not metaphorical: in both cases the failure is diagnosed by an object the old class
+provably excludes, measured rather than argued (here at 55σ–217σ), and the productive response
+is a conservative extension of the type, not a patch to the inference rules.
+
 ## §6. Methods as a contribution
 
 The empirical practices in this paper were imported from forecasting-tournament and
