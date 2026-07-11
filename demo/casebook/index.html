@@ -41,11 +41,24 @@
  button.kit:hover:not(:disabled){background:#3a3145}
  button.kit.sel{background:#4a3a1e;color:#ffe9b3;box-shadow:inset 0 0 0 1.5px var(--gold)}
  body.kitused button.kit.sel::after{content:" ✓";font-weight:normal}
- /* 3-panel interrogation-room row; breaks out of the 960px prose column to fit on screen */
+ /* interrogation-room breakout: panel 1 wide, panels 2+accuracy stacked right */
  #game{--gw:min(1240px,100vw - 36px);width:var(--gw);margin-inline:calc((100% - var(--gw))/2)}
- .grid3{display:grid;grid-template-columns:1.45fr 1fr 1fr;gap:14px;margin:12px 0;align-items:start}
- @media (max-width:980px){ .grid3{grid-template-columns:1fr 1fr} .grid3>.panel:first-child{grid-column:1/-1} }
- @media (max-width:640px){ .grid3{grid-template-columns:1fr} }
+ @media (min-width:1500px) and (max-width:1720px){ #game{--gw:min(1240px,100vw - 440px)} }
+ .grid3{display:grid;grid-template-columns:1.45fr 1fr;gap:14px;margin:12px 0;align-items:start}
+ .colstack{display:flex;flex-direction:column;gap:14px}
+ @media (max-width:900px){ .grid3{grid-template-columns:1fr} }
+ html{scroll-behavior:smooth}
+ @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+ .toc{background:var(--panel2);border:1px solid var(--edge);border-radius:10px;
+      padding:10px 14px;margin:14px 0;font-size:0.9em}
+ .toc p{margin:0;font-weight:bold;color:var(--dim);letter-spacing:.5px;font-size:0.85em}
+ .toc ul{list-style:none;margin:6px 0 0;padding:0}
+ .toc li{margin:6px 0}
+ @media (min-width:1500px){ .toc{position:fixed;left:18px;top:90px;width:185px;margin:0;z-index:5} }
+ .panelno{display:inline-block;width:1.55em;height:1.55em;border-radius:50%;background:#2c2c40;
+      color:var(--ink);text-align:center;line-height:1.55em;font-weight:bold;font-size:0.95em;
+      margin-right:7px;font-family:Georgia,serif}
+ .hint{font-size:0.78em;color:var(--gold);margin:6px 0 0;font-style:italic}
  .stepsbar{background:var(--panel2);border:1px solid var(--edge);border-radius:8px;
       padding:8px 12px;margin:10px 0 0;font-size:0.9em;color:var(--dim)}
  .stepsbar b{color:var(--ink);background:#2c2c40;display:inline-block;width:1.5em;height:1.5em;
@@ -120,6 +133,17 @@
  <strong>measured on a real quantum computer</strong>.</p>
 </header>
 
+<nav class="toc" aria-label="Contents">
+ <p>CONTENTS</p>
+ <ul>
+  <li><a href="#setup-h">The setup</a></li>
+  <li><a href="#rules-h">Game rules</a></li>
+  <li><a href="#game-h">The interrogation room</a></li>
+  <li><a href="#log-h">Case log</a></li>
+  <li><a href="#truth-h">What's really true</a></li>
+ </ul>
+</nav>
+
 <section aria-labelledby="setup-h">
  <h2 id="setup-h">The setup, in three steps</h2>
  <div class="cards">
@@ -172,8 +196,8 @@
 
 <section id="game" aria-labelledby="game-h">
  <h2 id="game-h">The interrogation room</h2>
- <p class="stepsbar"><strong>How a round works:</strong>&nbsp; <b>1</b> press a kit (that IS the
-    interrogation) → <b>2</b> read its report → <b>3</b> make your call → the case file opens.</p>
+ <p class="stepsbar"><strong>How a round works:</strong>&nbsp; <b>1</b> Interrogate with a kit →
+    <b>2</b> read its report and make your call → the case file opens.</p>
  <div class="grid3">
   <div class="panel">
    <p class="stat" id="casehdr" role="status" style="margin-top:0">CASE #— · suspects unidentified</p>
@@ -186,7 +210,7 @@
       <span class="nm" id="s2nm" aria-hidden="true">?</span></div>
    </div>
    <fieldset style="border:none;padding:0;margin:0">
-    <legend class="colhead" style="padding:0">Interrogate with a kit</legend>
+    <legend class="colhead" style="padding:0"><span class="panelno" aria-hidden="true">1</span>Interrogate with a kit</legend>
     <div class="kitrow">
      <div>
       <button data-k="rookie" id="krookie" class="kit" aria-describedby="rookie-d">ROOKIE KIT</button>
@@ -194,7 +218,7 @@
       <em>confidently wrong</em> about certain suspects.</p>
      </div>
      <div>
-      <button data-k="bell" id="kbell" class="kit sel" aria-describedby="bell-d">ENTANGLED CASEFILE</button>
+      <button data-k="bell" id="kbell" class="kit" aria-describedby="bell-d">ENTANGLED CASEFILE</button>
       <p class="desc" id="bell-d">A case-file in two linked halves, one stamp each. The best kit
       ordinary causality allows — 75%. Mind the blind spot.</p>
      </div>
@@ -207,14 +231,17 @@
      </div>
     </div>
     <div class="autorow" style="margin-top:12px">
-     <button id="auto" aria-describedby="auto-d">Auto-play ×10</button>
+     <button id="auto" disabled aria-describedby="auto-d">Auto-play ×10</button>
     </div>
-    <p class="desc" id="auto-d"><strong>Auto-play</strong> runs your selected kit on ten cases in
-    a row, always trusting its report — the fastest way to feel each kit's true average.</p>
+    <p class="desc" id="auto-d"><strong>Auto-play</strong> runs your last selected kit on ten
+    cases in a row, always trusting its report — the fastest way to feel each kit's true
+    average.</p>
+    <p class="hint" id="auto-hint" role="status">interrogate once with a kit first to select one</p>
    </fieldset>
   </div>
+  <div class="colstack">
   <div class="panel">
-     <p class="colhead" id="call-h">Make your call</p>
+     <p class="colhead" id="call-h"><span class="panelno" aria-hidden="true">2</span>Make your call</p>
      <p class="report" id="report" role="status">— press a kit to interrogate —</p>
      <div class="callrow" aria-labelledby="call-h">
       <button class="call" id="callP" disabled>Call PARTNERS</button>
@@ -243,6 +270,7 @@
     There is one interrogation room where the order of questioning is never decided — its odds
     were not designed, they were <b>measured</b>. The SWITCH kit is now on your belt: select it
     and step into the forbidden zone.</div>
+  </div>
   </div>
  </div>
 
@@ -323,7 +351,12 @@ function draw() {
 }
 function interrogate() {
   if (!cur || pending || revealing) return;
-  if (!kitEverUsed) { kitEverUsed = true; document.body.classList.add('kitused'); }
+  if (!kitEverUsed) {
+    kitEverUsed = true;
+    document.body.classList.add('kitused');
+    el('auto').disabled = false;
+    el('auto-hint').style.display = 'none';
+  }
   const p = cur[kit] / 100;
   const pointsCorrect = Math.random() < p;
   const truthP = cur.truth === 'PARTNERS';
