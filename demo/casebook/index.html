@@ -109,9 +109,13 @@
  .meterlbl{font-size:0.78em;color:var(--dim);margin-top:14px}
  .meterlbl b{color:var(--red)}
  .stat{font-family:'Courier New',monospace;font-size:0.92em;margin:6px 0 2px}
- .badge{display:none;background:#13301e;border:1.5px solid var(--q);border-radius:10px;
-      padding:10px 14px;margin:10px 0}
- .badge.show{display:block} .badge b{color:var(--q)}
+ dialog.badge{background:#13301e;border:1.5px solid var(--q);border-radius:12px;
+      padding:18px 22px;margin:auto;max-width:440px;color:var(--ink);font:inherit;
+      box-shadow:0 0 30px rgba(138,240,174,.25)}
+ dialog.badge b{color:var(--q)}
+ dialog.badge::backdrop{background:rgba(5,5,10,.7)}
+ dialog.badge .okrow{text-align:center;margin-top:14px}
+ dialog.badge button{border-color:var(--q);color:var(--q);font-weight:bold;min-width:110px}
  .log{font-family:'Courier New',monospace;font-size:0.85em;color:var(--dim);max-height:150px;
       overflow-y:auto;background:#0a0a10;border:1px solid var(--edge);border-radius:8px;
       padding:8px;margin-top:8px}
@@ -266,16 +270,20 @@
     only the switch reaches it.</p>
    </div>
    <p class="stat" id="kitstats"></p>
-   <div class="badge" id="badge" role="status"><b>⚡ SWITCH BADGE EARNED.</b> Ten rounds played.
-    There is one interrogation room where the order of questioning is never decided — its odds
-    were not designed, they were <b>measured</b>. The SWITCH kit is now on your belt: select it
-    and step into the forbidden zone.</div>
   </div>
   </div>
  </div>
 
  <h3 id="log-h">Case log</h3>
  <div class="log" id="log" role="log" aria-live="polite" aria-labelledby="log-h"></div>
+
+ <dialog class="badge" id="badge" aria-labelledby="badge-t">
+  <p id="badge-t" style="margin-top:0"><b>⚡ SWITCH BADGE EARNED.</b> Ten rounds played.</p>
+  <p>There is one interrogation room where the order of questioning is never decided — its odds
+   were not designed, they were <b>measured</b>. The SWITCH kit is now on your belt: select it
+   and step into the forbidden zone.</p>
+  <div class="okrow"><button id="badgeok" autofocus>OK</button></div>
+ </dialog>
 </section>
 
 <section class="truth" aria-labelledby="truth-h">
@@ -417,7 +425,9 @@ function upd() {
   const m = document.querySelector('.meter');
   m.setAttribute('aria-label', `Accuracy ${played ? pct.toFixed(0) : 0} percent of the way along a scale whose proven ceiling is 91 percent` + (pct > 91 ? ' — you are inside the forbidden zone' : ''));
   if (!badge && played >= 10) {
-    badge = true; el('badge').classList.add('show');
+    badge = true;
+    const dlg = el('badge');
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
     if (!pending && !revealing) el('kswitch').disabled = false;
     el('kswitch').textContent = '⚡ SWITCH BADGE';
     el('switch-lock').innerHTML = '⚡ <strong>Unlocked.</strong>';
@@ -436,6 +446,7 @@ document.querySelectorAll('fieldset button[data-k]').forEach(b => b.onclick = ()
 });
 el('callP').onclick = () => call(true);
 el('callR').onclick = () => call(false);
+el('badgeok').onclick = () => el('badge').close ? el('badge').close() : el('badge').removeAttribute('open');
 el('auto').onclick = () => {
   let n = 10;
   autoRunning = true;
