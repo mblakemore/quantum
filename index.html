@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
 <title>Autonomous characterization of IBM Heron-r2 — quantum campaign</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -9,19 +13,25 @@
   :root[data-theme="light"]{--ink:#eef0f5;--surface:#fff;--edge:#dce0ea;--text:#171b26;--muted:#5c6479;--cyan:#10a89f;--amber:#b9791b;}
   *{box-sizing:border-box;} html{-webkit-text-size-adjust:100%;}
   body{margin:0;background:var(--ink);color:var(--text);font-family:var(--sans);line-height:1.6;
-       display:flex;min-height:100vh;align-items:center;justify-content:center;padding:32px 20px;
+       display:flex;min-height:100vh;padding:32px 20px;
        background:radial-gradient(120% 80% at 80% -10%,rgba(69,214,207,0.12),transparent 60%),var(--ink);}
-  .wrap{max-width:760px;width:100%;}
+  /* .wrap{margin:auto} centers like align-items:center BUT degrades safely when content
+     is taller than the viewport (the old flex centering clipped the top lines, unscrollably) */
+  .wrap{max-width:760px;width:100%;margin:auto;}
   .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);}
   h1{font-family:var(--mono);font-weight:700;letter-spacing:-0.02em;line-height:1.15;
      font-size:clamp(26px,5.4vw,42px);margin:14px 0 14px;text-wrap:balance;}
   h1 .hl{color:var(--cyan);}
+  h2{font-family:var(--mono);font-size:15px;letter-spacing:0.14em;text-transform:uppercase;
+     color:var(--muted);margin:30px 0 4px;}
   p{color:var(--text);max-width:62ch;font-size:clamp(16px,2.2vw,18px);}
   .muted{color:var(--muted);}
-  .cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;
-       text-decoration:none;background:var(--cyan);color:#06201f;padding:14px 22px;border-radius:12px;
-       margin:22px 0 8px;box-shadow:0 18px 40px -18px var(--cyan);}
-  .cta:hover{filter:brightness(1.06);}
+  .demo{display:block;text-decoration:none;background:var(--cyan);color:#06201f;
+        padding:14px 20px;border-radius:12px;margin:14px 0;
+        box-shadow:0 18px 40px -18px var(--cyan);}
+  .demo:hover{filter:brightness(1.06);}
+  .demo .t{display:block;font-family:var(--mono);font-weight:700;font-size:16px;}
+  .demo .d{display:block;font-size:13.5px;line-height:1.45;margin-top:5px;color:rgba(6,32,31,0.78);}
   .stats{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0;}
   .stat{background:var(--surface);border:1px solid var(--edge);border-radius:12px;padding:12px 16px;}
   .stat .n{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--cyan);font-variant-numeric:tabular-nums;}
@@ -29,25 +39,49 @@
   .links{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;font-family:var(--mono);font-size:14px;}
   .links a{color:var(--cyan);}
 </style>
+</head>
+<body>
 <div class="wrap">
   <span class="eyebrow">IBM Heron-r2 · ibm_marrakesh · ibm_kingston · ibm_fez</span>
   <h1>Putting the <span class="hl">order of events</span><br>into superposition — on real silicon</h1>
   <p>An autonomous multi-agent network ran ~100 pre-registered experiments on IBM's Heron-r2 quantum
      processors. The headline: a <b>quantum switch</b> — a circuit where the order of two operations is
      itself in superposition — witnessed at <b>≥72σ</b> beyond what any classical causal model can represent.</p>
-  <a class="cta" href="demo/">🔀 Quantum Switch — interactive demo →</a>
-  <a class="cta" href="demo/static-duel/">📺 STATIC — classic bot vs quantum bot (bring-your-own-key LIVE mode) →</a>
-  <a class="cta" href="demo/casebook/">🕵️ The Interrogation You Cannot Win — playable casebook game →</a>
-  <a class="cta" href="demo/casebook-pnp/">🃏 The Casebook — print &amp; play tabletop games →</a>
   <div class="stats">
     <div class="stat"><div class="n">≥72σ</div><div class="l">quantum vs classical-order gap (F77)</div></div>
     <div class="stat"><div class="n">0.9992</div><div class="l">Pearson to the cosine law on hardware (F76)</div></div>
     <div class="stat"><div class="n">~100</div><div class="l">pre-registered experiments</div></div>
   </div>
-  <p class="muted">Every number in the demo is measured hardware data. It's play-first: drag a slider to
-     drain the control qubit's order-coherence and watch the causal witness trace the measured cosine law.</p>
+
+  <h2 id="demos">Demos</h2>
+  <a class="demo" href="demo/" target="_blank" rel="noopener">
+    <span class="t">🔀 Quantum Switch — interactive demo →</span>
+    <span class="d">Drag a slider to drain the control qubit's order-coherence and watch the ≥72σ
+    causal witness trace the measured cosine law. Every number on the page is real F73–F77
+    hardware data.</span></a>
+  <a class="demo" href="demo/static-duel/" target="_blank" rel="noopener">
+    <span class="t">📺 STATIC — classic bot vs quantum bot →</span>
+    <span class="d">Two bots race to decode a secret through two completely dead channels. The
+    classic bot is the provable best — a theorem caps it at coin-flipping — while the quantum bot
+    runs measured switch statistics. Bring your own free IBM key and every roll consumes a real
+    hardware measurement, live.</span></a>
+  <a class="demo" href="demo/casebook/" target="_blank" rel="noopener">
+    <span class="t">🕵️ The Interrogation You Cannot Win — playable casebook game →</span>
+    <span class="d">A detective game whose difficulty ceiling is a theorem: under definite causal
+    order, no kit that will ever exist can average above 91%. Play ten honest rounds, earn the
+    Switch Badge, and step into the forbidden zone with odds measured at 97.8%.</span></a>
+  <a class="demo" href="demo/casebook-pnp/" target="_blank" rel="noopener">
+    <span class="t">🃏 The Casebook — print &amp; play tabletop games →</span>
+    <span class="d">The same impossible interrogation as a self-contained tabletop game: print four
+    pages, grab a d100, and play the measured odds by hand.</span></a>
+
+  <p class="muted">Everything above runs on measured hardware data — pre-registered before
+     submission, graded by frozen rules, with the IBM job IDs published in the repository.
+     Where a page says <i>measured</i>, it is measured.</p>
   <div class="links">
     <a href="https://github.com/mblakemore/quantum">Repository &amp; findings on GitHub →</a>
     <a href="https://github.com/mblakemore/quantum/blob/main/ELI5_SUMMARY.md">Plain-English summary →</a>
   </div>
 </div>
+</body>
+</html>
