@@ -41,7 +41,7 @@
   .stat .n{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--cyan);font-variant-numeric:tabular-nums;}
   .stat .l{font-size:12px;color:var(--muted);}
   .links{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;font-family:var(--mono);font-size:14px;}
-  .links a{color:var(--cyan);}
+  .links a, p a{color:var(--cyan);}
 </style>
 </head>
 <body>
@@ -157,6 +157,12 @@
   <p class="muted">Everything above runs on measured hardware data — pre-registered before
      submission, graded by frozen rules, with the IBM job IDs published in the repository.
      Where a page says <i>measured</i>, it is measured.</p>
+  <p class="muted" style="font-size:14px">Scope: these circuits are <b>device-characterized</b> —
+     they reproduce the switch's statistics on compiled gate-model hardware, trusted at the level
+     of the compilation. The device-independent certifications of indefinite causal order are
+     photonic experiments; our contribution is the pre-registered, control-armed,
+     provable-bound-beating version on a general-purpose quantum computer. Full scope in the
+     <a href="https://github.com/mblakemore/quantum/blob/main/docs/quantum-switch-spec.md">spec sheet</a>.</p>
   <div class="links">
     <a href="https://github.com/mblakemore/quantum">Repository &amp; findings on GitHub →</a>
     <a href="https://github.com/mblakemore/quantum/blob/main/docs/quantum-switch-spec.md">Switch spec sheet →</a>
