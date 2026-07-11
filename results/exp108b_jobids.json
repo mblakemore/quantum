@@ -1,0 +1,158 @@
+{
+ "experiment": "exp108b-native-thermal",
+ "cycle": "C4562-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp108b",
+ "prereg": "experiments/exp108b-native-thermal-preregistration.md",
+ "gates": {
+  "calib_band": [
+   0.12,
+   0.4
+  ],
+  "retention_min": 0.8,
+  "therm_band": 0.06,
+  "win_floor": 0.06,
+  "cooling": "p1|+ + 5SE < min(p_a, p_b)"
+ },
+ "shuffle_seed": 4562,
+ "chain": [
+  5,
+  6,
+  7,
+  8
+ ],
+ "layout": [
+  5,
+  7,
+  6,
+  8
+ ],
+ "t1_us": {
+  "a1_q6": 201.27814409450346,
+  "a2_q8": 154.96644427619827
+ },
+ "delays_us": {
+  "a1": 279.03075617488696,
+  "a2": 214.8291078628934
+ },
+ "calibration_report": {
+  "5": {
+   "T1_us": 126.7424248107438,
+   "readout": 0.016357421875
+  },
+  "6": {
+   "T1_us": 201.27814409450346,
+   "readout": 0.00537109375
+  },
+  "7": {
+   "T1_us": 260.5125113904566,
+   "readout": 0.0068359375
+  },
+  "8": {
+   "T1_us": 154.96644427619827,
+   "readout": 0.00537109375
+  },
+  "cz(5, 6)": 0.003487755568145262,
+  "cz(6, 7)": 0.001543569267942052,
+  "cz(7, 8)": 0.002425849971997851
+ },
+ "job_id": "d998ch0tcv6s73dmvqr0",
+ "metas": [
+  {
+   "label": "sent_start_retention",
+   "kind": "sentinel",
+   "replicate": "start",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "calib_a",
+   "kind": "calib_a",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "calib_b",
+   "kind": "calib_b",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "null_rev_t1",
+   "kind": "null_rev",
+   "t0": 1,
+   "shots": 2500,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "null_rev_t0",
+   "kind": "null_rev",
+   "t0": 0,
+   "shots": 2500,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "sent_mid_retention",
+   "kind": "sentinel",
+   "replicate": "mid",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "sent_mid_deconull",
+   "kind": "sentinel",
+   "replicate": "mid",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "switch_t1",
+   "kind": "switch",
+   "t0": 1,
+   "shots": 3000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "null_fwd_t0",
+   "kind": "null_fwd",
+   "t0": 0,
+   "shots": 2500,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "switch_t0",
+   "kind": "switch",
+   "t0": 0,
+   "shots": 3000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "null_fwd_t1",
+   "kind": "null_fwd",
+   "t0": 1,
+   "shots": 2500,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "sent_end_retention",
+   "kind": "sentinel",
+   "replicate": "end",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  }
+ ]
+}
