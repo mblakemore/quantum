@@ -57,8 +57,15 @@
  @media (min-width:1500px){ .toc{position:fixed;left:18px;top:90px;width:185px;margin:0;z-index:5} }
  .panelno{display:inline-block;width:1.55em;height:1.55em;border-radius:50%;background:#2c2c40;
       color:var(--ink);text-align:center;line-height:1.55em;font-weight:bold;font-size:0.95em;
-      margin-right:7px;font-family:Georgia,serif}
+      margin-right:8px;font-family:Georgia,serif;flex:none}
  .hint{font-size:0.78em;color:var(--gold);margin:6px 0 0;font-style:italic}
+ .stephead{display:flex;align-items:center;font-weight:bold;font-size:1.06em;margin:0 0 10px;
+      padding:7px 11px;border:1px solid var(--edge);border-radius:8px;background:#20202e;
+      color:var(--dim);transition:background .25s,color .25s,box-shadow .25s}
+ .stephead.active{color:#ffe9b3;border-color:var(--gold);background:#332a18;
+      box-shadow:0 0 12px rgba(232,194,104,.3)}
+ .stephead.active .panelno{background:var(--gold);color:#141420}
+ @media (prefers-reduced-motion: reduce){ .stephead{transition:none} }
  .stepsbar{background:var(--panel2);border:1px solid var(--edge);border-radius:8px;
       padding:8px 12px;margin:10px 0 0;font-size:0.9em;color:var(--dim)}
  .stepsbar b{color:var(--ink);background:#2c2c40;display:inline-block;width:1.5em;height:1.5em;
@@ -204,6 +211,7 @@
     <b>2</b> read its report and make your call → the case file opens.</p>
  <div class="grid3">
   <div class="panel">
+   <p class="stephead" id="kit-h"><span class="panelno" aria-hidden="true">1</span>Interrogate with a kit</p>
    <p class="stat" id="casehdr" role="status" style="margin-top:0">CASE #— · suspects unidentified</p>
    <div class="suspects">
     <div class="sil"><img id="s1img" src="img/silhouette.png"
@@ -213,8 +221,7 @@
       alt="Unidentified suspect two: a featureless backlit silhouette under an interrogation lamp.">
       <span class="nm" id="s2nm" aria-hidden="true">?</span></div>
    </div>
-   <fieldset style="border:none;padding:0;margin:0">
-    <legend class="colhead" style="padding:0"><span class="panelno" aria-hidden="true">1</span>Interrogate with a kit</legend>
+   <fieldset style="border:none;padding:0;margin:0" aria-labelledby="kit-h">
     <div class="kitrow">
      <div>
       <button data-k="rookie" id="krookie" class="kit" aria-describedby="rookie-d">ROOKIE KIT</button>
@@ -245,7 +252,7 @@
   </div>
   <div class="colstack">
   <div class="panel">
-     <p class="colhead" id="call-h"><span class="panelno" aria-hidden="true">2</span>Make your call</p>
+     <p class="stephead" id="call-h"><span class="panelno" aria-hidden="true">2</span>Make your call</p>
      <p class="report" id="report" role="status">— press a kit to interrogate —</p>
      <div class="callrow" aria-labelledby="call-h">
       <button class="call" id="callP" disabled>Call PARTNERS</button>
@@ -343,9 +350,14 @@ function setKits(on) {
   el('krookie').disabled = !on; el('kbell').disabled = !on;
   el('kswitch').disabled = !on || !badge;
 }
+function setStep(n) {
+  el('kit-h').classList.toggle('active', n === 1);
+  el('call-h').classList.toggle('active', n === 2);
+}
 function draw() {
   revealing = false;
   setKits(true);
+  setStep(1);
   cur = DECK[Math.floor(Math.random() * DECK.length)];
   el('casehdr').textContent = `CASE #${1000 + Math.floor(Math.random() * 9000)} · suspects unidentified`;
   [1, 2].forEach(i => {
@@ -371,6 +383,7 @@ function interrogate() {
   const says = pointsCorrect ? truthP : !truthP;
   pending = { says };
   setKits(false);
+  setStep(2);
   el('report').textContent = `your ${KITNAME[kit]} reports: "${says ? 'PARTNERS' : 'RIVALS'}" — trust it, or override?`;
   el('callP').disabled = false; el('callR').disabled = false;
 }
@@ -394,6 +407,7 @@ function call(guessP) {
     line += ' — the Rookie Kit is deterministically wrong about this suspect type.';
   log(line);
   upd();
+  setStep(0);          // case file open — both steps rest until the next case
   revealing = true;
   setTimeout(draw, autoRunning ? 1400 : 2600);  // let the reveal breathe
 }
@@ -451,6 +465,7 @@ el('auto').onclick = () => {
   let n = 10;
   autoRunning = true;
   const t = setInterval(() => {
+    if (el('badge').open) return;        // badge modal up — pause until OK
     if (revealing) return;               // wait out the reveal
     if (n-- <= 0) { clearInterval(t); autoRunning = false; return; }
     if (!pending) interrogate();
