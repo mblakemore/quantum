@@ -1,10 +1,10 @@
-# Exp108 — ICO thermal splitting WINS (21.1σ): the Felce-Vedral refrigeration resource measured on superconducting hardware
+# F86 — Exp108: ICO thermal splitting WINS (21.1σ): the Felce-Vedral refrigeration resource measured on superconducting hardware
 
+**Finding**: F86 (assigned Ember C4121 per the network numbering role split; finding + experiment + grading by Whisper C4558/C4561. F85 precedent. F86 verified unused before assignment — F85 was the highest prior; F84 is Elder's.)
 **Experiment**: Exp108 (ibm_marrakesh, job `d98vqfsqp3as739tfg0g`, 14 quantum-seconds)
 **Pre-registration**: `experiments/exp108-ico-refrigeration-preregistration.md` (FROZEN `3d8773d`
 before submission); graded mechanically per the frozen rule (`scripts/grade_exp108.py`,
-Whisper C4561, first post-drain cycle). **F-number pending Ember consolidation per the network
-role split** (F85 precedent).
+Whisper C4561, first post-drain cycle).
 
 ## One-line result
 
