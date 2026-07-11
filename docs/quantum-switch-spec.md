@@ -3,10 +3,16 @@
 **Author**: Whisper (DC15W), C4559 (2026-07-11), Creator-directed ("write the spec doc").
 **Purpose**: single-document engineering spec of the quantum switch *as we build, measure, and
 grade it* — circuit family, exact theory statistics, measured-results ledger, reusable
-methodology, pitfall registry, and honest scope. Consolidates what previously lived across six
-preregistrations, the findings series (F73–F85), and the Pearl-bridge paper draft. The paper
+methodology, pitfall registry, and scope. Consolidates what previously lived across six
+preregistrations, the findings series (F73–F86), and the Pearl-bridge paper draft. The paper
 (`pearl-bridge-paper-draft.md`) is the narrative for causal-inference readers; **this is the
 spec for whoever builds experiment N+1.**
+
+**Contents**: [1 Definition](#1-definition) · [2 Circuit family](#2-the-circuit-family-five-variants-all-on-ibm-heron-r2) ·
+[3 Exact theory](#3-exact-theory-statistics-derived-not-recalled--see-65) · [4 Measured ledger](#4-measured-results-ledger-hardware-all-pre-registered-frozen-rules) ·
+[5 Provable bounds](#5-provable-bounds-referenced-by-the-family) · [6 Methodology](#6-reusable-methodology-the-part-that-transfers-to-experiment-n1) ·
+[7 Applications](#7-what-the-switch-is-good-for-verified-application-map-c4557c4527) · [8 Scope](#8-scope-what-we-do-not-claim) ·
+[9 Public artifacts](#9-public-artifacts) · [10 File index](#10-file-index)
 
 ---
 
@@ -48,7 +54,7 @@ photonic. Claims here are worded accordingly — "first" is never claimed, revie
 | V2 padded game | Exp105/105b | 2 | **uniform 4-CZ skeleton** | X basis | — |
 | V3 channel-twirl 2-switch | Exp106 | 2 | uniform 4-CZ skeleton | X (clbit 0) | Z (clbit 1) |
 | V4 cyclic-3 | Exp107 | 3 + 2q control | 92–110 CZ | inverse-prep basis | Z |
-| V5 SWAP-dilation thermal | Exp108 | 4 (c,t,a1,a2) | uniform 22 CZ | X (clbit 0) | Z (clbit 1) |
+| V5 SWAP-dilation thermal | Exp108 (synthetic τ) / Exp108b (native-decay τ) | 4 (c,t,a1,a2) | uniform 22 CZ | X (clbit 0) | Z (clbit 1) |
 
 **V1/V2 (unitary switch, control-only readout)**: control |+⟩; controlled-order application of
 two single-qubit unitaries; H on control; measure. V2 adds the **skeleton-uniformity rule**
@@ -100,7 +106,7 @@ uncorrelated with control → Δ_causal = **0 exactly**. Switch: P(c=+) = 0.7187
 p₁|+ = **0.1848** (colder than τ's 0.25), p₁|− = **0.4167** (hotter),
 Δ = p₁|− − p₁|+ = **0.2319**. Conditional states are **input-dependent** in general (a recalled
 closed form was refuted by direct Kraus computation, C4558); input is pooled to τ, the
-Felce-Vedral cycle-relevant state. Demon honesty: without feedback the branches cancel exactly
+Felce-Vedral cycle-relevant state. No-free-lunch (Maxwell-demon structure): without feedback the branches cancel exactly
 (0.719×0.0652 = 0.281×0.1667) — the switch yields a *conditional resource*, not free cooling.
 
 ## 4. Measured results ledger (hardware, all pre-registered, frozen rules)
@@ -115,6 +121,7 @@ Felce-Vedral cycle-relevant state. Demon honesty: without feedback the branches 
 | 6 | Capacity activation N=2 | marrakesh `d983ek52su3c739ip92g` | **R̄ = +0.5034 ± 0.0091 = 55.6σ** (causal: exactly 0); **0.0436 bits/use**; unconditioned target exactly depolarized (bit lives only in the correlation) | F83 |
 | 7 | Capacity N=3 + scaling inversion | marrakesh `d9845dif47jc73a7ehe0` | **R̄ = +0.3817 ± 0.0062 = 61.7σ**; MI **0.0260 bits** — theory scales up (0.0489→0.0833), practice inverts (0.0436→0.0260): ~110 CZ depth-noise eats the gain. **N=2 is the practical optimum this generation** | F85 |
 | 8 | Thermal splitting (ICO refrigeration resource) | marrakesh `d98vqfsqp3as739tfg0g` | **WIN (C4561)**: Δ = **0.1796 ± 0.0085 = 21.1σ** (causal: exactly 0); cooling direction confirmed (p₁|+ = 0.2098 < 0.25, p₁|− = 0.3894); null arms 0.2496/0.2492 vs τ = 0.25; retention 0.851–0.861 (floor 0.85 — mediocre window). Bonus: pre-data depth-decay-law prediction (0.2008) beat FakeMarrakesh (0.2275) by 2.3× | **F86** (`findings/F86-exp108-ico-refrigeration-resource-whisper-c4561-ember-numbered-c4121.md`) |
+| 9 | Native-fluid thermal splitting (reservoirs mixed by the chip's own T1 decay — removes the priors' synthetic prep) | marrakesh `d998ch0tcv6s73dmvqr0` | **SUBMITTED C4562, in queue** — frozen rule 4ef8276: measured-p̂ procedure targets, colder-than-COLDEST-reservoir WIN gate (stricter than Exp108) | Exp108b prereg |
 
 Related null with the same discipline: **F84** (Elder design, Whisper mechanical grade) —
 window *quality*, not calibration age, drives depth-class outcomes; graded NULL and published.
@@ -175,10 +182,11 @@ window *quality*, not calibration age, drives depth-class outcomes; graded NULL 
 - **Communication**: capacity activation through dead channels — measured (F83/F85), N=2
   practical optimum; physics result, not an engineering comms claim (coherent-control critiques
   cap the interpretation).
-- **Thermodynamics**: the Felce-Vedral conditional temperature splitting — Exp108 (pending).
+- **Thermodynamics**: the Felce-Vedral conditional temperature splitting — measured, F86 (21.1σ);
+  the native-working-fluid variant Exp108b extends it (reservoirs mixed by the chip's own T1 decay).
 - **Query-complexity scaling (Fourier promise)**: postponed — not this hardware generation.
 
-## 8. Honest scope (what we do NOT claim)
+## 8. Scope (what we do NOT claim)
 
 Device-characterized throughout (§1). Not device-independent; not a spacetime claim; not Bell
 (the swapped axis is causal definiteness, not locality — the model class is W_sep, not local
