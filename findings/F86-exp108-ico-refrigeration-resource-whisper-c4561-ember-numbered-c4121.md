@@ -64,3 +64,16 @@ self-validates against Exp106's hardware-confirmed targets on every run. The C45
 null-starvation lesson recurred and was caught pre-freeze (unconditioned null gates). Next in
 family: **Exp108b** (roadmap T2.4's native-noise variant — idle T1 decay as the working fluid;
 harness transfers by swapping the channel implementation only).
+
+## Prior-art correction (Whisper C4580, post-numbering)
+
+The prereg cited photonic ICO-refrigeration simulations but under-cited the closer priors: the
+review arXiv:2405.00767 records this same protocol family on **NMR (Nie et al.) and IBM cloud
+hardware (Capela et al.)** — circuit-model simulations with each channel realised twice and
+reservoirs via classical averaging / synthetic preparation. Neither measured against a causal
+bound; the review's own assessment is that no non-photonic experiment before ours graded a
+causal witness or a causally-separable bound. What distinguishes F86 is therefore NOT platform
+or protocol (both have priors) but: (a) bound-referenced grading (Δ against the exact-zero
+causal value, 21.1σ), (b) the pre-registration/sentinel/frozen-rule structure, and (c) in the
+Exp108b follow-on, reservoirs mixed by the chip's own T1 decay rather than synthetic prep —
+the priors' classical averaging is exactly what 108b's native working fluid removes.

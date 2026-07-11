@@ -33,6 +33,13 @@ Three properties are load-bearing for everything below:
 statistics on characterized hardware. We do not claim indefinite spacetime order (the photonic
 device-independent program is orthogonal, not competing). See §8.
 
+**Platform prior art (C4580, from the review arXiv:2405.00767)**: non-photonic ICO experiments
+before this campaign = the ICO-refrigeration protocol on NMR (Nie et al.) and IBM cloud
+(Capela et al.), circuit-model simulations without witness measurement or bound-referenced
+grading. To our knowledge no prior gate-model experiment graded against a causally-separable
+bound; the witness-violation and (semi-)device-independent certification literature is
+photonic. Claims here are worded accordingly — "first" is never claimed, review lag is real.
+
 ## 2. The circuit family (five variants, all on IBM Heron-r2)
 
 | Variant | Experiment | Qubits | 2q cost (routed) | Control readout | Target readout |
@@ -107,7 +114,7 @@ Felce-Vedral cycle-relevant state. Demon honesty: without feedback the branches 
 | 5 | Game replication | fez `d982qssqp3as739sdmmg` | **0.9738 ± 0.0005 = 201.0σ**, frozen design verbatim, 0.3pp concordance | F82 |
 | 6 | Capacity activation N=2 | marrakesh `d983ek52su3c739ip92g` | **R̄ = +0.5034 ± 0.0091 = 55.6σ** (causal: exactly 0); **0.0436 bits/use**; unconditioned target exactly depolarized (bit lives only in the correlation) | F83 |
 | 7 | Capacity N=3 + scaling inversion | marrakesh `d9845dif47jc73a7ehe0` | **R̄ = +0.3817 ± 0.0062 = 61.7σ**; MI **0.0260 bits** — theory scales up (0.0489→0.0833), practice inverts (0.0436→0.0260): ~110 CZ depth-noise eats the gain. **N=2 is the practical optimum this generation** | F85 |
-| 8 | Thermal splitting (ICO refrigeration resource) | marrakesh `d98vqfsqp3as739tfg0g` | **WIN (C4561)**: Δ = **0.1796 ± 0.0085 = 21.1σ** (causal: exactly 0); cooling direction confirmed (p₁|+ = 0.2098 < 0.25, p₁|− = 0.3894); null arms 0.2496/0.2492 vs τ = 0.25; retention 0.851–0.861 (floor 0.85 — mediocre window). Bonus: pre-data depth-decay-law prediction (0.2008) beat FakeMarrakesh (0.2275) by 2.3× | `findings/exp108-ico-thermal-splitting-win-whisper-c4561.md` |
+| 8 | Thermal splitting (ICO refrigeration resource) | marrakesh `d98vqfsqp3as739tfg0g` | **WIN (C4561)**: Δ = **0.1796 ± 0.0085 = 21.1σ** (causal: exactly 0); cooling direction confirmed (p₁|+ = 0.2098 < 0.25, p₁|− = 0.3894); null arms 0.2496/0.2492 vs τ = 0.25; retention 0.851–0.861 (floor 0.85 — mediocre window). Bonus: pre-data depth-decay-law prediction (0.2008) beat FakeMarrakesh (0.2275) by 2.3× | **F86** (`findings/F86-exp108-ico-refrigeration-resource-whisper-c4561-ember-numbered-c4121.md`) |
 
 Related null with the same discipline: **F84** (Elder design, Whisper mechanical grade) —
 window *quality*, not calibration age, drives depth-class outcomes; graded NULL and published.
