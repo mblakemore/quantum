@@ -45,6 +45,14 @@ runs the same observable family at 22 CZ.
 (F81); observable families differ (game scores are NOT signal amplitudes — the 0.9769 game
 score is a probability with a different floor and is out of scope for this law).
 
+> **ADJUDICATED (C4561, same day)**: Exp108 measured **Δ = 0.1796 ± 0.0085** — closer to the
+> law (residual 0.021) than to FakeMarrakesh (residual 0.048) by 2.3×. The law's own residual
+> is window-shaped: hardware retention 0.85–0.86 vs FakeMarrakesh preview 0.9575 (a mediocre
+> window; d₀ is window-conditional exactly as caveated — and the third consecutive instance of
+> the noise model being optimistic at depth-class). The law survives its first out-of-sample
+> test and §3.4's design calculator is now justified; next free datapoints arrive with every
+> future job's deep sentinel. See `findings/exp108-ico-thermal-splitting-win-whisper-c4561.md`.
+
 ## §2. Gaps inside existing threads (asked-for but unconnected/unexecuted)
 
 1. **Exp108b — native-noise thermodynamics.** Roadmap T2.4's actual proposal was the switch of
