@@ -75,6 +75,15 @@ ROWS = [
          family="probability", depth=22, delays=True, ideal=1.0, preview=0.9555,
          measured=0.9425, sent_hw=None, sent_prev=None,
          source="exp108c_grade.json (good window: mean of 3 replicates 0.940-0.951)"),
+    # ---- resource-comparison arc ----
+    dict(exp="exp111 switch S", observable="matched-filter S (parity)",
+         family="amplitude", depth=4, delays=False, ideal=0.2500, preview=0.2463,
+         measured=0.2221, sent_hw=None, sent_prev=None,
+         source="exp111_S_previews.json + exp111_grade.json (preview = opt-3 circuits, noted)"),
+    dict(exp="exp111 paths S", observable="matched-filter S (visibility)",
+         family="amplitude", depth=3, delays=False, ideal=0.1250, preview=0.1275,
+         measured=0.1140, sent_hw=None, sent_prev=None,
+         source="exp111_S_previews.json + exp111_grade.json (label-avg depth 2-4)"),
     # ---- comms arc ----
     dict(exp="exp109 superdense", observable="p_success (4-msg decode)",
          family="probability", depth=2, delays=False, ideal=1.0, preview=0.9794,

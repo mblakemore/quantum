@@ -160,6 +160,38 @@
    "optimism_ln": 0.013698844358161927
   },
   {
+   "exp": "exp111 switch S",
+   "observable": "matched-filter S (parity)",
+   "family": "amplitude",
+   "depth": 4,
+   "delays": false,
+   "ideal": 0.25,
+   "preview": 0.2463,
+   "measured": 0.2221,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "exp111_S_previews.json + exp111_grade.json (preview = opt-3 circuits, noted)",
+   "ratio_preview": 0.9852,
+   "ratio_hw": 0.8884,
+   "optimism_ln": 0.1034225742261104
+  },
+  {
+   "exp": "exp111 paths S",
+   "observable": "matched-filter S (visibility)",
+   "family": "amplitude",
+   "depth": 3,
+   "delays": false,
+   "ideal": 0.125,
+   "preview": 0.1275,
+   "measured": 0.114,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "exp111_S_previews.json + exp111_grade.json (label-avg depth 2-4)",
+   "ratio_preview": 1.02,
+   "ratio_hw": 0.912,
+   "optimism_ln": 0.1119179162039854
+  },
+  {
    "exp": "exp109 superdense",
    "observable": "p_success (4-msg decode)",
    "family": "probability",
@@ -178,9 +210,9 @@
  ],
  "optimism_by_depth_class": {
   "shallow (<=8 CZ)": {
-   "n": 4,
-   "mean": 0.030497274878617007,
-   "spread": 0.07153344569424339
+   "n": 6,
+   "mean": 0.056221598324093965,
+   "spread": 0.10103596917465084
   },
   "mid (9-50 CZ)": {
    "n": 4,

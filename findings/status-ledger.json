@@ -766,10 +766,10 @@
    "claim_type": "law",
    "status": "CONFIRMED_ON_RETEST",
    "retested": true,
-   "retest_ref": "docs/pearl-bridge-paper-draft.md s2",
+   "retest_ref": "findings/F74-causal-order-coherence-is-a-continuous-resource-ember-c4066.md",
    "sim_only": false,
    "single_run": false,
-   "evidence": "DISC(phi)=2cos(phi/2) traced on a SECOND device, Pearson 0.9992 \u2014 a law that survived cross-device retest"
+   "evidence": "DISC(phi)=2cos(phi/2) traced on a SECOND device, Pearson 0.9992 (F76 finding record; pointer moved off the mutable synthesis doc per Ember C4123 spot-check flag 1)"
   },
   {
    "id": "F77",
