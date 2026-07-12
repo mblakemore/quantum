@@ -64,7 +64,18 @@ ROWS = [
     dict(exp="exp108 retention", observable="retention P(c=+,t=0)", family="probability",
          depth=22, delays=False, ideal=1.0, preview=0.9575, measured=0.856,
          sent_hw=None, sent_prev=None, source="exp108 grade"),
-    # exp108b row appended at grade time (delays=True — first delay-bearing row)
+    # exp108b (C4591): NO-TEST — calib gate failed (T1 queue-drift), preview-vs-measured
+    # comparison of the THERMAL observable would be conditioned on a broken prep; the
+    # honest atlas row is the retention sentinel only (prep-independent probe).
+    dict(exp="exp108b retention (NO-TEST run)", observable="retention P(c=+,t=0)",
+         family="probability", depth=22, delays=True, ideal=1.0, preview=0.9555,
+         measured=0.908, sent_hw=None, sent_prev=None,
+         source="exp108b_feasibility.json + exp108b_grade.json (first delay-bearing row)"),
+    # ---- comms arc ----
+    dict(exp="exp109 superdense", observable="p_success (4-msg decode)",
+         family="probability", depth=2, delays=False, ideal=1.0, preview=0.9794,
+         measured=0.9688, sent_hw=0.982, sent_prev=None,
+         source="exp109_feasibility.json + exp109_grade.json"),
 ]
 
 

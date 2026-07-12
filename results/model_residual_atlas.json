@@ -126,18 +126,50 @@
    "ratio_preview": 0.9575,
    "ratio_hw": 0.856,
    "optimism_ln": 0.11205534491305896
+  },
+  {
+   "exp": "exp108b retention (NO-TEST run)",
+   "observable": "retention P(c=+,t=0)",
+   "family": "probability",
+   "depth": 22,
+   "delays": true,
+   "ideal": 1.0,
+   "preview": 0.9555,
+   "measured": 0.908,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "exp108b_feasibility.json + exp108b_grade.json (first delay-bearing row)",
+   "ratio_preview": 0.9555,
+   "ratio_hw": 0.908,
+   "optimism_ln": 0.050990385079034424
+  },
+  {
+   "exp": "exp109 superdense",
+   "observable": "p_success (4-msg decode)",
+   "family": "probability",
+   "depth": 2,
+   "delays": false,
+   "ideal": 1.0,
+   "preview": 0.9794,
+   "measured": 0.9688,
+   "sent_hw": 0.982,
+   "sent_prev": null,
+   "source": "exp109_feasibility.json + exp109_grade.json",
+   "ratio_preview": 0.9794,
+   "ratio_hw": 0.9688,
+   "optimism_ln": 0.010881947029334562
   }
  ],
  "optimism_by_depth_class": {
   "shallow (<=8 CZ)": {
-   "n": 3,
-   "mean": 0.03703571749504449,
-   "spread": 0.0693897497064219
+   "n": 4,
+   "mean": 0.030497274878617007,
+   "spread": 0.07153344569424339
   },
   "mid (9-50 CZ)": {
-   "n": 2,
-   "mean": 0.17423671371798238,
-   "spread": 0.12436273760984687
+   "n": 3,
+   "mean": 0.13315460417166639,
+   "spread": 0.18542769744387141
   },
   "deep (>50 CZ)": {
    "n": 2,

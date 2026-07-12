@@ -879,7 +879,7 @@
    "retest_ref": null,
    "sim_only": false,
    "single_run": false,
-   "evidence": "Exp108b (native-fluid variant) in queue = retest pending, d998ch0tcv6s73dmvqr0"
+   "evidence": "Exp108b retest attempt graded NO-TEST C4591 (calib gate: T1 drift over ~19h queue pushed reservoir p_B outside frozen band; results/exp108b_grade.json). NO-TEST does not adjudicate F86 \u2014 status stays UNTESTED (retested=False), retest still pending a valid run."
   }
  ]
 }
