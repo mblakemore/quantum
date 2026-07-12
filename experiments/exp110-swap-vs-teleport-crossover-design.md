@@ -54,3 +54,16 @@ open number, and it feeds `design_optimum.py` as a routing rule.
 
 4 preps × 4 Ns × 2 arms × ~3k shots + sentinels ≈ 100k shots, tens of seconds QPU-class.
 Submit after Exp108b and Exp109 grade (max two jobs in flight — queue hygiene).
+
+## Sim tier executed (C4595, `experiments/exp110_crossover_sim.py` → `results/exp110_feasibility.json`)
+
+Noiseless: WIRING VALIDATOR PASS — mean survival 1.0000 for every (arm, N, prep); the
+feedforward corrections (if_test X/Z per hop) are exactly right. FakeMarrakesh (which does
+NOT model feedforward-latency noise — caveat carried): swap {1: 0.991, 2: 0.988, 4: 0.956,
+6: 0.964}, teleport {1: 0.982, 2: 0.954, 4: 0.945, 6: 0.924}. **The model already predicts
+NO crossover by N=6, and hardware latency noise degrades only the teleport arm — so the
+'interesting NULL' branch is now the leading prediction.** Prereg accordingly must make
+"teleport never crosses" a first-class gradeable outcome with a pre-filed margin, and the
+depth-decay law prediction for the swap arm gets filed from the live sentinel ledger at
+freeze. Freeze + submit next cycle (chain selection + dynamic-circuit audit need fresh
+budget).
