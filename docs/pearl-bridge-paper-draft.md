@@ -1,8 +1,13 @@
 # Causal Structure Beyond the Ladder: Hardware Experiments Where do-Calculus Has No Input
 
-**DRAFT v0.3 (Whisper C4549, 2026-07-10) — ALL SECTIONS DRAFTED (§1–§7); figures fig15/fig16
-rendered; remaining: sibling review of the §5 hinge arms, related-work polish, venue call. Outline: `pearl-bridge-paper-outline-whisper-c4533.md`. Audience:
-causal-inference (UAI / Journal of Causal Inference / perspective venue).**
+**DRAFT v0.4 (Whisper C4587, 2026-07-12) — Elder C6443 hinge-review blockers resolved: ONE
+operative ceiling (pre-registered 0.8695; class-balanced 0.9098 demoted to alternate measure,
+both σ quoted; fig15 relabeled), σ provenance disclosed (weighted-SE formula, stat-only AND
+systematic-inflated margins, error-model-robustness stated from the apparatus's own controls),
+N=3 scope sentence, F80 phrasing trimmed, cross-device subtraction explicit. Prior: v0.3 C4549
+(all sections drafted). Outline: `pearl-bridge-paper-outline-whisper-c4533.md`. Audience:
+causal-inference (UAI / Journal of Causal Inference / perspective venue). Remaining: Elder
+re-review, related-work polish, venue call.**
 
 > **Abstract (working).** Pearl's ladder of causation rests on an assumption it never needs to
 > state: that there *is* a definite causal structure — every structural causal model fixes an
@@ -95,7 +100,7 @@ then reproduced not a number but a *law*: dialing the coherence of the order-con
 angle φ traces DISC(φ) = 2·cos(φ/2) with Pearson correlation 0.9992 (F76) — causal definiteness
 behaves as a continuous resource, and its φ = π endpoint doubles as the classical mixture,
 closing the loop between the two devices. One proposed corroboration — an "independent" fit of
-the data to classical DAG families — was retracted by its own author before running, after
+the data to classical DAG families — was retracted before running, after
 proving to be an exact rescaling of the witness itself (F80); we keep the retraction in the
 record because a test that cannot fail proves nothing, and the discipline is part of the result.
 
@@ -131,14 +136,33 @@ computed on someone else's population.
 The hardware protocol was frozen before data: fifty-one game circuits sharing one identical
 compiled skeleton (after a review catch in which the transpiler silently optimized away the
 padding that guaranteed pair-independence), sentinel circuits at the start, middle, and end of
-the batch, a definite-order null arm, and a grading rule fixed to the constant 0.8695. The
-switch scored p̂ = 0.9769 ± 0.0005 — 216.8σ above the ceiling — while the null arm scored
-0.6146, statistically indistinguishable from the game's class prior of 0.6165: on the same chip,
-in the same window, a definite order buys exactly what Pearl says it buys, and nothing more.
-The following day the identical frozen design ran on a second processor with no prior history of
-switch circuits and returned p̂ = 0.9738 — a 0.3-percentage-point concordance across devices,
-same verdict, 201σ. (Figure: fig15 — the per-pair measured successes sitting wholly inside the
-forbidden zone above the ceiling, with the classical kits' averages below it.)
+the batch, a definite-order null arm, and a grading rule fixed to the constant 0.8695 — the
+**one operative ceiling** in this paper, pre-registered before data, set marginally above the
+re-derived SDP optimum 0.869028 for the optimal input distribution q\*. Because §3's own lesson
+is that the classical optimum is a function of the input distribution, we note the alternate
+measure explicitly: under a class-balanced prior over the same ten operations the bound is
+instead 0.9098. We quote margins against both; grading uses only the frozen 0.8695.
+
+The switch scored p̂ = 0.9769, weighted standard error 0.000495 — the SE of the q\*-weighted
+success estimator, binomial pooling across the 51 pair-circuits; σ values are computed from the
+unrounded SE (the display-rounded ±0.0005 would misreport the headline as 214.9σ) — placing it
+**216.8σ above the operative ceiling** (135.5σ above the class-balanced alternate). The null
+arm scored 0.6146, statistically indistinguishable from the game's class prior of 0.6165: on
+the same chip, in the same window, a definite order buys exactly what Pearl says it buys, and
+nothing more. The following day the identical frozen design ran on a second processor with no
+prior history of switch circuits and returned p̂ = 0.9738 (SE 0.00052) — a cross-device
+discrepancy of 0.9769 − 0.9738 = 0.0031 — same verdict: 201.0σ above the operative ceiling
+(123.3σ above the alternate).
+
+These margins are statistical. Rather than assert that systematics vanish, we bound them with
+the apparatus's own measurements: the two empirical scales for unmodeled effects on score-type
+observables here are the cross-device discrepancy (0.0031) and the null arm's deviation from
+its predicted prior (0.0019). The measured excess above the operative ceiling, 0.1074, is 35×
+the first and 57× the second; an error model that treats the entire cross-device discrepancy
+as a one-σ systematic still leaves the margin at 34σ. No error model constructible from this
+apparatus's own control measurements brings the verdict into question. (Figure: fig15 — the
+per-pair measured successes sitting wholly inside the forbidden zone above the operative
+ceiling, with the class-balanced alternate marked as a secondary line.)
 
 ## §4. Information through causally-forbidden structure
 
@@ -151,6 +175,9 @@ inequality in the paper: the entire causally separable set sits at a single poin
 
 On hardware, the switch of two such channels transmitted 0.0436 ± 0.0005 bits per use — 55.6σ
 from zero — with the definite-order null arm measuring 0.00012 bits (the theorem, on a chip).
+The capacity margins carry the same proviso as §3's: they are statistical, and the executed
+null arm doubles as the empirical systematic floor — the switch value is 363× the null arm's
+0.00012 bits, so no systematic at the scale the apparatus itself exhibits threatens the verdict.
 The pre-registered signature is the part we most want causal-inference readers to see: the
 *target alone* remains exactly depolarized even in the switch configuration (measured
 D = +0.004). All of the transmitted information lives in the correlation between the message
@@ -163,7 +190,9 @@ Scaling the switch to three channels in a superposition of the three cyclic orde
 whether the resource grows. In theory it does: the ideal transmitted information rises from
 0.0489 to 0.0833 bits. On hardware the experiment won again — 0.0260 bits, 61.7σ from the
 causal zero — but *less* than the two-channel result: the deeper circuit (110 versus 4
-entangling gates) costs more fidelity than the larger superposition gains. Theory scales;
+entangling gates) costs more fidelity than the larger superposition gains. What the N=3 result
+establishes is that the resource remains above zero at three channels — not that it scales
+positively on this hardware. Theory scales;
 practice inverts; both facts were measured under a single pre-registration, and the inversion
 is the more useful number, because it locates the current hardware generation's frontier
 (Figure: fig16 — the capacity ladder with the inversion annotated). The run also field-tested a
@@ -311,6 +340,7 @@ account) are public in the project repository.
 ---
 
 *Figures planned: (i) the hinge table above as the central figure; (ii) the ceiling plot —
-classical kits converging under 0.9098, switch column above it, per-case measured points;
+operative pre-registered ceiling 0.8695 with the class-balanced alternate 0.9098 as a
+secondary line, classical kits below, per-case measured points in the forbidden zone (fig15);
 (iii) DISC(φ)=2cos(φ/2) (exists, fig12); (iv) capacity ladder N=1(=0)/N=2/N=3 ideal-vs-measured
 showing the inversion.*

@@ -457,27 +457,33 @@ def fig_15_causal_game_ceiling():
     """F82 (Exp105/105b): the causal-game ceiling and the measured forbidden zone.
     Per-pair points from results/exp105_hw_results.json (job d9826lkqp3as739sd2lg);
     fez replicate p_hat from exp105b (d982qssqp3as739sdmmg); classical-kit deck
-    averages computed at C4541 (theory); ceiling = class-balanced causally-separable
-    bound 0.9098 (SDP, re-derived C4524; optimal-q* game graded vs 0.8695)."""
+    averages computed at C4541 (theory). ONE operative ceiling (Elder C6443 blocker
+    fix, C4587): pre-registered 0.8695 (optimal-q* population, SDP optimum 0.869028);
+    class-balanced 0.9098 shown as SECONDARY alternate. Sigma vs both per line
+    (marrakesh 216.8/135.5; fez 201.0/123.3 — from recorded se_w, script-computed)."""
     import json as _json
     rows = _json.load(open(os.path.join(OUT, "..", "results",
                                         "exp105_hw_results.json")))["rows"]
     succ = sorted((r["p_plus"] if r["commuting"] else 1 - r["p_plus"])
                   for r in rows if r["kind"] == "game")
     fig, ax = plt.subplots(figsize=(7.2, 4.4))
-    ax.axhspan(0.9098, 1.005, color="#ffccd5", alpha=0.55, zorder=0,
+    ax.axhspan(0.8695, 1.005, color="#ffccd5", alpha=0.55, zorder=0,
                label="forbidden zone (no definite order)")
-    ax.axhline(0.9098, color="#b00020", lw=2,
-               label="THE CEILING: causally-separable bound 0.9098")
+    ax.axhline(0.8695, color="#b00020", lw=2,
+               label="THE CEILING (pre-registered): bound 0.8695, optimal-q* population")
+    ax.axhline(0.9098, color="#b00020", ls="--", lw=1.2, alpha=0.8,
+               label="alternate measure: class-balanced bound 0.9098")
     ax.axhline(0.75, color="#888", ls="--", lw=1.2,
                label="best classical kit (entangled casefile), deck avg 0.75")
     ax.axhline(0.575, color="#bbb", ls=":", lw=1.2, label="rookie kit, deck avg 0.575")
     ax.scatter(range(len(succ)), succ, s=22, color="#1b7f4d", zorder=3,
                label="measured per-pair success, ibm_marrakesh (51 pairs)")
     ax.axhline(0.976931, color="#1b7f4d", lw=1.4, alpha=0.9)
-    ax.text(0.5, 0.9860, "marrakesh p̂ = 0.9769 (216.8σ)", fontsize=8, color="#1b7f4d")
+    ax.text(0.5, 0.9860, "marrakesh p̂ = 0.9769 (216.8σ vs 0.8695; 135.5σ vs 0.9098)",
+            fontsize=8, color="#1b7f4d")
     ax.axhline(0.973786, color="#2b5fad", lw=1.4, alpha=0.9)
-    ax.text(0.5, 0.9330, "fez replication p̂ = 0.9738 (201σ)", fontsize=8, color="#2b5fad")
+    ax.text(0.5, 0.9330, "fez replication p̂ = 0.9738 (201.0σ; 123.3σ)",
+            fontsize=8, color="#2b5fad")
     ax.set_xlabel("game pairs, sorted by measured success")
     ax.set_ylabel("probability of a correct call")
     ax.set_ylim(0.5, 1.005)
