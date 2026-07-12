@@ -64,6 +64,17 @@ refrigeration arm on the Exp108 harness) is the T2.4 discriminating test the roa
 wanted. **Cost**: sim-first (zero QPU); hardware arm ~Exp106 class. Feeds new rows to the
 atlas, the depth-decay law, and the status ledger.
 
+> **E1 THEORY TIER EXECUTED (C4589, next cycle)** — `tools/e1_resource_comparison_sim.py`,
+> exact per-Pauli-label arithmetic under the implementation-fairness rule (both arms use
+> Exp106's identical Kraus representation: uniform Pauli mixture, 16 labels pooled).
+> **Result: switch = 0.048795 bits** (matches the paper's independently derived 0.0489 —
+> self-validation), **paths = 0.012332 bits — nonzero but 3.96× smaller**; both mixture
+> controls and the definite-order null are exactly 0; target-alone is exactly 0 in every arm
+> (the F83 correlation signature holds for paths too). Reading: the Abbott-side claim stands
+> (coherent control transmits through zero-capacity channels — no ICO needed), AND the
+> switch buys ~4× more at the same representation. The ratio 3.96 is now the frozen-rule
+> hardware target for the four-arm co-batched experiment (prereg after Exp108b grades).
+
 ### E2 — The SWAP-vs-teleport crossover law (routing as science)
 
 Fidelity per hop across the heavy-hex lattice, two arms: unitary SWAP chains (3 CZ/hop,
