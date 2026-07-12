@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ladder of Causation, Climbed on Real Silicon</title>
+<style>
+  :root{
+    --ink:#171b26; --panel:#1e2331; --line:#2a3145; --text:#e2e6f0; --muted:#8b93a7;
+    --dim:#5c6479; --cyan:#45d6cf; --gold:#e6a94e; --golddark:#b9791b; --green:#3dbd7d;
+    --red:#e05c6e; --zone:#06201f;
+    --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--text);font-family:var(--sans);line-height:1.6}
+  .wrap{max-width:860px;margin:auto;padding:48px 22px 80px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:var(--mono);font-weight:700;letter-spacing:-.02em;line-height:1.2;font-size:clamp(26px,4.5vw,38px);margin:.3em 0 .4em}
+  .lede{color:var(--muted);font-size:17px;max-width:64ch}
+  .lede b{color:var(--text)}
+  .rail{position:relative;margin-top:56px;padding-left:34px;border-left:3px solid var(--line)}
+  .stop{position:relative;margin-bottom:64px}
+  .stop::before{content:"";position:absolute;left:-45px;top:6px;width:17px;height:17px;border-radius:50%;
+    background:var(--ink);border:3px solid var(--gold)}
+  .stop.off::before{border-color:var(--cyan);box-shadow:0 0 14px rgba(69,214,207,.55)}
+  .rung{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--golddark)}
+  .stop.off .rung{color:var(--cyan)}
+  h2{font-size:24px;margin:.25em 0 .45em;line-height:1.25}
+  .stop p{max-width:66ch;margin:.5em 0}
+  .muted{color:var(--muted)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:16px 0;max-width:640px}
+  .card .k{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+  .num{font-family:var(--mono);color:var(--gold);font-size:15px}
+  .stop.off .num{color:var(--cyan)}
+  .exp{font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+  .exp a{color:var(--dim)}
+  code{font-family:var(--mono);font-size:.92em;background:var(--panel);border:1px solid var(--line);
+    border-radius:4px;padding:1px 5px;white-space:nowrap}
+  .zone{background:var(--zone);border:1px solid rgba(69,214,207,.35);border-radius:10px;padding:18px 20px;margin:18px 0;max-width:640px}
+  .foot{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim);font-size:13.5px}
+  .foot a{color:var(--cyan)}
+  a{color:var(--cyan)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">A guided tour · real experiments · one idea</div>
+  <h1>The Ladder of Causation,<br>climbed on real silicon</h1>
+  <p class="lede">Judea Pearl taught a generation that causal questions come in three rungs —
+  <b>seeing</b>, <b>doing</b>, and <b>imagining</b> — and that no rung can be answered from the
+  one below it. This repository, it turns out, climbed the whole ladder on a quantum processor
+  without planning to. Here is the tour: one real experiment per rung, with the measured
+  numbers — and at the top, a step off the ladder that Pearl's framework can name only by its
+  absence.</p>
+
+  <div class="rail">
+
+    <div class="stop">
+      <div class="rung">Rung 1 · Association — "What do I see?"</div>
+      <h2>Watching the chip's noise, and finding structure in it</h2>
+      <p>Rung 1 is pure observation: correlations, patterns, P(y|x). Months of characterization
+      work lived here — mapping which qubits are quiet, which measurement directions are noisy,
+      where the depth wall sits.</p>
+      <div class="card">
+        <div class="k">The exhibit — Finding 3, X-basis noise immunity</div>
+        <p style="margin:0">Read a qubit one way (X) and the dominant noise largely misses it;
+        read it another way (Z) and it doesn't. Same circuit, different viewing angle,
+        <span class="num">up to 3× cleaner</span> — confirmed three independent times, and the
+        <em>ordering</em> replicated on a second chip. Nothing was intervened on. This is
+        seeing, at its most useful.</p>
+      </div>
+      <p class="exp">Also at this rung: the ~1000-gate depth wall (Finding 5), quiet-qubit maps
+      (F57–F70), the calibration-window lottery (F81/F84).</p>
+    </div>
+
+    <div class="stop">
+      <div class="rung">Rung 2 · Intervention — "What if I do?"</div>
+      <h2>Surgery on a circuit: the do() operator, executed</h2>
+      <p>Rung 2 asks what observation cannot answer: what happens if I <em>make</em> it so? On
+      this chip, gate count and circuit duration normally rise together — hopelessly
+      confounded, like diet and exercise. The fix is Pearl's: sever the link by intervention.</p>
+      <div class="card">
+        <div class="k">The exhibit — Finding 11, the gate-overhead dose-response law</div>
+        <p style="margin:0">A do()-style experiment held duration fixed while adding gates, and
+        vice versa, splitting the cost of a two-qubit gate into
+        <span class="num">~78% time-decoherence + ~22% gate-specific noise</span> — two numbers
+        no amount of passive watching could separate.</p>
+      </div>
+      <div class="card">
+        <div class="k">Second exhibit — Finding 18, H-gate surgery</div>
+        <p style="margin:0">Do the H-gates <em>cause</em> the measured advantage, or merely
+        accompany it? Surgically removing them (intervention) degraded the answers directly —
+        association upgraded to causation, exactly per the textbook.</p>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="rung">Rung 3 · Counterfactuals — "What if I had?"</div>
+      <h2>Frozen predictions: counterfactuals with receipts</h2>
+      <p>Rung 3 reasons about worlds that didn't happen. Our version is methodological: every
+      hardware experiment ships with a <em>pre-registration</em> — a frozen, committed statement
+      of what the world will look like if the hypothesis is true, and what it will look like if
+      it is false, before any data exists. Grading a frozen rule is comparing the actual world
+      against a committed counterfactual one.</p>
+      <div class="card">
+        <div class="k">The exhibit — the depth-decay law's blind test</div>
+        <p style="margin:0">Before Exp108 returned, two futures were filed: the noise model said
+        Δ ≈ 0.2275; our cross-arc law said Δ ≈ 0.201. The hardware said
+        <span class="num">Δ = 0.1796 ± 0.0085</span> — closer to the law by 2.3×. Both
+        counterfactual worlds were written down first; that is what made the win mean
+        something.</p>
+      </div>
+      <p class="exp">The discipline is audited: the self-replication ledger
+      (<code>findings/status-ledger.json</code>) grades which claim types survive our own
+      retests.</p>
+    </div>
+
+    <div class="stop off">
+      <div class="rung">Off the ladder · "What if there is no order?"</div>
+      <h2>The step Pearl's ladder cannot type</h2>
+      <p>Every rung — seeing, doing, imagining — quietly assumes one thing: that a definite
+      causal structure <em>exists</em>. Some DAG, maybe unknown, maybe latent-mixed, but there.
+      The quantum switch breaks exactly that assumption: two operations are applied in a
+      coherent superposition of <b>A-then-B</b> and <b>B-then-A</b>. Not a hidden order. Not a
+      coin-flip over orders — we ran that as a control arm, and it behaves just as Pearl
+      predicts. An amplitude over orders.</p>
+      <div class="zone">
+        <div class="k" style="color:var(--cyan);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">The measured step off</div>
+        <p style="margin:0">A discrimination game whose ceiling for <em>any</em> definite-order
+        strategy is provably <b>0.8695</b> was won at <span class="num">0.9769 — 216.8σ above
+        the ceiling</span> — and replicated on a second chip the next day (0.9738, 201σ). Two
+        channels that each transmit exactly zero information carried
+        <span class="num">0.0436 bits</span> through their superposition of orders. The
+        definite-order null arms, run in the same jobs, scored exactly what the ladder says
+        they must.</p>
+      </div>
+      <p>The ladder isn't wrong — inside its world it was quantitatively correct on this same
+      hardware, in the same calibration windows. It is <b>typed</b>: its input is a causal
+      structure, and this object isn't one. We even fed the switch data to standard
+      causal-discovery algorithms (PC, GES): they returned an ordinary causal graph, no
+      warning — the output format itself cannot say "there is no order here"
+      (<code>docs/causal-discovery-stress-test-whisper-c4587.md</code>).</p>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    Every number above is a measured, pre-registered, frozen-rule-graded result with public job
+    IDs — see the <a href="../../docs/quantum-switch-spec.md">switch spec sheet</a>, the
+    <a href="../../docs/pearl-bridge-paper-draft.md">paper draft</a>, and the
+    <a href="../../README.md">repository front door</a>. Built by the DC network (Whisper C4587).
+  </div>
+</div>
+</body>
+</html>
