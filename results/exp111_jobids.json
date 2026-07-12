@@ -1,0 +1,1670 @@
+{
+ "experiment": "exp111-e1-resource-comparison",
+ "cycle": "C4593-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp111",
+ "prereg": "experiments/exp111-e1-resource-comparison-preregistration.md",
+ "gates": {
+  "G1_sent_min_disc": 1.6,
+  "G2_null_D_band": 0.1,
+  "G3_mix_band": 0.04,
+  "G4_switch_floor": 0.1,
+  "G5_paths_floor": 0.05,
+  "G6_diff_floor": 0.02
+ },
+ "filters_tc_order": {
+  "w_sw": [
+   0.5,
+   -0.5,
+   -0.5,
+   0.5
+  ],
+  "w_pa": [
+   0.5,
+   -0.5,
+   0.5,
+   -0.5
+  ]
+ },
+ "prefiled": {
+  "S_switch": [
+   0.225,
+   0.245
+  ],
+  "S_paths": [
+   0.115,
+   0.128
+  ],
+  "S_ratio": [
+   1.7,
+   2.1
+  ]
+ },
+ "transpile": {
+  "seed": 4593,
+  "opt_level": 1,
+  "layout": [
+   13,
+   14
+  ]
+ },
+ "shuffle_seed": 4593,
+ "pair": [
+  13,
+  14
+ ],
+ "pair_cost": 0.008318610812662552,
+ "job_id": "d99tkdgtcv6s73dnpaeg",
+ "metas": [
+  {
+   "label": "sent_start_comm",
+   "kind": "sentinel",
+   "shots": 2000,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "sent_start_anti",
+   "kind": "sentinel",
+   "shots": 2000,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "nu(Y,X)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pa(Z,X)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 15
+  },
+  {
+   "label": "nu(1,Y)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pm(X,X)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "sm(Y,Z)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "sw(1,Y)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "nu(X,X)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sm(Y,X)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "pm(Z,1)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 9
+  },
+  {
+   "label": "sw(Y,Z)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "pm(1,1)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 9
+  },
+  {
+   "label": "pa(Z,Z)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 10
+  },
+  {
+   "label": "pm(X,Y)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "pa(X,Y)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "pa(1,Y)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 15
+  },
+  {
+   "label": "sw(Y,Z)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "pa(1,Y)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 15
+  },
+  {
+   "label": "sm(1,1)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 9
+  },
+  {
+   "label": "sw(Z,X)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "pm(Z,Z)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 8
+  },
+  {
+   "label": "pm(Z,Y)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "pm(X,1)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "pm(1,X)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 14
+  },
+  {
+   "label": "sm(Z,X)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "sm(1,X)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "sw(X,1)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "sm(X,1)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "sm(1,Z)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 11
+  },
+  {
+   "label": "pm(1,1)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 8
+  },
+  {
+   "label": "pm(X,X)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "sm(1,1)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 9
+  },
+  {
+   "label": "pa(X,Z)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "nu(Z,Y)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pm(Z,Z)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 7
+  },
+  {
+   "label": "sw(X,1)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "pm(Y,X)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "pa(Y,Z)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "sm(X,X)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "pa(Y,1)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "nu(Z,X)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pm(Z,Y)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "sm(Z,X)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "nu(Y,1)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sm(Y,1)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "pm(Y,X)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "pm(X,1)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "sm(1,1)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 8
+  },
+  {
+   "label": "pm(Z,X)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "sw(1,1)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 11
+  },
+  {
+   "label": "sw(Y,Y)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "nu(X,Z)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "nu(Y,Y)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sm(Z,Z)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 11
+  },
+  {
+   "label": "pm(Y,X)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "pm(X,X)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "sm(X,Y)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "sw(1,X)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "pm(1,Z)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 8
+  },
+  {
+   "label": "pm(1,Z)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 8
+  },
+  {
+   "label": "sm(X,Y)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "sm(X,Z)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "sm(Y,Z)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "pm(Y,1)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "sm(Z,Y)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "nu(1,1)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pa(X,X)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "sm(Z,Y)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 18
+  },
+  {
+   "label": "sm(Y,Z)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "sm(Y,1)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "sw(1,Z)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 13
+  },
+  {
+   "label": "nu(Y,Z)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sm(Y,Y)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "sw(Z,1)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 12
+  },
+  {
+   "label": "sm(1,Z)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 11
+  },
+  {
+   "label": "sent_mid_comm",
+   "kind": "sentinel",
+   "shots": 2000,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "sent_mid_anti",
+   "kind": "sentinel",
+   "shots": 2000,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "pm(X,Y)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "nu(1,1)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sw(X,Y)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "pm(1,Z)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 7
+  },
+  {
+   "label": "pm(1,Y)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 12
+  },
+  {
+   "label": "sm(X,X)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "nu(X,1)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sm(Y,X)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "sm(X,1)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "pm(X,X)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "nu(X,Y)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pa(Y,Z)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "sw(Z,Z)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 14
+  },
+  {
+   "label": "pm(X,1)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "sm(Z,1)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 10
+  },
+  {
+   "label": "pa(1,Z)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 10
+  },
+  {
+   "label": "pa(Z,1)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 11
+  },
+  {
+   "label": "pm(X,Z)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "pa(Y,X)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "sm(1,Y)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 18
+  },
+  {
+   "label": "pm(Y,Z)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "pm(1,X)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 14
+  },
+  {
+   "label": "pm(Y,Y)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "pm(Y,1)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "pm(Z,X)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "pm(Z,1)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 8
+  },
+  {
+   "label": "pa(1,Z)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 10
+  },
+  {
+   "label": "nu(Z,X)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "nu(X,Y)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pm(Z,1)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 9
+  },
+  {
+   "label": "pm(Y,X)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "sm(Z,X)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "pm(Y,1)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 12
+  },
+  {
+   "label": "sm(Z,Y)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "pm(X,Z)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "sm(X,1)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "sm(Z,Z)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 12
+  },
+  {
+   "label": "sm(X,X)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "nu(X,Z)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sw(Y,1)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "sm(Z,1)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 10
+  },
+  {
+   "label": "pm(Z,X)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "sw(Y,Y)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "nu(Y,Z)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sw(Y,X)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "sm(1,Y)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "sm(1,Z)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 11
+  },
+  {
+   "label": "pa(X,X)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "nu(Z,1)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sm(X,Y)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "pm(1,Y)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "sm(Y,X)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "nu(Z,Y)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sw(X,X)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "sm(Y,Y)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "sm(Y,X)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "sm(Z,Z)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 12
+  },
+  {
+   "label": "pm(1,Y)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "pm(Y,1)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 12
+  },
+  {
+   "label": "sm(X,Z)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "pa(X,Z)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "nu(1,Y)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sm(X,Z)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "sm(Z,Z)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 12
+  },
+  {
+   "label": "pm(Y,Y)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "sw(Z,Y)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "sw(1,Z)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 13
+  },
+  {
+   "label": "sm(1,X)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "sm(Y,1)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 18
+  },
+  {
+   "label": "sw(X,X)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "sm(Y,Y)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "sm(X,Z)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "sw(Y,1)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "pa(1,1)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 11
+  },
+  {
+   "label": "pm(Y,Z)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 11
+  },
+  {
+   "label": "sm(Y,Z)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "sm(1,X)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "pa(Y,X)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "pm(Z,Z)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 8
+  },
+  {
+   "label": "sm(1,Y)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "nu(1,X)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "nu(Y,1)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pm(Y,Z)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "sm(Y,1)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 18
+  },
+  {
+   "label": "pa(X,1)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "sm(Z,1)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 9
+  },
+  {
+   "label": "sw(1,X)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "pa(Z,1)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 11
+  },
+  {
+   "label": "pa(Z,Y)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "pm(Z,Y)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "sm(1,Y)b1p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "pm(Y,Y)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "sm(X,1)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "pm(1,Z)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 8
+  },
+  {
+   "label": "nu(Z,Z)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pm(X,Y)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "pm(X,1)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "sw(Z,1)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 12
+  },
+  {
+   "label": "pa(Y,Y)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "pa(Y,1)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "pm(Y,Y)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "pa(Z,X)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 15
+  },
+  {
+   "label": "sw(X,Z)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "pm(Y,Z)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 11
+  },
+  {
+   "label": "pm(Z,Z)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 8
+  },
+  {
+   "label": "nu(Z,Z)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pa(1,X)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 16
+  },
+  {
+   "label": "pa(1,X)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 16
+  },
+  {
+   "label": "pm(X,Y)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "sw(Z,X)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "sw(Z,Y)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "sm(Z,1)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 10
+  },
+  {
+   "label": "pm(Z,Y)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 11
+  },
+  {
+   "label": "pm(X,Z)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "pm(1,X)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 14
+  },
+  {
+   "label": "sm(X,Y)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "sm(Z,X)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "pa(X,1)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "sm(Z,Y)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 19
+  },
+  {
+   "label": "sw(Z,Z)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 14
+  },
+  {
+   "label": "pm(1,1)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 9
+  },
+  {
+   "label": "sw(X,Z)b1",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "nu(Y,Y)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "nu(Z,1)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "nu(X,X)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sm(X,X)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "sm(1,X)b1p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "pm(1,1)b1p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 9
+  },
+  {
+   "label": "pm(Z,1)b1p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 9
+  },
+  {
+   "label": "pa(Z,Z)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 10
+  },
+  {
+   "label": "nu(1,X)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sw(1,1)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 11
+  },
+  {
+   "label": "sw(1,Y)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "nu(Y,X)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pm(Z,X)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "nu(1,Z)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "pa(1,1)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 11
+  },
+  {
+   "label": "sm(Y,Y)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 20
+  },
+  {
+   "label": "sm(1,Z)b0p0",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 10
+  },
+  {
+   "label": "pm(1,Y)b0p1",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "nu(X,1)b1",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sw(Y,X)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "pa(Z,Y)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "nu(1,Z)b0",
+   "kind": "null",
+   "shots": 1500,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "sw(X,Y)b0",
+   "kind": "switch",
+   "shots": 1500,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "pa(X,Y)b1",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 14
+  },
+  {
+   "label": "pm(X,Z)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "sm(1,1)b0p1",
+   "kind": "sw_mix",
+   "shots": 750,
+   "twoq": 4,
+   "depth": 9
+  },
+  {
+   "label": "pa(Y,Y)b0",
+   "kind": "paths",
+   "shots": 1500,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "pm(1,X)b0p0",
+   "kind": "paths_mix",
+   "shots": 750,
+   "twoq": 3,
+   "depth": 13
+  },
+  {
+   "label": "sent_end_comm",
+   "kind": "sentinel",
+   "shots": 2000,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "sent_end_anti",
+   "kind": "sentinel",
+   "shots": 2000,
+   "twoq": 4,
+   "depth": 21
+  }
+ ]
+}
