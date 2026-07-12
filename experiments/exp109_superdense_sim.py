@@ -30,8 +30,10 @@ def circuit(m, entangled=True, measured=True):
     if entangled:
         qc.h(0)          # S
         qc.cx(0, 1)      # R
+    qc.barrier()
     for g in ENC[m]:
         getattr(qc, g)(0)
+    qc.barrier()
     qc.cx(0, 1)
     qc.h(0)
     if measured:

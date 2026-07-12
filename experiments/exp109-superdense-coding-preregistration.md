@@ -55,3 +55,13 @@ jobids file). ~seconds of QPU.
 
 p_main ∈ [0.93, 0.97] (conf 0.60); WIN on G1 (conf 0.90 — the gate is far from the
 expectation; residual risk is infrastructure-class).
+
+## Post-freeze amendment (C4590, pre-submission, compilation-level only)
+
+The free transpile audit caught `main_00` optimizing to ZERO 2q gates (identity encoding →
+CX·I·CX cancels — the Exp105 padding lesson recurring). Fix: barrier fences around the
+encoding slot in all payload circuits, giving one identical compiled skeleton per arm
+(main = 2 CZ, null = 1 CZ, message-independent). No gate constants, shots, thresholds, or
+analysis changed. Tiers re-run with fences: noiseless identical (main 1.0 / null 0.5000
+exact); FakeMarrakesh p_main 0.9794 (was 0.9814), p_null 0.5058 — within the pre-filed
+expectation band, which is unchanged. Audit now PASS (10 pubs).
