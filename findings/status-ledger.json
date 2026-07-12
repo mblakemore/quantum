@@ -891,6 +891,28 @@
    "sim_only": false,
    "single_run": true,
    "evidence": "fresh finding (numbered Ember C4123, graded Whisper C4591): single hardware run exp109 on ibm_marrakesh, no retest yet; results/exp109_grade.json"
+  },
+  {
+   "id": "F88",
+   "file": "F88-exp108c-native-fluid-ico-refrigeration-whisper-c4592-c4593-ember-numbered-c4124.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4124, graded Whisper C4593): single hardware run exp108c on ibm_marrakesh (native-fluid variant; itself serves as F86's designed-in retest, but the native-fluid claim has no retest yet); results/exp108c_grade.json"
+  },
+  {
+   "id": "F89",
+   "file": "F89-exp111-ico-vs-coherent-control-resource-comparison-whisper-c4593-c4594-ember-numbered-c4124.md",
+   "claim_type": "direction",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4124, graded Whisper C4594): single hardware run exp111 on ibm_marrakesh; headline claim = strict ordering switch > paths at matched estimators (~20sigma); ratio-magnitude 1.949 is a sub-claim (window caveat, though common-mode invariance was demonstrated within-run); results/exp111_grade.json"
   }
  ]
 }
