@@ -1,13 +1,14 @@
-# Causal Structure Beyond the Ladder: Hardware Experiments Where do-Calculus Has No Input
+# Beyond the Ladder — Hardware Experiments Where do-Calculus Has No Input
 
-**DRAFT v0.4 (Whisper C4587, 2026-07-12) — Elder C6443 hinge-review blockers resolved: ONE
-operative ceiling (pre-registered 0.8695; class-balanced 0.9098 demoted to alternate measure,
-both σ quoted; fig15 relabeled), σ provenance disclosed (weighted-SE formula, stat-only AND
-systematic-inflated margins, error-model-robustness stated from the apparatus's own controls),
-N=3 scope sentence, F80 phrasing trimmed, cross-device subtraction explicit. Prior: v0.3 C4549
-(all sections drafted). Outline: `pearl-bridge-paper-outline-whisper-c4533.md`. Audience:
-causal-inference (UAI / Journal of Causal Inference / perspective venue). Remaining: Elder
-re-review, related-work polish, venue call.**
+*(docs/beyond-the-ladder.md — the causal-inference-facing synthesis of this repository)*
+
+**The repository's definitive account of the switch campaign for causal-inference readers —
+what the measurements mean for structural causal models and the do-calculus. Written to
+journal standard and sibling-reviewed (Elder C6443 hinge review; blockers resolved v0.4 C4587;
+APPROVED C6445), but not submitted anywhere: this document IS the publication, versioned in
+this repository (Creator direction, C4594). v1.0. History: outline C4533, draft C4549,
+review-hardened C4587, Exp111 capstone added C4594. Start with the README or ELI5 for the
+plain-language version; this is the technical argument.**
 
 > **Abstract (working).** Pearl's ladder of causation rests on an assumption it never needs to
 > state: that there *is* a definite causal structure — every structural causal model fixes an
@@ -243,6 +244,23 @@ device-independent certification of causal nonseparability exists; our contribut
 game-form, provable-ceiling, pre-registered version on gate-model hardware, with the executed
 classical controls that make the comparison to SCM predictions quantitative rather than
 rhetorical.
+
+A fourth clarification arrived after review and deserves its own paragraph, because it answers
+the objection a careful reader should now be forming: *is the resource really the indefinite
+order, or just coherent control?* A superposition of PATHS through the two channels — no
+indefinite order anywhere — also transmits information (Abbott et al.; the effect is real and
+we measured it). We executed the comparison rather than argue it: five co-batched arms on the
+same chip in the same calibration window, both configurations built from the identical Kraus
+representation, each with its own skeleton-matched classical-mixture control, graded by
+matched-filter statistics frozen before submission (Exp111). Result: coherent path control
+transmits (S = 0.1140 ± 0.0039 — its own win), and the switch transmits **strictly more** —
+S = 0.2221 ± 0.0039, a difference of 20σ, with the circuit-depth difference *favoring* the
+paths arm. The measured ratio, 1.949, landed inside the pre-registered band [1.7, 2.1] around
+the theoretical 2.000. The two advantages even live in different correlations: the paths
+effect in the control's interference visibility alone, the switch's in the control–target
+parity. So the honest statement is quantitative, not categorical: coherent control buys real
+transmission through zero-capacity channels; indefinite causal order buys exactly twice that,
+at matched implementation, on the same silicon, in the same hour.
 
 What should a causal-inference researcher *do* with this? Three things, in ascending ambition.
 (1) **Vocabulary**: "causally separable" is a precise, theorem-bearing name for the closure of

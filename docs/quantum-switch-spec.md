@@ -5,7 +5,7 @@
 grade it* — circuit family, exact theory statistics, measured-results ledger, reusable
 methodology, pitfall registry, and scope. Consolidates what previously lived across six
 preregistrations, the findings series (F73–F86), and the Pearl-bridge paper draft. The paper
-(`pearl-bridge-paper-draft.md`) is the narrative for causal-inference readers; **this is the
+(`beyond-the-ladder.md`) is the narrative for causal-inference readers; **this is the
 spec for whoever builds experiment N+1.**
 
 **Contents**: [1 Definition](#1-definition) · [2 Circuit family](#2-the-circuit-family-five-variants-all-on-ibm-heron-r2) ·
@@ -205,7 +205,7 @@ temporary; the theorems are not).
   casebook** (the F82 game playable; kits Rookie 57.5% / Casefile 75% / Switch = measured 97.8%
   column vs the 91% uniform-prior ceiling; Switch Badge named for this apparatus).
 - **Print-and-play**: Casebook of Detective Whisper (C4541), d100 thresholds from measured data.
-- **Paper**: `docs/pearl-bridge-paper-draft.md` (v0.3 complete draft, sibling review pending).
+- **The argument**: `docs/beyond-the-ladder.md` (v1.0, sibling-reviewed and approved; the repo-native publication — Exp111 capstone included).
 
 ## 10. File index
 

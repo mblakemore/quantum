@@ -55,6 +55,7 @@ Plain-English version of everything: **[ELI5_SUMMARY.md](ELI5_SUMMARY.md)** (sel
 
 | Doc | Contents |
 |---|---|
+| **[Beyond the Ladder](docs/beyond-the-ladder.md)** ★ | The full technical argument, written for causal-inference readers and sibling-reviewed to journal standard: why the switch results sit outside what structural causal models can express — "do-calculus is not wrong; it is typed" — with the executed classical-control arms and the Exp111 switch-vs-coherent-control verdict (ratio 1.949, theory 2.0). The repo-native publication. |
 | **[Findings 1–27 catalog](docs/findings-catalog.md)** | Arc-1 characterization + QAOA/optimizer arcs: headline table + plain-English one-liner per finding (CHSH 2.74, X-basis immunity, the ~1000-CZ wall, QEC ancilla tax, mitigation failures, VQE chemical accuracy, QAE 344×, …) |
 | **[Campaign arcs since June 2026](docs/campaign-arcs.md)** | Findings 28+ and the F-series, arc by arc: warm-start anchors, noise-is-not-a-resource kills, placement-beats-gate-count (F57–F70), toric-code replication, financial QAE depth boundary + calibration-window lottery (F78–F81), quantum-IIT bridge, the ⭐ quantum-switch arc (F73–F77 witness chain → F82–F86 bound beats), and the communication-primitives arc (F87) with figures |
 | **[Methodology & validation](docs/methodology-and-validation.md)** | Autonomous-network methodology, pre-registration discipline, Pearl causal framing, budget, cross-validation anchors, limitations and caveats |
@@ -124,7 +125,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
 │   ├── next-steps-and-open-questions.md ← actionable rules + strategic frontier + ORQs
 │   ├── bridges-to-compute-advantage-whisper-c4522.md ← the 3-bridges strategy synthesis
 │   ├── ico-applications-roadmap-whisper-c4527.md     ← what the certified switch can do next
-│   ├── pearl-bridge-paper-draft.md                   ← paper draft (causal-inference audience)
+│   ├── beyond-the-ladder.md                          ← ★ the full technical argument (causal-inference readers)
 │   └── hardware-substrate.md    ← Heron-r2 physical architecture primer
 └── sources/
     └── references.md            ← peer-reviewed and primary sources (cited inline in findings)

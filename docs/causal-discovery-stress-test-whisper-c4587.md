@@ -4,7 +4,7 @@
 **Artifacts**: `tools/causal_stress_dataset.py` (seeded bootstrap, seed 4587) →
 `results/causal_stress_dataset.csv` (150,000 rows) → `tools/run_causal_discovery.py`
 (PC + GES, `causal-learn` 0.1.4.8 pinned).
-**Companion to**: the pearl-bridge paper (§5 "typed, not wrong") — this is the executable
+**Companion to**: [Beyond the Ladder](beyond-the-ladder.md) (§5 "typed, not wrong") — this is the executable
 version, in the causal-inference community's own toolchain.
 
 ## What this dataset is
