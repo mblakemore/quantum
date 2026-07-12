@@ -1,0 +1,105 @@
+{
+ "experiment": "exp109-superdense-coding",
+ "cycle": "C4590-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp109",
+ "prereg": "experiments/exp109-superdense-coding-preregistration.md",
+ "gates": {
+  "G1_win_floor": 0.55,
+  "G2_null_band": 0.03,
+  "G3_sentinel_floor": 0.95
+ },
+ "prefiled_expectation": [
+  0.93,
+  0.97
+ ],
+ "shuffle_seed": 4590,
+ "pair": [
+  147,
+  148
+ ],
+ "pair_cost": 0.007531808029079989,
+ "job_id": "d99fidd2su3c739kcv80",
+ "metas": [
+  {
+   "label": "sent_00",
+   "kind": "sentinel",
+   "prep": "00",
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "null_01",
+   "kind": "null",
+   "message": "01",
+   "shots": 4000,
+   "twoq": 1,
+   "depth": 9
+  },
+  {
+   "label": "main_10",
+   "kind": "main",
+   "message": "10",
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "main_11",
+   "kind": "main",
+   "message": "11",
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 17
+  },
+  {
+   "label": "null_10",
+   "kind": "null",
+   "message": "10",
+   "shots": 4000,
+   "twoq": 1,
+   "depth": 9
+  },
+  {
+   "label": "null_00",
+   "kind": "null",
+   "message": "00",
+   "shots": 4000,
+   "twoq": 1,
+   "depth": 8
+  },
+  {
+   "label": "main_01",
+   "kind": "main",
+   "message": "01",
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "main_00",
+   "kind": "main",
+   "message": "00",
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 15
+  },
+  {
+   "label": "null_11",
+   "kind": "null",
+   "message": "11",
+   "shots": 4000,
+   "twoq": 1,
+   "depth": 10
+  },
+  {
+   "label": "sent_11",
+   "kind": "sentinel",
+   "prep": "11",
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 2
+  }
+ ]
+}
