@@ -84,6 +84,16 @@ ROWS = [
          family="amplitude", depth=3, delays=False, ideal=0.1250, preview=0.1275,
          measured=0.1140, sent_hw=None, sent_prev=None,
          source="exp111_S_previews.json + exp111_grade.json (label-avg depth 2-4)"),
+    # ---- routing arc (Exp110, C4597) ----
+    dict(exp="exp110 swap N=6", observable="mean 4-prep survival",
+         family="probability", depth=18, delays=False, ideal=1.0, preview=0.9644,
+         measured=0.9452, sent_hw=None, sent_prev=None,
+         source="exp110_grade.json (good window; model GOOD for unitary routing)"),
+    dict(exp="exp110 teleport N=6", observable="mean 4-prep survival (feedforward)",
+         family="probability+feedforward", depth=12, delays=False, ideal=1.0,
+         preview=0.9237, measured=0.7477, sent_hw=None, sent_prev=None,
+         source="exp110_grade.json — FIRST feedforward row: +0.212 ln = the unmodeled "
+                "feedforward-latency cost; largest observable-family gap in the atlas"),
     # ---- comms arc ----
     dict(exp="exp109 superdense", observable="p_success (4-msg decode)",
          family="probability", depth=2, delays=False, ideal=1.0, preview=0.9794,

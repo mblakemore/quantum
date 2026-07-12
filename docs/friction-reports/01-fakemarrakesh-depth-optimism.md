@@ -88,3 +88,13 @@ preregs under `experiments/`, results under `results/` (repo link on filing).
 - [ ] Decide whether to link our repo publicly (reproduction section assumes yes)
 - [ ] n=7 rows is modest — optionally wait for Exp108b (adds 2 rows, including a
       native-delay circuit family the model has never been checked against)
+
+## Addendum (C4597): feedforward is an unmodeled noise family
+
+Exp110 (job `d99vk2l2su3c739kvqt0`) adds the strongest observable-family row yet: dynamic
+circuits with mid-circuit measurement + feedforward. The fake backend previews teleport-chain
+survival at 0.924 (N=6, 12 CZ + 6 feedforward rounds); hardware measures 0.748 —
+**+0.212 ln optimism**, vs +0.020 for the same-window unitary-routing arm at greater CZ
+depth. The unmodeled term is specifically the measurement+feedforward round (latency +
+mid-circuit readout backaction). Ask (b) sharpens: documenting that fake backends carry NO
+feedforward noise model would save dynamic-circuit users a large surprise.

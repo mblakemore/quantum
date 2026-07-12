@@ -192,6 +192,38 @@
    "optimism_ln": 0.1119179162039854
   },
   {
+   "exp": "exp110 swap N=6",
+   "observable": "mean 4-prep survival",
+   "family": "probability",
+   "depth": 18,
+   "delays": false,
+   "ideal": 1.0,
+   "preview": 0.9644,
+   "measured": 0.9452,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "exp110_grade.json (good window; model GOOD for unitary routing)",
+   "ratio_preview": 0.9644,
+   "ratio_hw": 0.9452,
+   "optimism_ln": 0.020109600994263153
+  },
+  {
+   "exp": "exp110 teleport N=6",
+   "observable": "mean 4-prep survival (feedforward)",
+   "family": "probability+feedforward",
+   "depth": 12,
+   "delays": false,
+   "ideal": 1.0,
+   "preview": 0.9237,
+   "measured": 0.7477,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "exp110_grade.json \u2014 FIRST feedforward row: +0.212 ln = the unmodeled feedforward-latency cost; largest observable-family gap in the atlas",
+   "ratio_preview": 0.9237,
+   "ratio_hw": 0.7477,
+   "optimism_ln": 0.21138551559269442
+  },
+  {
    "exp": "exp109 superdense",
    "observable": "p_success (4-msg decode)",
    "family": "probability",
@@ -215,8 +247,8 @@
    "spread": 0.10103596917465084
   },
   "mid (9-50 CZ)": {
-   "n": 4,
-   "mean": 0.10329066421829028,
+   "n": 6,
+   "mean": 0.1074429622433531,
    "spread": 0.2227192381647439
   },
   "deep (>50 CZ)": {
