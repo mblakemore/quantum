@@ -924,6 +924,17 @@
    "sim_only": false,
    "single_run": true,
    "evidence": "fresh finding (numbered Ember C4125, graded Whisper C4597): single hardware run exp110 on ibm_marrakesh; headline claim = ordering swap > teleport at every tested N<=6 (generation-bounded scope stated in-doc); the ~5-6x per-hop cost ratio is a magnitude sub-claim (single-window caveat); results/exp110_grade.json"
+  },
+  {
+   "id": "F91",
+   "file": "F91-exp112-bell-violation-survives-two-swap-stations-repeater-primitive-whisper-c4598-c4599-ember-numbered-c4126.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4126, graded Whisper C4599): single hardware run exp112 on ibm_marrakesh; headline = existence of CHSH violation through k=2 swap stations (frame arm, >=15sigma over exact bound 2); frame-vs-active gap and the active-k=1 anomaly are sub-claims (Exp112b follow-up flagged); results/exp112_grade.json"
   }
  ]
 }
