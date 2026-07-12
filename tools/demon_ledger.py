@@ -51,7 +51,9 @@ def temp_of(p1):
 
 
 def ledger(name, p1_plus, p1_minus, P_plus, p_th):
-    T_res = 1.0 / LN3
+    # bath temperature from the run's own baseline population (kT/E = 1/ln((1-p)/p));
+    # equals 1/ln3 when p_th=0.25 (Exp108), generalizes to hot reservoirs (Exp108c)
+    T_res = temp_of(p_th)
     d_plus = p_th - p1_plus          # cooling depth on + (population below baseline)
     d_minus = p1_minus - p_th        # heating on -
     P_minus = 1 - P_plus
@@ -94,11 +96,16 @@ def ledger(name, p1_plus, p1_minus, P_plus, p_th):
 def main(path):
     g = json.load(open(path))
     p_th = 0.5 * (g["null_fwd"]["p1"] + g["null_rev"]["p1"])
+    th = g["theory"]
+    if "p1p" in th:   # exp108 grade schema
+        th_args = (th["p1p"], th["p1m"], th["Pp"], 0.25)
+    else:             # exp108b/c grade schema (nested +/-)
+        th_args = (th["+"]["p1"], th["-"]["p1"], th["+"]["P"],
+                   0.5 * (g["p_a"] + g["p_b"]))
     rows = [
         ledger("measured", g["switch"]["+"]["p1"], g["switch"]["-"]["p1"],
                g["switch"]["+"]["P"], p_th),
-        ledger("theory", g["theory"]["p1p"], g["theory"]["p1m"],
-               g["theory"]["Pp"], 0.25),
+        ledger("theory", *th_args),
     ]
     print(json.dumps({"source": path, "ledger": rows}, indent=1))
     m = rows[0]

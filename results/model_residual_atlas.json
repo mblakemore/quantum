@@ -144,6 +144,22 @@
    "optimism_ln": 0.050990385079034424
   },
   {
+   "exp": "exp108c retention (WIN run)",
+   "observable": "retention P(c=+,t=0)",
+   "family": "probability",
+   "depth": 22,
+   "delays": true,
+   "ideal": 1.0,
+   "preview": 0.9555,
+   "measured": 0.9425,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "exp108c_grade.json (good window: mean of 3 replicates 0.940-0.951)",
+   "ratio_preview": 0.9555,
+   "ratio_hw": 0.9425,
+   "optimism_ln": 0.013698844358161927
+  },
+  {
    "exp": "exp109 superdense",
    "observable": "p_success (4-msg decode)",
    "family": "probability",
@@ -167,9 +183,9 @@
    "spread": 0.07153344569424339
   },
   "mid (9-50 CZ)": {
-   "n": 3,
-   "mean": 0.13315460417166639,
-   "spread": 0.18542769744387141
+   "n": 4,
+   "mean": 0.10329066421829028,
+   "spread": 0.2227192381647439
   },
   "deep (>50 CZ)": {
    "n": 2,

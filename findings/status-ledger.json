@@ -874,12 +874,12 @@
    "id": "F86",
    "file": "F86-exp108-ico-refrigeration-resource-whisper-c4561-ember-numbered-c4121.md",
    "claim_type": "existence",
-   "status": "UNTESTED",
-   "retested": false,
-   "retest_ref": null,
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "results/exp108c_grade.json",
    "sim_only": false,
    "single_run": false,
-   "evidence": "Exp108b retest attempt graded NO-TEST C4591 (calib gate: T1 drift over ~19h queue pushed reservoir p_B outside frozen band; results/exp108b_grade.json). NO-TEST does not adjudicate F86 \u2014 status stays UNTESTED (retested=False), retest still pending a valid run."
+   "evidence": "Exp108c (C4593): thermal splitting reproduced with SUBSTITUTED working fluid (native T1 decay, hot reservoirs p~0.44): Delta=0.1645+/-0.0127 (12.9sigma), cooling-below-coldest at 5sigma, procedure-theory residual 0.0015. Prior attempt 108b NO-TEST (calib drift) \u2014 did not adjudicate."
   }
  ]
 }

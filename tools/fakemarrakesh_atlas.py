@@ -71,6 +71,10 @@ ROWS = [
          family="probability", depth=22, delays=True, ideal=1.0, preview=0.9555,
          measured=0.908, sent_hw=None, sent_prev=None,
          source="exp108b_feasibility.json + exp108b_grade.json (first delay-bearing row)"),
+    dict(exp="exp108c retention (WIN run)", observable="retention P(c=+,t=0)",
+         family="probability", depth=22, delays=True, ideal=1.0, preview=0.9555,
+         measured=0.9425, sent_hw=None, sent_prev=None,
+         source="exp108c_grade.json (good window: mean of 3 replicates 0.940-0.951)"),
     # ---- comms arc ----
     dict(exp="exp109 superdense", observable="p_success (4-msg decode)",
          family="probability", depth=2, delays=False, ideal=1.0, preview=0.9794,
