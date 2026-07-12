@@ -138,6 +138,18 @@ Two independent "noise actually helps" claims from earlier arcs were killed unde
 
 > *ELI5: Imagine proving that a package was shipped through two sorting centers in BOTH orders at once — not "we don't know which order," but genuinely neither-and-both — and ruling out every mundane explanation, including a mail service that secretly flips a coin each day. That's what these circuits did, on two different real quantum chips, with the statistical strength of a ≥72-sigma result (particle-physics discoveries require 5). The "amount of both-ness" even turns out to be a smooth dial that follows a simple cosine law. One caveat, kept honest: the demonstration certifies the quantum nature of the ORDER, not a computational speedup from it. And one proposed follow-up check was withdrawn by its own author after proving it was circular — a test that cannot fail proves nothing.*
 
+### Communication primitives — first fill of the comms white space (F87)
+
+**Plain English**: a C4588 survey re-read the whole repo as *communications* research ([comms paths doc](quantum-communication-paths-whisper-c4588.md)) and found a white space — 115 findings, zero standard quantum-communication primitives (no teleportation, no superdense coding, no entanglement swapping). F87 is the first fill, run with the same frozen bound-referenced grading discipline as the causal arc.
+
+| Finding | Result | Tier |
+|---|---|---|
+| F87 | **Superdense coding WINS (341σ)**: pre-shared entanglement doubles the classical capacity of one transmitted qubit — p_success = **0.9688 ± 0.0014** over 4 uniform 2-bit messages vs the unassisted-single-qubit ceiling of **exactly 0.5** (computed by the executed null construction, not cited); MI **1.77 bits/qubit** vs null 0.93; null arm 0.4988, dead on the ceiling; measured value IN the pre-filed atlas band [0.93, 0.97]. Scope honest: tutorial-class platform priors credited — the contribution is the frozen grading + executed null + linted gates (two pre-submission catches: a VACUOUS-PASS G1 draft caught by the gate-feasibility linter, and identity-encoding CX·I·CX cancellation caught by the transpile audit — the Exp105 pad lesson recurring) | **HW** marrakesh |
+
+Next in the comms sequence: E2 swap-vs-teleport crossover (Exp110 designed), E1 four-arm ICO-vs-coherent-control resource comparison (theory ratio 3.96 frozen as the hardware target).
+
+> *ELI5: If you and a friend each hold one half of an entangled pair, sending your friend just ONE qubit can deliver TWO full bits of your message — double what a lone qubit is provably allowed to carry. Textbook physics, demonstrated many times before; what's new here is the bookkeeping standard: the "impossible without entanglement" ceiling was computed by actually running the no-entanglement version (it scored exactly at the ceiling, as it must), and the pass/fail rules were frozen — and machine-checked for loopholes — before the quantum computer ever saw the job.*
+
 ---
 
 ![CHSH violation S = 2.74](../images/fig01_chsh.png) ![GHZ sublinear scaling](../images/fig02_ghz_sublinear.png)
