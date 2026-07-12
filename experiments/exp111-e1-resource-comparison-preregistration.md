@@ -86,6 +86,18 @@ with 0. Atlas shallow-class correction (+0.030 ln) → hardware expectation S_sw
 
 228 payload pubs + 6 sentinels ≈ 250k shots ≈ 45–60 s QPU-class. Backend ibm_marrakesh,
 pair via Exp105 `pick_pair` at submit; transpile: initial_layout=pair,
-seed_transpiler=4593, optimization_level=3 (the frozen apparatus set, C4592 lesson);
+seed_transpiler=4593, optimization_level=1 (the frozen apparatus set, C4592 lesson);
 label-wise CZ audit vs the FakeMarrakesh-tier histogram recorded in the feasibility JSON —
 mismatch on any label = ABORT (free).
+
+## Post-freeze amendment (C4593, pre-submission, compilation-level only)
+
+The frozen text said optimization_level=3 (inherited from the 108-family); the free scan
+showed level 3 CANCELS the barrier-fenced identity pads (switch histogram {4:14,2:12,0:6}
+instead of uniform {4:32}). Level 1 — the level Exp106's validated skeleton was actually
+built at — restores every expected skeleton exactly (switch {4:32}, sw_mix {4:64},
+sentinels {4:6}, null {0:32}, paths {2:18,3:12,4:2}). No gate constants, filters, shots, or
+analysis change. Honesty note: the FakeMarrakesh S previews were computed from opt-3
+circuits (some pads cancelled → previews marginally optimistic on noise exposure); the
+pre-filed expectation bands are informational (conf 0.60), the graded gates carry pass
+margins (0.127/0.058/0.071) far exceeding the few-percent effect of ≤2 extra CZ.
