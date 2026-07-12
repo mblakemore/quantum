@@ -1,0 +1,351 @@
+{
+ "experiment": "exp110-swap-vs-teleport",
+ "cycle": "C4596-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp110",
+ "prereg": "experiments/exp110-swap-vs-teleport-preregistration.md",
+ "gates": {
+  "G1_readout_floor": 0.95,
+  "G2_teleport_N1_floor": 0.75,
+  "A_no_crossover_meanD_floor": 0.005,
+  "B_crossover_5se": true
+ },
+ "prefiled_law": {
+  "1": 0.9482,
+  "2": 0.9346,
+  "4": 0.9081,
+  "6": 0.8823
+ },
+ "prefiled_fake_swap": {
+  "1": 0.9912,
+  "2": 0.9882,
+  "4": 0.9559,
+  "6": 0.9644
+ },
+ "prefiled_fake_tele": {
+  "1": 0.9824,
+  "2": 0.9541,
+  "4": 0.9446,
+  "6": 0.9237
+ },
+ "transpile": {
+  "seed": 4596,
+  "opt_level": 1
+ },
+ "shuffle_seed": 4596,
+ "chain": [
+  14,
+  13,
+  12,
+  11,
+  10,
+  9,
+  8,
+  7,
+  6,
+  5,
+  4,
+  3,
+  16
+ ],
+ "chain_cost": 0.09743689049330784,
+ "job_id": "d99vk2l2su3c739kvqt0",
+ "metas": [
+  {
+   "label": "sent_ro_start_0",
+   "kind": "sent",
+   "hops": 0,
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sent_ro_start_1",
+   "kind": "sent",
+   "hops": 0,
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "swap_N2_0",
+   "kind": "swap",
+   "hops": 2,
+   "shots": 3000,
+   "twoq": 6,
+   "depth": 13
+  },
+  {
+   "label": "teleport_N2_+",
+   "kind": "teleport",
+   "hops": 2,
+   "shots": 3000,
+   "twoq": 4,
+   "depth": 25
+  },
+  {
+   "label": "swap_N4_+",
+   "kind": "swap",
+   "hops": 4,
+   "shots": 3000,
+   "twoq": 12,
+   "depth": 30
+  },
+  {
+   "label": "teleport_N4_+i",
+   "kind": "teleport",
+   "hops": 4,
+   "shots": 3000,
+   "twoq": 8,
+   "depth": 38
+  },
+  {
+   "label": "swap_N6_1",
+   "kind": "swap",
+   "hops": 6,
+   "shots": 3000,
+   "twoq": 18,
+   "depth": 40
+  },
+  {
+   "label": "teleport_N6_+",
+   "kind": "teleport",
+   "hops": 6,
+   "shots": 3000,
+   "twoq": 12,
+   "depth": 53
+  },
+  {
+   "label": "teleport_N4_0",
+   "kind": "teleport",
+   "hops": 4,
+   "shots": 3000,
+   "twoq": 8,
+   "depth": 36
+  },
+  {
+   "label": "teleport_N4_1",
+   "kind": "teleport",
+   "hops": 4,
+   "shots": 3000,
+   "twoq": 8,
+   "depth": 37
+  },
+  {
+   "label": "teleport_N2_1",
+   "kind": "teleport",
+   "hops": 2,
+   "shots": 3000,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "swap_N6_0",
+   "kind": "swap",
+   "hops": 6,
+   "shots": 3000,
+   "twoq": 18,
+   "depth": 37
+  },
+  {
+   "label": "swap_N1_0",
+   "kind": "swap",
+   "hops": 1,
+   "shots": 3000,
+   "twoq": 3,
+   "depth": 7
+  },
+  {
+   "label": "swap_N2_1",
+   "kind": "swap",
+   "hops": 2,
+   "shots": 3000,
+   "twoq": 6,
+   "depth": 16
+  },
+  {
+   "label": "swap_N1_1",
+   "kind": "swap",
+   "hops": 1,
+   "shots": 3000,
+   "twoq": 3,
+   "depth": 10
+  },
+  {
+   "label": "teleport_N6_0",
+   "kind": "teleport",
+   "hops": 6,
+   "shots": 3000,
+   "twoq": 12,
+   "depth": 50
+  },
+  {
+   "label": "swap_N6_+",
+   "kind": "swap",
+   "hops": 6,
+   "shots": 3000,
+   "twoq": 18,
+   "depth": 42
+  },
+  {
+   "label": "teleport_N1_0",
+   "kind": "teleport",
+   "hops": 1,
+   "shots": 3000,
+   "twoq": 2,
+   "depth": 15
+  },
+  {
+   "label": "sent_mid_swapN6p0",
+   "kind": "sent",
+   "hops": 6,
+   "shots": 2000,
+   "twoq": 18,
+   "depth": 37
+  },
+  {
+   "label": "swap_N6_+i",
+   "kind": "swap",
+   "hops": 6,
+   "shots": 3000,
+   "twoq": 18,
+   "depth": 39
+  },
+  {
+   "label": "swap_N2_+",
+   "kind": "swap",
+   "hops": 2,
+   "shots": 3000,
+   "twoq": 6,
+   "depth": 18
+  },
+  {
+   "label": "teleport_N2_0",
+   "kind": "teleport",
+   "hops": 2,
+   "shots": 3000,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "teleport_N1_1",
+   "kind": "teleport",
+   "hops": 1,
+   "shots": 3000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "teleport_N2_+i",
+   "kind": "teleport",
+   "hops": 2,
+   "shots": 3000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "teleport_N6_+i",
+   "kind": "teleport",
+   "hops": 6,
+   "shots": 3000,
+   "twoq": 12,
+   "depth": 52
+  },
+  {
+   "label": "swap_N1_+",
+   "kind": "swap",
+   "hops": 1,
+   "shots": 3000,
+   "twoq": 3,
+   "depth": 12
+  },
+  {
+   "label": "teleport_N1_+i",
+   "kind": "teleport",
+   "hops": 1,
+   "shots": 3000,
+   "twoq": 2,
+   "depth": 17
+  },
+  {
+   "label": "teleport_N6_1",
+   "kind": "teleport",
+   "hops": 6,
+   "shots": 3000,
+   "twoq": 12,
+   "depth": 51
+  },
+  {
+   "label": "teleport_N4_+",
+   "kind": "teleport",
+   "hops": 4,
+   "shots": 3000,
+   "twoq": 8,
+   "depth": 39
+  },
+  {
+   "label": "swap_N1_+i",
+   "kind": "swap",
+   "hops": 1,
+   "shots": 3000,
+   "twoq": 3,
+   "depth": 9
+  },
+  {
+   "label": "teleport_N1_+",
+   "kind": "teleport",
+   "hops": 1,
+   "shots": 3000,
+   "twoq": 2,
+   "depth": 18
+  },
+  {
+   "label": "swap_N4_1",
+   "kind": "swap",
+   "hops": 4,
+   "shots": 3000,
+   "twoq": 12,
+   "depth": 28
+  },
+  {
+   "label": "swap_N2_+i",
+   "kind": "swap",
+   "hops": 2,
+   "shots": 3000,
+   "twoq": 6,
+   "depth": 15
+  },
+  {
+   "label": "swap_N4_+i",
+   "kind": "swap",
+   "hops": 4,
+   "shots": 3000,
+   "twoq": 12,
+   "depth": 27
+  },
+  {
+   "label": "swap_N4_0",
+   "kind": "swap",
+   "hops": 4,
+   "shots": 3000,
+   "twoq": 12,
+   "depth": 25
+  },
+  {
+   "label": "sent_ro_end_0",
+   "kind": "sent",
+   "hops": 0,
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sent_ro_end_1",
+   "kind": "sent",
+   "hops": 0,
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 2
+  }
+ ]
+}
