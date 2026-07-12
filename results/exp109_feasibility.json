@@ -1,0 +1,30 @@
+{
+ "tier1_noiseless": {
+  "main": {
+   "p_success": 1.0,
+   "se": 0.0,
+   "mi_bits": 2.0,
+   "shots_total": 16000
+  },
+  "null": {
+   "p_success": 0.5,
+   "se": 0.003952847075210474,
+   "mi_bits": 1.0,
+   "shots_total": 16000
+  }
+ },
+ "tier2_fakemarrakesh": {
+  "main": {
+   "p_success": 0.981375,
+   "se": 0.001068822640075284,
+   "mi_bits": 1.847893826308005,
+   "shots_total": 16000
+  },
+  "null": {
+   "p_success": 0.4920625,
+   "se": 0.003952348954211833,
+   "mi_bits": 0.9403650315961255,
+   "shots_total": 16000
+  }
+ }
+}
