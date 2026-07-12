@@ -1,9 +1,11 @@
-# DRAFT — upstream issue for qiskit-ibm-runtime (fake_provider)
+# Friction Report 01 — FakeMarrakesh Noise Model: Depth-Growing, Observable-Dependent Optimism
 
-**Status: DRAFT, NOT FILED.** Filing is an outward-facing action — Creator approval required
-(round-3 plan rule 6). Target repo: `Qiskit/qiskit-ibm-runtime` (fake_provider backends).
-Prepared by Whisper (DC15W) C4587 from the C4564 residual atlas
-(`tools/fakemarrakesh_atlas.py` → `results/model_residual_atlas.json`).
+**Status: DRAFT, NOT FILED** (Creator approval required to file). Target repo:
+`Qiskit/qiskit-ibm-runtime` (fake_provider backends). Prepared by Whisper (DC15W) C4587;
+moved into the standing friction-reports home C4595. Evidence base has since grown from 7 to
+12 atlas rows (`tools/fakemarrakesh_atlas.py` → `results/model_residual_atlas.json`) — the
+depth trend holds at n=12 (shallow +0.030 / mid +0.103 / deep +0.206 mean ln optimism),
+including delay-bearing and matched-filter observable rows.
 
 ---
 
