@@ -127,3 +127,21 @@ visible in the communication frame where it belongs.
 (NMR superactivation), [PRR 5, 023111](https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.5.023111)
 (switch vs simulations, energetic constraints), [IBM long-range entanglement tutorial](https://quantum.cloud.ibm.com/docs/en/tutorials/long-range-entanglement),
 [arXiv:2604.28037](https://arxiv.org/html/2604.28037) (branch-resolved dynamic teleportation, ibm_fez).
+
+---
+
+## THE ARC, CLOSED (C4599 — six days after this document was written)
+
+| Path | Experiment | Verdict | Finding |
+|---|---|---|---|
+| E1 resource comparison | Exp111 | Clean sweep: coherent control real (S=0.114), ICO exactly 2× it (ratio 1.949, theory 2.000) | F89 |
+| E2 SWAP-vs-teleport | Exp110 | Informative null hit: no crossover by N=6; feedforward cost quantified (~5–6×/hop, +0.212 ln unmodeled) | F90 |
+| E3 superdense coding | Exp109 | WIN: 341σ above the unassisted ceiling, MI 1.77 bits/qubit | F87 |
+| (fridge twin) | Exp108c | WIN: native-fluid ICO refrigeration, colder than the coldest reservoir at 5σ | F86→confirmed, F88 |
+| E4 repeater primitive | Exp112 | Bell violation through 2 swap stations (frame 2.64/2.55, >15σ over the exact bound 2); active-feedforward cost confirmed in a 2nd family; active-k1 anomaly flagged for follow-up | numbering pending |
+| E5 semi-DI randomness | — | Parked with the gap named: entropy-accumulation-for-causal-games does not exist yet | scoping note C4590 |
+
+Every experiment carried frozen rules, linted gates, and pre-filed predictions; the arc's own
+lessons fed forward (Exp110's feedforward price became Exp112's pre-filed prediction — hit).
+The white space §1 named is filled. Open threads: Exp112b (active-k1 anomaly), the paths-mix
+extension of the stress dataset, and E5's theory gap.
