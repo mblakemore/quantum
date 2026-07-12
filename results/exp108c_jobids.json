@@ -1,0 +1,166 @@
+{
+ "experiment": "exp108c-native-thermal-refly",
+ "cycle": "C4592-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp108c",
+ "prereg": "experiments/exp108c-native-thermal-refly-preregistration.md",
+ "gates": {
+  "calib_band": [
+   0.12,
+   0.47
+  ],
+  "retention_min": 0.8,
+  "therm_band": 0.1,
+  "win_floor": 0.06,
+  "cooling": "p1|+ + 5SE < min(p_a, p_b)"
+ },
+ "overrides_vs_108b": {
+  "CALIB_BAND": [
+   0.12,
+   0.47
+  ],
+  "THERM_BAND": 0.1,
+  "SHOTS_NULL": 6000
+ },
+ "shuffle_seed": 4592,
+ "chain": [
+  5,
+  6,
+  7,
+  8
+ ],
+ "layout": [
+  5,
+  7,
+  6,
+  8
+ ],
+ "t1_us": {
+  "a1_q6": 166.395552044954,
+  "a2_q8": 111.93520557777757
+ },
+ "delays_us": {
+  "a1": 230.67321551535102,
+  "a2": 155.17514430326875
+ },
+ "calibration_report": {
+  "5": {
+   "T1_us": 230.76974030843957,
+   "readout": 0.0048828125
+  },
+  "6": {
+   "T1_us": 166.395552044954,
+   "readout": 0.004150390625
+  },
+  "7": {
+   "T1_us": 256.3788532002067,
+   "readout": 0.0048828125
+  },
+  "8": {
+   "T1_us": 111.93520557777758,
+   "readout": 0.01025390625
+  },
+  "cz(5, 6)": 0.003487755568145262,
+  "cz(6, 7)": 0.001543569267942052,
+  "cz(7, 8)": 0.002425849971997851
+ },
+ "job_id": "d99qjmt2su3c739kq9n0",
+ "metas": [
+  {
+   "label": "sent_start_retention",
+   "kind": "sentinel",
+   "replicate": "start",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "null_rev_t1",
+   "kind": "null_rev",
+   "t0": 1,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "null_fwd_t1",
+   "kind": "null_fwd",
+   "t0": 1,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "switch_t0",
+   "kind": "switch",
+   "t0": 0,
+   "shots": 3000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "switch_t1",
+   "kind": "switch",
+   "t0": 1,
+   "shots": 3000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "sent_mid_retention",
+   "kind": "sentinel",
+   "replicate": "mid",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "sent_mid_deconull",
+   "kind": "sentinel",
+   "replicate": "mid",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "null_rev_t0",
+   "kind": "null_rev",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "null_fwd_t0",
+   "kind": "null_fwd",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "calib_b",
+   "kind": "calib_b",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "calib_a",
+   "kind": "calib_a",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "sent_end_retention",
+   "kind": "sentinel",
+   "replicate": "end",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  }
+ ]
+}
