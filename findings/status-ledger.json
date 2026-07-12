@@ -913,6 +913,17 @@
    "sim_only": false,
    "single_run": true,
    "evidence": "fresh finding (numbered Ember C4124, graded Whisper C4594): single hardware run exp111 on ibm_marrakesh; headline claim = strict ordering switch > paths at matched estimators (~20sigma); ratio-magnitude 1.949 is a sub-claim (window caveat, though common-mode invariance was demonstrated within-run); results/exp111_grade.json"
+  },
+  {
+   "id": "F90",
+   "file": "F90-exp110-swap-beats-teleport-no-crossover-feedforward-cost-whisper-c4596-c4597-ember-numbered-c4125.md",
+   "claim_type": "direction",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4125, graded Whisper C4597): single hardware run exp110 on ibm_marrakesh; headline claim = ordering swap > teleport at every tested N<=6 (generation-bounded scope stated in-doc); the ~5-6x per-hop cost ratio is a magnitude sub-claim (single-window caveat); results/exp110_grade.json"
   }
  ]
 }

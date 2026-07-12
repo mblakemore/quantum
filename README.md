@@ -42,7 +42,7 @@ Eight arcs of operational discoveries about real NISQ hardware, each detailed in
 - **Noise structure**: the dominant CZ noise is Z-biased and structured (X-basis readout is measurably cleaner — magnitude substrate-dependent, mechanism replicated); "noise as a computational resource" was tested and killed under controls (F55–F56).
 - **Calibration reality**: ±7pp daily drift; deep-circuit quality is a *window lottery* — detectable by same-depth sentinels in-run, not forecastable from calibration age (F81, F84) — and the noise-model's optimism grows with depth (the measured depth-decay law in the spec).
 - **What works today**: VQE hit chemical accuracy on H₂; amplitude-estimation readout recovered a 344× precision gain via multi-k MLE — with a mapped depth boundary for financial-scale loaders (F51, F54, F78–F79).
-- **Communication primitives**: the comms white space opened — superdense coding graded WIN at **341σ** above the exactly-0.5 unassisted ceiling (p=0.9688, MI 1.77 bits/qubit, executed no-entanglement null dead on the ceiling; F87 — tutorial-class priors credited, the contribution is the frozen bound-referenced grading).
+- **Communication primitives**: the comms white space opened — superdense coding graded WIN at **341σ** above the exactly-0.5 unassisted ceiling (p=0.9688, MI 1.77 bits/qubit, executed no-entanglement null dead on the ceiling; F87 — tutorial-class priors credited, the contribution is the frozen bound-referenced grading). And the first dynamic-circuit result: **SWAP beats teleportation at every hop count through N=6** (F90, the pre-filed informative null at 66σ) — feedforward *works* (0.947 integrity) but costs ~5–6× per hop, giving the routing rule *unitary SWAP through ≥6 hops on current Heron* and the atlas's first feedforward-latency row (fake backends model no feedforward noise, +0.212 ln).
 - **Side quest**: integrated-information (Φ) of quantum systems follows a clean size law and ignores the number-theoretic structure that dominates its classical counterpart (quantum-IIT arc).
 
 **Orientation numbers**: ~100 experiments · 3 real Heron chips + a noise-model sim tier ·
@@ -60,7 +60,7 @@ Plain-English version of everything: **[ELI5_SUMMARY.md](ELI5_SUMMARY.md)** (sel
 | **[Beyond the Ladder](docs/beyond-the-ladder.md)** ★ | The full technical argument, written for causal-inference readers and sibling-reviewed to journal standard: why the switch results sit outside what structural causal models can express — "do-calculus is not wrong; it is typed" — with the executed classical-control arms and the Exp111 switch-vs-coherent-control verdict (ratio 1.949, theory 2.0). The repo-native publication. |
 | **[Friction reports](docs/friction-reports/README.md)** | Standing, data-backed reports of platform/tooling issues we hit (paste-ready if we ever file them): FakeMarrakesh depth-optimism (12-row atlas), published-T1 bias (+38–69%, 2/2 runs, queue-independent), calibration blind to window quality. Grows as we go. |
 | **[Findings 1–27 catalog](docs/findings-catalog.md)** | Arc-1 characterization + QAOA/optimizer arcs: headline table + plain-English one-liner per finding (CHSH 2.74, X-basis immunity, the ~1000-CZ wall, QEC ancilla tax, mitigation failures, VQE chemical accuracy, QAE 344×, …) |
-| **[Campaign arcs since June 2026](docs/campaign-arcs.md)** | Findings 28+ and the F-series, arc by arc: warm-start anchors, noise-is-not-a-resource kills, placement-beats-gate-count (F57–F70), toric-code replication, financial QAE depth boundary + calibration-window lottery (F78–F81), quantum-IIT bridge, the ⭐ quantum-switch arc (F73–F77 witness chain → F82–F89 bound beats, native-fluid retest, and the ICO-vs-coherent-control resource separation), and the communication-primitives arc (F87) with figures |
+| **[Campaign arcs since June 2026](docs/campaign-arcs.md)** | Findings 28+ and the F-series, arc by arc: warm-start anchors, noise-is-not-a-resource kills, placement-beats-gate-count (F57–F70), toric-code replication, financial QAE depth boundary + calibration-window lottery (F78–F81), quantum-IIT bridge, the ⭐ quantum-switch arc (F73–F77 witness chain → F82–F89 bound beats, native-fluid retest, and the ICO-vs-coherent-control resource separation), and the communication-primitives arc (F87, F90) with figures |
 | **[Methodology & validation](docs/methodology-and-validation.md)** | Autonomous-network methodology, pre-registration discipline, Pearl causal framing, budget, cross-validation anchors, limitations and caveats |
 | **[Next steps & open questions](docs/next-steps-and-open-questions.md)** | What you can use today (7 actionable rules), the strategic frontier (P1 noise-as-resource RESOLVED-NEGATIVE, P2 causal order DELIVERED, P3 replication audit), and the ORQ list with live statuses |
 | **[ELI5_SUMMARY.md](ELI5_SUMMARY.md)** | The whole campaign in plain English, shareable (§17 the game, §18 the two walls) |
@@ -107,7 +107,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
 ├── full-report.md               ← Arc-1 synthesis (the deep-research source doc)
 ├── findings/                    ← one-per-discovery deep dives (~80 files)
 │   ├── 01…44-*.md               ← the core numbered line (Findings 41–43 under exp-named files)
-│   ├── F48…F89-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
+│   ├── F48…F90-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
 │   ├── finding-25/26/46/47…     ← quantum-IIT arc side numbering (25/26 here ≠ QAOA Findings 25/26!)
 │   └── exp*-*.md                ← interim findings, integrity audits, closure notes
 ├── images/                      ← figures (PNG), reproducible from scripts/generate_figures.py
@@ -134,7 +134,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
     └── references.md            ← peer-reviewed and primary sources (cited inline in findings)
 ```
 
-**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F89 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
+**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F90 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
 
 ---
 
