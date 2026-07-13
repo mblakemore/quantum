@@ -1240,6 +1240,29 @@
      "evidence": "gate-feasibility linter caught it VACUOUS pre-freeze, fixed to entanglement-dead; executed null resulted at 0.657 coin-flip-class (C4657/C4662 self-catch)."
     }
    ]
+  },
+  {
+   "id": "F107",
+   "file": "F107-exp128-pocket-dictionary-2to1-qrac-two-sided-band-whisper-c4667-ember-numbered-c4148.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp128 on ibm_marrakesh (numbered Ember C4148, graded Whisper C4667): 2->1 QRAC (two bits in one qubit, either retrievable) CERTIFIED in the two-sided band -- pooled 0.84893+/-0.00090 = 110.5sigma above the enumerated classical ceiling 0.75 (256 strategy pairs) AND 5.2sigma below the quantum optimum cos^2(pi/8)=0.8536; proc-theory residual 0.0046; W2 min-case 0.84325 (36.3sigma); executed optimal-classical arm 0.74818 (0.2pp under its own 0.75 law); sentinels 0.998/0.995; all 5 gates PASS (incl G_QBAND: exceeding quantum law = NO-TEST not win); preds 0.95/0.90 hit. FIRST zero-2q-gate ADVANTAGE flight. Comms ladder F87(341)+F106(196)+F107(110). results/exp128_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "the executed optimal-classical arm respects its own 0.75 law on the same chip/window",
+     "status": "CONFIRMED",
+     "evidence": "class arm 0.74818, 0.2pp under 0.75 -- both laws honored same window, only the quantum player crosses the classical line (the adversarial control, executed not assumed)."
+    },
+    {
+     "claim": "the FakeMarrakesh noise-model optimism sign is fixed across depth",
+     "status": "REFUTED",
+     "evidence": "fake PESSIMISTIC by 0.4pp here (0-CZ) vs OPTIMISTIC 0.9pp at Exp126 depth -> the noise-model optimism crossover sits between 0 and ~2 CZ; new shallow-end atlas anchor."
+    }
+   ]
   }
  ],
  "rubric_v2": {
