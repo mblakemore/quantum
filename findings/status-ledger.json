@@ -1049,6 +1049,24 @@
    "sim_only": false,
    "single_run": true,
    "evidence": "fresh finding (numbered Ember C4134, graded Whisper C4635): single hardware run exp118 on ibm_marrakesh; headline = existence of certified schedule-symmetry (nominally-parallel CZ scheduling carries no hidden effective ordering; hotspot D_order 0.0123 certified <=0.0303 vs floor 0.0223, control symmetric, guard clean). type_basis: existence of the symmetry certification; order-INDEPENDENCE reading also valid (output independent of A/B order); certified bound <=0.0303 = reported magnitude figure of merit. results/exp118_grade.json"
+  },
+  {
+   "id": "F97",
+   "file": "F97-exp119b-certified-negative-local-energy-coherent-extraction-whisper-c4641-c4642-ember-numbered-c4135.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4135, graded Whisper C4642): single hardware run exp119b on ibm_marrakesh; headline = existence of certified sub-ground-state (negative) LOCAL energy via COHERENT extraction (corrected E_B -0.0547+/-0.0046, 12sigma below local ground; 5sigma certified bound <=-0.0319, one-sided conservative; V3 correlation-control 21sigma). Certified bound = magnitude figure of merit (composite-floor). SCOPE: NOT LOCC energy teleportation (parent Exp119 = FAIL-EXISTENCE C4640, the 0.092 E feedforward tax stands). F82 retest pattern (disclosed pro-hypothesis selection -> fresh-data certification, came back deeper). results/exp119b_grade.json",
+   "subclaims": [
+    {
+     "claim": "LOCC quantum energy teleportation (classical-feedforward-controlled extraction) drives local energy below ground",
+     "status": "REFUTED",
+     "evidence": "parent Exp119 (results/exp119_grade.json, C4640): FAIL-EXISTENCE as frozen, no softening (P1/P2c missed); classical feedforward latency tax 0.092 E of target decoherence ate the 0.115 E budget (friction 05). The certified F97 claim is COHERENT extraction only, strictly weaker."
+    }
+   ]
   }
  ],
  "rubric_v2": {
