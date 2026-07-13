@@ -1,0 +1,92 @@
+{
+ "instances": {
+  "2x2": {
+   "n": 4,
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "b": [
+    1,
+    0,
+    0,
+    1
+   ],
+   "Lq_size": 4,
+   "valid_z": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     1,
+     1,
+     1,
+     1
+    ]
+   ],
+   "P_valid_noiseless": 1.0,
+   "support_valid": true,
+   "cz_layers_logical": 2,
+   "P_valid_fake": 0.96305,
+   "routed_2q_fake": 10,
+   "depth_fake": 18
+  }
+ },
+ "depth_ladder": {
+  "2x2": {
+   "n": 4,
+   "edges": 4,
+   "cz_layers": 2
+  },
+  "2x3": {
+   "n": 6,
+   "edges": 7,
+   "cz_layers": 3
+  },
+  "3x3": {
+   "n": 9,
+   "edges": 12,
+   "cz_layers": 4
+  },
+  "3x4": {
+   "n": 12,
+   "edges": 17,
+   "cz_layers": 4
+  },
+  "4x4": {
+   "n": 16,
+   "edges": 24,
+   "cz_layers": 4
+  }
+ },
+ "design_valid": true
+}
