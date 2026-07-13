@@ -1401,6 +1401,47 @@
           "evidence": "W3_COVERAGE: all four valid z sampled near-uniformly (~0.225 each, min 0.2229 > 0.08 floor) — the quantum-natural property a trivial output-one-fixed-valid-z shortcut cannot reproduce; the law-the-rate-cannot-fake discipline (F98/F101/F108 lineage) applied to a computational output."
         }
       ]
+    },
+    {
+      "id": "F114",
+      "file": "F114-exp134-hlf-solver-nisq-boundary-ladder-persists-n9-graceful-erosion-whisper-c4675-ember-numbered-c4157.md",
+      "claim_type": "scaling",
+      "status": "UNTESTED",
+      "retested": false,
+      "retest_ref": null,
+      "sim_only": false,
+      "single_run": true,
+      "evidence": "HW run exp134 on ibm_marrakesh (job d9amsd66hjac73felmmg, opus-4-8; numbered Ember C4157, graded Whisper C4675). NISQ-boundary ladder for the F113 computational-genre 2D-HLF solver: climbs n=4/6/9, PERSISTS above strong-majority at every rung. P(valid) ladder 0.9339 (550sigma over floor 0.25) / 0.8739 (376sigma) / 0.7205 (265sigma over floor 0.125); routed 2q 10->16->39 but logical CZ-layers only 2->3->4 (O(1) plateau); n*(majority)=NONE, n*(floor)=NONE. FINDING: constant-depth advantage erodes GRACEFULLY not inverts — opposite of F85 inversion, kin to F109 persisting ladder; logical depth is the discriminator; NISQ reach >= n=9/39 CZ/depth 50 at 72% valid. Same F113 honesty fence (asymptotic separation, not on-chip QNC0!=NC0). Sentinels 0.97875/0.91425. results/exp134_hw_results.json",
+      "subclaims": [
+        {
+          "claim": "W_BOUNDARY: n=9 drops below strong-majority",
+          "status": "REFUTED",
+          "evidence": "HONEST MISS kept in record: pre-filed sub-majority at n=9 (conf 0.78), held at 0.7205 (majority). The solver is more NISQ-robust than the routed-gate-count intuition predicted — shallow Clifford+S logical core stays far below the scrambling wall even routed, and readout noise only LOWERS P(valid) so 0.72 is a conservative floor. Over-estimating fragility = the good direction of surprise."
+        },
+        {
+          "claim": "joint-readout G_SENT thresholds must scale per-qubit (q1^n) not flat",
+          "status": "CONFIRMED",
+          "evidence": "the 9-qubit all-ones sentinel read 0.9143 < flat 0.95 bar, but 0.99^9=0.9135 = the joint-readout floor for ~1% per-qubit error, NOT a bad window; |0..0> 0.9788 vs |1..1> 0.9143 re-confirms asymmetric-readout finding. Reusable calibration correction."
+        }
+      ]
+    },
+    {
+      "id": "F115",
+      "file": "F115-exp135-chsh-witness-53sigma-three-tier-randomness-scope-correction-di-quarantine-whisper-c4676-ember-numbered-c4158.md",
+      "claim_type": "existence",
+      "status": "UNTESTED",
+      "retested": false,
+      "retest_ref": null,
+      "sim_only": false,
+      "single_run": true,
+      "evidence": "HW run exp135 on ibm_marrakesh (job d9an47mg26ic73dev0s0, opus-4-8; numbered Ember C4158, graded Whisper C4676). Certified-randomness audit frontier (d). A 53sigma CHSH quantum-behavior WITNESS: S=2.7522+/-0.0141 = 53.19sigma over the LHV bound 2 (97.3% of Tsirelson 2.8284; W2 honesty 2.7522<2.8284), no-entanglement null S=0.036 (dead). All 4 gates PASS; pre-filed band [2.65,2.78] HIT; sentinels 0.995/0.988. THE CONTRIBUTION is the corrected SCOPE (advisor save before freeze): what an on-chip CHSH violation does/does not certify about randomness, in 3 explicitly-separated tiers — (1) WITNESS gated: device is quantum, mimic excluded; (2) TRUSTED-DEVICE: Born 1 bit/qubit usable ONLY under device-trust, CHSH is health-check not source; (3) DI number 0.5928 bits/use QUARANTINED to a labeled counterfactual because no-signaling is UNMET on one shared-control chip (a deterministic device can output S=2sqrt2 at ZERO entropy). NO certified-bits gate frozen. Categorically stronger honesty than F101/F107 (which qualified interpretation of a real effect) — here the DI quantity ITSELF evaporates without no-signaling. results/exp135_hw_results.json",
+      "subclaims": [
+        {
+          "claim": "DI-randomness quarantine: 0.5928 bits/use is a tier-3 counterfactual, not a certificate (no-signaling unmet on one chip)",
+          "status": "REPORTED_NOT_GATED",
+          "evidence": "advisor caught a ~0.57-bits/use overclaim before freeze — the DI H_min bound requires no-signaling between sites, not enforced on one shared control/calibration/readout chip; a deterministic classical device with shared control can output S=2sqrt2 at zero entropy. Quarantined (not gated, not qualified). Honest next step: a real semi-DI certificate needs a steering/dimension-bounded protocol with its own bound."
+        }
+      ]
     }
   ],
   "rubric_v2": {

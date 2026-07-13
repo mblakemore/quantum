@@ -72,7 +72,7 @@ The natural opposite of the no-go games: those certify a classical/causal limit 
 
 ### The computational scoreboard — the shallow-circuit separation, on silicon (a *different kind* of result)
 
-The one scoreboard the campaign had **not** touched, opened — but honestly, and it is not the same currency as the bound-beats above. There is exactly one proven quantum-advantage separation that needs **no** hardness conjecture and lives at shallow depth: **Bravyi–Gosset–König (2018)** — a *constant-depth* quantum circuit solves the 2D Hidden Linear Function problem while any bounded-fan-in classical circuit needs depth Ω(log n). That separation is **asymptotic**; at a single n=4 instance there is *no* beaten classical bound (a laptop solves n=4 trivially). So this certifies the theorem's **apparatus running on silicon**, not an advantage margin — the honest complement to F54's measured deep-circuit wall, and distinct from a raw speedup (still depth-walled).
+The one scoreboard the campaign had **not** touched, opened — but honestly, and it is not the same currency as the bound-beats above. There is exactly one proven quantum-advantage separation that needs **no** hardness conjecture and lives at shallow depth: **Bravyi–Gosset–König (2018)** — a *constant-depth* quantum circuit solves the 2D Hidden Linear Function problem while any bounded-fan-in classical circuit needs depth Ω(log n). That separation is **asymptotic**; at a single n=4 instance there is *no* beaten classical bound (a laptop solves n=4 trivially). So this certifies the theorem's **apparatus running on silicon**, not an advantage margin — the honest complement to F54's measured deep-circuit wall, and distinct from a raw speedup (still depth-walled). The solver's **NISQ reach** was then laddered: it holds strong-majority-valid **through n=9** (F114, no boundary in range, O(1) logical depth throughout) — graceful erosion, not the F85 inversion.
 
 | Result | Number | Where |
 |---|---|---|
@@ -217,7 +217,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
     └── references.md            ← peer-reviewed and primary sources (cited inline in findings)
 ```
 
-**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F113 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
+**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F115 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
 
 ---
 
