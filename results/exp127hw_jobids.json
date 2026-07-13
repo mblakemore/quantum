@@ -1,0 +1,88 @@
+{
+ "experiment": "exp127hw-bgk-hlf-solver",
+ "cycle": "C4674-whisper",
+ "substrate": "claude-opus-4-8",
+ "backend": "ibm_marrakesh",
+ "tag": "exp127hw",
+ "finding": "experiments/exp127-bgk-hlf-sim-finding-whisper-c4673.md",
+ "instance": {
+  "grid": "2x2",
+  "edges": [
+   [
+    0,
+    1
+   ],
+   [
+    0,
+    2
+   ],
+   [
+    1,
+    3
+   ],
+   [
+    2,
+    3
+   ]
+  ],
+  "b": [
+   1,
+   0,
+   0,
+   1
+  ]
+ },
+ "valid_z": [
+  [
+   0,
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   1,
+   0
+  ],
+  [
+   1,
+   0,
+   0,
+   0
+  ],
+  [
+   1,
+   1,
+   1,
+   1
+  ]
+ ],
+ "uniform_floor": 0.25,
+ "gates": {
+  "W1_SOLVER": "P_valid > 0.25 + 5se",
+  "W2_MAJORITY": "P_valid > 0.5 + 5se",
+  "W3_COVERAGE": "all 4 valid_z prob > 0.08",
+  "G_SENT": 0.95
+ },
+ "prefiled_expectation": {
+  "P_valid_fake": 0.963,
+  "P_valid_hw": [
+   0.82,
+   0.93
+  ]
+ },
+ "chain": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "routed_2q": 10,
+ "hw_depth": 23,
+ "sentinel_order": [
+  "0000",
+  "1111"
+ ],
+ "job_id": "d9amnlvu62qs738o8nt0"
+}
