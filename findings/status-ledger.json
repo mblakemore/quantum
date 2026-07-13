@@ -1355,6 +1355,29 @@
           "evidence": "DFS provides NO net protection (DFS/bare 0.291 < 1, as predicted null 0.75) BUT sits 1.9x above the fake independent-noise floor 0.15 -> a real spatial/collective correlated fraction exists. Confound-breaker held: memoryless fake cannot show correlation; hardware moved BOTH metrics toward correlation."
         }
       ]
+    },
+    {
+      "id": "F112",
+      "file": "F112-exp133-transporters-exam-three-axis-bench-portability-device-independent-court-whisper-c4672-ember-numbered-c4154.md",
+      "claim_type": "existence",
+      "status": "UNTESTED",
+      "retested": false,
+      "retest_ref": null,
+      "sim_only": false,
+      "single_run": true,
+      "evidence": "HW run exp133 on ibm_kingston (FOREIGN Heron-r2 chip the full bench never saw; job d9amd73v6alc73cs0lp0, 77 pubs, 208k shots, substrate opus-4-8; numbered Ember C4154, graded Whisper C4672). PORTABILITY/DEVICE-INDEPENDENCE proof of the three-axis switch-bench: all 3 axes PASS against the SAME frozen bounds (theory constants + F96 rules), no retuning. Horizons-3 H6 -> COMPLETES Horizons-3. First TWO-DEVICE comparison card: CAUSAL witness DISC 1.9533+/-0.0224 (marrakesh 1.90, ideal 2.0) / capacity Rbar 0.5245+/-0.0090 (marrakesh 0.5034, ideal 0.5333) / null dead 0.0008; SCHEDULE (F96) hotspot D_order 0.0130 <= bound 0.0297 ORDER-SYMMETRIC (control 0.0052); HOLD (Zeno) tractor sep 0.6487+/-0.0034 (marrakesh 0.624) / QND q 0.9847 (marrakesh 0.987). Extends the F82 cross-device replication (fez, one axis) to the full 3-axis bench. Prediction HIT (all certify, kingston within ~10-20% of ref). Scope: same Heron generation, cross-generation (Eagle) NOT claimed; single window per device (same-instrument not same-instant). results/switch_bench_d9amd73v6alc73cs0lp0_card.json",
+      "subclaims": [
+        {
+          "claim": "device-ranking: kingston is a slightly BETTER causal chip than marrakesh",
+          "status": "CONFIRMED",
+          "evidence": "kingston edges marrakesh on every causal-family number (W 1.9533 vs 1.90, Rbar 0.5245 vs 0.5034, hold sep 0.649 vs 0.624), ties on QND (0.9847 vs 0.987) + schedule-symmetry — the bench ranks devices on axes QV/CLOPS/EPLG do not touch."
+        },
+        {
+          "claim": "frozen site-selection rules re-derive LIVE on the foreign map (the portability mechanism)",
+          "status": "CONFIRMED",
+          "evidence": "deterministic live-map selection re-solved on kingston (causal pair (10,11), hold qubit 11, schedule sites chosen at free scan) untouched — the same machinery that adapted to marrakesh drift at C4660; portability is a re-solving rule, not a layout coincidence."
+        }
+      ]
     }
   ],
   "rubric_v2": {
