@@ -1442,6 +1442,29 @@
           "evidence": "advisor caught a ~0.57-bits/use overclaim before freeze — the DI H_min bound requires no-signaling between sites, not enforced on one shared control/calibration/readout chip; a deterministic classical device with shared control can output S=2sqrt2 at zero entropy. Quarantined (not gated, not qualified). Honest next step: a real semi-DI certificate needs a steering/dimension-bounded protocol with its own bound."
         }
       ]
+    },
+    {
+      "id": "F116",
+      "file": "F116-exp136-one-sided-di-steering-certificate-trust-ladder-whisper-c4677-ember-numbered-c4159.md",
+      "claim_type": "existence",
+      "status": "UNTESTED",
+      "retested": false,
+      "retest_ref": null,
+      "sim_only": false,
+      "single_run": true,
+      "evidence": "HW run exp136 on ibm_marrakesh (job d9anamjv6alc73cs246g, opus-4-8; numbered Ember C4159, graded Whisper C4677). The semi-DI certificate F115/Exp135 flagged as the honest next step, delivered: ONE-SIDED DEVICE-INDEPENDENT STEERING certified. CJWR functional S3 = (1/sqrt3)|<XX>-<YY>+<ZZ>| = 1.6813+/-0.0071 = 96.35 sigma over the local-hidden-state (unsteerable) bound 1.0, 97% of quantum max sqrt3; near-ideal corrs X 0.9694/Y -0.969/Z 0.9737; separable-faking null S3=0.025 (dead). All 4 gates PASS; sentinels 0.994/0.987. TYPE-A (assumption stated, quantity REAL) vs F115 Type-B (quantity evaporates): trust BOBs measurements (calibrated X/Y/Z MUB triple), ALICE a BLACK BOX — assumption EXACT at logical level Tr_A(U_A rho U_A^dag)=Tr_A(rho), fails only via physical crosstalk. WHY IT HOLDS WHERE DI CHSH DID NOT: faking S3=1.68 needs ~0.68 correlation excess, but the only on-chip mechanism (Alice-setting crosstalk back-acting on Bob) is ~1% per the campaigns OWN C4671/F55/F56 measurements — 1% cannot fake 0.68; null 0.025 confirms empirically. NOT loophole-free (locality open, crosstalk bounded-not-closed); gate named W1_STEERING_ONE_SIDED_DI. Trust ladder: Born full-trust (F115 t2) -> one-sided-DI steering 96sigma (here) -> full-DI needs space-like off-chip (flagged). results/exp136_hw_results.json",
+      "subclaims": [
+        {
+          "claim": "crosstalk-cannot-fake: the ~1% measured on-chip crosstalk is far below the ~0.68 excess a fake needs",
+          "status": "CONFIRMED",
+          "evidence": "the one-sided-no-signaling assumption is exact at the logical level (Alice unitary cannot change Bobs reduced state algebraically); it fails ONLY via physical crosstalk, measured ~1% (C4671/F55/F56) vs a 0.68 faking requirement; measured separable-faking floor null S3=0.025 is the direct empirical confirmation. This is why steering holds where DI CHSH (F115) evaporated."
+        },
+        {
+          "claim": "the F115->F116 trust ladder (quarantine the number you cannot hold, deliver the strongest you can)",
+          "status": "CONFIRMED",
+          "evidence": "Born full-trust (F115 t2) -> one-sided-DI steering (F116, Alice demoted trusted->black-box, 96sigma) -> full-DI (off-chip, flagged). F115 quarantined the DI number; F116 delivers the strongest certificate one chip CAN, each rung claiming exactly its assumption."
+        }
+      ]
     }
   ],
   "rubric_v2": {
