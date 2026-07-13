@@ -240,6 +240,38 @@
    "optimism_ln": 0.059818495210910205
   },
   {
+   "exp": "exp114 purified",
+   "observable": "CHSH S (post-selected)",
+   "family": "amplitude",
+   "depth": 10,
+   "delays": false,
+   "ideal": 2.264,
+   "preview": 2.1892,
+   "measured": 2.1437,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "exp114_grade.json (layout-matched preview; +0.021 ln \u2014 model GOOD at 10 CZ)",
+   "ratio_preview": 0.9669611307420496,
+   "ratio_hw": 0.9468639575971732,
+   "optimism_ln": 0.02100287224267306
+  },
+  {
+   "exp": "exp114 raw@p*",
+   "observable": "CHSH S (injected noise)",
+   "family": "amplitude",
+   "depth": 1,
+   "delays": false,
+   "ideal": 1.998,
+   "preview": 1.899,
+   "measured": 1.9037,
+   "sent_hw": null,
+   "sent_prev": null,
+   "source": "exp114_grade.json (-0.002 ln \u2014 dead on)",
+   "ratio_preview": 0.9504504504504505,
+   "ratio_hw": 0.9528028028028028,
+   "optimism_ln": -0.0024719290994571104
+  },
+  {
    "exp": "exp109 superdense",
    "observable": "p_success (4-msg decode)",
    "family": "probability",
@@ -258,13 +290,13 @@
  ],
  "optimism_by_depth_class": {
   "shallow (<=8 CZ)": {
-   "n": 7,
-   "mean": 0.056735440736496286,
-   "spread": 0.10103596917465084
+   "n": 8,
+   "mean": 0.049334519507002114,
+   "spread": 0.11438984530344251
   },
   "mid (9-50 CZ)": {
-   "n": 6,
-   "mean": 0.1074429622433531,
+   "n": 7,
+   "mean": 0.09509437795754168,
    "spread": 0.2227192381647439
   },
   "deep (>50 CZ)": {
