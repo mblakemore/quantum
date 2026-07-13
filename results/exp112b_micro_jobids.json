@@ -1,0 +1,30 @@
+{
+ "experiment": "exp112b-micro",
+ "cycle": "C4629-whisper",
+ "prereg": "experiments/exp112b-micro-preregistration.md",
+ "chain": [
+  8,
+  7,
+  6,
+  5
+ ],
+ "job_id": "d9a7misqp3as739uv1q0",
+ "metas": [
+  {
+   "label": "active_k1_ab",
+   "shots": 4000
+  },
+  {
+   "label": "active_k1_abp",
+   "shots": 4000
+  },
+  {
+   "label": "active_k1_apb",
+   "shots": 4000
+  },
+  {
+   "label": "active_k1_apbp",
+   "shots": 4000
+  }
+ ]
+}
