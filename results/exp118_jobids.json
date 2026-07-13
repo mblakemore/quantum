@@ -1,0 +1,140 @@
+{
+ "experiment": "exp118-hidden-order-diagnostics",
+ "cycle": "C4634-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp118",
+ "prereg": "experiments/exp118-hidden-order-preregistration.md",
+ "twoq_gate": "cz",
+ "k": 8,
+ "shots_per_arm": 6000,
+ "floor": 0.0223,
+ "sigma_rule": 5,
+ "bootstrap": {
+  "B": 200,
+  "seed": 4634
+ },
+ "sites": {
+  "hotspot": {
+   "pairA": [
+    6,
+    7
+   ],
+   "pairB": [
+    9,
+    10
+   ],
+   "spectator": 8,
+   "sum_2q_err": 0.002567756167666413,
+   "spect_ro": 0.006591796875
+  },
+  "control": {
+   "pairA": [
+    2,
+    3
+   ],
+   "pairB": [
+    6,
+    7
+   ],
+   "spectator": 4,
+   "sum_2q_err": 0.0026173703710420937,
+   "spect_ro": 0.00390625,
+   "min_hops": 3
+  }
+ },
+ "transpile_seed": 4634,
+ "shuffle_seed": 4634,
+ "job_id": "d9a8sa2f47jc73a9uk2g",
+ "metas": [
+  {
+   "label": "control_seqBA",
+   "site": "control",
+   "schedule": "seqBA",
+   "layout": [
+    2,
+    3,
+    4,
+    6,
+    7
+   ],
+   "shots": 6000,
+   "twoq": 16,
+   "depth": 23
+  },
+  {
+   "label": "control_par",
+   "site": "control",
+   "schedule": "par",
+   "layout": [
+    2,
+    3,
+    4,
+    6,
+    7
+   ],
+   "shots": 6000,
+   "twoq": 16,
+   "depth": 15
+  },
+  {
+   "label": "hotspot_seqBA",
+   "site": "hotspot",
+   "schedule": "seqBA",
+   "layout": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "shots": 6000,
+   "twoq": 16,
+   "depth": 23
+  },
+  {
+   "label": "hotspot_seqAB",
+   "site": "hotspot",
+   "schedule": "seqAB",
+   "layout": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "shots": 6000,
+   "twoq": 16,
+   "depth": 23
+  },
+  {
+   "label": "control_seqAB",
+   "site": "control",
+   "schedule": "seqAB",
+   "layout": [
+    2,
+    3,
+    4,
+    6,
+    7
+   ],
+   "shots": 6000,
+   "twoq": 16,
+   "depth": 23
+  },
+  {
+   "label": "hotspot_par",
+   "site": "hotspot",
+   "schedule": "par",
+   "layout": [
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "shots": 6000,
+   "twoq": 16,
+   "depth": 15
+  }
+ ]
+}

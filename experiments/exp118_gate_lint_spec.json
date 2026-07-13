@@ -1,0 +1,30 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "hotspot_order_exists",
+      "pass_value": 0.05,
+      "fail_value": 0.0062,
+      "threshold": 0.0223,
+      "direction": "above",
+      "se": 0.0032
+    },
+    {
+      "name": "control_no_test_guard",
+      "pass_value": 0.05,
+      "fail_value": 0.0062,
+      "threshold": 0.0223,
+      "direction": "above",
+      "se": 0.0032
+    },
+    {
+      "name": "genuinely_concurrent_minref",
+      "pass_value": 0.05,
+      "fail_value": 0.0062,
+      "threshold": 0.0223,
+      "direction": "above",
+      "se": 0.0032
+    }
+  ]
+}
