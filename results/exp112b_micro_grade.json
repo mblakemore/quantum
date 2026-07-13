@@ -1,0 +1,16 @@
+{
+ "E": {
+  "ab": 0.588,
+  "abp": 0.58,
+  "apb": 0.6355,
+  "apbp": -0.6495
+ },
+ "pattern": [
+  "+",
+  "+",
+  "+",
+  "-"
+ ],
+ "S": 2.453,
+ "verdict": "TRANSIENT (Phi+ fingerprint \u2014 defect not reproduced)"
+}

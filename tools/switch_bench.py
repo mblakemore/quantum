@@ -101,7 +101,26 @@ def grade(job_id):
                            getattr(pub.data, list(pub.data.keys())[0]).get_counts())
               for pub, m in zip(res, man["metas"])}
     W, seW, (R, seR), (Rn, seRn) = analyze(counts)
-    null_ok = abs(Rn) + 5 * seRn < 0.10
+    # null integrity via the UNCONDITIONED D observable (Exp106 convention: the
+    # null control is a |+> spectator, so conditional R starves the minus branch
+    # — v1.0 wrongly applied conditional Rbar to the null; caught on the maiden
+    # flight when the null SE ballooned to 0.068)
+    import itertools as _it
+    dz, dvar = [], []
+    for bit in (0, 1):
+        pool = {}
+        for a, b in _it.product(PAULIS, repeat=2):
+            for k, v in counts[f"cap_nu({a},{b})b{bit}"].items():
+                pool[k] = pool.get(k, 0) + v
+        n = sum(pool.values())
+        z = (sum(v for k, v in pool.items() if k[0] == "0")
+             - sum(v for k, v in pool.items() if k[0] == "1")) / n
+        dz.append(z)
+        dvar.append((1 - z * z) / n)
+    Dn = (dz[0] - dz[1]) / 2
+    seDn = float(np.sqrt(sum(dvar) / 4))
+    null_ok = abs(Dn) + 5 * seDn < 0.10
+    Rn, seRn = Dn, seDn   # report the D values in the null slot
     pass_w = W - 5 * seW > 0
     pass_cap = R - 5 * seR > 0.10
     verdict = ("PASS-CAUSAL" if (null_ok and pass_w and pass_cap) else
@@ -111,7 +130,7 @@ def grade(job_id):
     print("=" * 62)
     print(f"  W (witness DISC)    {W:+.4f} ± {seW:.4f}   ideal 2.0 | causal-mix 0")
     print(f"  Rbar (capacity)     {R:+.4f} ± {seR:.4f}   ideal 0.5333 | causal 0")
-    print(f"  Rbar (null arm)     {Rn:+.4f} ± {seRn:.4f}   integrity band ±0.10")
+    print(f"  D    (null arm)     {Rn:+.4f} ± {seRn:.4f}   integrity band ±0.10 (unconditioned)")
     print(f"  reference: marrakesh W~{REFERENCE['ibm_marrakesh']['W']}, "
           f"Rbar~{REFERENCE['ibm_marrakesh']['Rbar']}")
     print(f"  VERDICT: {verdict}")

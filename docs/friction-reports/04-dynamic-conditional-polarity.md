@@ -39,3 +39,11 @@ classical wiring. Our detection required branch-resolved sign forensics against 
 state fingerprints. Ask: any known issue class for conditional-polarity in runtime
 execution of `if_test` on 2-bit registers; and/or expose the compiled classical program
 for user audit.
+
+## RESOLUTION (C4630): TRANSIENT
+
+Exp112b-micro (job `d9a7misqp3as739uv1q0`, 16k shots, exact original apparatus): clean Phi+
+fingerprint (+,+,+,-) at |E|~0.6, S=2.453 — the defect did NOT reproduce (note: the instance
+was recreated between occurrence and re-test). Classification per the frozen rule: TRANSIENT.
+This report stays as documentation of the failure mode and the fingerprint-forensics method;
+NOT a filing candidate. If the Psi+ fingerprint ever reappears, this file reopens.

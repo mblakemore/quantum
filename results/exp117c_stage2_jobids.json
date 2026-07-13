@@ -1,0 +1,150 @@
+{
+ "experiment": "exp117c-stage2",
+ "cycle": "C4630-whisper",
+ "prereg": "experiments/exp117c-two-stage-preregistration.md",
+ "gates": {
+  "calib_band": [
+   0.35,
+   0.4677
+  ],
+  "passive": "p+5SE<0.5",
+  "retention_min": 0.8,
+  "therm_band": 0.1,
+  "G_recert": "p1m_meas-5SE>0.5",
+  "G_plus": 0.05,
+  "W1": "drop-5SE>0.05",
+  "W2": "p1m_extract+5SE<0.5"
+ },
+ "stage1": {
+  "p_a": 0.6851666666666667,
+  "p_b": 0.5523333333333333,
+  "r_a": 2.111933718785741,
+  "r_b": 1.3451868606865223,
+  "stage1_gate_sane": true,
+  "t1_pub_us": {
+   "q6": 166.395552044954,
+   "q8": 111.93520557777758
+  },
+  "d0_us": {
+   "a": 132.86812892430052,
+   "b": 89.38112313157384
+  }
+ },
+ "delays_us": {
+  "a": 280.6086816272013,
+  "b": 120.2343124299973
+ },
+ "chain": [
+  5,
+  6,
+  7,
+  8
+ ],
+ "layout": [
+  5,
+  7,
+  6,
+  8
+ ],
+ "job_id": "d9a7pbsqp3as739uv4qg",
+ "metas": [
+  {
+   "label": "sent_start_retention",
+   "kind": "retention",
+   "t0": 0,
+   "shots": 2000,
+   "twoq": 22
+  },
+  {
+   "label": "null_rev_t1",
+   "kind": "null_rev",
+   "t0": 1,
+   "shots": 4000,
+   "twoq": 0
+  },
+  {
+   "label": "null_rev_t0",
+   "kind": "null_rev",
+   "t0": 0,
+   "shots": 4000,
+   "twoq": 0
+  },
+  {
+   "label": "calib_b",
+   "kind": "calib_b",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0
+  },
+  {
+   "label": "switch_t0",
+   "kind": "switch",
+   "t0": 0,
+   "shots": 14000,
+   "twoq": 22
+  },
+  {
+   "label": "extract_t0",
+   "kind": "extract",
+   "t0": 0,
+   "shots": 14000,
+   "twoq": 22
+  },
+  {
+   "label": "sent_mid_retention",
+   "kind": "retention",
+   "t0": 0,
+   "shots": 2000,
+   "twoq": 22
+  },
+  {
+   "label": "sent_mid_deconull",
+   "kind": "deco",
+   "t0": 0,
+   "shots": 2000,
+   "twoq": 22
+  },
+  {
+   "label": "extract_t1",
+   "kind": "extract",
+   "t0": 1,
+   "shots": 14000,
+   "twoq": 22
+  },
+  {
+   "label": "calib_a",
+   "kind": "calib_a",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0
+  },
+  {
+   "label": "null_fwd_t0",
+   "kind": "null_fwd",
+   "t0": 0,
+   "shots": 4000,
+   "twoq": 0
+  },
+  {
+   "label": "null_fwd_t1",
+   "kind": "null_fwd",
+   "t0": 1,
+   "shots": 4000,
+   "twoq": 0
+  },
+  {
+   "label": "switch_t1",
+   "kind": "switch",
+   "t0": 1,
+   "shots": 14000,
+   "twoq": 22
+  },
+  {
+   "label": "sent_end_retention",
+   "kind": "retention",
+   "t0": 0,
+   "shots": 2000,
+   "twoq": 22
+  }
+ ]
+}
