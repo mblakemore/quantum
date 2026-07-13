@@ -1263,6 +1263,29 @@
      "evidence": "fake PESSIMISTIC by 0.4pp here (0-CZ) vs OPTIMISTIC 0.9pp at Exp126 depth -> the noise-model optimism crossover sits between 0 and ~2 CZ; new shallow-end atlas anchor."
     }
    ]
+  },
+  {
+   "id": "F108",
+   "file": "F108-exp129-navigators-sextant-ghz-heisenberg-metrology-vs-executed-sql-whisper-c4668-ember-numbered-c4149.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp129 on ibm_marrakesh (numbered Ember C4149, graded Whisper C4668): GHZ Heisenberg-limit metrology advantage at N=3 CERTIFIED vs an EXECUTED SQL reference (same 3 qubits/window/shots) -- R=2.848+/-0.011 (95% of max 3.0) = 168sigma; W2 absolute F_GHZ=8.293 beats even PERFECT separable probes at 239.5sigma, V3=0.9599 = 299sigma over the 1/sqrt(3) threshold; super-resolution law G_FREQ peaks at k=3 (122.9x amp ratio, fringe oscillates at 3x drive); 4 gates PASS; preds 0.93/0.90 hit; sentinels 0.988/0.978. Executed separable arm at its own ideal (F_sep 2.912/3.0, V1 0.9853 -- classical best case, lost anyway). GENRE TRIPTYCH: games F106 + storage F107 + metrology F108. results/exp129_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "the SQL reference is executed at its own ideal (not a strawman)",
+     "status": "CONFIRMED",
+     "evidence": "separable arm F_sep 2.912/3.0, V1 0.9853 -- classical player at essentially perfect performance on the same chip/window, and still beaten (F107 executed-reference discipline)."
+    },
+    {
+     "claim": "the GHZ fringe oscillates at exactly 3x the drive (super-resolution law)",
+     "status": "CONFIRMED",
+     "evidence": "free-frequency DFT scan peaks at k=3, amp ratio 122.9x over any other frequency -- the advantage is visible structure, a law the Fisher ratio cannot fake."
+    }
+   ]
   }
  ],
  "rubric_v2": {

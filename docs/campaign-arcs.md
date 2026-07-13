@@ -220,6 +220,16 @@ Two independent "noise actually helps" claims from earlier arcs were killed unde
 
 > **The comms column is now a ladder** — three communication primitives, each a provable-bound beat: **F87** superdense coding (341σ, assisted capacity) · **F106** magic-square game (196σ, nonlocal games / contextuality) · **F107** QRAC (110.5σ, random-access storage).
 
+### The navigator's sextant — Heisenberg-limit metrology, and the genre triptych (F108)
+
+**Plain English**: to measure a phase, entangled probes beat independent ones — an N-qubit GHZ state turns N times faster with the phase (super-resolution), so its precision scales like N (Heisenberg) instead of √N (the standard quantum limit). F108 certifies the N=3 advantage against a *classical reference actually run on the same qubits*.
+
+| Finding | Result | Tier |
+|---|---|---|
+| F108 | **GHZ Heisenberg-limit metrology certified at N=3 vs an EXECUTED SQL reference (Horizons-3)**: the entangled probe's phase Fisher information is **R = 2.848 ± 0.011× the executed separable reference** (95% of the max 3.0) = **168σ**, and it beats even *perfect* separable probes (F_GHZ 8.293 > 3 at **239.5σ**; V₃ 0.9599 = **299σ over the 1/√3 threshold**). The law the ratio can't fake: the GHZ fringe oscillates at **exactly 3× the drive** (free-frequency scan peaks at k=3, 122.9× amp ratio — super-resolution as visible structure). The executed separable arm ran at its own ideal (F_sep 2.912/3.0, V₁ 0.985 — classical best case, beaten anyway). GHZ arm 4 CX, separable arm zero-2q. Scope: N=3 metrology advantage, textbook priors (Bollinger 1996) credited; **scaling is the open question** — the N-ladder follow-up meets F85's NISQ scaling-inversion wall (deeper GHZ prep decoheres) | **HW** marrakesh |
+
+> **The genre triptych — three kinds of quantum advantage in three cycles**: **F106** nonlocal games / contextuality (196σ) · **F107** random-access storage / QRAC (110.5σ) · **F108** metrology / GHZ sensing (168σ). Games → storage → *metrology, the advantage the sensing industry actually buys*.
+
 ### Negative local energy — quantum energy teleportation physics on silicon (F97)
 
 **Plain English**: quantum theory permits a region to read *below its own ground-state energy* if it is correlated with a distant one (quantum energy teleportation, Hotta) — "exotic-matter-sign" negative energy, the squeezed-vacuum/Casimir family. F97 certifies it on a 2-qubit chip. Energy conservation is intact (the partner pays the energy in); the negative reading is local, correlation-enabled, and audited. The honest twin: the *classical-message* version (true energy teleportation) FAILED on the same hardware, because a classical feedforward round-trip costs measurable decoherence.
