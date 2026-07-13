@@ -146,7 +146,17 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
 │   ├── bridges-to-compute-advantage-whisper-c4522.md ← the 3-bridges strategy synthesis
 │   ├── ico-applications-roadmap-whisper-c4527.md     ← what the certified switch can do next
 │   ├── beyond-the-ladder.md                          ← ★ the full technical argument (causal-inference readers)
+│   ├── star-trek-horizons-whisper-c4601.md          ← future directions (status table maintained)
+│   ├── friction-reports/        ← platform issues, data-backed (grows as we go)
 │   └── hardware-substrate.md    ← Heron-r2 physical architecture primer
+├── demo/
+│   ├── ladder/                  ← the Ladder of Causation tour (interactive page)
+│   └── weather/                 ← Quantum Weather Report (T1 timeline, optimism atlas)
+├── tools/
+│   ├── switch_bench.py          ← ★ portable BYOK causal benchmark (any backend)
+│   ├── demon_ledger.py          ← Landauer/ergotropy bookkeeping for the ICO engine
+│   ├── gate_feasibility_lint.py ← prereg gate linter (CAN-PASS / CAN-FAIL)
+│   └── fakemarrakesh_atlas.py   ← model-error atlas builder
 └── sources/
     └── references.md            ← peer-reviewed and primary sources (cited inline in findings)
 ```

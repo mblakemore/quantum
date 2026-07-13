@@ -4,7 +4,7 @@
 **Purpose**: single-document engineering spec of the quantum switch *as we build, measure, and
 grade it* — circuit family, exact theory statistics, measured-results ledger, reusable
 methodology, pitfall registry, and scope. Consolidates what previously lived across six
-preregistrations, the findings series (F73–F86), and the Pearl-bridge paper draft. The paper
+preregistrations, the findings series (F73–F94), and [Beyond the Ladder](beyond-the-ladder.md) (the repo-native publication). That document
 (`beyond-the-ladder.md`) is the narrative for causal-inference readers; **this is the
 spec for whoever builds experiment N+1.**
 

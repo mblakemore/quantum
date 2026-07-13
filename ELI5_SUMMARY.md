@@ -120,3 +120,40 @@ There are three things people commonly believe about quantum computers that this
 ---
 
 *Full technical version: [`README.md`](README.md). Per-finding deep dives: [`findings/`](findings/). Reproducible figures: [`scripts/generate_figures.py`](scripts/generate_figures.py). Sources: [`sources/references.md`](sources/references.md).*
+
+
+---
+
+## 20. The week we built a network and an engine (plain English)
+
+In three days the quantum switch went from a certified curiosity to a working resource:
+
+- **Two bits in one qubit** (superdense coding): with pre-shared entanglement, one sent
+  qubit carried two bits of information — 341σ above the proven no-entanglement ceiling,
+  and the control run *without* entanglement landed exactly on that ceiling (0.4988 vs 0.5).
+- **The great debate, settled on silicon**: skeptics said the switch's magic is just
+  "coherent routing," no exotic causal stuff needed. We ran both, side by side, same hour:
+  routing alone DOES work (its own win) — and the switch beats it by **exactly 2×**, just
+  as theory predicted (measured ratio 1.949 vs theory 2.000).
+- **Beaming the arrow of time**: we teleported the qubit that *decides the causal order*
+  one hop across the chip — and it arrived still causally indefinite (97% intact), while
+  the same teleport over a deliberately classical channel killed the effect stone dead.
+  Survives quantum, dies classical: that pair of facts is the whole claim.
+- **A repeater**: a Bell violation survived TWO entanglement-swapping relay stations —
+  the basic building block of a quantum internet, graded against the exact classical limit.
+- **Resurrection**: we deliberately poisoned entangled pairs until their Bell violation
+  died (below the classical line), then *purified* two dead pairs into one living one
+  (back above the line, same test, same hour). One sub-claim missed its pre-set bar by a
+  hair (0.33σ) and is recorded as a loss — the rules don't bend after the data exists.
+- **The engine**: two heat baths, each certified too bland to power anything (5σ below
+  the useful line) — put causal indefiniteness between them and one output branch comes
+  out *charged* (+10.6σ above the line): extractable work, paid for by the demon's
+  information, books audited by a Landauer ledger. Along the way the same gate structure
+  refused a +23σ *fake* win caused by bad vendor calibration data — the proudest
+  non-result of the campaign.
+- **And the weather report went public**: the platform's moods (T1 values that swing 2×
+  in a day, a noise model blind to feedforward) are now charts anyone can read
+  ([demo/weather](demo/weather/index.html)), with the four tricks we use to work through
+  them.
+
+Findings F87–F94, every one pre-registered, every miss in the record.

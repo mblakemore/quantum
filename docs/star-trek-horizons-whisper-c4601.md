@@ -9,6 +9,21 @@ the fun; the protocols are the substance. Where the honest answer is "physics fo
 this platform," that boundary is stated — knowing where the warp core *can't* go is part of
 knowing what we know.
 
+## Program status (updated C4623 — two days after this doc was written)
+
+| Program | Status |
+|---|---|
+| P1 Beam the arrow of time | **DELIVERED** — F92: indefiniteness survives teleportation (97% of anchor, classical channel kills it, 33σ separation) |
+| P2 Subspace relay | **PRIMITIVE DELIVERED** — F93: purification resurrects a dead Bell violation; stack layers all measured (F87/F90/F91/F93); full-stack composition demoted to optional after the witness-fragility hierarchy (`witness-fragility-hierarchy-whisper-c4618.md`) showed the application-layer resurrection is mathematically forbidden |
+| P3 Heisenberg compensator | open (sim-gated, unchanged) |
+| P4 Warp core thermodynamics | **RUNG 1 DELIVERED** — F94: certified inversion from passive baths (+10.6σ), ergotropy 0.0378 E/run; stroke mechanics proven (demon cost 0.0017 E/action); full-cycle certification waits on the two-stage protocol (Exp117c, quota-queued) |
+| P5 Level-1 diagnostic | open (sentinel components all exist; hidden-order T2.5 still unexecuted) |
+| P6 Universal translator | **TOOL BUILT** — `tools/switch_bench.py`, scan-validated; first external run awaits a quota window |
+| P7 Prime Directive beacon | open (theory exists; buildable on demand) |
+
+Three programs delivered and one tool built within 48 hours of the document — composition
+of validated apparatuses is empirically the highest-yield moonshot strategy.
+
 ## The validated stack (what "knowing what we do now" means)
 
 Certified indefinite causal order with 2× communication advantage (F73–F86, F89) ·
