@@ -58,6 +58,12 @@ def main(path="findings/status-ledger.json"):
     except ImportError:
         print("(scipy unavailable — contingency table only)")
 
+    subs = [(r["id"], s) for r in rows for s in r.get("subclaims", [])]
+    if subs:
+        from collections import Counter
+        cs = Counter(s["status"] for _, s in subs)
+        print(f"\nsubclaims (v2, informational — never in headline survival): "
+              f"{len(subs)} across {len(set(i for i,_ in subs))} findings: {dict(cs)}")
     print("\ncaveats: v1 classification is single-agent (Whisper) with mandatory "
           "evidence pointers; 10-row sibling spot-check requested via Discord; "
           "single-run flag coverage is partial; UNTESTED rows say nothing about "
