@@ -1309,6 +1309,24 @@
      "evidence": "Exp130 N=3 rung (F_ghz 8.42, R 2.859, opus-4-8) reproduces F108/Exp129 (8.29, 2.848, fable-5) at ~1% -- different job/window/substrate; F108 -> CONFIRMED_ON_RETEST."
     }
    ]
+  },
+  {
+   "id": "F110",
+   "file": "F110-exp131-optimal-cloning-ceiling-no-cloning-cheat-detector-whisper-c4670-ember-numbered-c4152.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp131 on ibm_marrakesh, substrate opus-4-8 (numbered Ember C4152, graded Whisper C4670): the optimal universal 1->2 cloning CEILING 5/6 saturated-and-enforced -- a certified quantum LIMIT (first certified-limits ledger entry, opposite of the no-go beats). Optimal cloner FLAT across bases (Z 0.8265/Y 0.8121/X 0.8047, spread 0.0218, never exceeds 5/6); cheat beats 5/6 on Z (0.9911) but craters on conjugates (X 0.4995/Y 0.5054, min 0.4995, spread 0.492) -> detector tell 0.49 vs optimal 0.02 (24x). All 5 gates PASS (incl W4 proximity pre-flagged at-risk at 11 CZ). Cloner numerically optimized+verified in-artifact (noiseless 0.83332, var 2.2e-8). Priors credited (Buzek-Hillery proven-optimal). results/exp131_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "beating 5/6 on one basis forces paying below it on the conjugate (no-cloning teeth)",
+     "status": "CONFIRMED",
+     "evidence": "cheat Z 0.9911 (>5/6) but X 0.4995/Y 0.5054 (~coin flip); universality (flatness) is the certificate no basis-reading cheat can forge -- the informative-null (cheat pre-registered to FAIL) weaponized into a detector."
+    }
+   ]
   }
  ],
  "rubric_v2": {
