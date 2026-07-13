@@ -1217,6 +1217,29 @@
      "evidence": "direct -0.855 far exceeds |twirled| 0.296 (twirl only raises entropy); F103 -> CONFIRMED_ON_RETEST via this run."
     }
    ]
+  },
+  {
+   "id": "F106",
+   "file": "F106-exp126-kobayashi-maru-magic-square-contextuality-no-go-triptych-whisper-c4666-ember-numbered-c4147.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp126 on ibm_marrakesh (numbered Ember C4147, graded Whisper C4666): Peres-Mermin magic-square (contextuality) game WON -- pooled 0.96901+/-0.00041 vs the classical ceiling 8/9 = 196sigma clearance; W2 jewel min-context (r3c3, 10-CZ) 0.9482=37.8sigma over 8/9 (min>8/9 classically impossible even for mixtures); no-entanglement null 0.657 (92.7sigma below); sentinels 0.99/0.98; all 4 gates PASS, preds 0.93/0.85 hit. Classical bound ENUMERATED in-artifact (4096 strategy pairs = 8/9 exactly, not cited). Completes the no-go triptych: Bell(F73)+ICO(F82)+contextuality(F106). Scope: game-value advantage NOT computational speedup; device-characterized not loophole-free; textbook priors credited. results/exp126_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "the classical ceiling 8/9 is provable in-artifact (enumerated, not cited)",
+     "status": "CONFIRMED",
+     "evidence": "exhaustive search over all 4096 deterministic parity-respecting strategy pairs returns max avg = 8/9 exactly, in the same code that grades the data (pattern c857)."
+    },
+    {
+     "claim": "the broken/control scenario is a meaningful (can-fail) control",
+     "status": "CONFIRMED",
+     "evidence": "gate-feasibility linter caught it VACUOUS pre-freeze, fixed to entanglement-dead; executed null resulted at 0.657 coin-flip-class (C4657/C4662 self-catch)."
+    }
+   ]
   }
  ],
  "rubric_v2": {
