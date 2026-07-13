@@ -9,7 +9,8 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, "..", "experiments"))
-MANIFEST = os.path.join(HERE, "..", "results", "exp117_jobids.json")
+MANIFEST = os.path.join(HERE, "..", "results",
+                        sys.argv[1] if len(sys.argv) > 1 else "exp117_jobids.json")
 import exp108b_native_thermal as m108  # noqa: E402
 m108.THERM_BAND = 0.10
 from run_exp66_qpu_partb import _get_ibm_service  # noqa: E402
@@ -62,7 +63,7 @@ def main():
             C[lab] = c
 
     rungs = {}
-    for r in ("r1", "r2", "r3"):
+    for r in sorted(man["rungs"]):   # rung list from manifest (C4617)
         p_a, _ = p1_of(C[f"{r}_calib_a"])
         p_b, _ = p1_of(C[f"{r}_calib_b"])
         rungs[r] = {"p_a": p_a, "p_b": p_b,

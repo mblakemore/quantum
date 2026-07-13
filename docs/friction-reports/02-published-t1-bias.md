@@ -72,3 +72,17 @@ the cost of the missing calibration data is now a wasted flight, documented.
 Exp116b (C4612): bias r≈1.82 this run (r1 rung assumed 1.5 landed baths at 0.52). Sample now 7 values, 1.38–2.15. The delay-ladder workaround VALIDATED (rung-2 landed on target; experiment certified through the bias).
 
 Exp117 (C4615): bias ~1.6 this run — the sample (now 8 values, 1.38-2.15) swings BOTH directions across days. Ladder consequence: 3 coarse rungs can straddle the sweet spot (r1 missed qualifying by 0.011, r2 qualified but cool). Refined ask: even a daily-granularity live T1 estimate would collapse the needed rung count.
+
+## Addendum (C4617): the sign flipped — this is VARIABILITY, not a fixed bias
+
+Exp117b (job `d9a6c6kqp3as739ust2g`): all four rungs landed COLD — back-computed **r ≈ 0.97**:
+published T1 was essentially CORRECT this run, first time in 9 measurements (sample now
+{0.97, 1.38, 1.59, ~1.6, 1.68, 1.69, 1.82, 1.85, 2.15} over 4 days). Most consistent
+explanation: a calibration refresh landed, and the "bias" is really **staleness of a
+fast-moving quantity** — published T1 can be right today and 2× low tomorrow. Consequences:
+(a) the report's title claim softens from one-signed bias to unreliable-with-large-variable-
+error (usually underestimating); (b) rung ladders cannot economically chase a 2.3× range —
+the robust protocol is TWO-STAGE: a cheap calibration-only job, graded, then the payload
+submitted into the same drain window with delays computed from the measured r (pre-registered
+as a two-job protocol; queue latency permitting). The ask stands and sharpens further: any
+live or timestamped T1 exposure makes all of this unnecessary.
