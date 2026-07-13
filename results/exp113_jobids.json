@@ -1,0 +1,124 @@
+{
+ "experiment": "exp113-teleported-witness",
+ "cycle": "C4603-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp113",
+ "prereg": "experiments/exp113-teleported-witness-preregistration.md",
+ "gates": {
+  "G1_readout_floor": 0.95,
+  "G2_direct_anchor": 1.6,
+  "W1_survival_floor": 1.0,
+  "W2_separation_floor": 1.0,
+  "G3_deco_band": 0.15
+ },
+ "preview": {
+  "direct": 1.9295,
+  "tele_frame": 1.9375,
+  "tele_active": 1.941,
+  "tele_deco": -0.013
+ },
+ "transpile": {
+  "seed": 4603,
+  "opt_level": 1
+ },
+ "chain": [
+  34,
+  35,
+  19,
+  15
+ ],
+ "layout4": [
+  35,
+  34,
+  19,
+  15
+ ],
+ "chain_cost": 0.02736180617420178,
+ "job_id": "d9a36352su3c739l3kf0",
+ "metas": [
+  {
+   "label": "sent_start_0",
+   "arm": "sent",
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sent_start_1",
+   "arm": "sent",
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "tele_frame_comm",
+   "arm": "tele_frame",
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 30
+  },
+  {
+   "label": "direct_comm",
+   "arm": "direct",
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 22
+  },
+  {
+   "label": "tele_frame_anti",
+   "arm": "tele_frame",
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 29
+  },
+  {
+   "label": "tele_deco_comm",
+   "arm": "tele_deco",
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 34
+  },
+  {
+   "label": "tele_active_anti",
+   "arm": "tele_active",
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 35
+  },
+  {
+   "label": "tele_deco_anti",
+   "arm": "tele_deco",
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 33
+  },
+  {
+   "label": "tele_active_comm",
+   "arm": "tele_active",
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 36
+  },
+  {
+   "label": "direct_anti",
+   "arm": "direct",
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 21
+  },
+  {
+   "label": "sent_end_0",
+   "arm": "sent",
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "sent_end_1",
+   "arm": "sent",
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 2
+  }
+ ]
+}
