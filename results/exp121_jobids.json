@@ -1,0 +1,105 @@
+{
+ "experiment": "exp121-hp-switch-heralded-mirror",
+ "cycle": "C4647-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp121",
+ "prereg": "experiments/exp121-hp-switch-preregistration.md",
+ "site": {
+  "S": 3,
+  "C": 4,
+  "F1": 2,
+  "F2": 16,
+  "sum_err": 0.00452964521645749,
+  "C_readout": 0.00390625
+ },
+ "layout": [
+  4,
+  3,
+  2,
+  16
+ ],
+ "gates": {
+  "PREMISE_DEAD": "|S_P(def)|<0.05 both, else NO-TEST",
+  "N1": "|S_P(null)|<0.05 and S_E2(null)<0.25, else NO-TEST",
+  "H1": "minus-rate in [0.10,0.40], else NO-TEST",
+  "W_MIRROR": "S_P(minus)+5SE < -0.05 (sign fixed)",
+  "W_PLUS": "S_P(plus)-5SE > +0.05 (sign fixed)"
+ },
+ "twoq_counts": {
+  "definite": [
+   2
+  ],
+  "skeleton": [
+   63
+  ]
+ },
+ "transpile_seed": 4647,
+ "shuffle_seed": 4647,
+ "job_id": "d9aabnt2su3c739lcam0",
+ "metas": [
+  {
+   "label": "ordXZ_-",
+   "arm": "ordXZ",
+   "diary": "-",
+   "shots": 30000,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "ordZX_+",
+   "arm": "ordZX",
+   "diary": "+",
+   "shots": 30000,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "null_-",
+   "arm": "null",
+   "diary": "-",
+   "shots": 30000,
+   "twoq": 63,
+   "depth": 156
+  },
+  {
+   "label": "ordXZ_+",
+   "arm": "ordXZ",
+   "diary": "+",
+   "shots": 30000,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "ordZX_-",
+   "arm": "ordZX",
+   "diary": "-",
+   "shots": 30000,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "null_+",
+   "arm": "null",
+   "diary": "+",
+   "shots": 30000,
+   "twoq": 63,
+   "depth": 156
+  },
+  {
+   "label": "switch_+",
+   "arm": "switch",
+   "diary": "+",
+   "shots": 30000,
+   "twoq": 63,
+   "depth": 156
+  },
+  {
+   "label": "switch_-",
+   "arm": "switch",
+   "diary": "-",
+   "shots": 30000,
+   "twoq": 63,
+   "depth": 156
+  }
+ ]
+}
