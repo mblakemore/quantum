@@ -167,9 +167,18 @@ In three days the quantum switch went from a certified curiosity to a working re
   naive analysis would have cried "hidden order!" (parallel runs *do* look different) —
   but they differ *equally from both orderings*, the fingerprint of "faster, not
   sneakier."
+- **Energy below zero, certified** (F97): we made a tiny patch of the chip hold
+  *less energy than empty* — the energy-sign that warp-drive math asks for — twelve
+  sigma below the ground level, with books so conservative the real effect must be
+  bigger than we claim. The honest half of the story is in the same record: the
+  sci-fi version (beaming energy with a classical radio message) FAILED — the radio
+  delay costs more than the energy it moves, and we measured that price exactly.
+  What worked is the quantum-controlled version. Sister finding: the winning move
+  came from a near-miss we refused to count until it passed a fresh, pre-registered
+  retest.
 - **And the weather report went public**: the platform's moods (T1 values that swing 2×
   in a day, a noise model blind to feedforward) are now charts anyone can read
   ([demo/weather](demo/weather/index.html)), with the four tricks we use to work through
   them.
 
-Findings F87–F96, every one pre-registered, every miss in the record.
+Findings F87–F97, every one pre-registered, every miss in the record.
