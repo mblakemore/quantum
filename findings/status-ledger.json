@@ -1268,12 +1268,12 @@
    "id": "F108",
    "file": "F108-exp129-navigators-sextant-ghz-heisenberg-metrology-vs-executed-sql-whisper-c4668-ember-numbered-c4149.md",
    "claim_type": "existence",
-   "status": "UNTESTED",
-   "retested": false,
-   "retest_ref": null,
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "results/exp130_hw_results.json",
    "sim_only": false,
    "single_run": true,
-   "evidence": "HW run exp129 on ibm_marrakesh (numbered Ember C4149, graded Whisper C4668): GHZ Heisenberg-limit metrology advantage at N=3 CERTIFIED vs an EXECUTED SQL reference (same 3 qubits/window/shots) -- R=2.848+/-0.011 (95% of max 3.0) = 168sigma; W2 absolute F_GHZ=8.293 beats even PERFECT separable probes at 239.5sigma, V3=0.9599 = 299sigma over the 1/sqrt(3) threshold; super-resolution law G_FREQ peaks at k=3 (122.9x amp ratio, fringe oscillates at 3x drive); 4 gates PASS; preds 0.93/0.90 hit; sentinels 0.988/0.978. Executed separable arm at its own ideal (F_sep 2.912/3.0, V1 0.9853 -- classical best case, lost anyway). GENRE TRIPTYCH: games F106 + storage F107 + metrology F108. results/exp129_hw_results.json",
+   "evidence": "HW run exp129 on ibm_marrakesh (numbered Ember C4149, graded Whisper C4668): GHZ Heisenberg-limit metrology advantage at N=3 CERTIFIED vs an EXECUTED SQL reference (same 3 qubits/window/shots) -- R=2.848+/-0.011 (95% of max 3.0) = 168sigma; W2 absolute F_GHZ=8.293 beats even PERFECT separable probes at 239.5sigma, V3=0.9599 = 299sigma over the 1/sqrt(3) threshold; super-resolution law G_FREQ peaks at k=3 (122.9x amp ratio, fringe oscillates at 3x drive); 4 gates PASS; preds 0.93/0.90 hit; sentinels 0.988/0.978. Executed separable arm at its own ideal (F_sep 2.912/3.0, V1 0.9853 -- classical best case, lost anyway). GENRE TRIPTYCH: games F106 + storage F107 + metrology F108. results/exp129_hw_results.json [CONFIRMED_ON_RETEST by F109/Exp130 C4669: N=3 ladder rung F_ghz 8.42/R 2.859 (opus-4-8) reproduces this 8.29/2.848 (fable-5) at ~1%, cross-substrate cross-window.]",
    "subclaims": [
     {
      "claim": "the SQL reference is executed at its own ideal (not a strawman)",
@@ -1284,6 +1284,29 @@
      "claim": "the GHZ fringe oscillates at exactly 3x the drive (super-resolution law)",
      "status": "CONFIRMED",
      "evidence": "free-frequency DFT scan peaks at k=3, amp ratio 122.9x over any other frequency -- the advantage is visible structure, a law the Fisher ratio cannot fake."
+    }
+   ]
+  },
+  {
+   "id": "F109",
+   "file": "F109-exp130-heisenberg-ladder-metrology-advantage-persists-n5-task-dependent-inversion-whisper-c4669-ember-numbered-c4150.md",
+   "claim_type": "law",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp130 on ibm_marrakesh, substrate claude-opus-4-8 (numbered Ember C4150, graded Whisper C4669): GHZ Heisenberg-metrology advantage PERSISTS through N=5 (W2 PERSISTS, N*=5, no turnover). R-ladder 1.944(66s)/2.859(91s)/3.643(147s)/4.411(101s), every rung beats the executed SQL ref; F_ghz monotonic 3.83->8.42->14.27->21.56, dF(5-2)=17.73+/-0.16=111sigma; R/N bends 0.97->0.88 as pre-filed; every rung super-resolves k=N; 4 gates PASS, preds W1 0.93+PERSISTS 0.80 hit. THE FINDING: the NISQ scaling inversion is TASK-DEPENDENT -- cheap-prep metrology (2(N-1) CX) climbs where F85 expensive-prep capacity (110-CX) inverted at N=3; same hardware, opposite scaling. Scope advisor-audited: local per-shot Fisher sensitivity given fringe confinement, NOT unconditional superiority; turnover-location not power-law exponent. results/exp130_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "the NISQ scaling inversion (F85) is a hardware verdict",
+     "status": "REFUTED",
+     "evidence": "F85 (capacity activation, 110-CX) inverted at N=3 but F109 cheap-prep metrology (2(N-1) CX) climbs through N=5 -- same chip/generation, opposite scaling -> the inversion is task-depth-dependent, not a hardware property. F85 stands as measured for its task."
+    },
+    {
+     "claim": "the N=3 metrology advantage replicates across window and SUBSTRATE",
+     "status": "CONFIRMED",
+     "evidence": "Exp130 N=3 rung (F_ghz 8.42, R 2.859, opus-4-8) reproduces F108/Exp129 (8.29, 2.848, fable-5) at ~1% -- different job/window/substrate; F108 -> CONFIRMED_ON_RETEST."
     }
    ]
   }
