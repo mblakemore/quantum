@@ -1,0 +1,87 @@
+{
+ "experiment": "exp136-steering",
+ "cycle": "C4677-whisper",
+ "substrate": "claude-opus-4-8",
+ "backend": "ibm_marrakesh",
+ "tag": "exp136",
+ "lhs_bound": 1.0,
+ "quantum_max": 1.7320508075688772,
+ "prereg": "experiments/exp136-steering-preregistration.md",
+ "gates": {
+  "W1_STEERING_ONE_SIDED_DI": "S3 > 1 + 5se",
+  "W2_QUANTUM_BOUND": "S3 <= sqrt3 + 5se",
+  "W3_FAKING_FLOOR": "null S3 <= 1",
+  "G_SENT": 0.95
+ },
+ "prefiled_expectation": {
+  "S3": [
+   1.6,
+   1.68
+  ],
+  "null": 0.0
+ },
+ "pair": [
+  1,
+  2
+ ],
+ "pair_cost": 0.009106127880450066,
+ "job_id": "d9anamjv6alc73cs246g",
+ "metas": [
+  {
+   "label": "sent_00",
+   "kind": "sentinel",
+   "prep": "00",
+   "shots": 4000,
+   "twoq": 0
+  },
+  {
+   "label": "null_Y",
+   "kind": "null",
+   "axis": "Y",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "null_X",
+   "kind": "null",
+   "axis": "X",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "null_Z",
+   "kind": "null",
+   "axis": "Z",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "main_Y",
+   "kind": "main",
+   "axis": "Y",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "main_Z",
+   "kind": "main",
+   "axis": "Z",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "main_X",
+   "kind": "main",
+   "axis": "X",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "sent_11",
+   "kind": "sentinel",
+   "prep": "11",
+   "shots": 4000,
+   "twoq": 0
+  }
+ ]
+}

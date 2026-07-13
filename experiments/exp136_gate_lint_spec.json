@@ -1,0 +1,38 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "W1_STEERING_ONE_SIDED_DI_over_1",
+      "pass_value": 1.667,
+      "fail_value": 0.9,
+      "threshold": 1.0,
+      "direction": "above",
+      "se": 0.008
+    },
+    {
+      "name": "W2_QUANTUM_BOUND_honesty",
+      "pass_value": 1.667,
+      "fail_value": 1.85,
+      "threshold": 1.7321,
+      "direction": "below",
+      "se": 0.008
+    },
+    {
+      "name": "W3_FAKING_FLOOR_null_below_1",
+      "pass_value": 0.003,
+      "fail_value": 1.3,
+      "threshold": 1.0,
+      "direction": "below",
+      "se": 0.008
+    },
+    {
+      "name": "G_SENT_integrity",
+      "pass_value": 0.98,
+      "fail_value": 0.5,
+      "threshold": 0.95,
+      "direction": "above",
+      "se": 0.0025
+    }
+  ]
+}
