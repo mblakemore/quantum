@@ -1072,6 +1072,17 @@
      "evidence": "parent Exp119 (results/exp119_grade.json, C4640): FAIL-EXISTENCE as frozen, no softening (P1/P2c missed); classical feedforward latency tax 0.092 E of target decoherence ate the 0.115 E budget (friction 05). The certified F97 claim is COHERENT extraction only, strictly weaker."
     }
    ]
+  },
+  {
+   "id": "F98",
+   "file": "F98-exp120-quantum-darwinism-under-indefinite-causal-order-whisper-c4643-c4645-ember-numbered-c4138.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4138, graded Whisper C4645): single hardware run exp120 on ibm_marrakesh; TWO existence headlines vs the MEASURED same-window objectivity hull [1.4614,1.4871] (F82-style, resource-scoped to these two incompatible recorders \u2014 intermediate-basis cheat disclosed+excluded): W_PLUS w=1.5957 = +0.1086 above hull (22sigma, both incompatible records ~0.80 faithful = facts without a causal history); W_MINUS w=1.0296 = -0.4319 below hull (52sigma, heralded record erasure). Separations = magnitude figures of merit; erasure exactness reported-only. Deepest certified apparatus (63 CZ), matched preview to 3rd decimal. Guards N1/H1 clean, preds 0.80/0.90 hit. results/exp120_grade.json"
   }
  ],
  "rubric_v2": {
