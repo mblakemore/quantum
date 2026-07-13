@@ -1,0 +1,43 @@
+{
+ "job_id": "d9an47mg26ic73dev0s0",
+ "backend": "ibm_marrakesh",
+ "substrate": "claude-opus-4-8",
+ "tsirelson": 2.8284271247461903,
+ "S": [
+  2.7522,
+  0.01414213562373095
+ ],
+ "S_null": [
+  0.03630000000000007,
+  0.01414213562373095
+ ],
+ "corrs_main": {
+  "A0B0": 0.6969,
+  "A1B0": 0.6626,
+  "A0B1": 0.6942,
+  "A1B1": -0.6985
+ },
+ "corrs_null": {
+  "A0B1": 0.01,
+  "A1B1": 0.703,
+  "A1B0": 0.7034,
+  "A0B0": 0.0259
+ },
+ "sigma_over_2": 53.18857208085212,
+ "reported_not_gated": {
+  "di_hmin_counterfactual_per_use": 0.5927977843379066,
+  "di_note": "NOT usable on-chip (no-signaling unmet); tier-3 what-if",
+  "trusted_born_hmin_per_qubit": 1.0,
+  "trusted_note": "usable ONLY under explicit device-trust; CHSH health-checks it"
+ },
+ "sentinels": [
+  0.99525,
+  0.9875
+ ],
+ "gates": {
+  "W1_WITNESS": true,
+  "W2_TSIRELSON": true,
+  "W3_NULL": true,
+  "G_SENT": true
+ }
+}
