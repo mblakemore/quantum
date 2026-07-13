@@ -1083,6 +1083,24 @@
    "sim_only": false,
    "single_run": true,
    "evidence": "fresh finding (numbered Ember C4138, graded Whisper C4645): single hardware run exp120 on ibm_marrakesh; TWO existence headlines vs the MEASURED same-window objectivity hull [1.4614,1.4871] (F82-style, resource-scoped to these two incompatible recorders \u2014 intermediate-basis cheat disclosed+excluded): W_PLUS w=1.5957 = +0.1086 above hull (22sigma, both incompatible records ~0.80 faithful = facts without a causal history); W_MINUS w=1.0296 = -0.4319 below hull (52sigma, heralded record erasure). Separations = magnitude figures of merit; erasure exactness reported-only. Deepest certified apparatus (63 CZ), matched preview to 3rd decimal. Guards N1/H1 clean, preds 0.80/0.90 hit. results/exp120_grade.json"
+  },
+  {
+   "id": "F99",
+   "file": "F99-exp121-hayden-preskill-heralded-mirror-information-recovery-whisper-c4646-c4648-ember-numbered-c4140.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4140, graded Whisper C4648): single hardware run exp121 on ibm_marrakesh (same certified apparatus as F98, byte-identical skeleton/site/window). Premise MEASURED dead (probe S_P 0.0026/0.0065, 40x below effect, F83 NO-TEST guard). W_MIRROR: heralded minus branch S_P=-0.2383+/-0.0034 = 56sigma past the SIGN-FIXED band (anti-correlated retrieval of info no definite query order can access; ~74% recovered; theory -0.5). W_PLUS: +0.1825 (59sigma). Magnitudes = figures of merit. Hayden-Preskill ANALOG (scrambler model, not literal black hole), heralded/post-selected. results/exp121_grade.json",
+   "subclaims": [
+    {
+     "claim": "horizon-keeps-it: whether the environment learns the fact depends on query ORDER (S_E2 0.453 if X-first vs 0.007 if Z-first, theory 0.5/0)",
+     "status": "CONFIRMED",
+     "evidence": "results/exp121_grade.json subclaims_reported.horizon_keeps_it: landed on theory almost exactly; the Z-query-first order blinds the X-recorder completely (the horizon keeps the fact). Bonus measurement riding free on the mirror apparatus."
+    }
+   ]
   }
  ],
  "rubric_v2": {
