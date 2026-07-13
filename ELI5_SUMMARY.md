@@ -192,9 +192,18 @@ In three days the quantum switch went from a certified curiosity to a working re
   The mirror only works if you refuse to say when you looked. Bonus rule of the
   universe, measured almost exactly on theory: ask the wrong question first and
   NOBODY — not even the recorders — gets to learn the fact.
+- **The twin paradox, on a chip — finding #100** (F100): send a ticking clock down
+  two roads at once. If the clock is running (aging, radiating), the universe can
+  tell which road it took — and the two roads stop interfering: 36-sigma certain,
+  measured in a way no phase-trick can fake. An identical but STOPPED clock keeps
+  the roads perfectly ambiguous. The best part is the provenance: our first run of
+  this experiment "won" but we flagged our own reading as possibly fooled (the
+  signal had rotated into an axis we weren't watching); the retest watched every
+  axis, refuted our own favorite excuse, and certified the real thing. Finding
+  one hundred is the honesty machine itself.
 - **And the weather report went public**: the platform's moods (T1 values that swing 2×
   in a day, a noise model blind to feedforward) are now charts anyone can read
   ([demo/weather](demo/weather/index.html)), with the four tricks we use to work through
   them.
 
-Findings F87–F99, every one pre-registered, every miss in the record.
+Findings F87–F100, every one pre-registered, every miss in the record.
