@@ -70,3 +70,5 @@ premise gate (baths must be passive at 5σ) caught the miss and NO-TESTed a +23�
 the cost of the missing calibration data is now a wasted flight, documented.
 
 Exp116b (C4612): bias r≈1.82 this run (r1 rung assumed 1.5 landed baths at 0.52). Sample now 7 values, 1.38–2.15. The delay-ladder workaround VALIDATED (rung-2 landed on target; experiment certified through the bias).
+
+Exp117 (C4615): bias ~1.6 this run — the sample (now 8 values, 1.38-2.15) swings BOTH directions across days. Ladder consequence: 3 coarse rungs can straddle the sweet spot (r1 missed qualifying by 0.011, r2 qualified but cool). Refined ask: even a daily-granularity live T1 estimate would collapse the needed rung count.
