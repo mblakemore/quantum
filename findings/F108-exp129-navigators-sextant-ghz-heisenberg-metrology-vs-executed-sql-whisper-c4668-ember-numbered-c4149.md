@@ -6,7 +6,7 @@ F108 verified unused — F107 was the highest prior.)
 **Experiment**: Exp129 (ibm_marrakesh, job `d9ale3jv6alc73crvd30`, star [2,1,3], 26 pubs, 196k
 shots; **GHZ arm 4 CX, separable arm zero-2q**). Grader frozen *with* the prereg (a factor-2 in
 the DFT estimator and a vacuous G_FREQ width both caught at sim/lint tier pre-freeze).
-**Pre-registration**: `experiments/exp129-ghz-metrology-preregistration.md` (FROZEN; the SQL
+**Pre-registration**: `experiments/exp129-ghz-sql-preregistration.md` (FROZEN; the SQL
 reference **executed, not assumed** — the F107 house standard).
 
 ## Plain English — the entangled sextant

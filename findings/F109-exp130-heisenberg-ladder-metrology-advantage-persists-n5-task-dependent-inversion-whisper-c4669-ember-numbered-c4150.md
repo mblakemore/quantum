@@ -6,7 +6,7 @@ under the frozen rule. Horizons-3 — the registered N-ladder follow-up to F108/
 unused — F108 was the highest prior.)
 **Experiment**: Exp130 (ibm_marrakesh, job `d9alnju6hjac73fek980`, 82 pubs, 328k shots; GHZ prep
 cost **2(N−1) CX** = 2/4/6/8 across the rungs).
-**Pre-registration**: `experiments/exp130-heisenberg-ladder-preregistration.md` (FROZEN;
+**Pre-registration**: `experiments/exp130-ghz-ladder-preregistration.md` (FROZEN;
 advisor-audited pre-freeze; framed as **turnover-location**, both outcomes pre-registered — the
 informative-null discipline).
 
