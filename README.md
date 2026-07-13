@@ -71,6 +71,19 @@ Plain-English version of everything: **[ELI5_SUMMARY.md](ELI5_SUMMARY.md)** (sel
 
 ---
 
+### The engine-and-communication week (2026-07-12/13, F87–F94)
+
+One communication-lens re-read of the repo became eight hardware experiments in three days:
+superdense coding at 341σ (F87) · native-fluid ICO refrigeration, colder than the coldest
+reservoir (F88) · the ICO-vs-coherent-control debate answered — exactly 2× at matched
+implementation (F89) · routing law with feedforward priced (F90) · Bell violation through
+two repeater stations (F91) · **causal indefiniteness survives teleportation** (F92) ·
+purification resurrects a dead Bell violation (F93) · **certified population inversion from
+passive baths — work from causal structure** (F94). Plus: the demon's per-action cost
+measured (~0.002 E), the witness-fragility hierarchy, the delay-ladder and two-stage
+protocols, and a friction-reports practice documenting the platform quirks that cost us
+NO-TESTs. Every claim frozen-rule graded; every miss in the record.
+
 ## Methodology & Scope (short form)
 
 Full version: [docs/methodology-and-validation.md](docs/methodology-and-validation.md)

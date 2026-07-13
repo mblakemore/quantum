@@ -89,6 +89,10 @@ def ledger(name, p1_plus, p1_minus, P_plus, p_th):
         "net_population_shift_unconditioned": net_delta,
         "mutual_info_control_target_bits": I_CT,
         "second_law_check_cost_exceeds_harvest": W_landauer >= Q_selected,
+        # work column (C4619): ergotropy of the hot branch — extractable work if
+        # p1|- exceeds the passive line (F94-certified on hardware; Exp117-class
+        # stroke extracts it at measured demon cost ~0.0017 E per action)
+        "ergotropy_minus_branch_E": max(0.0, 2 * p1_minus - 1) * P_minus,
     }
     return out
 
