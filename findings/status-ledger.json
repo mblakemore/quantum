@@ -73,7 +73,8 @@
    "retest_ref": "findings/13-qaoa-cz-wall.md",
    "sim_only": false,
    "single_run": false,
-   "evidence": "catalog L20: dense portfolio QUBO and sparse MaxCut hit the same ~1000-CZ wall \u2014 independent problem class reproduces the wall"
+   "evidence": "catalog L20: dense portfolio QUBO and sparse MaxCut hit the same ~1000-CZ wall \u2014 independent problem class reproduces the wall",
+   "type_basis": "existence per Whisper (a wall EXISTS at ~1000 CZ); Ember blind-read law (a depth constant). Edge case, H1-neutral (opposite-direction pair with F82); Elder naive tiebreak optional."
   },
   {
    "id": "06",
@@ -824,7 +825,8 @@
    "retest_ref": "findings/F81-loader-depth-boundary-not-stable-same-circuits-same-qubits-11h-apart-elder-c6378.md",
    "sim_only": false,
    "single_run": false,
-   "evidence": "F81: loader depth boundary not stable across windows"
+   "evidence": "F81: loader depth boundary not stable across windows",
+   "type_basis": "magnitude per Whisper vs law per Ember blind \u2014 both fragile group, zero H1 impact."
   },
   {
    "id": "F80",
@@ -851,13 +853,20 @@
   {
    "id": "F82",
    "file": "F82-causal-game-beats-causal-bound-two-chips-ember-c4118.md",
-   "claim_type": "magnitude",
+   "claim_type": "existence",
    "status": "CONFIRMED_ON_RETEST",
    "retested": true,
    "retest_ref": "results/exp105b_hw_results.json",
    "sim_only": false,
    "single_run": false,
-   "evidence": "fez replication p=0.9738 vs marrakesh 0.9769 \u2014 0.31pp concordance; a MAGNITUDE that replicated cross-device"
+   "evidence": "fez replication p=0.9738 vs marrakesh 0.9769 \u2014 0.31pp concordance; a MAGNITUDE that replicated cross-device [headline relabeled existence per Ember C4132: the claim is a bound-beat; magnitude lives in subclaims]",
+   "subclaims": [
+    {
+     "claim": "game-score magnitude reproduces cross-device (0.31pp concordance)",
+     "status": "CONFIRMED_ON_RETEST",
+     "evidence": "exp105b fez replication p=0.9738 vs marrakesh 0.9769 \u2014 a designed second measurement (R4-qualifying). Split from headline per Ember C4132 blind re-label + rubric R1/R2."
+    }
+   ]
   },
   {
    "id": "F83",
@@ -1020,5 +1029,11 @@
   "R3_evidence_pointers": "evidence pointers must reference STABLE artifacts (findings/, results/, prereg files) \u2014 never mutable synthesis docs (the F76 flag, fixed C4594).",
   "R4_retest_definition": "retested=true requires a SECOND measurement or formal adjudication event; internal cross-instance checks within one prereg count (Finding 13 precedent); corroboration-by-composition does not.",
   "R5_composition_status": "Ember C4131 finding 2: subclaims whose evidence is corroboration-by-composition (byproducts of experiments designed for other questions) use CORROBORATED_BY_COMPOSITION \u2014 a distinct status, weaker than CONFIRMED_ON_RETEST, consistent with R4. It counts in the informational subclaim tally, never as a retest."
+ },
+ "blind_relabel": {
+  "by": "Ember C4132",
+  "agreement": "16/19 exact, 17/19 H1-group",
+  "H1_invariance": "2x2 numerically identical under both labelings (fragile 8/11, robust 1/7); disagreements cancel (one pro-H1, one anti-H1)",
+  "verdict": "confirmation-bias-in-labeling FALSIFIED; H1 statable without the not-blind asterisk"
  }
 }
