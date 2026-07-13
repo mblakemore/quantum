@@ -1,0 +1,37 @@
+{
+ "job_id": "d9anamjv6alc73cs246g",
+ "backend": "ibm_marrakesh",
+ "substrate": "claude-opus-4-8",
+ "lhs_bound": 1.0,
+ "quantum_max": 1.7320508075688772,
+ "S3": [
+  1.6813017189071093,
+  0.007071067811865476
+ ],
+ "S3_null": [
+  0.025345676817424573,
+  0.007071067811865476
+ ],
+ "corrs_main": {
+  "Y": -0.969,
+  "Z": 0.9737,
+  "X": 0.9694
+ },
+ "corrs_null": {
+  "Y": -0.001,
+  "X": -0.0175,
+  "Z": -0.0274
+ },
+ "sigma_over_lhs": 96.3506130946536,
+ "sentinels": [
+  0.9935,
+  0.98725
+ ],
+ "scope": "one-sided-DI under Bob-measurement-trust; Alice black-box; locality loophole open, crosstalk loophole bounded (~1% << 0.67 faking excess)",
+ "gates": {
+  "W1_STEERING_ONE_SIDED_DI": true,
+  "W2_QUANTUM_BOUND": true,
+  "W3_FAKING_FLOOR": true,
+  "G_SENT": true
+ }
+}
