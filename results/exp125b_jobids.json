@@ -1,0 +1,120 @@
+{
+ "experiment": "exp125b-coherent-record-erasure-frontier",
+ "cycle": "C4664-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp125b",
+ "prereg": "experiments/exp125b-coherent-record-erasure-frontier-preregistration.md",
+ "pair": [
+  3,
+  4
+ ],
+ "a_max": {
+  "3": 0.005859375,
+  "4": 0.00732421875
+ },
+ "record_qubit_index": 1,
+ "tax_coherent_E": 0.028,
+ "tax_classical_E": 0.092,
+ "grade": {
+  "G_ent": "S(B|A)+5SE < 0",
+  "G_frontier": "bonus=|S(B|A)|*k_BT*ln2 vs tax_coh 0.028 / tax_cl 0.092"
+ },
+ "bound_graded": "conditional/coherent (companion to F104 classical)",
+ "transpile_seed": 4664,
+ "shuffle_seed": 4664,
+ "boot_B": 400,
+ "job_id": "d9ajm2e6hjac73fehhdg",
+ "metas": [
+  {
+   "label": "tomo_ZX",
+   "arm": "tomo",
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 5
+  },
+  {
+   "label": "cal_10",
+   "arm": "cal",
+   "shots": 8000,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "tomo_YZ",
+   "arm": "tomo",
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 8
+  },
+  {
+   "label": "tomo_YY",
+   "arm": "tomo",
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 8
+  },
+  {
+   "label": "tomo_XX",
+   "arm": "tomo",
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 8
+  },
+  {
+   "label": "tomo_YX",
+   "arm": "tomo",
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 7
+  },
+  {
+   "label": "tomo_ZZ",
+   "arm": "tomo",
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 8
+  },
+  {
+   "label": "tomo_XY",
+   "arm": "tomo",
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 8
+  },
+  {
+   "label": "cal_00",
+   "arm": "cal",
+   "shots": 8000,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "cal_01",
+   "arm": "cal",
+   "shots": 8000,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "tomo_ZY",
+   "arm": "tomo",
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 8
+  },
+  {
+   "label": "cal_11",
+   "arm": "cal",
+   "shots": 8000,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "tomo_XZ",
+   "arm": "tomo",
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 8
+  }
+ ]
+}
