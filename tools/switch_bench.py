@@ -1,30 +1,43 @@
 #!/usr/bin/env python3
-"""switch_bench.py — the portable causal-structure benchmark (Whisper C4619,
-horizons P6 "universal translator"; proposed C4560, backlog since).
+"""switch_bench.py — the portable causal-structure benchmark.
+v1.0 Whisper C4619 (horizons P6 "universal translator"; proposed C4560).
+v1.0.1 C4630: null-estimator fix (maiden-flight catch, see grade()).
+v2.0 Whisper C4637: + SCHEDULE module — the F96 hidden-order diagnostic folded
+in as a second axis (Creator directive). The bench now measures BOTH directions
+of causal structure: can the device HOST indefinite order (causal axis), and is
+its "parallel" scheduling honestly order-free (schedule axis)?
 
-ONE cheap job (68 pubs, 112k shots, ~25s QPU) measures three numbers no standard
-benchmark (QV, CLOPS, EPLG) touches — a device's ability to host INDEFINITE
-CAUSAL ORDER:
-
+CAUSAL axis (one job, 68 pubs, 112k shots): three numbers no standard benchmark
+(QV, CLOPS, EPLG) touches —
   W    witness DISC = <X_c>_comm - <X_c>_anti  (ideal 2.0; classical mixture: 0)
   Rbar capacity signal through two zero-capacity channels (ideal 0.5333; causal: 0)
-  NULL definite-order integrity (|Rbar_null| must sit at 0 — apparatus honesty)
+  NULL definite-order integrity (unconditioned D must sit at 0 — apparatus honesty)
 
-Grading is frozen HERE (bounds are theory constants, not tuned): PASS-CAUSAL if
-W - 5SE > 0 and Rbar - 5SE > 0.10 with NULL inside 0.10 (Exp106 constants).
-Reference values from our published campaign (ibm_marrakesh/ibm_fez, job IDs in
-docs/quantum-switch-spec.md) are printed for comparison.
+SCHEDULE axis (6 pubs, 36k shots; F96 apparatus, frozen rules inherited): for a
+max-crosstalk hotspot + a >=3-hop control (deterministic live-map selection,
+run_exp118_submit.select_sites), three schedules seqAB/seqBA/par at x8
+amplification. Classification per grade_exp118 (FROZEN: floor 0.0223 at 6000
+shots — budget frozen with the floor): ORDER-SYMMETRIC with certified bound
+D_order+5SE as the figure of merit, or EXISTS with par-classification. Control
+EXISTS => NO-TEST(sched-control); split-half floor-transfer guard blocks EXISTS
+headlines (median rule, prereg exp118).
+
+Grading frozen HERE (bounds are theory constants / F96 frozen rules, not tuned).
+Reference values from the published campaign (job IDs in
+docs/quantum-switch-spec.md) printed for comparison.
 
 BYOK: point QISKIT_IBM_TOKEN at any account.
   python3 tools/switch_bench.py --backend <name> --scan     # free transpile audit
   python3 tools/switch_bench.py --backend <name> --submit   # spend, prints job id
   python3 tools/switch_bench.py --grade <job_id>            # frozen grade + card
+  --modules causal,schedule (default both; v1 cards reproducible with --modules causal)
 """
 import argparse
 import itertools
 import json
 import os
 import sys
+from collections import Counter
 
 import numpy as np
 
@@ -34,13 +47,14 @@ sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
 
 SHOTS_W = 4000
 SHOTS_CAP = 1500
-REFERENCE = {"ibm_marrakesh": {"W": 1.90, "Rbar": 0.5034},
-             "ibm_fez": {"W": 1.87, "Rbar": None},
-             "ideal": {"W": 2.0, "Rbar": 0.5333}}
+SHOTS_SCHED = 6000   # FROZEN with the 0.0223 floor (exp118 prereg) — do not tune
+REFERENCE = {"ibm_marrakesh": {"W": 1.90, "Rbar": 0.5034, "sched_bound": 0.0303},
+             "ibm_fez": {"W": 1.87, "Rbar": None, "sched_bound": None},
+             "ideal": {"W": 2.0, "Rbar": 0.5333, "sched_bound": 0.0}}
 PAULIS = ["1", "X", "Y", "Z"]
 
 
-def build_all():
+def build_causal():
     from exp106_capacity_activation import build_circuit
     pubs = []
     for rep in ("start", "end"):
@@ -54,6 +68,23 @@ def build_all():
             pubs.append((f"cap_nu({a},{b})b{bit}",
                          build_circuit(a, b, bit, definite=True), SHOTS_CAP))
     return pubs
+
+
+def build_sched(backend):
+    """F96 apparatus: frozen deterministic site selection + frozen probe."""
+    from exp118_hidden_order_sim import probe
+    from run_exp118_submit import select_sites
+    _, sites = select_sites(backend.target)
+    pubs = []
+    for site in ("hotspot", "control"):
+        sel = sites[site]
+        layout = [sel["pairA"][0], sel["pairA"][1], sel["spectator"],
+                  sel["pairB"][0], sel["pairB"][1]]
+        legal = {tuple(sorted(sel["pairA"])), tuple(sorted(sel["pairB"]))}
+        for sch in ("seqAB", "seqBA", "par"):
+            pubs.append((f"sched_{site}_{sch}", probe(sch), SHOTS_SCHED,
+                         layout, legal))
+    return pubs, sites
 
 
 def pick_pair(backend):
@@ -90,26 +121,16 @@ def analyze(counts_by_label):
     return float(W), float(seW), stats["sw"], stats["nu"]
 
 
-def grade(job_id):
-    from run_exp66_qpu_partb import _get_ibm_service
-    svc = _get_ibm_service()
-    job = svc.job(job_id)
-    res = job.result()
-    man = json.load(open(os.path.join(HERE, "..", "results",
-                                      f"switch_bench_{job_id}.json")))
-    counts = {m["label"]: (pub.data.c.get_counts() if hasattr(pub.data, "c") else
-                           getattr(pub.data, list(pub.data.keys())[0]).get_counts())
-              for pub, m in zip(res, man["metas"])}
+def grade_causal(counts, man, out):
     W, seW, (R, seR), (Rn, seRn) = analyze(counts)
     # null integrity via the UNCONDITIONED D observable (Exp106 convention: the
     # null control is a |+> spectator, so conditional R starves the minus branch
     # — v1.0 wrongly applied conditional Rbar to the null; caught on the maiden
     # flight when the null SE ballooned to 0.068)
-    import itertools as _it
     dz, dvar = [], []
     for bit in (0, 1):
         pool = {}
-        for a, b in _it.product(PAULIS, repeat=2):
+        for a, b in itertools.product(PAULIS, repeat=2):
             for k, v in counts[f"cap_nu({a},{b})b{bit}"].items():
                 pool[k] = pool.get(k, 0) + v
         n = sum(pool.values())
@@ -120,24 +141,89 @@ def grade(job_id):
     Dn = (dz[0] - dz[1]) / 2
     seDn = float(np.sqrt(sum(dvar) / 4))
     null_ok = abs(Dn) + 5 * seDn < 0.10
-    Rn, seRn = Dn, seDn   # report the D values in the null slot
     pass_w = W - 5 * seW > 0
     pass_cap = R - 5 * seR > 0.10
     verdict = ("PASS-CAUSAL" if (null_ok and pass_w and pass_cap) else
                "NO-TEST(null)" if not null_ok else "FAIL")
-    print("=" * 62)
-    print(f"SWITCH-BENCH REPORT CARD — {man['backend']} (job {job_id})")
-    print("=" * 62)
+    print(f"  CAUSAL AXIS")
     print(f"  W (witness DISC)    {W:+.4f} ± {seW:.4f}   ideal 2.0 | causal-mix 0")
     print(f"  Rbar (capacity)     {R:+.4f} ± {seR:.4f}   ideal 0.5333 | causal 0")
-    print(f"  D    (null arm)     {Rn:+.4f} ± {seRn:.4f}   integrity band ±0.10 (unconditioned)")
+    print(f"  D    (null arm)     {Dn:+.4f} ± {seDn:.4f}   integrity band ±0.10 (unconditioned)")
     print(f"  reference: marrakesh W~{REFERENCE['ibm_marrakesh']['W']}, "
           f"Rbar~{REFERENCE['ibm_marrakesh']['Rbar']}")
-    print(f"  VERDICT: {verdict}")
-    out = {"backend": man["backend"], "job_id": job_id, "W": W, "seW": seW,
-           "Rbar": R, "seR": seR, "Rbar_null": Rn, "verdict": verdict}
+    print(f"  verdict: {verdict}")
+    out.update({"W": W, "seW": seW, "Rbar": R, "seR": seR, "Rbar_null": Dn,
+                "causal_verdict": verdict})
+    return verdict
+
+
+def grade_sched(bits_by_label, out):
+    """F96 frozen classification — grade_site/FLOOR imported, not re-derived."""
+    from grade_exp118 import FLOOR, grade_site, split_half
+    rng = np.random.default_rng(4634)
+    grades, diag = {}, {}
+    for site in ("hotspot", "control"):
+        counts = {sch: dict(Counter(bits_by_label[f"sched_{site}_{sch}"]))
+                  for sch in ("seqAB", "seqBA", "par")}
+        grades[site] = grade_site(counts, rng)
+        for sch in ("seqAB", "seqBA", "par"):
+            diag[f"{site}_{sch}"] = split_half(bits_by_label[f"sched_{site}_{sch}"])
+    guard_ok = float(np.median(list(diag.values()))) <= FLOOR
+    if grades["control"]["order"] != "ORDER-SYMMETRIC":
+        verdict = "NO-TEST(sched-control)"
+    elif grades["hotspot"]["order"] == "ORDER-SYMMETRIC":
+        bound = (grades["hotspot"]["point"]["D_order"]
+                 + 5 * grades["hotspot"]["se"]["D_order"])
+        verdict = f"SCHED-SYMMETRIC(bound<={bound:.4f})"
+    elif not guard_ok:   # EXISTS headline blocked by floor-transfer guard
+        verdict = "NO-TEST(floor-transfer)"
+    else:
+        verdict = f"HIDDEN-ORDER({grades['hotspot'].get('par_class', '?')})"
+    print(f"  SCHEDULE AXIS (F96 apparatus, floor {FLOOR})")
+    for site in ("hotspot", "control"):
+        g = grades[site]
+        bound = g["point"]["D_order"] + 5 * g["se"]["D_order"]
+        print(f"  {site:8s} D_order {g['point']['D_order']:.4f} ± "
+              f"{g['se']['D_order']:.4f}  bound<={bound:.4f}  {g['order']}"
+              + (f" / par={g['par_class']}" if "par_class" in g else ""))
+    print(f"  split-half median {float(np.median(list(diag.values()))):.4f} "
+          f"(guard {'holds' if guard_ok else 'VIOLATED'})   "
+          f"reference: marrakesh bound<="
+          f"{REFERENCE['ibm_marrakesh']['sched_bound']} (F96)")
+    print(f"  verdict: {verdict}")
+    out.update({"sched_grades": grades, "sched_split_half": diag,
+                "sched_verdict": verdict})
+    return verdict
+
+
+def grade(job_id):
+    from run_exp66_qpu_partb import _get_ibm_service
+    svc = _get_ibm_service()
+    job = svc.job(job_id)
+    res = job.result()
+    man = json.load(open(os.path.join(HERE, "..", "results",
+                                      f"switch_bench_{job_id}.json")))
+    counts, bits = {}, {}
+    for pub, m in zip(res, man["metas"]):
+        arr = (pub.data.c if hasattr(pub.data, "c")
+               else getattr(pub.data, list(pub.data.keys())[0]))
+        counts[m["label"]] = arr.get_counts()
+        if m["label"].startswith("sched_"):
+            bits[m["label"]] = arr.get_bitstrings()
+    labels = set(counts)
+    print("=" * 62)
+    print(f"SWITCH-BENCH v2 REPORT CARD — {man['backend']} (job {job_id})")
+    print("=" * 62)
+    out = {"backend": man["backend"], "job_id": job_id}
+    verdicts = []
+    if any(lab.startswith("w_") for lab in labels):
+        verdicts.append(grade_causal(counts, man, out))
+    if any(lab.startswith("sched_") for lab in labels):
+        verdicts.append(grade_sched(bits, out))
+    out["verdict"] = " | ".join(verdicts)
+    print(f"  VERDICT: {out['verdict']}")
     p = os.path.join(HERE, "..", "results", f"switch_bench_{job_id}_card.json")
-    json.dump(out, open(p, "w"), indent=1)
+    json.dump(out, open(p, "w"), indent=1, default=float)
     print(f"  card -> {p}")
 
 
@@ -147,29 +233,49 @@ def main():
     ap.add_argument("--scan", action="store_true")
     ap.add_argument("--submit", action="store_true")
     ap.add_argument("--grade", metavar="JOB_ID")
+    ap.add_argument("--modules", default="causal,schedule")
     args = ap.parse_args()
     if args.grade:
         return grade(args.grade)
+    modules = [m.strip() for m in args.modules.split(",") if m.strip()]
 
     from qiskit import transpile
     from run_exp66_qpu_partb import _get_ibm_service
     svc = _get_ibm_service()
     backend = svc.backend(args.backend)
-    pair, cost, twoq = pick_pair(backend)
-    print(f"{backend.name}: pair={pair} cost={cost:.5f}")
-    pubs = build_all()
+
+    # pubs: (label, qc, shots, layout, legal_edges_or_None)
+    pubs, sites, pair = [], None, None
+    if "causal" in modules:
+        pair, cost, twoq = pick_pair(backend)
+        print(f"{backend.name}: causal pair={pair} cost={cost:.5f}")
+        pubs += [(lab, qc, shots, list(pair), None)
+                 for lab, qc, shots in build_causal()]
+    if "schedule" in modules:
+        spubs, sites = build_sched(backend)
+        print(f"{backend.name}: sched sites hotspot="
+              f"{sites['hotspot']['pairA']}+{sites['hotspot']['pairB']}"
+              f"/s{sites['hotspot']['spectator']} control="
+              f"{sites['control']['pairA']}+{sites['control']['pairB']}"
+              f"/s{sites['control']['spectator']}")
+        pubs += spubs
+
     tqcs, metas, ok = [], [], True
-    for lab, qc, shots in pubs:
-        tqc = transpile(qc, backend, initial_layout=list(pair),
+    for lab, qc, shots, layout, legal in pubs:
+        tqc = transpile(qc, backend, initial_layout=layout,
                         seed_transpiler=4619, optimization_level=1)
-        n2 = sum(1 for i in tqc.data if i.operation.num_qubits == 2
-                 and i.operation.name != "barrier")
-        expected = 4 if not lab.startswith("cap_nu") else 0
-        if n2 != expected:
+        tw = [tuple(sorted(tqc.find_bit(q).index for q in i.qubits))
+              for i in tqc.data if i.operation.num_qubits == 2
+              and i.operation.name != "barrier"]
+        if legal is not None:                       # schedule module: 2k=16 CZ
+            good = len(tw) == 16 and set(tw) <= legal
+        else:
+            good = len(tw) == (0 if lab.startswith("cap_nu") else 4)
+        if not good:
             ok = False
-            print(f"  AUDIT MISS {lab}: {n2} != {expected}")
+            print(f"  AUDIT MISS {lab}: 2q={len(tw)} edges={sorted(set(tw))}")
         tqcs.append(tqc)
-        metas.append({"label": lab, "shots": shots, "twoq": n2})
+        metas.append({"label": lab, "shots": shots, "twoq": len(tw)})
     print(f"AUDIT {'PASS' if ok else 'FAIL'} ({len(tqcs)} pubs, "
           f"{sum(m['shots'] for m in metas)} shots)")
     if not ok or not args.submit:
@@ -179,10 +285,12 @@ def main():
     job = SamplerV2(mode=backend).run(
         [(t, None, m["shots"]) for t, m in zip(tqcs, metas)])
     jid = job.job_id()
-    man = {"backend": args.backend, "pair": list(pair), "job_id": jid,
+    man = {"backend": args.backend, "modules": modules, "job_id": jid,
+           "pair": list(pair) if pair else None, "sites": sites,
            "metas": metas}
     json.dump(man, open(os.path.join(HERE, "..", "results",
-                                     f"switch_bench_{jid}.json"), "w"), indent=1)
+                                     f"switch_bench_{jid}.json"), "w"),
+              indent=1, default=str)
     print(f"SUBMITTED {jid}; grade with: python3 tools/switch_bench.py --grade {jid}")
 
 

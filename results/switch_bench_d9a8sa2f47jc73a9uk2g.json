@@ -1,0 +1,70 @@
+{
+ "backend": "ibm_marrakesh",
+ "modules": [
+  "schedule"
+ ],
+ "job_id": "d9a8sa2f47jc73a9uk2g",
+ "pair": null,
+ "sites": {
+  "hotspot": {
+   "pairA": [
+    6,
+    7
+   ],
+   "pairB": [
+    9,
+    10
+   ],
+   "spectator": 8,
+   "sum_2q_err": 0.002567756167666413,
+   "spect_ro": 0.006591796875
+  },
+  "control": {
+   "pairA": [
+    2,
+    3
+   ],
+   "pairB": [
+    6,
+    7
+   ],
+   "spectator": 4,
+   "sum_2q_err": 0.0026173703710420937,
+   "spect_ro": 0.00390625,
+   "min_hops": 3
+  }
+ },
+ "metas": [
+  {
+   "label": "sched_control_seqBA",
+   "shots": 6000,
+   "twoq": 16
+  },
+  {
+   "label": "sched_control_par",
+   "shots": 6000,
+   "twoq": 16
+  },
+  {
+   "label": "sched_hotspot_seqBA",
+   "shots": 6000,
+   "twoq": 16
+  },
+  {
+   "label": "sched_hotspot_seqAB",
+   "shots": 6000,
+   "twoq": 16
+  },
+  {
+   "label": "sched_control_seqAB",
+   "shots": 6000,
+   "twoq": 16
+  },
+  {
+   "label": "sched_hotspot_par",
+   "shots": 6000,
+   "twoq": 16
+  }
+ ],
+ "note": "regression manifest: F96 job regraded through switch-bench v2 (C4637)"
+}
