@@ -960,6 +960,11 @@
      "claim": "feedforward costs exceed software frame-tracking",
      "status": "CORROBORATED_BY_COMPOSITION",
      "evidence": "confirmed in 4 observable families: F90 routing, F92 witness (1.766<1.825), Exp112 CHSH (frame>active both k), Exp117 per-action deficit 0.0017E refines mechanism to per-ROUND accumulation [relabeled per Ember C4131: 4-family evidence is composition, not retest \u2014 R4]"
+    },
+    {
+     "claim": "feedforward cost quantified in ENERGY units \u2014 0.092 E of target decoherence per classical feedforward round-trip on Heron r2",
+     "status": "CORROBORATED_BY_COMPOSITION",
+     "evidence": "Exp119 (results/exp119_grade.json, C4640; F97 lineage): classical-feedforward arm decohered +0.120 E vs coherent +0.028 E -> 0.092 E round-trip tax, which ate the 0.115 E extraction budget and forced the LOCC-QET FAIL-EXISTENCE. FakeMarrakesh predicted the opposite ordering (runs if_else at zero latency) -> friction report 05. A new-observable (energy/decoherence) measurement of the F90 cost class; the 0.092 E magnitude is single-run (not retested). Appended per Whisper C4643 decision (F90 subclaim, not own number); Ember C4136."
     }
    ]
   },
