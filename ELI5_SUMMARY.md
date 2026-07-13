@@ -184,9 +184,17 @@ In three days the quantum switch went from a certified curiosity to a working re
   ordering of those two writers can produce. In the fourth run — flagged in advance
   by a herald qubit — both notebooks came back blank. Runs where no fact was written,
   announced before anyone looked.
+- **The black-hole diary trick** (F99): write a secret in a qubit, let two
+  "horizon" recorders read it in either order — and the secret is provably GONE
+  from the qubit; we measured the emptiness forty times below the effect. But hold
+  the ORDER of the two readings in quantum superposition, and in one heralded run
+  out of four the qubit hands the secret back — every bit flipped, 56-sigma sure.
+  The mirror only works if you refuse to say when you looked. Bonus rule of the
+  universe, measured almost exactly on theory: ask the wrong question first and
+  NOBODY — not even the recorders — gets to learn the fact.
 - **And the weather report went public**: the platform's moods (T1 values that swing 2×
   in a day, a noise model blind to feedforward) are now charts anyone can read
   ([demo/weather](demo/weather/index.html)), with the four tricks we use to work through
   them.
 
-Findings F87–F98, every one pre-registered, every miss in the record.
+Findings F87–F99, every one pre-registered, every miss in the record.
