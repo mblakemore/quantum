@@ -68,3 +68,5 @@ delay-calibrated protocol needs either an in-job T1 estimate (the ask) or a pre-
 delay LADDER with calib-arm-based rung selection (our Exp116b workaround). This run's
 premise gate (baths must be passive at 5σ) caught the miss and NO-TESTed a +23σ pseudo-win —
 the cost of the missing calibration data is now a wasted flight, documented.
+
+Exp116b (C4612): bias r≈1.82 this run (r1 rung assumed 1.5 landed baths at 0.52). Sample now 7 values, 1.38–2.15. The delay-ladder workaround VALIDATED (rung-2 landed on target; experiment certified through the bias).
