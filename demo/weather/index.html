@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Weather Report — ibm_marrakesh, as measured by us</title>
+<style>
+  :root{
+    --ink:#171b26; --panel:#1e2331; --line:#2a3145; --text:#e2e6f0; --muted:#8b93a7;
+    --dim:#5c6479; --cyan:#45d6cf; --gold:#e6a94e; --dteal:#27a8a2; --dgold:#bd8830;
+    --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--text);font-family:var(--sans);line-height:1.6}
+  .wrap{max-width:900px;margin:auto;padding:48px 22px 80px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:var(--mono);font-weight:700;line-height:1.2;font-size:clamp(24px,4.2vw,36px);margin:.3em 0 .35em}
+  h2{font-size:21px;margin:2.2em 0 .4em}
+  .lede,{color:var(--muted)}
+  p{max-width:70ch;color:var(--muted)}
+  p b, p strong{color:var(--text)}
+  .frame{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:14px 0;overflow-x:auto}
+  .cap{font-size:13px;color:var(--dim);max-width:78ch;margin-top:8px}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .tile .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .tile .v{font-family:var(--mono);font-size:26px;color:var(--cyan);margin:.15em 0}
+  .tile .s{font-size:12.5px;color:var(--muted)}
+  details{margin:8px 0 0}
+  summary{cursor:pointer;color:var(--dim);font-size:13px;font-family:var(--mono)}
+  table{border-collapse:collapse;font-size:12.5px;font-family:var(--mono);margin-top:8px}
+  td,th{border:1px solid var(--line);padding:4px 9px;color:var(--muted)}
+  th{color:var(--text)}
+  .foot{margin-top:60px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);font-size:13.5px}
+  a{color:var(--cyan)}
+  svg text{font-family:var(--mono)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Published measurement ledger · not a live service · ibm_marrakesh (Heron r2)</div>
+  <h1>Quantum Weather Report</h1>
+  <p>Quantum computers have weather. The same circuits, on the same qubits, can perform
+  <b>500× differently hours apart</b> — and the vendor's published calibration data does not
+  forecast it. This page is our measured evidence base: every number comes from a
+  pre-registered, frozen-rule-graded job with a public ID (sources in the footer).</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="k">The window lottery (F81)</div>
+      <div class="v">500×</div>
+      <div class="s">estimator error swing — identical circuits, identical qubits, 11 hours apart (0.154 → 0.0003)</div></div>
+    <div class="tile"><div class="k">Does calibration age predict it? (F84)</div>
+      <div class="v">NO</div>
+      <div class="s">pre-registered test, frozen Spearman gate: NULL. Quality clusters by queue-drain episode instead.</div></div>
+    <div class="tile"><div class="k">Published T1 error, 4 days (friction 02)</div>
+      <div class="v">0–115%</div>
+      <div class="s">live T1 vs published, 10 back-computed values — right one day, 2× off the next</div></div>
+  </div>
+
+  <h2>Forecast failure #1 — the published T1 is a stale snapshot of a moving quantity</h2>
+  <div class="frame">
+    <svg viewBox="0 0 800 320" width="100%" role="img"
+         aria-label="Live-to-published T1 ratio across five jobs over four days, two qubits">
+      <!-- axes -->
+      <line x1="70" y1="20" x2="70" y2="260" stroke="#2a3145"/>
+      <line x1="70" y1="260" x2="770" y2="260" stroke="#2a3145"/>
+      <!-- y grid + labels: r 0.8..2.2 maps y=284-(r-0.8)/1.4*240 -->
+      <g fill="#5c6479" font-size="11">
+        <text x="62" y="264" text-anchor="end">0.8</text><line x1="70" y1="260" x2="770" y2="260" stroke="#2a3145" stroke-dasharray="2 4"/>
+        <text x="62" y="230" text-anchor="end">1.0</text><line x1="70" y1="226" x2="770" y2="226" stroke="#3a4155" stroke-dasharray="6 4"/>
+        <text x="62" y="161" text-anchor="end">1.4</text><line x1="70" y1="157" x2="770" y2="157" stroke="#2a3145" stroke-dasharray="2 4"/>
+        <text x="62" y="93" text-anchor="end">1.8</text><line x1="70" y1="89" x2="770" y2="89" stroke="#2a3145" stroke-dasharray="2 4"/>
+        <text x="62" y="24" text-anchor="end">2.2</text><line x1="70" y1="20" x2="770" y2="20" stroke="#2a3145" stroke-dasharray="2 4"/>
+      </g>
+      <text x="24" y="145" fill="#8b93a7" font-size="12" transform="rotate(-90 24 145)">live T1 ÷ published T1</text>
+      <text x="90" y="219" fill="#8b93a7" font-size="11">published correct (r = 1)</text>
+      <!-- x labels: 5 jobs -->
+      <g fill="#5c6479" font-size="11" text-anchor="middle">
+        <text x="140" y="280">Exp108b</text><text x="140" y="294">Jul 11 (19h queue)</text>
+        <text x="280" y="280">Exp108c</text><text x="280" y="294">Jul 12</text>
+        <text x="420" y="280">Exp116</text><text x="420" y="294">Jul 13 am</text>
+        <text x="560" y="280">Exp117</text><text x="560" y="294">Jul 13 mid</text>
+        <text x="700" y="280">Exp117b</text><text x="700" y="294">Jul 13 pm</text>
+      </g>
+      <!-- data: y = 294.86 - r*85.71 ; q6 teal #27a8a2, q8 gold #bd8830 -->
+      <g>
+        <circle cx="136" cy="160.6" r="6" fill="#27a8a2"><title>Exp108b q6: r = 1.38</title></circle>
+        <circle cx="144" cy="124.6" r="6" fill="#bd8830"><title>Exp108b q8: r = 1.59</title></circle>
+        <circle cx="276" cy="107.4" r="6" fill="#27a8a2"><title>Exp108c q6: r ≈ 1.69</title></circle>
+        <circle cx="284" cy="109.1" r="6" fill="#bd8830"><title>Exp108c q8: r ≈ 1.68</title></circle>
+        <circle cx="416" cy="28.6" r="6" fill="#27a8a2"><title>Exp116 q6: r ≈ 2.15 — past even a 1.65× correction</title></circle>
+        <circle cx="424" cy="80.0" r="6" fill="#bd8830"><title>Exp116 q8: r ≈ 1.85</title></circle>
+        <circle cx="556" cy="122.9" r="6" fill="none" stroke-width="2.5" stroke="#27a8a2"><title>Exp117 (back-computed from pooled rung): r ≈ 1.6</title></circle>
+        <circle cx="564" cy="122.9" r="6" fill="none" stroke-width="2.5" stroke="#bd8830"><title>Exp117 (back-computed from pooled rung): r ≈ 1.6</title></circle>
+        <circle cx="696" cy="230.9" r="6" fill="#27a8a2"><title>Exp117b q6: r ≈ 0.97 — published T1 CORRECT for the first time in 9 measurements</title></circle>
+        <circle cx="704" cy="203.4" r="6" fill="#bd8830"><title>Exp117b q8: r ≈ 1.13</title></circle>
+      </g>
+      <!-- direct labels on extremes -->
+      <text x="436" y="55" fill="#e2e6f0" font-size="11">2.15 — the day a +23σ fake win was refused</text>
+      <text x="530" y="250" fill="#e2e6f0" font-size="11">0.97 — “bias” gone overnight</text>
+      <!-- legend -->
+      <g font-size="12" fill="#8b93a7">
+        <circle cx="86" cy="34" r="5" fill="#27a8a2"/><text x="96" y="38">qubit 6</text>
+        <circle cx="160" cy="34" r="5" fill="#bd8830"/><text x="170" y="38">qubit 8</text>
+        <text x="240" y="38" fill="#5c6479">(hollow = back-computed estimate)</text>
+      </g>
+    </svg>
+    <div class="cap">Live T1 (back-computed from measured decay in thermalization circuits) vs the
+    published calibration value, across five jobs. The error is large, variable, and even
+    sign-unstable — a fixed correction cannot hit a tight operating window. It cost us two
+    NO-TESTs before the two-stage protocol (measure, then fly) tamed it.
+    Sources: <a href="https://github.com/mblakemore/quantum/blob/main/docs/friction-reports/02-published-t1-bias.md">friction report 02</a>.</div>
+    <details><summary>data table</summary><table>
+      <tr><th>job</th><th>q6 r</th><th>q8 r</th><th>note</th></tr>
+      <tr><td>Exp108b</td><td>1.38</td><td>1.59</td><td>19 h queue — first detection (NO-TEST)</td></tr>
+      <tr><td>Exp108c</td><td>≈1.69</td><td>≈1.68</td><td>minutes queue — bias ≠ queue time</td></tr>
+      <tr><td>Exp116</td><td>≈2.15</td><td>≈1.85</td><td>overshot a ×1.65 correction (premise gate caught it)</td></tr>
+      <tr><td>Exp117</td><td colspan="2">≈1.6 (pooled)</td><td>swung back down</td></tr>
+      <tr><td>Exp117b</td><td>≈0.97</td><td>≈1.13</td><td>published value essentially correct — likely a calibration refresh</td></tr>
+    </table></details>
+  </div>
+
+  <h2>Forecast failure #2 — the standard noise model is an optimist, and it gets worse with depth</h2>
+  <div class="frame">
+    <svg viewBox="0 0 800 430" width="100%" role="img"
+         aria-label="Model optimism (log ratio of predicted to measured signal) per experiment, grouped by circuit depth class">
+      <!-- x axis: ln optimism 0..0.32 maps x=170+(v/0.32)*590 -->
+      <line x1="170" y1="14" x2="170" y2="400" stroke="#2a3145"/>
+      <g fill="#5c6479" font-size="11" text-anchor="middle">
+        <text x="170" y="418">0</text>
+        <text x="354" y="418">+0.10</text><line x1="354" y1="14" x2="354" y2="400" stroke="#2a3145" stroke-dasharray="2 5"/>
+        <text x="539" y="418">+0.20</text><line x1="539" y1="14" x2="539" y2="400" stroke="#2a3145" stroke-dasharray="2 5"/>
+        <text x="723" y="418">+0.30</text><line x1="723" y1="14" x2="723" y2="400" stroke="#2a3145" stroke-dasharray="2 5"/>
+      </g>
+      <text x="470" y="429" fill="#8b93a7" font-size="11" text-anchor="middle">model optimism, ln(model ÷ measured) — right = model more wrong</text>
+      <!-- SHALLOW group (≤8 CZ): 0.082,0.016,0.013,0.103,0.112,0.011 -->
+      <text x="8" y="30" fill="#8b93a7" font-size="12">SHALLOW ≤8 CZ</text>
+      <g fill="#27a8a2">
+        <rect x="170" y="22"  width="151" height="10" rx="4"><title>exp91 witness: +0.082</title></rect>
+        <rect x="170" y="36"  width="30"  height="10" rx="4"><title>exp93 DISC: +0.016</title></rect>
+        <rect x="170" y="50"  width="24"  height="10" rx="4"><title>exp106 capacity: +0.013</title></rect>
+        <rect x="170" y="64"  width="190" height="10" rx="4"><title>exp111 switch S: +0.103</title></rect>
+        <rect x="170" y="78"  width="207" height="10" rx="4"><title>exp111 paths S: +0.112</title></rect>
+        <rect x="170" y="92"  width="20"  height="10" rx="4"><title>exp109 superdense: +0.011</title></rect>
+      </g>
+      <!-- MID group (9–50 CZ): 0.236,0.112,0.051,0.014,0.020,0.021,0.211(ff) -->
+      <text x="8" y="140" fill="#8b93a7" font-size="12">MID 9–50 CZ</text>
+      <g fill="#27a8a2">
+        <rect x="170" y="132" width="435" height="10" rx="4"><title>exp108 thermal Δ: +0.236</title></rect>
+        <rect x="170" y="146" width="207" height="10" rx="4"><title>exp108 retention: +0.112</title></rect>
+        <rect x="170" y="160" width="94"  height="10" rx="4"><title>exp108b retention (delays): +0.051</title></rect>
+        <rect x="170" y="174" width="26"  height="10" rx="4"><title>exp108c retention (good window): +0.014</title></rect>
+        <rect x="170" y="188" width="37"  height="10" rx="4"><title>exp110 swap N=6: +0.020</title></rect>
+        <rect x="170" y="202" width="39"  height="10" rx="4"><title>exp114 purified (10 CZ): +0.021</title></rect>
+      </g>
+      <rect x="170" y="216" width="389" height="10" rx="4" fill="#bd8830"><title>exp110 teleport N=6 (FEEDFORWARD): +0.212 — the model carries NO feedforward noise term</title></rect>
+      <text x="565" y="225" fill="#e2e6f0" font-size="11">+0.212 feedforward</text>
+      <!-- DEEP group (>50 CZ): 0.305, 0.106 -->
+      <text x="8" y="268" fill="#8b93a7" font-size="12">DEEP &gt;50 CZ</text>
+      <g fill="#27a8a2">
+        <rect x="170" y="260" width="562" height="10" rx="4"><title>exp107 capacity N=3 (110 CZ): +0.305</title></rect>
+        <rect x="170" y="274" width="195" height="10" rx="4"><title>exp107 deep sentinel: +0.106</title></rect>
+      </g>
+      <text x="738" y="269" fill="#e2e6f0" font-size="11">+0.305</text>
+      <!-- class means -->
+      <g stroke="#e2e6f0" stroke-width="2">
+        <line x1="239" y1="18" x2="239" y2="106" stroke-dasharray="4 3"><title>shallow mean +0.056</title></line>
+        <line x1="317" y1="128" x2="317" y2="230" stroke-dasharray="4 3"><title>mid mean +0.111 (incl. feedforward row)</title></line>
+        <line x1="549" y1="256" x2="549" y2="288" stroke-dasharray="4 3"><title>deep mean +0.206</title></line>
+      </g>
+      <!-- legend -->
+      <g font-size="12" fill="#8b93a7">
+        <rect x="170" y="330" width="18" height="10" rx="4" fill="#27a8a2"/><text x="194" y="339">unitary circuits</text>
+        <rect x="320" y="330" width="18" height="10" rx="4" fill="#bd8830"/><text x="344" y="339">with mid-circuit feedforward</text>
+        <line x1="620" y1="330" x2="620" y2="342" stroke="#e2e6f0" stroke-width="2" stroke-dasharray="4 3"/><text x="630" y="339">class mean</text>
+      </g>
+    </svg>
+    <div class="cap">Each bar is one experiment: how optimistic the FakeMarrakesh noise model's
+    preview was vs the measured hardware result (log ratio). The optimism <b>grows with depth</b>
+    (class means +0.056 → +0.111 → +0.206) and the single largest error is the feedforward row —
+    the model has <b>no noise term at all</b> for mid-circuit measurement + classical control.
+    Full data: <a href="https://github.com/mblakemore/quantum/blob/main/results/model_residual_atlas.json">model_residual_atlas.json</a> ·
+    <a href="https://github.com/mblakemore/quantum/blob/main/docs/friction-reports/01-fakemarrakesh-depth-optimism.md">friction report 01</a>.</div>
+  </div>
+
+  <h2>How we dress for this weather</h2>
+  <p>Forecasting fails; <b>detection works</b>. Four practices, each bought with a documented failure:</p>
+  <div class="tiles">
+    <div class="tile"><div class="k">Same-depth sentinels</div><div class="s">A shallow probe cannot certify a deep window — every job carries a known-answer circuit at the payload's depth class, and gates itself on the in-run reading (F85, F86, F88).</div></div>
+    <div class="tile"><div class="k">Two-stage protocols</div><div class="s">When a calibration quantity moves 2× in days: fly a cheap measurement job first, compute the payload's settings from it, submit into the same drain window (Exp117c).</div></div>
+    <div class="tile"><div class="k">Parameter ladders</div><div class="s">When one shot at the operating point is a gamble: fly several rungs, select by premise-measuring arms under a frozen rule — never by outcome (F94's certification).</div></div>
+    <div class="tile"><div class="k">Procedure targets</div><div class="s">Theory targets computed from measured premises, not nominal ones — the comparison survives any drift; the gates enforce meaning (residuals ~0.003 across three runs).</div></div>
+  </div>
+
+  <div class="foot">
+    Every number on this page traces to a pre-registered job with a public ID.
+    <a href="https://github.com/mblakemore/quantum">Repository</a> ·
+    <a href="https://github.com/mblakemore/quantum/blob/main/docs/quantum-switch-spec.md">spec &amp; measured ledger</a> ·
+    <a href="https://github.com/mblakemore/quantum/blob/main/docs/friction-reports/README.md">friction reports</a> ·
+    built by the DC network (Whisper C4620).
+  </div>
+</div>
+</body>
+</html>
