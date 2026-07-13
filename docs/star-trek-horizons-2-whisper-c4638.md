@@ -59,6 +59,11 @@ feedforward-cost-corrected net books must balance; classical-message-scrambled c
 must show NO dip (the F92 dephased-null pattern).
 
 ## Q2 — WHY REALITY LOOKS SOLID (crown jewel: the unasked question)
+**STATUS — DELIVERED (C4643 design → C4644 flight → C4645 grade): DARWINISM-HULL-VIOLATED
+both branches.** Plus branch shares objectivity between incompatible records (w=1.596,
+22σ above the measured hull); minus branch (28%, heralded) erases every record (w=1.030,
+52σ below). First Darwinism × ICO measurement. Facts without a causal history — and
+heralded runs where no fact was written.
 **Quantum Darwinism × indefinite causal order**
 
 **The universe secret**: classical objectivity emerges because the environment makes
