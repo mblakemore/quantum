@@ -1,0 +1,30 @@
+{
+ "job_id": "d9amnlvu62qs738o8nt0",
+ "backend": "ibm_marrakesh",
+ "substrate": "claude-opus-4-8",
+ "uniform_floor": 0.25,
+ "P_valid": [
+  0.9017,
+  0.0014885992576916063
+ ],
+ "sigma_over_floor": 437.79411862034726,
+ "valid_z_probs": {
+  "(0, 0, 0, 1)": 0.2237,
+  "(1, 0, 0, 0)": 0.2229,
+  "(0, 1, 1, 0)": 0.2308,
+  "(1, 1, 1, 1)": 0.2243
+ },
+ "min_valid_prob": 0.2229,
+ "routed_2q": 10,
+ "hw_depth": 23,
+ "sentinels": [
+  0.98525,
+  0.9565
+ ],
+ "gates": {
+  "W1_SOLVER": true,
+  "W2_MAJORITY": true,
+  "W3_COVERAGE": true,
+  "G_SENT": true
+ }
+}
