@@ -143,6 +143,11 @@ dephasing, not gravitational time dilation — the sim tier predicts the exact c
 hardware grades as certification (null-first, like F96).
 
 ## Q5 — THE TIME-LOOP COURTROOM
+**STATUS — DELIVERED (C4655 design+fly → C4656 grade): PARADOX-ENFORCED +
+CTC-BACKACTION-CERTIFIED.** Enforcement law measured to ~1% (p = cos²(θ/2)/2,
+residuals ≤0.013); paradox point suppressed 53× (ratio 0.0188±0.0011); bystander's
+classical record rotated into coherence at 78σ (X_S 0.970 loop vs 0.028 broken).
+Numbering requested.
 **Postselected closed timelike curves (P-CTC): the grandfather paradox, audited**
 
 **The universe secret**: quantum mechanics resolves time-travel paradoxes by
