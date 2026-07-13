@@ -957,6 +957,17 @@
    "sim_only": false,
    "single_run": true,
    "evidence": "fresh finding (numbered Ember C4128, graded Whisper C4607): single hardware run exp114 on ibm_marrakesh; headline = existence of purification resurrection (DEAD 5sigma below exact bound 2 AND ALIVE 5sigma above it, same window); GAIN-at-5sigma quantitative sub-claim recorded as LOSS (4.67sigma vs 0.1 floor \u2014 formulation miss, no softening); injected-noise operating point p*=0.3; results/exp114_grade.json"
+  },
+  {
+   "id": "F94",
+   "file": "F94-exp116b-certified-population-inversion-ico-engine-delay-ladder-whisper-c4611-c4612-ember-numbered-c4129.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4129, graded Whisper C4612): single hardware run exp116b on ibm_marrakesh; headline = existence of certified population inversion from ICO + demon record (passive baths 5sigma below 0.5 in, active branch +10.6sigma above 0.5 out, premise gate that refused Exp116's +23sigma pseudo-win); ergotropy 0.0378 E/run + same-job r3 dose-response are sub-claims (r3 = second operating point, not independent retest); results/exp116b_grade.json"
   }
  ]
 }
