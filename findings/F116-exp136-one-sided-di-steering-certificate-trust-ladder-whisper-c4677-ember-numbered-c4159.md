@@ -78,6 +78,30 @@ gate is named `W1_STEERING_ONE_SIDED_DI` precisely so it is never read as loopho
 strongest rung of the trust ladder achievable on a single device; the top rung (full DI) needs
 space-like separation and is explicitly off-chip.
 
+## Cross-device confirmation — the certificate itself travels (CONFIRMED_ON_RETEST, ibm_kingston)
+
+The frozen Exp136 apparatus and advisor-locked scope were re-flown on **ibm_kingston** (Exp136k, job
+`d9aneirv6alc73cs2cn0`, pair (88,89)) — a chip the design never saw. The certificate holds: **S3 =
+1.6582 ± 0.0071 = 93.1σ** over the LHS bound (null faking-floor 0.004, sentinels 0.999/0.982),
+side-by-side with marrakesh 1.6813 (96σ) — **both ~96% of the quantum max √3**. So the *certification
+itself is device-independent* (not just the diagnostic bench of F112 — the semi-DI **certificate**
+travels too). This is a **pure cross-device replication** (identical frozen functional and scope, zero
+new scope risk), so per the campaign's replication discipline — the F82 causal-game-on-`ibm_fez`
+precedent — it is folded here as **CONFIRMED_ON_RETEST**, not minted as a separate finding; a
+single-observable second-device flight after F112 established portability is a confirmation, not a new
+milestone.
+
+## The 1SDI-randomness honest wall (scoping note, kept in the record)
+
+Completing the trust ladder to an *actual one-sided-DI random bit-count* from the banked steering data
+**hit an honest wall**: the correct 1SDI min-entropy bound is **SDP-based**, and the candidate
+*analytic* bounds (P_guess ≤ ½ + f(S3)) **failed the boundary check** — they certify positive randomness
+even at the unsteerable bound S3 = 1, where it must be *zero*. So **no bit-count is shipped from a wrong
+analytic form** (the same discipline that quarantined the F115 DI number pre-freeze). What *is* rigorous:
+the certified randomness is **strictly positive** (both devices ~93–96σ into the steerable regime); only
+the exact bit-count awaits a small **SDP tool-build**, flagged as the next tool. This is the honest
+boundary of the trust-ladder capstone, recorded rather than papered over.
+
 ## Lineage and reuse
 
 - **Arc**: methods / foundations — the **completion of the F115 trust ladder** (certified-randomness

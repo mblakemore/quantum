@@ -1447,9 +1447,9 @@
       "id": "F116",
       "file": "F116-exp136-one-sided-di-steering-certificate-trust-ladder-whisper-c4677-ember-numbered-c4159.md",
       "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
+      "status": "CONFIRMED_ON_RETEST",
+      "retested": true,
+      "retest_ref": "Exp136k (ibm_kingston, job d9aneirv6alc73cs2cn0): S3=1.6582+/-0.0071=93.1sigma over LHS bound, null 0.004, sentinels 0.999/0.982 — the frozen steering certificate travels to a foreign chip (pure cross-device replication, folded per F82-fez precedent not minted separate)",
       "sim_only": false,
       "single_run": true,
       "evidence": "HW run exp136 on ibm_marrakesh (job d9anamjv6alc73cs246g, opus-4-8; numbered Ember C4159, graded Whisper C4677). The semi-DI certificate F115/Exp135 flagged as the honest next step, delivered: ONE-SIDED DEVICE-INDEPENDENT STEERING certified. CJWR functional S3 = (1/sqrt3)|<XX>-<YY>+<ZZ>| = 1.6813+/-0.0071 = 96.35 sigma over the local-hidden-state (unsteerable) bound 1.0, 97% of quantum max sqrt3; near-ideal corrs X 0.9694/Y -0.969/Z 0.9737; separable-faking null S3=0.025 (dead). All 4 gates PASS; sentinels 0.994/0.987. TYPE-A (assumption stated, quantity REAL) vs F115 Type-B (quantity evaporates): trust BOBs measurements (calibrated X/Y/Z MUB triple), ALICE a BLACK BOX — assumption EXACT at logical level Tr_A(U_A rho U_A^dag)=Tr_A(rho), fails only via physical crosstalk. WHY IT HOLDS WHERE DI CHSH DID NOT: faking S3=1.68 needs ~0.68 correlation excess, but the only on-chip mechanism (Alice-setting crosstalk back-acting on Bob) is ~1% per the campaigns OWN C4671/F55/F56 measurements — 1% cannot fake 0.68; null 0.025 confirms empirically. NOT loophole-free (locality open, crosstalk bounded-not-closed); gate named W1_STEERING_ONE_SIDED_DI. Trust ladder: Born full-trust (F115 t2) -> one-sided-DI steering 96sigma (here) -> full-DI needs space-like off-chip (flagged). results/exp136_hw_results.json",
@@ -1463,6 +1463,16 @@
           "claim": "the F115->F116 trust ladder (quarantine the number you cannot hold, deliver the strongest you can)",
           "status": "CONFIRMED",
           "evidence": "Born full-trust (F115 t2) -> one-sided-DI steering (F116, Alice demoted trusted->black-box, 96sigma) -> full-DI (off-chip, flagged). F115 quarantined the DI number; F116 delivers the strongest certificate one chip CAN, each rung claiming exactly its assumption."
+        },
+        {
+          "claim": "the semi-DI steering CERTIFICATE is itself device-independent (travels cross-device)",
+          "status": "CONFIRMED",
+          "evidence": "Exp136k re-flew the exact frozen apparatus + advisor-locked scope on ibm_kingston: S3=1.6582 (93.1sigma) vs marrakesh 1.6813 (96sigma), both ~96% of quantum max sqrt3, null faking-floor 0.004. Complements F112 (the diagnostic bench travels) — here the CERTIFICATE travels. Pure cross-device replication -> CONFIRMED_ON_RETEST fold-in (F82-fez precedent), not a new F-number."
+        },
+        {
+          "claim": "1SDI-randomness bit-count hit an honest wall (analytic bounds fail the S3=1 boundary check)",
+          "status": "HONEST_WALL",
+          "evidence": "candidate ANALYTIC 1SDI min-entropy bounds (P_guess<=1/2+f(S3)) certify positive randomness even at the unsteerable bound S3=1 where it MUST be zero -> FAILED boundary check, no bit-count shipped (same discipline that quarantined the F115 DI number). Rigorous claim = certified randomness strictly POSITIVE (both devices ~93-96sigma into steerable regime); exact bits await an SDP tool-build (flagged next tool). Ember numbering determination C4160: cross-device flight FOLDS into F116 (not a new number); the 1SDI-randomness note is docs/scoping tier."
         }
       ]
     }

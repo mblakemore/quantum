@@ -1,0 +1,433 @@
+{
+ "backend": "ibm_kingston",
+ "modules": [
+  "causal",
+  "schedule",
+  "hold"
+ ],
+ "job_id": "d9amd73v6alc73cs0lp0",
+ "pair": [
+  10,
+  11
+ ],
+ "sites": {
+  "hotspot": {
+   "pairA": [
+    1,
+    2
+   ],
+   "pairB": [
+    16,
+    23
+   ],
+   "spectator": 3,
+   "sum_2q_err": 0.002137798562482085,
+   "spect_ro": 0.005615234375
+  },
+  "control": {
+   "pairA": [
+    16,
+    23
+   ],
+   "pairB": [
+    19,
+    35
+   ],
+   "spectator": 3,
+   "sum_2q_err": 0.001863026796698558,
+   "spect_ro": 0.005615234375,
+   "min_hops": 3
+  }
+ },
+ "hold_site": {
+  "qubit": 11,
+  "readout_err": 0.001708984375
+ },
+ "metas": [
+  {
+   "label": "w_start_c",
+   "shots": 4000,
+   "twoq": 4
+  },
+  {
+   "label": "w_start_a",
+   "shots": 4000,
+   "twoq": 4
+  },
+  {
+   "label": "w_end_c",
+   "shots": 4000,
+   "twoq": 4
+  },
+  {
+   "label": "w_end_a",
+   "shots": 4000,
+   "twoq": 4
+  },
+  {
+   "label": "cap_sw(1,1)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(1,1)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(1,1)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(1,1)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(1,X)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(1,X)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(1,X)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(1,X)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(1,Y)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(1,Y)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(1,Y)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(1,Y)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(1,Z)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(1,Z)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(1,Z)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(1,Z)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(X,1)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(X,1)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(X,1)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(X,1)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(X,X)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(X,X)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(X,X)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(X,X)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(X,Y)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(X,Y)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(X,Y)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(X,Y)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(X,Z)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(X,Z)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(X,Z)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(X,Z)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Y,1)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Y,1)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Y,1)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Y,1)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Y,X)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Y,X)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Y,X)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Y,X)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Y,Y)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Y,Y)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Y,Y)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Y,Y)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Y,Z)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Y,Z)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Y,Z)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Y,Z)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Z,1)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Z,1)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Z,1)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Z,1)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Z,X)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Z,X)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Z,X)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Z,X)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Z,Y)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Z,Y)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Z,Y)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Z,Y)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Z,Z)b0",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Z,Z)b0",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "cap_sw(Z,Z)b1",
+   "shots": 1500,
+   "twoq": 4
+  },
+  {
+   "label": "cap_nu(Z,Z)b1",
+   "shots": 1500,
+   "twoq": 0
+  },
+  {
+   "label": "hold_pinned_8",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "hold_unwatched_8",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "hold_nodrive_8",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "sched_hotspot_seqAB",
+   "shots": 6000,
+   "twoq": 16
+  },
+  {
+   "label": "sched_hotspot_seqBA",
+   "shots": 6000,
+   "twoq": 16
+  },
+  {
+   "label": "sched_hotspot_par",
+   "shots": 6000,
+   "twoq": 16
+  },
+  {
+   "label": "sched_control_seqAB",
+   "shots": 6000,
+   "twoq": 16
+  },
+  {
+   "label": "sched_control_seqBA",
+   "shots": 6000,
+   "twoq": 16
+  },
+  {
+   "label": "sched_control_par",
+   "shots": 6000,
+   "twoq": 16
+  }
+ ]
+}
