@@ -25,6 +25,7 @@ characterizing hardware:
 | **ICO vs coherent control — the resource debate answered**: five co-batched arms; coherent path control transmits (S = 0.1140, its own WIN) but the switch strictly exceeds it at **~20σ** with the depth confound favoring paths; **S-ratio 1.949 in the pre-filed [1.7, 2.1], theory exactly 2.00**. Both literature camps partially right, quantified on silicon | **F89** | [finding](findings/F89-exp111-ico-vs-coherent-control-resource-comparison-whisper-c4593-c4594-ember-numbered-c4124.md) · [pre-reg](experiments/exp111-e1-resource-comparison-preregistration.md) |
 | **Causal indefiniteness survives TELEPORTATION** — the switch control beamed one hop arrives still causally indefinite: DISC 1.825 ± 0.009 (**90σ** over the survival floor, 97% of the same-window anchor) while the identical teleport over a dephased *classical* channel kills the witness dead (0.018 ≈ 0, separation **33σ**). Survives quantum, dies classical, one job, one window. No gate-model prior found | **F92** | [finding](findings/F92-exp113-causal-indefiniteness-survives-teleportation-whisper-c4603-c4604-ember-numbered-c4127.md) · [pre-reg](experiments/exp113-teleported-witness-preregistration.md) |
 | **THE ENGINE EXISTS — certified population inversion from causal indefiniteness**: both baths certifiably passive (each **5σ below** the 0.5 line), the switch's minus branch certifiably active (p₁\|₋ = 0.5509, **+10.6σ above** it) — ergotropy 0.0378 E/run from baths that individually can power nothing. Certified by the premise gate that had just refused a +23σ pseudo-win (Exp116 NO-TEST), via the delay-ladder technique (graded rung selected by calib arms only); free +6.1σ dose-response in-job | **F94** | [finding](findings/F94-exp116b-certified-population-inversion-ico-engine-delay-ladder-whisper-c4611-c4612-ember-numbered-c4129.md) · [pre-reg](experiments/exp116b-delay-ladder-preregistration.md) |
+| **The engine runs its FULL CYCLE** — a complete thermodynamic loop on causal indefiniteness: passive baths in (5σ below 0.5) → target charged (p₁\|₋ = 0.5485, **7σ**) → work extracted (**0.0340 E/run**) → output passive again (**W2 WIN**, 5σ); demon books audited. Enabled by per-qubit two-stage delays beating a 57%-asymmetric T1 bias. Honest W1 floor-miss (0.7σ short of the 0.05 clearance, LOSS as frozen) in the record | **F95** | [finding](findings/F95-exp117c-ico-engine-full-thermodynamic-cycle-whisper-c4618-c4632-ember-numbered-c4133.md) · [pre-reg](experiments/exp117c-two-stage-preregistration.md) |
 
 **[Quantum-switch full apparatus spec](docs/quantum-switch-spec.md)** — the single-document engineering reference: circuit family (V1–V5), exact theory statistics, measured-results ledger with job IDs, reusable methodology, pitfall registry, scope and platform prior art.
 
@@ -124,7 +125,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
 ├── full-report.md               ← Arc-1 synthesis (the deep-research source doc)
 ├── findings/                    ← one-per-discovery deep dives (~80 files)
 │   ├── 01…44-*.md               ← the core numbered line (Findings 41–43 under exp-named files)
-│   ├── F48…F94-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
+│   ├── F48…F95-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
 │   ├── finding-25/26/46/47…     ← quantum-IIT arc side numbering (25/26 here ≠ QAOA Findings 25/26!)
 │   └── exp*-*.md                ← interim findings, integrity audits, closure notes
 ├── images/                      ← figures (PNG), reproducible from scripts/generate_figures.py
@@ -161,7 +162,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
     └── references.md            ← peer-reviewed and primary sources (cited inline in findings)
 ```
 
-**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F94 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
+**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F95 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
 
 ---
 

@@ -1020,6 +1020,24 @@
    "sim_only": false,
    "single_run": true,
    "evidence": "fresh finding (numbered Ember C4129, graded Whisper C4612): single hardware run exp116b on ibm_marrakesh; headline = existence of certified population inversion from ICO + demon record (passive baths 5sigma below 0.5 in, active branch +10.6sigma above 0.5 out, premise gate that refused Exp116's +23sigma pseudo-win); ergotropy 0.0378 E/run + same-job r3 dose-response are sub-claims (r3 = second operating point, not independent retest); results/exp116b_grade.json"
+  },
+  {
+   "id": "F95",
+   "file": "F95-exp117c-ico-engine-full-thermodynamic-cycle-whisper-c4618-c4632-ember-numbered-c4133.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4133, graded Whisper C4632): single hardware run exp117c two-stage on ibm_marrakesh; headline = existence of a complete ICO-powered thermodynamic cycle (passive baths in 5sigma below 0.5, battery charged 7sigma above, W2 output passive-again WIN at 5sigma, net work 0.0340 E/run, demon cost audited); results/exp117c_stage2_grade.json",
+   "subclaims": [
+    {
+     "claim": "W1 power-stroke drop clears the 0.05 floor at 5sigma (quantitative)",
+     "status": "REFUTED",
+     "evidence": "results/exp117c_stage2_grade.json: drop 0.0920 is 9.4sigma from zero but misses 5sigma clearance vs the 0.05 floor by 0.7sigma; LOSS as frozen, no softening (F93 GAIN-leg class; c4130_001 power-calc applies)"
+    }
+   ]
   }
  ],
  "rubric_v2": {
