@@ -35,3 +35,11 @@ recorded at scan and must be uniform across purified pubs (audit).
 ## Prediction
 
 WIN (all three legs) conf 0.70; DEAD 0.9; ALIVE 0.75; GAIN 0.85; keep ∈ [0.6, 0.8] 0.7.
+
+## Post-freeze amendment (C4606, pre-submission, expectations only)
+
+The live scan pinned the chain [34,35,19,15] and the purified skeleton compiled to a uniform
+10 CZ (the Fake tier had previewed without layout pinning — the Exp111 apparatus lesson
+recurring). Layout-matched re-preview: purified@p* S = 2.1892 ± 0.0251 (was 2.2197); ALIVE
+still clears at preview (margin 0.064). NO gate constants, shots, or analysis changed —
+expectations updated for the record; prediction confidences stand.
