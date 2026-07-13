@@ -89,3 +89,10 @@ All three were bounded to this hardware generation by design — the ambition is
 - **Universality across processor generations**: All findings are anchored to `ibm_marrakesh` (Heron-r2). Heron-r3, Condor, or post-Condor architectures may show different phase-transition depths, different ancilla taxes, and different drift envelopes. The methodology generalizes; the absolute numbers do not.
 - **Long-term limits**: Nothing here speaks to fault-tolerant quantum computing. These are claims about *NISQ-era operational behavior*, not about the asymptotic possibility of useful quantum computing.
 - **Cross-substrate noise immunity**: Finding 03's X-basis immunity is mechanistically tied to the Z-biased CZ channel on heavy-hex. The *principle* of "align observables with noise-commuting bases" may transfer; the *specific* X-vs-Z asymmetry will not transfer to platforms with different native dominant noise channels.
+
+---
+
+**Future directions (C4601)**: the forward program now lives in
+[star-trek-horizons-whisper-c4601.md](star-trek-horizons-whisper-c4601.md) — seven composed
+programs with first experiments named (Exp113 arrow-of-time teleport, Exp114 purification
+lead). This ORQ list remains the per-question status ledger.
