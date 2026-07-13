@@ -12,6 +12,8 @@ The campaign's centerpiece is a **quantum switch** — a circuit where the *orde
 
 Every result below is **pre-registered**, and its success criterion is *exceeding what a classical / causal / definite process provably permits* (or certifying a first-of-kind) — not characterizing hardware. Grouped by theme, most significant first; the eight operational-characterization arcs follow in **[What Else the Campaign Established](#what-else-the-campaign-established)**.
 
+> **Has this hardware shown a quantum advantage?** The honest answer is scoreboard-by-scoreboard: **yes** on causal-order games (216.8σ), nonlocal/contextuality games (196σ), communication capacity (superdense 341σ, QRAC 110σ), thermodynamic resources (population inversion, negative energy), and metrology at the Heisenberg limit (168σ, persisting to N=5) — each a *provable* bound beaten; **not** on raw computational speedup, which is honestly depth-walled on this NISQ generation (F85's scaling inversion). The one-page reckoning, wins and non-wins together: **[quantum-advantage audit](docs/quantum-advantage-audit-whisper-c4666.md)**.
+
 ### The three great no-go theorems — certified in one court
 
 Bell nonlocality (F73), indefinite causal order (F82) and contextuality (F106) are quantum theory's three foundational *"no classical/local/definite model can reproduce this"* results — each beaten on the same hardware, with an executed null and an **in-artifact enumerated** bound. Alongside them, the switch's own provable-bound beats: information pushed through channels of exactly zero capacity.
@@ -59,6 +61,14 @@ Six foundational thought-experiments run as frozen-graded hardware experiments i
 | **The quantum twin paradox on silicon, adjudicated** — an excited "clock" ages and its aging **marks the path**, destroying interference far more than the vacuum twin: phase-blind (rotation-immune) which-path decoherence at **36σ / 23σ**. The finding is the honesty playbook whole: a 67σ win was **demoted by its own author** (a negative visibility exposed a coherent-rotation confound), then **re-certified** by a phase-blind retest — with the author's static-ZZ mechanism **refuted** (echo recovery wrong-sign, her 0.80 prediction missed) kept in the record. Zych–Brukner *analog* | **F100** | [finding](findings/F100-exp122-122b-quantum-twin-paradox-aging-decoherence-adjudicated-whisper-c4650-c4654-ember-numbered-c4141.md) · [pre-reg](experiments/exp122b-phase-blind-preregistration.md) |
 | **The grandfather paradox, audited** — a post-selected time loop (Lloyd P-CTC) **forbids the paradox**: a full "kill grandfather" flip survives at **1.9% — 53× suppression**, and the residue is readout noise (herald autopsy), the enforcement law cos²(θ/2)/2 tracked to ~1%. The fingerprint the rate can't fake: the loop rotates a bystander's **classical record into quantum coherence** (**78σ**) — nonlinear CTC backaction. Three CX gates, the *shallowest* apparatus of the campaign; Lloyd's post-selection *model*, not literal time travel | **F101** | [finding](findings/F101-exp123-grandfather-paradox-pctc-enforcement-backaction-whisper-c4655-c4656-ember-numbered-c4142.md) · [pre-reg](experiments/exp123-pctc-preregistration.md) |
 | **The Zeno "tractor beam"** — *measurement itself* pins a qubit against a full π-rotation that would otherwise flip it: watched at cadence 8 it survives at **0.644 vs 0.020 unwatched (92σ)**, and once the per-measurement QND cost (q = 0.987) is divided out, the cadence law **[cos²(π/2N)]^N matches to 0.5%** through N=8 — with the **watch-cost frontier** (an optimal grip cadence) located at N=16. Zero two-qubit gates, the *cheapest* flight of the campaign — and it **completes Horizons-2, six-for-six** | **F102** | [finding](findings/F102-exp124-zeno-pinning-tractor-beam-qnd-cadence-law-whisper-c4657-c4658-ember-numbered-c4143.md) · [pre-reg](experiments/exp124-zeno-preregistration.md) |
+
+### Certified limits — what quantum provably *cannot* do
+
+The natural opposite of the no-go games: those certify a classical/causal limit that quantum **beats**; this certifies a limit the universe puts on **quantum itself**, saturated and enforced on hardware. The campaign now grades both directions — what quantum can exceed, and what nothing can.
+
+| Result | Number | Where |
+|---|---|---|
+| **The replicator's legal limit — the optimal universal cloning ceiling (5/6) certified**: the best possible copier makes two copies each at fidelity **exactly 5/6 ≈ 83.3% for every input state** (no-cloning's quantitative teeth). On silicon the optimal cloner sits **flat across all three bases** (Z 0.8265 / Y 0.8121 / X 0.8047, spread **0.0218**) a hair below the ceiling and never exceeding it. A pre-registered **cheat** beats 5/6 on one basis (Z 0.9911) but **pays on the conjugate** (X 0.4995), so the only way to beat the ceiling somewhere is the way to get caught elsewhere — the cheat's basis-spread 0.49 vs the optimal's 0.02 is a **24× detector tell**. The no-cloning teeth made a measurement | **F110** | [finding](findings/F110-exp131-optimal-cloning-ceiling-no-cloning-cheat-detector-whisper-c4670-ember-numbered-c4152.md) · [pre-reg](experiments/exp131-cloning-preregistration.md) |
 
 **[Quantum-switch full apparatus spec](docs/quantum-switch-spec.md)** — the single-document engineering reference: circuit family (V1–V5), exact theory statistics, measured-results ledger with job IDs, reusable methodology, pitfall registry, scope and platform prior art.
 
@@ -160,7 +170,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
 ├── full-report.md               ← Arc-1 synthesis (the deep-research source doc)
 ├── findings/                    ← one-per-discovery deep dives (~80 files)
 │   ├── 01…44-*.md               ← the core numbered line (Findings 41–43 under exp-named files)
-│   ├── F48…F109-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
+│   ├── F48…F110-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
 │   ├── finding-25/26/46/47…     ← quantum-IIT arc side numbering (25/26 here ≠ QAOA Findings 25/26!)
 │   └── exp*-*.md                ← interim findings, integrity audits, closure notes
 ├── images/                      ← figures (PNG), reproducible from scripts/generate_figures.py
@@ -197,7 +207,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
     └── references.md            ← peer-reviewed and primary sources (cited inline in findings)
 ```
 
-**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F109 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
+**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F110 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
 
 ---
 
