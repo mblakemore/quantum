@@ -1,0 +1,46 @@
+{
+ "noiseless": {
+  "direct": {
+   "x_comm": 1.0,
+   "x_anti": -1.0,
+   "DISC": 2.0
+  },
+  "tele_frame": {
+   "x_comm": 1.0,
+   "x_anti": -1.0,
+   "DISC": 2.0
+  },
+  "tele_active": {
+   "x_comm": 1.0,
+   "x_anti": -1.0,
+   "DISC": 2.0
+  },
+  "tele_deco": {
+   "x_comm": 0.0195,
+   "x_anti": -0.012,
+   "DISC": 0.0315
+  }
+ },
+ "fakemarrakesh": {
+  "direct": {
+   "x_comm": 0.965,
+   "x_anti": -0.9645,
+   "DISC": 1.9295
+  },
+  "tele_frame": {
+   "x_comm": 0.9625,
+   "x_anti": -0.975,
+   "DISC": 1.9375
+  },
+  "tele_active": {
+   "x_comm": 0.972,
+   "x_anti": -0.969,
+   "DISC": 1.9409999999999998
+  },
+  "tele_deco": {
+   "x_comm": -0.0045,
+   "x_anti": 0.0085,
+   "DISC": -0.013000000000000001
+  }
+ }
+}
