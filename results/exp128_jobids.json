@@ -1,0 +1,123 @@
+{
+ "experiment": "exp128-qrac",
+ "cycle": "C4667-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp128",
+ "prereg": "experiments/exp128-qrac-preregistration.md",
+ "classical_bound": 0.75,
+ "quantum_optimum": 0.8535533905932737,
+ "gates": {
+  "W1_QRAC": "pooled > 0.75 + 5se",
+  "W2_MIN": "min case > 0.75 + 5se",
+  "G_QBAND": "pooled <= 0.8536 + 5se",
+  "G_CLASS": "class pooled <= 0.75",
+  "G_SENT": 0.95
+ },
+ "prefiled_expectation": {
+  "pooled": 0.8453,
+  "min": 0.841,
+  "class": 0.7447
+ },
+ "shuffle_seed": 4667,
+ "qubit": 75,
+ "qubit_cost": 0.0027114807444622293,
+ "job_id": "d9al7om6hjac73fejisg",
+ "metas": [
+  {
+   "label": "class_0_q0",
+   "kind": "class",
+   "x0": 0,
+   "shots": 20000,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "main_10_q1",
+   "kind": "main",
+   "x0": 1,
+   "x1": 0,
+   "q": 1,
+   "shots": 20000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "main_11_q0",
+   "kind": "main",
+   "x0": 1,
+   "x1": 1,
+   "q": 0,
+   "shots": 20000,
+   "twoq": 0,
+   "depth": 5
+  },
+  {
+   "label": "main_01_q1",
+   "kind": "main",
+   "x0": 0,
+   "x1": 1,
+   "q": 1,
+   "shots": 20000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "main_11_q1",
+   "kind": "main",
+   "x0": 1,
+   "x1": 1,
+   "q": 1,
+   "shots": 20000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "main_10_q0",
+   "kind": "main",
+   "x0": 1,
+   "x1": 0,
+   "q": 0,
+   "shots": 20000,
+   "twoq": 0,
+   "depth": 5
+  },
+  {
+   "label": "main_00_q0",
+   "kind": "main",
+   "x0": 0,
+   "x1": 0,
+   "q": 0,
+   "shots": 20000,
+   "twoq": 0,
+   "depth": 5
+  },
+  {
+   "label": "main_01_q0",
+   "kind": "main",
+   "x0": 0,
+   "x1": 1,
+   "q": 0,
+   "shots": 20000,
+   "twoq": 0,
+   "depth": 5
+  },
+  {
+   "label": "main_00_q1",
+   "kind": "main",
+   "x0": 0,
+   "x1": 0,
+   "q": 1,
+   "shots": 20000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "class_1_q0",
+   "kind": "class",
+   "x0": 1,
+   "shots": 20000,
+   "twoq": 0,
+   "depth": 2
+  }
+ ]
+}

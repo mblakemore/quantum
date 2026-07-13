@@ -1,0 +1,46 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "W1_QRAC_pooled_over_075",
+      "pass_value": 0.8453,
+      "fail_value": 0.677,
+      "threshold": 0.75,
+      "direction": "above",
+      "se": 0.0009
+    },
+    {
+      "name": "W2_MIN_case_over_075",
+      "pass_value": 0.841,
+      "fail_value": 0.5,
+      "threshold": 0.75,
+      "direction": "above",
+      "se": 0.0026
+    },
+    {
+      "name": "G_QBAND_below_quantum_optimum",
+      "pass_value": 0.8453,
+      "fail_value": 0.87,
+      "threshold": 0.8536,
+      "direction": "below",
+      "se": 0.0009
+    },
+    {
+      "name": "G_CLASS_below_075",
+      "pass_value": 0.7447,
+      "fail_value": 0.76,
+      "threshold": 0.75,
+      "direction": "below",
+      "se": 0.001
+    },
+    {
+      "name": "G_SENT_integrity",
+      "pass_value": 0.99,
+      "fail_value": 0.5,
+      "threshold": 0.95,
+      "direction": "above",
+      "se": 0.0007
+    }
+  ]
+}
