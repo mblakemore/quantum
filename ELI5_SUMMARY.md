@@ -158,9 +158,18 @@ In three days the quantum switch went from a certified curiosity to a working re
   (the drained output certified passive *again*, 5σ — nothing usable left behind). The
   demon's meter read +0.0051 per action. One pre-set quantitative bar was missed by 0.7σ
   and stands in the record as a loss, right next to the win.
+- **The lie detector, pointed at the scheduler** (F96): after months of *building*
+  machines that run on scrambled cause-and-effect, we flipped the tool around and asked
+  the chip a suspicious question — when you're told to fire two gates "at the same
+  time," do you secretly run one first? Answer, measured at the worst spot on the chip
+  with the effect amplified 8×: **no.** Simultaneous means simultaneous, certified down
+  to our measurement floor — a guarantee the vendor doesn't offer. Bonus catch: the
+  naive analysis would have cried "hidden order!" (parallel runs *do* look different) —
+  but they differ *equally from both orderings*, the fingerprint of "faster, not
+  sneakier."
 - **And the weather report went public**: the platform's moods (T1 values that swing 2×
   in a day, a noise model blind to feedforward) are now charts anyone can read
   ([demo/weather](demo/weather/index.html)), with the four tricks we use to work through
   them.
 
-Findings F87–F95, every one pre-registered, every miss in the record.
+Findings F87–F96, every one pre-registered, every miss in the record.
