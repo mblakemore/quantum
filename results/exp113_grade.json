@@ -1,0 +1,50 @@
+{
+ "x": {
+  "tele_frame_comm": 0.9235,
+  "direct_comm": 0.95,
+  "tele_frame_anti": -0.9015,
+  "tele_deco_comm": 0.0265,
+  "tele_active_anti": -0.8815,
+  "tele_deco_anti": 0.009,
+  "tele_active_comm": 0.8845,
+  "direct_anti": -0.9305
+ },
+ "DISC": {
+  "direct": 1.8805,
+  "tele_frame": 1.825,
+  "tele_active": 1.766,
+  "tele_deco": 0.0175
+ },
+ "SE": {
+  "direct": 0.007610350681801726,
+  "tele_frame": 0.009143925579312203,
+  "tele_active": 0.010495445440761437,
+  "tele_deco": 0.022356300845622918
+ },
+ "sentinels": {
+  "sent_start_0": 0.9995,
+  "sent_start_1": 0.99,
+  "sent_end_0": 0.9985,
+  "sent_end_1": 0.9935
+ },
+ "gates": {
+  "G1": true,
+  "G2": true,
+  "G3": true
+ },
+ "W1": true,
+ "W2": true,
+ "separation": 1.8074999999999999,
+ "se_separation": 0.02415399682247226,
+ "verdict": {
+  "W1": "WIN",
+  "W2": "WIN"
+ },
+ "survival_ratio": 0.9704865727200213,
+ "preview": {
+  "direct": 1.9295,
+  "tele_frame": 1.9375,
+  "tele_active": 1.941,
+  "tele_deco": -0.013
+ }
+}

@@ -94,6 +94,10 @@ ROWS = [
          preview=0.9237, measured=0.7477, sent_hw=None, sent_prev=None,
          source="exp110_grade.json — FIRST feedforward row: +0.212 ln = the unmodeled "
                 "feedforward-latency cost; largest observable-family gap in the atlas"),
+    dict(exp="exp113 teleported witness", observable="DISC (teleported control)",
+         family="amplitude+feedforward-frame", depth=6, delays=False, ideal=2.0,
+         preview=1.9375, measured=1.8250, sent_hw=None, sent_prev=None,
+         source="exp113_grade.json (frame arm; +0.060 ln — teleport haircut visible, model-blind as usual)"),
     # ---- comms arc ----
     dict(exp="exp109 superdense", observable="p_success (4-msg decode)",
          family="probability", depth=2, delays=False, ideal=1.0, preview=0.9794,
