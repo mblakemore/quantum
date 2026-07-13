@@ -1,0 +1,38 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "W1_WITNESS_S_over_2",
+      "pass_value": 2.737,
+      "fail_value": 1.9,
+      "threshold": 2.0,
+      "direction": "above",
+      "se": 0.011
+    },
+    {
+      "name": "W2_TSIRELSON_honesty",
+      "pass_value": 2.737,
+      "fail_value": 3.0,
+      "threshold": 2.8284,
+      "direction": "below",
+      "se": 0.011
+    },
+    {
+      "name": "W3_NULL_below_2",
+      "pass_value": 0.02,
+      "fail_value": 2.4,
+      "threshold": 2.0,
+      "direction": "below",
+      "se": 0.011
+    },
+    {
+      "name": "G_SENT_integrity",
+      "pass_value": 0.98,
+      "fail_value": 0.5,
+      "threshold": 0.95,
+      "direction": "above",
+      "se": 0.0025
+    }
+  ]
+}

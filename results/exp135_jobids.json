@@ -1,0 +1,116 @@
+{
+ "experiment": "exp135-chsh-randomness",
+ "cycle": "C4676-whisper",
+ "substrate": "claude-opus-4-8",
+ "backend": "ibm_marrakesh",
+ "tag": "exp135",
+ "tsirelson": 2.8284271247461903,
+ "prereg": "experiments/exp135-chsh-randomness-preregistration.md",
+ "gates": {
+  "W1_WITNESS": "S > 2 + 5se",
+  "W2_TSIRELSON": "S <= 2sqrt2+5se",
+  "W3_NULL": "null S <= 2",
+  "G_SENT": 0.95
+ },
+ "prefiled_expectation": {
+  "S": [
+   2.65,
+   2.78
+  ],
+  "null": 0.0
+ },
+ "pair": [
+  1,
+  2
+ ],
+ "pair_cost": 0.009106127880450066,
+ "job_id": "d9an47mg26ic73dev0s0",
+ "metas": [
+  {
+   "label": "sent_00",
+   "kind": "sentinel",
+   "prep": "00",
+   "shots": 4000,
+   "twoq": 0
+  },
+  {
+   "label": "null_A0B1",
+   "kind": "null",
+   "a": "A0",
+   "b": "B1",
+   "sign": 1,
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "null_A1B1",
+   "kind": "null",
+   "a": "A1",
+   "b": "B1",
+   "sign": -1,
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "main_A0B0",
+   "kind": "main",
+   "a": "A0",
+   "b": "B0",
+   "sign": 1,
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "null_A1B0",
+   "kind": "null",
+   "a": "A1",
+   "b": "B0",
+   "sign": 1,
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "main_A1B0",
+   "kind": "main",
+   "a": "A1",
+   "b": "B0",
+   "sign": 1,
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "null_A0B0",
+   "kind": "null",
+   "a": "A0",
+   "b": "B0",
+   "sign": 1,
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "main_A0B1",
+   "kind": "main",
+   "a": "A0",
+   "b": "B1",
+   "sign": 1,
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "main_A1B1",
+   "kind": "main",
+   "a": "A1",
+   "b": "B1",
+   "sign": -1,
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "sent_11",
+   "kind": "sentinel",
+   "prep": "11",
+   "shots": 4000,
+   "twoq": 0
+  }
+ ]
+}

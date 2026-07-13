@@ -1,0 +1,28 @@
+{
+ "tsirelson": 2.8284271247461903,
+ "noiseless": {
+  "S": 2.8327,
+  "corrs": {
+   "A0B0": 0.711,
+   "A0B1": 0.7063,
+   "A1B0": 0.703,
+   "A1B1": -0.7124
+  },
+  "S_null": 0.00029999999999996696,
+  "di_hmin_counterfactual": 1.0,
+  "trusted_hmin_per_qubit": 1.0
+ },
+ "fakemarrakesh": {
+  "S": 2.7369,
+  "corrs": {
+   "A0B0": 0.6854,
+   "A0B1": 0.6843,
+   "A1B0": 0.6778,
+   "A1B1": -0.6894
+  },
+  "S_null": -0.020500000000000074,
+  "di_hmin_counterfactual": 0.5597347754323326,
+  "trusted_hmin_per_qubit": 1.0
+ },
+ "design_valid": true
+}
