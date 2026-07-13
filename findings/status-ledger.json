@@ -1183,6 +1183,17 @@
      "evidence": "|dH| <= 0.304 bits (F96 hotspot), 0.380 (control), 0.697 (Exp118 duration artifact), 0.303 (bench regression) \u2014 from banked TVD bounds, zero shots. SCOPE-CORRECTED to classical Shannon (not von Neumann) after the C4659 Fannes overstatement was caught at implementation."
     }
    ]
+  },
+  {
+   "id": "F104",
+   "file": "F104-exp125-final-invoice-landauer-floor-demon-record-straddle-refuted-whisper-c4663-ember-numbered-c4145.md",
+   "claim_type": "magnitude",
+   "status": "REFUTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp125 on ibm_marrakesh (numbered Ember C4145, graded Whisper C4663): the graded claim 'Landauer erasure floor of the ICO-engine demon record > F95 work credit at 5sigma' is STRADDLE-REFUTED (honest loss, F93/F95 floor-miss pattern). Engine q4 floor bracket [0.1234,0.1539]E vs banked F95 credit 0.0920+/-0.0098 = demon pays DIRECTIONALLY 1.3-1.7x but only 2.9sigma (PASS margin -0.0225, both directions miss 5sigma); sites agree (q98 concurs). Bottleneck = single-window credit SE not thermometry -> multi-window F95 rerun specified. Design-audited: grades the at-risk FLOOR not the cannot-fail dissipation (vacuous-gate self-catch); 3rd data-blind self-catch. Coherent-record loophole (F103 S(B|A)<0 could erase below floor) pre-reg'd as Exp125b, NOT graded. results/exp125_grade.json"
   }
  ],
  "rubric_v2": {

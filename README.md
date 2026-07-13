@@ -133,7 +133,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
 ├── full-report.md               ← Arc-1 synthesis (the deep-research source doc)
 ├── findings/                    ← one-per-discovery deep dives (~80 files)
 │   ├── 01…44-*.md               ← the core numbered line (Findings 41–43 under exp-named files)
-│   ├── F48…F103-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
+│   ├── F48…F104-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
 │   ├── finding-25/26/46/47…     ← quantum-IIT arc side numbering (25/26 here ≠ QAOA Findings 25/26!)
 │   └── exp*-*.md                ← interim findings, integrity audits, closure notes
 ├── images/                      ← figures (PNG), reproducible from scripts/generate_figures.py
@@ -170,7 +170,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
     └── references.md            ← peer-reviewed and primary sources (cited inline in findings)
 ```
 
-**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F103 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
+**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F104 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
 
 ---
 
