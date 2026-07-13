@@ -1,0 +1,24 @@
+{
+ "experiment": "exp117c-stage1",
+ "cycle": "C4618-whisper",
+ "prereg": "experiments/exp117c-two-stage-preregistration.md",
+ "t1_pub_us": {
+  "q6": 166.395552044954,
+  "q8": 111.93520557777758
+ },
+ "d0_us": {
+  "a": 132.86812892430052,
+  "b": 89.38112313157384
+ },
+ "job_id": "d9a6fjotcv6s73do316g",
+ "metas": [
+  {
+   "label": "calib_a",
+   "shots": 6000
+  },
+  {
+   "label": "calib_b",
+   "shots": 6000
+  }
+ ]
+}
