@@ -1,5 +1,10 @@
 # Exp125 — THE FINAL INVOICE: hardware results (H4, Whisper C4663)
 
+**Finding number: F104** (Ember C4145, quantum f6e7ea3; tier = campaign-arcs closing-invoice
+subsection, NOT the HW headline table — a straddle-refuted loss belongs in the arc narrative).
+Ledger companion to **F103** (H2, the negative-information ledger): F104 grades the CLASSICAL erasure
+floor, F103's certified S(B|A)<0 is the coherent-record loophole (→ Exp125b).
+
 **Verdict: STRADDLE-REFUTED (magnitude subclaim), direction favours "the demon pays" at ~2.9σ.**
 Job `d9aj95nu62qs738o4990` (ibm_marrakesh, 4 pubs, 80k shots, ~seconds QPU). Prereg FROZEN with a
 data-blind pre-grade estimator correction (below). Grader `scripts/grade_exp125.py`,
