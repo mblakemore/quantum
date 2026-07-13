@@ -1,0 +1,208 @@
+{
+ "experiment": "exp126-magic-square",
+ "cycle": "C4666-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp126",
+ "prereg": "experiments/exp126-magic-square-preregistration.md",
+ "classical_bound": 0.8888888888888888,
+ "gates": {
+  "W1_GAME": "pooled > 8/9 + 5se",
+  "W2_MIN": "min context > 8/9 + 5se",
+  "G_NULL": "null pooled < 8/9",
+  "G_SENT": 0.95
+ },
+ "prefiled_expectation": {
+  "pooled": 0.9779,
+  "min": 0.9689,
+  "null": 0.663
+ },
+ "shuffle_seed": 4666,
+ "line": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "line_cost": 0.022826777038972346,
+ "job_id": "d9akl8fu62qs738o68pg",
+ "metas": [
+  {
+   "label": "sent_0000",
+   "kind": "sentinel",
+   "prep": "0000",
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "null_r1c2",
+   "kind": "null",
+   "r": 0,
+   "c": 1,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 4
+  },
+  {
+   "label": "main_r3c3",
+   "kind": "main",
+   "r": 2,
+   "c": 2,
+   "shots": 20000,
+   "twoq": 10,
+   "depth": 24
+  },
+  {
+   "label": "main_r1c3",
+   "kind": "main",
+   "r": 0,
+   "c": 2,
+   "shots": 20000,
+   "twoq": 9,
+   "depth": 23
+  },
+  {
+   "label": "main_r2c3",
+   "kind": "main",
+   "r": 1,
+   "c": 2,
+   "shots": 20000,
+   "twoq": 9,
+   "depth": 21
+  },
+  {
+   "label": "main_r1c2",
+   "kind": "main",
+   "r": 0,
+   "c": 1,
+   "shots": 20000,
+   "twoq": 2,
+   "depth": 11
+  },
+  {
+   "label": "main_r3c1",
+   "kind": "main",
+   "r": 2,
+   "c": 0,
+   "shots": 20000,
+   "twoq": 3,
+   "depth": 12
+  },
+  {
+   "label": "null_r1c3",
+   "kind": "null",
+   "r": 0,
+   "c": 2,
+   "shots": 4000,
+   "twoq": 7,
+   "depth": 16
+  },
+  {
+   "label": "null_r2c3",
+   "kind": "null",
+   "r": 1,
+   "c": 2,
+   "shots": 4000,
+   "twoq": 7,
+   "depth": 14
+  },
+  {
+   "label": "null_r3c3",
+   "kind": "null",
+   "r": 2,
+   "c": 2,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 17
+  },
+  {
+   "label": "null_r2c2",
+   "kind": "null",
+   "r": 1,
+   "c": 1,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 4
+  },
+  {
+   "label": "main_r2c2",
+   "kind": "main",
+   "r": 1,
+   "c": 1,
+   "shots": 20000,
+   "twoq": 2,
+   "depth": 11
+  },
+  {
+   "label": "main_r3c2",
+   "kind": "main",
+   "r": 2,
+   "c": 1,
+   "shots": 20000,
+   "twoq": 3,
+   "depth": 12
+  },
+  {
+   "label": "null_r3c1",
+   "kind": "null",
+   "r": 2,
+   "c": 0,
+   "shots": 4000,
+   "twoq": 1,
+   "depth": 5
+  },
+  {
+   "label": "null_r3c2",
+   "kind": "null",
+   "r": 2,
+   "c": 1,
+   "shots": 4000,
+   "twoq": 1,
+   "depth": 5
+  },
+  {
+   "label": "null_r1c1",
+   "kind": "null",
+   "r": 0,
+   "c": 0,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 4
+  },
+  {
+   "label": "null_r2c1",
+   "kind": "null",
+   "r": 1,
+   "c": 0,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 4
+  },
+  {
+   "label": "main_r1c1",
+   "kind": "main",
+   "r": 0,
+   "c": 0,
+   "shots": 20000,
+   "twoq": 2,
+   "depth": 11
+  },
+  {
+   "label": "main_r2c1",
+   "kind": "main",
+   "r": 1,
+   "c": 0,
+   "shots": 20000,
+   "twoq": 2,
+   "depth": 11
+  },
+  {
+   "label": "sent_1111",
+   "kind": "sentinel",
+   "prep": "1111",
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 2
+  }
+ ]
+}

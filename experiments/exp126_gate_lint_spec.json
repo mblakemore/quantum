@@ -1,0 +1,38 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "W1_GAME_pooled_over_8ninths",
+      "pass_value": 0.9779,
+      "fail_value": 0.663,
+      "threshold": 0.8889,
+      "direction": "above",
+      "se": 0.00035
+    },
+    {
+      "name": "W2_MIN_context_over_8ninths",
+      "pass_value": 0.9689,
+      "fail_value": 0.55,
+      "threshold": 0.8889,
+      "direction": "above",
+      "se": 0.0012
+    },
+    {
+      "name": "G_NULL_below_ceiling",
+      "pass_value": 0.663,
+      "fail_value": 0.95,
+      "threshold": 0.8889,
+      "direction": "below",
+      "se": 0.0025
+    },
+    {
+      "name": "G_SENT_integrity",
+      "pass_value": 0.99,
+      "fail_value": 0.5,
+      "threshold": 0.95,
+      "direction": "above",
+      "se": 0.0022
+    }
+  ]
+}
