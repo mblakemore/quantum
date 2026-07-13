@@ -164,6 +164,13 @@ itself — and we measured the enforcement rate."
 **Cost**: one job, 3-4 qubits. Highest gee-whiz per shot in this document.
 
 ## Q6 — THE TRACTOR BEAM FOR QUANTUM STATES
+**STATUS — DELIVERED (C4657 corrected-design+fly → C4658 grade): ZENO-PINNING-
+CERTIFIED(+cadence-law). HORIZONS-2 COMPLETE, SIX FOR SIX.** Pinned 0.644 vs
+unwatched 0.020 (92σ over bar); Zeno law to sub-percent after in-job QND
+correction (q≈0.987/projection — the bench v3 number); watch-cost plateau found
+at N≈16. NOTE: the sketch below said pin-against-T1 — corrected at design
+(C4657): Zeno protects coherent dynamics only; the flown claim is
+hold-against-a-drive.
 **Zeno pinning: freezing decay by measurement cadence**
 
 **The universe secret**: watching a quantum system freezes it (Zeno). We own per-qubit
