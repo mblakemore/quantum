@@ -8,7 +8,8 @@
   "SOFTENED",
   "REFUTED",
   "REGIME_CONTINGENT",
-  "RETRACTED_PRE_RUN"
+  "RETRACTED_PRE_RUN",
+  "CORROBORATED_BY_COMPOSITION"
  ],
  "scope_note": "v1: numbered findings in findings/ only (NN- and FNN prefixes); preregs/results/notes excluded; duplicate-prefix files collapsed to one row. UNTESTED = never retested, not ungraded.",
  "rows": [
@@ -571,8 +572,8 @@
    "subclaims": [
     {
      "claim": "placement-dominance DIRECTION generalizes",
-     "status": "CONFIRMED_ON_RETEST",
-     "evidence": "F68/F69 drift-free + draw-robust on ibm_fez; headline 46x/17x magnitude remains UNTESTED per R1"
+     "status": "CORROBORATED_BY_COMPOSITION",
+     "evidence": "F68/F69 drift-free + draw-robust on ibm_fez; headline 46x/17x magnitude remains UNTESTED per R1 [relabeled per Ember C4131: F68/F69 direction evidence arose as byproducts \u2014 R4]"
     }
    ]
   },
@@ -883,13 +884,13 @@
   {
    "id": "F85",
    "file": "F85-n3-capacity-activation-scaling-inversion-whisper-c4539-ember-numbered-c4119.md",
-   "claim_type": "unclassified",
+   "claim_type": "existence",
    "status": "UNTESTED",
    "retested": false,
    "retest_ref": null,
    "sim_only": false,
    "single_run": false,
-   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+   "evidence": "headline = the N=3 scaling INVERSION exists (theory scales, hardware inverts); not retested (Exp110's routing inversion is a different family). Classified C4627 per Ember C4131 finding 4 (sibling consistency)."
   },
   {
    "id": "F86",
@@ -948,8 +949,8 @@
    "subclaims": [
     {
      "claim": "feedforward costs exceed software frame-tracking",
-     "status": "CONFIRMED_ON_RETEST",
-     "evidence": "confirmed in 4 observable families: F90 routing, F92 witness (1.766<1.825), Exp112 CHSH (frame>active both k), Exp117 per-action deficit 0.0017E refines mechanism to per-ROUND accumulation"
+     "status": "CORROBORATED_BY_COMPOSITION",
+     "evidence": "confirmed in 4 observable families: F90 routing, F92 witness (1.766<1.825), Exp112 CHSH (frame>active both k), Exp117 per-action deficit 0.0017E refines mechanism to per-ROUND accumulation [relabeled per Ember C4131: 4-family evidence is composition, not retest \u2014 R4]"
     }
    ]
   },
@@ -962,7 +963,14 @@
    "retest_ref": null,
    "sim_only": false,
    "single_run": true,
-   "evidence": "fresh finding (numbered Ember C4126, graded Whisper C4599): single hardware run exp112 on ibm_marrakesh; headline = existence of CHSH violation through k=2 swap stations (frame arm, >=15sigma over exact bound 2); frame-vs-active gap and the active-k=1 anomaly are sub-claims (Exp112b follow-up flagged); results/exp112_grade.json"
+   "evidence": "fresh finding (numbered Ember C4126, graded Whisper C4599): single hardware run exp112 on ibm_marrakesh; headline = existence of CHSH violation through k=2 swap stations (frame arm, >=15sigma over exact bound 2); frame-vs-active gap and the active-k=1 anomaly are sub-claims (Exp112b follow-up flagged); results/exp112_grade.json",
+   "subclaims": [
+    {
+     "claim": "active-feedforward arm certifies Bell violation at k=1",
+     "status": "REFUTED",
+     "evidence": "C4625: deterministic conditional-polarity inversion in runtime if_test (net X on B, branch-independent Psi+ fingerprint); logic+transpile exonerated, k=2 sibling in same job correct; friction report 04. NOT branch-noise (2604.28037). [seeded per Ember C4131 finding 3]"
+    }
+   ]
   },
   {
    "id": "F92",
@@ -1010,6 +1018,7 @@
   "R1_status_granularity": "status tracks the HEADLINE claim at its ORIGINAL granularity. Direction-level corroboration of a magnitude claim (the F57 ambiguity) does NOT flip status to CONFIRMED \u2014 it goes in subclaims[].",
   "R2_subclaims": "optional subclaims[] = [{claim, status, evidence}] records partial adjudication (the F62 flag: one-row-per-finding hid sub-claim results). Subclaims use the same status vocabulary; they feed the audit as a separate informational count, never the headline survival rate.",
   "R3_evidence_pointers": "evidence pointers must reference STABLE artifacts (findings/, results/, prereg files) \u2014 never mutable synthesis docs (the F76 flag, fixed C4594).",
-  "R4_retest_definition": "retested=true requires a SECOND measurement or formal adjudication event; internal cross-instance checks within one prereg count (Finding 13 precedent); corroboration-by-composition does not."
+  "R4_retest_definition": "retested=true requires a SECOND measurement or formal adjudication event; internal cross-instance checks within one prereg count (Finding 13 precedent); corroboration-by-composition does not.",
+  "R5_composition_status": "Ember C4131 finding 2: subclaims whose evidence is corroboration-by-composition (byproducts of experiments designed for other questions) use CORROBORATED_BY_COMPOSITION \u2014 a distinct status, weaker than CONFIRMED_ON_RETEST, consistent with R4. It counts in the informational subclaim tally, never as a retest."
  }
 }
