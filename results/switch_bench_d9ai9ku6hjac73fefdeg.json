@@ -1,0 +1,52 @@
+{
+ "backend": "ibm_marrakesh",
+ "modules": [
+  "hold"
+ ],
+ "job_id": "d9ai9ku6hjac73fefdeg",
+ "pair": null,
+ "sites": null,
+ "hold_site": {
+  "qubit": 98,
+  "readout_err": 0.002197265625
+ },
+ "metas": [
+  {
+   "label": "nodrive_16",
+   "shots": 20000
+  },
+  {
+   "label": "pinned_4",
+   "shots": 20000
+  },
+  {
+   "label": "hold_unwatched_8",
+   "shots": 20000
+  },
+  {
+   "label": "hold_pinned_8",
+   "shots": 20000
+  },
+  {
+   "label": "hold_nodrive_8",
+   "shots": 20000
+  },
+  {
+   "label": "pinned_2",
+   "shots": 20000
+  },
+  {
+   "label": "nodrive_4",
+   "shots": 20000
+  },
+  {
+   "label": "pinned_16",
+   "shots": 20000
+  },
+  {
+   "label": "nodrive_2",
+   "shots": 20000
+  }
+ ],
+ "note": "regression: Exp124 job regraded through bench v3 hold path (C4660)"
+}

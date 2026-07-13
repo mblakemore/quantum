@@ -6,6 +6,10 @@ v2.0 Whisper C4637: + SCHEDULE module — the F96 hidden-order diagnostic folded
 in as a second axis (Creator directive). The bench now measures BOTH directions
 of causal structure: can the device HOST indefinite order (causal axis), and is
 its "parallel" scheduling honestly order-free (schedule axis)?
+v3.0 Whisper C4660: + HOLD module — the Exp124 Zeno/QND axis (Creator directive).
+Third question: can the device HOLD a state on demand? 3 pubs (pinned_8 /
+unwatched_8 / nodrive_8, Exp124 builders verbatim): tractor separation at 5sigma
++ per-projection QND survival q as the figure of merit.
 
 CAUSAL axis (one job, 68 pubs, 112k shots): three numbers no standard benchmark
 (QV, CLOPS, EPLG) touches —
@@ -30,7 +34,7 @@ BYOK: point QISKIT_IBM_TOKEN at any account.
   python3 tools/switch_bench.py --backend <name> --scan     # free transpile audit
   python3 tools/switch_bench.py --backend <name> --submit   # spend, prints job id
   python3 tools/switch_bench.py --grade <job_id>            # frozen grade + card
-  --modules causal,schedule (default both; v1 cards reproducible with --modules causal)
+  --modules causal,schedule,hold (default all three; v1/v2 cards reproducible via subsets)
 """
 import argparse
 import itertools
@@ -48,7 +52,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
 SHOTS_W = 4000
 SHOTS_CAP = 1500
 SHOTS_SCHED = 6000   # FROZEN with the 0.0223 floor (exp118 prereg) — do not tune
-REFERENCE = {"ibm_marrakesh": {"W": 1.90, "Rbar": 0.5034, "sched_bound": 0.0303},
+REFERENCE = {"ibm_marrakesh": {"W": 1.90, "Rbar": 0.5034, "sched_bound": 0.0303, "hold_sep": 0.624, "qnd": 0.987},
              "ibm_fez": {"W": 1.87, "Rbar": None, "sched_bound": None},
              "ideal": {"W": 2.0, "Rbar": 0.5333, "sched_bound": 0.0}}
 PAULIS = ["1", "X", "Y", "Z"]
@@ -85,6 +89,45 @@ def build_sched(backend):
             pubs.append((f"sched_{site}_{sch}", probe(sch), SHOTS_SCHED,
                          layout, legal))
     return pubs, sites
+
+
+SHOTS_HOLD = 20000   # FROZEN with Exp124 (q measured at this budget)
+
+
+def build_hold(backend):
+    """Exp124 apparatus verbatim: frozen min-readout qubit + frozen builders."""
+    from exp124_zeno_sim import build as zbuild
+    from run_exp124_submit import select_qubit
+    site = select_qubit(backend.target)
+    pubs = [(f"hold_{arm}_8", zbuild(arm, 8), SHOTS_HOLD, [site["qubit"]])
+            for arm in ("pinned", "unwatched", "nodrive")]
+    return pubs, site
+
+
+def grade_hold(counts, out):
+    from exp124_zeno_sim import stats as zstats
+    import numpy as _np
+    p8, se8 = zstats(counts["hold_pinned_8"], "pinned", 8)
+    pu, seu = zstats(counts["hold_unwatched_8"], "unwatched", 8)
+    nd, send = zstats(counts["hold_nodrive_8"], "nodrive", 8)
+    q = nd ** (1.0 / 9.0)
+    d = p8 - pu
+    se_d = float(_np.hypot(se8, seu))
+    ok_qnd = nd > 0.7
+    W_HOLD = d - 5 * se_d > 0.3
+    verdict = ("NO-TEST(hold-qnd)" if not ok_qnd else
+               f"HOLD-CERTIFIED(sep={d:.3f},q={q:.4f})" if W_HOLD
+               else "HOLD-FAIL")
+    print(f"  HOLD AXIS (Exp124 apparatus, frozen)")
+    print(f"  pinned_8 {p8:.4f} | unwatched {pu:.4f} | sep {d:.4f}±{se_d:.4f}")
+    print(f"  QND per-projection q = {q:.4f} (nodrive_8 {nd:.4f})   "
+          f"reference: marrakesh sep~{REFERENCE['ibm_marrakesh']['hold_sep']}, "
+          f"q~{REFERENCE['ibm_marrakesh']['qnd']}")
+    print(f"  verdict: {verdict}")
+    out.update({"hold": {"pinned_8": p8, "unwatched_8": pu, "sep": [d, se_d],
+                         "qnd_q": q, "nodrive_8": nd},
+                "hold_verdict": verdict})
+    return verdict
 
 
 def pick_pair(backend):
@@ -212,7 +255,7 @@ def grade(job_id):
             bits[m["label"]] = arr.get_bitstrings()
     labels = set(counts)
     print("=" * 62)
-    print(f"SWITCH-BENCH v2 REPORT CARD — {man['backend']} (job {job_id})")
+    print(f"SWITCH-BENCH v3 REPORT CARD — {man['backend']} (job {job_id})")
     print("=" * 62)
     out = {"backend": man["backend"], "job_id": job_id}
     verdicts = []
@@ -220,6 +263,8 @@ def grade(job_id):
         verdicts.append(grade_causal(counts, man, out))
     if any(lab.startswith("sched_") for lab in labels):
         verdicts.append(grade_sched(bits, out))
+    if any(lab.startswith("hold_") for lab in labels):
+        verdicts.append(grade_hold(counts, out))
     out["verdict"] = " | ".join(verdicts)
     print(f"  VERDICT: {out['verdict']}")
     p = os.path.join(HERE, "..", "results", f"switch_bench_{job_id}_card.json")
@@ -233,7 +278,7 @@ def main():
     ap.add_argument("--scan", action="store_true")
     ap.add_argument("--submit", action="store_true")
     ap.add_argument("--grade", metavar="JOB_ID")
-    ap.add_argument("--modules", default="causal,schedule")
+    ap.add_argument("--modules", default="causal,schedule,hold")
     args = ap.parse_args()
     if args.grade:
         return grade(args.grade)
@@ -251,6 +296,11 @@ def main():
         print(f"{backend.name}: causal pair={pair} cost={cost:.5f}")
         pubs += [(lab, qc, shots, list(pair), None)
                  for lab, qc, shots in build_causal()]
+    hold_site = None
+    if "hold" in modules:
+        hpubs, hold_site = build_hold(backend)
+        print(f"{backend.name}: hold qubit={hold_site['qubit']}")
+        pubs += [(lab, qc, shots, lay, "hold") for lab, qc, shots, lay in hpubs]
     if "schedule" in modules:
         spubs, sites = build_sched(backend)
         print(f"{backend.name}: sched sites hotspot="
@@ -267,7 +317,9 @@ def main():
         tw = [tuple(sorted(tqc.find_bit(q).index for q in i.qubits))
               for i in tqc.data if i.operation.num_qubits == 2
               and i.operation.name != "barrier"]
-        if legal is not None:                       # schedule module: 2k=16 CZ
+        if legal == "hold":                         # hold module: single-qubit
+            good = len(tw) == 0
+        elif legal is not None:                     # schedule module: 2k=16 CZ
             good = len(tw) == 16 and set(tw) <= legal
         else:
             good = len(tw) == (0 if lab.startswith("cap_nu") else 4)
@@ -287,7 +339,7 @@ def main():
     jid = job.job_id()
     man = {"backend": args.backend, "modules": modules, "job_id": jid,
            "pair": list(pair) if pair else None, "sites": sites,
-           "metas": metas}
+           "hold_site": hold_site, "metas": metas}
     json.dump(man, open(os.path.join(HERE, "..", "results",
                                      f"switch_bench_{jid}.json"), "w"),
               indent=1, default=str)

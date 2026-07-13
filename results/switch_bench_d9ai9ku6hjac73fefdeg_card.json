@@ -1,0 +1,16 @@
+{
+ "backend": "ibm_marrakesh",
+ "job_id": "d9ai9ku6hjac73fefdeg",
+ "hold": {
+  "pinned_8": 0.6439,
+  "unwatched_8": 0.02005,
+  "sep": [
+   0.62385,
+   0.003528036192416399
+  ],
+  "qnd_q": 0.9864431958609103,
+  "nodrive_8": 0.8844
+ },
+ "hold_verdict": "HOLD-CERTIFIED(sep=0.624,q=0.9864)",
+ "verdict": "HOLD-CERTIFIED(sep=0.624,q=0.9864)"
+}
