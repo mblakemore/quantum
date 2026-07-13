@@ -35,6 +35,12 @@ replicator has a legal limit, printed on the license. **Cost: low. Court fit:
 exact-law class (F96/F101 style).**
 
 ## H2 — THE NEGATIVE-INFORMATION LEDGER (cheapest first flight)
+**STATUS — DELIVERED (C4662, ZERO SHOTS)**: 4 Shannon-Fannes certifications
+minted from banked TVD bounds (F96 order-effects ≤0.30 bits); **S(B|A)_twirl ≤
+−0.0986 at 5σ** from banked Exp112b CHSH via twirl+positivity worst-case
+(positivity forces YY ≤ −0.734) — entanglement certified by negative ink. Bonus:
+caught and corrected a scoping bug in my own C4659 Fannes-transfer pattern.
+Numbering requested.
 **Entropy metrology on banked data: Fannes transfer + S(B|A) < 0 witnesses**
 
 Two moves, almost free: (1) **Fannes-transfer pass** over the existing ledger —

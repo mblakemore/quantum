@@ -1,0 +1,49 @@
+{
+ "leg1_shannon_fannes": [
+  {
+   "row": "F96 hotspot D_order bound",
+   "T_bound": 0.0303,
+   "d": 32,
+   "dH_bound_bits": 0.3043495134011179,
+   "note": "parallel vs sequential CZ scheduling, 5q joint dist"
+  },
+  {
+   "row": "F96 control D_order bound",
+   "T_bound": 0.0393,
+   "d": 32,
+   "dH_bound_bits": 0.3800045462775301,
+   "note": "control site"
+  },
+  {
+   "row": "Exp118 D_A (par vs seqAB, measured)",
+   "T_bound": 0.0808,
+   "d": 32,
+   "dH_bound_bits": 0.6972636724612504,
+   "note": "duration artifact magnitude, 5SE-inflated"
+  },
+  {
+   "row": "switch-bench sched card (regression)",
+   "T_bound": 0.0302,
+   "d": 32,
+   "dH_bound_bits": 0.303489090734776,
+   "note": "same certification via bench path"
+  }
+ ],
+ "leg2_negative_ink": {
+  "source": "exp112b_micro (job in results/exp112b_micro_jobids.json)",
+  "S_chsh": 2.453,
+  "XX_plus_ZZ": 1.7345329342506008,
+  "SE": 0.022360679774997894,
+  "worst_case_H_point": 0.7044326596816054,
+  "worst_case_H_at_minus5SE": 0.9014389364450172,
+  "S_cond_upper_bound_point": -0.2955673403183946,
+  "S_cond_upper_bound_5SE": -0.09856106355498284,
+  "certified_negative": true,
+  "scope": [
+   "claim is for the BELL-TWIRLED banked state (LOCC-constructible; twirl only increases entropy)",
+   "worst-case over unmeasured YY and XX/ZZ split -> one-sided conservative",
+   "assumes standard CHSH setting geometry a=Z,a'=X,b,b'=(Z\u00b1X)/rt2 per Exp112 apparatus"
+  ]
+ },
+ "scope_correction": "C4659 pattern overstated: observed TVD only LOWER-bounds trace distance; quantum Fannes transfer requires state-level distance. Leg 1 claims are CLASSICAL Shannon bounds on measured distributions (always valid); leg 2 achieves the quantum (von Neumann) claim via twirl+positivity instead."
+}
