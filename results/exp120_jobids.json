@@ -1,0 +1,105 @@
+{
+ "experiment": "exp120-darwinism-ico",
+ "cycle": "C4644-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp120",
+ "prereg": "experiments/exp120-darwinism-ico-preregistration.md",
+ "site": {
+  "S": 3,
+  "C": 4,
+  "F1": 2,
+  "F2": 16,
+  "sum_err": 0.00452964521645749,
+  "C_readout": 0.00390625
+ },
+ "layout": [
+  4,
+  3,
+  2,
+  16
+ ],
+ "gates": {
+  "N1": "A_X(null)-A_Z(null) > 0.2 else NO-TEST",
+  "H1": "minus-rate in [0.10,0.40] else NO-TEST",
+  "W_PLUS": "w(plus)-5SE > max(w_ordZX,w_ordXZ)",
+  "W_MINUS": "w(minus)+5SE < min(w_ordZX,w_ordXZ)",
+  "null_first": "both inside hull at 5SE -> ORDER-ROBUST cert"
+ },
+ "twoq_counts": {
+  "definite": [
+   2
+  ],
+  "skeleton": [
+   63
+  ]
+ },
+ "transpile_seed": 4644,
+ "shuffle_seed": 4644,
+ "job_id": "d9aa5m8tcv6s73do7li0",
+ "metas": [
+  {
+   "label": "switch_x",
+   "arm": "switch",
+   "s_basis": "x",
+   "shots": 30000,
+   "twoq": 63,
+   "depth": 157
+  },
+  {
+   "label": "switch_z",
+   "arm": "switch",
+   "s_basis": "z",
+   "shots": 30000,
+   "twoq": 63,
+   "depth": 157
+  },
+  {
+   "label": "ordZX_z",
+   "arm": "ordZX",
+   "s_basis": "z",
+   "shots": 30000,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "ordXZ_z",
+   "arm": "ordXZ",
+   "s_basis": "z",
+   "shots": 30000,
+   "twoq": 2,
+   "depth": 12
+  },
+  {
+   "label": "null_x",
+   "arm": "null",
+   "s_basis": "x",
+   "shots": 30000,
+   "twoq": 63,
+   "depth": 157
+  },
+  {
+   "label": "ordZX_x",
+   "arm": "ordZX",
+   "s_basis": "x",
+   "shots": 30000,
+   "twoq": 2,
+   "depth": 13
+  },
+  {
+   "label": "null_z",
+   "arm": "null",
+   "s_basis": "z",
+   "shots": 30000,
+   "twoq": 63,
+   "depth": 157
+  },
+  {
+   "label": "ordXZ_x",
+   "arm": "ordXZ",
+   "s_basis": "x",
+   "shots": 30000,
+   "twoq": 2,
+   "depth": 12
+  }
+ ]
+}

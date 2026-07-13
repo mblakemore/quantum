@@ -1,0 +1,30 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "W_PLUS_above_measured_hull",
+      "pass_value": 0.112,
+      "fail_value": -0.02,
+      "threshold": 0.0,
+      "direction": "above",
+      "se": 0.0048
+    },
+    {
+      "name": "W_MINUS_below_measured_hull",
+      "pass_value": -0.42,
+      "fail_value": 0.02,
+      "threshold": 0.0,
+      "direction": "below",
+      "se": 0.0086
+    },
+    {
+      "name": "N1_null_ZX_classification",
+      "pass_value": 0.416,
+      "fail_value": 0.0,
+      "threshold": 0.2,
+      "direction": "above",
+      "se": 0.0033
+    }
+  ]
+}
