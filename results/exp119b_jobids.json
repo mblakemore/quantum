@@ -1,0 +1,94 @@
+{
+ "experiment": "exp119b-coherent-negative-energy",
+ "cycle": "C4641-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp119b",
+ "prereg": "experiments/exp119b-coherent-negative-energy-preregistration.md",
+ "parent": "exp119 (FAIL-EXISTENCE C4640; this is the scope-honest retest)",
+ "theta": 0.161,
+ "pair": [
+  3,
+  4
+ ],
+ "gates": {
+  "G0": "raw ground+5SE<0 -> NO-TEST",
+  "V1": "corrected E_B(def)+5SE_c < 0 (HEADLINE)",
+  "V2": "corrected def-ground < 0 at 5sigma",
+  "V3": "raw def-fixpooled < 0 at 5sigma"
+ },
+ "transpile_seed": 4641,
+ "shuffle_seed": 4641,
+ "job_id": "d9a9sp2f47jc73a9vurg",
+ "metas": [
+  {
+   "label": "fixp_xx",
+   "arm": "fixp",
+   "shots": 20000,
+   "twoq": 1,
+   "depth": 10
+  },
+  {
+   "label": "cal1",
+   "arm": "cal1",
+   "shots": 25000,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "fixm_xx",
+   "arm": "fixm",
+   "shots": 20000,
+   "twoq": 1,
+   "depth": 10
+  },
+  {
+   "label": "fixp_zb",
+   "arm": "fixp",
+   "shots": 20000,
+   "twoq": 1,
+   "depth": 10
+  },
+  {
+   "label": "ground_zb",
+   "arm": "ground",
+   "shots": 100000,
+   "twoq": 1,
+   "depth": 9
+  },
+  {
+   "label": "cal0",
+   "arm": "cal0",
+   "shots": 25000,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "fixm_zb",
+   "arm": "fixm",
+   "shots": 20000,
+   "twoq": 1,
+   "depth": 10
+  },
+  {
+   "label": "ground_xx",
+   "arm": "ground",
+   "shots": 100000,
+   "twoq": 1,
+   "depth": 9
+  },
+  {
+   "label": "qet_def_zb",
+   "arm": "qet_def",
+   "shots": 100000,
+   "twoq": 3,
+   "depth": 18
+  },
+  {
+   "label": "qet_def_xx",
+   "arm": "qet_def",
+   "shots": 100000,
+   "twoq": 3,
+   "depth": 15
+  }
+ ]
+}

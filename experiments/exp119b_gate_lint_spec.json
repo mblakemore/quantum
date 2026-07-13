@@ -1,0 +1,30 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "V1_corrected_negativity",
+      "pass_value": -0.034,
+      "fail_value": 0.041,
+      "threshold": 0.0,
+      "direction": "below",
+      "se": 0.0047
+    },
+    {
+      "name": "V2_def_below_ground_corrected",
+      "pass_value": -0.07,
+      "fail_value": 0.02,
+      "threshold": 0.0,
+      "direction": "below",
+      "se": 0.0064
+    },
+    {
+      "name": "V3_def_below_fixpooled_raw",
+      "pass_value": -0.19,
+      "fail_value": 0.02,
+      "threshold": 0.0,
+      "direction": "below",
+      "se": 0.0088
+    }
+  ]
+}
