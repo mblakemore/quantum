@@ -1,0 +1,30 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "W1_ACTIVE_BEATS_PASSIVE_echo_minus_dfs",
+      "pass_value": 0.45,
+      "fail_value": -0.05,
+      "threshold": 0.0,
+      "direction": "above",
+      "se": 0.010
+    },
+    {
+      "name": "W2_ECHO_PROTECTS_echo_minus_bare",
+      "pass_value": 0.13,
+      "fail_value": -0.02,
+      "threshold": 0.05,
+      "direction": "above",
+      "se": 0.010
+    },
+    {
+      "name": "G_SENT_integrity",
+      "pass_value": 0.98,
+      "fail_value": 0.5,
+      "threshold": 0.95,
+      "direction": "above",
+      "se": 0.0025
+    }
+  ]
+}

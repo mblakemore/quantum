@@ -1,0 +1,341 @@
+{
+ "experiment": "exp132-dfs-cloak",
+ "cycle": "C4671-whisper",
+ "substrate": "claude-opus-4-8",
+ "backend": "ibm_marrakesh",
+ "tag": "exp132",
+ "prereg": "experiments/exp132-dfs-cloak-preregistration.md",
+ "delays_us": [
+  0,
+  30,
+  60,
+  120
+ ],
+ "d_star": 120,
+ "gates": {
+  "W1_ACTIVE_BEATS_PASSIVE": "echo_norm-dfs_norm > 5se @d*",
+  "W2_ECHO_PROTECTS": "echo_norm-bare_norm > 0.05+5se @d*",
+  "W3_DFS": "both-outcomes: dfs_norm vs bare_norm @d*",
+  "G_SENT": 0.95
+ },
+ "prefiled_expectation": {
+  "W1": "echo>>dfs",
+  "W2": "ECHO_PROTECTS",
+  "W3": "NO_PASSIVE_PROTECTION",
+  "fake_dfs_ratio": 0.15,
+  "fake_echo_ratio": 0.97
+ },
+ "shuffle_seed": 4671,
+ "pair": [
+  1,
+  2
+ ],
+ "pair_cost": 0.009106127880450066,
+ "job_id": "d9am7pu6hjac73fekufg",
+ "metas": [
+  {
+   "label": "sent_00",
+   "kind": "sentinel",
+   "prep": "00",
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "log_YY_120",
+   "kind": "logical",
+   "setting": "YY",
+   "delay": 120,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 12
+  },
+  {
+   "label": "echo_Y_60",
+   "kind": "echo",
+   "setting": "Y",
+   "delay": 60,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "echo_Y_120",
+   "kind": "echo",
+   "setting": "Y",
+   "delay": 120,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "echo_X_30",
+   "kind": "echo",
+   "setting": "X",
+   "delay": 30,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 10
+  },
+  {
+   "label": "log_YX_120",
+   "kind": "logical",
+   "setting": "YX",
+   "delay": 120,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 13
+  },
+  {
+   "label": "log_YX_30",
+   "kind": "logical",
+   "setting": "YX",
+   "delay": 30,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 13
+  },
+  {
+   "label": "bare_Y_0",
+   "kind": "bare",
+   "setting": "Y",
+   "delay": 0,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 6
+  },
+  {
+   "label": "bare_X_30",
+   "kind": "bare",
+   "setting": "X",
+   "delay": 30,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "echo_Y_30",
+   "kind": "echo",
+   "setting": "Y",
+   "delay": 30,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "log_XY_30",
+   "kind": "logical",
+   "setting": "XY",
+   "delay": 30,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 13
+  },
+  {
+   "label": "bare_X_0",
+   "kind": "bare",
+   "setting": "X",
+   "delay": 0,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "log_YX_0",
+   "kind": "logical",
+   "setting": "YX",
+   "delay": 0,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 11
+  },
+  {
+   "label": "log_XY_0",
+   "kind": "logical",
+   "setting": "XY",
+   "delay": 0,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 11
+  },
+  {
+   "label": "echo_X_60",
+   "kind": "echo",
+   "setting": "X",
+   "delay": 60,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 10
+  },
+  {
+   "label": "log_YX_60",
+   "kind": "logical",
+   "setting": "YX",
+   "delay": 60,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 13
+  },
+  {
+   "label": "bare_Y_120",
+   "kind": "bare",
+   "setting": "Y",
+   "delay": 120,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "log_YY_30",
+   "kind": "logical",
+   "setting": "YY",
+   "delay": 30,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 12
+  },
+  {
+   "label": "bare_Y_30",
+   "kind": "bare",
+   "setting": "Y",
+   "delay": 30,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "log_XY_60",
+   "kind": "logical",
+   "setting": "XY",
+   "delay": 60,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 13
+  },
+  {
+   "label": "log_XX_120",
+   "kind": "logical",
+   "setting": "XX",
+   "delay": 120,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 13
+  },
+  {
+   "label": "log_XX_30",
+   "kind": "logical",
+   "setting": "XX",
+   "delay": 30,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 13
+  },
+  {
+   "label": "echo_X_120",
+   "kind": "echo",
+   "setting": "X",
+   "delay": 120,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 10
+  },
+  {
+   "label": "bare_Y_60",
+   "kind": "bare",
+   "setting": "Y",
+   "delay": 60,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "echo_Y_0",
+   "kind": "echo",
+   "setting": "Y",
+   "delay": 0,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 6
+  },
+  {
+   "label": "bare_X_60",
+   "kind": "bare",
+   "setting": "X",
+   "delay": 60,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "bare_X_120",
+   "kind": "bare",
+   "setting": "X",
+   "delay": 120,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "log_XX_60",
+   "kind": "logical",
+   "setting": "XX",
+   "delay": 60,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 13
+  },
+  {
+   "label": "log_YY_0",
+   "kind": "logical",
+   "setting": "YY",
+   "delay": 0,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 10
+  },
+  {
+   "label": "log_XX_0",
+   "kind": "logical",
+   "setting": "XX",
+   "delay": 0,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 11
+  },
+  {
+   "label": "echo_X_0",
+   "kind": "echo",
+   "setting": "X",
+   "delay": 0,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "log_XY_120",
+   "kind": "logical",
+   "setting": "XY",
+   "delay": 120,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 13
+  },
+  {
+   "label": "log_YY_60",
+   "kind": "logical",
+   "setting": "YY",
+   "delay": 60,
+   "shots": 8000,
+   "twoq": 1,
+   "depth": 12
+  },
+  {
+   "label": "sent_11",
+   "kind": "sentinel",
+   "prep": "11",
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 2
+  }
+ ]
+}
