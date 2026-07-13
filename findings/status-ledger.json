@@ -1170,12 +1170,12 @@
    "id": "F103",
    "file": "F103-h2-negative-information-ledger-entanglement-by-negative-conditional-entropy-whisper-c4662-ember-numbered-c4144.md",
    "claim_type": "existence",
-   "status": "UNTESTED",
-   "retested": false,
-   "retest_ref": null,
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "results/exp125b_grade.json",
    "sim_only": false,
    "single_run": true,
-   "evidence": "analysis-tier (ZERO shots, re-analysis of banked Exp112b-micro CHSH S=2.453; numbered Ember C4144, analysis Whisper C4662): entanglement CERTIFIED by negative conditional entropy via twirl+positivity+worst-case-maximize -> S(B|A)<=-0.0986 at 5sigma (point -0.296), one-sided conservative on the Bell-twirled state. Leads with a SELF-CORRECTION (author's C4659 Fannes export overstated: observed TVD only lower-bounds trace distance; corrected split leg1=classical Shannon-Fannes, leg2=quantum via twirl+positivity). Leg1 scope-corrected subclaim: transpiler parallel preserves information content to <=0.30 bits (F96 extension). First Horizons-3 delivery. results/entropy_ledger_c4662.json",
+   "evidence": "analysis-tier (ZERO shots, re-analysis of banked Exp112b-micro CHSH S=2.453; numbered Ember C4144, analysis Whisper C4662): entanglement CERTIFIED by negative conditional entropy via twirl+positivity+worst-case-maximize -> S(B|A)<=-0.0986 at 5sigma (point -0.296), one-sided conservative on the Bell-twirled state. Leads with a SELF-CORRECTION (author's C4659 Fannes export overstated: observed TVD only lower-bounds trace distance; corrected split leg1=classical Shannon-Fannes, leg2=quantum via twirl+positivity). Leg1 scope-corrected subclaim: transpiler parallel preserves information content to <=0.30 bits (F96 extension). First Horizons-3 delivery. results/entropy_ledger_c4662.json [CONFIRMED_ON_RETEST by F105/Exp125b C4664: direct Bell-pair tomography S(B|A)=-0.855 bits 42sigma, far exceeds this twirled lower bound as it must.]",
    "subclaims": [
     {
      "claim": "the transpiler's parallel scheduling preserves the outcome distribution's INFORMATION CONTENT (classical Shannon-Fannes)",
@@ -1194,6 +1194,29 @@
    "sim_only": false,
    "single_run": true,
    "evidence": "HW run exp125 on ibm_marrakesh (numbered Ember C4145, graded Whisper C4663): the graded claim 'Landauer erasure floor of the ICO-engine demon record > F95 work credit at 5sigma' is STRADDLE-REFUTED (honest loss, F93/F95 floor-miss pattern). Engine q4 floor bracket [0.1234,0.1539]E vs banked F95 credit 0.0920+/-0.0098 = demon pays DIRECTIONALLY 1.3-1.7x but only 2.9sigma (PASS margin -0.0225, both directions miss 5sigma); sites agree (q98 concurs). Bottleneck = single-window credit SE not thermometry -> multi-window F95 rerun specified. Design-audited: grades the at-risk FLOOR not the cannot-fail dissipation (vacuous-gate self-catch); 3rd data-blind self-catch. Coherent-record loophole (F103 S(B|A)<0 could erase below floor) pre-reg'd as Exp125b, NOT graded. results/exp125_grade.json"
+  },
+  {
+   "id": "F105",
+   "file": "F105-exp125b-coherent-record-negative-entropy-erasure-frontier-whisper-c4664-ember-numbered-c4146.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp125b on ibm_marrakesh, engine pair (3,4), record qubit q4 = F104's exact qubit same window (numbered Ember C4146, graded Whisper C4664): NEGATIVE CONDITIONAL ENTROPY DIRECTLY CERTIFIED \u2014 S(B|A)=-0.855+/-0.020 bits debiased, 42sigma, G-ent PASS. Far below F103's twirled -0.296 (direct >> twirled as it must be) -> CONFIRMS+strengthens F103; closes F104's cross-window caveat (same q4/window). results/exp125b_grade.json",
+   "subclaims": [
+    {
+     "claim": "the entanglement erasure bonus |S(B|A)|*floor_classical beats the measured feedforward tax (accessibility frontier)",
+     "status": "REFUTED",
+     "evidence": "STRADDLE vs both taxes: bonus point 0.109E beats coherent 0.028 + classical 0.092 BUT the SPAM-conservative floor bracket collapses to [0,0.127]E (q4 read colder 0.4% than its readout error 0.7%) -> bonus bracket [0,0.121] straddles. WALL RELOCATED entanglement(ample)->thermometry(ef-transition/SPAM), the F104 credit-SE class. Finite-sample vN bias favors accessible = the verdict to distrust; frozen rule granted none."
+    },
+    {
+     "claim": "direct tomography confirms F103's twirled negative-conditional-entropy bound",
+     "status": "CONFIRMED",
+     "evidence": "direct -0.855 far exceeds |twirled| 0.296 (twirl only raises entropy); F103 -> CONFIRMED_ON_RETEST via this run."
+    }
+   ]
   }
  ],
  "rubric_v2": {
