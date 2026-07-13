@@ -1,0 +1,191 @@
+{
+ "experiment": "exp122-proper-time-interferometer",
+ "cycle": "C4650-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp122",
+ "prereg": "experiments/exp122-twin-paradox-preregistration.md",
+ "site": {
+  "C": 2,
+  "K": 3,
+  "L": 1,
+  "sum_err": 0.0027177629935174474
+ },
+ "layout": [
+  2,
+  3,
+  1
+ ],
+ "published_t1_us": {
+  "K": 178.99560889568284,
+  "L": 136.34271311736723,
+  "Tbar": 154.78452981634484
+ },
+ "ladder_us": [
+  0.0,
+  23.2,
+  46.4,
+  92.9,
+  185.7
+ ],
+ "cal_ladder_us": [
+  0.0,
+  46.4,
+  92.9,
+  185.7
+ ],
+ "gates": {
+  "G0": "V(0)>0.7 both arms else NO-TEST",
+  "W_AGE": "V_vac(dt*)-V_exc(dt*) > 5SE at ladder[2]",
+  "W_AGE_LADDER": "same at ladder[3]",
+  "law": "REPORTED subclaim only (excess-decay pre-filed)"
+ },
+ "transpile_seed": 4650,
+ "shuffle_seed": 4650,
+ "job_id": "d9aaj352su3c739lcic0",
+ "metas": [
+  {
+   "label": "vac_46.4",
+   "arm": "vac",
+   "dt_us": 46.4,
+   "shots": 20000,
+   "twoq": 28,
+   "depth": 106
+  },
+  {
+   "label": "vac_0.0",
+   "arm": "vac",
+   "dt_us": 0.0,
+   "shots": 20000,
+   "twoq": 28,
+   "depth": 105
+  },
+  {
+   "label": "calK_92.9",
+   "arm": "calK",
+   "dt_us": 92.9,
+   "shots": 10000,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "exc_46.4",
+   "arm": "exc",
+   "dt_us": 46.4,
+   "shots": 20000,
+   "twoq": 28,
+   "depth": 106
+  },
+  {
+   "label": "calK_0.0",
+   "arm": "calK",
+   "dt_us": 0.0,
+   "shots": 10000,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "exc_185.7",
+   "arm": "exc",
+   "dt_us": 185.7,
+   "shots": 20000,
+   "twoq": 28,
+   "depth": 106
+  },
+  {
+   "label": "calL_185.7",
+   "arm": "calL",
+   "dt_us": 185.7,
+   "shots": 10000,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "calK_46.4",
+   "arm": "calK",
+   "dt_us": 46.4,
+   "shots": 10000,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "calL_0.0",
+   "arm": "calL",
+   "dt_us": 0.0,
+   "shots": 10000,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "vac_23.2",
+   "arm": "vac",
+   "dt_us": 23.2,
+   "shots": 20000,
+   "twoq": 28,
+   "depth": 106
+  },
+  {
+   "label": "exc_23.2",
+   "arm": "exc",
+   "dt_us": 23.2,
+   "shots": 20000,
+   "twoq": 28,
+   "depth": 106
+  },
+  {
+   "label": "vac_92.9",
+   "arm": "vac",
+   "dt_us": 92.9,
+   "shots": 20000,
+   "twoq": 28,
+   "depth": 106
+  },
+  {
+   "label": "vac_185.7",
+   "arm": "vac",
+   "dt_us": 185.7,
+   "shots": 20000,
+   "twoq": 28,
+   "depth": 106
+  },
+  {
+   "label": "exc_92.9",
+   "arm": "exc",
+   "dt_us": 92.9,
+   "shots": 20000,
+   "twoq": 28,
+   "depth": 106
+  },
+  {
+   "label": "calL_92.9",
+   "arm": "calL",
+   "dt_us": 92.9,
+   "shots": 10000,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "exc_0.0",
+   "arm": "exc",
+   "dt_us": 0.0,
+   "shots": 20000,
+   "twoq": 28,
+   "depth": 105
+  },
+  {
+   "label": "calK_185.7",
+   "arm": "calK",
+   "dt_us": 185.7,
+   "shots": 10000,
+   "twoq": 0,
+   "depth": 3
+  },
+  {
+   "label": "calL_46.4",
+   "arm": "calL",
+   "dt_us": 46.4,
+   "shots": 10000,
+   "twoq": 0,
+   "depth": 3
+  }
+ ]
+}

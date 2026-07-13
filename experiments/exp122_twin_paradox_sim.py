@@ -81,9 +81,11 @@ def build(excited, dt_us, measure_clock=False):
     if excited:
         qc.x(1)
     qc.cswap(0, 1, 2)
-    if dt_us > 0:
+    qc.barrier()                      # structure-invariant: prevents CSWAP
+    if dt_us > 0:                     # cancellation at dt=0 (C4650 audit catch)
         qc.delay(int(dt_us * 1000), 1, unit="ns")
         qc.delay(int(dt_us * 1000), 2, unit="ns")
+    qc.barrier()
     qc.cswap(0, 1, 2)
     qc.h(0)
     qc.measure(0, 0)
