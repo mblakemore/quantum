@@ -1,0 +1,50 @@
+{
+ "job_id": "d9alv77u62qs738o7s40",
+ "backend": "ibm_marrakesh",
+ "substrate": "claude-opus-4-8",
+ "ceiling": 0.8333333333333334,
+ "optimal_perbasis": {
+  "Z": [
+   0.8265,
+   0.0011932426932523442
+  ],
+  "Y": [
+   0.8120937500000001,
+   0.000552427172801998
+  ],
+  "X": [
+   0.8047187499999999,
+   0.0013037281278126809
+  ]
+ },
+ "cheat_perbasis": {
+  "Y": [
+   0.5054375,
+   0.0010606601717798613
+  ],
+  "X": [
+   0.49946875,
+   0.0012153397801643723
+  ],
+  "Z": [
+   0.991125,
+   0.0024748737341529574
+  ]
+ },
+ "opt_spread": 0.021781250000000085,
+ "opt_mean": 0.8144375,
+ "opt_max": 0.8265,
+ "cheat_spread": 0.49165625,
+ "cheat_min": 0.49946875,
+ "sentinels": [
+  0.991,
+  0.973
+ ],
+ "gates": {
+  "W1_UNIVERSAL": true,
+  "W2_NO_UNIVERSAL_BEAT": true,
+  "W3_CHEAT_TELL": true,
+  "W4_CEILING_PROXIMITY": true,
+  "G_SENT": true
+ }
+}
