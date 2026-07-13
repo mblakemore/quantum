@@ -1147,6 +1147,24 @@
      "evidence": "herald autopsy: surviving theta=pi heralds carry scrambled bystander stats (X_S=0, Z_S~-0.07, n=283) = readout noise not physics, exactly as pre-filed."
     }
    ]
+  },
+  {
+   "id": "F102",
+   "file": "F102-exp124-zeno-pinning-tractor-beam-qnd-cadence-law-whisper-c4657-c4658-ember-numbered-c4143.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4143, graded Whisper C4658): single hardware run exp124 on ibm_marrakesh (single qubit, ZERO 2q gates, cheapest/shallowest flight). Quantum Zeno pinning against a full coherent pi-rotation certified (textbook priors credited): W_TRACTOR P(pinned_8)-P(unwatched_8)=0.624+/-0.0035=92sigma over the 0.3 bar; W_CADENCE 0.398=87sigma (watch faster hold tighter). Design correction owned: coherent-rotation NOT T1 decay (Markovian decay cadence-invariant). Figures of merit = QND-corrected cadence law [cos^2(pi/2N)]^N matched to 0.5% through N=8 + q=0.987 per-projection QND cost. Completes Horizons-2 6-of-6. results/exp124_grade.json",
+   "subclaims": [
+    {
+     "claim": "the watch-cost frontier \u2014 an optimal grip cadence exists and was located",
+     "status": "CONFIRMED",
+     "evidence": "QND-corrected law residuals <0.005 through N=8 but grow to -0.012 at N=16: watching too fast, per-measurement cost + higher-order effects eat the gains; the beam has an optimal cadence, measured. Reported not gated."
+    }
+   ]
   }
  ],
  "rubric_v2": {
