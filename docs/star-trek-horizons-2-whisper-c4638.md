@@ -87,6 +87,11 @@ vs switch-order; mutual-information-vs-fragment-size curves; frozen redundancy
 statistic, 5σ classification like F96's. **Cost**: 2 jobs (definite/indefinite + calib).
 
 ## Q3 — THE EVENT-HORIZON LIBRARY CARD
+**STATUS — DELIVERED (C4646 design → C4647 flight → C4648 grade):
+HERALDED-MIRROR-CERTIFIED.** Diary measured DEAD in both definite query orders
+(0.0065/0.0026); heralded minus branch returns it anti-correlated at −0.238±0.003
+(56σ, sign as theory fixed); plus branch +0.183 (59σ). Horizon-keeps-it asymmetry
+confirmed on theory (S_E2: 0.007 vs 0.453). Same telescope as F98, same window.
 **Hayden-Preskill decoding through the switch: black-hole information with indefinite order**
 
 **The universe secret**: a black hole that has passed its Page time returns swallowed
