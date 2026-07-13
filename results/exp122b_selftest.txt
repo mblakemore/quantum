@@ -1,0 +1,5 @@
+  [mixed] -> MIXED-BOTH-MECHANISMS (PASS)
+  [aging-only] -> AGING-CERTIFIED-CLEAN (PASS)
+  [rotation-only] -> CLOCK-PULL-CERTIFIED (PASS)
+  [unresolved] -> UNRESOLVED (PASS)
+SELFTEST 4/4 PASS

@@ -1,0 +1,30 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "W_TWIN_phase_blind_sep",
+      "pass_value": 0.088,
+      "fail_value": -0.03,
+      "threshold": 0.0,
+      "direction": "above",
+      "se": 0.01
+    },
+    {
+      "name": "W_ROT_echo_recovery",
+      "pass_value": 0.4,
+      "fail_value": -0.02,
+      "threshold": 0.0,
+      "direction": "above",
+      "se": 0.0099
+    },
+    {
+      "name": "G0_alive",
+      "pass_value": 0.88,
+      "fail_value": 0.3,
+      "threshold": 0.7,
+      "direction": "above",
+      "se": 0.0033
+    }
+  ]
+}
