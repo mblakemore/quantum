@@ -1,0 +1,303 @@
+{
+ "experiment": "exp116b-delay-ladder",
+ "cycle": "C4611-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp116b",
+ "prereg": "experiments/exp116b-delay-ladder-preregistration.md",
+ "selection_rule": "qualifying: both calib p in (0.35, 0.4677); pick mean closest to 0.45",
+ "gates": {
+  "passive": "p+5SE<0.5 each",
+  "retention_min": 0.8,
+  "therm_band": 0.1,
+  "win": "p1m - 5SE > 0.5"
+ },
+ "rungs": {
+  "r1": {
+   "r": 1.5,
+   "d_a_us": 199.30219338645082,
+   "d_b_us": 134.07168469736075
+  },
+  "r2": {
+   "r": 1.85,
+   "d_a_us": 245.806038509956,
+   "d_b_us": 165.3550777934116
+  },
+  "r3": {
+   "r": 2.2,
+   "d_a_us": 292.3098836334612,
+   "d_b_us": 196.63847088946244
+  }
+ },
+ "t1_pub_us": {
+  "q6": 166.395552044954,
+  "q8": 111.93520557777757
+ },
+ "shuffle_seed": 4611,
+ "chain": [
+  5,
+  6,
+  7,
+  8
+ ],
+ "layout": [
+  5,
+  7,
+  6,
+  8
+ ],
+ "job_id": "d9a5necqp3as739us200",
+ "metas": [
+  {
+   "label": "sent_start_retention",
+   "rung": "shared",
+   "kind": "retention",
+   "t0": 0,
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "r2_null_fwd_t0",
+   "rung": "r2",
+   "kind": "null_fwd",
+   "t0": 0,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r2_null_rev_t0",
+   "rung": "r2",
+   "kind": "null_rev",
+   "t0": 0,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r2_null_rev_t1",
+   "rung": "r2",
+   "kind": "null_rev",
+   "t0": 1,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r3_switch_t1",
+   "rung": "r3",
+   "kind": "switch",
+   "t0": 1,
+   "shots": 14000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "r2_null_fwd_t1",
+   "rung": "r2",
+   "kind": "null_fwd",
+   "t0": 1,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r3_calib_a",
+   "rung": "r3",
+   "kind": "calib_a",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r3_null_fwd_t1",
+   "rung": "r3",
+   "kind": "null_fwd",
+   "t0": 1,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r1_switch_t1",
+   "rung": "r1",
+   "kind": "switch",
+   "t0": 1,
+   "shots": 14000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "sent_mid_retention",
+   "rung": "shared",
+   "kind": "retention",
+   "t0": 0,
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "sent_mid_deconull",
+   "rung": "shared",
+   "kind": "deco",
+   "t0": 0,
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "r1_null_fwd_t0",
+   "rung": "r1",
+   "kind": "null_fwd",
+   "t0": 0,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r3_null_rev_t1",
+   "rung": "r3",
+   "kind": "null_rev",
+   "t0": 1,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r1_null_fwd_t1",
+   "rung": "r1",
+   "kind": "null_fwd",
+   "t0": 1,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r3_switch_t0",
+   "rung": "r3",
+   "kind": "switch",
+   "t0": 0,
+   "shots": 14000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "r1_null_rev_t1",
+   "rung": "r1",
+   "kind": "null_rev",
+   "t0": 1,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r2_switch_t0",
+   "rung": "r2",
+   "kind": "switch",
+   "t0": 0,
+   "shots": 14000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "r1_calib_a",
+   "rung": "r1",
+   "kind": "calib_a",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r3_null_rev_t0",
+   "rung": "r3",
+   "kind": "null_rev",
+   "t0": 0,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r3_calib_b",
+   "rung": "r3",
+   "kind": "calib_b",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r1_switch_t0",
+   "rung": "r1",
+   "kind": "switch",
+   "t0": 0,
+   "shots": 14000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "r1_null_rev_t0",
+   "rung": "r1",
+   "kind": "null_rev",
+   "t0": 0,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r2_switch_t1",
+   "rung": "r2",
+   "kind": "switch",
+   "t0": 1,
+   "shots": 14000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "r1_calib_b",
+   "rung": "r1",
+   "kind": "calib_b",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r2_calib_a",
+   "rung": "r2",
+   "kind": "calib_a",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r2_calib_b",
+   "rung": "r2",
+   "kind": "calib_b",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "r3_null_fwd_t0",
+   "rung": "r3",
+   "kind": "null_fwd",
+   "t0": 0,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "sent_end_retention",
+   "rung": "shared",
+   "kind": "retention",
+   "t0": 0,
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  }
+ ]
+}
