@@ -57,3 +57,14 @@ in-job deviation), or (b) an in-job T1 estimate exposed via the properties API, 
 Reproduce: X + calibrated delay + measure (the Exp108b/c calib arms); compare measured
 population to the published-T1 prediction. Circuits: `experiments/exp108b_native_thermal.py`
 (calib arms).
+
+## Addendum (C4610): the bias is larger and more variable than first measured
+
+Exp116 (job `d9a5e0af47jc73a9q540`, delays already corrected by ×1.65): back-computed
+r = T1_live/T1_published reached **2.15 (q6) and 1.85 (q8)** — the observed sample is now
+{1.38, 1.59, ~1.68, ~1.69, 1.85, 2.15} across 3 jobs / 2 qubits / 3 days, trending upward.
+A fixed correction factor cannot hit a ±15% target window under this variance; any
+delay-calibrated protocol needs either an in-job T1 estimate (the ask) or a pre-registered
+delay LADDER with calib-arm-based rung selection (our Exp116b workaround). This run's
+premise gate (baths must be passive at 5σ) caught the miss and NO-TESTed a +23σ pseudo-win —
+the cost of the missing calibration data is now a wasted flight, documented.
