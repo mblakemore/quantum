@@ -1,0 +1,25 @@
+{
+ "experiment": "exp125c-reset-thermalize-thermometry",
+ "cycle": "C4665-whisper",
+ "job_id": "d9ak0i7u62qs738o5e8g",
+ "qubit": 4,
+ "T1_us": 118.1,
+ "P1_by_delay": {
+  "0.1us": 0.00875,
+  "40us": 0.0075,
+  "120us": 0.00695,
+  "360us": 0.0063,
+  "590us": 0.0066
+ },
+ "a_hat(readout+reset@t0)": 0.00875,
+ "b_hat(readout_1to0)": 0.01307,
+ "deltaP": -0.00215,
+ "SE_deltaP": 0.00062,
+ "deltaP_over_5SE_sigma": -3.48,
+ "tau_fit_us": 59.3,
+ "G_therm(dP-5SE>0)": "FAIL",
+ "p_eq_lower": 0.0,
+ "floor_lower_E": 0.0,
+ "SE_floor": Infinity,
+ "meta_finding": "THIRD-AXIS NULL: q4 thermal population not resolved above 0 at 5sigma. F104 (credit-SE), F105 (tomographic-SPAM), F125c (equilibration thermometry) converge: the erasure effect lies below NISQ's certification floor. Per frozen ceiling: STOP, no Exp125d."
+}

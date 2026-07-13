@@ -1,0 +1,79 @@
+{
+ "experiment": "exp125c-reset-thermalize-thermometry",
+ "cycle": "C4665-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp125c",
+ "prereg": "experiments/exp125c-reset-thermalize-thermometry-preregistration.md",
+ "qubit": 4,
+ "T1_s": 0.000118061381875228,
+ "readout_err": 0.00732421875,
+ "delays_us": [
+  0.1,
+  40,
+  120,
+  360,
+  590
+ ],
+ "S_BA_banked": -0.855,
+ "S_BA_SE": 0.02,
+ "tax_coherent": 0.028,
+ "tax_classical": 0.092,
+ "grade": {
+  "G_therm": "dP - 5SE > 0 (thermal resolved)",
+  "frontier": "bonus_lower=(|S|-5SE)*floor(p_eq_lower) vs taxes"
+ },
+ "meta_ceiling": "if G-therm FAIL: 3rd axis (F104 credit-SE, F105 SPAM, F125c thermometry) agrees effect below NISQ floor -> STOP, no Exp125d",
+ "transpile_seed": 4665,
+ "shuffle_seed": 4665,
+ "job_id": "d9ak0i7u62qs738o5e8g",
+ "metas": [
+  {
+   "label": "therm_40us",
+   "arm": "therm",
+   "delay_us": 40,
+   "shots": 40000,
+   "reset": 1,
+   "depth": 3
+  },
+  {
+   "label": "therm_0.1us",
+   "arm": "therm",
+   "delay_us": 0.1,
+   "shots": 40000,
+   "reset": 1,
+   "depth": 3
+  },
+  {
+   "label": "therm_120us",
+   "arm": "therm",
+   "delay_us": 120,
+   "shots": 40000,
+   "reset": 1,
+   "depth": 3
+  },
+  {
+   "label": "therm_360us",
+   "arm": "therm",
+   "delay_us": 360,
+   "shots": 40000,
+   "reset": 1,
+   "depth": 3
+  },
+  {
+   "label": "ref1",
+   "arm": "ref1",
+   "delay_us": 0.0,
+   "shots": 40000,
+   "reset": 0,
+   "depth": 2
+  },
+  {
+   "label": "therm_590us",
+   "arm": "therm",
+   "delay_us": 590,
+   "shots": 40000,
+   "reset": 1,
+   "depth": 3
+  }
+ ]
+}
