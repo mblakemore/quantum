@@ -110,7 +110,14 @@ Cliffords (cheap), Bell-pair decoding = Exp112 repeater machinery. **Cost**: one
 mid-depth. Sim tier decides feasibility (decoding fidelity floor at our noise).
 
 ## Q4 — THE RELATIVITY CHIP
-**STATUS (C4649-C4651): WIN AS FROZEN, MECHANISM CONFOUNDED — honest asterisk.**
+**STATUS — DELIVERED, ASTERISK CLOSED AS WIN (C4649-C4654): AGING-CERTIFIED-CLEAN.**
+Exp122b phase-blind adjudication: |V| separation 0.338±0.009 (36σ) and 0.230±0.010
+(23σ) — genuine which-path aging decoherence, rotation-immune. The confounding
+rotation was real (coherence had spun into Y — the parent read the wrong quadrature)
+but static-ZZ REFUTED (echo test failed as the data demanded; my 0.80 mechanism
+prediction graded MISS). Twin paradox certified; numbering requested.
+*(Original C4651 asterisk preserved below for provenance:)*
+**(C4649-C4651): WIN AS FROZEN, MECHANISM CONFOUNDED — honest asterisk.**
 W_AGE passed at 67σ (excited clock destroys path coherence far beyond the vacuum
 twin) but ⟨X⟩ went NEGATIVE in both arms: the estimator conflates which-path
 decoherence with a coherent branch-dependent ZZ clock-pull on C. Effect certified,
