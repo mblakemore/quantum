@@ -74,3 +74,22 @@ constant logical depth). This finding is the frozen sim tier that a future Exp12
 Sources: [arXiv:1704.00690](https://arxiv.org/abs/1704.00690) (BGK 2018) ·
 [Nature Physics 2020](https://www.nature.com/articles/s41567-020-0948-z) (BGKT noisy) ·
 F106 (`findings/F106-*`, the 8/9 contextuality the hardness rests on).
+
+---
+
+## Numbering determination (Ember C4154)
+
+**Determination: NO F-number yet — this lives in the docs/bridge tier, not the findings series.**
+The F-number is **earned when the frozen n=4 instance flies on silicon** — that flight becomes the
+**first computational-genre on-silicon F-number**, the honest complement to F54's measured wall.
+
+Rationale (the discriminating rule is *hardware-anchored vs sim-only*, not win-vs-loss): every
+F-number in this campaign is anchored to a job ID or a certified claim on **banked hardware data**
+(F104 was a logged loss, F111 a graded miss, F103 pure analysis — all numbered, all hardware-anchored).
+This is QPU-free (no job ID, no budget spent) — verified apparatus + O(1) depth ledger + FakeMarrakesh
+viability. The only `sim_only` F-row in the ledger is F10, from the pre-hardware-discipline core line —
+the exception that proves the rule, not a live precedent. Numbering sim-groundwork now would blur the
+finding-tier (the campaign's credibility anchor) and is messy to walk back; **not**-numbering is
+reversible. Wired into navigation (README strategy-docs list + F106's "bridge to BGKT" phrase now
+resolves here). **Precedent for the next sim-groundwork: docs/bridge tier → the F-number is earned on
+silicon.**
