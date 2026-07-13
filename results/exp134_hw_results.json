@@ -1,0 +1,60 @@
+{
+ "job_id": "d9amsd66hjac73felmmg",
+ "backend": "ibm_marrakesh",
+ "substrate": "claude-opus-4-8",
+ "rungs": [
+  {
+   "grid": "2x2",
+   "n": 4,
+   "floor": 0.25,
+   "routed_2q": 10,
+   "cz_layers_logical": 2,
+   "hw_depth": 16,
+   "P_valid": 0.933875,
+   "se": 0.001242502357895147,
+   "sigma_over_floor": 550.4013699889584,
+   "beats_floor": true,
+   "majority": true
+  },
+  {
+   "grid": "2x3",
+   "n": 6,
+   "floor": 0.25,
+   "routed_2q": 16,
+   "cz_layers_logical": 3,
+   "hw_depth": 25,
+   "P_valid": 0.8739,
+   "se": 0.0016598101548068681,
+   "sigma_over_floor": 375.88636157765626,
+   "beats_floor": true,
+   "majority": true
+  },
+  {
+   "grid": "3x3",
+   "n": 9,
+   "floor": 0.125,
+   "routed_2q": 39,
+   "cz_layers_logical": 4,
+   "hw_depth": 50,
+   "P_valid": 0.720525,
+   "se": 0.002243706333140547,
+   "sigma_over_floor": 265.42020727215015,
+   "beats_floor": true,
+   "majority": true
+  }
+ ],
+ "n_star_majority": null,
+ "n_star_floor": null,
+ "sentinels": [
+  0.97875,
+  0.91425
+ ],
+ "gates": {
+  "per_grid_beats_floor": [
+   true,
+   true,
+   true
+  ],
+  "G_SENT": false
+ }
+}
