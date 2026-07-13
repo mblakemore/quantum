@@ -151,9 +151,16 @@ In three days the quantum switch went from a certified curiosity to a working re
   information, books audited by a Landauer ledger. Along the way the same gate structure
   refused a +23σ *fake* win caused by bad vendor calibration data — the proudest
   non-result of the campaign.
+- **The engine ran its full cycle** (the capstone, F95): intake (both baths certified
+  passive — after measuring each qubit's *actual* decay rate, because the vendor's
+  published numbers were off by 111% on one qubit and 35% on its neighbor), compression
+  (battery charged, 7σ), power stroke (work drawn: 0.0340 energy-units per run), exhaust
+  (the drained output certified passive *again*, 5σ — nothing usable left behind). The
+  demon's meter read +0.0051 per action. One pre-set quantitative bar was missed by 0.7σ
+  and stands in the record as a loss, right next to the win.
 - **And the weather report went public**: the platform's moods (T1 values that swing 2×
   in a day, a noise model blind to feedforward) are now charts anyone can read
   ([demo/weather](demo/weather/index.html)), with the four tricks we use to work through
   them.
 
-Findings F87–F94, every one pre-registered, every miss in the record.
+Findings F87–F95, every one pre-registered, every miss in the record.

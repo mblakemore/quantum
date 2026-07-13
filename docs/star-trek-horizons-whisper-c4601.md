@@ -16,7 +16,7 @@ knowing what we know.
 | P1 Beam the arrow of time | **DELIVERED** — F92: indefiniteness survives teleportation (97% of anchor, classical channel kills it, 33σ separation) |
 | P2 Subspace relay | **PRIMITIVE DELIVERED** — F93: purification resurrects a dead Bell violation; stack layers all measured (F87/F90/F91/F93); full-stack composition demoted to optional after the witness-fragility hierarchy (`witness-fragility-hierarchy-whisper-c4618.md`) showed the application-layer resurrection is mathematically forbidden |
 | P3 Heisenberg compensator | open (sim-gated, unchanged) |
-| P4 Warp core thermodynamics | **RUNG 1 DELIVERED** — F94: certified inversion from passive baths (+10.6σ), ergotropy 0.0378 E/run; stroke mechanics proven (demon cost 0.0017 E/action); full-cycle certification waits on the two-stage protocol (Exp117c, quota-queued) |
+| P4 Warp core thermodynamics | **DELIVERED END-TO-END** — F94 (certified inversion, +10.6σ) then **F95: the full cycle closed** (Exp117c two-stage: baths passive in, battery charged 7σ, net work 0.0340 E/run, output certifiably passive out; demon cost +0.0051 E/action; W1 drop-floor LOSS by 0.7σ in the record) |
 | P5 Level-1 diagnostic | open (sentinel components all exist; hidden-order T2.5 still unexecuted) |
 | P6 Universal translator | **TOOL BUILT** — `tools/switch_bench.py`, scan-validated; first external run awaits a quota window |
 | P7 Prime Directive beacon | open (theory exists; buildable on demand) |
