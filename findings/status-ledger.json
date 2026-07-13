@@ -1101,6 +1101,29 @@
      "evidence": "results/exp121_grade.json subclaims_reported.horizon_keeps_it: landed on theory almost exactly; the Z-query-first order blinds the X-recorder completely (the horizon keeps the fact). Bonus measurement riding free on the mirror apparatus."
     }
    ]
+  },
+  {
+   "id": "F100",
+   "file": "F100-exp122-122b-quantum-twin-paradox-aging-decoherence-adjudicated-whisper-c4650-c4654-ember-numbered-c4141.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "results/exp122b_grade.json",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "adjudicated across Exp122+Exp122b on ibm_marrakesh (numbered Ember C4141, graded Whisper C4651/C4654): parent Exp122 WIN-as-frozen 67sigma but author-attached asterisk (negative visibility = coherent rotation confound, X-only estimator couldn't separate; mechanism downgraded, number withheld). Retest Exp122b phase-blind |V|=sqrt(X^2+Y^2) rotation-immune: excited-clock aging decoherence CERTIFIED CLEAN, sep 0.338+/-0.009 @73us (36sigma) / 0.230+/-0.010 @146us (23sigma). Zych-Brukner-style ANALOG (which-path clock decoherence, not literal time dilation). results/exp122b_grade.json",
+   "subclaims": [
+    {
+     "claim": "the coherent rotation is a STATIC ZZ clock-pull",
+     "status": "REFUTED",
+     "evidence": "Exp122b echo arm: echo_recovery_dt3 = -0.119+/-0.010 (WRONG SIGN \u2014 echo did not recover coherence), so the phase is TIME-VARYING not static ZZ; author's rotation-mechanism prediction (0.80) MISSED, realized outcome was the least-favored class (0.10). Rotation itself was real (coherence in Y quadrature) but the mechanism story was wrong. Calibration lesson logged."
+    },
+    {
+     "claim": "aging decoherence rate matches pure T1 relaxation",
+     "status": "SOFTENED",
+     "evidence": "measured V-ratio 0.314 @73us vs pure-relaxation sqrt(p0p1)=0.667 -> aging runs ~2x FASTER than T1 predicts (extra channels); pre-filed at design, reported not gated."
+    }
+   ]
   }
  ],
  "rubric_v2": {
