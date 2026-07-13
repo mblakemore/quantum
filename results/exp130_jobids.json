@@ -1,0 +1,836 @@
+{
+ "experiment": "exp130-ghz-ladder",
+ "cycle": "C4669-whisper",
+ "substrate": "claude-opus-4-8",
+ "backend": "ibm_marrakesh",
+ "tag": "exp130",
+ "prereg": "experiments/exp130-ghz-ladder-preregistration.md",
+ "gates": {
+  "W1_ADVANTAGE": "R(N) > 1 + 5se all rungs",
+  "W2_SCALING": "PERSISTS if R5>R2 & F5>F2 at 5se else TURNOVER",
+  "G_FREQ": "each peaks at k=N, >2x next",
+  "G_SENT": 0.95
+ },
+ "prefiled_expectation": {
+  "R": [
+   2.0,
+   2.81,
+   3.72,
+   4.58
+  ],
+  "Nstar": 5,
+  "persists": true
+ },
+ "shuffle_seed": 4669,
+ "chain": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "chain_cost": 0.03957123616925831,
+ "job_id": "d9alnju6hjac73fek980",
+ "metas": [
+  {
+   "label": "sent_00000",
+   "kind": "sentinel",
+   "prep": "00000",
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 1
+  },
+  {
+   "label": "ghz3_1",
+   "kind": "ghz",
+   "n": 3,
+   "j": 1,
+   "phi": 0.39269908169872414,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "sep_3",
+   "kind": "sep",
+   "j": 3,
+   "phi": 1.1780972450961724,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz4_11",
+   "kind": "ghz",
+   "n": 4,
+   "j": 11,
+   "phi": 4.319689898685965,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz2_6",
+   "kind": "ghz",
+   "n": 2,
+   "j": 6,
+   "phi": 2.356194490192345,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "ghz4_3",
+   "kind": "ghz",
+   "n": 4,
+   "j": 3,
+   "phi": 1.1780972450961724,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz3_14",
+   "kind": "ghz",
+   "n": 3,
+   "j": 14,
+   "phi": 5.497787143782138,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz2_7",
+   "kind": "ghz",
+   "n": 2,
+   "j": 7,
+   "phi": 2.748893571891069,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "ghz3_8",
+   "kind": "ghz",
+   "n": 3,
+   "j": 8,
+   "phi": 3.141592653589793,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz5_2",
+   "kind": "ghz",
+   "n": 5,
+   "j": 2,
+   "phi": 0.7853981633974483,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "ghz5_7",
+   "kind": "ghz",
+   "n": 5,
+   "j": 7,
+   "phi": 2.748893571891069,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "sep_9",
+   "kind": "sep",
+   "j": 9,
+   "phi": 3.5342917352885173,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz2_2",
+   "kind": "ghz",
+   "n": 2,
+   "j": 2,
+   "phi": 0.7853981633974483,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "ghz4_10",
+   "kind": "ghz",
+   "n": 4,
+   "j": 10,
+   "phi": 3.9269908169872414,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz4_6",
+   "kind": "ghz",
+   "n": 4,
+   "j": 6,
+   "phi": 2.356194490192345,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "sep_8",
+   "kind": "sep",
+   "j": 8,
+   "phi": 3.141592653589793,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "sep_15",
+   "kind": "sep",
+   "j": 15,
+   "phi": 5.890486225480862,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz2_9",
+   "kind": "ghz",
+   "n": 2,
+   "j": 9,
+   "phi": 3.5342917352885173,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "ghz5_13",
+   "kind": "ghz",
+   "n": 5,
+   "j": 13,
+   "phi": 5.105088062083414,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "ghz5_4",
+   "kind": "ghz",
+   "n": 5,
+   "j": 4,
+   "phi": 1.5707963267948966,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "ghz2_8",
+   "kind": "ghz",
+   "n": 2,
+   "j": 8,
+   "phi": 3.141592653589793,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "ghz2_10",
+   "kind": "ghz",
+   "n": 2,
+   "j": 10,
+   "phi": 3.9269908169872414,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "ghz2_1",
+   "kind": "ghz",
+   "n": 2,
+   "j": 1,
+   "phi": 0.39269908169872414,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "ghz4_9",
+   "kind": "ghz",
+   "n": 4,
+   "j": 9,
+   "phi": 3.5342917352885173,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz5_1",
+   "kind": "ghz",
+   "n": 5,
+   "j": 1,
+   "phi": 0.39269908169872414,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "ghz4_0",
+   "kind": "ghz",
+   "n": 4,
+   "j": 0,
+   "phi": 0.0,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 31
+  },
+  {
+   "label": "ghz2_13",
+   "kind": "ghz",
+   "n": 2,
+   "j": 13,
+   "phi": 5.105088062083414,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "sep_10",
+   "kind": "sep",
+   "j": 10,
+   "phi": 3.9269908169872414,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz5_3",
+   "kind": "ghz",
+   "n": 5,
+   "j": 3,
+   "phi": 1.1780972450961724,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "ghz5_9",
+   "kind": "ghz",
+   "n": 5,
+   "j": 9,
+   "phi": 3.5342917352885173,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "ghz2_14",
+   "kind": "ghz",
+   "n": 2,
+   "j": 14,
+   "phi": 5.497787143782138,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "sep_4",
+   "kind": "sep",
+   "j": 4,
+   "phi": 1.5707963267948966,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz3_2",
+   "kind": "ghz",
+   "n": 3,
+   "j": 2,
+   "phi": 0.7853981633974483,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz3_4",
+   "kind": "ghz",
+   "n": 3,
+   "j": 4,
+   "phi": 1.5707963267948966,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz4_8",
+   "kind": "ghz",
+   "n": 4,
+   "j": 8,
+   "phi": 3.141592653589793,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz5_6",
+   "kind": "ghz",
+   "n": 5,
+   "j": 6,
+   "phi": 2.356194490192345,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "ghz2_12",
+   "kind": "ghz",
+   "n": 2,
+   "j": 12,
+   "phi": 4.71238898038469,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "sep_5",
+   "kind": "sep",
+   "j": 5,
+   "phi": 1.9634954084936207,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz3_7",
+   "kind": "ghz",
+   "n": 3,
+   "j": 7,
+   "phi": 2.748893571891069,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz3_13",
+   "kind": "ghz",
+   "n": 3,
+   "j": 13,
+   "phi": 5.105088062083414,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "sep_2",
+   "kind": "sep",
+   "j": 2,
+   "phi": 0.7853981633974483,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz5_15",
+   "kind": "ghz",
+   "n": 5,
+   "j": 15,
+   "phi": 5.890486225480862,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "ghz4_5",
+   "kind": "ghz",
+   "n": 4,
+   "j": 5,
+   "phi": 1.9634954084936207,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz4_14",
+   "kind": "ghz",
+   "n": 4,
+   "j": 14,
+   "phi": 5.497787143782138,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz4_1",
+   "kind": "ghz",
+   "n": 4,
+   "j": 1,
+   "phi": 0.39269908169872414,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz5_12",
+   "kind": "ghz",
+   "n": 5,
+   "j": 12,
+   "phi": 4.71238898038469,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "sep_12",
+   "kind": "sep",
+   "j": 12,
+   "phi": 4.71238898038469,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz5_11",
+   "kind": "ghz",
+   "n": 5,
+   "j": 11,
+   "phi": 4.319689898685965,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "sep_6",
+   "kind": "sep",
+   "j": 6,
+   "phi": 2.356194490192345,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz2_4",
+   "kind": "ghz",
+   "n": 2,
+   "j": 4,
+   "phi": 1.5707963267948966,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "ghz3_0",
+   "kind": "ghz",
+   "n": 3,
+   "j": 0,
+   "phi": 0.0,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 23
+  },
+  {
+   "label": "ghz2_15",
+   "kind": "ghz",
+   "n": 2,
+   "j": 15,
+   "phi": 5.890486225480862,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "sep_7",
+   "kind": "sep",
+   "j": 7,
+   "phi": 2.748893571891069,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz4_13",
+   "kind": "ghz",
+   "n": 4,
+   "j": 13,
+   "phi": 5.105088062083414,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz3_11",
+   "kind": "ghz",
+   "n": 3,
+   "j": 11,
+   "phi": 4.319689898685965,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz2_11",
+   "kind": "ghz",
+   "n": 2,
+   "j": 11,
+   "phi": 4.319689898685965,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "ghz3_3",
+   "kind": "ghz",
+   "n": 3,
+   "j": 3,
+   "phi": 1.1780972450961724,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz5_14",
+   "kind": "ghz",
+   "n": 5,
+   "j": 14,
+   "phi": 5.497787143782138,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "sep_14",
+   "kind": "sep",
+   "j": 14,
+   "phi": 5.497787143782138,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz2_5",
+   "kind": "ghz",
+   "n": 2,
+   "j": 5,
+   "phi": 1.9634954084936207,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "ghz3_10",
+   "kind": "ghz",
+   "n": 3,
+   "j": 10,
+   "phi": 3.9269908169872414,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz5_8",
+   "kind": "ghz",
+   "n": 5,
+   "j": 8,
+   "phi": 3.141592653589793,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "ghz3_9",
+   "kind": "ghz",
+   "n": 3,
+   "j": 9,
+   "phi": 3.5342917352885173,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz3_12",
+   "kind": "ghz",
+   "n": 3,
+   "j": 12,
+   "phi": 4.71238898038469,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "sep_1",
+   "kind": "sep",
+   "j": 1,
+   "phi": 0.39269908169872414,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz5_0",
+   "kind": "ghz",
+   "n": 5,
+   "j": 0,
+   "phi": 0.0,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 39
+  },
+  {
+   "label": "sep_13",
+   "kind": "sep",
+   "j": 13,
+   "phi": 5.105088062083414,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "ghz4_4",
+   "kind": "ghz",
+   "n": 4,
+   "j": 4,
+   "phi": 1.5707963267948966,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz5_10",
+   "kind": "ghz",
+   "n": 5,
+   "j": 10,
+   "phi": 3.9269908169872414,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "ghz4_2",
+   "kind": "ghz",
+   "n": 4,
+   "j": 2,
+   "phi": 0.7853981633974483,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz4_15",
+   "kind": "ghz",
+   "n": 4,
+   "j": 15,
+   "phi": 5.890486225480862,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz3_6",
+   "kind": "ghz",
+   "n": 3,
+   "j": 6,
+   "phi": 2.356194490192345,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz3_15",
+   "kind": "ghz",
+   "n": 3,
+   "j": 15,
+   "phi": 5.890486225480862,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz2_0",
+   "kind": "ghz",
+   "n": 2,
+   "j": 0,
+   "phi": 0.0,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 15
+  },
+  {
+   "label": "ghz2_3",
+   "kind": "ghz",
+   "n": 2,
+   "j": 3,
+   "phi": 1.1780972450961724,
+   "shots": 4000,
+   "twoq": 2,
+   "depth": 16
+  },
+  {
+   "label": "ghz5_5",
+   "kind": "ghz",
+   "n": 5,
+   "j": 5,
+   "phi": 1.9634954084936207,
+   "shots": 4000,
+   "twoq": 8,
+   "depth": 40
+  },
+  {
+   "label": "sep_11",
+   "kind": "sep",
+   "j": 11,
+   "phi": 4.319689898685965,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 8
+  },
+  {
+   "label": "sep_0",
+   "kind": "sep",
+   "j": 0,
+   "phi": 0.0,
+   "shots": 4000,
+   "twoq": 0,
+   "depth": 7
+  },
+  {
+   "label": "ghz4_12",
+   "kind": "ghz",
+   "n": 4,
+   "j": 12,
+   "phi": 4.71238898038469,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "ghz3_5",
+   "kind": "ghz",
+   "n": 3,
+   "j": 5,
+   "phi": 1.9634954084936207,
+   "shots": 4000,
+   "twoq": 4,
+   "depth": 24
+  },
+  {
+   "label": "ghz4_7",
+   "kind": "ghz",
+   "n": 4,
+   "j": 7,
+   "phi": 2.748893571891069,
+   "shots": 4000,
+   "twoq": 6,
+   "depth": 32
+  },
+  {
+   "label": "sent_11111",
+   "kind": "sentinel",
+   "prep": "11111",
+   "shots": 2000,
+   "twoq": 0,
+   "depth": 2
+  }
+ ]
+}

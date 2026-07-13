@@ -1,0 +1,46 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "W1_ADVANTAGE_minR_over_1",
+      "pass_value": 2.0,
+      "fail_value": 0.05,
+      "threshold": 1.0,
+      "direction": "above",
+      "se": 0.012
+    },
+    {
+      "name": "W2_PERSIST_F5_minus_F2",
+      "pass_value": 18.2,
+      "fail_value": -3.0,
+      "threshold": 0.0,
+      "direction": "above",
+      "se": 0.15
+    },
+    {
+      "name": "W2_HEISENBERG_R5_minus_R2",
+      "pass_value": 2.58,
+      "fail_value": -0.5,
+      "threshold": 0.0,
+      "direction": "above",
+      "se": 0.02
+    },
+    {
+      "name": "G_FREQ_ampN_over_2x_next",
+      "pass_value": 10.0,
+      "fail_value": 0.8,
+      "threshold": 2.0,
+      "direction": "above",
+      "se": 0.25
+    },
+    {
+      "name": "G_SENT_integrity",
+      "pass_value": 0.98,
+      "fail_value": 0.5,
+      "threshold": 0.95,
+      "direction": "above",
+      "se": 0.0025
+    }
+  ]
+}
