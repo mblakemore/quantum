@@ -1124,6 +1124,29 @@
      "evidence": "measured V-ratio 0.314 @73us vs pure-relaxation sqrt(p0p1)=0.667 -> aging runs ~2x FASTER than T1 predicts (extra channels); pre-filed at design, reported not gated."
     }
    ]
+  },
+  {
+   "id": "F101",
+   "file": "F101-exp123-grandfather-paradox-pctc-enforcement-backaction-whisper-c4655-c4656-ember-numbered-c4142.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4142, graded Whisper C4656): single hardware run exp123 on ibm_marrakesh (3 CX gates, shallowest apparatus). Two existence gates on Lloyd's P-CTC model (postselection=the timeline, honest scope stated first, NOT literal time travel): W_PARADOX enforcement rate p(pi)/p(0)=0.0188 (53x suppression, residue is readout noise per herald autopsy); W_BACKACTION bystander rotated classical->coherence, X_S separation 0.9415+/-0.0120=78sigma (nonlinear CTC backaction trivial postselection cannot fake). Magnitudes 0.0188/0.9415 = figures of merit. Preds 0.90/0.90 hit. results/exp123_grade.json",
+   "subclaims": [
+    {
+     "claim": "the enforcement rate follows the frozen law p(theta)=cos^2(theta/2)/2",
+     "status": "CONFIRMED",
+     "evidence": "intermediate ladder residuals < 0.013 at every theta in both arms \u2014 the timeline-enforcement curve measured to ~1%."
+    },
+    {
+     "claim": "the 1.9% surviving the full paradox are un-suppressed paradox (loophole)",
+     "status": "REFUTED",
+     "evidence": "herald autopsy: surviving theta=pi heralds carry scrambled bystander stats (X_S=0, Z_S~-0.07, n=283) = readout noise not physics, exactly as pre-filed."
+    }
+   ]
   }
  ],
  "rubric_v2": {
