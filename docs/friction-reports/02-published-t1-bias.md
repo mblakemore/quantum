@@ -86,3 +86,5 @@ the robust protocol is TWO-STAGE: a cheap calibration-only job, graded, then the
 submitted into the same drain window with delays computed from the measured r (pre-registered
 as a two-job protocol; queue latency permitting). The ask stands and sharpens further: any
 live or timestamped T1 exposure makes all of this unnecessary.
+
+Exp117c (C4630-32): bias measured QUBIT-ASYMMETRIC (r_a=2.112 vs r_b=1.345, neighbors, 57% spread) — the final mechanism: no single correction exists even per-job. THE TWO-STAGE WORKAROUND VALIDATED: per-qubit measured delays landed both baths in the passive-certifiable window and the engine cycle completed. The ask stands (per-qubit live T1 exposure); the workaround is now proven practice.
