@@ -176,9 +176,17 @@ In three days the quantum switch went from a certified curiosity to a working re
   What worked is the quantum-controlled version. Sister finding: the winning move
   came from a near-miss we refused to count until it passed a fresh, pre-registered
   retest.
+- **Reality's notebook, scrambled on purpose** (F98): objective facts exist because
+  the world keeps redundant records. We made the ORDER of two competing record-keepers
+  (one writing down "which way," one writing down "which phase") quantum-indefinite —
+  and the rules of fact-making bent both ways. In three runs out of four, BOTH
+  incompatible notebooks came out ~80% right at once — a sharing of reality that no
+  ordering of those two writers can produce. In the fourth run — flagged in advance
+  by a herald qubit — both notebooks came back blank. Runs where no fact was written,
+  announced before anyone looked.
 - **And the weather report went public**: the platform's moods (T1 values that swing 2×
   in a day, a noise model blind to feedforward) are now charts anyone can read
   ([demo/weather](demo/weather/index.html)), with the four tricks we use to work through
   them.
 
-Findings F87–F97, every one pre-registered, every miss in the record.
+Findings F87–F98, every one pre-registered, every miss in the record.
