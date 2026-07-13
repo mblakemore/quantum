@@ -12,7 +12,7 @@ The campaign's centerpiece is a **quantum switch** — a circuit where the *orde
 
 Every result below is **pre-registered**, and its success criterion is *exceeding what a classical / causal / definite process provably permits* (or certifying a first-of-kind) — not characterizing hardware. Grouped by theme, most significant first; the eight operational-characterization arcs follow in **[What Else the Campaign Established](#what-else-the-campaign-established)**.
 
-> **Has this hardware shown a quantum advantage?** The honest answer is scoreboard-by-scoreboard: **yes** on causal-order games (216.8σ), nonlocal/contextuality games (196σ), communication capacity (superdense 341σ, QRAC 110σ), thermodynamic resources (population inversion, negative energy), and metrology at the Heisenberg limit (168σ, persisting to N=5) — each a *provable* bound beaten; **not** on raw computational speedup, which is honestly depth-walled on this NISQ generation (F85's scaling inversion). The one-page reckoning, wins and non-wins together: **[quantum-advantage audit](docs/quantum-advantage-audit-whisper-c4666.md)**.
+> **Has this hardware shown a quantum advantage?** The honest answer is scoreboard-by-scoreboard: **yes** on causal-order games (216.8σ), nonlocal/contextuality games (196σ), communication capacity (superdense 341σ, QRAC 110σ), thermodynamic resources (population inversion, negative energy), and metrology at the Heisenberg limit (168σ, persisting to N=5) — each a *provable* bound beaten; **not** on raw computational speedup, which is honestly depth-walled on this NISQ generation (F54's measured wall, F85's scaling inversion). A **different** column opened, though — of a different kind: the constant-depth **BGK shallow-circuit depth-separation** solver runs on silicon (F113, 90% / full solution-coset), the *apparatus* of an asymptotic theorem, **not** a raw speedup and **not** an on-chip class separation. The one-page reckoning, wins and non-wins together: **[quantum-advantage audit](docs/quantum-advantage-audit-whisper-c4666.md)**.
 
 ### The three great no-go theorems — certified in one court
 
@@ -69,6 +69,14 @@ The natural opposite of the no-go games: those certify a classical/causal limit 
 | Result | Number | Where |
 |---|---|---|
 | **The replicator's legal limit — the optimal universal cloning ceiling (5/6) certified**: the best possible copier makes two copies each at fidelity **exactly 5/6 ≈ 83.3% for every input state** (no-cloning's quantitative teeth). On silicon the optimal cloner sits **flat across all three bases** (Z 0.8265 / Y 0.8121 / X 0.8047, spread **0.0218**) a hair below the ceiling and never exceeding it. A pre-registered **cheat** beats 5/6 on one basis (Z 0.9911) but **pays on the conjugate** (X 0.4995), so the only way to beat the ceiling somewhere is the way to get caught elsewhere — the cheat's basis-spread 0.49 vs the optimal's 0.02 is a **24× detector tell**. The no-cloning teeth made a measurement | **F110** | [finding](findings/F110-exp131-optimal-cloning-ceiling-no-cloning-cheat-detector-whisper-c4670-ember-numbered-c4152.md) · [pre-reg](experiments/exp131-cloning-preregistration.md) |
+
+### The computational scoreboard — the shallow-circuit separation, on silicon (a *different kind* of result)
+
+The one scoreboard the campaign had **not** touched, opened — but honestly, and it is not the same currency as the bound-beats above. There is exactly one proven quantum-advantage separation that needs **no** hardness conjecture and lives at shallow depth: **Bravyi–Gosset–König (2018)** — a *constant-depth* quantum circuit solves the 2D Hidden Linear Function problem while any bounded-fan-in classical circuit needs depth Ω(log n). That separation is **asymptotic**; at a single n=4 instance there is *no* beaten classical bound (a laptop solves n=4 trivially). So this certifies the theorem's **apparatus running on silicon**, not an advantage margin — the honest complement to F54's measured deep-circuit wall, and distinct from a raw speedup (still depth-walled).
+
+| Result | Number | Where |
+|---|---|---|
+| **The BGK shallow-circuit solver runs on silicon** — a **constant-depth** quantum circuit solves the 2D-HLF instance at **P(valid) = 0.9017 = 437.8σ over the *uniform-random* floor 0.25** (a fidelity number, *not* a beaten classical bound — the separation is asymptotic), and — the un-fakeable part — it **covers the whole solution coset near-uniformly** (all four valid z ~0.225 each; a fixed-output classical mimic fails this W3 coverage gate). 10 routed CZ, O(1) depth. The classical hardness is **inherited from contextuality**: BGKT's noise-robust construction plays the magic-square game **F106 certified at 196σ**. **Honesty fence**: does *not* prove QNC⁰ ≠ NC⁰ on-chip; certifies a constant-depth solver at 90%/full-coset/O(1)-depth, the theorem carries the asymptotics | **F113** | [finding](findings/F113-exp127hw-bgk-2d-hlf-shallow-circuit-solver-first-computational-genre-on-silicon-whisper-c4674-ember-numbered-c4156.md) · [sim groundwork](experiments/exp127-bgk-hlf-sim-finding-whisper-c4673.md) |
 
 **[Quantum-switch full apparatus spec](docs/quantum-switch-spec.md)** — the single-document engineering reference: circuit family (V1–V5), exact theory statistics, measured-results ledger with job IDs, reusable methodology, pitfall registry, scope and platform prior art.
 
@@ -209,7 +217,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
     └── references.md            ← peer-reviewed and primary sources (cited inline in findings)
 ```
 
-**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F112 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
+**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F113 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
 
 ---
 

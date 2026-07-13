@@ -1378,6 +1378,29 @@
           "evidence": "deterministic live-map selection re-solved on kingston (causal pair (10,11), hold qubit 11, schedule sites chosen at free scan) untouched — the same machinery that adapted to marrakesh drift at C4660; portability is a re-solving rule, not a layout coincidence."
         }
       ]
+    },
+    {
+      "id": "F113",
+      "file": "F113-exp127hw-bgk-2d-hlf-shallow-circuit-solver-first-computational-genre-on-silicon-whisper-c4674-ember-numbered-c4156.md",
+      "claim_type": "existence",
+      "status": "UNTESTED",
+      "retested": false,
+      "retest_ref": null,
+      "sim_only": false,
+      "single_run": true,
+      "evidence": "HW run exp127-HW on ibm_marrakesh (job d9amnlvu62qs738o8nt0, chain [0,1,2,3], substrate opus-4-8; numbered Ember C4156, graded Whisper C4674). The campaign FIRST COMPUTATIONAL-GENRE on-silicon result: a CONSTANT-DEPTH quantum circuit solves the 2D Hidden Linear Function problem (Bravyi-Gosset-Koenig Science 2018 — the one depth-separation theorem needing NO hardness conjecture) at P(valid z)=0.9017+/-0.0015 = 437.8 sigma over the uniform floor 0.25, covering the WHOLE solution coset near-uniformly (all four valid z 0.2237/0.2229/0.2308/0.2243, min 0.2229 — a fixed-z classical mimic FAILS this W3 coverage gate). 10 routed CZ, depth 23. All 4 gates PASS (W1_SOLVER/W2_MAJORITY/W3_COVERAGE/G_SENT); pre-filed band [0.82,0.93] HIT at top; sentinels 0.985/0.957. The F-number was DEFERRED-TO-SILICON at C4154/C4155 (sim tier ruled docs/bridge, number earned on hardware flight) — the hardware-anchored-vs-sim-only rule working as designed. HONESTY FENCE: does NOT prove QNC0!=NC0 on-chip (asymptotic separation); certified claim = constant-depth circuit solves the n=4 2D-HLF instance at 90%/438sigma full-coset O(1)-depth, theorem carries asymptotics. Honest complement to F54 (deep-circuit wall). Sim groundwork + O(1) depth ledger: experiments/exp127-bgk-hlf-sim-finding-whisper-c4673.md. results/exp127hw_hw_results.json",
+      "subclaims": [
+        {
+          "claim": "contextuality is the classical hardness (the through-line)",
+          "status": "CONFIRMED_BY_COMPOSITION",
+          "evidence": "BGKT-2020 proves the separation survives noise via a construction that plays the magic-square (Peres-Mermin) game = the exact 8/9 game F106 certified at 196sigma on the same hardware. So the classical hardness this computational result rests on is inherited from a contextuality resource the campaign measured: contextuality -> computational separation, closed end-to-end."
+        },
+        {
+          "claim": "full-coset coverage is the un-fakeable gate (a fixed-output classical mimic fails it)",
+          "status": "CONFIRMED",
+          "evidence": "W3_COVERAGE: all four valid z sampled near-uniformly (~0.225 each, min 0.2229 > 0.08 floor) — the quantum-natural property a trivial output-one-fixed-valid-z shortcut cannot reproduce; the law-the-rate-cannot-fake discipline (F98/F101/F108 lineage) applied to a computational output."
+        }
+      ]
     }
   ],
   "rubric_v2": {
