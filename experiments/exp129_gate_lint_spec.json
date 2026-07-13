@@ -1,0 +1,38 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "W1_HEISENBERG_ratio_over_1",
+      "pass_value": 2.96,
+      "fail_value": 0.05,
+      "threshold": 1.0,
+      "direction": "above",
+      "se": 0.012
+    },
+    {
+      "name": "W2_SQL_ABS_Fghz_over_3",
+      "pass_value": 8.63,
+      "fail_value": 0.02,
+      "threshold": 3.0,
+      "direction": "above",
+      "se": 0.02
+    },
+    {
+      "name": "G_FREQ_amp3_over_2x_next",
+      "pass_value": 20.0,
+      "fail_value": 0.8,
+      "threshold": 2.0,
+      "direction": "above",
+      "se": 0.25
+    },
+    {
+      "name": "G_SENT_integrity",
+      "pass_value": 0.99,
+      "fail_value": 0.5,
+      "threshold": 0.95,
+      "direction": "above",
+      "se": 0.0022
+    }
+  ]
+}
