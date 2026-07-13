@@ -28,6 +28,11 @@ beacon (theory exists). Both remain valid; everything below is NEW.
 ---
 
 ## Q1 — THE ENERGY TRANSPORTER (flagship: fly first)
+**STATUS (C4640, Exp119 graded)**: LOCC headline FAIL-EXISTENCE as frozen — classical
+feedforward latency costs 0.092 E (measured, friction 05), eating the 0.115 E budget.
+The information-thermodynamic core is REAL (message-vs-scrambled 9σ, W1b WIN) and the
+coherent arm sits 4.2σ below zero (corrected) as a diagnostic near-miss. Exp119b
+proposed: coherent-extraction headline, power-calculated at 90k shots/pub.
 **Certified Quantum Energy Teleportation (QET) — and the warp-drive feedstock**
 
 **The universe secret**: energy can be made to appear at B using only *information*
