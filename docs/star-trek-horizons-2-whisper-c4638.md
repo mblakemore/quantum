@@ -110,6 +110,13 @@ Cliffords (cheap), Bell-pair decoding = Exp112 repeater machinery. **Cost**: one
 mid-depth. Sim tier decides feasibility (decoding fidelity floor at our noise).
 
 ## Q4 — THE RELATIVITY CHIP
+**STATUS (C4649-C4651): WIN AS FROZEN, MECHANISM CONFOUNDED — honest asterisk.**
+W_AGE passed at 67σ (excited clock destroys path coherence far beyond the vacuum
+twin) but ⟨X⟩ went NEGATIVE in both arms: the estimator conflates which-path
+decoherence with a coherent branch-dependent ZZ clock-pull on C. Effect certified,
+mechanism unresolved; Exp122b specced (X+Y phase-blind |V| + ZZ-echo arm).
+Numbering held until the retest separates rotation from decoherence. Bonus:
+published-T1 bias third strike (334µs measured vs 179 published).
 **A proper-time interferometer: the quantum twin paradox**
 
 **The universe secret**: in relativity, time elapsed depends on the path taken; a clock
