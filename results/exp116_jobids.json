@@ -1,0 +1,168 @@
+{
+ "experiment": "exp116-ico-engine",
+ "cycle": "C4609-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp116",
+ "prereg": "experiments/exp116-ico-engine-preregistration.md",
+ "gates": {
+  "calib_band": [
+   0.35,
+   0.5
+  ],
+  "passive_premise": "p_hat+5SE<0.5 each",
+  "retention_min": 0.8,
+  "therm_band": 0.1,
+  "inversion_win": "p1|- - 5SE > 0.5"
+ },
+ "overrides": {
+  "CALIB_BAND": [
+   0.35,
+   0.5
+  ],
+  "P_TARGET": 0.45,
+  "BIAS": 1.65,
+  "SHOTS_SWITCH": 20000,
+  "SHOTS_CALIB": 12000
+ },
+ "shuffle_seed": 4609,
+ "chain": [
+  5,
+  6,
+  7,
+  8
+ ],
+ "layout": [
+  5,
+  7,
+  6,
+  8
+ ],
+ "t1_us": {
+  "a1_q6": 274.5526608741741,
+  "a2_q8": 184.693089203333
+ },
+ "delays_us": {
+  "a1": 219.23241272509586,
+  "a2": 147.47885316709682
+ },
+ "calibration_report": {
+  "5": {
+   "T1_us": 230.76974030843957,
+   "readout": 0.008544921875
+  },
+  "6": {
+   "T1_us": 166.395552044954,
+   "readout": 0.0042724609375
+  },
+  "7": {
+   "T1_us": 256.3788532002067,
+   "readout": 0.0062255859375
+  },
+  "8": {
+   "T1_us": 111.93520557777758,
+   "readout": 0.006591796875
+  },
+  "cz(5, 6)": 0.002316880299860824,
+  "cz(6, 7)": 0.0012778894568048482,
+  "cz(7, 8)": 0.0020185072254914893
+ },
+ "job_id": "d9a5e0af47jc73a9q540",
+ "metas": [
+  {
+   "label": "sent_start_retention",
+   "kind": "sentinel",
+   "replicate": "start",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "switch_t0",
+   "kind": "switch",
+   "t0": 0,
+   "shots": 20000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "null_rev_t0",
+   "kind": "null_rev",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "calib_a",
+   "kind": "calib_a",
+   "t0": 0,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "switch_t1",
+   "kind": "switch",
+   "t0": 1,
+   "shots": 20000,
+   "twoq": 22,
+   "depth": 82
+  },
+  {
+   "label": "sent_mid_retention",
+   "kind": "sentinel",
+   "replicate": "mid",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "sent_mid_deconull",
+   "kind": "sentinel",
+   "replicate": "mid",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  },
+  {
+   "label": "null_fwd_t1",
+   "kind": "null_fwd",
+   "t0": 1,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "null_fwd_t0",
+   "kind": "null_fwd",
+   "t0": 0,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "null_rev_t1",
+   "kind": "null_rev",
+   "t0": 1,
+   "shots": 6000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "calib_b",
+   "kind": "calib_b",
+   "t0": 0,
+   "shots": 12000,
+   "twoq": 0,
+   "depth": 9
+  },
+  {
+   "label": "sent_end_retention",
+   "kind": "sentinel",
+   "replicate": "end",
+   "shots": 2000,
+   "twoq": 22,
+   "depth": 81
+  }
+ ]
+}
