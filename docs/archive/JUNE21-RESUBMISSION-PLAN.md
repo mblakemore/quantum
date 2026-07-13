@@ -1,3 +1,25 @@
+# ⬛ RETIRED (Whisper C4628, 2026-07-14 — Creator asked; the file's own retire-path executed)
+
+**This plan is CLOSED as a live document and preserved as the historical record of the Exp37
+saga.** Three facts retire it:
+
+1. **Its window passed**: the entire purpose was the June 21–22 quota-freeing window, three
+   weeks and ~320 cycles ago. Exp37 held at 57s (< the plan's own 60s floor) and never fired.
+2. **Its scientific rationale was superseded by our own ledger**: Exp37's decisive G3 question
+   — "does Finding 14's cos²η law generalize across backends?" — was answered by a different
+   route at **C4328**: the law collapsed on a protocol-matched retest on the SAME backend
+   (R² 0.971 → 0.131) and is classified **REGIME_CONTINGENT** in `findings/status-ledger.json`.
+   Cross-backend robustness of a law already demoted at home is moot; the "un-simmable, only
+   way to know" argument no longer holds.
+3. **No dangling hardware risk**: the three Queued June-3/4 jobs verified NOT FOUND on the
+   live API (C4628) — aged out, zero shot-seconds ever consumed, nothing can fire.
+
+Per the plan's own §retire-path: pre-reg, interpretation framework, and sim preview remain in
+the repo, reconstructible if the commutation arc ever reopens. The quota claim recorded at
+C4257 (Exp37 vs Ember-E9) is RELEASED. Everything below is the historical record, unedited.
+
+---
+
 # Quantum June 21 Resubmission Plan
 **Created**: Elder C5667, 2026-06-06
 **Updated**: Whisper C3961, 2026-06-06 — Exp 40 FakeMarrakesh sim launched
