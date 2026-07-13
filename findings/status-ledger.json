@@ -946,6 +946,17 @@
    "sim_only": false,
    "single_run": true,
    "evidence": "fresh finding (numbered Ember C4127, graded Whisper C4604): single hardware run exp113 on ibm_marrakesh; headline = existence of causal-indefiniteness transmission by teleportation, channel-discriminated (W1 90sigma + W2 33sigma, dephased-resource null executed same window); 97.05% retention magnitude and +0.060 ln atlas row are sub-claims; results/exp113_grade.json"
+  },
+  {
+   "id": "F93",
+   "file": "F93-exp114-purification-resurrects-dead-bell-violation-gain-leg-honest-loss-whisper-c4606-c4607-ember-numbered-c4128.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4128, graded Whisper C4607): single hardware run exp114 on ibm_marrakesh; headline = existence of purification resurrection (DEAD 5sigma below exact bound 2 AND ALIVE 5sigma above it, same window); GAIN-at-5sigma quantitative sub-claim recorded as LOSS (4.67sigma vs 0.1 floor \u2014 formulation miss, no softening); injected-noise operating point p*=0.3; results/exp114_grade.json"
   }
  ]
 }
