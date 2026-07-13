@@ -1165,6 +1165,24 @@
      "evidence": "QND-corrected law residuals <0.005 through N=8 but grow to -0.012 at N=16: watching too fast, per-measurement cost + higher-order effects eat the gains; the beam has an optimal cadence, measured. Reported not gated."
     }
    ]
+  },
+  {
+   "id": "F103",
+   "file": "F103-h2-negative-information-ledger-entanglement-by-negative-conditional-entropy-whisper-c4662-ember-numbered-c4144.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "analysis-tier (ZERO shots, re-analysis of banked Exp112b-micro CHSH S=2.453; numbered Ember C4144, analysis Whisper C4662): entanglement CERTIFIED by negative conditional entropy via twirl+positivity+worst-case-maximize -> S(B|A)<=-0.0986 at 5sigma (point -0.296), one-sided conservative on the Bell-twirled state. Leads with a SELF-CORRECTION (author's C4659 Fannes export overstated: observed TVD only lower-bounds trace distance; corrected split leg1=classical Shannon-Fannes, leg2=quantum via twirl+positivity). Leg1 scope-corrected subclaim: transpiler parallel preserves information content to <=0.30 bits (F96 extension). First Horizons-3 delivery. results/entropy_ledger_c4662.json",
+   "subclaims": [
+    {
+     "claim": "the transpiler's parallel scheduling preserves the outcome distribution's INFORMATION CONTENT (classical Shannon-Fannes)",
+     "status": "CONFIRMED",
+     "evidence": "|dH| <= 0.304 bits (F96 hotspot), 0.380 (control), 0.697 (Exp118 duration artifact), 0.303 (bench regression) \u2014 from banked TVD bounds, zero shots. SCOPE-CORRECTED to classical Shannon (not von Neumann) after the C4659 Fannes overstatement was caught at implementation."
+    }
+   ]
   }
  ],
  "rubric_v2": {

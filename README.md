@@ -52,6 +52,7 @@ Eight arcs of operational discoveries about real NISQ hardware, each detailed in
 - **Calibration reality**: ±7pp daily drift; deep-circuit quality is a *window lottery* — detectable by same-depth sentinels in-run, not forecastable from calibration age (F81, F84) — and the noise-model's optimism grows with depth (the measured depth-decay law in the spec).
 - **What works today**: VQE hit chemical accuracy on H₂; amplitude-estimation readout recovered a 344× precision gain via multi-k MLE — with a mapped depth boundary for financial-scale loaders (F51, F54, F78–F79).
 - **Communication primitives**: the comms white space opened — superdense coding graded WIN at **341σ** above the exactly-0.5 unassisted ceiling (p=0.9688, MI 1.77 bits/qubit, executed no-entanglement null dead on the ceiling; F87 — tutorial-class priors credited, the contribution is the frozen bound-referenced grading). And the first dynamic-circuit result: **SWAP beats teleportation at every hop count through N=6** (F90, the pre-filed informative null at 66σ) — feedforward *works* (0.947 integrity) but costs ~5–6× per hop, giving the routing rule *unitary SWAP through ≥6 hops on current Heron* and the atlas's first feedforward-latency row (fake backends model no feedforward noise, +0.212 ln). Arc closed by the **repeater primitive**: Bell violation survives TWO entanglement-swapping stations (F91, frame arm ≥15σ above the exact classical bound 2), with the F90 cost lesson pre-filed and confirmed — software Pauli-frame tracking beats active feedforward on current hardware (one anomaly flagged honestly, Exp112b follow-up registered). Then reopened by Horizons P2: **purification resurrects a dead Bell violation** (F93 — noisy pair 5σ *below* the exact bound, BBPSSW-purified pair 5σ *above* it, same window; the quantitative GAIN leg missed its frozen floor by 0.33σ and is recorded as a LOSS, no softening). Every network-stack layer now has a measured primitive: distribute (F91) · purify (F93) · route (F90) · carry (F87).
+- **Information-theoretic certification (zero shots)**: entanglement certified by **negative conditional entropy** — from a *banked* CHSH number, a twirl+positivity argument puts S(B|A) ≤ −0.0986 at 5σ (F103, first Horizons-3 result), and every TVD certification the campaign owns now also yields a free classical-entropy (Fannes) certification; the finding leads with the author retracting her own overstated reading-cycle export.
 - **Causal-structure metrology**: the switch apparatus inverted into a diagnostic — a first-of-kind **schedule-symmetry certification** (F96) proves the transpiler's nominally-parallel CZ gates carry no hidden effective ordering (hotspot hidden-order ≤ 0.03 TVD, certified; a guarantee the vendor does not provide), with a portable duration-vs-order discriminator.
 - **Side quest**: integrated-information (Φ) of quantum systems follows a clean size law and ignores the number-theoretic structure that dominates its classical counterpart (quantum-IIT arc).
 
@@ -132,7 +133,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
 ├── full-report.md               ← Arc-1 synthesis (the deep-research source doc)
 ├── findings/                    ← one-per-discovery deep dives (~80 files)
 │   ├── 01…44-*.md               ← the core numbered line (Findings 41–43 under exp-named files)
-│   ├── F48…F102-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
+│   ├── F48…F103-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
 │   ├── finding-25/26/46/47…     ← quantum-IIT arc side numbering (25/26 here ≠ QAOA Findings 25/26!)
 │   └── exp*-*.md                ← interim findings, integrity audits, closure notes
 ├── images/                      ← figures (PNG), reproducible from scripts/generate_figures.py
@@ -169,7 +170,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
     └── references.md            ← peer-reviewed and primary sources (cited inline in findings)
 ```
 
-**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F102 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
+**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F103 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
 
 ---
 
