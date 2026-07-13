@@ -1,0 +1,30 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "W_TRACTOR_pinned_vs_unwatched",
+      "pass_value": 0.65,
+      "fail_value": 0.05,
+      "threshold": 0.3,
+      "direction": "above",
+      "se": 0.0034
+    },
+    {
+      "name": "W_CADENCE_8_vs_2",
+      "pass_value": 0.42,
+      "fail_value": -0.02,
+      "threshold": 0.0,
+      "direction": "above",
+      "se": 0.0044
+    },
+    {
+      "name": "G0_QND_alive",
+      "pass_value": 0.907,
+      "fail_value": 0.4,
+      "threshold": 0.7,
+      "direction": "above",
+      "se": 0.0021
+    }
+  ]
+}

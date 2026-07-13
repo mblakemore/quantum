@@ -1,0 +1,5 @@
+  [both] -> ZENO-PINNING-CERTIFIED(+cadence-law) (PASS)
+  [tractor-only] -> ZENO-PINNING-CERTIFIED (PASS)
+  [fail] -> FAIL-PINNING (PASS)
+  [no-test] -> NO-TEST(QND-dead) (PASS)
+SELFTEST 4/4 PASS

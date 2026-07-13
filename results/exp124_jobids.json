@@ -1,0 +1,93 @@
+{
+ "experiment": "exp124-zeno-tractor-beam",
+ "cycle": "C4657-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp124",
+ "prereg": "experiments/exp124-zeno-preregistration.md",
+ "site": {
+  "qubit": 98,
+  "readout_err": 0.002197265625
+ },
+ "gates": {
+  "G0": "nodrive_8 > 0.7",
+  "W_TRACTOR": "pinned_8 - unwatched_8 - 5SE > 0.3",
+  "W_CADENCE": "pinned_8 - pinned_2 - 5SE > 0"
+ },
+ "transpile_seed": 4657,
+ "shuffle_seed": 4657,
+ "job_id": "d9ai9ku6hjac73fefdeg",
+ "metas": [
+  {
+   "label": "nodrive_16",
+   "arm": "nodrive",
+   "n": 16,
+   "shots": 20000,
+   "meas": 17,
+   "depth": 18
+  },
+  {
+   "label": "pinned_4",
+   "arm": "pinned",
+   "n": 4,
+   "shots": 20000,
+   "meas": 5,
+   "depth": 25
+  },
+  {
+   "label": "unwatched_8",
+   "arm": "unwatched",
+   "n": 8,
+   "shots": 20000,
+   "meas": 1,
+   "depth": 41
+  },
+  {
+   "label": "pinned_8",
+   "arm": "pinned",
+   "n": 8,
+   "shots": 20000,
+   "meas": 9,
+   "depth": 49
+  },
+  {
+   "label": "nodrive_8",
+   "arm": "nodrive",
+   "n": 8,
+   "shots": 20000,
+   "meas": 9,
+   "depth": 10
+  },
+  {
+   "label": "pinned_2",
+   "arm": "pinned",
+   "n": 2,
+   "shots": 20000,
+   "meas": 3,
+   "depth": 7
+  },
+  {
+   "label": "nodrive_4",
+   "arm": "nodrive",
+   "n": 4,
+   "shots": 20000,
+   "meas": 5,
+   "depth": 6
+  },
+  {
+   "label": "pinned_16",
+   "arm": "pinned",
+   "n": 16,
+   "shots": 20000,
+   "meas": 17,
+   "depth": 97
+  },
+  {
+   "label": "nodrive_2",
+   "arm": "nodrive",
+   "n": 2,
+   "shots": 20000,
+   "meas": 3,
+   "depth": 4
+  }
+ ]
+}
