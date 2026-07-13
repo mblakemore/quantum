@@ -23,6 +23,7 @@ characterizing hardware:
 | **ICO thermal splitting** — the Felce-Vedral refrigeration resource **WON at 21.1σ**: the switch of two fully-thermalizing channels split the target COLDER (p₁\|+ = 0.2098) vs HOTTER (p₁\|− = 0.3894) by control outcome, Δ = 0.1796 against a causal value of exactly 0. Bonus: the pre-filed cross-arc depth-decay law beat FakeMarrakesh out-of-sample by 2.3× | **F86** | [finding](findings/F86-exp108-ico-refrigeration-resource-whisper-c4561-ember-numbered-c4121.md) · [pre-reg](experiments/exp108-ico-refrigeration-preregistration.md) |
 | **Native-fluid ICO refrigeration** — F86 **CONFIRMED_ON_RETEST at 12.9σ** with the working fluid substituted: reservoirs mixed by the chip's own T1 decay, + branch **colder than the coldest reservoir at 5σ**, procedure-theory residual 0.0016. The drift-tolerant re-fly absorbed the published-T1 bias (+38–69% live vs calibration, 2/2 runs) that NO-TESTed the first attempt | **F88** | [finding](findings/F88-exp108c-native-fluid-ico-refrigeration-whisper-c4592-c4593-ember-numbered-c4124.md) · [pre-reg](experiments/exp108c-native-thermal-refly-preregistration.md) |
 | **ICO vs coherent control — the resource debate answered**: five co-batched arms; coherent path control transmits (S = 0.1140, its own WIN) but the switch strictly exceeds it at **~20σ** with the depth confound favoring paths; **S-ratio 1.949 in the pre-filed [1.7, 2.1], theory exactly 2.00**. Both literature camps partially right, quantified on silicon | **F89** | [finding](findings/F89-exp111-ico-vs-coherent-control-resource-comparison-whisper-c4593-c4594-ember-numbered-c4124.md) · [pre-reg](experiments/exp111-e1-resource-comparison-preregistration.md) |
+| **Causal indefiniteness survives TELEPORTATION** — the switch control beamed one hop arrives still causally indefinite: DISC 1.825 ± 0.009 (**90σ** over the survival floor, 97% of the same-window anchor) while the identical teleport over a dephased *classical* channel kills the witness dead (0.018 ≈ 0, separation **33σ**). Survives quantum, dies classical, one job, one window. No gate-model prior found | **F92** | [finding](findings/F92-exp113-causal-indefiniteness-survives-teleportation-whisper-c4603-c4604-ember-numbered-c4127.md) · [pre-reg](experiments/exp113-teleported-witness-preregistration.md) |
 
 **[Quantum-switch full apparatus spec](docs/quantum-switch-spec.md)** — the single-document engineering reference: circuit family (V1–V5), exact theory statistics, measured-results ledger with job IDs, reusable methodology, pitfall registry, scope and platform prior art.
 
@@ -108,7 +109,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
 ├── full-report.md               ← Arc-1 synthesis (the deep-research source doc)
 ├── findings/                    ← one-per-discovery deep dives (~80 files)
 │   ├── 01…44-*.md               ← the core numbered line (Findings 41–43 under exp-named files)
-│   ├── F48…F91-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
+│   ├── F48…F92-*.md             ← the unified F-series (quiet qubits, placement, toric, causal-order, comms arcs)
 │   ├── finding-25/26/46/47…     ← quantum-IIT arc side numbering (25/26 here ≠ QAOA Findings 25/26!)
 │   └── exp*-*.md                ← interim findings, integrity audits, closure notes
 ├── images/                      ← figures (PNG), reproducible from scripts/generate_figures.py
@@ -135,7 +136,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
     └── references.md            ← peer-reviewed and primary sources (cited inline in findings)
 ```
 
-**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F91 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
+**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (with 41–43 under experiment-named files and no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to F92 (and counting), with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
 
 ---
 

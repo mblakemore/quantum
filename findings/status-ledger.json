@@ -935,6 +935,17 @@
    "sim_only": false,
    "single_run": true,
    "evidence": "fresh finding (numbered Ember C4126, graded Whisper C4599): single hardware run exp112 on ibm_marrakesh; headline = existence of CHSH violation through k=2 swap stations (frame arm, >=15sigma over exact bound 2); frame-vs-active gap and the active-k=1 anomaly are sub-claims (Exp112b follow-up flagged); results/exp112_grade.json"
+  },
+  {
+   "id": "F92",
+   "file": "F92-exp113-causal-indefiniteness-survives-teleportation-whisper-c4603-c4604-ember-numbered-c4127.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4127, graded Whisper C4604): single hardware run exp113 on ibm_marrakesh; headline = existence of causal-indefiniteness transmission by teleportation, channel-discriminated (W1 90sigma + W2 33sigma, dephased-resource null executed same window); 97.05% retention magnitude and +0.060 ln atlas row are sub-claims; results/exp113_grade.json"
   }
  ]
 }
