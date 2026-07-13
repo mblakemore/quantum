@@ -143,6 +143,14 @@ Two independent "noise actually helps" claims from earlier arcs were killed unde
 
 > *ELI5: Imagine proving that a package was shipped through two sorting centers in BOTH orders at once — not "we don't know which order," but genuinely neither-and-both — and ruling out every mundane explanation, including a mail service that secretly flips a coin each day. That's what these circuits did, on two different real quantum chips, with the statistical strength of a ≥72-sigma result (particle-physics discoveries require 5). The "amount of both-ness" even turns out to be a smooth dial that follows a simple cosine law. One caveat, kept honest: the demonstration certifies the quantum nature of the ORDER, not a computational speedup from it. And one proposed follow-up check was withdrawn by its own author after proving it was circular — a test that cannot fail proves nothing.*
 
+### Causal-structure metrology — the switch apparatus turned into a diagnostic (F96)
+
+**Plain English**: the same machinery that *detects* indefinite causal order can be inverted to *certify its absence* where you want none. F96 asks whether the transpiler's "parallel" gate scheduling secretly runs in an order (crosstalk-imposed), and certifies it does NOT.
+
+| Finding | Result | Tier |
+|---|---|---|
+| F96 | **First schedule-symmetry certification (null-first WIN)**: at the maximum-crosstalk site (shared-neighbor spectator, 8× amplified), the two execution orders of nominally-parallel CZ gates are statistically indistinguishable — D_order = 0.0123 ± 0.0036, hidden ordering **certified ≤ 0.0303 TVD** (below the pre-registered floor 0.0223); control site symmetric too (guard clean). The transpiler's "parallel" is honest at our floor — **a certification the vendor does not provide**, and every depth-1-layer claim on this hardware now inherits it. Mechanism held as pre-filed (CZ and ZZ crosstalk are both diagonal → they commute → no during-gate ordering). Reusable catch: the **duration-vs-order discriminator** — `par` sits ~14σ from both sequential arms but is *equidistant* from them (D_A ≈ D_B ≈ D_mix), the fingerprint of a duration artifact (par is 40% shallower), not ordering; hidden order would lean toward one arm | **HW** marrakesh |
+
 ### Communication primitives — the comms white space, opened, CLOSED, and reopened by Horizons (F87, F90–F91, F93)
 
 **Plain English**: a C4588 survey re-read the whole repo as *communications* research ([comms paths doc](quantum-communication-paths-whisper-c4588.md)) and found a white space — 115 findings, zero standard quantum-communication primitives (no teleportation, no superdense coding, no entanglement swapping). F87 is the first fill, run with the same frozen bound-referenced grading discipline as the causal arc.

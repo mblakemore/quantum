@@ -1038,6 +1038,17 @@
      "evidence": "results/exp117c_stage2_grade.json: drop 0.0920 is 9.4sigma from zero but misses 5sigma clearance vs the 0.05 floor by 0.7sigma; LOSS as frozen, no softening (F93 GAIN-leg class; c4130_001 power-calc applies)"
     }
    ]
+  },
+  {
+   "id": "F96",
+   "file": "F96-exp118-schedule-symmetry-certification-hidden-order-metrology-whisper-c4634-c4635-ember-numbered-c4134.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4134, graded Whisper C4635): single hardware run exp118 on ibm_marrakesh; headline = existence of certified schedule-symmetry (nominally-parallel CZ scheduling carries no hidden effective ordering; hotspot D_order 0.0123 certified <=0.0303 vs floor 0.0223, control symmetric, guard clean). type_basis: existence of the symmetry certification; order-INDEPENDENCE reading also valid (output independent of A/B order); certified bound <=0.0303 = reported magnitude figure of merit. results/exp118_grade.json"
   }
  ],
  "rubric_v2": {
