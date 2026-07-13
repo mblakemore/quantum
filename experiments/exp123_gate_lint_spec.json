@@ -1,0 +1,30 @@
+{
+  "k": 5,
+  "k_fail": 2,
+  "gates": [
+    {
+      "name": "W_PARADOX_ratio",
+      "pass_value": 0.016,
+      "fail_value": 0.5,
+      "threshold": 0.1,
+      "direction": "below",
+      "se": 0.0011
+    },
+    {
+      "name": "W_LOOP_bystander_diff",
+      "pass_value": 0.99,
+      "fail_value": 0.0,
+      "threshold": 0.5,
+      "direction": "above",
+      "se": 0.0123
+    },
+    {
+      "name": "G0_herald_rate",
+      "pass_value": 0.496,
+      "fail_value": 0.2,
+      "threshold": 0.4,
+      "direction": "above",
+      "se": 0.0029
+    }
+  ]
+}

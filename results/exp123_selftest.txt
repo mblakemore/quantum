@@ -1,0 +1,5 @@
+  [both] -> PARADOX-ENFORCED+CTC-BACKACTION-CERTIFIED (PASS)
+  [paradox-only] -> PARADOX-ENFORCED(only) (PASS)
+  [backaction-only] -> CTC-BACKACTION(only) (PASS)
+  [no-test] -> NO-TEST(N1) (PASS)
+SELFTEST 4/4 PASS
