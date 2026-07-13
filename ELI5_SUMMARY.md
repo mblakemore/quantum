@@ -201,9 +201,18 @@ In three days the quantum switch went from a certified curiosity to a working re
   signal had rotated into an axis we weren't watching); the retest watched every
   axis, refuted our own favorite excuse, and certified the real thing. Finding
   one hundred is the honesty machine itself.
+- **The grandfather paradox, with a receipt** (F101): we built a quantum time
+  loop (Lloyd's recipe — the loop is a post-selection rule, stated up front) and
+  sent in a qubit trying to flip its own past. The universe's answer, measured:
+  the full paradox survives at 1.9% — pure readout noise; the math says exactly
+  zero — and the "how forbidden is it" curve tracks theory to one percent. Better:
+  an innocent bystander who merely SHOOK HANDS with the time traveler came out
+  changed — its ordinary classical record turned into quantum coherence, 78-sigma
+  sure. Time loops don't just punish paradoxes; they leave fingerprints on
+  everyone in the room.
 - **And the weather report went public**: the platform's moods (T1 values that swing 2×
   in a day, a noise model blind to feedforward) are now charts anyone can read
   ([demo/weather](demo/weather/index.html)), with the four tricks we use to work through
   them.
 
-Findings F87–F100, every one pre-registered, every miss in the record.
+Findings F87–F101, every one pre-registered, every miss in the record.
