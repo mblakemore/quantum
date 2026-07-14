@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The GHZ Sextant — measuring a phase beyond the standard quantum limit | The Quantum Museum</title>
+<meta name="description" content="Entangle N probes and the interference fringe oscillates N times faster (super-resolution), carrying N² the sensitivity of separate probes. The Fisher advantage climbs the Heisenberg ladder to R=4.41 at N=5, persisting where cheaper tasks invert. Real hardware data (F108/F109).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 10px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(29px,5.6vw,50px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:64ch; margin:0 0 12px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--cyan); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:66ch; }
+
+  .dial { display:flex; gap:8px; align-items:center; margin-bottom:20px; flex-wrap:wrap; }
+  .dial .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .nbtn { font-family:var(--mono); font-size:15px; font-weight:700; width:44px; height:44px; border-radius:10px;
+    border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; transition:all .12s; }
+  .nbtn:hover { border-color:var(--cyan); }
+  .nbtn.on { background:var(--cyan); color:#04201e; border-color:var(--cyan); }
+
+  .fringes { display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,3vw,24px); }
+  @media (max-width:680px){ .fringes { grid-template-columns:1fr; } }
+  .fbox { border:1px solid var(--edge); border-radius:12px; padding:14px; background:var(--surface-2); }
+  .fbox .ft { font-family:var(--mono); font-size:12px; font-weight:600; margin-bottom:2px; }
+  .fbox.sep .ft { color:var(--ink-3); } .fbox.ghz .ft { color:var(--cyan); }
+  .fbox .fd { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-bottom:8px; }
+  svg { display:block; width:100%; height:auto; }
+  .axis { stroke:var(--edge-2); stroke-width:1; }
+  .fwave { fill:none; stroke-width:2.4; }
+  .fwave.sep { stroke:var(--ink-3); } .fwave.ghz { stroke:var(--cyan); }
+  .axlabel { font-family:var(--mono); font-size:9px; fill:var(--ink-3); }
+
+  .fisher { display:flex; flex-wrap:wrap; gap:14px 30px; align-items:baseline; margin-top:22px; }
+  .fisher .rbig { font-family:var(--mono); font-size:clamp(32px,7vw,48px); font-weight:720; color:var(--cyan); letter-spacing:-.02em; line-height:1; }
+  .fisher .rlab { font-family:var(--mono); font-size:12.5px; color:var(--ink-3); }
+  .fisher .rlab b { color:var(--ink); }
+  .fisher .sig { font-family:var(--mono); font-size:13px; color:var(--good); font-weight:600; }
+  .why { font-size:13px; color:var(--ink-2); margin-top:14px; border-left:2px solid var(--cyan); padding-left:12px; max-width:60ch; }
+  .why b { color:var(--ink); }
+
+  /* ladder plot */
+  .ladderwrap { max-width:520px; margin:0 auto; }
+  .dot-m { fill:var(--card); stroke:var(--cyan); stroke-width:2.4; }
+  .dot-cur { fill:var(--cyan); stroke:var(--surface); stroke-width:3; }
+  .ideal-line { stroke:var(--ink-3); stroke-width:1.6; stroke-dasharray:4 4; opacity:.6; }
+  .lad-note { font-family:var(--mono); font-size:11px; color:var(--ink-3); text-align:center; margin-top:6px; }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--cyan); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
+  .badge-row .sp { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing IV · The Advantage Ladder</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">GHZ metrology · beating the standard quantum limit</p>
+    <h1>A sextant made of <span class="hl">entanglement</span>.</h1>
+    <p class="lede">To measure a tiny phase, you watch an interference fringe. Tie N probes into one
+    entangled GHZ state and the fringe oscillates <em>N times faster</em> — super-resolution — carrying up
+    to N² the sensitivity of N separate probes. Dial up the probes and watch the fringe sharpen and the
+    advantage climb the Heisenberg ladder. Every value is measured on silicon.</p>
+    <span class="scope">GHZ phase super-resolution is textbook (Bollinger 1996). The contribution: the frozen, <b>executed-reference</b> measurement.</span>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — The Sextant</p>
+    <h2>More entangled probes, a sharper fringe</h2>
+    <p class="sub">Left: N separate probes, each a slow cos(φ) fringe. Right: one GHZ state of the same N
+    probes — a single fringe at N times the frequency, drawn at the visibility actually measured (so it
+    honestly loses a little contrast as N grows). The extra oscillations are the extra sensitivity.</p>
+    <div class="dial" role="group" aria-label="Number of probes N">
+      <span class="lbl">probes N =</span>
+      <button class="nbtn" data-n="2" type="button">2</button>
+      <button class="nbtn" data-n="3" type="button">3</button>
+      <button class="nbtn" data-n="4" type="button">4</button>
+      <button class="nbtn" data-n="5" type="button">5</button>
+    </div>
+    <div class="fringes">
+      <div class="fbox sep">
+        <div class="ft">Separable — N independent probes</div>
+        <div class="fd" id="sepd">one fringe, frequency 1</div>
+        <svg viewBox="0 0 300 130"><line class="axis" x1="6" y1="65" x2="294" y2="65"/><path class="fwave sep" id="sepwave"/></svg>
+      </div>
+      <div class="fbox ghz">
+        <div class="ft">GHZ — N entangled probes</div>
+        <div class="fd" id="ghzd">one fringe, frequency N — super-resolution</div>
+        <svg viewBox="0 0 300 130"><line class="axis" x1="6" y1="65" x2="294" y2="65"/><path class="fwave ghz" id="ghzwave"/></svg>
+      </div>
+    </div>
+    <div class="fisher">
+      <div><div class="rbig" id="rbig">R = 1.94×</div><div class="rlab">Fisher advantage · ideal Heisenberg = <b id="ideal">2</b>×</div></div>
+      <div><div class="sig" id="sig">66σ over the executed separable reference</div>
+        <div class="rlab" id="vlab">GHZ visibility V₅ measured</div></div>
+    </div>
+    <p class="why">The GHZ fringe's <b>N× frequency</b> is what carries the advantage: sensitivity to a phase
+    grows as the fringe frequency squared, so N entangled probes reach <b>N² Fisher information</b> against
+    the N of separate probes — the Heisenberg scaling, measured against a separable reference we actually ran.</p>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The Heisenberg Ladder</p>
+    <h2>The advantage climbs — and does not give up at N=5</h2>
+    <p class="sub">Each rung is the measured Fisher advantage against the ideal Heisenberg line R = N. The
+    advantage tracks just below the line and keeps climbing through N=5 — where a deeper task (capacity
+    activation, F85) had already inverted. On this hardware, cheap-prep metrology stays in the quantum regime.</p>
+    <div class="ladderwrap">
+      <svg viewBox="0 0 420 260" role="img" aria-label="Fisher advantage R versus N against the ideal Heisenberg line">
+        <line class="axis" x1="44" y1="16" x2="44" y2="220"/>
+        <line class="axis" x1="44" y1="220" x2="400" y2="220"/>
+        <line class="ideal-line" id="idealLine"/>
+        <g id="ladderDots"></g>
+        <text class="axlabel" x="8" y="20">R=5</text>
+        <text class="axlabel" x="18" y="224">1</text>
+        <text class="axlabel" x="44" y="238">N=2</text>
+        <text class="axlabel" x="370" y="238">N=5</text>
+        <text class="axlabel" x="150" y="14" fill="var(--ink-3)">dashed = ideal Heisenberg R = N</text>
+      </svg>
+      <p class="lad-note">measured R: 1.94 · 2.86 · 3.64 · 4.41 &nbsp;|&nbsp; persists to N=5, N* = 5</p>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F108 / F109</span> · job <span class="sig">d9alnju6hjac73fek980</span></span>
+    <span>ibm_marrakesh · executed separable reference · fringe peak k = N</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+
+    // ---- data kernel (F109 exp130 ladder) ----
+    var V1 = 0.9853;  // separable single-qubit visibility (F108)
+    var LADDER = {
+      2:{R:1.944, ideal:2, sigma:66, VN:0.9781},
+      3:{R:2.859, ideal:3, sigma:91, VN:0.9672},
+      4:{R:3.643, ideal:4, sigma:147, VN:0.9445},
+      5:{R:4.411, ideal:5, sigma:101, VN:0.9286}
+    };
+    console.assert(LADDER[5].R > LADDER[2].R, "ladder climbs");
+
+    // fringe path: P0(phi) = (1 + V cos(k phi))/2 over [0,2pi], y 0..1 mapped to svg 120..10
+    function fringePath(k, V) {
+      var d = "M", W = 288, X0 = 6, YTOP = 12, YBOT = 118;
+      for (var i = 0; i <= 160; i++) {
+        var phi = i / 160 * 2 * Math.PI;
+        var p0 = (1 + V * Math.cos(k * phi)) / 2;
+        var x = X0 + i / 160 * W, y = YBOT - p0 * (YBOT - YTOP);
+        d += (i ? "L" : "") + x.toFixed(1) + "," + y.toFixed(1) + " ";
+      }
+      return d;
+    }
+
+    var sepwave = document.getElementById("sepwave"), ghzwave = document.getElementById("ghzwave"),
+        rbig = document.getElementById("rbig"), ideal = document.getElementById("ideal"),
+        sig = document.getElementById("sig"), vlab = document.getElementById("vlab"),
+        ghzd = document.getElementById("ghzd"), btns = document.querySelectorAll(".nbtn");
+    function render(N) {
+      var d = LADDER[N];
+      sepwave.setAttribute("d", fringePath(1, V1));      // separable: freq 1
+      ghzwave.setAttribute("d", fringePath(N, d.VN));    // GHZ: freq N, measured visibility
+      rbig.textContent = "R = " + d.R.toFixed(2) + "×";
+      ideal.textContent = d.ideal;
+      sig.textContent = d.sigma + "σ over the executed separable reference";
+      vlab.innerHTML = "GHZ visibility V<sub>" + N + "</sub> = " + d.VN.toFixed(3) + " (measured)";
+      ghzd.textContent = "one fringe, frequency " + N + " — super-resolution";
+      btns.forEach(function (b) { var on = +b.dataset.n === N; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false"); });
+      drawCur(N);
+    }
+    btns.forEach(function (b) { b.addEventListener("click", function () { render(+b.dataset.n); }); });
+
+    // ---- ladder plot ----
+    var LX0 = 44, LX1 = 396, LY0 = 16, LY1 = 220;  // R axis 1..5
+    function lx(N) { return LX0 + (N - 2) / (5 - 2) * (LX1 - LX0); }
+    function ly(R) { return LY1 - (R - 1) / (5 - 1) * (LY1 - LY0); }
+    document.getElementById("idealLine").setAttribute("x1", lx(2));
+    document.getElementById("idealLine").setAttribute("y1", ly(2));
+    document.getElementById("idealLine").setAttribute("x2", lx(5));
+    document.getElementById("idealLine").setAttribute("y2", ly(5));
+    var g = document.getElementById("ladderDots");
+    [2,3,4,5].forEach(function (N) {
+      var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      c.setAttribute("class", "dot-m"); c.setAttribute("r", "5");
+      c.setAttribute("cx", lx(N)); c.setAttribute("cy", ly(LADDER[N].R));
+      g.appendChild(c);
+    });
+    var curDot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    curDot.setAttribute("class", "dot-cur"); curDot.setAttribute("r", "7"); g.appendChild(curDot);
+    function drawCur(N) { curDot.setAttribute("cx", lx(N)); curDot.setAttribute("cy", ly(LADDER[N].R)); }
+
+    render(2);
+  })();
+</script>
+</body>
+</html>
