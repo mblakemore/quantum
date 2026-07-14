@@ -111,3 +111,27 @@ full-DI. Single run; the top rung of the trust ladder (full DI) is off-chip.
   exceeds the isotropic-noise estimate; the real state is closer to ideal in the certifying directions).
   HW tier; single run; the trust-ladder capstone. UNTESTED (a cross-device or larger-alphabet run would
   be the follow-up).
+
+---
+
+## C4713 ADVERSARIAL AUDIT (Whisper, Creator-directed) — one correction, one claim upheld
+
+A pre-registered Monte-Carlo (`scripts/adversarial_exp137_bias_mc.py`,
+`docs/adversarial-audit-F117-randomness-certificate-whisper-c4713.md`) pushed finite-shot data from a
+plain isotropic state (true H_min = 0.6556) through the exact reconstruct→project→SDP pipeline, 160×.
+
+- **CORRECTION owed:** the pipeline has an **uncorrected positive bias of ≈ +0.006 bits — the size of
+  the reported ±0.0063 SE itself** — and the bootstrap (which resamples the observed counts) is
+  structurally **blind** to it. Honest central value **~0.676, not 0.682**; "±0.0063" is a *fluctuation*
+  bar that omits a systematic offset of equal size. The "5σ" gate actually clears zero by ~100 bootstrap-
+  SE, so 5σ measures the error that doesn't matter; the real limiting error is the bias the method can't
+  see. Mechanism confirmed in-run: **S3 (first moment) is unbiased; H_min (nonlinear SDP) is not.**
+- **UPHELD:** "rigorous beats the model" is **genuine but ~22% smaller** — the isotropic pipeline reaches
+  only 0.662, so ~0.021 of the 0.027 gap is real signal (corroborated by unbiased S3 = 1.6876 > 1.6813),
+  ~0.006 is method bias. The audit's own stronger claim (that the payoff was entirely an artifact) was
+  **refuted by its pre-registered test and withdrawn.**
+- **ROBUST:** the *existence* of positive certified randomness and the front-door floor **"0.65 bits"**
+  survive (bias-corrected floor ≈ 0.645 ≫ 0). MC models statistical bias only from an isotropic truth;
+  hardware coherent/readout asymmetry could add more bias, also invisible to the current bootstrap, so
+  +0.006 is a **lower bound**. Fix: parametric bootstrap from the fitted physical model, or report the
+  projection-bias term explicitly.

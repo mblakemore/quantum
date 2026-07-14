@@ -1,0 +1,11 @@
+{
+ "v": 0.9706990075885179,
+ "h_true": 0.6556260460567579,
+ "mean_recovered": 0.6615927107840026,
+ "bias": 0.005966664727244719,
+ "std": 0.006671797777170273,
+ "nrep": 160,
+ "observed_f117": 0.6823,
+ "boot_se": 0.0063,
+ "verdict": "PAYOFF REAL: pipeline ~unbiased; retract beats-the-model critique"
+}
