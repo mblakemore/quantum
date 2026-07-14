@@ -92,25 +92,6 @@
   .badge-row .sig { color: var(--cyan); font-weight:600; }
   .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
   .badge-row .sp { flex:1; }
-
-  /* frost canvas */
-  .canvas-wrap { display:grid; grid-template-columns: auto 1fr; gap:clamp(18px,3.5vw,34px); align-items:start; }
-  @media (max-width:680px){ .canvas-wrap { grid-template-columns:1fr; } }
-  .grid { display:grid; gap:3px; background:var(--edge); padding:6px; border-radius:10px; width:max-content;
-    grid-template-columns:repeat(13, clamp(15px,3.4vw,24px)); }
-  .cell { width:100%; aspect-ratio:1; border:none; border-radius:3px; padding:0; cursor:pointer;
-    background:#ff6b5e; transition:background .1s; }
-  .cell[aria-pressed="true"] { background:#3b9dff; }
-  @media (prefers-reduced-motion: reduce){ .cell { transition:none; } }
-  .cell:focus-visible { outline:2px solid var(--cyan); outline-offset:1px; }
-  .presets { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; }
-  .pbtn { font-family:var(--mono); font-size:12px; background:var(--surface-2); border:1px solid var(--edge);
-    color:var(--ink-2); border-radius:8px; padding:6px 12px; cursor:pointer; }
-  .pbtn:hover { border-color:var(--cyan); color:var(--cyan); }
-  .legend { display:flex; gap:16px; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); margin-top:12px; flex-wrap:wrap; }
-  .legend .sw { display:inline-block; width:11px; height:11px; border-radius:2px; vertical-align:middle; margin-right:5px; }
-  .limit-note { border-left:2px solid var(--amber); padding-left:12px; margin-top:16px; font-size:13.5px; color:var(--ink-2); max-width:52ch; }
-  .limit-note b { color:var(--ink); } .limit-note .amb { color:var(--amber); font-weight:600; }
 </style>
 </head>
 <body>
@@ -196,43 +177,6 @@
     </div>
   </section>
 
-  <!-- PANEL C -->
-  <section class="panel">
-    <p class="panel-label">Exhibit C — The Frost Canvas · and what the fridge <em>can't</em> do</p>
-    <h2>Paint a symbol in the temperature field</h2>
-    <p class="sub">Every <span style="color:#3b9dff">blue</span> tile below is the <b>one measured cold branch</b>
-    (p₁ = 0.2098); every <span style="color:#ff6b5e">red</span> tile the <b>one measured hot branch</b> (0.3894).
-    Click to draw, or drop in a shape. This is a real thermal field built from real hardware numbers — with the
-    edge of what the resource does marked plainly.</p>
-    <div class="canvas-wrap">
-      <div>
-        <div class="presets" role="group" aria-label="Preset patterns">
-          <button class="pbtn" type="button" data-preset="snow">❄ snowflake</button>
-          <button class="pbtn" type="button" data-preset="ico">ICO</button>
-          <button class="pbtn" type="button" data-preset="heart">♥ heart</button>
-          <button class="pbtn" type="button" data-preset="clear">clear (all hot)</button>
-        </div>
-        <div class="grid" id="grid" role="group" aria-label="Frost canvas — toggle each tile between the measured cold and hot branch"></div>
-        <div class="legend">
-          <span><span class="sw" style="background:#3b9dff"></span>cold · + branch · p₁ = 0.21 (measured)</span>
-          <span><span class="sw" style="background:#ff6b5e"></span>hot · − branch · p₁ = 0.39 (measured)</span>
-        </div>
-      </div>
-      <div>
-        <div class="limit-note">
-          <p style="margin:0 0 10px"><span class="amb">The physics is the split; the picture is your choice.</span>
-          The switch hands you two temperatures per site — the 21.1σ cold/hot split. Arranging them into a shape means
-          <b>post-selecting</b> which control outcome you keep at each tile.</p>
-          <p style="margin:0 0 10px">That choice is <b>yours</b>, and it is reproducible from <em>any</em> two-outcome
-          stream — a coin would do. So the fridge did not "draw" this symbol and the drawing is <b>not a computation</b>
-          the ICO resource performed.</p>
-          <p style="margin:0">What <em>is</em> forbidden to ordered physics is the split itself (causal value = 0). The art
-          is decoration on top of a certified result — kept here because the line between the two is the point.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   </main>
   <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="sig">F86 / F88 / F95</span> · job <span class="sig">d98vqfsqp3as739tfg0g</span></span>
@@ -300,49 +244,6 @@
     var coh = document.getElementById("coh");
     coh.addEventListener("input", function () { render(+coh.value / 100); });
     render(0);
-
-    // ---- Exhibit C: the frost canvas (cold = measured + branch, hot = measured - branch) ----
-    var COLS = 13, ROWS = 11, gridEl = document.getElementById("grid");
-    var PRESETS = {
-      snow: ["0000001000000","0010001000100","0001001001000","0000101010000","0000011100000",
-             "1111111111111","0000011100000","0000101010000","0001001001000","0010001000100","0000001000000"],
-      ico:  ["0000000000000","0000000000000","0000000000000","0111011101110","0010010001010",
-             "0010010001010","0010010001010","0111011101110","0000000000000","0000000000000","0000000000000"],
-      heart:["0000000000000","0011000001100","0111100011110","0111111111110","0111111111110",
-             "0011111111100","0001111111000","0000111110000","0000011100000","0000001000000","0000000000000"],
-      clear: null
-    };
-    var cells = [];
-    for (var r = 0; r < ROWS; r++) for (var c = 0; c < COLS; c++) {
-      var b = document.createElement("button");
-      b.type = "button"; b.className = "cell"; b.setAttribute("aria-pressed", "false");
-      b.setAttribute("aria-label", "tile row " + (r + 1) + " column " + (c + 1) + " — hot branch");
-      (function (btn) {
-        btn.addEventListener("click", function () {
-          var on = btn.getAttribute("aria-pressed") === "true";
-          setCell(btn, !on);
-        });
-      })(b);
-      gridEl.appendChild(b); cells.push(b);
-    }
-    function setCell(btn, cold) {
-      btn.setAttribute("aria-pressed", cold ? "true" : "false");
-      var idx = cells.indexOf(btn), rr = Math.floor(idx / COLS) + 1, cc = (idx % COLS) + 1;
-      btn.setAttribute("aria-label", "tile row " + rr + " column " + cc + " — " +
-        (cold ? "cold branch, p1 = 0.21" : "hot branch, p1 = 0.39"));
-    }
-    function applyPreset(name) {
-      var pat = PRESETS[name];
-      for (var i = 0; i < cells.length; i++) {
-        var on = false;
-        if (pat) { var row = pat[Math.floor(i / COLS)]; on = row && row.charAt(i % COLS) === "1"; }
-        setCell(cells[i], on);
-      }
-    }
-    Array.prototype.forEach.call(document.querySelectorAll(".pbtn"), function (btn) {
-      btn.addEventListener("click", function () { applyPreset(btn.getAttribute("data-preset")); });
-    });
-    applyPreset("snow");
   })();
 </script>
 </body>
