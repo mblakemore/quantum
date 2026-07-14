@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full Spec Sheet — The Shallow-Circuit Solver / BGK 2D-HLF (F113) | The Quantum Museum</title>
+<meta name="description" content="Complete specification for the Shallow-Circuit Solver: a constant-depth quantum circuit solves the n=4 2D Hidden Linear Function at P(valid)=0.9017 (437.8σ over the 0.25 floor), covering all four valid solutions near-uniformly (the un-fakeable coverage gate). Classical hardness inherited from contextuality (F106). Honesty fence: asymptotic separation, not proven on-chip. Job d9amnlvu62qs738o8nt0.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .doc { max-width: 820px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 90px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .spec-head { padding: clamp(16px,3vw,30px) 0 6px; border-bottom:1px solid var(--edge); margin-bottom:8px; }
+  .kicker { font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
+  .spec-head h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.08;
+    font-size:clamp(26px,4.6vw,40px); margin:10px 0 12px; text-wrap:balance; }
+  .spec-head h1 .hl { color: var(--cyan); }
+  .idline { display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--mono); font-size:12px; color:var(--ink-3); margin-bottom:10px; }
+  .idline b { color: var(--ink-2); font-weight:600; }
+  .verdict-chip { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:12px;
+    color:var(--good); border:1px solid color-mix(in srgb,var(--good) 45%,var(--edge)); border-radius:999px; padding:5px 13px; font-weight:600; }
+
+  .fence { background: color-mix(in srgb, var(--amber) 9%, transparent); border:1px solid color-mix(in srgb,var(--amber) 40%,var(--edge));
+    border-radius:12px; padding:15px 18px; margin:16px 0; }
+  .fence .fl { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--amber); font-weight:700; margin:0 0 4px; }
+  .fence p { margin:4px 0; color:var(--ink-2); }
+
+  .doc h2 { font-family:var(--mono); font-size:clamp(16px,2.4vw,20px); letter-spacing:-.01em; margin:38px 0 8px;
+    padding-top:14px; border-top:1px solid var(--edge); }
+  .doc h2 .n { color: var(--cyan); font-weight:720; margin-right:10px; }
+  .doc h3 { font-size:15px; margin:20px 0 6px; color: var(--ink); }
+  .doc p { color: var(--ink-2); max-width:72ch; margin:9px 0; }
+  .doc p.tight { margin:4px 0; }
+  .doc ul { color: var(--ink-2); max-width:72ch; padding-left:20px; }
+  .doc li { margin:6px 0; }
+  .doc b { color: var(--ink); }
+  .doc code { font-family:var(--mono); font-size:.9em; background:var(--surface-2);
+    border:1px solid var(--edge); border-radius:5px; padding:1px 6px; color:var(--ink); }
+  .doc a { color: var(--cyan); }
+
+  .callout { background:var(--surface); border:1px solid var(--edge); border-left:3px solid var(--cyan);
+    border-radius:10px; padding:16px 18px; margin:16px 0; }
+  .callout.good { border-left-color: var(--good); }
+  .callout .clabel { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin:0 0 4px; }
+
+  .tbl-wrap { overflow-x:auto; margin:14px 0; border:1px solid var(--edge); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; min-width:440px; }
+  th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
+  th:first-child, td:first-child { text-align:left; }
+  thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
+  tbody tr:last-child td { border-bottom:none; }
+  td.gd { color: var(--good); }
+  .gate { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-family:var(--mono); font-size:13px; margin:10px 0; }
+  .gate .g { color:var(--cyan); font-weight:600; }
+  .gate .r { color:var(--ink-2); }
+  .pass { color: var(--good); font-weight:600; }
+
+  .foot { margin-top:44px; padding-top:16px; border-top:1px solid var(--edge); font-family:var(--mono);
+    font-size:11.5px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; }
+  .foot a { color: var(--ink-2); } .foot a:hover { color: var(--cyan); } .foot .sp { flex:1; }
+  .backlink { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    border:1.5px solid var(--cyan); color:var(--cyan); border-radius:10px; padding:9px 16px; margin-top:20px; text-decoration:none; }
+  .backlink:hover { background: color-mix(in srgb,var(--cyan) 12%,transparent); }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <a href="./">· Shallow-Circuit Solver exhibit</a>
+    <span class="wingtag">· Wing IV · The Advantage Ladder</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="spec-head">
+    <p class="kicker">Full Specification Sheet</p>
+    <h1>A circuit too <span class="hl">shallow</span> for any classical machine to match</h1>
+    <div class="idline">
+      <span><b>Finding</b> F113</span>
+      <span><b>Experiment</b> Exp127hw (BGK 2D-HLF, n=4)</span>
+      <span><b>Backend</b> ibm_marrakesh (Heron r2)</span>
+      <span><b>Job</b> d9amnlvu62qs738o8nt0</span>
+    </div>
+    <span class="verdict-chip">✓ CONSTANT-DEPTH SOLVER — P(valid) 0.9017, 437.8σ, full coset covered</span>
+  </header>
+
+  <div class="fence">
+    <p class="fl">Honesty fence — read this first</p>
+    <p>This does <b>not</b> prove the complexity separation (QNC⁰ ≠ NC⁰) <b>on the chip</b>. That separation is
+    <b>asymptotic</b> — it lives in the limit of large <code>n</code>, and the <b>theorem</b> carries the asymptotics.
+    What the hardware certifies is a concrete instance: a <b>constant-depth</b> quantum circuit that solves the
+    <code>n=4</code> problem at <b>90% fidelity</b>, covering the <b>whole</b> solution set, in <b>O(1) logical
+    depth</b>. It is the honest complement to F54's deep-circuit wall — the campaign's one computational-genre result,
+    scoped exactly.</p>
+  </div>
+
+  <h2><span class="n">1</span>The idea, in plain language</h2>
+  <p><b>Depth</b> is how many layers of gates a circuit has, one after another. A <b>constant-depth</b> (shallow)
+  circuit has a <b>fixed</b> number of layers no matter how big the problem grows — every gate fires in a few parallel
+  rounds. Bravyi, Gosset &amp; König (2018) proved something remarkable: there is a problem a <b>quantum</b>
+  constant-depth circuit can solve that <b>no classical</b> constant-depth circuit can — and the proof needs
+  <b>no unproven assumptions</b> (unlike "P ≠ NP"). It is one of the few <b>unconditional</b> quantum advantages known.</p>
+  <p>The problem is the <b>2D Hidden Linear Function</b>: given a quadratic puzzle laid out on a grid, find a hidden
+  linear rule. It has <b>many equally-valid answers</b> — a whole <b>solution set (a coset)</b> — and a good solver
+  must be able to produce <b>any</b> of them.</p>
+
+  <h2><span class="n">2</span>The un-fakeable test — coverage</h2>
+  <div class="callout">
+    <p class="clabel">Why "how often is it valid" is not enough</p>
+    <p class="tight">A cheap classical mimic could just <b>memorize one</b> valid answer and output it every time —
+    scoring 100% on "is the answer valid?" while doing none of the actual computation. So the real gate is
+    <b>coverage</b>: the solver must spread its answers across the <b>entire</b> solution set. A one-answer mimic has
+    <b>zero</b> probability on the other valid answers and <b>fails</b>. Only a genuine solver covers the coset.</p>
+  </div>
+
+  <h2><span class="n">3</span>The measured result</h2>
+  <p>At <code>n=4</code> the coset has <b>four</b> valid answers out of 16 possible outputs (uniform-random floor =
+  4/16 = <b>0.25</b>). The quantum solver:</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>quantity</th><th>value</th><th>note</th></tr></thead>
+    <tbody>
+      <tr><td>P(valid answer)</td><td class="gd"><b>0.9017 ± 0.0015</b></td><td>437.8σ over the 0.25 floor</td></tr>
+      <tr><td>valid z = 0001</td><td>0.2237</td><td rowspan="4" style="vertical-align:middle">the four cover the<br>coset near-uniformly</td></tr>
+      <tr><td>valid z = 1000</td><td>0.2229</td></tr>
+      <tr><td>valid z = 0110</td><td>0.2308</td></tr>
+      <tr><td>valid z = 1111</td><td>0.2243</td></tr>
+      <tr><td>min valid (coverage)</td><td class="gd"><b>0.2229</b></td><td>the un-fakeable W3 gate</td></tr>
+      <tr><td>hardware depth</td><td>23</td><td>10 routed CZ · O(1) logical depth</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Pre-filed success band <code>[0.82, 0.93]</code> — <b>hit at the top</b>. Sentinels 0.985 / 0.957.</p>
+
+  <h2><span class="n">4</span>Pre-registered gates (frozen before flight)</h2>
+  <div class="gate">
+    <span class="g">W1_SOLVER</span><span class="r">P(valid) &gt; the uniform floor 0.25 by ≫5·SE. <span class="pass">PASS</span> (0.9017, 437.8σ).</span>
+    <span class="g">W2_MAJORITY</span><span class="r">A majority of shots land on a valid answer. <span class="pass">PASS</span> (90%).</span>
+    <span class="g">W3_COVERAGE</span><span class="r"><b>the un-fakeable one:</b> every valid answer gets real weight (a one-answer mimic fails). <span class="pass">PASS</span> (min 0.2229).</span>
+    <span class="g">G_SENT</span><span class="r">Readout sentinels healthy. <span class="pass">PASS</span> (0.985 / 0.957).</span>
+  </div>
+
+  <h2><span class="n">5</span>The through-line — hardness inherited from contextuality</h2>
+  <div class="callout good">
+    <p class="clabel">Contextuality → computational separation</p>
+    <p class="tight">Why <b>can't</b> a classical shallow circuit do this? The BGKT-2020 noise-robust construction
+    embeds the <b>magic-square game</b> — the same Peres–Mermin <b>contextuality</b> the museum certifies at 196σ
+    (<b>F106</b>). The classical hardness of the shallow circuit is <b>inherited</b> from the impossibility of a
+    non-contextual value assignment. The foundational no-go (contextuality) and the computational advantage
+    (shallow-circuit separation) are <b>the same fact</b>, seen twice — the campaign's through-line, closed end to end.</p>
+  </div>
+
+  <h2><span class="n">6</span>Scope &amp; caveats</h2>
+  <ul>
+    <li><b>Asymptotic separation, not on-chip.</b> (See the fence above.) The n=4 result is a <b>fidelity</b>
+    demonstration of the solver; the classical impossibility is a theorem about the large-n limit.</li>
+    <li><b>A fidelity number, not a beaten bound.</b> At n=4 there is no finite classical bound being crossed — 0.9017
+    measures how well the constant-depth circuit runs, and coverage proves it isn't a one-answer trick.</li>
+    <li><b>Textbook priors credited.</b> Bravyi–Gosset–König (2018) for the separation; BGKT (2020) for the
+    noise-robust / contextuality construction. The contribution is the frozen, coverage-gated hardware run.</li>
+  </ul>
+
+  <h2><span class="n">7</span>Provenance</h2>
+  <ul>
+    <li><b>Grade file:</b> <code>results/exp127hw_hw_results.json</code> · <b>Job:</b> d9amnlvu62qs738o8nt0</li>
+    <li><b>Groundwork:</b> <code>experiments/exp127-bgk-shallow-advantage-groundwork-whisper-c4666.md</code> · sim finding <code>…-sim-finding-whisper-c4673.md</code></li>
+    <li><b>Backend:</b> ibm_marrakesh (Heron r2) · <b>Depth:</b> 23 hardware / O(1) logical · <b>10 routed CZ</b></li>
+    <li><b>Through-line:</b> F106 (magic-square contextuality, 196σ) — the inherited hardness · complement to F54 (deep-circuit wall)</li>
+  </ul>
+
+  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+
+  <div class="foot">
+    <span>MEASURED · <b style="color:var(--cyan)">F113</b> · job d9amnlvu62qs738o8nt0 · ibm_marrakesh</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>

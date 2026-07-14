@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Shallow-Circuit Solver — a constant-depth quantum advantage | The Quantum Museum</title>
+<meta name="description" content="A constant-depth quantum circuit solves the 2D Hidden Linear Function that no classical shallow circuit can — unconditionally. On silicon (n=4): P(valid)=0.9017 (437.8σ over the 0.25 floor), covering all four valid answers near-uniformly, where a one-answer classical mimic fails the coverage test. Hardness inherited from contextuality (F106). Real hardware (F113, job d9amnlvu62qs738o8nt0).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(58% 60% at 28% 0%, color-mix(in srgb,var(--cyan) 17%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.4vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 16px; }
+
+  .fence { background: color-mix(in srgb, var(--amber) 9%, transparent); border:1px solid color-mix(in srgb,var(--amber) 40%,var(--edge));
+    border-radius:12px; padding:14px 17px; margin:8px 0 18px; max-width:70ch; }
+  .fence .fl { font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--amber); font-weight:700; margin:0 0 4px; }
+  .fence p { margin:0; color:var(--ink-2); font-size:13.5px; }
+  .fence b { color: var(--ink); }
+
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
+  .pcard b { color: var(--ink); }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13.5px; font-weight:600;
+    text-decoration:none; color:var(--bg); background:var(--cyan); border:1.5px solid var(--cyan);
+    border-radius:11px; padding:10px 18px; transition:transform .12s, box-shadow .12s; box-shadow:var(--shadow); }
+  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--cyan) 35%,transparent); }
+  .specbtn .arw { font-size:15px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--cyan); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:70ch; }
+
+  .selector { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:20px; }
+  .selector .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .cbtn { font-family:var(--mono); font-size:12.5px; font-weight:600; padding:9px 13px; border-radius:10px;
+    border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; transition:all .12s; }
+  .cbtn:hover { border-color:var(--cyan); }
+  .cbtn.on { background:var(--cyan); color:var(--bg); border-color:var(--cyan); }
+  .cbtn.on[data-s="cheat"] { background:var(--amber); border-color:var(--amber); }
+  .cbtn.on[data-s="random"] { background:var(--ink-3); border-color:var(--ink-3); }
+
+  .solve { display:grid; grid-template-columns:1fr 260px; gap:clamp(16px,4vw,30px); align-items:start; }
+  @media (max-width:680px){ .solve { grid-template-columns:1fr; } }
+
+  /* bar chart */
+  .chart { }
+  .chart-cap { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-bottom:8px; }
+  .bars { display:flex; gap:8px; align-items:flex-end; height:170px; border-bottom:2px solid var(--edge-2); padding-bottom:0; }
+  .bcol { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
+  .bval { font-family:var(--mono); font-size:11px; font-weight:700; margin-bottom:3px; color:var(--ink-2); }
+  .bfill { width:100%; border-radius:5px 5px 0 0; transition:height .4s cubic-bezier(.34,1.15,.5,1), background .3s; min-height:2px; }
+  @media (prefers-reduced-motion: reduce){ .bfill { transition:none; } }
+  .bcol.valid .bfill { background:linear-gradient(180deg,var(--cyan),color-mix(in srgb,var(--cyan) 55%,transparent)); }
+  .bcol.valid.cheatcol .bfill { background:linear-gradient(180deg,var(--amber),color-mix(in srgb,var(--amber) 55%,transparent)); }
+  .bcol.invalid .bfill { background:color-mix(in srgb,var(--ink-3) 45%,transparent); }
+  .blab { font-family:var(--mono); font-size:10px; color:var(--ink-3); margin-top:6px; text-align:center; }
+  .blab.v { color:var(--cyan); } .blab.inv { color:var(--ink-3); }
+  .floor-note { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-top:8px; }
+
+  /* gate cards */
+  .gates { display:flex; flex-direction:column; gap:12px; }
+  .gcard { border:1px solid var(--edge); border-radius:12px; padding:13px 15px; background:var(--surface-2); }
+  .gcard .gt { font-family:var(--mono); font-size:11px; letter-spacing:.05em; color:var(--ink-3); margin-bottom:4px; }
+  .gcard .gv { font-family:var(--mono); font-size:20px; font-weight:720; letter-spacing:-.01em; }
+  .gcard .gsub { font-family:var(--mono); font-size:11px; color:var(--ink-3); margin-top:2px; }
+  .gcard .gbadge { display:inline-block; font-family:var(--mono); font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; margin-top:8px; }
+  .gbadge.pass { color:var(--good); background:color-mix(in srgb,var(--good) 13%,transparent); }
+  .gbadge.fail { color:var(--bad); background:color-mix(in srgb,var(--bad) 13%,transparent); }
+  .gcard.pass .gv { color:var(--good); } .gcard.fail .gv { color:var(--bad); }
+
+  .verdict { margin-top:18px; text-align:center; font-size:14px; color:var(--ink-2); }
+  .verdict b { color:var(--ink); } .verdict .ok { color:var(--good); font-weight:700; } .verdict .no { color:var(--bad); font-weight:700; }
+
+  /* panel B stats */
+  .stats { display:flex; flex-wrap:wrap; gap:12px; }
+  .stat { flex:1; min-width:120px; border:1px solid var(--edge); border-radius:12px; padding:14px 16px; background:var(--surface-2); text-align:center; }
+  .stat .sv { font-family:var(--mono); font-size:clamp(20px,4vw,26px); font-weight:720; letter-spacing:-.02em; color:var(--cyan); }
+  .stat .sl { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-top:3px; }
+  .depth-note { margin-top:16px; font-size:13.5px; color:var(--ink-2); max-width:66ch; }
+  .depth-note b { color:var(--ink); }
+
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; }
+  .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; }
+  .links-row { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
+  .deeper { display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:12.5px; font-weight:600;
+    text-decoration:none; border:1.5px solid var(--amber); color:var(--amber); border-radius:9px; padding:7px 13px; }
+  .deeper:hover { background: color-mix(in srgb, var(--amber) 12%, transparent); }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--cyan); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
+  .badge-row .sp2 { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing IV · The Advantage Ladder</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">A constant-depth quantum advantage · Bravyi–Gosset–König</p>
+    <h1>A circuit too <span class="hl">shallow</span> for any classical machine to match.</h1>
+    <p class="lede">Some quantum advantages rest on unproven guesses (like "P ≠ NP"). This one doesn't. There is a
+    problem a quantum circuit of <b>fixed, shallow depth</b> can solve that <b>no classical shallow circuit can</b> —
+    proven outright. We ran it on silicon and it solved the puzzle 90% of the time, spreading its answers across the
+    <b>whole</b> solution set — the part a classical cheat can't fake. Every number is measured hardware.</p>
+
+    <div class="fence">
+      <p class="fl">⚠ Honesty fence — read this first</p>
+      <p>This does <b>not</b> prove the complexity separation on the chip. That separation is <b>asymptotic</b> — it
+      lives in the large-size limit, and the <b>theorem</b> carries it. What the hardware shows is the concrete
+      instance: a constant-depth circuit solving the <code>n=4</code> puzzle at <b>90% fidelity</b>, full coverage,
+      <b>O(1) depth</b>. The honest complement to the deep-circuit wall.</p>
+    </div>
+
+    <div class="primer">
+      <div class="pcard">
+        <h4>What's a constant-depth circuit?</h4>
+        <p><b>Depth</b> = how many layers of gates run one after another. <b>Constant</b> depth means a <b>fixed</b>
+        number of layers no matter how big the problem — everything happens in a few parallel rounds. Shallow, fast,
+        and hard to beat classically at this depth.</p>
+      </div>
+      <div class="pcard">
+        <h4>Why is coverage the real test?</h4>
+        <p>The puzzle has <b>four</b> valid answers. A classical cheat could memorize <b>one</b> and output it every
+        time — acing "is it valid?" while computing nothing. So the real gate is <b>coverage</b>: produce <b>all</b>
+        four. Only a genuine solver can.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
+      <span class="scope">An <b>unconditional</b> advantage genre — but scoped: n=4 fidelity, the theorem carries the asymptotics.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — Two tests, three strategies</p>
+    <h2>Solve the puzzle — and prove you're not a one-answer cheat</h2>
+    <p class="sub">The 2D Hidden Linear Function at n=4 has <b>four</b> valid answers out of 16 possible outputs (so a
+    random guess is valid 25% of the time). Pick a strategy and watch two gates: <b>W1</b> — is it valid more than
+    chance? — and <b>W3 coverage</b> — does it produce <b>all four</b> valid answers? Only the real quantum solver
+    passes both.</p>
+
+    <div class="selector" role="group" aria-label="Choose a strategy">
+      <span class="lbl">strategy:</span>
+      <button class="cbtn on" data-s="quantum" type="button">Quantum solver</button>
+      <button class="cbtn" data-s="random" type="button">Random guess</button>
+      <button class="cbtn" data-s="cheat" type="button">One-answer cheat</button>
+    </div>
+
+    <div class="solve">
+      <div class="chart">
+        <div class="chart-cap">output distribution — 4 valid answers (cyan) + everything else</div>
+        <div class="bars" id="bars"></div>
+        <div class="floor-note" id="floorNote"></div>
+      </div>
+      <div class="gates">
+        <div class="gcard" id="g1">
+          <div class="gt">W1 · SOLVER</div>
+          <div class="gv" id="g1v">0.90</div>
+          <div class="gsub">P(valid) vs floor 0.25</div>
+          <div class="gbadge" id="g1b">PASS</div>
+        </div>
+        <div class="gcard" id="g3">
+          <div class="gt">W3 · COVERAGE</div>
+          <div class="gv" id="g3v">4/4</div>
+          <div class="gsub">valid answers produced</div>
+          <div class="gbadge" id="g3b">PASS</div>
+        </div>
+      </div>
+    </div>
+    <p class="verdict" id="verdict"></p>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — Shallow, and unconditional</p>
+    <h2>Fixed depth, no matter how big the problem grows</h2>
+    <p class="sub">A classical circuit needs <b>growing</b> depth to keep up — but a shallow classical circuit
+    provably <b>can't</b> keep up at all (as the problem grows). The quantum circuit's depth stays <b>O(1)</b>. Here's
+    the run that certified it.</p>
+    <div class="stats">
+      <div class="stat"><div class="sv">0.9017</div><div class="sl">P(valid answer)</div></div>
+      <div class="stat"><div class="sv">437.8σ</div><div class="sl">over the 0.25 floor</div></div>
+      <div class="stat"><div class="sv">23</div><div class="sl">hardware depth · 10 CZ</div></div>
+      <div class="stat"><div class="sv">O(1)</div><div class="sl">logical depth · fixed in n</div></div>
+    </div>
+    <p class="depth-note">The separation is <b>unconditional</b> — it needs no unproven assumption like P ≠ NP. Bravyi,
+    Gosset &amp; König (2018) proved a quantum constant-depth circuit outright beats every classical one on this
+    problem, in the large-size limit. <b>The scope, again:</b> at n=4 this is a fidelity demonstration of the solver;
+    the theorem carries the asymptotic hardness.</p>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — The through-line</p>
+    <h2>Why classical circuits can't: it's contextuality again</h2>
+    <p class="sub">The deepest thread in the whole campaign closes here.</p>
+    <div class="receipts">
+      <div class="rc">
+        <h4>1 · Coverage is un-fakeable</h4>
+        <p>The one-answer cheat aces validity (100%) but produces only <b>1 of 4</b> valid answers — <b>failing
+        coverage</b>. The quantum solver produces all four at ~0.22 each. <span class="yes">You can't memorize your
+        way past coverage.</span></p>
+      </div>
+      <div class="rc">
+        <h4>2 · Hardness from contextuality</h4>
+        <p>Why <b>can't</b> a classical shallow circuit do this? The construction embeds the <b>magic-square game</b> —
+        the very <b>contextuality</b> the museum certifies at 196σ (F106). The no-go theorem and the computational
+        advantage are <span class="yes">the same fact, seen twice</span>.</p>
+      </div>
+      <div class="rc">
+        <h4>3 · No assumptions required</h4>
+        <p>Unlike most claimed quantum advantages, this one rests on <b>no unproven conjecture</b>. The classical
+        impossibility is a <b>theorem</b>, not a hope — which is what makes the constant-depth separation so unusual.</p>
+      </div>
+    </div>
+    <div class="links-row">
+      <a class="deeper" href="../magic-square/">The Magic Square — the contextuality it inherits →</a>
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet</a>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F113</span> · job <span class="sig">d9amnlvu62qs738o8nt0</span></span>
+    <span>ibm_marrakesh · 0.9017 · 437.8σ · full coset · O(1) depth</span>
+    <span class="sp2"></span>
+    <a href="./spec.html">Full Spec</a>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+
+    // ---- data kernel (F113 exp127hw, job d9amnlvu62qs738o8nt0) ----
+    var FLOOR = 0.25;
+    var ZLAB = ["0001","1000","0110","1111"];
+    var STRATS = {
+      quantum: { label:"Quantum solver", z:[0.2237,0.2229,0.2308,0.2243], inv:0.0983,
+        pvalid:0.9017, covered:4, w1:true, w3:true, cheat:false,
+        note:"<b>The genuine solver.</b> Valid <span class='ok'>90% of the time</span> — 437.8σ over chance — and it produces <b>all four</b> answers at ~0.22 each. <span class='ok'>Passes both gates.</span> Only a real constant-depth quantum circuit does this." },
+      random: { label:"Random guess", z:[0.0625,0.0625,0.0625,0.0625], inv:0.75,
+        pvalid:0.25, covered:4, w1:false, w3:true, cheat:false,
+        note:"<b>Guessing.</b> It technically hits all four valid answers — but only <b>25% of the time</b>, exactly the floor. <span class='no'>Fails W1:</span> no better than chance. Coverage without solving is worthless." },
+      cheat: { label:"One-answer cheat", z:[1.0,0,0,0], inv:0,
+        pvalid:1.0, covered:1, w1:true, w3:false, cheat:true,
+        note:"<b>The classical mimic.</b> It memorized one valid answer and outputs it every time — acing validity (100%!) while computing <b>nothing</b>. <span class='no'>Fails W3 coverage:</span> only 1 of 4 answers. This is exactly why coverage is the un-fakeable gate." }
+    };
+    console.assert(STRATS.quantum.w1 && STRATS.quantum.w3 && STRATS.cheat.w1 && !STRATS.cheat.w3 && !STRATS.random.w1, "gate logic");
+
+    var barsEl=document.getElementById("bars"), floorNote=document.getElementById("floorNote"),
+        g1=document.getElementById("g1"), g1v=document.getElementById("g1v"), g1b=document.getElementById("g1b"),
+        g3=document.getElementById("g3"), g3v=document.getElementById("g3v"), g3b=document.getElementById("g3b"),
+        verdict=document.getElementById("verdict"), btns=document.querySelectorAll(".cbtn");
+
+    function render(key){
+      var s=STRATS[key];
+      // bars: 4 valid + 1 invalid aggregate, scaled to [0,1]
+      var html="";
+      s.z.forEach(function(p,i){
+        html+='<div class="bcol valid'+(s.cheat?' cheatcol':'')+'">'+
+          '<div class="bval">'+(p>=0.001?p.toFixed(p>=0.5?2:4).replace(/0+$/,'').replace(/\.$/,''):'0')+'</div>'+
+          '<div class="bfill" style="height:'+(p*100)+'%"></div>'+
+          '<div class="blab v">'+ZLAB[i]+'</div></div>';
+      });
+      html+='<div class="bcol invalid">'+
+        '<div class="bval">'+s.inv.toFixed(s.inv>=0.5?2:4).replace(/0+$/,'').replace(/\.$/,'')+'</div>'+
+        '<div class="bfill" style="height:'+(s.inv*100)+'%"></div>'+
+        '<div class="blab inv">invalid<br>(12 others)</div></div>';
+      barsEl.innerHTML=html;
+      floorNote.innerHTML="valid = one of the 4 answers in the solution set · random floor = 4⁄16 = <b>0.25</b>";
+      // gates
+      g1v.textContent=s.pvalid.toFixed(s.pvalid>=0.9995?0:2);
+      g1.className="gcard "+(s.w1?"pass":"fail"); g1b.className="gbadge "+(s.w1?"pass":"fail"); g1b.textContent=s.w1?"PASS":"FAIL";
+      g3v.textContent=s.covered+"/4";
+      g3.className="gcard "+(s.w3?"pass":"fail"); g3b.className="gbadge "+(s.w3?"pass":"fail"); g3b.textContent=s.w3?"PASS":"FAIL";
+      verdict.innerHTML=s.note;
+      btns.forEach(function(b){ var on=b.dataset.s===key; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
+    }
+    btns.forEach(function(b){ b.addEventListener("click", function(){ render(b.dataset.s); }); });
+    render("quantum");
+  })();
+</script>
+</body>
+</html>
