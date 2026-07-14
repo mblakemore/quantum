@@ -27,6 +27,11 @@
   .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
     color: var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
   .scope b { color: var(--amber); font-weight:600; }
+  .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13.5px; font-weight:600;
+    text-decoration:none; color:#fff; background:var(--violet); border:1.5px solid var(--violet);
+    border-radius:11px; padding:10px 18px; transition:transform .12s, box-shadow .12s; box-shadow:var(--shadow); }
+  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--violet) 35%,transparent); }
+  .specbtn .arw { font-size:15px; }
 
   .panel { background: var(--surface); border:1px solid var(--edge); border-radius:16px;
     padding: clamp(18px,3vw,26px); margin-top: 22px; box-shadow: var(--shadow); }
@@ -108,6 +113,7 @@
     post-selected time loop on IBM Heron and tried to create the paradox. The timeline pushed back —
     and left a fingerprint no ordinary post-selection can fake. Every number below is measured hardware data.</p>
     <span class="scope">MODEL: Lloyd 2011 P-CTC — the post-selection <b>is</b> the timeline. Not literal time travel.</span>
+    <div style="margin-top:16px;"><a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a></div>
   </header>
 
   <!-- PANEL 1 -->

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full Spec Sheet — The QPU Weather Report (F81 lineage) | The Quantum Museum</title>
+<meta name="description" content="Methodology sheet for the QPU Weather Report: a live drift nowcast (quiet-qubit map, live-readout drift, shallow/deep mirror ladder, sentinel-vs-vendor forecast, GO/NO-GO) that beat the vendor's deep-circuit forecast by 27% on its validation window. Instrument, not a quantum speedup. Tool tools/qpu_weather.py, job d9ao2hug26ic73df0iag, ibm_marrakesh.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .doc { max-width: 840px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 90px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .spec-head { padding: clamp(16px,3vw,30px) 0 6px; border-bottom:1px solid var(--edge); margin-bottom:8px; }
+  .kicker { font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
+  .spec-head h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.08;
+    font-size:clamp(26px,4.6vw,40px); margin:10px 0 12px; text-wrap:balance; }
+  .spec-head h1 .hl { color: var(--cyan); }
+  .idline { display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--mono); font-size:12px; color:var(--ink-3); margin-bottom:10px; }
+  .idline b { color: var(--ink-2); font-weight:600; }
+  .verdict-chip { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:12px;
+    color:var(--cyan); border:1px solid color-mix(in srgb,var(--cyan) 45%,var(--edge)); border-radius:999px; padding:5px 13px; font-weight:600; }
+
+  .doc h2 { font-family:var(--mono); font-size:clamp(16px,2.4vw,20px); letter-spacing:-.01em; margin:38px 0 8px;
+    padding-top:14px; border-top:1px solid var(--edge); }
+  .doc h2 .n { color: var(--cyan); font-weight:720; margin-right:10px; }
+  .doc h3 { font-size:15px; margin:20px 0 6px; color: var(--ink); }
+  .doc p { color: var(--ink-2); max-width:72ch; margin:9px 0; }
+  .doc p.tight { margin:4px 0; }
+  .doc ul { color: var(--ink-2); max-width:72ch; padding-left:20px; }
+  .doc li { margin:6px 0; }
+  .doc b { color: var(--ink); }
+  .doc code { font-family:var(--mono); font-size:.9em; background:var(--surface-2);
+    border:1px solid var(--edge); border-radius:5px; padding:1px 6px; color:var(--ink); }
+  .doc a { color: var(--cyan); }
+
+  .callout { background:var(--surface); border:1px solid var(--edge); border-left:3px solid var(--cyan);
+    border-radius:10px; padding:16px 18px; margin:16px 0; }
+  .callout.good { border-left-color: var(--good); }
+  .callout.warn { border-left-color: var(--amber); }
+  .callout .clabel { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin:0 0 4px; }
+
+  .tbl-wrap { overflow-x:auto; margin:14px 0; border:1px solid var(--edge); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; min-width:520px; }
+  th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
+  th:first-child, td:first-child { text-align:left; }
+  thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
+  tbody tr:last-child td { border-bottom:none; }
+  td.win { color: var(--cyan); } .edge { color: var(--good); font-weight:600; }
+  .gate { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-family:var(--mono); font-size:13px; margin:10px 0; }
+  .gate .g { color:var(--cyan); font-weight:600; }
+  .gate .r { color:var(--ink-2); }
+  .pass { color: var(--good); font-weight:600; }
+
+  .foot { margin-top:44px; padding-top:16px; border-top:1px solid var(--edge); font-family:var(--mono);
+    font-size:11.5px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; }
+  .foot a { color: var(--ink-2); } .foot a:hover { color: var(--cyan); } .foot .sp { flex:1; }
+  .backlink { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    border:1.5px solid var(--cyan); color:var(--cyan); border-radius:10px; padding:9px 16px; margin-top:20px; text-decoration:none; }
+  .backlink:hover { background: color-mix(in srgb,var(--cyan) 12%,transparent); }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <a href="./">· QPU Weather Report exhibit</a>
+    <span class="wingtag">· Wing V · The Instruments</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="spec-head">
+    <p class="kicker">Full Specification Sheet · Methodology &amp; Sources</p>
+    <h1>A weather service for a chip whose <span class="hl">quality has weather</span></h1>
+    <div class="idline">
+      <span><b>Nature</b> Instrument (F81 lineage)</span>
+      <span><b>Tool</b> tools/qpu_weather.py</span>
+      <span><b>Backend</b> ibm_marrakesh (Heron r2)</span>
+      <span><b>Validation job</b> d9ao2hug26ic73df0iag</span>
+      <span><b>Cycle</b> C4681 · Whisper</span>
+    </div>
+    <span class="verdict-chip">◇ SINGLE-WINDOW VALIDATED · scheduling edge, not a quantum speedup</span>
+  </header>
+
+  <p>This is the methodology sheet behind the interactive exhibit. It describes <b>how the weather service works</b>
+  and what it measured on its one validation window. The exhibit's headline evidence base (the window lottery, the
+  calibration-age null, the published-T1 error band) is drawn from the campaign's F81/F84 findings; the live nowcast
+  numbers below are from the service's validation job <code>d9ao2hug26ic73df0iag</code> and are attributed to their
+  source files in §5. Nothing here is invented for display.</p>
+
+  <h2><span class="n">1</span>What this is</h2>
+  <p>Quantum computers have <b>weather</b>: the same circuits, on the same qubits, can perform very differently hours
+  apart, and the vendor's published calibration data does not forecast the swing. The exhibit's evidence base:</p>
+  <ul>
+    <li><b>The window lottery (F81).</b> Identical deep circuits on identical qubits, 11 hours apart, swung the
+    estimator error <b>500×</b> — <code>0.154 → 0.0003</code>. QAE on today's hardware is a calibration-window lottery.</li>
+    <li><b>Calibration age does not predict it (F84).</b> A pre-registered, frozen-Spearman test came back <b>NULL</b>;
+    quality clusters by queue-drain episode, not by how stale the calibration is.</li>
+    <li><b>The published T1 is a stale snapshot.</b> Live T1 vs published across ten back-computed values over four days
+    ran <b>0–115%</b> off — right one day, ~2× off the next.</li>
+  </ul>
+  <p>Forecasting fails; <b>detection works</b>. The QPU Weather Report is the instrument that operationalizes that
+  lesson: a cheap live <b>nowcast</b> of a chip's current quality that predicts how well a deep circuit will run
+  <b>right now</b>, benchmarked against the vendor's published forecast. It is a <b>scheduling oracle</b> — a
+  different axis from any advantage result in the campaign.</p>
+
+  <h2><span class="n">2</span>How the weather service works</h2>
+  <p>The tool runs in three modes: <code>--scan</code> (a free vendor-only report), <code>--nowcast</code> (fly a
+  cheap sentinel and grade the window), and <code>--report &lt;job&gt;</code> (grade a completed job). A nowcast has
+  four instruments:</p>
+  <ul>
+    <li><b>Quiet-qubit map.</b> Best-placement line chosen from calibration — the validation window selected the line
+    <code>[0, 1, 2, 3]</code>.</li>
+    <li><b>Live-readout drift.</b> Measure the actual SPAM error now: <code>|0..0⟩ = 0.9125</code>,
+    <code>|1..1⟩ = 0.9305</code>, against the published mean readout error <code>0.0067</code>.</li>
+    <li><b>Mirror ladder (shallow / deep).</b> A mirror circuit at two depths reads live fidelity:
+    <code>shallow (6 CZ) P0 = 0.9070</code> and <code>deep (24 CZ) P0 = 0.7983</code>.</li>
+    <li><b>Nowcast vs vendor forecast, then GO/NO-GO.</b> The SPAM-corrected sentinel nowcasts the deep fidelity and is
+    compared to the vendor's per-gate-product forecast; the verdict gates on a separation <b>threshold 0.30</b>.</li>
+  </ul>
+  <div class="callout">
+    <p class="clabel">The report it produced (validation window, ibm_marrakesh)</p>
+    <p class="tight">Quiet-qubit line <code>[0,1,2,3]</code> · nowcast deep P0 → <b>0.8907</b> (|err| 0.0924) ·
+    vendor forecast deep P0 → <b>0.9245</b> (|err| 0.1262) · measured deep P0 <b>0.7983</b> · forecast winner
+    <b>SENTINEL</b> (closer to measured) · verdict <b class="pass">GO for deep work</b> (threshold 0.30).</p>
+  </div>
+
+  <h2><span class="n">3</span>What it shows — two live wins</h2>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>quantity</th><th>vendor / published</th><th>sentinel nowcast</th><th>measured truth</th></tr></thead>
+    <tbody>
+      <tr><td>per-qubit readout error</td><td>0.67%</td><td class="win">~2.3% <span class="edge">▲</span></td><td>drift live</td></tr>
+      <tr><td>deep (24 CZ) mirror fidelity</td><td>0.9245 <small>(|err| 0.126)</small></td><td class="win">0.8907 <small>(|err| 0.092)</small> <span class="edge">▲</span></td><td>0.7983</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <ul>
+    <li><b>Readout drift, caught clean.</b> Live <code>P(|0000⟩ read as 0000) = 0.9125</code> implies ~<b>2.3%</b>
+    per-qubit readout error versus the vendor's published <b>0.67%</b> — a <b>3.4× understatement</b> of this window,
+    measured in ~2 q-sec.</li>
+    <li><b>Deep-circuit nowcast beats the vendor by 27%.</b> The vendor's per-gate-product forecast (0.9245)
+    over-predicts the actual 24-CZ fidelity (0.7983) — the F81 optimism pattern. The SPAM-corrected sentinel nowcast
+    (0.8907) lands closer: error <b>0.092 vs 0.126</b>, a <b>27%</b> reduction.</li>
+  </ul>
+
+  <h2><span class="n">4</span>Scope &amp; honest limits</h2>
+  <ul>
+    <li><b>Single window.</b> This flight validates the <b>mechanism</b> on one window (live drift detection + a nowcast
+    that beats the published forecast). The full "out-predicts the vendor <b>across drift</b>" claim is F81's (banked,
+    multi-window). A standing multi-window deployment would rebuild that drift-statistics result directly — <b>not
+    claimed here</b>.</li>
+    <li><b>Both forecasts still over-predict the deep fidelity.</b> Nowcast 0.891 and vendor 0.924 both sit above the
+    measured 0.798 — a single shallow probe can't fully capture the non-linear/correlated-error decay at 24 CZ. A
+    multi-point depth fit (mirror at K=1,2,3) would sharpen it; flagged, not yet done.</li>
+    <li><b>Scheduling edge, not a quantum speedup.</b> The value is better placement, live GO/NO-GO, and drift-aware
+    timing — a different axis than any of the campaign's advantage results. No speedup is claimed.</li>
+  </ul>
+
+  <h2><span class="n">5</span>Sources &amp; provenance</h2>
+  <ul>
+    <li><b>Exhibit evidence base (§1):</b> the 500× window lottery, the F84 calibration-age NULL, and the 0–115% T1
+    band are the exhibit page's own numbers — see <code>demo/weather/index.html</code>, friction reports 01–02, and the
+    F81/F84 rows of <code>docs/campaign-arcs.md</code>.</li>
+    <li><b>Service mechanism &amp; live nowcast numbers (§2–§3):</b> quiet-qubit line, live readout, mirror ladder,
+    nowcast/vendor forecasts, the 27% win, and the 3.4× readout understatement are the validation-job results, reported
+    in <code>docs/qpu-weather-service-whisper-c4681.md</code> and <code>results/qpu_weather_report.json</code>. They are
+    <b>not</b> printed on the exhibit page; they are the service doc's, cited here.</li>
+    <li><b>Tool:</b> <code>tools/qpu_weather.py</code> · <b>Validation job:</b> d9ao2hug26ic73df0iag (ibm_marrakesh, Heron r2)</li>
+    <li><b>Tier:</b> tool/docs-tier — a standing multi-window deployment producing a drift-statistics result would earn the F-number (per the numbering discipline). This sheet documents the instrument, not a new finding.</li>
+  </ul>
+
+  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+
+  <div class="foot">
+    <span>INSTRUMENT · <b style="color:var(--cyan)">F81 lineage</b> · job d9ao2hug26ic73df0iag · ibm_marrakesh</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>

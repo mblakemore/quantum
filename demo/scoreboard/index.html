@@ -159,6 +159,13 @@
   footer { margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--hair);
     font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: .02em;
     display: flex; gap: 8px 18px; flex-wrap: wrap; }
+
+  .specbtn { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono);
+    font-size: 13.5px; font-weight: 600; text-decoration: none; color: #fff; background: #1f8f89;
+    border: 1.5px solid #1f8f89; border-radius: 11px; padding: 10px 18px; margin: 16px 0 4px;
+    box-shadow: var(--shadow); transition: transform .12s, box-shadow .12s; }
+  .specbtn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(31,143,137,.35); }
+  .specbtn .arw { font-size: 15px; }
 </style>
 
 <div class="wrap">
@@ -168,6 +175,8 @@
   <h1>Have we found quantum advantage?</h1>
   <p class="verdict"><b>Yes — measurably, on four of five scoreboards</b>, against exact theorem ceilings cleared by <span class="sig">21σ to 341σ</span>.</p>
   <p class="verdict">On the fifth — computational — the wall against a brute-force speedup is <b>measured</b> (F54), and the constant-depth solver that the only depth-separation theorem is built on now <b>runs on silicon at 90%</b>. No shortcut is claimed that the hardware doesn't hold.</p>
+
+  <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
 
   <hr class="rule" />
   <p class="sect-label">The five scoreboards</p>

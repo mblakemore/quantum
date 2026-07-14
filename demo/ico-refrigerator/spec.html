@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full Spec Sheet — The ICO Refrigerator (F86 / F88 / F95) | The Quantum Museum</title>
+<meta name="description" content="Complete specification for the ICO Refrigerator: a superposition of the order of two thermalizing channels splits a target colder/hotter by control outcome — forbidden to any definite-order process (causal value 0). Split Δ=0.1796 at 21.1σ (F86), confirmed with a native T1 working fluid (F88), and a full engine cycle extracting 0.0340 E/run with an honest W1-loss (F95). Job d98vqfsqp3as739tfg0g, ibm_marrakesh.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .doc { max-width: 840px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 90px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .spec-head { padding: clamp(16px,3vw,30px) 0 6px; border-bottom:1px solid var(--edge); margin-bottom:8px; }
+  .kicker { font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
+  .spec-head h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.08;
+    font-size:clamp(26px,4.6vw,40px); margin:10px 0 12px; text-wrap:balance; }
+  .spec-head h1 .hl { color: var(--cyan); }
+  .idline { display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--mono); font-size:12px; color:var(--ink-3); margin-bottom:10px; }
+  .idline b { color: var(--ink-2); font-weight:600; }
+  .verdict-chip { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:12px;
+    color:var(--good); border:1px solid color-mix(in srgb,var(--good) 45%,var(--edge)); border-radius:999px; padding:5px 13px; font-weight:600; }
+
+  .doc h2 { font-family:var(--mono); font-size:clamp(16px,2.4vw,20px); letter-spacing:-.01em; margin:38px 0 8px;
+    padding-top:14px; border-top:1px solid var(--edge); }
+  .doc h2 .n { color: var(--cyan); font-weight:720; margin-right:10px; }
+  .doc h3 { font-size:15px; margin:20px 0 6px; color: var(--ink); }
+  .doc p { color: var(--ink-2); max-width:72ch; margin:9px 0; }
+  .doc p.tight { margin:4px 0; }
+  .doc ul { color: var(--ink-2); max-width:72ch; padding-left:20px; }
+  .doc li { margin:6px 0; }
+  .doc b { color: var(--ink); }
+  .doc code { font-family:var(--mono); font-size:.9em; background:var(--surface-2);
+    border:1px solid var(--edge); border-radius:5px; padding:1px 6px; color:var(--ink); }
+  .doc a { color: var(--cyan); }
+
+  .callout { background:var(--surface); border:1px solid var(--edge); border-left:3px solid var(--cyan);
+    border-radius:10px; padding:16px 18px; margin:16px 0; }
+  .callout.good { border-left-color: var(--good); }
+  .callout.warn { border-left-color: var(--amber); }
+  .callout .clabel { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin:0 0 4px; }
+
+  .tbl-wrap { overflow-x:auto; margin:14px 0; border:1px solid var(--edge); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; min-width:600px; }
+  th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
+  th:first-child, td:first-child { text-align:left; }
+  thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
+  tbody tr:last-child td { border-bottom:none; }
+  td.king { color: var(--cyan); } .edge { color: var(--good); font-weight:600; } .loss { color: var(--amber); font-weight:600; }
+  .gate { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-family:var(--mono); font-size:13px; margin:10px 0; }
+  .gate .g { color:var(--cyan); font-weight:600; }
+  .gate .r { color:var(--ink-2); }
+  .pass { color: var(--good); font-weight:600; } .fail { color: var(--amber); font-weight:600; }
+
+  .foot { margin-top:44px; padding-top:16px; border-top:1px solid var(--edge); font-family:var(--mono);
+    font-size:11.5px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; }
+  .foot a { color: var(--ink-2); } .foot a:hover { color: var(--cyan); } .foot .sp { flex:1; }
+  .backlink { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    border:1.5px solid var(--cyan); color:var(--cyan); border-radius:10px; padding:9px 16px; margin-top:20px; text-decoration:none; }
+  .backlink:hover { background: color-mix(in srgb,var(--cyan) 12%,transparent); }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <a href="./">· ICO Refrigerator exhibit</a>
+    <span class="wingtag">· Wing I · The Causal Switch</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="spec-head">
+    <p class="kicker">Full Specification Sheet</p>
+    <h1>Cooling from the <span class="hl">order</span> of operations — and a full engine cycle</h1>
+    <div class="idline">
+      <span><b>Findings</b> F86 / F88 / F95</span>
+      <span><b>Experiment</b> Exp108 series (split · native fluid · engine loop)</span>
+      <span><b>Backend</b> ibm_marrakesh (Heron r2)</span>
+      <span><b>Job</b> d98vqfsqp3as739tfg0g</span>
+    </div>
+    <span class="verdict-chip">✓ ICO REFRIGERATION CERTIFIED — split 21.1σ over causal 0 · full engine cycle runs (W1-loss kept)</span>
+  </header>
+
+  <p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page
+  is drawn from here; every number here is drawn from the frozen grade files <code>results/exp108_grade.json</code> and
+  siblings, and the campaign finding rows for F86 / F88 / F95. Nothing is hand-tuned for display.</p>
+
+  <h2><span class="n">1</span>The idea, in plain language</h2>
+  <p>Send a qubit through two channels that each drag it toward a fixed bath temperature. Normally the <b>order</b> in
+  which the two channels act is fixed. Here it is put into a <b>quantum superposition of both orders</b> at once — an
+  indefinite causal order (ICO), realised as a <b>quantum switch</b> controlled by an ancilla. Read the control qubit,
+  and the target comes out <b>colder</b> or <b>hotter</b> than either bath it touched, depending on the outcome.</p>
+  <div class="callout">
+    <p class="clabel">Why this is forbidden to ordered physics</p>
+    <p class="tight">Every <b>definite-order</b> composition of two constant-to-<code>τ</code> channels outputs
+    <code>τ</code>, uncorrelated with the control — so a definite/mixed/dynamical process gives a split of
+    <b>exactly Δ = 0</b>. Any split at all is the signature of indefinite causal order. This is the Felce–Vedral
+    refrigeration resource (PRL 125, 070603); the contribution here is the frozen-court <b>measurement on silicon</b>.</p>
+  </div>
+
+  <h2><span class="n">2</span>What we measure — and the method</h2>
+  <p>The target's excited-state population <code>p₁</code> is the thermometer (higher <code>p₁</code> = hotter). We
+  read it in each control branch and take the <b>split</b> <code>Δ = p₁|₋ − p₁|₊</code> against the causal value 0. The
+  baths are two thermalizing channels with <code>τ = diag(0.75, 0.25)</code>. Three progressively harder tests:</p>
+  <ul>
+    <li><b>F86 — the split.</b> Basis-prepared reservoirs; certify <code>Δ &gt; 0</code> against the exact causal 0, with thermalization null arms confirming the baths reach <code>τ</code>.</li>
+    <li><b>F88 — native working fluid.</b> Re-fly with the reservoirs mixed by the chip's <b>own T1 decay</b> (X + live-calibrated delays) instead of classical basis-prep pooling — the working fluid is free.</li>
+    <li><b>F95 — the engine.</b> A complete loop: certify passive baths in, charge the target above the halfway line, extract work, and re-certify the output passive so the cycle can repeat. Demon books audited on-chip.</li>
+  </ul>
+
+  <h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
+  <div class="gate">
+    <span class="g">SPLIT (F86)</span><span class="r"><code>Δ &gt; 0</code> vs the exact causal value, null arms thermalize. <span class="pass">PASS</span> — <code>Δ = 0.1796 ± 0.0085</code>, <b>21.1σ</b>; nulls 0.2496 / 0.2492.</span>
+    <span class="g">NATIVE (F88)</span><span class="r">+ branch colder than the <b>coldest</b> reservoir under the native T1 fluid. <span class="pass">PASS</span> — <code>Δ = 0.1645 ± 0.0127</code>, <b>5σ</b>.</span>
+    <span class="g">W2 (F95)</span><span class="r">Output re-certified passive: <code>p₁ &lt; 0.5</code> at 5σ. <span class="pass">PASS</span> — 0.4913 &lt; 0.5 (W2 WIN).</span>
+    <span class="g">W1 (F95)</span><span class="r">Quantitative drop-floor <code>&gt; 0.05</code> at 5σ. <span class="fail">LOSS</span> — missed clearance by <b>0.7σ</b> (drop is 9.4σ from zero); kept in the record as a REFUTED magnitude subclaim.</span>
+  </div>
+
+  <h2><span class="n">4</span>The measured data — three findings, one resource</h2>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>finding · what</th><th>key measured value</th><th>vs threshold</th><th>significance</th><th>verdict</th></tr></thead>
+    <tbody>
+      <tr><td>F86 · refrigeration split</td><td class="king">Δ = 0.1796 ± 0.0085<br>(p₁|₊ 0.2098 · p₁|₋ 0.3894)</td><td>causal value = 0 exactly</td><td>21.1σ</td><td class="edge">WIN</td></tr>
+      <tr><td>F88 · native-fluid retest</td><td class="king">Δ = 0.1645 ± 0.0127</td><td>+ colder than coldest reservoir</td><td>5σ</td><td class="edge">CONFIRMED</td></tr>
+      <tr><td>F95 · full engine cycle</td><td class="king">net work 0.0340 E/run<br>(charge p₁|₋ = 0.5485)</td><td>passive → charged → passive</td><td>7σ charge · W2 5σ</td><td class="edge">W2 WIN</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The F86 branches straddle the baths: the <b>+</b> branch at <code>p₁ = 0.2098</code> is <b>colder</b> than the
+  reservoir, the <b>−</b> branch at <code>0.3894</code> hotter — a definite-order engine cannot separate them at all.
+  The F95 loop runs end-to-end: passive baths in (0.426 / 0.444, each 5σ below 0.5) → the switch charges the target to
+  <code>p₁ = 0.5485</code> (7σ above 0.5) → the power stroke drops <code>p₁</code> by 0.0920 for a net
+  <b>0.0340 E/run</b> → the output re-certifies passive (0.4913 &lt; 0.5 at 5σ). Demon ledger audited at
+  +0.0051 E/action.</p>
+
+  <h2><span class="n">5</span>Scope &amp; caveats <span style="font-family:var(--sans);font-weight:400;font-size:14px;color:var(--ink-3)">— including the loss we kept</span></h2>
+  <ul>
+    <li><b>Definite order gives split = 0, exactly.</b> The null is not an approximation — it is a theorem for
+    constant-to-<code>τ</code> channels. That is what makes any measured <code>Δ &gt; 0</code> a clean signature of
+    indefinite causal order rather than a noise artifact.</li>
+    <li><b>The engine's W1 gate is an honest LOSS.</b> The quantitative drop-floor (<code>&gt; 0.05</code> at 5σ) missed
+    clearance by <b>0.7σ</b> and is frozen as <span class="loss">LOSS</span> — a REFUTED magnitude subclaim, kept in
+    the record, not swept under. The <b>direction</b> is unambiguous (the drop is 9.4σ from zero and W2 passes); only
+    the pre-filed <b>magnitude</b> at 5σ did not clear. The finding is the full cycle plus the honesty, together.</li>
+    <li><b>Modest harvest, free fluid.</b> Under the native working fluid (F88) the + branch reaches ≈ 0.462×T_res
+    (~54% colder), harvesting ~1.9% of the Landauer bound — the working fluid is free, the record is not. Published-T1
+    ran +38–69% high vs calibration (bias, not drift), absorbed by drift-tolerant gates; the certificate rests on
+    in-job measured values.</li>
+  </ul>
+
+  <h2><span class="n">6</span>Provenance</h2>
+  <ul>
+    <li><b>Job:</b> d98vqfsqp3as739tfg0g (Exp108, the F86 split) · <b>Backend:</b> ibm_marrakesh (Heron r2)</li>
+    <li><b>Grade files:</b> <code>results/exp108_grade.json</code> (F86) · <code>results/exp108b_grade.json</code> &amp; <code>results/exp108c_grade.json</code> (F88 native-fluid retest)</li>
+    <li><b>Finding rows:</b> <code>docs/campaign-arcs.md</code> — F86 (thermal splitting WIN), F88 (native-fluid CONFIRMED), F95 (the full engine cycle)</li>
+    <li><b>Resource:</b> Felce–Vedral (PRL 125, 070603) · <b>Family:</b> Wing I, The Causal Switch · Horizons P4 (engine, end-to-end)</li>
+  </ul>
+
+  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+
+  <div class="foot">
+    <span>MEASURED · <b style="color:var(--cyan)">F86 / F88 / F95</b> · job d98vqfsqp3as739tfg0g · ibm_marrakesh</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>

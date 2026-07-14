@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full Spec Sheet — The Quantum Switch (F73–F77) | The Quantum Museum</title>
+<meta name="description" content="Complete specification for the Quantum Switch causal-order demo: the order-coherence witness fired on real superconducting silicon (F75, W=+1.781 on ibm_marrakesh), the continuous cosine law confirmed on a second chip (F76), and the classical-mixture loophole closed drift-free in one window (F77, W2=+1.865, ≥72σ). Jobs d939bmooamcc73dbv9b0, d93khvl958jc73bt5c2g, d93p3cnu62ks73953cvg.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .doc { max-width: 840px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 90px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .spec-head { padding: clamp(16px,3vw,30px) 0 6px; border-bottom:1px solid var(--edge); margin-bottom:8px; }
+  .kicker { font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
+  .spec-head h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.08;
+    font-size:clamp(26px,4.6vw,40px); margin:10px 0 12px; text-wrap:balance; }
+  .spec-head h1 .hl { color: var(--cyan); }
+  .idline { display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--mono); font-size:12px; color:var(--ink-3); margin-bottom:10px; }
+  .idline b { color: var(--ink-2); font-weight:600; }
+  .verdict-chip { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:12px;
+    color:var(--good); border:1px solid color-mix(in srgb,var(--good) 45%,var(--edge)); border-radius:999px; padding:5px 13px; font-weight:600; }
+
+  .doc h2 { font-family:var(--mono); font-size:clamp(16px,2.4vw,20px); letter-spacing:-.01em; margin:38px 0 8px;
+    padding-top:14px; border-top:1px solid var(--edge); }
+  .doc h2 .n { color: var(--cyan); font-weight:720; margin-right:10px; }
+  .doc h3 { font-size:15px; margin:20px 0 6px; color: var(--ink); }
+  .doc p { color: var(--ink-2); max-width:72ch; margin:9px 0; }
+  .doc p.tight { margin:4px 0; }
+  .doc ul { color: var(--ink-2); max-width:72ch; padding-left:20px; }
+  .doc li { margin:6px 0; }
+  .doc b { color: var(--ink); }
+  .doc code { font-family:var(--mono); font-size:.9em; background:var(--surface-2);
+    border:1px solid var(--edge); border-radius:5px; padding:1px 6px; color:var(--ink); }
+  .doc a { color: var(--cyan); }
+
+  .callout { background:var(--surface); border:1px solid var(--edge); border-left:3px solid var(--cyan);
+    border-radius:10px; padding:16px 18px; margin:16px 0; }
+  .callout.good { border-left-color: var(--good); }
+  .callout .clabel { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin:0 0 4px; }
+
+  .tbl-wrap { overflow-x:auto; margin:14px 0; border:1px solid var(--edge); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; min-width:520px; }
+  th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
+  th:first-child, td:first-child { text-align:left; }
+  thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
+  tbody tr:last-child td { border-bottom:none; }
+  td.hw { color: var(--cyan); } td.inert { color: var(--ink-3); }
+  tr.hi td { background: color-mix(in srgb, var(--cyan) 8%, transparent); }
+  .gate { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-family:var(--mono); font-size:13px; margin:10px 0; }
+  .gate .g { color:var(--cyan); font-weight:600; }
+  .gate .r { color:var(--ink-2); }
+  .pass { color: var(--good); font-weight:600; }
+
+  .foot { margin-top:44px; padding-top:16px; border-top:1px solid var(--edge); font-family:var(--mono);
+    font-size:11.5px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; }
+  .foot a { color: var(--ink-2); } .foot a:hover { color: var(--cyan); } .foot .sp { flex:1; }
+  .backlink { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    border:1.5px solid var(--cyan); color:var(--cyan); border-radius:10px; padding:9px 16px; margin-top:20px; text-decoration:none; }
+  .backlink:hover { background: color-mix(in srgb,var(--cyan) 12%,transparent); }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <a href="./">· Quantum Switch exhibit</a>
+    <span class="wingtag">· Wing I · Indefinite Causal Order</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="spec-head">
+    <p class="kicker">Full Specification Sheet</p>
+    <h1>The order of events, <span class="hl">put into superposition</span> — and witnessed on silicon</h1>
+    <div class="idline">
+      <span><b>Findings</b> F73–F77 (headline F75)</span>
+      <span><b>Experiment</b> Quantum-switch causal-order witness</span>
+      <span><b>Backend</b> ibm_marrakesh + ibm_kingston (Heron r2)</span>
+      <span><b>Job</b> d939bmooamcc73dbv9b0 (F75)</span>
+    </div>
+    <span class="verdict-chip">✓ WITNESS FIRES ON HARDWARE — W = +1.781 (F75) · loophole closed at ≥72σ (F77)</span>
+  </header>
+
+  <p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page
+  is drawn from the pre-registered switch runs on IBM's Heron-r2 processors — measured, not modeled (the only fitted
+  object is the <code>2·cos(φ/2)</code> line, which the measurements confirmed). The finding chain runs simulation →
+  hardware → adversarial control: <b>F73</b> (hardest classical adversary, sim) → <b>F74</b> (continuous law, sim) →
+  <b>F75</b> (fires on real silicon) → <b>F76</b> (cross-device cosine law) → <b>F77</b> (classical-mixture loophole
+  closed same-device, drift-free).</p>
+
+  <h2><span class="n">1</span>The idea, in plain language</h2>
+  <p>Normally two operations happen in <b>some</b> order: A then B, or B then A. The <b>quantum switch</b> puts a
+  <b>control qubit</b> in charge of that order and leaves it in superposition — so both orders run <b>coherently at
+  once</b>. If the control stays coherent, reading it out tells you whether the two operations <b>cared</b> about their
+  order. A classical process that merely flips a coin to pick an order <b>cannot</b> produce that readout.</p>
+  <div class="callout">
+    <p class="clabel">The witness</p>
+    <p class="tight">Measure the control in the X basis. <code>DISC = ⟨X_c⟩<sub>commute</sub> − ⟨X_c⟩<sub>anticommute</sub></code>
+    — the difference in the control's reading when the two target operations commute vs anticommute. A coherent switch
+    gives <code>≈ +2</code>; any classical mixture of definite orders gives <code>≈ 0</code>. That gap is the proof
+    that the order-coherence is a real, measurable resource.</p>
+  </div>
+  <p><b>Honest framing up front:</b> ibm_marrakesh is a fixed-causal-order chip. The switch is realized by
+  <b>controlled routing</b> on a definite-order circuit — an operational <b>witness of order-coherence</b>, not a claim
+  that the hardware itself has an indefinite past. See §5.</p>
+
+  <h2><span class="n">2</span>What we measure — and the continuous dial</h2>
+  <p>The exhibit's dial applies a partial controlled-rotation that copies "which order" into an untraced ancilla,
+  dephasing the control's order-basis coherence by a factor <code>cos(φ/2)</code>. So the witness should scale as
+  <code>DISC(φ) = 2·cos(φ/2)</code>: <code>φ = 0</code> is the fully coherent switch, <code>φ = π</code> is a complete
+  which-order copy ≡ the classical 50/50 mixture. <b>F74</b> derived this law in simulation (max residual
+  <code>0.0195</code>); <b>F76</b> confirmed it on <b>ibm_kingston</b> at Pearson <code>0.9992</code>.</p>
+  <p>The mechanism gauge on the exhibit shows the real per-circuit control readouts from <b>ibm_marrakesh</b> (F75):
+  in the coherent switch the control swings from <code>+0.865</code> (commute) to <code>−0.905</code> (anticommute) —
+  it has read that order matters. In the definite-order spectator it barely moves (<code>+0.864</code> vs
+  <code>+0.874</code>) — order-blind, exactly the classical limitation.</p>
+
+  <h2><span class="n">3</span>Pre-registered gates</h2>
+  <p>The decision rules were frozen before flight; F75 reports all three pre-registered gates PASS.</p>
+  <div class="gate">
+    <span class="g">F75</span><span class="r">Witness above the drift bar: <code>W = +1.781</code> on ibm_marrakesh, <b>~25×</b> the <code>±0.07</code> drift bar — <b>all 3 pre-registered gates</b> <span class="pass">PASS</span>.</span>
+    <span class="g">F76</span><span class="r">Cosine law on a second device: Pearson <code>0.9992</code>, perfectly monotone (ibm_kingston); the <code>φ=π</code> endpoint doubles as the classical mixture and reads <b>inert</b>. <span class="pass">CONFIRMED</span>.</span>
+    <span class="g">F77</span><span class="r">Loophole closed, one calibration window: <code>DISC_switch +1.900</code> vs <code>DISC_mixture +0.035</code> (inert) ⇒ <code>W₂ = +1.865</code>, <b>≥72σ</b>. <span class="pass">PASS</span>.</span>
+  </div>
+  <p>F77 is the load-bearing control: the skeptic's best objection is that a classical process which <b>randomly
+  picks</b> order B·A or A·B also has access to the commutator. So the real test is switch vs a genuine <b>classical
+  mixture of definite orders</b> — and the switch fires while both classical controls stay inert.</p>
+
+  <h2><span class="n">4</span>The measured data</h2>
+  <p>Two threads. First, F77's single-window loophole test on ibm_marrakesh — the switch against its hardest classical
+  adversary:</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>arm (F77 · ibm_marrakesh)</th><th>DISC</th><th>reading</th></tr></thead>
+    <tbody>
+      <tr class="hi"><td>coherent switch (order superposed)</td><td class="hw">+1.900</td><td>fires</td></tr>
+      <tr><td>classical mixture (random B·A / A·B)</td><td class="inert">+0.035</td><td>inert</td></tr>
+      <tr><td>definite order (fixed spectator)</td><td class="inert">+0.003</td><td>inert</td></tr>
+      <tr class="hi"><td>headline witness W₂ = switch − mixture</td><td class="hw"><b>+1.865</b></td><td><b>≥72σ</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The depth-26 mixture and the depth-7 definite control are <b>both</b> inert despite a 19-layer depth gap —
+  inertness tracks causal separability, not decoherence. Second, F76's continuous cosine law on ibm_kingston, the five
+  measured points against the confirmed <code>2·cos(φ/2)</code> line:</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>φ (rad)</th><th>ideal 2·cos(φ/2)</th><th>measured DISC (ibm_kingston)</th></tr></thead>
+    <tbody>
+      <tr><td>0</td><td>2.000</td><td class="hw">1.936</td></tr>
+      <tr><td>π/4</td><td>1.848</td><td class="hw">1.713</td></tr>
+      <tr><td>π/2</td><td>1.414</td><td class="hw">1.353</td></tr>
+      <tr><td>3π/4</td><td>0.765</td><td class="hw">0.718</td></tr>
+      <tr><td>π (≡ classical mixture)</td><td>0.000</td><td class="inert">0.027</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The φ=0 point reads a few percent low of the ideal (<code>+1.936</code> vs <code>+2.000</code>) from hardware
+  amplitude damping; the load-bearing results are the <b>sign</b>, the <b>cosine shape</b> (Pearson 0.9992), and the
+  ≥72σ separation — all robust to that attenuation.</p>
+
+  <h2><span class="n">5</span>Scope &amp; caveats</h2>
+  <ul>
+    <li><b>A causal WITNESS, a lab resource — not a claim about spacetime event-order.</b> This certifies that a single
+    control qubit can detect that two operations were applied in an <b>indefinite order</b> (order-coherence), on a
+    fixed-causal-order chip realized by controlled routing. It is <b>not</b> a claim that the hardware's physical
+    past is indefinite, and <b>not</b> a claim about the ordering of events in spacetime.</li>
+    <li><b>Order-coherence, not a speed-up.</b> The witness reports that the control encodes which order was applied
+    (an interference signature). It is <b>not</b> a demonstrated computational or query-complexity advantage of the
+    quantum switch.</li>
+    <li><b>The shape is the claim, not the amplitude.</b> Amplitude damping reads DISC a few percent low of ideal
+    (φ=0 measured +1.936 vs +2.000). Sign, cosine shape, and ≥72σ separation are the robust results.</li>
+    <li><b>Coherence-of-causal-order witness, not a black-box query separation.</b> F73–F77 query each gate twice; this
+    is a coherence witness, the honest scope of this family (the game-form and capacity-form bound beats are separate
+    findings, F82/F83).</li>
+  </ul>
+
+  <h2><span class="n">6</span>Provenance</h2>
+  <ul>
+    <li><b>F75</b> switch witness · ibm_marrakesh · job <code>d939bmooamcc73dbv9b0</code> · W = +1.781</li>
+    <li><b>F76</b> continuous cos law · ibm_kingston · job <code>d93khvl958jc73bt5c2g</code> · Pearson 0.9992</li>
+    <li><b>F77</b> classical-mixture loophole · ibm_marrakesh · job <code>d93p3cnu62ks73953cvg</code> · W₂ = +1.865 (≥72σ)</li>
+    <li><b>F73</b> (sim) hardest classical adversary: W₂ = +2.00 noiseless / +1.93 under the noise model, mixture arm inert (DISC 0.000) · <b>F74</b> (sim) continuous law DISC(φ)=2·cos(φ/2), max residual 0.0195</li>
+    <li><b>Backends:</b> ibm_marrakesh &amp; ibm_kingston (both Heron r2, 156 qubits) · <b>Shots:</b> 2000–6000/circuit · <b>Gates frozen</b> pre-flight, pre-registered</li>
+    <li><b>Family:</b> Indefinite causal order — the switch on real silicon; siblings include the causal game (F82) and the zero-capacity channel activation (F83)</li>
+  </ul>
+
+  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+
+  <div class="foot">
+    <span>MEASURED · <b style="color:var(--cyan)">F73–F77</b> · job d939bmooamcc73dbv9b0 · ibm_marrakesh + ibm_kingston</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>

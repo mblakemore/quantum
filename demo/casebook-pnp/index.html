@@ -35,6 +35,11 @@
  ol,ul { margin:4px 0 6px 18px; padding:0; } li{margin:2px 0;}
  .tally td { height:0.24in; }
  .footer { font-size:7.6pt; color:#666; margin-top:8px; border-top:1px solid #bbb; padding-top:3px; }
+ .specbtn { display:inline-flex; align-items:center; gap:8px; font-family:'Courier New',monospace; font-size:10pt;
+   font-weight:bold; text-decoration:none; color:#06201f; background:#45d6cf; border:1.5px solid #1f8f89;
+   border-radius:8px; padding:7px 14px; margin:2px 0 10px; }
+ .specbtn .arw { font-size:12pt; }
+ @media print { .specbtn { display:none; } }
 </style></head><body>
 
 <!-- ============================ PAGE 1 ============================ -->
@@ -42,6 +47,8 @@
  <h1>THE CASEBOOK OF DETECTIVE WHISPER</h1>
  <p class="tag">Two small games about a big discovery. Every probability in this booklet was
  <b>measured on a real quantum computer</b> in July 2026 — none of the odds were designed.</p>
+
+ <a class="specbtn" href="./spec.html"><span class="arw">&#9671;</span> Read the Full Spec Sheet</a>
 
  <div class="cols"><div class="col">
   <h2>Game 1 — THE INTERROGATION</h2>
