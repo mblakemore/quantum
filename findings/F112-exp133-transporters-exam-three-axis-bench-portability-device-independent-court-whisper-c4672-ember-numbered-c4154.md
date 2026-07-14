@@ -25,20 +25,46 @@ and all three axes PASSED against the exact same frozen thresholds, no retuning.
 campaign's first **two-device comparison card** — and, surprisingly, **kingston is a slightly *better*
 causal chip than marrakesh**, edging it on every causal-family number.
 
-## The two-device comparison card
+## The three-device comparison card
 
-| Axis | Quantity | **ibm_kingston** | ibm_marrakesh (ref) | ideal / bound | Verdict |
-|---|---|---|---|---|---|
-| **Causal** | W (witness DISC) | **1.9533 ± 0.0224** | 1.90 | 2.0 (causal-mix 0) | **PASS** |
-| | R̄ (capacity) | **0.5245 ± 0.0090** | 0.5034 | 0.5333 (causal 0) | **PASS** |
-| | D (null integrity) | 0.0008 ± 0.0046 | ~0 | band ±0.10 | honest (dead at 0) |
-| **Schedule** (F96) | hotspot D_order | **0.0130 ± 0.0033** | ≤0.0303 | bound ≤0.0297 | **ORDER-SYMMETRIC** |
-| | control D_order | 0.0052 ± 0.0030 | — | bound ≤0.0201 | ORDER-SYMMETRIC |
-| **Hold** (Zeno) | tractor separation | **0.6487 ± 0.0034** | 0.624 | — | **CERTIFIED** |
-| | QND per-projection q | **0.9847** | 0.987 | — | CERTIFIED |
+*(Extended C4165 — Ember numbering determination: the ibm_fez flight (job d9b9fvvu62qs738ov860)
+FOLDS INTO F112 as the 3rd device, NOT a new F-number. Rationale below the card.)*
 
-**Verdict: PASS-CAUSAL · SCHED-SYMMETRIC (bound ≤0.0297) · HOLD-CERTIFIED.** Prediction HIT — kingston
-matched or **beat** marrakesh on every number.
+| Axis | Quantity | **ibm_kingston** | ibm_marrakesh (ref) | **ibm_fez** | ideal / bound | Verdict |
+|---|---|---|---|---|---|---|
+| **Causal** | W (witness DISC) | **1.9533 ± 0.0224** | 1.90 | **1.8948 ± 0.0224** | 2.0 (causal-mix 0) | **PASS ×3** |
+| | R̄ (capacity) | **0.5245 ± 0.0090** | 0.5034 | **0.5080 ± 0.0091** | 0.5333 (causal 0) | **PASS ×3** |
+| | D (null integrity) | 0.0008 ± 0.0046 | ~0 | 0.0002 | band ±0.10 | honest (dead at 0) |
+| **Schedule** (F96) | hotspot D_order | **0.0130 ± 0.0033** | ≤0.0303 | **0.0185** (bound ≤0.0464) | *device-derived bound* | **SYMMETRIC — fez QUALIFIED** |
+| | control D_order | 0.0052 ± 0.0030 | — | — | — | ORDER-SYMMETRIC |
+| **Hold** (Zeno) | tractor separation | **0.6487 ± 0.0034** | 0.624 | **0.5247 ± 0.0037** | — | **CERTIFIED ×3** |
+| | QND per-projection q | **0.9847** | 0.987 | **0.9708** | — | CERTIFIED ×3 |
+
+**Verdict (kingston, marrakesh): PASS-CAUSAL · SCHED-SYMMETRIC · HOLD-CERTIFIED clean.**
+**Verdict (fez): PASS-CAUSAL · HOLD-CERTIFIED clean; SCHEDULE symmetric on the POOLED hotspot only.**
+Device ranking on the causal/hold family: **kingston ≥ marrakesh ≥ fez** (W 1.953/1.927/1.895; hold-sep
+0.649/0.624/0.525; QND 0.985/0.987/0.971) — fez is the *weakest* of the three but still certifies.
+
+> **Honest caveat carried into the ledger (fez schedule axis):** the F96 split-half floor-transfer
+> guard was **VIOLATED** on fez (split median D_order **0.0582 > bound**); only the **pooled** hotspot
+> statistic (0.0185) certifies symmetric. fez's schedule data is noisier than marrakesh/kingston. Note
+> the schedule bound is **device-derived** (kingston ≤0.0297 vs fez ≤0.0464), *not* a frozen theory
+> constant — so "same frozen bounds, no retuning" is **exact for the causal (W vs 2.0, R̄ vs 0.5333)
+> and hold axes** (the load-bearing device-independence claim) and **looser for schedule**. The 3-chip
+> device-independence rests on causal + hold; schedule is the *qualified* axis on fez.
+
+## Numbering determination (Ember C4165) — 3rd device is an F112 EXTENSION, not a new F
+
+The ibm_fez flight is a **pure same-generation cross-device replication** of an *already-established*
+portability finding. F112's own scope section pre-registered the discriminator: **"same Heron
+generation = within scope; a cross-*generation* flight (e.g. an Eagle chip) is the harder exam and is
+NOT claimed."** fez is a **third Heron-r2 chip** — squarely within F112's stated scope. It adds a data
+point to claims F112 already made (device-independence across the *generation*; the bench as a device
+*ranker*), introduces **no new mechanism, no first-of-kind, no cross-generation leap**. This is the
+**C4160 precedent applied cleanly** (kingston steering folded into F116 as CONFIRMED_ON_RETEST; the
+F82-`ibm_fez` single-axis precedent). F112's ledger was `UNTESTED / single_run: true` — fez is
+literally the retest that flips it to **CONFIRMED_ON_RETEST**. A minted number would be messy to walk
+back; a fold-in trivially promotes later if a cross-generation flight ever earns it.
 
 ## The finding — the court is DEVICE-INDEPENDENT, and it ranks devices on axes no standard benchmark touches
 

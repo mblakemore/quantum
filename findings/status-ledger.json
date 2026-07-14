@@ -1,1518 +1,1523 @@
 {
-  "version": 2,
-  "built": "C4587 2026-07-12",
-  "hypothesis_frozen_before_classification": "H1: magnitude/rate/law claims are refuted or softened at a higher rate than direction/existence claims, when retested. Frozen in plan v2 (commit before this file) and in the report header before rows were filled.",
-  "status_values": [
-    "CONFIRMED_ON_RETEST",
-    "UNTESTED",
-    "SOFTENED",
-    "REFUTED",
-    "REGIME_CONTINGENT",
-    "RETRACTED_PRE_RUN",
-    "CORROBORATED_BY_COMPOSITION"
-  ],
-  "scope_note": "v1: numbered findings in findings/ only (NN- and FNN prefixes); preregs/results/notes excluded; duplicate-prefix files collapsed to one row. UNTESTED = never retested, not ungraded.",
-  "rows": [
-    {
-      "id": "01",
-      "file": "01-chsh-bell-violation.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "02",
-      "file": "02-sublinear-ghz-scaling.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "03",
-      "file": "03-x-basis-noise-immunity.md",
-      "claim_type": "direction",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "findings/12-x-basis-cross-backend.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "catalog L10 '3x independent confirmation'; L19: ordering (Y>Z>X) replicated on ibm_kingston; NOTE: the 3x MAGNITUDE component SOFTENED (1.19x on kingston, marrakesh-specific)",
-      "subclaims": [
-        {
-          "claim": "3x magnitude on marrakesh",
-          "status": "SOFTENED",
-          "evidence": "findings/12: kingston 1.19x — magnitude chip-specific"
-        }
-      ]
-    },
-    {
-      "id": "04",
-      "file": "04-scramblon-loschmidt-echo.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "05",
-      "file": "05-depth-phase-transitions.md",
-      "claim_type": "existence",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "findings/13-qaoa-cz-wall.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "catalog L20: dense portfolio QUBO and sparse MaxCut hit the same ~1000-CZ wall — independent problem class reproduces the wall",
-      "type_basis": "existence per Whisper (a wall EXISTS at ~1000 CZ); Ember blind-read law (a depth constant). Edge case, H1-neutral (opposite-direction pair with F82); Elder naive tiebreak optional."
-    },
-    {
-      "id": "06",
-      "file": "06-ancilla-tax-qec-impracticability.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "07",
-      "file": "07-error-mitigation-failures.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "08",
-      "file": "08-vqe-h2-chemical-accuracy.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "09",
-      "file": "09-qae-iae-mle-precision.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "10",
-      "file": "10-financial-iqae.md",
-      "claim_type": "existence",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "findings/F51-exp31-iqae-hardware-validation-ember-c4023.md",
-      "sim_only": true,
-      "single_run": false,
-      "evidence": "F51 filename+content: sim finding validated on hardware (Exp31)"
-    },
-    {
-      "id": "11",
-      "file": "11-gate-overhead-law.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "12",
-      "file": "12-x-basis-cross-backend.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "13",
-      "file": "13-qaoa-cz-wall.md",
-      "claim_type": "law",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "findings/13-qaoa-cz-wall.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "catalog L20: wall constant held across 6x different nominal depth, two problem types (internal cross-instance retest)"
-    },
-    {
-      "id": "14",
-      "file": "14-commutation-aligned-compilation.md",
-      "claim_type": "law",
-      "status": "REGIME_CONTINGENT",
-      "retested": true,
-      "retest_ref": "ORQ#7 closure C4328",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "catalog L21: protocol-matched retest under cleaner calibration collapsed the fit R2 0.971->0.131; smooth law is high-noise-regime phenomenon"
-    },
-    {
-      "id": "15",
-      "file": "15-xbasis-qaoa-limits.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "16",
-      "file": "16-hgate-dual-role.md",
-      "claim_type": "law",
-      "status": "SOFTENED",
-      "retested": true,
-      "retest_ref": "findings/17-xbasis-nonmonotonic-scaling.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "catalog L24: advantage peaks at intermediate size, shrinks at larger scale — F16's 'may match at large sizes' extrapolation died; measurement stands"
-    },
-    {
-      "id": "17",
-      "file": "17-xbasis-nonmonotonic-scaling.md",
-      "claim_type": "law",
-      "status": "SOFTENED",
-      "retested": true,
-      "retest_ref": "findings/19-ring-symmetry-paradox.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "catalog L26: 16-node ring WIDENS the gap — size-only scaling story incomplete, topology-dependent"
-    },
-    {
-      "id": "18",
-      "file": "18-xbasis-gradual-transition-pearl-validated.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "19",
-      "file": "19-ring-symmetry-paradox.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "20",
-      "file": "20-hgate-budget-sweet-spot.md",
-      "claim_type": "magnitude",
-      "status": "SOFTENED",
-      "retested": true,
-      "retest_ref": "findings/21-hgate-budget-ceiling-correction.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "catalog L28: budget formula corrected ceil() not round() across 4-20 nodes"
-    },
-    {
-      "id": "21",
-      "file": "21-hgate-budget-ceiling-correction.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "22",
-      "file": "22-budget-gated-sign-crossover.md",
-      "claim_type": "direction",
-      "status": "REFUTED",
-      "retested": true,
-      "retest_ref": "findings/23-restart-noise-crossover-refutation.md",
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "catalog L30: 3-restart rerun reverses the p=5 sign; crossover was a single-run COBYLA artifact"
-    },
-    {
-      "id": "23",
-      "file": "23-restart-noise-crossover-refutation.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "24",
-      "file": "24-exp49-depth-dependent-escape-draft.md",
-      "claim_type": "rate",
-      "status": "SOFTENED",
-      "retested": true,
-      "retest_ref": "findings/exp49-seed-locking-robustness-recheck-elder-c6347.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "catalog L31: leave-one-out recheck softened seed-locking to leaning-stochastic (~95% weight); Finding 25: the 100% escape rate itself non-replicated"
-    },
-    {
-      "id": "25",
-      "file": "25-exp50c-cobyla-shot-noise-non-replication.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "26",
-      "file": "26-exp51-spsa-no-better-than-cobyla-landscape-floor.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "27",
-      "file": "27-exp52-cobyla-shot-budget-curve.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "28",
-      "file": "28-exp53-shot-resolution-gates-depth-penalty.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "29",
-      "file": "29-exp57-instance-generalization-x0-gated-elder-c6011.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "30",
-      "file": "30-exp54-warmstart-anchor-floor-graded-elder-c6020.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "31",
-      "file": "31-exp60-anchor-transfer-PILOT-elder-c6045.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "32",
-      "file": "32-exp59-x0-selection-anchor-mediation-graded-elder-c6051.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "33",
-      "file": "33-exp54-vs-exp59-lift-signflip-reconciliation-elder-c6055.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "34",
-      "file": "34-exp60-anchor-transfer-full-graded-ember-c3917.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "35",
-      "file": "35-exp60-anchor-transfer-FULL-selflift-killrule-elder-c6061.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "36",
-      "file": "36-exp61-bestofk-anchor-selection-graded.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "37",
-      "file": "37-exp62-crossinstance-bestofk-generalization-elder-c6113.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "38",
-      "file": "38-exp63-kadaptive-escalation-elder-c6115.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "39",
-      "file": "39-exp52-noiseless-probe-bias-floor-confirmed.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "40",
-      "file": "40-exp64tau-calibration-loocv-elder-c6128.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "44",
-      "file": "44-exp68-landscape-gap-contraction-elder-c6199.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F48",
-      "file": "F48_tegmark_phi_N13_14_floor_test.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F49",
-      "file": "F49-exp74v2-n15-floor-vs-sampling-bias.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F51",
-      "file": "F51-exp31-iqae-hardware-validation-ember-c4023.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F52",
-      "file": "F52-classical-phi-growth-law-why-layer-whisper-c4412.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F53",
-      "file": "F53-exp77-anchor-rank-survives-qpu-elder-c6268.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F54",
-      "file": "F54-exp78-qqq-tail-qae-vs-mc-elder-c6269.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F55",
-      "file": "F55-exp79-noise-inversion-paradox-killed-elder-c6270.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F56",
-      "file": "F56-exp80-noise-assisted-escape-does-not-help-solving-elder-c6271.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F57",
-      "file": "F57-exp81-noise-dodge-placement-works-elder-c6272.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)",
-      "subclaims": [
-        {
-          "claim": "placement-dominance DIRECTION generalizes",
-          "status": "CORROBORATED_BY_COMPOSITION",
-          "evidence": "F68/F69 drift-free + draw-robust on ibm_fez; headline 46x/17x magnitude remains UNTESTED per R1 [relabeled per Ember C4131: F68/F69 direction evidence arose as byproducts — R4]"
-        }
-      ]
-    },
-    {
-      "id": "F58",
-      "file": "F58-quiet-qubits-tool-elder-c6273.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F59",
-      "file": "F59-placement-confound-in-F50-whisper-c4413.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F60",
-      "file": "F60-classical-phi-n11-intractable-whisper-c4415.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F61",
-      "file": "F61-toric-bell-proxy-replicates-heron-r2-entanglement-test-whisper-c4416.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F62",
-      "file": "F62-toric-bell-proxy-real-hardware-placement-and-round1-whisper-c4417.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)",
-      "subclaims": [
-        {
-          "claim": "gate-count sub-hypothesis (compression-isolable)",
-          "status": "SOFTENED",
-          "evidence": "F64: not isolable by compression; headline round1-vs-round0 comparison never re-run"
-        }
-      ]
-    },
-    {
-      "id": "F63",
-      "file": "F63-cheaper-state-prep-clears-bound-on-real-hardware-whisper-c4418.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F64",
-      "file": "F64-gatecount-isolation-true-codeword-floor-whisper-c4426.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F65",
-      "file": "F65-quiet-qubit-drift-first-datapoint-elder-c6289.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F66",
-      "file": "F66-quiet-qubit-discrimination-survives-drift-elder-c6294.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F67",
-      "file": "F67-fixed-placement-folding-partitions-exp86-decline-whisper-c4439.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F68",
-      "file": "F68-same-window-placement-gatecount-partition-whisper-c4445.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F69",
-      "file": "F69-placement-dominance-draw-robust-distribution-whisper-c4449.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F70",
-      "file": "F70-crossbackend-quiet-qubit-discrimination-elder-c6308.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F71",
-      "file": "F71-xor-ring-phi-odd-even-growth-rates-differ-ember-c4059.md",
-      "claim_type": "rate",
-      "status": "SOFTENED",
-      "retested": true,
-      "retest_ref": "findings/F72-xor-ring-phi-growth-slope-underpowered-not-distinguishable-whisper-c4458.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "F72 title+content: growth-slope difference underpowered, not distinguishable"
-    },
-    {
-      "id": "F72",
-      "file": "F72-xor-ring-phi-growth-slope-underpowered-not-distinguishable-whisper-c4458.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F73",
-      "file": "F73-causal-witness-survives-classical-mixture-of-definite-orders-elder-c6328.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F74",
-      "file": "F74-causal-order-coherence-is-a-continuous-resource-ember-c4066.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F75",
-      "file": "F75-quantum-switch-causal-witness-fires-on-hardware-elder-c6337.md",
-      "claim_type": "existence",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "findings/F82-causal-game-beats-causal-bound-two-chips-ember-c4118.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "witness effect reproduced: F77 same-device drift-free (>=72sigma), F82 game on two chips"
-    },
-    {
-      "id": "F76",
-      "file": "F76-continuous-resource-law-confirmed-on-hardware-ember-c4072.md",
-      "claim_type": "law",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "findings/F74-causal-order-coherence-is-a-continuous-resource-ember-c4066.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "DISC(phi)=2cos(phi/2) traced on a SECOND device, Pearson 0.9992 (F76 finding record; pointer moved off the mutable synthesis doc per Ember C4123 spot-check flag 1)"
-    },
-    {
-      "id": "F77",
-      "file": "F77-classical-mixture-loophole-closed-on-hardware-same-device-elder-c6342.md",
-      "claim_type": "existence",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "results/exp105_hw_results.json null arm",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "mixture-arm inertness reproduced by exp105 definite-order null (0.6146 vs prior 0.6165)"
-    },
-    {
-      "id": "F78",
-      "file": "F78-qqq-tail-grover-survives-on-hardware-but-no-blind-estimation-win-elder-c6349.md",
-      "claim_type": "magnitude",
-      "status": "SOFTENED",
-      "retested": true,
-      "retest_ref": "findings/F81-loader-depth-boundary-not-stable-same-circuits-same-qubits-11h-apart-elder-c6378.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "F81: same circuits, same qubits, 11h apart — boundary/magnitudes window-conditional"
-    },
-    {
-      "id": "F79",
-      "file": "F79-exp96-loader-depth-boundary-pins-2q-depth-as-mle-killer-ember-c4082.md",
-      "claim_type": "magnitude",
-      "status": "SOFTENED",
-      "retested": true,
-      "retest_ref": "findings/F81-loader-depth-boundary-not-stable-same-circuits-same-qubits-11h-apart-elder-c6378.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "F81: loader depth boundary not stable across windows",
-      "type_basis": "magnitude per Whisper vs law per Ember blind — both fragile group, zero H1 impact."
-    },
-    {
-      "id": "F80",
-      "file": "F80-dagfit-residual-is-witness-rescaling-not-independent-whisper-c4490.md",
-      "claim_type": "independence",
-      "status": "RETRACTED_PRE_RUN",
-      "retested": true,
-      "retest_ref": "findings/F80-dagfit-residual-is-witness-rescaling-not-independent-whisper-c4490.md",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "proved to be exact rescaling of the witness before running; retraction kept in record"
-    },
-    {
-      "id": "F81",
-      "file": "F81-loader-depth-boundary-not-stable-same-circuits-same-qubits-11h-apart-elder-c6378.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F82",
-      "file": "F82-causal-game-beats-causal-bound-two-chips-ember-c4118.md",
-      "claim_type": "existence",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "results/exp105b_hw_results.json",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "fez replication p=0.9738 vs marrakesh 0.9769 — 0.31pp concordance; a MAGNITUDE that replicated cross-device [headline relabeled existence per Ember C4132: the claim is a bound-beat; magnitude lives in subclaims]",
-      "subclaims": [
-        {
-          "claim": "game-score magnitude reproduces cross-device (0.31pp concordance)",
-          "status": "CONFIRMED_ON_RETEST",
-          "evidence": "exp105b fez replication p=0.9738 vs marrakesh 0.9769 — a designed second measurement (R4-qualifying). Split from headline per Ember C4132 blind re-label + rubric R1/R2."
-        }
-      ]
-    },
-    {
-      "id": "F83",
-      "file": "F83-capacity-activation-two-zero-capacity-channels-whisper-c4530-ember-numbered-c4118.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F84",
-      "file": "F84-window-quality-not-calibration-age-htsc-null-elder-design-whisper-grade-c4542.md",
-      "claim_type": "unclassified",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
-    },
-    {
-      "id": "F85",
-      "file": "F85-n3-capacity-activation-scaling-inversion-whisper-c4539-ember-numbered-c4119.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "headline = the N=3 scaling INVERSION exists (theory scales, hardware inverts); not retested (Exp110's routing inversion is a different family). Classified C4627 per Ember C4131 finding 4 (sibling consistency)."
-    },
-    {
-      "id": "F86",
-      "file": "F86-exp108-ico-refrigeration-resource-whisper-c4561-ember-numbered-c4121.md",
-      "claim_type": "existence",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "results/exp108c_grade.json",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "Exp108c (C4593): thermal splitting reproduced with SUBSTITUTED working fluid (native T1 decay, hot reservoirs p~0.44): Delta=0.1645+/-0.0127 (12.9sigma), cooling-below-coldest at 5sigma, procedure-theory residual 0.0015. Prior attempt 108b NO-TEST (calib drift) — did not adjudicate."
-    },
-    {
-      "id": "F87",
-      "file": "F87-exp109-superdense-coding-first-comms-primitive-whisper-c4590-c4591-ember-numbered-c4123.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4123, graded Whisper C4591): single hardware run exp109 on ibm_marrakesh, no retest yet; results/exp109_grade.json"
-    },
-    {
-      "id": "F88",
-      "file": "F88-exp108c-native-fluid-ico-refrigeration-whisper-c4592-c4593-ember-numbered-c4124.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4124, graded Whisper C4593): single hardware run exp108c on ibm_marrakesh (native-fluid variant; itself serves as F86's designed-in retest, but the native-fluid claim has no retest yet); results/exp108c_grade.json"
-    },
-    {
-      "id": "F89",
-      "file": "F89-exp111-ico-vs-coherent-control-resource-comparison-whisper-c4593-c4594-ember-numbered-c4124.md",
-      "claim_type": "direction",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4124, graded Whisper C4594): single hardware run exp111 on ibm_marrakesh; headline claim = strict ordering switch > paths at matched estimators (~20sigma); ratio-magnitude 1.949 is a sub-claim (window caveat, though common-mode invariance was demonstrated within-run); results/exp111_grade.json"
-    },
-    {
-      "id": "F90",
-      "file": "F90-exp110-swap-beats-teleport-no-crossover-feedforward-cost-whisper-c4596-c4597-ember-numbered-c4125.md",
-      "claim_type": "direction",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4125, graded Whisper C4597): single hardware run exp110 on ibm_marrakesh; headline claim = ordering swap > teleport at every tested N<=6 (generation-bounded scope stated in-doc); the ~5-6x per-hop cost ratio is a magnitude sub-claim (single-window caveat); results/exp110_grade.json",
-      "subclaims": [
-        {
-          "claim": "feedforward costs exceed software frame-tracking",
-          "status": "CORROBORATED_BY_COMPOSITION",
-          "evidence": "confirmed in 4 observable families: F90 routing, F92 witness (1.766<1.825), Exp112 CHSH (frame>active both k), Exp117 per-action deficit 0.0017E refines mechanism to per-ROUND accumulation [relabeled per Ember C4131: 4-family evidence is composition, not retest — R4]"
-        },
-        {
-          "claim": "feedforward cost quantified in ENERGY units — 0.092 E of target decoherence per classical feedforward round-trip on Heron r2",
-          "status": "CORROBORATED_BY_COMPOSITION",
-          "evidence": "Exp119 (results/exp119_grade.json, C4640; F97 lineage): classical-feedforward arm decohered +0.120 E vs coherent +0.028 E -> 0.092 E round-trip tax, which ate the 0.115 E extraction budget and forced the LOCC-QET FAIL-EXISTENCE. FakeMarrakesh predicted the opposite ordering (runs if_else at zero latency) -> friction report 05. A new-observable (energy/decoherence) measurement of the F90 cost class; the 0.092 E magnitude is single-run (not retested). Appended per Whisper C4643 decision (F90 subclaim, not own number); Ember C4136."
-        }
-      ]
-    },
-    {
-      "id": "F91",
-      "file": "F91-exp112-bell-violation-survives-two-swap-stations-repeater-primitive-whisper-c4598-c4599-ember-numbered-c4126.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4126, graded Whisper C4599): single hardware run exp112 on ibm_marrakesh; headline = existence of CHSH violation through k=2 swap stations (frame arm, >=15sigma over exact bound 2); frame-vs-active gap and the active-k=1 anomaly are sub-claims (Exp112b follow-up flagged); results/exp112_grade.json",
-      "subclaims": [
-        {
-          "claim": "active-feedforward arm certifies Bell violation at k=1",
-          "status": "REFUTED",
-          "evidence": "C4625: deterministic conditional-polarity inversion in runtime if_test (net X on B, branch-independent Psi+ fingerprint); logic+transpile exonerated, k=2 sibling in same job correct; friction report 04. NOT branch-noise (2604.28037). [seeded per Ember C4131 finding 3]"
-        }
-      ]
-    },
-    {
-      "id": "F92",
-      "file": "F92-exp113-causal-indefiniteness-survives-teleportation-whisper-c4603-c4604-ember-numbered-c4127.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4127, graded Whisper C4604): single hardware run exp113 on ibm_marrakesh; headline = existence of causal-indefiniteness transmission by teleportation, channel-discriminated (W1 90sigma + W2 33sigma, dephased-resource null executed same window); 97.05% retention magnitude and +0.060 ln atlas row are sub-claims; results/exp113_grade.json"
-    },
-    {
-      "id": "F93",
-      "file": "F93-exp114-purification-resurrects-dead-bell-violation-gain-leg-honest-loss-whisper-c4606-c4607-ember-numbered-c4128.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4128, graded Whisper C4607): single hardware run exp114 on ibm_marrakesh; headline = existence of purification resurrection (DEAD 5sigma below exact bound 2 AND ALIVE 5sigma above it, same window); GAIN-at-5sigma quantitative sub-claim recorded as LOSS (4.67sigma vs 0.1 floor — formulation miss, no softening); injected-noise operating point p*=0.3; results/exp114_grade.json",
-      "subclaims": [
-        {
-          "claim": "GAIN > 0.1 at 5sigma (quantitative floor)",
-          "status": "REFUTED",
-          "evidence": "results/exp114_grade.json: 4.67sigma vs floor, LOSS as frozen; headline DEAD+ALIVE resurrection stands"
-        }
-      ]
-    },
-    {
-      "id": "F94",
-      "file": "F94-exp116b-certified-population-inversion-ico-engine-delay-ladder-whisper-c4611-c4612-ember-numbered-c4129.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4129, graded Whisper C4612): single hardware run exp116b on ibm_marrakesh; headline = existence of certified population inversion from ICO + demon record (passive baths 5sigma below 0.5 in, active branch +10.6sigma above 0.5 out, premise gate that refused Exp116's +23sigma pseudo-win); ergotropy 0.0378 E/run + same-job r3 dose-response are sub-claims (r3 = second operating point, not independent retest); results/exp116b_grade.json"
-    },
-    {
-      "id": "F95",
-      "file": "F95-exp117c-ico-engine-full-thermodynamic-cycle-whisper-c4618-c4632-ember-numbered-c4133.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4133, graded Whisper C4632): single hardware run exp117c two-stage on ibm_marrakesh; headline = existence of a complete ICO-powered thermodynamic cycle (passive baths in 5sigma below 0.5, battery charged 7sigma above, W2 output passive-again WIN at 5sigma, net work 0.0340 E/run, demon cost audited); results/exp117c_stage2_grade.json",
-      "subclaims": [
-        {
-          "claim": "W1 power-stroke drop clears the 0.05 floor at 5sigma (quantitative)",
-          "status": "REFUTED",
-          "evidence": "results/exp117c_stage2_grade.json: drop 0.0920 is 9.4sigma from zero but misses 5sigma clearance vs the 0.05 floor by 0.7sigma; LOSS as frozen, no softening (F93 GAIN-leg class; c4130_001 power-calc applies)"
-        }
-      ]
-    },
-    {
-      "id": "F96",
-      "file": "F96-exp118-schedule-symmetry-certification-hidden-order-metrology-whisper-c4634-c4635-ember-numbered-c4134.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4134, graded Whisper C4635): single hardware run exp118 on ibm_marrakesh; headline = existence of certified schedule-symmetry (nominally-parallel CZ scheduling carries no hidden effective ordering; hotspot D_order 0.0123 certified <=0.0303 vs floor 0.0223, control symmetric, guard clean). type_basis: existence of the symmetry certification; order-INDEPENDENCE reading also valid (output independent of A/B order); certified bound <=0.0303 = reported magnitude figure of merit. results/exp118_grade.json"
-    },
-    {
-      "id": "F97",
-      "file": "F97-exp119b-certified-negative-local-energy-coherent-extraction-whisper-c4641-c4642-ember-numbered-c4135.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4135, graded Whisper C4642): single hardware run exp119b on ibm_marrakesh; headline = existence of certified sub-ground-state (negative) LOCAL energy via COHERENT extraction (corrected E_B -0.0547+/-0.0046, 12sigma below local ground; 5sigma certified bound <=-0.0319, one-sided conservative; V3 correlation-control 21sigma). Certified bound = magnitude figure of merit (composite-floor). SCOPE: NOT LOCC energy teleportation (parent Exp119 = FAIL-EXISTENCE C4640, the 0.092 E feedforward tax stands). F82 retest pattern (disclosed pro-hypothesis selection -> fresh-data certification, came back deeper). results/exp119b_grade.json",
-      "subclaims": [
-        {
-          "claim": "LOCC quantum energy teleportation (classical-feedforward-controlled extraction) drives local energy below ground",
-          "status": "REFUTED",
-          "evidence": "parent Exp119 (results/exp119_grade.json, C4640): FAIL-EXISTENCE as frozen, no softening (P1/P2c missed); classical feedforward latency tax 0.092 E of target decoherence ate the 0.115 E budget (friction 05). The certified F97 claim is COHERENT extraction only, strictly weaker."
-        }
-      ]
-    },
-    {
-      "id": "F98",
-      "file": "F98-exp120-quantum-darwinism-under-indefinite-causal-order-whisper-c4643-c4645-ember-numbered-c4138.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4138, graded Whisper C4645): single hardware run exp120 on ibm_marrakesh; TWO existence headlines vs the MEASURED same-window objectivity hull [1.4614,1.4871] (F82-style, resource-scoped to these two incompatible recorders — intermediate-basis cheat disclosed+excluded): W_PLUS w=1.5957 = +0.1086 above hull (22sigma, both incompatible records ~0.80 faithful = facts without a causal history); W_MINUS w=1.0296 = -0.4319 below hull (52sigma, heralded record erasure). Separations = magnitude figures of merit; erasure exactness reported-only. Deepest certified apparatus (63 CZ), matched preview to 3rd decimal. Guards N1/H1 clean, preds 0.80/0.90 hit. results/exp120_grade.json"
-    },
-    {
-      "id": "F99",
-      "file": "F99-exp121-hayden-preskill-heralded-mirror-information-recovery-whisper-c4646-c4648-ember-numbered-c4140.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4140, graded Whisper C4648): single hardware run exp121 on ibm_marrakesh (same certified apparatus as F98, byte-identical skeleton/site/window). Premise MEASURED dead (probe S_P 0.0026/0.0065, 40x below effect, F83 NO-TEST guard). W_MIRROR: heralded minus branch S_P=-0.2383+/-0.0034 = 56sigma past the SIGN-FIXED band (anti-correlated retrieval of info no definite query order can access; ~74% recovered; theory -0.5). W_PLUS: +0.1825 (59sigma). Magnitudes = figures of merit. Hayden-Preskill ANALOG (scrambler model, not literal black hole), heralded/post-selected. results/exp121_grade.json",
-      "subclaims": [
-        {
-          "claim": "horizon-keeps-it: whether the environment learns the fact depends on query ORDER (S_E2 0.453 if X-first vs 0.007 if Z-first, theory 0.5/0)",
-          "status": "CONFIRMED",
-          "evidence": "results/exp121_grade.json subclaims_reported.horizon_keeps_it: landed on theory almost exactly; the Z-query-first order blinds the X-recorder completely (the horizon keeps the fact). Bonus measurement riding free on the mirror apparatus."
-        }
-      ]
-    },
-    {
-      "id": "F100",
-      "file": "F100-exp122-122b-quantum-twin-paradox-aging-decoherence-adjudicated-whisper-c4650-c4654-ember-numbered-c4141.md",
-      "claim_type": "existence",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "results/exp122b_grade.json",
-      "sim_only": false,
-      "single_run": false,
-      "evidence": "adjudicated across Exp122+Exp122b on ibm_marrakesh (numbered Ember C4141, graded Whisper C4651/C4654): parent Exp122 WIN-as-frozen 67sigma but author-attached asterisk (negative visibility = coherent rotation confound, X-only estimator couldn't separate; mechanism downgraded, number withheld). Retest Exp122b phase-blind |V|=sqrt(X^2+Y^2) rotation-immune: excited-clock aging decoherence CERTIFIED CLEAN, sep 0.338+/-0.009 @73us (36sigma) / 0.230+/-0.010 @146us (23sigma). Zych-Brukner-style ANALOG (which-path clock decoherence, not literal time dilation). results/exp122b_grade.json",
-      "subclaims": [
-        {
-          "claim": "the coherent rotation is a STATIC ZZ clock-pull",
-          "status": "REFUTED",
-          "evidence": "Exp122b echo arm: echo_recovery_dt3 = -0.119+/-0.010 (WRONG SIGN — echo did not recover coherence), so the phase is TIME-VARYING not static ZZ; author's rotation-mechanism prediction (0.80) MISSED, realized outcome was the least-favored class (0.10). Rotation itself was real (coherence in Y quadrature) but the mechanism story was wrong. Calibration lesson logged."
-        },
-        {
-          "claim": "aging decoherence rate matches pure T1 relaxation",
-          "status": "SOFTENED",
-          "evidence": "measured V-ratio 0.314 @73us vs pure-relaxation sqrt(p0p1)=0.667 -> aging runs ~2x FASTER than T1 predicts (extra channels); pre-filed at design, reported not gated."
-        }
-      ]
-    },
-    {
-      "id": "F101",
-      "file": "F101-exp123-grandfather-paradox-pctc-enforcement-backaction-whisper-c4655-c4656-ember-numbered-c4142.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4142, graded Whisper C4656): single hardware run exp123 on ibm_marrakesh (3 CX gates, shallowest apparatus). Two existence gates on Lloyd's P-CTC model (postselection=the timeline, honest scope stated first, NOT literal time travel): W_PARADOX enforcement rate p(pi)/p(0)=0.0188 (53x suppression, residue is readout noise per herald autopsy); W_BACKACTION bystander rotated classical->coherence, X_S separation 0.9415+/-0.0120=78sigma (nonlinear CTC backaction trivial postselection cannot fake). Magnitudes 0.0188/0.9415 = figures of merit. Preds 0.90/0.90 hit. results/exp123_grade.json",
-      "subclaims": [
-        {
-          "claim": "the enforcement rate follows the frozen law p(theta)=cos^2(theta/2)/2",
-          "status": "CONFIRMED",
-          "evidence": "intermediate ladder residuals < 0.013 at every theta in both arms — the timeline-enforcement curve measured to ~1%."
-        },
-        {
-          "claim": "the 1.9% surviving the full paradox are un-suppressed paradox (loophole)",
-          "status": "REFUTED",
-          "evidence": "herald autopsy: surviving theta=pi heralds carry scrambled bystander stats (X_S=0, Z_S~-0.07, n=283) = readout noise not physics, exactly as pre-filed."
-        }
-      ]
-    },
-    {
-      "id": "F102",
-      "file": "F102-exp124-zeno-pinning-tractor-beam-qnd-cadence-law-whisper-c4657-c4658-ember-numbered-c4143.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "fresh finding (numbered Ember C4143, graded Whisper C4658): single hardware run exp124 on ibm_marrakesh (single qubit, ZERO 2q gates, cheapest/shallowest flight). Quantum Zeno pinning against a full coherent pi-rotation certified (textbook priors credited): W_TRACTOR P(pinned_8)-P(unwatched_8)=0.624+/-0.0035=92sigma over the 0.3 bar; W_CADENCE 0.398=87sigma (watch faster hold tighter). Design correction owned: coherent-rotation NOT T1 decay (Markovian decay cadence-invariant). Figures of merit = QND-corrected cadence law [cos^2(pi/2N)]^N matched to 0.5% through N=8 + q=0.987 per-projection QND cost. Completes Horizons-2 6-of-6. results/exp124_grade.json",
-      "subclaims": [
-        {
-          "claim": "the watch-cost frontier — an optimal grip cadence exists and was located",
-          "status": "CONFIRMED",
-          "evidence": "QND-corrected law residuals <0.005 through N=8 but grow to -0.012 at N=16: watching too fast, per-measurement cost + higher-order effects eat the gains; the beam has an optimal cadence, measured. Reported not gated."
-        }
-      ]
-    },
-    {
-      "id": "F103",
-      "file": "F103-h2-negative-information-ledger-entanglement-by-negative-conditional-entropy-whisper-c4662-ember-numbered-c4144.md",
-      "claim_type": "existence",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "results/exp125b_grade.json",
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "analysis-tier (ZERO shots, re-analysis of banked Exp112b-micro CHSH S=2.453; numbered Ember C4144, analysis Whisper C4662): entanglement CERTIFIED by negative conditional entropy via twirl+positivity+worst-case-maximize -> S(B|A)<=-0.0986 at 5sigma (point -0.296), one-sided conservative on the Bell-twirled state. Leads with a SELF-CORRECTION (author's C4659 Fannes export overstated: observed TVD only lower-bounds trace distance; corrected split leg1=classical Shannon-Fannes, leg2=quantum via twirl+positivity). Leg1 scope-corrected subclaim: transpiler parallel preserves information content to <=0.30 bits (F96 extension). First Horizons-3 delivery. results/entropy_ledger_c4662.json [CONFIRMED_ON_RETEST by F105/Exp125b C4664: direct Bell-pair tomography S(B|A)=-0.855 bits 42sigma, far exceeds this twirled lower bound as it must.]",
-      "subclaims": [
-        {
-          "claim": "the transpiler's parallel scheduling preserves the outcome distribution's INFORMATION CONTENT (classical Shannon-Fannes)",
-          "status": "CONFIRMED",
-          "evidence": "|dH| <= 0.304 bits (F96 hotspot), 0.380 (control), 0.697 (Exp118 duration artifact), 0.303 (bench regression) — from banked TVD bounds, zero shots. SCOPE-CORRECTED to classical Shannon (not von Neumann) after the C4659 Fannes overstatement was caught at implementation."
-        }
-      ]
-    },
-    {
-      "id": "F104",
-      "file": "F104-exp125-final-invoice-landauer-floor-demon-record-straddle-refuted-whisper-c4663-ember-numbered-c4145.md",
-      "claim_type": "magnitude",
-      "status": "REFUTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp125 on ibm_marrakesh (numbered Ember C4145, graded Whisper C4663): the graded claim 'Landauer erasure floor of the ICO-engine demon record > F95 work credit at 5sigma' is STRADDLE-REFUTED (honest loss, F93/F95 floor-miss pattern). Engine q4 floor bracket [0.1234,0.1539]E vs banked F95 credit 0.0920+/-0.0098 = demon pays DIRECTIONALLY 1.3-1.7x but only 2.9sigma (PASS margin -0.0225, both directions miss 5sigma); sites agree (q98 concurs). Bottleneck = single-window credit SE not thermometry -> multi-window F95 rerun specified. Design-audited: grades the at-risk FLOOR not the cannot-fail dissipation (vacuous-gate self-catch); 3rd data-blind self-catch. Coherent-record loophole (F103 S(B|A)<0 could erase below floor) pre-reg'd as Exp125b, NOT graded. results/exp125_grade.json"
-    },
-    {
-      "id": "F105",
-      "file": "F105-exp125b-coherent-record-negative-entropy-erasure-frontier-whisper-c4664-ember-numbered-c4146.md",
-      "claim_type": "existence",
-      "status": "CONFIRMED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp125b on ibm_marrakesh, engine pair (3,4), record qubit q4 = F104's exact qubit same window (numbered Ember C4146, graded Whisper C4664): NEGATIVE CONDITIONAL ENTROPY DIRECTLY CERTIFIED — S(B|A)=-0.855+/-0.020 bits debiased, 42sigma, G-ent PASS. Far below F103's twirled -0.296 (direct >> twirled as it must be) -> CONFIRMS+strengthens F103; closes F104's cross-window caveat (same q4/window). results/exp125b_grade.json",
-      "subclaims": [
-        {
-          "claim": "the entanglement erasure bonus |S(B|A)|*floor_classical beats the measured feedforward tax (accessibility frontier)",
-          "status": "REFUTED",
-          "evidence": "STRADDLE vs both taxes: bonus point 0.109E beats coherent 0.028 + classical 0.092 BUT the SPAM-conservative floor bracket collapses to [0,0.127]E (q4 read colder 0.4% than its readout error 0.7%) -> bonus bracket [0,0.121] straddles. WALL RELOCATED entanglement(ample)->thermometry(ef-transition/SPAM), the F104 credit-SE class. Finite-sample vN bias favors accessible = the verdict to distrust; frozen rule granted none."
-        },
-        {
-          "claim": "direct tomography confirms F103's twirled negative-conditional-entropy bound",
-          "status": "CONFIRMED",
-          "evidence": "direct -0.855 far exceeds |twirled| 0.296 (twirl only raises entropy); F103 -> CONFIRMED_ON_RETEST via this run."
-        }
-      ]
-    },
-    {
-      "id": "F106",
-      "file": "F106-exp126-kobayashi-maru-magic-square-contextuality-no-go-triptych-whisper-c4666-ember-numbered-c4147.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp126 on ibm_marrakesh (numbered Ember C4147, graded Whisper C4666): Peres-Mermin magic-square (contextuality) game WON -- pooled 0.96901+/-0.00041 vs the classical ceiling 8/9 = 196sigma clearance; W2 jewel min-context (r3c3, 10-CZ) 0.9482=37.8sigma over 8/9 (min>8/9 classically impossible even for mixtures); no-entanglement null 0.657 (92.7sigma below); sentinels 0.99/0.98; all 4 gates PASS, preds 0.93/0.85 hit. Classical bound ENUMERATED in-artifact (4096 strategy pairs = 8/9 exactly, not cited). Completes the no-go triptych: Bell(F73)+ICO(F82)+contextuality(F106). Scope: game-value advantage NOT computational speedup; device-characterized not loophole-free; textbook priors credited. results/exp126_hw_results.json",
-      "subclaims": [
-        {
-          "claim": "the classical ceiling 8/9 is provable in-artifact (enumerated, not cited)",
-          "status": "CONFIRMED",
-          "evidence": "exhaustive search over all 4096 deterministic parity-respecting strategy pairs returns max avg = 8/9 exactly, in the same code that grades the data (pattern c857)."
-        },
-        {
-          "claim": "the broken/control scenario is a meaningful (can-fail) control",
-          "status": "CONFIRMED",
-          "evidence": "gate-feasibility linter caught it VACUOUS pre-freeze, fixed to entanglement-dead; executed null resulted at 0.657 coin-flip-class (C4657/C4662 self-catch)."
-        }
-      ]
-    },
-    {
-      "id": "F107",
-      "file": "F107-exp128-pocket-dictionary-2to1-qrac-two-sided-band-whisper-c4667-ember-numbered-c4148.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp128 on ibm_marrakesh (numbered Ember C4148, graded Whisper C4667): 2->1 QRAC (two bits in one qubit, either retrievable) CERTIFIED in the two-sided band -- pooled 0.84893+/-0.00090 = 110.5sigma above the enumerated classical ceiling 0.75 (256 strategy pairs) AND 5.2sigma below the quantum optimum cos^2(pi/8)=0.8536; proc-theory residual 0.0046; W2 min-case 0.84325 (36.3sigma); executed optimal-classical arm 0.74818 (0.2pp under its own 0.75 law); sentinels 0.998/0.995; all 5 gates PASS (incl G_QBAND: exceeding quantum law = NO-TEST not win); preds 0.95/0.90 hit. FIRST zero-2q-gate ADVANTAGE flight. Comms ladder F87(341)+F106(196)+F107(110). results/exp128_hw_results.json",
-      "subclaims": [
-        {
-          "claim": "the executed optimal-classical arm respects its own 0.75 law on the same chip/window",
-          "status": "CONFIRMED",
-          "evidence": "class arm 0.74818, 0.2pp under 0.75 -- both laws honored same window, only the quantum player crosses the classical line (the adversarial control, executed not assumed)."
-        },
-        {
-          "claim": "the FakeMarrakesh noise-model optimism sign is fixed across depth",
-          "status": "REFUTED",
-          "evidence": "fake PESSIMISTIC by 0.4pp here (0-CZ) vs OPTIMISTIC 0.9pp at Exp126 depth -> the noise-model optimism crossover sits between 0 and ~2 CZ; new shallow-end atlas anchor."
-        }
-      ]
-    },
-    {
-      "id": "F108",
-      "file": "F108-exp129-navigators-sextant-ghz-heisenberg-metrology-vs-executed-sql-whisper-c4668-ember-numbered-c4149.md",
-      "claim_type": "existence",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "results/exp130_hw_results.json",
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp129 on ibm_marrakesh (numbered Ember C4149, graded Whisper C4668): GHZ Heisenberg-limit metrology advantage at N=3 CERTIFIED vs an EXECUTED SQL reference (same 3 qubits/window/shots) -- R=2.848+/-0.011 (95% of max 3.0) = 168sigma; W2 absolute F_GHZ=8.293 beats even PERFECT separable probes at 239.5sigma, V3=0.9599 = 299sigma over the 1/sqrt(3) threshold; super-resolution law G_FREQ peaks at k=3 (122.9x amp ratio, fringe oscillates at 3x drive); 4 gates PASS; preds 0.93/0.90 hit; sentinels 0.988/0.978. Executed separable arm at its own ideal (F_sep 2.912/3.0, V1 0.9853 -- classical best case, lost anyway). GENRE TRIPTYCH: games F106 + storage F107 + metrology F108. results/exp129_hw_results.json [CONFIRMED_ON_RETEST by F109/Exp130 C4669: N=3 ladder rung F_ghz 8.42/R 2.859 (opus-4-8) reproduces this 8.29/2.848 (fable-5) at ~1%, cross-substrate cross-window.]",
-      "subclaims": [
-        {
-          "claim": "the SQL reference is executed at its own ideal (not a strawman)",
-          "status": "CONFIRMED",
-          "evidence": "separable arm F_sep 2.912/3.0, V1 0.9853 -- classical player at essentially perfect performance on the same chip/window, and still beaten (F107 executed-reference discipline)."
-        },
-        {
-          "claim": "the GHZ fringe oscillates at exactly 3x the drive (super-resolution law)",
-          "status": "CONFIRMED",
-          "evidence": "free-frequency DFT scan peaks at k=3, amp ratio 122.9x over any other frequency -- the advantage is visible structure, a law the Fisher ratio cannot fake."
-        }
-      ]
-    },
-    {
-      "id": "F109",
-      "file": "F109-exp130-heisenberg-ladder-metrology-advantage-persists-n5-task-dependent-inversion-whisper-c4669-ember-numbered-c4150.md",
-      "claim_type": "law",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp130 on ibm_marrakesh, substrate claude-opus-4-8 (numbered Ember C4150, graded Whisper C4669): GHZ Heisenberg-metrology advantage PERSISTS through N=5 (W2 PERSISTS, N*=5, no turnover). R-ladder 1.944(66s)/2.859(91s)/3.643(147s)/4.411(101s), every rung beats the executed SQL ref; F_ghz monotonic 3.83->8.42->14.27->21.56, dF(5-2)=17.73+/-0.16=111sigma; R/N bends 0.97->0.88 as pre-filed; every rung super-resolves k=N; 4 gates PASS, preds W1 0.93+PERSISTS 0.80 hit. THE FINDING: the NISQ scaling inversion is TASK-DEPENDENT -- cheap-prep metrology (2(N-1) CX) climbs where F85 expensive-prep capacity (110-CX) inverted at N=3; same hardware, opposite scaling. Scope advisor-audited: local per-shot Fisher sensitivity given fringe confinement, NOT unconditional superiority; turnover-location not power-law exponent. results/exp130_hw_results.json",
-      "subclaims": [
-        {
-          "claim": "the NISQ scaling inversion (F85) is a hardware verdict",
-          "status": "REFUTED",
-          "evidence": "F85 (capacity activation, 110-CX) inverted at N=3 but F109 cheap-prep metrology (2(N-1) CX) climbs through N=5 -- same chip/generation, opposite scaling -> the inversion is task-depth-dependent, not a hardware property. F85 stands as measured for its task."
-        },
-        {
-          "claim": "the N=3 metrology advantage replicates across window and SUBSTRATE",
-          "status": "CONFIRMED",
-          "evidence": "Exp130 N=3 rung (F_ghz 8.42, R 2.859, opus-4-8) reproduces F108/Exp129 (8.29, 2.848, fable-5) at ~1% -- different job/window/substrate; F108 -> CONFIRMED_ON_RETEST."
-        }
-      ]
-    },
-    {
-      "id": "F110",
-      "file": "F110-exp131-optimal-cloning-ceiling-no-cloning-cheat-detector-whisper-c4670-ember-numbered-c4152.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp131 on ibm_marrakesh, substrate opus-4-8 (numbered Ember C4152, graded Whisper C4670): the optimal universal 1->2 cloning CEILING 5/6 saturated-and-enforced -- a certified quantum LIMIT (first certified-limits ledger entry, opposite of the no-go beats). Optimal cloner FLAT across bases (Z 0.8265/Y 0.8121/X 0.8047, spread 0.0218, never exceeds 5/6); cheat beats 5/6 on Z (0.9911) but craters on conjugates (X 0.4995/Y 0.5054, min 0.4995, spread 0.492) -> detector tell 0.49 vs optimal 0.02 (24x). All 5 gates PASS (incl W4 proximity pre-flagged at-risk at 11 CZ). Cloner numerically optimized+verified in-artifact (noiseless 0.83332, var 2.2e-8). Priors credited (Buzek-Hillery proven-optimal). results/exp131_hw_results.json",
-      "subclaims": [
-        {
-          "claim": "beating 5/6 on one basis forces paying below it on the conjugate (no-cloning teeth)",
-          "status": "CONFIRMED",
-          "evidence": "cheat Z 0.9911 (>5/6) but X 0.4995/Y 0.5054 (~coin flip); universality (flatness) is the certificate no basis-reading cheat can forge -- the informative-null (cheat pre-registered to FAIL) weaponized into a detector."
-        }
-      ]
-    },
-    {
-      "id": "F111",
-      "file": "F111-exp132-cloaking-device-dfs-echo-bare-protection-race-noise-structure-whisper-c4671-ember-numbered-c4153.md",
-      "claim_type": "direction",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp132 on ibm_marrakesh, pair (1,2), substrate opus-4-8 (numbered Ember C4153, graded Whisper C4671). 3-way phase-blind coherence race down delay ladder [0,30,60,120]us: DFS logical qubit {|01>,|10>} (passive, immune to COLLECTIVE dephasing) vs Hahn echo (active, refocuses LOW-FREQ) vs bare idle. NOISE-STRUCTURE readout via a confound-breaker: the memoryless fake backend structurally CANNOT preview either benefit (pre-reg DFS 0.15/echo 0.97), so a hardware benefit = evidence of real correlated noise the vendor model omits (successor to F81). FINDING: on this good pair IBM dephasing is DOMINANTLY memoryless-independent with a real subdominant ~10-15% CORRELATED tail, detected TWO ways: echo/bare T2 1.088 (temporal/low-freq, +9%) and DFS/bare 0.291 sitting 1.9x ABOVE the 0.15 memoryless floor (spatial/collective). Direction of the hardware deviation is the evidence. T1 leakage structurally caps DFS (protects dephasing never relaxation). Sentinels 0.995/0.9835. results/exp132_hw_results.json",
-      "subclaims": [
-        {
-          "claim": "W1 ACTIVE beats PASSIVE (Hahn echo out-protects the DFS code)",
-          "status": "CONFIRMED",
-          "evidence": "echo - DFS = 0.4239 +/- 0.0123 = 34.5 sigma at 120us; the robust scientific spine (active refocusing beats a passive code crushed by T1 leakage + differential dephasing)."
-        },
-        {
-          "claim": "W2 ECHO_PROTECTS (real IBM noise carries a refocusable low-freq tail clearing a 5% bar)",
-          "status": "REFUTED",
-          "evidence": "HONEST MISS kept in record (F90/F93/F95/F100 informative-null discipline): pre-filed 0.80, echo helped only +9% raw (T2 ratio 1.088, echo-bare 0.0426) BELOW the 5% scientific bar -> graded MEMORYLESS-leaning. The low-freq correlated fraction was over-estimated. Scientific content survives: the correlated tail is still detected, just smaller in the temporal channel than the bet demanded."
-        },
-        {
-          "claim": "W3 correlated tail present above the memoryless floor (nonzero collective fraction)",
-          "status": "CONFIRMED",
-          "evidence": "DFS provides NO net protection (DFS/bare 0.291 < 1, as predicted null 0.75) BUT sits 1.9x above the fake independent-noise floor 0.15 -> a real spatial/collective correlated fraction exists. Confound-breaker held: memoryless fake cannot show correlation; hardware moved BOTH metrics toward correlation."
-        }
-      ]
-    },
-    {
-      "id": "F112",
-      "file": "F112-exp133-transporters-exam-three-axis-bench-portability-device-independent-court-whisper-c4672-ember-numbered-c4154.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp133 on ibm_kingston (FOREIGN Heron-r2 chip the full bench never saw; job d9amd73v6alc73cs0lp0, 77 pubs, 208k shots, substrate opus-4-8; numbered Ember C4154, graded Whisper C4672). PORTABILITY/DEVICE-INDEPENDENCE proof of the three-axis switch-bench: all 3 axes PASS against the SAME frozen bounds (theory constants + F96 rules), no retuning. Horizons-3 H6 -> COMPLETES Horizons-3. First TWO-DEVICE comparison card: CAUSAL witness DISC 1.9533+/-0.0224 (marrakesh 1.90, ideal 2.0) / capacity Rbar 0.5245+/-0.0090 (marrakesh 0.5034, ideal 0.5333) / null dead 0.0008; SCHEDULE (F96) hotspot D_order 0.0130 <= bound 0.0297 ORDER-SYMMETRIC (control 0.0052); HOLD (Zeno) tractor sep 0.6487+/-0.0034 (marrakesh 0.624) / QND q 0.9847 (marrakesh 0.987). Extends the F82 cross-device replication (fez, one axis) to the full 3-axis bench. Prediction HIT (all certify, kingston within ~10-20% of ref). Scope: same Heron generation, cross-generation (Eagle) NOT claimed; single window per device (same-instrument not same-instant). results/switch_bench_d9amd73v6alc73cs0lp0_card.json",
-      "subclaims": [
-        {
-          "claim": "device-ranking: kingston is a slightly BETTER causal chip than marrakesh",
-          "status": "CONFIRMED",
-          "evidence": "kingston edges marrakesh on every causal-family number (W 1.9533 vs 1.90, Rbar 0.5245 vs 0.5034, hold sep 0.649 vs 0.624), ties on QND (0.9847 vs 0.987) + schedule-symmetry — the bench ranks devices on axes QV/CLOPS/EPLG do not touch."
-        },
-        {
-          "claim": "frozen site-selection rules re-derive LIVE on the foreign map (the portability mechanism)",
-          "status": "CONFIRMED",
-          "evidence": "deterministic live-map selection re-solved on kingston (causal pair (10,11), hold qubit 11, schedule sites chosen at free scan) untouched — the same machinery that adapted to marrakesh drift at C4660; portability is a re-solving rule, not a layout coincidence."
-        }
-      ]
-    },
-    {
-      "id": "F113",
-      "file": "F113-exp127hw-bgk-2d-hlf-shallow-circuit-solver-first-computational-genre-on-silicon-whisper-c4674-ember-numbered-c4156.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp127-HW on ibm_marrakesh (job d9amnlvu62qs738o8nt0, chain [0,1,2,3], substrate opus-4-8; numbered Ember C4156, graded Whisper C4674). The campaign FIRST COMPUTATIONAL-GENRE on-silicon result: a CONSTANT-DEPTH quantum circuit solves the 2D Hidden Linear Function problem (Bravyi-Gosset-Koenig Science 2018 — the one depth-separation theorem needing NO hardness conjecture) at P(valid z)=0.9017+/-0.0015 = 437.8 sigma over the uniform floor 0.25, covering the WHOLE solution coset near-uniformly (all four valid z 0.2237/0.2229/0.2308/0.2243, min 0.2229 — a fixed-z classical mimic FAILS this W3 coverage gate). 10 routed CZ, depth 23. All 4 gates PASS (W1_SOLVER/W2_MAJORITY/W3_COVERAGE/G_SENT); pre-filed band [0.82,0.93] HIT at top; sentinels 0.985/0.957. The F-number was DEFERRED-TO-SILICON at C4154/C4155 (sim tier ruled docs/bridge, number earned on hardware flight) — the hardware-anchored-vs-sim-only rule working as designed. HONESTY FENCE: does NOT prove QNC0!=NC0 on-chip (asymptotic separation); certified claim = constant-depth circuit solves the n=4 2D-HLF instance at 90%/438sigma full-coset O(1)-depth, theorem carries asymptotics. Honest complement to F54 (deep-circuit wall). Sim groundwork + O(1) depth ledger: experiments/exp127-bgk-hlf-sim-finding-whisper-c4673.md. results/exp127hw_hw_results.json",
-      "subclaims": [
-        {
-          "claim": "contextuality is the classical hardness (the through-line)",
-          "status": "CONFIRMED_BY_COMPOSITION",
-          "evidence": "BGKT-2020 proves the separation survives noise via a construction that plays the magic-square (Peres-Mermin) game = the exact 8/9 game F106 certified at 196sigma on the same hardware. So the classical hardness this computational result rests on is inherited from a contextuality resource the campaign measured: contextuality -> computational separation, closed end-to-end."
-        },
-        {
-          "claim": "full-coset coverage is the un-fakeable gate (a fixed-output classical mimic fails it)",
-          "status": "CONFIRMED",
-          "evidence": "W3_COVERAGE: all four valid z sampled near-uniformly (~0.225 each, min 0.2229 > 0.08 floor) — the quantum-natural property a trivial output-one-fixed-valid-z shortcut cannot reproduce; the law-the-rate-cannot-fake discipline (F98/F101/F108 lineage) applied to a computational output."
-        }
-      ]
-    },
-    {
-      "id": "F114",
-      "file": "F114-exp134-hlf-solver-nisq-boundary-ladder-persists-n9-graceful-erosion-whisper-c4675-ember-numbered-c4157.md",
-      "claim_type": "scaling",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp134 on ibm_marrakesh (job d9amsd66hjac73felmmg, opus-4-8; numbered Ember C4157, graded Whisper C4675). NISQ-boundary ladder for the F113 computational-genre 2D-HLF solver: climbs n=4/6/9, PERSISTS above strong-majority at every rung. P(valid) ladder 0.9339 (550sigma over floor 0.25) / 0.8739 (376sigma) / 0.7205 (265sigma over floor 0.125); routed 2q 10->16->39 but logical CZ-layers only 2->3->4 (O(1) plateau); n*(majority)=NONE, n*(floor)=NONE. FINDING: constant-depth advantage erodes GRACEFULLY not inverts — opposite of F85 inversion, kin to F109 persisting ladder; logical depth is the discriminator; NISQ reach >= n=9/39 CZ/depth 50 at 72% valid. Same F113 honesty fence (asymptotic separation, not on-chip QNC0!=NC0). Sentinels 0.97875/0.91425. results/exp134_hw_results.json",
-      "subclaims": [
-        {
-          "claim": "W_BOUNDARY: n=9 drops below strong-majority",
-          "status": "REFUTED",
-          "evidence": "HONEST MISS kept in record: pre-filed sub-majority at n=9 (conf 0.78), held at 0.7205 (majority). The solver is more NISQ-robust than the routed-gate-count intuition predicted — shallow Clifford+S logical core stays far below the scrambling wall even routed, and readout noise only LOWERS P(valid) so 0.72 is a conservative floor. Over-estimating fragility = the good direction of surprise."
-        },
-        {
-          "claim": "joint-readout G_SENT thresholds must scale per-qubit (q1^n) not flat",
-          "status": "CONFIRMED",
-          "evidence": "the 9-qubit all-ones sentinel read 0.9143 < flat 0.95 bar, but 0.99^9=0.9135 = the joint-readout floor for ~1% per-qubit error, NOT a bad window; |0..0> 0.9788 vs |1..1> 0.9143 re-confirms asymmetric-readout finding. Reusable calibration correction."
-        }
-      ]
-    },
-    {
-      "id": "F115",
-      "file": "F115-exp135-chsh-witness-53sigma-three-tier-randomness-scope-correction-di-quarantine-whisper-c4676-ember-numbered-c4158.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp135 on ibm_marrakesh (job d9an47mg26ic73dev0s0, opus-4-8; numbered Ember C4158, graded Whisper C4676). Certified-randomness audit frontier (d). A 53sigma CHSH quantum-behavior WITNESS: S=2.7522+/-0.0141 = 53.19sigma over the LHV bound 2 (97.3% of Tsirelson 2.8284; W2 honesty 2.7522<2.8284), no-entanglement null S=0.036 (dead). All 4 gates PASS; pre-filed band [2.65,2.78] HIT; sentinels 0.995/0.988. THE CONTRIBUTION is the corrected SCOPE (advisor save before freeze): what an on-chip CHSH violation does/does not certify about randomness, in 3 explicitly-separated tiers — (1) WITNESS gated: device is quantum, mimic excluded; (2) TRUSTED-DEVICE: Born 1 bit/qubit usable ONLY under device-trust, CHSH is health-check not source; (3) DI number 0.5928 bits/use QUARANTINED to a labeled counterfactual because no-signaling is UNMET on one shared-control chip (a deterministic device can output S=2sqrt2 at ZERO entropy). NO certified-bits gate frozen. Categorically stronger honesty than F101/F107 (which qualified interpretation of a real effect) — here the DI quantity ITSELF evaporates without no-signaling. results/exp135_hw_results.json",
-      "subclaims": [
-        {
-          "claim": "DI-randomness quarantine: 0.5928 bits/use is a tier-3 counterfactual, not a certificate (no-signaling unmet on one chip)",
-          "status": "REPORTED_NOT_GATED",
-          "evidence": "advisor caught a ~0.57-bits/use overclaim before freeze — the DI H_min bound requires no-signaling between sites, not enforced on one shared control/calibration/readout chip; a deterministic classical device with shared control can output S=2sqrt2 at zero entropy. Quarantined (not gated, not qualified). Honest next step: a real semi-DI certificate needs a steering/dimension-bounded protocol with its own bound."
-        }
-      ]
-    },
-    {
-      "id": "F116",
-      "file": "F116-exp136-one-sided-di-steering-certificate-trust-ladder-whisper-c4677-ember-numbered-c4159.md",
-      "claim_type": "existence",
-      "status": "CONFIRMED_ON_RETEST",
-      "retested": true,
-      "retest_ref": "Exp136k (ibm_kingston, job d9aneirv6alc73cs2cn0): S3=1.6582+/-0.0071=93.1sigma over LHS bound, null 0.004, sentinels 0.999/0.982 — the frozen steering certificate travels to a foreign chip (pure cross-device replication, folded per F82-fez precedent not minted separate)",
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp136 on ibm_marrakesh (job d9anamjv6alc73cs246g, opus-4-8; numbered Ember C4159, graded Whisper C4677). The semi-DI certificate F115/Exp135 flagged as the honest next step, delivered: ONE-SIDED DEVICE-INDEPENDENT STEERING certified. CJWR functional S3 = (1/sqrt3)|<XX>-<YY>+<ZZ>| = 1.6813+/-0.0071 = 96.35 sigma over the local-hidden-state (unsteerable) bound 1.0, 97% of quantum max sqrt3; near-ideal corrs X 0.9694/Y -0.969/Z 0.9737; separable-faking null S3=0.025 (dead). All 4 gates PASS; sentinels 0.994/0.987. TYPE-A (assumption stated, quantity REAL) vs F115 Type-B (quantity evaporates): trust BOBs measurements (calibrated X/Y/Z MUB triple), ALICE a BLACK BOX — assumption EXACT at logical level Tr_A(U_A rho U_A^dag)=Tr_A(rho), fails only via physical crosstalk. WHY IT HOLDS WHERE DI CHSH DID NOT: faking S3=1.68 needs ~0.68 correlation excess, but the only on-chip mechanism (Alice-setting crosstalk back-acting on Bob) is ~1% per the campaigns OWN C4671/F55/F56 measurements — 1% cannot fake 0.68; null 0.025 confirms empirically. NOT loophole-free (locality open, crosstalk bounded-not-closed); gate named W1_STEERING_ONE_SIDED_DI. Trust ladder: Born full-trust (F115 t2) -> one-sided-DI steering 96sigma (here) -> full-DI needs space-like off-chip (flagged). results/exp136_hw_results.json",
-      "subclaims": [
-        {
-          "claim": "crosstalk-cannot-fake: the ~1% measured on-chip crosstalk is far below the ~0.68 excess a fake needs",
-          "status": "CONFIRMED",
-          "evidence": "the one-sided-no-signaling assumption is exact at the logical level (Alice unitary cannot change Bobs reduced state algebraically); it fails ONLY via physical crosstalk, measured ~1% (C4671/F55/F56) vs a 0.68 faking requirement; measured separable-faking floor null S3=0.025 is the direct empirical confirmation. This is why steering holds where DI CHSH (F115) evaporated."
-        },
-        {
-          "claim": "the F115->F116 trust ladder (quarantine the number you cannot hold, deliver the strongest you can)",
-          "status": "CONFIRMED",
-          "evidence": "Born full-trust (F115 t2) -> one-sided-DI steering (F116, Alice demoted trusted->black-box, 96sigma) -> full-DI (off-chip, flagged). F115 quarantined the DI number; F116 delivers the strongest certificate one chip CAN, each rung claiming exactly its assumption."
-        },
-        {
-          "claim": "the semi-DI steering CERTIFICATE is itself device-independent (travels cross-device)",
-          "status": "CONFIRMED",
-          "evidence": "Exp136k re-flew the exact frozen apparatus + advisor-locked scope on ibm_kingston: S3=1.6582 (93.1sigma) vs marrakesh 1.6813 (96sigma), both ~96% of quantum max sqrt3, null faking-floor 0.004. Complements F112 (the diagnostic bench travels) — here the CERTIFICATE travels. Pure cross-device replication -> CONFIRMED_ON_RETEST fold-in (F82-fez precedent), not a new F-number."
-        },
-        {
-          "claim": "1SDI-randomness bit-count hit an honest wall (analytic bounds fail the S3=1 boundary check)",
-          "status": "WALL_CLOSED_BY_TOOL",
-          "evidence": "Flagged at C4160, CLOSED at C4161 by tools/sdp_randomness.py (Whisper C4679, docs/tool tier no F-number): the EXACT 1SDI SDP for a trusted qubit Bob (GHJW: qubit assemblage quantum-realizable iff PSD + no-signaling = the SDP constraints, no NPA hierarchy; Passaro-Acin 2015). PASSES the boundary the analytic bounds failed: Werner H_min=0.000 at S3=1 (unsteerable) and ~1 at S3=sqrt3 (Bell), monotonic; reproduces the Passaro randomness-threshold>steering-threshold nuance (S3 in [1,~1.3] steerable yet ZERO randomness). Werner-MODEL estimate (labeled): marrakesh 0.656 bits/use, kingston 0.587. RIGOROUS per-device number still needs assemblage tomography (Bob X/Y/Z conditional states per Alice outcome/setting; Exp136 measured matched-correlations only) — that FLIGHT earns the 1SDI-randomness F-number (c4155_001 hardware-anchored-vs-tool discipline), not the tool-build. Arc: Exp135->Exp136->Exp136k->SDP tool->assemblage-tomography flight."
-        }
-      ]
-    },
-    {
-      "id": "F117",
-      "file": "F117-exp137-rigorous-one-sided-di-randomness-certificate-trust-ladder-capstone-whisper-c4680-ember-numbered-c4162.md",
-      "claim_type": "existence",
-      "status": "UNTESTED",
-      "retested": false,
-      "retest_ref": null,
-      "sim_only": false,
-      "single_run": true,
-      "evidence": "HW run exp137 on ibm_marrakesh (job d9ansru6hjac73fenigg, opus-4-8; numbered Ember C4162, graded Whisper C4680). The trust-ladder CAPSTONE: RIGOROUS one-sided-DI RANDOMNESS certified from MEASURED ASSEMBLAGE (no Werner model). H_min = 0.6823+/-0.0063 bits/use, certified H_min - 5*SE_boot = 0.6509 > 0 => 0.65 private random bits/use at 5sigma. Full assemblage: Alice 3 untrusted settings x Bob 3 trusted tomo axes = 9 circuits -> reconstruct sigma_{a|x} -> nearest-valid projection (SDP: PSD+no-signaling) -> guessing-prob SDP -> H_min, 40-sample bootstrap. recon S3=1.6876 (steerable), null S3=0.006 H_min_null=0, ns_violation 0.0032 (<0.05 physical), sentinels 0.994/0.987. All 5 gates PASS; pre-filed [0.45,0.70] HIT at top. THE RIGOROUS VALUE BEAT THE MODEL: 0.682 measured > 0.656 Werner estimate (F116/Exp136k) — the real state is closer to ideal in the certifying directions than isotropic noise assumes. Delivers as a NUMBER what F115 wanted but could only quarantine (DI evaporated), at the one-sided-DI rung a single chip genuinely holds. NUMBERING DISCIPLINE VALIDATED 2ND TIME (after F113): sim (C4155) + tool (C4161) ruled docs-tier, the hardware assemblage-tomography FLIGHT earns the F (c4155_001). NOT loophole-free (locality open, crosstalk bounded ~1% via F55/F56/C4671). Arc: Exp135(DI evaporated)->136(steering 96sigma)->136k(analytic failed)->C4679 SDP tool->137(rigorous cert). results/exp137_hw_results.json",
-      "subclaims": [
-        {
-          "claim": "the rigorous measured-assemblage value beats the Werner-model estimate (model-free is better, not worse)",
-          "status": "CONFIRMED",
-          "evidence": "H_min 0.6823 (measured full assemblage) > 0.656 (F116 Werner-model estimate) — the real state is closer to ideal in the certifying directions than isotropic noise assumes; the payoff of measuring the full object rather than inferring it from matched correlations."
-        },
-        {
-          "claim": "the trust ladder is complete (F115 quarantine -> F116 steering -> F117 rigorous randomness number)",
-          "status": "CONFIRMED",
-          "evidence": "what F115 wanted (certified private randomness) but could not claim via full-DI (no-signaling evaporates on one chip) is delivered at the one-sided-DI rung: 0.65 bits/use rigorous. Top rung (full DI) explicitly off-chip. The C4154 defer-to-silicon numbering rule fired cleanly for the 2nd time this week (after F113): tool docs-tier, flight earns the F."
-        }
-      ]
-    }
-  ],
-  "rubric_v2": {
-    "built": "C4626 Whisper, from Ember C4123 spot-check flags; Ember adversarial pass requested",
-    "R1_status_granularity": "status tracks the HEADLINE claim at its ORIGINAL granularity. Direction-level corroboration of a magnitude claim (the F57 ambiguity) does NOT flip status to CONFIRMED — it goes in subclaims[].",
-    "R2_subclaims": "optional subclaims[] = [{claim, status, evidence}] records partial adjudication (the F62 flag: one-row-per-finding hid sub-claim results). Subclaims use the same status vocabulary; they feed the audit as a separate informational count, never the headline survival rate.",
-    "R3_evidence_pointers": "evidence pointers must reference STABLE artifacts (findings/, results/, prereg files) — never mutable synthesis docs (the F76 flag, fixed C4594).",
-    "R4_retest_definition": "retested=true requires a SECOND measurement or formal adjudication event; internal cross-instance checks within one prereg count (Finding 13 precedent); corroboration-by-composition does not.",
-    "R5_composition_status": "Ember C4131 finding 2: subclaims whose evidence is corroboration-by-composition (byproducts of experiments designed for other questions) use CORROBORATED_BY_COMPOSITION — a distinct status, weaker than CONFIRMED_ON_RETEST, consistent with R4. It counts in the informational subclaim tally, never as a retest."
+ "version": 2,
+ "built": "C4587 2026-07-12",
+ "hypothesis_frozen_before_classification": "H1: magnitude/rate/law claims are refuted or softened at a higher rate than direction/existence claims, when retested. Frozen in plan v2 (commit before this file) and in the report header before rows were filled.",
+ "status_values": [
+  "CONFIRMED_ON_RETEST",
+  "UNTESTED",
+  "SOFTENED",
+  "REFUTED",
+  "REGIME_CONTINGENT",
+  "RETRACTED_PRE_RUN",
+  "CORROBORATED_BY_COMPOSITION"
+ ],
+ "scope_note": "v1: numbered findings in findings/ only (NN- and FNN prefixes); preregs/results/notes excluded; duplicate-prefix files collapsed to one row. UNTESTED = never retested, not ungraded.",
+ "rows": [
+  {
+   "id": "01",
+   "file": "01-chsh-bell-violation.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
   },
-  "blind_relabel": {
-    "by": "Ember C4132",
-    "agreement": "16/19 exact, 17/19 H1-group",
-    "H1_invariance": "2x2 numerically identical under both labelings (fragile 8/11, robust 1/7); disagreements cancel (one pro-H1, one anti-H1)",
-    "verdict": "confirmation-bias-in-labeling FALSIFIED; H1 statable without the not-blind asterisk",
-    "post_edit_transparency": "The F82 split (recommended by the blind rater, rubric-driven) moved a fragile-survivor counterexample out of the headline table: H1 strengthened from p=0.025/OR=13 (v2.1) to p=0.008/OR=28 (v2.2). Flagged explicitly because the edit favors the hypothesis; its provenance (independent rater recommendation + R1/R2 mechanical application) is the defense. The v2.1 numbers remain quotable as the pre-split sensitivity bound."
+  {
+   "id": "02",
+   "file": "02-sublinear-ghz-scaling.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "03",
+   "file": "03-x-basis-noise-immunity.md",
+   "claim_type": "direction",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "findings/12-x-basis-cross-backend.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "catalog L10 '3x independent confirmation'; L19: ordering (Y>Z>X) replicated on ibm_kingston; NOTE: the 3x MAGNITUDE component SOFTENED (1.19x on kingston, marrakesh-specific)",
+   "subclaims": [
+    {
+     "claim": "3x magnitude on marrakesh",
+     "status": "SOFTENED",
+     "evidence": "findings/12: kingston 1.19x — magnitude chip-specific"
+    }
+   ]
+  },
+  {
+   "id": "04",
+   "file": "04-scramblon-loschmidt-echo.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "05",
+   "file": "05-depth-phase-transitions.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "findings/13-qaoa-cz-wall.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "catalog L20: dense portfolio QUBO and sparse MaxCut hit the same ~1000-CZ wall — independent problem class reproduces the wall",
+   "type_basis": "existence per Whisper (a wall EXISTS at ~1000 CZ); Ember blind-read law (a depth constant). Edge case, H1-neutral (opposite-direction pair with F82); Elder naive tiebreak optional."
+  },
+  {
+   "id": "06",
+   "file": "06-ancilla-tax-qec-impracticability.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "07",
+   "file": "07-error-mitigation-failures.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "08",
+   "file": "08-vqe-h2-chemical-accuracy.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "09",
+   "file": "09-qae-iae-mle-precision.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "10",
+   "file": "10-financial-iqae.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "findings/F51-exp31-iqae-hardware-validation-ember-c4023.md",
+   "sim_only": true,
+   "single_run": false,
+   "evidence": "F51 filename+content: sim finding validated on hardware (Exp31)"
+  },
+  {
+   "id": "11",
+   "file": "11-gate-overhead-law.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "12",
+   "file": "12-x-basis-cross-backend.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "13",
+   "file": "13-qaoa-cz-wall.md",
+   "claim_type": "law",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "findings/13-qaoa-cz-wall.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "catalog L20: wall constant held across 6x different nominal depth, two problem types (internal cross-instance retest)"
+  },
+  {
+   "id": "14",
+   "file": "14-commutation-aligned-compilation.md",
+   "claim_type": "law",
+   "status": "REGIME_CONTINGENT",
+   "retested": true,
+   "retest_ref": "ORQ#7 closure C4328",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "catalog L21: protocol-matched retest under cleaner calibration collapsed the fit R2 0.971->0.131; smooth law is high-noise-regime phenomenon"
+  },
+  {
+   "id": "15",
+   "file": "15-xbasis-qaoa-limits.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "16",
+   "file": "16-hgate-dual-role.md",
+   "claim_type": "law",
+   "status": "SOFTENED",
+   "retested": true,
+   "retest_ref": "findings/17-xbasis-nonmonotonic-scaling.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "catalog L24: advantage peaks at intermediate size, shrinks at larger scale — F16's 'may match at large sizes' extrapolation died; measurement stands"
+  },
+  {
+   "id": "17",
+   "file": "17-xbasis-nonmonotonic-scaling.md",
+   "claim_type": "law",
+   "status": "SOFTENED",
+   "retested": true,
+   "retest_ref": "findings/19-ring-symmetry-paradox.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "catalog L26: 16-node ring WIDENS the gap — size-only scaling story incomplete, topology-dependent"
+  },
+  {
+   "id": "18",
+   "file": "18-xbasis-gradual-transition-pearl-validated.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "19",
+   "file": "19-ring-symmetry-paradox.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "20",
+   "file": "20-hgate-budget-sweet-spot.md",
+   "claim_type": "magnitude",
+   "status": "SOFTENED",
+   "retested": true,
+   "retest_ref": "findings/21-hgate-budget-ceiling-correction.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "catalog L28: budget formula corrected ceil() not round() across 4-20 nodes"
+  },
+  {
+   "id": "21",
+   "file": "21-hgate-budget-ceiling-correction.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "22",
+   "file": "22-budget-gated-sign-crossover.md",
+   "claim_type": "direction",
+   "status": "REFUTED",
+   "retested": true,
+   "retest_ref": "findings/23-restart-noise-crossover-refutation.md",
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "catalog L30: 3-restart rerun reverses the p=5 sign; crossover was a single-run COBYLA artifact"
+  },
+  {
+   "id": "23",
+   "file": "23-restart-noise-crossover-refutation.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "24",
+   "file": "24-exp49-depth-dependent-escape-draft.md",
+   "claim_type": "rate",
+   "status": "SOFTENED",
+   "retested": true,
+   "retest_ref": "findings/exp49-seed-locking-robustness-recheck-elder-c6347.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "catalog L31: leave-one-out recheck softened seed-locking to leaning-stochastic (~95% weight); Finding 25: the 100% escape rate itself non-replicated"
+  },
+  {
+   "id": "25",
+   "file": "25-exp50c-cobyla-shot-noise-non-replication.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "26",
+   "file": "26-exp51-spsa-no-better-than-cobyla-landscape-floor.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "27",
+   "file": "27-exp52-cobyla-shot-budget-curve.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "28",
+   "file": "28-exp53-shot-resolution-gates-depth-penalty.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "29",
+   "file": "29-exp57-instance-generalization-x0-gated-elder-c6011.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "30",
+   "file": "30-exp54-warmstart-anchor-floor-graded-elder-c6020.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "31",
+   "file": "31-exp60-anchor-transfer-PILOT-elder-c6045.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "32",
+   "file": "32-exp59-x0-selection-anchor-mediation-graded-elder-c6051.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "33",
+   "file": "33-exp54-vs-exp59-lift-signflip-reconciliation-elder-c6055.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "34",
+   "file": "34-exp60-anchor-transfer-full-graded-ember-c3917.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "35",
+   "file": "35-exp60-anchor-transfer-FULL-selflift-killrule-elder-c6061.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "36",
+   "file": "36-exp61-bestofk-anchor-selection-graded.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "37",
+   "file": "37-exp62-crossinstance-bestofk-generalization-elder-c6113.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "38",
+   "file": "38-exp63-kadaptive-escalation-elder-c6115.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "39",
+   "file": "39-exp52-noiseless-probe-bias-floor-confirmed.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "40",
+   "file": "40-exp64tau-calibration-loocv-elder-c6128.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "44",
+   "file": "44-exp68-landscape-gap-contraction-elder-c6199.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F48",
+   "file": "F48_tegmark_phi_N13_14_floor_test.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F49",
+   "file": "F49-exp74v2-n15-floor-vs-sampling-bias.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F51",
+   "file": "F51-exp31-iqae-hardware-validation-ember-c4023.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F52",
+   "file": "F52-classical-phi-growth-law-why-layer-whisper-c4412.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F53",
+   "file": "F53-exp77-anchor-rank-survives-qpu-elder-c6268.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F54",
+   "file": "F54-exp78-qqq-tail-qae-vs-mc-elder-c6269.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F55",
+   "file": "F55-exp79-noise-inversion-paradox-killed-elder-c6270.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F56",
+   "file": "F56-exp80-noise-assisted-escape-does-not-help-solving-elder-c6271.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F57",
+   "file": "F57-exp81-noise-dodge-placement-works-elder-c6272.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)",
+   "subclaims": [
+    {
+     "claim": "placement-dominance DIRECTION generalizes",
+     "status": "CORROBORATED_BY_COMPOSITION",
+     "evidence": "F68/F69 drift-free + draw-robust on ibm_fez; headline 46x/17x magnitude remains UNTESTED per R1 [relabeled per Ember C4131: F68/F69 direction evidence arose as byproducts — R4]"
+    }
+   ]
+  },
+  {
+   "id": "F58",
+   "file": "F58-quiet-qubits-tool-elder-c6273.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F59",
+   "file": "F59-placement-confound-in-F50-whisper-c4413.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F60",
+   "file": "F60-classical-phi-n11-intractable-whisper-c4415.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F61",
+   "file": "F61-toric-bell-proxy-replicates-heron-r2-entanglement-test-whisper-c4416.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F62",
+   "file": "F62-toric-bell-proxy-real-hardware-placement-and-round1-whisper-c4417.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)",
+   "subclaims": [
+    {
+     "claim": "gate-count sub-hypothesis (compression-isolable)",
+     "status": "SOFTENED",
+     "evidence": "F64: not isolable by compression; headline round1-vs-round0 comparison never re-run"
+    }
+   ]
+  },
+  {
+   "id": "F63",
+   "file": "F63-cheaper-state-prep-clears-bound-on-real-hardware-whisper-c4418.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F64",
+   "file": "F64-gatecount-isolation-true-codeword-floor-whisper-c4426.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F65",
+   "file": "F65-quiet-qubit-drift-first-datapoint-elder-c6289.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F66",
+   "file": "F66-quiet-qubit-discrimination-survives-drift-elder-c6294.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F67",
+   "file": "F67-fixed-placement-folding-partitions-exp86-decline-whisper-c4439.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F68",
+   "file": "F68-same-window-placement-gatecount-partition-whisper-c4445.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F69",
+   "file": "F69-placement-dominance-draw-robust-distribution-whisper-c4449.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F70",
+   "file": "F70-crossbackend-quiet-qubit-discrimination-elder-c6308.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F71",
+   "file": "F71-xor-ring-phi-odd-even-growth-rates-differ-ember-c4059.md",
+   "claim_type": "rate",
+   "status": "SOFTENED",
+   "retested": true,
+   "retest_ref": "findings/F72-xor-ring-phi-growth-slope-underpowered-not-distinguishable-whisper-c4458.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "F72 title+content: growth-slope difference underpowered, not distinguishable"
+  },
+  {
+   "id": "F72",
+   "file": "F72-xor-ring-phi-growth-slope-underpowered-not-distinguishable-whisper-c4458.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F73",
+   "file": "F73-causal-witness-survives-classical-mixture-of-definite-orders-elder-c6328.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F74",
+   "file": "F74-causal-order-coherence-is-a-continuous-resource-ember-c4066.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F75",
+   "file": "F75-quantum-switch-causal-witness-fires-on-hardware-elder-c6337.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "findings/F82-causal-game-beats-causal-bound-two-chips-ember-c4118.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "witness effect reproduced: F77 same-device drift-free (>=72sigma), F82 game on two chips"
+  },
+  {
+   "id": "F76",
+   "file": "F76-continuous-resource-law-confirmed-on-hardware-ember-c4072.md",
+   "claim_type": "law",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "findings/F74-causal-order-coherence-is-a-continuous-resource-ember-c4066.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "DISC(phi)=2cos(phi/2) traced on a SECOND device, Pearson 0.9992 (F76 finding record; pointer moved off the mutable synthesis doc per Ember C4123 spot-check flag 1)"
+  },
+  {
+   "id": "F77",
+   "file": "F77-classical-mixture-loophole-closed-on-hardware-same-device-elder-c6342.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "results/exp105_hw_results.json null arm",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "mixture-arm inertness reproduced by exp105 definite-order null (0.6146 vs prior 0.6165)"
+  },
+  {
+   "id": "F78",
+   "file": "F78-qqq-tail-grover-survives-on-hardware-but-no-blind-estimation-win-elder-c6349.md",
+   "claim_type": "magnitude",
+   "status": "SOFTENED",
+   "retested": true,
+   "retest_ref": "findings/F81-loader-depth-boundary-not-stable-same-circuits-same-qubits-11h-apart-elder-c6378.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "F81: same circuits, same qubits, 11h apart — boundary/magnitudes window-conditional"
+  },
+  {
+   "id": "F79",
+   "file": "F79-exp96-loader-depth-boundary-pins-2q-depth-as-mle-killer-ember-c4082.md",
+   "claim_type": "magnitude",
+   "status": "SOFTENED",
+   "retested": true,
+   "retest_ref": "findings/F81-loader-depth-boundary-not-stable-same-circuits-same-qubits-11h-apart-elder-c6378.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "F81: loader depth boundary not stable across windows",
+   "type_basis": "magnitude per Whisper vs law per Ember blind — both fragile group, zero H1 impact."
+  },
+  {
+   "id": "F80",
+   "file": "F80-dagfit-residual-is-witness-rescaling-not-independent-whisper-c4490.md",
+   "claim_type": "independence",
+   "status": "RETRACTED_PRE_RUN",
+   "retested": true,
+   "retest_ref": "findings/F80-dagfit-residual-is-witness-rescaling-not-independent-whisper-c4490.md",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "proved to be exact rescaling of the witness before running; retraction kept in record"
+  },
+  {
+   "id": "F81",
+   "file": "F81-loader-depth-boundary-not-stable-same-circuits-same-qubits-11h-apart-elder-c6378.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F82",
+   "file": "F82-causal-game-beats-causal-bound-two-chips-ember-c4118.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "results/exp105b_hw_results.json",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "fez replication p=0.9738 vs marrakesh 0.9769 — 0.31pp concordance; a MAGNITUDE that replicated cross-device [headline relabeled existence per Ember C4132: the claim is a bound-beat; magnitude lives in subclaims]",
+   "subclaims": [
+    {
+     "claim": "game-score magnitude reproduces cross-device (0.31pp concordance)",
+     "status": "CONFIRMED_ON_RETEST",
+     "evidence": "exp105b fez replication p=0.9738 vs marrakesh 0.9769 — a designed second measurement (R4-qualifying). Split from headline per Ember C4132 blind re-label + rubric R1/R2."
+    }
+   ]
+  },
+  {
+   "id": "F83",
+   "file": "F83-capacity-activation-two-zero-capacity-channels-whisper-c4530-ember-numbered-c4118.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F84",
+   "file": "F84-window-quality-not-calibration-age-htsc-null-elder-design-whisper-grade-c4542.md",
+   "claim_type": "unclassified",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "no documented retest found in catalog/reversal records (v1 pass, C4587)"
+  },
+  {
+   "id": "F85",
+   "file": "F85-n3-capacity-activation-scaling-inversion-whisper-c4539-ember-numbered-c4119.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "headline = the N=3 scaling INVERSION exists (theory scales, hardware inverts); not retested (Exp110's routing inversion is a different family). Classified C4627 per Ember C4131 finding 4 (sibling consistency)."
+  },
+  {
+   "id": "F86",
+   "file": "F86-exp108-ico-refrigeration-resource-whisper-c4561-ember-numbered-c4121.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "results/exp108c_grade.json",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "Exp108c (C4593): thermal splitting reproduced with SUBSTITUTED working fluid (native T1 decay, hot reservoirs p~0.44): Delta=0.1645+/-0.0127 (12.9sigma), cooling-below-coldest at 5sigma, procedure-theory residual 0.0015. Prior attempt 108b NO-TEST (calib drift) — did not adjudicate."
+  },
+  {
+   "id": "F87",
+   "file": "F87-exp109-superdense-coding-first-comms-primitive-whisper-c4590-c4591-ember-numbered-c4123.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4123, graded Whisper C4591): single hardware run exp109 on ibm_marrakesh, no retest yet; results/exp109_grade.json"
+  },
+  {
+   "id": "F88",
+   "file": "F88-exp108c-native-fluid-ico-refrigeration-whisper-c4592-c4593-ember-numbered-c4124.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4124, graded Whisper C4593): single hardware run exp108c on ibm_marrakesh (native-fluid variant; itself serves as F86's designed-in retest, but the native-fluid claim has no retest yet); results/exp108c_grade.json"
+  },
+  {
+   "id": "F89",
+   "file": "F89-exp111-ico-vs-coherent-control-resource-comparison-whisper-c4593-c4594-ember-numbered-c4124.md",
+   "claim_type": "direction",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4124, graded Whisper C4594): single hardware run exp111 on ibm_marrakesh; headline claim = strict ordering switch > paths at matched estimators (~20sigma); ratio-magnitude 1.949 is a sub-claim (window caveat, though common-mode invariance was demonstrated within-run); results/exp111_grade.json"
+  },
+  {
+   "id": "F90",
+   "file": "F90-exp110-swap-beats-teleport-no-crossover-feedforward-cost-whisper-c4596-c4597-ember-numbered-c4125.md",
+   "claim_type": "direction",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4125, graded Whisper C4597): single hardware run exp110 on ibm_marrakesh; headline claim = ordering swap > teleport at every tested N<=6 (generation-bounded scope stated in-doc); the ~5-6x per-hop cost ratio is a magnitude sub-claim (single-window caveat); results/exp110_grade.json",
+   "subclaims": [
+    {
+     "claim": "feedforward costs exceed software frame-tracking",
+     "status": "CORROBORATED_BY_COMPOSITION",
+     "evidence": "confirmed in 4 observable families: F90 routing, F92 witness (1.766<1.825), Exp112 CHSH (frame>active both k), Exp117 per-action deficit 0.0017E refines mechanism to per-ROUND accumulation [relabeled per Ember C4131: 4-family evidence is composition, not retest — R4]"
+    },
+    {
+     "claim": "feedforward cost quantified in ENERGY units — 0.092 E of target decoherence per classical feedforward round-trip on Heron r2",
+     "status": "CORROBORATED_BY_COMPOSITION",
+     "evidence": "Exp119 (results/exp119_grade.json, C4640; F97 lineage): classical-feedforward arm decohered +0.120 E vs coherent +0.028 E -> 0.092 E round-trip tax, which ate the 0.115 E extraction budget and forced the LOCC-QET FAIL-EXISTENCE. FakeMarrakesh predicted the opposite ordering (runs if_else at zero latency) -> friction report 05. A new-observable (energy/decoherence) measurement of the F90 cost class; the 0.092 E magnitude is single-run (not retested). Appended per Whisper C4643 decision (F90 subclaim, not own number); Ember C4136."
+    }
+   ]
+  },
+  {
+   "id": "F91",
+   "file": "F91-exp112-bell-violation-survives-two-swap-stations-repeater-primitive-whisper-c4598-c4599-ember-numbered-c4126.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4126, graded Whisper C4599): single hardware run exp112 on ibm_marrakesh; headline = existence of CHSH violation through k=2 swap stations (frame arm, >=15sigma over exact bound 2); frame-vs-active gap and the active-k=1 anomaly are sub-claims (Exp112b follow-up flagged); results/exp112_grade.json",
+   "subclaims": [
+    {
+     "claim": "active-feedforward arm certifies Bell violation at k=1",
+     "status": "REFUTED",
+     "evidence": "C4625: deterministic conditional-polarity inversion in runtime if_test (net X on B, branch-independent Psi+ fingerprint); logic+transpile exonerated, k=2 sibling in same job correct; friction report 04. NOT branch-noise (2604.28037). [seeded per Ember C4131 finding 3]"
+    }
+   ]
+  },
+  {
+   "id": "F92",
+   "file": "F92-exp113-causal-indefiniteness-survives-teleportation-whisper-c4603-c4604-ember-numbered-c4127.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4127, graded Whisper C4604): single hardware run exp113 on ibm_marrakesh; headline = existence of causal-indefiniteness transmission by teleportation, channel-discriminated (W1 90sigma + W2 33sigma, dephased-resource null executed same window); 97.05% retention magnitude and +0.060 ln atlas row are sub-claims; results/exp113_grade.json"
+  },
+  {
+   "id": "F93",
+   "file": "F93-exp114-purification-resurrects-dead-bell-violation-gain-leg-honest-loss-whisper-c4606-c4607-ember-numbered-c4128.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4128, graded Whisper C4607): single hardware run exp114 on ibm_marrakesh; headline = existence of purification resurrection (DEAD 5sigma below exact bound 2 AND ALIVE 5sigma above it, same window); GAIN-at-5sigma quantitative sub-claim recorded as LOSS (4.67sigma vs 0.1 floor — formulation miss, no softening); injected-noise operating point p*=0.3; results/exp114_grade.json",
+   "subclaims": [
+    {
+     "claim": "GAIN > 0.1 at 5sigma (quantitative floor)",
+     "status": "REFUTED",
+     "evidence": "results/exp114_grade.json: 4.67sigma vs floor, LOSS as frozen; headline DEAD+ALIVE resurrection stands"
+    }
+   ]
+  },
+  {
+   "id": "F94",
+   "file": "F94-exp116b-certified-population-inversion-ico-engine-delay-ladder-whisper-c4611-c4612-ember-numbered-c4129.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4129, graded Whisper C4612): single hardware run exp116b on ibm_marrakesh; headline = existence of certified population inversion from ICO + demon record (passive baths 5sigma below 0.5 in, active branch +10.6sigma above 0.5 out, premise gate that refused Exp116's +23sigma pseudo-win); ergotropy 0.0378 E/run + same-job r3 dose-response are sub-claims (r3 = second operating point, not independent retest); results/exp116b_grade.json"
+  },
+  {
+   "id": "F95",
+   "file": "F95-exp117c-ico-engine-full-thermodynamic-cycle-whisper-c4618-c4632-ember-numbered-c4133.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4133, graded Whisper C4632): single hardware run exp117c two-stage on ibm_marrakesh; headline = existence of a complete ICO-powered thermodynamic cycle (passive baths in 5sigma below 0.5, battery charged 7sigma above, W2 output passive-again WIN at 5sigma, net work 0.0340 E/run, demon cost audited); results/exp117c_stage2_grade.json",
+   "subclaims": [
+    {
+     "claim": "W1 power-stroke drop clears the 0.05 floor at 5sigma (quantitative)",
+     "status": "REFUTED",
+     "evidence": "results/exp117c_stage2_grade.json: drop 0.0920 is 9.4sigma from zero but misses 5sigma clearance vs the 0.05 floor by 0.7sigma; LOSS as frozen, no softening (F93 GAIN-leg class; c4130_001 power-calc applies)"
+    }
+   ]
+  },
+  {
+   "id": "F96",
+   "file": "F96-exp118-schedule-symmetry-certification-hidden-order-metrology-whisper-c4634-c4635-ember-numbered-c4134.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4134, graded Whisper C4635): single hardware run exp118 on ibm_marrakesh; headline = existence of certified schedule-symmetry (nominally-parallel CZ scheduling carries no hidden effective ordering; hotspot D_order 0.0123 certified <=0.0303 vs floor 0.0223, control symmetric, guard clean). type_basis: existence of the symmetry certification; order-INDEPENDENCE reading also valid (output independent of A/B order); certified bound <=0.0303 = reported magnitude figure of merit. results/exp118_grade.json"
+  },
+  {
+   "id": "F97",
+   "file": "F97-exp119b-certified-negative-local-energy-coherent-extraction-whisper-c4641-c4642-ember-numbered-c4135.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4135, graded Whisper C4642): single hardware run exp119b on ibm_marrakesh; headline = existence of certified sub-ground-state (negative) LOCAL energy via COHERENT extraction (corrected E_B -0.0547+/-0.0046, 12sigma below local ground; 5sigma certified bound <=-0.0319, one-sided conservative; V3 correlation-control 21sigma). Certified bound = magnitude figure of merit (composite-floor). SCOPE: NOT LOCC energy teleportation (parent Exp119 = FAIL-EXISTENCE C4640, the 0.092 E feedforward tax stands). F82 retest pattern (disclosed pro-hypothesis selection -> fresh-data certification, came back deeper). results/exp119b_grade.json",
+   "subclaims": [
+    {
+     "claim": "LOCC quantum energy teleportation (classical-feedforward-controlled extraction) drives local energy below ground",
+     "status": "REFUTED",
+     "evidence": "parent Exp119 (results/exp119_grade.json, C4640): FAIL-EXISTENCE as frozen, no softening (P1/P2c missed); classical feedforward latency tax 0.092 E of target decoherence ate the 0.115 E budget (friction 05). The certified F97 claim is COHERENT extraction only, strictly weaker."
+    }
+   ]
+  },
+  {
+   "id": "F98",
+   "file": "F98-exp120-quantum-darwinism-under-indefinite-causal-order-whisper-c4643-c4645-ember-numbered-c4138.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4138, graded Whisper C4645): single hardware run exp120 on ibm_marrakesh; TWO existence headlines vs the MEASURED same-window objectivity hull [1.4614,1.4871] (F82-style, resource-scoped to these two incompatible recorders — intermediate-basis cheat disclosed+excluded): W_PLUS w=1.5957 = +0.1086 above hull (22sigma, both incompatible records ~0.80 faithful = facts without a causal history); W_MINUS w=1.0296 = -0.4319 below hull (52sigma, heralded record erasure). Separations = magnitude figures of merit; erasure exactness reported-only. Deepest certified apparatus (63 CZ), matched preview to 3rd decimal. Guards N1/H1 clean, preds 0.80/0.90 hit. results/exp120_grade.json"
+  },
+  {
+   "id": "F99",
+   "file": "F99-exp121-hayden-preskill-heralded-mirror-information-recovery-whisper-c4646-c4648-ember-numbered-c4140.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4140, graded Whisper C4648): single hardware run exp121 on ibm_marrakesh (same certified apparatus as F98, byte-identical skeleton/site/window). Premise MEASURED dead (probe S_P 0.0026/0.0065, 40x below effect, F83 NO-TEST guard). W_MIRROR: heralded minus branch S_P=-0.2383+/-0.0034 = 56sigma past the SIGN-FIXED band (anti-correlated retrieval of info no definite query order can access; ~74% recovered; theory -0.5). W_PLUS: +0.1825 (59sigma). Magnitudes = figures of merit. Hayden-Preskill ANALOG (scrambler model, not literal black hole), heralded/post-selected. results/exp121_grade.json",
+   "subclaims": [
+    {
+     "claim": "horizon-keeps-it: whether the environment learns the fact depends on query ORDER (S_E2 0.453 if X-first vs 0.007 if Z-first, theory 0.5/0)",
+     "status": "CONFIRMED",
+     "evidence": "results/exp121_grade.json subclaims_reported.horizon_keeps_it: landed on theory almost exactly; the Z-query-first order blinds the X-recorder completely (the horizon keeps the fact). Bonus measurement riding free on the mirror apparatus."
+    }
+   ]
+  },
+  {
+   "id": "F100",
+   "file": "F100-exp122-122b-quantum-twin-paradox-aging-decoherence-adjudicated-whisper-c4650-c4654-ember-numbered-c4141.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "results/exp122b_grade.json",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "adjudicated across Exp122+Exp122b on ibm_marrakesh (numbered Ember C4141, graded Whisper C4651/C4654): parent Exp122 WIN-as-frozen 67sigma but author-attached asterisk (negative visibility = coherent rotation confound, X-only estimator couldn't separate; mechanism downgraded, number withheld). Retest Exp122b phase-blind |V|=sqrt(X^2+Y^2) rotation-immune: excited-clock aging decoherence CERTIFIED CLEAN, sep 0.338+/-0.009 @73us (36sigma) / 0.230+/-0.010 @146us (23sigma). Zych-Brukner-style ANALOG (which-path clock decoherence, not literal time dilation). results/exp122b_grade.json",
+   "subclaims": [
+    {
+     "claim": "the coherent rotation is a STATIC ZZ clock-pull",
+     "status": "REFUTED",
+     "evidence": "Exp122b echo arm: echo_recovery_dt3 = -0.119+/-0.010 (WRONG SIGN — echo did not recover coherence), so the phase is TIME-VARYING not static ZZ; author's rotation-mechanism prediction (0.80) MISSED, realized outcome was the least-favored class (0.10). Rotation itself was real (coherence in Y quadrature) but the mechanism story was wrong. Calibration lesson logged."
+    },
+    {
+     "claim": "aging decoherence rate matches pure T1 relaxation",
+     "status": "SOFTENED",
+     "evidence": "measured V-ratio 0.314 @73us vs pure-relaxation sqrt(p0p1)=0.667 -> aging runs ~2x FASTER than T1 predicts (extra channels); pre-filed at design, reported not gated."
+    }
+   ]
+  },
+  {
+   "id": "F101",
+   "file": "F101-exp123-grandfather-paradox-pctc-enforcement-backaction-whisper-c4655-c4656-ember-numbered-c4142.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4142, graded Whisper C4656): single hardware run exp123 on ibm_marrakesh (3 CX gates, shallowest apparatus). Two existence gates on Lloyd's P-CTC model (postselection=the timeline, honest scope stated first, NOT literal time travel): W_PARADOX enforcement rate p(pi)/p(0)=0.0188 (53x suppression, residue is readout noise per herald autopsy); W_BACKACTION bystander rotated classical->coherence, X_S separation 0.9415+/-0.0120=78sigma (nonlinear CTC backaction trivial postselection cannot fake). Magnitudes 0.0188/0.9415 = figures of merit. Preds 0.90/0.90 hit. results/exp123_grade.json",
+   "subclaims": [
+    {
+     "claim": "the enforcement rate follows the frozen law p(theta)=cos^2(theta/2)/2",
+     "status": "CONFIRMED",
+     "evidence": "intermediate ladder residuals < 0.013 at every theta in both arms — the timeline-enforcement curve measured to ~1%."
+    },
+    {
+     "claim": "the 1.9% surviving the full paradox are un-suppressed paradox (loophole)",
+     "status": "REFUTED",
+     "evidence": "herald autopsy: surviving theta=pi heralds carry scrambled bystander stats (X_S=0, Z_S~-0.07, n=283) = readout noise not physics, exactly as pre-filed."
+    }
+   ]
+  },
+  {
+   "id": "F102",
+   "file": "F102-exp124-zeno-pinning-tractor-beam-qnd-cadence-law-whisper-c4657-c4658-ember-numbered-c4143.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "fresh finding (numbered Ember C4143, graded Whisper C4658): single hardware run exp124 on ibm_marrakesh (single qubit, ZERO 2q gates, cheapest/shallowest flight). Quantum Zeno pinning against a full coherent pi-rotation certified (textbook priors credited): W_TRACTOR P(pinned_8)-P(unwatched_8)=0.624+/-0.0035=92sigma over the 0.3 bar; W_CADENCE 0.398=87sigma (watch faster hold tighter). Design correction owned: coherent-rotation NOT T1 decay (Markovian decay cadence-invariant). Figures of merit = QND-corrected cadence law [cos^2(pi/2N)]^N matched to 0.5% through N=8 + q=0.987 per-projection QND cost. Completes Horizons-2 6-of-6. results/exp124_grade.json",
+   "subclaims": [
+    {
+     "claim": "the watch-cost frontier — an optimal grip cadence exists and was located",
+     "status": "CONFIRMED",
+     "evidence": "QND-corrected law residuals <0.005 through N=8 but grow to -0.012 at N=16: watching too fast, per-measurement cost + higher-order effects eat the gains; the beam has an optimal cadence, measured. Reported not gated."
+    }
+   ]
+  },
+  {
+   "id": "F103",
+   "file": "F103-h2-negative-information-ledger-entanglement-by-negative-conditional-entropy-whisper-c4662-ember-numbered-c4144.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "results/exp125b_grade.json",
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "analysis-tier (ZERO shots, re-analysis of banked Exp112b-micro CHSH S=2.453; numbered Ember C4144, analysis Whisper C4662): entanglement CERTIFIED by negative conditional entropy via twirl+positivity+worst-case-maximize -> S(B|A)<=-0.0986 at 5sigma (point -0.296), one-sided conservative on the Bell-twirled state. Leads with a SELF-CORRECTION (author's C4659 Fannes export overstated: observed TVD only lower-bounds trace distance; corrected split leg1=classical Shannon-Fannes, leg2=quantum via twirl+positivity). Leg1 scope-corrected subclaim: transpiler parallel preserves information content to <=0.30 bits (F96 extension). First Horizons-3 delivery. results/entropy_ledger_c4662.json [CONFIRMED_ON_RETEST by F105/Exp125b C4664: direct Bell-pair tomography S(B|A)=-0.855 bits 42sigma, far exceeds this twirled lower bound as it must.]",
+   "subclaims": [
+    {
+     "claim": "the transpiler's parallel scheduling preserves the outcome distribution's INFORMATION CONTENT (classical Shannon-Fannes)",
+     "status": "CONFIRMED",
+     "evidence": "|dH| <= 0.304 bits (F96 hotspot), 0.380 (control), 0.697 (Exp118 duration artifact), 0.303 (bench regression) — from banked TVD bounds, zero shots. SCOPE-CORRECTED to classical Shannon (not von Neumann) after the C4659 Fannes overstatement was caught at implementation."
+    }
+   ]
+  },
+  {
+   "id": "F104",
+   "file": "F104-exp125-final-invoice-landauer-floor-demon-record-straddle-refuted-whisper-c4663-ember-numbered-c4145.md",
+   "claim_type": "magnitude",
+   "status": "REFUTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp125 on ibm_marrakesh (numbered Ember C4145, graded Whisper C4663): the graded claim 'Landauer erasure floor of the ICO-engine demon record > F95 work credit at 5sigma' is STRADDLE-REFUTED (honest loss, F93/F95 floor-miss pattern). Engine q4 floor bracket [0.1234,0.1539]E vs banked F95 credit 0.0920+/-0.0098 = demon pays DIRECTIONALLY 1.3-1.7x but only 2.9sigma (PASS margin -0.0225, both directions miss 5sigma); sites agree (q98 concurs). Bottleneck = single-window credit SE not thermometry -> multi-window F95 rerun specified. Design-audited: grades the at-risk FLOOR not the cannot-fail dissipation (vacuous-gate self-catch); 3rd data-blind self-catch. Coherent-record loophole (F103 S(B|A)<0 could erase below floor) pre-reg'd as Exp125b, NOT graded. results/exp125_grade.json"
+  },
+  {
+   "id": "F105",
+   "file": "F105-exp125b-coherent-record-negative-entropy-erasure-frontier-whisper-c4664-ember-numbered-c4146.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp125b on ibm_marrakesh, engine pair (3,4), record qubit q4 = F104's exact qubit same window (numbered Ember C4146, graded Whisper C4664): NEGATIVE CONDITIONAL ENTROPY DIRECTLY CERTIFIED — S(B|A)=-0.855+/-0.020 bits debiased, 42sigma, G-ent PASS. Far below F103's twirled -0.296 (direct >> twirled as it must be) -> CONFIRMS+strengthens F103; closes F104's cross-window caveat (same q4/window). results/exp125b_grade.json",
+   "subclaims": [
+    {
+     "claim": "the entanglement erasure bonus |S(B|A)|*floor_classical beats the measured feedforward tax (accessibility frontier)",
+     "status": "REFUTED",
+     "evidence": "STRADDLE vs both taxes: bonus point 0.109E beats coherent 0.028 + classical 0.092 BUT the SPAM-conservative floor bracket collapses to [0,0.127]E (q4 read colder 0.4% than its readout error 0.7%) -> bonus bracket [0,0.121] straddles. WALL RELOCATED entanglement(ample)->thermometry(ef-transition/SPAM), the F104 credit-SE class. Finite-sample vN bias favors accessible = the verdict to distrust; frozen rule granted none."
+    },
+    {
+     "claim": "direct tomography confirms F103's twirled negative-conditional-entropy bound",
+     "status": "CONFIRMED",
+     "evidence": "direct -0.855 far exceeds |twirled| 0.296 (twirl only raises entropy); F103 -> CONFIRMED_ON_RETEST via this run."
+    }
+   ]
+  },
+  {
+   "id": "F106",
+   "file": "F106-exp126-kobayashi-maru-magic-square-contextuality-no-go-triptych-whisper-c4666-ember-numbered-c4147.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp126 on ibm_marrakesh (numbered Ember C4147, graded Whisper C4666): Peres-Mermin magic-square (contextuality) game WON -- pooled 0.96901+/-0.00041 vs the classical ceiling 8/9 = 196sigma clearance; W2 jewel min-context (r3c3, 10-CZ) 0.9482=37.8sigma over 8/9 (min>8/9 classically impossible even for mixtures); no-entanglement null 0.657 (92.7sigma below); sentinels 0.99/0.98; all 4 gates PASS, preds 0.93/0.85 hit. Classical bound ENUMERATED in-artifact (4096 strategy pairs = 8/9 exactly, not cited). Completes the no-go triptych: Bell(F73)+ICO(F82)+contextuality(F106). Scope: game-value advantage NOT computational speedup; device-characterized not loophole-free; textbook priors credited. results/exp126_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "the classical ceiling 8/9 is provable in-artifact (enumerated, not cited)",
+     "status": "CONFIRMED",
+     "evidence": "exhaustive search over all 4096 deterministic parity-respecting strategy pairs returns max avg = 8/9 exactly, in the same code that grades the data (pattern c857)."
+    },
+    {
+     "claim": "the broken/control scenario is a meaningful (can-fail) control",
+     "status": "CONFIRMED",
+     "evidence": "gate-feasibility linter caught it VACUOUS pre-freeze, fixed to entanglement-dead; executed null resulted at 0.657 coin-flip-class (C4657/C4662 self-catch)."
+    }
+   ]
+  },
+  {
+   "id": "F107",
+   "file": "F107-exp128-pocket-dictionary-2to1-qrac-two-sided-band-whisper-c4667-ember-numbered-c4148.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp128 on ibm_marrakesh (numbered Ember C4148, graded Whisper C4667): 2->1 QRAC (two bits in one qubit, either retrievable) CERTIFIED in the two-sided band -- pooled 0.84893+/-0.00090 = 110.5sigma above the enumerated classical ceiling 0.75 (256 strategy pairs) AND 5.2sigma below the quantum optimum cos^2(pi/8)=0.8536; proc-theory residual 0.0046; W2 min-case 0.84325 (36.3sigma); executed optimal-classical arm 0.74818 (0.2pp under its own 0.75 law); sentinels 0.998/0.995; all 5 gates PASS (incl G_QBAND: exceeding quantum law = NO-TEST not win); preds 0.95/0.90 hit. FIRST zero-2q-gate ADVANTAGE flight. Comms ladder F87(341)+F106(196)+F107(110). results/exp128_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "the executed optimal-classical arm respects its own 0.75 law on the same chip/window",
+     "status": "CONFIRMED",
+     "evidence": "class arm 0.74818, 0.2pp under 0.75 -- both laws honored same window, only the quantum player crosses the classical line (the adversarial control, executed not assumed)."
+    },
+    {
+     "claim": "the FakeMarrakesh noise-model optimism sign is fixed across depth",
+     "status": "REFUTED",
+     "evidence": "fake PESSIMISTIC by 0.4pp here (0-CZ) vs OPTIMISTIC 0.9pp at Exp126 depth -> the noise-model optimism crossover sits between 0 and ~2 CZ; new shallow-end atlas anchor."
+    }
+   ]
+  },
+  {
+   "id": "F108",
+   "file": "F108-exp129-navigators-sextant-ghz-heisenberg-metrology-vs-executed-sql-whisper-c4668-ember-numbered-c4149.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "results/exp130_hw_results.json",
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp129 on ibm_marrakesh (numbered Ember C4149, graded Whisper C4668): GHZ Heisenberg-limit metrology advantage at N=3 CERTIFIED vs an EXECUTED SQL reference (same 3 qubits/window/shots) -- R=2.848+/-0.011 (95% of max 3.0) = 168sigma; W2 absolute F_GHZ=8.293 beats even PERFECT separable probes at 239.5sigma, V3=0.9599 = 299sigma over the 1/sqrt(3) threshold; super-resolution law G_FREQ peaks at k=3 (122.9x amp ratio, fringe oscillates at 3x drive); 4 gates PASS; preds 0.93/0.90 hit; sentinels 0.988/0.978. Executed separable arm at its own ideal (F_sep 2.912/3.0, V1 0.9853 -- classical best case, lost anyway). GENRE TRIPTYCH: games F106 + storage F107 + metrology F108. results/exp129_hw_results.json [CONFIRMED_ON_RETEST by F109/Exp130 C4669: N=3 ladder rung F_ghz 8.42/R 2.859 (opus-4-8) reproduces this 8.29/2.848 (fable-5) at ~1%, cross-substrate cross-window.]",
+   "subclaims": [
+    {
+     "claim": "the SQL reference is executed at its own ideal (not a strawman)",
+     "status": "CONFIRMED",
+     "evidence": "separable arm F_sep 2.912/3.0, V1 0.9853 -- classical player at essentially perfect performance on the same chip/window, and still beaten (F107 executed-reference discipline)."
+    },
+    {
+     "claim": "the GHZ fringe oscillates at exactly 3x the drive (super-resolution law)",
+     "status": "CONFIRMED",
+     "evidence": "free-frequency DFT scan peaks at k=3, amp ratio 122.9x over any other frequency -- the advantage is visible structure, a law the Fisher ratio cannot fake."
+    }
+   ]
+  },
+  {
+   "id": "F109",
+   "file": "F109-exp130-heisenberg-ladder-metrology-advantage-persists-n5-task-dependent-inversion-whisper-c4669-ember-numbered-c4150.md",
+   "claim_type": "law",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp130 on ibm_marrakesh, substrate claude-opus-4-8 (numbered Ember C4150, graded Whisper C4669): GHZ Heisenberg-metrology advantage PERSISTS through N=5 (W2 PERSISTS, N*=5, no turnover). R-ladder 1.944(66s)/2.859(91s)/3.643(147s)/4.411(101s), every rung beats the executed SQL ref; F_ghz monotonic 3.83->8.42->14.27->21.56, dF(5-2)=17.73+/-0.16=111sigma; R/N bends 0.97->0.88 as pre-filed; every rung super-resolves k=N; 4 gates PASS, preds W1 0.93+PERSISTS 0.80 hit. THE FINDING: the NISQ scaling inversion is TASK-DEPENDENT -- cheap-prep metrology (2(N-1) CX) climbs where F85 expensive-prep capacity (110-CX) inverted at N=3; same hardware, opposite scaling. Scope advisor-audited: local per-shot Fisher sensitivity given fringe confinement, NOT unconditional superiority; turnover-location not power-law exponent. results/exp130_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "the NISQ scaling inversion (F85) is a hardware verdict",
+     "status": "REFUTED",
+     "evidence": "F85 (capacity activation, 110-CX) inverted at N=3 but F109 cheap-prep metrology (2(N-1) CX) climbs through N=5 -- same chip/generation, opposite scaling -> the inversion is task-depth-dependent, not a hardware property. F85 stands as measured for its task."
+    },
+    {
+     "claim": "the N=3 metrology advantage replicates across window and SUBSTRATE",
+     "status": "CONFIRMED",
+     "evidence": "Exp130 N=3 rung (F_ghz 8.42, R 2.859, opus-4-8) reproduces F108/Exp129 (8.29, 2.848, fable-5) at ~1% -- different job/window/substrate; F108 -> CONFIRMED_ON_RETEST."
+    }
+   ]
+  },
+  {
+   "id": "F110",
+   "file": "F110-exp131-optimal-cloning-ceiling-no-cloning-cheat-detector-whisper-c4670-ember-numbered-c4152.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp131 on ibm_marrakesh, substrate opus-4-8 (numbered Ember C4152, graded Whisper C4670): the optimal universal 1->2 cloning CEILING 5/6 saturated-and-enforced -- a certified quantum LIMIT (first certified-limits ledger entry, opposite of the no-go beats). Optimal cloner FLAT across bases (Z 0.8265/Y 0.8121/X 0.8047, spread 0.0218, never exceeds 5/6); cheat beats 5/6 on Z (0.9911) but craters on conjugates (X 0.4995/Y 0.5054, min 0.4995, spread 0.492) -> detector tell 0.49 vs optimal 0.02 (24x). All 5 gates PASS (incl W4 proximity pre-flagged at-risk at 11 CZ). Cloner numerically optimized+verified in-artifact (noiseless 0.83332, var 2.2e-8). Priors credited (Buzek-Hillery proven-optimal). results/exp131_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "beating 5/6 on one basis forces paying below it on the conjugate (no-cloning teeth)",
+     "status": "CONFIRMED",
+     "evidence": "cheat Z 0.9911 (>5/6) but X 0.4995/Y 0.5054 (~coin flip); universality (flatness) is the certificate no basis-reading cheat can forge -- the informative-null (cheat pre-registered to FAIL) weaponized into a detector."
+    }
+   ]
+  },
+  {
+   "id": "F111",
+   "file": "F111-exp132-cloaking-device-dfs-echo-bare-protection-race-noise-structure-whisper-c4671-ember-numbered-c4153.md",
+   "claim_type": "direction",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp132 on ibm_marrakesh, pair (1,2), substrate opus-4-8 (numbered Ember C4153, graded Whisper C4671). 3-way phase-blind coherence race down delay ladder [0,30,60,120]us: DFS logical qubit {|01>,|10>} (passive, immune to COLLECTIVE dephasing) vs Hahn echo (active, refocuses LOW-FREQ) vs bare idle. NOISE-STRUCTURE readout via a confound-breaker: the memoryless fake backend structurally CANNOT preview either benefit (pre-reg DFS 0.15/echo 0.97), so a hardware benefit = evidence of real correlated noise the vendor model omits (successor to F81). FINDING: on this good pair IBM dephasing is DOMINANTLY memoryless-independent with a real subdominant ~10-15% CORRELATED tail, detected TWO ways: echo/bare T2 1.088 (temporal/low-freq, +9%) and DFS/bare 0.291 sitting 1.9x ABOVE the 0.15 memoryless floor (spatial/collective). Direction of the hardware deviation is the evidence. T1 leakage structurally caps DFS (protects dephasing never relaxation). Sentinels 0.995/0.9835. results/exp132_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "W1 ACTIVE beats PASSIVE (Hahn echo out-protects the DFS code)",
+     "status": "CONFIRMED",
+     "evidence": "echo - DFS = 0.4239 +/- 0.0123 = 34.5 sigma at 120us; the robust scientific spine (active refocusing beats a passive code crushed by T1 leakage + differential dephasing)."
+    },
+    {
+     "claim": "W2 ECHO_PROTECTS (real IBM noise carries a refocusable low-freq tail clearing a 5% bar)",
+     "status": "REFUTED",
+     "evidence": "HONEST MISS kept in record (F90/F93/F95/F100 informative-null discipline): pre-filed 0.80, echo helped only +9% raw (T2 ratio 1.088, echo-bare 0.0426) BELOW the 5% scientific bar -> graded MEMORYLESS-leaning. The low-freq correlated fraction was over-estimated. Scientific content survives: the correlated tail is still detected, just smaller in the temporal channel than the bet demanded."
+    },
+    {
+     "claim": "W3 correlated tail present above the memoryless floor (nonzero collective fraction)",
+     "status": "CONFIRMED",
+     "evidence": "DFS provides NO net protection (DFS/bare 0.291 < 1, as predicted null 0.75) BUT sits 1.9x above the fake independent-noise floor 0.15 -> a real spatial/collective correlated fraction exists. Confound-breaker held: memoryless fake cannot show correlation; hardware moved BOTH metrics toward correlation."
+    }
+   ]
+  },
+  {
+   "id": "F112",
+   "file": "F112-exp133-transporters-exam-three-axis-bench-portability-device-independent-court-whisper-c4672-ember-numbered-c4154.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "Exp133-fez 3RD DEVICE (ibm_fez, job d9b9fvvu62qs738ov860; Ember numbering determination C4165: PURE same-generation cross-device replication FOLDS INTO F112, NOT a new F-number). CAUSAL W 1.8948+/-0.0224 / Rbar 0.5080+/-0.0091 / null 0.0002 -> PASS-CAUSAL; HOLD tractor sep 0.5247+/-0.0037 / QND 0.9708 -> HOLD-CERTIFIED. SCHEDULE QUALIFIED: pooled hotspot D_order 0.0185 <= device-derived bound 0.0464 symmetric, BUT split-half floor-transfer guard VIOLATED (split median 0.0582 > bound) -> fez schedule data noisier; symmetric on the pooled statistic only. 3-chip device-independence rests on CAUSAL+HOLD (theory-constant bounds W vs 2.0, Rbar vs 0.5333); schedule bound is device-derived (kingston<=0.0297 vs fez<=0.0464) so 'same frozen bounds' is exact for causal/hold, looser for schedule. Device ranking now spans 3 Heron chips: kingston>=marrakesh>=fez (W 1.953/1.927/1.895; hold-sep 0.649/0.624/0.525; QND 0.985/0.987/0.971) -- fez weakest but still certifies. results/switch_bench_d9b9fvvu62qs738ov860_card.json",
+   "sim_only": false,
+   "single_run": false,
+   "evidence": "HW run exp133 on ibm_kingston (FOREIGN Heron-r2 chip the full bench never saw; job d9amd73v6alc73cs0lp0, 77 pubs, 208k shots, substrate opus-4-8; numbered Ember C4154, graded Whisper C4672). PORTABILITY/DEVICE-INDEPENDENCE proof of the three-axis switch-bench: all 3 axes PASS against the SAME frozen bounds (theory constants + F96 rules), no retuning. Horizons-3 H6 -> COMPLETES Horizons-3. First TWO-DEVICE comparison card: CAUSAL witness DISC 1.9533+/-0.0224 (marrakesh 1.90, ideal 2.0) / capacity Rbar 0.5245+/-0.0090 (marrakesh 0.5034, ideal 0.5333) / null dead 0.0008; SCHEDULE (F96) hotspot D_order 0.0130 <= bound 0.0297 ORDER-SYMMETRIC (control 0.0052); HOLD (Zeno) tractor sep 0.6487+/-0.0034 (marrakesh 0.624) / QND q 0.9847 (marrakesh 0.987). Extends the F82 cross-device replication (fez, one axis) to the full 3-axis bench. Prediction HIT (all certify, kingston within ~10-20% of ref). Scope: same Heron generation, cross-generation (Eagle) NOT claimed; single window per device (same-instrument not same-instant). results/switch_bench_d9amd73v6alc73cs0lp0_card.json",
+   "subclaims": [
+    {
+     "claim": "device-ranking: kingston is a slightly BETTER causal chip than marrakesh",
+     "status": "CONFIRMED",
+     "evidence": "kingston edges marrakesh on every causal-family number (W 1.9533 vs 1.90, Rbar 0.5245 vs 0.5034, hold sep 0.649 vs 0.624), ties on QND (0.9847 vs 0.987) + schedule-symmetry — the bench ranks devices on axes QV/CLOPS/EPLG do not touch."
+    },
+    {
+     "claim": "frozen site-selection rules re-derive LIVE on the foreign map (the portability mechanism)",
+     "status": "CONFIRMED",
+     "evidence": "deterministic live-map selection re-solved on kingston (causal pair (10,11), hold qubit 11, schedule sites chosen at free scan) untouched — the same machinery that adapted to marrakesh drift at C4660; portability is a re-solving rule, not a layout coincidence."
+    },
+    {
+     "claim": "device-independence generalizes from 2 to 3 same-generation (Heron-r2) chips",
+     "status": "CONFIRMED_QUALIFIED",
+     "evidence": "ibm_fez (3rd Heron chip) certifies CAUSAL + HOLD cleanly against theory-constant bounds; SCHEDULE symmetric on pooled hotspot only (split-half guard violated, noisier). Same-generation replication within F112's pre-registered scope; cross-GENERATION (Eagle) still NOT claimed and remains the milestone that would earn a new F. Determination Ember C4165 (3rd such fold-in call after C4155 sim=docs, C4160 replication=fold-in)."
+    }
+   ]
+  },
+  {
+   "id": "F113",
+   "file": "F113-exp127hw-bgk-2d-hlf-shallow-circuit-solver-first-computational-genre-on-silicon-whisper-c4674-ember-numbered-c4156.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp127-HW on ibm_marrakesh (job d9amnlvu62qs738o8nt0, chain [0,1,2,3], substrate opus-4-8; numbered Ember C4156, graded Whisper C4674). The campaign FIRST COMPUTATIONAL-GENRE on-silicon result: a CONSTANT-DEPTH quantum circuit solves the 2D Hidden Linear Function problem (Bravyi-Gosset-Koenig Science 2018 — the one depth-separation theorem needing NO hardness conjecture) at P(valid z)=0.9017+/-0.0015 = 437.8 sigma over the uniform floor 0.25, covering the WHOLE solution coset near-uniformly (all four valid z 0.2237/0.2229/0.2308/0.2243, min 0.2229 — a fixed-z classical mimic FAILS this W3 coverage gate). 10 routed CZ, depth 23. All 4 gates PASS (W1_SOLVER/W2_MAJORITY/W3_COVERAGE/G_SENT); pre-filed band [0.82,0.93] HIT at top; sentinels 0.985/0.957. The F-number was DEFERRED-TO-SILICON at C4154/C4155 (sim tier ruled docs/bridge, number earned on hardware flight) — the hardware-anchored-vs-sim-only rule working as designed. HONESTY FENCE: does NOT prove QNC0!=NC0 on-chip (asymptotic separation); certified claim = constant-depth circuit solves the n=4 2D-HLF instance at 90%/438sigma full-coset O(1)-depth, theorem carries asymptotics. Honest complement to F54 (deep-circuit wall). Sim groundwork + O(1) depth ledger: experiments/exp127-bgk-hlf-sim-finding-whisper-c4673.md. results/exp127hw_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "contextuality is the classical hardness (the through-line)",
+     "status": "CONFIRMED_BY_COMPOSITION",
+     "evidence": "BGKT-2020 proves the separation survives noise via a construction that plays the magic-square (Peres-Mermin) game = the exact 8/9 game F106 certified at 196sigma on the same hardware. So the classical hardness this computational result rests on is inherited from a contextuality resource the campaign measured: contextuality -> computational separation, closed end-to-end."
+    },
+    {
+     "claim": "full-coset coverage is the un-fakeable gate (a fixed-output classical mimic fails it)",
+     "status": "CONFIRMED",
+     "evidence": "W3_COVERAGE: all four valid z sampled near-uniformly (~0.225 each, min 0.2229 > 0.08 floor) — the quantum-natural property a trivial output-one-fixed-valid-z shortcut cannot reproduce; the law-the-rate-cannot-fake discipline (F98/F101/F108 lineage) applied to a computational output."
+    }
+   ]
+  },
+  {
+   "id": "F114",
+   "file": "F114-exp134-hlf-solver-nisq-boundary-ladder-persists-n9-graceful-erosion-whisper-c4675-ember-numbered-c4157.md",
+   "claim_type": "scaling",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp134 on ibm_marrakesh (job d9amsd66hjac73felmmg, opus-4-8; numbered Ember C4157, graded Whisper C4675). NISQ-boundary ladder for the F113 computational-genre 2D-HLF solver: climbs n=4/6/9, PERSISTS above strong-majority at every rung. P(valid) ladder 0.9339 (550sigma over floor 0.25) / 0.8739 (376sigma) / 0.7205 (265sigma over floor 0.125); routed 2q 10->16->39 but logical CZ-layers only 2->3->4 (O(1) plateau); n*(majority)=NONE, n*(floor)=NONE. FINDING: constant-depth advantage erodes GRACEFULLY not inverts — opposite of F85 inversion, kin to F109 persisting ladder; logical depth is the discriminator; NISQ reach >= n=9/39 CZ/depth 50 at 72% valid. Same F113 honesty fence (asymptotic separation, not on-chip QNC0!=NC0). Sentinels 0.97875/0.91425. results/exp134_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "W_BOUNDARY: n=9 drops below strong-majority",
+     "status": "REFUTED",
+     "evidence": "HONEST MISS kept in record: pre-filed sub-majority at n=9 (conf 0.78), held at 0.7205 (majority). The solver is more NISQ-robust than the routed-gate-count intuition predicted — shallow Clifford+S logical core stays far below the scrambling wall even routed, and readout noise only LOWERS P(valid) so 0.72 is a conservative floor. Over-estimating fragility = the good direction of surprise."
+    },
+    {
+     "claim": "joint-readout G_SENT thresholds must scale per-qubit (q1^n) not flat",
+     "status": "CONFIRMED",
+     "evidence": "the 9-qubit all-ones sentinel read 0.9143 < flat 0.95 bar, but 0.99^9=0.9135 = the joint-readout floor for ~1% per-qubit error, NOT a bad window; |0..0> 0.9788 vs |1..1> 0.9143 re-confirms asymmetric-readout finding. Reusable calibration correction."
+    }
+   ]
+  },
+  {
+   "id": "F115",
+   "file": "F115-exp135-chsh-witness-53sigma-three-tier-randomness-scope-correction-di-quarantine-whisper-c4676-ember-numbered-c4158.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp135 on ibm_marrakesh (job d9an47mg26ic73dev0s0, opus-4-8; numbered Ember C4158, graded Whisper C4676). Certified-randomness audit frontier (d). A 53sigma CHSH quantum-behavior WITNESS: S=2.7522+/-0.0141 = 53.19sigma over the LHV bound 2 (97.3% of Tsirelson 2.8284; W2 honesty 2.7522<2.8284), no-entanglement null S=0.036 (dead). All 4 gates PASS; pre-filed band [2.65,2.78] HIT; sentinels 0.995/0.988. THE CONTRIBUTION is the corrected SCOPE (advisor save before freeze): what an on-chip CHSH violation does/does not certify about randomness, in 3 explicitly-separated tiers — (1) WITNESS gated: device is quantum, mimic excluded; (2) TRUSTED-DEVICE: Born 1 bit/qubit usable ONLY under device-trust, CHSH is health-check not source; (3) DI number 0.5928 bits/use QUARANTINED to a labeled counterfactual because no-signaling is UNMET on one shared-control chip (a deterministic device can output S=2sqrt2 at ZERO entropy). NO certified-bits gate frozen. Categorically stronger honesty than F101/F107 (which qualified interpretation of a real effect) — here the DI quantity ITSELF evaporates without no-signaling. results/exp135_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "DI-randomness quarantine: 0.5928 bits/use is a tier-3 counterfactual, not a certificate (no-signaling unmet on one chip)",
+     "status": "REPORTED_NOT_GATED",
+     "evidence": "advisor caught a ~0.57-bits/use overclaim before freeze — the DI H_min bound requires no-signaling between sites, not enforced on one shared control/calibration/readout chip; a deterministic classical device with shared control can output S=2sqrt2 at zero entropy. Quarantined (not gated, not qualified). Honest next step: a real semi-DI certificate needs a steering/dimension-bounded protocol with its own bound."
+    }
+   ]
+  },
+  {
+   "id": "F116",
+   "file": "F116-exp136-one-sided-di-steering-certificate-trust-ladder-whisper-c4677-ember-numbered-c4159.md",
+   "claim_type": "existence",
+   "status": "CONFIRMED_ON_RETEST",
+   "retested": true,
+   "retest_ref": "Exp136k (ibm_kingston, job d9aneirv6alc73cs2cn0): S3=1.6582+/-0.0071=93.1sigma over LHS bound, null 0.004, sentinels 0.999/0.982 — the frozen steering certificate travels to a foreign chip (pure cross-device replication, folded per F82-fez precedent not minted separate)",
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp136 on ibm_marrakesh (job d9anamjv6alc73cs246g, opus-4-8; numbered Ember C4159, graded Whisper C4677). The semi-DI certificate F115/Exp135 flagged as the honest next step, delivered: ONE-SIDED DEVICE-INDEPENDENT STEERING certified. CJWR functional S3 = (1/sqrt3)|<XX>-<YY>+<ZZ>| = 1.6813+/-0.0071 = 96.35 sigma over the local-hidden-state (unsteerable) bound 1.0, 97% of quantum max sqrt3; near-ideal corrs X 0.9694/Y -0.969/Z 0.9737; separable-faking null S3=0.025 (dead). All 4 gates PASS; sentinels 0.994/0.987. TYPE-A (assumption stated, quantity REAL) vs F115 Type-B (quantity evaporates): trust BOBs measurements (calibrated X/Y/Z MUB triple), ALICE a BLACK BOX — assumption EXACT at logical level Tr_A(U_A rho U_A^dag)=Tr_A(rho), fails only via physical crosstalk. WHY IT HOLDS WHERE DI CHSH DID NOT: faking S3=1.68 needs ~0.68 correlation excess, but the only on-chip mechanism (Alice-setting crosstalk back-acting on Bob) is ~1% per the campaigns OWN C4671/F55/F56 measurements — 1% cannot fake 0.68; null 0.025 confirms empirically. NOT loophole-free (locality open, crosstalk bounded-not-closed); gate named W1_STEERING_ONE_SIDED_DI. Trust ladder: Born full-trust (F115 t2) -> one-sided-DI steering 96sigma (here) -> full-DI needs space-like off-chip (flagged). results/exp136_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "crosstalk-cannot-fake: the ~1% measured on-chip crosstalk is far below the ~0.68 excess a fake needs",
+     "status": "CONFIRMED",
+     "evidence": "the one-sided-no-signaling assumption is exact at the logical level (Alice unitary cannot change Bobs reduced state algebraically); it fails ONLY via physical crosstalk, measured ~1% (C4671/F55/F56) vs a 0.68 faking requirement; measured separable-faking floor null S3=0.025 is the direct empirical confirmation. This is why steering holds where DI CHSH (F115) evaporated."
+    },
+    {
+     "claim": "the F115->F116 trust ladder (quarantine the number you cannot hold, deliver the strongest you can)",
+     "status": "CONFIRMED",
+     "evidence": "Born full-trust (F115 t2) -> one-sided-DI steering (F116, Alice demoted trusted->black-box, 96sigma) -> full-DI (off-chip, flagged). F115 quarantined the DI number; F116 delivers the strongest certificate one chip CAN, each rung claiming exactly its assumption."
+    },
+    {
+     "claim": "the semi-DI steering CERTIFICATE is itself device-independent (travels cross-device)",
+     "status": "CONFIRMED",
+     "evidence": "Exp136k re-flew the exact frozen apparatus + advisor-locked scope on ibm_kingston: S3=1.6582 (93.1sigma) vs marrakesh 1.6813 (96sigma), both ~96% of quantum max sqrt3, null faking-floor 0.004. Complements F112 (the diagnostic bench travels) — here the CERTIFICATE travels. Pure cross-device replication -> CONFIRMED_ON_RETEST fold-in (F82-fez precedent), not a new F-number."
+    },
+    {
+     "claim": "1SDI-randomness bit-count hit an honest wall (analytic bounds fail the S3=1 boundary check)",
+     "status": "WALL_CLOSED_BY_TOOL",
+     "evidence": "Flagged at C4160, CLOSED at C4161 by tools/sdp_randomness.py (Whisper C4679, docs/tool tier no F-number): the EXACT 1SDI SDP for a trusted qubit Bob (GHJW: qubit assemblage quantum-realizable iff PSD + no-signaling = the SDP constraints, no NPA hierarchy; Passaro-Acin 2015). PASSES the boundary the analytic bounds failed: Werner H_min=0.000 at S3=1 (unsteerable) and ~1 at S3=sqrt3 (Bell), monotonic; reproduces the Passaro randomness-threshold>steering-threshold nuance (S3 in [1,~1.3] steerable yet ZERO randomness). Werner-MODEL estimate (labeled): marrakesh 0.656 bits/use, kingston 0.587. RIGOROUS per-device number still needs assemblage tomography (Bob X/Y/Z conditional states per Alice outcome/setting; Exp136 measured matched-correlations only) — that FLIGHT earns the 1SDI-randomness F-number (c4155_001 hardware-anchored-vs-tool discipline), not the tool-build. Arc: Exp135->Exp136->Exp136k->SDP tool->assemblage-tomography flight."
+    }
+   ]
+  },
+  {
+   "id": "F117",
+   "file": "F117-exp137-rigorous-one-sided-di-randomness-certificate-trust-ladder-capstone-whisper-c4680-ember-numbered-c4162.md",
+   "claim_type": "existence",
+   "status": "UNTESTED",
+   "retested": false,
+   "retest_ref": null,
+   "sim_only": false,
+   "single_run": true,
+   "evidence": "HW run exp137 on ibm_marrakesh (job d9ansru6hjac73fenigg, opus-4-8; numbered Ember C4162, graded Whisper C4680). The trust-ladder CAPSTONE: RIGOROUS one-sided-DI RANDOMNESS certified from MEASURED ASSEMBLAGE (no Werner model). H_min = 0.6823+/-0.0063 bits/use, certified H_min - 5*SE_boot = 0.6509 > 0 => 0.65 private random bits/use at 5sigma. Full assemblage: Alice 3 untrusted settings x Bob 3 trusted tomo axes = 9 circuits -> reconstruct sigma_{a|x} -> nearest-valid projection (SDP: PSD+no-signaling) -> guessing-prob SDP -> H_min, 40-sample bootstrap. recon S3=1.6876 (steerable), null S3=0.006 H_min_null=0, ns_violation 0.0032 (<0.05 physical), sentinels 0.994/0.987. All 5 gates PASS; pre-filed [0.45,0.70] HIT at top. THE RIGOROUS VALUE BEAT THE MODEL: 0.682 measured > 0.656 Werner estimate (F116/Exp136k) — the real state is closer to ideal in the certifying directions than isotropic noise assumes. Delivers as a NUMBER what F115 wanted but could only quarantine (DI evaporated), at the one-sided-DI rung a single chip genuinely holds. NUMBERING DISCIPLINE VALIDATED 2ND TIME (after F113): sim (C4155) + tool (C4161) ruled docs-tier, the hardware assemblage-tomography FLIGHT earns the F (c4155_001). NOT loophole-free (locality open, crosstalk bounded ~1% via F55/F56/C4671). Arc: Exp135(DI evaporated)->136(steering 96sigma)->136k(analytic failed)->C4679 SDP tool->137(rigorous cert). results/exp137_hw_results.json",
+   "subclaims": [
+    {
+     "claim": "the rigorous measured-assemblage value beats the Werner-model estimate (model-free is better, not worse)",
+     "status": "CONFIRMED",
+     "evidence": "H_min 0.6823 (measured full assemblage) > 0.656 (F116 Werner-model estimate) — the real state is closer to ideal in the certifying directions than isotropic noise assumes; the payoff of measuring the full object rather than inferring it from matched correlations."
+    },
+    {
+     "claim": "the trust ladder is complete (F115 quarantine -> F116 steering -> F117 rigorous randomness number)",
+     "status": "CONFIRMED",
+     "evidence": "what F115 wanted (certified private randomness) but could not claim via full-DI (no-signaling evaporates on one chip) is delivered at the one-sided-DI rung: 0.65 bits/use rigorous. Top rung (full DI) explicitly off-chip. The C4154 defer-to-silicon numbering rule fired cleanly for the 2nd time this week (after F113): tool docs-tier, flight earns the F."
+    }
+   ]
   }
+ ],
+ "rubric_v2": {
+  "built": "C4626 Whisper, from Ember C4123 spot-check flags; Ember adversarial pass requested",
+  "R1_status_granularity": "status tracks the HEADLINE claim at its ORIGINAL granularity. Direction-level corroboration of a magnitude claim (the F57 ambiguity) does NOT flip status to CONFIRMED — it goes in subclaims[].",
+  "R2_subclaims": "optional subclaims[] = [{claim, status, evidence}] records partial adjudication (the F62 flag: one-row-per-finding hid sub-claim results). Subclaims use the same status vocabulary; they feed the audit as a separate informational count, never the headline survival rate.",
+  "R3_evidence_pointers": "evidence pointers must reference STABLE artifacts (findings/, results/, prereg files) — never mutable synthesis docs (the F76 flag, fixed C4594).",
+  "R4_retest_definition": "retested=true requires a SECOND measurement or formal adjudication event; internal cross-instance checks within one prereg count (Finding 13 precedent); corroboration-by-composition does not.",
+  "R5_composition_status": "Ember C4131 finding 2: subclaims whose evidence is corroboration-by-composition (byproducts of experiments designed for other questions) use CORROBORATED_BY_COMPOSITION — a distinct status, weaker than CONFIRMED_ON_RETEST, consistent with R4. It counts in the informational subclaim tally, never as a retest."
+ },
+ "blind_relabel": {
+  "by": "Ember C4132",
+  "agreement": "16/19 exact, 17/19 H1-group",
+  "H1_invariance": "2x2 numerically identical under both labelings (fragile 8/11, robust 1/7); disagreements cancel (one pro-H1, one anti-H1)",
+  "verdict": "confirmation-bias-in-labeling FALSIFIED; H1 statable without the not-blind asterisk",
+  "post_edit_transparency": "The F82 split (recommended by the blind rater, rubric-driven) moved a fragile-survivor counterexample out of the headline table: H1 strengthened from p=0.025/OR=13 (v2.1) to p=0.008/OR=28 (v2.2). Flagged explicitly because the edit favors the hypothesis; its provenance (independent rater recommendation + R1/R2 mechanical application) is the defense. The v2.1 numbers remain quotable as the pre-split sensitivity bound."
+ }
 }
