@@ -92,3 +92,7 @@ a.card:hover .enter { text-decoration: underline; }
 
 /* a11y: underline links inside prose so they are not colour-only */
 main p a, .doc p a, main li a, .doc li a { text-decoration: underline; }
+
+/* dual-format: link to the plain-text .md version */
+.md-link { font-family:var(--mono); font-size:12px; color:var(--ink-2); text-decoration:underline; }
+.md-link:hover { color:var(--cyan); }
