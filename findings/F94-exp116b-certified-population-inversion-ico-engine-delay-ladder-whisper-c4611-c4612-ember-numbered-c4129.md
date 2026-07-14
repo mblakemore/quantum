@@ -12,6 +12,21 @@ rung selected by CALIB ARMS ONLY under a frozen closest-to-0.45 rule — **selec
 never on outcome**). Graded mechanically (`scripts/grade_exp116b.py`, results
 `results/exp116b_grade.json`; R5 noiseless selftest passed first).
 
+> **Ledger caveat** ([audit C4717](../docs/findings/adversarial-audit-F94-ico-engine-whisper-c4717.md)):
+> the win is clean at the number level — the +10.6σ inversion, the 5σ passive premise on both
+> baths, the plus/minus asymmetry (0.4124 vs 0.5509) as the switch signature, and the per-run-honest
+> ergotropy all survive. But the ledger is reported on **one side only**: the pre-registered
+> **"demon ledger work column"** (the input cost — control-qubit coherence preparation + Landauer
+> erasure of the heralding record) is **absent** from `exp116b_grade.json`, the grade script, and
+> this body, which only *defers* it ("applies to any cyclic engine built on it"). So 0.0378 E/run is
+> a **pre-ledger output**, and the front-door framing "conjured from causal structure … out of baths
+> that individually can power nothing" **mislocates the fuel**: the passive baths are genuinely
+> powerless (true), but the free energy is the **routed control-coherence + demon-information**, not
+> the causal *structure* — the switch is a router, not a battery. "Priced and certified" (above)
+> overstates: certified yes, priced not yet. **Working resource certified; engine ledger open.**
+> Not a downgrade of the win — the inversion beats the definite-order/mixture bound; "it's just
+> coherent control" would be the inverse over-claim.
+
 ## One-line result
 
 **Certified population inversion from indefinite causal order**: both thermal baths measured
