@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Trust Ladder — how much randomness can a chip certify? | The Quantum Museum</title>
+<meta name="description" content="Climb a ladder of trust: full-trust gives 1 Born bit, one-sided device-independence gives a rigorous 0.65 certified bits, and full device-independence evaporates on one chip because no-signaling is unmet. Real hardware data (F115/F116/F117).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 10px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(29px,5.6vw,50px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:64ch; margin:0 0 12px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--cyan); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:66ch; }
+
+  .climb { display:grid; grid-template-columns: 300px 1fr; gap:clamp(20px,4vw,36px); align-items:stretch; }
+  @media (max-width:680px){ .climb { grid-template-columns:1fr; } }
+
+  /* the ladder */
+  .ladder { display:flex; flex-direction:column; gap:10px; }
+  .rung { text-align:left; border:1.5px solid var(--edge); border-radius:12px; padding:13px 15px;
+    background:var(--surface-2); cursor:pointer; transition:border-color .14s, background .14s, transform .12s; position:relative; }
+  .rung:hover { transform:translateX(3px); border-color:var(--edge-2); }
+  .rung.on { border-color:var(--cyan); background:var(--card-hover); }
+  .rung.on.evap { border-color:var(--amber); }
+  .rung .lvl { font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); }
+  .rung .nm { font-size:15px; font-weight:640; color:var(--ink); margin:3px 0 2px; }
+  .rung .sec { font-family:var(--mono); font-size:11px; color:var(--ink-3); }
+  .rung .bits { position:absolute; right:14px; top:50%; transform:translateY(-50%);
+    font-family:var(--mono); font-size:15px; font-weight:700; color:var(--cyan); }
+  .rung.evap .bits { color:var(--amber); }
+  .climb-note { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); text-align:center; margin-top:2px; }
+
+  /* certificate card */
+  .cert { border:1px solid var(--edge); border-radius:14px; padding:22px; background:var(--surface-2);
+    display:flex; flex-direction:column; gap:12px; }
+  .cert .state { font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    display:inline-flex; align-items:center; gap:7px; align-self:flex-start; padding:4px 10px; border-radius:999px; }
+  .cert .state.solid { color:var(--good); background:color-mix(in srgb,var(--good) 12%,transparent); border:1px solid color-mix(in srgb,var(--good) 30%,transparent); }
+  .cert .state.evap { color:var(--amber); background:color-mix(in srgb,var(--amber) 12%,transparent); border:1px solid color-mix(in srgb,var(--amber) 32%,transparent); }
+  .cert .bignum { position:relative; font-family:var(--mono); font-weight:720; letter-spacing:-.03em; line-height:1;
+    font-size:clamp(52px,12vw,80px); color:var(--ink); font-variant-numeric:tabular-nums; }
+  .cert .bignum small { font-size:15px; color:var(--ink-3); font-weight:500; letter-spacing:0; }
+  .cert .bignum.dissolve { animation:evap 1.1s ease forwards; }
+  @keyframes evap { 0%{opacity:1;filter:blur(0)} 60%{opacity:.25;filter:blur(6px)} 100%{opacity:.12;filter:blur(9px)} }
+  .cert .bignum .overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:15px; font-weight:600; color:var(--amber); opacity:0; }
+  .cert .bignum.dissolve .overlay { animation:showov 1.1s ease forwards; }
+  @keyframes showov { 0%,55%{opacity:0} 100%{opacity:1} }
+  @media (prefers-reduced-motion: reduce){
+    .cert .bignum.dissolve { animation:none; opacity:.14; filter:blur(7px); }
+    .cert .bignum.dissolve .overlay { animation:none; opacity:1; }
+  }
+  .cert .row { font-size:13.5px; color:var(--ink-2); }
+  .cert .row b { color:var(--ink); } .cert .row .k { font-family:var(--mono); font-size:10.5px; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:2px; }
+  .cert .meas { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px solid var(--edge); padding-top:10px; }
+  .cert .meas .sig { color:var(--cyan); font-weight:600; }
+
+  /* summary */
+  .summ { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  @media (max-width:680px){ .summ { grid-template-columns:1fr; } }
+  .sc { border:1px solid var(--edge); border-radius:12px; padding:16px; background:var(--surface-2); }
+  .sc .h { font-size:13.5px; font-weight:620; color:var(--ink); }
+  .sc .b { font-family:var(--mono); font-size:clamp(24px,5vw,32px); font-weight:720; margin:8px 0 4px; letter-spacing:-.02em; }
+  .sc.a .b { color:var(--ink-3); } .sc.b .b { color:var(--good); } .sc.c .b { color:var(--amber); }
+  .sc .d { font-size:12px; color:var(--ink-3); }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--cyan); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
+  .badge-row .sp { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing IV · The Advantage Ladder</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Certified randomness · the ladder of assumptions</p>
+    <h1>How much can a chip <span class="hl">certify</span> — and what does it cost in trust?</h1>
+    <p class="lede">Randomness is only as good as the assumption behind it. Climb this ladder: the higher you
+    go, the less you trust your devices — and the more you demand of the hardware. At the top, a single chip
+    can't deliver, and the certificate evaporates. Find the rung where the number is both strong and real.</p>
+    <span class="scope">Every value is measured (F115–F117) or a <b>labelled counterfactual</b>. The top rung is the honest null: we did not perform full device-independence.</span>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — Climb the Trust Ladder</p>
+    <h2>Trade trust for security, and watch what survives</h2>
+    <p class="sub">Pick a rung. Lower rungs assume more about your devices and buy weaker security; higher
+    rungs assume less and demand more. The certificate on the right updates — until the top, where it dissolves.</p>
+    <div class="climb">
+      <div>
+        <div class="ladder" id="ladder" role="group" aria-label="Trust level"></div>
+        <p class="climb-note">↑ trust less · demand more &nbsp;|&nbsp; ↓ trust more · demand less</p>
+      </div>
+      <div class="cert" id="cert"></div>
+    </div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The Three Rungs, Side by Side</p>
+    <h2>The honest map of what a single chip holds</h2>
+    <p class="sub">The middle rung is the sweet spot: strong security, and a number that is rigorously
+    certified on hardware. Below it you get more bits but must trust the box; above it, the number is unreachable here.</p>
+    <div class="summ">
+      <div class="sc a"><div class="h">Full trust</div><div class="b">1.00</div><div class="d">bit/qubit — Born-rule, but you must trust the device. CHSH (53σ) only health-checks it.</div></div>
+      <div class="sc b"><div class="h">One-sided-DI</div><div class="b">0.65</div><div class="d">bit/use — rigorous, 5σ, from measured assemblage tomography. The other device is a black box.</div></div>
+      <div class="sc c"><div class="h">Full DI</div><div class="b">—</div><div class="d">evaporates on one chip: no-signaling is unmet. Needs space-like separation, off-chip. Not performed.</div></div>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F115 / F116 / F117</span> · job <span class="sig">d9ansru6hjac73fenigg</span></span>
+    <span>ibm_marrakesh · 0.65 bit via the SDP randomness tool</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+
+    // ---- rung-data kernel (F115/F116/F117), top of ladder first ----
+    var RUNGS = [
+      { id:"di", lvl:"Trust nothing", nm:"Full device-independence", sec:"strongest security", bitsTag:"evaporates",
+        state:"evap", big:"0.59", small:"bit/use", overlay:"no-signaling unmet",
+        assume:"You trust <b>nothing</b> — not your device, not the source. But this demands no-signaling between the two measurement sites.",
+        security:"Strongest — device-independent, secure against any adversary.",
+        why:"On <b>one chip</b> the two qubits share control lines, so no-signaling isn't enforced: a shared-control classical device can fake S = 2√2 at <b>zero</b> entropy. The certified number dissolves. Full-DI needs space-like separation — off-chip. <b>We did not perform this.</b>",
+        meas:"the DI bound <span class='sig'>would</span> give 0.59 bit/use — a quarantined counterfactual (F115)" },
+      { id:"1sdi", lvl:"Trust only yourself", nm:"One-sided device-independence", sec:"strong security", bitsTag:"rigorous",
+        state:"solid", big:"0.65", small:"bit/use", overlay:"",
+        assume:"You trust <b>only your own measurement</b>. The other side is a black box an adversary may control.",
+        security:"Strong — a compromised partner device cannot leak your outcome.",
+        why:"A steering violation (S₃ = 1.68, <b>96σ</b>) certifies the state under one-sided trust; the SDP tool turns the measured assemblage into a rigorous min-entropy. This is the certificate a single chip genuinely holds.",
+        meas:"H_min = <span class='sig'>0.6823 ± 0.0063</span> bit/use · H_min − 5σ = 0.6509 · steering 96σ (F116/F117)" },
+      { id:"trust", lvl:"Trust everything", nm:"Full device trust", sec:"weakest security", bitsTag:"born-rule",
+        state:"solid", big:"1.00", small:"bit/qubit", overlay:"",
+        assume:"You trust <b>both devices</b> to perform exactly the measurements you modelled.",
+        security:"Weakest — a compromised device could hand you anything.",
+        why:"Under full trust, a projective qubit measurement is a full Born-rule random bit. The CHSH violation (S = 2.75, <b>53σ</b>) is a <b>health-check</b> that the device is behaving quantumly — it rules out a classical mimic, but it does not certify the bit; the trust does.",
+        meas:"1.00 bit/qubit (Born) · CHSH S = 2.7522, 53σ (F115)" }
+    ];
+
+    var ladder = document.getElementById("ladder"), cert = document.getElementById("cert");
+    var buttons = [];
+    RUNGS.forEach(function (r, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "rung" + (r.state === "evap" ? " evap" : "");
+      b.setAttribute("aria-pressed", "false");
+      b.innerHTML = '<span class="lvl">' + r.lvl + '</span><span class="nm">' + r.nm + '</span>' +
+        '<span class="sec">' + r.sec + '</span><span class="bits">' + (r.state === "evap" ? "✕" : r.big) + '</span>';
+      b.addEventListener("click", function () { select(i, true); });
+      ladder.appendChild(b); buttons.push(b);
+    });
+    function select(i, animate) {
+      var r = RUNGS[i];
+      buttons.forEach(function (b, j) {
+        b.classList.toggle("on", j === i);
+        b.setAttribute("aria-pressed", j === i ? "true" : "false");
+      });
+      var dissolve = (r.state === "evap");
+      cert.innerHTML =
+        '<span class="state ' + (dissolve ? "evap" : "solid") + '">' + (dissolve ? "◌ evaporated" : "● " + r.bitsTag) + '</span>' +
+        '<div class="bignum' + (dissolve ? " dissolve" + (animate ? "" : " nomo") : "") + '">' + r.big + ' <small>' + r.small + '</small>' +
+        (dissolve ? '<span class="overlay">' + r.overlay + '</span>' : '') + '</div>' +
+        '<div class="row"><span class="k">You assume</span>' + r.assume + '</div>' +
+        '<div class="row"><span class="k">Security</span>' + r.security + '</div>' +
+        '<div class="row"><span class="k">What happens</span>' + r.why + '</div>' +
+        '<div class="meas">' + r.meas + '</div>';
+      // restart the dissolve animation each selection
+      if (dissolve && animate) {
+        var bn = cert.querySelector(".bignum"); bn.style.animation = "none"; void bn.offsetWidth; bn.style.animation = "";
+      }
+    }
+    select(1, false);   // open on the sweet spot (one-sided-DI)
+  })();
+</script>
+</body>
+</html>
