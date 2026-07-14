@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Switch-Bench Readout — a causal-order instrument that travels | The Quantum Museum</title>
+<meta name="description" content="A three-axis instrument for causal-order physics (CAUSAL, SCHEDULE, HOLD), flown intact on a chip it had never seen (ibm_kingston) and certifying every axis against the same frozen bounds — and ranking devices on axes QV/CLOPS/EPLG don't touch. Kingston edges the home chip. Real hardware (F112, job d9amd73v6alc73cs0lp0).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(58% 60% at 28% 0%, color-mix(in srgb,var(--cyan) 16%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.4vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 16px; }
+
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
+  .pcard b { color: var(--ink); }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13.5px; font-weight:600;
+    text-decoration:none; color:var(--bg); background:var(--cyan); border:1.5px solid var(--cyan);
+    border-radius:11px; padding:10px 18px; transition:transform .12s, box-shadow .12s; box-shadow:var(--shadow); }
+  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--cyan) 35%,transparent); }
+  .specbtn .arw { font-size:15px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--cyan); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:70ch; }
+
+  .devsel { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:22px; }
+  .devsel .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .dbtn { font-family:var(--mono); font-size:13px; font-weight:600; padding:9px 15px; border-radius:10px;
+    border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; transition:all .12s; text-align:left; }
+  .dbtn small { display:block; font-size:10px; font-weight:400; opacity:.7; }
+  .dbtn:hover { border-color:var(--cyan); }
+  .dbtn.on { background:var(--cyan); color:var(--bg); border-color:var(--cyan); }
+  .dbtn.on small { opacity:.85; }
+
+  .axis-card { border:1px solid var(--edge); border-radius:13px; padding:15px 16px; background:var(--surface-2); margin-bottom:12px; }
+  .ax-head { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px; }
+  .ax-name { font-family:var(--mono); font-size:13.5px; font-weight:720; letter-spacing:.02em; }
+  .ax-metric { font-family:var(--mono); font-size:11px; color:var(--ink-3); }
+  .ax-badge { font-family:var(--mono); font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px;
+    color: var(--good); background: color-mix(in srgb,var(--good) 13%,transparent); }
+  .ax-svg { width:100%; display:block; margin:4px 0 2px; }
+  .ax-nums { display:flex; gap:16px; flex-wrap:wrap; font-family:var(--mono); font-size:12px; margin-top:6px; }
+  .ax-nums .dv { color:var(--ink-3); } .ax-nums .dv b { color:var(--ink-2); }
+  .ax-nums .dv.act b { color:var(--ink); } .ax-nums .dv .edge { color:var(--good); font-weight:700; }
+  .ax-nums .comp { color:var(--ink-3); margin-left:auto; }
+  .ax-link { font-family:var(--mono); font-size:11px; color:var(--ink-3); }
+  .ax-link a { color: var(--ink-2); } .ax-link a:hover { color: var(--cyan); }
+
+  .verdict-big { margin-top:14px; text-align:center; font-size:14px; color:var(--ink-2); }
+  .verdict-big b { color:var(--ink); } .verdict-big .ok { color:var(--good); font-weight:700; }
+
+  /* leaderboard B */
+  .lb { display:grid; grid-template-columns:1fr; gap:10px; max-width:600px; margin:0 auto; }
+  .lbrow { display:grid; grid-template-columns:150px 1fr; gap:12px; align-items:center; }
+  @media (max-width:560px){ .lbrow { grid-template-columns:110px 1fr; } }
+  .lbrow .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-2); }
+  .lbrow .lbl small { display:block; color:var(--ink-3); font-size:10px; }
+  .lbbars { position:relative; }
+  .lbnums { font-family:var(--mono); font-size:11.5px; display:flex; gap:14px; }
+  .lbnums .m { color:var(--ink-3); } .lbnums .k { color:var(--cyan); font-weight:600; } .lbnums .win { color:var(--good); }
+
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; }
+  .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; }
+  .links-row { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
+  .deeper { display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:12.5px; font-weight:600;
+    text-decoration:none; border:1.5px solid var(--edge-2); color:var(--ink-2); border-radius:9px; padding:7px 13px; }
+  .deeper:hover { border-color:var(--cyan); color:var(--cyan); }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--cyan); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
+  .badge-row .sp2 { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing V · The Instruments</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">A device-independent instrument · the transporter exam</p>
+    <h1>The bench that <span class="hl">travels</span>.</h1>
+    <p class="lede">Chip vendors publish generic quality scores — Quantum Volume, CLOPS, EPLG. None of them tell you
+    whether a chip can do the <b>physics of causal-order superposition</b>. This instrument does — three axes, each
+    against a frozen bound. Then we flew the whole thing on a chip it had <b>never seen</b>, graded it against the
+    <b>same bounds with no retuning</b>, and it certified all three. Flip between the chips and watch the bench travel.</p>
+
+    <div class="primer">
+      <div class="pcard">
+        <h4>What's the switch-bench?</h4>
+        <p>A three-axis <b>instrument</b>: <b>CAUSAL</b> (is the order truly indefinite?), <b>SCHEDULE</b> (is the chip
+        order-symmetric, no hidden preference?), <b>HOLD</b> (can measurement pin a qubit — the Zeno effect?). Each axis
+        is a finding you can visit elsewhere in the museum.</p>
+      </div>
+      <div class="pcard">
+        <h4>What does "travels" mean?</h4>
+        <p>The bench had only run on the home chip. If causal-order physics is a property of the hardware
+        <b>generation</b> — not one lucky die — the same bench should certify on a <b>different</b> chip, unretuned. We
+        tested it on a chip it had never seen. It did.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
+      <span class="scope">Same Heron <b>generation</b> — cross-generation (Eagle) not claimed. Same-instrument, not same-instant.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — The bench travels</p>
+    <h2>Pick a chip; watch all three axes certify against the same bounds</h2>
+    <p class="sub">The home chip (<b>marrakesh</b>) is where the bench was built. The foreign chip (<b>kingston</b>) had
+    never seen it. Each axis is graded against the <b>identical frozen bound</b>. The foreign chip's marker is solid;
+    the home chip is the faint ring — so you can see the ranking at a glance.</p>
+
+    <div class="devsel" role="group" aria-label="Choose a chip">
+      <span class="lbl">chip:</span>
+      <button class="dbtn" data-dev="marrakesh" type="button">ibm_marrakesh <small>home · where it was built</small></button>
+      <button class="dbtn on" data-dev="kingston" type="button">ibm_kingston <small>foreign · never seen before</small></button>
+    </div>
+
+    <div id="axes"></div>
+
+    <p class="verdict-big" id="verdictBig"></p>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The device leaderboard</p>
+    <h2>It doesn't just travel — it ranks the chips</h2>
+    <p class="sub">Graded on the causal-order axes, the <b>foreign</b> chip actually beats the home chip on every causal
+    number and on the Zeno hold, tying on the rest. This is a benchmark that ranks devices on <b>axes QV, CLOPS and
+    EPLG never touch</b> — which chip does causal-order physics <b>better</b>.</p>
+    <div class="lb" id="leaderboard"></div>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — Why the travel counts</p>
+    <h2>Three receipts behind device-independence</h2>
+    <p class="sub">A number matching on two chips is only meaningful if the standard was identical and the machinery
+    wasn't hand-fed to the new device.</p>
+    <div class="receipts">
+      <div class="rc">
+        <h4>1 · The same frozen bounds</h4>
+        <p>Every axis on the foreign chip was graded against the <b>identical pre-registered bounds</b> — no retuning,
+        no per-device thresholds. <span class="yes">The grader didn't move for kingston.</span></p>
+      </div>
+      <div class="rc">
+        <h4>2 · Site-selection re-derived live</h4>
+        <p>The frozen qubit-selection rules were <b>re-run live on kingston's unfamiliar map</b> — deterministic,
+        untouched, the same machinery that adapted to the home chip's drift. <span class="yes">No hand-picking.</span></p>
+      </div>
+      <div class="rc">
+        <h4>3 · A generation, not a die</h4>
+        <p>All three axes certify on both chips, so the causal-order phenomena are properties of the <b>Heron
+        generation</b> — not one lucky piece of silicon. The physics is portable.</p>
+      </div>
+    </div>
+    <div class="links-row">
+      <a class="deeper" href="../switch/">The Causal Switch (CAUSAL axis)</a>
+      <a class="deeper" href="../zeno-tractor/">The Zeno Tractor Beam (HOLD axis)</a>
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet</a>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F112</span> · job <span class="sig">d9amd73v6alc73cs0lp0</span></span>
+    <span>ibm_kingston + ibm_marrakesh · full 3-axis bench · same frozen bounds</span>
+    <span class="sp2"></span>
+    <a href="./spec.html">Full Spec</a>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+    var css = getComputedStyle(document.documentElement);
+    function C(v){ return css.getPropertyValue(v).trim(); }
+
+    // ---- data kernel (F112 exp133; kingston d9amd73…, marrakesh d9a7mn2… + Zeno d9ai9ku…) ----
+    var AXES = [
+      { key:"causal", name:"CAUSAL", color:"--cyan", metric:"witness W  ·  ideal 2.0",
+        min:0, max:2.0, ideal:2.0, bound:0.10, boundLab:"classical ≈0", boundType:"floor",
+        vals:{marrakesh:1.9265, kingston:1.9533}, edge:"kingston",
+        comp:{marrakesh:"capacity R̄ 0.498", kingston:"capacity R̄ 0.525"},
+        badge:"PASS-CAUSAL", exUrl:"../switch/", exLab:"the Causal Switch" },
+      { key:"schedule", name:"SCHEDULE", color:"--violet", metric:"order-imbalance D_order  ·  ideal 0",
+        min:0, max:0.05, ideal:0, bound:0.0223, boundLab:"bound 0.0223", boundType:"ceiling",
+        vals:{marrakesh:null, kingston:0.0130}, edge:null,
+        comp:{marrakesh:"order-symmetric (home)", kingston:"order-symmetric"},
+        badge:"ORDER-SYMMETRIC", exUrl:null, exLab:"F96 hidden-order" },
+      { key:"hold", name:"HOLD", color:"--amber", metric:"Zeno tractor sep  ·  ideal ~0.73",
+        min:0, max:0.75, ideal:0.73, bound:0.30, boundLab:"bar 0.30", boundType:"floor",
+        vals:{marrakesh:0.624, kingston:0.6487}, edge:"kingston",
+        comp:{marrakesh:"QND q 0.987", kingston:"QND q 0.9847"},
+        badge:"HOLD-CERTIFIED", exUrl:"../zeno-tractor/", exLab:"the Zeno Tractor Beam" }
+    ];
+    console.assert(AXES[0].vals.kingston>AXES[0].vals.marrakesh && AXES[2].vals.kingston>AXES[2].vals.marrakesh, "kingston edges causal+hold");
+
+    var state = { dev:"kingston" };
+
+    // build gauge svg for one axis (both device markers; active emphasized)
+    function gauge(ax){
+      var X0=20, X1=340, Y=26, ns="http://www.w3.org/2000/svg";
+      function gx(v){ return X0 + (v-ax.min)/(ax.max-ax.min)*(X1-X0); }
+      var col=C(ax.color), s='<svg class="ax-svg" viewBox="0 0 360 44" role="img" aria-label="'+ax.name+' gauge">';
+      // certified region shade
+      if(ax.boundType==="floor"){ s+='<rect x="'+gx(ax.bound)+'" y="14" width="'+(gx(ax.max)-gx(ax.bound))+'" height="20" rx="3" fill="'+C("--good")+'" fill-opacity="0.10"/>'; }
+      else { s+='<rect x="'+gx(ax.min)+'" y="14" width="'+(gx(ax.bound)-gx(ax.min))+'" height="20" rx="3" fill="'+C("--good")+'" fill-opacity="0.10"/>'; }
+      // baseline
+      s+='<line x1="'+X0+'" y1="34" x2="'+X1+'" y2="34" stroke="'+C("--edge-2")+'" stroke-width="1.2"/>';
+      // bound line
+      s+='<line x1="'+gx(ax.bound)+'" y1="12" x2="'+gx(ax.bound)+'" y2="36" stroke="'+C("--ink-3")+'" stroke-width="1.4" stroke-dasharray="3 2"/>';
+      s+='<text x="'+gx(ax.bound)+'" y="9" text-anchor="middle" font-family="'+C("--mono")+'" font-size="8" fill="'+C("--ink-3")+'">'+ax.boundLab+'</text>';
+      // ideal tick
+      s+='<line x1="'+gx(ax.ideal)+'" y1="28" x2="'+gx(ax.ideal)+'" y2="40" stroke="'+C("--good")+'" stroke-width="1.4" opacity="0.7"/>';
+      // device markers
+      ["marrakesh","kingston"].forEach(function(dev){
+        var v=ax.vals[dev]; if(v===null) return;
+        var active = dev===state.dev, x=gx(v);
+        if(active){
+          s+='<line x1="'+x+'" y1="14" x2="'+x+'" y2="34" stroke="'+col+'" stroke-width="2"/>';
+          s+='<circle cx="'+x+'" cy="24" r="6" fill="'+C("--card")+'" stroke="'+col+'" stroke-width="2.6"/>';
+        } else {
+          s+='<circle cx="'+x+'" cy="24" r="4.5" fill="none" stroke="'+C("--ink-3")+'" stroke-width="1.5" opacity="0.7"/>';
+        }
+      });
+      s+='</svg>';
+      return s;
+    }
+
+    var axesEl=document.getElementById("axes"), verdictBig=document.getElementById("verdictBig");
+    function render(){
+      var html="";
+      AXES.forEach(function(ax){
+        var mv=ax.vals.marrakesh, kv=ax.vals.kingston, dev=state.dev;
+        var mAct=dev==="marrakesh", kAct=dev==="kingston";
+        var edgeMark = ax.edge==="kingston" ? ' <span class="edge">▲ edges</span>' : '';
+        var mNum = mv===null ? "symmetric ✓" : mv.toFixed(4);
+        html +=
+          '<div class="axis-card">'+
+            '<div class="ax-head">'+
+              '<span><span class="ax-name" style="color:'+C(ax.color)+'">'+ax.name+'</span> <span class="ax-metric">'+ax.metric+'</span></span>'+
+              '<span class="ax-badge">✓ '+ax.badge+'</span>'+
+            '</div>'+
+            gauge(ax)+
+            '<div class="ax-nums">'+
+              '<span class="dv '+(mAct?"act":"")+'">marrakesh <b>'+mNum+'</b></span>'+
+              '<span class="dv '+(kAct?"act":"")+'">kingston <b>'+kv.toFixed(4)+'</b>'+(kAct?edgeMark:'')+'</span>'+
+              '<span class="comp">'+ax.comp[dev]+'</span>'+
+            '</div>'+
+            '<div class="ax-link">axis → '+(ax.exUrl?'<a href="'+ax.exUrl+'">'+ax.exLab+'</a>':ax.exLab)+'</div>'+
+          '</div>';
+      });
+      axesEl.innerHTML=html;
+      var dev=state.dev;
+      if(dev==="kingston"){
+        verdictBig.innerHTML='<b>The foreign chip.</b> The full three-axis bench, flown on a chip it had <b>never seen</b> — one job, 77 pubs, 208,000 shots — certifies <span class="ok">all three axes</span> against the same frozen bounds, no retuning. Causal-order physics travels.';
+      } else {
+        verdictBig.innerHTML='<b>The home chip.</b> Where the bench was built and first certified all three axes. Flip to <b>kingston</b> to watch the same bench certify on a chip it had never seen.';
+      }
+      document.querySelectorAll(".dbtn").forEach(function(b){ var on=b.dataset.dev===dev; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
+    }
+    document.querySelectorAll(".dbtn").forEach(function(b){ b.addEventListener("click", function(){ state.dev=b.dataset.dev; render(); }); });
+
+    // ---- Panel B leaderboard ----
+    (function(){
+      var ns="http://www.w3.org/2000/svg";
+      var ROWS=[
+        { lab:"CAUSAL witness W", sub:"ideal 2.0", m:1.9265, k:1.9533, min:1.85, max:2.0, kwin:true },
+        { lab:"CAUSAL capacity R̄", sub:"ideal 0.533", m:0.4978, k:0.5245, min:0.45, max:0.5333, kwin:true },
+        { lab:"HOLD tractor sep", sub:"bar 0.30", m:0.624, k:0.6487, min:0.55, max:0.70, kwin:true },
+        { lab:"HOLD QND fidelity q", sub:"ideal 1.0", m:0.987, k:0.9847, min:0.97, max:1.0, kwin:false }
+      ];
+      var lb=document.getElementById("leaderboard");
+      ROWS.forEach(function(r){
+        function bx(v){ return 4 + (v-r.min)/(r.max-r.min)*92; } // percent
+        var svg='<svg viewBox="0 0 320 34" preserveAspectRatio="none" style="width:100%;height:34px" role="img" aria-label="'+r.lab+' home vs foreign">';
+        // track
+        svg+='<line x1="6" y1="17" x2="314" y2="17" stroke="'+C("--edge-2")+'" stroke-width="1"/>';
+        function px(v){ return 6 + (v-r.min)/(r.max-r.min)*308; }
+        // marrakesh (home, ring)
+        svg+='<circle cx="'+px(r.m)+'" cy="17" r="5" fill="none" stroke="'+C("--ink-3")+'" stroke-width="1.6"/>';
+        // kingston (foreign, solid cyan)
+        svg+='<circle cx="'+px(r.k)+'" cy="17" r="6" fill="'+C("--card")+'" stroke="'+C("--cyan")+'" stroke-width="2.6"/>';
+        svg+='</svg>';
+        var winTag = r.kwin ? '<span class="win">kingston ▲</span>' : '<span class="m">tie</span>';
+        lb.innerHTML +=
+          '<div class="lbrow">'+
+            '<div class="lbl">'+r.lab+'<small>'+r.sub+'</small></div>'+
+            '<div class="lbbars">'+svg+
+              '<div class="lbnums"><span class="m">home '+r.m.toFixed(4)+'</span><span class="k">foreign '+r.k.toFixed(4)+'</span>'+winTag+'</div>'+
+            '</div>'+
+          '</div>';
+      });
+    })();
+
+    render();
+  })();
+</script>
+</body>
+</html>
