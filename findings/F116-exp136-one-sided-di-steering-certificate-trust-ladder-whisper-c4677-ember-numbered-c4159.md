@@ -91,16 +91,32 @@ precedent — it is folded here as **CONFIRMED_ON_RETEST**, not minted as a sepa
 single-observable second-device flight after F112 established portability is a confirmation, not a new
 milestone.
 
-## The 1SDI-randomness honest wall (scoping note, kept in the record)
+## The 1SDI-randomness honest wall — flagged, then CLOSED by the SDP tool (scoping note)
 
 Completing the trust ladder to an *actual one-sided-DI random bit-count* from the banked steering data
 **hit an honest wall**: the correct 1SDI min-entropy bound is **SDP-based**, and the candidate
 *analytic* bounds (P_guess ≤ ½ + f(S3)) **failed the boundary check** — they certify positive randomness
-even at the unsteerable bound S3 = 1, where it must be *zero*. So **no bit-count is shipped from a wrong
-analytic form** (the same discipline that quarantined the F115 DI number pre-freeze). What *is* rigorous:
-the certified randomness is **strictly positive** (both devices ~93–96σ into the steerable regime); only
-the exact bit-count awaits a small **SDP tool-build**, flagged as the next tool. This is the honest
-boundary of the trust-ladder capstone, recorded rather than papered over.
+even at the unsteerable bound S3 = 1, where it must be *zero*. So **no bit-count was shipped from a wrong
+analytic form** (the same discipline that quarantined the F115 DI number pre-freeze).
+
+**The wall is now methodologically closed** (`tools/sdp_randomness.py`, Whisper C4679, Creator-directed —
+docs/tool tier, no F-number). It is the **exact** 1SDI SDP for a trusted qubit Bob: by GHJW a qubit
+assemblage is quantum-realizable **iff** PSD + no-signaling — precisely the SDP constraints — so no NPA
+hierarchy is needed (Passaro–Acin 2015). It **passes the boundary the analytic bounds failed**: on Werner
+states, H_min = **0.000 at S3 = 1** (unsteerable) and **≈ 1 at S3 = √3** (pure Bell), monotonic between;
+and it reproduces the known Passaro feature that the **randomness threshold exceeds the steering
+threshold** — states with S3 ∈ [1, ~1.3] are *steerable yet certify zero randomness*, exactly the nuance
+no naive S→H_min bound can capture (the concrete reason the SDP was necessary). Applied to our data as a
+**Werner-model estimate (labeled)**: marrakesh S3=1.68 → **0.656 bits/use**, kingston S3=1.66 → **0.587
+bits/use**.
+
+**The remaining honest gap (the earning-line):** the *rigorous* per-device number needs **assemblage
+tomography** — Bob's X/Y/Z conditional states per Alice outcome/setting — which Exp136 did not measure
+(matched-correlations only). The tool is *ready to consume it*: one cheap follow-up flight turns the
+~0.6-bit Werner *estimate* into a rigorous 1SDI certificate, and **that flight — not this tool-build —
+earns the 1SDI-randomness F-number** (the hardware-anchored-vs-tool discipline, c4155_001). Arc:
+Exp135 (DI evaporated) → Exp136 (steering 96σ) → Exp136k (analytic bound failed) → the SDP tool
+(correct, validated) → *assemblage-tomography flight (earns the F)*.
 
 ## Lineage and reuse
 

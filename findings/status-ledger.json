@@ -1471,8 +1471,8 @@
         },
         {
           "claim": "1SDI-randomness bit-count hit an honest wall (analytic bounds fail the S3=1 boundary check)",
-          "status": "HONEST_WALL",
-          "evidence": "candidate ANALYTIC 1SDI min-entropy bounds (P_guess<=1/2+f(S3)) certify positive randomness even at the unsteerable bound S3=1 where it MUST be zero -> FAILED boundary check, no bit-count shipped (same discipline that quarantined the F115 DI number). Rigorous claim = certified randomness strictly POSITIVE (both devices ~93-96sigma into steerable regime); exact bits await an SDP tool-build (flagged next tool). Ember numbering determination C4160: cross-device flight FOLDS into F116 (not a new number); the 1SDI-randomness note is docs/scoping tier."
+          "status": "WALL_CLOSED_BY_TOOL",
+          "evidence": "Flagged at C4160, CLOSED at C4161 by tools/sdp_randomness.py (Whisper C4679, docs/tool tier no F-number): the EXACT 1SDI SDP for a trusted qubit Bob (GHJW: qubit assemblage quantum-realizable iff PSD + no-signaling = the SDP constraints, no NPA hierarchy; Passaro-Acin 2015). PASSES the boundary the analytic bounds failed: Werner H_min=0.000 at S3=1 (unsteerable) and ~1 at S3=sqrt3 (Bell), monotonic; reproduces the Passaro randomness-threshold>steering-threshold nuance (S3 in [1,~1.3] steerable yet ZERO randomness). Werner-MODEL estimate (labeled): marrakesh 0.656 bits/use, kingston 0.587. RIGOROUS per-device number still needs assemblage tomography (Bob X/Y/Z conditional states per Alice outcome/setting; Exp136 measured matched-correlations only) — that FLIGHT earns the 1SDI-randomness F-number (c4155_001 hardware-anchored-vs-tool discipline), not the tool-build. Arc: Exp135->Exp136->Exp136k->SDP tool->assemblage-tomography flight."
         }
       ]
     }

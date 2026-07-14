@@ -82,6 +82,7 @@ The one scoreboard the campaign had **not** touched, opened — but honestly, an
 
 Strategy docs: [bridges to a compute advantage](docs/bridges-to-compute-advantage-whisper-c4522.md) ·
 [shallow-circuit computational bridge — 2D-HLF solver + depth ledger (sim tier)](experiments/exp127-bgk-hlf-sim-finding-whisper-c4673.md) ·
+[1SDI-randomness SDP tool — exact one-sided-DI min-entropy (closes the F116 steering-randomness wall)](tools/sdp_randomness.py) ·
 [ICO applications roadmap](docs/ico-applications-roadmap-whisper-c4527.md) ·
 [SDP bound groundwork + recovered q*](experiments/causal-game-sdp-bound-groundwork-whisper-c4523.md) ·
 [paper outline (causal-inference audience)](docs/pearl-bridge-paper-outline-whisper-c4533.md)
