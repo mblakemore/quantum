@@ -29,7 +29,7 @@ pre-registered, on silicon:
 
 | Advantage | Ceiling | Measured | Finding |
 |---|---|---|---|
-| Causal discrimination game | 0.8695 (SDP, all definite-order) | 0.9769, **216.8σ** (replicated 201σ) | F82 |
+| Causal discrimination game | 0.8695 (SDP, all definite-order) | 0.9769; **216.8σ within-run**, physical carrier is the 0.3 pp two-chip concordance (replicated 0.9738 / 201σ; audit C4714) | F82 |
 | Superdense coding | 0.5 exactly | 0.9688, **341σ** | F87 |
 | Magic-square contextuality | **8/9 exactly (enumerated in-artifact, 4096 strategies)** | 0.9690, **196σ**; worst context still >8/9 at 37.8σ | **F106** |
 | Capacity activation | 0 exactly | 0.0436 bits/use, 55.6σ (N=3: 61.7σ) | F85 |
@@ -69,7 +69,7 @@ inaccessible information recovered by the switch (F99, 56σ) sit in the same cla
 - **The bridge (the honest depth advantage)**: Bravyi–Gosset–König is the only *unconditional*
   computational-separation theorem at our depth (constant-depth quantum solves 2D-HLF; any
   bounded-fan-in classical circuit needs Ω(log n)). We **flew it**: the constant-depth solver
-  runs on silicon at **P(valid) = 0.9017, 438σ over chance**, covering the full solution coset
+  runs on silicon at **P(valid) = 0.9017, 438σ over the random-chance floor 0.25** (a fidelity number, not a beaten classical bound), covering the full solution coset
   (**F113**), and the advantage **persists through n=9** as heavy-hex routing grows (F114). The
   fence held throughout: this is *not* a QNC⁰≠NC⁰ on-chip proof — the separation is asymptotic,
   carried by the theorem; the apparatus works on 2026 hardware.
@@ -115,8 +115,9 @@ in claiming *exactly* the assumption the hardware provides.
 - The randomness bound then failed a boundary check (it certified randomness where there is
   none) → **the SDP tool** was built (`tools/sdp_randomness.py`), exact via GHJW for a trusted
   qubit, boundary-validated.
-- F117 — **the rigorous certificate: 0.65 certified private random bits per use, at 5σ, from
-  measured assemblage tomography.** What F115 wanted but could not honestly claim via DI,
+- F117 — **the rigorous certificate: 0.65 certified private random bits per use, from
+  measured assemblage tomography** (bias-disclosed: a +0.006 method bias ≈1 SE the bootstrap can't
+  see is the limiting factor, not the ~100σ statistical margin; audit C4713). What F115 wanted but could not honestly claim via DI,
   delivered at the one-sided-DI rung a single chip genuinely holds.
 
 The ladder of trust, each rung claiming exactly its assumption: full-trust Born randomness →

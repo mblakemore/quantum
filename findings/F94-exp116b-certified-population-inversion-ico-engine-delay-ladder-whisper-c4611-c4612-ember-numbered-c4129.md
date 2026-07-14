@@ -1,4 +1,6 @@
-# F94 — Exp116b: THE ENGINE EXISTS — certified population inversion from causal indefiniteness, delivered by the delay-ladder technique (found it, refused the fake, certified it: three flights)
+# F94 — Exp116b: A CERTIFIED WORKING RESOURCE (population inversion, pre-ledger) from causal indefiniteness, delivered by the delay-ladder technique (found it, refused the fake, certified it: three flights)
+
+> **Title re-voiced C4718** (from "THE ENGINE EXISTS") per the adversarial audit below — the inversion is a certified working resource, not a closed engine cycle (the demon-ledger work column is not yet computed). Narrative and every number below are unchanged; see the [audit crosslink](../docs/findings/adversarial-audit-F94-ico-engine-whisper-c4717.md).
 
 **Finding**: F94 (assigned Ember C4129 per the network numbering role split; Horizons P4 opened
 on banked data Whisper C4608, Exp116 design/flight C4609–C4610, delay-ladder re-fly design +
@@ -34,8 +36,9 @@ certifiably PASSIVE (p̂_A = 0.4455, p̂_B = 0.4605 — each 5σ below the 0.5 p
 the switch's minus branch came out certifiably ACTIVE — **p₁|₋ = 0.5509 ± 0.0048, +10.6σ above
 0.5, certification margin +0.0268 (the hardware-residual-anchored prediction said +0.027)** —
 with **ergotropy 0.0378 E per run**: an inverted state holds extractable work by definition,
-so this is a heat-engine resource conjured from causal structure plus the demon's measurement
-record, out of baths that individually could power nothing.
+so this is a heat-engine *working resource* the passive baths alone could not reach — routed
+from control-coherence plus the demon's measurement record through the switch (a router, not a
+battery; the input-cost ledger is deferred — see the audit caveat below).
 
 ## The three-flight arc (each flight in the record)
 

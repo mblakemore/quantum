@@ -52,11 +52,13 @@ quantum-natural property no output-one-fixed-z classical mimic can reproduce. Pr
   *computational* genre was open, walled by depth (F54). F113 lands it in the **only genre-honest way
   available at NISQ depth**: not a raw speedup (that needs the deep circuits F54 showed we can't run),
   but the **shallow-circuit depth separation** — the BGK theorem's constant-depth solver, executed.
-- **The hardness is the contextuality the campaign already certified.** BGKT-2020 proves the separation
-  *survives noise* via a construction that plays the **magic-square game** — the exact 8/9 Peres–Mermin
-  game **F106 certified at 196σ**. So the classical hardness this result rests on is *inherited from a
-  resource the campaign measured on the same hardware*: **contextuality → computational separation**,
-  the through-line the C4666 groundwork promised, now closed end-to-end.
+- **The hardness is contextuality-flavored, and theory-associated with a resource the campaign
+  certified.** BGKT-2020 proves the separation *survives noise* via a construction that plays the
+  **magic-square game** — the exact 8/9 Peres–Mermin game **F106 certified at 196σ**. But that gadget is
+  BGKT-2020's, a *different* circuit family; the solver flown here is the plain **BGK-2018** circuit, and
+  F106 certified the game in a *separate* experiment. So the link is **contextuality → computational
+  separation in theory** — an association argued, not composed on one chip: the through-line the C4666
+  groundwork promised, argued by theorem, **not** closed end-to-end on silicon (see audit C4715 below).
 - **Coverage is the load-bearing gate.** Beating the floor (W1) or a majority (W2) could in principle be
   gamed by a classifier that memorizes valid strings; the **full-coset coverage (W3)** is the signature
   a genuine quantum solver produces and a shortcut does not — the "law the rate can't fake," the
