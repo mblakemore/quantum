@@ -1,0 +1,65 @@
+{
+ "backend": "ibm_fez",
+ "job_id": "d9b9fvvu62qs738ov860",
+ "W": 1.8947500000000002,
+ "seW": 0.022360679774997897,
+ "Rbar": 0.5080215479109854,
+ "seR": 0.009066828072209623,
+ "Rbar_null": 0.00024999999999999935,
+ "causal_verdict": "PASS-CAUSAL",
+ "sched_grades": {
+  "hotspot": {
+   "point": {
+    "D_order": 0.018500000000000003,
+    "D_A": 0.030666666666666672,
+    "D_B": 0.03900000000000001,
+    "D_mix": 0.03416666666666667
+   },
+   "se": {
+    "D_order": 0.005579150111999338,
+    "D_A": 0.006268692879434011,
+    "D_B": 0.0063565897019462305,
+    "D_mix": 0.005283671765580152
+   },
+   "floor": 0.0223,
+   "order": "ORDER-SYMMETRIC"
+  },
+  "control": {
+   "point": {
+    "D_order": 0.02199999999999998,
+    "D_A": 0.1015,
+    "D_B": 0.09150000000000003,
+    "D_mix": 0.09616666666666668
+   },
+   "se": {
+    "D_order": 0.006744656269554766,
+    "D_A": 0.0073254533420578595,
+    "D_B": 0.007878363302954067,
+    "D_mix": 0.006225690487697819
+   },
+   "floor": 0.0223,
+   "order": "ORDER-SYMMETRIC"
+  }
+ },
+ "sched_split_half": {
+  "hotspot_seqAB": 0.018666666666666637,
+  "hotspot_seqBA": 0.01666666666666671,
+  "hotspot_par": 0.028999999999999953,
+  "control_seqAB": 0.18533333333333338,
+  "control_seqBA": 0.17433333333333334,
+  "control_par": 0.08733333333333336
+ },
+ "sched_verdict": "SCHED-SYMMETRIC(bound<=0.0464)",
+ "hold": {
+  "pinned_8": 0.5537,
+  "unwatched_8": 0.029,
+  "sep": [
+   0.5246999999999999,
+   0.0037099549188635704
+  ],
+  "qnd_q": 0.9707799060392193,
+  "nodrive_8": 0.76575
+ },
+ "hold_verdict": "HOLD-CERTIFIED(sep=0.525,q=0.9708)",
+ "verdict": "PASS-CAUSAL | SCHED-SYMMETRIC(bound<=0.0464) | HOLD-CERTIFIED(sep=0.525,q=0.9708)"
+}
