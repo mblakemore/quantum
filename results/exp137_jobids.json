@@ -1,0 +1,187 @@
+{
+ "experiment": "exp137-assemblage-tomography",
+ "cycle": "C4680-whisper",
+ "substrate": "claude-opus-4-8",
+ "backend": "ibm_marrakesh",
+ "tag": "exp137",
+ "sim": "experiments/exp137_assemblage_tomography_sim.py",
+ "gates": {
+  "W1_STEERABLE": "recon S3 > 1",
+  "W2_RIGOROUS_1SDI_RANDOMNESS": "H_min - 5*SE_boot > 0",
+  "W3_NULL": "null recon S3 <= 1",
+  "G_PHYSICAL": "NSviol < 0.05",
+  "G_SENT": 0.95
+ },
+ "prefiled_expectation": {
+  "H_min_bits": [
+   0.45,
+   0.7
+  ]
+ },
+ "pair": [
+  1,
+  2
+ ],
+ "pair_cost": 0.009106127880450066,
+ "job_id": "d9ansru6hjac73fenigg",
+ "metas": [
+  {
+   "label": "sent_00",
+   "kind": "sentinel",
+   "prep": "00",
+   "shots": 4000,
+   "twoq": 0
+  },
+  {
+   "label": "main_YZ",
+   "kind": "main",
+   "x": "Y",
+   "t": "Z",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "null_ZX",
+   "kind": "null",
+   "x": "Z",
+   "t": "X",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "null_ZZ",
+   "kind": "null",
+   "x": "Z",
+   "t": "Z",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "null_YZ",
+   "kind": "null",
+   "x": "Y",
+   "t": "Z",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "null_XX",
+   "kind": "null",
+   "x": "X",
+   "t": "X",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "null_YY",
+   "kind": "null",
+   "x": "Y",
+   "t": "Y",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "main_ZZ",
+   "kind": "main",
+   "x": "Z",
+   "t": "Z",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "main_ZX",
+   "kind": "main",
+   "x": "Z",
+   "t": "X",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "null_ZY",
+   "kind": "null",
+   "x": "Z",
+   "t": "Y",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "main_YY",
+   "kind": "main",
+   "x": "Y",
+   "t": "Y",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "main_YX",
+   "kind": "main",
+   "x": "Y",
+   "t": "X",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "null_XZ",
+   "kind": "null",
+   "x": "X",
+   "t": "Z",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "null_XY",
+   "kind": "null",
+   "x": "X",
+   "t": "Y",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "null_YX",
+   "kind": "null",
+   "x": "Y",
+   "t": "X",
+   "shots": 20000,
+   "twoq": 0
+  },
+  {
+   "label": "main_XY",
+   "kind": "main",
+   "x": "X",
+   "t": "Y",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "main_XZ",
+   "kind": "main",
+   "x": "X",
+   "t": "Z",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "main_ZY",
+   "kind": "main",
+   "x": "Z",
+   "t": "Y",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "main_XX",
+   "kind": "main",
+   "x": "X",
+   "t": "X",
+   "shots": 20000,
+   "twoq": 1
+  },
+  {
+   "label": "sent_11",
+   "kind": "sentinel",
+   "prep": "11",
+   "shots": 4000,
+   "twoq": 0
+  }
+ ]
+}

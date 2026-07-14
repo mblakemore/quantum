@@ -1,0 +1,39 @@
+{
+ "noiseless": {
+  "main": {
+   "S3": 1.7307634198907509,
+   "P_guess": 0.5184648294774101,
+   "H_min": 0.9476819690301438,
+   "ns_violation": 0.0034780707360048914,
+   "psd_violation": 4.261572682501269e-05,
+   "solver": "optimal"
+  },
+  "null": {
+   "S3": 0.009311028609261595,
+   "P_guess": 0.9923152085664091,
+   "H_min": 0.011129629917958628,
+   "ns_violation": 0.006944241920246821,
+   "psd_violation": 3.250404219884569e-05,
+   "solver": "optimal_inaccurate"
+  }
+ },
+ "fakemarrakesh": {
+  "main": {
+   "S3": 1.669768403388057,
+   "P_guess": 0.649655711415132,
+   "H_min": 0.6222527383249251,
+   "ns_violation": 0.002881168858765743,
+   "psd_violation": 0.0,
+   "solver": "optimal"
+  },
+  "null": {
+   "S3": 0.0020405626459552503,
+   "P_guess": 1.000029904396527,
+   "H_min": -0.0,
+   "ns_violation": 0.0029111974132295083,
+   "psd_violation": 0.0,
+   "solver": "optimal"
+  }
+ },
+ "design_valid": true
+}
