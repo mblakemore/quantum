@@ -46,6 +46,7 @@ The F86 branches straddle the baths: the **+** branch at `p₁ = 0.2098` is **co
 
 - **Definite order gives split = 0, exactly.** The null is not an approximation — it is a theorem for constant-to-`τ` channels. That is what makes any measured `Δ > 0` a clean signature of indefinite causal order rather than a noise artifact.
 - **The engine's W1 gate is a LOSS.** The quantitative drop-floor (`> 0.05` at 5σ) missed clearance by **0.7σ** and is frozen as LOSS — a REFUTED magnitude subclaim, kept in the record, not swept under. The **direction** is unambiguous (the drop is 9.4σ from zero and W2 passes); only the pre-filed **magnitude** at 5σ did not clear. The finding is the full cycle plus the leg that did not clear, together.
+- **The Frost Canvas (Exhibit C) is post-selection, not computation.** It reuses only the two measured F86 branch values (cold `0.2098`, hot `0.3894`) — no new number. Drawing a symbol = post-selecting which control outcome you keep at each site, a choice reproducible from any two-outcome stream. The ICO resource supplies the certified split; it does **not** draw the picture. Included to mark where the resource ends — the same reason the W1 loss is kept visible.
 - **Modest harvest, free fluid.** Under the native working fluid (F88) the + branch reaches ≈ 0.462×T_res (~54% colder), harvesting ~1.9% of the Landauer bound — the working fluid is free, the record is not. Published-T1 ran +38–69% high vs calibration (bias, not drift), absorbed by drift-tolerant gates; the certificate rests on in-job measured values.
 
 ## 6 · Provenance
