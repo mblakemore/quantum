@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The ICO Refrigerator — cooling from the order of operations | The Quantum Museum</title>
+<meta name="description" content="Put two operations in a superposition of orders and a target qubit splits colder or hotter by control outcome — a refrigeration forbidden to any definite-order process (causal value 0). Split Δ=0.1796 at 21.1σ; a full engine cycle extracts 0.0340 E/run. Real hardware data (F86/F88/F95, job d98vqfsqp3as739tfg0g).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 10px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,#3b9dff 16%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(29px,5.6vw,50px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .cold { color:#3b9dff; } h1 .hot { color:#ff6b5e; }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:64ch; margin:0 0 12px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--cyan); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:66ch; }
+
+  .fridge { display:grid; grid-template-columns: 1fr auto; gap:clamp(20px,4vw,40px); align-items:center; }
+  @media (max-width:680px){ .fridge { grid-template-columns:1fr; } }
+  .therms { display:flex; gap:26px; justify-content:center; }
+  .thermo { text-align:center; }
+  .tube { position:relative; width:44px; height:230px; margin:0 auto; border:2px solid var(--edge-2);
+    border-radius:22px; background:var(--surface-2); overflow:hidden; }
+  .merc { position:absolute; left:0; right:0; bottom:0; border-radius:0 0 20px 20px; transition:height .12s ease, background .12s ease; }
+  @media (prefers-reduced-motion: reduce){ .merc { transition:none; } }
+  .baseline { position:absolute; left:-6px; right:-6px; border-top:2px dashed var(--ink-3); }
+  .baseline span { position:absolute; right:100%; margin-right:8px; white-space:nowrap; font-family:var(--mono);
+    font-size:10px; color:var(--ink-3); top:-7px; }
+  .thermo .name { font-family:var(--mono); font-size:12.5px; margin-top:10px; color:var(--ink); font-weight:600; }
+  .thermo .p1 { font-family:var(--mono); font-size:20px; font-weight:700; margin-top:3px; font-variant-numeric:tabular-nums; }
+  .thermo.cold .p1 { color:#3b9dff; } .thermo.hot .p1 { color:#ff6b5e; }
+  .thermo .state { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-top:2px; }
+
+  .readout-split { font-family:var(--mono); margin-bottom:16px; }
+  .readout-split .d { font-size:clamp(30px,7vw,44px); font-weight:720; letter-spacing:-.02em; color:var(--ink); }
+  .readout-split .cap { font-size:12.5px; color:var(--ink-3); }
+  .readout-split .cap b { color: var(--good); }
+  .causal { font-family:var(--mono); font-size:12px; color:var(--ink-3); border-left:2px solid var(--amber);
+    padding-left:12px; margin:14px 0; }
+  .causal b { color: var(--amber); }
+  .slider-wrap { margin-top:8px; }
+  .slabel { display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--ink-3); margin-bottom:8px; }
+  input[type=range]{ -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:999px;
+    background:linear-gradient(90deg,var(--ink-3),#3b9dff); outline:none; cursor:pointer; }
+  input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:22px; height:22px; border-radius:50%;
+    background:var(--ink); border:3px solid var(--cyan); box-shadow:0 2px 8px rgba(0,0,0,.4); }
+  input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%; background:var(--ink); border:3px solid var(--cyan); }
+  .verdict { margin-top:14px; font-size:14px; color:var(--ink-2); min-height:3em; max-width:56ch; }
+  .verdict b { color: var(--ink); } .verdict .forbid { color:#3b9dff; font-weight:700; }
+
+  /* cycle */
+  .cycle { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  @media (max-width:680px){ .cycle { grid-template-columns:1fr 1fr; } }
+  .stage { border:1px solid var(--edge); border-radius:12px; padding:14px; background:var(--surface-2); position:relative; }
+  .stage .n { font-family:var(--mono); font-size:11px; color:var(--cyan); font-weight:700; }
+  .stage .t { font-size:14px; font-weight:620; margin:6px 0 4px; color:var(--ink); }
+  .stage .v { font-family:var(--mono); font-size:12.5px; color:var(--ink-2); }
+  .stage .v b { color:var(--good); }
+  .ledger { display:flex; flex-wrap:wrap; gap:12px 24px; margin-top:18px; font-family:var(--mono); font-size:12.5px; align-items:baseline; }
+  .ledger .work { font-size:clamp(22px,5vw,32px); font-weight:720; color:var(--good); letter-spacing:-.02em; }
+  .ledger .lab { color:var(--ink-3); }
+  .ledger .win { color:var(--good); } .ledger .loss { color:var(--amber); }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--cyan); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
+  .badge-row .sp { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing I · The Causal Switch</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Indefinite-causal-order thermodynamics</p>
+    <h1>Cooling from the <span class="cold">order</span> of operations.</h1>
+    <p class="lede">Send a qubit through two thermalizing channels — but put the <em>order</em> of the two
+    channels into a quantum superposition. Read a control qubit, and the target comes out <span class="cold">colder</span>
+    or <span class="hot">hotter</span> than the baths it touched. No definite-order process can do this: its causal
+    value is exactly zero. Turn the knob and watch it happen — every number is measured hardware data.</p>
+    <span class="scope">Resource identified by <b>Felce–Vedral (2020)</b>. The contribution: the frozen-court measurement on silicon.</span>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — The Refrigeration Split</p>
+    <h2>Turn up the superposition of orders</h2>
+    <p class="sub">At zero order-coherence the two channels act in one definite order and the target just
+    reaches the bath temperature — no split. Add order-coherence and the two control outcomes pull the target
+    apart: one branch dives below the reservoirs, the other heats up.</p>
+    <div class="fridge">
+      <div>
+        <div class="readout-split">
+          <div class="d" id="delta">Δ = 0.000</div>
+          <div class="cap" id="dcap">split in excited population between the two control outcomes</div>
+        </div>
+        <div class="causal">A definite-order process gives <b>Δ = 0, exactly</b>. Any split at all is forbidden to ordered physics — it is the signature of indefinite causal order.</div>
+        <div class="slider-wrap">
+          <div class="slabel"><span>order-coherence — superposition of the two orders</span><span id="gRead">0%</span></div>
+          <input type="range" id="coh" min="0" max="100" step="1" value="0" aria-label="Order coherence">
+        </div>
+        <div class="verdict" id="verdict">Definite order. The target thermalizes to the bath population p₁ ≈ 0.25 whichever way the control reads. Nothing is refrigerated.</div>
+      </div>
+      <div class="therms">
+        <div class="thermo cold" id="thPlus">
+          <div class="tube"><div class="baseline" id="base1" style="bottom:50%"><span>baths 0.25</span></div><div class="merc" id="mercPlus"></div></div>
+          <div class="name">+ branch</div>
+          <div class="p1" id="p1Plus">0.250</div>
+          <div class="state" id="statePlus">p₁ (→ temperature)</div>
+        </div>
+        <div class="thermo hot" id="thMinus">
+          <div class="tube"><div class="baseline" style="bottom:50%"></div><div class="merc" id="mercMinus"></div></div>
+          <div class="name">− branch</div>
+          <div class="p1" id="p1Minus">0.250</div>
+          <div class="state" id="stateMinus">p₁ (→ temperature)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The Engine, Full Cycle</p>
+    <h2>The same resource, running a complete thermodynamic loop</h2>
+    <p class="sub">Passive baths — the kind that can individually power nothing — go in; the switch charges the
+    target above the halfway line; work comes out; and the output is passive again, so the cycle can repeat.
+    Books audited on the chip.</p>
+    <div class="cycle">
+      <div class="stage"><div class="n">① IN</div><div class="t">Passive baths</div><div class="v">both 5σ below the 0.5 line — no free work</div></div>
+      <div class="stage"><div class="n">② CHARGE</div><div class="t">Target inverted</div><div class="v">p₁ = <b>0.5485</b> · 7σ above 0.5</div></div>
+      <div class="stage"><div class="n">③ EXTRACT</div><div class="t">Work out</div><div class="v"><b>0.0340 E</b>/run · p₁ drops 0.092</div></div>
+      <div class="stage"><div class="n">④ OUT</div><div class="t">Passive again</div><div class="v">output re-certified passive · 5σ</div></div>
+    </div>
+    <div class="ledger">
+      <span class="work">0.0340 E</span><span class="lab">net work extracted per run, from baths that alone can power nothing</span>
+      <span class="sp" style="flex:1"></span>
+      <span class="win">W2 WIN</span><span class="loss">W1 LOSS (0.7σ short — kept in the record)</span>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F86 / F88 / F95</span> · job <span class="sig">d98vqfsqp3as739tfg0g</span></span>
+    <span>ibm_marrakesh · causal value = 0 · split 21.1σ</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+
+    // ---- data kernel (F86, exp108_grade.json) ----
+    var BASE = 0.25;           // definite-order bath population (measured null 0.2496)
+    var P1P_FULL = 0.2098;     // + branch, colder (measured)
+    var P1M_FULL = 0.3894;     // - branch, hotter (measured)
+    var SCALE = 0.5;           // thermometer top (p1 axis 0..0.5)
+    // sanity: colder < baseline < hotter
+    console.assert(P1P_FULL < BASE && BASE < P1M_FULL, "branch ordering");
+
+    var merc = { p: document.getElementById("mercPlus"), m: document.getElementById("mercMinus") };
+    function tempColor(p1) {
+      // p1 0.10 (cold blue) -> 0.25 (neutral) -> 0.40 (hot red)
+      var t = Math.max(0, Math.min(1, (p1 - 0.10) / (0.40 - 0.10)));
+      var cold = [59,157,255], hot = [255,107,94];
+      var c = cold.map(function (x, i) { return Math.round(x + (hot[i] - x) * t); });
+      return "rgb(" + c[0] + "," + c[1] + "," + c[2] + ")";
+    }
+    function setTube(el, p1) { el.style.height = (p1 / SCALE * 100) + "%"; el.style.background = tempColor(p1); }
+
+    var delta = document.getElementById("delta"), dcap = document.getElementById("dcap"),
+        gRead = document.getElementById("gRead"), verdict = document.getElementById("verdict"),
+        p1P = document.getElementById("p1Plus"), p1M = document.getElementById("p1Minus"),
+        stP = document.getElementById("statePlus"), stM = document.getElementById("stateMinus");
+    function render(g) {   // g in [0,1] = order coherence
+      var pp = BASE + (P1P_FULL - BASE) * g;   // + branch cools
+      var pm = BASE + (P1M_FULL - BASE) * g;   // - branch heats
+      var d = pm - pp;
+      setTube(merc.p, pp); setTube(merc.m, pm);
+      p1P.textContent = pp.toFixed(3); p1M.textContent = pm.toFixed(3);
+      delta.textContent = "Δ = " + d.toFixed(3);
+      gRead.textContent = Math.round(g * 100) + "%";
+      stP.textContent = pp < BASE - 0.002 ? "colder than the baths" : "p₁ (→ temperature)";
+      stM.textContent = pm > BASE + 0.002 ? "hotter than the baths" : "p₁ (→ temperature)";
+      if (g < 0.02) {
+        dcap.innerHTML = "split in excited population between the two control outcomes";
+        verdict.innerHTML = "Definite order. The target thermalizes to the bath population p₁ ≈ 0.25 whichever way the control reads. Nothing is refrigerated.";
+      } else if (g > 0.98) {
+        dcap.innerHTML = "measured on ibm_marrakesh · <b>21.1σ over the causal value 0</b>";
+        verdict.innerHTML = "<span class='forbid'>Full superposition of orders.</span> Read <b>+</b> and the target is at p₁ = 0.21 — <b>colder than the coldest reservoir</b> (F88, 5σ). Read <b>−</b> and it is hotter. A definite-order engine cannot split them at all.";
+      } else {
+        dcap.innerHTML = "split scales with the order-coherence (endpoints measured)";
+        verdict.innerHTML = "The orders are partly superposed. The two control outcomes have started to pull the target's temperature apart — a split no ordered process is allowed to produce.";
+      }
+    }
+    var coh = document.getElementById("coh");
+    coh.addEventListener("input", function () { render(+coh.value / 100); });
+    render(0);
+  })();
+</script>
+</body>
+</html>
