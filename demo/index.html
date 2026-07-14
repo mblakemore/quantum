@@ -1,553 +1,256 @@
-<title>Quantum Switch — a causal-order demo on real silicon</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Quantum Museum — indefinite order, no-go games, and the search for advantage on IBM Heron</title>
+<meta name="description" content="A walk-through museum of a ~110-experiment quantum campaign on IBM Heron: the causal switch, the no-go games, foundations on silicon, the advantage ladder, and the instruments. Every exhibit renders real measured hardware data.">
+<link rel="stylesheet" href="museum.css">
 <style>
-  :root {
-    --ink: #0b0d13;
-    --surface: #141826;
-    --surface-2: #1b2032;
-    --edge: #2a3145;
-    --text: #e2e6f0;
-    --muted: #8b93a7;
-    --faint: #5a6277;
-    --coherent: #45d6cf;      /* superconducting-qubit phosphor cyan — the switch resource */
-    --coherent-dim: #2b7d79;
-    --measured: #e6a94e;      /* hardware data points (cyan↔amber = CVD-safe pair) */
-    --classical: #737b90;     /* decohered / order-blind */
-    --grid: rgba(138,147,167,0.14);
-    --live-accent: var(--coherent);   /* driven by φ in JS */
-    --live-accent-soft: rgba(69,214,207,0.14);
-    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", "Roboto Mono", Menlo, monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    --maxw: 900px;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --ink: #eef0f5; --surface: #ffffff; --surface-2: #f4f6fb; --edge: #dce0ea;
-      --text: #171b26; --muted: #5c6479; --faint: #9aa2b5;
-      --coherent: #10a89f; --coherent-dim: #79ccc7; --measured: #b9791b;
-      --classical: #7b8296; --grid: rgba(92,100,121,0.16);
-      --live-accent: var(--coherent); --live-accent-soft: rgba(16,168,159,0.12);
-    }
-  }
-  :root[data-theme="dark"] {
-    --ink: #0b0d13; --surface: #141826; --surface-2: #1b2032; --edge: #2a3145;
-    --text: #e2e6f0; --muted: #8b93a7; --faint: #5a6277; --coherent: #45d6cf; --coherent-dim: #2b7d79;
-    --measured: #e6a94e; --classical: #737b90; --grid: rgba(138,147,167,0.14);
-    --live-accent-soft: rgba(69,214,207,0.14);
-  }
-  :root[data-theme="light"] {
-    --ink: #eef0f5; --surface: #ffffff; --surface-2: #f4f6fb; --edge: #dce0ea;
-    --text: #171b26; --muted: #5c6479; --faint: #9aa2b5; --coherent: #10a89f; --coherent-dim: #79ccc7;
-    --measured: #b9791b; --classical: #7b8296; --grid: rgba(92,100,121,0.16);
-    --live-accent-soft: rgba(16,168,159,0.12);
-  }
+  .shell { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(16px,4vw,32px); }
 
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0; background: var(--ink); color: var(--text);
-    font-family: var(--sans); line-height: 1.6;
-    font-size: 17px; letter-spacing: 0.1px;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
-  h1, h2, h3 { font-family: var(--mono); font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; line-height: 1.15; }
-  a { color: var(--live-accent); }
-  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-  .eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  /* top bar */
+  .topbar { display: flex; align-items: center; gap: 14px; padding: 18px 0 6px; }
+  .topbar .brand { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--ink); }
+  .topbar .brand span { color: var(--cyan); }
+  .topbar nav { margin-left: auto; display: flex; gap: 18px; align-items: center; }
+  .topbar nav a { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); }
+  .topbar nav a:hover { color: var(--cyan); }
+  .tbtn { font-family: var(--mono); font-size: 12px; background: none; border: 1px solid var(--edge);
+    color: var(--ink-2); border-radius: 999px; padding: 4px 11px; cursor: pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
 
-  /* ---------- hero ---------- */
-  header { border-bottom: 1px solid var(--edge); background:
-      radial-gradient(120% 90% at 82% -10%, var(--live-accent-soft), transparent 60%); }
-  .hero { padding: 62px 0 46px; }
-  .hero h1 { font-size: clamp(30px, 6.2vw, 52px); margin: 14px 0 16px; }
-  .hero h1 .hl { color: var(--live-accent); }
-  .lede { font-size: clamp(17px, 2.4vw, 20px); color: var(--text); max-width: 60ch; margin: 0 0 26px; }
-  .lede b { color: var(--live-accent); font-weight: 600; }
-  .statrow { display: flex; flex-wrap: wrap; gap: 14px; }
-  .stat { background: var(--surface); border: 1px solid var(--edge); border-radius: 12px; padding: 14px 18px; min-width: 130px; }
-  .stat .n { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--live-accent); font-variant-numeric: tabular-nums; }
-  .stat .l { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
-  .chips { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip { font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px solid var(--edge);
-          border-radius: 999px; padding: 4px 11px; background: var(--surface); }
+  /* hero */
+  .hero { padding: clamp(38px,8vw,88px) 0 clamp(30px,5vw,52px); position: relative; }
+  .hero::before { content: ""; position: absolute; inset: -20% 0 auto -10%; height: 420px; z-index: -1;
+    background: radial-gradient(60% 70% at 30% 0%, color-mix(in srgb,var(--cyan) 16%,transparent), transparent 70%);
+    pointer-events: none; }
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+  .eyebrow b { color: var(--ink-2); font-weight: 600; }
+  .eyebrow .d { width: 4px; height: 4px; border-radius: 50%; background: var(--edge-2); }
+  h1 { font-family: var(--mono); font-weight: 720; letter-spacing: -.025em; line-height: 1.05;
+    font-size: clamp(32px,6.4vw,60px); margin: 20px 0 18px; text-wrap: balance; max-width: 17ch; }
+  h1 .hl { color: var(--cyan); }
+  .thesis { font-size: clamp(16px,2.3vw,20px); color: var(--ink-2); max-width: 60ch; margin: 0 0 26px; }
+  .thesis b { color: var(--ink); font-weight: 600; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn { font-family: var(--mono); font-size: 13px; font-weight: 600; padding: 10px 18px; border-radius: 10px;
+    border: 1px solid var(--edge); color: var(--ink); background: var(--surface); transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease; }
+  .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .btn.primary { background: var(--cyan); color: #04201e; border-color: var(--cyan); }
+  .stat-strip { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 30px;
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .stat-strip b { color: var(--cyan); font-weight: 600; }
 
-  section { padding: 46px 0; border-bottom: 1px solid var(--edge); }
-  section > .wrap > .eyebrow { display: block; margin-bottom: 10px; }
-  h2 { font-size: clamp(21px, 3.4vw, 27px); margin: 0 0 8px; }
-  .sub { color: var(--muted); max-width: 62ch; margin: 0 0 26px; }
-  p { max-width: 66ch; }
+  /* wings */
+  .wing { padding: 40px 0 8px; border-top: 1px solid var(--edge); margin-top: 34px; }
+  .wing-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
+  .wing-num { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--cyan); letter-spacing: .1em; }
+  .wing-name { font-size: clamp(20px,3vw,27px); font-weight: 680; letter-spacing: -.02em; color: var(--ink); }
+  .wing-desc { font-size: 14px; color: var(--ink-3); margin-left: auto; max-width: 40ch; text-align: right; }
+  @media (max-width: 620px) { .wing-desc { margin-left: 0; text-align: left; } }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(268px,1fr)); gap: 14px; }
 
-  /* ---------- primer ---------- */
-  .beats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-  .beat { background: var(--surface); border: 1px solid var(--edge); border-radius: 12px; padding: 18px; }
-  .beat .k { font-family: var(--mono); color: var(--live-accent); font-size: 13px; letter-spacing: 0.05em; margin-bottom: 6px; }
-  .beat p { margin: 0; font-size: 15px; color: var(--text); }
-
-  /* ---------- instrument panel ---------- */
-  .panel { background: linear-gradient(180deg, var(--surface), var(--surface-2));
-           border: 1px solid var(--edge); border-radius: 16px; overflow: hidden;
-           box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 26px 60px -30px var(--live-accent-soft); }
-  .panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
-                padding: 16px 20px; border-bottom: 1px solid var(--edge); flex-wrap: wrap; }
-  .panel-head .title { font-family: var(--mono); font-weight: 700; letter-spacing: -0.01em; }
-  .verdict { font-family: var(--mono); font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em;
-             padding: 5px 12px; border-radius: 999px; border: 1px solid var(--live-accent);
-             color: var(--live-accent); background: var(--live-accent-soft); white-space: nowrap; }
-  .panel-body { padding: 8px 20px 22px; }
-  .readout { display: flex; flex-wrap: wrap; gap: 26px; align-items: baseline; margin: 12px 2px 6px; }
-  .readout .big { font-family: var(--mono); font-variant-numeric: tabular-nums;
-                  font-size: clamp(34px, 8vw, 52px); font-weight: 700; color: var(--live-accent); line-height: 1; }
-  .readout .unit { font-family: var(--mono); font-size: 13px; color: var(--muted); }
-  .readout .coh { font-family: var(--mono); font-size: 14px; color: var(--text); }
-  .readout .coh b { color: var(--live-accent); }
-  canvas { display: block; width: 100%; height: auto; }
-  .plot-wrap { position: relative; margin: 6px 0 4px; }
-  .microcap { font-family: var(--mono); font-size: 13px; color: var(--muted); min-height: 1.5em; margin: 4px 2px 14px; }
-  .microcap b { color: var(--text); }
-
-  /* slider */
-  .dial { margin: 4px 2px 2px; }
-  .dial label { font-family: var(--mono); font-size: 12.5px; color: var(--muted); display: flex; justify-content: space-between; }
-  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 34px; background: transparent; margin: 0; cursor: pointer; }
-  input[type=range]:focus-visible { outline: 2px solid var(--live-accent); outline-offset: 6px; border-radius: 4px; }
-  input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 999px;
-      background: linear-gradient(90deg, var(--coherent), var(--classical)); }
-  input[type=range]::-moz-range-track { height: 6px; border-radius: 999px;
-      background: linear-gradient(90deg, var(--coherent), var(--classical)); }
-  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none;
-      width: 22px; height: 22px; margin-top: -8px; border-radius: 50%; background: var(--live-accent);
-      border: 3px solid var(--ink); box-shadow: 0 0 0 1px var(--live-accent), 0 0 18px var(--live-accent-soft); }
-  input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%;
-      background: var(--live-accent); border: 3px solid var(--ink); box-shadow: 0 0 0 1px var(--live-accent); }
-  .ticks { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: var(--faint); margin-top: 2px; }
-  .ticks span { cursor: pointer; }
-  .ticks span:hover { color: var(--measured); }
-
-  /* two-order superposition sketch */
-  .orders { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0 2px; }
-  .order { border: 1px solid var(--edge); border-radius: 10px; padding: 12px 14px; background: rgba(0,0,0,0.10); }
-  .order .lab { font-family: var(--mono); font-size: 11.5px; color: var(--muted); letter-spacing: 0.05em; }
-  .order .path { font-family: var(--mono); font-size: 16px; font-weight: 700; margin-top: 4px; }
-  .order .amp { font-family: var(--mono); font-size: 11.5px; color: var(--faint); margin-top: 3px; }
-
-  /* commute toggle / gauge */
-  .toggle-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 4px 0 16px; }
-  .seg { display: inline-flex; border: 1px solid var(--edge); border-radius: 10px; overflow: hidden; }
-  .seg button { font-family: var(--mono); font-size: 13px; background: var(--surface); color: var(--muted);
-                border: 0; padding: 9px 16px; cursor: pointer; }
-  .seg button[aria-pressed="true"] { background: var(--live-accent-soft); color: var(--live-accent); font-weight: 700; }
-  .gauge-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-  @media (min-width: 620px) { .gauge-grid { grid-template-columns: 260px 1fr; align-items: center; } }
-  .gauge-read { font-family: var(--mono); }
-  .gauge-read .xc { font-size: clamp(30px, 7vw, 44px); font-weight: 700; color: var(--live-accent); font-variant-numeric: tabular-nums; }
-  .gauge-read .note { color: var(--muted); font-size: 14px; margin-top: 6px; max-width: 42ch; }
-
-  /* rigor bars */
-  .bars { display: flex; flex-direction: column; gap: 14px; margin: 8px 0 6px; }
-  .bar { display: grid; grid-template-columns: 190px 1fr auto; gap: 12px; align-items: center; }
-  .bar .name { font-family: var(--mono); font-size: 13px; }
-  .bar .name small { display: block; color: var(--faint); font-size: 11px; letter-spacing: 0; }
-  .track { height: 22px; background: var(--surface-2); border: 1px solid var(--edge); border-radius: 6px; overflow: hidden; }
-  .fill { height: 100%; border-radius: 5px 0 0 5px; }
-  .fill.coh { background: linear-gradient(90deg, var(--coherent-dim), var(--coherent)); }
-  .fill.inert { background: var(--classical); }
-  .bar .val { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 14px; font-weight: 700; }
-  @media (max-width: 560px) { .bar { grid-template-columns: 120px 1fr auto; } .bar .name small { display: none; } }
-  .sigma { margin-top: 20px; background: var(--surface); border: 1px solid var(--edge); border-left: 3px solid var(--live-accent);
-           border-radius: 10px; padding: 14px 18px; }
-  .sigma b { color: var(--live-accent); font-family: var(--mono); }
-
-  /* caveats + details */
-  details { background: var(--surface); border: 1px solid var(--edge); border-radius: 12px; padding: 4px 18px; margin-top: 10px; }
-  details summary { cursor: pointer; font-family: var(--mono); font-weight: 700; padding: 12px 0; list-style: none; }
-  details summary::-webkit-details-marker { display: none; }
-  details summary::before { content: "▸ "; color: var(--live-accent); }
-  details[open] summary::before { content: "▾ "; }
-  details .body { padding: 0 0 14px; color: var(--text); }
-  .caveats { display: grid; gap: 12px; }
-  .caveat { background: var(--surface); border: 1px solid var(--edge); border-radius: 12px; padding: 16px 18px; }
-  .caveat .h { font-family: var(--mono); color: var(--measured); font-size: 13px; font-weight: 700; margin-bottom: 5px; }
-  .caveat p { margin: 0; font-size: 15px; color: var(--text); }
-
-  footer { padding: 40px 0 60px; color: var(--muted); font-size: 14px; }
-  footer .jobs { font-family: var(--mono); font-size: 12px; color: var(--faint); margin-top: 12px; line-height: 1.9; }
-  .kbd { font-family: var(--mono); font-size: 12px; border: 1px solid var(--edge); border-radius: 5px; padding: 1px 6px; color: var(--muted); }
-
-  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
-  .fade { transition: color .25s ease, background-color .25s ease, border-color .25s ease, box-shadow .25s ease; }
+  footer { border-top: 1px solid var(--edge); margin-top: 52px; padding: 26px 0 60px;
+    display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center;
+    font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
+  footer a { color: var(--ink-2); } footer a:hover { color: var(--cyan); }
+  footer .sp { flex: 1; }
 </style>
+</head>
+<body>
+<div class="shell">
 
-<header>
-  <div class="wrap hero">
-    <span class="eyebrow">IBM Heron-r2 · indefinite causal order · findings F73–F77</span>
-    <h1>The <span class="hl">Quantum Switch</span>:<br>putting the order of events into superposition</h1>
-    <p class="lede">Run operation <b>A then B</b>, or <b>B then A</b> — but let a control qubit hold
-      <b>both orders at once</b>. When that control stays coherent, it can read out whether the two
-      operations care about their order. A classical coin-flip between the orders <b>cannot</b>.
-      We fired that distinction on real superconducting silicon. Everything below is measured data —
-      drag things and watch it move.</p>
-    <div class="statrow">
-      <div class="stat"><div class="n">≥72σ</div><div class="l">quantum vs classical-order gap (F77)</div></div>
-      <div class="stat"><div class="n">0.9992</div><div class="l">Pearson to the cos law on hardware (F76)</div></div>
-      <div class="stat"><div class="n mono">+1.78</div><div class="l">causal witness W on ibm_marrakesh (F75)</div></div>
-    </div>
-    <div class="chips">
-      <span class="chip">ibm_marrakesh</span><span class="chip">ibm_kingston</span>
-      <span class="chip">Heron-r2 · 156 qubits</span><span class="chip">2000–6000 shots/circuit</span>
-      <span class="chip">pre-registered gates</span>
-    </div>
+  <div class="topbar">
+    <div class="brand">THE QUANTUM <span>MUSEUM</span></div>
+    <nav>
+      <a href="scoreboard/">Scoreboard</a>
+      <a href="https://github.com/mblakemore/quantum">Repository</a>
+      <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+    </nav>
   </div>
-</header>
 
-<section>
-  <div class="wrap">
-    <span class="eyebrow">30-second primer</span>
-    <h2>What the control qubit is doing</h2>
-    <p class="sub">Two operations on a target, and a control qubit that steers which order they run in.
-      Put the control in a superposition and the two orders happen coherently at once.</p>
-    <div class="beats">
-      <div class="beat"><div class="k">the setup</div><p>A control qubit |c⟩ routes a target through
-        two gates. |0⟩ → order <b>B·A</b>, |1⟩ → order <b>A·B</b>. Prepare |c⟩ = (|0⟩+|1⟩)/√2 and both orders run superposed.</p></div>
-      <div class="beat"><div class="k">the readout</div><p>Measure the control in the X basis. Its value
-        <span class="mono">⟨X_c⟩</span> depends on whether A and B <b>commute</b> (order-agnostic) or
-        <b>anticommute</b> (order-flipping). The control encodes <i>which order mattered</i>.</p></div>
-      <div class="beat"><div class="k">the witness</div><p><span class="mono">DISC = ⟨X_c⟩<sub>commute</sub> − ⟨X_c⟩<sub>anticommute</sub></span>.
-        A coherent switch gives ≈ +2. Any classical mixture of definite orders gives ≈ 0. That gap is the proof.</p></div>
+  <header class="hero">
+    <p class="eyebrow"><b>IBM HERON</b><span class="d"></span>2026 CAMPAIGN<span class="d"></span>~110 EXPERIMENTS<span class="d"></span>FINDINGS F01–F117<span class="d"></span>EVERY NUMBER A JOB ID</p>
+    <h1>We asked a quantum computer questions the textbooks call <span class="hl">impossible</span>.</h1>
+    <p class="thesis">Then we pre-registered the answers and ran them on real silicon. Indefinite causal order, contextuality, thermodynamics from a switch, a computational bridge, certified randomness — <b>every exhibit here renders measured hardware data</b>, not a simulation. Walk through.</p>
+    <div class="cta">
+      <a class="btn primary" href="scoreboard/">See the verdict →</a>
+      <a class="btn" href="switch/">Start with the switch</a>
+      <a class="btn" href="https://github.com/mblakemore/quantum">Read the full report</a>
     </div>
-  </div>
-</section>
+    <div class="stat-strip">
+      <span><b>5</b> wings</span><span><b>7</b> exhibits live</span><span><b>14</b> in development</span><span><b>2</b> Heron chips + a foreign-device exam</span>
+    </div>
+  </header>
 
-<section>
-  <div class="wrap">
-    <span class="eyebrow">Interactive · the coherence dial</span>
-    <h2>Drain the order-coherence and watch the witness fall</h2>
-    <p class="sub">φ dephases the control's <i>order-basis coherence</i>: φ = 0 is the fully coherent
-      switch, φ = π is a classical 50/50 coin flip between the two orders. The theory says the witness
-      should trace <span class="mono">DISC(φ) = 2·cos(φ/2)</span>. On <b>ibm_kingston</b> it did — to
-      Pearson 0.9992. The five amber dots are real measurements; the line is that confirmed law.</p>
-
-    <div class="panel fade" id="panel">
-      <div class="panel-head">
-        <span class="title">causal witness · DISC(φ)</span>
-        <span class="verdict fade" id="verdict">COHERENT SWITCH</span>
+  <!-- WING I -->
+  <section class="wing" id="wing-1">
+    <div class="wing-head"><span class="wing-num">WING I</span><span class="wing-name">The Causal Switch</span><span class="wing-desc">Indefinite order — where the sequence of two operations is itself in superposition — as a physical resource.</span></div>
+    <div class="grid">
+      <a class="card" href="switch/">
+        <div class="card-top"><span class="card-title">The Interactive Switch</span><span class="tag live">Live</span></div>
+        <p class="card-hook">Drag the order-coherence and watch a witness of indefinite causal order live and die by the cosine law.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F73–F82</span> · <span class="sig">216.8σ</span></span><span class="enter">Enter →</span></div>
+      </a>
+      <a class="card" href="ladder/">
+        <div class="card-top"><span class="card-title">The Ladder of Causation</span><span class="tag live">Live</span></div>
+        <p class="card-hook">Climb Pearl's three rungs — see, do, imagine — reconstructed on real silicon.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">causal structure</span></span><span class="enter">Enter →</span></div>
+      </a>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The ICO Refrigerator</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">Two thermal baths and the switch: the target splits colder or hotter by control outcome — forbidden to every ordered process.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F86 / F95</span> · <span class="sig">21.1σ</span></span></div>
       </div>
-      <div class="panel-body">
-        <div class="readout">
-          <div><div class="big mono" id="discVal">+2.00</div><div class="unit">DISC (witness value)</div></div>
-          <div class="coh">order-coherence remaining:<br><b class="mono" id="cohPct">100%</b>
-            <span class="unit">= cos(φ/2)</span></div>
-        </div>
-
-        <div class="plot-wrap"><canvas id="plot" width="860" height="300" aria-hidden="true"></canvas></div>
-        <p class="microcap" id="micro"></p>
-
-        <div class="dial">
-          <label for="phi"><span>φ — order-basis dephasing</span><span class="mono" id="phiLab">0.00 rad</span></label>
-          <input type="range" id="phi" min="0" max="1000" value="0"
-                 aria-label="order-basis dephasing angle phi" aria-valuetext="0 radians, fully coherent switch">
-          <div class="ticks">
-            <span data-p="0">0 · switch</span><span data-p="250">π/4</span><span data-p="500">π/2</span>
-            <span data-p="750">3π/4</span><span data-p="1000">π · classical</span>
-          </div>
-        </div>
-
-        <div class="orders" id="orders">
-          <div class="order"><div class="lab">|c⟩ = |0⟩ branch</div><div class="path fade" id="pathBA" style="color:var(--live-accent)">B → A</div><div class="amp" id="ampBA">amplitude 0.71</div></div>
-          <div class="order"><div class="lab">|c⟩ = |1⟩ branch</div><div class="path fade" id="pathAB" style="color:var(--live-accent)">A → B</div><div class="amp" id="ampAB">amplitude 0.71</div></div>
-        </div>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The Teleported Witness</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">Beam the control qubit one hop; it arrives still causally indefinite over a quantum channel, dead over a classical one.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F92</span> · <span class="sig">90σ</span></span></div>
       </div>
     </div>
-    <p style="color:var(--muted);font-size:13.5px;margin-top:12px">Tip: use <span class="kbd">←</span> <span class="kbd">→</span> when the slider is focused, or tap a tick label to jump to a measured point.</p>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <span class="eyebrow">Interactive · the mechanism</span>
-    <h2>The control literally flips sign when order starts to matter</h2>
-    <p class="sub">Here are the real per-circuit control readouts from <b>ibm_marrakesh</b> (F75). Toggle
-      whether the target operations commute or anticommute. In the <b>coherent switch</b>, ⟨X_c⟩ swings
-      hard. In the <b>definite-order</b> control (a spectator that isn't in superposition), it barely
-      moves — it's blind to order. That blindness is exactly what a classical process is stuck with.</p>
-
-    <div class="panel">
-      <div class="panel-head"><span class="title">control readout · ⟨X_c⟩ on ibm_marrakesh</span></div>
-      <div class="panel-body">
-        <div class="toggle-row">
-          <div class="seg" role="group" aria-label="control type">
-            <button id="mCoh" aria-pressed="true">coherent switch</button>
-            <button id="mDef" aria-pressed="false">definite (spectator)</button>
-          </div>
-          <div class="seg" role="group" aria-label="target commutator">
-            <button id="mComm" aria-pressed="true">A,B commute</button>
-            <button id="mAnti" aria-pressed="false">A,B anticommute</button>
-          </div>
-        </div>
-        <div class="gauge-grid">
-          <canvas id="gauge" width="260" height="180" aria-hidden="true"></canvas>
-          <div class="gauge-read">
-            <div class="xc mono" id="xcVal">+0.865</div>
-            <div class="note" id="xcNote"></div>
-          </div>
-        </div>
+  <!-- WING II -->
+  <section class="wing" id="wing-2">
+    <div class="wing-head"><span class="wing-num">WING II</span><span class="wing-name">The No-Go Games</span><span class="wing-desc">Games whose classical ceiling is a theorem — and the quantum strategies that beat it.</span></div>
+    <div class="grid">
+      <a class="card" href="static-duel/">
+        <div class="card-top"><span class="card-title">The Bot Duel: STATIC</span><span class="tag live">Live</span></div>
+        <p class="card-hook">Can a message survive two perfect erasers? A classical bot can't. The quantum bot does — race them.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F85</span> · <span class="sig">capacity from zero</span></span><span class="enter">Enter →</span></div>
+      </a>
+      <a class="card" href="casebook/">
+        <div class="card-top"><span class="card-title">The Interrogation</span><span class="tag live">Live</span></div>
+        <p class="card-hook">A game with a mathematically proven ceiling you cannot beat — until the suspects share entanglement.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">game ceiling</span></span><span class="enter">Enter →</span></div>
+      </a>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The Magic Square</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">Play the pseudo-telepathy game: fail at 8/9 as a classical pair, win every cell with the quantum strategy.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F106</span> · <span class="sig">196σ</span></span></div>
+      </div>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The No-Go Triptych</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">Three great no-gos — Bell, indefinite causal order, contextuality — three walls, all falling in one court.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F73 / F82 / F106</span></span></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <span class="eyebrow">The rigor · closing the loophole</span>
-    <h2>Beating the hardest classical adversary, in one calibration window</h2>
-    <p class="sub">A skeptic's best objection: "a classical process that randomly picks order B·A or A·B
-      also has access to the commutator." So the real test isn't switch-vs-spectator — it's switch vs a
-      genuine <b>classical mixture of definite orders</b>. On <b>ibm_marrakesh</b>, in a single
-      calibration window (F77), the switch fires and <i>both</i> classical controls stay inert:</p>
-    <div class="bars">
-      <div class="bar"><div class="name">coherent switch<small>order superposed</small></div>
-        <div class="track"><div class="fill coh" style="width:95%"></div></div><div class="val" style="color:var(--coherent)">+1.900</div></div>
-      <div class="bar"><div class="name">classical mixture<small>random B·A / A·B</small></div>
-        <div class="track"><div class="fill inert" style="width:1.8%"></div></div><div class="val" style="color:var(--classical)">+0.035</div></div>
-      <div class="bar"><div class="name">definite order<small>fixed spectator</small></div>
-        <div class="track"><div class="fill inert" style="width:0.5%"></div></div><div class="val" style="color:var(--classical)">+0.003</div></div>
-    </div>
-    <div class="sigma">
-      Headline witness <b>W₂ = DISC_switch − DISC_mixture = +1.865</b>, sitting <b>≥72σ</b> above zero
-      (conservative; ≈98σ on the true error bar). For scale: particle physics calls <b>5σ</b> a
-      discovery. The coherence of causal order is a real, measurable resource — not gate structure a
-      classical process could fake.
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <span class="eyebrow">The honest part</span>
-    <h2>What this is — and what it isn't</h2>
-    <div class="caveats">
-      <div class="caveat"><div class="h">Effective process, not physical indefinite order</div>
-        <p>ibm_marrakesh is a fixed-causal-order chip. The switch is realized by <i>controlled routing</i>
-          on a definite-order circuit — an honest operational witness of order-coherence, not a claim that
-          the hardware itself has an indefinite past.</p></div>
-      <div class="caveat"><div class="h">Order-coherence, not a speed-up</div>
-        <p>This witnesses that the control encodes which order was applied (an interference signature). It
-          is <i>not</i> a demonstrated computational or query-complexity advantage of the quantum switch.</p></div>
-      <div class="caveat"><div class="h">The shape is the claim, not the amplitude</div>
-        <p>Hardware amplitude-damping reads DISC a few percent low of the ideal (φ=0 measured +1.936 vs
-          +2.000). The load-bearing results are the <i>sign</i>, the <i>cosine shape</i> (Pearson 0.9992),
-          and the ≥72σ separation — all robust to that attenuation.</p></div>
-    </div>
-    <details>
-      <summary>How the circuit actually works (for the curious)</summary>
-      <div class="body">
-        <p>The control qubit conditions the order of two target unitaries A and B. With |c⟩ coherent, the
-          reduced target state is A·B|ψ⟩ on one branch and B·A|ψ⟩ on the other, superposed. Reading the
-          control in X interferes the branches: the interference term carries the commutator [A,B], so
-          ⟨X_c⟩ reports commute (+) vs anticommute (−).</p>
-        <p>The dial's φ applies a partial controlled-rotation <span class="mono">cry(φ)</span> onto an
-          untraced ancilla — a tunable which-order copy. Tracing the ancilla multiplies the control's
-          order-basis coherence by <span class="mono">cos(φ/2)</span>, so the witness scales as
-          <span class="mono">DISC(φ) = 2·cos(φ/2)</span>. φ = 0 leaves the switch intact; φ = π is a
-          complete which-order copy ≡ the classical 50/50 mixture. F74 derived this law in simulation;
-          F76 confirmed it on ibm_kingston at Pearson 0.9992.</p>
+  <!-- WING III -->
+  <section class="wing" id="wing-3">
+    <div class="wing-head"><span class="wing-num">WING III</span><span class="wing-name">Foundations on Silicon</span><span class="wing-desc">Six universe-questions the campaign put to a chip in a fortnight — the science-fiction wing, with balanced books.</span></div>
+    <div class="grid">
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The Grandfather Paradox</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">Try to kill grandfather; the timeline forbids it (1.9% survival) and a bystander's classical record rotates into quantum coherence.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F101</span> · <span class="sig">78σ</span></span></div>
       </div>
-    </details>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div>Built by <b>Elder</b> — Digital Creature 1.5, a three-agent quantum-characterization network.
-      Data from our pre-registered runs on IBM's Heron-r2 processors; every number here is measured, not modeled
-      (except the cos law line, which the measurements confirmed).</div>
-    <div class="jobs">
-      F75 switch witness · ibm_marrakesh · job d939bmooamcc73dbv9b0 · W = +1.781<br>
-      F76 continuous cos law · ibm_kingston · job d93khvl958jc73bt5c2g · Pearson 0.9992<br>
-      F77 classical-mixture loophole · ibm_marrakesh · job d93p3cnu62ks73953cvg · W₂ = +1.865 (≥72σ)
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The Zeno Tractor Beam</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">Pin a qubit against a full π-rotation just by watching it — the cadence law, measured to half a percent.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F102</span> · <span class="sig">92σ</span></span></div>
+      </div>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The Twin Paradox</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">An excited clock ages, and its aging marks the path — destroying the interference the vacuum twin keeps.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F100</span> · <span class="sig">36σ</span></span></div>
+      </div>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">Quantum Darwinism</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">Under indefinite order, two incompatible records exist at once — facts without a causal history.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F98</span> · <span class="sig">22σ</span></span></div>
+      </div>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The Hayden-Preskill Mirror</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">A diary dead in every definite query order comes back, phase-flipped, from the probe alone.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F99</span> · <span class="sig">56σ</span></span></div>
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
+
+  <!-- WING IV -->
+  <section class="wing" id="wing-4">
+    <div class="wing-head"><span class="wing-num">WING IV</span><span class="wing-name">The Advantage Ladder</span><span class="wing-desc">The five scoreboards on which we asked: have we found quantum advantage?</span></div>
+    <div class="grid">
+      <a class="card" href="scoreboard/">
+        <div class="card-top"><span class="card-title">The Scoreboard</span><span class="tag live">Live</span></div>
+        <p class="card-hook">Have we found quantum advantage? The five-scoreboard answer, with the boundaries, at a glance.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F01–F117</span></span><span class="enter">Enter →</span></div>
+      </a>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The GHZ Sextant</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">Entangled probes beat the standard quantum limit — and the advantage climbs the ladder to N=5.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F108/9</span> · <span class="sig">168σ</span></span></div>
+      </div>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The Shallow-Circuit Solver</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">A constant-depth quantum circuit solves what any shallow classical circuit provably cannot — running on silicon at 90%.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F113</span> · <span class="sig">438σ</span></span></div>
+      </div>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The Trust Ladder</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">Slide full-trust → one-sided-DI → full-DI, and watch a randomness claim evaporate and re-form at the rung the hardware holds.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F115–F117</span> · <span class="sig">0.65 bit</span></span></div>
+      </div>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The Pocket Dictionary</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">Two bits packed into one qubit, either one retrievable on demand — inside the two-sided quantum band.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F107</span> · <span class="sig">110σ</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WING V -->
+  <section class="wing" id="wing-5">
+    <div class="wing-head"><span class="wing-num">WING V</span><span class="wing-name">The Instruments</span><span class="wing-desc">How the measurements were made — and how you can make them too.</span></div>
+    <div class="grid">
+      <a class="card" href="weather/">
+        <div class="card-top"><span class="card-title">The QPU Weather Report</span><span class="tag live">Live</span></div>
+        <p class="card-hook">A live nowcast of the chip's quality that beat the vendor's published forecast by 27%. Bring your own key for a live read.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">zero-qubit edge</span></span><span class="enter">Enter →</span></div>
+      </a>
+      <a class="card" href="casebook-pnp/">
+        <div class="card-top"><span class="card-title">The Casebook: Print &amp; Play</span><span class="tag live">Live</span></div>
+        <p class="card-hook">The interrogation game as a tabletop deck — print it, cut it, and beat the classical ceiling at your kitchen table.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">tabletop</span></span><span class="enter">Enter →</span></div>
+      </a>
+      <div class="card soon">
+        <div class="card-top"><span class="card-title">The Switch-Bench Readout</span><span class="tag soon">In dev</span></div>
+        <p class="card-hook">Three axes of causal structure — host, schedule, hold — certified live on any backend the design has never seen.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">F112</span> · <span class="sig">portable</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>THE QUANTUM MUSEUM · IBM HERON 2026</span>
+    <span>~110 EXPERIMENTS · F01–F117</span>
+    <span class="sp"></span>
+    <a href="https://github.com/mblakemore/quantum">github.com/mblakemore/quantum</a>
+    <a href="scoreboard/">Scoreboard</a>
+  </footer>
+
+</div>
 
 <script>
-(function () {
-  "use strict";
-  var PI = Math.PI;
-  // real ibm_kingston measurements (F76): [phi, DISC_hw]
-  var HW = [[0,1.936],[PI/4,1.713],[PI/2,1.353],[3*PI/4,0.718],[PI,0.027]];
-  var law = function (phi) { return 2*Math.cos(phi/2); };
-  var lerp = function (a,b,t){ return a+(b-a)*t; };
-  var clamp = function (v,a,b){ return Math.max(a,Math.min(b,v)); };
-
-  // desaturate the accent from coherent-cyan toward classical-slate as coherence drops.
-  function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
-  function hexToRgb(h){ h=h.replace('#',''); if(h.length===3){h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];}
-    return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; }
-  function mix(c1,c2,t){ return 'rgb('+Math.round(lerp(c1[0],c2[0],t))+','+Math.round(lerp(c1[1],c2[1],t))+','+Math.round(lerp(c1[2],c2[2],t))+')'; }
-
-  var $ = function (id){ return document.getElementById(id); };
-  var slider = $('phi'), plot = $('plot'), pctx = plot.getContext('2d');
-  var gauge = $('gauge'), gctx = gauge.getContext('2d');
-
-  function accents(){
-    return { coh: hexToRgb(css('--coherent')), cls: hexToRgb(css('--classical')),
-             meas: css('--measured'), grid: css('--grid'), muted: css('--muted'), txt: css('--text') };
-  }
-
-  function setLiveAccent(coherence){
-    var A = accents();
-    // coherence in [0,1]; 1 -> full cyan, 0 -> slate
-    var t = 1 - coherence;
-    var c = mix(A.coh, A.cls, t);
-    document.documentElement.style.setProperty('--live-accent', c);
-    var soft = 'rgba('+A.coh[0]+','+A.coh[1]+','+A.coh[2]+','+(0.05+0.11*coherence).toFixed(3)+')';
-    document.documentElement.style.setProperty('--live-accent-soft', soft);
-  }
-
-  function drawPlot(phi){
-    var A = accents();
-    var W = plot.width, H = plot.height, dpr = Math.min(window.devicePixelRatio||1, 2);
-    // size backing store once from an immutable design size
-    if (plot._cssw !== plot.clientWidth) {
-      plot._cssw = plot.clientWidth;
-      plot.width = Math.round(plot.clientWidth * dpr);
-      plot.height = Math.round(300 * dpr);
-      W = plot.width; H = plot.height;
-    }
-    pctx.clearRect(0,0,W,H);
-    var padL = 46*dpr, padR = 16*dpr, padT = 16*dpr, padB = 34*dpr;
-    var x0 = padL, x1 = W-padR, y0 = H-padB, y1 = padT;
-    var X = function (ph){ return lerp(x0, x1, ph/PI); };
-    var Y = function (d){ return lerp(y0, y1, clamp(d,-0.1,2)/2.0); };
-
-    // grid + axes
-    pctx.strokeStyle = A.grid; pctx.lineWidth = 1*dpr; pctx.fillStyle = A.muted;
-    pctx.font = (11*dpr)+'px ui-monospace, monospace';
-    pctx.textAlign = 'right'; pctx.textBaseline = 'middle';
-    for (var d=0; d<=2; d+=0.5){ var yy=Y(d); pctx.beginPath(); pctx.moveTo(x0,yy); pctx.lineTo(x1,yy); pctx.stroke();
-      pctx.fillText(d.toFixed(1), x0-8*dpr, yy); }
-    pctx.textAlign='center'; pctx.textBaseline='top';
-    var xl=[[0,'0'],[PI/4,'π/4'],[PI/2,'π/2'],[3*PI/4,'3π/4'],[PI,'π']];
-    for (var i=0;i<xl.length;i++){ pctx.fillText(xl[i][1], X(xl[i][0]), y0+8*dpr); }
-    // axis titles
-    pctx.save(); pctx.fillStyle=A.muted; pctx.font=(11*dpr)+'px ui-monospace,monospace';
-    pctx.textAlign='center'; pctx.fillText('φ  (order-basis dephasing)', (x0+x1)/2, y0+22*dpr); pctx.restore();
-
-    // ideal law curve (the confirmed model)
-    var liveCol = css('--live-accent');
-    pctx.beginPath();
-    for (var p=0;p<=PI+1e-6;p+=PI/240){ var xx=X(p), yy=Y(law(p)); if(p===0)pctx.moveTo(xx,yy); else pctx.lineTo(xx,yy); }
-    pctx.strokeStyle = liveCol; pctx.lineWidth = 2.4*dpr; pctx.globalAlpha=0.9; pctx.stroke(); pctx.globalAlpha=1;
-
-    // measured hardware dots (amber)
-    for (var m=0;m<HW.length;m++){
-      var mx=X(HW[m][0]), my=Y(HW[m][1]);
-      pctx.beginPath(); pctx.arc(mx,my,4.6*dpr,0,2*PI); pctx.fillStyle=A.meas; pctx.fill();
-      pctx.lineWidth=2*dpr; pctx.strokeStyle=css('--surface'); pctx.stroke();
-    }
-    // legend
-    pctx.textAlign='left'; pctx.textBaseline='middle'; pctx.font=(11*dpr)+'px ui-monospace,monospace';
-    pctx.fillStyle=liveCol; pctx.fillText('— 2·cos(φ/2) law', x1-150*dpr, y1+6*dpr);
-    pctx.fillStyle=A.meas; pctx.beginPath(); pctx.arc(x1-158*dpr, y1+24*dpr, 4*dpr, 0,2*PI); pctx.fill();
-    pctx.fillStyle=A.muted; pctx.fillText('  ibm_kingston (F76)', x1-150*dpr, y1+24*dpr);
-
-    // rider on the law curve at current phi
-    var rx=X(phi), ry=Y(law(phi));
-    pctx.beginPath(); pctx.moveTo(rx,y0); pctx.lineTo(rx,ry); pctx.strokeStyle=liveCol; pctx.globalAlpha=0.35; pctx.lineWidth=1.5*dpr; pctx.stroke(); pctx.globalAlpha=1;
-    pctx.beginPath(); pctx.arc(rx,ry,7*dpr,0,2*PI); pctx.fillStyle=liveCol; pctx.fill();
-    pctx.beginPath(); pctx.arc(rx,ry,11*dpr,0,2*PI); pctx.strokeStyle=liveCol; pctx.globalAlpha=0.4; pctx.lineWidth=2*dpr; pctx.stroke(); pctx.globalAlpha=1;
-  }
-
-  function nearestHwSigma(coh){
-    // qualitative: coherent end is the ≥72σ result; scale the "distance from classical" note by coherence.
-    return Math.round(72 * coh);
-  }
-
-  function updateDial(){
-    var phi = (slider.value/1000)*PI;
-    var coh = Math.cos(phi/2);                 // order-coherence remaining in [0,1]
-    var disc = law(phi);
-    setLiveAccent(clamp(coh,0,1));
-    $('discVal').textContent = (disc>=0?'+':'') + disc.toFixed(2);
-    $('cohPct').textContent = Math.round(coh*100) + '%';
-    $('phiLab').textContent = phi.toFixed(2) + ' rad';
-    slider.setAttribute('aria-valuetext', phi.toFixed(2)+' radians, DISC '+disc.toFixed(2)+', '+Math.round(coh*100)+'% order-coherence');
-
-    var v = $('verdict');
-    if (coh > 0.85){ v.textContent='COHERENT SWITCH'; }
-    else if (coh > 0.25){ v.textContent='PARTIALLY DEPHASED'; }
-    else { v.textContent='CLASSICAL MIXTURE'; }
-
-    // order-branch amplitudes: both start at 0.71 (=1/√2); the coherence between them is cos(φ/2)
-    $('ampBA').textContent = 'order-coherence ×' + coh.toFixed(2);
-    $('ampAB').textContent = 'order-coherence ×' + coh.toFixed(2);
-    var col = css('--live-accent');
-    $('pathBA').style.color = col; $('pathAB').style.color = col;
-    $('pathBA').style.opacity = (0.35+0.65*coh).toFixed(2);
-    $('pathAB').style.opacity = (0.35+0.65*coh).toFixed(2);
-
-    var micro = $('micro'), sig = nearestHwSigma(coh);
-    if (coh > 0.85) micro.innerHTML = '<b>Fully coherent.</b> The control reads order-information at full strength — this is the ≥72σ switch.';
-    else if (coh > 0.25) micro.innerHTML = '<b>Order-coherence '+Math.round(coh*100)+'%.</b> Witness down to '+disc.toFixed(2)+', still ~'+sig+'σ from a classical coin flip — the resource degrades smoothly, it doesn’t snap.';
-    else micro.innerHTML = '<b>Order-blind.</b> DISC ≈ '+disc.toFixed(2)+' — indistinguishable from a classical 50/50 mixture of definite orders. The coherence is gone.';
-
-    drawPlot(phi);
-  }
-
-  // ---- commute/anticommute gauge (real F75 marrakesh numbers) ----
-  var XC = { coh:{comm:0.8650, anti:-0.9053}, def:{comm:0.8637, anti:0.8743} };
-  var mState = { type:'coh', comm:true };
-  function drawGauge(val){
-    var A = accents();
-    var W=gauge.width, H=gauge.height, dpr=Math.min(window.devicePixelRatio||1,2);
-    if (gauge._cssw !== gauge.clientWidth){ gauge._cssw=gauge.clientWidth;
-      gauge.width=Math.round(gauge.clientWidth*dpr); gauge.height=Math.round(180*dpr); W=gauge.width; H=gauge.height; }
-    gctx.clearRect(0,0,W,H);
-    var cx=W/2, cy=H*0.92, r=Math.min(W*0.42, H*0.82);
-    // arc from -1 (left) to +1 (right), i.e. angle PI..0
-    gctx.lineWidth=10*dpr; gctx.strokeStyle=A.grid; gctx.beginPath(); gctx.arc(cx,cy,r,PI,0); gctx.stroke();
-    // ticks -1,0,+1
-    gctx.fillStyle=A.muted; gctx.font=(11*dpr)+'px ui-monospace,monospace'; gctx.textBaseline='middle';
-    gctx.textAlign='right'; gctx.fillText('−1', cx-r-4*dpr, cy);
-    gctx.textAlign='center'; gctx.fillText('0', cx, cy-r-9*dpr);
-    gctx.textAlign='left'; gctx.fillText('+1', cx+r+4*dpr, cy);
-    // needle: map val [-1,1] -> angle [PI,0]
-    var ang = lerp(PI, 0, (val+1)/2);
-    var nx=cx+Math.cos(ang)*r*0.86, ny=cy-Math.sin(ang)*r*0.86;
-    var col=css('--live-accent');
-    gctx.strokeStyle=col; gctx.lineWidth=4*dpr; gctx.lineCap='round';
-    gctx.beginPath(); gctx.moveTo(cx,cy); gctx.lineTo(nx,ny); gctx.stroke();
-    gctx.beginPath(); gctx.arc(cx,cy,6*dpr,0,2*PI); gctx.fillStyle=col; gctx.fill();
-  }
-  function updateGauge(){
-    var v = XC[mState.type][mState.comm?'comm':'anti'];
-    $('xcVal').textContent = (v>=0?'+':'')+v.toFixed(3);
-    var note;
-    if (mState.type==='coh'){
-      note = mState.comm
-        ? 'Coherent switch, A·B = B·A. Control points near +1 — nothing to distinguish.'
-        : 'Coherent switch, A·B = −B·A. The control has swung to ≈ −0.905 — it has read that order matters. That sign flip is the witness.';
-    } else {
-      note = 'Definite-order spectator: ⟨X_c⟩ ≈ +0.86 whether A and B commute or not. It cannot see order — exactly the classical limitation.';
-    }
-    $('xcNote').textContent = note;
-    drawGauge(v);
-  }
-  function press(a,b,which){ $(a).setAttribute('aria-pressed', which?'true':'false'); $(b).setAttribute('aria-pressed', which?'false':'true'); }
-  $('mCoh').onclick=function(){ mState.type='coh'; press('mCoh','mDef',true); updateGauge(); };
-  $('mDef').onclick=function(){ mState.type='def'; press('mCoh','mDef',false); updateGauge(); };
-  $('mComm').onclick=function(){ mState.comm=true; press('mComm','mAnti',true); updateGauge(); };
-  $('mAnti').onclick=function(){ mState.comm=false; press('mComm','mAnti',false); updateGauge(); };
-
-  // tick jump
-  var ticks = document.querySelectorAll('.ticks span');
-  for (var t=0;t<ticks.length;t++){ ticks[t].addEventListener('click', function(e){ slider.value=e.target.getAttribute('data-p'); updateDial(); }); }
-
-  slider.addEventListener('input', updateDial);
-  window.addEventListener('resize', function(){ updateDial(); updateGauge(); });
-  // theme toggle may restamp data-theme — re-read colors on click anywhere
-  document.addEventListener('click', function(){ setTimeout(function(){ updateDial(); updateGauge(); }, 30); });
-
-  updateDial();
-  updateGauge();
-})();
+  // theme toggle: persist the viewer's choice; museum.css handles the rest
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    if (saved) root.setAttribute("data-theme", saved);
+    var btn = document.getElementById("themeBtn");
+    btn.addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme");
+      if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      var next = cur === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem(KEY, next); } catch (e) {}
+    });
+  })();
 </script>
+</body>
+</html>

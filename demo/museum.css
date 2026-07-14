@@ -1,0 +1,87 @@
+/* museum.css — the Quantum Museum shared design system (Whisper C4685).
+   One token set, one card, one badge, imported by every exhibit so the wing of
+   standalone pages reads as one building. Observatory aesthetic: deep cool
+   ground, a cyan signature (continuity with the switch demo), amber secondary,
+   monospace for measured data. Theme-aware; the viewer's toggle wins. */
+
+:root {
+  --bg:#0a0c12; --surface:#121622; --surface-2:#1a2031;
+  --edge:#293146; --edge-2:#3a4560;
+  --ink:#e7eaf3; --ink-2:#a6afc6; --ink-3:#6d7896;
+  --cyan:#45d6cf; --cyan-deep:#1f8f89; --amber:#e6a94e; --violet:#9a8cf0;
+  --good:#3ecf6d; --warn:#e6a94e; --bad:#ec6a5e;
+  --card:#141a29; --card-hover:#182036;
+  --glow: 0 0 0 1px rgba(69,214,207,.0);
+  --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 40px rgba(0,0,0,.42);
+  --mono: ui-monospace,"SF Mono","JetBrains Mono","Cascadia Mono",Menlo,monospace;
+  --sans: -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,sans-serif;
+  --maxw: 1080px;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:#eef1f6; --surface:#ffffff; --surface-2:#f4f6fa;
+    --edge:#dce1ec; --edge-2:#c7cfdd;
+    --ink:#141926; --ink-2:#495468; --ink-3:#78839a;
+    --cyan:#0f9d95; --cyan-deep:#0c7a74; --amber:#b9791b; --violet:#6a5cc4;
+    --good:#12933f; --warn:#b9791b; --bad:#c8493d;
+    --card:#ffffff; --card-hover:#f6f8fc;
+    --shadow: 0 1px 2px rgba(20,25,38,.05), 0 12px 34px rgba(20,25,38,.09);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#0a0c12; --surface:#121622; --surface-2:#1a2031; --edge:#293146; --edge-2:#3a4560;
+  --ink:#e7eaf3; --ink-2:#a6afc6; --ink-3:#6d7896; --cyan:#45d6cf; --cyan-deep:#1f8f89;
+  --amber:#e6a94e; --violet:#9a8cf0; --good:#3ecf6d; --warn:#e6a94e; --bad:#ec6a5e;
+  --card:#141a29; --card-hover:#182036;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 14px 40px rgba(0,0,0,.42);
+}
+:root[data-theme="light"] {
+  --bg:#eef1f6; --surface:#ffffff; --surface-2:#f4f6fa; --edge:#dce1ec; --edge-2:#c7cfdd;
+  --ink:#141926; --ink-2:#495468; --ink-3:#78839a; --cyan:#0f9d95; --cyan-deep:#0c7a74;
+  --amber:#b9791b; --violet:#6a5cc4; --good:#12933f; --warn:#b9791b; --bad:#c8493d;
+  --card:#ffffff; --card-hover:#f6f8fc;
+  --shadow:0 1px 2px rgba(20,25,38,.05),0 12px 34px rgba(20,25,38,.09);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--sans); line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+a { color: var(--cyan); text-decoration: none; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 4px; }
+
+/* the measured-data badge — the museum's authenticity seal */
+.mdata {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .02em;
+  color: var(--ink-3); display: inline-flex; align-items: center; gap: 7px;
+}
+.mdata .sig { color: var(--cyan); font-weight: 600; }
+.mdata .fnd { color: var(--ink-2); }
+
+/* exhibit card */
+.card {
+  position: relative; display: flex; flex-direction: column; gap: 10px;
+  background: var(--card); border: 1px solid var(--edge); border-radius: 14px;
+  padding: 18px 18px 16px; text-decoration: none; color: inherit;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+a.card:hover { transform: translateY(-3px); background: var(--card-hover);
+  border-color: var(--edge-2); box-shadow: var(--shadow); }
+.card.soon { opacity: .62; }
+.card-top { display: flex; align-items: center; gap: 9px; }
+.card-title { font-size: 16px; font-weight: 640; letter-spacing: -.01em; color: var(--ink); }
+.card-hook { font-size: 13.5px; color: var(--ink-2); flex: 1 0 auto; }
+.card-foot { display: flex; align-items: center; gap: 10px; margin-top: 2px; }
+.enter { margin-left: auto; font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--cyan); }
+a.card:hover .enter { text-decoration: underline; }
+
+.tag {
+  font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .07em;
+  text-transform: uppercase; padding: 3px 7px; border-radius: 999px; white-space: nowrap;
+}
+.tag.live { color: var(--good); background: color-mix(in srgb, var(--good) 13%, transparent);
+  border: 1px solid color-mix(in srgb, var(--good) 32%, transparent); }
+.tag.soon { color: var(--ink-3); background: color-mix(in srgb, var(--ink-3) 12%, transparent);
+  border: 1px solid var(--edge-2); }
