@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Darwinism — two facts no causal order can share | The Quantum Museum</title>
+<meta name="description" content="A fact is objective when the environment holds many faithful copies of it. Complementarity boxes two incompatible facts into a hull; a superposed causal order breaks it on both branches — joint objectivity +0.109 above the ceiling (22σ) and −0.432 below the floor (52σ). Real hardware (F98, job d9aa5m8tcv6s73do7li0, ibm_marrakesh, 63 two-qubit gates).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--violet); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--violet); color: var(--violet); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 20%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.4vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--violet); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:65ch; margin:0 0 16px; }
+
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
+  .pcard b { color: var(--ink); } .pcard .zc { color:var(--cyan); font-weight:600; } .pcard .xc { color:var(--amber); font-weight:600; }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13.5px; font-weight:600;
+    text-decoration:none; color:#fff; background:var(--violet); border:1.5px solid var(--violet);
+    border-radius:11px; padding:10px 18px; transition:transform .12s, box-shadow .12s; box-shadow:var(--shadow); }
+  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--violet) 35%,transparent); }
+  .specbtn .arw { font-size:15px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--violet); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:68ch; }
+
+  .selector { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:22px; }
+  .selector .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .cbtn { font-family:var(--mono); font-size:12.5px; font-weight:600; padding:9px 13px; border-radius:10px;
+    border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; transition:all .12s; }
+  .cbtn:hover { border-color:var(--violet); }
+  .cbtn.on { background:var(--violet); color:#fff; border-color:var(--violet); }
+  .cbtn small { font-weight:400; opacity:.75; }
+
+  /* recorders */
+  .recorders { display:grid; grid-template-columns:1fr 1fr; gap:clamp(12px,3vw,22px); margin-bottom:6px; }
+  @media (max-width:560px){ .recorders { grid-template-columns:1fr; } }
+  .rec { border:1px solid var(--edge); border-radius:13px; padding:15px; background:var(--surface-2); }
+  .rec .rhead { display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:12px; }
+  .rec .rname { font-family:var(--mono); font-size:13.5px; font-weight:700; }
+  .rec.z .rname { color: var(--cyan); } .rec.x .rname { color: var(--amber); }
+  .rec .rsub { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); }
+  .abar { position:relative; height:26px; border:1px solid var(--edge-2); border-radius:7px; background:var(--surface); overflow:hidden; }
+  .afill { position:absolute; top:0; bottom:0; left:0; transition:width .4s cubic-bezier(.34,1.2,.5,1); }
+  @media (prefers-reduced-motion: reduce){ .afill { transition:none; } }
+  .rec.z .afill { background:linear-gradient(90deg,color-mix(in srgb,var(--cyan) 45%,transparent),var(--cyan)); }
+  .rec.x .afill { background:linear-gradient(90deg,color-mix(in srgb,var(--amber) 45%,transparent),var(--amber)); }
+  .coinflip { position:absolute; top:-3px; bottom:-3px; width:0; border-left:2px dashed var(--ink-3); opacity:.6; }
+  .arow { display:flex; align-items:baseline; justify-content:space-between; margin-top:10px; }
+  .anum { font-family:var(--mono); font-weight:720; font-size:clamp(22px,5vw,30px); letter-spacing:-.02em; line-height:1; }
+  .rec.z .anum { color: var(--cyan); } .rec.x .anum { color: var(--amber); }
+  .astate { font-family:var(--mono); font-size:11px; }
+  .astate.obj { color: var(--good); } .astate.part { color: var(--ink-2); } .astate.erased { color: var(--bad); }
+
+  /* w scale */
+  .wscale-wrap { margin-top:20px; }
+  .wscale-cap { display:flex; justify-content:space-between; font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-bottom:2px; }
+  .verdict { margin-top:16px; text-align:center; font-size:14px; color:var(--ink-2); min-height:2.6em; }
+  .verdict .w { font-family:var(--mono); font-weight:720; font-size:19px; color:var(--ink); }
+  .verdict .above { color: var(--good); font-weight:700; } .verdict .below { color: var(--bad); font-weight:700; }
+  .verdict .inb { color: var(--violet); font-weight:700; }
+
+  .band { fill: color-mix(in srgb, var(--violet) 15%, transparent); }
+  .band-edge { stroke: var(--violet); stroke-width:1; opacity:.5; }
+  .scale-axis { stroke: var(--edge-2); stroke-width:1.4; }
+  .tick { stroke: var(--edge-2); stroke-width:1; }
+  .ticklab { font-family:var(--mono); font-size:9px; fill: var(--ink-3); }
+  .bandlab { font-family:var(--mono); font-size:9.5px; fill: var(--violet); }
+  .wmark-line { stroke-width:2; } .wmark-dot { stroke-width:2; }
+  .ghost { fill:none; stroke:var(--ink-3); stroke-width:1.4; stroke-dasharray:2 2; opacity:.7; }
+  .ghostlab { font-family:var(--mono); font-size:8.5px; fill:var(--ink-3); }
+  .ptlab { font-family:var(--mono); font-size:9.5px; }
+  .siglab { font-family:var(--mono); font-size:10px; font-weight:600; }
+
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; }
+  .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; }
+  .speclink-row { margin-top:20px; text-align:center; }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--violet); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--violet); }
+  .badge-row .sp { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing III · Foundations on Silicon</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Quantum Darwinism × indefinite causal order</p>
+    <h1>Two facts that <span class="hl">no causal order</span> can hold at once.</h1>
+    <p class="lede">A thing becomes a <b>fact</b> when the world keeps many copies of it — that's why we all agree the
+    moon is there. But two incompatible quantum properties can't both be copied faithfully, so under any definite order
+    of events, recording one <b>erases</b> the other. Put the order of two recorders in <b>superposition</b> and the
+    rule breaks two ways: one branch holds <b>both</b> facts at once; the other holds <b>neither</b>. Every number is
+    measured hardware.</p>
+
+    <div class="primer">
+      <div class="pcard">
+        <h4>Why is anything a "fact"?</h4>
+        <p>Quantum Darwinism: a property is <b>objective</b> when the environment makes <b>many redundant copies</b> of
+        it, so independent observers all read the same answer. A recorder's <b>faithfulness A</b> measures its copy —
+        <b>A=1</b> a perfect record, <b>A=0.5</b> a coin-flip carrying nothing.</p>
+      </div>
+      <div class="pcard">
+        <h4>What's the catch?</h4>
+        <p>Complementarity forbids faithful copies of a <span class="zc">Z-fact</span> and an incompatible
+        <span class="xc">X-fact</span> at the same time. So the joint objectivity <b>w = A<sub>Z</sub> + A<sub>X</sub></b>
+        is boxed into a narrow <b>hull</b> — the most any ordering of events can reach.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
+      <span class="scope"><b>Resource-scoped:</b> these two recorders, this window — not a universal bound. 63 two-qubit gates.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — Break the hull</p>
+    <h2>Choose how the two recorders are ordered</h2>
+    <p class="sub">Each recorder copies one property into the environment. Under a <b>definite</b> order it's
+    winner-take-all — the last recorder owns its fact, the other is scrambled to a coin-flip. Superpose the order and
+    watch the joint objectivity <b>w</b> leave the box that any causal history is confined to.</p>
+
+    <div class="selector" role="group" aria-label="Recorder order">
+      <span class="lbl">recorder order:</span>
+      <button class="cbtn" data-i="0" type="button">Z&nbsp;then&nbsp;X</button>
+      <button class="cbtn" data-i="1" type="button">X&nbsp;then&nbsp;Z</button>
+      <button class="cbtn" data-i="2" type="button">Superposed → <small>+ branch (72%)</small></button>
+      <button class="cbtn" data-i="3" type="button">Superposed → <small>− branch (28%)</small></button>
+    </div>
+
+    <div class="recorders">
+      <div class="rec z">
+        <div class="rhead"><span class="rname">Z-recorder</span><span class="rsub">copies the Z-fact</span></div>
+        <div class="abar"><div class="afill" id="fillZ"></div><div class="coinflip" id="cfZ"></div></div>
+        <div class="arow"><span class="anum" id="anumZ">0.506</span><span class="astate" id="astateZ">faithfulness A<sub>Z</sub></span></div>
+      </div>
+      <div class="rec x">
+        <div class="rhead"><span class="rname">X-recorder</span><span class="rsub">copies the X-fact</span></div>
+        <div class="abar"><div class="afill" id="fillX"></div><div class="coinflip" id="cfX"></div></div>
+        <div class="arow"><span class="anum" id="anumX">0.955</span><span class="astate" id="astateX">faithfulness A<sub>X</sub></span></div>
+      </div>
+    </div>
+
+    <div class="wscale-wrap">
+      <div class="wscale-cap"><span>joint objectivity w = A<sub>Z</sub> + A<sub>X</sub></span><span>these two recorders, this window</span></div>
+      <svg viewBox="0 0 460 96" role="img" aria-label="Joint objectivity scale with the causal-order hull band and a live marker">
+        <rect class="band" id="bandA" y="30" height="26"/>
+        <line class="band-edge" id="bandAe1" y1="24" y2="62"/>
+        <line class="band-edge" id="bandAe2" y1="24" y2="62"/>
+        <line class="scale-axis" x1="30" y1="56" x2="440" y2="56"/>
+        <g id="ticksA"></g>
+        <text class="bandlab" id="bandAlab" y="20" text-anchor="end">↓ the causal-order hull</text>
+        <line class="wmark-line" id="wlineA" y1="18" y2="68"/>
+        <circle class="wmark-dot" id="wdotA" r="6" cy="43"/>
+      </svg>
+    </div>
+    <p class="verdict" id="verdict"></p>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The objectivity hull</p>
+    <h2>Both branches leave the box — at 22σ and 52σ</h2>
+    <p class="sub">The definite orders sit at the edges of the hull (winner-take-all). The superposed <b>+</b> branch
+    pushes joint objectivity <b>above the ceiling</b> — two incompatible facts objective at once, which no ordering can
+    do. The <b>−</b> branch drops <b>below the floor</b> — both records erased. Faint marks are the noiseless theory.</p>
+    <div style="max-width:560px;margin:0 auto;">
+      <svg viewBox="0 0 480 210" role="img" aria-label="All four arms on the joint-objectivity scale, with the hull band, the two branch violations, and theory ghosts">
+        <rect class="band" id="bandB" y="70" height="30"/>
+        <line class="band-edge" id="bandBe1" y1="60" y2="150"/>
+        <line class="band-edge" id="bandBe2" y1="60" y2="150"/>
+        <line class="scale-axis" x1="34" y1="150" x2="456" y2="150"/>
+        <g id="ticksB"></g>
+        <g id="ghostsB"></g>
+        <g id="pointsB"></g>
+        <text class="bandlab" x="150" y="52" fill="var(--violet)">the causal-order hull [1.461, 1.487]</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — Why trust a 63-gate result</p>
+    <h2>Three receipts behind the crown jewel</h2>
+    <p class="sub">This is the deepest certified circuit of the whole campaign. Here's why the violation is the
+    physics and not the noise.</p>
+    <div class="receipts">
+      <div class="rc">
+        <h4>1 · The apparatus is calibrated</h4>
+        <p>Under definite orders the chip reproduces <b>winner-take-all exactly</b> — the last recorder wins at
+        <b>0.955</b> and <b>0.986</b>, the earlier one falls to a coin-flip. <span class="yes">Textbook behaviour</span>,
+        so the switch result isn't a miscalibration.</p>
+      </div>
+      <div class="rc">
+        <h4>2 · The hull is measured</h4>
+        <p>The box isn't assumed from theory — it's the <b>same-window measured range</b> [1.461, 1.487] of these exact
+        recorders. The branches are compared to <b>what this hardware can actually reach</b>, not an idealization.</p>
+      </div>
+      <div class="rc">
+        <h4>3 · The cheat is excluded</h4>
+        <p>A recorder reading in a tilted intermediate basis could fake shared objectivity. That loophole is
+        <b>disclosed and removed by construction</b> (F82 lineage) — the recorders read the pure Z and X bases,
+        nothing in between.</p>
+      </div>
+    </div>
+    <div class="speclink-row">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet — data table, gates &amp; the hull derivation</a>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F98</span> · job <span class="sig">d9aa5m8tcv6s73do7li0</span></span>
+    <span>ibm_marrakesh · 63 two-qubit gates · +22σ / −52σ</span>
+    <span class="sp"></span>
+    <a href="./spec.html">Full Spec</a>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+    var css = getComputedStyle(document.documentElement);
+    function C(v){ return css.getPropertyValue(v).trim(); }
+
+    // ---- data kernel (F98 exp120, job d9aa5m8tcv6s73do7li0) ----
+    var HULL = { min:1.4614, max:1.4871 };
+    var THEORY = { plus:1.6667, minus:1.0 };
+    var MODES = [
+      { key:"ordZX", label:"Z-then-X",  az:0.506, ax:0.955, w:1.4614, se:0, rel:"in", state:"definite",
+        note:"<b>Definite order, Z then X.</b> The last recorder wins: X is copied faithfully (0.955), Z is scrambled to a coin-flip (0.506). w sits at the <span class='inb'>hull floor</span> — winner-take-all, exactly as any causal history demands." },
+      { key:"ordXZ", label:"X-then-Z",  az:0.986, ax:0.501, w:1.4871, se:0, rel:"in", state:"definite",
+        note:"<b>Definite order, X then Z.</b> Now Z wins (0.986) and X is erased (0.501). w sits at the <span class='inb'>hull ceiling</span>. Swapping the order just swaps who owns the fact — the box never opens." },
+      { key:"plus",  label:"Superposed → + branch", az:0.817, ax:0.778, w:1.5957, se:0.0039, rel:"above", state:"above",
+        note:"<b>Superposed order, + branch (72%).</b> <span class='w'>w = 1.596</span> — <span class='above'>0.109 above the ceiling, 22σ</span>. Both incompatible facts are ~0.80 objective <b>at once</b>: two facts sharing the environment's redundancy, which <b>no ordering of events can produce</b>." },
+      { key:"minus", label:"Superposed → − branch", az:0.553, ax:0.477, w:1.0296, se:0.0076, rel:"below", state:"below",
+        note:"<b>Superposed order, − branch (28%, heralded).</b> <span class='w'>w = 1.030</span> — <span class='below'>0.432 below the floor, 52σ</span>. Both records collapse to coin-flips: the environment holds <b>no faithful copy of either fact</b>. Erasure, flagged before anyone reads." }
+    ];
+    console.assert(Math.abs(MODES[2].w-1.5957)<0.002 && MODES[2].w>HULL.max, "+ branch above ceiling");
+    console.assert(Math.abs(MODES[3].w-1.0296)<0.002 && MODES[3].w<HULL.min, "- branch below floor");
+
+    // ---- w-scale geometry (shared domain) ----
+    var WMIN=0.98, WMAX=1.70, AX0=30, AX1=440;
+    function wx(w, x0, x1){ return x0 + (w-WMIN)/(WMAX-WMIN)*(x1-x0); }
+
+    // Panel A scale setup
+    var bandA=document.getElementById("bandA"), bandAlab=document.getElementById("bandAlab");
+    bandA.setAttribute("x", wx(HULL.min,AX0,AX1)); bandA.setAttribute("width", wx(HULL.max,AX0,AX1)-wx(HULL.min,AX0,AX1));
+    document.getElementById("bandAe1").setAttribute("x1",wx(HULL.min,AX0,AX1)); document.getElementById("bandAe1").setAttribute("x2",wx(HULL.min,AX0,AX1));
+    document.getElementById("bandAe2").setAttribute("x1",wx(HULL.max,AX0,AX1)); document.getElementById("bandAe2").setAttribute("x2",wx(HULL.max,AX0,AX1));
+    bandAlab.setAttribute("x", wx(HULL.max,AX0,AX1)+2);
+    (function(){ var g=document.getElementById("ticksA"), svgns="http://www.w3.org/2000/svg";
+      [1.0,1.25,1.5].forEach(function(t){ var x=wx(t,AX0,AX1);
+        var l=document.createElementNS(svgns,"line"); l.setAttribute("class","tick"); l.setAttribute("x1",x); l.setAttribute("x2",x); l.setAttribute("y1",56); l.setAttribute("y2",61); g.appendChild(l);
+        var tx=document.createElementNS(svgns,"text"); tx.setAttribute("class","ticklab"); tx.setAttribute("x",x-6); tx.setAttribute("y",74); tx.textContent=t.toFixed(2); g.appendChild(tx);
+      });
+    })();
+
+    var fillZ=document.getElementById("fillZ"), fillX=document.getElementById("fillX"),
+        cfZ=document.getElementById("cfZ"), cfX=document.getElementById("cfX"),
+        anumZ=document.getElementById("anumZ"), anumX=document.getElementById("anumX"),
+        astZ=document.getElementById("astateZ"), astX=document.getElementById("astateX"),
+        wline=document.getElementById("wlineA"), wdot=document.getElementById("wdotA"),
+        verdict=document.getElementById("verdict"), btns=document.querySelectorAll(".cbtn");
+
+    // gauge maps A in [0.45,1.0] to width; coin-flip mark at 0.5
+    function aWidth(A){ return Math.max(0, Math.min(1,(A-0.45)/(1.0-0.45)))*100; }
+    function aState(A){ return A>=0.72 ? ["objective record","obj"] : A>=0.6 ? ["partial record","part"] : ["erased · coin-flip","erased"]; }
+
+    function render(i){
+      var m=MODES[i];
+      fillZ.style.width=aWidth(m.az)+"%"; fillX.style.width=aWidth(m.ax)+"%";
+      cfZ.style.left=aWidth(0.5)+"%"; cfX.style.left=aWidth(0.5)+"%";
+      anumZ.textContent=m.az.toFixed(3); anumX.textContent=m.ax.toFixed(3);
+      var sz=aState(m.az), sx=aState(m.ax);
+      astZ.textContent=sz[0]; astZ.className="astate "+sz[1];
+      astX.textContent=sx[0]; astX.className="astate "+sx[1];
+      // marker
+      var col = m.state==="above" ? C("--good") : m.state==="below" ? C("--bad") : C("--violet");
+      var x = wx(m.w,AX0,AX1);
+      wline.setAttribute("x1",x); wline.setAttribute("x2",x); wline.setAttribute("stroke",col);
+      wdot.setAttribute("cx",x); wdot.setAttribute("stroke",col); wdot.setAttribute("fill",C("--card"));
+      verdict.innerHTML=m.note;
+      btns.forEach(function(b,j){ var on=j===i; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
+    }
+    btns.forEach(function(b){ b.addEventListener("click", function(){ render(+b.dataset.i); }); });
+
+    // ---- Panel B: static full chart ----
+    (function(){
+      var svgns="http://www.w3.org/2000/svg", BX0=34, BX1=456;
+      function bx(w){ return wx(w,BX0,BX1); }
+      var bandB=document.getElementById("bandB");
+      bandB.setAttribute("x",bx(HULL.min)); bandB.setAttribute("width",bx(HULL.max)-bx(HULL.min));
+      document.getElementById("bandBe1").setAttribute("x1",bx(HULL.min)); document.getElementById("bandBe1").setAttribute("x2",bx(HULL.min));
+      document.getElementById("bandBe2").setAttribute("x1",bx(HULL.max)); document.getElementById("bandBe2").setAttribute("x2",bx(HULL.max));
+      var tg=document.getElementById("ticksB");
+      [1.0,1.25,1.5].forEach(function(t){ var x=bx(t);
+        var l=document.createElementNS(svgns,"line"); l.setAttribute("class","tick"); l.setAttribute("x1",x); l.setAttribute("x2",x); l.setAttribute("y1",150); l.setAttribute("y2",156); tg.appendChild(l);
+        var tx=document.createElementNS(svgns,"text"); tx.setAttribute("class","ticklab"); tx.setAttribute("x",x-6); tx.setAttribute("y",168); tx.textContent=t.toFixed(2); tg.appendChild(tx);
+      });
+      // theory ghosts
+      var gg=document.getElementById("ghostsB");
+      [[THEORY.plus,"theory +"],[THEORY.minus,"theory −"]].forEach(function(t){ var x=bx(t[0]);
+        var l=document.createElementNS(svgns,"line"); l.setAttribute("class","ghost"); l.setAttribute("x1",x); l.setAttribute("x2",x); l.setAttribute("y1",78); l.setAttribute("y2",142); gg.appendChild(l);
+        var tx=document.createElementNS(svgns,"text"); tx.setAttribute("class","ghostlab"); tx.setAttribute("x",x-14); tx.setAttribute("y",76); tx.textContent=t[1]; gg.appendChild(tx);
+      });
+      // points
+      var pg=document.getElementById("pointsB");
+      var PTS=[
+        { w:1.4614, y:100, col:"--violet", lab:"Z→X", sub:"" },
+        { w:1.4871, y:118, col:"--violet", lab:"X→Z", sub:"" },
+        { w:1.5957, y:100, col:"--good",   lab:"+ branch", sub:"+22σ" },
+        { w:1.0296, y:118, col:"--bad",    lab:"− branch", sub:"−52σ" }
+      ];
+      PTS.forEach(function(p){ var x=bx(p.w);
+        var c=document.createElementNS(svgns,"circle"); c.setAttribute("cx",x); c.setAttribute("cy",p.y); c.setAttribute("r",6);
+        c.setAttribute("fill",C("--card")); c.setAttribute("stroke",C(p.col)); c.setAttribute("stroke-width",2.4); pg.appendChild(c);
+        var t=document.createElementNS(svgns,"text"); t.setAttribute("class","ptlab"); t.setAttribute("x",x); t.setAttribute("y",p.y-11);
+        t.setAttribute("text-anchor","middle"); t.setAttribute("fill",C(p.col)); t.textContent=p.lab; pg.appendChild(t);
+        if(p.sub){ var s=document.createElementNS(svgns,"text"); s.setAttribute("class","siglab"); s.setAttribute("x",x); s.setAttribute("y",p.y+18);
+          s.setAttribute("text-anchor","middle"); s.setAttribute("fill",C(p.col)); s.textContent=p.sub; pg.appendChild(s); }
+      });
+    })();
+
+    render(0);
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full Spec Sheet — Quantum Darwinism × ICO (F98 / Exp120) | The Quantum Museum</title>
+<meta name="description" content="Complete specification for the Quantum Darwinism exhibit: objectivity as redundant environmental copies, the complementarity hull on two incompatible recorders, and how a superposed causal order breaks the hull on both branches — +0.109 above the cap (22σ) and −0.432 below the floor (52σ). Job d9aa5m8tcv6s73do7li0, ibm_marrakesh, 63 two-qubit gates.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .doc { max-width: 820px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 90px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--violet); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--violet); color: var(--violet); }
+
+  .spec-head { padding: clamp(16px,3vw,30px) 0 6px; border-bottom:1px solid var(--edge); margin-bottom:8px; }
+  .kicker { font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
+  .spec-head h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.08;
+    font-size:clamp(26px,4.6vw,40px); margin:10px 0 12px; text-wrap:balance; }
+  .spec-head h1 .hl { color: var(--violet); }
+  .idline { display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--mono); font-size:12px; color:var(--ink-3); margin-bottom:10px; }
+  .idline b { color: var(--ink-2); font-weight:600; }
+  .verdict-chip { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:12px;
+    color:var(--good); border:1px solid color-mix(in srgb,var(--good) 45%,var(--edge)); border-radius:999px; padding:5px 13px; font-weight:600; }
+
+  .doc h2 { font-family:var(--mono); font-size:clamp(16px,2.4vw,20px); letter-spacing:-.01em; margin:38px 0 8px;
+    padding-top:14px; border-top:1px solid var(--edge); }
+  .doc h2 .n { color: var(--violet); font-weight:720; margin-right:10px; }
+  .doc h3 { font-size:15px; margin:20px 0 6px; color: var(--ink); }
+  .doc p { color: var(--ink-2); max-width:70ch; margin:9px 0; }
+  .doc p.tight { margin:4px 0; }
+  .doc ul { color: var(--ink-2); max-width:70ch; padding-left:20px; }
+  .doc li { margin:6px 0; }
+  .doc b { color: var(--ink); }
+  .doc code { font-family:var(--mono); font-size:.9em; background:var(--surface-2);
+    border:1px solid var(--edge); border-radius:5px; padding:1px 6px; color:var(--ink); }
+  .doc a { color: var(--violet); }
+  .zc { color: var(--cyan); font-weight:600; } .xc { color: var(--amber); font-weight:600; }
+
+  .callout { background:var(--surface); border:1px solid var(--edge); border-left:3px solid var(--violet);
+    border-radius:10px; padding:16px 18px; margin:16px 0; }
+  .callout.good { border-left-color: var(--good); }
+  .callout.bad { border-left-color: var(--bad); }
+  .callout .clabel { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin:0 0 4px; }
+
+  .tbl-wrap { overflow-x:auto; margin:14px 0; border:1px solid var(--edge); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; min-width:520px; }
+  th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
+  th:first-child, td:first-child { text-align:left; }
+  thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
+  tbody tr:last-child td { border-bottom:none; }
+  td.zc2 { color: var(--cyan); } td.xc2 { color: var(--amber); }
+  tr.plus td { background: color-mix(in srgb, var(--good) 9%, transparent); }
+  tr.minus td { background: color-mix(in srgb, var(--bad) 9%, transparent); }
+  .gate { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-family:var(--mono); font-size:13px; margin:10px 0; }
+  .gate .g { color:var(--violet); font-weight:600; }
+  .gate .r { color:var(--ink-2); }
+  .pass { color: var(--good); font-weight:600; } .fail { color: var(--bad); font-weight:600; }
+
+  .foot { margin-top:44px; padding-top:16px; border-top:1px solid var(--edge); font-family:var(--mono);
+    font-size:11.5px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; }
+  .foot a { color: var(--ink-2); } .foot a:hover { color: var(--violet); } .foot .sp { flex:1; }
+  .backlink { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    border:1.5px solid var(--violet); color:var(--violet); border-radius:10px; padding:9px 16px; margin-top:20px; text-decoration:none; }
+  .backlink:hover { background: color-mix(in srgb,var(--violet) 12%,transparent); }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <a href="./">· Quantum Darwinism exhibit</a>
+    <span class="wingtag">· Wing III · Foundations on Silicon</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="spec-head">
+    <p class="kicker">Full Specification Sheet</p>
+    <h1>Two objective facts that <span class="hl">no causal order</span> can hold at once</h1>
+    <div class="idline">
+      <span><b>Finding</b> F98</span>
+      <span><b>Experiment</b> Exp120 (Darwinism × ICO)</span>
+      <span><b>Backend</b> ibm_marrakesh (Heron r2)</span>
+      <span><b>Job</b> d9aa5m8tcv6s73do7li0</span>
+      <span><b>Cycle</b> C4645 · Whisper</span>
+    </div>
+    <span class="verdict-chip">✓ VERDICT — DARWINISM-HULL-VIOLATED (both branches) · 22σ &amp; 52σ</span>
+  </header>
+
+  <p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit is
+  drawn from here; every number here is drawn from the frozen grade file <code>results/exp120_grade.json</code> and
+  its job record <code>results/exp120_jobids.json</code>. It is the crown jewel of Horizons-2 and the campaign's
+  deepest certified apparatus — <b>63 two-qubit gates</b>.</p>
+
+  <h2><span class="n">1</span>The idea, in plain language</h2>
+  <p><b>Why is anything a "fact"?</b> Quantum Darwinism (Zurek) says a property becomes <b>objective</b> when the
+  environment makes <b>many redundant copies</b> of it. You and I agree the moon is there because countless photons
+  each carry the same record of it — we can each read a different fragment of the environment and get the same answer.
+  Objectivity is redundancy.</p>
+  <p><b>The catch: complementarity.</b> A quantum system has properties that cannot both be sharply defined — here,
+  a <span class="zc">Z-fact</span> and an incompatible <span class="xc">X-fact</span>. The environment cannot hold
+  faithful copies of <b>both</b> at once. So if two recorders each try to copy one property, there is a hard ceiling
+  on how objective the two facts can jointly be.</p>
+  <div class="callout">
+    <p class="clabel">The measured quantity</p>
+    <p class="tight">Each recorder's <b>faithfulness</b> <code>A</code> is how good its copy is: <code>A = 1</code> a
+    perfect objective record, <code>A = 0.5</code> a coin-flip (no information). The <b>joint objectivity</b> is their
+    sum <code>w = A_Z + A_X</code>. Under <b>any definite order</b> of the two recorders, w is boxed into a narrow
+    <b>hull</b> — that box is what a causal history permits.</p>
+  </div>
+  <p><b>The twist (indefinite causal order).</b> A quantum switch puts the <b>order</b> of the two recorders into
+  superposition — recorder-Z-then-X <b>and</b> X-then-Z at the same time. Now measure w. If it leaves the hull, we
+  have joint objectivity that <b>no ordering of events could have produced</b>: facts without a causal history.</p>
+
+  <h2><span class="n">2</span>The objectivity hull — winner-take-all</h2>
+  <p>Under a definite order, the <b>last</b> recorder wins: it copies its property faithfully (<code>A ≈ 0.95–0.99</code>)
+  while the earlier recorder's copy is scrambled by the later measurement to a coin-flip (<code>A ≈ 0.50</code>). The
+  two orders trace the edges of the hull:</p>
+  <div class="callout">
+    <p class="clabel">Measured hull (same window, these two recorders)</p>
+    <p class="tight"><span class="zc">Z-then-X</span>: <code>A_Z=0.506</code> (lost), <code>A_X=0.955</code> (won) →
+    <code>w=1.4614</code>. &nbsp; <span class="xc">X-then-Z</span>: <code>A_Z=0.986</code> (won),
+    <code>A_X=0.501</code> (lost) → <code>w=1.4871</code>. &nbsp; <b>Hull = [1.4614, 1.4871]</b> — everything a
+    definite order can reach. The winner-take-all pattern is exactly what theory demands.</p>
+  </div>
+
+  <h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
+  <div class="gate">
+    <span class="g">N1</span><span class="r">Herald sanity: the switch-control witness must register indefinite order. <span class="pass">PASS</span> (0.333).</span>
+    <span class="g">H1</span><span class="r">Minus-branch rate in the expected window (theory 0.25). <span class="pass">PASS</span> (0.284).</span>
+    <span class="g">W_PLUS</span><span class="r"><code>w_plus &gt; hull_max</code> by &gt;5·SE — joint objectivity <b>above</b> the ceiling. <span class="pass">PASS</span> (+0.109, 22σ).</span>
+    <span class="g">W_MINUS</span><span class="r"><code>w_minus &lt; hull_min</code> by &gt;5·SE — both records <b>erased</b> below the floor. <span class="pass">PASS</span> (−0.432, 52σ).</span>
+  </div>
+
+  <h2><span class="n">4</span>The measured data</h2>
+  <p>Faithfulness of each recorder, and the joint objectivity <code>w</code>, for every arm. 30,000 shots per definite
+  arm; the switch branches are split by the heralded control outcome (+ = 71.6%, − = 28.4%).</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>arm</th><th>Z-fact A_Z</th><th>X-fact A_X</th><th>w = A_Z+A_X</th><th>vs hull</th></tr></thead>
+    <tbody>
+      <tr><td>Z-then-X (definite)</td><td class="zc2">0.506</td><td class="xc2">0.955</td><td>1.4614</td><td>hull floor</td></tr>
+      <tr><td>X-then-Z (definite)</td><td class="zc2">0.986</td><td class="xc2">0.501</td><td>1.4871</td><td>hull ceiling</td></tr>
+      <tr class="plus"><td>switch → + branch (72%)</td><td class="zc2">0.817</td><td class="xc2">0.778</td><td><b>1.5957 ± 0.0039</b></td><td><b>+0.109 · 22σ</b></td></tr>
+      <tr class="minus"><td>switch → − branch (28%)</td><td class="zc2">0.553</td><td class="xc2">0.477</td><td><b>1.0296 ± 0.0076</b></td><td><b>−0.432 · 52σ</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Theory targets (reported, not gated): <code>w_plus = 1.667</code>, <code>w_minus = 1.0</code>,
+  <code>hull point = 1.5</code>, <code>minus rate = 0.25</code>. The hardware matched the noise-model preview to the
+  third decimal.</p>
+
+  <h2><span class="n">5</span>The two violations</h2>
+  <div class="callout good">
+    <p class="clabel">+ branch (72%) — facts without a causal history</p>
+    <p class="tight">Both incompatible records land at <b>~0.80 faithful at once</b> (<code>w=1.596</code>), a joint
+    objectivity <b>0.109 above the ceiling</b> that any definite order can reach — <b>22σ</b>. Two complementary facts
+    share the environment's redundancy at the same time, a configuration <b>no sequence of events can produce</b>.</p>
+  </div>
+  <div class="callout bad">
+    <p class="clabel">− branch (28%, heralded) — record erasure</p>
+    <p class="tight">Both records collapse to <b>coin-flip</b> (<code>A_Z=0.553</code>, <code>A_X=0.477</code>,
+    <code>w=1.030</code>) — <b>0.432 below the floor</b>, <b>52σ</b>. The environment holds <b>no</b> faithful copy of
+    either fact. Erasure is <b>flagged by the herald before anyone reads the records</b>.</p>
+  </div>
+
+  <h2><span class="n">6</span>Scope &amp; caveats</h2>
+  <ul>
+    <li><b>Resource-scoped.</b> The hull is the reachable set of <b>these two recorders</b> in this window, not a
+    universal bound over all possible apparatus. The claim is: <b>within this fixed resource</b>, superposed order
+    exits a box that every definite order is confined to.</li>
+    <li><b>The intermediate-basis cheat is excluded by construction.</b> A recorder reading in a cleverly-tilted
+    intermediate basis could fake shared objectivity; that loophole is disclosed and structurally removed (F82
+    lineage). The recorders read the pure Z and X bases.</li>
+    <li><b>Separations are the figures of merit.</b> The +/− <b>excursions past the hull</b> (22σ, 52σ) are the
+    certified results. The exact erasure values and theory-matching are <b>reported</b>, not gated.</li>
+    <li><b>Deepest apparatus, honestly.</b> 63 two-qubit gates — the campaign's deepest certified circuit (the
+    deliberate opposite of the grandfather audit's 3-gate shallowest). Hardware matched the noise model to the third
+    decimal, which is why a circuit this deep still certifies.</li>
+  </ul>
+
+  <h2><span class="n">7</span>Provenance</h2>
+  <ul>
+    <li><b>Grade file:</b> <code>results/exp120_grade.json</code> · <b>Job record:</b> <code>results/exp120_jobids.json</code> · <b>Job:</b> d9aa5m8tcv6s73do7li0</li>
+    <li><b>Backend:</b> ibm_marrakesh (Heron r2) · <b>Shots:</b> 30,000/definite arm · <b>Depth:</b> 63 two-qubit gates</li>
+    <li><b>Sibling telescope:</b> F99 (the heralded Hayden–Preskill mirror) shares this exact certified skeleton, site, and window</li>
+    <li><b>Family:</b> Horizons-2 Q2 · lineage F82 (loophole discipline)</li>
+  </ul>
+
+  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+
+  <div class="foot">
+    <span>MEASURED · <b style="color:var(--violet)">F98</b> · job d9aa5m8tcv6s73do7li0 · ibm_marrakesh</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>
