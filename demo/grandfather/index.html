@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Grandfather Paradox — measured on a quantum computer | The Quantum Museum</title>
+<meta name="description" content="Can you change the past? A Lloyd post-selected time loop on IBM Heron forbids the grandfather paradox — survival drops to 1.9% (53× suppression), and a bystander's classical record rotates into quantum coherence at 78σ. Every number is real hardware data (F101, job d9ahnee6hjac73feegfg).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display: flex; align-items: center; gap: 14px; padding: 16px 0; font-family: var(--mono); font-size: 12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); }
+  .topbar .sp { flex: 1; }
+  .tbtn { font-family: var(--mono); font-size: 12px; background: none; border: 1px solid var(--edge);
+    color: var(--ink-2); border-radius: 999px; padding: 4px 11px; cursor: pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 10px; position: relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 20%,transparent), transparent 70%); }
+  .eyebrow { font-family: var(--mono); font-size: 11.5px; letter-spacing:.15em; text-transform:uppercase; color: var(--ink-3); }
+  h1 { font-family: var(--mono); font-weight: 720; letter-spacing:-.02em; line-height:1.06;
+    font-size: clamp(30px,6vw,52px); margin: 12px 0 14px; text-wrap: balance; }
+  h1 .hl { color: var(--violet); }
+  .lede { font-size: clamp(15px,2.1vw,18px); color: var(--ink-2); max-width: 62ch; margin: 0 0 12px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color: var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background: var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding: clamp(18px,3vw,26px); margin-top: 22px; box-shadow: var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    color: var(--violet); margin: 0 0 4px; font-weight:600; }
+  .panel h2 { font-size: clamp(18px,2.6vw,23px); margin: 0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color: var(--ink-2); font-size: 14px; margin: 0 0 20px; max-width: 66ch; }
+
+  /* enforcement panel */
+  .enf { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(18px,3vw,30px); align-items: center; }
+  @media (max-width: 680px){ .enf { grid-template-columns: 1fr; } }
+  .gauge { text-align: center; }
+  .gauge .big { font-family: var(--mono); font-weight: 720; letter-spacing: -.03em; line-height: 1;
+    font-size: clamp(56px,13vw,92px); color: var(--ink); font-variant-numeric: tabular-nums; }
+  .gauge .big.zero { color: var(--bad); }
+  .gauge .cap { font-family: var(--mono); font-size: 12px; color: var(--ink-3); letter-spacing:.05em; margin-top: 4px; }
+  .gauge .cap b { color: var(--good); }
+  .verdict-line { margin-top: 16px; font-size: 14.5px; min-height: 3em; color: var(--ink-2); }
+  .verdict-line b { color: var(--ink); }
+  .verdict-line .forbid { color: var(--bad); font-weight: 700; }
+
+  .slider-wrap { margin-top: 22px; }
+  .slabel { display:flex; justify-content: space-between; font-family:var(--mono); font-size:11px;
+    color: var(--ink-3); margin-bottom: 8px; letter-spacing:.02em; }
+  input[type=range]{ -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:999px;
+    background: linear-gradient(90deg, var(--violet), var(--bad)); outline:none; cursor: pointer; }
+  input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:22px; height:22px; border-radius:50%;
+    background: var(--ink); border: 3px solid var(--violet); box-shadow: 0 2px 8px rgba(0,0,0,.4); cursor: grab; }
+  input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%; background: var(--ink);
+    border: 3px solid var(--violet); cursor: grab; }
+  .stops { display:flex; justify-content: space-between; margin-top:9px; }
+  .stops span { font-family:var(--mono); font-size:10.5px; color: var(--ink-3); text-align:center; flex:1; }
+  .stops span.on { color: var(--violet); font-weight: 600; }
+
+  svg { display:block; width:100%; height:auto; }
+  .curve-theory { fill:none; stroke: var(--ink-3); stroke-width:1.6; stroke-dasharray:4 4; opacity:.6; }
+  .curve-axis { stroke: var(--edge-2); stroke-width:1; }
+  .dot-measured { fill: var(--card); stroke: var(--violet); stroke-width:2.2; }
+  .dot-current { fill: var(--violet); stroke: var(--surface); stroke-width:3; }
+  .axlabel { font-family: var(--mono); font-size: 9.5px; fill: var(--ink-3); }
+
+  /* backaction panel */
+  .back { display:grid; grid-template-columns: 1fr 1fr; gap: clamp(18px,3vw,30px); align-items:center; }
+  @media (max-width: 680px){ .back { grid-template-columns: 1fr; } }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:10px; overflow:hidden; margin-bottom:20px; }
+  .seg button { font-family:var(--mono); font-size:12.5px; padding:9px 16px; border:none; cursor:pointer;
+    background: var(--surface); color: var(--ink-2); }
+  .seg button.on { background: var(--violet); color:#fff; }
+  .dial-wrap { text-align:center; }
+  .arrow { transition: transform .8s cubic-bezier(.34,1.4,.5,1); transform-origin: 90px 90px; }
+  @media (prefers-reduced-motion: reduce){ .arrow { transition: none; } }
+  .record-read { font-family: var(--mono); font-size: 13px; margin-top: 10px; }
+  .record-read .val { color: var(--cyan); font-weight: 600; }
+  .fingerprint { font-family: var(--mono); }
+  .fingerprint .n { font-size: clamp(34px,7vw,52px); font-weight:720; color: var(--violet); letter-spacing:-.02em; line-height:1; }
+  .fingerprint .l { font-size: 12.5px; color: var(--ink-3); margin-top:6px; }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap: 10px 20px; align-items:center; margin-top: 26px;
+    padding-top: 18px; border-top: 1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color: var(--ink-3); }
+  .badge-row .sig { color: var(--violet); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
+  .badge-row .sp { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing III · Foundations on Silicon</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">The Time-Loop Courtroom</p>
+    <h1>Can you kill your <span class="hl">grandfather</span>?</h1>
+    <p class="lede">The oldest question in time-travel fiction, put to a quantum computer. We built a
+    post-selected time loop on IBM Heron and tried to create the paradox. The timeline pushed back —
+    and left a fingerprint no ordinary post-selection can fake. Every number below is measured hardware data.</p>
+    <span class="scope">MODEL: Lloyd 2011 P-CTC — the post-selection <b>is</b> the timeline. Not literal time travel.</span>
+  </header>
+
+  <!-- PANEL 1 -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — The Enforcement Rate</p>
+    <h2>How hard the timeline works to stop you</h2>
+    <p class="sub">Slide from "leave grandfather alone" to "full kill attempt." The number is the fraction of
+    timelines that stay self-consistent — measured on the chip. The harder you try to break history, the more
+    the timeline forbids it.</p>
+    <div class="enf">
+      <div class="gauge">
+        <div class="big" id="survival">100%</div>
+        <div class="cap" id="gaugeCap">of timelines survive · <b>baseline</b></div>
+        <div class="verdict-line" id="verdict">Grandfather is safe. Nothing has been changed, so every timeline is consistent.</div>
+      </div>
+      <div>
+        <svg viewBox="0 0 340 210" role="img" aria-label="Enforcement curve: survival vs kill strength">
+          <line class="curve-axis" x1="38" y1="14" x2="38" y2="176"/>
+          <line class="curve-axis" x1="38" y1="176" x2="326" y2="176"/>
+          <text class="axlabel" x="10" y="20">100%</text>
+          <text class="axlabel" x="18" y="180">0</text>
+          <text class="axlabel" x="30" y="198">leave alone</text>
+          <text class="axlabel" x="262" y="198">full kill</text>
+          <path class="curve-theory" id="theoryPath"/>
+          <g id="measuredDots"></g>
+          <circle class="dot-current" id="curDot" r="7" cx="38" cy="14"/>
+        </svg>
+        <p class="axlabel" style="text-align:center; margin:2px 0 0;">dashed = the law cos²(θ/2) · dots = measured on ibm_marrakesh</p>
+      </div>
+    </div>
+    <div class="slider-wrap">
+      <div class="slabel"><span>θ — how hard you try to kill grandfather</span><span id="thetaReadout">θ = 0</span></div>
+      <input type="range" id="theta" min="0" max="4" step="1" value="0" aria-label="Kill strength">
+      <div class="stops" id="stops">
+        <span>none</span><span>a nudge</span><span>half</span><span>most</span><span>full</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL 2 -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The Loop's Fingerprint</p>
+    <h2>The tell the rate cannot fake</h2>
+    <p class="sub">A bystander writes down what the traveller did — a plain classical record — <em>before</em> the loop
+    closes. If this were just ordinary post-selection, the record would stay classical. Watch what closing the
+    self-consistent loop actually does to it.</p>
+    <div class="back">
+      <div class="dial-wrap">
+        <div class="seg" role="group" aria-label="Loop state">
+          <button id="btnBroken" class="on" type="button">Loop broken</button>
+          <button id="btnClosed" type="button">Loop closed</button>
+        </div>
+        <svg viewBox="0 0 180 180" role="img" aria-label="The bystander's record">
+          <circle cx="90" cy="90" r="66" fill="none" stroke="var(--edge)" stroke-width="1.4"/>
+          <text class="axlabel" x="150" y="94" text-anchor="middle">X</text>
+          <text class="axlabel" x="86" y="18" text-anchor="middle">Z</text>
+          <text class="axlabel" x="90" y="112" font-size="8" text-anchor="middle" fill="var(--ink-3)">record</text>
+          <g class="arrow" id="recArrow">
+            <line x1="90" y1="90" x2="90" y2="30" stroke="var(--violet)" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="90" cy="30" r="6" fill="var(--violet)"/>
+          </g>
+        </svg>
+        <div class="record-read" id="recRead">record axis: <span class="val">Z (classical)</span> · Z<sub>S</sub> = 0.978</div>
+      </div>
+      <div class="fingerprint">
+        <div class="n">78σ</div>
+        <div class="l">the record swings from a classical value (Z<sub>S</sub> = 0.978) to full quantum coherence
+        (X<sub>S</sub> = 0.966) the instant the loop closes — a difference of 0.9415 ± 0.0120. Trivial post-selection
+        leaves the record classical; the self-consistency projection rotates it. That rotation is the signature of
+        genuine closed-timelike-curve backaction.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F101</span> · job <span class="sig">d9ahnee6hjac73feegfg</span></span>
+    <span>3 CX gates — the shallowest apparatus of the campaign</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var next = cur === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem(KEY, next); } catch (e) {}
+    });
+
+    // ---- measured enforcement ladder (F101, exp123 grade, normalized to theta=0 baseline) ----
+    var M = [
+      { t: 0.00, surv: 100.0, label: "θ = 0", verdict: "Grandfather is safe. Nothing has been changed, so every timeline is consistent.", cap: "of timelines survive · <b>baseline</b>" },
+      { t: 0.25, surv: 85.7,  label: "θ = π/4", verdict: "A gentle nudge to the past. Most timelines still close consistently — but some are already being pruned.", cap: "of the baseline survive" },
+      { t: 0.50, surv: 51.8,  label: "θ = π/2", verdict: "A serious attempt. Now <b>half</b> the timelines are gone — the ones where the paradox would have happened.", cap: "of the baseline survive" },
+      { t: 0.75, surv: 17.1,  label: "θ = 3π/4", verdict: "Nearly a full kill. The timeline has thrown out five in six of your attempts to keep itself consistent.", cap: "of the baseline survive" },
+      { t: 1.00, surv: 1.9,   label: "θ = π", verdict: "<span class='forbid'>THE TIMELINE FORBIDS IT.</span> A full grandfather kill survives at just 1.9% — a 53× suppression, and the residue is readout noise, not physics. The paradox has exactly zero self-consistent amplitude.", cap: "survive · <b style='color:var(--bad)'>53× suppressed</b>" }
+    ];
+    // plot geometry
+    var PX0 = 38, PX1 = 326, PY0 = 14, PY1 = 176;
+    function px(t) { return PX0 + t * (PX1 - PX0); }              // t in [0,1] = θ/π
+    function py(s) { return PY1 - (s / 100) * (PY1 - PY0); }       // s = survival %
+    // theory law cos^2(theta/2) normalized to 100
+    var d = "M";
+    for (var i = 0; i <= 60; i++) {
+      var tt = i / 60, s = Math.cos(tt * Math.PI / 2) * Math.cos(tt * Math.PI / 2) * 100;
+      d += (i ? "L" : "") + px(tt).toFixed(1) + "," + py(s).toFixed(1) + " ";
+    }
+    document.getElementById("theoryPath").setAttribute("d", d);
+    var dotsG = document.getElementById("measuredDots");
+    M.forEach(function (m) {
+      var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      c.setAttribute("class", "dot-measured"); c.setAttribute("r", "4.5");
+      c.setAttribute("cx", px(m.t)); c.setAttribute("cy", py(m.surv));
+      dotsG.appendChild(c);
+    });
+
+    var survEl = document.getElementById("survival"), capEl = document.getElementById("gaugeCap"),
+        verdEl = document.getElementById("verdict"), curDot = document.getElementById("curDot"),
+        thEl = document.getElementById("thetaReadout"), stops = document.getElementById("stops").children;
+    function render(idx) {
+      var m = M[idx];
+      survEl.innerHTML = (m.surv % 1 ? m.surv.toFixed(1) : m.surv) + "%";
+      survEl.className = "big" + (m.surv < 3 ? " zero" : "");
+      capEl.innerHTML = m.cap;
+      verdEl.innerHTML = m.verdict;
+      thEl.textContent = m.label;
+      curDot.setAttribute("cx", px(m.t)); curDot.setAttribute("cy", py(m.surv));
+      for (var i = 0; i < stops.length; i++) stops[i].className = (i === idx ? "on" : "");
+    }
+    var slider = document.getElementById("theta");
+    slider.addEventListener("input", function () { render(+slider.value); });
+    render(0);
+
+    // ---- backaction: the record dial ----
+    var arrow = document.getElementById("recArrow"), recRead = document.getElementById("recRead"),
+        bBroken = document.getElementById("btnBroken"), bClosed = document.getElementById("btnClosed");
+    function setLoop(closed) {
+      // broken: arrow up = Z (classical). closed: rotate 90deg to X (coherence).
+      arrow.style.transform = "rotate(" + (closed ? 90 : 0) + "deg)";
+      recRead.innerHTML = closed
+        ? "record axis: <span class='val'>X (quantum coherence)</span> · X<sub>S</sub> = 0.966"
+        : "record axis: <span class='val'>Z (classical)</span> · Z<sub>S</sub> = 0.978";
+      bClosed.className = closed ? "on" : "";
+      bBroken.className = closed ? "" : "on";
+    }
+    bBroken.addEventListener("click", function () { setLoop(false); });
+    bClosed.addEventListener("click", function () { setLoop(true); });
+    setLoop(false);
+  })();
+</script>
+</body>
+</html>
