@@ -142,6 +142,44 @@ measured (~0.002 E), the witness-fragility hierarchy, the delay-ladder and two-s
 protocols, and a friction-reports practice documenting the platform quirks that cost us
 NO-TESTs. Every claim frozen-rule graded; every miss in the record.
 
+## The Museum — Exhibit Spec Sheets
+
+Every one of the 22 interactive exhibits has a **full specification sheet** — the source-of-truth for each number it renders: the finding in plain language, what is measured, the pre-registered gates (frozen before flight), the measured-data table, the scope and limits, and the IBM job ID. Rendered as Markdown below; the interactive versions are at **[mblakemore.github.io/quantum](https://mblakemore.github.io/quantum/)**.
+
+**Wing I · The Causal Switch**
+- **The Interactive Switch** (F73–F82) — [spec sheet](demo/switch/spec.md) · [interactive](demo/switch/index.html)
+- **The Ladder of Causation** — [spec sheet](demo/ladder/spec.md) · [interactive](demo/ladder/index.html)
+- **The ICO Refrigerator** (F86/F88/F95) — [spec sheet](demo/ico-refrigerator/spec.md) · [interactive](demo/ico-refrigerator/index.html)
+- **The Teleported Witness** (F92) — [spec sheet](demo/teleported-witness/spec.md) · [interactive](demo/teleported-witness/index.html)
+
+**Wing II · The No-Go Games**
+- **The Bot Duel: STATIC** (F83) — [spec sheet](demo/static-duel/spec.md) · [interactive](demo/static-duel/index.html)
+- **The Interrogation** (F82) — [spec sheet](demo/casebook/spec.md) · [interactive](demo/casebook/index.html)
+- **The Magic Square** (F106) — [spec sheet](demo/magic-square/spec.md) · [interactive](demo/magic-square/index.html)
+- **The No-Go Triptych** (CHSH · F82 · F106) — [spec sheet](demo/no-go-triptych/spec.md) · [interactive](demo/no-go-triptych/index.html)
+
+**Wing III · Foundations on Silicon**
+- **The Grandfather Paradox** (F101) — [spec sheet](demo/grandfather/spec.md) · [interactive](demo/grandfather/index.html)
+- **The Zeno Tractor Beam** (F102) — [spec sheet](demo/zeno-tractor/spec.md) · [interactive](demo/zeno-tractor/index.html)
+- **The Twin Paradox** (F100) — [spec sheet](demo/twin-paradox/spec.md) · [interactive](demo/twin-paradox/index.html)
+- **Quantum Darwinism** (F98) — [spec sheet](demo/quantum-darwinism/spec.md) · [interactive](demo/quantum-darwinism/index.html)
+- **The Hayden–Preskill Mirror** (F99) — [spec sheet](demo/hayden-preskill/spec.md) · [interactive](demo/hayden-preskill/index.html)
+- **Negative Energy** (F97) — [spec sheet](demo/negative-energy/spec.md) · [interactive](demo/negative-energy/index.html)
+
+**Wing IV · The Advantage Ladder**
+- **The Scoreboard** (campaign summary) — [spec sheet](demo/scoreboard/spec.md) · [interactive](demo/scoreboard/index.html)
+- **The GHZ Sextant** (F108/F109) — [spec sheet](demo/ghz-sextant/spec.md) · [interactive](demo/ghz-sextant/index.html)
+- **The Trust Ladder** (F115–F117) — [spec sheet](demo/trust-ladder/spec.md) · [interactive](demo/trust-ladder/index.html)
+- **The Pocket Dictionary** (F107) — [spec sheet](demo/pocket-dictionary/spec.md) · [interactive](demo/pocket-dictionary/index.html)
+- **The Shallow-Circuit Solver** (F113) — [spec sheet](demo/shallow-solver/spec.md) · [interactive](demo/shallow-solver/index.html)
+
+**Wing V · The Instruments**
+- **The QPU Weather Report** (F81) — [spec sheet](demo/weather/spec.md) · [interactive](demo/weather/index.html)
+- **The Casebook: Print & Play** (F82/F83) — [spec sheet](demo/casebook-pnp/spec.md) · [interactive](demo/casebook-pnp/index.html)
+- **The Switch-Bench Readout** (F112) — [spec sheet](demo/switch-bench/spec.md) · [interactive](demo/switch-bench/index.html)
+
+---
+
 ## Methodology & Scope (short form)
 
 Full version: [docs/methodology-and-validation.md](docs/methodology-and-validation.md)
