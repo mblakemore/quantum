@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Zeno Tractor Beam — pinning a qubit by watching it | The Quantum Museum</title>
+<meta name="description" content="A full π-rotation should flip a qubit, but watch it often enough and it freezes — measurement is a tractor beam. Survival climbs 2% → 64% with watch cadence, then plateaus at the watch-cost frontier (N=16). Real hardware data (F102, job d9ai9ku6hjac73fefdeg), zero two-qubit gates.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 10px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 20%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(29px,5.6vw,50px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--violet); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:64ch; margin:0 0 12px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--violet); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:66ch; }
+
+  .beam { display:grid; grid-template-columns:1fr auto; gap:clamp(20px,4vw,40px); align-items:center; }
+  @media (max-width:680px){ .beam { grid-template-columns:1fr; } }
+  .gauge-wrap { text-align:center; }
+  .gcol { display:inline-flex; gap:14px; align-items:stretch; }
+  .gbar { position:relative; width:52px; height:220px; border:2px solid var(--edge-2); border-radius:12px;
+    background:var(--surface-2); overflow:hidden; }
+  .gfill { position:absolute; left:0; right:0; bottom:0; background:linear-gradient(180deg,var(--violet),color-mix(in srgb,var(--violet) 60%,transparent));
+    transition:height .35s cubic-bezier(.34,1.3,.5,1); }
+  @media (prefers-reduced-motion: reduce){ .gfill { transition:none; } }
+  .glabels { display:flex; flex-direction:column; justify-content:space-between; font-family:var(--mono); font-size:10.5px; color:var(--ink-3); padding:2px 0; }
+  .glabels .on { color:var(--violet); } .glabels .off { color:var(--bad); }
+  .gnum { font-family:var(--mono); font-weight:720; font-size:clamp(40px,10vw,64px); letter-spacing:-.03em; line-height:1; color:var(--ink); margin-top:12px; }
+  .gnum small { font-size:13px; color:var(--ink-3); font-weight:500; }
+  .verdict { margin-top:14px; font-size:14px; color:var(--ink-2); min-height:3.4em; max-width:46ch; margin-inline:auto; }
+  .verdict b { color:var(--ink); } .verdict .front { color:var(--amber); font-weight:700; }
+
+  .controls { margin-top:2px; }
+  .dial { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .dial .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .cbtn { font-family:var(--mono); font-size:13px; font-weight:600; padding:9px 13px; border-radius:10px;
+    border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; transition:all .12s; }
+  .cbtn:hover { border-color:var(--violet); }
+  .cbtn.on { background:var(--violet); color:#fff; border-color:var(--violet); }
+  .looks { display:flex; gap:5px; flex-wrap:wrap; margin-top:18px; min-height:16px; align-items:center; }
+  .looks .lk { width:10px; height:10px; border-radius:50%; background:var(--violet); opacity:.85; }
+  .looks .txt { font-family:var(--mono); font-size:11px; color:var(--ink-3); }
+
+  /* law plot */
+  .lawwrap { max-width:520px; margin:0 auto; }
+  .law-curve { fill:none; stroke:var(--ink-3); stroke-width:1.6; stroke-dasharray:4 4; opacity:.65; }
+  .meas-curve { fill:none; stroke:var(--violet); stroke-width:2.2; }
+  .dot-m { fill:var(--card); stroke:var(--violet); stroke-width:2.4; }
+  .axis { stroke:var(--edge-2); stroke-width:1; }
+  .axlabel { font-family:var(--mono); font-size:9px; fill:var(--ink-3); }
+  .front-mark { stroke:var(--amber); stroke-width:1.4; stroke-dasharray:3 3; }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--violet); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
+  .badge-row .sp { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing III · Foundations on Silicon</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">The quantum Zeno effect</p>
+    <h1>Hold a qubit still by <span class="hl">watching</span> it.</h1>
+    <p class="lede">Aim a full π-rotation at a qubit and it should flip from ON to OFF. But keep measuring it as it
+    turns, and it freezes in place — the act of looking is a tractor beam. Turn up how often you look and watch the
+    survival climb… until the frontier, where each glance costs enough that looking faster stops paying. Every
+    number is measured hardware data — on the cheapest circuit of the whole campaign.</p>
+    <span class="scope">Quantum Zeno is textbook (Misra–Sudarshan 1977). It pins against <b>coherent</b> rotation, not relaxation. Contribution: the QND-corrected law + the measured frontier.</span>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — The Tractor Beam</p>
+    <h2>Watch more often, hold tighter</h2>
+    <p class="sub">The qubit starts ON. A full π-drive is trying to flip it OFF. Each time you look, you catch it
+    before it can turn — the more looks, the more it's pinned. Pick a watch cadence.</p>
+    <div class="beam">
+      <div>
+        <div class="controls">
+          <div class="dial" role="group" aria-label="Watch cadence">
+            <span class="lbl">watch cadence:</span>
+            <button class="cbtn" data-i="0" type="button">unwatched</button>
+            <button class="cbtn" data-i="1" type="button">N=2</button>
+            <button class="cbtn" data-i="2" type="button">N=4</button>
+            <button class="cbtn" data-i="3" type="button">N=8</button>
+            <button class="cbtn" data-i="4" type="button">N=16</button>
+          </div>
+          <div class="looks" id="looks"></div>
+        </div>
+        <p class="verdict" id="verdict" style="text-align:left; margin-inline:0;"></p>
+      </div>
+      <div class="gauge-wrap">
+        <div class="gcol">
+          <div class="glabels"><span class="on">ON</span><span class="off">OFF · flipped</span></div>
+          <div class="gbar"><div class="gfill" id="gfill" style="height:2%"></div></div>
+        </div>
+        <div class="gnum" id="gnum">2%</div>
+        <div class="gnum" style="font-size:12px;margin-top:4px;color:var(--ink-3)">survival (stays ON)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The Cadence Law &amp; the Frontier</p>
+    <h2>Watch faster, hold tighter — but each look costs</h2>
+    <p class="sub">The dashed curve is the ideal Zeno law, [cos²(π/2N)]^N: watch infinitely fast and the qubit never
+    flips. The dots are measured. Divide out the per-look cost and they match the law to 0.5% through N=8 — but the
+    raw survival plateaus at N=16, the <b>watch-cost frontier</b>, where each glance's cost cancels the extra grip.</p>
+    <div class="lawwrap">
+      <svg viewBox="0 0 420 250" role="img" aria-label="Survival versus watch cadence, measured against the Zeno law">
+        <line class="axis" x1="44" y1="16" x2="44" y2="210"/>
+        <line class="axis" x1="44" y1="210" x2="404" y2="210"/>
+        <path class="law-curve" id="lawCurve"/>
+        <path class="meas-curve" id="measCurve"/>
+        <g id="measDots"></g>
+        <line class="front-mark" id="frontMark"/>
+        <text class="axlabel" x="10" y="20">100%</text>
+        <text class="axlabel" x="24" y="214">0</text>
+        <text class="axlabel" x="44" y="228">N=2</text>
+        <text class="axlabel" x="360" y="228">N=16</text>
+        <text class="axlabel" id="frontLabel" fill="var(--amber)"></text>
+        <text class="axlabel" x="150" y="14" fill="var(--ink-3)">dashed = ideal Zeno law [cos²(π/2N)]^N</text>
+      </svg>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F102</span> · job <span class="sig">d9ai9ku6hjac73fefdeg</span></span>
+    <span>ibm_marrakesh · 92σ over unwatched · zero two-qubit gates</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+
+    // ---- data kernel (F102 exp124) ----
+    var CAD = [
+      { N:0,  surv:0.020, verdict:"<b>Unwatched.</b> Nothing looks, so the π-drive turns the qubit all the way over — it flips almost completely. Survival: just 2%." },
+      { N:2,  surv:0.246, verdict:"Two looks. Already the qubit is caught partway and pulled back — a third of the flip undone. Survival 25%." },
+      { N:4,  surv:0.498, verdict:"Four looks. The tractor beam has it at the halfway mark — measurement is fighting the rotation to a draw. Survival 50%." },
+      { N:8,  surv:0.644, verdict:"Eight looks. Pinned at <b>64%</b> — a 92σ tractor beam over the unwatched flip. Divide out the per-look cost and this matches the Zeno law to half a percent." },
+      { N:16, surv:0.664, verdict:"Sixteen looks — and barely tighter than eight (64% → 66%). <span class='front'>The watch-cost frontier.</span> Each glance slightly degrades the qubit; near here that cost cancels the extra grip. This is the optimal cadence, measured." }
+    ];
+    console.assert(CAD[3].surv - CAD[0].surv > 0.6, "tractor separation ~0.62");
+
+    var gfill = document.getElementById("gfill"), gnum = document.getElementById("gnum"),
+        verdict = document.getElementById("verdict"), looks = document.getElementById("looks"),
+        btns = document.querySelectorAll(".cbtn");
+    function render(i) {
+      var c = CAD[i];
+      gfill.style.height = (c.surv * 100) + "%";
+      gnum.textContent = Math.round(c.surv * 100) + "%";
+      verdict.innerHTML = c.verdict;
+      looks.innerHTML = "";
+      if (c.N === 0) { var t=document.createElement("span"); t.className="txt"; t.textContent="no measurements"; looks.appendChild(t); }
+      else {
+        for (var k = 0; k < c.N; k++) { var d=document.createElement("span"); d.className="lk"; looks.appendChild(d); }
+        var tx=document.createElement("span"); tx.className="txt"; tx.textContent=" "+c.N+" looks"; looks.appendChild(tx);
+      }
+      btns.forEach(function (b, j) { var on = j === i; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false"); });
+    }
+    btns.forEach(function (b) { b.addEventListener("click", function () { render(+b.dataset.i); }); });
+
+    // ---- law plot (survival vs N; x = log2(N) for N=2..16 even spacing) ----
+    var PX0=44, PX1=400, PY0=16, PY1=210;
+    function lx(N){ return PX0 + (Math.log2(N)-1)/(4-1)*(PX1-PX0); }   // N=2->x@1, N=16->x@4
+    function ly(s){ return PY1 - s*(PY1-PY0); }
+    function zeno(N){ var c=Math.cos(Math.PI/(2*N)); return Math.pow(c*c, N); }
+    // ideal law curve N=2..18
+    var d="M"; for(var N=2; N<=18; N+=0.25){ d += (N>2?"L":"") + lx(N).toFixed(1)+","+ly(zeno(N)).toFixed(1)+" "; }
+    document.getElementById("lawCurve").setAttribute("d", d);
+    // measured points + connecting curve (N=2,4,8,16)
+    var pts=[[2,0.246],[4,0.498],[8,0.644],[16,0.664]];
+    var md="M"+pts.map(function(p,i){return (i?"L":"")+lx(p[0]).toFixed(1)+","+ly(p[1]).toFixed(1);}).join(" ");
+    document.getElementById("measCurve").setAttribute("d", md);
+    var g=document.getElementById("measDots");
+    pts.forEach(function(p){ var c=document.createElementNS("http://www.w3.org/2000/svg","circle");
+      c.setAttribute("class","dot-m"); c.setAttribute("r","5"); c.setAttribute("cx",lx(p[0])); c.setAttribute("cy",ly(p[1])); g.appendChild(c); });
+    // frontier marker at N=16
+    var fm=document.getElementById("frontMark");
+    fm.setAttribute("x1",lx(16)); fm.setAttribute("y1",ly(0.02)); fm.setAttribute("x2",lx(16)); fm.setAttribute("y2",ly(0.70));
+    var fl=document.getElementById("frontLabel"); fl.setAttribute("x", lx(16)-52); fl.setAttribute("y", 30); fl.textContent="frontier";
+
+    render(0);
+  })();
+</script>
+</body>
+</html>
