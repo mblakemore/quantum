@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hayden–Preskill Mirror — recovering a message the horizon flipped | The Quantum Museum</title>
+<meta name="description" content="A one-bit diary thrown at two incompatible horizon-queries is dead in every definite order — but a superposed order returns it. The minus branch reads it phase-flipped (S_P=−0.238, 56σ): flip the bits and recover 74%. Plus branch reads it direct, 68% (59σ). Real hardware (F99, job d9aabnt2su3c739lcam0, ibm_marrakesh).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--violet); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--violet); color: var(--violet); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 20%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.4vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--violet); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:65ch; margin:0 0 16px; }
+
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
+  .pcard b { color: var(--ink); } .pcard .direct { color:var(--cyan); font-weight:600; } .pcard .flip { color:var(--amber); font-weight:600; }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13.5px; font-weight:600;
+    text-decoration:none; color:#fff; background:var(--violet); border:1.5px solid var(--violet);
+    border-radius:11px; padding:10px 18px; transition:transform .12s, box-shadow .12s; box-shadow:var(--shadow); }
+  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--violet) 35%,transparent); }
+  .specbtn .arw { font-size:15px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--violet); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:68ch; }
+
+  .selector { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:22px; }
+  .selector .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .cbtn { font-family:var(--mono); font-size:12.5px; font-weight:600; padding:9px 13px; border-radius:10px;
+    border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; transition:all .12s; }
+  .cbtn:hover { border-color:var(--violet); }
+  .cbtn.on { background:var(--violet); color:#fff; border-color:var(--violet); }
+  .cbtn small { font-weight:400; opacity:.75; }
+
+  /* S_P scale */
+  .scale-cap { display:flex; justify-content:space-between; font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-bottom:2px; }
+  .band { fill: color-mix(in srgb, var(--ink-3) 20%, transparent); }
+  .band-edge { stroke: var(--ink-3); stroke-width:1; opacity:.4; }
+  .scale-axis { stroke: var(--edge-2); stroke-width:1.4; }
+  .tick { stroke: var(--edge-2); stroke-width:1; }
+  .ticklab { font-family:var(--mono); font-size:9px; fill: var(--ink-3); }
+  .bandlab { font-family:var(--mono); font-size:9.5px; fill: var(--ink-3); }
+  .ideal { stroke-width:1.4; stroke-dasharray:2 2; opacity:.7; }
+  .ideallab { font-family:var(--mono); font-size:8.5px; }
+  .wmark-line { stroke-width:2; } .wmark-dot { stroke-width:2; }
+
+  /* recovery bars */
+  .recov { margin-top:20px; display:grid; gap:12px; }
+  .rbar { display:grid; grid-template-columns:130px 1fr auto; gap:12px; align-items:center; }
+  @media (max-width:560px){ .rbar { grid-template-columns:100px 1fr auto; gap:8px; } }
+  .rbar .rlab { font-family:var(--mono); font-size:12px; color:var(--ink-2); }
+  .rbar .rlab b { display:block; font-size:11px; color:var(--ink-3); font-weight:400; }
+  .rtrack { position:relative; height:24px; border:1px solid var(--edge-2); border-radius:7px; background:var(--surface-2); overflow:hidden; }
+  .rfill { position:absolute; top:0; bottom:0; left:0; transition:width .4s cubic-bezier(.34,1.15,.5,1); }
+  @media (prefers-reduced-motion: reduce){ .rfill { transition:none; } }
+  .rbar.direct .rfill { background:linear-gradient(90deg,color-mix(in srgb,var(--cyan) 40%,transparent),var(--cyan)); }
+  .rbar.flip .rfill { background:linear-gradient(90deg,color-mix(in srgb,var(--amber) 40%,transparent),var(--amber)); }
+  .halfmark { position:absolute; top:-2px; bottom:-2px; left:50%; border-left:2px dashed var(--ink-3); opacity:.55; }
+  .rval { font-family:var(--mono); font-weight:720; font-size:17px; min-width:52px; text-align:right; font-variant-numeric:tabular-nums; color:var(--ink-3); }
+  .rbar.win .rval { color: var(--ink); }
+  .rbar.win.direct .rval { color: var(--cyan); } .rbar.win.flip .rval { color: var(--amber); }
+  .rbar.win .rtrack { box-shadow:0 0 0 2px color-mix(in srgb,var(--good) 55%,transparent); }
+
+  .verdict { margin-top:18px; text-align:center; font-size:14px; color:var(--ink-2); min-height:2.8em; }
+  .verdict .direct { color: var(--cyan); font-weight:700; } .verdict .flip { color: var(--amber); font-weight:700; }
+  .verdict .dead { color: var(--ink-3); font-weight:700; } .verdict b { color:var(--ink); }
+
+  /* scoreboard B */
+  .board-band { fill: color-mix(in srgb, var(--ink-3) 20%, transparent); }
+  .ptlab { font-family:var(--mono); font-size:9.5px; }
+  .siglab { font-family:var(--mono); font-size:10px; font-weight:600; }
+
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; }
+  .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; } .rc .flip { color:var(--amber); font-weight:600; }
+  .speclink-row { margin-top:20px; text-align:center; }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--violet); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--violet); }
+  .badge-row .sp2 { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing III · Foundations on Silicon</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Hayden–Preskill recovery × indefinite causal order</p>
+    <h1>A message the mirror returns <span class="hl">flipped</span>.</h1>
+    <p class="lede">Throw a one-bit message into a scrambler — the theorists' toy black hole — and interrogate it with
+    two incompatible questions. In any <b>definite order</b> the message is gone: your probe reads a coin-flip. Put the
+    order of the questions in <b>superposition</b> and it comes back — but on one branch the mirror hands it to you
+    <b>upside down</b>. Read the sign, flip the bits, and recover it. Every number is measured hardware.</p>
+
+    <div class="primer">
+      <div class="pcard">
+        <h4>What's Hayden–Preskill?</h4>
+        <p>A 2007 result: a message thrown into a scrambler <b>isn't destroyed</b> — if you hold the right entangled
+        reference, it re-emerges in the radiation almost at once. Information is smeared into correlations you can
+        un-smear.</p>
+      </div>
+      <div class="pcard">
+        <h4>How do we read "recovery"?</h4>
+        <p>The probe's score is <b>S<sub>P</sub> = P(reads the diary right) − ½</b>. <b>0</b> = coin-flip (dead);
+        <span class="direct">+½ = perfect direct read</span>; <span class="flip">−½ = perfect mirror</span> (anti-correlated —
+        read it <b>flipped</b>). Recovery is ½+|S<sub>P</sub>|; the <b>sign</b> says whether to invert.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
+      <span class="scope">A Hayden–Preskill <b>scrambler analog</b>, heralded — not a literal black hole. Same certified telescope as F98.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — Recover the diary</p>
+    <h2>Pick a query order and try to read the message back</h2>
+    <p class="sub">Under a <b>definite</b> order the probe is a coin-flip — there is nothing to recover, and we prove
+    it first. Superpose the order and the probe lights up. Then use the <b>sign</b> of the signal to decide: read it
+    straight, or flip every bit.</p>
+
+    <div class="selector" role="group" aria-label="Query order">
+      <span class="lbl">query order:</span>
+      <button class="cbtn" data-i="0" type="button">X&nbsp;then&nbsp;Z</button>
+      <button class="cbtn" data-i="1" type="button">Z&nbsp;then&nbsp;X</button>
+      <button class="cbtn" data-i="2" type="button">Superposed → <small>+ branch (72%)</small></button>
+      <button class="cbtn" data-i="3" type="button">Superposed → <small>− branch (28%)</small></button>
+    </div>
+
+    <div class="scale-cap"><span>probe signal S<sub>P</sub> = P(reads diary right) − ½</span><span>← flipped · direct →</span></div>
+    <svg viewBox="0 0 460 96" role="img" aria-label="Probe signal scale with the no-recovery band, the ideal mirror and direct points, and a live marker">
+      <rect class="band" id="bandA" y="30" height="26"/>
+      <line class="band-edge" id="bandAe1" y1="24" y2="62"/>
+      <line class="band-edge" id="bandAe2" y1="24" y2="62"/>
+      <line class="scale-axis" x1="24" y1="56" x2="446" y2="56"/>
+      <g id="ticksA"></g>
+      <text class="bandlab" id="bandAlab" y="20" text-anchor="middle">no-recovery band ±0.05</text>
+      <g id="idealsA"></g>
+      <line class="wmark-line" id="wlineA" y1="18" y2="68"/>
+      <circle class="wmark-dot" id="wdotA" r="6" cy="43"/>
+    </svg>
+
+    <div class="recov">
+      <div class="rbar direct" id="barDirect">
+        <span class="rlab">Read direct<b>½ + S<sub>P</sub></b></span>
+        <div class="rtrack"><div class="rfill" id="fillDirect"></div><div class="halfmark"></div></div>
+        <span class="rval" id="valDirect">50%</span>
+      </div>
+      <div class="rbar flip" id="barFlip">
+        <span class="rlab">Flip the bits<b>½ − S<sub>P</sub></b></span>
+        <div class="rtrack"><div class="rfill" id="fillFlip"></div><div class="halfmark"></div></div>
+        <span class="rval" id="valFlip">50%</span>
+      </div>
+    </div>
+    <p class="verdict" id="verdict"></p>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The recovery scoreboard</p>
+    <h2>Dead in every order — recovered in superposition, with opposite signs</h2>
+    <p class="sub">Both definite orders sit dead in the no-recovery band. The superposed <b>+</b> branch lands on the
+    <span style="color:var(--cyan);font-weight:600">direct</span> side (+59σ); the <b>−</b> branch lands on the
+    <span style="color:var(--amber);font-weight:600">mirror</span> side (−56σ). Faint marks are the noiseless ideals ±½.</p>
+    <div style="max-width:560px;margin:0 auto;">
+      <svg viewBox="0 0 480 200" role="img" aria-label="All four arms on the probe-signal scale, with the no-recovery band, ideal mirror and direct points, and the two branch recoveries">
+        <rect class="board-band" id="bandB" y="66" height="30"/>
+        <line class="band-edge" id="bandBe1" y1="56" y2="146"/>
+        <line class="band-edge" id="bandBe2" y1="56" y2="146"/>
+        <line class="scale-axis" x1="28" y1="146" x2="452" y2="146"/>
+        <g id="ticksB"></g>
+        <g id="idealsB"></g>
+        <g id="pointsB"></g>
+        <text class="bandlab" x="240" y="48" text-anchor="middle" fill="var(--ink-3)">no-recovery band — dead in any definite order</text>
+        <text class="ptlab" x="86" y="182" text-anchor="middle" fill="var(--amber)">◄ mirror (flip to recover)</text>
+        <text class="ptlab" x="394" y="182" text-anchor="middle" fill="var(--cyan)">direct read ►</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — Why this is recovery, not luck</p>
+    <h2>Three receipts behind the mirror</h2>
+    <p class="sub">A recovered message only counts if it was truly lost first — and if the signature was called in
+    advance. Both boxes are ticked.</p>
+    <div class="receipts">
+      <div class="rc">
+        <h4>1 · Truly dead first</h4>
+        <p>In <b>both</b> definite orders the probe reads a coin-flip — <b>S<sub>P</sub> ≈ 0.005</b>, ~40× below the
+        effect and inside the frozen band. <span class="yes">Nothing to recover</span> under ordinary causality, proven
+        before the claim.</p>
+      </div>
+      <div class="rc">
+        <h4>2 · The sign was pre-called</h4>
+        <p>The gate is <b>sign-fixed</b>: theory says the mirror returns the message <span class="flip">anti-correlated</span>.
+        A <b>positive</b> minus-branch would have <b>failed</b>. The phase flip isn't an artifact — it's the
+        <b>predicted signature</b>, and the chip produced it.</p>
+      </div>
+      <div class="rc">
+        <h4>3 · Bonus — who gets to know?</h4>
+        <p>Free from the same run: whether the <b>environment</b> learns the diary depends on <b>which query is first</b>
+        — <b>0.453</b> (X-first) vs <b>0.007</b> (Z-first). Ask the wrong question first and <b>nobody</b> gets to
+        know.</p>
+      </div>
+    </div>
+    <div class="speclink-row">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet — data, gates &amp; the phase-flip theory</a>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F99</span> · job <span class="sig">d9aabnt2su3c739lcam0</span></span>
+    <span>ibm_marrakesh · − branch 74% flipped (56σ) · + branch 68% direct (59σ)</span>
+    <span class="sp2"></span>
+    <a href="./spec.html">Full Spec</a>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+    var css = getComputedStyle(document.documentElement);
+    function C(v){ return css.getPropertyValue(v).trim(); }
+
+    // ---- data kernel (F99 exp121, job d9aabnt2su3c739lcam0) ----
+    var BAND = 0.05, IDEAL = 0.5;
+    var MODES = [
+      { key:"ordXZ", label:"X-then-Z", sp:0.0026, dir:"dead",
+        note:"<b>Definite order, X then Z.</b> The probe reads a coin-flip — S<sub>P</sub> ≈ 0. <span class='dead'>The diary is dead.</span> No definite order can pull it back; that's the premise the recovery is measured against." },
+      { key:"ordZX", label:"Z-then-X", sp:0.0065, dir:"dead",
+        note:"<b>Definite order, Z then X.</b> Still a coin-flip — S<sub>P</sub> ≈ 0.006, inside the no-recovery band. Swapping which question comes first doesn't help: <span class='dead'>the diary stays dead.</span>" },
+      { key:"plus", label:"Superposed → + branch", sp:0.1825, sigma:59, dir:"direct",
+        note:"<b>Superposed order, + branch (72%).</b> S<sub>P</sub> = +0.182, <span class='direct'>+59σ past the band</span>. The probe is <span class='direct'>correlated</span> — read it <b>straight</b> and you're right <b>68%</b> of the time. Recovery no definite order allows." },
+      { key:"minus", label:"Superposed → − branch", sp:-0.2383, sigma:56, dir:"flip",
+        note:"<b>Superposed order, − branch (28%, heralded).</b> S<sub>P</sub> = −0.238, <span class='flip'>−56σ</span> — the probe is <span class='flip'>anti-correlated</span>. <b>Flip every bit</b> and you recover the message <b>74%</b> of the time. The negative sign <b>is</b> the predicted mirror signature." }
+    ];
+    console.assert(Math.abs(MODES[0].sp)<BAND && Math.abs(MODES[1].sp)<BAND, "definite orders dead in band");
+    console.assert(MODES[2].sp>BAND && MODES[3].sp<-BAND, "+ direct, - flipped, past band");
+
+    // ---- S_P scale geometry ----
+    var SMIN=-0.55, SMAX=0.55;
+    function sx(s, x0, x1){ return x0 + (s-SMIN)/(SMAX-SMIN)*(x1-x0); }
+
+    // Panel A scale
+    var AX0=24, AX1=446;
+    (function(){
+      var bandA=document.getElementById("bandA"), svgns="http://www.w3.org/2000/svg";
+      bandA.setAttribute("x", sx(-BAND,AX0,AX1)); bandA.setAttribute("width", sx(BAND,AX0,AX1)-sx(-BAND,AX0,AX1));
+      document.getElementById("bandAe1").setAttribute("x1",sx(-BAND,AX0,AX1)); document.getElementById("bandAe1").setAttribute("x2",sx(-BAND,AX0,AX1));
+      document.getElementById("bandAe2").setAttribute("x1",sx(BAND,AX0,AX1)); document.getElementById("bandAe2").setAttribute("x2",sx(BAND,AX0,AX1));
+      document.getElementById("bandAlab").setAttribute("x", sx(0,AX0,AX1));
+      var tg=document.getElementById("ticksA");
+      [-0.5,-0.25,0,0.25,0.5].forEach(function(t){ var x=sx(t,AX0,AX1);
+        var l=document.createElementNS(svgns,"line"); l.setAttribute("class","tick"); l.setAttribute("x1",x); l.setAttribute("x2",x); l.setAttribute("y1",56); l.setAttribute("y2",61); tg.appendChild(l);
+        var tx=document.createElementNS(svgns,"text"); tx.setAttribute("class","ticklab"); tx.setAttribute("x",x); tx.setAttribute("y",74); tx.setAttribute("text-anchor","middle"); tx.textContent=(t>0?"+":"")+t; tg.appendChild(tx);
+      });
+      var ig=document.getElementById("idealsA");
+      [[-IDEAL,"--amber","perfect mirror"],[IDEAL,"--cyan","perfect direct"]].forEach(function(d){ var x=sx(d[0],AX0,AX1);
+        var l=document.createElementNS(svgns,"line"); l.setAttribute("class","ideal"); l.setAttribute("x1",x); l.setAttribute("x2",x); l.setAttribute("y1",26); l.setAttribute("y2",62); l.setAttribute("stroke",C(d[1])); ig.appendChild(l);
+      });
+    })();
+
+    var fillD=document.getElementById("fillDirect"), fillF=document.getElementById("fillFlip"),
+        valD=document.getElementById("valDirect"), valF=document.getElementById("valFlip"),
+        barD=document.getElementById("barDirect"), barF=document.getElementById("barFlip"),
+        wline=document.getElementById("wlineA"), wdot=document.getElementById("wdotA"),
+        verdict=document.getElementById("verdict"), btns=document.querySelectorAll(".cbtn");
+
+    function render(i){
+      var m=MODES[i], rd=0.5+m.sp, rf=0.5-m.sp;
+      fillD.style.width=(rd*100)+"%"; fillF.style.width=(rf*100)+"%";
+      valD.textContent=Math.round(rd*100)+"%"; valF.textContent=Math.round(rf*100)+"%";
+      var winD = m.dir==="direct", winF = m.dir==="flip";
+      barD.classList.toggle("win", winD); barF.classList.toggle("win", winF);
+      // marker
+      var col = m.dir==="direct" ? C("--cyan") : m.dir==="flip" ? C("--amber") : C("--ink-3");
+      var x = sx(m.sp,AX0,AX1);
+      wline.setAttribute("x1",x); wline.setAttribute("x2",x); wline.setAttribute("stroke",col);
+      wdot.setAttribute("cx",x); wdot.setAttribute("stroke",col); wdot.setAttribute("fill",C("--card"));
+      verdict.innerHTML=m.note;
+      btns.forEach(function(b,j){ var on=j===i; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
+    }
+    btns.forEach(function(b){ b.addEventListener("click", function(){ render(+b.dataset.i); }); });
+
+    // ---- Panel B scoreboard ----
+    (function(){
+      var svgns="http://www.w3.org/2000/svg", BX0=28, BX1=452;
+      function bx(s){ return sx(s,BX0,BX1); }
+      var bandB=document.getElementById("bandB");
+      bandB.setAttribute("x",bx(-BAND)); bandB.setAttribute("width",bx(BAND)-bx(-BAND));
+      document.getElementById("bandBe1").setAttribute("x1",bx(-BAND)); document.getElementById("bandBe1").setAttribute("x2",bx(-BAND));
+      document.getElementById("bandBe2").setAttribute("x1",bx(BAND)); document.getElementById("bandBe2").setAttribute("x2",bx(BAND));
+      var tg=document.getElementById("ticksB");
+      [-0.5,-0.25,0,0.25,0.5].forEach(function(t){ var x=bx(t);
+        var l=document.createElementNS(svgns,"line"); l.setAttribute("class","tick"); l.setAttribute("x1",x); l.setAttribute("x2",x); l.setAttribute("y1",146); l.setAttribute("y2",152); tg.appendChild(l);
+        var tx=document.createElementNS(svgns,"text"); tx.setAttribute("class","ticklab"); tx.setAttribute("x",x); tx.setAttribute("y",164); tx.setAttribute("text-anchor","middle"); tx.textContent=(t>0?"+":"")+t; tg.appendChild(tx);
+      });
+      var ig=document.getElementById("idealsB");
+      [[-IDEAL,"--amber"],[IDEAL,"--cyan"]].forEach(function(d){ var x=bx(d[0]);
+        var l=document.createElementNS(svgns,"line"); l.setAttribute("class","ideal"); l.setAttribute("x1",x); l.setAttribute("x2",x); l.setAttribute("y1",70); l.setAttribute("y2",142); l.setAttribute("stroke",C(d[1])); ig.appendChild(l);
+      });
+      var pg=document.getElementById("pointsB");
+      var PTS=[
+        { s:0.0026, y:96,  col:"--ink-3", lab:"X→Z", sub:"", labBelow:false },
+        { s:0.0065, y:114, col:"--ink-3", lab:"Z→X", sub:"", labBelow:true },
+        { s:0.1825, y:96,  col:"--cyan",  lab:"+ branch", sub:"+59σ", labBelow:false },
+        { s:-0.2383,y:114, col:"--amber", lab:"− branch", sub:"−56σ", labBelow:false }
+      ];
+      PTS.forEach(function(p){ var x=bx(p.s);
+        var c=document.createElementNS(svgns,"circle"); c.setAttribute("cx",x); c.setAttribute("cy",p.y); c.setAttribute("r",6);
+        c.setAttribute("fill",C("--card")); c.setAttribute("stroke",C(p.col)); c.setAttribute("stroke-width",2.4); pg.appendChild(c);
+        var t=document.createElementNS(svgns,"text"); t.setAttribute("class","ptlab"); t.setAttribute("x",x); t.setAttribute("y",p.labBelow?p.y+20:p.y-11);
+        t.setAttribute("text-anchor","middle"); t.setAttribute("fill",C(p.col)); t.textContent=p.lab; pg.appendChild(t);
+        if(p.sub){ var s=document.createElementNS(svgns,"text"); s.setAttribute("class","siglab"); s.setAttribute("x",x); s.setAttribute("y",p.y+18);
+          s.setAttribute("text-anchor","middle"); s.setAttribute("fill",C(p.col)); s.textContent=p.sub; pg.appendChild(s); }
+      });
+    })();
+
+    render(0);
+  })();
+</script>
+</body>
+</html>
