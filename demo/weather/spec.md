@@ -4,6 +4,8 @@
 
 > **◇ SINGLE-WINDOW VALIDATED · scheduling edge, not a quantum speedup**
 
+Full Specification Sheet · Methodology & Sources
+
 This is the methodology sheet behind the interactive exhibit. It describes **how the weather service works** and what it measured on its one validation window. The exhibit's headline evidence base (the window lottery, the calibration-age null, the published-T1 error band) is drawn from the campaign's F81/F84 findings; the live nowcast numbers below are from the service's validation job `d9ao2hug26ic73df0iag` and are attributed to their source files in §5. Nothing here is invented for display.
 
 ## 1 · What this is

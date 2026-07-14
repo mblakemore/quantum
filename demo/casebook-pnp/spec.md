@@ -4,6 +4,8 @@
 
 > **◇ EVERY PROBABILITY MEASURED ON REAL HARDWARE · none of the odds were designed**
 
+Full Specification Sheet · Rules, Ceilings & Sources
+
 This sheet is the methodology companion to the printable booklet. The Casebook turns two certified hardware results into d100 dice games: every threshold on the deck is a **measured** number rounded to a d100, and the point of each game is that its **SWITCH column beats a classical ceiling that is a theorem**. Below: the rules, the ceiling each game beats, and how the deck maps to the certified result. Numbers are transcribed from `demo/casebook-pnp/index.html` and corroborated in `docs/campaign-arcs.md` (§4).
 
 ## 1 · Game 1 — The Interrogation (F82)

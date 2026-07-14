@@ -4,6 +4,8 @@
 
 > **✓ VERDICT — NEGATIVE-LOCAL-ENERGY-CERTIFIED (coherent) · 12σ below vacuum**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. Every number is drawn from the frozen grade file `results/exp119b_grade.json` and its job record. It certifies the campaign's most physically strange result: a local region measured with **less energy than its own ground state** — the "exotic-matter" sign associated with the Casimir effect and squeezed vacuum.
 
 ## 1 · The idea, in plain language

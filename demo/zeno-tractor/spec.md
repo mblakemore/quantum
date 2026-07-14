@@ -4,6 +4,8 @@
 
 > **✓ VERDICT — TRACTOR BEAM 92σ · LAW MATCH TO 0.5%**
 
+Full Specification Sheet
+
 This sheet is the complete, source-of-truth specification behind the interactive exhibit. Every number on the exhibit page is drawn from here; every number here is drawn from the frozen grade file `results/exp124_grade.json` and its job record `results/exp124_jobids.json`. Nothing is hand-tuned for display.
 
 ## 1 · The idea, in plain language

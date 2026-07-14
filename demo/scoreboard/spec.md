@@ -4,6 +4,8 @@
 
 > **◇ FOUND ON FOUR OF FIVE · theorem ceilings cleared 21σ to 341σ**
 
+Full Specification Sheet · Methodology & Sources
+
 This is the methodology sheet behind the visual scoreboard. The exhibit answers one question — **have we found quantum advantage?** — across **five scoreboards**, each cleared against an **exact theorem ceiling**, and it states plainly what is **not** claimed. Every σ below is transcribed verbatim from the exhibit (the tiles and the enumerated `rows` array); nothing is invented. Sources in §5.
 
 ## 1 · The verdict, in one line

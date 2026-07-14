@@ -4,6 +4,8 @@
 
 > **✓ DOUBLE WIN — survives quantum (90σ) · dies classical (33σ separation)**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. Every number is drawn from the frozen grade file `results/exp113_grade.json` and its job record. This was the **first experiment born under the R5 grader-selftest rule** — the grader passed its synthetic self-test before it was allowed to touch hardware counts.
 
 ## 1 · The idea, in plain language

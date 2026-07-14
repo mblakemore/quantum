@@ -4,6 +4,8 @@
 
 > **✓ QRAC CERTIFIED IN THE TWO-SIDED BAND · 110.5σ over classical, 5.2σ under the quantum law**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. Every number is drawn from the frozen grade file `results/exp128_hw_results.json` and its job record. It is the campaign's **first zero-two-qubit-gate advantage flight** — the whole trick fits in a single qubit's angles.
 
 ## 1 · The idea, in plain language

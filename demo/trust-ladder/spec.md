@@ -4,6 +4,8 @@
 
 > **✓ ONE-SIDED-DI RANDOMNESS CERTIFIED — 0.65 private bit/use at 5σ · full-DI quarantined**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page is drawn from here; every number here is drawn from the hardware records `results/exp137_hw_results.json` and `results/exp137_jobids.json`, and the campaign finding rows for F115 / F116 / F117. The top rung is a labelled null: we did **not** perform full device-independence.
 
 ## 1 · The idea, in plain language

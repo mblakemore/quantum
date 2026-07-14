@@ -4,6 +4,8 @@
 
 > **✓ CONSTANT-DEPTH SOLVER — P(valid) 0.9017, 437.8σ, full coset covered**
 
+Full Specification Sheet
+
 > **Scope — read this first**
 > This does **not** prove the complexity separation (QNC⁰ ≠ NC⁰) **on the chip**. That separation is **asymptotic** — it lives in the limit of large `n`, and the **theorem** carries the asymptotics. What the hardware certifies is a concrete instance: a **constant-depth** quantum circuit that solves the `n=4` problem at **90% fidelity**, covering the **whole** solution set, in **O(1) logical depth**. It is the complement to F54's deep-circuit wall — the campaign's one computational-genre result, scoped exactly.
 

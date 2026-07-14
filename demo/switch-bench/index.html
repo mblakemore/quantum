@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Switch-Bench Readout — a causal-order instrument that travels | The Quantum Museum</title>
-<meta name="description" content="A three-axis instrument for causal-order physics (CAUSAL, SCHEDULE, HOLD), flown intact on a chip it had never seen (ibm_kingston) and certifying every axis against the same frozen bounds — and ranking devices on axes QV/CLOPS/EPLG don't touch. Kingston edges the home chip. Real hardware (F112, job d9amd73v6alc73cs0lp0).">
+<meta name="description" content="A three-axis instrument for causal-order physics (CAUSAL, SCHEDULE, HOLD), flown intact on two chips it had never seen (ibm_kingston, ibm_fez) and certifying every axis against the same frozen bounds — ranking three Heron dies on axes QV/CLOPS/EPLG don't touch. Real hardware (F112, extended to 3 devices).">
 <link rel="stylesheet" href="../museum.css">
 <style>
   .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
@@ -148,14 +148,15 @@
   <section class="panel">
     <p class="panel-label">Exhibit A — The bench travels</p>
     <h2>Pick a chip; watch all three axes certify against the same bounds</h2>
-    <p class="sub">The home chip (<b>marrakesh</b>) is where the bench was built. The foreign chip (<b>kingston</b>) had
-    never seen it. Each axis is graded against the <b>identical frozen bound</b>. The foreign chip's marker is solid;
-    the home chip is the faint ring — so you can see the ranking at a glance.</p>
+    <p class="sub">The home chip (<b>marrakesh</b>) is where the bench was built; two <b>foreign</b> chips (<b>kingston</b>, <b>fez</b>)
+    had never seen it. Each axis is graded against the <b>identical frozen bound</b>, no retuning. The selected chip's
+    marker is solid; the others are faint rings — so you can see the ranking at a glance.</p>
 
     <div class="devsel" role="group" aria-label="Choose a chip">
       <span class="lbl">chip:</span>
       <button class="dbtn" data-dev="marrakesh" type="button">ibm_marrakesh <small>home · where it was built</small></button>
       <button class="dbtn on" data-dev="kingston" type="button">ibm_kingston <small>foreign · never seen before</small></button>
+      <button class="dbtn" data-dev="fez" type="button">ibm_fez <small>foreign · 3rd Heron die</small></button>
     </div>
 
     <div id="axes"></div>
@@ -167,9 +168,9 @@
   <section class="panel">
     <p class="panel-label">Exhibit B — The device leaderboard</p>
     <h2>It doesn't just travel — it ranks the chips</h2>
-    <p class="sub">Graded on the causal-order axes, the <b>foreign</b> chip actually beats the home chip on every causal
-    number and on the Zeno hold, tying on the rest. This is a benchmark that ranks devices on <b>axes QV, CLOPS and
-    EPLG never touch</b> — which chip does causal-order physics <b>better</b>.</p>
+    <p class="sub">Graded on the causal-order axes, the three dies rank <b>kingston ≥ marrakesh ≥ fez</b> — kingston leads on every
+    causal number and the Zeno hold; fez, the newest die, certifies every axis but sits <b>last</b>. This is a benchmark
+    that ranks devices on <b>axes QV, CLOPS and EPLG never touch</b> — which chip does causal-order physics <b>better</b>.</p>
     <div class="lb" id="leaderboard"></div>
   </section>
 
@@ -206,7 +207,7 @@
   </main>
   <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="sig">F112</span> · job <span class="sig">d9amd73v6alc73cs0lp0</span></span>
-    <span>ibm_kingston + ibm_marrakesh · full 3-axis bench · same frozen bounds</span>
+    <span>ibm_marrakesh + ibm_kingston + ibm_fez · full 3-axis bench · same frozen bounds</span>
     <span class="sp2"></span>
     <a href="./spec.html">Full Spec</a>
     <a href="../scoreboard/">Scoreboard</a>
@@ -231,18 +232,18 @@
     var AXES = [
       { key:"causal", name:"CAUSAL", color:"--cyan", metric:"witness W  ·  ideal 2.0",
         min:0, max:2.0, ideal:2.0, bound:0.10, boundLab:"classical ≈0", boundType:"floor",
-        vals:{marrakesh:1.9265, kingston:1.9533}, edge:"kingston",
-        comp:{marrakesh:"capacity R̄ 0.498", kingston:"capacity R̄ 0.525"},
+        vals:{marrakesh:1.9265, kingston:1.9533, fez:1.8948}, edge:"kingston",
+        comp:{marrakesh:"capacity R̄ 0.498", kingston:"capacity R̄ 0.525", fez:"capacity R̄ 0.508"},
         badge:"PASS-CAUSAL", exUrl:"../switch/", exLab:"the Causal Switch" },
       { key:"schedule", name:"SCHEDULE", color:"--violet", metric:"order-imbalance D_order  ·  ideal 0",
         min:0, max:0.05, ideal:0, bound:0.0223, boundLab:"bound 0.0223", boundType:"ceiling",
-        vals:{marrakesh:null, kingston:0.0130}, edge:null,
-        comp:{marrakesh:"order-symmetric (home)", kingston:"order-symmetric"},
+        vals:{marrakesh:null, kingston:0.0130, fez:0.0185}, edge:null,
+        comp:{marrakesh:"order-symmetric (home)", kingston:"order-symmetric", fez:"symmetric · split-half guard flagged"},
         badge:"ORDER-SYMMETRIC", exUrl:null, exLab:"F96 hidden-order" },
       { key:"hold", name:"HOLD", color:"--amber", metric:"Zeno tractor sep  ·  ideal ~0.73",
         min:0, max:0.75, ideal:0.73, bound:0.30, boundLab:"bar 0.30", boundType:"floor",
-        vals:{marrakesh:0.624, kingston:0.6487}, edge:"kingston",
-        comp:{marrakesh:"QND q 0.987", kingston:"QND q 0.9847"},
+        vals:{marrakesh:0.624, kingston:0.6487, fez:0.5247}, edge:"kingston",
+        comp:{marrakesh:"QND q 0.987", kingston:"QND q 0.9847", fez:"QND q 0.9708"},
         badge:"HOLD-CERTIFIED", exUrl:"../zeno-tractor/", exLab:"the Zeno Tractor Beam" }
     ];
     console.assert(AXES[0].vals.kingston>AXES[0].vals.marrakesh && AXES[2].vals.kingston>AXES[2].vals.marrakesh, "kingston edges causal+hold");
@@ -265,7 +266,7 @@
       // ideal tick
       s+='<line x1="'+gx(ax.ideal)+'" y1="28" x2="'+gx(ax.ideal)+'" y2="40" stroke="'+C("--good")+'" stroke-width="1.4" opacity="0.7"/>';
       // device markers
-      ["marrakesh","kingston"].forEach(function(dev){
+      ["marrakesh","kingston","fez"].forEach(function(dev){
         var v=ax.vals[dev]; if(v===null) return;
         var active = dev===state.dev, x=gx(v);
         if(active){
@@ -297,6 +298,7 @@
             '<div class="ax-nums">'+
               '<span class="dv '+(mAct?"act":"")+'">marrakesh <b>'+mNum+'</b></span>'+
               '<span class="dv '+(kAct?"act":"")+'">kingston <b>'+kv.toFixed(4)+'</b>'+(kAct?edgeMark:'')+'</span>'+
+              '<span class="dv '+(dev==="fez"?"act":"")+'">fez <b>'+(ax.vals.fez==null?"symmetric ✓":ax.vals.fez.toFixed(4))+'</b></span>'+
               '<span class="comp">'+ax.comp[dev]+'</span>'+
             '</div>'+
             '<div class="ax-link">axis → '+(ax.exUrl?'<a href="'+ax.exUrl+'">'+ax.exLab+'</a>':ax.exLab)+'</div>'+
@@ -306,8 +308,10 @@
       var dev=state.dev;
       if(dev==="kingston"){
         verdictBig.innerHTML='<b>The foreign chip.</b> The full three-axis bench, flown on a chip it had <b>never seen</b> — one job, 77 pubs, 208,000 shots — certifies <span class="ok">all three axes</span> against the same frozen bounds, no retuning. Causal-order physics travels.';
+      } else if(dev==="fez"){
+        verdictBig.innerHTML='<b>The second foreign chip — F112 extended to a 3rd die.</b> ibm_fez, also never seen, certifies all three axes against the same frozen bounds — but <b>not a clean 3/3</b>: its SCHEDULE data tripped the split-half floor-transfer guard (noisier than the other two), and it ranks <span class="ok">last</span> on the causal and Zeno-hold numbers. Device-independence holds across three dies; the bench ranks fez weakest.';
       } else {
-        verdictBig.innerHTML='<b>The home chip.</b> Where the bench was built and first certified all three axes. Flip to <b>kingston</b> to watch the same bench certify on a chip it had never seen.';
+        verdictBig.innerHTML='<b>The home chip.</b> Where the bench was built and first certified all three axes. Flip to <b>kingston</b> or <b>fez</b> to watch the same bench certify on chips it had never seen.';
       }
       document.querySelectorAll(".dbtn").forEach(function(b){ var on=b.dataset.dev===dev; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
     }
@@ -317,10 +321,10 @@
     (function(){
       var ns="http://www.w3.org/2000/svg";
       var ROWS=[
-        { lab:"CAUSAL witness W", sub:"ideal 2.0", m:1.9265, k:1.9533, min:1.85, max:2.0, kwin:true },
-        { lab:"CAUSAL capacity R̄", sub:"ideal 0.533", m:0.4978, k:0.5245, min:0.45, max:0.5333, kwin:true },
-        { lab:"HOLD tractor sep", sub:"bar 0.30", m:0.624, k:0.6487, min:0.55, max:0.70, kwin:true },
-        { lab:"HOLD QND fidelity q", sub:"ideal 1.0", m:0.987, k:0.9847, min:0.97, max:1.0, kwin:false }
+        { lab:"CAUSAL witness W", sub:"ideal 2.0", m:1.9265, k:1.9533, f:1.8948, min:1.85, max:2.0 },
+        { lab:"CAUSAL capacity R̄", sub:"ideal 0.533", m:0.4978, k:0.5245, f:0.5080, min:0.45, max:0.5333 },
+        { lab:"HOLD tractor sep", sub:"bar 0.30", m:0.624, k:0.6487, f:0.5247, min:0.50, max:0.70 },
+        { lab:"HOLD QND fidelity q", sub:"ideal 1.0", m:0.987, k:0.9847, f:0.9708, min:0.965, max:1.0 }
       ];
       var lb=document.getElementById("leaderboard");
       ROWS.forEach(function(r){
@@ -333,13 +337,17 @@
         svg+='<circle cx="'+px(r.m)+'" cy="17" r="5" fill="none" stroke="'+C("--ink-3")+'" stroke-width="1.6"/>';
         // kingston (foreign, solid cyan)
         svg+='<circle cx="'+px(r.k)+'" cy="17" r="6" fill="'+C("--card")+'" stroke="'+C("--cyan")+'" stroke-width="2.6"/>';
+        // fez (foreign, solid amber)
+        svg+='<circle cx="'+px(r.f)+'" cy="17" r="6" fill="'+C("--card")+'" stroke="'+C("--amber")+'" stroke-width="2.6"/>';
         svg+='</svg>';
-        var winTag = r.kwin ? '<span class="win">kingston ▲</span>' : '<span class="m">tie</span>';
+        var trio={marrakesh:r.m, kingston:r.k, fez:r.f};
+        var leader=Object.keys(trio).reduce(function(a,b){return trio[a]>=trio[b]?a:b;});
+        var winTag='<span class="win">'+leader+' ▲</span>';
         lb.innerHTML +=
           '<div class="lbrow">'+
             '<div class="lbl">'+r.lab+'<small>'+r.sub+'</small></div>'+
             '<div class="lbbars">'+svg+
-              '<div class="lbnums"><span class="m">home '+r.m.toFixed(4)+'</span><span class="k">foreign '+r.k.toFixed(4)+'</span>'+winTag+'</div>'+
+              '<div class="lbnums"><span class="m">mrk '+r.m.toFixed(3)+'</span><span class="k">king '+r.k.toFixed(3)+'</span><span style="color:var(--amber)">fez '+r.f.toFixed(3)+'</span>'+winTag+'</div>'+
             '</div>'+
           '</div>';
       });

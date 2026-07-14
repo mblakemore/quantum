@@ -4,6 +4,8 @@
 
 > **✓ CAPACITY ACTIVATED — 0.0436 bits/use, R̄ = +0.5034 ± 0.0091 = 55.6σ above zero**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. The classic bot in the game is not weak — it is **as good as any machine, strategy, or intelligence can ever be** under ordinary cause-and-effect, and that best-possible score is a coin flip. The quantum bot's edge traces to a single public job ID and a frozen pre-registration. **Note on numbering:** this exhibit and its cited job `d983ek52su3c739ip92g` are the **N=2 finding, F83 (Exp106)** — the two-channel version of zero-capacity channel activation.
 
 ## 1 · The idea, in plain language

@@ -4,6 +4,8 @@
 
 > **✓ ICO REFRIGERATION CERTIFIED — split 21.1σ over causal 0 · full engine cycle runs (W1-loss kept)**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page is drawn from here; every number here is drawn from the frozen grade files `results/exp108_grade.json` and siblings, and the campaign finding rows for F86 / F88 / F95. Nothing is hand-tuned for display.
 
 ## 1 · The idea, in plain language

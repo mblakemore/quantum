@@ -4,6 +4,8 @@
 
 > **✓ VERDICT — DARWINISM-HULL-VIOLATED (both branches) · 22σ & 52σ**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit is drawn from here; every number here is drawn from the frozen grade file `results/exp120_grade.json` and its job record `results/exp120_jobids.json`. It is the crown jewel of Horizons-2 and the campaign's deepest certified apparatus — **63 two-qubit gates**.
 
 ## 1 · The idea, in plain language

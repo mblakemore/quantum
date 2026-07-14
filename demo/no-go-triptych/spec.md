@@ -4,6 +4,8 @@
 
 > **✓ THREE THEOREM-WALLS BREACHED — 53σ · 217σ · 196σ, each with an executed null**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. It gathers three **independent no-go theorems** — each a mathematical proof that **no classical strategy** can exceed a certain ceiling — and shows all three ceilings **breached on the same silicon**, each with an **executed classical control** that lands at the wall. Every number is drawn from the frozen grade files of the three experiments.
 
 ## 1 · What is a no-go theorem?

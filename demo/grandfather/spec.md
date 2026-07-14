@@ -4,6 +4,8 @@
 
 > **✓ VERDICT — PARADOX SUPPRESSED 53× · FINGERPRINT 78σ**
 
+Full Specification Sheet
+
 This sheet is the complete, source-of-truth specification behind the interactive exhibit. Every number on the exhibit page is drawn from here; every number here is drawn from the frozen grade file `results/exp123_grade.json` and its job record `results/exp123_jobids.json`. Nothing is hand-tuned for display.
 
 ## 1 · The idea, in plain language

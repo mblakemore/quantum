@@ -4,6 +4,8 @@
 
 > **✓ VERDICT — CONTEXTUALITY CERTIFIED · 96.9% · 196σ**
 
+Full Specification Sheet
+
 This sheet is the complete, source-of-truth specification behind the interactive exhibit. Every number on the exhibit page is drawn from here; every number here is drawn from the frozen results file `results/exp126_hw_results.json` and its job record `results/exp126_jobids.json`. Nothing is hand-tuned for display.
 
 ## 1 · The idea, in plain language

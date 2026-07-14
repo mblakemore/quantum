@@ -4,6 +4,8 @@
 
 > **◇ 3 RUNGS + THE STEP OFF · every number pre-registered & frozen-rule-graded**
 
+Full Specification Sheet · Concept & Sources
+
 This sheet is the concept-and-sources companion to the exhibit. The exhibit makes one claim: the campaign **climbed Pearl's whole Ladder of Causation on a quantum processor without planning to** — one real experiment per rung — and then took a step Pearl's framework can only name by its absence. Here is the framework, how each rung maps to the campaign's work, and which findings populate it. Every number is transcribed from the exhibit page (itself an allowed source) and corroborated in `docs/campaign-arcs.md` and the finding files where noted in §5.
 
 ## 1 · The concept — Pearl's three rungs

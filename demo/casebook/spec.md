@@ -4,6 +4,8 @@
 
 > **✓ BOUND BEATEN ON TWO CHIPS — p̂ = 0.9769 (216.8σ) · replicated 0.9738 on ibm_fez**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. The game the exhibit lets you play is a real discrimination game with a **mathematically proven difficulty ceiling**; the "switch kit" you earn after ten rounds plays with odds **measured on real quantum hardware**. Every threshold traces to a public job ID and a frozen pre-registration.
 
 ## 1 · The idea, in plain language

@@ -4,6 +4,8 @@
 
 > **✓ WITNESS FIRES ON HARDWARE — W = +1.781 (F75) · loophole closed at ≥72σ (F77)**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page is drawn from the pre-registered switch runs on IBM's Heron-r2 processors — measured, not modeled (the only fitted object is the `2·cos(φ/2)` line, which the measurements confirmed). The finding chain runs simulation → hardware → adversarial control: **F73** (hardest classical adversary, sim) → **F74** (continuous law, sim) → **F75** (fires on real silicon) → **F76** (cross-device cosine law) → **F77** (classical-mixture loophole closed same-device, drift-free).
 
 ## 1 · The idea, in plain language

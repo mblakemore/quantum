@@ -4,6 +4,8 @@
 
 > **✓ HEISENBERG ADVANTAGE CERTIFIED — vs an executed separable reference · persists to N=5**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page is drawn from here; every number here is drawn from the hardware records `results/exp130_hw_results.json` (the ladder) and `results/exp129_hw_results.json` (the N=3 certification), and the campaign finding rows for F108 / F109. Nothing is hand-tuned for display.
 
 ## 1 · The idea, in plain language

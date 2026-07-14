@@ -4,6 +4,8 @@
 
 > **✓ VERDICT — HERALDED-MIRROR-CERTIFIED (+ plus branch) · 56σ & 59σ**
 
+Full Specification Sheet
+
 This sheet is the source-of-truth specification behind the interactive exhibit. Every number is drawn from the frozen grade file `results/exp121_grade.json` and its job record `results/exp121_jobids.json`. It runs on the **same certified telescope as F98** (Quantum Darwinism) — byte-identical skeleton, site, and window — so the two findings share one calibrated apparatus.
 
 ## 1 · The idea, in plain language
