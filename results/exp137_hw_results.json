@@ -1,0 +1,24 @@
+{
+ "job_id": "d9ansru6hjac73fenigg",
+ "backend": "ibm_marrakesh",
+ "substrate": "claude-opus-4-8",
+ "H_min_bits": 0.6823003163652529,
+ "H_min_se_boot": 0.006287823040370638,
+ "H_min_minus_5se": 0.6508612011633997,
+ "S3": 1.6876406965936686,
+ "S3_null": 0.006111236729586664,
+ "H_min_null": -0.0,
+ "ns_violation": 0.0032109273459666114,
+ "sentinels": [
+  0.994,
+  0.98675
+ ],
+ "gates": {
+  "W1_STEERABLE": 1.0,
+  "W2_RIGOROUS_1SDI_RANDOMNESS": true,
+  "W3_NULL": 1.0,
+  "G_PHYSICAL": true,
+  "G_SENT": true
+ },
+ "scope": "RIGOROUS 1SDI randomness of Alice's outcome from measured assemblage (no Werner model); one-sided trust (Bob), locality open, crosstalk bounded"
+}
