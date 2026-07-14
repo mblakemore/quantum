@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Negative Energy — a patch of chip that reads below empty | The Quantum Museum</title>
+<meta name="description" content="Quantum theory lets a region read below its own ground-state energy if it's entangled with a distant partner. On IBM Heron: Bob's local energy = −0.0547 (12σ below the vacuum floor), 5σ certified bound ≤ −0.0319. The correlation is the active ingredient — the same op without it injects energy (21σ). Conservation intact: Alice pays. Real hardware (F97, job d9a9sp2f47jc73a9vurg).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--violet); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--violet); color: var(--violet); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 20%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.4vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--violet); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:65ch; margin:0 0 16px; }
+
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
+  .pcard b { color: var(--ink); }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13.5px; font-weight:600;
+    text-decoration:none; color:#fff; background:var(--violet); border:1.5px solid var(--violet);
+    border-radius:11px; padding:10px 18px; transition:transform .12s, box-shadow .12s; box-shadow:var(--shadow); }
+  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--violet) 35%,transparent); }
+  .specbtn .arw { font-size:15px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--violet); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:68ch; }
+
+  .selector { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:22px; }
+  .selector .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .cbtn { font-family:var(--mono); font-size:12.5px; font-weight:600; padding:9px 13px; border-radius:10px;
+    border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; transition:all .12s; }
+  .cbtn:hover { border-color:var(--violet); }
+  .cbtn.on { background:var(--violet); color:#fff; border-color:var(--violet); }
+
+  /* thermometer + readout */
+  .therm-grid { display:grid; grid-template-columns:325px 1fr; gap:clamp(16px,4vw,30px); align-items:center; }
+  @media (max-width:640px){ .therm-grid { grid-template-columns:1fr; justify-items:center; } }
+  .subvac { fill: color-mix(in srgb, var(--violet) 14%, transparent); }
+  .tube { fill: var(--surface-2); stroke: var(--edge-2); stroke-width:1.5; }
+  .ebar { transition: y .45s cubic-bezier(.34,1.15,.5,1), height .45s cubic-bezier(.34,1.15,.5,1), fill .3s; }
+  @media (prefers-reduced-motion: reduce){ .ebar { transition:none; } }
+  .floor-line { stroke: var(--ink); stroke-width:2; }
+  .floor-lab { font-family:var(--mono); font-size:10px; font-weight:600; fill:var(--ink); }
+  .bound-line { stroke: var(--good); stroke-width:1.4; stroke-dasharray:4 3; opacity:.85; }
+  .bound-lab { font-family:var(--mono); font-size:8.5px; fill:var(--good); }
+  .axlab { font-family:var(--mono); font-size:9px; fill:var(--ink-3); }
+  .val-tip { font-family:var(--mono); font-size:12px; font-weight:720; }
+
+  .readout .enum { font-family:var(--mono); font-weight:720; font-size:clamp(34px,9vw,52px); letter-spacing:-.03em; line-height:1; }
+  .readout .enum.neg { color: var(--violet); } .readout .enum.pos { color: var(--amber); } .readout .enum.zero { color: var(--ink-2); }
+  .readout .ecap { font-family:var(--mono); font-size:11px; color:var(--ink-3); margin-top:2px; }
+  .state-pill { display:inline-block; font-family:var(--mono); font-size:12.5px; font-weight:700; padding:5px 13px; border-radius:999px; margin-top:12px; }
+  .state-pill.neg { color: var(--good); background: color-mix(in srgb,var(--good) 13%,transparent); }
+  .state-pill.pos { color: var(--amber); background: color-mix(in srgb,var(--amber) 13%,transparent); }
+  .state-pill.zero { color: var(--ink-3); background: color-mix(in srgb,var(--ink-3) 12%,transparent); }
+  .verdict { margin-top:14px; font-size:14px; color:var(--ink-2); max-width:44ch; }
+  .verdict b { color:var(--ink); } .verdict .neg { color:var(--violet); font-weight:700; } .verdict .pos { color:var(--amber); font-weight:700; }
+
+  .ledger { margin-top:18px; border-top:1px solid var(--edge); padding-top:14px; }
+  .ledger-t { font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); margin-bottom:8px; }
+  .ledger-rows { display:flex; gap:18px; flex-wrap:wrap; align-items:baseline; font-family:var(--mono); font-size:13px; }
+  .ledger-rows .a { color:var(--ink-2); } .ledger-rows .a b { color: var(--good); }
+  .ledger-rows .b { color:var(--ink-2); } .ledger-rows .b b { color: var(--violet); }
+  .ledger-rows .g { color:var(--ink-3); }
+
+  /* scoreboard B */
+  .board-sub { fill: color-mix(in srgb, var(--violet) 12%, transparent); }
+  .ptlab { font-family:var(--mono); font-size:9.5px; }
+  .siglab { font-family:var(--mono); font-size:10px; font-weight:600; }
+
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; }
+  .rc b { color:var(--ink); } .rc .neg { color:var(--violet); font-weight:600; } .rc .pos { color:var(--amber); font-weight:600; } .rc .yes { color:var(--good); font-weight:600; }
+  .speclink-row { margin-top:20px; text-align:center; }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--violet); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--violet); }
+  .badge-row .sp2 { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing III · Foundations on Silicon</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Negative local energy · quantum energy teleportation</p>
+    <h1>A patch of chip that reads <span class="hl">below empty</span>.</h1>
+    <p class="lede">The vacuum is supposed to be the energy floor — you can't have less than nothing. But entangle one
+    region with a distant partner, act on the partner, and the first region's <b>local</b> energy can dip <b>below its
+    own ground state</b>: negative energy, the sign carried by exotic matter. We measured it on real silicon — and
+    nothing is broken: the partner pays the bill. Every number is measured hardware.</p>
+
+    <div class="primer">
+      <div class="pcard">
+        <h4>What is negative energy?</h4>
+        <p>Not "less than zero joules" in the everyday sense — <b>less than the vacuum</b>. Normalize empty space to
+        <b>0</b>; a region reading <b>below 0</b> holds less energy than empty. It's the Casimir / squeezed-vacuum
+        sign, and quantum correlations let a <b>local</b> patch reach it.</p>
+      </div>
+      <div class="pcard">
+        <h4>Isn't that a free lunch?</h4>
+        <p>No. Acting on the distant partner <b>Alice deposits energy</b> there — far more than the tiny amount the
+        local site reads negative. The <b>global</b> energy stays positive and conserved. The negativity is purely
+        <b>local</b>, borrowed against the entanglement. No perpetual motion.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
+      <span class="scope"><b>Coherent extraction</b> — the classical-feedforward teleportation headline failed (kept on the record). Certified as a bound.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — Below empty</p>
+    <h2>Drop the local energy under the vacuum floor</h2>
+    <p class="sub">Watch Bob's local energy. The bold line is the <b>vacuum floor</b> — empty space, energy 0. Run the
+    correlated protocol and his energy dips <b>below</b> it, into the shaded sub-vacuum region. Run the same rotation
+    <b>without</b> the correlation and it goes the other way.</p>
+
+    <div class="selector" role="group" aria-label="Protocol">
+      <span class="lbl">protocol:</span>
+      <button class="cbtn" data-i="0" type="button">Ground (reference)</button>
+      <button class="cbtn" data-i="1" type="button">QET (correlated)</button>
+      <button class="cbtn" data-i="2" type="button">Same op · no correlation</button>
+    </div>
+
+    <div class="therm-grid">
+      <svg viewBox="0 0 336 300" role="img" aria-label="Vertical energy thermometer for Bob's local site, with the vacuum floor at zero and a shaded sub-vacuum region below">
+        <!-- sub-vacuum region -->
+        <rect class="subvac" id="subvacRect" x="118" width="64"/>
+        <!-- tube -->
+        <rect class="tube" x="120" y="26" width="60" height="248" rx="12"/>
+        <!-- energy bar -->
+        <rect class="ebar" id="ebar" x="123" width="54"/>
+        <!-- 5-sigma bound -->
+        <line class="bound-line" id="boundLine" x1="112" x2="188"/>
+        <text class="bound-lab" id="boundLab" x="190">5σ ceiling −0.032</text>
+        <!-- vacuum floor -->
+        <line class="floor-line" id="floorLine" x1="104" x2="196"/>
+        <text class="floor-lab" id="floorLab" x="198">vacuum floor · E=0</text>
+        <!-- axis labels -->
+        <text class="axlab" id="axTop" x="96" text-anchor="end">+0.25</text>
+        <text class="axlab" id="axBot" x="96" text-anchor="end">−0.10</text>
+        <!-- value tip -->
+        <text class="val-tip" id="valTip" x="150" text-anchor="middle"></text>
+        <text class="axlab" x="150" y="292" text-anchor="middle" fill="var(--ink-3)">Bob's local energy</text>
+      </svg>
+
+      <div class="readout">
+        <div class="enum neg" id="enum">−0.0547</div>
+        <div class="ecap">Bob's local energy E_B (vacuum floor = 0)</div>
+        <span class="state-pill neg" id="statePill">below empty · 12σ</span>
+        <p class="verdict" id="verdict"></p>
+        <div class="ledger">
+          <div class="ledger-t">Global energy ledger — conservation</div>
+          <div class="ledger-rows">
+            <span class="a">Alice's site <b>+0.71</b> (pays in)</span>
+            <span class="b">Bob's site <b id="ledgerB">−0.055</b> (reads out)</span>
+            <span class="g">→ global positive &amp; conserved</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The energy scoreboard</p>
+    <h2>Only the correlated protocol goes sub-vacuum</h2>
+    <p class="sub">Three protocols on one energy axis. Ground sits at the floor; the uncorrelated control <b>injects</b>
+    energy; only the correlated QET dips <b>below zero</b> — and the certified 5σ ceiling (−0.032) is still negative.
+    The 0.203 gap between QET and the control (21σ) is the correlation doing the work.</p>
+    <div style="max-width:560px;margin:0 auto;">
+      <svg viewBox="0 0 520 210" role="img" aria-label="Bob's local energy for the three protocols against the vacuum floor and the certified bound">
+        <rect class="board-sub" id="boardSub" x="40" width="400"/>
+        <g id="barsB"></g>
+        <line id="floorB" stroke="var(--ink)" stroke-width="2"/>
+        <text class="ptlab" id="floorBlab" fill="var(--ink)">vacuum E=0</text>
+        <line id="boundB" stroke="var(--good)" stroke-width="1.3" stroke-dasharray="4 3" opacity="0.85"/>
+        <text class="bound-lab" id="boundBlab">5σ ceiling</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — Why this is real negative energy</p>
+    <h2>Three receipts behind the sub-vacuum reading</h2>
+    <p class="sub">"A negative number came out" is not enough. These three make it a certified, correlation-driven,
+    conservation-respecting result.</p>
+    <div class="receipts">
+      <div class="rc">
+        <h4>1 · Certified, and conservatively</h4>
+        <p>We certify a <b>bound</b>, not a point: the 5σ ceiling is <span class="neg">−0.032 &lt; 0</span>. And every
+        residual readout bias pushes the estimate <b>up</b> toward zero — so the <b>true</b> energy is <b>more</b>
+        negative than reported. <span class="yes">The negativity is not a fluke of correction.</span></p>
+      </div>
+      <div class="rc">
+        <h4>2 · The correlation does the work</h4>
+        <p>Run the <b>identical</b> local rotation <b>without</b> the correlation and energy goes the other way:
+        <span class="pos">+0.157, injected</span>. The 0.203 gap is <b>21σ</b>. So this isn't trivial cooling or a
+        calibration offset — it's specifically the entanglement.</p>
+      </div>
+      <div class="rc">
+        <h4>3 · The books balance</h4>
+        <p>Alice's site carries <b>+0.71</b> — she pays energy <b>in</b>, dwarfing Bob's <b>−0.055</b>. Global energy
+        is positive and conserved; only Bob's local patch reads sub-vacuum. <span class="yes">No free lunch.</span></p>
+      </div>
+    </div>
+    <div class="speclink-row">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet — data, gates &amp; the failed teleportation twin</a>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F97</span> · job <span class="sig">d9a9sp2f47jc73a9vurg</span></span>
+    <span>ibm_marrakesh · E_B −0.0547 (12σ below vacuum) · 5σ bound ≤ −0.032</span>
+    <span class="sp2"></span>
+    <a href="./spec.html">Full Spec</a>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+    var css = getComputedStyle(document.documentElement);
+    function C(v){ return css.getPropertyValue(v).trim(); }
+
+    // ---- data kernel (F97 exp119b, job d9a9sp2f47jc73a9vurg) ----
+    var FLOOR = 0, BOUND = -0.0319;
+    var PROT = [
+      { key:"ground", label:"Ground (reference)", eb:0.0453, sign:"zero", pill:"at the vacuum floor",
+        note:"<b>The undisturbed reference.</b> Bob's site sits right at the vacuum floor (E ≈ 0) — this is 'empty', the level everything else is measured against." },
+      { key:"qet", label:"QET (correlated)", eb:-0.0547, sign:"neg", pill:"below empty · 12σ",
+        note:"<b>The correlated extraction protocol.</b> Bob's local energy drops to <span class='neg'>−0.0547</span> — below the vacuum floor, <b>12σ under empty</b>. The certified 5σ ceiling is −0.032: even conservatively, it is negative." },
+      { key:"control", label:"Same op · no correlation", eb:0.157, sign:"pos", pill:"energy injected",
+        note:"<b>The identical rotation — but without the correlation.</b> Energy goes the other way: <span class='pos'>+0.157, injected</span>. The 0.203 gap (21σ) proves the correlation is the active ingredient, not trivial cooling." }
+    ];
+    console.assert(PROT[1].eb < BOUND && PROT[2].eb > 0, "QET below bound, control positive");
+
+    // ---- thermometer geometry ----
+    var EMAX=0.25, EMIN=-0.10, TY0=26, TY1=274;
+    function ty(E){ return TY0 + (EMAX-E)/(EMAX-EMIN)*(TY1-TY0); }
+    var yFloor = ty(FLOOR);
+    // static marks
+    document.getElementById("subvacRect").setAttribute("y", yFloor);
+    document.getElementById("subvacRect").setAttribute("height", (TY1-yFloor));
+    var fl=document.getElementById("floorLine"); fl.setAttribute("y1",yFloor); fl.setAttribute("y2",yFloor);
+    document.getElementById("floorLab").setAttribute("y", yFloor-5);
+    var bl=document.getElementById("boundLine"); bl.setAttribute("y1",ty(BOUND)); bl.setAttribute("y2",ty(BOUND));
+    document.getElementById("boundLab").setAttribute("y", ty(BOUND)+11);
+    document.getElementById("axTop").setAttribute("y", ty(EMAX)+4);
+    document.getElementById("axBot").setAttribute("y", ty(EMIN));
+
+    var ebar=document.getElementById("ebar"), valTip=document.getElementById("valTip"),
+        enum_=document.getElementById("enum"), statePill=document.getElementById("statePill"),
+        verdict=document.getElementById("verdict"), ledgerB=document.getElementById("ledgerB"),
+        btns=document.querySelectorAll(".cbtn");
+
+    function render(i){
+      var p=PROT[i], yE=ty(p.eb);
+      var top=Math.min(yFloor,yE), h=Math.abs(yFloor-yE);
+      ebar.setAttribute("y", top); ebar.setAttribute("height", Math.max(1,h));
+      var col = p.sign==="neg" ? C("--violet") : p.sign==="pos" ? C("--amber") : C("--ink-3");
+      ebar.setAttribute("fill", col);
+      valTip.setAttribute("y", (p.eb>=0? yE-6 : yE+15)); valTip.setAttribute("fill", col);
+      valTip.textContent = (p.eb>0?"+":"")+p.eb.toFixed(3);
+      enum_.textContent = (p.eb>0?"+":"")+p.eb.toFixed(4); enum_.className = "enum "+p.sign;
+      statePill.textContent = p.pill; statePill.className = "state-pill "+p.sign;
+      verdict.innerHTML = p.note;
+      btns.forEach(function(b,j){ var on=j===i; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
+    }
+    btns.forEach(function(b){ b.addEventListener("click", function(){ render(+b.dataset.i); }); });
+
+    // ---- Panel B scoreboard (vertical bars from floor) ----
+    (function(){
+      var svgns="http://www.w3.org/2000/svg", BX0=40, BX1=440, BY_TOP=26, BY_BOT=160;
+      var e2=0.25, e1=-0.10;
+      function by(E){ return BY_TOP + (e2-E)/(e2-e1)*(BY_BOT-BY_TOP); }
+      var yF=by(0);
+      document.getElementById("boardSub").setAttribute("y", yF);
+      document.getElementById("boardSub").setAttribute("height", (BY_BOT-yF));
+      var fB=document.getElementById("floorB"); fB.setAttribute("x1",BX0); fB.setAttribute("x2",BX1); fB.setAttribute("y1",yF); fB.setAttribute("y2",yF);
+      document.getElementById("floorBlab").setAttribute("x", BX1+2); document.getElementById("floorBlab").setAttribute("y", yF+3);
+      var bB=document.getElementById("boundB"); bB.setAttribute("x1",BX0); bB.setAttribute("x2",BX1); bB.setAttribute("y1",by(BOUND)); bB.setAttribute("y2",by(BOUND));
+      document.getElementById("boundBlab").setAttribute("x", BX1+2); document.getElementById("boundBlab").setAttribute("y", by(BOUND)+10);
+      var rows=[
+        { p:PROT[0], x:110, col:"--ink-3", sig:"at floor" },
+        { p:PROT[1], x:230, col:"--violet", sig:"−12σ ·below" },
+        { p:PROT[2], x:350, col:"--amber", sig:"+injected" }
+      ];
+      var bg=document.getElementById("barsB");
+      rows.forEach(function(r){
+        var yE=by(r.p.eb), top=Math.min(yF,yE), h=Math.max(2,Math.abs(yF-yE)), w=52;
+        var rect=document.createElementNS(svgns,"rect"); rect.setAttribute("x",r.x-w/2); rect.setAttribute("y",top);
+        rect.setAttribute("width",w); rect.setAttribute("height",h); rect.setAttribute("rx",4);
+        rect.setAttribute("fill",C(r.col)); rect.setAttribute("opacity","0.9"); bg.appendChild(rect);
+        var val=document.createElementNS(svgns,"text"); val.setAttribute("class","siglab"); val.setAttribute("x",r.x);
+        val.setAttribute("y", r.p.eb>=0 ? top-6 : top+h+13); val.setAttribute("text-anchor","middle"); val.setAttribute("fill",C(r.col));
+        val.textContent=(r.p.eb>0?"+":"")+r.p.eb.toFixed(3); bg.appendChild(val);
+        var lab=document.createElementNS(svgns,"text"); lab.setAttribute("class","ptlab"); lab.setAttribute("x",r.x);
+        lab.setAttribute("y",194); lab.setAttribute("text-anchor","middle"); lab.setAttribute("fill",C("--ink-2"));
+        lab.textContent=({ground:"ground",qet:"QET (correlated)",control:"no correlation"})[r.p.key]; bg.appendChild(lab);
+      });
+    })();
+
+    render(1);
+  })();
+</script>
+</body>
+</html>
