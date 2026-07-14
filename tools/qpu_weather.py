@@ -143,10 +143,12 @@ def main():
         ro1 = d["ro1"].get("1" * len(line), 0) / sum(d["ro1"].values())
         shallow = p_all_zero(d["mir_shallow"])
         deep = p_all_zero(d["mir_deep"])
-        # nowcast: fidelity decays ~exp(-depth); extrapolate shallow->deep
-        # P0 ~ p_layer^K -> p_layer = shallow^(1/K_shallow); deep_pred=p_layer^K_deep
-        p_layer = shallow ** (1.0 / K_SHALLOW) if shallow > 0 else 0
-        nowcast_deep = p_layer ** K_DEEP
+        # nowcast: SPAM-corrected extrapolation. P0(K) ~ SPAM * f^K, SPAM from
+        # the readout probe (prep+measure floor), f = per-K-block gate fidelity
+        # from the shallow point. deep_pred = SPAM * (P0_shallow/SPAM)^K_deep.
+        spam = max(ro0, 1e-6)
+        f_layer = (shallow / spam) ** (1.0 / K_SHALLOW) if shallow > 0 else 0
+        nowcast_deep = spam * f_layer ** K_DEEP
         vend = vendor_forecast(line, err, ro, man["n2_deep"])
         e_now = abs(nowcast_deep - deep)
         e_vend = abs(vend - deep)
