@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
 <title>Quantum Switch — a causal-order demo on real silicon</title>
 <style>
   :root {
@@ -22,8 +26,8 @@
   @media (prefers-color-scheme: light) {
     :root {
       --ink: #eef0f5; --surface: #ffffff; --surface-2: #f4f6fb; --edge: #dce0ea;
-      --text: #171b26; --muted: #5c6479; --faint: #9aa2b5;
-      --coherent: #10a89f; --coherent-dim: #79ccc7; --measured: #b9791b;
+      --text: #171b26; --muted: #5c6479; --faint: #5f6a83;
+      --coherent: #0a6b66; --coherent-dim: #79ccc7; --measured: #8f5d10;
       --classical: #7b8296; --grid: rgba(92,100,121,0.16);
       --live-accent: var(--coherent); --live-accent-soft: rgba(16,168,159,0.12);
     }
@@ -36,8 +40,8 @@
   }
   :root[data-theme="light"] {
     --ink: #eef0f5; --surface: #ffffff; --surface-2: #f4f6fb; --edge: #dce0ea;
-    --text: #171b26; --muted: #5c6479; --faint: #9aa2b5; --coherent: #10a89f; --coherent-dim: #79ccc7;
-    --measured: #b9791b; --classical: #7b8296; --grid: rgba(92,100,121,0.16);
+    --text: #171b26; --muted: #5c6479; --faint: #5f6a83; --coherent: #0a6b66; --coherent-dim: #79ccc7;
+    --measured: #8f5d10; --classical: #7b8296; --grid: rgba(92,100,121,0.16);
     --live-accent-soft: rgba(16,168,159,0.12);
   }
 
@@ -207,7 +211,7 @@
 </header>
 
 <section>
-  <div class="wrap">
+  <div class="wrap" role="main" id="main">
     <span class="eyebrow">30-second primer</span>
     <h2>What the control qubit is doing</h2>
     <p class="sub">Two operations on a target, and a control qubit that steers which order they run in.

@@ -27,7 +27,7 @@
   .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
   @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
   .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
-  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
   .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
   .pcard b { color: var(--ink); } .pcard .zc { color:var(--cyan); font-weight:600; } .pcard .xc { color:var(--amber); font-weight:600; }
 
@@ -99,7 +99,7 @@
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
   @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
   .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
-  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
   .rc p { font-size:13px; color:var(--ink-2); margin:0; }
   .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; }
   .speclink-row { margin-top:20px; text-align:center; }
@@ -112,15 +112,17 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing III · Foundations on Silicon</span>
     <span class="sp"></span>
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="hero">
     <p class="eyebrow">Quantum Darwinism × indefinite causal order</p>
     <h1>Two facts that <span class="hl">no causal order</span> can hold at once.</h1>
@@ -132,13 +134,13 @@
 
     <div class="primer">
       <div class="pcard">
-        <h4>Why is anything a "fact"?</h4>
+        <h2>Why is anything a "fact"?</h2>
         <p>Quantum Darwinism: a property is <b>objective</b> when the environment makes <b>many redundant copies</b> of
         it, so independent observers all read the same answer. A recorder's <b>faithfulness A</b> measures its copy —
         <b>A=1</b> a perfect record, <b>A=0.5</b> a coin-flip carrying nothing.</p>
       </div>
       <div class="pcard">
-        <h4>What's the catch?</h4>
+        <h2>What's the catch?</h2>
         <p>Complementarity forbids faithful copies of a <span class="zc">Z-fact</span> and an incompatible
         <span class="xc">X-fact</span> at the same time. So the joint objectivity <b>w = A<sub>Z</sub> + A<sub>X</sub></b>
         is boxed into a narrow <b>hull</b> — the most any ordering of events can reach.</p>
@@ -225,18 +227,18 @@
     physics and not the noise.</p>
     <div class="receipts">
       <div class="rc">
-        <h4>1 · The apparatus is calibrated</h4>
+        <h3>1 · The apparatus is calibrated</h3>
         <p>Under definite orders the chip reproduces <b>winner-take-all exactly</b> — the last recorder wins at
         <b>0.955</b> and <b>0.986</b>, the earlier one falls to a coin-flip. <span class="yes">Textbook behaviour</span>,
         so the switch result isn't a miscalibration.</p>
       </div>
       <div class="rc">
-        <h4>2 · The hull is measured</h4>
+        <h3>2 · The hull is measured</h3>
         <p>The box isn't assumed from theory — it's the <b>same-window measured range</b> [1.461, 1.487] of these exact
         recorders. The branches are compared to <b>what this hardware can actually reach</b>, not an idealization.</p>
       </div>
       <div class="rc">
-        <h4>3 · The cheat is excluded</h4>
+        <h3>3 · The cheat is excluded</h3>
         <p>A recorder reading in a tilted intermediate basis could fake shared objectivity. That loophole is
         <b>disclosed and removed by construction</b> (F82 lineage) — the recorders read the pure Z and X bases,
         nothing in between.</p>
@@ -247,7 +249,8 @@
     </div>
   </section>
 
-  <div class="badge-row">
+  </main>
+  <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="sig">F98</span> · job <span class="sig">d9aa5m8tcv6s73do7li0</span></span>
     <span>ibm_marrakesh · 63 two-qubit gates · +22σ / −52σ</span>
     <span class="sp"></span>

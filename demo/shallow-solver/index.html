@@ -33,7 +33,7 @@
   .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
   @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
   .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
-  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
   .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
   .pcard b { color: var(--ink); }
 
@@ -106,7 +106,7 @@
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
   @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
   .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
-  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
   .rc p { font-size:13px; color:var(--ink-2); margin:0; }
   .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; }
   .links-row { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
@@ -122,15 +122,17 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
     <span class="sp"></span>
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="hero">
     <p class="eyebrow">A constant-depth quantum advantage · Bravyi–Gosset–König</p>
     <h1>A circuit too <span class="hl">shallow</span> for any classical machine to match.</h1>
@@ -149,13 +151,13 @@
 
     <div class="primer">
       <div class="pcard">
-        <h4>What's a constant-depth circuit?</h4>
+        <h2>What's a constant-depth circuit?</h2>
         <p><b>Depth</b> = how many layers of gates run one after another. <b>Constant</b> depth means a <b>fixed</b>
         number of layers no matter how big the problem — everything happens in a few parallel rounds. Shallow, fast,
         and hard to beat classically at this depth.</p>
       </div>
       <div class="pcard">
-        <h4>Why is coverage the real test?</h4>
+        <h2>Why is coverage the real test?</h2>
         <p>The puzzle has <b>four</b> valid answers. A classical cheat could memorize <b>one</b> and output it every
         time — acing "is it valid?" while computing nothing. So the real gate is <b>coverage</b>: produce <b>all</b>
         four. Only a genuine solver can.</p>
@@ -234,19 +236,19 @@
     <p class="sub">The deepest thread in the whole campaign closes here.</p>
     <div class="receipts">
       <div class="rc">
-        <h4>1 · Coverage is un-fakeable</h4>
+        <h3>1 · Coverage is un-fakeable</h3>
         <p>The one-answer cheat aces validity (100%) but produces only <b>1 of 4</b> valid answers — <b>failing
         coverage</b>. The quantum solver produces all four at ~0.22 each. <span class="yes">You can't memorize your
         way past coverage.</span></p>
       </div>
       <div class="rc">
-        <h4>2 · Hardness from contextuality</h4>
+        <h3>2 · Hardness from contextuality</h3>
         <p>Why <b>can't</b> a classical shallow circuit do this? The construction embeds the <b>magic-square game</b> —
         the very <b>contextuality</b> the museum certifies at 196σ (F106). The no-go theorem and the computational
         advantage are <span class="yes">the same fact, seen twice</span>.</p>
       </div>
       <div class="rc">
-        <h4>3 · No assumptions required</h4>
+        <h3>3 · No assumptions required</h3>
         <p>Unlike most claimed quantum advantages, this one rests on <b>no unproven conjecture</b>. The classical
         impossibility is a <b>theorem</b>, not a hope — which is what makes the constant-depth separation so unusual.</p>
       </div>
@@ -257,7 +259,8 @@
     </div>
   </section>
 
-  <div class="badge-row">
+  </main>
+  <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="sig">F113</span> · job <span class="sig">d9amnlvu62qs738o8nt0</span></span>
     <span>ibm_marrakesh · 0.9017 · 437.8σ · full coset · O(1) depth</span>
     <span class="sp2"></span>

@@ -27,7 +27,7 @@
   .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
   @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
   .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
-  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
   .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
   .pcard b { color: var(--ink); } .pcard .direct { color:var(--cyan); font-weight:600; } .pcard .flip { color:var(--amber); font-weight:600; }
 
@@ -97,7 +97,7 @@
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
   @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
   .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
-  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
   .rc p { font-size:13px; color:var(--ink-2); margin:0; }
   .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; } .rc .flip { color:var(--amber); font-weight:600; }
   .speclink-row { margin-top:20px; text-align:center; }
@@ -110,15 +110,17 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing III · Foundations on Silicon</span>
     <span class="sp"></span>
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="hero">
     <p class="eyebrow">Hayden–Preskill recovery × indefinite causal order</p>
     <h1>A message the mirror returns <span class="hl">flipped</span>.</h1>
@@ -129,13 +131,13 @@
 
     <div class="primer">
       <div class="pcard">
-        <h4>What's Hayden–Preskill?</h4>
+        <h2>What's Hayden–Preskill?</h2>
         <p>A 2007 result: a message thrown into a scrambler <b>isn't destroyed</b> — if you hold the right entangled
         reference, it re-emerges in the radiation almost at once. Information is smeared into correlations you can
         un-smear.</p>
       </div>
       <div class="pcard">
-        <h4>How do we read "recovery"?</h4>
+        <h2>How do we read "recovery"?</h2>
         <p>The probe's score is <b>S<sub>P</sub> = P(reads the diary right) − ½</b>. <b>0</b> = coin-flip (dead);
         <span class="direct">+½ = perfect direct read</span>; <span class="flip">−½ = perfect mirror</span> (anti-correlated —
         read it <b>flipped</b>). Recovery is ½+|S<sub>P</sub>|; the <b>sign</b> says whether to invert.</p>
@@ -223,19 +225,19 @@
     advance. Both boxes are ticked.</p>
     <div class="receipts">
       <div class="rc">
-        <h4>1 · Truly dead first</h4>
+        <h3>1 · Truly dead first</h3>
         <p>In <b>both</b> definite orders the probe reads a coin-flip — <b>S<sub>P</sub> ≈ 0.005</b>, ~40× below the
         effect and inside the frozen band. <span class="yes">Nothing to recover</span> under ordinary causality, proven
         before the claim.</p>
       </div>
       <div class="rc">
-        <h4>2 · The sign was pre-called</h4>
+        <h3>2 · The sign was pre-called</h3>
         <p>The gate is <b>sign-fixed</b>: theory says the mirror returns the message <span class="flip">anti-correlated</span>.
         A <b>positive</b> minus-branch would have <b>failed</b>. The phase flip isn't an artifact — it's the
         <b>predicted signature</b>, and the chip produced it.</p>
       </div>
       <div class="rc">
-        <h4>3 · Bonus — who gets to know?</h4>
+        <h3>3 · Bonus — who gets to know?</h3>
         <p>Free from the same run: whether the <b>environment</b> learns the diary depends on <b>which query is first</b>
         — <b>0.453</b> (X-first) vs <b>0.007</b> (Z-first). Ask the wrong question first and <b>nobody</b> gets to
         know.</p>
@@ -246,7 +248,8 @@
     </div>
   </section>
 
-  <div class="badge-row">
+  </main>
+  <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="sig">F99</span> · job <span class="sig">d9aabnt2su3c739lcam0</span></span>
     <span>ibm_marrakesh · − branch 74% flipped (56σ) · + branch 68% direct (59σ)</span>
     <span class="sp2"></span>

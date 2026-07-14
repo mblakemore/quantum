@@ -27,7 +27,7 @@
   .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
   @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
   .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
-  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
   .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
   .pcard b { color: var(--ink); }
 
@@ -94,7 +94,7 @@
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
   @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
   .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
-  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
   .rc p { font-size:13px; color:var(--ink-2); margin:0; }
   .rc b { color:var(--ink); } .rc .neg { color:var(--violet); font-weight:600; } .rc .pos { color:var(--amber); font-weight:600; } .rc .yes { color:var(--good); font-weight:600; }
   .speclink-row { margin-top:20px; text-align:center; }
@@ -107,15 +107,17 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing III · Foundations on Silicon</span>
     <span class="sp"></span>
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="hero">
     <p class="eyebrow">Negative local energy · quantum energy teleportation</p>
     <h1>A patch of chip that reads <span class="hl">below empty</span>.</h1>
@@ -126,13 +128,13 @@
 
     <div class="primer">
       <div class="pcard">
-        <h4>What is negative energy?</h4>
+        <h2>What is negative energy?</h2>
         <p>Not "less than zero joules" in the everyday sense — <b>less than the vacuum</b>. Normalize empty space to
         <b>0</b>; a region reading <b>below 0</b> holds less energy than empty. It's the Casimir / squeezed-vacuum
         sign, and quantum correlations let a <b>local</b> patch reach it.</p>
       </div>
       <div class="pcard">
-        <h4>Isn't that a free lunch?</h4>
+        <h2>Isn't that a free lunch?</h2>
         <p>No. Acting on the distant partner <b>Alice deposits energy</b> there — far more than the tiny amount the
         local site reads negative. The <b>global</b> energy stays positive and conserved. The negativity is purely
         <b>local</b>, borrowed against the entanglement. No perpetual motion.</p>
@@ -226,19 +228,19 @@
     conservation-respecting result.</p>
     <div class="receipts">
       <div class="rc">
-        <h4>1 · Certified, and conservatively</h4>
+        <h3>1 · Certified, and conservatively</h3>
         <p>We certify a <b>bound</b>, not a point: the 5σ ceiling is <span class="neg">−0.032 &lt; 0</span>. And every
         residual readout bias pushes the estimate <b>up</b> toward zero — so the <b>true</b> energy is <b>more</b>
         negative than reported. <span class="yes">The negativity is not a fluke of correction.</span></p>
       </div>
       <div class="rc">
-        <h4>2 · The correlation does the work</h4>
+        <h3>2 · The correlation does the work</h3>
         <p>Run the <b>identical</b> local rotation <b>without</b> the correlation and energy goes the other way:
         <span class="pos">+0.157, injected</span>. The 0.203 gap is <b>21σ</b>. So this isn't trivial cooling or a
         calibration offset — it's specifically the entanglement.</p>
       </div>
       <div class="rc">
-        <h4>3 · The books balance</h4>
+        <h3>3 · The books balance</h3>
         <p>Alice's site carries <b>+0.71</b> — she pays energy <b>in</b>, dwarfing Bob's <b>−0.055</b>. Global energy
         is positive and conserved; only Bob's local patch reads sub-vacuum. <span class="yes">No free lunch.</span></p>
       </div>
@@ -248,7 +250,8 @@
     </div>
   </section>
 
-  <div class="badge-row">
+  </main>
+  <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="sig">F97</span> · job <span class="sig">d9a9sp2f47jc73a9vurg</span></span>
     <span>ibm_marrakesh · E_B −0.0547 (12σ below vacuum) · 5σ bound ≤ −0.032</span>
     <span class="sp2"></span>

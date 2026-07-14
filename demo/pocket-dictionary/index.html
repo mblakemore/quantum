@@ -27,7 +27,7 @@
   .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
   @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
   .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
-  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
   .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
   .pcard b { color: var(--ink); }
 
@@ -84,7 +84,7 @@
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
   @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
   .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
-  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
   .rc p { font-size:13px; color:var(--ink-2); margin:0; }
   .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; }
   .speclink-row { margin-top:20px; text-align:center; }
@@ -97,15 +97,17 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
     <span class="sp"></span>
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="hero">
     <p class="eyebrow">The 2→1 quantum random access code</p>
     <h1>Two bits in one qubit — <span class="hl">look up either</span>.</h1>
@@ -116,13 +118,13 @@
 
     <div class="primer">
       <div class="pcard">
-        <h4>What's a QRAC?</h4>
+        <h2>What's a QRAC?</h2>
         <p>A <b>quantum random access code</b>: encode <b>n</b> bits into fewer qubits so that <b>any one</b> of them
         can be recovered on demand. Here it's <b>2 bits → 1 qubit</b>, either bit retrievable. Success = how often
         Bob's guess is right.</p>
       </div>
       <div class="pcard">
-        <h4>Why can't a classical bit do it?</h4>
+        <h2>Why can't a classical bit do it?</h2>
         <p>One classical bit holds one bit. Your best move is to store one faithfully and guess the other — averaged
         over Bob's random choice, that's <b>75%</b>. Enumerate all 256 strategies and the ceiling is <b>exactly
         0.75</b>. The qubit beats it.</p>
@@ -217,18 +219,18 @@
     result sits where physics allows.</p>
     <div class="receipts">
       <div class="rc">
-        <h4>1 · The wall is proven</h4>
+        <h3>1 · The wall is proven</h3>
         <p>The classical ceiling <b>0.75</b> is <b>enumerated in-code over all 256</b> encode/decode strategies — not
         cited, <span class="yes">provable inside the grader</span>. No classical trick was left on the table.</p>
       </div>
       <div class="rc">
-        <h4>2 · Two-sided, not one-sided</h4>
+        <h3>2 · Two-sided, not one-sided</h3>
         <p>The gate <b>G_QBAND</b> flags any reading <b>above</b> the quantum law 0.854 as apparatus error. Landing
         <b>inside the band</b> (5.2σ below the law) certifies <span class="yes">real physics</span>, not just a big
         number.</p>
       </div>
       <div class="rc">
-        <h4>3 · Both laws, one chip, no 2q gates</h4>
+        <h3>3 · Both laws, one chip, no 2q gates</h3>
         <p>The quantum player lands at <b>0.849</b>, the executed classical player at <b>0.748</b> — each obeying its
         own law, same window. And the whole advantage uses <b>zero two-qubit gates</b> — one qubit's angles.</p>
       </div>
@@ -238,7 +240,8 @@
     </div>
   </section>
 
-  <div class="badge-row">
+  </main>
+  <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="sig">F107</span> · job <span class="sig">d9al7om6hjac73fejisg</span></span>
     <span>ibm_marrakesh · 0.84893 · 110.5σ over classical · inside the band · 0 two-qubit gates</span>
     <span class="sp2"></span>

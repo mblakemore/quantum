@@ -27,7 +27,7 @@
   .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
   @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
   .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
-  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
   .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
   .pcard b { color: var(--ink); }
 
@@ -87,7 +87,7 @@
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
   @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
   .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
-  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
   .rc p { font-size:13px; color:var(--ink-2); margin:0; }
   .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; }
   .links-row { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
@@ -103,15 +103,17 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing V · The Instruments</span>
     <span class="sp"></span>
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="hero">
     <p class="eyebrow">A device-independent instrument · the transporter exam</p>
     <h1>The bench that <span class="hl">travels</span>.</h1>
@@ -122,13 +124,13 @@
 
     <div class="primer">
       <div class="pcard">
-        <h4>What's the switch-bench?</h4>
+        <h2>What's the switch-bench?</h2>
         <p>A three-axis <b>instrument</b>: <b>CAUSAL</b> (is the order truly indefinite?), <b>SCHEDULE</b> (is the chip
         order-symmetric, no hidden preference?), <b>HOLD</b> (can measurement pin a qubit — the Zeno effect?). Each axis
         is a finding you can visit elsewhere in the museum.</p>
       </div>
       <div class="pcard">
-        <h4>What does "travels" mean?</h4>
+        <h2>What does "travels" mean?</h2>
         <p>The bench had only run on the home chip. If causal-order physics is a property of the hardware
         <b>generation</b> — not one lucky die — the same bench should certify on a <b>different</b> chip, unretuned. We
         tested it on a chip it had never seen. It did.</p>
@@ -178,17 +180,17 @@
     wasn't hand-fed to the new device.</p>
     <div class="receipts">
       <div class="rc">
-        <h4>1 · The same frozen bounds</h4>
+        <h3>1 · The same frozen bounds</h3>
         <p>Every axis on the foreign chip was graded against the <b>identical pre-registered bounds</b> — no retuning,
         no per-device thresholds. <span class="yes">The grader didn't move for kingston.</span></p>
       </div>
       <div class="rc">
-        <h4>2 · Site-selection re-derived live</h4>
+        <h3>2 · Site-selection re-derived live</h3>
         <p>The frozen qubit-selection rules were <b>re-run live on kingston's unfamiliar map</b> — deterministic,
         untouched, the same machinery that adapted to the home chip's drift. <span class="yes">No hand-picking.</span></p>
       </div>
       <div class="rc">
-        <h4>3 · A generation, not a die</h4>
+        <h3>3 · A generation, not a die</h3>
         <p>All three axes certify on both chips, so the causal-order phenomena are properties of the <b>Heron
         generation</b> — not one lucky piece of silicon. The physics is portable.</p>
       </div>
@@ -200,7 +202,8 @@
     </div>
   </section>
 
-  <div class="badge-row">
+  </main>
+  <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="sig">F112</span> · job <span class="sig">d9amd73v6alc73cs0lp0</span></span>
     <span>ibm_kingston + ibm_marrakesh · full 3-axis bench · same frozen bounds</span>
     <span class="sp2"></span>

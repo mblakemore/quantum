@@ -27,7 +27,7 @@
   .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
   @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
   .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
-  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
   .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
   .pcard b { color: var(--ink); }
 
@@ -102,7 +102,7 @@
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
   @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
   .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
-  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
   .rc p { font-size:13px; color:var(--ink-2); margin:0; }
   .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; } .rc .cl { color:var(--bad); font-weight:600; }
   .speclink-row { margin-top:20px; text-align:center; }
@@ -115,15 +115,17 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing I · The Causal Switch</span>
     <span class="sp"></span>
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="hero">
     <p class="eyebrow">Teleporting a physical resource · the causal switch</p>
     <h1>Beaming <span class="hl">indefinite order</span> across the chip.</h1>
@@ -134,13 +136,13 @@
 
     <div class="primer">
       <div class="pcard">
-        <h4>What's a causal witness?</h4>
+        <h2>What's a causal witness?</h2>
         <p>One measurable number, <b>DISC</b>. It reads <b>0</b> for any ordinary sequence of events — even a random
         coin-flip between "A first" and "B first" — and climbs toward <b>2</b> the more the order is genuinely
         <b>indefinite</b>. Nonzero DISC is something no definite order can fake.</p>
       </div>
       <div class="pcard">
-        <h4>What's teleportation here?</h4>
+        <h2>What's teleportation here?</h2>
         <p>Standard quantum teleportation — a shared <b>entangled pair</b> plus two classical bits move a qubit's
         state from A to B with <b>no wire</b> carrying the qubit. No faster-than-light anything. The novelty is
         <b>what</b> we send: the carrier of indefinite causal order itself.</p>
@@ -230,19 +232,19 @@
     one.</p>
     <div class="receipts">
       <div class="rc">
-        <h4>1 · The classical null was run</h4>
+        <h3>1 · The classical null was run</h3>
         <p>The dead <span class="cl">0.0175</span> isn't a theory line — it's the <b>identical teleport</b> over a
         dephased resource, measured in the <b>same job and window</b>. That executed null is what turns "survived
         noise" into <span class="yes">"carried by entanglement."</span></p>
       </div>
       <div class="rc">
-        <h4>2 · Four predictions, four hits</h4>
+        <h3>2 · Four predictions, four hits</h3>
         <p>All four pre-filed predictions landed — including the subtle one: active feedforward costs a little
         (<b>1.766 &lt; 1.825</b>), appearing in a <b>4th</b> observable family. The noise model had guessed the
         <b>opposite</b>; the chip corrected it.</p>
       </div>
       <div class="rc">
-        <h4>3 · The grader proved itself first</h4>
+        <h3>3 · The grader proved itself first</h3>
         <p>This was the <b>first flight under the R5 rule</b>: the grading code had to pass a synthetic self-test
         <b>before</b> it was allowed to touch the hardware counts. <span class="yes">No moving the goalposts</span>
         after the data landed.</p>
@@ -253,7 +255,8 @@
     </div>
   </section>
 
-  <div class="badge-row">
+  </main>
+  <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="sig">F92</span> · job <span class="sig">d9a36352su3c739l3kf0</span></span>
     <span>ibm_marrakesh · survives quantum 90σ · dies classical (33σ separation)</span>
     <span class="sp2"></span>

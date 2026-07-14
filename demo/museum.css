@@ -7,7 +7,7 @@
 :root {
   --bg:#0a0c12; --surface:#121622; --surface-2:#1a2031;
   --edge:#293146; --edge-2:#3a4560;
-  --ink:#e7eaf3; --ink-2:#a6afc6; --ink-3:#6d7896;
+  --ink:#e7eaf3; --ink-2:#a6afc6; --ink-3:#8691b0;
   --cyan:#45d6cf; --cyan-deep:#1f8f89; --amber:#e6a94e; --violet:#9a8cf0;
   --good:#3ecf6d; --warn:#e6a94e; --bad:#ec6a5e;
   --card:#141a29; --card-hover:#182036;
@@ -21,24 +21,24 @@
   :root {
     --bg:#eef1f6; --surface:#ffffff; --surface-2:#f4f6fa;
     --edge:#dce1ec; --edge-2:#c7cfdd;
-    --ink:#141926; --ink-2:#495468; --ink-3:#78839a;
-    --cyan:#0f9d95; --cyan-deep:#0c7a74; --amber:#b9791b; --violet:#6a5cc4;
-    --good:#12933f; --warn:#b9791b; --bad:#c8493d;
+    --ink:#141926; --ink-2:#495468; --ink-3:#5f6a83;
+    --cyan:#0a6b66; --cyan-deep:#0c7a74; --amber:#8f5d10; --violet:#5f52ba;
+    --good:#0e7332; --warn:#8f5d10; --bad:#b23b30;
     --card:#ffffff; --card-hover:#f6f8fc;
     --shadow: 0 1px 2px rgba(20,25,38,.05), 0 12px 34px rgba(20,25,38,.09);
   }
 }
 :root[data-theme="dark"] {
   --bg:#0a0c12; --surface:#121622; --surface-2:#1a2031; --edge:#293146; --edge-2:#3a4560;
-  --ink:#e7eaf3; --ink-2:#a6afc6; --ink-3:#6d7896; --cyan:#45d6cf; --cyan-deep:#1f8f89;
+  --ink:#e7eaf3; --ink-2:#a6afc6; --ink-3:#8691b0; --cyan:#45d6cf; --cyan-deep:#1f8f89;
   --amber:#e6a94e; --violet:#9a8cf0; --good:#3ecf6d; --warn:#e6a94e; --bad:#ec6a5e;
   --card:#141a29; --card-hover:#182036;
   --shadow:0 1px 2px rgba(0,0,0,.35),0 14px 40px rgba(0,0,0,.42);
 }
 :root[data-theme="light"] {
   --bg:#eef1f6; --surface:#ffffff; --surface-2:#f4f6fa; --edge:#dce1ec; --edge-2:#c7cfdd;
-  --ink:#141926; --ink-2:#495468; --ink-3:#78839a; --cyan:#0f9d95; --cyan-deep:#0c7a74;
-  --amber:#b9791b; --violet:#6a5cc4; --good:#12933f; --warn:#b9791b; --bad:#c8493d;
+  --ink:#141926; --ink-2:#495468; --ink-3:#5f6a83; --cyan:#0a6b66; --cyan-deep:#0c7a74;
+  --amber:#8f5d10; --violet:#5f52ba; --good:#0e7332; --warn:#8f5d10; --bad:#b23b30;
   --card:#ffffff; --card-hover:#f6f8fc;
   --shadow:0 1px 2px rgba(20,25,38,.05),0 12px 34px rgba(20,25,38,.09);
 }
@@ -85,3 +85,10 @@ a.card:hover .enter { text-decoration: underline; }
   border: 1px solid color-mix(in srgb, var(--good) 32%, transparent); }
 .tag.soon { color: var(--ink-3); background: color-mix(in srgb, var(--ink-3) 12%, transparent);
   border: 1px solid var(--edge-2); }
+
+/* a11y: skip link */
+.skip { position:absolute; left:8px; top:-48px; z-index:1000; background:var(--cyan); color:var(--bg); padding:8px 14px; border-radius:8px; font-family:var(--mono); font-size:13px; font-weight:600; transition:top .12s; }
+.skip:focus { top:8px; outline:2px solid var(--ink); }
+
+/* a11y: underline links inside prose so they are not colour-only */
+main p a, .doc p a, main li a, .doc li a { text-decoration: underline; }

@@ -28,7 +28,7 @@
   .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
   @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
   .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
-  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
   .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:46ch; }
   .pcard b { color: var(--ink); }
 
@@ -98,7 +98,7 @@
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
   @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
   .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
-  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
   .rc p { font-size:13px; color:var(--ink-2); margin:0; }
   .rc b { color:var(--ink); } .rc .no { color:var(--bad); font-weight:600; } .rc .yes { color:var(--good); font-weight:600; }
   .speclink-row { margin-top:20px; text-align:center; }
@@ -111,15 +111,17 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing III · Foundations on Silicon</span>
     <span class="sp"></span>
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="hero">
     <p class="eyebrow">The quantum twin paradox · Zych–Brukner analog</p>
     <h1>The twin who <span class="hl">ages</span> loses the interference.</h1>
@@ -130,13 +132,13 @@
 
     <div class="primer">
       <div class="pcard">
-        <h4>What's an interferometer?</h4>
+        <h2>What's an interferometer?</h2>
         <p>A device that splits one particle onto <b>two paths at once</b> and recombines it, so it interferes with
         itself. The interference only appears if the two paths are <b>indistinguishable</b> — the instant anything
         records which way it went, the pattern vanishes.</p>
       </div>
       <div class="pcard">
-        <h4>Why does "aging" matter?</h4>
+        <h2>Why does "aging" matter?</h2>
         <p>A clock that ticks while in flight ends up reading <b>how much time passed on its path</b>. If the two
         paths age differently, the clock <b>is</b> a which-path record — so aging itself decoheres the superposition.
         That's the twin paradox as quantum information.</p>
@@ -224,19 +226,19 @@
     isolated, and re-earned. Here's how the confounds were closed.</p>
     <div class="receipts">
       <div class="rc">
-        <h4>1 · Rotation can't fake it</h4>
+        <h3>1 · Rotation can't fake it</h3>
         <p>We read <b>|V| = √(X²+Y²)</b>, the length of the coherence vector. A stray phase <b>rotation</b> only
         spins that vector — it can't shrink it. Only genuine decoherence can. <span class="yes">Phase-blind by
         construction.</span></p>
       </div>
       <div class="rc">
-        <h4>2 · The obvious mechanism, refuted</h4>
+        <h3>2 · The obvious mechanism, refuted</h3>
         <p>The pre-filed guess was a static ZZ pull, which a spin-echo should <b>undo</b>. The echo recovery came back
         <b>−0.119</b> — the <span class="no">wrong sign</span>. Static-ZZ <span class="no">REFUTED</span>, in the open,
         against the author's own 0.80 prior.</p>
       </div>
       <div class="rc">
-        <h4>3 · The withheld 67σ</h4>
+        <h3>3 · The withheld 67σ</h3>
         <p>The first run passed at <b>67σ</b> — bigger than the 36σ reported — but its X-curves went negative
         (impossible for a real visibility). The author <b>withheld it</b> and ran this phase-blind retest instead. The
         asterisk was self-attached.</p>
@@ -247,7 +249,8 @@
     </div>
   </section>
 
-  <div class="badge-row">
+  </main>
+  <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="sig">F100</span> · job <span class="sig">d9ah35eg26ic73demgag</span></span>
     <span>ibm_marrakesh · aging gap 0.338 @73µs · 36σ</span>
     <span class="sp"></span>

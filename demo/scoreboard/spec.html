@@ -64,9 +64,10 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· The Scoreboard exhibit</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
@@ -74,6 +75,7 @@
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet · Methodology &amp; Sources</p>
     <h1>Have we found quantum advantage? <span class="hl">The five-scoreboard answer</span></h1>
@@ -160,7 +162,8 @@
 
   <a class="backlink" href="./">← Back to the interactive scoreboard</a>
 
-  <div class="foot">
+  </main>
+  <div class="foot" role="contentinfo">
     <span>CAMPAIGN SUMMARY · <b style="color:var(--cyan)">F01–F117</b> · ~110 experiments · IBM Heron</span>
     <span class="sp"></span>
     <a href="../">The Museum</a>

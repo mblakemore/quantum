@@ -69,9 +69,10 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· Shallow-Circuit Solver exhibit</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
@@ -79,6 +80,7 @@
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet</p>
     <h1>A circuit too <span class="hl">shallow</span> for any classical machine to match</h1>
@@ -177,7 +179,8 @@
 
   <a class="backlink" href="./">← Back to the interactive exhibit</a>
 
-  <div class="foot">
+  </main>
+  <div class="foot" role="contentinfo">
     <span>MEASURED · <b style="color:var(--cyan)">F113</b> · job d9amnlvu62qs738o8nt0 · ibm_marrakesh</span>
     <span class="sp"></span>
     <a href="../scoreboard/">Scoreboard</a>

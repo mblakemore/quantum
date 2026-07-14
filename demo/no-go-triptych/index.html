@@ -25,7 +25,7 @@
   .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 16px; }
 
   .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; margin:6px 0 18px; max-width:70ch; }
-  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
   .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; }
   .pcard b { color: var(--ink); }
 
@@ -59,7 +59,7 @@
   @media (max-width:640px){ .towers { grid-template-columns:1fr; gap:16px; } }
   .tcol { border:1px solid var(--edge); border-radius:14px; padding:14px 10px 12px; background:var(--surface-2);
     text-align:center; transition:opacity .2s, box-shadow .2s, border-color .2s; }
-  .tcol.dim { opacity:.42; }
+  .tcol.dim { opacity:1; }
   .tcol.sel { box-shadow:0 0 0 2px var(--sel); border-color:var(--sel); }
   .tw-name { font-family:var(--mono); font-size:15px; font-weight:720; letter-spacing:-.01em; }
   .tw-sub { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-bottom:2px; }
@@ -83,7 +83,7 @@
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
   @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
   .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
-  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
   .rc p { font-size:13px; color:var(--ink-2); margin:0; }
   .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; }
   .links-row { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
@@ -96,15 +96,17 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing II · The No-Go Games</span>
     <span class="sp"></span>
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="hero">
     <p class="eyebrow">Three no-go theorems · one court</p>
     <h1>Three walls — <span class="b">Bell</span>, <span class="c">causal order</span>, <span class="x">contextuality</span> — all breached.</h1>
@@ -114,7 +116,7 @@
     with a classical control run alongside that lands right at the wall.</p>
 
     <div class="pcard">
-      <h4>What each wall forbids</h4>
+      <h2>What each wall forbids</h2>
       <p><b style="color:var(--cyan)">Bell</b> forbids <b>locality</b> (outcomes fixed by local hidden variables) ·
       <b style="color:var(--violet)">Causal order</b> forbids <b>a definite sequence of events</b> (even a random
       mixture of orders) · <b style="color:var(--amber)">Contextuality</b> forbids <b>pre-set values</b> (each
@@ -157,19 +159,19 @@
     controls were run, and it's all the same silicon.</p>
     <div class="receipts">
       <div class="rc">
-        <h4>1 · The bounds are proven, not cited</h4>
+        <h3>1 · The bounds are proven, not cited</h3>
         <p>The causal wall <b>0.869</b> is re-solved by SDP; the contextuality wall <b>8/9</b> is
         <b>enumerated in-code over all 4,096</b> classical strategies; Bell's <b>2</b> is the textbook CHSH bound.
         <span class="yes">Each ceiling is provable inside the grader.</span></p>
       </div>
       <div class="rc">
-        <h4>2 · Every wall has an executed null</h4>
+        <h3>2 · Every wall has an executed null</h3>
         <p>A real classical control ran on the same chip for each: Bell <b>0.036</b>, fixed-order <b>0.615</b>,
         no-entanglement <b>0.657</b> — each landing <b>at its wall</b>. The breach is a measured <b>contrast</b>, not
         an absolute reading.</p>
       </div>
       <div class="rc">
-        <h4>3 · One chip — and one crossed devices</h4>
+        <h3>3 · One chip — and one crossed devices</h3>
         <p>All three on <b>ibm_marrakesh</b>. And the causal-order game <b>reproduced on a second device</b>
         (ibm_fez, 0.9738, 201σ — 0.3pp concordance), so its wall didn't fall to one machine's quirk.</p>
       </div>
@@ -181,7 +183,8 @@
     </div>
   </section>
 
-  <div class="badge-row">
+  </main>
+  <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="b">CHSH 53σ</span> · <span class="c">F82 217σ</span> · <span class="x">F106 196σ</span></span>
     <span>ibm_marrakesh · each with an executed null</span>
     <span class="sp2"></span>

@@ -83,15 +83,17 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar">
+  <div class="topbar" role="navigation" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
     <span class="sp"></span>
     <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
   </div>
 
+  <main id="main">
   <header class="hero">
     <p class="eyebrow">GHZ metrology · beating the standard quantum limit</p>
     <h1>A sextant made of <span class="hl">entanglement</span>.</h1>
@@ -123,12 +125,12 @@
       <div class="fbox sep">
         <div class="ft">Separable — N independent probes</div>
         <div class="fd" id="sepd">one fringe, frequency 1</div>
-        <svg viewBox="0 0 300 130"><line class="axis" x1="6" y1="65" x2="294" y2="65"/><path class="fwave sep" id="sepwave"/></svg>
+        <svg viewBox="0 0 300 130" role="img" aria-label="Interference-fringe plot"><line class="axis" x1="6" y1="65" x2="294" y2="65"/><path class="fwave sep" id="sepwave"/></svg>
       </div>
       <div class="fbox ghz">
         <div class="ft">GHZ — N entangled probes</div>
         <div class="fd" id="ghzd">one fringe, frequency N — super-resolution</div>
-        <svg viewBox="0 0 300 130"><line class="axis" x1="6" y1="65" x2="294" y2="65"/><path class="fwave ghz" id="ghzwave"/></svg>
+        <svg viewBox="0 0 300 130" role="img" aria-label="Interference-fringe plot"><line class="axis" x1="6" y1="65" x2="294" y2="65"/><path class="fwave ghz" id="ghzwave"/></svg>
       </div>
     </div>
     <div class="fisher">
@@ -164,7 +166,8 @@
     </div>
   </section>
 
-  <div class="badge-row">
+  </main>
+  <div class="badge-row" role="contentinfo">
     <span>MEASURED · <span class="sig">F108 / F109</span> · job <span class="sig">d9alnju6hjac73fek980</span></span>
     <span>ibm_marrakesh · executed separable reference · fringe peak k = N</span>
     <span class="sp"></span>
