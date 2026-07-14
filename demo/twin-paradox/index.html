@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Twin Paradox — aging marks the path | The Quantum Museum</title>
+<meta name="description" content="Put a clock in a quantum superposition of two histories. If the clock ages, its reading records which path was taken — and that destroys the interference. An excited clock washes out coherence far faster than a vacuum clock: aging gap 0.338 at 73µs (36σ). Real hardware data (F100, job d9ah35eg26ic73demgag, ibm_marrakesh).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--violet); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--violet); color: var(--violet); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 20%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(29px,5.6vw,50px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--violet); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:64ch; margin:0 0 16px; }
+
+  /* added-context explainer (Creator request) */
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--violet); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:46ch; }
+  .pcard b { color: var(--ink); }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13.5px; font-weight:600;
+    text-decoration:none; color:#fff; background:var(--violet); border:1.5px solid var(--violet);
+    border-radius:11px; padding:10px 18px; transition:transform .12s, box-shadow .12s; box-shadow:var(--shadow); }
+  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--violet) 35%,transparent); }
+  .specbtn .arw { font-size:15px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--violet); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:68ch; }
+
+  /* dial */
+  .dial { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:20px; }
+  .dial .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .cbtn { font-family:var(--mono); font-size:13px; font-weight:600; padding:9px 13px; border-radius:10px;
+    border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; transition:all .12s; }
+  .cbtn:hover { border-color:var(--violet); }
+  .cbtn.on { background:var(--violet); color:#fff; border-color:var(--violet); }
+  .cbtn small { font-weight:400; opacity:.75; }
+
+  /* two twins */
+  .twins { display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,3vw,26px); }
+  @media (max-width:680px){ .twins { grid-template-columns:1fr; } }
+  .twin { border:1px solid var(--edge); border-radius:13px; padding:14px; background:var(--surface-2); }
+  .twin .thead { display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:10px; }
+  .twin .tname { font-family:var(--mono); font-size:13.5px; font-weight:700; }
+  .twin.vac .tname { color: var(--cyan); } .twin.exc .tname { color: var(--amber); }
+  .twin .tsub { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); }
+  .fringe { width:100%; height:96px; border-radius:9px; display:block; border:1px solid var(--edge-2); }
+  .twin .vrow { display:flex; align-items:baseline; justify-content:space-between; margin-top:11px; }
+  .twin .vnum { font-family:var(--mono); font-weight:720; font-size:clamp(26px,6vw,36px); letter-spacing:-.02em; line-height:1; }
+  .twin.vac .vnum { color: var(--cyan); } .twin.exc .vnum { color: var(--amber); }
+  .twin .vcap { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); }
+  .twin .state { font-family:var(--mono); font-size:11px; margin-top:4px; }
+  .twin .state.alive { color: var(--good); } .twin .state.grey { color: var(--ink-3); }
+
+  .gap-readout { margin-top:18px; text-align:center; font-size:14px; color:var(--ink-2); min-height:2.6em; }
+  .gap-readout .big { font-family:var(--mono); font-weight:720; font-size:20px; color:var(--ink); }
+  .gap-readout .sg { color: var(--violet); font-weight:700; }
+  .gap-readout .win { color: var(--good); font-weight:700; }
+  .phase-note { text-align:center; font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-top:6px; }
+
+  /* decay plot */
+  .plotwrap { max-width:600px; margin:0 auto; }
+  .curve-vac { fill:none; stroke:var(--cyan); stroke-width:2.4; }
+  .curve-exc { fill:none; stroke:var(--amber); stroke-width:2.4; }
+  .gapfill { fill:var(--violet); opacity:.13; }
+  .dot-v { fill:var(--card); stroke:var(--cyan); stroke-width:2.4; }
+  .dot-e { fill:var(--card); stroke:var(--amber); stroke-width:2.4; }
+  .axis { stroke:var(--edge-2); stroke-width:1; }
+  .axlabel { font-family:var(--mono); font-size:9px; fill:var(--ink-3); }
+  .sig-mark { stroke:var(--violet); stroke-width:1.2; stroke-dasharray:3 3; opacity:.7; }
+  .sig-txt { font-family:var(--mono); font-size:10px; fill:var(--violet); font-weight:600; }
+  .lgd { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; font-family:var(--mono); font-size:11.5px; color:var(--ink-2); margin-top:8px; }
+  .lgd i { display:inline-block; width:18px; height:3px; border-radius:2px; vertical-align:middle; margin-right:6px; }
+
+  /* receipts panel C */
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--violet); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; }
+  .rc b { color:var(--ink); } .rc .no { color:var(--bad); font-weight:600; } .rc .yes { color:var(--good); font-weight:600; }
+  .speclink-row { margin-top:20px; text-align:center; }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--violet); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--violet); }
+  .badge-row .sp { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing III · Foundations on Silicon</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">The quantum twin paradox · Zych–Brukner analog</p>
+    <h1>The twin who <span class="hl">ages</span> loses the interference.</h1>
+    <p class="lede">Einstein's twins: the one who travels ages less. Make it quantum — send a particle down two paths
+    at once so it interferes with itself, and hang a <b>clock</b> on it. If the clock <b>ages</b>, its reading quietly
+    records which path was taken, and that record destroys the interference. We built the analog on a chip: an
+    excited clock (it ages) washes out coherence far faster than a vacuum clock. Every number is measured hardware.</p>
+
+    <div class="primer">
+      <div class="pcard">
+        <h4>What's an interferometer?</h4>
+        <p>A device that splits one particle onto <b>two paths at once</b> and recombines it, so it interferes with
+        itself. The interference only appears if the two paths are <b>indistinguishable</b> — the instant anything
+        records which way it went, the pattern vanishes.</p>
+      </div>
+      <div class="pcard">
+        <h4>Why does "aging" matter?</h4>
+        <p>A clock that ticks while in flight ends up reading <b>how much time passed on its path</b>. If the two
+        paths age differently, the clock <b>is</b> a which-path record — so aging itself decoheres the superposition.
+        That's the twin paradox as quantum information.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
+      <span class="scope">A which-path <b>clock-decoherence analog</b>, not literal time dilation. Verdict: AGING-CERTIFIED-CLEAN.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — The Two Twins</p>
+    <h2>Let time pass, and watch one twin's interference die</h2>
+    <p class="sub">Both twins start with crisp interference fringes (high contrast = coherent). Turn up the elapsed
+    proper time. The <b>vacuum twin</b> (stays home, doesn't age) keeps its fringes far longer; the <b>excited twin</b>
+    (ages) washes out — its aging has recorded the path. Pick an elapsed time.</p>
+
+    <div class="dial" role="group" aria-label="Elapsed proper time">
+      <span class="lbl">proper time:</span>
+      <button class="cbtn" data-i="0" type="button">0 <small>µs</small></button>
+      <button class="cbtn" data-i="1" type="button">37 <small>µs</small></button>
+      <button class="cbtn" data-i="2" type="button">73 <small>µs</small></button>
+      <button class="cbtn" data-i="3" type="button">146 <small>µs</small></button>
+      <button class="cbtn" data-i="4" type="button">293 <small>µs</small></button>
+    </div>
+
+    <div class="twins">
+      <div class="twin vac">
+        <div class="thead"><span class="tname">Vacuum twin</span><span class="tsub">clock in |0⟩ · stays home</span></div>
+        <svg class="fringe" id="fringeVac" viewBox="0 0 300 96" preserveAspectRatio="none" role="img" aria-label="Vacuum twin interference fringes"></svg>
+        <div class="vrow"><span class="vnum" id="vnumVac">0.885</span><span class="vcap">contrast |V|</span></div>
+        <div class="state alive" id="stateVac">interference alive</div>
+      </div>
+      <div class="twin exc">
+        <div class="thead"><span class="tname">Excited twin</span><span class="tsub">clock in |1⟩ · ages</span></div>
+        <svg class="fringe" id="fringeExc" viewBox="0 0 300 96" preserveAspectRatio="none" role="img" aria-label="Excited twin interference fringes"></svg>
+        <div class="vrow"><span class="vnum" id="vnumExc">0.862</span><span class="vcap">contrast |V|</span></div>
+        <div class="state alive" id="stateExc">interference alive</div>
+      </div>
+    </div>
+
+    <p class="gap-readout" id="gapReadout"></p>
+    <p class="phase-note">Bands show contrast only — their position (phase) is arbitrary. We measure |V| = √(X²+Y²), rotation-immune by construction.</p>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The Aging Curves</p>
+    <h2>The gap between the twins is the finding</h2>
+    <p class="sub">Both visibilities decay, but the excited twin's collapses almost twice as fast. The shaded gap
+    between them is the <b>aging signal</b> — widest in the coherent middle of the ladder, where a which-path clock
+    bites hardest. It peaks at <b>73µs: 36σ</b>. By 293µs both have decayed to the noise floor — nothing left to tell
+    apart, so no claim there.</p>
+    <div class="plotwrap">
+      <svg viewBox="0 0 460 260" role="img" aria-label="Visibility versus proper time for the vacuum and excited twins, with the aging gap shaded">
+        <line class="axis" x1="46" y1="16" x2="46" y2="216"/>
+        <line class="axis" x1="46" y1="216" x2="440" y2="216"/>
+        <polygon class="gapfill" id="gapPoly"/>
+        <path class="curve-vac" id="curveVac"/>
+        <path class="curve-exc" id="curveExc"/>
+        <g id="dots"></g>
+        <g id="sigMarks"></g>
+        <text class="axlabel" x="12" y="20">|V| 1.0</text>
+        <text class="axlabel" x="30" y="220">0</text>
+        <text class="axlabel" x="40" y="234">0µs</text>
+        <text class="axlabel" x="410" y="234">293µs</text>
+        <text class="axlabel" x="150" y="250" fill="var(--ink-3)">proper time (delay) — more time = more aging →</text>
+      </svg>
+      <div class="lgd">
+        <span><i style="background:var(--cyan)"></i>vacuum twin (stays home)</span>
+        <span><i style="background:var(--amber)"></i>excited twin (ages)</span>
+        <span><i style="background:var(--violet);opacity:.5"></i>aging gap</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — How we know it's aging, not a trick</p>
+    <h2>Three receipts behind the verdict</h2>
+    <p class="sub">A big number is only worth as much as the audit behind it. This one was demoted by its own author,
+    isolated, and re-earned. Here's how the confounds were closed.</p>
+    <div class="receipts">
+      <div class="rc">
+        <h4>1 · Rotation can't fake it</h4>
+        <p>We read <b>|V| = √(X²+Y²)</b>, the length of the coherence vector. A stray phase <b>rotation</b> only
+        spins that vector — it can't shrink it. Only genuine decoherence can. <span class="yes">Phase-blind by
+        construction.</span></p>
+      </div>
+      <div class="rc">
+        <h4>2 · The obvious mechanism, refuted</h4>
+        <p>The pre-filed guess was a static ZZ pull, which a spin-echo should <b>undo</b>. The echo recovery came back
+        <b>−0.119</b> — the <span class="no">wrong sign</span>. Static-ZZ <span class="no">REFUTED</span>, in the open,
+        against the author's own 0.80 prior.</p>
+      </div>
+      <div class="rc">
+        <h4>3 · The withheld 67σ</h4>
+        <p>The first run passed at <b>67σ</b> — bigger than the 36σ reported — but its X-curves went negative
+        (impossible for a real visibility). The author <b>withheld it</b> and ran this phase-blind retest instead. The
+        asterisk was self-attached.</p>
+      </div>
+    </div>
+    <div class="speclink-row">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet — data table, gates &amp; the complete adjudication</a>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F100</span> · job <span class="sig">d9ah35eg26ic73demgag</span></span>
+    <span>ibm_marrakesh · aging gap 0.338 @73µs · 36σ</span>
+    <span class="sp"></span>
+    <a href="./spec.html">Full Spec</a>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+
+    // ---- data kernel (F100 exp122b, job d9ah35eg26ic73demgag) ----
+    var LAD = [
+      { us:0,   vac:0.885, exc:0.862, gap:0.023, sig:null, note:"Both twins start crisp and coherent — no time has passed, nothing has aged. |V| ≈ 0.87 each." },
+      { us:37,  vac:0.657, exc:0.355, gap:0.302, sig:null, note:"37µs in: the excited twin has already lost half its contrast while the vacuum twin holds. The aging is biting." },
+      { us:73,  vac:0.493, exc:0.155, gap:0.338, sig:36,  note:"The peak. Vacuum keeps a live fringe; the excited twin has nearly flattened. Aging gap 0.338 — a 36σ separation." },
+      { us:146, vac:0.283, exc:0.052, gap:0.230, sig:23,  note:"146µs: the excited twin is essentially decohered; the vacuum twin, still fading, holds a clear edge. Gap 0.230, 23σ." },
+      { us:293, vac:0.066, exc:0.027, gap:0.038, sig:null, note:"Both have decayed to the noise floor — nothing coherent left to tell apart. The signal lives in the middle, not here." }
+    ];
+    // assertions (fail loudly in console if the kernel drifts)
+    console.assert(Math.abs(LAD[2].gap - 0.338) < 0.002, "gap@73 ~ 0.338");
+    console.assert(LAD[2].sig === 36, "73us = 36 sigma");
+    console.assert(LAD.slice(1).every(function(r){return r.vac > r.exc;}), "vacuum keeps more coherence at every elapsed time");
+
+    // ---- fringe renderer: contrast = |V| ----
+    // endpoints per twin: [dark, bright]; V=0 -> uniform midtone (washed), V=1 -> full alternation
+    var COL = {
+      vac: [[10,58,55],[122,238,231]],   // deep teal -> bright cyan
+      exc: [[63,42,7],[255,205,105]]      // deep amber -> bright amber
+    };
+    function lerp(a,b,t){ return Math.round(a + (b-a)*t); }
+    function bandColor(ends, t){ // t in [0,1]
+      return "rgb("+lerp(ends[0][0],ends[1][0],t)+","+lerp(ends[0][1],ends[1][1],t)+","+lerp(ends[0][2],ends[1][2],t)+")";
+    }
+    var NB = 48, FREQ = 3.4, PHASE = 0.6;
+    function drawFringe(svg, ends, V){
+      var w = 300/NB, s = "";
+      for (var i=0;i<NB;i++){
+        var osc = Math.cos(2*Math.PI*FREQ*(i/NB) + PHASE);   // -1..1
+        var t = 0.5 + 0.5*V*osc;                             // V=0 -> flat 0.5
+        s += '<rect x="'+(i*w).toFixed(2)+'" y="0" width="'+(w+0.6).toFixed(2)+'" height="96" fill="'+bandColor(ends,t)+'"/>';
+      }
+      svg.innerHTML = s;
+    }
+
+    var fVac=document.getElementById("fringeVac"), fExc=document.getElementById("fringeExc"),
+        vnV=document.getElementById("vnumVac"), vnE=document.getElementById("vnumExc"),
+        stV=document.getElementById("stateVac"), stE=document.getElementById("stateExc"),
+        gapR=document.getElementById("gapReadout"), btns=document.querySelectorAll(".cbtn");
+
+    function stateOf(V){ return V>=0.4 ? ["interference alive","alive"] : V>=0.12 ? ["fading","grey"] : ["washed out","grey"]; }
+    function render(i){
+      var r = LAD[i];
+      drawFringe(fVac, COL.vac, r.vac); drawFringe(fExc, COL.exc, r.exc);
+      vnV.textContent = r.vac.toFixed(3); vnE.textContent = r.exc.toFixed(3);
+      var sv=stateOf(r.vac), se=stateOf(r.exc);
+      stV.textContent = sv[0]; stV.className = "state "+sv[1];
+      stE.textContent = se[0]; stE.className = "state "+se[1];
+      var sigTxt = r.sig ? ' <span class="sg">'+r.sig+'σ</span> separation' : (r.us===0 ? ' — no aging yet' : (r.us===293 ? ' — at the noise floor' : ''));
+      gapR.innerHTML = '<span class="big">aging gap '+r.gap.toFixed(3)+'</span>'+sigTxt+'.<br>'+r.note;
+      btns.forEach(function(b,j){ var on=j===i; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
+    }
+    btns.forEach(function(b){ b.addEventListener("click", function(){ render(+b.dataset.i); }); });
+
+    // ---- decay plot ----
+    var PX0=46, PX1=436, PY0=16, PY1=216, TMAX=293;
+    function px(us){ return PX0 + (us/TMAX)*(PX1-PX0); }
+    function py(v){ return PY1 - v*(PY1-PY0); }
+    function path(key){ return "M"+LAD.map(function(r,i){return (i?"L":"")+px(r.us).toFixed(1)+","+py(r[key]).toFixed(1);}).join(" "); }
+    document.getElementById("curveVac").setAttribute("d", path("vac"));
+    document.getElementById("curveExc").setAttribute("d", path("exc"));
+    // shaded gap polygon: vac forward, exc backward
+    var top = LAD.map(function(r){return px(r.us).toFixed(1)+","+py(r.vac).toFixed(1);}).join(" ");
+    var bot = LAD.slice().reverse().map(function(r){return px(r.us).toFixed(1)+","+py(r.exc).toFixed(1);}).join(" ");
+    document.getElementById("gapPoly").setAttribute("points", top+" "+bot);
+    // dots
+    var dg=document.getElementById("dots");
+    function dot(us,v,cls){ var c=document.createElementNS("http://www.w3.org/2000/svg","circle");
+      c.setAttribute("class",cls); c.setAttribute("r","4.5"); c.setAttribute("cx",px(us)); c.setAttribute("cy",py(v)); dg.appendChild(c); }
+    LAD.forEach(function(r){ dot(r.us,r.vac,"dot-v"); dot(r.us,r.exc,"dot-e"); });
+    // sigma marks at 73 and 146
+    var sm=document.getElementById("sigMarks");
+    [[73,36,0.155,0.493],[146,23,0.052,0.283]].forEach(function(m){
+      var x=px(m[0]);
+      var ln=document.createElementNS("http://www.w3.org/2000/svg","line");
+      ln.setAttribute("class","sig-mark"); ln.setAttribute("x1",x); ln.setAttribute("y1",py(m[2]));
+      ln.setAttribute("x2",x); ln.setAttribute("y2",py(m[3])); sm.appendChild(ln);
+      var tx=document.createElementNS("http://www.w3.org/2000/svg","text");
+      tx.setAttribute("class","sig-txt"); tx.setAttribute("x",x-9); tx.setAttribute("y",py(m[3])-6);
+      tx.textContent=m[1]+"σ"; sm.appendChild(tx);
+    });
+
+    render(0);
+  })();
+</script>
+</body>
+</html>

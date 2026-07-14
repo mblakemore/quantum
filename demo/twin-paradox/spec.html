@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full Spec Sheet — The Twin Paradox (F100 / Exp122b) | The Quantum Museum</title>
+<meta name="description" content="Complete specification sheet for the Twin Paradox exhibit: the proper-time interferometer on IBM Heron, the phase-blind visibility method, pre-registered gates, the full measured data table, the self-attached-asterisk adjudication, and scope. Job d9ah35eg26ic73demgag, ibm_marrakesh.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .doc { max-width: 820px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 90px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--amber); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--amber); color: var(--amber); }
+
+  .spec-head { padding: clamp(16px,3vw,30px) 0 6px; border-bottom:1px solid var(--edge); margin-bottom:8px; }
+  .kicker { font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
+  .spec-head h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.08;
+    font-size:clamp(26px,4.6vw,40px); margin:10px 0 12px; text-wrap:balance; }
+  .spec-head h1 .hl { color: var(--amber); }
+  .idline { display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--mono); font-size:12px; color:var(--ink-3); margin-bottom:10px; }
+  .idline b { color: var(--ink-2); font-weight:600; }
+  .verdict-chip { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:12px;
+    color:var(--good); border:1px solid color-mix(in srgb,var(--good) 45%,var(--edge)); border-radius:999px; padding:5px 13px; font-weight:600; }
+
+  .doc h2 { font-family:var(--mono); font-size:clamp(16px,2.4vw,20px); letter-spacing:-.01em; margin:38px 0 8px;
+    padding-top:14px; border-top:1px solid var(--edge); }
+  .doc h2 .n { color: var(--amber); font-weight:720; margin-right:10px; }
+  .doc h3 { font-size:15px; margin:20px 0 6px; color: var(--ink); }
+  .doc p { color: var(--ink-2); max-width:70ch; margin:9px 0; }
+  .doc p.tight { margin:4px 0; }
+  .doc ul { color: var(--ink-2); max-width:70ch; padding-left:20px; }
+  .doc li { margin:6px 0; }
+  .doc b { color: var(--ink); }
+  .doc code, .doc .kbd { font-family:var(--mono); font-size:.9em; background:var(--surface-2);
+    border:1px solid var(--edge); border-radius:5px; padding:1px 6px; color:var(--ink); }
+  .doc a { color: var(--amber); }
+
+  .callout { background:var(--surface); border:1px solid var(--edge); border-left:3px solid var(--amber);
+    border-radius:10px; padding:16px 18px; margin:16px 0; }
+  .callout.good { border-left-color: var(--good); }
+  .callout .clabel { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin:0 0 4px; }
+
+  .tbl-wrap { overflow-x:auto; margin:14px 0; border:1px solid var(--edge); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; min-width:440px; }
+  th, td { text-align:right; padding:9px 14px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
+  th:first-child, td:first-child { text-align:left; }
+  thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
+  tbody tr:last-child td { border-bottom:none; }
+  td.vac { color: var(--cyan); } td.exc { color: var(--amber); }
+  tr.hi td { background: color-mix(in srgb, var(--amber) 8%, transparent); }
+  .gate { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-family:var(--mono); font-size:13px; margin:10px 0; }
+  .gate .g { color:var(--amber); font-weight:600; }
+  .gate .r { color:var(--ink-2); }
+  .pass { color: var(--good); font-weight:600; } .fail { color: var(--bad); font-weight:600; }
+
+  .foot { margin-top:44px; padding-top:16px; border-top:1px solid var(--edge); font-family:var(--mono);
+    font-size:11.5px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; }
+  .foot a { color: var(--ink-2); } .foot a:hover { color: var(--amber); } .foot .sp { flex:1; }
+  .backlink { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    border:1.5px solid var(--amber); color:var(--amber); border-radius:10px; padding:9px 16px; margin-top:20px; text-decoration:none; }
+  .backlink:hover { background: color-mix(in srgb,var(--amber) 12%,transparent); }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <a href="./">· Twin Paradox exhibit</a>
+    <span class="wingtag">· Wing III · Foundations on Silicon</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="spec-head">
+    <p class="kicker">Full Specification Sheet</p>
+    <h1>The Twin Paradox, <span class="hl">adjudicated end-to-end</span></h1>
+    <div class="idline">
+      <span><b>Finding</b> F100</span>
+      <span><b>Experiment</b> Exp122b (phase-blind retest of Exp122)</span>
+      <span><b>Backend</b> ibm_marrakesh (Heron r2)</span>
+      <span><b>Job</b> d9ah35eg26ic73demgag</span>
+      <span><b>Cycle</b> C4653 · Whisper</span>
+    </div>
+    <span class="verdict-chip">✓ VERDICT — AGING-CERTIFIED-CLEAN · 36σ</span>
+  </header>
+
+  <p>This sheet is the complete, source-of-truth specification behind the interactive exhibit. Every number on the
+  exhibit page is drawn from here; every number here is drawn from the frozen grade file
+  <code>results/exp122b_grade.json</code> and its job record <code>results/exp122b_jobids.json</code>. Nothing is
+  hand-tuned for display.</p>
+
+  <h2><span class="n">1</span>The idea, in plain language</h2>
+  <p>Einstein's twin paradox: a twin who takes a fast trip ages <b>less</b> than the twin who stays home — moving
+  clocks run slow. Now make it quantum. Send a single particle through an interferometer — a device that splits it
+  onto <b>two paths at once</b> and recombines them, so it interferes with itself. Interference only appears if the
+  two paths are truly <b>indistinguishable</b>: nothing must record which way it went.</p>
+  <p>Put a tiny <b>clock</b> on the particle. If the clock <b>ticks</b> (ages) while in flight, its reading becomes a
+  record of <b>how much time elapsed on that path</b> — and if the two paths accumulate different amounts of aging,
+  the clock has quietly written down <b>which path was taken</b>. That which-path record destroys the interference.
+  Aging, in other words, is <b>which-path information</b>. This is the Zych–Brukner insight: proper time itself can
+  act as a which-path marker, decohering a quantum superposition.</p>
+  <div class="callout">
+    <p class="clabel">The chip analog</p>
+    <p class="tight">We cannot dilate real time on a qubit, so we build the <b>analog</b>: a "clock" qubit that either
+    <b>ages</b> or <b>doesn't</b>, riding an interferometer built from a second qubit. An <b>excited</b> clock
+    (prepared in |1⟩) decays and dephases — it ages. A <b>vacuum</b> clock (left in |0⟩) barely evolves — it is the
+    stay-at-home twin. Prediction: the excited-clock interference should wash out <b>far faster</b> than the
+    vacuum-clock interference. It does. That gap <b>is</b> the twin paradox on silicon — an analog of which-path
+    clock decoherence, <b>not</b> a measurement of literal gravitational/velocity time dilation.</p>
+  </div>
+
+  <h2><span class="n">2</span>What we measure — and why it is "phase-blind"</h2>
+  <p>The health of the interference is its <b>visibility</b> <code>V</code> — the contrast of the fringes, 1 = perfect,
+  0 = washed out to grey. We read it out on two axes (X and Y) and combine them:</p>
+  <div class="callout">
+    <p class="clabel">The phase-blind estimator</p>
+    <p class="tight"><code>|V| = √(X² + Y²)</code> — the <b>length</b> of the coherence vector, discarding its
+    <b>angle</b>. This is deliberate. A coherent stray rotation (the clock qubit tugging the phase around) would
+    <b>move</b> the fringe sideways without destroying it — and an X-only estimator would misread that spin as a loss
+    of contrast. By taking the magnitude, we are <b>immune to rotation by construction</b>: only genuine loss of
+    coherence can shrink <code>|V|</code>. This estimator is the fix that turned a confounded win into a clean one
+    (see §5).</p>
+  </div>
+
+  <h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
+  <p>The decision rules were written and committed in <code>experiments/exp122b-phase-blind-preregistration.md</code>
+  before any data was taken. The grade script self-tested against four synthetic outcomes (MIXED / AGING-CLEAN /
+  CLOCK-PULL / UNRESOLVED) and passed 4/4 before touching the real counts.</p>
+  <div class="gate">
+    <span class="g">G0</span><span class="r">Both arms must start coherent: <code>|V|(0) &gt; 0.7</code> for vac and exc, else NO-TEST. <span class="pass">PASS</span> (0.885, 0.862).</span>
+    <span class="g">W_TWIN</span><span class="r">Aging signal: <code>V_vac − V_exc &gt; 5·SE</code> at 73µs <b>or</b> 146µs. <span class="pass">PASS</span> (36σ and 23σ — both).</span>
+    <span class="g">W_ROT</span><span class="r">Rotation probe: <code>echoX − rawX &gt; 5·SE</code> at 73µs (would indicate a recoverable coherent pull). <span class="fail">did not fire</span> (−0.119, wrong sign).</span>
+  </div>
+  <p>Classification map: <code>MIXED | AGING-CERTIFIED-CLEAN | CLOCK-PULL | UNRESOLVED</code>. W_TWIN firing while
+  W_ROT stays silent ⇒ the loss is real decoherence from aging, not a hidden rotation ⇒ <b>AGING-CERTIFIED-CLEAN</b>.</p>
+
+  <h2><span class="n">4</span>The measured data</h2>
+  <p>Phase-blind visibility <code>|V| = √(X²+Y²)</code> down the delay ladder (delay is the proper-time proxy —
+  more delay = more aging). 20,000 shots per setting, X and Y readouts, 28 two-qubit gates per circuit.</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>delay (µs)</th><th>vacuum |V|</th><th>excited |V|</th><th>aging gap</th><th>significance</th></tr></thead>
+    <tbody>
+      <tr><td>0.0</td><td class="vac">0.885</td><td class="exc">0.862</td><td>0.023</td><td>—</td></tr>
+      <tr><td>36.6</td><td class="vac">0.657</td><td class="exc">0.355</td><td>0.302</td><td>—</td></tr>
+      <tr class="hi"><td>73.2</td><td class="vac">0.493</td><td class="exc">0.155</td><td><b>0.338 ± 0.009</b></td><td><b>36σ</b></td></tr>
+      <tr class="hi"><td>146.4</td><td class="vac">0.283</td><td class="exc">0.052</td><td><b>0.230 ± 0.010</b></td><td><b>23σ</b></td></tr>
+      <tr><td>292.7</td><td class="vac">0.066</td><td class="exc">0.027</td><td>0.038</td><td>floor</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The vacuum twin keeps its interference far longer; the excited twin's washes out almost twice as fast. At the
+  longest delay both have decayed to the noise floor (nothing coherent left to distinguish) — the signal lives in the
+  <b>middle</b> of the ladder, exactly where a which-path clock should bite hardest.</p>
+
+  <h2><span class="n">5</span>The adjudication <span style="font-family:var(--sans);font-weight:400;font-size:14px;color:var(--ink-3)">— the honesty story that is itself the finding</span></h2>
+  <p>The first run, <b>Exp122</b>, passed at <b>67σ</b> — a bigger number than the one reported here. It was not
+  reported. Its author attached her own asterisk and withheld it, for a specific reason:</p>
+  <div class="callout">
+    <p class="clabel">Why the bigger number was withheld</p>
+    <p class="tight">The X-only visibility curves went <b>negative</b>. A true visibility <b>cannot</b> be negative —
+    but a fringe that is <b>rotating</b> can swing its X-projection below zero. That was the tell: some of the
+    apparent "decoherence" was actually the clock qubit <b>coherently spinning the phase</b> (a ZZ-type pull), which
+    an X-only estimator confounds with genuine contrast loss. Rather than bank the inflated 67σ, the run was frozen
+    as a confounded result and a <b>phase-blind retest</b> (Exp122b, this sheet) was designed to be immune to exactly
+    that artifact.</p>
+  </div>
+  <p>The retest keeps two honest sub-stories on the record:</p>
+  <ul>
+    <li><b>The rotation was real</b> — coherence had spun into the Y axis; Exp122 was reading the wrong axis. The
+    phase-blind <code>|V|</code> recovers it and still shows a clean 36σ aging gap.</li>
+    <li><b>But the proposed mechanism was refuted.</b> The pre-filed hypothesis was a <b>static ZZ</b> pull, which a
+    spin-echo should <b>recover</b>. The echo recovery came back <b>−0.119 ± 0.010 — the wrong sign</b>. Static-ZZ
+    <span class="fail">REFUTED</span>. The author's 0.80 prior on that mechanism missed; the realized class was her
+    <b>least-favored</b> (0.10). Calibration lesson logged, not buried.</li>
+  </ul>
+  <div class="callout good">
+    <p class="clabel">Verdict</p>
+    <p class="tight"><b>AGING-CERTIFIED-CLEAN.</b> The aging signal survives the estimator that a rotation cannot fool
+    (36σ), and the one mechanism that would have explained it away as a recoverable artifact was tested and rejected.
+    The adjudication — win demoted, confound isolated, retest designed, mechanism refuted in the open — <b>is</b> the
+    finding.</p>
+  </div>
+
+  <h2><span class="n">6</span>Scope &amp; caveats</h2>
+  <ul>
+    <li><b>Analog, not literal.</b> This is a which-path <b>clock-decoherence</b> analog (Zych–Brukner style). It is
+    not a measurement of gravitational or velocity time dilation on a qubit.</li>
+    <li><b>Coherent decoherence, honestly.</b> "Aging" here is the excited clock's decay + dephasing marking the path.
+    Reported subclaim: the excited-arm decay runs <b>~2× faster than pure T1</b> would predict
+    (<code>V-ratio 0.314</code> measured vs <code>√0.1 = 0.667</code> expected) — extra channels beyond simple
+    relaxation, reported as an open excess, not swept under.</li>
+    <li><b>Published-T1 is not trustworthy for grading.</b> The clock lane's published T1 swung 334→188µs in 24h (and
+    361µs in this job's calibration). The rule of the campaign holds: <b>place by published, grade by measured.</b>
+    The in-job measured T1 (K=188µs, L=174µs) is what the certificate rests on.</li>
+    <li><b>Floor at long delay.</b> At 292.7µs both arms have decohered to noise; the aging gap there (0.038) is not a
+    claim — only the coherent middle of the ladder carries the result.</li>
+  </ul>
+
+  <h2><span class="n">7</span>Provenance</h2>
+  <ul>
+    <li><b>Grade file:</b> <code>results/exp122b_grade.json</code> · <b>Job record:</b> <code>results/exp122b_jobids.json</code></li>
+    <li><b>Pre-registration:</b> <code>experiments/exp122b-phase-blind-preregistration.md</code> · <b>Parent (confounded):</b> Exp122</li>
+    <li><b>Backend:</b> ibm_marrakesh (Heron r2) · <b>Layout:</b> [2,3,1] · <b>Shots:</b> 20,000/setting (10,000 for calibration probes)</li>
+    <li><b>Self-test:</b> grade script 4/4 PASS on synthetic MIXED / AGING-CLEAN / CLOCK-PULL / UNRESOLVED before scoring real data</li>
+    <li><b>Family:</b> Horizons-2 Q4 · sibling of the Grandfather audit (F101) and the Zeno tractor beam (F102)</li>
+  </ul>
+
+  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+
+  <div class="foot">
+    <span>MEASURED · <b style="color:var(--amber)">F100</b> · job d9ah35eg26ic73demgag · ibm_marrakesh</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>
