@@ -11,7 +11,7 @@ scoped five routes). This is the completion: every route flown, every scope name
 ## The one-line answer
 
 **Yes — measurably, on four of five scoreboards, against exact theorem ceilings cleared by
-53σ–341σ; and on the fifth (computational), the constant-depth solver the only depth-separation
+21σ–341σ; and on the fifth (computational), the constant-depth solver the only depth-separation
 theorem is built on now runs on silicon at 90%. What we have *not* found is a brute-force
 time-to-solution speedup, and F54 measured exactly the wall that forbids it. Every claim is
 scoped to the assumption its hardware honestly provides.**
