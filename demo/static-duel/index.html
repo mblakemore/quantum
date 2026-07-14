@@ -337,7 +337,7 @@ function settle() {
   if (S.racing && (S.c.ok >= RACE_TARGET || S.q.ok >= RACE_TARGET)) {
     const b = el('banner'); b.classList.add('show');
     if (S.q.ok > S.c.ok) b.innerHTML = '🏆 <strong>The quantum bot wins the race</strong> — a 62% whisper, compounded, beats a coin. Press Reset and run it again.';
-    else if (S.c.ok > S.q.ok) b.innerHTML = '🎲 <strong>The classic bot got lucky this time!</strong> Coins win short races occasionally — that is honest randomness. Replay: the long run belongs to the signal.';
+    else if (S.c.ok > S.q.ok) b.innerHTML = '🎲 <strong>The classic bot got lucky this time!</strong> Coins win short races occasionally — that is genuine chance variation. Replay: the long run belongs to the signal.';
     else b.innerHTML = '🤝 A dead heat — replay to break it.';
     S.racing = false; clearInterval(timer); upd(); return;
   }

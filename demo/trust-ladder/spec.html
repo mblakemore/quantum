@@ -84,7 +84,7 @@
       <span><b>Backend</b> ibm_marrakesh (Heron r2)</span>
       <span><b>Job</b> d9ansru6hjac73fenigg</span>
     </div>
-    <span class="verdict-chip">✓ ONE-SIDED-DI RANDOMNESS CERTIFIED — 0.65 private bit/use at 5σ · full-DI honestly quarantined</span>
+    <span class="verdict-chip">✓ ONE-SIDED-DI RANDOMNESS CERTIFIED — 0.65 private bit/use at 5σ · full-DI quarantined</span>
   </header>
 
   <p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page
@@ -102,8 +102,7 @@
     <p class="clabel">The three rungs</p>
     <p class="tight"><b>Full trust</b> → 1 Born bit/qubit, but a compromised device could hand you anything.
     <b>One-sided device-independence</b> → you trust only your <b>own</b> measurement; the partner is a black box.
-    <b>Full device-independence</b> → you trust nothing at all — the strongest security, and the one this chip cannot
-    honestly deliver.</p>
+    <b>Full device-independence</b> → you trust nothing at all — the strongest security, and the one this chip cannot deliver.</p>
   </div>
 
   <h2><span class="n">2</span>What we measure — and the method</h2>
@@ -150,7 +149,7 @@
     between the two measurement sites. On a single chip the two qubits share control lines, so a <b>deterministic</b>
     device could output <code>S = 2√2</code> at <b>zero</b> entropy. The <code>0.5928</code> bit/use is therefore a
     <b>labelled counterfactual</b> — a what-if, never a certificate. A real full-DI number needs space-like separation,
-    off-chip. <b>We did not perform it.</b> This is categorically stronger honesty than qualifying an interpretation:
+    off-chip. <b>We did not perform it.</b> This is categorically stronger than qualifying an interpretation:
     here the DI <b>quantity itself</b> evaporates.</li>
     <li><b>One-sided-DI is the rigorous rung.</b> Its assumption (trust only Bob) is <b>exact at the logical level</b>
     — <code>Tr_A(U_A ρ U_A†) = Tr_A(ρ)</code> — failing only via physical crosstalk. Faking <code>S₃</code> needs a

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Full Spec Sheet — The Shallow-Circuit Solver / BGK 2D-HLF (F113) | The Quantum Museum</title>
-<meta name="description" content="Complete specification for the Shallow-Circuit Solver: a constant-depth quantum circuit solves the n=4 2D Hidden Linear Function at P(valid)=0.9017 (437.8σ over the 0.25 floor), covering all four valid solutions near-uniformly (the un-fakeable coverage gate). Classical hardness inherited from contextuality (F106). Honesty fence: asymptotic separation, not proven on-chip. Job d9amnlvu62qs738o8nt0.">
+<meta name="description" content="Complete specification for the Shallow-Circuit Solver: a constant-depth quantum circuit solves the n=4 2D Hidden Linear Function at P(valid)=0.9017 (437.8σ over the 0.25 floor), covering all four valid solutions near-uniformly (the un-fakeable coverage gate). Classical hardness inherited from contextuality (F106). Scope: asymptotic separation, not proven on-chip. Job d9amnlvu62qs738o8nt0.">
 <link rel="stylesheet" href="../museum.css">
 <style>
   .doc { max-width: 820px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 90px; }
@@ -92,12 +92,12 @@
   </header>
 
   <div class="fence">
-    <p class="fl">Honesty fence — read this first</p>
+    <p class="fl">Scope — read this first</p>
     <p>This does <b>not</b> prove the complexity separation (QNC⁰ ≠ NC⁰) <b>on the chip</b>. That separation is
     <b>asymptotic</b> — it lives in the limit of large <code>n</code>, and the <b>theorem</b> carries the asymptotics.
     What the hardware certifies is a concrete instance: a <b>constant-depth</b> quantum circuit that solves the
     <code>n=4</code> problem at <b>90% fidelity</b>, covering the <b>whole</b> solution set, in <b>O(1) logical
-    depth</b>. It is the honest complement to F54's deep-circuit wall — the campaign's one computational-genre result,
+    depth</b>. It is the complement to F54's deep-circuit wall — the campaign's one computational-genre result,
     scoped exactly.</p>
   </div>
 
