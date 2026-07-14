@@ -73,6 +73,21 @@ graded number above.
   Exp105 ~at-sim; my interval assumed a haircut). Logged, not spun.
 - Whisper's pred_c4527_001 (replication) hit all arms including the p̂ interval.
 
+## Adversarial calibration note (Whisper C4714, Creator-directed)
+
+An adversarial re-audit (`docs/adversarial-audit-F82-causal-game-sigma-whisper-c4714.md`) reproduced
+every graded number exactly and confirmed the SDP bound, the Pauli-pitfall catch, and the null arm as
+a load-bearing safeguard. It found **the WIN robust under every error model** but flagged the
+**216.8σ headline as a precision-vs-significance conflation**: `se_w = 0.0005` is a correctly-computed
+*shot-noise* SE, not the uncertainty that limits the physical claim. Because the null arm sits at the
+prior (0.6146 ≈ 0.6165), any residual systematic is *conservative* (p̂ = 0.9769 is a floor on the
+ideal), so the margin may **not** be divided by a systematic band to manufacture a lower "honest σ."
+The right empirical reproducibility carrier is the **two-chip concordance: 0.3pp (~34σ)**, already
+reported above. The binding limitation remains the disclosed *device-characterized* scope, not any σ.
+Guidance: where 216.8σ is headlined, pair it with the 0.3pp concordance and read it as shot-noise
+precision, not as the significance of beating the bound. (Related to — not the same as — the F117
+audit: F117 was a *wrong* uncertainty; this is a correctly-computed σ answering a narrower question.)
+
 ## Pointers
 
 `results/exp105_hw_results.json` · `results/exp105b_hw_results.json` ·
