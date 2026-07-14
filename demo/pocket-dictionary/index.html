@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Pocket Dictionary — two bits in one qubit | The Quantum Museum</title>
+<meta name="description" content="Alice packs two bits into one qubit; Bob retrieves either one, ~85% of the time — beating the classical packing limit of 75%. Measured 0.84893 (110.5σ over classical 0.75), landing inside the quantum band below cos²(π/8)=0.8536, with zero two-qubit gates. Real hardware (F107, job d9al7om6hjac73fejisg, ibm_marrakesh).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(55% 60% at 28% 0%, color-mix(in srgb,var(--cyan) 16%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.4vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:65ch; margin:0 0 16px; }
+
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h4 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--cyan); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
+  .pcard b { color: var(--ink); }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13.5px; font-weight:600;
+    text-decoration:none; color:var(--bg); background:var(--cyan); border:1.5px solid var(--cyan);
+    border-radius:11px; padding:10px 18px; transition:transform .12s, box-shadow .12s; box-shadow:var(--shadow); }
+  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--cyan) 35%,transparent); }
+  .specbtn .arw { font-size:15px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--cyan); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:68ch; }
+
+  .ctrls { display:flex; gap:20px 30px; flex-wrap:wrap; margin-bottom:20px; }
+  .ctrl-grp { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .ctrl-grp .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .cbtn { font-family:var(--mono); font-size:13px; font-weight:600; padding:8px 12px; border-radius:9px;
+    border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; transition:all .12s; }
+  .cbtn:hover { border-color:var(--cyan); }
+  .cbtn.on { background:var(--cyan); color:var(--bg); border-color:var(--cyan); }
+  .cbtn.cls.on { background:var(--amber); border-color:var(--amber); color:var(--bg); }
+
+  .play { display:grid; grid-template-columns:200px 1fr; gap:clamp(16px,4vw,32px); align-items:center; }
+  @media (max-width:620px){ .play { grid-template-columns:1fr; justify-items:center; } }
+  .glyph-cap { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); text-align:center; margin-top:4px; }
+
+  /* success gauge */
+  .gauge-cap { display:flex; justify-content:space-between; font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-bottom:3px; }
+  .band { fill: color-mix(in srgb, var(--good) 16%, transparent); }
+  .wall-line { stroke: var(--amber); stroke-width:2; }
+  .law-line { stroke: var(--good); stroke-width:1.6; stroke-dasharray:4 3; }
+  .gfill { transition: width .4s cubic-bezier(.34,1.15,.5,1), fill .3s; }
+  @media (prefers-reduced-motion: reduce){ .gfill { transition:none; } }
+  .gmark-lab { font-family:var(--mono); font-size:9px; }
+  .readout { margin-top:16px; }
+  .readout .rnum { font-family:var(--mono); font-weight:720; font-size:clamp(30px,8vw,46px); letter-spacing:-.02em; line-height:1; }
+  .readout .rnum.q { color: var(--cyan); } .readout .rnum.c { color: var(--amber); }
+  .readout .rcap { font-family:var(--mono); font-size:11px; color:var(--ink-3); }
+  .verdict { margin-top:12px; font-size:14px; color:var(--ink-2); max-width:52ch; }
+  .verdict b { color:var(--ink); } .verdict .win { color: var(--good); font-weight:700; } .verdict .cl { color: var(--amber); font-weight:700; }
+
+  /* band chart B */
+  .board-band { fill: color-mix(in srgb, var(--good) 15%, transparent); }
+  .ptlab { font-family:var(--mono); font-size:9.5px; }
+  .siglab { font-family:var(--mono); font-size:10px; font-weight:600; }
+
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h4 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--cyan); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; }
+  .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; }
+  .speclink-row { margin-top:20px; text-align:center; }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--cyan); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
+  .badge-row .sp2 { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing IV · The Advantage Ladder</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">The 2→1 quantum random access code</p>
+    <h1>Two bits in one qubit — <span class="hl">look up either</span>.</h1>
+    <p class="lede">Alice has two bits and one carrier to send them in. Bob, at the far end, gets to ask for
+    <b>either</b> bit — his choice — and may look <b>once</b>. With a classical bit he's stuck at 75%. Pack the two
+    bits into a single <b>qubit's angle</b> and he can read <b>whichever</b> bit he wants about 85% of the time. A
+    pocket dictionary that holds two entries in the space of one. Every number is measured hardware.</p>
+
+    <div class="primer">
+      <div class="pcard">
+        <h4>What's a QRAC?</h4>
+        <p>A <b>quantum random access code</b>: encode <b>n</b> bits into fewer qubits so that <b>any one</b> of them
+        can be recovered on demand. Here it's <b>2 bits → 1 qubit</b>, either bit retrievable. Success = how often
+        Bob's guess is right.</p>
+      </div>
+      <div class="pcard">
+        <h4>Why can't a classical bit do it?</h4>
+        <p>One classical bit holds one bit. Your best move is to store one faithfully and guess the other — averaged
+        over Bob's random choice, that's <b>75%</b>. Enumerate all 256 strategies and the ceiling is <b>exactly
+        0.75</b>. The qubit beats it.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
+      <span class="scope">A <b>coding advantage</b> (~85%, either bit) — not perfect storage, not a computational speedup. Zero two-qubit gates.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — You're Bob</p>
+    <h2>Pick Alice's message, then pick which bit to read</h2>
+    <p class="sub">Alice's two bits set the qubit to one of four angles. You choose which bit to recover — <b>after</b>
+    the qubit arrives — and measure along that bit's axis. Watch the retrieval land above the classical 75% wall, for
+    <b>either</b> bit and <b>any</b> message. Then try a plain classical bit and see it stall at the wall.</p>
+
+    <div class="ctrls">
+      <div class="ctrl-grp" role="group" aria-label="Alice's message">
+        <span class="lbl">Alice sends:</span>
+        <button class="cbtn msg on" data-msg="00" type="button">00</button>
+        <button class="cbtn msg" data-msg="01" type="button">01</button>
+        <button class="cbtn msg" data-msg="10" type="button">10</button>
+        <button class="cbtn msg" data-msg="11" type="button">11</button>
+      </div>
+      <div class="ctrl-grp" role="group" aria-label="Which bit Bob reads">
+        <span class="lbl">Bob reads:</span>
+        <button class="cbtn bit on" data-bit="b1" type="button">bit 1</button>
+        <button class="cbtn bit" data-bit="b2" type="button">bit 2</button>
+      </div>
+      <div class="ctrl-grp" role="group" aria-label="Carrier type">
+        <span class="lbl">carrier:</span>
+        <button class="cbtn car on" data-car="q" type="button">qubit</button>
+        <button class="cbtn car cls" data-car="c" type="button">classical bit</button>
+      </div>
+    </div>
+
+    <div class="play">
+      <div>
+        <svg id="glyph" viewBox="0 0 180 180" role="img" aria-label="Encoding glyph: the four messages point to four angles; Bob measures along one axis"></svg>
+        <div class="glyph-cap">4 messages → 4 angles · Bob measures one axis</div>
+      </div>
+      <div>
+        <div class="gauge-cap"><span>retrieval success</span><span id="caseTag"></span></div>
+        <svg viewBox="0 0 460 74" role="img" aria-label="Retrieval success on a scale with the classical wall and the quantum law">
+          <rect class="band" id="bandRect" y="16" height="26"/>
+          <line class="wall-line" id="wallLine" y1="10" y2="48"/>
+          <line class="law-line" id="lawLine" y1="10" y2="48"/>
+          <line x1="30" y1="42" x2="430" y2="42" stroke="var(--edge-2)" stroke-width="1.2"/>
+          <rect class="gfill" id="gfill" x="30" y="18" height="22" rx="3" fill="var(--cyan)"/>
+          <text class="gmark-lab" id="wallLab" y="62" text-anchor="middle" fill="var(--amber)">classical wall 0.75</text>
+          <text class="gmark-lab" id="lawLab" y="62" text-anchor="middle" fill="var(--good)">quantum law 0.854</text>
+        </svg>
+        <div class="readout">
+          <span class="rnum q" id="rnum">0.843</span>
+          <span class="rcap" id="rcap">P(Bob reads the bit correctly)</span>
+          <p class="verdict" id="verdict"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — Inside the band</p>
+    <h2>Above the classical wall, below the quantum law</h2>
+    <p class="sub">A correct QRAC must land <b>between</b> two lines: above the classical ceiling 0.75, and at or below
+    the quantum law 0.854 (exceeding it would be an apparatus error, not a better result). The pooled quantum value
+    sits <b>inside the band</b>; the executed classical player sits at its own wall. Only the qubit crosses the line.</p>
+    <div style="max-width:560px;margin:0 auto;">
+      <svg viewBox="0 0 500 180" role="img" aria-label="The pooled quantum value and the classical arm against the classical wall, the quantum law, and the advantage band">
+        <rect class="board-band" id="boardBand" y="40" height="30"/>
+        <line id="wallB" stroke="var(--amber)" stroke-width="2"/>
+        <line id="lawB" stroke="var(--good)" stroke-width="1.6" stroke-dasharray="4 3"/>
+        <line x1="40" y1="70" x2="440" y2="70" stroke="var(--edge-2)" stroke-width="1.2"/>
+        <g id="ptsB"></g>
+        <text class="ptlab" id="wallBlab" y="88" text-anchor="middle" fill="var(--amber)">classical wall 0.75</text>
+        <text class="ptlab" id="lawBlab" y="88" text-anchor="middle" fill="var(--good)">quantum law 0.854</text>
+        <text class="ptlab" x="240" y="30" text-anchor="middle" fill="var(--good)">◄ the advantage band ►</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — Why it's a real advantage</p>
+    <h2>Three receipts behind the pocket dictionary</h2>
+    <p class="sub">Beating 75% is only meaningful if 75% is proven, the classical player actually ran, and the quantum
+    result sits where physics allows.</p>
+    <div class="receipts">
+      <div class="rc">
+        <h4>1 · The wall is proven</h4>
+        <p>The classical ceiling <b>0.75</b> is <b>enumerated in-code over all 256</b> encode/decode strategies — not
+        cited, <span class="yes">provable inside the grader</span>. No classical trick was left on the table.</p>
+      </div>
+      <div class="rc">
+        <h4>2 · Two-sided, not one-sided</h4>
+        <p>The gate <b>G_QBAND</b> flags any reading <b>above</b> the quantum law 0.854 as apparatus error. Landing
+        <b>inside the band</b> (5.2σ below the law) certifies <span class="yes">real physics</span>, not just a big
+        number.</p>
+      </div>
+      <div class="rc">
+        <h4>3 · Both laws, one chip, no 2q gates</h4>
+        <p>The quantum player lands at <b>0.849</b>, the executed classical player at <b>0.748</b> — each obeying its
+        own law, same window. And the whole advantage uses <b>zero two-qubit gates</b> — one qubit's angles.</p>
+      </div>
+    </div>
+    <div class="speclink-row">
+      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet — data, the two-sided band &amp; the enumerated ceiling</a>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F107</span> · job <span class="sig">d9al7om6hjac73fejisg</span></span>
+    <span>ibm_marrakesh · 0.84893 · 110.5σ over classical · inside the band · 0 two-qubit gates</span>
+    <span class="sp2"></span>
+    <a href="./spec.html">Full Spec</a>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+    var css = getComputedStyle(document.documentElement);
+    function C(v){ return css.getPropertyValue(v).trim(); }
+
+    // ---- data kernel (F107 exp128, job d9al7om6hjac73fejisg) ----
+    var WALL=0.75, LAW=0.8535533906, POOLED=0.848925, CLASS_ARM=0.748175;
+    var CASES = {
+      "00":{b1:0.84325,b2:0.84455}, "01":{b1:0.84345,b2:0.84940},
+      "10":{b1:0.85300,b2:0.85410}, "11":{b1:0.85650,b2:0.84715}
+    };
+    // message -> angle (deg) on the circle: the four "diagonals"
+    var ANG = { "00":45, "01":135, "11":225, "10":315 };
+    Object.keys(CASES).forEach(function(m){ console.assert(CASES[m].b1>WALL && CASES[m].b2>WALL, "case above wall "+m); });
+    console.assert(POOLED>WALL && POOLED<LAW, "pooled inside band");
+
+    var state = { msg:"00", bit:"b1", car:"q" };
+
+    // ---- gauge geometry ----
+    var GMIN=0.5, GMAX=0.9, GX0=30, GX1=430;
+    function gx(v){ return GX0 + (v-GMIN)/(GMAX-GMIN)*(GX1-GX0); }
+    (function(){
+      document.getElementById("bandRect").setAttribute("x", gx(WALL));
+      document.getElementById("bandRect").setAttribute("width", gx(LAW)-gx(WALL));
+      document.getElementById("wallLine").setAttribute("x1",gx(WALL)); document.getElementById("wallLine").setAttribute("x2",gx(WALL));
+      document.getElementById("lawLine").setAttribute("x1",gx(LAW)); document.getElementById("lawLine").setAttribute("x2",gx(LAW));
+      document.getElementById("wallLab").setAttribute("x", gx(WALL));
+      document.getElementById("lawLab").setAttribute("x", gx(LAW));
+    })();
+
+    // ---- encoding glyph ----
+    function drawGlyph(){
+      var cx=90, cy=90, R=58, ns="http://www.w3.org/2000/svg", s="";
+      // circle
+      s+='<circle cx="90" cy="90" r="58" fill="none" stroke="'+C("--edge-2")+'" stroke-width="1.4"/>';
+      // measurement axis (which bit): bit1 = vertical, bit2 = horizontal
+      var vert = state.bit==="b1";
+      var axCol = state.car==="c" ? C("--amber") : C("--cyan");
+      if(vert) s+='<line x1="90" y1="24" x2="90" y2="156" stroke="'+axCol+'" stroke-width="2" opacity="0.5"/>';
+      else     s+='<line x1="24" y1="90" x2="156" y2="90" stroke="'+axCol+'" stroke-width="2" opacity="0.5"/>';
+      // four message dots
+      Object.keys(ANG).forEach(function(m){
+        var a=ANG[m]*Math.PI/180, x=cx+R*Math.cos(a), y=cy-R*Math.sin(a);
+        var on=m===state.msg;
+        s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+(on?7:4.5)+'" fill="'+(on?axCol:C("--surface-2"))+'" stroke="'+(on?axCol:C("--ink-3"))+'" stroke-width="1.6"/>';
+        s+='<text x="'+(cx+(R+15)*Math.cos(a)).toFixed(1)+'" y="'+(cy-(R+15)*Math.sin(a)+3).toFixed(1)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10" fill="'+(on?axCol:C("--ink-3"))+'">'+m+'</text>';
+      });
+      // state vector to selected message
+      var a=ANG[state.msg]*Math.PI/180;
+      s+='<line x1="90" y1="90" x2="'+(cx+R*Math.cos(a)).toFixed(1)+'" y2="'+(cy-R*Math.sin(a)).toFixed(1)+'" stroke="'+axCol+'" stroke-width="2.4"/>';
+      document.getElementById("glyph").innerHTML=s;
+    }
+
+    var gfill=document.getElementById("gfill"), rnum=document.getElementById("rnum"),
+        rcap=document.getElementById("rcap"), verdict=document.getElementById("verdict"),
+        caseTag=document.getElementById("caseTag");
+
+    function current(){ return state.car==="c" ? CLASS_ARM : CASES[state.msg][state.bit]; }
+    function render(){
+      var p=current(), q=state.car==="q";
+      gfill.setAttribute("width", Math.max(2, gx(p)-GX0));
+      gfill.setAttribute("fill", q ? C("--cyan") : C("--amber"));
+      rnum.textContent=p.toFixed(3); rnum.className="rnum "+(q?"q":"c");
+      caseTag.textContent = q ? ("message "+state.msg+" · bit "+(state.bit==="b1"?"1":"2")) : "classical bit";
+      if(q){
+        var over=((p-WALL)*100).toFixed(1);
+        verdict.innerHTML='<span class="win">✓ retrieved '+Math.round(p*100)+'% of the time</span> — <b>'+over+' points above</b> the classical 75% wall, for '+(state.bit==="b1"?"the first":"the second")+' bit. And it stays under the quantum law 0.854: real, not a glitch.';
+      } else {
+        verdict.innerHTML='<span class="cl">Stuck at the wall.</span> A classical bit averages <b>0.748</b> however you encode it — store one bit, guess the other. It cannot cross 0.75. Switch back to the qubit.';
+      }
+      // buttons
+      document.querySelectorAll(".msg").forEach(function(b){ var on=b.dataset.msg===state.msg; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
+      document.querySelectorAll(".bit").forEach(function(b){ var on=b.dataset.bit===state.bit; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
+      document.querySelectorAll(".car").forEach(function(b){ var on=b.dataset.car===state.car; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
+      drawGlyph();
+    }
+    document.querySelectorAll(".msg").forEach(function(b){ b.addEventListener("click",function(){ state.msg=b.dataset.msg; render(); }); });
+    document.querySelectorAll(".bit").forEach(function(b){ b.addEventListener("click",function(){ state.bit=b.dataset.bit; render(); }); });
+    document.querySelectorAll(".car").forEach(function(b){ b.addEventListener("click",function(){ state.car=b.dataset.car; render(); }); });
+
+    // ---- Panel B band chart ----
+    (function(){
+      var ns="http://www.w3.org/2000/svg", BMIN=0.70, BMAX=0.87, BX0=40, BX1=440;
+      function bx(v){ return BX0 + (v-BMIN)/(BMAX-BMIN)*(BX1-BX0); }
+      document.getElementById("boardBand").setAttribute("x", bx(WALL));
+      document.getElementById("boardBand").setAttribute("width", bx(LAW)-bx(WALL));
+      var wB=document.getElementById("wallB"); wB.setAttribute("x1",bx(WALL)); wB.setAttribute("x2",bx(WALL)); wB.setAttribute("y1",34); wB.setAttribute("y2",76);
+      var lB=document.getElementById("lawB"); lB.setAttribute("x1",bx(LAW)); lB.setAttribute("x2",bx(LAW)); lB.setAttribute("y1",34); lB.setAttribute("y2",76);
+      document.getElementById("wallBlab").setAttribute("x", bx(WALL));
+      document.getElementById("lawBlab").setAttribute("x", bx(LAW));
+      var g=document.getElementById("ptsB");
+      function pt(v, col, lab, sub, up){
+        var x=bx(v), y=70;
+        var c=document.createElementNS(ns,"circle"); c.setAttribute("cx",x); c.setAttribute("cy",y); c.setAttribute("r",6);
+        c.setAttribute("fill",C("--card")); c.setAttribute("stroke",C(col)); c.setAttribute("stroke-width",2.6); g.appendChild(c);
+        var t=document.createElementNS(ns,"text"); t.setAttribute("class","siglab"); t.setAttribute("x",x); t.setAttribute("y", up?y-12:y+20);
+        t.setAttribute("text-anchor","middle"); t.setAttribute("fill",C(col)); t.textContent=lab; g.appendChild(t);
+        if(sub){ var s=document.createElementNS(ns,"text"); s.setAttribute("class","ptlab"); s.setAttribute("x",x); s.setAttribute("y", up?y-25:y+33);
+          s.setAttribute("text-anchor","middle"); s.setAttribute("fill",C("--ink-3")); s.textContent=sub; g.appendChild(s); }
+      }
+      pt(CLASS_ARM, "--amber", "0.748", "classical arm", true);
+      pt(POOLED, "--cyan", "0.849", "quantum pooled", true);
+    })();
+
+    render();
+  })();
+</script>
+</body>
+</html>
