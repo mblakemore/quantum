@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Full Spec Sheet — The Shallow-Circuit Solver / BGK 2D-HLF (F113) | The Quantum Museum</title>
-<meta name="description" content="Complete specification for the Shallow-Circuit Solver: a constant-depth quantum circuit solves the n=4 2D Hidden Linear Function at P(valid)=0.9017 (437.8σ over the 0.25 floor), covering all four valid solutions near-uniformly (the un-fakeable coverage gate). Classical hardness inherited from contextuality (F106). Scope: asymptotic separation, not proven on-chip. Job d9amnlvu62qs738o8nt0.">
+<meta name="description" content="Complete specification for the Shallow-Circuit Solver: a constant-depth quantum circuit solves the n=4 2D Hidden Linear Function at P(valid)=0.9017 (437.8σ over the 0.25 floor), covering all four valid solutions near-uniformly (the un-fakeable coverage gate). The 437.8σ is fidelity over the 0.25 floor, not a beaten classical bound. Classical hardness is contextuality-flavored (theory-associated with F106). Scope: asymptotic separation (as n grows), not proven on-chip. Job d9amnlvu62qs738o8nt0.">
 <link rel="stylesheet" href="../museum.css">
 <style>
   .doc { max-width: 820px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 90px; }
@@ -150,14 +150,16 @@
     <span class="g">G_SENT</span><span class="r">Readout sentinels healthy. <span class="pass">PASS</span> (0.985 / 0.957).</span>
   </div>
 
-  <h2><span class="n">5</span>The through-line — hardness inherited from contextuality</h2>
+  <h2><span class="n">5</span>The through-line — hardness is contextuality-flavored (theory-associated)</h2>
   <div class="callout good">
-    <p class="clabel">Contextuality → computational separation</p>
-    <p class="tight">Why <b>can't</b> a classical shallow circuit do this? The BGKT-2020 noise-robust construction
-    embeds the <b>magic-square game</b> — the same Peres–Mermin <b>contextuality</b> the museum certifies at 196σ
-    (<b>F106</b>). The classical hardness of the shallow circuit is <b>inherited</b> from the impossibility of a
-    non-contextual value assignment. The foundational no-go (contextuality) and the computational advantage
-    (shallow-circuit separation) are <b>the same fact</b>, seen twice — the campaign's through-line, closed end to end.</p>
+    <p class="clabel">Contextuality → computational separation (in theory)</p>
+    <p class="tight">Why <b>can't</b> a classical shallow circuit keep up <b>as the problem grows</b>? The hardness is
+    <b>contextuality-flavored</b> — the grid's Peres–Mermin parity structure, the same resource family the museum
+    certifies at 196σ (<b>F106</b>). One caution about that link: the magic-square gadget lives in the <b>BGKT-2020</b>
+    noise-robust construction, a <i>different</i> circuit family; <b>the circuit we flew is the plain BGK-2018 solver</b>,
+    and F106 certified the game in a <b>separate experiment</b>. So the no-go (contextuality) and the computational
+    advantage are the <b>same resource in theory</b> — an association argued, <b>not a composition demonstrated on one
+    chip</b>. Not "closed end to end": linked by the theorem, not by a measured on-silicon chain.</p>
   </div>
 
   <h2><span class="n">6</span>Scope &amp; caveats</h2>

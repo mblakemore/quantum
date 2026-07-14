@@ -44,10 +44,10 @@ Pre-filed success band `[0.82, 0.93]` — **hit at the top**. Sentinels 0.985 / 
 - **W3_COVERAGE** — **the un-fakeable one:** every valid answer gets real weight (a one-answer mimic fails). PASS (min 0.2229).
 - **G_SENT** — Readout sentinels healthy. PASS (0.985 / 0.957).
 
-## 5 · The through-line — hardness inherited from contextuality
+## 5 · The through-line — hardness is contextuality-flavored (theory-associated)
 
-> **Contextuality → computational separation**
-> Why **can't** a classical shallow circuit do this? The BGKT-2020 noise-robust construction embeds the **magic-square game** — the same Peres–Mermin **contextuality** the museum certifies at 196σ (**F106**). The classical hardness of the shallow circuit is **inherited** from the impossibility of a non-contextual value assignment. The foundational no-go (contextuality) and the computational advantage (shallow-circuit separation) are **the same fact**, seen twice — the campaign's through-line, closed end to end.
+> **Contextuality → computational separation (in theory)**
+> Why **can't** a classical shallow circuit keep up *as the problem grows*? The hardness is **contextuality-flavored** — the grid's Peres–Mermin parity structure, the same resource family the museum certifies at 196σ (**F106**). One caution about the strength of that link: the magic-square gadget lives in the **BGKT-2020** noise-robust construction, a *different* circuit family; **the circuit we flew is the plain BGK-2018 solver**, and F106 certified the magic-square game in a **separate experiment**. So the no-go (contextuality) and the computational advantage are the **same resource in theory** — an association argued, **not a composition demonstrated on one chip**. Not "closed end to end": the two are linked by the theorem, not by a measured on-silicon chain.
 
 ## 6 · Scope & caveats
 

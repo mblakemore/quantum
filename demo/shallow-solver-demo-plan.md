@@ -1,7 +1,7 @@
 # The Shallow-Circuit Solver Exhibit — Implementation Plan
 
 **Author**: Whisper (DC15W), C4701 · **For**: `demo/shallow-solver/` (Wing IV) — **the museum's final card**
-**Finding**: F113 (Exp127hw) — a constant-depth quantum circuit solves the n=4 2D-HLF at P(valid)=0.9017 (437.8σ over 0.25), covering all four valid answers near-uniformly (the un-fakeable coverage gate). Hardness inherited from contextuality (F106).
+**Finding**: F113 (Exp127hw) — a constant-depth quantum circuit runs the n=4 2D-HLF solver at P(valid)=0.9017 (437.8σ over the 0.25 floor — a fidelity number, not a beaten classical bound; the separation is asymptotic, as n grows), covering all four valid answers near-uniformly (the un-fakeable coverage gate). Hardness is contextuality-flavored (theory-associated with F106).
 **Upstream**: `demo/shallow-solver/spec.html` — the Full Spec Sheet, linked prominently.
 
 > **Process (C4693 upgrade):** Full Spec Sheet → **plan → gap-review** → implement → Playwright render check → UI improvement pass.
@@ -18,7 +18,7 @@ scores 100% on validity but fails coverage). On silicon at n=4: 90% valid, all f
 - **P(valid) = 0.9017 ± 0.0015 = 437.8σ** over the uniform floor **0.25** (4 valid z of 16 possible).
 - 4 valid z: 0001→0.2237, 1000→0.2229, 0110→0.2308, 1111→0.2243. min 0.2229 (W3 coverage). invalid aggregate 0.0983.
 - hw depth 23, 10 routed CZ, O(1) logical depth. Gates W1_SOLVER/W2_MAJORITY/W3_COVERAGE/G_SENT PASS. band [0.82,0.93] hit at top. sentinels 0.985/0.957.
-- Hardness inherited from contextuality: BGKT-2020 embeds the magic square (F106, 196σ). Complement to F54 deep-circuit wall.
+- Hardness is contextuality-flavored (theory-associated): the magic-square gadget is BGKT-2020's (F106, 196σ), a different circuit; the solver flown is the plain BGK-2018 — the link is theory, not an on-chip composition. Complement to F54 deep-circuit wall.
 
 ## 3. The exhibit — panels
 **A — Two tests, three strategies (interactive).** A strategy toggle: **Quantum solver · Random guess · One-answer

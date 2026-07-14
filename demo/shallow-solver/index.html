@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Shallow-Circuit Solver — a constant-depth quantum advantage | The Quantum Museum</title>
-<meta name="description" content="A constant-depth quantum circuit solves the 2D Hidden Linear Function that no classical shallow circuit can — unconditionally. On silicon (n=4): P(valid)=0.9017 (437.8σ over the 0.25 floor), covering all four valid answers near-uniformly, where a one-answer classical mimic fails the coverage test. Hardness inherited from contextuality (F106). Real hardware (F113, job d9amnlvu62qs738o8nt0).">
+<meta name="description" content="A constant-depth quantum circuit runs the 2D Hidden Linear Function solver on silicon — the one theorem that separates shallow quantum from shallow classical as n grows (unconditional, but asymptotic; at n=4 a shallow classical circuit still solves it). On silicon (n=4): P(valid)=0.9017 (437.8σ over the 0.25 floor, a fidelity number not a beaten classical bound), covering all four valid answers near-uniformly, where a one-answer classical mimic fails the coverage test. Hardness is contextuality-flavored (theory-associated with F106). Real hardware (F113, job d9amnlvu62qs738o8nt0).">
 <link rel="stylesheet" href="../museum.css">
 <style>
   .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
@@ -137,8 +137,9 @@
     <p class="eyebrow">A constant-depth quantum advantage · Bravyi–Gosset–König</p>
     <h1>A circuit too <span class="hl">shallow</span> for any classical machine to match.</h1>
     <p class="lede">Some quantum advantages rest on unproven guesses (like "P ≠ NP"). This one doesn't. There is a
-    problem a quantum circuit of <b>fixed, shallow depth</b> can solve that <b>no classical shallow circuit can</b> —
-    proven outright. We ran it on silicon and it solved the puzzle 90% of the time, spreading its answers across the
+    problem a quantum circuit of <b>fixed, shallow depth</b> can solve that <b>no classical shallow circuit can — as the
+    problem grows</b> (proven outright, asymptotically; at the small size we flew a shallow classical circuit still
+    can). We ran it on silicon and it solved the puzzle 90% of the time, spreading its answers across the
     <b>whole</b> solution set — the part a classical cheat can't fake. Every number is measured hardware.</p>
 
     <div class="fence">
@@ -244,9 +245,12 @@
       </div>
       <div class="rc">
         <h3>2 · Hardness from contextuality</h3>
-        <p>Why <b>can't</b> a classical shallow circuit do this? The construction embeds the <b>magic-square game</b> —
-        the very <b>contextuality</b> the museum certifies at 196σ (F106). The no-go theorem and the computational
-        advantage are <span class="yes">the same fact, seen twice</span>.</p>
+        <p>Why <b>can't</b> a classical shallow circuit keep up as the problem grows? The hardness is
+        <b>contextuality-flavored</b> — the grid's parity structure, the same resource family the museum certifies at
+        196σ (F106). That link is <b>theory</b>: the magic-square gadget lives in BGKT-2020, a different circuit; the
+        solver we flew is the plain BGK-2018 circuit, and F106 certified the game in a <span class="yes">separate
+        experiment</span>. The no-go theorem and the computational advantage are the same resource in theory — not
+        composed on one chip here.</p>
       </div>
       <div class="rc">
         <h3>3 · No assumptions required</h3>

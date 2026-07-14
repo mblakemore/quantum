@@ -38,7 +38,7 @@ Three witnesses, one per rung, each graded against the bound its assumption sets
 | One-sided-DI | 0.65 bit/use (certified) ▲ | S₃ = 1.6813 ± 0.0071 · H_min = 0.6823 ± 0.0063 | 96σ / 5σ | RIGOROUS |
 | Full device-independence | 0.5928 bit/use (counterfactual) | DI bound — no-signaling unmet | — | EVAPORATES ✕ |
 
-▲ = the rung a single chip genuinely holds. The certified **0.65** is `H_min − 5·SE = 0.6509`. Near-ideal steering correlations (X 0.969 / Y −0.969 / Z 0.974); reconstructed `S₃ = 1.6876`; separable null `H_min = 0` (adversary certain); residual no-signaling violation `0.0032`; sentinels 0.994 / 0.987. The rigorous value **beat the Werner model** (0.682 > the 0.656 isotropic-noise estimate) — the real state is closer to ideal in the certifying directions than noise assumes.
+▲ = the rung a single chip genuinely holds. The certified **0.65** is `H_min − 5·SE = 0.6509`. Near-ideal steering correlations (X 0.969 / Y −0.969 / Z 0.974); reconstructed `S₃ = 1.6876`; separable null `H_min = 0` (adversary certain); residual no-signaling violation `0.0032`; sentinels 0.994 / 0.987. The rigorous value **beat the Werner model** (0.682 > the 0.656 isotropic-noise estimate) — the real state is closer to ideal in the certifying directions than noise assumes. **Bias-disclosed** ([audit C4713](../../docs/adversarial-audit-F117-randomness-certificate-whisper-c4713.md)): ~0.006 of that 0.026 gap is a method bias the bootstrap can't see (an MC lower bound, since it models only tomographic bias), so the beat is **real but ~22% smaller** (~0.020 signal), and 0.65 is the honest floor net of a systematic the method doesn't quantify — not a 5σ-tight number.
 
 ## 5 · Scope & caveats — the rung that evaporates is the point
 
