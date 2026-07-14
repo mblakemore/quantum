@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Magic Square — a puzzle with no solution, solved by a quantum computer | The Quantum Museum</title>
+<meta name="description" content="Fill a 3×3 square of +1/−1 obeying six rules — you can't, ever, beyond 5 of 6. A quantum computer wins all nine contexts at 96.9%, past the enumerated 8/9 classical ceiling by 196σ. Real hardware data (F106, job d9akl8fu62qs738o68pg).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 10px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(29px,5.6vw,50px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:64ch; margin:0 0 12px; }
+  .scope { display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; }
+  .panel-label.wall { color: var(--amber); } .panel-label.key { color: var(--cyan); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:66ch; }
+
+  .board { display:grid; grid-template-columns: repeat(3, 1fr) auto; gap:8px; max-width:360px; }
+  .cell { aspect-ratio:1; border:1.5px solid var(--edge-2); border-radius:10px; background:var(--card);
+    font-family:var(--mono); font-size:clamp(24px,7vw,34px); font-weight:700; cursor:pointer; color:var(--ink);
+    display:flex; align-items:center; justify-content:center; transition:transform .1s ease, border-color .12s; }
+  .cell:hover { transform: translateY(-2px); border-color: var(--cyan); }
+  .cell.plus { color: var(--good); } .cell.minus { color: var(--bad); }
+  .rtarget { display:flex; align-items:center; justify-content:center; font-family:var(--mono);
+    font-size:13px; gap:5px; color:var(--ink-3); min-width:40px; }
+  .ctargets { display:grid; grid-template-columns: repeat(3,1fr) auto; gap:8px; max-width:360px; margin-top:8px; }
+  .ctarget { text-align:center; font-family:var(--mono); font-size:13px; color:var(--ink-3); }
+  .ok { color: var(--good); } .bad { color: var(--bad); }
+  .rulechip { font-family:var(--mono); font-size:11px; }
+
+  .counter { font-family:var(--mono); margin-top:18px; }
+  .counter .n { font-size:clamp(30px,7vw,44px); font-weight:720; color:var(--ink); letter-spacing:-.02em; }
+  .counter .n b { color: var(--amber); }
+  .counter .c { font-size:12.5px; color:var(--ink-3); }
+  .hint { margin-top:14px; font-size:13.5px; color:var(--ink-2); max-width:60ch;
+    border-left:2px solid var(--amber); padding-left:12px; }
+  .layout { display:grid; grid-template-columns: auto 1fr; gap:clamp(20px,4vw,40px); align-items:start; }
+  @media (max-width:680px){ .layout { grid-template-columns:1fr; } }
+
+  .btn { font-family:var(--mono); font-size:13px; font-weight:600; padding:10px 18px; border-radius:10px;
+    border:1px solid var(--edge); color:var(--ink); background:var(--surface); cursor:pointer;
+    transition:transform .14s ease, box-shadow .14s ease; margin-top:18px; }
+  .btn:hover { transform:translateY(-2px); box-shadow:var(--shadow); }
+  .btn.accent { background:var(--cyan); color:#04201e; border-color:var(--cyan); }
+  .proof { font-family:var(--mono); font-size:13px; margin-top:16px; color:var(--ink-2); min-height:2.4em; }
+  .proof b { color:var(--ink); } .proof .ceil { color: var(--amber); font-weight:700; }
+
+  /* panel B */
+  .opgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; max-width:300px; }
+  .op { aspect-ratio:1.5; border:1px solid var(--edge); border-radius:8px; background:var(--surface-2);
+    display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-weight:700;
+    font-size:clamp(15px,4vw,20px); color:var(--cyan); }
+  .heat { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; max-width:300px; }
+  .hc { aspect-ratio:1.4; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-family:var(--mono); border:1px solid var(--edge); opacity:0; transform:scale(.85);
+    transition:opacity .4s ease, transform .4s cubic-bezier(.34,1.4,.5,1); }
+  .hc.show { opacity:1; transform:none; }
+  .hc .v { font-size:clamp(15px,4vw,20px); font-weight:700; color:var(--ink); }
+  .hc .lab { font-size:9px; color:var(--ink-3); }
+  @media (prefers-reduced-motion: reduce){ .hc { transition:none; } }
+  .readouts { display:flex; flex-wrap:wrap; gap:12px 26px; margin-top:22px; }
+  .ro { font-family:var(--mono); }
+  .ro .big { font-size:clamp(26px,6vw,38px); font-weight:720; letter-spacing:-.02em; line-height:1; }
+  .ro.q .big { color: var(--good); } .ro.c .big { color: var(--amber); } .ro.n .big { color: var(--ink-3); }
+  .ro .lab { font-size:11.5px; color:var(--ink-3); margin-top:5px; }
+  .ro .lab b { color: var(--cyan); }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--cyan); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
+  .badge-row .sp { flex:1; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing II · The No-Go Games</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Peres–Mermin pseudo-telepathy</p>
+    <h1>A puzzle with <span class="hl">no solution</span> — solved anyway.</h1>
+    <p class="lede">Fill a 3×3 square with +1 and −1 so that every row multiplies to +1 and the columns
+    multiply to +1, +1, −1. It cannot be done — you'll always break exactly one rule. That single broken
+    rule caps any classical team at 8 wins in 9. A quantum computer wins all nine. Play it, then watch the machine.</p>
+    <span class="scope">Pseudo-telepathy is textbook (Mermin–Peres). The contribution: the <b>frozen-court, enumerated-bound</b> measurement.</span>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label wall">Exhibit A — The Impossible Square</p>
+    <h2>Try to satisfy all six rules</h2>
+    <p class="sub">Click a cell to flip it between +1 and −1. Rows want +1; columns want +1, +1, −1.
+    Green ✓ means a rule is satisfied. Get all six at once — you can't.</p>
+    <div class="layout">
+      <div>
+        <div class="board" id="board"></div>
+        <div class="ctargets" id="ctargets"></div>
+      </div>
+      <div>
+        <div class="counter"><span class="n" id="ruleN"><b>5</b> / 6</span><div class="c">rules satisfied · the sixth never joins them</div></div>
+        <p class="hint">The whole grid multiplies to <b>+1</b> across the rows but <b>−1</b> down the columns — a flat contradiction. One rule always breaks, and that's the crack a classical team loses through.</p>
+        <button class="btn" id="proveBtn" type="button">Prove the ceiling →</button>
+        <div class="proof" id="proof"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label key">Exhibit B — The Quantum Key</p>
+    <h2>The same square, in quantum measurements</h2>
+    <p class="sub">Swap each ±1 number for one of these quantum measurements. Within any row or column they're
+    <em>compatible</em> and multiply to the required sign — so all six rules hold at once, no contradiction.
+    Alice and Bob share entangled pairs and read off their answers.</p>
+    <div class="layout">
+      <div>
+        <div class="opgrid" aria-label="Pauli operator square">
+          <div class="op">XI</div><div class="op">IX</div><div class="op">XX</div>
+          <div class="op">IZ</div><div class="op">ZI</div><div class="op">ZZ</div>
+          <div class="op">XZ</div><div class="op">ZX</div><div class="op">YY</div>
+        </div>
+        <button class="btn accent" id="runBtn" type="button">Run it on the quantum computer →</button>
+      </div>
+      <div>
+        <div class="heat" id="heat" aria-label="Measured per-context win rates"></div>
+        <div class="readouts" id="readouts" style="visibility:hidden">
+          <div class="ro q"><div class="big">96.9%</div><div class="lab">quantum, measured · <b>196σ</b> past the wall</div></div>
+          <div class="ro c"><div class="big">88.9%</div><div class="lab">classical ceiling (8/9)</div></div>
+          <div class="ro n"><div class="big">65.7%</div><div class="lab">no entanglement — even a quantum machine fails</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="badge-row">
+    <span>MEASURED · <span class="sig">F106</span> · job <span class="sig">d9akl8fu62qs738o68pg</span></span>
+    <span>ibm_marrakesh · 8/9 enumerated over 4096 strategy pairs</span>
+    <span class="sp"></span>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    // theme
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+
+    // ---- correctness kernel ----
+    var ROW_P = [1, 1, 1], COL_P = [1, 1, -1];
+    function prod(a) { return a[0] * a[1] * a[2]; }
+    function rowState(T, r) { return prod(T[r]) === ROW_P[r]; }
+    function colState(T, c) { return T[0][c] * T[1][c] * T[2][c] === COL_P[c]; }
+    function rulesSat(T) {
+      var n = 0; for (var r = 0; r < 3; r++) if (rowState(T, r)) n++;
+      for (var c = 0; c < 3; c++) if (colState(T, c)) n++; return n;
+    }
+    // live enumerators (the museum "we checked it" ethos)
+    function enumerate() {
+      var maxRules = 0, solvable = 0, tables = 0;
+      for (var b = 0; b < 512; b++) {
+        var T = [[0,0,0],[0,0,0],[0,0,0]];
+        for (var i = 0; i < 9; i++) T[(i/3)|0][i%3] = (b >> i) & 1 ? -1 : 1;
+        var n = rulesSat(T); if (n > maxRules) maxRules = n; if (n === 6) solvable++; tables++;
+      }
+      // game ceiling over strategy pairs
+      function rowsWith(p){ var out=[]; for(var b=0;b<8;b++){var s=[b&1?-1:1,b&2?-1:1,b&4?-1:1]; if(prod(s)===p)out.push(s);} return out; }
+      var Ar=[rowsWith(ROW_P[0]),rowsWith(ROW_P[1]),rowsWith(ROW_P[2])];
+      var Bc=[rowsWith(COL_P[0]),rowsWith(COL_P[1]),rowsWith(COL_P[2])];
+      var best=0, pairs=0;
+      for(var a0=0;a0<Ar[0].length;a0++)for(var a1=0;a1<Ar[1].length;a1++)for(var a2=0;a2<Ar[2].length;a2++)
+        for(var c0=0;c0<Bc[0].length;c0++)for(var c1=0;c1<Bc[1].length;c1++)for(var c2=0;c2<Bc[2].length;c2++){
+          var A=[Ar[0][a0],Ar[1][a1],Ar[2][a2]], B=[Bc[0][c0],Bc[1][c1],Bc[2][c2]], w=0;
+          for(var r=0;r<3;r++)for(var c=0;c<3;c++) if(A[r][c]===B[c][r]) w++;
+          if(w>best)best=w; pairs++;
+        }
+      return { maxRules: maxRules, solvable: solvable, tables: tables, best: best, pairs: pairs };
+    }
+
+    // ---- Panel A UI ----
+    var T = [[1,1,1],[1,1,1],[1,1,1]];   // starts at 5/6 (col 3 wants −1)
+    var board = document.getElementById("board"), ctargets = document.getElementById("ctargets"),
+        ruleN = document.getElementById("ruleN");
+    var cellEls = [];
+    for (var r = 0; r < 3; r++) {
+      for (var c = 0; c < 3; c++) (function (r, c) {
+        var btn = document.createElement("button");
+        btn.className = "cell"; btn.type = "button";
+        btn.addEventListener("click", function () { T[r][c] *= -1; paint(); });
+        board.appendChild(btn); cellEls.push({ btn: btn, r: r, c: c });
+      })(r, c);
+      // row target
+      var rt = document.createElement("div"); rt.className = "rtarget";
+      rt.innerHTML = '<span>→ +1</span> <span class="rulechip" id="rr' + r + '"></span>';
+      board.appendChild(rt);
+    }
+    for (var c = 0; c < 3; c++) {
+      var ct = document.createElement("div"); ct.className = "ctarget";
+      ct.innerHTML = '↓ ' + (COL_P[c] > 0 ? '+1' : '−1') + ' <span class="rulechip" id="cc' + c + '"></span>';
+      ctargets.appendChild(ct);
+    }
+    ctargets.appendChild(document.createElement("div")); // spacer under the row-target column
+    function paint() {
+      cellEls.forEach(function (o) {
+        var v = T[o.r][o.c];
+        o.btn.textContent = v > 0 ? "+" : "−";
+        o.btn.className = "cell " + (v > 0 ? "plus" : "minus");
+        o.btn.setAttribute("aria-label", "row " + (o.r+1) + " column " + (o.c+1) + ", currently " + (v>0?"+1":"−1") + ", click to flip");
+      });
+      for (var r = 0; r < 3; r++) { var ok = rowState(T, r);
+        document.getElementById("rr" + r).innerHTML = ok ? '<span class="ok">✓</span>' : '<span class="bad">✗</span>'; }
+      for (var c = 0; c < 3; c++) { var ok2 = colState(T, c);
+        document.getElementById("cc" + c).innerHTML = ok2 ? '<span class="ok">✓</span>' : '<span class="bad">✗</span>'; }
+      var n = rulesSat(T);
+      ruleN.innerHTML = "<b>" + n + "</b> / 6";
+    }
+    paint();
+
+    document.getElementById("proveBtn").addEventListener("click", function () {
+      var p = document.getElementById("proof");
+      p.innerHTML = "checking every square and every strategy…";
+      setTimeout(function () {
+        var e = enumerate();
+        p.innerHTML = "<b>" + e.solvable + "</b> of " + e.tables + " squares satisfy all six rules. " +
+          "The best classical team wins <b>" + e.best + " of 9</b> games — " +
+          "<span class='ceil'>the 8/9 ceiling = 88.9%</span> — checked across all " + e.pairs + " strategy pairs.";
+      }, 260);
+    });
+
+    // ---- Panel B: measured heatmap ----
+    // per-context win rates, row-major [r][c]; min is r3c3 = 0.9482 (assert-in-comment)
+    var WIN = [[0.9833,0.9832,0.9497],[0.9823,0.9849,0.9527],[0.9640,0.9726,0.9482]];
+    var heat = document.getElementById("heat"), cells = [];
+    for (var r = 0; r < 3; r++) for (var c = 0; c < 3; c++) {
+      var d = document.createElement("div"); d.className = "hc";
+      var w = WIN[r][c];
+      // green intensity scaled by margin above 8/9 (0.889..0.985)
+      var t = Math.max(0, Math.min(1, (w - 0.889) / (0.985 - 0.889)));
+      d.style.background = "color-mix(in srgb, var(--good) " + (16 + t * 40).toFixed(0) + "%, var(--card))";
+      d.innerHTML = '<span class="v">' + (w * 100).toFixed(1) + '%</span><span class="lab">r' + (r+1) + 'c' + (c+1) + '</span>';
+      heat.appendChild(d); cells.push(d);
+    }
+    document.getElementById("runBtn").addEventListener("click", function () {
+      var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      cells.forEach(function (el, i) {
+        if (reduce) { el.classList.add("show"); }
+        else setTimeout(function () { el.classList.add("show"); }, 70 * i);
+      });
+      var ro = document.getElementById("readouts");
+      setTimeout(function () { ro.style.visibility = "visible"; }, reduce ? 0 : 700);
+      this.disabled = true; this.textContent = "Measured on ibm_marrakesh ✓";
+    });
+  })();
+</script>
+</body>
+</html>
