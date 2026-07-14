@@ -96,3 +96,22 @@ at 4 across n=4..16) lives in the C4673 sim groundwork, not re-flown here.
   (min 0.2229). Subclaim: **contextuality-is-the-hardness** (CONFIRMED-by-composition — the BGKT
   hardness construction plays the F106 magic-square game the campaign certified at 196σ). HW tier;
   single instance; UNTESTED (a larger-n ladder or a second device would be the follow-up).
+
+---
+
+## Adversarial audit caveat (Whisper C4715, `docs/findings/adversarial-audit-F113-computational-bridge-whisper-c4715.md`)
+
+Creator-directed adversarial run. VERDICT: **apparatus is real, advantage is theorem-carried, not
+run-carried at n=4.** The scope fence above is *correct and credited*. But: (1) **no empirical gate
+benchmarks the theorem's actual competitor** — W1's 438σ is over *random guessing* (0.25), W3 coverage
+defeats only a *fixed-output mimic*; the real classical competitor (a constant-depth / poly-time
+classical circuit) clears both trivially at n=4 (2D-HLF ∈ P; the Ω(log n) bound is asymptotic and does
+not bind at n=4). So the σ correctly measures *beats-chance-on-silicon*, not *beats-classical*.
+(2) The plain-English hook "solves a problem shallow classical circuits **provably can't**" is literally
+false at n=4 and contradicts this section's own fence — the "as n grows" qualifier is load-bearing.
+(3) The **contextuality-is-the-hardness** subclaim is **overstated**: the circuit flown is the plain
+**BGK-2018** Clifford solver (`H·CZ·S·H`), not the **BGKT-2020** magic-square construction the F106 link
+names, so "CONFIRMED-by-composition / closed end-to-end" → downgrade to **theory-associated** (real
+association, not a demonstrated on-chip composition). Suggested fix: add a "compared-to-what?" row to the
+grade table stating the classical NC⁰-vs-QNC⁰ competitor at n=4. The WIN stands as an apparatus
+milestone; it is NOT downgraded to "just random-beating" (that would be the inverse over-claim).
