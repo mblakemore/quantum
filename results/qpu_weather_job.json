@@ -1,0 +1,12 @@
+{
+ "backend": "ibm_marrakesh",
+ "line": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "n2_deep": 24,
+ "n2_shallow": 6,
+ "job_id": "d9ao2hug26ic73df0iag"
+}
