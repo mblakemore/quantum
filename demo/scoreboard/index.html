@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Advantage — The Scoreboard</title>
+<meta name="description" content="Have we found quantum advantage? The five-scoreboard answer from a ~110-experiment IBM Heron campaign, F01–F117.">
+</head>
+<body>
+<style>
+  :root {
+    --surface:   #fcfcfb;
+    --panel:     #f3f4f6;
+    --panel-2:   #ffffff;
+    --hair:      #e4e6ea;
+    --hair-2:    #d3d7de;
+    --ink:       #0d0f12;
+    --ink-2:     #4b5563;
+    --ink-3:     #79828f;
+    --good:      #0ca30c;
+    --warn:      #b7791f;
+    --warn-led:  #fab219;
+    --blue:      #2a78d6;
+    --blue-soft: #dbe8fb;
+    --track:     #e8ebf0;
+    --shadow:    0 1px 2px rgba(13,15,18,.05), 0 8px 30px rgba(13,15,18,.06);
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, "Cascadia Mono", "Roboto Mono", monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface:   #14161a;
+      --panel:     #1b1e24;
+      --panel-2:   #20242b;
+      --hair:      #2b2f37;
+      --hair-2:    #3a3f49;
+      --ink:       #f2f4f7;
+      --ink-2:     #aab2be;
+      --ink-3:     #767f8c;
+      --good:      #24b524;
+      --warn:      #fab219;
+      --warn-led:  #fab219;
+      --blue:      #3987e5;
+      --blue-soft: #17233a;
+      --track:     #262b33;
+      --shadow:    0 1px 2px rgba(0,0,0,.3), 0 10px 34px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="light"] {
+    --surface:#fcfcfb; --panel:#f3f4f6; --panel-2:#ffffff; --hair:#e4e6ea;
+    --hair-2:#d3d7de; --ink:#0d0f12; --ink-2:#4b5563; --ink-3:#79828f;
+    --good:#0ca30c; --warn:#b7791f; --warn-led:#fab219; --blue:#2a78d6;
+    --blue-soft:#dbe8fb; --track:#e8ebf0;
+    --shadow:0 1px 2px rgba(13,15,18,.05),0 8px 30px rgba(13,15,18,.06);
+  }
+  :root[data-theme="dark"] {
+    --surface:#14161a; --panel:#1b1e24; --panel-2:#20242b; --hair:#2b2f37;
+    --hair-2:#3a3f49; --ink:#f2f4f7; --ink-2:#aab2be; --ink-3:#767f8c;
+    --good:#24b524; --warn:#fab219; --warn-led:#fab219; --blue:#3987e5;
+    --blue-soft:#17233a; --track:#262b33;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 34px rgba(0,0,0,.4);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--surface); color: var(--ink);
+    font-family: var(--sans); line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: clamp(20px, 4vw, 52px) clamp(16px, 4vw, 32px) 64px; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-3); margin: 0 0 14px;
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  }
+  .eyebrow b { color: var(--ink-2); font-weight: 600; }
+  .eyebrow .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--hair-2); }
+
+  h1 {
+    font-size: clamp(27px, 4.6vw, 42px); line-height: 1.08; letter-spacing: -.02em;
+    margin: 0 0 16px; font-weight: 680; text-wrap: balance; max-width: 20ch;
+  }
+  .verdict {
+    font-size: clamp(15px, 2vw, 17px); color: var(--ink-2); max-width: 68ch;
+    margin: 0 0 6px;
+  }
+  .verdict b { color: var(--ink); font-weight: 640; }
+  .verdict .sig { font-family: var(--mono); color: var(--blue); font-weight: 600; }
+
+  .rule { height: 1px; background: var(--hair); border: 0; margin: 30px 0 24px; }
+  .sect-label {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px;
+  }
+
+  /* scoreboard tiles */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 12px; }
+  .tile {
+    background: var(--panel); border: 1px solid var(--hair); border-radius: 12px;
+    padding: 16px 18px 17px; box-shadow: var(--shadow); position: relative;
+    display: flex; flex-direction: column; gap: 9px;
+  }
+  .tile-top { display: flex; align-items: center; gap: 9px; }
+  .led { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .led.good { background: var(--good); box-shadow: 0 0 0 3px color-mix(in srgb, var(--good) 18%, transparent); }
+  .led.warn { background: var(--warn-led); box-shadow: 0 0 0 3px color-mix(in srgb, var(--warn-led) 20%, transparent); }
+  .tile-name { font-size: 14px; font-weight: 620; color: var(--ink); letter-spacing: -.01em; }
+  .pill {
+    margin-left: auto; font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+    letter-spacing: .06em; padding: 3px 8px; border-radius: 999px; white-space: nowrap;
+  }
+  .pill.good { color: var(--good); background: color-mix(in srgb, var(--good) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--good) 30%, transparent); }
+  .pill.warn { color: var(--warn); background: color-mix(in srgb, var(--warn-led) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--warn-led) 34%, transparent); }
+  .metric { font-family: var(--mono); font-size: 21px; font-weight: 600; letter-spacing: -.01em;
+    color: var(--ink); font-variant-numeric: tabular-nums; }
+  .metric small { font-size: 12.5px; color: var(--ink-3); font-weight: 500; letter-spacing: 0; }
+  .tile-note { font-size: 12.5px; color: var(--ink-2); }
+  .tile-note code { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); }
+
+  /* sigma bars */
+  .bars { display: flex; flex-direction: column; gap: 13px; }
+  .bar-row { display: grid; grid-template-columns: 1fr; gap: 5px; }
+  .bar-head { display: flex; align-items: baseline; gap: 10px; }
+  .bar-name { font-size: 13.5px; font-weight: 560; color: var(--ink); }
+  .bar-null { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-left: auto; white-space: nowrap; }
+  .bar-track { position: relative; height: 22px; background: var(--track); border-radius: 5px; overflow: hidden; }
+  .bar-fill {
+    position: absolute; inset: 0 auto 0 0; border-radius: 5px;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--blue) 78%, transparent), var(--blue));
+    width: 0; transition: width 1s cubic-bezier(.22,.61,.36,1);
+    display: flex; align-items: center; justify-content: flex-end;
+  }
+  .bar-val { font-family: var(--mono); font-size: 12.5px; font-weight: 640; color: #fff;
+    padding-right: 9px; font-variant-numeric: tabular-nums; letter-spacing: -.01em;
+    text-shadow: 0 1px 2px rgba(0,0,0,.28); }
+  @media (prefers-reduced-motion: reduce) { .bar-fill { transition: none; } }
+
+  /* through-line + boundaries */
+  .through {
+    margin-top: 30px; background: var(--blue-soft); border: 1px solid color-mix(in srgb, var(--blue) 26%, transparent);
+    border-radius: 12px; padding: 17px 20px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .through .tag { font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: .1em;
+    color: var(--blue); text-transform: uppercase; padding-top: 2px; flex: none; }
+  .through p { margin: 0; font-size: 14px; color: var(--ink); max-width: 74ch; }
+  .through code { font-family: var(--mono); font-size: 12.5px; color: var(--blue); font-weight: 600; }
+
+  .bounds { margin-top: 26px; }
+  .bounds ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 8px 26px; }
+  .bounds li { font-size: 12.5px; color: var(--ink-2); padding-left: 18px; position: relative; }
+  .bounds li::before { content: "✕"; position: absolute; left: 0; color: var(--ink-3);
+    font-family: var(--mono); font-size: 11px; top: 1px; }
+  .bounds li b { color: var(--ink); font-weight: 600; }
+
+  footer { margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--hair);
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: .02em;
+    display: flex; gap: 8px 18px; flex-wrap: wrap; }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">
+    <b>IBM HERON</b><span class="dot"></span>2026 CAMPAIGN<span class="dot"></span>~110 EXPERIMENTS<span class="dot"></span>F01–F117<span class="dot"></span>EVERY NUMBER A JOB ID
+  </p>
+  <h1>Have we found quantum advantage?</h1>
+  <p class="verdict"><b>Yes — measurably, on four of five scoreboards</b>, against exact theorem ceilings cleared by <span class="sig">42σ&nbsp;to&nbsp;341σ</span>.</p>
+  <p class="verdict">On the fifth — computational — the wall against a brute-force speedup is <b>measured</b> (F54), and the constant-depth solver that the only depth-separation theorem is built on now <b>runs on silicon at 90%</b>. No shortcut is claimed that the hardware doesn't hold.</p>
+
+  <hr class="rule" />
+  <p class="sect-label">The five scoreboards</p>
+  <div class="tiles">
+    <div class="tile">
+      <div class="tile-top"><span class="led good"></span><span class="tile-name">Games &amp; correlations</span><span class="pill good">FOUND</span></div>
+      <div class="metric">216.8σ <small>causal-order game</small></div>
+      <div class="tile-note">The three great no-go theorems in one court — Bell, indefinite causal order, contextuality (8/9 at 196σ). <code>F82 · F106</code></div>
+    </div>
+    <div class="tile">
+      <div class="tile-top"><span class="led good"></span><span class="tile-name">Communication &amp; sensing</span><span class="pill good">FOUND</span></div>
+      <div class="metric">341σ <small>superdense coding</small></div>
+      <div class="tile-note">A ladder: superdense, 2→1 QRAC (110σ), GHZ metrology beats the standard quantum limit (168σ). <code>F87 · F107 · F108/9</code></div>
+    </div>
+    <div class="tile">
+      <div class="tile-top"><span class="led good"></span><span class="tile-name">Thermodynamics</span><span class="pill good">FOUND</span></div>
+      <div class="metric">21.1σ <small>ICO refrigeration</small></div>
+      <div class="tile-note">The causal-indefiniteness engine: population inversion from passive baths, a full cycle, negative local energy. <code>F86 · F94/5 · F97</code></div>
+    </div>
+    <div class="tile">
+      <div class="tile-top"><span class="led good"></span><span class="tile-name">Information</span><span class="pill good">FOUND</span></div>
+      <div class="metric">42σ <small>S(B|A) &lt; 0</small></div>
+      <div class="tile-note">Negative conditional entropy — a sign classical physics forbids — plus zero-capacity transmission. <code>F103 · F105</code></div>
+    </div>
+    <div class="tile">
+      <div class="tile-top"><span class="led warn"></span><span class="tile-name">Computational</span><span class="pill warn">WALL + BRIDGE</span></div>
+      <div class="metric">0.90 <small>BGK solver on silicon</small></div>
+      <div class="tile-note">No brute-force speedup (F54's wall). But the constant-depth 2D-HLF solver runs at 438σ over chance, persists to n=9. <code>F113 · F114</code></div>
+    </div>
+  </div>
+
+  <hr class="rule" />
+  <p class="sect-label">Clearance over the classical / theorem bound &nbsp;·&nbsp; log scale</p>
+  <div class="bars" id="bars"></div>
+
+  <div class="through">
+    <span class="tag">Through-line</span>
+    <p>The classical hardness of the <b>computational</b> problem <code>F113</code> <em>is</em> the magic-square <b>contextuality</b> <code>F106</code>, certified at 196σ. The correlation advantage and the computational advantage are the same resource.</p>
+  </div>
+
+  <div class="bounds">
+    <p class="sect-label">What is not claimed</p>
+    <ul>
+      <li><b>No brute-force speedup</b> — F54's 10× depth wall, measured.</li>
+      <li><b>No on-chip QNC⁰≠NC⁰ proof</b> — the separation is asymptotic; the apparatus is real.</li>
+      <li><b>No loophole-free device-independence</b> — the randomness certificate (F117, 0.65 bit/use) is one-sided-DI; locality open.</li>
+      <li><b>Same Heron generation only</b> — a cross-generation exam is the harder unclaimed test.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <span>~110 EXPERIMENTS</span><span>FINDINGS F01–F117</span><span>2 HERON CHIPS + FOREIGN-DEVICE EXAM</span><span>2 STANDING TOOLS: SDP-RANDOMNESS · QPU-WEATHER</span>
+  </footer>
+</div>
+
+<script>
+  const rows = [
+    { name: "Superdense coding",            sig: 341,   nul: "over 0.5 (unassisted)" },
+    { name: "Causal-order game",            sig: 216.8, nul: "over 0.8695 (SDP)" },
+    { name: "Magic-square contextuality",   sig: 196,   nul: "over 8/9 (enumerated)" },
+    { name: "GHZ metrology",                sig: 168,   nul: "over executed SQL" },
+    { name: "One-sided-DI steering",        sig: 96,    nul: "over LHS bound 1" },
+    { name: "Capacity activation",          sig: 55.6,  nul: "over 0" },
+    { name: "Negative conditional entropy", sig: 42,    nul: "S(B|A) < 0" },
+    { name: "ICO refrigeration",            sig: 21.1,  nul: "over 0" },
+  ];
+  const LO = 1, HI = Math.log10(500);            // log domain [10, 500]
+  const w = s => Math.max(9, ((Math.log10(s) - LO) / (HI - LO)) * 100);
+  const host = document.getElementById("bars");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  rows.forEach((r, i) => {
+    const row = document.createElement("div"); row.className = "bar-row";
+    row.innerHTML =
+      '<div class="bar-head"><span class="bar-name">' + r.name + '</span>' +
+      '<span class="bar-null">' + r.nul + '</span></div>' +
+      '<div class="bar-track"><div class="bar-fill"><span class="bar-val">' +
+      r.sig.toFixed(r.sig % 1 ? 1 : 0) + 'σ</span></div></div>';
+    host.appendChild(row);
+    const fill = row.querySelector(".bar-fill");
+    const target = w(r.sig) + "%";
+    if (reduce) { fill.style.width = target; }
+    else { requestAnimationFrame(() => setTimeout(() => fill.style.width = target, 80 + i * 70)); }
+  });
+</script>
+</body>
+</html>

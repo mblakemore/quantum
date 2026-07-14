@@ -6,6 +6,8 @@ scoped five routes). This is the completion: every route flown, every scope name
 
 ---
 
+**Visual scoreboard**: `demo/scoreboard/index.html` — the five scoreboards, the σ-clearances, and the boundaries at a glance (self-contained, theme-aware; deployable on the campaign Pages site).
+
 ## The one-line answer
 
 **Yes — measurably, on four of five scoreboards, against exact theorem ceilings cleared by
