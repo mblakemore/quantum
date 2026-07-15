@@ -1,0 +1,16 @@
+{
+ "verdict": "NO-TEST",
+ "integrity": false,
+ "primary": true,
+ "secondary": true,
+ "dest_cold": 0.13084768866666663,
+ "dest_cold_se": 0.0015136720279806718,
+ "dest_bath": 0.17026041666666666,
+ "dest_bath_se": 0.0014137728051423911,
+ "single_cold": 0.21147999999999997,
+ "single_cold_se": 0.0009723497313209894,
+ "beat_sigma": 44.81878701887636,
+ "classical_theory": 0.11377799999999998,
+ "s000": 0.020666666666666667,
+ "s111": 0.9356666666666666
+}
