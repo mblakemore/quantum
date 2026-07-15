@@ -137,7 +137,9 @@ Felce-Vedral cycle-relevant state. No-free-lunch (Maxwell-demon structure): with
 | 21 | THE ENGINE'S INVOICE — does the demon pay its Landauer bill? (erasure floor vs the work it earned) — **F104** | marrakesh (Exp125) | **LOSS as frozen (graded C4663, straddle-refuted at 5σ)** — the erasure floor measures **1.3–1.7× the work credit**, so *directionally* the demon pays its bill (no free lunch, books balance in the right direction), but the certification sits at **2.9σ** — short of the campaign's frozen 5σ bar → recorded as a **loss** (the F93/F95 floor-miss pattern), the exact insufficiency and fix named. Direction unambiguous; the sharp proof does not clear. | **F104** (`findings/F104-exp125-final-invoice-landauer-floor-demon-record-straddle-refuted-whisper-c4663-ember-numbered-c4145.md`) |
 | 22 | THE COHERENT RECORD — negative conditional entropy of the engine's record, directly certified — **F105** | marrakesh (Exp125b, qubit q4 = F104's qubit, **same window**) | **CERTIFIED half / frontier still straddles (graded C4664)** — direct S(B\|A) = **−0.855 bits at 42σ** (the record "knows more than its own contents"; direct ≫ F103's −0.296 twirled lower bound, exactly as it must be — twirling only raises entropy), which **closes F103/F104's cross-window caveat**. But erasure *below* the classical floor still **straddles**: the wall moved from entanglement (amply, directly present) to thermometry. The engine's negative-information ledger is real; cashing it below the floor is not yet certified. | **F105** |
 
-**Scope of this ledger (C4720)**: rows 1–22 are the switch / ICO **apparatus** family. The campaign
+| 23 | SPENDING THE COLD BRANCH — deliver the + branch onto an external data qubit (sub-bath reset) — **F118** | marrakesh `d9bdgrug26ic73dfr010` (re-fly of NO-TEST `d9bd80rv6alc73cst7g0`) | **WIN both legs (graded C4720, frozen rule C4720)** — the cold branch, measured in F86/F88 but never *used*, is SWAP-delivered onto a data qubit D outside the fridge: D lands at p₁ = **0.2100 ± 0.0038**, below the warm bath and **12.2σ colder than the definite-order null** (0.2602/0.2700); sub-bath certified at 5σ (0.2100+5SE=0.2289 < 0.25). First *use* of the cold branch (F95 spent the hot − branch). Honest NO-TEST→WIN arc: parent failed an optimistic 0.90 retention floor (F81 depth-haircut); re-fly's fresh window (retention 0.8885) clears Exp108's 0.85 precedent independently of the re-derived 0.80 floor. Scope: beats *definite-order* reset, **not** native reset (~0.01) — resource-theory sub-bath delivery. | **F118** (`findings/F118-exp138b-ico-cold-branch-sub-bath-reset-external-qubit-whisper-c4720.md`) |
+
+**Scope of this ledger (C4720)**: rows 1–23 are the switch / ICO **apparatus** family. The campaign
 then continued *past* ICO into a broader quantum-advantage program (**F106–F117**: Peres–Mermin
 contextuality, GHZ Heisenberg metrology, optimal cloning, shallow-circuit HLF computation,
 CHSH/one-sided-DI randomness) — a *different* apparatus family, indexed in
@@ -210,7 +212,9 @@ window *quality*, not calibration age, drives depth-class outcomes; graded NULL 
   the full engine cycle closes with books audited (F95, row 14); its Landauer *invoice* is
   directionally paid but not sharply certified (F104, row 21 — a recorded LOSS at 2.9σ), and the record's
   negative conditional entropy is directly certified at 42σ (F105, row 22) though erasure below the
-  classical floor still straddles.
+  classical floor still straddles; and the **cold** branch — never spent before — is delivered onto
+  an external qubit, resetting it sub-bath at 12.2σ over the definite-order null (F118, row 23; the
+  resource-theory floor beaten is definite-order, not native reset).
 - **Query-complexity scaling (Fourier promise)**: postponed — not this hardware generation.
 
 ## 8. Scope (what we do NOT claim)
