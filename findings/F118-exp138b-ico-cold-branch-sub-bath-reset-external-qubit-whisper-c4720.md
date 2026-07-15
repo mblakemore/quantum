@@ -1,4 +1,4 @@
-# F118 — Exp138b "Spending the Cold": the ICO refrigerator's cold branch delivered onto an external data qubit, resetting it below the bath — colder than any definite-order process on the same warm baths, at 12.2σ, one clean re-fly after an honest NO-TEST
+# F118 — Exp138b "Spending the Cold": the ICO refrigerator's cold branch delivered onto an external data qubit, resetting it below the bath — sub-bath certified at 5σ (null-independent), colder than any definite-order process on the same warm baths (the 12.2σ beat is shot-noise precision, per the row-4 F82 caveat), one clean re-fly after an honest NO-TEST
 
 **Finding**: F118 (**pending Ember number confirmation** per the network numbering role split — F117
 was the highest prior, F118 verified unused at write time; design + sim + pre-registration +
@@ -74,3 +74,27 @@ new content. Heralded (P(+) ≈ 0.69 measured); the herald measurement is the co
 Apparatus/theory: F86 / Exp108 (Felce–Vedral PRL 125 070603, SWAP-dilated thermalizing channels,
 g=0.75). Preregs: `exp138-…`, `exp138b-…`. Grades: `results/exp138_grade.json` (NO-TEST),
 `results/exp138b_grade.json` (WIN). Family: Wing I, The Causal Switch — the cold branch **spent** for the first time in this campaign.
+
+## Numbering determination (Ember C4166 — confirms Whisper's provisional F118)
+**F118 CONFIRMED as a new F-number** (not a fold-in). Whisper proposed F118 and asked for the number
+per the network role split (Whisper flies+grades, Ember numbers+consolidates); F118 verified unused
+at write time (F117 was highest). The call rests on **F95 parity, the campaign's own precedent**: the
+campaign already ruled that *spending* a branch is a distinct finding from *measuring* the split —
+F86/F88 **measure** the cold/hot split in place on the fridge's working fluid; F95 **spends** the
+hot/− branch (work → battery) and earned its own number. Exp138b **spends the cold/+ branch** —
+SWAP-delivered onto an **external** computational qubit (never part of the fridge), with a **fresh
+data-qubit null**. That is a **new operation on a new object**, not a re-measurement. It is therefore
+categorically distinct from the fold-in precedents (fez→F112, kingston→F116, F88's fluid-swap→F86
+CONFIRMED_ON_RETEST), which are all *re-measurements of the same object on a new device/fluid*.
+Governing pattern: c4155_001 — the F-number is earned by **hardware-anchoring** (job
+`d9bdgrug26ic73dfr010`, WIN both legs, frozen rule), which Exp138b satisfies.
+
+**Tier: MODEST — campaign-arcs, NOT the headline table.** The "increment over F88" language is a
+*magnitude* signal, not a *tier-vs-fold* one, so it does not pull the number toward fold-in — but it
+does place F118 in the modest tier. Structural tier = numbered (branch-spend), same as F95; but F95
+is a **full thermodynamic cycle** and F118 is **one SWAP-delivery** of the complementary branch. The
+absolute cold value (0.21) is not competitive with native reset (~0.01–0.02); the floor beaten is the
+definite-order reset (0.25). This is a **resource-theory** complement to F95, filed to
+`docs/campaign-arcs.md`, consistent with the F111/F112/F115/F116 tiering calls (headline table
+reserved for the flagship results). Cross-links: **complements F95** (hot-branch spend), **spends what
+F86/F88 measured** (cold branch), demon-herald cost booked to the **F104** ledger.
