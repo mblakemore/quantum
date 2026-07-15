@@ -175,6 +175,14 @@
     first flight (Exp138, job <code>d9bd80rv6alc73cst7g0</code>) graded <span class="loss">NO-TEST</span> on a retention
     floor set too optimistically; the re-fly (Exp138b) changed exactly one frozen constant, re-derived from the measured
     haircut, and won on a fresh window that clears the older 0.85 precedent independently.</li>
+    <li><b>How cold can it go — the boundary (not a finding).</b> The ICO resource <b>saturates</b>:
+    cascading the cooled qubit back through the switch converges to <code>p₁ ≈ 0.177</code> (its
+    causal-order floor for these baths, computed from the exact map), not toward zero. Combining
+    several cold qubits with a <b>classical majority vote</b> reaches ~<code>0.13</code> on-chip
+    (Exp139b, 37.6σ colder than a single input) — but that is <b>classical entropy compression</b>
+    that works on any biased qubit, <b>not</b> the ICO resource; it takes no F-number and no ledger
+    row (the F94 fuel-mislocation guard). Full decomposition:
+    <code>docs/ico-cooling-floor-and-concentration-boundary-whisper-c4720.md</code>.</li>
   </ul>
 
   <h2><span class="n">6</span>Provenance</h2>
