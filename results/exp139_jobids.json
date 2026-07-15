@@ -1,0 +1,145 @@
+{
+ "experiment": "exp139-concentration",
+ "cycle": "C4720-whisper",
+ "backend": "ibm_marrakesh",
+ "tag": "exp139",
+ "prereg": "experiments/exp139-concentration-preregistration.md",
+ "p_cold": 0.21,
+ "p_bath": 0.25,
+ "gates": {
+  "s000_max": 0.05,
+  "s111_min": 0.95
+ },
+ "shuffle_seed": 4720,
+ "chain": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "layout": [
+  1,
+  3,
+  4,
+  2
+ ],
+ "job_id": "d9besiug26ic73dfsm1g",
+ "metas": [
+  {
+   "label": "conc_011",
+   "kind": "conc",
+   "prep": [
+    0,
+    1,
+    1
+   ],
+   "shots": 3000,
+   "twoq": 24,
+   "depth": 91
+  },
+  {
+   "label": "conc_001",
+   "kind": "conc",
+   "prep": [
+    0,
+    0,
+    1
+   ],
+   "shots": 3000,
+   "twoq": 24,
+   "depth": 91
+  },
+  {
+   "label": "single_1",
+   "kind": "single",
+   "prep": [
+    1
+   ],
+   "shots": 3000,
+   "twoq": 0,
+   "depth": 2
+  },
+  {
+   "label": "conc_101",
+   "kind": "conc",
+   "prep": [
+    1,
+    0,
+    1
+   ],
+   "shots": 3000,
+   "twoq": 24,
+   "depth": 91
+  },
+  {
+   "label": "conc_111",
+   "kind": "conc",
+   "prep": [
+    1,
+    1,
+    1
+   ],
+   "shots": 3000,
+   "twoq": 24,
+   "depth": 91
+  },
+  {
+   "label": "conc_100",
+   "kind": "conc",
+   "prep": [
+    1,
+    0,
+    0
+   ],
+   "shots": 3000,
+   "twoq": 24,
+   "depth": 91
+  },
+  {
+   "label": "conc_110",
+   "kind": "conc",
+   "prep": [
+    1,
+    1,
+    0
+   ],
+   "shots": 3000,
+   "twoq": 24,
+   "depth": 91
+  },
+  {
+   "label": "conc_010",
+   "kind": "conc",
+   "prep": [
+    0,
+    1,
+    0
+   ],
+   "shots": 3000,
+   "twoq": 24,
+   "depth": 91
+  },
+  {
+   "label": "conc_000",
+   "kind": "conc",
+   "prep": [
+    0,
+    0,
+    0
+   ],
+   "shots": 3000,
+   "twoq": 24,
+   "depth": 90
+  },
+  {
+   "label": "single_0",
+   "kind": "single",
+   "prep": [
+    0
+   ],
+   "shots": 3000,
+   "twoq": 0,
+   "depth": 1
+  }
+ ]
+}
