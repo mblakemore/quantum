@@ -1,7 +1,10 @@
 # Exp140 — PRE-REGISTRATION (DRAFT, not yet frozen/flown): does the characterization stack sharpen a *mitigated* Operator-Loschmidt-Echo estimate at tracker scale?
 
 **Author**: Whisper (DC15W), C4744 (2026-07-15) · **Substrate**: claude-opus-4-8
-**Status**: DRAFT — **awaiting Creator (1) scope decision and (2) QPU ack.** Not frozen. Not flown.
+**Status**: **SIM-GATE PASSED (Option 2 done, C4744) → design frozen → awaiting only the QPU ack (Option 1).**
+Creator picked "2 & 1". The sim-tier feasibility kill-gate PASSED (see `exp140-sim/RESULT-...c4744.md`):
+the tracker's literal `49x648` echo signal clears the shot floor across the realistic depolarizing range;
+ground truth is **exactly 1.0** (α=0 mirror echo). Frozen design below. Not yet flown.
 **Bridge**: A (C4744) — the one live quantum-vs-classical *cost/accuracy race* our findings can support.
 **Target instance**: `operator_loschmidt_echo_49x648` (tracker `/data`, observable-estimations lane).
 
@@ -70,6 +73,22 @@ deserves to be believed over (or alongside) the tensor-network value. That is br
    (ii) a noisy-model pass (FakeMarrakesh) to confirm the stack-vs-mitigation delta is even **resolvable**
    at 648 CZ before spending QPU. **If the noisy sim shows the delta is below SE, do not fly** — report the
    negative feasibility instead (anti-F55-false-precision discipline).
+
+## FROZEN DESIGN (post sim-gate, C4744) — ready to fly on ack
+
+- **Instance**: `operator_loschmidt_echo_49x648` (tracker literal), O = Z₅₂Z₅₉Z₇₂, 648 CZ / 49 qubits.
+- **Ground truth**: **f_δ(O) = 1.0 exactly** (α=0 mirror echo; O disjoint+commuting with the rz(0.3)
+  perturbation; U=I confirmed by 100% CZ palindrome + ± angle-pair census). Freeze-time guard: one
+  symbolic gate-by-gate inverse check before submit.
+- **Arms**: (a) mitigation-alone (global rescaling + REM, default/vendor placement); (b) stack+mitigation
+  (same + live quiet-qubit placement F57/F58 + sentinel window-gate F81). Optional (c) raw, record-only.
+- **Primary metric**: `|f̂ − 1.0|` (deviation of the mitigated estimate from the exact echo value).
+- **Primary gate `W_A_STACK_SHARPENS`**: `|f̂_stack+mit − 1| < |f̂_mit − 1|` with the gap `> 2·SE_boot`.
+  Null (stack adds nothing beyond mitigation) is informative and kept.
+- **Shot budget**: **≥ 24 initial states × 4000 shots × 2 arms** (kill-gate margin; 30×8000 if the window
+  is poor). Sentinel `--nowcast` first; ABORT to the characterization tranche on NO-GO.
+- **Cost / ack**: ~120–240 s of the window/characterization tranche → **crosses the 180 s Creator-ack
+  gate (budget policy C4536 rule 2)**. This is the one remaining gate.
 
 ## The decision for the Creator (scope fork)
 
