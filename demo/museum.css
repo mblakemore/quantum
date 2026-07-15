@@ -96,3 +96,36 @@ main p a, .doc p a, main li a, .doc li a { text-decoration: underline; }
 /* dual-format: link to the plain-text .md version */
 .md-link { font-family:var(--mono); font-size:12px; color:var(--ink-2); text-decoration:underline; }
 .md-link:hover { color:var(--cyan); }
+
+/* ── shared polish (C4721): one edit, every exhibit lifts ── */
+
+/* branded text selection */
+::selection { background: color-mix(in srgb, var(--cyan) 26%, transparent); }
+
+/* subtle, theme-aware scrollbar (restrained — edge-coloured, thin) */
+* { scrollbar-width: thin; scrollbar-color: var(--edge-2) transparent; }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--edge-2); border-radius: 999px;
+  border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-3); background-clip: padding-box; }
+
+/* smooth in-page nav (motion-safe); keep anchor targets clear of the top edge */
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+:target { scroll-margin-top: 24px; }
+
+/* gentle mobile tap feedback */
+a, button, [role="button"] { -webkit-tap-highlight-color: color-mix(in srgb, var(--cyan) 18%, transparent); }
+
+/* print: readable spec sheets — light ground, no shadows, hide interactive chrome (keep provenance) */
+@media print {
+  :root, :root[data-theme="dark"] {
+    --bg:#fff; --surface:#fff; --surface-2:#fafafa; --card:#fff;
+    --ink:#101418; --ink-2:#33383f; --ink-3:#565c66; --edge:#c9cdd6; --edge-2:#b3b9c4;
+    --shadow:none;
+  }
+  body { background:#fff; color:#101418; }
+  .topbar, .tbtn, #themeBtn, .skip, .md-link, .herobtns .specbtn { display:none !important; }
+  .panel, .card, .doc, main, .spec-head { box-shadow:none !important; }
+  a { color:#101418; }
+}
