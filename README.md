@@ -1,6 +1,6 @@
 # Autonomous Characterization of the IBM Heron-r2 Quantum Processor
 
-**An empirical campaign on IBM Heron-generation hardware — `ibm_marrakesh`, `ibm_kingston`, `ibm_fez` — run end-to-end by an autonomous multi-agent network from May 2026 (ongoing). Every experiment is pre-registered before it flies; every number traces to an IBM Quantum job ID. The F-series of findings runs to F117, across 105 pre-registration documents.**
+**An empirical campaign on IBM Heron-generation hardware — `ibm_marrakesh`, `ibm_kingston`, `ibm_fez` — run end-to-end by an autonomous multi-agent network from May 2026 (ongoing). Every experiment is pre-registered before it flies; every number traces to an IBM Quantum job ID. The F-series of findings runs to F118, across 107 pre-registration documents.**
 
 Most of what you can buy from a quantum computer today is characterization: *how good are the qubits?* This campaign asks a sharper question — *what can this hardware do that a classical, causal, or definite-order process provably cannot?* — and answers it one scoreboard at a time, with the losses kept next to the wins.
 
@@ -51,7 +51,7 @@ The end-use of a Bell violation is *private random bits* — but how many you ma
 
 ### Thermodynamics from causal indefiniteness
 
-A resource proven real (F86), substrate-substituted (F88), certified (F94), run as a full engine cycle (F95), and pushed below the local ground state (F97) — demon books audited, every floor-miss kept in the record.
+A resource proven real (F86), substrate-substituted (F88), certified (F94), run as a full engine cycle (F95), pushed below the local ground state (F97), and — finally — *spent*: the cold branch delivered onto an external qubit to reset it sub-bath (F118) — demon books audited, every floor-miss kept in the record.
 
 | Result | Number | Where |
 |---|---|---|
@@ -60,6 +60,7 @@ A resource proven real (F86), substrate-substituted (F88), certified (F94), run 
 | **Certified sub-ground-state (negative) local energy** — a coherent-controlled extraction drives Bob's local energy **12σ below the local ground level** (corrected −0.0547 ± 0.0046; 5σ certified bound ≤ −0.0319, conservative by construction); the correlation is the active ingredient (removing it *injects* energy, 21σ). Exotic-matter-sign energy on a 2-qubit chip, books audited. **Scope**: coherent extraction only — the LOCC energy-*teleportation* leg missed its floor and is logged as a LOSS (classical-feedforward latency tax 0.092 E) | **F97** | [finding](findings/F97-exp119b-certified-negative-local-energy-coherent-extraction-whisper-c4641-c4642-ember-numbered-c4135.md) · [pre-reg](experiments/exp119b-coherent-negative-energy-preregistration.md) |
 | **ICO thermal splitting** — the Felce–Vedral refrigeration resource **won at 21.1σ**: the switch of two fully-thermalizing channels split the target COLDER (p₁\|+ = 0.2098) vs HOTTER (p₁\|− = 0.3894) by control outcome, Δ = 0.1796 against a causal value of exactly 0. Bonus: the pre-filed cross-arc depth-decay law beat FakeMarrakesh out-of-sample by 2.3× | **F86** | [finding](findings/F86-exp108-ico-refrigeration-resource-whisper-c4561-ember-numbered-c4121.md) · [pre-reg](experiments/exp108-ico-refrigeration-preregistration.md) |
 | **Native-fluid ICO refrigeration** — F86 **confirmed on retest at 12.9σ** with the working fluid substituted: reservoirs mixed by the chip's own T1 decay, + branch **colder than the coldest reservoir at 5σ**, procedure-theory residual 0.0016. The drift-tolerant re-fly absorbed the published-T1 bias (+38–69% live vs calibration, 2/2 runs) that NO-TESTed the first attempt | **F88** | [finding](findings/F88-exp108c-native-fluid-ico-refrigeration-whisper-c4592-c4593-ember-numbered-c4124.md) · [pre-reg](experiments/exp108c-native-thermal-refly-preregistration.md) |
+| **Spending the cold branch** — the cold output, only ever *measured* before (F86/F88), is **used**: SWAP-delivered onto an **external** data qubit and resetting it **sub-bath at 5σ** (p₁ = 0.2100, below 0.25), colder than the definite-order null (0.2602/0.2700) under the error budget. Not cherry-picking (null P(c=+)=0.998 → no cold subset to select under definite order). **Scope**: beats *definite-order* reset, **not** native reset (~0.01) — a resource-theory result, modest increment over F88. Honest NO-TEST→WIN arc: an optimistic retention floor NO-TESTed the parent; a one-frozen-constant re-fly (floor re-derived from the measured haircut) won on a window clearing the older 0.85 precedent independently | **F118** | [finding](findings/F118-exp138b-ico-cold-branch-sub-bath-reset-external-qubit-whisper-c4720.md) · [pre-reg](experiments/exp138b-ico-reset-refly-preregistration.md) |
 
 ### Foundations on silicon — Horizons-2, six universe-questions
 
@@ -108,7 +109,7 @@ The results above, made playable. Each exhibit is a self-contained, theme-aware 
 **Wing I · The Causal Switch**
 - **The Interactive Switch** (F73–F82) — [spec](demo/switch/spec.md) · [play](demo/switch/index.html)
 - **The Ladder of Causation** — [spec](demo/ladder/spec.md) · [play](demo/ladder/index.html)
-- **The ICO Refrigerator** (F86 / F88 / F95) — [spec](demo/ico-refrigerator/spec.md) · [play](demo/ico-refrigerator/index.html)
+- **The ICO Refrigerator** (F86 / F88 / F95 / F118) — [spec](demo/ico-refrigerator/spec.md) · [play](demo/ico-refrigerator/index.html)
 - **The Teleported Witness** (F92) — [spec](demo/teleported-witness/spec.md) · [play](demo/teleported-witness/index.html)
 
 **Wing II · The No-Go Games**
@@ -254,7 +255,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
     └── references.md             ← peer-reviewed and primary sources (cited inline in findings)
 ```
 
-**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (41–43 under experiment-named files, no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to **F117** and counting, with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
+**A field guide to finding numbers**: the campaign's numbering evolved live. Findings 1–44 are the core line (41–43 under experiment-named files, no Finding 45 in this line); `finding-25/26/46/47` belong to the quantum-IIT arc's separate numbering; the unified `F##` series runs from ~F48 to **F118** and counting, with one flagged collision (Elder's anchor "Finding 48" vs Ember's IIT F48). When in doubt, the file's header states its arc.
 
 ---
 

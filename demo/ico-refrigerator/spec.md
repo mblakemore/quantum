@@ -1,12 +1,12 @@
-# Cooling from the order of operations — and a full engine cycle
+# Cooling from the order of operations — a full engine cycle, and the cold branch spent
 
-`Findings F86 / F88 / F95`  ·  `Experiment Exp108 series (split · native fluid · engine loop)`  ·  `Backend ibm_marrakesh (Heron r2)`  ·  `Job d98vqfsqp3as739tfg0g`
+`Findings F86 / F88 / F95 / F118`  ·  `Experiment Exp108 series + Exp138b (split · native fluid · engine loop · sub-bath reset)`  ·  `Backend ibm_marrakesh (Heron r2)`  ·  `Jobs d98vqfsqp3as739tfg0g · d9bdgrug26ic73dfr010`
 
-> **✓ ICO REFRIGERATION CERTIFIED — split 21.1σ over causal 0 · full engine cycle runs (W1-loss kept)**
+> **✓ ICO REFRIGERATION CERTIFIED — split 21.1σ over causal 0 · full engine cycle runs (W1-loss kept) · cold branch spent to reset an external qubit sub-bath (F118)**
 
 Full Specification Sheet
 
-This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page is drawn from here; every number here is drawn from the frozen grade files `results/exp108_grade.json` and siblings, and the campaign finding rows for F86 / F88 / F95. Nothing is hand-tuned for display.
+This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page is drawn from here; every number here is drawn from the frozen grade files `results/exp108_grade.json`, `results/exp138b_grade.json`, and siblings, and the campaign finding rows for F86 / F88 / F95 / F118. Nothing is hand-tuned for display.
 
 ## 1 · The idea, in plain language
 
@@ -22,6 +22,7 @@ The target's excited-state population `p₁` is the thermometer (higher `p₁` =
 - **F86 — the split.** Basis-prepared reservoirs; certify `Δ > 0` against the exact causal 0, with thermalization null arms confirming the baths reach `τ`.
 - **F88 — native working fluid.** Re-fly with the reservoirs mixed by the chip's **own T1 decay** (X + live-calibrated delays) instead of classical basis-prep pooling — the working fluid is free.
 - **F95 — the engine.** A complete loop: certify passive baths in, charge the target above the halfway line, extract work, and re-certify the output passive so the cycle can repeat. Demon books audited on-chip.
+- **F118 — spending the cold branch.** The cold + branch, only ever *measured* before, is **used**: after the switch, a SWAP delivers it onto an **external** data qubit (never part of the fridge), resetting it below the bath — colder than any definite-order reset on the same warm baths.
 
 ## 3 · Pre-registered gates (frozen before flight)
 
@@ -29,8 +30,9 @@ The target's excited-state population `p₁` is the thermometer (higher `p₁` =
 - **NATIVE (F88)** — + branch colder than the **coldest** reservoir under the native T1 fluid. PASS — `Δ = 0.1645 ± 0.0127`, **5σ**.
 - **W2 (F95)** — Output re-certified passive: `p₁ < 0.5` at 5σ. PASS — 0.4913 < 0.5 (W2 WIN).
 - **W1 (F95)** — Quantitative drop-floor `> 0.05` at 5σ. LOSS — missed clearance by **0.7σ** (drop is 9.4σ from zero); kept in the record as a REFUTED magnitude subclaim.
+- **RESET (F118)** — external data qubit sub-bath (`p₁ + 5SE < 0.25`) AND colder than the definite-order null. PASS both — `p₁ = 0.2100 ± 0.0038` (5σ sub-bath), null 0.2602/0.2700 (12.2σ beat, common-mode-conservative). Integrity gates (null band, retention ≥ 0.80, deco) PASS.
 
-## 4 · The measured data — three findings, one resource
+## 4 · The measured data — four findings, one resource
 
 | finding · what | key measured value | vs threshold | significance | verdict |
 | --- | --- | --- | --- | --- |
@@ -39,21 +41,26 @@ The target's excited-state population `p₁` is the thermometer (higher `p₁` =
 | F88 · native-fluid retest | Δ = 0.1645 ± 0.0127 | + colder than coldest reservoir | 5σ | CONFIRMED |
 | F95 · full engine cycle | net work 0.0340 E/run  
 (charge p₁|₋ = 0.5485) | passive → charged → passive | 7σ charge · W2 5σ | W2 WIN |
+| F118 · sub-bath reset (cold spent) | p₁ = 0.2100 ± 0.0038  
+(null 0.2602 / 0.2700) | sub-bath at 5σ · beats definite-order reset | 12.2σ beat | WIN |
 
 The F86 branches straddle the baths: the **+** branch at `p₁ = 0.2098` is **colder** than the reservoir, the **−** branch at `0.3894` hotter — a definite-order engine cannot separate them at all. The F95 loop runs end-to-end: passive baths in (0.426 / 0.444, each 5σ below 0.5) → the switch charges the target to `p₁ = 0.5485` (7σ above 0.5) → the power stroke drops `p₁` by 0.0920 for a net **0.0340 E/run** → the output re-certifies passive (0.4913 < 0.5 at 5σ). Demon ledger audited at +0.0051 E/action.
+
+**F118 spends the cold branch.** Exhibits A–B *measured* the split and *spent the hot branch* (the engine charges a battery). F118 spends the **cold** branch: after the switch, `SWAP(target, D)` delivers the cold outcome onto an external data qubit `D`, which lands at `p₁ = 0.2100 ± 0.0038` — below the bath (0.25) at **5σ**, and colder than the same-chip definite-order reset (0.2602 / 0.2700) by a **12.2σ** beat. Both arms take the 22-CZ depth haircut (the null runs hot too), so the beat is common-mode-conservative. **Not cherry-picking:** in the null arms `P(c=+) = 0.998` — the control is a spectator, so under definite order there is no cold subset to post-select; the cold outcome exists to be heralded *only* when the order is superposed, which is exactly the causal-value-0 signature.
 
 ## 5 · Scope & caveats — including the loss we kept
 
 - **Definite order gives split = 0, exactly.** The null is not an approximation — it is a theorem for constant-to-`τ` channels. That is what makes any measured `Δ > 0` a clean signature of indefinite causal order rather than a noise artifact.
 - **The engine's W1 gate is a LOSS.** The quantitative drop-floor (`> 0.05` at 5σ) missed clearance by **0.7σ** and is frozen as LOSS — a REFUTED magnitude subclaim, kept in the record, not swept under. The **direction** is unambiguous (the drop is 9.4σ from zero and W2 passes); only the pre-filed **magnitude** at 5σ did not clear. The finding is the full cycle plus the leg that did not clear, together.
 - **Modest harvest, free fluid.** Under the native working fluid (F88) the + branch reaches ≈ 0.462×T_res (~54% colder), harvesting ~1.9% of the Landauer bound — the working fluid is free, the record is not. Published-T1 ran +38–69% high vs calibration (bias, not drift), absorbed by drift-tolerant gates; the certificate rests on in-job measured values.
+- **F118 is resource-theory, not a reset upgrade.** The sub-bath reset beats the **definite-order** reset (0.25), **not** the chip's native measurement-reset (~0.01–0.02). It is a proof-of-principle that the cold is a *transferable* resource (delivered to an external qubit), a modest increment over F88 — not a drop-in initialization primitive. Heralded (P(+) ≈ 0.69); the herald cost books to the F104 demon ledger. Honest arc: the first flight (Exp138, job `d9bd80rv6alc73cst7g0`) graded **NO-TEST** on a retention floor set too optimistically; the re-fly (Exp138b) changed exactly one frozen constant, re-derived from the measured haircut, and won on a fresh window that clears the older 0.85 precedent independently.
 
 ## 6 · Provenance
 
-- **Job:** d98vqfsqp3as739tfg0g (Exp108, the F86 split) · **Backend:** ibm_marrakesh (Heron r2)
-- **Grade files:** `results/exp108_grade.json` (F86) · `results/exp108b_grade.json` & `results/exp108c_grade.json` (F88 native-fluid retest)
-- **Finding rows:** `docs/campaign-arcs.md` — F86 (thermal splitting WIN), F88 (native-fluid CONFIRMED), F95 (the full engine cycle)
-- **Resource:** Felce–Vedral (PRL 125, 070603) · **Family:** Wing I, The Causal Switch · Horizons P4 (engine, end-to-end)
+- **Jobs:** d98vqfsqp3as739tfg0g (Exp108, the F86 split) · d9bdgrug26ic73dfr010 (Exp138b, the F118 sub-bath reset; parent NO-TEST d9bd80rv6alc73cst7g0) · **Backend:** ibm_marrakesh (Heron r2)
+- **Grade files:** `results/exp108_grade.json` (F86) · `results/exp108b_grade.json` & `results/exp108c_grade.json` (F88 native-fluid retest) · `results/exp138_grade.json` (F118 NO-TEST) & `results/exp138b_grade.json` (F118 WIN)
+- **Finding rows:** `docs/campaign-arcs.md` — F86 (thermal splitting WIN), F88 (native-fluid CONFIRMED), F95 (the full engine cycle); `findings/F118-…` (cold branch spent)
+- **Resource:** Felce–Vedral (PRL 125, 070603) · **Family:** Wing I, The Causal Switch · Horizons P4 (engine, end-to-end) · first *use* of the cold branch
 
 ---
 

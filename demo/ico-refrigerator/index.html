@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M4%204C8%208%208%208%2012%2012%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12%204C8%208%208%208%204%2012%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.7%22%20fill%3D%22%23e5e7eb%22%2F%3E%3C%2Fsvg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The ICO Refrigerator — cooling from the order of operations | The Quantum Museum</title>
-<meta name="description" content="Put two operations in a superposition of orders and a target qubit splits colder or hotter by control outcome — a refrigeration forbidden to any definite-order process (causal value 0). Split Δ=0.1796 at 21.1σ; a full engine cycle extracts 0.0340 E/run. Real hardware data (F86/F88/F95, job d98vqfsqp3as739tfg0g).">
+<meta name="description" content="Put two operations in a superposition of orders and a target qubit splits colder or hotter by control outcome — a refrigeration forbidden to any definite-order process (causal value 0). Split Δ=0.1796 at 21.1σ; a full engine cycle extracts 0.0340 E/run; the cold branch is spent to reset an external qubit sub-bath at 5σ. Real hardware data (F86/F88/F95/F118, jobs d98vqfsqp3as739tfg0g, d9bdgrug26ic73dfr010).">
 <link rel="stylesheet" href="../museum.css">
 <style>
   .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
@@ -177,10 +178,60 @@
     </div>
   </section>
 
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — Spending the Cold Branch (F118)</p>
+    <h2>Put the cold to work: reset another qubit below the bath</h2>
+    <p class="sub">Exhibit A <em>measured</em> the cold branch in place. Here it is <b>spent</b>: after the switch makes
+    the cold outcome, a SWAP delivers it onto a separate <b>data qubit</b> that was never part of the fridge —
+    leaving that qubit at <b>p₁ = 0.2100</b>, below the bath and colder than any definite-order reset on the same
+    warm baths. The engine (Exhibit B) spent the <em>hot</em> branch; this spends the <em>cold</em> one, for the first
+    time in the campaign.</p>
+    <div class="fridge">
+      <div>
+        <div class="readout-split">
+          <div class="d" style="color:#3b9dff">p₁ = 0.2100</div>
+          <div class="cap">the external data qubit after <b>ICO reset</b> (heralded on control = +) · ±0.0038</div>
+        </div>
+        <div class="causal">Sub-bath at <b>5σ</b> (0.2100 + 5·SE = 0.229 &lt; 0.25) and colder than the same-chip
+        definite-order reset (0.260) under the error budget. Both arms take the depth haircut; the cold one stays
+        colder — that difference is common-mode-robust.</div>
+        <div class="verdict"><b>Not cherry-picking.</b> In the definite-order arms the control is a spectator
+        (P(+) = 0.998), so <em>both</em> its outcomes sit at the bath — there is no cold subset to select. The cold
+        outcome exists to be heralded <span class="forbid">only</span> when the order is superposed. Keeping it
+        <em>is</em> the causal-value-0 signature, not a thumb on the scale.</div>
+      </div>
+      <div class="therms">
+        <div class="thermo hot">
+          <div class="tube"><div class="baseline" style="bottom:50%"><span>bath 0.25</span></div><div class="merc" style="height:52%;background:#ff6b5e"></div></div>
+          <div class="name">definite order</div>
+          <div class="p1" style="color:#ff6b5e">0.260</div>
+          <div class="state">reset → bath (null)</div>
+        </div>
+        <div class="thermo cold">
+          <div class="tube"><div class="baseline" style="bottom:50%"></div><div class="merc" style="height:42%;background:#3b9dff"></div></div>
+          <div class="name">ICO reset +</div>
+          <div class="p1" style="color:#3b9dff">0.210</div>
+          <div class="state">below the bath</div>
+        </div>
+      </div>
+    </div>
+    <div class="ledger">
+      <span class="win">WIN both legs</span>
+      <span class="lab">sub-bath 5σ · colder than definite-order reset · deco/retention clean</span>
+      <span class="sp" style="flex:1"></span>
+      <span class="lab" style="color:var(--amber)">scope: beats <b>definite-order</b> reset (0.25), <b>not</b> the chip's native reset (~0.01) — a resource-theory result</span>
+    </div>
+    <p class="sub" style="margin:14px 0 0;font-size:12.5px;color:var(--ink-3)">Honest arc: the first flight graded
+    <b>NO-TEST</b> — a quality sentinel came in under a floor I'd set too optimistically. The re-fly changed exactly one
+    pre-registered number (re-derived from the measured data), ran a fresh job, and won cleanly on a better window that
+    clears the older established bar independently — so the win does not hinge on the loosened floor.</p>
+  </section>
+
   </main>
   <div class="badge-row" role="contentinfo">
-    <span>MEASURED · <span class="sig">F86 / F88 / F95</span> · job <span class="sig">d98vqfsqp3as739tfg0g</span></span>
-    <span>ibm_marrakesh · causal value = 0 · split 21.1σ</span>
+    <span>MEASURED · <span class="sig">F86 / F88 / F95 / F118</span> · jobs <span class="sig">d98vqfsqp3as739tfg0g · d9bdgrug26ic73dfr010</span></span>
+    <span>ibm_marrakesh · causal value = 0 · split 21.1σ · sub-bath reset 5σ</span>
     <span class="sp"></span>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
