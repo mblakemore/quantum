@@ -1,0 +1,18 @@
+{
+  "fake": {
+    "dest_cold": 0.126554536,
+    "dest_cold_se": 0.0012949378512371215,
+    "dest_bath": 0.167375,
+    "dest_bath_se": 0.0011752586567033872,
+    "single_cold": 0.2113,
+    "single_cold_se": 0.0006594000303306026,
+    "th_cold": 0.11377799999999998,
+    "th_bath": 0.15625,
+    "s000": 0.017,
+    "s111": 0.975,
+    "beats_single": true,
+    "colder_bath": true,
+    "integrity": true,
+    "twoq": 24
+  }
+}
