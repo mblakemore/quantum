@@ -48,7 +48,7 @@
 
   /* the ladder */
   .ladder { display:flex; flex-direction:column; gap:10px; }
-  .rung { text-align:left; border:1.5px solid var(--edge); border-radius:12px; padding:13px 15px;
+  .rung { display:flex; flex-direction:column; text-align:left; border:1.5px solid var(--edge); border-radius:12px; padding:13px 15px;
     background:var(--surface-2); cursor:pointer; transition:border-color .14s, background .14s, transform .12s; position:relative; }
   .rung:hover { transform:translateX(3px); border-color:var(--edge-2); }
   .rung.on { border-color:var(--cyan); background:var(--card-hover); }
