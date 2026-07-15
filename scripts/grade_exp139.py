@@ -19,7 +19,7 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, '..', 'experiments'))
 from run_exp66_qpu_partb import _get_ibm_service
 
-MANIFEST = os.path.join(HERE, '..', 'results', 'exp139_jobids.json')
+DEFAULT_MANIFEST = os.path.join(HERE, '..', 'results', 'exp139_jobids.json')
 
 
 def w(b, p):
@@ -36,7 +36,7 @@ def pooled(dest, p):
 
 
 def main():
-    man = json.load(open(MANIFEST))
+    man = json.load(open(sys.argv[1] if len(sys.argv) > 1 else DEFAULT_MANIFEST))
     P_COLD, P_BATH = man["p_cold"], man["p_bath"]
     svc = _get_ibm_service()
     job = svc.job(man["job_id"])
@@ -89,8 +89,9 @@ def main():
            "secondary": bool(secondary), "dest_cold": dc, "dest_cold_se": dc_se,
            "dest_bath": db, "dest_bath_se": db_se, "single_cold": sc, "single_cold_se": sc_se,
            "beat_sigma": float(beat_sigma), "classical_theory": th, "s000": s000, "s111": s111}
-    json.dump(out, open(os.path.join(HERE, '..', 'results', 'exp139_grade.json'), 'w'), indent=1, default=float)
-    print(f"\nwrote results/exp139_grade.json")
+    tag = man.get("tag", "exp139")
+    json.dump(out, open(os.path.join(HERE, '..', 'results', f'{tag}_grade.json'), 'w'), indent=1, default=float)
+    print(f"\nwrote results/{tag}_grade.json")
 
 
 if __name__ == "__main__":

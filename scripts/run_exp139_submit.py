@@ -23,6 +23,9 @@ from exp139_concentration import conc_circuit, single_circuit, SHOTS, P_COLD, P_
 
 SHUFFLE_SEED = 4720
 MAX_2Q = 40
+# module-level integrity-gate constants (overridable by the exp139b re-fly wrapper; recorded in manifest)
+S000_MAX = 0.05
+S111_MIN = 0.95
 
 
 def pick_chain4(backend):
@@ -136,7 +139,7 @@ def main():
                 "backend": args.backend, "tag": args.tag,
                 "prereg": "experiments/exp139-concentration-preregistration.md",
                 "p_cold": P_COLD, "p_bath": P_BATH,
-                "gates": {"s000_max": 0.05, "s111_min": 0.95},
+                "gates": {"s000_max": S000_MAX, "s111_min": S111_MIN},
                 "shuffle_seed": SHUFFLE_SEED, "chain": list(chain), "layout": layout,
                 "job_id": jid, "metas": metas}
     outp = os.path.join(HERE, '..', 'results', f'{args.tag}_jobids.json')
