@@ -21,7 +21,7 @@ delivers exactly the bath (causal value = 0); the sub-bath delivery is forbidden
   the engine uses the − branch; C4519 memory — episodic recall ≈ 0% — so this was checked in the
   finding text, not remembered).
 - Exp138b **spends it**: delivery of the cold onto an **external computational qubit** + a **fresh
-  data-qubit null**. First *use* of the cold branch as a coolant.
+  data-qubit null**. The cold branch spent as a coolant for the first time in this campaign.
 
 ## Frozen grade (rule committed pre-data, `experiments/exp138b-ico-reset-refly-preregistration.md`)
 - **INTEGRITY (PASS):** null band `|n − 0.25| + 5SE < 0.05` both orders (0.2602±0.0016, 0.2700±0.0023);
@@ -36,16 +36,32 @@ that floor was set **optimistically** against FakeMarrakesh's 0.9725 (the F81 de
 ~0.12, so ~0.85 is what this depth realistically delivers), **and** the window landed at the
 Exp108 precedent edge (0.846 < 0.85). The re-fly changed **exactly one** frozen constant — the
 retention floor, re-derived to 0.80 from the measured haircut — and re-submitted for a fresh
-window; it **re-graded nothing**. The new window came in materially better (0.8885), which
-**clears Exp108's established 0.85 precedent independently of the re-derivation** — so the WIN does
-not hinge on the loosened floor. (It *would* miss the original 0.90, confirming that floor was
-optimistic rather than the re-derivation excessive.) The Exp108b → Exp108c pattern, repeated.
+window; it **re-graded nothing**. The new window came in materially better (0.8885) — and note this sentinel runs through the extra transfer
+SWAP, so it is a **deeper (harder) bar than Exp108's**, yet it still clears Exp108's established
+**0.85** precedent — so the WIN does not hinge on the loosened floor. (It *would* miss the original
+0.90, confirming that floor was optimistic rather than the re-derivation excessive.) The
+Exp108b → Exp108c pattern, repeated.
+
+## The heralding is not cherry-picking (the first objection an audit raises)
+The PRIMARY compares the **heralded** reset (control = +, kept ≈ 69%) against the **unconditioned**
+nulls — which invites *"you discarded the 31% hot − branch and kept the cold outcomes; that's
+post-selection, not cooling."* The rebuttal is in the data: **in the definite-order nulls
+P(c=+) = 0.9987 / 0.9979** — the control is a **spectator**, and *both* its outcomes sit at the bath.
+Under definite order **there is no cold subset to post-select**; heralding on the null control is
+vacuous. The cold outcome exists to be heralded **only** when the order is superposed, because that
+is what creates the control–target correlation. So "heralded vs unconditioned" is not an asymmetric
+advantage — it **is** the operational signature of causal value = 0. (The herald's cost is the
+control measurement, booked to the F104 demon ledger.)
 
 ## Conservative-not-inflated
-The measured beat (0.0501) is **smaller** than the ideal (0.065): depth noise on the 22-CZ payload
-shrank it, so the signal is conservative. The nulls ran hot (0.26–0.27 vs bath 0.25) from the same
-depth — a common-mode symptom that does **not** manufacture the beat (the deeper reset arm beats
-the shallower nulls anyway), and the sub-bath leg (0.2100 + 5SE < 0.25) is null-independent.
+Model-free strength (this is the claim, not the σ): the sub-bath leg (0.2100 + 5SE = 0.2289 < 0.25)
+is certified at 5σ and is **null-independent**; and the reset beats the definite-order null under the
+error budget on the same chip in the same job. The headline **12.2σ is beat/shot-noise precision**,
+not physical significance (the row-4 F82 caveat applies to this number too). The measured beat
+(0.0501) is **smaller** than the ideal (0.065): depth noise on the 22-CZ payload shrank it, so the
+signal is conservative. The nulls ran hot (0.26–0.27 vs bath 0.25) from the same depth — a
+common-mode symptom that does **not** manufacture the beat (the deeper reset arm beats the shallower
+nulls anyway).
 
 ## Scope (frozen — not oversold)
 A **resource-theory** result: sub-bath cooling of an arbitrary external qubit using **warm baths +
@@ -57,4 +73,4 @@ new content. Heralded (P(+) ≈ 0.69 measured); the herald measurement is the co
 ## Provenance
 Apparatus/theory: F86 / Exp108 (Felce–Vedral PRL 125 070603, SWAP-dilated thermalizing channels,
 g=0.75). Preregs: `exp138-…`, `exp138b-…`. Grades: `results/exp138_grade.json` (NO-TEST),
-`results/exp138b_grade.json` (WIN). Family: Wing I, The Causal Switch — first **use** of the cold branch.
+`results/exp138b_grade.json` (WIN). Family: Wing I, The Causal Switch — the cold branch **spent** for the first time in this campaign.
