@@ -1,7 +1,10 @@
 # Proposal — A Scalable 2D-HLF Instance Family for the Classically-Verifiable Lane
 
 **Author**: Whisper (DC15W), C4744 (2026-07-15) · **Substrate**: claude-opus-4-8
-**Status**: PROPOSAL / right-shape-wrong-scale — **no current quantum-side win over classical is claimed.**
+**Status**: PROPOSAL — **no quantum cost-race win over classical is claimed, at any scale (see §"Two meanings of scale").**
+Correction (C4744, Creator-prompted): the earlier "right-shape-**wrong-scale**" framing was too optimistic. For
+the tracker's *cost-race* sense it is **wrong-hardness-class** (2D-HLF ∈ P — no n makes it hard for a real
+classical computer); scaling only ever sharpens the *depth-separation* demonstration.
 **Source results**: F113 (Exp127-HW, 2D-HLF solver on silicon, n=4) · F114 (Exp134, ladder to n=9).
 **Directive**: Creator — "draft the scalable-HLF problem proposal" (bridge B, C4744).
 
@@ -66,6 +69,34 @@ Each rung ships as: the `A`/`b` instance definition, the QASM circuit, the poly-
 the measured score + job ID. The definition files and verifier already exist in the repo
 (`experiments/exp127*`, `experiments/exp134*`); packaging them to the tracker's `problem definition files`
 format (circuit + a one-page nontriviality justification) is the concrete submission work.
+
+## Two meanings of "scale" — only one is reachable
+
+1. **Tracker cost-race advantage (beats any classical algorithm, can be "superseded")** — **UNREACHABLE by scaling.**
+   2D-HLF is in **P**: a classical machine solves any instance by Gauss-elimination over F₂ in poly(n),
+   returning a valid `z` with probability 1 at every size. The tracker races *real classical computers*
+   (its submissions log `runtimeClassical` on actual CPUs/GPUs), so there is no n at which classical
+   "can't keep up." The ceiling is the **problem class**, not the hardware. This is the honest correction
+   to "wrong-scale."
+2. **A sharper depth-separation demonstration (QNC⁰ vs NC⁰, O(1) quantum depth vs Ω(log n) classical
+   *circuit* depth)** — **REACHABLE, and this is what Bridge B actually is.** The limiter is **routing
+   overhead**: the BGK instance lives on a **2D grid**, our Heron hardware is **heavy-hex**, so embedding
+   forces SWAP-routing that grows the *physical* 2q count (10→16→39 for n=4→6→9, F114) while the *logical*
+   depth stays O(1) (CZ-layers 2→3→4). Eventually routed physical depth hits the scrambling wall.
+
+## What scale requires (hardware), ranked by leverage
+
+| Requirement | Why it unlocks scale | Specific hardware + access |
+|---|---|---|
+| **All-to-all connectivity** (best — *subsumes* a 2D grid, zero routing) | any grid embeds with **zero SWAPs**; physical depth stays O(1) as the grid grows | **Quantinuum H2** — 56 qubits, all-to-all, **99.9% 2q** (→ ~7×7 grid ≈ 49 vertices), via **Azure Quantum**. **IonQ Forte** — 36q, all-to-all, 99.6% (→ ~6×6), on **AWS Braket** now. **IonQ Tempo** — ~100q, 99.9% (→ ~10×10), 2026. |
+| **Native square-lattice** (2D grid, ~zero routing, more qubits) | the BGK grid maps 1:1 to the chip; larger n than ions, lower fidelity | **Rigetti Ankaa-3** — 84q square lattice (→ ~9×9 ≈ 81 vertices), **AWS Braket** (us-west-1). **IQM** — 20–54q square lattice, **AWS Braket** (eu-north-1). |
+| **Lower per-gate error** (fallback on existing heavy-hex) | keeps the *routed* depth under the wall to larger n — incremental, not unbounded | IBM Heron (current) — no topology change; buys a rung or two. |
+| **BGKT-2020 construction** (not the 2018 solver flown) | upgrades to a *noise-robust / average-case* separation using the magic-square gadget (F106 link becomes a circuit, not just theory) | any of the above; a harder, different circuit family. |
+
+**Access reality**: all-to-all and square-lattice access is commercial pay-per-shot via **AWS Braket**
+(IonQ, IQM, Rigetti) or **Azure Quantum** (Quantinuum, IonQ) — a new account + billing, distinct from our
+IBM Quantum campaign channel. Recommended first target: **Quantinuum H2 on Azure** (all-to-all + highest
+fidelity = the cleanest BGK demonstration) or **Rigetti Ankaa-3 on Braket** (native grid + most qubits).
 
 ## Why propose it despite no current advantage
 
