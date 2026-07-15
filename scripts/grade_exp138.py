@@ -22,11 +22,17 @@ sys.path.insert(0, os.path.join(HERE, '..', 'experiments'))
 from run_exp66_qpu_partb import _get_ibm_service
 from exp108_ico_refrigeration import pooled_stats, exact_targets, G
 
-MANIFEST = os.path.join(HERE, '..', 'results', 'exp138_jobids.json')
+DEFAULT_MANIFEST = os.path.join(HERE, '..', 'results', 'exp138_jobids.json')
 
 
 def main():
-    man = json.load(open(MANIFEST))
+    manifest_path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_MANIFEST
+    man = json.load(open(manifest_path))
+    gates = man.get("gates", {})
+    RET_MIN = gates.get("retention_min", 0.90)
+    BEAT_FLOOR = gates.get("beat_floor", 0.02)
+    THERM = gates.get("therm_band", 0.05)
+    DECO_LO, DECO_HI = gates.get("deco_band", [0.40, 0.60])
     svc = _get_ibm_service()
     job = svc.job(man["job_id"])
     assert str(job.status()) in ("DONE", "JobStatus.DONE"), f"job not done: {job.status()}"
@@ -54,7 +60,8 @@ def main():
     nr = pooled_stats(counts["null_rev"], conditional=False)
     th = exact_targets(G, np.diag([G, 1 - G]).astype(complex))
 
-    print(f"=== Exp138 GRADE (job {man['job_id']}, chain {man['chain']}, layout {man['layout']}) ===")
+    print(f"=== {man.get('tag','exp138')} GRADE (job {man['job_id']}, chain {man['chain']}, "
+          f"layout {man['layout']}, retention floor {RET_MIN}) ===")
     print(f"theory: reset p1_D|+={th['+']['p1']:.4f}  null 0.25 exactly  P(+)={th['+']['P']:.4f}")
     print(f"reset : p1_D|+={r['+']['p1']:.4f}(±{r['+']['se']:.4f})  "
           f"p1_D|-={r['-']['p1']:.4f}(±{r['-']['se']:.4f})  P(+)={r['+']['P']:.4f}")
@@ -65,21 +72,21 @@ def main():
     dec_pplus = sum(v for k, v in deco.items() if k[-1] == "0")
     print(f"deco-null P(c=+)={dec_pplus:.4f} (ideal 0.5)")
 
-    # frozen gates
-    null_ok = all(abs(n["p1"] - (1 - G)) + 5 * n["p1_se"] < 0.05 for n in (nf, nr))
-    ret_ok = min(sentinels.values()) >= 0.90
-    deco_ok = 0.40 <= dec_pplus <= 0.60
+    # frozen gates (values from manifest, committed pre-data)
+    null_ok = all(abs(n["p1"] - (1 - G)) + 5 * n["p1_se"] < THERM for n in (nf, nr))
+    ret_ok = min(sentinels.values()) >= RET_MIN
+    deco_ok = DECO_LO <= dec_pplus <= DECO_HI
     integrity = null_ok and ret_ok and deco_ok
 
     null_min, null_min_se = (nf["p1"], nf["p1_se"]) if nf["p1"] <= nr["p1"] else (nr["p1"], nr["p1_se"])
     beat_val = null_min - r["+"]["p1"]
     beat_margin = beat_val - 5 * np.hypot(r["+"]["se"], null_min_se)
-    primary = beat_margin > 0.02
+    primary = beat_margin > BEAT_FLOOR
     subbath = r["+"]["p1"] + 5 * r["+"]["se"] < 0.25
     subbath_val = r["+"]["p1"] + 5 * r["+"]["se"]
 
     print(f"\nINTEGRITY: null-band {'ok' if null_ok else 'BAD'} | "
-          f"retention {'ok' if ret_ok else 'BAD'} (min {min(sentinels.values()):.4f}/0.90) | "
+          f"retention {'ok' if ret_ok else 'BAD'} (min {min(sentinels.values()):.4f}/{RET_MIN}) | "
           f"deco {'ok' if deco_ok else 'BAD'} -> {'PASS' if integrity else 'NO-TEST'}")
     print(f"PRIMARY  beats-definite-order: beat={beat_val:.4f}, margin(−5SE)={beat_margin:.4f} vs 0.02 "
           f"-> {'PASS' if primary else 'FAIL'}")
@@ -103,7 +110,7 @@ def main():
            "beat_val": float(beat_val), "beat_margin": float(beat_margin),
            "beat_sigma": float(beat_sigma), "subbath_val": float(subbath_val),
            "theory": {"p1p": th["+"]["p1"], "p1m": th["-"]["p1"], "Pp": th["+"]["P"]}}
-    outp = os.path.join(HERE, '..', 'results', 'exp138_grade.json')
+    outp = os.path.join(HERE, '..', 'results', f"{man.get('tag','exp138')}_grade.json")
     with open(outp, 'w') as f:
         json.dump(out, f, indent=1, default=float)
     print(f"\nwrote {os.path.abspath(outp)}")

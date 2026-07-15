@@ -25,6 +25,12 @@ import exp108_ico_refrigeration as m108
 
 SHUFFLE_SEED = 4720          # pre-registered (matches transpile seed in exp138_ico_reset)
 MAX_RESET_2Q = 40            # frozen class bound (FakeMarrakesh preview: 23)
+# module-level gate constants (overridable by the exp138b re-fly wrapper; recorded in manifest)
+BEAT_FLOOR = 0.02
+SUBBATH_MARGIN = 0.0
+THERM_BAND = 0.05
+RETENTION_MIN = 0.90
+DECO_BAND = [0.40, 0.60]
 
 
 def pick_chain5(backend):
@@ -162,8 +168,9 @@ def main():
         "experiment": "exp138-ico-reset", "cycle": "C4720-whisper",
         "backend": args.backend, "tag": args.tag,
         "prereg": "experiments/exp138-ico-reset-preregistration.md",
-        "gates": {"beat_floor": 0.02, "subbath_margin": 0.0, "therm_band": 0.05,
-                  "retention_min": 0.90, "deco_band": [0.40, 0.60]},
+        "gates": {"beat_floor": BEAT_FLOOR, "subbath_margin": SUBBATH_MARGIN,
+                  "therm_band": THERM_BAND, "retention_min": RETENTION_MIN,
+                  "deco_band": DECO_BAND},
         "shuffle_seed": SHUFFLE_SEED, "chain": list(chain), "chain_cost": cost,
         "layout": layout, "job_id": jid, "metas": metas,
     }
