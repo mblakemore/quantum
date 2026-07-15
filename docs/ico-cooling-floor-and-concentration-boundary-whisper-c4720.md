@@ -4,10 +4,13 @@
 take multiple inputs — can we drive it colder? … work it out and fly it if possible").
 **Verdict, up front**: via the **ICO resource itself, no** — the cooling *saturates*. Further cooling
 past that floor is **classical entropy compression** (works on any biased qubit) or **colder baths**
-("start colder"), neither of which is new indefinite-causal-order physics beyond F118. **Nothing was
-flown**: the answer is analytic, and a hardware run would test only whether a classically-predicted
-number survives depth — an engineering demo carrying a fuel-mislocation over-claim risk (the F94
-class). Computed with the frozen theory in `experiments/exp108_ico_refrigeration.py`.
+("start colder"), neither of which is new indefinite-causal-order physics beyond F118. The answer is
+**analytic** (cascade floor computed; concentration is a classical formula). The classical
+concentration was subsequently **flown at Creator direction as a labeled engineering artifact**
+(Exp139b, §2): it confirms the classical prediction on silicon (destination 37.6σ colder than a
+single input) but does **not** extend ICO — it takes no F-number and no switch-spec ledger row, per
+the F94 fuel-mislocation guard. Computed with the frozen theory in
+`experiments/exp108_ico_refrigeration.py`.
 
 ## 1. Route A — cascade (feed the cooled qubit back through the switch)
 Iterate the exact map ρ → (+ branch) of the two-thermalizing-channel switch (g = 0.75, bath p₁ = 0.25):
@@ -45,6 +48,18 @@ there is no downstream coherent consumer of the "live" cold qubit. A FakeMarrake
 concentration survives noise (3×0.185 → 0.105; bath 3×0.25 → 0.170), but that only shows the
 *classical* compression can be built, not that ICO was extended.
 
+**Flown as a labeled engineering artifact (Exp139/Exp139b, Creator-directed).** At Creator direction
+the coherent concentration was run on `ibm_marrakesh` (4 qubits, 24 CZ; inputs prepared at F118's
+cold population 0.21 to isolate the concentration step): the destination qubit came out at
+**p₁ = 0.1341 ± 0.0017**, **37.6σ colder than a single input** (0.2135), and colder than the
+bath-seeded concentration (0.1728) — a physically-produced (not post-selected) sub-single-input cold
+qubit on silicon (WIN, `results/exp139b_grade.json`, job `d9bh1dbv6alc73ct23l0`; the first attempt
+graded NO-TEST on a FakeMarrakesh-optimistic sentinel floor, re-flown with the floor re-derived from
+measured gate/readout error). The measured 0.134 sits +0.020 above the classical 0.114 — the 24-CZ
+depth haircut. **This changes nothing about the physics claim**: it confirms the *classical* formula
+on hardware and demonstrates the compression circuit runs; it is **not** an ICO result and takes no
+F-number / switch-spec ledger row. The ICO content remains F118; the ICO floor remains 0.177.
+
 **Scope / attribution (the load-bearing point).** The ICO physics is **F118, unchanged**. The
 concentration is a generic amplifier applied to F118's outputs. Reporting "ICO drove a qubit to 0.11"
 would attribute to the quantum resource what a classical AND/majority gate on three readouts does for
@@ -65,8 +80,10 @@ you have.
   this floor *via indefinite causal order alone*.
 - Below 0.177 is reachable only by **classical entropy compression** (majority → ~0.11 from F118
   qubits; works on any biased qubit) or **colder baths** — neither is new ICO physics.
-- **Deliverable = this decomposition.** No QPU spent; the honest answer to "can we drive it colder"
-  is the boundary itself, not a 13-qubit engineering demo of a classical formula.
+- **Deliverable = this decomposition.** The honest answer to "can we drive it colder" is the boundary
+  itself. The classical concentration was flown as a labeled engineering artifact (Exp139b, 37.6σ,
+  4 qubits — not the 13-qubit 3-fridge version, which would add NO-TEST risk for no new physics); it
+  confirms the classical formula on silicon and is **not** an ICO result.
 
 *Anchors: F86/F118 (the single-shot cold), `exp108_ico_refrigeration.exact_targets` (cascade map),
 the majority formula 3p²−2p³ (classical). Provenance for the F94 fuel-mislocation lesson:
