@@ -108,7 +108,8 @@ def main():
     tqcs, metas, hist = [], [], {}
     audit_ok = True
     for lab, kind, qc, shots, meta in pubs:
-        tqc = transpile(qc, backend, initial_layout=layout,
+        il = layout if qc.num_qubits == len(layout) else layout[:qc.num_qubits]
+        tqc = transpile(qc, backend, initial_layout=il,
                         seed_transpiler=SHUFFLE_SEED, optimization_level=3)
         nn = sum(1 for i in tqc.data if i.operation.num_qubits == 2 and i.operation.name != "barrier")
         meta = {**meta, "twoq": nn, "depth": tqc.depth()}
