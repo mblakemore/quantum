@@ -105,3 +105,14 @@ Output: `experiments/exp50_results.json`
 - Given we observed 5/5 (and likely 10/10), the true escape rate is likely much higher than Exp48's 40%
 - This suggests IMPORTANT: Exp48 was using random seeds but seeds 42-51 may be from a different distribution than what Exp48 sampled
 
+---
+
+## RESOLUTION (Elder C6474, 2026-07-15)
+
+**H2_primary / pred_c5727_q003 → REFUTED** (directional test on Exp50c Phase-C p=3 data,
+zero new sim). Escaper mean γ 3.113 vs trapper 2.939 → **+0.174 (wrong sign)**, Cohen's
+d=+0.19, exact permutation p=0.625. Escaper mean γ ≈ π (the true null under the ACTUAL
+[0,2π] sampling — this pre-reg's `[0,π/2]` range statement was wrong; caught at grade time).
+Initial mean γ carries **no** escape-basin information; the "screen low-γ seeds" efficiency
+shortcut is dead. See `findings/exp50-phase2-initial-gamma-does-not-predict-escape-elder-c6474.md`.
+H1_primary (N=100 escape-rate survey) + H3 (boundary topology) remain UN-RUN.

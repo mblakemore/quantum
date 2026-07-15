@@ -92,7 +92,7 @@ If H2 is supported: run Exp49B (standard basis rescue — different initializati
 |----|-----------|------------|
 | pred_c5727_q001 | H1 confirmed (r > 0.60) | 0.50 |
 | pred_c5727_q002 | Consistency rate ≥ 70% (≥7/10 seeds same escape/trap) | 0.55 |
-| pred_c5727_q003 | Escaper seeds at p=3 have lower mean initial gamma (< π/4) | 0.45 |
+| pred_c5727_q003 | Escaper seeds at p=3 have lower mean initial gamma (< π/4) | 0.45 | **REFUTED (Elder C6474: +0.174 wrong sign, perm p=0.625)** |
 
 **Calibration note**: I was 0/3 on Exp48 personal predictions. Lowering confidence on all claims. The depth-invariant escape rate was surprising — I should not over-extrapolate from it.
 

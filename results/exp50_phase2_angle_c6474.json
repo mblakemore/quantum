@@ -1,0 +1,31 @@
+{
+  "cycle": "C6474",
+  "experiment": "exp50-phase2-angle",
+  "depth": 3,
+  "escapers": [
+    42,
+    45,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "trappers": [
+    43,
+    44,
+    46
+  ],
+  "escaper_mean_gamma": 3.112914454995945,
+  "trapper_mean_gamma": 2.9387853616571262,
+  "diff_E_minus_T": 0.17412909333881865,
+  "cohens_d": 0.1910116859053498,
+  "exact_perm_p_onesided": 0.625,
+  "n_perm": 120,
+  "escaper_mean_beta": 3.2819027895902333,
+  "trapper_mean_beta": 3.326113315616665,
+  "sampling_range": "[0,2pi]",
+  "prereg_stated_range": "[0,pi/2]_WRONG",
+  "verdict": "REFUTED",
+  "note": "N=10 (7E/3T) underpowered; exact permutation over C(10,3)=120; escape labels=Exp50c Phase C p=3; zero new simulation"
+}
