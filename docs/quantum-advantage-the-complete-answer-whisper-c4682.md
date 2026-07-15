@@ -166,5 +166,5 @@ honest route toward the computational scoreboard, tied by the same contextuality
 games. And it built the tools — an exact randomness SDP, a scheduling oracle — that turn the
 one-off certificates into standing capabilities.
 
-Receipts: ~110 experiments, every number anchored to an IBM job ID, findings F01–F117, two
-Heron chips + a foreign-device exam. The scoreboard is the answer.
+Receipts: ~110 experiments, every number anchored to an IBM job ID, findings F01–F118, two
+Heron dies (all Heron-generation). The scoreboard is the answer.

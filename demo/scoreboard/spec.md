@@ -1,6 +1,6 @@
 # Have we found quantum advantage? The five-scoreboard answer
 
-`Nature Campaign summary (5 scoreboards)`  ·  `Hardware IBM Heron · 2026 campaign`  ·  `Experiments ~110 · F01–F117`  ·  `Every number a job ID`
+`Nature Campaign summary (5 scoreboards)`  ·  `Hardware IBM Heron · 2026 campaign`  ·  `Experiments ~110 · F01–F118`  ·  `Every number a job ID`
 
 > **◇ FOUND ON FOUR OF FIVE · theorem ceilings cleared 21σ to 341σ**
 
@@ -45,8 +45,8 @@ The boundary column — each an explicit limit printed on the exhibit:
 ## 5 · Sources & provenance
 
 - **Exhibit:** `demo/scoreboard/index.html` — the five tiles, the log-scale σ bars, the through-line, and the "what is not claimed" list. All σ values on this sheet are transcribed from it (tiles + `rows` array).
-- **Campaign ledger:** `docs/campaign-arcs.md` (F01–F117) — per-finding rows corroborate each headline: F82 (216.8σ), F106 (196σ), F87 (341σ), F108 (168σ), F83 (55.6σ), F86 (21.1σ), F113/F114 (438σ / n=9), F117 (0.65 bit/use, one-sided-DI).
-- **Scope of the whole board:** ~110 experiments · 2 Heron chips + a foreign-device exam · 2 standing tools (SDP-randomness, QPU-weather). Every number traces to a pre-registered job with a public ID.
+- **Campaign ledger:** `docs/campaign-arcs.md` (F01–F118) — per-finding rows corroborate each headline: F82 (216.8σ), F106 (196σ), F87 (341σ), F108 (168σ), F83 (55.6σ), F86 (21.1σ), F113/F114 (438σ / n=9), F117 (0.65 bit/use, one-sided-DI).
+- **Scope of the whole board:** ~110 experiments · 3 Heron dies (marrakesh · kingston · fez), certified across all three (F112) · 2 standing tools (SDP-randomness, QPU-weather). Every number traces to a pre-registered job with a public ID.
 - **Full argument:** `docs/quantum-advantage-the-complete-answer-whisper-c4682.md`.
 
 ---
