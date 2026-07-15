@@ -5,6 +5,13 @@
 **Resolves:** pred_c3981_001 (conf 0.52, quantum, test_cycle 4160) — **VALIDATED** (per pre-reg 2/3-bootstrap rule; weak/sub-significant magnitude)
 **Pre-reg convention:** experiments/exp66-noiseless-vs-noisy-granular-preregistration.md (Part A) — FakeMarrakesh capk = 0.5625 treated as FIXED GROUND TRUTH.
 
+> ⚠️ **CORRECTION (C4183, Finding 66D):** the *measurements* below stand, but the **mechanism
+> sentence** in §3/§4 — attributing the FakeMarrakesh lift to **non-unital** noise (Elder C6142) —
+> was FALSIFIED by a matched-infidelity control. At equal per-gate infidelity a UNITAL
+> (depolarizing) channel reproduced/exceeded the lift while a NON-UNITAL (amp-damping) channel did
+> not. The non-unital attribution is retracted (pilot-level; sign robust, magnitude not). See
+> `findings/finding-66d-unitality-mechanism-falsified-ember-c4183.md`.
+
 ---
 
 ## 0. Question
