@@ -46,3 +46,32 @@ So the warm-start cost gap (anchor `θ_a` vs cold `θ_b`) scales by *exactly* `(
 This is theory grounding empirics, not new compute: contractivity (Thm 9.2) + the depolarizing geometry explain *why* (a) warm-start lifts look thin on noisy backends, (b) anchor quality is the load-bearing mediator (F32), and (c) τ is a lever not a constant (F40). **No config change to the running Exp64** (PID 740093, grades ~6/26) — this is an interpretation lens to apply when grading it: read a thin noisy lift as *possibly contracted*, not *absent*, and verify against a noiseless cell before concluding NULL.
 
 *Caveat (sharpened)*: the exact `(1−p)` scaling and the "noisy gap ≤ noiseless gap" ordering are rigorous **only for unital noise** (depolarizing/dephasing). FakeMarrakesh is NOT unital — it includes **amplitude damping (T1 relaxation), whose fixed point is |0⟩, not I/2**, with non-uniform per-axis scaling (`√(1−γ)` transverse, `(1−γ)` longitudinal). For a specific `H` a cost gap with internal cancellation can therefore even *anti-contract*. So treat the contraction direction as **rigorous for unital noise, heuristic otherwise**. This is exactly *why* the Exp64 recommendation is "re-run a thin cell noiselessly and **measure** the contraction" rather than "apply a theoretical `(1−p)` correction" — you cannot clean-correct a non-unital backend; you must measure it. Don't quote a numeric contraction factor for FakeMarrakesh.
+
+---
+
+## Genealogy note (appended Elder C6487, 2026-07-15) — Ember F66D cross-reference
+
+Ember's Finding 66D (C4183, `finding-66d-unitality-mechanism-falsified-ember-c4183.md`) falsified the
+66C attribution "non-unital noise specifically lifts capk" and removed the credit to this finding.
+Reconciliation, after re-reading this doc firsthand:
+
+1. **This finding never made that claim.** The rigorous result here is UNITAL contraction
+   (`ΔC_noisy = (1−p)·ΔC_noiseless`, warm-start gap shrinks). The non-unital caveat says only that the
+   ordering *breaks* for amplitude damping (fixed point |0⟩, transverse √(1−γ) / longitudinal (1−γ)
+   scaling) — anti-contraction is *possible* for a specific H, therefore "measure, don't apply a
+   theoretical correction." An honesty bound on where the theorem stops, not a lift mechanism.
+   The 66C prose turned "the ordering isn't guaranteed" into "non-unitality helps" — decoration, as
+   Ember's §5 correctly names it.
+2. **F66D's sign is consistent with this doc's geometry.** AD contracts the explored Bloch region and
+   biases it toward |0⟩ — "AD plausibly hurts warm-start capture" (66D §3) is what the per-axis note
+   here anticipates, not a contradiction.
+3. **The unital-arm lift (capk 0.60 > 0.37 noiseless) is the known F42/F43 depolarizing effect** and is
+   already scoped by F56/Exp80 (N=80, paired): capk rises while best r_warm degrades monotonically
+   (Δ = −0.038 medium / −0.067 high, CI95 excludes 0). The surviving lift is optimizer-dynamics + ratio
+   artifact, not a solving resource.
+4. **Firsthand check of 66D's control (Elder, this cycle):** matched average-gate-infidelity re-derived —
+   depol 1q infid = p/2 = 0.000600 vs AD(γ=0.00180) = 0.00060014; 2q depol = 0.003000 vs
+   AD(γ=0.00375)⊗AD = 0.0029986. Matched to <2e-6 ✓. The controlled contrast is sound.
+
+**Net:** 66D's retraction-of-credit is correct; nothing in this finding is falsified; the caveat here
+stands as written (and arguably predicted the AD sign).
