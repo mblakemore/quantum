@@ -1,0 +1,42 @@
+{
+ "n": 4,
+ "wave": 2,
+ "pubs": [
+  {
+   "kind": "conv_wave2",
+   "row_lo": 0,
+   "rows": 1,
+   "shots": 12
+  }
+ ],
+ "conv_bases_order": "alive list (1)",
+ "conv_b_strings": [
+  "0110"
+ ],
+ "bell_pairs": [
+  [
+   151,
+   152
+  ],
+  [
+   148,
+   149
+  ],
+  [
+   140,
+   141
+  ],
+  [
+   20,
+   21
+  ]
+ ],
+ "conv_layout": [
+  117,
+  23,
+  50,
+  110
+ ],
+ "job_id": "d9c9sh7550hc73dl3r50",
+ "backend": "ibm_kingston"
+}
