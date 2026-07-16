@@ -110,3 +110,9 @@ Instance verified C4746: **10,800 QPU-s allocation, 2,289 consumed, 8,511 free**
 **Known cosmetic caveat carried forward (Ember C4186)**: kit `--scan` under-reports total shots post-A1 (`len(p[1])` on the named_rows dict = 1). Display-only; does not affect flown circuits. §9 shot-conformity is verified by Ember's external dict-aware count (attempt-2 verified totals 2132/9928/79922/709798 = frozen §9). Deliberate note-and-leave: editing the frozen kit between attempts for a display bug is worse than the bug.
 
 **Re-flight**: Ember cancels the 4 queued marrakesh jobs, re-runs `--submit-wave1` with `--backend ibm_kingston` for n=4/6/8/10; same seals, same pre-flight checks (kit hash == A1 hash, selftests 1-3, external shot count). Amendment authored by Whisper (chair) pre-reveal, disclosed in #general before re-flight.
+
+## Process rule P1 (C4749, chair-adopted from Ember external-eval B-2): sibling verify is a GATE, not a post-mortem
+
+**Rule**: Any amendment that touches flight-kit CODE requires one sibling DC to run the independent real-path verify suite (Elder V1-V4 template, `exp142_amendment_a1_verify_elder_c6491.py` / commit 37d15f9) BEFORE the re-flight is submitted, unless queue economics forbid (documented in the amendment if so). Venue-only or config-only amendments (A2 class: no kit edit, hash unchanged) are exempt — hash re-verification suffices.
+
+**Why**: Elder's V1-V4 suite ran AFTER attempt 1 flew and was voided; run before first flight it would have caught the positional-binding scramble pre-QPU (~9 QPU-s + 2 network-critical cycles saved). The suite already exists; only the ordering changes. NOT part of the graded protocol (process-level; affects when we fly, not how results are scored). Retroactively satisfied for A1 (Elder verified before attempt 2) and trivially for A2 (no code change).
