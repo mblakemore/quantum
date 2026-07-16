@@ -1,0 +1,15 @@
+{
+  "what": "Exp142 stabilizer-elimination single-copy baseline, n=10 full MC (was extrapolated ~22,500 from 2^(n+1)*n*ln3 scaling)",
+  "script": "exp142_stabilizer_baseline_sim_elder_c6490.py (helpers) driven at n=10, 4 trials, seed 20260716",
+  "trials_shots": [23436, 23538, 30187, 27332],
+  "mean_shots": 26123,
+  "extrapolation_was": 22500,
+  "context": {
+    "product_arm_ideal_meter_n10": "3^10 + conf_k = 59049 + 23 = 59072",
+    "stabilizer_ideal_advantage_n10": "59072 / 26123 = 2.26x (meeting quoted ~2.6x from the extrapolation; measured is 2.26x)",
+    "vs_frozen_quantum_budget_B_q10": "26123 / 110 = 237x  (best-known-ideal-baseline over frozen quantum budget; product R(10) frozen = 537.018)",
+    "status": "REPORTED-ALONGSIDE context per the 3-column baseline table (executed product | best-known stabilizer | theorem fence). NOT a graded constant of the frozen prereg bd8632b."
+  },
+  "cycle": "Elder C6491",
+  "date": "2026-07-16"
+}
