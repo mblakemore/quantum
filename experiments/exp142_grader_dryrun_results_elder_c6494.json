@@ -1,0 +1,92 @@
+{
+  "harness": "exp142_grader_dryrun_elder_c6494.py",
+  "grader_sha256_expected_frozen": "f281deb36ab8",
+  "tests": {
+    "T0_real_key_shape": {
+      "expect": "crash KeyError 'sha256' (4th untested-path find). NOTE: Python traceback exits rc=1 == the grader's legitimate NOT-WIN exit code \u2014 crash must be discriminated by absent JSON, never by exit code",
+      "rc": 1,
+      "stderr_tail": "KeyError: 'sha256'",
+      "pass": true
+    },
+    "T1_all_win": {
+      "expect": "WIN x4, overall WIN, exit 0",
+      "rc": 0,
+      "per_n": {
+        "4": "WIN",
+        "6": "WIN",
+        "8": "WIN",
+        "10": "WIN"
+      },
+      "overall": "WIN",
+      "pass": true
+    },
+    "T2_branch_matrix": {
+      "expect": "n4 LOSS(quantum) n6 NULL n8 LOSS(ratio) n10 LOSS(budget), NOT-WIN, exit 1",
+      "rc": 1,
+      "per_n": {
+        "4": "LOSS",
+        "6": "NULL",
+        "8": "LOSS",
+        "10": "LOSS"
+      },
+      "reasons": {
+        "4": "quantum arm wrong P_hat",
+        "6": "conventional arm failed to identify (ratio reported as lower",
+        "8": "ratio 73.1 < 73.122222 with both arms correct (secondary: q ",
+        "10": "quantum budget 111 != frozen 5 x m99_ideal = 110 (conformity"
+      },
+      "pass": true
+    },
+    "T2b_conv_misidentified": {
+      "expect": "n6 NULL (conv misidentified), others WIN, overall WIN (n8 + 3 wins)",
+      "rc": 0,
+      "per_n": {
+        "4": "WIN",
+        "6": "NULL",
+        "8": "WIN",
+        "10": "WIN"
+      },
+      "overall": "WIN",
+      "pass": true
+    },
+    "T3_tampered_commitment": {
+      "expect": "n8 INVALID -> overall NOT-WIN (n8 required)",
+      "rc": 1,
+      "per_n": {
+        "4": "WIN",
+        "6": "WIN",
+        "8": "INVALID",
+        "10": "WIN"
+      },
+      "overall": "NOT-WIN",
+      "pass": true
+    },
+    "T4a_three_wins_incl_n8": {
+      "expect": "overall WIN",
+      "overall": "WIN",
+      "rc": 0,
+      "pass": true
+    },
+    "T4b_three_wins_excl_n8": {
+      "expect": "overall NOT-WIN (n8 mandatory)",
+      "overall": "NOT-WIN",
+      "rc": 1,
+      "pass": true
+    },
+    "T5_real_answer_files": {
+      "expect": "parses real decode_meter output; NULL x4 (identified=false), no crash",
+      "rc": 1,
+      "per_n": {
+        "4": "NULL",
+        "6": "NULL",
+        "8": "NULL",
+        "10": "NULL"
+      },
+      "stderr_tail": "",
+      "pass": true
+    }
+  },
+  "passed": 8,
+  "total": 8,
+  "all_pass": true
+}
