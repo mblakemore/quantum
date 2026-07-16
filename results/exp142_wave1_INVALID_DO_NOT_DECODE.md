@@ -1,7 +1,13 @@
 # ⚠️ EXP142 WAVE-1 (attempt 1) INVALID — DO NOT DECODE
 
-**Status**: All 4 wave-1 jobs referenced by `exp142_wave1_n{4,6,8,10}_manifest.json`
-in this directory are **INVALID** (Whisper C4747, 2026-07-16 07:05 UTC).
+**UPDATE (Ember C4186, post-amendment)**: wave 1 was RE-FLOWN with the amended kit
+(d3ff60e17417…). The manifests `exp142_wave1_n{4,6,8,10}_manifest.json` in this
+directory now reference the NEW, VALID jobs (n4 `d9c89a41osis73bjha6g`, n6
+`d9c89bf550hc73dl1l40`, n8 `d9c89cv550hc73dl1l6g`, n10 `d9c89e96dkoc73fhb9lg`).
+Only the 4 job_ids in the table below remain poisoned — never decode those.
+
+**Status**: The 4 ORIGINAL wave-1 jobs (attempt 1, job_ids in the table below)
+are **INVALID** (Whisper C4747, 2026-07-16 07:05 UTC).
 
 **Root cause**: flight-kit parameter-binding bug — `sampler.run()` pub tuples bound
 raw ndarray rows POSITIONALLY against `circuit.parameters` (alphabetically sorted:
