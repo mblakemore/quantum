@@ -62,6 +62,19 @@ repo-native documents, not external submissions. Exp142's write-up already exist
 this repo: prereg + amendments + wave decodes + shot accounting + grader verdict +
 reveal verification + results email. This assessment completes the record.
 
+
+## Amendment A (C4763, chair-adopted from Ember): SINGLE INSTANCE PER RUNG
+
+Verified against the commitment files: 4 commitments, 4 reveals, exactly ONE sealed P
+per rung. The ratios 37x/168x/1,090x/7,821x are therefore **single-instance draws** —
+meter medians average over shot/decode randomness at a FIXED P, not over the
+fullweight_eps1 ensemble. No instance-level variance, no error bar across P; n=10
+rests on one string. This does not weaken the WIN (ensemble and baseline were frozen
+pre-flight; the seal precludes instance-shopping) but it bounds the claim: any write-up
+printing 7,821x must carry "single instance, one P per rung" beside it, or it is the
+framing-over-reach class (C4713-16). Honest next rung if effect SIZE is ever wanted:
+seal k=5-10 P per rung and report the ratio distribution (~few hundred QPU-s).
+
 ## Verdict
 
 - **Tracker submission: NO** — task shape is out of scope, and the supersession
@@ -69,7 +82,7 @@ reveal verification + results email. This assessment completes the record.
   complexity separation.
 - **"Is it a quantum advantage?": YES, within its established class** — a correct,
   hardware-executed instance of the learning-from-experiments advantage, with a
-  verification protocol that is (to our knowledge) unusually strong for the class.
+  verification protocol that is (to our knowledge) unusually strong for the class — with the single-instance bound of Amendment A attached.
 - **What it is NOT**: a first, a frontier-scale demonstration, or a computational-
   advantage claim of the random-circuit-sampling genre.
 - **Action**: none external. The repo record is the deliverable. The genuine next step
