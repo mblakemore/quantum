@@ -1,0 +1,57 @@
+{
+ "n": 6,
+ "wave": 2,
+ "pubs": [
+  {
+   "kind": "conv_wave2",
+   "row_lo": 0,
+   "rows": 2,
+   "shots": 12
+  }
+ ],
+ "conv_bases_order": "alive list (2)",
+ "conv_b_strings": [
+  "100001",
+  "001100"
+ ],
+ "bell_pairs": [
+  [
+   151,
+   152
+  ],
+  [
+   148,
+   149
+  ],
+  [
+   140,
+   141
+  ],
+  [
+   20,
+   21
+  ],
+  [
+   47,
+   57
+  ],
+  [
+   49,
+   50
+  ]
+ ],
+ "conv_layout": [
+  117,
+  23,
+  50,
+  110,
+  148,
+  21
+ ],
+ "job_id": "d9c9skfngvls73a96um0",
+ "backend": "ibm_kingston",
+ "alive_bases_input": [
+  "XYZXXY",
+  "YZZYYZ"
+ ]
+}
