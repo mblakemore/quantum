@@ -12,14 +12,15 @@ Secrets (salt hex + P) are held OFF-GIT by Ember (~/.ember-exp142-secrets.json,
 chmod 600) until reveal. Order of operations: prereg freeze -> seal -> fly -> both
 arms submit identifications -> reveal -> grade by hash match.
 
-Ensembles:
-  full-weight : P uniform over {X,Y,Z}^n           (primary executed race, eps=1)
-  all-pauli   : P uniform over 4^n-1 non-identity  (theorem-literal family, if flown)
+Ensemble tags are FREE-FORM and must match the frozen prereg string verbatim
+(the tag enters the hash preimage). Draw rule selected by prefix:
+  fullweight* (e.g. fullweight_eps1) : P uniform over {X,Y,Z}^n   (Stage-1 executed race)
+  allpauli*                          : P uniform over 4^n-1 non-identity Paulis
 
 Usage:
-  seal   --n 4,6,8,10 --ensemble full-weight     draw P, write commitments, store secrets
-  reveal --n 8                                    write salt+P into commitments dir
-  verify --n 8                                    recompute hash from revealed file
+  seal   --n 4,6,8,10 --ensemble fullweight_eps1   draw P, write commitments, store secrets
+  reveal --n 8 --ensemble fullweight_eps1          write salt+P into commitments dir
+  verify --n 8 --ensemble fullweight_eps1          recompute hash from revealed file
 Blindness: Ember does not read decoder code between seal and reveal; Whisper/Elder
 do not read the secrets file (honor protocol, same-host filesystem).
 """
@@ -36,9 +37,14 @@ def preimage(salt: bytes, ensemble: str, n: int, P: str) -> bytes:
 
 
 def draw_pauli(n: int, ensemble: str) -> str:
-    if ensemble == "full-weight":
+    # The ensemble TAG is free-form (it enters the hash preimage and must match the
+    # frozen prereg string verbatim, e.g. "fullweight_eps1"). The DRAW RULE is
+    # selected by prefix: fullweight* -> uniform {X,Y,Z}^n; allpauli*/all-pauli* ->
+    # uniform non-identity {I,X,Y,Z}^n.
+    key = ensemble.replace("-", "").lower()
+    if key.startswith("fullweight"):
         return "".join(secrets.choice("XYZ") for _ in range(n))
-    if ensemble == "all-pauli":
+    if key.startswith("allpauli"):
         while True:
             p = "".join(secrets.choice("IXYZ") for _ in range(n))
             if set(p) != {"I"}:
@@ -120,11 +126,11 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("seal"); s.add_argument("--n", required=True, help="comma list, e.g. 4,6,8,10")
-    s.add_argument("--ensemble", default="full-weight", choices=["full-weight", "all-pauli"])
+    s.add_argument("--ensemble", default="fullweight_eps1")
     s.add_argument("--force", action="store_true")
     r = sub.add_parser("reveal"); r.add_argument("--n", type=int, required=True)
-    r.add_argument("--ensemble", default="full-weight", choices=["full-weight", "all-pauli"])
+    r.add_argument("--ensemble", default="fullweight_eps1")
     v = sub.add_parser("verify"); v.add_argument("--n", type=int, required=True)
-    v.add_argument("--ensemble", default="full-weight", choices=["full-weight", "all-pauli"])
+    v.add_argument("--ensemble", default="fullweight_eps1")
     a = ap.parse_args()
     {"seal": cmd_seal, "reveal": cmd_reveal, "verify": cmd_verify}[a.cmd](a)
