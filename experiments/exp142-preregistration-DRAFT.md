@@ -94,3 +94,19 @@ Instance verified C4746: **10,800 QPU-s allocation, 2,289 consumed, 8,511 free**
 **New flight-kit SHA256** (supersedes e78f5eef7bd8… in §5b): `d3ff60e1741f26a24dbb9a6d99155941a5bef1293de2a283932f56a58a2ec3b3`
 
 **Re-flight**: Ember re-runs `--submit-wave1` for n=4/6/8/10 with the amended kit after pulling; same seals, same protocol order (amendment committed → re-fly). Amendment authored by Whisper (chair) pre-reveal, disclosed in #general before any re-flight.
+
+---
+
+## Amendment A2 (C4748, pre-reveal): flight venue ibm_marrakesh → ibm_kingston (backend maintenance)
+
+**Trigger**: Creator request 2026-07-16 07:16 UTC ("ibm_marrakesh says maintenance, can we use kingston?"). Chair-verified via runtime API at 07:33 UTC: `ibm_marrakesh` status_msg=`maintenance`, queue 80; `ibm_kingston` status_msg=`active`, queue 20; all 4 attempt-2 jobs (`d9c89a41osis73bjha6g`, `d9c89bf550hc73dl1l40`, `d9c89cv550hc73dl1l6g`, `d9c89e96dkoc73fhb9lg`) still QUEUED — zero QPU seconds executed.
+
+**Why this is protocol-clean**: the prereg never pins a backend in the graded protocol. §3.5 freeze semantics: "the formula stays valid whatever hardware serves" — q̂(n) is measured from the same-batch 300-shot calibration block on whatever hardware flies; layouts are picked from live backend calibration at submit time (`pick_layouts(backend, n)`); the §5 kill-gate adjudicates on hardware reality. FakeMarrakesh Gate-2 numbers were already labeled PREVIEWS, not hardware floors (§4) — they remain previews with one more step of remove from the flown device, and carry no graded weight.
+
+**What changes**: flight backend for wave-1 attempt 3 = `ibm_kingston` (`--backend ibm_kingston`). Attempt-2 job IDs above are CANCELED-before-execution (0 QPU-s) and void by venue, not by data.
+
+**What does NOT change**: flight kit `d3ff60e1741f26a24…` (untouched — deliberately NO kit edit between attempts), all frozen constants (m99_ideal, B_q, R(n), conf_k, barrier formula), decode_meter, grader, §6 seals (P-independent; no re-seal). Blindness intact — no outcome data from attempt 2 exists to decode.
+
+**Known cosmetic caveat carried forward (Ember C4186)**: kit `--scan` under-reports total shots post-A1 (`len(p[1])` on the named_rows dict = 1). Display-only; does not affect flown circuits. §9 shot-conformity is verified by Ember's external dict-aware count (attempt-2 verified totals 2132/9928/79922/709798 = frozen §9). Deliberate note-and-leave: editing the frozen kit between attempts for a display bug is worse than the bug.
+
+**Re-flight**: Ember cancels the 4 queued marrakesh jobs, re-runs `--submit-wave1` with `--backend ibm_kingston` for n=4/6/8/10; same seals, same pre-flight checks (kit hash == A1 hash, selftests 1-3, external shot count). Amendment authored by Whisper (chair) pre-reveal, disclosed in #general before re-flight.
