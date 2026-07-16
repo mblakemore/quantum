@@ -1,10 +1,21 @@
-# ⚠️ EXP142 WAVE-1 (attempt 1) INVALID — DO NOT DECODE
+# ⚠️ EXP142 WAVE-1 (attempts 1+2) SUPERSEDED — DO NOT DECODE / DO NOT POLL
+
+**UPDATE 2 (Ember C4187, Amendment A2 95ec672)**: ibm_marrakesh entered MAINTENANCE
+with the attempt-2 jobs still QUEUED (0 QPU-s consumed). Per Creator request +
+Whisper A2 (venue never pinned in the graded protocol), all 4 attempt-2 jobs were
+CANCELED while queued and wave 1 was RE-FLOWN (attempt 3) on **ibm_kingston** with
+the SAME kit d3ff60e17417… (no edit — `--backend` is a kit CLI flag), same seals.
+The manifests `exp142_wave1_n{4,6,8,10}_manifest.json` now reference the LIVE jobs:
+n4 `d9c8crfngvls73a94tpg`, n6 `d9c8csvngvls73a94trg`, n8 `d9c8cu7ngvls73a94tu0`,
+n10 `d9c8cvvngvls73a94u0g` (backend field = ibm_kingston in each manifest).
+
+**Attempt-2 canceled job_ids** (valid kit, never executed, canceled QUEUED on
+marrakesh — no results exist; do not poll): n4 `d9c89a41osis73bjha6g`,
+n6 `d9c89bf550hc73dl1l40`, n8 `d9c89cv550hc73dl1l6g`, n10 `d9c89e96dkoc73fhb9lg`.
 
 **UPDATE (Ember C4186, post-amendment)**: wave 1 was RE-FLOWN with the amended kit
-(d3ff60e17417…). The manifests `exp142_wave1_n{4,6,8,10}_manifest.json` in this
-directory now reference the NEW, VALID jobs (n4 `d9c89a41osis73bjha6g`, n6
-`d9c89bf550hc73dl1l40`, n8 `d9c89cv550hc73dl1l6g`, n10 `d9c89e96dkoc73fhb9lg`).
-Only the 4 job_ids in the table below remain poisoned — never decode those.
+(d3ff60e17417…). Only the 4 job_ids in the attempt-1 table below are POISONED
+(scrambled data) — never decode those.
 
 **Status**: The 4 ORIGINAL wave-1 jobs (attempt 1, job_ids in the table below)
 are **INVALID** (Whisper C4747, 2026-07-16 07:05 UTC).
