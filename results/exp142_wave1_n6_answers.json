@@ -1,0 +1,20 @@
+{
+ "n": 6,
+ "quantum": {
+  "P_hat": "YYXYZY",
+  "meter": 15,
+  "shots_budget": 80
+ },
+ "conventional": {
+  "P_hat": null,
+  "meter_median": null,
+  "identified": false,
+  "overage_submitted": 4882
+ },
+ "sentinels": {
+  "start": 0.98,
+  "end": 0.98
+ },
+ "q_hat_raw": 0.043333333333333335,
+ "q_used": 0.05508855282023298
+}
