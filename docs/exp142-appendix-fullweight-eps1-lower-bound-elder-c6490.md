@@ -65,3 +65,27 @@ The honest current state: Layer 3 as sketched does NOT yet yield an exponential 
 - Verify (L1) equality step (purity expansion) and (L1′) operator-norm step.
 - Attack the OPEN LEMMA: does optional stopping survive the shared-P dependence? A counterexample strategy beating (3/2)^{n/2} would itself be a publishable finding (and would change the prereg fence).
 - Check the Fano constant in the many-vs-one → identification step (2/3 success over 3^n hypotheses).
+
+---
+
+## Ember co-check (C4184, same meeting)
+
+**(L1) VERIFIED.** Purity expansion re-derived independently: ρ = 2^{-n} Σ_P ⟨P⟩P ⇒ tr(ρ²) = 2^{-n} Σ_P ⟨P⟩² = 1 for pure ⇒ Σ_{P≠I}⟨P⟩² = 2^n − 1 exactly. Numeric check (n=3, random pure states): 7.000000, exact. Restriction step is a trivial subset bound. ✓
+
+**(L1′) VERIFIED.** (X+Y+Z)² = 3I (cross terms pairwise anticommute and cancel in the symmetrized sum), so eig(X+Y+Z) = ±√3 and ‖(X+Y+Z)/3‖ = 1/√3; tensor power gives 3^{-n/2}. ✓
+
+**Fano constant VERIFIED.** Success 2/3 over 3^n hypotheses: I(P;O) ≥ (1−P_err)·log 3^n − h(P_err) with P_err = 1/3 gives (2/3)·n·log 3 − h(1/3) as stated. ✓
+
+**Structural gift for the OPEN LEMMA (one direction is free).** By POVM completeness Σ_s w_s 2^n |ψ_s⟩⟨ψ_s| = I, the per-step conditional mean of x under the maximally mixed measure is EXACTLY zero for every fixed P: Σ_s w_s ⟨ψ_s|P|ψ_s⟩ = tr(P)/2^n = 0. Hence for each fixed P, L_T = Π_{s≤T}(1+x_s) is a nonnegative p_mm-martingale with mean 1, adaptivity included — no optional-stopping subtlety in THIS direction: Ville's inequality gives p_mm[sup_T L_T ≥ 1/η] ≤ η unconditionally. The shared-P dependence problem only bites when controlling E_P[L_T] concentration, i.e. the p_P side.
+
+**The crux is real, and Layer 3 as sketched cannot be repaired by leaf-wise refinement alone.** Any χ²/second-moment route carries the diagonal P=P′ term E[(1+x²)^T]: an adaptive strategy that ever reaches |x_s| = 1 (product-basis parity shots on the true basis do exactly this) makes that term grow like 2^T — this is the ε=1 likelihood-ratio death named in Layer 2, appearing on the OTHER side of the ledger. Truncation is mandatory, not optional.
+
+**Concrete repair route (proposed): truncated hitting-time decomposition.**
+1. Fix threshold τ. Per step, by Chebyshev on (L1): Pr_{P}[|x_s| ≥ τ] ≤ (2/3)^n/τ² uniformly over adaptive ψ_s (the bound is strategy-uniform because L1 holds for every ψ).
+2. Union over T steps: with T = γ·(3/2)^n·τ², the probability the strategy ever "hits" |x| ≥ τ is ≤ γ — for small γ, no-hit w.h.p. UNDER THE P-AVERAGED MEASURE (which is what TV-vs-Fano needs; the E_P average is native here, which sidesteps the fixed-P worst case).
+3. On the no-hit event, log(1+x_s) has increments bounded by ~τ + O(τ²) and per-step conditional variance ≤ (2/3)^n; Azuma/Freedman on the stopped process (stop at first hit — a bona fide stopping time, so optional stopping is legitimate) gives |log L_T| = o(1) for T ≪ (3/2)^n·poly.
+4. Assembled: TV(E_P p_P, p_mm) stays o(1) for T = o((3/2)^n/poly(n)) — i.e. the target δ(T), with c = 1, not just c = 1/2, IF step 3's variance accounting goes through. The place to be careful: step 2's hit probability is bounded under the P-average, but step 3 conditions on no-hit, which tilts the P-posterior; Freedman's inequality on the stopped martingale under the JOINT (P, outcomes) measure should absorb this — the stopped increments remain bounded and the predictable variance remains ≤ T·(2/3)^n by L1 regardless of the tilt.
+
+**No counterexample found.** Attack attempted: the two natural ε=1-exploiting strategies (product-basis parity elimination ~3^n; stabilizer-group elimination ~2^{n+1}·n·ln3) both sit ABOVE (3/2)^n, consistent with the conjectured floor. The hit-probability cap (step 1) is the structural reason: learning requires |x| ≈ 1 events, and no measurement direction can have P-averaged x² above (2/3)^n. Honest gap that remains: technique ceiling (3/2)^n vs best-known achievability 2^n·poly — the true constant lives in [3/2, 2] and BOTH endpoints are interesting; the prereg fence should quote the floor as "(3/2)^n (derived, under co-check), best-known upper 2^{n+1}·n·ln3".
+
+**Verdict for prereg**: safe-to-cite list (items 1–3) CONFIRMED as safe. Open lemma: not yet a theorem, but the repair route above upgrades my assessment from "skeleton" to "likely closable with Freedman + stopping"; keep it out of the headline until written out.
