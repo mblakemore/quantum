@@ -208,12 +208,59 @@ def selftest():
         grid=[20, 30, 40])
     assert curve[40] == 1, f"quantum decoder failed: {curve}"
     print("  selftest 2 (quantum arm + Gate-2 decoder on parameterized circuits): PASS")
+    # 3) AMENDMENT A1 (C4747) regression: bindings through the REAL pub-tuple path.
+    # StatevectorSampler coerces pubs exactly like runtime SamplerV2; a positional
+    # (raw-ndarray) binding scrambles angles and fails these deterministic checks.
+    from qiskit.primitives import StatevectorSampler
+    sv = StatevectorSampler(seed=7)
+    # 3a) conventional/cal: true-basis parity must be even for every shot
+    r_true, bs_true = conv_param_rows(P, [P], rng)
+    res = sv.run([(qc, named_rows(params, r_true), 200)]).result()[0]
+    reg = list(res.data.keys())[0] if hasattr(res.data, "keys") else "c"
+    bits = getattr(res.data, reg).get_bitstrings()
+    b = np.array([int(c) for c in bs_true[0]])
+    odd = sum((np.array([int(c) for c in s.replace(' ', '')[::-1][:n]]).sum()
+               - b.sum()) % 2 for s in bits)
+    assert odd == 0, f"pub-path true-basis odd rate {odd}/200 (binding scramble?)"
+    # 3b) quantum: per-row deterministic Bell bits. X qubit -> clbit i == b1^b2
+    # (XX correlation); Z qubit -> clbit n+i == b1^b2 (ZZ correlation). A qt/qp
+    # swap turns X preps computational and drops Z sign bits -> both checks fail.
+    qqc2, qparams2 = quantum_template(n)
+    qrows2, qbstrs2 = quantum_param_rows(P, 20, rng)
+    res2 = sv.run([(qqc2, named_rows(qparams2, qrows2), 4)]).result()[0]
+    reg2 = list(res2.data.keys())[0] if hasattr(res2.data, "keys") else "c"
+    bits2 = getattr(res2.data, reg2).get_bitstrings()
+    for row_i, bstr in enumerate(qbstrs2):
+        b1, b2 = bstr.split("|")
+        expect = [int(b1[i]) ^ int(b2[i]) for i in range(n)]
+        for s in bits2[row_i * 4:(row_i + 1) * 4]:
+            v = s.replace(" ", "")[::-1]  # v[k] = clbit k
+            for i in range(n):
+                if P[i] == "X":
+                    assert int(v[i]) == expect[i], \
+                        f"row {row_i} qubit {i} X-corr mismatch (binding scramble?)"
+                elif P[i] == "Z":
+                    assert int(v[n + i]) == expect[i], \
+                        f"row {row_i} qubit {i} Z-corr mismatch (binding scramble?)"
+    print("  selftest 3 (REAL pub-tuple binding path via StatevectorSampler): PASS")
     print("SELFTEST PASS")
 
 
 # ------------------------------------------------------------------ job builder
+def named_rows(params, rows):
+    """AMENDMENT A1 (C4747): bind parameter rows BY NAME, never positionally.
+
+    Raw ndarrays in a SamplerV2 pub tuple are coerced positionally against
+    circuit.parameters, which is sorted ALPHABETICALLY (lm,pm,pp,tm,tp) — not
+    template order (tp,pp,tm,pm,lm). Wave-1 flew with that scramble: every
+    parameterized circuit had wrong angles (cal q_hat=0.70, deterministic-flip
+    signatures on hardware; sentinels clean because parameterless). Dict-keyed
+    BindingsArray binds by name and is order-immune."""
+    return {tuple(p.name for p in params): rows}
+
+
 def build_job(n, P, rng, alive_bases=None, wave=1):
-    """Returns (pubs, manifest). PUB = (circuit, param_rows|None, shots)."""
+    """Returns (pubs, manifest). PUB = (circuit, named_rows|None, shots)."""
     pubs, manifest = [], {"n": n, "wave": wave, "pubs": []}
     if wave == 1:
         pubs.append((sentinel_circuit(), None, SENT_SHOTS))
@@ -224,23 +271,23 @@ def build_job(n, P, rng, alive_bases=None, wave=1):
         cal_rows, cal_b = conv_param_rows(cal_paulis[0], [cal_paulis[0]], rng)
         for cp in cal_paulis:
             r, bs = conv_param_rows(cp, [cp], rng)
-            pubs.append((qc, r, CAL_SHOTS))
+            pubs.append((qc, named_rows(params, r), CAL_SHOTS))
             manifest["pubs"].append({"kind": "cal", "pauli": cp, "b": bs[0],
                                      "shots": CAL_SHOTS})
         # quantum arm
-        qqc, _ = quantum_template(n)
+        qqc, qparams = quantum_template(n)
         qrows, qb = quantum_param_rows(P, BQ[n], rng)
-        pubs.append((qqc, qrows, 1))
+        pubs.append((qqc, named_rows(qparams, qrows), 1))
         manifest["pubs"].append({"kind": "quantum", "rows": BQ[n], "b": qb, "shots": 1})
         bases = ["".join(t) for t in itertools.product(PAULIS, repeat=n)]
     else:
         bases = alive_bases
     # conventional arm (wave 1 = all bases; wave 2 = alive only)
-    qc, _ = conv_template(n)
+    qc, cparams = conv_template(n)
     rows, bstrs = conv_param_rows(P, bases, rng)
     for lo in range(0, len(rows), CONV_CHUNK_ROWS):
         chunk = rows[lo:lo + CONV_CHUNK_ROWS]
-        pubs.append((qc, chunk, WAVE1_SHOTS))
+        pubs.append((qc, named_rows(cparams, chunk), WAVE1_SHOTS))
         manifest["pubs"].append({"kind": f"conv_wave{wave}", "row_lo": lo,
                                  "rows": len(chunk), "shots": WAVE1_SHOTS})
     manifest["conv_bases_order"] = "itertools.product XYZ repeat=n" if wave == 1 \

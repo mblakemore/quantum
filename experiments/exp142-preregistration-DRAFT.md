@@ -78,3 +78,19 @@ Instance verified C4746: **10,800 QPU-s allocation, 2,289 consumed, 8,511 free**
 - Quantum arm exceeding 5× ideal on hardware → decoder/noise-model gap; report, no reflight without redesign.
 - Conventional arm beating 3ⁿ materially → our baseline was not best-known; the executed race result stands but the ratio shrinks; report as-is.
 - Ratio below R(n) with both arms correct → advantage not demonstrated at that rung.
+
+---
+
+## Amendment A1 (C4747, pre-reveal): wave-1 voided — flight-kit parameter-binding bug
+
+**What happened**: Wave-1 jobs (ibm_marrakesh: n4 `d9c8047550hc73dl1ap0`, n6 `d9c807k1osis73bjh0e0`, n8 `d9c80bnngvls73a94eug`, n10 `d9c80ev550hc73dl1bcg`) flew with scrambled circuit angles. The kit passed raw ndarray parameter rows in SamplerV2 pub tuples; pubs coerce those POSITIONALLY against `circuit.parameters` (alphabetically sorted: lm,pm,pp,tm,tp / qp,qt), not template order (tp,pp,tm,pm,lm / qt,qp). Detected at first blind decode (n=4): cal q̂=0.7033 with clean parameterless sentinels (0.985/0.993). Confirmed by hand-trace: scrambled binding predicts cal block ZZXZ/b=1100 → deterministic `0100` (hardware 98/100), YYYX & ZZXY → ~50% parity (60/100, 53/100). Both arms invalid: conv streams meaningless; quantum qt/qp swap turns X preps computational (n=4 P̂=ZZZZ is artifact — recorded as VOID, not an answer). n8/n10 canceled mid-run (~790k invalid shots saved).
+
+**Why sims/selftests missed it**: every pre-flight check (selftests 1-2, Gate-2 v1/v2) bound parameters BY NAME via `assign_parameters(dict)`. Only the submission path used positional pub-tuple coercion. Same lesson-class as the Gate-2 v1 layout artifact: the verification must exercise the FLOWN path.
+
+**Fix (this amendment)**: `named_rows()` — all pubs now carry dict-keyed BindingsArrays (bind-by-name, order-immune). New selftest 3 drives pubs through `StatevectorSampler` (identical pub coercion to runtime SamplerV2) with deterministic checks: true-basis parity ≡ even (conv/cal), per-row XX/ZZ Bell correlations ≡ b1⊕b2 (quantum). Verified: old positional path fails it 103/200; fixed path 0/200 + all selftests PASS.
+
+**What does NOT change**: all frozen constants (m99_ideal, B_q, R(n), conf_k, SPRT formulas), `exp142_decode_meter.py` (8323461e23f9…), `exp142_grader.py` (f281deb36ab8…), Gate-2 v2 results (name-bound = correct), §6 sealed commitments (P never revealed; blindness intact — no salvage decode of wave-1 was attempted or permitted, since a scramble-aware decode could leak P to the decoders).
+
+**New flight-kit SHA256** (supersedes e78f5eef7bd8… in §5b): `d3ff60e1741f26a24dbb9a6d99155941a5bef1293de2a283932f56a58a2ec3b3`
+
+**Re-flight**: Ember re-runs `--submit-wave1` for n=4/6/8/10 with the amended kit after pulling; same seals, same protocol order (amendment committed → re-fly). Amendment authored by Whisper (chair) pre-reveal, disclosed in #general before any re-flight.
