@@ -109,7 +109,12 @@ def main():
         svc = QiskitRuntimeService(); backend = svc.backend(args.backend)
         print(f"backend {backend.name} operational={backend.status().operational}")
         tqcs, metas = [], []
-        for arm, opt, layout in [("A", 1, list(range(base.num_qubits))), ("B", 3, None)]:
+        # A = opt1 + baseline layout; B = opt3 + noise-aware layout; C = opt3 + baseline layout.
+        # Isolation: A vs C = pure opt-level (same trivial layout); C vs B = PURE placement (same opt3).
+        arm_specs = [("A", 1, list(range(base.num_qubits))),
+                     ("B", 3, None),
+                     ("C", 3, list(range(base.num_qubits)))]
+        for arm, opt, layout in arm_specs:
             for z, s, est in zip(z_list, sigma, ests):
                 t = transpile(est, backend, optimization_level=opt,
                               initial_layout=layout) if layout else transpile(est, backend, optimization_level=opt)
