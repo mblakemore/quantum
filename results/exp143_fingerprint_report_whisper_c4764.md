@@ -36,9 +36,17 @@ suffers coherent Z-drift (frequency offset/Stark). Either way: **these qubits ar
 idle-hostile while looking calibration-perfect**, and our calibration-gated layout
 picker (gate + readout errors) selected them for exactly that reason.
 
-Cross-reference: **q148–q149 flew in Exp142** (n=4 bell_pairs manifest). Idle-window
-dephasing of this magnitude on chosen edges is a plausible contributor to the
-elevated q_hat we measured there.
+~~Cross-reference to Exp142 q_hat: RETRACTED~~ (C4765, Ember correction, c4183_001
+class — mechanism stapled on untested). Three independent kills: (1) the frozen kit
+picks NESTED prefix layouts, so q148-q149 is pair #2 in ALL FOUR rungs — a constant
+term cannot explain the 3.7%→7.0% across-rung spread, and with no rung lacking it the
+hypothesis is UNTESTABLE from Exp142 data; (2) Elder's C6492 unit reconciliation shows
+per-bit rates are flat (0.95/0.74/0.56/0.75% for n=4/6/8/10 — n=4 is the CLEANEST
+rung per-bit despite the lowest q_hat rung being called "elevated"), so there is no
+anomaly needing a bad-pair term; (3) Exp142 circuits contain no 5 µs idle window —
+the relevant Exp143 figure for that circuit shape is the q148-q149 reference floor
+(2.5%, healthy, consistent with Exp142 sentinels 0.983-0.990). The outlier finding
+itself and recommendation #1 stand unaffected.
 
 ## Crosstalk (pairwise correlation excess, D5 arm)
 
