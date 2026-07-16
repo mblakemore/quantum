@@ -5,9 +5,13 @@ alongside results, never patched silently.
 
 Grades per-n WIN/LOSS/NULL per prereg section 5:
   WIN  = both arms' P_hat match Ember's sealed P (hash-verified)
-         AND quantum_shots_budget <= 5 * M99_IDEAL[n]
-         AND (conventional_meter_median / quantum_meter) >= R_THRESHOLD[n]
+         AND quantum_shots_budget == frozen budget 5 * M99_IDEAL[n] (conformity)
+         AND (conventional_meter_median / (5 * M99_IDEAL[n])) >= R_THRESHOLD[n]
   LOSS = quantum arm wrong, OR ratio < R_THRESHOLD[n] with both arms correct
+  Ratio denominator = FULL frozen quantum budget (Elder C6490 pre-freeze NACK):
+  apples-to-apples with the R(n) formula and strictly conservative. The quantum
+  stable-prefix meter is reported alongside as a secondary observable, never in
+  the graded ratio.
   NULL = conventional arm failed to identify (transcript exhausted, no acceptance)
 Overall WIN = n=8 wins AND >=3 of 4 rungs win.
 
@@ -59,10 +63,12 @@ def grade_n(n, true_P, ans):
     c_correct = (c["P_hat"] == true_P)
     if not c_correct:
         return "NULL", "conventional arm misidentified (graded as conventional failure)"
-    ratio = c["meter_median"] / q["meter"]
+    ratio = c["meter_median"] / (5 * M99_IDEAL[n])
+    secondary = f"(secondary: q stable-prefix meter {q['meter']}, " \
+                f"prefix-ratio {c['meter_median'] / q['meter']:.1f})"
     if ratio >= R_THRESHOLD[n]:
-        return "WIN", f"ratio {ratio:.1f} >= {R_THRESHOLD[n]}"
-    return "LOSS", f"ratio {ratio:.1f} < {R_THRESHOLD[n]} with both arms correct"
+        return "WIN", f"ratio {ratio:.1f} >= {R_THRESHOLD[n]} {secondary}"
+    return "LOSS", f"ratio {ratio:.1f} < {R_THRESHOLD[n]} with both arms correct {secondary}"
 
 
 def main():
