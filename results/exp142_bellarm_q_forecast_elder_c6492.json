@@ -1,0 +1,72 @@
+{
+ "method": "iid readout-flip proxy on raw Bell bits; per-bit r derived from measured kingston parity-level q_hat via r=(1-(1-2q)^{1/n})/2; frozen Gate-2 ML decoder",
+ "trials_per_cell": 200,
+ "budgets": {
+  "4": 60,
+  "6": 80,
+  "8": 90,
+  "10": 110
+ },
+ "qhat_parity_measured": {
+  "4": 0.0367,
+  "6": 0.0433,
+  "8": 0.0433,
+  "10": 0.07
+ },
+ "cells": [
+  {
+   "n": 8,
+   "r_per_bit": 0.005629406037551743,
+   "tag": "measured",
+   "m99": 40,
+   "budget": 90,
+   "success_at_budget": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "n": 8,
+   "r_per_bit": 0.011258812075103486,
+   "tag": "2x stress",
+   "m99": 50,
+   "budget": 90,
+   "success_at_budget": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "n": 8,
+   "r_per_bit": 0.022517624150206972,
+   "tag": "4x stress",
+   "m99": 90,
+   "budget": 90,
+   "success_at_budget": 0.99,
+   "verdict": "PASS"
+  },
+  {
+   "n": 10,
+   "r_per_bit": 0.007484560455974898,
+   "tag": "measured",
+   "m99": 60,
+   "budget": 110,
+   "success_at_budget": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "n": 10,
+   "r_per_bit": 0.014969120911949796,
+   "tag": "2x stress",
+   "m99": 90,
+   "budget": 110,
+   "success_at_budget": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "n": 10,
+   "r_per_bit": 0.029938241823899592,
+   "tag": "4x stress",
+   "m99": null,
+   "budget": 110,
+   "success_at_budget": 0.63,
+   "verdict": "AT-RISK"
+  }
+ ]
+}

@@ -109,17 +109,30 @@ def main():
     print(f"mapping={mapping} csign={csign}")
 
     trials = 200
-    out = {"method": "iid readout-flip proxy on raw Bell bits at measured kingston q; frozen Gate-2 ML decoder",
-           "trials_per_cell": trials, "budgets": B_Q, "cells": []}
+    # UNIT RECONCILE (v2, C6492 self-caught): cal q_hat is the odd-rate of an
+    # n-bit PARITY (that is what the conventional SPRT consumes) — NOT a per-bit
+    # readout rate. v1 of this script injected q_hat per RAW BIT (n-fold
+    # over-noising) and forecast AT-RISK everywhere, contradicting the observed
+    # hardware meters (8/15/22/34 ~ 1.5x ideal) — the contradiction was the bug
+    # signal. Per-bit rate under iid: r = (1 - (1-2*q_hat)^(1/n)) / 2.
+    QHAT_MEASURED = {4: 0.0367, 6: 0.0433, 8: 0.0433, 10: 0.0700}
+    out = {"method": "iid readout-flip proxy on raw Bell bits; per-bit r derived "
+                     "from measured kingston parity-level q_hat via "
+                     "r=(1-(1-2q)^{1/n})/2; frozen Gate-2 ML decoder",
+           "trials_per_cell": trials, "budgets": B_Q,
+           "qhat_parity_measured": QHAT_MEASURED, "cells": []}
     for n in (8, 10):
-        for q in (0.044, 0.055, 0.08):
-            curve = forecast(n, q, trials, mapping, csign, inv)
+        r_meas = (1 - (1 - 2 * QHAT_MEASURED[n]) ** (1.0 / n)) / 2
+        for r, tag in ((r_meas, "measured"), (2 * r_meas, "2x stress"),
+                       (4 * r_meas, "4x stress")):
+            curve = forecast(n, r, trials, mapping, csign, inv)
             m = m99(curve)
             at_budget = curve.get(B_Q[n])
             verdict = "PASS" if (m is not None and m <= B_Q[n]) else "AT-RISK"
-            print(f"n={n} q={q:.3f}: m99={m} budget={B_Q[n]} "
+            print(f"n={n} r={r:.4f} ({tag}): m99={m} budget={B_Q[n]} "
                   f"success@budget={at_budget} -> {verdict}", flush=True)
-            out["cells"].append({"n": n, "q": q, "m99": m, "budget": B_Q[n],
+            out["cells"].append({"n": n, "r_per_bit": r, "tag": tag, "m99": m,
+                                 "budget": B_Q[n],
                                  "success_at_budget": at_budget, "verdict": verdict})
     path = os.path.join(HERE, "..", "results",
                         "exp142_bellarm_q_forecast_elder_c6492.json")
