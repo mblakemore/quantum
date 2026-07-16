@@ -1,0 +1,101 @@
+{
+ "A_ELIM": 4.605170185988092,
+ "runs": [
+  {
+   "arm": "stab_robust",
+   "n": 6,
+   "q": 0.015,
+   "trials": 10,
+   "mean_shots": 2421.7,
+   "std_shots": 379.8457713335769,
+   "success": 10,
+   "inflation_vs_ideal": 2.4511133603238866
+  },
+  {
+   "arm": "stab_robust",
+   "n": 6,
+   "q": 0.03,
+   "trials": 10,
+   "mean_shots": 3294.4,
+   "std_shots": 521.0741214069261,
+   "success": 10,
+   "inflation_vs_ideal": 3.334412955465587
+  },
+  {
+   "arm": "stab_robust",
+   "n": 6,
+   "q": 0.05,
+   "trials": 8,
+   "mean_shots": 4447.125,
+   "std_shots": 599.6035018034835,
+   "success": 8,
+   "inflation_vs_ideal": 4.501138663967612
+  },
+  {
+   "arm": "stab_robust",
+   "n": 6,
+   "q": 0.08,
+   "trials": 6,
+   "mean_shots": 7420.166666666667,
+   "std_shots": 1376.892324120598,
+   "success": 6,
+   "inflation_vs_ideal": 7.5102901484480435
+  },
+  {
+   "arm": "stab_robust",
+   "n": 8,
+   "q": 0.015,
+   "trials": 4,
+   "mean_shots": 13660.0,
+   "std_shots": 1848.4517846024548,
+   "success": 4,
+   "inflation_vs_ideal": 2.826401820815229
+  },
+  {
+   "arm": "stab_robust",
+   "n": 8,
+   "q": 0.05,
+   "trials": 3,
+   "mean_shots": 28847.0,
+   "std_shots": 4711.518085146938,
+   "success": 3,
+   "inflation_vs_ideal": 5.96875646596317
+  },
+  {
+   "arm": "product_sprt",
+   "n": 6,
+   "q": 0.015,
+   "trials": 20,
+   "mean_shots": 3210.9,
+   "std_shots": 127.0932334941558,
+   "note": "MC walk, barriers A=ln(3^n*100), B=-ln(100)"
+  },
+  {
+   "arm": "product_sprt",
+   "n": 6,
+   "q": 0.05,
+   "trials": 20,
+   "mean_shots": 10903.05,
+   "std_shots": 369.3373085676561,
+   "note": "MC walk, barriers A=ln(3^n*100), B=-ln(100)"
+  },
+  {
+   "arm": "product_sprt",
+   "n": 8,
+   "q": 0.015,
+   "trials": 10,
+   "mean_shots": 36841.8,
+   "std_shots": 397.54818575865744,
+   "note": "MC walk, barriers A=ln(3^n*100), B=-ln(100)"
+  },
+  {
+   "arm": "product_sprt",
+   "n": 8,
+   "q": 0.05,
+   "trials": 10,
+   "mean_shots": 154612.7,
+   "std_shots": 1032.6601619119429,
+   "note": "MC walk, barriers A=ln(3^n*100), B=-ln(100)"
+  }
+ ]
+}
