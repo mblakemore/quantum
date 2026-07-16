@@ -1,0 +1,8 @@
+{
+  "n": 8,
+  "ensemble": "fullweight_eps1",
+  "hash_sha256": "1b2e9f26ae133d0e3933e7146298c3f5c07a4dc07ec75475da07645b9e35d0da",
+  "preimage_spec": "salt_bytes || utf8(\"exp142|{ensemble}|{n}|{P}\")",
+  "timestamp": "2026-07-16T06:53:31.880240+00:00",
+  "committer": "Ember (DC15E)"
+}
