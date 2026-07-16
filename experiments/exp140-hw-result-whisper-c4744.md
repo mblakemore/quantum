@@ -57,17 +57,41 @@ measured on identical physical qubits across arms, or REM applied.
   negative on all three chips (kingston −2.9σ, fez −1.4σ null, marrakesh −2.7σ). Whatever is going on,
   it is not the optimization level. That confound *is* cleanly resolved.
 
-## Honest status
+## Exp140b — the readout-CONTROLLED re-test (tensored REM on every arm, seeded layout, 3 chips)
 
-The bridge-A placement lever is **unproven**: a single-window 6σ effect failed to replicate across
-three chips (sign-reversed on one), and the C-vs-B contrast is confounded by measured-qubit readout.
-This legitimately motivates **live-calibration/readout verification as a precondition** for any
-placement claim — "published/heuristic layout selection can misrank real qubit quality, and the
-measured-qubit readout must be controlled" — NOT as a rescue of the win.
+Jobs: kingston `d9c4kgv550hc73dksojg`, marrakesh `d9c4kj41osis73bjcf00`, fez `d9c4klh6dkoc73fh6g9g`.
+REM removes the readout confound; C-vs-B is now pure bulk placement (both opt3). Result:
 
-**A clean re-test would**: (1) measure the observable on the *same* physical qubits across all arms
-(or apply REM to all), (2) replicate across ≥2 chips/windows, (3) only then attribute any residual
-delta to bulk placement. Until then: unproven.
+| Chip | REM factors A·C / B | C−B (bulk placement, REM'd) | usable? |
+|---|---|---|---|
+| kingston | 0.94 / 0.97 | **+5.5σ (B better)** | yes (clean readout) |
+| marrakesh | 0.92 / 0.84 | **−4.0σ (B worse)** | yes (clean readout) |
+| fez | **0.20** / 0.96 | +4.2σ | **NO** — A/C on ~40%/qubit readout; REM×5 amplifies variance → noise, not a datapoint |
 
-*Data: `results/exp140_graded_{d9c300k1osis73bjab80,d9c49fp6dkoc73fh61ag,d9c49ic1osis73bjbvq0,d9c49ks1osis73bjbvsg}.json`.
-Supersedes the earlier "mechanism confirmed" framing of the first single-window run.*
+**Honest tally: 1 better, 1 worse, 1 unusable → the effect does NOT replicate.** It is *not* a readout
+artifact (it survives REM at 4–5σ per clean chip), but on the two chips where the test is clean it
+comes out with **opposite signs**.
+
+## Final status (Exp140 + 140b)
+
+- **The supportable statement**: the transpiler's noise-aware layout is **not a reliable improvement**
+  over the trivial baseline for this circuit — better on one clean chip (+5.5σ), worse on the other
+  (−4.0σ). Nothing stronger.
+- **What is NOT supportable** (and is deliberately not claimed): each arm B is a *single seeded layout
+  draw*, so this cannot separate chip-identity from which-region-was-drawn — so **not** "sign is
+  chip-dependent," and **no** mechanism (published-cal-misled, drift) is pinned. It also gives no
+  support to any live-calibration/weather-service remedy — there is no live-cal arm here.
+- **Scope w.r.t. bridge A**: this is the **α=0 mirror echo** (ideal 1.0), placement-vs-arbitrary-trivial
+  -baseline — **not** the tracked α≠0 observable and **not** the stack+mitigation-vs-mitigation
+  *rescaled-residual* race metric. So Exp140/140b resolves bridge A in **neither** direction. It is a
+  narrow methodological finding: *noise-aware transpiler placement is not a dependable lever for this
+  circuit class.*
+- **The process worked**: replication caught a false positive twice (single-window 6σ → raw 3-chip →
+  REM-controlled), each pass shrinking the claim to what the data supports. The fly-loop is complete.
+
+**The one open item that would actually speak to bridge A** is the deferred **rescaled-residual test**
+(stack+mitigation vs mitigation-alone, the metric the tracker's mitigated contenders are graded on) —
+which needs the α≠0 instance and a non-circular rescaling design. Everything here is upstream of that.
+
+*Data: `results/exp140_graded_*.json`, `results/exp140b_graded_*.json`. Supersedes the "mechanism
+confirmed" framing of the first single-window run.*
