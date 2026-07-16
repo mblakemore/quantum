@@ -6,10 +6,13 @@ never reads circuit definitions from retrieved jobs.
 
 Pipeline per n:
   1. sentinels: Bell fidelity start/end (window integrity, report only)
-  2. q_hat(n): pooled odd-rate on the 3 known-Pauli cal blocks (300 shots)
+  2. q_hat(n): pooled odd-rate on the 3 known-Pauli cal blocks (300 shots);
+     barriers use q_used = min(q_hat + 1 pooled SE, 0.49) — accept-direction
+     safety margin (prereg s4, Elder C6490 caution: q_hat underestimate shrinks
+     H_true drift -> beta above target -> NULL risk)
   3. SPRT barriers by FROZEN FORMULA: alpha = 0.01/3^n (Bonferroni FW 1%),
      beta = 0.01;  A = ln((1-beta)/alpha), B = ln(beta/(1-alpha))
-     per-shot LLR: odd -> ln(q_hat/0.5); even -> ln((1-q_hat)/0.5)
+     per-shot LLR: odd -> ln(q_used/0.5); even -> ln((1-q_used)/0.5)
   4. conventional: per-basis parity streams vs manifest b -> SPRT crossing status
      -> alive list (wave 2) | after all crossed: P_hat_c = max-final-LLR accepted
      basis (sigma-independent); METER = MEDIAN over 1001 precommitted permutations
@@ -174,8 +177,11 @@ def main():
         stream = parity_stream(bits, pubs[i]["b"])
         odd_tot += sum(stream)
         shots_tot += len(stream)
-    q_hat = max(odd_tot / shots_tot, 1e-4)
-    print(f"q_hat(n={n}) = {q_hat:.4f}  ({odd_tot}/{shots_tot})")
+    q_raw = max(odd_tot / shots_tot, 1e-4)
+    se = math.sqrt(q_raw * (1 - q_raw) / shots_tot)
+    q_hat = min(q_raw + se, 0.49)  # accept-direction margin (prereg s4)
+    print(f"q_hat(n={n}) = {q_raw:.4f} ({odd_tot}/{shots_tot}) "
+          f"+ 1SE {se:.4f} -> q_used = {q_hat:.4f}")
 
     # conventional streams: rows across chunked PUBs, in product order
     bstrs = man1["conv_b_strings"]
@@ -232,7 +238,7 @@ def main():
                                         "overage_submitted": conv[
                                             "consumed_per_basis_total"]},
                        "sentinels": {"start": s_start, "end": s_end},
-                       "q_hat": q_hat}, f, indent=1)
+                       "q_hat_raw": q_raw, "q_used": q_hat}, f, indent=1)
         print(f"answers -> {args.emit_answers}")
 
 
