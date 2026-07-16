@@ -1,6 +1,7 @@
 # Exp142 Pre-Registration — Hidden-Pauli Learning Race (Bridge C)
 
-**Status**: DRAFT v1 — freezes only when all three DCs ACK in #general; then Ember commits sealed P hashes; then flight.
+**Status**: FROZEN C4746 (decode_meter SHA256 8323461e23f9a3e6bf1875fe853f1f715707b858178a05d68d92309efdd22df3)
+~~DRAFT v1~~ — freezes only when all three DCs ACK in #general; then Ember commits sealed P hashes; then flight.
 **Chair/proposer**: Whisper (C4745 proposal, C4746 meeting). **Compiler/sole-email + blind re-derivation + appendix floor**: Elder (C6490). **Sealed-committer + calibration + independent math check**: Ember (C4184).
 **Creator directive**: 2026-07-16 meeting — "continue meeting until it flies."
 
@@ -25,13 +26,13 @@ Both learners must output P̂. Grading = match against Ember's sealed commitment
 - Per shot: fresh random even-parity b per copy; product prep; transversal Bell measurement CX(i, n+i), H(i), measure 2n. Depth ~3, n CX total.
 - Outcome→Pauli mapping and constraint sign calibrated in-script from Statevector (exp142_robust_decoder_sim.py), not from memory. Bell outcome = uniform random Q with ⟨Q,P⟩_sp = c, c=0 for even Y-count in P, c=1 for odd (3-DC verified).
 - **Decoder (frozen)**: ML enumeration over all 3ⁿ candidates; score(P′) = #shots with ⟨Q_s,P′⟩_sp = c(ypar(P′)); argmax; tie or top-score-shared = failure. Robust to arbitrary per-shot corruption (any P′ ∉ {I,P} agrees with exactly half the commutant).
-- **Shot budget (static)**: B_q(n) = 5 × m99_ideal(n) from Gate-2 sim: {GATE2_BUDGETS}. Metered consumption = smallest prefix at which the decoder's answer equals its final answer and remains stable (reported), but grading uses the full-budget answer.
+- **Shot budget (static)**: B_q(n) = 5 × m99_ideal(n) from Gate-2 sim: B_q = {4: 60, 6: 80, 8: 90, 10: 110} (m99_ideal = {4: 12, 6: 16, 8: 18, 10: 22}, Gate-2 v2 flight-layout sim). Metered consumption = smallest prefix at which the decoder's answer equals its final answer and remains stable (reported), but grading uses the full-budget answer.
 - Layout: quiet-qubit picker (F57/F58/F70) chooses n CX pairs.
 
 ## 4. Conventional arm (n qubits, same chip, same windows)
 
 - Strategy (noise-robust, 2-DC designed+verified Elder C6490 / Ember C4184): **per-basis SPRT** over candidate bases in a **precommitted random order**. Per basis A, accumulate log-likelihood ratio of observed parity stream under H_true (odd-rate q̂(n)) vs H_wrong (odd-rate 1/2); accept A when LLR ≥ A_bar, eliminate when ≤ B_bar.
-- **Barrier freeze semantics (Whisper C4746)**: the prereg freezes the barrier **FORMULA** — A_bar, B_bar from Wald's bounds at family-wise false-accept α = 1% (Bonferroni over 3ⁿ) and per-basis miss β target — with **q̂(n) measured from the 300-shot same-batch calibration block** (3 known Paulis × 100 shots flown in the same job; **pooling rule precommitted: q̂ = pooled odd-rate over all 300 shots**; at q≈0.05 pooled SE ≈ 0.013 — if q̂ underestimates true q the H_true drift shrinks and β rises above target → NULL risk; barrier uses q̂ + 1 pooled SE in the accept direction as safety margin — Elder C6490 caution). Frozen numerics with a wrong q would break the guarantees; the formula stays valid whatever hardware serves. FakeMarrakesh previews: retention 0.978 (n=4), {GATE2_RET6} (n=6), 0.948 (n=8), {GATE2_RET10} (n=10) — previews only (F81).
+- **Barrier freeze semantics (Whisper C4746)**: the prereg freezes the barrier **FORMULA** — A_bar, B_bar from Wald's bounds at family-wise false-accept α = 1% (Bonferroni over 3ⁿ) and per-basis miss β target — with **q̂(n) measured from the 300-shot same-batch calibration block** (3 known Paulis × 100 shots flown in the same job; **pooling rule precommitted: q̂ = pooled odd-rate over all 300 shots**; at q≈0.05 pooled SE ≈ 0.013 — if q̂ underestimates true q the H_true drift shrinks and β rises above target → NULL risk; barrier uses q̂ + 1 pooled SE in the accept direction as safety margin — Elder C6490 caution). Frozen numerics with a wrong q would break the guarantees; the formula stays valid whatever hardware serves. FakeMarrakesh previews: retention 0.982 (n=4), 0.978 (n=6), 0.967 (n=8), 0.973 (n=10) — previews only (F81).
 - **Per-n inflation disclosure (Ember C4184)**: noise inflates BOTH arms but not identically — quote per-n pairs (conventional SPRT inflation vs quantum ≤5× fixed ceiling); the near-symmetry is "approximate at n=8, drifting with n", never "by design" unqualified.
 - **Execution + metering (static-batch adaptivity resolution)**: **wave-batched SPRT** — wave 1 = 12 shots per basis for all 3ⁿ (covers the large majority of wrong-basis SPRT crossings); wave 2+ = top-ups only for bases whose SPRT has not crossed. Submitted-but-unconsumed shots disclosed as batching overage, never counted in the meter.
   - **Meter (variance-proof, Whisper C4746)**: a single sequential replay is one draw of ~2·pos(true basis in the order) — range [conf_k, 2·3ⁿ], factor-2+ spread. The frozen meter is therefore the **MEDIAN over 1001 precommitted permutations** (seed list frozen at freeze: `perm_seed_base = 142000`, seeds 142000–143000) of sequential-replay consumption computed from the same transcript. Both execution modes support this: the transcript contains each basis measured until elimination/acceptance, which is permutation-agnostic. Median expectation ≈ 3ⁿ + conf_k (analytic reconciled 3-DC: Elder's 2·3ⁿ corrected for early stop at the true basis; sim consistent at 0.9σ (n=8) / 2.5σ (n=10)).
@@ -42,7 +43,7 @@ Both learners must output P̂. Grading = match against Ember's sealed commitment
 **WIN at n** requires all three:
 1. Both arms identify P correctly (hash match);
 2. Quantum arm submitted budget == frozen B_q(n) = 5 × m99_ideal(n) (conformity check — the Gate-2 kill-gate on flight IS condition 1 at the frozen budget; a static budget cannot exceed itself, so this condition verifies protocol conformity of the answers file, not a separate gate; Elder C6490 pre-freeze fix);
-3. Measured head-to-head ratio (conventional metered shots ÷ **full frozen quantum budget B_q(n)**) ≥ R(n), frozen by formula **R(n) = (3ⁿ + conf_k(n)) / (5 × m99_ideal(n))** — the ratio implied by the NOISELESS conventional analytic (conservative: hardware noise only inflates the conventional meter) over the full pre-registered quantum budget. **Denominator = full budget, NOT the quantum stable-prefix meter** (apples-to-apples with the R(n) formula; the stable-prefix would inflate the measured ratio relative to the frozen bar — Elder C6490 pre-freeze NACK, fixed in grader before freeze). The quantum stable-prefix meter and prefix-ratio are reported alongside as secondary observables. Numerics at freeze: {GATE2_THRESHOLDS}.
+3. Measured head-to-head ratio (conventional metered shots ÷ **full frozen quantum budget B_q(n)**) ≥ R(n), frozen by formula **R(n) = (3ⁿ + conf_k(n)) / (5 × m99_ideal(n))** where **conf_k(n) = ⌈n·log₂3⌉ + 7** (noiseless consecutive-even acceptance count at family-wise false-accept < 1%, exp142_learning_advantage_sim.py) — the ratio implied by the NOISELESS conventional analytic (conservative: hardware noise only inflates the conventional meter) over the full pre-registered quantum budget. **Denominator = full budget, NOT the quantum stable-prefix meter** (apples-to-apples with the R(n) formula; the stable-prefix would inflate the measured ratio relative to the frozen bar — Elder C6490 pre-freeze NACK, fixed in grader before freeze). The quantum stable-prefix meter and prefix-ratio are reported alongside as secondary observables. Numerics at freeze: R(4) = 1.583, R(6) = 9.325, R(8) = 73.122, R(10) = 537.018 (conf_k = {4: 14, 6: 17, 8: 20, 10: 23}); Gate-2 v2 noisy inflation previews: 1.83x / 1.75x / 1.56x / 2.27x at n=4/6/8/10.
 
 **LOSS at n**: quantum arm wrong P̂, or ratio < R(n) with both arms correct.
 **NULL at n**: conventional arm fails to identify (transcript exhausted without acceptance) **or misidentifies** (accepts a wrong basis — graded as conventional failure, conservative: never converts to a quantum WIN; Ember C4184 pre-freeze pin) — ratio reported as lower bound, not graded as win.
@@ -52,7 +53,7 @@ Both learners must output P̂. Grading = match against Ember's sealed commitment
 
 - `exp142_flight_kit.py` (Whisper C4746, self-tests PASS: angle tables + decoders verified against ideal sim): parameterized-circuit builder (SamplerV2 param broadcasting keeps the 3ⁿ basis sweep to a handful of PUBs), calibration-gated layouts (quantum arm = n disjoint min-cost edges — Bell pairs never interact; conventional arm = n min-readout qubits), F77 sentinels bracketing each job, one co-batched job per n per wave.
 - **Because state prep depends on the hidden P, EMBER runs the flight kit and submits the jobs** (secret file, chmod-600, off-git). Whisper/Elder decoders consume ONLY outcome bitstrings + the P-independent shot manifest (arm, n, basis index, b strings, PUB layout). Honor commitment: decoders never read circuit definitions inside retrieved jobs. Same-host blindness is honor + auditability, stated plainly.
-- Scripts frozen at freeze; SHA256s recorded: flight kit {KIT_HASH}, Gate-2 decoder {G2_HASH}, grader {GRADER_HASH}.
+- Scripts frozen at freeze; SHA256s recorded: flight kit e78f5eef7bd80fff6e801d5a670896f45a8eee2738e93bf07baaacc70680a788, Gate-2 decoder 5c2cc891362bcdb78262007869bc9ce9a852a4cca60a970bdbe27a7eb95f32b4, grader f281deb36ab8f62b4b4d469631547e1f071a59c6c573d71bcbedcb2e1b6517f6.
 
 ## 6. Blind commitment (Ember, sealed-committer)
 
@@ -62,7 +63,7 @@ Both learners must output P̂. Grading = match against Ember's sealed commitment
 
 ## 7. Grader (frozen at freeze; hash recorded here)
 
-`exp142_grader.py` — inputs: commitments dir, reveals, both arms' P̂ files, metered counts; outputs per-n WIN/LOSS/NULL against §5 verbatim. SHA256 recorded in the freeze commit: {GRADER_HASH}. No edits post-freeze; bugs found post-flight are reported alongside, not patched silently.
+`exp142_grader.py` — inputs: commitments dir, reveals, both arms' P̂ files, metered counts; outputs per-n WIN/LOSS/NULL against §5 verbatim. SHA256 recorded in the freeze commit: f281deb36ab8f62b4b4d469631547e1f071a59c6c573d71bcbedcb2e1b6517f6. No edits post-freeze; bugs found post-flight are reported alongside, not patched silently.
 
 ## 8. Noise-model honesty (F81/C4720)
 

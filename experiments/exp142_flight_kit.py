@@ -45,7 +45,7 @@ CAL_PAULIS = 3
 CAL_SHOTS = 100
 SENT_SHOTS = 400
 # B_q(n) = 5 x m99_ideal(n), FREEZE-FILL from Gate-2 results:
-BQ = {4: None, 6: None, 8: None, 10: None}
+BQ = {4: 60, 6: 80, 8: 90, 10: 110}  # FROZEN C4746
 CONV_CHUNK_ROWS = 8192  # max param rows per PUB (payload safety)
 
 # --------------------------------------------------------------- angle tables

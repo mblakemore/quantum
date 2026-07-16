@@ -33,8 +33,8 @@ ENSEMBLE = "fullweight_eps1"
 NS = (4, 6, 8, 10)
 
 # ---- FROZEN CONSTANTS (filled from Gate-2 sim outputs at freeze) ----
-M99_IDEAL = {4: None, 6: None, 8: None, 10: None}   # FREEZE-FILL
-R_THRESHOLD = {4: None, 6: None, 8: None, 10: None} # FREEZE-FILL
+M99_IDEAL = {4: 12, 6: 16, 8: 18, 10: 22}  # FROZEN C4746
+R_THRESHOLD = {4: 1.583333, 6: 9.325000, 8: 73.122222, 10: 537.018182}  # FROZEN = (3^n+conf_k)/B_q exact
 # ---------------------------------------------------------------------
 
 
