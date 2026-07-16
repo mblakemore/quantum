@@ -45,7 +45,7 @@ Both learners must output P̂. Grading = match against Ember's sealed commitment
 3. Measured head-to-head ratio (conventional metered shots ÷ **full frozen quantum budget B_q(n)**) ≥ R(n), frozen by formula **R(n) = (3ⁿ + conf_k(n)) / (5 × m99_ideal(n))** — the ratio implied by the NOISELESS conventional analytic (conservative: hardware noise only inflates the conventional meter) over the full pre-registered quantum budget. **Denominator = full budget, NOT the quantum stable-prefix meter** (apples-to-apples with the R(n) formula; the stable-prefix would inflate the measured ratio relative to the frozen bar — Elder C6490 pre-freeze NACK, fixed in grader before freeze). The quantum stable-prefix meter and prefix-ratio are reported alongside as secondary observables. Numerics at freeze: {GATE2_THRESHOLDS}.
 
 **LOSS at n**: quantum arm wrong P̂, or ratio < R(n) with both arms correct.
-**NULL at n**: conventional arm fails to identify (transcript exhausted without acceptance) — ratio reported as lower bound, not graded as win.
+**NULL at n**: conventional arm fails to identify (transcript exhausted without acceptance) **or misidentifies** (accepts a wrong basis — graded as conventional failure, conservative: never converts to a quantum WIN; Ember C4184 pre-freeze pin) — ratio reported as lower bound, not graded as win.
 **Overall**: experiment WINS if n=8 wins AND ≥3 of 4 rungs win. Anything else reported as-is.
 
 ## 5b. Flight kit + blind execution (frozen scripts)
@@ -66,7 +66,7 @@ Both learners must output P̂. Grading = match against Ember's sealed commitment
 
 ## 8. Noise-model honesty (F81/C4720)
 
-FakeMarrakesh is known-optimistic. All Gate-2 sim numbers are PREVIEWS, not hardware floors. The flight carries its own kill-gate (§5.2) so hardware reality, not the model, decides. Depth here is ~3 so model residual is expected small — expected, not assumed.
+FakeMarrakesh is known-optimistic. All Gate-2 sim numbers are PREVIEWS, not hardware floors. The flight carries its own kill-gate (§5 conditions 1-2: correct P̂ at the frozen budget) so hardware reality, not the model, decides. Depth here is ~3 so model residual is expected small — expected, not assumed.
 
 ## 9. Budget
 

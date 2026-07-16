@@ -7,6 +7,16 @@ for n in {4, 8, 10}. F81/C4720 caveat: FakeMarrakesh is KNOWN-OPTIMISTIC at dept
 this circuit is depth ~3 so the model residual is small, but the flight prereg
 still quotes the sim number as a PREVIEW, not a hardware floor.
 
+v2 (C4746 root-cause fix): v1 let transpile() pick the layout; at n=10 it chose a
+pair with 19.8% combined readout error -> true-candidate bias collapsed to 0.083
+and the noisy curve flat-zeroed through m=200 (v1 FAIL artifact preserved in
+exp142_robust_decoder_results_v1_default_layout.json). The FLIGHT design uses
+pick_layouts() calibration-gated min-cost disjoint edges (flight kit), so Gate-2
+must sim the flown layout: noisy arms now use initial_layout=q_layout and the
+conventional probe uses conv_layout, seed_transpiler=142 (flight kit match).
+Lesson (F81 family): a kill-gate sim must match the flight design's qubit
+selection, or it grades a different experiment.
+
 Protocol (quantum arm, per shot):
   - draw random even-parity sign string b for each copy independently
   - prep product eigenstates |P_i, b_i> on qubits 0..n-1 (copy1) and n..2n-1 (copy2)
@@ -164,7 +174,7 @@ def decode_success_curve(shots_bits, true_idx, cand_M, ypar, csign, n, grid):
     return out
 
 # ------------------------------------------------------------------- run arms
-def run_arm(n, trials, m_max, noisy, mapping, csign, backend=None):
+def run_arm(n, trials, m_max, noisy, mapping, csign, backend=None, initial_layout=None):
     """Returns success-rate-vs-m dict. One hidden P per trial."""
     cands, cand_M, ypar = candidate_matrix(n)
     if noisy:
@@ -180,7 +190,8 @@ def run_arm(n, trials, m_max, noisy, mapping, csign, backend=None):
         P = "".join(cands[idx])
         circs = [shot_circuit(P, random_even_parity_bits(n), random_even_parity_bits(n))
                  for _ in range(m_max)]
-        tcircs = transpile(circs, sim, optimization_level=1, seed_transpiler=7)
+        tcircs = transpile(circs, sim, optimization_level=1, seed_transpiler=142,
+                           initial_layout=initial_layout)
         result = sim.run(tcircs, shots=1, memory=True).result()
         shots_bits = np.array([
             outcome_to_bits(result.get_memory(i)[0], n, mapping)
@@ -201,7 +212,7 @@ def m99(curve):
     return None
 
 # -------------------------------------------------- conventional-arm noise probe
-def conventional_noise_probe(n, backend, mapping, shots=400):
+def conventional_noise_probe(n, backend, mapping, shots=400, initial_layout=None):
     """Measured parity retention in the TRUE basis under FakeMarrakesh (readout+1q
     noise inflates the executed 3^n baseline; quote measured, not assumed)."""
     sim = AerSimulator.from_backend(backend)
@@ -220,7 +231,8 @@ def conventional_noise_probe(n, backend, mapping, shots=400):
                 qc.sdg(i)
                 qc.h(i)
         qc.measure(range(n), range(n))
-        tqc = transpile(qc, sim, optimization_level=1, seed_transpiler=7)
+        tqc = transpile(qc, sim, optimization_level=1, seed_transpiler=142,
+                        initial_layout=initial_layout)
         counts = sim.run(tqc, shots=shots).result().get_counts()
         even = sum(v for k, v in counts.items()
                    if (np.array([int(c) for c in k.replace(' ', '')]).sum() - b.sum()) % 2 == 0)
@@ -240,18 +252,24 @@ def main():
     assert m99(st) is not None and m99(st) <= 20, f"SELF-TEST FAIL: {st}"
     print(f"  self-test n=3 noiseless m99={m99(st)} OK")
 
+    from exp142_flight_kit import pick_layouts
     backend = FakeMarrakesh()
     results = {"mapping_ok": True, "csign": {str(k): v for k, v in csign.items()},
-               "per_n": {}, "kill_gate": "m99_noisy <= 5 * m99_ideal AND success>=0.99"}
+               "per_n": {}, "kill_gate": "m99_noisy <= 5 * m99_ideal AND success>=0.99",
+               "layout_provenance": "v2: flight-kit pick_layouts (calibration-gated "
+               "min-cost disjoint edges), seed_transpiler=142 — matches flown design"}
     for n, trials, m_max in ((4, 30, 80), (8, 25, 140), (10, 20, 200)):
+        q_layout, conv_layout, pairs = pick_layouts(backend, n)
+        print(f"n={n}: flight pairs {pairs}", flush=True)
         print(f"n={n}: ideal arm...", flush=True)
         ideal = run_arm(n, trials, m_max, noisy=False, mapping=mapping, csign=csign)
         mi = m99(ideal)
         print(f"n={n}: FakeMarrakesh arm...", flush=True)
         noisy = run_arm(n, trials, m_max, noisy=True, mapping=mapping, csign=csign,
-                        backend=backend)
+                        backend=backend, initial_layout=q_layout)
         mn = m99(noisy)
-        conv_ret = conventional_noise_probe(n, backend, mapping)
+        conv_ret = conventional_noise_probe(n, backend, mapping,
+                                            initial_layout=conv_layout)
         verdict = (mn is not None and mi is not None and mn <= 5 * mi)
         results["per_n"][n] = {
             "m99_ideal": mi, "m99_noisy": mn,
@@ -259,6 +277,7 @@ def main():
             "ideal_curve": ideal, "noisy_curve": noisy,
             "conventional_true_basis_parity_retention": conv_ret,
             "kill_gate_pass": bool(verdict),
+            "flight_pairs": pairs, "conv_layout": conv_layout,
         }
         print(f"n={n}: m99 ideal={mi} noisy={mn} "
               f"inflation={(mn/mi):.2f}x conv_retention={conv_ret:.3f} "

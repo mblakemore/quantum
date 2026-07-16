@@ -56,8 +56,9 @@ def grade_n(n, true_P, ans):
     q_correct = (q["P_hat"] == true_P)
     if not q_correct:
         return "LOSS", "quantum arm wrong P_hat"
-    if q["shots_budget"] > 5 * M99_IDEAL[n]:
-        return "LOSS", f"quantum budget {q['shots_budget']} > 5x ideal {M99_IDEAL[n]}"
+    if q["shots_budget"] != 5 * M99_IDEAL[n]:
+        return "LOSS", (f"quantum budget {q['shots_budget']} != frozen "
+                        f"5 x m99_ideal = {5 * M99_IDEAL[n]} (conformity, prereg s5 cond 2)")
     if not c.get("identified", False) or c.get("P_hat") is None:
         return "NULL", "conventional arm failed to identify (ratio reported as lower bound)"
     c_correct = (c["P_hat"] == true_P)
