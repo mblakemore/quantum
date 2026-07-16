@@ -1,0 +1,35 @@
+{
+  "per_n": {
+    "4": {
+      "verdict": "WIN",
+      "reason": "ratio 4.9 >= 1.583333 (secondary: q stable-prefix meter 8, prefix-ratio 37.0)"
+    },
+    "6": {
+      "verdict": "WIN",
+      "reason": "ratio 31.5 >= 9.325 (secondary: q stable-prefix meter 15, prefix-ratio 168.1)"
+    },
+    "8": {
+      "verdict": "WIN",
+      "reason": "ratio 266.6 >= 73.122222 (secondary: q stable-prefix meter 22, prefix-ratio 1090.8)"
+    },
+    "10": {
+      "verdict": "WIN",
+      "reason": "ratio 2417.5 >= 537.018182 (secondary: q stable-prefix meter 34, prefix-ratio 7821.4)"
+    }
+  },
+  "overall": "WIN",
+  "constants": {
+    "M99_IDEAL": {
+      "4": 12,
+      "6": 16,
+      "8": 18,
+      "10": 22
+    },
+    "R_THRESHOLD": {
+      "4": 1.583333,
+      "6": 9.325,
+      "8": 73.122222,
+      "10": 537.018182
+    }
+  }
+}
