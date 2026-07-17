@@ -1,0 +1,21 @@
+{
+ "exp": 146,
+ "pkind": "nonlinear",
+ "n": 3,
+ "reps": 256,
+ "backend": "ibm_kingston",
+ "planted_k1": [
+  0,
+  1,
+  0
+ ],
+ "planted_k2": [
+  1,
+  0,
+  1
+ ],
+ "job_id": "d9dc2c4inv1c73aorvm0",
+ "cz": 108,
+ "depth": 314,
+ "note": "EM key recovery, 2-Toffoli S-box; self-verifying; flying to MEASURE the boundary"
+}
