@@ -1,0 +1,140 @@
+{
+ "arm": "conv_stage1_cumulative",
+ "decoder": "elder",
+ "instances": {
+  "n4_k1": {
+   "alive_rows": [
+    3,
+    79
+   ],
+   "conserved_rows": [
+    24,
+    43,
+    48
+   ],
+   "n_alive": 2,
+   "n_conserved": 3,
+   "n_rejected": 76,
+   "p0_measured": 0.483,
+   "p1_measured": 0.8,
+   "shots_max": 120
+  },
+  "n4_k2": {
+   "alive_rows": [
+    3,
+    12,
+    13,
+    14,
+    20,
+    21,
+    22,
+    23,
+    28,
+    34,
+    41,
+    43,
+    45,
+    47,
+    50,
+    52,
+    59,
+    60,
+    65,
+    74,
+    75,
+    77,
+    79
+   ],
+   "conserved_rows": [
+    7,
+    11,
+    33,
+    46
+   ],
+   "n_alive": 23,
+   "n_conserved": 4,
+   "n_rejected": 54,
+   "p0_measured": 0.5,
+   "p1_measured": 0.696,
+   "shots_max": 120
+  },
+  "n4_k3": {
+   "alive_rows": [
+    14
+   ],
+   "conserved_rows": [
+    0,
+    9,
+    18,
+    19,
+    24,
+    29,
+    30,
+    54,
+    66
+   ],
+   "n_alive": 1,
+   "n_conserved": 9,
+   "n_rejected": 71,
+   "p0_measured": 0.467,
+   "p1_measured": 0.783,
+   "shots_max": 120
+  },
+  "n4_k4": {
+   "alive_rows": [
+    4,
+    8,
+    17,
+    26,
+    32,
+    36,
+    37,
+    43,
+    55,
+    61,
+    62,
+    67,
+    70,
+    78
+   ],
+   "conserved_rows": [
+    7,
+    11,
+    31,
+    40,
+    52,
+    65,
+    74
+   ],
+   "n_alive": 14,
+   "n_conserved": 7,
+   "n_rejected": 60,
+   "p0_measured": 0.487,
+   "p1_measured": 0.7,
+   "shots_max": 120
+  },
+  "n4_k5": {
+   "alive_rows": [
+    5,
+    9,
+    16,
+    25,
+    74
+   ],
+   "conserved_rows": [
+    31,
+    40,
+    43,
+    69
+   ],
+   "n_alive": 5,
+   "n_conserved": 4,
+   "n_rejected": 72,
+   "p0_measured": 0.5,
+   "p1_measured": 0.725,
+   "shots_max": 120
+  }
+ },
+ "n": 4,
+ "through_wave": 2
+}
