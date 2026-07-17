@@ -250,7 +250,7 @@ def conv_param_row(n, cand, wave):
 CONV_WAVE_SHOTS = 60   # stage-1 SPRT wave size/candidate (accumulate, cap S1_CAP)
 CONV_CHUNK_ROWS = 4096
 S1_SHOTS = 60          # per-wave stage-1 shots (SPRT alpha=.05 beta=.01 decode-side)
-S1_CAP = 600           # max cumulative stage-1 shots/candidate
+S1_CAP = 800           # max cumulative stage-1 shots/candidate (== frozen §5 line 228; A2-rev1 fix, sibling-verify catch C4790)
 S2_FAMILY = 12         # stage-2 probe family size (frozen §5 / MC v2)
 S2_SHOTS = 500         # stage-2 shots per (survivor, probe) (frozen §5 / MC v2)
 

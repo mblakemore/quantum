@@ -32,13 +32,17 @@ normative. Synced values (kit `exp144_flight_kit.py`):
 | constant | frozen-kit (stale) | A2 (== §5) |
 |---|---|---|
 | CONV_WAVE_SHOTS / S1_SHOTS | 12 / 30 | 60 / 60 (SPRT wave size) |
-| S1_CAP | — | 600 (max cumulative stage-1 shots/candidate) |
+| S1_CAP | — | 800 (max cumulative stage-1 shots/candidate) |
 | S2_FAMILY | 8 | 12 |
 | S2_SHOTS | 48 | 500 |
 | SPRT boundaries | — | α = 0.05, β = 0.01 (decode-side) |
 
 **Hashes:** kit OLD (frozen C6520) `18e4026df52ed9c204edf92e1b433925b656e53e...`
-→ kit NEW (A2) `d70f3b435f7b2da1cc6456902d21605dc4d8216ec1b9385c7f399f99bacd0b7f`.
+→ kit A2-rev0 `d70f3b435f7b2da1cc6456902d21605dc4d8216ec1b9385c7f399f99bacd0b7f`
+(❌ SIBLING-VERIFY FAIL C4790: S1_CAP was 600, frozen §5 says 800 — I introduced a
+fresh prose↔kit mismatch WHILE fixing F-B, from memory of my MC search range
+instead of the artifact; the P1 verify caught it pre-flight, as designed)
+→ kit A2-rev1 `8944fc3423f42b1b92e2dec5fd5e1d36c780f8065af144e016a3a2f17d7ede66` (S1_CAP = 800, sole change).
 All other frozen artifacts UNCHANGED (prereg 4d75d190…, grader db2843ee…,
 decode_meter 8beae25e…, MC script/json 94d18773…/3900b96e…).
 Kit selftest re-run post-sync: G2.1 PASS both arms (stage-2 now 12 probes).
