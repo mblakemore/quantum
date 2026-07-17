@@ -48,6 +48,8 @@ def main():
     ap.add_argument("--hashes", help="JSON {filename: sha256} as posted at freeze")
     ap.add_argument("--hash", action="append", default=[],
                     help="filename=sha256 (repeatable)")
+    ap.add_argument("--expect-count", type=int, default=None,
+                    help="how many artifacts the freeze record contains; refuses on mismatch")
     ap.add_argument("--skip-gates", action="store_true",
                     help="verify hashes only, do not re-run gates")
     a = ap.parse_args()
@@ -64,6 +66,18 @@ def main():
         print("REFUSING: no frozen hashes given. The whole point of this gate is to bind "
               "my green cells to specific bytes; running it with nothing to check would be "
               "ceremony.")
+        return 2
+
+    # COUNT CHECK (added C4194 after this gate's first real run reported "all 5 artifacts
+    # match the freeze" when the freeze had SIX — my parser's regex matched .md|.py and
+    # silently dropped the MC results .json). The PASS was scoped narrower than it read:
+    # c4194_003, verification scope is claim-by-claim, firing on me within the hour of my
+    # storing it. A gate that cannot say how many artifacts it FAILED to see is not
+    # reporting coverage, it is reporting the subset it happened to parse.
+    if a.expect_count and len(expected) != a.expect_count:
+        print(f"REFUSING: parsed {len(expected)} artifacts but --expect-count says "
+              f"{a.expect_count}. A gate over a SUBSET of the freeze reads exactly like a "
+              f"gate over the whole freeze. Fix the input, not the number.")
         return 2
 
     print("=== [1] FROZEN HASH VERIFICATION (refuse on any mismatch) ===")
