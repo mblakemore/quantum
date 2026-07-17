@@ -1,0 +1,58 @@
+{
+ "job": "d9dbp74jeosc73fhbhag",
+ "reps": 64,
+ "rungs": [
+  {
+   "n": 3,
+   "planted_s": [
+    0,
+    0,
+    1
+   ],
+   "recovered_s": [
+    0,
+    0,
+    1
+   ],
+   "orthogonality_frac": 1.0,
+   "recovered": true
+  },
+  {
+   "n": 4,
+   "planted_s": [
+    1,
+    1,
+    0,
+    0
+   ],
+   "recovered_s": [
+    1,
+    1,
+    0,
+    0
+   ],
+   "orthogonality_frac": 0.98,
+   "recovered": true
+  },
+  {
+   "n": 5,
+   "planted_s": [
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "recovered_s": [
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "orthogonality_frac": 0.909,
+   "recovered": true
+  }
+ ],
+ "all_recovered": true
+}
