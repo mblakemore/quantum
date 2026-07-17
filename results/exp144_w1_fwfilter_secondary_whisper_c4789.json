@@ -1,0 +1,197 @@
+{
+ "n4_k1": {
+  "top3_fw": [
+   "ZXZY",
+   "YXYY",
+   "YYYZ"
+  ],
+  "implied_c": [
+   0.246,
+   0.203,
+   0.147
+  ],
+  "sep_3rd_vs_4th": 2.71
+ },
+ "n4_k2": {
+  "top3_fw": [
+   "ZXZZ",
+   "YYYY",
+   "YXYZ"
+  ],
+  "implied_c": [
+   0.254,
+   0.213,
+   0.146
+  ],
+  "sep_3rd_vs_4th": 1.52
+ },
+ "n4_k3": {
+  "top3_fw": [
+   "XZYZ",
+   "ZZXZ",
+   "ZXYZ"
+  ],
+  "implied_c": [
+   0.258,
+   0.2,
+   0.143
+  ],
+  "sep_3rd_vs_4th": 3.85
+ },
+ "n4_k4": {
+  "top3_fw": [
+   "YXXY",
+   "YZXZ",
+   "XXZY"
+  ],
+  "implied_c": [
+   0.248,
+   0.202,
+   0.157
+  ],
+  "sep_3rd_vs_4th": 5.3
+ },
+ "n4_k5": {
+  "top3_fw": [
+   "YZXZ",
+   "XZXY",
+   "YYYZ"
+  ],
+  "implied_c": [
+   0.252,
+   0.196,
+   0.132
+  ],
+  "sep_3rd_vs_4th": 2.25
+ },
+ "n6_k1": {
+  "top3_fw": [
+   "YYZZYZ",
+   "YZZYYZ",
+   "ZXZXYY"
+  ],
+  "implied_c": [
+   0.242,
+   0.191,
+   0.137
+  ],
+  "sep_3rd_vs_4th": 2.49
+ },
+ "n6_k2": {
+  "top3_fw": [
+   "XZXYXY",
+   "XYXXYZ",
+   "XYZZZY"
+  ],
+  "implied_c": [
+   0.257,
+   0.213,
+   0.146
+  ],
+  "sep_3rd_vs_4th": 3.44
+ },
+ "n6_k3": {
+  "top3_fw": [
+   "XXYZYZ",
+   "XYZYYY",
+   "YZXXZX"
+  ],
+  "implied_c": [
+   0.251,
+   0.206,
+   0.157
+  ],
+  "sep_3rd_vs_4th": 4.76
+ },
+ "n6_k4": {
+  "top3_fw": [
+   "XXXZZX",
+   "XXZYXZ",
+   "XXZZXX"
+  ],
+  "implied_c": [
+   0.25,
+   0.201,
+   0.151
+  ],
+  "sep_3rd_vs_4th": 7.56
+ },
+ "n6_k5": {
+  "top3_fw": [
+   "XYYXYX",
+   "YXXZZZ",
+   "YYYZYX"
+  ],
+  "implied_c": [
+   0.25,
+   0.196,
+   0.139
+  ],
+  "sep_3rd_vs_4th": 1.29
+ },
+ "n8_k1": {
+  "top3_fw": [
+   "ZZXZZXZZ",
+   "YZXYYXZX",
+   "YXYZYZXZ"
+  ],
+  "implied_c": [
+   0.275,
+   0.216,
+   0.179
+  ],
+  "sep_3rd_vs_4th": 1.1
+ },
+ "n8_k2": {
+  "top3_fw": [
+   "YYZXYZYY",
+   "XYYZYXZX",
+   "XYZXYZYY"
+  ],
+  "implied_c": [
+   0.292,
+   0.213,
+   0.15
+  ],
+  "sep_3rd_vs_4th": 1.2
+ },
+ "n8_k3": {
+  "top3_fw": [
+   "XYYYZXXZ",
+   "ZZZZXXYZ",
+   "YYYYZXXZ"
+  ],
+  "implied_c": [
+   0.321,
+   0.2,
+   0.193
+  ],
+  "sep_3rd_vs_4th": 1.16
+ },
+ "n8_k4": {
+  "top3_fw": [
+   "YXYYXXZZ",
+   "XXZYYYXY",
+   "YXYYZXZX"
+  ],
+  "implied_c": [
+   0.267,
+   0.252,
+   0.176
+  ],
+  "sep_3rd_vs_4th": 1.39
+ },
+ "n8_k5": {
+  "top3_fw": [
+   "XXYXZZZX",
+   "YXXXZZYZ",
+   "XZYZZZYZ"
+  ],
+  "implied_c": [
+   0.285,
+   0.252,
+   0.2
+  ],
+  "sep_3rd_vs_4th": 1.37
+ }
+}
