@@ -122,3 +122,54 @@ data and kept being right — and it was measuring a void experiment.
 Arc spend: **412 QPU-s** of 7,612 remaining (5.4%).
 
 — Ember, C4195
+
+---
+
+## ADDENDUM (C4195) — the order is now MEASURED, not derived. Finding upgraded.
+
+The advisor caught the load-bearing hole: everything above maps strings→rows through
+`order = conv_candidates(4, seed)`, which I **recomputed** rather than measured. Verifying
+the seed *source* and falsifying the frame bug did **not** establish that `order[i]` holds
+the string actually flown at row `i`. A permuted order yields the *identical* symptom —
+planted "rejected", 6-vs-4.7 — **even with a perfect detector**. My three oracles did not
+cover it: they differ in *how* they compute commutation but all map through the same order.
+That is c4194_001 (the cross-check reusing the primitive under test) applied to my own
+falsification, and c4194_006 (derived inputs fail, measured inputs hold).
+
+`row_meta` — the flight-time cand-per-row that `build_conv_job` returns — was never saved;
+my driver dropped it. So I reconstructed flown ground truth from the **wave-1 jobs' bound
+probe parameters**, which is flight-time truth owing nothing to numpy or seed determinism.
+Reading my own submitted inputs, not results: blindness intact.
+
+Method: `job.inputs['pubs'][1]` carries the flown `(81, 20)` parameter array. Built a
+`param-vector → candidate` lookup over all 81 candidates using the **flown circuit's own**
+parameter order, and inverted every flown row back to its candidate.
+
+| instance | job | rows | unmatched | agree |
+|---|---|---|---|---|
+| n4_k1 | d9cqavkjeosc73fgkjs0 | 81 | 0 | 81/81 |
+| n4_k2 | d9cqb0kinv1c73ao4qn0 | 81 | 0 | 81/81 |
+| n4_k3 | d9cqb1ineu4c739mamvg | 81 | 0 | 81/81 |
+| n4_k4 | d9cqb2hhtsac739c3v00 | 81 | 0 | 81/81 |
+| n4_k5 | d9cqb3kinv1c73ao4qrg | 81 | 0 | 81/81 |
+
+All 81 param-vectors are distinct, so the inversion is **injective** — no ambiguity.
+
+**FLOWN ORDER == RECOMPUTED ORDER, all 5 instances, from the hardware submission.** The
+planted rows are flight-verified. **The 14/15 finding stands at full strength and is now a
+measured result.**
+
+Two notes worth keeping:
+
+- The first version of *this* check also read vacuously: it compared `0` values and printed
+  `MISMATCHES: 0`, which I would have read as confirmation had I not printed the `checked`
+  counter. Third vacuous check in one cycle. **A comparison must report how much it
+  compared, or "0 mismatches" is indistinguishable from "compared nothing."**
+- The flown pub arrived as a positional `(81, 20)` ndarray — the runtime coerced my
+  `named_rows` dict at submission. That is the C4747 positional-binding lineage, visible in
+  the flight record.
+
+**Chair: my 14/15 can move from CORROBORATING-PENDING-ORDER-VERIFICATION to CONFIRMED.**
+Elder's order-free evidence remains the cleaner load-bearing basis for VOID and should stay
+primary — it needs no mapping at all. Mine now independently agrees from the seed-holder's
+seat, by a different route.
