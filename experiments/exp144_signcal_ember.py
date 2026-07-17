@@ -162,10 +162,18 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--fly", action="store_true")
     ap.add_argument("--coeffs", default="0.25,0.20,0.15",
-                    help="per-term magnitudes (grid); sign taken from --signs")
+                    help="per-term magnitudes (grid); sign taken from --signs. Elder C-reply: "
+                         "all three 0.15/0.20/0.25 — 0.90 bar is worst-coeff, 0.15 hardest.")
     ap.add_argument("--signs", default="+,+,+",
-                    help="per-term KNOWN sign pattern, e.g. +,-,+ (frame — set from Elder's sim)")
-    ap.add_argument("--layout", default="path", choices=["path", "idle", "transpiler"])
+                    help="KNOWN sign pattern. Elder C-reply: ALL-POSITIVE — his sim is att-only "
+                         "+ symmetric, a mix injects readout-asymmetry it maps to 'att too low'.")
+    ap.add_argument("--layout", default="transpiler", choices=["path", "idle", "transpiler"],
+                    help="Elder C-reply: TRANSPILER-CHOICE (what the conv arm flew); his sim is "
+                         "layout-agnostic (att is the swept input). Disconnected -> pin min-CX path.")
+    ap.add_argument("--shots", type=int, default=2000,
+                    help="shots/term to measure att PRECISELY (att=<Q>/ideal). NOT the recovery N: "
+                         "Elder derives per-term recovery analytically from the binomial at N_SIGN="
+                         f"{KIT.N_SIGN}. More shots here only tightens att; his N stays {KIT.N_SIGN}.")
     ap.add_argument("--backend", default="ibm_kingston")
     a = ap.parse_args()
 
@@ -203,32 +211,90 @@ def main():
 
     svc = _get_ibm_service()
     backend = svc.backend(a.backend)
-    layout = resolve_layout(a.layout)
-    if layout == "PATH":
-        layout = _connected_chain(backend, a.layout)
+    pubs, meta = build_pubs(coeffs)
+
+    # Elder: transpiler-choice (what the conv arm flew). If the transpiler routes onto a
+    # DISCONNECTED set of physical qubits, pin a connected min-CX chain and note it.
+    layout_note = "transpiler-choice (conv-arm basis)"
+    if a.layout == "transpiler":
+        tp = [transpile(qc, backend, optimization_level=1, seed_transpiler=144)
+              for qc, _ in pubs]
+        used = _physical_qubits(tp[0])
+        if not _connected(used, backend):
+            path = _connected_chain(backend, a.layout)
+            layout_note = f"DEVIATION: transpiler layout {sorted(used)} disconnected -> pinned min-CX path {path}"
+            print(f"  {layout_note}")
+            tp = [transpile(qc, backend, initial_layout=path, optimization_level=1,
+                            seed_transpiler=144) for qc, _ in pubs]
+            layout = path
+        else:
+            layout = sorted(used)
+            print(f"  transpiler layout {layout} is connected — flying as-is (conv-arm basis)")
+    else:
+        layout = resolve_layout(a.layout)
+        if layout == "PATH":
+            layout = _connected_chain(backend, a.layout)
+        tp = [transpile(qc, backend, initial_layout=layout, optimization_level=1,
+                        seed_transpiler=144) for qc, _ in pubs]
+
     print(f"\n{backend.name}: operational={backend.status().operational} "
           f"pending={backend.status().pending_jobs} | layout={layout}")
-
-    pubs, meta = build_pubs(coeffs)
-    tp = [(transpile(qc, backend, initial_layout=layout, optimization_level=1,
-                     seed_transpiler=144), None, KIT.N_SIGN) for qc, _ in pubs]
+    tpubs = [(t, None, a.shots) for t in tp]
     outp = os.path.join(RESULTS, "exp144_signcal_manifest.json")
     if os.path.exists(outp):
         print(f"REFUSING: {os.path.basename(outp)} exists — would overwrite a record."); return 3
-    job = SamplerV2(mode=backend).run(tp)
+    job = SamplerV2(mode=backend).run(tpubs)
     out = {"exp": "144-signcal-dummy", "n": N, "terms": TERMS,
-           "coeffs": coeffs, "known_signs": sgn, "layout_kind": a.layout, "layout": layout,
-           "n_sign": KIT.N_SIGN, "job_id": job.job_id(), "backend": a.backend,
+           "coeffs": coeffs, "known_signs": sgn, "layout_kind": a.layout,
+           "layout": layout, "layout_note": layout_note,
+           "shots_per_term": a.shots, "n_sign_analytic": KIT.N_SIGN,
+           "ideal_Q": {m["term"]: m["want_Q"] for m in meta},
+           "job_id": job.job_id(), "backend": a.backend,
            "cobatched": True, "meta": meta,
-           "_note": "DUMMY sign-recovery calibration (chair C4812). PUBLIC, known signs. "
-                    "Standalone hardware-capability number (stage-1 support is VOID, so this "
-                    "gates nothing downstream). Elder decodes for 2-of-2 vs the 0.90 bar."}
+           "_note": "DUMMY sign-recovery calibration (chair C4812, Elder frame). PUBLIC, "
+                    "ALL-POSITIVE known signs. Elder decode: att = <Q>/ideal_Q per term "
+                    f"(shots_per_term={a.shots} for a PRECISE att); per-term recovery is then "
+                    f"ANALYTIC from the binomial at N_SIGN={KIT.N_SIGN}; 0.90 bar = worst-coeff. "
+                    "Standalone HARDWARE-CAPABILITY (stage-1 support VOID — gates nothing "
+                    "downstream). The 3 att estimates (one per coeff) should AGREE if the "
+                    "att-only model holds — disagreement is itself a finding."}
     with open(outp, "w") as f:
         json.dump(out, f, indent=1)
     print(f"\n  SUBMITTED: job {job.job_id()} -> {os.path.basename(outp)}")
-    print(f"  known signs (public): {dict(zip(TERMS, sgn))}")
+    print(f"  frame: all-positive, coeffs {coeffs}, {a.shots} shots/term, layout {layout}")
+    print(f"  ideal <Q> per term: {[round(m['want_Q'],4) for m in meta]}")
     print(f"  (no QPU figure — measured on landing, C4796 rule)")
     return 0
+
+
+def _physical_qubits(tcirc):
+    """Physical qubits actually used by a transpiled circuit."""
+    used = set()
+    for inst in tcirc.data:
+        for q in inst.qubits:
+            used.add(tcirc.find_bit(q).index)
+    return used
+
+
+def _connected(qubits, backend):
+    """Are these physical qubits a connected subgraph of the coupling map?"""
+    edges = set()
+    for e in backend.coupling_map:
+        a, b = e[0], e[1]
+        if a in qubits and b in qubits:
+            edges.add((a, b)); edges.add((b, a))
+    if not qubits:
+        return False
+    seen, stack = set(), [next(iter(qubits))]
+    while stack:
+        x = stack.pop()
+        if x in seen:
+            continue
+        seen.add(x)
+        for a, b in edges:
+            if a == x and b not in seen:
+                stack.append(b)
+    return seen >= set(qubits)
 
 
 def _connected_chain(backend, kind):

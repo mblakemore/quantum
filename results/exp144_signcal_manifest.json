@@ -1,0 +1,64 @@
+{
+ "exp": "144-signcal-dummy",
+ "n": 4,
+ "terms": [
+  "XXXX",
+  "XXYY",
+  "XXZZ"
+ ],
+ "coeffs": [
+  0.25,
+  0.2,
+  0.15
+ ],
+ "known_signs": [
+  1,
+  1,
+  1
+ ],
+ "layout_kind": "transpiler",
+ "layout": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "layout_note": "transpiler-choice (conv-arm basis)",
+ "shots_per_term": 2000,
+ "n_sign_analytic": 100,
+ "ideal_Q": {
+  "XXXX": -0.8414709848078965,
+  "XXYY": -0.7173560908995228,
+  "XXZZ": -0.5646424733950354
+ },
+ "job_id": "d9d82qkinv1c73aomk30",
+ "backend": "ibm_kingston",
+ "cobatched": true,
+ "meta": [
+  {
+   "term": "XXXX",
+   "coeff": 0.25,
+   "known_sign": 1,
+   "probe": "IYIX",
+   "prep": "XZXI",
+   "want_Q": -0.8414709848078965
+  },
+  {
+   "term": "XXYY",
+   "coeff": 0.2,
+   "known_sign": 1,
+   "probe": "IYIY",
+   "prep": "XZYI",
+   "want_Q": -0.7173560908995228
+  },
+  {
+   "term": "XXZZ",
+   "coeff": 0.15,
+   "known_sign": 1,
+   "probe": "IYIZ",
+   "prep": "XZZI",
+   "want_Q": -0.5646424733950354
+  }
+ ],
+ "_note": "DUMMY sign-recovery calibration (chair C4812, Elder frame). PUBLIC, ALL-POSITIVE known signs. Elder decode: att = <Q>/ideal_Q per term (shots_per_term=2000 for a PRECISE att); per-term recovery is then ANALYTIC from the binomial at N_SIGN=100; 0.90 bar = worst-coeff. Standalone HARDWARE-CAPABILITY (stage-1 support VOID \u2014 gates nothing downstream). The 3 att estimates (one per coeff) should AGREE if the att-only model holds \u2014 disagreement is itself a finding."
+}
