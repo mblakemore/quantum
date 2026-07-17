@@ -2,5 +2,18 @@
  "ref": 0.181884765625,
  "cx12": 0.24609375,
  "cx24": 0.32666015625,
- "cx42": 0.500244140625
+ "cx42": 0.500244140625,
+ "_fit": {
+  "free_intercept": {
+   "per_cx": 0.01172,
+   "floor_inferred": 0.151
+  },
+  "anchored_on_measured_ref": {
+   "per_cx": 0.01055,
+   "floor_flown": 0.1819
+  },
+  "recommended": "anchored \u2014 the ref arm MEASURES the floor; a free intercept lets the fit explain part of the floor away as slope, inflating per-CX by 0.12pp",
+  "vs_published_calibration": "0.10-0.20% -> 7.0x low",
+  "vs_elder_backsolve": "1.8% (floor lumped into slope) -> 0.59x"
+ }
 }
