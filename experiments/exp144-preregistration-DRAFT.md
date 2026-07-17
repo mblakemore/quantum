@@ -165,17 +165,19 @@ Per instance i, rung n:
 - τ = 0.03, α = 0.01, K = 5, grid {0.15,0.20,0.25}, m = 3, t = 2.0 (provisional): frozen now.
 
 **WIN per rung (n ∈ {6,8} only)** = quantum PASS on ≥4/5 instances AND median ratio ≥
-R_THRESHOLD(n). Accepted floors (chair C4772): R(6) = 1.5, R(8) = 10 — final values
-frozen at kit-stage Gate-2 close.
+R_THRESHOLD(n). **FROZEN (C6512): R(6) = 1.5, R(8) = 10** — the chair-accepted
+conservative floors adopted as the frozen values (≈½ the red-team conservative-mean
+ratios 2.5–3.1 / 22–29; margin absorbs baseline-favorable surprises).
 
 **n=4 = PRE-REGISTERED NEGATIVE CONTROL (chair decision C4772, red-team C6510):**
 the quantum budget is τ-precision-bound (~n-independent) while the baseline haystack
 at n=4 is only 81 candidates — the baseline is EXPECTED TO WIN this rung. Expectation
 band: median ratio ∈ [0.33, 0.40] (red-team MC, quoted as expectation). n=4 is
 EXCLUDED from overall-WIN. If the flown n=4 median ratio exceeds the frozen
-N4_FLAG_THRESHOLD ⟨GATE-2 kit stage — principle frozen now, number frozen with the
-constants⟩, the grader raises **METER_MISCALIBRATION_FLAG**: investigate the metering
-pipeline before trusting the n=6/n=8 ratios. The predicted loss is the scaling claim
+**N4_FLAG_THRESHOLD = 0.8** (derivation: 2× the expectation-band top 0.40, headroom
+for K=5 median sampling variability; still < 1, so a "quantum win" at the control
+rung ALWAYS flags), the grader raises **METER_MISCALIBRATION_FLAG**: investigate the
+metering pipeline before trusting the n=6/n=8 ratios. The predicted loss is the scaling claim
 made visible: loss at n=4, crossover at n=6, domination at n=8 — a rung we predict
 LOSING is unfakeable evidence the rungs we predict winning weren't cherry-picked.
 
@@ -248,11 +250,15 @@ Grader's verify_commitment re-serializes terms/coeffs per the §6 normative rule
 ## 8. Noise-model honesty + FINGERPRINT-GATED LAYOUT (Exp143 C4764 adoption)
 
 - **Layout picker gated on the Exp143 raw-idle fingerprint**, keyed to the campaign's ACTUAL
-  idle exposure (Ember C4765 / Elder C6504 refinement). **v2 note: dynamics circuits are
-  deeper than v1's depth-5** (Pauli-rotation gadgets, ~2·n+1 per term × m terms) — the
-  relevant fingerprint arm is chosen at Gate-2 from the TRANSPILED circuit duration, not
-  assumed near-zero. Exclude any candidate Bell-pair whose raw-idle error > 2× cohort median
-  at that arm. DD on any genuine idle windows.
+  idle exposure (Ember C4765 / Elder C6504 refinement). **ARM SELECTED (C6512, from
+  transpiled duration — kit `--scan`): circuit durations ≈ 4.5 / 6.3 / 8.0 µs at
+  n = 4/6/8 (gate-count estimate; ladder structure idles early/late qubits for a few µs)
+  → the 1µs and 5µs fingerprint arms bracket the real exposure → GATE ON THE 5µs ARM
+  (conservative).** Note this OVERTURNS the C6504 assumption (v1's depth-5 → reference
+  arm): the dynamics redesign deepened the circuits, and keying to transpiled duration —
+  the rule adopted precisely for this — caught the change. Both Exp143 outlier pairs
+  (q2-q3, q148-q149) are excluded at this arm. Exclude any candidate Bell-pair whose
+  raw-idle error > 2× cohort median at the 5µs arm. DD on genuine idle windows.
 - Sentinels bracket every job (window integrity, report-only).
 - iid-readout caveat carries from Exp142/Stage-2: noise models are simulation proxies;
   hardware is the adjudicator.

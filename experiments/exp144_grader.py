@@ -42,12 +42,11 @@ NS = (4, 6, 8)
 KS = (1, 2, 3, 4, 5)
 TAU = 0.03
 
-# ---- CONSTANTS (M_BELL frozen C6508; R floors accepted C4772; final values +
-#      N4_FLAG_THRESHOLD frozen with the kit-stage Gate-2 close) ----
+# ---- FROZEN CONSTANTS (freeze candidate C6512) ----
 M_BELL = {4: 1000, 6: 1000, 8: 1000}            # FROZEN C6508 (power calc B3)
-R_THRESHOLD = {6: 1.5, 8: 10.0}                  # floors accepted C4772; final at freeze
+R_THRESHOLD = {6: 1.5, 8: 10.0}                  # FROZEN C6512 (chair-accepted floors)
 N4_EXPECTATION_BAND = (0.33, 0.40)               # red-team C6510, quoted per C4772
-N4_FLAG_THRESHOLD = None                          # <GATE-2 kit stage> principle frozen C4772
+N4_FLAG_THRESHOLD = 0.8                          # FROZEN C6512: 2x band top, < 1 always flags a control "win"
 # ---------------------------------------------------------------------
 
 
