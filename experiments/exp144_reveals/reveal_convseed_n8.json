@@ -1,0 +1,7 @@
+{
+ "schema": "exp144-convseed-reveal-v1",
+ "salt_hex": "8668c8bac441d249c8062ad3bbc45f6d089457a1c15fb7f78491b98907588888",
+ "ensemble": "dynamics_fullweight_m3",
+ "n": 8,
+ "seed": 2636137004176244977
+}
