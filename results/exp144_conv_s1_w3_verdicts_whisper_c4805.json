@@ -1,0 +1,95 @@
+{
+ "n4_k1": {
+  "conserved_rows": [
+   3,
+   24,
+   43,
+   48
+  ],
+  "alive_rows": [],
+  "newly_rejected_rows": [
+   79
+  ],
+  "method": "R1+R1b cumulative w1+w2+w3"
+ },
+ "n4_k2": {
+  "conserved_rows": [
+   7,
+   11,
+   33,
+   46
+  ],
+  "alive_rows": [
+   3,
+   14
+  ],
+  "newly_rejected_rows": [
+   12,
+   13,
+   21
+  ],
+  "method": "R1+R1b cumulative w1+w2+w3"
+ },
+ "n4_k3": {
+  "conserved_rows": [
+   0,
+   9,
+   18,
+   19,
+   24,
+   29,
+   30,
+   54,
+   66
+  ],
+  "alive_rows": [],
+  "newly_rejected_rows": [
+   14
+  ],
+  "method": "R1+R1b cumulative w1+w2+w3"
+ },
+ "n4_k4": {
+  "conserved_rows": [
+   7,
+   8,
+   31,
+   40,
+   52,
+   65,
+   74
+  ],
+  "alive_rows": [
+   11,
+   32,
+   36,
+   62,
+   67
+  ],
+  "newly_rejected_rows": [
+   17,
+   26,
+   43,
+   55,
+   61,
+   78
+  ],
+  "method": "R1+R1b cumulative w1+w2+w3"
+ },
+ "n4_k5": {
+  "conserved_rows": [
+   5,
+   31,
+   40,
+   43,
+   69
+  ],
+  "alive_rows": [],
+  "newly_rejected_rows": [
+   9,
+   16,
+   25,
+   74
+  ],
+  "method": "R1+R1b cumulative w1+w2+w3"
+ }
+}
