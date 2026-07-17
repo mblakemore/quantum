@@ -94,6 +94,93 @@ def reference_verify(commit, reveal):
 
 
 # ---------------------------------------------------------------------------
+# CONV-SEED commitments (chair C4776, F2(b) — separate record, FR-1 untouched).
+#
+#   preimage = sha256( salt_bytes || utf8("exp144|convseed|{n}|{seed_decimal}") )
+#
+# ONE per rung — the conventional sweep order is per-rung. WHY THIS EXISTS: F2(b) is a
+# contamination channel — once accepted support is public/conveyed, an unfrozen candidate
+# order could be steered by it. Pre-seeding only closes that if the seed is COMMITTED;
+# an uncommitted seed is a number claimed after the fact, i.e. the channel wearing a
+# fix's name. So the seed is sealed before any data exists and revealed with the rest.
+# ---------------------------------------------------------------------------
+CONVSEED_RUNGS = (4, 6, 8)
+
+
+def convseed_preimage_str(n, seed):
+    if not isinstance(seed, int) or seed < 0:
+        raise ValueError(f"seed must be a non-negative int, got {seed!r}")
+    if n not in CONVSEED_RUNGS:
+        raise ValueError(f"n must be one of {CONVSEED_RUNGS}, got {n}")
+    return f"exp144|convseed|{n}|{seed}"
+
+
+def convseed_commit_hash(salt_bytes, n, seed):
+    body = convseed_preimage_str(n, seed)
+    return hashlib.sha256(salt_bytes + body.encode("utf-8")).hexdigest(), body
+
+
+def convseed_commit_record(n, digest):
+    return {"schema": "exp144-convseed-commit-v1", "ensemble": ENS, "n": n,
+            "sha256": digest}
+
+
+def convseed_reveal_record(n, salt_hex, seed):
+    return {"schema": "exp144-convseed-reveal-v1", "salt_hex": salt_hex,
+            "ensemble": ENS, "n": n, "seed": seed}
+
+
+def convseed_reference_verify(commit, reveal):
+    """PLACEHOLDER — same caveat as reveal: the frozen grader is the authority."""
+    body = convseed_preimage_str(reveal["n"], reveal["seed"])
+    digest = hashlib.sha256(bytes.fromhex(reveal["salt_hex"]) + body.encode()).hexdigest()
+    return (digest == commit["sha256"]
+            and commit["ensemble"] == reveal["ensemble"]
+            and int(commit["n"]) == int(reveal["n"]))
+
+
+def convseed_selftest():
+    fails = 0
+
+    def check(label, cond, detail=""):
+        nonlocal fails
+        if not cond:
+            fails += 1
+        print(f"  [{'PASS' if cond else 'FAIL'}] {label}{(' — ' + detail) if detail else ''}")
+
+    check("CS0 preimage shape mirrors chair C4776",
+          convseed_preimage_str(6, 12345) == "exp144|convseed|6|12345",
+          convseed_preimage_str(6, 12345))
+    # Round-trip, all 3 rungs.
+    for n in CONVSEED_RUNGS:
+        seed = 1000 + n
+        salt = hashlib.sha256(f"cs-dummy-{n}".encode()).digest()
+        d, _ = convseed_commit_hash(salt, n, seed)
+        cr, rr = convseed_commit_record(n, d), convseed_reveal_record(n, salt.hex(), seed)
+        check(f"CS1 seal->reveal->verify n={n}", convseed_reference_verify(cr, rr))
+    # Negatives: a seed commitment that cannot detect a swapped seed is decoration.
+    salt = hashlib.sha256(b"cs-neg").digest()
+    d, _ = convseed_commit_hash(salt, 6, 777)
+    cr = convseed_commit_record(6, d)
+    check("CS2 different seed REJECTED",
+          not convseed_reference_verify(cr, convseed_reveal_record(6, salt.hex(), 778)))
+    check("CS3 different rung REJECTED",
+          not convseed_reference_verify(cr, convseed_reveal_record(4, salt.hex(), 777)))
+    check("CS4 wrong salt REJECTED",
+          not convseed_reference_verify(
+              cr, convseed_reveal_record(6, hashlib.sha256(b"x").hexdigest(), 777)))
+    check("CS5 key is 'sha256' only (FR-2)",
+          "sha256" in cr and "hash_sha256" not in cr)
+    for bad, why in [((6, -1), "negative seed"), ((6, "12"), "string seed"), ((5, 1), "bad rung")]:
+        try:
+            convseed_preimage_str(*bad)
+            check(f"CS6 rejects {why}", False, "accepted!")
+        except ValueError:
+            check(f"CS6 rejects {why}", True)
+    return fails
+
+
+# ---------------------------------------------------------------------------
 def selftest():
     fails = 0
 
@@ -166,6 +253,9 @@ def selftest():
             check(f"T8 rejects {why}", False, "accepted bad input!")
         except ValueError:
             check(f"T8 rejects {why}", True)
+
+    print("\n  --- conv-seed commitments (chair C4776) ---")
+    fails += convseed_selftest()
 
     print(f"\nEXP144 SEAL/REVEAL SELFTEST: {'PASS' if fails == 0 else f'FAIL ({fails})'}")
     print("NOTE: reference_verify is a PLACEHOLDER. The gate is only satisfied when this")
