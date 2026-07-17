@@ -245,6 +245,44 @@ def conv_param_row(n, cand, wave):
 
 CONV_WAVE_SHOTS = 12
 CONV_CHUNK_ROWS = 4096
+S1_SHOTS = 30          # stage-1 conservation shots/candidate (flight value MC-set)
+S2_FAMILY = 8          # stage-2 probe family size (flight value MC-set)
+S2_SHOTS = 48          # stage-2 shots per (survivor, probe) (flight value MC-set)
+
+
+def conv_stage1_row(n, cand):
+    """Stage-1 CONSERVATION row: prep +1 product eigenstate of the candidate
+    itself, evolve V, measure the candidate in its letter basis. Outcome
+    (product of letter bits) = +1 EXACTLY iff [cand, H] = 0 (noiseless) —
+    deterministic, contamination-free (two-stage detector, C6515 2-of-2 algebra)."""
+    tp = [PREP_U[(c, 0)][0] for c in cand]
+    pp = [PREP_U[(c, 0)][1] for c in cand]
+    tm = [TO_Z[c][0] for c in cand]
+    pm = [TO_Z[c][1] for c in cand]
+    lm = [TO_Z[c][2] for c in cand]
+    return tp + pp + tm + pm + lm
+
+
+def build_conv_stage1_job(n, k, terms, coeffs, t=T_FROZEN, seed=None):
+    """One co-batched stage-1 job: every candidate in sealed-seeded order,
+    S1_SHOTS each. Rejects the anticommuting ~7/8 cheaply and exactly."""
+    thetas = [c * t for c in coeffs]
+    cands = conv_candidates(n, seed)
+    qc, params = build_conv_circuit(n, terms, thetas)
+    pubs = [(sentinel_circuit(), None, SENT_SHOTS)]
+    manifest = {"n": n, "k": k, "arm": "conv_stage1",
+                "pubs": [{"kind": "sentinel_start", "shots": SENT_SHOTS}]}
+    row_meta = []
+    for lo in range(0, len(cands), CONV_CHUNK_ROWS):
+        chunk = cands[lo:lo + CONV_CHUNK_ROWS]
+        rows = [conv_stage1_row(n, c) for c in chunk]
+        pubs.append((qc, named_rows(params, rows), S1_SHOTS))
+        manifest["pubs"].append({"kind": "conv_stage1", "rows": len(chunk),
+                                 "shots": S1_SHOTS})
+        row_meta.extend({"cand": c} for c in chunk)
+    pubs.append((sentinel_circuit(), None, SENT_SHOTS))
+    manifest["pubs"].append({"kind": "sentinel_end", "shots": SENT_SHOTS})
+    return pubs, manifest, row_meta
 
 
 def named_rows(params, rows):
@@ -411,35 +449,52 @@ def selftest():
         val = np.real(v.conj() @ Rm @ v)
         assert abs(val - 1) < 1e-9, f"prep algebra != matrix for {pr},{cnd}"
     print("    prep_for_iqp algebra vs MATRIX ground truth: 20/20 PASS")
-    # SPRT sweep
+    # TWO-STAGE DETECTOR (C6515 design, 2-of-2 algebra C4778)
+    def commutes_l0(a, b):
+        return sum(1 for x, y in zip(a, b) if x != "I" and y != "I" and x != y) % 2 == 0
     all_cands = conv_candidates(n)
-    sprt = ConvSPRT(len(all_cands))
-    alive = list(all_cands)
-    accepted, rejected, meter = [], [], 0
-    for wave in range(1, 41):
-        if not alive:
-            break
-        pubs, _, meta = build_conv_job(n, 1, terms, coeffs, wave=wave, alive=alive)
-        res = sampler.run(pubs).result()
-        conv = res[1].data
-        bits = (conv.c if hasattr(conv, "c") else conv.meas)
-        arr = bits.get_bitstrings()          # row-major: row0 shots first
-        per_row = len(arr) // len(alive)
-        meter += len(alive) * per_row
-        nxt = []
+    conserved_truth = [c for c in all_cands if all(commutes_l0(c, tt) for tt in terms)]
+    meter = 0
+    # stage 1: conservation pre-filter, one job, exact rejection of anticommuters
+    pubs, _, meta = build_conv_stage1_job(n, 1, terms, coeffs)
+    res = sampler.run(pubs).result()
+    d1 = res[1].data
+    arr = (d1.c if hasattr(d1, "c") else d1.meas).get_bitstrings()
+    per_row = len(arr) // len(meta)
+    meter += len(arr)
+    survivors = []
+    for i, m in enumerate(meta):
+        mean = float(np.mean(probe_outcomes(arr[i * per_row:(i + 1) * per_row],
+                                            m["cand"])))
+        if mean > 0.9:                      # noiseless: conserved reads exactly +1
+            survivors.append(m["cand"])
+    s1_ok = sorted(survivors) == sorted(conserved_truth)
+    print(f"    stage-1: {len(meta)} candidates -> {len(survivors)} survivors "
+          f"(truth {len(conserved_truth)}): {'EXACT' if s1_ok else 'MISMATCH'}")
+    # stage 2: median over rotated probe family, gauge-randomized rows
+    per_probe_mean = {c: [] for c in survivors}
+    for wave in range(1, S2_FAMILY + 1):
+        pubs, _, meta = build_conv_job(n, 1, terms, coeffs, wave=wave,
+                                       alive=survivors)
+        res = sampler.run([(pubs[1][0], pubs[1][1], 400)]).result()
+        d2 = res[0].data
+        arr = (d2.c if hasattr(d2, "c") else d2.meas).get_bitstrings()
+        per_row = len(arr) // len(survivors)
+        meter += len(survivors) * S2_SHOTS   # flight-shot accounting (sim used 400)
         for i, m in enumerate(meta):
             outs = probe_outcomes(arr[i * per_row:(i + 1) * per_row], m["probe"])
-            v = sprt.update(m["cand"], outs)
-            if v == "ACCEPT":
-                accepted.append(m["cand"])
-            elif v == "REJECT":
-                rejected.append(m["cand"])
-            else:
-                nxt.append(m["cand"])
-        alive = nxt
-    conv_sup_ok = sorted(accepted) == sorted(terms) and not alive
-    conserved = "YYXX"   # commutes with all three planted, outside the group
-    cons_rej = conserved in rejected
+            per_probe_mean[m["cand"]].append(float(np.mean(outs)))
+    CUT2 = 0.10
+    accepted = [c for c, v in per_probe_mean.items()
+                if abs(float(np.median(v))) >= CUT2]
+    conv_sup_ok = sorted(accepted) == sorted(terms)
+    # chair caution (C4777): EXHAUSTIVE check on the conserved-NON-planted class
+    non_planted = [c for c in survivors if c not in terms]
+    false_pos = [c for c in non_planted if c in accepted]
+    cons_rej = not false_pos
+    print(f"    stage-2 (median over {S2_FAMILY} probes, cut {CUT2}): accepted "
+          f"{sorted(accepted)}; conserved-non-planted class ({len(non_planted)} "
+          f"members, EXHAUSTIVE) false-positives: {len(false_pos)}")
     # coeff refinement with constrained probes (support now known to conv arm)
     def commutes_l(a, b):
         return sum(1 for x, y in zip(a, b) if x != "I" and y != "I" and x != y) % 2 == 0
@@ -457,10 +512,11 @@ def selftest():
         mval = float(np.mean(probe_outcomes(bb, pq)))
         chat = -math.asin(max(-1, min(1, mval))) / (2 * T_FROZEN)
         ref_ok &= abs(chat - c) <= 0.03
-    ok_conv = conv_sup_ok and cons_rej and ref_ok
+    ok_conv = s1_ok and conv_sup_ok and cons_rej and ref_ok
     ok_all &= ok_conv
-    print(f"    sweep: accepted {sorted(accepted)} (want {sorted(terms)}), "
-          f"conserved {conserved} rejected: {cons_rej}, refine |c-hat - c|<=tau: {ref_ok}")
+    print(f"    two-stage verdict: support {'OK' if conv_sup_ok else sorted(accepted)}"
+          f" | stage-1 exact: {s1_ok} | class-exhaustive clean: {cons_rej}"
+          f" | refine |c-hat - c|<=tau: {ref_ok}")
     print(f"    conv meter (n=4, sim): {meter} shots -> {'PASS' if ok_conv else 'FAIL'}")
     print("SELFTEST (G2.1 law check, REAL pub path, both arms):",
           "PASS" if ok_all else "FAIL")

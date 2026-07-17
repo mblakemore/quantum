@@ -135,21 +135,33 @@ done CORRECTLY this time (R2 lesson):
 - Red-team verdict (C6510, `exp144_baseline_redteam_elder_c6510.md`): 7 attack vectors,
   NO poly shortcut — the wall is per-setting full-weight coverage 3⁻ⁿ. SPRT MC:
   E[shots/candidate] = 36–48 (α = 0.01/M Bonferroni, β = 0.05, worst signal).
-- **⚠️ DETECTOR STATISTICS OPEN (C6514, real-path selftest finding — freeze blocked
-  here honestly):** implementing §4 through the real pub path exposed cross-term
-  contamination the red-team MC's clean-signal model missed: (i) fixed-prep conjugation
-  readouts carry probe-dependent cross-term components that flip planted signs and
-  fire on some NULLS; (ii) prep-GAUGE randomization (random even-weight sign flips,
-  eigenvalue-preserving — Exp142's trick, same reason) kills most contamination but a
-  gauge-INVARIANT residual (cross strings with even overlap on every flip pattern,
-  e.g. S itself) leaves specific candidates hovering between SPRT boundaries.
-  Candidate resolution under Gate-2 analysis: TWO-STAGE detector — conservation
-  pre-filter (⟨P′(t)⟩ = 1 exactly for anything commuting with H; cheap, exact,
-  contamination-free) → gauge-randomized conjugation coefficient test on the ~3ⁿ/8
-  survivors. Cost model + contamination spectrum to be MC'd; per-candidate costs and
-  therefore R_THRESHOLD inputs may move (direction favors quantum: real baseline is
-  MORE expensive than the clean model). §4 does not claim a working implementation
-  until the kit selftest passes at G2.1 standard.
+- **TWO-STAGE DETECTOR (C6514 finding → C6516 CLOSED for correctness; algebra 2-of-2
+  Elder C6515 / Whisper C4778):** implementing §4 through the real pub path exposed
+  cross-term contamination the red-team MC's clean-signal model missed. Resolution,
+  all verified through the REAL pub path at G2.1 standard:
+  - **Stage 1 — conservation pre-filter:** prep +1 eigenstate of the candidate itself,
+    evolve, measure it; ⟨P′(t)⟩ = 1 EXACTLY iff [P′,H]=0 — deterministic,
+    contamination-free rejection of the anticommuting ~7/8 (selftest: 81→15
+    survivors, EXACT match with the enumerated commutant).
+  - **Stage 2 — median over a rotated probe family** on survivors, gauge-randomized
+    rows (random even-weight sign flips preserve the iQP eigenvalue; the
+    GAUGE-AVERAGE THEOREM — 2-of-2 — proves surviving contaminants are exactly the
+    class-(i) I-site Z-strings and class-(ii) full-cover letter-matched terms, both
+    S-dependent and therefore (candidate,probe)-PAIR-SPARSE, while the target
+    −sin(2cⱼt) is candidate-persistent → the MEDIAN is contamination-immune with no
+    threshold tuning). Pre-registered rule = (probe-family size, median cut).
+    Selftest: exactly the 3 planted accepted; **conserved-non-planted class checked
+    EXHAUSTIVELY at n=4 (all 12 members, per chair caution C4777): 0 false positives.**
+  - Coefficient refinement (constrained probes, contamination-free by construction —
+    A(Q)={target} makes the only surviving subset the target itself) unchanged.
+  - **REMAINING pre-freeze item (the one open Gate-2 cell): the NOISE/COST MC** —
+    sets flight values of N₁ (stage-1 shots), F (family size), W₂ (stage-2 shots),
+    median cut, per rung, ON the conserved-non-planted class incl. explicit class-(i)
+    members (Whisper addendum #2); re-derives per-candidate costs → conventional
+    meter model → n=4 expectation band + N4_FLAG_THRESHOLD re-derived (the two-stage
+    baseline is cheaper at n=4 than the single-stage model the current band came
+    from — the band and flag WILL move; grader constants updated at that re-freeze);
+    R(6)/R(8) floors re-checked (direction favors quantum).
   **Conserved-candidate subtlety (flagged, Gate-2 resolves):** a non-planted candidate
   COMMUTING with all planted terms is conserved by V — the naive ⟨P⟩-conservation test
   cannot reject it; the conjugation readout CAN (it reads the coefficient, which is 0).
@@ -248,7 +260,10 @@ sweep order is fixed by a PER-RUNG seed, hash-committed at seal alongside the 15
 instance commitments and revealed with the rest:
 preimage = sha256(salt || utf8("exp144|convseed|{n}|{seed_decimal}")), record schema
 `exp144-convseed-commit-v1` / reveal `exp144-convseed-reveal-v1` (3 records, one per
-rung). Candidate order = lexicographic full-weight strings shuffled by that seed
+rung; filenames `commit_convseed_n{N}.json` / `reveal_convseed_n{N}.json`). **The
+grader verifies all three at grade time (verify_convseed, selftest T5); an
+unverifiable conv order marks that rung INVALID — the meter certifies nothing
+without its committed order.** Candidate order = lexicographic full-weight strings shuffled by that seed
 (kit `conv_candidates(n, seed)`). A seed that is not committed is a post-hoc claim —
 the contamination channel wearing a fix's name (Ember C6513-era finding, adopted).
 

@@ -83,6 +83,21 @@ def verify_commitment(commit_path, reveal_path):
     return ok, [r["terms"][i] for i in order], [float(r["coeffs"][i]) for i in order]
 
 
+def verify_convseed(commit_path, reveal_path):
+    """F2b conv-order commitment (chair C4776 option (a)): per-rung seed.
+    preimage = salt || utf8("exp144|convseed|{n}|{seed_decimal}"). Single key
+    'sha256'. Returns (ok, seed)."""
+    with open(commit_path) as f:
+        c = json.load(f)
+    with open(reveal_path) as f:
+        r = json.load(f)
+    pre = bytes.fromhex(r["salt_hex"]) + \
+        f"exp144|convseed|{int(r['n'])}|{int(r['seed'])}".encode()
+    ok = (hashlib.sha256(pre).hexdigest() == c["sha256"]) \
+        and (int(c["n"]) == int(r["n"]))
+    return ok, int(r["seed"])
+
+
 def grade_instance(n, true_terms, true_coeffs, ans):
     """Returns (quantum_pass: bool, ratio: float|None, notes: str)."""
     q, c = ans["quantum"], ans["conventional"]
@@ -139,6 +154,15 @@ def grade_rung(n, inst_results):
 
 def main(commits_dir, answers_dir):
     rungs = {}
+    convseeds = {}
+    for n in NS:
+        cs_c = os.path.join(commits_dir, f"commit_convseed_n{n}.json")
+        cs_r = os.path.join(commits_dir, f"reveal_convseed_n{n}.json")
+        if not (os.path.exists(cs_c) and os.path.exists(cs_r)):
+            convseeds[n] = ("MISSING", None)
+        else:
+            ok, seed = verify_convseed(cs_c, cs_r)
+            convseeds[n] = ("OK" if ok else "INVALID", seed if ok else None)
     for n in NS:
         inst = []
         for k in KS:
@@ -155,6 +179,12 @@ def main(commits_dir, answers_dir):
             inst.append(grade_instance(n, tt, tc, ans))
         else:
             rungs[n] = grade_rung(n, inst)
+    # convseed breach: an unverifiable conv order invalidates that rung's METER
+    for n, (st, _) in convseeds.items():
+        if st != "OK" and n in rungs and rungs[n][0] not in ("INVALID",):
+            v, r, p, m, i = rungs[n]
+            rungs[n] = ("INVALID", f"convseed {st} — conv order unverifiable "
+                        f"(F2b breach); prior verdict was {v}: {r}", p, m, i)
     wins = [n for n, (v, *_ ) in rungs.items() if v == "WIN"]
     overall = "WIN" if (6 in wins and 8 in wins) else "NOT-WIN"
     flag = any(v == "METER_MISCALIBRATION_FLAG" for v, *_ in rungs.values())
@@ -162,6 +192,7 @@ def main(commits_dir, answers_dir):
                               "median_ratio": m, "iqr": i}
                      for n, (v, r, p, m, i) in rungs.items()},
            "overall": overall,
+           "convseeds": {str(n): st for n, (st, _) in convseeds.items()},
            "meter_miscalibration_flag": flag,
            "constants": {"M_BELL": M_BELL, "R_THRESHOLD": R_THRESHOLD, "TAU": TAU,
                          "N4_FLAG_THRESHOLD": N4_FLAG_THRESHOLD,
@@ -178,6 +209,16 @@ def selftest():
         cdir, adir = os.path.join(td, "c"), os.path.join(td, "a")
         os.makedirs(cdir); os.makedirs(adir)
         truth = {}
+        for n in NS:                       # convseed records (F2b)
+            seed = int.from_bytes(pysecrets.token_bytes(8), "big")
+            salt = pysecrets.token_bytes(16)
+            pre = salt + f"exp144|convseed|{n}|{seed}".encode()
+            json.dump({"schema": "exp144-convseed-commit-v1", "n": n,
+                       "sha256": hashlib.sha256(pre).hexdigest()},
+                      open(os.path.join(cdir, f"commit_convseed_n{n}.json"), "w"))
+            json.dump({"schema": "exp144-convseed-reveal-v1", "n": n,
+                       "salt_hex": salt.hex(), "seed": seed},
+                      open(os.path.join(cdir, f"reveal_convseed_n{n}.json"), "w"))
         for n in NS:
             for k in KS:
                 terms = sorted(["X" * n, "X" * (n - 2) + "YY", "X" * (n - 2) + "ZZ"])
@@ -247,6 +288,20 @@ def selftest():
         t4 = v["per_n"]["6"]["verdict"] == "LOSS" and v["overall"] == "NOT-WIN"
         print(f"T4 budget nonconformity x2 -> n6 LOSS, overall NOT-WIN: {'PASS' if t4 else 'FAIL'}")
         ok_all &= t4
+        # T5: convseed tamper -> rung INVALID (conv order unverifiable = F2b breach)
+        rpath = os.path.join(cdir, "reveal_convseed_n8.json")
+        rc = json.load(open(rpath))
+        rc["seed"] = rc["seed"] ^ 1
+        json.dump(rc, open(rpath, "w"))
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            main(cdir, adir)
+        v = json.loads(buf.getvalue())
+        t5 = (v["convseeds"]["8"] == "INVALID"
+              and v["per_n"]["8"]["verdict"] == "INVALID"
+              and v["overall"] == "NOT-WIN")
+        print(f"T5 convseed tamper -> n8 INVALID, overall NOT-WIN: {'PASS' if t5 else 'FAIL'}")
+        ok_all &= t5
     print("SELFTEST:", "PASS" if ok_all else "FAIL")
     return 0 if ok_all else 1
 
