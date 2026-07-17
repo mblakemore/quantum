@@ -243,11 +243,16 @@ def conv_param_row(n, cand, wave):
     return tp + pp + tm + pm + lm, probe
 
 
-CONV_WAVE_SHOTS = 12
+# --- AMENDMENT A2 (Elder C6526, chair C4789b): constants SYNCED to frozen §5 ---
+# (F-B fix: the freeze carried pre-MC-v2 values here; §5 prose was normative.
+#  Old: CONV_WAVE_SHOTS=12, S1_SHOTS=30, S2_FAMILY=8, S2_SHOTS=48.
+#  New hash recorded in exp144_amendment_a2_elder_c6526.md; P1 sibling-verified.)
+CONV_WAVE_SHOTS = 60   # stage-1 SPRT wave size/candidate (accumulate, cap S1_CAP)
 CONV_CHUNK_ROWS = 4096
-S1_SHOTS = 30          # stage-1 conservation shots/candidate (flight value MC-set)
-S2_FAMILY = 8          # stage-2 probe family size (flight value MC-set)
-S2_SHOTS = 48          # stage-2 shots per (survivor, probe) (flight value MC-set)
+S1_SHOTS = 60          # per-wave stage-1 shots (SPRT alpha=.05 beta=.01 decode-side)
+S1_CAP = 600           # max cumulative stage-1 shots/candidate
+S2_FAMILY = 12         # stage-2 probe family size (frozen §5 / MC v2)
+S2_SHOTS = 500         # stage-2 shots per (survivor, probe) (frozen §5 / MC v2)
 
 
 def conv_stage1_row(n, cand):
