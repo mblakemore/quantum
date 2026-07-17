@@ -1,0 +1,45 @@
+{
+ "exp": "144-A1(0b)-cxsweep",
+ "arms": [
+  "ref",
+  "cx12",
+  "cx24",
+  "cx42"
+ ],
+ "extra_cx": {
+  "ref": 0,
+  "cx12": 12,
+  "cx24": 24,
+  "cx42": 42
+ },
+ "pairs": [
+  [
+   94,
+   95
+  ],
+  [
+   49,
+   50
+  ],
+  [
+   140,
+   141
+  ],
+  [
+   55,
+   59
+  ],
+  [
+   43,
+   44
+  ],
+  [
+   91,
+   98
+  ]
+ ],
+ "shots": 4096,
+ "job_id": "d9cptusinv1c73ao484g",
+ "backend": "ibm_kingston",
+ "anchor": "A1(0) ARM-CX (42 extra CX) measured 0.527 \u2014 cx42 here must reproduce it"
+}
