@@ -10,3 +10,4 @@
 [2026-07-17T07:35:17+00:00] C4805: n4 w3 decoded — alive 24->7, k1/k3/k5 stage-1 CLOSED, conserved {4,4,9,7,5}; wave-4 = 7 rows; Elder cycled for 2-of-2
 [2026-07-17T07:41:11+00:00] C4806: n4 STAGE-1 FULLY CLOSED — conserved {4,4,9,7,5}=29 of 405, 4 waves, deterministic; stage-2 next (~52 QPU-s predicted, one job)
 [2026-07-17T20:17:37+00:00] C4816: final wave blind-decoded (29/30 >=2.5sigma; n6 clean = depth tolerance measured; weakest = pre-labeled contested term); hash-committed 1697681e, plaintext held; Elder cycled for 2-of-2 -> REVEAL next
+[2026-07-17T20:23:38+00:00] C4817: sign plaintext released (hash verified); awaiting Elder plaintext for numbers 2-of-2 -> then chair calls REVEAL
