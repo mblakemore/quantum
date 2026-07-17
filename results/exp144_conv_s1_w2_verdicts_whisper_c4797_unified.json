@@ -1,0 +1,176 @@
+{
+ "n4_k1": {
+  "conserved_rows": [
+   3,
+   24,
+   43,
+   48
+  ],
+  "alive_rows": [
+   79
+  ],
+  "newly_rejected_rows": [
+   10,
+   57,
+   62,
+   69,
+   72
+  ],
+  "method": "R1+R1b: wave-1 verdicts READ from committed v2 file (not recomputed); constants = committed wave-1 p0/p1; incremental SPRT on alive rows only"
+ },
+ "n4_k2": {
+  "conserved_rows": [
+   7,
+   11,
+   33,
+   46
+  ],
+  "alive_rows": [
+   3,
+   12,
+   13,
+   14,
+   21
+  ],
+  "newly_rejected_rows": [
+   1,
+   8,
+   19,
+   22,
+   25,
+   26,
+   27,
+   28,
+   32,
+   34,
+   35,
+   38,
+   45,
+   49,
+   54,
+   57,
+   61,
+   65,
+   68,
+   69,
+   71,
+   72,
+   73,
+   74,
+   76,
+   77,
+   79
+  ],
+  "method": "R1+R1b: wave-1 verdicts READ from committed v2 file (not recomputed); constants = committed wave-1 p0/p1; incremental SPRT on alive rows only"
+ },
+ "n4_k3": {
+  "conserved_rows": [
+   0,
+   9,
+   18,
+   19,
+   24,
+   29,
+   30,
+   54,
+   66
+  ],
+  "alive_rows": [
+   14
+  ],
+  "newly_rejected_rows": [
+   2,
+   28,
+   32,
+   33,
+   55
+  ],
+  "method": "R1+R1b: wave-1 verdicts READ from committed v2 file (not recomputed); constants = committed wave-1 p0/p1; incremental SPRT on alive rows only"
+ },
+ "n4_k4": {
+  "conserved_rows": [
+   7,
+   31,
+   40,
+   52,
+   65,
+   74
+  ],
+  "alive_rows": [
+   8,
+   11,
+   17,
+   26,
+   32,
+   36,
+   43,
+   55,
+   61,
+   62,
+   67,
+   78
+  ],
+  "newly_rejected_rows": [
+   0,
+   2,
+   3,
+   4,
+   12,
+   14,
+   18,
+   19,
+   20,
+   21,
+   24,
+   25,
+   33,
+   37,
+   38,
+   42,
+   47,
+   48,
+   51,
+   53,
+   54,
+   58,
+   60,
+   70,
+   79,
+   80
+  ],
+  "method": "R1+R1b: wave-1 verdicts READ from committed v2 file (not recomputed); constants = committed wave-1 p0/p1; incremental SPRT on alive rows only"
+ },
+ "n4_k5": {
+  "conserved_rows": [
+   31,
+   40,
+   43,
+   69
+  ],
+  "alive_rows": [
+   5,
+   9,
+   16,
+   25,
+   74
+  ],
+  "newly_rejected_rows": [
+   7,
+   12,
+   14,
+   15,
+   32,
+   36,
+   39,
+   42,
+   45,
+   50,
+   57,
+   62,
+   64,
+   78,
+   80
+  ],
+  "method": "R1+R1b: wave-1 verdicts READ from committed v2 file (not recomputed); constants = committed wave-1 p0/p1; incremental SPRT on alive rows only"
+ }
+}
