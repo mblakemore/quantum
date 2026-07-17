@@ -1,0 +1,114 @@
+{
+ "arm": "conv_stage1_sequential",
+ "decoder": "elder",
+ "instances": {
+  "n4_k1": {
+   "alive_rows": [
+    79
+   ],
+   "conserved_rows": [
+    3,
+    24,
+    43,
+    48
+   ],
+   "n_alive": 1,
+   "n_conserved": 4,
+   "n_rejected": 76,
+   "p0_frozen": 0.483,
+   "p1_frozen": 0.783
+  },
+  "n4_k2": {
+   "alive_rows": [
+    3,
+    12,
+    13,
+    14,
+    21
+   ],
+   "conserved_rows": [
+    7,
+    11,
+    33,
+    46
+   ],
+   "n_alive": 5,
+   "n_conserved": 4,
+   "n_rejected": 72,
+   "p0_frozen": 0.517,
+   "p1_frozen": 0.717
+  },
+  "n4_k3": {
+   "alive_rows": [
+    14
+   ],
+   "conserved_rows": [
+    0,
+    9,
+    18,
+    19,
+    24,
+    29,
+    30,
+    54,
+    66
+   ],
+   "n_alive": 1,
+   "n_conserved": 9,
+   "n_rejected": 71,
+   "p0_frozen": 0.467,
+   "p1_frozen": 0.783
+  },
+  "n4_k4": {
+   "alive_rows": [
+    8,
+    11,
+    17,
+    26,
+    32,
+    36,
+    43,
+    55,
+    61,
+    62,
+    67,
+    78
+   ],
+   "conserved_rows": [
+    7,
+    31,
+    40,
+    52,
+    65,
+    74
+   ],
+   "n_alive": 12,
+   "n_conserved": 6,
+   "n_rejected": 63,
+   "p0_frozen": 0.508,
+   "p1_frozen": 0.7
+  },
+  "n4_k5": {
+   "alive_rows": [
+    5,
+    9,
+    16,
+    25,
+    74
+   ],
+   "conserved_rows": [
+    31,
+    40,
+    43,
+    69
+   ],
+   "n_alive": 5,
+   "n_conserved": 4,
+   "n_rejected": 72,
+   "p0_frozen": 0.5,
+   "p1_frozen": 0.725
+  }
+ },
+ "n": 4,
+ "through_wave": 2
+}
