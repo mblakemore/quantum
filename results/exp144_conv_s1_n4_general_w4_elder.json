@@ -1,0 +1,77 @@
+{
+ "arm": "conv_stage1_general",
+ "decoder": "elder",
+ "instances": {
+  "n4_k1": {
+   "alive_rows": [],
+   "conserved_rows": [
+    3,
+    24,
+    43,
+    48
+   ],
+   "n_alive": 0,
+   "n_conserved": 4,
+   "n_rejected": 77
+  },
+  "n4_k2": {
+   "alive_rows": [],
+   "conserved_rows": [
+    7,
+    11,
+    33,
+    46
+   ],
+   "n_alive": 0,
+   "n_conserved": 4,
+   "n_rejected": 77
+  },
+  "n4_k3": {
+   "alive_rows": [],
+   "conserved_rows": [
+    0,
+    9,
+    18,
+    19,
+    24,
+    29,
+    30,
+    54,
+    66
+   ],
+   "n_alive": 0,
+   "n_conserved": 9,
+   "n_rejected": 72
+  },
+  "n4_k4": {
+   "alive_rows": [],
+   "conserved_rows": [
+    7,
+    8,
+    31,
+    40,
+    52,
+    65,
+    74
+   ],
+   "n_alive": 0,
+   "n_conserved": 7,
+   "n_rejected": 74
+  },
+  "n4_k5": {
+   "alive_rows": [],
+   "conserved_rows": [
+    5,
+    31,
+    40,
+    43,
+    69
+   ],
+   "n_alive": 0,
+   "n_conserved": 5,
+   "n_rejected": 76
+  }
+ },
+ "n": 4,
+ "through_wave": 4
+}
