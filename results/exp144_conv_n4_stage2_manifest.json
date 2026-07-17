@@ -1,0 +1,82 @@
+{
+ "exp": "144-conv-stage2",
+ "n": 4,
+ "cobatched": true,
+ "job_id": "d9ctsjineu4c739mfi90",
+ "backend": "ibm_kingston",
+ "s2_family": 12,
+ "s2_shots": 500,
+ "shots_overridden_from": 60,
+ "per": "A5/frozen \u00a75",
+ "shots_flown_total": 174000,
+ "total_pubs": 60,
+ "instances": [
+  {
+   "k": 1,
+   "survivor_rows": [
+    3,
+    24,
+    43,
+    48
+   ],
+   "n_survivors": 4,
+   "waves": 12
+  },
+  {
+   "k": 2,
+   "survivor_rows": [
+    7,
+    11,
+    33,
+    46
+   ],
+   "n_survivors": 4,
+   "waves": 12
+  },
+  {
+   "k": 3,
+   "survivor_rows": [
+    0,
+    9,
+    18,
+    19,
+    24,
+    29,
+    30,
+    54,
+    66
+   ],
+   "n_survivors": 9,
+   "waves": 12
+  },
+  {
+   "k": 4,
+   "survivor_rows": [
+    7,
+    8,
+    31,
+    40,
+    52,
+    65,
+    74
+   ],
+   "n_survivors": 7,
+   "waves": 12
+  },
+  {
+   "k": 5,
+   "survivor_rows": [
+    5,
+    31,
+    40,
+    43,
+    69
+   ],
+   "n_survivors": 5,
+   "waves": 12
+  }
+ ],
+ "kit_sha_prefix": "8944fc34",
+ "survivors_source": "exp144_conv_s1_w4_verdicts_whisper_c4806.json",
+ "_note": "A5 (chair C4808): pub shots overridden 60 -> 500 for stage-2. Kit UNTOUCHED and hash re-verified pre-flight; circuits are the kit's own (probe rotation per wave = frozen conv_probe semantics), only the shots constant is stage-1's. Meter accounts FLOWN shots (A5(3))."
+}
