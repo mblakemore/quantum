@@ -1,0 +1,37 @@
+{
+ "exp": 145,
+ "cobatched": true,
+ "reps": 64,
+ "backend": "ibm_kingston",
+ "job_id": "d9dbp74jeosc73fhbhag",
+ "ladder": [
+  {
+   "n": 3,
+   "planted_s": [
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "n": 4,
+   "planted_s": [
+    1,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "n": 5,
+   "planted_s": [
+    1,
+    1,
+    1,
+    1,
+    0
+   ]
+  }
+ ],
+ "note": "Simon scaling ladder n=3,4,5; self-verifying (s_hat==planted AND all y.s_hat==0)"
+}
