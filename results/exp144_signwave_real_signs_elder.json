@@ -1,0 +1,338 @@
+{
+ "arm": "signwave_real",
+ "decoder": "elder",
+ "instances": {
+  "n4_k1": {
+   "n": 4,
+   "sep": 2.71,
+   "terms": [
+    {
+     "contested": false,
+     "implied_c": 0.246,
+     "probe": "IIYI",
+     "q_mean": 0.88,
+     "sigma": 8.8,
+     "sign": "-",
+     "term": "ZXZY"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.203,
+     "probe": "IIYZ",
+     "q_mean": -0.6,
+     "sigma": 6.0,
+     "sign": "+",
+     "term": "YXYY"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.147,
+     "probe": "IIIY",
+     "q_mean": -0.54,
+     "sigma": 5.4,
+     "sign": "+",
+     "term": "YYYZ"
+    }
+   ]
+  },
+  "n4_k2": {
+   "n": 4,
+   "sep": 1.52,
+   "terms": [
+    {
+     "contested": true,
+     "implied_c": 0.254,
+     "probe": "IIYI",
+     "q_mean": -0.54,
+     "sigma": 5.4,
+     "sign": "+",
+     "term": "ZXZZ"
+    },
+    {
+     "contested": true,
+     "implied_c": 0.213,
+     "probe": "IIIZ",
+     "q_mean": 0.6,
+     "sigma": 6.0,
+     "sign": "-",
+     "term": "YYYY"
+    },
+    {
+     "contested": true,
+     "implied_c": 0.146,
+     "probe": "IIYY",
+     "q_mean": 0.52,
+     "sigma": 5.2,
+     "sign": "-",
+     "term": "YXYZ"
+    }
+   ]
+  },
+  "n4_k3": {
+   "n": 4,
+   "sep": 3.85,
+   "terms": [
+    {
+     "contested": false,
+     "implied_c": 0.258,
+     "probe": "IXXX",
+     "q_mean": 0.54,
+     "sigma": 5.4,
+     "sign": "-",
+     "term": "XZYZ"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.2,
+     "probe": "IIXX",
+     "q_mean": 0.54,
+     "sigma": 5.4,
+     "sign": "-",
+     "term": "ZZXZ"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.143,
+     "probe": "IXIX",
+     "q_mean": -0.52,
+     "sigma": 5.2,
+     "sign": "+",
+     "term": "ZXYZ"
+    }
+   ]
+  },
+  "n4_k4": {
+   "n": 4,
+   "sep": 5.3,
+   "terms": [
+    {
+     "contested": false,
+     "implied_c": 0.248,
+     "probe": "IIXZ",
+     "q_mean": 0.7,
+     "sigma": 7.0,
+     "sign": "-",
+     "term": "YXXY"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.202,
+     "probe": "IIIY",
+     "q_mean": -0.64,
+     "sigma": 6.4,
+     "sign": "+",
+     "term": "YZXZ"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.157,
+     "probe": "IIXI",
+     "q_mean": -0.66,
+     "sigma": 6.6,
+     "sign": "+",
+     "term": "XXZY"
+    }
+   ]
+  },
+  "n4_k5": {
+   "n": 4,
+   "sep": 2.25,
+   "terms": [
+    {
+     "contested": false,
+     "implied_c": 0.252,
+     "probe": "IIXY",
+     "q_mean": -0.7,
+     "sigma": 7.0,
+     "sign": "+",
+     "term": "YZXZ"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.196,
+     "probe": "IIIZ",
+     "q_mean": 0.74,
+     "sigma": 7.4,
+     "sign": "-",
+     "term": "XZXY"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.132,
+     "probe": "IIXI",
+     "q_mean": -0.44,
+     "sigma": 4.4,
+     "sign": "+",
+     "term": "YYYZ"
+    }
+   ]
+  },
+  "n6_k1": {
+   "n": 6,
+   "sep": 2.49,
+   "terms": [
+    {
+     "contested": false,
+     "implied_c": 0.242,
+     "probe": "IIIYIZ",
+     "q_mean": 0.7,
+     "sigma": 7.0,
+     "sign": "-",
+     "term": "YYZZYZ"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.191,
+     "probe": "IIIYIX",
+     "q_mean": 0.66,
+     "sigma": 6.6,
+     "sign": "-",
+     "term": "YZZYYZ"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.137,
+     "probe": "IIIIIZ",
+     "q_mean": -0.32,
+     "sigma": 3.2,
+     "sign": "+",
+     "term": "ZXZXYY"
+    }
+   ]
+  },
+  "n6_k2": {
+   "n": 6,
+   "sep": 3.44,
+   "terms": [
+    {
+     "contested": false,
+     "implied_c": 0.257,
+     "probe": "IIIIXX",
+     "q_mean": 0.52,
+     "sigma": 5.2,
+     "sign": "-",
+     "term": "XZXYXY"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.213,
+     "probe": "IIIIIY",
+     "q_mean": -0.62,
+     "sigma": 6.2,
+     "sign": "+",
+     "term": "XYXXYZ"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.146,
+     "probe": "IIIIXY",
+     "q_mean": -0.46,
+     "sigma": 4.6,
+     "sign": "+",
+     "term": "XYZZZY"
+    }
+   ]
+  },
+  "n6_k3": {
+   "n": 6,
+   "sep": 4.76,
+   "terms": [
+    {
+     "contested": false,
+     "implied_c": 0.251,
+     "probe": "IIIIXZ",
+     "q_mean": 0.64,
+     "sigma": 6.4,
+     "sign": "-",
+     "term": "XXYZYZ"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.206,
+     "probe": "IIIIXY",
+     "q_mean": -0.58,
+     "sigma": 5.8,
+     "sign": "+",
+     "term": "XYZYYY"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.157,
+     "probe": "IIIIXX",
+     "q_mean": -0.34,
+     "sigma": 3.4,
+     "sign": "+",
+     "term": "YZXXZX"
+    }
+   ]
+  },
+  "n6_k4": {
+   "n": 6,
+   "sep": 7.56,
+   "terms": [
+    {
+     "contested": false,
+     "implied_c": 0.25,
+     "probe": "IIIIXI",
+     "q_mean": -0.76,
+     "sigma": 7.6,
+     "sign": "+",
+     "term": "XXXZZX"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.201,
+     "probe": "IIIIIX",
+     "q_mean": -0.46,
+     "sigma": 4.6,
+     "sign": "+",
+     "term": "XXZYXZ"
+    },
+    {
+     "contested": false,
+     "implied_c": 0.151,
+     "probe": "IIIIXZ",
+     "q_mean": -0.42,
+     "sigma": 4.2,
+     "sign": "+",
+     "term": "XXZZXX"
+    }
+   ]
+  },
+  "n6_k5": {
+   "n": 6,
+   "sep": 1.29,
+   "terms": [
+    {
+     "contested": true,
+     "implied_c": 0.25,
+     "probe": "IIIXIY",
+     "q_mean": 0.74,
+     "sigma": 7.4,
+     "sign": "-",
+     "term": "XYYXYX"
+    },
+    {
+     "contested": true,
+     "implied_c": 0.196,
+     "probe": "IIIIIX",
+     "q_mean": -0.58,
+     "sigma": 5.8,
+     "sign": "+",
+     "term": "YXXZZZ"
+    },
+    {
+     "contested": true,
+     "implied_c": 0.139,
+     "probe": "IIIXIX",
+     "q_mean": -0.16,
+     "sigma": 1.6,
+     "sign": "+",
+     "term": "YYYZYX"
+    }
+   ]
+  }
+ },
+ "job": "d9d8ouphtsac739cml0g",
+ "n_sign": 100
+}
