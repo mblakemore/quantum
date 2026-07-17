@@ -1,0 +1,55 @@
+{
+ "exp": "145b",
+ "cobatched": true,
+ "reps": 96,
+ "backend": "ibm_kingston",
+ "job_id": "d9dbuehhtsac739cr17g",
+ "ladder": [
+  {
+   "n": 6,
+   "planted_s": [
+    1,
+    0,
+    0,
+    0,
+    1,
+    0
+   ],
+   "cz": 6,
+   "depth": 14
+  },
+  {
+   "n": 8,
+   "planted_s": [
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1
+   ],
+   "cz": 20,
+   "depth": 31
+  },
+  {
+   "n": 10,
+   "planted_s": [
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1
+   ],
+   "cz": 24,
+   "depth": 40
+  }
+ ],
+ "note": "Rung-1: Simon robustness ladder n=6,8,10"
+}
