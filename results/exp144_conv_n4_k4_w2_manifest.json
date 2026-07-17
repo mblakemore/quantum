@@ -1,0 +1,64 @@
+{
+ "n": 4,
+ "k": 4,
+ "arm": "conventional",
+ "wave": 2,
+ "pubs": [
+  {
+   "kind": "sentinel_start",
+   "shots": 400
+  },
+  {
+   "kind": "conv_wave2",
+   "rows": 39,
+   "shots": 60
+  },
+  {
+   "kind": "sentinel_end",
+   "shots": 400
+  }
+ ],
+ "job_id": "d9crad2neu4c739mc2q0",
+ "backend": "ibm_kingston",
+ "alive_rows_in": [
+  0,
+  2,
+  3,
+  4,
+  8,
+  11,
+  12,
+  14,
+  17,
+  18,
+  19,
+  20,
+  21,
+  24,
+  25,
+  26,
+  32,
+  33,
+  36,
+  37,
+  38,
+  42,
+  43,
+  47,
+  48,
+  51,
+  53,
+  54,
+  55,
+  58,
+  60,
+  61,
+  62,
+  65,
+  67,
+  70,
+  78,
+  79,
+  80
+ ]
+}

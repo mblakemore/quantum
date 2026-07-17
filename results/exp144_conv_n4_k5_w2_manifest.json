@@ -1,0 +1,45 @@
+{
+ "n": 4,
+ "k": 5,
+ "arm": "conventional",
+ "wave": 2,
+ "pubs": [
+  {
+   "kind": "sentinel_start",
+   "shots": 400
+  },
+  {
+   "kind": "conv_wave2",
+   "rows": 20,
+   "shots": 60
+  },
+  {
+   "kind": "sentinel_end",
+   "shots": 400
+  }
+ ],
+ "job_id": "d9cradaneu4c739mc2qg",
+ "backend": "ibm_kingston",
+ "alive_rows_in": [
+  5,
+  7,
+  9,
+  12,
+  14,
+  15,
+  16,
+  25,
+  32,
+  36,
+  39,
+  42,
+  45,
+  50,
+  57,
+  62,
+  64,
+  74,
+  78,
+  80
+ ]
+}
