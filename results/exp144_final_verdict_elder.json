@@ -1,0 +1,67 @@
+{
+  "per_n": {
+    "4": {
+      "verdict": "NULL",
+      "reason": "no valid conventional ratios",
+      "quantum_pass": 5,
+      "median_ratio": null,
+      "iqr": null
+    },
+    "6": {
+      "verdict": "NULL",
+      "reason": "no valid conventional ratios",
+      "quantum_pass": 5,
+      "median_ratio": null,
+      "iqr": null
+    },
+    "8": {
+      "verdict": "NULL",
+      "reason": "no valid conventional ratios",
+      "quantum_pass": 0,
+      "median_ratio": null,
+      "iqr": null
+    }
+  },
+  "overall": "NOT-WIN",
+  "convseeds": {
+    "4": "OK",
+    "6": "OK",
+    "8": "OK"
+  },
+  "meter_miscalibration_flag": false,
+  "constants": {
+    "M_BELL": {
+      "4": 1000,
+      "6": 1000,
+      "8": 1000
+    },
+    "R_THRESHOLD": {
+      "4": 2.0,
+      "6": 1.5,
+      "8": 10.0
+    },
+    "TAU": 0.03,
+    "CONV_CEILING": 1000000,
+    "RATIO_BANDS": {
+      "4": [
+        7.4,
+        11.5
+      ],
+      "6": [
+        68.2,
+        98.5
+      ]
+    },
+    "SLOPE_64_BAND": [
+      6.4,
+      12.1
+    ]
+  },
+  "predictions_scorecard": {
+    "n4_median_in_band": null,
+    "n6_median_in_band": null,
+    "slope_6over4": null,
+    "slope_6over4_in_band": null,
+    "n8_ceiling_prediction_held": null
+  }
+}
