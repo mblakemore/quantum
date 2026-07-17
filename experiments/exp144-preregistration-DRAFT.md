@@ -173,14 +173,39 @@ green-or-waived before freeze.
 
 ---
 
-## 6. Blind commitment (Ember, sealed-committer)
+## 6. Blind commitment (Ember, sealed-committer) — SCHEMA PINNED PRE-FREEZE (Ember ask #1, C6509)
 
-Per instance: seal {support {Pⱼ}, signed coefficients {cⱼ}} via
-sha256(salt || utf8("exp144|dynamics_fullweight_m3|{n}|{instance}|{support}|{coeffs}")),
-salts+plaintext off-git chmod-600 + AES-256 encrypted backup committed (Exp142 C4187 SPOF
-fix), passphrase Creator-only. 15 commitments (3 rungs × 5 instances). Decoders read no
-plaintext until reveal. **Reveal writer dry-run vs the frozen grader's own verify_commitment
-BEFORE freeze** (Exp142 C4188/step-2 lesson).
+**Preimage (EXACT, frozen here — the vector serialization IS the commitment):**
+
+    sha256( salt_bytes || utf8("exp144|dynamics_fullweight_m3|{n}|{k}|{terms_csv}|{coeffs_csv}") )
+
+- `n` ∈ {4,6,8} decimal, `k` ∈ {1..5} decimal instance index (NEW vs Exp142 — 15 instances).
+- `terms_csv`: the m=3 term labels, **canonical order = lexicographic ascending** of the
+  label strings (uppercase IXYZ alphabet, length n, no internal separators), joined by ",".
+  Ordering is normative: any other order is a different preimage.
+- `coeffs_csv`: signed coefficients **in the SAME index order as terms_csv**, each
+  formatted exactly `%+.2f` (grid values are 2-decimal exact), joined by ",".
+  Example (n=4, k=2): `exp144|dynamics_fullweight_m3|4|2|XXXX,XXYY,XXZZ|+0.15,-0.20,+0.25`
+
+**Commitment record (one JSON per instance, committed):**
+`{"schema":"exp144-commit-v1","ensemble":"dynamics_fullweight_m3","n":N,"instance":K,"sha256":"<hex>"}`
+**Reveal record (one JSON per instance, published at reveal):**
+`{"schema":"exp144-reveal-v1","salt_hex":"<hex>","ensemble":"dynamics_fullweight_m3","n":N,"instance":K,"terms":[...],"coeffs":[...]}`
+filename `reveal_dynamics_fullweight_m3_n{N}_k{K}.json`; grader recomputes the preimage
+from the record fields (re-serializing per the rules above) and verifies vs `sha256`.
+
+**Key-name discipline (Ember ask #2): the commitment hash key is `sha256` — ONE name,
+used identically by sealer, reveal writer, and grader. The Exp142 dual-key bridge
+(`sha256` vs `hash_sha256`) is a documented DEFECT, not a design — it does not carry
+into Exp144. Grader contains NO bridge code.**
+
+Salts+plaintext off-git chmod-600 + AES-256 encrypted backup committed (Exp142 C4187
+SPOF fix), passphrase Creator-only. 15 commitments (3 rungs × 5 instances). Decoders
+read no plaintext until reveal. **REQUIRED pre-freeze path-matrix item: Ember exercises
+seal → reveal-write → grader verify_commitment END-TO-END on DUMMY vectors (all 3 rungs,
+≥2 instances each) BEFORE the freeze hash** — the Exp142 reveal path was the only
+never-run production path and survived on a voluntary last-hour pre-flight; Exp144
+makes that exercise a gate, not a favor.
 
 ---
 
@@ -189,8 +214,11 @@ BEFORE freeze** (Exp142 C4188/step-2 lesson).
 `exp144_grader.py` grades per (n,instance): quantum support+signed-coeff correct vs sealed
 truth, budget conformity (quantum_budget == 5·m_bell(n)), ratio ≥ R_THRESHOLD(n); rung WIN
 per §5; overall per §5. Verdict = JSON stdout (Elder C6494: exit codes are not verdicts).
-Commitment-key bridge if sealer key name ≠ grader key name (C6494 dual-key find) — bridge in
-a scratch dir, never edit frozen files.
+**Commitment key = `sha256`, per §6 — sealer and grader agree at source; NO bridge code
+in or around the grader** (the Exp142 scratch bridge was the correct patch for a frozen
+artifact and is the wrong pattern for an unfrozen one — Ember C6509 ask #2 adopted).
+Grader's verify_commitment re-serializes terms/coeffs per the §6 normative rules; the
+§6 dummy-vector end-to-end exercise must pass against THIS grader before freeze.
 
 ---
 
