@@ -122,6 +122,15 @@ done CORRECTLY this time (R2 lesson):
 - Executed scheme: SPRT-metered candidate sweep over the promised (public) ensemble class —
   for candidate P, conjugation readout as in §3's sign block (prep product eigenstate of
   iQP, evolve, measure Q): planted → ⟨Q(t)⟩ = ∓sin(2ct) ≠ 0; non-planted → 0.
+- **Baseline upgrades (red-team C6510, chair-adopted C4772):** (i) COMMUTING NARROWING —
+  after each accepted term, the candidate list restricts to strings commuting with it
+  (legal use of the promise; MC'd into the meter); (ii) **CONCATENATION V^k PERMITTED** —
+  the conventional arm may apply V multiple times per circuit (metered as k uses);
+  amplifies precision, never the 3ⁿ search (an unmatched setting reads 0 for any k) —
+  symmetric access, strictly stronger baseline, asymptotically immaterial.
+- Red-team verdict (C6510, `exp144_baseline_redteam_elder_c6510.md`): 7 attack vectors,
+  NO poly shortcut — the wall is per-setting full-weight coverage 3⁻ⁿ. SPRT MC:
+  E[shots/candidate] = 36–48 (α = 0.01/M Bonferroni, β = 0.05, worst signal).
   **Conserved-candidate subtlety (flagged, Gate-2 resolves):** a non-planted candidate
   COMMUTING with all planted terms is conserved by V — the naive ⟨P⟩-conservation test
   cannot reject it; the conjugation readout CAN (it reads the coefficient, which is 0).
@@ -155,8 +164,22 @@ Per instance i, rung n:
 - N_sign per term. ⟨GATE-2⟩
 - τ = 0.03, α = 0.01, K = 5, grid {0.15,0.20,0.25}, m = 3, t = 2.0 (provisional): frozen now.
 
-**WIN per rung** = quantum PASS on ≥4/5 instances AND median ratio ≥ R_THRESHOLD(n).
-**Overall WIN** = n=6 rung wins AND ≥2 of 3 rungs win.
+**WIN per rung (n ∈ {6,8} only)** = quantum PASS on ≥4/5 instances AND median ratio ≥
+R_THRESHOLD(n). Accepted floors (chair C4772): R(6) = 1.5, R(8) = 10 — final values
+frozen at kit-stage Gate-2 close.
+
+**n=4 = PRE-REGISTERED NEGATIVE CONTROL (chair decision C4772, red-team C6510):**
+the quantum budget is τ-precision-bound (~n-independent) while the baseline haystack
+at n=4 is only 81 candidates — the baseline is EXPECTED TO WIN this rung. Expectation
+band: median ratio ∈ [0.33, 0.40] (red-team MC, quoted as expectation). n=4 is
+EXCLUDED from overall-WIN. If the flown n=4 median ratio exceeds the frozen
+N4_FLAG_THRESHOLD ⟨GATE-2 kit stage — principle frozen now, number frozen with the
+constants⟩, the grader raises **METER_MISCALIBRATION_FLAG**: investigate the metering
+pipeline before trusting the n=6/n=8 ratios. The predicted loss is the scaling claim
+made visible: loss at n=4, crossover at n=6, domination at n=8 — a rung we predict
+LOSING is unfakeable evidence the rungs we predict winning weren't cherry-picked.
+
+**Overall WIN** = n=6 rung WINS AND n=8 rung WINS.
 
 ---
 
