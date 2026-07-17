@@ -93,6 +93,52 @@ def decode(labels, n, n_shots, t=T_FROZEN, m=M_TERMS):
             "n_shots": n_shots}
 
 
+class ConvSPRT:
+    """Two-sided SPRT per candidate for the §4 sweep. Outcomes are +-1 probe
+    readouts; H0 mu=0 vs H1 |mu| >= MU1 (conservative floor incl. cross-term
+    attenuation). alpha Bonferroni over the candidate space; beta loose
+    (miss -> candidate stays alive into the next wave)."""
+    MU1 = 0.20   # worst planted signal after cross-attenuation: sin(0.6)*cos(0.8)*cos(1.0)
+
+    def __init__(self, n_candidates, alpha_total=0.01, beta=0.05):
+        self.alpha = alpha_total / n_candidates
+        self.beta = beta
+        self.la = math.log((1 - beta) / self.alpha)
+        self.lb = math.log(beta / (1 - self.alpha))
+        self.p1 = (1 + self.MU1) / 2
+        self.state = {}
+
+    def update(self, cand, outcomes):
+        pos, neg = self.state.get(cand, (0.0, 0.0))
+        for x in outcomes:
+            if x > 0:
+                pos += math.log(self.p1 / 0.5)
+                neg += math.log((1 - self.p1) / 0.5)
+            else:
+                pos += math.log((1 - self.p1) / 0.5)
+                neg += math.log(self.p1 / 0.5)
+        self.state[cand] = (pos, neg)
+        m = max(pos, neg)
+        if m >= self.la:
+            return "ACCEPT"          # planted-signal detected
+        if pos <= self.lb and neg <= self.lb:
+            return "REJECT"          # null accepted
+        return "OPEN"
+
+
+def probe_outcomes(bitstrings, probe):
+    """+-1 product of measured probe sites per shot (little-endian creg)."""
+    out = []
+    for s in bitstrings:
+        b = s[::-1]
+        v = 1
+        for i, c in enumerate(probe):
+            if c != "I":
+                v *= (1 - 2 * int(b[i]))
+        out.append(v)
+    return out
+
+
 def assemble_answer(n, k, decoded, signs, shots_budget, conventional):
     """Merge decode + sign block -> the grader's answers_n{N}_k{K}.json shape.
     signs: {term_label: +1|-1} from the sign-block consumer."""

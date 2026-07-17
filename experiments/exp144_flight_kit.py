@@ -122,6 +122,163 @@ def sentinel_circuit():
     return qc
 
 
+# ------------------------------------------------- conventional arm (§4) — F1
+# Pauli single-qubit products with phase: sa*sb = phase * sc
+_PROD = {("X", "Y"): ("Z", 1j), ("Y", "X"): ("Z", -1j),
+         ("Y", "Z"): ("X", 1j), ("Z", "Y"): ("X", -1j),
+         ("Z", "X"): ("Y", 1j), ("X", "Z"): ("Y", -1j)}
+
+
+def pauli_prod_phase(a, b):
+    """(label, phase) of the string product a*b, phase in {1,-1,i,-i}."""
+    lab, ph = [], 1 + 0j
+    for x, y in zip(a, b):
+        if x == "I": lab.append(y)
+        elif y == "I": lab.append(x)
+        elif x == y: lab.append("I")
+        else:
+            c, p = _PROD[(x, y)]
+            lab.append(c); ph *= p
+    return "".join(lab), ph
+
+
+def prep_for_iqp(probe, cand):
+    """Product eigenstate of iQP (+1), by ALGEBRA (public, decoder-reproducible;
+    matrix-free — the selftest cross-checks this against matrices, per the
+    known-answer-vs-ground-truth rule). Returns (letters S, sign_bits)."""
+    S, ph = pauli_prod_phase(probe, cand)
+    coef = 1j * ph                     # iQP = coef * S; {Q,P}=0 -> coef real +-1
+    assert abs(coef.imag) < 1e-12, "probe must anticommute with candidate"
+    signs = [0] * len(S)
+    if coef.real < 0:
+        signs[next(i for i, c in enumerate(S) if c != "I")] = 1
+    return S, signs
+
+
+def conv_candidates(n, seed=None):
+    """SEALED-SEEDED candidate order (F2b, chair ruling C4776 option (a)):
+    all 3^n full-weight strings, lexicographic then shuffled by the PER-RUNG
+    seed Ember seals as exp144-convseed-commit-v1 (revealed with the rest —
+    a verifiable pre-commitment, not a post-hoc claim). seed=None is the
+    SELFTEST-ONLY deterministic fallback tag."""
+    import hashlib as _h
+    cands = ["".join(p) for p in itertools.product("XYZ", repeat=n)]
+    if seed is None:                      # selftest fallback, never flown
+        seed = int.from_bytes(
+            _h.sha256(f"exp144|conv-order-selftest|{n}".encode()).digest()[:8], "big")
+    rng = np.random.default_rng(int(seed))
+    rng.shuffle(cands)
+    return cands
+
+
+def conv_probe(cand, wave, site_stride=1):
+    """Deterministic single-site sweep probe for candidate (wave-rotated site &
+    letter — the §4 randomization across waves). Detection only; coeff
+    refinement uses constrained probes post-identification."""
+    n = len(cand)
+    site = (wave - 1) % n
+    letters = [c for c in "XYZ" if c != cand[site]]
+    q = ["I"] * n
+    q[site] = letters[(wave - 1) // n % 2]
+    return "".join(q)
+
+
+def conv_template(n):
+    """Parameterized: prep u(tp,pp,0) per qubit + V blocks (concrete secret
+    angles baked at build) + pre-measure u(tm,pm,lm) per qubit + measure.
+    Rows bound BY NAME (C4747 A1 — never positional)."""
+    from qiskit.circuit import ParameterVector
+    qc = QuantumCircuit(n, n)
+    tp = ParameterVector("tp", n); pp = ParameterVector("pp", n)
+    tm = ParameterVector("tm", n); pm = ParameterVector("pm", n)
+    lm = ParameterVector("lm", n)
+    for i in range(n):
+        qc.u(tp[i], pp[i], 0.0, i)
+    qc.barrier()
+    return qc, (tp, pp, tm, pm, lm)
+
+
+def build_conv_circuit(n, terms, thetas):
+    qc, (tp, pp, tm, pm, lm) = conv_template(n)
+    for lab, th in zip(terms, thetas):
+        rotation_block(qc, list(range(n)), lab, 2 * th)
+    qc.barrier()
+    for i in range(n):
+        qc.u(tm[i], pm[i], lm[i], i)
+    qc.measure(range(n), range(n))
+    return qc, list(tp) + list(pp) + list(tm) + list(pm) + list(lm)
+
+
+PREP_U = {("Z", 0): (0.0, 0.0), ("Z", 1): (math.pi, 0.0),
+          ("X", 0): (math.pi / 2, 0.0), ("X", 1): (math.pi / 2, math.pi),
+          ("Y", 0): (math.pi / 2, math.pi / 2), ("Y", 1): (math.pi / 2, -math.pi / 2),
+          ("I", 0): (0.0, 0.0), ("I", 1): (0.0, 0.0)}
+
+
+def conv_param_row(n, cand, wave):
+    """One named row: prep iQP'(+1) eigenstate, measure probe letters.
+    GAUGE RANDOMIZATION (C6514 fix): the +1 eigenspace has sign-pattern freedom —
+    any EVEN-weight flip of non-I site signs preserves the iQP eigenvalue while
+    flipping cross-term expectations. Randomizing it per (cand, wave) averages
+    cross-term contamination to zero (the debug data showed sign-flipping planted
+    signals and strong per-wave NULL signals without it); the target
+    −sin(2ct)·⟨iQP⟩ is gauge-invariant. Same trick, same reason as Exp142's
+    random_even_parity_bits."""
+    probe = conv_probe(cand, wave)
+    S, signs = prep_for_iqp(probe, cand)
+    import hashlib as _h
+    seed = int.from_bytes(_h.sha256(f"gauge|{cand}|{wave}".encode()).digest()[:8], "big")
+    grng = np.random.default_rng(seed)
+    sites = [i for i, c in enumerate(S) if c != "I"]
+    flip = grng.integers(0, 2, size=len(sites))
+    if flip.sum() % 2:
+        flip[grng.integers(0, len(sites))] ^= 1
+    for i, f in zip(sites, flip):
+        signs[i] ^= int(f)
+    tp = [PREP_U[(c, s)][0] for c, s in zip(S, signs)]
+    pp = [PREP_U[(c, s)][1] for c, s in zip(S, signs)]
+    tm = [TO_Z[c][0] if c != "I" else 0.0 for c in probe]
+    pm = [TO_Z[c][1] if c != "I" else 0.0 for c in probe]
+    lm = [TO_Z[c][2] if c != "I" else 0.0 for c in probe]
+    return tp + pp + tm + pm + lm, probe
+
+
+CONV_WAVE_SHOTS = 12
+CONV_CHUNK_ROWS = 4096
+
+
+def named_rows(params, rows):
+    """Bind by NAME (C4747 A1: raw ndarrays coerce positionally — the wave-1
+    binding-scramble class)."""
+    arr = np.asarray(rows, dtype=float)
+    return {p.name: arr[:, i] for i, p in enumerate(params)}
+
+
+def build_conv_job(n, k, terms, coeffs, wave=1, alive=None, t=T_FROZEN, seed=None):
+    """(pubs, manifest, row_meta). alive = candidate subset for top-up waves
+    (SPRT-open only); wave 1 = full sealed-seeded order (per-rung seed, C4776)."""
+    thetas = [c * t for c in coeffs]
+    cands = alive if alive is not None else conv_candidates(n, seed)
+    qc, params = build_conv_circuit(n, terms, thetas)
+    pubs, manifest, row_meta = [], {"n": n, "k": k, "arm": "conventional",
+                                    "wave": wave, "pubs": []}, []
+    pubs.append((sentinel_circuit(), None, SENT_SHOTS))
+    manifest["pubs"].append({"kind": "sentinel_start", "shots": SENT_SHOTS})
+    for lo in range(0, len(cands), CONV_CHUNK_ROWS):
+        chunk = cands[lo:lo + CONV_CHUNK_ROWS]
+        rows, probes = [], []
+        for cnd in chunk:
+            r, probe = conv_param_row(n, cnd, wave)
+            rows.append(r); probes.append(probe)
+        pubs.append((qc, named_rows(params, rows), CONV_WAVE_SHOTS))
+        manifest["pubs"].append({"kind": f"conv_wave{wave}", "rows": len(chunk),
+                                 "shots": CONV_WAVE_SHOTS})
+        row_meta.extend({"cand": c, "probe": p} for c, p in zip(chunk, probes))
+    pubs.append((sentinel_circuit(), None, SENT_SHOTS))
+    manifest["pubs"].append({"kind": "sentinel_end", "shots": SENT_SHOTS})
+    return pubs, manifest, row_meta
+
+
 def build_quantum_job(n, terms, coeffs, t=T_FROZEN):
     """(pubs, manifest) for one instance's quantum-arm job. Manifest is
     instance-independent: layout + shots only."""
@@ -227,7 +384,86 @@ def selftest():
     ok_all &= sign_ok
     print(f"  sign block (term XXXX, probe {probe}, prep {Slab}): <Q(t)> = {got:+.4f} "
           f"vs -sin(2th) = {want:+.4f} -> {'PASS' if sign_ok else 'FAIL'}")
-    print("SELFTEST (G2.1 law check, REAL pub path):", "PASS" if ok_all else "FAIL")
+    # ---------------- conventional arm through the REAL chunked-row pub path (F1)
+    print("  conv arm (§4): full n=4 sweep, 81 candidates, frozen-seeded order...")
+    from exp144_decode_meter import ConvSPRT, probe_outcomes
+    import functools
+    n, terms, coeffs = cases[0]
+    # algebra-vs-matrix cross-check of prep_for_iqp (ground-truth rule, C6513)
+    PM2 = {"I": I2, "X": PM["X"], "Y": PM["Y"], "Z": PM["Z"]}
+    kron2 = lambda s: functools.reduce(np.kron, [PM2[c] for c in s])
+    rngx = np.random.default_rng(5)
+    for _ in range(20):
+        cnd = "".join(rngx.choice(list("XYZ"), n))
+        pr = conv_probe(cnd, int(rngx.integers(1, 9)))
+        S, sg = prep_for_iqp(pr, cnd)
+        Rm = 1j * kron2(pr) @ kron2(cnd)
+        eig = {"I": np.array([1, 0], complex),
+               "X": np.array([1, 1], complex) / np.sqrt(2),
+               "Y": np.array([1, 1j], complex) / np.sqrt(2),
+               "Z": np.array([1, 0], complex)}
+        eigm = {"X": np.array([1, -1], complex) / np.sqrt(2),
+                "Y": np.array([1, -1j], complex) / np.sqrt(2),
+                "Z": np.array([0, 1], complex)}
+        v = np.array([1.0 + 0j])
+        for c, s in zip(S, sg):
+            v = np.kron(v, eig[c] if (c == "I" or s == 0) else eigm[c])
+        val = np.real(v.conj() @ Rm @ v)
+        assert abs(val - 1) < 1e-9, f"prep algebra != matrix for {pr},{cnd}"
+    print("    prep_for_iqp algebra vs MATRIX ground truth: 20/20 PASS")
+    # SPRT sweep
+    all_cands = conv_candidates(n)
+    sprt = ConvSPRT(len(all_cands))
+    alive = list(all_cands)
+    accepted, rejected, meter = [], [], 0
+    for wave in range(1, 41):
+        if not alive:
+            break
+        pubs, _, meta = build_conv_job(n, 1, terms, coeffs, wave=wave, alive=alive)
+        res = sampler.run(pubs).result()
+        conv = res[1].data
+        bits = (conv.c if hasattr(conv, "c") else conv.meas)
+        arr = bits.get_bitstrings()          # row-major: row0 shots first
+        per_row = len(arr) // len(alive)
+        meter += len(alive) * per_row
+        nxt = []
+        for i, m in enumerate(meta):
+            outs = probe_outcomes(arr[i * per_row:(i + 1) * per_row], m["probe"])
+            v = sprt.update(m["cand"], outs)
+            if v == "ACCEPT":
+                accepted.append(m["cand"])
+            elif v == "REJECT":
+                rejected.append(m["cand"])
+            else:
+                nxt.append(m["cand"])
+        alive = nxt
+    conv_sup_ok = sorted(accepted) == sorted(terms) and not alive
+    conserved = "YYXX"   # commutes with all three planted, outside the group
+    cons_rej = conserved in rejected
+    # coeff refinement with constrained probes (support now known to conv arm)
+    def commutes_l(a, b):
+        return sum(1 for x, y in zip(a, b) if x != "I" and y != "I" and x != y) % 2 == 0
+    ref_ok = True
+    for j, (lab, c) in enumerate(zip(terms, coeffs)):
+        others = [x for x in terms if x != lab]
+        pq = next("".join(p) for p in itertools.product("IXYZ", repeat=n)
+                  if set(p) != {"I"} and not commutes_l("".join(p), lab)
+                  and all(commutes_l("".join(p), o) for o in others))
+        S, sg = prep_for_iqp(pq, lab)
+        qc = signblock_circuit(n, terms, [cc * T_FROZEN for cc in coeffs], j, pq, S, sg)
+        rr = sampler.run([(qc, None, 4000)]).result()[0].data
+        bb = (rr.c if hasattr(rr, "c") else rr.meas).get_bitstrings()
+        meter += 4000
+        mval = float(np.mean(probe_outcomes(bb, pq)))
+        chat = -math.asin(max(-1, min(1, mval))) / (2 * T_FROZEN)
+        ref_ok &= abs(chat - c) <= 0.03
+    ok_conv = conv_sup_ok and cons_rej and ref_ok
+    ok_all &= ok_conv
+    print(f"    sweep: accepted {sorted(accepted)} (want {sorted(terms)}), "
+          f"conserved {conserved} rejected: {cons_rej}, refine |c-hat - c|<=tau: {ref_ok}")
+    print(f"    conv meter (n=4, sim): {meter} shots -> {'PASS' if ok_conv else 'FAIL'}")
+    print("SELFTEST (G2.1 law check, REAL pub path, both arms):",
+          "PASS" if ok_all else "FAIL")
     return 0 if ok_all else 1
 
 

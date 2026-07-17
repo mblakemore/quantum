@@ -101,10 +101,14 @@ products. **Contrast is O(1)** — this is what v1's mixed-state design lacked (
 - **Sign block (single-copy, adaptive after support ID):** sin² is sign-blind. For each
   accepted Pⱼ, decoder solves (symplectic GF(2)) for a probe Qⱼ with {Qⱼ,Pⱼ}=0 and
   [Qⱼ,Pₖ]=0 (k≠j); prep a product eigenstate of the Pauli string iQⱼPⱼ, evolve V, measure
-  Qⱼ in its letter basis: ⟨Qⱼ(t)⟩ = ∓sin(2cⱼt) — sign-sensitive, other terms pass through
-  by construction. N_sign shots per term ⟨GATE-2⟩. Exact scheme + degeneracy handling in the
-  Gate-2 sim.
-- Quantum arm BUDGET (frozen conformity, §5): N_bell = 5·⟨GATE-2 m_bell⟩, N_sign ⟨GATE-2⟩.
+  Qⱼ in its letter basis: ⟨Qⱼ(t)⟩ = −sin(2cⱼt) (convention frozen C6508: sign(cⱼ) =
+  −sign(⟨Qⱼ(t)⟩) on the +1 eigenstate) — other terms pass through by construction.
+  **N_sign = 100 shots per term (FROZEN).**
+- **Sign-block SEQUENCING (F2, chair text C4776 verbatim):** decoders hash-commit
+  accepted support → cross-check commits (2-of-2 gate) → support conveyed to submitter
+  only → sign wave flies → conv sweep order = committed per-rung seed, so support
+  publicity cannot touch the meter even in principle.
+- Quantum arm BUDGET (frozen conformity, §5): N_bell = 5·m_bell = 5,000; N_sign = 100/term.
 
 ---
 
@@ -131,6 +135,21 @@ done CORRECTLY this time (R2 lesson):
 - Red-team verdict (C6510, `exp144_baseline_redteam_elder_c6510.md`): 7 attack vectors,
   NO poly shortcut — the wall is per-setting full-weight coverage 3⁻ⁿ. SPRT MC:
   E[shots/candidate] = 36–48 (α = 0.01/M Bonferroni, β = 0.05, worst signal).
+- **⚠️ DETECTOR STATISTICS OPEN (C6514, real-path selftest finding — freeze blocked
+  here honestly):** implementing §4 through the real pub path exposed cross-term
+  contamination the red-team MC's clean-signal model missed: (i) fixed-prep conjugation
+  readouts carry probe-dependent cross-term components that flip planted signs and
+  fire on some NULLS; (ii) prep-GAUGE randomization (random even-weight sign flips,
+  eigenvalue-preserving — Exp142's trick, same reason) kills most contamination but a
+  gauge-INVARIANT residual (cross strings with even overlap on every flip pattern,
+  e.g. S itself) leaves specific candidates hovering between SPRT boundaries.
+  Candidate resolution under Gate-2 analysis: TWO-STAGE detector — conservation
+  pre-filter (⟨P′(t)⟩ = 1 exactly for anything commuting with H; cheap, exact,
+  contamination-free) → gauge-randomized conjugation coefficient test on the ~3ⁿ/8
+  survivors. Cost model + contamination spectrum to be MC'd; per-candidate costs and
+  therefore R_THRESHOLD inputs may move (direction favors quantum: real baseline is
+  MORE expensive than the clean model). §4 does not claim a working implementation
+  until the kit selftest passes at G2.1 standard.
   **Conserved-candidate subtlety (flagged, Gate-2 resolves):** a non-planted candidate
   COMMUTING with all planted terms is conserved by V — the naive ⟨P⟩-conservation test
   cannot reject it; the conjugation readout CAN (it reads the coefficient, which is 0).
@@ -157,12 +176,12 @@ Per instance i, rung n:
 - **Rung metric = MEDIAN ratio over K=5 instances**, reported WITH inter-instance spread
   (IQR / min-max) — the error bar Exp142 lacked.
 
-**FROZEN thresholds (filled at Gate-2):**
-- m_bell(n) = 99th-pct two-copy shots to PASS (noise-modeled sim, §G2) → budget = 5·m_bell(n). ⟨GATE-2⟩
-- R_THRESHOLD(n) = analytic single-copy / two-copy shot ratio at frozen instance params. ⟨GATE-2⟩
-- background threshold θ(n) (α = 0.01/(4ⁿ−1) Bonferroni). ⟨GATE-2⟩
-- N_sign per term. ⟨GATE-2⟩
-- τ = 0.03, α = 0.01, K = 5, grid {0.15,0.20,0.25}, m = 3, t = 2.0 (provisional): frozen now.
+**FROZEN thresholds (all values now frozen — no ⟨GATE-2⟩ placeholders remain):**
+- m_bell(n) = 1000 all rungs (99th-pct shots-to-PASS, Gate-2 B3 refined C6508) → budget 5,000.
+- R_THRESHOLD: §5 amendment above is the single normative statement (R(6)=1.5, R(8)=10).
+- θ(n): frozen as FORMULA in decode_meter (α = 0.01/(4ⁿ−1) Bonferroni normal tail).
+- N_sign = 100 per term.
+- τ = 0.03, α = 0.01, K = 5, grid {0.15,0.20,0.25}, m = 3, **t = 2.0 FROZEN (C6508 t-sweep)**.
 
 **WIN per rung (n ∈ {6,8} only)** = quantum PASS on ≥4/5 instances AND median ratio ≥
 R_THRESHOLD(n). **FROZEN (C6512): R(6) = 1.5, R(8) = 10** — the chair-accepted
@@ -224,6 +243,20 @@ used identically by sealer, reveal writer, and grader. The Exp142 dual-key bridg
 (`sha256` vs `hash_sha256`) is a documented DEFECT, not a design — it does not carry
 into Exp144. Grader contains NO bridge code.**
 
+**CONV-SEED COMMITMENT (F2b, chair ruling C4776 option (a)):** the conventional-arm
+sweep order is fixed by a PER-RUNG seed, hash-committed at seal alongside the 15
+instance commitments and revealed with the rest:
+preimage = sha256(salt || utf8("exp144|convseed|{n}|{seed_decimal}")), record schema
+`exp144-convseed-commit-v1` / reveal `exp144-convseed-reveal-v1` (3 records, one per
+rung). Candidate order = lexicographic full-weight strings shuffled by that seed
+(kit `conv_candidates(n, seed)`). A seed that is not committed is a post-hoc claim —
+the contamination channel wearing a fix's name (Ember C6513-era finding, adopted).
+
+**BLINDNESS NORM (verbatim, chair C4776):** "The submitter constructs the sign-block
+wave mechanically from the conveyed 2-of-2-agreed support and does NOT compare it
+against sealed plaintext; no grading-relevant signal flows submitter→network before
+reveal." A protocol is exactly the set of things we refuse to leave to character.
+
 Salts+plaintext off-git chmod-600 + AES-256 encrypted backup committed (Exp142 C4187
 SPOF fix), passphrase Creator-only. 15 commitments (3 rungs × 5 instances). Decoders
 read no plaintext until reveal. **REQUIRED pre-freeze path-matrix item: Ember exercises
@@ -278,8 +311,9 @@ must produce ALL of the following before freeze, kill-gating on each:
 2. **POWER (the blocker-detector):** full shots-to-PASS distributions for the quantum arm —
    ideal AND under the noise grid (q ∈ {measured-fingerprint, 2×, 4×} depolarizing +
    readout) — at frozen τ, α, grid, t. m_bell(n) = 99th pct. **KILL if PASS-probability
-   < 0.9 at budget ≤ 8k Bell shots/instance, or if the singleton-dominance margin under
-   noise falls below a frozen floor** ⟨set at Gate-2 from the noise sims⟩.
+   < 0.9 at budget ≤ 8k Bell shots/instance.** (No separate dominance floor: the PASS
+   metric requires correct top-m identification, which fails first when noise erodes
+   dominance — the PASS-prob kill SUBSUMES the floor. F5 resolution, C6514.)
 3. **t-sensitivity:** confirm t = 2.0 (or re-freeze t) — max over grid of coefficient-
    estimate variance, singleton-dominance margin, and sign-block SNR.
 4. **Conventional-arm analytic + adversarial:** re-derive the 3ⁿ-regime arithmetic for the
