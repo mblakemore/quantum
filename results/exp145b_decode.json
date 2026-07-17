@@ -1,0 +1,26 @@
+{
+ "job": "d9dbuehhtsac739cr17g",
+ "rungs": [
+  {
+   "n": 6,
+   "recovered": true,
+   "orthogonality": 0.957,
+   "depth": 14,
+   "cz": 6
+  },
+  {
+   "n": 8,
+   "recovered": true,
+   "orthogonality": 0.819,
+   "depth": 31,
+   "cz": 20
+  },
+  {
+   "n": 10,
+   "recovered": true,
+   "orthogonality": 0.844,
+   "depth": 40,
+   "cz": 24
+  }
+ ]
+}
