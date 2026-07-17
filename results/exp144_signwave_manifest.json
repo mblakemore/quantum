@@ -1,0 +1,564 @@
+{
+ "exp": "144-signwave-real",
+ "support_file": "exp144_w1_fwfilter_secondary_whisper_c4789.json",
+ "rungs": [
+  4,
+  6
+ ],
+ "instances_per_rung": 5,
+ "terms_per_instance": 3,
+ "n_sign": 100,
+ "layout_kind": "transpiler",
+ "cobatched": true,
+ "total_pubs": 30,
+ "job_id": "d9d8ouphtsac739cml0g",
+ "backend": "ibm_kingston",
+ "blindness": "C4776 \u2014 submitter built V from sealed P; manifest support-only; no outcomes read",
+ "labels": {
+  "contested_rule": "sep<2 OR |implied_c-0.15|<0.02",
+  "n_contested": 14
+ },
+ "index": [
+  {
+   "instance": "n4_k1",
+   "term_idx": 0,
+   "target_support": "ZXZY",
+   "probe": "IIYI",
+   "prep_letters": "ZXXY",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 2.71,
+   "implied_c": 0.246,
+   "contested_support": false,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k1",
+   "term_idx": 1,
+   "target_support": "YXYY",
+   "probe": "IIYZ",
+   "prep_letters": "YXIX",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 2.71,
+   "implied_c": 0.203,
+   "contested_support": false,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k1",
+   "term_idx": 2,
+   "target_support": "YYYZ",
+   "probe": "IIIY",
+   "prep_letters": "YYYX",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 2.71,
+   "implied_c": 0.147,
+   "contested_support": true,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k2",
+   "term_idx": 0,
+   "target_support": "ZXZZ",
+   "probe": "IIYI",
+   "prep_letters": "ZXXZ",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 1.52,
+   "implied_c": 0.254,
+   "contested_support": true,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k2",
+   "term_idx": 1,
+   "target_support": "YYYY",
+   "probe": "IIIZ",
+   "prep_letters": "YYYX",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 1.52,
+   "implied_c": 0.213,
+   "contested_support": true,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k2",
+   "term_idx": 2,
+   "target_support": "YXYZ",
+   "probe": "IIYY",
+   "prep_letters": "YXIX",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 1.52,
+   "implied_c": 0.146,
+   "contested_support": true,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k3",
+   "term_idx": 0,
+   "target_support": "XZYZ",
+   "probe": "IXXX",
+   "prep_letters": "XYZY",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 3.85,
+   "implied_c": 0.258,
+   "contested_support": false,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k3",
+   "term_idx": 1,
+   "target_support": "ZZXZ",
+   "probe": "IIXX",
+   "prep_letters": "ZZIY",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 3.85,
+   "implied_c": 0.2,
+   "contested_support": false,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k3",
+   "term_idx": 2,
+   "target_support": "ZXYZ",
+   "probe": "IXIX",
+   "prep_letters": "ZIYY",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 3.85,
+   "implied_c": 0.143,
+   "contested_support": true,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k4",
+   "term_idx": 0,
+   "target_support": "YXXY",
+   "probe": "IIXZ",
+   "prep_letters": "YXIX",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 5.3,
+   "implied_c": 0.248,
+   "contested_support": false,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k4",
+   "term_idx": 1,
+   "target_support": "YZXZ",
+   "probe": "IIIY",
+   "prep_letters": "YZXX",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 5.3,
+   "implied_c": 0.202,
+   "contested_support": false,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k4",
+   "term_idx": 2,
+   "target_support": "XXZY",
+   "probe": "IIXI",
+   "prep_letters": "XXYY",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 5.3,
+   "implied_c": 0.157,
+   "contested_support": true,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k5",
+   "term_idx": 0,
+   "target_support": "YZXZ",
+   "probe": "IIXY",
+   "prep_letters": "YZIX",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 2.25,
+   "implied_c": 0.252,
+   "contested_support": false,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k5",
+   "term_idx": 1,
+   "target_support": "XZXY",
+   "probe": "IIIZ",
+   "prep_letters": "XZXX",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 2.25,
+   "implied_c": 0.196,
+   "contested_support": false,
+   "att_characterized": true
+  },
+  {
+   "instance": "n4_k5",
+   "term_idx": 2,
+   "target_support": "YYYZ",
+   "probe": "IIXI",
+   "prep_letters": "YYZZ",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 2.25,
+   "implied_c": 0.132,
+   "contested_support": true,
+   "att_characterized": true
+  },
+  {
+   "instance": "n6_k1",
+   "term_idx": 0,
+   "target_support": "YYZZYZ",
+   "probe": "IIIYIZ",
+   "prep_letters": "YYZXYI",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 2.49,
+   "implied_c": 0.242,
+   "contested_support": false,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k1",
+   "term_idx": 1,
+   "target_support": "YZZYYZ",
+   "probe": "IIIYIX",
+   "prep_letters": "YZZIYY",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 2.49,
+   "implied_c": 0.191,
+   "contested_support": false,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k1",
+   "term_idx": 2,
+   "target_support": "ZXZXYY",
+   "probe": "IIIIIZ",
+   "prep_letters": "ZXZXYX",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 2.49,
+   "implied_c": 0.137,
+   "contested_support": true,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k2",
+   "term_idx": 0,
+   "target_support": "XZXYXY",
+   "probe": "IIIIXX",
+   "prep_letters": "XZXYIZ",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 3.44,
+   "implied_c": 0.257,
+   "contested_support": false,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k2",
+   "term_idx": 1,
+   "target_support": "XYXXYZ",
+   "probe": "IIIIIY",
+   "prep_letters": "XYXXYX",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 3.44,
+   "implied_c": 0.213,
+   "contested_support": false,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k2",
+   "term_idx": 2,
+   "target_support": "XYZZZY",
+   "probe": "IIIIXY",
+   "prep_letters": "XYZZYI",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 3.44,
+   "implied_c": 0.146,
+   "contested_support": true,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k3",
+   "term_idx": 0,
+   "target_support": "XXYZYZ",
+   "probe": "IIIIXZ",
+   "prep_letters": "XXYZZI",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 4.76,
+   "implied_c": 0.251,
+   "contested_support": false,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k3",
+   "term_idx": 1,
+   "target_support": "XYZYYY",
+   "probe": "IIIIXY",
+   "prep_letters": "XYZYZI",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 4.76,
+   "implied_c": 0.206,
+   "contested_support": false,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k3",
+   "term_idx": 2,
+   "target_support": "YZXXZX",
+   "probe": "IIIIXX",
+   "prep_letters": "YZXXYI",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 4.76,
+   "implied_c": 0.157,
+   "contested_support": true,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k4",
+   "term_idx": 0,
+   "target_support": "XXXZZX",
+   "probe": "IIIIXI",
+   "prep_letters": "XXXZYX",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 7.56,
+   "implied_c": 0.25,
+   "contested_support": false,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k4",
+   "term_idx": 1,
+   "target_support": "XXZYXZ",
+   "probe": "IIIIIX",
+   "prep_letters": "XXZYXY",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 7.56,
+   "implied_c": 0.201,
+   "contested_support": false,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k4",
+   "term_idx": 2,
+   "target_support": "XXZZXX",
+   "probe": "IIIIXZ",
+   "prep_letters": "XXZZIY",
+   "prep_signs": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 7.56,
+   "implied_c": 0.151,
+   "contested_support": true,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k5",
+   "term_idx": 0,
+   "target_support": "XYYXYX",
+   "probe": "IIIXIY",
+   "prep_letters": "XYYIYZ",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 1.29,
+   "implied_c": 0.25,
+   "contested_support": true,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k5",
+   "term_idx": 1,
+   "target_support": "YXXZZZ",
+   "probe": "IIIIIX",
+   "prep_letters": "YXXZZY",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 1.29,
+   "implied_c": 0.196,
+   "contested_support": true,
+   "att_characterized": false
+  },
+  {
+   "instance": "n6_k5",
+   "term_idx": 2,
+   "target_support": "YYYZYX",
+   "probe": "IIIXIX",
+   "prep_letters": "YYYYYI",
+   "prep_signs": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "sep_3rd_vs_4th": 1.29,
+   "implied_c": 0.139,
+   "contested_support": true,
+   "att_characterized": false
+  }
+ ],
+ "_note": "REAL sign wave (chair C4813/C4814). Decoders recover signs BLIND: per term, <Q> = mean parity over non-I probe sites, recovered sign = -sign(<Q>); 2-of-2 on NUMBERS; reveal grades vs P. n=6 att UNCHARACTERIZED (dummy was n=4) \u2014 read n=6 recovery as a measurement, not a passed gate."
+}
