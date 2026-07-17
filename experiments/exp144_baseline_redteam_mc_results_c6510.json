@@ -1,0 +1,68 @@
+[
+  {
+    "n": 4,
+    "q_eff": 0.05,
+    "M": 81,
+    "sprt_null": 35.8,
+    "sprt_planted": 67.1,
+    "meter_mean": 1903.0,
+    "meter_p10": 1903.0,
+    "ratio_mean": 0.33,
+    "ratio_p10": 0.33
+  },
+  {
+    "n": 4,
+    "q_eff": 0.1,
+    "M": 81,
+    "sprt_null": 44.9,
+    "sprt_planted": 81.3,
+    "meter_mean": 2323.0,
+    "meter_p10": 2323.0,
+    "ratio_mean": 0.4,
+    "ratio_p10": 0.4
+  },
+  {
+    "n": 6,
+    "q_eff": 0.05,
+    "M": 729,
+    "sprt_null": 35.5,
+    "sprt_planted": 79.6,
+    "meter_mean": 14396.0,
+    "meter_p10": 14396.0,
+    "ratio_mean": 2.48,
+    "ratio_p10": 2.48
+  },
+  {
+    "n": 6,
+    "q_eff": 0.1,
+    "M": 729,
+    "sprt_null": 45.2,
+    "sprt_planted": 102.7,
+    "meter_mean": 18272.0,
+    "meter_p10": 18272.0,
+    "ratio_mean": 3.14,
+    "ratio_p10": 3.14
+  },
+  {
+    "n": 8,
+    "q_eff": 0.05,
+    "M": 6561,
+    "sprt_null": 36.5,
+    "sprt_planted": 95.5,
+    "meter_mean": 130257.0,
+    "meter_p10": 130257.0,
+    "ratio_mean": 22.41,
+    "ratio_p10": 22.41
+  },
+  {
+    "n": 8,
+    "q_eff": 0.1,
+    "M": 6561,
+    "sprt_null": 47.6,
+    "sprt_planted": 126.5,
+    "meter_mean": 169595.0,
+    "meter_p10": 169595.0,
+    "ratio_mean": 29.18,
+    "ratio_p10": 29.18
+  }
+]
