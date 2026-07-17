@@ -91,6 +91,12 @@ def main():
     ap.add_argument("--n", type=int, default=None, help="single rung (default: all)")
     ap.add_argument("--wave", type=int, default=1)
     ap.add_argument("--prereg-sha", default=None)
+    ap.add_argument("--arm", choices=["quantum", "conv", "both"], default="both",
+                    help="A2-3 re-fly scope is conv-only; do not re-spend on the quantum arm")
+    ap.add_argument("--attempt", default=None,
+                    help="tag for a RE-flight (e.g. a2). Without it a re-fly would overwrite "
+                         "the prior manifest and erase the record of the flight it replaces — "
+                         "the C4189 collision, and Exp142 discipline: failures stay visible.")
     a = ap.parse_args()
 
     if not (a.dry_run or a.fly):
@@ -129,6 +135,8 @@ def main():
             e = sec["instances"][str(n)][str(k)]
             terms, coeffs = e["terms"], e["coeffs"]
             for label, pubs, man, meta in build_all(n, k, terms, coeffs, seed, wave=a.wave):
+                if a.arm != "both" and label != a.arm:
+                    continue
                 assert_p_independent(label, man, terms)
                 total_pubs += len(pubs)
                 if a.dry_run:
@@ -147,8 +155,13 @@ def main():
                 job = SamplerV2(mode=backend).run(tpubs)
                 man["job_id"] = job.job_id()
                 man["backend"] = a.backend
+                tag = f"_{a.attempt}" if a.attempt else ""
                 outp = os.path.join(RESULTS,
-                                    f"exp144_{label}_n{n}_k{k}_w{a.wave}_manifest.json")
+                                    f"exp144_{label}_n{n}_k{k}_w{a.wave}{tag}_manifest.json")
+                if os.path.exists(outp):
+                    print(f"REFUSING: {os.path.basename(outp)} exists — a re-fly must not "
+                          f"overwrite the record of the flight it replaces.")
+                    return 3
                 with open(outp, "w") as f:
                     json.dump(man, f, indent=1)
                 print(f"  n={n} k={k} {label}: job {job.job_id()} -> {outp}")
