@@ -1,0 +1,62 @@
+{
+ "n4_k1": {
+  "rows": 81,
+  "rates_mean_hi": 0.7749999999999999,
+  "rates_mean_lo": 0.4785714285714287,
+  "survivors_gt_.68": 4
+ },
+ "n4_k2": {
+  "rows": 81,
+  "rates_mean_hi": 0.7333333333333334,
+  "rates_mean_lo": 0.5046413502109705,
+  "survivors_gt_.68": 2
+ },
+ "n4_k3": {
+  "rows": 81,
+  "rates_mean_hi": 0.7703703703703704,
+  "rates_mean_lo": 0.4395833333333334,
+  "survivors_gt_.68": 9
+ },
+ "n4_k4": {
+  "rows": 81,
+  "rates_mean_hi": 0.71,
+  "rates_mean_lo": 0.4877192982456139,
+  "survivors_gt_.68": 5
+ },
+ "n4_k5": {
+  "rows": 81,
+  "rates_mean_hi": 0.7291666666666667,
+  "rates_mean_lo": 0.48463203463203486,
+  "survivors_gt_.68": 4
+ },
+ "n6_k1": {
+  "rows": 729,
+  "rates_mean_hi": 0.7166666666666667,
+  "rates_mean_lo": 0.501766620176662,
+  "survivors_gt_.68": 12
+ },
+ "n6_k2": {
+  "rows": 729,
+  "rates_mean_hi": 0.7300000000000001,
+  "rates_mean_lo": 0.49901012891344376,
+  "survivors_gt_.68": 5
+ },
+ "n6_k3": {
+  "rows": 729,
+  "rates_mean_hi": 0.743939393939394,
+  "rates_mean_lo": 0.491480965645311,
+  "survivors_gt_.68": 11
+ },
+ "n6_k4": {
+  "rows": 729,
+  "rates_mean_hi": 0.7183333333333334,
+  "rates_mean_lo": 0.4931617987946222,
+  "survivors_gt_.68": 10
+ },
+ "n6_k5": {
+  "rows": 729,
+  "rates_mean_hi": 0.725,
+  "rates_mean_lo": 0.5077455048409405,
+  "survivors_gt_.68": 6
+ }
+}
