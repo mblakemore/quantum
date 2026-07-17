@@ -40,10 +40,15 @@ analytic-law, not stabilizer.
   equals another planted term or identity). Sampled uniformly from full-weight strings
   subject to these constraints, at seal time.
 - Coefficients: cⱼ from the frozen grid {0.15, 0.20, 0.25} (one each, m=3), signs uniform ±.
-- Evolution time **t = 2.0 (frozen, provisional — Gate-2 confirms)**: cⱼt ∈ {0.30, 0.40, 0.50}
-  rad → sin²(cⱼt) ≈ {0.087, 0.152, 0.230}, all < 0.5. **Singleton-dominance condition
-  (frozen constraint): sin²(cⱼt) < 0.5 ∀ grid values ⟹ tan²(cⱼt) < 1 ⟹ every planted-term
-  peak strictly exceeds every |S|≥2 subset-product peak.** Decoder needs no structure search.
+- Evolution time **t = 2.0 (FROZEN — Gate-2 t-sweep argmax, C6508)**: cⱼt ∈ {0.30, 0.40, 0.50}
+  rad → sin²(cⱼt) ≈ {0.087, 0.152, 0.230}. **Singleton-dominance condition (frozen
+  constraint, EXACT form — Gate-2 correction C6508):**
+  min over singletons of p({j}) > max over |S|≥2 subsets of p(S), evaluated on the frozen
+  grid×t via the subset law; equivalently tan²_min > max product of ≥2 tan² factors.
+  At the frozen grid and t=2.0 the margin is **1.79×** (exact). *v2's original shorthand
+  "sin²<0.5 ⟹ dominance" is NOT a valid implication — it only covers subsets CONTAINING
+  the singleton; t=2.5 satisfies sin²<0.5 yet has margin 1.00× (Gate-2 B1). The exact
+  inequality is what is frozen.* Decoder needs no structure search.
 - **K = 5 independent instances per rung** (Ember C4189 caveat baked in at design time).
   15 sealed instances total.
 
@@ -86,8 +91,9 @@ products. **Contrast is O(1)** — this is what v1's mixed-state design lacked (
 
 **Decoder (Elder+Whisper, independent):**
 - Histogram Bell labels over N_bell shots. **Support = the m largest non-identity peaks**
-  (guaranteed by the frozen singleton-dominance condition), each also required to clear the
-  frozen background threshold θ(n) ⟨GATE-2⟩ (FW error α = 0.01/(4ⁿ−1), Bonferroni).
+  (guaranteed by the frozen EXACT singleton-dominance inequality, §1 — margin 1.79× at the
+  frozen grid×t), each also required to clear the frozen background threshold θ(n) ⟨GATE-2⟩
+  (FW error α = 0.01/(4ⁿ−1), Bonferroni).
 - **Magnitudes, self-normalized:** |ĉⱼ| = arctan(√(p̂ⱼ/p̂_∅))/t (ratio to the identity peak
   cancels common attenuation to first order; residual bias characterized at Gate-2).
 - **Consistency checks (free, report-only):** multiplicativity p̂(P_{jk})·p̂_∅ ≈ p̂ⱼ·p̂ₖ for
