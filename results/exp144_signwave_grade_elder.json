@@ -1,0 +1,282 @@
+{
+ "grader": "elder-independent",
+ "seals_verified": "18/18",
+ "support_exact": "10/10",
+ "signs_correct": 30,
+ "magnitudes_within_tau": 30,
+ "tau": 0.03,
+ "total": "70/70",
+ "note": "quantum arm (A2 secondary + calibrated sign wave) recovered every sealed n4+n6 Hamiltonian: support+signs+magnitudes. Matches Whisper C4820 cross-check. FORMAL frozen-grader dual verdict pending conv-encoding align (conv detector-falsified, not validly metered).",
+ "rows": [
+  {
+   "inst": "n4_k1",
+   "term": "ZXZY",
+   "true_coeff": -0.25,
+   "my_mag": 0.246,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k1",
+   "term": "YXYY",
+   "true_coeff": 0.2,
+   "my_mag": 0.203,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k1",
+   "term": "YYYZ",
+   "true_coeff": 0.15,
+   "my_mag": 0.147,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k2",
+   "term": "ZXZZ",
+   "true_coeff": 0.25,
+   "my_mag": 0.254,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k2",
+   "term": "YYYY",
+   "true_coeff": -0.2,
+   "my_mag": 0.213,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k2",
+   "term": "YXYZ",
+   "true_coeff": -0.15,
+   "my_mag": 0.146,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k3",
+   "term": "XZYZ",
+   "true_coeff": -0.25,
+   "my_mag": 0.258,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k3",
+   "term": "ZZXZ",
+   "true_coeff": -0.2,
+   "my_mag": 0.2,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k3",
+   "term": "ZXYZ",
+   "true_coeff": 0.15,
+   "my_mag": 0.143,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k4",
+   "term": "YXXY",
+   "true_coeff": -0.25,
+   "my_mag": 0.248,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k4",
+   "term": "YZXZ",
+   "true_coeff": 0.2,
+   "my_mag": 0.202,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k4",
+   "term": "XXZY",
+   "true_coeff": 0.15,
+   "my_mag": 0.157,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k5",
+   "term": "YZXZ",
+   "true_coeff": 0.25,
+   "my_mag": 0.252,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k5",
+   "term": "XZXY",
+   "true_coeff": -0.2,
+   "my_mag": 0.196,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n4_k5",
+   "term": "YYYZ",
+   "true_coeff": 0.15,
+   "my_mag": 0.132,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k1",
+   "term": "YYZZYZ",
+   "true_coeff": -0.25,
+   "my_mag": 0.242,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k1",
+   "term": "YZZYYZ",
+   "true_coeff": -0.2,
+   "my_mag": 0.191,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k1",
+   "term": "ZXZXYY",
+   "true_coeff": 0.15,
+   "my_mag": 0.137,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k2",
+   "term": "XZXYXY",
+   "true_coeff": -0.25,
+   "my_mag": 0.257,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k2",
+   "term": "XYXXYZ",
+   "true_coeff": 0.2,
+   "my_mag": 0.213,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k2",
+   "term": "XYZZZY",
+   "true_coeff": 0.15,
+   "my_mag": 0.146,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k3",
+   "term": "XXYZYZ",
+   "true_coeff": -0.25,
+   "my_mag": 0.251,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k3",
+   "term": "XYZYYY",
+   "true_coeff": 0.2,
+   "my_mag": 0.206,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k3",
+   "term": "YZXXZX",
+   "true_coeff": 0.15,
+   "my_mag": 0.157,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k4",
+   "term": "XXXZZX",
+   "true_coeff": 0.25,
+   "my_mag": 0.25,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k4",
+   "term": "XXZYXZ",
+   "true_coeff": 0.2,
+   "my_mag": 0.201,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k4",
+   "term": "XXZZXX",
+   "true_coeff": 0.15,
+   "my_mag": 0.151,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k5",
+   "term": "XYYXYX",
+   "true_coeff": -0.25,
+   "my_mag": 0.25,
+   "my_sign": "-",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k5",
+   "term": "YXXZZZ",
+   "true_coeff": 0.2,
+   "my_mag": 0.196,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  },
+  {
+   "inst": "n6_k5",
+   "term": "YYYZYX",
+   "true_coeff": 0.15,
+   "my_mag": 0.139,
+   "my_sign": "+",
+   "sign_ok": true,
+   "mag_ok": true
+  }
+ ]
+}
