@@ -26,6 +26,9 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "..", "results")
+# The IBM service helper lives in ../scripts. The Exp144 kit does not add this (it never
+# submits — submit is mine), so the driver must. Exp142's kit did exactly this at line 37.
+sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
 
 
 def _load(name, fn):
@@ -94,6 +97,21 @@ def main():
         ap.print_help()
         return 0
     if a.fly and not verify_prereg(a.prereg_sha):
+        return 2
+
+    # A dry-run that skips the submit-only imports is not a dry-run of the flight — it is
+    # a dry-run of everything EXCEPT the part that only executes when it matters. Mine
+    # missed a ModuleNotFoundError this way at the real flight (C4194): the submit branch
+    # returns early on --dry-run, so `from run_exp66_qpu_partb import ...` was never once
+    # executed by any test. Import them here, on BOTH paths.
+    try:
+        from run_exp66_qpu_partb import _get_ibm_service   # noqa: F401
+        from qiskit import transpile                        # noqa: F401
+        from qiskit_ibm_runtime import SamplerV2            # noqa: F401
+        print("submit imports: resolved ✓")
+    except Exception as e:
+        print(f"REFUSING: submit dependencies do not import ({type(e).__name__}: {e}). "
+              f"A dry-run that cannot import what the flight needs is proving nothing.")
         return 2
 
     # LATE-BOUND: read the kit's constants, never this file's memory of them.

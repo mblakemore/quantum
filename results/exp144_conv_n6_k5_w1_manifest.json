@@ -1,0 +1,23 @@
+{
+ "n": 6,
+ "k": 5,
+ "arm": "conventional",
+ "wave": 1,
+ "pubs": [
+  {
+   "kind": "sentinel_start",
+   "shots": 400
+  },
+  {
+   "kind": "conv_wave1",
+   "rows": 729,
+   "shots": 12
+  },
+  {
+   "kind": "sentinel_end",
+   "shots": 400
+  }
+ ],
+ "job_id": "d9cpc9aneu4c739m99n0",
+ "backend": "ibm_kingston"
+}

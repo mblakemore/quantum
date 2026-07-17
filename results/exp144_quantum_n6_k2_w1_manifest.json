@@ -1,0 +1,20 @@
+{
+ "n": 6,
+ "arm": "quantum",
+ "pubs": [
+  {
+   "kind": "sentinel_start",
+   "shots": 400
+  },
+  {
+   "kind": "bell",
+   "shots": 5000
+  },
+  {
+   "kind": "sentinel_end",
+   "shots": 400
+  }
+ ],
+ "job_id": "d9cpc1hhtsac739c2i5g",
+ "backend": "ibm_kingston"
+}
