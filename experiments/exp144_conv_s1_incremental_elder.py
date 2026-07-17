@@ -39,10 +39,10 @@ for k in (1, 2, 3, 4, 5):
     m1 = json.load(open(f"../results/exp144_conv_n{N}_k{k}_w1_a2_manifest.json"))
     acc = rows_even_parity(m1["job_id"])           # [sum, shots] per row, 60 shots
     nrows = len(acc)
-    rates = np.array([(1 + acc[i][0] / acc[i][1]) / 2 for i in range(nrows)])
-    hi = rates[rates > 0.65]
-    p1 = float(np.median(hi)) if len(hi) else 0.75   # att-cluster center (frozen for k)
-    p0 = 0.5                                          # anticommuting: <P(t)>=0 exactly
+    # R1 (chair C4800): FREEZE p0/p1 at the COMMITTED wave-1 per-instance values.
+    # No re-estimation on later waves — constants must not drift with the data they gate.
+    _w1 = json.load(open("../results/exp144_conv_s1_w1_verdicts_elder_v2.json"))["instances"][f"n{N}_k{k}"]
+    p1 = float(_w1["p1_measured"]); p0 = float(_w1["p0_measured"])
     lpos, lneg = math.log(p1 / p0), math.log((1 - p1) / (1 - p0))
     def verdict(sum_e, shots):
         r = (1 + sum_e / shots) / 2

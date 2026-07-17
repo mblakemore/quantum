@@ -4,18 +4,18 @@
  "instances": {
   "n4_k1": {
    "alive_rows": [
-    3,
     79
    ],
    "conserved_rows": [
+    3,
     24,
     43,
     48
    ],
-   "n_alive": 2,
-   "n_conserved": 3,
+   "n_alive": 1,
+   "n_conserved": 4,
    "n_rejected": 76,
-   "p0": 0.5,
+   "p0": 0.483,
    "p1_measured": 0.783,
    "wave1_verdict_disagreements": []
   },
@@ -25,8 +25,7 @@
     12,
     13,
     14,
-    21,
-    65
+    21
    ],
    "conserved_rows": [
     7,
@@ -34,17 +33,12 @@
     33,
     46
    ],
-   "n_alive": 6,
+   "n_alive": 5,
    "n_conserved": 4,
-   "n_rejected": 71,
-   "p0": 0.5,
+   "n_rejected": 72,
+   "p0": 0.517,
    "p1_measured": 0.717,
-   "wave1_verdict_disagreements": [
-    [
-     3,
-     "CONSERVED"
-    ]
-   ]
+   "wave1_verdict_disagreements": []
   },
   "n4_k3": {
    "alive_rows": [
@@ -64,60 +58,39 @@
    "n_alive": 1,
    "n_conserved": 9,
    "n_rejected": 71,
-   "p0": 0.5,
+   "p0": 0.467,
    "p1_measured": 0.783,
-   "wave1_verdict_disagreements": [
-    [
-     2,
-     "REJECTED"
-    ],
-    [
-     28,
-     "REJECTED"
-    ]
-   ]
+   "wave1_verdict_disagreements": []
   },
   "n4_k4": {
    "alive_rows": [
-    4,
     8,
+    11,
     17,
     26,
     32,
     36,
-    37,
     43,
     55,
     61,
     62,
     67,
-    70,
     78
    ],
    "conserved_rows": [
     7,
-    11,
     31,
     40,
     52,
     65,
     74
    ],
-   "n_alive": 14,
-   "n_conserved": 7,
-   "n_rejected": 60,
-   "p0": 0.5,
+   "n_alive": 12,
+   "n_conserved": 6,
+   "n_rejected": 63,
+   "p0": 0.508,
    "p1_measured": 0.7,
-   "wave1_verdict_disagreements": [
-    [
-     26,
-     "CONSERVED"
-    ],
-    [
-     78,
-     "CONSERVED"
-    ]
-   ]
+   "wave1_verdict_disagreements": []
   },
   "n4_k5": {
    "alive_rows": [
