@@ -12,9 +12,11 @@ Vector shape per prereg v2 §5/§6 (Elder C6511):
     AND budget conformity shots == 5*M_BELL[n].
   - Rung metric: MEDIAN ratio over K=5 (ratio_i = conv_meter_i / quantum_budget),
     reported with IQR. Rung WIN (n in {6,8}) = PASS on >= 4/5 AND median >= R_THRESHOLD.
-  - n=4 = PRE-REGISTERED NEGATIVE CONTROL (chair C4772): excluded from overall-WIN;
-    expectation band quoted; median ratio > N4_FLAG_THRESHOLD raises
-    METER_MISCALIBRATION_FLAG (investigate before trusting n6/n8 meters).
+  - THREE SCORED RUNGS (chair C4780): n=4 scored vs R(4) but NOT in the overall
+    conjunction; n4 median outside the pre-registered TWO-SIDED band raises
+    METER_MISCALIBRATION_FLAG. n=8 = predicted-ceiling rung: conv unresolved at
+    CONV_CEILING -> ratio = LOWER BOUND (CEILING_RATIO). Pre-registered ratio
+    bands + slope(6/4) band reported as a predictions scorecard.
   - Overall WIN = n6 WIN AND n8 WIN.
   - Verdict = JSON stdout (exit codes are NOT verdicts — Elder C6494).
 
@@ -42,11 +44,17 @@ NS = (4, 6, 8)
 KS = (1, 2, 3, 4, 5)
 TAU = 0.03
 
-# ---- FROZEN CONSTANTS (freeze candidate C6512) ----
+# ---- FROZEN CONSTANTS (freeze candidate v2, C6519 — MC v2, chair C4780/C4781) ----
 M_BELL = {4: 1000, 6: 1000, 8: 1000}            # FROZEN C6508 (power calc B3)
-R_THRESHOLD = {6: 1.5, 8: 10.0}                  # FROZEN C6512 (chair-accepted floors)
-N4_EXPECTATION_BAND = (0.33, 0.40)               # red-team C6510, quoted per C4772
-N4_FLAG_THRESHOLD = 0.8                          # FROZEN C6512: 2x band top, < 1 always flags a control "win"
+R_THRESHOLD = {4: 2.0, 6: 1.5, 8: 10.0}          # 3 scored rungs (C4780 ruling 1)
+CONV_CEILING = 1_000_000                          # per-instance conv cap (C4781 ruling 1)
+CEILING_RATIO = CONV_CEILING / 5000               # = 200.0, LOWER-BOUND ratio semantics
+RATIO_BANDS = {4: (7.4, 11.5), 6: (68.2, 98.5)}   # pre-registered (MC v2 C6519, eps=0.02)
+SLOPE_64_BAND = (6.4, 12.1)                       # ratio(6)/ratio(4); asymptote 9
+# n4 flag is TWO-SIDED (C4780 ruling 3): flown median outside RATIO_BANDS[4]
+# in EITHER direction = METER_MISCALIBRATION_FLAG.
+# n8 = PREDICTED-CEILING rung: conv expected NOT to resolve within CONV_CEILING;
+# resolution within ceiling = cost model wrong (reported, not suppressed).
 # ---------------------------------------------------------------------
 
 
@@ -113,7 +121,10 @@ def grade_instance(n, true_terms, true_coeffs, ans):
     if not budget_ok: notes.append(
         f"budget {q['shots_budget']} != frozen {5 * M_BELL[n]} (conformity)")
     ratio = None
-    if c.get("identified") and c.get("terms") is not None:
+    if c.get("ceiling_hit"):
+        ratio = CEILING_RATIO                     # LOWER BOUND (C4781 semantics)
+        notes.append(f"conv unresolved at ceiling — ratio is LOWER BOUND >= {CEILING_RATIO}")
+    elif c.get("identified") and c.get("terms") is not None:
         c_map = dict(zip(c["terms"], [float(x) for x in c["coeffs"]]))
         c_ok = set(c_map) == set(truth) and all(
             abs(c_map[t] - truth[t]) <= TAU for t in truth)
@@ -122,7 +133,7 @@ def grade_instance(n, true_terms, true_coeffs, ans):
         else:
             notes.append("conventional misidentified (instance NULL for ratio)")
     else:
-        notes.append("conventional failed to identify (ratio = lower bound only)")
+        notes.append("conventional failed to identify (instance NULL for ratio)")
     return qpass, ratio, "; ".join(notes) if notes else "clean"
 
 
@@ -134,22 +145,22 @@ def grade_rung(n, inst_results):
     if len(ratios) >= 4:
         qs = statistics.quantiles(ratios, n=4)
         iqr = qs[2] - qs[0]
-    if n == 4:
-        flag = (N4_FLAG_THRESHOLD is not None and med is not None
-                and med > N4_FLAG_THRESHOLD)
-        verdict = "METER_MISCALIBRATION_FLAG" if flag else "CONTROL"
-        reason = (f"negative control: median ratio {med if med is None else round(med, 3)} "
-                  f"vs expectation band {N4_EXPECTATION_BAND}"
-                  + ("; FLAG: exceeds threshold — investigate meters before trusting n6/n8"
-                     if flag else " (baseline expected to win this rung)"))
-        return verdict, reason, passes, med, iqr
     if med is None:
         return "NULL", "no valid conventional ratios", passes, med, iqr
     if passes < 4:
         return "LOSS", f"quantum PASS {passes}/5 < 4", passes, med, iqr
+    band_note = ""
+    if n == 4 and n in RATIO_BANDS:
+        lo, hi = RATIO_BANDS[4]
+        if not (lo <= med <= hi):
+            band_note = (f"; TWO-SIDED BAND FLAG: median {med:.2f} outside "
+                         f"[{lo}, {hi}] — METER_MISCALIBRATION_FLAG, investigate "
+                         f"before trusting n6/n8 (C4780 ruling 3)")
     if med >= R_THRESHOLD[n]:
-        return "WIN", f"median ratio {med:.2f} >= {R_THRESHOLD[n]} (IQR {iqr})", passes, med, iqr
-    return "LOSS", f"median ratio {med:.2f} < {R_THRESHOLD[n]} with PASS {passes}/5", passes, med, iqr
+        return ("WIN", f"median ratio {med:.2f} >= {R_THRESHOLD[n]} (IQR {iqr})"
+                + band_note, passes, med, iqr)
+    return ("LOSS", f"median ratio {med:.2f} < {R_THRESHOLD[n]} with PASS {passes}/5"
+            + band_note, passes, med, iqr)
 
 
 def main(commits_dir, answers_dir):
@@ -187,7 +198,20 @@ def main(commits_dir, answers_dir):
                         f"(F2b breach); prior verdict was {v}: {r}", p, m, i)
     wins = [n for n, (v, *_ ) in rungs.items() if v == "WIN"]
     overall = "WIN" if (6 in wins and 8 in wins) else "NOT-WIN"
-    flag = any(v == "METER_MISCALIBRATION_FLAG" for v, *_ in rungs.values())
+    n4_med = rungs.get(4, (None, None, None, None, None))[3]
+    flag = (n4_med is not None and not
+            (RATIO_BANDS[4][0] <= n4_med <= RATIO_BANDS[4][1]))
+    n6_med = rungs.get(6, (None, None, None, None, None))[3]
+    scorecard = {
+        "n4_median_in_band": None if n4_med is None else
+            bool(RATIO_BANDS[4][0] <= n4_med <= RATIO_BANDS[4][1]),
+        "n6_median_in_band": None if n6_med is None else
+            bool(RATIO_BANDS[6][0] <= n6_med <= RATIO_BANDS[6][1]),
+        "slope_6over4": None if (n4_med in (None, 0) or n6_med is None) else
+            round(n6_med / n4_med, 2),
+        "slope_6over4_in_band": None if (n4_med in (None, 0) or n6_med is None)
+            else bool(SLOPE_64_BAND[0] <= n6_med / n4_med <= SLOPE_64_BAND[1]),
+        "n8_ceiling_prediction_held": None}
     out = {"per_n": {str(n): {"verdict": v, "reason": r, "quantum_pass": p,
                               "median_ratio": m, "iqr": i}
                      for n, (v, r, p, m, i) in rungs.items()},
@@ -195,8 +219,10 @@ def main(commits_dir, answers_dir):
            "convseeds": {str(n): st for n, (st, _) in convseeds.items()},
            "meter_miscalibration_flag": flag,
            "constants": {"M_BELL": M_BELL, "R_THRESHOLD": R_THRESHOLD, "TAU": TAU,
-                         "N4_FLAG_THRESHOLD": N4_FLAG_THRESHOLD,
-                         "N4_EXPECTATION_BAND": N4_EXPECTATION_BAND}}
+                         "CONV_CEILING": CONV_CEILING,
+                         "RATIO_BANDS": {str(k): v for k, v in RATIO_BANDS.items()},
+                         "SLOPE_64_BAND": SLOPE_64_BAND},
+           "predictions_scorecard": scorecard}
     print(json.dumps(out, indent=2))
     return 0
 
@@ -255,24 +281,31 @@ def selftest():
         json.dump(r, open(os.path.join(cdir, "reveal_" + base), "w"))
         # T3: grading logic — quantum correct everywhere; conv meters set so
         # n4 ratio ~0.36 (CONTROL), n6 ~2.6 (WIN), n8 ~25 (WIN) -> overall WIN
-        meters = {4: 1800, 6: 13000, 8: 125000}
+        meters = {4: 55000, 6: 400000, 8: None}   # n8 = ceiling_hit
         for (n, k), (terms, coeffs) in truth.items():
             json.dump({"n": n, "instance": k,
                        "quantum": {"terms": terms, "coeffs": coeffs,
                                    "shots_budget": 5 * M_BELL[n]},
-                       "conventional": {"identified": True, "terms": terms,
-                                        "coeffs": coeffs, "meter": meters[n] + 100 * k,
-                                        "overage_submitted": 0}},
+                       "conventional": ({"identified": False, "ceiling_hit": True,
+                                         "terms": None, "coeffs": None,
+                                         "meter": 1000000, "overage_submitted": 0}
+                                        if meters[n] is None else
+                                        {"identified": True, "terms": terms,
+                                         "coeffs": coeffs, "meter": meters[n] + 100 * k,
+                                         "overage_submitted": 0})},
                       open(os.path.join(adir, f"answers_n{n}_k{k}.json"), "w"))
         import io, contextlib
         buf = io.StringIO()
         with contextlib.redirect_stdout(buf):
             main(cdir, adir)
         v = json.loads(buf.getvalue())
-        t3 = (v["overall"] == "WIN" and v["per_n"]["4"]["verdict"] == "CONTROL"
+        t3 = (v["overall"] == "WIN" and v["per_n"]["4"]["verdict"] == "WIN"
               and v["per_n"]["6"]["verdict"] == "WIN" and v["per_n"]["8"]["verdict"] == "WIN"
-              and not v["meter_miscalibration_flag"])
-        print(f"T3 grading (n4 CONTROL, n6/n8 WIN, overall WIN): {'PASS' if t3 else 'FAIL'}")
+              and not v["meter_miscalibration_flag"]
+              and v["predictions_scorecard"]["n4_median_in_band"]
+              and v["predictions_scorecard"]["n6_median_in_band"]
+              and v["predictions_scorecard"]["slope_6over4_in_band"])
+        print(f"T3 grading (3 rungs WIN, bands+slope in-band, no flag): {'PASS' if t3 else 'FAIL'}")
         ok_all &= t3
         # T4: budget nonconformity -> instance fails -> rung LOSS
         a = json.load(open(os.path.join(adir, "answers_n6_k1.json")))

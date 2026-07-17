@@ -1,0 +1,66 @@
+{
+  "per_rung": {
+    "4": {
+      "P_instance_correct_mean": 0.872,
+      "meter_mean_unceiled": 47583,
+      "frac_ceiling": 0.0,
+      "F": 12,
+      "W2": 500,
+      "cut2": 0.1431
+    },
+    "6": {
+      "P_instance_correct_mean": 0.969,
+      "meter_mean_unceiled": 410778,
+      "frac_ceiling": 0.0,
+      "F": 12,
+      "W2": 500,
+      "cut2": 0.1252
+    },
+    "8": {
+      "P_instance_correct_mean": 0.969,
+      "meter_mean_unceiled": 3969818,
+      "frac_ceiling": 1.0,
+      "F": 12,
+      "W2": 500,
+      "cut2": 0.1252
+    }
+  },
+  "ceiling": 1000000,
+  "sprt": {
+    "alpha": 0.05,
+    "beta": 0.01
+  },
+  "ratio_bands": {
+    "4": [
+      7.4,
+      11.5
+    ],
+    "6": [
+      68.2,
+      98.5
+    ],
+    "8": [
+      200.0,
+      200.0
+    ]
+  },
+  "ladder_medians": {
+    "4": 11.0,
+    "6": 79.7,
+    "8": 200.0
+  },
+  "slope_6over4_band": [
+    6.4,
+    12.1
+  ],
+  "n8_semantics": "PREDICTED-CEILING rung: conv expected NOT to resolve within 1M -> ratio reported as LOWER BOUND >= 200; falsifiable (resolution within ceiling = cost model wrong, report as-is)",
+  "R_floors": {
+    "4": 2.0,
+    "6": 1.5,
+    "8": 10.0
+  },
+  "n4_flag_band_two_sided": [
+    7.4,
+    11.5
+  ]
+}

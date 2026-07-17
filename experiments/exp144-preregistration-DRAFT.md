@@ -195,24 +195,41 @@ Per instance i, rung n:
 - N_sign = 100 per term.
 - τ = 0.03, α = 0.01, K = 5, grid {0.15,0.20,0.25}, m = 3, **t = 2.0 FROZEN (C6508 t-sweep)**.
 
-**WIN per rung (n ∈ {6,8} only)** = quantum PASS on ≥4/5 instances AND median ratio ≥
-R_THRESHOLD(n). **FROZEN (C6512): R(6) = 1.5, R(8) = 10** — the chair-accepted
-conservative floors adopted as the frozen values (≈½ the red-team conservative-mean
-ratios 2.5–3.1 / 22–29; margin absorbs baseline-favorable surprises).
+**THREE SCORED RUNGS — THE PREDICTED LADDER (chair ruling C4780/C4781; MC v2 C6519;
+supersedes the C4772 negative-control design, which died on the honest two-stage
+detector cost — finding chain C6517/C6518, all corrections against the temptation
+gradient, on the record):**
 
-**n=4 = PRE-REGISTERED NEGATIVE CONTROL (chair decision C4772, red-team C6510):**
-the quantum budget is τ-precision-bound (~n-independent) while the baseline haystack
-at n=4 is only 81 candidates — the baseline is EXPECTED TO WIN this rung. Expectation
-band: median ratio ∈ [0.33, 0.40] (red-team MC, quoted as expectation). n=4 is
-EXCLUDED from overall-WIN. If the flown n=4 median ratio exceeds the frozen
-**N4_FLAG_THRESHOLD = 0.8** (derivation: 2× the expectation-band top 0.40, headroom
-for K=5 median sampling variability; still < 1, so a "quantum win" at the control
-rung ALWAYS flags), the grader raises **METER_MISCALIBRATION_FLAG**: investigate the
-metering pipeline before trusting the n=6/n=8 ratios. The predicted loss is the scaling claim
-made visible: loss at n=4, crossover at n=6, domination at n=8 — a rung we predict
-LOSING is unfakeable evidence the rungs we predict winning weren't cherry-picked.
+**WIN per rung** = quantum PASS on ≥4/5 instances AND median ratio ≥ R_THRESHOLD(n).
+**R FROZEN: R(4) = 2, R(6) = 1.5, R(8) = 10.**
+**Overall WIN = n=6 WINS AND n=8 WINS** (n=4 scored but excluded from the
+conjunction — the most model-sensitive rung).
 
-**Overall WIN** = n=6 rung WINS AND n=8 rung WINS.
+**Pre-registered ratio LADDER (MC v2, eps=0.02 central, K=5 median, 5–95% bands —
+same MC that set every other constant, per chair C4779):**
+- n=4: median **11.0**, band **[7.4, 11.5]** — TWO-SIDED FLAG: flown median outside
+  this band in EITHER direction ⇒ METER_MISCALIBRATION_FLAG (investigate the
+  metering pipeline before trusting n6/n8). The dead control rung's diagnostic
+  function survives as this flag (C4780 ruling 3).
+- n=6: median **79.7**, band **[68.2, 98.5]**.
+- n=8: **PREDICTED-CEILING RUNG** — the conventional arm is predicted NOT to resolve
+  within the per-instance CONV_CEILING = 1,000,000 shots (MC: unceiled cost ≈ 4M);
+  unresolved-at-ceiling instances carry ratio = LOWER BOUND ≥ **200**
+  (= ceiling/budget). Falsifiable: conv resolution within the ceiling means the
+  cost model was wrong — reported as-is, never suppressed.
+
+**Pre-registered SLOPE CLAIM (the 3ⁿ wall as a measured exponent):**
+ratio(6)/ratio(4) ∈ **[6.4, 12.1]** (MC band; **9 = the noiseless 3² asymptote**,
+inside the band). ratio(8)/ratio(6) reported as a lower bound (≥ 200/median(6)).
+A cherry-picked design does not land a predicted geometric ladder on all three
+rungs plus the slope — this replaces the dead control's unfakeability (C4780).
+
+**Conventional-arm flight constants (frozen from MC v2 C6519):** stage-1 SPRT
+(α = 0.05 anticommuter-pass, β = 0.01 conserved-kill, cap 800/candidate);
+stage-2 F = 12 probes, W₂ = 500, cut = 3.2/√W₂ ≈ 0.14, MAGNITUDE-majority
+(sign-persistence sub-claim killed C6518 — signs from refinement), sequential
+probes with early stop; per-instance ceiling 1M with NULL/lower-bound semantics.
+P(instance correct) = 0.87 / 0.97 / —(ceiling) at n = 4/6/8.
 
 ---
 
