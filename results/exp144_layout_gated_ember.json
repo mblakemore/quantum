@@ -1,0 +1,151 @@
+{
+ "_meta": "Exp144 \u00a78 fingerprint-gated layout (Ember). Arm D5 (5us, frozen C6512 from transpiled duration); exclude >2x cohort median.",
+ "source_fingerprint": "results/exp143_fingerprint.json",
+ "arm": "D5",
+ "cohort_median": 0.1783447265625,
+ "cut": 0.356689453125,
+ "excluded": [
+  {
+   "pair": [
+    148,
+    149
+   ],
+   "idle_err": 0.6552734375
+  },
+  {
+   "pair": [
+    2,
+    3
+   ],
+   "idle_err": 0.9580078125
+  }
+ ],
+ "eligible": [
+  {
+   "pair": [
+    94,
+    95
+   ],
+   "idle_err": 0.073974609375
+  },
+  {
+   "pair": [
+    49,
+    50
+   ],
+   "idle_err": 0.08740234375
+  },
+  {
+   "pair": [
+    140,
+    141
+   ],
+   "idle_err": 0.093505859375
+  },
+  {
+   "pair": [
+    55,
+    59
+   ],
+   "idle_err": 0.1171875
+  },
+  {
+   "pair": [
+    43,
+    44
+   ],
+   "idle_err": 0.13134765625
+  },
+  {
+   "pair": [
+    91,
+    98
+   ],
+   "idle_err": 0.1337890625
+  },
+  {
+   "pair": [
+    128,
+    129
+   ],
+   "idle_err": 0.136474609375
+  },
+  {
+   "pair": [
+    105,
+    117
+   ],
+   "idle_err": 0.155517578125
+  },
+  {
+   "pair": [
+    79,
+    93
+   ],
+   "idle_err": 0.169189453125
+  },
+  {
+   "pair": [
+    123,
+    124
+   ],
+   "idle_err": 0.173583984375
+  },
+  {
+   "pair": [
+    109,
+    110
+   ],
+   "idle_err": 0.18310546875
+  },
+  {
+   "pair": [
+    20,
+    21
+   ],
+   "idle_err": 0.1923828125
+  },
+  {
+   "pair": [
+    5,
+    6
+   ],
+   "idle_err": 0.201171875
+  },
+  {
+   "pair": [
+    8,
+    9
+   ],
+   "idle_err": 0.202880859375
+  },
+  {
+   "pair": [
+    65,
+    77
+   ],
+   "idle_err": 0.22216796875
+  },
+  {
+   "pair": [
+    150,
+    151
+   ],
+   "idle_err": 0.224609375
+  },
+  {
+   "pair": [
+    10,
+    11
+   ],
+   "idle_err": 0.249267578125
+  },
+  {
+   "pair": [
+    87,
+    88
+   ],
+   "idle_err": 0.275634765625
+  }
+ ]
+}
