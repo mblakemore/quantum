@@ -1,0 +1,7 @@
+{
+ "schema": "exp144-commit-v1",
+ "ensemble": "dynamics_fullweight_m3",
+ "n": 4,
+ "instance": 4,
+ "sha256": "9ca1aa1593d8bc7ea95b318d68a9f419cac1c34b24c1578ac646939465454972"
+}

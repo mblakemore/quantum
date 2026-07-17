@@ -1,0 +1,17 @@
+{
+ "schema": "exp144-reveal-v1",
+ "salt_hex": "3da46ff35792e79c72c5ed40e234a7cdd00b284250b2c08561426dcb98f355a5",
+ "ensemble": "dynamics_fullweight_m3",
+ "n": 6,
+ "instance": 5,
+ "terms": [
+  "XYYXYX",
+  "YXXZZZ",
+  "YYYZYX"
+ ],
+ "coeffs": [
+  -0.25,
+  0.2,
+  0.15
+ ]
+}
