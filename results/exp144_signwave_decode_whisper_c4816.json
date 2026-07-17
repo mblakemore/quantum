@@ -1,0 +1,242 @@
+{
+ "n4_k1_t0": {
+  "support": "ZXZY",
+  "Q_mean": 0.88,
+  "sign": "-",
+  "sigma": 8.8,
+  "contested": false,
+  "att_characterized": true
+ },
+ "n4_k1_t1": {
+  "support": "YXYY",
+  "Q_mean": -0.6,
+  "sign": "+",
+  "sigma": 6.0,
+  "contested": false,
+  "att_characterized": true
+ },
+ "n4_k1_t2": {
+  "support": "YYYZ",
+  "Q_mean": -0.54,
+  "sign": "+",
+  "sigma": 5.4,
+  "contested": true,
+  "att_characterized": true
+ },
+ "n4_k2_t0": {
+  "support": "ZXZZ",
+  "Q_mean": -0.54,
+  "sign": "+",
+  "sigma": 5.4,
+  "contested": true,
+  "att_characterized": true
+ },
+ "n4_k2_t1": {
+  "support": "YYYY",
+  "Q_mean": 0.6,
+  "sign": "-",
+  "sigma": 6.0,
+  "contested": true,
+  "att_characterized": true
+ },
+ "n4_k2_t2": {
+  "support": "YXYZ",
+  "Q_mean": 0.52,
+  "sign": "-",
+  "sigma": 5.2,
+  "contested": true,
+  "att_characterized": true
+ },
+ "n4_k3_t0": {
+  "support": "XZYZ",
+  "Q_mean": 0.54,
+  "sign": "-",
+  "sigma": 5.4,
+  "contested": false,
+  "att_characterized": true
+ },
+ "n4_k3_t1": {
+  "support": "ZZXZ",
+  "Q_mean": 0.54,
+  "sign": "-",
+  "sigma": 5.4,
+  "contested": false,
+  "att_characterized": true
+ },
+ "n4_k3_t2": {
+  "support": "ZXYZ",
+  "Q_mean": -0.52,
+  "sign": "+",
+  "sigma": 5.2,
+  "contested": true,
+  "att_characterized": true
+ },
+ "n4_k4_t0": {
+  "support": "YXXY",
+  "Q_mean": 0.7,
+  "sign": "-",
+  "sigma": 7.0,
+  "contested": false,
+  "att_characterized": true
+ },
+ "n4_k4_t1": {
+  "support": "YZXZ",
+  "Q_mean": -0.64,
+  "sign": "+",
+  "sigma": 6.4,
+  "contested": false,
+  "att_characterized": true
+ },
+ "n4_k4_t2": {
+  "support": "XXZY",
+  "Q_mean": -0.66,
+  "sign": "+",
+  "sigma": 6.6,
+  "contested": true,
+  "att_characterized": true
+ },
+ "n4_k5_t0": {
+  "support": "YZXZ",
+  "Q_mean": -0.7,
+  "sign": "+",
+  "sigma": 7.0,
+  "contested": false,
+  "att_characterized": true
+ },
+ "n4_k5_t1": {
+  "support": "XZXY",
+  "Q_mean": 0.74,
+  "sign": "-",
+  "sigma": 7.4,
+  "contested": false,
+  "att_characterized": true
+ },
+ "n4_k5_t2": {
+  "support": "YYYZ",
+  "Q_mean": -0.44,
+  "sign": "+",
+  "sigma": 4.4,
+  "contested": true,
+  "att_characterized": true
+ },
+ "n6_k1_t0": {
+  "support": "YYZZYZ",
+  "Q_mean": 0.7,
+  "sign": "-",
+  "sigma": 7.0,
+  "contested": false,
+  "att_characterized": false
+ },
+ "n6_k1_t1": {
+  "support": "YZZYYZ",
+  "Q_mean": 0.66,
+  "sign": "-",
+  "sigma": 6.6,
+  "contested": false,
+  "att_characterized": false
+ },
+ "n6_k1_t2": {
+  "support": "ZXZXYY",
+  "Q_mean": -0.32,
+  "sign": "+",
+  "sigma": 3.2,
+  "contested": true,
+  "att_characterized": false
+ },
+ "n6_k2_t0": {
+  "support": "XZXYXY",
+  "Q_mean": 0.52,
+  "sign": "-",
+  "sigma": 5.2,
+  "contested": false,
+  "att_characterized": false
+ },
+ "n6_k2_t1": {
+  "support": "XYXXYZ",
+  "Q_mean": -0.62,
+  "sign": "+",
+  "sigma": 6.2,
+  "contested": false,
+  "att_characterized": false
+ },
+ "n6_k2_t2": {
+  "support": "XYZZZY",
+  "Q_mean": -0.46,
+  "sign": "+",
+  "sigma": 4.6,
+  "contested": true,
+  "att_characterized": false
+ },
+ "n6_k3_t0": {
+  "support": "XXYZYZ",
+  "Q_mean": 0.64,
+  "sign": "-",
+  "sigma": 6.4,
+  "contested": false,
+  "att_characterized": false
+ },
+ "n6_k3_t1": {
+  "support": "XYZYYY",
+  "Q_mean": -0.58,
+  "sign": "+",
+  "sigma": 5.8,
+  "contested": false,
+  "att_characterized": false
+ },
+ "n6_k3_t2": {
+  "support": "YZXXZX",
+  "Q_mean": -0.34,
+  "sign": "+",
+  "sigma": 3.4,
+  "contested": true,
+  "att_characterized": false
+ },
+ "n6_k4_t0": {
+  "support": "XXXZZX",
+  "Q_mean": -0.76,
+  "sign": "+",
+  "sigma": 7.6,
+  "contested": false,
+  "att_characterized": false
+ },
+ "n6_k4_t1": {
+  "support": "XXZYXZ",
+  "Q_mean": -0.46,
+  "sign": "+",
+  "sigma": 4.6,
+  "contested": false,
+  "att_characterized": false
+ },
+ "n6_k4_t2": {
+  "support": "XXZZXX",
+  "Q_mean": -0.42,
+  "sign": "+",
+  "sigma": 4.2,
+  "contested": true,
+  "att_characterized": false
+ },
+ "n6_k5_t0": {
+  "support": "XYYXYX",
+  "Q_mean": 0.74,
+  "sign": "-",
+  "sigma": 7.4,
+  "contested": true,
+  "att_characterized": false
+ },
+ "n6_k5_t1": {
+  "support": "YXXZZZ",
+  "Q_mean": -0.58,
+  "sign": "+",
+  "sigma": 5.8,
+  "contested": true,
+  "att_characterized": false
+ },
+ "n6_k5_t2": {
+  "support": "YYYZYX",
+  "Q_mean": -0.16,
+  "sign": "+",
+  "sigma": 1.6,
+  "contested": true,
+  "att_characterized": false
+ }
+}
