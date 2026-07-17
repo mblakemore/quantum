@@ -1,0 +1,171 @@
+{
+ "exp": "144-conv-topup",
+ "n": 4,
+ "wave": 3,
+ "cobatched": true,
+ "job_id": "d9ctclphtsac739c826g",
+ "backend": "ibm_kingston",
+ "total_pubs": 15,
+ "instances": [
+  {
+   "k": 1,
+   "n_pubs": 3,
+   "alive_rows_in": [
+    79
+   ],
+   "manifest": {
+    "n": 4,
+    "k": 1,
+    "arm": "conventional",
+    "wave": 3,
+    "pubs": [
+     {
+      "kind": "sentinel_start",
+      "shots": 400
+     },
+     {
+      "kind": "conv_wave3",
+      "rows": 1,
+      "shots": 60
+     },
+     {
+      "kind": "sentinel_end",
+      "shots": 400
+     }
+    ]
+   }
+  },
+  {
+   "k": 2,
+   "n_pubs": 3,
+   "alive_rows_in": [
+    3,
+    12,
+    13,
+    14,
+    21
+   ],
+   "manifest": {
+    "n": 4,
+    "k": 2,
+    "arm": "conventional",
+    "wave": 3,
+    "pubs": [
+     {
+      "kind": "sentinel_start",
+      "shots": 400
+     },
+     {
+      "kind": "conv_wave3",
+      "rows": 5,
+      "shots": 60
+     },
+     {
+      "kind": "sentinel_end",
+      "shots": 400
+     }
+    ]
+   }
+  },
+  {
+   "k": 3,
+   "n_pubs": 3,
+   "alive_rows_in": [
+    14
+   ],
+   "manifest": {
+    "n": 4,
+    "k": 3,
+    "arm": "conventional",
+    "wave": 3,
+    "pubs": [
+     {
+      "kind": "sentinel_start",
+      "shots": 400
+     },
+     {
+      "kind": "conv_wave3",
+      "rows": 1,
+      "shots": 60
+     },
+     {
+      "kind": "sentinel_end",
+      "shots": 400
+     }
+    ]
+   }
+  },
+  {
+   "k": 4,
+   "n_pubs": 3,
+   "alive_rows_in": [
+    8,
+    11,
+    17,
+    26,
+    32,
+    36,
+    43,
+    55,
+    61,
+    62,
+    67,
+    78
+   ],
+   "manifest": {
+    "n": 4,
+    "k": 4,
+    "arm": "conventional",
+    "wave": 3,
+    "pubs": [
+     {
+      "kind": "sentinel_start",
+      "shots": 400
+     },
+     {
+      "kind": "conv_wave3",
+      "rows": 12,
+      "shots": 60
+     },
+     {
+      "kind": "sentinel_end",
+      "shots": 400
+     }
+    ]
+   }
+  },
+  {
+   "k": 5,
+   "n_pubs": 3,
+   "alive_rows_in": [
+    5,
+    9,
+    16,
+    25,
+    74
+   ],
+   "manifest": {
+    "n": 4,
+    "k": 5,
+    "arm": "conventional",
+    "wave": 3,
+    "pubs": [
+     {
+      "kind": "sentinel_start",
+      "shots": 400
+     },
+     {
+      "kind": "conv_wave3",
+      "rows": 5,
+      "shots": 60
+     },
+     {
+      "kind": "sentinel_end",
+      "shots": 400
+     }
+    ]
+   }
+  }
+ ],
+ "_note": "K=5 co-batched into ONE job (chair C4798). Measured cost model: 2.64 QPU-s FIXED per job + ~3,545 shots/QPU-s marginal \u2014 five separate jobs pay the fixed cost five times for identical shots. Also: one calibration window per wave, so all K=5 see the same noise by construction."
+}

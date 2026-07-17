@@ -28,7 +28,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
 RESULTS = os.path.join(HERE, "..", "results")
-VERDICTS = os.path.join(RESULTS, "exp144_conv_s1_w1_verdicts_elder_v2.json")
+# No default verdicts path — see --verdicts. A hardcoded one silently goes stale.
 
 
 def _load(name, fn):
@@ -49,6 +49,11 @@ def main():
     ap.add_argument("--n", type=int, default=4)
     ap.add_argument("--wave", type=int, default=2)
     ap.add_argument("--backend", default="ibm_kingston")
+    ap.add_argument("--verdicts", required=True,
+                    help="verdicts file for the wave being topped up. REQUIRED and has no "
+                         "default: a hardcoded path silently goes stale — mine pointed at "
+                         "wave-1 while wave-2 had already cut alive 105->24, which would "
+                         "have re-flown resolved rows.")
     a = ap.parse_args()
     if not (a.dry_run or a.fly):
         ap.print_help(); return 0
@@ -64,8 +69,10 @@ def main():
 
     with open(SEALER.SECRETS_PATH) as f:
         sec = json.load(f)
-    with open(VERDICTS) as f:
-        verd = json.load(f)["instances"]
+    with open(a.verdicts) as f:
+        vraw = json.load(f)
+    verd = vraw["instances"] if "instances" in vraw else vraw
+    print(f"verdicts: {os.path.basename(a.verdicts)}")
 
     seed = sec["convseeds"][str(a.n)]["seed"]
     order = KIT.conv_candidates(a.n, seed)      # the sealed order — mine to reproduce
@@ -114,20 +121,32 @@ def main():
     backend = svc.backend(a.backend)
     print(f"\n{backend.name}: operational={backend.status().operational} "
           f"pending={backend.status().pending_jobs}")
+    # ONE co-batched job for the whole wave: K=5 instances as separate PUBs.
+    all_tp, pub_index = [], []
     for k, pubs, man, alive_rows in jobs:
-        tp = [(transpile(qc, backend, optimization_level=1, seed_transpiler=144), rows, s)
-              for qc, rows, s in pubs]
-        job = SamplerV2(mode=backend).run(tp)
-        man["job_id"] = job.job_id(); man["backend"] = a.backend
-        man["alive_rows_in"] = alive_rows
-        outp = os.path.join(RESULTS,
-                            f"exp144_conv_n{a.n}_k{k}_w{a.wave}_manifest.json")
-        if os.path.exists(outp):
-            print(f"REFUSING: {os.path.basename(outp)} exists — would overwrite a record.")
-            return 3
-        with open(outp, "w") as f:
-            json.dump(man, f, indent=1)
-        print(f"  n={a.n} k={k}: job {job.job_id()} -> {os.path.basename(outp)}")
+        for qc, rows, sh in pubs:
+            all_tp.append((transpile(qc, backend, optimization_level=1,
+                                     seed_transpiler=144), rows, sh))
+        pub_index.append({"k": k, "n_pubs": len(pubs), "alive_rows_in": alive_rows,
+                          "manifest": man})
+    outp = os.path.join(RESULTS,
+                        f"exp144_conv_n{a.n}_w{a.wave}_cobatch_manifest.json")
+    if os.path.exists(outp):
+        print(f"REFUSING: {os.path.basename(outp)} exists — would overwrite a record.")
+        return 3
+    job = SamplerV2(mode=backend).run(all_tp)
+    out = {"exp": "144-conv-topup", "n": a.n, "wave": a.wave, "cobatched": True,
+           "job_id": job.job_id(), "backend": a.backend,
+           "total_pubs": len(all_tp), "instances": pub_index,
+           "_note": "K=5 co-batched into ONE job (chair C4798). Measured cost model: "
+                    "2.64 QPU-s FIXED per job + ~3,545 shots/QPU-s marginal — five "
+                    "separate jobs pay the fixed cost five times for identical shots. "
+                    "Also: one calibration window per wave, so all K=5 see the same "
+                    "noise by construction."}
+    with open(outp, "w") as f:
+        json.dump(out, f, indent=1)
+    print(f"\n  CO-BATCHED: 1 job, {len(all_tp)} pubs across K={len(jobs)}")
+    print(f"  job {job.job_id()} -> {os.path.basename(outp)}")
     return 0
 
 
