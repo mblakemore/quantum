@@ -1,0 +1,272 @@
+{
+ "n4_k1": {
+  "support": [
+   "ZXZY",
+   "YXYY",
+   "YIII"
+  ],
+  "abs_coeffs": {
+   "ZXZY": 0.24596642262538604,
+   "YXYY": 0.20277236160198542,
+   "YIII": 0.14697228557249037
+  },
+  "off_group_mass": 0.3688,
+  "sentinels": [
+   0.948,
+   0.938
+  ],
+  "shots": 5000
+ },
+ "n4_k2": {
+  "support": [
+   "ZXZZ",
+   "YYYY",
+   "YIII"
+  ],
+  "abs_coeffs": {
+   "ZXZZ": 0.25413362308564214,
+   "YYYY": 0.21344358727320867,
+   "YIII": 0.15597707440707773
+  },
+  "off_group_mass": 0.369,
+  "sentinels": [
+   0.963,
+   0.95
+  ],
+  "shots": 5000
+ },
+ "n4_k3": {
+  "support": [
+   "XZYZ",
+   "ZZXZ",
+   "ZIII"
+  ],
+  "abs_coeffs": {
+   "XZYZ": 0.25837049414822777,
+   "ZZXZ": 0.19985909879995675,
+   "ZIII": 0.18031983442417462
+  },
+  "off_group_mass": 0.3558,
+  "sentinels": [
+   0.955,
+   0.963
+  ],
+  "shots": 5000
+ },
+ "n4_k4": {
+  "support": [
+   "YXXY",
+   "YZXZ",
+   "XXZY"
+  ],
+  "abs_coeffs": {
+   "YXXY": 0.24822781118499446,
+   "YZXZ": 0.2015773647055044,
+   "XXZY": 0.15745849545248233
+  },
+  "off_group_mass": 0.3776,
+  "sentinels": [
+   0.953,
+   0.955
+  ],
+  "shots": 5000
+ },
+ "n4_k5": {
+  "support": [
+   "YZXZ",
+   "XZXY",
+   "IIZI"
+  ],
+  "abs_coeffs": {
+   "YZXZ": 0.2520404833649691,
+   "XZXY": 0.19581993490533173,
+   "IIZI": 0.15556581715457515
+  },
+  "off_group_mass": 0.378,
+  "sentinels": [
+   0.963,
+   0.94
+  ],
+  "shots": 5000
+ },
+ "n6_k1": {
+  "support": [
+   "YYZZYZ",
+   "YZZYYZ",
+   "IIIZII"
+  ],
+  "abs_coeffs": {
+   "YYZZYZ": 0.24208542335247651,
+   "YZZYYZ": 0.19134225058259127,
+   "IIIZII": 0.14574090927657965
+  },
+  "off_group_mass": 0.6052,
+  "sentinels": [
+   0.965,
+   0.955
+  ],
+  "shots": 5000
+ },
+ "n6_k2": {
+  "support": [
+   "XZXYXY",
+   "XYXXYZ",
+   "XYIIII"
+  ],
+  "abs_coeffs": {
+   "XZXYXY": 0.257117756005012,
+   "XYXXYZ": 0.21313483289876525,
+   "XYIIII": 0.15707395300130952
+  },
+  "off_group_mass": 0.5724,
+  "sentinels": [
+   0.963,
+   0.943
+  ],
+  "shots": 5000
+ },
+ "n6_k3": {
+  "support": [
+   "XXYZYZ",
+   "XYZYYY",
+   "YZXXZX"
+  ],
+  "abs_coeffs": {
+   "XXYZYZ": 0.2512733270625572,
+   "XYZYYY": 0.20619802024203693,
+   "YZXXZX": 0.15742673049532868
+  },
+  "off_group_mass": 0.5572,
+  "sentinels": [
+   0.965,
+   0.958
+  ],
+  "shots": 5000
+ },
+ "n6_k4": {
+  "support": [
+   "XXXZZX",
+   "XXZYXZ",
+   "XXIIII"
+  ],
+  "abs_coeffs": {
+   "XXXZZX": 0.2497652786243612,
+   "XXZYXZ": 0.2011729599813093,
+   "XXIIII": 0.16597788142265318
+  },
+  "off_group_mass": 0.5196,
+  "sentinels": [
+   0.945,
+   0.963
+  ],
+  "shots": 5000
+ },
+ "n6_k5": {
+  "support": [
+   "XYYXYX",
+   "YXXZZZ",
+   "IIIZII"
+  ],
+  "abs_coeffs": {
+   "XYYXYX": 0.2497402000070821,
+   "YXXZZZ": 0.19565546782420518,
+   "IIIZII": 0.13918763114006857
+  },
+  "off_group_mass": 0.5704,
+  "sentinels": [
+   0.95,
+   0.963
+  ],
+  "shots": 5000
+ },
+ "n8_k1": {
+  "support": [
+   "ZIIIIIII",
+   "ZZXZZXZZ",
+   "IIIIIZII"
+  ],
+  "abs_coeffs": {
+   "ZIIIIIII": 0.2878564441282953,
+   "ZZXZZXZZ": 0.27457560605977094,
+   "IIIIIZII": 0.2681085801239886
+  },
+  "off_group_mass": 0.876,
+  "sentinels": [
+   0.96,
+   0.958
+  ],
+  "shots": 5000
+ },
+ "n8_k2": {
+  "support": [
+   "YYZXYZYY",
+   "ZIIIIIII",
+   "IIIIIZII"
+  ],
+  "abs_coeffs": {
+   "YYZXYZYY": 0.29192586521982167,
+   "ZIIIIIII": 0.285512662741929,
+   "IIIIIZII": 0.28219523048881634
+  },
+  "off_group_mass": 0.86,
+  "sentinels": [
+   0.958,
+   0.958
+  ],
+  "shots": 5000
+ },
+ "n8_k3": {
+  "support": [
+   "XYYYZXXZ",
+   "ZIIIIIII",
+   "IIIIIIZI"
+  ],
+  "abs_coeffs": {
+   "XYYYZXXZ": 0.3207949094989797,
+   "ZIIIIIII": 0.30346705772697813,
+   "IIIIIIZI": 0.30128139957151034
+  },
+  "off_group_mass": 0.8664,
+  "sentinels": [
+   0.97,
+   0.968
+  ],
+  "shots": 5000
+ },
+ "n8_k4": {
+  "support": [
+   "IIIIIZII",
+   "YXYYXXZZ",
+   "ZIIIIIII"
+  ],
+  "abs_coeffs": {
+   "IIIIIZII": 0.2777936778962154,
+   "YXYYXXZZ": 0.2673302337782399,
+   "ZIIIIIII": 0.2662408917853775
+  },
+  "off_group_mass": 0.861,
+  "sentinels": [
+   0.958,
+   0.968
+  ],
+  "shots": 5000
+ },
+ "n8_k5": {
+  "support": [
+   "IIIIIIZI",
+   "ZIIIIIII",
+   "IIIIIZII"
+  ],
+  "abs_coeffs": {
+   "IIIIIIZI": 0.32436675271162835,
+   "ZIIIIIII": 0.292741584778344,
+   "IIIIIZII": 0.28627109637853754
+  },
+  "off_group_mass": 0.873,
+  "sentinels": [
+   0.953,
+   0.963
+  ],
+  "shots": 5000
+ }
+}
