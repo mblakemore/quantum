@@ -1,0 +1,289 @@
+{
+ "exp": 151,
+ "backend": "ibm_fez",
+ "tmax": 12,
+ "shots": 4000,
+ "L": 6,
+ "eps": 0.12,
+ "J": [
+  0.7934350739657037,
+  0.6881132025227275,
+  0.9675280390209388,
+  0.9516085733321822,
+  0.7779054011356812
+ ],
+ "h": [
+  -0.13164178480554847,
+  -3.098467839863629,
+  2.5411705307771437,
+  -0.4163241874911429,
+  -0.1658491754262297,
+  -2.9258860202105654
+ ],
+ "job_id": "d9dhehphtsac739d2qfg",
+ "order": [
+  [
+   "dtc",
+   0
+  ],
+  [
+   "dtc",
+   1
+  ],
+  [
+   "dtc",
+   2
+  ],
+  [
+   "dtc",
+   3
+  ],
+  [
+   "dtc",
+   4
+  ],
+  [
+   "dtc",
+   5
+  ],
+  [
+   "dtc",
+   6
+  ],
+  [
+   "dtc",
+   7
+  ],
+  [
+   "dtc",
+   8
+  ],
+  [
+   "dtc",
+   9
+  ],
+  [
+   "dtc",
+   10
+  ],
+  [
+   "dtc",
+   11
+  ],
+  [
+   "dtc",
+   12
+  ],
+  [
+   "control",
+   0
+  ],
+  [
+   "control",
+   1
+  ],
+  [
+   "control",
+   2
+  ],
+  [
+   "control",
+   3
+  ],
+  [
+   "control",
+   4
+  ],
+  [
+   "control",
+   5
+  ],
+  [
+   "control",
+   6
+  ],
+  [
+   "control",
+   7
+  ],
+  [
+   "control",
+   8
+  ],
+  [
+   "control",
+   9
+  ],
+  [
+   "control",
+   10
+  ],
+  [
+   "control",
+   11
+  ],
+  [
+   "control",
+   12
+  ]
+ ],
+ "meta": [
+  {
+   "arm": "dtc",
+   "t": 0,
+   "depth": 1,
+   "n2q": 0
+  },
+  {
+   "arm": "dtc",
+   "t": 1,
+   "depth": 43,
+   "n2q": 10
+  },
+  {
+   "arm": "dtc",
+   "t": 2,
+   "depth": 61,
+   "n2q": 20
+  },
+  {
+   "arm": "dtc",
+   "t": 3,
+   "depth": 79,
+   "n2q": 30
+  },
+  {
+   "arm": "dtc",
+   "t": 4,
+   "depth": 99,
+   "n2q": 40
+  },
+  {
+   "arm": "dtc",
+   "t": 5,
+   "depth": 117,
+   "n2q": 50
+  },
+  {
+   "arm": "dtc",
+   "t": 6,
+   "depth": 136,
+   "n2q": 60
+  },
+  {
+   "arm": "dtc",
+   "t": 7,
+   "depth": 153,
+   "n2q": 70
+  },
+  {
+   "arm": "dtc",
+   "t": 8,
+   "depth": 171,
+   "n2q": 80
+  },
+  {
+   "arm": "dtc",
+   "t": 9,
+   "depth": 189,
+   "n2q": 90
+  },
+  {
+   "arm": "dtc",
+   "t": 10,
+   "depth": 207,
+   "n2q": 100
+  },
+  {
+   "arm": "dtc",
+   "t": 11,
+   "depth": 225,
+   "n2q": 110
+  },
+  {
+   "arm": "dtc",
+   "t": 12,
+   "depth": 250,
+   "n2q": 120
+  },
+  {
+   "arm": "control",
+   "t": 0,
+   "depth": 1,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 1,
+   "depth": 6,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 2,
+   "depth": 6,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 3,
+   "depth": 6,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 4,
+   "depth": 6,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 5,
+   "depth": 6,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 6,
+   "depth": 6,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 7,
+   "depth": 6,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 8,
+   "depth": 6,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 9,
+   "depth": 6,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 10,
+   "depth": 6,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 11,
+   "depth": 6,
+   "n2q": 0
+  },
+  {
+   "arm": "control",
+   "t": 12,
+   "depth": 6,
+   "n2q": 0
+  }
+ ],
+ "note": "discrete time crystal: dtc(interactions+disorder) vs control(pulse only); metric A(t)=(-1)^t<Z>; rigidity vs beat-null is the self-verifying contrast"
+}
