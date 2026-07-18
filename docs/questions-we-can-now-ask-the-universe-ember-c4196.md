@@ -66,13 +66,13 @@ whether the measured pulse obeys the quantum-interest inequality. A frozen-bound
 
 ### The GF(2) machine + QFT (the Ember line)
 
-**Q5 — Where exactly does the Shor staircase die on NISQ?**
-Exp150 flew the kernel; the missing rung is modular exponentiation, which is where the depth
-explodes. The survival predictor (C4195, scoped to generic decay) can now *pre-compute* the death
-altitude: price the full staircase for the smallest composite (N=15, then 21) against the
-~800–1000-CZ wall, publish the predicted failure depth, then fly the cheapest rung to test the
-prediction. The deliverable is a measured **"distance-to-Shor" number for this hardware
-generation** — the gap stated in gates, not vibes. (Fence stays: toy N, not RSA.)
+**Q5 — Where exactly does the Shor staircase die on NISQ? — DELIVERED (Exp152, C4196).**
+Priced: the smallest textbook Shor (N=15) costs **1,564–6,172 CZ = 1.6×–7.7× past the ~1000-CZ
+wall**; the QFT back-end Exp150 flew is only ~0.5–1.8 % of the circuit, the missing ~98 % is the
+modular-exponentiation front-end, and the survival predictor pins `p_true` at 0.5 (reps → ∞,
+drowned) far below that depth. The gap is not a tuning problem — it is the wall standing between the
+kernel and the algorithm. See [finding-exp152](../findings/finding-exp152-distance-to-shor-ember-c4196.md).
+(Fence held: toy N, not RSA; compiled-Shor cheat excluded per F110 pattern.)
 
 **Q6 — Is the confident-wrong inversion coherent?** *(the question Exp149 failed to answer)*
 Exp148b localized the copy-channel inversion; Exp149's twirl test FALSIFIED its own prediction by

@@ -1,0 +1,136 @@
+{
+ "meta": {
+  "cycle": 4196,
+  "author": "ember",
+  "wall_cz": [
+   800,
+   1000
+  ],
+  "E_CX": 0.0106,
+  "E_RO": 0.02,
+  "exp150_backend_cz": 70,
+  "fence": "prices gate-distance to toy-N factoring; NOT RSA, NOT fault-tolerant, compiled-Shor cheat excluded (F110 pattern)"
+ },
+ "rows": [
+  {
+   "N": 15,
+   "n_bits": 4,
+   "n_count": 8,
+   "toffoli_modexp": 512,
+   "modexp_cz": 1536,
+   "qft_backend_cz": 28,
+   "total_cz": 1564,
+   "wall_multiple_lo": 1.6,
+   "wall_multiple_hi": 2.0,
+   "backend_frac_pct": 1.79,
+   "scenario": "aggressive-LB",
+   "cz_per_toffoli": 3,
+   "predictor": {
+    "p_true_pred": 0.5,
+    "bias_margin": "2.46e-08",
+    "reps_needed": 1.0402662300420992e+16,
+    "survives_any_realistic_budget": false
+   }
+  },
+  {
+   "N": 15,
+   "n_bits": 4,
+   "n_count": 8,
+   "toffoli_modexp": 1024,
+   "modexp_cz": 6144,
+   "qft_backend_cz": 28,
+   "total_cz": 6172,
+   "wall_multiple_lo": 6.2,
+   "wall_multiple_hi": 7.7,
+   "backend_frac_pct": 0.45,
+   "scenario": "textbook",
+   "cz_per_toffoli": 6,
+   "predictor": {
+    "p_true_pred": 0.5,
+    "bias_margin": "0.00e+00",
+    "reps_needed": "inf (drowned)",
+    "survives_any_realistic_budget": false
+   }
+  },
+  {
+   "N": 21,
+   "n_bits": 5,
+   "n_count": 10,
+   "toffoli_modexp": 1000,
+   "modexp_cz": 3000,
+   "qft_backend_cz": 45,
+   "total_cz": 3045,
+   "wall_multiple_lo": 3.0,
+   "wall_multiple_hi": 3.8,
+   "backend_frac_pct": 1.48,
+   "scenario": "aggressive-LB",
+   "cz_per_toffoli": 3,
+   "predictor": {
+    "p_true_pred": 0.5,
+    "bias_margin": "3.44e-15",
+    "reps_needed": "inf (drowned)",
+    "survives_any_realistic_budget": false
+   }
+  },
+  {
+   "N": 21,
+   "n_bits": 5,
+   "n_count": 10,
+   "toffoli_modexp": 2000,
+   "modexp_cz": 12000,
+   "qft_backend_cz": 45,
+   "total_cz": 12045,
+   "wall_multiple_lo": 12.0,
+   "wall_multiple_hi": 15.1,
+   "backend_frac_pct": 0.37,
+   "scenario": "textbook",
+   "cz_per_toffoli": 6,
+   "predictor": {
+    "p_true_pred": 0.5,
+    "bias_margin": "0.00e+00",
+    "reps_needed": "inf (drowned)",
+    "survives_any_realistic_budget": false
+   }
+  },
+  {
+   "N": 35,
+   "n_bits": 6,
+   "n_count": 12,
+   "toffoli_modexp": 1728,
+   "modexp_cz": 5184,
+   "qft_backend_cz": 66,
+   "total_cz": 5250,
+   "wall_multiple_lo": 5.2,
+   "wall_multiple_hi": 6.6,
+   "backend_frac_pct": 1.26,
+   "scenario": "aggressive-LB",
+   "cz_per_toffoli": 3,
+   "predictor": {
+    "p_true_pred": 0.5,
+    "bias_margin": "0.00e+00",
+    "reps_needed": "inf (drowned)",
+    "survives_any_realistic_budget": false
+   }
+  },
+  {
+   "N": 35,
+   "n_bits": 6,
+   "n_count": 12,
+   "toffoli_modexp": 3456,
+   "modexp_cz": 20736,
+   "qft_backend_cz": 66,
+   "total_cz": 20802,
+   "wall_multiple_lo": 20.8,
+   "wall_multiple_hi": 26.0,
+   "backend_frac_pct": 0.32,
+   "scenario": "textbook",
+   "cz_per_toffoli": 6,
+   "predictor": {
+    "p_true_pred": 0.5,
+    "bias_margin": "0.00e+00",
+    "reps_needed": "inf (drowned)",
+    "survives_any_realistic_budget": false
+   }
+  }
+ ]
+}
