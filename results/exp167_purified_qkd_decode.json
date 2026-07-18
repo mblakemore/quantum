@@ -1,0 +1,22 @@
+{
+ "job_id": "d9du8gphtsac739di1q0",
+ "faded": {
+  "S": 0.7138671875,
+  "qber_z": 0.178955078125,
+  "qber_x": 0.5927734375,
+  "qber_avg": 0.3858642578125,
+  "secret_fraction": 0.0,
+  "p_success": 1.0
+ },
+ "purified": {
+  "S": 1.3059164157722367,
+  "qber_z": 0.2581986143187067,
+  "qber_x": 0.21773444753946147,
+  "qber_avg": 0.2379665309290841,
+  "secret_fraction": 0.0,
+  "p_success": 0.528564453125
+ },
+ "delta_secret_fraction": 0.0,
+ "fatter": false,
+ "verdict": "NULL \u2014 DEJMPS overhead did not net a fatter key at this depth (honest accounting)"
+}
