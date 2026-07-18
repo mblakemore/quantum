@@ -1,0 +1,95 @@
+{
+ "exp": 166,
+ "slug": "qkd",
+ "backend": "ibm_fez",
+ "shots": 4096,
+ "job_id": "d9du1bkjeosc73fi2h3g",
+ "order": [
+  [
+   "honest",
+   "Z",
+   "Z"
+  ],
+  [
+   "honest",
+   "Z",
+   "X"
+  ],
+  [
+   "honest",
+   "X",
+   "Z"
+  ],
+  [
+   "honest",
+   "X",
+   "X"
+  ],
+  [
+   "honest",
+   "Z",
+   "W"
+  ],
+  [
+   "honest",
+   "Z",
+   "V"
+  ],
+  [
+   "honest",
+   "X",
+   "W"
+  ],
+  [
+   "honest",
+   "X",
+   "V"
+  ],
+  [
+   "eve",
+   "Z",
+   "Z"
+  ],
+  [
+   "eve",
+   "Z",
+   "X"
+  ],
+  [
+   "eve",
+   "X",
+   "Z"
+  ],
+  [
+   "eve",
+   "X",
+   "X"
+  ],
+  [
+   "eve",
+   "Z",
+   "W"
+  ],
+  [
+   "eve",
+   "Z",
+   "V"
+  ],
+  [
+   "eve",
+   "X",
+   "W"
+  ],
+  [
+   "eve",
+   "X",
+   "V"
+  ]
+ ],
+ "message": "BEAM ME UP",
+ "prereg": {
+  "honest": "S > 2 at >5 sigma AND qber_avg < 0.11 -> key + OTP demo; if S>2 but qber>=0.11: certified-no-key (prices the stack)",
+  "eve": "S < 2 AND qber_x > 0.18 -> key ABORTED (falsifier = feature)",
+  "prediction": "S_honest 2.15-2.45; qber_z 5-9%, qber_x 10-16%; S_eve 1.1-1.6; P(positive key) 0.5"
+ }
+}
