@@ -1,0 +1,28 @@
+{
+ "exp": "159b",
+ "slug": "sensor_v2",
+ "backend": "ibm_fez",
+ "shots": 4096,
+ "job_id": "d9dsdfineu4c739nmef0",
+ "order": [
+  "prod_cal",
+  "prod_ref",
+  "prod_field",
+  "ghz_cal",
+  "ghz_ref",
+  "ghz_field"
+ ],
+ "theta_ref": 0.35,
+ "theta_window": [
+  0.15,
+  0.55
+ ],
+ "delta_bracket": 0.06,
+ "commitment_sha256": "d8a4f4a912b71b3dd48471e9412e36f381fc2d0f25d184121d833204e45b1a7d",
+ "prereg": {
+  "coverage": "both 95% CIs (1.96 sigma, bootstrap) contain revealed theta*",
+  "head_to_head": "var_GHZ/var_product < 0.5",
+  "prediction": "GHZ coverage HIT after two-point correction; measured delta_g in [-0.06,-0.01]; ratio 0.2-0.55 (bootstrap widens)"
+ },
+ "note": "v2: two-point calibration (0 + theta_ref) separates contrast from offset; fix for v1's 8-sigma GHZ coverage miss"
+}
