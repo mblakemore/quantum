@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%223.5%22%20cy%3D%228%22%20r%3D%221.6%22%20fill%3D%22%2345d6cf%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.6%22%20fill%3D%22%23e6a94e%22%2F%3E%3Ccircle%20cx%3D%2212.5%22%20cy%3D%228%22%20r%3D%221.6%22%20fill%3D%22%2345d6cf%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Relay — teleportation's second hop | The Quantum Museum</title>
+<meta name="description" content="A state crosses two Bell pairs through two real feedforward stages — end-to-end fidelity 0.784 vs the 2/3 classical relay bound (45σ), with both hop-2 falsifiers at chance. And the hops don't compose: the second window costs more than the first. Exp160, ibm_fez.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 14%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:7px 14px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:8px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:17px; font-weight:700; }
+  .val.good { color:var(--good); } .val.cy { color:var(--cyan); } .val.warn { color:var(--amber); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ quantum network</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Relay<span class="hl">.</span></h1>
+    <p class="lede">A network is not a link — it is links <b>composed</b>. Here a qubit's state crosses <b>two</b>
+      teleportation hops in sequence: destroyed at the source, rebuilt at a midpoint, destroyed again, rebuilt at the
+      far end — two Bell pairs, two live feedforward corrections. End-to-end fidelity <b>0.784</b>, past the 2/3
+      classical relay bound at 45σ. And an honest surprise in the accounting: the hops <b>don't compose</b> — the
+      second window costs more than the first, and the deficit has a fingerprint.</p>
+    <span class="scope">Scope: a relay <b>primitive</b> (sequential teleportation on one die, zero storage) — not a
+      repeater: no entanglement swapping, no purification, no quantum memory.</span>
+  </header>
+
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Run the chain</h2>
+    <p class="sub">4 arms × 6 states, one job · ibm_fez · 4096 shots · job d9dsrnsinv1c73apgi7g</p>
+    <p class="primer"><b>How to read it.</b> Six known states are sent through each arm; bars show the fraction
+      recovered correctly at the end (1.0 = perfect, 0.5 = coin flip, dashed line = the 2/3 bound no classical relay
+      can beat). The <b>single-hop</b> baseline flew in the same job, so the price of the second hop is measured
+      drift-free.</p>
+    <div class="seg" role="tablist" id="segbtns"></div>
+    <figure aria-label="per-state fidelity bars"><svg id="bars" viewBox="0 0 860 240"></svg></figure>
+    <p class="story" id="story"></p>
+    <div class="verdict">
+      <div class="box hl"><span class="lbl">end-to-end, two hops</span><span class="val cy">0.784 · +0.117 · 45σ</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">vs the 2/3 classical relay bound</span></div>
+      <div class="box"><span class="lbl">falsifiers (hop 2 only)</span><span class="val good">both at chance</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">no-entanglement 0.512 · no-correction 0.499</span></div>
+      <div class="box"><span class="lbl">composition check</span><span class="val warn">−0.095 below square</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">same-job single hop² predicts 0.879 — hops don't compose</span></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">what's proven, what's diagnosed, what's armed next</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE CHANNEL IS QUANTUM END-TO-END</div>
+        <p>The 2/3 bound applies to the whole chain — a classical middleman anywhere caps it. 0.784 clears it at 45σ,
+        and hop 2's own falsifiers (Bell pair removed → superpositions to chance; corrections removed → everything to
+        chance) prove the second hop's resources are load-bearing, independent of hop 1's (Exp154).
+        <code>within-job, pre-registered</code></p></div>
+      <div class="receipt"><div class="rt">THE DEFICIT HAS A FINGERPRINT</div>
+        <p>The −0.095 shortfall vs composition is not uniform: the chain loses ~0.20 on superpositions and only ~0.06
+        on Z states, while the same-job single hop is nearly uniform. The end receiver idles through <em>two</em>
+        feedforward windows — consistent with idle-window dephasing scaling superlinearly, the Exp154/158 error class
+        re-emerging in exactly the condition that doubles the window. Consistent-with, not proven.</p></div>
+      <div class="receipt"><div class="rt">THE HONEST MISS</div>
+        <p>Pre-registered band 0.855–0.92 assumed hops compose; they don't (0.784). The composition check was built
+        into the decode precisely to expose this — the named risk materialized with its diagnostic attached.
+        <code>prediction ledger updated, calibration 82.3%</code></p></div>
+      <div class="receipt"><div class="rt">ARMED NEXT — BY CONDITION, NOT CALENDAR</div>
+        <p>Two DD tests came back null this morning because the idle gap wasn't there to cure. In the relay it IS
+        there, measured in-job (~0.17 on superpositions). The condition-first rule now has its trigger: DD on the
+        relay's end receiver is the properly-armed experiment. <code>Exp160 · fence: primitive, not repeater</code></p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Exp160 · ibm_fez · 24 circuits · 4096 shots</span>
+    <span>C4849 · 2026-07-18</span>
+    <a href="../teleportation/">← single hop (Exp154)</a>
+    <a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+const STATES=["Z+","Z−","X+","X−","Y+","Y−"];
+const ARMS={
+ chain:{lbl:"the chain (2 hops)",vals:[0.906,0.899,0.725,0.732,0.716,0.726],col:"var(--cyan)",
+  story:"<b>The chain.</b> Every state arrives above the 2/3 bound — the relay works end-to-end. But look at the shape: Z states ~0.90, superpositions ~0.72. The extra hop taxes the superpositions specifically — the fingerprint of dephasing while the receiver waits through two feedforward windows."},
+ single:{lbl:"single hop (same job)",vals:[0.966,0.960,0.927,0.927,0.912,0.926],col:"var(--good)",
+  story:"<b>The baseline, same job.</b> One hop runs at 0.936 today, nearly uniform across states — the single-window idle gap is invisible at this calibration. Squaring this predicts 0.879 for the chain; the chain delivers 0.784. The difference is the physics the relay adds."},
+ noent2:{lbl:"falsifier: no Bell pair 2",vals:[0.951,0.955,0.514,0.524,0.507,0.503],col:"var(--bad)",
+  story:"<b>Remove the relay's resource.</b> Hop 1 intact, hop 2's Bell pair never created: superpositions collapse to a coin flip (Z survives by accident — a qubit near |0⟩ answers |0⟩). The second hop's entanglement is load-bearing."},
+ nocorr2:{lbl:"falsifier: no corrections 2",vals:[0.524,0.460,0.524,0.470,0.492,0.525],col:"var(--bad)",
+  story:"<b>Remove the relay's classical bits.</b> Skip only hop 2's feedforward: all six states collapse to chance — the far receiver is right only up to the random Pauli the bits were meant to undo. The second hop's feedforward is load-bearing."}};
+const SVGNS="http://www.w3.org/2000/svg";
+const bars=document.getElementById("bars");
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function draw(key){
+  const A=ARMS[key]; bars.innerHTML="";
+  const L=56,R=845,T=14,B=190; const py=v=>B-(B-T)*v;
+  [0,0.5,1].forEach(g=>{el(bars,"line",{x1:L,y1:py(g),x2:R,y2:py(g),style:"stroke:var(--edge);stroke-width:1"});
+    el(bars,"text",{x:L-8,y:py(g)+4,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=g.toFixed(1);});
+  el(bars,"line",{x1:L,y1:py(2/3),x2:R,y2:py(2/3),style:"stroke:var(--amber);stroke-width:1.6;stroke-dasharray:6 5"});
+  el(bars,"text",{x:R,y:py(2/3)-6,"text-anchor":"end",style:"fill:var(--amber);font-family:var(--mono);font-size:11.5px"}).textContent="2/3 classical bound";
+  const n=STATES.length,bw=(R-L)/n*0.5;
+  A.vals.forEach((v,i)=>{const x=L+(R-L)*(i+0.5)/n;
+    el(bars,"rect",{x:x-bw/2,y:py(v),width:bw,height:B-py(v),rx:4,style:`fill:${A.col};opacity:.9`});
+    el(bars,"text",{x:x,y:py(v)-7,"text-anchor":"middle",style:`fill:${A.col};font-family:var(--mono);font-size:12px;font-weight:700`}).textContent=v.toFixed(3);
+    el(bars,"text",{x:x,y:B+20,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12.5px"}).textContent=STATES[i];});
+  document.getElementById("story").innerHTML=A.story;
+  document.querySelectorAll("#segbtns button").forEach(b=>b.classList.toggle("on",b.dataset.k===key));
+}
+const seg=document.getElementById("segbtns");
+Object.keys(ARMS).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;
+  b.textContent=ARMS[k].lbl;b.addEventListener("click",()=>draw(k));seg.appendChild(b);});
+draw("chain");
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>
