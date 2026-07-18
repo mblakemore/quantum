@@ -117,11 +117,13 @@
         <p>Eve listens in Z, so the Z-basis error stays clean (8%) while the X-basis error explodes (51%). A protocol
         checking one basis would have missed her completely. This is exactly why BB84/E91 use conjugate bases —
         here it's in the data, not the textbook.</p></div>
-      <div class="receipt"><div class="rt">THE FINE PRINT — AND THE NEXT RUNG</div>
-        <p>The secret fraction is thin (0.04): swap-grade fidelity barely clears the key threshold. That's the honest
-        hook — run <a href="../swap/" style="color:var(--cyan)">purification</a> first to fatten the key. One die,
-        co-located parties, one attack strategy, raw key for the demo (no privacy amplification). A certified-key
-        demonstration. <code>Exp166 · job d9du1bkjeosc73fi2h3g</code></p></div>
+      <div class="receipt"><div class="rt">THE FINE PRINT — AND AN HONEST DEAD END</div>
+        <p>The secret fraction is thin (0.04): swap-grade fidelity barely clears the key threshold. The obvious fix —
+        run <a href="../swap/" style="color:var(--cyan)">purification</a> first — we <em>tried</em>, and it did
+        <em>not</em> pay: two bracketing flights (Exp167) showed single-round distillation is underwater on this
+        hardware — its two-qubit-gate overhead costs more fidelity than it recovers, at every input we could reach.
+        The fatter key here awaits better gates or a lower-overhead protocol, not a free win from the stack. One die,
+        co-located parties, one attack, raw key (no privacy amplification). <code>Exp166 · job d9du1bkjeosc73fi2h3g</code></p></div>
     </div>
   </section>
 
