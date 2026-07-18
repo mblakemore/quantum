@@ -1,0 +1,182 @@
+{
+ "exp": 173,
+ "backend": "ibm_fez",
+ "steps": 6,
+ "shots": 8000,
+ "N": 8,
+ "dt": 0.8,
+ "scar_init": "10101010",
+ "ctrl_inits": [
+  "10101000",
+  "10100010",
+  "10001000",
+  "00000000"
+ ],
+ "layout": [
+  117,
+  105,
+  124,
+  125,
+  136,
+  123,
+  143,
+  142
+ ],
+ "job_id": "d9dv4qsinv1c73apjff0",
+ "order": [
+  [
+   "10101010",
+   0
+  ],
+  [
+   "10101010",
+   1
+  ],
+  [
+   "10101010",
+   2
+  ],
+  [
+   "10101010",
+   3
+  ],
+  [
+   "10101010",
+   4
+  ],
+  [
+   "10101010",
+   5
+  ],
+  [
+   "10101010",
+   6
+  ],
+  [
+   "10101000",
+   0
+  ],
+  [
+   "10101000",
+   1
+  ],
+  [
+   "10101000",
+   2
+  ],
+  [
+   "10101000",
+   3
+  ],
+  [
+   "10101000",
+   4
+  ],
+  [
+   "10101000",
+   5
+  ],
+  [
+   "10101000",
+   6
+  ],
+  [
+   "10100010",
+   0
+  ],
+  [
+   "10100010",
+   1
+  ],
+  [
+   "10100010",
+   2
+  ],
+  [
+   "10100010",
+   3
+  ],
+  [
+   "10100010",
+   4
+  ],
+  [
+   "10100010",
+   5
+  ],
+  [
+   "10100010",
+   6
+  ],
+  [
+   "10001000",
+   0
+  ],
+  [
+   "10001000",
+   1
+  ],
+  [
+   "10001000",
+   2
+  ],
+  [
+   "10001000",
+   3
+  ],
+  [
+   "10001000",
+   4
+  ],
+  [
+   "10001000",
+   5
+  ],
+  [
+   "10001000",
+   6
+  ],
+  [
+   "00000000",
+   0
+  ],
+  [
+   "00000000",
+   1
+  ],
+  [
+   "00000000",
+   2
+  ],
+  [
+   "00000000",
+   3
+  ],
+  [
+   "00000000",
+   4
+  ],
+  [
+   "00000000",
+   5
+  ],
+  [
+   "00000000",
+   6
+  ],
+  [
+   "cal0",
+   -1
+  ],
+  [
+   "cal1",
+   -1
+  ]
+ ],
+ "prereg": {
+  "confidence": 0.55,
+  "gate": "R_rel = s_scar/s_gen > 0.85 (scar decays like the generic pack; no scar-specific fragility) AND readout mitigation lifts the F-channel R by more than the Neel R (F<Neel gap was readout)",
+  "note": "CLEAR THE FOG (advisor C4203): independent normalizers only. R_rel fits scar and generics SEPARATELY (non-circular, detects fragility per selftest). Fog DECOMPOSITION: readout-mit lifts F not Neel -> residual is coherent Trotter, not readout. In-job cal, pinned qubits (C4199)."
+ },
+ "note": "N=8 scar fog-clear: readout mitigation (pinned qubits, in-job cal) + fog DECOMPOSITION (F-vs-Neel recovery = readout vs coherent) + non-circular fragility R_rel=s_scar/s_gen"
+}

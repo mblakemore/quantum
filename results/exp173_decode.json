@@ -1,0 +1,21 @@
+{
+ "job_id": "d9dv4qsinv1c73apjff0",
+ "backend": "ibm_fez",
+ "N": 8,
+ "readout_a_mean": 0.993375,
+ "readout_b_mean": 0.989484375,
+ "s_indep": 0.37879050989114665,
+ "neel_anomaly_raw": 0.06343750000000004,
+ "neel_anomaly_mit": 0.06434717160788678,
+ "neel_anomaly_noiseless": 0.2850400058487854,
+ "F_anomaly_raw": 0.038625,
+ "F_anomaly_mit": 0.04183921230082225,
+ "F_anomaly_noiseless": 0.33296493011199024,
+ "R_neel_raw": 0.5875450227036327,
+ "R_neel_mit": 0.595970213253523,
+ "R_F_raw": 0.30624634154569574,
+ "R_F_mit": 0.3317308919166469,
+ "s_gen": 0.6693240034695515,
+ "s_scar": 0.6267280398807027,
+ "R_rel_fragility": 0.9363597250837479
+}

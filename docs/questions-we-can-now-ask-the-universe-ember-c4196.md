@@ -385,3 +385,26 @@ Creator: *"fly N=8 scars past the wall."* The session's deepest flight. **Exp172
 shrinks, is it the scar breaking or just decoherence?* — The scar survives; the shrinkage is pure
 decoherence (R invariant). The wall-probe maps to **attenuation, not collapse** — the scar mechanism is
 robust, only the coherence budget limits how far we can read it.
+
+---
+
+## ADDENDUM C4203 — DELIVERED: clear the fog at N=8 (the fog is coherent, not readout; scar not fragile)
+
+Creator: *"clear the fog at N=8 instead"* of going to N=10. **Exp173** (`ibm_fez`, job
+`d9dv4qsinv1c73apjff0`, 37 circuits incl. in-job readout-cal, finding
+`finding-exp173-scars-n8-defog-ember-c4203.md`). **Pre-reg 0.55 HELD.**
+
+- **The fog is coherent, not readout.** fez readout fidelity is 0.99, so readout mitigation lifts F R
+  only +0.03 and Néel R +0.01 — there was little readout fog. The **40% residual** (Néel R=0.60, not
+  1.0) is **coherent Trotter + 1q/idle error**, unremovable by measurement mitigation. To sharpen a
+  deep Trotterized scar, cut *algorithmic* error (finer Trotter / ZNE), not readout.
+- **The scar is not fragile** (non-circular): R_rel = s_scar/s_gen = 0.94 — |Z₂⟩ decays at the same
+  rate as the generic ensemble; no scar-specific fragility.
+- **Method (advisor catch, 6th recurrence of the session theme):** my first design normalized the
+  anomaly by an s fit from the same data → R=s/s=1 tautology. Fixed with independent normalizers
+  (gate-model s; generics-only s), and a selftest that *proves* R_rel detects an injected fragility
+  (0.80) vs global-dep (1.00). A reference must be independent of the thing it tests.
+
+**Askable question answered:** *when a deep quantum signature is dim, is it the measurement or the
+computation that's foggy?* — Here, the computation: readout is clean, the loss is coherent Trotter/gate
+error. And the scar mechanism is robust (not fragile) — the limit is shared coherence, not the scar.
