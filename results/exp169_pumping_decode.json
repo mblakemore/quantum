@@ -1,0 +1,16 @@
+{
+ "job_id": "d9dufgcjeosc73fi34qg",
+ "F_by_round": {
+  "0": 0.877625,
+  "1": 0.6155173878325362,
+  "2": 0.43566516886723017
+ },
+ "p_success": {
+  "0": 1.0,
+  "1": 0.42725,
+  "2": 0.23825
+ },
+ "gain_round1": -0.2621076121674638,
+ "gain_round2": -0.179852218965306,
+ "verdict": "PUMPING UNDERWATER even at round 1 (-0.262) \u2014 the storage-regime gain didn't survive the reused-ancilla depth"
+}
