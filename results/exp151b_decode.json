@@ -1,0 +1,112 @@
+{
+ "exp": "151b",
+ "job_id": "d9di5mkjeosc73fhkf6g",
+ "backend": "ibm_fez",
+ "rows": [
+  {
+   "t": 0,
+   "A_dtc_hw": 0.996,
+   "A_match_hw": 0.997,
+   "P_hw": 0.999,
+   "P_ideal": 1.0,
+   "ratio": 0.999
+  },
+  {
+   "t": 1,
+   "A_dtc_hw": 0.885,
+   "A_match_hw": 0.887,
+   "P_hw": 0.998,
+   "P_ideal": 1.0,
+   "ratio": 0.998
+  },
+  {
+   "t": 2,
+   "A_dtc_hw": 0.867,
+   "A_match_hw": 0.884,
+   "P_hw": 0.98,
+   "P_ideal": 0.96,
+   "ratio": 1.021
+  },
+  {
+   "t": 3,
+   "A_dtc_hw": 0.809,
+   "A_match_hw": 0.874,
+   "P_hw": 0.926,
+   "P_ideal": 0.951,
+   "ratio": 0.973
+  },
+  {
+   "t": 4,
+   "A_dtc_hw": 0.767,
+   "A_match_hw": 0.869,
+   "P_hw": 0.882,
+   "P_ideal": 0.883,
+   "ratio": 0.999
+  },
+  {
+   "t": 5,
+   "A_dtc_hw": 0.703,
+   "A_match_hw": 0.829,
+   "P_hw": 0.848,
+   "P_ideal": 0.869,
+   "ratio": 0.976
+  },
+  {
+   "t": 6,
+   "A_dtc_hw": 0.662,
+   "A_match_hw": 0.815,
+   "P_hw": 0.812,
+   "P_ideal": 0.794,
+   "ratio": 1.023
+  },
+  {
+   "t": 7,
+   "A_dtc_hw": 0.595,
+   "A_match_hw": 0.795,
+   "P_hw": 0.748,
+   "P_ideal": 0.777,
+   "ratio": 0.963
+  },
+  {
+   "t": 8,
+   "A_dtc_hw": 0.569,
+   "A_match_hw": 0.807,
+   "P_hw": 0.705,
+   "P_ideal": 0.71,
+   "ratio": 0.994
+  },
+  {
+   "t": 9,
+   "A_dtc_hw": 0.511,
+   "A_match_hw": 0.779,
+   "P_hw": 0.656,
+   "P_ideal": 0.681,
+   "ratio": 0.964
+  },
+  {
+   "t": 10,
+   "A_dtc_hw": 0.457,
+   "A_match_hw": 0.754,
+   "P_hw": 0.606,
+   "P_ideal": 0.583,
+   "ratio": 1.039
+  },
+  {
+   "t": 11,
+   "A_dtc_hw": 0.412,
+   "A_match_hw": 0.769,
+   "P_hw": 0.536,
+   "P_ideal": 0.57,
+   "ratio": 0.941
+  },
+  {
+   "t": 12,
+   "A_dtc_hw": 0.349,
+   "A_match_hw": 0.743,
+   "P_hw": 0.469,
+   "P_ideal": 0.468,
+   "ratio": 1.002
+  }
+ ],
+ "verdict": "A_dtc_hw 0.349 <= A_match_hw 0.743 at t_max -> interactions alone carry the shield; localization adds no differential noise-robustness (pred FALSIFIED)"
+}

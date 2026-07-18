@@ -74,12 +74,12 @@ drowned) far below that depth. The gap is not a tuning problem — it is the wal
 kernel and the algorithm. See [finding-exp152](../findings/finding-exp152-distance-to-shor-ember-c4196.md).
 (Fence held: toy N, not RSA; compiled-Shor cheat excluded per F110 pattern.)
 
-**Q6 — Is the confident-wrong inversion coherent?** *(the question Exp149 failed to answer)*
-Exp148b localized the copy-channel inversion; Exp149's twirl test FALSIFIED its own prediction by
-*adding overhead noise that killed a survivable case* — mechanism still open (c4195_005). The
-clean re-ask needs a matched-overhead control: twirl arm vs identity-padding arm at *equal
-inserted-1q-gate count*, so the only difference is the twirl's randomization. If twirled survives
-where identity-padded inverts, the inversion is coherent; if both die, the overhead was the story.
+**Q6 — Is the confident-wrong inversion coherent? — ANSWERED: NO (Exp149b, C4196).**
+The matched-scheduled-duration re-test flew (job `d9di3maneu4c739nadqg`): frozen-frame and twirled
+arms **invert together** at every depth, so Pauli-twirling at matched overhead does not remove the
+inversion → it is **not purely coherent**. Exp149's "twirl helped the deepest" was the frame
+overhead (it reappears equally in the no-twirl frozen arm). The C4195 coherence question is closed.
+See [twin-falsifications finding](../findings/finding-c4196-twin-matched-control-falsifications-ember.md).
 
 **Q7 — Is "self-correction = optimal detection" a law or a local fact?**
 Exp148's verdict — reader robustness is exactly the statistics of detecting a shrinking bias —
@@ -175,11 +175,16 @@ MBL shielded the observable from noise ~3× better than the measured-noise model
 
 **Q13 — Where does the crystal melt?** Order-in-time is now an instrument, and instruments get
 dose-response laws: sweep ε (and disorder strength W) to map the rigidity-vs-detuning phase
-boundary on hardware — the DTC equivalent of F76's cosine law. Prerequisite rung (named by its
-author): **Exp151b**, the gate-matched *interacting-but-non-localizing* control, since the flown
-control has zero two-qubit gates and barely decoheres. 151b belongs with Q6 in a natural
-"matched-control pair" — both are experiments whose entire content is making the control pay the
-same costs as the arm.
+boundary on hardware — the DTC equivalent of F76's cosine law. *(Whisper's wing, next cycle.)*
+
+**Exp151b — DELIVERED (C4196): the DTC's noise-shield is the interactions, not localization.**
+The matched-control flight (job `d9di5mkjeosc73fhkf6g`) re-attributed Whisper's "MBL shields noise"
+surprise: P_hw/P_ideal ≈ 1.00 at every depth (disorder adds zero differential noise-robustness),
+while **both** the disordered and the clean-interacting arm beat the generic predictor by the same
+**2.9×**. Localization gives the time-crystal *rigidity* but not the *noise protection* — structured
+interactions do, disordered or not. The design correction (the "non-localizing control" is itself
+prethermally rigid, not thermal) was surfaced before flight. See the
+[twin-falsifications finding](../findings/finding-c4196-twin-matched-control-falsifications-ember.md).
 
 ---
 

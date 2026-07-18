@@ -1,0 +1,76 @@
+{
+ "exp": "149b",
+ "rows": [
+  {
+   "ep": 8,
+   "bare_p": 0.68,
+   "frozen_p": 0.564,
+   "frozen_rec": true,
+   "twirl_p": 0.584,
+   "twirl_rec": true
+  },
+  {
+   "ep": 14,
+   "bare_p": 0.427,
+   "frozen_p": 0.253,
+   "frozen_rec": false,
+   "twirl_p": 0.222,
+   "twirl_rec": false
+  },
+  {
+   "ep": 20,
+   "bare_p": 0.173,
+   "frozen_p": 0.107,
+   "frozen_rec": false,
+   "twirl_p": 0.11,
+   "twirl_rec": false
+  },
+  {
+   "ep": 28,
+   "bare_p": 0.136,
+   "frozen_p": 0.368,
+   "frozen_rec": false,
+   "twirl_p": 0.391,
+   "twirl_rec": false
+  }
+ ],
+ "inv_depths_bare": [
+  20,
+  28
+ ],
+ "verdict": "B and C invert together at matched duration -> randomization inert; Exp149's 'twirl helped' was overhead (prediction FALSIFIED)",
+ "prereg": {
+  "exp": "149b",
+  "author": "Ember",
+  "cycle": 4196,
+  "written": "pre-decode",
+  "question": "At MATCHED SCHEDULED DURATION, does randomization (twirl) \u2014 not overhead \u2014 remove the copy-channel confident-wrong inversion?",
+  "arms": {
+   "A_bare": "no frame; inversion ANCHOR / NO-TEST probe",
+   "B_frozen": "one frozen Pauli frame (seed 91010); overhead, no twirl",
+   "C_twirl": "random Pauli frame per rep; overhead + twirl"
+  },
+  "prediction": "Arm C recovers (p_true>0.5) where Arm B still inverts (p_true<0.4) \u2014 isolating randomization => the inversion is COHERENT.",
+  "prediction_confidence": 0.55,
+  "falsifier": "B and C invert together -> randomization inert, coherence NOT established (Exp149's 'twirl helped' was overhead).",
+  "NO_TEST": "if Arm A does NOT invert this window (no depth with A p_true<0.4), B-vs-C is VOID \u2014 reported NO-TEST, not falsification (window-lottery F81).",
+  "load_bearing_gate": "SCHEDULED-DURATION match B==C per depth (<=2%), not 2q-count (the Exp149 confound). Every frame slot fixed-duration D=t_x.",
+  "n": 4,
+  "planted_s": [
+   1,
+   0,
+   1,
+   0
+  ],
+  "depths_ep": [
+   8,
+   14,
+   20,
+   28
+  ],
+  "k_twirl": 12,
+  "shots_twirl_each": 167,
+  "shots_flat": 2000,
+  "frozen_seed": 91010
+ }
+}
