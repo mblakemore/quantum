@@ -1,0 +1,74 @@
+{
+ "exp": 170,
+ "slug": "gate",
+ "backend": "ibm_fez",
+ "shots": 4096,
+ "job_id": "d9dutehhtsac739dit60",
+ "order": [
+  [
+   "teleported",
+   "bell_ZZ"
+  ],
+  [
+   "teleported",
+   "bell_XX"
+  ],
+  [
+   "teleported",
+   "bell_YY"
+  ],
+  [
+   "teleported",
+   "tt_10"
+  ],
+  [
+   "teleported",
+   "tt_00"
+  ],
+  [
+   "direct",
+   "bell_ZZ"
+  ],
+  [
+   "direct",
+   "bell_XX"
+  ],
+  [
+   "direct",
+   "bell_YY"
+  ],
+  [
+   "direct",
+   "tt_10"
+  ],
+  [
+   "direct",
+   "tt_00"
+  ],
+  [
+   "noresource",
+   "bell_ZZ"
+  ],
+  [
+   "noresource",
+   "bell_XX"
+  ],
+  [
+   "noresource",
+   "bell_YY"
+  ],
+  [
+   "noresource",
+   "tt_10"
+  ],
+  [
+   "noresource",
+   "tt_00"
+  ]
+ ],
+ "prereg": {
+  "primary": "teleported F_bell > 1/2 at >5 sigma AND truth_table > 0.85",
+  "falsifier": "noresource F_bell < 0.6 (caps at 1/2 \u2014 classical shadow, no entanglement)",
+  "prediction": "F_bell 0.78-0.90, truth_table 0.88-0.96; direct baseline higher"
+ }
+}
