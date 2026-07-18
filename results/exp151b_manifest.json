@@ -1,0 +1,116 @@
+{
+ "exp": "151b",
+ "backend": "ibm_fez",
+ "tmax": 12,
+ "shots": 4000,
+ "L": 6,
+ "eps": 0.12,
+ "job_id": "d9di5mkjeosc73fhkf6g",
+ "order": [
+  [
+   "dtc",
+   0
+  ],
+  [
+   "dtc",
+   1
+  ],
+  [
+   "dtc",
+   2
+  ],
+  [
+   "dtc",
+   3
+  ],
+  [
+   "dtc",
+   4
+  ],
+  [
+   "dtc",
+   5
+  ],
+  [
+   "dtc",
+   6
+  ],
+  [
+   "dtc",
+   7
+  ],
+  [
+   "dtc",
+   8
+  ],
+  [
+   "dtc",
+   9
+  ],
+  [
+   "dtc",
+   10
+  ],
+  [
+   "dtc",
+   11
+  ],
+  [
+   "dtc",
+   12
+  ],
+  [
+   "match",
+   0
+  ],
+  [
+   "match",
+   1
+  ],
+  [
+   "match",
+   2
+  ],
+  [
+   "match",
+   3
+  ],
+  [
+   "match",
+   4
+  ],
+  [
+   "match",
+   5
+  ],
+  [
+   "match",
+   6
+  ],
+  [
+   "match",
+   7
+  ],
+  [
+   "match",
+   8
+  ],
+  [
+   "match",
+   9
+  ],
+  [
+   "match",
+   10
+  ],
+  [
+   "match",
+   11
+  ],
+  [
+   "match",
+   12
+  ]
+ ],
+ "note": "DTC vs gate-matched clean-interacting; protection-factor decomposition"
+}
