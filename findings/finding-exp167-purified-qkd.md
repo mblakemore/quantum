@@ -1,40 +1,48 @@
-# Finding — Exp167: PURIFY → QKD — the mechanism worked, the channel was already dead (v1 null)
+# Finding — Exp167/167b: PURIFY → QKD — purification is underwater on Heron r2 (bracketed null)
 
-**Cycle**: C4858 · **Date**: 2026-07-18 · **Backend**: ibm_fez · **Job**: `d9du8gphtsac739di1q0`
-(16 circuits: {faded, purified} × 8 basis settings, 4096 shots). Composes Exp164 (storage) +
-Exp165 (purify) + Exp166 (QKD) to test whether distilling first fattens the key.
+**Cycle**: C4858 · **Date**: 2026-07-18 · **Backend**: ibm_fez ·
+**Jobs**: v1 `d9du8gphtsac739di1q0` (τ=10 μs), v2 `d9du9ssjeosc73fi2u30` (τ=4 μs, pinned).
+Composes Exp164 (storage) + 165 (purify) + 166 (QKD): does distilling first fatten the key?
 
-## Result — honest NULL on the headline, mechanism resolved
+## Answer: no — and two flights prove *why*, by bracketing the input
 
-| arm | S | QBER_Z | QBER_X | secret fraction |
-|-----|---|--------|--------|-----------------|
-| faded (one 10 μs pair → QKD) | 0.714 | 0.179 | 0.593 | 0.000 |
-| purified (two pairs → DEJMPS → QKD) | 1.306 | 0.258 | 0.218 | 0.000 |
+| flight | input | faded arm | purified arm |
+|--------|-------|-----------|--------------|
+| v1 (τ=10 μs) | dead (S=0.714) | S 0.714, SF 0 | S 1.306, SF 0 |
+| v2 (τ=4 μs, pinned) | healthy (S=2.430) | S 2.430, **SF 0.294** | S 2.181, SF 0 |
 
-**The fatter-key claim did not land: both arms yield zero secret key.** But purification's
-mechanism is unmistakable — it lifted S by +0.59 (0.714 → 1.306) and **more than halved QBER_X**
-(0.593 → 0.218, p_success 0.53). The distillery did exactly what the truth-gate proved it would;
-it simply started from a corpse.
+- **v1: input too dead to save.** Purification's mechanism worked (S 0.714→1.306, QBER_X
+  0.593→0.218) but a distilled corpse is still a corpse — below the key threshold.
+- **v2: input too good to help.** With a healthy 4 μs pair, the faded arm makes a fine key
+  (SF 0.294), and running DEJMPS first makes it **worse** (S 2.43→2.18): the protocol's ~2 extra
+  CX + the second pair's preparation noise cost more fidelity than distillation returned.
 
-## Why — the input was dead, not marginal
+Together the two flights bracket the accessible input range and land on the same wall:
+**single-round DEJMPS does not fatten a QKD key on Heron r2 — its two-qubit-gate overhead exceeds
+its distillation gain everywhere.** The break-even (distillation gain > ~2-CX cost) is not reached
+at this gate fidelity: at F≈0.8 the ideal gain is ≈+0.1, and ~2 CX of hardware error is ≈+0.15–0.2
+of fidelity cost. The named pre-registered risk ("DEJMPS depth eats the gain") materialized on
+both flights.
 
-I pre-registered the faded channel as *marginal* (S ≈ 2, secret fraction ≈ 0⁺). It came back at
-**S = 0.714** — a nearly destroyed pair (QBER_X 0.593 is *anti*-correlated). This run's 10 μs
-storage degraded the pair far past the Exp164 curve (which put 10 μs at F ≈ 0.61, S ≈ 1.5–2):
-the fifth instance today of the condition-volatility / non-stationarity lesson (Exp158, 161, 163,
-165 input misses), compounded by an unpinned layout landing on worse qubits. Distilling a dead
-pair gives a less-dead pair that is still below the key threshold — S 1.31 < 2. The composition
-is directionally correct and thresholds-short.
+## What this prices
 
-## Fix and refly
+This is the honest ceiling on the composition, and it is quantitative: purification pays only
+once the two-qubit gate error drops enough that one distillation round's gain clears its own
+cost — a concrete target for better hardware, or for lower-overhead schemes (entanglement pumping,
+measurement-based distillation) that spend fewer gates per round. It does **not** retract Exp165
+(purification demonstrably works on *structured storage noise* where the gain is large, 0.396→0.688)
+— it shows that gain does not survive being stacked under a QKD readout at QKD-relevant input
+fidelities on this device.
 
-The demonstration needs an input with a fighting chance: **shorter storage (τ = 4 μs) and a
-pinned layout** so the faded arm is genuinely marginal, letting distillation carry the purified
-arm across the key threshold. Flown as Exp167b — same v1→v2 discipline as the sensor (Exp159).
-Prediction record: SF_purified band missed (0 vs 0.10–0.40); the miss is entirely explained by
-the input level, and the mechanism (S↑, QBER↓) held as designed.
+## Consequence (correction)
 
-## Fence
+The Exp166 subspace-channel exhibit's "purify first for a fatter key" hook is **corrected**: on
+current hardware purification's overhead exceeds its gain, so the fatter key awaits better gates
+or a lower-overhead protocol — not a free win from the stack as first written.
 
-Deeper than Exp165 (QKD + CHSH rounds stacked on DEJMPS); one intercept-free channel; the null
-prices *composition from a dead input*, not purification itself (which measurably worked).
+## Fence & discipline
+
+Two flights bracket the input; a third would land between and fail for the same reason, so the
+chapter is closed (not chased) — the same discipline as the DD trilogy. Single-round DEJMPS, one
+device, one day; the negative is a hardware-gate-fidelity statement, not a theory retraction.
+Prediction record: SF_purified band missed on both flights (the named risk), calibration 82.4%.

@@ -1,0 +1,23 @@
+{
+ "job_id": "d9du9ssjeosc73fi2u30",
+ "tau_us": 4.0,
+ "faded": {
+  "S": 2.4296875,
+  "qber_z": 0.047607421875,
+  "qber_x": 0.08544921875,
+  "qber_avg": 0.0665283203125,
+  "secret_fraction": 0.2943352413641346,
+  "p_success": 1.0
+ },
+ "purified": {
+  "S": 2.181277056827372,
+  "qber_z": 0.12002840909090909,
+  "qber_x": 0.10751528227256382,
+  "qber_avg": 0.11377184568173646,
+  "secret_fraction": 0.0,
+  "p_success": 0.6875
+ },
+ "delta_secret_fraction": -0.2943352413641346,
+ "fatter": false,
+ "verdict": "NULL \u2014 distillation did not net a usable key at this input (honest accounting)"
+}
