@@ -1,0 +1,77 @@
+{
+ "exp": 179,
+ "slug": "merged_window",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e0gv4inv1c73aplk4g",
+ "order": [
+  [
+   "seq",
+   "ZZ"
+  ],
+  [
+   "seq",
+   "XX"
+  ],
+  [
+   "seq",
+   "YY"
+  ],
+  [
+   "seqecho",
+   "ZZ"
+  ],
+  [
+   "seqecho",
+   "XX"
+  ],
+  [
+   "seqecho",
+   "YY"
+  ],
+  [
+   "merged",
+   "ZZ"
+  ],
+  [
+   "merged",
+   "XX"
+  ],
+  [
+   "merged",
+   "YY"
+  ],
+  [
+   "mergedecho",
+   "ZZ"
+  ],
+  [
+   "mergedecho",
+   "XX"
+  ],
+  [
+   "mergedecho",
+   "YY"
+  ],
+  [
+   "direct",
+   "ZZ"
+  ],
+  [
+   "direct",
+   "XX"
+  ],
+  [
+   "direct",
+   "YY"
+  ]
+ ],
+ "delay_dt": 425,
+ "prereg": {
+  "primary": "F(merged)-F(seq) > 0 at >=3 sigma (window-count architecture pays)",
+  "secondary": "F(mergedecho)-F(seqecho) > 0 at >=3 sigma (new best stack)",
+  "band": "seq 0.50-0.62; seqecho 0.70-0.82; merged 0.68-0.82; mergedecho 0.75-0.88; direct 0.95-0.99; ceiling ref 0.885",
+  "open": "merged vs seqecho pre-registered as genuinely open (locates residual: middles vs ends)",
+  "risk": "if mergedecho ~ merged, suspect delay placement first (Exp178 proved coherence)"
+ }
+}
