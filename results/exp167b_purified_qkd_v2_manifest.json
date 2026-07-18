@@ -1,0 +1,101 @@
+{
+ "exp": "167b",
+ "slug": "purified_qkd_v2",
+ "backend": "ibm_fez",
+ "shots": 4096,
+ "job_id": "d9du9ssjeosc73fi2u30",
+ "order": [
+  [
+   "faded",
+   "Z",
+   "Z"
+  ],
+  [
+   "faded",
+   "Z",
+   "X"
+  ],
+  [
+   "faded",
+   "X",
+   "Z"
+  ],
+  [
+   "faded",
+   "X",
+   "X"
+  ],
+  [
+   "faded",
+   "Z",
+   "W"
+  ],
+  [
+   "faded",
+   "Z",
+   "V"
+  ],
+  [
+   "faded",
+   "X",
+   "W"
+  ],
+  [
+   "faded",
+   "X",
+   "V"
+  ],
+  [
+   "purified",
+   "Z",
+   "Z"
+  ],
+  [
+   "purified",
+   "Z",
+   "X"
+  ],
+  [
+   "purified",
+   "X",
+   "Z"
+  ],
+  [
+   "purified",
+   "X",
+   "X"
+  ],
+  [
+   "purified",
+   "Z",
+   "W"
+  ],
+  [
+   "purified",
+   "Z",
+   "V"
+  ],
+  [
+   "purified",
+   "X",
+   "W"
+  ],
+  [
+   "purified",
+   "X",
+   "V"
+  ]
+ ],
+ "tau_us": 4.0,
+ "layout": [
+  127,
+  137,
+  147,
+  146
+ ],
+ "message": "BEAM ME UP",
+ "prereg": {
+  "primary": "SF_purified > SF_faded AND SF_purified > 0 (positive key); faded S ~ 2 (marginal, not dead this time)",
+  "prediction": "faded S 1.8-2.3 SF 0-0.10; purified S 2.2-2.6 SF 0.15-0.45"
+ }
+}
