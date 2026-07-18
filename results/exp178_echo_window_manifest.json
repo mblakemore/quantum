@@ -1,0 +1,77 @@
+{
+ "exp": 178,
+ "slug": "echo_window",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e0a4ineu4c739nrt50",
+ "order": [
+  [
+   "live",
+   "ZZ"
+  ],
+  [
+   "live",
+   "XX"
+  ],
+  [
+   "live",
+   "YY"
+  ],
+  [
+   "liveecho",
+   "ZZ"
+  ],
+  [
+   "liveecho",
+   "XX"
+  ],
+  [
+   "liveecho",
+   "YY"
+  ],
+  [
+   "deferred",
+   "ZZ"
+  ],
+  [
+   "deferred",
+   "XX"
+  ],
+  [
+   "deferred",
+   "YY"
+  ],
+  [
+   "defecho",
+   "ZZ"
+  ],
+  [
+   "defecho",
+   "XX"
+  ],
+  [
+   "defecho",
+   "YY"
+  ],
+  [
+   "direct",
+   "ZZ"
+  ],
+  [
+   "direct",
+   "XX"
+  ],
+  [
+   "direct",
+   "YY"
+  ]
+ ],
+ "witness": 0.5,
+ "prereg": {
+  "primary": "F(defecho)-F(deferred) > 0 at >=3 sigma",
+  "secondary": "F(liveecho)-F(live) > 0 at >=3 sigma",
+  "branches": ">=+0.10 coherent | <+0.03 & <=2sigma echo-immune (backaction) | else mixed",
+  "band": "live 0.42-0.58; liveecho +0.00-0.15 over live; deferred 0.50-0.62; defecho 0.55-0.75; direct 0.95-0.99; ceiling ref endmeasure 0.885 (Exp177)",
+  "fingerprint": "recovery XX/YY-concentrated, ZZ flat"
+ }
+}
