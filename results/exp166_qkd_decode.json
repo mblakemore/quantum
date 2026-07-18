@@ -1,0 +1,33 @@
+{
+ "job_id": "d9du1bkjeosc73fi2h3g",
+ "honest": {
+  "S": 2.17919921875,
+  "E": {
+   "ZW": 0.58447265625,
+   "ZV": 0.6083984375,
+   "XW": 0.5,
+   "XV": -0.486328125
+  },
+  "qber_z": 0.0595703125,
+  "qber_x": 0.1474609375,
+  "qber_avg": 0.103515625,
+  "secret_fraction": 0.03991637390151326
+ },
+ "eve": {
+  "S": 1.18408203125,
+  "E": {
+   "ZW": 0.6015625,
+   "ZV": 0.59033203125,
+   "XW": 0.01171875,
+   "XV": 0.01953125
+  },
+  "qber_z": 0.080810546875,
+  "qber_x": 0.506591796875,
+  "qber_avg": 0.293701171875,
+  "secret_fraction": 0.0
+ },
+ "certified": true,
+ "key_ok": true,
+ "eve_detected": true,
+ "verdict": "SECURE CHANNEL LIVE \u2014 key certified by physics, wiretap detected and aborted"
+}
