@@ -1,0 +1,31 @@
+{
+ "results": {
+  "d3": {
+   "rounds": 3,
+   "p_data": 0.021087640000000074,
+   "p_meas": 0.01,
+   "p_L_mwpm": 0.01,
+   "p_L_ours": 0.011
+  },
+  "d5": {
+   "rounds": 5,
+   "p_data": 0.021087640000000074,
+   "p_meas": 0.01,
+   "p_L_mwpm": 0.002,
+   "p_L_ours": null
+  },
+  "d7": {
+   "rounds": 7,
+   "p_data": 0.021087640000000074,
+   "p_meas": 0.01,
+   "p_L_mwpm": 0.00025,
+   "p_L_ours": null
+  }
+ },
+ "trend": "SUPPRESSION",
+ "ladder": [
+  3,
+  5,
+  7
+ ]
+}

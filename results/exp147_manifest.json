@@ -1,0 +1,58 @@
+{
+ "exp": 147,
+ "backend": "ibm_fez",
+ "reps": 4000,
+ "distances": [
+  3,
+  5,
+  7
+ ],
+ "job_id": "d9dctekinv1c73aot06g",
+ "circuit_meta": [
+  {
+   "d": 3,
+   "rounds": 3,
+   "logical": 0,
+   "depth": 33,
+   "n2q": 12
+  },
+  {
+   "d": 3,
+   "rounds": 3,
+   "logical": 1,
+   "depth": 33,
+   "n2q": 12
+  },
+  {
+   "d": 5,
+   "rounds": 5,
+   "logical": 0,
+   "depth": 75,
+   "n2q": 40
+  },
+  {
+   "d": 5,
+   "rounds": 5,
+   "logical": 1,
+   "depth": 75,
+   "n2q": 40
+  },
+  {
+   "d": 7,
+   "rounds": 7,
+   "logical": 0,
+   "depth": 133,
+   "n2q": 84
+  },
+  {
+   "d": 7,
+   "rounds": 7,
+   "logical": 1,
+   "depth": 133,
+   "n2q": 84
+  }
+ ],
+ "E_CX": 0.0106,
+ "E_RO": 0.01,
+ "note": "repetition-code syndrome decode; self-verifying (recovered logical vs planted); race ours-GF2 vs MWPM; distance suppression pre-registered"
+}
