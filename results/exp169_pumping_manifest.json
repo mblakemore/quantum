@@ -1,0 +1,65 @@
+{
+ "exp": 169,
+ "slug": "pumping",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9dufgcjeosc73fi34qg",
+ "order": [
+  [
+   0,
+   "ZZ",
+   4
+  ],
+  [
+   0,
+   "XX",
+   4
+  ],
+  [
+   0,
+   "YY",
+   4
+  ],
+  [
+   1,
+   "ZZ",
+   4
+  ],
+  [
+   1,
+   "XX",
+   4
+  ],
+  [
+   1,
+   "YY",
+   4
+  ],
+  [
+   2,
+   "ZZ",
+   6
+  ],
+  [
+   2,
+   "XX",
+   6
+  ],
+  [
+   2,
+   "YY",
+   6
+  ]
+ ],
+ "layout": [
+  127,
+  137,
+  147,
+  146
+ ],
+ "tau_us": 10.0,
+ "prereg": {
+  "primary": "map F vs pump round; find the crossover (round where gain <= overhead)",
+  "prediction": "F: r0~0.6, r1~0.75-0.85 (pays), r2 flat-or-down (crossover); one useful round on Heron r2"
+ }
+}
