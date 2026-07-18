@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%225.5%22%20cy%3D%228%22%20r%3D%222.2%22%20fill%3D%22none%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.3%22%2F%3E%3Ccircle%20cx%3D%2210.5%22%20cy%3D%228%22%20r%3D%222.2%22%20fill%3D%22none%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.3%22%2F%3E%3Cline%20x1%3D%227.3%22%20y1%3D%228%22%20x2%3D%228.7%22%20y2%3D%228%22%20stroke%3D%22%2345d6cf%22%20stroke-width%3D%221.3%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Tricorder — scan a real molecule | The Quantum Museum</title>
+<meta name="description" content="A quantum chip reads a hydrogen molecule: the full dissociation curve, the bond length, and the electron correlation mean-field theory misses — with the chemistry derived from scratch and three intrinsic falsifiers. Exp156, ibm_fez.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--amber); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--amber); color: var(--amber); }
+
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--amber) 14%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--amber); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .plotwrap { overflow-x:auto; }
+  .legend { display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--mono); font-size:12px; color:var(--ink-2); margin:10px 0 0; }
+  .legend span { display:inline-flex; align-items:center; gap:7px; }
+  .swatch { width:15px; height:3px; border-radius:2px; display:inline-block; }
+
+  .ctl { display:flex; flex-wrap:wrap; gap:14px 22px; align-items:center; margin:14px 0 4px; }
+  .ctl label { font-family:var(--mono); font-size:12.5px; color:var(--ink-2); display:inline-flex; gap:8px; align-items:center; }
+  input[type=range]{ width:min(340px,70vw); accent-color:var(--amber); }
+  input[type=checkbox]{ accent-color:var(--bad); width:15px; height:15px; }
+
+  .readout { font-family:var(--mono); font-size:13px; background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:12px 15px; margin-top:12px; display:grid; gap:4px 26px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); }
+  .readout .k { color:var(--ink-3); font-size:11px; letter-spacing:.07em; text-transform:uppercase; display:block; }
+  .readout .v { color:var(--ink); font-weight:700; font-size:15px; }
+  .readout .v.up { color:var(--good); } .readout .v.corr { color:var(--bad); }
+
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; align-items:stretch; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:17px; font-weight:700; }
+  .val.good { color:var(--good); } .val.amber { color:var(--amber); }
+  .box.hl { border-color:color-mix(in srgb,var(--amber) 50%,var(--edge)); }
+
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--amber); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .principle { font-size:15px; color:var(--ink); line-height:1.6; margin:2px 0 16px; }
+  .principle b { color:var(--amber); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--amber); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce){ * { transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ quantum chemistry</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Tricorder<span class="hl">.</span></h1>
+    <p class="lede">Point the instrument at a hydrogen molecule and read off its physics. A quantum chip scans H<sub>2</sub>
+      across ten bond lengths and recovers the <b>dissociation curve</b>, the <b>bond length</b> — within 0.04&nbsp;Å of where a
+      real hydrogen molecule sits — and the <b>electron correlation</b> that mean-field theory provably misses, detected at
+      31σ. The chemistry it verifies against was derived from scratch: Gaussian integrals in plain numpy, no chemistry
+      package anywhere in the stack.</p>
+    <span class="scope">Scope: <b>hardware energy readout</b> of a first-principles 2-qubit molecular Hamiltonian
+      (minimal STO-3G basis) — verified against the model's exact diagonalization, not spectroscopy; no mitigation.</span>
+  </header>
+
+  <!-- PANEL A: the scan -->
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">The scan</h2>
+    <p class="sub">energy vs bond length · 10 hardware points · ibm_fez · 4096 shots × 3 bases each</p>
+    <p class="primer"><b>How it works.</b> For each bond length R, the exact correlated ground state of the molecule's
+      2-qubit Hamiltonian is prepared with a single CX, and the energy is measured in three bases
+      (⟨Z₀⟩, ⟨Z₁⟩, ⟨Z₀Z₁⟩, ⟨X₀X₁⟩, ⟨Y₀Y₁⟩ recombined with the self-derived coefficients). The <b>variational theorem</b>
+      makes this self-verifying: no physical state can have energy below the true ground energy, so hardware noise can
+      only push the reading <em>up</em>. A point below the exact curve would mean the instrument is lying. None is.</p>
+    <figure class="plotwrap" aria-label="H2 dissociation curve: exact theory versus hardware readings">
+      <svg id="plot" viewBox="0 0 860 470" role="img"></svg>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--amber)"></i> exact ground (full CI, the model's truth)</span>
+        <span><i class="swatch" style="background:var(--cyan)"></i> ● hardware reading (correlated arm)</span>
+        <span id="legHF" style="display:none"><i class="swatch" style="background:var(--bad)"></i> ✕ hardware Hartree-Fock control · dashed = exact HF</span>
+      </div>
+    </figure>
+    <div class="ctl">
+      <label>scan cursor <input type="range" id="cursor" min="0" max="9" value="4" step="1"
+        aria-label="select bond length"></label>
+      <label><input type="checkbox" id="hfToggle"> show the Hartree-Fock control (the arm that must fail)</label>
+    </div>
+    <div class="readout" id="readout" aria-live="polite"></div>
+  </section>
+
+  <!-- PANEL B: what the instrument recovered -->
+  <section class="panel" aria-labelledby="pb">
+    <h2 id="pb">What the instrument recovered</h2>
+    <p class="sub">three falsifiers armed pre-flight · all passed · raw hardware, no error mitigation</p>
+    <p class="principle">The readings carry a systematic offset — on average <b>+65&nbsp;mHa</b> above exact, ~40× chemical
+      accuracy, largest where the Hamiltonian's coefficients are strongest. But the offset is nearly constant, so
+      <b>differences survive</b>: the binding energy (bottom of the well vs the dissociated atoms) comes out
+      <b>191&nbsp;mHa vs the model's 201</b> — within 5%. A noisy instrument tells the truth in derived quantities:
+      curve shape, bond length, binding, and the correlation gap.</p>
+    <div class="verdict">
+      <div class="box hl"><span class="lbl">bond length, from the curve minimum</span>
+        <span class="val amber">R<sub>e</sub> = 0.779 Å</span><br><span style="font-size:12px;color:var(--ink-3)">model exact 0.735 · real H₂ 0.741</span></div>
+      <div class="box"><span class="lbl">variational bound</span>
+        <span class="val good">0 / 10 below ground</span><br><span style="font-size:12px;color:var(--ink-3)">noise pushed only UP, as the theorem demands</span></div>
+      <div class="box"><span class="lbl">correlation detected (2.5 Å)</span>
+        <span class="val good">202 mHa · 31σ</span><br><span style="font-size:12px;color:var(--ink-3)">exact prediction 233 · grows 2→202 along the curve</span></div>
+      <div class="box"><span class="lbl">binding energy (difference)</span>
+        <span class="val amber">191 vs 201 mHa</span><br><span style="font-size:12px;color:var(--ink-3)">the systematic cancels in differences</span></div>
+    </div>
+  </section>
+
+  <!-- PANEL C: the court -->
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">why this reading is believable — and exactly what it is not</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE INSTRUMENT CANNOT FLATTER ITSELF</div>
+        <p>⟨ψ|H|ψ⟩ ≥ E<sub>ground</sub> for <em>any</em> state — so every error mechanism (gate noise, readout, decoherence)
+        raises the reading. All 10 points sit above the exact curve. A single point significantly below would have
+        voided the run as an instrument fault. <code>0/10 violations at 3σ</code></p></div>
+      <div class="receipt"><div class="rt">THE MATCHED CONTROL MUST FAIL</div>
+        <p>The Hartree-Fock arm runs the <em>identical circuit</em> with θ=0 — same gates, no correlation. It must sit
+        above the correlated arm by the correlation energy, which grows 11× toward dissociation as mean-field theory
+        fails to break the bond. The hardware sees exactly that divergence. <code>202 mHa at 2.5 Å, 31σ</code></p></div>
+      <div class="receipt"><div class="rt">CHEMISTRY FROM SCRATCH</div>
+        <p>No chemistry packages: STO-3G integrals from Szabo-Ostlund closed forms in numpy (Boys function, two-electron
+        integrals), 2×2 full CI, self-derived Pauli coefficients. Cross-checked against the literature before flight:
+        RHF −1.1167, FCI −1.1373 Ha at R=1.4 bohr — to four decimals. <code>truth-gates A/B/C all passed first run</code></p></div>
+      <div class="receipt"><div class="rt">THE FENCE</div>
+        <p>Minimal-basis model of H₂ on 2 qubits, verified against its own exact diagonalization — not against
+        experimental spectroscopy (STO-3G overbinds real H₂). Absolute accuracy is 65 mHa raw; chemical accuracy would
+        need mitigation and a bigger basis. A hardware energy readout with intrinsic falsifiers, not a beyond-classical
+        chemistry calculation. <code>Exp156 · job d9dr5skjeosc73fhus40</code></p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Exp156 · ibm_fez · 60 circuits · 4096 shots</span>
+    <span>C4845 · 2026-07-18</span>
+    <a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+// ---- data (measured on ibm_fez, job d9dr5skjeosc73fhus40; exact = from-scratch numpy CI) ----
+const HW = [ // [R, E_ci, sigma_ci, E_hf, sigma_hf]
+  [0.30,-0.5083,0.0084,-0.5005,0.0083],[0.40,-0.8275,0.0077,-0.8388,0.0070],
+  [0.50,-0.9923,0.0066,-0.9707,0.0070],[0.60,-1.0511,0.0066,-1.0415,0.0062],
+  [0.7414,-1.0689,0.0065,-1.0667,0.0057],[0.90,-1.0611,0.0062,-1.0439,0.0054],
+  [1.10,-1.0319,0.0056,-0.9881,0.0055],[1.40,-0.9599,0.0054,-0.9070,0.0050],
+  [1.80,-0.9095,0.0051,-0.7947,0.0050],[2.50,-0.8775,0.0047,-0.6755,0.0047]];
+const EXACT = { // fine grid, from the same self-contained pipeline
+  R:[0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.25,1.3,1.35,1.4,1.45,1.5,1.55,1.6,1.65,1.7,1.75,1.8,1.85,1.9,1.95,2.0,2.05,2.1,2.15,2.2,2.25,2.3,2.35,2.4,2.45,2.5,2.55,2.6],
+  fci:[-0.31227,-0.6018,-0.78927,-0.91415,-0.99842,-1.05516,-1.09263,-1.11629,-1.1299,-1.13619,-1.13712,-1.13415,-1.12836,-1.12056,-1.11134,-1.10115,-1.09034,-1.07919,-1.06793,-1.05674,-1.04578,-1.03519,-1.02505,-1.01547,-1.00649,-0.99815,-0.99048,-0.98347,-0.97713,-0.97143,-0.96633,-0.96182,-0.95783,-0.95434,-0.95129,-0.94864,-0.94635,-0.94437,-0.94268,-0.94122,-0.93998,-0.93892,-0.93802,-0.93725,-0.93661,-0.93605,-0.93559,-0.9352],
+  hf:[-0.305,-0.59383,-0.78045,-0.90436,-0.98751,-1.043,-1.07905,-1.10113,-1.113,-1.11735,-1.11615,-1.11085,-1.10251,-1.09191,-1.07964,-1.06611,-1.05166,-1.03654,-1.02096,-1.00511,-0.98911,-0.97311,-0.9572,-0.94148,-0.92602,-0.91087,-0.8961,-0.88173,-0.8678,-0.85434,-0.84135,-0.82885,-0.81684,-0.80533,-0.79432,-0.78379,-0.77375,-0.76418,-0.75507,-0.7464,-0.73817,-0.73035,-0.72294,-0.71591,-0.70925,-0.70294,-0.69697,-0.69133]};
+const EXACT_AT = [-0.6018,-0.91415,-1.05516,-1.11629,-1.13727,-1.12056,-1.07919,-1.01547,-0.96182,-0.93605]; // FCI at the 10 HW points
+const EXHF_AT  = [-0.59383,-0.90436,-1.043,-1.10113,-1.11671,-1.09191,-1.03654,-0.94148,-0.82885,-0.70294];
+
+// ---- plot ----
+const SVGNS = "http://www.w3.org/2000/svg";
+const W=860, H=470, ML=74, MR=18, MT=16, MB=52;
+const R0=0.26, R1=2.6, E0=-1.17, E1=-0.44;
+const px = r => ML + (r-R0)/(R1-R0)*(W-ML-MR);
+const py = e => MT + (E1-e)/(E1-E0)*(H-MT-MB);
+const plot = document.getElementById("plot");
+function el(n, at, parent){ const e=document.createElementNS(SVGNS,n);
+  for(const k in at) e.setAttribute(k,at[k]); (parent||plot).appendChild(e); return e; }
+function poly(Rs, Es){ return Rs.map((r,i)=>`${px(r).toFixed(1)},${py(Es[i]).toFixed(1)}`).join(" "); }
+
+function drawPlot(showHF, ci){
+  plot.innerHTML = "";
+  // grid + axes
+  for(let e=-1.1; e<=-0.5+1e-9; e+=0.1){
+    el("line",{x1:ML,y1:py(e),x2:W-MR,y2:py(e),style:"stroke:var(--edge);stroke-width:1"});
+    el("text",{x:ML-9,y:py(e)+4,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:12px"}).textContent = e.toFixed(1);
+  }
+  for(const r of [0.5,1.0,1.5,2.0,2.5]){
+    el("line",{x1:px(r),y1:MT,x2:px(r),y2:H-MB,style:"stroke:var(--edge);stroke-width:1"});
+    el("text",{x:px(r),y:H-MB+20,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:12px"}).textContent = r.toFixed(1);
+  }
+  el("text",{x:(ML+W-MR)/2,y:H-8,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:13px"}).textContent = "bond length R (Å)";
+  el("text",{x:16,y:(MT+H-MB)/2,transform:`rotate(-90 16 ${(MT+H-MB)/2})`,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:13px"}).textContent = "energy (hartree)";
+  // real bond length marker
+  el("line",{x1:px(0.741),y1:MT,x2:px(0.741),y2:H-MB,style:"stroke:var(--ink-3);stroke-width:1;stroke-dasharray:2 5"});
+  el("text",{x:px(0.741)+5,y:MT+14,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent = "real H₂: 0.741 Å";
+  // exact curves
+  if(showHF) el("polyline",{points:poly(EXACT.R,EXACT.hf),fill:"none",style:"stroke:var(--bad);stroke-width:1.6;stroke-dasharray:6 5;opacity:.75"});
+  el("polyline",{points:poly(EXACT.R,EXACT.fci),fill:"none",style:"stroke:var(--amber);stroke-width:2.4"});
+  // hardware points
+  HW.forEach((d,i)=>{
+    const [r,eci,sci,ehf,shf]=d;
+    if(showHF){
+      el("line",{x1:px(r),y1:py(ehf-shf),x2:px(r),y2:py(ehf+shf),style:"stroke:var(--bad);stroke-width:1.6"});
+      const s=6, cx=px(r), cy=py(ehf);
+      el("path",{d:`M${cx-s},${cy-s}L${cx+s},${cy+s}M${cx-s},${cy+s}L${cx+s},${cy-s}`,style:"stroke:var(--bad);stroke-width:2.2"});
+    }
+    el("line",{x1:px(r),y1:py(eci-sci),x2:px(r),y2:py(eci+sci),style:"stroke:var(--cyan);stroke-width:1.6"});
+    el("circle",{cx:px(r),cy:py(eci),r:i===ci?7:4.6,style:`fill:var(--cyan);stroke:var(--bg);stroke-width:1.6${i===ci?";filter:drop-shadow(0 0 5px var(--cyan))":""}`});
+  });
+  // cursor line
+  el("line",{x1:px(HW[ci][0]),y1:MT,x2:px(HW[ci][0]),y2:H-MB,style:"stroke:var(--cyan);stroke-width:1;opacity:.45;stroke-dasharray:4 4"});
+}
+
+function updateReadout(ci, showHF){
+  const [r,eci,sci,ehf,shf]=HW[ci];
+  const dE=(eci-EXACT_AT[ci])*1000;
+  const corrHW=(ehf-eci)*1000, corrEX=(EXHF_AT[ci]-EXACT_AT[ci])*1000;
+  const ro=document.getElementById("readout");
+  ro.innerHTML =
+    `<div><span class="k">bond length</span><span class="v">R = ${r.toFixed(2)} Å</span></div>`+
+    `<div><span class="k">hardware reading</span><span class="v">${eci.toFixed(4)} ± ${sci.toFixed(4)} Ha</span></div>`+
+    `<div><span class="k">exact ground (model)</span><span class="v">${EXACT_AT[ci].toFixed(4)} Ha</span></div>`+
+    `<div><span class="k">offset (must be ≥ 0)</span><span class="v up">+${dE.toFixed(0)} mHa ↑</span></div>`+
+    (showHF?`<div><span class="k">correlation gap · HF − CI</span><span class="v corr">${corrHW.toFixed(0)} mHa <span style="font-weight:400;color:var(--ink-3)">(exact ${corrEX.toFixed(0)})</span></span></div>`:"");
+}
+
+const cursor=document.getElementById("cursor"), hfT=document.getElementById("hfToggle");
+function render(){ const ci=+cursor.value, s=hfT.checked;
+  document.getElementById("legHF").style.display = s?"inline-flex":"none";
+  drawPlot(s,ci); updateReadout(ci,s); }
+cursor.addEventListener("input",render); hfT.addEventListener("change",render);
+render();
+
+// theme
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>
