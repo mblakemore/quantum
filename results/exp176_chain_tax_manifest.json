@@ -1,0 +1,52 @@
+{
+ "exp": 176,
+ "slug": "chain_tax",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e008kinv1c73apkuug",
+ "order": [
+  [
+   "direct",
+   "ZZ"
+  ],
+  [
+   "direct",
+   "XX"
+  ],
+  [
+   "direct",
+   "YY"
+  ],
+  [
+   "swap1",
+   "ZZ"
+  ],
+  [
+   "swap1",
+   "XX"
+  ],
+  [
+   "swap1",
+   "YY"
+  ],
+  [
+   "swap2",
+   "ZZ"
+  ],
+  [
+   "swap2",
+   "XX"
+  ],
+  [
+   "swap2",
+   "YY"
+  ]
+ ],
+ "witness": 0.5,
+ "prereg": {
+  "primary": "F(swap2) > 1/2 at >=5 sigma (2-station chain certifies end-to-end)",
+  "band": "swap2 F 0.60-0.75; swap1 0.78-0.88; direct 0.95-0.99",
+  "scaling": "p2_pred = p1^2/p0; delta<-2sigma => tax compounds with windows; |delta|<=2sigma => tax lives at link x compute interface (Exp175)",
+  "fingerprint": "if compounding: ZZ >> XX/YY asymmetry grows with N"
+ }
+}

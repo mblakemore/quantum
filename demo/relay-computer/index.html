@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%223%22%20cy%3D%228%22%20r%3D%221.8%22%20fill%3D%22%2345d6cf%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%224%22%20r%3D%221.4%22%20fill%3D%22%23e6a94e%22%2F%3E%3Ccircle%20cx%3D%2213%22%20cy%3D%228%22%20r%3D%221.8%22%20fill%3D%22%2345d6cf%22%2F%3E%3Cpath%20d%3D%22M4.5%208%20L8%205%20L11.5%208%22%20fill%3D%22none%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.2%22%20stroke-dasharray%3D%221.2%201.2%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Relay Computer — a gate run on entanglement from a relay, and the tax the stack charges | The Quantum Museum</title>
+<meta name="description" content="The first composition of the network wing: a nonlocal CNOT (Exp170) executed through an e-bit forged by an entanglement-swapping relay (Exp162). It works — 6σ over the witness — and the pre-registered composition test finds the stack costs more than the product of its layers. Exp175.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .grid2 { display:grid; grid-template-columns:1.15fr 1fr; gap:18px; align-items:start; }
+  @media (max-width:680px){ .gr2 { grid-template-columns:1fr; } .grid2 { grid-template-columns:1fr; } }
+  .tt { font-family:var(--mono); font-size:13px; }
+  .tt .row { display:flex; align-items:center; gap:10px; padding:5px 0; }
+  .tt .io { color:var(--ink-2); } .tt .arr { color:var(--ink-3); }
+  .tt .ok { color:var(--good); font-weight:700; } .tt .bad { color:var(--bad); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:17px; font-weight:700; }
+  .val.good { color:var(--good); } .val.bad { color:var(--bad); } .val.cy { color:var(--cyan); }
+  .val.am { color:var(--amber); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ quantum network</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Relay Computer<span class="hl">.</span></h1>
+    <p class="lede">Every piece of this wing was a solo act: a relay that entangles two strangers
+      (<a href="../swap/" style="color:var(--cyan)">the Matchmaker</a>), a gate performed across a link
+      (<a href="../remote-gate/" style="color:var(--cyan)">the Remote Handshake</a>). This exhibit <b>stacks them</b>:
+      the entanglement consumed by the remote gate is itself <em>forged by the relay</em> — a CNOT between two
+      computers that never met, running on an e-bit from a middleman neither controls. It works, 6σ past the witness.
+      And the pre-registered accounting found something better than success: <b>the stack charges a tax</b> —
+      composing the layers costs more than the layers themselves.</p>
+    <span class="scope">Scope: <b>swap → gate-teleport</b>, four feedforward layers end-to-end in one job on one die —
+      the minimal quantum-internet <b>stack</b>, not a network (no independent sources, no memory wait).</span>
+  </header>
+
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Build the stack</h2>
+    <p class="sub">5 arms, one job · ibm_fez · 4096 shots · job d9dvseineu4c739nrb2g</p>
+    <p class="primer"><b>How to read it.</b> Same gauge as the Remote Handshake: feed the gate |+⟩|0⟩ and a real CNOT
+      makes a <b>Bell pair</b> — above the dashed 1/2 line means genuine entanglement; the bars are the three
+      correlations that prove it; the table is the gate's classical job. Walk the arms left to right and watch the
+      stack assemble: plain gate → gate over a local e-bit → gate over a <b>relay-forged</b> e-bit. On the full stack,
+      a <b>ghost marker</b> appears: where the fidelity <em>should</em> land if layer costs simply multiplied. It lands lower.</p>
+    <div class="seg" role="tablist" id="seg"></div>
+    <div class="grid2">
+      <figure aria-label="Bell fidelity gauge with composition prediction, and correlation bars"><svg id="viz" viewBox="0 0 460 300"></svg></figure>
+      <div>
+        <div class="tt" id="ttbox"></div>
+        <p class="story" id="story"></p>
+      </div>
+    </div>
+    <div class="verdict" id="vbox"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">the discovery: layer benchmarks don't add up — literally</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE COMPOSITION TAX</div>
+        <p>Price each layer alone (same job): plain CNOT 0.978, the gate-teleport's overhead, the relay link at 0.847.
+        If layers were independent, the full stack should read <b>0.638</b>. It reads <b>0.576</b> — a −0.062 gap at
+        <b>3.4σ</b>. Stacking is <em>super-multiplicative</em>: composition itself costs, about 40% of the relay's own
+        price. Second sighting of this law in the wing — <a href="../relay/" style="color:var(--cyan)">the Relay</a>'s
+        hops didn't compose either. <code>isolated benchmarks underestimate stacked systems</code></p></div>
+      <div class="receipt"><div class="rt">THE MECHANISM — CONFIRMED BY DOSE-RESPONSE</div>
+        <p>The full stack holds <b>four</b> feedforward windows — and while each classical bit flies, the entangled
+        spectator qubits idle unprotected. Idle-window dephasing is this wing's signature error: ZZ survives (+0.76)
+        while XX/YY bleed (+0.28/−0.27). The same night, a follow-up flight (Exp176) made the windows a <em>dose</em>:
+        a chain of 0, 1, 2 swaps. The tax <b>compounds</b> — the second swap costs nearly twice the first
+        (−9.4σ off the multiplicative line), and the ZZ-vs-XX/YY asymmetry grows with every added window.
+        Latency isn't a per-layer cost; it accumulates <em>across</em> the whole stack.</p></div>
+      <div class="receipt"><div class="rt">THE FALSIFIER STILL HOLDS</div>
+        <p>Strip the e-bit and run the whole protocol anyway: the truth table survives (0.877 — the classical action
+        is just messages) but XX and YY die at zero and the Bell fidelity caps at 0.473 — <em>under</em> the 1/2 line
+        it cannot cross. Even at the top of the stack, the witness stays the exact boundary between a real quantum
+        gate and its classical shadow.</p></div>
+      <div class="receipt"><div class="rt">WHY IT MATTERS &amp; THE FENCE</div>
+        <p>This is the quantum internet in miniature: link layer makes entanglement, compute layer spends it. The tax
+        says you cannot budget such a machine from layer datasheets — the interaction term is real and must be
+        measured. Fence: one die, one day, one placement; the −3.4σ is real for this flight, the magnitude is a first
+        measurement, not a constant. <code>Exp175 · job d9dvseineu4c739nrb2g</code></p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Exp175 · ibm_fez · 23 circuits · 4096 shots</span>
+    <span>C4863 · 2026-07-18</span>
+    <a href="../swap/">← the relay (Matchmaker)</a>
+    <a href="../remote-gate/">← the remote gate</a>
+    <a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+const ARMS={
+ cnot:{lbl:"plain CNOT",F:0.978,tt:0.983,zz:0.97,xx:0.97,yy:-0.97,col:"var(--good)",pred:null,
+   story:"<b>The floor of the stack.</b> The ordinary gate — both qubits side by side — reads 0.978. Every layer we stack from here will pay rent. Remember this number: the composition test prices the other arms against it.",ok:true},
+ directebit:{lbl:"gate over local e-bit",F:0.723,tt:0.906,zz:0.81,xx:0.54,yy:-0.54,col:"var(--cyan)",pred:null,
+   story:"<b>Layer one: teleport the gate.</b> The nonlocal CNOT running on a Bell pair prepared right there — the Remote Handshake replayed inside this job (it read 0.789 yesterday; 0.723 in tonight's conditions, which is why every comparison here stays within-job). This prices the gate-teleport layer alone.",ok:true},
+ swaponly:{lbl:"relay link only",F:0.847,tt:null,zz:0.88,xx:0.76,yy:-0.75,col:"var(--cyan)",pred:null,
+   story:"<b>Layer two, alone: the relay.</b> No gate here — just the Matchmaker's swap, tonight: a Bell measurement at the middle station forges an e-bit between two qubits that never met, at 0.847. This prices the link layer alone. Now stack them.",ok:true},
+ relaygate:{lbl:"★ the full stack",F:0.576,tt:0.822,zz:0.76,xx:0.28,yy:-0.27,col:"var(--cyan)",pred:0.638,
+   story:"<b>The Relay Computer.</b> The swap forges the e-bit; the gate immediately spends it — four feedforward windows end-to-end, and the CNOT still lands 6σ past the witness: a genuine entangling gate between strangers, over a link a middleman built. But look at the ghost marker: if the two layers you just priced composed independently, this should read 0.638. It reads 0.576. The gap is the composition tax — the stack costs more than its parts.",ok:true},
+ noresource:{lbl:"no e-bit",F:0.473,tt:0.877,zz:0.87,xx:0.01,yy:-0.01,col:"var(--bad)",pred:null,
+   story:"<b>The fake, one last time.</b> Same protocol, no entanglement anywhere. The truth table still passes (0.877) — messages alone can permute bits. But XX and YY are stone dead and the fidelity sits at 0.473, under the line it cannot cross. The witness holds at the top of the stack exactly as it did for a single gate.",ok:false}};
+const SVGNS="http://www.w3.org/2000/svg";
+const viz=document.getElementById("viz");
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function draw(key){
+  const A=ARMS[key]; viz.innerHTML="";
+  const gx=70,T=20,B=250; const gy=v=>B-(B-T)*(v-0.2)/0.8;
+  el(viz,"text",{x:gx,y:14,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="Bell F";
+  el(viz,"line",{x1:gx,y1:T,x2:gx,y2:B,style:"stroke:var(--edge-2);stroke-width:3"});
+  [[0.25,"0.25"],[0.5,"1/2"],[0.75,"0.75"],[1,"1.0"]].forEach(g=>{
+    el(viz,"line",{x1:gx-24,y1:gy(g[0]),x2:gx+24,y2:gy(g[0]),style:`stroke:${g[0]===0.5?"var(--amber)":"var(--edge)"};stroke-width:${g[0]===0.5?2:1};${g[0]===0.5?"stroke-dasharray:5 4":""}`});
+    el(viz,"text",{x:gx-30,y:gy(g[0])+4,"text-anchor":"end",style:`fill:${g[0]===0.5?"var(--amber)":"var(--ink-3)"};font-family:var(--mono);font-size:10.5px`}).textContent=g[1];});
+  if(A.pred){ // ghost marker: the multiplicative prediction
+    el(viz,"circle",{cx:gx,cy:gy(A.pred),r:9,style:"fill:none;stroke:var(--amber);stroke-width:2;stroke-dasharray:3 3"});
+    el(viz,"text",{x:gx+34,y:gy(A.pred)+4,style:"fill:var(--amber);font-family:var(--mono);font-size:10.5px"}).textContent="if layers multiplied: "+A.pred.toFixed(3);
+    el(viz,"line",{x1:gx+16,y1:gy(A.pred),x2:gx+16,y2:gy(A.F),style:"stroke:var(--amber);stroke-width:2"});
+    el(viz,"text",{x:gx+34,y:(gy(A.pred)+gy(A.F))/2+16,style:"fill:var(--amber);font-family:var(--mono);font-size:10.5px;font-weight:700"}).textContent="the tax: −0.062 (3.4σ)";
+  }
+  el(viz,"circle",{cx:gx,cy:gy(A.F),r:11,style:`fill:${A.col};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${A.col})`});
+  el(viz,"text",{x:gx,y:gy(A.F)-18,"text-anchor":"middle",style:`fill:${A.col};font-family:var(--mono);font-size:15px;font-weight:700`}).textContent=A.F.toFixed(3);
+  el(viz,"text",{x:gx,y:B+20,"text-anchor":"middle",style:`fill:${A.F>0.5?"var(--good)":"var(--bad)"};font-family:var(--mono);font-size:11px`}).textContent=A.F>0.5?"entangled ✓":"not entangled";
+  const L=170,R=445,mid=(T+B)/2; const py=v=>mid-(B-T)/2*0.9*v;
+  el(viz,"text",{x:(L+R)/2,y:14,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="the Bell correlations";
+  [1,0,-1].forEach(g=>el(viz,"line",{x1:L,y1:py(g),x2:R,y2:py(g),style:`stroke:var(--edge);stroke-width:${g===0?2:1}`}));
+  [["⟨ZZ⟩",A.zz,"+"],["⟨XX⟩",A.xx,"+"],["⟨YY⟩",A.yy,"−"]].forEach((b,i)=>{
+    const x=L+(R-L)*(i+0.5)/3, bw=44;
+    const good=(b[2]==="+"&&b[1]>0.2)||(b[2]==="−"&&b[1]<-0.2);
+    const c=good?A.col:"var(--bad)";
+    el(viz,"rect",{x:x-bw/2,y:Math.min(py(b[1]),py(0)),width:bw,height:Math.max(2,Math.abs(py(b[1])-py(0))),rx:4,style:`fill:${c};opacity:.9`});
+    el(viz,"text",{x:x,y:py(b[1])+(b[1]>=0?-7:15),"text-anchor":"middle",style:`fill:${c};font-family:var(--mono);font-size:12px;font-weight:700`}).textContent=(b[1]>0?"+":"")+b[1].toFixed(2);
+    el(viz,"text",{x:x,y:B+20,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=b[0];});
+  el(viz,"text",{x:(L+R)/2,y:B+38,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"}).textContent=key==="relaygate"?"ZZ survives, XX/YY bleed — the idle-window fingerprint":"a Bell pair needs all three";
+  const ttb=document.getElementById("ttbox");
+  if(A.tt===null){
+    ttb.innerHTML=`<div style="font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">link layer only</div>`+
+      `<div style="font-family:var(--mono);font-size:12.5px;color:var(--ink-2)">no gate in this arm — this measures the raw swapped e-bit the stack will spend</div>`;
+  } else {
+    const tt = A.tt>0.6;
+    ttb.innerHTML =
+      `<div style="font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">the classical job — truth table</div>`+
+      `<div class="row"><span class="io">|0⟩|0⟩</span><span class="arr">→</span><span class="io">|0⟩|0⟩</span><span class="${tt?'ok':'bad'}">${tt?'✓':'✗'}</span></div>`+
+      `<div class="row"><span class="io">|1⟩|0⟩</span><span class="arr">→</span><span class="io">|1⟩|1⟩</span><span class="${tt?'ok':'bad'}">${tt?'✓':'✗'}</span></div>`+
+      `<div style="font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:4px">table accuracy ${(A.tt*100).toFixed(0)}%${key==='noresource'?' — passes without any entanglement':''}</div>`;
+  }
+  document.getElementById("story").innerHTML=A.story;
+  let v = `<div class="box hl"><span class="lbl">arm verdict</span><span class="val ${A.ok?'good':'bad'}">${A.ok?(key==='relaygate'?'REAL — gate ran on relay-forged e-bit':'certified'):'FAKE — classical shadow only'}</span></div>`+
+    `<div class="box"><span class="lbl">Bell fidelity vs witness</span><span class="val ${A.F>0.5?'cy':'bad'}">${A.F.toFixed(3)} ${A.F>0.5?'> 1/2':'< 1/2'}</span></div>`;
+  if(A.pred) v += `<div class="box"><span class="lbl">composition test</span><span class="val am">0.576 &lt; 0.638 pred — tax is real</span></div>`;
+  else if(A.tt!==null) v += `<div class="box"><span class="lbl">truth table</span><span class="val ${A.tt>0.6?'good':'bad'}">${(A.tt*100).toFixed(0)}% ${A.tt>0.6?'✓':'✗'}</span></div>`;
+  document.getElementById("vbox").innerHTML=v;
+  document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("on",b.dataset.k===key));
+}
+const seg=document.getElementById("seg");
+Object.keys(ARMS).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;
+  b.textContent=ARMS[k].lbl;b.addEventListener("click",()=>draw(k));seg.appendChild(b);});
+draw("relaygate");
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>
