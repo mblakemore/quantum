@@ -1,0 +1,108 @@
+{
+ "exp": 175,
+ "slug": "relay_gate",
+ "backend": "ibm_fez",
+ "shots": 4096,
+ "job_id": "d9dvseineu4c739nrb2g",
+ "order": [
+  [
+   "relaygate",
+   "bell_ZZ"
+  ],
+  [
+   "relaygate",
+   "bell_XX"
+  ],
+  [
+   "relaygate",
+   "bell_YY"
+  ],
+  [
+   "relaygate",
+   "tt_10"
+  ],
+  [
+   "relaygate",
+   "tt_00"
+  ],
+  [
+   "directebit",
+   "bell_ZZ"
+  ],
+  [
+   "directebit",
+   "bell_XX"
+  ],
+  [
+   "directebit",
+   "bell_YY"
+  ],
+  [
+   "directebit",
+   "tt_10"
+  ],
+  [
+   "directebit",
+   "tt_00"
+  ],
+  [
+   "swaponly",
+   "bell_ZZ"
+  ],
+  [
+   "swaponly",
+   "bell_XX"
+  ],
+  [
+   "swaponly",
+   "bell_YY"
+  ],
+  [
+   "cnot",
+   "bell_ZZ"
+  ],
+  [
+   "cnot",
+   "bell_XX"
+  ],
+  [
+   "cnot",
+   "bell_YY"
+  ],
+  [
+   "cnot",
+   "tt_10"
+  ],
+  [
+   "cnot",
+   "tt_00"
+  ],
+  [
+   "noresource",
+   "bell_ZZ"
+  ],
+  [
+   "noresource",
+   "bell_XX"
+  ],
+  [
+   "noresource",
+   "bell_YY"
+  ],
+  [
+   "noresource",
+   "tt_10"
+  ],
+  [
+   "noresource",
+   "tt_00"
+  ]
+ ],
+ "prereg": {
+  "primary": "relaygate F_bell > 1/2 at >=5 sigma AND truth_table > 0.82",
+  "band": "relaygate F_bell 0.58-0.73; tt 0.78-0.88",
+  "composition": "p_pred = p(directebit)*p(swaponly)/p(cnot); |delta|<=2sigma => layers price multiplicatively",
+  "falsifier": "noresource truth_table > 0.85 AND F_bell < 0.6",
+  "gauges": "swaponly 0.72-0.90, directebit 0.72-0.85, cnot 0.95-0.99"
+ }
+}
