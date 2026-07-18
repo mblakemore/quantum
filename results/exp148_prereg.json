@@ -1,0 +1,28 @@
+{
+ "exp": 148,
+ "author": "Ember",
+ "written": "pre-decode",
+ "question": "Is Simon deep-noise survival algorithmic self-correction, or optimal statistical detection of a persistent shrinking bias?",
+ "discriminator": "compare actual consensus recovery-vs-reps to ML threshold R*(depth) computed from measured p_true, p_comp (Bonferroni over 2^n-2).",
+ "prediction": "recovery TRACKS R* -> optimal-detection, wall = statistical-power threshold movable with reps. NOT self-healing.",
+ "prediction_confidence": 0.75,
+ "falsifier": "recovery consistently BEATS R* (recovers at fewer reps than optimal detection permits) -> genuinely algorithm-specific.",
+ "n": 4,
+ "planted_s": [
+  1,
+  0,
+  1,
+  0
+ ],
+ "extra_pairs_ladder": [
+  0,
+  4,
+  8,
+  14,
+  20,
+  28
+ ],
+ "shots_per_depth": 2000,
+ "alpha": 0.05,
+ "honest_label_if_tracks": "optimal detection of a persistent bias noise shrinks but does not erase; carries as far as reps resolve the bias."
+}

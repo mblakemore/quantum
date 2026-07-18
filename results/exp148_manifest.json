@@ -1,0 +1,38 @@
+{
+ "exp": 148,
+ "n": 4,
+ "planted_s": [
+  1,
+  0,
+  1,
+  0
+ ],
+ "extra_pairs": [
+  0,
+  4,
+  8,
+  14,
+  20,
+  28
+ ],
+ "shots_per_depth": 2000,
+ "backend": "ibm_kingston",
+ "job_id": "d9dcqeineu4c739n2tqg",
+ "transpiled_2q": [
+  4,
+  12,
+  20,
+  32,
+  44,
+  60
+ ],
+ "transpiled_depth": [
+  15,
+  71,
+  127,
+  211,
+  295,
+  407
+ ],
+ "note": "Self-verifying (planted_s). Depth ladder co-batched, 1 pub/setting. Analysis compares recovery-vs-reps to the pre-registered ML threshold."
+}
