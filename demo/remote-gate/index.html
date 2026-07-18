@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%224%22%20cy%3D%228%22%20r%3D%222%22%20fill%3D%22%2345d6cf%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%222%22%20fill%3D%22%2345d6cf%22%2F%3E%3Cpath%20d%3D%22M6%208h4%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%221.2%201.2%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Remote Handshake — teleporting a gate, not a state | The Quantum Museum</title>
+<meta name="description" content="Gate teleportation on ibm_fez: a nonlocal CNOT entangles two data qubits that never interact, using one shared Bell pair and classical messages. The entanglement witness F>1/2 turns out to be the exact line between a real quantum gate and its classical shadow. Exp170.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 15px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .grid2 { display:grid; grid-template-columns:1.15fr 1fr; gap:18px; align-items:start; }
+  @media (max-width:680px){ .grid2 { grid-template-columns:1fr; } }
+  .tt { font-family:var(--mono); font-size:13px; }
+  .tt .row { display:flex; align-items:center; gap:10px; padding:5px 0; }
+  .tt .io { color:var(--ink-2); } .tt .arr { color:var(--ink-3); }
+  .tt .ok { color:var(--good); font-weight:700; } .tt .bad { color:var(--bad); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:17px; font-weight:700; }
+  .val.good { color:var(--good); } .val.bad { color:var(--bad); } .val.cy { color:var(--cyan); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ quantum network</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Remote Handshake<span class="hl">.</span></h1>
+    <p class="lede">Teleportation usually moves a <em>noun</em> — a state from here to there. This moves a <b>verb</b>.
+      Two data qubits that never touch have an entangling <b>CNOT performed between them</b>, using one shared Bell
+      pair and two classical messages. It's the primitive behind distributed and fault-tolerant quantum computers —
+      running a gate across a link you can't put both qubits on. And it hides a beautiful catch: the test for
+      "did it work" turns out to be the exact line between a <b>real</b> quantum gate and a <b>fake</b> one.</p>
+    <span class="scope">Scope: a <b>nonlocal CNOT</b> (Eisert–Jozsa–Simon: 1 e-bit + 2 classical bits, feedforward both
+      ways) on one die — the gate-teleportation primitive, not a compiled distributed algorithm or a logical gate.</span>
+  </header>
+
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Perform the gate</h2>
+    <p class="sub">3 arms, one job · ibm_fez · 4096 shots · job d9dutehhtsac739dit60</p>
+    <p class="primer"><b>How to read it.</b> A working CNOT does two things. Its <b>classical</b> job: flip the target
+      when the control is 1 (the truth table). Its <b>quantum</b> job: entangle — feed it |+⟩|0⟩ and out comes a
+      <b>Bell pair</b>. The gauge shows the Bell fidelity (above the dashed 1/2 line = genuine entanglement); the
+      bars show the three correlations that make a Bell pair (ZZ, XX both +, YY −); the table checks the classical job.
+      Now click the third arm.</p>
+    <div class="seg" role="tablist" id="seg"></div>
+    <div class="grid2">
+      <figure aria-label="Bell fidelity gauge and correlation bars"><svg id="viz" viewBox="0 0 460 300"></svg></figure>
+      <div>
+        <div class="tt" id="ttbox"></div>
+        <p class="story" id="story"></p>
+      </div>
+    </div>
+    <div class="verdict" id="vbox"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">the twist: the pass mark is a law of physics</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE WITNESS IS THE QUANTUM–CLASSICAL LINE</div>
+        <p>Strip the shared entanglement (the "no resource" arm) and the gate <em>still passes the truth table</em>
+        (0.885) — because a CNOT's classical action is just a permutation of basis states, and you can do that with
+        classical messages alone. But its Bell fidelity <b>caps at 1/2</b> (0.454): ZZ survives, XX and YY collapse to
+        zero. So F&nbsp;&gt;&nbsp;1/2 isn't a "did it work" threshold — it is precisely the boundary a fake gate
+        <em>cannot</em> cross. Only the real one does. <code>the e-bit is the quantum resource, shown in data</code></p></div>
+      <div class="receipt"><div class="rt">THE PROTOCOL</div>
+        <p>One Bell pair shared between the two sides, and two classical bits. Alice CNOTs her data into her half and
+        measures it → sends one bit. Bob corrects, CNOTs into his data, measures in the X basis → sends one bit back.
+        Alice corrects. Net: CNOT(A→B), with A and B never coupled. Minimal: 1 e-bit, 2 c-bits.</p></div>
+      <div class="receipt"><div class="rt">THE PRICE</div>
+        <p>The teleported gate reaches Bell F = 0.789 (25σ past the witness); the same-job <em>direct</em> CNOT reads
+        0.979. The 0.19 gap is the two feedforward-idle windows — the qubits wait, and dephase, while the classical
+        bits fly. The gate is real; the tax is latency, the same idle class the rest of this wing pays.</p></div>
+      <div class="receipt"><div class="rt">WHY IT MATTERS &amp; THE FENCE</div>
+        <p>Fault-tolerant and distributed machines must run gates between qubits that can't share a chip; gate
+        teleportation is how. Fence: one die, one entangling gate, bidirectional feedforward, raw hardware — the
+        primitive, not a compiled algorithm or a logical gate. <code>Exp170 · job d9dutehhtsac739dit60</code></p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Exp170 · ibm_fez · 15 circuits · 4096 shots</span>
+    <span>C4861 · 2026-07-18</span>
+    <a href="../teleportation/">← teleport a state</a>
+    <a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+const ARMS={
+ teleported:{lbl:"the teleported gate",F:0.789,tt:0.870,zz:0.75,xx:0.74,yy:-0.67,col:"var(--cyan)",
+   story:"<b>The nonlocal CNOT.</b> Two qubits that never touched — and out of |+⟩|0⟩ comes a Bell pair at F=0.789, 25σ past the 1/2 witness. Genuine entanglement, created across a link by classical messages plus one shared e-bit. The gate is real.",ok:true},
+ direct:{lbl:"direct CNOT (baseline)",F:0.979,tt:0.983,zz:0.97,xx:0.97,yy:-0.98,col:"var(--good)",
+   story:"<b>The reference.</b> The ordinary CNOT — the two qubits sitting side by side, one gate between them — reads 0.979 in the same job. The teleported gate gives up 0.19 to reach the same entanglement without ever putting the qubits together: the latency tax of the feedforward.",ok:true},
+ noresource:{lbl:"no shared entanglement",F:0.454,tt:0.885,zz:0.80,xx:0.01,yy:-0.02,col:"var(--bad)",
+   story:"<b>The fake gate.</b> Run the exact same protocol but with the Bell pair <em>not</em> entangled. Look: the truth table still passes (0.885) — the classical job needs no quantum resource. But the entanglement is gone. XX and YY collapse to zero, and the Bell fidelity sits at 0.45 — it <em>cannot</em> cross 1/2. This is why the witness line is the real test: a classical impostor gets the table right and dies here.",ok:false}};
+const SVGNS="http://www.w3.org/2000/svg";
+const viz=document.getElementById("viz");
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function draw(key){
+  const A=ARMS[key]; viz.innerHTML="";
+  // gauge (left column of svg): vertical, 0.2..1.0, witness at 0.5
+  const gx=70,T=20,B=250; const gy=v=>B-(B-T)*(v-0.2)/0.8;
+  el(viz,"text",{x:gx,y:14,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="Bell F";
+  el(viz,"line",{x1:gx,y1:T,x2:gx,y2:B,style:"stroke:var(--edge-2);stroke-width:3"});
+  [[0.25,"0.25"],[0.5,"1/2"],[0.75,"0.75"],[1,"1.0"]].forEach(g=>{
+    el(viz,"line",{x1:gx-24,y1:gy(g[0]),x2:gx+24,y2:gy(g[0]),style:`stroke:${g[0]===0.5?"var(--amber)":"var(--edge)"};stroke-width:${g[0]===0.5?2:1};${g[0]===0.5?"stroke-dasharray:5 4":""}`});
+    el(viz,"text",{x:gx-30,y:gy(g[0])+4,"text-anchor":"end",style:`fill:${g[0]===0.5?"var(--amber)":"var(--ink-3)"};font-family:var(--mono);font-size:10.5px`}).textContent=g[1];});
+  el(viz,"circle",{cx:gx,cy:gy(A.F),r:11,style:`fill:${A.col};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${A.col})`});
+  el(viz,"text",{x:gx,y:gy(A.F)-18,"text-anchor":"middle",style:`fill:${A.col};font-family:var(--mono);font-size:15px;font-weight:700`}).textContent=A.F.toFixed(3);
+  el(viz,"text",{x:gx,y:B+20,"text-anchor":"middle",style:`fill:${A.F>0.5?"var(--good)":"var(--bad)"};font-family:var(--mono);font-size:11px`}).textContent=A.F>0.5?"entangled ✓":"not entangled";
+  // correlation bars (right of svg): ZZ, XX, YY signed -1..1
+  const L=170,R=445,mid=(T+B)/2; const py=v=>mid-(B-T)/2*0.9*v;
+  el(viz,"text",{x:(L+R)/2,y:14,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="the Bell correlations";
+  [1,0,-1].forEach(g=>el(viz,"line",{x1:L,y1:py(g),x2:R,y2:py(g),style:`stroke:var(--edge);stroke-width:${g===0?2:1}`}));
+  [["⟨ZZ⟩",A.zz,"+"],["⟨XX⟩",A.xx,"+"],["⟨YY⟩",A.yy,"−"]].forEach((b,i)=>{
+    const x=L+(R-L)*(i+0.5)/3, bw=44;
+    const good=(b[2]==="+"&&b[1]>0.4)||(b[2]==="−"&&b[1]<-0.4);
+    const c=good?A.col:"var(--bad)";
+    el(viz,"rect",{x:x-bw/2,y:Math.min(py(b[1]),py(0)),width:bw,height:Math.max(2,Math.abs(py(b[1])-py(0))),rx:4,style:`fill:${c};opacity:.9`});
+    el(viz,"text",{x:x,y:py(b[1])+(b[1]>=0?-7:15),"text-anchor":"middle",style:`fill:${c};font-family:var(--mono);font-size:12px;font-weight:700`}).textContent=(b[1]>0?"+":"")+b[1].toFixed(2);
+    el(viz,"text",{x:x,y:B+20,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=b[0];});
+  el(viz,"text",{x:(L+R)/2,y:B+38,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"}).textContent="a Bell pair needs all three";
+  // truth table box
+  const tt = A.tt>0.6;
+  document.getElementById("ttbox").innerHTML =
+    `<div style="font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">the classical job — truth table</div>`+
+    `<div class="row"><span class="io">|0⟩|0⟩</span><span class="arr">→</span><span class="io">|0⟩|0⟩</span><span class="${tt?'ok':'bad'}">${tt?'✓':'✗'}</span></div>`+
+    `<div class="row"><span class="io">|1⟩|0⟩</span><span class="arr">→</span><span class="io">|1⟩|1⟩</span><span class="${tt?'ok':'bad'}">${tt?'✓':'✗'}</span></div>`+
+    `<div style="font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:4px">table accuracy ${(A.tt*100).toFixed(0)}%${key==='noresource'?' — passes without any entanglement':''}</div>`;
+  document.getElementById("story").innerHTML=A.story;
+  document.getElementById("vbox").innerHTML=
+    `<div class="box hl"><span class="lbl">gate verdict</span><span class="val ${A.ok?'good':'bad'}">${A.ok?'REAL — entangling gate performed':'FAKE — classical shadow only'}</span></div>`+
+    `<div class="box"><span class="lbl">Bell fidelity vs witness</span><span class="val ${A.F>0.5?'cy':'bad'}">${A.F.toFixed(3)} ${A.F>0.5?'> 1/2':'< 1/2'}</span></div>`+
+    `<div class="box"><span class="lbl">truth table</span><span class="val ${A.tt>0.6?'good':'bad'}">${(A.tt*100).toFixed(0)}% ${A.tt>0.6?'✓':'✗'}</span></div>`;
+  document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("on",b.dataset.k===key));
+}
+const seg=document.getElementById("seg");
+Object.keys(ARMS).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;
+  b.textContent=ARMS[k].lbl;b.addEventListener("click",()=>draw(k));seg.appendChild(b);});
+draw("teleported");
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>
