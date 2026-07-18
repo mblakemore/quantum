@@ -1,0 +1,42 @@
+{
+ "exp": 150,
+ "author": "Ember",
+ "written": "pre-decode",
+ "question": "Does QFT-based QPE order-recovery run on kingston, recovering hidden r?",
+ "regimes": "divisor (exact, weak test) + non-divisor (approximate, real Shor regime)",
+ "prediction": "recover r for the divisor setting and the non-divisor settings the survival predictor passes; the QPE circuit is shallow so all should survive.",
+ "prediction_confidence": 0.6,
+ "falsifier": "fails to recover r at a setting the predictor passed -> QPE too noisy on kingston (or predictor over-optimistic; log which).",
+ "fence": "QFT/QPE ORDER-RECOVERY back-end, NOT factoring RSA (no modular-exp front-end).",
+ "settings": [
+  {
+   "t": 4,
+   "s": 1,
+   "r": 4,
+   "Nmax": 6,
+   "regime": "divisor"
+  },
+  {
+   "t": 5,
+   "s": 1,
+   "r": 3,
+   "Nmax": 6,
+   "regime": "non-divisor"
+  },
+  {
+   "t": 5,
+   "s": 1,
+   "r": 5,
+   "Nmax": 7,
+   "regime": "non-divisor"
+  },
+  {
+   "t": 5,
+   "s": 2,
+   "r": 5,
+   "Nmax": 7,
+   "regime": "non-divisor"
+  }
+ ],
+ "shots": 4000
+}
