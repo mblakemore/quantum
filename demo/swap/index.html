@@ -98,6 +98,31 @@
     </div>
   </section>
 
+  <section class="panel" aria-labelledby="pm">
+    <h2 id="pm">The memory — how long the match keeps</h2>
+    <p class="sub">swap, then hold τ before the witness reads · Exp163/164 · same pinned qubits · jobs d9dtf1aneu4c739nnq20, d9dtmbcinv1c73aphifg</p>
+    <p class="primer"><b>How to read it.</b> A repeater must <em>hold</em> entanglement, not just make it. Each curve:
+      swap A–C, store for τ, then measure the Bell fidelity. Above the dashed 1/2 line the match is still provably
+      entangled; where a curve crosses is its <b>certified hold time</b>. The <b>echo</b> arms fire a single X on both
+      qubits mid-storage — |Φ+⟩ is a +1 eigenstate of X⊗X, so the pulse leaves the state untouched while refocusing
+      each qubit's slow detuning drift.</p>
+    <figure aria-label="Bell fidelity versus storage time, plain versus echoed"><svg id="mem" viewBox="0 0 860 300"></svg></figure>
+    <p class="story"><b>The echo doubles the memory: 16 → 36 μs certified hold time (2.3×).</b> A second echo (CPMG-2,
+      38 μs) adds nothing — one π-pulse captures all the refocusable noise, pinning the dephasing as quasi-static.
+      Two honest notes: the swapped pair ages exactly like a gate-made pair (pedigree ratio 0.76 — decay is local
+      physics, not pedigree), and at very long τ the plain arm floats higher (~0.37, its classical ZZ correlation
+      survives dephasing) while echo pulse errors accumulate — the echo wins where the memory is <em>usable</em>,
+      not asymptotically. Pre-registered gates all held.</p>
+    <div class="verdict">
+      <div class="box hl"><span class="lbl">certified hold time</span><span class="val cy">16 → 36 μs · 2.3×</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">plain vs one mid-storage echo (T-ratio 2.07, gate &gt;1.5)</span></div>
+      <div class="box"><span class="lbl">pedigree (Exp163)</span><span class="val good">ratio 0.76 — same physics</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">swapped entanglement ages like gate-made</span></div>
+      <div class="box"><span class="lbl">noise diagnosis</span><span class="val cy">CPMG-2 ≈ Hahn</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">quasi-static dephasing — one echo captures it all</span></div>
+    </div>
+  </section>
+
   <section class="panel" aria-labelledby="pc">
     <h2 id="pc">The court</h2>
     <p class="sub">why the certificate is airtight — and where this sits in the network wing</p>
@@ -175,6 +200,34 @@ const seg=document.getElementById("segbtns");
 Object.keys(ARMS).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;
   b.textContent=ARMS[k].lbl;b.addEventListener("click",()=>draw(k));seg.appendChild(b);});
 draw("swap");
+// memory panel: F(tau) curves, sqrt-tau axis, witness line, t_50 markers (Exp163/164 fez data)
+(function(){
+  const s=document.getElementById("mem");
+  const TAU=[0,5,10,20,40,80,160];
+  const CURVES=[
+    {n:"plain storage",c:"var(--bad)",t50:16,F:[0.834,0.748,0.608,0.420,0.384,0.378,0.370]},
+    {n:"Hahn echo",c:"var(--cyan)",t50:36,F:[0.830,0.771,0.697,0.615,0.475,0.359,0.307]},
+    {n:"CPMG-2",c:"var(--violet)",t50:38,F:[0.834,0.773,0.700,0.607,0.485,0.341,0.305]}];
+  const L=64,R=840,T2=18,B2=232; const sq=v=>Math.sqrt(v);
+  const px=t=>L+(R-L)*sq(t)/sq(160), py=v=>B2-(B2-T2)*(v-0.25)/0.75;
+  [[0.25,"0.25"],[0.5,"1/2"],[0.75,"0.75"],[1,"1.0"]].forEach(g=>{
+    el(s,"line",{x1:L,y1:py(g[0]),x2:R,y2:py(g[0]),style:`stroke:${g[0]===0.5?"var(--amber)":"var(--edge)"};stroke-width:${g[0]===0.5?2:1};${g[0]===0.5?"stroke-dasharray:6 4":""}`});
+    el(s,"text",{x:L-8,y:py(g[0])+4,"text-anchor":"end",style:`fill:${g[0]===0.5?"var(--amber)":"var(--ink-3)"};font-family:var(--mono);font-size:11px`}).textContent=g[1];});
+  el(s,"text",{x:R,y:py(0.5)-6,"text-anchor":"end",style:"fill:var(--amber);font-family:var(--mono);font-size:11px"}).textContent="separable bound — certification lost below";
+  TAU.forEach(t=>{el(s,"line",{x1:px(t),y1:B2,x2:px(t),y2:B2+5,style:"stroke:var(--edge-2);stroke-width:1"});
+    el(s,"text",{x:px(t),y:B2+20,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=t;});
+  el(s,"text",{x:(L+R)/2,y:B2+40,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12.5px"}).textContent="storage time τ (μs, √ scale)";
+  CURVES.forEach(cv=>{
+    el(s,"polyline",{points:TAU.map((t,i)=>`${px(t).toFixed(1)},${py(cv.F[i]).toFixed(1)}`).join(" "),
+      fill:"none",style:`stroke:${cv.c};stroke-width:2.6;opacity:.92`});
+    TAU.forEach((t,i)=>el(s,"circle",{cx:px(t),cy:py(cv.F[i]),r:4,style:`fill:${cv.c};stroke:var(--bg);stroke-width:1.4`}));
+    el(s,"circle",{cx:px(cv.t50),cy:py(0.5),r:6,style:`fill:none;stroke:${cv.c};stroke-width:2.4`});
+    el(s,"text",{x:px(cv.t50),y:py(0.5)+24,"text-anchor":"middle",style:`fill:${cv.c};font-family:var(--mono);font-size:11.5px;font-weight:700`}).textContent=cv.t50+"μs";});
+  CURVES.forEach((cv,i)=>{const lx=R-235,ly=T2+16+i*20;
+    el(s,"line",{x1:lx,y1:ly,x2:lx+22,y2:ly,style:`stroke:${cv.c};stroke-width:3`});
+    el(s,"text",{x:lx+30,y:ly+4,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=cv.n;});
+})();
+
 document.getElementById("themeBtn").addEventListener("click",()=>{
   const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
   const next=cur==="dark"?"light":"dark";
