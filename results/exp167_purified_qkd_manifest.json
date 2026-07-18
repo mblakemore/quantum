@@ -1,0 +1,95 @@
+{
+ "exp": 167,
+ "slug": "purified_qkd",
+ "backend": "ibm_fez",
+ "shots": 4096,
+ "job_id": "d9du8gphtsac739di1q0",
+ "order": [
+  [
+   "faded",
+   "Z",
+   "Z"
+  ],
+  [
+   "faded",
+   "Z",
+   "X"
+  ],
+  [
+   "faded",
+   "X",
+   "Z"
+  ],
+  [
+   "faded",
+   "X",
+   "X"
+  ],
+  [
+   "faded",
+   "Z",
+   "W"
+  ],
+  [
+   "faded",
+   "Z",
+   "V"
+  ],
+  [
+   "faded",
+   "X",
+   "W"
+  ],
+  [
+   "faded",
+   "X",
+   "V"
+  ],
+  [
+   "purified",
+   "Z",
+   "Z"
+  ],
+  [
+   "purified",
+   "Z",
+   "X"
+  ],
+  [
+   "purified",
+   "X",
+   "Z"
+  ],
+  [
+   "purified",
+   "X",
+   "X"
+  ],
+  [
+   "purified",
+   "Z",
+   "W"
+  ],
+  [
+   "purified",
+   "Z",
+   "V"
+  ],
+  [
+   "purified",
+   "X",
+   "W"
+  ],
+  [
+   "purified",
+   "X",
+   "V"
+  ]
+ ],
+ "tau_us": 10.0,
+ "message": "BEAM ME UP",
+ "prereg": {
+  "primary": "SF_purified > SF_faded; purified delivers positive key + OTP",
+  "prediction": "SF_faded 0-0.06, SF_purified 0.10-0.40; P(fatter) 0.6; null = DEJMPS depth eats the gain (prices composition)"
+ }
+}
