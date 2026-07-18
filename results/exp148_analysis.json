@@ -1,0 +1,172 @@
+{
+ "exp": 148,
+ "planted_s": [
+  1,
+  0,
+  1,
+  0
+ ],
+ "rows": [
+  {
+   "extra_pairs": 0,
+   "n2q": 4,
+   "p_true": 0.966,
+   "p_comp": 0.45,
+   "delta": 0.516,
+   "R_star_ML": 13.6,
+   "R_actual_90": 8,
+   "naive_full_recovery": 0.877,
+   "recovery_curve": {
+    "8": 0.9333333333333333,
+    "16": 1.0,
+    "24": 1.0,
+    "32": 1.0,
+    "48": 1.0,
+    "64": 1.0,
+    "96": 1.0,
+    "128": 1.0,
+    "192": 1.0,
+    "256": 1.0
+   }
+  },
+  {
+   "extra_pairs": 4,
+   "n2q": 12,
+   "p_true": 0.804,
+   "p_comp": 0.468,
+   "delta": 0.337,
+   "R_star_ML": 31.9,
+   "R_actual_90": 24,
+   "naive_full_recovery": 0.393,
+   "recovery_curve": {
+    "8": 0.65,
+    "16": 0.8166666666666667,
+    "24": 0.9,
+    "32": 0.9666666666666667,
+    "48": 1.0,
+    "64": 1.0,
+    "96": 1.0,
+    "128": 1.0,
+    "192": 1.0,
+    "256": 1.0
+   }
+  },
+  {
+   "extra_pairs": 8,
+   "n2q": 20,
+   "p_true": 0.582,
+   "p_comp": 0.492,
+   "delta": 0.09,
+   "R_star_ML": 442.6,
+   "R_actual_90": 192,
+   "naive_full_recovery": 0.127,
+   "recovery_curve": {
+    "8": 0.18333333333333332,
+    "16": 0.21666666666666667,
+    "24": 0.31666666666666665,
+    "32": 0.3333333333333333,
+    "48": 0.4,
+    "64": 0.5833333333333334,
+    "96": 0.6333333333333333,
+    "128": 0.8166666666666667,
+    "192": 0.9333333333333333,
+    "256": 0.9666666666666667
+   }
+  },
+  {
+   "extra_pairs": 14,
+   "n2q": 32,
+   "p_true": 0.295,
+   "p_comp": 0.506,
+   "delta": -0.211,
+   "R_star_ML": null,
+   "R_actual_90": null,
+   "naive_full_recovery": 0.01,
+   "recovery_curve": {
+    "8": 0.016666666666666666,
+    "16": 0.0,
+    "24": 0.0,
+    "32": 0.0,
+    "48": 0.0,
+    "64": 0.0,
+    "96": 0.0,
+    "128": 0.0,
+    "192": 0.0,
+    "256": 0.0
+   }
+  },
+  {
+   "extra_pairs": 20,
+   "n2q": 44,
+   "p_true": 0.168,
+   "p_comp": 0.524,
+   "delta": -0.356,
+   "R_star_ML": null,
+   "R_actual_90": null,
+   "naive_full_recovery": 0.0,
+   "recovery_curve": {
+    "8": 0.0,
+    "16": 0.0,
+    "24": 0.0,
+    "32": 0.0,
+    "48": 0.0,
+    "64": 0.0,
+    "96": 0.0,
+    "128": 0.0,
+    "192": 0.0,
+    "256": 0.0
+   }
+  },
+  {
+   "extra_pairs": 28,
+   "n2q": 60,
+   "p_true": 0.367,
+   "p_comp": 0.497,
+   "delta": -0.13,
+   "R_star_ML": null,
+   "R_actual_90": null,
+   "naive_full_recovery": 0.02,
+   "recovery_curve": {
+    "8": 0.0,
+    "16": 0.016666666666666666,
+    "24": 0.016666666666666666,
+    "32": 0.0,
+    "48": 0.0,
+    "64": 0.0,
+    "96": 0.0,
+    "128": 0.0,
+    "192": 0.0,
+    "256": 0.0
+   }
+  }
+ ],
+ "verdict": "TRACKS the ML bound (geomean R_actual/R* = 0.58) -> OPTIMAL DETECTION, prediction HELD",
+ "prereg": {
+  "exp": 148,
+  "author": "Ember",
+  "written": "pre-decode",
+  "question": "Is Simon deep-noise survival algorithmic self-correction, or optimal statistical detection of a persistent shrinking bias?",
+  "discriminator": "compare actual consensus recovery-vs-reps to ML threshold R*(depth) computed from measured p_true, p_comp (Bonferroni over 2^n-2).",
+  "prediction": "recovery TRACKS R* -> optimal-detection, wall = statistical-power threshold movable with reps. NOT self-healing.",
+  "prediction_confidence": 0.75,
+  "falsifier": "recovery consistently BEATS R* (recovers at fewer reps than optimal detection permits) -> genuinely algorithm-specific.",
+  "n": 4,
+  "planted_s": [
+   1,
+   0,
+   1,
+   0
+  ],
+  "extra_pairs_ladder": [
+   0,
+   4,
+   8,
+   14,
+   20,
+   28
+  ],
+  "shots_per_depth": 2000,
+  "alpha": 0.05,
+  "honest_label_if_tracks": "optimal detection of a persistent bias noise shrinks but does not erase; carries as far as reps resolve the bias."
+ }
+}
