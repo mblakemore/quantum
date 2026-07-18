@@ -1,0 +1,120 @@
+{
+ "exp": 155,
+ "backend": "ibm_fez",
+ "shots": 4000,
+ "job_id": "d9dr5vqneu4c739nkt20",
+ "phases": [
+  0.0,
+  0.7853981633974483,
+  1.5707963267948966,
+  2.356194490192345,
+  3.141592653589793,
+  3.9269908169872414,
+  4.71238898038469,
+  5.497787143782138
+ ],
+ "order": [
+  [
+   "static_erase",
+   0
+  ],
+  [
+   "static_erase",
+   1
+  ],
+  [
+   "static_erase",
+   2
+  ],
+  [
+   "static_erase",
+   3
+  ],
+  [
+   "static_erase",
+   4
+  ],
+  [
+   "static_erase",
+   5
+  ],
+  [
+   "static_erase",
+   6
+  ],
+  [
+   "static_erase",
+   7
+  ],
+  [
+   "static_whichpath",
+   0
+  ],
+  [
+   "static_whichpath",
+   1
+  ],
+  [
+   "static_whichpath",
+   2
+  ],
+  [
+   "static_whichpath",
+   3
+  ],
+  [
+   "static_whichpath",
+   4
+  ],
+  [
+   "static_whichpath",
+   5
+  ],
+  [
+   "static_whichpath",
+   6
+  ],
+  [
+   "static_whichpath",
+   7
+  ],
+  [
+   "dynamic",
+   0
+  ],
+  [
+   "dynamic",
+   1
+  ],
+  [
+   "dynamic",
+   2
+  ],
+  [
+   "dynamic",
+   3
+  ],
+  [
+   "dynamic",
+   4
+  ],
+  [
+   "dynamic",
+   5
+  ],
+  [
+   "dynamic",
+   6
+  ],
+  [
+   "dynamic",
+   7
+  ]
+ ],
+ "prereg": {
+  "confidence": 0.6,
+  "gate": "V_erase - V_whichpath > 0.2 AND V_marginal < 0.1",
+  "dynamic_expected_residual": "marker-idle dephasing lowers V_dynamic below V_static (Exp143/144/154 idle-error class)"
+ },
+ "note": "delayed-choice quantum eraser; static erase/whichpath matched control + dynamic quantum-coin delayed choice; self-verifying (known phi); no-signaling fence"
+}

@@ -240,3 +240,27 @@ standing instrument. The rest queue behind those.
 *Every claim above traces to the findings cited; every proposed flight inherits the house rules —
 pre-registered gates frozen before submit, failed gates reported as first-class results, and the
 honest label written for both outcomes before we ask.*
+
+---
+
+## ADDENDUM C4197 — DELIVERED: the delayed-choice quantum eraser (14th instrument) 🖖
+
+Creator's Star-Trek directive (2026-07-18, Quantinuum-gated) turned the frontier toward the flashiest
+self-verifying flights. Whisper took teleportation (Exp154, F=0.913 vs 2/3). **Ember flew Exp155 —
+the delayed-choice quantum eraser** (`ibm_fez`, job `d9dr5vqneu4c739nkt20`, finding
+`finding-exp155-delayed-choice-eraser-ember-c4197.md`). **Pre-reg 0.60 HELD.**
+
+- **Erasure signal +0.878:** erasing which-path info restores a near-perfect fringe (static erase
+  V=0.946); the which-path **matched control** through the identical coincidence sort stays flat
+  (0.068) — the fringe is the erasure, not the post-selection.
+- **Delayed choice +0.642:** a quantum coin measured *after* the system qubit (real `if_test`
+  feed-forward) toggles whether the already-recorded past shows a fringe (coin=erase 0.797 vs
+  coin=keep 0.155). The choice is causally in S's future.
+- **No-signaling measured (V_marg=0.055 < 0.1):** the marginal never moves — the fringe is
+  coincidence-only, no FTL. Wheeler's delayed choice and no-signaling hold *simultaneously*.
+- **Bonus (advisor-pre-registered):** dynamic erase 0.797 << static 0.946 = the marker-idle
+  dephasing signature — the same idle-error class as Exp154 (Z 0.96 vs X/Y 0.88) and Exp144. A second
+  Trek flight where the instrument that floors negative results is just the texture on a positive one.
+
+**New askable question answered:** *can a choice made after a qubit is measured decide whether its
+past showed interference, without sending a signal?* — Yes, on silicon, both halves at once.
