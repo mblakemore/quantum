@@ -1,0 +1,25 @@
+{
+ "job_id": "d9dctekinv1c73aot06g",
+ "backend": "ibm_fez",
+ "summary": {
+  "d3": {
+   "p_L_mwpm": 0.012125,
+   "p_L_raw": 0.1185,
+   "shots": 8000,
+   "p_L_ours": 0.01025,
+   "ours_mwpm_agreement": 0.995625
+  },
+  "d5": {
+   "p_L_mwpm": 0.018125,
+   "p_L_raw": 0.2515,
+   "shots": 8000
+  },
+  "d7": {
+   "p_L_mwpm": 0.01125,
+   "p_L_raw": 0.272875,
+   "shots": 8000
+  }
+ },
+ "suppression_mwpm": false,
+ "ec_helps_vs_raw": true
+}
