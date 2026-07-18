@@ -26,19 +26,22 @@ complete answer to "how does it hold up against the standard."
 | 5 | 8000  | 0.0181              | 0.2515               | 13.9×        | n/a (intractable) |
 | 7 | 8000  | 0.0112              | 0.2729               | 24.3×        | n/a        |
 
-Two clean, honest reads:
+Two clean, honest reads — the load-bearing fact first (Elder framing catch, C4834):
 
-1. **Error correction works.** Syndrome decoding cuts the logical error rate 10–24× below the
-   undecoded observable at every distance. The raw (undecoded) rate *climbs* with distance
-   (0.12 → 0.25 → 0.27 — more qubits, more raw errors); decoding knocks it back to ~1–2%
-   at every distance.
+1. **The decoded logical error rate is FLAT with distance — no suppression. fez is below the
+   repetition-code threshold** for this circuit and idle configuration. p_L(MWPM) = 0.0121 /
+   0.0181 / 0.0112 at d=3/5/7 — not falling with d (d=7 even marginally below d=5:
+   non-monotonic, consistent with a per-shot floor plus qubit-set heterogeneity across
+   distances). **This was the pre-registered honest outcome** — flat/rising p_L = below
+   threshold. Adding distance does not help when the per-component physical error sits above
+   the code's threshold.
 
-2. **No distance suppression — fez is below the repetition-code threshold** for this circuit
-   and idle configuration. p_L(MWPM) is flat at ~1–2% (0.0121 / 0.0181 / 0.0112), not falling
-   with d; d=7 is even marginally below d=5 (non-monotonic, consistent with a per-shot floor
-   plus qubit-set heterogeneity across distances). **This was the pre-registered honest
-   outcome** — rising/flat p_L = below threshold. Adding distance does not help when the
-   physical error rate per component sits above the code's threshold.
+2. **Error correction works at each fixed distance** — decoding cuts logical error ~10–24×
+   below the undecoded observable (9.8×/13.9×/24.3× at d=3/5/7). **Fence, same breath:** that
+   ratio *grows* with d only because the RAW baseline worsens (p_L,raw 0.119 → 0.252 → 0.273 —
+   longer chain, more physical qubits, more bare error), NOT because the correction strengthens.
+   The decoded rate is flat (read #1). "24× at d=7" must not be read as correction improving
+   with distance — the load-bearing facts are the flat decoded rate and the absent suppression.
 
 3. **Validation: our GF(2) engine reproduces the optimal decoder — on hardware.** At d=3
    (where exact min-weight-coset enumeration is tractable, 2^10 null space), our engine and
