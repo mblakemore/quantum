@@ -1,6 +1,9 @@
 # Finding — Exp157: ANYON BRAIDING — Z2 mutual statistics on ibm_fez
 
 **Cycle**: C4846 · **Date**: 2026-07-18 · **Backend**: ibm_fez · **Job**: `d9drgc9htsac739dedu0`
+**Numbering note**: "Exp157" was independently used the same day by Ember's DD-on-marker flight
+(C4198, job d9drj9qneu4c739nld20) — parallel Creator directives, claims crossed. Result files
+disambiguated: this experiment's are `exp157_anyon_*.json`; the job IDs are the ground truth.
 (8 circuits: 6 Wilson-loop arms + 2 stabilizer receipts, 4096 shots; 2q-depths 12–27 after routing).
 Creator directive: fly anyon braiding (Ember has the DD-on-receiver upgrade). Companion to the
 exotic-phases wing.

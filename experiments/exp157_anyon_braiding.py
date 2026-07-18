@@ -27,7 +27,7 @@ interferometry — not non-abelian braiding, not adiabatic anyon transport, not 
 Usage:
   python3 exp157_anyon_braiding.py --selftest
   python3 exp157_anyon_braiding.py --submit [--backend ibm_fez --shots 4096]
-  python3 exp157_anyon_braiding.py --decode --manifest ../results/exp157_manifest.json
+  python3 exp157_anyon_braiding.py --decode --manifest ../results/exp157_anyon_manifest.json
 """
 import argparse, json, os, sys
 import numpy as np
@@ -174,7 +174,7 @@ def submit(backend_name, shots):
                 "prereg": "all six arm signs correct AND |<X_anc>| > 5 sigma each; receipts: "
                           "B_p, A_v > 0.5, single edges |<Z_i>| < 0.15",
                 "note": "Z2 anyon mutual statistics: Wilson-loop interferometry, 6 arms + 2 receipts"}
-    out = os.path.join(HERE, "..", "results", "exp157_manifest.json")
+    out = os.path.join(HERE, "..", "results", "exp157_anyon_manifest.json")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     json.dump(manifest, open(out, "w"), indent=1)
     print(f"submitted {job.job_id()} ({len(circuits)} circuits, 2q-depths {depths}, {shots} shots) -> {out}")
@@ -211,7 +211,7 @@ def decode(mp):
     out = {"job_id": man["job_id"], "backend": man["backend"], "arms": rows,
            "plaquettes": [float(v) for v in plq], "stars": [float(v) for v in stars],
            "edges": [float(v) for v in edges], "receipts_ok": bool(rec_ok), "verdict_ok": bool(verdict)}
-    fn = os.path.join(HERE, "..", "results", "exp157_decode.json")
+    fn = os.path.join(HERE, "..", "results", "exp157_anyon_decode.json")
     json.dump(out, open(fn, "w"), indent=1)
     print(f"-> {fn}")
 
@@ -224,5 +224,5 @@ if __name__ == "__main__":
     a = ap.parse_args()
     if a.selftest: selftest()
     elif a.submit: submit(a.backend, a.shots)
-    elif a.decode: decode(a.manifest or os.path.join(HERE, "..", "results", "exp157_manifest.json"))
+    elif a.decode: decode(a.manifest or os.path.join(HERE, "..", "results", "exp157_anyon_manifest.json"))
     else: ap.print_help()

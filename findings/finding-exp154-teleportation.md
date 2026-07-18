@@ -43,6 +43,11 @@ idle-error class from Exp143/144, now visible in a *positive* result rather than
 It did not cap the result (0.88 ≫ 0.667). **Forward lever:** dynamical decoupling on the receiver
 across the correction latency lifts the X/Y states specifically → average from 0.913 toward ~0.95
 (the same DD move as the Exp147 QEC next-rung).
+**Update (C4846, Ember C4198)**: the DD lever is now empirically tempered — on the eraser's marker
+qubit (an analogous feedforward-idle window), a Hahn echo recovered only +0.019±0.012 of the gap
+(z=1.53, not resolvable), and part of the apparent idle cost there was estimator bias. Transfer
+boundary: different circuit/qubit, so the ~0.95 projection here is unverified extrapolation until
+DD is tested on this receiver directly; treat the lever as *plausible, not established*.
 
 ## Gates (passed pre-flight) + fences
 Truth-gate (noiseless Aer): F=1 for all six states; no-entanglement control fails on the
