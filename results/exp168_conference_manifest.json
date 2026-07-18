@@ -1,0 +1,95 @@
+{
+ "exp": 168,
+ "slug": "conference",
+ "backend": "ibm_fez",
+ "shots": 4096,
+ "job_id": "d9duedineu4c739np50g",
+ "order": [
+  [
+   "honest",
+   [
+    "X",
+    "X",
+    "X"
+   ]
+  ],
+  [
+   "honest",
+   [
+    "X",
+    "Y",
+    "Y"
+   ]
+  ],
+  [
+   "honest",
+   [
+    "Y",
+    "X",
+    "Y"
+   ]
+  ],
+  [
+   "honest",
+   [
+    "Y",
+    "Y",
+    "X"
+   ]
+  ],
+  [
+   "honest",
+   [
+    "Z",
+    "Z",
+    "Z"
+   ]
+  ],
+  [
+   "eve",
+   [
+    "X",
+    "X",
+    "X"
+   ]
+  ],
+  [
+   "eve",
+   [
+    "X",
+    "Y",
+    "Y"
+   ]
+  ],
+  [
+   "eve",
+   [
+    "Y",
+    "X",
+    "Y"
+   ]
+  ],
+  [
+   "eve",
+   [
+    "Y",
+    "Y",
+    "X"
+   ]
+  ],
+  [
+   "eve",
+   [
+    "Z",
+    "Z",
+    "Z"
+   ]
+  ]
+ ],
+ "message": "ENGAGE",
+ "prereg": {
+  "honest": "Mermin > 2 at >5 sigma AND conf_qber < 0.11 -> broadcast key",
+  "eve": "Mermin < 2 AND Mermin-basis collapse -> aborted",
+  "prediction": "M 3.0-3.6; conf_qber 4-9%; positive key; Eve M 1.5-2.2"
+ }
+}
