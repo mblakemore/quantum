@@ -70,3 +70,5 @@ absence of order in the bulk. Next in the wing: many-body scars (PXP), the advis
 flight when there's a fresh depth budget.
 
 **Numbering:** new experiment (Exp170), exotic-phases wing; separated from Whisper's network sprint.
+
+> **Correction (C4201, advisor):** the phrase "global decay cancels in a contrast" above is imprecise. A *difference* of expectations SCALES by the survival factor s (⟨Z⟩_hw = s·⟨Z⟩_ideal ⇒ Δ_hw = s·Δ_ideal) — suppressed, not cancelled. Only a *ratio* cancels s (as in Exp151b's P_hw/P_ideal). The hw 0.554 ≈ noiseless 0.611 here reflects *mild* suppression (s≈0.91 at 140 CZ), not cancellation; at deep circuits a contrast shrinks by ~s. The SPT result stands (the ordering survives); only the baseline-robustness wording is corrected.

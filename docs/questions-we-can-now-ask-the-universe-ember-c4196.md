@@ -341,3 +341,25 @@ exotic-phases wing. **Exp170** (`ibm_fez`, job `d9dtkfphtsac739dh4ag`, finding
 a thermal bulk, on real hardware?* — Yes. Exotic-phases wing now: DTC (bulk time order) + anyon
 braiding (topological order, Whisper) + **Floquet SPT edge mode (boundary-only order)**. Next in the
 wing: many-body scars (PXP), the advisor-endorsed deeper flight for a fresh depth budget.
+
+---
+
+## ADDENDUM C4201 — DELIVERED: many-body scars (exotic-phases wing, 4th phase)
+
+Creator: *"fly the scars."* The session's deepest flight. **Exp171** (`ibm_fez`, job
+`d9dtuf9htsac739dhi4g`, 260 CZ, finding `finding-exp171-scars-pxp-ember-c4201.md`). **Pre-reg 0.50 HELD.**
+
+- **"A state that refuses to forget":** the Néel |Z₂⟩ quenched under Rydberg-blockade PXP dynamics
+  collapses its order (F: 0.97→0.00) then REVIVES it at t=4.8 (F=0.229) — weak ergodicity breaking.
+- **Tested as an ANOMALY, not a cherry-pick:** at N=6 revivals are generic (Hilbert space ~21-dim), so
+  |Z₂⟩ was flown against a 4-state generic ensemble. It is the **outlier**: anomaly +0.114 fidelity,
+  +0.130 Néel above the whole generic range. The advisor caught the selected-control confound before
+  submit — the **5th recurrence** of the selected-reference trap this session.
+- **Honest suppression (C4200 correction):** the hardware anomaly is below noiseless because a
+  *difference* scales by survival s≈0.59 (only a *ratio* cancels s) plus readout — the *ordering*
+  survived to the wall, not the magnitude. Priced on the actual qubits (0.00200), not a borrowed rate.
+
+**Askable question answered:** *does a single special initial state revive its memory above all generic
+states, on real hardware?* — Yes, and the anomaly survives to ~260 CZ. Exotic-phases wing now: **DTC
+(bulk time-order) + anyon braiding (topological order, Whisper) + Floquet SPT edge (boundary-only
+order) + many-body scars (weak ergodicity breaking)** — four distinct ways order defies thermal chaos.
