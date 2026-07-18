@@ -188,6 +188,55 @@ prethermally rigid, not thermal) was surfaced before flight. See the
 
 ---
 
+## Where next — the forward map after C4196 (Creator: "where can we go with our experiments next?")
+
+Tonight closed Q5, Q6, Q13 and Exp151b, and — the load-bearing meta-result — the network falsified
+**three** fancy stories in two cycles, each with a matched control + null-first design: twirl-defends-
+coherence (Exp149b), MBL-shields-noise (Exp151b), MBL-extends-the-crystal (Whisper Exp153). The DTC
+physics is now fully decomposed: **interactions = rigidity + noise-protection; disorder = lowers-
+amplitude + shrinks-boundary.** That reshapes what's worth flying next into four tiers.
+
+**Tier 1 — the one that changes the category: substrate universality.** Everything the campaign has
+graded is Heron-generation. The single highest-information flight available is **Q11 / Exp141** —
+the BGK shallow-circuit solver (+ a depth-wall probe) on **Quantinuum H2 (trapped-ion)**, pre-reg
+drafted. One external flight answers whether the ~1000-CZ wall, the depth-decay law, and the F114
+erosion ladder are *physics* (transfer to a platform with completely different per-gate error) or
+*chip-lore* (Heron-specific). This is the line between "we characterized a chip" and "we found a
+NISQ regularity."
+
+**Tier 2 — turn the discipline inward: a self-replication audit of our own headline wins.** The
+matched-control + null-first method is now doubly proven as a fancy-assumption killer. The highest-
+yield *internal* experiment is applying it adversarially to the campaign's surviving flagship claims
+(the causal-game σ, the metrology advantage, the randomness certificate) — the same reflex that
+already self-corrected F80/F94/F100/F115, run as a deliberate pass, not incidentally. This is Q12
+(the NISQ replication audit) pointed at *ourselves* first, and it needs only a scoping cycle.
+
+**Tier 3 — three cheap, sharp follow-ons tonight specifically unlocked:**
+- **What IS the non-coherent inversion?** Exp149b proved it isn't coherent; the mechanism is now
+  open. A low-overhead native-echo / leakage / SPAM-decomposition probe (~5 QPU-s) asks whether the
+  confident-wrong bias is a stochastic channel, leakage, or a readout-basis artifact — closes the
+  C4195→C4196 arc.
+- **Upgrade the survival predictor to a characterized instrument.** It now has *two measured
+  scope-limits* — blind to coherent inversion (Exp148b, unfavorable) and to structured-dynamics
+  protection (Exp151b, favorable, the 2.9× interaction shield). Fit a two-term model (generic decay ×
+  structured-protection factor) on the 148b/151/151b/153 data. 0 QPU; every future flight then tests
+  it, the way the generic model was tested tonight.
+- **The exotic-phases wing (Whisper's) is open past the DTC.** With prethermal-vs-MBL separated, the
+  same Floquet apparatus can reach a *different* phase — a Floquet SPT / topological edge mode, or
+  many-body scars. Whisper's wing; I pair-review.
+
+**Tier 4 — standing products & the sim-free bet (unchanged, restated):** the **randomness beacon**
+(Q8 — close F117's +0.006 bias, publish certified bits to the trading Monte Carlo, the first standing
+*product*); and the **Heisenberg compensator** (Q2 — superpose two gate orders to beat the best fixed
+order; sim-gated and free until it earns hardware).
+
+**If we fly one thing:** Tier 1 (Quantinuum H2) — it's the only flight that can tell us our two years
+of walls and laws are about the universe and not about one vendor's silicon. **If we fly one cheap
+thing:** the two-term predictor upgrade (0 QPU) — it converts tonight's two scope-limits into a
+standing instrument. The rest queue behind those.
+
+---
+
 *Every claim above traces to the findings cited; every proposed flight inherits the house rules —
 pre-registered gates frozen before submit, failed gates reported as first-class results, and the
 honest label written for both outcomes before we ask.*
