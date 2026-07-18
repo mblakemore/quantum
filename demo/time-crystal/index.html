@@ -118,6 +118,29 @@
     </div>
   </section>
 
+  <!-- PANEL MELT -->
+  <section class="panel" aria-labelledby="hM">
+    <h2 id="hM">2 · The melting point — and disorder doesn't help</h2>
+    <p class="sub">ibm_fez · sweep the drive error ε and the disorder strength W · where does the rhythm die?</p>
+    <div class="primer">Push the drive error ε up and eventually even the crystal melts. The natural guess — the one
+      textbooks suggest — is that <b>disorder</b> should <em>protect</em> the crystal, letting it survive to larger ε.
+      The hardware says the opposite: <b>more disorder melts it sooner</b>. The clean interaction-only chain (W=0)
+      survives to ε≈0.33; strong disorder collapses it at ε≈0.19. Disorder spreads the rhythm across sites and weakens
+      the signal — it gives the crystal its rigidity, but it is not the thing holding the melting point back.</div>
+
+    <div class="plotwrap"><figure><svg id="plotMelt" viewBox="0 0 640 250" role="img"
+      aria-label="Rigidity heat map over drive error and disorder strength; the melt boundary moves to smaller drive error as disorder increases, showing disorder shrinks the crystal."></svg></figure></div>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--violet)"></i> rigid (rhythm locked)</span>
+      <span><i class="swatch" style="background:color-mix(in srgb,var(--violet) 20%,transparent)"></i> melted</span>
+      <span><i class="swatch" style="background:var(--good);height:0;border-top:2px dashed var(--good)"></i> melt boundary ε_melt</span>
+    </div>
+    <p style="margin:12px 0 0;font-size:13px;color:var(--ink-2);font-family:var(--mono)">And the melt boundary matches the
+      <b style="color:var(--good)">noiseless</b> prediction to ~0.007 in ε at every W — noise dims the signal but does not
+      move the boundary. So disorder is a bystander to noise too: <b>interactions set both the rigidity and the noise
+      protection; disorder only lowers the amplitude and shrinks the boundary.</b></p>
+  </section>
+
   <!-- PANEL B -->
   <section class="panel" aria-labelledby="hB">
     <h2 id="hB">The court</h2>
@@ -221,7 +244,54 @@
     try{localStorage.setItem("qmuseum-theme",nxt);}catch(e){}
     drawA(+slider.value);
   });
-  drawA(4);
+  // ---- Panel MELT: R(eps,W) heat map (ibm_fez, job d9dicm4inv1c73ap4kh0) ----
+  var MELT_EPS = [0.04,0.12,0.20,0.28,0.40];
+  var MELT_W = ["0","1","π"];
+  var MELT_R = [                 // rows = eps, cols = W
+    [0.835,0.778,0.807],
+    [0.796,0.547,0.613],
+    [0.722,0.394,0.373],
+    [0.566,0.231,0.247],
+    [0.214,0.101,0.160]];
+  var MELT_BOUND = [0.331,0.202,0.190];   // eps_melt per W column
+  function drawMelt(){
+    var svg=document.getElementById("plotMelt"); svg.innerHTML="";
+    var mL=52,mT=16,mR=18,mB=40,W=640,H=250;
+    var cols=MELT_W.length, rows=MELT_EPS.length;
+    var cw=(W-mL-mR)/cols, ch=(H-mT-mB)/rows;
+    function epsY(eps){ // map eps (0.04..0.40) to y within plot
+      var f=(eps-MELT_EPS[0])/(MELT_EPS[rows-1]-MELT_EPS[0]);
+      return mT + f*(H-mT-mB);
+    }
+    for(var r=0;r<rows;r++) for(var c=0;c<cols;c++){
+      var R=MELT_R[r][c], x=mL+c*cw, y=mT+r*ch;
+      svg.appendChild(el("rect",{x:x+1,y:y+1,width:cw-2,height:ch-2,rx:4,
+        fill:"color-mix(in srgb,"+css('--violet')+" "+Math.round(R*85)+"%,transparent)",
+        stroke:css('--edge'),"stroke-width":1}));
+      var t=el("text",{x:x+cw/2,y:y+ch/2+4,"text-anchor":"middle","font-size":12,
+        "font-family":css('--mono'),fill:R>0.45?css('--ink'):css('--ink-3')}); t.textContent=R.toFixed(2); svg.appendChild(t);
+    }
+    // melt boundary markers per column (dashed segment at eps_melt)
+    for(var c2=0;c2<cols;c2++){
+      var yb=epsY(MELT_BOUND[c2]), xb=mL+c2*cw;
+      svg.appendChild(el("line",{x1:xb+2,y1:yb,x2:xb+cw-2,y2:yb,stroke:css('--good'),
+        "stroke-width":2.4,"stroke-dasharray":"5 3"}));
+      var tb=el("text",{x:xb+cw/2,y:yb-4,"text-anchor":"middle","font-size":10,
+        "font-family":css('--mono'),fill:css('--good')}); tb.textContent="ε="+MELT_BOUND[c2].toFixed(2); svg.appendChild(tb);
+    }
+    // axes labels
+    for(var r3=0;r3<rows;r3++){var ty=el("text",{x:mL-8,y:mT+r3*ch+ch/2+4,"text-anchor":"end",
+      "font-size":11,"font-family":css('--mono'),fill:css('--ink-3')}); ty.textContent="ε="+MELT_EPS[r3].toFixed(2); svg.appendChild(ty);}
+    for(var c3=0;c3<cols;c3++){var tx=el("text",{x:mL+c3*cw+cw/2,y:H-mB+18,"text-anchor":"middle",
+      "font-size":11.5,"font-family":css('--mono'),fill:css('--ink-3')}); tx.textContent="W="+MELT_W[c3]; svg.appendChild(tx);}
+    var xl=el("text",{x:(mL+W-mR)/2,y:H-6,"text-anchor":"middle","font-size":11,"font-family":css('--mono'),
+      fill:css('--ink-3')}); xl.textContent="disorder strength W  (0 = none · π = strong)"; svg.appendChild(xl);
+    var yl=el("text",{x:14,y:mT+(H-mT-mB)/2,"text-anchor":"middle","font-size":11,"font-family":css('--mono'),
+      fill:css('--ink-3'),transform:"rotate(-90 14 "+(mT+(H-mT-mB)/2)+")"}); yl.textContent="drive error ε"; svg.appendChild(yl);
+  }
+
+  document.getElementById("themeBtn").addEventListener("click",drawMelt);
+  drawA(4); drawMelt();
 })();
 </script>
 </body>
