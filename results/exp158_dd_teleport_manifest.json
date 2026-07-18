@@ -1,0 +1,89 @@
+{
+ "exp": 158,
+ "slug": "dd_teleport",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9ds03phtsac739devt0",
+ "order": [
+  [
+   "Z+",
+   "nodd"
+  ],
+  [
+   "Z-",
+   "nodd"
+  ],
+  [
+   "X+",
+   "nodd"
+  ],
+  [
+   "X-",
+   "nodd"
+  ],
+  [
+   "Y+",
+   "nodd"
+  ],
+  [
+   "Y-",
+   "nodd"
+  ],
+  [
+   "Z+",
+   "dd"
+  ],
+  [
+   "Z-",
+   "dd"
+  ],
+  [
+   "X+",
+   "dd"
+  ],
+  [
+   "X-",
+   "dd"
+  ],
+  [
+   "Y+",
+   "dd"
+  ],
+  [
+   "Y-",
+   "dd"
+  ],
+  [
+   "Z+",
+   "bracket"
+  ],
+  [
+   "Z-",
+   "bracket"
+  ],
+  [
+   "X+",
+   "bracket"
+  ],
+  [
+   "X-",
+   "bracket"
+  ],
+  [
+   "Y+",
+   "bracket"
+  ],
+  [
+   "Y-",
+   "bracket"
+  ]
+ ],
+ "prereg": {
+  "estimator": "direct per-state P(0); primary Delta = mean over X\u00b1,Y\u00b1 of F_dd - F_nodd; binomial SE",
+  "resolvable": "Delta > 2*SE AND Delta > 0.01",
+  "mechanism": "bracket arm must track nodd (|Delta_bracket| < max(2*SE, 0.01))",
+  "neg_control": "Z states: |Delta_Z| small in all arms",
+  "prediction": "Delta_dd in [0.000, 0.045] (2x-wide band, C4846 rule); P(resolvable) ~ 0.5; null is first-class"
+ },
+ "note": "DD on teleport receiver: nodd/dd(CPMG-2 subdividing)/bracket(inversion), within-job A/B/C, direct Exp154-lever test"
+}
