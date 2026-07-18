@@ -37,11 +37,15 @@ signature, measured on real silicon.
    two-qubit gates (t=12), where the measured-noise feasibility model predicted ≈0.12. The many-body
    localization that rigidifies the subharmonic also suppresses heating of the observable — the phase is
    partly self-protecting. A measure-beat-predict in the honest direction (cf. Exp146).
-2. **The late-time crossover is a disclosed asymmetry, not a failure.** Past t≈6 the control's beat
-   *revives* (|A| → 0.98 at t=8) while the DTC keeps slowly decohering, so the raw contrast goes negative.
-   This is expected and was flagged pre-flight: the control has **zero** two-qubit gates (interactions off),
-   so it barely decoheres, while the DTC pays the full gate cost. The clean claim lives at the first
-   beat-null (t≈3–5); the late-time DTC decay is the finite-coherence fence made visible.
+2. **It is a 13-point SHAPE discrimination, and the late-time "revival" corroborates the mechanism**
+   (Ember, C4196, on re-reading the data — I had undersold this as a one-point contrast). The control's
+   *entire* curve tracks the parameter-free beat envelope **cos(πεt)** — 0.995 → 0.064 at the null → −0.979
+   at t=8 → −0.189 at t=12 — with an **RMS residual of 0.009 (max 1.5%)** across all 13 periods. The DTC is
+   **monotonic**: no null, no sign flip, no revival — it does not beat at all. So the discriminator is the
+   whole shape (beat vs no-beat), not the single null; and the late-time control revival I first disclosed as
+   a "fence" is the beat doing exactly what theory demands for a non-interacting chain — it *confirms* the
+   mechanism rather than weakening the claim. (The control has no two-qubit gates, so its absolute amplitude
+   is not gate-matched to the DTC — but the shape discrimination does not depend on that.)
 
 ## Fences (headline-level)
 - Finite chain (L=6), finite coherence — a **signature** of the DTC phase, not a thermodynamic-limit proof.
