@@ -1,0 +1,63 @@
+{
+ "exp": 162,
+ "slug": "swap",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9dt50ineu4c739nndeg",
+ "order": [
+  [
+   "swap",
+   "ZZ"
+  ],
+  [
+   "swap",
+   "XX"
+  ],
+  [
+   "swap",
+   "YY"
+  ],
+  [
+   "direct",
+   "ZZ"
+  ],
+  [
+   "direct",
+   "XX"
+  ],
+  [
+   "direct",
+   "YY"
+  ],
+  [
+   "nocorr",
+   "ZZ"
+  ],
+  [
+   "nocorr",
+   "XX"
+  ],
+  [
+   "nocorr",
+   "YY"
+  ],
+  [
+   "nomeas",
+   "ZZ"
+  ],
+  [
+   "nomeas",
+   "XX"
+  ],
+  [
+   "nomeas",
+   "YY"
+  ]
+ ],
+ "witness": 0.5,
+ "prereg": {
+  "primary": "F_swap > 1/2 (separable bound) at >5 sigma",
+  "controls": "nocorr and nomeas F in [0.18, 0.35]",
+  "prediction": "F_swap 0.80-0.92; F_direct 0.90-0.97; controls 0.22-0.28"
+ }
+}
