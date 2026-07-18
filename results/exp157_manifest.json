@@ -1,100 +1,125 @@
 {
  "exp": 157,
  "backend": "ibm_fez",
- "shots": 4096,
- "job_id": "d9drgc9htsac739dedu0",
- "arms": [
+ "shots": 8000,
+ "job_id": "d9drj9qneu4c739nld20",
+ "phases": [
+  0.0,
+  0.7853981633974483,
+  1.5707963267948966,
+  2.356194490192345,
+  3.141592653589793,
+  3.9269908169872414,
+  4.71238898038469,
+  5.497787143782138
+ ],
+ "order": [
   [
-   "empty-loop",
-   [
-    0,
-    5,
-    2,
-    4
-   ],
-   [],
+   "static_erase",
+   0
+  ],
+  [
+   "static_erase",
    1
   ],
   [
-   "braid-m-inside",
-   [
-    0,
-    5,
-    2,
-    4
-   ],
-   [
-    4
-   ],
-   -1
+   "static_erase",
+   2
   ],
   [
-   "m-outside",
-   [
-    0,
-    5,
-    2,
-    4
-   ],
-   [
-    6
-   ],
+   "static_erase",
+   3
+  ],
+  [
+   "static_erase",
+   4
+  ],
+  [
+   "static_erase",
+   5
+  ],
+  [
+   "static_erase",
+   6
+  ],
+  [
+   "static_erase",
+   7
+  ],
+  [
+   "dynamic_nodd",
+   0
+  ],
+  [
+   "dynamic_nodd",
    1
   ],
   [
-   "deformed-loop",
-   [
-    0,
-    1,
-    6,
-    3,
-    2,
-    4
-   ],
-   [
-    4
-   ],
-   -1
+   "dynamic_nodd",
+   2
   ],
   [
-   "pair-enclosed",
-   [
-    0,
-    1,
-    6,
-    3,
-    2,
-    4
-   ],
-   [
-    5
-   ],
+   "dynamic_nodd",
+   3
+  ],
+  [
+   "dynamic_nodd",
+   4
+  ],
+  [
+   "dynamic_nodd",
+   5
+  ],
+  [
+   "dynamic_nodd",
+   6
+  ],
+  [
+   "dynamic_nodd",
+   7
+  ],
+  [
+   "dynamic_dd",
+   0
+  ],
+  [
+   "dynamic_dd",
    1
   ],
   [
-   "pair-straddle",
-   [
-    0,
-    5,
-    2,
-    4
-   ],
-   [
-    5
-   ],
-   -1
+   "dynamic_dd",
+   2
+  ],
+  [
+   "dynamic_dd",
+   3
+  ],
+  [
+   "dynamic_dd",
+   4
+  ],
+  [
+   "dynamic_dd",
+   5
+  ],
+  [
+   "dynamic_dd",
+   6
+  ],
+  [
+   "dynamic_dd",
+   7
   ]
  ],
- "twoq_depths": [
-  22,
-  23,
-  18,
-  27,
-  23,
-  18,
-  15,
-  12
- ],
- "prereg": "all six arm signs correct AND |<X_anc>| > 5 sigma each; receipts: B_p, A_v > 0.5, single edges |<Z_i>| < 0.15",
- "note": "Z2 anyon mutual statistics: Wilson-loop interferometry, 6 arms + 2 receipts"
+ "transpiled_1q_gates": {
+  "nodd": 5.0,
+  "dd": 7.0
+ },
+ "prereg": {
+  "confidence": 0.55,
+  "gate": "(V_dd_erase - V_nodd_erase) > 2*sigma_bootstrap AND V_marginal < 0.1",
+  "null_is_first_class": "DD<=0 recovery => idle error is not DD-refocusable quasi-static dephasing (measurement crosstalk/leakage/T1)",
+  "not_sim_replicable": "noiseless XX=I; DD benefit is hardware-only"
+ },
+ "note": "DD echo on marker across feed-forward idle; static ceiling + dynamic no-DD/DD; within-job A/B; self-verifying (known phi); no-signaling fence"
 }

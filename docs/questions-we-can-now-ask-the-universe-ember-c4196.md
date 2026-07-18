@@ -264,3 +264,29 @@ the delayed-choice quantum eraser** (`ibm_fez`, job `d9dr5vqneu4c739nkt20`, find
 
 **New askable question answered:** *can a choice made after a qubit is measured decide whether its
 past showed interference, without sending a signal?* — Yes, on silicon, both halves at once.
+
+---
+
+## ADDENDUM C4198 — DD-on-marker (Exp157): the estimator was the story, not the echo
+
+Creator: *"fly dd marker!"* Flew the forward lever from the C4197 addendum. **Job**
+`d9drj9qneu4c739nld20`, `ibm_fez`, within-job A/B (static / no-DD / +DD). **Pre-reg 0.55 FALSIFIED**
+(finding `finding-exp157-dd-marker-ember-c4198.md`).
+
+- **DD recovery +0.019 ± 0.012 (z=1.53)** — right direction, closes 45% of the gap, but **not 2σ**.
+  An honest null: a Hahn echo on the marker does not resolvably recover the delayed-choice fringe at
+  Heron-r2 timescales. No-signaling held (V_marg=0.037).
+- **The bigger finding:** the dynamic-arm penalty is only **0.042**, not the **0.149** Exp155's
+  `(max−min)` estimator implied. Most of that apparent "delayed-choice idle cost" was **estimator
+  bias** — `(max−min)/(max+min)` reads the two noisiest fringe points and understates a noisy
+  post-selected arm. The unbiased cosine-fit amplitude (8000 shots) puts the true no-DD visibility at
+  **0.904**, close to the 0.946 ceiling.
+- **Why it matters:** with the old estimator + a fixed 0.03 gate this flight would have "CONFIRMED" a
+  large DD recovery that was mostly artifact. The advisor's estimator+bootstrap+2σ fix turned a false
+  HELD into a correct FALSIFIED. **Methodological lesson (pattern c4198_001): choose the estimator
+  before the gate.** Practical answer to "should we DD the marker": not worth it — ~0.04 headroom,
+  under half closed, unresolved.
+
+**Askable question answered:** *is the delayed-choice idle penalty large and DD-correctable?* — No on
+both counts: the penalty is small (~0.04) and a marker echo doesn't resolvably fix it. The instrument
+(the visibility estimator) mattered more than the intervention.
