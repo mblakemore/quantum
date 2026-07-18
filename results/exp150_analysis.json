@@ -1,0 +1,141 @@
+{
+ "exp": 150,
+ "rows": [
+  {
+   "t": 4,
+   "phi": "1/4",
+   "regime": "divisor",
+   "planted_r": 4,
+   "recovered_r": 4,
+   "confidence": 0.88,
+   "top": [
+    [
+     4,
+     3334
+    ],
+    [
+     5,
+     189
+    ],
+    [
+     2,
+     103
+    ]
+   ],
+   "correct": true
+  },
+  {
+   "t": 5,
+   "phi": "1/3",
+   "regime": "non-divisor",
+   "planted_r": 3,
+   "recovered_r": 3,
+   "confidence": 0.553,
+   "top": [
+    [
+     3,
+     2116
+    ],
+    [
+     5,
+     619
+    ],
+    [
+     6,
+     475
+    ]
+   ],
+   "correct": true
+  },
+  {
+   "t": 5,
+   "phi": "1/5",
+   "regime": "non-divisor",
+   "planted_r": 5,
+   "recovered_r": 5,
+   "confidence": 0.655,
+   "top": [
+    [
+     5,
+     2381
+    ],
+    [
+     7,
+     616
+    ],
+    [
+     6,
+     219
+    ]
+   ],
+   "correct": true
+  },
+  {
+   "t": 5,
+   "phi": "2/5",
+   "regime": "non-divisor",
+   "planted_r": 5,
+   "recovered_r": 5,
+   "confidence": 0.642,
+   "top": [
+    [
+     5,
+     2499
+    ],
+    [
+     7,
+     677
+    ],
+    [
+     3,
+     300
+    ]
+   ],
+   "correct": true
+  }
+ ],
+ "verdict": "4/4 settings recovered r on hardware (QFT/QPE back-end runs on kingston)",
+ "prereg": {
+  "exp": 150,
+  "author": "Ember",
+  "written": "pre-decode",
+  "question": "Does QFT-based QPE order-recovery run on kingston, recovering hidden r?",
+  "regimes": "divisor (exact, weak test) + non-divisor (approximate, real Shor regime)",
+  "prediction": "recover r for the divisor setting and the non-divisor settings the survival predictor passes; the QPE circuit is shallow so all should survive.",
+  "prediction_confidence": 0.6,
+  "falsifier": "fails to recover r at a setting the predictor passed -> QPE too noisy on kingston (or predictor over-optimistic; log which).",
+  "fence": "QFT/QPE ORDER-RECOVERY back-end, NOT factoring RSA (no modular-exp front-end).",
+  "settings": [
+   {
+    "t": 4,
+    "s": 1,
+    "r": 4,
+    "Nmax": 6,
+    "regime": "divisor"
+   },
+   {
+    "t": 5,
+    "s": 1,
+    "r": 3,
+    "Nmax": 6,
+    "regime": "non-divisor"
+   },
+   {
+    "t": 5,
+    "s": 1,
+    "r": 5,
+    "Nmax": 7,
+    "regime": "non-divisor"
+   },
+   {
+    "t": 5,
+    "s": 2,
+    "r": 5,
+    "Nmax": 7,
+    "regime": "non-divisor"
+   }
+  ],
+  "shots": 4000
+ },
+ "fence": "QFT order-recovery back-end, NOT factoring RSA"
+}

@@ -1,0 +1,59 @@
+{
+ "exp": 149,
+ "rows": [
+  {
+   "ep": 8,
+   "untw_p_true": 0.591,
+   "untw_rec": true,
+   "twirl_p_true": 0.484,
+   "twirl_rec": false
+  },
+  {
+   "ep": 14,
+   "untw_p_true": 0.226,
+   "untw_rec": false,
+   "twirl_p_true": 0.153,
+   "twirl_rec": false
+  },
+  {
+   "ep": 20,
+   "untw_p_true": 0.104,
+   "untw_rec": false,
+   "twirl_p_true": 0.155,
+   "twirl_rec": false
+  },
+  {
+   "ep": 28,
+   "untw_p_true": 0.381,
+   "untw_rec": false,
+   "twirl_p_true": 0.633,
+   "twirl_rec": true
+  }
+ ],
+ "verdict": "twirl does NOT remove the inversion -> not purely coherent (prediction FALSIFIED)",
+ "prereg": {
+  "exp": 149,
+  "author": "Ember",
+  "written": "pre-decode",
+  "question": "Does Pauli-twirling REMOVE the copy-channel confident-wrong inversion (=> the inversion was coherent, and twirling defends it)?",
+  "prediction": "twirled does NOT invert (p_true>0.5, recovers) where untwirled inverts; this both confirms coherent mechanism (G4) and gives the defense.",
+  "prediction_confidence": 0.65,
+  "falsifier": "twirled ALSO inverts -> not purely coherent, mechanism is elsewhere.",
+  "n": 4,
+  "planted_s": [
+   1,
+   0,
+   1,
+   0
+  ],
+  "depths_ep": [
+   8,
+   14,
+   20,
+   28
+  ],
+  "k_twirl": 12,
+  "shots_twirl_each": 167,
+  "shots_untw": 2000
+ }
+}
