@@ -193,10 +193,11 @@ def analyze(mp):
                      "generic_p_true": g["p_true"], "generic_rec": g["recovered"]})
         print(f"  {ep:>9} | {c['p_true']:>11} {str(c['recovered']):>4} | "
               f"{g['p_true']:>14} {str(g['recovered']):>4}")
-    # verdict: at the deep settings (ep>=32) does GENERIC invert (p_true<0.4) like copy?
-    deep = [r for r in rows if r["ep"] >= 32]
-    gen_inverts = all(r["generic_p_true"] < 0.4 for r in deep) if deep else False
-    copy_inverts = all(r["copy_p_true"] < 0.4 for r in deep) if deep else False
+    # verdict: DATA-DRIVEN — compare the arms at the settings where COPY actually inverts
+    # (copy_p_true < 0.4), not a hardcoded ep threshold (ep != 2q — the units bug I keep hitting).
+    inv = [r for r in rows if r["copy_p_true"] < 0.4]
+    copy_inverts = len(inv) > 0
+    gen_inverts = copy_inverts and all(r["generic_p_true"] < 0.4 for r in inv)
     if copy_inverts and gen_inverts:
         verdict = "GENERIC ALSO INVERTS -> inversion is a GENERIC deep-noise property; confident-wrong stands (prediction FALSIFIED)"
     elif copy_inverts and not gen_inverts:

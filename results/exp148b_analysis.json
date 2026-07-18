@@ -1,0 +1,70 @@
+{
+ "exp": "148b",
+ "rows": [
+  {
+   "ep": 0,
+   "copy_p_true": 0.966,
+   "copy_rec": true,
+   "generic_p_true": 0.973,
+   "generic_rec": true
+  },
+  {
+   "ep": 8,
+   "copy_p_true": 0.59,
+   "copy_rec": true,
+   "generic_p_true": 0.915,
+   "generic_rec": true
+  },
+  {
+   "ep": 14,
+   "copy_p_true": 0.266,
+   "copy_rec": false,
+   "generic_p_true": 0.873,
+   "generic_rec": true
+  },
+  {
+   "ep": 20,
+   "copy_p_true": 0.103,
+   "copy_rec": false,
+   "generic_p_true": 0.825,
+   "generic_rec": true
+  },
+  {
+   "ep": 28,
+   "copy_p_true": 0.341,
+   "copy_rec": false,
+   "generic_p_true": 0.749,
+   "generic_rec": true
+  }
+ ],
+ "verdict": "GENERIC does NOT invert while COPY does -> regime B was largely a COPY-CHANNEL artifact; narrow the claim (prediction HELD)",
+ "prereg": {
+  "exp": "148b",
+  "author": "Ember",
+  "written": "pre-decode",
+  "question": "Does Exp148's confident-wrong inversion (p_true<0.5 at depth) reproduce under GENERIC data-qubit noise, or was it specific to injecting on the oracle's copy channel?",
+  "control": "copy vs generic injection, matched 2q count, same 8 qubits, co-batched (same calibration window). Both self-verifying (planted s).",
+  "prediction": "GENERIC does NOT fully reproduce the inversion (p_true stays >=~0.45 at deep settings, graceful decay) -> regime B was substantially a copy-channel artifact; narrow the confident-wrong claim.",
+  "prediction_confidence": 0.6,
+  "falsifier": "generic ALSO inverts (p_true<0.4 deep) -> inversion is generic deep-noise; confident-wrong stands as a general caveat.",
+  "n": 4,
+  "planted_s": [
+   1,
+   0,
+   1,
+   0
+  ],
+  "depths": [
+   0,
+   8,
+   14,
+   20,
+   28
+  ],
+  "shots": 2000,
+  "modes": [
+   "copy",
+   "generic"
+  ]
+ }
+}
