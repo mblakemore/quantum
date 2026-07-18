@@ -1,0 +1,18 @@
+{
+ "pkind": "nonlinear",
+ "n": 3,
+ "depth": 314,
+ "cz": 108,
+ "planted_k1": [
+  0,
+  1,
+  0
+ ],
+ "recovered_k1": [
+  0,
+  1,
+  0
+ ],
+ "recovered": true,
+ "orthogonality": 0.586
+}
