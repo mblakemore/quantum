@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%224%22%20cy%3D%228%22%20r%3D%222%22%20fill%3D%22%2345d6cf%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%222%22%20fill%3D%22%2345d6cf%22%2F%3E%3Cpath%20d%3D%22M5.6%208h4.8%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%221.4%201.2%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teleportation — beam me up | The Quantum Museum</title>
+<meta name="description" content="Destroy a qubit's state here and rebuild it there, using a shared Bell pair and two classical bits — the original provably gone. Six states teleported on real hardware at 0.913 average fidelity, past the 2/3 classical bound, with two independent falsifiers. Real feed-forward on ibm_fez (Exp154).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge); color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; } .plotwrap { overflow-x:auto; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:4px 0 2px; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:6px 14px; cursor:pointer; }
+  .seg button[aria-pressed="true"]{ background:var(--cyan); color:#04201e; font-weight:600; }
+  .bignum { font-family:var(--mono); font-size:15px; margin-top:14px; }
+  .bignum b { font-size:22px; } .beats { color:var(--good); } .fails { color:var(--bad); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; } .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .principle { font-size:15px; color:var(--ink); line-height:1.6; margin:2px 0 16px; } .principle b { color:var(--cyan); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce){ * { transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ quantum network</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>Teleportation<span class="hl">.</span></h1>
+    <p class="lede">Destroy a qubit's state <em>here</em> and rebuild it <em>there</em> — carried by a shared entangled
+      pair and two classical bits, with the original provably gone (no-cloning). Not a copy: the state crosses without
+      anything that holds it ever traversing the gap. We beamed six states across real silicon and checked every one
+      against what we sent.</p>
+    <span class="scope">Scope: <b>single-hop, real feed-forward</b>, finite fidelity (SPAM + 1 entangling gate +
+      correction latency). A hardware demonstration of the primitive, not a deployed network.</span>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel" aria-labelledby="hA">
+    <h2 id="hA">1 · Six states, beamed and verified</h2>
+    <p class="sub">ibm_fez · the six cardinal states · fidelity of the received state vs the one we sent</p>
+    <div class="primer">A classical strategy — measure the qubit, send the result, rebuild — cannot exceed an average
+      fidelity of <b>2/3</b> (a theorem; measurement destroys what a superposition holds). Beat 2/3 and only genuine
+      quantum teleportation explains it. Every bar clears the line; the average is <b>0.913</b>.</div>
+    <div class="seg" role="group" aria-label="which run">
+      <button type="button" id="segTele" aria-pressed="true">teleport</button>
+      <button type="button" id="segNoent" aria-pressed="false">no entanglement</button>
+      <button type="button" id="segNocorr" aria-pressed="false">no correction</button>
+    </div>
+    <div class="plotwrap"><figure><svg id="plotA" viewBox="0 0 640 300" role="img"
+      aria-label="Per-state teleportation fidelity bars against the 2/3 classical bound; teleport run clears the bound at every state, the falsifier runs collapse to chance."></svg></figure></div>
+    <div class="bignum" id="bignum"></div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel" aria-labelledby="hB">
+    <h2 id="hB">2 · Two falsifiers, two resources</h2>
+    <div class="primer">Teleportation needs two things: the shared <b>entanglement</b> and the <b>classical
+      correction</b>. Remove either and it must fail — and each fails <em>differently</em>, so no partial cheat can
+      pass both. Switch the runs above: <b style="color:var(--bad)">no entanglement</b> kills the superposition states
+      (X/Y → chance; the Z states survive by accident, a qubit left near |0⟩ answers |0⟩ right). <b style="color:var(--bad)">No
+      correction</b> kills <em>everything</em> (every state → chance), because the received qubit is right only up to a
+      random Pauli the classical bits were supposed to undo.</div>
+    <p class="principle">Genuine teleportation is the only thing that clears 2/3 <b>and</b> survives both falsifiers.
+      This run does: 0.913 average, entanglement-off collapses the superpositions, correction-off collapses all six.</p>
+  </section>
+
+  <!-- COURT -->
+  <section class="panel" aria-labelledby="hC">
+    <h2 id="hC">The court</h2>
+    <div class="court">
+      <div class="receipt"><div class="rt">EXECUTED · Exp154</div><p>Six cardinal states, real feed-forward (mid-circuit
+        Bell measurement → conditional X/Z), ibm_fez. Average fidelity 0.913 vs 2/3, margin +0.246.
+        <code>job d9dinncinv1c73ap52ng</code></p></div>
+      <div class="receipt"><div class="rt">TWO FALSIFIERS</div><p>No-entanglement control → superpositions to chance;
+        no-correction control → all six to chance (0.498). Both resources measured load-bearing.
+        <code>job d9dios1htsac739d4dd0</code></p></div>
+      <div class="receipt"><div class="rt">SELF-VERIFYING</div><p>We hold the six inputs, so each fidelity is checked
+        directly against the known state — no seals, no grader. The 2/3 bound is a theorem, not a fitted line.</p></div>
+      <div class="receipt"><div class="rt">HONEST FENCE</div><p>The ~0.09 below perfect is mostly the receiver
+        decohering during the measure→classical→correction latency (an idle-error channel). A hardware primitive on
+        one hop — not a deployed quantum internet.</p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>The Quantum Museum · quantum-network wing</span>
+    <a href="../index.html">← all exhibits</a>
+    <span>Data: Exp154, ibm_fez, 2026 · self-verifying (known input states)</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var STATES=["Z+","Z-","X+","X-","Y+","Y-"];
+  var DATA={
+    tele:  [0.959,0.959,0.896,0.894,0.884,0.884],
+    noent: [0.990,0.972,0.502,0.510,0.502,0.504],
+    nocorr:[0.516,0.467,0.505,0.496,0.499,0.507]
+  };
+  var AVG={tele:0.913, noent:0.663, nocorr:0.498};
+  var BOUND=2/3;
+  var css=function(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();};
+  var NS="http://www.w3.org/2000/svg";
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  var plotA=document.getElementById("plotA"), arm="tele";
+  var W=640,H=300,mL=44,mR=16,mT=18,mB=44;
+  function yOf(v){return mT+(1-v)*(H-mT-mB);}
+  function draw(){
+    plotA.innerHTML="";
+    [0,0.5,1].forEach(function(v){var y=yOf(v);
+      plotA.appendChild(el("line",{x1:mL,y1:y,x2:W-mR,y2:y,stroke:css('--edge'),"stroke-width":1}));
+      var t=el("text",{x:mL-8,y:y+4,"text-anchor":"end","font-size":11,fill:css('--ink-3'),"font-family":css('--mono')});t.textContent=v.toFixed(1);plotA.appendChild(t);});
+    // 2/3 bound line
+    var yb=yOf(BOUND);
+    plotA.appendChild(el("line",{x1:mL,y1:yb,x2:W-mR,y2:yb,stroke:css('--amber'),"stroke-width":2,"stroke-dasharray":"6 4"}));
+    var bl=el("text",{x:W-mR,y:yb-6,"text-anchor":"end","font-size":11,fill:css('--amber'),"font-family":css('--mono')});bl.textContent="classical bound 2/3";plotA.appendChild(bl);
+    var vals=DATA[arm], n=vals.length, bw=(W-mL-mR)/n*0.6, gap=(W-mL-mR)/n;
+    vals.forEach(function(v,i){
+      var x=mL+i*gap+gap*0.2, y=yOf(v), h=(H-mB)-y;
+      var above=v>BOUND;
+      plotA.appendChild(el("rect",{x:x,y:y,width:bw,height:h,rx:4,
+        fill:above?css('--good'):css('--bad'),opacity:arm==="tele"?0.9:0.8}));
+      var vt=el("text",{x:x+bw/2,y:y-6,"text-anchor":"middle","font-size":11,fill:css('--ink-2'),"font-family":css('--mono')});vt.textContent=v.toFixed(2);plotA.appendChild(vt);
+      var st=el("text",{x:x+bw/2,y:H-mB+18,"text-anchor":"middle","font-size":12,fill:css('--ink-3'),"font-family":css('--mono')});st.textContent=STATES[i];plotA.appendChild(st);
+    });
+    var beats=AVG[arm]>BOUND;
+    var bn=document.getElementById("bignum");
+    bn.innerHTML = "average fidelity <b class='"+(beats?"beats":"fails")+"'>"+AVG[arm].toFixed(3)+"</b> "
+      + (arm==="tele" ? "<span class='beats'>— beats 2/3, genuine teleportation</span>"
+        : arm==="noent" ? "<span class='fails'>— superpositions collapse (entanglement load-bearing)</span>"
+        : "<span class='fails'>— all states collapse to chance (correction load-bearing)</span>");
+  }
+  function setArm(a){arm=a;
+    document.getElementById("segTele").setAttribute("aria-pressed",a==="tele");
+    document.getElementById("segNoent").setAttribute("aria-pressed",a==="noent");
+    document.getElementById("segNocorr").setAttribute("aria-pressed",a==="nocorr");
+    draw();}
+  document.getElementById("segTele").addEventListener("click",function(){setArm("tele");});
+  document.getElementById("segNoent").addEventListener("click",function(){setArm("noent");});
+  document.getElementById("segNocorr").addEventListener("click",function(){setArm("nocorr");});
+  document.getElementById("themeBtn").addEventListener("click",function(){
+    var cur=document.documentElement.getAttribute("data-theme");var nxt=cur==="light"?"dark":"light";
+    document.documentElement.setAttribute("data-theme",nxt);try{localStorage.setItem("qmuseum-theme",nxt);}catch(e){}draw();});
+  draw();
+})();
+</script>
+</body>
+</html>
