@@ -1,0 +1,21 @@
+{
+ "job_id": "d9dsdfineu4c739nmef0",
+ "theta_star": 0.415206,
+ "commitment_verified": true,
+ "product": {
+  "theta": 0.4104509528988455,
+  "sigma": 0.010005236514648467,
+  "delta": -0.006219943076887752,
+  "contrast": 0.995038779064792,
+  "covered": true
+ },
+ "ghz": {
+  "theta": 0.416083056133147,
+  "sigma": 0.005213206592708379,
+  "delta": -0.03448576136591594,
+  "contrast": 0.8648760726071154,
+  "covered": true
+ },
+ "variance_ratio": 0.2714908222033716,
+ "verdict_ok": true
+}

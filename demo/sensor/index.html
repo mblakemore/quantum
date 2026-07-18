@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M3%2011a5%205%200%200%201%2010%200%22%20fill%3D%22none%22%20stroke%3D%22%2345d6cf%22%20stroke-width%3D%221.5%22%2F%3E%3Cline%20x1%3D%228%22%20y1%3D%2211%22%20x2%3D%2211%22%20y2%3D%226.5%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sensor — an instrument is its error bar | The Quantum Museum</title>
+<meta name="description" content="A blind test of an entanglement-enhanced sensor: the field strength is sealed by hash before flight, two sensors publish estimate ± error bar, then the seal opens. The entangled sensor's first error bar lied by 8σ — the protocol caught it, the fix flew, and the sensor certified at 0.2σ. Exp159, ibm_fez.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 14%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 14px; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:7px 16px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:10px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; align-items:stretch; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:17px; font-weight:700; }
+  .val.good { color:var(--good); } .val.bad { color:var(--bad); } .val.cy { color:var(--cyan); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); word-break:break-all; }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce){ * { transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ advantage ladder</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Sensor<span class="hl">.</span></h1>
+    <p class="lede">An instrument is its <b>error bar</b>. We sealed a secret field strength behind a hash, sent two
+      sensors to read it blind — five ordinary probes vs five entangled ones — and made each publish its answer
+      <em>with</em> its uncertainty before the seal opened. The entangled sensor was five times sharper… and on the
+      first flight its error bar <b>lied by 8σ</b>. The protocol caught it, the fix flew the same hour, and the
+      certified sensor now reads the hidden field to <b>0.2σ</b> — still 3.7× beyond any classical strategy at the
+      same budget.</p>
+    <span class="scope">Scope: <b>blind sealed-phase estimation</b> on 5 qubits (GHZ vs product probes, matched
+      budget) — a certification protocol demo, not a field-deployed magnetometer; dynamic range 2π/5.</span>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Open the seal</h2>
+    <p class="sub">two flights, same protocol · ibm_fez · truth hidden behind sha256 until decode</p>
+    <p class="primer"><b>How to read it.</b> Each flight: a secret θ* is drawn and its hash committed publicly before
+      launch. The <b>product sensor</b> (5 independent probes, classical strategy) and the <b>GHZ sensor</b> (5 qubits
+      entangled — the field's kick is amplified 5×) each publish an estimate and a 95% confidence interval computed
+      from their own data. Then the seal opens and the ruler below shows where truth actually was. A sensor passes
+      only if its interval <em>contains</em> the truth — precision means nothing if the bar doesn't cover.</p>
+    <div class="seg" role="tablist">
+      <button id="bv1" type="button">Flight 1 — the lie</button>
+      <button id="bv2" type="button" class="on">Flight 2 — certified</button>
+    </div>
+    <figure aria-label="number line with sealed truth and both sensors' confidence intervals">
+      <svg id="ruler" viewBox="0 0 860 250"></svg>
+    </figure>
+    <p class="story" id="story"></p>
+    <div class="verdict" id="vboxes"></div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel" aria-labelledby="pb">
+    <h2 id="pb">The court</h2>
+    <p class="sub">why a blind seal, why coverage is the certificate, and what fell out</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE SEAL MAKES IT HONEST</div>
+        <p>θ* is drawn at random and only sha256(θ*‖salt) is published before flight — the estimates cannot be
+        steered toward a known answer, and the reveal is checkable by anyone.
+        <code>v1 commit af7dd3de… · v2 commit d8a4f4a9… · both VERIFIED on reveal</code></p></div>
+      <div class="receipt"><div class="rt">WHY THE FIRST ERROR BAR LIED</div>
+        <p>The GHZ fringe runs 5× steeper — which also amplifies any systematic phase 5×. The first flight calibrated
+        with a single θ=0 arm, and cosine is an even function: one calibration point <em>cannot distinguish</em>
+        reduced contrast from a phase offset. A ~0.03 rad systematic rode in unmodeled; the statistical bar didn't
+        know it existed. More information per shot ≠ more truth per shot — unless the calibration model can see every
+        parameter the slope amplifies.</p></div>
+      <div class="receipt"><div class="rt">THE FIX, PROVEN BEFORE IT FLEW</div>
+        <p>Two calibration arms (applied 0 and a known 0.35 rad) give three fringe points for three unknowns —
+        contrast, offset, field. The pre-flight truth-gate <em>injects</em> flight 1's disease into simulation:
+        the pipeline measures the planted −0.030 as −0.0325 and still covers truth. On hardware it then measured the
+        real offset at −0.0345 — the same systematic, quasi-static across both jobs — and corrected it blind.</p></div>
+      <div class="receipt"><div class="rt">WHAT SURVIVES ALL GATES</div>
+        <p>Entanglement advantage under honest accounting: variance ratio 0.271 at matched budget (ideal 0.20 —
+        Heisenberg; classical floor 1.0), coverage HIT in both arms, truth revealed only after the estimates were
+        frozen. Fence: 5 qubits, 2π/5 dynamic range, offset assumed quasi-static within a job.
+        <code>Exp159/159b · jobs d9dsc34inv1c73apfu60, d9dsdfineu4c739nmef0</code></p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Exp159/159b · ibm_fez · 4+6 circuits · 4096 shots</span>
+    <span>C4848 · 2026-07-18</span>
+    <a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+// measured on ibm_fez; truth values were sealed (sha256) until each decode
+const FLIGHTS = {
+ v1: { truth:0.3325,
+   prod:{th:0.3287, ci:0.0145, hit:true,  sig:"0.5σ"},
+   ghz: {th:0.3030, ci:0.0072, hit:false, sig:"8.0σ"},
+   ratio:"0.249", verdict:"FAILED — GHZ error bar did not cover truth", vclass:"bad",
+   story:"<b>Flight 1.</b> The seal opens at θ* = 0.3325. The product sensor's wide bar covers it easily. The GHZ sensor's bar is beautifully narrow — and sits 8σ away from the truth. It was more precise <em>and wrong</em>: a ~0.03 rad systematic in the entangled epoch, amplified 5× by the very slope that gives the advantage, invisible to the single-point calibration. The pre-registered verdict field reads FAILED, published as-is."},
+ v2: { truth:0.4152,
+   prod:{th:0.4105, ci:0.0196, hit:true, sig:"0.5σ"},
+   ghz: {th:0.4161, ci:0.0102, hit:true, sig:"0.2σ"},
+   ratio:"0.271", verdict:"CERTIFIED — blind, bias-corrected, entanglement-enhanced", vclass:"good",
+   story:"<b>Flight 2.</b> Fresh seal, fresh θ* = 0.4152. Two-point calibration now measures the offset in-job (−0.0345 — the same disease that sank flight 1) and corrects it without ever seeing the sealed value. The GHZ sensor lands 0.2σ from truth with a bar half the classical width: variance ratio 0.271 at matched budget. Both intervals cover. The sensor is certified."}
+};
+const SVGNS="http://www.w3.org/2000/svg";
+const ruler=document.getElementById("ruler");
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+
+function draw(key){
+  const F=FLIGHTS[key]; ruler.innerHTML="";
+  const L=70,R=800, y0=210;
+  const lo=Math.min(F.ghz.th-F.ghz.ci,F.prod.th-F.prod.ci,F.truth)-0.012;
+  const hi=Math.max(F.ghz.th+F.ghz.ci,F.prod.th+F.prod.ci,F.truth)+0.012;
+  const px=v=>L+(v-lo)/(hi-lo)*(R-L);
+  el(ruler,"line",{x1:L,y1:y0,x2:R,y2:y0,style:"stroke:var(--edge-2);stroke-width:2"});
+  for(let t=Math.ceil(lo*100)/100; t<=hi; t+=0.01){
+    el(ruler,"line",{x1:px(t),y1:y0-5,x2:px(t),y2:y0+5,style:"stroke:var(--edge-2);stroke-width:1"});
+    el(ruler,"text",{x:px(t),y:y0+24,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=t.toFixed(2);
+  }
+  el(ruler,"text",{x:(L+R)/2,y:y0+44,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12.5px"}).textContent="field strength θ (radians)";
+  // truth line (revealed)
+  el(ruler,"line",{x1:px(F.truth),y1:28,x2:px(F.truth),y2:y0,style:"stroke:var(--amber);stroke-width:2.5;stroke-dasharray:6 4"});
+  el(ruler,"text",{x:px(F.truth),y:18,"text-anchor":"middle",style:"fill:var(--amber);font-family:var(--mono);font-size:12.5px;font-weight:700"}).textContent="θ* (sealed → revealed) = "+F.truth.toFixed(4);
+  // sensors: product (top), ghz (below)
+  const rows=[["product sensor",F.prod,95,"var(--ink-2)"],["GHZ sensor",F.ghz,150,"var(--cyan)"]];
+  rows.forEach(([name,d,y,col])=>{
+    const c = d.hit ? col : "var(--bad)";
+    el(ruler,"line",{x1:px(d.th-d.ci),y1:y,x2:px(d.th+d.ci),y2:y,style:`stroke:${c};stroke-width:5;stroke-linecap:round;opacity:.85`});
+    [d.th-d.ci,d.th+d.ci].forEach(v=>el(ruler,"line",{x1:px(v),y1:y-8,x2:px(v),y2:y+8,style:`stroke:${c};stroke-width:2.5`}));
+    el(ruler,"circle",{cx:px(d.th),cy:y,r:6,style:`fill:${c};stroke:var(--bg);stroke-width:1.5`});
+    el(ruler,"text",{x:px(d.th-d.ci)-10,y:y+4,"text-anchor":"end",style:`fill:${c};font-family:var(--mono);font-size:12.5px`}).textContent=name;
+    el(ruler,"text",{x:px(d.th+d.ci)+10,y:y+4,style:`fill:${c};font-family:var(--mono);font-size:12px`})
+      .textContent=`${d.th.toFixed(4)} ±${d.ci.toFixed(4)} · ${d.hit?"COVERS":"MISSES"} (${d.sig})`;
+  });
+  document.getElementById("story").innerHTML=F.story;
+  document.getElementById("vboxes").innerHTML=
+    `<div class="box hl"><span class="lbl">verdict (pre-registered gates)</span><span class="val ${F.vclass}">${F.verdict}</span></div>`+
+    `<div class="box"><span class="lbl">variance ratio GHZ / product</span><span class="val cy">${F.ratio}</span><br><span style="font-size:12px;color:var(--ink-3)">matched budget · ideal 0.20 · classical 1.0</span></div>`+
+    `<div class="box"><span class="lbl">coverage</span><span class="val ${F.prod.hit&&F.ghz.hit?"good":"bad"}">product ${F.prod.hit?"HIT":"MISS"} · GHZ ${F.ghz.hit?"HIT":"MISS"}</span><br><span style="font-size:12px;color:var(--ink-3)">the certificate is the interval, not the point</span></div>`;
+  document.getElementById("bv1").classList.toggle("on",key==="v1");
+  document.getElementById("bv2").classList.toggle("on",key==="v2");
+}
+document.getElementById("bv1").addEventListener("click",()=>draw("v1"));
+document.getElementById("bv2").addEventListener("click",()=>draw("v2"));
+draw("v2");
+
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>
