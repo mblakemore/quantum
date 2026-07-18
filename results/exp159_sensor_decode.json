@@ -1,0 +1,21 @@
+{
+ "job_id": "d9dsc34inv1c73apfu60",
+ "backend": "ibm_fez",
+ "theta_star": 0.332521,
+ "commitment_verified": true,
+ "product": {
+  "theta": 0.32872994089055607,
+  "sigma": 0.007386005649923967,
+  "contrast": 0.9939453125,
+  "covered": true
+ },
+ "ghz": {
+  "theta": 0.30299120687265735,
+  "sigma": 0.0036840030392958673,
+  "contrast": 0.8486328125,
+  "covered": false
+ },
+ "variance_ratio": 0.24878299314553226,
+ "gate_ratio_lt_05": true,
+ "verdict_ok": false
+}
