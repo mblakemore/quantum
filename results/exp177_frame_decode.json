@@ -1,0 +1,39 @@
+{
+ "job_id": "d9e0521htsac739dkslg",
+ "results": {
+  "live": {
+   "F": 0.46275000000000005,
+   "ZZ": 0.74575,
+   "XX": 0.05075,
+   "YY": -0.0545
+  },
+  "deferred": {
+   "F": 0.5553125000000001,
+   "ZZ": 0.78725,
+   "XX": 0.22125,
+   "YY": -0.21275
+  },
+  "endmeasure": {
+   "F": 0.8849374999999999,
+   "ZZ": 0.87225,
+   "XX": 0.8345,
+   "YY": -0.833
+  },
+  "direct": {
+   "F": 0.9788749999999999,
+   "ZZ": 0.9735,
+   "XX": 0.97275,
+   "YY": -0.96925
+  }
+ },
+ "decomposition": {
+  "delta_latency": 0.09256250000000005,
+  "delta_latency_sigma": 7.805555357848954,
+  "delta_measure": 0.32962499999999983,
+  "delta_measure_sigma": 27.796420632880043,
+  "delta_circuit": 0.09393750000000001,
+  "se_delta": 0.011858541225631422,
+  "latency_fraction_of_window_deficit": 0.21924500370096242
+ },
+ "verdict_ok": true
+}
