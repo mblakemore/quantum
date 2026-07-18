@@ -1,0 +1,23 @@
+{
+ "exp": "151b",
+ "author": "Ember",
+ "cycle": 4196,
+ "written": "pre-decode",
+ "origin": "Whisper Exp151 MBL-shields-noise surprise (A 0.376 measured vs 0.12 predicted)",
+ "design_correction": "int-only control is ideally RIGID (prethermal), not thermal \u2014 so 151b decomposes the shield into interactions vs localization, measured vs the KNOWN P_ideal baseline (not vs 1).",
+ "arms": {
+  "dtc": "rx(imperfect)+rzz(J)+rz(disorder)",
+  "match": "rx(imperfect)+rzz(J) \u2014 same rzz => same 2q count, no disorder"
+ },
+ "prediction": "on hardware the DISORDERED arm retains subharmonic amplitude better than the clean-interacting arm at t_max (A_dtc_hw>A_match_hw; P_hw/P_ideal>1 and grows) \u2014 disorder is a noise-shield distinct from interactions.",
+ "prediction_confidence": 0.5,
+ "falsifier": "A_dtc_hw <= A_match_hw at t_max \u2014 interactions alone carry the shield.",
+ "NO_TEST": "both arms |A|<0.1 by t_max (noise floor) \u2014 underpowered, void.",
+ "L": 6,
+ "eps": 0.12,
+ "null_t": 4,
+ "arms_order": [
+  "dtc",
+  "match"
+ ]
+}
