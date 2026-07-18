@@ -123,6 +123,32 @@
     </div>
   </section>
 
+  <section class="panel" aria-labelledby="pp">
+    <h2 id="pp">The distillery — two faded pairs, one brighter pair</h2>
+    <p class="sub">entanglement purification (DEJMPS) · Exp165 · ibm_fez · 8000 shots · job d9dtr24inv1c73aphomg</p>
+    <p class="primer"><b>How to read it.</b> When storage has faded two Bell pairs, a repeater can trade them:
+      local rotations, a CNOT between the pairs on each side, then measure one pair and <b>keep only the shots where
+      its two bits agree</b>. Half the data is spent — and the surviving pair comes back brighter. The bars show the
+      witness fidelity: the faded <b>input</b>, the <b>kept</b> pair after distillation, and the <b>discard pile</b>
+      (the rejected shots) — which must come out <em>worse</em> than the input, or the protocol isn't sorting anything.</p>
+    <figure aria-label="purification fidelities: input, kept, discard, fresh overhead"><svg id="pur" viewBox="0 0 860 300"></svg></figure>
+    <p class="story"><b>Gain +0.292 at 20σ, success probability 0.50 — and the sort is visible in the same shots:</b>
+      kept 0.688, discard −0.171. The remarkable part, honestly fenced: this run's input had faded to 0.396,
+      <em>below the 1/2 witness</em> — not even certifiably entangled — yet the distilled output <em>is</em> certified.
+      No bound is violated: the textbook "purification needs F&nbsp;&gt;&nbsp;1/2" threshold is a statement about
+      <em>unstructured</em> (Werner) noise, and this storage noise is structured coherent dephasing — diagnosed by the
+      memory panel above, and exactly the error class this protocol filters (proven in simulation before flight).
+      It would not work on 0.396 of depolarized noise. Distillation exploits structure; that's the physics, not magic.</p>
+    <div class="verdict">
+      <div class="box hl"><span class="lbl">distillation</span><span class="val cy">0.396 → 0.688 · 20σ</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">two pairs in, one pair out · p = 0.50</span></div>
+      <div class="box"><span class="lbl">the discard pile</span><span class="val good">−0.171 — garbage confirmed</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">rejected shots are worse than the input: the sort is real</span></div>
+      <div class="box"><span class="lbl">from below the witness</span><span class="val cy">uncertified → certified</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">structured-noise physics, fenced — not a bound violation</span></div>
+    </div>
+  </section>
+
   <section class="panel" aria-labelledby="pc">
     <h2 id="pc">The court</h2>
     <p class="sub">why the certificate is airtight — and where this sits in the network wing</p>
@@ -226,6 +252,35 @@ draw("swap");
   CURVES.forEach((cv,i)=>{const lx=R-235,ly=T2+16+i*20;
     el(s,"line",{x1:lx,y1:ly,x2:lx+22,y2:ly,style:`stroke:${cv.c};stroke-width:3`});
     el(s,"text",{x:lx+30,y:ly+4,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=cv.n;});
+})();
+
+// purification panel: witness-fidelity bars incl. the negative discard pile (Exp165 fez data)
+(function(){
+  const s=document.getElementById("pur");
+  const BARS=[
+    {n:"input (stored 10μs)",v:0.396,c:"var(--ink-3)"},
+    {n:"kept (distilled)",v:0.688,c:"var(--cyan)"},
+    {n:"discard pile",v:-0.171,c:"var(--bad)"},
+    {n:"fresh pairs (overhead)",v:0.905,c:"var(--good)"}];
+  const L=64,R=840,T3=16,B3=238; const py=v=>B3-(B3-T3)*(v+0.3)/1.3;
+  [[-0.171,null],[0,"0"],[0.25,"0.25"],[0.5,"1/2"],[1,"1.0"]].forEach(g=>{
+    if(g[1]===null) return;
+    el(s,"line",{x1:L,y1:py(g[0]),x2:R,y2:py(g[0]),style:`stroke:${g[0]===0.5?"var(--amber)":"var(--edge)"};stroke-width:${g[0]===0.5?2:1};${g[0]===0.5?"stroke-dasharray:6 4":""}`});
+    el(s,"text",{x:L-8,y:py(g[0])+4,"text-anchor":"end",style:`fill:${g[0]===0.5?"var(--amber)":"var(--ink-3)"};font-family:var(--mono);font-size:11px`}).textContent=g[1];});
+  el(s,"text",{x:R,y:py(0.5)-6,"text-anchor":"end",style:"fill:var(--amber);font-family:var(--mono);font-size:11px"}).textContent="1/2 — certified entanglement above this line";
+  const n=BARS.length,bw=(R-L)/n*0.42;
+  BARS.forEach((b,i)=>{
+    const x=L+(R-L)*(i+0.5)/n;
+    el(s,"rect",{x:x-bw/2,y:Math.min(py(b.v),py(0)),width:bw,height:Math.max(2,Math.abs(py(b.v)-py(0))),rx:4,
+      style:`fill:${b.c};opacity:.9`});
+    el(s,"text",{x:x,y:py(b.v)+(b.v>=0?-8:16),"text-anchor":"middle",
+      style:`fill:${b.c};font-family:var(--mono);font-size:13px;font-weight:700`}).textContent=(b.v>0?"":"−")+Math.abs(b.v).toFixed(3);
+    el(s,"text",{x:x,y:B3+20,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=b.n;});
+  // gain arrow input -> kept
+  const x1=L+(R-L)*0.5/n, x2=L+(R-L)*1.5/n;
+  el(s,"path",{d:`M${x1+bw/2+6},${py(0.396)} C ${(x1+x2)/2},${py(0.62)} ${(x1+x2)/2},${py(0.62)} ${x2-bw/2-8},${py(0.688)}`,
+    fill:"none",style:"stroke:var(--cyan);stroke-width:2;stroke-dasharray:4 4;opacity:.8"});
+  el(s,"text",{x:(x1+x2)/2,y:py(0.66)-8,"text-anchor":"middle",style:"fill:var(--cyan);font-family:var(--mono);font-size:12px;font-weight:700"}).textContent="+0.292 · 20σ";
 })();
 
 document.getElementById("themeBtn").addEventListener("click",()=>{
