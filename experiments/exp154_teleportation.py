@@ -47,8 +47,10 @@ def _apply(qc, gates, q):
         getattr(qc, g)(q)
 
 
-def teleport_circuit(prep, verify, entangled=True):
-    """q0 = source |psi>, q1+q2 = Bell pair; Bell-measure q0q1, feed-forward correct q2, verify q2."""
+def teleport_circuit(prep, verify, entangled=True, correct=True):
+    """q0 = source |psi>, q1+q2 = Bell pair; Bell-measure q0q1, feed-forward correct q2, verify q2.
+    entangled=False -> no Bell resource (entanglement falsifier). correct=False -> skip the
+    conditional X/Z (classical-feedforward falsifier, Elder C4844)."""
     qc = QuantumCircuit(3, 3)
     _apply(qc, prep, 0)                       # prepare |psi> on the source
     if entangled:
@@ -56,10 +58,11 @@ def teleport_circuit(prep, verify, entangled=True):
     qc.barrier()
     qc.cx(0, 1); qc.h(0)                      # Bell measurement basis
     qc.measure(0, 0); qc.measure(1, 1)
-    with qc.if_test((qc.clbits[1], 1)):       # X correction if m1=1
-        qc.x(2)
-    with qc.if_test((qc.clbits[0], 1)):       # Z correction if m0=1
-        qc.z(2)
+    if correct:
+        with qc.if_test((qc.clbits[1], 1)):   # X correction if m1=1
+            qc.x(2)
+        with qc.if_test((qc.clbits[0], 1)):   # Z correction if m0=1
+            qc.z(2)
     qc.barrier()
     _apply(qc, verify, 2)                     # U_psi^dagger: measuring 0 == fidelity to |psi>
     qc.measure(2, 2)

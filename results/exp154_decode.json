@@ -1,0 +1,24 @@
+{
+ "job_id": "d9dinncinv1c73ap52ng",
+ "backend": "ibm_fez",
+ "avg_fidelity": 0.9127083333333333,
+ "avg_control": 0.6633333333333333,
+ "classical_bound": 0.6666666666666666,
+ "beats_bound": true,
+ "per_state_teleport": {
+  "Z+": 0.95925,
+  "Z-": 0.95875,
+  "X+": 0.896,
+  "X-": 0.89375,
+  "Y+": 0.8845,
+  "Y-": 0.884
+ },
+ "per_state_control": {
+  "Z+": 0.99025,
+  "Z-": 0.972,
+  "X+": 0.50175,
+  "X-": 0.5105,
+  "Y+": 0.50175,
+  "Y-": 0.50375
+ }
+}

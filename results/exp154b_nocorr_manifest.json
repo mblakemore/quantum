@@ -1,0 +1,15 @@
+{
+ "exp": "154b",
+ "arm": "no-correction",
+ "backend": "ibm_fez",
+ "shots": 4000,
+ "job_id": "d9dios1htsac739d4dd0",
+ "order": [
+  "Z+",
+  "Z-",
+  "X+",
+  "X-",
+  "Y+",
+  "Y-"
+ ]
+}
