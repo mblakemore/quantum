@@ -1,0 +1,26 @@
+{
+ "exp": 159,
+ "slug": "sensor",
+ "backend": "ibm_fez",
+ "shots": 4096,
+ "job_id": "d9dsc34inv1c73apfu60",
+ "order": [
+  "prod_cal",
+  "ghz_cal",
+  "prod_field",
+  "ghz_field"
+ ],
+ "n_probes": 5,
+ "theta_window": [
+  0.15,
+  0.55
+ ],
+ "commitment_sha256": "af7dd3deb658ea2e040b6ef23ccddebe66116adcd2115dc4b324a98e4d6e3224",
+ "prereg": {
+  "coverage": "both 95% CIs (1.96 sigma) must contain revealed theta*",
+  "head_to_head": "var_GHZ / var_product < 0.5 at matched budget (ideal 0.20)",
+  "calibration": "within-job theta=0 arms; per-sensor contrast into estimator+CI",
+  "prediction": "ratio 0.25-0.45 (2x-wide band); coverage holds both arms; GHZ contrast 0.75-0.92, product 0.90-0.98"
+ },
+ "note": "blind sealed-phase sensing: product vs GHZ-5 at matched budget; seal opens only at decode"
+}
