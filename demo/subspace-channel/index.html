@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M5%207V5.5a3%203%200%200%201%206%200V7%22%20fill%3D%22none%22%20stroke%3D%22%2345d6cf%22%20stroke-width%3D%221.2%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%227%22%20width%3D%228%22%20height%3D%225.5%22%20rx%3D%221.2%22%20fill%3D%22%23e6a94e%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Subspace Channel — a key no one can steal | The Quantum Museum</title>
+<meta name="description" content="Quantum key distribution over the network: Alice and Bob share a swapped pair (they never met), certify their key with a CHSH test (S=2.179), and one-time-pad BEAM ME UP. A wiretap collapses the certificate and spikes the error to 51% — the channel that detects its own tap. Exp166, ibm_fez.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 14px; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 18px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .wire { font-family:var(--mono); font-size:clamp(13px,2vw,15px); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:14px 16px; margin-top:12px; line-height:1.7; word-break:break-all; }
+  .wire .lbl { color:var(--ink-3); font-size:11px; letter-spacing:.06em; text-transform:uppercase; }
+  .wire .plain { color:var(--good); font-weight:700; font-size:17px; letter-spacing:.12em; }
+  .wire .cipher { color:var(--amber); }
+  .wire .out.ok { color:var(--good); font-weight:700; font-size:17px; letter-spacing:.12em; }
+  .wire .out.bad { color:var(--bad); font-weight:700; font-size:17px; letter-spacing:.12em; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:180px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:17px; font-weight:700; }
+  .val.good { color:var(--good); } .val.bad { color:var(--bad); } .val.cy { color:var(--cyan); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ quantum network</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Subspace Channel<span class="hl">.</span></h1>
+    <p class="lede">Now that the network can entangle two strangers, here is what it's <b>for</b>. Alice and Bob —
+      who never interacted — share a swapped pair, turn it into a secret key, and check with a Bell test that
+      <b>no one else holds a copy</b>. They one-time-pad a message: <b>BEAM ME UP</b>. Then a wiretap tries to listen —
+      and the same Bell test that certifies the key <b>catches the tap and burns it down</b>. A channel you cannot
+      eavesdrop without announcing yourself. Toggle the eavesdropper below.</p>
+    <span class="scope">Scope: <b>entanglement-based QKD</b> (E91/BBM92) over the swapped pair, with the CHSH
+      certificate and one intercept-resend attack — a physics-certified-key demonstration, not a deployed cryptosystem.</span>
+  </header>
+
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Send the message</h2>
+    <p class="sub">key certified by a Bell test, then one-time-padded · ibm_fez · 4096 shots · job d9du1bkjeosc73fi2h3g</p>
+    <p class="primer"><b>How to read it.</b> The <b>S</b> value is a Bell test on the shared pair: above 2, physics
+      guarantees the correlation is genuine entanglement no eavesdropper can have copied. The <b>error rate (QBER)</b>
+      is how often Alice's and Bob's key bits disagree — low enough, and a secret key survives; too high, and the key
+      is thrown away. Flip the eavesdropper on and watch both move.</p>
+    <div class="seg" role="tablist">
+      <button id="bh" type="button" class="on">🔓 honest channel</button>
+      <button id="be" type="button">🕵 eavesdropper listening</button>
+    </div>
+    <figure aria-label="Bell certificate and error-rate gauges"><svg id="viz" viewBox="0 0 860 210"></svg></figure>
+    <div class="wire" id="wire"></div>
+    <p class="story" id="story"></p>
+    <div class="verdict" id="vbox"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">why the key is trustworthy, why the tap can't hide, and the honest fine print</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE KEY IS CERTIFIED, NOT ASSUMED</div>
+        <p>S = 2.179 beats the classical limit of 2 at 6σ — the shared randomness is genuine entanglement, which
+        (by monogamy) no third party can hold a copy of. The security rests on a measured Bell violation, not on
+        trusting the hardware. The message round-tripped: <code>"BEAM ME UP" → cipher → "BEAM ME UP", 100% correct</code></p></div>
+      <div class="receipt"><div class="rt">THE WIRETAP CANNOT HIDE</div>
+        <p>An intercept-resend Eve on Bob's qubit collapses the certificate (S 2.179 → 1.184) and drives the X-basis
+        error rate to 50.7% — a coin flip. The protocol sees it and aborts the key. The falsifier passing <em>is</em>
+        the security feature: you cannot listen without announcing yourself.</p></div>
+      <div class="receipt"><div class="rt">WHY TWO BASES — SHOWN, NOT ASSERTED</div>
+        <p>Eve listens in Z, so the Z-basis error stays clean (8%) while the X-basis error explodes (51%). A protocol
+        checking one basis would have missed her completely. This is exactly why BB84/E91 use conjugate bases —
+        here it's in the data, not the textbook.</p></div>
+      <div class="receipt"><div class="rt">THE FINE PRINT — AND THE NEXT RUNG</div>
+        <p>The secret fraction is thin (0.04): swap-grade fidelity barely clears the key threshold. That's the honest
+        hook — run <a href="../swap/" style="color:var(--cyan)">purification</a> first to fatten the key. One die,
+        co-located parties, one attack strategy, raw key for the demo (no privacy amplification). A certified-key
+        demonstration. <code>Exp166 · job d9du1bkjeosc73fi2h3g</code></p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Exp166 · ibm_fez · 16 circuits · 4096 shots</span>
+    <span>C4857 · 2026-07-18</span>
+    <a href="../swap/">← the matchmaker</a>
+    <a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+const D={
+ honest:{S:2.179,ssig:"+6σ",qz:0.060,qx:0.147,sf:0.040,
+   cipher:"bd ba be b2 df b2 ba df aa af",out:"BEAM ME UP",ok:true,
+   story:"<b>The honest channel.</b> The Bell test reads 2.179 — past the classical 2 at 6σ, so the shared key is certified genuine entanglement no one else can hold. The error rate (10%) is low enough to distill a secret key, and the message comes through: BEAM ME UP, every character correct.",
+   verdict:"SECURE — key certified, message delivered",vclass:"good"},
+ eve:{S:1.184,ssig:"below 2",qz:0.081,qx:0.507,sf:0.0,
+   cipher:"— key aborted —",out:"▓▓▓▓ ▓▓ ▓▓",ok:false,
+   story:"<b>Eavesdropper listening.</b> Eve intercepts Bob's qubit — and the Bell test collapses to 1.184, below the classical bound, while the X-basis error rate leaps to 51%. Both alarms fire. The protocol refuses to make a key: no message is sent. The tap didn't steal the secret; it destroyed the channel and revealed itself.",
+   verdict:"TAP DETECTED — key aborted, no message",vclass:"bad"}};
+const SVGNS="http://www.w3.org/2000/svg";
+const viz=document.getElementById("viz");
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function gauge(cx,label,val,vmin,vmax,thr,thrlabel,good,fmt){
+  const w=300,x0=cx-w/2,x1=cx+w/2,y=120;
+  el(viz,"text",{x:cx,y:34,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:13px"}).textContent=label;
+  el(viz,"line",{x1:x0,y1:y,x2:x1,y2:y,style:"stroke:var(--edge);stroke-width:6;stroke-linecap:round"});
+  const px=v=>x0+(x1-x0)*(v-vmin)/(vmax-vmin);
+  // threshold
+  el(viz,"line",{x1:px(thr),y1:y-16,x2:px(thr),y2:y+16,style:"stroke:var(--amber);stroke-width:2;stroke-dasharray:3 3"});
+  el(viz,"text",{x:px(thr),y:y+34,"text-anchor":"middle",style:"fill:var(--amber);font-family:var(--mono);font-size:10.5px"}).textContent=thrlabel;
+  const c=good?"var(--good)":"var(--bad)";
+  el(viz,"circle",{cx:px(val),cy:y,r:9,style:`fill:${c};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${c})`});
+  el(viz,"text",{x:px(val),y:y-22,"text-anchor":"middle",style:`fill:${c};font-family:var(--mono);font-size:16px;font-weight:700`}).textContent=fmt(val);
+}
+function draw(key){
+  const d=D[key]; viz.innerHTML="";
+  gauge(220,"Bell certificate  S",d.S,1.0,3.0,2.0,"classical 2",d.S>2,v=>v.toFixed(3));
+  gauge(640,"error rate  QBER (X basis)",d.qx,0,0.6,0.11,"key threshold 11%",d.qx<0.11,v=>(v*100).toFixed(0)+"%");
+  document.getElementById("wire").innerHTML=
+    `<div><span class="lbl">plaintext</span> &nbsp;<span class="plain">BEAM ME UP</span></div>`+
+    `<div><span class="lbl">one-time-pad cipher</span> &nbsp;<span class="cipher">${d.cipher}</span></div>`+
+    `<div><span class="lbl">Bob decrypts</span> &nbsp;<span class="out ${d.ok?'ok':'bad'}">${d.out}</span></div>`;
+  document.getElementById("story").innerHTML=d.story;
+  document.getElementById("vbox").innerHTML=
+    `<div class="box hl"><span class="lbl">verdict</span><span class="val ${d.vclass}">${d.verdict}</span></div>`+
+    `<div class="box"><span class="lbl">Bell test S</span><span class="val ${d.S>2?'good':'bad'}">${d.S.toFixed(3)} · ${d.ssig}</span></div>`+
+    `<div class="box"><span class="lbl">secret key fraction</span><span class="val ${d.sf>0?'cy':'bad'}">${d.sf>0?d.sf.toFixed(3)+" bit/round":"0 — aborted"}</span></div>`;
+  document.getElementById("bh").classList.toggle("on",key==="honest");
+  document.getElementById("be").classList.toggle("on",key==="eve");
+}
+document.getElementById("bh").addEventListener("click",()=>draw("honest"));
+document.getElementById("be").addEventListener("click",()=>draw("eve"));
+draw("honest");
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>
