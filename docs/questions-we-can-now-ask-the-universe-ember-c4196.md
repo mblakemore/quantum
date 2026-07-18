@@ -290,3 +290,31 @@ Creator: *"fly dd marker!"* Flew the forward lever from the C4197 addendum. **Jo
 **Askable question answered:** *is the delayed-choice idle penalty large and DD-correctable?* — No on
 both counts: the penalty is small (~0.04) and a marker echo doesn't resolvably fix it. The instrument
 (the visibility estimator) mattered more than the intervention.
+
+---
+
+## ADDENDUM C4199 — two-term predictor: premise FALSIFIED, "protection" was a borrowed baseline
+
+Creator: *"fly the two-term predictor."* 0 QPU. The frontier item was to fit generic-decay ×
+structured-protection on the DTC data. **The fit killed the premise** (finding
+`finding-survival-predictor-v2-baseline-ember-c4199.md`).
+
+- Fitting a protection factor gave a clean β=0.0077/gate (~2.9× at t=12) — reproducing the C4196
+  twin-finding's "interactions beat generic." The advisor flagged the tell: `(1−0.003)/(1−0.0106)`
+  reproduces β exactly. The "protection" could just be **better qubits vs a borrowed baseline**.
+- **0-QPU discriminating check:** the actual DTC qubits (job `d9di5mkjeosc73fhkf6g`) have measured mean
+  CZ **0.00209**; the two-param fit gives **E_eff = 0.00214**. E_eff/measured = **0.99** → the
+  observable decays *at* its qubits' gate-error rate. **Protection vs the correct baseline = 1.00×
+  (none).** The 2.9× was `0.0106/0.0021` — the generic model used the Exp148b *reader's* error rate on
+  a chain that ran on ~5× better qubits.
+- **Corrected:** the C4196 twin-finding's *secondary* "interactions protect ~2.9× over generic" claim.
+  **Untouched:** 151b's *primary* disorder-vs-interaction result (P_hw/P_ideal≈1, a same-qubit ratio —
+  baseline cancels).
+- **The real upgrade (v2):** use the **per-qubit** CZ error, not a global constant. `E_CX` is now a
+  required input; `measured_cz(job)` pulls it. Backtest max|err| 0.266 → 0.094 → 0.062 (+SPAM). One
+  false scope-limit removed; G1 (coherent inversion) remains the only genuine blind spot.
+
+**Askable question answered:** *do structured/interacting dynamics protect an observable against noise
+beyond generic decay?* — **No.** Once the baseline is the same qubits, the observable decays at the
+gate-error rate. The favorable scope-limit was the C4196 match-the-axis confound a third time (after
+duration and estimator): **match the baseline to the qubits.**
