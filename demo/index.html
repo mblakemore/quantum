@@ -7,6 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Quantum Museum — indefinite order, no-go games, and the search for advantage on IBM Heron</title>
 <meta name="description" content="A walk-through museum of a ~110-experiment quantum campaign on IBM Heron: the causal switch, the no-go games, foundations on silicon, the advantage ladder, and the instruments. Every exhibit renders real measured hardware data.">
+<meta property="og:title" content="The Quantum Museum">
+<meta property="og:description" content="23 interactive exhibits across 5 wings — causal order, no-go theorems, quantum advantage, and more. Every number is measured on IBM Heron silicon.">
+<meta property="og:url" content="https://mblakemore.github.io/quantum/demo/">
+<meta property="og:type" content="website">
 <link rel="stylesheet" href="museum.css">
 <style>
   .shell { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(16px,4vw,32px); }
@@ -15,9 +19,9 @@
   .topbar { display: flex; align-items: center; gap: 14px; padding: 18px 0 6px; }
   .topbar .brand { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--ink); }
   .topbar .brand span { color: var(--cyan); }
-  .topbar nav { margin-left: auto; display: flex; gap: 18px; align-items: center; }
-  .topbar nav a { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); }
-  .topbar nav a:hover { color: var(--cyan); }
+  .topbar nav, .topbar .topbar-links { margin-left: auto; display: flex; gap: 18px; align-items: center; }
+  .topbar nav a, .topbar .topbar-links a { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); }
+  .topbar nav a:hover, .topbar .topbar-links a:hover { color: var(--cyan); }
   .tbtn { font-family: var(--mono); font-size: 12px; background: none; border: 1px solid var(--edge);
     color: var(--ink-2); border-radius: 999px; padding: 4px 11px; cursor: pointer; }
   .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
@@ -49,7 +53,7 @@
   .wing { padding: 40px 0 8px; border-top: 1px solid var(--edge); margin-top: 34px; }
   .wing-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
   .wing-num { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--cyan); letter-spacing: .1em; }
-  .wing-name { font-size: clamp(20px,3vw,27px); font-weight: 680; letter-spacing: -.02em; color: var(--ink); }
+  .wing-name { font-size: clamp(20px,3vw,27px); font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
   .wing-desc { font-size: 14px; color: var(--ink-3); margin-left: auto; max-width: 40ch; text-align: right; }
   @media (max-width: 620px) { .wing-desc { margin-left: 0; text-align: left; } }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(268px,1fr)); gap: 14px; }
@@ -65,51 +69,51 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <div class="brand">THE QUANTUM <span>MUSEUM</span></div>
-    <nav>
+    <div class="topbar-links">
       <a href="scoreboard/">Scoreboard</a>
       <a href="https://github.com/mblakemore/quantum">Repository</a>
-      <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-    </nav>
-  </div>
+      <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+    </div>
+  </nav>
 
   <main id="main">
   <header class="hero">
-    <p class="eyebrow"><b>IBM HERON</b><span class="d"></span>2026 CAMPAIGN<span class="d"></span>~110 EXPERIMENTS<span class="d"></span>FINDINGS F01–F118<span class="d"></span>EVERY NUMBER A JOB ID</p>
+    <p class="eyebrow"><strong>IBM HERON</strong><span class="d"></span>2026 CAMPAIGN<span class="d"></span>~110 EXPERIMENTS<span class="d"></span>FINDINGS F01–F118<span class="d"></span>EVERY NUMBER A JOB ID</p>
     <h1>We asked a quantum computer questions the textbooks call <span class="hl">impossible</span>.</h1>
-    <p class="thesis">Then we pre-registered the answers and ran them on real silicon. Indefinite causal order, contextuality, thermodynamics from a switch, a computational bridge, certified randomness — <b>every exhibit here renders measured hardware data</b>, not a simulation. Walk through.</p>
+    <p class="thesis">Then we pre-registered the answers and ran them on real silicon. Indefinite causal order, contextuality, thermodynamics from a switch, a computational bridge, certified randomness — <strong>every exhibit here renders measured hardware data</strong>, not a simulation. Walk through.</p>
     <div class="cta">
       <a class="btn primary" href="scoreboard/">See the verdict →</a>
       <a class="btn" href="switch/">Start with the switch</a>
       <a class="btn" href="https://github.com/mblakemore/quantum">Read the full report</a>
     </div>
     <div class="stat-strip">
-      <span><b>5</b> wings</span><span><b>22</b> exhibits live</span><span><b>every finding walkable</b></span><span><b>3</b> Heron dies · a portability exam (F112)</span>
+      <span><strong>5</strong> wings</span><span><strong>23</strong> exhibits live</span><span><strong>every finding walkable</strong></span><span><strong>3</strong> Heron dies · a portability exam (F112)</span>
     </div>
   </header>
 
   <!-- WING I -->
-  <section class="wing" id="wing-1">
-    <div class="wing-head"><span class="wing-num">WING I</span><span class="wing-name">The Causal Switch</span><span class="wing-desc">Indefinite order — where the sequence of two operations is itself in superposition — as a physical resource.</span></div>
+  <section class="wing" id="wing-1" aria-labelledby="wing-1-name">
+    <div class="wing-head"><span class="wing-num">WING I</span><h2 class="wing-name" id="wing-1-name">The Causal Switch</h2><span class="wing-desc">Indefinite order — where the sequence of two operations is itself in superposition — as a physical resource.</span></div>
     <div class="grid">
       <a class="card" href="switch/">
-        <div class="card-top"><span class="card-title">The Interactive Switch</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Interactive Switch</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Drag the order-coherence and watch a witness of indefinite causal order live and die by the cosine law.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F73–F82</span> · <span class="sig">216.8σ</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="ladder/">
-        <div class="card-top"><span class="card-title">The Ladder of Causation</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Ladder of Causation</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Climb Pearl's three rungs — see, do, imagine — reconstructed on real silicon.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">causal structure</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="ico-refrigerator/">
-        <div class="card-top"><span class="card-title">The ICO Refrigerator</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The ICO Refrigerator</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Two thermal baths and the switch: the target splits colder or hotter by control outcome — forbidden to every ordered process.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F86 / F95</span> · <span class="sig">21.1σ</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="teleported-witness/">
-        <div class="card-top"><span class="card-title">The Teleported Witness</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Teleported Witness</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Beam the control qubit one hop; it arrives still causally indefinite over a quantum channel, dead over a classical one.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F92</span> · <span class="sig">90σ</span></span></div>
       </a>
@@ -117,31 +121,31 @@
   </section>
 
   <!-- WING II -->
-  <section class="wing" id="wing-2">
-    <div class="wing-head"><span class="wing-num">WING II</span><span class="wing-name">The No-Go Games</span><span class="wing-desc">Games whose classical ceiling is a theorem — and the quantum strategies that beat it.</span></div>
+  <section class="wing" id="wing-2" aria-labelledby="wing-2-name">
+    <div class="wing-head"><span class="wing-num">WING II</span><h2 class="wing-name" id="wing-2-name">The No-Go Games</h2><span class="wing-desc">Games whose classical ceiling is a theorem — and the quantum strategies that beat it.</span></div>
     <div class="grid">
       <a class="card" href="static-duel/">
-        <div class="card-top"><span class="card-title">The Bot Duel: STATIC</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Bot Duel: STATIC</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Can a message survive two perfect erasers? A classical bot can't. The quantum bot does — race them.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F83</span> · <span class="sig">capacity from zero</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="casebook/">
-        <div class="card-top"><span class="card-title">The Interrogation</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Interrogation</h3><span class="tag live">Live</span></div>
         <p class="card-hook">A game with a mathematically proven ceiling you cannot beat — until the suspects share entanglement.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">game ceiling</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="magic-square/">
-        <div class="card-top"><span class="card-title">The Magic Square</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Magic Square</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Play the pseudo-telepathy game: fail at 8/9 as a classical pair, win every cell with the quantum strategy.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F106</span> · <span class="sig">196σ</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="no-go-triptych/">
-        <div class="card-top"><span class="card-title">The No-Go Triptych</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The No-Go Triptych</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Three great no-gos — Bell, indefinite causal order, contextuality — three walls, all falling in one court.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">CHSH / F82 / F106</span> · <span class="sig">53–217σ</span></span></div>
       </a>
       <a class="card" href="cloning-replicator/">
-        <div class="card-top"><span class="card-title">The Cloning Replicator</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Cloning Replicator</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Copy a qubit and hit the 5/6 wall the universe puts on quantum itself — cheat past it on one basis, get caught paying on the conjugate.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F110</span> · <span class="sig">5/6 certified</span></span><span class="enter">Enter →</span></div>
       </a>
@@ -149,36 +153,36 @@
   </section>
 
   <!-- WING III -->
-  <section class="wing" id="wing-3">
-    <div class="wing-head"><span class="wing-num">WING III</span><span class="wing-name">Foundations on Silicon</span><span class="wing-desc">Six universe-questions the campaign put to a chip in a fortnight — the science-fiction wing, with balanced books.</span></div>
+  <section class="wing" id="wing-3" aria-labelledby="wing-3-name">
+    <div class="wing-head"><span class="wing-num">WING III</span><h2 class="wing-name" id="wing-3-name">Foundations on Silicon</h2><span class="wing-desc">Six universe-questions the campaign put to a chip in a fortnight — the science-fiction wing, with balanced books.</span></div>
     <div class="grid">
       <a class="card" href="grandfather/">
-        <div class="card-top"><span class="card-title">The Grandfather Paradox</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Grandfather Paradox</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Try to kill grandfather; the timeline forbids it (1.9% survival) and a bystander's classical record rotates into quantum coherence.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F101</span> · <span class="sig">78σ</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="zeno-tractor/">
-        <div class="card-top"><span class="card-title">The Zeno Tractor Beam</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Zeno Tractor Beam</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Pin a qubit against a full π-rotation just by watching it — the cadence law, measured to half a percent.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F102</span> · <span class="sig">92σ</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="twin-paradox/">
-        <div class="card-top"><span class="card-title">The Twin Paradox</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Twin Paradox</h3><span class="tag live">Live</span></div>
         <p class="card-hook">An excited clock ages, and its aging marks the path — destroying the interference the vacuum twin keeps.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F100</span> · <span class="sig">36σ</span></span></div>
       </a>
       <a class="card" href="quantum-darwinism/">
-        <div class="card-top"><span class="card-title">Quantum Darwinism</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">Quantum Darwinism</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Under indefinite order, two incompatible records exist at once — facts without a causal history.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F98</span> · <span class="sig">22σ</span></span></div>
       </a>
       <a class="card" href="hayden-preskill/">
-        <div class="card-top"><span class="card-title">The Hayden-Preskill Mirror</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Hayden–Preskill Mirror</h3><span class="tag live">Live</span></div>
         <p class="card-hook">A diary dead in every definite query order comes back, phase-flipped, from the probe alone.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F99</span> · <span class="sig">56σ</span></span></div>
       </a>
       <a class="card" href="negative-energy/">
-        <div class="card-top"><span class="card-title">Negative Energy</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">Negative Energy</h3><span class="tag live">Live</span></div>
         <p class="card-hook">A patch of chip reads below its own vacuum — negative local energy, borrowed against entanglement, with the books balanced.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F97</span> · <span class="sig">12σ</span></span></div>
       </a>
@@ -186,31 +190,36 @@
   </section>
 
   <!-- WING IV -->
-  <section class="wing" id="wing-4">
-    <div class="wing-head"><span class="wing-num">WING IV</span><span class="wing-name">The Advantage Ladder</span><span class="wing-desc">The five scoreboards on which we asked: have we found quantum advantage?</span></div>
+  <section class="wing" id="wing-4" aria-labelledby="wing-4-name">
+    <div class="wing-head"><span class="wing-num">WING IV</span><h2 class="wing-name" id="wing-4-name">The Advantage Ladder</h2><span class="wing-desc">The five scoreboards on which we asked: have we found quantum advantage?</span></div>
     <div class="grid">
       <a class="card" href="scoreboard/">
-        <div class="card-top"><span class="card-title">The Scoreboard</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Scoreboard</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Have we found quantum advantage? The five-scoreboard answer, with the boundaries, at a glance.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F01–F118</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="ghz-sextant/">
-        <div class="card-top"><span class="card-title">The GHZ Sextant</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The GHZ Sextant</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Entangled probes beat the standard quantum limit — and the advantage climbs the ladder to N=5.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F108/9</span> · <span class="sig">168σ</span></span><span class="enter">Enter →</span></div>
       </a>
+      <a class="card" href="blind-spot/">
+        <div class="card-top"><h3 class="card-title">The Blind Spot</h3><span class="tag live">Live</span></div>
+        <p class="card-hook">A decoder's own self-check can score a wrong answer higher than the true one — a confident lie only ground truth catches.</p>
+        <div class="card-foot"><span class="mdata"><span class="fnd">Exp147/148/148b</span></span><span class="enter">Enter →</span></div>
+      </a>
       <a class="card" href="shallow-solver/">
-        <div class="card-top"><span class="card-title">The Shallow-Circuit Solver</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Shallow-Circuit Solver</h3><span class="tag live">Live</span></div>
         <p class="card-hook">A constant-depth quantum circuit runs, on silicon at 90% with full coverage, the solver of the one theorem that provably separates shallow quantum from shallow classical as the problem grows.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F113</span> · <span class="sig">438σ</span></span></div>
       </a>
       <a class="card" href="trust-ladder/">
-        <div class="card-top"><span class="card-title">The Trust Ladder</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Trust Ladder</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Slide full-trust → one-sided-DI → full-DI, and watch a randomness claim evaporate and re-form at the rung the hardware holds.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F115–F117</span> · <span class="sig">0.65 bit</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="pocket-dictionary/">
-        <div class="card-top"><span class="card-title">The Pocket Dictionary</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Pocket Dictionary</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Two bits packed into one qubit, either one retrievable on demand — inside the two-sided quantum band.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F107</span> · <span class="sig">110σ</span></span></div>
       </a>
@@ -218,21 +227,21 @@
   </section>
 
   <!-- WING V -->
-  <section class="wing" id="wing-5">
-    <div class="wing-head"><span class="wing-num">WING V</span><span class="wing-name">The Instruments</span><span class="wing-desc">How the measurements were made — and how you can make them too.</span></div>
+  <section class="wing" id="wing-5" aria-labelledby="wing-5-name">
+    <div class="wing-head"><span class="wing-num">WING V</span><h2 class="wing-name" id="wing-5-name">The Instruments</h2><span class="wing-desc">How the measurements were made — and how you can make them too.</span></div>
     <div class="grid">
       <a class="card" href="weather/">
-        <div class="card-top"><span class="card-title">The QPU Weather Report</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The QPU Weather Report</h3><span class="tag live">Live</span></div>
         <p class="card-hook">A live nowcast of the chip's quality that beat the vendor's published forecast by 27%. Bring your own key for a live read.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">zero-qubit edge</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="casebook-pnp/">
-        <div class="card-top"><span class="card-title">The Casebook: Print &amp; Play</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Casebook: Print &amp; Play</h3><span class="tag live">Live</span></div>
         <p class="card-hook">The interrogation game as a tabletop deck — print it, cut it, and beat the classical ceiling at your kitchen table.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">tabletop</span></span><span class="enter">Enter →</span></div>
       </a>
       <a class="card" href="switch-bench/">
-        <div class="card-top"><span class="card-title">The Switch-Bench Readout</span><span class="tag live">Live</span></div>
+        <div class="card-top"><h3 class="card-title">The Switch-Bench Readout</h3><span class="tag live">Live</span></div>
         <p class="card-hook">Three axes of causal structure — causal, schedule, hold — certified on a chip the bench had never seen, ranking devices on axes QV/CLOPS/EPLG can't touch.</p>
         <div class="card-foot"><span class="mdata"><span class="fnd">F112</span> · <span class="sig">device-independent</span></span></div>
       </a>
@@ -263,6 +272,7 @@
       if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       var next = cur === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
+      btn.setAttribute("aria-pressed", next === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, next); } catch (e) {}
     });
   })();

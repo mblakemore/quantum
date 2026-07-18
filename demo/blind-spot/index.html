@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%225.2%22%20fill%3D%22none%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.5%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.6%22%20fill%3D%22%23ec6a5e%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Blind Spot — a self-check that endorses the lie | The Quantum Museum</title>
+<meta name="description" content="A decoder that grades its own answer with a self-consistency check can be driven, by the right coherent noise, to rank a WRONG answer above the true one — it doesn't fail loudly, it hands you a confident lie. Only a separate ground-truth channel catches it. Real hardware data (Exp147/148/148b).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--amber); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--amber); color: var(--amber); }
+
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--amber) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--amber); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+
+  figure { margin:0; }
+  svg { width:100%; height:auto; display:block; }
+  .plotwrap { overflow-x:auto; }
+
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin:14px 0 4px; }
+  .ctl label { font-family:var(--mono); font-size:12.5px; color:var(--ink-2); }
+  input[type=range]{ width:min(340px,70vw); accent-color:var(--amber); }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2);
+    padding:6px 15px; cursor:pointer; }
+  .seg button[aria-pressed="true"]{ background:var(--amber); color:#22160a; font-weight:600; }
+
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 22px; align-items:center; margin-top:14px;
+    font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:210px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:16px; font-weight:700; }
+  .val.true { color:var(--good); } .val.wrong { color:var(--bad); } .val.truth { color:var(--cyan); }
+  .box.truth { border-color:color-mix(in srgb,var(--cyan) 45%,var(--edge)); }
+  .box.lie { border-color:color-mix(in srgb,var(--bad) 50%,var(--edge)); }
+
+  .legend { display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--mono); font-size:12px; color:var(--ink-2); margin:10px 0 0; }
+  .legend span { display:inline-flex; align-items:center; gap:7px; }
+  .swatch { width:15px; height:3px; border-radius:2px; display:inline-block; }
+
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--amber); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .principle { font-size:15px; color:var(--ink); line-height:1.6; margin:2px 0 16px; }
+  .principle b { color:var(--amber); }
+
+  .qbtns { display:flex; gap:10px; flex-wrap:wrap; margin:6px 0 2px; }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--amber); }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce){ * { transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ verification wing</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Blind Spot<span class="hl">.</span></h1>
+    <p class="lede">A decoder that grades its own answer with a self-consistency check can be driven, by the right
+      coherent noise, to rank a <b>wrong</b> answer <em>above</em> the true one. It doesn't fail loudly — it hands you a
+      confident lie. The only thing that catches it is a <b>separate ground-truth channel</b>. The lie lives where the
+      check, by construction, cannot look.</p>
+    <span class="scope">Scope: <b>narrow</b> — coherent, signal-channel noise. Under generic noise the check is fine
+      (recovers to depth 407). Toy scale. Not "decoders lie in general."</span>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel" aria-labelledby="hA">
+    <h2 id="hA">1 · The crossover</h2>
+    <p class="sub">Simon's problem on ibm_kingston · planted secret s = 1010 · slide the circuit depth</p>
+    <div class="primer">The blind check counts how many measurements <b>agree</b> with a candidate answer, and picks the
+      highest scorer — higher looks more right. Watch the true answer's score fall and a wrong competitor's rise. Past the
+      crossover the check picks the <b>wrong</b> one, and nothing it can measure tells it so.</div>
+
+    <div class="plotwrap"><figure><svg id="plotA" viewBox="0 0 620 300" role="img"
+      aria-label="Score of the true secret vs the best wrong competitor across circuit depth; the true score falls below the competitor past 2q=32."></svg></figure></div>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--good)"></i> true s = 1010 (what the check scores it)</span>
+      <span><i class="swatch" style="background:var(--bad)"></i> best wrong competitor</span>
+      <span><i class="swatch" style="background:var(--ink-3);height:2px"></i> coin-flip line (0.5)</span>
+    </div>
+
+    <div class="ctl">
+      <label for="depthA">Circuit depth (2-qubit gates): <b id="depthLbl">4</b></label>
+      <input type="range" id="depthA" min="0" max="5" value="0" step="1" aria-describedby="verdictA">
+    </div>
+    <div class="verdict" id="verdictA">
+      <div class="box lie"><span class="lbl">What the blind check decides</span><span class="val true" id="decideA">✓ picks TRUE s</span>
+        <span style="color:var(--ink-3);font-size:12px" id="scoreA">true 0.97 vs wrong 0.45</span></div>
+      <div class="box truth"><span class="lbl">The planted secret (separate channel)</span><span class="val truth">s = 1010</span>
+        <span style="color:var(--ink-3);font-size:12px" id="truthA">actually correct — the check agrees</span></div>
+    </div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel" aria-labelledby="hB">
+    <h2 id="hB">2 · It's a blind spot, not a general failure</h2>
+    <p class="sub">The control (ibm_kingston): same noise, same qubits, different location — does the lie survive?</p>
+    <div class="primer">If deep circuits simply lied, the failure would appear wherever noise is added. It does not. Put
+      the <b>same amount of noise</b> on the oracle's own signal channel (<b>copy</b>) vs on spectator qubits
+      (<b>generic</b>): only the signal-channel version inverts. Generic noise degrades <em>gracefully</em> and still
+      recovers at depth 407. The lie needs noise aimed at the exact channel carrying the answer.</div>
+
+    <div class="ctl" role="group" aria-label="highlight arm">
+      <div class="seg">
+        <button type="button" id="segBoth" aria-pressed="true">both</button>
+        <button type="button" id="segCopy" aria-pressed="false">copy only</button>
+        <button type="button" id="segGen" aria-pressed="false">generic only</button>
+      </div>
+    </div>
+    <div class="plotwrap"><figure><svg id="plotB" viewBox="0 0 620 300" role="img"
+      aria-label="True-secret recovery score vs depth for copy-channel noise (inverts past the coin-flip line) versus generic noise (stays high, recovers at depth 407)."></svg></figure></div>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--bad)"></i> copy = noise on the signal channel (inverts → lies)</span>
+      <span><i class="swatch" style="background:var(--good)"></i> generic = noise elsewhere (recovers at depth 407)</span>
+    </div>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel" aria-labelledby="hC">
+    <h2 id="hC">3 · The same blind spot, in error correction</h2>
+    <p class="sub">A distance-3 repetition code on ibm_fez · the syndrome check is the self-check</p>
+    <div class="primer">Error correction has its own self-check: <b>syndromes</b>, which flag when neighbouring qubits
+      disagree. It catches an ordinary bit-flip. But a <b>logical</b> error — the one that actually changes your stored
+      answer — flips every qubit together, leaves every syndrome reading "all clear," and slips past unseen. Same blind
+      spot: the failure lives in the check's null space (H·z = 0, verified d=3/5/7).</div>
+
+    <div class="qbtns" role="group" aria-label="inject error">
+      <div class="seg">
+        <button type="button" id="qNone" aria-pressed="true">no error</button>
+        <button type="button" id="qData" aria-pressed="false">bit-flip (1 qubit)</button>
+        <button type="button" id="qLog" aria-pressed="false">logical (all qubits)</button>
+      </div>
+    </div>
+    <div class="plotwrap"><figure><svg id="plotC" viewBox="0 0 620 210" role="img"
+      aria-label="Repetition code chain of three data qubits and two syndrome checks; a single bit-flip lights a syndrome, the logical error leaves all syndromes dark while flipping the stored value."></svg></figure></div>
+    <div class="verdict" id="verdictC">
+      <div class="box"><span class="lbl">Syndrome self-check says</span><span class="val" id="synC">— clean —</span></div>
+      <div class="box"><span class="lbl">Stored answer</span><span class="val" id="ansC">intact</span></div>
+    </div>
+  </section>
+
+  <!-- PANEL D -->
+  <section class="panel" aria-labelledby="hD">
+    <h2 id="hD">The court</h2>
+    <p class="principle">A self-consistency check certifies against <b>inconsistent</b> errors — noise that breaks the
+      check. It is blind to a coherent failure that lives in its <b>null space</b> (the QEC logical error: equal
+      consistency, syndrome silent) or that the noise <b>favours</b> (the Simon inversion: the wrong answer scores
+      <em>higher</em>). Ground truth — a planted secret, a known input — is a <b>separate channel</b>, and the only one
+      that survives both.</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">EXECUTED · Exp148</div><p>Simon depth ladder, ibm_kingston. True-secret score
+        crosses below a coin-flip competitor at 2q≈32. <code>job d9dcqeineu4c739n2tqg</code></p></div>
+      <div class="receipt"><div class="rt">EXECUTED · Exp148b (control)</div><p>Copy vs generic injection, matched
+        noise, same 8 qubits, one calibration window. Generic never inverts. <code>job d9df1fineu4c739n5pqg</code></p></div>
+      <div class="receipt"><div class="rt">EXECUTED · Exp147</div><p>Distance-3/5/7 repetition code, ibm_fez. Correction
+        works (~99% correct); the logical error is invisible to syndromes. <code>job d9dctekinv1c73aot06g</code></p></div>
+      <div class="receipt"><div class="rt">VERIFIED · in harness</div><p>The logical operator has trivial syndrome
+        (H·z = 0) at d = 3, 5, 7 — the syndrome check is blind to it by construction, not by noise.</p></div>
+    </div>
+    <p style="margin:16px 0 0;font-size:13px;color:var(--ink-3);font-family:var(--mono)">Companion exhibit →
+      <a href="../index.html" style="color:var(--amber);text-decoration:none">The Trust Ladder</a> — how much you can
+      trust a claim; this exhibit is the failure a self-check cannot see at all.</p>
+  </section>
+
+  <div class="foot">
+    <span>The Quantum Museum · verification wing</span>
+    <a href="../index.html">← all exhibits</a>
+    <span>Data: Exp147 / 148 / 148b, IBM Heron, 2026 · self-verifying (planted truth)</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  // ---- verified data kernel (from committed result files) ----
+  // Exp148: planted s=1010, ibm_kingston job d9dcqeineu4c739n2tqg
+  var SIMON = [
+    {n2q:4,  pt:0.966, pc:0.450},
+    {n2q:12, pt:0.804, pc:0.468},
+    {n2q:20, pt:0.582, pc:0.492},
+    {n2q:32, pt:0.295, pc:0.506},
+    {n2q:44, pt:0.168, pc:0.524},
+    {n2q:60, pt:0.367, pc:0.497}
+  ];
+  // Exp148b control: copy vs generic true-secret score, job d9df1fineu4c739n5pqg
+  var CTRL = [
+    {n2q:4,  copy:0.966, gen:0.973},
+    {n2q:20, copy:0.590, gen:0.915},
+    {n2q:32, copy:0.266, gen:0.873},
+    {n2q:44, copy:0.103, gen:0.825},
+    {n2q:60, copy:0.341, gen:0.749}
+  ];
+  var css = function(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); };
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs){ var e=document.createElementNS(SVGNS,tag); for(var k in attrs) e.setAttribute(k,attrs[k]); return e; }
+
+  // plot geometry
+  var W=620, H=300, mL=48, mR=18, mT=18, mB=42;
+  function xOf(n2q){ return mL + (n2q-4)/(60-4) * (W-mL-mR); }
+  function yOf(v){ return mT + (1-v) * (H-mT-mB); }
+
+  function axes(svg, title){
+    // y grid 0,0.5,1
+    [0,0.5,1].forEach(function(v){
+      var y=yOf(v);
+      svg.appendChild(el("line",{x1:mL,y1:y,x2:W-mR,y2:y,stroke:css('--edge'),"stroke-width":1,"stroke-dasharray": v===0.5?"4 4":"0"}));
+      var t=el("text",{x:mL-8,y:y+4,"text-anchor":"end","font-size":11,fill:css('--ink-3'),"font-family":css('--mono')}); t.textContent=v.toFixed(1); svg.appendChild(t);
+    });
+    // 0.5 label
+    var cf=el("text",{x:W-mR,y:yOf(0.5)-6,"text-anchor":"end","font-size":10.5,fill:css('--ink-3'),"font-family":css('--mono')}); cf.textContent="coin flip"; svg.appendChild(cf);
+    // x ticks
+    [4,12,20,32,44,60].forEach(function(n){
+      var x=xOf(n);
+      var t=el("text",{x:x,y:H-mB+18,"text-anchor":"middle","font-size":11,fill:css('--ink-3'),"font-family":css('--mono')}); t.textContent=n; svg.appendChild(t);
+    });
+    var xl=el("text",{x:(mL+W-mR)/2,y:H-6,"text-anchor":"middle","font-size":11,fill:css('--ink-3'),"font-family":css('--mono')}); xl.textContent="circuit depth  (2-qubit gates)"; svg.appendChild(xl);
+  }
+  function poly(svg, pts, color, w){
+    var d=pts.map(function(p){return xOf(p.x)+","+yOf(p.y);}).join(" ");
+    svg.appendChild(el("polyline",{points:d,fill:"none",stroke:color,"stroke-width":w||2.5,"stroke-linejoin":"round","stroke-linecap":"round"}));
+    pts.forEach(function(p){ svg.appendChild(el("circle",{cx:xOf(p.x),cy:yOf(p.y),r:3.2,fill:color})); });
+  }
+
+  // ---------- Panel A ----------
+  var plotA=document.getElementById("plotA");
+  function drawA(idx){
+    plotA.innerHTML="";
+    axes(plotA);
+    // crossover band (between 20 and 32)
+    var bx=xOf(20), bw=xOf(32)-xOf(20);
+    plotA.appendChild(el("rect",{x:bx,y:mT,width:bw,height:H-mT-mB,fill:"color-mix(in srgb,"+css('--bad')+" 10%,transparent)"}));
+    var bt=el("text",{x:(bx+bx+bw)/2,y:mT+14,"text-anchor":"middle","font-size":10.5,fill:css('--bad'),"font-family":css('--mono')}); bt.textContent="crossover"; plotA.appendChild(bt);
+    poly(plotA, SIMON.map(function(r){return {x:r.n2q,y:r.pc};}), css('--bad'));
+    poly(plotA, SIMON.map(function(r){return {x:r.n2q,y:r.pt};}), css('--good'));
+    // live marker
+    var r=SIMON[idx], x=xOf(r.n2q);
+    plotA.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:H-mB,stroke:css('--amber'),"stroke-width":1.6,"stroke-dasharray":"3 3"}));
+    plotA.appendChild(el("circle",{cx:x,cy:yOf(r.pt),r:5,fill:"none",stroke:css('--amber'),"stroke-width":2}));
+    plotA.appendChild(el("circle",{cx:x,cy:yOf(r.pc),r:5,fill:"none",stroke:css('--amber'),"stroke-width":2}));
+    // verdict
+    document.getElementById("depthLbl").textContent=r.n2q;
+    var picksWrong = r.pc > r.pt;
+    var dec=document.getElementById("decideA");
+    dec.textContent = picksWrong ? "✗ picks a WRONG s" : "✓ picks TRUE s";
+    dec.className = "val " + (picksWrong ? "wrong":"true");
+    document.getElementById("scoreA").textContent = "true "+r.pt.toFixed(3)+" vs wrong "+r.pc.toFixed(3);
+    document.getElementById("truthA").textContent = picksWrong
+      ? "still 1010 — but the check now scores a wrong answer higher" : "correct — the check agrees";
+  }
+  var slider=document.getElementById("depthA");
+  slider.addEventListener("input", function(){ drawA(+slider.value); });
+
+  // ---------- Panel B ----------
+  var plotB=document.getElementById("plotB"), armMode="both";
+  function drawB(){
+    plotB.innerHTML=""; axes(plotB);
+    if(armMode!=="gen") poly(plotB, CTRL.map(function(r){return {x:r.n2q,y:r.copy};}), css('--bad'));
+    if(armMode!=="copy") poly(plotB, CTRL.map(function(r){return {x:r.n2q,y:r.gen};}), css('--good'));
+    // depth-407 annotation at deep end of generic
+    if(armMode!=="copy"){
+      var last=CTRL[CTRL.length-1];
+      var tx=xOf(last.n2q), ty=yOf(last.gen);
+      var t=el("text",{x:tx-6,y:ty-9,"text-anchor":"end","font-size":10.5,fill:css('--good'),"font-family":css('--mono')});
+      t.textContent="still recovers · depth 407"; plotB.appendChild(t);
+    }
+  }
+  function segSet(id){ armMode=id;
+    document.getElementById("segBoth").setAttribute("aria-pressed", id==="both");
+    document.getElementById("segCopy").setAttribute("aria-pressed", id==="copy");
+    document.getElementById("segGen").setAttribute("aria-pressed", id==="gen");
+    drawB();
+  }
+  document.getElementById("segBoth").addEventListener("click",function(){segSet("both");});
+  document.getElementById("segCopy").addEventListener("click",function(){segSet("copy");});
+  document.getElementById("segGen").addEventListener("click",function(){segSet("gen");});
+
+  // ---------- Panel C (QEC rep chain) ----------
+  var plotC=document.getElementById("plotC");
+  // 3 data qubits, 2 checks between; state 0=|0>,1=|1>
+  function drawC(mode){
+    plotC.innerHTML="";
+    var data=[0,0,0], hi=[false,false,false];
+    if(mode==="data"){ data=[1,0,0]; hi=[true,false,false]; }
+    if(mode==="log"){ data=[1,1,1]; hi=[true,true,true]; }
+    var cx=[130,310,490], cy=95, r=30;
+    // checks between neighbours: syndrome j = data[j] xor data[j+1]
+    var checks=[ data[0]^data[1], data[1]^data[2] ];
+    var chx=[220,400];
+    // wires
+    plotC.appendChild(el("line",{x1:cx[0],y1:cy,x2:cx[2],y2:cy,stroke:css('--edge'),"stroke-width":2}));
+    // syndrome squares
+    checks.forEach(function(s,j){
+      var lit = s===1;
+      plotC.appendChild(el("rect",{x:chx[j]-17,y:cy-17,width:34,height:34,rx:7,
+        fill: lit? "color-mix(in srgb,"+css('--bad')+" 22%,transparent)":"var(--surface-2)",
+        stroke: lit?css('--bad'):css('--edge'),"stroke-width":lit?2.2:1.4}));
+      var t=el("text",{x:chx[j],y:cy+4,"text-anchor":"middle","font-size":13,"font-family":css('--mono'),
+        fill: lit?css('--bad'):css('--ink-3')}); t.textContent= lit?"⚑":"·"; plotC.appendChild(t);
+      var lab=el("text",{x:chx[j],y:cy+52,"text-anchor":"middle","font-size":10.5,"font-family":css('--mono'),
+        fill: lit?css('--bad'):css('--ink-3')}); lab.textContent= lit?"detected":"all clear"; plotC.appendChild(lab);
+    });
+    // data qubits
+    data.forEach(function(v,i){
+      var flipped=hi[i];
+      plotC.appendChild(el("circle",{cx:cx[i],cy:cy,r:r,
+        fill: flipped? "color-mix(in srgb,"+css('--amber')+" 20%,transparent)":"var(--surface-2)",
+        stroke: flipped?css('--amber'):css('--edge'),"stroke-width":flipped?2.4:1.5}));
+      var t=el("text",{x:cx[i],y:cy+6,"text-anchor":"middle","font-size":17,"font-family":css('--mono'),
+        fill: flipped?css('--amber'):css('--ink-2')}); t.textContent="|"+v+"⟩"; plotC.appendChild(t);
+      var lab=el("text",{x:cx[i],y:cy-r-10,"text-anchor":"middle","font-size":10.5,"font-family":css('--mono'),fill:css('--ink-3')}); lab.textContent="data "+i; plotC.appendChild(lab);
+    });
+    // verdict text
+    var anyLit = checks.some(function(s){return s===1;});
+    var stored = (data[0]+data[1]+data[2])>=2 ? 1 : 0; // majority = logical value
+    var syn=document.getElementById("synC"), ans=document.getElementById("ansC");
+    if(mode==="none"){ syn.textContent="— clean —"; syn.className="val"; ans.textContent="|0⟩ intact"; ans.className="val"; }
+    else if(mode==="data"){ syn.textContent="⚑ error detected"; syn.className="val true"; ans.textContent="|0⟩ — correctable"; ans.className="val true"; }
+    else { syn.textContent="all clear (blind)"; syn.className="val wrong"; ans.textContent="FLIPPED → |1⟩"; ans.className="val wrong"; }
+  }
+  function qSet(mode){
+    document.getElementById("qNone").setAttribute("aria-pressed", mode==="none");
+    document.getElementById("qData").setAttribute("aria-pressed", mode==="data");
+    document.getElementById("qLog").setAttribute("aria-pressed", mode==="log");
+    drawC(mode);
+  }
+  document.getElementById("qNone").addEventListener("click",function(){qSet("none");});
+  document.getElementById("qData").addEventListener("click",function(){qSet("data");});
+  document.getElementById("qLog").addEventListener("click",function(){qSet("log");});
+
+  // ---------- theme toggle ----------
+  document.getElementById("themeBtn").addEventListener("click",function(){
+    var cur=document.documentElement.getAttribute("data-theme");
+    var nxt = cur==="light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme",nxt);
+    try{ localStorage.setItem("qmuseum-theme",nxt); }catch(e){}
+    drawA(+slider.value); drawB(); drawC(curQ());
+  });
+  function curQ(){ return document.getElementById("qData").getAttribute("aria-pressed")==="true"?"data":
+    document.getElementById("qLog").getAttribute("aria-pressed")==="true"?"log":"none"; }
+
+  // init
+  drawA(0); drawB(); drawC("none");
+})();
+</script>
+</body>
+</html>
