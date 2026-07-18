@@ -1,0 +1,112 @@
+{
+ "exp": 160,
+ "slug": "relay",
+ "backend": "ibm_fez",
+ "shots": 4096,
+ "job_id": "d9dsrnsinv1c73apgi7g",
+ "order": [
+  [
+   "Z+",
+   "chain"
+  ],
+  [
+   "Z-",
+   "chain"
+  ],
+  [
+   "X+",
+   "chain"
+  ],
+  [
+   "X-",
+   "chain"
+  ],
+  [
+   "Y+",
+   "chain"
+  ],
+  [
+   "Y-",
+   "chain"
+  ],
+  [
+   "Z+",
+   "single"
+  ],
+  [
+   "Z-",
+   "single"
+  ],
+  [
+   "X+",
+   "single"
+  ],
+  [
+   "X-",
+   "single"
+  ],
+  [
+   "Y+",
+   "single"
+  ],
+  [
+   "Y-",
+   "single"
+  ],
+  [
+   "Z+",
+   "noent2"
+  ],
+  [
+   "Z-",
+   "noent2"
+  ],
+  [
+   "X+",
+   "noent2"
+  ],
+  [
+   "X-",
+   "noent2"
+  ],
+  [
+   "Y+",
+   "noent2"
+  ],
+  [
+   "Y-",
+   "noent2"
+  ],
+  [
+   "Z+",
+   "nocorr2"
+  ],
+  [
+   "Z-",
+   "nocorr2"
+  ],
+  [
+   "X+",
+   "nocorr2"
+  ],
+  [
+   "X-",
+   "nocorr2"
+  ],
+  [
+   "Y+",
+   "nocorr2"
+  ],
+  [
+   "Y-",
+   "nocorr2"
+  ]
+ ],
+ "classical_bound": 0.6666666666666666,
+ "prereg": {
+  "primary": "chain avg F > 2/3 (end-to-end classical relay bound)",
+  "prediction": "chain 0.855-0.92 (point 0.878); per-hop cost 0.02-0.09; noent2 superpos 0.46-0.54; nocorr2 avg 0.46-0.54",
+  "within_job": "single-hop baseline same job (drift-free per-hop cost)"
+ },
+ "note": "two-hop teleport relay, 4 arms x 6 states; hop-2 falsifiers; relay primitive fence (no swapping/purification/memory)"
+}
