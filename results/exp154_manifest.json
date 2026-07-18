@@ -1,0 +1,58 @@
+{
+ "exp": 154,
+ "backend": "ibm_fez",
+ "shots": 4000,
+ "job_id": "d9dinncinv1c73ap52ng",
+ "order": [
+  [
+   "Z+",
+   true
+  ],
+  [
+   "Z-",
+   true
+  ],
+  [
+   "X+",
+   true
+  ],
+  [
+   "X-",
+   true
+  ],
+  [
+   "Y+",
+   true
+  ],
+  [
+   "Y-",
+   true
+  ],
+  [
+   "Z+",
+   false
+  ],
+  [
+   "Z-",
+   false
+  ],
+  [
+   "X+",
+   false
+  ],
+  [
+   "X-",
+   false
+  ],
+  [
+   "Y+",
+   false
+  ],
+  [
+   "Y-",
+   false
+  ]
+ ],
+ "classical_bound": 0.6666666666666666,
+ "note": "teleportation fidelity vs 2/3 bound; entangled arm + no-entanglement control; real feed-forward; self-verifying (known input states)"
+}
