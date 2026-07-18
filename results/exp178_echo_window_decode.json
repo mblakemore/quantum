@@ -1,0 +1,44 @@
+{
+ "job_id": "d9e0a4ineu4c739nrt50",
+ "results": {
+  "live": {
+   "F": 0.47368750000000004,
+   "ZZ": 0.75225,
+   "XX": 0.0705,
+   "YY": -0.072
+  },
+  "liveecho": {
+   "F": 0.7671875,
+   "ZZ": 0.75125,
+   "XX": 0.653,
+   "YY": -0.6645
+  },
+  "deferred": {
+   "F": 0.5649375000000001,
+   "ZZ": 0.78675,
+   "XX": 0.237,
+   "YY": -0.236
+  },
+  "defecho": {
+   "F": 0.7815624999999999,
+   "ZZ": 0.7785,
+   "XX": 0.69025,
+   "YY": -0.6575
+  },
+  "direct": {
+   "F": 0.9781875,
+   "ZZ": 0.97225,
+   "XX": 0.96825,
+   "YY": -0.97225
+  }
+ },
+ "gains": {
+  "echo_gain_deferred": 0.21662499999999985,
+  "echo_gain_deferred_sigma": 18.267423950239326,
+  "echo_gain_live": 0.2935,
+  "echo_gain_live_sigma": 24.750093153584515,
+  "se_delta": 0.011858541225631422,
+  "branch": "substantially coherent (software+pulse path viable)"
+ },
+ "verdict_ok": true
+}
