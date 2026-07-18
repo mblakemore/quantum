@@ -101,6 +101,23 @@
     <div class="verdict" id="vbox"></div>
   </section>
 
+  <section class="panel" aria-labelledby="pconf">
+    <h2 id="pconf">The conference call — one key, three holders</h2>
+    <p class="sub">GHZ conference key · Mermin certificate · Exp168 · ibm_fez · job d9duedineu4c739np50g</p>
+    <p class="primer"><b>Scaling up.</b> A private line needs a shared pair; a <em>conference call</em> needs a shared
+      trio. One <b>GHZ state</b> (|000⟩+|111⟩) hands Alice, Bob and Charlie the same key bit at once. The certificate
+      also scales: instead of a two-party Bell test, a genuine three-party one — the <b>Mermin</b> value, whose
+      classical ceiling is 2 and whose quantum maximum (GHZ) is 4. Toggle the eavesdropper.</p>
+    <div class="seg" role="tablist">
+      <button id="ch" type="button" class="on">🔓 honest conference</button>
+      <button id="ce" type="button">🕵 eavesdropper on Charlie</button>
+    </div>
+    <figure aria-label="Mermin certificate gauge for the conference key"><svg id="cviz" viewBox="0 0 860 150"></svg></figure>
+    <div class="wire" id="cwire"></div>
+    <p class="story" id="cstory"></p>
+    <div class="verdict" id="cvbox"></div>
+  </section>
+
   <section class="panel" aria-labelledby="pc">
     <h2 id="pc">The court</h2>
     <p class="sub">why the key is trustworthy, why the tap can't hide, and the honest fine print</p>
@@ -180,6 +197,42 @@ function draw(key){
 document.getElementById("bh").addEventListener("click",()=>draw("honest"));
 document.getElementById("be").addEventListener("click",()=>draw("eve"));
 draw("honest");
+
+// conference-key panel (Exp168 GHZ / Mermin, real fez data)
+const C={
+ honest:{M:3.467,msig:"+23σ",q:0.037,sf:0.547,ok:true,out:"ENGAGE",
+   story:"<b>The honest conference.</b> The Mermin value reads 3.467 — past the classical ceiling of 2 at 23σ, genuine three-party entanglement no one else shares. All three parties recover the same key and read the broadcast: ENGAGE. One GHZ trio, one certified key, three holders.",
+   verdict:"SECURE — conference key certified, broadcast delivered to all three",vclass:"good"},
+ eve:{M:-0.032,msig:"below 2",q:0.043,sf:0.0,ok:false,out:"▓▓▓▓▓▓",
+   story:"<b>Eavesdropper on Charlie.</b> Intercepting one party's qubit collapses the whole GHZ coherence — the Mermin value falls to ≈0, far below the classical 2 (every three-party correlation dies at once, a sharper collapse than the two-party line). The conference aborts. The key basis alone would look clean; the Mermin certificate is what catches the tap.",
+   verdict:"TAP DETECTED — Mermin collapsed, conference aborted",vclass:"bad"}};
+const cviz=document.getElementById("cviz");
+function cdraw(key){
+  const d=C[key]; cviz.innerHTML="";
+  const L=70,R=790,y=78; const px=v=>L+(R-L)*(v-(-1))/(4-(-1));
+  el(cviz,"text",{x:(L+R)/2,y:26,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:13px"}).textContent="Mermin value  M   (classical ≤ 2, GHZ max 4)";
+  el(cviz,"line",{x1:L,y1:y,x2:R,y2:y,style:"stroke:var(--edge);stroke-width:6;stroke-linecap:round"});
+  el(cviz,"line",{x1:px(2),y1:y-16,x2:px(2),y2:y+16,style:"stroke:var(--amber);stroke-width:2;stroke-dasharray:3 3"});
+  el(cviz,"text",{x:px(2),y:y+34,"text-anchor":"middle",style:"fill:var(--amber);font-family:var(--mono);font-size:10.5px"}).textContent="classical ceiling 2";
+  el(cviz,"line",{x1:px(4),y1:y-10,x2:px(4),y2:y+10,style:"stroke:var(--ink-3);stroke-width:1.5"});
+  el(cviz,"text",{x:px(4),y:y+34,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"}).textContent="GHZ 4";
+  const c=d.M>2?"var(--good)":"var(--bad)";
+  el(cviz,"circle",{cx:px(d.M),cy:y,r:9,style:`fill:${c};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${c})`});
+  el(cviz,"text",{x:px(d.M),y:y-22,"text-anchor":"middle",style:`fill:${c};font-family:var(--mono);font-size:16px;font-weight:700`}).textContent="M = "+d.M.toFixed(3);
+  document.getElementById("cwire").innerHTML=
+    `<div><span class="lbl">broadcast to Alice · Bob · Charlie</span> &nbsp;<span class="plain">ENGAGE</span></div>`+
+    `<div><span class="lbl">each party decrypts</span> &nbsp;<span class="out ${d.ok?'ok':'bad'}">${d.out}</span></div>`;
+  document.getElementById("cstory").innerHTML=d.story;
+  document.getElementById("cvbox").innerHTML=
+    `<div class="box hl"><span class="lbl">verdict</span><span class="val ${d.vclass}">${d.verdict}</span></div>`+
+    `<div class="box"><span class="lbl">Mermin M</span><span class="val ${d.M>2?'good':'bad'}">${d.M.toFixed(3)} · ${d.msig}</span></div>`+
+    `<div class="box"><span class="lbl">conference key fraction</span><span class="val ${d.sf>0?'cy':'bad'}">${d.sf>0?d.sf.toFixed(3)+" bit/round":"0 — aborted"}</span></div>`;
+  document.getElementById("ch").classList.toggle("on",key==="honest");
+  document.getElementById("ce").classList.toggle("on",key==="eve");
+}
+document.getElementById("ch").addEventListener("click",()=>cdraw("honest"));
+document.getElementById("ce").addEventListener("click",()=>cdraw("eve"));
+cdraw("honest");
 document.getElementById("themeBtn").addEventListener("click",()=>{
   const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
   const next=cur==="dark"?"light":"dark";
