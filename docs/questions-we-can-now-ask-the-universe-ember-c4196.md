@@ -408,3 +408,26 @@ Creator: *"clear the fog at N=8 instead"* of going to N=10. **Exp173** (`ibm_fez
 **Askable question answered:** *when a deep quantum signature is dim, is it the measurement or the
 computation that's foggy?* — Here, the computation: readout is clean, the loss is coherent Trotter/gate
 error. And the scar mechanism is robust (not fragile) — the limit is shared coherence, not the scar.
+
+---
+
+## ADDENDUM C4204 — ZNE cannot rescue the deep scar (0-QPU boundary; corrects C4203)
+
+Creator: *"fly ZNE on the coherent residual."* The design-time viability check is the answer — **no QPU
+spent** (finding `finding-exp174-zne-viability-boundary-ember-c4204.md`).
+
+- **ZNE fails at the scar's depth — depth, quantified.** Per-λ survival f = anomaly(λ=1)/noiseless:
+  N=8 f=0.22, N=6 f=0.33 → exponential extrapolation SE ≈ 0.20–0.21 (60–70 % error bars, useless);
+  linear is precise but biased (can't fit an exponential). Boundary: ZNE needs base ≲150 CZ (f≳0.45).
+  The scar (≥260 CZ) is past the mitigation-rescuable depth. Folding only makes it worse.
+- **N=4 (146 CZ) IS viable** (exp recovers 0.63±0.04 of the true 0.632) — but that is a shallow-depth
+  method-reach demo, **not** rescuing the deep-scar residual. Flagged for Creator, not auto-flown.
+- **Corrects the C4203 addendum:** the residual is **hardware error beyond 2q-depolarizing and beyond
+  readout** (1q/idle/coherent-gate/crosstalk) — Exp173 proved *not readout*, not *coherent*. And
+  "finer Trotter" is backwards: Trotter error CANCELS in R=measured/(noiseless×s); finer Trotter just
+  adds depth.
+
+**Askable question answered:** *can error mitigation recover a signal lost to depth?* — Not by ZNE past
+~150 CZ: the amplification drowns the extrapolation. The scar's residual is beyond both readout mitigation
+(Exp173) and ZNE (here) at its depth — the mitigation wall, mapped. The scar is fully characterized:
+survives the wall, decoherence-limited, not fragile, and its residual is past mitigation reach.

@@ -72,3 +72,13 @@ the generic ensemble (R_rel=0.94). To actually sharpen this scar one must reduce
 not readout.
 
 **Numbering:** new experiment (Exp173), exotic-phases wing; the mitigation companion to Exp172.
+
+> **Correction (C4204, advisor):** two claims above are wrong and superseded by
+> `finding-exp174-zne-viability-boundary-ember-c4204.md`. (1) **"Finer Trotter" is backwards** — the
+> residual R = measured/(noiseless × s) uses the *same* Trotterized circuit in numerator and noiseless
+> baseline, so Trotter error CANCELS in R; it is not in the residual. Finer Trotter → deeper → *lower*
+> R. (2) **"The residual is coherent Trotter + 1q/idle" overclaims** — Exp173 established *not readout*,
+> not *coherent*; coherent-vs-stochastic was never decomposed. The supported statement: the residual is
+> **hardware error beyond 2q-depolarizing and beyond readout** (1q/idle/coherent-gate/crosstalk). And
+> ZNE cannot clear it — not because it is "coherent" but because of **depth** (C4204 viability boundary:
+> ZNE needs a base circuit ≲150 CZ; the scar is ≥260 CZ).
