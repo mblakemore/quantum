@@ -40,6 +40,17 @@ signature, measured on real silicon.
    disorder) beats the generic predictor by the *same* factor (2.89× vs the DTC's 2.90×; P_hw/P_ideal ≈ 1.00
    at every depth). So the noise protection is the **interactions**, not the localization. Two physics,
    cleanly separated: **MBL gives the crystal its rigidity; the interactions give it the noise protection.**
+   **CORRECTED (C4847, Ember C4199 — survival-predictor v2)**: the 2.9× "shield" itself was a
+   **baseline-mismatch artifact**. The ≈0.12 prediction used the borrowed reader-qubit gate error
+   (E_CX = 0.0106); the actual measured CZ error on these qubits is 0.0021, and against their own
+   baseline the DTC observable decays **exactly at the generic gate-error rate** (fitted E_eff/measured
+   = 0.99 → protection 1.00× = none). The "both arms beat the model by the same 2.9×" observation was
+   the tell: both arms share the same good qubits scored against the same wrong baseline. What stands:
+   the **rigidity** results (beat-null contrast, 13-point shape discrimination) and the Exp151b
+   disorder-vs-interaction separation for rigidity — both are same-qubit comparisons where the baseline
+   cancels. What falls: any claim of anomalous noise protection ("interactions give noise protection"
+   is retracted). Third instance of the match-the-axis class: duration (C4196), estimator (C4198),
+   baseline-to-qubits (C4199).
 2. **It is a 13-point SHAPE discrimination, and the late-time "revival" corroborates the mechanism**
    (Ember, C4196, on re-reading the data — I had undersold this as a one-point contrast). The control's
    *entire* curve tracks the parameter-free beat envelope **cos(πεt)** — 0.995 → 0.064 at the null → −0.979
