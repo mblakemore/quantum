@@ -1,0 +1,287 @@
+{
+ "exp": "149b",
+ "n": 4,
+ "planted_s": [
+  1,
+  0,
+  1,
+  0
+ ],
+ "index": [
+  {
+   "mode": "bare",
+   "ep": 8
+  },
+  {
+   "mode": "frozen",
+   "ep": 8
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 0
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 1
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 2
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 3
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 4
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 5
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 6
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 7
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 8
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 9
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 10
+  },
+  {
+   "mode": "twirl",
+   "ep": 8,
+   "k": 11
+  },
+  {
+   "mode": "bare",
+   "ep": 14
+  },
+  {
+   "mode": "frozen",
+   "ep": 14
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 0
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 1
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 2
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 3
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 4
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 5
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 6
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 7
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 8
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 9
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 10
+  },
+  {
+   "mode": "twirl",
+   "ep": 14,
+   "k": 11
+  },
+  {
+   "mode": "bare",
+   "ep": 20
+  },
+  {
+   "mode": "frozen",
+   "ep": 20
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 0
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 1
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 2
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 3
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 4
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 5
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 6
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 7
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 8
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 9
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 10
+  },
+  {
+   "mode": "twirl",
+   "ep": 20,
+   "k": 11
+  },
+  {
+   "mode": "bare",
+   "ep": 28
+  },
+  {
+   "mode": "frozen",
+   "ep": 28
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 0
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 1
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 2
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 3
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 4
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 5
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 6
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 7
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 8
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 9
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 10
+  },
+  {
+   "mode": "twirl",
+   "ep": 28,
+   "k": 11
+  }
+ ],
+ "backend": "ibm_kingston",
+ "job_id": "d9di3maneu4c739nadqg",
+ "note": "bare(anchor)+frozen(overhead)+twirl(overhead+random) at matched duration"
+}
