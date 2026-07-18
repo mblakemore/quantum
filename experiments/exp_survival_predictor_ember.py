@@ -75,7 +75,9 @@ def survives(n2q, n_meas, n_secret_bits, rep_budget, e_cx):
 
 
 def measured_cz(job_id, backend_name="ibm_fez"):
-    """Pull the mean CZ error on the physical qubits a job actually used — the correct baseline."""
+    """Pull the mean CZ error on the physical qubits a job actually used — the correct baseline.
+    NOTE (retrospective): this needs a job that already ran. To GATE a FUTURE flight, look up
+    current backend.properties() on the intended qubit-list/coupling instead (TODO, not this cycle)."""
     import os, sys, numpy as np
     sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "scripts"))
     from run_exp66_qpu_partb import _get_ibm_service
@@ -113,8 +115,11 @@ def backtest():
             me[k] = max(me[k], abs(v - ahw))
         print(f"  {t:>2} {n2q:>4} {ahw:>6.3f} {bor:>7.3f} {per:>7.3f} {two:>7.3f}")
     print(f"\n  max|err|  borrowed(v1)={me['borrow']:.3f}   per-qubit={me['perqb']:.3f}   2-param={me['twopar']:.3f}")
-    print(f"  E_eff(fit)=0.00214 vs measured CZ 0.00217 = 0.99x -> observable decays AT the gate-error rate.")
-    print(f"  PROTECTION vs correct baseline = 1.00x (NONE). v1's 2.9x was baseline mismatch, now removed.")
+    print(f"  E_eff(fit)=0.00214 vs measured CZ ~0.0021 = ~0.99x -> observable decays at ~the gate-error rate.")
+    print(f"  PROTECTION vs correct baseline ~= 1x (no evidence of the large factor). v1's 2.9x was baseline")
+    print(f"  mismatch (0.0106/0.0021). Caveat: E_eff has no error bar + 1q/idle/readout budget on top of")
+    print(f"  10 CZ means a purely-generic observable should decay slightly FASTER than bare 2q -> a small")
+    print(f"  real effect could hide in fit+budget uncertainty. The falsification (2.9x was artifact) is solid.")
     ok = me["perqb"] < 0.12
     print(f"  -> corrected model {'VALIDATED' if ok else 'FAILS'} (per-qubit baseline, no protection term).")
     return ok

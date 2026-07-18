@@ -32,18 +32,25 @@ I pulled the mean CZ error on the **actual** qubits job `d9di5mkjeosc73fhkf6g` r
 | borrowed reader baseline (v1) | 0.0106 (≈5× too high) |
 | two-param fit `A_hw/A_ideal = B·(1−E_eff)^n2q`, **E_eff** | **0.00214** |
 | SPAM/front-end offset **B** | 0.934 |
-| **E_eff / measured CZ** | **0.99 — the observable decays *at* the bare gate-error rate** |
-| protection vs the **correct** baseline | **1.00× — none** |
+| **E_eff / measured CZ** | **≈ 0.99 — the observable decays at ≈ the bare gate-error rate** |
+| protection vs the **correct** baseline | **≈ 1× — no evidence of the large protection claimed** |
 | protection vs the **borrowed** baseline | 0.36× (the 2.9× artifact) |
 
 n2q = 10/period confirmed against the transpiled circuit (5 edges × 2 CZ/bond × 12 periods = 120).
 The SPAM offset B=0.934 also explains the front-end drop (0.996→0.885 in one period) I'd mistaken for
 super-exponential protection — it's readout/prep, not dynamics.
 
-**Verdict: there is zero structured protection.** The DTC subharmonic observable decays at exactly the
-CZ error rate of the qubits it ran on. The "interactions protect the observable ~2.9× over generic"
-claim (Exp151b secondary / C4196 twin-finding) was a **baseline-mismatch confound** — good qubits
-scored against a borrowed worse-qubit rate.
+**Verdict: no evidence of structured protection.** The DTC subharmonic observable decays at ≈ the CZ
+error rate of the qubits it ran on; the "interactions protect ~2.9× over generic" claim (Exp151b
+secondary / C4196 twin-finding) was a **baseline-mismatch confound** — good qubits scored against a
+borrowed worse-qubit rate. *Honesty caveat (the same C4198 discipline this finding stores as a
+pattern):* I put no error bar on E_eff (the 0.062 backtest residual says it is non-trivial), and a
+*purely* generic observable should decay slightly **faster** than the bare 2q rate once 1q rotations
+(~12/period), idle, and readout are budgeted on top of the 10 CZ. So E_eff ≈ E_CX is not proof of
+*exactly* zero protection — a small real effect could hide within fit + error-budget uncertainty. The
+airtight claim is the falsification: **the 2.9× was a borrowed-baseline artifact; against the correct
+per-qubit baseline any residual protection is small and unresolved, not the large factor originally
+claimed.**
 
 ## What this corrects, and what still stands
 
