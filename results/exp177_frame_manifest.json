@@ -1,0 +1,65 @@
+{
+ "exp": 177,
+ "slug": "frame",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e0521htsac739dkslg",
+ "order": [
+  [
+   "live",
+   "ZZ"
+  ],
+  [
+   "live",
+   "XX"
+  ],
+  [
+   "live",
+   "YY"
+  ],
+  [
+   "deferred",
+   "ZZ"
+  ],
+  [
+   "deferred",
+   "XX"
+  ],
+  [
+   "deferred",
+   "YY"
+  ],
+  [
+   "endmeasure",
+   "ZZ"
+  ],
+  [
+   "endmeasure",
+   "XX"
+  ],
+  [
+   "endmeasure",
+   "YY"
+  ],
+  [
+   "direct",
+   "ZZ"
+  ],
+  [
+   "direct",
+   "XX"
+  ],
+  [
+   "direct",
+   "YY"
+  ]
+ ],
+ "witness": 0.5,
+ "prereg": {
+  "primary": "delta_latency = F(deferred)-F(live) > 0 at >=3 sigma",
+  "magnitude": "latency fraction of window deficit >= 0.6",
+  "band": "live 0.52-0.63; deferred 0.70-0.85; endmeasure 0.76-0.90; direct 0.95-0.99",
+  "fingerprint": "recovery concentrated in XX/YY (dephasing-specific), not ZZ",
+  "falsifier_direction": "delta_latency ~ 0 with large delta_measure => tax is measurement placement, not classical latency"
+ }
+}
