@@ -1,0 +1,62 @@
+{
+ "exp": 165,
+ "slug": "purify",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9dtr24inv1c73aphomg",
+ "order": [
+  [
+   "input",
+   "ZZ"
+  ],
+  [
+   "input",
+   "XX"
+  ],
+  [
+   "input",
+   "YY"
+  ],
+  [
+   "purify",
+   "ZZ"
+  ],
+  [
+   "purify",
+   "XX"
+  ],
+  [
+   "purify",
+   "YY"
+  ],
+  [
+   "fresh",
+   "ZZ"
+  ],
+  [
+   "fresh",
+   "XX"
+  ],
+  [
+   "fresh",
+   "YY"
+  ]
+ ],
+ "tau_us": 10.0,
+ "twoq_depths": [
+  3,
+  3,
+  3,
+  5,
+  5,
+  5,
+  5,
+  5,
+  5
+ ],
+ "prereg": {
+  "primary": "F_kept > F_input at >3 sigma (same job, same storage)",
+  "falsifier": "F_anti < F_input (discard pile worse)",
+  "prediction": "F_in 0.55-0.68; gain +0.03-0.12; p_success 0.4-0.7; null = routing SWAPs eat the gain (prices the topology)"
+ }
+}
