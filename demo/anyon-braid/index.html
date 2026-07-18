@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%224.6%22%20fill%3D%22none%22%20stroke%3D%22%239a8cf0%22%20stroke-width%3D%221.4%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.6%22%20fill%3D%22%23e6a94e%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Anyon Loop — a minus sign only topology can write | The Quantum Museum</title>
+<meta name="description" content="On a 7-qubit toric-code patch, an e-anyon circling an m picks up exactly −1 — and the phase follows enclosed topological charge only: invariant to loop shape, blind to charge outside, trivial for a fused pair. Six arms at ~50σ. Exp157, ibm_fez.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--violet); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--violet); color: var(--violet); }
+
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 16%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--violet); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--violet); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+
+  .armbtns { display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 14px; }
+  .armbtn { font-family:var(--mono); font-size:12px; padding:7px 12px; border-radius:999px;
+    border:1px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; }
+  .armbtn:hover { border-color:var(--violet); color:var(--ink); }
+  .armbtn.on { border-color:var(--violet); color:var(--violet); background:color-mix(in srgb,var(--violet) 12%,var(--surface-2)); font-weight:700; }
+
+  .meter { margin-top:14px; }
+  .meter .mrow { display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-family:var(--mono); font-size:13px; color:var(--ink-2); }
+  .meter .big { font-size:clamp(24px,4vw,34px); font-weight:700; }
+  .big.plus { color:var(--good); } .big.minus { color:var(--violet); }
+  .story { font-size:14px; color:var(--ink-2); margin-top:10px; line-height:1.55; max-width:72ch; }
+  .story b { color:var(--ink); }
+
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; align-items:stretch; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:17px; font-weight:700; }
+  .val.good { color:var(--good); } .val.vio { color:var(--violet); }
+  .box.hl { border-color:color-mix(in srgb,var(--violet) 50%,var(--edge)); }
+
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--violet); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .principle { font-size:15px; color:var(--ink); line-height:1.6; margin:2px 0 16px; }
+  .principle b { color:var(--violet); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--violet); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce){ * { transition:none !important; animation:none !important; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ exotic phases</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Anyon Loop<span class="hl">.</span></h1>
+    <p class="lede">In two dimensions, particles are allowed a third option — neither boson nor fermion. On a
+      7-qubit patch of topological matter, carrying one kind of quasiparticle in a closed loop around the other
+      writes a phase of exactly <b>−1</b> into an interferometer. Six experimental arms show the minus sign obeys
+      only <b>topology</b>: it counts the charge enclosed, mod 2, and cares nothing for the loop's shape, or for
+      charge sitting just outside. Each arm read at ~50σ on real silicon.</p>
+    <span class="scope">Scope: <b>abelian Z₂ mutual statistics</b> (toric-code e and m), read by single-shot
+      Wilson-loop interferometry — not non-abelian braiding, not adiabatic transport, not fault tolerance.</span>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Run the braid</h2>
+    <p class="sub">6 arms · ancilla interferometry · ibm_fez · 4096 shots each · job d9drgc9htsac739dedu0</p>
+    <p class="primer"><b>How to read it.</b> Qubits live on the edges of a two-square lattice prepared in the
+      toric-code ground state. An × marks an <b>m-anyon</b> (created by flipping an edge). The glowing path is the
+      <b>Wilson loop</b> — the closed path an e-anyon is carried along, executed as a controlled string and read by an
+      ancilla interferometer. The meter shows the measured interference ⟨X⟩: <b>+1 means no phase, −1 means the braid
+      wrote π</b>. Pick an arm.</p>
+    <div class="armbtns" id="armbtns" role="tablist"></div>
+    <figure aria-label="lattice with anyons and Wilson loop">
+      <svg id="lat" viewBox="0 0 470 290" role="img"></svg>
+    </figure>
+    <div class="meter">
+      <div class="mrow">
+        <span>measured ⟨X⟩ =</span><span class="big" id="mval"></span>
+        <span id="msig"></span>
+      </div>
+      <svg id="bar" viewBox="0 0 860 56"></svg>
+      <p class="story" id="story"></p>
+    </div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel" aria-labelledby="pb">
+    <h2 id="pb">Order in loops, not in locals</h2>
+    <p class="sub">the same ground state, measured directly — what makes this topology and not bookkeeping</p>
+    <p class="principle">Every <b>individual edge</b> of the patch measures as a fair coin — ⟨Z⟩ ≈ 0, locally random,
+      no pattern to see. Yet the <b>loops</b> around each square are near-certain, and the star checks agree in the
+      conjugate basis. The information that flips the interferometer is stored in <b>closed loops nothing local can
+      read</b> — that coexistence is topological order, and no product state can fake it.</p>
+    <figure aria-label="stabilizer receipts versus single-edge randomness">
+      <svg id="rec" viewBox="0 0 860 240"></svg>
+    </figure>
+    <div class="verdict">
+      <div class="box hl"><span class="lbl">the braid</span><span class="val vio">−0.781 · 50σ</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">one m enclosed → π phase</span></div>
+      <div class="box"><span class="lbl">six signs</span><span class="val good">6 / 6 correct</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">each at 50–53σ, contrast 0.78–0.83</span></div>
+      <div class="box"><span class="lbl">shape independence</span><span class="val good">−0.796 deformed</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">bigger loop, same charge, same phase</span></div>
+      <div class="box"><span class="lbl">Z₂ fusion</span><span class="val good">pair → +0.779</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">two anyons enclosed = (−1)² = trivial</span></div>
+    </div>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">why the minus sign is topological — and exactly what it is not</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">SIX ARMS CLOSE EACH OTHER'S LOOPHOLES</div>
+        <p>−1 appears only for <em>odd enclosed charge</em>: empty loop +1, one m −1, the same m outside the loop +1,
+        a deformed loop around the same m −1, an enclosed pair +1, a straddling pair −1. A classical parity artifact
+        would have to match the outside, deformation, and fusion patterns simultaneously — it cannot.
+        <code>all six pre-registered, all &gt;50σ</code></p></div>
+      <div class="receipt"><div class="rt">THE STATE IS THE OTHER HALF OF THE PROOF</div>
+        <p>Loop values are only topology if the state carries loop order: plaquettes +0.86/+0.82 and stars 0.87–0.95
+        certain, while all seven single edges read ⟨Z⟩ = 0.00–0.06 — a loop-gas superposition, not a bit-string.
+        <code>receipts measured on the same prepared state</code></p></div>
+      <div class="receipt"><div class="rt">PREDICTION RECORD</div>
+        <p>Pre-registered: all six signs at &gt;5σ (held) with contrast 0.3–0.6 — measured 0.78–0.83, <em>above</em>
+        the band. Second consecutive magnitude miss in opposite directions across Exp156/157; signs and mechanisms
+        right both times. Logged: magnitude priors carry ~2× error, sign claims stay the hard gate.
+        <code>calibration 82.3%, 516 validated</code></p></div>
+      <div class="receipt"><div class="rt">THE FENCE</div>
+        <p>Abelian Z₂ e–m <em>mutual</em> statistics on one small open-boundary patch, braids executed as single-shot
+        controlled Wilson loops (the unitary the moving anyon would accumulate), raw hardware. Not non-abelian
+        braiding, no computation by braiding, no error correction. <code>Exp157 · job d9drgc9htsac739dedu0</code></p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Exp157 · ibm_fez · 8 circuits · 4096 shots</span>
+    <span>C4846 · 2026-07-18</span>
+    <a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+// measured on ibm_fez, job d9drgc9htsac739dedu0
+const ARMS = [
+ {k:"empty-loop",     lbl:"empty loop",      loop:"P1", ins:[],  x:+0.800, sig:51, exp:+1,
+  story:"<b>Nothing enclosed, no phase.</b> The interferometer reads +1: carrying the e-anyon around an empty region does nothing. This is the baseline every other arm is judged against."},
+ {k:"braid",          lbl:"★ the braid",     loop:"P1", ins:[4], x:-0.781, sig:50, exp:-1,
+  story:"<b>The braid.</b> One m-anyon sits inside the loop — and the interferometer flips to −1. An e carried around an m acquires exactly π. Neither particle is a boson or fermion to the other: that minus sign is anyonic mutual statistics, on silicon."},
+ {k:"m-outside",      lbl:"m outside",       loop:"P1", ins:[6], x:+0.833, sig:53, exp:+1,
+  story:"<b>Locality.</b> The same anyon moved just <em>outside</em> the loop — and the phase vanishes: +1. The braid phase is not caused by the anyon's presence nearby; only enclosed charge counts."},
+ {k:"deformed",       lbl:"deformed loop",   loop:"PM", ins:[4], x:-0.796, sig:51, exp:-1,
+  story:"<b>Shape must not matter — and doesn't.</b> A bigger loop of a different shape around the same single m: still −1, same value within error. The phase is a property of the enclosed topological charge, not of the path — that invariance is what 'topological' means."},
+ {k:"pair-enclosed",  lbl:"pair enclosed",   loop:"PM", ins:[5], x:+0.779, sig:50, exp:+1,
+  story:"<b>Z₂ fusion.</b> One flip of the shared edge creates a <em>pair</em> of m-anyons — one in each square. Enclose both and the interferometer reads +1: (−1)² — a pair fuses to the trivial charge. The loop counts charge mod 2."},
+ {k:"pair-straddle",  lbl:"pair straddling", loop:"P1", ins:[5], x:-0.823, sig:53, exp:-1,
+  story:"<b>Only enclosed charge counts.</b> The same pair, but the loop encircles only one member — and the −1 returns. The interferometer doesn't see 'a trivial pair nearby'; it sees exactly the charge inside the loop."}];
+
+// lattice geometry (SVG coords)
+const V = [[85,55],[235,55],[385,55],[85,205],[235,205],[385,205]];
+const EDGES = [[0,1],[1,2],[3,4],[4,5],[0,3],[1,4],[2,5]]; // e0..e6
+const PLQ_CENTER = {P1:[160,130], P2:[310,130]};
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+
+function drawLattice(arm){
+  const s=document.getElementById("lat"); s.innerHTML="";
+  // Wilson loop glow (rounded rect)
+  const loopR = arm.loop==="P1" ? {x:100,y:70,w:120,h:120} : {x:100,y:70,w:270,h:120};
+  el(s,"rect",{x:loopR.x,y:loopR.y,width:loopR.w,height:loopR.h,rx:18,fill:"none",
+    style:"stroke:var(--cyan);stroke-width:5;opacity:.85;filter:drop-shadow(0 0 7px var(--cyan))"});
+  el(s,"text",{x:loopR.x+loopR.w/2,y:loopR.y+loopR.h+38,"text-anchor":"middle",
+    style:"fill:var(--cyan);font-family:var(--mono);font-size:12px"}).textContent="Wilson loop (the e-anyon's path)";
+  // edges
+  EDGES.forEach((e,i)=>{
+    const [a,b]=e, flipped=arm.ins.includes(i);
+    el(s,"line",{x1:V[a][0],y1:V[a][1],x2:V[b][0],y2:V[b][1],
+      style:`stroke:${flipped?"var(--amber)":"var(--edge-2)"};stroke-width:${flipped?5:3.5}`});
+    const mx=(V[a][0]+V[b][0])/2, my=(V[a][1]+V[b][1])/2;
+    el(s,"circle",{cx:mx,cy:my,r:7,style:`fill:${flipped?"var(--amber)":"var(--surface-2)"};stroke:var(--edge-2);stroke-width:1.5`});
+  });
+  // vertices
+  V.forEach(v=>el(s,"circle",{cx:v[0],cy:v[1],r:4,style:"fill:var(--ink-3)"}));
+  // anyons: X on edge e flips plaquettes containing e
+  const P1E=[0,5,2,4], P2E=[1,6,3,5];
+  const m1 = arm.ins.filter(e=>P1E.includes(e)).length%2, m2 = arm.ins.filter(e=>P2E.includes(e)).length%2;
+  if(m1) drawAnyon(s, PLQ_CENTER.P1);
+  if(m2) drawAnyon(s, PLQ_CENTER.P2);
+  if(!m1&&!m2) el(s,"text",{x:235,y:136,"text-anchor":"middle",
+    style:"fill:var(--ink-3);font-family:var(--mono);font-size:11.5px"}).textContent="(no anyons)";
+}
+function drawAnyon(s,c){
+  const [x,y]=c, r=11;
+  el(s,"path",{d:`M${x-r},${y-r}L${x+r},${y+r}M${x-r},${y+r}L${x+r},${y-r}`,
+    style:"stroke:var(--amber);stroke-width:5;stroke-linecap:round;filter:drop-shadow(0 0 6px var(--amber))"});
+  el(s,"text",{x:x,y:y+30,"text-anchor":"middle",style:"fill:var(--amber);font-family:var(--mono);font-size:12px"}).textContent="m";
+}
+
+function drawBar(arm){
+  const s=document.getElementById("bar"); s.innerHTML="";
+  const L=60,R=800,mid=(L+R)/2, y=30;
+  const px=v=>mid+v*(R-L)/2;
+  el(s,"line",{x1:L,y1:y,x2:R,y2:y,style:"stroke:var(--edge);stroke-width:3"});
+  [[-1,"−1"],[0,"0"],[1,"+1"]].forEach(t=>{
+    el(s,"line",{x1:px(t[0]),y1:y-7,x2:px(t[0]),y2:y+7,style:"stroke:var(--edge-2);stroke-width:2"});
+    el(s,"text",{x:px(t[0]),y:y+26,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:12px"}).textContent=t[1];
+  });
+  // expected marker
+  el(s,"line",{x1:px(arm.exp),y1:y-13,x2:px(arm.exp),y2:y+13,style:"stroke:var(--ink-3);stroke-width:2;stroke-dasharray:3 3"});
+  // measured
+  const col = arm.exp<0?"var(--violet)":"var(--good)";
+  el(s,"circle",{cx:px(arm.x),cy:y,r:9,style:`fill:${col};filter:drop-shadow(0 0 6px ${col})`});
+}
+
+function render(i){
+  const arm=ARMS[i];
+  document.querySelectorAll(".armbtn").forEach((b,j)=>b.classList.toggle("on",j===i));
+  drawLattice(arm); drawBar(arm);
+  const mv=document.getElementById("mval");
+  mv.textContent=(arm.x>0?"+":"")+arm.x.toFixed(3);
+  mv.className="big "+(arm.exp<0?"minus":"plus");
+  document.getElementById("msig").textContent=`expected ${arm.exp>0?"+1":"−1"} · ${arm.sig}σ from zero · sign correct`;
+  document.getElementById("story").innerHTML=arm.story;
+}
+
+const bts=document.getElementById("armbtns");
+ARMS.forEach((a,i)=>{const b=document.createElement("button");
+  b.className="armbtn"; b.type="button"; b.textContent=a.lbl; b.addEventListener("click",()=>render(i)); bts.appendChild(b);});
+render(1); // open on the braid
+
+// receipts chart
+(function(){
+  const s=document.getElementById("rec");
+  const vals=[["B₁",0.856],["B₂",0.818],["A₀",0.866],["A₁",0.897],["A₂",0.925],["A₃",0.891],["A₄",0.883],["A₅",0.949],
+              ["e₀",0.00],["e₁",0.03],["e₂",0.06],["e₃",-0.01],["e₄",0.04],["e₅",0.01],["e₆",0.00]];
+  const L=56,R=845,T=18,B=190, n=vals.length, bw=(R-L)/n*0.62;
+  const py=v=>B-(B-T)*v;
+  [0,0.5,1].forEach(g=>{
+    el(s,"line",{x1:L,y1:py(g),x2:R,y2:py(g),style:"stroke:var(--edge);stroke-width:1"});
+    el(s,"text",{x:L-8,y:py(g)+4,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=g.toFixed(1);
+  });
+  vals.forEach((v,i)=>{
+    const x=L+(R-L)*(i+0.5)/n, loop=i<8;
+    const h=Math.max(2,Math.abs(py(v[1])-py(0)));
+    el(s,"rect",{x:x-bw/2,y:Math.min(py(v[1]),py(0)),width:bw,height:h,rx:3,
+      style:`fill:${loop?"var(--violet)":"var(--ink-3)"};opacity:${loop?0.92:0.65}`});
+    el(s,"text",{x:x,y:B+18,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=v[0];
+  });
+  el(s,"text",{x:L+(R-L)*4/15,y:B+38,"text-anchor":"middle",style:"fill:var(--violet);font-family:var(--mono);font-size:12px"}).textContent="loops & stars: certain";
+  el(s,"text",{x:L+(R-L)*11.5/15,y:B+38,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="single edges: fair coins";
+})();
+
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>
