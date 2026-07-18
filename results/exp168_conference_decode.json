@@ -1,0 +1,33 @@
+{
+ "job_id": "d9duedineu4c739np50g",
+ "honest": {
+  "mermin": 3.46728515625,
+  "E": {
+   "XXX": 0.87451171875,
+   "XYY": -0.85205078125,
+   "YXY": -0.85986328125,
+   "YYX": -0.880859375
+  },
+  "conf_qber": 0.03662109375,
+  "qber_ab": 0.027587890625,
+  "qber_ac": 0.03662109375,
+  "secret_fraction": 0.5468409684909886
+ },
+ "eve": {
+  "mermin": -0.03173828125,
+  "E": {
+   "XXX": 0.00634765625,
+   "XYY": 0.01123046875,
+   "YXY": -0.0087890625,
+   "YYX": 0.03564453125
+  },
+  "conf_qber": 0.043212890625,
+  "qber_ab": 0.0419921875,
+  "qber_ac": 0.043212890625,
+  "secret_fraction": 0.48633191128308106
+ },
+ "certified": true,
+ "key_ok": true,
+ "eve_detected": true,
+ "verdict": "3-PARTY CONFERENCE KEY LIVE \u2014 one GHZ trio, one shared key certified by Mermin, wiretap aborts"
+}
