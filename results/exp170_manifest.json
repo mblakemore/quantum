@@ -1,0 +1,249 @@
+{
+ "exp": 170,
+ "backend": "ibm_fez",
+ "tmax": 10,
+ "shots": 4000,
+ "N": 8,
+ "eps": 0.15,
+ "J": 1.3,
+ "h_break": 0.5,
+ "edge_sites": [
+  0,
+  7
+ ],
+ "bulk_sites": [
+  3,
+  4
+ ],
+ "job_id": "d9dtkfphtsac739dh4ag",
+ "order": [
+  [
+   "spt",
+   0
+  ],
+  [
+   "spt",
+   1
+  ],
+  [
+   "spt",
+   2
+  ],
+  [
+   "spt",
+   3
+  ],
+  [
+   "spt",
+   4
+  ],
+  [
+   "spt",
+   5
+  ],
+  [
+   "spt",
+   6
+  ],
+  [
+   "spt",
+   7
+  ],
+  [
+   "spt",
+   8
+  ],
+  [
+   "spt",
+   9
+  ],
+  [
+   "spt",
+   10
+  ],
+  [
+   "broken",
+   0
+  ],
+  [
+   "broken",
+   1
+  ],
+  [
+   "broken",
+   2
+  ],
+  [
+   "broken",
+   3
+  ],
+  [
+   "broken",
+   4
+  ],
+  [
+   "broken",
+   5
+  ],
+  [
+   "broken",
+   6
+  ],
+  [
+   "broken",
+   7
+  ],
+  [
+   "broken",
+   8
+  ],
+  [
+   "broken",
+   9
+  ],
+  [
+   "broken",
+   10
+  ]
+ ],
+ "meta": [
+  {
+   "arm": "spt",
+   "t": 0,
+   "depth": 1,
+   "n2q": 0
+  },
+  {
+   "arm": "spt",
+   "t": 1,
+   "depth": 52,
+   "n2q": 12
+  },
+  {
+   "arm": "spt",
+   "t": 2,
+   "depth": 70,
+   "n2q": 26
+  },
+  {
+   "arm": "spt",
+   "t": 3,
+   "depth": 86,
+   "n2q": 40
+  },
+  {
+   "arm": "spt",
+   "t": 4,
+   "depth": 102,
+   "n2q": 54
+  },
+  {
+   "arm": "spt",
+   "t": 5,
+   "depth": 118,
+   "n2q": 68
+  },
+  {
+   "arm": "spt",
+   "t": 6,
+   "depth": 134,
+   "n2q": 82
+  },
+  {
+   "arm": "spt",
+   "t": 7,
+   "depth": 150,
+   "n2q": 96
+  },
+  {
+   "arm": "spt",
+   "t": 8,
+   "depth": 166,
+   "n2q": 110
+  },
+  {
+   "arm": "spt",
+   "t": 9,
+   "depth": 182,
+   "n2q": 124
+  },
+  {
+   "arm": "spt",
+   "t": 10,
+   "depth": 198,
+   "n2q": 138
+  },
+  {
+   "arm": "broken",
+   "t": 0,
+   "depth": 1,
+   "n2q": 0
+  },
+  {
+   "arm": "broken",
+   "t": 1,
+   "depth": 60,
+   "n2q": 14
+  },
+  {
+   "arm": "broken",
+   "t": 2,
+   "depth": 77,
+   "n2q": 28
+  },
+  {
+   "arm": "broken",
+   "t": 3,
+   "depth": 94,
+   "n2q": 42
+  },
+  {
+   "arm": "broken",
+   "t": 4,
+   "depth": 111,
+   "n2q": 56
+  },
+  {
+   "arm": "broken",
+   "t": 5,
+   "depth": 128,
+   "n2q": 70
+  },
+  {
+   "arm": "broken",
+   "t": 6,
+   "depth": 145,
+   "n2q": 84
+  },
+  {
+   "arm": "broken",
+   "t": 7,
+   "depth": 173,
+   "n2q": 98
+  },
+  {
+   "arm": "broken",
+   "t": 8,
+   "depth": 179,
+   "n2q": 112
+  },
+  {
+   "arm": "broken",
+   "t": 9,
+   "depth": 196,
+   "n2q": 126
+  },
+  {
+   "arm": "broken",
+   "t": 10,
+   "depth": 213,
+   "n2q": 140
+  }
+ ],
+ "prereg": {
+  "confidence": 0.55,
+  "gate": "edge-bulk contrast (SPT) > 0.15 AND edge_SPT - edge_broken > 0.15",
+  "note": "both are baseline-robust CONTRASTS (C4199): global decay cancels"
+ },
+ "note": "Floquet SPT edge pi-mode: spt(h=0) vs symmetry-broken(h=0.5) control; per-site A_j=(-1)^n<Z_j>; edge persists + bulk decays + symmetry-break kills = SPT signature"
+}

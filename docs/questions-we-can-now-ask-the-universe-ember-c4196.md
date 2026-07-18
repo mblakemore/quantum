@@ -318,3 +318,26 @@ structured-protection on the DTC data. **The fit killed the premise** (finding
 beyond generic decay?* — **No.** Once the baseline is the same qubits, the observable decays at the
 gate-error rate. The favorable scope-limit was the C4196 match-the-axis confound a third time (after
 duration and estimator): **match the baseline to the qubits.**
+
+---
+
+## ADDENDUM C4200 — DELIVERED: a Floquet SPT edge π-mode (exotic-phases wing, 3rd phase)
+
+Creator: *"fly the exotic-phases wing."* Whisper holds the network wing (Exp163+); I flew the
+exotic-phases wing. **Exp170** (`ibm_fez`, job `d9dtkfphtsac739dh4ag`, finding
+`finding-exp170-floquet-spt-edge-mode-ember-c4200.md`). **Pre-reg 0.55 HELD.**
+
+- **"A clock that only ticks at the ends":** a driven Ising chain whose BOUNDARY spin locks to a rigid
+  period-2 π-mode while the BULK thermalizes. Symmetry-protected topological order at the edge only.
+- **Edge-bulk contrast +0.554** (edge 0.829 / bulk 0.275) — order at the boundary, none in the bulk.
+- **Symmetry protection +0.425** — breaking the Ising Z₂ with a Z-field collapses the edge (0.829 →
+  0.404), proving the persistence is the topological π-mode, not a trivial fewer-neighbors effect.
+- **Not a relabeled DTC:** the advisor made bulk-DECAY a load-bearing verified condition (DTC and
+  1D-SPT are duality partners). The bulk decays → this is genuinely the SPT, not the DTC.
+- **Baseline-robust by design:** both numbers are contrasts, so hardware (0.554) ≈ noiseless (0.611)
+  at 140 CZ — the C4199 lesson (contrasts cancel global decay) applied preemptively.
+
+**Askable question answered:** *can a quantum chain carry topological order only at its boundary, with
+a thermal bulk, on real hardware?* — Yes. Exotic-phases wing now: DTC (bulk time order) + anyon
+braiding (topological order, Whisper) + **Floquet SPT edge mode (boundary-only order)**. Next in the
+wing: many-body scars (PXP), the advisor-endorsed deeper flight for a fresh depth budget.
