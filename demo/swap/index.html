@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%223.5%22%20cy%3D%224.5%22%20r%3D%221.8%22%20fill%3D%22none%22%20stroke%3D%22%2345d6cf%22%20stroke-width%3D%221.3%22%2F%3E%3Ccircle%20cx%3D%2212.5%22%20cy%3D%224.5%22%20r%3D%221.8%22%20fill%3D%22none%22%20stroke%3D%22%2345d6cf%22%20stroke-width%3D%221.3%22%2F%3E%3Cpath%20d%3D%22M4.5%206C7%209%209%209%2011.5%206%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.4%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Matchmaker — entangling two qubits that never met | The Quantum Museum</title>
+<meta name="description" content="Entanglement swapping on ibm_fez: Bell-measure the middles of two Bell pairs and the two outer qubits — which never interacted — come out certified entangled: F = 0.836 against the 1/2 separable bound, 40σ. Exp162.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 14%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:7px 14px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:8px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:17px; font-weight:700; }
+  .val.good { color:var(--good); } .val.cy { color:var(--cyan); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ quantum network</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Matchmaker<span class="hl">.</span></h1>
+    <p class="lede">Two qubits, A and C, sit at opposite ends of the chip. No gate ever connects them; they share no
+      history. Between them, two Bell pairs and one measurement — and when the middle qubits are measured together
+      and two classical bits are sent to C, <b>A and C become entangled with each other</b>. Certified:
+      overlap with a perfect Bell pair <b>F = 0.836</b>, where no unentangled pair of qubits can exceed 1/2 — a 40σ
+      violation of the separable bound. This is <b>entanglement swapping</b>, the primitive every quantum repeater is
+      built from.</p>
+    <span class="scope">Scope: the swapping <b>primitive</b> on one die (zero storage, adjacent routing) — not a
+      repeater: no quantum memory, no purification, no independent sources.</span>
+  </header>
+
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Make the match</h2>
+    <p class="sub">4 arms × 3 measurement settings, one job · ibm_fez · 8000 shots · job d9dt50ineu4c739nndeg</p>
+    <p class="primer"><b>How to read it.</b> Entanglement between A and C shows up as <em>correlations in three
+      bases at once</em>: ZZ and XX near +1, YY near −1 — something no coin-flip story can do simultaneously. The
+      bars show the measured correlations; the gauge below folds them into the Bell-state fidelity
+      F = (1 + ZZ + XX − YY)/4. Above the dashed 1/2 line, the pair is provably entangled. Pick an arm.</p>
+    <div class="seg" role="tablist" id="segbtns"></div>
+    <figure aria-label="measured two-qubit correlations and fidelity gauge"><svg id="viz" viewBox="0 0 860 300"></svg></figure>
+    <p class="story" id="story"></p>
+    <div class="verdict">
+      <div class="box hl"><span class="lbl">the witness</span><span class="val cy">F = 0.836 · 40σ over 1/2</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">no separable state can exceed 1/2 — A and C are entangled</span></div>
+      <div class="box"><span class="lbl">falsifiers</span><span class="val good">0.258 · 0.251</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">no-correction, no-measurement — both at the 0.25 floor</span></div>
+      <div class="box"><span class="lbl">swap cost (same job)</span><span class="val cy">0.979 → 0.836</span><br>
+        <span style="font-size:12px;color:var(--ink-3)">vs a directly-prepared Bell pair; loss is spectator-idle structured</span></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">why the certificate is airtight — and where this sits in the network wing</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE BOUND IS A THEOREM</div>
+        <p>For any two qubits in a separable (unentangled) state, the overlap with a maximally entangled state is at
+        most 1/2 — no noise model, no loophole. 0.836 clears it by 40σ. The certificate needs no trust in the
+        preparation: it is read off A and C alone. <code>F = (1+ZZ+XX−YY)/4 · pre-registered</code></p></div>
+      <div class="receipt"><div class="rt">BOTH INGREDIENTS PROVEN LOAD-BEARING</div>
+        <p>Skip the classical feedforward: the four Bell outcomes average to the maximally mixed state — F drops to
+        0.258. Skip the Bell measurement entirely: A and C are never entangled — 0.251. Both falsifiers sit exactly
+        at the 0.25 floor; only the full protocol produces the match.</p></div>
+      <div class="receipt"><div class="rt">THE PRICE, MEASURED HONESTLY</div>
+        <p>A directly-prepared Bell pair in the same job reads 0.979, so the swap costs 0.143 — and the loss is
+        basis-structured (ZZ 0.86 vs XX/YY 0.74): qubit A idles, entangled and unechoed, through the measure-and-
+        correct window. The same spectator-idle fingerprint the relay found — the day's error taxonomy, consistent
+        across experiments. <code>within-job baseline · C4199 rule</code></p></div>
+      <div class="receipt"><div class="rt">THE TRIPTYCH</div>
+        <p>The network wing's three primitives, all flown in one day, each past its own classical bound with
+        falsifiers intact: the <a href="../teleportation/" style="color:var(--cyan)">hop</a> (0.913 vs 2/3), the
+        <a href="../relay/" style="color:var(--cyan)">chain</a> (0.784 end-to-end, 45σ), and the swap (0.836 vs 1/2,
+        40σ). Teleport a state, relay it, entangle strangers. <code>Exp154 · Exp160 · Exp162</code></p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Exp162 · ibm_fez · 12 circuits · 8000 shots</span>
+    <span>C4852 · 2026-07-18</span>
+    <a href="../relay/">← the relay</a>
+    <a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+const ARMS={
+ swap:{lbl:"the swap",zz:0.864,xx:0.737,yy:-0.741,F:0.836,col:"var(--cyan)",
+  story:"<b>The match is made.</b> All three correlations light up with the Bell signature — ZZ and XX positive, YY negative, simultaneously. F = 0.836, far above the 1/2 line: A and C, which never touched, are provably entangled. The measurement in the middle didn't read the pairs — it stitched them."},
+ direct:{lbl:"direct Bell (same job)",zz:0.972,xx:0.971,yy:-0.972,F:0.979,col:"var(--good)",
+  story:"<b>The reference.</b> A Bell pair prepared the ordinary way — a gate directly between the qubits — reads 0.979 in the same job. The swap gives up 0.143 to reach the same entanglement without ever connecting the endpoints: the price of matchmaking at a distance."},
+ nocorr:{lbl:"falsifier: no feedforward",zz:-0.001,xx:-0.007,yy:-0.041,F:0.258,col:"var(--bad)",
+  story:"<b>Remove the classical bits.</b> The Bell measurement still happens, but its two bits never reach C — the four possible Bell states average out to nothing. Every correlation dies; F falls to the 0.25 floor. The 'spooky' link needs the classical mail to mean anything."},
+ nomeas:{lbl:"falsifier: no measurement",zz:0.002,xx:-0.002,yy:-0.006,F:0.251,col:"var(--bad)",
+  story:"<b>Remove the matchmaker.</b> Both Bell pairs exist, but the middles are never measured together — and A and C remain perfect strangers: all correlations zero, F at the floor. Entanglement is not contagious; the joint measurement is what swaps it."}};
+const SVGNS="http://www.w3.org/2000/svg";
+const viz=document.getElementById("viz");
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function draw(key){
+  const A=ARMS[key]; viz.innerHTML="";
+  // correlation bars: signed, -1..+1
+  const L=70,R=560,T=16,B=196,mid=(T+B)/2; const py=v=>mid-(B-T)/2*v;
+  [[-1,"−1"],[0,"0"],[1,"+1"]].forEach(g=>{
+    el(viz,"line",{x1:L,y1:py(g[0]),x2:R,y2:py(g[0]),style:`stroke:var(--edge);stroke-width:${g[0]===0?2:1}`});
+    el(viz,"text",{x:L-8,y:py(g[0])+4,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=g[1];});
+  const bars=[["⟨ZZ⟩",A.zz],["⟨XX⟩",A.xx],["⟨YY⟩",A.yy]], bw=70;
+  bars.forEach((b,i)=>{const x=L+(R-L)*(i+0.5)/3;
+    el(viz,"rect",{x:x-bw/2,y:Math.min(py(b[1]),py(0)),width:bw,height:Math.max(2,Math.abs(py(b[1])-py(0))),rx:4,
+      style:`fill:${A.col};opacity:.9`});
+    el(viz,"text",{x:x,y:py(b[1])+(b[1]>=0?-8:16),"text-anchor":"middle",
+      style:`fill:${A.col};font-family:var(--mono);font-size:12.5px;font-weight:700`}).textContent=(b[1]>0?"+":"")+b[1].toFixed(3);
+    el(viz,"text",{x:x,y:B+22,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:13px"}).textContent=b[0];});
+  // fidelity gauge: 0.2..1.0 with witness at 0.5
+  const GL=640,GR=830; const gy=v=>B-(B-T)*(v-0.2)/0.8;
+  el(viz,"line",{x1:(GL+GR)/2,y1:T,x2:(GL+GR)/2,y2:B,style:"stroke:var(--edge-2);stroke-width:3"});
+  [[0.25,"0.25 floor"],[0.5,"1/2 separable bound"],[1.0,"1.0 perfect"]].forEach(g=>{
+    el(viz,"line",{x1:GL+40,y1:gy(g[0]),x2:GR-40,y2:gy(g[0]),style:`stroke:${g[0]===0.5?"var(--amber)":"var(--edge-2)"};stroke-width:${g[0]===0.5?2:1};${g[0]===0.5?"stroke-dasharray:5 4":""}`});
+    el(viz,"text",{x:(GL+GR)/2,y:gy(g[0])-6,"text-anchor":"middle",style:`fill:${g[0]===0.5?"var(--amber)":"var(--ink-3)"};font-family:var(--mono);font-size:10.5px`}).textContent=g[1];});
+  el(viz,"circle",{cx:(GL+GR)/2,cy:gy(A.F),r:10,style:`fill:${A.col};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${A.col})`});
+  el(viz,"text",{x:(GL+GR)/2,y:gy(A.F)+28,"text-anchor":"middle",style:`fill:${A.col};font-family:var(--mono);font-size:15px;font-weight:700`}).textContent="F = "+A.F.toFixed(3);
+  el(viz,"text",{x:(GL+GR)/2,y:B+22,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12.5px"}).textContent="Bell fidelity";
+  document.getElementById("story").innerHTML=A.story;
+  document.querySelectorAll("#segbtns button").forEach(b=>b.classList.toggle("on",b.dataset.k===key));
+}
+const seg=document.getElementById("segbtns");
+Object.keys(ARMS).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;
+  b.textContent=ARMS[k].lbl;b.addEventListener("click",()=>draw(k));seg.appendChild(b);});
+draw("swap");
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>
