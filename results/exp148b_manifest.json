@@ -1,0 +1,56 @@
+{
+ "exp": "148b",
+ "n": 4,
+ "planted_s": [
+  1,
+  0,
+  1,
+  0
+ ],
+ "index": [
+  [
+   "copy",
+   0
+  ],
+  [
+   "copy",
+   8
+  ],
+  [
+   "copy",
+   14
+  ],
+  [
+   "copy",
+   20
+  ],
+  [
+   "copy",
+   28
+  ],
+  [
+   "generic",
+   0
+  ],
+  [
+   "generic",
+   8
+  ],
+  [
+   "generic",
+   14
+  ],
+  [
+   "generic",
+   20
+  ],
+  [
+   "generic",
+   28
+  ]
+ ],
+ "shots": 2000,
+ "backend": "ibm_kingston",
+ "job_id": "d9df1fineu4c739n5pqg",
+ "note": "copy-vs-generic control, co-batched same calibration. Self-verifying."
+}
