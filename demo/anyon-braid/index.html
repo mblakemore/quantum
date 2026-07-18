@@ -93,6 +93,50 @@
       Wilson-loop interferometry — not non-abelian braiding, not adiabatic transport, not fault tolerance.</span>
   </header>
 
+  <!-- PANEL 0: ELI5 -->
+  <section class="panel" aria-labelledby="p0">
+    <h2 id="p0">Start here — flatland particles, in plain words</h2>
+    <p class="sub">no equations · why a third kind of particle is allowed, and why anyone cares</p>
+    <p class="principle" style="color:var(--ink-2);font-size:14.5px">Every particle you have ever met is one of two kinds.
+      Swap two identical <b>bosons</b> and the universe shrugs. Swap two identical <b>fermions</b> and the universe's
+      bookkeeping flips a minus sign. In our 3D world those are the <em>only</em> options, because of a quiet geometric
+      fact: any trip that carries one particle around another can be lifted into the third dimension and shrunk away to
+      nothing. The trip leaves no trace.</p>
+    <figure aria-label="worldlines in 3D versus 2D">
+      <svg id="eli5" viewBox="0 0 860 210"></svg>
+    </figure>
+    <p class="principle" style="color:var(--ink-2);font-size:14.5px">Squash the world flat and that escape route
+      disappears. In two dimensions, a particle carried around another leaves a permanent tangle in their shared
+      history — plot position against time and the two world-lines are <b>braided like rope</b>. No smooth motion can
+      undo a braid without cutting it. So flatland is allowed a third kind of particle: one that <em>remembers being
+      circled</em>. Physicists named them <b>anyons</b>, because the memory can be "any" phase.</p>
+    <p class="principle" style="color:var(--ink-2);font-size:14.5px">That is what the panel below shows, with real
+      hardware data: we built a small patch of digital flatland (seven qubits of "toric-code" matter, plus one
+      interferometer qubit), placed two kinds of quasiparticles on it, carried one around the other, and asked what the
+      trip left behind. The answer is <b>exactly a minus sign</b> — and the six arms show the sign obeys braid-logic,
+      not geometry: it appears only when the loop truly <em>encloses</em> the other particle, it does not care about
+      the loop's shape, and circling two of them cancels out (minus times minus).</p>
+    <p class="principle" style="color:var(--ink-2);font-size:14.5px"><b>Why this is a building block.</b> The minus
+      sign is stored in the braid — in the whole history — not in any qubit you could point to. The receipts panel
+      shows that directly: every individual qubit on the patch reads as a fair coin, yet the braid answer is certain at
+      50σ. Information that no local poke can <em>read</em> is information that no local noise can easily
+      <em>corrupt</em> — and that is the founding idea of <b>topological quantum computing</b>: protect quantum
+      information by hiding it in topology.</p>
+    <div class="court" style="margin-top:6px">
+      <div class="receipt"><div class="rt">THIS EXHIBIT — ABELIAN ANYONS (the first rung)</div>
+        <p>The braid writes a <em>phase</em>: a minus sign. It proves braid-memory is real and behaves topologically —
+        but a phase alone doesn't compute. Toric-code e and m quasiparticles, mutual statistics π, every falsifier on
+        the table. <code>this page: Exp157, ibm_fez, 6 arms at ~50σ</code></p></div>
+      <div class="receipt"><div class="rt">THE NEXT RUNG — NON-ABELIAN ANYONS (where braids compute)</div>
+        <p>For a rarer kind of anyon, the braid changes the <em>state itself</em> — swapping two of them moves the
+        system to a genuinely different configuration, so a sequence of swaps IS a computation. Google Quantum AI
+        demonstrated this in 2023 (D3V graph-vertex anyons on a superconducting chip: eight anyons encoding three
+        logical qubits, entangled into a GHZ state by braiding alone). Same hardware family as this exhibit; the rung
+        this one is built to hold up.
+        <code><a href="https://research.google/blog/the-worlds-first-braiding-of-non-abelian-anyons/" rel="noopener">Google Quantum AI, Nature 618, 264 (2023)</a></code></p></div>
+    </div>
+  </section>
+
   <!-- PANEL A -->
   <section class="panel" aria-labelledby="pa">
     <h2 id="pa">Run the braid</h2>
@@ -281,6 +325,36 @@ render(1); // open on the braid
   });
   el(s,"text",{x:L+(R-L)*4/15,y:B+38,"text-anchor":"middle",style:"fill:var(--violet);font-family:var(--mono);font-size:12px"}).textContent="loops & stars: certain";
   el(s,"text",{x:L+(R-L)*11.5/15,y:B+38,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="single edges: fair coins";
+})();
+
+// ELI5 sketch: in 3D the encircling trip can shrink away; in 2D it is a braid locked into history
+(function(){
+  const s=document.getElementById("eli5");
+  const cap=(x,y,t,c)=>el(s,"text",{x:x,y:y,"text-anchor":"middle",
+    style:`fill:${c||"var(--ink-3)"};font-family:var(--mono);font-size:12px`}).textContent=t;
+  // LEFT — 3D
+  el(s,"line",{x1:40,y1:105,x2:380,y2:105,style:"stroke:var(--ink-3);stroke-width:2.5"});
+  el(s,"circle",{cx:210,cy:105,r:5,style:"fill:var(--amber)"});
+  [[52,34],[36,24],[22,15]].forEach((r,i)=>el(s,"ellipse",{cx:210,cy:105,rx:r[0],ry:r[1],fill:"none",
+    style:`stroke:var(--cyan);stroke-width:${i?1.4:2.2};opacity:${1-0.3*i}${i?";stroke-dasharray:5 5":""}`}));
+  el(s,"text",{x:285,y:70,style:"fill:var(--cyan);font-family:var(--mono);font-size:13px"}).textContent="→ shrinks to nothing";
+  cap(210,30,"3 DIMENSIONS","var(--ink-2)");
+  cap(210,178,"the loop lifts off and vanishes — the trip leaves no memory");
+  // divider
+  el(s,"line",{x1:430,y1:24,x2:430,y2:186,style:"stroke:var(--edge);stroke-width:1"});
+  // RIGHT — 2D braid (two strands crossing twice)
+  el(s,"path",{d:"M470,85 C530,85 530,125 590,125 C650,125 650,85 710,85 L820,85",fill:"none",
+    style:"stroke:var(--violet);stroke-width:3"});
+  el(s,"path",{d:"M470,125 C530,125 530,85 590,85 C650,85 650,125 710,125 L820,125",fill:"none",
+    style:"stroke:var(--amber);stroke-width:3;stroke-dasharray:0"});
+  // over-crossing masks (break the violet strand where amber passes over, and vice versa)
+  el(s,"circle",{cx:530,cy:105,r:7,style:"fill:var(--surface)"});
+  el(s,"path",{d:"M510,97 C525,101 535,109 550,113",fill:"none",style:"stroke:var(--amber);stroke-width:3"});
+  el(s,"circle",{cx:650,cy:105,r:7,style:"fill:var(--surface)"});
+  el(s,"path",{d:"M630,113 C645,109 655,101 670,97",fill:"none",style:"stroke:var(--violet);stroke-width:3"});
+  cap(645,30,"2 DIMENSIONS","var(--ink-2)");
+  cap(645,178,"the world-lines are braided — no smooth motion can untangle them");
+  el(s,"text",{x:838,y:109,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent="t →";
 })();
 
 document.getElementById("themeBtn").addEventListener("click",()=>{
