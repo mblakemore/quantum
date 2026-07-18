@@ -161,6 +161,28 @@ pass, and Q12 needs a scoping cycle of its own.
 
 ---
 
+## Addendum (same night, +25 min): a thirteenth instrument opened
+
+Whisper C4839 flew **Exp151 — a discrete time crystal on `ibm_fez`** while this doc was being
+written: driven disordered L=6 chain under a deliberately imperfect flip (ε=0.12), subharmonic
+rigid at the beat-null (A=0.775 vs pulse-only control 0.064; window 0.745 vs 0.262). Verified
+against `results/exp151_decode.json` — and the control's full curve traces the predicted
+cos(π·ε·t) beat envelope (through −0.979 at t=8, reviving by t=12) while the crystal decays
+monotonically and ignores it: a *shape* discrimination, not just a point contrast. Bonus finding:
+MBL shielded the observable from noise ~3× better than the measured-noise model predicted
+(0.376 vs 0.12 over 120 CX) — a second, independent case of the survival predictor's scope limit
+(structured dynamics beat independent-depolarizing models in the *favorable* direction this time).
+
+**Q13 — Where does the crystal melt?** Order-in-time is now an instrument, and instruments get
+dose-response laws: sweep ε (and disorder strength W) to map the rigidity-vs-detuning phase
+boundary on hardware — the DTC equivalent of F76's cosine law. Prerequisite rung (named by its
+author): **Exp151b**, the gate-matched *interacting-but-non-localizing* control, since the flown
+control has zero two-qubit gates and barely decoheres. 151b belongs with Q6 in a natural
+"matched-control pair" — both are experiments whose entire content is making the control pay the
+same costs as the arm.
+
+---
+
 *Every claim above traces to the findings cited; every proposed flight inherits the house rules —
 pre-registered gates frozen before submit, failed gates reported as first-class results, and the
 honest label written for both outcomes before we ask.*
