@@ -1,0 +1,88 @@
+{
+ "exp": 161,
+ "slug": "dd_relay",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9dt1e2neu4c739nn8qg",
+ "order": [
+  [
+   "Z+",
+   "nodd"
+  ],
+  [
+   "Z-",
+   "nodd"
+  ],
+  [
+   "X+",
+   "nodd"
+  ],
+  [
+   "X-",
+   "nodd"
+  ],
+  [
+   "Y+",
+   "nodd"
+  ],
+  [
+   "Y-",
+   "nodd"
+  ],
+  [
+   "Z+",
+   "dd"
+  ],
+  [
+   "Z-",
+   "dd"
+  ],
+  [
+   "X+",
+   "dd"
+  ],
+  [
+   "X-",
+   "dd"
+  ],
+  [
+   "Y+",
+   "dd"
+  ],
+  [
+   "Y-",
+   "dd"
+  ],
+  [
+   "Z+",
+   "bracket"
+  ],
+  [
+   "Z-",
+   "bracket"
+  ],
+  [
+   "X+",
+   "bracket"
+  ],
+  [
+   "X-",
+   "bracket"
+  ],
+  [
+   "Y+",
+   "bracket"
+  ],
+  [
+   "Y-",
+   "bracket"
+  ]
+ ],
+ "prereg": {
+  "precondition": "in-job gap meanZ-meanXY (nodd) > 0.10 else null UNINFORMATIVE",
+  "estimator": "Delta = mean X/Y of F_dd - F_nodd; binomial SE",
+  "resolvable": "Delta > 2*SE AND Delta > 0.01",
+  "mechanism": "|Delta_bracket| < max(2*SE, 0.01)",
+  "prediction": "gap 0.10-0.22; Delta 0.005-0.08; P(resolvable) 0.55"
+ }
+}
