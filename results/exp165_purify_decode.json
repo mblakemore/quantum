@@ -1,0 +1,18 @@
+{
+ "job_id": "d9dtr24inv1c73aphomg",
+ "F": {
+  "input": 0.3955625,
+  "purify": 0.6875491550705122,
+  "purify_anti": -0.17132493803989737,
+  "fresh": 0.9051673485665382,
+  "fresh_anti": 0.2841698348508991
+ },
+ "p_success": {
+  "purify": 0.5033333333333333,
+  "fresh": 0.938625
+ },
+ "gain": 0.2919866550705122,
+ "sigma": 20.148695601236156,
+ "falsifier_ok": true,
+ "verdict_ok": true
+}
