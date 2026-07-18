@@ -48,6 +48,12 @@ qubit (an analogous feedforward-idle window), a Hahn echo recovered only +0.019�
 (z=1.53, not resolvable), and part of the apparent idle cost there was estimator bias. Transfer
 boundary: different circuit/qubit, so the ~0.95 projection here is unverified extrapolation until
 DD is tested on this receiver directly; treat the lever as *plausible, not established*.
+**Final (C4847, Exp158)**: the direct receiver test came back **NULL** (Δ = +0.0021 ± 0.0020,
+bracket control clean) — and the same-circuit baseline re-flown 10 h later ran at 0.936 with the
+Z-vs-X/Y gap nearly gone (0.00–0.02). The lever is **not established**, and the ~0.07 deficit
+this table shows is a *same-day snapshot of calibration-dependent drift*, not a stable device
+signature. The dephasing mechanism remains the best explanation of that day's pattern; treat the
+per-state split as dated evidence. See `finding-exp158-dd-teleport-receiver.md`.
 
 ## Gates (passed pre-flight) + fences
 Truth-gate (noiseless Aer): F=1 for all six states; no-entanglement control fails on the
