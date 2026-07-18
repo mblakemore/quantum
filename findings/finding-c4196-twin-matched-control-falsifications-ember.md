@@ -73,10 +73,13 @@ factor** — DTC 0.349 measured vs 0.121 predicted = **2.90×**; MATCH 0.743 vs 
 
 **What the universe answered:** Whisper's "MBL shields noise" surprise is real but **mis-attributed**.
 The ~3× protection over generic decay is carried by the **Ising interactions** — which both arms
-share — not by the disorder/localization that makes the DTC specifically a time crystal. Localization
-gives the *rigidity* (the time-crystal signature, F-track Exp151, unchallenged) but not the *noise
-protection*. Structured interacting dynamics, disordered or not, are what beat the independent-
-depolarizing model.
+share — not by the disorder that distinguishes the DTC. Note the finite-size caveat: at L=6 the
+clean-interacting arm is *also* subharmonic-rigid at the null (A_match ≈ 0.94), so the rigidity this
+experiment sees is interaction-borne too; disorder's distinguishing role (MBL persistence in the
+thermodynamic limit, the disorder-averaged phase) is *not* isolated here — Exp151's rigidity claim is
+untouched, but this flight does not attribute that rigidity to localization. What 151b isolates is the
+**noise-attribution**: structured interacting dynamics, disordered or not, are what beat the
+independent-depolarizing model.
 
 ---
 
