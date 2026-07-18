@@ -108,41 +108,41 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing V · The Instruments</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
     <p class="eyebrow">A device-independent instrument · the transporter exam</p>
     <h1>The bench that <span class="hl">travels</span>.</h1>
     <p class="lede">Chip vendors publish generic quality scores — Quantum Volume, CLOPS, EPLG. None of them tell you
-    whether a chip can do the <b>physics of causal-order superposition</b>. This instrument does — three axes, each
-    against a frozen bound. Then we flew the whole thing on a chip it had <b>never seen</b>, graded it against the
-    <b>same bounds with no retuning</b>, and it certified all three. Flip between the chips and watch the bench travel.</p>
+    whether a chip can do the <strong>physics of causal-order superposition</strong>. This instrument does — three axes, each
+    against a frozen bound. Then we flew the whole thing on a chip it had <strong>never seen</strong>, graded it against the
+    <strong>same bounds with no retuning</strong>, and it certified all three. Flip between the chips and watch the bench travel.</p>
 
     <div class="primer">
       <div class="pcard">
         <h2>What's the switch-bench?</h2>
-        <p>A three-axis <b>instrument</b>: <b>CAUSAL</b> (is the order truly indefinite?), <b>SCHEDULE</b> (is the chip
-        order-symmetric, no hidden preference?), <b>HOLD</b> (can measurement pin a qubit — the Zeno effect?). Each axis
+        <p>A three-axis <strong>instrument</strong>: <strong>CAUSAL</strong> (is the order truly indefinite?), <strong>SCHEDULE</strong> (is the chip
+        order-symmetric, no hidden preference?), <strong>HOLD</strong> (can measurement pin a qubit — the Zeno effect?). Each axis
         is a finding you can visit elsewhere in the museum.</p>
       </div>
       <div class="pcard">
         <h2>What does "travels" mean?</h2>
         <p>The bench had only run on the home chip. If causal-order physics is a property of the hardware
-        <b>generation</b> — not one lucky die — the same bench should certify on a <b>different</b> chip, unretuned. We
+        <strong>generation</strong> — not one lucky die — the same bench should certify on a <strong>different</strong> chip, unretuned. We
         tested it on a chip it had never seen. It did.</p>
       </div>
     </div>
 
     <div class="herobtns">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
-      <span class="scope">Same Heron <b>generation</b> — cross-generation (Eagle) not claimed. Same-instrument, not same-instant.</span>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
+      <span class="scope">Same Heron <strong>generation</strong> — cross-generation (Eagle) not claimed. Same-instrument, not same-instant.</span>
     </div>
   </header>
 
@@ -150,8 +150,8 @@
   <section class="panel">
     <p class="panel-label">Exhibit A — The bench travels</p>
     <h2>Pick a chip; watch all three axes certify against the same bounds</h2>
-    <p class="sub">The home chip (<b>marrakesh</b>) is where the bench was built; two <b>foreign</b> chips (<b>kingston</b>, <b>fez</b>)
-    had never seen it. Each axis is graded against the <b>identical frozen bound</b>, no retuning. The selected chip's
+    <p class="sub">The home chip (<strong>marrakesh</strong>) is where the bench was built; two <strong>foreign</strong> chips (<strong>kingston</strong>, <strong>fez</strong>)
+    had never seen it. Each axis is graded against the <strong>identical frozen bound</strong>, no retuning. The selected chip's
     marker is solid; the others are faint rings — so you can see the ranking at a glance.</p>
 
     <div class="devsel" role="group" aria-label="Choose a chip">
@@ -163,16 +163,16 @@
 
     <div id="axes"></div>
 
-    <p class="verdict-big" id="verdictBig"></p>
+    <p class="verdict-big" id="verdictBig" aria-live="polite"></p>
   </section>
 
   <!-- PANEL B -->
   <section class="panel">
     <p class="panel-label">Exhibit B — The device leaderboard</p>
     <h2>It doesn't just travel — it ranks the chips</h2>
-    <p class="sub">Graded on the causal-order axes, the three dies rank <b>kingston ≥ marrakesh ≥ fez</b> — kingston leads on every
-    causal number and the Zeno hold; fez, the newest die, certifies every axis but sits <b>last</b>. This is a benchmark
-    that ranks devices on <b>axes QV, CLOPS and EPLG never touch</b> — which chip does causal-order physics <b>better</b>.</p>
+    <p class="sub">Graded on the causal-order axes, the three dies rank <strong>kingston ≥ marrakesh ≥ fez</strong> — kingston leads on every
+    causal number and the Zeno hold; fez, the newest die, certifies every axis but sits <strong>last</strong>. This is a benchmark
+    that ranks devices on <strong>axes QV, CLOPS and EPLG never touch</strong> — which chip does causal-order physics <strong>better</strong>.</p>
     <div class="lb" id="leaderboard"></div>
   </section>
 
@@ -185,36 +185,36 @@
     <div class="receipts">
       <div class="rc">
         <h3>1 · The same frozen bounds</h3>
-        <p>Every axis on the foreign chip was graded against the <b>identical pre-registered bounds</b> — no retuning,
+        <p>Every axis on the foreign chip was graded against the <strong>identical pre-registered bounds</strong> — no retuning,
         no per-device thresholds. <span class="yes">The grader didn't move for kingston.</span></p>
       </div>
       <div class="rc">
         <h3>2 · Site-selection re-derived live</h3>
-        <p>The frozen qubit-selection rules were <b>re-run live on kingston's unfamiliar map</b> — deterministic,
+        <p>The frozen qubit-selection rules were <strong>re-run live on kingston's unfamiliar map</strong> — deterministic,
         untouched, the same machinery that adapted to the home chip's drift. <span class="yes">No hand-picking.</span></p>
       </div>
       <div class="rc">
         <h3>3 · A generation, not a die</h3>
-        <p>All three axes certify on both chips, so the causal-order phenomena are properties of the <b>Heron
-        generation</b> — not one lucky piece of silicon. The physics is portable.</p>
+        <p>All three axes certify on both chips, so the causal-order phenomena are properties of the <strong>Heron
+        generation</strong> — not one lucky piece of silicon. The physics is portable.</p>
       </div>
     </div>
     <div class="links-row">
       <a class="deeper" href="../switch/">The Causal Switch (CAUSAL axis)</a>
       <a class="deeper" href="../zeno-tractor/">The Zeno Tractor Beam (HOLD axis)</a>
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet</a>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Full Spec Sheet</a>
     </div>
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F112</span> · job <span class="sig">d9amd73v6alc73cs0lp0</span></span>
     <span>ibm_marrakesh + ibm_kingston + ibm_fez · full 3-axis bench · same frozen bounds</span>
     <span class="sp2"></span>
     <a href="./spec.html">Full Spec</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -224,7 +224,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
     var css = getComputedStyle(document.documentElement);
@@ -298,9 +298,9 @@
             '</div>'+
             gauge(ax)+
             '<div class="ax-nums">'+
-              '<span class="dv '+(mAct?"act":"")+'">marrakesh <b>'+mNum+'</b></span>'+
-              '<span class="dv '+(kAct?"act":"")+'">kingston <b>'+kv.toFixed(4)+'</b>'+(kAct?edgeMark:'')+'</span>'+
-              '<span class="dv '+(dev==="fez"?"act":"")+'">fez <b>'+(ax.vals.fez==null?"symmetric ✓":ax.vals.fez.toFixed(4))+'</b></span>'+
+              '<span class="dv '+(mAct?"act":"")+'">marrakesh <strong>'+mNum+'</strong></span>'+
+              '<span class="dv '+(kAct?"act":"")+'">kingston <strong>'+kv.toFixed(4)+'</strong>'+(kAct?edgeMark:'')+'</span>'+
+              '<span class="dv '+(dev==="fez"?"act":"")+'">fez <strong>'+(ax.vals.fez==null?"symmetric ✓":ax.vals.fez.toFixed(4))+'</strong></span>'+
               '<span class="comp">'+ax.comp[dev]+'</span>'+
             '</div>'+
             '<div class="ax-link">axis → '+(ax.exUrl?'<a href="'+ax.exUrl+'">'+ax.exLab+'</a>':ax.exLab)+'</div>'+
@@ -309,11 +309,11 @@
       axesEl.innerHTML=html;
       var dev=state.dev;
       if(dev==="kingston"){
-        verdictBig.innerHTML='<b>The foreign chip.</b> The full three-axis bench, flown on a chip it had <b>never seen</b> — one job, 77 pubs, 208,000 shots — certifies <span class="ok">all three axes</span> against the same frozen bounds, no retuning. Causal-order physics travels.';
+        verdictBig.innerHTML='<strong>The foreign chip.</strong> The full three-axis bench, flown on a chip it had <strong>never seen</strong> — one job, 77 pubs, 208,000 shots — certifies <span class="ok">all three axes</span> against the same frozen bounds, no retuning. Causal-order physics travels.';
       } else if(dev==="fez"){
-        verdictBig.innerHTML='<b>The second foreign chip — F112 extended to a 3rd die.</b> ibm_fez, also never seen, certifies all three axes against the same frozen bounds — but <b>not a clean 3/3</b>: its SCHEDULE data tripped the split-half floor-transfer guard (noisier than the other two), and it ranks <span class="ok">last</span> on the causal and Zeno-hold numbers. Device-independence holds across three dies; the bench ranks fez weakest.';
+        verdictBig.innerHTML='<strong>The second foreign chip — F112 extended to a 3rd die.</strong> ibm_fez, also never seen, certifies all three axes against the same frozen bounds — but <strong>not a clean 3/3</strong>: its SCHEDULE data tripped the split-half floor-transfer guard (noisier than the other two), and it ranks <span class="ok">last</span> on the causal and Zeno-hold numbers. Device-independence holds across three dies; the bench ranks fez weakest.';
       } else {
-        verdictBig.innerHTML='<b>The home chip.</b> Where the bench was built and first certified all three axes. Flip to <b>kingston</b> or <b>fez</b> to watch the same bench certify on chips it had never seen.';
+        verdictBig.innerHTML='<strong>The home chip.</strong> Where the bench was built and first certified all three axes. Flip to <strong>kingston</strong> or <strong>fez</strong> to watch the same bench certify on chips it had never seen.';
       }
       document.querySelectorAll(".dbtn").forEach(function(b){ var on=b.dataset.dev===dev; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
     }

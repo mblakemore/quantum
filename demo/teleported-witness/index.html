@@ -82,8 +82,8 @@
   .gfill.dead { background:linear-gradient(90deg,color-mix(in srgb,var(--bad) 45%,transparent),var(--bad)); }
   @media (prefers-reduced-motion: reduce){ .gfill { transition:none; } }
   .winbar { position:absolute; top:-4px; bottom:-4px; border-left:2px dashed var(--ink-2); }
-  .winbar-lab { position:absolute; top:-17px; transform:translateX(-50%); font-family:var(--mono); font-size:9.5px; color:var(--ink-2); white-space:nowrap; }
-  .gticks { display:flex; justify-content:space-between; font-family:var(--mono); font-size:9.5px; color:var(--ink-3); margin-top:3px; }
+  .winbar-lab { position:absolute; top:-17px; transform:translateX(-50%); font-family:var(--mono); font-size:0.7rem; color:var(--ink-2); white-space:nowrap; }
+  .gticks { display:flex; justify-content:space-between; font-family:var(--mono); font-size:0.7rem; color:var(--ink-3); margin-top:3px; }
 
   .readout { margin-top:18px; display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; justify-content:center; }
   .readout .dnum { font-family:var(--mono); font-weight:720; font-size:clamp(30px,7vw,42px); letter-spacing:-.02em; line-height:1; }
@@ -98,7 +98,7 @@
 
   /* scoreboard B */
   .board-bar { fill: color-mix(in srgb, var(--ink-3) 14%, transparent); }
-  .ptlab { font-family:var(--mono); font-size:9.5px; }
+  .ptlab { font-family:var(--mono); font-size:0.7rem; }
   .siglab { font-family:var(--mono); font-size:10px; font-weight:600; }
 
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
@@ -120,41 +120,41 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing I · The Causal Switch</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
     <p class="eyebrow">Teleporting a physical resource · the causal switch</p>
     <h1>Beaming <span class="hl">indefinite order</span> across the chip.</h1>
-    <p class="lede">A quantum switch holds two operations in <b>both orders at once</b> — a real physical resource,
-    carried by a single control qubit. Here we <b>teleport that qubit</b> one hop before reading its witness, and ask:
-    does the indefiniteness arrive intact? Over a genuine <b>entangled</b> channel it does — 97% of the un-teleported
-    value. Over a <b>classical</b> channel, the exact same protocol, it dies. Every number is measured hardware.</p>
+    <p class="lede">A quantum switch holds two operations in <strong>both orders at once</strong> — a real physical resource,
+    carried by a single control qubit. Here we <strong>teleport that qubit</strong> one hop before reading its witness, and ask:
+    does the indefiniteness arrive intact? Over a genuine <strong>entangled</strong> channel it does — 97% of the un-teleported
+    value. Over a <strong>classical</strong> channel, the exact same protocol, it dies. Every number is measured hardware.</p>
 
     <div class="primer">
       <div class="pcard">
         <h2>What's a causal witness?</h2>
-        <p>One measurable number, <b>DISC</b>. It reads <b>0</b> for any ordinary sequence of events — even a random
-        coin-flip between "A first" and "B first" — and climbs toward <b>2</b> the more the order is genuinely
-        <b>indefinite</b>. Nonzero DISC is something no definite order can fake.</p>
+        <p>One measurable number, <strong>DISC</strong>. It reads <strong>0</strong> for any ordinary sequence of events — even a random
+        coin-flip between "A first" and "B first" — and climbs toward <strong>2</strong> the more the order is genuinely
+        <strong>indefinite</strong>. Nonzero DISC is something no definite order can fake.</p>
       </div>
       <div class="pcard">
         <h2>What's teleportation here?</h2>
-        <p>Standard quantum teleportation — a shared <b>entangled pair</b> plus two classical bits move a qubit's
-        state from A to B with <b>no wire</b> carrying the qubit. No faster-than-light anything. The novelty is
-        <b>what</b> we send: the carrier of indefinite causal order itself.</p>
+        <p>Standard quantum teleportation — a shared <strong>entangled pair</strong> plus two classical bits move a qubit's
+        state from A to B with <strong>no wire</strong> carrying the qubit. No faster-than-light anything. The novelty is
+        <strong>what</strong> we send: the carrier of indefinite causal order itself.</p>
       </div>
     </div>
 
     <div class="herobtns">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
-      <span class="scope">A laboratory <b>causal witness</b> — not a claim about the order of events in spacetime. Same witness as F75 / F82.</span>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
+      <span class="scope">A laboratory <strong>causal witness</strong> — not a claim about the order of events in spacetime. Same witness as F75 / F82.</span>
     </div>
   </header>
 
@@ -163,15 +163,15 @@
     <p class="panel-label">Exhibit A — Teleport the witness</p>
     <h2>Send the control qubit across a channel, then read the order</h2>
     <p class="sub">The control qubit carries the indefinite order from node A to node B. Choose the channel it rides on.
-    A genuine <b>entangled</b> bond carries the indefiniteness intact; a <b>dephased</b> bond — the same teleport, just
+    A genuine <strong>entangled</strong> bond carries the indefiniteness intact; a <strong>dephased</strong> bond — the same teleport, just
     a decohered resource — delivers a dead, definite qubit.</p>
 
     <div class="selector" role="group" aria-label="Teleport channel">
       <span class="lbl">channel:</span>
-      <button class="cbtn" data-i="0" type="button">Direct <small>(no teleport)</small></button>
-      <button class="cbtn" data-i="1" type="button">Teleport · quantum</button>
-      <button class="cbtn" data-i="2" type="button">Teleport · quantum <small>+ feedforward</small></button>
-      <button class="cbtn" data-i="3" type="button">Teleport · classical</button>
+      <button class="cbtn" data-i="0" type="button" aria-pressed="true">Direct <small>(no teleport)</small></button>
+      <button class="cbtn" data-i="1" type="button" aria-pressed="false">Teleport · quantum</button>
+      <button class="cbtn" data-i="2" type="button" aria-pressed="false">Teleport · quantum <small>+ feedforward</small></button>
+      <button class="cbtn" data-i="3" type="button" aria-pressed="false">Teleport · classical</button>
     </div>
 
     <div class="teleport">
@@ -193,19 +193,19 @@
     </div>
 
     <div class="gauge-cap"><span>causal witness DISC</span><span id="channelName"></span></div>
-    <div class="gtrack">
+    <div class="gtrack" role="meter" aria-valuemin="0" aria-valuemax="200" aria-valuenow="0" aria-label="Causal witness DISC value">
       <div class="gfill alive" id="gfill" style="width:0%"></div>
       <div class="winbar" id="winbar"></div><div class="winbar-lab" id="winbarLab">WIN bar 1.0</div>
     </div>
     <div class="gticks"><span>0 · classical / definite</span><span>noiseless max 2.0</span></div>
 
     <div class="readout">
-      <span class="dnum alive" id="dnum">1.881</span>
+      <span class="dnum alive" id="dnum" aria-live="polite">1.881</span>
       <span class="dcap">DISC</span>
-      <span class="pct" id="pct">100% of direct</span>
-      <span class="surv alive" id="surv">anchor</span>
+      <span class="pct" id="pct" aria-live="polite">100% of direct</span>
+      <span class="surv alive" id="surv" aria-live="polite">anchor</span>
     </div>
-    <p class="verdict" id="verdict"></p>
+    <p class="verdict" id="verdict" aria-live="polite"></p>
   </section>
 
   <!-- PANEL B -->
@@ -213,8 +213,8 @@
     <p class="panel-label">Exhibit B — The channel scoreboard</p>
     <h2>Survives quantum, dies classical — one job, one window</h2>
     <p class="sub">The three quantum channels sit high above the WIN bar; the classical channel — the identical
-    teleport over a dephased resource — collapses to zero. The <b>separation</b> between them (33σ) is what proves the
-    indefiniteness travels on the <b>entanglement</b>, not on merely surviving noise.</p>
+    teleport over a dephased resource — collapses to zero. The <strong>separation</strong> between them (33σ) is what proves the
+    indefiniteness travels on the <strong>entanglement</strong>, not on merely surviving noise.</p>
     <div style="max-width:560px;margin:0 auto;">
       <svg viewBox="0 0 450 250" role="img" aria-label="Witness DISC for all four channels against the WIN bar and the noiseless maximum">
         <line class="axis" x1="150" y1="20" x2="150" y2="210" stroke="var(--edge-2)"/>
@@ -236,37 +236,37 @@
     <div class="receipts">
       <div class="rc">
         <h3>1 · The classical null was run</h3>
-        <p>The dead <span class="cl">0.0175</span> isn't a theory line — it's the <b>identical teleport</b> over a
-        dephased resource, measured in the <b>same job and window</b>. That executed null is what turns "survived
+        <p>The dead <span class="cl">0.0175</span> isn't a theory line — it's the <strong>identical teleport</strong> over a
+        dephased resource, measured in the <strong>same job and window</strong>. That executed null is what turns "survived
         noise" into <span class="yes">"carried by entanglement."</span></p>
       </div>
       <div class="rc">
         <h3>2 · Four predictions, four hits</h3>
         <p>All four pre-filed predictions landed — including the subtle one: active feedforward costs a little
-        (<b>1.766 &lt; 1.825</b>), appearing in a <b>4th</b> observable family. The noise model had guessed the
-        <b>opposite</b>; the chip corrected it.</p>
+        (<strong>1.766 &lt; 1.825</strong>), appearing in a <strong>4th</strong> observable family. The noise model had guessed the
+        <strong>opposite</strong>; the chip corrected it.</p>
       </div>
       <div class="rc">
         <h3>3 · The grader proved itself first</h3>
-        <p>This was the <b>first flight under the R5 rule</b>: the grading code had to pass a synthetic self-test
-        <b>before</b> it was allowed to touch the hardware counts. <span class="yes">No moving the goalposts</span>
+        <p>This was the <strong>first flight under the R5 rule</strong>: the grading code had to pass a synthetic self-test
+        <strong>before</strong> it was allowed to touch the hardware counts. <span class="yes">No moving the goalposts</span>
         after the data landed.</p>
       </div>
     </div>
     <div class="speclink-row">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet — data, gates &amp; the executed classical null</a>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Full Spec Sheet — data, gates &amp; the executed classical null</a>
     </div>
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F92</span> · job <span class="sig">d9a36352su3c739l3kf0</span></span>
     <span>ibm_marrakesh · survives quantum 90σ · dies classical (33σ separation)</span>
     <span class="sp2"></span>
     <a href="./spec.html">Full Spec</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -276,7 +276,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
     var css = getComputedStyle(document.documentElement);
@@ -287,16 +287,16 @@
     var CHAN = [
       { key:"direct", label:"Direct — no teleport", disc:1.8805, sigma:116, alive:true, link:"none",
         linkLab:"read in place", linkLab2:"no teleportation",
-        note:"<b>The baseline.</b> The witness read right where the control sits — no teleportation. DISC 1.881, deep in indefinite territory. Every teleported channel is measured against this anchor." },
+        note:"<strong>The baseline.</strong> The witness read right where the control sits — no teleportation. DISC 1.881, deep in indefinite territory. Every teleported channel is measured against this anchor." },
       { key:"quantum", label:"Teleport · quantum channel", disc:1.8250, sigma:90, alive:true, link:"quantum",
         linkLab:"entangled Bell resource", linkLab2:"quantum channel — intact",
-        note:"<b>Teleported over a real entangled channel.</b> The control qubit crossed the chip and arrived <span class='q'>still indefinite</span> — DISC 1.825, <b>97% of the anchor</b>, 90σ over the WIN bar. Indefinite causal order is a transmissible resource." },
+        note:"<strong>Teleported over a real entangled channel.</strong> The control qubit crossed the chip and arrived <span class='q'>still indefinite</span> — DISC 1.825, <strong>97% of the anchor</strong>, 90σ over the WIN bar. Indefinite causal order is a transmissible resource." },
       { key:"feedforward", label:"Teleport · quantum + feedforward", disc:1.7660, sigma:73, alive:true, link:"quantum",
         linkLab:"entangled + active correction", linkLab2:"quantum channel — if-test",
-        note:"<b>Same quantum channel, with active feedforward correction.</b> Still survives (1.766, 74σ) — but a touch <b>lower</b> than the frame-tracked version: the feedforward cost, in a 4th observable family. The model previewed the opposite ordering; the hardware corrected it." },
+        note:"<strong>Same quantum channel, with active feedforward correction.</strong> Still survives (1.766, 74σ) — but a touch <strong>lower</strong> than the frame-tracked version: the feedforward cost, in a 4th observable family. The model previewed the opposite ordering; the hardware corrected it." },
       { key:"classical", label:"Teleport · classical channel", disc:0.0175, sigma:null, alive:false, link:"classical",
         linkLab:"dephased resource", linkLab2:"classical channel — broken",
-        note:"<b>The identical teleport, over a dephased (classical) resource.</b> The witness reads <span class='cl'>~0 — dead.</span> The protocol ran; the resource simply wasn't quantum. This executed null is the point: the indefiniteness rides on the <b>entanglement</b>, not on surviving noise." }
+        note:"<strong>The identical teleport, over a dephased (classical) resource.</strong> The witness reads <span class='cl'>~0 — dead.</span> The protocol ran; the resource simply wasn't quantum. This executed null is the point: the indefiniteness rides on the <strong>entanglement</strong>, not on surviving noise." }
     ];
     console.assert(CHAN[1].disc>BAR && CHAN[3].disc<0.15, "quantum survives, classical dead");
     console.assert(Math.abs(CHAN[1].disc/ANCHOR-0.9705)<0.002, "survival ratio 97%");
@@ -314,7 +314,9 @@
 
     function render(i){
       var c=CHAN[i];
-      gfill.style.width=(Math.max(0,c.disc)/MAX*100)+"%";
+      var discPct = Math.round(Math.max(0,c.disc)/MAX*100);
+      gfill.style.width=discPct+"%";
+      gfill.parentElement.setAttribute("aria-valuenow", Math.round(c.disc * 100));
       gfill.className="gfill "+(c.alive?"alive":"dead");
       dnum.textContent=c.disc.toFixed(3); dnum.className="dnum "+(c.alive?"alive":"dead");
       pct.textContent=(c.disc/ANCHOR*100).toFixed(1)+"% of direct";

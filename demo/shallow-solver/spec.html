@@ -74,124 +74,125 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· Shallow-Circuit Solver exhibit</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet</p>
     <h1>A circuit too <span class="hl">shallow</span> for any classical machine to match</h1>
     <div class="idline">
-      <span><b>Finding</b> F113</span>
-      <span><b>Experiment</b> Exp127hw (BGK 2D-HLF, n=4)</span>
-      <span><b>Backend</b> ibm_marrakesh (Heron r2)</span>
-      <span><b>Job</b> d9amnlvu62qs738o8nt0</span>
+      <span><strong>Finding</strong> F113</span>
+      <span><strong>Experiment</strong> Exp127hw (BGK 2D-HLF, n=4)</span>
+      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+      <span><strong>Job</strong> d9amnlvu62qs738o8nt0</span>
     </div>
-    <span class="verdict-chip">✓ CONSTANT-DEPTH SOLVER — P(valid) 0.9017, 437.8σ, full coset covered</span>
+    <span class="verdict-chip"><span aria-hidden="true">✓</span> CONSTANT-DEPTH SOLVER — P(valid) 0.9017, 437.8σ, full coset covered</span>
   </header>
   <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
 
   <div class="fence">
     <p class="fl">Scope — read this first</p>
-    <p>This does <b>not</b> prove the complexity separation (QNC⁰ ≠ NC⁰) <b>on the chip</b>. That separation is
-    <b>asymptotic</b> — it lives in the limit of large <code>n</code>, and the <b>theorem</b> carries the asymptotics.
-    What the hardware certifies is a concrete instance: a <b>constant-depth</b> quantum circuit that solves the
-    <code>n=4</code> problem at <b>90% fidelity</b>, covering the <b>whole</b> solution set, in <b>O(1) logical
-    depth</b>. It is the complement to F54's deep-circuit wall — the campaign's one computational-genre result,
+    <p>This does <strong>not</strong> prove the complexity separation (QNC⁰ ≠ NC⁰) <strong>on the chip</strong>. That separation is
+    <strong>asymptotic</strong> — it lives in the limit of large <code>n</code>, and the <strong>theorem</strong> carries the asymptotics.
+    What the hardware certifies is a concrete instance: a <strong>constant-depth</strong> quantum circuit that solves the
+    <code>n=4</code> problem at <strong>90% fidelity</strong>, covering the <strong>whole</strong> solution set, in <strong>O(1) logical
+    depth</strong>. It is the complement to F54's deep-circuit wall — the campaign's one computational-genre result,
     scoped exactly.</p>
   </div>
 
   <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p><b>Depth</b> is how many layers of gates a circuit has, one after another. A <b>constant-depth</b> (shallow)
-  circuit has a <b>fixed</b> number of layers no matter how big the problem grows — every gate fires in a few parallel
-  rounds. Bravyi, Gosset &amp; König (2018) proved something remarkable: there is a problem a <b>quantum</b>
-  constant-depth circuit can solve that <b>no classical</b> constant-depth circuit can — and the proof needs
-  <b>no unproven assumptions</b> (unlike "P ≠ NP"). It is one of the few <b>unconditional</b> quantum advantages known.</p>
-  <p>The problem is the <b>2D Hidden Linear Function</b>: given a quadratic puzzle laid out on a grid, find a hidden
-  linear rule. It has <b>many equally-valid answers</b> — a whole <b>solution set (a coset)</b> — and a good solver
-  must be able to produce <b>any</b> of them.</p>
+  <p><strong>Depth</strong> is how many layers of gates a circuit has, one after another. A <strong>constant-depth</strong> (shallow)
+  circuit has a <strong>fixed</strong> number of layers no matter how big the problem grows — every gate fires in a few parallel
+  rounds. Bravyi, Gosset &amp; König (2018) proved something remarkable: there is a problem a <strong>quantum</strong>
+  constant-depth circuit can solve that <strong>no classical</strong> constant-depth circuit can — and the proof needs
+  <strong>no unproven assumptions</strong> (unlike "P ≠ NP"). It is one of the few <strong>unconditional</strong> quantum advantages known.</p>
+  <p>The problem is the <strong>2D Hidden Linear Function</strong>: given a quadratic puzzle laid out on a grid, find a hidden
+  linear rule. It has <strong>many equally-valid answers</strong> — a whole <strong>solution set (a coset)</strong> — and a good solver
+  must be able to produce <strong>any</strong> of them.</p>
 
   <h2><span class="n">2</span>The un-fakeable test — coverage</h2>
   <div class="callout">
     <p class="clabel">Why "how often is it valid" is not enough</p>
-    <p class="tight">A cheap classical mimic could just <b>memorize one</b> valid answer and output it every time —
+    <p class="tight">A cheap classical mimic could just <strong>memorize one</strong> valid answer and output it every time —
     scoring 100% on "is the answer valid?" while doing none of the actual computation. So the real gate is
-    <b>coverage</b>: the solver must spread its answers across the <b>entire</b> solution set. A one-answer mimic has
-    <b>zero</b> probability on the other valid answers and <b>fails</b>. Only a genuine solver covers the coset.</p>
+    <strong>coverage</strong>: the solver must spread its answers across the <strong>entire</strong> solution set. A one-answer mimic has
+    <strong>zero</strong> probability on the other valid answers and <strong>fails</strong>. Only a genuine solver covers the coset.</p>
   </div>
 
   <h2><span class="n">3</span>The measured result</h2>
-  <p>At <code>n=4</code> the coset has <b>four</b> valid answers out of 16 possible outputs (uniform-random floor =
-  4/16 = <b>0.25</b>). The quantum solver:</p>
+  <p>At <code>n=4</code> the coset has <strong>four</strong> valid answers out of 16 possible outputs (uniform-random floor =
+  4/16 = <strong>0.25</strong>). The quantum solver:</p>
   <div class="tbl-wrap">
   <table>
-    <thead><tr><th>quantity</th><th>value</th><th>note</th></tr></thead>
+<caption>BGK 2D-HLF solver results: validity rate and coset coverage at n=4</caption>
+    <thead><tr><th scope="col">quantity</th><th scope="col">value</th><th scope="col">note</th></tr></thead>
     <tbody>
-      <tr><td>P(valid answer)</td><td class="gd"><b>0.9017 ± 0.0015</b></td><td>437.8σ over the 0.25 floor</td></tr>
+      <tr><td>P(valid answer)</td><td class="gd"><strong>0.9017 ± 0.0015</strong></td><td>437.8σ over the 0.25 floor</td></tr>
       <tr><td>valid z = 0001</td><td>0.2237</td><td rowspan="4" style="vertical-align:middle">the four cover the<br>coset near-uniformly</td></tr>
       <tr><td>valid z = 1000</td><td>0.2229</td></tr>
       <tr><td>valid z = 0110</td><td>0.2308</td></tr>
       <tr><td>valid z = 1111</td><td>0.2243</td></tr>
-      <tr><td>min valid (coverage)</td><td class="gd"><b>0.2229</b></td><td>the un-fakeable W3 gate</td></tr>
+      <tr><td>min valid (coverage)</td><td class="gd"><strong>0.2229</strong></td><td>the un-fakeable W3 gate</td></tr>
       <tr><td>hardware depth</td><td>23</td><td>10 routed CZ · O(1) logical depth</td></tr>
     </tbody>
   </table>
   </div>
-  <p>Pre-filed success band <code>[0.82, 0.93]</code> — <b>hit at the top</b>. Sentinels 0.985 / 0.957.</p>
+  <p>Pre-filed success band <code>[0.82, 0.93]</code> — <strong>hit at the top</strong>. Sentinels 0.985 / 0.957.</p>
 
   <h2><span class="n">4</span>Pre-registered gates (frozen before flight)</h2>
   <div class="gate">
     <span class="g">W1_SOLVER</span><span class="r">P(valid) &gt; the uniform floor 0.25 by ≫5·SE. <span class="pass">PASS</span> (0.9017, 437.8σ).</span>
     <span class="g">W2_MAJORITY</span><span class="r">A majority of shots land on a valid answer. <span class="pass">PASS</span> (90%).</span>
-    <span class="g">W3_COVERAGE</span><span class="r"><b>the un-fakeable one:</b> every valid answer gets real weight (a one-answer mimic fails). <span class="pass">PASS</span> (min 0.2229).</span>
+    <span class="g">W3_COVERAGE</span><span class="r"><strong>the un-fakeable one:</strong> every valid answer gets real weight (a one-answer mimic fails). <span class="pass">PASS</span> (min 0.2229).</span>
     <span class="g">G_SENT</span><span class="r">Readout sentinels healthy. <span class="pass">PASS</span> (0.985 / 0.957).</span>
   </div>
 
   <h2><span class="n">5</span>The through-line — hardness is contextuality-flavored (theory-associated)</h2>
   <div class="callout good">
     <p class="clabel">Contextuality → computational separation (in theory)</p>
-    <p class="tight">Why <b>can't</b> a classical shallow circuit keep up <b>as the problem grows</b>? The hardness is
-    <b>contextuality-flavored</b> — the grid's Peres–Mermin parity structure, the same resource family the museum
-    certifies at 196σ (<b>F106</b>). One caution about that link: the magic-square gadget lives in the <b>BGKT-2020</b>
-    noise-robust construction, a <i>different</i> circuit family; <b>the circuit we flew is the plain BGK-2018 solver</b>,
-    and F106 certified the game in a <b>separate experiment</b>. So the no-go (contextuality) and the computational
-    advantage are the <b>same resource in theory</b> — an association argued, <b>not a composition demonstrated on one
-    chip</b>. Not "closed end to end": linked by the theorem, not by a measured on-silicon chain.</p>
+    <p class="tight">Why <strong>can't</strong> a classical shallow circuit keep up <strong>as the problem grows</strong>? The hardness is
+    <strong>contextuality-flavored</strong> — the grid's Peres–Mermin parity structure, the same resource family the museum
+    certifies at 196σ (<strong>F106</strong>). One caution about that link: the magic-square gadget lives in the <strong>BGKT-2020</strong>
+    noise-robust construction, a <i>different</i> circuit family; <strong>the circuit we flew is the plain BGK-2018 solver</strong>,
+    and F106 certified the game in a <strong>separate experiment</strong>. So the no-go (contextuality) and the computational
+    advantage are the <strong>same resource in theory</strong> — an association argued, <strong>not a composition demonstrated on one
+    chip</strong>. Not "closed end to end": linked by the theorem, not by a measured on-silicon chain.</p>
   </div>
 
   <h2><span class="n">6</span>Scope &amp; caveats</h2>
   <ul>
-    <li><b>Asymptotic separation, not on-chip.</b> (See the fence above.) The n=4 result is a <b>fidelity</b>
+    <li><strong>Asymptotic separation, not on-chip.</strong> (See the fence above.) The n=4 result is a <strong>fidelity</strong>
     demonstration of the solver; the classical impossibility is a theorem about the large-n limit.</li>
-    <li><b>A fidelity number, not a beaten bound.</b> At n=4 there is no finite classical bound being crossed — 0.9017
+    <li><strong>A fidelity number, not a beaten bound.</strong> At n=4 there is no finite classical bound being crossed — 0.9017
     measures how well the constant-depth circuit runs, and coverage proves it isn't a one-answer trick.</li>
-    <li><b>Textbook priors credited.</b> Bravyi–Gosset–König (2018) for the separation; BGKT (2020) for the
+    <li><strong>Textbook priors credited.</strong> Bravyi–Gosset–König (2018) for the separation; BGKT (2020) for the
     noise-robust / contextuality construction. The contribution is the frozen, coverage-gated hardware run.</li>
   </ul>
 
   <h2><span class="n">7</span>Provenance</h2>
   <ul>
-    <li><b>Grade file:</b> <code>results/exp127hw_hw_results.json</code> · <b>Job:</b> d9amnlvu62qs738o8nt0</li>
-    <li><b>Groundwork:</b> <code>experiments/exp127-bgk-shallow-advantage-groundwork-whisper-c4666.md</code> · sim finding <code>…-sim-finding-whisper-c4673.md</code></li>
-    <li><b>Backend:</b> ibm_marrakesh (Heron r2) · <b>Depth:</b> 23 hardware / O(1) logical · <b>10 routed CZ</b></li>
-    <li><b>Through-line:</b> F106 (magic-square contextuality, 196σ) — the inherited hardness · complement to F54 (deep-circuit wall)</li>
+    <li><strong>Grade file:</strong> <code>results/exp127hw_hw_results.json</code> · <strong>Job:</strong> d9amnlvu62qs738o8nt0</li>
+    <li><strong>Groundwork:</strong> <code>experiments/exp127-bgk-shallow-advantage-groundwork-whisper-c4666.md</code> · sim finding <code>…-sim-finding-whisper-c4673.md</code></li>
+    <li><strong>Backend:</strong> ibm_marrakesh (Heron r2) · <strong>Depth:</strong> 23 hardware / O(1) logical · <strong>10 routed CZ</strong></li>
+    <li><strong>Through-line:</strong> F106 (magic-square contextuality, 196σ) — the inherited hardness · complement to F54 (deep-circuit wall)</li>
   </ul>
 
-  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
 
   </main>
-  <div class="foot" role="contentinfo">
+  <footer class="foot">
     <span>MEASURED · <b style="color:var(--cyan)">F113</b> · job d9amnlvu62qs738o8nt0 · ibm_marrakesh</span>
     <span class="sp"></span>
     <a href="./spec.md">Markdown</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 <script>
@@ -200,7 +201,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
   })();

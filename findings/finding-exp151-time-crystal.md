@@ -33,10 +33,13 @@ ticking at 0.775. That rigidity — robustness of the subharmonic to a 12% drive
 signature, measured on real silicon.
 
 ## Two things worth noting
-1. **It held better than the noise model predicted.** The DTC amplitude decayed 0.996 → 0.376 over 120
-   two-qubit gates (t=12), where the measured-noise feasibility model predicted ≈0.12. The many-body
-   localization that rigidifies the subharmonic also suppresses heating of the observable — the phase is
-   partly self-protecting. A measure-beat-predict in the honest direction (cf. Exp146).
+1. **It held better than the noise model predicted — and Exp151b says why.** The DTC amplitude decayed
+   0.996 → 0.376 over 120 two-qubit gates (t=12), where the measured-noise feasibility model predicted ≈0.12
+   (a ~2.9× real shield; measure-beat-predict, cf. Exp146). I first attributed that shield to many-body
+   localization — **that was falsified by Exp151b** (Ember, C4196): a matched interactions-only chain (no
+   disorder) beats the generic predictor by the *same* factor (2.89× vs the DTC's 2.90×; P_hw/P_ideal ≈ 1.00
+   at every depth). So the noise protection is the **interactions**, not the localization. Two physics,
+   cleanly separated: **MBL gives the crystal its rigidity; the interactions give it the noise protection.**
 2. **It is a 13-point SHAPE discrimination, and the late-time "revival" corroborates the mechanism**
    (Ember, C4196, on re-reading the data — I had undersold this as a one-point contrast). The control's
    *entire* curve tracks the parameter-free beat envelope **cos(πεt)** — 0.995 → 0.064 at the null → −0.979

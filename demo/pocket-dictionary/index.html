@@ -102,41 +102,41 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
     <p class="eyebrow">The 2→1 quantum random access code</p>
     <h1>Two bits in one qubit — <span class="hl">look up either</span>.</h1>
     <p class="lede">Alice has two bits and one carrier to send them in. Bob, at the far end, gets to ask for
-    <b>either</b> bit — his choice — and may look <b>once</b>. With a classical bit he's stuck at 75%. Pack the two
-    bits into a single <b>qubit's angle</b> and he can read <b>whichever</b> bit he wants about 85% of the time. A
+    <strong>either</strong> bit — his choice — and may look <strong>once</strong>. With a classical bit he's stuck at 75%. Pack the two
+    bits into a single <strong>qubit's angle</strong> and he can read <strong>whichever</strong> bit he wants about 85% of the time. A
     pocket dictionary that holds two entries in the space of one. Every number is measured hardware.</p>
 
     <div class="primer">
       <div class="pcard">
         <h2>What's a QRAC?</h2>
-        <p>A <b>quantum random access code</b>: encode <b>n</b> bits into fewer qubits so that <b>any one</b> of them
-        can be recovered on demand. Here it's <b>2 bits → 1 qubit</b>, either bit retrievable. Success = how often
+        <p>A <strong>quantum random access code</strong>: encode <strong>n</strong> bits into fewer qubits so that <strong>any one</strong> of them
+        can be recovered on demand. Here it's <strong>2 bits → 1 qubit</strong>, either bit retrievable. Success = how often
         Bob's guess is right.</p>
       </div>
       <div class="pcard">
         <h2>Why can't a classical bit do it?</h2>
         <p>One classical bit holds one bit. Your best move is to store one faithfully and guess the other — averaged
-        over Bob's random choice, that's <b>75%</b>. Enumerate all 256 strategies and the ceiling is <b>exactly
-        0.75</b>. The qubit beats it.</p>
+        over Bob's random choice, that's <strong>75%</strong>. Enumerate all 256 strategies and the ceiling is <strong>exactly
+        0.75</strong>. The qubit beats it.</p>
       </div>
     </div>
 
     <div class="herobtns">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
-      <span class="scope">A <b>coding advantage</b> (~85%, either bit) — not perfect storage, not a computational speedup. Zero two-qubit gates.</span>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
+      <span class="scope">A <strong>coding advantage</strong> (~85%, either bit) — not perfect storage, not a computational speedup. Zero two-qubit gates.</span>
     </div>
   </header>
 
@@ -144,9 +144,9 @@
   <section class="panel">
     <p class="panel-label">Exhibit A — You're Bob</p>
     <h2>Pick Alice's message, then pick which bit to read</h2>
-    <p class="sub">Alice's two bits set the qubit to one of four angles. You choose which bit to recover — <b>after</b>
+    <p class="sub">Alice's two bits set the qubit to one of four angles. You choose which bit to recover — <strong>after</strong>
     the qubit arrives — and measure along that bit's axis. Watch the retrieval land above the classical 75% wall, for
-    <b>either</b> bit and <b>any</b> message. Then try a plain classical bit and see it stall at the wall.</p>
+    <strong>either</strong> bit and <strong>any</strong> message. Then try a plain classical bit and see it stall at the wall.</p>
 
     <div class="ctrls">
       <div class="ctrl-grp" role="group" aria-label="Alice's message">
@@ -185,9 +185,9 @@
           <text class="gmark-lab" id="lawLab" y="62" text-anchor="middle" fill="var(--good)">quantum law 0.854</text>
         </svg>
         <div class="readout">
-          <span class="rnum q" id="rnum">0.843</span>
-          <span class="rcap" id="rcap">P(Bob reads the bit correctly)</span>
-          <p class="verdict" id="verdict"></p>
+          <span class="rnum q" id="rnum" aria-live="polite">0.843</span>
+          <span class="rcap" id="rcap" aria-live="polite">P(Bob reads the bit correctly)</span>
+          <p class="verdict" id="verdict" aria-live="polite"></p>
         </div>
       </div>
     </div>
@@ -197,9 +197,9 @@
   <section class="panel">
     <p class="panel-label">Exhibit B — Inside the band</p>
     <h2>Above the classical wall, below the quantum law</h2>
-    <p class="sub">A correct QRAC must land <b>between</b> two lines: above the classical ceiling 0.75, and at or below
+    <p class="sub">A correct QRAC must land <strong>between</strong> two lines: above the classical ceiling 0.75, and at or below
     the quantum law 0.854 (exceeding it would be an apparatus error, not a better result). The pooled quantum value
-    sits <b>inside the band</b>; the executed classical player sits at its own wall. Only the qubit crosses the line.</p>
+    sits <strong>inside the band</strong>; the executed classical player sits at its own wall. Only the qubit crosses the line.</p>
     <div style="max-width:560px;margin:0 auto;">
       <svg viewBox="0 0 500 180" role="img" aria-label="The pooled quantum value and the classical arm against the classical wall, the quantum law, and the advantage band">
         <rect class="board-band" id="boardBand" y="40" height="30"/>
@@ -223,35 +223,35 @@
     <div class="receipts">
       <div class="rc">
         <h3>1 · The wall is proven</h3>
-        <p>The classical ceiling <b>0.75</b> is <b>enumerated in-code over all 256</b> encode/decode strategies — not
+        <p>The classical ceiling <strong>0.75</strong> is <strong>enumerated in-code over all 256</strong> encode/decode strategies — not
         cited, <span class="yes">provable inside the grader</span>. No classical trick was left on the table.</p>
       </div>
       <div class="rc">
         <h3>2 · Two-sided, not one-sided</h3>
-        <p>The gate <b>G_QBAND</b> flags any reading <b>above</b> the quantum law 0.854 as apparatus error. Landing
-        <b>inside the band</b> (5.2σ below the law) certifies <span class="yes">real physics</span>, not just a big
+        <p>The gate <strong>G_QBAND</strong> flags any reading <strong>above</strong> the quantum law 0.854 as apparatus error. Landing
+        <strong>inside the band</strong> (5.2σ below the law) certifies <span class="yes">real physics</span>, not just a big
         number.</p>
       </div>
       <div class="rc">
         <h3>3 · Both laws, one chip, no 2q gates</h3>
-        <p>The quantum player lands at <b>0.849</b>, the executed classical player at <b>0.748</b> — each obeying its
-        own law, same window. And the whole advantage uses <b>zero two-qubit gates</b> — one qubit's angles.</p>
+        <p>The quantum player lands at <strong>0.849</strong>, the executed classical player at <strong>0.748</strong> — each obeying its
+        own law, same window. And the whole advantage uses <strong>zero two-qubit gates</strong> — one qubit's angles.</p>
       </div>
     </div>
     <div class="speclink-row">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet — data, the two-sided band &amp; the enumerated ceiling</a>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Full Spec Sheet — data, the two-sided band &amp; the enumerated ceiling</a>
     </div>
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F107</span> · job <span class="sig">d9al7om6hjac73fejisg</span></span>
     <span>ibm_marrakesh · 0.84893 · 110.5σ over classical · inside the band · 0 two-qubit gates</span>
     <span class="sp2"></span>
     <a href="./spec.html">Full Spec</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -261,7 +261,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
     var css = getComputedStyle(document.documentElement);
@@ -326,11 +326,13 @@
       gfill.setAttribute("fill", q ? C("--cyan") : C("--amber"));
       rnum.textContent=p.toFixed(3); rnum.className="rnum "+(q?"q":"c");
       caseTag.textContent = q ? ("message "+state.msg+" · bit "+(state.bit==="b1"?"1":"2")) : "classical bit";
+      document.querySelector('svg[aria-label^="Retrieval success"]').setAttribute('aria-label',
+        'Retrieval success gauge: P(Bob reads correctly) = ' + p.toFixed(3) + (q ? ' (qubit, message ' + state.msg + ', bit ' + (state.bit==="b1"?"1":"2") + ')' : ' (classical bit)'));
       if(q){
         var over=((p-WALL)*100).toFixed(1);
-        verdict.innerHTML='<span class="win">✓ retrieved '+Math.round(p*100)+'% of the time</span> — <b>'+over+' points above</b> the classical 75% wall, for '+(state.bit==="b1"?"the first":"the second")+' bit. And it stays under the quantum law 0.854: real, not a glitch.';
+        verdict.innerHTML='<span class="win">✓ retrieved '+Math.round(p*100)+'% of the time</span> — <strong>'+over+' points above</strong> the classical 75% wall, for '+(state.bit==="b1"?"the first":"the second")+' bit. And it stays under the quantum law 0.854: real, not a glitch.';
       } else {
-        verdict.innerHTML='<span class="cl">Stuck at the wall.</span> A classical bit averages <b>0.748</b> however you encode it — store one bit, guess the other. It cannot cross 0.75. Switch back to the qubit.';
+        verdict.innerHTML='<span class="cl">Stuck at the wall.</span> A classical bit averages <strong>0.748</strong> however you encode it — store one bit, guess the other. It cannot cross 0.75. Switch back to the qubit.';
       }
       // buttons
       document.querySelectorAll(".msg").forEach(function(b){ var on=b.dataset.msg===state.msg; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });

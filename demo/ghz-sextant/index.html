@@ -88,12 +88,12 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
@@ -103,10 +103,10 @@
     entangled GHZ state and the fringe oscillates <em>N times faster</em> — super-resolution — carrying up
     to N² the sensitivity of N separate probes. Dial up the probes and watch the fringe sharpen and the
     advantage climb the Heisenberg ladder. Every value is measured on silicon.</p>
-    <span class="scope">GHZ phase super-resolution is textbook (Bollinger 1996). The contribution: the frozen, <b>executed-reference</b> measurement.</span>
+    <span class="scope">GHZ phase super-resolution is textbook (Bollinger 1996). The contribution: the frozen, <strong>executed-reference</strong> measurement.</span>
     <div class="herobtns">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
     </div>
   </header>
 
@@ -141,8 +141,8 @@
       <div><div class="sig" id="sig">66σ over the executed separable reference</div>
         <div class="rlab" id="vlab">GHZ visibility V₅ measured</div></div>
     </div>
-    <p class="why">The GHZ fringe's <b>N× frequency</b> is what carries the advantage: sensitivity to a phase
-    grows as the fringe frequency squared, so N entangled probes reach <b>N² Fisher information</b> against
+    <p class="why">The GHZ fringe's <strong>N× frequency</strong> is what carries the advantage: sensitivity to a phase
+    grows as the fringe frequency squared, so N entangled probes reach <strong>N² Fisher information</strong> against
     the N of separate probes — the Heisenberg scaling, measured against a separable reference we actually ran.</p>
   </section>
 
@@ -170,13 +170,13 @@
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F108 / F109</span> · job <span class="sig">d9alnju6hjac73fek980</span></span>
     <span>ibm_marrakesh · executed separable reference · fringe peak k = N</span>
     <span class="sp"></span>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -186,7 +186,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
 

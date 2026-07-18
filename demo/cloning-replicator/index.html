@@ -105,32 +105,32 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing II · The No-Go Games</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
     <p class="eyebrow">A limit on quantum itself · nothing beats it</p>
     <h1>Copy a qubit — the universe caps you at <span class="c">5/6</span>, and every <span class="w">cheat</span> gets caught.</h1>
-    <p class="lede">The <b>no-cloning theorem</b> says you cannot perfectly copy an unknown quantum state. You <i>can</i>
-    make imperfect copies — and there's a proven best: the <b>optimal universal cloner</b> makes two copies each at
-    fidelity <b>exactly 5/6 ≈ 83.3%</b>, the <i>same</i> for every possible input. You cannot do better than 5/6 for
-    all states at once. This exhibit certifies that ceiling on hardware — and runs a <b>cheat</b> alongside to prove
+    <p class="lede">The <strong>no-cloning theorem</strong> says you cannot perfectly copy an unknown quantum state. You <i>can</i>
+    make imperfect copies — and there's a proven best: the <strong>optimal universal cloner</strong> makes two copies each at
+    fidelity <strong>exactly 5/6 ≈ 83.3%</strong>, the <i>same</i> for every possible input. You cannot do better than 5/6 for
+    all states at once. This exhibit certifies that ceiling on hardware — and runs a <strong>cheat</strong> alongside to prove
     the ceiling has teeth.</p>
 
     <div class="pcard">
       <h2>The trap, in one line</h2>
-      <p>The only way to beat 5/6 <b>somewhere</b> is to get <b>caught somewhere else</b>. A copier tuned for one
+      <p>The only way to beat 5/6 <strong>somewhere</strong> is to get <strong>caught somewhere else</strong>. A copier tuned for one
       measurement direction can score 99% <i>there</i> — but it necessarily craters to a coin-flip (50%) on the two
-      conjugate directions. <b>Universality is the certificate no cheat can forge.</b></p>
+      conjugate directions. <strong>Universality is the certificate no cheat can forge.</strong></p>
     </div>
 
     <div class="herobtns">
-      <span class="scope">Certifies a <b>quantum limit</b> (the completing move to the no-go games), not a speedup.
+      <span class="scope">Certifies a <strong>quantum limit</strong> (the completing move to the no-go games), not a speedup.
       1→2 symmetric universal cloning · device-characterized · single run.</span>
     </div>
   </header>
@@ -139,14 +139,14 @@
   <section class="panel">
     <p class="panel-label">Exhibit A — The copy bench</p>
     <h2>Feed a qubit in; read the two copies out in three bases</h2>
-    <p class="sub">Pick a copier. The bars are the <b>measured copy fidelity</b> in each measurement basis (Z, Y, X)
-    on <b>ibm_marrakesh</b>; the red line is the <b>5/6 ceiling</b>. The honest cloner sits flat, a hair under the
+    <p class="sub">Pick a copier. The bars are the <strong>measured copy fidelity</strong> in each measurement basis (Z, Y, X)
+    on <strong>ibm_marrakesh</strong>; the red line is the <strong>5/6 ceiling</strong>. The honest cloner sits flat, a hair under the
     line, in every basis. The cheat poking <i>above</i> the line in one basis is the tell — watch what it costs.</p>
 
     <div class="selector" role="group" aria-label="Choose a copier">
       <span class="lbl">load a copier:</span>
-      <button class="cbtn" data-key="optimal" type="button">Optimal universal cloner</button>
-      <button class="cbtn" data-key="cheat" type="button">The cheat (tuned for Z)</button>
+      <button class="cbtn" data-key="optimal" type="button" aria-pressed="true">Optimal universal cloner</button>
+      <button class="cbtn" data-key="cheat" type="button" aria-pressed="false">The cheat (tuned for Z)</button>
     </div>
 
     <div class="bench">
@@ -162,15 +162,15 @@
   <section class="panel">
     <p class="panel-label">Exhibit B — The cheat-detector</p>
     <h2>Flatness is the measurement — the null weaponized</h2>
-    <p class="sub">The cheat arm was <b>pre-registered to fail</b>, and its failure mode <i>is</i> the detector. An
-    honest universal cloner is the <b>same</b> in every basis (tiny spread); any basis-reading cheat is loud
+    <p class="sub">The cheat arm was <strong>pre-registered to fail</strong>, and its failure mode <i>is</i> the detector. An
+    honest universal cloner is the <strong>same</strong> in every basis (tiny spread); any basis-reading cheat is loud
     (huge spread). So you don't need to know a copier's secret — just measure how much it varies across bases.</p>
 
     <div class="gauges" id="gauges"></div>
 
     <p class="det-punch">The optimal cloner's basis spread is <span class="num">0.022</span>; the cheat's is
-    <span class="num">0.49</span> — a <b>~24× separation</b>. Above the detector threshold, a copier is
-    provably reading a secret basis. <b>Universality (flatness) is the signature no cheat can forge</b>, because
+    <span class="num">0.49</span> — a <strong>~24× separation</strong>. Above the detector threshold, a copier is
+    provably reading a secret basis. <strong>Universality (flatness) is the signature no cheat can forge</strong>, because
     beating 5/6 in one basis mathematically forces a loss in its conjugate.</p>
   </section>
 
@@ -183,19 +183,19 @@
     <div class="receipts">
       <div class="rc">
         <h3>1 · The ceiling is proven, not cited</h3>
-        <p>5/6 is the optimal universal-cloning fidelity (<b>Bužek–Hillery 1996</b>; Gisin–Massar). The cloner circuit
-        was <b>numerically optimized and verified in-artifact</b> — noiseless mean <b>0.83332</b>, cross-state variance
-        <b>2.2×10⁻⁸</b>. <span class="yes">Not memorized.</span></p>
+        <p>5/6 is the optimal universal-cloning fidelity (<strong>Bužek–Hillery 1996</strong>; Gisin–Massar). The cloner circuit
+        was <strong>numerically optimized and verified in-artifact</strong> — noiseless mean <strong>0.83332</strong>, cross-state variance
+        <strong>2.2×10⁻⁸</strong>. <span class="yes">Not memorized.</span></p>
       </div>
       <div class="rc">
         <h3>2 · Saturated, never exceeded</h3>
-        <p>Optimal measured <b>Z 0.8265 · Y 0.8121 · X 0.8047</b> — flat (spread <b>0.022</b>), a hair below the line;
-        the ~0.019 gap is pure <b>11-CZ noise</b>. Exceeding 5/6 anywhere would be the tell of secret basis-reading.
+        <p>Optimal measured <strong>Z 0.8265 · Y 0.8121 · X 0.8047</strong> — flat (spread <strong>0.022</strong>), a hair below the line;
+        the ~0.019 gap is pure <strong>11-CZ noise</strong>. Exceeding 5/6 anywhere would be the tell of secret basis-reading.
         <span class="yes">It never does.</span></p>
       </div>
       <div class="rc">
         <h3>3 · The teeth, on the same chip</h3>
-        <p>The cheat wins <b>Z 0.9911</b> but pays <b>X 0.4995 · Y 0.5054</b> — min-over-bases 0.4995. All five gates
+        <p>The cheat wins <strong>Z 0.9911</strong> but pays <strong>X 0.4995 · Y 0.5054</strong> — min-over-bases 0.4995. All five gates
         PASS (sentinels 0.991 / 0.973). <span class="yes">The way to win is the way to get caught.</span></p>
       </div>
     </div>
@@ -206,14 +206,14 @@
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="c">optimal flat 0.022</span> · <span class="w">cheat spread 0.49</span> · ceiling 5/6</span>
     <span>ibm_marrakesh · job d9alv77u62qs738o7s40 · F110 / Exp131</span>
     <span class="sp2"></span>
     <a href="https://github.com/mblakemore/quantum/blob/main/findings/F110-exp131-optimal-cloning-ceiling-no-cloning-cheat-detector-whisper-c4670-ember-numbered-c4152.md">Finding F110</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -223,7 +223,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
     var css = getComputedStyle(document.documentElement);
@@ -238,8 +238,8 @@
         bases:{ Z:0.8265, Y:0.8121, X:0.8047 }, spread:0.022, mean:0.814,
         ok:true, tag:"UNIVERSAL — honest best",
         headline:"Flat at ~0.81 in every basis, never over 5/6.",
-        note:"Two copies, each at essentially the same fidelity <b>no matter how you read them</b> — the definition of "+
-             "<i>universal</i>. The tiny 0.019 shortfall from 5/6 is <b>11-CZ hardware noise</b>, not strategy. "+
+        note:"Two copies, each at essentially the same fidelity <strong>no matter how you read them</strong> — the definition of "+
+             "<i>universal</i>. The tiny 0.019 shortfall from 5/6 is <strong>11-CZ hardware noise</strong>, not strategy. "+
              "This is the best any copier can do, and it hides nothing."
       },
       cheat: {
@@ -247,8 +247,8 @@
         bases:{ Z:0.9911, Y:0.5054, X:0.4995 }, spread:0.492, min:0.4995,
         ok:false, tag:"CHEAT DETECTED",
         headline:"Beats 5/6 on Z (0.9911) — craters to a coin-flip on X, Y.",
-        note:"A trivial copier that just measures Z and rebuilds it scores <b>99% on Z</b> — over the ceiling! — "+
-             "but a Z-measurement <b>erases</b> the conjugate directions, so on X and Y it's a <b>coin flip</b> "+
+        note:"A trivial copier that just measures Z and rebuilds it scores <strong>99% on Z</strong> — over the ceiling! — "+
+             "but a Z-measurement <strong>erases</strong> the conjugate directions, so on X and Y it's a <strong>coin flip</strong> "+
              "(0.4995, 0.5054). It beat the ceiling in one place by paying for it, visibly, in two others."
       }
     };
@@ -295,10 +295,10 @@
       var rows="";
       ORDER.forEach(function(b){
         var v=cp.bases[b], over=v>CEIL+1e-9;
-        rows+='<div class="'+(over?"over":"under")+'"><span class="k">'+b+'-basis</span><b>'+v.toFixed(4)+(over?"  ▲ over 5/6":"")+'</b></div>';
+        rows+='<div class="'+(over?"over":"under")+'"><span class="k">'+b+'-basis</span><strong>'+v.toFixed(4)+(over?"  ▲ over 5/6":"")+'</strong></div>';
       });
       var spreadLine = cp.ok
-        ? '<div><span class="k">basis spread</span><b>'+cp.spread.toFixed(3)+'  (flat)</b></div>'
+        ? '<div><span class="k">basis spread</span><strong>'+cp.spread.toFixed(3)+'  (flat)</strong></div>'
         : '<div><span class="k">basis spread</span><b style="color:'+C("--amber")+'">'+cp.spread.toFixed(3)+'  (loud)</b></div>';
       verdict.innerHTML =
         '<div class="vd-tag '+(cp.ok?"ok":"bad")+'">'+(cp.ok?"✔ ":"✘ ")+cp.tag+'</div>'+

@@ -66,37 +66,37 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· No-Go Triptych exhibit</a>
     <span class="wingtag">· Wing II · The No-Go Games</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet</p>
     <h1>Three walls — <span class="b">Bell</span>, <span class="c">causal order</span>, <span class="x">contextuality</span> — one court</h1>
     <div class="idline">
-      <span><b>Findings</b> CHSH · F82 · F106</span>
-      <span><b>Experiments</b> Exp135 · Exp105 · magic-square</span>
-      <span><b>Backend</b> ibm_marrakesh (Heron r2)</span>
-      <span><b>Cross-device</b> +ibm_fez (game)</span>
+      <span><strong>Findings</strong> CHSH · F82 · F106</span>
+      <span><strong>Experiments</strong> Exp135 · Exp105 · magic-square</span>
+      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+      <span><strong>Cross-device</strong> +ibm_fez (game)</span>
     </div>
-    <span class="verdict-chip">✓ THREE THEOREM-WALLS BREACHED — 53σ · 217σ · 196σ, each with an executed null</span>
+    <span class="verdict-chip"><span aria-hidden="true">✓</span> THREE THEOREM-WALLS BREACHED — 53σ · 217σ · 196σ, each with an executed null</span>
   </header>
   <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
 
-  <p>This sheet is the source-of-truth specification behind the interactive exhibit. It gathers three <b>independent
-  no-go theorems</b> — each a mathematical proof that <b>no classical strategy</b> can exceed a certain ceiling — and
-  shows all three ceilings <b>breached on the same silicon</b>, each with an <b>executed classical control</b> that
+  <p>This sheet is the source-of-truth specification behind the interactive exhibit. It gathers three <strong>independent
+  no-go theorems</strong> — each a mathematical proof that <strong>no classical strategy</strong> can exceed a certain ceiling — and
+  shows all three ceilings <strong>breached on the same silicon</strong>, each with an <strong>executed classical control</strong> that
   lands at the wall. Every number is drawn from the frozen grade files of the three experiments.</p>
 
   <h2><span class="n">1</span>What is a no-go theorem?</h2>
-  <p>A <b>no-go theorem</b> proves that some intuitive picture of the world <b>cannot</b> reproduce quantum
+  <p>A <strong>no-go theorem</strong> proves that some intuitive picture of the world <strong>cannot</strong> reproduce quantum
   predictions. Each comes with a hard number — a ceiling a classical strategy cannot pass. Beat the ceiling on
-  hardware and you have <b>falsified the classical picture</b>, not merely "done well." The three here forbid three
+  hardware and you have <strong>falsified the classical picture</strong>, not merely "done well." The three here forbid three
   different classical intuitions:</p>
   <ul>
     <li><b class="b" style="color:var(--cyan)">Bell — locality.</b> No theory where distant outcomes are fixed by
@@ -110,11 +110,12 @@
   <h2><span class="n">2</span>The three walls, measured</h2>
   <div class="tbl-wrap">
   <table>
-    <thead><tr><th>theorem</th><th>forbids</th><th>classical wall</th><th>quantum measured</th><th>clearance</th><th>executed null</th></tr></thead>
+<caption>Three no-go theorem walls breached: Bell, causal order, and contextuality on one chip</caption>
+    <thead><tr><th scope="col">theorem</th><th scope="col">forbids</th><th scope="col">classical wall</th><th scope="col">quantum measured</th><th scope="col">clearance</th><th scope="col">executed null</th></tr></thead>
     <tbody>
-      <tr><td class="bc">Bell (CHSH)</td><td>local hidden variables</td><td>|S| ≤ 2</td><td class="bc"><b>S = 2.7522 ± 0.014</b></td><td class="clear">53σ</td><td>0.036 ≈ 0</td></tr>
-      <tr><td class="cc">Causal order (F82)</td><td>a definite order of events</td><td>≤ 0.8690</td><td class="cc"><b>0.9769 ± 0.0005</b></td><td class="clear">217σ</td><td>0.615 (fixed order)</td></tr>
-      <tr><td class="xc">Contextuality (F106)</td><td>pre-set (non-contextual) values</td><td>≤ 8/9 = 0.8889</td><td class="xc"><b>0.96901 ± 0.0004</b></td><td class="clear">196σ</td><td>0.657 (no entanglement)</td></tr>
+      <tr><td class="bc">Bell (CHSH)</td><td>local hidden variables</td><td>|S| ≤ 2</td><td class="bc"><strong>S = 2.7522 ± 0.014</strong></td><td class="clear">53σ</td><td>0.036 ≈ 0</td></tr>
+      <tr><td class="cc">Causal order (F82)</td><td>a definite order of events</td><td>≤ 0.8690</td><td class="cc"><strong>0.9769 ± 0.0005</strong></td><td class="clear">217σ</td><td>0.615 (fixed order)</td></tr>
+      <tr><td class="xc">Contextuality (F106)</td><td>pre-set (non-contextual) values</td><td>≤ 8/9 = 0.8889</td><td class="xc"><strong>0.96901 ± 0.0004</strong></td><td class="clear">196σ</td><td>0.657 (no entanglement)</td></tr>
     </tbody>
   </table>
   </div>
@@ -124,62 +125,62 @@
   <h2><span class="n">3</span>Why it counts as "one court"</h2>
   <div class="callout">
     <p class="clabel">Three disciplines held to one standard</p>
-    <p class="tight">(1) <b>The bounds are proven, not cited.</b> The causal wall 0.8690 is re-solved by SDP; the
-    contextuality wall 8/9 is <b>enumerated in-code over all 4,096 parity-respecting strategies</b>; Bell's 2 is the
-    textbook CHSH bound. (2) <b>Every wall has an executed null</b> — a real classical control run on the same chip
-    that lands <b>at</b> the wall (Bell 0.036, fixed-order 0.615, no-entanglement 0.657), so the breach is a contrast,
-    not an absolute reading. (3) <b>Same silicon</b> — all three on <code>ibm_marrakesh</code>, and the causal game
-    <b>reproduced across a second device</b> (<code>ibm_fez</code>, 0.9738, 201σ, 0.3pp concordance).</p>
+    <p class="tight">(1) <strong>The bounds are proven, not cited.</strong> The causal wall 0.8690 is re-solved by SDP; the
+    contextuality wall 8/9 is <strong>enumerated in-code over all 4,096 parity-respecting strategies</strong>; Bell's 2 is the
+    textbook CHSH bound. (2) <strong>Every wall has an executed null</strong> — a real classical control run on the same chip
+    that lands <strong>at</strong> the wall (Bell 0.036, fixed-order 0.615, no-entanglement 0.657), so the breach is a contrast,
+    not an absolute reading. (3) <strong>Same silicon</strong> — all three on <code>ibm_marrakesh</code>, and the causal game
+    <strong>reproduced across a second device</strong> (<code>ibm_fez</code>, 0.9738, 201σ, 0.3pp concordance).</p>
   </div>
 
   <h2><span class="n">4</span>Each wall in detail</h2>
   <h3 class="b">Bell / nonlocality (CHSH) — Exp135</h3>
-  <p>The CHSH correlator <code>S = 2.7522 ± 0.0141</code> exceeds the local-realistic bound of 2 by <b>53.2σ</b>,
+  <p>The CHSH correlator <code>S = 2.7522 ± 0.0141</code> exceeds the local-realistic bound of 2 by <strong>53.2σ</strong>,
   approaching the Tsirelson ceiling 2.8284. The classical control (a separable state) reads <code>S = 0.036 ≈ 0</code>.
   Job <code>d9an47mg26ic73dev0s0</code>.</p>
   <h3 class="c">Indefinite causal order (the causal game) — F82 / Exp105</h3>
   <p>The Araújo et al. commute/anticommute discrimination game, with the SDP-optimal input distribution frozen
-  pre-submission. Measured <code>p̂ = 0.9769 ± 0.0005</code> vs the causally-separable bound <b>0.8690</b> — <b>216.8σ</b>
+  pre-submission. Measured <code>p̂ = 0.9769 ± 0.0005</code> vs the causally-separable bound <strong>0.8690</strong> — <strong>216.8σ</strong>
   — with every one of 51 unitary pairs individually above the bound. The fixed-order null reads 0.615 (buying exactly
   the commuting prior). Cross-device: <code>ibm_fez</code> 0.9738 (201σ). Jobs <code>d9826lkqp3as739sd2lg</code> (mrk),
   <code>d982qssqp3as739sdmmg</code> (fez).</p>
   <h3 class="x">Contextuality (Peres–Mermin magic square) — F106</h3>
   <p>The magic-square pseudo-telepathy game, value <code>0.96901 ± 0.00041</code> vs the non-contextual ceiling
-  <code>8/9</code> — <b>196σ</b> — with the ceiling enumerated over all 4,096 parity-respecting strategy pairs. Even
+  <code>8/9</code> — <strong>196σ</strong> — with the ceiling enumerated over all 4,096 parity-respecting strategy pairs. Even
   the worst single context (r3c3) clears 8/9 at 37.8σ. The no-entanglement null reads 0.657 (92.7σ below). Job
   <code>d9akl8fu62qs738o68pg</code>.</p>
 
   <h2><span class="n">5</span>Scope &amp; caveats</h2>
   <ul>
-    <li><b>Game-value advantages, not computational speedup.</b> Each result is a certified <b>correlation/game</b>
+    <li><strong>Game-value advantages, not computational speedup.</strong> Each result is a certified <strong>correlation/game</strong>
     advantage over a classical ceiling — foundational, not a runtime speedup. (The one un-won scoreboard of the
     campaign is computational advantage.)</li>
-    <li><b>Device-characterized, not loophole-free.</b> These are hardware certifications on characterized devices,
+    <li><strong>Device-characterized, not loophole-free.</strong> These are hardware certifications on characterized devices,
     not loophole-free Bell/contextuality tests. The nulls and enumerated bounds are what make the breach meaningful
     on this apparatus.</li>
-    <li><b>Textbook priors credited.</b> Bell (1964), Kochen–Specker / Peres–Mermin, and Oreshkov–Costa–Brukner /
+    <li><strong>Textbook priors credited.</strong> Bell (1964), Kochen–Specker / Peres–Mermin, and Oreshkov–Costa–Brukner /
     Araújo et al. are the sources; the contribution is the frozen, null-controlled hardware certification of all three
     in one campaign.</li>
   </ul>
 
   <h2><span class="n">6</span>Provenance</h2>
   <ul>
-    <li><b>Bell/CHSH:</b> <code>results/exp135_hw_results.json</code> · job d9an47mg26ic73dev0s0</li>
-    <li><b>Causal game (F82):</b> <code>results/exp105_hw_results.json</code> (+ exp105b fez) · jobs d9826lkqp3as739sd2lg, d982qssqp3as739sdmmg · bound <code>results/causal_game_sdp_qij.json</code> = 0.8690</li>
-    <li><b>Contextuality (F106):</b> magic-square grade · job d9akl8fu62qs738o68pg</li>
-    <li><b>Backend:</b> ibm_marrakesh (Heron r2), cross-device ibm_fez · <b>Deeper exhibits:</b> the Interrogation (game ceiling) · the Magic Square (F106)</li>
+    <li><strong>Bell/CHSH:</strong> <code>results/exp135_hw_results.json</code> · job d9an47mg26ic73dev0s0</li>
+    <li><strong>Causal game (F82):</strong> <code>results/exp105_hw_results.json</code> (+ exp105b fez) · jobs d9826lkqp3as739sd2lg, d982qssqp3as739sdmmg · bound <code>results/causal_game_sdp_qij.json</code> = 0.8690</li>
+    <li><strong>Contextuality (F106):</strong> magic-square grade · job d9akl8fu62qs738o68pg</li>
+    <li><strong>Backend:</strong> ibm_marrakesh (Heron r2), cross-device ibm_fez · <strong>Deeper exhibits:</strong> the Interrogation (game ceiling) · the Magic Square (F106)</li>
   </ul>
 
-  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
 
   </main>
-  <div class="foot" role="contentinfo">
+  <footer class="foot">
     <span>MEASURED · <b style="color:var(--cyan)">CHSH</b> · <b style="color:var(--violet)">F82</b> · <b style="color:var(--amber)">F106</b> · ibm_marrakesh</span>
     <span class="sp"></span>
     <a href="./spec.md">Markdown</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 <script>
@@ -188,7 +189,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
   })();

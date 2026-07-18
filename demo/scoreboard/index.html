@@ -21,7 +21,7 @@
     --ink-2:     #4b5563;
     --ink-3:     #5f6a83;
     --good:      #0a7a0a;
-    --warn:      #b7791f;
+    --warn:      #8f5000;
     --warn-led:  #fab219;
     --blue:      #2a78d6;
     --blue-soft: #dbe8fb;
@@ -39,11 +39,11 @@
       --hair-2:    #3a3f49;
       --ink:       #f2f4f7;
       --ink-2:     #aab2be;
-      --ink-3:     #767f8c;
+      --ink-3:     #7d8799;
       --good:      #24b524;
       --warn:      #fab219;
       --warn-led:  #fab219;
-      --blue:      #3987e5;
+      --blue:      #2f70cc;
       --blue-soft: #17233a;
       --track:     #262b33;
       --shadow:    0 1px 2px rgba(0,0,0,.3), 0 10px 34px rgba(0,0,0,.4);
@@ -52,14 +52,14 @@
   :root[data-theme="light"] {
     --surface:#fcfcfb; --panel:#f3f4f6; --panel-2:#ffffff; --hair:#e4e6ea;
     --hair-2:#d3d7de; --ink:#0d0f12; --ink-2:#4b5563; --ink-3:#5f6a83;
-    --good:#0a7a0a; --warn:#b7791f; --warn-led:#fab219; --blue:#2a78d6;
+    --good:#0a7a0a; --warn:#8f5000; --warn-led:#fab219; --blue:#2a78d6;
     --blue-soft:#dbe8fb; --track:#e8ebf0;
     --shadow:0 1px 2px rgba(13,15,18,.05),0 8px 30px rgba(13,15,18,.06);
   }
   :root[data-theme="dark"] {
     --surface:#14161a; --panel:#1b1e24; --panel-2:#20242b; --hair:#2b2f37;
-    --hair-2:#3a3f49; --ink:#f2f4f7; --ink-2:#aab2be; --ink-3:#767f8c;
-    --good:#24b524; --warn:#fab219; --warn-led:#fab219; --blue:#3987e5;
+    --hair-2:#3a3f49; --ink:#f2f4f7; --ink-2:#aab2be; --ink-3:#7d8799;
+    --good:#24b524; --warn:#fab219; --warn-led:#fab219; --blue:#2f70cc;
     --blue-soft:#17233a; --track:#262b33;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 34px rgba(0,0,0,.4);
   }
@@ -174,61 +174,61 @@
 <div class="wrap">
 <main id="main">
   <p class="eyebrow">
-    <b>IBM HERON</b><span class="dot"></span>2026 CAMPAIGN<span class="dot"></span>~110 EXPERIMENTS<span class="dot"></span>F01–F118<span class="dot"></span>EVERY NUMBER A JOB ID
+    <strong>IBM HERON</strong><span class="dot"></span>2026 CAMPAIGN<span class="dot"></span>~110 EXPERIMENTS<span class="dot"></span>F01–F118<span class="dot"></span>EVERY NUMBER A JOB ID
   </p>
   <h1>Have we found quantum advantage?</h1>
-  <p class="verdict"><b>Yes — measurably, on four of five scoreboards</b>, against exact theorem ceilings cleared by <span class="sig">21σ to 341σ</span>.</p>
-  <p class="verdict">On the fifth — computational — the wall against a brute-force speedup is <b>measured</b> (F54), and the constant-depth solver that the only depth-separation theorem is built on now <b>runs on silicon at 90%</b>. No shortcut is claimed that the hardware doesn't hold.</p>
+  <p class="verdict"><strong>Yes — measurably, on four of five scoreboards</strong>, against exact theorem ceilings cleared by <span class="sig">21σ to 341σ</span>.</p>
+  <p class="verdict">On the fifth — computational — the wall against a brute-force speedup is <strong>measured</strong> (F54), and the constant-depth solver that the only depth-separation theorem is built on now <strong>runs on silicon at 90%</strong>. No shortcut is claimed that the hardware doesn't hold.</p>
 
-  <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
+  <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
 
   <hr class="rule" />
-  <p class="sect-label">The five scoreboards</p>
+  <h2 class="sect-label">The five scoreboards</h2>
   <div class="tiles">
     <div class="tile">
-      <div class="tile-top"><span class="led good"></span><span class="tile-name">Games &amp; correlations</span><span class="pill good">FOUND</span></div>
+      <div class="tile-top"><span class="led good" aria-hidden="true"></span><span class="tile-name">Games &amp; correlations</span><span class="pill good">FOUND</span></div>
       <div class="metric">216.8σ <small>causal-order game</small></div>
       <div class="tile-note">The three great no-go theorems in one court — Bell, indefinite causal order, contextuality (8/9 at 196σ). <code>F82 · F106</code></div>
     </div>
     <div class="tile">
-      <div class="tile-top"><span class="led good"></span><span class="tile-name">Communication &amp; sensing</span><span class="pill good">FOUND</span></div>
+      <div class="tile-top"><span class="led good" aria-hidden="true"></span><span class="tile-name">Communication &amp; sensing</span><span class="pill good">FOUND</span></div>
       <div class="metric">341σ <small>superdense coding</small></div>
       <div class="tile-note">A ladder: superdense, 2→1 QRAC (110σ), GHZ metrology beats the standard quantum limit (168σ). <code>F87 · F107 · F108/9</code></div>
     </div>
     <div class="tile">
-      <div class="tile-top"><span class="led good"></span><span class="tile-name">Thermodynamics</span><span class="pill good">FOUND</span></div>
+      <div class="tile-top"><span class="led good" aria-hidden="true"></span><span class="tile-name">Thermodynamics</span><span class="pill good">FOUND</span></div>
       <div class="metric">21.1σ <small>ICO refrigeration</small></div>
       <div class="tile-note">The causal-indefiniteness engine: population inversion from passive baths, a full cycle, negative local energy. <code>F86 · F94/5 · F97</code></div>
     </div>
     <div class="tile">
-      <div class="tile-top"><span class="led good"></span><span class="tile-name">Information</span><span class="pill good">FOUND</span></div>
+      <div class="tile-top"><span class="led good" aria-hidden="true"></span><span class="tile-name">Information</span><span class="pill good">FOUND</span></div>
       <div class="metric">42σ <small>S(B|A) &lt; 0</small></div>
       <div class="tile-note">Negative conditional entropy — a sign classical physics forbids — plus zero-capacity transmission. <code>F103 · F105</code></div>
     </div>
     <div class="tile">
-      <div class="tile-top"><span class="led warn"></span><span class="tile-name">Computational</span><span class="pill warn">WALL + BRIDGE</span></div>
+      <div class="tile-top"><span class="led warn" aria-hidden="true"></span><span class="tile-name">Computational</span><span class="pill warn">WALL + BRIDGE</span></div>
       <div class="metric">0.90 <small>BGK solver on silicon</small></div>
       <div class="tile-note">No brute-force speedup (F54's wall). But the constant-depth 2D-HLF solver runs at 438σ over chance, persists to n=9. <code>F113 · F114</code></div>
     </div>
   </div>
 
   <hr class="rule" />
-  <p class="sect-label">Clearance over the classical / theorem bound · log scale</p>
+  <h2 class="sect-label">Clearance over the classical / theorem bound · log scale</h2>
   <div class="bars" id="bars"></div>
 
   <div class="through">
     <span class="tag">Through-line</span>
-    <p>The classical hardness of the <b>computational</b> problem <code>F113</code> <em>is</em> the magic-square <b>contextuality</b> <code>F106</code>, certified at 196σ. The correlation advantage and the computational advantage are the same resource.</p>
+    <p>The classical hardness of the <strong>computational</strong> problem <code>F113</code> <em>is</em> the magic-square <strong>contextuality</strong> <code>F106</code>, certified at 196σ. The correlation advantage and the computational advantage are the same resource.</p>
   </div>
 
   <div class="bounds">
-    <p class="sect-label">What is not claimed</p>
+    <h2 class="sect-label">What is not claimed</h2>
     <ul>
-      <li><b>No brute-force speedup</b> — F54's 10× depth wall, measured.</li>
-      <li><b>No on-chip QNC⁰≠NC⁰ proof</b> — the separation is asymptotic; the apparatus is real.</li>
-      <li><b>No loophole-free device-independence</b> — the randomness certificate (F117, 0.65 bit/use) is one-sided-DI; locality open.</li>
-      <li><b>Same Heron generation only</b> — a cross-generation exam is the harder unclaimed test.</li>
+      <li><strong>No brute-force speedup</strong> — F54's 10× depth wall, measured.</li>
+      <li><strong>No on-chip QNC⁰≠NC⁰ proof</strong> — the separation is asymptotic; the apparatus is real.</li>
+      <li><strong>No loophole-free device-independence</strong> — the randomness certificate (F117, 0.65 bit/use) is one-sided-DI; locality open.</li>
+      <li><strong>Same Heron generation only</strong> — a cross-generation exam is the harder unclaimed test.</li>
     </ul>
   </div>
 
@@ -258,11 +258,14 @@
     row.innerHTML =
       '<div class="bar-head"><span class="bar-name">' + r.name + '</span>' +
       '<span class="bar-null">' + r.nul + '</span></div>' +
-      '<div class="bar-track"><div class="bar-fill"><span class="bar-val">' +
+      '<div class="bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="' + r.name + ' significance"><div class="bar-fill"><span class="bar-val">' +
       r.sig.toFixed(r.sig % 1 ? 1 : 0) + 'σ</span></div></div>';
     host.appendChild(row);
     const fill = row.querySelector(".bar-fill");
-    const target = w(r.sig) + "%";
+    const track = row.querySelector(".bar-track");
+    const pct = Math.round(w(r.sig));
+    const target = pct + "%";
+    track.setAttribute("aria-valuenow", pct);
     if (reduce) { fill.style.width = target; }
     else { requestAnimationFrame(() => setTimeout(() => fill.style.width = target, 80 + i * 70)); }
   });

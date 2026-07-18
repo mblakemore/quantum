@@ -70,69 +70,69 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· The Interrogation exhibit</a>
     <span class="wingtag">· Wing II · Games with a Proven Ceiling</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet</p>
     <h1>A game whose ceiling is a <span class="hl">theorem</span> — and the switch beats it</h1>
     <div class="idline">
-      <span><b>Finding</b> F82</span>
-      <span><b>Experiment</b> Araújo et al. causal discrimination game</span>
-      <span><b>Backend</b> ibm_marrakesh + ibm_fez (Heron r2)</span>
-      <span><b>Job</b> d9826lkqp3as739sd2lg</span>
+      <span><strong>Finding</strong> F82</span>
+      <span><strong>Experiment</strong> Araújo et al. causal discrimination game</span>
+      <span><strong>Backend</strong> ibm_marrakesh + ibm_fez (Heron r2)</span>
+      <span><strong>Job</strong> d9826lkqp3as739sd2lg</span>
     </div>
-    <span class="verdict-chip">✓ BOUND BEATEN ON TWO CHIPS — p̂ = 0.9769 (216.8σ) · replicated 0.9738 on ibm_fez</span>
+    <span class="verdict-chip"><span aria-hidden="true">✓</span> BOUND BEATEN ON TWO CHIPS — p̂ = 0.9769 (216.8σ) · replicated 0.9738 on ibm_fez</span>
   </header>
   <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
 
   <p>This sheet is the source-of-truth specification behind the interactive exhibit. The game the exhibit lets you play
-  is a real discrimination game with a <b>mathematically proven difficulty ceiling</b>; the "switch kit" you earn
-  after ten rounds plays with odds <b>measured on real quantum hardware</b>. Every threshold traces to a public job ID
+  is a real discrimination game with a <strong>mathematically proven difficulty ceiling</strong>; the "switch kit" you earn
+  after ten rounds plays with odds <strong>measured on real quantum hardware</strong>. Every threshold traces to a public job ID
   and a frozen pre-registration.</p>
 
   <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p>Two machine-suspects are secretly either <b>PARTNERS</b> (their stories agree no matter who is questioned first)
-  or <b>RIVALS</b> (their stories come out opposite depending on order). You question each exactly once and must say
-  which. Mathematics proves that <b>no strategy under ordinary cause-and-effect</b> — no gadget, no entangled trick,
+  <p>Two machine-suspects are secretly either <strong>PARTNERS</strong> (their stories agree no matter who is questioned first)
+  or <strong>RIVALS</strong> (their stories come out opposite depending on order). You question each exactly once and must say
+  which. Mathematics proves that <strong>no strategy under ordinary cause-and-effect</strong> — no gadget, no entangled trick,
   no scheme that picks the order adaptively — can average above the ceiling, as long as the two questions happen in
-  <b>some</b> order.</p>
+  <strong>some</strong> order.</p>
   <div class="callout">
     <p class="clabel">What the suspects really are</p>
-    <p class="tight">The suspects are <b>quantum operations</b>: PARTNERS = commuting, RIVALS = anticommuting, dealt
-    50/50 from a 20-case deck. The quantum switch questions both suspects <b>in a superposition of both orders at
-    once</b> — a physically different kind of question, one no definite order can imitate. Measured, it scores
+    <p class="tight">The suspects are <strong>quantum operations</strong>: PARTNERS = commuting, RIVALS = anticommuting, dealt
+    50/50 from a 20-case deck. The quantum switch questions both suspects <strong>in a superposition of both orders at
+    once</strong> — a physically different kind of question, one no definite order can imitate. Measured, it scores
     <code>≈ 97.8%</code> (0.9769) on ibm_marrakesh.</p>
   </div>
 
   <h2><span class="n">2</span>What we measure — and the ceiling</h2>
-  <p>The task is the finite 10-unitary commute/anticommute discrimination game of <b>Araújo et al. (2015)</b>. Its
-  causally-separable ceiling was <b>re-derived from scratch and machine-verified</b> in the repository — including the
+  <p>The task is the finite 10-unitary commute/anticommute discrimination game of <strong>Araújo et al. (2015)</strong>. Its
+  causally-separable ceiling was <strong>re-derived from scratch and machine-verified</strong> in the repository — including the
   optimal input distribution the original paper omitted.</p>
   <ul>
-    <li><b>The balanced-game ceiling:</b> <code>0.9098</code> (the 91% the exhibit's meter draws as THE CEILING) — the
+    <li><strong>The balanced-game ceiling:</strong> <code>0.9098</code> (the 91% the exhibit's meter draws as THE CEILING) — the
     best any causally-separable strategy can do on the uniform deck.</li>
-    <li><b>The SDP-optimal bound:</b> <code>0.8690</code> — under the input distribution re-solved to maximize the
+    <li><strong>The SDP-optimal bound:</strong> <code>0.8690</code> — under the input distribution re-solved to maximize the
     quantum-vs-classical gap, the causally-separable bound (covering fixed, mixed, and dynamical order). The measured
     result's significance is quoted against this bound.</li>
   </ul>
-  <p>The <b>load-bearing blind spot</b>: the "do-nothing" (Nobody) suspect. Remove those cases and the theorem's
+  <p>The <strong>load-bearing blind spot</strong>: the "do-nothing" (Nobody) suspect. Remove those cases and the theorem's
   ceiling silently rises to 100% — which is why they are kept in the deck. The best classical kit is deterministically,
   perfectly wrong whenever a do-nothing suspect is involved; that structural fact is real physics, not a gimmick.</p>
 
   <h2><span class="n">3</span>Pre-registered gates</h2>
-  <p>The game, the bound, and the optimal input distribution were <b>frozen pre-submission</b>. Four pre-data catches
+  <p>The game, the bound, and the optimal input distribution were <strong>frozen pre-submission</strong>. Four pre-data catches
   are documented in the finding:</p>
   <div class="gate">
-    <span class="g">BEAT</span><span class="r">Measured game value strictly above the causally-separable bound. <span class="pass">PASS</span> — p̂ 0.9769 vs bound 0.8690, <b>216.8σ</b> on ibm_marrakesh.</span>
-    <span class="g">NULL</span><span class="r">Fixed-order null arm buys exactly the commuting prior. <span class="pass">PASS</span> — null = commuting prior <b>+0.2pp</b> on both devices (fixed order buys the prior, measured).</span>
-    <span class="g">PAIRS</span><span class="r">Every individual case pair above the bound (no single lucky pair carries it). <span class="pass">PASS</span> — <b>all 51 pairs</b> individually above the bound.</span>
+    <span class="g">BEAT</span><span class="r">Measured game value strictly above the causally-separable bound. <span class="pass">PASS</span> — p̂ 0.9769 vs bound 0.8690, <strong>216.8σ</strong> on ibm_marrakesh.</span>
+    <span class="g">NULL</span><span class="r">Fixed-order null arm buys exactly the commuting prior. <span class="pass">PASS</span> — null = commuting prior <strong>+0.2pp</strong> on both devices (fixed order buys the prior, measured).</span>
+    <span class="g">PAIRS</span><span class="r">Every individual case pair above the bound (no single lucky pair carries it). <span class="pass">PASS</span> — <strong>all 51 pairs</strong> individually above the bound.</span>
   </div>
   <p>Four pre-data catches on the record: the Pauli pitfall; identity pairs load-bearing; skeleton uniformity;
   transpiler pad-cancellation.</p>
@@ -140,7 +140,8 @@
   <h2><span class="n">4</span>The measured data</h2>
   <div class="tbl-wrap">
   <table>
-    <thead><tr><th>quantity</th><th>ibm_marrakesh</th><th>ibm_fez</th><th>ceiling / bound</th></tr></thead>
+<caption>Causal game scores on two chips vs the causally-separable SDP bound</caption>
+    <thead><tr><th scope="col">quantity</th><th scope="col">ibm_marrakesh</th><th scope="col">ibm_fez</th><th scope="col">ceiling / bound</th></tr></thead>
     <tbody>
       <tr class="hi"><td>switch game value p̂</td><td class="hw">0.9769 ± 0.0005</td><td class="hw">0.9738</td><td class="bound">0.8690 (SDP-optimal)</td></tr>
       <tr><td>significance above bound</td><td class="hw">216.8σ</td><td class="hw">201.0σ</td><td>—</td></tr>
@@ -150,44 +151,44 @@
     </tbody>
   </table>
   </div>
-  <p>The two chips agree to <b>0.3 percentage points</b> (0.9769 vs 0.9738) — cross-device concordance on a chip
+  <p>The two chips agree to <strong>0.3 percentage points</strong> (0.9769 vs 0.9738) — cross-device concordance on a chip
   (ibm_fez) the experiment had never touched, replicated the next day. Even the single worst case in the deck beats
   the ceiling on its own.</p>
 
   <h2><span class="n">5</span>Scope &amp; caveats</h2>
   <ul>
-    <li><b>A game-value / correlation advantage — not a loophole-free certification.</b> The result is that the
-    measured game value beats the causally-separable bound; it is a <b>device-characterized</b> demonstration (the
-    devices are trusted and characterized), <b>not</b> a device-independent, loophole-free test. Photonic
+    <li><strong>A game-value / correlation advantage — not a loophole-free certification.</strong> The result is that the
+    measured game value beats the causally-separable bound; it is a <strong>device-characterized</strong> demonstration (the
+    devices are trusted and characterized), <strong>not</strong> a device-independent, loophole-free test. Photonic
     device-independent prior art is acknowledged.</li>
-    <li><b>The bound is the theorem; the switch column is a measurement.</b> A web page can replay any numbers, so the
+    <li><strong>The bound is the theorem; the switch column is a measurement.</strong> A web page can replay any numbers, so the
     demo itself proves nothing — the theorem does (no definite/mixed/adaptive order beats the bound), and a real
     quantum computer produced the winning column.</li>
-    <li><b>Prior credited.</b> The game and its causally-separable bound are due to <b>Araújo et al. (2015)</b>; this
+    <li><strong>Prior credited.</strong> The game and its causally-separable bound are due to <strong>Araújo et al. (2015)</strong>; this
     work re-derived the bound and the optimal input distribution from scratch and machine-verified them.</li>
-    <li><b>Load-bearing deck.</b> The do-nothing suspects are structurally required — excluding them lifts the ceiling
+    <li><strong>Load-bearing deck.</strong> The do-nothing suspects are structurally required — excluding them lifts the ceiling
     to 100% and voids the game. They are kept in by design.</li>
   </ul>
 
   <h2><span class="n">6</span>Provenance</h2>
   <ul>
-    <li><b>Job:</b> <code>d9826lkqp3as739sd2lg</code> · <b>Backend:</b> ibm_marrakesh (Heron r2) · frozen pre-registration</li>
-    <li><b>Cross-device replication:</b> ibm_fez (Heron r2), p̂ = 0.9738 (201.0σ), the next day, never-touched chip</li>
-    <li><b>Bound:</b> Araújo et al. (2015) causal discrimination game; causally-separable bound re-derived + machine-verified in the <a href="https://github.com/mblakemore/quantum">repository</a> (balanced 0.9098; SDP-optimal 0.8690)</li>
-    <li><b>Pre-data catches:</b> Pauli pitfall · identity pairs load-bearing · skeleton uniformity · transpiler pad-cancellation</li>
-    <li><b>Family:</b> Indefinite causal order — the causal game; sibling of the Quantum Switch (F73–F77) and the zero-capacity channel activation (F83)</li>
+    <li><strong>Job:</strong> <code>d9826lkqp3as739sd2lg</code> · <strong>Backend:</strong> ibm_marrakesh (Heron r2) · frozen pre-registration</li>
+    <li><strong>Cross-device replication:</strong> ibm_fez (Heron r2), p̂ = 0.9738 (201.0σ), the next day, never-touched chip</li>
+    <li><strong>Bound:</strong> Araújo et al. (2015) causal discrimination game; causally-separable bound re-derived + machine-verified in the <a href="https://github.com/mblakemore/quantum">repository</a> (balanced 0.9098; SDP-optimal 0.8690)</li>
+    <li><strong>Pre-data catches:</strong> Pauli pitfall · identity pairs load-bearing · skeleton uniformity · transpiler pad-cancellation</li>
+    <li><strong>Family:</strong> Indefinite causal order — the causal game; sibling of the Quantum Switch (F73–F77) and the zero-capacity channel activation (F83)</li>
   </ul>
 
-  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
 
   </main>
-  <div class="foot" role="contentinfo">
+  <footer class="foot">
     <span>MEASURED · <b style="color:var(--cyan)">F82</b> · job d9826lkqp3as739sd2lg · ibm_marrakesh + ibm_fez</span>
     <span class="sp"></span>
     <a href="./spec.md">Markdown</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 <script>
@@ -196,7 +197,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
   })();

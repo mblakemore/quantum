@@ -71,53 +71,53 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· Switch-Bench exhibit</a>
     <span class="wingtag">· Wing V · The Instruments</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet</p>
     <h1>An instrument for causal-order physics — that <span class="hl">travels</span></h1>
     <div class="idline">
-      <span><b>Finding</b> F112</span>
-      <span><b>Experiment</b> Exp133 (the transporter exam)</span>
-      <span><b>Foreign chips</b> ibm_kingston · ibm_fez</span>
-      <span><b>Jobs</b> d9amd73… · d9b9fvvu…</span>
+      <span><strong>Finding</strong> F112</span>
+      <span><strong>Experiment</strong> Exp133 (the transporter exam)</span>
+      <span><strong>Foreign chips</strong> ibm_kingston · ibm_fez</span>
+      <span><strong>Jobs</strong> d9amd73… · d9b9fvvu…</span>
     </div>
-    <span class="verdict-chip">✓ DEVICE-INDEPENDENCE — full 3-axis bench across THREE Heron dies (fez extends F112; not a clean 3/3)</span>
+    <span class="verdict-chip"><span aria-hidden="true">✓</span> DEVICE-INDEPENDENCE — full 3-axis bench across THREE Heron dies (fez extends F112; not a clean 3/3)</span>
   </header>
   <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
 
   <p>This sheet is the source-of-truth specification behind the interactive exhibit. Numbers are drawn from the frozen
   switch-bench cards for <code>kingston</code> and <code>fez</code> (<code>…d9b9fvvu…_card.json</code>), plus <code>marrakesh</code> (causal axis) and the Zeno run for the home HOLD axis. It
-  is the campaign's <b>first two-device card</b>, and it completes Horizons-3.</p>
+  is the campaign's <strong>first two-device card</strong>, and it completes Horizons-3.</p>
 
   <h2><span class="n">1</span>What is the switch-bench?</h2>
   <p>Chip vendors publish generic quality metrics — Quantum Volume, CLOPS, EPLG. None of them tell you whether a chip
-  can actually do the <b>physics of causal-order superposition</b>. The <b>switch-bench</b> is an instrument that does:
-  it reads <b>three axes</b> of the campaign's causal-order phenomena, each against a <b>frozen, pre-registered
-  bound</b>. Each axis is a finding you can visit elsewhere in the museum:</p>
+  can actually do the <strong>physics of causal-order superposition</strong>. The <strong>switch-bench</strong> is an instrument that does:
+  it reads <strong>three axes</strong> of the campaign's causal-order phenomena, each against a <strong>frozen, pre-registered
+  bound</strong>. Each axis is a finding you can visit elsewhere in the museum:</p>
   <ul>
     <li><b class="cs" style="color:var(--cyan)">CAUSAL</b> — is the order genuinely indefinite? The switch witness and its channel capacity. <i>(→ the Causal Switch)</i></li>
-    <li><b style="color:var(--violet)">SCHEDULE</b> — is the chip <b>order-symmetric</b>, with no hidden preferred order sneaking in? <i>(→ F96 hidden-order)</i></li>
+    <li><b style="color:var(--violet)">SCHEDULE</b> — is the chip <strong>order-symmetric</strong>, with no hidden preferred order sneaking in? <i>(→ F96 hidden-order)</i></li>
     <li><b style="color:var(--amber)">HOLD</b> — can measurement pin a qubit against a rotation (the quantum Zeno effect)? <i>(→ the Zeno Tractor Beam)</i></li>
   </ul>
 
   <h2><span class="n">2</span>The transporter exam — the bench travels</h2>
-  <p>The bench had only ever run on <b>ibm_marrakesh</b> (home). The test: fly the <b>entire three-axis bench</b> on a
-  chip it had <b>never seen</b> — first <b>ibm_kingston</b>, then <b>ibm_fez</b> — and grade every axis against the <b>same frozen bounds, with no
-  retuning</b>. If causal-order physics is a property of the <b>hardware generation</b> (both are IBM Heron), not one
+  <p>The bench had only ever run on <strong>ibm_marrakesh</strong> (home). The test: fly the <strong>entire three-axis bench</strong> on a
+  chip it had <strong>never seen</strong> — first <strong>ibm_kingston</strong>, then <strong>ibm_fez</strong> — and grade every axis against the <strong>same frozen bounds, with no
+  retuning</strong>. If causal-order physics is a property of the <strong>hardware generation</strong> (both are IBM Heron), not one
   lucky die, the bench should certify on the foreign chip too.</p>
   <div class="callout good">
     <p class="clabel">Result</p>
-    <p class="tight">On kingston (one job, <b>77 pubs, 208,000 shots</b>), <b>all three axes certified</b> against the
-    identical bounds — and the bench then <b>repeated on a third die, ibm_fez</b>, which also certifies all three axes (though <b>not as cleanly</b> — see §6). The frozen site-selection rules were <b>re-derived live</b> on each chip's unfamiliar qubit map —
-    deterministic, untouched. The court is <b>device-independent</b>: the causal-order phenomena travel.</p>
+    <p class="tight">On kingston (one job, <strong>77 pubs, 208,000 shots</strong>), <strong>all three axes certified</strong> against the
+    identical bounds — and the bench then <strong>repeated on a third die, ibm_fez</strong>, which also certifies all three axes (though <strong>not as cleanly</strong> — see §6). The frozen site-selection rules were <strong>re-derived live</strong> on each chip's unfamiliar qubit map —
+    deterministic, untouched. The court is <strong>device-independent</strong>: the causal-order phenomena travel.</p>
   </div>
 
   <h2><span class="n">3</span>Pre-registered gates (frozen; graded identically on both chips)</h2>
@@ -130,7 +130,8 @@
   <h2><span class="n">4</span>The measured data — two devices, one standard</h2>
   <div class="tbl-wrap">
   <table>
-    <thead><tr><th>axis · metric</th><th>ideal</th><th>marrakesh</th><th>kingston</th><th>fez</th><th>bound</th></tr></thead>
+<caption>Switch-bench three-axis scores across three IBM Heron dies vs frozen bounds</caption>
+    <thead><tr><th scope="col">axis · metric</th><th scope="col">ideal</th><th scope="col">marrakesh</th><th scope="col">kingston</th><th scope="col">fez</th><th scope="col">bound</th></tr></thead>
     <tbody>
       <tr><td>CAUSAL · witness W</td><td>2.000</td><td>1.9265</td><td class="king">1.9533 <span class="edge">▲</span></td><td>1.8948</td><td>≫ 0</td></tr>
       <tr><td>CAUSAL · capacity R̄</td><td>0.5333</td><td>0.4978</td><td class="king">0.5245 <span class="edge">▲</span></td><td>0.5080</td><td>≫ 0 null</td></tr>
@@ -140,48 +141,48 @@
     </tbody>
   </table>
   </div>
-  <p><span class="edge">▲</span> = leads. The three dies rank <b>kingston ≥ marrakesh ≥ fez</b> on the causal and Zeno-hold numbers — kingston leads W, R̄ and hold-separation; marrakesh edges QND. <b>fez, the newest die, certifies every axis but sits last</b>, and its SCHEDULE reading (⚠) tripped the split-half guard (§6). Device-independence holds across three dies; the bench ranks them.</p>
+  <p><span class="edge">▲</span> = leads. The three dies rank <strong>kingston ≥ marrakesh ≥ fez</strong> on the causal and Zeno-hold numbers — kingston leads W, R̄ and hold-separation; marrakesh edges QND. <strong>fez, the newest die, certifies every axis but sits last</strong>, and its SCHEDULE reading (⚠) tripped the split-half guard (§6). Device-independence holds across three dies; the bench ranks them.</p>
 
   <h2><span class="n">5</span>What it means</h2>
   <ul>
-    <li><b>Device-independence.</b> The causal-order phenomena certify on a chip the bench had never seen, against the
-    same bounds — so they are properties of the <b>Heron generation</b>, not one die's quirks.</li>
-    <li><b>A new kind of benchmark.</b> The bench <b>ranks devices on axes QV / CLOPS / EPLG do not touch</b> — it
-    tells you which chip does causal-order physics <b>better</b> — here kingston leads, marrakesh second, fez last, all certifying.</li>
-    <li><b>Extends the cross-device story.</b> F82 replicated one axis (the causal game) on a second device; F112
-    replicates the <b>full three-axis bench across three dies</b> (marrakesh, kingston, fez).</li>
+    <li><strong>Device-independence.</strong> The causal-order phenomena certify on a chip the bench had never seen, against the
+    same bounds — so they are properties of the <strong>Heron generation</strong>, not one die's quirks.</li>
+    <li><strong>A new kind of benchmark.</strong> The bench <strong>ranks devices on axes QV / CLOPS / EPLG do not touch</strong> — it
+    tells you which chip does causal-order physics <strong>better</strong> — here kingston leads, marrakesh second, fez last, all certifying.</li>
+    <li><strong>Extends the cross-device story.</strong> F82 replicated one axis (the causal game) on a second device; F112
+    replicates the <strong>full three-axis bench across three dies</strong> (marrakesh, kingston, fez).</li>
   </ul>
 
   <h2><span class="n">6</span>Scope &amp; caveats</h2>
   <ul>
-    <li><b>Same generation only.</b> Both chips are IBM Heron. Cross-<b>generation</b> travel (e.g. to Eagle) is
-    <b>not</b> claimed here.</li>
-    <li><b>Same-instrument, not same-instant.</b> One calibration window per device; this is a device comparison across
+    <li><strong>Same generation only.</strong> Both chips are IBM Heron. Cross-<strong>generation</strong> travel (e.g. to Eagle) is
+    <strong>not</strong> claimed here.</li>
+    <li><strong>Same-instrument, not same-instant.</strong> One calibration window per device; this is a device comparison across
     windows, not a simultaneous measurement.</li>
-    <li><b>Composite home reference.</b> The marrakesh numbers are drawn from the home-chip bench runs across the
+    <li><strong>Composite home reference.</strong> The marrakesh numbers are drawn from the home-chip bench runs across the
     campaign (causal from the bench card, HOLD from the Zeno run); kingston and fez each ran all three axes in a single job.</li>
-    <li><b>fez is not a clean 3/3.</b> ibm_fez clears every frozen bound, but its SCHEDULE axis tripped the <b>split-half floor-transfer guard</b> (split-half median 0.0582 &gt; the per-run bound 0.0464): the pooled hotspot D_order (0.0185) still reads order-symmetric, but the two halves disagree more than on the other dies — fez's schedule data is noisier. Reported as an extension of F112 with this caveat kept in the record, not a fourth clean certification.</li>
+    <li><strong>fez is not a clean 3/3.</strong> ibm_fez clears every frozen bound, but its SCHEDULE axis tripped the <strong>split-half floor-transfer guard</strong> (split-half median 0.0582 &gt; the per-run bound 0.0464): the pooled hotspot D_order (0.0185) still reads order-symmetric, but the two halves disagree more than on the other dies — fez's schedule data is noisier. Reported as an extension of F112 with this caveat kept in the record, not a fourth clean certification.</li>
   </ul>
 
   <h2><span class="n">7</span>Provenance</h2>
   <ul>
-    <li><b>Kingston card:</b> <code>results/switch_bench_d9amd73v6alc73cs0lp0_card.json</code> · <b>Job:</b> d9amd73v6alc73cs0lp0 (77 pubs, 208k shots)</li>
-    <li><b>Fez card:</b> <code>results/switch_bench_d9b9fvvu62qs738ov860_card.json</code> · <b>Job:</b> d9b9fvvu62qs738ov860 (77 pubs, 208k shots)</li>
-    <li><b>Marrakesh card:</b> <code>results/switch_bench_d9a7mn2f47jc73a9tcpg_card.json</code> (causal) · HOLD from the Zeno run (Exp124)</li>
-    <li><b>Backends:</b> ibm_marrakesh, ibm_kingston, ibm_fez (all Heron r2) · <b>Bounds frozen</b> pre-flight, identical on all three</li>
-    <li><b>Family:</b> Horizons-3 H6 (completes Horizons-3) · the three axes → the Causal Switch, F96 hidden-order, the Zeno Tractor Beam</li>
+    <li><strong>Kingston card:</strong> <code>results/switch_bench_d9amd73v6alc73cs0lp0_card.json</code> · <strong>Job:</strong> d9amd73v6alc73cs0lp0 (77 pubs, 208k shots)</li>
+    <li><strong>Fez card:</strong> <code>results/switch_bench_d9b9fvvu62qs738ov860_card.json</code> · <strong>Job:</strong> d9b9fvvu62qs738ov860 (77 pubs, 208k shots)</li>
+    <li><strong>Marrakesh card:</strong> <code>results/switch_bench_d9a7mn2f47jc73a9tcpg_card.json</code> (causal) · HOLD from the Zeno run (Exp124)</li>
+    <li><strong>Backends:</strong> ibm_marrakesh, ibm_kingston, ibm_fez (all Heron r2) · <strong>Bounds frozen</strong> pre-flight, identical on all three</li>
+    <li><strong>Family:</strong> Horizons-3 H6 (completes Horizons-3) · the three axes → the Causal Switch, F96 hidden-order, the Zeno Tractor Beam</li>
   </ul>
 
-  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
 
   </main>
-  <div class="foot" role="contentinfo">
+  <footer class="foot">
     <span>MEASURED · <b style="color:var(--cyan)">F112</b> · ibm_marrakesh + ibm_kingston + ibm_fez (3 dies)</span>
     <span class="sp"></span>
     <a href="./spec.md">Markdown</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 <script>
@@ -190,7 +191,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
   })();

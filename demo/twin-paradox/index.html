@@ -116,41 +116,41 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing III · Foundations on Silicon</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
     <p class="eyebrow">The quantum twin paradox · Zych–Brukner analog</p>
     <h1>The twin who <span class="hl">ages</span> loses the interference.</h1>
     <p class="lede">Einstein's twins: the one who travels ages less. Make it quantum — send a particle down two paths
-    at once so it interferes with itself, and hang a <b>clock</b> on it. If the clock <b>ages</b>, its reading quietly
+    at once so it interferes with itself, and hang a <strong>clock</strong> on it. If the clock <strong>ages</strong>, its reading quietly
     records which path was taken, and that record destroys the interference. We built the analog on a chip: an
     excited clock (it ages) washes out coherence far faster than a vacuum clock. Every number is measured hardware.</p>
 
     <div class="primer">
       <div class="pcard">
         <h2>What's an interferometer?</h2>
-        <p>A device that splits one particle onto <b>two paths at once</b> and recombines it, so it interferes with
-        itself. The interference only appears if the two paths are <b>indistinguishable</b> — the instant anything
+        <p>A device that splits one particle onto <strong>two paths at once</strong> and recombines it, so it interferes with
+        itself. The interference only appears if the two paths are <strong>indistinguishable</strong> — the instant anything
         records which way it went, the pattern vanishes.</p>
       </div>
       <div class="pcard">
         <h2>Why does "aging" matter?</h2>
-        <p>A clock that ticks while in flight ends up reading <b>how much time passed on its path</b>. If the two
-        paths age differently, the clock <b>is</b> a which-path record — so aging itself decoheres the superposition.
+        <p>A clock that ticks while in flight ends up reading <strong>how much time passed on its path</strong>. If the two
+        paths age differently, the clock <strong>is</strong> a which-path record — so aging itself decoheres the superposition.
         That's the twin paradox as quantum information.</p>
       </div>
     </div>
 
     <div class="herobtns">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
-      <span class="scope">A which-path <b>clock-decoherence analog</b>, not literal time dilation. Verdict: AGING-CERTIFIED-CLEAN.</span>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
+      <span class="scope">A which-path <strong>clock-decoherence analog</strong>, not literal time dilation. Verdict: AGING-CERTIFIED-CLEAN.</span>
     </div>
   </header>
 
@@ -159,16 +159,16 @@
     <p class="panel-label">Exhibit A — The Two Twins</p>
     <h2>Let time pass, and watch one twin's interference die</h2>
     <p class="sub">Both twins start with crisp interference fringes (high contrast = coherent). Turn up the elapsed
-    proper time. The <b>vacuum twin</b> (stays home, doesn't age) keeps its fringes far longer; the <b>excited twin</b>
+    proper time. The <strong>vacuum twin</strong> (stays home, doesn't age) keeps its fringes far longer; the <strong>excited twin</strong>
     (ages) washes out — its aging has recorded the path. Pick an elapsed time.</p>
 
     <div class="dial" role="group" aria-label="Elapsed proper time">
       <span class="lbl">proper time:</span>
-      <button class="cbtn" data-i="0" type="button">0 <small>µs</small></button>
-      <button class="cbtn" data-i="1" type="button">37 <small>µs</small></button>
-      <button class="cbtn" data-i="2" type="button">73 <small>µs</small></button>
-      <button class="cbtn" data-i="3" type="button">146 <small>µs</small></button>
-      <button class="cbtn" data-i="4" type="button">293 <small>µs</small></button>
+      <button class="cbtn" data-i="0" type="button" aria-pressed="true">0 <small>µs</small></button>
+      <button class="cbtn" data-i="1" type="button" aria-pressed="false">37 <small>µs</small></button>
+      <button class="cbtn" data-i="2" type="button" aria-pressed="false">73 <small>µs</small></button>
+      <button class="cbtn" data-i="3" type="button" aria-pressed="false">146 <small>µs</small></button>
+      <button class="cbtn" data-i="4" type="button" aria-pressed="false">293 <small>µs</small></button>
     </div>
 
     <div class="twins">
@@ -176,17 +176,17 @@
         <div class="thead"><span class="tname">Vacuum twin</span><span class="tsub">clock in |0⟩ · stays home</span></div>
         <svg class="fringe" id="fringeVac" viewBox="0 0 300 96" preserveAspectRatio="none" role="img" aria-label="Vacuum twin interference fringes"></svg>
         <div class="vrow"><span class="vnum" id="vnumVac">0.885</span><span class="vcap">contrast |V|</span></div>
-        <div class="state alive" id="stateVac">interference alive</div>
+        <div class="state alive" id="stateVac" aria-live="polite">interference alive</div>
       </div>
       <div class="twin exc">
         <div class="thead"><span class="tname">Excited twin</span><span class="tsub">clock in |1⟩ · ages</span></div>
         <svg class="fringe" id="fringeExc" viewBox="0 0 300 96" preserveAspectRatio="none" role="img" aria-label="Excited twin interference fringes"></svg>
         <div class="vrow"><span class="vnum" id="vnumExc">0.862</span><span class="vcap">contrast |V|</span></div>
-        <div class="state alive" id="stateExc">interference alive</div>
+        <div class="state alive" id="stateExc" aria-live="polite">interference alive</div>
       </div>
     </div>
 
-    <p class="gap-readout" id="gapReadout"></p>
+    <p class="gap-readout" id="gapReadout" aria-live="polite"></p>
     <p class="phase-note">Bands show contrast only — their position (phase) is arbitrary. We measure |V| = √(X²+Y²), rotation-immune by construction.</p>
   </section>
 
@@ -195,8 +195,8 @@
     <p class="panel-label">Exhibit B — The Aging Curves</p>
     <h2>The gap between the twins is the finding</h2>
     <p class="sub">Both visibilities decay, but the excited twin's collapses almost twice as fast. The shaded gap
-    between them is the <b>aging signal</b> — widest in the coherent middle of the ladder, where a which-path clock
-    bites hardest. It peaks at <b>73µs: 36σ</b>. By 293µs both have decayed to the noise floor — nothing left to tell
+    between them is the <strong>aging signal</strong> — widest in the coherent middle of the ladder, where a which-path clock
+    bites hardest. It peaks at <strong>73µs: 36σ</strong>. By 293µs both have decayed to the noise floor — nothing left to tell
     apart, so no claim there.</p>
     <div class="plotwrap">
       <svg viewBox="0 0 460 260" role="img" aria-label="Visibility versus proper time for the vacuum and excited twins, with the aging gap shaded">
@@ -214,9 +214,9 @@
         <text class="axlabel" x="150" y="250" fill="var(--ink-3)">proper time (delay) — more time = more aging →</text>
       </svg>
       <div class="lgd">
-        <span><i style="background:var(--cyan)"></i>vacuum twin (stays home)</span>
-        <span><i style="background:var(--amber)"></i>excited twin (ages)</span>
-        <span><i style="background:var(--violet);opacity:.5"></i>aging gap</span>
+        <span><i style="background:var(--cyan)" aria-hidden="true"></i>vacuum twin (stays home)</span>
+        <span><i style="background:var(--amber)" aria-hidden="true"></i>excited twin (ages)</span>
+        <span><i style="background:var(--violet);opacity:.5" aria-hidden="true"></i>aging gap</span>
       </div>
     </div>
   </section>
@@ -230,37 +230,37 @@
     <div class="receipts">
       <div class="rc">
         <h3>1 · Rotation can't fake it</h3>
-        <p>We read <b>|V| = √(X²+Y²)</b>, the length of the coherence vector. A stray phase <b>rotation</b> only
+        <p>We read <strong>|V| = √(X²+Y²)</strong>, the length of the coherence vector. A stray phase <strong>rotation</strong> only
         spins that vector — it can't shrink it. Only genuine decoherence can. <span class="yes">Phase-blind by
         construction.</span></p>
       </div>
       <div class="rc">
         <h3>2 · The obvious mechanism, refuted</h3>
-        <p>The pre-filed guess was a static ZZ pull, which a spin-echo should <b>undo</b>. The echo recovery came back
-        <b>−0.119</b> — the <span class="no">wrong sign</span>. Static-ZZ <span class="no">REFUTED</span>, in the open,
+        <p>The pre-filed guess was a static ZZ pull, which a spin-echo should <strong>undo</strong>. The echo recovery came back
+        <strong>−0.119</strong> — the <span class="no">wrong sign</span>. Static-ZZ <span class="no">REFUTED</span>, in the open,
         against the author's own 0.80 prior.</p>
       </div>
       <div class="rc">
         <h3>3 · The withheld 67σ</h3>
-        <p>The first run passed at <b>67σ</b> — bigger than the 36σ reported — but its X-curves went negative
-        (impossible for a real visibility). The author <b>withheld it</b> and ran this phase-blind retest instead. The
+        <p>The first run passed at <strong>67σ</strong> — bigger than the 36σ reported — but its X-curves went negative
+        (impossible for a real visibility). The author <strong>withheld it</strong> and ran this phase-blind retest instead. The
         asterisk was self-attached.</p>
       </div>
     </div>
     <div class="speclink-row">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet — data table, gates &amp; the complete adjudication</a>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Full Spec Sheet — data table, gates &amp; the complete adjudication</a>
     </div>
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F100</span> · job <span class="sig">d9ah35eg26ic73demgag</span></span>
     <span>ibm_marrakesh · aging gap 0.338 @73µs · 36σ</span>
     <span class="sp"></span>
     <a href="./spec.html">Full Spec</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -270,7 +270,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
 

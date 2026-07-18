@@ -59,7 +59,8 @@
   .slabel { display:flex; justify-content: space-between; font-family:var(--mono); font-size:11px;
     color: var(--ink-3); margin-bottom: 8px; letter-spacing:.02em; }
   input[type=range]{ -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:999px;
-    background: linear-gradient(90deg, var(--violet), var(--bad)); outline:none; cursor: pointer; }
+    background: linear-gradient(90deg, var(--violet), var(--bad)); cursor: pointer; }
+  input[type=range]:focus-visible{ outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 999px; }
   input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:22px; height:22px; border-radius:50%;
     background: var(--ink); border: 3px solid var(--violet); box-shadow: 0 2px 8px rgba(0,0,0,.4); cursor: grab; }
   input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%; background: var(--ink);
@@ -102,12 +103,12 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing III · Foundations on Silicon</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
@@ -116,9 +117,9 @@
     <p class="lede">The oldest question in time-travel fiction, put to a quantum computer. We built a
     post-selected time loop on IBM Heron and tried to create the paradox. The timeline pushed back —
     and left a fingerprint no ordinary post-selection can fake. Every number below is measured hardware data.</p>
-    <span class="scope">MODEL: Lloyd 2011 P-CTC — the post-selection <b>is</b> the timeline. Not literal time travel.</span>
-    <div style="margin-top:16px;"><a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a></div>
+    <span class="scope">MODEL: Lloyd 2011 P-CTC — the post-selection <strong>is</strong> the timeline. Not literal time travel.</span>
+    <div style="margin-top:16px;"><a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a></div>
   </header>
 
   <!-- PANEL 1 -->
@@ -130,9 +131,9 @@
     the timeline forbids it.</p>
     <div class="enf">
       <div class="gauge">
-        <div class="big" id="survival">100%</div>
-        <div class="cap" id="gaugeCap">of timelines survive · <b>baseline</b></div>
-        <div class="verdict-line" id="verdict">Grandfather is safe. Nothing has been changed, so every timeline is consistent.</div>
+        <div class="big" id="survival" aria-live="polite">100%</div>
+        <div class="cap" id="gaugeCap" aria-live="polite">of timelines survive · <strong>baseline</strong></div>
+        <div class="verdict-line" id="verdict" aria-live="polite">Grandfather is safe. Nothing has been changed, so every timeline is consistent.</div>
       </div>
       <div>
         <svg viewBox="0 0 340 210" role="img" aria-label="Enforcement curve: survival vs kill strength">
@@ -151,7 +152,7 @@
     </div>
     <div class="slider-wrap">
       <div class="slabel"><span>θ — how hard you try to kill grandfather</span><span id="thetaReadout">θ = 0</span></div>
-      <input type="range" id="theta" min="0" max="4" step="1" value="0" aria-label="Kill strength">
+      <input type="range" id="theta" min="0" max="4" step="1" value="0" aria-label="Kill strength — how hard you try to kill grandfather" aria-valuetext="θ = 0, leave alone">
       <div class="stops" id="stops">
         <span>none</span><span>a nudge</span><span>half</span><span>most</span><span>full</span>
       </div>
@@ -168,8 +169,8 @@
     <div class="back">
       <div class="dial-wrap">
         <div class="seg" role="group" aria-label="Loop state">
-          <button id="btnBroken" class="on" type="button">Loop broken</button>
-          <button id="btnClosed" type="button">Loop closed</button>
+          <button id="btnBroken" class="on" type="button" aria-pressed="true">Loop broken</button>
+          <button id="btnClosed" type="button" aria-pressed="false">Loop closed</button>
         </div>
         <svg viewBox="0 0 180 180" role="img" aria-label="The bystander's record">
           <circle cx="90" cy="90" r="66" fill="none" stroke="var(--edge)" stroke-width="1.4"/>
@@ -181,7 +182,7 @@
             <circle cx="90" cy="30" r="6" fill="var(--violet)"/>
           </g>
         </svg>
-        <div class="record-read" id="recRead">record axis: <span class="val">Z (classical)</span> · Z<sub>S</sub> = 0.978</div>
+        <div class="record-read" id="recRead" aria-live="polite">record axis: <span class="val">Z (classical)</span> · Z<sub>S</sub> = 0.978</div>
       </div>
       <div class="fingerprint">
         <div class="n">78σ</div>
@@ -194,13 +195,13 @@
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F101</span> · job <span class="sig">d9ahnee6hjac73feegfg</span></span>
     <span>3 CX gates — the shallowest apparatus of the campaign</span>
     <span class="sp"></span>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -212,14 +213,15 @@
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
       var next = cur === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
+      document.getElementById("themeBtn").setAttribute("aria-pressed", next === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, next); } catch (e) {}
     });
 
     // ---- measured enforcement ladder (F101, exp123 grade, normalized to theta=0 baseline) ----
     var M = [
-      { t: 0.00, surv: 100.0, label: "θ = 0", verdict: "Grandfather is safe. Nothing has been changed, so every timeline is consistent.", cap: "of timelines survive · <b>baseline</b>" },
+      { t: 0.00, surv: 100.0, label: "θ = 0", verdict: "Grandfather is safe. Nothing has been changed, so every timeline is consistent.", cap: "of timelines survive · <strong>baseline</strong>" },
       { t: 0.25, surv: 85.7,  label: "θ = π/4", verdict: "A gentle nudge to the past. Most timelines still close consistently — but some are already being pruned.", cap: "of the baseline survive" },
-      { t: 0.50, surv: 51.8,  label: "θ = π/2", verdict: "A serious attempt. Now <b>half</b> the timelines are gone — the ones where the paradox would have happened.", cap: "of the baseline survive" },
+      { t: 0.50, surv: 51.8,  label: "θ = π/2", verdict: "A serious attempt. Now <strong>half</strong> the timelines are gone — the ones where the paradox would have happened.", cap: "of the baseline survive" },
       { t: 0.75, surv: 17.1,  label: "θ = 3π/4", verdict: "Nearly a full kill. The timeline has thrown out five in six of your attempts to keep itself consistent.", cap: "of the baseline survive" },
       { t: 1.00, surv: 1.9,   label: "θ = π", verdict: "<span class='forbid'>THE TIMELINE FORBIDS IT.</span> A full grandfather kill survives at just 1.9% — a 53× suppression, and the residue is readout noise, not physics. The paradox has exactly zero self-consistent amplitude.", cap: "survive · <b style='color:var(--bad)'>53× suppressed</b>" }
     ];
@@ -245,6 +247,7 @@
     var survEl = document.getElementById("survival"), capEl = document.getElementById("gaugeCap"),
         verdEl = document.getElementById("verdict"), curDot = document.getElementById("curDot"),
         thEl = document.getElementById("thetaReadout"), stops = document.getElementById("stops").children;
+    var STOP_LABELS = ["θ = 0, leave alone", "θ = π/4, a nudge", "θ = π/2, half", "θ = 3π/4, most", "θ = π, full kill"];
     function render(idx) {
       var m = M[idx];
       survEl.innerHTML = (m.surv % 1 ? m.surv.toFixed(1) : m.surv) + "%";
@@ -252,7 +255,10 @@
       capEl.innerHTML = m.cap;
       verdEl.innerHTML = m.verdict;
       thEl.textContent = m.label;
+      slider.setAttribute("aria-valuetext", STOP_LABELS[idx]);
       curDot.setAttribute("cx", px(m.t)); curDot.setAttribute("cy", py(m.surv));
+      document.querySelector('svg[aria-label^="Enforcement curve"]').setAttribute('aria-label',
+        'Enforcement curve: at kill strength ' + m.label + ', survival is ' + (m.surv % 1 ? m.surv.toFixed(1) : m.surv) + '%');
       for (var i = 0; i < stops.length; i++) stops[i].className = (i === idx ? "on" : "");
     }
     var slider = document.getElementById("theta");
@@ -270,6 +276,8 @@
         : "record axis: <span class='val'>Z (classical)</span> · Z<sub>S</sub> = 0.978";
       bClosed.className = closed ? "on" : "";
       bBroken.className = closed ? "" : "on";
+      bClosed.setAttribute("aria-pressed", closed ? "true" : "false");
+      bBroken.setAttribute("aria-pressed", closed ? "false" : "true");
     }
     bBroken.addEventListener("click", function () { setLoop(false); });
     bClosed.addEventListener("click", function () { setLoop(true); });

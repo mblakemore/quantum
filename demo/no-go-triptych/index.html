@@ -101,35 +101,35 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing II · The No-Go Games</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
     <p class="eyebrow">Three no-go theorems · one court</p>
     <h1>Three walls — <span class="b">Bell</span>, <span class="c">causal order</span>, <span class="x">contextuality</span> — all breached.</h1>
-    <p class="lede">A <b>no-go theorem</b> is a proof: a hard ceiling that <b>no classical strategy</b> can pass. Cross
-    it on hardware and you haven't just done well — you've <b>ruled out a way the world could have been</b>. Here are
+    <p class="lede">A <strong>no-go theorem</strong> is a proof: a hard ceiling that <strong>no classical strategy</strong> can pass. Cross
+    it on hardware and you haven't just done well — you've <strong>ruled out a way the world could have been</strong>. Here are
     three, each forbidding a different classical intuition, each with its ceiling breached on the same chip — and each
     with a classical control run alongside that lands right at the wall.</p>
 
     <div class="pcard">
       <h2>What each wall forbids</h2>
-      <p><b style="color:var(--cyan)">Bell</b> forbids <b>locality</b> (outcomes fixed by local hidden variables) ·
-      <b style="color:var(--violet)">Causal order</b> forbids <b>a definite sequence of events</b> (even a random
-      mixture of orders) · <b style="color:var(--amber)">Contextuality</b> forbids <b>pre-set values</b> (each
+      <p><b style="color:var(--cyan)">Bell</b> forbids <strong>locality</strong> (outcomes fixed by local hidden variables) ·
+      <b style="color:var(--violet)">Causal order</b> forbids <strong>a definite sequence of events</strong> (even a random
+      mixture of orders) · <b style="color:var(--amber)">Contextuality</b> forbids <strong>pre-set values</strong> (each
       observable answering the same regardless of what's measured with it). Beating each ceiling falsifies that
       picture.</p>
     </div>
 
     <div class="herobtns">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
-      <span class="scope">Certified <b>game / correlation</b> advantages, not computational speedup. Device-characterized, not loophole-free.</span>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
+      <span class="scope">Certified <strong>game / correlation</strong> advantages, not computational speedup. Device-characterized, not loophole-free.</span>
     </div>
   </header>
 
@@ -137,21 +137,21 @@
   <section class="panel">
     <p class="panel-label">Exhibit A — The three walls</p>
     <h2>Each classical ceiling, and the quantum value cresting over it</h2>
-    <p class="sub">Each tower is one theorem. The shaded block is <b>classical territory</b> — everything a classical
-    strategy can reach, capped by the proven wall. The bright line is the <b>measured quantum value</b>, cresting into
-    the region only quantum mechanics can reach; the hollow dot is the <b>executed classical control</b>, sitting at
+    <p class="sub">Each tower is one theorem. The shaded block is <strong>classical territory</strong> — everything a classical
+    strategy can reach, capped by the proven wall. The bright line is the <strong>measured quantum value</strong>, cresting into
+    the region only quantum mechanics can reach; the hollow dot is the <strong>executed classical control</strong>, sitting at
     the wall. Each tower has its own scale — the σ clearance is the comparable headline.</p>
 
     <div class="selector" role="group" aria-label="Choose a no-go theorem">
       <span class="lbl">focus a wall:</span>
-      <button class="cbtn" data-key="bell" type="button">Bell</button>
-      <button class="cbtn" data-key="causal" type="button">Causal order</button>
-      <button class="cbtn" data-key="context" type="button">Contextuality</button>
+      <button class="cbtn" data-key="bell" type="button" aria-pressed="true">Bell</button>
+      <button class="cbtn" data-key="causal" type="button" aria-pressed="false">Causal order</button>
+      <button class="cbtn" data-key="context" type="button" aria-pressed="false">Contextuality</button>
     </div>
 
     <div class="towers" id="towers"></div>
 
-    <div class="detail" id="detail"></div>
+    <div class="detail" id="detail" aria-live="polite"></div>
   </section>
 
   <!-- PANEL B -->
@@ -163,38 +163,38 @@
     <div class="receipts">
       <div class="rc">
         <h3>1 · The bounds are proven, not cited</h3>
-        <p>The causal wall <b>0.869</b> is re-solved by SDP; the contextuality wall <b>8/9</b> is
-        <b>enumerated in-code over all 4,096</b> classical strategies; Bell's <b>2</b> is the textbook CHSH bound.
+        <p>The causal wall <strong>0.869</strong> is re-solved by SDP; the contextuality wall <strong>8/9</strong> is
+        <strong>enumerated in-code over all 4,096</strong> classical strategies; Bell's <strong>2</strong> is the textbook CHSH bound.
         <span class="yes">Each ceiling is provable inside the grader.</span></p>
       </div>
       <div class="rc">
         <h3>2 · Every wall has an executed null</h3>
-        <p>A real classical control ran on the same chip for each: Bell <b>0.036</b>, fixed-order <b>0.615</b>,
-        no-entanglement <b>0.657</b> — each landing <b>at its wall</b>. The breach is a measured <b>contrast</b>, not
+        <p>A real classical control ran on the same chip for each: Bell <strong>0.036</strong>, fixed-order <strong>0.615</strong>,
+        no-entanglement <strong>0.657</strong> — each landing <strong>at its wall</strong>. The breach is a measured <strong>contrast</strong>, not
         an absolute reading.</p>
       </div>
       <div class="rc">
         <h3>3 · One chip — and one crossed devices</h3>
-        <p>All three on <b>ibm_marrakesh</b>. And the causal-order game <b>reproduced on a second device</b>
+        <p>All three on <strong>ibm_marrakesh</strong>. And the causal-order game <strong>reproduced on a second device</strong>
         (ibm_fez, 0.9738, 201σ — 0.3pp concordance), so its wall didn't fall to one machine's quirk.</p>
       </div>
     </div>
     <div class="links-row">
       <a class="deeper" style="--sel:var(--violet)" href="../casebook/">Deeper → The Interrogation (causal game)</a>
       <a class="deeper" style="--sel:var(--amber)" href="../magic-square/">Deeper → The Magic Square (contextuality)</a>
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet</a>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Full Spec Sheet</a>
     </div>
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="b">CHSH 53σ</span> · <span class="c">F82 217σ</span> · <span class="x">F106 196σ</span></span>
     <span>ibm_marrakesh · each with an executed null</span>
     <span class="sp2"></span>
     <a href="./spec.html">Full Spec</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -204,7 +204,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
     var css = getComputedStyle(document.documentElement);
@@ -215,17 +215,17 @@
       { key:"bell", name:"Bell", sub:"nonlocality · CHSH", color:"--cyan", forbids:"local hidden variables",
         ceiling:2.0, ceilLab:"|S| ≤ 2", measured:2.7522, measLab:"S = 2.7522", sigma:"53σ",
         nullv:0.036, nullLab:"null 0.04", niceMin:0, niceMax:2.83, qLab:"Tsirelson 2.83",
-        note:"The <b>CHSH</b> correlator reaches <b>S = 2.7522 ± 0.014</b> — <b>53σ</b> past the local-realistic bound of 2, nearing the Tsirelson ceiling 2.83. No theory where distant outcomes are fixed by local hidden variables can do this. The separable control reads S ≈ 0.04.",
+        note:"The <strong>CHSH</strong> correlator reaches <strong>S = 2.7522 ± 0.014</strong> — <strong>53σ</strong> past the local-realistic bound of 2, nearing the Tsirelson ceiling 2.83. No theory where distant outcomes are fixed by local hidden variables can do this. The separable control reads S ≈ 0.04.",
         deeper:null, deeperLab:null },
       { key:"causal", name:"Causal order", sub:"no definite order · F82", color:"--violet", forbids:"a definite order of events",
         ceiling:0.869, ceilLab:"≤ 0.869", measured:0.9769, measLab:"0.9769", sigma:"217σ",
         nullv:0.615, nullLab:"fixed-order 0.62", niceMin:0.55, niceMax:1.0, qLab:"max 1.0",
-        note:"The Araújo et al. commute/anticommute game, won at <b>0.9769 ± 0.0005</b> vs the causally-separable bound <b>0.869</b> — <b>216.8σ</b>. No fixed order of the two operations, nor any random mixture, can win this often; the fixed-order control buys exactly 0.615. <b>Reproduced on a second device</b> (ibm_fez, 0.9738, 201σ).",
+        note:"The Araújo et al. commute/anticommute game, won at <strong>0.9769 ± 0.0005</strong> vs the causally-separable bound <strong>0.869</strong> — <strong>216.8σ</strong>. No fixed order of the two operations, nor any random mixture, can win this often; the fixed-order control buys exactly 0.615. <strong>Reproduced on a second device</strong> (ibm_fez, 0.9738, 201σ).",
         deeper:"../casebook/", deeperLab:"The Interrogation" },
       { key:"context", name:"Contextuality", sub:"pre-set values · F106", color:"--amber", forbids:"pre-set (non-contextual) values",
         ceiling:0.8889, ceilLab:"≤ 8/9", measured:0.96901, measLab:"0.9690", sigma:"196σ",
         nullv:0.657, nullLab:"no-entangle 0.66", niceMin:0.6, niceMax:1.0, qLab:"max 1.0",
-        note:"The Peres–Mermin magic-square game, value <b>0.96901 ± 0.0004</b> vs the non-contextual ceiling <b>8/9</b> — <b>196σ</b>, with the ceiling enumerated over all 4,096 classical strategies. Even the worst single context clears 8/9 at 37.8σ. The no-entanglement control reads 0.657.",
+        note:"The Peres–Mermin magic-square game, value <strong>0.96901 ± 0.0004</strong> vs the non-contextual ceiling <strong>8/9</strong> — <strong>196σ</strong>, with the ceiling enumerated over all 4,096 classical strategies. Even the worst single context clears 8/9 at 37.8σ. The no-entanglement control reads 0.657.",
         deeper:"../magic-square/", deeperLab:"The Magic Square" }
     ];
     WALLS.forEach(function(w){ console.assert(w.measured > w.ceiling && w.nullv <= w.ceiling + 1e-9, "measured crests, null at/below wall: "+w.key); });
@@ -264,18 +264,22 @@
         tsvg(w)+
         '<div class="tw-nums">'+
           '<div class="tw-sig" style="color:'+C(w.color)+'">'+w.sigma+' <small>over the wall</small></div>'+
-          '<div class="tw-row q">quantum <b>'+w.measLab+'</b></div>'+
+          '<div class="tw-row q">quantum <strong>'+w.measLab+'</strong></div>'+
           '<div class="tw-row wall">wall '+w.ceilLab+'</div>'+
           '<div class="tw-row null">'+w.nullLab+'</div>'+
         '</div>';
+      d.setAttribute("role", "button");
+      d.setAttribute("tabindex", "0");
+      d.setAttribute("aria-pressed", "false");
       d.addEventListener("click", function(){ select(w.key); });
+      d.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); select(w.key); } });
       towers.appendChild(d);
     });
 
     var detail = document.getElementById("detail"), btns = document.querySelectorAll(".cbtn"), cols = document.querySelectorAll(".tcol");
     function select(key){
       var w = WALLS.filter(function(x){return x.key===key;})[0];
-      cols.forEach(function(c){ var on=c.dataset.key===key; c.classList.toggle("sel",on); c.classList.toggle("dim",!on); });
+      cols.forEach(function(c){ var on=c.dataset.key===key; c.classList.toggle("sel",on); c.classList.toggle("dim",!on); c.setAttribute("aria-pressed",on?"true":"false"); });
       btns.forEach(function(b){ var on=b.dataset.key===key; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
       var deep = w.deeper ? '<a class="deeper" style="--sel:'+C(w.color)+'" href="'+w.deeper+'">Deeper → '+w.deeperLab+'</a>' : '';
       detail.innerHTML =

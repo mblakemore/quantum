@@ -71,68 +71,68 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· Pocket Dictionary exhibit</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet</p>
     <h1>Two bits in one qubit, <span class="hl">either one retrievable</span></h1>
     <div class="idline">
-      <span><b>Finding</b> F107</span>
-      <span><b>Experiment</b> Exp128 (2→1 QRAC)</span>
-      <span><b>Backend</b> ibm_marrakesh (Heron r2)</span>
-      <span><b>Job</b> d9al7om6hjac73fejisg</span>
+      <span><strong>Finding</strong> F107</span>
+      <span><strong>Experiment</strong> Exp128 (2→1 QRAC)</span>
+      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+      <span><strong>Job</strong> d9al7om6hjac73fejisg</span>
     </div>
-    <span class="verdict-chip">✓ QRAC CERTIFIED IN THE TWO-SIDED BAND · 110.5σ over classical, 5.2σ under the quantum law</span>
+    <span class="verdict-chip"><span aria-hidden="true">✓</span> QRAC CERTIFIED IN THE TWO-SIDED BAND · 110.5σ over classical, 5.2σ under the quantum law</span>
   </header>
   <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
 
   <p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number is drawn from the
   frozen grade file <code>results/exp128_hw_results.json</code> and its job record. It is the campaign's
-  <b>first zero-two-qubit-gate advantage flight</b> — the whole trick fits in a single qubit's angles.</p>
+  <strong>first zero-two-qubit-gate advantage flight</strong> — the whole trick fits in a single qubit's angles.</p>
 
   <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p>Alice has <b>two bits</b>. She must pack them into <b>one</b> carrier and send it. Bob, on the other end, gets to
-  ask for <b>either</b> bit — his choice, made <b>after</b> he receives the carrier — and he may look <b>once</b>.
+  <p>Alice has <strong>two bits</strong>. She must pack them into <strong>one</strong> carrier and send it. Bob, on the other end, gets to
+  ask for <strong>either</strong> bit — his choice, made <strong>after</strong> he receives the carrier — and he may look <strong>once</strong>.
   How often can he be right?</p>
   <div class="callout">
     <p class="clabel">The classical packing limit</p>
-    <p class="tight">With one <b>classical</b> bit you cannot store two. The best you can do is store one bit faithfully
-    and guess the other — averaged over Bob's random choice, that is <b>75%</b>. This ceiling is a theorem: enumerated
-    here over all <b>256 encode/decode strategy pairs</b>, it comes out <b>exactly 0.75</b>.</p>
+    <p class="tight">With one <strong>classical</strong> bit you cannot store two. The best you can do is store one bit faithfully
+    and guess the other — averaged over Bob's random choice, that is <strong>75%</strong>. This ceiling is a theorem: enumerated
+    here over all <strong>256 encode/decode strategy pairs</strong>, it comes out <strong>exactly 0.75</strong>.</p>
   </div>
   <div class="callout good">
     <p class="clabel">The quantum trick</p>
-    <p class="tight">Encode the two bits into <b>one qubit's angle</b> on the Bloch sphere — the four messages point to
+    <p class="tight">Encode the two bits into <strong>one qubit's angle</strong> on the Bloch sphere — the four messages point to
     the four "diagonals". Bob measures along the axis for the bit he wants. Because the states are cleverly spread, he
-    is right <code>cos²(π/8) = 0.8536</code> of the time <b>for either bit</b>. Two bits, one qubit, either
-    retrievable — <b>above what any classical bit can do.</b></p>
+    is right <code>cos²(π/8) = 0.8536</code> of the time <strong>for either bit</strong>. Two bits, one qubit, either
+    retrievable — <strong>above what any classical bit can do.</strong></p>
   </div>
 
   <h2><span class="n">2</span>The two-sided band — certifying inside the physical regime</h2>
-  <p>Quantum mechanics doesn't just have a floor to beat; it has a <b>ceiling of its own</b>. A correct QRAC must land
-  <b>between</b> the classical wall and the quantum law:</p>
+  <p>Quantum mechanics doesn't just have a floor to beat; it has a <strong>ceiling of its own</strong>. A correct QRAC must land
+  <strong>between</strong> the classical wall and the quantum law:</p>
   <div class="callout">
     <p class="clabel">The advantage band</p>
     <p class="tight"><code>classical 0.75  &lt;  (a real 2→1 QRAC)  ≤  0.8536 quantum law</code>. Beating 0.75 is the
-    advantage; <b>exceeding 0.8536 is impossible</b> — so a reading above the quantum law is an <b>apparatus error</b>,
-    not a better result. The gate <code>G_QBAND</code> makes crossing the quantum ceiling a <b>NO-TEST</b>. Certifying
-    <b>inside</b> the band is stronger than merely clearing the floor: it says the result is <b>real physics</b>.</p>
+    advantage; <strong>exceeding 0.8536 is impossible</strong> — so a reading above the quantum law is an <strong>apparatus error</strong>,
+    not a better result. The gate <code>G_QBAND</code> makes crossing the quantum ceiling a <strong>NO-TEST</strong>. Certifying
+    <strong>inside</strong> the band is stronger than merely clearing the floor: it says the result is <strong>real physics</strong>.</p>
   </div>
 
   <h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
   <div class="gate">
     <span class="g">G_SENT</span><span class="r">Readout sentinels healthy. <span class="pass">PASS</span> (0.998 / 0.995).</span>
     <span class="g">G_CLASS</span><span class="r">The executed classical arm honors its own 0.75 law. <span class="pass">PASS</span> (0.74818).</span>
-    <span class="g">W1_QRAC</span><span class="r"><b>advantage:</b> pooled quantum − 5·SE &gt; 0.75. <span class="pass">PASS</span> (0.84893, 110.5σ).</span>
-    <span class="g">W2_MIN</span><span class="r"><b>every case:</b> the worst single (message, bit) case &gt; 0.75. <span class="pass">PASS</span> (min 0.84325, 36.3σ).</span>
-    <span class="g">G_QBAND</span><span class="r"><b>two-sided:</b> pooled must not exceed the quantum law 0.8536 (else NO-TEST). <span class="pass">PASS</span> (5.2σ below, inside the band).</span>
+    <span class="g">W1_QRAC</span><span class="r"><strong>advantage:</strong> pooled quantum − 5·SE &gt; 0.75. <span class="pass">PASS</span> (0.84893, 110.5σ).</span>
+    <span class="g">W2_MIN</span><span class="r"><strong>every case:</strong> the worst single (message, bit) case &gt; 0.75. <span class="pass">PASS</span> (min 0.84325, 36.3σ).</span>
+    <span class="g">G_QBAND</span><span class="r"><strong>two-sided:</strong> pooled must not exceed the quantum law 0.8536 (else NO-TEST). <span class="pass">PASS</span> (5.2σ below, inside the band).</span>
   </div>
 
   <h2><span class="n">4</span>The measured data</h2>
@@ -140,13 +140,14 @@
   executed classical arm. Classical ceiling 0.75; quantum law 0.8536.</p>
   <div class="tbl-wrap">
   <table>
-    <thead><tr><th>Alice's message</th><th>read bit 1</th><th>read bit 2</th></tr></thead>
+<caption>2→1 QRAC retrieval success per message and bit, vs classical 0.75 ceiling</caption>
+    <thead><tr><th scope="col">Alice's message</th><th scope="col">read bit 1</th><th scope="col">read bit 2</th></tr></thead>
     <tbody>
       <tr><td>00</td><td class="qv">0.84325</td><td class="qv">0.84455</td></tr>
       <tr><td>01</td><td class="qv">0.84345</td><td class="qv">0.84940</td></tr>
       <tr><td>10</td><td class="qv">0.85300</td><td class="qv">0.85410</td></tr>
       <tr><td>11</td><td class="qv">0.85650</td><td class="qv">0.84715</td></tr>
-      <tr class="hi"><td>pooled (quantum)</td><td class="qv" colspan="2"><b>0.84893 ± 0.00090 — 110.5σ over 0.75, 5.2σ under 0.8536</b></td></tr>
+      <tr class="hi"><td>pooled (quantum)</td><td class="qv" colspan="2"><strong>0.84893 ± 0.00090 — 110.5σ over 0.75, 5.2σ under 0.8536</strong></td></tr>
       <tr><td>classical arm</td><td class="cv" colspan="2">0.74818 (honors its own 0.75 law)</td></tr>
     </tbody>
   </table>
@@ -156,44 +157,44 @@
 
   <h2><span class="n">5</span>What makes it real</h2>
   <ul>
-    <li><b>The ceiling is proven, not cited.</b> 0.75 is enumerated in-code over all 256 classical encode/decode
+    <li><strong>The ceiling is proven, not cited.</strong> 0.75 is enumerated in-code over all 256 classical encode/decode
     strategy pairs — provable inside the grader.</li>
-    <li><b>Both laws honored on one chip.</b> The quantum player lands at 0.849; the executed classical player lands at
+    <li><strong>Both laws honored on one chip.</strong> The quantum player lands at 0.849; the executed classical player lands at
     0.748 — each obeying its own law, same window. Only the quantum player crosses the line.</li>
-    <li><b>Two-sided, not one-sided.</b> <code>G_QBAND</code> would flag an over-the-law reading as apparatus error.
+    <li><strong>Two-sided, not one-sided.</strong> <code>G_QBAND</code> would flag an over-the-law reading as apparatus error.
     Landing inside the band certifies the physics, not just "a big number".</li>
-    <li><b>Zero two-qubit gates.</b> The entire advantage is one qubit's rotation angles — the campaign's first
-    zero-2q-gate <b>advantage</b> flight (the earlier zero-2q flight, F102, was a law-match, not an advantage).</li>
+    <li><strong>Zero two-qubit gates.</strong> The entire advantage is one qubit's rotation angles — the campaign's first
+    zero-2q-gate <strong>advantage</strong> flight (the earlier zero-2q flight, F102, was a law-match, not an advantage).</li>
   </ul>
 
   <h2><span class="n">6</span>Scope &amp; caveats</h2>
   <ul>
-    <li><b>A communication/coding advantage, not computational speedup.</b> This certifies a random-access-coding
+    <li><strong>A communication/coding advantage, not computational speedup.</strong> This certifies a random-access-coding
     advantage over a classical bit — one of the campaign's five advantage scoreboards, not a runtime speedup.</li>
-    <li><b>Device-characterized.</b> A hardware certification on a characterized device with an executed classical
+    <li><strong>Device-characterized.</strong> A hardware certification on a characterized device with an executed classical
     control, not a loophole-free protocol.</li>
-    <li><b>Textbook prior credited.</b> The 2→1 QRAC is Ambainis–Nayak–Ta-Shma–Vazirani; the contribution is the
+    <li><strong>Textbook prior credited.</strong> The 2→1 QRAC is Ambainis–Nayak–Ta-Shma–Vazirani; the contribution is the
     frozen, two-sided-band, null-controlled hardware certification.</li>
   </ul>
 
   <h2><span class="n">7</span>Provenance</h2>
   <ul>
-    <li><b>Grade file:</b> <code>results/exp128_hw_results.json</code> · <b>Job:</b> d9al7om6hjac73fejisg</li>
-    <li><b>Pre-registration:</b> <code>experiments/exp128-qrac-preregistration.md</code></li>
-    <li><b>Backend:</b> ibm_marrakesh (Heron r2) · <b>Classical ceiling:</b> 0.75 (enumerated, 256 pairs) · <b>Quantum law:</b> cos²(π/8) = 0.8536</li>
-    <li><b>Family:</b> Horizons-3 · one of the five advantage scoreboards (communication &amp; sensing)</li>
+    <li><strong>Grade file:</strong> <code>results/exp128_hw_results.json</code> · <strong>Job:</strong> d9al7om6hjac73fejisg</li>
+    <li><strong>Pre-registration:</strong> <code>experiments/exp128-qrac-preregistration.md</code></li>
+    <li><strong>Backend:</strong> ibm_marrakesh (Heron r2) · <strong>Classical ceiling:</strong> 0.75 (enumerated, 256 pairs) · <strong>Quantum law:</strong> cos²(π/8) = 0.8536</li>
+    <li><strong>Family:</strong> Horizons-3 · one of the five advantage scoreboards (communication &amp; sensing)</li>
   </ul>
 
-  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
 
   </main>
-  <div class="foot" role="contentinfo">
+  <footer class="foot">
     <span>MEASURED · <b style="color:var(--cyan)">F107</b> · job d9al7om6hjac73fejisg · ibm_marrakesh</span>
     <span class="sp"></span>
     <a href="./spec.md">Markdown</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 <script>
@@ -202,7 +203,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
   })();

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="description" content="The Ladder of Causation: climb from association to intervention to counterfactual reasoning, illustrated with quantum causal structure measured on IBM Heron silicon.">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M4%204C8%208%208%208%2012%2012%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12%204C8%208%208%208%204%2012%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.7%22%20fill%3D%22%23e5e7eb%22%2F%3E%3C%2Fsvg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +10,7 @@
 <style>
   :root{
     --ink:#171b26; --panel:#1e2331; --line:#2a3145; --text:#e2e6f0; --muted:#8b93a7;
-    --dim:#8691b0; --cyan:#45d6cf; --gold:#e6a94e; --golddark:#b9791b; --green:#3dbd7d;
+    --dim:#8691b0; --cyan:#45d6cf; --gold:#e6a94e; --golddark:#d4880a; --green:#3dbd7d;
     --red:#e05c6e; --zone:#06201f;
     --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -52,18 +53,18 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div id="main" role="main" class="wrap">
-  <div class="eyebrow">A guided tour · real experiments · one idea</div>
+<main id="main" class="wrap">
+  <div class="eyebrow">A guided tour · real experiments · one idea</main>
   <h1>The Ladder of Causation,<br>climbed on real silicon</h1>
   <p class="lede">Judea Pearl taught a generation that causal questions come in three rungs —
-  <b>seeing</b>, <b>doing</b>, and <b>imagining</b> — and that no rung can be answered from the
+  <strong>seeing</strong>, <strong>doing</strong>, and <strong>imagining</strong> — and that no rung can be answered from the
   one below it. This repository, it turns out, climbed the whole ladder on a quantum processor
   without planning to. Here is the tour: one real experiment per rung, with the measured
   numbers — and at the top, a step off the ladder that Pearl's framework can name only by its
   absence.</p>
 
-  <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
+  <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
 
   <div class="rail">
 
@@ -133,13 +134,13 @@
       <p>Every rung — seeing, doing, imagining — quietly assumes one thing: that a definite
       causal structure <em>exists</em>. Some DAG, maybe unknown, maybe latent-mixed, but there.
       The quantum switch breaks exactly that assumption: two operations are applied in a
-      coherent superposition of <b>A-then-B</b> and <b>B-then-A</b>. Not a hidden order. Not a
+      coherent superposition of <strong>A-then-B</strong> and <strong>B-then-A</strong>. Not a hidden order. Not a
       coin-flip over orders — we ran that as a control arm, and it behaves just as Pearl
       predicts. An amplitude over orders.</p>
       <div class="zone">
         <div class="k" style="color:var(--cyan);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">The measured step off</div>
         <p style="margin:0">A discrimination game whose ceiling for <em>any</em> definite-order
-        strategy is provably <b>0.8695</b> was won at <span class="num">0.9769 — 216.8σ above
+        strategy is provably <strong>0.8695</strong> was won at <span class="num">0.9769 — 216.8σ above
         the ceiling</span> — and replicated on a second chip the next day (0.9738, 201σ). Two
         channels that each transmit exactly zero information carried
         <span class="num">0.0436 bits</span> through their superposition of orders. The
@@ -147,7 +148,7 @@
         they must.</p>
       </div>
       <p>The ladder isn't wrong — inside its world it was quantitatively correct on this same
-      hardware, in the same calibration windows. It is <b>typed</b>: its input is a causal
+      hardware, in the same calibration windows. It is <strong>typed</strong>: its input is a causal
       structure, and this object isn't one. We even fed the switch data to standard
       causal-discovery algorithms (PC, GES): they returned an ordinary causal graph, no
       warning — the output format itself cannot say "there is no order here"
@@ -156,12 +157,12 @@
 
   </div>
 
-  <div class="foot">
+  <footer class="foot">
     Every number above is a measured, pre-registered, frozen-rule-graded result with public job
     IDs — see the <a href="../../docs/quantum-switch-spec.md">switch spec sheet</a>, the
     <a href="../../docs/beyond-the-ladder.md">Beyond the Ladder (the full argument)</a>, and the
     <a href="../../README.md">repository front door</a>. Built by the DC network (Whisper C4587).
-  </div>
+  </footer>
 </div>
 </body>
 </html>

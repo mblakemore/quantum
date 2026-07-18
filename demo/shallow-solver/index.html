@@ -127,50 +127,50 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
     <p class="eyebrow">A constant-depth quantum advantage · Bravyi–Gosset–König</p>
     <h1>A circuit too <span class="hl">shallow</span> for any classical machine to match.</h1>
     <p class="lede">Some quantum advantages rest on unproven guesses (like "P ≠ NP"). This one doesn't. There is a
-    problem a quantum circuit of <b>fixed, shallow depth</b> can solve that <b>no classical shallow circuit can — as the
-    problem grows</b> (proven outright, asymptotically; at the small size we flew a shallow classical circuit still
+    problem a quantum circuit of <strong>fixed, shallow depth</strong> can solve that <strong>no classical shallow circuit can — as the
+    problem grows</strong> (proven outright, asymptotically; at the small size we flew a shallow classical circuit still
     can). We ran it on silicon and it solved the puzzle 90% of the time, spreading its answers across the
-    <b>whole</b> solution set — the part a classical cheat can't fake. Every number is measured hardware.</p>
+    <strong>whole</strong> solution set — the part a classical cheat can't fake. Every number is measured hardware.</p>
 
     <div class="fence">
       <p class="fl">⚠ Scope — read this first</p>
-      <p>This does <b>not</b> prove the complexity separation on the chip. That separation is <b>asymptotic</b> — it
-      lives in the large-size limit, and the <b>theorem</b> carries it. What the hardware shows is the concrete
-      instance: a constant-depth circuit solving the <code>n=4</code> puzzle at <b>90% fidelity</b>, full coverage,
-      <b>O(1) depth</b>. The complement to the deep-circuit wall.</p>
+      <p>This does <strong>not</strong> prove the complexity separation on the chip. That separation is <strong>asymptotic</strong> — it
+      lives in the large-size limit, and the <strong>theorem</strong> carries it. What the hardware shows is the concrete
+      instance: a constant-depth circuit solving the <code>n=4</code> puzzle at <strong>90% fidelity</strong>, full coverage,
+      <strong>O(1) depth</strong>. The complement to the deep-circuit wall.</p>
     </div>
 
     <div class="primer">
       <div class="pcard">
         <h2>What's a constant-depth circuit?</h2>
-        <p><b>Depth</b> = how many layers of gates run one after another. <b>Constant</b> depth means a <b>fixed</b>
+        <p><strong>Depth</strong> = how many layers of gates run one after another. <strong>Constant</strong> depth means a <strong>fixed</strong>
         number of layers no matter how big the problem — everything happens in a few parallel rounds. Shallow, fast,
         and hard to beat classically at this depth.</p>
       </div>
       <div class="pcard">
         <h2>Why is coverage the real test?</h2>
-        <p>The puzzle has <b>four</b> valid answers. A classical cheat could memorize <b>one</b> and output it every
-        time — acing "is it valid?" while computing nothing. So the real gate is <b>coverage</b>: produce <b>all</b>
+        <p>The puzzle has <strong>four</strong> valid answers. A classical cheat could memorize <strong>one</strong> and output it every
+        time — acing "is it valid?" while computing nothing. So the real gate is <strong>coverage</strong>: produce <strong>all</strong>
         four. Only a genuine solver can.</p>
       </div>
     </div>
 
     <div class="herobtns">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
-      <span class="scope">An <b>unconditional</b> advantage genre — but scoped: n=4 fidelity, the theorem carries the asymptotics.</span>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
+      <span class="scope">An <strong>unconditional</strong> advantage genre — but scoped: n=4 fidelity, the theorem carries the asymptotics.</span>
     </div>
   </header>
 
@@ -178,16 +178,16 @@
   <section class="panel">
     <p class="panel-label">Exhibit A — Two tests, three strategies</p>
     <h2>Solve the puzzle — and prove you're not a one-answer cheat</h2>
-    <p class="sub">The 2D Hidden Linear Function at n=4 has <b>four</b> valid answers out of 16 possible outputs (so a
-    random guess is valid 25% of the time). Pick a strategy and watch two gates: <b>W1</b> — is it valid more than
-    chance? — and <b>W3 coverage</b> — does it produce <b>all four</b> valid answers? Only the real quantum solver
+    <p class="sub">The 2D Hidden Linear Function at n=4 has <strong>four</strong> valid answers out of 16 possible outputs (so a
+    random guess is valid 25% of the time). Pick a strategy and watch two gates: <strong>W1</strong> — is it valid more than
+    chance? — and <strong>W3 coverage</strong> — does it produce <strong>all four</strong> valid answers? Only the real quantum solver
     passes both.</p>
 
     <div class="selector" role="group" aria-label="Choose a strategy">
       <span class="lbl">strategy:</span>
       <button class="cbtn on" data-s="quantum" type="button">Quantum solver</button>
-      <button class="cbtn" data-s="random" type="button">Random guess</button>
-      <button class="cbtn" data-s="cheat" type="button">One-answer cheat</button>
+      <button class="cbtn" data-s="random" type="button" aria-pressed="true">Random guess</button>
+      <button class="cbtn" data-s="cheat" type="button" aria-pressed="false">One-answer cheat</button>
     </div>
 
     <div class="solve">
@@ -197,13 +197,13 @@
         <div class="floor-note" id="floorNote"></div>
       </div>
       <div class="gates">
-        <div class="gcard" id="g1">
+        <div class="gcard" id="g1" aria-live="polite">
           <div class="gt">W1 · SOLVER</div>
           <div class="gv" id="g1v">0.90</div>
           <div class="gsub">P(valid) vs floor 0.25</div>
           <div class="gbadge" id="g1b">PASS</div>
         </div>
-        <div class="gcard" id="g3">
+        <div class="gcard" id="g3" aria-live="polite">
           <div class="gt">W3 · COVERAGE</div>
           <div class="gv" id="g3v">4/4</div>
           <div class="gsub">valid answers produced</div>
@@ -211,15 +211,15 @@
         </div>
       </div>
     </div>
-    <p class="verdict" id="verdict"></p>
+    <p class="verdict" id="verdict" aria-live="polite"></p>
   </section>
 
   <!-- PANEL B -->
   <section class="panel">
     <p class="panel-label">Exhibit B — Shallow, and unconditional</p>
     <h2>Fixed depth, no matter how big the problem grows</h2>
-    <p class="sub">A classical circuit needs <b>growing</b> depth to keep up — but a shallow classical circuit
-    provably <b>can't</b> keep up at all (as the problem grows). The quantum circuit's depth stays <b>O(1)</b>. Here's
+    <p class="sub">A classical circuit needs <strong>growing</strong> depth to keep up — but a shallow classical circuit
+    provably <strong>can't</strong> keep up at all (as the problem grows). The quantum circuit's depth stays <strong>O(1)</strong>. Here's
     the run that certified it.</p>
     <div class="stats">
       <div class="stat"><div class="sv">0.9017</div><div class="sl">P(valid answer)</div></div>
@@ -227,9 +227,9 @@
       <div class="stat"><div class="sv">23</div><div class="sl">hardware depth · 10 CZ</div></div>
       <div class="stat"><div class="sv">O(1)</div><div class="sl">logical depth · fixed in n</div></div>
     </div>
-    <p class="depth-note">The separation is <b>unconditional</b> — it needs no unproven assumption like P ≠ NP. Bravyi,
+    <p class="depth-note">The separation is <strong>unconditional</strong> — it needs no unproven assumption like P ≠ NP. Bravyi,
     Gosset &amp; König (2018) proved a quantum constant-depth circuit outright beats every classical one on this
-    problem, in the large-size limit. <b>The scope, again:</b> at n=4 this is a fidelity demonstration of the solver;
+    problem, in the large-size limit. <strong>The scope, again:</strong> at n=4 this is a fidelity demonstration of the solver;
     the theorem carries the asymptotic hardness.</p>
   </section>
 
@@ -241,40 +241,40 @@
     <div class="receipts">
       <div class="rc">
         <h3>1 · Coverage is un-fakeable</h3>
-        <p>The one-answer cheat aces validity (100%) but produces only <b>1 of 4</b> valid answers — <b>failing
-        coverage</b>. The quantum solver produces all four at ~0.22 each. <span class="yes">You can't memorize your
+        <p>The one-answer cheat aces validity (100%) but produces only <strong>1 of 4</strong> valid answers — <strong>failing
+        coverage</strong>. The quantum solver produces all four at ~0.22 each. <span class="yes">You can't memorize your
         way past coverage.</span></p>
       </div>
       <div class="rc">
         <h3>2 · Hardness from contextuality</h3>
-        <p>Why <b>can't</b> a classical shallow circuit keep up as the problem grows? The hardness is
-        <b>contextuality-flavored</b> — the grid's parity structure, the same resource family the museum certifies at
-        196σ (F106). That link is <b>theory</b>: the magic-square gadget lives in BGKT-2020, a different circuit; the
+        <p>Why <strong>can't</strong> a classical shallow circuit keep up as the problem grows? The hardness is
+        <strong>contextuality-flavored</strong> — the grid's parity structure, the same resource family the museum certifies at
+        196σ (F106). That link is <strong>theory</strong>: the magic-square gadget lives in BGKT-2020, a different circuit; the
         solver we flew is the plain BGK-2018 circuit, and F106 certified the game in a <span class="yes">separate
         experiment</span>. The no-go theorem and the computational advantage are the same resource in theory — not
         composed on one chip here.</p>
       </div>
       <div class="rc">
         <h3>3 · No assumptions required</h3>
-        <p>Unlike most claimed quantum advantages, this one rests on <b>no unproven conjecture</b>. The classical
-        impossibility is a <b>theorem</b>, not a hope — which is what makes the constant-depth separation so unusual.</p>
+        <p>Unlike most claimed quantum advantages, this one rests on <strong>no unproven conjecture</strong>. The classical
+        impossibility is a <strong>theorem</strong>, not a hope — which is what makes the constant-depth separation so unusual.</p>
       </div>
     </div>
     <div class="links-row">
       <a class="deeper" href="../magic-square/">The Magic Square — the contextuality it inherits →</a>
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet</a>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Full Spec Sheet</a>
     </div>
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F113</span> · job <span class="sig">d9amnlvu62qs738o8nt0</span></span>
     <span>ibm_marrakesh · 0.9017 · 437.8σ · full coset · O(1) depth</span>
     <span class="sp2"></span>
     <a href="./spec.html">Full Spec</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -284,7 +284,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
 
@@ -294,13 +294,13 @@
     var STRATS = {
       quantum: { label:"Quantum solver", z:[0.2237,0.2229,0.2308,0.2243], inv:0.0983,
         pvalid:0.9017, covered:4, w1:true, w3:true, cheat:false,
-        note:"<b>The genuine solver.</b> Valid <span class='ok'>90% of the time</span> — 437.8σ over chance — and it produces <b>all four</b> answers at ~0.22 each. <span class='ok'>Passes both gates.</span> Only a real constant-depth quantum circuit does this." },
+        note:"<strong>The genuine solver.</strong> Valid <span class='ok'>90% of the time</span> — 437.8σ over chance — and it produces <strong>all four</strong> answers at ~0.22 each. <span class='ok'>Passes both gates.</span> Only a real constant-depth quantum circuit does this." },
       random: { label:"Random guess", z:[0.0625,0.0625,0.0625,0.0625], inv:0.75,
         pvalid:0.25, covered:4, w1:false, w3:true, cheat:false,
-        note:"<b>Guessing.</b> It technically hits all four valid answers — but only <b>25% of the time</b>, exactly the floor. <span class='no'>Fails W1:</span> no better than chance. Coverage without solving is worthless." },
+        note:"<strong>Guessing.</strong> It technically hits all four valid answers — but only <strong>25% of the time</strong>, exactly the floor. <span class='no'>Fails W1:</span> no better than chance. Coverage without solving is worthless." },
       cheat: { label:"One-answer cheat", z:[1.0,0,0,0], inv:0,
         pvalid:1.0, covered:1, w1:true, w3:false, cheat:true,
-        note:"<b>The classical mimic.</b> It memorized one valid answer and outputs it every time — acing validity (100%!) while computing <b>nothing</b>. <span class='no'>Fails W3 coverage:</span> only 1 of 4 answers. This is exactly why coverage is the un-fakeable gate." }
+        note:"<strong>The classical mimic.</strong> It memorized one valid answer and outputs it every time — acing validity (100%!) while computing <strong>nothing</strong>. <span class='no'>Fails W3 coverage:</span> only 1 of 4 answers. This is exactly why coverage is the un-fakeable gate." }
     };
     console.assert(STRATS.quantum.w1 && STRATS.quantum.w3 && STRATS.cheat.w1 && !STRATS.cheat.w3 && !STRATS.random.w1, "gate logic");
 
@@ -324,7 +324,7 @@
         '<div class="bfill" style="height:'+(s.inv*100)+'%"></div>'+
         '<div class="blab inv">invalid<br>(12 others)</div></div>';
       barsEl.innerHTML=html;
-      floorNote.innerHTML="valid = one of the 4 answers in the solution set · random floor = 4⁄16 = <b>0.25</b>";
+      floorNote.innerHTML="valid = one of the 4 answers in the solution set · random floor = 4⁄16 = <strong>0.25</strong>";
       // gates
       g1v.textContent=s.pvalid.toFixed(s.pvalid>=0.9995?0:2);
       g1.className="gcard "+(s.w1?"pass":"fail"); g1b.className="gbadge "+(s.w1?"pass":"fail"); g1b.textContent=s.w1?"PASS":"FAIL";

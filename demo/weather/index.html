@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="description" content="Quantum weather station: real-time decoherence forecasting across 8 qubits on IBM Heron. Watch qubit coherence decay and compare nowcast vs vendor forecast — all measured data.">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M4%204C8%208%208%208%2012%2012%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12%204C8%208%208%208%204%2012%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.7%22%20fill%3D%22%23e5e7eb%22%2F%3E%3C%2Fsvg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +13,25 @@
     --dim:#8691b0; --cyan:#45d6cf; --gold:#e6a94e; --dteal:#27a8a2; --dgold:#bd8830;
     --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    /* SVG chart tokens */
+    --svg-axis:#2a3145; --svg-grid:#3a4155; --svg-label:#8691b0; --svg-cap:#8b93a7; --svg-hi:#e2e6f0;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --ink:#f0f2f7; --panel:#ffffff; --line:#d0d6e4; --text:#141926; --muted:#4a5570;
+      --dim:#5f6a83; --cyan:#0a6b66; --gold:#8f5d10; --dteal:#0a6b66; --dgold:#8f5d10;
+      --svg-axis:#c0c8d8; --svg-grid:#d0d8e8; --svg-label:#4a5570; --svg-cap:#5f6a83; --svg-hi:#141926;
+    }
+  }
+  :root[data-theme="light"] {
+    --ink:#f0f2f7; --panel:#ffffff; --line:#d0d6e4; --text:#141926; --muted:#4a5570;
+    --dim:#5f6a83; --cyan:#0a6b66; --gold:#8f5d10; --dteal:#0a6b66; --dgold:#8f5d10;
+    --svg-axis:#c0c8d8; --svg-grid:#d0d8e8; --svg-label:#4a5570; --svg-cap:#5f6a83; --svg-hi:#141926;
+  }
+  :root[data-theme="dark"] {
+    --ink:#171b26; --panel:#1e2331; --line:#2a3145; --text:#e2e6f0; --muted:#8b93a7;
+    --dim:#8691b0; --cyan:#45d6cf; --gold:#e6a94e; --dteal:#27a8a2; --dgold:#bd8830;
+    --svg-axis:#2a3145; --svg-grid:#3a4155; --svg-label:#8691b0; --svg-cap:#8b93a7; --svg-hi:#e2e6f0;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--ink);color:var(--text);font-family:var(--sans);line-height:1.6}
@@ -19,7 +39,7 @@
   .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
   h1{font-family:var(--mono);font-weight:700;line-height:1.2;font-size:clamp(24px,4.2vw,36px);margin:.3em 0 .35em}
   h2{font-size:21px;margin:2.2em 0 .4em}
-  .lede,{color:var(--muted)}
+  .lede{color:var(--muted)}
   p{max-width:70ch;color:var(--muted)}
   p b, p strong{color:var(--text)}
   .frame{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:14px 0;overflow-x:auto}
@@ -37,8 +57,16 @@
   .foot{margin-top:60px;padding-top:16px;border-top:1px solid var(--line);color:var(--dim);font-size:13.5px}
   a{color:var(--cyan)}
   svg text{font-family:var(--mono)}
+  /* SVG color overrides — CSS beats presentation attributes, enabling theme switching */
+  svg line[stroke="#2a3145"]  { stroke: var(--svg-axis); }
+  svg line[stroke="#3a4155"]  { stroke: var(--svg-grid); }
+  svg g[fill="#8691b0"] text, svg text[fill="#8691b0"] { fill: var(--svg-label); }
+  svg text[fill="#8b93a7"]    { fill: var(--svg-cap); }
+  svg text[fill="#e2e6f0"]    { fill: var(--svg-hi); }
+  svg line[stroke="#e2e6f0"]  { stroke: var(--svg-hi); }
+  svg g[stroke="#e2e6f0"] line { stroke: var(--svg-hi); }
   .specbtn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13.5px;font-weight:600;
-    text-decoration:none;color:#06201f;background:var(--cyan);border:1.5px solid var(--cyan);border-radius:11px;
+    text-decoration:none;color:#ffffff;background:var(--cyan);border:1.5px solid var(--cyan);border-radius:11px;
     padding:10px 18px;margin:6px 0 10px;transition:transform .12s, box-shadow .12s}
   .specbtn:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(69,214,207,.35)}
   .specbtn .arw{font-size:15px}
@@ -46,16 +74,19 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div id="main" role="main" class="wrap">
+<main id="main" class="wrap">
+  <nav aria-label="Museum navigation" style="font-family:var(--mono);font-size:12.5px;padding:12px 0;display:flex;gap:14px;">
+    <a href="../">← The Quantum Museum</a>
+  </nav>
   <div class="eyebrow">Published measurement ledger · not a live service · ibm_marrakesh (Heron r2)</div>
   <h1>Quantum Weather Report</h1>
   <p>Quantum computers have weather. The same circuits, on the same qubits, can perform
-  <b>500× differently hours apart</b> — and the vendor's published calibration data does not
+  <strong>500× differently hours apart</strong> — and the vendor's published calibration data does not
   forecast it. This page is our measured evidence base: every number comes from a
   pre-registered, frozen-rule-graded job with a public ID (sources in the footer).</p>
 
-  <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
+  <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
 
   <div class="tiles">
     <div class="tile"><div class="k">The window lottery (F81)</div>
@@ -94,27 +125,27 @@
         <text x="560" y="280">Exp117</text><text x="560" y="294">Jul 13 mid</text>
         <text x="700" y="280">Exp117b</text><text x="700" y="294">Jul 13 pm</text>
       </g>
-      <!-- data: y = 294.86 - r*85.71 ; q6 teal #27a8a2, q8 gold #bd8830 -->
+      <!-- data: y = 294.86 - r*85.71 ; q6 teal circles #27a8a2, q8 gold diamonds #bd8830 -->
       <g>
         <circle cx="136" cy="160.6" r="6" fill="#27a8a2"><title>Exp108b q6: r = 1.38</title></circle>
-        <circle cx="144" cy="124.6" r="6" fill="#bd8830"><title>Exp108b q8: r = 1.59</title></circle>
+        <polygon points="144,118.6 150,124.6 144,130.6 138,124.6" fill="#bd8830"><title>Exp108b q8: r = 1.59</title></polygon>
         <circle cx="276" cy="107.4" r="6" fill="#27a8a2"><title>Exp108c q6: r ≈ 1.69</title></circle>
-        <circle cx="284" cy="109.1" r="6" fill="#bd8830"><title>Exp108c q8: r ≈ 1.68</title></circle>
+        <polygon points="284,103.1 290,109.1 284,115.1 278,109.1" fill="#bd8830"><title>Exp108c q8: r ≈ 1.68</title></polygon>
         <circle cx="416" cy="28.6" r="6" fill="#27a8a2"><title>Exp116 q6: r ≈ 2.15 — past even a 1.65× correction</title></circle>
-        <circle cx="424" cy="80.0" r="6" fill="#bd8830"><title>Exp116 q8: r ≈ 1.85</title></circle>
+        <polygon points="424,74.0 430,80.0 424,86.0 418,80.0" fill="#bd8830"><title>Exp116 q8: r ≈ 1.85</title></polygon>
         <circle cx="556" cy="122.9" r="6" fill="none" stroke-width="2.5" stroke="#27a8a2"><title>Exp117 (back-computed from pooled rung): r ≈ 1.6</title></circle>
-        <circle cx="564" cy="122.9" r="6" fill="none" stroke-width="2.5" stroke="#bd8830"><title>Exp117 (back-computed from pooled rung): r ≈ 1.6</title></circle>
+        <polygon points="564,116.9 570,122.9 564,128.9 558,122.9" fill="none" stroke-width="2.5" stroke="#bd8830"><title>Exp117 (back-computed from pooled rung): r ≈ 1.6</title></polygon>
         <circle cx="696" cy="230.9" r="6" fill="#27a8a2"><title>Exp117b q6: r ≈ 0.97 — published T1 CORRECT for the first time in 9 measurements</title></circle>
-        <circle cx="704" cy="203.4" r="6" fill="#bd8830"><title>Exp117b q8: r ≈ 1.13</title></circle>
+        <polygon points="704,197.4 710,203.4 704,209.4 698,203.4" fill="#bd8830"><title>Exp117b q8: r ≈ 1.13</title></polygon>
       </g>
       <!-- direct labels on extremes -->
       <text x="436" y="55" fill="#e2e6f0" font-size="11">2.15 — the day a +23σ fake win was refused</text>
       <text x="530" y="250" fill="#e2e6f0" font-size="11">0.97 — “bias” gone overnight</text>
       <!-- legend -->
       <g font-size="12" fill="#8b93a7">
-        <circle cx="86" cy="34" r="5" fill="#27a8a2"/><text x="96" y="38">qubit 6</text>
-        <circle cx="160" cy="34" r="5" fill="#bd8830"/><text x="170" y="38">qubit 8</text>
-        <text x="240" y="38" fill="#8691b0">(hollow = back-computed estimate)</text>
+        <circle cx="86" cy="34" r="5" fill="#27a8a2"/><text x="96" y="38">qubit 6 (circle)</text>
+        <polygon points="168,28 174,34 168,40 162,34" fill="#bd8830"/><text x="178" y="38">qubit 8 (diamond)</text>
+        <text x="310" y="38" fill="#8691b0">(hollow = back-computed estimate)</text>
       </g>
     </svg>
     <div class="cap">Live T1 (back-computed from measured decay in thermalization circuits) vs the
@@ -123,7 +154,8 @@
     NO-TESTs before the two-stage protocol (measure, then fly) tamed it.
     Sources: <a href="https://github.com/mblakemore/quantum/blob/main/docs/friction-reports/02-published-t1-bias.md">friction report 02</a>.</div>
     <details><summary>data table</summary><table>
-      <tr><th>job</th><th>q6 r</th><th>q8 r</th><th>note</th></tr>
+      <caption>Live T1 ratio vs published T1 across five jobs (q6 and q8)</caption>
+      <tr><th scope="col">job</th><th scope="col">q6 r</th><th scope="col">q8 r</th><th scope="col">note</th></tr>
       <tr><td>Exp108b</td><td>1.38</td><td>1.59</td><td>19 h queue — first detection (NO-TEST)</td></tr>
       <tr><td>Exp108c</td><td>≈1.69</td><td>≈1.68</td><td>minutes queue — bias ≠ queue time</td></tr>
       <tr><td>Exp116</td><td>≈2.15</td><td>≈1.85</td><td>overshot a ×1.65 correction (premise gate caught it)</td></tr>
@@ -188,15 +220,15 @@
       </g>
     </svg>
     <div class="cap">Each bar is one experiment: how optimistic the FakeMarrakesh noise model's
-    preview was vs the measured hardware result (log ratio). The optimism <b>grows with depth</b>
+    preview was vs the measured hardware result (log ratio). The optimism <strong>grows with depth</strong>
     (class means +0.056 → +0.111 → +0.206) and the single largest error is the feedforward row —
-    the model has <b>no noise term at all</b> for mid-circuit measurement + classical control.
+    the model has <strong>no noise term at all</strong> for mid-circuit measurement + classical control.
     Full data: <a href="https://github.com/mblakemore/quantum/blob/main/results/model_residual_atlas.json">model_residual_atlas.json</a> ·
     <a href="https://github.com/mblakemore/quantum/blob/main/docs/friction-reports/01-fakemarrakesh-depth-optimism.md">friction report 01</a>.</div>
   </div>
 
   <h2>How we dress for this weather</h2>
-  <p>Forecasting fails; <b>detection works</b>. Four practices, each bought with a documented failure:</p>
+  <p>Forecasting fails; <strong>detection works</strong>. Four practices, each bought with a documented failure:</p>
   <div class="tiles">
     <div class="tile"><div class="k">Same-depth sentinels</div><div class="s">A shallow probe cannot certify a deep window — every job carries a known-answer circuit at the payload's depth class, and gates itself on the in-run reading (F85, F86, F88).</div></div>
     <div class="tile"><div class="k">Two-stage protocols</div><div class="s">When a calibration quantity moves 2× in days: fly a cheap measurement job first, compute the payload's settings from it, submit into the same drain window (Exp117c).</div></div>
@@ -211,6 +243,6 @@
     <a href="https://github.com/mblakemore/quantum/blob/main/docs/friction-reports/README.md">friction reports</a> ·
     built by the DC network (Whisper C4620).
   </div>
-</div>
+</main>
 </body>
 </html>

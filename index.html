@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <title>Autonomous characterization of IBM Heron-r2 — quantum campaign</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An autonomous quantum characterization campaign on IBM Heron-r2: ~110 pre-registered experiments, findings F01–F118, 23 interactive exhibits. Every number is measured hardware data.">
+<meta property="og:title" content="Autonomous characterization of IBM Heron-r2 — quantum campaign">
+<meta property="og:description" content="An autonomous quantum characterization campaign on IBM Heron-r2: ~110 pre-registered experiments, findings F01–F118, 23 interactive exhibits. Every number is measured hardware data.">
+<meta property="og:url" content="https://mblakemore.github.io/quantum/">
+<meta property="og:type" content="website">
 <style>
   :root{--ink:#0b0d13;--surface:#141826;--edge:#2a3145;--text:#e2e6f0;--muted:#8b93a7;
         --cyan:#45d6cf;--amber:#e6a94e;--mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace;
@@ -42,10 +47,15 @@
   .stat .l{font-size:12px;color:var(--muted);}
   .links{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;font-family:var(--mono);font-size:14px;}
   .links a, p a{color:var(--cyan);}
+  .skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
+  .skip:focus{left:0;top:0;width:auto;height:auto;overflow:visible;z-index:9999;background:var(--surface);color:var(--cyan);padding:8px 16px;font-family:var(--mono);font-size:14px;border-radius:0 0 8px 0;text-decoration:none;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
+<main id="main">
   <span class="eyebrow">IBM Heron-r2 · ibm_marrakesh · ibm_kingston · ibm_fez</span>
   <h1>Putting the <span class="hl">order of events</span><br>into superposition — on real silicon</h1>
   <p>An autonomous multi-agent network ran ~100 pre-registered experiments on IBM's Heron-r2 quantum
@@ -73,10 +83,10 @@
     <circle cx="56" cy="52" r="2.6" fill="var(--cyan)"/>
    </svg></div>
    <div class="dcol">
-    <a class="demo" href="demo/" target="_blank" rel="noopener">🏛️ The Quantum Museum — 21 interactive exhibits →</a>
+    <a class="demo" href="demo/" target="_blank" rel="noopener"><span aria-hidden="true">🏛️ </span>The Quantum Museum — 23 interactive exhibits →<span class="sr-only"> (opens in new tab)</span></a>
     <p>Walk through five wings — the causal switch, the no-go games, foundations on silicon,
     the advantage ladder, the instruments. Every exhibit renders real hardware data.
-    <a href="demo/switch/" target="_blank" rel="noopener">Start with the switch →</a></p>
+    <a href="demo/switch/" target="_blank" rel="noopener">Start with the switch →<span class="sr-only"> (opens in new tab)</span></a></p>
    </div>
   </div>
 
@@ -93,7 +103,7 @@
     <line x1="26" y1="56" x2="42" y2="56" stroke="var(--edge)" stroke-width="3" stroke-linecap="round"/>
    </svg></div>
    <div class="dcol">
-    <a class="demo" href="demo/static-duel/" target="_blank" rel="noopener">📺 STATIC — classic bot vs quantum bot →</a>
+    <a class="demo" href="demo/static-duel/" target="_blank" rel="noopener"><span aria-hidden="true">📺 </span>STATIC — classic bot vs quantum bot →<span class="sr-only"> (opens in new tab)</span></a>
     <p>Two bots race to decode a secret through two completely dead channels. The
     classic bot is the provable best — a theorem caps it at coin-flipping — while the quantum
     bot runs measured switch statistics. Bring your own free IBM key and every roll consumes a
@@ -110,7 +120,7 @@
     <line x1="49.5" y1="47.5" x2="58" y2="56" stroke="var(--cyan)" stroke-width="4.5" stroke-linecap="round"/>
    </svg></div>
    <div class="dcol">
-    <a class="demo" href="demo/casebook/" target="_blank" rel="noopener">🕵️ The Interrogation You Cannot Win — playable casebook game →</a>
+    <a class="demo" href="demo/casebook/" target="_blank" rel="noopener"><span aria-hidden="true">🕵️ </span>The Interrogation You Cannot Win — playable casebook game →<span class="sr-only"> (opens in new tab)</span></a>
     <p>A detective game whose difficulty ceiling is a theorem: under definite causal
     order, no kit that will ever exist can average above 91%. Play ten honest rounds, earn the
     Switch Badge, and step into the forbidden zone with odds measured at 97.8%.</p>
@@ -130,7 +140,7 @@
     <circle cx="48" cy="52" r="1.6" fill="#06201f"/>
    </svg></div>
    <div class="dcol">
-    <a class="demo" href="demo/casebook-pnp/" target="_blank" rel="noopener">🃏 The Casebook — print &amp; play tabletop games →</a>
+    <a class="demo" href="demo/casebook-pnp/" target="_blank" rel="noopener"><span aria-hidden="true">🃏 </span>The Casebook — print &amp; play tabletop games →<span class="sr-only"> (opens in new tab)</span></a>
     <p>The same impossible interrogation as a self-contained tabletop game: print four
     pages, grab a d100, and play the measured odds by hand.</p>
    </div>
@@ -151,7 +161,7 @@
    </svg></div>
    <div class="dcol">
     <a class="demo" href="https://github.com/mblakemore/quantum/blob/main/docs/quantum-switch-spec.md"
-      target="_blank" rel="noopener">📋 Quantum Switch — the full spec sheet →</a>
+      target="_blank" rel="noopener"><span aria-hidden="true">📋 </span>Quantum Switch — the full spec sheet →<span class="sr-only"> (opens in new tab)</span></a>
     <p>The engineering reference behind every demo above: the circuit family (V1–V5), exact
     theory targets, the measured-results ledger with IBM job IDs, and the reusable
     methodology — pre-registration, sentinels, frozen grade rules.</p>
@@ -167,12 +177,13 @@
      photonic experiments; our contribution is the pre-registered, control-armed,
      provable-bound-beating version on a general-purpose quantum computer. Full scope in the
      <a href="https://github.com/mblakemore/quantum/blob/main/docs/quantum-switch-spec.md">spec sheet</a>.</p>
-  <div class="links">
+  <nav aria-label="External resources" class="links">
     <a href="https://github.com/mblakemore/quantum">Repository &amp; findings on GitHub →</a>
     <a href="https://github.com/mblakemore/quantum/blob/main/docs/quantum-switch-spec.md">Switch spec sheet →</a>
     <a href="https://github.com/mblakemore/quantum/blob/main/ELI5_SUMMARY.md">Plain-English summary →</a>
     <a href="https://github.com/mblakemore/quantum/blob/main/docs/beyond-the-ladder.md">Beyond the Ladder: the full argument &#8594;</a>
-  </div>
+  </nav>
+</main>
 </div>
 </body>
 </html>

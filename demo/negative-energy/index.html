@@ -112,41 +112,41 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing III · Foundations on Silicon</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
     <p class="eyebrow">Negative local energy · quantum energy teleportation</p>
     <h1>A patch of chip that reads <span class="hl">below empty</span>.</h1>
     <p class="lede">The vacuum is supposed to be the energy floor — you can't have less than nothing. But entangle one
-    region with a distant partner, act on the partner, and the first region's <b>local</b> energy can dip <b>below its
-    own ground state</b>: negative energy, the sign carried by exotic matter. We measured it on real silicon — and
+    region with a distant partner, act on the partner, and the first region's <strong>local</strong> energy can dip <strong>below its
+    own ground state</strong>: negative energy, the sign carried by exotic matter. We measured it on real silicon — and
     nothing is broken: the partner pays the bill. Every number is measured hardware.</p>
 
     <div class="primer">
       <div class="pcard">
         <h2>What is negative energy?</h2>
-        <p>Not "less than zero joules" in the everyday sense — <b>less than the vacuum</b>. Normalize empty space to
-        <b>0</b>; a region reading <b>below 0</b> holds less energy than empty. It's the Casimir / squeezed-vacuum
-        sign, and quantum correlations let a <b>local</b> patch reach it.</p>
+        <p>Not "less than zero joules" in the everyday sense — <strong>less than the vacuum</strong>. Normalize empty space to
+        <strong>0</strong>; a region reading <strong>below 0</strong> holds less energy than empty. It's the Casimir / squeezed-vacuum
+        sign, and quantum correlations let a <strong>local</strong> patch reach it.</p>
       </div>
       <div class="pcard">
         <h2>Isn't that a free lunch?</h2>
-        <p>No. Acting on the distant partner <b>Alice deposits energy</b> there — far more than the tiny amount the
-        local site reads negative. The <b>global</b> energy stays positive and conserved. The negativity is purely
-        <b>local</b>, borrowed against the entanglement. No perpetual motion.</p>
+        <p>No. Acting on the distant partner <strong>Alice deposits energy</strong> there — far more than the tiny amount the
+        local site reads negative. The <strong>global</strong> energy stays positive and conserved. The negativity is purely
+        <strong>local</strong>, borrowed against the entanglement. No perpetual motion.</p>
       </div>
     </div>
 
     <div class="herobtns">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
-      <span class="scope"><b>Coherent extraction</b> — the classical-feedforward teleportation headline failed (kept on the record). Certified as a bound.</span>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
+      <span class="scope"><strong>Coherent extraction</strong> — the classical-feedforward teleportation headline failed (kept on the record). Certified as a bound.</span>
     </div>
   </header>
 
@@ -154,15 +154,15 @@
   <section class="panel">
     <p class="panel-label">Exhibit A — Below empty</p>
     <h2>Drop the local energy under the vacuum floor</h2>
-    <p class="sub">Watch Bob's local energy. The bold line is the <b>vacuum floor</b> — empty space, energy 0. Run the
-    correlated protocol and his energy dips <b>below</b> it, into the shaded sub-vacuum region. Run the same rotation
-    <b>without</b> the correlation and it goes the other way.</p>
+    <p class="sub">Watch Bob's local energy. The bold line is the <strong>vacuum floor</strong> — empty space, energy 0. Run the
+    correlated protocol and his energy dips <strong>below</strong> it, into the shaded sub-vacuum region. Run the same rotation
+    <strong>without</strong> the correlation and it goes the other way.</p>
 
     <div class="selector" role="group" aria-label="Protocol">
       <span class="lbl">protocol:</span>
-      <button class="cbtn" data-i="0" type="button">Ground (reference)</button>
-      <button class="cbtn" data-i="1" type="button">QET (correlated)</button>
-      <button class="cbtn" data-i="2" type="button">Same op · no correlation</button>
+      <button class="cbtn" data-i="0" type="button" aria-pressed="true">Ground (reference)</button>
+      <button class="cbtn" data-i="1" type="button" aria-pressed="false">QET (correlated)</button>
+      <button class="cbtn" data-i="2" type="button" aria-pressed="false">Same op · no correlation</button>
     </div>
 
     <div class="therm-grid">
@@ -188,15 +188,15 @@
       </svg>
 
       <div class="readout">
-        <div class="enum neg" id="enum">−0.0547</div>
+        <div class="enum neg" id="enum" aria-live="polite">−0.0547</div>
         <div class="ecap">Bob's local energy E_B (vacuum floor = 0)</div>
-        <span class="state-pill neg" id="statePill">below empty · 12σ</span>
-        <p class="verdict" id="verdict"></p>
+        <span class="state-pill neg" id="statePill" aria-live="polite">below empty · 12σ</span>
+        <p class="verdict" id="verdict" aria-live="polite"></p>
         <div class="ledger">
           <div class="ledger-t">Global energy ledger — conservation</div>
           <div class="ledger-rows">
-            <span class="a">Alice's site <b>+0.71</b> (pays in)</span>
-            <span class="b">Bob's site <b id="ledgerB">−0.055</b> (reads out)</span>
+            <span class="a">Alice's site <strong>+0.71</strong> (pays in)</span>
+            <span class="b">Bob's site <b id="ledgerB" aria-live="polite">−0.055</b> (reads out)</span>
             <span class="g">→ global positive &amp; conserved</span>
           </div>
         </div>
@@ -208,8 +208,8 @@
   <section class="panel">
     <p class="panel-label">Exhibit B — The energy scoreboard</p>
     <h2>Only the correlated protocol goes sub-vacuum</h2>
-    <p class="sub">Three protocols on one energy axis. Ground sits at the floor; the uncorrelated control <b>injects</b>
-    energy; only the correlated QET dips <b>below zero</b> — and the certified 5σ ceiling (−0.032) is still negative.
+    <p class="sub">Three protocols on one energy axis. Ground sits at the floor; the uncorrelated control <strong>injects</strong>
+    energy; only the correlated QET dips <strong>below zero</strong> — and the certified 5σ ceiling (−0.032) is still negative.
     The 0.203 gap between QET and the control (21σ) is the correlation doing the work.</p>
     <div style="max-width:560px;margin:0 auto;">
       <svg viewBox="0 0 520 210" role="img" aria-label="Bob's local energy for the three protocols against the vacuum floor and the certified bound">
@@ -232,36 +232,36 @@
     <div class="receipts">
       <div class="rc">
         <h3>1 · Certified, and conservatively</h3>
-        <p>We certify a <b>bound</b>, not a point: the 5σ ceiling is <span class="neg">−0.032 &lt; 0</span>. And every
-        residual readout bias pushes the estimate <b>up</b> toward zero — so the <b>true</b> energy is <b>more</b>
+        <p>We certify a <strong>bound</strong>, not a point: the 5σ ceiling is <span class="neg">−0.032 &lt; 0</span>. And every
+        residual readout bias pushes the estimate <strong>up</strong> toward zero — so the <strong>true</strong> energy is <strong>more</strong>
         negative than reported. <span class="yes">The negativity is not a fluke of correction.</span></p>
       </div>
       <div class="rc">
         <h3>2 · The correlation does the work</h3>
-        <p>Run the <b>identical</b> local rotation <b>without</b> the correlation and energy goes the other way:
-        <span class="pos">+0.157, injected</span>. The 0.203 gap is <b>21σ</b>. So this isn't trivial cooling or a
+        <p>Run the <strong>identical</strong> local rotation <strong>without</strong> the correlation and energy goes the other way:
+        <span class="pos">+0.157, injected</span>. The 0.203 gap is <strong>21σ</strong>. So this isn't trivial cooling or a
         calibration offset — it's specifically the entanglement.</p>
       </div>
       <div class="rc">
         <h3>3 · The books balance</h3>
-        <p>Alice's site carries <b>+0.71</b> — she pays energy <b>in</b>, dwarfing Bob's <b>−0.055</b>. Global energy
+        <p>Alice's site carries <strong>+0.71</strong> — she pays energy <strong>in</strong>, dwarfing Bob's <strong>−0.055</strong>. Global energy
         is positive and conserved; only Bob's local patch reads sub-vacuum. <span class="yes">No free lunch.</span></p>
       </div>
     </div>
     <div class="speclink-row">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet — data, gates &amp; the failed teleportation twin</a>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Full Spec Sheet — data, gates &amp; the failed teleportation twin</a>
     </div>
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F97</span> · job <span class="sig">d9a9sp2f47jc73a9vurg</span></span>
     <span>ibm_marrakesh · E_B −0.0547 (12σ below vacuum) · 5σ bound ≤ −0.032</span>
     <span class="sp2"></span>
     <a href="./spec.html">Full Spec</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -271,7 +271,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
     var css = getComputedStyle(document.documentElement);
@@ -281,11 +281,11 @@
     var FLOOR = 0, BOUND = -0.0319;
     var PROT = [
       { key:"ground", label:"Ground (reference)", eb:0.0453, sign:"zero", pill:"at the vacuum floor",
-        note:"<b>The undisturbed reference.</b> Bob's site sits right at the vacuum floor (E ≈ 0) — this is 'empty', the level everything else is measured against." },
+        note:"<strong>The undisturbed reference.</strong> Bob's site sits right at the vacuum floor (E ≈ 0) — this is 'empty', the level everything else is measured against." },
       { key:"qet", label:"QET (correlated)", eb:-0.0547, sign:"neg", pill:"below empty · 12σ",
-        note:"<b>The correlated extraction protocol.</b> Bob's local energy drops to <span class='neg'>−0.0547</span> — below the vacuum floor, <b>12σ under empty</b>. The certified 5σ ceiling is −0.032: even conservatively, it is negative." },
+        note:"<strong>The correlated extraction protocol.</strong> Bob's local energy drops to <span class='neg'>−0.0547</span> — below the vacuum floor, <strong>12σ under empty</strong>. The certified 5σ ceiling is −0.032: even conservatively, it is negative." },
       { key:"control", label:"Same op · no correlation", eb:0.157, sign:"pos", pill:"energy injected",
-        note:"<b>The identical rotation — but without the correlation.</b> Energy goes the other way: <span class='pos'>+0.157, injected</span>. The 0.203 gap (21σ) proves the correlation is the active ingredient, not trivial cooling." }
+        note:"<strong>The identical rotation — but without the correlation.</strong> Energy goes the other way: <span class='pos'>+0.157, injected</span>. The 0.203 gap (21σ) proves the correlation is the active ingredient, not trivial cooling." }
     ];
     console.assert(PROT[1].eb < BOUND && PROT[2].eb > 0, "QET below bound, control positive");
 

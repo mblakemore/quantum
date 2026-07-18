@@ -103,12 +103,12 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing II · The No-Go Games</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
@@ -117,9 +117,9 @@
     <p class="lede">Fill a 3×3 square with +1 and −1 so that every row multiplies to +1 and the columns
     multiply to +1, +1, −1. It cannot be done — you'll always break exactly one rule. That single broken
     rule caps any classical team at 8 wins in 9. A quantum computer wins all nine. Play it, then watch the machine.</p>
-    <span class="scope">Pseudo-telepathy is textbook (Mermin–Peres). The contribution: the <b>frozen-court, enumerated-bound</b> measurement.</span>
-    <div style="margin-top:16px;"><a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a></div>
+    <span class="scope">Pseudo-telepathy is textbook (Mermin–Peres). The contribution: the <strong>frozen-court, enumerated-bound</strong> measurement.</span>
+    <div style="margin-top:16px;"><a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a></div>
   </header>
 
   <!-- PANEL A -->
@@ -134,8 +134,8 @@
         <div class="ctargets" id="ctargets"></div>
       </div>
       <div>
-        <div class="counter"><span class="n" id="ruleN"><b>5</b> / 6</span><div class="c">rules satisfied · the sixth never joins them</div></div>
-        <p class="hint">The whole grid multiplies to <b>+1</b> across the rows but <b>−1</b> down the columns — a flat contradiction. One rule always breaks, and that's the crack a classical team loses through.</p>
+        <div class="counter"><span class="n" id="ruleN"><strong>5</strong> / 6</span><div class="c">rules satisfied · the sixth never joins them</div></div>
+        <p class="hint">The whole grid multiplies to <strong>+1</strong> across the rows but <strong>−1</strong> down the columns — a flat contradiction. One rule always breaks, and that's the crack a classical team loses through.</p>
         <button class="btn" id="proveBtn" type="button">Prove the ceiling →</button>
         <div class="proof" id="proof"></div>
       </div>
@@ -161,7 +161,7 @@
       <div>
         <div class="heat" id="heat" aria-label="Measured per-context win rates"></div>
         <div class="readouts" id="readouts" style="visibility:hidden">
-          <div class="ro q"><div class="big">96.9%</div><div class="lab">quantum, measured · <b>196σ</b> past the wall</div></div>
+          <div class="ro q"><div class="big">96.9%</div><div class="lab">quantum, measured · <strong>196σ</strong> past the wall</div></div>
           <div class="ro c"><div class="big">88.9%</div><div class="lab">classical ceiling (8/9)</div></div>
           <div class="ro n"><div class="big">65.7%</div><div class="lab">no entanglement — even a quantum machine fails</div></div>
         </div>
@@ -170,13 +170,13 @@
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F106</span> · job <span class="sig">d9akl8fu62qs738o68pg</span></span>
     <span>ibm_marrakesh · 8/9 enumerated over 4096 strategy pairs</span>
     <span class="sp"></span>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -187,7 +187,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
 
@@ -257,7 +257,7 @@
       for (var c = 0; c < 3; c++) { var ok2 = colState(T, c);
         document.getElementById("cc" + c).innerHTML = ok2 ? '<span class="ok">✓</span>' : '<span class="bad">✗</span>'; }
       var n = rulesSat(T);
-      ruleN.innerHTML = "<b>" + n + "</b> / 6";
+      ruleN.innerHTML = "<strong>" + n + "</strong> / 6";
     }
     paint();
 
@@ -266,8 +266,8 @@
       p.innerHTML = "checking every square and every strategy…";
       setTimeout(function () {
         var e = enumerate();
-        p.innerHTML = "<b>" + e.solvable + "</b> of " + e.tables + " squares satisfy all six rules. " +
-          "The best classical team wins <b>" + e.best + " of 9</b> games — " +
+        p.innerHTML = "<strong>" + e.solvable + "</strong> of " + e.tables + " squares satisfy all six rules. " +
+          "The best classical team wins <strong>" + e.best + " of 9</strong> games — " +
           "<span class='ceil'>the 8/9 ceiling = 88.9%</span> — checked across all " + e.pairs + " strategy pairs.";
       }, 260);
     });

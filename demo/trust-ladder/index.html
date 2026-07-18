@@ -107,12 +107,12 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
@@ -121,10 +121,10 @@
     <p class="lede">Randomness is only as good as the assumption behind it. Climb this ladder: the higher you
     go, the less you trust your devices — and the more you demand of the hardware. At the top, a single chip
     can't deliver, and the certificate evaporates. Find the rung where the number is both strong and real.</p>
-    <span class="scope">Every value is measured (F115–F117) or a <b>labelled counterfactual</b>. The top rung is the measured null: we did not perform full device-independence.</span>
+    <span class="scope">Every value is measured (F115–F117) or a <strong>labelled counterfactual</strong>. The top rung is the measured null: we did not perform full device-independence.</span>
     <div class="herobtns">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
     </div>
   </header>
 
@@ -139,7 +139,7 @@
         <div class="ladder" id="ladder" role="group" aria-label="Trust level"></div>
         <p class="climb-note">↑ trust less · demand more &nbsp;|&nbsp; ↓ trust more · demand less</p>
       </div>
-      <div class="cert" id="cert"></div>
+      <div class="cert" id="cert" aria-live="polite"></div>
     </div>
   </section>
 
@@ -157,13 +157,13 @@
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F115 / F116 / F117</span> · job <span class="sig">d9ansru6hjac73fenigg</span></span>
     <span>ibm_marrakesh · 0.65 bit via the SDP randomness tool</span>
     <span class="sp"></span>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -173,7 +173,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
 
@@ -181,21 +181,21 @@
     var RUNGS = [
       { id:"di", lvl:"Trust nothing", nm:"Full device-independence", sec:"strongest security", bitsTag:"evaporates",
         state:"evap", big:"0.59", small:"bit/use", overlay:"no-signaling unmet",
-        assume:"You trust <b>nothing</b> — not your device, not the source. But this demands no-signaling between the two measurement sites.",
+        assume:"You trust <strong>nothing</strong> — not your device, not the source. But this demands no-signaling between the two measurement sites.",
         security:"Strongest — device-independent, secure against any adversary.",
-        why:"On <b>one chip</b> the two qubits share control lines, so no-signaling isn't enforced: a shared-control classical device can fake S = 2√2 at <b>zero</b> entropy. The certified number dissolves. Full-DI needs space-like separation — off-chip. <b>We did not perform this.</b>",
+        why:"On <strong>one chip</strong> the two qubits share control lines, so no-signaling isn't enforced: a shared-control classical device can fake S = 2√2 at <strong>zero</strong> entropy. The certified number dissolves. Full-DI needs space-like separation — off-chip. <strong>We did not perform this.</strong>",
         meas:"the DI bound <span class='sig'>would</span> give 0.59 bit/use — a quarantined counterfactual (F115)" },
       { id:"1sdi", lvl:"Trust only yourself", nm:"One-sided device-independence", sec:"strong security", bitsTag:"rigorous",
         state:"solid", big:"0.65", small:"bit/use", overlay:"",
-        assume:"You trust <b>only your own measurement</b>. The other side is a black box an adversary may control.",
+        assume:"You trust <strong>only your own measurement</strong>. The other side is a black box an adversary may control.",
         security:"Strong — a compromised partner device cannot leak your outcome.",
-        why:"A steering violation (S₃ = 1.68, <b>96σ</b>) certifies the state under one-sided trust; the SDP tool turns the measured assemblage into a rigorous min-entropy. This is the certificate a single chip genuinely holds.",
+        why:"A steering violation (S₃ = 1.68, <strong>96σ</strong>) certifies the state under one-sided trust; the SDP tool turns the measured assemblage into a rigorous min-entropy. This is the certificate a single chip genuinely holds.",
         meas:"H_min = <span class='sig'>0.6823 ± 0.0063</span> bit/use · H_min − 5σ = 0.6509 · steering 96σ (F116/F117)" },
       { id:"trust", lvl:"Trust everything", nm:"Full device trust", sec:"weakest security", bitsTag:"born-rule",
         state:"solid", big:"1.00", small:"bit/qubit", overlay:"",
-        assume:"You trust <b>both devices</b> to perform exactly the measurements you modelled.",
+        assume:"You trust <strong>both devices</strong> to perform exactly the measurements you modelled.",
         security:"Weakest — a compromised device could hand you anything.",
-        why:"Under full trust, a projective qubit measurement is a full Born-rule random bit. The CHSH violation (S = 2.75, <b>53σ</b>) is a <b>health-check</b> that the device is behaving quantumly — it rules out a classical mimic, but it does not certify the bit; the trust does.",
+        why:"Under full trust, a projective qubit measurement is a full Born-rule random bit. The CHSH violation (S = 2.75, <strong>53σ</strong>) is a <strong>health-check</strong> that the device is behaving quantumly — it rules out a classical mimic, but it does not certify the bit; the trust does.",
         meas:"1.00 bit/qubit (Born) · CHSH S = 2.7522, 53σ (F115)" }
     ];
 

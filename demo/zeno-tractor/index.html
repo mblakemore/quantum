@@ -88,12 +88,12 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing III · Foundations on Silicon</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
@@ -103,9 +103,9 @@
     turns, and it freezes in place — the act of looking is a tractor beam. Turn up how often you look and watch the
     survival climb… until the frontier, where each glance costs enough that looking faster stops paying. Every
     number is measured hardware data — on the cheapest circuit of the whole campaign.</p>
-    <span class="scope">Quantum Zeno is textbook (Misra–Sudarshan 1977); it freezes a <b>coherent π-rotation</b>, not T1 relaxation. Contribution: the QND-corrected law + the measured frontier.</span>
-    <div style="margin-top:16px;"><a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a></div>
+    <span class="scope">Quantum Zeno is textbook (Misra–Sudarshan 1977); it freezes a <strong>coherent π-rotation</strong>, not T1 relaxation. Contribution: the QND-corrected law + the measured frontier.</span>
+    <div style="margin-top:16px;"><a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a></div>
   </header>
 
   <!-- PANEL A -->
@@ -119,22 +119,22 @@
         <div class="controls">
           <div class="dial" role="group" aria-label="Watch cadence">
             <span class="lbl">watch cadence:</span>
-            <button class="cbtn" data-i="0" type="button">unwatched</button>
-            <button class="cbtn" data-i="1" type="button">N=2</button>
-            <button class="cbtn" data-i="2" type="button">N=4</button>
-            <button class="cbtn" data-i="3" type="button">N=8</button>
-            <button class="cbtn" data-i="4" type="button">N=16</button>
+            <button class="cbtn" data-i="0" type="button" aria-pressed="true">unwatched</button>
+            <button class="cbtn" data-i="1" type="button" aria-pressed="false">N=2</button>
+            <button class="cbtn" data-i="2" type="button" aria-pressed="false">N=4</button>
+            <button class="cbtn" data-i="3" type="button" aria-pressed="false">N=8</button>
+            <button class="cbtn" data-i="4" type="button" aria-pressed="false">N=16</button>
           </div>
           <div class="looks" id="looks"></div>
         </div>
-        <p class="verdict" id="verdict" style="text-align:left; margin-inline:0;"></p>
+        <p class="verdict" id="verdict" style="text-align:left; margin-inline:0;" aria-live="polite"></p>
       </div>
       <div class="gauge-wrap">
         <div class="gcol">
           <div class="glabels"><span class="on">ON</span><span class="off">OFF · flipped</span></div>
-          <div class="gbar"><div class="gfill" id="gfill" style="height:2%"></div></div>
+          <div class="gbar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="2" aria-label="Qubit survival rate"><div class="gfill" id="gfill" style="height:2%"></div></div>
         </div>
-        <div class="gnum" id="gnum">2%</div>
+        <div class="gnum" id="gnum" aria-live="polite">2%</div>
         <div class="gnum" style="font-size:12px;margin-top:4px;color:var(--ink-3)">survival (stays ON)</div>
       </div>
     </div>
@@ -146,7 +146,7 @@
     <h2>Watch faster, hold tighter — but each look costs</h2>
     <p class="sub">The dashed curve is the ideal Zeno law, [cos²(π/2N)]^N: watch infinitely fast and the qubit never
     flips. The dots are measured. Divide out the per-look cost and they match the law to 0.5% through N=8 — but the
-    raw survival plateaus at N=16, the <b>watch-cost frontier</b>, where each glance's cost cancels the extra grip.</p>
+    raw survival plateaus at N=16, the <strong>watch-cost frontier</strong>, where each glance's cost cancels the extra grip.</p>
     <div class="lawwrap">
       <svg viewBox="0 0 420 250" role="img" aria-label="Survival versus watch cadence, measured against the Zeno law">
         <line class="axis" x1="44" y1="16" x2="44" y2="210"/>
@@ -166,13 +166,13 @@
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F102</span> · job <span class="sig">d9ai9ku6hjac73fefdeg</span></span>
     <span>ibm_marrakesh · 92σ over unwatched · zero two-qubit gates</span>
     <span class="sp"></span>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -182,16 +182,16 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
 
     // ---- data kernel (F102 exp124) ----
     var CAD = [
-      { N:0,  surv:0.020, verdict:"<b>Unwatched.</b> Nothing looks, so the π-drive turns the qubit all the way over — it flips almost completely. Survival: just 2%." },
+      { N:0,  surv:0.020, verdict:"<strong>Unwatched.</strong> Nothing looks, so the π-drive turns the qubit all the way over — it flips almost completely. Survival: just 2%." },
       { N:2,  surv:0.246, verdict:"Two looks. Already the qubit is caught partway and pulled back — a third of the flip undone. Survival 25%." },
       { N:4,  surv:0.498, verdict:"Four looks. The tractor beam has it at the halfway mark — measurement is fighting the rotation to a draw. Survival 50%." },
-      { N:8,  surv:0.644, verdict:"Eight looks. Pinned at <b>64%</b> — a 92σ tractor beam over the unwatched flip. Divide out the per-look cost and this matches the Zeno law to half a percent." },
+      { N:8,  surv:0.644, verdict:"Eight looks. Pinned at <strong>64%</strong> — a 92σ tractor beam over the unwatched flip. Divide out the per-look cost and this matches the Zeno law to half a percent." },
       { N:16, surv:0.664, verdict:"Sixteen looks — and barely tighter than eight (64% → 66%). <span class='front'>The watch-cost frontier.</span> Each glance slightly degrades the qubit; near here that cost cancels the extra grip. This is the optimal cadence, measured." }
     ];
     console.assert(CAD[3].surv - CAD[0].surv > 0.6, "tractor separation ~0.62");
@@ -201,8 +201,10 @@
         btns = document.querySelectorAll(".cbtn");
     function render(i) {
       var c = CAD[i];
-      gfill.style.height = (c.surv * 100) + "%";
-      gnum.textContent = Math.round(c.surv * 100) + "%";
+      var pct = Math.round(c.surv * 100);
+      gfill.style.height = pct + "%";
+      gfill.parentElement.setAttribute("aria-valuenow", pct);
+      gnum.textContent = pct + "%";
       verdict.innerHTML = c.verdict;
       looks.innerHTML = "";
       if (c.N === 0) { var t=document.createElement("span"); t.className="txt"; t.textContent="no measurements"; looks.appendChild(t); }

@@ -66,64 +66,64 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· Ladder of Causation exhibit</a>
     <span class="wingtag">· Wing I · The Causal Switch</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet · Concept &amp; Sources</p>
     <h1>Pearl's three rungs — and the step the ladder <span class="hl">cannot type</span></h1>
     <div class="idline">
-      <span><b>Nature</b> Pedagogy (guided tour)</span>
-      <span><b>Framework</b> Pearl's Ladder of Causation</span>
-      <span><b>Populated by</b> real hardware findings</span>
-      <span><b>Cycle</b> C4587 · Whisper</span>
+      <span><strong>Nature</strong> Pedagogy (guided tour)</span>
+      <span><strong>Framework</strong> Pearl's Ladder of Causation</span>
+      <span><strong>Populated by</strong> real hardware findings</span>
+      <span><strong>Cycle</strong> C4587 · Whisper</span>
     </div>
     <span class="verdict-chip">◇ 3 RUNGS + THE STEP OFF · every number pre-registered &amp; frozen-rule-graded</span>
   </header>
   <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
 
   <p>This sheet is the concept-and-sources companion to the exhibit. The exhibit makes one claim: the campaign
-  <b>climbed Pearl's whole Ladder of Causation on a quantum processor without planning to</b> — one real experiment per
+  <strong>climbed Pearl's whole Ladder of Causation on a quantum processor without planning to</strong> — one real experiment per
   rung — and then took a step Pearl's framework can only name by its absence. Here is the framework, how each rung maps
   to the campaign's work, and which findings populate it. Every number is transcribed from the exhibit page (itself an
   allowed source) and corroborated in <code>docs/campaign-arcs.md</code> and the finding files where noted in §5.</p>
 
   <h2><span class="n">1</span>The concept — Pearl's three rungs</h2>
-  <p>Judea Pearl taught that causal questions come in three rungs — <b>seeing</b>, <b>doing</b>, and <b>imagining</b> —
-  and that <b>no rung can be answered from the one below it</b>. Association is what you can read off passive data;
-  intervention requires you to <b>act</b>; counterfactuals reason about worlds that did not happen. The exhibit maps
-  each rung to a real hardware result, and then shows an object that <b>breaks the ladder's hidden premise</b> — that a
+  <p>Judea Pearl taught that causal questions come in three rungs — <strong>seeing</strong>, <strong>doing</strong>, and <strong>imagining</strong> —
+  and that <strong>no rung can be answered from the one below it</strong>. Association is what you can read off passive data;
+  intervention requires you to <strong>act</strong>; counterfactuals reason about worlds that did not happen. The exhibit maps
+  each rung to a real hardware result, and then shows an object that <strong>breaks the ladder's hidden premise</strong> — that a
   definite causal structure exists at all.</p>
 
   <h2><span class="n">2</span>How each rung maps to the campaign</h2>
 
   <h3><span class="rung">Rung 1 · Association — "What do I see?"</span>Watching the chip's noise, finding structure</h3>
-  <p>Pure observation: correlations, patterns, P(y|x). The exhibit's rung-1 example is <b>Finding 3, X-basis noise
-  immunity</b> — read a qubit one way (X) and the dominant noise largely misses it; read it another way (Z) and it does
+  <p>Pure observation: correlations, patterns, P(y|x). The exhibit's rung-1 example is <strong>Finding 3, X-basis noise
+  immunity</strong> — read a qubit one way (X) and the dominant noise largely misses it; read it another way (Z) and it does
   not. Same circuit, different viewing angle, <span class="num">up to 3× cleaner</span>, confirmed three independent
   times, with the ordering replicated on a second chip. Nothing was intervened on.</p>
   <p class="tight">Also at this rung, per the exhibit: the ~1000-gate depth wall (Finding 5), the quiet-qubit maps
   (F57–F70), and the calibration-window lottery (F81/F84).</p>
 
   <h3><span class="rung">Rung 2 · Intervention — "What if I do?"</span>Surgery on a circuit: the do() operator, executed</h3>
-  <p>Rung 2 asks what observation cannot: what happens if I <b>make</b> it so? Two exhibit examples:</p>
+  <p>Rung 2 asks what observation cannot: what happens if I <strong>make</strong> it so? Two exhibit examples:</p>
   <ul>
-    <li><b>Finding 11 — the gate-overhead dose-response law.</b> A do()-style experiment held duration fixed while
+    <li><strong>Finding 11 — the gate-overhead dose-response law.</strong> A do()-style experiment held duration fixed while
     adding gates, and vice versa, splitting the cost of a two-qubit gate into <span class="num">~78%
     time-decoherence + ~22% gate-specific noise</span> — two numbers no amount of passive watching could separate.</li>
-    <li><b>Finding 18 — H-gate surgery.</b> Do the H-gates <b>cause</b> the measured advantage or merely accompany it?
+    <li><strong>Finding 18 — H-gate surgery.</strong> Do the H-gates <strong>cause</strong> the measured advantage or merely accompany it?
     Surgically removing them (intervention) degraded the answers directly — association upgraded to causation.</li>
   </ul>
 
   <h3><span class="rung">Rung 3 · Counterfactuals — "What if I had?"</span>Frozen predictions: counterfactuals with receipts</h3>
   <p>Rung 3 reasons about worlds that did not happen. The campaign's version is methodological: every hardware
-  experiment ships with a <b>pre-registration</b> — a frozen, committed statement of what the world will look like if
+  experiment ships with a <strong>pre-registration</strong> — a frozen, committed statement of what the world will look like if
   the hypothesis is true and if it is false, before any data exists. The exhibit's example is the depth-decay law's
   blind test: two futures were filed before Exp108 returned — the noise model said <code>Δ ≈ 0.2275</code>, the
   cross-arc law said <code>Δ ≈ 0.201</code>. The hardware said <span class="num">Δ = 0.1796 ± 0.0085</span> — closer to
@@ -131,19 +131,19 @@
   counterfactual one.</p>
 
   <h2><span class="n">3</span>The step off the ladder — the quantum switch</h2>
-  <p>Every rung quietly assumes one thing: that a definite causal structure <b>exists</b> — some DAG, maybe unknown,
+  <p>Every rung quietly assumes one thing: that a definite causal structure <strong>exists</strong> — some DAG, maybe unknown,
   maybe latent-mixed, but there. The quantum switch breaks exactly that: two operations are applied in a coherent
-  superposition of <b>A-then-B</b> and <b>B-then-A</b> — not a hidden order, not a coin-flip over orders (that control
-  arm behaves just as Pearl predicts), but an <b>amplitude over orders</b>.</p>
+  superposition of <strong>A-then-B</strong> and <strong>B-then-A</strong> — not a hidden order, not a coin-flip over orders (that control
+  arm behaves just as Pearl predicts), but an <strong>amplitude over orders</strong>.</p>
   <div class="callout good">
     <p class="clabel">The measured step off (F82 / F83)</p>
-    <p class="tight">A discrimination game whose ceiling for <b>any</b> definite-order strategy is provably
-    <b>0.8695</b> was won at <span class="num">0.9769 — 216.8σ above the ceiling</span>, and replicated on a second chip
-    the next day (0.9738, 201σ). Two channels that each transmit <b>exactly zero</b> information carried
+    <p class="tight">A discrimination game whose ceiling for <strong>any</strong> definite-order strategy is provably
+    <strong>0.8695</strong> was won at <span class="num">0.9769 — 216.8σ above the ceiling</span>, and replicated on a second chip
+    the next day (0.9738, 201σ). Two channels that each transmit <strong>exactly zero</strong> information carried
     <span class="num">0.0436 bits</span> through their superposition of orders. The definite-order null arms, run in the
     same jobs, scored exactly what the ladder says they must.</p>
   </div>
-  <p>The ladder is not wrong — inside its world it was quantitatively correct on this same hardware. It is <b>typed</b>:
+  <p>The ladder is not wrong — inside its world it was quantitatively correct on this same hardware. It is <strong>typed</strong>:
   its input is a causal structure, and this object is not one. Fed to standard causal-discovery algorithms (PC, GES),
   the switch data returns an ordinary causal graph with no warning — the output format itself cannot say "there is no
   order here."</p>
@@ -151,7 +151,8 @@
   <h2><span class="n">4</span>The findings that populate the ladder</h2>
   <div class="tbl-wrap">
   <table>
-    <thead><tr><th>rung</th><th>finding(s)</th><th>the measured claim (as shown on the exhibit)</th></tr></thead>
+<caption>Pearl's causation rungs mapped to campaign findings, plus the quantum switch off-ladder</caption>
+    <thead><tr><th scope="col">rung</th><th scope="col">finding(s)</th><th scope="col">the measured claim (as shown on the exhibit)</th></tr></thead>
     <tbody>
       <tr><td>Rung 1 · Association</td><td class="f">F3 · F5 · F57–F70 · F81/F84</td><td>X-basis immunity up to 3× cleaner (F3); depth wall; quiet-qubit maps; window lottery</td></tr>
       <tr><td>Rung 2 · Intervention</td><td class="f">F11 · F18</td><td>gate-overhead law ~78% decoherence + ~22% gate-specific (F11); H-gate surgery (F18)</td></tr>
@@ -163,30 +164,30 @@
 
   <h2><span class="n">5</span>Scope &amp; sources</h2>
   <ul>
-    <li><b>Pedagogy — the scope.</b> The rung mappings are an interpretive frame over real results, not new
-    physics. Rung 3 is a <b>methodological</b> counterfactual (pre-registration), not a hardware counterfactual-world
+    <li><strong>Pedagogy — the scope.</strong> The rung mappings are an interpretive frame over real results, not new
+    physics. Rung 3 is a <strong>methodological</strong> counterfactual (pre-registration), not a hardware counterfactual-world
     measurement.</li>
-    <li><b>Off-ladder scope.</b> F82/F83 are pre-registered provable-bound beats against the causally-separable class
-    including dynamical order — device-characterized, <b>not</b> loophole-free device-independent.</li>
-    <li><b>Numbers &amp; corroboration.</b> All scalars are transcribed from <code>demo/ladder/index.html</code>. F82/F83
+    <li><strong>Off-ladder scope.</strong> F82/F83 are pre-registered provable-bound beats against the causally-separable class
+    including dynamical order — device-characterized, <strong>not</strong> loophole-free device-independent.</li>
+    <li><strong>Numbers &amp; corroboration.</strong> All scalars are transcribed from <code>demo/ladder/index.html</code>. F82/F83
     (0.9769 · 216.8σ · 0.9738 · 201σ · 0.0436 bits · bound) and the Exp108 depth-decay set (Δ 0.1796, filed 0.2275/0.201,
     2.3×) are corroborated in <code>docs/campaign-arcs.md</code> (F82, F83, F86). The gate-overhead law is
     <code>findings/11-gate-overhead-law.md</code>. The low-numbered rung-1/rung-2 findings (F3, F5, F18) are cited from
     the exhibit; they were not independently re-located as <code>campaign-arcs.md</code> rows.</li>
-    <li><b>Further reading.</b> <code>docs/beyond-the-ladder.md</code> (the full argument), the switch spec sheet, and
+    <li><strong>Further reading.</strong> <code>docs/beyond-the-ladder.md</code> (the full argument), the switch spec sheet, and
     <code>docs/causal-discovery-stress-test-whisper-c4587.md</code> (PC/GES stress test).</li>
   </ul>
 
-  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
 
   </main>
-  <div class="foot" role="contentinfo">
+  <footer class="foot">
     <span>PEDAGOGY · <b style="color:var(--cyan)">Pearl × the quantum switch</b> · F82 / F83 measured</span>
     <span class="sp"></span>
     <a href="./spec.md">Markdown</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 <script>
@@ -195,7 +196,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
   })();

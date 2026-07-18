@@ -82,16 +82,17 @@
  .skip{position:absolute;left:-999px;top:0;background:var(--focus);color:#000;padding:8px 14px;z-index:10}
  .skip:focus{left:8px}
 </style></head><body>
+<a class="skip" href="#main">Skip to main content</a>
 <a class="skip" href="#game">Skip to the game</a>
 <div class="wrap">
 
 <header>
- <h1>📺 STATIC — can a message survive two perfect erasers?</h1>
+ <h1><span aria-hidden="true">📺 </span>STATIC — can a message survive two perfect erasers?</h1>
  <p class="tagline">A tiny game about a big experiment: information transmitted through two
  machines that each <em>provably destroy everything</em> — with every probability in this page
  <strong>measured on a real quantum computer</strong>, not designed.</p>
- <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
+ <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
 </header>
 <main id="main">
 
@@ -110,7 +111,7 @@
    orders at once</em> — genuinely neither-first-and-both. Then a whisper of the secret survives:
    <strong>0.0436 bits per try, measured</strong>, 55 standard deviations away from "impossible."</div>
  </div>
- <div class="why"><b>Why this matters:</b> the classic bot below isn't weak — it is
+ <div class="why"><strong>Why this matters:</strong> the classic bot below isn't weak — it is
   <em>as good as any machine, strategy, or intelligence can ever be</em> under normal
   cause-and-effect, and that best-possible score is a coin flip. The quantum bot's edge doesn't
   come from cleverness; it comes from the <em>order of events itself</em> being quantum. When it
@@ -188,7 +189,7 @@
 
  <div class="lanes">
   <div class="lane c">
-   <h3>🎲 Classic bot</h3>
+   <h3><span aria-hidden="true">🎲 </span>Classic bot</h3>
    <p class="how">Hears pure static. Votes by coin flip — the <em>provable maximum</em> for any
     definite order of the censors.</p>
    <canvas class="tv" id="tvc" role="img"
@@ -200,7 +201,7 @@
    <p class="stat" id="dc">secrets decoded: 0 correct, 0 wrong</p>
   </div>
   <div class="lane q">
-   <h3>⚛️ Quantum bot</h3>
+   <h3><span aria-hidden="true">⚛️ </span>Quantum bot</h3>
    <p class="how">Reads the stamp <em>and</em> the die each round, then trusts or flips
     accordingly. Measured odds: ~62% per round.</p>
    <canvas class="tv" id="tvq" role="img"
@@ -213,7 +214,7 @@
    <p class="stat" id="dq">secrets decoded: 0 correct, 0 wrong</p>
   </div>
   <div class="lane you" id="youlane" hidden>
-   <h3>🕵️ You</h3>
+   <h3><span aria-hidden="true">🕵️ </span>You</h3>
    <p class="how">Same evidence as the quantum bot. Rule: <strong>stamp UP → trust the die ·
     stamp DOWN → flip it</strong>. Or follow your hunch.</p>
    <canvas class="tv" id="tvy" role="img" aria-label="Television static — your view of the message"></canvas>
@@ -232,7 +233,7 @@
 </section>
 
 <section class="truth" aria-labelledby="truth-h">
- <h2 id="truth-h">🔍 What's really true here</h2>
+ <h2 id="truth-h"><span aria-hidden="true">🔍 </span>What's really true here</h2>
  <p><strong>The numbers are measurements.</strong> Quantum-bot odds per round: stamp UP with
  probability 0.6214; given UP, the die matches the secret with probability ≈0.595; given DOWN it
  <em>mismatches</em> with probability ≈0.657 — all from experiment Exp106 on

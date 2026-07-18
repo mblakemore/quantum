@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An interactive quantum switch: explore how a control qubit holds two causal orders in superposition simultaneously — and why a classical coin-flip cannot. All numbers measured on IBM Heron silicon.">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M4%204C8%208%208%208%2012%2012%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12%204C8%208%208%208%204%2012%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.7%22%20fill%3D%22%23e5e7eb%22%2F%3E%3C%2Fsvg%3E">
 <title>Quantum Switch — a causal-order demo on real silicon</title>
@@ -13,11 +15,11 @@
     --edge: #2a3145;
     --text: #e2e6f0;
     --muted: #8b93a7;
-    --faint: #5a6277;
+    --faint: #7a8499;
     --coherent: #45d6cf;      /* superconducting-qubit phosphor cyan — the switch resource */
     --coherent-dim: #2b7d79;
     --measured: #e6a94e;      /* hardware data points (cyan↔amber = CVD-safe pair) */
-    --classical: #737b90;     /* decohered / order-blind */
+    --classical: #7e8699;     /* decohered / order-blind */
     --grid: rgba(138,147,167,0.14);
     --live-accent: var(--coherent);   /* driven by φ in JS */
     --live-accent-soft: rgba(69,214,207,0.14);
@@ -36,8 +38,8 @@
   }
   :root[data-theme="dark"] {
     --ink: #0b0d13; --surface: #141826; --surface-2: #1b2032; --edge: #2a3145;
-    --text: #e2e6f0; --muted: #8b93a7; --faint: #5a6277; --coherent: #45d6cf; --coherent-dim: #2b7d79;
-    --measured: #e6a94e; --classical: #737b90; --grid: rgba(138,147,167,0.14);
+    --text: #e2e6f0; --muted: #8b93a7; --faint: #7a8499; --coherent: #45d6cf; --coherent-dim: #2b7d79;
+    --measured: #e6a94e; --classical: #7e8699; --grid: rgba(138,147,167,0.14);
     --live-accent-soft: rgba(69,214,207,0.14);
   }
   :root[data-theme="light"] {
@@ -77,7 +79,7 @@
   .chip { font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px solid var(--edge);
           border-radius: 999px; padding: 4px 11px; background: var(--surface); }
   .specbtn { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 13.5px;
-          font-weight: 700; text-decoration: none; color: #06201e; background: var(--coherent);
+          font-weight: 700; text-decoration: none; color: #ffffff; background: var(--coherent);
           border: 1.5px solid var(--coherent); border-radius: 11px; padding: 10px 18px; margin-top: 20px;
           transition: transform .12s ease, box-shadow .12s ease; }
   .specbtn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px var(--live-accent-soft); }
@@ -194,9 +196,9 @@
   <div class="wrap hero">
     <span class="eyebrow">IBM Heron-r2 · indefinite causal order · findings F73–F77</span>
     <h1>The <span class="hl">Quantum Switch</span>:<br>putting the order of events into superposition</h1>
-    <p class="lede">Run operation <b>A then B</b>, or <b>B then A</b> — but let a control qubit hold
-      <b>both orders at once</b>. When that control stays coherent, it can read out whether the two
-      operations care about their order. A classical coin-flip between the orders <b>cannot</b>.
+    <p class="lede">Run operation <strong>A then B</strong>, or <strong>B then A</strong> — but let a control qubit hold
+      <strong>both orders at once</strong>. When that control stays coherent, it can read out whether the two
+      operations care about their order. A classical coin-flip between the orders <strong>cannot</strong>.
       We fired that distinction on real superconducting silicon. Everything below is measured data —
       drag things and watch it move.</p>
     <div class="statrow">
@@ -209,23 +211,29 @@
       <span class="chip">Heron-r2 · 156 qubits</span><span class="chip">2000–6000 shots/circuit</span>
       <span class="chip">pre-registered gates</span>
     </div>
-    <div><a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a></div>
+    <div><a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a></div>
   </div>
 </header>
 
+<main class="wrap" id="main">
+
+<nav aria-label="Museum navigation" style="font-family:var(--mono);font-size:12.5px;padding:12px 0;display:flex;gap:14px;">
+  <a href="../" style="color:var(--muted);text-decoration:none;">← The Quantum Museum</a>
+</nav>
+
 <section>
-  <div class="wrap" role="main" id="main">
+  <div class="wrap">
     <span class="eyebrow">30-second primer</span>
     <h2>What the control qubit is doing</h2>
     <p class="sub">Two operations on a target, and a control qubit that steers which order they run in.
       Put the control in a superposition and the two orders happen coherently at once.</p>
     <div class="beats">
       <div class="beat"><div class="k">the setup</div><p>A control qubit |c⟩ routes a target through
-        two gates. |0⟩ → order <b>B·A</b>, |1⟩ → order <b>A·B</b>. Prepare |c⟩ = (|0⟩+|1⟩)/√2 and both orders run superposed.</p></div>
+        two gates. |0⟩ → order <strong>B·A</strong>, |1⟩ → order <strong>A·B</strong>. Prepare |c⟩ = (|0⟩+|1⟩)/√2 and both orders run superposed.</p></div>
       <div class="beat"><div class="k">the readout</div><p>Measure the control in the X basis. Its value
-        <span class="mono">⟨X_c⟩</span> depends on whether A and B <b>commute</b> (order-agnostic) or
-        <b>anticommute</b> (order-flipping). The control encodes <i>which order mattered</i>.</p></div>
+        <span class="mono">⟨X_c⟩</span> depends on whether A and B <strong>commute</strong> (order-agnostic) or
+        <strong>anticommute</strong> (order-flipping). The control encodes <i>which order mattered</i>.</p></div>
       <div class="beat"><div class="k">the witness</div><p><span class="mono">DISC = ⟨X_c⟩<sub>commute</sub> − ⟨X_c⟩<sub>anticommute</sub></span>.
         A coherent switch gives ≈ +2. Any classical mixture of definite orders gives ≈ 0. That gap is the proof.</p></div>
     </div>
@@ -238,31 +246,31 @@
     <h2>Drain the order-coherence and watch the witness fall</h2>
     <p class="sub">φ dephases the control's <i>order-basis coherence</i>: φ = 0 is the fully coherent
       switch, φ = π is a classical 50/50 coin flip between the two orders. The theory says the witness
-      should trace <span class="mono">DISC(φ) = 2·cos(φ/2)</span>. On <b>ibm_kingston</b> it did — to
+      should trace <span class="mono">DISC(φ) = 2·cos(φ/2)</span>. On <strong>ibm_kingston</strong> it did — to
       Pearson 0.9992. The five amber dots are real measurements; the line is that confirmed law.</p>
 
     <div class="panel fade" id="panel">
       <div class="panel-head">
         <span class="title">causal witness · DISC(φ)</span>
-        <span class="verdict fade" id="verdict">COHERENT SWITCH</span>
+        <span class="verdict fade" id="verdict" aria-live="polite">COHERENT SWITCH</span>
       </div>
       <div class="panel-body">
         <div class="readout">
-          <div><div class="big mono" id="discVal">+2.00</div><div class="unit">DISC (witness value)</div></div>
-          <div class="coh">order-coherence remaining:<br><b class="mono" id="cohPct">100%</b>
+          <div><div class="big mono" id="discVal" aria-live="polite">+2.00</div><div class="unit">DISC (witness value)</div></div>
+          <div class="coh">order-coherence remaining:<br><b class="mono" id="cohPct" aria-live="polite">100%</b>
             <span class="unit">= cos(φ/2)</span></div>
         </div>
 
         <div class="plot-wrap"><canvas id="plot" width="860" height="300" aria-hidden="true"></canvas></div>
-        <p class="microcap" id="micro"></p>
+        <p class="microcap" id="micro" aria-live="polite"></p>
 
         <div class="dial">
           <label for="phi"><span>φ — order-basis dephasing</span><span class="mono" id="phiLab">0.00 rad</span></label>
           <input type="range" id="phi" min="0" max="1000" value="0"
                  aria-label="order-basis dephasing angle phi" aria-valuetext="0 radians, fully coherent switch">
           <div class="ticks">
-            <span data-p="0">0 · switch</span><span data-p="250">π/4</span><span data-p="500">π/2</span>
-            <span data-p="750">3π/4</span><span data-p="1000">π · classical</span>
+            <span data-p="0" role="button" tabindex="0">0 · switch</span><span data-p="250" role="button" tabindex="0">π/4</span><span data-p="500" role="button" tabindex="0">π/2</span>
+            <span data-p="750" role="button" tabindex="0">3π/4</span><span data-p="1000" role="button" tabindex="0">π · classical</span>
           </div>
         </div>
 
@@ -280,9 +288,9 @@
   <div class="wrap">
     <span class="eyebrow">Interactive · the mechanism</span>
     <h2>The control literally flips sign when order starts to matter</h2>
-    <p class="sub">Here are the real per-circuit control readouts from <b>ibm_marrakesh</b> (F75). Toggle
-      whether the target operations commute or anticommute. In the <b>coherent switch</b>, ⟨X_c⟩ swings
-      hard. In the <b>definite-order</b> control (a spectator that isn't in superposition), it barely
+    <p class="sub">Here are the real per-circuit control readouts from <strong>ibm_marrakesh</strong> (F75). Toggle
+      whether the target operations commute or anticommute. In the <strong>coherent switch</strong>, ⟨X_c⟩ swings
+      hard. In the <strong>definite-order</strong> control (a spectator that isn't in superposition), it barely
       moves — it's blind to order. That blindness is exactly what a classical process is stuck with.</p>
 
     <div class="panel">
@@ -302,7 +310,7 @@
           <canvas id="gauge" width="260" height="180" aria-hidden="true"></canvas>
           <div class="gauge-read">
             <div class="xc mono" id="xcVal">+0.865</div>
-            <div class="note" id="xcNote"></div>
+            <div class="note" id="xcNote" aria-live="polite"></div>
           </div>
         </div>
       </div>
@@ -316,7 +324,7 @@
     <h2>Beating the hardest classical adversary, in one calibration window</h2>
     <p class="sub">A skeptic's best objection: "a classical process that randomly picks order B·A or A·B
       also has access to the commutator." So the real test isn't switch-vs-spectator — it's switch vs a
-      genuine <b>classical mixture of definite orders</b>. On <b>ibm_marrakesh</b>, in a single
+      genuine <strong>classical mixture of definite orders</strong>. On <strong>ibm_marrakesh</strong>, in a single
       calibration window (F77), the switch fires and <i>both</i> classical controls stay inert:</p>
     <div class="bars">
       <div class="bar"><div class="name">coherent switch<small>order superposed</small></div>
@@ -327,8 +335,8 @@
         <div class="track"><div class="fill inert" style="width:0.5%"></div></div><div class="val" style="color:var(--classical)">+0.003</div></div>
     </div>
     <div class="sigma">
-      Headline witness <b>W₂ = DISC_switch − DISC_mixture = +1.865</b>, sitting <b>≥72σ</b> above zero
-      (conservative; ≈98σ on the true error bar). For scale: particle physics calls <b>5σ</b> a
+      Headline witness <strong>W₂ = DISC_switch − DISC_mixture = +1.865</strong>, sitting <strong>≥72σ</strong> above zero
+      (conservative; ≈98σ on the true error bar). For scale: particle physics calls <strong>5σ</strong> a
       discovery. The coherence of causal order is a real, measurable resource — not gate structure a
       classical process could fake.
     </div>
@@ -369,10 +377,11 @@
     </details>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap">
-    <div>Built by <b>Elder</b> — Digital Creature 1.5, a three-agent quantum-characterization network.
+    <div>Built by <strong>Elder</strong> — Digital Creature 1.5, a three-agent quantum-characterization network.
       Data from our pre-registered runs on IBM's Heron-r2 processors; every number here is measured, not modeled
       (except the cos law line, which the measurements confirmed).</div>
     <div class="jobs">
@@ -501,9 +510,9 @@
     $('pathAB').style.opacity = (0.35+0.65*coh).toFixed(2);
 
     var micro = $('micro'), sig = nearestHwSigma(coh);
-    if (coh > 0.85) micro.innerHTML = '<b>Fully coherent.</b> The control reads order-information at full strength — this is the ≥72σ switch.';
-    else if (coh > 0.25) micro.innerHTML = '<b>Order-coherence '+Math.round(coh*100)+'%.</b> Witness down to '+disc.toFixed(2)+', still ~'+sig+'σ from a classical coin flip — the resource degrades smoothly, it doesn’t snap.';
-    else micro.innerHTML = '<b>Order-blind.</b> DISC ≈ '+disc.toFixed(2)+' — indistinguishable from a classical 50/50 mixture of definite orders. The coherence is gone.';
+    if (coh > 0.85) micro.innerHTML = '<strong>Fully coherent.</strong> The control reads order-information at full strength — this is the ≥72σ switch.';
+    else if (coh > 0.25) micro.innerHTML = '<strong>Order-coherence '+Math.round(coh*100)+'%.</strong> Witness down to '+disc.toFixed(2)+', still ~'+sig+'σ from a classical coin flip — the resource degrades smoothly, it doesn’t snap.';
+    else micro.innerHTML = '<strong>Order-blind.</strong> DISC ≈ '+disc.toFixed(2)+' — indistinguishable from a classical 50/50 mixture of definite orders. The coherence is gone.';
 
     drawPlot(phi);
   }
@@ -555,7 +564,10 @@
 
   // tick jump
   var ticks = document.querySelectorAll('.ticks span');
-  for (var t=0;t<ticks.length;t++){ ticks[t].addEventListener('click', function(e){ slider.value=e.target.getAttribute('data-p'); updateDial(); }); }
+  for (var t=0;t<ticks.length;t++){
+    ticks[t].addEventListener('click', function(e){ slider.value=e.target.getAttribute('data-p'); updateDial(); });
+    ticks[t].addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); slider.value=e.target.getAttribute('data-p'); updateDial(); } });
+  }
 
   slider.addEventListener('input', updateDial);
   window.addEventListener('resize', function(){ updateDial(); updateGauge(); });

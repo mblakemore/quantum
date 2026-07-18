@@ -145,16 +145,17 @@
  .skip{position:absolute;left:-999px;top:0;background:var(--focus);color:#000;padding:8px 14px;z-index:10}
  .skip:focus{left:8px}
 </style></head><body>
+<a class="skip" href="#main">Skip to main content</a>
 <a class="skip" href="#game">Skip to the game</a>
 <div class="wrap">
 
-<header>
+<header role="banner">
  <h1>🕵️ The Interrogation You Cannot Win</h1>
  <p class="tagline">A detective game whose difficulty ceiling is not a setting — it's a
  <strong>theorem</strong>. And then you get the one tool that breaks it, with odds
  <strong>measured on a real quantum computer</strong>.</p>
- <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
+ <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
 </header>
 <main id="main">
 
@@ -196,7 +197,7 @@
    <img class="setupimg" src="img/setup3.png" width="750" height="500"
     alt="A gold, tiered quantum-computer chandelier hanging under a lamp in a dark laboratory, its lowest stage glowing mint green."></div>
  </div>
- <div class="why"><b>Why this matters:</b> the 91% ceiling binds every strategy under normal
+ <div class="why"><strong>Why this matters:</strong> the 91% ceiling binds every strategy under normal
   cause-and-effect — every gadget, every entangled trick, every adaptive scheme, as long as the
   two questions happen in <em>some</em> order. Beating it isn't better detective work; it
   requires the order of events itself to be quantum. When your accuracy crosses the red line,
@@ -230,17 +231,17 @@
 
 <section id="game" aria-labelledby="game-h">
  <h2 id="game-h">The interrogation room</h2>
- <p class="stepsbar"><strong>How a round works:</strong>&nbsp; <b>1</b> Interrogate with a kit →
-    <b>2</b> read its report and make your call → the case file opens.</p>
+ <p class="stepsbar"><strong>How a round works:</strong>&nbsp; <strong>1</strong> Interrogate with a kit →
+    <strong>2</strong> read its report and make your call → the case file opens.</p>
  <div class="grid3">
   <div class="panel">
    <p class="stephead" id="kit-h"><span class="panelno" aria-hidden="true">1</span>Interrogate with a kit</p>
    <p class="stat" id="casehdr" role="status" style="margin-top:0">CASE #— · suspects unidentified</p>
    <div class="suspects">
-    <div class="sil"><img id="s1img" src="img/silhouette.png"
+    <div class="sil"><img id="s1img" src="img/silhouette.png" width="512" height="686"
       alt="Unidentified suspect one: a featureless backlit silhouette under an interrogation lamp.">
       <span class="nm" id="s1nm" aria-hidden="true">?</span></div>
-    <div class="sil"><img id="s2img" src="img/silhouette.png"
+    <div class="sil"><img id="s2img" src="img/silhouette.png" width="512" height="686"
       alt="Unidentified suspect two: a featureless backlit silhouette under an interrogation lamp.">
       <span class="nm" id="s2nm" aria-hidden="true">?</span></div>
    </div>
@@ -295,7 +296,7 @@
     <div class="meter" role="img" aria-labelledby="meter-h" aria-describedby="meter-d">
      <i id="acc" style="width:0%"></i><span class="zone"></span><span class="ceil"></span>
     </div>
-    <p class="meterlbl" id="meter-d">The <b>red line at 91%</b> is THE CEILING — the proven
+    <p class="meterlbl" id="meter-d">The <strong>red line at 91%</strong> is THE CEILING — the proven
     maximum for any kit, ever, under definite causal order. Beyond it is the forbidden zone:
     only the switch reaches it.</p>
    </div>
@@ -308,9 +309,9 @@
  <div class="log" id="log" role="log" aria-live="polite" aria-labelledby="log-h"></div>
 
  <dialog class="badge" id="badge" aria-labelledby="badge-t">
-  <p id="badge-t" style="margin-top:0"><b>⚡ SWITCH BADGE EARNED.</b> Ten rounds played.</p>
+  <p id="badge-t" style="margin-top:0"><strong>⚡ SWITCH BADGE EARNED.</strong> Ten rounds played.</p>
   <p>There is one interrogation room where the order of questioning is never decided — its odds
-   were not designed, they were <b>measured</b>. The SWITCH kit is now on your belt: select it
+   were not designed, they were <strong>measured</strong>. The SWITCH kit is now on your belt: select it
    and step into the forbidden zone.</p>
   <div class="okrow"><button id="badgeok" autofocus>OK</button></div>
  </dialog>

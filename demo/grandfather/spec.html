@@ -70,26 +70,26 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· Grandfather Paradox exhibit</a>
     <span class="wingtag">· Wing III · Foundations on Silicon</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet</p>
     <h1>The Grandfather Paradox, <span class="hl">forbidden on silicon</span></h1>
     <div class="idline">
-      <span><b>Finding</b> F101</span>
-      <span><b>Experiment</b> Exp123 (P-CTC enforcement + backaction audit)</span>
-      <span><b>Backend</b> ibm_marrakesh (Heron r2)</span>
-      <span><b>Job</b> d9ahnee6hjac73feegfg</span>
-      <span><b>Wing</b> III · Horizons-2 Q5</span>
+      <span><strong>Finding</strong> F101</span>
+      <span><strong>Experiment</strong> Exp123 (P-CTC enforcement + backaction audit)</span>
+      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+      <span><strong>Job</strong> d9ahnee6hjac73feegfg</span>
+      <span><strong>Wing</strong> III · Horizons-2 Q5</span>
     </div>
-    <span class="verdict-chip">✓ VERDICT — PARADOX SUPPRESSED 53× · FINGERPRINT 78σ</span>
+    <span class="verdict-chip"><span aria-hidden="true">✓</span> VERDICT — PARADOX SUPPRESSED 53× · FINGERPRINT 78σ</span>
   </header>
   <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
 
@@ -101,114 +101,115 @@
   <h2><span class="n">1</span>The idea, in plain language</h2>
   <p>The grandfather paradox is the oldest objection to time travel: go back, prevent your own grandfather from
   meeting your grandmother, and you are never born to make the trip — a story that cannot be consistent with itself.
-  Physicist <b>Seth Lloyd</b> proposed a resolution. If a quantum time loop existed, it would only permit stories
-  that are <b>self-consistent</b>; the universe effectively <b>post-selects</b> for consistency, and the paradoxical
-  branches are simply pruned away. The grandfather kill cannot happen because there is <b>no self-consistent
-  amplitude</b> for it.</p>
-  <p>We do not build a real closed timelike curve. We build the <b>model</b> Lloyd wrote down: a
-  <b>post-selected CTC</b> (P-CTC), where a post-selection stands in for the loop closing on itself. Then we ask the
-  chip two questions. First — <b>how hard does the timeline work to forbid a paradox?</b> We turn up the strength of
-  the grandfather kill and measure the fraction of runs that survive as self-consistent. Second — <b>can the rate
-  be faked?</b> A bystander who merely knew what the traveller did, before the loop closed, should carry a fingerprint
+  Physicist <strong>Seth Lloyd</strong> proposed a resolution. If a quantum time loop existed, it would only permit stories
+  that are <strong>self-consistent</strong>; the universe effectively <strong>post-selects</strong> for consistency, and the paradoxical
+  branches are simply pruned away. The grandfather kill cannot happen because there is <strong>no self-consistent
+  amplitude</strong> for it.</p>
+  <p>We do not build a real closed timelike curve. We build the <strong>model</strong> Lloyd wrote down: a
+  <strong>post-selected CTC</strong> (P-CTC), where a post-selection stands in for the loop closing on itself. Then we ask the
+  chip two questions. First — <strong>how hard does the timeline work to forbid a paradox?</strong> We turn up the strength of
+  the grandfather kill and measure the fraction of runs that survive as self-consistent. Second — <strong>can the rate
+  be faked?</strong> A bystander who merely knew what the traveller did, before the loop closed, should carry a fingerprint
   that ordinary post-selection cannot leave.</p>
   <div class="callout">
     <p class="clabel">Scope, stated first</p>
-    <p class="tight">This is <b>Lloyd's post-selection model</b> (P-CTC, 2011): <b>the post-selection IS the
-    timeline</b>. It is <b>not</b> literal time travel and <b>not</b> a physical closed timelike curve — no signal is
+    <p class="tight">This is <strong>Lloyd's post-selection model</strong> (P-CTC, 2011): <strong>the post-selection IS the
+    timeline</strong>. It is <strong>not</strong> literal time travel and <strong>not</strong> a physical closed timelike curve — no signal is
     sent to the past. What is real is the measured hardware behaviour of that model: the enforcement rate and the
     nonlinear backaction fingerprint.</p>
   </div>
 
   <h2><span class="n">2</span>What we measure — the rate and the fingerprint</h2>
-  <p>Two observables carry the finding, on the shallowest apparatus of the whole campaign — <b>three CX gates</b>.</p>
+  <p>Two observables carry the finding, on the shallowest apparatus of the whole campaign — <strong>three CX gates</strong>.</p>
   <h3>The enforcement rate</h3>
   <p>A knob <code>θ</code> sets how hard the traveller tries to flip the grandfather bit: <code>θ = 0</code> is
-  "leave him alone," <code>θ = π</code> is a full kill. We measure the <b>survival</b> — the fraction of runs that
+  "leave him alone," <code>θ = π</code> is a full kill. We measure the <strong>survival</strong> — the fraction of runs that
   close self-consistently — down the ladder. The prediction of the model is the enforcement law
-  <code>p(θ) = cos²(θ/2)</code> (normalised to the baseline): survival should fall to <b>zero</b> at a full kill.</p>
+  <code>p(θ) = cos²(θ/2)</code> (normalised to the baseline): survival should fall to <strong>zero</strong> at a full kill.</p>
   <h3>The fingerprint the rate cannot fake</h3>
-  <p>A chronology-respecting <b>bystander</b> is correlated with the traveller <em>before</em> the loop closes,
-  writing a plain <b>classical record</b> (a value along the Z axis). If this were trivial post-selection, that
-  record would stay classical. Instead, closing the self-consistent loop <b>rotates the record into quantum
-  coherence</b> — it appears along the X axis. That rotation is the nonlinear CTC backaction; a trivial
+  <p>A chronology-respecting <strong>bystander</strong> is correlated with the traveller <em>before</em> the loop closes,
+  writing a plain <strong>classical record</strong> (a value along the Z axis). If this were trivial post-selection, that
+  record would stay classical. Instead, closing the self-consistent loop <strong>rotates the record into quantum
+  coherence</strong> — it appears along the X axis. That rotation is the nonlinear CTC backaction; a trivial
   post-selection cannot produce it.</p>
 
   <h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
   <p>The decision rules were written and committed in <code>experiments/exp123-pctc-preregistration.md</code> before
-  any data was taken. The grade script self-tested against synthetic outcomes and passed <b>4/4</b> before touching
+  any data was taken. The grade script self-tested against synthetic outcomes and passed <strong>4/4</strong> before touching
   the real counts.</p>
   <div class="gate">
     <span class="g">G0</span><span class="r">Both arms must start balanced: baseline <code>p(0) ∈ [0.40, 0.60]</code>, else NO-TEST. <span class="pass">PASS</span>.</span>
     <span class="g">N1</span><span class="r">Miswire guard: broken-loop bystander stays classical, <code>X_S(broken,0) &lt; 0.25</code>, else NO-TEST. <span class="pass">PASS</span>.</span>
-    <span class="g">W_PARADOX</span><span class="r">Enforcement headline: <code>p(π)/p(0) &lt; 0.1</code> at 5σ. <span class="pass">PASS</span> (realized <b>0.0188</b> — a <b>53× suppression</b>).</span>
-    <span class="g">W_LOOP</span><span class="r">Backaction headline: <code>X_S(loop,0) − X_S(broken,0) &gt; 0.5</code> at 5σ. <span class="pass">PASS</span> (realized <b>0.9415 ± 0.0120 = 78σ</b>).</span>
+    <span class="g">W_PARADOX</span><span class="r">Enforcement headline: <code>p(π)/p(0) &lt; 0.1</code> at 5σ. <span class="pass">PASS</span> (realized <strong>0.0188</strong> — a <strong>53× suppression</strong>).</span>
+    <span class="g">W_LOOP</span><span class="r">Backaction headline: <code>X_S(loop,0) − X_S(broken,0) &gt; 0.5</code> at 5σ. <span class="pass">PASS</span> (realized <strong>0.9415 ± 0.0120 = 78σ</strong>).</span>
   </div>
   <p>Both headline gates fire and both NO-TEST guards stay clean ⇒ the timeline genuinely forbids the paradox
-  <b>and</b> leaves the un-fakeable fingerprint. Registered prior on each headline was <b>0.90</b>; both hit.</p>
+  <strong>and</strong> leaves the un-fakeable fingerprint. Registered prior on each headline was <strong>0.90</strong>; both hit.</p>
 
   <h2><span class="n">4</span>The measured data</h2>
   <p>Survival down the kill-strength ladder, normalised to the <code>θ=0</code> baseline (measured on the chip), with
   the model enforcement law <code>cos²(θ/2)</code> for comparison.</p>
   <div class="tbl-wrap">
   <table>
-    <thead><tr><th>kill strength θ</th><th>measured survival</th><th>law cos²(θ/2)</th><th>note</th></tr></thead>
+<caption>P-CTC paradox suppression: measured survival vs cos²(θ/2) enforcement law</caption>
+    <thead><tr><th scope="col">kill strength θ</th><th scope="col">measured survival</th><th scope="col">law cos²(θ/2)</th><th scope="col">note</th></tr></thead>
     <tbody>
       <tr><td>0 · leave alone</td><td class="meas">100%</td><td class="law">100%</td><td>baseline</td></tr>
       <tr><td>π/4 · a nudge</td><td class="meas">85.7%</td><td class="law">85.4%</td><td>—</td></tr>
       <tr><td>π/2 · half</td><td class="meas">51.8%</td><td class="law">50.0%</td><td>half pruned</td></tr>
       <tr><td>3π/4 · most</td><td class="meas">17.1%</td><td class="law">14.6%</td><td>—</td></tr>
-      <tr class="hi"><td>π · full kill</td><td class="meas"><b>1.9%</b></td><td class="law">0%</td><td><b>53× suppressed</b></td></tr>
+      <tr class="hi"><td>π · full kill</td><td class="meas"><strong>1.9%</strong></td><td class="law">0%</td><td><strong>53× suppressed</strong></td></tr>
     </tbody>
   </table>
   </div>
-  <p>The survival collapses along the model's <code>cos²(θ/2)</code> curve, and at a full kill only <b>1.9%</b>
-  remains — a <b>53× suppression</b> of the paradox. Theory says the self-consistent amplitude is <b>exactly zero</b>;
+  <p>The survival collapses along the model's <code>cos²(θ/2)</code> curve, and at a full kill only <strong>1.9%</strong>
+  remains — a <strong>53× suppression</strong> of the paradox. Theory says the self-consistent amplitude is <strong>exactly zero</strong>;
   the 1.9% residue is readout noise, confirmed by a herald autopsy (the survivors show scrambled bystander statistics,
-  not un-suppressed paradox). The full enforcement curve tracks to residuals below <b>0.013</b> — the timeline's law
+  not un-suppressed paradox). The full enforcement curve tracks to residuals below <strong>0.013</strong> — the timeline's law
   measured to about a percent.</p>
   <div class="callout">
     <p class="clabel">The loop's fingerprint</p>
-    <p class="tight">Before the loop closes, the bystander's record is <b>classical</b>: <code>Z_S = 0.978</code>
-    (a plain Z-axis value). After the self-consistent loop closes, the same record has rotated into <b>quantum
-    coherence</b>: <code>X_S = 0.966</code> (an X-axis value). The certified quantity is the X-basis separation
+    <p class="tight">Before the loop closes, the bystander's record is <strong>classical</strong>: <code>Z_S = 0.978</code>
+    (a plain Z-axis value). After the self-consistent loop closes, the same record has rotated into <strong>quantum
+    coherence</strong>: <code>X_S = 0.966</code> (an X-axis value). The certified quantity is the X-basis separation
     between loop-closed and loop-broken, <code>X_S(loop) − X_S(broken) = 0.9415 ± 0.0120 = 78σ</code> — the nonlinear
     backaction a trivial post-selection cannot fake.</p>
   </div>
 
   <h2><span class="n">5</span>Scope &amp; caveats</h2>
   <ul>
-    <li><b>A model, not literal time travel.</b> This is <b>Lloyd's P-CTC (2011) post-selection model</b> —
-    <b>the post-selection IS the timeline</b>. It is not a physical closed timelike curve and sends no signal to the
+    <li><strong>A model, not literal time travel.</strong> This is <strong>Lloyd's P-CTC (2011) post-selection model</strong> —
+    <strong>the post-selection IS the timeline</strong>. It is not a physical closed timelike curve and sends no signal to the
     past. The claim is about the measured behaviour of that model on hardware.</li>
-    <li><b>The residue is noise, not physics.</b> The model predicts <b>exactly zero</b> self-consistent amplitude at a
+    <li><strong>The residue is noise, not physics.</strong> The model predicts <strong>exactly zero</strong> self-consistent amplitude at a
     full kill; the measured 1.9% survival is readout floor, confirmed by the herald autopsy (scrambled bystander
     statistics among the survivors). We report the residue openly rather than rounding it to the theoretical zero.</li>
-    <li><b>The fingerprint is the load-bearing claim.</b> A suppression rate alone could, in principle, be mimicked by
-    an ordinary post-selection. The <b>78σ</b> rotation of a classical record into coherence is the observable a
+    <li><strong>The fingerprint is the load-bearing claim.</strong> A suppression rate alone could, in principle, be mimicked by
+    an ordinary post-selection. The <strong>78σ</strong> rotation of a classical record into coherence is the observable a
     trivial post-selection cannot produce — that is what distinguishes genuine (modelled) CTC backaction.</li>
-    <li><b>Shallowest apparatus of the campaign.</b> Three CX gates — deliberately the opposite of the campaign's
+    <li><strong>Shallowest apparatus of the campaign.</strong> Three CX gates — deliberately the opposite of the campaign's
     deepest circuits. The result rests on a very shallow, well-characterised device, not on a delicate deep circuit.</li>
   </ul>
 
   <h2><span class="n">6</span>Provenance</h2>
   <ul>
-    <li><b>Grade file:</b> <code>results/exp123_grade.json</code> · <b>Job record:</b> <code>results/exp123_jobids.json</code></li>
-    <li><b>Pre-registration:</b> <code>experiments/exp123-pctc-preregistration.md</code> · <b>Builder:</b> <code>experiments/exp123_pctc_sim.py::build</code></li>
-    <li><b>Backend:</b> ibm_marrakesh (Heron r2) · <b>Apparatus:</b> 3 CX gates (shallowest of the campaign)</li>
-    <li><b>Self-test:</b> grade script 4/4 PASS on synthetic outcomes before scoring real data · gate lint <code>experiments/exp123_gate_lint_spec.json</code></li>
-    <li><b>Family:</b> Horizons-2 Q5 · sibling of the Twin Paradox (F100) and the Zeno tractor beam (F102)</li>
+    <li><strong>Grade file:</strong> <code>results/exp123_grade.json</code> · <strong>Job record:</strong> <code>results/exp123_jobids.json</code></li>
+    <li><strong>Pre-registration:</strong> <code>experiments/exp123-pctc-preregistration.md</code> · <strong>Builder:</strong> <code>experiments/exp123_pctc_sim.py::build</code></li>
+    <li><strong>Backend:</strong> ibm_marrakesh (Heron r2) · <strong>Apparatus:</strong> 3 CX gates (shallowest of the campaign)</li>
+    <li><strong>Self-test:</strong> grade script 4/4 PASS on synthetic outcomes before scoring real data · gate lint <code>experiments/exp123_gate_lint_spec.json</code></li>
+    <li><strong>Family:</strong> Horizons-2 Q5 · sibling of the Twin Paradox (F100) and the Zeno tractor beam (F102)</li>
   </ul>
 
-  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
 
   </main>
-  <div class="foot" role="contentinfo">
+  <footer class="foot">
     <span>MEASURED · <b style="color:var(--violet)">F101</b> · job d9ahnee6hjac73feegfg · ibm_marrakesh</span>
     <span class="sp"></span>
     <a href="./spec.md">Markdown</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 <script>
@@ -217,7 +218,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
   })();

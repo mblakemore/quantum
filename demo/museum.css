@@ -11,7 +11,6 @@
   --cyan:#45d6cf; --cyan-deep:#1f8f89; --amber:#e6a94e; --violet:#9a8cf0;
   --good:#3ecf6d; --warn:#e6a94e; --bad:#ec6a5e;
   --card:#141a29; --card-hover:#182036;
-  --glow: 0 0 0 1px rgba(69,214,207,.0);
   --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 40px rgba(0,0,0,.42);
   --mono: ui-monospace,"SF Mono","JetBrains Mono","Cascadia Mono",Menlo,monospace;
   --sans: -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,sans-serif;
@@ -21,7 +20,7 @@
   :root {
     --bg:#eef1f6; --surface:#ffffff; --surface-2:#f4f6fa;
     --edge:#dce1ec; --edge-2:#c7cfdd;
-    --ink:#141926; --ink-2:#495468; --ink-3:#5f6a83;
+    --ink:#141926; --ink-2:#495468; --ink-3:#4a5570;
     --cyan:#0a6b66; --cyan-deep:#0c7a74; --amber:#8f5d10; --violet:#5f52ba;
     --good:#0e7332; --warn:#8f5d10; --bad:#b23b30;
     --card:#ffffff; --card-hover:#f6f8fc;
@@ -37,7 +36,7 @@
 }
 :root[data-theme="light"] {
   --bg:#eef1f6; --surface:#ffffff; --surface-2:#f4f6fa; --edge:#dce1ec; --edge-2:#c7cfdd;
-  --ink:#141926; --ink-2:#495468; --ink-3:#5f6a83; --cyan:#0a6b66; --cyan-deep:#0c7a74;
+  --ink:#141926; --ink-2:#495468; --ink-3:#4a5570; --cyan:#0a6b66; --cyan-deep:#0c7a74;
   --amber:#8f5d10; --violet:#5f52ba; --good:#0e7332; --warn:#8f5d10; --bad:#b23b30;
   --card:#ffffff; --card-hover:#f6f8fc;
   --shadow:0 1px 2px rgba(20,25,38,.05),0 12px 34px rgba(20,25,38,.09);
@@ -71,7 +70,7 @@ a.card:hover { transform: translateY(-3px); background: var(--card-hover);
   border-color: var(--edge-2); box-shadow: var(--shadow); }
 .card.soon { opacity: .62; }
 .card-top { display: flex; align-items: center; gap: 9px; }
-.card-title { font-size: 16px; font-weight: 640; letter-spacing: -.01em; color: var(--ink); }
+.card-title { font-size: 16px; font-weight: 700; letter-spacing: -.01em; color: var(--ink); }
 .card-hook { font-size: 13.5px; color: var(--ink-2); flex: 1 0 auto; }
 .card-foot { display: flex; align-items: center; gap: 10px; margin-top: 2px; }
 .enter { margin-left: auto; font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--cyan); }
@@ -89,6 +88,12 @@ a.card:hover .enter { text-decoration: underline; }
 /* a11y: skip link */
 .skip { position:absolute; left:8px; top:-48px; z-index:1000; background:var(--cyan); color:var(--bg); padding:8px 14px; border-radius:8px; font-family:var(--mono); font-size:13px; font-weight:600; transition:top .12s; }
 .skip:focus { top:8px; outline:2px solid var(--ink); }
+
+/* a11y: visually-hidden text for screen readers (new-tab warnings, etc.) */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
 
 /* a11y: underline links inside prose so they are not colour-only */
 main p a, .doc p a, main li a, .doc li a { text-decoration: underline; }

@@ -70,76 +70,77 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· STATIC bot duel exhibit</a>
     <span class="wingtag">· Wing II · Indefinite Causal Order</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet</p>
     <h1>A message through <span class="hl">two perfect erasers</span> — capacity from zero</h1>
     <div class="idline">
-      <span><b>Finding</b> F83</span>
-      <span><b>Experiment</b> Exp106 (zero-capacity channel activation, N=2)</span>
-      <span><b>Backend</b> ibm_marrakesh (Heron r2)</span>
-      <span><b>Job</b> d983ek52su3c739ip92g</span>
+      <span><strong>Finding</strong> F83</span>
+      <span><strong>Experiment</strong> Exp106 (zero-capacity channel activation, N=2)</span>
+      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+      <span><strong>Job</strong> d983ek52su3c739ip92g</span>
     </div>
-    <span class="verdict-chip">✓ CAPACITY ACTIVATED — 0.0436 bits/use, R̄ = +0.5034 ± 0.0091 = 55.6σ above zero</span>
+    <span class="verdict-chip"><span aria-hidden="true">✓</span> CAPACITY ACTIVATED — 0.0436 bits/use, R̄ = +0.5034 ± 0.0091 = 55.6σ above zero</span>
   </header>
   <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
 
   <p>This sheet is the source-of-truth specification behind the interactive exhibit. The classic bot in the game is not
-  weak — it is <b>as good as any machine, strategy, or intelligence can ever be</b> under ordinary cause-and-effect,
+  weak — it is <strong>as good as any machine, strategy, or intelligence can ever be</strong> under ordinary cause-and-effect,
   and that best-possible score is a coin flip. The quantum bot's edge traces to a single public job ID and a frozen
-  pre-registration. <b>Note on numbering:</b> this exhibit and its cited job <code>d983ek52su3c739ip92g</code> are the
-  <b>N=2 finding, F83 (Exp106)</b> — the two-channel version of zero-capacity channel activation.</p>
+  pre-registration. <strong>Note on numbering:</strong> this exhibit and its cited job <code>d983ek52su3c739ip92g</code> are the
+  <strong>N=2 finding, F83 (Exp106)</strong> — the two-channel version of zero-capacity channel activation.</p>
 
   <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p>A secret — RED or BLUE — is sent through <b>two censor machines</b>. Each censor turns whatever enters it into
-  pure random static; each is a <b>completely depolarizing channel</b>, individually of <b>exactly zero capacity</b>.
-  Run them in either order, alternate them, flip coins between orders — a theorem says <b>exactly zero</b> information
+  <p>A secret — RED or BLUE — is sent through <strong>two censor machines</strong>. Each censor turns whatever enters it into
+  pure random static; each is a <strong>completely depolarizing channel</strong>, individually of <strong>exactly zero capacity</strong>.
+  Run them in either order, alternate them, flip coins between orders — a theorem says <strong>exactly zero</strong> information
   survives. Not "very little": zero. The control experiment measured it: <code>0.00012 bits</code>.</p>
   <div class="callout">
     <p class="clabel">The loophole</p>
-    <p class="tight">A quantum computer runs the two censors in a <b>superposition of both orders at once</b> —
-    genuinely neither-first-and-both. Then a whisper of the secret survives: <b>0.0436 bits per use, measured</b>,
-    <code>55.6σ</code> away from "impossible." The edge does not come from cleverness; it comes from the <b>order of
-    events itself</b> being quantum.</p>
+    <p class="tight">A quantum computer runs the two censors in a <strong>superposition of both orders at once</strong> —
+    genuinely neither-first-and-both. Then a whisper of the secret survives: <strong>0.0436 bits per use, measured</strong>,
+    <code>55.6σ</code> away from "impossible." The edge does not come from cleverness; it comes from the <strong>order of
+    events itself</strong> being quantum.</p>
   </div>
 
   <h2><span class="n">2</span>What we measure — where the bit lives</h2>
-  <p>The quantum bot reads two things per round: a <b>stamp</b> (the order-control qubit, UP or DOWN) and a <b>die</b>
-  (the message qubit, RED or BLUE). Its rule — measured, not invented — is <b>stamp UP → trust the die; stamp DOWN →
-  flip it</b>. The measured per-round parameters:</p>
+  <p>The quantum bot reads two things per round: a <strong>stamp</strong> (the order-control qubit, UP or DOWN) and a <strong>die</strong>
+  (the message qubit, RED or BLUE). Its rule — measured, not invented — is <strong>stamp UP → trust the die; stamp DOWN →
+  flip it</strong>. The measured per-round parameters:</p>
   <ul>
     <li>P(stamp UP) = <code>0.6214</code></li>
     <li>given UP, the die matches the secret with probability <code>≈ 0.5944</code></li>
-    <li>given DOWN, the die <b>mis</b>matches with probability <code>≈ 0.6573</code></li>
+    <li>given DOWN, the die <strong>mis</strong>matches with probability <code>≈ 0.6573</code></li>
   </ul>
   <p>That's a ~62% correct vote per round; 15 votes at ~62% compound to an ~83% decoded answer.</p>
   <div class="callout">
     <p class="clabel">The pre-registered signature</p>
-    <p class="tight">The message qubit <b>by itself</b> is still perfect static — no trace of the secret. So is the
-    stamp by itself. The unconditioned target is <b>fully depolarized even in the switch arm</b>: the bit lives only in
-    <b>how the control and target move together</b> — the control–target correlation. That is why the quantum bot must
+    <p class="tight">The message qubit <strong>by itself</strong> is still perfect static — no trace of the secret. So is the
+    stamp by itself. The unconditioned target is <strong>fully depolarized even in the switch arm</strong>: the bit lives only in
+    <strong>how the control and target move together</strong> — the control–target correlation. That is why the quantum bot must
     read both, and it is the signature the pre-registration required and confirmed.</p>
   </div>
 
   <h2><span class="n">3</span>Pre-registered gates</h2>
   <div class="gate">
-    <span class="g">ACTIVATE</span><span class="r">Coherent-mutual-information rate strictly above the causal value of 0. <span class="pass">PASS</span> — R̄ = +0.5034 ± 0.0091, <b>55.6σ</b> above 0; 0.0436 bits/use.</span>
-    <span class="g">NULL</span><span class="r">Definite-order null arm measured DEAD on-chip. <span class="pass">PASS</span> — MI <b>0.00012 bits</b> (the theorem's exact zero, measured).</span>
+    <span class="g">ACTIVATE</span><span class="r">Coherent-mutual-information rate strictly above the causal value of 0. <span class="pass">PASS</span> — R̄ = +0.5034 ± 0.0091, <strong>55.6σ</strong> above 0; 0.0436 bits/use.</span>
+    <span class="g">NULL</span><span class="r">Definite-order null arm measured DEAD on-chip. <span class="pass">PASS</span> — MI <strong>0.00012 bits</strong> (the theorem's exact zero, measured).</span>
     <span class="g">SIGNATURE</span><span class="r">Unconditioned target fully depolarized even in the switch arm (bit only in the correlation). <span class="pass">PASS</span> — confirmed as pre-registered.</span>
   </div>
 
   <h2><span class="n">4</span>The measured data</h2>
   <div class="tbl-wrap">
   <table>
-    <thead><tr><th>quantity (ibm_marrakesh · Exp106)</th><th>measured</th><th>causal value</th></tr></thead>
+<caption>Zero-capacity channel activation: switch-arm rate, bits transmitted, and definite-order null</caption>
+    <thead><tr><th scope="col">quantity (ibm_marrakesh · Exp106)</th><th scope="col">measured</th><th scope="col">causal value</th></tr></thead>
     <tbody>
       <tr class="hi"><td>switch-arm rate R̄</td><td class="hw">+0.5034 ± 0.0091</td><td>0 (exactly)</td></tr>
       <tr class="hi"><td>information transmitted</td><td class="hw">0.0436 bits/use</td><td>0 bits</td></tr>
@@ -151,46 +152,46 @@
     </tbody>
   </table>
   </div>
-  <p>Each censor is individually zero-capacity, and <b>every causally-separable composition of the two is provably
-  zero by channel algebra</b> — so the definite-order null arm reading 0.00012 bits is the theorem's exact zero,
+  <p>Each censor is individually zero-capacity, and <strong>every causally-separable composition of the two is provably
+  zero by channel algebra</strong> — so the definite-order null arm reading 0.00012 bits is the theorem's exact zero,
   measured. The switch arm's 0.0436 bits is a resource ordinary cause-and-effect cannot produce.</p>
 
   <h2><span class="n">5</span>Scope &amp; caveats</h2>
   <ul>
-    <li><b>Zero-capacity channel activation — the specific channel and resource.</b> The channels here are <b>two
-    completely depolarizing channels</b>, each individually of exactly zero capacity. The claim is that the quantum
-    switch's coherent superposition of their two orders <b>activates</b> a nonzero transmission rate (0.0436 bits/use,
-    N=2). It is a statement about <b>these zero-capacity channels under indefinite order</b>, not a general channel or
+    <li><strong>Zero-capacity channel activation — the specific channel and resource.</strong> The channels here are <strong>two
+    completely depolarizing channels</strong>, each individually of exactly zero capacity. The claim is that the quantum
+    switch's coherent superposition of their two orders <strong>activates</strong> a nonzero transmission rate (0.0436 bits/use,
+    N=2). It is a statement about <strong>these zero-capacity channels under indefinite order</strong>, not a general channel or
     a speed-up.</li>
-    <li><b>Device-characterized, not device-independent.</b> The devices are trusted and characterized; every threshold
+    <li><strong>Device-characterized, not device-independent.</strong> The devices are trusted and characterized; every threshold
     traces to a public job ID and a frozen pre-registration. A web page can replay any numbers — the demo itself proves
-    nothing; the <b>theorem</b> does (no definite/mixed/adaptive order transmits anything), and a real quantum computer
+    nothing; the <strong>theorem</strong> does (no definite/mixed/adaptive order transmits anything), and a real quantum computer
     produced the switch column.</li>
-    <li><b>The bit is in the correlation.</b> Neither the message qubit nor the stamp alone carries the secret — only
+    <li><strong>The bit is in the correlation.</strong> Neither the message qubit nor the stamp alone carries the secret — only
     the control–target correlation does. The unconditioned target is fully depolarized even in the switch arm.</li>
-    <li><b>N=2 is this exhibit's finding.</b> This is the two-channel instance (F83). Its cited job is the F83/Exp106
+    <li><strong>N=2 is this exhibit's finding.</strong> This is the two-channel instance (F83). Its cited job is the F83/Exp106
     run; the N=3 three-channel extension is a separate later finding and is not the resource shown here.</li>
   </ul>
 
   <h2><span class="n">6</span>Provenance</h2>
   <ul>
-    <li><b>Finding:</b> F83 · <b>Experiment:</b> Exp106 (N=2 capacity activation) · <b>Backend:</b> ibm_marrakesh (Heron r2)</li>
-    <li><b>Job:</b> <code>d983ek52su3c739ip92g</code> · frozen pre-registration · results <code>results/exp106_hw_results.json</code>, <code>results/exp106_jobids.json</code></li>
-    <li><b>Headline:</b> R̄ = +0.5034 ± 0.0091 = 55.6σ above the causal value of 0; 0.0436 bits/use; null arm MI 0.00012 bits</li>
-    <li><b>LIVE mode:</b> the exhibit can consume fresh measured shots from your own free IBM Quantum job (see the exhibit's setup link) — the same job family, live</li>
-    <li><b>Family:</b> Indefinite causal order — capacity form; sibling of the Quantum Switch (F73–F77) and the causal game (F82)</li>
+    <li><strong>Finding:</strong> F83 · <strong>Experiment:</strong> Exp106 (N=2 capacity activation) · <strong>Backend:</strong> ibm_marrakesh (Heron r2)</li>
+    <li><strong>Job:</strong> <code>d983ek52su3c739ip92g</code> · frozen pre-registration · results <code>results/exp106_hw_results.json</code>, <code>results/exp106_jobids.json</code></li>
+    <li><strong>Headline:</strong> R̄ = +0.5034 ± 0.0091 = 55.6σ above the causal value of 0; 0.0436 bits/use; null arm MI 0.00012 bits</li>
+    <li><strong>LIVE mode:</strong> the exhibit can consume fresh measured shots from your own free IBM Quantum job (see the exhibit's setup link) — the same job family, live</li>
+    <li><strong>Family:</strong> Indefinite causal order — capacity form; sibling of the Quantum Switch (F73–F77) and the causal game (F82)</li>
   </ul>
 
-  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
 
   </main>
-  <div class="foot" role="contentinfo">
+  <footer class="foot">
     <span>MEASURED · <b style="color:var(--cyan)">F83</b> · job d983ek52su3c739ip92g · ibm_marrakesh</span>
     <span class="sp"></span>
     <a href="./spec.md">Markdown</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 <script>
@@ -199,7 +200,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
   })();

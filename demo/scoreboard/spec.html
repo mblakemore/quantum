@@ -69,51 +69,51 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· The Scoreboard exhibit</a>
     <span class="wingtag">· Wing IV · The Advantage Ladder</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet · Methodology &amp; Sources</p>
     <h1>Have we found quantum advantage? <span class="hl">The five-scoreboard answer</span></h1>
     <div class="idline">
-      <span><b>Nature</b> Campaign summary (5 scoreboards)</span>
-      <span><b>Hardware</b> IBM Heron · 2026 campaign</span>
-      <span><b>Experiments</b> ~110 · F01–F118</span>
-      <span><b>Every number a job ID</b></span>
+      <span><strong>Nature</strong> Campaign summary (5 scoreboards)</span>
+      <span><strong>Hardware</strong> IBM Heron · 2026 campaign</span>
+      <span><strong>Experiments</strong> ~110 · F01–F118</span>
+      <span><strong>Every number a job ID</strong></span>
     </div>
     <span class="verdict-chip">◇ FOUND ON FOUR OF FIVE · theorem ceilings cleared 21σ to 341σ</span>
   </header>
   <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
 
   <p>This is the methodology sheet behind the visual scoreboard. The exhibit answers one question —
-  <b>have we found quantum advantage?</b> — across <b>five scoreboards</b>, each cleared against an <b>exact theorem
-  ceiling</b>, and it states plainly what is <b>not</b> claimed. Every σ below is transcribed verbatim from the exhibit
+  <strong>have we found quantum advantage?</strong> — across <strong>five scoreboards</strong>, each cleared against an <strong>exact theorem
+  ceiling</strong>, and it states plainly what is <strong>not</strong> claimed. Every σ below is transcribed verbatim from the exhibit
   (the tiles and the enumerated <code>rows</code> array); nothing is invented. Sources in §5.</p>
 
   <h2><span class="n">1</span>The verdict, in one line</h2>
-  <p><b>Yes — measurably, on four of five scoreboards</b>, against exact theorem ceilings cleared by <b>21σ to 341σ</b>.
-  On the fifth — computational — the wall against a brute-force speedup is <b>measured</b> (F54), and the constant-depth
-  solver that the only depth-separation theorem is built on now <b>runs on silicon at 90%</b>. No shortcut is claimed
+  <p><strong>Yes — measurably, on four of five scoreboards</strong>, against exact theorem ceilings cleared by <strong>21σ to 341σ</strong>.
+  On the fifth — computational — the wall against a brute-force speedup is <strong>measured</strong> (F54), and the constant-depth
+  solver that the only depth-separation theorem is built on now <strong>runs on silicon at 90%</strong>. No shortcut is claimed
   that the hardware does not hold.</p>
 
   <h2><span class="n">2</span>The five scoreboards</h2>
   <ul>
-    <li><b>Games &amp; correlations — FOUND.</b> <span style="color:var(--cyan)">216.8σ</span> causal-order game; the three
+    <li><strong>Games &amp; correlations — FOUND.</strong> <span style="color:var(--cyan)">216.8σ</span> causal-order game; the three
     great no-go theorems in one court — Bell, indefinite causal order, contextuality (8/9 at 196σ). <code>F82 · F106</code></li>
-    <li><b>Communication &amp; sensing — FOUND.</b> <span style="color:var(--cyan)">341σ</span> superdense coding; a
+    <li><strong>Communication &amp; sensing — FOUND.</strong> <span style="color:var(--cyan)">341σ</span> superdense coding; a
     ladder including 2→1 QRAC (110σ) and GHZ metrology beating the standard quantum limit (168σ). <code>F87 · F107 · F108/9</code></li>
-    <li><b>Thermodynamics — FOUND.</b> <span style="color:var(--cyan)">21.1σ</span> ICO refrigeration: population
+    <li><strong>Thermodynamics — FOUND.</strong> <span style="color:var(--cyan)">21.1σ</span> ICO refrigeration: population
     inversion from passive baths, a full cycle, negative local energy. <code>F86 · F94/5 · F97</code></li>
-    <li><b>Information — FOUND.</b> <span style="color:var(--cyan)">42σ</span> negative conditional entropy S(B|A)&lt;0
+    <li><strong>Information — FOUND.</strong> <span style="color:var(--cyan)">42σ</span> negative conditional entropy S(B|A)&lt;0
     — a sign classical physics forbids — plus zero-capacity transmission. <code>F103 · F105</code></li>
-    <li><b>Computational — WALL + BRIDGE.</b> No brute-force speedup (F54's wall), but the constant-depth 2D-HLF solver
-    runs at <b>0.90</b> (438σ over chance) and persists to n=9. <code>F113 · F114</code></li>
+    <li><strong>Computational — WALL + BRIDGE.</strong> No brute-force speedup (F54's wall), but the constant-depth 2D-HLF solver
+    runs at <strong>0.90</strong> (438σ over chance) and persists to n=9. <code>F113 · F114</code></li>
   </ul>
 
   <h2><span class="n">3</span>The theorem ceilings — clearance over the classical / theorem bound</h2>
@@ -121,7 +121,8 @@
   enumerated table with the null each is measured against:</p>
   <div class="tbl-wrap">
   <table>
-    <thead><tr><th>scoreboard headline</th><th>clearance</th><th>over the bound</th></tr></thead>
+<caption>Campaign headline clearances over classical theorem bounds across five scoreboards</caption>
+    <thead><tr><th scope="col">scoreboard headline</th><th scope="col">clearance</th><th scope="col">over the bound</th></tr></thead>
     <tbody>
       <tr><td>Superdense coding</td><td class="sig">341σ</td><td>over 0.5 (unassisted)</td></tr>
       <tr><td>Causal-order game</td><td class="sig">216.8σ</td><td>over 0.8695 (SDP)</td></tr>
@@ -136,42 +137,42 @@
   </div>
   <div class="callout">
     <p class="clabel">The through-line</p>
-    <p class="tight">The classical hardness of the <b>computational</b> problem (<code>F113</code>) <b>is</b> the
-    magic-square <b>contextuality</b> (<code>F106</code>), certified at 196σ — the correlation advantage and the
-    computational advantage are the <b>same resource</b>.</p>
+    <p class="tight">The classical hardness of the <strong>computational</strong> problem (<code>F113</code>) <strong>is</strong> the
+    magic-square <strong>contextuality</strong> (<code>F106</code>), certified at 196σ — the correlation advantage and the
+    computational advantage are the <strong>same resource</strong>.</p>
   </div>
 
   <h2><span class="n">4</span>What is NOT claimed</h2>
   <p>The boundary column — each an explicit limit printed on the exhibit:</p>
   <div class="notclaim">
-    <span class="x">✕</span><span class="r"><b>No brute-force speedup</b> — F54's 10× depth wall, measured.</span>
-    <span class="x">✕</span><span class="r"><b>No on-chip QNC⁰≠NC⁰ proof</b> — the separation is asymptotic; the apparatus is real.</span>
-    <span class="x">✕</span><span class="r"><b>No loophole-free device-independence</b> — the randomness certificate (F117, 0.65 bit/use) is one-sided-DI; locality open.</span>
-    <span class="x">✕</span><span class="r"><b>Same Heron generation only</b> — a cross-generation exam is the harder unclaimed test.</span>
+    <span class="x">✕</span><span class="r"><strong>No brute-force speedup</strong> — F54's 10× depth wall, measured.</span>
+    <span class="x">✕</span><span class="r"><strong>No on-chip QNC⁰≠NC⁰ proof</strong> — the separation is asymptotic; the apparatus is real.</span>
+    <span class="x">✕</span><span class="r"><strong>No loophole-free device-independence</strong> — the randomness certificate (F117, 0.65 bit/use) is one-sided-DI; locality open.</span>
+    <span class="x">✕</span><span class="r"><strong>Same Heron generation only</strong> — a cross-generation exam is the harder unclaimed test.</span>
   </div>
 
   <h2><span class="n">5</span>Sources &amp; provenance</h2>
   <ul>
-    <li><b>Exhibit:</b> <code>demo/scoreboard/index.html</code> — the five tiles, the log-scale σ bars, the through-line,
+    <li><strong>Exhibit:</strong> <code>demo/scoreboard/index.html</code> — the five tiles, the log-scale σ bars, the through-line,
     and the "what is not claimed" list. All σ values on this sheet are transcribed from it (tiles + <code>rows</code>
     array).</li>
-    <li><b>Campaign ledger:</b> <code>docs/campaign-arcs.md</code> (F01–F118) — per-finding rows corroborate each
+    <li><strong>Campaign ledger:</strong> <code>docs/campaign-arcs.md</code> (F01–F118) — per-finding rows corroborate each
     headline: F82 (216.8σ), F106 (196σ), F87 (341σ), F108 (168σ), F83 (55.6σ), F86 (21.1σ), F113/F114 (438σ / n=9),
     F117 (0.65 bit/use, one-sided-DI).</li>
-    <li><b>Scope of the whole board:</b> ~110 experiments · 3 Heron dies (marrakesh · kingston · fez), certified across all three (F112) · 2 standing tools
+    <li><strong>Scope of the whole board:</strong> ~110 experiments · 3 Heron dies (marrakesh · kingston · fez), certified across all three (F112) · 2 standing tools
     (SDP-randomness, QPU-weather). Every number traces to a pre-registered job with a public ID.</li>
-    <li><b>Full argument:</b> <code>docs/quantum-advantage-the-complete-answer-whisper-c4682.md</code>.</li>
+    <li><strong>Full argument:</strong> <code>docs/quantum-advantage-the-complete-answer-whisper-c4682.md</code>.</li>
   </ul>
 
-  <a class="backlink" href="./">← Back to the interactive scoreboard</a>
+  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive scoreboard</a>
 
   </main>
-  <div class="foot" role="contentinfo">
+  <footer class="foot">
     <span>CAMPAIGN SUMMARY · <b style="color:var(--cyan)">F01–F118</b> · ~110 experiments · IBM Heron</span>
     <span class="sp"></span>
     <a href="../">The Museum</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 <script>
@@ -180,7 +181,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
   })();

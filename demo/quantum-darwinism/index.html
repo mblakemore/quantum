@@ -117,42 +117,42 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <span class="wingtag">· Wing III · Foundations on Silicon</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="hero">
     <p class="eyebrow">Quantum Darwinism × indefinite causal order</p>
     <h1>Two facts that <span class="hl">no causal order</span> can hold at once.</h1>
-    <p class="lede">A thing becomes a <b>fact</b> when the world keeps many copies of it — that's why we all agree the
+    <p class="lede">A thing becomes a <strong>fact</strong> when the world keeps many copies of it — that's why we all agree the
     moon is there. But two incompatible quantum properties can't both be copied faithfully, so under any definite order
-    of events, recording one <b>erases</b> the other. Put the order of two recorders in <b>superposition</b> and the
-    rule breaks two ways: one branch holds <b>both</b> facts at once; the other holds <b>neither</b>. Every number is
+    of events, recording one <strong>erases</strong> the other. Put the order of two recorders in <strong>superposition</strong> and the
+    rule breaks two ways: one branch holds <strong>both</strong> facts at once; the other holds <strong>neither</strong>. Every number is
     measured hardware.</p>
 
     <div class="primer">
       <div class="pcard">
         <h2>Why is anything a "fact"?</h2>
-        <p>Quantum Darwinism: a property is <b>objective</b> when the environment makes <b>many redundant copies</b> of
-        it, so independent observers all read the same answer. A recorder's <b>faithfulness A</b> measures its copy —
-        <b>A=1</b> a perfect record, <b>A=0.5</b> a coin-flip carrying nothing.</p>
+        <p>Quantum Darwinism: a property is <strong>objective</strong> when the environment makes <strong>many redundant copies</strong> of
+        it, so independent observers all read the same answer. A recorder's <strong>faithfulness A</strong> measures its copy —
+        <strong>A=1</strong> a perfect record, <strong>A=0.5</strong> a coin-flip carrying nothing.</p>
       </div>
       <div class="pcard">
         <h2>What's the catch?</h2>
         <p>Complementarity forbids faithful copies of a <span class="zc">Z-fact</span> and an incompatible
-        <span class="xc">X-fact</span> at the same time. So the joint objectivity <b>w = A<sub>Z</sub> + A<sub>X</sub></b>
-        is boxed into a narrow <b>hull</b> — the most any ordering of events can reach.</p>
+        <span class="xc">X-fact</span> at the same time. So the joint objectivity <strong>w = A<sub>Z</sub> + A<sub>X</sub></strong>
+        is boxed into a narrow <strong>hull</strong> — the most any ordering of events can reach.</p>
       </div>
     </div>
 
     <div class="herobtns">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:12px;text-decoration:underline;">plain-text (.md)</a>
-      <span class="scope"><b>Resource-scoped:</b> these two recorders, this window — not a universal bound. 63 two-qubit gates.</span>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
+      <span class="scope"><strong>Resource-scoped:</strong> these two recorders, this window — not a universal bound. 63 two-qubit gates.</span>
     </div>
   </header>
 
@@ -160,27 +160,27 @@
   <section class="panel">
     <p class="panel-label">Exhibit A — Break the hull</p>
     <h2>Choose how the two recorders are ordered</h2>
-    <p class="sub">Each recorder copies one property into the environment. Under a <b>definite</b> order it's
+    <p class="sub">Each recorder copies one property into the environment. Under a <strong>definite</strong> order it's
     winner-take-all — the last recorder owns its fact, the other is scrambled to a coin-flip. Superpose the order and
-    watch the joint objectivity <b>w</b> leave the box that any causal history is confined to.</p>
+    watch the joint objectivity <strong>w</strong> leave the box that any causal history is confined to.</p>
 
     <div class="selector" role="group" aria-label="Recorder order">
       <span class="lbl">recorder order:</span>
-      <button class="cbtn" data-i="0" type="button">Z&nbsp;then&nbsp;X</button>
-      <button class="cbtn" data-i="1" type="button">X&nbsp;then&nbsp;Z</button>
-      <button class="cbtn" data-i="2" type="button">Superposed → <small>+ branch (72%)</small></button>
-      <button class="cbtn" data-i="3" type="button">Superposed → <small>− branch (28%)</small></button>
+      <button class="cbtn" data-i="0" type="button" aria-pressed="true">Z&nbsp;then&nbsp;X</button>
+      <button class="cbtn" data-i="1" type="button" aria-pressed="false">X&nbsp;then&nbsp;Z</button>
+      <button class="cbtn" data-i="2" type="button" aria-pressed="false">Superposed → <small>+ branch (72%)</small></button>
+      <button class="cbtn" data-i="3" type="button" aria-pressed="false">Superposed → <small>− branch (28%)</small></button>
     </div>
 
     <div class="recorders">
       <div class="rec z">
         <div class="rhead"><span class="rname">Z-recorder</span><span class="rsub">copies the Z-fact</span></div>
-        <div class="abar"><div class="afill" id="fillZ"></div><div class="coinflip" id="cfZ"></div></div>
+        <div class="abar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-label="Z-recorder faithfulness"><div class="afill" id="fillZ"></div><div class="coinflip" id="cfZ"></div></div>
         <div class="arow"><span class="anum" id="anumZ">0.506</span><span class="astate" id="astateZ">faithfulness A<sub>Z</sub></span></div>
       </div>
       <div class="rec x">
         <div class="rhead"><span class="rname">X-recorder</span><span class="rsub">copies the X-fact</span></div>
-        <div class="abar"><div class="afill" id="fillX"></div><div class="coinflip" id="cfX"></div></div>
+        <div class="abar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-label="X-recorder faithfulness"><div class="afill" id="fillX"></div><div class="coinflip" id="cfX"></div></div>
         <div class="arow"><span class="anum" id="anumX">0.955</span><span class="astate" id="astateX">faithfulness A<sub>X</sub></span></div>
       </div>
     </div>
@@ -198,16 +198,16 @@
         <circle class="wmark-dot" id="wdotA" r="6" cy="43"/>
       </svg>
     </div>
-    <p class="verdict" id="verdict"></p>
+    <p class="verdict" id="verdict" aria-live="polite"></p>
   </section>
 
   <!-- PANEL B -->
   <section class="panel">
     <p class="panel-label">Exhibit B — The objectivity hull</p>
     <h2>Both branches leave the box — at 22σ and 52σ</h2>
-    <p class="sub">The definite orders sit at the edges of the hull (winner-take-all). The superposed <b>+</b> branch
-    pushes joint objectivity <b>above the ceiling</b> — two incompatible facts objective at once, which no ordering can
-    do. The <b>−</b> branch drops <b>below the floor</b> — both records erased. Faint marks are the noiseless theory.</p>
+    <p class="sub">The definite orders sit at the edges of the hull (winner-take-all). The superposed <strong>+</strong> branch
+    pushes joint objectivity <strong>above the ceiling</strong> — two incompatible facts objective at once, which no ordering can
+    do. The <strong>−</strong> branch drops <strong>below the floor</strong> — both records erased. Faint marks are the noiseless theory.</p>
     <div style="max-width:560px;margin:0 auto;">
       <svg viewBox="0 0 480 210" role="img" aria-label="All four arms on the joint-objectivity scale, with the hull band, the two branch violations, and theory ghosts">
         <rect class="band" id="bandB" y="70" height="30"/>
@@ -231,36 +231,36 @@
     <div class="receipts">
       <div class="rc">
         <h3>1 · The apparatus is calibrated</h3>
-        <p>Under definite orders the chip reproduces <b>winner-take-all exactly</b> — the last recorder wins at
-        <b>0.955</b> and <b>0.986</b>, the earlier one falls to a coin-flip. <span class="yes">Textbook behaviour</span>,
+        <p>Under definite orders the chip reproduces <strong>winner-take-all exactly</strong> — the last recorder wins at
+        <strong>0.955</strong> and <strong>0.986</strong>, the earlier one falls to a coin-flip. <span class="yes">Textbook behaviour</span>,
         so the switch result isn't a miscalibration.</p>
       </div>
       <div class="rc">
         <h3>2 · The hull is measured</h3>
-        <p>The box isn't assumed from theory — it's the <b>same-window measured range</b> [1.461, 1.487] of these exact
-        recorders. The branches are compared to <b>what this hardware can actually reach</b>, not an idealization.</p>
+        <p>The box isn't assumed from theory — it's the <strong>same-window measured range</strong> [1.461, 1.487] of these exact
+        recorders. The branches are compared to <strong>what this hardware can actually reach</strong>, not an idealization.</p>
       </div>
       <div class="rc">
         <h3>3 · The cheat is excluded</h3>
         <p>A recorder reading in a tilted intermediate basis could fake shared objectivity. That loophole is
-        <b>disclosed and removed by construction</b> (F82 lineage) — the recorders read the pure Z and X bases,
+        <strong>disclosed and removed by construction</strong> (F82 lineage) — the recorders read the pure Z and X bases,
         nothing in between.</p>
       </div>
     </div>
     <div class="speclink-row">
-      <a class="specbtn" href="./spec.html"><span class="arw">◇</span> Full Spec Sheet — data table, gates &amp; the hull derivation</a>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Full Spec Sheet — data table, gates &amp; the hull derivation</a>
     </div>
   </section>
 
   </main>
-  <div class="badge-row" role="contentinfo">
+  <footer class="badge-row">
     <span>MEASURED · <span class="sig">F98</span> · job <span class="sig">d9aa5m8tcv6s73do7li0</span></span>
     <span>ibm_marrakesh · 63 two-qubit gates · +22σ / −52σ</span>
     <span class="sp"></span>
     <a href="./spec.html">Full Spec</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 
@@ -270,7 +270,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
     var css = getComputedStyle(document.documentElement);
@@ -281,13 +281,13 @@
     var THEORY = { plus:1.6667, minus:1.0 };
     var MODES = [
       { key:"ordZX", label:"Z-then-X",  az:0.506, ax:0.955, w:1.4614, se:0, rel:"in", state:"definite",
-        note:"<b>Definite order, Z then X.</b> The last recorder wins: X is copied faithfully (0.955), Z is scrambled to a coin-flip (0.506). w sits at the <span class='inb'>hull floor</span> — winner-take-all, exactly as any causal history demands." },
+        note:"<strong>Definite order, Z then X.</strong> The last recorder wins: X is copied faithfully (0.955), Z is scrambled to a coin-flip (0.506). w sits at the <span class='inb'>hull floor</span> — winner-take-all, exactly as any causal history demands." },
       { key:"ordXZ", label:"X-then-Z",  az:0.986, ax:0.501, w:1.4871, se:0, rel:"in", state:"definite",
-        note:"<b>Definite order, X then Z.</b> Now Z wins (0.986) and X is erased (0.501). w sits at the <span class='inb'>hull ceiling</span>. Swapping the order just swaps who owns the fact — the box never opens." },
+        note:"<strong>Definite order, X then Z.</strong> Now Z wins (0.986) and X is erased (0.501). w sits at the <span class='inb'>hull ceiling</span>. Swapping the order just swaps who owns the fact — the box never opens." },
       { key:"plus",  label:"Superposed → + branch", az:0.817, ax:0.778, w:1.5957, se:0.0039, rel:"above", state:"above",
-        note:"<b>Superposed order, + branch (72%).</b> <span class='w'>w = 1.596</span> — <span class='above'>0.109 above the ceiling, 22σ</span>. Both incompatible facts are ~0.80 objective <b>at once</b>: two facts sharing the environment's redundancy, which <b>no ordering of events can produce</b>." },
+        note:"<strong>Superposed order, + branch (72%).</strong> <span class='w'>w = 1.596</span> — <span class='above'>0.109 above the ceiling, 22σ</span>. Both incompatible facts are ~0.80 objective <strong>at once</strong>: two facts sharing the environment's redundancy, which <strong>no ordering of events can produce</strong>." },
       { key:"minus", label:"Superposed → − branch", az:0.553, ax:0.477, w:1.0296, se:0.0076, rel:"below", state:"below",
-        note:"<b>Superposed order, − branch (28%, heralded).</b> <span class='w'>w = 1.030</span> — <span class='below'>0.432 below the floor, 52σ</span>. Both records collapse to coin-flips: the environment holds <b>no faithful copy of either fact</b>. Erasure, flagged before anyone reads." }
+        note:"<strong>Superposed order, − branch (28%, heralded).</strong> <span class='w'>w = 1.030</span> — <span class='below'>0.432 below the floor, 52σ</span>. Both records collapse to coin-flips: the environment holds <strong>no faithful copy of either fact</strong>. Erasure, flagged before anyone reads." }
     ];
     console.assert(Math.abs(MODES[2].w-1.5957)<0.002 && MODES[2].w>HULL.max, "+ branch above ceiling");
     console.assert(Math.abs(MODES[3].w-1.0296)<0.002 && MODES[3].w<HULL.min, "- branch below floor");
@@ -322,7 +322,10 @@
 
     function render(i){
       var m=MODES[i];
-      fillZ.style.width=aWidth(m.az)+"%"; fillX.style.width=aWidth(m.ax)+"%";
+      var wZ=aWidth(m.az), wX=aWidth(m.ax);
+      fillZ.style.width=wZ+"%"; fillX.style.width=wX+"%";
+      fillZ.parentElement.setAttribute("aria-valuenow", Math.round(wZ));
+      fillX.parentElement.setAttribute("aria-valuenow", Math.round(wX));
       cfZ.style.left=aWidth(0.5)+"%"; cfX.style.left=aWidth(0.5)+"%";
       anumZ.textContent=m.az.toFixed(3); anumX.textContent=m.ax.toFixed(3);
       var sz=aState(m.az), sx=aState(m.ax);
@@ -333,6 +336,8 @@
       var x = wx(m.w,AX0,AX1);
       wline.setAttribute("x1",x); wline.setAttribute("x2",x); wline.setAttribute("stroke",col);
       wdot.setAttribute("cx",x); wdot.setAttribute("stroke",col); wdot.setAttribute("fill",C("--card"));
+      document.querySelector('svg[aria-label^="Joint objectivity"]').setAttribute('aria-label',
+        'Joint objectivity scale: ' + m.label + ', w = ' + m.w.toFixed(4) + ', ' + (m.rel === 'above' ? 'above the hull ceiling' : m.rel === 'below' ? 'below the hull floor' : 'inside the causal-order hull'));
       verdict.innerHTML=m.note;
       btns.forEach(function(b,j){ var on=j===i; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
     }

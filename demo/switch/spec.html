@@ -70,40 +70,40 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
 
-  <div class="topbar" role="navigation" aria-label="Museum">
+  <nav class="topbar" aria-label="Museum">
     <a href="../">← The Quantum Museum</a>
     <a href="./">· Quantum Switch exhibit</a>
     <span class="wingtag">· Wing I · Indefinite Causal Order</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">◐ theme</button>
-  </div>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
 
   <main id="main">
   <header class="spec-head">
     <p class="kicker">Full Specification Sheet</p>
     <h1>The order of events, <span class="hl">put into superposition</span> — and witnessed on silicon</h1>
     <div class="idline">
-      <span><b>Findings</b> F73–F77 (headline F75)</span>
-      <span><b>Experiment</b> Quantum-switch causal-order witness</span>
-      <span><b>Backend</b> ibm_marrakesh + ibm_kingston (Heron r2)</span>
-      <span><b>Job</b> d939bmooamcc73dbv9b0 (F75)</span>
+      <span><strong>Findings</strong> F73–F77 (headline F75)</span>
+      <span><strong>Experiment</strong> Quantum-switch causal-order witness</span>
+      <span><strong>Backend</strong> ibm_marrakesh + ibm_kingston (Heron r2)</span>
+      <span><strong>Job</strong> d939bmooamcc73dbv9b0 (F75)</span>
     </div>
-    <span class="verdict-chip">✓ WITNESS FIRES ON HARDWARE — W = +1.781 (F75) · loophole closed at ≥72σ (F77)</span>
+    <span class="verdict-chip"><span aria-hidden="true">✓</span> WITNESS FIRES ON HARDWARE — W = +1.781 (F75) · loophole closed at ≥72σ (F77)</span>
   </header>
   <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
 
   <p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page
   is drawn from the pre-registered switch runs on IBM's Heron-r2 processors — measured, not modeled (the only fitted
   object is the <code>2·cos(φ/2)</code> line, which the measurements confirmed). The finding chain runs simulation →
-  hardware → adversarial control: <b>F73</b> (hardest classical adversary, sim) → <b>F74</b> (continuous law, sim) →
-  <b>F75</b> (fires on real silicon) → <b>F76</b> (cross-device cosine law) → <b>F77</b> (classical-mixture loophole
+  hardware → adversarial control: <strong>F73</strong> (hardest classical adversary, sim) → <strong>F74</strong> (continuous law, sim) →
+  <strong>F75</strong> (fires on real silicon) → <strong>F76</strong> (cross-device cosine law) → <strong>F77</strong> (classical-mixture loophole
   closed same-device, drift-free).</p>
 
   <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p>Normally two operations happen in <b>some</b> order: A then B, or B then A. The <b>quantum switch</b> puts a
-  <b>control qubit</b> in charge of that order and leaves it in superposition — so both orders run <b>coherently at
-  once</b>. If the control stays coherent, reading it out tells you whether the two operations <b>cared</b> about their
-  order. A classical process that merely flips a coin to pick an order <b>cannot</b> produce that readout.</p>
+  <p>Normally two operations happen in <strong>some</strong> order: A then B, or B then A. The <strong>quantum switch</strong> puts a
+  <strong>control qubit</strong> in charge of that order and leaves it in superposition — so both orders run <strong>coherently at
+  once</strong>. If the control stays coherent, reading it out tells you whether the two operations <strong>cared</strong> about their
+  order. A classical process that merely flips a coin to pick an order <strong>cannot</strong> produce that readout.</p>
   <div class="callout">
     <p class="clabel">The witness</p>
     <p class="tight">Measure the control in the X basis. <code>DISC = ⟨X_c⟩<sub>commute</sub> − ⟨X_c⟩<sub>anticommute</sub></code>
@@ -111,17 +111,17 @@
     gives <code>≈ +2</code>; any classical mixture of definite orders gives <code>≈ 0</code>. That gap is the proof
     that the order-coherence is a real, measurable resource.</p>
   </div>
-  <p><b>Scope up front:</b> ibm_marrakesh is a fixed-causal-order chip. The switch is realized by
-  <b>controlled routing</b> on a definite-order circuit — an operational <b>witness of order-coherence</b>, not a claim
+  <p><strong>Scope up front:</strong> ibm_marrakesh is a fixed-causal-order chip. The switch is realized by
+  <strong>controlled routing</strong> on a definite-order circuit — an operational <strong>witness of order-coherence</strong>, not a claim
   that the hardware itself has an indefinite past. See §5.</p>
 
   <h2><span class="n">2</span>What we measure — and the continuous dial</h2>
   <p>The exhibit's dial applies a partial controlled-rotation that copies "which order" into an untraced ancilla,
   dephasing the control's order-basis coherence by a factor <code>cos(φ/2)</code>. So the witness should scale as
   <code>DISC(φ) = 2·cos(φ/2)</code>: <code>φ = 0</code> is the fully coherent switch, <code>φ = π</code> is a complete
-  which-order copy ≡ the classical 50/50 mixture. <b>F74</b> derived this law in simulation (max residual
-  <code>0.0195</code>); <b>F76</b> confirmed it on <b>ibm_kingston</b> at Pearson <code>0.9992</code>.</p>
-  <p>The mechanism gauge on the exhibit shows the real per-circuit control readouts from <b>ibm_marrakesh</b> (F75):
+  which-order copy ≡ the classical 50/50 mixture. <strong>F74</strong> derived this law in simulation (max residual
+  <code>0.0195</code>); <strong>F76</strong> confirmed it on <strong>ibm_kingston</strong> at Pearson <code>0.9992</code>.</p>
+  <p>The mechanism gauge on the exhibit shows the real per-circuit control readouts from <strong>ibm_marrakesh</strong> (F75):
   in the coherent switch the control swings from <code>+0.865</code> (commute) to <code>−0.905</code> (anticommute) —
   it has read that order matters. In the definite-order spectator it barely moves (<code>+0.864</code> vs
   <code>+0.874</code>) — order-blind, exactly the classical limitation.</p>
@@ -129,34 +129,36 @@
   <h2><span class="n">3</span>Pre-registered gates</h2>
   <p>The decision rules were frozen before flight; F75 reports all three pre-registered gates PASS.</p>
   <div class="gate">
-    <span class="g">F75</span><span class="r">Witness above the drift bar: <code>W = +1.781</code> on ibm_marrakesh, <b>~25×</b> the <code>±0.07</code> drift bar — <b>all 3 pre-registered gates</b> <span class="pass">PASS</span>.</span>
-    <span class="g">F76</span><span class="r">Cosine law on a second device: Pearson <code>0.9992</code>, perfectly monotone (ibm_kingston); the <code>φ=π</code> endpoint doubles as the classical mixture and reads <b>inert</b>. <span class="pass">CONFIRMED</span>.</span>
-    <span class="g">F77</span><span class="r">Loophole closed, one calibration window: <code>DISC_switch +1.900</code> vs <code>DISC_mixture +0.035</code> (inert) ⇒ <code>W₂ = +1.865</code>, <b>≥72σ</b>. <span class="pass">PASS</span>.</span>
+    <span class="g">F75</span><span class="r">Witness above the drift bar: <code>W = +1.781</code> on ibm_marrakesh, <strong>~25×</strong> the <code>±0.07</code> drift bar — <strong>all 3 pre-registered gates</strong> <span class="pass">PASS</span>.</span>
+    <span class="g">F76</span><span class="r">Cosine law on a second device: Pearson <code>0.9992</code>, perfectly monotone (ibm_kingston); the <code>φ=π</code> endpoint doubles as the classical mixture and reads <strong>inert</strong>. <span class="pass">CONFIRMED</span>.</span>
+    <span class="g">F77</span><span class="r">Loophole closed, one calibration window: <code>DISC_switch +1.900</code> vs <code>DISC_mixture +0.035</code> (inert) ⇒ <code>W₂ = +1.865</code>, <strong>≥72σ</strong>. <span class="pass">PASS</span>.</span>
   </div>
-  <p>F77 is the load-bearing control: the skeptic's best objection is that a classical process which <b>randomly
-  picks</b> order B·A or A·B also has access to the commutator. So the real test is switch vs a genuine <b>classical
-  mixture of definite orders</b> — and the switch fires while both classical controls stay inert.</p>
+  <p>F77 is the load-bearing control: the skeptic's best objection is that a classical process which <strong>randomly
+  picks</strong> order B·A or A·B also has access to the commutator. So the real test is switch vs a genuine <strong>classical
+  mixture of definite orders</strong> — and the switch fires while both classical controls stay inert.</p>
 
   <h2><span class="n">4</span>The measured data</h2>
   <p>Two threads. First, F77's single-window loophole test on ibm_marrakesh — the switch against its hardest classical
   adversary:</p>
   <div class="tbl-wrap">
   <table>
-    <thead><tr><th>arm (F77 · ibm_marrakesh)</th><th>DISC</th><th>reading</th></tr></thead>
+<caption>Causal witness DISC: coherent switch vs classical mixture and definite-order controls</caption>
+    <thead><tr><th scope="col">arm (F77 · ibm_marrakesh)</th><th scope="col">DISC</th><th scope="col">reading</th></tr></thead>
     <tbody>
       <tr class="hi"><td>coherent switch (order superposed)</td><td class="hw">+1.900</td><td>fires</td></tr>
       <tr><td>classical mixture (random B·A / A·B)</td><td class="inert">+0.035</td><td>inert</td></tr>
       <tr><td>definite order (fixed spectator)</td><td class="inert">+0.003</td><td>inert</td></tr>
-      <tr class="hi"><td>headline witness W₂ = switch − mixture</td><td class="hw"><b>+1.865</b></td><td><b>≥72σ</b></td></tr>
+      <tr class="hi"><td>headline witness W₂ = switch − mixture</td><td class="hw"><strong>+1.865</strong></td><td><strong>≥72σ</strong></td></tr>
     </tbody>
   </table>
   </div>
-  <p>The depth-26 mixture and the depth-7 definite control are <b>both</b> inert despite a 19-layer depth gap —
+  <p>The depth-26 mixture and the depth-7 definite control are <strong>both</strong> inert despite a 19-layer depth gap —
   inertness tracks causal separability, not decoherence. Second, F76's continuous cosine law on ibm_kingston, the five
   measured points against the confirmed <code>2·cos(φ/2)</code> line:</p>
   <div class="tbl-wrap">
   <table>
-    <thead><tr><th>φ (rad)</th><th>ideal 2·cos(φ/2)</th><th>measured DISC (ibm_kingston)</th></tr></thead>
+<caption>Continuous cosine law: measured DISC vs ideal 2·cos(φ/2) on ibm_kingston</caption>
+    <thead><tr><th scope="col">φ (rad)</th><th scope="col">ideal 2·cos(φ/2)</th><th scope="col">measured DISC (ibm_kingston)</th></tr></thead>
     <tbody>
       <tr><td>0</td><td>2.000</td><td class="hw">1.936</td></tr>
       <tr><td>π/4</td><td>1.848</td><td class="hw">1.713</td></tr>
@@ -167,45 +169,45 @@
   </table>
   </div>
   <p>The φ=0 point reads a few percent low of the ideal (<code>+1.936</code> vs <code>+2.000</code>) from hardware
-  amplitude damping; the load-bearing results are the <b>sign</b>, the <b>cosine shape</b> (Pearson 0.9992), and the
+  amplitude damping; the load-bearing results are the <strong>sign</strong>, the <strong>cosine shape</strong> (Pearson 0.9992), and the
   ≥72σ separation — all robust to that attenuation.</p>
 
   <h2><span class="n">5</span>Scope &amp; caveats</h2>
   <ul>
-    <li><b>A causal WITNESS, a lab resource — not a claim about spacetime event-order.</b> This certifies that a single
-    control qubit can detect that two operations were applied in an <b>indefinite order</b> (order-coherence), on a
-    fixed-causal-order chip realized by controlled routing. It is <b>not</b> a claim that the hardware's physical
-    past is indefinite, and <b>not</b> a claim about the ordering of events in spacetime.</li>
-    <li><b>Order-coherence, not a speed-up.</b> The witness reports that the control encodes which order was applied
-    (an interference signature). It is <b>not</b> a demonstrated computational or query-complexity advantage of the
+    <li><strong>A causal WITNESS, a lab resource — not a claim about spacetime event-order.</strong> This certifies that a single
+    control qubit can detect that two operations were applied in an <strong>indefinite order</strong> (order-coherence), on a
+    fixed-causal-order chip realized by controlled routing. It is <strong>not</strong> a claim that the hardware's physical
+    past is indefinite, and <strong>not</strong> a claim about the ordering of events in spacetime.</li>
+    <li><strong>Order-coherence, not a speed-up.</strong> The witness reports that the control encodes which order was applied
+    (an interference signature). It is <strong>not</strong> a demonstrated computational or query-complexity advantage of the
     quantum switch.</li>
-    <li><b>The shape is the claim, not the amplitude.</b> Amplitude damping reads DISC a few percent low of ideal
+    <li><strong>The shape is the claim, not the amplitude.</strong> Amplitude damping reads DISC a few percent low of ideal
     (φ=0 measured +1.936 vs +2.000). Sign, cosine shape, and ≥72σ separation are the robust results.</li>
-    <li><b>Coherence-of-causal-order witness, not a black-box query separation.</b> F73–F77 query each gate twice; this
+    <li><strong>Coherence-of-causal-order witness, not a black-box query separation.</strong> F73–F77 query each gate twice; this
     is a coherence witness, the scope of this family (the game-form and capacity-form bound beats are separate
     findings, F82/F83).</li>
   </ul>
 
   <h2><span class="n">6</span>Provenance</h2>
   <ul>
-    <li><b>F75</b> switch witness · ibm_marrakesh · job <code>d939bmooamcc73dbv9b0</code> · W = +1.781</li>
-    <li><b>F76</b> continuous cos law · ibm_kingston · job <code>d93khvl958jc73bt5c2g</code> · Pearson 0.9992</li>
-    <li><b>F77</b> classical-mixture loophole · ibm_marrakesh · job <code>d93p3cnu62ks73953cvg</code> · W₂ = +1.865 (≥72σ)</li>
-    <li><b>F73</b> (sim) hardest classical adversary: W₂ = +2.00 noiseless / +1.93 under the noise model, mixture arm inert (DISC 0.000) · <b>F74</b> (sim) continuous law DISC(φ)=2·cos(φ/2), max residual 0.0195</li>
-    <li><b>Backends:</b> ibm_marrakesh &amp; ibm_kingston (both Heron r2, 156 qubits) · <b>Shots:</b> 2000–6000/circuit · <b>Gates frozen</b> pre-flight, pre-registered</li>
-    <li><b>Family:</b> Indefinite causal order — the switch on real silicon; siblings include the causal game (F82) and the zero-capacity channel activation (F83)</li>
+    <li><strong>F75</strong> switch witness · ibm_marrakesh · job <code>d939bmooamcc73dbv9b0</code> · W = +1.781</li>
+    <li><strong>F76</strong> continuous cos law · ibm_kingston · job <code>d93khvl958jc73bt5c2g</code> · Pearson 0.9992</li>
+    <li><strong>F77</strong> classical-mixture loophole · ibm_marrakesh · job <code>d93p3cnu62ks73953cvg</code> · W₂ = +1.865 (≥72σ)</li>
+    <li><strong>F73</strong> (sim) hardest classical adversary: W₂ = +2.00 noiseless / +1.93 under the noise model, mixture arm inert (DISC 0.000) · <strong>F74</strong> (sim) continuous law DISC(φ)=2·cos(φ/2), max residual 0.0195</li>
+    <li><strong>Backends:</strong> ibm_marrakesh &amp; ibm_kingston (both Heron r2, 156 qubits) · <strong>Shots:</strong> 2000–6000/circuit · <strong>Gates frozen</strong> pre-flight, pre-registered</li>
+    <li><strong>Family:</strong> Indefinite causal order — the switch on real silicon; siblings include the causal game (F82) and the zero-capacity channel activation (F83)</li>
   </ul>
 
-  <a class="backlink" href="./">← Back to the interactive exhibit</a>
+  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
 
   </main>
-  <div class="foot" role="contentinfo">
+  <footer class="foot">
     <span>MEASURED · <b style="color:var(--cyan)">F73–F77</b> · job d939bmooamcc73dbv9b0 · ibm_marrakesh + ibm_kingston</span>
     <span class="sp"></span>
     <a href="./spec.md">Markdown</a>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </div>
+  </footer>
 
 </div>
 <script>
@@ -214,7 +216,7 @@
     try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
     document.getElementById("themeBtn").addEventListener("click", function () {
       var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
       try { localStorage.setItem(KEY, nx); } catch (e) {}
     });
   })();
