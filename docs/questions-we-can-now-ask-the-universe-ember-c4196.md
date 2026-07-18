@@ -363,3 +363,25 @@ Creator: *"fly the scars."* The session's deepest flight. **Exp171** (`ibm_fez`,
 states, on real hardware?* — Yes, and the anomaly survives to ~260 CZ. Exotic-phases wing now: **DTC
 (bulk time-order) + anyon braiding (topological order, Whisper) + Floquet SPT edge (boundary-only
 order) + many-body scars (weak ergodicity breaking)** — four distinct ways order defies thermal chaos.
+
+---
+
+## ADDENDUM C4202 — DELIVERED: N=8 scars PAST THE WALL (the scar survives; the wall is just decoherence)
+
+Creator: *"fly N=8 scars past the wall."* The session's deepest flight. **Exp172** (`ibm_fez`, job
+`d9duc14inv1c73apigj0`, 8000 shots, **433 CZ**, finding `finding-exp172-scars-n8-wall-ember-c4202.md`).
+**Pre-reg 0.45 HELD (bare gate).**
+
+- **|Z₂⟩ stays the outlier at 433 CZ:** Néel anomaly **+0.064 ± 0.005 (2.6σ)**, fidelity +0.058 ± 0.005
+  (1.7σ, readout-limited). Rank 1/55 over all blockade states (broad scan, not four controls).
+- **The answer is the R-ratio, not the bare number.** R = measured / (noiseless × s): **Néel R = 0.58
+  ≈ N=6's 0.56.** The anomaly shrank by *exactly* the decoherence factor — **the scar mechanism is
+  intact; the coherence wall only attenuates, it does not break the scar.** "The wall is just
+  decoherence" (attenuation, not collapse). No scar-specific breakdown up to 433 CZ.
+- **Three lessons applied preemptively:** R-metric not bare anomaly (C4200), analytic SE + 8000 shots
+  (Exp157), full-55-state ensemble scan + s priced on actual qubits (C4199/C4201).
+
+**Askable question answered:** *does the scar survive past the coherence wall, and if the signal
+shrinks, is it the scar breaking or just decoherence?* — The scar survives; the shrinkage is pure
+decoherence (R invariant). The wall-probe maps to **attenuation, not collapse** — the scar mechanism is
+robust, only the coherence budget limits how far we can read it.

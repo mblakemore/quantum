@@ -1,0 +1,377 @@
+{
+ "exp": 172,
+ "backend": "ibm_fez",
+ "steps": 6,
+ "shots": 8000,
+ "N": 8,
+ "dt": 0.8,
+ "scar_init": "10101010",
+ "ctrl_inits": [
+  "10101000",
+  "10100010",
+  "10001000",
+  "00000000"
+ ],
+ "job_id": "d9duc14inv1c73apigj0",
+ "order": [
+  [
+   "10101010",
+   0
+  ],
+  [
+   "10101010",
+   1
+  ],
+  [
+   "10101010",
+   2
+  ],
+  [
+   "10101010",
+   3
+  ],
+  [
+   "10101010",
+   4
+  ],
+  [
+   "10101010",
+   5
+  ],
+  [
+   "10101010",
+   6
+  ],
+  [
+   "10101000",
+   0
+  ],
+  [
+   "10101000",
+   1
+  ],
+  [
+   "10101000",
+   2
+  ],
+  [
+   "10101000",
+   3
+  ],
+  [
+   "10101000",
+   4
+  ],
+  [
+   "10101000",
+   5
+  ],
+  [
+   "10101000",
+   6
+  ],
+  [
+   "10100010",
+   0
+  ],
+  [
+   "10100010",
+   1
+  ],
+  [
+   "10100010",
+   2
+  ],
+  [
+   "10100010",
+   3
+  ],
+  [
+   "10100010",
+   4
+  ],
+  [
+   "10100010",
+   5
+  ],
+  [
+   "10100010",
+   6
+  ],
+  [
+   "10001000",
+   0
+  ],
+  [
+   "10001000",
+   1
+  ],
+  [
+   "10001000",
+   2
+  ],
+  [
+   "10001000",
+   3
+  ],
+  [
+   "10001000",
+   4
+  ],
+  [
+   "10001000",
+   5
+  ],
+  [
+   "10001000",
+   6
+  ],
+  [
+   "00000000",
+   0
+  ],
+  [
+   "00000000",
+   1
+  ],
+  [
+   "00000000",
+   2
+  ],
+  [
+   "00000000",
+   3
+  ],
+  [
+   "00000000",
+   4
+  ],
+  [
+   "00000000",
+   5
+  ],
+  [
+   "00000000",
+   6
+  ]
+ ],
+ "meta": [
+  {
+   "init": "10101010",
+   "step": 0,
+   "depth": 2,
+   "n2q": 0
+  },
+  {
+   "init": "10101010",
+   "step": 1,
+   "depth": 138,
+   "n2q": 70
+  },
+  {
+   "init": "10101010",
+   "step": 2,
+   "depth": 249,
+   "n2q": 141
+  },
+  {
+   "init": "10101010",
+   "step": 3,
+   "depth": 363,
+   "n2q": 211
+  },
+  {
+   "init": "10101010",
+   "step": 4,
+   "depth": 477,
+   "n2q": 285
+  },
+  {
+   "init": "10101010",
+   "step": 5,
+   "depth": 591,
+   "n2q": 363
+  },
+  {
+   "init": "10101010",
+   "step": 6,
+   "depth": 708,
+   "n2q": 413
+  },
+  {
+   "init": "10101000",
+   "step": 0,
+   "depth": 2,
+   "n2q": 0
+  },
+  {
+   "init": "10101000",
+   "step": 1,
+   "depth": 127,
+   "n2q": 70
+  },
+  {
+   "init": "10101000",
+   "step": 2,
+   "depth": 270,
+   "n2q": 141
+  },
+  {
+   "init": "10101000",
+   "step": 3,
+   "depth": 348,
+   "n2q": 207
+  },
+  {
+   "init": "10101000",
+   "step": 4,
+   "depth": 477,
+   "n2q": 289
+  },
+  {
+   "init": "10101000",
+   "step": 5,
+   "depth": 576,
+   "n2q": 351
+  },
+  {
+   "init": "10101000",
+   "step": 6,
+   "depth": 705,
+   "n2q": 429
+  },
+  {
+   "init": "10100010",
+   "step": 0,
+   "depth": 2,
+   "n2q": 0
+  },
+  {
+   "init": "10100010",
+   "step": 1,
+   "depth": 126,
+   "n2q": 70
+  },
+  {
+   "init": "10100010",
+   "step": 2,
+   "depth": 249,
+   "n2q": 141
+  },
+  {
+   "init": "10100010",
+   "step": 3,
+   "depth": 348,
+   "n2q": 207
+  },
+  {
+   "init": "10100010",
+   "step": 4,
+   "depth": 477,
+   "n2q": 285
+  },
+  {
+   "init": "10100010",
+   "step": 5,
+   "depth": 591,
+   "n2q": 359
+  },
+  {
+   "init": "10100010",
+   "step": 6,
+   "depth": 705,
+   "n2q": 425
+  },
+  {
+   "init": "10001000",
+   "step": 0,
+   "depth": 2,
+   "n2q": 0
+  },
+  {
+   "init": "10001000",
+   "step": 1,
+   "depth": 153,
+   "n2q": 70
+  },
+  {
+   "init": "10001000",
+   "step": 2,
+   "depth": 235,
+   "n2q": 137
+  },
+  {
+   "init": "10001000",
+   "step": 3,
+   "depth": 363,
+   "n2q": 211
+  },
+  {
+   "init": "10001000",
+   "step": 4,
+   "depth": 462,
+   "n2q": 281
+  },
+  {
+   "init": "10001000",
+   "step": 5,
+   "depth": 576,
+   "n2q": 351
+  },
+  {
+   "init": "10001000",
+   "step": 6,
+   "depth": 705,
+   "n2q": 425
+  },
+  {
+   "init": "00000000",
+   "step": 0,
+   "depth": 1,
+   "n2q": 0
+  },
+  {
+   "init": "00000000",
+   "step": 1,
+   "depth": 174,
+   "n2q": 75
+  },
+  {
+   "init": "00000000",
+   "step": 2,
+   "depth": 249,
+   "n2q": 141
+  },
+  {
+   "init": "00000000",
+   "step": 3,
+   "depth": 362,
+   "n2q": 211
+  },
+  {
+   "init": "00000000",
+   "step": 4,
+   "depth": 462,
+   "n2q": 285
+  },
+  {
+   "init": "00000000",
+   "step": 5,
+   "depth": 591,
+   "n2q": 363
+  },
+  {
+   "init": "00000000",
+   "step": 6,
+   "depth": 690,
+   "n2q": 433
+  }
+ ],
+ "prereg": {
+  "confidence": 0.45,
+  "gate": "F(scar)[6] - max_generic F[6] > 0.05 AND |m_s|(scar)[6] - max_generic |m_s|[6] > 0.05",
+  "expectation": "WALL-PROBE at 409 CZ, actual-qubit s~0.404 (NOT baseline-robust; difference scales by s). noiseless anomaly F+0.333/Neel+0.285; with s + the ~0.56 extra readout/Trotter suppression N=6 showed, expect ~+0.06-0.07 -> right at the 0.05 gate. Null (wall wins) is the LIKELY, first-class outcome.",
+  "null_first_class": "if the anomaly drowns at 409 CZ -> the coherence wall blocks the N=8 scar (the point of the probe: map where the wall is)"
+ },
+ "note": "PXP many-body scars: |Z2> vs a 4-state generic ensemble, matched on init; anomaly = scar revives above the whole generic range (not a selected control)"
+}
