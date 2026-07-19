@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%224%22%20width%3D%224%22%20height%3D%228%22%20rx%3D%221%22%20fill%3D%22%2345d6cf%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%224%22%20width%3D%224%22%20height%3D%228%22%20rx%3D%221%22%20fill%3D%22%2345d6cf%22%2F%3E%3Cpath%20d%3D%22M6.5%206h3M6.5%2010h3%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.2%22%20stroke-dasharray%3D%221.2%201.2%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Two Computers — a distributed algorithm across a cut nothing crosses | The Quantum Museum</title>
+<meta name="description" content="Bernstein–Vazirani split across two processors that never touch: every oracle gate teleported, right answer 4/4 programs at 96% of monolithic performance, and the per-gate cost measured as a scaling law (r=0.954). Exp181–182 on ibm_fez.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .lede a { color: var(--cyan); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 10px 12px 0; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .seglbl { font-family:var(--mono); font-size:11px; color:var(--ink-3); letter-spacing:.06em; text-transform:uppercase; display:block; margin-bottom:3px; }
+  .grid2 { display:grid; grid-template-columns:1.2fr 1fr; gap:18px; align-items:start; }
+  @media (max-width:680px){ .grid2 { grid-template-columns:1fr; } }
+  .answer { font-family:var(--mono); margin-top:10px; }
+  .answer .big { font-size:34px; font-weight:800; letter-spacing:.12em; }
+  .answer .ok { color:var(--good); } .answer .bad { color:var(--bad); }
+  .answer .note { font-size:12px; color:var(--ink-3); margin-top:2px; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:16px; font-weight:700; }
+  .val.good { color:var(--good); } .val.bad { color:var(--bad); } .val.cy { color:var(--cyan); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ quantum network</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Two Computers<span class="hl">.</span></h1>
+    <p class="lede">Alice owns a quantum register. Bob owns another. They never touch — no wire, no
+      gate, nothing crosses the cut between them except <em>pre-shared entanglement and ordinary
+      classical notes</em>. Then they run <b>one program, together</b>: an algorithm whose oracle
+      lives on both sides at once, every cross-cut gate performed by
+      <a href="../remote-gate/">teleportation</a>. Load a secret into the program, press run, and the
+      distributed machine reads the secret back in <b>one query</b> — at 96% of what a single
+      machine scores. Pull out the entanglement and it decays, exactly, into a coin-flipping
+      guesser.</p>
+    <span class="scope">Scope: <b>Bernstein–Vazirani</b> across a register cut (n=2, Exp181; n=3 scaling,
+      Exp182) — teleported oracle gates, zero live feedforward, zero mid-circuit measurement; e-bits
+      pre-shared (the standard distributed model); chip patches, not separated machines.</span>
+  </header>
+
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Run the program</h2>
+    <p class="sub">Exp181 · 3 arms × 4 programs · ibm_fez · 8000 shots · job d9e28tcjeosc73fi8fi0</p>
+    <p class="primer"><b>How to read it.</b> Pick a secret 2-bit string — that programs the oracle. Pick a
+      machine. The gauge shows how often the machine's single query decodes the exact secret; the
+      readout shows what it answered most often. The quantum trick (both machines): the oracle is
+      queried with all inputs <em>in superposition</em>, so one query suffices where a classical reader
+      needs one query per bit. The distributed machine does this with its oracle split across the cut —
+      then try the third machine, where the e-bits are removed and nothing else changes.</p>
+    <span class="seglbl">the secret (programs the oracle)</span>
+    <div class="seg" role="tablist" id="segS"></div>
+    <span class="seglbl">the machine</span>
+    <div class="seg" role="tablist" id="segM"></div>
+    <div class="grid2">
+      <figure aria-label="two-register machine sketch with cut and teleported gates"><svg id="topo" viewBox="0 0 460 190"></svg></figure>
+      <div>
+        <div class="answer" id="ans"></div>
+        <p class="story" id="story"></p>
+      </div>
+    </div>
+    <div class="verdict" id="vbox"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="pb">
+    <h2 id="pb">The scaling law</h2>
+    <p class="sub">Exp182 · n=3, 8 programs, 0–3 teleported gates · 10 qubits · job d9e2f4kinv1c73aplk4g</p>
+    <p class="primer"><b>The question that decides whether this scales.</b> Each cross-cut gate costs
+      something. Is the cost a constant? Eight programs spanning 1, 2, and 3 teleported gates measure
+      it at three doses: per-gate ratios <b>0.954 / 0.945 / 0.972</b> — a cost banded at 3–5% per
+      gate, pooled <b>r = 0.954</b>. The extrapolation license: r¹⁰ ≈ 0.62 — a distributed oracle with
+      <em>ten</em> cross-cut gates would still decode near 62%. And the wobble in those ratios? The
+      <em>monolithic</em> machine shows the same wobble, stronger — it's compiler texture, not a
+      distribution cost. All eight programs answered correctly (floors sat exactly on 1/2<sup>w</sup>).</p>
+    <figure aria-label="P(correct) versus number of teleported gates, distributed vs monolithic vs guessing floor"><svg id="scal" viewBox="0 0 460 260"></svg></figure>
+  </section>
+
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">the twist: the corrections vanish — and so does the tax</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">HOW A GATE CROSSES THE CUT</div>
+        <p>Each oracle CNOT is the Remote Handshake's teleported gate — but here <em>every correction
+        disappears</em>. The X-correction lands on Bob's ancilla, which sits in an X-eigenstate: a
+        global phase, dropped. The Z-correction slides through Alice's final gate into a classical
+        XOR applied at decode. Net: <b>zero live feedforward, zero mid-circuit measurement</b> — no
+        message is ever in flight while the program runs; the classical notes are opened afterward,
+        like sifting a key. <code>s_i = m_i ⊕ z_i</code></p></div>
+      <div class="receipt"><div class="rt">THE TAX VANISHES WITH THE WINDOWS</div>
+        <p>The <a href="../relay-computer/">Relay Computer</a> found that stacking network layers
+        charges a compounding tax, and traced it to feedforward/measurement windows: with windows,
+        a second operation cost ~45%. Here, with the windows architected away, the second teleported
+        gate costs <b>3%</b> (P₁₁/P₀₁ = 0.971). The loop closes from both sides: <em>it was never the
+        stacking — it was always the windows.</em></p></div>
+      <div class="receipt"><div class="rt">THE FALSIFIER IS A THEOREM</div>
+        <p>Remove the e-bits and run everything else identically: every readout bit fed by a
+        cross-cut gate becomes a fair coin, so the "computer" must decay to the classical guessing
+        floor — 1/2 per gate-bearing bit, 1/2<sup>w</sup> per program. Measured: 0.502 / 0.486 / 0.244
+        (n=2) and floors to 0.123 (n=3) against theory 0.5 / 0.25 / 0.125. The magic was the
+        entanglement, to four decimal places of nothing else.</p></div>
+      <div class="receipt"><div class="rt">WHY IT MATTERS &amp; THE FENCE</div>
+        <p>Machines too big for one chip must run gates between chips — this is that, in miniature,
+        with the price measured: 96% of monolithic, &lt;1%/gate distribution cost at low weight, no
+        resource-scale surprise at 10 qubits and 3 simultaneous e-bits. Fence: one die (patches, not
+        machines); e-bits pre-shared; the zero-communication trick is strongest for phase-kickback
+        oracles and Clifford consumption — richer algorithms re-enter (priced) window territory.
+        <code>Exp181–182 · jobs d9e28tcjeosc73fi8fi0, d9e2f4kinv1c73aplk4g</code></p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Exp181–182 · ibm_fez · 32 circuits · 8000 shots</span>
+    <span>C4872 · 2026-07-19</span>
+    <a href="../remote-gate/">← the teleported gate</a>
+    <a href="../relay-computer/">← the composition tax</a>
+    <a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+// Exp181 measured P(correct) per machine per program + modal answers (all modal==program for local/dist)
+const P181={
+ local:{ "00":0.995,"01":0.970,"10":0.964,"11":0.912 },
+ dist:{ "00":0.992,"01":0.923,"10":0.920,"11":0.897 },
+ noresource:{ "00":0.993,"01":0.502,"10":0.486,"11":0.244 }};
+const MODAL_NR={ "00":"00","01":"01","10":"00","11":"10" }; // falsifier's measured modal answers (01 lucked onto the secret at 0.502)
+const MACH={
+ local:{lbl:"one machine (monolithic)",cut:false,ebits:false,
+   story:"<b>The reference.</b> Both registers on one machine, ordinary gates. One query, right answer — this is the ceiling the distributed machine is measured against."},
+ dist:{lbl:"two machines (distributed)",cut:true,ebits:true,
+   story:"<b>The distributed computer.</b> The oracle spans the cut; each cross-cut CNOT consumes one pre-shared e-bit and leaves only a classical note to open at decode. No message flies while the program runs. It answers correctly — at 96% of the single machine, with the worst program (both gates teleported) still at 0.897."},
+ noresource:{lbl:"no entanglement",cut:true,ebits:false,
+   story:"<b>The impostor.</b> Same two machines, same circuit, same decode — but the e-bits were never entangled. Every cross-cut gate now injects a coin flip, and the machine decays to the classical guessing floor: exactly 1/2 per gate-bearing bit. Its top answer stops tracking the secret (except one coin-flip fluke at 0.502)."}};
+const SVGNS="http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+let curS="11", curM="dist";
+function drawTopo(){
+  const t=document.getElementById("topo"); t.innerHTML="";
+  const M=MACH[curM]; const bits=[curS[1],curS[0]];   // s1 (q0), s2 (q1)
+  // Alice box
+  el(t,"rect",{x:20,y:30,width:150,height:120,rx:12,style:"fill:none;stroke:var(--cyan);stroke-width:1.6"});
+  el(t,"text",{x:95,y:22,"text-anchor":"middle",style:"fill:var(--cyan);font-family:var(--mono);font-size:11px"}).textContent="ALICE — data register";
+  // Bob box
+  el(t,"rect",{x:290,y:30,width:150,height:120,rx:12,style:"fill:none;stroke:var(--cyan);stroke-width:1.6"});
+  el(t,"text",{x:365,y:22,"text-anchor":"middle",style:"fill:var(--cyan);font-family:var(--mono);font-size:11px"}).textContent="BOB — oracle ancilla";
+  // the cut
+  if(M.cut){
+    el(t,"line",{x1:230,y1:14,x2:230,y2:170,style:"stroke:var(--edge-2);stroke-width:2;stroke-dasharray:6 5"});
+    el(t,"text",{x:230,y:184,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="the cut — no gate ever crosses";
+  }
+  // qubits
+  const qy=[70,120];
+  qy.forEach((y,i)=>{
+    el(t,"circle",{cx:60,cy:y,r:10,style:"fill:var(--cyan)"});
+    el(t,"text",{x:60,y:y+4,"text-anchor":"middle",style:"fill:var(--bg);font-family:var(--mono);font-size:11px;font-weight:700"}).textContent="a"+(i+1);
+  });
+  el(t,"circle",{cx:400,cy:95,r:10,style:"fill:var(--amber)"});
+  el(t,"text",{x:400,y:99,"text-anchor":"middle",style:"fill:var(--bg);font-family:var(--mono);font-size:10px;font-weight:700"}).textContent="anc";
+  // oracle gate lines for programmed bits
+  qy.forEach((y,i)=>{
+    if(bits[i]==="0") return;
+    const st = curM==="local" ? "stroke:var(--good);stroke-width:2"
+      : (M.ebits ? "stroke:var(--amber);stroke-width:2;stroke-dasharray:5 4" : "stroke:var(--bad);stroke-width:2;stroke-dasharray:2 5");
+    el(t,"line",{x1:72,y1:y,x2:390,y2:95,style:st});
+    if(curM!=="local"){
+      const mx=(72+390)/2, my=(y+95)/2;
+      el(t,"text",{x:mx,y:my-8,"text-anchor":"middle",style:`fill:${M.ebits?"var(--amber)":"var(--bad)"};font-family:var(--mono);font-size:10px`})
+        .textContent=M.ebits?"teleported gate (1 e-bit)":"e-bit removed ✂";
+    }
+  });
+  if(bits[0]==="0"&&bits[1]==="0")
+    el(t,"text",{x:230,y:100,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent="secret 00 — the oracle is empty";
+}
+function draw(){
+  drawTopo();
+  const P=P181[curM][curS];
+  const modal = curM==="noresource" ? MODAL_NR[curS] : curS;
+  const right = modal===curS;
+  document.getElementById("ans").innerHTML=
+    `<span class="lbl" style="font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase">the machine answered</span><br>`+
+    `<span class="big ${right?'ok':'bad'}">${modal}</span> <span style="font-family:var(--mono);font-size:14px;color:${right?'var(--good)':'var(--bad)'}">${right?'✓ the secret':'✗ (secret was '+curS+')'}</span>`+
+    `<div class="note">exact-answer rate ${(P*100).toFixed(1)}% of 8000 one-query runs${curM==='noresource'&&curS!=='00'?' — the guessing floor':''}</div>`;
+  document.getElementById("story").innerHTML=MACH[curM].story;
+  document.getElementById("vbox").innerHTML=
+    `<div class="box hl"><span class="lbl">machine verdict</span><span class="val ${curM!=='noresource'?'good':'bad'}">${curM==='local'?'CORRECT — one query':(curM==='dist'?'CORRECT — one query, across the cut':'GUESSING — the entanglement was the computer')}</span></div>`+
+    `<div class="box"><span class="lbl">P(exact secret) this program</span><span class="val ${P>0.6?'cy':'bad'}">${P.toFixed(3)}</span></div>`+
+    `<div class="box"><span class="lbl">distributed vs monolithic (all programs)</span><span class="val cy">0.914 / 0.949 = 96%</span></div>`;
+  document.querySelectorAll("#segS button").forEach(b=>{b.classList.toggle("on",b.dataset.k===curS);b.setAttribute("aria-pressed",String(b.dataset.k===curS));});
+  document.querySelectorAll("#segM button").forEach(b=>{b.classList.toggle("on",b.dataset.k===curM);b.setAttribute("aria-pressed",String(b.dataset.k===curM));});
+}
+const segS=document.getElementById("segS");
+["00","01","10","11"].forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;
+  b.textContent="secret "+k;b.addEventListener("click",()=>{curS=k;draw();});segS.appendChild(b);});
+const segM=document.getElementById("segM");
+Object.keys(MACH).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;
+  b.textContent=MACH[k].lbl;b.addEventListener("click",()=>{curM=k;draw();});segM.appendChild(b);});
+// Panel B: scaling plot (Exp182 measured)
+function drawScal(){
+  const s=document.getElementById("scal"); s.innerHTML="";
+  const L=60,R=430,T=24,B=210; const X=w=>L+(R-L)*w/3; const Y=p=>B-(B-T)*p;
+  [0,0.25,0.5,0.75,1].forEach(g=>{
+    el(s,"line",{x1:L,y1:Y(g),x2:R,y2:Y(g),style:`stroke:var(--edge);stroke-width:${g===0?2:1}`});
+    el(s,"text",{x:L-8,y:Y(g)+4,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"}).textContent=g.toFixed(2);});
+  [0,1,2,3].forEach(w=>el(s,"text",{x:X(w),y:B+18,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:11px"}).textContent=w);
+  el(s,"text",{x:(L+R)/2,y:B+36,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"}).textContent="teleported gates in the program (Hamming weight of the secret)";
+  el(s,"text",{x:14,y:T-8,style:"fill:var(--ink-2);font-family:var(--mono);font-size:11px"}).textContent="P(exact secret)";
+  const series=[
+    {name:"one machine",col:"var(--good)",pts:[0.991,0.950,0.900,0.945],dash:""},
+    {name:"two machines",col:"var(--cyan)",pts:[0.991,0.945,0.893,0.868],dash:""},
+    {name:"guessing floor 1/2ʷ",col:"var(--bad)",pts:[1.0,0.489,0.245,0.123],dash:"5 4"}];
+  series.forEach(sr=>{
+    for(let w=0;w<3;w++)
+      el(s,"line",{x1:X(w),y1:Y(sr.pts[w]),x2:X(w+1),y2:Y(sr.pts[w+1]),style:`stroke:${sr.col};stroke-width:2;${sr.dash?`stroke-dasharray:${sr.dash}`:""};opacity:.85`});
+    sr.pts.forEach((p,w)=>el(s,"circle",{cx:X(w),cy:Y(p),r:5,style:`fill:${sr.col};stroke:var(--bg);stroke-width:1.5`}));
+  });
+  // series labels
+  el(s,"text",{x:R+2,y:Y(0.945)-8,"text-anchor":"end",style:"fill:var(--good);font-family:var(--mono);font-size:10.5px"}).textContent="one machine";
+  el(s,"text",{x:R+2,y:Y(0.868)+16,"text-anchor":"end",style:"fill:var(--cyan);font-family:var(--mono);font-size:10.5px"}).textContent="two machines (r=0.954)";
+  el(s,"text",{x:R+2,y:Y(0.123)-8,"text-anchor":"end",style:"fill:var(--bad);font-family:var(--mono);font-size:10.5px"}).textContent="no e-bits: 1/2ʷ exactly";
+  el(s,"text",{x:L+6,y:T+12,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"}).textContent="8/8 programs answered correctly · per-gate ratios 0.954/0.945/0.972 · extrapolation r¹⁰ ≈ 0.62";
+}
+drawScal(); draw();
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>
