@@ -1,0 +1,24 @@
+{
+ "exp": 213,
+ "slug": "teleported_s_gadget",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9ell82neu4c739ojhn0",
+ "order": [
+  "gadget",
+  "noS"
+ ],
+ "n2": {
+  "gadget": 82,
+  "noS": 61
+ },
+ "prereg": {
+  "W1_gadget_applies_s": "frame-corrected <Ybar1_C>(gadget) >= 0.40 at >=5 sigma",
+  "W2_s_necessary": "|<Ybar1_C>(noS)| <= 0.15",
+  "W3_frame_necessary": "uncorrected <Ybar1_C>(gadget) <= 0.15",
+  "G_acc": "Bell-measurement acceptance >= 0.40",
+  "registered_verdict": "W1 and W2 and W3 and G_acc",
+  "scope": "resource+Bell-measurement stabilizer-checked; C Ybar output mixed-basis (half-shielded, 208 pattern); frame found-by-search on the gadget arm",
+  "budget_predictions": "Ybar_corrected in [0.40,0.80]; noS |Ybar| < 0.12; acceptance in [0.45,0.75]"
+ }
+}
