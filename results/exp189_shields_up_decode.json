@@ -1,0 +1,38 @@
+{
+ "job_id": "d9e561cjeosc73fibmn0",
+ "results": {
+  "L00_Z": {
+   "acceptance": 0.965625,
+   "rejection": 0.034375,
+   "logical_err_per_qubit": 0.001035598705501618
+  },
+  "Lpp_X": {
+   "acceptance": 0.965625,
+   "rejection": 0.034375,
+   "logical_err_per_qubit": 0.002459546925566343
+  },
+  "bare_Z": {
+   "err_per_qubit": 0.002125
+  },
+  "bare_X": {
+   "err_per_qubit": 0.0024375
+  },
+  "inject_Z": {
+   "acceptance": 0.037125,
+   "rejection": 0.962875,
+   "logical_err_per_qubit": 0.531986531986532
+  },
+  "inject_X": {
+   "acceptance": 0.035,
+   "rejection": 0.965,
+   "logical_err_per_qubit": 0.4857142857142857
+  }
+ },
+ "ratios": {
+  "Z": 0.48734056729487907,
+  "X": 1.0090448925400382
+ },
+ "detector_ok": false,
+ "shield_pays": false,
+ "verdict_ok": false
+}
