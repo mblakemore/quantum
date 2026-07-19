@@ -1,0 +1,284 @@
+{
+ "exp": "203b",
+ "slug": "collision_ledger",
+ "backend": "ibm_fez",
+ "shots_plain": 12000,
+ "shots_twirl": 1500,
+ "k_twirl": 8,
+ "job_id": "d9ee989htsac739e5e20",
+ "order": [
+  [
+   "plain",
+   0.0,
+   0
+  ],
+  [
+   "plain",
+   0.25,
+   0
+  ],
+  [
+   "plain",
+   0.5,
+   0
+  ],
+  [
+   "plain",
+   0.75,
+   0
+  ],
+  [
+   "plain",
+   1.0,
+   0
+  ],
+  [
+   "twirled",
+   0.0,
+   0
+  ],
+  [
+   "twirled",
+   0.0,
+   1
+  ],
+  [
+   "twirled",
+   0.0,
+   2
+  ],
+  [
+   "twirled",
+   0.0,
+   3
+  ],
+  [
+   "twirled",
+   0.0,
+   4
+  ],
+  [
+   "twirled",
+   0.0,
+   5
+  ],
+  [
+   "twirled",
+   0.0,
+   6
+  ],
+  [
+   "twirled",
+   0.0,
+   7
+  ],
+  [
+   "twirled",
+   0.25,
+   0
+  ],
+  [
+   "twirled",
+   0.25,
+   1
+  ],
+  [
+   "twirled",
+   0.25,
+   2
+  ],
+  [
+   "twirled",
+   0.25,
+   3
+  ],
+  [
+   "twirled",
+   0.25,
+   4
+  ],
+  [
+   "twirled",
+   0.25,
+   5
+  ],
+  [
+   "twirled",
+   0.25,
+   6
+  ],
+  [
+   "twirled",
+   0.25,
+   7
+  ],
+  [
+   "twirled",
+   0.5,
+   0
+  ],
+  [
+   "twirled",
+   0.5,
+   1
+  ],
+  [
+   "twirled",
+   0.5,
+   2
+  ],
+  [
+   "twirled",
+   0.5,
+   3
+  ],
+  [
+   "twirled",
+   0.5,
+   4
+  ],
+  [
+   "twirled",
+   0.5,
+   5
+  ],
+  [
+   "twirled",
+   0.5,
+   6
+  ],
+  [
+   "twirled",
+   0.5,
+   7
+  ],
+  [
+   "twirled",
+   0.75,
+   0
+  ],
+  [
+   "twirled",
+   0.75,
+   1
+  ],
+  [
+   "twirled",
+   0.75,
+   2
+  ],
+  [
+   "twirled",
+   0.75,
+   3
+  ],
+  [
+   "twirled",
+   0.75,
+   4
+  ],
+  [
+   "twirled",
+   0.75,
+   5
+  ],
+  [
+   "twirled",
+   0.75,
+   6
+  ],
+  [
+   "twirled",
+   0.75,
+   7
+  ],
+  [
+   "twirled",
+   1.0,
+   0
+  ],
+  [
+   "twirled",
+   1.0,
+   1
+  ],
+  [
+   "twirled",
+   1.0,
+   2
+  ],
+  [
+   "twirled",
+   1.0,
+   3
+  ],
+  [
+   "twirled",
+   1.0,
+   4
+  ],
+  [
+   "twirled",
+   1.0,
+   5
+  ],
+  [
+   "twirled",
+   1.0,
+   6
+  ],
+  [
+   "twirled",
+   1.0,
+   7
+  ]
+ ],
+ "seed_transpiler": 0,
+ "audit_2q": {
+  "plain": {
+   "0.0": [
+    5
+   ],
+   "0.25": [
+    5
+   ],
+   "0.5": [
+    5
+   ],
+   "0.75": [
+    5
+   ],
+   "1.0": [
+    5
+   ]
+  },
+  "twirled": {
+   "0.0": [
+    5
+   ],
+   "0.25": [
+    5
+   ],
+   "0.5": [
+    5
+   ],
+   "0.75": [
+    5
+   ],
+   "1.0": [
+    5
+   ]
+  }
+ },
+ "prereg": {
+  "frozen_in": "docs/collision-corrected-ledger-whisper-c4898.md sec.4 (P1-P4 verbatim, frozen BEFORE this flight was authorized)",
+  "G0_anchors": "acc(0) >= 0.55 and X1_post(0) >= 0.55 at >=5 sigma, both arms; coin occupancy tracks sin^2/2 within 0.06 both arms every dose",
+  "P1": "XOR law |resid| <= 0.03 every dose both arms; acc(pi) in [0.47,0.53] both",
+  "P2": "twirled arm: |post - model| <= 0.06 every dose (in-arm anchors)",
+  "P3": "plain arm: post_resid non-decreasing (0.04 tol) and resid(pi) >= +0.10",
+  "P4": "resid_plain(pi) - resid_twirled(pi) >= 0.10 at >=5 sigma",
+  "registered_verdict": "G0 and P1 and P2 and P3 and P4",
+  "scope": "no unbend arm -> coin quality non-critical (place-by-measured deferred to rewinder flights); twirl scope = storage-idle {I,X} frames on block qubits (gate-coherent errors outside twirl scope \u2014 if P2 fails, scope is part of the diagnosis); arms graded against their OWN anchors",
+  "budget_predictions": "plain resid(pi) in [0.12,0.28] (C4898 measured +0.199); twirled resid(pi) in [-0.06,+0.06]; P4 sigma ~7; acc(pi) within 0.02 of 0.50 both arms"
+ }
+}
