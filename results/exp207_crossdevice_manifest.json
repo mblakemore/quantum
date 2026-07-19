@@ -1,0 +1,69 @@
+{
+ "exp": 207,
+ "slug": "logical_computer_crossdevice",
+ "backend": "ibm_marrakesh",
+ "shots": 8000,
+ "job_id": "d9ei8ccjeosc73fiqjgg",
+ "order": [
+  "bare",
+  "logical"
+ ],
+ "decode": {
+  "dec": [
+   [
+    0,
+    1
+   ],
+   [
+    0,
+    2
+   ]
+  ],
+  "mask": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "valid_set": [
+  [
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   1,
+   1,
+   0
+  ],
+  [
+   1,
+   0,
+   0,
+   1
+  ],
+  [
+   1,
+   1,
+   1,
+   1
+  ]
+ ],
+ "n2": {
+  "bare": 7,
+  "logical": 25
+ },
+ "fez_reference": {
+  "bare": 0.8968,
+  "logical": 0.9741
+ },
+ "prereg": {
+  "W1_W4_Gacc": "Exp206 gates re-applied on the new device (frozen)",
+  "X1_concordance": "sign(margin) reproduces (logical>bare) AND |P_log-0.974|<=0.10 AND |P_bare-0.897|<=0.10",
+  "scope": "cross-DEVICE Heron-r2 (Eagle unavailable, boundaries.md C4904); device-independence of logical-beats-bare, extends F112",
+  "budget": "expect marrakesh within +-0.08 of fez both arms; margin sign reproduces at >=3 sigma"
+ }
+}
