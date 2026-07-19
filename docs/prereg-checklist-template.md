@@ -29,3 +29,37 @@ selftest, for every arm INCLUDING falsifiers and gauges.
 
 Selftest gates: every criterion evaluable noiselessly must be asserted exactly; every frame /
 echo / sifting algebra proven in sim before a shot is spent.
+
+## Additions from the ledger/jury arcs (Whisper C4900 fold-in — each paid with a real miss)
+
+11. **Anti-folding for angle sweeps** (C4897 Exp203; validated C4899/C4900): any
+    angle-parameterized 2q gate in a dose sweep must be MANUALLY decomposed
+    (ry(θ/2)–cx–BARRIER–ry(−θ/2)–cx) so the identity-angle endpoint cannot fold away and
+    free the layout. Skeleton audit then demands FULL dose-uniformity of 2q counts per
+    family (not interior-only). Endpoint compilation specials to check by hand: cry(0)
+    folds; cry(π) synthesizes 1 CZ/wing cheaper.
+12. **Anchor-layout integrity before model promotion** (C4899, the C4898 retraction): a
+    model's anchor parameters must be measured on the SAME layout/compilation as the points
+    showing a residual. Anchor contamination generates monotone-in-effect-size residuals
+    that perfectly mimic emergent physics — and sign-impossibility arguments do NOT rescue
+    a model whose parameters are corrupted.
+13. **XOR composition for parity detectors** (C4898/C4899, Exp203/203b): postselection
+    acceptance under independent flip processes composes as XOR, never as a product:
+    acc = (1−p_n)(1−e_r) + p_n·e_r. Free calibration checkpoints: acc(π) = ½ at any p_n;
+    acc = ½ at every dose when p_n = ½. Collisions (both flip) are ACCEPTED-but-damaged —
+    price that column.
+14. **Echo-compatible twirling** (C4899, Exp203b): twirl frames inserted inside a
+    refocusing window un-do the echo (per-instance O(π) phases → parity coin, dead pooled
+    coherence). Frames must be placed in echo-symmetric pairs or wrap the whole refocused
+    window as one unit. The Exp199 twirl doctrine (convert invisible coherent errors to
+    visible Pauli ones) stands — this amendment is about WHERE the frames may go.
+15. **Power-calc before σ-gates on compound estimators** (C4896, Exp202): a
+    difference-of-differences gate compounds SE across 4 arms — compute the required shots
+    for the target σ BEFORE freezing (202's depth-pays landed 1.9σ on a true effect; the
+    4×-shots retest with unchanged bands delivered 4.1σ, matching the power calc).
+16. **Gauge scope ends where the headline physics begins** (C4897, Exp203): never extend a
+    gauge into the regime the measured phenomenon owns (a records-returned bound applied at
+    long storage MUST fail whenever bath-forgetting — the thing being measured — is
+    present). A gauge that cannot pass when the physics works is a design error, not a
+    check. Sibling rule: single-basis gates are fragile when the deliverable metric pools
+    bases — gate the form the deliverable uses (C4896).
