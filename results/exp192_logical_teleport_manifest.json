@@ -1,0 +1,39 @@
+{
+ "exp": 192,
+ "slug": "logical_teleport",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e68bcjeosc73fid4cg",
+ "order": [
+  [
+   "logical",
+   "0"
+  ],
+  [
+   "logical",
+   "+"
+  ],
+  [
+   "noresource",
+   "0"
+  ],
+  [
+   "noresource",
+   "+"
+  ],
+  [
+   "bare",
+   "0"
+  ],
+  [
+   "bare",
+   "+"
+  ]
+ ],
+ "prereg": {
+  "primary": "P(logical,0) >= 0.85 AND P(logical,+) >= 0.85 AND Dplus = P(+|logical)-P(+|noresource) >= 0.35 at >=5 sigma",
+  "bands": "logical 0: 0.93-0.995; logical +: 0.88-0.98; bare 0.93-0.99",
+  "falsifier": "P(+|noresource) 0.45-0.55 AND P(0|noresource) 0.45-0.55 (PRE-FLIGHT CORRECTION, selftest-caught: state teleportation has NO classical shadow \u2014 without the pair nothing flows; my prose borrowed Exp170s GATE-teleport structure where classical info rides the gate chain)",
+  "gauges": "triple-block acceptance >= 0.50"
+ }
+}
