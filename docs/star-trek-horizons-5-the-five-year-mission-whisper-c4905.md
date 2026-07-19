@@ -58,7 +58,7 @@ between a physics demonstration and an engineering primitive.
 
 ---
 
-## P2 — THE FULL REPLICATOR: scaling the logical computer (highest-confidence flight) — ✅ GADGET FLOWN + CERTIFIED (Exp213, C4905): the transversally-unreachable logical S̄ (C4901: 12/720) is REACHED on silicon by Bell-resource teleportation — |+̄⟩ → S̄|+̄⟩ (Y-eigenstate) at ⟨Ȳ⟩=0.824, 51.6σ, S-necessary & frame-necessary nulls dead. The b≠0 HLF family is unlocked. See [Exp213 status](../experiments/exp213-STATUS-certified.md) + [derivation](teleported-s-gadget-derivation-whisper-c4905.md)
+## P2 — THE FULL REPLICATOR: scaling the logical computer — ✅ COMPLETE (Exp206 b=0 + Exp213 S-gadget + Exp214 b≠0 all certified: the full BGK HLF family runs logically, error-corrected). Detail below. — ✅ GADGET FLOWN + CERTIFIED (Exp213, C4905): the transversally-unreachable logical S̄ (C4901: 12/720) is REACHED on silicon by Bell-resource teleportation — |+̄⟩ → S̄|+̄⟩ (Y-eigenstate) at ⟨Ȳ⟩=0.824, 51.6σ, S-necessary & frame-necessary nulls dead. The b≠0 HLF family is unlocked. See [Exp213 status](../experiments/exp213-STATUS-certified.md) + [derivation](teleported-s-gadget-derivation-whisper-c4905.md)
 
 **The vision**: Exp206 ran the first error-corrected computation (BGK 2D-HLF, n=4, b=0) and it
 beat bare uphill (19.7σ) and travelled to a second chip (207). But the C4901 audit proved the
