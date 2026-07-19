@@ -48,8 +48,9 @@ def circ_184live(setting):
     return qc
 
 
-def circ_187live(tbasis):
-    """control=q0, target=q1, coin=q2. c0=target; c1=control; c2=coin."""
+def circ_187live(tbasis, echo=False):
+    """control=q0, target=q1, coin=q2. c0=target; c1=control; c2=coin.
+    echo: X-[coin window]-X sandwich on the control (net identity, refocuses the idle)."""
     qc = QuantumCircuit(3, 3)
     qc.h(0)
     qc.barrier()
@@ -61,18 +62,20 @@ def circ_187live(tbasis):
     if tbasis == "X": qc.h(1)
     elif tbasis == "Y": qc.sdg(1); qc.h(1)
     qc.measure(1, 0)                          # target measured — record CLOSED
+    if echo: qc.x(0)                          # echo open
     qc.barrier()
     qc.h(2); qc.measure(2, 2)                 # THE COIN
+    if echo: qc.x(0)                          # echo close (X.X = I, frame unchanged)
     with qc.if_test((qc.clbits[2], 0)):       # heads: X-sort (coherence question)
         qc.h(0)
     qc.measure(0, 1)                          # (tails: Z-sort — which order)
     return qc
 
 
-def analyze(get, shots):
-    r = {"184": {}, "187": {}}
+def analyze(get, shots, fams=("184", "187")):
+    r = {f: {} for f in fams}
     # --- 184live: per-coin parities of (A=c2, D=c3) with swap-frame on heads
-    for coin_val, key in ((0, "heads_bell"), (1, "tails_product")):
+    for coin_val, key in (((0, "heads_bell"), (1, "tails_product")) if "184" in fams else ()):
         par = {}
         fair = {}
         marg = {}
@@ -98,12 +101,13 @@ def analyze(get, shots):
                          "A_marginal": {k: float(v) for k, v in marg.items()}}
         r["184"]["fair"] = {k: float(v) for k, v in fair.items()}
     # --- 187live: per-coin sorted target Bloch
-    for coin_val, key in ((0, "heads_X"), (1, "tails_Z")):
+    for fam187 in [f for f in fams if f.startswith("187")]:
+      for coin_val, key in ((0, "heads_X"), (1, "tails_Z")):
         sort = {0: {}, 1: {}}; nn = {0: 0, 1: 0}
         fair = {}; marg = {}
         for tb in SETTINGS_187:
             acc = {0: 0, 1: 0}; n = {0: 0, 1: 0}; heads = tot = 0; tm = tn = 0
-            for bstr, cnt in get("187", tb).items():
+            for bstr, cnt in get(fam187, tb).items():
                 b = bstr.replace(" ", "")
                 coin = int(b[-3]); t = int(b[-1]); c = int(b[-2])
                 tot += cnt
@@ -116,10 +120,10 @@ def analyze(get, shots):
                 nn[c] += n[c]
             fair[tb] = heads / tot
             marg[tb] = tm / tn if tn else 0.0
-        r["187"][key] = {"sorted": {c: {k: float(v) for k, v in sort[c].items()} for c in (0, 1)},
-                         "p1": float(nn[1] / (nn[0] + nn[1])),
-                         "T_marginal": {k: float(v) for k, v in marg.items()}}
-        r["187"]["fair"] = {k: float(v) for k, v in fair.items()}
+        r[fam187][key] = {"sorted": {c: {k: float(v) for k, v in sort[c].items()} for c in (0, 1)},
+                          "p1": float(nn[1] / (nn[0] + nn[1])),
+                          "T_marginal": {k: float(v) for k, v in marg.items()}}
+        r[fam187]["fair"] = {k: float(v) for k, v in fair.items()}
     return r
 
 
@@ -161,40 +165,92 @@ def selftest():
           "Cleared to fly.")
 
 
-def submit(backend_name, shots):
+def submit(backend_name, shots, tag=""):
     from run_exp66_qpu_partb import _get_ibm_service
     from qiskit_ibm_runtime import SamplerV2
     svc = _get_ibm_service(); backend = svc.backend(backend_name)
     circuits, order = [], []
-    for s in SETTINGS_184:
-        circuits.append(transpile(circ_184live(s), backend=backend, optimization_level=3))
-        order.append(["184", s])
-    for tb in SETTINGS_187:
-        circuits.append(transpile(circ_187live(tb), backend=backend, optimization_level=3))
-        order.append(["187", tb])
+    if tag == "b":   # 187 family only: echoed + unechoed same-job arms, coin pinned FAR
+        probe = transpile(circ_187live("X"), backend=backend, optimization_level=3)
+        lay = probe.layout.final_index_layout()
+        far = 120 if lay[0] < 60 else 10
+        while far in lay[:2]: far += 1
+        layout = [lay[0], lay[1], far]
+        print(f"pinned layout ctrl/tgt {lay[:2]}, coin far at {far}")
+        for tb in SETTINGS_187:
+            circuits.append(transpile(circ_187live(tb, echo=True), backend=backend,
+                                      initial_layout=layout, optimization_level=1))
+            order.append(["187e", tb])
+        for tb in SETTINGS_187:
+            circuits.append(transpile(circ_187live(tb, echo=False), backend=backend,
+                                      initial_layout=layout, optimization_level=1))
+            order.append(["187", tb])
+    else:
+        for s in SETTINGS_184:
+            circuits.append(transpile(circ_184live(s), backend=backend, optimization_level=3))
+            order.append(["184", s])
+        for tb in SETTINGS_187:
+            circuits.append(transpile(circ_187live(tb), backend=backend, optimization_level=3))
+            order.append(["187", tb])
     sampler = SamplerV2(mode=backend); job = sampler.run(circuits, shots=shots)
     manifest = {"exp": 188, "slug": "live_choice", "backend": backend_name, "shots": shots,
-                "job_id": job.job_id(), "order": order,
+                "job_id": job.job_id(), "order": order, "tag": tag,
+                "prereg_b": ({"echoed": "W+ > 0 at >=3 sigma (band +0.12..+0.35); W- < 0 at >=5 sigma "
+                                        "(band -0.80..-0.45); tails Z-sort F >= 0.80",
+                              "unechoed_replica": "|W+|,|W-| <= 0.10 within-job (confirms the window diagnosis)",
+                              "blindness_far_coin": "target split by coin < 0.03 per basis",
+                              "coin": "P(heads) 0.46-0.54"} if tag == "b" else None),
                 "prereg": {"p184": "F(heads) > 1/2 at >=5 sigma, band 0.72-0.86; F(tails) 0.18-0.32",
                            "p187": "heads: W+ > 0 at >=3 sigma (band +0.05..+0.28), W- < 0 at >=5 sigma "
                                    "(band -0.80..-0.40); tails: definite orders F >= 0.80",
                            "coin": "P(heads) 0.46-0.54 every circuit",
                            "future_blindness": "closed-record marginal split by coin < 0.03 per basis"}}
-    out = os.path.join(HERE, "..", "results", "exp188_live_choice_manifest.json")
+    out = os.path.join(HERE, "..", "results", f"exp188{tag}_live_choice_manifest.json")
     json.dump(manifest, open(out, "w"), indent=1)
     print(f"submitted {job.job_id()} ({len(circuits)} circuits, {shots} shots) -> {out}")
 
 
-def decode():
+def decode(tag=""):
     from run_exp66_qpu_partb import _get_ibm_service
-    mp = os.path.join(HERE, "..", "results", "exp188_live_choice_manifest.json")
+    mp = os.path.join(HERE, "..", "results", f"exp188{tag}_live_choice_manifest.json")
     svc = _get_ibm_service(); man = json.load(open(mp)); res = svc.job(man["job_id"]).result()
     shots = man["shots"]
     raw = {}
     for idx, (fam, s) in enumerate(man["order"]):
         r0 = res[idx]; reg = list(r0.data.keys())[0]
         raw[(fam, s)] = getattr(r0.data, reg).get_counts()
-    r = analyze(lambda fam, s: raw[(fam, s)], shots)
+    fams = tuple(sorted(set(f for f, _ in raw.keys())))
+    r = analyze(lambda fam, s: raw[(fam, s)], shots, fams)
+    if tag == "b":
+        he, hu = r["187e"]["heads_X"], r["187"]["heads_X"]
+        tze, tzu = r["187e"]["tails_Z"], r["187"]["tails_Z"]
+        seW = 1.0 / np.sqrt(shots * 0.5 * 0.75); seWm = 1.0 / np.sqrt(shots * 0.5 * 0.25)
+        fABe, fBAe = _fid(tze["sorted"][0], BLOCH_AB), _fid(tze["sorted"][1], BLOCH_BA)
+        tspread = max(abs(he["T_marginal"][s] - r["187e"]["tails_Z"]["T_marginal"][s]) for s in SETTINGS_187)
+        print(f"Exp188b LIVE CHOICE (echoed) decode | job {man['job_id']}")
+        print(f"  ECHOED:   W+<Z> = {he['sorted'][0]['Z']:+.3f} ({he['sorted'][0]['Z']/seW:+.0f} sigma) | "
+              f"W-<Z> = {he['sorted'][1]['Z']:+.3f} ({abs(he['sorted'][1]['Z'])/seWm:.0f} sigma) | "
+              f"tails Z-sort {fABe:.3f}/{fBAe:.3f}")
+        print(f"  UNECHOED (same job): W+ = {hu['sorted'][0]['Z']:+.3f}  W- = {hu['sorted'][1]['Z']:+.3f}")
+        print(f"  COINS: " + " ".join(f"{v:.3f}" for v in list(r['187e']['fair'].values()) + list(r['187']['fair'].values())))
+        print(f"  FUTURE-BLINDNESS (far coin): {tspread:.4f}")
+        e_ok = (he["sorted"][0]["Z"] > 0 and he["sorted"][0]["Z"] / seW >= 3
+                and he["sorted"][1]["Z"] < 0 and abs(he["sorted"][1]["Z"]) / seWm >= 5
+                and fABe >= 0.80 and fBAe >= 0.80)
+        u_ok = abs(hu["sorted"][0]["Z"]) <= 0.10 and abs(hu["sorted"][1]["Z"]) <= 0.10
+        b_ok = tspread < 0.03
+        c_ok = all(0.46 <= v <= 0.54 for v in list(r["187e"]["fair"].values()) + list(r["187"]["fair"].values()))
+        print(f"\nECHOED: {'HELD — the live order-choice survives WITH the echo' if e_ok else 'NOT HELD'} | "
+              f"UNECHOED replica: {'null as diagnosed' if u_ok else 'UNEXPECTED signal'} | "
+              f"blindness {'clean' if b_ok else 'CHECK'} | coins {'fair' if c_ok else 'BIASED'}")
+        ok = e_ok and u_ok and c_ok and b_ok
+        print(f"VERDICT: {'THE ORDER-CHOICE IS LIVE — with the echo, a coin flipped after the record closed decides between definite and indefinite causal order' if ok else 'NOT HELD (honest accounting above)'}")
+        out = {"job_id": man["job_id"], "results": r, "echoed_ok": bool(e_ok),
+               "unechoed_null_ok": bool(u_ok), "blind_ok": bool(b_ok), "coin_ok": bool(c_ok),
+               "verdict_ok": bool(ok)}
+        json.dump(out, open(os.path.join(HERE, "..", "results", "exp188b_live_choice_decode.json"), "w"), indent=1)
+        print("-> results/exp188b_live_choice_decode.json")
+        return
     hb, tp = r["184"]["heads_bell"], r["184"]["tails_product"]
     hx, tz = r["187"]["heads_X"], r["187"]["tails_Z"]
     se_h = 0.75 / np.sqrt(shots * 0.5)
@@ -238,8 +294,9 @@ if __name__ == "__main__":
     ap.add_argument("--selftest", action="store_true"); ap.add_argument("--submit", action="store_true")
     ap.add_argument("--decode", action="store_true")
     ap.add_argument("--backend", default="ibm_fez"); ap.add_argument("--shots", type=int, default=8000)
+    ap.add_argument("--tag", default="")
     a = ap.parse_args()
     if a.selftest: selftest()
-    elif a.submit: submit(a.backend, a.shots)
-    elif a.decode: decode()
+    elif a.submit: submit(a.backend, a.shots, a.tag)
+    elif a.decode: decode(a.tag)
     else: ap.print_help()
