@@ -150,3 +150,30 @@ Fixed → new "Time" wing header with the four wing-1-style stats); museum count
 
 Vault first (small, pure idiom reuse, ~1 short cycle) → Past Is Not Fixed second (the flagship,
 one full cycle with the spec above as its contract).
+
+---
+
+# ROUND-2 GAP REVIEW (C4885) — all three plans (Vault · Past-Is-Not-Fixed · Shields), pre-build
+
+## Cross-plan gaps found and fixed
+
+| # | plan | gap | fix (binding for the builds) |
+|---|------|-----|------------------------------|
+| R2-1 | Past-Not-Fixed | the "no-signaling strip" doesn't generalize to room 2 (185 has no late choice) | rename to **the AUDIT STRIP**: per-room audit with its own measured number — R1: marginal spread 0.0191 · R2: wrong-law ratio 0.469 vs theory 0.500 · R3: invasive-vs-INRM 0.021 · R4: pinned spread 0.0162 |
+| R2-2 | Past-Not-Fixed | Exp188/188b (live choices) post-date the plan — the quartet now stands on LIVE quantum coins | rooms 1 and 4 gain a **LIVE COIN badge** (184-live 23σ; 187-live echoed +20/26σ) with one-line explanations; the court's how-we-know receipt cites the coin upgrade |
+| R2-3 | Vault | stream mismatch rates under-specified | derive from measured correlations: singles (1−0.028)/2 ≈ 48.6% · group 1−0.92 ≈ 8% · bellAB Bob-alone (1−0.902)/2 ≈ 4.9% (the leak!) · bellAB group ≈ 48.3%; Mermin gauge scale 0–4 with LHV line at 2 and marker 3.369 |
+| R2-4 | Shields | 190's failure story risks reading as decoration | the pays-curve panel itself renders the failed flight's points (hollow markers) — the failure is IN the data view, not only the court |
+| R2-5 | all three | duplicated boilerplate risk (3 pages) | shared idiom contract: identical topbar/theme/CSS base copied from relay-key (the most recent audited page); components kept file-local (museum pages stay self-contained — no shared JS file, by design) |
+| R2-6 | all three | stub-run coverage | each build must stub-run EVERY selector state: Vault 3×3=9 · Shields 4 stages · PNF 4 rooms × their toggles (≥10 states) |
+
+## Standardized pre-dev structure (applies to each build)
+
+1. **Data kernel first**: one JS object per page, every number traceable to a decode JSON or
+   dated prereg; sanity asserts inline (thrown at load in dev, removed = never — they're cheap).
+2. **Component pass**: selector seg → SVG viz helpers → verdict boxes → court receipts.
+3. **Copy pass**: fences and honest-ledger receipts written from the findings, not from memory.
+4. **Verify pass**: extract `<script>`, stub-DOM run all states, grep-check every §2 number
+   appears in the page, card added, count updated.
+5. **Build order**: Vault → Shields → Past-Is-Not-Fixed (flagship last, idioms warmest).
+
+Plans v2 complete; builds may proceed.
