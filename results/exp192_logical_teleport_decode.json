@@ -1,0 +1,38 @@
+{
+ "job_id": "d9e68bcjeosc73fid4cg",
+ "results": {
+  "logical_0": {
+   "acceptance": 0.63275,
+   "success": 0.9802449624654287,
+   "n_acc": 5062
+  },
+  "logical_+": {
+   "acceptance": 0.7075,
+   "success": 0.9932862190812721,
+   "n_acc": 5660
+  },
+  "noresource_0": {
+   "acceptance": 0.724625,
+   "success": 0.4976712092461618,
+   "n_acc": 5797
+  },
+  "noresource_+": {
+   "acceptance": 0.76825,
+   "success": 0.5003254149040026,
+   "n_acc": 6146
+  },
+  "bare_0": {
+   "acceptance": 1.0,
+   "success": 0.962375
+  },
+  "bare_+": {
+   "acceptance": 1.0,
+   "success": 0.92375
+  }
+ },
+ "D_plus": 0.4929608041772695,
+ "sigma_D": 76.19709120555798,
+ "primary_ok": true,
+ "falsifier_ok": true,
+ "verdict_ok": true
+}
