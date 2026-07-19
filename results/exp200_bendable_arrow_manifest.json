@@ -1,0 +1,32 @@
+{
+ "exp": 200,
+ "slug": "bendable_arrow",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e8gf9htsac739dv540",
+ "order": [
+  "base_2",
+  "base_4",
+  "base_8",
+  "bend_0.25_2",
+  "bend_0.5_2",
+  "bend_0.75_2",
+  "bend_1.0_2",
+  "unbend_0.25_2",
+  "unbend_0.5_2",
+  "unbend_0.75_2",
+  "unbend_1.0_2",
+  "bend_1.0_4",
+  "bend_1.0_8",
+  "unbend_1.0_4",
+  "unbend_1.0_8"
+ ],
+ "prereg": {
+  "anchors": "C(base_2) in [0.70,0.90] (194: 0.802); base_4 within 0.10 of 0.657; base_8 within 0.10 of 0.457",
+  "bend": "C_bend(theta,2us) monotone decreasing; C_bend(pi) <= 0.10; |C_bend - C_base*cos(theta/2)| <= 0.10 per dose",
+  "bend_back": "C_unbend(pi,2us) - C_bend(pi,2us) >= 0.40 at >=5 sigma (coherence returns from full kill); max-min of C_unbend over theta <= 0.15 (dose-independent)",
+  "meta_arrow": "Rec(T)=C_unbend(pi,T)/C_base(T) non-increasing in T; Rec(2us) >= 0.70",
+  "gauges": "unbend coin P(1) <= 0.10 (record returned); bend coin P(1) tracks sin^2(theta/2)/2 within 0.06",
+  "budget_check": "revival contrast ~0.6 vs floor ~0 (C4887 rule; trivial)"
+ }
+}
