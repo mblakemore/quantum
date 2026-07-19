@@ -1,0 +1,66 @@
+{
+ "exp": 196,
+ "slug": "logical_chsh",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e79thhtsac739dteu0",
+ "order": [
+  [
+   "logical",
+   "ZZ"
+  ],
+  [
+   "logical",
+   "ZX"
+  ],
+  [
+   "logical",
+   "XZ"
+  ],
+  [
+   "logical",
+   "XX"
+  ],
+  [
+   "nocx",
+   "ZZ"
+  ],
+  [
+   "nocx",
+   "ZX"
+  ],
+  [
+   "nocx",
+   "XZ"
+  ],
+  [
+   "nocx",
+   "XX"
+  ],
+  [
+   "bare",
+   "ZZ"
+  ],
+  [
+   "bare",
+   "ZX"
+  ],
+  [
+   "bare",
+   "XZ"
+  ],
+  [
+   "bare",
+   "XX"
+  ]
+ ],
+ "prereg": {
+  "primary": "S_L1(logical) > 2 at >=5 sigma; band [2.40, 2.85] (Exp191 contrast predicts ~2.79; >2.8284 excess flags systematics)",
+  "internal_control": "S_L2(logical) in [1.20, 1.48] (product pair AT sqrt2, BELOW classical bound, same shots)",
+  "nulls": "|ZX_L1| and |XZ_L1| (logical) <= 0.15",
+  "falsifier": "S_L1(nocx) in [-0.25, 0.30] AND S_L2(nocx) in [1.20, 1.48]",
+  "reference": "S_L1(bare) in [2.45, 2.80]",
+  "gauges": "per-basis block-pair acceptance >= 0.70",
+  "budget_check": "lambda_req 0.707 vs Exp191 measured ~0.985 (C4887 rule)"
+ }
+}
