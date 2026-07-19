@@ -1,0 +1,22 @@
+{
+ "exp": 186,
+ "slug": "leggett_garg",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e4jsineu4c739o0shg",
+ "order": [
+  "c12",
+  "c13",
+  "c23_plus",
+  "c23_minus",
+  "c13_deph",
+  "c23_invasive"
+ ],
+ "prereg": {
+  "primary": "K3 (INRM C23) > 1 at >=5 sigma; band 1.30-1.48",
+  "correlators": "C12 +0.42..+0.52; C23 +0.40..+0.52; C13 -0.52..-0.40",
+  "macroreal_control": "K3_deph in 0.62-0.88 (ideal 0.75), UNDER the bound",
+  "clumsiness_audit": "|C23_inrm - C23_inv| < 0.06",
+  "bookkeeping": "kept_sum in 0.95-1.05"
+ }
+}
