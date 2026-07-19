@@ -1,0 +1,24 @@
+{
+ "exp": 194,
+ "slug": "arrow_meter",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e6q6ineu4c739o3gjg",
+ "order": [
+  "T0",
+  "echo_1",
+  "echo_2",
+  "echo_4",
+  "echo_8",
+  "raw_1",
+  "raw_2",
+  "raw_4",
+  "raw_8"
+ ],
+ "prereg": {
+  "primary": "A(T) strictly increasing (steps >=2 sigma) AND R non-increasing >=2/3 steps",
+  "bands": "A: 1us 0.01-0.08, 2us 0.02-0.12, 4us 0.06-0.25, 8us 0.15-0.45; R(1us) 0.45-0.90",
+  "deliverable": "tau_arrow (A crosses 1/2, interpolated/extrapolated labeled)",
+  "gauge": "C(T0) >= 0.97"
+ }
+}
