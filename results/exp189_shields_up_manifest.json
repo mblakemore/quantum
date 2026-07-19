@@ -1,0 +1,20 @@
+{
+ "exp": 189,
+ "slug": "shields_up",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e561cjeosc73fibmn0",
+ "order": [
+  "L00_Z",
+  "Lpp_X",
+  "bare_Z",
+  "bare_X",
+  "inject_Z",
+  "inject_X"
+ ],
+ "prereg": {
+  "detection": "injected rejection >= 0.90 both bases; accepted-and-wrong <= 0.05",
+  "acceptance": "clean arms 0.80-0.95 per basis",
+  "shield": "accepted logical err per qubit <= bare err per qubit; ratio band 0.2-1.0 (stage-i caveat: bare is gate-lighter; >1 prices stage ii, does not kill the arc)"
+ }
+}
