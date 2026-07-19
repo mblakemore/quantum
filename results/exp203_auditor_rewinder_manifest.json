@@ -1,0 +1,264 @@
+{
+ "exp": 203,
+ "slug": "auditor_and_rewinder",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9ee1akjeosc73fim3kg",
+ "order": [
+  [
+   "bb",
+   0.0,
+   2
+  ],
+  [
+   "bb",
+   0.25,
+   2
+  ],
+  [
+   "bb",
+   0.5,
+   2
+  ],
+  [
+   "bb",
+   0.75,
+   2
+  ],
+  [
+   "bb",
+   1.0,
+   2
+  ],
+  [
+   "bb",
+   0.0,
+   4
+  ],
+  [
+   "bb",
+   1.0,
+   4
+  ],
+  [
+   "bb",
+   0.0,
+   8
+  ],
+  [
+   "bb",
+   1.0,
+   8
+  ],
+  [
+   "bu",
+   0.0,
+   2
+  ],
+  [
+   "bu",
+   0.25,
+   2
+  ],
+  [
+   "bu",
+   0.5,
+   2
+  ],
+  [
+   "bu",
+   0.75,
+   2
+  ],
+  [
+   "bu",
+   1.0,
+   2
+  ],
+  [
+   "bu",
+   0.0,
+   4
+  ],
+  [
+   "bu",
+   1.0,
+   4
+  ],
+  [
+   "bu",
+   0.0,
+   8
+  ],
+  [
+   "bu",
+   1.0,
+   8
+  ],
+  [
+   "lc",
+   0.0,
+   2
+  ],
+  [
+   "lc",
+   0.25,
+   2
+  ],
+  [
+   "lc",
+   0.5,
+   2
+  ],
+  [
+   "lc",
+   0.75,
+   2
+  ],
+  [
+   "lc",
+   1.0,
+   2
+  ],
+  [
+   "lc",
+   0.0,
+   4
+  ],
+  [
+   "lc",
+   1.0,
+   4
+  ],
+  [
+   "lc",
+   0.0,
+   8
+  ],
+  [
+   "lc",
+   1.0,
+   8
+  ],
+  [
+   "lu",
+   0.0,
+   2
+  ],
+  [
+   "lu",
+   0.25,
+   2
+  ],
+  [
+   "lu",
+   0.5,
+   2
+  ],
+  [
+   "lu",
+   0.75,
+   2
+  ],
+  [
+   "lu",
+   1.0,
+   2
+  ],
+  [
+   "lu",
+   0.0,
+   4
+  ],
+  [
+   "lu",
+   1.0,
+   4
+  ],
+  [
+   "lu",
+   0.0,
+   8
+  ],
+  [
+   "lu",
+   1.0,
+   8
+  ]
+ ],
+ "seed_transpiler": 0,
+ "audit_2q": {
+  "bb_T2": {
+   "0.0": 0,
+   "0.25": 2,
+   "0.5": 2,
+   "0.75": 2,
+   "1.0": 1
+  },
+  "bb_T4": {
+   "0.0": 0,
+   "1.0": 1
+  },
+  "bb_T8": {
+   "0.0": 0,
+   "1.0": 1
+  },
+  "bu_T2": {
+   "0.0": 0,
+   "0.25": 4,
+   "0.5": 4,
+   "0.75": 4,
+   "1.0": 2
+  },
+  "bu_T4": {
+   "0.0": 0,
+   "1.0": 2
+  },
+  "bu_T8": {
+   "0.0": 0,
+   "1.0": 2
+  },
+  "lc_T2": {
+   "0.0": 2,
+   "0.25": 4,
+   "0.5": 4,
+   "0.75": 4,
+   "1.0": 3
+  },
+  "lc_T4": {
+   "0.0": 2,
+   "1.0": 3
+  },
+  "lc_T8": {
+   "0.0": 2,
+   "1.0": 3
+  },
+  "lu_T2": {
+   "0.0": 2,
+   "0.25": 6,
+   "0.5": 6,
+   "0.75": 6,
+   "1.0": 4
+  },
+  "lu_T4": {
+   "0.0": 2,
+   "1.0": 4
+  },
+  "lu_T8": {
+   "0.0": 2,
+   "1.0": 4
+  }
+ },
+ "prereg": {
+  "whiteboard_correction": "original U3 wording (shield declines on bath clock) REFUTED pre-flight by derivation: the syndrome is the BLOCK's record; shield predicted CLOCK-FREE vs the coin",
+  "G1_anchors": "C_bb(0,2) in [0.65,0.92] (200b band); X1_unpost_lc(0,2) >= 0.50 at >=5 sigma; acc_lc(0,2) >= 0.70",
+  "G2_event_universality": "|C_bb(t,2)/C_bb(0,2) - cos(t*pi/2)| <= 0.10 all t; |X1u_lc(t,2)/X1u_lc(0,2) - C_bb(t,2)/C_bb(0,2)| <= 0.12 all t (logical dephases like bare \u2014 same event, two substrates)",
+  "G3_two_revivals": "at (pi,2us): AUDITOR X1p_lc - X1u_lc >= 0.5*X1p_lc(0,2) at >=5 sigma; REWINDER X1u_lu(pi) - X1u_lc(pi) >= 0.5*X1u_lu(0,2) at >=5 sigma; bare revival C_bu-C_bb >= 0.5*C_bb(0,2) at >=5 sigma (200b regression)",
+  "G4_one_ledger": "|acc_lc(t,2)/acc_lc(0,2) - (1+kappa(t))/2| <= 0.08 for t in {0.25,0.5,0.75,1.0}, kappa(t)=C_bb(t,2)/C_bb(0,2) \u2014 the shield's rejection column priced by the arrow's coherence column, parametric, no fit to theta",
+  "G5_clock_discrimination": "Rec_rw(T)=X1u_lu(pi,T)/X1u_lu(0,T) non-increasing with Rec_rw(8) <= Rec_rw(2)-0.10 at >=3 sigma; Rec_sh(T)=X1p_lc(pi,T)/X1p_lc(0,T) flat (|Rec_sh(8)-Rec_sh(2)| <= 0.15); gap Rec_sh(8)-Rec_rw(8) >= 0.25 at >=5 sigma",
+  "G6_the_refund": "acc_lu(pi,2)/acc_lu(0,2) >= 0.90 AND [acc_lu(pi,2)/acc_lu(0,2)] - [acc_lc(pi,2)/acc_lc(0,2)] >= 0.25 at >=5 sigma (uncompute the record -> the auditor finds nothing)",
+  "G7_gauges": "coin occupancy tracks sin^2(t*pi/2)/2 within 0.06 in bb and lc; records returned coin P1 <= 0.15 in bu and lu everywhere",
+  "registered_verdict": "conjunction G1-G7; the U3 ANSWER = G4+G5 jointly (one ledger, two clocks -> QEC is not time reversal, it is the ledger's auditor)",
+  "budget_predictions": "acc_lc(pi,2)/acc_lc(0,2) in [0.42,0.58]; ledger residuals <= 0.06 mean; Rec_rw(8) in [0.25,0.60] (200b bare 0.484); Rec_sh(8) in [0.85,1.05]; clock gap in [0.30,0.65]"
+ }
+}
