@@ -1,0 +1,39 @@
+{
+ "exp": 188,
+ "slug": "live_choice",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e54qaneu4c739o1f3g",
+ "order": [
+  [
+   "184",
+   "ZZ"
+  ],
+  [
+   "184",
+   "XX"
+  ],
+  [
+   "184",
+   "YY"
+  ],
+  [
+   "187",
+   "X"
+  ],
+  [
+   "187",
+   "Y"
+  ],
+  [
+   "187",
+   "Z"
+  ]
+ ],
+ "prereg": {
+  "p184": "F(heads) > 1/2 at >=5 sigma, band 0.72-0.86; F(tails) 0.18-0.32",
+  "p187": "heads: W+ > 0 at >=3 sigma (band +0.05..+0.28), W- < 0 at >=5 sigma (band -0.80..-0.40); tails: definite orders F >= 0.80",
+  "coin": "P(heads) 0.46-0.54 every circuit",
+  "future_blindness": "closed-record marginal split by coin < 0.03 per basis"
+ }
+}
