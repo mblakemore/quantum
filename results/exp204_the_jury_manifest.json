@@ -1,0 +1,181 @@
+{
+ "exp": 204,
+ "slug": "the_jury",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9eegkcjeosc73fimk10",
+ "order": [
+  [
+   "bend",
+   1,
+   0.0,
+   0
+  ],
+  [
+   "bend",
+   1,
+   0.25,
+   0
+  ],
+  [
+   "bend",
+   1,
+   0.5,
+   0
+  ],
+  [
+   "bend",
+   1,
+   0.75,
+   0
+  ],
+  [
+   "bend",
+   1,
+   1.0,
+   0
+  ],
+  [
+   "bend",
+   2,
+   0.0,
+   0
+  ],
+  [
+   "bend",
+   2,
+   0.25,
+   0
+  ],
+  [
+   "bend",
+   2,
+   0.5,
+   0
+  ],
+  [
+   "bend",
+   2,
+   0.75,
+   0
+  ],
+  [
+   "bend",
+   2,
+   1.0,
+   0
+  ],
+  [
+   "bend",
+   3,
+   0.0,
+   0
+  ],
+  [
+   "bend",
+   3,
+   0.25,
+   0
+  ],
+  [
+   "bend",
+   3,
+   0.5,
+   0
+  ],
+  [
+   "bend",
+   3,
+   0.75,
+   0
+  ],
+  [
+   "bend",
+   3,
+   1.0,
+   0
+  ],
+  [
+   "ladder",
+   3,
+   0.5,
+   1
+  ],
+  [
+   "ladder",
+   3,
+   0.5,
+   2
+  ],
+  [
+   "ladder",
+   3,
+   0.5,
+   3
+  ],
+  [
+   "ladder",
+   3,
+   1.0,
+   1
+  ],
+  [
+   "ladder",
+   3,
+   1.0,
+   2
+  ],
+  [
+   "ladder",
+   3,
+   1.0,
+   3
+  ]
+ ],
+ "seed_transpiler": 0,
+ "audit_2q": {
+  "bend_N1_k0": {
+   "0.0": 5,
+   "0.25": 5,
+   "0.5": 5,
+   "0.75": 5,
+   "1.0": 5
+  },
+  "bend_N2_k0": {
+   "0.0": 6,
+   "0.25": 6,
+   "0.5": 6,
+   "0.75": 6,
+   "1.0": 6
+  },
+  "bend_N3_k0": {
+   "0.0": 9,
+   "0.25": 9,
+   "0.5": 9,
+   "0.75": 9,
+   "1.0": 9
+  },
+  "ladder_N3_k1": {
+   "0.5": 12,
+   "1.0": 12
+  },
+  "ladder_N3_k2": {
+   "0.5": 15,
+   "1.0": 15
+  },
+  "ladder_N3_k3": {
+   "0.5": 18,
+   "1.0": 18
+  }
+ },
+ "prereg": {
+  "G1_anchors": "C(N,0) >= 0.75 each N at >=5 sigma",
+  "G2_exponent_law": "kappa(t)=C(1,t)/C(1,0); |C(N,t)/C(N,0) - kappa^N| <= 0.10 at interior doses for N=2,3; ratios strictly decreasing in N at t=0.5,0.75",
+  "G3_the_jury": "theta=pi: C(3,k)/C(3,0) <= 0.15 for k=0,1,2 AND >= 0.50 at >=5 sigma for k=3; jump k2->k3 >= 0.40 at >=5 sigma",
+  "G4_partial_ladder": "theta=pi/2: |C(3,k)/C(3,0) - kappa(pi/2)^(3-k)| <= 0.12, k=0..3",
+  "G5_consensus": "N=3 bend pooled pairwise agreement |A - (1-s2+s2^2)| <= 0.06 every dose; A(pi) >= 0.90",
+  "G6_gauges": "record p1 tracks sin^2/2 within 0.06 (bend); uncomputed <= 0.10; 2q theta-uniform per family (anti-folding, 203b doctrine)",
+  "registered_verdict": "G1-G6; U5 = G2+G5; U7 = G3+G4",
+  "budget_predictions": "C(1,0) in [0.85,0.98]; kappa(pi/2) in [0.63,0.73]; jury jump in [0.50,0.85]; exponent residuals <= 0.06; A(pi/2) in [0.69,0.80]"
+ }
+}
