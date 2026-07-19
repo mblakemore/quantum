@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Crect%20x%3D%224%22%20y%3D%227%22%20width%3D%228%22%20height%3D%226%22%20rx%3D%221.5%22%20fill%3D%22%2345d6cf%22%2F%3E%3Cpath%20d%3D%22M6%207V5a2%202%200%200%201%204%200v2%22%20fill%3D%22none%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.4%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Vault — a secret neither officer can read alone | The Quantum Museum</title>
+<meta name="description" content="Quantum secret sharing (HBB99) on ibm_fez: Alice's secret opens to Bob and Charlie together (92%) and to neither alone (coin flips) — enforced by GHZ marginal structure at 61σ. Swap the resource for a Bell pair and the vault inverts. Exp183.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge); color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 10px 12px 0; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .seglbl { font-family:var(--mono); font-size:11px; color:var(--ink-3); letter-spacing:.06em; text-transform:uppercase; display:block; margin-bottom:3px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1.15fr; gap:18px; align-items:start; }
+  @media (max-width:680px){ .grid2 { grid-template-columns:1fr; } }
+  .stream { font-family:var(--mono); font-size:12.5px; line-height:1.7; margin-top:6px; }
+  .stream .lbl { color:var(--ink-3); font-size:11px; letter-spacing:.06em; text-transform:uppercase; }
+  .stream .row { white-space:nowrap; overflow-x:auto; }
+  .stream .who { display:inline-block; width:64px; color:var(--ink-2); }
+  .stream .b { display:inline-block; width:13px; text-align:center; color:var(--ink-2); }
+  .stream .b.miss { color:var(--amber); font-weight:700; background:color-mix(in srgb,var(--amber) 14%,transparent); border-radius:3px; }
+  .stream .note { color:var(--ink-3); font-size:11px; margin-top:4px; max-width:52ch; white-space:normal; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:16px; font-weight:700; }
+  .val.good { color:var(--good); } .val.bad { color:var(--bad); } .val.cy { color:var(--cyan); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a><span class="wingtag">/ quantum network</span><span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Vault<span class="hl">.</span></h1>
+    <p class="lede">Alice locks a secret so that <b>both officers together</b> can read it — and
+      <b>neither alone</b> can. Not by policy: by the marginal structure of a three-way entangled
+      state. Look over Bob's shoulder: coin flips. Charlie's: coin flips. Turn both keys: the
+      secret reads out at 92%. Then swap the GHZ for a mere Bell pair and watch the vault
+      <em>invert</em> — one officer reads everything, and the group secret dies.</p>
+    <span class="scope">Scope: <b>HBB99 quantum secret sharing</b> over GHZ (Exp183) — raw sifted bits,
+      information-theoretic layer; blindness is the GHZ two-party-marginal theorem, measured.</span>
+  </header>
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Turn the keys</h2>
+    <p class="sub">11 circuits, one job · ibm_fez · 8000 shots · job d9e3cqsjeosc73fi9lqg</p>
+    <p class="primer"><b>How to read it.</b> Pick a viewer and a resource. The stream shows Alice's
+      secret bits against that viewer's best reconstruction — mismatches flagged at the <em>measured</em>
+      rate. The Mermin gauge certifies the resource: anything classical caps at 2; the GHZ reads 3.369.
+      Now try the Bell-pair resource and look over Bob's shoulder.</p>
+    <span class="seglbl">the viewer</span><div class="seg" id="segV"></div>
+    <span class="seglbl">the resource</span><div class="seg" id="segR"></div>
+    <div class="grid2">
+      <figure aria-label="Mermin certificate gauge"><svg id="gauge" viewBox="0 0 220 260"></svg></figure>
+      <div><div class="stream" id="stream"></div><p class="story" id="story"></p></div>
+    </div>
+    <div class="verdict" id="vbox"></div>
+  </section>
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">the twist: the blindness is a theorem, and the wrong resource proves it</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">WHY NEITHER OFFICER CAN PEEK</div>
+        <p>Trace out any single party of a GHZ state and what remains is maximally mixed — a
+        theorem, not a design goal. Measured: the worst single-officer correlation with Alice is
+        0.028; alone, each officer's reconstruction runs at a 48.6% error rate — statistically a
+        coin. Together (XOR of both keys, per the sifting rule a = b⊕c⊕σ): 8%. <code>M = 3.369
+        vs the classical bound 2 — 61σ</code></p></div>
+      <div class="receipt"><div class="rt">THE ANTI-PATTERN</div>
+        <p>Replace the GHZ with a Bell pair between Alice and Bob and the scheme <em>inverts</em>:
+        Bob alone reads Alice's every bit at a 4.9% error rate (⟨AB⟩ = +0.902 — total leak) while
+        the group reconstruction collapses to 48.3%. Wrong entanglement topology is not weaker
+        security — it is the complement of the protocol, both failure modes in one dataset.</p></div>
+      <div class="receipt"><div class="rt">THE DISCARDED ROUNDS TALK</div>
+        <p>The sifting rule discards one-Y and three-Y basis rounds (ideal correlation: exactly 0).
+        Measured: +0.096 / −0.101 — a real ~9σ residual from coherent GHZ-prep imperfection.
+        Harmless to the protocol (those rounds are thrown away by design), and kept on display:
+        should-be-zero sectors are free diagnostics.</p></div>
+      <div class="receipt"><div class="rt">WHY IT MATTERS &amp; THE FENCE</div>
+        <p>Two-officer authorization enforced by physics — the network wing's first multi-party
+        cryptographic primitive beyond key distribution. Fence: 3 qubits, one die; raw sifted bits
+        (no authentication, error correction, or privacy amplification); deterministic per-circuit
+        bases. <code>Exp183 · job d9e3cqsjeosc73fi9lqg</code></p></div>
+    </div>
+  </section>
+  <div class="foot">
+    <span>Exp183 · ibm_fez · 11 circuits · 8000 shots</span><span>C4885 · 2026-07-19</span>
+    <a href="../subspace-channel/">← keys</a><a href="../relay-key/">← the relay key</a><a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+<script>
+"use strict";
+// measured: recon 0.920 avg -> group mismatch 8.0%; blindness 0.028 -> singles 48.6%;
+// bellAB: <AB>=0.902 -> bob-alone 4.9%; group 48.3%; C uncorrelated -> 50%. noghz: all 50%.
+const RES={
+ ghz:{lbl:"GHZ (the protocol)",M:3.369,rates:{bob:0.486,charlie:0.486,both:0.080},
+   story:"<b>The vault as designed.</b> The Mermin certificate reads 3.369 — 61σ past anything classical — and the marginal theorem does the rest: each officer alone sees noise; both keys together open the secret at 92%.",cert:true},
+ bell:{lbl:"Bell pair (anti-pattern)",M:null,rates:{bob:0.049,charlie:0.500,both:0.483},
+   story:"<b>The wrong resource.</b> A Bell pair between Alice and Bob only: now Bob reads the secret ALONE at 95% — total leak — while Charlie sees noise and the two-key reconstruction is dead. The inversion is the proof that the GHZ topology, not entanglement per se, is the vault.",cert:false},
+ none:{lbl:"nothing (null)",M:0.003,rates:{bob:0.500,charlie:0.500,both:0.500},
+   story:"<b>No resource.</b> Product states: every viewer, every combination — coin flips. M = 0.003.",cert:false}};
+const VIEWERS={bob:"Bob alone",charlie:"Charlie alone",both:"both together"};
+let curV="bob", curR="ghz";
+const SVGNS="http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function drawGauge(){
+  const g=document.getElementById("gauge"); g.innerHTML="";
+  const gx=110,T=22,B=222,LO=0,HI=4; const gy=v=>B-(B-T)*(v-LO)/(HI-LO);
+  el(g,"text",{x:gx,y:12,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="Mermin certificate M";
+  el(g,"line",{x1:gx,y1:T,x2:gx,y2:B,style:"stroke:var(--edge-2);stroke-width:3"});
+  [[0,"0"],[1,"1"],[3,"3"],[4,"4"]].forEach(t=>{el(g,"line",{x1:gx-20,y1:gy(t[0]),x2:gx+20,y2:gy(t[0]),style:"stroke:var(--edge);stroke-width:1"});
+    el(g,"text",{x:gx-26,y:gy(t[0])+4,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"}).textContent=t[1];});
+  el(g,"line",{x1:gx-30,y1:gy(2),x2:gx+34,y2:gy(2),style:"stroke:var(--bad);stroke-width:2.5;stroke-dasharray:6 4"});
+  el(g,"text",{x:gx+38,y:gy(2)+4,style:"fill:var(--bad);font-family:var(--mono);font-size:10px"}).textContent="classical max 2";
+  const M=RES[curR].M;
+  if(M===null){
+    el(g,"text",{x:gx,y:gy(2.9),"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent="—";
+    el(g,"text",{x:gx,y:B+22,"text-anchor":"middle",style:"fill:var(--bad);font-family:var(--mono);font-size:10.5px"}).textContent="not a GHZ resource";
+  } else {
+    const c=M>2?"var(--good)":"var(--bad)";
+    el(g,"circle",{cx:gx,cy:gy(M),r:11,style:`fill:${c};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${c})`});
+    el(g,"text",{x:gx,y:gy(M)-18,"text-anchor":"middle",style:`fill:${c};font-family:var(--mono);font-size:15px;font-weight:700`}).textContent=M.toFixed(3);
+    el(g,"text",{x:gx,y:B+22,"text-anchor":"middle",style:`fill:${c};font-family:var(--mono);font-size:10.5px`}).textContent=M>2?"certified non-classical (61σ)":"no certificate";
+  }
+}
+function drawStream(){
+  const rate=RES[curR].rates[curV], N=36, rnd=mulberry32(183001+N*({bob:1,charlie:2,both:3}[curV])+({ghz:10,bell:20,none:30}[curR]));
+  const alice=[],guess=[],miss=[];
+  for(let i=0;i<N;i++){const a=rnd()<0.5?0:1;const m=rnd()<rate;alice.push(a);guess.push(m?1-a:a);miss.push(m);}
+  const row=(who,bits)=>`<span class="who">${who}</span>`+bits.map((b,i)=>`<span class="b${miss[i]?' miss':''}">${b}</span>`).join("");
+  document.getElementById("stream").innerHTML=
+    `<div class="lbl">alice's secret vs ${VIEWERS[curV]}</div>`+
+    `<div class="row">${row("Alice",alice)}</div>`+
+    `<div class="row">${row("guess",guess)}</div>`+
+    `<div class="note">error rate ${(rate*100).toFixed(1)}% (measured) — illustrative stream at the measured rate; real data = 8000 shots/setting in the decode file</div>`;
+}
+function draw(){
+  drawGauge(); drawStream();
+  document.getElementById("story").innerHTML=RES[curR].story;
+  const rate=RES[curR].rates[curV];
+  const reads = rate < 0.25;
+  document.getElementById("vbox").innerHTML=
+    `<div class="box hl"><span class="lbl">can ${VIEWERS[curV]} read the secret?</span><span class="val ${reads?(curV==='both'&&curR==='ghz'?'good':'bad'):'good'}">${reads?(curV==='both'?'YES — the vault opens':'YES — LEAKED (the anti-pattern)'):'NO — coin flips'}</span></div>`+
+    `<div class="box"><span class="lbl">error rate</span><span class="val cy">${(rate*100).toFixed(1)}%</span></div>`+
+    `<div class="box"><span class="lbl">resource certificate</span><span class="val ${RES[curR].cert?'good':'bad'}">${RES[curR].cert?'M = 3.369 > 2 ✓':'uncertified'}</span></div>`;
+  document.querySelectorAll("#segV button").forEach(b=>{b.classList.toggle("on",b.dataset.k===curV);b.setAttribute("aria-pressed",String(b.dataset.k===curV));});
+  document.querySelectorAll("#segR button").forEach(b=>{b.classList.toggle("on",b.dataset.k===curR);b.setAttribute("aria-pressed",String(b.dataset.k===curR));});
+}
+const segV=document.getElementById("segV");
+Object.keys(VIEWERS).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;b.textContent=VIEWERS[k];b.addEventListener("click",()=>{curV=k;draw();});segV.appendChild(b);});
+const segR=document.getElementById("segR");
+Object.keys(RES).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;b.textContent=RES[k].lbl;b.addEventListener("click",()=>{curR=k;draw();});segR.appendChild(b);});
+draw();
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>

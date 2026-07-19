@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%225.5%22%20fill%3D%22none%22%20stroke%3D%22%2345d6cf%22%20stroke-width%3D%221.3%22%2F%3E%3Cpath%20d%3D%22M8%208L8%204.5M8%208l2.5%201.5%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Past Is Not Fixed — four rooms about time | The Quantum Museum</title>
+<meta name="description" content="Four hardware results, one thesis: entanglement across disjoint lifetimes decided by a later choice (40σ); time as clock–system entanglement with an off-switch; no definite value between looks (24σ); no definite causal order (17/29σ) — with live quantum coins and no-signaling audits. Exp184–188.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge); color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:70ch; margin:0 0 14px; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; font-family:var(--mono); font-size:11.5px; }
+  .badge { border:1px solid var(--edge); border-radius:999px; padding:4px 11px; color:var(--ink-2); }
+  .badge b { color:var(--cyan); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(16px,2.4vw,20px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13px; margin:0 0 12px; font-family:var(--mono); }
+  .live { display:inline-block; font-family:var(--mono); font-size:10.5px; color:var(--amber); border:1px solid color-mix(in srgb,var(--amber) 50%,var(--edge)); border-radius:999px; padding:2px 9px; margin-left:8px; vertical-align:middle; }
+  .primer { font-size:13px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:10px 13px; margin:0 0 12px; line-height:1.5; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 10px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12px; background:none; border:none; color:var(--ink-2); padding:7px 12px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .audit { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px dashed var(--edge); margin-top:12px; padding-top:8px; }
+  .audit b { color:var(--good); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a><span class="wingtag">/ time</span><span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+  <header class="hero">
+    <div class="eyebrow">Four flights from the Heron 2026 campaign — one thesis</div>
+    <h1>The Past Is Not Fixed<span class="hl">.</span></h1>
+    <p class="lede">On quantum hardware, "what happened" is not a settled thing waiting to be read.
+      Four rooms, four certified results: entanglement between states that <b>never coexisted</b>,
+      decided later · a toy universe where <b>time is entanglement</b> — with an off-switch · a qubit
+      with <b>no definite value</b> between looks · two operations with <b>no definite order</b>,
+      sorted after the fact. Nothing ever signals backward — every room carries its own audit.</p>
+    <div class="badges">
+      <span class="badge">R1 <b>40σ</b> across time</span><span class="badge">R2 time <b>off-switch</b></span>
+      <span class="badge">R3 <b>24σ</b> no definite value</span><span class="badge">R4 <b>17/29σ</b> no definite order</span>
+    </div>
+    <span class="scope">Exp184–188 · sifted-ensemble physics (Wheeler's lineage) — records re-sorted, never rewritten</span>
+  </header>
+
+  <section class="panel">
+    <h2>Room 1 — No Fixed Moment<span class="live">LIVE COIN: 23σ</span></h2>
+    <p class="sub">Exp184 · job d9e3ngcinv1c73appedg · Exp188 (live) · d9e54qaneu4c739o1f3g</p>
+    <p class="primer"><b>Qubit A was measured — destroyed — before qubit D existed.</b> A later
+      measurement on the middles decides, retroactively in the sifted record, whether they were
+      entangled. Flip the late choice.</p>
+    <div class="seg" id="seg1"></div>
+    <figure><svg id="viz1" viewBox="0 0 460 150"></svg></figure>
+    <div class="audit">AUDIT — no signaling backward: A's marginals identical across every later choice (spread <b>0.0191</b> &lt; 0.02). LIVE upgrade (Exp188): the choice made by a quantum coin flipped <em>after</em> A's record closed — still certifies at <b>23σ</b> (F = 0.775).</div>
+  </section>
+
+  <section class="panel">
+    <h2>Room 2 — Time Is Entanglement</h2>
+    <p class="sub">Exp185/185b · jobs d9e46v4inv1c73appu20 + d9e4bgphtsac739dpt20</p>
+    <p class="primer"><b>A three-qubit universe: a clock entangled with a system.</b> Inside, conditioned
+      on the clock, the system evolves — 90° per tick. Outside, the correct-law time translation is
+      invisible (0.907 of the prep ceiling) while the wrong-law one costs exactly ½ (0.469). Now press
+      the button.</p>
+    <div class="seg" id="seg2"></div>
+    <figure><svg id="viz2" viewBox="0 0 460 170"></svg></figure>
+    <div class="audit">AUDIT — the law test: wrong-law translation ratio <b>0.469</b> vs theory 0.500 (correct-law 0.907). Honest ledger: flight 1 missed one bar by 0.008 (an absolute criterion — my error); the rule-derived re-flight held all three legs, ratios replicated.</div>
+  </section>
+
+  <section class="panel">
+    <h2>Room 3 — No Definite Value</h2>
+    <p class="sub">Exp186 · job d9e4jsineu4c739o0shg</p>
+    <p class="primer"><b>Did the qubit HAVE a value between looks?</b> Macrorealism caps K₃ at 1. Measured:
+      1.465 — 24σ over — with the mid-time value credited only from detectors that provably never fired
+      (negative-result rounds, bookkeeping 0.998). Toggle the dephaser to restore the classical world.</p>
+    <div class="seg" id="seg3"></div>
+    <figure><svg id="viz3" viewBox="0 0 460 150"></svg></figure>
+    <div class="audit">AUDIT — the disturbance excuse: invasive vs never-fired protocols agree to <b>0.021</b>; a macrorealist "your measurement disturbed it" story has nothing left to explain.</div>
+  </section>
+
+  <section class="panel">
+    <h2>Room 4 — No Definite Order<span class="live">LIVE COIN: 20/26σ</span></h2>
+    <p class="sub">Exp187/187b · job d9e4r2sjeosc73fib9hg · Exp188b (live, echoed) · d9e5722neu4c739o1hjg</p>
+    <p class="primer"><b>The target was measured before the control was examined</b> — then the choice of
+      control basis sorts the same record into definite causal orders (Z) or ensembles off the equator
+      that EVERY definite-or-mixed order is pinned to (X). And the echo lever: deferring the choice —
+      echoed — beats choosing now.</p>
+    <div class="seg" id="seg4"></div>
+    <figure><svg id="viz4" viewBox="0 0 460 150"></svg></figure>
+    <div class="audit">AUDIT — no signaling backward: unsorted target marginals across later choices, spread <b>0.0162</b> (one pinned layout). LIVE upgrade (Exp188b): the sort chosen by a mid-circuit quantum coin, control echoed — <b>+20σ / 26σ</b> off the equator.</div>
+  </section>
+
+  <section class="panel">
+    <h2>The court</h2>
+    <p class="sub">how we know we're not fooling ourselves</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">PRE-REGISTERED, FALSIFIED-FIRST, AMENDED HONESTLY</div>
+        <p>Every room flew with criteria committed before decode and falsifier arms that landed on
+        script (product sorts flat; decohered sorts stay on the equator; dephased K₃ under the bound).
+        Two flights missed their own letter by hairs (0.008; 0.0004) — both NOT-HELD verdicts stand,
+        both re-flights used rule-derived criteria committed pre-flight, both replicated stronger.</p></div>
+      <div class="receipt"><div class="rt">WHAT "RETRO" REALLY MEANS</div>
+        <p>Nothing propagates backward — the audits prove it in-data. The later choice selects which
+        <em>sorting</em> of the already-written record is meaningful. That is Wheeler's delayed choice,
+        Peres's swap, and Leggett–Garg's missing past, all drawn by one chip in one night. The record
+        is re-sorted, never rewritten.</p></div>
+      <div class="receipt"><div class="rt">THE TOOLKIT PLAYED BOTH SIDES</div>
+        <p>The instruments came from plumbing: frame-steered sifting (built for relay keys) sorts the
+        ensembles; the engineered echo (built to cure the window tax) protects the order-coherence —
+        and in room 4 it made the LATE choice beat the early one (0.467 vs 0.345, 196% of the
+        delayed-choice cost recovered). The live coins (mid-circuit QRNG + dynamic branches) closed
+        the compiled-choice fence on rooms 1 and 4.</p></div>
+      <div class="receipt"><div class="rt">FENCES</div>
+        <p>One die; toy universes; Clifford laws; sifted ensembles with published relay outcomes;
+        the live coins are on-chip QRNG (ordering, not space-like separation); Leggett–Garg's
+        clumsiness addressed at the standard (negative-result) level. <code>Exp184–188 · findings in
+        the repo</code></p></div>
+    </div>
+  </section>
+  <div class="foot">
+    <span>Exp184–188 · ibm_fez · 6 flights</span><span>C4885 · 2026-07-19</span>
+    <a href="../switch/">← the causal switch</a><a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+<script>
+"use strict";
+const SVGNS="http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function gauge(svg,val,lo,hi,line,lineLbl,lbl,col){
+  svg.innerHTML="";
+  const L=40,R=440,y=70; const X=v=>L+(R-L)*(v-lo)/(hi-lo);
+  el(svg,"line",{x1:L,y1:y,x2:R,y2:y,style:"stroke:var(--edge-2);stroke-width:3"});
+  el(svg,"line",{x1:X(line),y1:y-22,x2:X(line),y2:y+22,style:"stroke:var(--bad);stroke-width:2.5;stroke-dasharray:5 4"});
+  el(svg,"text",{x:X(line),y:y+40,"text-anchor":"middle",style:"fill:var(--bad);font-family:var(--mono);font-size:10.5px"}).textContent=lineLbl;
+  el(svg,"circle",{cx:X(val),cy:y,r:11,style:`fill:${col};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${col})`});
+  el(svg,"text",{x:X(val),y:y-20,"text-anchor":"middle",style:`fill:${col};font-family:var(--mono);font-size:14px;font-weight:700`}).textContent=val.toFixed(3);
+  el(svg,"text",{x:X(val),y:y+40,"text-anchor":"middle",style:`fill:${col};font-family:var(--mono);font-size:10.5px`}).textContent=lbl;
+}
+function segify(id,states,cb){
+  const seg=document.getElementById(id);
+  states.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.dataset.k=s[0];b.textContent=s[1];
+    b.addEventListener("click",()=>{cb(s[0]);seg.querySelectorAll("button").forEach(x=>{x.classList.toggle("on",x.dataset.k===s[0]);x.setAttribute("aria-pressed",String(x.dataset.k===s[0]));});});
+    seg.appendChild(b);});
+  cb(states[0][0]); seg.querySelector("button").classList.add("on");
+}
+// R1: 184 — F gauge vs 1/2 witness
+segify("seg1",[["bell","late choice: BELL measurement"],["prod","late choice: product measurement"]],k=>{
+  const v=document.getElementById("viz1");
+  if(k==="bell") gauge(v,0.832,0,1,0.5,"separable witness 1/2","ENTANGLED across time — 40σ","var(--good)");
+  else gauge(v,0.249,0,1,0.5,"separable witness 1/2","the same early data: separable","var(--bad)");
+});
+// R2: 185b — tick dial + off switch
+const TICKS=[[0.936,0.035],[-0.039,0.949],[-0.952,0.051],[-0.034,-0.947]];
+segify("seg2",[["on","time ON (entangled)"],["off","TIME OFF (cut the entanglement)"]],k=>{
+  const svg=document.getElementById("viz2"); svg.innerHTML="";
+  const cx=120,cy=88,r=62;
+  el(svg,"circle",{cx:cx,cy:cy,r:r,style:"fill:none;stroke:var(--edge);stroke-width:1.5"});
+  el(svg,"text",{x:cx,y:16,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:11.5px"}).textContent="the system, conditioned on each clock tick";
+  for(let t=0;t<4;t++){
+    const b = k==="on"?TICKS[t]:TICKS[0];
+    const x=cx+r*0.85*b[0], y=cy-r*0.85*b[1];
+    const col = k==="on"?"var(--cyan)":"var(--ink-3)";
+    el(svg,"line",{x1:cx,y1:cy,x2:x,y2:y,style:`stroke:${col};stroke-width:2;opacity:${k==="on"?0.45+0.15*t:0.7}`});
+    el(svg,"circle",{cx:x,cy:y,r:6,style:`fill:${col}`});
+    if(k==="on") el(svg,"text",{x:x+(b[0]>=0?10:-10),y:y+4,"text-anchor":b[0]>=0?"start":"end",style:`fill:${col};font-family:var(--mono);font-size:10px`}).textContent="t="+t;
+  }
+  el(svg,"text",{x:300,y:60,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=k==="on"?"inside: 90°/tick sweep":"inside: NOTHING MOVES";
+  el(svg,"text",{x:300,y:80,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=k==="on"?"mean F(evolving) = 0.973":"every tick identical, F = 0.998";
+  el(svg,"text",{x:300,y:108,style:`fill:${k==="on"?"var(--good)":"var(--amber)"};font-family:var(--mono);font-size:11.5px;font-weight:700`}).textContent=k==="on"?"time exists for the inhabitants":"time switched OFF by removing 2 gates";
+});
+// R3: 186 — K3 needle
+segify("seg3",[["q","coherent (the quantum world)"],["deph","dephased (the classical control)"]],k=>{
+  const v=document.getElementById("viz3");
+  if(k==="q") gauge(v,1.465,0,1.6,1.0,"macrorealist bound 1","K₃ = 1.465 — 24σ: no definite value between looks","var(--good)");
+  else gauge(v,0.695,0,1.6,1.0,"macrorealist bound 1","dephased: classicality restored on demand","var(--cyan)");
+});
+// R4: 187b — sorted-ensemble Z markers vs the equator
+function r4(k){
+  const svg=document.getElementById("viz4"); svg.innerHTML="";
+  const L=40,R=440,y=75; const X=v=>L+(R-L)*(v-(-1))/2;
+  el(svg,"line",{x1:L,y1:y,x2:R,y2:y,style:"stroke:var(--edge-2);stroke-width:3"});
+  el(svg,"line",{x1:X(0),y1:y-24,x2:X(0),y2:y+24,style:"stroke:var(--bad);stroke-width:2.5;stroke-dasharray:5 4"});
+  el(svg,"text",{x:X(0),y:y+42,"text-anchor":"middle",style:"fill:var(--bad);font-family:var(--mono);font-size:10.5px"}).textContent="the equator: EVERY definite-or-mixed order sits at Z = 0";
+  let pts,lbl,col;
+  if(k==="x"){pts=[[0.218,"ψ₊ (+17σ)"],[-0.657,"ψ₋ (29σ)"]];lbl="X-sort: OFF the equator — no definite order";col="var(--good)";}
+  else if(k==="echo"){pts=[[0.467,"ψ₊ echoed"],[-0.814,"ψ₋ echoed"]];lbl="echoed late choice: beats measure-now (0.467 vs 0.345)";col="var(--cyan)";}
+  else {pts=[[0.076,"sorted +"],[0.003,"sorted −"]];lbl="decohered control: sorting does nothing (mixture behavior)";col="var(--ink-3)";}
+  pts.forEach(p=>{
+    el(svg,"circle",{cx:X(p[0]),cy:y,r:10,style:`fill:${col};stroke:var(--bg);stroke-width:2`});
+    el(svg,"text",{x:X(p[0]),y:y-18,"text-anchor":"middle",style:`fill:${col};font-family:var(--mono);font-size:10.5px;font-weight:700`}).textContent=p[1];});
+  el(svg,"text",{x:L,y:16,style:`fill:${col};font-family:var(--mono);font-size:11.5px`}).textContent=lbl;
+}
+segify("seg4",[["x","X-sort (delayed)"],["echo","X-sort (delayed + ECHO)"],["dec","decohered control"]],r4);
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>

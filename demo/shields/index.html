@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M8%202l5%202v4c0%203.3-2.2%205.3-5%206-2.8-.7-5-2.7-5-6V4z%22%20fill%3D%22none%22%20stroke%3D%22%2345d6cf%22%20stroke-width%3D%221.4%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%222%22%20fill%3D%22%23e6a94e%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Shields — protected quantum information, four stages | The Quantum Museum</title>
+<meta name="description" content="The [[4,2,2]] Shields arc on ibm_fez: an error detector at 2% escape, the measured crossover where protection pays, logical entanglement at 57σ with an in-shot control, and a logical qubit teleported between shields — beating the bare machine. Exp189–192.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge); color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:16px; font-weight:700; }
+  .val.good { color:var(--good); } .val.bad { color:var(--bad); } .val.cy { color:var(--cyan); } .val.am { color:var(--amber); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a><span class="wingtag">/ the shields</span><span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Shields<span class="hl">.</span></h1>
+    <p class="lede">Everything else in this museum ran on bare qubits. This wing raises a
+      <b>shield</b>: two logical qubits encoded in four physical, errors <em>detected</em> and
+      culled. Four stages: the detector proven, the exact regime where protection <em>pays</em>
+      (mapped, honestly, through a failed flight), two shielded qubits entangled at 57σ — and the
+      finale: <b>a logical qubit teleported between shields, beating the bare machine.</b></p>
+    <span class="scope">Scope: the <b>[[4,2,2]] error-detecting code</b> (Exp189–192) — detection +
+      postselection, not correction; the toll is paid in discarded shots and repaid in cleaner ensembles.</span>
+  </header>
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Climb the ladder</h2>
+    <p class="sub">4 stages · ibm_fez · jobs d9e561c… / d9e5o3s… / d9e64rs… / d9e68bc…</p>
+    <p class="primer"><b>How to read it.</b> Each stage is one flight, its key measurement drawn from
+      the decode files. The recurring twist to watch for: the shield's toll — shots thrown away when
+      the detector fires — keeps buying ensembles <em>cleaner than bare hardware can produce at any
+      price</em>. It happens at stages (i), (iii), and (iv).</p>
+    <div class="seg" role="tablist" id="seg"></div>
+    <figure aria-label="stage visualization"><svg id="viz" viewBox="0 0 460 280"></svg></figure>
+    <p class="story" id="story"></p>
+    <div class="verdict" id="vbox"></div>
+  </section>
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">the twist: the toll is the treasure — and the map came from a failure</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE TOLL IS THE TREASURE</div>
+        <p>Postselection prices: 3.4% (stage i), ~13% (iii), ~35% (iv). What it buys, three times
+        over: logical Z-error at HALF the bare rate (0.0010 vs 0.0021); logical entanglement above
+        bare (1.970 vs 1.902); logical teleportation above bare (0.9933 vs 0.9237). The discarded
+        shots are where the errors went.</p></div>
+      <div class="receipt"><div class="rt">THE HONEST FAILURE THAT DREW THE MAP</div>
+        <p>Stage (ii)'s first flight failed ALL THREE rungs — flown at a dose where distance-2
+        detection mathematically loses, with an unfair echo and mis-nulled bars (three owned design
+        flaws, each now a checklist rule). The redesign then measured the full pays-curve: the
+        crossover sits at ≈1.2–1.5 μs. The hollow points on the stage-(ii) plot ARE the failed
+        flight — the map exists because of it.</p></div>
+      <div class="receipt"><div class="rt">NO CLASSICAL SHADOW</div>
+        <p>Gate teleportation has a classical shadow (Exp170: strip the e-bit, the truth table
+        survives). STATE teleportation has none — without the pair there is no message-to-destination
+        path at all. The selftest caught this distinction pre-flight when the prereg borrowed the
+        wrong structure; the hardware then drew it exactly: 0.4977 / 0.5003. <code>both lanes: coins</code></p></div>
+      <div class="receipt"><div class="rt">WHY IT MATTERS &amp; THE FENCE</div>
+        <p>Machines that outlive their own error rates must encode, detect, and move logical
+        information — this wing does all three in miniature. Fence: DETECTION not correction
+        (distance 2; postselection discards, never fixes); no repeated syndrome rounds; two-basis
+        teleport certification; chip patches as blocks. <code>Exp189–192</code></p></div>
+    </div>
+  </section>
+  <div class="foot">
+    <span>Exp189–192 · ibm_fez · 4 flights</span><span>C4885 · 2026-07-19</span>
+    <a href="../teleportation/">← the bare transporter</a><a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+<script>
+"use strict";
+const SVGNS="http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+const STAGES={
+ i:{lbl:"(i) shields up",story:"<b>The detector.</b> Two logical qubits in four physical. Inject a deliberate error and the stabilizer readout catches it 96.3–96.5% of the time; the shots that slip through undetected-and-corrupted are 2% — and they are exactly the double-error shots a distance-2 code cannot see. Price: 3.4% of clean shots rejected. And already the shield pays in Z: accepted logical error 0.0010 vs bare 0.0021.",
+   verd:[["detector escape (joint)","2.0% ✓","good"],["acceptance price","3.4%","cy"],["Z-shield ratio","0.49 (pays 2×)","good"]]},
+ ii:{lbl:"(ii) where it pays",story:"<b>The map.</b> Logical vs bare error at matched wall time, fair echoes both arms. Solid points: the redesigned flight — the shield pays at every dose up to 1 μs (ratios 0.31 / 0.57 / 0.87, 4–6σ at the low doses). Hollow points: the FAILED first flight at 2–4 μs, where the dose put distance-2 out of its regime (ratios above 1). Together: the crossover sits at ≈1.2–1.5 μs — and stage (iii) obeys the map. Also certified here: mid-circuit syndrome coverage, Δ = +0.452 over its attrition-matched baseline (the error terminal readout provably cannot see, caught).",
+   verd:[["crossover","≈1.2–1.5 μs","cy"],["coverage differential","+0.452 ✓","good"],["wrong-null differential","+0.001 (theory 0)","good"]]},
+ iii:{lbl:"(iii) shielded entanglement",story:"<b>The handshake.</b> Two logical qubits, two blocks, one transversal CNOT: S = ⟨X̄X̄⟩+⟨Z̄Z̄⟩ = 1.970 against the separable bound of 1 — 57σ. The code's second logical pair rode the SAME shots in a product state and landed at 0.998, dead-center ON the bound: the witness calibrated itself inside the dataset. And the shielded pair beat the bare one: 1.970 vs 1.902.",
+   verd:[["S vs separable bound 1","1.970 (57σ)","good"],["in-shot control","0.998 — ON the bound","cy"],["vs bare Bell","1.970 > 1.902","good"]]},
+ iv:{lbl:"(iv) the shielded transporter",story:"<b>The finale.</b> A logical qubit teleported between shields — 12 qubits, three blocks, zero measurement windows, every correction deferred into software. Success: |0̄⟩ 0.9802, |+̄⟩ 0.9933 — BEATING the bare teleporter (0.9624 / 0.9237). Remove the logical e-bit and both messages die to exact coin flips (0.4977 / 0.5003): a 76σ gap, and state teleportation's no-classical-shadow drawn by hardware.",
+   verd:[["logical success","0.980 / 0.993","good"],["vs bare","beats by +0.02 / +0.07","good"],["no-resource","coins (76σ gap)","am"]]}};
+function draw(key){
+  const viz=document.getElementById("viz"); viz.innerHTML="";
+  if(key==="i"){ // rejection meter
+    const L=90,R=420,y1=90,y2=170;
+    el(viz,"text",{x:20,y:40,style:"fill:var(--ink-2);font-family:var(--mono);font-size:13px"}).textContent="inject a deliberate error →";
+    [[y1,"caught by the shield",0.963,"var(--good)"],[y2,"escaped AND corrupted",0.02,"var(--bad)"]].forEach(r=>{
+      el(viz,"rect",{x:L,y:r[0]-16,width:(R-L),height:32,rx:8,style:"fill:none;stroke:var(--edge);stroke-width:1"});
+      el(viz,"rect",{x:L,y:r[0]-16,width:(R-L)*r[2],height:32,rx:8,style:`fill:${r[3]};opacity:.85`});
+      el(viz,"text",{x:L,y:r[0]-24,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=r[1];
+      el(viz,"text",{x:R+4,y:r[0]+5,"text-anchor":"end",style:`fill:${r[3]};font-family:var(--mono);font-size:14px;font-weight:700`}).textContent=(r[2]*100).toFixed(1)+"%";});
+    el(viz,"text",{x:L,y:230,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent="escapees are double-error shots — exactly what distance-2 means";
+  } else if(key==="ii"){ // pays curve
+    const L=70,R=430,T=30,B=220; const X=us=>L+(R-L)*us/4; const Y=r=>B-(B-T)*Math.min(r,2)/2;
+    el(viz,"text",{x:16,y:18,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="logical/bare error ratio (fair echoes)";
+    [[0.5,"0.5"],[1,"1.0 — break-even"],[1.5,"1.5"]].forEach(g=>{
+      el(viz,"line",{x1:L,y1:Y(g[0]),x2:R,y2:Y(g[0]),style:`stroke:${g[0]===1?"var(--bad)":"var(--edge)"};stroke-width:${g[0]===1?2:1};${g[0]===1?"stroke-dasharray:6 4":""}`});
+      el(viz,"text",{x:L-6,y:Y(g[0])+4,"text-anchor":"end",style:`fill:${g[0]===1?"var(--bad)":"var(--ink-3)"};font-family:var(--mono);font-size:10px`}).textContent=g[1];});
+    [[0,"0"],[1,"1μs"],[2,"2μs"],[4,"4μs"]].forEach(t=>el(viz,"text",{x:X(t[0]),y:B+18,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"}).textContent=t[1]);
+    el(viz,"rect",{x:X(1.2),y:T,width:X(1.5)-X(1.2),height:B-T,style:"fill:var(--amber);opacity:.15"});
+    el(viz,"text",{x:X(1.35),y:T+14,"text-anchor":"middle",style:"fill:var(--amber);font-family:var(--mono);font-size:10px"}).textContent="crossover";
+    const solid=[[0,0.31],[0.5,0.57],[1,0.87]], hollow=[[2,1.24],[4,1.55]];
+    for(let i=0;i<solid.length-1;i++) el(viz,"line",{x1:X(solid[i][0]),y1:Y(solid[i][1]),x2:X(solid[i+1][0]),y2:Y(solid[i+1][1]),style:"stroke:var(--cyan);stroke-width:2"});
+    solid.forEach(p=>el(viz,"circle",{cx:X(p[0]),cy:Y(p[1]),r:6,style:"fill:var(--cyan);stroke:var(--bg);stroke-width:1.5"}));
+    hollow.forEach(p=>el(viz,"circle",{cx:X(p[0]),cy:Y(p[1]),r:6,style:"fill:none;stroke:var(--bad);stroke-width:2"}));
+    el(viz,"text",{x:X(3),y:Y(1.42),style:"fill:var(--bad);font-family:var(--mono);font-size:10px"}).textContent="the failed flight (hollow)";
+    el(viz,"text",{x:X(0.28),y:Y(0.40),style:"fill:var(--cyan);font-family:var(--mono);font-size:10px"}).textContent="shield wins";
+  } else if(key==="iii"){ // S gauge with control
+    const gx=200,T=30,B=240,LO=0,HI=2.2; const gy=v=>B-(B-T)*(v-LO)/(HI-LO);
+    el(viz,"text",{x:gx,y:16,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="S = ⟨X̄X̄⟩ + ⟨Z̄Z̄⟩";
+    el(viz,"line",{x1:gx,y1:T,x2:gx,y2:B,style:"stroke:var(--edge-2);stroke-width:3"});
+    el(viz,"line",{x1:gx-40,y1:gy(1),x2:gx+44,y2:gy(1),style:"stroke:var(--bad);stroke-width:2.5;stroke-dasharray:6 4"});
+    el(viz,"text",{x:gx+50,y:gy(1)+4,style:"fill:var(--bad);font-family:var(--mono);font-size:10.5px"}).textContent="separable bound 1";
+    el(viz,"circle",{cx:gx,cy:gy(1.970),r:11,style:"fill:var(--good);stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px var(--good))"});
+    el(viz,"text",{x:gx-20,y:gy(1.970)+4,"text-anchor":"end",style:"fill:var(--good);font-family:var(--mono);font-size:13px;font-weight:700"}).textContent="entangled pair 1.970 (57σ)";
+    el(viz,"circle",{cx:gx,cy:gy(0.998),r:9,style:"fill:var(--cyan);stroke:var(--bg);stroke-width:2"});
+    el(viz,"text",{x:gx-16,y:gy(0.998)+22,"text-anchor":"end",style:"fill:var(--cyan);font-family:var(--mono);font-size:11px"}).textContent="product pair 0.998 — same shots";
+    el(viz,"line",{x1:gx+22,y1:gy(1.902),x2:gx+34,y2:gy(1.902),style:"stroke:var(--ink-3);stroke-width:2"});
+    el(viz,"text",{x:gx+40,y:gy(1.902)+4,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="bare Bell 1.902";
+  } else { // iv transporter bars
+    const groups=[["|0̄⟩",0.9802,0.9624,0.4977],["|+̄⟩",0.9933,0.9237,0.5003]];
+    const L=90,W=340,T=40,B=230; const Y=p=>B-(B-T)*p;
+    el(viz,"text",{x:16,y:18,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="teleport success (accepted ensembles)";
+    el(viz,"line",{x1:L-20,y1:Y(0.5),x2:L+W+10,y2:Y(0.5),style:"stroke:var(--bad);stroke-width:1.5;stroke-dasharray:5 4"});
+    el(viz,"text",{x:L+W+12,y:Y(0.5)+4,style:"fill:var(--bad);font-family:var(--mono);font-size:10px"}).textContent="coin flip";
+    groups.forEach((g,gi)=>{
+      const gx=L+gi*(W/2)+20; const bw=36;
+      [[g[1],"var(--good)","shielded"],[g[2],"var(--ink-3)","bare"],[g[3],"var(--bad)","no pair"]].forEach((b,i)=>{
+        const x=gx+i*(bw+8);
+        el(viz,"rect",{x:x,y:Y(b[0]),width:bw,height:B-Y(b[0]),rx:4,style:`fill:${b[1]};opacity:.9`});
+        el(viz,"text",{x:x+bw/2,y:Y(b[0])-6,"text-anchor":"middle",style:`fill:${b[1]};font-family:var(--mono);font-size:10.5px;font-weight:700`}).textContent=b[0].toFixed(3);
+        el(viz,"text",{x:x+bw/2,y:B+14,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:9.5px"}).textContent=b[2];});
+      el(viz,"text",{x:gx+bw*1.5,y:B+30,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="message "+g[0];});
+  }
+  document.getElementById("story").innerHTML=STAGES[key].story;
+  document.getElementById("vbox").innerHTML=STAGES[key].verd.map((v,i)=>
+    `<div class="box${i===0?' hl':''}"><span class="lbl">${v[0]}</span><span class="val ${v[2]}">${v[1]}</span></div>`).join("");
+  document.querySelectorAll("#seg button").forEach(b=>{b.classList.toggle("on",b.dataset.k===key);b.setAttribute("aria-pressed",String(b.dataset.k===key));});
+}
+const seg=document.getElementById("seg");
+Object.keys(STAGES).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;b.textContent=STAGES[k].lbl;b.addEventListener("click",()=>draw(k));seg.appendChild(b);});
+draw("iv");
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>
