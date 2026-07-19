@@ -54,6 +54,7 @@ Primitives (F87/F90/F91/F93) composed end-to-end; the composition tax discovered
 
 | Exp | Result | Verdict |
 |---|---|---|
+| 202/202b | **The subspace relay key** — logical E91 between [[4,2,2]] shields, direct + through an untrusted relay: shield beats bare on SECRET FRACTION both links (+24pp/29σ direct, +29pp/27σ relay), wins throughput both links net of postselection, and the advantage **grows with depth** (+0.055 at 4.1σ) — the FT-pays trend on the key scoreboard. Horizons-4 Invention 1 flight 1 ([202 split kept](../experiments/exp202-STATUS-split-verdict.md) · [202b certified](../experiments/exp202b-STATUS-certified.md)) | 202 split (kept) · **202b CERTIFIED, all 5 gates** |
 | 183 | Two-officer secret sharing (HBB99 over GHZ) | certified, 61σ |
 | 182 | Distributed BV, n=3 scaling law (per-gate cost 3–5%) | HELD, 79–141σ |
 | 181 | The distributed computer — Bernstein–Vazirani across a cut | HELD, 67–141σ |

@@ -266,7 +266,7 @@ one instrument.
 | Rank | Item | Type | QPU cost | Why first |
 |---|---|---|---|---|
 | 1 | **U1 objectivity ≡ irreversibility sweep** — ✅ **DELIVERED same day (Exp201, C4895): CERTIFIED, all 6 gates + U1 claim HELD.** One-curve law y=x² held cross-observable; the absolute fact revived above the observer-independence bound at 16.5σ when the record was uncomputed. See [`exp201-STATUS-certified.md`](../experiments/exp201-STATUS-certified.md) | question | 1 job, proven instrument class | Cheapest path to the biggest conceptual result; pure composition of 198+200b machinery |
-| 2 | **Invention 1, flight 1: Logical E91** | invention | 1–2 jobs | Highest certified-machinery reuse; extends the measured shield-advantage trend to the layer with a deliverable (key rate) |
+| 2 | **Invention 1, flight 1: Logical E91** — ✅ **DELIVERED same day (Exp202/202b, C4896): 202b CERTIFIED, all 5 gates.** Shield beats bare on secret fraction both links (~28σ), wins throughput net of toll, and the advantage GROWS with depth (+0.055 at 4.1σ) — the Subspace Relay thesis certified on secret bits. 202's split verdict kept on the books. See [`exp202b-STATUS-certified.md`](../experiments/exp202b-STATUS-certified.md) | invention | 1–2 jobs | Highest certified-machinery reuse; extends the measured shield-advantage trend to the layer with a deliverable (key rate) |
 | 3 | **U3 / Invention 2: is QEC time reversal** | question | 1–2 jobs | Unifies Decks 1 and 4; the fleet's shield rules inherit a clock either way |
 | 4 | **Invention 7: twirled compilation doctrine** | engineering | 0 QPU | Already justified by 199's data; every later flight inherits it |
 | 5 | **U7 bath-size ladder** | question | 1 job | The half-revival bath size is a number nobody has |
