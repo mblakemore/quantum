@@ -1,0 +1,65 @@
+{
+ "exp": 208,
+ "slug": "shielded_switch",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9ek9okjeosc73fisnhg",
+ "order": [
+  [
+   "bare",
+   "switch",
+   "commute"
+  ],
+  [
+   "bare",
+   "switch",
+   "anti"
+  ],
+  [
+   "bare",
+   "definite",
+   "commute"
+  ],
+  [
+   "bare",
+   "definite",
+   "anti"
+  ],
+  [
+   "logical",
+   "switch",
+   "commute"
+  ],
+  [
+   "logical",
+   "switch",
+   "anti"
+  ],
+  [
+   "logical",
+   "definite",
+   "commute"
+  ],
+  [
+   "logical",
+   "definite",
+   "anti"
+  ]
+ ],
+ "n2": {
+  "bare_switch": 2,
+  "bare_definite": 1,
+  "logical_switch": 14,
+  "logical_definite": 3
+ },
+ "prereg": {
+  "W1_shield_preserves": "DISC_logical(switch) >= 0.5*DISC_bare(switch) at >=5 sigma",
+  "W2_witness_alive": "DISC_logical(switch) > 1.0 at >=5 sigma",
+  "W3_nulls": "|DISC_bare(definite)| <= 0.15 AND |DISC_logical(definite)| <= 0.15",
+  "W4_reference": "DISC_logical vs DISC_bare gap (reported)",
+  "G_acc": "target ZZZZ acceptance >= 0.55",
+  "registered_verdict": "W1 and W2 and W3 and G_acc",
+  "scope": "coherence-of-causal-order witness (F77), half-shielded (target only), single-syndrome ZZZZ partial shield",
+  "budget_predictions": "DISC_bare in [1.5,1.95]; DISC_logical in [1.3,1.9]; acceptance in [0.65,0.85]"
+ }
+}
