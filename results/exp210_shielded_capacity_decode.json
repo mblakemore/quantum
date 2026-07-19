@@ -1,0 +1,15 @@
+{
+ "job_id": "d9eksmqneu4c739oinr0",
+ "Rbar_switch": 0.4842008588766503,
+ "seR_switch": 0.008194146246688556,
+ "Rbar_null": 0.11710225662925337,
+ "D_switch": 0.0022500000000000003,
+ "acceptance": 0.91728125,
+ "sigma_w1": 46.88723477835349,
+ "shielded_over_bare": 0.9618610625281095,
+ "w1": true,
+ "w2": false,
+ "w3": true,
+ "g_acc": true,
+ "verdict_ok": false
+}
