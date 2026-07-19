@@ -1,0 +1,19 @@
+{
+ "job_id": "d9e4jsineu4c739o0shg",
+ "results": {
+  "C12": 0.49275,
+  "C13": -0.5115,
+  "C13_deph": 0.25875,
+  "C23_inrm": 0.46099999999999997,
+  "kept_sum": 0.99775,
+  "C23_inv": 0.48175,
+  "K3": 1.46525,
+  "K3_deph": 0.6950000000000001,
+  "inrm_vs_inv": 0.020750000000000046
+ },
+ "K3_sigma": 24.02540669097334,
+ "primary_ok": true,
+ "control_ok": true,
+ "audit_ok": true,
+ "verdict_ok": true
+}
