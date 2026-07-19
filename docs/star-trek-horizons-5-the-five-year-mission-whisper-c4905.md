@@ -26,7 +26,7 @@ tractable *here*, and what it would mean.
 
 ---
 
-## P1 — THE SHIELDED SWITCH: fault-tolerant causal order ⭐ (recommended first flight)
+## P1 — THE SHIELDED SWITCH: fault-tolerant causal order ⭐ — ✅ DELIVERED (Exp208, C4905: CERTIFIED, the causal witness survives error detection — DISC_logical 1.707 = 87% of bare, 40σ over the bar, definite-order nulls dead; [status](../experiments/exp208-STATUS-certified.md))
 
 **The vision**: every indefinite-causal-order result in the campaign (the witness at 72σ, the
 game at 216σ, the engine, the fridge, negative energy) was run on *bare* physical qubits.
