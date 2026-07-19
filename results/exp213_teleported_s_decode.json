@@ -1,0 +1,17 @@
+{
+ "job_id": "d9ell82neu4c739ojhn0",
+ "frame": [
+  1,
+  0
+ ],
+ "Ybar_gadget": 0.8244725738396624,
+ "Ybar_gadget_uncorrected": 0.019409282700421943,
+ "Ybar_noS": 0.014450338394000365,
+ "acceptance": 0.5925,
+ "sigma_w1": 51.64135673052903,
+ "w1": true,
+ "w2": true,
+ "w3": true,
+ "g_acc": true,
+ "verdict_ok": true
+}
