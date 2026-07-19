@@ -1,0 +1,67 @@
+{
+ "exp": 197,
+ "slug": "federation",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e7ffkjeosc73fiekc0",
+ "order": [
+  [
+   "federation",
+   "ZZ"
+  ],
+  [
+   "federation",
+   "ZX"
+  ],
+  [
+   "federation",
+   "XZ"
+  ],
+  [
+   "federation",
+   "XX"
+  ],
+  [
+   "norelay",
+   "ZZ"
+  ],
+  [
+   "norelay",
+   "ZX"
+  ],
+  [
+   "norelay",
+   "XZ"
+  ],
+  [
+   "norelay",
+   "XX"
+  ],
+  [
+   "bare",
+   "ZZ"
+  ],
+  [
+   "bare",
+   "ZX"
+  ],
+  [
+   "bare",
+   "XZ"
+  ],
+  [
+   "bare",
+   "XX"
+  ]
+ ],
+ "prereg": {
+  "primary": "S_L1(federation, corrected) > 2 at >=5 sigma; band [2.10, 2.85] (budget-predicted ~2.4-2.6)",
+  "internal_control": "S_L2(federation) in [1.20, 1.48] (ride-along product pair)",
+  "nulls": "|ZX_L1| and |XZ_L1| (federation, corrected) <= 0.15",
+  "falsifier_decode": "S_L1(federation, relay bits IGNORED) in [-0.25, 0.30]",
+  "falsifier_hw": "S_L1(norelay) in [-0.25, 0.30]",
+  "reference": "S_L1(bare swap) descriptive",
+  "gauges": "end-block acceptance >= 0.60; relay X-check acceptance >= 0.70 (joint acceptance is the product, expect ~0.55-0.75)",
+  "budget_check": "lambda_req 0.707; predicted end-to-end ~0.85-0.92 (C4887 rule)"
+ }
+}
