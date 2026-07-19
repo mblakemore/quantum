@@ -139,7 +139,7 @@ can dial exactly how objective a fact is, and to whom" — objectivity engineeri
 
 ---
 
-## P5 — THE SELF-CHARACTERIZING CHIP: the shield as a coherent-noise spectrometer
+## P5 — THE SELF-CHARACTERIZING CHIP: the shield as a coherent-noise spectrometer — ✅ FLIGHT 1 DELIVERED (Exp211, C4905: CERTIFIED — the coherent-error transfer function measured; blind spots = axes orthogonal to the logical readout basis, transparent = parallel; 44σ discrimination; [status](../experiments/exp211-STATUS-certified.md))
 
 **The vision**: 199 found the shield's blind spot; 205 turned it into a sensor; C4898's
 collision-ledger found that the shield's *coherence column reads out non-Pauli noise the chip
