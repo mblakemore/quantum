@@ -1,0 +1,16 @@
+{
+ "job_id": "d9ekjlkinv1c73aqboj0",
+ "DISC_bare_switch": 1.8587500000000001,
+ "DISC_bare_mixture": 0.018999999999999996,
+ "DISC_logical_switch": 1.8174300617513424,
+ "DISC_logical_mixture": -0.09482385635598156,
+ "switch_minus_mixture": 1.912253918107324,
+ "acceptance": 0.91159375,
+ "sigma_w2": 39.634453576176476,
+ "sigma_w3": 49.57428597301192,
+ "w1": true,
+ "w2": true,
+ "w3": true,
+ "g_acc": true,
+ "verdict_ok": true
+}
