@@ -1,0 +1,65 @@
+{
+ "exp": 209,
+ "slug": "shielded_switch_mixture",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9ekjlkinv1c73aqboj0",
+ "order": [
+  [
+   "bare",
+   "switch",
+   "commute"
+  ],
+  [
+   "bare",
+   "switch",
+   "anti"
+  ],
+  [
+   "bare",
+   "mixture",
+   "commute"
+  ],
+  [
+   "bare",
+   "mixture",
+   "anti"
+  ],
+  [
+   "logical",
+   "switch",
+   "commute"
+  ],
+  [
+   "logical",
+   "switch",
+   "anti"
+  ],
+  [
+   "logical",
+   "mixture",
+   "commute"
+  ],
+  [
+   "logical",
+   "mixture",
+   "anti"
+  ]
+ ],
+ "n2": {
+  "bare_switch": 2,
+  "bare_mixture": 1,
+  "logical_switch": 14,
+  "logical_mixture": 19
+ },
+ "prereg": {
+  "W1_mixture_inert": "|DISC_logical_mixture| <= 0.15 AND |DISC_bare_mixture| <= 0.15",
+  "W2_switch_beats_mixture": "DISC_logical_switch - DISC_logical_mixture >= 0.5*DISC_bare_switch at >=5 sigma",
+  "W3_switch_alive": "DISC_logical_switch > 1.0 at >=5 sigma",
+  "W4_depth_decorrelation": "mixture arm >= switch depth yet inert (reported, F77)",
+  "G_acc": "target ZZZZ acceptance >= 0.55 both arms",
+  "registered_verdict": "W1 and W2 and W3 and G_acc",
+  "scope": "coherence-of-causal-order witness (F77), half-shielded, single-syndrome; closes causal-separability loophole for the shielded switch, same-window",
+  "budget_predictions": "DISC_log_switch in [1.4,1.9]; |DISC_mixture| < 0.12; acceptance in [0.65,0.90]"
+ }
+}
