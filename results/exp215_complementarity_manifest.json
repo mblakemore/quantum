@@ -1,0 +1,119 @@
+{
+ "exp": 215,
+ "slug": "complementarity_dial",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9elus1htsac739edhu0",
+ "order": [
+  [
+   "V",
+   0.0,
+   "none"
+  ],
+  [
+   "D",
+   0.0,
+   "Z"
+  ],
+  [
+   "D",
+   0.0,
+   "X"
+  ],
+  [
+   "V",
+   0.25,
+   "none"
+  ],
+  [
+   "D",
+   0.25,
+   "Z"
+  ],
+  [
+   "D",
+   0.25,
+   "X"
+  ],
+  [
+   "V",
+   0.5,
+   "none"
+  ],
+  [
+   "D",
+   0.5,
+   "Z"
+  ],
+  [
+   "D",
+   0.5,
+   "X"
+  ],
+  [
+   "V",
+   0.75,
+   "none"
+  ],
+  [
+   "D",
+   0.75,
+   "Z"
+  ],
+  [
+   "D",
+   0.75,
+   "X"
+  ],
+  [
+   "V",
+   1.0,
+   "none"
+  ],
+  [
+   "D",
+   1.0,
+   "Z"
+  ],
+  [
+   "D",
+   1.0,
+   "X"
+  ]
+ ],
+ "exact": {
+  "0.0": {
+   "V": 1.0,
+   "D": 0.0,
+   "duality": 1.0
+  },
+  "0.25": {
+   "V": 0.9238795325112867,
+   "D": 0.3826834323650898,
+   "duality": 1.0
+  },
+  "0.5": {
+   "V": 0.7071067811865476,
+   "D": 0.7071067811865475,
+   "duality": 1.0
+  },
+  "0.75": {
+   "V": 0.38268343236508984,
+   "D": 0.9238795325112867,
+   "duality": 1.0
+  },
+  "1.0": {
+   "V": 6.123233995736766e-17,
+   "D": 1.0,
+   "duality": 1.0
+  }
+ },
+ "prereg": {
+  "G1_V_law": "|V - cos(th/2)| <= 0.10 every dose; V strictly decreasing",
+  "G2_D_law": "|D - sin(th/2)| <= 0.10 every dose; D strictly increasing",
+  "G3_duality": "|V^2 + D^2 - 1| <= 0.12 at every interior dose",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "single system + single owned-bath record (200b/F118); Englert duality on the bath-record dial that governs the ledger arc",
+  "budget_predictions": "duality residual <= 0.08; V(pi/2)=D(pi/2)~0.707"
+ }
+}
