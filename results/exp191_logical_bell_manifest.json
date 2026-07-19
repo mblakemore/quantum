@@ -1,0 +1,49 @@
+{
+ "exp": 191,
+ "slug": "logical_bell",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e64rsjeosc73fid0gg",
+ "order": [
+  [
+   "logical",
+   "Z"
+  ],
+  [
+   "logical",
+   "X"
+  ],
+  [
+   "logical_idle",
+   "Z"
+  ],
+  [
+   "logical_idle",
+   "X"
+  ],
+  [
+   "nocx",
+   "Z"
+  ],
+  [
+   "nocx",
+   "X"
+  ],
+  [
+   "bare",
+   "Z"
+  ],
+  [
+   "bare",
+   "X"
+  ]
+ ],
+ "prereg": {
+  "primary": "S_L1(logical) > 1 at (S-1)/se >= 5; band 1.55-1.85",
+  "internal_control": "S_L2(logical) in 0.85-1.05 (AT the bound)",
+  "operating_point": "S_L1(logical_idle) > 1 at >=5 sigma; band 1.35-1.75",
+  "falsifier": "S_L1(nocx) in -0.10..0.15 AND S_L2(nocx) in 0.85-1.05",
+  "reference": "S_bare 1.80-1.95",
+  "gauges": "block-pair acceptance >= 0.70/basis"
+ }
+}
