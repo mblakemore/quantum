@@ -1,0 +1,95 @@
+{
+ "exp": 182,
+ "slug": "dist_bv3",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e2f4kinv1c73apo1l0",
+ "order": [
+  [
+   "local",
+   "000"
+  ],
+  [
+   "local",
+   "001"
+  ],
+  [
+   "local",
+   "010"
+  ],
+  [
+   "local",
+   "011"
+  ],
+  [
+   "local",
+   "100"
+  ],
+  [
+   "local",
+   "101"
+  ],
+  [
+   "local",
+   "110"
+  ],
+  [
+   "local",
+   "111"
+  ],
+  [
+   "dist",
+   "000"
+  ],
+  [
+   "dist",
+   "001"
+  ],
+  [
+   "dist",
+   "010"
+  ],
+  [
+   "dist",
+   "011"
+  ],
+  [
+   "dist",
+   "100"
+  ],
+  [
+   "dist",
+   "101"
+  ],
+  [
+   "dist",
+   "110"
+  ],
+  [
+   "dist",
+   "111"
+  ],
+  [
+   "noresource",
+   "000"
+  ],
+  [
+   "noresource",
+   "001"
+  ],
+  [
+   "noresource",
+   "011"
+  ],
+  [
+   "noresource",
+   "111"
+  ]
+ ],
+ "prereg": {
+  "primary": "dist > noresource >=3 sigma per weight class; modal 8/8",
+  "scaling": "successive ratios r1,r2,r3 consistent within 2 sigma => constant-cost law; r_hat band 0.93-0.99; report r_hat^10",
+  "bands": "local 0.85-0.99 all; dist P0 0.90-0.99, P1 0.84-0.97, P2 0.78-0.95, P3 0.72-0.93; noresource w1 0.42-0.56, w2 0.19-0.31, w3 0.09-0.17",
+  "failure_mode_named": "monotone ratio degradation > 2 sigma => resource-scale interaction (routing congestion / e-bit prep crosstalk)"
+ }
+}
