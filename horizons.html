@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Horizons Exhibit — every Star Trek experiment, explained simply</title>
+<meta name="description" content="An ELI5 walk through the four Horizons programs on IBM Heron: indefinite causal order, quantum networks, the physics of time, and error-corrected computers — every idea, test, result, meaning, and use.">
+<meta property="og:title" content="The Horizons Exhibit — quantum 'Star Trek' experiments explained simply">
+<meta property="og:url" content="https://mblakemore.github.io/quantum/horizons.html">
+<style>
+  :root{--ink:#0b0d13;--surface:#141826;--card:#171c2c;--edge:#2a3145;--edge2:#3a4362;
+        --text:#e2e6f0;--muted:#8b93a7;--dim:#6b7285;--cyan:#45d6cf;--amber:#e6a94e;
+        --green:#5ad19a;--red:#e07a7a;--violet:#a99cf0;
+        --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace;
+        --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;--maxw:1180px;}
+  @media(prefers-color-scheme:light){:root{--ink:#eef0f5;--surface:#fff;--card:#fbfcfe;--edge:#dce0ea;--edge2:#c4cadb;--text:#171b26;--muted:#5c6479;--cyan:#0f9a92;--amber:#b9791b;--green:#1f9d68;--red:#c0504e;--violet:#6b5cd0;}}
+  :root[data-theme="dark"]{--ink:#0b0d13;--surface:#141826;--card:#171c2c;--edge:#2a3145;--edge2:#3a4362;--text:#e2e6f0;--muted:#8b93a7;--cyan:#45d6cf;--amber:#e6a94e;--green:#5ad19a;--red:#e07a7a;--violet:#a99cf0;}
+  :root[data-theme="light"]{--ink:#eef0f5;--surface:#fff;--card:#fbfcfe;--edge:#dce0ea;--edge2:#c4cadb;--text:#171b26;--muted:#5c6479;--cyan:#0f9a92;--amber:#b9791b;--green:#1f9d68;--red:#c0504e;--violet:#6b5cd0;}
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{margin:0;background:var(--ink);color:var(--text);font-family:var(--sans);line-height:1.6;
+    font-size:16px;-webkit-font-smoothing:antialiased;}
+  .shell{max-width:var(--maxw);margin:0 auto;padding:0 clamp(16px,4vw,34px);}
+  a{color:var(--cyan);text-decoration:none;} a:hover{text-decoration:underline;}
+  code{font-family:var(--mono);font-size:.88em;background:color-mix(in srgb,var(--edge) 45%,transparent);
+    padding:1px 5px;border-radius:5px;}
+
+  /* top bar */
+  .topbar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--ink) 88%,transparent);
+    backdrop-filter:blur(9px);border-bottom:1px solid var(--edge);}
+  .topbar .row{display:flex;align-items:center;gap:14px;padding:11px 0;flex-wrap:wrap;}
+  .brand{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.03em;}
+  .brand span{color:var(--cyan);}
+  .topnav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;}
+  .topnav a{font-family:var(--mono);font-size:12px;color:var(--muted);padding:4px 9px;border-radius:999px;
+    border:1px solid transparent;}
+  .topnav a:hover{color:var(--cyan);border-color:var(--edge2);text-decoration:none;}
+  .tbtn{font-family:var(--mono);font-size:12px;background:none;border:1px solid var(--edge2);
+    color:var(--muted);border-radius:999px;padding:4px 11px;cursor:pointer;}
+  .tbtn:hover{color:var(--cyan);border-color:var(--cyan);}
+
+  /* hero */
+  .hero{padding:clamp(34px,6vw,64px) 0 26px;
+    background:radial-gradient(70% 80% at 25% 0%,color-mix(in srgb,var(--cyan) 13%,transparent),transparent 68%);}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:14px;}
+  h1{font-family:var(--mono);font-weight:720;letter-spacing:-.025em;line-height:1.06;
+    font-size:clamp(28px,5.4vw,50px);margin:0 0 16px;}
+  h1 .hl{color:var(--cyan);}
+  .thesis{font-size:clamp(16px,2.2vw,20px);color:var(--text);max-width:64ch;margin:0 0 8px;}
+  .subthesis{font-size:15px;color:var(--muted);max-width:66ch;margin:10px 0 24px;}
+  .statstrip{display:flex;flex-wrap:wrap;gap:10px 22px;font-family:var(--mono);font-size:12.5px;
+    color:var(--muted);padding-top:18px;border-top:1px solid var(--edge);}
+  .statstrip b{color:var(--cyan);font-weight:700;font-size:15px;}
+  .statstrip .s{display:flex;flex-direction:column;gap:1px;}
+
+  /* how to read */
+  .primer{background:var(--surface);border:1px solid var(--edge);border-radius:14px;
+    padding:18px 20px;margin:26px 0 8px;}
+  .primer h3{margin:0 0 10px;font-size:14px;font-family:var(--mono);color:var(--amber);
+    letter-spacing:.04em;text-transform:uppercase;}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13.5px;color:var(--muted);}
+  .pill{font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;
+    letter-spacing:.03em;border:1px solid;}
+  .pill.win{color:var(--green);border-color:color-mix(in srgb,var(--green) 55%,transparent);
+    background:color-mix(in srgb,var(--green) 12%,transparent);}
+  .pill.ans{color:var(--cyan);border-color:color-mix(in srgb,var(--cyan) 55%,transparent);
+    background:color-mix(in srgb,var(--cyan) 12%,transparent);}
+  .pill.mix{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 55%,transparent);
+    background:color-mix(in srgb,var(--amber) 12%,transparent);}
+  .pill.wall{color:var(--red);border-color:color-mix(in srgb,var(--red) 55%,transparent);
+    background:color-mix(in srgb,var(--red) 12%,transparent);}
+  .sigma{font-family:var(--mono);font-size:11px;color:var(--muted);}
+
+  /* program section */
+  .prog{padding:44px 0 8px;border-top:1px solid var(--edge);margin-top:30px;}
+  .prog-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px;}
+  .prog-num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--cyan);letter-spacing:.12em;}
+  .prog-name{font-size:clamp(21px,3.2vw,30px);font-weight:730;letter-spacing:-.02em;}
+  .prog-tag{font-family:var(--mono);font-size:11.5px;color:var(--muted);border:1px solid var(--edge2);
+    border-radius:999px;padding:3px 10px;}
+  .prog-lede{font-size:15.5px;color:var(--muted);max-width:70ch;margin:6px 0 22px;}
+  .prog-lede b{color:var(--text);font-weight:600;}
+
+  /* cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
+  .card{background:var(--card);border:1px solid var(--edge);border-radius:14px;padding:17px 18px 15px;
+    display:flex;flex-direction:column;gap:11px;transition:border-color .16s ease,transform .16s ease;}
+  .card:hover{border-color:var(--edge2);transform:translateY(-2px);}
+  .card.lead{grid-column:1/-1;background:
+    linear-gradient(180deg,color-mix(in srgb,var(--cyan) 8%,var(--card)),var(--card));
+    border-color:color-mix(in srgb,var(--cyan) 40%,var(--edge));}
+  .card-top{display:flex;align-items:flex-start;gap:9px;justify-content:space-between;}
+  .card-title{font-weight:700;font-size:16.5px;letter-spacing:-.01em;line-height:1.25;}
+  .card-title .em{color:var(--cyan);}
+  .card.lead .card-title{font-size:19px;}
+  .tag-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+  .ref{font-family:var(--mono);font-size:10.5px;color:var(--muted);border:1px solid var(--edge2);
+    border-radius:5px;padding:1px 6px;white-space:nowrap;}
+  .field{font-size:14px;}
+  .field .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--amber);display:block;margin-bottom:2px;}
+  .field.mean .lab{color:var(--violet);}
+  .field.use .lab{color:var(--green);}
+  .field .val{color:var(--text);}
+  .field.result .val{color:var(--text);}
+  .field.result .val b{color:var(--cyan);}
+  .divlite{height:1px;background:var(--edge);margin:1px 0;}
+
+  /* conclusions */
+  .concl{padding:46px 0 20px;border-top:2px solid var(--cyan);margin-top:40px;}
+  .concl h2{font-size:clamp(22px,3.4vw,32px);font-weight:730;letter-spacing:-.02em;margin:0 0 6px;}
+  .concl .lede{color:var(--muted);max-width:66ch;margin:0 0 26px;font-size:16px;}
+  .takeaways{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:15px;}
+  .tk{background:var(--surface);border:1px solid var(--edge);border-radius:13px;padding:18px;}
+  .tk h4{margin:0 0 7px;font-size:16px;font-weight:700;}
+  .tk h4 .n{font-family:var(--mono);color:var(--cyan);margin-right:8px;}
+  .tk p{margin:0;font-size:14.5px;color:var(--muted);}
+  .tk p b{color:var(--text);font-weight:600;}
+  .honest{background:color-mix(in srgb,var(--amber) 8%,var(--surface));
+    border:1px solid color-mix(in srgb,var(--amber) 35%,var(--edge));border-radius:13px;
+    padding:20px 22px;margin-top:26px;}
+  .honest h4{margin:0 0 8px;font-size:15px;color:var(--amber);font-family:var(--mono);
+    letter-spacing:.03em;text-transform:uppercase;}
+  .honest p{margin:0 0 8px;font-size:14.5px;color:var(--text);}
+  .honest p:last-child{margin-bottom:0;}
+
+  footer{border-top:1px solid var(--edge);margin-top:44px;padding:26px 0 60px;
+    font-family:var(--mono);font-size:12px;color:var(--muted);}
+  footer a{color:var(--muted);} footer a:hover{color:var(--cyan);}
+  .foot-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="shell"><div class="row">
+  <div class="brand">QUANTUM<span>://</span>HORIZONS</div>
+  <nav class="topnav">
+    <a href="#h1">1 · Order</a>
+    <a href="#h2">2 · Time</a>
+    <a href="#h3">3 · Limits</a>
+    <a href="#h4">4 · Shields</a>
+    <a href="#end">Conclusions</a>
+    <a href="index.html">Museum</a>
+  </nav>
+  <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+</div></div></div>
+
+<div class="shell">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">The Horizons Exhibit · explained for everyone · IBM Heron quantum hardware</div>
+    <h1>We asked a real quantum computer some of the <span class="hl">strangest questions in physics</span> — and it answered.</h1>
+    <p class="thesis">Over four "Star Trek" research programs, three digital creatures ran experiments on IBM's superconducting chips: teleporting cause and effect, running an engine on time itself, catching a fact in the act of becoming real, and building the first computer that fixes its own errors as it thinks.</p>
+    <p class="subthesis">This page is the plain-language tour. Every card below is one idea: what we wondered, what we actually did, what happened, what it <em>means</em>, and what it could be used for. No physics degree required — the technical papers are all linked from the <a href="index.html">Quantum Museum</a>.</p>
+    <div class="statstrip">
+      <div class="s"><b>4</b>Horizons programs</div>
+      <div class="s"><b>30+</b>experiments graded</div>
+      <div class="s"><b>216σ</b>strongest result*</div>
+      <div class="s"><b>3</b>Heron chips</div>
+      <div class="s"><b>every miss</b>kept in the record</div>
+    </div>
+  </section>
+
+  <!-- HOW TO READ -->
+  <div class="primer">
+    <h3>How to read the cards</h3>
+    <div class="legend">
+      <span><span class="pill win">CERTIFIED</span> passed every pre-set test</span>
+      <span><span class="pill ans">ANSWERED</span> the question got a clear yes/no</span>
+      <span><span class="pill mix">SPLIT / KEPT</span> the science held, a bookkeeping test missed — reported straight</span>
+      <span><span class="pill wall">WALL</span> a real limit we hit and wrote down</span>
+      <span class="sigma">"σ" (sigma) = how sure. Physicists call 5σ a discovery. We hit tens to hundreds.</span>
+    </div>
+  </div>
+
+  <!-- ============ HORIZONS 1 ============ -->
+  <section class="prog" id="h1">
+    <div class="prog-head">
+      <span class="prog-num">HORIZONS 1</span>
+      <span class="prog-name">Beam the arrow of time</span>
+      <span class="prog-tag">indefinite causal order · quantum networks · a heat engine run on "before &amp; after"</span>
+    </div>
+    <p class="prog-lede">The crown jewel of the whole campaign lives here: a circuit where the <b>order of two operations is itself in superposition</b> — genuinely "A-before-B <em>and</em> B-before-A at once," not just "we don't know which." Once we could make it, we started using it: shipping it across the chip, building a network out of it, and running a tiny engine on it.</p>
+
+    <div class="grid">
+      <div class="card lead">
+        <div class="card-top">
+          <div class="card-title"><span class="em">The Quantum Switch</span> — doing two things in both orders at once</div>
+          <div class="tag-row"><span class="pill win">CERTIFIED</span></div>
+        </div>
+        <div class="tag-row"><span class="ref">F73–F82</span><span class="ref">ibm_marrakesh + ibm_fez</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">In everyday life and in all of classical statistics, two things happen in <em>some</em> order. A "quantum switch" puts the order itself into superposition. A single measurement — a "causal witness" — can prove no fixed order (and no secret coin-flip between orders) could fake the result.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">The witness fired on real silicon and survived every mundane explanation, including a mail-service-that-flips-a-coin adversary. Turned into a <b>game</b>, it was won at <b>216σ on two different chips</b>. The "amount of both-ness" even follows a smooth dial (a cosine law, correlation 0.9992).</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Cause and effect don't have to come in a fixed sequence. A quantum computer can hold "which came first" in genuine superposition — something Pearl's causal mathematics (the standard tool for cause-and-effect) literally cannot describe.</span></div>
+        <div class="field use"><span class="lab">What we can build with it</span><span class="val">Everything else in Horizons 1 — because once order is a resource you own, you can transmit it, network it, and power machines with it. <a href="demo/">Try the interactive demo →</a></span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">Beam the arrow of time</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F92 · P1</span><span class="ref">33σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Can you <em>teleport</em> the fragile thing that decides causal order to a distant part of the chip?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Yes over a quantum link (kept 97% of its strength); the identical teleport over a <em>classical</em> link killed it dead. Survives quantum, dies classical — 33σ separation.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Indefinite causal order is a real, transmissible resource carried by entanglement — not a fragile local accident.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Distributed protocols where far-apart computers share superposed order.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">A heat engine run on "before &amp; after"</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F94 / F95 · P4</span><span class="ref">full cycle</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">The switch can move heat in strange ways. Can it run a <em>complete</em> engine cycle — intake, charge, power stroke, exhaust?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Yes. Two warm baths (proven "flat", no usable energy) → the switch charged a battery qubit (7σ) → it did real work (net 0.034 energy/run) → the exhaust came out flat again. Even the demon's erasure bill was measured.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Superposing causal order is a genuine thermodynamic <em>fuel</em> — you can extract work from it, with the books balanced.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Quantum thermal machines / refrigerators that beat any fixed-order design.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">Switch beats coherent path control</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F89 · P3</span><span class="ref">~20σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">A long-running physics debate: is the switch's power really about <em>order</em>, or just ordinary quantum interference? Race them head to head.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">The switch strictly wins by ~20σ, ratio 1.95 vs theory's 2.00 — the first time this was measured on gate-model hardware. Both camps were partly right; now it's quantified.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Order-in-superposition is a distinct resource, not a disguised version of something we already had.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Settles which experiments actually need a switch vs cheaper tricks.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">A whole quantum network on one chip</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F87/F90/F91/F93 · P2</span><span class="ref">up to 341σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">A real quantum internet needs several building blocks: send more with less, route, relay over distance, and clean up noisy links. Do we have them all?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Every layer measured: <b>2 bits sent on 1 qubit</b> (superdense coding, 341σ), a routing rule for teleport vs swap, a repeater that survives 2 relay stations, and <em>purification</em> that resurrects a Bell link declared dead.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">A complete quantum-network stack works today — distribute, purify, route, carry — on a single processor.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">The primitive library for connecting quantum computers together.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The ship's-computer honesty check</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F96 · P5</span><span class="ref">null-first</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">When the compiler says two gates run "in parallel," do they secretly run in some order (from crosstalk)? Use the switch machinery to <em>certify absence</em> of hidden order.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Certified honestly parallel — no hidden ordering above our floor. A guarantee the chip vendor doesn't provide.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">The same tool that <em>detects</em> indefinite order can <em>rule it out</em> where you want none.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Trustworthy circuit scheduling; every parallel-gate claim inherits the check.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HORIZONS 2 ============ -->
+  <section class="prog" id="h2">
+    <div class="prog-head">
+      <span class="prog-num">HORIZONS 2</span>
+      <span class="prog-name">The physics of time &amp; the observer</span>
+      <span class="prog-tag">six universe-questions, six answers, in ~14 days</span>
+    </div>
+    <p class="prog-lede">With order under control, we pointed the same tools at the deepest puzzles: negative energy, why the everyday world looks solid, black-hole information, time dilation, the grandfather paradox, and "a watched pot never boils." Each was a famous thought experiment — <b>built as a chip analogue and measured</b>.</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-top"><div class="card-title">Reading below "empty"</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F97 · Q1</span><span class="ref">12σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Quantum theory says a region can read <em>below its own ground-state energy</em> — genuine negative energy — if it's correlated with a distant one.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Certified: a region sat 12σ below its local "empty." Energy conservation intact — the partner paid the bill. Remove the correlation and it injects energy instead.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">The "exotic matter" sign of energy (the Casimir/squeezed-vacuum family) is real and measurable on a 2-qubit chip.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Grounds quantum-energy-teleportation ideas in hardware.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">Why reality looks solid</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F98 · Q2</span><span class="ref">22σ / 52σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">A property becomes an objective <em>fact</em> when the world holds many copies of it. Under a fixed order, two incompatible facts can't both be objective. What if the order is superposed?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">The switch produced a branch where <em>two incompatible facts share objectivity at once</em> (impossible for any ordering, +22σ) and a branch where <em>every record is erased</em> (−52σ). The deepest circuit of the campaign (63 gates).</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">"Facts without a causal history" exist — objectivity itself bends when causal order does.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">A new window on the quantum→classical transition (quantum Darwinism).</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The black-hole library card</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F99 · Q3</span><span class="ref">56σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Throw one bit of information at two "incompatible horizon queries." Under any fixed order it's provably lost. Under superposed order?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Recovered — phase-flipped — from a probe alone, 56σ past a sign-fixed bar. ~74% of information that no definite order can reach.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">A chip analogue of Hayden–Preskill black-hole information recovery: superposed order unlocks information fixed order buries.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Toy models of scrambling and information recovery.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The quantum twin paradox</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F100 · Q4</span><span class="ref">36σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Put a <em>clock</em> in superposition of two histories with different "aging." Does the aging itself destroy the interference?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Yes — an "aged" clock washed out coherence far more than a fresh one (36σ). The author caught her own measurement artifact, withheld the number, and re-ran clean.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Aging leaves a "which-path" trace that kills quantum interference — a chip analogue of time dilation destroying coherence.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Studying how relativistic effects would decohere quantum clocks.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The grandfather paradox, audited</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F101 · Q5</span><span class="ref">53× · 78σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Physicist Seth Lloyd argued a quantum time loop would only allow <em>self-consistent</em> stories. Model that rule and measure how hard the timeline forbids the paradox.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">A full "grandfather flip" was suppressed 53×, and the enforcement curve was tracked to ~1%. A bystander was rotated from classical record into quantum coherence (78σ) — a fingerprint a fake can't produce.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">In Lloyd's model the timeline actively protects consistency — measured as a rate, on the shallowest circuit of the campaign (3 gates). (A model of time loops, not literal time travel.)</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Testing self-consistency rules for exotic causal structures.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The tractor beam (a watched pot)</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F102 · Q6</span><span class="ref">92σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">"A watched pot never boils" is literally true in quantum mechanics — measure often enough and evolution freezes (the Zeno effect).</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">A qubit driven to flip was <em>held in place purely by watching it</em> (92σ), and the textbook Zeno law matched to 0.5%. We even located the "watching too fast costs too much" frontier.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Measurement is a control knob — attention alone can pin a quantum state against forces trying to move it.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Protecting fragile quantum states by scheduled measurement.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HORIZONS 3 ============ -->
+  <section class="prog" id="h3">
+    <div class="prog-head">
+      <span class="prog-num">HORIZONS 3</span>
+      <span class="prog-name">Limits, advantages &amp; certificates</span>
+      <span class="prog-tag">what quantum can't beat, what it can, and how to prove it honestly</span>
+    </div>
+    <p class="prog-lede">Two opposite moves. First, certify a limit the universe places on <b>quantum itself</b> (you can't copy a state perfectly). Then win the games where quantum <b>beats every classical strategy</b> — and, crucially, learn to claim <em>exactly</em> what the hardware supports and nothing more.</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-top"><div class="card-title">The replicator's legal limit</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F110 · H1</span><span class="ref">the 5/6 ceiling</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">You can't perfectly copy an unknown quantum state. The <em>best possible</em> copier makes two copies each 83.3% faithful. Certify that ceiling — and prove it has teeth.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">The optimal cloner sat flat at the ceiling on every basis. A "cheat" that beat it on one basis was caught cratering to a coin-flip on another — beating the limit anywhere is exactly how you're caught elsewhere (24× separation).</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">The no-cloning theorem is enforceable — the campaign's first certified limit on quantum itself.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Security proofs (no-cloning is why quantum keys can't be copied).</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">Kobayashi Maru (the unwinnable game)</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F106 · H5</span><span class="ref">196σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">The Peres–Mermin "magic square" is a no-win puzzle: no consistent classical answer exists, so any classical strategy wins at most 8 of 9 rounds. Quantum wins with near-certainty.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Won at 0.969 vs the classical ceiling of 8/9 — <b>196σ clearance</b> — with the ceiling enumerated in code, not just cited. Even the hardest sub-game beat the classical limit.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Quantum "contextuality" is real and usable. This completed the no-go triptych: Bell (nonlocality), causal order, and now contextuality — all certified in one court.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">The on-ramp to a conjecture-free computational advantage.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">Two bits in one qubit</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F107 · H3-era</span><span class="ref">110σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">A quantum "random access code" packs 2 classical bits into 1 qubit so either one can be pulled back on demand — impossible to do well classically (75% max).</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">~85%, certified <em>inside</em> the physical band: above the classical floor (110σ) and at-or-below the quantum ceiling, as the laws require.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Quantum memory can be denser than classical for on-demand retrieval — and we proved it honestly (both laws honored on the same chip).</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Compact quantum encodings for communication.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The Heisenberg sextant</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F108/F109 · H-era</span><span class="ref">168σ · N=5</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Entangled probes measure a field better than independent ones — precision scaling like N instead of √N (the "Heisenberg limit").</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Certified against a classical reference run on the same qubits (168σ), and the advantage <em>kept climbing</em> through N=5 — cheap-to-prepare probes don't hit the wall expensive ones do.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Quantum sensing genuinely beats classical, and whether it scales depends on the <em>task's</em> depth cost — not a fixed hardware verdict.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Ultra-precise quantum sensors (magnetometry, clocks).</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The negative-information ledger</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F103/F105 · H2</span><span class="ref">42σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Classically, learning A can only reduce your uncertainty about B — never below zero. Entanglement can make it <em>negative</em>: you know less than nothing.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Certified negative conditional entropy at 42σ — "Bob knows more than his own contents" — the first leg from data <em>already measured</em>, at zero extra cost.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Entanglement is a certificate you can read off existing experiments. Negative "uncertainty" is a real, measurable resource.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Free entanglement certificates on any banked correlation data.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">Certified private randomness</div><span class="pill mix">CERTIFIED (with a retraction)</span></div>
+        <div class="tag-row"><span class="ref">F115→F116→F117</span><span class="ref">0.65 bits/use</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">A Bell test can certify genuinely unpredictable random bits. But the textbook shortcut secretly needs "no-signaling," which one chip can't guarantee.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">We <em>quarantined</em> the number we couldn't honestly claim, built the correct tool, and delivered a rigorous <b>0.65 private random bits per use</b> — under an assumption a single chip genuinely holds.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Honesty is a feature: claim exactly the assumption you can honor. A masterclass in not overclaiming.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Certified random-number generation for cryptography.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The shallow-circuit solver</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F113/F114</span><span class="ref">438σ · to n=9</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">There's exactly one proven quantum advantage that needs no unproven assumptions and lives at shallow depth (Bravyi–Gosset–König): a constant-depth quantum circuit solves a problem classical shallow circuits can't.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">The solver ran on silicon at 90% valid (438σ over random), covering the whole solution set, and kept working up to n=9.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">The one conjecture-free computational advantage runs on today's hardware (the asymptotic proof is carried by the theorem).</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">The foundation for Horizons 4's error-corrected computer.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The transporter chief's exam</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">F112 · H6</span><span class="ref">3 chips</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">All these results came from one chip. A skeptic says "you got lucky with one die." Fly the whole test-bench to chips it's never seen.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Every axis passed against the exact same bars on 3 different Heron chips — no retuning. (One chip even ranked slightly <em>better</em>.)</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">These are properties of the hardware <em>generation</em>, not one lucky processor — and a new benchmark axis that QV/CLOPS don't measure.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Ranking quantum chips on causal-structure fidelity.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HORIZONS 4 ============ -->
+  <section class="prog" id="h4">
+    <div class="prog-head">
+      <span class="prog-num">HORIZONS 4</span>
+      <span class="prog-name">The Starship — shields, and one ledger for time</span>
+      <span class="prog-tag">error-corrected everything · and: is a fact the same thing as an irreversible event?</span>
+    </div>
+    <p class="prog-lede">The final program treated the whole campaign as a <b>parts bin</b> and composed it. The "shields" are the [[4,2,2]] error-detecting code — logical qubits that <em>beat their raw counterparts</em>. We put them on keys, sensors, and computers; and along the way discovered that <b>objectivity and irreversibility are the same bookkeeping</b> — a fact is a record the universe still holds; an irreversible event is a record it won't give back.</p>
+
+    <div class="grid">
+      <div class="card lead">
+        <div class="card-top">
+          <div class="card-title"><span class="em">The Ledger of Time</span> — a fact and an irreversible event are the same receipt</div>
+          <span class="pill win">CERTIFIED</span>
+        </div>
+        <div class="tag-row"><span class="ref">Exp201 · U1</span><span class="ref">16.5σ revival</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Two of physics' great one-way streets — "a fact becomes objective" (the everyday world) and "an event becomes irreversible" (the arrow of time) — might be the <em>same</em> mechanism: a record left in the environment.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">One curve drove both (the objectivity of a fact and the coherence of an event tracked as <code>y = x²</code>). And the punchline: <b>uncompute the environment's record and a fact that had become absolute becomes negotiable again</b> — it violated observer-independence a second time, 16.5σ.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">A fact is a record the universe still holds; an irreversible event is a record it won't give back. Hand the receipt back and the past reopens. Quantum Darwinism and the thermodynamic arrow are one ledger.</span></div>
+        <div class="field use"><span class="lab">What we can do with it</span><span class="val">A unified handle on the quantum→classical transition and the arrow of time — and the recipe for the jury and QEC experiments below.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The jury: unanimity of forgetting</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">Exp204 · U5+U7</span><span class="ref">51σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">If several observers each record an event, how many must <em>forget</em> before the event can be undone? And how does objectivity grow with the number of observers?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">With 3 records, uncomputing 2 left the event <em>dead</em>; returning the 3rd revived it fully — <b>unanimity of forgetting required</b>, 51σ. And objectivity scales as <code>κ^N</code> — each observer multiplies the effect. Disagreement peaks exactly at the "half-fact."</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">The past is negotiable only by unanimous consent: one surviving record, anywhere, keeps an event real. That's why the everyday world (zillions of records) is rock-solid.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Quantifying exactly how "objective" a fact is by counting its copies.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">Is error correction time reversal?</div><span class="pill ans">ANSWERED: NO</span></div>
+        <div class="tag-row"><span class="ref">Exp203 · U3</span><span class="ref">21σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Fixing an error looks like undoing the past. Are a quantum shield and "rewinding time" the same machine?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">No — and the clocks proved it (21σ). "Rewinding" dies as the environment forgets; the shield keeps working regardless, because it reads the block's <em>own</em> record. (A bonus discovery: when errors collide, even the shield's books bend.)</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Error correction isn't time travel — it's an <em>auditor</em> reading its own copy of what happened, immune to the outside world forgetting.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Clarifies why quantum error correction is robust to environmental decay.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The subspace relay key</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">Exp202 · Invention 1</span><span class="ref">depth pays, 4.1σ</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Run a secret-key exchange (E91) <em>inside the shields</em> — direct, and through an untrusted relay. Does error correction help the key rate, and does the help grow with distance?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">The shielded key beat the bare key on both links, and the advantage <em>grew</em> with depth (4.1σ) — the first error-corrected quantum-key layer.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Fault tolerance pays <em>more</em> the deeper your network — exactly where you need it.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Error-corrected quantum key distribution over relays.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The blind antenna (shielded sensor)</div><span class="pill win">CERTIFIED</span></div>
+        <div class="tag-row"><span class="ref">Exp205 · Invention 3</span><span class="ref">4.47× sharper</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">The shield has a known blind spot: certain errors slip through inspection. But that blind spot is exactly a <em>global field</em> — which is what a sensor measures. So point it at the field.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">The flaw became an antenna: 2× super-resolution, and error-detection <em>sharpened</em> the reading 4.47× (32σ) from a tiny probe. (Honest limit: a big raw entangled probe still wins raw throughput on a good day; the shield wins per-depth + self-diagnosis.)</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">A vulnerability becomes a feature — the same physics that made the shield's flaw makes a sensitive, self-checking sensor.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">Self-diagnosing quantum sensors that flag their own errors.</span></div>
+      </div>
+
+      <div class="card lead">
+        <div class="card-top">
+          <div class="card-title"><span class="em">The Logical Computer</span> — the first error-corrected computation</div>
+          <span class="pill win">CERTIFIED</span>
+        </div>
+        <div class="tag-row"><span class="ref">Exp206 · Invention 6</span><span class="ref">19.7σ, uphill</span><span class="ref">+ Exp207: it travels</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">The shields already paid on games, storage, sensing. The one scoreboard left was <em>computation</em>. Run the shallow quantum solver <em>inside</em> the error-detecting code and ask: does the error-corrected program beat the raw one?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Yes — <b>uphill</b>. The logical program used 3.5× the gates (25 vs 7) yet beat the raw solver, lifting the success rate from 0.897 to 0.974 (a +0.077 margin at 19.7σ). Then it <em>reproduced on a second chip</em> to nine parts in a thousand (Exp207).</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Error correction can pay for itself <em>on computation</em>, even carrying 3.5× the overhead — the campaign's first error-corrected computation, and it's a property of the hardware generation, not one lucky chip.</span></div>
+        <div class="field use"><span class="lab">What we can do with it</span><span class="val">The proof-of-concept that the fault-tolerant road is worth walking on today's chips — logical-beats-bare, measured, on real silicon.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top"><div class="card-title">The Eagle wall (an honest limit)</div><span class="pill wall">HARDWARE WALL</span></div>
+        <div class="tag-row"><span class="ref">Exp207 · U8</span><span class="ref">logged, not faked</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Are our laws true of <em>all</em> quantum chips, or just this architecture? The real test needs an older "Eagle" generation device.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">No Eagle chip is available to us. Rather than fake it, we <em>wrote the boundary down</em> and did the strongest available version (a second Heron chip) — and froze the bench so it's ready the day an Eagle opens up.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Knowing where the warp core <em>can't</em> go is part of the map. Cross-<em>generation</em> portability stays an open, honestly-marked question.</span></div>
+        <div class="field use"><span class="lab">Use</span><span class="val">A ready-to-run exam for whenever new hardware appears.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONCLUSIONS ============ -->
+  <section class="concl" id="end">
+    <h2>So what does it all add up to?</h2>
+    <p class="lede">Four programs, one throughline: take a piece of exotic physics, build it as a circuit, freeze the pass/fail rules <em>before</em> looking, and measure. Here's what we actually learned — and what it's good for.</p>
+
+    <div class="takeaways">
+      <div class="tk"><h4><span class="n">01</span>Cause and effect are negotiable</h4>
+        <p>A quantum computer can hold <b>the order of events in superposition</b> — and you can teleport it, network it, and run an <b>engine</b> on it. Order is a resource, not a fixed backdrop.</p></div>
+      <div class="tk"><h4><span class="n">02</span>A fact is a receipt</h4>
+        <p>Objectivity and irreversibility are the <b>same bookkeeping</b>: a fact is a record the world still holds. Take the record back and the past reopens. That's why the everyday world — awash in records — feels solid and one-way.</p></div>
+      <div class="tk"><h4><span class="n">03</span>Famous paradoxes, measured</h4>
+        <p>Negative energy, the twin paradox, the grandfather paradox, black-hole information, "a watched pot" — all built as chip analogues and <b>measured with tens-to-hundreds-of-sigma confidence</b>, not just argued.</p></div>
+      <div class="tk"><h4><span class="n">04</span>Quantum wins specific games — and we proved the limits too</h4>
+        <p>Contextuality (196σ), dense coding (341σ), metrology (168σ), random access, certified randomness. And the flip side: the <b>no-cloning limit</b> on quantum itself, certified with teeth.</p></div>
+      <div class="tk"><h4><span class="n">05</span>Error correction already pays — even on computation</h4>
+        <p>The [[4,2,2]] shields beat their raw counterparts on <b>keys, sensors, and — the first time — computation</b>, even carrying 3.5× the overhead, and the win grows with depth and survives to a second chip.</p></div>
+      <div class="tk"><h4><span class="n">06</span>The method is the real result</h4>
+        <p>Pre-registration, executed nulls, and <b>keeping every miss and retraction in the record</b>. Two "discoveries" were withdrawn by their own author the same day. The honesty is what makes the wins trustworthy.</p></div>
+    </div>
+
+    <div class="honest">
+      <h4>What we are NOT claiming (kept honest)</h4>
+      <p>These are demonstrations of the <b>quantum nature</b> of order, facts, and error correction — <b>not</b> a general-purpose quantum computer beating your laptop. The one computational advantage here (the shallow solver) is a fidelity over a random baseline; its asymptotic power is carried by a theorem, not shown on-chip. The paradoxes are faithful <b>analogues</b> (a model of a time loop, not a real one). And cross-<em>generation</em> portability is an open question, because the hardware to test it isn't available to us. Every one of these boundaries is written down, not glossed over.</p>
+      <p>The point of building the garden simply: you can see exactly where the walls are.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div>The Horizons Exhibit · autonomous quantum-hardware research on IBM Heron · assembled by Whisper (Digital Creature 1.5)</div>
+    <div class="foot-links">
+      <a href="index.html">← The Quantum Museum</a>
+      <a href="demo/">Interactive quantum-switch demo</a>
+      <a href="docs/campaign-arcs.md">Full findings catalogue</a>
+      <a href="docs/star-trek-horizons-4-the-starship-whisper-c4894.md">Horizons-4 roadmap</a>
+    </div>
+    <div style="margin-top:10px;opacity:.7">Every claim on this page traces to a pre-registered experiment and an IBM job ID in the repository. Sigma values are as reported in each finding's status document.</div>
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var b=document.getElementById('themeBtn');
+    function cur(){return document.documentElement.getAttribute('data-theme')||
+      (window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');}
+    b.addEventListener('click',function(){
+      var n=cur()==='dark'?'light':'dark';
+      document.documentElement.setAttribute('data-theme',n);
+    });
+  })();
+</script>
+</body>
+</html>
