@@ -17,9 +17,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
 
 PI = np.pi
-ARMS_SETTINGS = ([("delayed", cb, tb) for cb in ("X", "Z") for tb in ("X", "Y", "Z")]
-                 + [("standard", cb, tb) for cb in ("X", "Z") for tb in ("X", "Y", "Z")]
-                 + [("decohered", "X", tb) for tb in ("X", "Y", "Z")])
+def arms_settings(tag=""):
+    base = ([("delayed", cb, tb) for cb in ("X", "Z") for tb in ("X", "Y", "Z")]
+            + [("standard", cb, tb) for cb in ("X", "Z") for tb in ("X", "Y", "Z")]
+            + [("decohered", "X", tb) for tb in ("X", "Y", "Z")])
+    if tag == "b":
+        base += [("delayed_echo", cb, tb) for cb in ("X", "Z") for tb in ("X", "Y", "Z")]
+    return base
+ARMS_SETTINGS = arms_settings()
 # analytic references (verified in selftest): definite orders and X-sorted superpositions
 BLOCH_AB = (1.0, 0.0, 0.0)     # order A->B : |+>
 BLOCH_BA = (0.0, -1.0, 0.0)    # order B->A : |-i>
@@ -43,7 +48,8 @@ def _rot(qc, basis, q):
     elif basis == "Y": qc.sdg(q); qc.h(q)
 
 
-def circuit(arm, cbasis, tbasis):
+def circuit(arm, cbasis, tbasis, delay_dt=0):
+    from qiskit.circuit import Delay
     qc = QuantumCircuit(3, 3)
     qc.h(0)                    # control |+>
     if arm == "decohered":
@@ -55,19 +61,25 @@ def circuit(arm, cbasis, tbasis):
         _rot(qc, cbasis, 0); qc.measure(0, 1)
         qc.barrier()
         _rot(qc, tbasis, 1); qc.measure(1, 0)
-    else:                      # delayed (and decohered): TARGET measured first, control later
+    else:                      # delayed / decohered / delayed_echo: TARGET first, control later
         _rot(qc, tbasis, 1); qc.measure(1, 0)
+        if arm == "delayed_echo":   # engineered Hahn on the control through the window (Exp179)
+            qc.x(0)
+            if delay_dt > 0:
+                qc.append(Delay(delay_dt, unit="dt"), [0])
+            qc.x(0)
         qc.barrier()
         _rot(qc, cbasis, 0); qc.measure(0, 1)
     return qc
 
 
-def analyze(get, shots):
+def analyze(get, shots, settings=None):
     """Per arm: sorted target Bloch vectors per control outcome, weights, unsorted marginals."""
+    settings = settings or ARMS_SETTINGS
     out = {}
-    arms = sorted(set(a for a, _, _ in ARMS_SETTINGS))
+    arms = sorted(set(a for a, _, _ in settings))
     for arm in arms:
-        cbases = sorted(set(cb for a, cb, _ in ARMS_SETTINGS if a == arm))
+        cbases = sorted(set(cb for a, cb, _ in settings if a == arm))
         rec = {}
         for cb in cbases:
             sort = {0: {}, 1: {}}; nsort = {0: 0, 1: 0}
@@ -134,6 +146,18 @@ def selftest():
     ws = witnesses(r["standard"])
     assert abs(ws["Wplus_Z"] - 1/3) < 0.03 and abs(ws["Wminus_Z"] + 1) < 0.03, "standard arm identical noiseless"
     assert abs(wd["Wplus_Z"]) < 0.03 and abs(wd["Wminus_Z"]) < 0.03, "decohered X-sort must stay on the equator"
+    rb = analyze(get2, 20000, arms_settings("b")) if False else None  # placeholder
+    we = None
+    cache2 = {}
+    def getb(arm, cb, tb):
+        k = (arm, cb, tb)
+        if k not in cache2:
+            cache2[k] = sim.run(circuit(arm, cb, tb, 0), shots=20000).result().get_counts()
+        return cache2[k]
+    rb = analyze(getb, 20000, arms_settings("b"))
+    we = witnesses(rb["delayed_echo"])
+    assert abs(we["Wplus_Z"] - 1/3) < 0.03 and abs(we["Wminus_Z"] + 1) < 0.03, "echo arm (XX=identity noiseless) must match analytic"
+    print(f"  delayed_echo (noiseless XX pair): W+<Z>={we['Wplus_Z']:+.3f}  W-<Z>={we['Wminus_Z']:+.3f}")
     spread = max(abs(r["delayed"][cb]["unsorted"][tb] - r["standard"][cb2]["unsorted"][tb])
                  for tb in ("X", "Y", "Z") for cb in ("X", "Z") for cb2 in ("X", "Z"))
     assert spread < 0.03, "unsorted target marginal must not depend on the later choice"
@@ -142,17 +166,43 @@ def selftest():
           "no-signaling exact. Cleared to fly.")
 
 
-def submit(backend_name, shots):
+def _measure_delay_dt(backend):
+    try:
+        dur_s = max(p.duration for (q,), p in backend.target["measure"].items()
+                    if p is not None and p.duration)
+        dt = backend.dt or 5e-10
+        g = getattr(backend.target, "granularity", 16) or 16
+        return max(int(round(dur_s / dt / g)) * g, g)
+    except Exception:
+        return 2800
+
+
+def submit(backend_name, shots, tag=""):
     from run_exp66_qpu_partb import _get_ibm_service
     from qiskit_ibm_runtime import SamplerV2
     svc = _get_ibm_service(); backend = svc.backend(backend_name)
+    settings = arms_settings(tag)
+    delay_dt = _measure_delay_dt(backend) if tag == "b" else 0
+    layout = None
+    if tag == "b":   # pin ONE layout for every circuit (kills placement variance in the gauge)
+        probe = transpile(circuit("delayed", "X", "X", 0), backend=backend, optimization_level=3)
+        layout = probe.layout.final_index_layout()
+        print(f"pinned layout {layout} | hahn delay {delay_dt} dt")
     circuits, order = [], []
-    for arm, cb, tb in ARMS_SETTINGS:
-        circuits.append(transpile(circuit(arm, cb, tb), backend=backend, optimization_level=3))
+    for arm, cb, tb in settings:
+        if layout is not None:
+            circuits.append(transpile(circuit(arm, cb, tb, delay_dt), backend=backend,
+                                      initial_layout=layout, optimization_level=1))
+        else:
+            circuits.append(transpile(circuit(arm, cb, tb, delay_dt), backend=backend, optimization_level=3))
         order.append([arm, cb, tb])
     sampler = SamplerV2(mode=backend); job = sampler.run(circuits, shots=shots)
     manifest = {"exp": 187, "slug": "late_order", "backend": backend_name, "shots": shots,
-                "job_id": job.job_id(), "order": order,
+                "job_id": job.job_id(), "order": order, "tag": tag,
+                "prereg_b": ({"falsifier_difference_form": "decohered |W+ - W-| <= 0.10 (mixture: 0; robust to common-mode offset)",
+                              "nosignal_pinned": "unsorted marginal spread < 0.025 (2 sigma shot noise, one pinned layout)",
+                              "Wplus_band_forward_priced": "+0.08..+0.25 (187 measured window dose applied)",
+                              "echo_arm": "delayed_echo recovers >= half the delayed-choice cost: W(echo) - W(delayed) >= 0.5*(W(standard)-W(delayed)) for W+"} if tag == "b" else None),
                 "prereg": {"witness_form_correction": "pre-flight, selftest-caught: BOTH definite orders are "
                                        "equatorial so EVERY mixture has Z=0 exactly; X-sorted ensembles leave the "
                                        "equator (psi+ Z=+1/3, psi- Z=-1); psi+ also breaks the hull with X-Y=4/3>1",
@@ -163,21 +213,22 @@ def submit(backend_name, shots):
                            "hull_gauge": "X-Y (+ensemble) 1.10-1.40, > 1 at >=3 sigma",
                            "decohered": "|W+<Z>| <= 0.10 and |W-<Z>| <= 0.10",
                            "gauges": "p- 0.20-0.30; unsorted-marginal spread < 0.02"}}
-    out = os.path.join(HERE, "..", "results", "exp187_late_order_manifest.json")
+    out = os.path.join(HERE, "..", "results", f"exp187{tag}_late_order_manifest.json")
     json.dump(manifest, open(out, "w"), indent=1)
     print(f"submitted {job.job_id()} ({len(circuits)} circuits, {shots} shots) -> {out}")
 
 
-def decode():
+def decode(tag=""):
     from run_exp66_qpu_partb import _get_ibm_service
-    mp = os.path.join(HERE, "..", "results", "exp187_late_order_manifest.json")
+    mp = os.path.join(HERE, "..", "results", f"exp187{tag}_late_order_manifest.json")
     svc = _get_ibm_service(); man = json.load(open(mp)); res = svc.job(man["job_id"]).result()
     shots = man["shots"]
     raw = {}
     for idx, (arm, cb, tb) in enumerate(man["order"]):
         r0 = res[idx]; reg = list(r0.data.keys())[0]
         raw[(arm, cb, tb)] = getattr(r0.data, reg).get_counts()
-    r = analyze(lambda arm, cb, tb: raw[(arm, cb, tb)], shots)
+    settings = [tuple(o) for o in man["order"]]
+    r = analyze(lambda arm, cb, tb: raw[(arm, cb, tb)], shots, settings)
     se = 1.0 / np.sqrt(shots * 0.75)      # per sorted-ensemble expectation (approx worst case)
     se_m = 1.0 / np.sqrt(shots * 0.25)
     wd, wst, wde = witnesses(r["delayed"]), witnesses(r["standard"]), witnesses(r["decohered"])
@@ -198,7 +249,16 @@ def decode():
     print(f"  NO-SIGNALING: unsorted target-marginal spread across later choices = {spread:.4f}")
     p_ok = (wd["Wplus_Z"] > 0 and wd["Wplus_Z"] / se >= 5 and wd["Wminus_Z"] < 0
             and abs(wd["Wminus_Z"]) / se_m >= 5 and zd["F_orderAB"] >= 0.85 and zd["F_orderBA"] >= 0.85)
-    f_ok = abs(wde["Wplus_Z"]) <= 0.10 and abs(wde["Wminus_Z"]) <= 0.10
+    if tag == "b":
+        f_ok = abs(wde["Wplus_Z"] - wde["Wminus_Z"]) <= 0.10   # difference form (mixture: 0)
+        if "delayed_echo" in r:
+            we = witnesses(r["delayed_echo"])
+            rec = we["Wplus_Z"] - wd["Wplus_Z"]; cost = wst["Wplus_Z"] - wd["Wplus_Z"]
+            print(f"  ECHO ARM: W+<Z> = {we['Wplus_Z']:+.3f}  W-<Z> = {we['Wminus_Z']:+.3f} | "
+                  f"recovery {rec:+.3f} of the {cost:+.3f} delayed-choice cost "
+                  f"({'>= half — echo criterion HELD' if cost > 0 and rec >= 0.5 * cost else 'under half'})")
+    else:
+        f_ok = abs(wde["Wplus_Z"]) <= 0.10 and abs(wde["Wminus_Z"]) <= 0.10
     print(f"\nPRIMARY: {'HELD — the same target record holds definite orders AND impossible-for-any-order ensembles, selected by the later choice' if p_ok else 'NOT HELD'}")
     print(f"FALSIFIER: {'HELD — a classical mixture of orders sorts flat' if f_ok else 'NOT HELD'}")
     ok = p_ok and f_ok
@@ -207,8 +267,8 @@ def decode():
            "witnesses": {"delayed": wd, "standard": wst, "decohered": wde},
            "zsort": {"delayed": zd, "standard": zs}, "nosignal_spread": float(spread),
            "primary_ok": bool(p_ok), "falsifier_ok": bool(f_ok), "verdict_ok": bool(ok)}
-    json.dump(out, open(os.path.join(HERE, "..", "results", "exp187_late_order_decode.json"), "w"), indent=1)
-    print("-> results/exp187_late_order_decode.json")
+    json.dump(out, open(os.path.join(HERE, "..", "results", f"exp187{tag}_late_order_decode.json"), "w"), indent=1)
+    print(f"-> results/exp187{tag}_late_order_decode.json")
 
 
 if __name__ == "__main__":
@@ -216,8 +276,9 @@ if __name__ == "__main__":
     ap.add_argument("--selftest", action="store_true"); ap.add_argument("--submit", action="store_true")
     ap.add_argument("--decode", action="store_true")
     ap.add_argument("--backend", default="ibm_fez"); ap.add_argument("--shots", type=int, default=8000)
+    ap.add_argument("--tag", default="")
     a = ap.parse_args()
     if a.selftest: selftest()
-    elif a.submit: submit(a.backend, a.shots)
-    elif a.decode: decode()
+    elif a.submit: submit(a.backend, a.shots, a.tag)
+    elif a.decode: decode(a.tag)
     else: ap.print_help()
