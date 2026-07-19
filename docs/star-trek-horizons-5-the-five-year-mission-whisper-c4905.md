@@ -214,6 +214,105 @@ to *be* the fuel of a computational separation, on silicon, behind the shield.
 
 ---
 
+## Further Horizons — the larger leaps (higher risk, higher wonder)
+
+*Added C4905 on Creator review (general#243: "any other imaginative discoveries… large leaps?").
+These reach further than P1–P7 — each composes a building block the first seven leave on the
+shelf, and each carries more depth or design risk. They are the "boldly go" tier.*
+
+### P8 — INDEFINITE NETWORK TOPOLOGY: the subspace relay in superposition
+
+**The leap**: F89 proved indefinite *operation order* is a resource that beats any definite
+order. The network (F87/F90/F91) routes messages through *definite* paths. Put the **route
+itself in superposition** — a message that travels through all relay paths at once, its
+topology genuinely indefinite. Ask the F89 question one level up: does indefinite *routing*
+beat any definite path (and any classical mixture of paths)?
+
+**Stands on**: the teleported switch control (F92 — indefinite order already survives
+transmission), the network stack, the resource-separation methodology (F89), the causal
+witness court (F77).
+
+**First flight**: a **two-path superposed relay** — a control qubit superposes which of two
+relay stations performs an entanglement swap; a witness tests whether the routing coherence is
+a genuine resource (fidelity or information advantage over any single definite path and over the
+decohered mixture — the F77 loophole-closure move applied to topology).
+
+**Why it's a leap**: it extends indefinite causal order from *when operations happen* to *where
+information flows* — indefinite causal *structure* at the network level. Nobody has put a
+network topology in superposition on hardware. Tractable because it is shallow (2 relays + a
+control) and pure composition of certified parts.
+
+**What it would mean**: the first indefinite-topology network — a genuinely new kind of
+quantum channel where "which route" is a coherent resource, not a classical choice.
+
+### P9 — THE DILITHIUM CHAMBER: memory that refuses to forget (protection without a code)
+
+**The leap**: the shields protect information with a *code* (stabilizers + postselection).
+Many-body scars (171–173) and discrete time crystals (151) protect it with *dynamics* — they
+refuse to thermalize, refuse to forget. **Store a logical qubit in a scar or time-crystal
+subspace** and let the dynamics, not a code, be the protection. A second, orthogonal paradigm
+of quantum memory.
+
+**Stands on**: the exotic-phases wing (DTC 151/153, PXP scars 171–173 — the one Horizons wing
+P1–P7 leaves unused), the shields (206) for a code-vs-dynamics comparison.
+
+**First flight**: encode a phase in a scar revival (171) or a DTC subharmonic (151) and measure
+its coherence lifetime against a bare idle — does the scar/crystal *extend* memory beyond raw
+decoherence? Then the composition test: **code + dynamics** — a [[4,2,2]] logical qubit whose
+physical carriers sit in a scar subspace (belt-and-suspenders protection).
+
+**Why it's a leap**: it introduces a protection axis the campaign has never used for memory, and
+composes with the shields for a two-layer defense. Depth-risky (scars need N≥8 and survive to
+~433 CZ, 172) — the first flight is the shallow lifetime comparison.
+
+**What it would mean**: "dilithium" — matter engineered to refuse to forget, a dynamical quantum
+memory that could stack with error correction.
+
+### P10 — THE HOLODECK: a unified curved-spacetime-analog bench
+
+**The leap**: Horizons-2 built four gravity/relativity analogs *separately* — negative energy
+(F97), the twin paradox / time dilation (F100), Hayden–Preskill black-hole recovery (F99), the
+closed-timelike-curve audit (F101). Unify them into one bench and ask the 201-style question:
+**do they share a common information-theoretic law?** Is the "which-path aging" that kills the
+twin paradox's coherence the *same* information the black hole buries?
+
+**Stands on**: the whole H2 foundations arc, the ledger-unification method (201 — two phenomena,
+one measured curve).
+
+**First flight**: co-batch the twin-paradox aging (F100) and the HP recovery (F99) on one
+apparatus; test whether F100's which-path aging record and F99's buried horizon information ride
+a single decoherence-vs-proper-time curve — one law, two gravitational analogs.
+
+**Why it's a leap**: it turns four one-off analogs into a *phenomenology suite* with a unifying
+question — the H2 counterpart to what 201 did for the arrow of time. Honestly analog (models,
+not literal spacetime), but a large conceptual synthesis.
+
+**What it would mean**: quantum-gravity phenomenology on silicon as one coherent bench, with a
+candidate unifying law — the closest an honest chip experiment gets to "subspace physics."
+
+### P11 — THE ZENO BRACE: measurement-driven protection of a computation
+
+**The leap**: F102's tractor beam pins a quantum state against evolution *purely by watching it*.
+Compose it with the logical computer (206): use scheduled measurement to **hold logical qubits
+steady during a computation** — measurement-based error *suppression*, a protection axis
+orthogonal to the code and composable with it.
+
+**Stands on**: the Zeno tractor beam (F102, the campaign's cheapest flight — zero 2q gates), the
+logical computer (206), the QND-cost frontier F102 already mapped.
+
+**First flight**: run the logical HLF (206) with Zeno stabilizer-watching *between* logical
+layers — does watching suppress the logical error rate beyond postselection alone, and where is
+the watch-cost frontier for a computation (the F102 frontier, now for a program)?
+
+**Why it's a leap**: it stacks a *second* protection mechanism (measurement) on the code — belt
+and suspenders for fault tolerance — using the cheapest instrument in the campaign. Tractable
+because both halves are certified and shallow.
+
+**What it would mean**: measurement as an active error-suppression layer for logical computation
+— the Zeno effect promoted from a curiosity to a fault-tolerance tool.
+
+---
+
 ## Priority view — if we fly in order
 
 | Rank | Program | Type | QPU | Why this order |
@@ -225,11 +324,67 @@ to *be* the fuel of a computational separation, on silicon, behind the shield.
 | 5 | **P5 Self-Characterizing Chip** (blind-spot spectrum) | instrument | 1 job | Noise metrology as a free byproduct; every ingredient certified |
 | 6 | **P6 Federation Computer** (distributed logical BV) | invention | 2 jobs | Fuses the network + logical-computer arcs; composition-tax risk, but 179 showed the cure |
 | 7 | **P7 Contextuality fuel** (BGKT-2020) | wildcard | 1–2 jobs | Highest conceptual payoff, highest design risk; closes the one un-composed advantage |
+| — | *— further horizons (boldly-go tier) —* | | | |
+| 8 | **P8 Indefinite network topology** | leap | 1–2 jobs | Shallow + pure composition; extends ICO to routing — new kind of channel |
+| 9 | **P9 Dilithium chamber** (dynamical memory) | leap | 1–3 jobs | Uses the unused exotic-phases wing; depth-risky, staged lifetime flight first |
+| 10 | **P10 The Holodeck** (gravity-analog suite) | synthesis | 1–2 jobs | Unifies the whole H2 arc; the 201 move for gravity analogs |
+| 11 | **P11 The Zeno brace** (measurement protection) | leap | 1 job | Cheapest instrument (F102, 0 2q) stacked on the code; second protection axis |
 
 **Recommendation**: fly **P1 (the half-shielded causal witness)** first — it is the single most
 "Star Trek" result available (fault-tolerant indefinite causal order) and the staged first
 flight keeps it shallow and honest. Hold **P2** as the high-confidence fallback if P1's depth
 proves unfriendly — the teleported-S̄ gadget is the surest next milestone either way.
+
+---
+
+## Pre-development structure
+
+*Added C4905 on Creator review (general#243: "revisit for gaps and add pre-dev planning
+structure"). The scaffold every H5 program passes through — the campaign's proven discipline
+made explicit, so any program is immediately actionable and any DC can pick one up.*
+
+### The standard dev pipeline (every program, in order)
+
+| Stage | What happens | Gate to advance | Ref |
+|-------|--------------|-----------------|-----|
+| **0 · Derive** | Whiteboard the physics. If the naive claim is wrong, retract *before* flying. | Claim is falsifiable, mechanism written down | F80 |
+| **1 · Feasibility sim** | Statevector / Clifford-exact ideal run; define the target (valid set / witness / curve). | Ideal circuit does the claimed thing exactly | — |
+| **2 · Compile & depth-check** | Transpile, count 2q, check vs the ~1000-CZ wall; anti-folding for angle sweeps. | Under the depth wall; skeleton uniform | items 11, 2 |
+| **3 · Selftest** | Assert every noiseless-evaluable gate exactly; *find-and-freeze* any decode by search. | Selftest exact; decode frozen | items 6, 12 |
+| **4 · Prereg freeze** | Gates as formulas; budget check (λ_req vs measured); commit **before** submit. | Prereg committed; budget margin stated | items 5–7, C4887 |
+| **5 · Fly & decode** | Submit; grade against frozen gates **only**; keep every miss. | Verdict straight; no post-hoc regrade | XOR/collision priced |
+| **6 · Consolidate** | Status doc + exhibit fold-in + any new fleet-rule → prereg checklist. | Result public + method captured | items 13–16 |
+
+### Readiness & dependency map
+
+| Program | Readiness | Depends on / unlocks | Kill criterion (abandon if…) |
+|---------|-----------|----------------------|------------------------------|
+| **P1 Shielded switch** | READY (staged) | — | half-shielded witness < 0.5× bare *and* depth can't be cut |
+| **P2 Full replicator** | READY · **ENABLER** | self-contained → **unlocks P6, P7** | teleported-S̄ can't be verified against ideal by search |
+| **P3 Guardian / EOS** | READY | 198/200b/195c | QET energy doesn't move on the dial (no signal to unify) |
+| **P4 Darwinism dial** | READY | 198/204 | the redundancy plateau is unresolvable at reachable N |
+| **P5 Self-char. chip** | READY · **ENABLER** | feeds calibration to P1/P6/P9 | blind-spot spectrum is flat (no exploitable structure) |
+| **P6 Federation computer** | NEEDS P2 | teleported-S̄ (P2); relay arch (179) | composition tax exceeds the logical margin at 2 nodes |
+| **P7 Contextuality fuel** | NEEDS P2 + scoping | teleported-S̄ (P2); BGKT gadget | gadget can't be composed on-chip at reachable n |
+| **P8 Indefinite topology** | READY | network stack + F92 | superposed-route witness = definite mixture (no resource) |
+| **P9 Dilithium chamber** | DEEP (staged) | exotic-phases wing; ZNE boundary (174) | scar/DTC memory ≤ bare idle (no protection) |
+| **P10 Holodeck** | READY | H2 banked data + 1 co-batch | the two analogs share no common curve (still separates them) |
+| **P11 Zeno brace** | READY | F102 + 206 | Zeno watching doesn't beat postselection alone |
+
+### Gaps found on revisit (and their fixes)
+
+1. **Enabler tier was implicit.** **P2** (teleported-S̄) and **P5** (self-characterization)
+   *unlock* others — P2 gates the b≠0 family P6/P7 need; P5 feeds live coherent-noise
+   calibration to every depth-risky flight. **Fix**: fly P2 and P5 early regardless of headline
+   ranking; they de-risk the rest.
+2. **The depth-risky trio (P1, P6, P9) lacked uniform staging.** P1 was staged; P6/P9 weren't.
+   **Fix**: every deep program's *first* flight is now a shallow half-version (P6 → shield one
+   node first; P9 → lifetime comparison before code+dynamics).
+3. **No kill criteria.** A roadmap without abandon-conditions invites sunk-cost reflights.
+   **Fix**: each program now carries one (table above).
+4. **Sequencing ≠ ranking.** The dependencies imply a *natural order*: **P1 (flagship) → P5
+   (enabler) → P2 (enabler) → P3/P4/P8/P10/P11 in any order → P6/P7 last (need P2).** The
+   headline ranking is the "fly one thing" answer; this is the "fly the program" answer.
 
 ---
 
