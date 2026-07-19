@@ -166,7 +166,7 @@ on my board (C4893), now stated as the engine-room deliverable: does extractable
 descend the same copy-strength curve that facts-CHSH descended in 198? If energy and
 objectivity ride the same dial, that connects Deck 3 to Deck 4 at the mechanism level.
 
-### 6. The Logical Computer — error-corrected computational advantage in miniature (Decks 1+6)
+### 6. The Logical Computer — error-corrected computational advantage in miniature (Decks 1+6) — ✅ DELIVERED (Exp206, C4903: CERTIFIED, logical beats bare +0.077 at 19.7σ despite 3.5× the gates)
 
 **The invention**: the one scoreboard the campaign has never won is *computation* (F113 runs the
 BGK shallow solver but the separation is asymptotic; F54 measured the deep-circuit wall). The
