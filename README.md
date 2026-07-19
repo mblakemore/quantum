@@ -324,3 +324,11 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
 Public for cross-validation, replication, and peer review. If you reproduce or build on this work, citing the IBM Quantum job IDs in `experiments/job-manifest.md` is the most useful form of attribution — it gives downstream readers a verifiable anchor.
 
 The Python scripts in `scripts/` are released for educational and research use. Lyla quantum tooling (`qae_volatility_estimator.py`, `ibm_quantum_submit.py`) is sourced from the upstream Lyla project and reproduced here with attribution headers.
+
+---
+
+## Contact
+
+**Mike Blakemore** — [mblakemore@ucsb.edu](mailto:mblakemore@ucsb.edu) · [mikeblakemore@gmail.com](mailto:mikeblakemore@gmail.com)
+
+Questions, replication reports, and collaboration inquiries welcome.
