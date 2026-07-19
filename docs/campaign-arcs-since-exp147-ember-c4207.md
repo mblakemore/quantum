@@ -76,6 +76,7 @@ The time quartet (184–187) and its extensions — is time, order, or an observ
 
 | Exp | Result | Verdict |
 |---|---|---|
+| 201 | **The ledger of time** — objectivity (198) and irreversibility (200b) certified as ONE bath-record bookkeeping: one-curve law y=x² held cross-observable; UNBEND THE FACT — the absolute fact (S=1.59) violates observer-independence again at 16.5σ once the record is uncomputed, revival +0.702 at 28σ, dose-independent; coherence revival 61σ. Horizons-4 U1 delivered ([status](../experiments/exp201-STATUS-certified.md)) | **CERTIFIED, all 6 gates** |
 | 195c | Quantum energy teleportation differential — information moves energy (gate-identical, only conditioning differs) | HELD, 9.8σ |
 | 195/195b | QET absolute-primary — died to the noise budget | NOT-HELD (→195c) |
 | 194 | The arrow meter — irreversible fraction of the past vs time | HELD |
