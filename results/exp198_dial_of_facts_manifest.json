@@ -1,0 +1,149 @@
+{
+ "exp": 198,
+ "slug": "dial_of_facts",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e8694inv1c73apulo0",
+ "order": [
+  [
+   0.0,
+   "FF"
+  ],
+  [
+   0.0,
+   "FB"
+  ],
+  [
+   0.0,
+   "AF"
+  ],
+  [
+   0.0,
+   "AB"
+  ],
+  [
+   0.25,
+   "FF"
+  ],
+  [
+   0.25,
+   "FB"
+  ],
+  [
+   0.25,
+   "AF"
+  ],
+  [
+   0.25,
+   "AB"
+  ],
+  [
+   0.5,
+   "FF"
+  ],
+  [
+   0.5,
+   "FB"
+  ],
+  [
+   0.5,
+   "AF"
+  ],
+  [
+   0.5,
+   "AB"
+  ],
+  [
+   0.75,
+   "FF"
+  ],
+  [
+   0.75,
+   "FB"
+  ],
+  [
+   0.75,
+   "AF"
+  ],
+  [
+   0.75,
+   "AB"
+  ],
+  [
+   1.0,
+   "FF"
+  ],
+  [
+   1.0,
+   "FB"
+  ],
+  [
+   1.0,
+   "AF"
+  ],
+  [
+   1.0,
+   "AB"
+  ]
+ ],
+ "exact": {
+  "0.0": {
+   "E": {
+    "FF": 0.9999999999999998,
+    "FB": 0.5,
+    "AF": 0.5,
+    "AB": -0.49999999999999967
+   },
+   "S": 2.4999999999999996,
+   "R_fd": 0.0
+  },
+  "0.25": {
+   "E": {
+    "FF": 0.9999999999999997,
+    "FB": 0.5,
+    "AF": 0.5,
+    "AB": -0.39016504294495497
+   },
+   "S": 2.3901650429449544,
+   "R_fd": 0.1464466094067263
+  },
+  "0.5": {
+   "E": {
+    "FF": 0.9999999999999998,
+    "FB": 0.5,
+    "AF": 0.5,
+    "AB": -0.12499999999999989
+   },
+   "S": 2.1249999999999996,
+   "R_fd": 0.49999999999999983
+  },
+  "0.75": {
+   "E": {
+    "FF": 0.9999999999999998,
+    "FB": 0.5,
+    "AF": 0.5,
+    "AB": 0.14016504294495533
+   },
+   "S": 1.8598349570550445,
+   "R_fd": 0.8535533905932735
+  },
+  "1.0": {
+   "E": {
+    "FF": 0.9999999999999998,
+    "FB": 0.5,
+    "AF": 0.5,
+    "AB": 0.24999999999999994
+   },
+   "S": 1.7499999999999998,
+   "R_fd": 0.9999999999999998
+  }
+ },
+ "prereg": {
+  "anchor_live": "S(0) > 2 at >=5 sigma; band [2.05, 2.45] (193 measured 2.346; widened for dose-independent copy-gate burden)",
+  "anchor_copied": "S(1) in [1.40, 1.90] (193 measured 1.556)",
+  "monotone": "S non-increasing across all consecutive doses within 2 sigma_pair tolerance (no significant increase)",
+  "crossing": "at least one dose >2 at >=3 sigma and one <2 at >=3 sigma; theta* reported by linear interpolation with CI",
+  "gauges": "E(F_A,F_B) >= 0.85 at every dose (records record); R_fd strictly increasing (the dial actually dials)",
+  "budget_check": "lambda_req 0.80 vs 193-measured 0.94 (C4887 rule)"
+ }
+}
