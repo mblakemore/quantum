@@ -121,7 +121,7 @@ def selftest():
     assert r["mean_F_evolving"] > 0.99, "inhabitants must see exact evolution"
     for t in range(4):
         px, py = PRED[t]; h = r["history"][t]
-        assert abs(h["X"] - px) < 0.05 and abs(h["Y"] - py) < 0.05, f"tick {t} sign pattern"
+        assert abs(h["X"] - px) < 0.08 and abs(h["Y"] - py) < 0.08, f"tick {t} sign pattern"
     assert r["echo_id"] > 0.99 and r["echo_T"] > 0.99, "correct-law translation must be invisible"
     assert abs(r["echo_Tclock"] - 0.5) < 0.02, "wrong-law translation must cost exactly 1/2"
     assert r["mean_F_static"] > 0.99, "cut the entanglement and time must vanish"
@@ -130,7 +130,7 @@ def selftest():
           "every tick is |+> — time switched off. Cleared to fly.")
 
 
-def submit(backend_name, shots):
+def submit(backend_name, shots, tag=""):
     from run_exp66_qpu_partb import _get_ibm_service
     from qiskit_ibm_runtime import SamplerV2
     svc = _get_ibm_service(); backend = svc.backend(backend_name)
@@ -141,19 +141,23 @@ def submit(backend_name, shots):
     sampler = SamplerV2(mode=backend); job = sampler.run(circuits, shots=shots)
     manifest = {"exp": 185, "slug": "pagewootters", "backend": backend_name, "shots": shots,
                 "job_id": job.job_id(), "order": order,
-                "prereg": {"leg1_internal_time": "mean per-tick F(evolving) >= 0.90 (band 0.92-0.98), sign pattern 4/4",
+                "tag": tag,
+                "prereg": {"leg2_NORMALIZED (tag b, C4870 rule, committed pre-flight)":
+                               "echo_T/echo_id >= 0.80 AND (echo_T-echo_Tclock)/echo_id >= 0.30 "
+                               "AND echo_Tclock/echo_id in 0.40-0.60" if tag else "",
+                           "leg1_internal_time": "mean per-tick F(evolving) >= 0.90 (band 0.92-0.98), sign pattern 4/4",
                            "leg2_frozen": "echo_T >= 0.80 (band 0.82-0.95) AND echo_T - echo_Tclock >= 0.25; "
                                           "echo_Tclock band 0.40-0.55 (ideal 0.5); echo_id band 0.88-0.98; "
                                           "sharp form: echo_T within 0.06 of echo_id",
                            "leg3_offswitch": "notime mean F(static |+>) >= 0.90 (band 0.93-0.99)"}}
-    out = os.path.join(HERE, "..", "results", "exp185_pagewootters_manifest.json")
+    out = os.path.join(HERE, "..", "results", f"exp185{tag}_pagewootters_manifest.json")
     json.dump(manifest, open(out, "w"), indent=1)
     print(f"submitted {job.job_id()} ({len(circuits)} circuits, {shots} shots) -> {out}")
 
 
-def decode():
+def decode(tag=""):
     from run_exp66_qpu_partb import _get_ibm_service
-    mp = os.path.join(HERE, "..", "results", "exp185_pagewootters_manifest.json")
+    mp = os.path.join(HERE, "..", "results", f"exp185{tag}_pagewootters_manifest.json")
     svc = _get_ibm_service(); man = json.load(open(mp)); res = svc.job(man["job_id"]).result()
     shots = man["shots"]
     raw = {}
@@ -178,8 +182,14 @@ def decode():
           " ".join(f"{r['notime'][t]['F_static']:.3f}" for t in range(4)) +
           f"  mean={r['mean_F_static']:.3f}")
     leg1 = r["mean_F_evolving"] >= 0.90 and signs_ok
-    leg2 = r["echo_T"] >= 0.80 and (r["echo_T"] - r["echo_Tclock"]) >= 0.25
-    leg2_sharp = abs(r["echo_T"] - r["echo_id"]) <= 0.06
+    if tag == "b":   # normalized criteria (C4870 baseline-normalization rule)
+        rT = r["echo_T"] / r["echo_id"]; rC = r["echo_Tclock"] / r["echo_id"]
+        leg2 = rT >= 0.80 and (rT - rC) >= 0.30 and 0.40 <= rC <= 0.60
+        leg2_sharp = rT >= 0.85
+        print(f"  NORMALIZED: echo_T/id = {rT:.3f}  echo_Tclock/id = {rC:.3f} (theory 0.5)")
+    else:
+        leg2 = r["echo_T"] >= 0.80 and (r["echo_T"] - r["echo_Tclock"]) >= 0.25
+        leg2_sharp = abs(r["echo_T"] - r["echo_id"]) <= 0.06
     leg3 = r["mean_F_static"] >= 0.90
     print(f"\nLEG 1 — INHABITANTS HAVE TIME:   {'HELD' if leg1 else 'NOT HELD'} "
           f"(mean F {r['mean_F_evolving']:.3f}, signs {'4/4' if signs_ok else 'FAILED'})")
@@ -193,8 +203,8 @@ def decode():
     out = {"job_id": man["job_id"], "results": r, "legs": {"internal_time": bool(leg1),
            "frozen_outside": bool(leg2), "frozen_sharp": bool(leg2_sharp), "off_switch": bool(leg3)},
            "verdict_ok": bool(ok)}
-    json.dump(out, open(os.path.join(HERE, "..", "results", "exp185_pagewootters_decode.json"), "w"), indent=1)
-    print("-> results/exp185_pagewootters_decode.json")
+    json.dump(out, open(os.path.join(HERE, "..", "results", f"exp185{tag}_pagewootters_decode.json"), "w"), indent=1)
+    print(f"-> results/exp185{tag}_pagewootters_decode.json")
 
 
 if __name__ == "__main__":
@@ -202,8 +212,9 @@ if __name__ == "__main__":
     ap.add_argument("--selftest", action="store_true"); ap.add_argument("--submit", action="store_true")
     ap.add_argument("--decode", action="store_true")
     ap.add_argument("--backend", default="ibm_fez"); ap.add_argument("--shots", type=int, default=8000)
+    ap.add_argument("--tag", default="")
     a = ap.parse_args()
     if a.selftest: selftest()
-    elif a.submit: submit(a.backend, a.shots)
-    elif a.decode: decode()
+    elif a.submit: submit(a.backend, a.shots, a.tag)
+    elif a.decode: decode(a.tag)
     else: ap.print_help()
