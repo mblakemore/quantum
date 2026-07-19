@@ -1,6 +1,6 @@
 # Autonomous Characterization of the IBM Heron-r2 Quantum Processor
 
-**An empirical campaign on IBM Heron-generation hardware — `ibm_marrakesh`, `ibm_kingston`, `ibm_fez` — run end-to-end by an autonomous multi-agent network from May 2026 (ongoing). Every experiment is pre-registered before it flies; every number traces to an IBM Quantum job ID. The F-series of findings runs to F118, across 107 pre-registration documents.**
+**An empirical campaign on IBM Heron-generation hardware — `ibm_marrakesh`, `ibm_kingston`, `ibm_fez` — run end-to-end by an autonomous multi-agent network from May 2026 (ongoing). Every experiment is pre-registered before it flies; every number traces to an IBM Quantum job ID. The F-series of findings runs to F118; the exp-numbered findings then continue through **Exp197** (the July "Star Trek" arcs — logical qubits, a composable network, exotic phases, and the physics of time), across 100+ pre-registration documents.**
 
 Most of what you can buy from a quantum computer today is characterization: *how good are the qubits?* This campaign asks a sharper question — *what can this hardware do that a classical, causal, or definite-order process provably cannot?* — and answers it one scoreboard at a time, with the losses kept next to the wins.
 
@@ -14,7 +14,7 @@ The centerpiece is a **quantum switch**: a circuit where the *order* of two oper
 
 Every result below is **pre-registered**, and its success criterion is *exceeding what a classical / causal / definite process provably permits* (or certifying a first-of-kind) — not characterizing hardware. Grouped by theme, most significant first; the eight operational-characterization arcs follow in **[What Else the Campaign Established](#what-else-the-campaign-established)**.
 
-> **Has this hardware shown a quantum advantage?** The answer is scoreboard-by-scoreboard: **yes** on causal-order games (216.8σ within-run, replicated two chips), nonlocal/contextuality games (196σ), communication capacity (superdense 341σ, QRAC 110σ), thermodynamic resources (population inversion, negative energy), and metrology at the Heisenberg limit (168σ, persisting to N=5) — each a *provable* bound beaten; **no** on raw computational speedup, which is depth-walled on this NISQ generation (F54's measured wall, F85's scaling inversion). A **different** column opened, of a different kind: the constant-depth **BGK shallow-circuit depth-separation** solver runs on silicon (F113, 90% valid / full solution-coset) — the *apparatus* of an asymptotic theorem, not a raw speedup and not an on-chip class separation. The one-page reckoning, wins and non-wins together: **[quantum-advantage audit](docs/quantum-advantage-audit-whisper-c4666.md)**.
+> **Has this hardware shown a quantum advantage?** The answer is scoreboard-by-scoreboard: **yes** on causal-order games (216.8σ within-run, replicated two chips), nonlocal/contextuality games (196σ), communication capacity (superdense 341σ, QRAC 110σ), thermodynamic resources (population inversion, negative energy), and metrology at the Heisenberg limit (168σ, persisting to N=5) — each a *provable* bound beaten; **no** on raw computational speedup, which is depth-walled on this NISQ generation (F54's measured wall, F85's scaling inversion). A **different** column opened, of a different kind: the constant-depth **BGK shallow-circuit depth-separation** solver runs on silicon (F113, 90% valid / full solution-coset) — the *apparatus* of an asymptotic theorem, not a raw speedup and not an on-chip class separation. The one-page reckoning, wins and non-wins together: **[quantum-advantage audit](docs/quantum-advantage-audit-whisper-c4666.md)**. The July second half ([Star Trek arcs](#-headline-results--the-july-star-trek-arcs-exp147197), Exp147–197) added two more advantage-flavored columns: a **distributed computer** (Bernstein–Vazirani split across a cut, 67–141σ) and the campaign's **first error-corrected logical qubits** — [[4,2,2]] logical operations that *beat* the bare machine (reversing F06's "QEC doesn't help yet"), including logical CHSH at 29.7σ.
 
 ### The three great no-go theorems — certified in one court
 
@@ -103,6 +103,62 @@ Strategy docs: [bridges to a compute advantage](docs/bridges-to-compute-advantag
 
 ---
 
+## ⭐ Headline Results — the July "Star Trek" arcs (Exp147–197)
+
+The campaign's second half opened four new scoreboards after F118. Same discipline — pre-registered gates, executed nulls, misses kept — now aimed at **error-corrected logical qubits, a composable quantum network, exotic phases of matter, and the physics of time and the observer.** Full per-experiment index (wins and nulls): **[campaign arcs since Exp147](docs/campaign-arcs-since-exp147-ember-c4207.md)**.
+
+### The first logical qubits — error correction that finally *helps* (the Shields arc)
+
+Findings 05/62 established that *textbook* error correction adds more noise than it removes on this substrate. The **[[4,2,2]] error-detecting code** crossed the line the other way — the campaign's first **logical qubits whose operations beat their bare-physical counterparts**: entangled, teleported, and made to violate Bell inequalities *as logical qubits*.
+
+| Result | Number | Where |
+|---|---|---|
+| **The shielded handshake** — two logical qubits (each an [[4,2,2]] block, 8 physical) entangled across blocks; the shielded logical Bell pair **beats the bare-physical pair** | HELD, **57σ** | [Exp191](findings/finding-exp191-logical-bell.md) |
+| **The shielded verdict** — logical CHSH between two shields: **S = 2.778 vs the classical bound 2 (29.7σ)**, on the F191-predicted 2.79 (Tsirelson 2.828) | HELD, 29.7σ | Exp196 |
+| **The shielded transporter** — a logical qubit teleported between [[4,2,2]] blocks across 12 physical qubits | HELD, **F ≈ 0.98 / 0.99** | [Exp192](findings/finding-exp192-logical-teleport.md) |
+| **The Federation** — logical entanglement swapping across **three** shields: two logical qubits sharing no gate anywhere, entangled through a relay | HELD, **21.8σ** | Exp197 |
+
+**Scope**: [[4,2,2]] is a *distance-2 error-**detecting*** code (post-selected on the syndrome) — a signature that logical encoding beats bare physical operations on this hardware, **not** below-threshold fault-tolerant correction. The honest boundary flights are kept (Exp189 shields-up HELD; Exp190 the paying regime NOT-HELD).
+
+### Exotic phases of matter, on silicon
+
+Driven, disordered, and constrained many-body phases — each a *different way order defies thermal chaos*, run as pre-registered signatures with matched controls (Ember's wing).
+
+| Result | Number | Where |
+|---|---|---|
+| **A Floquet SPT edge π-mode** — symmetry-protected topological order living **only at the boundary**: the edge spin locks to a rigid period-2 response while the bulk thermalizes; breaking the Ising Z₂ kills it (edge-bulk contrast +0.554, symmetry protection +0.425). The bulk-*decay* is the load-bearing verified condition that distinguishes it from a time crystal | HELD | [Exp170](findings/finding-exp170-floquet-spt-edge-mode-ember-c4200.md) |
+| **Quantum many-body scars (PXP)** — the Néel state revives its memory above the **entire** generic ensemble (rank 1/55), and **survives past the coherence wall**: at 433 CZ the anomaly shrinks by *exactly* the decoherence factor (R invariant), so the scar is decoherence-limited and **not fragile**, not broken | HELD | [Exp171](findings/finding-exp171-scars-pxp-ember-c4201.md) · [172](findings/finding-exp172-scars-n8-wall-ember-c4202.md) · [173](findings/finding-exp173-scars-n8-defog-ember-c4203.md) |
+| **A discrete time crystal** — a driven disordered chain ticking at half the drive, rigid against detuning ("a clock nothing set"); melt boundary mapped (disorder shrinks it) | HELD | [Exp151](findings/finding-exp151-time-crystal.md) · [153](findings/finding-exp153-dtc-melt-boundary.md) |
+| **Anyon braiding** — Z₂ mutual statistics on a toric-code patch: an e-anyon circling an m picks up exactly −1, certified topological (not parity bookkeeping) by six loophole-closing arms | HELD, **50σ** | [Exp157](findings/finding-exp157-anyon-braiding.md) |
+| **The delayed-choice quantum eraser** — a quantum coin flipped *after* the system qubit is measured decides whether its already-recorded data shows an interference fringe; no-signaling measured (the marginal never moves — no FTL) | HELD | [Exp155](findings/finding-exp155-delayed-choice-eraser-ember-c4197.md) |
+
+**Method note (the mitigation wall, mapped)**: readout mitigation is nearly free here (readout ~99% clean), so a deep observable's residual is coherent/gate error, not measurement (Exp173); and zero-noise extrapolation **cannot** rescue a ≥260-CZ signal — the amplified points drown before they extrapolate (Exp174, a 0-QPU viability boundary).
+
+### The quantum network, composed into a computer
+
+Every network-stack layer had a *primitive* (distribute F91 · route F90 · carry F87 · purify F93); this arc **composes them end-to-end** into applications — and prices the tax composition charges (Whisper's wing).
+
+| Result | Number | Where |
+|---|---|---|
+| **A distributed computer** — Bernstein–Vazirani run across a *cut* (Alice holds the data, Bob the oracle); the joined machine returns the hidden string as top outcome for every program, with a measured per-gate cost | HELD, **67–141σ** | [Exp181](findings/finding-exp181-dist-bv.md) · [182 scaling law](findings/finding-exp182-dist-bv3.md) |
+| **The relay computer** — a **nonlocal CNOT between two qubits that never met** (1 Bell pair + feed-forward both ways); the composition tax discovered, priced, decomposed, and **cured** (a Pauli frame + one echo pulse recovers it) across Exp175–180 | HELD (Exp179 plateau NOT-HELD, kept) | [Exp175](findings/finding-exp175-relay-gate.md) |
+| **The repeater with memory** — entanglement swapped through a relay and *held* for a swept delay before the witness (the repeater's defining ingredient); + gate teleportation (an entangling gate between qubits with no shared history, 25σ) | certified, **27σ** | [Exp160](findings/finding-exp160-relay.md) · [162](findings/finding-exp162-swap.md) · 163 · 170-gate |
+| **Keys through untrusted relays** — physics-certified E91 secret keys through one and two untrusted relay stations; + a GHZ conference key and two-officer secret sharing | certified | [Exp180](findings/finding-exp180-relay-key.md) · [168](findings/finding-exp168-conference.md) · [183](findings/finding-exp183-secret-sharing.md) |
+
+### Time and the observer — foundations, part two
+
+Beyond Horizons-2's six paradoxes: a **time quartet** and its extensions, asking whether time, order, and observed facts are absolute.
+
+| Result | Number | Where |
+|---|---|---|
+| **A handshake across time** — delayed-choice entanglement swapping between qubits of **disjoint lifetimes**: A was measured and its record closed *before* D existed, yet a later Bell measurement on the middles certifies A–D entanglement | HELD, **40σ** | [Exp184](findings/finding-exp184-acrosstime.md) |
+| **Time is entanglement** — a Page–Wootters "universe where time is optional": a static 3-qubit block whose inhabitants experience time *only* conditioned on a clock register they're entangled with | HELD (all 3 legs) | [Exp185b](findings/finding-exp185b-pagewootters.md) |
+| **Macrorealism violated** — a Leggett–Garg test: between two looks the qubit was in no definite state (K₃ = 1.465 vs the macrorealist bound 1) | HELD, **24σ** | [Exp186](findings/finding-exp186-leggett-garg.md) |
+| **Facts are not absolute** — a Wigner's-friend test: two "friend" qubits each record a definite outcome, yet the outcomes are not jointly absolute until copied out | HELD, **20σ** | [Exp193](findings/finding-exp193-wigner-friend.md) |
+| **Information moves energy** — quantum energy teleportation (Hotta): a purely informational LOCC message lets Bob extract energy locally, certified as an *information* effect by a gate-identical differential (the sole difference is whether Bob's kick is conditioned on Alice's bit) | HELD, **9.8σ** | Exp195c |
+
+---
+
 ## The Quantum Museum — 22 interactive exhibits
 
 The results above, made playable. Each exhibit is a self-contained, theme-aware page that renders **measured hardware data** — no simulations, no idealized curves — and each carries a **full specification sheet**: the finding in plain language, what is measured, the pre-registered gates (frozen before flight), the measured-data table, the scope and limits, and the IBM job ID. The interactive versions live at **[mblakemore.github.io/quantum](https://mblakemore.github.io/quantum/)**; the spec sheets render inline as Markdown below.
@@ -175,6 +231,7 @@ Plain-English version of everything: **[ELI5_SUMMARY.md](ELI5_SUMMARY.md)** (sel
 | **[Friction reports](docs/friction-reports/README.md)** | Standing, data-backed reports of platform/tooling issues we hit (paste-ready if we ever file them): FakeMarrakesh depth-optimism (12-row atlas), published-T1 bias (+38–69%, 2/2 runs, queue-independent), calibration blind to window quality. Grows as we go. |
 | **[Findings 1–27 catalog](docs/findings-catalog.md)** | Arc-1 characterization + QAOA/optimizer arcs: headline table + plain-English one-liner per finding (CHSH 2.74, X-basis immunity, the ~1000-CZ wall, QEC ancilla tax, mitigation failures, VQE chemical accuracy, QAE 344×, …) |
 | **[Campaign arcs since June 2026](docs/campaign-arcs.md)** | Findings 28+ and the F-series, arc by arc: warm-start anchors, noise-is-not-a-resource kills, placement-beats-gate-count (F57–F70), toric-code replication, financial QAE depth boundary + calibration-window lottery (F78–F81), quantum-IIT bridge, the ⭐ quantum-switch arc (F73–F77 witness chain → F82–F89 bound beats), the communication-primitives arc (F87, F90–F91, F93), and the Horizons foundations + trust-ladder arcs |
+| **[Campaign arcs since Exp147](docs/campaign-arcs-since-exp147-ember-c4207.md)** | The July "Star Trek" second half (post-F118): the full per-experiment index of the four new arcs — Shields/logical-QEC (Exp189–197), exotic phases (Exp151–174), the composed quantum network (Exp154–183), and time/observer foundations (Exp184–195c) — wins and nulls, most-recent-first |
 | **[Methodology & validation](docs/methodology-and-validation.md)** | Autonomous-network methodology, pre-registration discipline, Pearl causal framing, budget, cross-validation anchors, limitations and caveats |
 | **[Next steps & open questions](docs/next-steps-and-open-questions.md)** | What you can use today (7 actionable rules), the strategic frontier (P1 noise-as-resource RESOLVED-NEGATIVE, P2 causal order DELIVERED, P3 replication audit), and the ORQ list with live statuses |
 | **[Quantum-advantage audit](docs/quantum-advantage-audit-whisper-c4666.md)** | The one-page reckoning: every scoreboard the campaign touched, wins and non-wins side by side, with the currency of each result stated (beaten bound vs certified apparatus vs fidelity number) |

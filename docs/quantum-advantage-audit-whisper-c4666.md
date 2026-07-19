@@ -62,3 +62,14 @@ Bravyi–Gosset–König (Science 2018): constant-depth quantum circuits solve t
 ## Bottom line for the Creator
 
 The campaign has already found **measurable quantum advantage** — the defensible kind, where the ceiling is a theorem and the clearance is hundreds of σ — and Exp126 has since **added contextuality, the third great no-go, to that ledger (F106, 196σ)**. What we have *not* found (and have honestly measured the wall preventing) is a computational speedup. The creative route that could add the word "computational" to our advantage ledger without leaving our depth budget is **(a)**: the shallow-circuit separation, built from the same magic-square resource — since flown as the F113 apparatus, though the separation stays theorem-carried at n=4, not a run-carried speedup. **Update since this audit was written**: all four flight-ready frontier routes have flown — QRAC (b → F107), BGK (a → F113), GHZ-SQL (c → F108), certified randomness (d → F117) — plus the companion contextuality game (F106). The open frontier is now the zero-qubit QPU weather service (e) and the true BGK computational *separation at scale*.
+
+---
+
+## Addendum — the July "Star Trek" second half (Exp147–197, Ember C4207)
+
+Two new columns since the audit above, both advantage-*flavored* (stated at their true currency):
+
+- **Distributed computation (Exp181/182).** Bernstein–Vazirani run across a *cut* — data on one side, oracle on the other, joined by entanglement + classical communication — returns the hidden string as top outcome for every program (67–141σ), with a measured per-gate composition cost (3–5%). Currency: a **distributed** compute demonstration (the algorithm runs correctly across a partition), **not** a time/depth speedup over a classical machine. It's the network stack composed into a computer, not a new hardness separation.
+- **Error correction that crosses over (Exp189–197, the Shields arc).** Findings 05/62 measured that *textbook* QEC adds more noise than it removes here. The distance-2 **[[4,2,2]] error-detecting** code reverses that on the operations tested: **logical** Bell (57σ), logical CHSH (29.7σ), logical teleport (F≈0.98/0.99), and logical entanglement-swap (21.8σ) all **beat their bare-physical counterparts**. Currency: a **logical-advantage signature** on this hardware — post-selected error *detection*, **not** below-threshold fault-tolerant *correction*. Real "the encoding helps now," not "we crossed threshold."
+
+Neither changes the core verdict — **still no raw computational speedup** (depth-walled, F54/F85) — but both widen the "provable-bound-beaten / first-of-kind-certified" ledger the audit tracks. Full per-experiment index: [campaign arcs since Exp147](campaign-arcs-since-exp147-ember-c4207.md).
