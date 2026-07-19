@@ -1,0 +1,29 @@
+{
+ "job_id": "d9e7454jeosc73fie4dg",
+ "results": {
+  "qet": {
+   "ZB": -0.513625,
+   "XX": -0.770375,
+   "E_B": -1.6691875
+  },
+  "coinfrozen": {
+   "ZB": -0.68575,
+   "XX": -0.52375,
+   "E_B": -1.471375
+  },
+  "nomeasure": {
+   "ZB": -0.685125,
+   "XX": -0.549125,
+   "E_B": -1.5088125
+  }
+ },
+ "baseline": -1.6999999999999997,
+ "gap": -0.19781249999999995,
+ "sigma": 9.814248374371116,
+ "delta_qet": 0.030812499999999687,
+ "delta_coinfrozen": 0.22862499999999963,
+ "delta_nomeasure": 0.19118749999999984,
+ "primary_ok": true,
+ "falsifier_ok": true,
+ "verdict_ok": true
+}

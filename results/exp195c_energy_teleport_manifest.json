@@ -1,0 +1,32 @@
+{
+ "exp": "195c",
+ "slug": "energy_teleport",
+ "backend": "ibm_fez",
+ "shots": 16000,
+ "job_id": "d9e7454jeosc73fie4dg",
+ "order": [
+  "qet_XX",
+  "qet_ZB",
+  "coinfrozen_XX",
+  "coinfrozen_ZB",
+  "nomeasure_XX",
+  "nomeasure_ZB"
+ ],
+ "baseline_EB": -1.6999999999999997,
+ "h": 1.0,
+ "k": 1.5,
+ "theta": 0.17,
+ "exact": {
+  "ground_E": -2.5,
+  "baseline_EB": -1.6999999999999997,
+  "dE_qet": -0.10277518668267716,
+  "dE_coinfrozen": 0.09731706860181144,
+  "dE_nomeasure": 0.097317068601811,
+  "gap": -0.2000922552844886
+ },
+ "prereg": {
+  "primary": "E_B(qet) - E_B(coinfrozen) <= -0.10 at >=5 sigma; band [-0.30, -0.10] (exact -0.2001; lambda~0.89 -> ~-0.18)",
+  "falsifiers": "dE(coinfrozen) > 0 and dE(nomeasure) > 0, band [+0.02, +0.50]",
+  "secondary_labeled": "absolute dE(qet) reported, not verdict-gating"
+ }
+}
