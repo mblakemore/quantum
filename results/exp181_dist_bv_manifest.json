@@ -1,0 +1,63 @@
+{
+ "exp": 181,
+ "slug": "dist_bv",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e28tcjeosc73fi8fi0",
+ "order": [
+  [
+   "local",
+   "00"
+  ],
+  [
+   "local",
+   "01"
+  ],
+  [
+   "local",
+   "10"
+  ],
+  [
+   "local",
+   "11"
+  ],
+  [
+   "dist",
+   "00"
+  ],
+  [
+   "dist",
+   "01"
+  ],
+  [
+   "dist",
+   "10"
+  ],
+  [
+   "dist",
+   "11"
+  ],
+  [
+   "noresource",
+   "00"
+  ],
+  [
+   "noresource",
+   "01"
+  ],
+  [
+   "noresource",
+   "10"
+  ],
+  [
+   "noresource",
+   "11"
+  ]
+ ],
+ "prereg": {
+  "primary": "dist beats noresource on 01/10/11 at >=3 sigma each and on the 3-string average at >=5 sigma; dist modal string correct 4/4",
+  "bands": "local all 0.90-0.99; dist 00:0.92-0.99, 01/10:0.78-0.92, 11:0.62-0.85, avg 0.68-0.88; noresource 01/10:0.40-0.55, 11:0.18-0.32",
+  "physics": "falsifier floor = classical guessing bound (no e-bit -> coin flips)",
+  "note": "P(11)/P(01) reported as per-gate composition cost vs Exp175 expectation"
+ }
+}
