@@ -1,0 +1,21 @@
+{
+ "exp": 185,
+ "slug": "pagewootters",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e46v4inv1c73appu20",
+ "order": [
+  "history_X",
+  "history_Y",
+  "echo_id",
+  "echo_T",
+  "echo_Tclock",
+  "notime_X",
+  "notime_Y"
+ ],
+ "prereg": {
+  "leg1_internal_time": "mean per-tick F(evolving) >= 0.90 (band 0.92-0.98), sign pattern 4/4",
+  "leg2_frozen": "echo_T >= 0.80 (band 0.82-0.95) AND echo_T - echo_Tclock >= 0.25; echo_Tclock band 0.40-0.55 (ideal 0.5); echo_id band 0.88-0.98; sharp form: echo_T within 0.06 of echo_id",
+  "leg3_offswitch": "notime mean F(static |+>) >= 0.90 (band 0.93-0.99)"
+ }
+}
