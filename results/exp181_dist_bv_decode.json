@@ -1,0 +1,88 @@
+{
+ "job_id": "d9e28tcjeosc73fi8fi0",
+ "results": {
+  "local": {
+   "per_string": {
+    "00": {
+     "P_correct": 0.9945,
+     "modal": "00",
+     "modal_ok": true
+    },
+    "01": {
+     "P_correct": 0.969875,
+     "modal": "01",
+     "modal_ok": true
+    },
+    "10": {
+     "P_correct": 0.96425,
+     "modal": "10",
+     "modal_ok": true
+    },
+    "11": {
+     "P_correct": 0.912375,
+     "modal": "11",
+     "modal_ok": true
+    }
+   },
+   "avg_nontrivial": 0.9488333333333334
+  },
+  "dist": {
+   "per_string": {
+    "00": {
+     "P_correct": 0.992375,
+     "modal": "00",
+     "modal_ok": true
+    },
+    "01": {
+     "P_correct": 0.9235,
+     "modal": "01",
+     "modal_ok": true
+    },
+    "10": {
+     "P_correct": 0.9205,
+     "modal": "10",
+     "modal_ok": true
+    },
+    "11": {
+     "P_correct": 0.897125,
+     "modal": "11",
+     "modal_ok": true
+    }
+   },
+   "avg_nontrivial": 0.9137083333333332
+  },
+  "noresource": {
+   "per_string": {
+    "00": {
+     "P_correct": 0.99275,
+     "modal": "00",
+     "modal_ok": true
+    },
+    "01": {
+     "P_correct": 0.502375,
+     "modal": "01",
+     "modal_ok": true
+    },
+    "10": {
+     "P_correct": 0.486125,
+     "modal": "00",
+     "modal_ok": false
+    },
+    "11": {
+     "P_correct": 0.24375,
+     "modal": "10",
+     "modal_ok": false
+    }
+   },
+   "avg_nontrivial": 0.41074999999999995
+  }
+ },
+ "sigmas": {
+  "01": 66.51900418341096,
+  "10": 68.36237409653569,
+  "11": 111.11167529562364
+ },
+ "sigma_avg": 140.68366959232284,
+ "modal_4of4": true,
+ "verdict_ok": true
+}
