@@ -1,0 +1,46 @@
+{
+ "exp": 193,
+ "slug": "wigner_friend",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e6piineu4c739o3fsg",
+ "order": [
+  [
+   "live",
+   "FF"
+  ],
+  [
+   "live",
+   "FB"
+  ],
+  [
+   "live",
+   "AF"
+  ],
+  [
+   "live",
+   "AB"
+  ],
+  [
+   "dec",
+   "FF"
+  ],
+  [
+   "dec",
+   "FB"
+  ],
+  [
+   "dec",
+   "AF"
+  ],
+  [
+   "dec",
+   "AB"
+  ]
+ ],
+ "prereg": {
+  "primary": "S_live > 2 at >=5 sigma; band 2.15-2.45",
+  "decoherence": "S_dec 1.55-1.90 AND S_live - S_dec >= 0.30 at >=5 sigma",
+  "gauges": "E(F,F) >= 0.85 both arms; friend-marginal spread < 0.035"
+ }
+}
