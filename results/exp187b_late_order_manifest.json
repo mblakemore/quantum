@@ -1,0 +1,129 @@
+{
+ "exp": 187,
+ "slug": "late_order",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e4r2sjeosc73fib9hg",
+ "order": [
+  [
+   "delayed",
+   "X",
+   "X"
+  ],
+  [
+   "delayed",
+   "X",
+   "Y"
+  ],
+  [
+   "delayed",
+   "X",
+   "Z"
+  ],
+  [
+   "delayed",
+   "Z",
+   "X"
+  ],
+  [
+   "delayed",
+   "Z",
+   "Y"
+  ],
+  [
+   "delayed",
+   "Z",
+   "Z"
+  ],
+  [
+   "standard",
+   "X",
+   "X"
+  ],
+  [
+   "standard",
+   "X",
+   "Y"
+  ],
+  [
+   "standard",
+   "X",
+   "Z"
+  ],
+  [
+   "standard",
+   "Z",
+   "X"
+  ],
+  [
+   "standard",
+   "Z",
+   "Y"
+  ],
+  [
+   "standard",
+   "Z",
+   "Z"
+  ],
+  [
+   "decohered",
+   "X",
+   "X"
+  ],
+  [
+   "decohered",
+   "X",
+   "Y"
+  ],
+  [
+   "decohered",
+   "X",
+   "Z"
+  ],
+  [
+   "delayed_echo",
+   "X",
+   "X"
+  ],
+  [
+   "delayed_echo",
+   "X",
+   "Y"
+  ],
+  [
+   "delayed_echo",
+   "X",
+   "Z"
+  ],
+  [
+   "delayed_echo",
+   "Z",
+   "X"
+  ],
+  [
+   "delayed_echo",
+   "Z",
+   "Y"
+  ],
+  [
+   "delayed_echo",
+   "Z",
+   "Z"
+  ]
+ ],
+ "tag": "b",
+ "prereg_b": {
+  "falsifier_difference_form": "decohered |W+ - W-| <= 0.10 (mixture: 0; robust to common-mode offset)",
+  "nosignal_pinned": "unsorted marginal spread < 0.025 (2 sigma shot noise, one pinned layout)",
+  "Wplus_band_forward_priced": "+0.08..+0.25 (187 measured window dose applied)",
+  "echo_arm": "delayed_echo recovers >= half the delayed-choice cost: W(echo) - W(delayed) >= 0.5*(W(standard)-W(delayed)) for W+"
+ },
+ "prereg": {
+  "witness_form_correction": "pre-flight, selftest-caught: BOTH definite orders are equatorial so EVERY mixture has Z=0 exactly; X-sorted ensembles leave the equator (psi+ Z=+1/3, psi- Z=-1); psi+ also breaks the hull with X-Y=4/3>1",
+  "primary_delayed": "W+<Z> in +0.18..+0.33 (mixtures 0, >=5 sigma) AND W-<Z> in -0.85..-0.50 (mixtures 0, >=5 sigma) AND Z-sort F >= 0.85 both",
+  "standard": "W+<Z> +0.22..+0.34; W-<Z> -0.90..-0.65; Z-sort F >= 0.90; window cost = W(standard)-W(delayed), one control dose",
+  "hull_gauge": "X-Y (+ensemble) 1.10-1.40, > 1 at >=3 sigma",
+  "decohered": "|W+<Z>| <= 0.10 and |W-<Z>| <= 0.10",
+  "gauges": "p- 0.20-0.30; unsorted-marginal spread < 0.02"
+ }
+}
