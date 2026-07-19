@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%223%22%20cy%3D%228%22%20r%3D%221.8%22%20fill%3D%22%2345d6cf%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.4%22%20fill%3D%22%23e6a94e%22%2F%3E%3Ccircle%20cx%3D%2213%22%20cy%3D%228%22%20r%3D%221.8%22%20fill%3D%22%2345d6cf%22%2F%3E%3Cpath%20d%3D%22M4.5%208h2M9.5%208h2%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.2%22%20stroke-dasharray%3D%221.2%201.2%22%2F%3E%3Cpath%20d%3D%22M6%204l4%208%22%20stroke%3D%22%23d66%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Untrusted Relay — secret keys through relays a spy might run | The Quantum Museum</title>
+<meta name="description" content="E91 quantum key distribution through entanglement-swapping relays on ibm_fez: certified keys through one relay (S=2.307, 16.8σ) and two relays (S=2.235, 12.7σ). The CHSH score is a spy-meter — no eavesdropper can push it above 2. Exp180.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .lede a { color: var(--cyan); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
+    border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .grid2 { display:grid; grid-template-columns:1fr 1.1fr; gap:18px; align-items:start; }
+  @media (max-width:680px){ .grid2 { grid-template-columns:1fr; } }
+  .stream { font-family:var(--mono); font-size:12.5px; line-height:1.7; margin-top:10px; }
+  .stream .lbl { color:var(--ink-3); font-size:11px; letter-spacing:.06em; text-transform:uppercase; }
+  .stream .row { white-space:nowrap; overflow-x:auto; }
+  .stream .who { display:inline-block; width:44px; color:var(--ink-2); }
+  .stream .b { display:inline-block; width:13px; text-align:center; color:var(--ink-2); }
+  .stream .b.miss { color:var(--amber); font-weight:700; background:color-mix(in srgb,var(--amber) 14%,transparent); border-radius:3px; }
+  .stream .mrk { display:inline-block; width:13px; text-align:center; color:var(--amber); font-size:9px; }
+  .stream .note { color:var(--ink-3); font-size:11px; margin-top:4px; max-width:52ch; white-space:normal; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .eline { font-family:var(--mono); font-size:11px; color:var(--ink-3); margin-top:8px; }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:16px; font-weight:700; }
+  .val.good { color:var(--good); } .val.bad { color:var(--bad); } .val.cy { color:var(--cyan); }
+  .val.am { color:var(--amber); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="wingtag">/ quantum network</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
+    <h1>The Untrusted Relay<span class="hl">.</span></h1>
+    <p class="lede">Alice and Bob want a secret key. The only path between them runs through relay
+      stations — and <b>maybe a spy runs the relays</b>. It doesn't matter. The relays splice
+      entanglement end-to-end (<a href="../swap/">the Matchmaker</a>'s move) and publish their
+      results out loud; Alice and Bob then play a statistics game whose score, S, is a
+      <b>spy-meter</b>: no eavesdropper, no classical fake, no scripted relay can push S above 2 —
+      that is a theorem, not a promise. Our relay-built links score <b>2.31</b> and <b>2.24</b>.
+      The keys are certified by physics, through infrastructure nobody has to trust.</p>
+    <span class="scope">Scope: <b>E91 key distribution</b> over 1- and 2-relay swapped links with the full
+      countermeasure stack (frame + echo + merged windows) — raw sifted bits + the CHSH certificate;
+      no error correction or privacy amplification (the security layer, not the full protocol).</span>
+  </header>
+
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">The spy-meter</h2>
+    <p class="sub">4 arms, one job · ibm_fez · 8000 shots per setting · job d9e15q1htsac739dm7i0</p>
+    <p class="primer"><b>How to read it.</b> The gauge shows the CHSH score S with its two theorem lines:
+      the heavy red line at <b>2.0</b> — the ceiling for ANY spy, eavesdropper, or classical imitation —
+      and a faint line at 2.83, quantum mechanics' own maximum. Above red = the key is certified. The
+      "σ" figure says how far past the line we are in units of statistical doubt (16.8σ ≈ the odds of
+      this being classical noise are astronomically small). On the right: the two parties' sifted key
+      bits — disagreements flagged ▲ at the measured error rate. Add relays and watch S walk down
+      toward the red line… then pull the entanglement out entirely.</p>
+    <div class="seg" role="tablist" id="seg"></div>
+    <div class="grid2">
+      <figure aria-label="CHSH S gauge with classical bound at 2 and Tsirelson bound at 2.83"><svg id="viz" viewBox="0 0 250 320"></svg></figure>
+      <div>
+        <svg id="topo" viewBox="0 0 380 64" aria-label="link topology sketch" style="max-width:380px"></svg>
+        <div class="stream" id="stream"></div>
+        <p class="story" id="story"></p>
+        <div class="eline" id="eline"></div>
+      </div>
+    </div>
+    <div class="verdict" id="vbox"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">the twist: the security proof is the same witness this wing always uses</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">WHY THE RELAY CANNOT SPY</div>
+        <p>After its Bell measurement the relay holds <b>no qubit correlated with the key</b> — the
+        swap consumes its particles entirely. Its outcomes are published to everyone, spy included.
+        And S&nbsp;&gt;&nbsp;2 bounds <em>every</em> eavesdropping strategy at once — not "we didn't
+        detect a spy" but "a spy is impossible above this score." Security by theorem, under E91's
+        standard assumptions — the fence below names what this layer doesn't include.</p></div>
+      <div class="receipt"><div class="rt">FRAME-STEERED SIFTING</div>
+        <p>The relay's corrections are Pauli frames — but key measurements happen at ±45°, where
+        frames can't be XORed away. The conjugation rule saves every shot: a pending frame (x,z)
+        flips the outcome's sign by x and <em>steers Bob's effective angle</em> between ±45° by
+        x⊕z. Each shot lands in a valid CHSH term. That is <em>how</em> repeater QKD folds published
+        relay outcomes into sifting — derived from this wing's own frame algebra, proven exact in
+        simulation before flight. <code>(−1)ˣ·A((−1)^(x⊕z)·θ)</code></p></div>
+      <div class="receipt"><div class="rt">THE MODEL THAT FELL</div>
+        <p>The pre-registered prediction said the two-relay key <b>fails</b>: S = 1.97, from the
+        standard mapping that grades a link by one fidelity number. Measured: <b>2.235, certified.</b>
+        The decomposition: our links die by lopsided dephasing (ZZ ≫ XX), and for such states
+        S&nbsp;=&nbsp;√2·(ZZ+XX) — the previous night's own correlations already predicted 2.05, a
+        violation hidden by the one-number collapse. The rest (2.05→2.24) was a favorable condition
+        swing. The lopsidedness also keeps key-bit errors low: <b>dephasing-limited links are better
+        key carriers than their fidelity suggests.</b> Never price a structured thing with a scalar.</p></div>
+      <div class="receipt"><div class="rt">WHY IT MATTERS &amp; THE FENCE</div>
+        <p>This is the quantum internet's purpose, end-to-end: keys through infrastructure you don't
+        trust. Fence: raw sifted bits + the CHSH certificate (Ekert's security layer) — no error
+        correction, no privacy amplification, no authenticated channel; one die (patches, not
+        stations); the 2.235 includes a condition swing — the certified claim rests on the 12.7σ
+        margin, not on the point value repeating. <code>Exp180 · job d9e15q1htsac739dm7i0</code></p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Exp180 · ibm_fez · 20 circuits · 8000 shots</span>
+    <span>C4868 · 2026-07-19</span>
+    <a href="../subspace-channel/">← keys with no relays</a>
+    <a href="../relay-computer/">← the stack that carries them</a>
+    <a href="../index.html">← all exhibits</a>
+  </div>
+</div>
+
+<script>
+"use strict";
+const ARMS={
+ direct:{lbl:"direct",S:2.607,se:0.017,sig:35.8,qber:0.014,relays:0,seed:18001,ok:true,
+   E:[0.675,0.700,0.603,-0.629],
+   story:"<b>The reference.</b> Alice and Bob share a Bell pair prepared directly — no relays. S reads 2.607, far past the spy line, and their key bits disagree just 1.4% of the time. This is the ceiling the relays will spend from.",
+   v:"CERTIFIED — no spy possible above this score"},
+ key1relay:{lbl:"● 1 relay",S:2.307,se:0.018,sig:16.8,qber:0.082,relays:1,seed:18002,ok:true,
+   E:[0.604,0.590,0.548,-0.565],
+   story:"<b>The headline.</b> Alice's and Bob's particles never met — a relay station spliced their entanglement and shouted its results out loud. S = 2.307: <b>16.8σ past the ceiling any spy can reach.</b> The key (8.2% raw errors) is certified by physics, through a middleman nobody trusted.",
+   v:"CERTIFIED — key passed through an untrusted relay"},
+ key2relay:{lbl:"● ● 2 relays",S:2.235,se:0.019,sig:12.7,qber:0.106,relays:2,seed:18003,ok:true,ghost:true,
+   E:[0.581,0.566,0.559,-0.528],
+   story:"<b>The model-breaker.</b> TWO relay stations, the full countermeasure stack — and the pre-registered model said this one FAILS (the ghost at 1.97). Measured: 2.235, certified at 12.7σ. The model graded the link by one fidelity number; the link's lopsided noise protects exactly the correlations the key needs. Structure beat the scalar.",
+   v:"CERTIFIED — through two untrusted relays"},
+ nomeas:{lbl:"no entanglement",S:-0.010,se:0.022,sig:null,qber:0.499,relays:2,seed:18004,ok:false,cut:true,
+   E:[0.007,0.003,-0.013,0.006],
+   story:"<b>The falsifier.</b> Same hardware, same settings, same sifting — but the relays never perform their splice, so no entanglement ever reaches the ends. S collapses to 0.00 (no correlation at ANY angle pair) and the \"key\" becomes pure coin flips (49.9% disagreement). The magic was the entanglement, and only the entanglement.",
+   v:"DEAD LINK — the magic was the entanglement"}};
+const SVGNS="http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function drawGauge(A){
+  const viz=document.getElementById("viz"); viz.innerHTML="";
+  const gx=78,T=24,B=286,LO=-0.2,HI=2.95; const gy=v=>B-(B-T)*(v-LO)/(HI-LO);
+  el(viz,"text",{x:gx,y:14,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="CHSH score S";
+  el(viz,"line",{x1:gx,y1:T,x2:gx,y2:B,style:"stroke:var(--edge-2);stroke-width:3"});
+  [[0,"0"],[1,"1"]].forEach(g=>{
+    el(viz,"line",{x1:gx-22,y1:gy(g[0]),x2:gx+22,y2:gy(g[0]),style:"stroke:var(--edge);stroke-width:1"});
+    el(viz,"text",{x:gx-28,y:gy(g[0])+4,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"}).textContent=g[1];});
+  // the spy line — the load-bearing theorem
+  el(viz,"line",{x1:gx-34,y1:gy(2),x2:gx+40,y2:gy(2),style:"stroke:var(--bad);stroke-width:2.5;stroke-dasharray:6 4"});
+  el(viz,"text",{x:gx-40,y:gy(2)+4,"text-anchor":"end",style:"fill:var(--bad);font-family:var(--mono);font-size:11px;font-weight:700"}).textContent="2";
+  el(viz,"text",{x:gx+46,y:gy(2)-2,style:"fill:var(--bad);font-family:var(--mono);font-size:10px"}).textContent="any spy / classical";
+  el(viz,"text",{x:gx+46,y:gy(2)+10,style:"fill:var(--bad);font-family:var(--mono);font-size:10px"}).textContent="fake caps HERE";
+  // Tsirelson — context, deliberately faint
+  el(viz,"line",{x1:gx-26,y1:gy(2.828),x2:gx+26,y2:gy(2.828),style:"stroke:var(--edge-2);stroke-width:1;stroke-dasharray:2 3"});
+  el(viz,"text",{x:gx+32,y:gy(2.828)+4,style:"fill:var(--ink-3);font-family:var(--mono);font-size:9.5px"}).textContent="2√2 quantum max";
+  if(A.ghost){ // the pre-registered Werner prediction — BELOW the measured point
+    el(viz,"circle",{cx:gx,cy:gy(1.97),r:9,style:"fill:none;stroke:var(--amber);stroke-width:2;stroke-dasharray:3 3"});
+    el(viz,"text",{x:gx+34,y:gy(1.97)+16,style:"fill:var(--amber);font-family:var(--mono);font-size:10px"}).textContent="model said: 1.97, fails";
+    el(viz,"line",{x1:gx+16,y1:gy(1.97),x2:gx+16,y2:gy(A.S),style:"stroke:var(--amber);stroke-width:2"});
+  }
+  const mc=A.ok?"var(--cyan)":"var(--bad)";
+  el(viz,"line",{x1:gx,y1:gy(A.S-A.se),x2:gx,y2:gy(A.S+A.se),style:`stroke:${mc};stroke-width:5`});
+  el(viz,"circle",{cx:gx,cy:gy(A.S),r:11,style:`fill:${mc};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${mc})`});
+  el(viz,"text",{x:gx,y:gy(A.S)-18,"text-anchor":"middle",style:`fill:${mc};font-family:var(--mono);font-size:15px;font-weight:700`}).textContent=A.S.toFixed(3);
+  el(viz,"text",{x:gx,y:B+22,"text-anchor":"middle",style:`fill:${A.ok?"var(--good)":"var(--bad)"};font-family:var(--mono);font-size:11px`})
+    .textContent=A.ok?`certified: +${A.sig}σ over 2`:"S ≈ 0 — no correlation at all";
+}
+function drawTopo(A){
+  const t=document.getElementById("topo"); t.innerHTML="";
+  const y=32,ax=30,bx=350; const n=A.relays;
+  const pts=[ax]; for(let i=1;i<=n;i++) pts.push(ax+(bx-ax)*i/(n+1)); pts.push(bx);
+  for(let i=0;i<pts.length-1;i++){
+    const st=A.cut?"stroke:var(--edge-2);stroke-width:1.5;stroke-dasharray:2 4":"stroke:var(--amber);stroke-width:1.6;stroke-dasharray:4 3";
+    el(t,"line",{x1:pts[i]+12,y1:y,x2:pts[i+1]-12,y2:y,style:st});
+    if(A.cut){const mx=(pts[i]+pts[i+1])/2;
+      el(t,"line",{x1:mx-5,y1:y-6,x2:mx+5,y2:y+6,style:"stroke:var(--bad);stroke-width:2"});
+      el(t,"line",{x1:mx-5,y1:y+6,x2:mx+5,y2:y-6,style:"stroke:var(--bad);stroke-width:2"});}
+  }
+  el(t,"circle",{cx:ax,cy:y,r:9,style:"fill:var(--cyan)"});
+  el(t,"circle",{cx:bx,cy:y,r:9,style:"fill:var(--cyan)"});
+  el(t,"text",{x:ax,y:y+26,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:10.5px"}).textContent="Alice";
+  el(t,"text",{x:bx,y:y+26,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:10.5px"}).textContent="Bob";
+  for(let i=1;i<=n;i++){
+    el(t,"circle",{cx:pts[i],cy:y,r:7,style:"fill:var(--amber)"});
+    el(t,"text",{x:pts[i],y:y+26,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent=A.cut?"relay (idle)":"relay 🔍";
+  }
+}
+function drawStream(A){
+  const N=40, rnd=mulberry32(A.seed);
+  const alice=[],bob=[],miss=[];
+  for(let i=0;i<N;i++){const a=rnd()<0.5?0:1;const m=rnd()<A.qber;alice.push(a);bob.push(m?1-a:a);miss.push(m);}
+  const row=(who,bits)=>`<span class="who">${who}</span>`+bits.map((b,i)=>`<span class="b${miss[i]?' miss':''}">${b}</span>`).join("");
+  document.getElementById("stream").innerHTML=
+    `<div class="lbl">the sifted key bits</div>`+
+    `<div class="row">${row("Alice",alice)}</div>`+
+    `<div class="row">${row("Bob",bob)}</div>`+
+    `<div class="row"><span class="who"></span>${miss.map(m=>`<span class="mrk">${m?"▲":""}</span>`).join("")}</div>`+
+    `<div class="note">disagreement rate ${(A.qber*100).toFixed(1)}% (measured) — illustrative stream drawn at the measured error rate; the real key is 8&thinsp;000 shots per setting in the decode file</div>`;
+}
+function draw(key){
+  const A=ARMS[key];
+  drawGauge(A); drawTopo(A); drawStream(A);
+  document.getElementById("story").innerHTML=A.story;
+  document.getElementById("eline").textContent=
+    "the four CHSH correlations (measured): "+A.E.map(e=>(e>0?"+":"")+e.toFixed(2)).join("  ");
+  const qok=A.qber<0.11;
+  document.getElementById("vbox").innerHTML=
+    `<div class="box hl"><span class="lbl">arm verdict</span><span class="val ${A.ok?'good':'bad'}">${A.v}</span></div>`+
+    `<div class="box"><span class="lbl">certificate — S vs the spy line</span><span class="val ${A.ok?'cy':'bad'}">${A.S.toFixed(3)} ± ${A.se.toFixed(3)} ${A.ok?`(+${A.sig}σ)`:"< 2"}</span></div>`+
+    `<div class="box"><span class="lbl">key quality — QBER (11% folk threshold)</span><span class="val ${A.ok?(qok?'good':'am'):'bad'}">${(A.qber*100).toFixed(1)}% ${A.ok?(qok?'✓':'△'):'✗ coin flips'}</span></div>`;
+  document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("on",b.dataset.k===key));
+}
+const seg=document.getElementById("seg");
+Object.keys(ARMS).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;
+  b.setAttribute("aria-pressed","false");
+  b.textContent=ARMS[k].lbl;b.addEventListener("click",()=>{draw(k);
+    document.querySelectorAll("#seg button").forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.k===k)));});
+  seg.appendChild(b);});
+draw("key1relay");
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
+});
+</script>
+</body>
+</html>
