@@ -71,3 +71,16 @@ residuals ≤ 0.08; C_cb(0) in [0.93, 0.98].
   possibility: the fact lives in *correlations*, which decohere differently).
 - **NOT HELD on gauges/anchors**: instrument accounting, not physics; no band-shopping refly
   (190b/200 precedent) unless a specific, identifiable, pre-priceable cause is found.
+
+## Pre-data amendment (C4895, before submission, no outcome data seen)
+
+The first-form audit ("dose-uniform 2q counts for t>0, pooled") ABORTED the submission —
+correctly flagging, then mis-attributing, two separate facts: (1) within-dose spread [7,8,9]
+is across *settings* (0/1/2 overrule CX — by design, the audit's pooling was wrong); (2) at
+t=1.0 every setting is exactly 2 CZ cheaper: **cry(π) is a special angle** (1 CZ per wing vs
+2 generic). Fact (2) is a genuine dose-dependent compilation feature — present identically in
+Exp198's certified flights (same apparatus, same backend, opt3) — and is absorbed by this
+experiment's relative gate design: both endpoints enter only as in-job normalization anchors
+(banded), and the G2 law test is confined to the interior doses, which are skeleton-uniform.
+**Amended audit (frozen)**: per-(arm, setting) 2q counts must be uniform across the interior
+doses {¼, ½, ¾}; endpoint counts reported to the manifest. No gate bands changed.

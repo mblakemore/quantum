@@ -229,20 +229,25 @@ def submit(backend_name, shots):
     svc = _get_ibm_service(); backend = svc.backend(backend_name)
     names, builds = all_circuits()
     circuits = [transpile(qc, backend=backend, optimization_level=3) for qc in builds]
-    # pre-flight skeleton audit (197 lesson): within each arm, 2q count must be dose-uniform
-    # for t>0 (cry(0) may be folded by the transpiler at t=0 — the known 198 convention).
+    # pre-flight skeleton audit (197 lesson), amended pre-data C4895 after a first-form abort:
+    # compare per (arm, setting) — settings legitimately differ by overrule-cx count — and
+    # require uniformity across the INTERIOR doses (0.25/0.5/0.75), which carry the G2 law
+    # test. Endpoints are normalization anchors priced by bands and have known compilation
+    # specials: cry(0) folds at t=0 (198 convention); cry(pi) synthesizes 1 CZ cheaper per
+    # wing at t=1.0 (measured on this backend, present in 198's certified flights too;
+    # absorbed by the relative in-job gates). Both endpoint counts are reported to manifest.
     audit = {}
     for name, qc in zip(names, circuits):
-        arm = name.split("_")[0]; t = float(name.split("_")[1])
+        parts = name.split("_"); arm = parts[0]; t = float(parts[1])
+        key = arm + ("_" + parts[2] if len(parts) > 2 else "")
         n2 = sum(1 for inst in qc.data if inst.operation.num_qubits == 2)
-        audit.setdefault(arm, {}).setdefault(t, []).append(n2)
-    for arm, per_t in audit.items():
-        sets = {t: sorted(set(v)) for t, v in per_t.items() if t > 0}
-        uniq = set()
-        for v in sets.values(): uniq.update(v)
-        if len(uniq) > 3:
-            print(f"AUDIT ABORT: arm {arm} 2q counts vary across doses: {sets}"); sys.exit(1)
-        print(f"  audit {arm}: 2q counts t>0 {sets} | t=0 {sorted(set(per_t[0.0]))}")
+        audit.setdefault(key, {})[t] = n2
+    for key, per_t in sorted(audit.items()):
+        interior = {t: per_t[t] for t in INTERIOR}
+        if len(set(interior.values())) != 1:
+            print(f"AUDIT ABORT: {key} 2q counts vary across interior doses: {interior}")
+            sys.exit(1)
+        print(f"  audit {key}: interior 2q={interior[0.5]} | t=0: {per_t[0.0]} | t=1: {per_t[1.0]}")
     job = SamplerV2(mode=backend).run(circuits, shots=shots)
     man = {"exp": 201, "slug": "ledger_of_time", "backend": backend_name, "shots": shots,
            "job_id": job.job_id(), "order": names,
