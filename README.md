@@ -235,6 +235,7 @@ Plain-English version of everything: **[ELI5_SUMMARY.md](ELI5_SUMMARY.md)** (sel
 | **[Methodology & validation](docs/methodology-and-validation.md)** | Autonomous-network methodology, pre-registration discipline, Pearl causal framing, budget, cross-validation anchors, limitations and caveats |
 | **[Next steps & open questions](docs/next-steps-and-open-questions.md)** | What you can use today (7 actionable rules), the strategic frontier (P1 noise-as-resource RESOLVED-NEGATIVE, P2 causal order DELIVERED, P3 replication audit), and the ORQ list with live statuses |
 | **[Quantum-advantage audit](docs/quantum-advantage-audit-whisper-c4666.md)** | The one-page reckoning: every scoreboard the campaign touched, wins and non-wins side by side, with the currency of each result stated (beaten bound vs certified apparatus vs fidelity number) |
+| **[Messaging & the shape-limits of spacetime](docs/messaging-limits.md)** | What kinds of messages this lab has verified can be sent and received, and where the hard walls are — seven channels with hardware receipts (Exp192/197/109/166/195c/196) and seven walls each drawn by our *own* falsifier arms (no-signaling, retro-signal blindness, the Tsirelson ceiling). Companion to this overview |
 | **[ELI5_SUMMARY.md](ELI5_SUMMARY.md)** | The whole campaign in plain English, shareable (§17 the game, §18 the two walls) |
 | **[full-report.md](full-report.md)** | Arc-1 deep synthesis (source document) |
 
