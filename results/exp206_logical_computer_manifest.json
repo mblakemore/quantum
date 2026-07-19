@@ -1,0 +1,69 @@
+{
+ "exp": 206,
+ "slug": "logical_computer",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9ehr3cjeosc73fiq610",
+ "order": [
+  "bare",
+  "logical"
+ ],
+ "decode": {
+  "dec": [
+   [
+    0,
+    1
+   ],
+   [
+    0,
+    2
+   ]
+  ],
+  "mask": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "valid_set": [
+  [
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   1,
+   1,
+   0
+  ],
+  [
+   1,
+   0,
+   0,
+   1
+  ],
+  [
+   1,
+   1,
+   1,
+   1
+  ]
+ ],
+ "n2": {
+  "bare": 7,
+  "logical": 25
+ },
+ "prereg": {
+  "W1_solver": "bare P(valid)>0.55 & logical-post P(valid)>0.55, both >=5 sigma over 4/16 uniform floor",
+  "W2_coverage": "all valid z present both arms, min per-z >= 0.5/|valid|",
+  "W3_nontrivial": "|valid|=4 < 16 (enumerated from ideal statevector)",
+  "W4_shield_beats_bare": "logical-post P(valid) > bare P(valid) at >=3 sigma (FT-computation thesis; a miss is a kept finding)",
+  "G_acc": "block-pair acceptance >= 0.55",
+  "registered_verdict": "W1-W4 and G_acc",
+  "scope": "F113 fence: asymptotic QNC0!=NC0, at n=4 P(valid) is fidelity over uniform floor not a beaten bound; logical-beats-bare is a hardware claim",
+  "budget_predictions": "bare P(valid) [0.75,0.90]; logical-post [0.80,0.93]; margin [0.02,0.12]; acceptance [0.60,0.80]"
+ }
+}
