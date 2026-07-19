@@ -1,0 +1,51 @@
+{
+ "exp": 214,
+ "slug": "bneq0_hlf",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9elq2sinv1c73aqd03g",
+ "order": [
+  "bare",
+  "logical"
+ ],
+ "decode": {
+  "dec": [
+   [
+    0,
+    1
+   ],
+   [
+    0,
+    2
+   ]
+  ],
+  "mask": [
+   0,
+   0
+  ]
+ },
+ "valid_set": [
+  [
+   0,
+   0
+  ],
+  [
+   1,
+   1
+  ]
+ ],
+ "n2": {
+  "bare": 3,
+  "logical": 5
+ },
+ "prereg": {
+  "W1_solver": "bare & logical-post P(valid) > 0.55, both >=5 sigma over 2/4 floor",
+  "W2_coverage": "all valid z present both arms",
+  "W3_nontrivial": "|valid|=2 < 4",
+  "W4_shield_beats_bare": "logical-post > bare at >=3 sigma (miss kept)",
+  "G_acc": "acceptance >= 0.55",
+  "registered_verdict": "W1-W4 and G_acc",
+  "scope": "F113 fence (n=2 fidelity over floor); S-vertex via direct non-transversal in-block Sbar1 (1 CZ; 213 certified the teleported route separately)",
+  "budget_predictions": "bare P(valid) [0.80,0.95]; logical-post [0.80,0.95]; margin [0.00,0.12]; acceptance [0.75,0.95]"
+ }
+}
