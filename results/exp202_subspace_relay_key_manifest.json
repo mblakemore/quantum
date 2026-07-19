@@ -1,0 +1,132 @@
+{
+ "exp": 202,
+ "slug": "subspace_relay_key",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9edkh9htsac739e4oug",
+ "order": [
+  [
+   "logical",
+   "ZZ"
+  ],
+  [
+   "logical",
+   "ZX"
+  ],
+  [
+   "logical",
+   "XZ"
+  ],
+  [
+   "logical",
+   "XX"
+  ],
+  [
+   "relay",
+   "ZZ"
+  ],
+  [
+   "relay",
+   "ZX"
+  ],
+  [
+   "relay",
+   "XZ"
+  ],
+  [
+   "relay",
+   "XX"
+  ],
+  [
+   "bare",
+   "ZZ"
+  ],
+  [
+   "bare",
+   "ZX"
+  ],
+  [
+   "bare",
+   "XZ"
+  ],
+  [
+   "bare",
+   "XX"
+  ],
+  [
+   "barerelay",
+   "ZZ"
+  ],
+  [
+   "barerelay",
+   "ZX"
+  ],
+  [
+   "barerelay",
+   "XZ"
+  ],
+  [
+   "barerelay",
+   "XX"
+  ],
+  [
+   "nocx",
+   "ZZ"
+  ],
+  [
+   "nocx",
+   "ZX"
+  ],
+  [
+   "nocx",
+   "XZ"
+  ],
+  [
+   "nocx",
+   "XX"
+  ]
+ ],
+ "seed_transpiler": 0,
+ "audit_2q": {
+  "logical": {
+   "ZZ": 18,
+   "ZX": 18,
+   "XZ": 18,
+   "XX": 18
+  },
+  "relay": {
+   "ZZ": 40,
+   "ZX": 40,
+   "XZ": 40,
+   "XX": 40
+  },
+  "bare": {
+   "ZZ": 2,
+   "ZX": 2,
+   "XZ": 2,
+   "XX": 2
+  },
+  "barerelay": {
+   "ZZ": 3,
+   "ZX": 3,
+   "XZ": 3,
+   "XX": 3
+  },
+  "nocx": {
+   "ZZ": 5,
+   "ZX": 5,
+   "XZ": 5,
+   "XX": 5
+  }
+ },
+ "prereg": {
+  "G1_cert_anchors": "S(logical) in [2.40,2.85] & >2 at >=5 sigma (196 band); S(relay) in [2.30,2.75] & >2 at >=5 sigma (197 measured 2.6046); S(nocx) in [-0.25,0.30]",
+  "G2_key_exists": "QBER_Z and QBER_X < 0.11 in logical, relay, bare, barerelay; nocx QBER_Z and QBER_X in [0.45,0.55] (executed no-entanglement null: no weld, no secret)",
+  "G3_shield_quality": "r(logical) > r(bare) at >=3 sigma AND r(relay) > r(barerelay) at >=3 sigma (delta-method SE); QBER_Z(relay) < QBER_Z(barerelay) at >=5 sigma",
+  "G4_depth_pays": "[r(relay)-r(barerelay)] > [r(logical)-r(bare)] at >=3 sigma \u2014 the shield's key advantage GROWS with depth (the invention thesis; a miss is a finding against Invention 1, kept)",
+  "G5_gauges": "acceptance >= 0.70 every basis (logical/nocx, 196 gate); >= 0.50 every basis (relay, 12q/3-block); throughput column reported both links (reported, not gated \u2014 the honest toll)",
+  "registered_verdict": "conjunction G1-G5",
+  "budget_predictions": "QBER_Z(logical) in [0.005,0.025]; QBER_Z(relay) in [0.025,0.060]; r(relay)/r(barerelay) in [1.8,5.0]; crossover pattern (conf 0.6): bare wins throughput on the direct link, logical wins throughput on the relay link",
+  "scope": "trusted-device BBM92; CHSH = tier-2 health certificate NOT DI (F115); raw sifted + asymptotic r; no EC/PA/auth; deterministic settings"
+ }
+}
