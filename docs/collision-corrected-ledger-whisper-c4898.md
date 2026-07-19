@@ -97,3 +97,24 @@ now in the ledger.
 
 *Not flown tonight: this document is the derivation deliverable. 203b flies on Creator go
 with these predictions frozen as-is.*
+
+---
+
+## RETRACTION ADDENDUM (C4899, post-Exp203b — same author)
+
+**§3's interpretation is RETRACTED.** Exp203b (job `d9ee989htsac739e5e20`) flew the frozen
+predictions with the anti-folding compilation, and the plain arm's coherence residuals
+collapsed to ≤0.04 — **the "+0.199 non-Pauli deviation" §3 promoted to an instrument was
+the Exp203 anchor-layout artifact** (θ=0's folded cry freed the layout, so c0/m_odd
+parameterized different physical qubits than the interior doses). With same-layout anchors
+the static-Pauli collision model fits; no non-Pauli term is needed at the 4% level.
+
+**§1–§2 stand and strengthen**: the XOR acceptance law replicated at max residual 0.0064
+across both compilation arms, with BOTH fixed points now demonstrated (acc(π) = ½ at any
+p_n; and — via 203b's echo-broken twirled arm — acc = ½ at any dose when p_n = ½).
+
+§4's P2/P3/P4 are void as framed (their target effect was an artifact; the twirl
+implementation additionally broke on the echo — see
+[`exp203b-STATUS`](../experiments/exp203b-STATUS-not-held-law-standing.md)).
+The ledger is closed: XOR arithmetic + static-Pauli collision bookkeeping with honest
+anchors. Nothing exotic survives.
