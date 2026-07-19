@@ -1,0 +1,133 @@
+{
+ "exp": "202b",
+ "slug": "subspace_relay_key_b",
+ "backend": "ibm_fez",
+ "shots_ent": 32000,
+ "shots_nocx": 8000,
+ "job_id": "d9edmvsjeosc73filp50",
+ "order": [
+  [
+   "logical",
+   "ZZ"
+  ],
+  [
+   "logical",
+   "ZX"
+  ],
+  [
+   "logical",
+   "XZ"
+  ],
+  [
+   "logical",
+   "XX"
+  ],
+  [
+   "relay",
+   "ZZ"
+  ],
+  [
+   "relay",
+   "ZX"
+  ],
+  [
+   "relay",
+   "XZ"
+  ],
+  [
+   "relay",
+   "XX"
+  ],
+  [
+   "bare",
+   "ZZ"
+  ],
+  [
+   "bare",
+   "ZX"
+  ],
+  [
+   "bare",
+   "XZ"
+  ],
+  [
+   "bare",
+   "XX"
+  ],
+  [
+   "barerelay",
+   "ZZ"
+  ],
+  [
+   "barerelay",
+   "ZX"
+  ],
+  [
+   "barerelay",
+   "XZ"
+  ],
+  [
+   "barerelay",
+   "XX"
+  ],
+  [
+   "nocx",
+   "ZZ"
+  ],
+  [
+   "nocx",
+   "ZX"
+  ],
+  [
+   "nocx",
+   "XZ"
+  ],
+  [
+   "nocx",
+   "XX"
+  ]
+ ],
+ "seed_transpiler": 0,
+ "audit_2q": {
+  "logical": {
+   "ZZ": 18,
+   "ZX": 18,
+   "XZ": 18,
+   "XX": 18
+  },
+  "relay": {
+   "ZZ": 40,
+   "ZX": 40,
+   "XZ": 40,
+   "XX": 40
+  },
+  "bare": {
+   "ZZ": 2,
+   "ZX": 2,
+   "XZ": 2,
+   "XX": 2
+  },
+  "barerelay": {
+   "ZZ": 3,
+   "ZX": 3,
+   "XZ": 3,
+   "XX": 3
+  },
+  "nocx": {
+   "ZZ": 5,
+   "ZX": 5,
+   "XZ": 5,
+   "XX": 5
+  }
+ },
+ "prereg": {
+  "relation_to_202": "disclosed pro-hypothesis retest; 202 registered verdict stands NOT HELD; this is a new frozen instrument",
+  "G1_cert_anchors": "UNCHANGED from 202: S(logical) in [2.40,2.85] >=5 sigma; S(relay) in [2.30,2.75] >=5 sigma; S(nocx) in [-0.25,0.30]",
+  "G2_key_exists": "UNCHANGED: QBER_Z,QBER_X < 0.11 all four links; nocx in [0.45,0.55]",
+  "G3_shield_quality": "r-edges UNCHANGED (>=3 sigma both links); QBER sub-gate RE-PRICED pre-data (200b move): pooled Qbar=(Q_Z+Q_X)/2, Qbar(relay) < Qbar(barerelay) at >=5 sigma",
+  "G4_depth_pays": "UNCHANGED bands: [r(relay)-r(barerelay)] - [r(logical)-r(bare)] > 0 at >=3 sigma; POWERED: 32k shots -> se_gain ~0.013, detects >=0.040 at 3 sigma; expected z ~3.8 at 202's point estimate; can MISS if true gain smaller \u2014 accepted, bands unchanged",
+  "G5_gauges": "UNCHANGED: acceptance >=0.70 (logical/nocx), >=0.50 (relay)",
+  "registered_verdict": "conjunction G1-G5",
+  "budget_predictions": "depth gain in [0.02,0.09]; pooled relay QBER edge in [1.5pp,4.5pp]; relay r-multiple in [1.5,3.0] (re-priced from 202's measured windows); shield wins throughput both links (conf 0.75, upgraded on 202's measurement)"
+ }
+}
