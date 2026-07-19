@@ -1,0 +1,26 @@
+{
+ "exp": 190,
+ "slug": "shield_pays",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e5o3sjeosc73ficbv0",
+ "order": [
+  "Lx_T0",
+  "Lx_T1",
+  "Lx_T2",
+  "bx_T0",
+  "bx_T1",
+  "bx_T2",
+  "synd_clean_mid",
+  "inject_z_mid",
+  "clean_nomid",
+  "inject_z_nomid"
+ ],
+ "tunit_dt": 4000,
+ "prereg": {
+  "survival": "e_L(T2) < e_b(T2), z=(e_b-e_L)/sqrt(se^2+se^2) >= 3; ratio band 0.15-0.75",
+  "coverage": "P(reject|inject_z_mid) >= 0.90 AND P(accept|inject_z_nomid) >= 0.90",
+  "window_echo": "e_L(synd_echoed_X) < e_L(synd_unechoed_X) at >= 2 sigma; gap band 0.005-0.06",
+  "gauges": "survival acceptance >=0.85 T0, >=0.65 T2; syndrome acceptance 0.50-0.85"
+ }
+}

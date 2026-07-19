@@ -19,10 +19,13 @@ from qiskit.circuit import Delay
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
 
-TUNIT = 4000   # dt (~2 us at dt=0.5ns), granularity-16 safe
+TUNIT = 4000   # dt (~2 us) — Exp190 (tag "")
+TUNIT_B = 1000  # dt (~0.5 us) — Exp190b short-T sweep (tag "b")
 CIRCS = ("Lx_T0", "Lx_T1", "Lx_T2", "Lx_T2_unechoed", "bx_T0", "bx_T1", "bx_T2",
          "Lz_T0", "Lz_T2", "bz_T0", "bz_T2",
          "synd_echoed_X", "synd_unechoed_X", "inject_z_mid", "inject_z_nomid", "synd_clean_Z")
+CIRCS_B = ("Lx_T0", "Lx_T1", "Lx_T2", "bx_T0", "bx_T1", "bx_T2",
+           "synd_clean_mid", "inject_z_mid", "clean_nomid", "inject_z_nomid")
 
 
 def _delay(qc, qubits, dt):
@@ -31,15 +34,17 @@ def _delay(qc, qubits, dt):
 
 
 def _echo_idle(qc, qubits, total_dt, echo=True):
-    """Idle for total_dt with midpoint+endpoint refocusing pair (exact identity)."""
+    """Quarter-point fair echo: T/4 . X . T/2 . X . T/4 — net identity, SYMMETRIC
+    excited-state exposure (checklist item 8; fixes Exp190's unfair T1 dose on the bare arm)."""
     if total_dt <= 0: return
     if not echo:
         _delay(qc, qubits, total_dt); return
-    half = (total_dt // 2 // 16) * 16
-    _delay(qc, qubits, half)
+    q4 = (total_dt // 4 // 16) * 16
+    _delay(qc, qubits, q4)
     for q in qubits: qc.x(q)
-    _delay(qc, qubits, total_dt - half)
+    _delay(qc, qubits, total_dt - 2 * q4)
     for q in qubits: qc.x(q)
+    _delay(qc, qubits, q4)
 
 
 def _encode(qc, plus=False):
@@ -48,14 +53,18 @@ def _encode(qc, plus=False):
         for q in range(4): qc.h(q)
 
 
-def circuit(name):
-    if name.startswith("b"):                      # bare pair
+def circuit(name, tunit=TUNIT):
+    if name in ("synd_clean_mid", "clean_nomid"):        # 190b attrition-matched clean arms
+        return _cov_circuit(name, inject=False, tunit=tunit)
+    if name in ("inject_z_mid", "inject_z_nomid") and tunit == TUNIT_B:
+        return _cov_circuit(name, inject=True, tunit=tunit)
+    if name.startswith("b") and not name.startswith("bare"):  # bare pair
         basisX = name[1] == "x"
         T = int(name.split("_T")[1][0])
         qc = QuantumCircuit(2, 2)
         if basisX: qc.h(0); qc.h(1)
         qc.barrier()
-        _echo_idle(qc, [0, 1], T * TUNIT, echo=True)
+        _echo_idle(qc, [0, 1], T * tunit, echo=True)
         qc.barrier()
         if basisX: qc.h(0); qc.h(1)
         qc.measure(0, 0); qc.measure(1, 1)
@@ -67,7 +76,7 @@ def circuit(name):
         qc = QuantumCircuit(4, 4)
         _encode(qc, plus=basisX)
         qc.barrier()
-        _echo_idle(qc, [0, 1, 2, 3], T * TUNIT, echo=echo)   # X(x4) = the XXXX stabilizer
+        _echo_idle(qc, [0, 1, 2, 3], T * tunit, echo=echo)   # X(x4) = the XXXX stabilizer
         qc.barrier()
         if basisX:
             for q in range(4): qc.h(q)
@@ -79,7 +88,7 @@ def circuit(name):
     _encode(qc, plus=plus)
     if name.startswith("inject_z"): qc.z(0)       # the error terminal-Z readout cannot see
     qc.barrier()
-    _echo_idle(qc, [0, 1, 2, 3], TUNIT, echo=True)
+    _echo_idle(qc, [0, 1, 2, 3], tunit, echo=True)
     if name != "inject_z_nomid":                  # the mid-circuit XXXX syndrome
         echo_w = "unechoed" not in name
         qc.h(4)
@@ -91,10 +100,29 @@ def circuit(name):
         if echo_w and not name.startswith("inject"):
             for q in range(4): qc.x(q)            # echo close
     qc.barrier()
-    _echo_idle(qc, [0, 1, 2, 3], TUNIT, echo=True)
+    _echo_idle(qc, [0, 1, 2, 3], tunit, echo=True)
     qc.barrier()
     if plus:
         for q in range(4): qc.h(q)
+    for q in range(4): qc.measure(q, q)
+    return qc
+
+
+def _cov_circuit(name, inject, tunit):
+    """190b coverage quad: {clean, inject-Z} x {mid, nomid}; Z-family; 2us idles -> tunit*2."""
+    qc = QuantumCircuit(5, 5)
+    _encode(qc, plus=False)
+    if inject: qc.z(0)
+    qc.barrier()
+    _echo_idle(qc, [0, 1, 2, 3], 2 * tunit, echo=True)
+    if name.endswith("_mid"):
+        qc.h(4)
+        for d in range(4): qc.cx(4, d)
+        qc.h(4)
+        qc.measure(4, 4)
+    qc.barrier()
+    _echo_idle(qc, [0, 1, 2, 3], 2 * tunit, echo=True)
+    qc.barrier()
     for q in range(4): qc.measure(q, q)
     return qc
 
@@ -123,14 +151,14 @@ def _stats2(counts):
     return {"err": err / (2 * n)}
 
 
-def analyze(get):
+def analyze(get, circs=CIRCS):
     r = {}
-    for name in CIRCS:
+    for name in circs:
         counts = get(name)
         if name.startswith("b"):
             r[name] = _stats2(counts)
         else:
-            r[name] = _stats4(counts, use_mid=(name.startswith("synd") or name == "inject_z_mid"))
+            r[name] = _stats4(counts, use_mid=name.endswith("_mid"))
     return r
 
 
@@ -159,13 +187,15 @@ def selftest():
           "the mid-circuit syndrome closes it. Cleared to fly.")
 
 
-def submit(backend_name, shots):
+def submit(backend_name, shots, tag=""):
     from run_exp66_qpu_partb import _get_ibm_service
     from qiskit_ibm_runtime import SamplerV2
     svc = _get_ibm_service(); backend = svc.backend(backend_name)
+    circs = CIRCS_B if tag == "b" else CIRCS
+    tunit = TUNIT_B if tag == "b" else TUNIT
     circuits, order = [], []
-    for name in CIRCS:
-        circuits.append(transpile(circuit(name), backend=backend, optimization_level=3))
+    for name in circs:
+        circuits.append(transpile(circuit(name, tunit), backend=backend, optimization_level=3))
         order.append(name)
     sampler = SamplerV2(mode=backend); job = sampler.run(circuits, shots=shots)
     manifest = {"exp": 190, "slug": "shield_pays", "backend": backend_name, "shots": shots,
@@ -174,22 +204,51 @@ def submit(backend_name, shots):
                            "coverage": "P(reject|inject_z_mid) >= 0.90 AND P(accept|inject_z_nomid) >= 0.90",
                            "window_echo": "e_L(synd_echoed_X) < e_L(synd_unechoed_X) at >= 2 sigma; gap band 0.005-0.06",
                            "gauges": "survival acceptance >=0.85 T0, >=0.65 T2; syndrome acceptance 0.50-0.85"}}
-    out = os.path.join(HERE, "..", "results", "exp190_shield_pays_manifest.json")
+    out = os.path.join(HERE, "..", "results", f"exp190{tag}_shield_pays_manifest.json")
     json.dump(manifest, open(out, "w"), indent=1)
     print(f"submitted {job.job_id()} ({len(circuits)} circuits, {shots} shots) -> {out}")
 
 
-def decode():
+def decode(tag=""):
     from run_exp66_qpu_partb import _get_ibm_service
-    mp = os.path.join(HERE, "..", "results", "exp190_shield_pays_manifest.json")
+    mp = os.path.join(HERE, "..", "results", f"exp190{tag}_shield_pays_manifest.json")
     svc = _get_ibm_service(); man = json.load(open(mp)); res = svc.job(man["job_id"]).result()
     shots = man["shots"]
     raw = {}
     for idx, name in enumerate(man["order"]):
         r0 = res[idx]; reg = list(r0.data.keys())[0]
         raw[name] = getattr(r0.data, reg).get_counts()
-    r = analyze(lambda name: raw[name])
+    circs = CIRCS_B if tag == "b" else CIRCS
+    r = analyze(lambda name: raw[name], circs)
     se_e = lambda e, N: np.sqrt(max(e * (1 - e), 1e-9) / N)
+    if tag == "b":
+        print(f"Exp190b SHIELD PAYS (redesigned) decode | job {man['job_id']}")
+        print("  SURVIVAL (X family, quarter-point fair echoes, T unit 0.5us):")
+        for T in (0, 1, 2):
+            eL = r[f"Lx_T{T}"]["logical_err"]; eb = r[f"bx_T{T}"]["err"]
+            print(f"    T={T} ({T*0.5}us): logical {eL:.4f} (acc {r[f'Lx_T{T}']['acceptance']:.3f}) "
+                  f"vs bare {eb:.4f} -> ratio {eL/eb if eb else float('nan'):.2f}")
+        eL2, acc2 = r["Lx_T2"]["logical_err"], r["Lx_T2"]["acceptance"]
+        eb2 = r["bx_T2"]["err"]
+        z = (eb2 - eL2) / np.sqrt(se_e(eL2, 2*shots*acc2)**2 + se_e(eb2, 2*shots)**2)
+        rejm_i = 1 - r["inject_z_mid"]["acceptance"]; rejm_c = 1 - r["synd_clean_mid"]["acceptance"]
+        rejn_i = 1 - r["inject_z_nomid"]["acceptance"]; rejn_c = 1 - r["clean_nomid"]["acceptance"]
+        dmid = rejm_i - rejm_c; dnomid = rejn_i - rejn_c
+        print(f"  COVERAGE (attrition-matched differentials):")
+        print(f"    with mid syndrome: rej(inject) {rejm_i:.3f} - rej(clean) {rejm_c:.3f} = D_mid {dmid:+.3f}")
+        print(f"    without:           rej(inject) {rejn_i:.3f} - rej(clean) {rejn_c:.3f} = D_nomid {dnomid:+.3f}")
+        surv_ok = eL2 < eb2 and z >= 3
+        cov_ok = dmid >= 0.40 and -0.05 <= dnomid <= 0.10
+        print(f"\nSURVIVAL: {'HELD — the shield pays at matched time in the p^2 regime (' + format(z,'.0f') + ' sigma)' if surv_ok else 'NOT HELD (z=' + format(z,'.1f') + ')'}")
+        print(f"COVERAGE: {'HELD — mid syndrome catches the terminal-blind Z (attrition-matched)' if cov_ok else 'NOT HELD'}")
+        ok = surv_ok and cov_ok
+        print(f"VERDICT: {'THE SHIELD PAYS — stage (ii) certified on the redesign' if ok else 'NOT HELD (honest accounting above)'}")
+        out = {"job_id": man["job_id"], "results": r, "z_survival": float(z),
+               "D_mid": float(dmid), "D_nomid": float(dnomid),
+               "survival_ok": bool(surv_ok), "coverage_ok": bool(cov_ok), "verdict_ok": bool(ok)}
+        json.dump(out, open(os.path.join(HERE, "..", "results", "exp190b_shield_pays_decode.json"), "w"), indent=1)
+        print("-> results/exp190b_shield_pays_decode.json")
+        return
     print(f"Exp190 THE SHIELD PAYS decode | job {man['job_id']} | backend {man['backend']}")
     print("  SURVIVAL (X family, time-matched, both echoed):")
     for T in (0, 1, 2):
@@ -232,8 +291,9 @@ if __name__ == "__main__":
     ap.add_argument("--selftest", action="store_true"); ap.add_argument("--submit", action="store_true")
     ap.add_argument("--decode", action="store_true")
     ap.add_argument("--backend", default="ibm_fez"); ap.add_argument("--shots", type=int, default=8000)
+    ap.add_argument("--tag", default="")
     a = ap.parse_args()
     if a.selftest: selftest()
-    elif a.submit: submit(a.backend, a.shots)
-    elif a.decode: decode()
+    elif a.submit: submit(a.backend, a.shots, a.tag)
+    elif a.decode: decode(a.tag)
     else: ap.print_help()
