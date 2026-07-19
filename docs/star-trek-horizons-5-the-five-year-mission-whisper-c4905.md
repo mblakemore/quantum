@@ -58,7 +58,7 @@ between a physics demonstration and an engineering primitive.
 
 ---
 
-## P2 — THE FULL REPLICATOR: scaling the logical computer (highest-confidence flight)
+## P2 — THE FULL REPLICATOR: scaling the logical computer (highest-confidence flight) — 🔬 GADGET DERIVED (C4905): the teleported-S̄ construction is verified a genuine gate in statevector (Bell-resource Gottesman–Chuang, frame X̄^bx Z̄^bz; naive one-bit constructions ruled out); flight Exp213 specified. See [teleported-s-gadget-derivation](teleported-s-gadget-derivation-whisper-c4905.md)
 
 **The vision**: Exp206 ran the first error-corrected computation (BGK 2D-HLF, n=4, b=0) and it
 beat bare uphill (19.7σ) and travelled to a second chip (207). But the C4901 audit proved the
