@@ -1,0 +1,48 @@
+{
+ "job_id": "d9e5o3sjeosc73ficbv0",
+ "results": {
+  "Lx_T0": {
+   "acceptance": 0.972,
+   "logical_err": 0.0009645061728395061
+  },
+  "Lx_T1": {
+   "acceptance": 0.916,
+   "logical_err": 0.011804039301310043
+  },
+  "Lx_T2": {
+   "acceptance": 0.87375,
+   "logical_err": 0.025321888412017168
+  },
+  "bx_T0": {
+   "err": 0.003125
+  },
+  "bx_T1": {
+   "err": 0.0206875
+  },
+  "bx_T2": {
+   "err": 0.029
+  },
+  "synd_clean_mid": {
+   "acceptance": 0.5245,
+   "logical_err": 0.06744518589132507
+  },
+  "inject_z_mid": {
+   "acceptance": 0.073,
+   "logical_err": 0.2071917808219178
+  },
+  "clean_nomid": {
+   "acceptance": 0.74425,
+   "logical_err": 0.02972791400738999
+  },
+  "inject_z_nomid": {
+   "acceptance": 0.74275,
+   "logical_err": 0.034247728037697746
+  }
+ },
+ "z_survival": 1.9589474921645316,
+ "D_mid": 0.4515,
+ "D_nomid": 0.0014999999999999458,
+ "survival_ok": false,
+ "coverage_ok": true,
+ "verdict_ok": false
+}
