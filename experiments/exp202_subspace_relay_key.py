@@ -246,24 +246,32 @@ def submit(backend_name, shots):
     from run_exp66_qpu_partb import _get_ibm_service
     from qiskit_ibm_runtime import SamplerV2
     svc = _get_ibm_service(); backend = svc.backend(backend_name)
-    names, circuits = [], []
-    for arm in ARMS:
-        for bb in BASES:
-            names.append([arm, bb])
-            circuits.append(transpile(circuit(arm, bb), backend=backend, optimization_level=3))
-    # skeleton audit: bases differ only by 1q H layers -> per-arm 2q counts must be basis-uniform
-    audit = {}
-    for (arm, bb), qc in zip(names, circuits):
-        n2 = sum(1 for inst in qc.data if inst.operation.num_qubits == 2)
-        audit.setdefault(arm, {})[bb] = n2
+    names = [[arm, bb] for arm in ARMS for bb in BASES]
+    # Deterministic seed search (pre-data, outcome-blind): bases differ only by 1q H layers,
+    # so per-arm 2q counts must be basis-uniform. Unpinned SABRE routing broke this on the
+    # first submit attempt (relay ZX +3 gates) — the repo's pin-your-seeds lesson. Fly the
+    # first seed whose skeleton is uniform for every arm; seed recorded in the manifest.
+    circuits = audit = seed_used = None
+    for seed in range(20):
+        cand = [transpile(circuit(arm, bb), backend=backend, optimization_level=3,
+                          seed_transpiler=seed) for arm, bb in names]
+        aud = {}
+        for (arm, bb), qc in zip(names, cand):
+            n2 = sum(1 for inst in qc.data if inst.operation.num_qubits == 2)
+            aud.setdefault(arm, {})[bb] = n2
+        if all(len(set(per_b.values())) == 1 for per_b in aud.values()):
+            circuits, audit, seed_used = cand, aud, seed
+            break
+        bad = {a: p for a, p in aud.items() if len(set(p.values())) != 1}
+        print(f"  seed {seed}: non-uniform {bad} — next seed")
+    if circuits is None:
+        print("AUDIT ABORT: no seed in 0-19 gives a basis-uniform skeleton"); sys.exit(1)
     for arm, per_b in audit.items():
-        if len(set(per_b.values())) != 1:
-            print(f"AUDIT ABORT: arm {arm} 2q counts vary across bases: {per_b}"); sys.exit(1)
-        print(f"  audit {arm}: 2q={per_b['ZZ']} (basis-uniform)")
+        print(f"  audit {arm}: 2q={per_b['ZZ']} (basis-uniform, seed {seed_used})")
     job = SamplerV2(mode=backend).run(circuits, shots=shots)
     out = os.path.join(HERE, "..", "results", "exp202_subspace_relay_key_manifest.json")
     man = {"exp": 202, "slug": "subspace_relay_key", "backend": backend_name, "shots": shots,
-           "job_id": job.job_id(), "order": names}
+           "job_id": job.job_id(), "order": names, "seed_transpiler": seed_used}
     json.dump(man, open(out, "w"), indent=1)                # C4895 lesson: manifest FIRST,
     man["audit_2q"] = audit                                 # derived fields after
     man["prereg"] = {
