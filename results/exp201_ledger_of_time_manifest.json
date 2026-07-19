@@ -1,0 +1,222 @@
+{
+ "exp": 201,
+ "slug": "ledger_of_time",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9edbd4inv1c73aq49o0",
+ "order": [
+  "fb_0.0_FF",
+  "fb_0.0_FB",
+  "fb_0.0_AF",
+  "fb_0.0_AB",
+  "fu_0.0_FF",
+  "fu_0.0_FB",
+  "fu_0.0_AF",
+  "fu_0.0_AB",
+  "cb_0.0",
+  "cu_0.0",
+  "fb_0.25_FF",
+  "fb_0.25_FB",
+  "fb_0.25_AF",
+  "fb_0.25_AB",
+  "fu_0.25_FF",
+  "fu_0.25_FB",
+  "fu_0.25_AF",
+  "fu_0.25_AB",
+  "cb_0.25",
+  "cu_0.25",
+  "fb_0.5_FF",
+  "fb_0.5_FB",
+  "fb_0.5_AF",
+  "fb_0.5_AB",
+  "fu_0.5_FF",
+  "fu_0.5_FB",
+  "fu_0.5_AF",
+  "fu_0.5_AB",
+  "cb_0.5",
+  "cu_0.5",
+  "fb_0.75_FF",
+  "fb_0.75_FB",
+  "fb_0.75_AF",
+  "fb_0.75_AB",
+  "fu_0.75_FF",
+  "fu_0.75_FB",
+  "fu_0.75_AF",
+  "fu_0.75_AB",
+  "cb_0.75",
+  "cu_0.75",
+  "fb_1.0_FF",
+  "fb_1.0_FB",
+  "fb_1.0_AF",
+  "fb_1.0_AB",
+  "fu_1.0_FF",
+  "fu_1.0_FB",
+  "fu_1.0_AF",
+  "fu_1.0_AB",
+  "cb_1.0",
+  "cu_1.0"
+ ],
+ "exact": {
+  "fb": {
+   "0.0": {
+    "S": 2.4999999999999996
+   },
+   "0.25": {
+    "S": 2.3901650429449544
+   },
+   "0.5": {
+    "S": 2.1249999999999996
+   },
+   "0.75": {
+    "S": 1.8598349570550445
+   },
+   "1.0": {
+    "S": 1.7499999999999998
+   }
+  },
+  "fu": {
+   "0.0": {
+    "S": 2.4999999999999996
+   },
+   "0.25": {
+    "S": 2.499999999999999
+   },
+   "0.5": {
+    "S": 2.4999999999999996
+   },
+   "0.75": {
+    "S": 2.4999999999999996
+   },
+   "1.0": {
+    "S": 2.4999999999999996
+   }
+  },
+  "cb": {
+   "0.0": {
+    "C": 1.0,
+    "dump_p1": 0.0
+   },
+   "0.25": {
+    "C": 0.9238795325112867,
+    "dump_p1": 0.07322330470336312
+   },
+   "0.5": {
+    "C": 0.7071067811865476,
+    "dump_p1": 0.24999999999999994
+   },
+   "0.75": {
+    "C": 0.38268343236508984,
+    "dump_p1": 0.42677669529663687
+   },
+   "1.0": {
+    "C": 6.123233995736766e-17,
+    "dump_p1": 0.5
+   }
+  },
+  "cu": {
+   "0.0": {
+    "C": 1.0,
+    "dump_p1": 0.0
+   },
+   "0.25": {
+    "C": 1.0,
+    "dump_p1": 0.0
+   },
+   "0.5": {
+    "C": 1.0,
+    "dump_p1": 0.0
+   },
+   "0.75": {
+    "C": 1.0,
+    "dump_p1": 0.0
+   },
+   "1.0": {
+    "C": 1.0,
+    "dump_p1": 0.0
+   }
+  }
+ },
+ "audit_2q": {
+  "fb_FF": {
+   "0.0": 3,
+   "0.25": 7,
+   "0.5": 7,
+   "0.75": 7,
+   "1.0": 5
+  },
+  "fb_FB": {
+   "0.0": 4,
+   "0.25": 8,
+   "0.5": 8,
+   "0.75": 8,
+   "1.0": 6
+  },
+  "fb_AF": {
+   "0.0": 4,
+   "0.25": 8,
+   "0.5": 8,
+   "0.75": 8,
+   "1.0": 6
+  },
+  "fb_AB": {
+   "0.0": 5,
+   "0.25": 9,
+   "0.5": 9,
+   "0.75": 9,
+   "1.0": 7
+  },
+  "fu_FF": {
+   "0.0": 3,
+   "0.25": 11,
+   "0.5": 11,
+   "0.75": 11,
+   "1.0": 7
+  },
+  "fu_FB": {
+   "0.0": 4,
+   "0.25": 12,
+   "0.5": 12,
+   "0.75": 12,
+   "1.0": 8
+  },
+  "fu_AF": {
+   "0.0": 4,
+   "0.25": 12,
+   "0.5": 12,
+   "0.75": 12,
+   "1.0": 8
+  },
+  "fu_AB": {
+   "0.0": 5,
+   "0.25": 13,
+   "0.5": 13,
+   "0.75": 13,
+   "1.0": 9
+  },
+  "cb": {
+   "0.0": 2,
+   "0.25": 4,
+   "0.5": 4,
+   "0.75": 4,
+   "1.0": 3
+  },
+  "cu": {
+   "0.0": 2,
+   "0.25": 6,
+   "0.5": 6,
+   "0.75": 6,
+   "1.0": 4
+  }
+ },
+ "audit_note": "manifest reconstructed post-submit (manifest-build crash after job fired, C4895); audit recomputed from the ACTUAL flown pubs fetched from the job",
+ "prereg": {
+  "G1_anchors": "S_fb(0) in [2.05,2.45] and >2 at >=5 sigma (198 certified band, same backend); S_fb(1) in [1.40,1.90]; C_cb(0) >= 0.80",
+  "G2_one_curve_law": "x=C_cb(t)/C_cb(0), y=(S_fb(t)-S_fb(1))/(S_fb(0)-S_fb(1)); |y - x^2| <= 0.12 at each interior dose (0.25/0.5/0.75); y non-increasing within 2 sigma_pair; x strictly decreasing",
+  "G3_facts_revival": "rev_f = S_fu(1)-S_fb(1) >= 0.5*(S_fb(0)-S_fb(1)) at >=5 sigma; S_fu(1) > 2 at >=3 sigma; max-min S_fu over doses <= 0.25",
+  "G4_coh_revival": "rev_c = C_cu(1)-C_cb(1) >= 0.5*C_cb(0) at >=5 sigma; max-min C_cu over doses <= 0.15 (200b's relative gates)",
+  "G5_record_gauges": "R_fd(fb) non-decreasing within 0.02, total rise > 0.5; cb dump P1 tracks sin^2(theta/2)/2 within 0.06; cu dump P1 <= 0.15; fu dump P1 (max over wings) <= 0.15",
+  "G6_records_record": "E(F_A,F_B) >= 0.85 at every dose in BOTH facts arms",
+  "registered_verdict": "conjunction G1-G6; U1 claim proper = G2+G3+G4",
+  "budget_predictions": "S_fu(1) in [2.15,2.32]; rev_f in [0.55,0.72]; interior law residuals <= 0.08; C_cb(0) in [0.93,0.98]"
+ }
+}

@@ -252,8 +252,8 @@ def submit(backend_name, shots):
     man = {"exp": 201, "slug": "ledger_of_time", "backend": backend_name, "shots": shots,
            "job_id": job.job_id(), "order": names,
            "exact": {arm: {str(t): d[arm][t] for t in DOSES} for arm in d},
-           "audit_2q": {arm: {str(t): sorted(set(v)) for t, v in per_t.items()}
-                        for arm, per_t in audit.items()},
+           "audit_2q": {key: {str(t): n for t, n in per_t.items()}
+                        for key, per_t in audit.items()},
            "prereg": {
                "G1_anchors": "S_fb(0) in [2.05,2.45] and >2 at >=5 sigma (198 certified band, "
                              "same backend); S_fb(1) in [1.40,1.90]; C_cb(0) >= 0.80",
