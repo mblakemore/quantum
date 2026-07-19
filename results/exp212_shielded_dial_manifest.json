@@ -1,0 +1,64 @@
+{
+ "exp": 212,
+ "slug": "shielded_dial",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9el9qphtsac739ecsv0",
+ "order": [
+  [
+   "commute",
+   0.0
+  ],
+  [
+   "anti",
+   0.0
+  ],
+  [
+   "commute",
+   0.25
+  ],
+  [
+   "anti",
+   0.25
+  ],
+  [
+   "commute",
+   0.5
+  ],
+  [
+   "anti",
+   0.5
+  ],
+  [
+   "commute",
+   0.75
+  ],
+  [
+   "anti",
+   0.75
+  ],
+  [
+   "commute",
+   1.0
+  ],
+  [
+   "anti",
+   1.0
+  ]
+ ],
+ "exact": {
+  "0.0": 2.0,
+  "0.25": 1.8477590650225735,
+  "0.5": 1.4142135623730954,
+  "0.75": 0.7653668647301796,
+  "1.0": 0.0
+ },
+ "prereg": {
+  "G1_anchors": "DISC(0) > 1.0 at >=5 sigma; |DISC(pi)| <= 0.20",
+  "G2_continuous_law": "|DISC_meas - DISC_exact| <= 0.25 at every interior dose; DISC strictly decreasing in phi",
+  "G3_half_point": "phi crossing 0.5*DISC(0) bracketed at >=3 sigma both sides",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "coherence-of-causal-order witness (F77), half-shielded, single-syndrome; F74/F76 continuous law in the code",
+  "budget_predictions": "DISC(0) in [1.4,1.9]; law residuals <= 0.15; half-point ~pi/2"
+ }
+}
