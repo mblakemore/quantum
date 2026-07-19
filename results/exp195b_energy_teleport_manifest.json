@@ -1,0 +1,30 @@
+{
+ "exp": "195b",
+ "slug": "energy_teleport",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e70csinv1c73apt6cg",
+ "order": [
+  "qet_XX",
+  "qet_ZB",
+  "noLOCC_XX",
+  "noLOCC_ZB",
+  "nomeasure_XX",
+  "nomeasure_ZB"
+ ],
+ "baseline_EB": -1.6999999999999997,
+ "h": 1.0,
+ "k": 1.5,
+ "theta": 0.17,
+ "exact": {
+  "ground_E": -2.5,
+  "baseline_EB": -1.6999999999999997,
+  "dE_qet": -0.10277518668267716,
+  "dE_nomeasure": 0.097317068601811,
+  "dE_noLOCC": 0.097317068601811
+ },
+ "prereg": {
+  "primary": "Delta E_B(qet) < 0 at >=5 sigma; band [-0.15, -0.05] (exact -0.1028)",
+  "falsifiers": "Delta E_B(noLOCC) and Delta E_B(nomeasure) both POSITIVE, band [+0.03, +0.17] (exact +0.0973) \u2014 no-information arms pay"
+ }
+}
