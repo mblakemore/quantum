@@ -1,0 +1,65 @@
+{
+ "exp": 184,
+ "slug": "acrosstime",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9e3ngcinv1c73appedg",
+ "order": [
+  [
+   "acrosstime",
+   "ZZ"
+  ],
+  [
+   "acrosstime",
+   "XX"
+  ],
+  [
+   "acrosstime",
+   "YY"
+  ],
+  [
+   "standard",
+   "ZZ"
+  ],
+  [
+   "standard",
+   "XX"
+  ],
+  [
+   "standard",
+   "YY"
+  ],
+  [
+   "latechoice",
+   "ZZ"
+  ],
+  [
+   "latechoice",
+   "XX"
+  ],
+  [
+   "latechoice",
+   "YY"
+  ],
+  [
+   "nomeas",
+   "ZZ"
+  ],
+  [
+   "nomeas",
+   "XX"
+  ],
+  [
+   "nomeas",
+   "YY"
+  ]
+ ],
+ "witness": 0.5,
+ "prereg": {
+  "primary": "F(acrosstime) > 1/2 at >=5 sigma (band 0.80-0.90)",
+  "latechoice": "F < 0.55 with |XX|,|YY| < 0.10 \u2014 same early data sorts separable",
+  "window_model_secondary": "F(acrosstime) - F(standard) > 0 at >=2 sigma (dead qubits cannot dephase; standard band 0.78-0.88)",
+  "null": "nomeas 0.18-0.32",
+  "no_signaling_gauge": "A marginal spread < 0.02 across acrosstime/latechoice/nomeas"
+ }
+}
