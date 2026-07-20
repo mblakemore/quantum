@@ -1,0 +1,19 @@
+{
+ "exp": 229,
+ "slug": "leggett_garg",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9epva4jeosc73fj2v4g",
+ "order": [
+  "12",
+  "23",
+  "13"
+ ],
+ "prereg": {
+  "G1_macrorealism_violation": "K3 > 1.0 at >=5 sigma",
+  "G2_quantum_value": "K3 >= 1.30 (fraction of ideal 1.5)",
+  "G3_correlators": "reported: C12,C23~+0.5, C13~-0.5",
+  "registered_verdict": "G1 and G2",
+  "scope": "single-qubit Leggett-Garg temporal-Bell; projective mid-circuit measurement; macrorealism violated K3->1.5 (invasiveness loophole stated)"
+ }
+}
