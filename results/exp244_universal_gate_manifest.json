@@ -1,0 +1,40 @@
+{
+ "exp": 244,
+ "slug": "universal_gate",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9f5oecjeosc73fjgrt0",
+ "order": [
+  [
+   "g",
+   "T",
+   "I"
+  ],
+  [
+   "g",
+   "T",
+   "Zbar"
+  ],
+  [
+   "g",
+   "S",
+   "I"
+  ],
+  [
+   "g",
+   "S",
+   "Zbar"
+  ],
+  [
+   "nocx",
+   "T",
+   "I"
+  ]
+ ],
+ "prereg": {
+  "G1_universal_programmable": "|<X-bar>(T,I)|,|<X-bar>(T,Zbar)| in [0.55,0.85] and <X-bar>(T,I)-<X-bar>(T,Zbar) >= 1.1 (T steered to distinct non-stab targets)",
+  "G2_T_necessary": "|<X-bar>(S,*)| <= 0.2 (Clifford collapses to stabilizer) AND no-cnot >= 0.9",
+  "registered_verdict": "G1 and G2 \u2014 universal gate set closed + programmable, error-detected (NOT supremacy)",
+  "scope": "single injected T + Z-type Clifford program, X-bar-robust; full rotation (Y-bar frame) + error-corrected universality (distance-3) named not flown"
+ }
+}
