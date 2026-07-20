@@ -1,0 +1,94 @@
+{
+ "exp": 227,
+ "slug": "guardian_of_forever",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9ep30qneu4c739on4v0",
+ "order": [
+  [
+   "term",
+   0.0
+  ],
+  [
+   "term",
+   0.25
+  ],
+  [
+   "term",
+   0.5
+  ],
+  [
+   "term",
+   0.75
+  ],
+  [
+   "term",
+   1.0
+  ],
+  [
+   "qet",
+   0.0
+  ],
+  [
+   "qet",
+   0.25
+  ],
+  [
+   "qet",
+   0.5
+  ],
+  [
+   "qet",
+   0.75
+  ],
+  [
+   "qet",
+   1.0
+  ]
+ ],
+ "laws": {
+  "0.0": {
+   "kappa": 1.0,
+   "XS": 1.0,
+   "ZB": 1.0,
+   "XSZB": 1.0,
+   "W_ideal": 0.0
+  },
+  "0.25": {
+   "kappa": 0.9238795325112867,
+   "XS": 0.9238795325112867,
+   "ZB": 0.8535533905932737,
+   "XSZB": 0.9238795325112867,
+   "W_ideal": 0.14644660940672627
+  },
+  "0.5": {
+   "kappa": 0.7071067811865476,
+   "XS": 0.7071067811865476,
+   "ZB": 0.5000000000000001,
+   "XSZB": 0.7071067811865476,
+   "W_ideal": 0.4999999999999999
+  },
+  "0.75": {
+   "kappa": 0.38268343236508984,
+   "XS": 0.38268343236508984,
+   "ZB": 0.1464466094067263,
+   "XSZB": 0.38268343236508984,
+   "W_ideal": 0.8535533905932737
+  },
+  "1.0": {
+   "kappa": 6.123233995736766e-17,
+   "XS": 6.123233995736766e-17,
+   "ZB": 3.749399456654644e-33,
+   "XSZB": 6.123233995736766e-17,
+   "W_ideal": 1.0
+  }
+ },
+ "prereg": {
+  "G1_coherence": "|<X_S>-kappa|<=0.08 all doses",
+  "G2_record_energy": "|<Z_B>-kappa^2|<=0.08 all doses",
+  "G3_channel": "|<X_S Z_B>-kappa|<=0.08 all doses",
+  "G4_qet_extraction": "reported: W=<Z_B>_after-<Z_B>_before tracks 1-kappa^2 (feed-forward)",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "energy on the bath-record kappa dial (grand unification of the arrow of time); Hotta QET + 200b/215 ledger; G4 feed-forward hardware-priced"
+ }
+}
