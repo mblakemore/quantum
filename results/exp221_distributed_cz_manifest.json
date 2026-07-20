@@ -1,0 +1,43 @@
+{
+ "exp": 221,
+ "slug": "distributed_cz",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9enrg1htsac739efji0",
+ "order": [
+  [
+   "log",
+   "XZ"
+  ],
+  [
+   "log",
+   "ZX"
+  ],
+  [
+   "bare",
+   "XZ"
+  ],
+  [
+   "bare",
+   "ZX"
+  ]
+ ],
+ "frame": {
+  "XZ": [
+   null,
+   9
+  ],
+  "ZX": [
+   null,
+   8
+  ]
+ },
+ "prereg": {
+  "G1_stab_XZ": "<Xbar_A Zbar_B> >= 0.55, >=5 sigma over 0",
+  "G2_stab_ZX": "<Zbar_A Xbar_B> >= 0.55, >=5 sigma over 0 (both = cluster = CZ)",
+  "G3_frame_off": "frame-ignored |<XZ>|<=0.25 AND |<ZX>|<=0.25 (weld=the bits)",
+  "G4_shield_beats_bare": "descriptive: shielded (|XZ|+|ZX|) vs bare",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "distributed CZ across a shielded cut, cluster-state certified; per-variant partial shield; H-free CNOT-conjugation construction"
+ }
+}
