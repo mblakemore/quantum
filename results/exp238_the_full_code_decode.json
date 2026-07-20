@@ -1,0 +1,15 @@
+{
+ "job_id": "d9es1m1htsac739ekm70",
+ "floors": {
+  "A": 0.947,
+  "B": 0.88175
+ },
+ "mean_corrected": 0.7822890625000001,
+ "mean_uncorrected": 0.106875,
+ "no_error_floor": 0.9143749999999999,
+ "crossover": 0,
+ "n_damaging": 16,
+ "g1": true,
+ "g2": true,
+ "verdict_ok": true
+}
