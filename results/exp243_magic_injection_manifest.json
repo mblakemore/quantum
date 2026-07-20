@@ -1,0 +1,36 @@
+{
+ "exp": 243,
+ "slug": "magic_injection",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9f5ahhhtsac739evee0",
+ "order": [
+  [
+   "gadget",
+   0.0
+  ],
+  [
+   "gadget",
+   0.7853981633974483
+  ],
+  [
+   "gadget",
+   1.5707963267948966
+  ],
+  [
+   "gadget",
+   3.141592653589793
+  ],
+  [
+   "nocx",
+   0.7853981633974483
+  ]
+ ],
+ "prereg": {
+  "G1_magic_injected": "<X-bar_A>(pi/4, gadget) in [0.55,0.85] (non-stabilizer, injected)",
+  "G2_gadget_necessary": "<X-bar_A>(pi/4, no-cnot) >= 0.9 AND Clifford checkpoints land (cos theta)",
+  "registered_verdict": "G1 and G2",
+  "reported": "cos(theta) sweep, m0/m1 split (byproduct-robust witness), acceptance",
+  "scope": "error-DETECTED magic injection = the FT T-gadget on silicon (vs 235 direct gate); distance-2; correcting-code magic + distillation depth-blocked, named not flown"
+ }
+}
