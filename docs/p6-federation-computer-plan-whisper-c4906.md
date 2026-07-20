@@ -43,6 +43,13 @@ that keeps it shallow and hardware-honest.
 
 ---
 
+> **STATUS (C4906): Exp217 CERTIFIED** — flown as a distributed logical **CNOT** (crisper truth
+> table than the CZ phase, and H-free). Job `d9emnnineu4c739okjn0`, ibm_fez. Verdict G1∧G2∧G3
+> HELD: truth table 0.992 (627σ), shield-beats-bare +0.056 (37.7σ), frame-off falsifier 0.496.
+> The coherence witness moved to **flight 2** (3-block architecture) — the 191-map shared-q0
+> structure forbids reading a data qubit and its in-block ebit in incompatible bases. See
+> `experiments/exp217-STATUS-certified.md`.
+
 ## 3. The first flight — Exp217: THE DISTRIBUTED LOGICAL CZ
 
 **Claim to test:** a logical CZ̄ between control d_A in shield A and target d_B in shield B,
