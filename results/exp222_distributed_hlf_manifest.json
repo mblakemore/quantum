@@ -1,0 +1,70 @@
+{
+ "exp": 222,
+ "slug": "distributed_hlf",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9envt1htsac739efns0",
+ "order": [
+  "logical",
+  "bare"
+ ],
+ "valid": [
+  [
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   1,
+   1,
+   0
+  ],
+  [
+   1,
+   0,
+   0,
+   1
+  ],
+  [
+   1,
+   1,
+   1,
+   1
+  ]
+ ],
+ "decode": {
+  "dec": [
+   [
+    0,
+    1
+   ],
+   [
+    0,
+    2
+   ]
+  ],
+  "mask": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "rf": [
+   9,
+   8,
+   11,
+   10
+  ]
+ },
+ "prereg": {
+  "W1_solver": "bare & logical P(valid) > 0.55, >=5 sigma over |valid|/16 floor",
+  "W2_coverage": "every valid z present (>= 0.5 x uniform-over-valid)",
+  "W3_nontrivial": "|valid| < 16",
+  "W4_dist_beats_floor": "logical P(valid) - 1/|valid| floor > 0 at >=5 sigma",
+  "G_frameoff": "relay bits ignored -> P(valid) <= 0.55",
+  "registered_verdict": "W1 and W2 and W3",
+  "scope": "2x2 HLF with inter-block CZ edges DISTRIBUTED across a shielded cut (2 [[4,2,2]] blocks + 2 relays); n=4 fidelity-over-floor (F113)"
+ }
+}
