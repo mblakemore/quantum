@@ -6,8 +6,17 @@ Star Trek-like things we can invent or discover standing on all that we have bui
 
 *Successors: [Horizons-1](star-trek-horizons-whisper-c4601.md) · [Horizons-2](star-trek-horizons-2-whisper-c4638.md)
 · [Horizons-3](star-trek-horizons-3-whisper-c4661.md) · [Horizons-4 "The Starship"](star-trek-horizons-4-the-starship-whisper-c4894.md)
-(all delivered). This is a roadmap, not a launch — a ranked menu with a recommended first
-flight. Nothing here is flown; the top pick flies on Creator go.*
+(all delivered). Originally a ranked menu; now partly flown.*
+
+> **FLIGHT STATUS (updated C4910).** ✅ **Flown & certified: P1** (Shielded Switch, Exp208+arc) ·
+> **P2** (Full Replicator, Exp206/213/214) · **P5** (Self-Characterizing Chip, Exp211/216) ·
+> **P6** (Federation Computer — the full 6-flight distributed-computer arc, Exp217–222). ⬜ **Left
+> to fly: P3** (Guardian of Forever — arrow-of-time grand unification, needs the QET
+> equation-of-state) · **P4** (Birth of the Classical World — objectivity dial; *cleanest open
+> flight*) · **P7** (Contextuality fuel — the one un-composed advantage; needs the Ȳ-readout
+> crack) · **P8** (Indefinite network topology) · **P9** (Dilithium chamber — dynamical memory) ·
+> **P10** (The Holodeck — gravity-analog suite) · **P11** (The Zeno brace). See the [Priority
+> view](#priority-view--if-we-fly-in-order) for the full "what's left" table + next-fly rec (**P4**).
 
 ---
 
@@ -164,7 +173,21 @@ its error-correcting code — noise metrology as a free byproduct of running the
 
 ---
 
-## P6 — THE FEDERATION COMPUTER: distributed error-corrected computation
+## P6 — THE FEDERATION COMPUTER: distributed error-corrected computation — ✅ COMPLETE (C4906–4910, 6 flights certified)
+
+**✅ THE FULL ARC IS FLOWN (C4906–4910):** the distributed error-corrected quantum computer, built end to end —
+- **Exp217 EXECUTE** — a distributed logical CNOT runs across a shielded cut, welded by one classical bit, shield-beats-bare +0.056 (37.7σ). [status](../experiments/exp217-STATUS-certified.md)
+- **Exp218 QUANTUM** — the gate is genuinely quantum (logical Bell pair ⟨ZZ⟩=⟨XX⟩=0.88); bonus: the software weld *beats* live feed-forward on hardware. [status](../experiments/exp218-STATUS-certified.md)
+- **Exp219 NETWORK** — it scales: a logical GHZ across three shielded nodes, ⟨XXX⟩=0.831 (112σ). [status](../experiments/exp219-STATUS-certified.md)
+- **Exp220 ALGORITHM** — Deutsch's algorithm with its oracle distributed across the cut, constant-vs-balanced at 446σ. [status](../experiments/exp220-STATUS-certified.md)
+- **Exp221 CZ** — the second entangling gate: a logical cluster state across the cut, both stabilizers ≈0.89 (no single-qubit H̄). [plan](distributed-cz-plan-whisper-c4909.md) · [status](../experiments/exp221-STATUS-certified.md)
+- **Exp222 DISTRIBUTED ADVANTAGE** — the BGK HLF quantum-advantage algorithm with its inter-block edges distributed across the cut, P(valid)=0.855 (255σ). Honest: logical<bare at n=4 (distributed depth overhead) — capability, not crossover. [status](../experiments/exp222-STATUS-certified.md)
+
+Roadmap's original "distributed BV first" was superseded by the crisper distributed CNOT→CZ gate-set path. **Open extension**: the FT *crossover* (distributed HLF at larger n where logical beats bare, the F181/197 trend), and distributed MBQC on the 221 cluster resource.
+
+---
+
+## P6 (original plan) — distributed error-corrected computation
 
 **The vision**: 197's Federation entangled three shields that never met; 202 shielded a key
 through an untrusted relay; 206 ran a computation inside one shield. Compose them: **a
@@ -315,25 +338,53 @@ because both halves are certified and shallow.
 
 ## Priority view — if we fly in order
 
-| Rank | Program | Type | QPU | Why this order |
-|------|---------|------|-----|----------------|
-| **1** | **P1 Shielded Switch** (half-shielded witness) | invention | 1–2 jobs | Highest vision-to-reach ratio; unites the two crown jewels; 205 already proved the shield concentrates fragile quantum quantities |
-| **2** | **P2 Full Replicator** (teleported-S̄ → b≠0 HLF → depth) | scale-up | 1–2 jobs | Highest confidence; 206/207 machinery certified, only the S-vertex is new; tests the FT thesis on computation |
-| 3 | **P3 Guardian of Forever** (entanglement equation of state) | question | 1 job | Cheapest grand-unification shot; pure composition of 198/200b/195c on the proven toolchain |
-| 4 | **P4 Birth of the Classical World** (redundancy broadcasting) | question | 1 job | Width-cheap; turns 204's law into an objectivity dial + privacy control |
-| 5 | **P5 Self-Characterizing Chip** (blind-spot spectrum) | instrument | 1 job | Noise metrology as a free byproduct; every ingredient certified |
-| 6 | **P6 Federation Computer** (distributed logical BV) | invention | 2 jobs | Fuses the network + logical-computer arcs; composition-tax risk, but 179 showed the cure |
-| 7 | **P7 Contextuality fuel** (BGKT-2020) | wildcard | 1–2 jobs | Highest conceptual payoff, highest design risk; closes the one un-composed advantage |
+| Rank | Program | Type | QPU | Status |
+|------|---------|------|-----|--------|
+| **1** | **P1 Shielded Switch** (half-shielded witness) | invention | 1–2 jobs | ✅ **FLOWN** — Exp208 (+209/210/212 arc): fault-tolerant causal order certified |
+| **2** | **P2 Full Replicator** (teleported-S̄ → b≠0 HLF → depth) | scale-up | 1–2 jobs | ✅ **FLOWN** — Exp206+213+214: full BGK HLF family runs logically |
+| 3 | **P3 Guardian of Forever** (entanglement equation of state) | question | 1 job | ⬜ **OPEN** — needs the QET (195c) equation-of-state composition; 215 did the duality face of the ledger, not the energy face |
+| 4 | **P4 Birth of the Classical World** (redundancy broadcasting) | question | 1 job | ⬜ **OPEN** — width-cheap; the selective-objectivity dial + privacy control |
+| 5 | **P5 Self-Characterizing Chip** (blind-spot spectrum) | instrument | 1 job | ✅ **FLOWN** — Exp211+216: coherent-error transfer function + rotating blind-spot rule |
+| 6 | **P6 Federation Computer** (distributed computation) | invention | 2 jobs | ✅ **FLOWN** — Exp217–222 (6 flights): the full distributed error-corrected quantum computer |
+| 7 | **P7 Contextuality fuel** (BGKT-2020) | wildcard | 1–2 jobs | ⬜ **OPEN** — highest design risk; the shielded magic square was pruned twice (mixed-basis Ȳ contexts, ~16q) — needs the Ȳ-readout / gadget-composition problem solved |
 | — | *— further horizons (boldly-go tier) —* | | | |
-| 8 | **P8 Indefinite network topology** | leap | 1–2 jobs | Shallow + pure composition; extends ICO to routing — new kind of channel |
-| 9 | **P9 Dilithium chamber** (dynamical memory) | leap | 1–3 jobs | Uses the unused exotic-phases wing; depth-risky, staged lifetime flight first |
-| 10 | **P10 The Holodeck** (gravity-analog suite) | synthesis | 1–2 jobs | Unifies the whole H2 arc; the 201 move for gravity analogs |
-| 11 | **P11 The Zeno brace** (measurement protection) | leap | 1 job | Cheapest instrument (F102, 0 2q) stacked on the code; second protection axis |
+| 8 | **P8 Indefinite network topology** | leap | 1–2 jobs | ⬜ **OPEN** — superposed relay routing; shallow + pure composition (ICO⊗network) |
+| 9 | **P9 Dilithium chamber** (dynamical memory) | leap | 1–3 jobs | ⬜ **OPEN** — the unused exotic-phases wing (scars/DTC); staged lifetime flight first |
+| 10 | **P10 The Holodeck** (gravity-analog suite) | synthesis | 1–2 jobs | ⬜ **OPEN** — unify the H2 arc (twin paradox + HP recovery on one decoherence curve) |
+| 11 | **P11 The Zeno brace** (measurement protection) | leap | 1 job | ⬜ **OPEN** — cheapest instrument (F102, 0 2q) stacked on the code; second protection axis |
 
-**Recommendation**: fly **P1 (the half-shielded causal witness)** first — it is the single most
-"Star Trek" result available (fault-tolerant indefinite causal order) and the staged first
-flight keeps it shallow and honest. Hold **P2** as the high-confidence fallback if P1's depth
-proves unfriendly — the teleported-S̄ gadget is the surest next milestone either way.
+### What's left to fly (C4910)
+
+**Flown & certified: P1, P2, P5, P6** (4 of 7 core programs; P6 was the six-flight Federation
+Computer arc this session). **Open — the Five-Year Mission's remaining frontier:**
+
+- **P3 — Guardian of Forever** (arrow-of-time grand unification): does *energy* (QET, 195c)
+  descend the same κ bath-record dial as facts (201) and coherence (200b)? Cheapest
+  grand-unification shot; needs the QET-equation-of-state composition. Then the delayed-choice
+  arrow-bender machine.
+- **P4 — Birth of the Classical World** (objectivity engineering): redundancy broadcasting →
+  the selective-objectivity dial (a fact objective to some observers, private to others).
+  Width-cheap, shallow, on the certified 198/204 apparatus. **The single cleanest open flight.**
+- **P7 — Contextuality as fuel** (the one un-composed advantage): the BGKT-2020 shallow
+  separation on the magic-square gadget, error-corrected. Highest payoff, highest risk — the
+  shielded magic square was pruned twice at design time (mixed-basis Ȳ readout breaks the
+  shield); needs that Ȳ-context/gadget problem cracked first.
+- **P8 — Indefinite network topology**: put the *route* in superposition — does indefinite
+  *routing* beat any definite path? Shallow ICO⊗network composition.
+- **P9 — Dilithium chamber**: dynamical memory (scars/DTC) — protection by dynamics, not a code.
+  Depth-risky; staged lifetime flight first. The only program using the exotic-phases wing.
+- **P10 — The Holodeck**: unify the four H2 gravity analogs into one bench with a shared
+  information-theoretic law (the 201 move for gravity). Synthesis, honestly analog.
+- **P11 — The Zeno brace**: measurement-driven error suppression stacked on the logical HLF —
+  the cheapest instrument (F102, 0 2q) as a second fault-tolerance axis.
+
+**Recommendation for the next fly:** **P4 (redundancy broadcasting / selective-objectivity dial)**
+— it is the cleanest, shallowest, highest-confidence open flight (width-cheap ancillas on the
+certified 198/204 dial), and it is a genuinely new *foundations* result (objectivity engineering)
+to vary from the six-flight P6 computation arc. **P8** is the best "boldly-go" leap if you want
+wonder over confidence (indefinite routing — nobody has put a network topology in superposition).
+**P7** is the deepest unsolved challenge (needs the Ȳ-readout crack). P3 is the grand-unification
+shot when the QET composition is ready.
 
 ---
 
