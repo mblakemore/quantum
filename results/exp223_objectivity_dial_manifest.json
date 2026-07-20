@@ -1,0 +1,59 @@
+{
+ "exp": 223,
+ "slug": "objectivity_dial",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "N": 5,
+ "job_id": "d9eo5vcjeosc73fj0sa0",
+ "doses": [
+  0.0,
+  0.25,
+  0.5,
+  0.75,
+  1.0
+ ],
+ "ideal": {
+  "0.0": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "0.25": [
+   0.07740084667986535,
+   0.15116161253486046,
+   0.22116357304202852,
+   0.2873214206600433,
+   0.34958536935375545
+  ],
+  "0.5": [
+   0.31127812445913283,
+   0.5487949406953985,
+   0.7169171866886992,
+   0.8285353655857571,
+   0.8989842822057974
+  ],
+  "0.75": [
+   0.684035745082004,
+   0.9249243993007737,
+   0.9846735774427526,
+   0.9971185438357653,
+   0.9994846853119763
+  ],
+  "1.0": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ]
+ },
+ "prereg": {
+  "G1_plateau": "theta=pi: I(S:E_f)>=0.80 all f, spread<=0.15 (redundancy plateau)",
+  "G2_dial": "I(S:E_1) monotone, matches ideal <=0.12; th=0 <=0.06 (private), th=pi >=0.80 (objective)",
+  "G3_rise": "theta=pi/2: I(S:E_N)-I(S:E_1)>=0.15, non-decreasing in f",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "system + N=5 fragments; pointer-basis accessible info = Darwinism objectivity; selective-objectivity/privacy dial on the 198/204 apparatus"
+ }
+}
