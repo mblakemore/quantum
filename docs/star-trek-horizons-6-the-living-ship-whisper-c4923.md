@@ -147,6 +147,47 @@ the on-ramp to a fault-tolerant quantum internet node.
 distinct remaining threads are **P4 (near-free re-analysis)** and **P5 (one new question)**. This is the
 natural consolidation point of a very productive arc — surfaced *before* spending QPU to rediscover P2.
 
+## CONSOLIDATION (C4927): the arc is complete — the tripartite map of what this hardware can reach
+
+**After flying P1 & P4 and reducing P2/P3/P5/P6, H6's frontier splits cleanly into three, and this map
+IS the deliverable — it tells us exactly what ibm_fez can and cannot reach, and what the next hardware
+generation unlocks.**
+
+**(a) DONE — the genuinely-new results this arc produced:**
+- **P1 — the universal gate set, CLOSED** (Exp244, certified): an injected T steered by a logical-Clifford
+  program to distinct non-stabilizer targets, error-detected. The shielded computer is universal in
+  principle. *Mechanism, not supremacy.*
+- **P4 — detection purifies magic** (C4926, free re-analysis of 243): the distillation seed — the shield
+  cleans the magic (⟨X̄⟩ 0.609→0.690 toward 0.707).
+- *(Foundation, this session: correction 236/238/239b, live loop 240/241, magic injection 243.)*
+
+**(b) 245-IN-COSTUME — the single move `live-correction ∘ (a deck's stored qubit)`, whose core result
+Exp245 already measured (and found DRIFT-DEPENDENT):**
+- **P2 — the Living Qubit** (Exp245, flown): correction pays, but the self-healing lifespan *drifts* with
+  hardware (+0.341 → +0.077 on the same qubits, hours apart). *A single-run QEC number is a snapshot; never
+  quote a fault-tolerance figure without the weather report.*
+- **P3 — Self-Healing Warp Core**: battery energy = E·P(excited) = 245's curve × a constant. Redux.
+- **P6 — Living Federation Node**: correct a network node's stored qubit = 245 in costume.
+
+**(c) DEPTH-BLOCKED PAST 242 — the right experiments, uninterpretable on today's hardware (100+ 2q gates
+after routing → code-vs-depth confound, the wall that killed 242's phase leg):**
+- Actively-corrected indefinite causal order; the live logical Bell pair (both-bases distance-3);
+  error-*corrected* magic (T on a distance-3 code); the magic factory ([[15,1,3]] 15-to-1 distillation);
+  and **the real P5** — the facts-CHSH objectivity dial (6-qubit Wigner's friend) + encoded record + a
+  live round. *(P5's shallow form was sim-verified dead, C4927: passive record-decay does not re-cohere
+  the fact — damping relocates which-path info to the bath, it doesn't erase distinguishability, ⟨X_F⟩≡0.
+  The real objectivity-dial version needs the full apparatus, depth-blocked.)*
+
+**The one-line synthesis**: *the composition vein — put a crown jewel behind the shield, then correct it,
+then make the computer universal — ran rich from 236 through 244, and is now worked out on this hardware.
+What remains is not un-imagined; it is depth-blocked, waiting on a larger 2q-gate budget or a shallower
+code family. That boundary, mapped program by program, is the honest end of the arc.*
+
+**Session ledger (Exp236–245 + P4/P5 analyses): 7 certifications, 7 honest negatives — each a real
+lesson (the 0.001 noise-floor, the qubit-selection confound, the phase-blind Bell leg, the QEC-drift
+snapshot, the P3/P5 reductions caught before the spend) — 0 spins.** The next horizon is a hardware
+horizon, not an idea horizon.
+
 ## Named, not flown — the next-hardware climb (honest depth wall)
 
 These are the *right* experiments and they are **depth-blocked on ibm_fez today** (100+ 2q gates after
