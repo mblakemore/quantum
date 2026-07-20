@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%225%22%20fill%3D%22none%22%20stroke%3D%22%2334d399%22%20stroke-width%3D%221.4%22%2F%3E%3Cline%20x1%3D%228%22%20y1%3D%228%22%20x2%3D%2211.5%22%20y2%3D%224.5%22%20stroke%3D%22%23a78bfa%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Programmable Rotation — dialing a universal protected qubit | The Quantum Museum</title>
+<meta name="description" content="A Bloch-equator dial: pick a logical-Clifford program (I / S̄ / Z̄ / S̄Z̄) and watch a protected qubit's injected magic (T) state rotate to land on its target (45°/135°/225°/315°). Turn the magic off (Clifford S) and the reach collapses onto the axis. Real hardware (ibm_fez, Exp246) — the universal gate set, dialed. Error-detected.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--heal); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--heal); color: var(--heal); }
+
+  :root { --heal:#34d399; --magic:#a78bfa; }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(58% 60% at 28% 0%, color-mix(in srgb,var(--magic) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.4vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--magic); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 16px; }
+
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--magic); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
+  .pcard b { color: var(--ink); }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--magic); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:70ch; }
+
+  .dialwrap { display:grid; grid-template-columns:1fr 260px; gap:20px; align-items:center; }
+  @media (max-width:720px){ .dialwrap { grid-template-columns:1fr; } }
+  .dialsvg { width:100%; max-width:420px; margin:0 auto; display:block; }
+  .ctlcol { display:flex; flex-direction:column; gap:12px; }
+  .prog { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .pbtn { font-family:var(--mono); font-size:13px; font-weight:700; padding:11px 8px; border-radius:10px;
+    border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; text-align:center; }
+  .pbtn small { display:block; font-size:9.5px; font-weight:400; opacity:.7; margin-top:2px; }
+  .pbtn:hover { border-color:var(--heal); }
+  .pbtn.on { background:var(--heal); color:var(--bg); border-color:var(--heal); }
+  .pbtn:disabled { opacity:.3; cursor:not-allowed; }
+  .restog { display:inline-flex; border:1.5px solid var(--edge); border-radius:10px; overflow:hidden; }
+  .restog button { font-family:var(--mono); font-size:12.5px; font-weight:700; padding:9px 12px; border:none;
+    background:var(--surface-2); color:var(--ink-2); cursor:pointer; flex:1; }
+  .restog button.on { background:var(--magic); color:var(--bg); }
+  .readout { font-family:var(--mono); font-size:12.5px; color:var(--ink-2); border:1px solid var(--edge);
+    border-radius:10px; padding:11px 13px; background:var(--surface-2); }
+  .readout .big { font-size:15px; font-weight:700; color:var(--ink); }
+  .readout .tgt { color:var(--magic); }
+
+  .ladder { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:620px){ .ladder { grid-template-columns:1fr; } }
+  .lc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .lc h3 { font-family:var(--mono); font-size:12px; margin:0 0 6px; }
+  .lc.cliff h3 { color:var(--ink-2); } .lc.univ h3 { color:var(--magic); }
+  .lc p { font-size:13px; color:var(--ink-2); margin:0; } .lc b { color:var(--ink); }
+
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--magic); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; } .rc b { color:var(--ink); } .rc .yes { color:var(--heal); font-weight:600; }
+  .links-row { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
+  .deeper { display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:12.5px; font-weight:600;
+    text-decoration:none; border:1.5px solid var(--edge-2); color:var(--ink-2); border-radius:9px; padding:7px 13px; }
+  .deeper:hover { border-color:var(--magic); color:var(--magic); }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--magic); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--magic); }
+  .badge-row .sp2 { flex:1; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+
+  <nav class="topbar" aria-label="Museum">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing VIII · The Living Ship</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
+
+  <main id="main">
+  <header class="hero">
+    <p class="eyebrow">Universality · the gate set, dialed</p>
+    <h1>Dial a <span class="hl">universal</span> protected qubit.</h1>
+    <p class="lede">A protected qubit is only useful if you can compute <em>anything</em> with it — not a fixed few moves. Pick a
+    <strong>program</strong> and watch the qubit rotate to point exactly where you told it, anywhere around the dial. Then turn off the
+    special ingredient — the <strong>"magic"</strong> — and watch the reach collapse. That reachable "anywhere" is what <strong>universal</strong> means.</p>
+
+    <div class="primer">
+      <div class="pcard">
+        <h2>Cheap moves vs magic</h2>
+        <p><strong>Clifford</strong> gates are the cheap calculator moves — fast, but a classical computer can simulate them, and they
+        can't reach the diagonal points. The <strong>T ("magic")</strong> gate is the special ingredient that unlocks <em>every</em> rotation.</p>
+      </div>
+      <div class="pcard">
+        <h2>Why "dialing" = universal</h2>
+        <p>A famous no-go (Eastin–Knill) says you can't get the full toolkit for free on a protected qubit. The fix: <strong>inject</strong>
+        a magic state and <strong>steer</strong> it with cheap programs. Reaching the off-axis targets is the proof it's <b>universal</b>.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <span class="scope">Error-<strong>detected</strong>; a single injected T on a few qubits is classically simulable — this is universality's <strong>mechanism</strong>, not a supremacy claim.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — The dial</p>
+    <h2>Pick a program; watch the protected qubit rotate to its target</h2>
+    <p class="sub">The circle is the Bloch <strong>equator</strong> (X̄ axis →, Ȳ axis ↑). Each <strong>program</strong> steers the injected magic state to one
+    of four non-stabilizer targets — points <em>no cheap-Clifford state can occupy</em>. The faint ring is the ideal target; the solid dot
+    is the <strong>measured hardware</strong> value. Then flip the resource to a plain Clifford and watch the reach vanish onto the axis.</p>
+
+    <div class="dialwrap">
+      <svg id="dial" class="dialsvg" viewBox="0 0 300 300" role="img" aria-label="Bloch equator dial"></svg>
+      <div class="ctlcol">
+        <div class="restog" role="group" aria-label="Resource">
+          <button data-res="T" class="on" type="button">T · magic ✦</button>
+          <button data-res="S" type="button">S · Clifford</button>
+        </div>
+        <div class="prog" role="group" aria-label="Program">
+          <button class="pbtn on" data-prog="I" type="button">I<small>45°</small></button>
+          <button class="pbtn" data-prog="Sbar" type="button">S̄<small>135°</small></button>
+          <button class="pbtn" data-prog="Zbar" type="button">Z̄<small>225°</small></button>
+          <button class="pbtn" data-prog="SbarZbar" type="button">S̄Z̄<small>315°</small></button>
+        </div>
+        <div class="readout" id="readout" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — Why the dial means "universal"</p>
+    <h2>Cheap calculator, or a computer that can run anything</h2>
+    <p class="sub">A quantum computer is <strong>universal</strong> when it can approximate <em>any</em> operation. Cliffords alone can't — they're
+    stuck on the grid (and a laptop can simulate them). Add the injected T and you reach the whole dial.</p>
+    <div class="ladder">
+      <div class="lc cliff"><h3>◇ Clifford only — the cheap calculator</h3><p>Fast, protected, useful for setup — but <strong>classically simulable</strong> (Gottesman–Knill) and <strong>can't leave the axes</strong>. On the dial: stuck on the Ȳ axis.</p></div>
+      <div class="lc univ"><h3>✦ Clifford + T — universal</h3><p>Add one injected magic gate and the protected qubit can be <strong>dialed anywhere</strong> — the four measured diagonal targets are points no Clifford can reach. Exp244 <b>closed</b> the gate set; Exp246 <b>dialed</b> it.</p></div>
+    </div>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — Why this counts</p>
+    <h2>Three receipts, and the honest fence</h2>
+    <div class="receipts">
+      <div class="rc"><h3>1 · The falsifier</h3><p>Swap the magic T for a plain Clifford S and the state <strong>collapses onto the Ȳ axis</strong> (+0.02, +0.97) — proof the magic, not the program, did the off-axis work. <span class="yes">Un-fakeable.</span></p></div>
+      <div class="rc"><h3>2 · Read honestly</h3><p>The byproduct is dropped by postselecting m=0; ⟨Ȳ⟩ is rotated into the robust X̄ basis (a cheap S̄† then X̄) rather than read on the noisy Y axis. <span class="yes">No hidden knobs.</span></p></div>
+      <div class="rc"><h3>3 · The honest fence</h3><p>Error-<strong>detected</strong>; a single injected T on a few qubits is <strong>classically simulable</strong>. This shows universality's <strong>mechanism</strong>, <strong>not</strong> a supremacy claim.</p></div>
+    </div>
+    <div class="links-row">
+      <a class="deeper" href="../self-healing/">← The Self-Healing Qubit</a>
+      <a class="deeper" href="../shields/">The Shields (detection)</a>
+    </div>
+  </section>
+
+  </main>
+  <footer class="badge-row">
+    <span>MEASURED · <span class="sig">Exp246</span> · ibm_fez · job d9f7p7phtsac739f27hg</span>
+    <span>10 circuits · 8000 shots · 2q depth 18–23 · postselect XXXX_A·ZZZZ_B·m=0</span>
+    <span class="sp2"></span>
+    <a href="../">Museum</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+    var css = getComputedStyle(document.documentElement);
+    function C(v){ return css.getPropertyValue(v).trim(); }
+
+    // ---- verified data kernel (Exp246, ibm_fez) : [<X̄>, <Ȳ>], target angle ----
+    var PROG = {
+      I:        { xy:[+0.701,+0.673], ang:45,  lab:"I" },
+      Sbar:     { xy:[-0.687,+0.709], ang:135, lab:"S̄" },
+      Zbar:     { xy:[-0.683,-0.667], ang:225, lab:"Z̄" },
+      SbarZbar: { xy:[+0.695,-0.705], ang:315, lab:"S̄Z̄" }
+    };
+    var S_FALSIFIER = { xy:[+0.020,+0.967], lab:"S · I (Clifford)" };  // only wrapper I was flown for S
+    console.assert(Math.hypot(PROG.I.xy[0],PROG.I.xy[1])>0.9 && Math.abs(S_FALSIFIER.xy[0])<0.1, "T reaches radius~1; S on axis");
+
+    var state = { res:"T", prog:"I" };
+    var cx=150, cy=150, R=110;
+    function px(x){ return cx + x*R; }
+    function py(y){ return cy - y*R; }
+
+    function drawDial(){
+      var s="", ang;
+      // equator circle
+      s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="'+C("--edge-2")+'" stroke-width="1.4"/>';
+      // axes
+      s+='<line x1="'+(cx-R-8)+'" y1="'+cy+'" x2="'+(cx+R+8)+'" y2="'+cy+'" stroke="'+C("--edge")+'" stroke-width="1"/>';
+      s+='<line x1="'+cx+'" y1="'+(cy-R-8)+'" x2="'+cx+'" y2="'+(cy+R+8)+'" stroke="'+C("--edge")+'" stroke-width="1"/>';
+      s+='<text x="'+(cx+R+14)+'" y="'+(cy+4)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="11" fill="'+C("--ink-3")+'">X̄</text>';
+      s+='<text x="'+cx+'" y="'+(cy-R-12)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="11" fill="'+C("--ink-3")+'">Ȳ</text>';
+      // ideal target rings — faint dashed circles at radius 0.707 on the four diagonals
+      [45,135,225,315].forEach(function(deg){ var a=deg*Math.PI/180; var ix=px(0.707*Math.cos(a)), iy=py(0.707*Math.sin(a));
+        s+='<circle cx="'+ix+'" cy="'+iy+'" r="7" fill="none" stroke="'+C("--ink-3")+'" stroke-width="1" stroke-dasharray="2 2" opacity="0.55"/>'; });
+
+      if(state.res==="T"){
+        var p=PROG[state.prog], x=px(p.xy[0]), y=py(p.xy[1]);
+        // vector
+        s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+y+'" stroke="'+C("--heal")+'" stroke-width="2.6"/>';
+        s+='<circle cx="'+x+'" cy="'+y+'" r="8" fill="'+C("--card")+'" stroke="'+C("--heal")+'" stroke-width="3"/>';
+        s+='<text x="'+x+'" y="'+(y - 14)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="11" font-weight="700" fill="'+C("--heal")+'">'+p.ang+'°</text>';
+      } else {
+        var f=S_FALSIFIER, x2=px(f.xy[0]), y2=py(f.xy[1]);
+        s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+x2+'" y2="'+y2+'" stroke="'+C("--magic")+'" stroke-width="2.6"/>';
+        s+='<circle cx="'+x2+'" cy="'+y2+'" r="8" fill="'+C("--card")+'" stroke="'+C("--magic")+'" stroke-width="3"/>';
+        s+='<text x="'+(x2+34)+'" y="'+(y2+4)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--magic")+'">on Ȳ axis</text>';
+      }
+      s+='<circle cx="'+cx+'" cy="'+cy+'" r="3" fill="'+C("--ink-3")+'"/>';
+      document.getElementById("dial").innerHTML=s;
+
+      var ro=document.getElementById("readout");
+      if(state.res==="T"){
+        var p2=PROG[state.prog];
+        ro.innerHTML='program <b>'+p2.lab+'</b> → target <span class="tgt">'+p2.ang+'°</span><br><span class="big">⟨X̄⟩ '+p2.xy[0].toFixed(3)+' · ⟨Ȳ⟩ '+p2.xy[1].toFixed(3)+'</span><br>a non-stabilizer point no Clifford can reach.';
+      } else {
+        ro.innerHTML='resource <b>S</b> (Clifford, no magic)<br><span class="big">⟨X̄⟩ 0.020 · ⟨Ȳ⟩ 0.967</span><br>stuck on the Ȳ axis — the falsifier (only wrapper I flown).';
+      }
+      // sync buttons
+      document.querySelectorAll(".pbtn").forEach(function(b){ b.classList.toggle("on", state.res==="T" && b.dataset.prog===state.prog); b.disabled = state.res!=="T"; });
+      document.querySelectorAll(".restog button").forEach(function(b){ b.classList.toggle("on", b.dataset.res===state.res); });
+    }
+
+    document.querySelectorAll(".pbtn").forEach(function(b){ b.addEventListener("click", function(){ if(b.disabled) return; state.prog=b.dataset.prog; drawDial(); }); });
+    document.querySelectorAll(".restog button").forEach(function(b){ b.addEventListener("click", function(){ state.res=b.dataset.res; drawDial(); }); });
+
+    drawDial();
+  })();
+</script>
+</body>
+</html>

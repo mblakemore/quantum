@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%224.6%22%20fill%3D%22none%22%20stroke%3D%22%2334d399%22%20stroke-width%3D%221.7%22%2F%3E%3Cpath%20d%3D%22M6%208l1.5%201.6L10.2%206%22%20stroke%3D%22%2334d399%22%20stroke-width%3D%221.6%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Self-Healing Qubit — error correction that finally helps | The Quantum Museum</title>
+<meta name="description" content="Break a qubit (inject X, Y or Z), watch the syndrome ancillas point at which qubit broke without reading the data, watch a live feed-forward pulse heal it, and see the corrected-vs-uncorrected gap GROW every round. Real hardware (ibm_fez, Exp236/238/240/241) — active quantum error correction, error-detected.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--heal); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--heal); color: var(--heal); }
+
+  :root { --heal:#34d399; --err:#fb7185; }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(58% 60% at 28% 0%, color-mix(in srgb,var(--heal) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.4vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--heal); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 16px; }
+
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--heal); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; }
+  .pcard b { color: var(--ink); }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--heal); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:70ch; }
+
+  /* controls */
+  .ctl-row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:16px; }
+  .ctl-row .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .seg { display:inline-flex; border:1.5px solid var(--edge); border-radius:10px; overflow:hidden; }
+  .seg button { font-family:var(--mono); font-size:12.5px; font-weight:600; padding:8px 13px; border:none;
+    background:var(--surface-2); color:var(--ink-2); cursor:pointer; }
+  .seg button.on { background:var(--heal); color:var(--bg); }
+  .seg button:not(.on):hover { color:var(--heal); }
+  .ebtn { font-family:var(--mono); font-size:13px; font-weight:700; padding:9px 14px; border-radius:10px;
+    border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; }
+  .ebtn:hover { border-color:var(--err); color:var(--err); }
+  .ebtn.none { }
+  .ebtn.none:hover { border-color:var(--heal); color:var(--heal); }
+  .ebtn:disabled { opacity:.35; cursor:not-allowed; }
+
+  .machine { display:grid; grid-template-columns:1fr; gap:14px; }
+  .qwrap { border:1px solid var(--edge); border-radius:13px; padding:16px; background:var(--surface-2); }
+  .qcap { font-family:var(--mono); font-size:11px; color:var(--ink-3); margin:0 0 10px; text-align:center; }
+  .qcap b { color:var(--ink-2); }
+
+  .meters { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  @media (max-width:620px){ .meters { grid-template-columns:1fr; } }
+  .meter { border:1px solid var(--edge); border-radius:12px; padding:13px 14px; background:var(--surface-2); }
+  .meter .mt { font-family:var(--mono); font-size:11px; color:var(--ink-3); margin:0 0 8px; }
+  .meter .mv { font-family:var(--mono); font-size:22px; font-weight:720; }
+  .meter.corr .mv { color:var(--heal); } .meter.unc .mv { color:var(--amber); } .meter.bare .mv { color:var(--err); }
+  .meter .mbar { height:7px; border-radius:4px; background:var(--edge); margin-top:8px; overflow:hidden; }
+  .meter .mbar i { display:block; height:100%; border-radius:4px; }
+  .meter.corr .mbar i { background:var(--heal); } .meter.unc .mbar i { background:var(--amber); } .meter.bare .mbar i { background:var(--err); }
+  .meter small { display:block; font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-top:6px; }
+
+  .diag { text-align:center; font-family:var(--mono); font-size:13px; margin:2px 0 12px; color:var(--ink-2); min-height:1.4em; }
+  .diag b { color:var(--heal); } .diag .brk { color:var(--err); }
+
+  /* bars panel B */
+  .barpair { display:grid; grid-template-columns:1fr; gap:9px; max-width:620px; }
+  .bprow { display:grid; grid-template-columns:96px 1fr; gap:12px; align-items:center; }
+  .bprow .bl { font-family:var(--mono); font-size:12px; color:var(--ink-2); }
+  .bpnums { font-family:var(--mono); font-size:11.5px; display:flex; gap:14px; margin-top:3px; }
+  .bpnums .live { color:var(--heal); font-weight:600; } .bpnums .dest { color:var(--ink-3); }
+
+  /* rounds panel C */
+  .roundctl { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:14px; }
+  .roundctl input[type=range]{ accent-color:var(--heal); width:220px; }
+  .roundctl .rv { font-family:var(--mono); font-size:13px; color:var(--ink); font-weight:700; }
+  .gapnum { font-family:var(--mono); font-size:13px; }
+  .gapnum b { color:var(--heal); }
+
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--heal); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; } .rc b { color:var(--ink); } .rc .yes { color:var(--heal); font-weight:600; }
+  .links-row { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
+  .deeper { display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:12.5px; font-weight:600;
+    text-decoration:none; border:1.5px solid var(--edge-2); color:var(--ink-2); border-radius:9px; padding:7px 13px; }
+  .deeper:hover { border-color:var(--heal); color:var(--heal); }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--heal); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--heal); }
+  .badge-row .sp2 { flex:1; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+
+  <nav class="topbar" aria-label="Museum">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing VIII · The Living Ship</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
+
+  <main id="main">
+  <header class="hero">
+    <p class="eyebrow">Active error correction · the code that heals</p>
+    <h1>The qubit that <span class="hl">heals itself</span>.</h1>
+    <p class="lede">A qubit is a sandcastle: the tide of noise starts washing it away the instant you build it. The earlier
+    "Shields" could only <strong>notice</strong> an error and throw the whole run away. This one does the thing every real quantum
+    computer is built on — it works out <strong>which qubit broke, fixes it, and keeps going</strong>. Break it yourself and watch it heal.</p>
+
+    <div class="primer">
+      <div class="pcard">
+        <h2>Detect vs correct</h2>
+        <p><strong>Detect</strong> = "a typo happened, delete the essay." <strong>Correct</strong> = "autocorrect the typo and keep typing." Only
+        correction lets a long program finish — it's the capability all scalable fault tolerance is built on.</p>
+      </div>
+      <div class="pcard">
+        <h2>The clever trick</h2>
+        <p>Two extra "referee" qubits (ancillas) read a <strong>parity</strong> — which qubit disagrees — <strong>without</strong> reading what the
+        data actually is. So the machine learns the <strong>error</strong>, not the <strong>secret</strong>, and your superposition survives.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <span class="scope">Error-<strong>detected</strong> / injected errors, distance 2–3 — the <strong>mechanism</strong> of fault tolerance, not a below-threshold fidelity, not a supremacy claim.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — Break it, watch it heal</p>
+    <h2>Inject an error; the ancillas point at the culprit; a live pulse fixes it</h2>
+    <p class="sub">Pick a code, then break a data qubit. The <strong>referee (ancilla) qubits</strong> light up in the pattern that points
+    at <em>which</em> qubit flipped — never reading the data itself — then a <strong>feed-forward pulse</strong> heals it. Compare the healed
+    qubit to a bare, unprotected one under the same error.</p>
+
+    <div class="ctl-row" role="group" aria-label="Choose the code">
+      <span class="lbl">code:</span>
+      <div class="seg" id="codeSeg">
+        <button data-code="bitflip" class="on" type="button">3-qubit <span style="opacity:.7">· bit-flips</span></button>
+        <button data-code="shor" type="button">Shor 9-qubit <span style="opacity:.7">· any error</span></button>
+      </div>
+    </div>
+    <div class="ctl-row" role="group" aria-label="Inject an error">
+      <span class="lbl">break a qubit:</span>
+      <button class="ebtn" data-err="X" type="button">inject X (bit-flip)</button>
+      <button class="ebtn" data-err="Y" type="button" id="btnY">inject Y</button>
+      <button class="ebtn" data-err="Z" type="button" id="btnZ">inject Z (phase-flip)</button>
+      <button class="ebtn none" data-err="none" type="button">no error</button>
+    </div>
+
+    <div class="machine">
+      <div class="qwrap">
+        <p class="qcap" id="qcap"><b>3-qubit code</b> — 3 data qubits, 2 referee ancillas</p>
+        <svg id="qsvg" class="ax-svg" viewBox="0 0 360 150" role="img" aria-label="qubit register with syndrome"></svg>
+      </div>
+      <p class="diag" id="diag" aria-live="polite">Pick an error above to break a qubit.</p>
+      <div class="meters">
+        <div class="meter corr"><p class="mt">HEALED (this code)</p><div class="mv" id="mCorr">—</div><div class="mbar"><i id="bCorr" style="width:0"></i></div><small id="sCorr">logical fidelity after the fix</small></div>
+        <div class="meter unc"><p class="mt">UN-fixed (same run)</p><div class="mv" id="mUnc">—</div><div class="mbar"><i id="bUnc" style="width:0"></i></div><small>coded but not fixed — measured on the Shor flight (Exp238)</small></div>
+        <div class="meter bare"><p class="mt">BARE qubit (no code)</p><div class="mv" id="mBare">—</div><div class="mbar"><i id="bBare" style="width:0"></i></div><small>an unprotected qubit under the same error</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — Does it survive the measurement?</p>
+    <h2>The parity read keeps the superposition alive</h2>
+    <p class="sub">Reading a qubit the normal way <strong>destroys</strong> its "both-at-once"-ness. The referee trick reads only the
+    <strong>error</strong>, so a logical superposition <strong>|+⟩</strong> lives through it. Each pair below: the <span style="color:var(--heal)">LIVE</span> parity read vs a
+    <span style="color:var(--ink-3)">DESTRUCTIVE</span> direct read, for each injected error. (Exp240 — ⟨X̄⟩, ideal +1.)</p>
+    <div class="barpair" id="liveBars"></div>
+    <p class="sub" style="margin-top:14px">The referees diagnose the right qubit <strong style="color:var(--heal)">93%</strong> of the time — enough to drive the fix.
+    One round of this machinery costs ~<strong>45%</strong> of the coherence: the number that decides whether <em>repeated</em> rounds pay. They do →</p>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — The longer it runs, the more it saves</p>
+    <h2>Run the correction loop over and over — the gap grows</h2>
+    <p class="sub">The real test of a correction loop isn't one fix — it's whether repeated fixes <strong>outrun their own cost</strong>. Slide the
+    round count and watch: the <span style="color:var(--heal)">corrected</span> qubit ages slowly, the <span style="color:var(--amber)">sham</span> (identical circuit, fix switched OFF)
+    falls apart, and the <span style="color:var(--err)">bare</span> qubit dies fastest. The advantage <strong>compounds</strong>. (Exp241.)</p>
+    <div class="roundctl">
+      <span class="lbl" style="font-family:var(--mono);font-size:12px;color:var(--ink-3)">rounds:</span>
+      <input type="range" id="rSlider" min="0" max="4" step="1" value="4" aria-label="number of correction rounds">
+      <span class="rv" id="rVal">R = 4</span>
+      <span class="gapnum" id="gapNum"></span>
+    </div>
+    <svg id="roundSvg" viewBox="0 0 620 240" role="img" aria-label="fidelity vs rounds" style="width:100%;height:auto"></svg>
+  </section>
+
+  <!-- PANEL D -->
+  <section class="panel">
+    <p class="panel-label">Exhibit D — Why this counts</p>
+    <h2>Three receipts, and the honest fence</h2>
+    <div class="receipts">
+      <div class="rc"><h3>1 · Correct, not discard</h3><p>Every earlier code <strong>threw the bad run away</strong>. This one identifies the error and <strong>keeps the run</strong> — the capability that gates every scalable fault-tolerant scheme. <span class="yes">The run survives.</span></p></div>
+      <div class="rc"><h3>2 · A clean control</h3><p>The "sham" is the <strong>identical 5-qubit circuit with the fix switched off</strong> — same qubits, same machinery. So the growing gap is the <strong>correction's</strong> doing, not lucky qubit choice. <span class="yes">No confound.</span></p></div>
+      <div class="rc"><h3>3 · The honest fence</h3><p>This is error-<strong>detected</strong> / <strong>injected</strong> errors on distance-2–3 codes — the <strong>mechanism</strong> of fault tolerance. <strong>Not</strong> a below-threshold fidelity, <strong>not</strong> a supremacy claim.</p></div>
+    </div>
+    <div class="links-row">
+      <a class="deeper" href="../shields/">The Shields (error detection)</a>
+      <a class="deeper" href="../programmable-rotation/">The Programmable Rotation →</a>
+    </div>
+  </section>
+
+  </main>
+  <footer class="badge-row">
+    <span>MEASURED · <span class="sig">Exp236 / 238 / 240 / 241</span> · ibm_fez</span>
+    <span>jobs d9erdp1… · d9es1m1… · d9f3d4k… · d9f3ov4…</span>
+    <span class="sp2"></span>
+    <a href="../">Museum</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+    var css = getComputedStyle(document.documentElement);
+    function C(v){ return css.getPropertyValue(v).trim(); }
+    var ns="http://www.w3.org/2000/svg";
+
+    // ---- verified data kernels (ibm_fez) ----
+    // Exp236: 3-qubit bit-flip corrected fidelity (mean of |0>,|1>); uncorrected≈flipped, bare≈0.004
+    // corr = mean of the two measured basis fidelities |0_L>,|1_L>; bare 0.004 measured;
+    // "unc" (coded-but-unfixed) was NOT measured for the 3-qubit flight -> null (honest)
+    var BITFLIP = {
+      none:{corr:0.9965, unc:null, bare:null, synd:[0,0], culprit:null},
+      X0:{corr:0.919, unc:null, bare:0.004, synd:[1,0], culprit:0},
+      X1:{corr:0.963, unc:null, bare:0.004, synd:[1,1], culprit:1},
+      X2:{corr:0.936, unc:null, bare:0.004, synd:[0,1], culprit:2}
+    };
+    // Exp238: Shor [[9,1,3]] aggregate — any single-qubit error corrected (all measured)
+    var SHOR = { none:{corr:0.914, unc:null, bare:null}, err:{corr:0.782, unc:0.107, bare:0.005} };
+    // Exp240: live (parity) vs destructive (direct) ⟨X̄⟩ on |+_L>
+    var LIVE = [
+      {lab:"no error", live:0.487, dest:0.006},
+      {lab:"X on q0",  live:0.511, dest:0.007},
+      {lab:"X on q1",  live:0.637, dest:-0.003},
+      {lab:"X on q2",  live:0.557, dest:0.001}
+    ];
+    // Exp241: repeated rounds
+    var ROUNDS = { corr:[0.995,0.834,0.616,0.523,0.442], sham:[0.992,0.780,0.396,0.197,0.101],
+      bare:[0.979,0.516,0.280,0.160,0.098], adv:[0.002,0.054,0.220,0.327,0.341] };
+    console.assert(ROUNDS.adv[4]>ROUNDS.adv[1] && BITFLIP.X0.corr>0.90, "monotone advantage + worst-case>0.9");
+
+    var state = { code:"bitflip", err:null };
+
+    // ---- Panel A: qubit register svg ----
+    function drawRegister(){
+      var svg=document.getElementById("qsvg");
+      var nData = state.code==="bitflip" ? 3 : 9;
+      var culprit = (state.err && state.err!=="none" && state.code==="bitflip") ? BITFLIP["X"+ (state.errQ||0)] : null;
+      var s="";
+      // data qubits row
+      var y=44, r=15, gap=(320)/(nData), x0=30;
+      for(var i=0;i<nData;i++){
+        var cx=x0 + gap*i + gap/2;
+        var broke = state.code==="bitflip" && state.err && state.err!=="none" && state.errQ===i;
+        var col = broke ? C("--err") : C("--heal");
+        s+='<circle cx="'+cx+'" cy="'+y+'" r="'+r+'" fill="'+C("--card")+'" stroke="'+col+'" stroke-width="'+(broke?3:2)+'"/>';
+        s+='<text x="'+cx+'" y="'+(y+4)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="11" fill="'+C("--ink-2")+'">q'+i+'</text>';
+        if(broke){ s+='<text x="'+cx+'" y="'+(y-r-4)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--err")+'">✦ '+state.err+'</text>'; }
+      }
+      // ancilla row (bitflip: 2 referees; shor: schematic)
+      var ay=112;
+      if(state.code==="bitflip"){
+        var synd = (state.err==="none")?[0,0] : (state.err && state.errQ!=null)? BITFLIP["X"+state.errQ].synd : null;
+        [["a1 = q0⊕q1",0],["a2 = q1⊕q2",1]].forEach(function(p,idx){
+          var cx = 110 + idx*140;
+          var lit = synd && synd[idx]===1;
+          var col = lit ? C("--err") : C("--ink-3");
+          s+='<circle cx="'+cx+'" cy="'+ay+'" r="12" fill="'+(lit?"color-mix(in srgb,"+C("--err")+" 22%,transparent)":C("--surface"))+'" stroke="'+col+'" stroke-width="2"/>';
+          s+='<text x="'+cx+'" y="'+(ay+4)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="11" fill="'+(lit?C("--err"):C("--ink-3"))+'">'+(synd?synd[idx]:"?")+'</text>';
+          s+='<text x="'+cx+'" y="'+(ay+26)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">'+p[0]+'</text>';
+        });
+      } else {
+        s+='<text x="180" y="'+ay+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10.5" fill="'+C("--ink-3")+'">6 referee ancillas diagnose the error TYPE (X/Y/Z) and its block — X, Y and Z all fixed</text>';
+      }
+      svg.innerHTML=s;
+    }
+
+    function setMeter(idp, idb, v){
+      var el=document.getElementById(idp), b=document.getElementById(idb);
+      el.textContent = (v==null? "—" : v.toFixed(3));
+      b.style.width = (v==null?0:Math.max(0,Math.min(1,v))*100)+"%";
+    }
+    function renderA(){
+      drawRegister();
+      var diag=document.getElementById("diag");
+      var d;
+      if(!state.err){ diag.innerHTML="Pick an error above to break a qubit."; setMeter("mCorr","bCorr",null); setMeter("mUnc","bUnc",null); setMeter("mBare","bBare",null);
+        document.getElementById("sCorr").textContent="logical fidelity after the fix"; return; }
+      if(state.code==="bitflip"){
+        if(state.err==="none"){ d=BITFLIP.none; diag.innerHTML='No error. The clean logical qubit reads <b>'+d.corr.toFixed(3)+'</b>.'; }
+        else { d=BITFLIP["X"+state.errQ]; diag.innerHTML='Broke <span class="brk">q'+state.errQ+'</span> with X. Referees read <b>('+d.synd[0]+','+d.synd[1]+')</b> → points at <span class="brk">q'+d.culprit+'</span> → <b>healed</b> to '+d.corr.toFixed(3)+'.'; }
+        document.getElementById("sCorr").textContent="3-qubit code · recovers any bit-flip";
+      } else {
+        if(state.err==="none"){ d=SHOR.none; diag.innerHTML='No error. The Shor logical qubit floor is <b>'+d.corr.toFixed(3)+'</b> (through ~32 CNOTs).'; }
+        else { d=SHOR.err; diag.innerHTML='Injected <span class="brk">'+state.err+'</span>. The Shor code diagnoses type+block and <b>heals</b>: '+d.corr.toFixed(3)+' (from '+d.unc.toFixed(3)+' un-fixed).'; }
+        document.getElementById("sCorr").textContent="Shor 9-qubit · corrects X, Y and Z";
+      }
+      setMeter("mCorr","bCorr",d.corr); setMeter("mUnc","bUnc",d.unc); setMeter("mBare","bBare",d.bare);
+    }
+
+    // error buttons
+    document.querySelectorAll(".ebtn").forEach(function(b){ b.addEventListener("click", function(){
+      var e=b.dataset.err;
+      if(b.disabled) return;
+      if(e==="none"){ state.err="none"; state.errQ=null; }
+      else if(state.code==="bitflip"){ state.err="X"; state.errQ = (state.errQ==null?0:(state.errQ+1)%3); } // cycle q0→q1→q2
+      else { state.err=e; state.errQ=null; }
+      renderA();
+    }); });
+    // code toggle
+    document.querySelectorAll("#codeSeg button").forEach(function(b){ b.addEventListener("click", function(){
+      state.code=b.dataset.code; state.err=null; state.errQ=null;
+      document.querySelectorAll("#codeSeg button").forEach(function(x){ x.classList.toggle("on", x===b); });
+      document.getElementById("qcap").innerHTML = state.code==="bitflip" ? "<b>3-qubit code</b> — 3 data qubits, 2 referee ancillas" : "<b>Shor 9-qubit code</b> — 9 data qubits (3 blocks), 6 referee ancillas";
+      var dis = state.code==="bitflip";
+      document.getElementById("btnY").disabled=dis; document.getElementById("btnZ").disabled=dis;
+      renderA();
+    }); });
+
+    // ---- Panel B: live vs destructive bars ----
+    (function(){
+      var wrap=document.getElementById("liveBars");
+      LIVE.forEach(function(r){
+        function w(v){ return Math.max(1,Math.min(1,Math.abs(v)))*100; }
+        var svg='<svg viewBox="0 0 320 30" preserveAspectRatio="none" style="width:100%;height:30px" role="img" aria-label="'+r.lab+' live vs destructive">';
+        svg+='<rect x="0" y="4" width="'+(Math.max(0,r.live)*300)+'" height="9" rx="3" fill="'+C("--heal")+'"/>';
+        svg+='<rect x="0" y="17" width="'+(Math.max(0,r.dest)*300)+'" height="9" rx="3" fill="'+C("--ink-3")+'" opacity="0.6"/>';
+        svg+='</svg>';
+        wrap.innerHTML +=
+          '<div class="bprow"><div class="bl">'+r.lab+'</div>'+
+          '<div><div>'+svg+'</div><div class="bpnums"><span class="live">live '+r.live.toFixed(3)+'</span><span class="dest">destructive '+r.dest.toFixed(3)+'</span></div></div></div>';
+      });
+    })();
+
+    // ---- Panel C: rounds ----
+    function drawRounds(R){
+      var svg=document.getElementById("roundSvg"), W=620,H=240, x0=44,x1=596,y0=20,y1=200;
+      function gx(r){ return x0 + r/4*(x1-x0); }
+      function gy(v){ return y1 - v*(y1-y0); }
+      var s="";
+      // axes
+      s+='<line x1="'+x0+'" y1="'+y1+'" x2="'+x1+'" y2="'+y1+'" stroke="'+C("--edge-2")+'" stroke-width="1"/>';
+      s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x0+'" y2="'+y1+'" stroke="'+C("--edge-2")+'" stroke-width="1"/>';
+      [0,0.5,1].forEach(function(v){ s+='<text x="'+(x0-6)+'" y="'+(gy(v)+3)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">'+v.toFixed(1)+'</text>'; });
+      for(var r=0;r<=4;r++){ s+='<text x="'+gx(r)+'" y="'+(y1+15)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">'+r+'</text>'; }
+      s+='<text x="'+((x0+x1)/2)+'" y="'+(y1+30)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--ink-3")+'">correction rounds R</text>';
+      function path(arr,col,dash,upto){ var p=""; for(var r=0;r<=upto;r++){ p+=(r?"L":"M")+gx(r)+","+gy(arr[r]); }
+        var d='<path d="'+p+'" fill="none" stroke="'+col+'" stroke-width="2.4"'+(dash?' stroke-dasharray="4 3"':'')+'/>';
+        for(var r2=0;r2<=upto;r2++){ d+='<circle cx="'+gx(r2)+'" cy="'+gy(arr[r2])+'" r="3.2" fill="'+col+'"/>'; } return d; }
+      // gap shading between corr and sham up to R
+      var gp="M"+gx(0)+","+gy(ROUNDS.corr[0]);
+      for(var r=1;r<=R;r++) gp+="L"+gx(r)+","+gy(ROUNDS.corr[r]);
+      for(var r3=R;r3>=0;r3--) gp+="L"+gx(r3)+","+gy(ROUNDS.sham[r3]);
+      gp+="Z";
+      s+='<path d="'+gp+'" fill="'+C("--heal")+'" fill-opacity="0.12"/>';
+      s+=path(ROUNDS.bare,C("--err"),true,R);
+      s+=path(ROUNDS.sham,C("--amber"),true,R);
+      s+=path(ROUNDS.corr,C("--heal"),false,R);
+      // legend
+      var lg=[["corrected",C("--heal")],["sham (fix off)",C("--amber")],["bare",C("--err")]];
+      lg.forEach(function(p,i){ var lx=x0+12+i*130; s+='<circle cx="'+lx+'" cy="'+ (y0+4) +'" r="4" fill="'+p[1]+'"/><text x="'+(lx+9)+'" y="'+(y0+7)+'" font-family="'+C("--mono")+'" font-size="9.5" fill="'+C("--ink-2")+'">'+p[0]+'</text>'; });
+      svg.innerHTML=s;
+      document.getElementById("rVal").textContent="R = "+R;
+      document.getElementById("gapNum").innerHTML = R===0 ? "" : 'correction advantage: <b>+'+ROUNDS.adv[R].toFixed(3)+'</b>';
+    }
+    document.getElementById("rSlider").addEventListener("input", function(){ drawRounds(+this.value); });
+
+    renderA(); drawRounds(4);
+  })();
+</script>
+</body>
+</html>
