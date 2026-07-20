@@ -1,17 +1,24 @@
 {
-  "source": "transpile-and-count on ibm_fez (no QPU), C4929 recount of the depth-blocked list",
-  "wall": 54, "flyable_zone": "19-30",
-  "counts_physical_2q": {
-    "422_single_block_bell_pair_via_CZbar_S4": 2,
-    "error_corrected_magic_2_shor_blocks_plus_transversal_cnot": 82,
-    "2_shor_encodes_alone_no_cross_block_gate": 37,
-    "single_shor_block_encode_read": 15,
-    "transversal_cnot_routing_tax": 45
-  },
-  "findings": {
-    "structural_cheap_reframe_REAL": "a [[4,2,2]] logical Bell pair costs 2 physical 2q (CZbar=S^4, the entangling gate is single-qubit) -- Clifford-heavy LOGICAL algorithms on [[4,2,2]] are near-free (why Exp244 landed at 19). Holds within the DETECTION regime.",
-    "path1_frame_tracking_OVERSTATED": "'the wall may be an accounting artifact' is FALSE for distance-3 correction. Error-corrected magic = 82 > 54. The 45-gate cost is heavy-hex ROUTING of a co-located transversal CNOT, NOT frame-trackable Clifford gates. My Path-1 claim was the wrong tool.",
-    "path2_divide_conquer_VALIDATED": "the 82 is routing-dominated: 37 for the two encodes (the logic) + 45 for routing the transversal CNOT across 18 co-located qubits. A DISTRIBUTED nonlocal-CNOT (1 Bell pair + feed-forward, relay-style ~12 gates) replaces the 45-gate tax -> projected ~49 < 54. Error-corrected magic is blocked by ROUTING, not logic -- and divide-and-conquer projects it UNDER the wall."
-  },
-  "verdict": "the depth wall for error-corrected magic is a ROUTING wall, not a logic wall or an accounting artifact. Path 1 (frame-tracking) does NOT rescue it (honest correction). Path 2 (distribute the gate) projects it to ~49 < 54 -- the concrete next check. Walls-are-ideation-prompts vindicated, via a different lever than first proposed."
+ "source": "transpile-and-count on ibm_fez (no QPU), C4929 recount of the depth-blocked list",
+ "wall": 54,
+ "flyable_zone": "19-30",
+ "counts_physical_2q": {
+  "422_single_block_bell_pair_via_CZbar_S4": 2,
+  "error_corrected_magic_2_shor_blocks_plus_transversal_cnot": 82,
+  "2_shor_encodes_alone_no_cross_block_gate": 37,
+  "single_shor_block_encode_read": 15,
+  "transversal_cnot_routing_tax": 45
+ },
+ "findings": {
+  "structural_cheap_reframe_REAL": "a [[4,2,2]] logical Bell pair costs 2 physical 2q (CZbar=S^4, the entangling gate is single-qubit) -- Clifford-heavy LOGICAL algorithms on [[4,2,2]] are near-free (why Exp244 landed at 19). Holds within the DETECTION regime.",
+  "path1_frame_tracking_OVERSTATED": "'the wall may be an accounting artifact' is FALSE for distance-3 correction. Error-corrected magic = 82 > 54. The 45-gate cost is heavy-hex ROUTING of a co-located transversal CNOT, NOT frame-trackable Clifford gates. My Path-1 claim was the wrong tool.",
+  "path2_divide_conquer_VALIDATED": "the 82 is routing-dominated: 37 for the two encodes (the logic) + 45 for routing the transversal CNOT across 18 co-located qubits. A DISTRIBUTED nonlocal-CNOT (1 Bell pair + feed-forward, relay-style ~12 gates) replaces the 45-gate tax -> projected ~49 < 54. Error-corrected magic is blocked by ROUTING, not logic -- and divide-and-conquer projects it UNDER the wall."
+ },
+ "verdict": "the depth wall for error-corrected magic is a ROUTING wall, not a logic wall or an accounting artifact. Path 1 (frame-tracking) does NOT rescue it (honest correction). Path 2 (distribute the gate) projects it to ~49 < 54 -- the concrete next check. Walls-are-ideation-prompts vindicated, via a different lever than first proposed.",
+ "distributed_test_c4930": {
+  "co_located_direct_transversal_cnot": 82,
+  "distributed_9_nonlocal_cnots_bell_mediated": 152,
+  "finding": "single-chip distribution makes it WORSE (152 > 82): the 9 mediating Bell pairs must each be routed across the same A-B gap -> no free lunch on one chip. My Path-2 ~49 projection was WRONG (2nd honest correction).",
+  "true_verdict": "error-corrected magic on two co-located distance-3 blocks is genuinely single-chip ROUTING-limited (82); NEITHER frame-tracking (Path 1) NOR single-chip distribution (Path 2) reduces it. The genuine depth-reducing levers are OFF this chip: (a) a MULTI-chip network with real pre-shared entanglement across links (campaign has two-chip F82); (b) a hardware-native code (surface-code patches, geometric transversal CNOT); or (c) STOP trusting the gate-count heuristic -- the 54 wall was 242 fragile XX leg; the MAGIC witness (X-bar) is byproduct-robust + postselected (243 ran clean at 19), so fly the 82-gate version and TEST whether the robust witness survives, rather than declare it blocked by a count."
+ }
 }
