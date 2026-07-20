@@ -1,0 +1,63 @@
+{
+ "exp": 217,
+ "slug": "distributed_cnot",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9emnnineu4c739okjn0",
+ "order": [
+  [
+   "log",
+   "00"
+  ],
+  [
+   "log",
+   "01"
+  ],
+  [
+   "log",
+   "10"
+  ],
+  [
+   "log",
+   "11"
+  ],
+  [
+   "bare",
+   "00"
+  ],
+  [
+   "bare",
+   "01"
+  ],
+  [
+   "bare",
+   "10"
+  ],
+  [
+   "bare",
+   "11"
+  ]
+ ],
+ "decode": {
+  "dA": [
+   0,
+   2
+  ],
+  "dB": [
+   0,
+   2
+  ],
+  "eA": [
+   0,
+   1
+  ]
+ },
+ "prereg": {
+  "G1_truthtable": "mean P(correct) >= 0.80; every input >= 5 sigma over 0.25 floor",
+  "G2_shield_beats_bare": "logical mean - bare mean > 0 at >= 3 sigma",
+  "G3_frame_off": "mean P(correct) with bit x IGNORED <= 0.65 (weld = the bit)",
+  "G_acc": "two-block ZZZZ joint acceptance in [0.55, 0.80]",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "1 block/node, Z-basis partial (ZZZZ) shield like 197 relay; terminal 1-bit frame, no feed-forward, no crossing gate post-handshake; coherence witness deferred to the 3-block flight 2 (191 shared-q0 readout obstruction)"
+ }
+}
