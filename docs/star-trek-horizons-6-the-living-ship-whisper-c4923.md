@@ -133,7 +133,7 @@ the on-ramp to a fault-tolerant quantum internet node.
   measure. Redux, depth-blocked, or free-parameter. Killed before the QPU spend.
 - **P6 (Living Federation Node) shares the reduction**: live-correction ∘ (a deck's stored qubit) = 245
   in costume. It would re-derive the drift finding.
-- **P4 (Replicator's Purifier) is distinct and near-free**: does error *detection* purify a magic
+- **P4 (Replicator's Purifier) — ✅ DONE (C4926): detection PURIFIES the magic — injected T <X-bar> raw 0.609 -> postselected 0.690 toward ideal 0.707 (the distillation seed, free re-analysis of 243). [status](../experiments/exp243-P4-STATUS-magic-purification.md).** Was:: does error *detection* purify a magic
   state? This is a **re-analysis of Exp243's existing job** (raw vs postselected ⟨X̄⟩ → the distillation
   seed), the C4921 move for magic — no new QPU, genuinely different from a retention curve.
 - **P5 (The Fact That Heals Itself) is the one genuinely-new physics question**: does active correction
