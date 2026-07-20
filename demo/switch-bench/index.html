@@ -5,8 +5,8 @@
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M4%204C8%208%208%208%2012%2012%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12%204C8%208%208%208%204%2012%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.7%22%20fill%3D%22%23e5e7eb%22%2F%3E%3C%2Fsvg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Switch-Bench Readout — a causal-order instrument that travels | The Quantum Museum</title>
-<meta name="description" content="A three-axis instrument for causal-order physics (CAUSAL, SCHEDULE, HOLD), flown intact on two chips it had never seen (ibm_kingston, ibm_fez) and certifying every axis against the same frozen bounds — ranking three Heron dies on axes QV/CLOPS/EPLG don't touch. Real hardware (F112, extended to 3 devices).">
+<title>The Switch-Bench Readout — a causal-order instrument that travels, now across vendors | The Quantum Museum</title>
+<meta name="description" content="A three-axis instrument for causal-order physics (CAUSAL, SCHEDULE, HOLD), flown intact on chips it had never seen and certifying against the same frozen bounds — three IBM Heron dies (F112), and now the causal axis on a non-IBM chip (Rigetti Cepheus-1-108Q, via Amazon Braket, Exp210): indefinite causal order certifies across the vendor boundary. Real hardware.">
 <link rel="stylesheet" href="../museum.css">
 <style>
   .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
@@ -58,6 +58,12 @@
   .dbtn:hover { border-color:var(--cyan); }
   .dbtn.on { background:var(--cyan); color:var(--bg); border-color:var(--cyan); }
   .dbtn.on small { opacity:.85; }
+  /* cross-vendor (Rigetti) — rose accent, distinct from cyan/violet/amber; dashed = different vendor */
+  :root { --rig:#fb7185; }
+  .dbtn.rig { border-style:dashed; }
+  .dbtn.rig:hover { border-color:var(--rig); }
+  .dbtn.rig.on { background:var(--rig); color:var(--bg); border-color:var(--rig); }
+  .ax-nums .dv.nf b { color:var(--ink-3); font-weight:400; font-style:italic; }
 
   .axis-card { border:1px solid var(--edge); border-radius:13px; padding:15px 16px; background:var(--surface-2); margin-bottom:12px; }
   .ax-head { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px; }
@@ -65,6 +71,7 @@
   .ax-metric { font-family:var(--mono); font-size:11px; color:var(--ink-3); }
   .ax-badge { font-family:var(--mono); font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px;
     color: var(--good); background: color-mix(in srgb,var(--good) 13%,transparent); }
+  .ax-badge.nf { color:var(--ink-3); background:color-mix(in srgb,var(--ink-3) 12%,transparent); font-weight:600; }
   .ax-svg { width:100%; display:block; margin:4px 0 2px; }
   .ax-nums { display:flex; gap:16px; flex-wrap:wrap; font-family:var(--mono); font-size:12px; margin-top:6px; }
   .ax-nums .dv { color:var(--ink-3); } .ax-nums .dv b { color:var(--ink-2); }
@@ -121,8 +128,9 @@
     <h1>The bench that <span class="hl">travels</span>.</h1>
     <p class="lede">Chip vendors publish generic quality scores — Quantum Volume, CLOPS, EPLG. None of them tell you
     whether a chip can do the <strong>physics of causal-order superposition</strong>. This instrument does — three axes, each
-    against a frozen bound. Then we flew the whole thing on a chip it had <strong>never seen</strong>, graded it against the
-    <strong>same bounds with no retuning</strong>, and it certified all three. Flip between the chips and watch the bench travel.</p>
+    against a frozen bound. Then we flew the whole thing on chips it had <strong>never seen</strong>, graded them against the
+    <strong>same bounds with no retuning</strong>, and they certified — across three IBM Heron dies, and now the causal axis on a
+    chip from a <strong>different vendor entirely</strong> (Rigetti). Flip between the chips and watch the bench travel.</p>
 
     <div class="primer">
       <div class="pcard">
@@ -133,16 +141,16 @@
       </div>
       <div class="pcard">
         <h2>What does "travels" mean?</h2>
-        <p>The bench had only run on the home chip. If causal-order physics is a property of the hardware
-        <strong>generation</strong> — not one lucky die — the same bench should certify on a <strong>different</strong> chip, unretuned. We
-        tested it on a chip it had never seen. It did.</p>
+        <p>The bench had only run on the home chip. If causal-order physics is a property of the hardware — not one lucky die,
+        not one vendor — the same bench should certify on a <strong>different</strong> chip, unretuned. It did on two other Heron dies,
+        and the causal axis did on a chip from a <strong>different company</strong> (Rigetti) — weaker, but above the same bar.</p>
       </div>
     </div>
 
     <div class="herobtns">
       <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
       <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
-      <span class="scope">Same Heron <strong>generation</strong> — cross-generation (Eagle) not claimed. Same-instrument, not same-instant.</span>
+      <span class="scope">Now <strong>cross-vendor</strong> (Rigetti, causal axis) — cross-<strong>modality</strong> (trapped-ion) not yet flown. Same-instrument, not same-instant.</span>
     </div>
   </header>
 
@@ -150,15 +158,17 @@
   <section class="panel">
     <p class="panel-label">Exhibit A — The bench travels</p>
     <h2>Pick a chip; watch all three axes certify against the same bounds</h2>
-    <p class="sub">The home chip (<strong>marrakesh</strong>) is where the bench was built; two <strong>foreign</strong> chips (<strong>kingston</strong>, <strong>fez</strong>)
-    had never seen it. Each axis is graded against the <strong>identical frozen bound</strong>, no retuning. The selected chip's
-    marker is solid; the others are faint rings — so you can see the ranking at a glance.</p>
+    <p class="sub">The home chip (<strong>marrakesh</strong>) is where the bench was built; two <strong>foreign</strong> Heron chips (<strong>kingston</strong>, <strong>fez</strong>)
+    had never seen it, and a <strong style="color:var(--rig)">non-IBM</strong> chip (<strong>Rigetti Cepheus</strong>) ran the causal axis. Each axis is graded against the
+    <strong>identical frozen bound</strong>, no retuning. The selected chip's marker is solid; the others are faint rings (Rigetti in rose) —
+    so you can see the ranking, and the vendor gap, at a glance.</p>
 
     <div class="devsel" role="group" aria-label="Choose a chip">
       <span class="lbl">chip:</span>
       <button class="dbtn" data-dev="marrakesh" type="button">ibm_marrakesh <small>home · where it was built</small></button>
       <button class="dbtn on" data-dev="kingston" type="button">ibm_kingston <small>foreign · never seen before</small></button>
       <button class="dbtn" data-dev="fez" type="button">ibm_fez <small>foreign · 3rd Heron die</small></button>
+      <button class="dbtn rig" data-dev="rigetti" type="button">Rigetti Cepheus <small>non-IBM · cross-vendor · causal axis</small></button>
     </div>
 
     <div id="axes"></div>
@@ -170,9 +180,11 @@
   <section class="panel">
     <p class="panel-label">Exhibit B — The device leaderboard</p>
     <h2>It doesn't just travel — it ranks the chips</h2>
-    <p class="sub">Graded on the causal-order axes, the three dies rank <strong>kingston ≥ marrakesh ≥ fez</strong> — kingston leads on every
+    <p class="sub">Graded on the causal-order axes, the three <strong>Heron dies</strong> rank <strong>kingston ≥ marrakesh ≥ fez</strong> — kingston leads on every
     causal number and the Zeno hold; fez, the newest die, certifies every axis but sits <strong>last</strong>. This is a benchmark
-    that ranks devices on <strong>axes QV, CLOPS and EPLG never touch</strong> — which chip does causal-order physics <strong>better</strong>.</p>
+    that ranks devices on <strong>axes QV, CLOPS and EPLG never touch</strong> — which chip does causal-order physics <strong>better</strong>.
+    The cross-vendor chip (<strong style="color:var(--rig)">Rigetti Cepheus</strong>) sits <strong>far below this entire Heron field</strong> — witness 1.11 vs 1.89–1.95,
+    capacity 0.27 vs ~0.50: it certifies the physics but is not in the Heron dies' league. Flip to it in Exhibit A.</p>
     <div class="lb" id="leaderboard"></div>
   </section>
 
@@ -194,9 +206,10 @@
         untouched, the same machinery that adapted to the home chip's drift. <span class="yes">No hand-picking.</span></p>
       </div>
       <div class="rc">
-        <h3>3 · A generation, not a die</h3>
-        <p>All three axes certify on both chips, so the causal-order phenomena are properties of the <strong>Heron
-        generation</strong> — not one lucky piece of silicon. The physics is portable.</p>
+        <h3>3 · A generation — and across vendors</h3>
+        <p>All three axes certify across three Heron dies (a property of the <strong>generation</strong>, not one lucky die) — and the
+        causal axis certifies on a <strong>different vendor's</strong> chip (Rigetti, via Braket), so the physics isn't even IBM-specific.
+        Portable across silicon.</p>
       </div>
     </div>
     <div class="links-row">
@@ -208,8 +221,8 @@
 
   </main>
   <footer class="badge-row">
-    <span>MEASURED · <span class="sig">F112</span> · job <span class="sig">d9amd73v6alc73cs0lp0</span></span>
-    <span>ibm_marrakesh + ibm_kingston + ibm_fez · full 3-axis bench · same frozen bounds</span>
+    <span>MEASURED · <span class="sig">F112</span> + <span class="sig">Exp210</span> · IBM jobs + Braket task 28505c8c</span>
+    <span>ibm_marrakesh + ibm_kingston + ibm_fez (full 3-axis) + Rigetti Cepheus (causal axis, non-IBM) · same frozen bounds</span>
     <span class="sp2"></span>
     <a href="./spec.html">Full Spec</a>
     <a href="../scoreboard/">Scoreboard</a>
@@ -234,18 +247,18 @@
     var AXES = [
       { key:"causal", name:"CAUSAL", color:"--cyan", metric:"witness W  ·  ideal 2.0",
         min:0, max:2.0, ideal:2.0, bound:0.10, boundLab:"classical ≈0", boundType:"floor",
-        vals:{marrakesh:1.9265, kingston:1.9533, fez:1.8948}, edge:"kingston",
-        comp:{marrakesh:"capacity R̄ 0.498", kingston:"capacity R̄ 0.525", fez:"capacity R̄ 0.508"},
+        vals:{marrakesh:1.9265, kingston:1.9533, fez:1.8948, rigetti:1.1138}, edge:"kingston",
+        comp:{marrakesh:"capacity R̄ 0.498", kingston:"capacity R̄ 0.525", fez:"capacity R̄ 0.508", rigetti:"capacity R̄ 0.271"},
         badge:"PASS-CAUSAL", exUrl:"../switch/", exLab:"the Causal Switch" },
       { key:"schedule", name:"SCHEDULE", color:"--violet", metric:"order-imbalance D_order  ·  ideal 0",
         min:0, max:0.05, ideal:0, bound:0.0223, boundLab:"bound 0.0223", boundType:"ceiling",
-        vals:{marrakesh:null, kingston:0.0130, fez:0.0185}, edge:null,
-        comp:{marrakesh:"order-symmetric (home)", kingston:"order-symmetric", fez:"symmetric · split-half guard flagged"},
+        vals:{marrakesh:null, kingston:0.0130, fez:0.0185, rigetti:"NF"}, edge:null,
+        comp:{marrakesh:"order-symmetric (home)", kingston:"order-symmetric", fez:"symmetric · split-half guard flagged", rigetti:"not flown — causal axis only"},
         badge:"ORDER-SYMMETRIC", exUrl:null, exLab:"F96 hidden-order" },
       { key:"hold", name:"HOLD", color:"--amber", metric:"Zeno tractor sep  ·  ideal ~0.73",
         min:0, max:0.75, ideal:0.73, bound:0.30, boundLab:"bar 0.30", boundType:"floor",
-        vals:{marrakesh:0.624, kingston:0.6487, fez:0.5247}, edge:"kingston",
-        comp:{marrakesh:"QND q 0.987", kingston:"QND q 0.9847", fez:"QND q 0.9708"},
+        vals:{marrakesh:0.624, kingston:0.6487, fez:0.5247, rigetti:"NF"}, edge:"kingston",
+        comp:{marrakesh:"QND q 0.987", kingston:"QND q 0.9847", fez:"QND q 0.9708", rigetti:"not flown — causal axis only"},
         badge:"HOLD-CERTIFIED", exUrl:"../zeno-tractor/", exLab:"the Zeno Tractor Beam" }
     ];
     console.assert(AXES[0].vals.kingston>AXES[0].vals.marrakesh && AXES[2].vals.kingston>AXES[2].vals.marrakesh, "kingston edges causal+hold");
@@ -267,15 +280,16 @@
       s+='<text x="'+gx(ax.bound)+'" y="9" text-anchor="middle" font-family="'+C("--mono")+'" font-size="8" fill="'+C("--ink-3")+'">'+ax.boundLab+'</text>';
       // ideal tick
       s+='<line x1="'+gx(ax.ideal)+'" y1="28" x2="'+gx(ax.ideal)+'" y2="40" stroke="'+C("--good")+'" stroke-width="1.4" opacity="0.7"/>';
-      // device markers
-      ["marrakesh","kingston","fez"].forEach(function(dev){
-        var v=ax.vals[dev]; if(v===null) return;
-        var active = dev===state.dev, x=gx(v);
+      // device markers (rigetti always rose = cross-vendor; typeof-number skips null + "NF")
+      ["marrakesh","kingston","fez","rigetti"].forEach(function(dev){
+        var v=ax.vals[dev]; if(typeof v!=="number") return;
+        var active = dev===state.dev, x=gx(v), isRig = dev==="rigetti";
+        var mk = isRig ? C("--rig") : col;
         if(active){
-          s+='<line x1="'+x+'" y1="14" x2="'+x+'" y2="34" stroke="'+col+'" stroke-width="2"/>';
-          s+='<circle cx="'+x+'" cy="24" r="6" fill="'+C("--card")+'" stroke="'+col+'" stroke-width="2.6"/>';
+          s+='<line x1="'+x+'" y1="14" x2="'+x+'" y2="34" stroke="'+mk+'" stroke-width="2"/>';
+          s+='<circle cx="'+x+'" cy="24" r="6" fill="'+C("--card")+'" stroke="'+mk+'" stroke-width="2.6"/>';
         } else {
-          s+='<circle cx="'+x+'" cy="24" r="4.5" fill="none" stroke="'+C("--ink-3")+'" stroke-width="1.5" opacity="0.7"/>';
+          s+='<circle cx="'+x+'" cy="24" r="4.5" fill="none" stroke="'+(isRig?mk:C("--ink-3"))+'" stroke-width="1.5" opacity="'+(isRig?"0.9":"0.7")+'"/>';
         }
       });
       s+='</svg>';
@@ -286,21 +300,23 @@
     function render(){
       var html="";
       AXES.forEach(function(ax){
-        var mv=ax.vals.marrakesh, kv=ax.vals.kingston, dev=state.dev;
-        var mAct=dev==="marrakesh", kAct=dev==="kingston";
+        var dev=state.dev;
         var edgeMark = ax.edge==="kingston" ? ' <span class="edge">▲ edges</span>' : '';
-        var mNum = mv===null ? "symmetric ✓" : mv.toFixed(4);
+        function fmt(v){ return v===null ? "symmetric ✓" : v==="NF" ? "— not flown" : v.toFixed(4); }
+        function dvSpan(name){ var v=ax.vals[name], nf=(v==="NF");
+          return '<span class="dv '+(dev===name?"act":"")+(nf?" nf":"")+'">'+name+' <strong>'+fmt(v)+'</strong>'+(dev===name&&name==="kingston"?edgeMark:'')+'</span>'; }
+        var notFlown = ax.vals[dev]==="NF";
+        var badgeHtml = notFlown ? '<span class="ax-badge nf">— not flown on this chip</span>'
+                                 : '<span class="ax-badge">✓ '+ax.badge+'</span>';
         html +=
           '<div class="axis-card">'+
             '<div class="ax-head">'+
               '<span><span class="ax-name" style="color:'+C(ax.color)+'">'+ax.name+'</span> <span class="ax-metric">'+ax.metric+'</span></span>'+
-              '<span class="ax-badge">✓ '+ax.badge+'</span>'+
+              badgeHtml+
             '</div>'+
             gauge(ax)+
             '<div class="ax-nums">'+
-              '<span class="dv '+(mAct?"act":"")+'">marrakesh <strong>'+mNum+'</strong></span>'+
-              '<span class="dv '+(kAct?"act":"")+'">kingston <strong>'+kv.toFixed(4)+'</strong>'+(kAct?edgeMark:'')+'</span>'+
-              '<span class="dv '+(dev==="fez"?"act":"")+'">fez <strong>'+(ax.vals.fez==null?"symmetric ✓":ax.vals.fez.toFixed(4))+'</strong></span>'+
+              dvSpan("marrakesh")+dvSpan("kingston")+dvSpan("fez")+dvSpan("rigetti")+
               '<span class="comp">'+ax.comp[dev]+'</span>'+
             '</div>'+
             '<div class="ax-link">axis → '+(ax.exUrl?'<a href="'+ax.exUrl+'">'+ax.exLab+'</a>':ax.exLab)+'</div>'+
@@ -312,8 +328,10 @@
         verdictBig.innerHTML='<strong>The foreign chip.</strong> The full three-axis bench, flown on a chip it had <strong>never seen</strong> — one job, 77 pubs, 208,000 shots — certifies <span class="ok">all three axes</span> against the same frozen bounds, no retuning. Causal-order physics travels.';
       } else if(dev==="fez"){
         verdictBig.innerHTML='<strong>The second foreign chip — F112 extended to a 3rd die.</strong> ibm_fez, also never seen, certifies all three axes against the same frozen bounds — but <strong>not a clean 3/3</strong>: its SCHEDULE data tripped the split-half floor-transfer guard (noisier than the other two), and it ranks <span class="ok">last</span> on the causal and Zeno-hold numbers. Device-independence holds across three dies; the bench ranks fez weakest.';
+      } else if(dev==="rigetti"){
+        verdictBig.innerHTML='<strong>The vendor boundary — a different company\'s chip.</strong> Rigetti Cepheus-1-108Q (via Amazon Braket) is <strong>not an IBM device</strong>: different fab, different native gates. The <strong style="color:var(--cyan)">CAUSAL</strong> axis certifies against the <span class="ok">same frozen bound</span> — witness W = <strong>1.114</strong>, 49.7σ over the classical line — so indefinite causal order is not an IBM artifact. It runs at ~59% of Heron\'s witness (1.11 vs ~1.90): it certifies, but is a <strong>markedly weaker</strong> causal chip. <strong>SCHEDULE and HOLD were not flown</strong> — this was the causal-axis cross-vendor exam (Exp210).';
       } else {
-        verdictBig.innerHTML='<strong>The home chip.</strong> Where the bench was built and first certified all three axes. Flip to <strong>kingston</strong> or <strong>fez</strong> to watch the same bench certify on chips it had never seen.';
+        verdictBig.innerHTML='<strong>The home chip.</strong> Where the bench was built and first certified all three axes. Flip to <strong>kingston</strong> or <strong>fez</strong> (other Heron dies), or the <strong style="color:var(--rig)">Rigetti</strong> chip (a different vendor entirely), to watch the causal physics travel.';
       }
       document.querySelectorAll(".dbtn").forEach(function(b){ var on=b.dataset.dev===dev; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
     }
