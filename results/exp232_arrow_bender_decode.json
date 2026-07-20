@@ -1,0 +1,14 @@
+{
+ "job_id": "d9eqgf9htsac739eimg0",
+ "xs": {
+  "held": 0.00275,
+  "revoke": 0.977,
+  "release": 0.00925,
+  "release_revoke": 0.0195
+ },
+ "window": 0.9575,
+ "g1": true,
+ "g2": true,
+ "g3": true,
+ "verdict_ok": true
+}
