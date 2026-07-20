@@ -1,0 +1,93 @@
+{
+ "exp": 239,
+ "slug": "the_threshold",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9es6mhhtsac739ekrhg",
+ "order": [
+  [
+   "bare",
+   "1",
+   0
+  ],
+  [
+   "coded",
+   "1",
+   0
+  ],
+  [
+   "bare",
+   "1",
+   50
+  ],
+  [
+   "coded",
+   "1",
+   50
+  ],
+  [
+   "bare",
+   "1",
+   100
+  ],
+  [
+   "coded",
+   "1",
+   100
+  ],
+  [
+   "bare",
+   "1",
+   150
+  ],
+  [
+   "coded",
+   "1",
+   150
+  ],
+  [
+   "bare",
+   "1",
+   200
+  ],
+  [
+   "coded",
+   "1",
+   200
+  ],
+  [
+   "bare",
+   "1",
+   250
+  ],
+  [
+   "coded",
+   "1",
+   250
+  ],
+  [
+   "bare",
+   "0",
+   250
+  ],
+  [
+   "coded",
+   "0",
+   250
+  ]
+ ],
+ "taus_us": [
+  0,
+  50,
+  100,
+  150,
+  200,
+  250
+ ],
+ "prereg": {
+  "G1_memory_advantage": "exists tau>0 with F_coded - F_bare >= 0.02",
+  "registered_verdict": "G1 \u2014 HELD=above pseudo-threshold (bit-flip/T1), NOT HELD=below (honest)",
+  "reported": "full F_coded/F_bare curves, crossover tau*, tau=0 overhead gap, |0> control",
+  "scope": "bit-flip/T1 channel only; pseudo-threshold for ONE channel; full [[9,1,3]] memory expected below-threshold, separate flight"
+ }
+}

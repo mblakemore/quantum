@@ -1,0 +1,77 @@
+{
+ "exp": "239b",
+ "slug": "the_threshold_clean",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9es9u1htsac739ekvhg",
+ "order": [
+  [
+   "bare",
+   0
+  ],
+  [
+   "coded",
+   0
+  ],
+  [
+   "bare",
+   50
+  ],
+  [
+   "coded",
+   50
+  ],
+  [
+   "bare",
+   100
+  ],
+  [
+   "coded",
+   100
+  ],
+  [
+   "bare",
+   150
+  ],
+  [
+   "coded",
+   150
+  ],
+  [
+   "bare",
+   200
+  ],
+  [
+   "coded",
+   200
+  ],
+  [
+   "bare",
+   250
+  ],
+  [
+   "coded",
+   250
+  ]
+ ],
+ "taus_us": [
+  0,
+  50,
+  100,
+  150,
+  200,
+  250
+ ],
+ "triple": [
+  8,
+  9,
+  10
+ ],
+ "prereg": {
+  "G1_memory_advantage": "exists tau>0 with F_coded(majority) - F_bare_avg >= 0.02, same qubits",
+  "layout_assert": "all circuits on identical physical set = triple",
+  "registered_verdict": "G1 and layout-identity \u2014 per-triple EXISTENCE (p>1/2 regime), NOT hardware-wide threshold",
+  "reported": "curves, per-qubit single survivals, crossover tau*, tau=0 overhead gap",
+  "scope": "one named triple {8,9,10}, bit-flip/T1, single re-fly, existence claim only"
+ }
+}
