@@ -1,0 +1,110 @@
+{
+ "exp": 235,
+ "slug": "breaking_clifford_ceiling",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9er71phtsac739ejmm0",
+ "ks": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8
+ ],
+ "order": [
+  [
+   "log",
+   0
+  ],
+  [
+   "log",
+   1
+  ],
+  [
+   "log",
+   2
+  ],
+  [
+   "log",
+   3
+  ],
+  [
+   "log",
+   4
+  ],
+  [
+   "log",
+   5
+  ],
+  [
+   "log",
+   6
+  ],
+  [
+   "log",
+   7
+  ],
+  [
+   "log",
+   8
+  ],
+  [
+   "bare",
+   0
+  ],
+  [
+   "bare",
+   1
+  ],
+  [
+   "bare",
+   2
+  ],
+  [
+   "bare",
+   3
+  ],
+  [
+   "bare",
+   4
+  ],
+  [
+   "bare",
+   5
+  ],
+  [
+   "bare",
+   6
+  ],
+  [
+   "bare",
+   7
+  ],
+  [
+   "bare",
+   8
+  ]
+ ],
+ "ideal": {
+  "0": 1.0,
+  "1": 0.7071067811865476,
+  "2": 6.123233995736766e-17,
+  "3": -0.7071067811865475,
+  "4": -1.0,
+  "5": -0.7071067811865477,
+  "6": -1.8369701987210297e-16,
+  "7": 0.7071067811865474,
+  "8": 1.0
+ },
+ "prereg": {
+  "G1_t_rotation": "<Xbar1>(k) sign matches cos(k pi/4) all k; |<X>(k=2)|<=0.25; <X>(k=4)<=-0.55",
+  "G2_magic": "|<Xbar1>| >= 0.45 at k=1 and k=3 (non-stabilizer magic behind the shield)",
+  "G3_shield_vs_bare": "reported: shielded magic fringe vs bare physical-T fringe",
+  "registered_verdict": "G1 and G2",
+  "scope": "non-Clifford logical T-bar (Rzz, non-transversal, error-DETECTED); Clifford ceiling broken; scalable FT magic needs a d>=3 correcting code + distillation"
+ }
+}
