@@ -48,7 +48,7 @@ are named as the next-hardware climb, not flown into a foreseeable failure.
 
 ## The programs — wildest first, each grounded, each with a first flight
 
-### ⭐ P1 — THE UNIVERSAL LOGICAL COMPUTER: a computation no laptop can follow, behind the shield
+### ⭐ P1 — THE UNIVERSAL LOGICAL COMPUTER — ✅ FLOWN & CERTIFIED (Exp244, C4924): the universal gate set is CLOSED and PROGRAMMABLE behind the shield — the injected T steered by a logical-Clifford program to distinct non-stabilizer targets (+0.709 / -0.688, steer 1.40), Clifford-replacement collapses them, error-detected. Framed as the MECHANISM (not supremacy). [status](../experiments/exp244-STATUS-certified.md)
 **The vision.** Every error-corrected computation in the campaign was **Clifford** — and by
 Gottesman–Knill, classically simulable. 243 just supplied the missing ingredient: an injected **T**.
 Compose 206 (the logical Clifford computer) + 243 (T injection) to run the **smallest logical circuit
