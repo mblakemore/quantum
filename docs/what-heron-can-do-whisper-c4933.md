@@ -86,9 +86,13 @@ useful/demonstrative/not-yet fence kept sharp.
 1. **A certified-randomness *service*** — wrap F117 into a repeatable, weather-scheduled pipeline that
    emits certified private bits with the certificate attached. The one Tier-1 result that is a *product*,
    not a demo. (Compose F117 + the weather service.)
-2. **A protected sensor** — the shield-preserves-Fisher result (205) + the Heisenberg metrology
-   (F108/9): an entanglement-enhanced field estimate *with error detection*, testing whether the shield
-   buys a more robust small-N sensor. Shallow, useful, genuinely new composition.
+2. **A protected sensor** — ⚠️ **REDUCES TO Exp205 (C4933 rediscovery)**: Exp205 THE BLIND ANTENNA
+   already IS this — the [[4,2,2]] blind spot (global Z) = the antenna, postselection sharpens the fringe,
+   Fisher 16 from a 2-CX probe, CERTIFIED. The only untested delta is noise-robustness, and that is
+   either a *rigged* per-accepted-shot metric (postselection defines the clean subset — the Exp239
+   confound in metrology form) or, on the honest per-raw-resource metric, the known metrology no-go
+   (error detection buys shallower probes, not resource — exactly 205s claim). Not worth QPU. NOT a
+   genuinely-new build.
 3. **The logical-ISA testbed** — publish the certified logical instruction set (encode · frame-tracked
    Clifford · inject-T · dial · live-correct · decode) as a small API + a logical-circuit CI that
    depth-counts and sim-verifies before spending QPU. Turns the whole arc into a *reusable platform* for
