@@ -1,0 +1,54 @@
+{
+ "exp": 226,
+ "slug": "distributed_mbqc",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9eopr1htsac739egj7g",
+ "order": [
+  [
+   "0",
+   "bond"
+  ],
+  [
+   "1",
+   "bond"
+  ],
+  [
+   "plus",
+   "bond"
+  ],
+  [
+   "0",
+   "nobond"
+  ],
+  [
+   "1",
+   "nobond"
+  ],
+  [
+   "plus",
+   "nobond"
+  ]
+ ],
+ "frame": {
+  "0": [
+   8,
+   false
+  ],
+  "1": [
+   8,
+   false
+  ],
+  "plus": [
+   9,
+   true
+  ]
+ },
+ "prereg": {
+  "G1_hadamard_by_measurement": "all 3 inputs |<obs_B>|>=0.55 correct sign, >=5 sigma",
+  "G2_bond_necessary": "no-bond |<obs_B>| <= 0.30",
+  "G3_frame_necessary": "byproduct-ignored |<Zbar_B>| <= 0.30 (plus input)",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "distributed measurement-based computation across a shielded cut; Xbar-measure applies H (221 cluster bond); X/Z Clifford MBQC"
+ }
+}
