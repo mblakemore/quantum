@@ -1,0 +1,26 @@
+{
+ "job_id": "d9f3d4kjeosc73fjeb1g",
+ "live_xbar": {
+  "none": 0.48675,
+  "0": 0.51125,
+  "1": 0.63725,
+  "2": 0.557
+ },
+ "destructive_xbar": {
+  "none": 0.0065,
+  "0": 0.00675,
+  "1": -0.0025,
+  "2": 0.00125
+ },
+ "syndrome_match": {
+  "none": 0.937125,
+  "0": 0.936125,
+  "1": 0.92075,
+  "2": 0.931375
+ },
+ "mean_advantage": 0.5666666666666668,
+ "mean_syndrome_match": 0.9294166666666667,
+ "g1": true,
+ "g2": true,
+ "verdict_ok": true
+}

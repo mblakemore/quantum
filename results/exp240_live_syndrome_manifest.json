@@ -1,0 +1,47 @@
+{
+ "exp": 240,
+ "slug": "live_syndrome",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9f3d4kjeosc73fjeb1g",
+ "order": [
+  [
+   "live",
+   "none"
+  ],
+  [
+   "live",
+   "0"
+  ],
+  [
+   "live",
+   "1"
+  ],
+  [
+   "live",
+   "2"
+  ],
+  [
+   "destr",
+   "none"
+  ],
+  [
+   "destr",
+   "0"
+  ],
+  [
+   "destr",
+   "1"
+  ],
+  [
+   "destr",
+   "2"
+  ]
+ ],
+ "prereg": {
+  "G1_live_preserves": "<X-bar> live - destructive >= 0.50 over error cases",
+  "G2_syndrome_learns": "mid-circuit (a1,a2) matches injected error >= 0.75",
+  "registered_verdict": "G1 and G2",
+  "scope": "3-qubit bit-flip code, single live round, first non-destructive syndrome extraction + feed-forward; buildable primitive for repeated-round QEC"
+ }
+}
