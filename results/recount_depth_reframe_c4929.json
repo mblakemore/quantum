@@ -20,5 +20,14 @@
   "distributed_9_nonlocal_cnots_bell_mediated": 152,
   "finding": "single-chip distribution makes it WORSE (152 > 82): the 9 mediating Bell pairs must each be routed across the same A-B gap -> no free lunch on one chip. My Path-2 ~49 projection was WRONG (2nd honest correction).",
   "true_verdict": "error-corrected magic on two co-located distance-3 blocks is genuinely single-chip ROUTING-limited (82); NEITHER frame-tracking (Path 1) NOR single-chip distribution (Path 2) reduces it. The genuine depth-reducing levers are OFF this chip: (a) a MULTI-chip network with real pre-shared entanglement across links (campaign has two-chip F82); (b) a hardware-native code (surface-code patches, geometric transversal CNOT); or (c) STOP trusting the gate-count heuristic -- the 54 wall was 242 fragile XX leg; the MAGIC witness (X-bar) is byproduct-robust + postselected (243 ran clean at 19), so fly the 82-gate version and TEST whether the robust witness survives, rather than declare it blocked by a count."
+ },
+ "topology_study_c4932": {
+  "error_corrected_magic_skeleton_2q_by_topology": {
+   "heavy_hex_ibm_fez": 82,
+   "grid_2d_surface_native": 41,
+   "grid_cz_basis": 43,
+   "all_to_all_pure_logic": 25
+  },
+  "finding": "the routing wall is a HEAVY-HEX TOPOLOGY artifact, quantified: pure logic = 25 gates; heavy-hex routing -> 82 (over 54 wall); surface-native 2D grid -> 41 (UNDER 54 wall = flyable). Error-corrected magic is not fundamentally depth-blocked -- it is blocked by ibm_fez connectivity. A hardware-native (surface-code / grid) topology dissolves it. The off-chip lever is real and numbered."
  }
 }
