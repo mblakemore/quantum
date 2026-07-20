@@ -4,7 +4,8 @@
 Pre-registration: `braket-exp210-rigetti-cross-platform-causal-preregistration.md` (frozen, committed ab88b32).
 Device: Rigetti Cepheus-1-108Q (`arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q`).
 Task ARNs: `results/braket_causal_rigetti_manifest.json` (2 group handles: witness ARN + 64-task capacity batch).
-Cost: $68.00 full axis + $2.05 canary = **$70.05** (under the $100 us-west-1 ceiling).
+Cost: **$49.35 total AWS billed** (SV1 validation + $2 canary + full axis) — under the estimate (~$70,
+my per-task model over-counted Braket's batch task-fee) and under the $100 us-west-1 ceiling.
 
 ## Result — the switch-bench causal axis certifies on non-IBM silicon, against the IDENTICAL frozen bounds
 
@@ -26,7 +27,7 @@ against the identical bounds. Cross-*vendor*, same-*modality* portability establ
 > 0.50-class (Heron) ≫ 0.27 (Rigetti). The court travels across the vendor boundary, but Rigetti is a
 > markedly *weaker* causal chip — it still certifies, at ~50σ, but the witness runs at ~59% of Heron's value.
 
-## Honest accounting — a magnitude-prediction miss (binary hit)
+## Calibration — the binary PASS hit, the W magnitude missed
 Pre-filed: **PASS-CAUSAL ~0.80 (HIT)**, W ~1.5–1.9 (**MISSED** — actual 1.11, below the predicted band),
 capacity below Heron (hit direction). The named failure mode (witness decoheres to FAIL/NO-TEST) did **not**
 occur — it passed cleanly.
