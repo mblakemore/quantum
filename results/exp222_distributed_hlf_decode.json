@@ -1,0 +1,16 @@
+{
+ "job_id": "d9envt1htsac739efns0",
+ "bare_pvalid": 0.9045,
+ "logical_pvalid": 0.8550271515550436,
+ "frameoff": 0.24189567220668093,
+ "valid_size": 4,
+ "acceptance": 0.759625,
+ "coverage": 0.207832812242883,
+ "sigma_logical": 255.23082315776853,
+ "w1": true,
+ "w2": true,
+ "w3": true,
+ "w4": true,
+ "g_frameoff": true,
+ "verdict_ok": true
+}
