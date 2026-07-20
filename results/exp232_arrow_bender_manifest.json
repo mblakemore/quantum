@@ -1,0 +1,20 @@
+{
+ "exp": 232,
+ "slug": "arrow_bender",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9eqgf9htsac739eimg0",
+ "order": [
+  "held",
+  "revoke",
+  "release",
+  "release_revoke"
+ ],
+ "prereg": {
+  "G1_revocable": "<X_S>(revoke) >= 0.80",
+  "G2_release_locks_it": "<X_S>(release+revoke) <= 0.30",
+  "G3_the_window": "<X_S>(revoke) - <X_S>(release+revoke) >= 0.5",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "delayed-choice arrow-bender: hold a recorded event reversibly, then revoke (un-happen) or release (permanent); irreversibility = record escaping to E"
+ }
+}
