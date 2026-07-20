@@ -1,0 +1,71 @@
+{
+ "exp": 231,
+ "slug": "ft_crossover",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9eqha1htsac739einf0",
+ "depths": [
+  1,
+  2,
+  4,
+  6,
+  8,
+  12
+ ],
+ "order": [
+  [
+   "log",
+   1
+  ],
+  [
+   "log",
+   2
+  ],
+  [
+   "log",
+   4
+  ],
+  [
+   "log",
+   6
+  ],
+  [
+   "log",
+   8
+  ],
+  [
+   "log",
+   12
+  ],
+  [
+   "bare",
+   1
+  ],
+  [
+   "bare",
+   2
+  ],
+  [
+   "bare",
+   4
+  ],
+  [
+   "bare",
+   6
+  ],
+  [
+   "bare",
+   8
+  ],
+  [
+   "bare",
+   12
+  ]
+ ],
+ "prereg": {
+  "G1_trend": "Delta(D)=F_log-F_bare non-decreasing in D within error (FT trend)",
+  "G2_crossover": "Delta(D*)>0 at some D* at >=3 sigma -> FOUND; else NOT-REACHED (report trend)",
+  "registered_verdict": "G1 (trend); G2 crossover reported FOUND or NOT-REACHED",
+  "scope": "[[4,2,2]] mirror-circuit fidelity vs depth; distance-2 detection vs encoding overhead; honest crossover measurement"
+ }
+}
