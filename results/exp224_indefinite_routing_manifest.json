@@ -1,0 +1,41 @@
+{
+ "exp": 224,
+ "slug": "indefinite_routing",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9eoau4jeosc73fj11kg",
+ "order": [
+  [
+   "coherent",
+   "commute"
+  ],
+  [
+   "coherent",
+   "anti"
+  ],
+  [
+   "definite",
+   "commute"
+  ],
+  [
+   "definite",
+   "anti"
+  ],
+  [
+   "decohered",
+   "commute"
+  ],
+  [
+   "decohered",
+   "anti"
+  ]
+ ],
+ "prereg": {
+  "G1_routing_coherence": "DISC_coherent >= 1.0 at >=5 sigma",
+  "G2_definite_null": "|DISC_definite| <= 0.20",
+  "G3_mixture_null": "|DISC_decohered| <= 0.20 (coherent beats classical mixture of routes)",
+  "G4_separation": "reported: DISC_coherent - max(nulls)",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "indefinite routing (switch/DISC reframed to topology) + classical-mixture-of-paths null (F89 resource separation); bare physical target"
+ }
+}
