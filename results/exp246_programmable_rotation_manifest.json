@@ -1,0 +1,65 @@
+{
+ "exp": 246,
+ "slug": "programmable_rotation",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9f7p7phtsac739f27hg",
+ "order": [
+  [
+   "T",
+   "I",
+   "X"
+  ],
+  [
+   "T",
+   "I",
+   "Y"
+  ],
+  [
+   "T",
+   "S",
+   "X"
+  ],
+  [
+   "T",
+   "S",
+   "Y"
+  ],
+  [
+   "T",
+   "Z",
+   "X"
+  ],
+  [
+   "T",
+   "Z",
+   "Y"
+  ],
+  [
+   "T",
+   "SZ",
+   "X"
+  ],
+  [
+   "T",
+   "SZ",
+   "Y"
+  ],
+  [
+   "S",
+   "I",
+   "X"
+  ],
+  [
+   "S",
+   "I",
+   "Y"
+  ]
+ ],
+ "prereg": {
+  "G1_programmable_rotation": "4 T-wrappers land at 4 diagonal equator points (|X|,|Y| in [0.55,0.85], signs ++,-+,--,+-)",
+  "G2_T_necessary": "Clifford S ancilla collapses onto a stabilizer axis (a 0), not the diagonal",
+  "registered_verdict": "G1 and G2 \u2014 a programmable non-Clifford rotation, error-detected",
+  "scope": "single injected T + cheap logical-Clifford program; Y-bar via S-bar-dagger+X-bar; m=0 postselect"
+ }
+}
