@@ -1,0 +1,57 @@
+{
+ "exp": 225,
+ "slug": "shielded_routing",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9eogq2neu4c739omgag",
+ "order": [
+  [
+   "L",
+   "coherent",
+   "commute"
+  ],
+  [
+   "L",
+   "coherent",
+   "anti"
+  ],
+  [
+   "L",
+   "definite",
+   "commute"
+  ],
+  [
+   "L",
+   "definite",
+   "anti"
+  ],
+  [
+   "L",
+   "decohered",
+   "commute"
+  ],
+  [
+   "L",
+   "decohered",
+   "anti"
+  ],
+  [
+   "B",
+   "coherent",
+   "commute"
+  ],
+  [
+   "B",
+   "coherent",
+   "anti"
+  ]
+ ],
+ "prereg": {
+  "G1_shield_preserves_routing": "DISC_shielded_coherent >= 1.0 at >=5 sigma",
+  "G2_definite_null": "|DISC_shielded_definite| <= 0.20",
+  "G3_mixture_null": "|DISC_shielded_decohered| <= 0.20 (coherent beats mixture, shielded)",
+  "G4_reference": "reported: DISC_shielded vs DISC_bare",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "fault-tolerant indefinite routing: exp224 routing + mixture null behind the exp208 [[4,2,2]] shield on the message; first error-corrected topology"
+ }
+}
