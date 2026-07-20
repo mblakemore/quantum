@@ -203,20 +203,24 @@ def decode():
     var = sum((1 - terms[c] ** 2) / max(1, ns[c]) for c in CONTEXTS)
     se = float(np.sqrt(var))
     chi_bare = sum(SIGN[c] * _bare_ctx(raw[("B", c)], c) for c in CONTEXTS)
+    tautological = se < 1e-9                                   # zero variance = algebraic identity
     print(f"Exp228 CONTEXTUALITY BEHIND THE SHIELD decode | job {man['job_id']}")
     for c in CONTEXTS:
         print(f"  {c}: <product>={terms[c]:+.3f} (sign {SIGN[c]:+d})  accept={ns[c]/sum(raw[('L',c)].values()):.3f}")
     print(f"\n  chi_logical = {chi:.3f} ± {se:.3f}   chi_bare = {chi_bare:.3f}   (quantum 6, bound 4)")
-    g1 = chi > 4.0 and (chi - 4.0) / se >= 5
-    g2 = chi >= 5.0
-    print(f"G1 CONTEXTUALITY (shielded): chi_logical={chi:.3f} > 4 at {(chi-4.0)/se:.0f} sigma {'OK' if g1 else 'MISS'}")
+    if tautological:
+        print("  *** WITNESS TAUTOLOGICAL (zero variance) — see exp228-STATUS-not-certified.md. "
+              "Direct joint readout pins the context products at +/-1 by bit-identity; NOT a physical "
+              "contextuality test. The real test needs the pseudo-telepathy game or ancilla/sequential "
+              "measurement. NOT CERTIFIED.")
+    g1 = (not tautological) and chi > 4.0 and (chi - 4.0) / se >= 5
+    g2 = (not tautological) and chi >= 5.0
+    sig = (chi - 4.0) / se if se > 1e-9 else float('inf')
+    print(f"G1 CONTEXTUALITY (shielded): chi_logical={chi:.3f} > 4 at {sig:.0f} sigma {'OK' if g1 else 'MISS'}")
     print(f"G2 QUANTUM VALUE: chi_logical={chi:.3f} >= 5.0 {'OK' if g2 else 'MISS'}")
-    print(f"G3 REFERENCE: chi_bare={chi_bare:.3f} (shield {'preserves' if chi>=chi_bare-0.3 else 'below'} bare)")
+    print(f"G3 REFERENCE: chi_bare={chi_bare:.3f}")
     ok = g1 and g2
-    win = ("CONTEXTUALITY BEHIND THE SHIELD — the Peres-Mermin contextual contradiction survives error "
-           "detection: chi_logical beats the non-contextual bound of 4 behind the [[4,2,2]] shield, the "
-           "Y-bar wall dodged by 2-qubit Y products. Contextuality as an error-detected resource, on silicon")
-    print(f"VERDICT: {win if ok else 'NOT HELD (accounting above)'}")
+    print(f"VERDICT: {'NOT CERTIFIED — WITNESS TAUTOLOGICAL (see STATUS doc)' if tautological else ('CONTEXTUALITY BEHIND THE SHIELD certified' if ok else 'NOT HELD')}")
     json.dump({"job_id": man["job_id"], "chi_logical": chi, "chi_bare": chi_bare, "se": se,
                "contexts": terms, "g1": bool(g1), "g2": bool(g2), "verdict_ok": bool(ok)},
               open(os.path.join(HERE, "..", "results", "exp228_magic_square_decode.json"), "w"), indent=1)

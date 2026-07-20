@@ -1,0 +1,17 @@
+{
+ "job_id": "d9epkf4jeosc73fj2hog",
+ "chi_logical": 6.0,
+ "chi_bare": 6.0,
+ "se": 0.0,
+ "contexts": {
+  "R1": 1.0,
+  "R2": 1.0,
+  "R3": -1.0,
+  "C1": 1.0,
+  "C2": 1.0,
+  "C3": 1.0
+ },
+ "g1": false,
+ "g2": false,
+ "verdict_ok": false
+}
