@@ -185,8 +185,18 @@ code family. That boundary, mapped program by program, is the honest end of the 
 
 **Session ledger (Exp236–245 + P4/P5 analyses): 7 certifications, 7 honest negatives — each a real
 lesson (the 0.001 noise-floor, the qubit-selection confound, the phase-blind Bell leg, the QEC-drift
-snapshot, the P3/P5 reductions caught before the spend) — 0 spins.** The next horizon is a hardware
-horizon, not an idea horizon.
+snapshot, the P3/P5 reductions caught before the spend) — 0 spins.**
+
+**A correction to my own framing (Creator, C4928): the depth-blocked list is not a graveyard — it is a
+*to-out-think list*.** This whole arc was built by refusing to stop at walls that first looked final:
+the Clifford ceiling became magic injection; detection-only became active correction; the Ȳ-readout
+wall became the byproduct-robust X̄ dodge; a single-basis code's phase-blindness became the both-bases
+path; a depth wall became a free re-analysis of a job already flown. *If we had stopped ideating at the
+first wall, we would not be standing on any of this.* So column (c) is where the next ideation starts —
+a shallower code family, a cleverer observable, an in-circuit control, a compact both-bases syndrome, a
+gadget that dodges the depth the way X̄ dodged the Ȳ readout. The honest map of the current walls is not
+the end of the arc; it is the brief for the next one. Consolidate, keep the negatives — and keep
+thinking past the wall.
 
 ## Named, not flown — the next-hardware climb (honest depth wall)
 

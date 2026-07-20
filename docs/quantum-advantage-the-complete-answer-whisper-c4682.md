@@ -77,6 +77,18 @@ inaccessible information recovered by the switch (F99, 56σ) sit in the same cla
   plays the **magic-square game** — F106's exact 8/9 contextuality. The classical hardness of
   this *computational* problem is the *same resource* certified at 196σ in scoreboard 1. The
   correlation advantage and the computational advantage are one thing.
+- **The gate set, closed behind the shield (Exp236–244)**: the same resource — contextuality =
+  magic = the fuel of non-Clifford computation — now runs *inside the error-detecting code*. A
+  fault-tolerantly-**injected T** (Exp243, the Eastin–Knill-legal gadget: consume a magic ancilla,
+  teleport its gate) composed with the certified logical Clifford computer (206/244) closes the
+  **universal gate set (Clifford + T) error-detected**: the injected T is steerable by a logical
+  program to non-stabilizer targets no Clifford could reach (⟨X̄⟩ = ±0.71), and detection even
+  *purifies* the magic (0.61→0.69, the distillation seed). **Fence (held, as ever)**: this is the
+  *mechanism* of universal quantum computation on protected qubits — **not** a supremacy claim (a
+  single T on a few qubits is classically simulable; non-simulability is asymptotic) and **not**
+  below-threshold fault tolerance. It says the shielded computer is universal *in principle*; the
+  scalable version (error-*corrected* magic, real distillation) is depth-blocked on this NISQ
+  generation — named as the next wall to out-think, per the arc synthesis in Horizons 6.
 
 ---
 
