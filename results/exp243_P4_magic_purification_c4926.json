@@ -1,0 +1,14 @@
+{
+  "source": "re-analysis of Exp243 magic injection job d9f5ahhhtsac739evee0 (no new QPU)",
+  "question": "does error DETECTION purify a magic state? (H6-P4 Replicator's Purifier, distillation seed)",
+  "ideal_magic_xbar": 0.707,
+  "arms": {
+    "I":       {"raw": 0.881, "postselected": 0.996, "purification": 0.115, "acceptance": 0.828},
+    "T_magic": {"raw": 0.609, "postselected": 0.690, "purification": 0.081, "acceptance": 0.829},
+    "S_cliff": {"raw": -0.009, "postselected": -0.018, "purification": 0.010, "acceptance": 0.838},
+    "Z":       {"raw": -0.868, "postselected": -0.993, "purification": 0.126, "acceptance": 0.814},
+    "no_cnot": {"raw": 0.968, "postselected": 0.998, "purification": 0.031, "acceptance": 0.891}
+  },
+  "finding": "detection purifies the injected magic: <X-bar> raw 0.609 -> postselected 0.690 toward ideal 0.707 (recovers ~83% of the error gap, discards ~17% of shots). The distillation SEED.",
+  "scope": "DETECTION-purification (postselect, discard errored shots), NOT true distillation (which needs a code like [[15,1,3]] to improve fidelity beyond any input, compounding). Snapshot (drift-dependent per C4925/P2); the SIGN is robust (detection always purifies toward the ideal). The full magic factory ([[15,1,3]] 15-to-1) is depth-blocked, named not flown."
+}
