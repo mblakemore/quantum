@@ -18,6 +18,7 @@
   .tbtn:hover { border-color: var(--heal); color: var(--heal); }
 
   :root { --heal:#34d399; --err:#fb7185; }
+  :root[data-theme="light"] { --heal:#059669; --err:#e11d48; }  /* darker for contrast on white */
 
   .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
   .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
@@ -286,8 +287,8 @@
       var nData = state.code==="bitflip" ? 3 : 9;
       var culprit = (state.err && state.err!=="none" && state.code==="bitflip") ? BITFLIP["X"+ (state.errQ||0)] : null;
       var s="";
-      // data qubits row
-      var y=44, r=15, gap=(320)/(nData), x0=30;
+      // data qubits row (smaller radius for the 9-qubit Shor register so they don't crowd)
+      var y=44, r=(nData===9?11:15), gap=(320)/(nData), x0=30;
       for(var i=0;i<nData;i++){
         var cx=x0 + gap*i + gap/2;
         var broke = state.code==="bitflip" && state.err && state.err!=="none" && state.errQ===i;
