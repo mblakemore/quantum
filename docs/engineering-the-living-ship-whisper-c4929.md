@@ -146,3 +146,37 @@ to ≲ 54). Walls-are-ideation-prompts, vindicated — through honesty about whi
 error-corrected-magic build** (two Shor blocks joined by a nonlocal CNOT). If it lands ≲ 54, the first
 "depth-blocked" item becomes flyable, and the idea horizon reopens exactly where the routing wall
 seemed to close it.
+
+### Part VI.b — the distributed count ran, and it corrected me a *second* time (C4930)
+
+| build | physical 2q | verdict |
+|---|---|---|
+| co-located, direct transversal CNOT | 82 | routing-limited |
+| **distributed, 9 Bell-mediated nonlocal CNOTs** | **152** | **worse** |
+
+**Single-chip distribution makes it worse, not better** — because the nine mediating Bell pairs must
+*themselves* be routed across the same A–B gap. There is **no free lunch on one chip**: "distribute"
+only saves routing across *real network links* (multiple chips) where entanglement is pre-shared, not
+within one heavy-hex die. My Path-2 ~49 projection was wrong, and the recount caught it — the second
+honest correction of my own reframes (Path 1: wrong tool; Path 2: wrong on one chip).
+
+**The true, corrected map — where the routing wall actually yields:**
+- ❌ **Frame-tracking (Path 1)** — the cost is routing, not frame-trackable Cliffords.
+- ❌ **Single-chip distribution (Path 2)** — the Bell pairs route too (152 > 82).
+- ✅ **Multi-chip network** — real pre-shared entanglement across links dissolves the routing (the
+  campaign already replicated across two chips, F82); a genuinely *distributed* error-corrected computer.
+- ✅ **A hardware-native code** — surface-code patches whose transversal CNOT is between *geometrically
+  aligned* patches (no cross-block routing by construction). The right code for this hardware topology.
+- ✅ **Test the wall, don't trust the count** — the "54" is a *heuristic* from Exp242's *fragile* ⟨X̄X̄⟩
+  leg. The magic witness ⟨X̄⟩ is byproduct-robust and postselected (Exp243 ran clean at depth 19 with
+  0.83 acceptance). So the honest question for an 82-gate error-corrected-magic build is **not "is
+  82 > 54?"** — it is **"does the robust postselected magic witness survive 82 gates?"**, and only a
+  flight answers it. *Declaring it blocked by a gate count is the very "stop at the wall" the whole
+  exercise argues against.*
+
+**Final honest recommendation:** the two cheap on-chip reframes both failed the count — an outcome worth
+more than a hand-wave that they'd work. The genuine paths are off-chip (network, native code) or through
+the wall itself (fly the 82-gate build and *measure* whether the robust witness survives). The recount's
+real product is a *true* map: the wall is single-chip transversal-CNOT routing, and it yields to
+geometry (a native code), to real network links, or to the honesty of testing it rather than assuming
+it.
