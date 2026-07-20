@@ -111,3 +111,38 @@ brute-force depth count can't see.
 **One-line recommendation:** do **the recount (Path 1) first** — it is free, it directly tests the
 C4928 thesis that a wall can be an accounting artifact, and if even one depth-blocked flight drops under
 the line, the "next horizon" stops being a hardware horizon and becomes an idea horizon again.
+
+---
+
+## Part VI — RECOUNT RESULTS (C4929, transpile-and-count on ibm_fez, no QPU): the wall is ROUTING, not accounting
+
+The recount ran, and it corrected me in one place and vindicated the thesis in another. Hard transpiled
+2q counts (wall = 54, where Exp242 failed; flyable ~19–30):
+
+| circuit | physical 2q | verdict |
+|---|---|---|
+| [[4,2,2]] logical Bell pair via **CZ̄ = S⊗4** | **2** | structural-cheap reframe is **real** (entangling gate = single-qubit S's) — but detection-regime, already flyable |
+| single Shor [[9,1,3]] block, encode+read | 15 | one distance-3 block is cheap |
+| **2 Shor encodes ALONE** (no cross-block gate) | **37** | the *logic* of error-corrected magic is nearly flyable |
+| **error-corrected magic** (2 Shor blocks + transversal CNOT) | **82** | over the wall |
+| ↳ the transversal CNOT + its heavy-hex routing | **45 of the 82** | **the entire overage is ROUTING** |
+
+**Honest correction to Path 1 (my own over-claim):** *"the wall may be an accounting artifact via
+frame-tracking"* is **false** for the distance-3 correction items. Error-corrected magic is 82 > 54, and
+the 45-gate overage is **heavy-hex routing** (SWAPs to drag a co-located transversal CNOT across 18
+qubits), *not* frame-trackable Clifford gates. Frame-tracking was the wrong tool for this wall.
+
+**But the thesis holds — via a different lever.** The 82 splits as **37 (the encodes = the logic) + 45
+(routing a *co-located* entangling gate)**. The routing tax is not irreducible: **divide & conquer
+(Path 2)** replaces the transversal CNOT with a distributed **nonlocal CNOT** (one Bell pair + feed-
+forward, the certified relay primitive, ~12 gates) — projecting **~37 + 12 ≈ 49, under the 54 wall.**
+So error-corrected magic is **not** depth-blocked by its logic or by an accounting artifact — it is
+blocked by *routing a co-located gate*, and the standard **divide-and-conquer** pattern projects it
+under the line. **The wall is a routing wall.** That is the recount's real finding: not Path 1, but the
+*right* engineering lever identified with a concrete falsifiable target (a distributed build transpiling
+to ≲ 54). Walls-are-ideation-prompts, vindicated — through honesty about which lever actually pulls.
+
+**Revised recommendation:** the next concrete move is **Path 2, a transpile-count of the *distributed*
+error-corrected-magic build** (two Shor blocks joined by a nonlocal CNOT). If it lands ≲ 54, the first
+"depth-blocked" item becomes flyable, and the idea horizon reopens exactly where the routing wall
+seemed to close it.
