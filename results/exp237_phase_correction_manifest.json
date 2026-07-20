@@ -1,0 +1,86 @@
+{
+ "exp": 237,
+ "slug": "phase_correction",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9erlshhtsac739ek9a0",
+ "order": [
+  [
+   "log",
+   "0",
+   "none"
+  ],
+  [
+   "log",
+   "0",
+   "0"
+  ],
+  [
+   "log",
+   "0",
+   "1"
+  ],
+  [
+   "log",
+   "0",
+   "2"
+  ],
+  [
+   "log",
+   "1",
+   "none"
+  ],
+  [
+   "log",
+   "1",
+   "0"
+  ],
+  [
+   "log",
+   "1",
+   "1"
+  ],
+  [
+   "log",
+   "1",
+   "2"
+  ],
+  [
+   "bare",
+   "0",
+   "0"
+  ],
+  [
+   "bare",
+   "0",
+   "none"
+  ],
+  [
+   "coh",
+   "+",
+   "none"
+  ],
+  [
+   "coh",
+   "+",
+   "0"
+  ],
+  [
+   "coh",
+   "+",
+   "1"
+  ],
+  [
+   "coh",
+   "+",
+   "2"
+  ]
+ ],
+ "prereg": {
+  "G1_corrects_all": "corrected fidelity >= 0.90 for all 8 (input,Z-error) cases",
+  "G2_beats_bare": "corrected - bare >= 0.5 on errored cases",
+  "G3_stability": "reported: <Z0Z1Z2> (logical X-parity) undisturbed by correction",
+  "registered_verdict": "G1 and G2",
+  "scope": "3-qubit phase-flip code, phase (Z) channel; dual of 236; active correction (recover not discard); full quantum code = summit rung"
+ }
+}
