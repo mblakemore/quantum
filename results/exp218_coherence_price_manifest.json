@@ -1,0 +1,77 @@
+{
+ "exp": 218,
+ "slug": "coherent_federation",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9en584jeosc73fivo80",
+ "order": [
+  [
+   "SW",
+   "ENT",
+   "Z"
+  ],
+  [
+   "SW",
+   "ENT",
+   "X"
+  ],
+  [
+   "SW",
+   "00",
+   "Z"
+  ],
+  [
+   "SW",
+   "01",
+   "Z"
+  ],
+  [
+   "SW",
+   "10",
+   "Z"
+  ],
+  [
+   "SW",
+   "11",
+   "Z"
+  ],
+  [
+   "FF",
+   "ENT",
+   "Z"
+  ],
+  [
+   "FF",
+   "ENT",
+   "X"
+  ],
+  [
+   "FF",
+   "00",
+   "Z"
+  ],
+  [
+   "FF",
+   "01",
+   "Z"
+  ],
+  [
+   "FF",
+   "10",
+   "Z"
+  ],
+  [
+   "FF",
+   "11",
+   "Z"
+  ]
+ ],
+ "prereg": {
+  "G1_coherence": "SW <ZZ>>=0.55 AND <XX>>=0.55, each >=5 sigma over 0 (Bell pair = quantum)",
+  "G2_truth": "SW truth table mean >=0.70, each >=5 sigma over 0.25",
+  "G3_frame_off": "SW frame-ignored: |<ZZ>|<=0.25 AND |<XX>|<=0.25 (weld=the bits)",
+  "G4_weld_compare": "descriptive: FF <ZZ>,<XX> vs SW",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "encoded data + physical relay; per-variant partial shield; coherence witness (both Bell correlators) proving 217's distributed CNOT quantum"
+ }
+}
