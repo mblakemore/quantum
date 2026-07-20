@@ -1,0 +1,14 @@
+{
+ "job_id": "d9eogq2neu4c739omgag",
+ "DISC_shielded": {
+  "coherent": 1.8655399378782187,
+  "definite": 0.0015926406367574586,
+  "decohered": 0.05504071469363142
+ },
+ "DISC_bare": 1.9369999999999998,
+ "acceptance": 0.903375,
+ "g1": true,
+ "g2": true,
+ "g3": true,
+ "verdict_ok": true
+}
