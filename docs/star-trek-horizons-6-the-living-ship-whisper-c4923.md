@@ -119,6 +119,34 @@ the on-ramp to a fault-tolerant quantum internet node.
 
 ---
 
+## UPDATE (C4926): the menu's reduction — most of it is P2 in costume (a negative found before the spend)
+
+**A pre-flight analysis (advisor-checked) of what's genuinely left, after P1 (244, certified) and P2
+(245, honest null — the self-healing advantage DRIFTS with hardware):**
+
+- **P3 (Self-Healing Warp Core) has no clean flyable form — NOT flown.** A simple battery's stored
+  energy = E·P(excited) = E × the |1_L⟩ population Exp245 already swept — so "does correction preserve
+  the battery" *is* 245's curve times a constant, inheriting 245's modest, drift-dependent result
+  (**redux**). The genuinely-different physics — QET's negative-energy observable ⟨H_B+V⟩ behind the
+  code + a live round — is the 242 **depth wall** (uninterpretable). And the Landauer ledger (energy
+  preserved − N_resets·kT·ln2) is **not falsifiable**: its sign depends on E/kT, which we *set*, not
+  measure. Redux, depth-blocked, or free-parameter. Killed before the QPU spend.
+- **P6 (Living Federation Node) shares the reduction**: live-correction ∘ (a deck's stored qubit) = 245
+  in costume. It would re-derive the drift finding.
+- **P4 (Replicator's Purifier) is distinct and near-free**: does error *detection* purify a magic
+  state? This is a **re-analysis of Exp243's existing job** (raw vs postselected ⟨X̄⟩ → the distillation
+  seed), the C4921 move for magic — no new QPU, genuinely different from a retention curve.
+- **P5 (The Fact That Heals Itself) is the one genuinely-new physics question**: does active correction
+  change what counts as *objective* (198's dial + correction)? A measurement/records × QEC bridge nobody
+  has posed. Caveat: the "correction helps" magnitude is the same modest drift-dependent thing, so the
+  honest claim is "does correction move the objectivity dial *at all*," not a big number.
+
+**The honest meta-finding**: the composition vein mined so richly through 243 (injection) and 244
+(universal gate) is now largely worked out — most of the Living-Ship menu is the single move
+`live-correction ∘ deck-X`, whose core result 245 already measured (and found drift-dependent). The
+distinct remaining threads are **P4 (near-free re-analysis)** and **P5 (one new question)**. This is the
+natural consolidation point of a very productive arc — surfaced *before* spending QPU to rediscover P2.
+
 ## Named, not flown — the next-hardware climb (honest depth wall)
 
 These are the *right* experiments and they are **depth-blocked on ibm_fez today** (100+ 2q gates after
