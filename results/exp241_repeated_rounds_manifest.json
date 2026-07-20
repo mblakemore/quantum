@@ -1,0 +1,83 @@
+{
+ "exp": 241,
+ "slug": "repeated_rounds",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9f3ov4jeosc73fjen3g",
+ "order": [
+  [
+   "corr",
+   0
+  ],
+  [
+   "sham",
+   0
+  ],
+  [
+   "bare",
+   0
+  ],
+  [
+   "corr",
+   1
+  ],
+  [
+   "sham",
+   1
+  ],
+  [
+   "bare",
+   1
+  ],
+  [
+   "corr",
+   2
+  ],
+  [
+   "sham",
+   2
+  ],
+  [
+   "bare",
+   2
+  ],
+  [
+   "corr",
+   3
+  ],
+  [
+   "sham",
+   3
+  ],
+  [
+   "bare",
+   3
+  ],
+  [
+   "corr",
+   4
+  ],
+  [
+   "sham",
+   4
+  ],
+  [
+   "bare",
+   4
+  ]
+ ],
+ "rounds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "tau_us": 30,
+ "prereg": {
+  "G1_correction_pays": "exists R>=1 with F_corrected - F_sham >= 0.05",
+  "registered_verdict": "G1 \u2014 HELD=live loop nets benefit over rounds, NOT HELD=machinery swamps (honest)",
+  "reported": "F_corrected/F_sham vs R, best-R crossover, bare reference",
+  "scope": "3-qubit bit-flip code, T1 channel, repeated live rounds; sham arm isolates correction from machinery"
+ }
+}
