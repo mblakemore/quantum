@@ -1,0 +1,13 @@
+{
+ "job_id": "d9eoau4jeosc73fj11kg",
+ "DISC": {
+  "coherent": 1.9417499999999999,
+  "definite": 0.006750000000000034,
+  "decohered": 0.0605
+ },
+ "separation": 1.8812499999999999,
+ "g1": true,
+ "g2": true,
+ "g3": true,
+ "verdict_ok": true
+}
