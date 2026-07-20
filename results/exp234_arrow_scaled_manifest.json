@@ -1,0 +1,29 @@
+{
+ "exp": 234,
+ "slug": "arrow_bender_scaled",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9eqnd4inv1c73aqi9dg",
+ "Ns": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "phi": 1.5707963267948966,
+ "ideal": {
+  "0": 1.0,
+  "1": 0.7071067811865476,
+  "2": 0.5000000000000001,
+  "3": 0.35355339059327384,
+  "4": 0.25000000000000006
+ },
+ "prereg": {
+  "G1_geometric_decay": "<X_S>(N) matches kappa_copy^N <=0.10 all N, strictly decreasing",
+  "G2_threshold": "<X_S> < 0.5 at some N* (observers that make the past permanent)",
+  "G3_darwinism_link": "reported: decay rate kappa_copy = cos(phi/2)",
+  "registered_verdict": "G1 and G2",
+  "scope": "arrow-bender scaled by observer count; revocability = kappa_copy^N; Darwinism permanence threshold"
+ }
+}

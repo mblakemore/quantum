@@ -1,0 +1,62 @@
+{
+ "exp": 233,
+ "slug": "ft_hard_regime",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9eqnbcinv1c73aqi9c0",
+ "depths": [
+  1,
+  2,
+  4,
+  6,
+  8
+ ],
+ "order": [
+  [
+   "log",
+   1
+  ],
+  [
+   "log",
+   2
+  ],
+  [
+   "log",
+   4
+  ],
+  [
+   "log",
+   6
+  ],
+  [
+   "log",
+   8
+  ],
+  [
+   "bare",
+   1
+  ],
+  [
+   "bare",
+   2
+  ],
+  [
+   "bare",
+   4
+  ],
+  [
+   "bare",
+   6
+  ],
+  [
+   "bare",
+   8
+  ]
+ ],
+ "prereg": {
+  "G1_trend": "Delta(D) non-decreasing in D",
+  "G2_hard_crossover": "Delta(D*)>0 at >=3 sigma -> FT beats bare with EXPENSIVE gates; else NOT-REACHED (honest bound)",
+  "registered_verdict": "G1; G2 reported FOUND or NOT-REACHED",
+  "scope": "hard-regime FT crossover; expensive logical gate (SWAP CNOT, 3 physical 2q/layer)"
+ }
+}
