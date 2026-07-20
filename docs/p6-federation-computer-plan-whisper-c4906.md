@@ -52,6 +52,8 @@ that keeps it shallow and hardware-honest.
 
 > **STATUS (C4907): flight 2 CERTIFIED** — Exp218 THE COHERENT FEDERATION. Job `d9en584jeosc73fivo80`, ibm_fez. The distributed CNOT is genuinely QUANTUM: on |+bar>_A|0bar>_B it makes a logical Bell pair, <ZZ>=0.873 AND <XX>=0.890 (both >5 sigma), frame-off collapses to ~0, truth table 0.928. Physical-relay architecture sidesteps 217's shared-q0 obstruction. BONUS: the software weld beats live feed-forward on hardware (<XX> 0.890 vs 0.339). See `experiments/exp218-STATUS-certified.md`.
 
+> **STATUS (C4908): flight 3 CERTIFIED** — Exp219 THE NETWORK OF SHIELDS. Job `d9end0kjeosc73fj012g`, ibm_fez. The distributed gate SCALES: a logical GHZ across THREE shielded nodes (two distributed CNOTs from one control), <ZZ>_AB=0.905, <ZZ>_AC=0.879, <XXX>=0.831 (112 sigma), frame-off collapses. B,C share no gate. See `experiments/exp219-STATUS-certified.md`.
+
 ## 3. The first flight — Exp217: THE DISTRIBUTED LOGICAL CZ
 
 **Claim to test:** a logical CZ̄ between control d_A in shield A and target d_B in shield B,
