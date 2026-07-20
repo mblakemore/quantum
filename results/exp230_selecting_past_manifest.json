@@ -1,0 +1,24 @@
+{
+ "exp": 230,
+ "slug": "selecting_the_past",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9eq5chhtsac739eia1g",
+ "phis": [
+  0.0,
+  0.7853981633974483,
+  1.5707963267948966,
+  2.356194490192345,
+  3.141592653589793,
+  3.9269908169872414,
+  4.71238898038469,
+  5.497787143782138
+ ],
+ "prereg": {
+  "G1_eraser_restores_past": "|V(m=0)|>=0.7 AND |V(m=1)|>=0.7 (erased fringes)",
+  "G2_selection_flips_past": "V(m=0),V(m=1) opposite sign, |V0-V1|>=1.4",
+  "G3_whichpath_null": "|V_whichpath|<=0.25 AND |V_marginal|<=0.25",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "delayed-choice quantum eraser; selecting the marker outcome selects which past interference; no-signalling (marginal flat)"
+ }
+}
