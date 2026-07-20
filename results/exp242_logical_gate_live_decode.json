@@ -1,0 +1,24 @@
+{
+ "job_id": "d9f4me9htsac739eunb0",
+ "truth_corrected": [
+  0.975875,
+  0.56075,
+  0.364125,
+  0.5875
+ ],
+ "truth_sham": [
+  0.98575,
+  0.43625,
+  0.25075,
+  0.516875
+ ],
+ "truth_mean_corr": 0.6220625,
+ "truth_mean_sham": 0.5474062500000001,
+ "zz_corr": 0.5155,
+ "zz_sham": 0.48575,
+ "xx_corr": 0.00025,
+ "xx_sham": -0.0105,
+ "g1": true,
+ "g2": false,
+ "verdict_ok": false
+}

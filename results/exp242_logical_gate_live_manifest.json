@@ -1,0 +1,100 @@
+{
+ "exp": 242,
+ "slug": "logical_gate_live",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9f4me9htsac739eunb0",
+ "order": [
+  [
+   "tt",
+   "0",
+   "0",
+   "corr",
+   "Z"
+  ],
+  [
+   "tt",
+   "0",
+   "0",
+   "sham",
+   "Z"
+  ],
+  [
+   "tt",
+   "0",
+   "1",
+   "corr",
+   "Z"
+  ],
+  [
+   "tt",
+   "0",
+   "1",
+   "sham",
+   "Z"
+  ],
+  [
+   "tt",
+   "1",
+   "0",
+   "corr",
+   "Z"
+  ],
+  [
+   "tt",
+   "1",
+   "0",
+   "sham",
+   "Z"
+  ],
+  [
+   "tt",
+   "1",
+   "1",
+   "corr",
+   "Z"
+  ],
+  [
+   "tt",
+   "1",
+   "1",
+   "sham",
+   "Z"
+  ],
+  [
+   "bell",
+   "+",
+   "0",
+   "corr",
+   "Z"
+  ],
+  [
+   "bell",
+   "+",
+   "0",
+   "sham",
+   "Z"
+  ],
+  [
+   "bell",
+   "+",
+   "0",
+   "corr",
+   "X"
+  ],
+  [
+   "bell",
+   "+",
+   "0",
+   "sham",
+   "X"
+  ]
+ ],
+ "tau_us": 40,
+ "prereg": {
+  "G1_gate_corrected": "mean CNOT truth-table fidelity corrected - sham >= 0.05 (Z-bar, protected)",
+  "G2_entangles": "logical Bell <ZZ> >= 0.5 and <XX> >= 0.5 (entanglement demonstrated)",
+  "registered_verdict": "G1 and G2; only ZZ leg protected by the code (XX reported, not gated)",
+  "scope": "two 3-qubit bit-flip logical qubits, transversal logical CNOT, one live round each, sham control isolates correction; certify Z-bar, report entanglement half-protected"
+ }
+}
