@@ -14,7 +14,7 @@ Star Trek-like things we can invent or discover standing on all that we have bui
 > to fly: P3** (Guardian of Forever — arrow-of-time grand unification, needs the QET
 > equation-of-state) · **P4** (Birth of the Classical World — objectivity dial; *cleanest open
 > flight*) · **P7** (Contextuality fuel — the one un-composed advantage; needs the Ȳ-readout
-> crack) · **P8** (Indefinite network topology) · **P9** (Dilithium chamber — dynamical memory) ·
+> crack) · **P8** ✅ (Indefinite network topology — Exp224) · **P9** (Dilithium chamber — dynamical memory) ·
 > **P10** (The Holodeck — gravity-analog suite) · **P11** (The Zeno brace). See the [Priority
 > view](#priority-view--if-we-fly-in-order) for the full "what's left" table + next-fly rec (**P4**).
 
@@ -348,7 +348,7 @@ because both halves are certified and shallow.
 | 6 | **P6 Federation Computer** (distributed computation) | invention | 2 jobs | ✅ **FLOWN** — Exp217–222 (6 flights): the full distributed error-corrected quantum computer |
 | 7 | **P7 Contextuality fuel** (BGKT-2020) | wildcard | 1–2 jobs | ⬜ **OPEN** — highest design risk; the shielded magic square was pruned twice (mixed-basis Ȳ contexts, ~16q) — needs the Ȳ-readout / gadget-composition problem solved |
 | — | *— further horizons (boldly-go tier) —* | | | |
-| 8 | **P8 Indefinite network topology** | leap | 1–2 jobs | ⬜ **OPEN** — superposed relay routing; shallow + pure composition (ICO⊗network) |
+| 8 | **P8 Indefinite network topology** | leap | 1–2 jobs | ✅ **FLOWN** (Exp224, C4911) — indefinite routing certified: DISC_coherent=1.942 (515σ) beats definite (0.007) AND classical-mixture-of-routes (0.060) nulls; first superposed network route |
 | 9 | **P9 Dilithium chamber** (dynamical memory) | leap | 1–3 jobs | ⬜ **OPEN** — the unused exotic-phases wing (scars/DTC); staged lifetime flight first |
 | 10 | **P10 The Holodeck** (gravity-analog suite) | synthesis | 1–2 jobs | ⬜ **OPEN** — unify the H2 arc (twin paradox + HP recovery on one decoherence curve) |
 | 11 | **P11 The Zeno brace** (measurement protection) | leap | 1 job | ⬜ **OPEN** — cheapest instrument (F102, 0 2q) stacked on the code; second protection axis |
