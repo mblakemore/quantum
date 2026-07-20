@@ -1,0 +1,12 @@
+{
+  "source": "re-analysis of Exp191 job d9e64rsjeosc73fid0gg (no new QPU)",
+  "purpose": "answer Exp242 phase-blindness: does a both-bases code rescue the Bell pair's XX leg?",
+  "exp242_bitflip_bell": {"ZZ": 0.515, "XX": 0.000, "note": "phase-blind: XX dead, unrescuable"},
+  "exp191_422_bell": {
+    "logical": {"raw": {"ZZ": 0.886, "XX": 0.844, "S": 1.730},
+                "postselected": {"ZZ": 0.975, "XX": 0.995, "S": 1.970, "acc_Z": 0.87, "acc_X": 0.84}},
+    "logical_idle": {"raw": {"ZZ": 0.630, "XX": 0.778, "S": 1.408},
+                     "postselected": {"ZZ": 0.945, "XX": 0.956, "S": 1.902, "acc_Z": 0.66, "acc_X": 0.67}}
+  },
+  "conclusion": "both-bases [[4,2,2]] SEES phase errors (XXXX stabilizer) -> postselection rescues the XX leg (0.844->0.995; idle 0.778->0.956) where the bit-flip code (242) had XX=0.000 unrescuable. DETECTION not live correction (distance-2); live feed-forward correction of a Bell pair needs a distance-3 both-bases code, depth-blocked on ibm_fez now."
+}
