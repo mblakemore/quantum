@@ -1,0 +1,64 @@
+{
+ "exp": 228,
+ "slug": "shielded_magic_square",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9epkf4jeosc73fj2hog",
+ "order": [
+  [
+   "L",
+   "R1"
+  ],
+  [
+   "L",
+   "R2"
+  ],
+  [
+   "L",
+   "R3"
+  ],
+  [
+   "L",
+   "C1"
+  ],
+  [
+   "L",
+   "C2"
+  ],
+  [
+   "L",
+   "C3"
+  ],
+  [
+   "B",
+   "R1"
+  ],
+  [
+   "B",
+   "R2"
+  ],
+  [
+   "B",
+   "R3"
+  ],
+  [
+   "B",
+   "C1"
+  ],
+  [
+   "B",
+   "C2"
+  ],
+  [
+   "B",
+   "C3"
+  ]
+ ],
+ "prereg": {
+  "G1_contextuality": "chi_logical > 4.0 at >=5 sigma (beats non-contextual bound, shielded)",
+  "G2_quantum_value": "chi_logical >= 5.0 (all 6 contexts, R3 negative)",
+  "G3_reference": "reported: chi_bare + shield comparison",
+  "registered_verdict": "G1 and G2",
+  "scope": "Peres-Mermin state-independent contextuality error-detected; Y-bar wall dodged via 2-qubit Y products (YYYY stabilizer + Bell measurements)"
+ }
+}
