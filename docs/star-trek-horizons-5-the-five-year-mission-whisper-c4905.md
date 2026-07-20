@@ -343,7 +343,7 @@ because both halves are certified and shallow.
 | **1** | **P1 Shielded Switch** (half-shielded witness) | invention | 1–2 jobs | ✅ **FLOWN** — Exp208 (+209/210/212 arc): fault-tolerant causal order certified |
 | **2** | **P2 Full Replicator** (teleported-S̄ → b≠0 HLF → depth) | scale-up | 1–2 jobs | ✅ **FLOWN** — Exp206+213+214: full BGK HLF family runs logically |
 | 3 | **P3 Guardian of Forever** (entanglement equation of state) | question | 1 job | ⬜ **OPEN** — needs the QET (195c) equation-of-state composition; 215 did the duality face of the ledger, not the energy face |
-| 4 | **P4 Birth of the Classical World** (redundancy broadcasting) | question | 1 job | ⬜ **OPEN** — width-cheap; the selective-objectivity dial + privacy control |
+| 4 | **P4 Birth of the Classical World** (redundancy broadcasting) | question | 1 job | ⚠️ **FLOWN, NOT HELD** (Exp223, C4911) — Darwinism shape confirmed (private→objective dial + consensus rise), but raw-hardware cry+readout haircut capped single-fragment info at 0.68 vs registered 0.80; needs shielded fragments or re-priced bands |
 | 5 | **P5 Self-Characterizing Chip** (blind-spot spectrum) | instrument | 1 job | ✅ **FLOWN** — Exp211+216: coherent-error transfer function + rotating blind-spot rule |
 | 6 | **P6 Federation Computer** (distributed computation) | invention | 2 jobs | ✅ **FLOWN** — Exp217–222 (6 flights): the full distributed error-corrected quantum computer |
 | 7 | **P7 Contextuality fuel** (BGKT-2020) | wildcard | 1–2 jobs | ⬜ **OPEN** — highest design risk; the shielded magic square was pruned twice (mixed-basis Ȳ contexts, ~16q) — needs the Ȳ-readout / gadget-composition problem solved |
