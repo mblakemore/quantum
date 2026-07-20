@@ -1,0 +1,21 @@
+{
+ "exp": 220,
+ "slug": "distributed_deutsch",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9enkqkjeosc73fj09u0",
+ "order": [
+  "f0_const0",
+  "f1_const1",
+  "f2_bal_x",
+  "f3_bal_nx"
+ ],
+ "prereg": {
+  "G1_constant": "<Xq>(f0,f1) >= +0.55, each >=5 sigma over 0",
+  "G2_balanced": "<Xq>(f2,f3) <= -0.55, each >=5 sigma magnitude",
+  "G3_separation": "mean(const) - mean(bal) >= 1.1 at >=5 sigma (ideal 2.0)",
+  "G4_frame_off": "balanced frame-ignored |<Xq>| <= 0.30 (weld carries the oracle)",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "Deutsch's algorithm with the oracle DISTRIBUTED across a shielded cut; query and target in different [[4,2,2]] shields; per-block partial shield"
+ }
+}
