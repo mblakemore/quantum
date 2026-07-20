@@ -1,0 +1,14 @@
+{
+ "job_id": "d9enrg1htsac739efji0",
+ "XZ": 0.8870460394623964,
+ "ZX": 0.9010874422761805,
+ "XZ_off": -0.015441807263368601,
+ "ZX_off": 0.02666468047072844,
+ "bare_XZ": 0.0135,
+ "bare_ZX": 0.87325,
+ "acceptance": 0.87425,
+ "g1": true,
+ "g2": true,
+ "g3": true,
+ "verdict_ok": true
+}
