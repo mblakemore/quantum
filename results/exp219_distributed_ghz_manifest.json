@@ -1,0 +1,18 @@
+{
+ "exp": 219,
+ "slug": "distributed_ghz",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9end0kjeosc73fj012g",
+ "order": [
+  "Z",
+  "X"
+ ],
+ "prereg": {
+  "G1_ghz_z": "<ZZ>_AB>=0.55 AND <ZZ>_AC>=0.55, each >=5 sigma over 0",
+  "G2_ghz_x": "<XXX>>=0.40, >=4 sigma over 0 (phase = multipartite coherence)",
+  "G3_frame_off": "frame-ignored: |<ZZ>|<=0.30 both AND |<XXX>|<=0.30",
+  "registered_verdict": "G1 and G2 and G3",
+  "scope": "3 [[4,2,2]] blocks + 2 physical relays; per-variant partial shield; distributed logical GHZ across 2 shielded cuts (B,C share no gate)"
+ }
+}
