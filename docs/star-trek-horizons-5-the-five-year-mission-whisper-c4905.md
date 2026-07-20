@@ -342,7 +342,7 @@ because both halves are certified and shallow.
 |------|---------|------|-----|--------|
 | **1** | **P1 Shielded Switch** (half-shielded witness) | invention | 1–2 jobs | ✅ **FLOWN** — Exp208 (+209/210/212 arc): fault-tolerant causal order certified |
 | **2** | **P2 Full Replicator** (teleported-S̄ → b≠0 HLF → depth) | scale-up | 1–2 jobs | ✅ **FLOWN** — Exp206+213+214: full BGK HLF family runs logically |
-| 3 | **P3 Guardian of Forever** (entanglement equation of state) | question | 1 job | ⬜ **OPEN** — needs the QET (195c) equation-of-state composition; 215 did the duality face of the ledger, not the energy face |
+| 3 | **P3 Guardian of Forever** (arrow-of-time grand unification) | question | 1 job | 🧮 **DERIVED** (C4912, [derivation](../docs/p3-guardian-of-forever-derivation-whisper-c4912.md)) — energy rides the κ dial: stored=κ², QET-extractable=1−κ²=D², teleportation advantage=1−κ; unified with coherence(κ)/objectivity(κ²)/duality on ONE apparatus. Flight pre-registered, ready for 'fly P3' |
 | 4 | **P4 Birth of the Classical World** (redundancy broadcasting) | question | 1 job | ⚠️ **FLOWN, NOT HELD** (Exp223, C4911) — Darwinism shape confirmed (private→objective dial + consensus rise), but raw-hardware cry+readout haircut capped single-fragment info at 0.68 vs registered 0.80; needs shielded fragments or re-priced bands |
 | 5 | **P5 Self-Characterizing Chip** (blind-spot spectrum) | instrument | 1 job | ✅ **FLOWN** — Exp211+216: coherent-error transfer function + rotating blind-spot rule |
 | 6 | **P6 Federation Computer** (distributed computation) | invention | 2 jobs | ✅ **FLOWN** — Exp217–222 (6 flights): the full distributed error-corrected quantum computer |
