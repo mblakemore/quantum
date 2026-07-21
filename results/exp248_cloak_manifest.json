@@ -1,0 +1,20 @@
+{
+ "job_id": "d9fgdtsjeosc73fju0l0",
+ "backend": "ibm_fez",
+ "labels": [
+  "S1_0L_Z",
+  "S1_0L_X",
+  "S1_0L_Y",
+  "S2_1L_Z",
+  "S2_1L_X",
+  "S2_1L_Y",
+  "S3_pL_Z",
+  "S3_pL_X",
+  "S3_pL_Y",
+  "S4_mL_Z",
+  "S4_mL_X",
+  "S4_mL_Y",
+  "cal0",
+  "cal1"
+ ]
+}
