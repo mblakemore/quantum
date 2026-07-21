@@ -85,17 +85,51 @@ adversary (which gap **G1** would welcome — 32 GB pushes exact statevector to 
 `device` slot in the fingerprint so a working GPU backend drops in as another config row; standing
 up ROCm-Aer is a scoped follow-up (good Uhura infra-delegation candidate), NOT on the critical path.
 
-## Remaining (Phases 2–5, plan §A Item 2)
+## Phase 2 BUILT (C4971) — the solver bench `tools/classical_cost_bench.py`
 
-2. **Solver bench** — the three solver classes wrapped as workers, each correctness-gated; plus the
-   **G1 survey-and-adopt** pass for a stronger stabilizer-rank impl (Bravyi–Gosset lineage) or, if
-   none adoptable, a published-scaling lower bound labeled as such.
+Three solver classes wrapped as correctness-gated workers that plug into the Phase-1 meter, plus the
+random-Clifford+T control generator and the G1 survey. **5/5 self-test.** Run:
+`python3 tools/classical_cost_bench.py --selftest` · `--g1-survey`.
+
+**The T-column has the same poison as MPS χ, one level down — and it is nastier.** The advisor's
+decoupled-n/T check (n=4 for a cheap 16-amplitude oracle, T=48 for full stabilizer-rank stress)
+exposed that Aer `extended_stabilizer` is **approximate by default** (`approximation_error` = 0.05,
+nonzero). Measured at T=48 against an independent `quantum_info.Statevector` oracle:
+
+```
+approx_err=0.05 (default): fidelity 0.9979  -> verified=False (below 0.999 gate)
+approx_err=0.01          : fidelity 0.9999  -> verified=True
+approx_err=0.001         : fidelity 0.0     -> verified=False  (!!)
+approx_err=0.0  (exact)  : OUT OF MEMORY at T=48 -> recorded as failed row, not a crash
+```
+
+**New finding (C4971): the approximation dial is NON-MONOTONIC.** `0.001` returns a ~orthogonal
+garbage statevector — *worse* than `0.01` — because Aer's norm-estimation / Metropolis sampling
+degrades at tight error without a coordinated sample increase. Consequence baked into the worker
+contract: the gate must **verify every setting and may never interpolate the dial.** Without the
+gate, anyone assuming "tighter = safer" would time a *wrong answer* onto the map. This is the
+Exp144 detector lesson, reproduced classically and caught before any timing.
+
+Worker contract also locked (advisor): qiskit imported at module load so no import sits in the
+forked-child timed window (COW); each row carries the meter's whole-child cost AND the worker's own
+`transpile_s`/`run_s` split (transpile is compilation, not simulation).
+
+**G1 reframed and closed with what's installed.** The load-bearing G1 work is *characterizing*
+`extended_stabilizer` at verified accuracy and labeling it a proxy for the Bravyi–Gosset lineage —
+no install needed. `--g1-survey` records: stim (Clifford-only → T=0 control only), qulacs
+(constant-factor statevector speedup, never touches the T-column), quimb (additive tensor-network
+arm) — all absent, all low-priority additive, all a shared-box env decision for the Creator, none
+the G1 crux. Phase-4's T-column bill will be quoted **with a published-scaling lower bound labeled
+as such** (the exponent pinned from the Bravyi–Gosset paper, not memory — house rule G-1).
+
+## Remaining (Phases 3–5, plan §A Item 2)
+
 3. **Instance generator** — the hidden-shift family (shared with Item 3, its own freeze), HLF
-   (F113 receipts cross-check), random-Clifford+T control.
-4. **Sweep + fit** — log-cost vs n (statevector), vs T (stabilizer-rank), vs χ (MPS); censored fits
-   for `>cap`; single-thread AND all-core; **preflight headroom gate before launch** (C4415).
-   **G6**: deliver the stabilizer-rank curve as v0.5 first — it's the only column Item 3 needs, and
-   shipping it early unblocks the scout ~1 cycle sooner.
+   (F113 receipts cross-check). *(random-Clifford+T control already built in Phase 2.)*
+4. **Sweep + fit** — log-cost vs n (statevector), vs T (stabilizer-rank at **verified** accuracy),
+   vs χ (MPS); censored fits for `>cap`; single-thread AND all-core; **preflight headroom gate
+   before launch** (C4415). **G6**: deliver the stabilizer-rank curve as v0.5 first — it's the only
+   column Item 3 needs, and shipping it early unblocks the scout ~1 cycle sooner.
 5. **Card** — `results/classical_cost_map_v1.json` + doc, attenuation-map freeze discipline; future
    races quote it and each race grades its prediction for free.
 
