@@ -140,8 +140,8 @@ def main():
 
     pubs = build_causal()
     if args.smoke:
-        pubs = [(lab, qc, 100) for lab, qc, s in pubs if lab == "w_start_c"]
-        print("SMOKE — 1 witness circuit @ 100 shots (cheapest format/port check)")
+        pubs = [(lab, qc, 100) for lab, qc, s in pubs if lab in ("w_start_c", "w_start_a")]
+        print("SMOKE — 2 witness circuits (comm+anti) @ 100 shots — SEMANTIC port check (~$16.60 on IonQ)")
     elif args.witness_only or args.canary:
         sh = args.shots if args.shots else 500
         pubs = [(lab, qc, sh) for lab, qc, s in pubs if lab.startswith("w_")]
@@ -177,12 +177,23 @@ def main():
     print(f"SWITCH-BENCH CAUSAL AXIS — {backend.name}")
     print("=" * 62)
     if args.smoke:
-        lab = "w_start_c"; c = counts[lab]
-        keys_ok = all(len(k) == 2 for k in c)
-        print(f"SMOKE — {lab}: {c}")
-        print(f"  2-bit-key format OK: {keys_ok}  (total shots {sum(c.values())})")
-        verdict = f"SMOKE(format_ok={keys_ok})"
-        out["verdict"] = verdict
+        def xc(lab):
+            c = counts[lab]; n = sum(c.values())
+            return (sum(v for k, v in c.items() if k[1] == "0")
+                    - sum(v for k, v in c.items() if k[1] == "1")) / n
+        comm = xc("w_start_c"); anti = xc("w_start_a")
+        keys_ok = all(len(k) == 2 for lab in ("w_start_c", "w_start_a") for k in counts[lab])
+        # SEMANTIC check (the null arm's job, done cheaply up front — witness-only has no null
+        # downstream): comm must read strongly + (00-dominated), anti strongly - (11-dominated).
+        # A wrong qubit mapping / flipped bit convention from native compilation fails this.
+        sem_ok = keys_ok and comm > 0.5 and anti < -0.5
+        print(f"SMOKE — w_start_c: {counts['w_start_c']}")
+        print(f"        w_start_a: {counts['w_start_a']}")
+        print(f"  <X_c>_comm = {comm:+.3f} (expect strongly +, 00-dominated)")
+        print(f"  <X_c>_anti = {anti:+.3f} (expect strongly -, 11-dominated)")
+        print(f"  format_ok={keys_ok}  SEMANTIC_ok={sem_ok}  (mapping+convention survived native compile)")
+        verdict = f"SMOKE(semantic_ok={sem_ok})"
+        out.update({"comm": comm, "anti": anti, "verdict": verdict})
     elif args.witness_only or args.canary:
         shots = pubs[0][2]
         print("  raw witness counts:", {lab: counts[lab] for lab in ("w_start_c", "w_start_a", "w_end_c", "w_end_a")})
@@ -195,7 +206,7 @@ def main():
     outpath = os.path.join(QROOT, "results", f"braket_causal_{tag}.json")
     json.dump({"card": out, "counts": counts}, open(outpath, "w"), indent=1, default=float)
     print(f"card -> {outpath}")
-    return 0 if (verdict == "PASS-CAUSAL" or "FIRED" in verdict or "format_ok=True" in verdict) else 1
+    return 0 if (verdict == "PASS-CAUSAL" or "FIRED" in verdict or "semantic_ok=True" in verdict) else 1
 
 
 if __name__ == "__main__":

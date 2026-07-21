@@ -34,9 +34,20 @@ structure is the in-flight control. Stated plainly so the result is not over-rea
 
 ## Device & cost
 IonQ Forte-1 (`arn:aws:braket:us-east-1::device/qpu/ionq/Forte-1`), trapped ion, us-east-1.
-- **Smoke** (1 circuit × 100 shots): 1×$0.30 + 100×$0.08 = **$8.30** — port/format check on IonQ.
+- **Smoke** (2 circuits × 100 shots — comm+anti): 2×$0.30 + 200×$0.08 = **$16.60** — SEMANTIC port
+  check (not just format): asserts ⟨X_c⟩_comm strongly + (00-dominated) AND ⟨X_c⟩_anti strongly −
+  (11-dominated), confirming the qubit mapping + bit convention survived IonQ's native compilation.
+  This is the null arm's job done cheaply up front — witness-only has no null downstream.
 - **Witness** (4 circuits × 500 shots): 4×$0.30 + 2000×$0.08 = **$161.20**.
-- **Total ≈ $169.50** < $200 ceiling (us-east-1). Canary-first: no witness flight until the smoke passes.
+- **Total ≈ $177.80** < $200 ceiling (us-east-1). Canary-first: no witness flight until the smoke's
+  SEMANTIC check passes (comm > +0.5, anti < −0.5). If it fails → stop, it's a port bug ($16, not $178).
+
+## Reading rule — pre-committed BEFORE the number (no null arm to disambiguate)
+Witness-only has no null arm, so a *middling* W is ambiguous (real vs a spurious offset). Locked in now:
+- **W − 5·seW > 0 AND W ≥ 1.3** → **WITNESS-FIRED**: the cross-modality result. Clean, offset-implausible.
+- **0 < W < 1.3 (passes 5σ but low)** → reported as **INCONCLUSIVE-WITHOUT-NULL**, not spun into a firing —
+  a low W could be a residual offset the absent null would have caught. Kept in the record as such.
+- **W − 5·seW ≤ 0** → **WITNESS-FAIL** (with the smoke having already ruled out a port bug). Kept.
 
 ## Pre-filed prediction (honest, before the number)
 - **Predict WITNESS-FIRED, confidence ~0.85.** The bar is low (W>0) and trapped-ion 2-qubit
