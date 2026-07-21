@@ -1,0 +1,200 @@
+{
+ "card": "classical_cost_map",
+ "version": "0.5",
+ "substrate": "claude-fable-5",
+ "cycle": "C4971",
+ "timestamp": "2026-07-21T09:50:33Z",
+ "hardware": {
+  "cpu_vendor": "AMD",
+  "cpu_model": "AMD Ryzen 7 9800X3D 8-Core Processor",
+  "logical_cores": 16,
+  "ram_gb": 60.4,
+  "governor": "performance",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3"
+ },
+ "preflight": {
+  "loadavg_1m": 4.17,
+  "loadavg_5m": 4.51,
+  "cores": 16,
+  "load_per_core": 0.261,
+  "headroom_ok": true,
+  "threshold_per_core": 0.75
+ },
+ "cap_s": 45.0,
+ "thread_config": {
+  "threads": 1
+ },
+ "columns": {
+  "statevector_vs_n": {
+   "axis": "n",
+   "method": "statevector",
+   "cost_metric": "run_s",
+   "t_fixed": 8,
+   "rows": [
+    {
+     "n": 10,
+     "t_fixed": 8,
+     "verified_at_n": true,
+     "run_s": 0.0206,
+     "wall_s": 0.3029,
+     "censored": false,
+     "peak_rss_mb": 118.1,
+     "curve_eligible": true
+    },
+    {
+     "n": 12,
+     "t_fixed": 8,
+     "verified_at_n": true,
+     "run_s": 0.0205,
+     "wall_s": 0.3038,
+     "censored": false,
+     "peak_rss_mb": 118.4,
+     "curve_eligible": true
+    },
+    {
+     "n": 14,
+     "t_fixed": 8,
+     "verified_at_n": true,
+     "run_s": 0.0228,
+     "wall_s": 0.3232,
+     "censored": false,
+     "peak_rss_mb": 118.4,
+     "curve_eligible": true
+    },
+    {
+     "n": 16,
+     "t_fixed": 8,
+     "verified_at_n": null,
+     "run_s": 0.0969,
+     "wall_s": 0.3682,
+     "censored": false,
+     "peak_rss_mb": 119.0,
+     "curve_eligible": true
+    },
+    {
+     "n": 18,
+     "t_fixed": 8,
+     "verified_at_n": null,
+     "run_s": 0.0987,
+     "wall_s": 0.382,
+     "censored": false,
+     "peak_rss_mb": 122.3,
+     "curve_eligible": true
+    },
+    {
+     "n": 20,
+     "t_fixed": 8,
+     "verified_at_n": null,
+     "run_s": 0.1085,
+     "wall_s": 0.3857,
+     "censored": false,
+     "peak_rss_mb": 134.3,
+     "curve_eligible": true
+    },
+    {
+     "n": 22,
+     "t_fixed": 8,
+     "verified_at_n": null,
+     "run_s": 0.133,
+     "wall_s": 0.4256,
+     "censored": false,
+     "peak_rss_mb": 182.2,
+     "curve_eligible": true
+    }
+   ],
+   "fit_logcost_vs_n": {
+    "slope_ln_per_unit": 0.18559,
+    "intercept": -5.8893,
+    "r2": 0.8359,
+    "n_points": 7
+   },
+   "reference_ln_slope_2n": 0.693
+  },
+  "mps_min_chi_vs_n": {
+   "axis": "n",
+   "method": "matrix_product_state",
+   "quantity": "min_verifying_chi",
+   "rows": [
+    {
+     "n": 4,
+     "T": 8,
+     "min_verifying_chi": 4,
+     "run_s_at_min_chi": 0.0226,
+     "censored": false,
+     "curve_eligible": true
+    },
+    {
+     "n": 6,
+     "T": 12,
+     "min_verifying_chi": 4,
+     "run_s_at_min_chi": 0.0321,
+     "censored": false,
+     "curve_eligible": true
+    },
+    {
+     "n": 8,
+     "T": 16,
+     "min_verifying_chi": 8,
+     "run_s_at_min_chi": 0.0349,
+     "censored": false,
+     "curve_eligible": true
+    },
+    {
+     "n": 10,
+     "T": 20,
+     "min_verifying_chi": 8,
+     "run_s_at_min_chi": 0.0337,
+     "censored": false,
+     "curve_eligible": true
+    },
+    {
+     "n": 12,
+     "T": 24,
+     "min_verifying_chi": 16,
+     "run_s_at_min_chi": 0.0327,
+     "censored": false,
+     "curve_eligible": true
+    }
+   ],
+   "fit_ln_minchi_vs_n": {
+    "slope_ln_per_unit": 0.17329,
+    "intercept": 0.5545,
+    "r2": 0.8929,
+    "n_points": 5
+   }
+  },
+  "stabilizer_rank_vs_T": {
+   "status": "FRAMEWORK_ONLY_alpha_unpinned",
+   "why": "extended_stabilizer wall-time is a sampler-config artifact (shots x Metropolis mixing), NOT Clifford+T hardness \u2014 a G1 strawman if curved. The faithful signal is the stabilizer-extent model 2^(alpha*T) * c_per_term.",
+   "alpha": null,
+   "alpha_source_required": "Bravyi-Gosset (Improved classical simulation of quantum circuits dominated by Clifford gates, 2016 / Bravyi et al. 2019) \u2014 pin from paper, G-1 rule; paper requested from Creator",
+   "aer_reality_check_shots_scaling": {
+    "measured": {
+     "16_shots_s": 3.17,
+     "64_shots_s": 13.75,
+     "256_shots_s": 46.6
+    },
+    "marginal_s_per_shot": 0.2,
+    "metropolis_mixing_time": 5000,
+    "interpretation": "run_s is LINEAR in shots -> cost is Metropolis mixing per shot, an Aer sampler-config artifact; NOT Clifford+T hardness. Do not curve on it."
+   },
+   "aer_reality_check_exact_memory_wall": {
+    "T": 48,
+    "n": 4,
+    "approx_err": 0.0,
+    "result": "out_of_memory",
+    "max_memory_mb": null,
+    "genuine_wall": true
+   },
+   "projected_bill_fn": "projected_stabilizer_rank_bill(T, alpha, c_per_term_s)"
+  }
+ },
+ "provenance": {
+  "correctness_gate": "sv/mps: amplitude fidelity vs quantum_info oracle; extstab: TVD (Elder C6560, Aer 0.17.2 save_statevector near-zero-norm bug)",
+  "censoring": "rows over cap recorded censored, excluded from fits, never dropped",
+  "cost_metric": "run_s (simulation only); wall_s kept for full accounting",
+  "transfer_boundary": "small-n verify accuracy NOT asserted to transfer to large-n timing",
+  "g1_correction": "cost-faithfulness is the OTHER half of G1: accuracy-verified is necessary but not sufficient; extstab wall-time fails cost-faithfulness"
+ }
+}

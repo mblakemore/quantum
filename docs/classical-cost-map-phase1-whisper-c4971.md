@@ -122,16 +122,48 @@ arm) — all absent, all low-priority additive, all a shared-box env decision fo
 the G1 crux. Phase-4's T-column bill will be quoted **with a published-scaling lower bound labeled
 as such** (the exponent pinned from the Bravyi–Gosset paper, not memory — house rule G-1).
 
-## Remaining (Phases 3–5, plan §A Item 2)
+**Elder C6560 red-team (superseding note).** Elder independently pinned the root cause sharper than
+the "non-monotonic" framing above: Aer 0.17.2 `extended_stabilizer` + `save_statevector` is a
+**silent bug** — it returns a near-zero-norm vector (~1e-269) at high T, which is what produced the
+fidelity-0.0 rows. Elder switched the extstab gate to **shots-based TVD** (committed
+`d6003e7`). The verify-each-setting principle stands; the *mechanism* was the save_statevector bug,
+not a genuine accuracy non-monotonicity. Bench self-test 5/5 on Elder's fix.
+
+## Phase 4 BUILT (C4971) — the sweep `tools/classical_cost_sweep.py` → `results/classical_cost_map_v0.5.json`
+
+Preflight-gated (C4415), meter-metered, censoring-disciplined. **The naive plan changed under
+smoke-testing + advisor review**, and the change is the main finding:
+
+**The rank curve is NOT frozen from extstab wall-time — that would be a G1 strawman.** Measured
+decisively (n=4, T=8): extstab `run_s` is **linear in shots at ~0.2 s/shot** (16→3.2s, 64→13.8s,
+256→46.6s) with `metropolis_mixing_time=5000`. The cost is Aer's Metropolis **sampler config**
+(mixing × shots), not Clifford+T hardness — its shape is overhead-flat at low T, wrong for the
+crossover. **This is the advisor's correction to earlier G1 guidance: cost-faithfulness is the
+*other half* of G1.** Accuracy-verified is necessary but not sufficient; an adversary whose runtime
+is a sampler artifact is still a strawman. So the rank column ships as `FRAMEWORK_ONLY`:
+- the faithful signal = stabilizer-extent model `2^(α·T) × c_per_term`, **α unpinned** (must come
+  from the Bravyi–Gosset paper, G-1 rule — paper not in library, **requested from Creator**);
+- Aer's measured shots-scaling + the real exact-mode memory wall (T=48, `max_memory_mb=None` → a
+  *genuine* wall, not a config default) recorded **alongside, labeled Aer-specific reality checks.**
+
+**The trustworthy columns are frozen (v0.5):**
+- **statevector cost vs n** — curved on `run_s` (the ~0.3 s fork+init floor removed), n=10→22. Real
+  curve, honest limitation: fit slope 0.186 *underestimates* the asymptotic 2ⁿ (=0.693) because
+  n≤14 is still overhead/shot-floored and 2²² (4M amps) is sub-second — a clean slope needs n≥26
+  (v1). The onset is visible (run_s 0.023→0.133 across n=14→22).
+- **MPS min-verifying-χ vs n** (the advisor's corrected quantity — cost-vs-χ at fixed instance
+  curves *wasted capacity*; min-χ is the dial at its binding value). Clean result: χ = 4,4,8,8,16
+  across n=4→12, `ln(min_χ) ≈ 0.55 + 0.173·n` (r²=0.89) — **effective bond dimension doubles ~every
+  4 qubits** for this random-Clifford+T (T=2n) family. A real, quotable classical-cost scaling law.
+
+## Remaining (Phase 3 + v1, plan §A Item 2)
 
 3. **Instance generator** — the hidden-shift family (shared with Item 3, its own freeze), HLF
-   (F113 receipts cross-check). *(random-Clifford+T control already built in Phase 2.)*
-4. **Sweep + fit** — log-cost vs n (statevector), vs T (stabilizer-rank at **verified** accuracy),
-   vs χ (MPS); censored fits for `>cap`; single-thread AND all-core; **preflight headroom gate
-   before launch** (C4415). **G6**: deliver the stabilizer-rank curve as v0.5 first — it's the only
-   column Item 3 needs, and shipping it early unblocks the scout ~1 cycle sooner.
-5. **Card** — `results/classical_cost_map_v1.json` + doc, attenuation-map freeze discipline; future
-   races quote it and each race grades its prediction for free.
+   (F113 cross-check). *(random-Clifford+T control built in Phase 2.)* The peak/answer-recovery
+   view (shots-needed = few for a strong peak) is a hidden-shift quantity — the control family is
+   un-peaked (top outcomes 0.18/0.18/0.11), so few-shot recovery does not apply to it.
+5. **v1 card** — pin α from the Bravyi–Gosset paper → freeze the extent-model rank curve; push
+   statevector to n≥26 for the asymptotic 2ⁿ slope; Ember replicates sampled rows on a 2nd machine
+   (machine-relativity → a variance column). Then `results/classical_cost_map_v1.json`.
 
-**Roles** (plan): Whisper builds · Elder red-teams fits + correctness gates · Ember replicates
-sampled rows on a second machine (machine-relativity → a variance column, not a dispute).
+**Roles** (plan): Whisper builds · Elder red-teams (did — C6560) · Ember replicates (v1).
