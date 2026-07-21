@@ -5,6 +5,7 @@ Substrate of authorship: `claude-opus-4-8` (v1, C4941); revised `claude-fable-5`
 Whisper (DC15W), 2026-07-21. All results are measured quantum hardware; every number traces to an IBM
 Quantum job ID or an Amazon Braket quantum-task ARN (see §8, Data Availability). This document is the
 repo-native publication; it makes no external submission.
+**Contact for follow-up / collaboration**: Mike Blakemore — mblakemore@ucsb.edu · mikeblakemore@gmail.com (§10).
 
 ---
 
@@ -41,7 +42,13 @@ repo-native publication; it makes no external submission.
 
 ## Abstract
 
-The quantum switch places the *order* of two operations into coherent superposition — a process with **indefinite causal order (ICO)** that no definite-order (causally separable) process can reproduce. Prior hardware demonstrations, including the earlier phases of this campaign, established ICO on a single family of superconducting processors (IBM Heron). A natural skeptical question remains: *is ICO a genuine property of quantum mechanics, or an artifact of one hardware technology?* We answer it empirically by transporting a **frozen, pre-registered causal-order instrument** — the same circuits, graded against the **same theory-fixed bounds, with no retuning** — across the deepest hardware divide available to us. The causal witness **W** (ideal 2.0; causally-separable bound 0) certifies on **three IBM Heron dies** (W = 1.89–1.95), on a **different-vendor superconducting chip** (Rigetti Cepheus-1-108Q, W = 1.2165, 54.4σ over the bound, full three-number PASS-CAUSAL), and on a **trapped-ion processor** (IonQ Forte-1, same-window witness W = 1.910 ± 0.141 at 13.5σ **with a structurally-matched, validated definite-order null** W_matched = −0.09; corroborated by an earlier 500-shot witness at W = 1.892, 29.9σ). Trapped ions store each qubit in a single atom, use all-to-all connectivity and GPI/GPI2/RZZ native gates, and carry **none of the CZ Z-biased dephasing** on which the superconducting devices' error budget is dominated — yet ICO fires there at essentially the same strength as on tuned Heron, and collapses to zero there the moment the control's coin is made classical. Across three physically distinct substrates from three vendors, the witness strength **does not cluster by modality**: the two highest-contrast chips (Heron and IonQ) sit on *opposite* modalities, while a third superconducting chip (Rigetti) separates below — consistent with ICO being a quantum resource whose *observed* magnitude is attenuated by each device's **total, depth-integrated error budget** rather than by its qubit technology or its per-entangling-gate error. We conclude that indefinite causal order is substrate-general. We are explicit about the asymmetry of evidence (Heron: full three-axis bench; Rigetti: full causal axis; IonQ: witness + matched definite-order null, no capacity/null-integrity arms), about a client-library decode bug this campaign found, certified, and corrected along the way (§6b), and about what the result is and is not.
+The quantum switch places the *order* of two operations into coherent superposition — a process with **indefinite causal order (ICO)** that no definite-order (causally separable) process can reproduce. Prior hardware demonstrations, including the earlier phases of this campaign, established ICO on a single family of superconducting processors (IBM Heron). A natural skeptical question remains: *is ICO a genuine property of quantum mechanics, or an artifact of one hardware technology?* We answer it empirically by transporting a **frozen, pre-registered causal-order instrument** — the same circuits, graded against the **same theory-fixed bounds, with no retuning** — across the deepest hardware divide available to us. The causal witness **W** (ideal 2.0; causally-separable bound 0) certifies on **three IBM Heron dies** (W = 1.89–1.95), on a **different-vendor superconducting chip** (Rigetti Cepheus-1-108Q, W = 1.2165, 54.4σ over the bound, full three-number PASS-CAUSAL), and on a **trapped-ion processor** (IonQ Forte-1, same-window witness W = 1.910 ± 0.141 at 13.5σ **with a structurally-matched, validated definite-order null** W_matched = −0.09; corroborated by an earlier 500-shot witness at W = 1.892, 29.9σ).
+
+Trapped ions store each qubit in a single atom, use all-to-all connectivity and GPI/GPI2/RZZ native gates, and carry **none of the CZ Z-biased dephasing** on which the superconducting devices' error budget is dominated — yet ICO fires there at essentially the same strength as on tuned Heron, and collapses to zero there the moment the control's coin is made classical. Across three physically distinct substrates from three vendors, the witness strength **does not cluster by modality**: the two highest-contrast chips (Heron and IonQ) sit on *opposite* modalities, while a third superconducting chip (Rigetti) separates below — consistent with ICO being a quantum resource whose *observed* magnitude is attenuated by each device's **total, depth-integrated error budget** rather than by its qubit technology or its per-entangling-gate error. We conclude that indefinite causal order is substrate-general. We are explicit about the asymmetry of evidence (Heron: full three-axis bench; Rigetti: full causal axis; IonQ: witness + matched definite-order null, no capacity/null-integrity arms), about a client-library decode bug this campaign found, certified, and corrected along the way (§6b), and about what the result is and is not.
+
+### Plain-language summary
+
+Quantum mechanics permits a circuit in which the *order* of two operations — "A before B" versus "B before A" — is itself in superposition, and a simple measurement can prove no fixed or randomly shuffled order could fake the result. We packed that measurement into a frozen test kit, changed nothing but the machine under it, and ran it on five processors from three companies built on two entirely different physical technologies: superconducting circuits and individual trapped atoms. The test certifies on all of them, and on the atoms an exacting control — the identical circuit with the "quantum coin" that chooses the order replaced by a classical coin flip — snuffs the signal to zero in the same session. Along the way our control experiment initially *failed*, we retracted the claim, and the failure turned out to be a bit-ordering bug in a widely-used open-source client library, which we then proved with a purpose-built calibration and corrected. Both the retraction and the restoration are documented here in full, with every raw data receipt.
 
 ---
 
@@ -57,11 +64,11 @@ This paper addresses the sharpest remaining objection to any single-platform ICO
 
 ## 2. Background: the causal witness
 
-The instrument is the campaign's `switch_bench` causal axis. Its central observable is the **witness disc**
+The instrument is the campaign's `switch_bench` causal axis. Its central observable is the **causal witness**
 
   **W = ⟨X_c⟩_comm − ⟨X_c⟩_anti**,
 
-the difference between a control-qubit expectation measured under a "commuting" arm and an "anti-commuting" arm of the switch. The relevant reference values are theory constants, identical on every device:
+the difference between a control-qubit X expectation measured under two arms of the switch. Concretely: the control qubit is prepared in |+⟩, four controlled operations route the target through "A then B" (control 0) superposed with "B then A" (control 1), and the control is read in the X basis (final Hadamard, then a Z measurement). In the **commuting arm** the pair (A,B) commutes (here X,X), so the two orders are identical and the control returns ⟨X_c⟩ = +1; in the **anti-commuting arm** the pair anti-commutes (here X,Z), the two orders differ by a sign, and the coherent superposition of orders kicks that sign back onto the control: ⟨X_c⟩ = −1. A process with definite (or classically mixed) order has no such order-interference and cannot produce the difference. The relevant reference values are theory constants, identical on every device:
 
 - **Ideal (fully coherent switch): W = 2.0.**
 - **Causally-separable bound: W = 0.** Any definite-order process, or classical mixture of orders, yields W ≤ 0 for this witness; W > 0 (at statistical significance) certifies indefinite causal order.
@@ -79,7 +86,7 @@ The witness circuits are generated by `tools/switch_bench.py::build_causal()` an
 Every flight was pre-registered before submission: the circuits, the bounds, the pass rules, the shot budget, and a pre-filed prediction (including a named failure mode) were frozen in a committed document *before* any data was seen. Pre-registration files and their git commit hashes are cited in §8.
 
 ### 3.3 Cross-platform porting (Braket)
-The non-IBM devices were reached through Amazon Braket via `qiskit-braket-provider`. The IBM qiskit circuit is submitted with `backend.run(native=True)`, which compiles the abstract circuit to the device's own native, angle-restricted gate set inside a verbatim box: Rigetti → Rx/Rz/CZ; IonQ → GPI/GPI2/RZZ. Measurement counts are read through qiskit's `get_counts()`, preserving the classical-bit convention. A local-simulator validation reproduced the ideal witness (W = 2.0000) through the full port before any hardware spend.
+The non-IBM devices were reached through Amazon Braket via `qiskit-braket-provider`. The IBM qiskit circuit is submitted with `backend.run(native=True)`, which compiles the abstract circuit to the device's own native, angle-restricted gate set inside a verbatim box: Rigetti → Rx/Rz/CZ; IonQ → GPI/GPI2/RZZ. A local-simulator validation reproduced the ideal witness (W = 2.0000) through the full port before any hardware spend. Measurement counts are read through qiskit's `get_counts()` **plus the certified decode correction of §6b**: for multi-circuit (program-set) submissions the provider returns count keys in raw Braket qubit order, so the runner restores the little-endian reversal (`_programset_key_fix`, version-pinned to the certified provider release and hard-failing on any other). Single-circuit submissions decode correctly as shipped. All numbers in §4 are under this certified decode.
 
 ### 3.4 Cost-frugality, the null controversy, and the matched null
 IonQ bills $0.08/shot; the full frozen axis (68 pubs, 112k shots) would cost ~$9,000 there, so the first IonQ flight (Exp211) was **witness-only** at reduced shots, guarded by a **semantic smoke check** (~$16.60) in place of a downstream null arm. External review correctly identified that substitution as the weakest link; the campaign then flew the proper definite-order control in three stages: (i) a gate-free `definite=True` null (Exp211b) whose *instrumented* failure triggered a withdrawal and ultimately exposed a client-library decode bug (§6b); (ii) a **structurally-matched null** (Exp212) — the witness circuit itself with only the control preparation changed from |+⟩ to a classical |0⟩/|1⟩ mixture, keeping all four entangling gates, so it shares the witness's compilation path exactly; and (iii) a **known-input program-set calibration** that certified the decode correction with paid ground truth. The matched null flew **in the same submission batch as a witness re-fly** (same-window), and its grading pre-registered *every* classical bit: deterministic target marginals per arm, ~50/50 control marginals, per-preparation bands, and the mixture band. Task handles were persisted before blocking on results throughout, so a long queue could never orphan a paid job.
@@ -118,10 +125,12 @@ Trapped ions store each qubit in a single atom, provide all-to-all connectivity,
 
 | quantity (Exp212, one submission batch, 100 shots/pub) | value | rule | verdict |
 |---|---|---|---|
-| W (witness, same window) | **+1.9100 ± 0.1414** (13.5σ) | W ≥ 1.3 AND W − 5·seW > 0 | **FIRED** |
+| W (witness, same window) | **+1.9100 ± 0.1414** (13.5σ) | W ≥ 1.3 AND W − 5·seW > 0 † | **FIRED** |
 | W_matched (structurally-matched definite-order null) | **−0.0900 ± 0.0995** | \|W\| ≤ 0.3, per-prep \|W_D0\|,\|W_D1\| ≤ 0.3 | **CLOSED** |
 | null all-bit marginals (8 checks) | targets 95–100% ideal, controls 41–52% | t ≥ 0.85; c ∈ [0.30,0.70] | all PASS |
 | separation | **+2.0000 ± 0.1729** (11.6σ) | > 1.0 | PASS |
+
+† The IonQ pass rule is deliberately *stricter* than the §2 baseline (W − 5·seW > 0): the pre-registered Exp211 reading rule additionally demanded W ≥ 1.3 — a Heron-class effect size, not merely statistical significance — before a cross-modality firing could be claimed. Both clauses are met with margin.
 
 The matched null is the witness circuit itself — same four entangling gates, same depth, same compilation path — with only the control preparation changed from |+⟩ to a classical |0⟩/|1⟩ mixture. A classical mixture of definite orders is causally separable, so W_matched ≤ 0 is a theorem; measured, it collapses to −0.09 while the witness in the same window reads +1.91. **The switch's signal on trapped ions is carried by the control's quantum coin, and by nothing else.**
 
@@ -132,7 +141,7 @@ Corroboration: the earlier Exp211 witness (4 pubs, 500 shots) reads **W = +1.892
 | substrate | modality / connectivity | native 2-qubit gate | chip | W | scope flown |
 |---|---|---|---|---|---|
 | IBM Heron | superconducting, heavy-hex | CZ (Z-biased) | kingston/marrakesh/fez | 1.89–1.95 | full 3-axis bench |
-| Rigetti | superconducting, limited | CZ | Cepheus-1-108Q | 1.2165 (54.4σ) | full causal axis (PASS-CAUSAL) |
+| Rigetti | superconducting, nearest-neighbor lattice | CZ | Cepheus-1-108Q | 1.2165 (54.4σ) | full causal axis (PASS-CAUSAL) |
 | **IonQ** | **trapped ion, all-to-all** | **RZZ (no Z-bias)** | **Forte-1** | **1.910 (13.5σ); corrob. 1.892 (29.9σ)** | witness + matched null (same window) |
 
 The trapped-ion chip **matches tuned Heron and far exceeds Rigetti.** The ordering of witness strengths is Heron ≈ IonQ ≫ Rigetti — which does **not** follow modality (the two extremes, IonQ and Rigetti, are on opposite modalities). It follows device fidelity.
@@ -180,7 +189,20 @@ The campaign's own record of this incident is a result in its own right, so it i
 
 ## 7. Conclusion
 
-Holding a pre-registered causal-order instrument fixed and changing the substrate from IBM superconducting transmons, to a different vendor's superconducting transmons, to individual trapped ions, the causal witness certifies indefinite causal order on every one — at a strength that **does not cluster by qubit technology** (the two highest-contrast chips sit on opposite modalities), consistent with attenuation by each device's total, depth-integrated error budget. On the trapped-ion platform the certification now carries its sharpest internal control: make the switch's control coin classical while changing nothing else, and the witness collapses from +1.91 to −0.09 in the same session. Cause and effect held in coherent superposition is not an artifact of a chip, a vendor, a modality — or, after §6b, a decoder. It is, to the reach of these instruments, a property of quantum mechanics — and it now has hardware receipts on three physically distinct substrates, for a total additional expenditure of ~$320 in cloud QPU time.
+Holding a pre-registered causal-order instrument fixed and changing the substrate from IBM superconducting transmons, to a different vendor's superconducting transmons, to individual trapped ions, the causal witness certifies indefinite causal order on every one — at a strength that **does not cluster by qubit technology** (the two highest-contrast chips sit on opposite modalities), consistent with attenuation by each device's total, depth-integrated error budget. On the trapped-ion platform the certification now carries its sharpest internal control: make the switch's control coin classical while changing nothing else, and the witness collapses from +1.91 to −0.09 in the same session. Cause and effect held in coherent superposition is not an artifact of a chip, a vendor, a modality — or, after §6b, a decoder. It is, to the reach of these instruments, a property of quantum mechanics — and it now has hardware receipts on three physically distinct substrates, for a total cross-platform expenditure of ~$372 in cloud QPU time (~$70 Rigetti, ~$302 IonQ), on top of the IBM Heron bench flown under an academic open plan.
+
+---
+
+## 7b. Open problems and next steps
+
+Ordered roughly by evidentiary value per dollar; each would be pre-registered under the same frozen-bound discipline.
+
+1. **Complete the ion's three-number card.** The honest gap in §6-1: fly the capacity (R̄) and null-integrity (D) arms on IonQ at reduced shots (64 pubs × 100 shots ≈ **$530**). This would upgrade IonQ from witness+null to full PASS-CAUSAL, making the certification symmetric with Rigetti across the modality divide.
+2. **A second trapped-ion device (N = 1 → 2).** Witness + matched null on IonQ Aria (~$0.03/shot: ≈ **$30–40**) or another vendor's ion trap (e.g. AQT). Two ion points would move "does not cluster by modality" toward "tracks the depth-integrated error budget," and begin testing the attenuation model as a law.
+3. **A pre-registered attenuation model.** The campaign's own calibration miss (C4937: single-CZ error did not predict Rigetti's W) is a quantitative question waiting for a model: predict W from published device error budgets (2q error, 1q error, readout, T2/duration) *before* flying a new chip, and grade the prediction. Each new device (items 1–2) doubles as a test point.
+4. **A third modality.** Neutral-atom gate-model machines (e.g. QuEra's forthcoming gate-mode devices) or photonic processors would add a genuinely new physical substrate. Feasibility currently gated on gate-model access and native-gate porting, not on the instrument.
+5. **Upstream the decode-bug fix.** The §6b bug affects every user of multi-circuit (program-set) results through `qiskit-braket-provider`; an upstream issue + patch (counts key reversal in the program-set branch, plus a known-input regression test mirroring our calibration) is community-relevant beyond this campaign. *(External communication — will be filed by the campaign's human principal; see §10.)*
+6. **Cross-generation IBM (Eagle).** Still unclaimed (no Eagle-generation device on the open plan); would separate "Heron generation" from "IBM superconducting" the way Rigetti separated "IBM" from "superconducting."
 
 ---
 
@@ -193,8 +215,17 @@ Holding a pre-registered causal-order instrument fixed and changing the substrat
 - **Instrument & runner**: `tools/switch_bench.py` (circuits + grader); `scripts/braket_switch_causal.py` (Braket port; witness/smoke/matched-null modes; version-pinned program-set decode correction `_programset_key_fix`). No credentials are stored in the repository.
 
 ## 9. References (selected)
-1. G. Chiribella et al., "Quantum computations without definite causal structure" (the quantum switch).
-2. M. Araújo et al., "Witnessing causal nonseparability" (the causal witness and causally-separable bound).
-3. This campaign: `README.md` (headline results), `docs/beyond-the-ladder.md` (the causal-inference argument), `docs/quantum-advantage-audit-*.md` (wins and non-wins with their currency stated).
+1. G. Chiribella, G. M. D'Ariano, P. Perinotti, B. Valiron, "Quantum computations without definite causal structure," Phys. Rev. A **88**, 022318 (2013) — the quantum switch.
+2. M. Araújo, C. Branciard, F. Costa, A. Feix, C. Giarmatzi, Č. Brukner, "Witnessing causal nonseparability," New J. Phys. **17**, 102001 (2015) — the causal witness and causally-separable bound.
+3. L. M. Procopio et al., "Experimental superposition of orders of quantum gates," Nat. Commun. **6**, 7913 (2015); G. Rubino et al., "Experimental verification of an indefinite causal order," Sci. Adv. **3**, e1602589 (2017) — first photonic demonstrations.
+4. This campaign: `README.md` (headline results), `docs/beyond-the-ladder.md` (the causal-inference argument), `docs/quantum-advantage-audit-*.md` (wins and non-wins with their currency stated).
+
+## 10. Contact — follow-up, replication & collaboration
+
+Questions, adversarial review, replication attempts, and collaboration proposals are welcome:
+
+**Mike Blakemore** (campaign principal) — **mblakemore@ucsb.edu** · **mikeblakemore@gmail.com**
+
+The repository contains every pre-registration (with pre-data commit hashes), every raw count set, every task ARN/job ID, the frozen graders, and the complete correction history — the paper is designed to be independently re-graded from receipts.
 
 *Prepared as a repo-native publication. Corrections and adversarial review are logged in the campaign's finding record.*
