@@ -1,0 +1,230 @@
+{
+ "exp": "steth_3b",
+ "backend": "ibm_marrakesh",
+ "state_seed": 3210,
+ "shots": 4000,
+ "ns": [
+  1,
+  2,
+  3
+ ],
+ "job_id": "d9frnusjeosc73fkcohg",
+ "index": [
+  {
+   "kind": "twocopy",
+   "n": 1,
+   "settings": 1
+  },
+  {
+   "kind": "tomo",
+   "n": 1,
+   "axes": "X"
+  },
+  {
+   "kind": "tomo",
+   "n": 1,
+   "axes": "Y"
+  },
+  {
+   "kind": "tomo",
+   "n": 1,
+   "axes": "Z"
+  },
+  {
+   "kind": "twocopy",
+   "n": 2,
+   "settings": 1
+  },
+  {
+   "kind": "tomo",
+   "n": 2,
+   "axes": "XX"
+  },
+  {
+   "kind": "tomo",
+   "n": 2,
+   "axes": "XY"
+  },
+  {
+   "kind": "tomo",
+   "n": 2,
+   "axes": "XZ"
+  },
+  {
+   "kind": "tomo",
+   "n": 2,
+   "axes": "YX"
+  },
+  {
+   "kind": "tomo",
+   "n": 2,
+   "axes": "YY"
+  },
+  {
+   "kind": "tomo",
+   "n": 2,
+   "axes": "YZ"
+  },
+  {
+   "kind": "tomo",
+   "n": 2,
+   "axes": "ZX"
+  },
+  {
+   "kind": "tomo",
+   "n": 2,
+   "axes": "ZY"
+  },
+  {
+   "kind": "tomo",
+   "n": 2,
+   "axes": "ZZ"
+  },
+  {
+   "kind": "twocopy",
+   "n": 3,
+   "settings": 1
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "XXX"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "XXY"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "XXZ"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "XYX"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "XYY"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "XYZ"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "XZX"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "XZY"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "XZZ"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "YXX"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "YXY"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "YXZ"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "YYX"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "YYY"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "YYZ"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "YZX"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "YZY"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "YZZ"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "ZXX"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "ZXY"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "ZXZ"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "ZYX"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "ZYY"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "ZYZ"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "ZZX"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "ZZY"
+  },
+  {
+   "kind": "tomo",
+   "n": 3,
+   "axes": "ZZZ"
+  }
+ ],
+ "true_purity": {
+  "1": 0.6362544379879418,
+  "2": 0.3806293132140365,
+  "3": 0.2984536092900311
+ },
+ "note": "two-copy vs tomography-block purity; shot-bill delta from empirical variances"
+}
