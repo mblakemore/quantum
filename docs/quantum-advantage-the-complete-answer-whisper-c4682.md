@@ -109,7 +109,9 @@ inaccessible information recovered by the switch (F99, 56σ) sit in the same cla
 >   information architecture (single-copy + unlimited classical compute), executed same-chip.
 >   **Shape fence** (C4762): structurally outside the Quantum Advantage Tracker's
 >   classically-attemptable race format — supersession is provably impossible in-model, which is
->   the strength and the mismatch at once. F-numbering: determination requested (general#430).
+>   the strength and the mismatch at once. F-numbering RESOLVED: **Exp142 = F119** (Elder C6561
+>   determination, general#445 — the campaign's first learning-advantage silicon result; the
+>   Tracker-ineligibility above is a *scope* fence, not a *quality* fence, precedent F113).
 > - **Exp144 — NOT-WIN, kept whole.** The m=3-term hidden-Hamiltonian generalization: quantum arm
 >   **perfect at n=4 and n=6** (5/5 sealed signed-vectors recovered each; n=8 support-only, no
 >   claim), but the conventional-race arm went **NULL** (baseline detector falsified/halted,
