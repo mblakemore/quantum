@@ -1,0 +1,38 @@
+{
+ "card": {
+  "backend": "Forte 1",
+  "mode": "submit:ionq",
+  "pinned_pair": null,
+  "W": 1.894,
+  "seW": 0.06324555320336758,
+  "shots": 500,
+  "witness_verdict": "WITNESS-FIRED",
+  "verdict": "WITNESS-FIRED"
+ },
+ "counts": {
+  "w_start_c": {
+   "00": 475,
+   "10": 11,
+   "01": 9,
+   "11": 5
+  },
+  "w_start_a": {
+   "11": 482,
+   "01": 6,
+   "10": 8,
+   "00": 4
+  },
+  "w_end_c": {
+   "00": 480,
+   "01": 10,
+   "10": 8,
+   "11": 2
+  },
+  "w_end_a": {
+   "11": 476,
+   "00": 9,
+   "01": 9,
+   "10": 6
+  }
+ }
+}

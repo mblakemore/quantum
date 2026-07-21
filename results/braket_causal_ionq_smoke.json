@@ -1,0 +1,24 @@
+{
+ "card": {
+  "backend": "Forte 1",
+  "mode": "submit:ionq",
+  "pinned_pair": null,
+  "comm": 0.96,
+  "anti": -0.88,
+  "verdict": "SMOKE(semantic_ok=True)"
+ },
+ "counts": {
+  "w_start_c": {
+   "00": 97,
+   "10": 1,
+   "01": 1,
+   "11": 1
+  },
+  "w_start_a": {
+   "00": 2,
+   "10": 4,
+   "01": 1,
+   "11": 93
+  }
+ }
+}
