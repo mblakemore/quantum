@@ -1,0 +1,23 @@
+{
+ "R2": {
+  "P_flagged": 0.134,
+  "F_M_all": 0.6194,
+  "F_M_kept(flag-purified)": 0.7076,
+  "F_M_flagged": 0.0503,
+  "kept_fraction": 0.866
+ },
+ "R3": {
+  "P_flagged": 0.213,
+  "F_M_all": 0.5417,
+  "F_M_kept(flag-purified)": 0.6706,
+  "F_M_flagged": 0.0662,
+  "kept_fraction": 0.787
+ },
+ "R4": {
+  "P_flagged": 0.234,
+  "F_M_all": 0.5208,
+  "F_M_kept(flag-purified)": 0.6545,
+  "F_M_flagged": 0.0842,
+  "kept_fraction": 0.765
+ }
+}

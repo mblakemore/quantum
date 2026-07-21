@@ -1,0 +1,26 @@
+{
+ "R2": {
+  "P_flagged": 0.109,
+  "F_corrected_all": 0.616,
+  "F_corrected_kept": 0.613,
+  "F_corrected_flagged": 0.6406,
+  "kept_fraction": 0.891,
+  "se_kept": 0.0058
+ },
+ "R3": {
+  "P_flagged": 0.178,
+  "F_corrected_all": 0.5234,
+  "F_corrected_kept": 0.5055,
+  "F_corrected_flagged": 0.6059,
+  "kept_fraction": 0.822,
+  "se_kept": 0.0062
+ },
+ "R4": {
+  "P_flagged": 0.238,
+  "F_corrected_all": 0.4417,
+  "F_corrected_kept": 0.4127,
+  "F_corrected_flagged": 0.5346,
+  "kept_fraction": 0.762,
+  "se_kept": 0.0063
+ }
+}

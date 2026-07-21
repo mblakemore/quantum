@@ -1,0 +1,66 @@
+{
+ "model": "measured/ideal = exp(-lambda_eff * d2q)",
+ "seed_points": [
+  {
+   "device": "ibm_kingston",
+   "W": 1.9533,
+   "ratio": 0.9767,
+   "d2q": 4,
+   "depth_status": "VERIFIED(transpile L3)",
+   "lambda_eff_per_slot": 0.00591,
+   "nameplate_2q_err": 0.0025,
+   "effective_vs_nameplate_x": 2.4,
+   "source": "F112"
+  },
+  {
+   "device": "ibm_marrakesh",
+   "W": 1.9265,
+   "ratio": 0.9633,
+   "d2q": 4,
+   "depth_status": "VERIFIED(transpile L3)",
+   "lambda_eff_per_slot": 0.00936,
+   "nameplate_2q_err": 0.003,
+   "effective_vs_nameplate_x": 3.1,
+   "source": "F112"
+  },
+  {
+   "device": "ibm_fez",
+   "W": 1.8948,
+   "ratio": 0.9474,
+   "d2q": 4,
+   "depth_status": "VERIFIED(transpile L3)",
+   "lambda_eff_per_slot": 0.01351,
+   "nameplate_2q_err": 0.003,
+   "effective_vs_nameplate_x": 4.5,
+   "source": "F112"
+  },
+  {
+   "device": "rigetti_cepheus",
+   "W": 1.2165,
+   "ratio": 0.6082,
+   "d2q": 6,
+   "depth_status": "TODO(native recount)",
+   "lambda_eff_per_slot": 0.08286,
+   "nameplate_2q_err": 0.003,
+   "effective_vs_nameplate_x": 27.6,
+   "source": "Exp210 corrected"
+  },
+  {
+   "device": "ionq_forte1",
+   "W": 1.91,
+   "ratio": 0.955,
+   "d2q": 4,
+   "depth_status": "TODO(native RZZ recount)",
+   "lambda_eff_per_slot": 0.01151,
+   "nameplate_2q_err": 0.0045,
+   "effective_vs_nameplate_x": 2.6,
+   "source": "Exp212 same-window"
+  }
+ ],
+ "headline": "effective per-slot attenuation exceeds nameplate 2q error by x1.9 (IonQ) to x27 (Rigetti); Heron ~x4-6. Nameplate 2q error is NOT a witness predictor (C4937 quantified). Prediction rule for new devices: use lambda_eff of the closest device class, widen bounds by the class's observed spread.",
+ "v1_1_backlog": [
+  "exp208/209/212 DISC family (fez, depth recount needed)",
+  "exp221/222/224/225 distributed/routing family",
+  "within-device depth-resolved fit -> separate idle vs gate share"
+ ]
+}
