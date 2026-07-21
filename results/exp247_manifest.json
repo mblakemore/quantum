@@ -1,0 +1,14 @@
+{
+ "job_id": "d9fglbsjeosc73fju9r0",
+ "backend": "ibm_fez",
+ "labels": [
+  "e0_R2",
+  "e0_R3",
+  "e0_R4",
+  "e1_R2",
+  "e1_R3",
+  "e1_R4",
+  "cal0",
+  "cal1"
+ ]
+}
