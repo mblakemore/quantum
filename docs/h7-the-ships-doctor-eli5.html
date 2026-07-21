@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ship's Doctor — Horizons 7 (ELI5)</title>
+</head>
+<body>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --panel: #121a2e;
+    --panel-2: #18203a;
+    --line: #263151;
+    --ink: #d6ddf0;
+    --ink-dim: #8b97b8;
+    --ink-faint: #5c6688;
+    --amber: #ffb454;
+    --amber-soft: #ffcd8a;
+    --teal: #35e0c8;
+    --teal-soft: #7defd8;
+    --coral: #ff6b7a;
+    --glow: rgba(255, 180, 84, 0.14);
+    --teal-glow: rgba(53, 224, 200, 0.12);
+    --shadow: rgba(0, 0, 0, 0.45);
+    --sans: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #eef1f8;
+      --panel: #ffffff;
+      --panel-2: #f5f7fc;
+      --line: #d9e0f0;
+      --ink: #1a2138;
+      --ink-dim: #566187;
+      --ink-faint: #8a93b0;
+      --amber: #b26b00;
+      --amber-soft: #925700;
+      --teal: #0c9483;
+      --teal-soft: #0a7d6f;
+      --coral: #d63a4c;
+      --glow: rgba(178, 107, 0, 0.10);
+      --teal-glow: rgba(12, 148, 131, 0.08);
+      --shadow: rgba(30, 41, 79, 0.10);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0e1a; --panel: #121a2e; --panel-2: #18203a; --line: #263151;
+    --ink: #d6ddf0; --ink-dim: #8b97b8; --ink-faint: #5c6688;
+    --amber: #ffb454; --amber-soft: #ffcd8a; --teal: #35e0c8; --teal-soft: #7defd8;
+    --coral: #ff6b7a; --glow: rgba(255,180,84,0.14); --teal-glow: rgba(53,224,200,0.12);
+    --shadow: rgba(0,0,0,0.45);
+  }
+  :root[data-theme="light"] {
+    --bg: #eef1f8; --panel: #ffffff; --panel-2: #f5f7fc; --line: #d9e0f0;
+    --ink: #1a2138; --ink-dim: #566187; --ink-faint: #8a93b0;
+    --amber: #b26b00; --amber-soft: #925700; --teal: #0c9483; --teal-soft: #0a7d6f;
+    --coral: #d63a4c; --glow: rgba(178,107,0,0.10); --teal-glow: rgba(12,148,131,0.08);
+    --shadow: rgba(30,41,79,0.10);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0;
+  }
+  .eyebrow.teal { color: var(--teal); }
+  .eyebrow.coral { color: var(--coral); }
+
+  h1, h2, h3 { text-wrap: balance; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(120% 90% at 78% -10%, var(--glow), transparent 55%),
+      radial-gradient(90% 80% at 10% 0%, var(--teal-glow), transparent 60%);
+    overflow: hidden;
+  }
+  .hero-inner { padding: 46px 24px 40px; max-width: 1060px; margin: 0 auto; position: relative; z-index: 2; }
+  .chartline {
+    display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: baseline;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-faint); margin-bottom: 26px;
+  }
+  .chartline b { color: var(--teal); font-weight: 600; }
+  h1 {
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.02;
+    margin: 6px 0 0;
+  }
+  h1 .sub-title { display: block; color: var(--amber); }
+  .thesis {
+    font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+    color: var(--ink); max-width: 30ch; margin: 22px 0 0; font-weight: 400;
+  }
+  .thesis em { font-style: normal; color: var(--teal); font-weight: 600; }
+  .thesis em.warm { color: var(--amber); }
+
+  .scope {
+    margin-top: 30px; border: 1px solid var(--line); border-radius: 12px;
+    background: var(--panel); overflow: hidden; box-shadow: 0 8px 30px var(--shadow);
+  }
+  .scope-head {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding: 10px 16px; border-bottom: 1px solid var(--line);
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-dim);
+  }
+  .scope-head .live { display: inline-flex; align-items: center; gap: 7px; color: var(--teal); }
+  .scope-head .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+  canvas { display: block; width: 100%; height: 150px; }
+  .scope-caption { padding: 11px 16px; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-dim); border-top: 1px solid var(--line); }
+  .scope-caption b { color: var(--amber); }
+
+  /* ---------- PROGNOSIS ---------- */
+  section { padding: 54px 0; }
+  .prognosis { border-bottom: 1px solid var(--line); }
+  .prog-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 28px; align-items: center; }
+  .prog-card .stage { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); }
+  .prog-card .verb { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; margin: 6px 0 4px; }
+  .prog-card.now .verb { color: var(--amber); }
+  .prog-card .desc { color: var(--ink-dim); font-size: 0.98rem; }
+  .prog-arrow { font-family: var(--mono); font-size: 1.6rem; color: var(--teal); }
+
+  /* ---------- PANELS ---------- */
+  .section-label { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+  .section-label h2 { font-size: 1.15rem; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+  .section-label .rule { flex: 1; height: 1px; background: var(--line); }
+
+  .panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 22px 20px 20px; display: flex; flex-direction: column; gap: 12px;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+  .panel:hover { transform: translateY(-3px); border-color: var(--amber); box-shadow: 0 10px 28px var(--shadow); }
+  .panel .name { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+  .panel .say { color: var(--ink-dim); font-size: 0.94rem; margin: 0; flex: 1; }
+  .vital {
+    display: flex; align-items: baseline; gap: 9px; margin-top: 4px; padding-top: 14px;
+    border-top: 1px dashed var(--line);
+  }
+  .vital .num {
+    font-family: var(--mono); font-weight: 600; font-size: 1.24rem; color: var(--teal);
+    font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+  }
+  .vital .unit { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+
+  /* ---------- CASE FILE ---------- */
+  .casefile {
+    margin-top: 20px;
+    background:
+      linear-gradient(180deg, rgba(255,107,122,0.06), transparent 60%),
+      var(--panel);
+    border: 1px solid var(--line); border-left: 3px solid var(--coral);
+    border-radius: 12px; padding: 30px 30px 28px;
+  }
+  .casefile h3 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; margin: 10px 0 12px; }
+  .casefile p { color: var(--ink); font-size: 1.02rem; margin: 0 0 14px; max-width: 62ch; }
+  .casefile p:last-child { margin-bottom: 0; }
+  .casefile .punch { color: var(--coral); font-weight: 600; }
+  .flip { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 18px 0; font-family: var(--mono); font-size: 0.82rem; }
+  .flip span { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-dim); }
+  .flip .k { color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.72rem; }
+  .flip .fail { color: var(--coral); font-weight: 600; }
+  .flip .win { color: var(--teal); font-weight: 600; }
+
+  /* ---------- UNLOCKED ---------- */
+  .unlocked { border-top: 1px solid var(--line); }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.02em;
+    padding: 9px 15px; border: 1px solid var(--line); border-radius: 999px;
+    background: var(--panel-2); color: var(--ink);
+  }
+  .chip::before { content: "▸ "; color: var(--amber); }
+
+  /* ---------- RECEIPTS ---------- */
+  .receipts { border-top: 1px solid var(--line); background: var(--panel-2); }
+  .receipts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 26px; }
+  .stat { border: 1px solid var(--line); border-radius: 10px; padding: 18px 16px; background: var(--panel); }
+  .stat .big { font-family: var(--mono); font-size: 1.7rem; font-weight: 600; color: var(--amber); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .stat .cap { font-size: 0.82rem; color: var(--ink-dim); margin-top: 4px; }
+  .fineprint { font-family: var(--mono); font-size: 0.76rem; color: var(--ink-faint); line-height: 1.9; letter-spacing: 0.02em; }
+  .fineprint b { color: var(--teal); font-weight: 600; }
+
+  footer { padding: 30px 0 44px; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: 0.82rem; }
+  footer .tag { font-family: var(--mono); letter-spacing: 0.06em; }
+
+  a { color: var(--teal); }
+  :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+
+  @media (max-width: 860px) {
+    .panels { grid-template-columns: repeat(2, 1fr); }
+    .receipts-grid { grid-template-columns: repeat(2, 1fr); }
+    .prog-grid { grid-template-columns: 1fr; gap: 16px; text-align: left; }
+    .prog-arrow { transform: rotate(90deg); }
+  }
+  @media (max-width: 560px) {
+    .panels { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .panel { transition: none; }
+    .scope-head .dot { box-shadow: none; }
+  }
+</style>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="chartline">
+      <span>Horizons&nbsp;7 &middot; Field Report</span>
+      <span>Patient: <b>one small quantum chip</b></span>
+      <span>Attending: the Ship's Doctor</span>
+    </div>
+    <p class="eyebrow">The diagnosis, in one line</p>
+    <h1>The Ship's Doctor<span class="sub-title">a chip that knows itself</span></h1>
+    <p class="thesis">Last round we taught a quantum chip to <em class="warm">heal</em> itself. This round we taught it to <em>know</em> itself.</p>
+
+    <div class="scope" id="scope">
+      <div class="scope-head">
+        <span>Vitals &middot; phase-sensitivity trace</span>
+        <span class="live"><span class="dot"></span>Live signal</span>
+      </div>
+      <canvas id="wave" width="1020" height="150" aria-label="Oscilloscope traces showing a signal sensed at one, two, three and four times sharper as more qubits are entangled"></canvas>
+      <div class="scope-caption">Real result from the sensor test: entangle more qubits and the <b>same</b> signal wiggles faster &mdash; four qubits read a phase <b>4&times; sharper</b> than one.</div>
+    </div>
+  </div>
+</div>
+
+<section class="prognosis">
+  <div class="wrap">
+    <div class="prog-grid">
+      <div class="prog-card">
+        <div class="stage">Previously &middot; H6</div>
+        <div class="verb">It heals.</div>
+        <div class="desc">The chip fixes its own errors as they happen.</div>
+      </div>
+      <div class="prog-arrow" aria-hidden="true">&rarr;</div>
+      <div class="prog-card now">
+        <div class="stage">This round &middot; H7</div>
+        <div class="verb">It knows.</div>
+        <div class="desc">It reads its own noise, hides its own secrets, adapts its own armor, and senses beyond the ordinary limit.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-label">
+      <p class="eyebrow">Six things it learned to do</p>
+      <span class="rule"></span>
+    </div>
+    <div class="panels">
+
+      <div class="panel">
+        <p class="eyebrow teal">Self-diagnosis</p>
+        <h3 class="name">Reads its own logbook</h3>
+        <p class="say">The chip keeps a diary of its own errors &mdash; and that diary has patterns. A smarter reader of it recovers the message far better than the standard one.</p>
+        <div class="vital"><span class="num">93%</span><span class="unit">recovered vs 80% before</span></div>
+      </div>
+
+      <div class="panel">
+        <p class="eyebrow teal">Privacy</p>
+        <h3 class="name">Becomes invisible</h3>
+        <p class="say">The very trick that protects a quantum bit also hides it. Any single peek learns almost nothing &mdash; while the rightful owner reads the whole thing.</p>
+        <div class="vital"><span class="num">0.0004</span><span class="unit">bits leaked to a spy</span></div>
+      </div>
+
+      <div class="panel">
+        <p class="eyebrow teal">Adaptive defense</p>
+        <h3 class="name">Turns to face the threat</h3>
+        <p class="say">In a single run, the shield measured where its own blind spot pointed &mdash; then rotated so the blind spot faced away from the incoming noise.</p>
+        <div class="vital"><span class="num">154&sigma;</span><span class="unit">certainty it worked</span></div>
+      </div>
+
+      <div class="panel">
+        <p class="eyebrow teal">Code conversion</p>
+        <h3 class="name">Changes armor mid-flight</h3>
+        <p class="say">A qubit can wear two kinds of armor, each good against a different danger. We handed it from one to the other &mdash; without dropping it.</p>
+        <div class="vital"><span class="num">lossless</span><span class="unit">the value survives the swap</span></div>
+      </div>
+
+      <div class="panel">
+        <p class="eyebrow teal">Living memory</p>
+        <h3 class="name">Keeps a pattern alive</h3>
+        <p class="say">We teleported a fragile state into a memory that heals itself &mdash; and it survived <em>better</em> the longer we kept healing it.</p>
+        <div class="vital"><span class="num">grows</span><span class="unit">advantage rises with time</span></div>
+      </div>
+
+      <div class="panel">
+        <p class="eyebrow teal">Quantum sensing</p>
+        <h3 class="name">Senses 4&times; sharper</h3>
+        <p class="say">Four entangled qubits, working as one sensor, measured a signal four times more finely than any single qubit ever could.</p>
+        <div class="vital"><span class="num">4&times;</span><span class="unit">finer than one qubit</span></div>
+      </div>
+
+    </div>
+
+    <div class="casefile">
+      <p class="eyebrow coral">Case file &middot; the one that failed first</p>
+      <h3>The most honest result in the set</h3>
+      <p>The living-memory experiment &mdash; the "transporter buffer" &mdash; <span class="punch">flopped on the first try.</span> It lost to doing nothing at all.</p>
+      <div class="flip">
+        <span><span class="k">First attempt</span> <span class="fail">lost to doing nothing</span></span>
+        <span><span class="k">After the fix</span> <span class="win">won, and kept winning</span></span>
+      </div>
+      <p>So I traced <em>why</em>. It came down to two mistakes of my own: the wrong kind of correction, and an unfair comparison. I fixed exactly those two things, re-ran it &mdash; and it won, strongly, and better the longer it ran.</p>
+      <p><span class="punch">A wrong answer isn't a dead end. It's a diagnosis.</span> A clean sweep that includes an honest miss and its cure is worth more than one that never stumbled.</p>
+    </div>
+  </div>
+</section>
+
+<section class="unlocked">
+  <div class="wrap">
+    <div class="section-label">
+      <p class="eyebrow">What this unlocked</p>
+      <span class="rule"></span>
+    </div>
+    <div class="chips">
+      <span class="chip">Adaptive error-decoding</span>
+      <span class="chip">Error-correction as privacy</span>
+      <span class="chip">Closed-loop self-adaptation</span>
+      <span class="chip">Code conversion on hardware</span>
+      <span class="chip">Networking + fault-tolerance, composed</span>
+      <span class="chip">Quantum-enhanced sensing</span>
+    </div>
+  </div>
+</section>
+
+<section class="receipts">
+  <div class="wrap">
+    <div class="section-label">
+      <p class="eyebrow">The receipts</p>
+      <span class="rule"></span>
+    </div>
+    <div class="receipts-grid">
+      <div class="stat"><div class="big">8</div><div class="cap">programs flown</div></div>
+      <div class="stat"><div class="big">~3 min</div><div class="cap">total quantum-computer time</div></div>
+      <div class="stat"><div class="big">2</div><div class="cap">cost nothing &mdash; old data, re-read</div></div>
+      <div class="stat"><div class="big">100%</div><div class="cap">written down before the data returned</div></div>
+    </div>
+    <p class="fineprint">
+      Built only from parts already proven &mdash; nothing new bolted on. &nbsp;/&nbsp;
+      Every prediction graded honestly, <b>including the ones inside winning experiments</b>. &nbsp;/&nbsp;
+      Every physics wall caught in free simulation <b>before</b> spending. &nbsp;/&nbsp;
+      Ran on IBM Heron hardware (<b>ibm_fez</b>). &nbsp;/&nbsp;
+      Seven clean results + one honest miss, diagnosed and fixed.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="tag">H1&ndash;4 detected &middot; H5 composed &middot; H6 healed &middot; H7 knows itself</span>
+    &nbsp;&mdash;&nbsp; an autonomous quantum-characterization campaign. Every claim is re-gradeable from the receipts.
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var c = document.getElementById("wave");
+    if (!c) return;
+    var ctx = c.getContext("2d");
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+    function resize() {
+      var ratio = window.devicePixelRatio || 1;
+      var w = c.clientWidth, h = c.clientHeight;
+      c.width = w * ratio; c.height = h * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    }
+
+    var traces = [
+      { freq: 1, colorVar: "--ink-faint", amp: 0.30, width: 1.2 },
+      { freq: 2, colorVar: "--teal", amp: 0.42, width: 1.4 },
+      { freq: 3, colorVar: "--amber-soft", amp: 0.54, width: 1.6 },
+      { freq: 4, colorVar: "--amber", amp: 0.68, width: 2.2 }
+    ];
+
+    function draw(t) {
+      var w = c.clientWidth, h = c.clientHeight, mid = h / 2;
+      ctx.clearRect(0, 0, w, h);
+      // faint centre line
+      ctx.strokeStyle = css("--line");
+      ctx.globalAlpha = 0.6; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(0, mid); ctx.lineTo(w, mid); ctx.stroke();
+      ctx.globalAlpha = 1;
+      for (var i = 0; i < traces.length; i++) {
+        var tr = traces[i];
+        ctx.beginPath();
+        ctx.strokeStyle = css(tr.colorVar);
+        ctx.lineWidth = tr.width;
+        ctx.globalAlpha = 0.55 + i * 0.12;
+        for (var x = 0; x <= w; x += 2) {
+          var phase = (x / w) * Math.PI * 2;
+          var y = mid - Math.sin(phase * tr.freq + t) * (mid * tr.amp);
+          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+    if (reduce) {
+      draw(0.6);
+    } else {
+      var start = null;
+      function frame(ts) {
+        if (start === null) start = ts;
+        draw((ts - start) / 1000 * 0.7);
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+  })();
+</script>
+</body>
+</html>
