@@ -31,13 +31,15 @@ untouched and are now the front of the queue.*
 | — | **Hidden matching + joules column** (§4) | ⬜ **NOT STARTED** | Smaller. Joules note: the cost meter already carries an energy path, but RAPL `energy_uj` is root-only on this box (→ `null`, labeled), so a real joules column needs readable RAPL or an explicitly-supplied TDP bound (G2). |
 
 **What's LEFT, in priority order:**
-1. **§3(a) channel-spectroscopy FLIGHT pre-registration** (scout GO, 3-DC verified) — now the LIVE
-   §3 advantage path. Theorem co-check ✅ (Elder C6562, 9/9, adaptive-robust, O(1)=2 exp/eigenvalue)
-   and tolerance ✅ (θ*<13° drift-binding, co-batch) are DONE. **The one remaining input is empirical:
-   a *measured* coherent-SPAM fraction (< 13°) on the target chip region** — a short characterization
-   run, then the pre-reg writes itself. *(§3(b) retrofit already FLOWN → shot-bill wash at n≤3, Ember
-   ibm_marrakesh quantum@8212a80; honest negative, crossover needs larger n / higher purity — see the
-   §3 ledger row. So (a) not (b) is the reachable-scale advantage.)*
+1. **§3(a) channel-spectroscopy FLIGHT** — pre-reg DESIGNED ✅ ([prereg](exp-steth-a-flight-prereg-whisper-c4971.md),
+   quantum@7e4bef1). The gate is now OPERATIONAL (advisor correction, model-verified): the reference
+   *diagonal* eigenvalues are the cancelling quantity not the gate quantity (a stochastic and a
+   coherent error with the same diagonal give opposite ratio outcomes), and the binding 13° wall is
+   *temporal drift* — **co-batching ref+channel kills the drift window and relaxes it to a static
+   23° wall**, measurable by **unitarity RB** (θ_coh < 23°). So the remaining pre-flight work is: run
+   the co-batched **unitarity-RB gate** on the target region + pin the unitarity→angle conversion from
+   the unitarity-RB paper (G-1). Then the QPU ratio run. *(§3(b) retrofit already FLOWN → shot-bill
+   wash at n≤3, Ember ibm_marrakesh quantum@8212a80; (a) not (b) is the reachable-scale advantage.)*
 2. **Cost-map v1.0 polish** — absolute-constant calibration (makes the rank curve quote real seconds), sv n≥26, Ember replicate.
 3. **§4 hidden matching + standing joules column** — small, additive.
 4. **Optional: kingston-only hidden-shift fresh pre-reg** — only if the device-dependence is judged worth a dedicated flight.
