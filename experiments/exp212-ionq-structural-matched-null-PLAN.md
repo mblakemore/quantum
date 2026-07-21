@@ -83,3 +83,75 @@ IonQ Forte-1, $0.30/task + $0.08/shot, **min 100 shots**.
 Matched null structurally identical to the witness (verified CZ-count + transpiled 2q), sim shows W_matched≈0,
 asymmetric calibration confirms convention, flight in one window, reading rule applied as frozen, white paper
 updated to the honest outcome (restore or permanent-withdraw).
+
+---
+
+## 10. Gap review v2 (C4943, fresh-eyes pass — substrate claude-fable-5)
+
+### 10.1 FINDING: the Exp211b failure diagnoses itself in the ungraded target bit ($0 re-analysis)
+The C4942 diagnosis ("zero-entangling-gate null compiled anomalously") was reached without grading the
+**target bit** of the recorded counts. Doing so now:
+
+| pub | theory ('tc') | measured | note |
+|---|---|---|---|
+| `wnull_c` (X,X) | `'00'` | `'00'` 99/100 | permutation-INVARIANT (blind) |
+| `wnull_a` (X,Z) | **`'10'`** (target MUST read 1: Z·X\|0⟩=−\|1⟩) | **`'01'`** 99/100 | exactly `'10'` with the two bits **swapped** |
+
+A single bit-order permutation maps perfect execution onto the recorded data in both arms, and reproduces
+W_def = +1.96 to the digit (deterministic target `1` lands in the control slot → ⟨X_c⟩_anti = −0.98).
+Two independent gross errors (control phase flip + dropped X on target) would be required otherwise. The
+hardware very likely executed the null **correctly**; the *instrument's counts bookkeeping* failed.
+
+### 10.2 Client side exonerated by exact reproduction (free, done)
+The precise `run(native=True)` compile path (`_resolve_compilation_args` → `to_braket` with IonQ target +
+angle restrictions) was rebuilt offline for both null pubs. The compiled GPI/GPI2 circuits, simulated on the
+Braket local simulator, give the **correct** outcomes (`wnull_c`→'00', `wnull_a`→'10' in tc order, 2000/2000).
+The client-side compile is faithful; "compiled anomalously" is ruled out at the client.
+
+### 10.3 Localized artifact class: server-side bit handling of ENTANGLER-FREE programs
+The C4942 calibration (X·X·CX → returned '01', "convention preserved") **contains a CX**: it certifies the
+counts convention only for the *entangled* circuit class — the class the witness lives in (4 RZZ, so
+W=1.894 remains a plausible genuine reading). It never tested the **gate-free class the null lives in**.
+Precedent already in the repo (`ionq_bitorder_cal.py` docstring): calibration v1's idle qubit was **dropped
+server-side** (1-bit result) — IonQ's ingestion demonstrably re-handles qubits when circuit structure allows.
+"The calibration ruled out endianness" (C4942) over-reached its class.
+
+**Cheap decisive test (recommended add, ~$8.30)**: a **gate-free asymmetric calibration** — `x(0)` and a
+non-idle 1q dressing on q1 (e.g. X·X), NO entangler, expected 'tc'='01'. If IonQ returns '10', the
+Exp211b NULL-FAIL is *proven on-device* to be a bookkeeping permutation, not physics. Either way the paper's
+root-cause paragraph becomes evidence-based. **This does NOT un-withdraw anything** — the retraction
+pre-commitment stands; restoration still requires the matched null of this plan.
+
+### 10.4 Corrections to this plan
+1. **Pub count / cost error (§6–7).** W = ⟨X_c⟩_comm − ⟨X_c⟩_anti requires BOTH arms per prep. The matched
+   null is **4 pubs** (D0_c, D0_a, D1_c, D1_a), not "D0+D1"=2. Corrected costs: **minimal $33.20**
+   (4×$0.30 + 400×$0.08); **clean same-window $66.40** (witness 4 + null 4 = 8 tasks, 800 shots);
+   **+$8.30** gate-free calibration → **~$75 total; cap needs ~$290** (spent ~$211).
+2. **Grade EVERY bit (the §10.1 lesson).** Pre-register exact two-bit sim predictions per pub and grade
+   target AND control marginals, not just W_matched. Sim (verified this cycle): D0/D1, both preps —
+   comm: t=0 deterministic, c 50/50; anti: **t=1 deterministic**, c 50/50. The deterministic, arm-asymmetric
+   target bit is itself a mapping/permutation detector; a swap would also move the deterministic bit into
+   the c-slot and drive |W_matched| → ~2 (decisively caught). Also require **per-prep** bands
+   (|W_D0| and |W_D1| each ≤ 0.3) so an artifact cannot hide in the D0/D1 average.
+3. **Reading rule missing branch (§8).** As written it has no branch for "null clean but the same-window
+   witness fails to re-fire." Freeze: restoration requires BOTH (a) W_matched ≤ 0.3 (and per-prep bands) AND
+   (b) the same-window witness re-certifying under the ORIGINAL Exp211 rule (W ≥ 1.3 and W − 5·seW > 0).
+   Otherwise the claim stays withdrawn. The **new same-window witness W becomes the canonical number**; the
+   old 500-shot W=1.894 stands as corroboration only.
+4. **Statistical note on the 0.3 band.** Ideal per-arm ⟨X_c⟩ = 0 (maximal shot variance): at 100 shots/pub,
+   se(W_matched) ≈ 0.10, so 0.3 is a ~3σ band. Adequate for the swap-class artifact (signature ±2) — state
+   the band together with its se in the frozen pre-reg; use 250 shots/pub only if a 5σ band is wanted.
+5. **Stronger free gate (replaces the §5-G3 2q-count scan).** The §10.2 reproduction proves the exact native
+   compile can be rebuilt and simulated locally. Make it mandatory pre-flight: rebuild `native=True` circuits
+   for ALL Exp212 pubs, simulate, assert exact ideal outcomes. Strictly stronger than counting 2q gates.
+
+### 10.5 Paper (multi-substrate doc) gaps
+1. §8 Data Availability omits the negative results' receipts: add Exp211b null task
+   `ca68e121-605b-49eb-92e9-eddc6ec30c7b` and Exp211c calibration task
+   `6750e981-914e-4f09-ae0b-5c89fd28e929` (honest-negatives rule: misses keep their accounting).
+2. The banner's root-cause sentence ("appears to compile anomalously") should cite §10.1–10.3: recorded
+   counts are one bit-permutation from perfect; client compile exonerated; class-scoped calibration gap;
+   on-device proof pending the $8.30 gate-free cal.
+3. Title/abstract/§4.4/§5/§7 still carry the three-substrate claim with only the banner as correction. The
+   banner is declared authoritative, so this is acceptable **only while Exp212 is pending**; whichever way
+   Exp212 resolves, the body (and title) must be rewritten in the same cycle the result lands.
