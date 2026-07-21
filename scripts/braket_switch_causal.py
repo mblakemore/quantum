@@ -142,11 +142,19 @@ def main():
                     help="run only the 4 witness pubs; grade W vs the causal-mixture bound 0 (cost-frugal)")
     ap.add_argument("--smoke", action="store_true",
                     help="1 witness circuit @ 100 shots — cheapest QPU format/port check")
+    ap.add_argument("--null-witness", action="store_true",
+                    help="definite-order control (definite=True): expect W~0, closes the compiler-mapping loophole")
     ap.add_argument("--shots", type=int, default=None, help="override shots per pub")
     args = ap.parse_args()
 
     pubs = build_causal()
-    if args.smoke:
+    if args.null_witness:
+        from exp106_capacity_activation import build_circuit
+        sh = args.shots if args.shots else 100
+        pubs = [("wnull_c", build_circuit("X", "X", 0, definite=True), sh),
+                ("wnull_a", build_circuit("X", "Z", 0, definite=True), sh)]
+        print(f"NULL-WITNESS — 2 DEFINITE-ORDER circuits (comm+anti) @ {sh} shots — causal-mixture control, expect W~0")
+    elif args.smoke:
         pubs = [(lab, qc, 100) for lab, qc, s in pubs if lab in ("w_start_c", "w_start_a")]
         print("SMOKE — 2 witness circuits (comm+anti) @ 100 shots — SEMANTIC port check (~$16.60 on IonQ)")
     elif args.witness_only or args.canary:
@@ -167,7 +175,8 @@ def main():
     print(f"backend: {backend.name}  ({'LOCAL — FREE' if which=='local' else 'QPU — SPEND'})")
 
     layout = None
-    suffix = "_smoke" if args.smoke else ("_witness" if (args.witness_only or args.canary) else "")
+    suffix = ("_null" if args.null_witness else "_smoke" if args.smoke
+              else "_witness" if (args.witness_only or args.canary) else "")
     tag = (args.device + suffix) if args.submit else "localscan"
     manifest_path = os.path.join(QROOT, "results", f"braket_causal_{tag}_manifest.json") if args.submit else None
     if which != "local":
@@ -186,7 +195,28 @@ def main():
     print("=" * 62)
     print(f"SWITCH-BENCH CAUSAL AXIS — {backend.name}")
     print("=" * 62)
-    if args.smoke:
+    if args.null_witness:
+        import numpy as np
+        def xc(lab):
+            c = counts[lab]; n = sum(c.values())
+            return (sum(v for k, v in c.items() if k[1] == "0")
+                    - sum(v for k, v in c.items() if k[1] == "1")) / n
+        W_def = xc("wnull_c") - xc("wnull_a")
+        shots = pubs[0][2]
+        seW = float(np.sqrt(2.0 / shots))   # 2 arms, var<=1 each, 1 rep
+        # closes the compiler-mapping loophole: a faithful compilation MUST give W~0 for a
+        # definite-order (causally-separable) process. Pre-registered band |W_def| < 0.3.
+        closed = abs(W_def) < 0.3
+        sep_sigma = (1.894 - W_def) / float(np.sqrt(seW**2 + 0.0632**2))
+        print(f"NULL-WITNESS (definite-order control)")
+        print(f"  wnull_c: {counts['wnull_c']}")
+        print(f"  wnull_a: {counts['wnull_a']}")
+        print(f"  W_definite = {W_def:+.4f} ± {seW:.4f}   (expect ~0; switch W was +1.894)")
+        print(f"  |W_def| < 0.3 band: {closed}   |   separation from switch: {sep_sigma:.1f} sigma")
+        verdict = "NULL-CLOSED" if closed else "NULL-FAIL(artifact?)"
+        print(f"  verdict: {verdict}")
+        out.update({"W_definite": W_def, "seW": seW, "shots": shots, "verdict": verdict})
+    elif args.smoke:
         def xc(lab):
             c = counts[lab]; n = sum(c.values())
             return (sum(v for k, v in c.items() if k[1] == "0")
@@ -216,7 +246,7 @@ def main():
     outpath = os.path.join(QROOT, "results", f"braket_causal_{tag}.json")
     json.dump({"card": out, "counts": counts}, open(outpath, "w"), indent=1, default=float)
     print(f"card -> {outpath}")
-    return 0 if (verdict == "PASS-CAUSAL" or "FIRED" in verdict or "semantic_ok=True" in verdict) else 1
+    return 0 if (verdict == "PASS-CAUSAL" or "FIRED" in verdict or "CLOSED" in verdict or "semantic_ok=True" in verdict) else 1
 
 
 if __name__ == "__main__":
