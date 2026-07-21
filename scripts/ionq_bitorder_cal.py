@@ -20,8 +20,10 @@ from braket_switch_causal import get_backend
 
 
 def cal_circuit():
+    # deterministic |q0=1, q1=0>, with BOTH qubits carrying gates so native compilation cannot
+    # drop the idle one (the v1 failure: idle q1 was dropped -> 1-bit result).
     qc = QuantumCircuit(2, 2)
-    qc.x(0)                 # control (q0) -> 1 ; target (q1) stays 0
+    qc.x(0); qc.x(1); qc.cx(0, 1)   # q0=1 ; q1 = 1 XOR 1 = 0
     qc.measure(0, 0); qc.measure(1, 1)
     return qc
 
