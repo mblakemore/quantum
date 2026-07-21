@@ -176,13 +176,105 @@ def submit():
     return job.job_id()
 
 
+def _fit_exp(xs, ys):
+    """Fit y = A*p^x + B (least squares over a grid of p, closed-form A,B per p). Returns (p,A,B)."""
+    import numpy as _np
+    best = None
+    for p in _np.linspace(0.80, 0.9999, 400):
+        f = _np.array([p ** x for x in xs]); n = len(xs)
+        # solve [A,B] for y ~ A*f + B
+        M = _np.vstack([f, _np.ones(n)]).T
+        (A, B), *_ = _np.linalg.lstsq(M, _np.array(ys), rcond=None)
+        res = _np.sum((A * f + B - _np.array(ys)) ** 2)
+        if best is None or res < best[0]:
+            best = (res, p, A, B)
+    return best[1], best[2], best[3]
+
+
+def decode():
+    """Fetch the job, fit r (standard) and u (unitarity), report {r,u,r_coh}. MEASURE not DECLARE —
+    the pass/fail gate is closed separately (scout-model predicted-bias / pinned unitarity paper)."""
+    import numpy as _np
+    sys.path.insert(0, os.path.join(QROOT, "scripts"))
+    from run_exp66_qpu_partb import _get_ibm_service
+    man = json.load(open(os.path.join(QROOT, "results", "exp_steth_a_unitarity_manifest.json")))
+    svc = _get_ibm_service()
+    res = svc.job(man["job_id"]).result()
+    idx = man["index"]
+
+    def counts(i):
+        d = res[i].data
+        creg = list(d.__dict__.keys())[0] if hasattr(d, "__dict__") else "c"
+        return getattr(d, creg).get_counts()
+
+    # standard RB -> alpha -> r
+    d = 4
+    std = {}
+    for i, rec in enumerate(idx):
+        if rec["kind"] == "std":
+            c = counts(i); tot = sum(c.values())
+            surv = sum(v for k, v in c.items() if k.replace(" ", "") == "00") / tot
+            std.setdefault(rec["m"], []).append(surv)
+    ms = sorted(std); surv_mean = [float(_np.mean(std[m])) for m in ms]
+    alpha, _, _ = _fit_exp(ms, surv_mean)
+    r = (1 - alpha) * (d - 1) / d
+
+    # unitarity RB -> u  (purity per (m,seed) from its 9 bases)
+    uni = {}
+    for i, rec in enumerate(idx):
+        if rec["kind"] == "uni":
+            key = (rec["m"], rec["seed"])
+            uni.setdefault(key, {})[rec["basis"]] = counts(i)
+    pur = {}
+    for (m, s), bc in uni.items():
+        pur.setdefault(m, []).append(purity_from_bases(bc))
+    ums = sorted(pur); pur_mean = [float(_np.mean(pur[m])) for m in ums]
+    u, _, _ = _fit_exp(ums, pur_mean)
+
+    # drift monitor: purity spread of the late repeats vs the in-sweep m=4
+    drift = {}
+    for i, rec in enumerate(idx):
+        if rec["kind"] == "drift":
+            key = (rec["rep"], rec["seed"])
+            drift.setdefault(key, {})[rec["basis"]] = counts(i)
+    drift_pur = [purity_from_bases(bc) for bc in drift.values()]
+
+    # r_coh: coherent part of the infidelity. Wallman-Granade-Harper-Flammia relation (PIN from paper,
+    # G-1): a purely stochastic channel of infidelity r has unitarity u_stoch = (1 - d*r/(d-1))^2
+    # (its incoherent floor). Coherence raises u above that; invert to the coherent infidelity.
+    u_stoch = (1 - d * r / (d - 1)) ** 2
+    r_coh = max(0.0, r * (1 - _np.sqrt(min(1.0, u_stoch) / max(u, 1e-9)))) if u > u_stoch else 0.0
+
+    out = {"card": "exp_steth_a_unitarity_gate_decoded", "job_id": man["job_id"],
+           "backend": man["backend"], "pair": man["pair"], "substrate": "claude-fable-5",
+           "cycle": "C4971", "alpha": round(float(alpha), 5), "r_2q_cycle": round(float(r), 6),
+           "unitarity_u": round(float(u), 5), "u_stoch_floor": round(float(u_stoch), 5),
+           "r_coherent": round(float(r_coh), 6),
+           "survival_by_m": dict(zip(ms, [round(x, 4) for x in surv_mean])),
+           "purity_by_m": dict(zip(ums, [round(x, 4) for x in pur_mean])),
+           "drift_purity_late": [round(x, 4) for x in drift_pur],
+           "status": "MEASURED_not_declared",
+           "gate_note": ("pass/fail closed separately: feed r_coherent through the scout model "
+                         "(predicted ratio-bias < eps=0.02) and confirm the u->r_coh relation from "
+                         "the unitarity-RB paper (Wallman-Granade-Harper-Flammia 2015; G-1 pin)")}
+    op = os.path.join(QROOT, "results", "exp_steth_a_unitarity_decoded.json")
+    json.dump(out, open(op, "w"), indent=1)
+    print(json.dumps({k: out[k] for k in ("r_2q_cycle", "unitarity_u", "u_stoch_floor",
+                                          "r_coherent", "drift_purity_late")}, indent=1))
+    print(f"decoded -> {os.path.relpath(op)}")
+    return out
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--sanity", action="store_true"); ap.add_argument("--submit", action="store_true")
+    ap.add_argument("--decode", action="store_true")
     args = ap.parse_args()
     if args.sanity:
         local_sanity()
     elif args.submit:
         submit()
+    elif args.decode:
+        decode()
     else:
-        print("use --sanity (local check) or --submit (QPU)")
+        print("use --sanity (local check) | --submit (QPU) | --decode (after completion)")
