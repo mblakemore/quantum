@@ -37,3 +37,10 @@ invoked post-hoc — grid edges are reported if hit.
 PD-1: noiseless aer end-to-end — registers/replay/HMM/balanced-metric wiring verified, all decoders
 perfect on both classes at all R. PD-3: n/a (static). Depth assert in-code. Streams archived raw in the
 result file (the 241b rule: every syndrome stream is a future instrument).
+
+## AMENDMENT (C4954b, PRE-DATA — before any successful submission)
+First submission attempt was blocked by the in-code depth assert (transpiled 2q 19/23/27 vs an
+optimistic ≤22): the syndrome graph gives d1 degree-4, so heavy-hex routing is unavoidable (Exp241 paid
+the same tax). Fixed pre-flight, no data seen: chain-native encode (cx d0→d1→d2), optimization_level 3,
+assert re-set to ≤32 under the plan's ≤40 wall guard. No bounds, shots, decoders, or reading rules
+changed. Selftest re-passed.

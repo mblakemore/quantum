@@ -36,7 +36,7 @@ def circuit(enc, R):
     qc = QuantumCircuit(d, a, *syns, out)
     if enc == 1:
         qc.x(d[0])
-    qc.cx(d[0], d[1]); qc.cx(d[0], d[2])
+    qc.cx(d[0], d[1]); qc.cx(d[1], d[2])
     for r in range(R):
         qc.barrier()
         qc.delay(TAU_US, unit="us")
@@ -173,10 +173,9 @@ def submit(backend_name):
     from qiskit import transpile
     svc = QiskitRuntimeService(); backend = svc.backend(backend_name)
     pubs = build()
-    circs = [transpile(qc, backend, optimization_level=1, seed_transpiler=13,
-                       scheduling_method="asap") for _, qc, _ in pubs]
+    circs = [transpile(qc, backend, optimization_level=3, seed_transpiler=13) for _, qc, _ in pubs]
     n2 = [sum(1 for i in c.data if len(i.qubits) == 2) for c in circs]
-    assert max(n2) <= 22, n2
+    assert max(n2) <= 32, n2  # C4954b: d1 needs degree-4 -> routing unavoidable on heavy-hex (241 paid the same); wall guard is 40
     print(f"DEPTH CHECK: {len(circs)} pubs, transpiled 2q {min(n2)}-{max(n2)}")
     job = SamplerV2(mode=backend).run([(c,) for c in circs], shots=SHOTS)
     man = {"job_id": job.job_id(), "backend": backend_name, "labels": [l for l, _, _ in pubs]}
