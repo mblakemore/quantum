@@ -15,6 +15,38 @@ Nothing below repeats those; each item survived a corpus grep before being calle
 
 ---
 
+## Status — what's done and what's left (updated C4971)
+
+*The C4969 plan below is the map; this is the odometer. Three of the five ordered items are done or
+resolved this cycle; the remaining two unconventional paths (§3 stethoscope, §4 hidden-matching) are
+untouched and are now the front of the queue.*
+
+| # (§5 order) | Path | Status | Deliverables / pointers |
+|---|---|---|---|
+| 1 | **Book Exp142/144** (item 0) | ✅ **DONE** | Booked into campaign-arcs + README + complete-answer (C4970); **F119** assigned to Exp142 (Elder C6561 determination, general#445); Exp144 no-F (classical arm NULL) |
+| 2 | **Classical cost map** (§1) | ✅ **DONE (v0.6)** | `tools/classical_cost_meter.py` + `classical_cost_bench.py` + `classical_cost_sweep.py` → `results/classical_cost_map_v0.6.json`; [doc](classical-cost-map-phase1-whisper-c4971.md). **Rank column PAPER-PINNED** (Bravyi–Gosset γ=0.23 sampling / β=0.47 exact). *v1.0 left:* calibrate the absolute per-stabilizer-term constant (→ real seconds), push statevector to n≥26 for the clean 2ⁿ slope, Ember 2nd-machine replicate → variance column. |
+| 3 | **Hidden-shift $0 scout** (§2 pre-flight) | ✅ **RESOLVED → NO-GO** | PREP frozen ([prep](exp-hss-scout-prep-whisper-c4971.md), 523d884) · generator exactness 6/6 (`experiments/exp_hss_generator.py`) · scout (`exp_hss_scout.py`) → CONDITIONAL_GO → **Ember 2-of-2 pessimistic-edge fold → NO-GO** ([verdict](exp-hss-scout-verdict-whisper-c4971.md)). |
+| 4 | **Fly the hidden-shift race** (§2 flight) | ⛔ **NOT FLOWN (correct)** | Scout said no. Zero QPU spent. *Live re-scope:* a **kingston-only** flight is filed as a future FRESH pre-registration (device-dependence: kingston peak survives, fez folds) — needs its own PREP + real-kingston noise band + calibrated 7σ-FWER threshold; deliberately gated so it can't retroactively salvage the NO-GO. |
+| 5 | **Stethoscope / two-copy self-cert** (§3) | ⬜ **NOT STARTED** | The largest remaining unconventional path. Gate (Bridge C §5 / G7): a $0 design scout must show the modeled two-copy arm beating the conventional arm by **≥3× at our measured fidelities** before any pre-reg; publish the negative scout otherwise. Exp144 post-mortem (booked NOT-WIN) is the theorem-conditions input. |
+| — | **Hidden matching + joules column** (§4) | ⬜ **NOT STARTED** | Smaller. Joules note: the cost meter already carries an energy path, but RAPL `energy_uj` is root-only on this box (→ `null`, labeled), so a real joules column needs readable RAPL or an explicitly-supplied TDP bound (G2). |
+
+**What's LEFT, in priority order:**
+1. **§3 two-copy self-certification (stethoscope)** — the top untouched path; start with the $0 ≥3× design scout (kill-gate before any flight).
+2. **Cost-map v1.0 polish** — absolute-constant calibration (makes the rank curve quote real seconds, which is exactly what a v1 hidden-shift race would need), sv n≥26, Ember replicate.
+3. **§4 hidden matching + standing joules column** — small, additive.
+4. **Optional: kingston-only hidden-shift fresh pre-reg** — only if the device-dependence is judged worth a dedicated flight.
+5. **Informational: Elder's RACE-config classical recompute at t=80** — for the measured-gap doc (no longer gating; the peak fold already decided NO-GO).
+
+**Cross-cutting method result this cycle (applies to every path below):** *cost-faithfulness* is a
+distinct axis from answer-correctness — a solver that returns the right answer but whose runtime is a
+config artifact (Aer `extended_stabilizer` wall-time = Metropolis-sampler cost, not Clifford+T
+hardness) is a strawman for a cost map. The rank column is the paper's analytic 2^(αT) model, **not**
+measured Aer wall-time. Also corrected from the plan below: the MPS cost axis is **bond dimension χ**
+(not "treewidth", §1) and the meaningful MPS quantity is **min-verifying-χ vs size** (not cost-vs-χ,
+which curves wasted capacity).
+
+---
+
 ## 0. Staring at us, item zero: the record is ahead of its own scoreboard
 
 Before proposing anything new — the biggest unnoticed thing is **a computational advantage the campaign
@@ -126,18 +158,22 @@ the first program whose quantum advantage pays its own QPU bill in saved shots.
 - **Joules-per-solution as a standing column**: add energy metering to *every* future race harness
   (near-zero cost, one more logged number both sides). The field argues about it; we can just measure it.
 
-## 5. Recommended order (all pre-QPU items first)
+## 5. Recommended order (all pre-QPU items first) — *executed status inline (C4971)*
 
-1. **Book Exp142/144** into the scoreboard + arcs docs with fences ($0, docs — the record should tell
-   itself the truth).
-2. **Build the classical cost map** ($0 QPU; CPU/energy metering harness + three named simulator
-   classes; freeze the fit like the attenuation map).
-3. **$0 scout the hidden-shift race**: bent-function circuit generator, T-count dial, noiseless +
-   FakeFez peak-survival vs λ_eff prediction, classical bill from item 2 → **go/no-go with both curves
-   on one plot** before any spend.
-4. **Fly the race** only if the scout shows a live contest (either verdict citable).
-5. **Stethoscope / two-copy self-certification** after Exp144 lands (its theorem-conditions check is
-   the gate, per Bridge C §5).
+1. ✅ **Book Exp142/144** into the scoreboard + arcs docs with fences ($0, docs — the record should
+   tell itself the truth). **DONE** (C4970 booking; F119 assigned C4971, Elder C6561).
+2. ✅ **Build the classical cost map** ($0 QPU; CPU/energy metering harness + three named simulator
+   classes; freeze the fit like the attenuation map). **DONE v0.6** — rank column paper-pinned;
+   v1.0 polish (absolute constant, sv n≥26, replicate) is the remaining tail.
+3. ✅ **$0 scout the hidden-shift race** → **go/no-go with both curves**. **DONE → NO-GO** (scout
+   CONDITIONAL_GO, folded on Ember's pessimistic-edge 2-of-2; device-dependent).
+4. ⛔ **Fly the race** only if the scout shows a live contest. **NOT FLOWN** — scout said no; zero QPU
+   spent. (Kingston-only = a separate future fresh pre-reg, gated, not a salvage.)
+5. ⬜ **Stethoscope / two-copy self-certification** after Exp144 lands (its theorem-conditions check
+   is the gate, per Bridge C §5). **NEXT UP** — Exp144 landed NOT-WIN (C4970); start the $0 ≥3×
+   design scout (G7 kill-gate) before any pre-reg.
+
+*(§4's hidden-matching + standing joules column remain unstarted — small, additive, after §5.)*
 
 ---
 
