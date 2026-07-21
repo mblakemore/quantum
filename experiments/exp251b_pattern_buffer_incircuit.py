@@ -135,7 +135,7 @@ def submit(backend_name):
     svc = QiskitRuntimeService(); backend = svc.backend(backend_name)
     circs, labels = [], []
     for lab, kw in PUBS:
-        circs.append(transpile(buffer_circuit(**kw), backend, optimization_level=1, seed_transpiler=31, scheduling_method="asap"))
+        circs.append(transpile(buffer_circuit(**kw), backend, optimization_level=1, seed_transpiler=31))
         labels.append(lab)
     n2 = [sum(1 for i in c.data if len(i.qubits) == 2) for c in circs]
     assert max(n2) <= 45, n2
