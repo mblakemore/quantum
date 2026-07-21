@@ -1,0 +1,122 @@
+{
+ "corrected_R2": {
+  "shots": 8000,
+  "p_fire_per_round": [
+   0.659,
+   0.493
+  ],
+  "P(next|fired) vs P(next|clean) & ratio": [
+   [
+    0.46,
+    0.555,
+    0.83
+   ]
+  ]
+ },
+ "sham_R2": {
+  "shots": 8000,
+  "p_fire_per_round": [
+   0.56,
+   0.728
+  ],
+  "P(next|fired) vs P(next|clean) & ratio": [
+   [
+    0.76,
+    0.688,
+    1.11
+   ]
+  ]
+ },
+ "corrected_R3": {
+  "shots": 8000,
+  "p_fire_per_round": [
+   0.655,
+   0.503,
+   0.427
+  ],
+  "P(next|fired) vs P(next|clean) & ratio": [
+   [
+    0.468,
+    0.569,
+    0.82
+   ],
+   [
+    0.484,
+    0.369,
+    1.31
+   ]
+  ]
+ },
+ "sham_R3": {
+  "shots": 8000,
+  "p_fire_per_round": [
+   0.566,
+   0.722,
+   0.617
+  ],
+  "P(next|fired) vs P(next|clean) & ratio": [
+   [
+    0.755,
+    0.679,
+    1.11
+   ],
+   [
+    0.734,
+    0.315,
+    2.33
+   ]
+  ]
+ },
+ "corrected_R4": {
+  "shots": 8000,
+  "p_fire_per_round": [
+   0.651,
+   0.498,
+   0.438,
+   0.373
+  ],
+  "P(next|fired) vs P(next|clean) & ratio": [
+   [
+    0.464,
+    0.562,
+    0.83
+   ],
+   [
+    0.514,
+    0.361,
+    1.42
+   ],
+   [
+    0.479,
+    0.29,
+    1.65
+   ]
+  ]
+ },
+ "sham_R4": {
+  "shots": 8000,
+  "p_fire_per_round": [
+   0.579,
+   0.73,
+   0.62,
+   0.489
+  ],
+  "P(next|fired) vs P(next|clean) & ratio": [
+   [
+    0.761,
+    0.688,
+    1.11
+   ],
+   [
+    0.737,
+    0.303,
+    2.43
+   ],
+   [
+    0.721,
+    0.111,
+    6.48
+   ]
+  ]
+ }
+}
