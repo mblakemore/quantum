@@ -1,0 +1,116 @@
+{
+ "card": "exp_steth_tolerance_ember",
+ "role": "annex \u00a73 coherent-SPAM tolerance (flight-gate input)",
+ "substrate": "claude-opus-4-8",
+ "model_source": "exp_steth_scout (Whisper quantum@9d9d68a), reused verbatim",
+ "eps": 0.02,
+ "lam_true": 0.8,
+ "sweep": [
+  {
+   "theta_rad": 0.05,
+   "theta_deg": 2.9,
+   "bias_coherent": 0.00047,
+   "bias_drift_1p5x": 0.00109,
+   "coherent_ok": true,
+   "drift_ok": true
+  },
+  {
+   "theta_rad": 0.1,
+   "theta_deg": 5.7,
+   "bias_coherent": 0.0018,
+   "bias_drift_1p5x": 0.00418,
+   "coherent_ok": true,
+   "drift_ok": true
+  },
+  {
+   "theta_rad": 0.15,
+   "theta_deg": 8.6,
+   "bias_coherent": 0.00381,
+   "bias_drift_1p5x": 0.00902,
+   "coherent_ok": true,
+   "drift_ok": true
+  },
+  {
+   "theta_rad": 0.2,
+   "theta_deg": 11.5,
+   "bias_coherent": 0.00638,
+   "bias_drift_1p5x": 0.01537,
+   "coherent_ok": true,
+   "drift_ok": true
+  },
+  {
+   "theta_rad": 0.25,
+   "theta_deg": 14.3,
+   "bias_coherent": 0.00935,
+   "bias_drift_1p5x": 0.02302,
+   "coherent_ok": true,
+   "drift_ok": false
+  },
+  {
+   "theta_rad": 0.3,
+   "theta_deg": 17.2,
+   "bias_coherent": 0.01263,
+   "bias_drift_1p5x": 0.03182,
+   "coherent_ok": true,
+   "drift_ok": false
+  },
+  {
+   "theta_rad": 0.4,
+   "theta_deg": 22.9,
+   "bias_coherent": 0.01968,
+   "bias_drift_1p5x": 0.05244,
+   "coherent_ok": true,
+   "drift_ok": false
+  },
+  {
+   "theta_rad": 0.5,
+   "theta_deg": 28.6,
+   "bias_coherent": 0.02689,
+   "bias_drift_1p5x": 0.07684,
+   "coherent_ok": false,
+   "drift_ok": false
+  }
+ ],
+ "threshold_theta_star_rad": {
+  "coherent_selfref": 0.4044212971422213,
+  "drift_1p5x": 0.23119165240842204
+ },
+ "threshold_theta_star_deg": {
+  "coherent_selfref": 23.2,
+  "drift_1p5x": 13.2
+ },
+ "drift_multiplier_sensitivity_at_0p1rad": [
+  {
+   "drift_mult": 1.0,
+   "bias_at_0.1rad": 0.0018,
+   "ok": true
+  },
+  {
+   "drift_mult": 1.25,
+   "bias_at_0.1rad": 0.00286,
+   "ok": true
+  },
+  {
+   "drift_mult": 1.5,
+   "bias_at_0.1rad": 0.00418,
+   "ok": true
+  },
+  {
+   "drift_mult": 2.0,
+   "bias_at_0.1rad": 0.00752,
+   "ok": true
+  },
+  {
+   "drift_mult": 3.0,
+   "bias_at_0.1rad": 0.01695,
+   "ok": true
+  }
+ ],
+ "scout_assumed_rad": 0.1,
+ "headroom_coherent_x": 4.0,
+ "gate_readout": "Threshold DELIVERED, gate NOT closed. Flight-safe iff measured coherent SPAM on target region < ~0.231 rad (13 deg, drift wall) AND ref+channel co-batched (no drift window). Headroom to the binding wall from the scout assumed 0.1 rad = 2.3x. The measured coherent-SPAM fraction on the target region is STILL REQUIRED and NOT made here. This threshold is ONE input; flight gate also needs Elder Thm 7.9 co-check.",
+ "binding_wall": "DRIFT wall theta*=0.231 rad (13 deg) is BINDING (ref!=channel); self-ref wall 0.404 rad (23 deg) is conditional on co-batching ref+channel to kill the drift window.",
+ "headroom_binding_x": 2.3,
+ "not_done": "Did NOT fly annex 3(b); 0 QPU; 3(b) remains available on a Creator go. This is an offered supporting analysis, not a gate closure.",
+ "fence_n": "theta* derived at n=1 (2-qubit Choi). SPAM separability is per-eigenvalue algebra (n-independent, per scout), but whether the NUMERIC threshold holds at the n>=9 crossover (more qubits each carrying coherent SPAM) is not established here."
+}
