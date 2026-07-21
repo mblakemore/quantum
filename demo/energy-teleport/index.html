@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M8%202L5%209h2.2L6%2014l5-7H8.6z%22%20fill%3D%22%23fbbf24%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beam the Power — quantum energy teleportation | The Quantum Museum</title>
+<meta name="description" content="Alice measures her half of a two-qubit ground state and texts Bob one classical bit; Bob uses it to extract energy from his own qubit — but only if the bit carries information. The same bit, information-free (a coin), extracts nothing. Certified as a differential between gate-identical circuits: gap −0.198 at 9.8σ. Real hardware (ibm_fez, Exp195c). Hotta QET.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--energy); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--energy); color: var(--energy); }
+
+  :root { --energy:#fbbf24; --info:#34d399; --noinfo:#fb7185; }
+  :root[data-theme="light"] { --energy:#d97706; --info:#059669; --noinfo:#e11d48; }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(58% 60% at 28% 0%, color-mix(in srgb,var(--energy) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.4vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--energy); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 16px; }
+
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--energy); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; } .pcard b { color: var(--ink); }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--energy); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:70ch; }
+
+  .seg { display:inline-flex; border:1.5px solid var(--edge); border-radius:10px; overflow:hidden; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; font-weight:600; padding:9px 13px; border:none;
+    background:var(--surface-2); color:var(--ink-2); cursor:pointer; }
+  .seg button.on { background:var(--energy); color:var(--bg); }
+  .seg button:not(.on):hover { color:var(--energy); }
+
+  .stage { display:grid; grid-template-columns:1fr 300px; gap:20px; align-items:center; }
+  @media (max-width:720px){ .stage { grid-template-columns:1fr; } }
+  .ediagram { width:100%; display:block; }
+  .gapchip { font-family:var(--mono); font-size:12px; border:1px solid var(--energy); color:var(--energy);
+    border-radius:999px; padding:6px 12px; display:inline-block; }
+  .abschip { font-family:var(--mono); font-size:11px; color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 11px; display:inline-block; margin-top:8px; }
+  .schematic { text-align:center; }
+  .verdict { font-size:14px; color:var(--ink-2); margin-top:14px; min-height:3.4em; }
+  .verdict b { color:var(--ink); } .verdict .info { color:var(--info); font-weight:700; } .verdict .no { color:var(--noinfo); font-weight:700; }
+
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--energy); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; } .rc b { color:var(--ink); } .rc .yes { color:var(--info); font-weight:600; }
+  .links-row { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
+  .deeper { display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:12.5px; font-weight:600;
+    text-decoration:none; border:1.5px solid var(--edge-2); color:var(--ink-2); border-radius:9px; padding:7px 13px; }
+  .deeper:hover { border-color:var(--energy); color:var(--energy); }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--energy); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--energy); }
+  .badge-row .sp2 { flex:1; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+
+  <nav class="topbar" aria-label="Museum">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing VI · Time &amp; the Observer</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
+
+  <main id="main">
+  <header class="hero">
+    <p class="eyebrow">Quantum energy teleportation · Hotta, on silicon</p>
+    <h1>One bit of <span class="hl">information</span> moves energy.</h1>
+    <p class="lede">Alice and Bob share two qubits in their <strong>ground state</strong> — the lowest energy there is, nothing left to
+    pull out locally. Alice measures her qubit and texts Bob <strong>one bit</strong>. With it, Bob extracts energy from <em>his</em>
+    qubit — but <strong>only if that bit carries information</strong> about how the two are correlated. A coin flip gets him nothing.</p>
+
+    <div class="primer">
+      <div class="pcard">
+        <h2>Where's the energy from?</h2>
+        <p>Alice's measurement <strong>injects</strong> the energy (it costs her). The bit she sends just tells Bob <strong>how to claim</strong> his
+        share locally. No free lunch, and <strong>no faster-than-light</strong> — the bit travels normally.</p>
+      </div>
+      <div class="pcard">
+        <h2>Information IS the fuel</h2>
+        <p>Run the <em>identical</em> circuit but feed Bob a <strong>coin</strong> instead of Alice's bit: same gates, same kick — but the bit
+        <strong>knows nothing</strong>, and Bob's energy goes <strong>up</strong>, not down. The difference is pure information content.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <span class="scope">Certified as a <strong>differential</strong> between gate-identical arms; the absolute level is still noise-heated above ground; no free energy, no FTL; one die.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — Three bits, one energy meter</p>
+    <h2>Pick what drives Bob's kick; watch his local energy</h2>
+    <p class="sub">The scale is Bob's local energy <strong>E_B</strong> — lower is closer to the <strong>ground</strong> (nothing left to extract). Only
+    <strong>Alice's information-carrying bit</strong> pulls Bob toward the ground line; a coin or a fixed kick leaves him <strong>heated</strong>. The
+    certified result is the <strong>gap</strong> between the two <em>gate-for-gate identical</em> arms.</p>
+
+    <div style="margin-bottom:16px">
+      <div class="seg" role="group" aria-label="what drives Bob's kick">
+        <button data-arm="qet" class="on" type="button">Alice's bit ✦ (QET)</button>
+        <button data-arm="coin" type="button">a coin (no info)</button>
+        <button data-arm="fixed" type="button">fixed kick (no measurement)</button>
+      </div>
+    </div>
+
+    <div class="stage">
+      <svg id="ediagram" class="ediagram" viewBox="0 0 420 300" role="img" aria-label="Bob's local energy diagram"></svg>
+      <div>
+        <div class="schematic">
+          <svg id="schematic" viewBox="0 0 300 90" role="img" aria-label="Alice sends Bob a bit" style="width:100%;height:auto"></svg>
+        </div>
+        <div style="margin-top:10px">
+          <span class="gapchip">certified gap (QET − coin): <b>−0.198</b> · 9.8σ</span>
+          <span class="abschip" id="abschip"></span>
+        </div>
+        <p class="verdict" id="verdict" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — Why it's information, not magic</p>
+    <h2>Subtract two identical machines; what's left is the information</h2>
+    <p class="sub">The QET arm and the coin arm are <strong>the same circuit gate-for-gate</strong> — same ground prep, same two measurements,
+    same feed-forward, same kick angles. The <em>only</em> difference is whether the bit conditioning Bob's rotation <strong>carries
+    information</strong> about the A–B correlations. Subtract the two and every shared noise-heating cancels, leaving just the effect of
+    that information: <strong style="color:var(--info)">−0.198</strong>, which is <strong>99%</strong> of the exact Hotta prediction (−0.200). No FTL: Alice's
+    measurement paid the energy up front; the bit only tells Bob how to claim it.</p>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — Why this counts</p>
+    <h2>Three receipts, and the honest fence</h2>
+    <div class="receipts">
+      <div class="rc"><h3>1 · Gate-identical arms</h3><p>QET and coin are the <strong>same gates</strong>; only the bit's information differs. So the <strong>−0.198</strong> gap is the information, not the wiring. <span class="yes">Confound cancelled by construction.</span></p></div>
+      <div class="rc"><h3>2 · The falsifiers pay</h3><p>Both no-information arms move Bob's energy the <strong>wrong way</strong> (+0.229, +0.191 — heated, not cooled). Information-free bits can't extract. <span class="yes">The control works.</span></p></div>
+      <div class="rc"><h3>3 · The honest fence</h3><p>The <strong>absolute</strong> E_B is still noise-heated above the ground (+0.031) — the certified claim is the <strong>differential</strong>. No free energy; no FTL. One die.</p></div>
+    </div>
+    <div class="links-row">
+      <a class="deeper" href="../negative-energy/">Negative Energy (the sibling)</a>
+      <a class="deeper" href="../delayed-eraser/">The Delayed-Choice Eraser</a>
+    </div>
+  </section>
+
+  </main>
+  <footer class="badge-row">
+    <span>MEASURED · <span class="sig">Exp195c</span> · ibm_fez · job d9e7454jeosc73fie4dg</span>
+    <span>gap −0.198 (9.8σ) · qet −1.669 / coin −1.471 / fixed −1.509 · 16000 shots</span>
+    <span class="sp2"></span>
+    <a href="../">Museum</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+    var css = getComputedStyle(document.documentElement);
+    function C(v){ return css.getPropertyValue(v).trim(); }
+
+    // ---- verified data kernel (Exp195c, ibm_fez) ----
+    var Q = {
+      qet:  { E:-1.6692, d:0.0308, info:true,  lab:"Alice's bit (QET)" },
+      coin: { E:-1.4714, d:0.2286, info:false, lab:"a coin (no info)" },
+      fixed:{ E:-1.5088, d:0.1912, info:false, lab:"fixed kick" },
+      ground:-1.7, gap:-0.1978, se:0.0202, sigma:9.8
+    };
+    console.assert(Q.qet.E<Q.coin.E && Q.qet.E<Q.fixed.E && Math.abs((Q.qet.E-Q.coin.E)-Q.gap)<0.01, "qet lowest; gap consistent");
+
+    var state = { arm:"qet" };
+    var LO=-1.72, HI=-1.44;   // energy axis (lower=ground at bottom)
+
+    function drawDiagram(){
+      var svg=document.getElementById("ediagram"), X0=70, X1=390, Y0=24, Y1=250;
+      function gy(E){ return Y1 - (E-LO)/(HI-LO)*(Y1-Y0); }  // lower E → lower on screen (near ground)
+      var s="";
+      // axis
+      s+='<line x1="'+X0+'" y1="'+Y0+'" x2="'+X0+'" y2="'+Y1+'" stroke="'+C("--edge-2")+'" stroke-width="1"/>';
+      s+='<text x="'+(X0-8)+'" y="'+(Y0+4)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--noinfo")+'">heated</text>';
+      s+='<text x="'+(X0-8)+'" y="'+(Y1)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--info")+'">ground</text>';
+      s+='<text x="18" y="'+((Y0+Y1)/2)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--ink-3")+'" transform="rotate(-90 18 '+((Y0+Y1)/2)+')">Bob\'s local energy E_B</text>';
+      // ground line
+      var gyG=gy(Q.ground);
+      s+='<line x1="'+X0+'" y1="'+gyG+'" x2="'+X1+'" y2="'+gyG+'" stroke="'+C("--info")+'" stroke-width="1.4" stroke-dasharray="4 3"/>';
+      s+='<text x="'+X1+'" y="'+(gyG+14)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--info")+'">ground state −1.70</text>';
+      // arm markers (all three; selected highlighted)
+      var arms=[["qet",130],["coin",250],["fixed",330]];
+      arms.forEach(function(a){ var k=a[0], x=a[1], d=Q[k], y=gy(d.E), sel=(k===state.arm);
+        var col = d.info ? C("--info") : C("--noinfo");
+        // stem from ground to marker
+        s+='<line x1="'+x+'" y1="'+gyG+'" x2="'+x+'" y2="'+y+'" stroke="'+col+'" stroke-width="'+(sel?3:1.4)+'" opacity="'+(sel?1:0.5)+'"/>';
+        s+='<circle cx="'+x+'" cy="'+y+'" r="'+(sel?8:5)+'" fill="'+(sel?C("--card"):"none")+'" stroke="'+col+'" stroke-width="'+(sel?3:1.6)+'" opacity="'+(sel?1:0.6)+'"/>';
+        s+='<text x="'+x+'" y="'+(y-14)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="'+(sel?11:9.5)+'" font-weight="'+(sel?700:400)+'" fill="'+col+'" opacity="'+(sel?1:0.6)+'">'+d.E.toFixed(3)+'</text>';
+        s+='<text x="'+x+'" y="'+(Y1+16)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9" fill="'+(sel?C("--ink"):C("--ink-3"))+'">'+(k==="qet"?"QET":k)+'</text>';
+      });
+      // gap bracket between qet and coin
+      var yq=gy(Q.qet.E), yc=gy(Q.coin.E), bx=200;
+      s+='<line x1="'+bx+'" y1="'+yq+'" x2="'+bx+'" y2="'+yc+'" stroke="'+C("--energy")+'" stroke-width="1.4"/>';
+      s+='<line x1="'+(bx-4)+'" y1="'+yq+'" x2="'+(bx+4)+'" y2="'+yq+'" stroke="'+C("--energy")+'" stroke-width="1.4"/>';
+      s+='<line x1="'+(bx-4)+'" y1="'+yc+'" x2="'+(bx+4)+'" y2="'+yc+'" stroke="'+C("--energy")+'" stroke-width="1.4"/>';
+      s+='<text x="'+(bx+6)+'" y="'+((yq+yc)/2+3)+'" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--energy")+'">gap −0.198</text>';
+      svg.innerHTML=s;
+    }
+
+    function drawSchematic(){
+      var svg=document.getElementById("schematic"); var d=Q[state.arm];
+      var col = d.info ? C("--info") : C("--noinfo");
+      var s="";
+      // Alice
+      s+='<circle cx="40" cy="45" r="16" fill="none" stroke="'+C("--ink-3")+'" stroke-width="1.6"/>';
+      s+='<text x="40" y="49" text-anchor="middle" font-family="'+C("--mono")+'" font-size="11" fill="'+C("--ink-2")+'">A</text>';
+      s+='<text x="40" y="80" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">measures</text>';
+      // arrow with bit
+      s+='<line x1="62" y1="45" x2="238" y2="45" stroke="'+col+'" stroke-width="2" marker-end="url(#ar)"/>';
+      s+='<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="'+col+'"/></marker></defs>';
+      s+='<rect x="130" y="30" width="40" height="20" rx="5" fill="'+C("--card")+'" stroke="'+col+'" stroke-width="1.6"/>';
+      s+='<text x="150" y="44" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10" fill="'+col+'">bit</text>';
+      s+='<text x="150" y="20" text-anchor="middle" font-family="'+C("--mono")+'" font-size="8.5" fill="'+col+'">'+(d.info?"carries info ✦":"no info")+'</text>';
+      // Bob
+      s+='<circle cx="260" cy="45" r="16" fill="none" stroke="'+C("--ink-3")+'" stroke-width="1.6"/>';
+      s+='<text x="260" y="49" text-anchor="middle" font-family="'+C("--mono")+'" font-size="11" fill="'+C("--ink-2")+'">B</text>';
+      s+='<text x="260" y="80" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">extracts?</text>';
+      svg.innerHTML=s;
+    }
+
+    function render(){
+      drawDiagram(); drawSchematic();
+      var d=Q[state.arm], v=document.getElementById("verdict"), ab=document.getElementById("abschip");
+      ab.innerHTML = 'absolute ΔE_B(qet) = +0.031 (still above ground — noise heating)';
+      if(state.arm==="qet"){
+        v.innerHTML='<span class="info">Information delivered.</span> Alice\'s bit carries what Bob needs — he pulls E_B down to <b>−1.669</b>, closest to the ground line. This is <b>0.198 below</b> the coin arm running the identical circuit.';
+      } else if(state.arm==="coin"){
+        v.innerHTML='<span class="no">A coin knows nothing.</span> Same gates, same kick — but the bit is information-free, so Bob can\'t extract: E_B sits <b>higher</b> at <b>−1.471</b> (heated +0.229). The gap to QET is the pure information content.';
+      } else {
+        v.innerHTML='<span class="no">No measurement, no message.</span> A fixed kick with no bit at all leaves Bob heated at <b>−1.509</b> (+0.191). Without Alice\'s information there is nothing to claim.';
+      }
+      document.querySelectorAll(".seg button").forEach(function(b){ b.classList.toggle("on", b.dataset.arm===state.arm); });
+    }
+    document.querySelectorAll(".seg button").forEach(function(b){ b.addEventListener("click", function(){ state.arm=b.dataset.arm; render(); }); });
+    render();
+  })();
+</script>
+</body>
+</html>
