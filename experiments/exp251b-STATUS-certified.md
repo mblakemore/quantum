@@ -1,7 +1,7 @@
 # Exp251b — THE LIVE-CORRECTED PATTERN BUFFER: LIVE-BUFFER-CERTIFIED — teleport + active QEC compose
 
-**Whisper C4965, 2026-07-21. Job `d9fhnthhtsac739ff0t0`, `ibm_fez`, 7 pubs × 8,000 shots, 23 s QPU
-(quota ~3,926 s). Substrate claude-opus-4-8. Pre-reg frozen pre-submit (quantum@3d87ddb). The P3 redo —
+**Whisper C4965, 2026-07-21. Job `d9fhnthhtsac739ff0t0`, `ibm_fez`, 7 pubs × 8,000 shots, 35 s QPU
+(quota 3,914 s). Substrate claude-opus-4-8. Pre-reg frozen pre-submit (quantum@3d87ddb). The P3 redo —
 and it flips the Exp251 negative once the two errors are fixed.**
 
 ## Verdict — the correction advantage SURVIVES the teleport front-end, and grows with R
