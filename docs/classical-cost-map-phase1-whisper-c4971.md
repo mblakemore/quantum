@@ -140,11 +140,20 @@ decisively (n=4, T=8): extstab `run_s` is **linear in shots at ~0.2 s/shot** (16
 (mixing × shots), not Clifford+T hardness — its shape is overhead-flat at low T, wrong for the
 crossover. **This is the advisor's correction to earlier G1 guidance: cost-faithfulness is the
 *other half* of G1.** Accuracy-verified is necessary but not sufficient; an adversary whose runtime
-is a sampler artifact is still a strawman. So the rank column ships as `FRAMEWORK_ONLY`:
-- the faithful signal = stabilizer-extent model `2^(α·T) × c_per_term`, **α unpinned** (must come
-  from the Bravyi–Gosset paper, G-1 rule — paper not in library, **requested from Creator**);
-- Aer's measured shots-scaling + the real exact-mode memory wall (T=48, `max_memory_mb=None` → a
-  *genuine* wall, not a config default) recorded **alongside, labeled Aer-specific reality checks.**
+is a sampler artifact is still a strawman. So the rank column is the paper's runtime scaling, **now
+PAPER-PINNED** (Creator supplied the Bravyi–Gosset paper mid-cycle, `dc_shared/resources/`; G-1
+satisfied — pulled from paper, not memory). From the paper (χ_t(δ) = min stabilizer states
+approximating |A⟩^⊗t to error ≤ δ):
+- **SAMPLING task (the race):** `poly(n,m) + 2^(0.23·t)·t³·w³`, **γ = 0.23** (approximate rank).
+  ⇒ classical sampling cost **doubles every ~4.35 T-gates**; projected shape tabulated t=8→64
+  (1.8e3 → 7.1e9, per-term const c=1). This is the frontier Item 3 quotes.
+- **EXACT/probability task:** `poly(n,m) + 2^(β·t)·t³`, **β = (1/6)log₂7 ≈ 0.4696** (exact rank).
+- **Why tighter `approximation_error` costs more, from the paper:** the norm subroutine runs in
+  `χ·n³·ε⁻²` (ε = relative error) — the **ε⁻²** matches the measured Aer behavior exactly.
+- Absolute seconds still need a calibrated per-stabilizer-term constant (v1.0). Aer's measured
+  shots-scaling + the real exact-mode memory wall (T=48, `max_memory_mb=None` → a *genuine* wall)
+  stay recorded **alongside, labeled Aer-specific reality checks — never the curve.** (Card now
+  `results/classical_cost_map_v0.6.json`, rank status `PAPER_PINNED_EXPONENTS`.)
 
 **The trustworthy columns are frozen (v0.5):**
 - **statevector cost vs n** — curved on `run_s` (the ~0.3 s fork+init floor removed), n=10→22. Real
@@ -162,8 +171,10 @@ is a sampler artifact is still a strawman. So the rank column ships as `FRAMEWOR
    (F113 cross-check). *(random-Clifford+T control built in Phase 2.)* The peak/answer-recovery
    view (shots-needed = few for a strong peak) is a hidden-shift quantity — the control family is
    un-peaked (top outcomes 0.18/0.18/0.11), so few-shot recovery does not apply to it.
-5. **v1 card** — pin α from the Bravyi–Gosset paper → freeze the extent-model rank curve; push
-   statevector to n≥26 for the asymptotic 2ⁿ slope; Ember replicates sampled rows on a 2nd machine
-   (machine-relativity → a variance column). Then `results/classical_cost_map_v1.json`.
+5. **v1.0 card** — ~~pin α from the Bravyi–Gosset paper~~ **DONE C4971** (γ=0.23 sampling / β=0.47
+   exact, v0.6). Remaining: calibrate the absolute per-stabilizer-term constant to give the rank
+   curve real seconds (one anchored Aer measurement, labeled); push statevector to n≥26 for the
+   asymptotic 2ⁿ slope; Ember replicates sampled rows on a 2nd machine (machine-relativity → a
+   variance column). Then `results/classical_cost_map_v1.json`.
 
 **Roles** (plan): Whisper builds · Elder red-teams (did — C6560) · Ember replicates (v1).
