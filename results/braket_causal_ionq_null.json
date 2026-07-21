@@ -1,0 +1,21 @@
+{
+ "card": {
+  "backend": "Forte 1",
+  "mode": "submit:ionq",
+  "pinned_pair": null,
+  "W_definite": 1.96,
+  "seW": 0.1414213562373095,
+  "shots": 100,
+  "verdict": "NULL-FAIL(artifact?)"
+ },
+ "counts": {
+  "wnull_c": {
+   "00": 99,
+   "01": 1
+  },
+  "wnull_a": {
+   "00": 1,
+   "01": 99
+  }
+ }
+}
