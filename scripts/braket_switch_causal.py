@@ -102,19 +102,52 @@ def run_grouped(backend, pubs, is_qpu, manifest_path):
     return counts
 
 
+def grade_witness(counts, shots, out):
+    """Witness-only W (the 4 w_ pubs) graded vs the causal-mixture bound 0. For cost-frugal
+    flights where the full 68-pub / 112k-shot axis is unaffordable (IonQ at $0.08/shot). The
+    BOUND is the same theory constant (0); only the shot count (hence seW) differs from the
+    frozen bench — fewer shots widen the error bar, they do NOT retune the bound."""
+    import numpy as np
+    x = {}
+    for rep in ("start", "end"):
+        for kind in ("c", "a"):
+            c = counts[f"w_{rep}_{kind}"]; n = sum(c.values())
+            x[(rep, kind)] = (sum(v for k, v in c.items() if k[1] == "0")
+                              - sum(v for k, v in c.items() if k[1] == "1")) / n
+    W = float(np.mean([x[(r, "c")] - x[(r, "a")] for r in ("start", "end")]))
+    seW = float(np.sqrt(2 * 2 / (2 * shots)))   # switch_bench formula, actual shots
+    verdict = "WITNESS-FIRED" if (W - 5 * seW > 0) else "WITNESS-FAIL"
+    print("  CAUSAL WITNESS (W only)")
+    print(f"  W (witness DISC)   {W:+.4f} ± {seW:.4f}   ideal 2.0 | causal-mixture bound 0")
+    print(f"  W - 5*seW = {W - 5*seW:+.4f}   ({W/seW:.1f} sigma over 0)   verdict: {verdict}")
+    out.update({"W": W, "seW": seW, "shots": shots, "witness_verdict": verdict})
+    return verdict
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scan", action="store_true", help="FREE local-sim validation")
     ap.add_argument("--submit", action="store_true", help="SPEND on a real QPU")
     ap.add_argument("--device", choices=list(DEVICE), default="rigetti")
     ap.add_argument("--canary", action="store_true",
-                    help="cheap format-validation: 4 witness pubs @ 500 shots only (~$2), not the frozen run")
+                    help="cheap format-validation: 4 witness pubs @ 500 shots only, not the frozen run")
+    ap.add_argument("--witness-only", action="store_true",
+                    help="run only the 4 witness pubs; grade W vs the causal-mixture bound 0 (cost-frugal)")
+    ap.add_argument("--smoke", action="store_true",
+                    help="1 witness circuit @ 100 shots — cheapest QPU format/port check")
+    ap.add_argument("--shots", type=int, default=None, help="override shots per pub")
     args = ap.parse_args()
 
     pubs = build_causal()
-    if args.canary:
-        pubs = [(lab, qc, 500) for lab, qc, s in pubs if lab.startswith("w_")]
-        print("CANARY MODE — 4 witness circuits @ 500 shots (format check + prelim W; NOT the frozen axis)")
+    if args.smoke:
+        pubs = [(lab, qc, 100) for lab, qc, s in pubs if lab == "w_start_c"]
+        print("SMOKE — 1 witness circuit @ 100 shots (cheapest format/port check)")
+    elif args.witness_only or args.canary:
+        sh = args.shots if args.shots else 500
+        pubs = [(lab, qc, sh) for lab, qc, s in pubs if lab.startswith("w_")]
+        print(f"WITNESS-ONLY — 4 witness circuits @ {sh} shots (W vs causal-mixture bound; not the full frozen axis)")
+    elif args.shots:
+        pubs = [(lab, qc, args.shots) for lab, qc, s in pubs]
     total_shots = sum(s for _, _, s in pubs)
     if args.submit:
         per_shot = DEVICE[args.device][1]
@@ -127,7 +160,8 @@ def main():
     print(f"backend: {backend.name}  ({'LOCAL — FREE' if which=='local' else 'QPU — SPEND'})")
 
     layout = None
-    tag = (args.device + ("_canary" if args.canary else "")) if args.submit else "localscan"
+    suffix = "_smoke" if args.smoke else ("_witness" if (args.witness_only or args.canary) else "")
+    tag = (args.device + suffix) if args.submit else "localscan"
     manifest_path = os.path.join(QROOT, "results", f"braket_causal_{tag}_manifest.json") if args.submit else None
     if which != "local":
         layout, cz_err = best_pair(backend)
@@ -142,22 +176,17 @@ def main():
     print("=" * 62)
     print(f"SWITCH-BENCH CAUSAL AXIS — {backend.name}")
     print("=" * 62)
-    if args.canary:
-        print("CANARY — raw counts (verify 2-bit keys, sensible distribution):")
-        for lab in ("w_start_c", "w_start_a", "w_end_c", "w_end_a"):
-            print(f"  {lab}: {counts[lab]}")
-        # prelim W (witness only): <X_c> read on 2nd bit, comm - anti
-        x = {}
-        for rep in ("start", "end"):
-            for kind in ("c", "a"):
-                c = counts[f"w_{rep}_{kind}"]; n = sum(c.values())
-                x[(rep, kind)] = (sum(v for k, v in c.items() if k[1] == "0")
-                                  - sum(v for k, v in c.items() if k[1] == "1")) / n
-        Wprelim = sum(x[(r, "c")] - x[(r, "a")] for r in ("start", "end")) / 2
-        keys_ok = all(len(k) == 2 for lab in counts for k in counts[lab])
-        print(f"  2-bit-key format OK: {keys_ok}")
-        print(f"  PRELIM W (noisy, 500 shots): {Wprelim:+.3f}  (ideal 2.0, causal-mix 0; full run uses 4000)")
-        verdict = f"CANARY(format_ok={keys_ok}, Wprelim={Wprelim:+.3f})"
+    if args.smoke:
+        lab = "w_start_c"; c = counts[lab]
+        keys_ok = all(len(k) == 2 for k in c)
+        print(f"SMOKE — {lab}: {c}")
+        print(f"  2-bit-key format OK: {keys_ok}  (total shots {sum(c.values())})")
+        verdict = f"SMOKE(format_ok={keys_ok})"
+        out["verdict"] = verdict
+    elif args.witness_only or args.canary:
+        shots = pubs[0][2]
+        print("  raw witness counts:", {lab: counts[lab] for lab in ("w_start_c", "w_start_a", "w_end_c", "w_end_a")})
+        verdict = grade_witness(counts, shots, out)
         out["verdict"] = verdict
     else:
         verdict = grade_causal(counts, {}, out)
@@ -166,7 +195,7 @@ def main():
     outpath = os.path.join(QROOT, "results", f"braket_causal_{tag}.json")
     json.dump({"card": out, "counts": counts}, open(outpath, "w"), indent=1, default=float)
     print(f"card -> {outpath}")
-    return 0 if verdict == "PASS-CAUSAL" else 1
+    return 0 if (verdict == "PASS-CAUSAL" or "FIRED" in verdict or "format_ok=True" in verdict) else 1
 
 
 if __name__ == "__main__":
