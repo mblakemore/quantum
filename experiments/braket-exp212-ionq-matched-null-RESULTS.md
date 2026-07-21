@@ -85,3 +85,30 @@ Raw payloads fetched from tasks: Exp212 `29012b69`, gate-free cal `9e7acae7`, Ex
 Exp211 witness `b479e273`, Exp210 `c5d0e765`/`4196545e`. Corrected Rigetti card:
 `results/braket_causal_rigetti_CORRECTED.json`. As-instrumented Exp212 card:
 `results/braket_causal_ionq_matched.json`.
+
+---
+
+# ADDENDUM (C4946) — Flight C verdict and RESTORATION
+
+**Flight C (known-input program-set calibration, task `675bf4b2-96b6-4222-99ff-c380fec70a30`, $16.60):**
+- cal_A (entangled, truth qiskit `'01'`): read `'10'` at 0.99
+- cal_B (gate-free, truth qiskit `'10'`): read `'01'` at 1.00
+- **VERDICT: DECODE-BUG-CERTIFIED** — program-set counts are unreversed braket-order keys, certified by
+  paid known-input ground truth in the exact path. Pre-filed prediction (conf 0.9): **HIT**.
+
+**Official Exp212 regrade under the certified correction (frozen graders, unchanged bands):**
+W_witness = **+1.9100 ± 0.1414** (13.5σ; re-certifies under the original Exp211 rule W ≥ 1.3);
+W_matched = **−0.0900 ± 0.0995** (W_D0 −0.22, W_D1 +0.04; all 8 marginal checks PASS);
+separation = **+2.0000 ± 0.1729** (11.6σ) → **verdict: LOOPHOLE-CLOSED(restore)**.
+Card: `results/braket_causal_ionq_matched_CORRECTED.json`. Exp211b regrades **NULL-CLOSED**
+(W_def = 0.00). Exp210 corrected card adopted (W 1.2165, R̄ 0.2873, D −0.0039, PASS-CAUSAL).
+
+**Per the frozen Flight-C rule: the IonQ cross-modality certification is RESTORED** — witness +
+structurally-matched validated definite-order null, same window, on trapped ions. The canonical IonQ
+numbers are now: same-window witness W = 1.9100 ± 0.1414 with matched null −0.09 (Exp212); the 500-shot
+W = 1.8920 (corrected decode, Exp211) stands as corroboration.
+
+**Instrument fix:** `_programset_key_fix` in `braket_switch_causal.py` — version-pinned to
+qiskit-braket-provider 0.18.1 (certified); any other version hard-fails until re-certified with
+`ionq_bitorder_cal.py --program-set`. The full retraction→diagnosis→certification→restoration arc
+(C4941→C4946) stays in the record as the campaign's deepest instrument lesson.

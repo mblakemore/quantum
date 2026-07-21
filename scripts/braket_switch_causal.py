@@ -105,8 +105,28 @@ def run_grouped(backend, pubs, is_qpu, manifest_path):
     for labels, job in submitted:
         result = job.result()
         for i, lab in enumerate(labels):
-            counts[lab] = result.get_counts(i) if len(labels) > 1 else result.get_counts()
+            c = result.get_counts(i) if len(labels) > 1 else result.get_counts()
+            if is_qpu and len(labels) > 1:
+                c = _programset_key_fix(c)
+            counts[lab] = c
     return counts
+
+
+def _programset_key_fix(counts):
+    """C4946 certified decode correction: qiskit-braket-provider's PROGRAM-SET result branch
+    returns counts keyed in RAW braket qubit order — it omits the [::-1] little-endian reversal
+    that the single-task path applies (braket_quantum_task.py: the branch's own `memory` field
+    reverses, `counts` does not). Certified by known-input program-set calibration on IonQ
+    Forte-1 (task 675bf4b2, C4946: entangled known '01' read '10' @0.99; gate-free known '10'
+    read '01' @1.00). Multi-circuit QPU jobs (len>1 -> program set) need the reversal restored.
+    Pinned to certified provider versions — on upgrade, RE-CERTIFY with
+    `ionq_bitorder_cal.py --program-set` before trusting either orientation."""
+    from importlib.metadata import version
+    v = version("qiskit_braket_provider")
+    if v not in {"0.18.1"}:
+        raise SystemExit(f"program-set key fix certified only for qiskit-braket-provider 0.18.1; "
+                         f"found {v} — re-certify with ionq_bitorder_cal.py --program-set first")
+    return {k[::-1]: n for k, n in counts.items()}
 
 
 def build_matched_null(prep, a, b):

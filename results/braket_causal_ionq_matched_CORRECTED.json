@@ -1,0 +1,92 @@
+{
+ "card": {
+  "backend": "Forte 1",
+  "mode": "regrade:C4946-certified-decode-correction",
+  "correction": "program-set key reversal, certified by task 675bf4b2",
+  "W": 1.91,
+  "seW": 0.1414213562373095,
+  "shots": 100,
+  "witness_verdict": "WITNESS-FIRED",
+  "W_matched": -0.09,
+  "se_matched": 0.0995238664843765,
+  "W_D0": -0.22,
+  "W_D1": 0.039999999999999994,
+  "marginals": {
+   "mnull_d0_c": {
+    "P_target_expected": 0.98,
+    "P_c0": 0.41,
+    "ok": true
+   },
+   "mnull_d0_a": {
+    "P_target_expected": 1.0,
+    "P_c0": 0.52,
+    "ok": true
+   },
+   "mnull_d1_c": {
+    "P_target_expected": 0.96,
+    "P_c0": 0.49,
+    "ok": true
+   },
+   "mnull_d1_a": {
+    "P_target_expected": 0.95,
+    "P_c0": 0.47,
+    "ok": true
+   }
+  },
+  "null_ok": true,
+  "witness_recert": true,
+  "separation": 2.0,
+  "se_separation": 0.17293062192682937,
+  "matched_verdict": "LOOPHOLE-CLOSED(restore)"
+ },
+ "counts": {
+  "w_start_c": {
+   "00": 94,
+   "01": 4,
+   "10": 2
+  },
+  "w_start_a": {
+   "01": 3,
+   "11": 97
+  },
+  "w_end_c": {
+   "00": 96,
+   "01": 2,
+   "10": 2
+  },
+  "w_end_a": {
+   "00": 2,
+   "01": 3,
+   "10": 1,
+   "11": 94
+  },
+  "mnull_d0_c": {
+   "00": 40,
+   "01": 58,
+   "10": 1,
+   "11": 1
+  },
+  "mnull_d0_a": {
+   "10": 52,
+   "11": 48
+  },
+  "mnull_d1_c": {
+   "00": 46,
+   "01": 50,
+   "10": 3,
+   "11": 1
+  },
+  "mnull_d1_a": {
+   "00": 2,
+   "01": 3,
+   "10": 45,
+   "11": 50
+  }
+ },
+ "provenance": {
+  "raw_task": "29012b69-51bf-424f-99ba-be06f666bc0e",
+  "certifying_cal_task": "675bf4b2-96b6-4222-99ff-c380fec70a30",
+  "as_instrumented_verdict": "NULL-FAIL(stays-withdrawn)",
+  "prereg": "braket-exp212-ionq-matched-null-preregistration.md @ 12ad868"
+ }
+}
