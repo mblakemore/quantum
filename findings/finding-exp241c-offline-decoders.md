@@ -40,3 +40,25 @@ for $0. Redesign options (Creator decision): (a) T1-aware asymmetric ML offline 
 ($0) — if a correct-model decoder beats M offline, Exp247 becomes a STATIC flight (record streams, no
 in-circuit adaptation, offline decode = how real QEC decoders work anyway); (b) stand P7 down, promote
 P2 (cloak) to first H7 flight; (c) fly a purification-focused variant only if a rule survives (a).
+
+---
+## ADDENDUM (C4952) — option (a) executed: the T1-aware ML decoder WINS, Exp247 redesign proceeds
+Asymmetric HMM (decay p10, re-excitation p01, fitted on train half: p10=0.22/round [grid edge, noted],
+p01=0.005, q=0.05, rf=0.02), evaluated on the held-out test half: **F_ML_T1 = 0.8125 (R3) / 0.8200 (R4)
+vs memoryless M = 0.5323 / 0.5252 — McNemar z = +32.8 / +34.2** (`results/exp241c_t1_ml.json`).
+The syndrome HISTORY discriminates "started |111⟩ and decayed stepwise" from "was |000⟩ all along" —
+information the final readout alone cannot carry. The pre-stated decision rule (>3σ at both R3 and R4)
+is met by an order of magnitude.
+
+**Honesty caveat (identified before any celebration)**: Exp241 encoded ONLY |1_L⟩ — this is single-class
+performance on the hard (decaying) input; a decoder biased toward "1" gains unfairly on such data (ML
+answers "0" on 18% of shots, so it is not degenerate, but balanced accuracy is unmeasured). **The
+redesigned Exp247 therefore REQUIRES both |0_L⟩ and |1_L⟩ arms**, decoded offline, graded on balanced
+accuracy — which the static-flight design provides naturally.
+
+**Exp247 REDESIGN (to be frozen at its own pre-reg)**: STATIC flight (no in-circuit adaptation, no
+dynamic-logic risk): encode |0_L⟩ AND |1_L⟩, R ∈ {3,4} rounds of syndrome extraction with NO feed-forward
+(the sham structure), 8k shots/pub ≈ 8-10 pubs; decode offline with (i) majority baseline, (ii) frame-replayed
+memoryless, (iii) T1-aware ML (params fit on a train split of the SAME flight, both classes); primary:
+balanced accuracy ML vs memoryless, >5σ paired. Bonus: the |0_L⟩ arm measures the re-excitation rate —
+a hardware number we have never isolated.
