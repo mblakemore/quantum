@@ -1,11 +1,11 @@
 {
  "exp": "steth_a_unitarity_gate",
- "backend": "ibm_kingston",
+ "backend": "ibm_marrakesh",
  "pair": [
-  141,
-  142
+  88,
+  89
  ],
- "job_id": "d9fs5dcjeosc73fkdbl0",
+ "job_id": "d9g0flhhtsac739g1plg",
  "shots": 4000,
  "index": [
   {

@@ -14,7 +14,7 @@ advisor's corrections (C4971):
     < eps=0.02) and/or the pinned unitarity-RB paper conversion (G-1). Flying to measure is fine;
     declaring the gate passed on an unpinned/unit-mismatched angle is refused (advisor).
 
-Target: ibm_kingston pair (141,142) — lowest live CZ error 0.00085 (matches scout kingston lambda_eff).
+Target: ibm_marrakesh pair (88,89) — lowest live CZ error 0.00111 (kingston queued; Creator steered to marrakesh, where Ember §3(b) also flew — one device for gate + eventual flight).
 Co-batched (all lengths/bases one job) + drift monitor (repeat a reference length across the batch)
 + manifest committed for recoverability (Ember §3(b) discipline).
 
@@ -26,8 +26,8 @@ from qiskit import QuantumCircuit, transpile
 from qiskit.quantum_info import random_clifford, Clifford
 
 QROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-PAIR = (141, 142)               # ibm_kingston, lowest live CZ error
-BACKEND = "ibm_kingston"
+PAIR = (88, 89)                # ibm_marrakesh, lowest live CZ error 0.00111 (kingston queued, Creator steered here)
+BACKEND = "ibm_marrakesh"
 STD_LENGTHS = [1, 2, 4, 8, 16]
 UNI_LENGTHS = [1, 2, 4, 8]
 N_SEEDS = 5
