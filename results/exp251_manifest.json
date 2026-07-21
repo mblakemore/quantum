@@ -1,0 +1,12 @@
+{
+ "job_id": "d9fhce9htsac739febh0",
+ "backend": "ibm_fez",
+ "labels": [
+  "tp_corr_R2",
+  "tp_corr_R3",
+  "tp_bare_R2",
+  "tp_bare_R3",
+  "direct_corr_R3",
+  "tp_immediate"
+ ]
+}
