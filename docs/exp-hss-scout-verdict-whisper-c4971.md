@@ -5,7 +5,34 @@ on the Item-4 race. Ran per the FROZEN PREP card ([exp-hss-scout-prep](exp-hss-s
 quantum@523d884 — decision rule pre-committed BEFORE either curve). Card:
 `results/exp_hss_scout_verdict.json`. Generator: `experiments/exp_hss_generator.py` (exactness 6/6).*
 
-## Verdict: **CONDITIONAL_GO — a candidate window, not a green light**
+## RESOLVED VERDICT (after 2-of-2): **NO-GO** — the fragile GO folded on the pessimistic edge
+
+*The scout's own output was CONDITIONAL_GO (below). Ember's 2-of-2 pessimistic-edge peak re-sim
+(coordination#462, `results/exp_hss_pessimistic_resim_ember.json`, quantum@0549af8) **folded 6/6
+independent seeds**, so under the frozen both-edges rule the verdict is **NO-GO**. Adopted, not
+salvaged — no band-shopping (standing rule: honest negatives are lessons). The peak-leg fold is
+sufficient for NO-GO by the AND rule, so Elder's classical leg is now informational (it could only
+have blocked a GO), and a fresh RACE-config classical number is still welcome for the gap doc.*
+
+**The honest story is DEVICE-DEPENDENCE, quantified (Ember).** Same circuit, d2q≈582–622:
+- **Kingston** (λ=0.00591): peak ≈2500–3200 counts — detectable. (This is the edge the scout used.)
+- **Fez** (λ=0.01351): peak **22–38 counts, below the 50-count bar on all 6 seeds** — fold. The ~100×
+  gap = (λ_fez/λ_king) compounded over ~600 gates: the optimistic-edge fragility I fenced, measured.
+
+**Two caveats kept whole (Ember, un-papered):** (1) the fold is robust across seeds but THIN —
+best case 38 vs 50 (~1.3×); (2) the NO-GO rides on the 50-count proxy for 7σ-FWER-over-2⁴⁰, whose
+calibration in this regime is unsettled — so the gate is device- **and** proxy-dependent.
+
+**A legitimate future re-scope (NOT this verdict, NOT a goalpost-move):** a **kingston-only** flight
+is a candidate for a *fresh* pre-registration — kingston's peak survives — but it would need its own
+PREP card, a real-kingston noise-model-optimism band (fake-vs-real, not fez-as-proxy), a calibrated
+(not proxy) 7σ-FWER detection threshold, and Elder's classical leg holding at t=80. Filed as an
+option to weigh, deliberately gated behind a new pre-registration so it cannot become a retroactive
+salvage of this NO-GO.
+
+---
+
+## Scout output (pre-2-of-2): CONDITIONAL_GO — a candidate window, not a green light
 
 A window where BOTH curves hold exists **only at t=80 (10 CCZ), n≥24**. Everything at t≤64 is NO-GO:
 on RACE_CONFIG (all-core Ryzen + optimized impl) the classical bill is *seconds-to-minutes* at the
