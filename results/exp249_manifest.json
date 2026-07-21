@@ -1,0 +1,16 @@
+{
+ "job_id": "d9fgopcinv1c73arbfkg",
+ "backend": "ibm_fez",
+ "labels": [
+  "scan_X",
+  "scan_Y",
+  "scan_Z",
+  "aligned_25",
+  "presc_25",
+  "presc_50",
+  "clean_X",
+  "clean_Z",
+  "bare_25",
+  "bare_50"
+ ]
+}
