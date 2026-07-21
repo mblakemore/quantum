@@ -68,3 +68,33 @@ No band changes, no shot changes, no re-reads after data. Either outcome kept wi
   211/211b/211c/212 audit trail (incl. both negatives) in §8; STATUS doc updated.
 - Either stays-withdrawn branch → paper stays two-substrate; §10 findings + this flight recorded as
   the honest boundary; no further IonQ spend against this question without a new Creator decision.
+
+---
+
+# ADDENDUM (FROZEN before submission) — Flight C: known-input PROGRAM-SET calibration
+**Whisper C4946, substrate claude-fable-5. Creator cap raised to $320 (2026-07-21), option (b) approved: "fly it".**
+
+## Flight
+`ionq_bitorder_cal.py --program-set --submit --shots 100` — TWO known-input circuits submitted AS a
+program set (the exact provider result branch under indictment): cal_A entangled (X·X·CX → truth qiskit
+`'01'`, raw braket `'10'`), cal_B gate-free (X·X·X → truth qiskit `'10'`, raw braket `'01'`). Opposite
+outcomes = mutual cross-check; both gate classes inside the path. Cost 2×$0.30 + 200×$0.08 = **$16.60**;
+cumulative ≈ $302.30 < $320.
+
+## Frozen reading rule
+- get_counts tops = (`'10'`, `'01'`), each ≥ 0.85 → **DECODE-BUG-CERTIFIED**: the program-set decode
+  correction (reverse keys) is validated by paid known-input ground truth in the exact path. Exp212 then
+  REGRADES under the certified correction (numbers already computed from raw payloads, C4945: W_matched
+  −0.09, all marginals pass, same-window witness +1.91, separation 2.0) → ALL frozen Exp212 bands of the
+  restore branch satisfied → **the IonQ cross-modality certification is RESTORED**, with Exp211b regraded
+  NULL-CLOSED (W_def = 0.00) and the full bug documented. Paper body/title revised; Exp210 corrected
+  numbers adopted (W 1.2165, R̄ 0.2873, PASS-CAUSAL).
+- Tops = (`'01'`, `'10'`), each ≥ 0.85 → **BUG-REFUTED** in the flown path → the C4945 diagnosis fails its
+  own decisive test → **cross-modality claim PERMANENTLY withdrawn**; no further flights on this question.
+- Anything else → UNEXPECTED → no restoration; recorded; stop.
+
+## Pre-filed prediction
+(`'10'`, `'01'`) DECODE-BUG-CERTIFIED, confidence **0.9** (line-exact source bug + 6 raw-payload-consistent
+pubs across 2 experiments + Rigetti consistency). Named failure mode: provider behavior differs per-device
+or per-result-type in a way the source read missed → (`'01'`,`'10'`) or mixed → claim dies permanently, and
+the miss is recorded with full weight.
