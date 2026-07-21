@@ -1,0 +1,113 @@
+{
+ "card": "exp_steth_scout",
+ "annex_section": 3,
+ "substrate": "claude-fable-5",
+ "cycle": "C4971",
+ "timestamp": "2026-07-21T17:53:32Z",
+ "prep_card": "docs/exp-steth-scout-prep-whisper-c4971.md (quantum@46f13a5, pre-committed)",
+ "channel_separation_pinned": {
+  "paper": "Chen-Cotler-Huang-Li arXiv:2111.05881 Thm 1.5 / 7.9",
+  "without_memory": "Omega(2^(n/3))",
+  "with_memory": "O(1)",
+  "note": "exponent n/3 NOT n (channel case); ancilla-assisted Choi scheme = with-memory alg"
+ },
+ "spam_separability": {
+  "none": {
+   "strength": 0.0,
+   "raw": 0.8,
+   "ref": 1.0,
+   "ratio_estimate": 0.8,
+   "bias_vs_true": 0.0,
+   "within_epsilon": true
+  },
+  "pauli": {
+   "strength": 0.01,
+   "raw": 0.75818,
+   "ref": 0.94772,
+   "ratio_estimate": 0.8,
+   "bias_vs_true": 0.0,
+   "within_epsilon": true
+  },
+  "coherent": {
+   "strength": 0.1,
+   "raw": 0.797,
+   "ref": 0.99401,
+   "ratio_estimate": 0.8018,
+   "bias_vs_true": 0.0018,
+   "within_epsilon": true
+  },
+  "drift": {
+   "strength": 0.1,
+   "raw": 0.79897,
+   "ref": 0.99353,
+   "ratio_estimate": 0.80418,
+   "bias_vs_true": 0.00418,
+   "within_epsilon": true
+  }
+ },
+ "sample_reachability": [
+  {
+   "n": 3,
+   "conventional_2^(n/3)": 2.0,
+   "with_memory_x_ref": 2.0,
+   "sample_ratio": 1.0,
+   "ge_3x": false
+  },
+  {
+   "n": 6,
+   "conventional_2^(n/3)": 4.0,
+   "with_memory_x_ref": 2.0,
+   "sample_ratio": 2.0,
+   "ge_3x": false
+  },
+  {
+   "n": 9,
+   "conventional_2^(n/3)": 8.0,
+   "with_memory_x_ref": 2.0,
+   "sample_ratio": 4.0,
+   "ge_3x": true
+  },
+  {
+   "n": 12,
+   "conventional_2^(n/3)": 16.0,
+   "with_memory_x_ref": 2.0,
+   "sample_ratio": 8.0,
+   "ge_3x": true
+  },
+  {
+   "n": 20,
+   "conventional_2^(n/3)": 101.6,
+   "with_memory_x_ref": 2.0,
+   "sample_ratio": 50.8,
+   "ge_3x": true
+  },
+  {
+   "n": 30,
+   "conventional_2^(n/3)": 1024.0,
+   "with_memory_x_ref": 2.0,
+   "sample_ratio": 512.0,
+   "ge_3x": true
+  },
+  {
+   "n": 40,
+   "conventional_2^(n/3)": 10321.3,
+   "with_memory_x_ref": 2.0,
+   "sample_ratio": 5160.6,
+   "ge_3x": true
+  }
+ ],
+ "min_n_ge_3x": 9,
+ "verdict": "GO",
+ "interpretation": {
+  "pauli_spam": "identity-reference RATIO cancels Pauli SPAM (eigenvalues multiply) -> recovers lam_true to ~machine precision",
+  "coherent_spam_selfref": "coherent NON-COMMUTING (RX) SPAM at 0.1 rad, SAME strength in ref+channel: bias 0.0018 -> within eps 0.02",
+  "drift_spam": "coherent SPAM that DIFFERS ref-vs-channel (drift): bias 0.00418 -> within eps 0.02 -- this is the ratio-cancellation breaker the advisor flagged",
+  "gate": "sample crossover trivially reachable (min n>=3x at n=9); verdict is decided by SPAM stability, exactly as the advisor predicted"
+ },
+ "fences": {
+  "n1_sufficient": "SPAM cancellation is a per-eigenvalue algebraic property, n-independent; n=1 Choi (2-qubit, exact DM) is sufficient to decide separability",
+  "coherent_model": "coh_angle=0.1 rad is a chosen pessimistic non-Pauli SPAM; a real coherent fraction must be MEASURED on the target region before a flight",
+  "retrofit_fallback": "annex \u00a73(b) two-copy overlap/purity (state-property, low SPAM exposure) is the cleaner GO if (a) hits the coherent-SPAM wall",
+  "flight_gate": "G-1 theorem conditions co-check (Elder) + measured coherent-SPAM fraction on the target region required before any pre-reg; this scout is $0/analytic"
+ }
+}
