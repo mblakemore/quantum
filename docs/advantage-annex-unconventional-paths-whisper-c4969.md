@@ -27,12 +27,16 @@ untouched and are now the front of the queue.*
 | 2 | **Classical cost map** (§1) | ✅ **DONE (v0.6)** | `tools/classical_cost_meter.py` + `classical_cost_bench.py` + `classical_cost_sweep.py` → `results/classical_cost_map_v0.6.json`; [doc](classical-cost-map-phase1-whisper-c4971.md). **Rank column PAPER-PINNED** (Bravyi–Gosset γ=0.23 sampling / β=0.47 exact). *v1.0 left:* calibrate the absolute per-stabilizer-term constant (→ real seconds), push statevector to n≥26 for the clean 2ⁿ slope, Ember 2nd-machine replicate → variance column. |
 | 3 | **Hidden-shift $0 scout** (§2 pre-flight) | ✅ **RESOLVED → NO-GO** | PREP frozen ([prep](exp-hss-scout-prep-whisper-c4971.md), 523d884) · generator exactness 6/6 (`experiments/exp_hss_generator.py`) · scout (`exp_hss_scout.py`) → CONDITIONAL_GO → **Ember 2-of-2 pessimistic-edge fold → NO-GO** ([verdict](exp-hss-scout-verdict-whisper-c4971.md)). |
 | 4 | **Fly the hidden-shift race** (§2 flight) | ⛔ **NOT FLOWN (correct)** | Scout said no. Zero QPU spent. *Live re-scope:* a **kingston-only** flight is filed as a future FRESH pre-registration (device-dependence: kingston peak survives, fez folds) — needs its own PREP + real-kingston noise band + calibrated 7σ-FWER threshold; deliberately gated so it can't retroactively salvage the NO-GO. |
-| 5 | **Stethoscope / two-copy self-cert** (§3) | ⬜ **NOT STARTED** | The largest remaining unconventional path. Gate (Bridge C §5 / G7): a $0 design scout must show the modeled two-copy arm beating the conventional arm by **≥3× at our measured fidelities** before any pre-reg; publish the negative scout otherwise. Exp144 post-mortem (booked NOT-WIN) is the theorem-conditions input. |
+| 5 | **Stethoscope / two-copy self-cert** (§3) | ✅ **SCOUT → GO** | PREP frozen ([prep](exp-steth-scout-prep-whisper-c4971.md), 46f13a5) · scout (`experiments/exp_steth_scout.py` → `results/exp_steth_scout.json`, 7abeddd). CCHL channel separation pinned from paper (Ω(2^(n/3)) vs O(1); **n/3 not n** — G-1 trap avoided). Verdict collapses to SPAM self-reference (advisor); modeled it: **Pauli SPAM cancels exactly via the identity-reference ratio (bias 0)**, coherent SPAM (0.1 rad) leaves bias 0.0018–0.0042 < ε=0.02; crossover ≥3× from n≥9. **GO** (first GO of the scout phase). Flight gated on Elder theorem co-check + a *measured* coherent-SPAM fraction on the target region. |
 | — | **Hidden matching + joules column** (§4) | ⬜ **NOT STARTED** | Smaller. Joules note: the cost meter already carries an energy path, but RAPL `energy_uj` is root-only on this box (→ `null`, labeled), so a real joules column needs readable RAPL or an explicitly-supplied TDP bound (G2). |
 
 **What's LEFT, in priority order:**
-1. **§3 two-copy self-certification (stethoscope)** — the top untouched path; start with the $0 ≥3× design scout (kill-gate before any flight).
-2. **Cost-map v1.0 polish** — absolute-constant calibration (makes the rank curve quote real seconds, which is exactly what a v1 hidden-shift race would need), sv n≥26, Ember replicate.
+1. **§3 stethoscope FLIGHT pre-registration** (scout is GO) — the top live path now. Needs: Elder's
+   theorem-conditions co-check against CCHL Thm 7.9, a **measured** coherent-SPAM fraction on the
+   target chip region (the scout's one un-pinned input), and the with-memory algorithm's actual O(1)
+   constant. The §3(b) **retrofit** (two-copy overlap replacing a tomography block) is the safer,
+   lower-SPAM-exposure *first* flight — a measured shot-bill delta on an existing grader.
+2. **Cost-map v1.0 polish** — absolute-constant calibration (makes the rank curve quote real seconds), sv n≥26, Ember replicate.
 3. **§4 hidden matching + standing joules column** — small, additive.
 4. **Optional: kingston-only hidden-shift fresh pre-reg** — only if the device-dependence is judged worth a dedicated flight.
 5. **Informational: Elder's RACE-config classical recompute at t=80** — for the measured-gap doc (no longer gating; the peak fold already decided NO-GO).
@@ -169,9 +173,9 @@ the first program whose quantum advantage pays its own QPU bill in saved shots.
    CONDITIONAL_GO, folded on Ember's pessimistic-edge 2-of-2; device-dependent).
 4. ⛔ **Fly the race** only if the scout shows a live contest. **NOT FLOWN** — scout said no; zero QPU
    spent. (Kingston-only = a separate future fresh pre-reg, gated, not a salvage.)
-5. ⬜ **Stethoscope / two-copy self-certification** after Exp144 lands (its theorem-conditions check
-   is the gate, per Bridge C §5). **NEXT UP** — Exp144 landed NOT-WIN (C4970); start the $0 ≥3×
-   design scout (G7 kill-gate) before any pre-reg.
+5. ✅ **Stethoscope / two-copy self-certification** — **SCOUT DONE → GO** (C4971). SPAM divides out
+   (Pauli exactly; coherent 0.1 rad within ε), crossover ≥3× from n≥9. Next is the FLIGHT pre-reg
+   (Elder theorem co-check + measured coherent-SPAM fraction); §3(b) retrofit is the safer first flight.
 
 *(§4's hidden-matching + standing joules column remain unstarted — small, additive, after §5.)*
 
