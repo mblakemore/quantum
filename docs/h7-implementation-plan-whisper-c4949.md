@@ -262,3 +262,79 @@ required for any H7 claim. IonQ not needed for H7.
 3. **Drift between calibration and flight** (P1): mitigated by the same-window mini-scan.
 4. **Nothing requires**: Eagle, distance-3 codes, >7 qubits, Braket, or any capability outside our
    already-certified set.
+
+---
+
+# ADDENDUM v2 (C4950) — gap review + pre-dev planning structure
+
+## A. Gap review (fresh-eyes pass, with two live fact-checks)
+
+| # | gap | resolution |
+|---|---|---|
+| G1 | **`switch_case` does not exist on Heron** (verified live: fez/marrakesh targets expose only `if_else` + measure/reset). The P7 "16-case switch" fallback is fiction. | P7 memory rules rebuilt as **nested constant-condition `if_else`** (for v ∈ {01,10,11}: if syn_prev==v → if syn_cur==v → correct). One nesting level beyond Exp241. **Pre-dev gate PD-3 (compile check) is now MANDATORY before the P7 pre-reg freezes.** |
+| G2 | **P7 has an unflown $0 phase nobody noticed.** A *decoder* comparison needs no in-circuit adaptation: measure syndromes, never fix, decode offline — memory-aware vs memoryless decoding on the SAME shots. Exp241's sham arm already recorded exactly this (syn0..syn3 + final readout). | New **P7.0 (offline decoder study, $0, data in hand)**: run both decoders on the existing 241 sham streams first. It de-risks (or pre-demonstrates) the claim; the flight then tests the *in-circuit* adaptive version, which is the stronger real-time statement. |
+| G3 | **P7 statistical multiplicity**: two rules vs control = two comparisons. | The PD-2 Monte-Carlo (and P7.0) pick ONE primary rule pre-flight; the other becomes exploratory. Pre-reg states primary/secondary explicitly. |
+| G4 | **P7 decoder sim needs real noise parameters**, not guesses — 241b showed the stream is readout-noise-dominated (fire rates 0.37–0.65 ≫ physical rate). | PD-2 fits (ancilla readout error, per-round flip rate, memory term) from the EXISTING 241 data ($0) and feeds the Monte-Carlo. |
+| G5 | **P1 frame algebra unverified**: conjugating the data qubits by a 1q Clifford frame changes which physical axis the fixed CZ parity map detects — the intended effect, but sign/axis errors are easy. | PD-1 density-matrix asserts with exact targets: ALIGNED arm silent-corruption reproduces the Exp216 transfer function at the chosen θ; PRESCRIBED arm detection-rate rises and postselected corruption falls, both to sim-predicted values ±0.02. |
+| G6 | **P2 grading tests only 3 measurement axes** — an eavesdropper is not restricted to X/Y/Z. | Upgrade grading: reconstruct each single-qubit tomogram per logical state and bound the **Holevo χ** of the per-qubit ensemble (bounds EVERY measurement). PASS-CLOAK: max_q χ_q < 0.01 bit. Use Miller-Madow bias correction; note plug-in bias ~1e-4 bit at 8k shots (negligible vs threshold). Also pin the [[4,2,2]] second/gauge logical qubit to a fixed state so the 4 probe states differ ONLY in the probed logical bit. |
+| G7 | **P2 readout error cuts both ways** (fake mixedness can hide a real leak). | Report raw AND readout-mitigated tomograms (mitigation matrix from the same job's calibration pubs, +2 pubs); grade on mitigated, report both. |
+| G8 | **P3 layout is not a chain** — d0:=b1 with two ancilla branches needs a degree-3 subgraph (two branch points) on heavy-hex. | Builder gets a **subgraph-finding assert** (PD-1): find and pin a matching 7-qubit subgraph from the live coupling map; abort if the day's best-error subgraph doesn't exist. |
+| G9 | **P3 frame bookkeeping through the code**: deferred X frame flips the majority-vote interpretation (fine); deferred Z frame is invisible to the bit-flip code but flips the \|+⟩ row's readout. | PD-1 aer assert: inject known teleport outcomes, verify the frame-corrected decode reproduces the ideal for all 3 input states before any spend. |
+| G10 | **P4 logical-phase implementation undefined** — "Rz per node" must be the node-encoding's LOGICAL Z rotation, which depends on the Exp219 encoding detail. | PD-1 derives the per-node logical-Rz (which physical qubit(s) carry it) from the 219 builder and asserts cos(3φ) on aer before freeze. |
+| G11 | **P4 fit fragility**: nonlinear cos fits can fail to converge and invite judgment. | Grading re-specified as **DFT amplitude ratio**: \|A₃\|/\|A₁\| from the 8-point φ sweep; PASS if GHZ ratio > 3 AND product ratio < 1/3 (clean, deterministic, no fit). |
+| G12 | **P5 storms are coherent, not stochastic** — uniform R_x(θ) on all three qubits is a correlated coherent error; repetition-code behavior differs from iid flips. | Honest resolution: keep coherent storms, state the model, and pre-file **sim-predicted survival values** for all four arms (PD-1 asserts). The claim becomes "survives the coherent two-storm gauntlet," which the sim makes exact. |
+| G13 | **P6 heterogeneous observables** (W, DISC, F, S have different ideals and decay characters). | Inclusion rule: primary fit on the **DISC/W family only** (~15 points, one observable class); fidelity-family fitted separately as exploratory. Day-level scatter absorbed into the reported CI, not hidden. |
+| G14 | **No experiment numbers assigned** (numbering collision risk — the R2 retro lesson). | Assigned now: **P7→Exp247, P2→Exp248, P1→Exp249, P5→Exp250, P3→Exp251, P4→Exp252** (P6 is software, no number; P7.0 files as finding-exp241c). |
+| G15 | **Standard flight sequence omitted** coordination + quota discipline. | Baked into the per-flight sequence (D below): coordination_check + `ps aux` (C4038), live quota read before submit, usage recorded after, accounting doc updated. |
+
+## B. Pre-dev standard form (applies to every flight; instantiated per program)
+
+1. **Builder**: one script per experiment (`experiments/exp24N_*.py`) exposing `build()` (all pubs,
+   labeled), `--scan` (free local run), `--submit` (guarded), following `braket`/`switch_bench`
+   conventions: handles persisted before blocking, background submission, single job per flight.
+2. **In-code asserts (run at build time, abort on fail)**: pinned-layout subgraph exists on the live
+   coupling map; post-transpile 2q count == plan value ± 0; every classical register enumerated with
+   its pre-registered prediction (the all-bit table generated, not hand-written).
+3. **Free validation gates (all $0, all BEFORE the pre-reg freezes)**:
+   - **PD-1 sim-exactness**: aer/density-matrix run of every pub; assert primary observables hit ideal
+     values (and, where noise is injected, hit sim-predicted values) within stated tolerance.
+   - **PD-2 parameterized decoder/noise Monte-Carlo** (P7 only): noise parameters fitted from existing
+     241 data; picks the primary memory rule.
+   - **PD-3 dynamic-logic compile check** (P7, P3): transpile the exact nested `if_else` structure for
+     the flight backend; assert it compiles and aer-simulates to correct semantics. G1 made this
+     mandatory — `switch_case` does not exist on Heron.
+   - **PD-4 offline pre-study on existing data** where the record allows (P7.0 on 241 sham streams;
+     P6 entirely).
+4. **Pre-registration freeze**: bounds from the plan's draft tables + PD-1/PD-2 outputs; named failure
+   modes; pre-filed prediction with confidence; committed BEFORE submission (hash quoted in RESULTS).
+5. **Flight**: one job, all pubs; background submit; manifest/job-id persisted pre-block.
+6. **Grading**: grader implemented and frozen WITH the builder (not written post-data); primary /
+   secondary split explicit; syndrome streams archived and 241b-analyzed on every dynamic job;
+   substrate stamped.
+7. **Artifacts**: `results/exp24N_*.json` (card + full counts), `experiments/exp24N-STATUS-*.md`,
+   finding file if a claim certifies or a named failure fires; accounting doc updated with measured
+   job seconds.
+
+## C. Per-program pre-dev instantiation
+
+| exp | program | PD gates required | builder core | key asserts |
+|---|---|---|---|---|
+| — | P6 cartography | PD-4 | `tools/attenuation_map.py` | schema-complete tuples; DISC-family inclusion rule; fit CI reported |
+| 241c | P7.0 offline decoders | PD-4 (+PD-2 params) | `tools/exp241c_offline_decoders.py` | identical shots both decoders; primary rule selected |
+| 247 | P7 adaptive helm | PD-1,2,3 | `exp247_adaptive_helm.py` | nested if_else compiles on fez; Monte-Carlo winner = primary; 2q=4/round |
+| 248 | P2 cloak | PD-1 | `exp248_cloak.py` | gauge qubit pinned; Holevo grader unit-tested on synthetic tomograms; mitigation pubs present |
+| 249 | P1 EMH shield | PD-1 | `exp249_emh_shield.py` | frame conjugation reproduces 216 transfer function in sim; mini-scan pubs in-job |
+| 250 | P5 translator | PD-1 | `exp250_translator.py` | 4-arm sim-predicted survivals pre-filed; seam = 4 CZ verified post-transpile |
+| 251 | P3 pattern buffer | PD-1,3 | `exp251_pattern_buffer.py` | 7q subgraph found+pinned; frame bookkeeping aer-verified; 18 CZ |
+| 252 | P4 tricorder | PD-1 | `exp252_tricorder.py` | per-node logical-Rz derived from 219 builder; DFT grader unit-tested |
+
+## D. Per-flight sequence (the operational checklist, every flight)
+(1) coordination_check + `ps aux` (C4038) → (2) live quota read (abort if < 1000 s remaining unless
+Creator-cleared) → (3) builder asserts + all PD gates green → (4) freeze pre-reg, commit → (5) submit
+background, persist handle → (6) grade with the frozen grader; 241b stream analysis if dynamic →
+(7) STATUS + finding + accounting update, commit → (8) next flight only after this one is graded.
+
+## E. Revised immediate actions on Creator go
+1. **P6 + P7.0 together, $0, no pre-reg spend risk** — cartography build + offline decoder study on
+   existing 241 data. Their outputs (attenuation map; primary memory rule) feed every later freeze.
+2. **Exp247 (P7)**: PD-2/PD-3 gates, then freeze, then the first H7 flight.
