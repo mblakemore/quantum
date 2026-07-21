@@ -154,6 +154,7 @@ def local_sanity():
 
 
 def submit():
+    sys.path.insert(0, os.path.join(QROOT, "scripts"))
     from run_exp66_qpu_partb import _get_ibm_service
     from qiskit_ibm_runtime import SamplerV2
     svc = _get_ibm_service()
