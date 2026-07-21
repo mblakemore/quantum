@@ -109,6 +109,89 @@ def run_grouped(backend, pubs, is_qpu, manifest_path):
     return counts
 
 
+def build_matched_null(prep, a, b):
+    """Exp212: copy the WITNESS circuit (definite=False) VERBATIM, replacing ONLY the initial
+    control prep h(0) with |0> (removed, prep=0) or |1> (x(0), prep=1). Everything downstream —
+    the 4 controlled-unitaries (4 CZ) and the final h(0) + measurements — is instruction-identical
+    to the witness, so it belongs to the witness's compilation class (the Exp211b lesson: the
+    gate-free definite=True control compiled in a different class and its counts bookkeeping
+    failed). A 50/50 classical mixture of these two definite orders is causally separable ->
+    W_matched = 0 by theorem."""
+    from qiskit import QuantumCircuit
+    from exp106_capacity_activation import build_circuit
+    w = build_circuit(a, b, 0, definite=False)
+    qc = QuantumCircuit(2, 2)
+    if prep == 1:
+        qc.x(0)
+    skipped = False
+    for inst in w.data:
+        if not skipped and inst.operation.name == "h" and w.find_bit(inst.qubits[0]).index == 0:
+            skipped = True
+            continue
+        qc.append(inst.operation, inst.qubits, inst.clbits)
+    assert skipped, "witness initial h(0) not found — matched-null construction invalid"
+    # STRUCTURE ASSERT (Exp212 G1): identical 2q-op count vs the witness — the whole point.
+    n2q = lambda c: sum(1 for i in c.data if len(i.qubits) == 2)
+    assert n2q(qc) == n2q(w), f"matched-null 2q count {n2q(qc)} != witness {n2q(w)}"
+    return qc
+
+
+def grade_matched(counts, shots, out):
+    """Exp212 grader — frozen BEFORE flight (see pre-registration).
+    Grades ALL classical bits (the C4943 lesson: an ungraded deterministic marginal hid the
+    Exp211b artifact): per-pub target marginal (comm t=0, anti t=1, deterministic ideally),
+    control marginal (~50/50 ideally), per-prep bands, mixture band, and the three-branch
+    reading rule (restore / null-fail / witness-no-refire)."""
+    import numpy as np
+
+    def xc_se(lab):
+        c = counts[lab]; n = sum(c.values())
+        m = (sum(v for k, v in c.items() if k[1] == "0")
+             - sum(v for k, v in c.items() if k[1] == "1")) / n
+        return m, float(np.sqrt(max(1e-12, 1.0 - m * m) / n))
+
+    print("  MATCHED-NULL (structurally-identical definite-order control, D0/D1)")
+    marg, marg_ok = {}, True
+    for p in (0, 1):
+        for kind, t_expect in (("c", "0"), ("a", "1")):
+            lab = f"mnull_d{p}_{kind}"
+            c = counts[lab]; n = sum(c.values())
+            pt = sum(v for k, v in c.items() if k[0] == t_expect) / n
+            pc0 = sum(v for k, v in c.items() if k[1] == "0") / n
+            ok = (pt >= 0.85) and (0.30 <= pc0 <= 0.70)
+            marg[lab] = {"P_target_expected": pt, "P_c0": pc0, "ok": ok}
+            marg_ok &= ok
+            print(f"    {lab}: {dict(c)}  P(t={t_expect})={pt:.3f} (>=0.85)  "
+                  f"P(c=0)={pc0:.3f} (in [0.30,0.70])  {'OK' if ok else 'MARGINAL-FAIL'}")
+    W_prep, se_prep = {}, {}
+    for p in (0, 1):
+        mc, sec = xc_se(f"mnull_d{p}_c"); ma, sea = xc_se(f"mnull_d{p}_a")
+        W_prep[p], se_prep[p] = mc - ma, float(np.hypot(sec, sea))
+        print(f"    W_D{p} = {W_prep[p]:+.4f} ± {se_prep[p]:.4f}   (band |W| <= 0.3)")
+    W_m = 0.5 * (W_prep[0] + W_prep[1])
+    se_m = 0.5 * float(np.hypot(se_prep[0], se_prep[1]))
+    null_ok = (abs(W_m) <= 0.3 and abs(W_prep[0]) <= 0.3 and abs(W_prep[1]) <= 0.3 and marg_ok)
+    print(f"    W_matched = {W_m:+.4f} ± {se_m:.4f}   (causally-separable theorem: 0; band <= 0.3)")
+    print(f"    null_ok = {null_ok}  (mixture band + per-prep bands + all-bit marginals)")
+    # same-window witness re-certification under the ORIGINAL Exp211 rule
+    witness_recert = (out["W"] >= 1.3) and (out["W"] - 5 * out["seW"] > 0)
+    sep = out["W"] - W_m
+    se_sep = float(np.hypot(out["seW"], se_m))
+    print(f"    separation W_witness - W_matched = {sep:+.4f} ± {se_sep:.4f} "
+          f"({sep / se_sep:.1f} sigma; rule: > 1.0)")
+    if null_ok and witness_recert and sep > 1.0:
+        verdict = "LOOPHOLE-CLOSED(restore)"
+    elif not null_ok:
+        verdict = "NULL-FAIL(stays-withdrawn)"
+    else:
+        verdict = "WITNESS-NO-REFIRE(stays-withdrawn)"
+    print(f"    verdict: {verdict}")
+    out.update({"W_matched": W_m, "se_matched": se_m, "W_D0": W_prep[0], "W_D1": W_prep[1],
+                "marginals": marg, "null_ok": null_ok, "witness_recert": witness_recert,
+                "separation": sep, "se_separation": se_sep, "matched_verdict": verdict})
+    return verdict
+
+
 def grade_witness(counts, shots, out):
     """Witness-only W (the 4 w_ pubs) graded vs the causal-mixture bound 0. For cost-frugal
     flights where the full 68-pub / 112k-shot axis is unaffordable (IonQ at $0.08/shot). The
@@ -144,11 +227,22 @@ def main():
                     help="1 witness circuit @ 100 shots — cheapest QPU format/port check")
     ap.add_argument("--null-witness", action="store_true",
                     help="definite-order control (definite=True): expect W~0, closes the compiler-mapping loophole")
+    ap.add_argument("--matched-null", action="store_true",
+                    help="Exp212: witness 4 pubs + structurally-matched definite-order null 4 pubs "
+                         "(D0/D1 x comm/anti), ONE submission batch = same-window; frozen 3-branch reading rule")
     ap.add_argument("--shots", type=int, default=None, help="override shots per pub")
     args = ap.parse_args()
 
     pubs = build_causal()
-    if args.null_witness:
+    if args.matched_null:
+        sh = args.shots if args.shots else 100
+        pubs = [(lab, qc, sh) for lab, qc, s in pubs if lab.startswith("w_")]
+        for p in (0, 1):
+            for pair, kind in ((("X", "X"), "c"), (("X", "Z"), "a")):
+                pubs.append((f"mnull_d{p}_{kind}", build_matched_null(p, *pair), sh))
+        print(f"EXP212 MATCHED-NULL — witness 4 + matched null 4 (D0/D1 x comm/anti) @ {sh} shots, "
+              f"one submission batch (same-window)")
+    elif args.null_witness:
         from exp106_capacity_activation import build_circuit
         sh = args.shots if args.shots else 100
         pubs = [("wnull_c", build_circuit("X", "X", 0, definite=True), sh),
@@ -175,7 +269,8 @@ def main():
     print(f"backend: {backend.name}  ({'LOCAL — FREE' if which=='local' else 'QPU — SPEND'})")
 
     layout = None
-    suffix = ("_null" if args.null_witness else "_smoke" if args.smoke
+    suffix = ("_matched" if args.matched_null else "_null" if args.null_witness
+              else "_smoke" if args.smoke
               else "_witness" if (args.witness_only or args.canary) else "")
     tag = (args.device + suffix) if args.submit else "localscan"
     manifest_path = os.path.join(QROOT, "results", f"braket_causal_{tag}_manifest.json") if args.submit else None
@@ -195,7 +290,12 @@ def main():
     print("=" * 62)
     print(f"SWITCH-BENCH CAUSAL AXIS — {backend.name}")
     print("=" * 62)
-    if args.null_witness:
+    if args.matched_null:
+        shots = pubs[0][2]
+        print("  raw witness counts:", {lab: counts[lab] for lab in ("w_start_c", "w_start_a", "w_end_c", "w_end_a")})
+        grade_witness(counts, shots, out)
+        verdict = grade_matched(counts, shots, out)
+    elif args.null_witness:
         import numpy as np
         def xc(lab):
             c = counts[lab]; n = sum(c.values())
