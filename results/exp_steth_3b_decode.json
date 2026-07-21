@@ -1,0 +1,75 @@
+{
+ "card": "exp_steth_3b_twocopy_ember",
+ "annex_section": "3(b)",
+ "backend": "ibm_marrakesh",
+ "job_id": "d9frnusjeosc73fkcohg",
+ "state_seed": 3210,
+ "shots_per_circuit": 4000,
+ "summary": {
+  "1": {
+   "true_purity": 0.6363,
+   "twocopy": {
+    "estimate": 0.6345,
+    "se": 0.0122,
+    "shots": 4000,
+    "per_shot_var": 0.5976,
+    "settings": 1
+   },
+   "tomography": {
+    "estimate": 0.6358,
+    "se": 0.0078,
+    "shots": 12000,
+    "per_shot_var": 0.7288,
+    "settings": 3
+   },
+   "shot_bill_delta_matched_se": 1.22,
+   "settings_ratio": 3
+  },
+  "2": {
+   "true_purity": 0.3806,
+   "twocopy": {
+    "estimate": 0.392,
+    "se": 0.0145,
+    "shots": 4000,
+    "per_shot_var": 0.8465,
+    "settings": 1
+   },
+   "tomography": {
+    "estimate": 0.3795,
+    "se": 0.004,
+    "shots": 36000,
+    "per_shot_var": 0.5617,
+    "settings": 9
+   },
+   "shot_bill_delta_matched_se": 0.66,
+   "settings_ratio": 9
+  },
+  "3": {
+   "true_purity": 0.2985,
+   "twocopy": {
+    "estimate": 0.273,
+    "se": 0.0152,
+    "shots": 4000,
+    "per_shot_var": 0.9257,
+    "settings": 1
+   },
+   "tomography": {
+    "estimate": 0.2913,
+    "se": 0.0027,
+    "shots": 108000,
+    "per_shot_var": 0.8003,
+    "settings": 27
+   },
+   "shot_bill_delta_matched_se": 0.86,
+   "settings_ratio": 27
+  }
+ },
+ "frame": "RESOURCE comparison (two-copy primitive vs the tomography block it replaces), NOT a quantum-advantage claim; classical shadows estimate purity with no 2nd copy.",
+ "scope": "primitive-level head-to-head, not a named-grader retrofit.",
+ "estimators": "two-copy: unbiased per-shot (-1)^(sum u&v); tomography: unbiased variance-subtracted (1/2^n)sum(<P>^2 - Var).",
+ "confidence_cap": "<=0.6 (quantum behavioral cap)",
+ "headline": "MEASURED shot-bill is a WASH at n<=3: two-copy vs tomography-block matched-SE ratio = 1.22x / 0.66x / 0.86x (n=1/2/3) -> two-copy is NOT cheaper in total shots; tomography marginally ahead at n=2,3. The 3^n->1 settings reduction is a real OPERATIONAL difference but converts to NO shot saving in this window.",
+ "why_wash": "Two-copy per-shot variance = 1 - purity^2 (n-independent): predicted 0.595/0.855/0.911 vs measured 0.598/0.847/0.926. The fixed states are LOW purity (0.636/0.381/0.299), inflating two-copy variance toward 1, while tomography at only 3/9/27 settings is still cheap. The asymptotic two-copy shot advantage is real but needs larger n or higher purity; n<=3 does not reach the crossover. NOTE: the decreasing-purity state choice DISFAVORED two-copy, so this wash is pessimistic-for-two-copy, not a rigged baseline.",
+ "accuracy_note": "Both arms recover the true purity but at n=3 both read LOW (two-copy 0.273 = 1.7sigma; tomography 0.291 = 2.7sigma on its tiny 0.0027 SE) \u2014 a hardware-decoherence systematic pulling measured correlations down. SE bars are STATISTICAL-ONLY (do not include this systematic).",
+ "followup": "A higher-n or higher-purity flight would reach the two-copy shot-advantage crossover \u2014 named, not launched (Creator asked for \u00a73(b), delivered)."
+}
