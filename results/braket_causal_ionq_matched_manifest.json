@@ -1,0 +1,18 @@
+{
+ "handles": [
+  {
+   "shots": 100,
+   "labels": [
+    "w_start_c",
+    "w_start_a",
+    "w_end_c",
+    "w_end_a",
+    "mnull_d0_c",
+    "mnull_d0_a",
+    "mnull_d1_c",
+    "mnull_d1_a"
+   ],
+   "job_id": "arn:aws:braket:us-east-1:473906129841:quantum-task/29012b69-51bf-424f-99ba-be06f666bc0e"
+  }
+ ]
+}

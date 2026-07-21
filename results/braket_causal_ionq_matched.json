@@ -1,0 +1,86 @@
+{
+ "card": {
+  "backend": "Forte 1",
+  "mode": "submit:ionq",
+  "pinned_pair": null,
+  "W": 1.88,
+  "seW": 0.1414213562373095,
+  "shots": 100,
+  "witness_verdict": "WITNESS-FIRED",
+  "W_matched": 1.8900000000000001,
+  "se_matched": 0.03248076353786191,
+  "W_D0": 1.96,
+  "W_D1": 1.82,
+  "marginals": {
+   "mnull_d0_c": {
+    "P_target_expected": 0.41,
+    "P_c0": 0.98,
+    "ok": false
+   },
+   "mnull_d0_a": {
+    "P_target_expected": 0.48,
+    "P_c0": 0.0,
+    "ok": false
+   },
+   "mnull_d1_c": {
+    "P_target_expected": 0.49,
+    "P_c0": 0.96,
+    "ok": false
+   },
+   "mnull_d1_a": {
+    "P_target_expected": 0.53,
+    "P_c0": 0.05,
+    "ok": false
+   }
+  },
+  "null_ok": false,
+  "witness_recert": true,
+  "separation": -0.010000000000000231,
+  "se_separation": 0.14510341140029237,
+  "matched_verdict": "NULL-FAIL(stays-withdrawn)"
+ },
+ "counts": {
+  "w_start_c": {
+   "00": 94,
+   "10": 4,
+   "01": 2
+  },
+  "w_start_a": {
+   "10": 3,
+   "11": 97
+  },
+  "w_end_c": {
+   "00": 96,
+   "10": 2,
+   "01": 2
+  },
+  "w_end_a": {
+   "00": 2,
+   "10": 3,
+   "01": 1,
+   "11": 94
+  },
+  "mnull_d0_c": {
+   "00": 40,
+   "10": 58,
+   "01": 1,
+   "11": 1
+  },
+  "mnull_d0_a": {
+   "01": 52,
+   "11": 48
+  },
+  "mnull_d1_c": {
+   "00": 46,
+   "10": 50,
+   "01": 3,
+   "11": 1
+  },
+  "mnull_d1_a": {
+   "00": 2,
+   "10": 3,
+   "01": 45,
+   "11": 50
+  }
+ }
+}

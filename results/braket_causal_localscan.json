@@ -4,23 +4,69 @@
   "mode": "scan:local",
   "pinned_pair": null,
   "W": 2.0,
-  "seW": 0.06324555320336758,
-  "shots": 500,
+  "seW": 0.022360679774997897,
+  "shots": 4000,
   "witness_verdict": "WITNESS-FIRED",
-  "verdict": "WITNESS-FIRED"
+  "W_matched": -0.0235,
+  "se_matched": 0.015807368732651237,
+  "W_D0": -0.0495,
+  "W_D1": 0.0024999999999999988,
+  "marginals": {
+   "mnull_d0_c": {
+    "P_target_expected": 1.0,
+    "P_c0": 0.4825,
+    "ok": true
+   },
+   "mnull_d0_a": {
+    "P_target_expected": 1.0,
+    "P_c0": 0.50725,
+    "ok": true
+   },
+   "mnull_d1_c": {
+    "P_target_expected": 1.0,
+    "P_c0": 0.492,
+    "ok": true
+   },
+   "mnull_d1_a": {
+    "P_target_expected": 1.0,
+    "P_c0": 0.49075,
+    "ok": true
+   }
+  },
+  "null_ok": true,
+  "witness_recert": true,
+  "separation": 2.0235,
+  "se_separation": 0.027383807373153938,
+  "matched_verdict": "LOOPHOLE-CLOSED(restore)"
  },
  "counts": {
   "w_start_c": {
-   "00": 500
+   "00": 4000
   },
   "w_start_a": {
-   "11": 500
+   "11": 4000
   },
   "w_end_c": {
-   "00": 500
+   "00": 4000
   },
   "w_end_a": {
-   "11": 500
+   "11": 4000
+  },
+  "mnull_d0_c": {
+   "00": 1930,
+   "01": 2070
+  },
+  "mnull_d0_a": {
+   "11": 1971,
+   "10": 2029
+  },
+  "mnull_d1_c": {
+   "01": 2032,
+   "00": 1968
+  },
+  "mnull_d1_a": {
+   "10": 1963,
+   "11": 2037
   }
  }
 }
