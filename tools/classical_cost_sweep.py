@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""P-CCM Phase 4 — the sweep: turn the gated bench into frozen cost curves (the v0.5 card).
+"""P-CCM Phase 4 — the sweep: turn the gated bench into frozen cost curves (the v0.6 card).
 
-Produces `results/classical_cost_map_v0.5.json` — the deliverable Item 3 quotes.
+Produces `results/classical_cost_map_v0.6.json` — the deliverable Item 3 quotes.
 
 WHAT SMOKE-TESTING + ADVISOR REVIEW CHANGED (C4971 — recorded so the next pass starts here):
 The naive plan (log-cost-vs-T from extended_stabilizer wall-time) is a STRAWMAN and is NOT frozen.
@@ -11,12 +11,13 @@ NOT Clifford+T hardness. Its shape (overhead-flat at low T) is wrong for the cro
 G1 resurfacing on its COST-FAITHFULNESS half (accuracy was only half of G1): an adversary that
 returns the right answer but whose runtime is a sampler artifact is still a strawman.
 
-=> The FAITHFUL rank signal is the stabilizer-extent model: projected_bill(T) = 2^(alpha*T) *
-   c_per_term, with alpha pinned FROM the Bravyi-Gosset paper (G-1 house rule — advantage/cost
-   bounds are measure-dependent; C4523). That paper is NOT in the library yet, so alpha is left an
-   explicit UNPINNED parameter here and the rank curve's absolute scaling is a v1 deliverable
-   (paper requested from Creator). Aer's measured wall-time / memory wall are reported ALONGSIDE,
-   labeled Aer-specific / overhead-dominated — reality checks, never the curve.
+=> The FAITHFUL rank signal is the paper's runtime scaling, now PAPER-PINNED (Creator supplied the
+   Bravyi-Gosset paper C4971, dc_shared/resources/; G-1 satisfied — pulled from paper, not memory):
+   SAMPLING task (the race) = poly(n,m) + 2^(0.23*t)*t^3*w^3 (gamma=0.23); EXACT/probability task =
+   poly(n,m) + 2^(beta*t)*t^3, beta=(1/6)log2(7)~=0.4696; norm subroutine chi*n^3*eps^-2 (the eps^-2
+   is exactly why tighter approximation_error costs more). The SHAPE is paper-faithful; absolute
+   seconds still need a calibrated per-stabilizer-term constant (v1.0). Aer's measured wall-time /
+   memory wall are reported ALONGSIDE, labeled Aer-specific / overhead — reality checks, not the curve.
 
 The TRUSTWORTHY columns are frozen now:
   * statevector cost vs n — curved on the worker's run_s (simulation only; the ~0.3s fork+qiskit-init
@@ -52,6 +53,22 @@ AER_EXTSTAB_SHOTS_SCALING = {
 AER_EXACT_MEMORY_WALL = {"T": 48, "n": 4, "approx_err": 0.0, "result": "out_of_memory",
                          "max_memory_mb": None, "genuine_wall": True}
 
+# PAPER-PINNED exponents (Bravyi & Gosset, "Improved classical simulation of quantum circuits
+# dominated by Clifford gates", arXiv:1601.07601 / PRL 116, 250501, dated 2019-04-11; in
+# dc_shared/resources/). G-1 rule satisfied: pulled from the paper, not memory. Definitions:
+# chi_t(delta) = min # stabilizer states approximating |A>^t to |<A^t|psi>|^2 >= 1-delta.
+#   * EXACT rank chi_t(0) = O(2^(beta*t)), beta = (1/6)*log2(7) ~= 0.4696  -> PROBABILITY task
+#     runtime poly(n,m) + 2^(beta*t) * t^3   (abstract rounds beta to 0.5)
+#   * APPROX rank chi_t(delta) = O(2^(gamma*t)), gamma = 0.23 (const delta) -> SAMPLING task
+#     runtime poly(n,m) + 2^(gamma*t) * t^3 * w^3   (t=#T-gates, w=#measured qubits, n=#qubits)
+#   * norm-approximation subroutine: time chi * n^3 * eps^-2 (eps = relative error) -> the eps^-2
+#     is exactly WHY a tighter approximation_error costs more, straight from the paper.
+import math as _m
+BG_ALPHA_SAMPLING = 0.23                      # gamma: the race SAMPLES the peak -> this is the one
+BG_ALPHA_EXACT = (1.0 / 6.0) * _m.log2(7.0)   # beta ~= 0.4696 (exact / probability task)
+BG_PAPER = ("Bravyi & Gosset, Improved classical simulation of quantum circuits dominated by "
+            "Clifford gates, PRL 116 250501 (arXiv:1601.07601, 2019-04-11)")
+
 
 def _loglinfit(xs, ys):
     """Least-squares ln(y)=a+b*x. Returns dict or None (needs >=2 positive points)."""
@@ -74,12 +91,11 @@ def _loglinfit(xs, ys):
             "r2": round(r2, 4), "n_points": n}
 
 
-def projected_stabilizer_rank_bill(T, alpha, c_per_term_s):
-    """The FAITHFUL rank cost (framework). alpha MUST be pinned from the Bravyi-Gosset paper (G-1).
-    Until then this returns None to refuse a memory-sourced number."""
-    if alpha is None or c_per_term_s is None:
-        return None
-    return (2.0 ** (alpha * T)) * c_per_term_s
+def projected_stabilizer_rank_bill(t, w=1, c_per_term_s=1.0, alpha=BG_ALPHA_SAMPLING):
+    """The FAITHFUL rank cost, paper-pinned (Bravyi-Gosset). Sampling task (the race):
+    2^(alpha*t) * t^3 * w^3 * c_per_term_s, alpha=gamma=0.23. Absolute seconds require a calibrated
+    c_per_term_s (per-stabilizer-term runtime on this hardware); the SHAPE is paper-faithful."""
+    return (2.0 ** (alpha * t)) * (t ** 3) * (w ** 3) * c_per_term_s
 
 
 # ------------------------------------------------------------------ trustworthy column sweeps
@@ -168,24 +184,33 @@ def main():
                             cap_s=args.cap_s, tc=tc)
 
     card = {
-        "card": "classical_cost_map", "version": "0.5", "substrate": "claude-fable-5",
+        "card": "classical_cost_map", "version": "0.6", "substrate": "claude-fable-5",
         "cycle": "C4971", "timestamp": args.timestamp,
         "hardware": hardware_fingerprint(), "preflight": pf, "cap_s": args.cap_s, "thread_config": tc,
         "columns": {
             "statevector_vs_n": sv,
             "mps_min_chi_vs_n": mps,
             "stabilizer_rank_vs_T": {
-                "status": "FRAMEWORK_ONLY_alpha_unpinned",
+                "status": "PAPER_PINNED_EXPONENTS",
                 "why": ("extended_stabilizer wall-time is a sampler-config artifact (shots x "
                         "Metropolis mixing), NOT Clifford+T hardness — a G1 strawman if curved. "
-                        "The faithful signal is the stabilizer-extent model 2^(alpha*T) * c_per_term."),
-                "alpha": None,
-                "alpha_source_required": ("Bravyi-Gosset (Improved classical simulation of quantum "
-                                          "circuits dominated by Clifford gates, 2016 / Bravyi et al. "
-                                          "2019) — pin from paper, G-1 rule; paper requested from Creator"),
+                        "The faithful signal is the paper's stabilizer-rank runtime scaling."),
+                "paper": BG_PAPER,
+                "alpha_sampling_gamma": round(BG_ALPHA_SAMPLING, 4),   # the race task (samples peak)
+                "alpha_exact_beta": round(BG_ALPHA_EXACT, 4),          # exact/probability task
+                "sampling_runtime_model": "poly(n,m) + 2^(0.23*t) * t^3 * w^3   (t=#T, w=#measured)",
+                "exact_runtime_model": "poly(n,m) + 2^(beta*t) * t^3,  beta=(1/6)log2(7)~=0.4696",
+                "approximation_error_cost": "norm subroutine time = chi*n^3*eps^-2 (eps=rel error) "
+                                            "-> tighter approximation_error costs ~1/eps^2, from paper",
+                "cost_doubles_every_dT_sampling": round(1.0 / BG_ALPHA_SAMPLING, 2),  # ~4.35 T-gates
+                "projected_sampling_bill_shape": {
+                    str(t): round(2.0 ** (BG_ALPHA_SAMPLING * t) * (t ** 3), 1)  # w folded into const
+                    for t in (8, 16, 24, 32, 40, 48, 64)},  # relative shape (per-term const c=1, w=1)
+                "absolute_constant_note": ("shape is faithful + paper-pinned; absolute seconds need a "
+                                           "calibrated anchor (per-stabilizer-term runtime on this "
+                                           "hardware) — v1.0 calibration item"),
                 "aer_reality_check_shots_scaling": AER_EXTSTAB_SHOTS_SCALING,
                 "aer_reality_check_exact_memory_wall": AER_EXACT_MEMORY_WALL,
-                "projected_bill_fn": "projected_stabilizer_rank_bill(T, alpha, c_per_term_s)",
             },
         },
         "provenance": {
@@ -198,12 +223,13 @@ def main():
                               "necessary but not sufficient; extstab wall-time fails cost-faithfulness"),
         },
     }
-    out = os.path.join(QROOT, "results", "classical_cost_map_v0.5.json")
+    out = os.path.join(QROOT, "results", "classical_cost_map_v0.6.json")
     json.dump(card, open(out, "w"), indent=1)
-    print(f"\ncard -> results/classical_cost_map_v0.5.json")
+    print(f"\ncard -> results/classical_cost_map_v0.6.json")
     print(f"  statevector_vs_n fit: {sv['fit_logcost_vs_n']}  (ref ln-slope 2^n ~ {sv['reference_ln_slope_2n']})")
     print(f"  mps min-chi rows: {[(r['n'], r['min_verifying_chi']) for r in mps['rows']]}")
-    print(f"  rank column: FRAMEWORK_ONLY (alpha unpinned; paper requested) + Aer reality checks")
+    print(f"  rank column: PAPER_PINNED (Bravyi-Gosset gamma=0.23 sampling / beta=0.47 exact; "
+          f"cost doubles ~every 4.35 T-gates) + Aer reality checks")
     return 0
 
 
