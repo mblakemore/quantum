@@ -6,6 +6,28 @@ All results are measured quantum hardware; every number traces to an IBM Quantum
 
 ---
 
+> ## ⚠️ CORRECTION (C4942) — the IonQ cross-modality claim is WITHDRAWN
+> After this paper's first version, an external review (Gemini, relayed by the Creator) pressed on the
+> weakest link: the IonQ result relied on a $16 semantic-smoke port check in place of a full downstream
+> null-integrity arm. We flew the proper **definite-order null** on IonQ (Exp211b). **It FAILED**
+> (W_definite = +1.96, not the ≈0 a causally-separable control must give). A deterministic bit-order
+> **calibration** then ruled out a benign endianness artifact (IonQ returns the qiskit-convention
+> bitstring `'01'` for a known `|control=1,target=0⟩` — no bit flip). Diagnosis: the definite-order null
+> circuit carries **zero entangling gates** and appears to compile anomalously on IonQ's all-to-all native
+> path, so we could **not run a trustworthy definite-order control there**. The calibration indicates the
+> witness's *entangled* circuits read the control correctly (so W=1.894 is plausibly a real reading), but
+> **the loophole is not closed**: without a validated null we cannot certify that the IonQ W>0 arises from
+> indefinite order rather than a compilation artifact.
+>
+> **Therefore the IonQ (cross-modality) certification is withdrawn.** The robust result of this paper is
+> **two-substrate**: three IBM Heron dies (full 3-axis bench) and Rigetti Cepheus (cross-*vendor*
+> superconducting, full PASS-CAUSAL). The IonQ flight is retained below as an **attempted, uncertified**
+> cross-modality observation (witness fired; null-validation failed), not as evidence. The §5 "does not
+> cluster by modality" argument depended on the IonQ point and is likewise withdrawn pending a valid null.
+> The prose below §is being revised to this scope; treat this banner as authoritative where they conflict.
+
+---
+
 ## Abstract
 
 The quantum switch places the *order* of two operations into coherent superposition — a process with **indefinite causal order (ICO)** that no definite-order (causally separable) process can reproduce. Prior hardware demonstrations, including the earlier phases of this campaign, established ICO on a single family of superconducting processors (IBM Heron). A natural skeptical question remains: *is ICO a genuine property of quantum mechanics, or an artifact of one hardware technology?* We answer it empirically by transporting a **frozen, pre-registered causal-order instrument** — the same circuits, graded against the **same theory-fixed bounds, with no retuning** — across the deepest hardware divide available to us. The causal witness **W** (ideal 2.0; causally-separable bound 0) certifies on **three IBM Heron dies** (W = 1.89–1.95), on a **different-vendor superconducting chip** (Rigetti Cepheus-1-108Q, W = 1.114, 49.7σ over the bound, full three-number PASS-CAUSAL), and on a **trapped-ion processor** (IonQ Forte-1, W = 1.894, 29.9σ over the bound, witness-only). Trapped ions store each qubit in a single atom, use all-to-all connectivity and GPI/GPI2/RZZ native gates, and carry **none of the CZ Z-biased dephasing** on which the superconducting devices' error budget is dominated — yet ICO fires there at essentially the same strength as on tuned Heron. Across three physically distinct substrates from three vendors, the witness strength **does not cluster by modality**: the two highest-contrast chips (Heron and IonQ) sit on *opposite* modalities, while a third superconducting chip (Rigetti) separates below — consistent with ICO being a quantum resource whose *observed* magnitude is attenuated by each device's **total, depth-integrated error budget** rather than by its qubit technology or its per-entangling-gate error. We conclude that indefinite causal order is substrate-general. We are explicit about the asymmetry of evidence (Heron: full three-axis bench; Rigetti: full causal axis; IonQ: witness-only, budget-gated) and about what the result is and is not.
