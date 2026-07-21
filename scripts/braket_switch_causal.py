@@ -41,19 +41,26 @@ def get_backend(which):
         return BraketLocalBackend()
     from qiskit_braket_provider import BraketProvider
     arn = DEVICE[which][0]
-    name = arn.split("/")[-1]
-    for b in BraketProvider().backends():
-        if b.name == name:
+    last = arn.split("/")[-1]
+    variants = {last, last.replace("-", " "), last.replace(" ", "-")}  # "Forte-1" vs "Forte 1"
+    backends = BraketProvider().backends()
+    for b in backends:
+        if b.name in variants:
             return b
-    raise SystemExit(f"backend {name} not found; available: {[b.name for b in BraketProvider().backends()]}")
+    raise SystemExit(f"backend {last} not found; available: {[b.name for b in backends]}")
 
 
 def best_pair(backend):
     """Frozen protocol = re-derive site selection live on the device map. Pick the
-    lowest-CZ-error connected edge (mirrors the IBM bench's pick_pair)."""
-    cz = backend.target["cz"]
-    edges = [(p.error, tuple(qs)) for qs, p in cz.items()
+    lowest-CZ-error connected edge (mirrors the IBM bench's pick_pair). Returns (None, None)
+    for devices with no CZ in the native set (e.g. IonQ = GPI/GPI2/MS, all-to-all)."""
+    tgt = backend.target
+    if "cz" not in getattr(tgt, "operation_names", []):
+        return None, None
+    edges = [(p.error, tuple(qs)) for qs, p in tgt["cz"].items()
              if p is not None and getattr(p, "error", None) is not None]
+    if not edges:
+        return None, None
     edges.sort()
     return list(edges[0][1]), edges[0][0]
 
@@ -165,9 +172,12 @@ def main():
     manifest_path = os.path.join(QROOT, "results", f"braket_causal_{tag}_manifest.json") if args.submit else None
     if which != "local":
         layout, cz_err = best_pair(backend)
-        print(f"device best CZ edge (informational): {layout} err={cz_err:.5f}. "
-              f"native=True verbatim-boxes on the default label map (phys [0,1], a top-5 CZ edge) — "
-              f"placement pinned, not Braket-rewired.")
+        if layout is not None:
+            print(f"device best CZ edge (informational): {layout} err={cz_err:.5f}. "
+                  f"native=True verbatim-boxes on the default label map — placement pinned.")
+        else:
+            print(f"{backend.name}: no CZ in native set (all-to-all / non-CZ device) — "
+                  f"native=True compiles to the device's own natives + verbatim box.")
 
     counts = run_grouped(backend, pubs, is_qpu=(which != "local"), manifest_path=manifest_path)
 
