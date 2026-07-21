@@ -1,0 +1,110 @@
+{
+ "card": "exp_hss_pessimistic_resim_ember",
+ "role": "Item-3 2-of-2 (pessimistic-edge peak)",
+ "substrate": "claude-opus-4-8",
+ "n_qubits": 40,
+ "t": 80,
+ "n_ccz": 10,
+ "device_pessimistic": "ibm_fez",
+ "lambda_eff": {
+  "ibm_kingston": 0.00591,
+  "ibm_fez": 0.01351
+ },
+ "shot_budget": 100000,
+ "peak_min_counts": 50,
+ "fold_rule": "pre-committed: FOLD iff best-case fez peak < 50",
+ "seeds": [
+  {
+   "seed": 101,
+   "d2q": 584,
+   "depth": 735,
+   "R_fez": 0.0003745294949115424,
+   "peak_fez": 37.45,
+   "detectable_fez": false
+  },
+  {
+   "seed": 202,
+   "d2q": 622,
+   "depth": 568,
+   "R_fez": 0.0002241444159019351,
+   "peak_fez": 22.41,
+   "detectable_fez": false
+  },
+  {
+   "seed": 303,
+   "d2q": 582,
+   "depth": 653,
+   "R_fez": 0.00038478723992523245,
+   "peak_fez": 38.48,
+   "detectable_fez": false
+  },
+  {
+   "seed": 404,
+   "d2q": 583,
+   "depth": 671,
+   "R_fez": 0.00037962372241155294,
+   "peak_fez": 37.96,
+   "detectable_fez": false
+  },
+  {
+   "seed": 505,
+   "d2q": 593,
+   "depth": 560,
+   "R_fez": 0.00033165012005490407,
+   "peak_fez": 33.17,
+   "detectable_fez": false
+  },
+  {
+   "seed": 606,
+   "d2q": 604,
+   "depth": 675,
+   "R_fez": 0.0002858509605303036,
+   "peak_fez": 28.59,
+   "detectable_fez": false
+  }
+ ],
+ "best_case": {
+  "seed": 303,
+  "d2q": 582,
+  "peak_fez": 38.48,
+  "detectable": false
+ },
+ "scout_seed_crosscheck": {
+  "seed": 20260721,
+  "d2q": 617,
+  "peak_fez_pessimistic": 23.98,
+  "peak_kingston_optimistic_reported": 2608.3
+ },
+ "verdict": "FOLD -> NO-GO",
+ "fold": true,
+ "kingston_topology_check": {
+  "note": "GO-leg airtight: kingston topology + kingston lambda, peak>>50 on all seeds",
+  "rows": [
+   {
+    "seed": 101,
+    "d2q": 584,
+    "peak_kingston": 3170.0,
+    "detectable": true
+   },
+   {
+    "seed": 202,
+    "d2q": 622,
+    "peak_kingston": 2532.4,
+    "detectable": true
+   },
+   {
+    "seed": 303,
+    "d2q": 582,
+    "peak_kingston": 3207.7,
+    "detectable": true
+   },
+   {
+    "seed": 20260721,
+    "d2q": 617,
+    "peak_kingston": 2608.3,
+    "detectable": true
+   }
+  ]
+ },
+ "framing": "device-dependent gate: kingston DETECTS (GO leg), fez FOLDS (<50 bar); both-edges rule -> NO-GO. Margin thin (best fez 38 vs 50). NO-GO rides on 50-count proxy for 7sigma-FWER-over-2^40 (frozen, not overridden)."
+}
