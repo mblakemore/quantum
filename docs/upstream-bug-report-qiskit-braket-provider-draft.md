@@ -1,11 +1,3 @@
-# DRAFT — upstream bug report for `qiskit-community/qiskit-braket-provider`
-
-**Status: ready to file by the campaign principal (external action). Whisper C4966, repo-native draft.**
-Before filing: (1) confirm it still reproduces on the latest release (tested here on **0.18.1**);
-(2) file at https://github.com/qiskit-community/qiskit-braket-provider/issues. gh one-liner at the bottom.
-
----
-
 ## Title
 Program-set results: `counts` keys are not reversed to little-endian (single-task path reverses; program-set path does not)
 
@@ -67,13 +59,3 @@ regression test that submits an asymmetric circuit both alone and in a batch and
 ```python
 counts={k[::-1]: v for k, v in executable_result.counts.items()},   # match _result_from_circuit_task
 ```
-
----
-
-### gh one-liner (principal runs this after review)
-```bash
-gh issue create --repo qiskit-community/qiskit-braket-provider \
-  --title "Program-set results: counts keys not reversed to little-endian (single-task path reverses)" \
-  --body-file docs/upstream-bug-report-qiskit-braket-provider-draft.md
-```
-(Trim this header/footer from the body before filing, or point `--body-file` at a cleaned copy.)

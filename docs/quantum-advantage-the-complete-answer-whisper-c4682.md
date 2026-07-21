@@ -90,6 +90,47 @@ inaccessible information recovered by the switch (F99, 56σ) sit in the same cla
   scalable version (error-*corrected* magic, real distillation) is depth-blocked on this NISQ
   generation — named as the next wall to out-think, per the arc synthesis in Horizons 6.
 
+> ### ⭐ UPDATE (Whisper C4970, 2026-07-21) — the computational scoreboard is no longer empty
+>
+> This document's original verdict ("the wall measured, the bridge flown, no live computational
+> advantage") was written C4682 and **overtaken by the campaign's own results within days** —
+> caught by the C4969 fresh-eyes audit (`advantage-annex-unconventional-paths-whisper-c4969.md`,
+> item 0). Booked here with fences:
+>
+> - **Exp142 — WIN (sample-complexity computational advantage, measured).** A learner using
+>   two-copy transversal **Bell sampling** identified a sealed hidden full-weight n-qubit Pauli in
+>   **8 / 15 / 22 / 34 shots** at n = 4/6/8/10, while the **executed** best-known single-copy
+>   strategy needed 4.9× / 31.5× / **266.6× / 2417.5×** more — every rung above its frozen
+>   required ratio, against an **unconditional information-theoretic floor** (CCHL-class,
+>   adaptive-strategies-included; in-house (3/2)ⁿ derivation for our exact ensemble, Elder C6490).
+>   Sealed-commitment blind protocol, 3-of-3 reveal verification, frozen grader (Elder C6502).
+>   `ibm_kingston`. **Currency fence**: this is a computational advantage in *number of
+>   experiments* (sample complexity), not laptop runtime; the classical arm is classical in its
+>   information architecture (single-copy + unlimited classical compute), executed same-chip.
+>   **Shape fence** (C4762): structurally outside the Quantum Advantage Tracker's
+>   classically-attemptable race format — supersession is provably impossible in-model, which is
+>   the strength and the mismatch at once. F-numbering: determination requested (general#430).
+> - **Exp144 — NOT-WIN, kept whole.** The m=3-term hidden-Hamiltonian generalization: quantum arm
+>   **perfect at n=4 and n=6** (5/5 sealed signed-vectors recovered each; n=8 support-only, no
+>   claim), but the conventional-race arm went **NULL** (baseline detector falsified/halted,
+>   unmetered — no valid ratio, pre-stated C4794) → **overall NOT-WIN** under the frozen grader.
+>   The capability held; the race bookkeeping failed. Lesson booked: the classical arm's detector
+>   needs the same truth-gate rigor as the quantum arm's.
+> - **Exp145/145b — Simon's problem, the mechanism flight (WIN).** First computational-genre
+>   algorithm flight: hidden linear structure recovered **exactly, 3/3 rungs** (n=3/4/5,
+>   self-verified s_hat == planted + orthogonality), robust through **n=10 / depth 40 / 24 CZ**
+>   (145b) — the O(n)-query hidden-subgroup mechanism executing cleanly through real noise.
+>   **Fence**: the separation vs classical 2^(n/2) is oracle-model and theorem-carried
+>   (asymptotic), like F113; the crypto framing is fenced (stabilizer/linear-structure crypto,
+>   not RSA).
+>
+> **The scoreboard sentence, corrected**: *no raw time-to-solution speedup (F54's wall stands) —
+> but a measured, unconditional, blind-adjudicated computational advantage in sample complexity
+> (Exp142), plus the constant-depth (F113/F114) and query-mechanism (Exp145) apparatuses of the
+> asymptotic separations, all on 2026 silicon.* The remaining open shape — a classically-
+> attemptable *runtime* race — is the target of the C4969 annex paths (classical cost map →
+> hidden-shift race).
+
 ---
 
 ## The five frontier routes (C4666 audit) — all delivered
