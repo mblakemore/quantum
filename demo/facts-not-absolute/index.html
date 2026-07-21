@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%225.5%22%20cy%3D%228%22%20r%3D%222.4%22%20fill%3D%22none%22%20stroke%3D%22%23818cf8%22%20stroke-width%3D%221.5%22%2F%3E%3Ccircle%20cx%3D%2210.5%22%20cy%3D%228%22%20r%3D%222.4%22%20fill%3D%22none%22%20stroke%3D%22%23818cf8%22%20stroke-width%3D%221.5%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Facts Are Not Absolute — the friend in the machine | The Quantum Museum</title>
+<meta name="description" content="Two friend-qubits each record a definite outcome — yet while the records stay isolated, no single observer-independent fact exists (a facts-CHSH violation at 20σ). Copy the records into the world and absoluteness is restored. Real hardware (ibm_fez, Exp193). A Wigner's-friend / Local-Friendliness test on silicon.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--obs); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--obs); color: var(--obs); }
+
+  :root { --obs:#818cf8; --restore:#34d399; }
+  :root[data-theme="light"] { --obs:#4f46e5; --restore:#059669; }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(58% 60% at 28% 0%, color-mix(in srgb,var(--obs) 16%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.4vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--obs); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 16px; }
+
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--obs); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; } .pcard b { color: var(--ink); }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--obs); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:70ch; }
+
+  .seg { display:inline-flex; border:1.5px solid var(--edge); border-radius:10px; overflow:hidden; }
+  .seg button { font-family:var(--mono); font-size:12.5px; font-weight:600; padding:9px 14px; border:none;
+    background:var(--surface-2); color:var(--ink-2); cursor:pointer; }
+  .seg button.on { background:var(--obs); color:var(--bg); }
+  .seg button:not(.on):hover { color:var(--obs); }
+
+  .friends { display:flex; gap:16px; justify-content:center; margin:6px 0 16px; flex-wrap:wrap; }
+  .friend { border:1px solid var(--edge); border-radius:12px; padding:14px 18px; background:var(--surface-2); text-align:center; min-width:150px; }
+  .friend .fn { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .friend .rec { font-family:var(--mono); font-size:13px; font-weight:700; color:var(--restore); margin-top:6px; }
+  .friend .env { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-top:6px; min-height:1.2em; }
+
+  .gauge-wrap { max-width:560px; margin:0 auto; }
+  .verdict { text-align:center; font-size:14px; color:var(--ink-2); margin-top:12px; min-height:2.6em; }
+  .verdict b { color:var(--ink); } .verdict .bad { color:var(--obs); font-weight:700; } .verdict .ok { color:var(--restore); font-weight:700; }
+
+  .chain { display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .chain .step { border:1px solid var(--edge); border-radius:8px; padding:6px 10px; } .chain .here { border-color:var(--obs); color:var(--obs); font-weight:700; }
+  .chain .arw { color:var(--ink-3); }
+
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--obs); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; } .rc b { color:var(--ink); } .rc .yes { color:var(--restore); font-weight:600; }
+  .links-row { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
+  .deeper { display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:12.5px; font-weight:600;
+    text-decoration:none; border:1.5px solid var(--edge-2); color:var(--ink-2); border-radius:9px; padding:7px 13px; }
+  .deeper:hover { border-color:var(--obs); color:var(--obs); }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--obs); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--obs); }
+  .badge-row .sp2 { flex:1; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+
+  <nav class="topbar" aria-label="Museum">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing VI · Time &amp; the Observer</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
+
+  <main id="main">
+  <header class="hero">
+    <p class="eyebrow">Wigner's friend · observed facts, tested</p>
+    <h1>A fact isn't a fact <span class="hl">until the world copies it</span>.</h1>
+    <p class="lede">Two "friends" each look at their qubit and <strong>write down what they saw</strong> — a definite outcome. But while
+    those notes stay <strong>private</strong>, there's no single answer everyone can agree on: a facts-CHSH test breaks the bound every
+    "the observation is an absolute fact" model must obey. <strong>Copy the notes out into the world</strong> and the fact locks in.</p>
+
+    <div class="primer">
+      <div class="pcard">
+        <h2>The friend</h2>
+        <p>The "friend" is a <strong>memory qubit</strong> that measures its system and <strong>records</strong> the result (E(F,F) ≈ 0.94 — it
+        genuinely records). This is a theorem about <strong>records</strong>, not consciousness.</p>
+      </div>
+      <div class="pcard">
+        <h2>Isolated vs copied</h2>
+        <p>Keep the records <strong>isolated</strong> and a superobserver can still coherently overrule them → no absolute fact. <strong>Copy</strong>
+        them into the environment (many copies) and that becomes impossible → the fact is now absolute.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <span class="scope">Friend = one <strong>memory qubit</strong> (not a conscious observer); the theorem is about records; one die.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — Make a fact absolute (or not)</p>
+    <h2>Toggle the records; watch the fact cross the line</h2>
+    <p class="sub">Both friends have recorded a definite outcome (the green chips — E(F,F) ≈ 0.94). The gauge is the <strong>facts-CHSH</strong>
+    value S: above the line at <strong>2</strong>, no single observer-independent fact can exist. Flip the records from <strong>isolated</strong> to
+    <strong>copied into the world</strong> and watch S drop back under the bound — absoluteness restored.</p>
+
+    <div style="text-align:center;margin-bottom:18px">
+      <div class="seg" role="group" aria-label="record state">
+        <button data-rec="live" class="on" type="button">records ISOLATED</button>
+        <button data-rec="deco" type="button">records COPIED (decohered)</button>
+      </div>
+    </div>
+
+    <div class="friends">
+      <div class="friend"><div class="fn">Friend A</div><div class="rec">✓ recorded a fact</div><div class="env" id="envA"></div></div>
+      <div class="friend"><div class="fn">Friend B</div><div class="rec">✓ recorded a fact</div><div class="env" id="envB"></div></div>
+    </div>
+
+    <div class="gauge-wrap">
+      <svg id="sgauge" viewBox="0 0 560 96" role="img" aria-label="facts-CHSH gauge" style="width:100%;height:auto"></svg>
+    </div>
+    <p class="verdict" id="verdict" aria-live="polite"></p>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The last rung</p>
+    <h2>Where this sits in the observer ladder</h2>
+    <p class="sub">The campaign walked a lineage of "how absolute is reality?" — and this is the deepest rung: not just <em>when</em>
+    or <em>in what order</em>, but whether an <strong>observed fact</strong> is absolute at all.</p>
+    <div class="chain">
+      <span class="step">no definite value between looks · 186</span><span class="arw">→</span>
+      <span class="step">no fixed moment · 184</span><span class="arw">→</span>
+      <span class="step">no definite order · 187</span><span class="arw">→</span>
+      <span class="step here">no absolute fact · 193 ◂ you are here</span>
+    </div>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — Why this counts</p>
+    <h2>Three receipts, and the honest fence</h2>
+    <div class="receipts">
+      <div class="rc"><h3>1 · The records are real</h3><p>Each friend actually recorded its system: <strong>E(F,F) ≈ 0.94</strong>. This isn't "the friend didn't look" — the friends genuinely observed. <span class="yes">Not a null.</span></p></div>
+      <div class="rc"><h3>2 · The falsifier is built in</h3><p>Copying the records (decohere) collapses the violation to <strong>1.556</strong>, under the bound — the arm lands exactly where absoluteness lives. <span class="yes">A +0.791 swing, 32σ.</span></p></div>
+      <div class="rc"><h3>3 · The honest fence</h3><p>The "friend" is <strong>one memory qubit</strong>, not a conscious mind — the theorem is about <strong>records</strong>, and we test records. One die.</p></div>
+    </div>
+    <div class="links-row">
+      <a class="deeper" href="../past-not-fixed/">The Past Is Not Fixed (the lineage)</a>
+      <a class="deeper" href="../delayed-eraser/">The Delayed-Choice Eraser →</a>
+    </div>
+  </section>
+
+  </main>
+  <footer class="badge-row">
+    <span>MEASURED · <span class="sig">Exp193</span> · ibm_fez · job d9e6piineu4c739o3fsg</span>
+    <span>facts-CHSH 2.346 (20σ) → 1.556 · gap 32σ · 8 circuits · 8000 shots</span>
+    <span class="sp2"></span>
+    <a href="../">Museum</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+    var css = getComputedStyle(document.documentElement);
+    function C(v){ return css.getPropertyValue(v).trim(); }
+
+    // ---- verified data kernel (Exp193, ibm_fez) ----
+    var W = { live:{S:2.346, EFF:0.936}, deco:{S:1.556, EFF:0.913} };
+    console.assert(W.live.S>2 && W.deco.S<2 && W.live.EFF>0.9, "live violates, deco restored, records real");
+
+    var state = { rec:"live" };
+    var MIN=1.0, MAX=2.5, BOUND=2.0;
+
+    function drawGauge(){
+      var svg=document.getElementById("sgauge"), X0=20, X1=540, y=44;
+      function gx(v){ return X0 + (v-MIN)/(MAX-MIN)*(X1-X0); }
+      var s="";
+      // violation shade (above bound)
+      s+='<rect x="'+gx(BOUND)+'" y="30" width="'+(gx(MAX)-gx(BOUND))+'" height="28" rx="4" fill="'+C("--obs")+'" fill-opacity="0.13"/>';
+      // restored shade (below bound)
+      s+='<rect x="'+gx(MIN)+'" y="30" width="'+(gx(BOUND)-gx(MIN))+'" height="28" rx="4" fill="'+C("--restore")+'" fill-opacity="0.10"/>';
+      s+='<line x1="'+X0+'" y1="58" x2="'+X1+'" y2="58" stroke="'+C("--edge-2")+'" stroke-width="1.2"/>';
+      // bound line
+      s+='<line x1="'+gx(BOUND)+'" y1="24" x2="'+gx(BOUND)+'" y2="62" stroke="'+C("--ink-2")+'" stroke-width="1.6" stroke-dasharray="4 2"/>';
+      s+='<text x="'+gx(BOUND)+'" y="20" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--ink-2")+'">absolute-fact bound = 2</text>';
+      // region labels
+      s+='<text x="'+gx(2.25)+'" y="78" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9.5" fill="'+C("--obs")+'">no absolute fact</text>';
+      s+='<text x="'+gx(1.5)+'" y="78" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9.5" fill="'+C("--restore")+'">fact is absolute</text>';
+      // needle
+      var val=W[state.rec].S, x=gx(val), col = val>BOUND ? C("--obs") : C("--restore");
+      s+='<line x1="'+x+'" y1="28" x2="'+x+'" y2="58" stroke="'+col+'" stroke-width="2.4"/>';
+      s+='<circle cx="'+x+'" cy="44" r="8" fill="'+C("--card")+'" stroke="'+col+'" stroke-width="3"/>';
+      s+='<text x="'+x+'" y="'+ (val>BOUND?18:92) +'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="13" font-weight="700" fill="'+col+'">S = '+val.toFixed(3)+'</text>';
+      svg.innerHTML=s;
+    }
+    function render(){
+      drawGauge();
+      var d=W[state.rec], v=document.getElementById("verdict");
+      var envA=document.getElementById("envA"), envB=document.getElementById("envB");
+      if(state.rec==="live"){
+        envA.textContent="record isolated"; envB.textContent="record isolated";
+        v.innerHTML='<span class="bad">No absolute fact.</span> With the records isolated, the facts-CHSH hits <b>2.346</b> — <b>20σ</b> past the bound. No single observer-independent value for what the friend saw can exist.';
+      } else {
+        envA.innerHTML="copied → 🌐🌐🌐"; envB.innerHTML="copied → 🌐🌐🌐";
+        v.innerHTML='<span class="ok">Fact restored.</span> Copy the records into the world and the violation collapses to <b>1.556</b>, back under 2. Once a record has proliferated, the superobserver can no longer overrule it — the fact is <b>absolute</b>.';
+      }
+      document.querySelectorAll(".seg button").forEach(function(b){ b.classList.toggle("on", b.dataset.rec===state.rec); });
+    }
+    document.querySelectorAll(".seg button").forEach(function(b){ b.addEventListener("click", function(){ state.rec=b.dataset.rec; render(); }); });
+    render();
+  })();
+</script>
+</body>
+</html>

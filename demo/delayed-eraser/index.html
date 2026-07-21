@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M2%208q2-4%204%200t4%200%204%200%22%20stroke%3D%22%23818cf8%22%20stroke-width%3D%221.5%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Delayed-Choice Eraser — a future coin edits the past's fringe | The Quantum Museum</title>
+<meta name="description" content="Mark which path a qubit took and its interference fringe dies; erase the mark later — even after the qubit is measured — and the fringe returns. A choice in the qubit's future toggles whether its past shows a fringe (+0.642), yet the raw marginal stays flat (0.055): edits the pattern, sends no message. Real hardware (ibm_fez, Exp155).">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--obs); }
+  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
+    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
+  .tbtn:hover { border-color: var(--obs); color: var(--obs); }
+
+  :root { --obs:#818cf8; --fringe:#34d399; --flat:#fb7185; }
+  :root[data-theme="light"] { --obs:#4f46e5; --fringe:#059669; --flat:#e11d48; }
+
+  .hero { padding: clamp(20px,4vw,40px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
+    background: radial-gradient(58% 60% at 28% 0%, color-mix(in srgb,var(--obs) 16%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
+    font-size:clamp(28px,5.4vw,48px); margin:12px 0 14px; text-wrap:balance; }
+  h1 .hl { color: var(--obs); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 16px; }
+
+  .primer { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:6px 0 18px; }
+  @media (max-width:680px){ .primer { grid-template-columns:1fr; } }
+  .pcard { background:var(--surface); border:1px solid var(--edge); border-radius:12px; padding:14px 16px; }
+  .pcard h2 { font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; margin:0 0 5px; color:var(--obs); }
+  .pcard p { font-size:13.5px; color:var(--ink-2); margin:0; max-width:48ch; } .pcard b { color: var(--ink); }
+
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:2px 0 12px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:6px 13px; }
+  .scope b { color: var(--amber); font-weight:600; }
+
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    margin:0 0 4px; font-weight:600; color: var(--obs); }
+  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
+  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:70ch; }
+
+  .ctl-row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+  .ctl-row .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .seg { display:inline-flex; border:1.5px solid var(--edge); border-radius:10px; overflow:hidden; }
+  .seg button { font-family:var(--mono); font-size:12.5px; font-weight:600; padding:8px 13px; border:none;
+    background:var(--surface-2); color:var(--ink-2); cursor:pointer; }
+  .seg button.on { background:var(--obs); color:var(--bg); }
+  .seg button:not(.on):hover { color:var(--obs); }
+
+  .plotwrap { max-width:640px; margin:0 auto; }
+  .vlabel { text-align:center; font-family:var(--mono); font-size:13px; margin-top:8px; color:var(--ink-2); min-height:2.6em; }
+  .vlabel b { color:var(--ink); } .vlabel .f { color:var(--fringe); font-weight:700; } .vlabel .z { color:var(--flat); font-weight:700; }
+
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
+  .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--obs); }
+  .rc p { font-size:13px; color:var(--ink-2); margin:0; } .rc b { color:var(--ink); } .rc .yes { color:var(--fringe); font-weight:600; }
+  .links-row { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
+  .deeper { display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:12.5px; font-weight:600;
+    text-decoration:none; border:1.5px solid var(--edge-2); color:var(--ink-2); border-radius:9px; padding:7px 13px; }
+  .deeper:hover { border-color:var(--obs); color:var(--obs); }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
+    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .badge-row .sig { color: var(--obs); font-weight:600; }
+  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--obs); }
+  .badge-row .sp2 { flex:1; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+
+  <nav class="topbar" aria-label="Museum">
+    <a href="../">← The Quantum Museum</a>
+    <span class="wingtag">· Wing VI · Time &amp; the Observer</span>
+    <span class="sp"></span>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+  </nav>
+
+  <main id="main">
+  <header class="hero">
+    <p class="eyebrow">Delayed-choice quantum eraser · on silicon</p>
+    <h1>A future coin edits the <span class="hl">past's fringe</span>.</h1>
+    <p class="lede">Mark <strong>which path</strong> a qubit took and its interference fringe dies. Then — <em>after</em> the qubit is already
+    measured — <strong>choose to erase the mark</strong>, and the fringe comes back. A choice made in the qubit's <strong>future</strong> decides
+    whether its <strong>past</strong> shows a fringe. And yet you can't send a message with it: the raw signal stays flat.</p>
+
+    <div class="primer">
+      <div class="pcard">
+        <h2>Mark, then un-mark</h2>
+        <p>Copying <strong>which-path</strong> info onto a marker qubit destroys the system's interference. <strong>Erasing</strong> that mark (measure the
+        marker in the opposite basis) brings the fringe back — the information, not the particle, is what mattered.</p>
+      </div>
+      <div class="pcard">
+        <h2>Why it's not time travel</h2>
+        <p>The fringe only appears when you <strong>sort</strong> the already-recorded data by the marker's later result — you need <em>both</em>
+        records. The raw, unsorted signal is <strong>flat</strong> (0.055): no message travels back, no faster-than-light.</p>
+      </div>
+    </div>
+
+    <div class="herobtns">
+      <span class="scope">No retrocausal <strong>signalling</strong> — the unconditioned marginal is flat (0.055); the delayed choice pays a mapped idle-dephasing tax; one die.</span>
+    </div>
+  </header>
+
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — The fringe machine</p>
+    <h2>Choose to erase or keep the mark — watch the fringe appear or vanish</h2>
+    <p class="sub">The <span style="color:var(--fringe)">green</span> curve is the interference fringe (its height = visibility V). The
+    <span style="color:var(--flat)">dashed</span> curve is the <strong>raw, unsorted signal</strong> — always flat, the proof no message travels. In
+    <strong>DYNAMIC</strong> mode the choice is a quantum coin measured <em>after</em> the system is recorded.</p>
+
+    <div class="ctl-row" role="group" aria-label="mode">
+      <span class="lbl">mode:</span>
+      <div class="seg" id="modeSeg">
+        <button data-mode="static" class="on" type="button">STATIC choice</button>
+        <button data-mode="dynamic" type="button">DYNAMIC · future coin</button>
+      </div>
+    </div>
+    <div class="ctl-row" role="group" aria-label="choice">
+      <span class="lbl" id="choiceLbl">choice:</span>
+      <div class="seg" id="choiceSeg"></div>
+    </div>
+
+    <div class="plotwrap">
+      <svg id="fringe" viewBox="0 0 640 260" role="img" aria-label="interference fringe vs phase" style="width:100%;height:auto"></svg>
+    </div>
+    <p class="vlabel" id="vlabel" aria-live="polite"></p>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — The honesty is the point</p>
+    <h2>It edits the pattern; it cannot send a message</h2>
+    <p class="sub">Two numbers carry the result. The <strong>delayed-choice signal</strong> — how much the future coin toggles the fringe —
+    is <strong style="color:var(--fringe)">+0.642</strong> (coin=1 fringe 0.797 vs coin=0 flat 0.155). The <strong>no-signalling marginal</strong> — what you'd see
+    without the coincidence sort — is flat at <strong style="color:var(--flat)">0.055</strong> everywhere. The past's <em>pattern</em> bends to a future
+    choice; no <em>information</em> does. The flat marginal is the honesty fence <em>and</em> a measured number.</p>
+  </section>
+
+  <!-- PANEL C -->
+  <section class="panel">
+    <p class="panel-label">Exhibit C — Why this counts</p>
+    <h2>Three receipts, and the honest fence</h2>
+    <div class="receipts">
+      <div class="rc"><h3>1 · The matched control</h3><p>The which-path arm pays the <strong>identical</strong> post-selection cost and stays flat (<strong>0.068</strong>). So the fringe is the <strong>erasure</strong>, not the sorting. <span class="yes">Not a selection artifact.</span></p></div>
+      <div class="rc"><h3>2 · The choice is in the future</h3><p>In DYNAMIC mode a quantum coin is measured <strong>after</strong> the system is recorded, and a real feed-forward erases the marker only if the coin says so. <span class="yes">Causally later.</span></p></div>
+      <div class="rc"><h3>3 · The honest fence</h3><p>No retrocausal <strong>signalling</strong>: the marginal is flat (0.055). The delayed choice costs a mapped idle-dephasing tax (0.797 vs 0.946). One die.</p></div>
+    </div>
+    <div class="links-row">
+      <a class="deeper" href="../facts-not-absolute/">← Facts Are Not Absolute</a>
+      <a class="deeper" href="../past-not-fixed/">The Past Is Not Fixed</a>
+    </div>
+  </section>
+
+  </main>
+  <footer class="badge-row">
+    <span>MEASURED · <span class="sig">Exp155</span> · ibm_fez · job d9dr5vqneu4c739nkt20</span>
+    <span>erase 0.946 · which-path 0.068 · coin 0.797/0.155 · marginal 0.055 · 24 circuits · 4000 shots</span>
+    <span class="sp2"></span>
+    <a href="../">Museum</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement, KEY = "qmuseum-theme";
+    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx);
+      document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
+      try { localStorage.setItem(KEY, nx); } catch (e) {}
+    });
+    var css = getComputedStyle(document.documentElement);
+    function C(v){ return css.getPropertyValue(v).trim(); }
+
+    // ---- verified data kernel (Exp155, ibm_fez) : visibilities V ----
+    var E = {
+      static:  { erase:{V:0.946,lab:"erase the mark"}, whichpath:{V:0.068,lab:"keep which-path"} },
+      dynamic: { coin1:{V:0.797,lab:"coin = 1 (erase)"}, coin0:{V:0.155,lab:"coin = 0 (keep)"} },
+      marg: 0.055
+    };
+    console.assert(E.static.erase.V>0.9 && E.static.whichpath.V<0.1 && E.dynamic.coin1.V>E.dynamic.coin0.V && E.marg<0.1, "erase>>whichpath, coin1>>coin0, marginal flat");
+
+    var state = { mode:"static", choice:"erase" };
+    var CHOICES = { static:[["erase","erase the mark"],["whichpath","keep which-path"]],
+                    dynamic:[["coin1","future coin = 1 (erase)"],["coin0","future coin = 0 (keep)"]] };
+
+    function curV(){ return state.mode==="static" ? E.static[state.choice].V : E.dynamic[state.choice].V; }
+
+    function drawFringe(){
+      var svg=document.getElementById("fringe"), W=640,H=260, x0=44,x1=612,y0=24,y1=212, mid=(y0+y1)/2;
+      var s="";
+      // axes
+      s+='<line x1="'+x0+'" y1="'+y1+'" x2="'+x1+'" y2="'+y1+'" stroke="'+C("--edge-2")+'" stroke-width="1"/>';
+      s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x0+'" y2="'+y1+'" stroke="'+C("--edge-2")+'" stroke-width="1"/>';
+      s+='<line x1="'+x0+'" y1="'+mid+'" x2="'+x1+'" y2="'+mid+'" stroke="'+C("--edge")+'" stroke-width="1" stroke-dasharray="2 3"/>';
+      s+='<text x="'+(x0-6)+'" y="'+(y0+4)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">1</text>';
+      s+='<text x="'+(x0-6)+'" y="'+(mid+3)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">½</text>';
+      s+='<text x="'+(x0-6)+'" y="'+(y1+3)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">0</text>';
+      s+='<text x="'+((x0+x1)/2)+'" y="'+(y1+22)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--ink-3")+'">detector phase φ  (0 → 2π)</text>';
+      s+='<text x="'+(x0+4)+'" y="'+(y0-8)+'" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--ink-3")+'">coincidence probability P(S=0 | marker)</text>';
+      // coincidence probability P(φ) = 0.5 + 0.5·V·cos φ, mapped P=1→y0, P=0→y1, P=0.5→mid
+      function curve(V,col,dash){ var p=""; for(var i=0;i<=120;i++){ var phi=i/120*2*Math.PI;
+          var y = mid - 0.5*V*Math.cos(phi)*(y1-y0);
+          var x = x0 + i/120*(x1-x0); p+=(i?"L":"M")+x.toFixed(1)+","+y.toFixed(1); }
+        return '<path d="'+p+'" fill="none" stroke="'+col+'" stroke-width="2.6"'+(dash?' stroke-dasharray="5 4"':'')+'/>'; }
+      // fringe (green) at current V, marginal (flat, dashed) at marg
+      s+=curve(E.marg, C("--flat"), true);
+      s+=curve(curV(), C("--fringe"), false);
+      svg.innerHTML=s;
+    }
+    function renderChoices(){
+      var seg=document.getElementById("choiceSeg"); seg.innerHTML="";
+      CHOICES[state.mode].forEach(function(c){
+        var b=document.createElement("button"); b.dataset.choice=c[0]; b.type="button"; b.textContent=c[1];
+        if(c[0]===state.choice) b.className="on";
+        b.addEventListener("click", function(){ state.choice=c[0]; render(); });
+        seg.appendChild(b);
+      });
+    }
+    function render(){
+      drawFringe();
+      var V=curV(), vl=document.getElementById("vlabel");
+      var isFringe = V>0.5;
+      if(state.mode==="static"){
+        vl.innerHTML = isFringe
+          ? 'Erase the mark → the fringe is <span class="f">back</span>, visibility <b>'+V.toFixed(3)+'</b>. The information was the whole story.'
+          : 'Keep the which-path mark → <span class="z">flat</span>, visibility <b>'+V.toFixed(3)+'</b>. The matched control pays the same sorting cost and makes no fringe.';
+      } else {
+        vl.innerHTML = isFringe
+          ? 'The future coin said <b>erase</b> → fringe <span class="f">'+V.toFixed(3)+'</span>, chosen <em>after</em> the system was recorded (idle-degraded from the static 0.946).'
+          : 'The future coin said <b>keep</b> → <span class="z">flat</span> '+V.toFixed(3)+'. Same already-recorded data, sorted by the later coin.';
+      }
+      document.querySelectorAll("#modeSeg button").forEach(function(b){ b.classList.toggle("on", b.dataset.mode===state.mode); });
+      document.querySelectorAll("#choiceSeg button").forEach(function(b){ b.classList.toggle("on", b.dataset.choice===state.choice); });
+    }
+    document.querySelectorAll("#modeSeg button").forEach(function(b){ b.addEventListener("click", function(){
+      state.mode=b.dataset.mode; state.choice = state.mode==="static" ? "erase" : "coin1"; renderChoices(); render();
+    }); });
+    renderChoices(); render();
+  })();
+</script>
+</body>
+</html>
