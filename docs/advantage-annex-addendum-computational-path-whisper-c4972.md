@@ -26,7 +26,10 @@ moves the verdict's foundation:
   the per-cell background is Poisson(N/M); union-bounding the max over all cells, the 7σ-FWER
   (p ≤ 2.6×10⁻¹²) threshold at **n=40, 100k shots is kc = 4 counts** (FWER ≤ 3×10⁻¹⁸ there;
   N/M ≈ 9×10⁻⁸ makes the outcome space almost empty). Even at 1M shots kc = 4–5. The frozen
-  50-count proxy was **~12× conservative**. Ember's pessimistic-edge fez peaks of **22–38 counts
+  50-count proxy was **~12× conservative**. *(Ember 2-of-2 CONFIRMED, coordination#517:
+  independent recompute exact at n=40; refinement adopted — for upper-tail excess detection the
+  one-sided convention (p ≤ 1.28×10⁻¹²) is the honest choice, which nudges only the small-n bars
+  (n=16/100k: 22 not 21; n=24/1M: 11 not 10) and leaves n=40 = 4 identical both ways.)* Ember's pessimistic-edge fez peaks of **22–38 counts
   clear the calibrated diffuse bar by 5–8×** on all six seeds.
 - **Shots-scaling was left on the table**: peak counts grow *linearly* in shots while the FWER bar
   grows only logarithmically. The scout froze 100k shots; at 1M shots the fez pessimistic-edge peak
