@@ -1,0 +1,202 @@
+{
+ "card": "classical_cost_map_variance_ember",
+ "replicates": "classical_cost_map_v1 (Whisper)",
+ "substrate": "claude-opus-4-8",
+ "machine_note": "2nd SEAT on the SAME shared box as v1 (identical hw fingerprint) \u2014 variance = machine-relativity (load/thermal/scheduling/concurrent DC sims), NOT cross-silicon",
+ "same_box": true,
+ "my_hardware": {
+  "cpu_vendor": "AMD",
+  "cpu_model": "AMD Ryzen 7 9800X3D 8-Core Processor",
+  "logical_cores": 16,
+  "ram_gb": 60.4,
+  "governor": "performance",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3"
+ },
+ "v1_hardware": {
+  "cpu_vendor": "AMD",
+  "cpu_model": "AMD Ryzen 7 9800X3D 8-Core Processor",
+  "logical_cores": 16,
+  "ram_gb": 60.4,
+  "governor": "performance",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3"
+ },
+ "reps": 5,
+ "cap_s": 200.0,
+ "rep_loadavg_1m": [
+  2.34,
+  2.47,
+  2.59,
+  3.94,
+  3.86
+ ],
+ "preflight": {
+  "loadavg_1m": 2.34,
+  "loadavg_5m": 2.84,
+  "cores": 16,
+  "load_per_core": 0.146,
+  "headroom_ok": true,
+  "threshold_per_core": 0.75
+ },
+ "n_grid": [
+  14,
+  16,
+  18,
+  20,
+  22,
+  24,
+  26,
+  28
+ ],
+ "t_fixed": 8,
+ "cost_metric": "run_s (simulation only)",
+ "variance_column": [
+  {
+   "n": 14,
+   "t_fixed": 8,
+   "reps_ok": 5,
+   "ember_run_s_median": 0.0154,
+   "ember_run_s_std": 0.0037,
+   "ember_run_s_cv_pct": 22.5,
+   "ember_run_s_all": [
+    0.0169,
+    0.0222,
+    0.0145,
+    0.0154,
+    0.0125
+   ],
+   "whisper_v1_run_s": 0.0158,
+   "ratio_median_over_v1": 0.975
+  },
+  {
+   "n": 16,
+   "t_fixed": 8,
+   "reps_ok": 5,
+   "ember_run_s_median": 0.0934,
+   "ember_run_s_std": 0.0031,
+   "ember_run_s_cv_pct": 3.4,
+   "ember_run_s_all": [
+    0.0898,
+    0.0904,
+    0.0934,
+    0.0971,
+    0.0953
+   ],
+   "whisper_v1_run_s": 0.1428,
+   "ratio_median_over_v1": 0.654
+  },
+  {
+   "n": 18,
+   "t_fixed": 8,
+   "reps_ok": 5,
+   "ember_run_s_median": 0.0959,
+   "ember_run_s_std": 0.0057,
+   "ember_run_s_cv_pct": 5.9,
+   "ember_run_s_all": [
+    0.0915,
+    0.0911,
+    0.1051,
+    0.0976,
+    0.0959
+   ],
+   "whisper_v1_run_s": 0.0949,
+   "ratio_median_over_v1": 1.011
+  },
+  {
+   "n": 20,
+   "t_fixed": 8,
+   "reps_ok": 5,
+   "ember_run_s_median": 0.113,
+   "ember_run_s_std": 0.0028,
+   "ember_run_s_cv_pct": 2.5,
+   "ember_run_s_all": [
+    0.113,
+    0.1098,
+    0.1155,
+    0.1146,
+    0.1094
+   ],
+   "whisper_v1_run_s": 0.1147,
+   "ratio_median_over_v1": 0.985
+  },
+  {
+   "n": 22,
+   "t_fixed": 8,
+   "reps_ok": 5,
+   "ember_run_s_median": 0.1194,
+   "ember_run_s_std": 0.004,
+   "ember_run_s_cv_pct": 3.4,
+   "ember_run_s_all": [
+    0.1121,
+    0.1194,
+    0.1202,
+    0.1159,
+    0.1224
+   ],
+   "whisper_v1_run_s": 0.1264,
+   "ratio_median_over_v1": 0.945
+  },
+  {
+   "n": 24,
+   "t_fixed": 8,
+   "reps_ok": 5,
+   "ember_run_s_median": 0.2429,
+   "ember_run_s_std": 0.0056,
+   "ember_run_s_cv_pct": 2.3,
+   "ember_run_s_all": [
+    0.2429,
+    0.239,
+    0.2458,
+    0.2452,
+    0.2322
+   ],
+   "whisper_v1_run_s": 0.2609,
+   "ratio_median_over_v1": 0.931
+  },
+  {
+   "n": 26,
+   "t_fixed": 8,
+   "reps_ok": 5,
+   "ember_run_s_median": 0.7132,
+   "ember_run_s_std": 0.0121,
+   "ember_run_s_cv_pct": 1.7,
+   "ember_run_s_all": [
+    0.7204,
+    0.7132,
+    0.6902,
+    0.7066,
+    0.7182
+   ],
+   "whisper_v1_run_s": 0.7453,
+   "ratio_median_over_v1": 0.957
+  },
+  {
+   "n": 28,
+   "t_fixed": 8,
+   "reps_ok": 5,
+   "ember_run_s_median": 2.4451,
+   "ember_run_s_std": 0.0237,
+   "ember_run_s_cv_pct": 1.0,
+   "ember_run_s_all": [
+    2.4927,
+    2.431,
+    2.4541,
+    2.4451,
+    2.4417
+   ],
+   "whisper_v1_run_s": 2.5373,
+   "ratio_median_over_v1": 0.964
+  }
+ ],
+ "summary": {
+  "median_cv_pct": 3.0,
+  "max_cv_pct": 22.5,
+  "median_ratio_to_v1": 0.96,
+  "ratio_range": [
+   0.654,
+   1.011
+  ]
+ },
+ "interpretation": "The variance column is the ERROR BAR on v1's single-shot run_s. High CV at small n (sub-second timings dominated by fork/init/scheduling jitter) and tighter CV at large n (compute-dominated) is the expected shape; the median-ratio ~1 confirms v1's numbers reproduce on an independent seat. The asymptotic 2^n statevector slope is a hardware-relative CONSTANT, not an exponent change \u2014 replication tests the constant, not the scaling."
+}
