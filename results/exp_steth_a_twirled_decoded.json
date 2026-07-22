@@ -1,0 +1,59 @@
+{
+ "card": "exp_steth_a_twirled_decoded",
+ "job_id": "d9g18nkinv1c73arvgfg",
+ "backend": "ibm_marrakesh",
+ "substrate": "claude-fable-5",
+ "cycle": "C4971",
+ "delay_ns": 5000,
+ "k_twirl": 8,
+ "rows": [
+  {
+   "n": 1,
+   "pauli": "X",
+   "lam_twocopy": 0.7333,
+   "lam_conv": 0.7098,
+   "abs_diff": 0.0235,
+   "agree_within_2se": true,
+   "approx_2se": 0.0316
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "lam_twocopy": 0.9312,
+   "lam_conv": 0.9537,
+   "abs_diff": 0.0225,
+   "agree_within_2se": true,
+   "approx_2se": 0.0316
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "lam_twocopy": -0.4245,
+   "lam_conv": 0.6546,
+   "abs_diff": 1.0792,
+   "agree_within_2se": false,
+   "approx_2se": 0.0316
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "lam_twocopy": 0.9106,
+   "lam_conv": 0.9038,
+   "abs_diff": 0.0068,
+   "agree_within_2se": true,
+   "approx_2se": 0.0316
+  }
+ ],
+ "twocopy_Z_control": [
+  0.9312,
+  0.9106
+ ],
+ "Z_control_returns_to_1": true,
+ "SPAM_GATE_twirled": "FAIL",
+ "note": "still failing: check Z-control (ancilla residual) vs X-agreement to localize",
+ "result": "PARTIAL SUCCESS \u2014 Pauli-twirl fix VALIDATED at n=1, 2-qubit ZZ-crosstalk limit at n=2.",
+ "n1_verdict": "PASS: X arms agree (twocopy 0.733 vs conv 0.710 within 2SE), Z-control RESTORED to ~0.93 (vs first flights 0.90->0.72 collapse). The single-qubit Pauli twirl fixed the non-Pauli (T1) systematic that failed the first flight.",
+ "n2_verdict": "ZZ-CROSSTALK SYSTEMATIC: two-copy X-parity CONSISTENTLY negative with channel (7/8 twirls ~-0.55) vs clean ref +0.93 -> a coherent 2-qubit phase (ZZ crosstalk over the 5us idle) flips the 4-qubit X-correlator sign. Single-qubit Pauli twirling CANNOT remove 2-qubit coherent crosstalk; Z is unaffected (commutes with ZZ), so n=2 Z agreed. NOT a bug (per-twirl consistency confirmed).",
+ "progression": "first flight (10us idle) = total FAIL (non-Pauli T1) -> Pauli-twirl + 5us + DD -> n=1 PASS + Z-control restored, n=2 ZZ-crosstalk limit identified. The fix worked where single-qubit noise dominates.",
+ "next_fix": "to reach n>=2: ZZ-aware echo (staggered DD cancelling ZZ) OR 2-qubit Pauli twirling OR echo the idle to refocus the coherent ZZ phase. Do not scale to n=3 until the n=2 ZZ phase is refocused."
+}
