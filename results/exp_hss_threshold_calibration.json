@@ -1,0 +1,116 @@
+{
+ "card": "exp_hss_threshold_calibration",
+ "cycle": "C4972",
+ "substrate": "claude-fable-5",
+ "part_a_diffuse_fwer": [
+  {
+   "n": 16,
+   "shots": 100000,
+   "kc_7sigma_diffuse": 21,
+   "fwer_at_kc": 2.140378384975657e-12
+  },
+  {
+   "n": 16,
+   "shots": 1000000,
+   "kc_7sigma_diffuse": 59,
+   "fwer_at_kc": 1.004544326554648e-12
+  },
+  {
+   "n": 24,
+   "shots": 100000,
+   "kc_7sigma_diffuse": 7,
+   "fwer_at_kc": 8.850853645969668e-13
+  },
+  {
+   "n": 24,
+   "shots": 1000000,
+   "kc_7sigma_diffuse": 10,
+   "fwer_at_kc": 2.478737468756426e-12
+  },
+  {
+   "n": 32,
+   "shots": 100000,
+   "kc_7sigma_diffuse": 5,
+   "fwer_at_kc": 2.448899048870162e-16
+  },
+  {
+   "n": 32,
+   "shots": 1000000,
+   "kc_7sigma_diffuse": 6,
+   "fwer_at_kc": 9.50126706884619e-16
+  },
+  {
+   "n": 40,
+   "shots": 100000,
+   "kc_7sigma_diffuse": 4,
+   "fwer_at_kc": 3.1346513741168533e-18
+  },
+  {
+   "n": 40,
+   "shots": 1000000,
+   "kc_7sigma_diffuse": 4,
+   "fwer_at_kc": 3.134649321434412e-14
+  }
+ ],
+ "part_b_structured_smalln": {
+  "k": 8,
+  "n": 16,
+  "n_ccz": 10,
+  "t": 80,
+  "seed": 303,
+  "s": "1101011100100100",
+  "rows": [
+   {
+    "depol_2q": 0.002,
+    "p_readout": 0.01,
+    "d2q": 140,
+    "shots": 20000,
+    "R_measured": 0.6567,
+    "peak_counts": 13134,
+    "modal_is_s": true,
+    "modal_counts": 13134,
+    "runner_up_counts": 255,
+    "runner_up_hamming_from_s": 1,
+    "rho_runner_over_peak": 0.0194,
+    "kc_7sigma_diffuse_n16": 13,
+    "clears_calibrated_bar": true,
+    "clears_frozen_50bar": true,
+    "sim_wall_s": 54.7
+   },
+   {
+    "depol_2q": 0.006,
+    "p_readout": 0.01,
+    "d2q": 140,
+    "shots": 20000,
+    "R_measured": 0.39285,
+    "peak_counts": 7857,
+    "modal_is_s": true,
+    "modal_counts": 7857,
+    "runner_up_counts": 342,
+    "runner_up_hamming_from_s": 1,
+    "rho_runner_over_peak": 0.0435,
+    "kc_7sigma_diffuse_n16": 13,
+    "clears_calibrated_bar": true,
+    "clears_frozen_50bar": true,
+    "sim_wall_s": 54.6
+   },
+   {
+    "depol_2q": 0.012,
+    "p_readout": 0.01,
+    "d2q": 140,
+    "shots": 20000,
+    "R_measured": 0.1827,
+    "peak_counts": 3654,
+    "modal_is_s": true,
+    "modal_counts": 3654,
+    "runner_up_counts": 304,
+    "runner_up_hamming_from_s": 1,
+    "rho_runner_over_peak": 0.0832,
+    "kc_7sigma_diffuse_n16": 13,
+    "clears_calibrated_bar": true,
+    "clears_frozen_50bar": true,
+    "sim_wall_s": 54.5
+   }
+  ]
+ }
+}
