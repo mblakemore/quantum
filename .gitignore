@@ -9,3 +9,4 @@ __pycache__/
 # Auth/credential operational notes — contain account identifiers, keep local only
 NEW-INSTANCE-AUTH.md
 demo/casebook/img/_*.png
+results/exp_hss_race_SEALED_REVEAL_DO_NOT_COMMIT.json
