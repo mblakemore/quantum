@@ -58,10 +58,17 @@ untouched and are now the front of the queue.*
    RESTORED to ~0.93** (vs the first flight's 0.90→0.72 collapse), so the single-qubit non-Pauli (T1)
    systematic is fixed. **n=2: a coherent ZZ-crosstalk limit** — two-copy X-parity consistently
    negative with the channel (7/8 twirls ~−0.55) vs clean ref +0.93; a 2-qubit coherent phase over
-   the 5µs idle that *single*-qubit twirling cannot remove (Z unaffected → n=2 Z agreed). **Next: a
-   ZZ-aware echo / 2q twirl** before scaling past n=1. Progression: total-fail (non-Pauli) → twirl →
-   n=1 pass + n=2 ZZ limit mechanistically identified. *(§3(b) retrofit FLOWN → wash at n≤3, Ember
-   quantum@8212a80.)*
+   the 5µs idle. **ZZ-AWARE PINNED RE-FLY FLOWN** (ibm_marrakesh, job d9g1khkjeosc73fkk090,
+   quantum@d1a82be): pinning the SAME physical system qubits in both arms **FIXED the n=2 negative
+   anomaly** (X now +0.579 vs −0.55) → confirmed it was a **placement confound** (transpiler routed
+   the 2q/4q arms to different qubits). The residual is now a Pauli-structured offset — two-copy =
+   λ_sys·λ_anc with the **ancilla dephasing over the idle** (ratio X≈0.64, Z≈0.9) = the intrinsic
+   **ancilla-survival** requirement of two-copy characterization (CCHL assumes ideal memory). The
+   method **recovers λ_sys once λ_anc is divided out** (n=1 X 0.609/0.64≈0.95≈conv 0.954). **3
+   iterations peeled 3 confounds: non-Pauli T1 (twirl) → placement/ZZ (pin) → ancilla-survival
+   (fundamental, isolated).** Next: an ancilla-only survival calibration OR a shorter channel — not
+   a 4th flight now (QPU budget); the method is mechanistically understood. *(§3(b) retrofit FLOWN →
+   wash at n≤3, Ember quantum@8212a80.)*
 2. **Cost-map v1.0** — ✅ **DONE** (quantum@f24887c): rank absolute-bill band paper-anchored, sv 2ⁿ
    demonstrated (n≥22 slope 0.50→0.69). *Only Ember's 2nd-machine replicate → variance column remains.*
 3. **§4 hidden matching + standing joules column** — small, additive.
