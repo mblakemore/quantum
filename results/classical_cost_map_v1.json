@@ -1,9 +1,9 @@
 {
  "card": "classical_cost_map",
- "version": "0.6",
+ "version": "1.0",
  "substrate": "claude-fable-5",
  "cycle": "C4971",
- "timestamp": "2026-07-21T10:11:02Z",
+ "timestamp": "2026-07-22T01:00:05Z",
  "hardware": {
   "cpu_vendor": "AMD",
   "cpu_model": "AMD Ryzen 7 9800X3D 8-Core Processor",
@@ -14,14 +14,14 @@
   "python": "3.12.3"
  },
  "preflight": {
-  "loadavg_1m": 2.17,
-  "loadavg_5m": 2.67,
+  "loadavg_1m": 2.45,
+  "loadavg_5m": 2.43,
   "cores": 16,
-  "load_per_core": 0.136,
+  "load_per_core": 0.153,
   "headroom_ok": true,
   "threshold_per_core": 0.75
  },
- "cap_s": 45.0,
+ "cap_s": 200.0,
  "thread_config": {
   "threads": 1
  },
@@ -33,41 +33,21 @@
    "t_fixed": 8,
    "rows": [
     {
-     "n": 10,
-     "t_fixed": 8,
-     "verified_at_n": true,
-     "run_s": 0.0129,
-     "wall_s": 0.282,
-     "censored": false,
-     "peak_rss_mb": 118.1,
-     "curve_eligible": true
-    },
-    {
-     "n": 12,
-     "t_fixed": 8,
-     "verified_at_n": true,
-     "run_s": 0.0134,
-     "wall_s": 0.282,
-     "censored": false,
-     "peak_rss_mb": 118.4,
-     "curve_eligible": true
-    },
-    {
      "n": 14,
      "t_fixed": 8,
      "verified_at_n": true,
-     "run_s": 0.0183,
-     "wall_s": 0.3028,
+     "run_s": 0.0158,
+     "wall_s": 0.2818,
      "censored": false,
-     "peak_rss_mb": 118.6,
+     "peak_rss_mb": 118.8,
      "curve_eligible": true
     },
     {
      "n": 16,
      "t_fixed": 8,
      "verified_at_n": null,
-     "run_s": 0.0967,
-     "wall_s": 0.3837,
+     "run_s": 0.1428,
+     "wall_s": 0.4155,
      "censored": false,
      "peak_rss_mb": 118.8,
      "curve_eligible": true
@@ -76,38 +56,74 @@
      "n": 18,
      "t_fixed": 8,
      "verified_at_n": null,
-     "run_s": 0.1005,
-     "wall_s": 0.3863,
+     "run_s": 0.0949,
+     "wall_s": 0.3822,
      "censored": false,
-     "peak_rss_mb": 122.2,
+     "peak_rss_mb": 122.4,
      "curve_eligible": true
     },
     {
      "n": 20,
      "t_fixed": 8,
      "verified_at_n": null,
-     "run_s": 0.1145,
-     "wall_s": 0.3844,
+     "run_s": 0.1147,
+     "wall_s": 0.4028,
      "censored": false,
-     "peak_rss_mb": 134.2,
+     "peak_rss_mb": 134.0,
      "curve_eligible": true
     },
     {
      "n": 22,
      "t_fixed": 8,
      "verified_at_n": null,
-     "run_s": 0.1203,
-     "wall_s": 0.4026,
+     "run_s": 0.1264,
+     "wall_s": 0.4033,
      "censored": false,
-     "peak_rss_mb": 182.3,
+     "peak_rss_mb": 182.5,
+     "curve_eligible": true
+    },
+    {
+     "n": 24,
+     "t_fixed": 8,
+     "verified_at_n": null,
+     "run_s": 0.2609,
+     "wall_s": 0.5477,
+     "censored": false,
+     "peak_rss_mb": 374.4,
+     "curve_eligible": true
+    },
+    {
+     "n": 26,
+     "t_fixed": 8,
+     "verified_at_n": null,
+     "run_s": 0.7453,
+     "wall_s": 1.017,
+     "censored": false,
+     "peak_rss_mb": 1142.3,
+     "curve_eligible": true
+    },
+    {
+     "n": 28,
+     "t_fixed": 8,
+     "verified_at_n": null,
+     "run_s": 2.5373,
+     "wall_s": 2.8186,
+     "censored": false,
+     "peak_rss_mb": 4214.1,
      "curve_eligible": true
     }
    ],
    "fit_logcost_vs_n": {
-    "slope_ln_per_unit": 0.22665,
-    "intercept": -6.7096,
-    "r2": 0.8331,
-    "n_points": 7
+    "slope_ln_per_unit": 0.27943,
+    "intercept": -7.5417,
+    "r2": 0.8274,
+    "n_points": 8
+   },
+   "fit_highn_n_ge_22": {
+    "slope_ln_per_unit": 0.50239,
+    "intercept": -13.2535,
+    "r2": 0.9875,
+    "n_points": 4
    },
    "reference_ln_slope_2n": 0.693
   },
@@ -120,7 +136,7 @@
      "n": 4,
      "T": 8,
      "min_verifying_chi": 4,
-     "run_s_at_min_chi": 0.0225,
+     "run_s_at_min_chi": 0.0292,
      "censored": false,
      "curve_eligible": true
     },
@@ -128,7 +144,7 @@
      "n": 6,
      "T": 12,
      "min_verifying_chi": 4,
-     "run_s_at_min_chi": 0.0243,
+     "run_s_at_min_chi": 0.0302,
      "censored": false,
      "curve_eligible": true
     },
@@ -136,7 +152,7 @@
      "n": 8,
      "T": 16,
      "min_verifying_chi": 8,
-     "run_s_at_min_chi": 0.0236,
+     "run_s_at_min_chi": 0.0332,
      "censored": false,
      "curve_eligible": true
     },
@@ -144,7 +160,7 @@
      "n": 10,
      "T": 20,
      "min_verifying_chi": 8,
-     "run_s_at_min_chi": 0.0293,
+     "run_s_at_min_chi": 0.0297,
      "censored": false,
      "curve_eligible": true
     },
@@ -152,7 +168,7 @@
      "n": 12,
      "T": 24,
      "min_verifying_chi": 16,
-     "run_s_at_min_chi": 0.0281,
+     "run_s_at_min_chi": 0.0307,
      "censored": false,
      "curve_eligible": true
     }
@@ -174,6 +190,42 @@
    "exact_runtime_model": "poly(n,m) + 2^(beta*t) * t^3,  beta=(1/6)log2(7)~=0.4696",
    "approximation_error_cost": "norm subroutine time = chi*n^3*eps^-2 (eps=rel error) -> tighter approximation_error costs ~1/eps^2, from paper",
    "cost_doubles_every_dT_sampling": 4.35,
+   "absolute_bill_seconds_v1": {
+    "anchor": "paper: n=40,t=48 hidden-shift sim = 'several hours' on 2016 i5 MATLAB (~3h)",
+    "note": "IMPLEMENTATION-DOMINATED -> a BAND not a point; shape is paper-faithful",
+    "edges_speedup_vs_paper": {
+     "paper_matlab_i5_2016": 1.0,
+     "our_cpu_matlab_equiv": 3.5,
+     "best_c_singlethread": 35.0,
+     "best_c_allcore": 350.0
+    },
+    "bill_s_at": {
+     "n24_t48": {
+      "paper_matlab_i5_2016": 2332.8,
+      "our_cpu_matlab_equiv": 666.51,
+      "best_c_singlethread": 66.65,
+      "best_c_allcore": 6.67
+     },
+     "n40_t48": {
+      "paper_matlab_i5_2016": 10800.0,
+      "our_cpu_matlab_equiv": 3085.71,
+      "best_c_singlethread": 308.57,
+      "best_c_allcore": 30.86
+     },
+     "n40_t64": {
+      "paper_matlab_i5_2016": 328118.22,
+      "our_cpu_matlab_equiv": 93748.06,
+      "best_c_singlethread": 9374.81,
+      "best_c_allcore": 937.48
+     },
+     "n40_t80": {
+      "paper_matlab_i5_2016": 8213925.74,
+      "our_cpu_matlab_equiv": 2346835.93,
+      "best_c_singlethread": 234683.59,
+      "best_c_allcore": 23468.36
+     }
+    }
+   },
    "projected_sampling_bill_shape": {
     "8": 1833.0,
     "16": 52498.9,

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """P-CCM Phase 4 — the sweep: turn the gated bench into frozen cost curves (the v0.6 card).
 
-Produces `results/classical_cost_map_v0.6.json` — the deliverable Item 3 quotes.
+Produces `results/classical_cost_map_v1.json` — the deliverable Item 3 quotes.
 
 WHAT SMOKE-TESTING + ADVISOR REVIEW CHANGED (C4971 — recorded so the next pass starts here):
 The naive plan (log-cost-vs-T from extended_stabilizer wall-time) is a STRAWMAN and is NOT frozen.
@@ -69,6 +69,28 @@ BG_ALPHA_EXACT = (1.0 / 6.0) * _m.log2(7.0)   # beta ~= 0.4696 (exact / probabil
 BG_PAPER = ("Bravyi & Gosset, Improved classical simulation of quantum circuits dominated by "
             "Clifford gates, PRL 116 250501 (arXiv:1601.07601, 2019-04-11)")
 
+# v1.0 ABSOLUTE calibration of the rank curve. Anchor (from the paper, G-1): the FULL hidden-shift
+# simulation at n=40, t=48 (a few hundred Clifford gates) took "SEVERAL HOURS" on a 2016 2.6GHz i5
+# dual-core MATLAB implementation. "Several" ~ 2-4h -> take 3h = 10800s as the central anchor.
+# Table I cross-check: InnerProduct (the per-term op, O(n^3)) ~2.7ms at n=40 on the same laptop.
+# The absolute bill is IMPLEMENTATION-DOMINATED (MATLAB tableau vs optimized-C ~100x; +all-core),
+# so v1.0 quotes a BAND across implementation edges scaled to our hardware (Ryzen 9800X3D), NOT a
+# single point. The SHAPE (2^(0.23t)*t^3*n^3) is paper-faithful; the intercept carries the band.
+RANK_ANCHOR_S = 3 * 3600.0     # n=40,t=48 "several hours" -> 3h (2016 i5 MATLAB); central anchor
+RANK_IMPL_EDGES = {            # speedup vs the paper's 2016-MATLAB-on-i5 anchor (LABELED estimates)
+    "paper_matlab_i5_2016": 1.0,     # the anchor as measured
+    "our_cpu_matlab_equiv": 3.5,     # ~single-thread 2016-i5 -> 2024-Ryzen-9800X3D
+    "best_c_singlethread": 35.0,     # + optimized-C vs MATLAB (~10x)
+    "best_c_allcore": 350.0,         # + ~10x all-core (16 threads, imperfect scaling)
+}
+
+
+def rank_absolute_bill_s(t, n, edge_speedup):
+    """Paper-anchored absolute classical sampling bill in SECONDS at (n,t) under an implementation
+    edge. Calibrated so the paper anchor (n=40,t=48) reproduces RANK_ANCHOR_S at speedup=1."""
+    c = RANK_ANCHOR_S / ((2 ** (BG_ALPHA_SAMPLING * 48)) * (48 ** 3) * (40 ** 3))
+    return (2 ** (BG_ALPHA_SAMPLING * t)) * (t ** 3) * (n ** 3) * c / edge_speedup
+
 
 def _loglinfit(xs, ys):
     """Least-squares ln(y)=a+b*x. Returns dict or None (needs >=2 positive points)."""
@@ -120,9 +142,14 @@ def sweep_statevector(n_grid, t_fixed, cap_s, tc):
     xs = [r["n"] for r in rows if r["curve_eligible"]]
     ys = [r["run_s"] for r in rows if r["curve_eligible"]]
     fit = _loglinfit(xs, ys)
-    # exact statevector is Theta(2^n) => expected ln-slope ~ ln2 ~= 0.693 per n (sanity ref)
+    # the full-range fit is diluted by the low-n overhead/shot floor; the HIGH-n fit (n>=22, where
+    # 2^n construction dominates) recovers the asymptotic slope approaching ln2=0.693.
+    hx = [r["n"] for r in rows if r["curve_eligible"] and r["n"] >= 22]
+    hy = [r["run_s"] for r in rows if r["curve_eligible"] and r["n"] >= 22]
+    hifit = _loglinfit(hx, hy) if len(hx) >= 2 else None
     return {"axis": "n", "method": "statevector", "cost_metric": "run_s", "t_fixed": t_fixed,
-            "rows": rows, "fit_logcost_vs_n": fit, "reference_ln_slope_2n": round(math.log(2), 3)}
+            "rows": rows, "fit_logcost_vs_n": fit, "fit_highn_n_ge_22": hifit,
+            "reference_ln_slope_2n": round(math.log(2), 3)}
 
 
 def sweep_mps_min_chi(n_grid, t_per_n, chi_ladder, cap_s, tc):
@@ -174,7 +201,7 @@ def main():
     if args.quick:
         n_grid_sv, n_grid_mps = [8, 12, 16], [4, 6, 8]
     else:
-        n_grid_sv = [10, 12, 14, 16, 18, 20, 22]
+        n_grid_sv = [14, 16, 18, 20, 22, 24, 26, 28]
         n_grid_mps = [4, 6, 8, 10, 12]
 
     print("\n[1/2] statevector column (cost vs n, curved on run_s)")
@@ -184,7 +211,7 @@ def main():
                             cap_s=args.cap_s, tc=tc)
 
     card = {
-        "card": "classical_cost_map", "version": "0.6", "substrate": "claude-fable-5",
+        "card": "classical_cost_map", "version": "1.0", "substrate": "claude-fable-5",
         "cycle": "C4971", "timestamp": args.timestamp,
         "hardware": hardware_fingerprint(), "preflight": pf, "cap_s": args.cap_s, "thread_config": tc,
         "columns": {
@@ -203,6 +230,14 @@ def main():
                 "approximation_error_cost": "norm subroutine time = chi*n^3*eps^-2 (eps=rel error) "
                                             "-> tighter approximation_error costs ~1/eps^2, from paper",
                 "cost_doubles_every_dT_sampling": round(1.0 / BG_ALPHA_SAMPLING, 2),  # ~4.35 T-gates
+                "absolute_bill_seconds_v1": {
+                    "anchor": "paper: n=40,t=48 hidden-shift sim = 'several hours' on 2016 i5 MATLAB (~3h)",
+                    "note": "IMPLEMENTATION-DOMINATED -> a BAND not a point; shape is paper-faithful",
+                    "edges_speedup_vs_paper": RANK_IMPL_EDGES,
+                    "bill_s_at": {f"n{n}_t{t}": {e: round(rank_absolute_bill_s(t, n, s), 2)
+                                                 for e, s in RANK_IMPL_EDGES.items()}
+                                  for (n, t) in [(24, 48), (40, 48), (40, 64), (40, 80)]},
+                },
                 "projected_sampling_bill_shape": {
                     str(t): round(2.0 ** (BG_ALPHA_SAMPLING * t) * (t ** 3), 1)  # w folded into const
                     for t in (8, 16, 24, 32, 40, 48, 64)},  # relative shape (per-term const c=1, w=1)
@@ -223,9 +258,9 @@ def main():
                               "necessary but not sufficient; extstab wall-time fails cost-faithfulness"),
         },
     }
-    out = os.path.join(QROOT, "results", "classical_cost_map_v0.6.json")
+    out = os.path.join(QROOT, "results", "classical_cost_map_v1.json")
     json.dump(card, open(out, "w"), indent=1)
-    print(f"\ncard -> results/classical_cost_map_v0.6.json")
+    print(f"\ncard -> results/classical_cost_map_v1.json")
     print(f"  statevector_vs_n fit: {sv['fit_logcost_vs_n']}  (ref ln-slope 2^n ~ {sv['reference_ln_slope_2n']})")
     print(f"  mps min-chi rows: {[(r['n'], r['min_verifying_chi']) for r in mps['rows']]}")
     print(f"  rank column: PAPER_PINNED (Bravyi-Gosset gamma=0.23 sampling / beta=0.47 exact; "
