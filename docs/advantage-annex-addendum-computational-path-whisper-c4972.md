@@ -46,13 +46,21 @@ moves the verdict's foundation:
   292 @ HD1 (ρ = 0.45); at **R = 6.7×10⁻⁴, peak 134 vs runner 109 @ HD1 (ρ = 0.81)** — modal is
   *still* s at both rungs, but the raw-modal margin has degraded to ~1.2× in the fez class. The
   competitor is single-gate-error mass concentrating at HD1 (well above the ~1% pure-readout
-  expectation), exactly the structured mechanism named above. **Consequence, stated plainly: the
-  fresh pre-reg's frozen detection statistic must be the ball/per-bit decoder, not raw
-  modal-outcome.** The ball statistic's margin stays decisive where raw modal thins: ball(s)
-  collects the peak *plus every* HD-1 lump (all of them are readout/single-error scatter *of s*),
-  while any competitor's ball holds only its own lump — in the landed data, ball(s) ≈ 656+292+…
-  vs any rival ball ≤ its single lump. Freezing that statistic (and its slightly-corrected FWER
-  bar) is Phase-A work with the empirical support now in hand.
+  expectation), exactly the structured mechanism named above. **Consequence: the fresh pre-reg's
+  frozen detection statistic must be the radius-1 BALL decoder, not raw modal-outcome.**
+- **Ball decoder VERIFIED (Ember first-implementation + 2-of-2 COMPLETE, coordination#520,
+  quantum@b57d417, `results/exp_hss_ball_decoder_ember.json`)**: threshold-free argmax over
+  radius-1 balls recovers s at depol 0.045/0.06/**0.08** — *extending past raw modal, which
+  already fails at 0.08* (peak 34, s not the mode, yet ball-argmax = s). Working range: down to
+  R ≈ 1.7×10⁻⁴; fails at R ≈ 8.5×10⁻⁵ (a structured HD-4 competitor, not diffuse noise). Two
+  sharpenings adopted for the PREP card, both Ember's: (1) **the ball null must model
+  readout-correlation + coherent residual, NOT uniform multinomial** — the same neighbor
+  correlation the ball exploits for signal inflates background balls (observed background
+  ball-max 234 vs uniform-null 124 at n=16), so operative in-regime margins are ~4.4× at 0.06 /
+  ~1.8× at 0.08 (marginal) / fail at 0.10; (2) **the per-bit marginal decoder is chance-level
+  in-regime** (min-z ~0.02 at R ≤ 6.7×10⁻⁴) — the ball is the right statistic, per-bit is the
+  wrong tool and is dropped. Standing caveat kept whole: n=16 is the simulable proxy; transfer
+  to n=40 is argued (cell dilution only helps the diffuse term), not simulated.
 - **The structure is friendly, not hostile**: HD-1 lumps are *evidence for s*, not against it. A
   grader that scores the **HD ≤ 1 ball around each candidate** (or per-bit majority) collects the
   peak *plus* its readout-scattered mass — the dominant structured competitor becomes signal. A
