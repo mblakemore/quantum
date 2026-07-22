@@ -32,14 +32,16 @@ untouched and are now the front of the queue.*
 
 **What's LEFT, in priority order:**
 1. **§3(a) channel-spectroscopy FLIGHT** — pre-reg DESIGNED ✅ ([prereg](exp-steth-a-flight-prereg-whisper-c4971.md),
-   quantum@7e4bef1). The gate is now OPERATIONAL (advisor correction, model-verified): the reference
-   *diagonal* eigenvalues are the cancelling quantity not the gate quantity (a stochastic and a
-   coherent error with the same diagonal give opposite ratio outcomes), and the binding 13° wall is
-   *temporal drift* — **co-batching ref+channel kills the drift window and relaxes it to a static
-   23° wall**, measurable by **unitarity RB** (θ_coh < 23°). So the remaining pre-flight work is: run
-   the co-batched **unitarity-RB gate** on the target region + pin the unitarity→angle conversion from
-   the unitarity-RB paper (G-1). Then the QPU ratio run. *(§3(b) retrofit already FLOWN → shot-bill
-   wash at n≤3, Ember ibm_marrakesh quantum@8212a80; (a) not (b) is the reachable-scale advantage.)*
+   quantum@7e4bef1); **unitarity gate FLOWN** (ibm_marrakesh 88,89, job d9g0flhhtsac739g1plg,
+   quantum@bd46012) → **PLAUSIBLE PASS, not formally declared** (measure-not-declare). Measured on
+   the 2q Bell cycle: **r=0.0155** (clean); **drift LOW** (m=4 purity 0.908±0.006 across the batch)
+   → **co-batch validated → the static 23° wall is operative**; error is **coherent-dominant**
+   (u≈0.993 ≫ u_stoch 0.959) but **u under-resolved** (shallow non-monotonic purity at m≤8, grid-fit
+   railed). Even the pessimistic **all-coherent worst case ≈16° < 23°** → plausibly passes. To
+   **formally declare**: (i) re-fly unitarity with longer sequences (m≈40–60) for a reliable u; (ii)
+   pin the u→r_coh conversion from the WGHF unitarity-RB paper (G-1). Then the QPU ratio run. *(§3(b)
+   retrofit FLOWN → shot-bill wash at n≤3, Ember quantum@8212a80; (a) not (b) is the reachable-scale
+   advantage.)*
 2. **Cost-map v1.0 polish** — absolute-constant calibration (makes the rank curve quote real seconds), sv n≥26, Ember replicate.
 3. **§4 hidden matching + standing joules column** — small, additive.
 4. **Optional: kingston-only hidden-shift fresh pre-reg** — only if the device-dependence is judged worth a dedicated flight.
