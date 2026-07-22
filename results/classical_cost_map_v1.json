@@ -125,7 +125,16 @@
     "r2": 0.9875,
     "n_points": 4
    },
-   "reference_ln_slope_2n": 0.693
+   "reference_ln_slope_2n": 0.693,
+   "variance_column_ember_2of2": {
+    "artifact": "results/classical_cost_map_variance_ember.json (quantum@ae6e271)",
+    "reps": 5,
+    "median_CV_pct": 3.0,
+    "median_ratio_to_v1": 0.96,
+    "reproduces": "YES - Whisper v1 sv numbers reproduce cleanly (2^n slope unchanged; replication tests the CONSTANT not the exponent)",
+    "outlier_caught": "v1 n=16 (0.143) is a single-shot jitter outlier; Ember 5-rep median 0.093 fits the smooth curve -> that row bounded",
+    "honest_caveat": "SAME BOX (both DCs share AMD Ryzen 9800X3D 16c) -> this is machine-RELATIVITY (shared-box load/thermal/scheduling jitter), NOT cross-silicon. same_box=true. A genuinely different box would give a true cross-silicon variance column."
+   }
   },
   "mps_min_chi_vs_n": {
    "axis": "n",
