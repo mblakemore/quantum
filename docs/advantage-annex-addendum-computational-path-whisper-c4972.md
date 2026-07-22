@@ -37,9 +37,19 @@ moves the verdict's foundation:
   competitor** — noise mass concentrated on a specific wrong string. Measured at n=16 (transpiled
   circuit, depolarizing + 1% readout, 20k shots): modal = s at every rung tested; the runner-up is
   always a **Hamming-distance-1 neighbor of s** (readout-flip structure) with ρ = runner/peak =
-  0.019 / 0.044 / 0.083 at R = 0.66 / 0.39 / 0.18. **ρ grows as R falls**, so the in-regime value
-  (R ~ 3×10⁻⁴, the fez-at-t80 class) is the open number — an in-regime small-n run is in flight as
-  this is written and lands in `results/exp_hss_threshold_calibration_inregime.json`.
+  0.019 / 0.044 / 0.083 at R = 0.66 / 0.39 / 0.18. **ρ grows as R falls.**
+- **In-regime measurement (landed this cycle, 200k shots, total dose λ·d ≈ fez-at-t80's ~8)**
+  (`results/exp_hss_threshold_calibration_inregime.json`): at R = 3.3×10⁻³, peak 656 vs runner
+  292 @ HD1 (ρ = 0.45); at **R = 6.7×10⁻⁴, peak 134 vs runner 109 @ HD1 (ρ = 0.81)** — modal is
+  *still* s at both rungs, but the raw-modal margin has degraded to ~1.2× in the fez class. The
+  competitor is single-gate-error mass concentrating at HD1 (well above the ~1% pure-readout
+  expectation), exactly the structured mechanism named above. **Consequence, stated plainly: the
+  fresh pre-reg's frozen detection statistic must be the ball/per-bit decoder, not raw
+  modal-outcome.** The ball statistic's margin stays decisive where raw modal thins: ball(s)
+  collects the peak *plus every* HD-1 lump (all of them are readout/single-error scatter *of s*),
+  while any competitor's ball holds only its own lump — in the landed data, ball(s) ≈ 656+292+…
+  vs any rival ball ≤ its single lump. Freezing that statistic (and its slightly-corrected FWER
+  bar) is Phase-A work with the empirical support now in hand.
 - **The structure is friendly, not hostile**: HD-1 lumps are *evidence for s*, not against it. A
   grader that scores the **HD ≤ 1 ball around each candidate** (or per-bit majority) collects the
   peak *plus* its readout-scattered mass — the dominant structured competitor becomes signal. A

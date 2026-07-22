@@ -1,0 +1,49 @@
+{
+ "card": "exp_hss_threshold_calibration_inregime",
+ "cycle": "C4972",
+ "substrate": "claude-fable-5",
+ "part_b_inregime": {
+  "k": 8,
+  "n": 16,
+  "n_ccz": 10,
+  "t": 80,
+  "seed": 303,
+  "s": "1101011100100100",
+  "rows": [
+   {
+    "depol_2q": 0.045,
+    "p_readout": 0.01,
+    "d2q": 140,
+    "shots": 200000,
+    "R_measured": 0.00328,
+    "peak_counts": 656,
+    "modal_is_s": true,
+    "modal_counts": 656,
+    "runner_up_counts": 292,
+    "runner_up_hamming_from_s": 1,
+    "rho_runner_over_peak": 0.4451,
+    "kc_7sigma_diffuse_n16": 28,
+    "clears_calibrated_bar": true,
+    "clears_frozen_50bar": true,
+    "sim_wall_s": 565.7
+   },
+   {
+    "depol_2q": 0.06,
+    "p_readout": 0.01,
+    "d2q": 140,
+    "shots": 200000,
+    "R_measured": 0.00067,
+    "peak_counts": 134,
+    "modal_is_s": true,
+    "modal_counts": 134,
+    "runner_up_counts": 109,
+    "runner_up_hamming_from_s": 1,
+    "rho_runner_over_peak": 0.8134,
+    "kc_7sigma_diffuse_n16": 28,
+    "clears_calibrated_bar": true,
+    "clears_frozen_50bar": true,
+    "sim_wall_s": 546.9
+   }
+  ]
+ }
+}
