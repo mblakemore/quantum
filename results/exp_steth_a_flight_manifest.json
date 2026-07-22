@@ -1,0 +1,164 @@
+{
+ "exp": "steth_a_flight",
+ "backend": "ibm_marrakesh",
+ "job_id": "d9g0vq2neu4c739q6lag",
+ "shots": 8000,
+ "delay_ns": 10000,
+ "index": [
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false
+  },
+  {
+   "n": 3,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true
+  },
+  {
+   "n": 3,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false
+  },
+  {
+   "n": 3,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true
+  },
+  {
+   "n": 3,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false
+  },
+  {
+   "n": 3,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true
+  },
+  {
+   "n": 3,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false
+  },
+  {
+   "n": 3,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true
+  },
+  {
+   "n": 3,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false
+  }
+ ],
+ "sys": [
+  88,
+  89,
+  87
+ ],
+ "anc": [
+  91,
+  90,
+  86
+ ],
+ "note": "two-copy vs conventional lambda_{P^n} agreement gate (n=1,2,3, P in X,Z)"
+}
