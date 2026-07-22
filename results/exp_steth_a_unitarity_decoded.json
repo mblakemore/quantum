@@ -52,6 +52,7 @@
  },
  "worst_case_all_coherent_theta_deg": 15.9,
  "worst_case_note": "ROUGH order-of-magnitude bound theta~sqrt(5r) treating ALL of r as coherent (pessimistic); precise value needs WGHF u->r_coh pin (G-1). 15.9deg < 23deg static wall.",
- "GATE_VERDICT": "PLAUSIBLE_PASS_not_declared",
- "gate_verdict_reasoning": "(1) drift LOW -> co-batch valid -> 23deg wall. (2) worst-case all-coherent theta~16deg < 23deg -> plausibly passes even pessimistically. NOT formally declared because u is under-resolved (railed fit) and r_coh->theta needs WGHF paper pin. To DECLARE: re-fly unitarity with longer sequences (m~40-60) + pin WGHF conversion."
+ "GATE_VERDICT": "SUPPORTING_CHARACTERIZATION_gate_folded_into_flight",
+ "gate_verdict_reasoning": "(1) drift LOW -> co-batch valid -> 23deg wall. (2) worst-case all-coherent theta~16deg < 23deg -> plausibly passes even pessimistically. NOT formally declared because u is under-resolved (railed fit) and r_coh->theta needs WGHF paper pin. To DECLARE: re-fly unitarity with longer sequences (m~40-60) + pin WGHF conversion.",
+ "resolution": "Advisor C4971: the standalone URB gate became more expensive than the O(1) experiment it gates (rigorous u = 100s-1000s of sequences per Dirkse-Helsen-Wehner 1808.00850; I flew 5; worst-case-from-r useless since coherent scales O(sqrt r)~0.12>>eps). SPAM gate FOLDED into the flight first rung: n=1,2,3 two-copy-vs-conventional agreement within CIs = SPAM cancellation measured not predicted. r/u/drift kept as supporting characterization: r=0.0155, coherent-dominant, drift LOW (co-batch validated)."
 }

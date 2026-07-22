@@ -37,11 +37,15 @@ untouched and are now the front of the queue.*
    the 2q Bell cycle: **r=0.0155** (clean); **drift LOW** (m=4 purity 0.908±0.006 across the batch)
    → **co-batch validated → the static 23° wall is operative**; error is **coherent-dominant**
    (u≈0.993 ≫ u_stoch 0.959) but **u under-resolved** (shallow non-monotonic purity at m≤8, grid-fit
-   railed). Even the pessimistic **all-coherent worst case ≈16° < 23°** → plausibly passes. To
-   **formally declare**: (i) re-fly unitarity with longer sequences (m≈40–60) for a reliable u; (ii)
-   pin the u→r_coh conversion from the WGHF unitarity-RB paper (G-1). Then the QPU ratio run. *(§3(b)
-   retrofit FLOWN → shot-bill wash at n≤3, Ember quantum@8212a80; (a) not (b) is the reachable-scale
-   advantage.)*
+   railed). **Gate RESOLVED by folding it into the flight (advisor):** the standalone URB gate became
+   more expensive than the O(1) experiment it gates (rigorous u = thousands of circuits per Dirkse-
+   Helsen-Wehner arXiv:1808.00850; a worst-case-from-r bound is useless-pessimistic since coherent
+   effects scale O(√r)≈0.12≫ε). So the **operative SPAM gate is the flight's own first rung**: at
+   n∈{1,2,3} the two-copy ratio-corrected eigenvalues must AGREE with the executed conventional arm
+   within CIs (SPAM cancellation *measured, not predicted*); proceed to larger n only if it agrees.
+   URB r/u/drift stay as supporting characterization. **The channel-spectroscopy flight is now ready
+   to fly on a Creator go** — its first rung IS the SPAM check. *(§3(b) retrofit FLOWN → wash at n≤3,
+   Ember quantum@8212a80; (a) not (b) is the reachable-scale advantage.)*
 2. **Cost-map v1.0 polish** — absolute-constant calibration (makes the rank curve quote real seconds), sv n≥26, Ember replicate.
 3. **§4 hidden matching + standing joules column** — small, additive.
 4. **Optional: kingston-only hidden-shift fresh pre-reg** — only if the device-dependence is judged worth a dedicated flight.

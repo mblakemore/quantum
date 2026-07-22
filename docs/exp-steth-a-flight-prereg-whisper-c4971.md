@@ -33,14 +33,26 @@ The scout fenced "measure a coherent-SPAM fraction < 13°." Two corrections make
   (0.404 rad)**, which a static measurement CAN address. Co-batch is therefore load-bearing, not
   hygiene — it is what defeats the binding wall.
 
-**The gate, restated:** (i) co-batch ref+channel (kills drift → 23° static wall); (ii) measure the
-composite prep+measure apparatus coherence by **unitarity randomized benchmarking**, convert to an
-effective coherent angle θ_coh, PASS iff θ_coh < 23°; (iii) run a **drift monitor** (repeat the
-reference across the experiment's wall-clock) and quote the achieved drift — cheap, substantiates the
-co-batch claim, the honest number a referee asks for. Do NOT decompose prep- vs measure-coherence:
-the gate needs the COMPOSITE apparatus coherence (what unitarity RB and the ratio both see).
+**The gate — RESOLVED by folding it into the flight (advisor C4971, superseding the URB path below).**
+The URB pre-gate was flown (ibm_marrakesh 88,89, job d9g0flhhtsac739g1plg): r=0.0155 solid, drift LOW
+(co-batch validated → 23° wall), error coherent-dominant but u under-resolved — an *encouraging point
+estimate, NOT a rigorous pass*. Two facts then collapsed the gate back into the experiment: (a) a
+worst-case-over-all-coherent-errors bound is not cheap — coherent effects scale O(√r)≈0.12 ≫ ε, so
+bounding from r alone is useless-pessimistic (RY was a *particular* error, not the supremum); (b) a
+rigorous URB (paper: hundreds of sequences/length, I flew 5) would cost thousands of circuits — MORE
+than the O(1)-experiment it gates. **So the operative SPAM gate is the FLIGHT'S OWN FIRST RUNG:** at
+n∈{1,2,3} the executed conventional arm independently gives the Pauli eigenvalues; if the
+two-copy-with-identity-reference eigenvalues **AGREE with the conventional arm within CIs**, SPAM
+cancellation is demonstrated *measured, not predicted* — the direct test of what URB inferred at three
+removes. Disagreement = SPAM bias found cheaply. Proceed to larger n only if small-n agrees. The
+URB numbers (r, u, drift) stay in the record as supporting characterization, not the gate.
 
-**G-1 to pin before the run:** the unitarity→θ_coh conversion from the unitarity-RB source (Wallman-
+*(Superseded URB-gate text, kept for provenance):* ~~(i) co-batch → 23° wall; (ii) unitarity RB →
+θ_coh, pass iff <23°; (iii) drift monitor.~~ The unitarity→θ_coh conversion (Dirkse-Helsen-Wehner
+arXiv:1808.00850, Creator-supplied) is not needed — the flight's small-n agreement is the gate. Do
+NOT decompose prep- vs measure-coherence: the composite is what the ratio sees.
+
+**G-1 note (now supporting only):** the unitarity→θ_coh conversion from the URB source (Wallman-
 Granade-Harper-Flammia "Estimating the coherence of noise" 2015 / equivalent) — from the paper, not
 memory (the α-from-Bravyi-Gosset discipline; request the paper if the exact relation is needed).
 
@@ -61,9 +73,13 @@ Ember flight + blind seed where applicable. No seat meters the arm it built.
 ~0.25 the ratio grows but slower than 2^(n/3) at reachable n (hardware ceiling — the measured gap);
 ~0.2 θ_coh gate fails or non-Pauli SPAM beyond the model → NO-GO / needs SPAM-robust variant.
 
-## 7. KILL / ABORT (pre-committed)
-No channel-spectroscopy flight unless the co-batched unitarity-RB gate passes (θ_coh < 23°). If it
-fails, publish the measured θ_coh + the SPAM-bias gap (the finding), do not force the flight.
+## 7. KILL / ABORT (pre-committed) — the SMALL-n AGREEMENT gate (folded into the flight)
+The first rung (n∈{1,2,3}, co-batched with the identity reference) is the gate: the two-copy
+ratio-corrected Pauli eigenvalues must AGREE with the executed conventional-arm eigenvalues within
+CIs. **Proceed to larger n ONLY if small-n agrees.** If they disagree, publish the measured
+SPAM-bias (the finding) and stop — do not push to the crossover n. (Supersedes the standalone URB
+θ_coh<23° gate, which became more expensive than the O(1) experiment it gated; URB r/u/drift stay as
+supporting characterization.)
 
 ## 8. BUDGET  QPU: unitarity-RB gate (short) + the channel-vs-conventional ratio run. Modest width
 (n small; the with-memory arm is O(1) in experiments). Re-verify live quota pre-submission.
