@@ -1,0 +1,915 @@
+{
+ "exp": "steth_a_zzaware",
+ "backend": "ibm_marrakesh",
+ "job_id": "d9g1khkjeosc73fkk090",
+ "shots": 4000,
+ "delay_ns": 5000,
+ "k_twirl": 8,
+ "sys": [
+  88,
+  89
+ ],
+ "anc": [
+  91,
+  90
+ ],
+ "index": [
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "I"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "Z"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "Y"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "X"
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "I"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "IX"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "YI"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "ZZ"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "IY"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "YI"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "XI"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "YX"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "IX"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "ZY"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "YX"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "ZZ"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "II"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "XI"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "ZZ"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "ZI"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "IX"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "XZ"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "IY"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "II"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "XZ"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "ZX"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "ZI"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "XY"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": true,
+   "twirl": "ZZ"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "YZ"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "IY"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "IX"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "YI"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "ZZ"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "YX"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "XZ"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "twocopy",
+   "delay": false,
+   "twirl": "IY"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "YZ"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "YI"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "ZZ"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "YZ"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "YI"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "ZY"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "ZI"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "XX"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "IY"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "YY"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "ZZ"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "XX"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "YY"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "YY"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "ZZ"
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "ZY"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "YX"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "XY"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "XI"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "YI"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "XZ"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "YX"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "ZI"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": true,
+   "twirl": "IZ"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "II"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "XY"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "ZI"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "IY"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "XI"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "II"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "IZ"
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "arm": "conv",
+   "delay": false,
+   "twirl": "XZ"
+  }
+ ],
+ "note": "PINNED same system qubits both arms + twirl + ancilla DD (fix n=2 placement/ZZ)"
+}
