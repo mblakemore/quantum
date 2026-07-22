@@ -1,5 +1,13 @@
 # Exp-HSS Race Flight — VERDICT: gate-folded at race depth, and the wall is now measured on both sides
 
+> **CORRECTION (C4974, next day)**: the FOLD stands, but two instrument claims below are
+> corrected in [the shot-axis-code finding](exp-hss-shot-axis-code-finding-whisper-c4974.md):
+> (1) λ_global=0.091 was a single-point min-norm fit (the ≥5-count filter dropped 3 of 4 rungs),
+> not a measured 4-point law; (2) "15 QPU-days / window-closed" holds for the raw modal-peak
+> observable only — the same ladder's banked data decodes the sealed s EXACTLY at d2q≤185
+> (blind Chase decoder, 20k shots), so the s-information window at race depth is measurably
+> open at t=0; t=80 transfer requires a fresh pre-registered flight.
+
 *Whisper C4973, 2026-07-22, substrate claude-fable-5. Frozen card:
 [exp-hss-race-flight-prereg-whisper-c4973.md](exp-hss-race-flight-prereg-whisper-c4973.md)
 (quantum@65c0300). Job `d9g4oqsjeosc73fknnbg`, ibm_marrakesh, 48 pubs, 280k shots, **85 s QPU**

@@ -1,0 +1,151 @@
+{
+ "card": "exp_hss_infodecode_EXPLORATORY_no_claim",
+ "cycle": "C4974",
+ "substrate": "claude-fable-5",
+ "job_id": "d9g4oqsjeosc73fknnbg",
+ "scope": "rung-0 t=0 Clifford CALIBRATION ladder only (layout-verified); race rungs NOT analyzed (t40 layout unreproducible after calibration drift)",
+ "fences": "C4973 fold verdict STANDS; blind-first decoders; s used only as score",
+ "rungs": [
+  {
+   "tag": "rung0_m0_d2q37",
+   "shots": 20000,
+   "distinct": 13239,
+   "modal_counts": 692,
+   "R_modal": 0.0346,
+   "HD_modal_s": 0,
+   "count_at_s": 692,
+   "ball_mass_around_s_r0to8": [
+    692,
+    1400,
+    2196,
+    2690,
+    2819,
+    2671,
+    2274,
+    1858,
+    1281
+   ],
+   "HD_majority_s": 0,
+   "HD_dupmajority_s": 0,
+   "dup_shots": 8358,
+   "HD_softmajority_s": 0,
+   "mean_perbit_agreement_with_s": 0.8789087500000001,
+   "min_perbit_agreement_with_s": 0.6455,
+   "blind_z_min_med_max": [
+    41.15361466505707,
+    116.46755792923625,
+    139.44145724998717
+   ]
+  },
+  {
+   "tag": "rung0_m1_d2q111",
+   "shots": 20000,
+   "distinct": 19855,
+   "modal_counts": 4,
+   "R_modal": 0.0002,
+   "HD_modal_s": 2,
+   "count_at_s": 3,
+   "ball_mass_around_s_r0to8": [
+    3,
+    24,
+    110,
+    285,
+    609,
+    1050,
+    1674,
+    2183,
+    2493
+   ],
+   "HD_majority_s": 0,
+   "HD_dupmajority_s": 0,
+   "dup_shots": 268,
+   "HD_softmajority_s": 0,
+   "mean_perbit_agreement_with_s": 0.7696725000000001,
+   "min_perbit_agreement_with_s": 0.52475,
+   "blind_z_min_med_max": [
+    7.000357133746819,
+    73.23504932749073,
+    136.7544514814783
+   ]
+  },
+  {
+   "tag": "rung0_m2_d2q185",
+   "shots": 20000,
+   "distinct": 19996,
+   "modal_counts": 2,
+   "R_modal": 0.0001,
+   "HD_modal_s": 9,
+   "count_at_s": 0,
+   "ball_mass_around_s_r0to8": [
+    0,
+    1,
+    9,
+    36,
+    80,
+    260,
+    576,
+    1026,
+    1502
+   ],
+   "HD_majority_s": 1,
+   "HD_dupmajority_s": 5,
+   "dup_shots": 8,
+   "HD_softmajority_s": 1,
+   "mean_perbit_agreement_with_s": 0.71898625,
+   "min_perbit_agreement_with_s": 0.4981,
+   "blind_z_min_med_max": [
+    0.5374011537017798,
+    40.58085817229596,
+    134.90183171476954
+   ]
+  },
+  {
+   "tag": "rung0_m3_d2q259",
+   "shots": 20000,
+   "distinct": 19999,
+   "modal_counts": 2,
+   "R_modal": 0.0001,
+   "HD_modal_s": 10,
+   "count_at_s": 0,
+   "ball_mass_around_s_r0to8": [
+    0,
+    0,
+    2,
+    8,
+    33,
+    116,
+    261,
+    517,
+    986
+   ],
+   "HD_majority_s": 2,
+   "HD_dupmajority_s": 10,
+   "dup_shots": 2,
+   "HD_softmajority_s": 2,
+   "mean_perbit_agreement_with_s": 0.69267375,
+   "min_perbit_agreement_with_s": 0.47624999999999995,
+   "blind_z_min_med_max": [
+    1.1313708498984771,
+    35.291699449020584,
+    132.5542372012302
+   ]
+  }
+ ],
+ "convention_self_check": "PASS \u2014 pooled m=0 modal == s at 692/20000 (graded record)",
+ "perbit_bias_vs_d2q": {
+  "d2q": [
+   37.0,
+   111.0,
+   185.0,
+   259.0
+  ],
+  "mean_bias": [
+   0.7578175000000003,
+   0.5393450000000002,
+   0.4379725000000001,
+   0.38534749999999995
+  ],
+  "lambda_bit_per_slot": 0.0030230952946042043,
+  "note": "per-bit bias decay constant \u2014 the s-INFORMATION scale; compare stage-1 lambda_modal=0.091 (single-point min-norm)"
+ }
+}
