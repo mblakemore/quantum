@@ -8,12 +8,12 @@
   "seconds": 85,
   "status": "complete"
  },
- "decode_correction": "v1 read 156-bit full-register strings (116 idle qubits' readout junk in R). v2 marginalizes to the 40/32 system qubits at FINAL routed positions. Correction made pre-reveal, statistic unchanged.",
+ "decode_correction": "v1 read 156-bit full-register strings (116 idle qubits' readout junk in R). v2 marginalizes to the 40/32 system qubits at FINAL routed positions. Correction made pre-reveal, statistic unchanged. v3: marg had a double-reversal (generator s_str already reverses); correct convention = final-layout, no reversal \u2014 verified HD(modal,s)=0 at m=0. R/lambda/gate numbers label-independent, unchanged.",
  "rung0": [
   {
    "fold_m": 0,
    "d2q": 37,
-   "modal": "0001011101100001100000101111111100111110",
+   "modal": "0111110011111111010000011000011011101000",
    "modal_counts": 692,
    "shots": 20000,
    "R_modal": 0.0346
@@ -21,7 +21,7 @@
   {
    "fold_m": 1,
    "d2q": 111,
-   "modal": "0001011101100101100000101111111101111110",
+   "modal": "0111111011111111010000011010011011101000",
    "modal_counts": 4,
    "shots": 20000,
    "R_modal": 0.0002
@@ -29,7 +29,7 @@
   {
    "fold_m": 2,
    "d2q": 185,
-   "modal": "1011110001110001100001100111111101111110",
+   "modal": "0111111011111110011000011000111000111101",
    "modal_counts": 2,
    "shots": 20000,
    "R_modal": 0.0001
@@ -37,7 +37,7 @@
   {
    "fold_m": 3,
    "d2q": 259,
-   "modal": "1101111111000101110001101101011100111110",
+   "modal": "0111110011101011011000111010001111111011",
    "modal_counts": 2,
    "shots": 20000,
    "R_modal": 0.0001

@@ -1,0 +1,23 @@
+{
+ "card": "exp_hss_race_reveal",
+ "cycle": "C4973",
+ "substrate": "claude-fable-5",
+ "race_n40": {
+  "s_str": "0111110011111111010000011000011011101000",
+  "salt": "b6a875ec6aa577e500b55ec04b1fc1d2",
+  "commitment_verifies": true
+ },
+ "race_n32": {
+  "s_str": "10101100010011001001101010110011",
+  "salt": "f96d5306a041c221ba01be12b152d428",
+  "commitment_verifies": true
+ },
+ "rung0_m0_graded": {
+  "modal": "0111110011111111010000011000011011101000",
+  "planted": "0111110011111111010000011000011011101000",
+  "match": true,
+  "modal_counts": 692,
+  "hamming": 0,
+  "note": "v3 convention fix (double-reversal); EXACT MATCH: rung-0 m=0 recovered the sealed planted 40-bit s at 692/20000, diffuse floor ~0 at 2^40"
+ }
+}
