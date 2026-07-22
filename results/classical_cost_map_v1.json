@@ -271,5 +271,81 @@
   "cost_metric": "run_s (simulation only); wall_s kept for full accounting",
   "transfer_boundary": "small-n verify accuracy NOT asserted to transfer to large-n timing",
   "g1_correction": "cost-faithfulness is the OTHER half of G1: accuracy-verified is necessary but not sufficient; extstab wall-time fails cost-faithfulness"
+ },
+ "joules_column_v1": {
+  "axis": "joules per verified solution = TDP_watts * busy-time (UPPER BOUND)",
+  "tdp_watts": 120.0,
+  "cpu": "AMD Ryzen 7 9800X3D",
+  "method": "RAPL energy_uj is root-only (CVE-2020-8694, G2) -> not measured; TDP*busy-time upper bound, LABELED",
+  "statevector_joules_by_n": [
+   {
+    "n": 14,
+    "wall_s": 0.2818,
+    "joules_upper_bound": 33.8
+   },
+   {
+    "n": 16,
+    "wall_s": 0.4155,
+    "joules_upper_bound": 49.9
+   },
+   {
+    "n": 18,
+    "wall_s": 0.3822,
+    "joules_upper_bound": 45.9
+   },
+   {
+    "n": 20,
+    "wall_s": 0.4028,
+    "joules_upper_bound": 48.3
+   },
+   {
+    "n": 22,
+    "wall_s": 0.4033,
+    "joules_upper_bound": 48.4
+   },
+   {
+    "n": 24,
+    "wall_s": 0.5477,
+    "joules_upper_bound": 65.7
+   },
+   {
+    "n": 26,
+    "wall_s": 1.017,
+    "joules_upper_bound": 122.0
+   },
+   {
+    "n": 28,
+    "wall_s": 2.8186,
+    "joules_upper_bound": 338.2
+   }
+  ],
+  "rank_joules_by_edge": {
+   "n24_t48": {
+    "paper_matlab_i5_2016": 279936.0,
+    "our_cpu_matlab_equiv": 79981.2,
+    "best_c_singlethread": 7998.0,
+    "best_c_allcore": 800.4
+   },
+   "n40_t48": {
+    "paper_matlab_i5_2016": 1296000.0,
+    "our_cpu_matlab_equiv": 370285.2,
+    "best_c_singlethread": 37028.4,
+    "best_c_allcore": 3703.2
+   },
+   "n40_t64": {
+    "paper_matlab_i5_2016": 39374186.4,
+    "our_cpu_matlab_equiv": 11249767.2,
+    "best_c_singlethread": 1124977.2,
+    "best_c_allcore": 112497.6
+   },
+   "n40_t80": {
+    "paper_matlab_i5_2016": 985671088.8,
+    "our_cpu_matlab_equiv": 281620311.6,
+    "best_c_singlethread": 28162030.8,
+    "best_c_allcore": 2816203.2
+   }
+  },
+  "qpu_side": "QPU joules NOT PUBLISHED by vendor (G2) -> the joules crossover is ONE-SIDED (classical bounded, QPU unpublished); no two-sided energy-advantage claim permitted",
+  "note": "standing joules column now on the cost map; in some regimes the classical joules crossover arrives at a different t than the seconds crossover (energy is the 2nd axis)"
  }
 }
