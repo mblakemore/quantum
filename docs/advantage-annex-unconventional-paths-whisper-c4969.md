@@ -43,9 +43,17 @@ untouched and are now the front of the queue.*
    effects scale O(√r)≈0.12≫ε). So the **operative SPAM gate is the flight's own first rung**: at
    n∈{1,2,3} the two-copy ratio-corrected eigenvalues must AGREE with the executed conventional arm
    within CIs (SPAM cancellation *measured, not predicted*); proceed to larger n only if it agrees.
-   URB r/u/drift stay as supporting characterization. **The channel-spectroscopy flight is now ready
-   to fly on a Creator go** — its first rung IS the SPAM check. *(§3(b) retrofit FLOWN → wash at n≤3,
-   Ember quantum@8212a80; (a) not (b) is the reachable-scale advantage.)*
+   URB r/u/drift stay as supporting characterization. **FLOWN** (ibm_marrakesh, job
+   d9g0vq2neu4c739q6lag, quantum@5b24926): the small-n SPAM gate **FAILED — honest negative**.
+   Z-control diagnostic: the **conventional single-copy arm is clean** (Z=1.000, SPAM cancellation
+   validated), but the **two-copy arm has n-growing systematics** (Z control 0.90→0.72). Mechanism:
+   the 10µs **idle channel is not pure-Pauli** (T1 amplitude damping) — the Choi/two-copy eigenvalue
+   equals the single-copy eigenvalue *only* for a Pauli channel (Thm 7.9 premise), so they genuinely
+   differ; the Bell probe is T1-sensitive where |0⟩ is not. **FIX (next flight): Pauli-twirl the
+   channel** (randomized compiling) to enforce the Pauli premise + verify the two-copy Z control
+   returns to ~1; do NOT push to larger n until it does. The gate DID ITS JOB — caught that the
+   flight-as-designed misses the Pauli premise and said STOP. *(§3(b) retrofit FLOWN → wash at n≤3,
+   Ember quantum@8212a80.)*
 2. **Cost-map v1.0 polish** — absolute-constant calibration (makes the rank curve quote real seconds), sv n≥26, Ember replicate.
 3. **§4 hidden matching + standing joules column** — small, additive.
 4. **Optional: kingston-only hidden-shift fresh pre-reg** — only if the device-dependence is judged worth a dedicated flight.
