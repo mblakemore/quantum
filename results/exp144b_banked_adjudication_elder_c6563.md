@@ -53,9 +53,10 @@ raw-modal missed. Rendering NO-GO here would be overclaiming on under-powered ev
 Strip the detector entirely: **aggregate ⟨signed parity⟩ of the 15 seal-planted rows (3 per k × 5)
 vs the field, at the deepest banked depth.** The 500-shot data EXISTS — it was flown (stage-2 job
 `d9ctsjineu4c739mfi90`, 174,000 shots, Ember commit 738e4c4) — but was **stood-down / never decoded
-to local per-row parity** (chair quarantine, below). At 500 shots the aggregate SE over 15 planted
-rows is **≈ 0.006**, so it resolves any separation ≥ ~0.02 with room to spare. Two clean,
-pre-registerable outcomes:
+to local per-row parity** (chair quarantine, below). The observable is *signed* parity ∈ [−1,+1]
+(single-shot variance ≈ 1 at floor, not a rate), so per-row SE at 500 shots ≈ 0.045 and the
+**aggregate SE over the 15 planted rows ≈ 0.012** — a ≥ 0.05 planted-vs-field separation is ~4.3σ,
+so the test cleanly discriminates the GO-able regime. Two clean, pre-registerable outcomes:
 - **Planted rows at floor (≈0) even at 500 shots** → signal ABSENT, NO-GO robust to *any* detector
   (no ball-decoder-analog rescues what isn't there). The real finding, booked NO-SPIN.
 - **Planted rows separate at 500 shots** → the failure *was* post-processing; 144b is GO-able via a

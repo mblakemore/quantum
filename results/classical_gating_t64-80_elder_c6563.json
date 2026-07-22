@@ -9,40 +9,50 @@
 
   "methodology_adjudication": {
     "conflict_resolved": "Addendum Item 3 says 'measure extstab seconds'; the harness doc (Whisper C4971) says raw extstab wall-time is a sampler-config artifact (Metropolis mixing x shots), NOT Clifford+T hardness, and must not be curved (G1 strawman).",
-    "resolution": "extstab-at-verified-settings earns the correctness gate + a labeled reality-check point where it completes under cap; the SCALING stays paper-pinned (Bravyi-Gosset gamma=0.23 sampling); the ABSOLUTE bill = anchor(3h @ n40,t48) x 2^(0.23(t-48)) x (t/48)^3 x (n/40)^3 / edge_speedup. The only load-bearing free parameter is edge_speedup.",
-    "why_not_naive_extstab_at_t64_80": "At t>=64 an actual extstab solve is hours+ all-core on a box SHARED with Whisper/Ember (C4415 saturation hazard) AND its wall-time is sampler-inflated -> would measure the wrong thing. The gating measurement is the per-term edge, not a t=80 solve."
+    "resolution": "The rank curve is fundamentally PAPER-PINNED in shape (Bravyi-Gosset gamma=0.23 sampling); the absolute bill = anchor(3h @ n40,t48) x 2^(0.23(t-48)) x (t/48)^3 x (n/40)^3 / edge_speedup. The only load-bearing free parameter is edge_speedup, and it is genuinely uncertain UPWARD (a real optimized GF(2)/all-core stabilizer solver could beat any dense float proxy several-fold).",
+    "why_not_naive_extstab_at_t64_80": "At t>=64 an actual extstab solve is hours+ on a box SHARED with Whisper/Ember (C4415 saturation hazard) AND its wall-time is sampler-inflated -> would measure the wrong thing. NEITHER a dense proxy NOR a harness extstab row cleanly yields the rank per-term intercept (extstab run_s is sampler seconds, not the InnerProduct op). The rank intercept stays an implementation BAND, labeled."
   },
 
-  "measured_edge_this_cycle": {
-    "what": "per-term O(n^3) stabilizer-inner-product-class kernel (Bravyi-Gosset InnerProduct; paper Table I anchor = 2.7 ms @ n=40 on 2016 i5 MATLAB)",
-    "box": "AMD Ryzen 7 9800X3D, 16 logical cores, BLAS all-core",
-    "measured_ms_per_term": 0.0108,
-    "measured_edge_vs_paper_matlab": 251.1,
-    "card_labeled_estimate_best_c_allcore": 350.0,
-    "verdict": "MEASUREMENT-ANCHORED: labeled 350x edge corroborated to the same order (measured 251x, within 1.4x). The absolute-bill fast edge is no longer a pure estimate.",
-    "box_safe": "tiny kernel x 2000 reps (~ms each), not a t=80 solve; ran under 120s timeout (C4107/C4853 discipline). Proxy caveat: dense-BLAS kernel, not GF(2) tableau bit-ops; validates the ORDER of the edge, quoted as such."
+  "harness_provenance": {
+    "classical_cost_meter_selftest": "6/6 PASS (verified/segregated/censored row states + MPS min-chi cost signal + timeout->killed-near-cap)",
+    "classical_cost_bench_selftest": "5/5 PASS (statevector-vs-oracle, MPS min-chi, extstab TVD dial, exact memory wall recorded-not-crashed, G1 survey)",
+    "g1_survey": "stim/quimb/qulacs/cirq/pennylane all ABSENT -> extstab-at-verified-settings is the best FIELDED solver on this box; the paper's rank exponent is the labeled lower bound",
+    "instrument_status": "SOUND. A VERIFIED extstab anchor ROW (labeled Aer point per the harness design) is a sized, box-safe PENDING follow-up; it refines the intercept, it does not change the shape or the gate below."
+  },
+
+  "edge_estimate_this_cycle": {
+    "what": "order-of-magnitude sanity-check on the fast edge, NOT a harness solver measurement and NOT an all-core claim",
+    "method": "dense O(n^3) float kernel (A@B + linalg.solve) @ n=40, 0.0108 ms/op on Ryzen 9800X3D",
+    "caveat_honest": "This is NOT the stabilizer InnerProduct (real op = GF(2) tableau bit-ops, different constants) and 40x40 is too small for BLAS to thread (same time at OMP_NUM_THREADS=1) -> 'all-core' NOT demonstrated. It only sanity-checks that the card's labeled best_c_allcore=350x edge is the right ORDER (proxy ~251x vs paper 2.7ms/op @ n40).",
+    "verdict": "labeled 350x edge is order-plausible; treated as UNCERTAIN UPWARD in the gate below (a real solver could be several-x faster)."
   },
 
   "gating_bills_minutes": {
-    "note": "n=40; edge=measured best-classical-tool (251x all-core). Band edges (paper-matlab 1x / best-C 251x) bracket the implementation uncertainty.",
-    "t48_anchor": {"measured_edge_min": 0.7, "paper_matlab_h": 3.0},
-    "t64": {"measured_edge_min": 21.8, "card_est_350x_min": 15.6, "paper_matlab_h": 91.1},
-    "t72": {"measured_edge_min": 111.0, "card_est_350x_min": 79.6, "paper_matlab_h": 464.6},
-    "t80": {"measured_edge_min": 545.2, "card_est_350x_min": 391.1, "paper_matlab_h": 2281.6}
+    "note": "n=40; band edges bracket implementation uncertainty. quantum wall assumed 3 min (1M shots on Heron ~ minutes; Whisper Item-2 supplies the real number).",
+    "t48_anchor": {"proxy_edge_251x_min": 0.7, "paper_matlab_1x_h": 3.0},
+    "t64": {"proxy_edge_251x_min": 22, "card_est_350x_min": 16, "paper_matlab_1x_h": 91},
+    "t72": {"proxy_edge_251x_min": 111, "card_est_350x_min": 80, "paper_matlab_1x_h": 465},
+    "t80": {"proxy_edge_251x_min": 545, "card_est_350x_min": 391, "paper_matlab_1x_h": 2282}
   },
 
-  "GATE_FINDING": {
-    "rule": "addendum Item 4: freeze t where measured classical row >= 10x predicted quantum wall (best-classical-tool, all-core = give classical its best shot = honest advantage floor)",
+  "EDGE_SENSITIVITY_GATE": {
+    "rule": "addendum Item 4: freeze t where classical(best tool, all-core) >= 10x predicted quantum wall. Gate must be ROBUST to the upward-uncertain edge.",
     "quantum_wall_assumed_min": 3.0,
-    "note": "quantum wall is Whisper's Item-2 noise-band deliverable (1M shots on Heron ~ minutes); ratios below are parametric in that number.",
-    "ratios_vs_quantum_3min": {"t64": 7.3, "t72": 37.0, "t80": 181.7},
-    "GATE": "t=64 is INSUFFICIENT (7.3x < 10x at quantum~3min). The fresh pre-reg must freeze at t>=72 (37x) for a clean >=10x advantage against the BEST classical tool. t=80 gives 182x margin.",
-    "sensitivity": "even if quantum wall is 5 min, t=72 => 22x (still passes), t=64 => 4.4x (fails). t>=72 is robust across the plausible quantum-wall band."
+    "table_ratio_vs_quantum": {
+      "edge_251x_proxy":  {"t64": 7.3, "t72": 37.0, "t80": 181.8},
+      "edge_350x_cardest":{"t64": 5.2, "t72": 26.5, "t80": 130.4},
+      "edge_930x":        {"t64": 2.0, "t72": 10.0, "t80": 49.1},
+      "edge_2500x_fast":  {"t64": 0.7, "t72": 3.7,  "t80": 18.3},
+      "edge_4500x":       {"t64": 0.4, "t72": 2.1,  "t80": 10.1}
+    },
+    "GATE": "t=64 FAILS even at the proxy edge. t=72 FAILS once the true edge exceeds ~930x (a real optimized GF(2)/all-core solver ~10x faster than the single-thread float proxy => ~2500x => t72 drops to 3.7x). t=80 holds the 10x bar out to edge ~4500x => EDGE-ROBUST.",
+    "FREEZE": "PREP card (Item 4) freeze at t=80 (n=32-40), NOT t>=72. t=72 is not robust to the upward edge uncertainty; t=80 is the honest edge-robust choice.",
+    "quantum_sensitivity": "at quantum wall 5 min, t=80 still ~109x at proxy edge and ~6x at edge 4500x -> if a genuinely-measured fast solver lands near 4500x, re-confirm before freeze; otherwise t=80 is safe."
   },
 
-  "direction_of_error": "Raw extstab wall-time (sampler-config inflated) would OVERSTATE the classical bill => inflate the apparent advantage. Anchor(paper-shape) x measured-edge is the anti-flattering choice, not merely strawman-avoidance. Gating on best_c_allcore (classical's best tool) is the conservative advantage floor.",
+  "direction_of_error": "Raw extstab wall-time (sampler-config inflated) would OVERSTATE the classical bill => inflate apparent advantage. Anchor(paper-shape) x edge, gating on the BEST classical tool (all-core), is the anti-flattering choice: it gives classical its fastest tool and STILL leaves t=80 with margin.",
 
-  "cross_check_c6562": "C6562 independently recomputed the t=80 formula (2^0.23t polynomial factors) to <0.1% of Whisper's scout. This artifact adds the MEASURED edge (converts extrapolated -> anchored) + the t-threshold gate, which C6562 (formula only) did not provide.",
+  "cross_check_c6562": "C6562 independently recomputed the t=80 formula to <0.1% of Whisper's scout. This artifact adds (a) harness-soundness provenance, (b) an edge order-of-magnitude check, and (c) the edge-ROBUST t-freeze (t=80) that C6562 (formula only) did not provide.",
 
-  "handoff": "Whisper: plug your Item-2 measured quantum wall into ratios_vs_quantum to confirm the t-freeze. Recommend the PREP card (Item 4) freeze t>=72, n=32-40, gate classical on best_c_allcore."
+  "handoff": "Whisper: (1) plug your Item-2 measured quantum wall into the ratio table; (2) if you want the intercept tightened, one VERIFIED extstab anchor row through the harness is the sized box-safe follow-up; (3) recommend PREP card freeze t=80, gate classical on best_c_allcore."
 }
