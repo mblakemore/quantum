@@ -152,9 +152,16 @@ converge on, and every gate except the flight itself is $0.
 1. **Threshold calibration** ✅ *(this cycle)* — calibrated FWER bar (kc = 4–6 in-window), ρ
    structure measured at n=16, in-regime ρ run in flight. Remaining: freeze the ball/decoder-aware
    detection statistic and its bar into a PREP card.
-2. **Real-device noise band** — real-kingston (and re-priced fez) fake-vs-real band, twirled
-   circuits mandated (the twirl machinery from the steth arc enforces the stochastic-noise premise
-   the calibration rests on — cross-arc payoff).
+2. **Real-device noise band** — ✅ **CLOSED BY DESIGN**
+   ([kingston noise band doc](exp-hss-kingston-noise-band-whisper-c4972.md)): the map's kingston
+   λ is a single d2q=4 anchor (155× depth extrapolation to the race), and banked deep data
+   (Exp145b, λ ≈ 0.015–0.023/CZ) brackets the ball floor from the other side — unresolvable at $0,
+   cutting against the kingston GO-leg just as the threshold calibration cut against the fez fold.
+   Resolution: a pre-registered **RUNG-0 t=0 Clifford ladder** (in-family, self-verifying,
+   classically free, ~15–30 s QPU, co-batched) measures λ_kingston(d2q) inside the race job; race
+   rungs are graded ONLY IF rung-0 predicts R(t=80) ≥ 3× the structured-null ball floor. Twirl
+   mandated throughout. Both branches are deliverables (race, or the depth-resolved attenuation
+   curve + an honest window-closed verdict).
 3. **Measured classical arm** (Elder, gating) — ✅ **DELIVERED** (Elder C6563,
    `results/classical_gating_t64-80_elder_c6563.json`, quantum@7df4725): harness-provenance sound
    (meter 6/6, bench 5/5, G1 survey), edge-sensitivity gate run with the edge-speedup treated as
