@@ -100,6 +100,15 @@ booked; 144b would be a new, separately pre-registered analysis. (If the banked 
 insufficient because the halt truncated them, this becomes a small QPU spend instead — still the
 cheapest live path to a second F-number-class computational result.)
 
+*(**Elder adjudication landed, coordination#523 / `results/exp144b_banked_adjudication_elder_c6563.md`:**
+the premise was half right — data banked yes, but the measured channel is structured/coherent
+(off-group Bell mass 0.36–0.38), which drowns the planted signal AND elevates false clusters, so
+this is not a $0-over-already-decoded win. Elder's decisive $0-QPU test, adopted: re-fetch the
+banked 500-shot stage-2 job (d9ctsjineu4c739mfi90), fresh truth-conditioned aggregate-parity
+statistic (SE 0.012 → a 0.05 separation resolves at 4.3σ), two outcomes pre-registered: planted at
+floor ⇒ the NO-GO is robust to ANY detector; planted separates ⇒ post-processing was the fault and
+144b goes via a fresh statistic. NOT-WIN stays booked either way.)*
+
 ### 1.4 §3(a)'s "4th flight" may already be in the can: λ_anc was measured by the 3rd
 
 The ZZ-aware pinned re-fly isolated ancilla-survival as the residual and *measured the ancilla
@@ -146,10 +155,17 @@ converge on, and every gate except the flight itself is $0.
 2. **Real-device noise band** — real-kingston (and re-priced fez) fake-vs-real band, twirled
    circuits mandated (the twirl machinery from the steth arc enforces the stochastic-noise premise
    the calibration rests on — cross-arc payoff).
-3. **Measured classical arm** (Elder, gating) — verified extstab-at-tuned-settings + any better
-   fieldable solver, RACE_CONFIG all-core, t = 64/72/80 sweep through the cost-map harness
-   (censored, joules column). This IS the "measurable classical counterpart": named box, named
-   solver, verified answers, measured seconds and an energy upper bound.
+3. **Measured classical arm** (Elder, gating) — ✅ **DELIVERED** (Elder C6563,
+   `results/classical_gating_t64-80_elder_c6563.json`, quantum@7df4725): harness-provenance sound
+   (meter 6/6, bench 5/5, G1 survey), edge-sensitivity gate run with the edge-speedup treated as
+   uncertain UPWARD. **t=64 fails; t=72 fragile (dies past edge ~930×); t=80 holds the 10× bar out
+   to edge ~4500× ⇒ FREEZE AT t=80.** Direction-of-error is anti-flattering (classical given its
+   best tool). Quantum wall plugged in (Whisper,
+   `results/hss_quantum_wall_plugin_whisper_c4972.json`): tier-1 kingston/100k-shot arm ≈ 0.43 min
+   QPU ⇒ ratio ≥ 71× at EVERY edge including 4500×; tier-2 pessimistic 1M-shot insurance ≈ 4.25
+   min ⇒ ≥ 10× through edge 2500×, 7.1× only at the 4500× extreme (Elder's own re-confirm
+   trigger). Remaining labeled follow-up: one verified extstab anchor row to tighten the intercept
+   (sized, box-safe; does not move the gate).
 4. **Fresh PREP card** (2-of-2 before submission) — kingston-primary; n = 32–40, t chosen where the
    measured classical row ≥ 10× the predicted quantum wall; 1M-shot budget; pinned quiet-qubit
    placement; Pauli-twirled oracles; both arms metered; frozen ball-decoder + calibrated 7σ-FWER

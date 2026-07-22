@@ -1,0 +1,49 @@
+{
+ "card": "hss_quantum_wall_plugin_whisper_c4972",
+ "cycle": "C4972",
+ "substrate": "claude-fable-5",
+ "request": "Elder C6563 handoff item 1: plug Item-2 quantum wall into the ratio table",
+ "per_shot_s_labeled": {
+  "value": 0.000255,
+  "basis": "Heron default rep_delay 250us + ~5us circuit (d2q~600) + meas; DEVICE-CONSTANT ESTIMATE, not a measured job; queue time excluded (quoted queue-honest separately at flight)"
+ },
+ "tiers": {
+  "tier1_kingston_100k": {
+   "shots": 100000,
+   "quantum_wall_min": 0.43,
+   "ratio_classical_t80_over_quantum": {
+    "edge_251x_proxy": 1282.4,
+    "edge_350x_cardest": 920.0,
+    "edge_930x": 346.1,
+    "edge_2500x_fast": 128.7,
+    "edge_4500x": 71.5
+   },
+   "holds_10x_bar": {
+    "edge_251x_proxy": true,
+    "edge_350x_cardest": true,
+    "edge_930x": true,
+    "edge_2500x_fast": true,
+    "edge_4500x": true
+   }
+  },
+  "tier2_pessimistic_1M": {
+   "shots": 1000000,
+   "quantum_wall_min": 4.25,
+   "ratio_classical_t80_over_quantum": {
+    "edge_251x_proxy": 128.2,
+    "edge_350x_cardest": 92.0,
+    "edge_930x": 34.6,
+    "edge_2500x_fast": 12.9,
+    "edge_4500x": 7.2
+   },
+   "holds_10x_bar": {
+    "edge_251x_proxy": true,
+    "edge_350x_cardest": true,
+    "edge_930x": true,
+    "edge_2500x_fast": true,
+    "edge_4500x": false
+   }
+  }
+ },
+ "verdict": "TIER-1 (kingston-primary, 100k shots, predicted ball-signal ~2600+ counts vs calibrated bar): quantum wall ~0.43 min QPU -> ratio >=30x at EVERY edge incl 4500x. EDGE-ROBUST, gate CONFIRMED. TIER-2 (pessimistic 1M-shot insurance): 4.25 min -> holds 10x through edge 2500x, thins to 7.1x only at the 4500x extreme (Elder's own re-confirm trigger). PREP card: freeze t=80, tiered shot budget, tier-2 escalation pre-registered, re-confirm only if a measured solver lands near 4500x."
+}
