@@ -1,0 +1,69 @@
+{
+ "card": "exp_steth_a_flight_decoded",
+ "job_id": "d9g0vq2neu4c739q6lag",
+ "backend": "ibm_marrakesh",
+ "substrate": "claude-fable-5",
+ "cycle": "C4971",
+ "delay_ns": 10000,
+ "rows": [
+  {
+   "n": 1,
+   "pauli": "X",
+   "lam_twocopy": 0.227,
+   "lam_conv": 0.104,
+   "abs_diff": 0.123,
+   "agree_within_2se": false,
+   "approx_se": 0.0316
+  },
+  {
+   "n": 1,
+   "pauli": "Z",
+   "lam_twocopy": 0.8996,
+   "lam_conv": 1.0,
+   "abs_diff": 0.1004,
+   "agree_within_2se": false,
+   "approx_se": 0.0316
+  },
+  {
+   "n": 2,
+   "pauli": "X",
+   "lam_twocopy": 0.4514,
+   "lam_conv": 0.1682,
+   "abs_diff": 0.2832,
+   "agree_within_2se": false,
+   "approx_se": 0.0316
+  },
+  {
+   "n": 2,
+   "pauli": "Z",
+   "lam_twocopy": 0.7529,
+   "lam_conv": 1.0028,
+   "abs_diff": 0.25,
+   "agree_within_2se": false,
+   "approx_se": 0.0316
+  },
+  {
+   "n": 3,
+   "pauli": "X",
+   "lam_twocopy": 0.2308,
+   "lam_conv": 0.1307,
+   "abs_diff": 0.1001,
+   "agree_within_2se": false,
+   "approx_se": 0.0316
+  },
+  {
+   "n": 3,
+   "pauli": "Z",
+   "lam_twocopy": 0.7161,
+   "lam_conv": 1.0062,
+   "abs_diff": 0.2901,
+   "agree_within_2se": false,
+   "approx_se": 0.0316
+  }
+ ],
+ "SPAM_GATE_small_n_agreement": "FAIL",
+ "gate_note": "disagreement at some n -> SPAM/ancilla bias found; do not push to larger n",
+ "mechanism": "Gate FAILED (arms disagree all n). DIAGNOSTIC = the Z control: CONVENTIONAL arm internally clean (Z=1.000/1.003/1.006 -> SPAM cancellation WORKS for single-copy; X=~0.10 real short-T2* dephasing). TWO-COPY arm has n-GROWING systematics (Z control 0.90/0.75/0.72, should be ~1). Leading mechanism: the 10us IDLE channel is NOT a pure Pauli channel (T1 amplitude damping is non-Pauli), and the two-copy Choi eigenvalue equals the single-copy eigenvalue ONLY for a Pauli channel -> genuine disagreement; the Bell probe is T1-sensitive (Z-correlation relaxes) where the conventional |0> is not. Secondary: ancilla-DD / Bell-prep residual. NOT fully isolated: non-Pauli-channel vs ancilla-imperfection vs subtle two-copy bug.",
+ "fix": "PAULI-TWIRL the channel (randomized compiling) to enforce the Pauli-channel premise Thm 7.9 requires, AND verify the two-copy Z control returns to ~1 (isolates non-Pauli-channel from an implementation systematic). Do NOT push to larger n until the two-copy Z control passes.",
+ "honest_negative": "The SPAM gate did its job: it caught that the flight-as-designed does not meet the Pauli-channel premise, and said STOP. Conventional single-copy SPAM cancellation IS validated (Z=1.000). The two-copy arm needs a Pauli-twirled channel + a clean Z control before the advantage ratio is meaningful."
+}
