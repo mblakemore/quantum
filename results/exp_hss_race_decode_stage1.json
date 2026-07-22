@@ -1,0 +1,58 @@
+{
+ "card": "exp_hss_race_decode_stage1_v2_marginalized",
+ "cycle": "C4973",
+ "substrate": "claude-fable-5",
+ "job_id": "d9g4oqsjeosc73fknnbg",
+ "usage": {
+  "quantum_seconds": 85,
+  "seconds": 85,
+  "status": "complete"
+ },
+ "decode_correction": "v1 read 156-bit full-register strings (116 idle qubits' readout junk in R). v2 marginalizes to the 40/32 system qubits at FINAL routed positions. Correction made pre-reveal, statistic unchanged.",
+ "rung0": [
+  {
+   "fold_m": 0,
+   "d2q": 37,
+   "modal": "0001011101100001100000101111111100111110",
+   "modal_counts": 692,
+   "shots": 20000,
+   "R_modal": 0.0346
+  },
+  {
+   "fold_m": 1,
+   "d2q": 111,
+   "modal": "0001011101100101100000101111111101111110",
+   "modal_counts": 4,
+   "shots": 20000,
+   "R_modal": 0.0002
+  },
+  {
+   "fold_m": 2,
+   "d2q": 185,
+   "modal": "1011110001110001100001100111111101111110",
+   "modal_counts": 2,
+   "shots": 20000,
+   "R_modal": 0.0001
+  },
+  {
+   "fold_m": 3,
+   "d2q": 259,
+   "modal": "1101111111000101110001101101011100111110",
+   "modal_counts": 2,
+   "shots": 20000,
+   "R_modal": 0.0001
+  }
+ ],
+ "lambda_fit_per_slot": 0.09084989714305323,
+ "R_pred_race40": 2.210779781436786e-08,
+ "R_pred_race32": 2.498106030939217e-09,
+ "gate_threshold": 0.00051,
+ "gate_race40": false,
+ "gate_race32": false,
+ "race_n40": {
+  "gated": "FOLD \u2014 race rung DISCARDED UNGRADED per card"
+ },
+ "race_n32": {
+  "gated": "FOLD \u2014 race rung DISCARDED UNGRADED per card"
+ }
+}
