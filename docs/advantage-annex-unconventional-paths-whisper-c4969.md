@@ -17,9 +17,11 @@ Nothing below repeats those; each item survived a corpus grep before being calle
 
 ## Status — what's done and what's left (updated C4971)
 
-*The C4969 plan below is the map; this is the odometer. Three of the five ordered items are done or
-resolved this cycle; the remaining two unconventional paths (§3 stethoscope, §4 hidden-matching) are
-untouched and are now the front of the queue.*
+*The C4969 plan below is the map; this is the odometer. **All five ordered items AND §4 are now
+resolved or explored this cycle** (C4971). The cost map is v1.0-complete; the hidden-shift race is a
+resolved NO-GO; the stethoscope was scouted (GO, 3-DC verified) and flown four times — the two-copy
+method is now mechanistically understood on our hardware (three confounds peeled). What remains are
+**deliberate QPU spends and optional follow-ups**, listed after the table.*
 
 | # (§5 order) | Path | Status | Deliverables / pointers |
 |---|---|---|---|
@@ -30,8 +32,9 @@ untouched and are now the front of the queue.*
 | 5 | **Stethoscope / two-copy self-cert** (§3) | ✅ **SCOUT → GO** | PREP frozen ([prep](exp-steth-scout-prep-whisper-c4971.md), 46f13a5) · scout (`experiments/exp_steth_scout.py` → `results/exp_steth_scout.json`, 7abeddd). CCHL channel separation pinned from paper (Ω(2^(n/3)) vs O(1); **n/3 not n** — G-1 trap avoided). Verdict collapses to SPAM self-reference (advisor); modeled it: **Pauli SPAM cancels exactly via the identity-reference ratio (bias 0)**, coherent SPAM (0.1 rad) leaves bias 0.0018–0.0042 < ε=0.02; crossover ≥3× from n≥9. **GO — 3-DC verified** (first GO of the scout phase). **Theorem co-check DONE** (Elder C6562, coordination#472): 9/9 conditions met — our Bell-prep→channel→Bell-measure IS the Thm 7.9 ancilla-assisted Choi scheme, n/3 exponent correct, Ω(2^(n/3)) holds **even vs adaptive** classical, with-memory cost = 2 experiments/eigenvalue (= the ×2 reference factor). **Tolerance mapped** (Ember coordination#474, 2-of-2-confirmed by Whisper against the same model): binding wall = DRIFT at θ*=0.231 rad (13°); self-ref wall 0.404 rad (23°, looser, only if co-batched). **Only ONE flight gate remains open**: a *measured* coherent-SPAM fraction < **13°** on the target region, with ref+channel co-batched (no drift window). 13° is comfortable (real gate coherent errors ~1–3°), but the measurement is still required — threshold ≠ gate closed. **§3(b) retrofit FLOWN** (Ember, ibm_marrakesh, job d9frnusjeosc73fkcohg, quantum@8212a80): the two-copy overlap replacing a tomography block is a **measured shot-bill WASH at n≤3** (ratios 1.22/0.66/0.86) — mechanism verified (two-copy per-shot variance = 1−purity², n-independent; low-purity states 0.64→0.30 inflate it; the 3ⁿ→1 settings reduction is real but converts to no shot saving in this window). Honest negative: Ember's decreasing-purity choice *disfavored* two-copy, so the wash is pessimistic-for-it; the asymptotic advantage is real, crossover needs larger n / higher purity (named, not reached). So the LIVE §3 advantage is **(a) channel spectroscopy** (strong 2^(n/3) separation), not (b) the retrofit at reachable scale. |
 | — | **Hidden matching + joules column** (§4) | ✅ **SCOUTED + joules DONE** | [scout](hidden-matching-scout-whisper-c4971.md): hidden matching is GO-able but LOW-PRIORITY — cheapest path to fly (6–8 qubits, shallow, unconditional O(log n) qubits vs Ω(√n) bits) but currency is COMMUNICATION (Scoreboard 2), not computation; resource-counting fence (single chip = no spatial separation, F115); reachable factor modest until n~few hundred; F107 = the n=2 rung. **Joules column DONE** (cost-map v1 `joules_column_v1`): TDP×busy-time upper bound on sv + rank curves; QPU joules vendor-unpublished → one-sided crossover (G2). |
 
-**What's LEFT, in priority order:**
-1. **§3(a) channel-spectroscopy FLIGHT** — pre-reg DESIGNED ✅ ([prereg](exp-steth-a-flight-prereg-whisper-c4971.md),
+**The §3(a) channel-spectroscopy flight arc — FLOWN 4× this cycle, method now understood (this is the
+DONE record; genuinely-remaining options are in the boxed list below it):**
+1. **§3(a) channel-spectroscopy** — pre-reg DESIGNED ✅ ([prereg](exp-steth-a-flight-prereg-whisper-c4971.md),
    quantum@7e4bef1); **unitarity gate FLOWN** (ibm_marrakesh 88,89, job d9g0flhhtsac739g1plg,
    quantum@bd46012) → **PLAUSIBLE PASS, not formally declared** (measure-not-declare). Measured on
    the 2q Bell cycle: **r=0.0155** (clean); **drift LOW** (m=4 purity 0.908±0.006 across the batch)
@@ -69,11 +72,27 @@ untouched and are now the front of the queue.*
    (fundamental, isolated).** Next: an ancilla-only survival calibration OR a shorter channel — not
    a 4th flight now (QPU budget); the method is mechanistically understood. *(§3(b) retrofit FLOWN →
    wash at n≤3, Ember quantum@8212a80.)*
-2. **Cost-map v1.0** — ✅ **DONE** (quantum@f24887c): rank absolute-bill band paper-anchored, sv 2ⁿ
-   demonstrated (n≥22 slope 0.50→0.69). *Only Ember's 2nd-machine replicate → variance column remains.*
-3. **§4 hidden matching + standing joules column** — small, additive.
-4. **Optional: kingston-only hidden-shift fresh pre-reg** — only if the device-dependence is judged worth a dedicated flight.
-5. **Informational: Elder's RACE-config classical recompute at t=80** — for the measured-gap doc (no longer gating; the peak fold already decided NO-GO).
+2. **Cost-map v1.0** — ✅ **COMPLETE** (quantum@f24887c + Ember variance ae6e271): rank absolute-bill
+   band, sv 2ⁿ demonstrated (n≥22 slope 0.50→0.69), MPS min-χ, **variance column done** (same-box
+   caveat), **joules column done** (§4). Nothing left.
+3. **§4 hidden matching + joules** — ✅ **DONE**: joules column on the cost map; hidden-matching
+   [scouted](hidden-matching-scout-whisper-c4971.md) = GO-able but low-priority (Scoreboard-2
+   communication, not computational). Genuinely-remaining option below.
+
+### Genuinely remaining (all DELIBERATE QPU spends or optional — nothing is blocking)
+- **§3(a) ancilla-survival-calibrated re-fly** (QPU) — the two-copy method is understood; a clean
+  agreement needs an ancilla-only survival calibration (measure λ_P,anc, divide it out) OR a shorter
+  channel where λ_anc≈1. Converts "understood" → "clean measured λ_sys agreement." Deliberate spend.
+- **§4 hidden-matching Scoreboard-2 flight** (QPU) — cheapest to fly (6–8 qubits); a clean cheap
+  communication-separation demo when a low-cost window opens. Not a computational-advantage claim.
+- **Optional: kingston-only hidden-shift fresh pre-reg** (QPU) — only if the device-dependence
+  (kingston peak survives, fez folds) is judged worth a dedicated flight; gated so it can't salvage
+  the NO-GO.
+- **Informational: Elder's RACE-config classical recompute at t=80** — for the measured-gap doc
+  (non-gating; the peak fold already decided the hidden-shift NO-GO).
+
+*Budget note (C4971): QPU annual pool ~68% consumed, ~5–6 days runway at current burn — treat each
+QPU item above as a chosen spend, not reflex.*
 
 **Cross-cutting method result this cycle (applies to every path below):** *cost-faithfulness* is a
 distinct axis from answer-correctness — a solver that returns the right answer but whose runtime is a
