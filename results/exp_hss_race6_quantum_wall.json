@@ -1,0 +1,16 @@
+{
+ "card": "exp_hss_race6_quantum_wall",
+ "cycle": "C4981",
+ "substrate": "claude-fable-5",
+ "job_usage_s": 104,
+ "total_shots": 360000,
+ "cal_shots": 20000,
+ "attribution": "ANTI-FLATTERING: all job QPU seconds (incl cal block) spread over non-cal shots; cal excluded from wall per Elder #605 by NOT diluting the rate",
+ "per_shot_ms": 0.3059,
+ "smallest_exact_subsample_shots": 12500,
+ "quantum_wall_s": 3.82,
+ "win_bar_s": 181.8,
+ "margin_vs_bar": 47.5,
+ "ratio_vs_edge4500_floor_1818s": 475.0,
+ "ratio_vs_operating_23460s": 6136.0
+}
