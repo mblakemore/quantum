@@ -1,0 +1,28 @@
+{
+  "card": "exp_hss_redteam_whitebox_attack \u2014 Whisper C4996",
+  "robustness_random_instances": {
+    "trials": 200,
+    "exact": 200,
+    "mean_queries": 42.0
+  },
+  "instance": {
+    "n": 40,
+    "k": 20,
+    "n_ccz": 10,
+    "seed": 2026072306,
+    "family": "Maiorana-McFarland"
+  },
+  "planted_s": "0101010111110000100110110100011000000011",
+  "recovered_s": "0101010111110000100110110100011000000011",
+  "hamming_distance": 0,
+  "exact_match": true,
+  "oracle_queries": 42,
+  "wall_time_s": 0.00025233207270503044,
+  "wall_time_us": 252.33207270503044,
+  "quantum_wall_s": 3.82,
+  "classical_floor_s": 1818.0,
+  "speedup_vs_floor": 7204791.608576822,
+  "verdict": "WHITE-BOX SUPERSEDED",
+  "threat_model": "white-box: g known from circuit; oracle access to f_s (shifted). O(k) queries.",
+  "substrate": "claude-fable-5"
+}
