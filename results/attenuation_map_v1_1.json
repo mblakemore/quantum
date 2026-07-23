@@ -1,0 +1,597 @@
+{
+ "card": "attenuation_map_v1_1",
+ "cycle": "C4982",
+ "substrate": "claude-fable-5",
+ "supersedes": "attenuation_map.json v1.0 seed points RETAINED below; the modal-observable lambda_global(w40)=0.091 'law' from C4973 stage-1 is RETRACTED as a law (single-point min-norm fit, C4974 correction) \u2014 kept only as the modal-vs-bit observable-gap illustration",
+ "v1_0_seed_points": [
+  {
+   "device": "ibm_kingston",
+   "W": 1.9533,
+   "ratio": 0.9767,
+   "d2q": 4,
+   "depth_status": "VERIFIED(transpile L3)",
+   "lambda_eff_per_slot": 0.00591,
+   "nameplate_2q_err": 0.0025,
+   "effective_vs_nameplate_x": 2.4,
+   "source": "F112"
+  },
+  {
+   "device": "ibm_marrakesh",
+   "W": 1.9265,
+   "ratio": 0.9633,
+   "d2q": 4,
+   "depth_status": "VERIFIED(transpile L3)",
+   "lambda_eff_per_slot": 0.00936,
+   "nameplate_2q_err": 0.003,
+   "effective_vs_nameplate_x": 3.1,
+   "source": "F112"
+  },
+  {
+   "device": "ibm_fez",
+   "W": 1.8948,
+   "ratio": 0.9474,
+   "d2q": 4,
+   "depth_status": "VERIFIED(transpile L3)",
+   "lambda_eff_per_slot": 0.01351,
+   "nameplate_2q_err": 0.003,
+   "effective_vs_nameplate_x": 4.5,
+   "source": "F112"
+  },
+  {
+   "device": "rigetti_cepheus",
+   "W": 1.2165,
+   "ratio": 0.6082,
+   "d2q": 6,
+   "depth_status": "TODO(native recount)",
+   "lambda_eff_per_slot": 0.08286,
+   "nameplate_2q_err": 0.003,
+   "effective_vs_nameplate_x": 27.6,
+   "source": "Exp210 corrected"
+  },
+  {
+   "device": "ionq_forte1",
+   "W": 1.91,
+   "ratio": 0.955,
+   "d2q": 4,
+   "depth_status": "TODO(native RZZ recount)",
+   "lambda_eff_per_slot": 0.01151,
+   "nameplate_2q_err": 0.0045,
+   "effective_vs_nameplate_x": 2.6,
+   "source": "Exp212 same-window"
+  }
+ ],
+ "model_v1_1": "per-bit: bias(d2q) ~ b0*exp(-lambda_bit*d2q) per (die, width, t, register-class); decoder success predicted by bias*sqrt(N_shots) per bit vs threshold; modal observable decays ~width*faster (F120: lambda_modal ~ gates_per_slot*lambda_2q, lambda_bit ~ gates_per_slot*lambda_2q/width)",
+ "regression_rule": "fit() refuses <3 points post-filter (C4973 single-point-fit bug class)",
+ "dataset_rows": [
+  {
+   "die": "marrakesh",
+   "date": "2026-07-22",
+   "width": 40,
+   "t": 0,
+   "d2q": 37,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": 0.7578,
+   "decode_HD": 0,
+   "source": "C4973 banked ladder (C4974)",
+   "note": "blind majority HD; chase fixed 185"
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-22",
+   "width": 40,
+   "t": 0,
+   "d2q": 111,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": 0.5393,
+   "decode_HD": 0,
+   "source": "C4973 banked ladder (C4974)",
+   "note": "blind majority HD; chase fixed 185"
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-22",
+   "width": 40,
+   "t": 0,
+   "d2q": 185,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": 0.438,
+   "decode_HD": 1,
+   "source": "C4973 banked ladder (C4974)",
+   "note": "blind majority HD; chase fixed 185"
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-22",
+   "width": 40,
+   "t": 0,
+   "d2q": 259,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": 0.3853,
+   "decode_HD": 2,
+   "source": "C4973 banked ladder (C4974)",
+   "note": "blind majority HD; chase fixed 185"
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23a",
+   "width": 40,
+   "t": 0,
+   "d2q": 28,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": null,
+   "decode_HD": 0,
+   "source": "race-1 rung0 (reveal #564)",
+   "note": "bias not stored; HD under pinned convention"
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23a",
+   "width": 40,
+   "t": 0,
+   "d2q": 84,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": null,
+   "decode_HD": 0,
+   "source": "race-1 rung0 (reveal #564)",
+   "note": "bias not stored; HD under pinned convention"
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23a",
+   "width": 40,
+   "t": 0,
+   "d2q": 140,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": null,
+   "decode_HD": 1,
+   "source": "race-1 rung0 (reveal #564)",
+   "note": "bias not stored; HD under pinned convention"
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23a",
+   "width": 40,
+   "t": 0,
+   "d2q": 196,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": null,
+   "decode_HD": 3,
+   "source": "race-1 rung0 (reveal #564)",
+   "note": "bias not stored; HD under pinned convention"
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23b",
+   "width": 40,
+   "t": 0,
+   "d2q": 36,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": null,
+   "decode_HD": 0,
+   "source": "race-2 (reveal #578)",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23b",
+   "width": 40,
+   "t": 0,
+   "d2q": 108,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": null,
+   "decode_HD": 0,
+   "source": "race-2 (reveal #578)",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23b",
+   "width": 40,
+   "t": 0,
+   "d2q": 190,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": null,
+   "decode_HD": 0,
+   "source": "race-2 (reveal #578)",
+   "note": "shot-matched 100k"
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23b",
+   "width": 40,
+   "t": 0,
+   "d2q": 245,
+   "register_class": "pre-hygiene",
+   "mean_perbit_bias": null,
+   "decode_HD": 1,
+   "source": "race-2 (reveal #578)",
+   "note": "shots-limited: subs 3/3/3/1"
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23d",
+   "width": 40,
+   "t": 0,
+   "d2q": 43,
+   "register_class": "clean(exclusion)",
+   "mean_perbit_bias": 0.8248,
+   "decode_HD": 0,
+   "source": "exp_hss_race4_gate_shat.json",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23d",
+   "width": 40,
+   "t": 0,
+   "d2q": 129,
+   "register_class": "clean(exclusion)",
+   "mean_perbit_bias": 0.6047,
+   "decode_HD": 0,
+   "source": "exp_hss_race4_gate_shat.json",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23d",
+   "width": 40,
+   "t": 0,
+   "d2q": 217,
+   "register_class": "clean(exclusion)",
+   "mean_perbit_bias": 0.4987,
+   "decode_HD": 0,
+   "source": "exp_hss_race4_gate_shat.json",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23d",
+   "width": 40,
+   "t": 80,
+   "d2q": 217,
+   "register_class": "clean(exclusion)",
+   "mean_perbit_bias": 0.3704,
+   "decode_HD": 1,
+   "source": "exp_hss_race4_race_shat.json",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23e",
+   "width": 40,
+   "t": 0,
+   "d2q": 29,
+   "register_class": "dirty(no-exclusion)",
+   "mean_perbit_bias": 0.6746,
+   "decode_HD": 4,
+   "source": "exp_hss_race5_gate_shat.json",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23e",
+   "width": 40,
+   "t": 0,
+   "d2q": 87,
+   "register_class": "dirty(no-exclusion)",
+   "mean_perbit_bias": 0.5091,
+   "decode_HD": 4,
+   "source": "exp_hss_race5_gate_shat.json",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23e",
+   "width": 40,
+   "t": 0,
+   "d2q": 190,
+   "register_class": "dirty(no-exclusion)",
+   "mean_perbit_bias": 0.4292,
+   "decode_HD": 7,
+   "source": "exp_hss_race5_gate_shat.json",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23e",
+   "width": 40,
+   "t": 80,
+   "d2q": 190,
+   "register_class": "dirty(no-exclusion)",
+   "mean_perbit_bias": 0.3417,
+   "decode_HD": 5,
+   "source": "exp_hss_race5_race_shat.json",
+   "note": ""
+  },
+  {
+   "die": "kingston",
+   "date": "2026-07-23f",
+   "width": 40,
+   "t": 0,
+   "d2q": 55,
+   "register_class": "clean-class(pre-gate certified)",
+   "mean_perbit_bias": 0.7744,
+   "decode_HD": 0,
+   "source": "exp_hss_race6_gate_shat.json",
+   "note": ""
+  },
+  {
+   "die": "kingston",
+   "date": "2026-07-23f",
+   "width": 40,
+   "t": 0,
+   "d2q": 165,
+   "register_class": "clean-class(pre-gate certified)",
+   "mean_perbit_bias": 0.4953,
+   "decode_HD": 0,
+   "source": "exp_hss_race6_gate_shat.json",
+   "note": ""
+  },
+  {
+   "die": "kingston",
+   "date": "2026-07-23f",
+   "width": 40,
+   "t": 0,
+   "d2q": 167,
+   "register_class": "clean-class(pre-gate certified)",
+   "mean_perbit_bias": 0.5023,
+   "decode_HD": 0,
+   "source": "exp_hss_race6_gate_shat.json",
+   "note": ""
+  },
+  {
+   "die": "kingston",
+   "date": "2026-07-23f",
+   "width": 40,
+   "t": 80,
+   "d2q": 167,
+   "register_class": "clean-class(pre-gate certified)",
+   "mean_perbit_bias": 0.377,
+   "decode_HD": 0,
+   "source": "exp_hss_race6_race_shat.json",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23c",
+   "width": 40,
+   "t": 0,
+   "d2q": 64,
+   "register_class": "dirty(11/16 systematic)",
+   "mean_perbit_bias": 0.5961,
+   "decode_HD": 3,
+   "source": "race-3 gate",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23c",
+   "width": 40,
+   "t": 0,
+   "d2q": 192,
+   "register_class": "dirty(11/16 systematic)",
+   "mean_perbit_bias": 0.2868,
+   "decode_HD": 6,
+   "source": "race-3 gate",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23c",
+   "width": 40,
+   "t": 0,
+   "d2q": 125,
+   "register_class": "dirty(11/16 systematic)",
+   "mean_perbit_bias": 0.4926,
+   "decode_HD": 3,
+   "source": "race-3 gate",
+   "note": ""
+  },
+  {
+   "die": "marrakesh",
+   "date": "2026-07-23c",
+   "width": 32,
+   "t": 0,
+   "d2q": 195,
+   "register_class": "dirty",
+   "mean_perbit_bias": 0.5271,
+   "decode_HD": 0,
+   "source": "race-3 twin32",
+   "note": ""
+  }
+ ],
+ "lambda_bit_fits": [
+  {
+   "label": "marrakesh w40 t0 pre-hygiene (C4973 ladder)",
+   "n_points": 4,
+   "lambda_bit": 0.00302,
+   "intercept_bias": 0.8017,
+   "points": [
+    [
+     37,
+     0.7578
+    ],
+    [
+     111,
+     0.5393
+    ],
+    [
+     185,
+     0.438
+    ],
+    [
+     259,
+     0.3853
+    ]
+   ]
+  },
+  {
+   "label": "marrakesh w40 t0 CLEAN register (race-4)",
+   "n_points": 3,
+   "lambda_bit": 0.00289,
+   "intercept_bias": 0.9147,
+   "points": [
+    [
+     43,
+     0.8248
+    ],
+    [
+     129,
+     0.6047
+    ],
+    [
+     217,
+     0.4987
+    ]
+   ]
+  },
+  {
+   "label": "marrakesh w40 t0 dirty (race-5)",
+   "n_points": 3,
+   "lambda_bit": 0.00267,
+   "intercept_bias": 0.694,
+   "points": [
+    [
+     29,
+     0.6746
+    ],
+    [
+     87,
+     0.5091
+    ],
+    [
+     190,
+     0.4292
+    ]
+   ]
+  },
+  {
+   "label": "kingston w40 t0 clean-class (race-6)",
+   "n_points": 3,
+   "lambda_bit": 0.00396,
+   "intercept_bias": 0.9627,
+   "points": [
+    [
+     55,
+     0.7744
+    ],
+    [
+     165,
+     0.4953
+    ],
+    [
+     167,
+     0.5023
+    ]
+   ]
+  }
+ ],
+ "rho_t_rows": [
+  {
+   "matched_d2q": 167,
+   "die": "kingston",
+   "clean": true,
+   "bias_t0": 0.5023,
+   "bias_t80": 0.377,
+   "rho_t": 0.7504,
+   "ci95": [
+    0.738,
+    0.7616
+   ],
+   "pubs": [
+    16,
+    32
+   ],
+   "status": "CLEAN point #2 (race-6)"
+  },
+  {
+   "matched_d2q": 217,
+   "die": "marrakesh",
+   "clean": true,
+   "rho_t": 0.7427,
+   "ci95": [
+    0.7307,
+    0.7542
+   ],
+   "status": "CLEAN point #1 (race-4)"
+  },
+  {
+   "matched_d2q": 125,
+   "die": "marrakesh",
+   "clean": false,
+   "rho_t": 0.797,
+   "status": "CONFOUNDED (race-3 dirty register) \u2014 not a curve point"
+  },
+  {
+   "matched_d2q": 190,
+   "die": "marrakesh",
+   "clean": false,
+   "rho_t": 0.796,
+   "status": "CONFOUNDED (race-5 dirty) \u2014 not a curve point"
+  },
+  {
+   "matched_d2q": 195,
+   "die": "marrakesh",
+   "clean": false,
+   "rho_t": 0.531,
+   "status": "CONFOUNDED (race-3, n32 + dirty) \u2014 not a curve point"
+  }
+ ],
+ "routing_variance_row": {
+  "note": "d2q is a RANDOM VARIABLE of the transpile, not a device constant",
+  "marrakesh_w40_best_of_20_same_week": [
+   146,
+   194,
+   205
+  ],
+  "marrakesh_w40_best_of_100": 125,
+  "marrakesh_w40_best_of_100_clean8_excluded": "INFEASIBLE (0/100) \u2014 device-limitation, race-6 abort",
+  "marrakesh_w40_best_of_100_clean6_excluded": 217,
+  "kingston_w40_best_of_100": 167,
+  "exclusion_footprint_marrakesh": "+92 slots (125->217) for 6 excluded qubits; infeasible for 8"
+ },
+ "defect_registry": {
+  "taxonomy": [
+   "tilted (threshold-correctable, cal-visible)",
+   "stuck-at-readout (cal-visible, threshold-uncorrectable)",
+   "circuit-level-bad (cal-INVISIBLE, only a dynamic pre-gate catches it)"
+  ],
+  "marrakesh_2026-07-23": {
+   "near_stuck": [
+    113
+   ],
+   "circuit_bad": [
+    114,
+    115
+   ],
+   "measured_bad": [
+    67,
+    119,
+    133,
+    134,
+    135
+   ],
+   "tilted_correctable": [
+    4,
+    33,
+    65,
+    68,
+    69,
+    73,
+    78
+   ]
+  },
+  "kingston_2026-07-23": {
+   "stuck_98pct_with_leakage": [
+    16
+   ],
+   "tilted_correctable": [
+    92,
+    101
+   ],
+   "note": "flown register clean-class (pre-gate exact x2, zero flips)"
+  },
+  "warning": "calibration-dependent; re-screen per window; the clean-ladder pre-gate is the only guard for class-3 defects"
+ },
+ "standing_usage": "pre-flight: predict decoder success from the matching series' lambda_bit + planned shots; place gates INSIDE measured capability (C4977 lesson); treat routing depth as a lottery \u2014 pre-register caps and best-of-N; guard grades with the free t=0 pre-gate (C4980/81 lesson)"
+}
