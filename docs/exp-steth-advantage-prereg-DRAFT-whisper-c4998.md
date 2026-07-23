@@ -70,11 +70,18 @@ Haar-random, else known-structure probes beat the worst-case floor.*
   Elder's ~68 at k=12 concurs to rounding). The wall bounds the *memoryless learner's* T in the
   lower bound (Q, the with-memory arm, is governed by its separate O(1) upper bound). Consequence,
   printed plainly: **k=6 is regime-marginal** — the theorem-covered single-copy window is
-  T ∈ [floor≈4, wall≈6.5), too narrow to carry weight — so k=6 is flown as a descriptive rung and
-  the theorem citation rides on **k=9 and k=12** (windows [8,21) and [16,69)). C1's empirical
-  copies-to-criterion sweep may exceed the wall (the theorem is silent there; the measured number
-  is still the measured number); the FLOOR citation applies only sub-wall. G3 sims print all
-  margins per rung.
+  T ∈ [floor≈4, wall≈6.5), too narrow to carry weight (the unknown O(1) constant can push the true
+  floor past the wall — Elder #828, arithmetic co-confirmed: windows 1.61× / 2.65× / 4.34× at
+  k=6/9/12) — so the theorem citation rides on **k=9 and k=12** only. **Citation-demoted ≠
+  fit-dropped (Elder #828 refinement)**: k=6 REMAINS a measured rung in the exponent-fit dataset —
+  the fit is empirical (does the measured Q-vs-C1 ratio grow as 2^(k/3)?) and does not require the
+  theorem to be valid at each k; without it the fitted-exponent headline collapses to a 2-point
+  line with no CI. Three measured rungs, two theorem-carrying. **Reach option, named not banked**:
+  k=15 as a third theorem-carrying rung (window [32,228) = 7.1×) — 60-qubit two-copy transient
+  width and deeper Haar compile; flown only if the G3/G4 budget-and-depth check clears it. C1's
+  empirical copies-to-criterion sweep may exceed the wall (the theorem is silent there; the
+  measured number is still the measured number); the FLOOR citation applies only sub-wall. G3 sims
+  print all margins per rung.
 - **WIN criterion (frozen text)**: at each rung, Q reaches ≥95% blind accuracy over M = 40 sealed
   trials within its copy budget AND executed C1 at Q's copy count is within CI of chance; the
   ADVANTAGE claim is the growth-law gate above (fitted exponent consistent with 1/3, excluding 0,
