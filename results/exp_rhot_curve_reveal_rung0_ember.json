@@ -1,0 +1,34 @@
+{
+ "card": "exp_rhot_curve_reveal \u2014 RUNG0_n40 (pre-gate CLEAN-label adjudication; measurement, no grade)",
+ "role": "Ember SEALER reveal, C4214 rho_t curve C4983",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "rung0_n40": {
+  "n_bits": 40,
+  "s_str": "0000111000000101111011111011000100101101",
+  "salt": "1a3a0f2ed769b5c0d34d7e2935324ea9",
+  "commitment_sha256": "73e941b3c98dd6ca037c128604b3eab899019aa1fa7a72038d219360fbdfb32d",
+  "commitment_verifies": true
+ },
+ "ladder_m0_d66": {
+  "shat": "0000111000000101111011111011000100101101",
+  "HD_identity": 0,
+  "wrong_positions": []
+ },
+ "ladder_m1_d198": {
+  "shat": "0000111000000101111111111011000100101101",
+  "HD_identity": 1,
+  "wrong_positions": [
+   19
+  ]
+ },
+ "clean_label": "NOT-CLEAN (rule-1: a ladder rung is not exact)",
+ "held": [
+  "race_n40 (stage-2)"
+ ],
+ "cause_analysis": {
+  "label_by_rule": "NOT-CLEAN \u2014 rule-1 letter (ladder_m1 not exact) governs, correctly applied.",
+  "cause": "SHOTS-LIMITED, not register dirt. Evidence: (1) ladder_m0 on the SAME register decoded pos19 CORRECTLY at d66 (HD-0) => the pos-19 qubit is clean, not stuck/tilted; (2) ladder_m1 is at d198 (deep base b=66) with only 20k shots; (3) single bit, mild flags. So m1's HD-1 is depth(198)x20k-shot attenuation of a CLEAN bit \u2014 the physics the curve measures \u2014 NOT an instrument defect.",
+  "implication": "the CLEAN-label strip is CONSERVATIVE here: the register is clean (per m0), so the twin/t80 measurement arms at 160/220/280 remain trustworthy. Record cause=shots-limited in the verdict so the curve data are not mis-trusted as register-dirty."
+ }
+}
