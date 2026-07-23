@@ -80,3 +80,13 @@ counts"; no hard per-class floor needed).
 carry (a) the CROSS hold-role coin (Elder item 1), and (b) the W1/W2 shared-run measurement
 semantics (Fact 3 restructure). Ember's one-command path covers both together when G3″ fixes the
 final measurement structure.
+
+**Final seal-structure decisions (Elder #867 + build answers — NO re-seal needed):**
+- Count imbalance: 24,000 KEPT, grader-confirmed — realized-count CI absorbs it natively (min-class
+  7,876 → ~6.3σ); the imbalance is the metadata-clean independent-draw property working, not a defect.
+- CROSS hold-role ½/½: **deterministic-alternating within CROSS occurrences** (Elder's allowed
+  option) — build-level rule, no secret content, estimator reduces to ¼⟨d,H(d)⟩_HS exactly.
+- W1/W2 semantics: the sealed class-per-index applies **per pad run**, uniformly to every witness's
+  pairing in that run — the existing 3-class seal covers the shared-run structure unchanged.
+- Main block gates (frozen): cal PASS + null-validity λ_hold(witness-subspace) + CROSS ½/½
+  confirmed in the committed build code.
