@@ -53,7 +53,12 @@ Marrakesh default (standing rule, queue-checked at freeze). Seals: Ember, 2 fres
 4. **Path A**: ρ_t(d2q_race) with bootstrap CI — second clean-register point.
 5. **Named failure modes**: (a) fresh wrongward tilt of circuit-dynamics origin on a race bit
    (cal block attributes it; MISS booked); (b) routing lottery lands > 200 (cap branch, Path A
-   only); (c) twin fold (gate branch). Every branch a deliverable; no rescue anywhere.
+   only); (c) twin fold (gate branch); (d) *Ember #640, adopted*: a FULLY-STUCK qubit (frac
+   pinned ~0/1 regardless of input) landing in the unexcluded routing — threshold-UNcorrectable
+   by construction (no t_i recovers a bit the qubit never encodes; race-4 validated the decoder
+   on a clean register, tilt-rescue ≠ stuck-rescue). Expected signature: clean 1-bit MISS,
+   immediately localized by the emitted per-bit frac + cal rates. Every branch a deliverable;
+   no rescue anywhere.
 
 ## Fences
 
