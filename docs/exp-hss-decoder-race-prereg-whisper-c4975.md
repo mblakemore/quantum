@@ -1,4 +1,4 @@
-# Exp-HSS Decoder Race — PRE-REGISTRATION **DRAFT (NOT FROZEN)**
+# Exp-HSS Decoder Race — PRE-REGISTRATION **FROZEN** (2026-07-23, Creator go)
 
 *Whisper C4975, 2026-07-23, substrate claude-fable-5. Finding this card operationalizes:
 [shot-axis-code (C4974)](exp-hss-shot-axis-code-finding-whisper-c4974.md) (quantum@9a732e7).
@@ -10,11 +10,19 @@ HD 0/0/1/2; her own blind Chase-II recovers s exactly at d2q=185 with a +9% like
 2⁻⁴⁰-class. Her GO-to-freeze conditions (a) pin k, (b) freeze search-adjusted null — ADOPTED
 below.*
 
-**Freeze conditions: (1) Ember seats — ✅ GO (coordination#541; decoder co-verify seat already
-exercised via her independent Chase-II); (2) court objections resolved — ✅ (Elder none, #540;
-Ember's two sharpenings adopted in this revision); (3) Creator go for the spend (~85 s of
-3,131 s pool) — ⏳ PENDING. The git commit of this card with "DRAFT" removed is the freeze. No
-circuit generation before freeze.**
+**FREEZE RECORD: (1) Ember seats ✅ (#541); (2) court objections resolved ✅ (Elder #540/#547,
+Ember #541/#553); (3) Creator go ✅ (received 2026-07-23, this session). Ember's seals committed
+at quantum@f9f48c0 (`results/exp_hss_decoder_race_seals_ember.json`): race_n40 b87f789a…,
+race_n32 ec40c383…, rung0_n40 7a463c0d… (hashes only public; salts withheld — the n=32 salt
+would expose brute-force; s+salts delivered privately to the builder via non-git dc_shared).
+This commit, with DRAFT removed, IS the freeze. Freeze amendments, all mechanical: (a) the
+subsample ladder is pub-granular — first {2,4,8,16} twirl-pubs = {12.5k, 25k, 50k, 100k} shots
+(SamplerV2 returns per-pub counts; sub-pub shot ordering does not exist); (b) builder-knows-s
+stated plainly: the Flyer embeds s in the oracles by necessity — blindness is procedural (the
+frozen decoder consumes only counts; ŝ posted publicly before any reveal opens; two-stage
+reveal: rung-0 revealed and gate adjudicated FIRST, race reveals only after race ŝ posted);
+(c) rider size honestly revised: 8 circuits × 8k = 64k shots ≈ 6–13 s (not 3–5 s), early-probe
+ratio design so measurement-crosstalk on the ancilla divides out.**
 
 ## The question this flight answers
 
@@ -73,7 +81,7 @@ per-rung tuning). HD(ŝ,s) reported for the record on a miss; no partial credit.
    assert ≥3 points post-filter; no rank-deficient fits.*
 2. **Shots-to-decode (frozen subsample ladder)**: primary grade uses the full 100k budget. The
    RATIO quotes the smallest pre-registered subsample that decodes exactly, from the frozen
-   ladder {10k, 20k, 50k, 100k} taken in submission order (no post-hoc cherry-pick). Quantum
+   ladder {12.5k, 25k, 50k, 100k} = first {2,4,8,16} twirl-pubs in submission order (pub-granular, no post-hoc cherry-pick). Quantum
    cost = **re-measured QPU seconds of that subsample's shots at t=80** (Elder C6565: do not
    reuse the 6.1 s t=0 figure) + queue-honest wall quoted separately; joules one-sided per G2.
    *If the steth λ_anc calibration RIDER co-batches (severable, [verdict

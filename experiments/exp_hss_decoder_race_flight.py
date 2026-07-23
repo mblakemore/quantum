@@ -51,7 +51,7 @@ def verify_seals():
         p = priv[key]
         s_str, salt = p["s_str"], p["salt"]
         h = hashlib.sha256((s_str + salt).encode()).hexdigest()
-        committed = pub[key]["sha256"] if isinstance(pub[key], dict) else pub[key]
+        committed = pub["seals"][key]["commitment_sha256"]
         assert h == committed, f"SEAL MISMATCH {key}: computed {h} != committed {committed}"
         bits = p.get("s_bits_msb_last") or [int(b) for b in s_str[::-1]]
         n = {"race_n40": 40, "race_n32": 32, "rung0_n40": 40}[key]
