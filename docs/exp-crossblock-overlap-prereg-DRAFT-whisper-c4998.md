@@ -110,12 +110,36 @@ the cal block alone (~10 s).
 - ✅ **G1′ (Elder) — PASS-to-freeze, both edits applied above** (general#849, grade quantum@3f55f06):
   algebra confirmed symbolically (Δ = ¼‖ρ_A−ρ_N‖²_HS), CI confirmed (5.08σ at 3,500/class),
   conditional-label audit PASS, null-branch falsifiability clean, fold rules kept.
-- **G2′ (Ember — sealer)**: re-scoped seal (assignment sequence), leak check against her 4
-  requirements on THIS card's structure, seal generation on freeze.
-- **G3′ (Whisper — $0 sims)**: exactness gate (pipeline recovers a planted rotation in noiseless
-  sim, closed-form checks); baseline-cancellation verification; measured-λ_anc insertion into the
-  margin; freeze measurement counts and the systematics budget.
-- **G4′ (Creator + budget)**: the quote above stands; GO on freeze.
+- ✅ **G2′ (Ember) — DELIVERED** (coordination#853, quantum@a3ac200): seed-committed assignment
+  sequence binding the whole stream (count-freeze needs no re-seed; **generation on freeze**);
+  two freeze-blocking confounds identified (routing, blind-stream) — both quantified and closed
+  in G3′ below; Elder grader-endorsed all four (general#854).
+- ✅ **G3′ (Whisper) — RUN + PASS, all freeze-blockers closed** (`exp_crossblock_c4998_g3prime_sims.py`
+  → artifact incl. the G2′ confound quantification):
+  - **Exactness**: Δ = ¼‖ρ_A−ρ_N‖²_HS holds to machine precision; blind end-to-end: planted
+    rotation 4.28σ, null −0.14σ, realized-count Binomial CIs.
+  - **Power correction (frozen)**: 3,500/class = only 53% power to *observe* ≥5σ →
+    **5,500/class (16.5k SWAPs), expected 6.37σ, 91% power**. Quote updated below.
+  - **Routing (REQ3′, frozen rule)**: **depth-match all three classes** — pad AA/NN routing to
+    CROSS's routed 2q-depth. Elder verified this restores the HS identity through a common noise
+    channel (Δ = ¼‖E(ρ_A)−E(ρ_N)‖²_HS — conservative: E only shrinks signal), and the routing
+    overhead then cancels exactly. Adjacency-first N-block selection minimizes the common depth.
+    Unmatched sensitivity for the record: ≤2.8% of signal per ≤3 stray SWAPs.
+  - **Readout asymmetry (REQ2′, closed)**: grid 0–3% both directions — **worst positive bias is
+    exactly 0.00%**: readout error is shrinkage-only, one-sided-safe; it cannot fake Δ > 0.
+    Profile-match tolerance ≤1% absolute retained (limits shrinkage to ~3%).
+  - **Blind-stream (REQ1′, closed)**: posted stream = (measurement index, canonicalized parity
+    bit) only; single-measurement class recovery 35.3% vs 33.3% chance (1.9% per-bit leak = the
+    signal's own statistics); estimator code frozen and committed pre-flight, so the leak cannot
+    tune anything.
+  - **Order (REQ4′)**: the sealed sequence flies in its committed random order — never
+    class-sorted (anti drift-aliasing).
+  - **Systematics budget (frozen)**: routing ≈ 0 (depth-matched) + readout ≤ 0 (one-sided) +
+    envelope-mismatch < 0.1% + λ_anc term (measured at flight, cal block first) ≈ **0.3σ total
+    at 5,500/class** — against expected 6.37σ, (Δ − syst 1σ) ≥ 5σ holds with margin.
+- **G4′ (Creator + budget)**: updated quote **250 QPU-s worst-case** (16.5k SWAPs + C1 + cals)
+  vs 2,131 s pool. **CARD IS FREEZE-READY — awaiting GO.** On GO: Ember generates seals, λ_anc cal
+  block flies first (fold rule), then the main block.
 
 ---
 

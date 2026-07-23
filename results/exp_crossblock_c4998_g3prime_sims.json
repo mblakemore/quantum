@@ -1,0 +1,100 @@
+{
+ "card": "exp_crossblock_c4998_g3prime_sims",
+ "cycle": "C4998",
+ "substrate": "claude-fable-5",
+ "prereg": "docs/exp-crossblock-overlap-prereg-DRAFT-whisper-c4998.md",
+ "A_exactness": {
+  "delta_exact": 0.05191,
+  "quarter_hs2": 0.05191,
+  "identity_holds": true,
+  "delta_sampled_3500_per_class": 0.03643,
+  "se": 0.01018,
+  "sigma": 3.58,
+  "pass": true
+ },
+ "B_false_delta_table": [
+  {
+   "mismatch": "envelope -1%",
+   "false_delta": 1e-06
+  },
+  {
+   "mismatch": "envelope -2%",
+   "false_delta": 5e-06
+  },
+  {
+   "mismatch": "envelope -5%",
+   "false_delta": 3.3e-05
+  },
+  {
+   "mismatch": "envelope -10%",
+   "false_delta": 0.000132
+  },
+  {
+   "mismatch": "tilt 0.005",
+   "false_delta": 5e-06
+  },
+  {
+   "mismatch": "tilt 0.01",
+   "false_delta": 2e-05
+  },
+  {
+   "mismatch": "tilt 0.02",
+   "false_delta": 7.7e-05
+  }
+ ],
+ "C_blind_end_to_end": {
+  "planted_rotation": {
+   "delta": 0.04399,
+   "se": 0.01027,
+   "sigma": 4.28,
+   "realized_counts": {
+    "0": 3444,
+    "1": 3576,
+    "2": 3480
+   }
+  },
+  "null_no_rotation": {
+   "delta": -0.00144,
+   "se": 0.01017,
+   "sigma": -0.14,
+   "realized_counts": {
+    "0": 3501,
+    "1": 3548,
+    "2": 3451
+   }
+  }
+ },
+ "note": "B quantifies the G1' attribution condition: block-local mismatches enter Delta at SECOND order (1/4||d_rho||^2); the frozen systematics budget converts the table into the matched-<<-Delta requirement.",
+ "D_g2prime_confounds_quantified": {
+  "req1_parity_leak": {
+   "single_meas_class_recovery": 0.3526,
+   "chance": 0.3333,
+   "per_bit_leak": 0.0193,
+   "defense": "frozen estimator committed pre-flight + class-blind stream format (index,parity only); leak is the signal's own statistics, cannot be eliminated, cannot tune a frozen estimator"
+  },
+  "req3_routing": {
+   "false_delta_per_extra_swap_on_cross": [
+    0.00048,
+    0.00096,
+    0.00143
+   ],
+   "pct_of_signal": [
+    0.9,
+    1.9,
+    2.8
+   ],
+   "rule": "adjacency-first N-block selection + routed 2q-depth printed per class, matched within <=2 SWAPs (<=1.9%)"
+  },
+  "req2_readout_asym": {
+   "bias_at_1pct_vs_2pct": -0.0015,
+   "pct": -2.9,
+   "key_property": "shrinkage-dominated: readout flips pull all p toward 0.5 -> bias is NEGATIVE (cannot fake a positive Delta, only shrink it) \u2014 one-sided-safe; profile-match tolerance <=1% absolute"
+  },
+  "power_correction": {
+   "finding": "3500/class = 53% power to observe >=5sigma (sampled realizations 3.58/4.28sigma)",
+   "frozen": "5500/class = 16.5k SWAPs, expected 6.37sigma, 91% power",
+   "qpu_quote": "250s worst-case"
+  },
+  "systematics_budget_total": "~4-5% of signal ~ 0.003 ~ 0.3sigma at 5500/class (routing<=1.9% + readout<=2.9% one-sided + envelope<0.1% + lambda_anc flight-measured term added at flight)"
+ }
+}
