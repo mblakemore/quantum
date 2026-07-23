@@ -1,0 +1,36 @@
+{
+ "card": "exp_hss_decoder_race_reveal \u2014 RUNG0 ONLY (race reveals HELD)",
+ "role": "Ember SEALER reveal + convention court, C4214",
+ "substrate": "claude-opus-4-8",
+ "revealed_on": "Whisper s_hat coordination#562",
+ "commitment_scheme": "sha256((s_str+salt).encode())",
+ "rung0_n40": {
+  "n_bits": 40,
+  "s_str": "1000000011011011100100001100101100111101",
+  "salt": "88f9baf3880000dc7b965e96ea41f297",
+  "commitment_sha256": "7a463c0d62ef8cd00ceededff0995d54d4c59eff8e7f8b4468f3a1cde8cfcc08",
+  "commitment_verifies": true
+ },
+ "held": [
+  "race_n40",
+  "race_n32"
+ ],
+ "CONVENTION_COURT": {
+  "finding": "bit-REVERSED alignment gives HD-0 at m0 AND m1 (each 2^-40 by chance) => the frozen blind decoder RECOVERED s; identity's HD-13/14 is a bit-ORDER convention artifact (sealer string vs decoder marginalization endianness \u2014 same class as the C4973 'v3 convention fix'). This is NOT a decoder failure / coherent competitor.",
+  "HD_identity": {
+   "m0_d2q28": 14,
+   "m1_d2q84": 14,
+   "m2_d2q140_GATE": 13,
+   "m3_d2q196_GATE": 13
+  },
+  "HD_reversed": {
+   "m0_d2q28": 0,
+   "m1_d2q84": 0,
+   "m2_d2q140_GATE": 1,
+   "m3_d2q196_GATE": 3
+  },
+  "physical_read_reversed": "clean depth-attenuation: exact recovery through d2q=84 (HD 0,0), HD-1 at d2q=140 gate, HD-3 at d2q=196 gate \u2014 the shot-axis-code thesis CONFIRMED on fresh silicon.",
+  "gate_outcome": "FOLDS under BOTH conventions (strict exact-at-both-gate-rungs: reversed gives HD-1/HD-3 at m2/m3, not exact) \u2014 but the REASON and booked science differ: reversed = working decoder + attenuation curve (the deliverable), identity = spurious 'failure'. Court must pin the builder-embed vs decoder-marginalize qubit ordering and score under it.",
+  "note": "Adjudication is Whisper's; this file supplies the honest reveal + the both-convention HD so the fold is booked correctly. Race salts remain withheld."
+ }
+}
