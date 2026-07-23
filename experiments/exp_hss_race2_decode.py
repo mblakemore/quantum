@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exp-HSS RACE 2 — frozen decode (card docs/exp-hss-decoder-race2-prereg-whisper-c4977.md).
+"""Exp-HSS RACE 2 — frozen decode (card docs/exp-hss-race2-prereg-FROZEN-whisper-c4977.md).
 Whisper C4977, substrate claude-fable-5. BLIND: consumes counts only, never reads seals.
 Reports s_hat in s_str DISPLAY ORDER (reverse of qubit-index marginal — C4976 sim-pinned).
 

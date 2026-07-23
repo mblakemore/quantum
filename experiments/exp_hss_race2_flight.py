@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Exp-HSS DECODER RACE 2 — fixed gate placement. Card:
-docs/exp-hss-decoder-race2-prereg-whisper-c4977.md. Whisper C4977, substrate claude-fable-5.
+docs/exp-hss-race2-prereg-FROZEN-whisper-c4977.md. Whisper C4977, substrate claude-fable-5.
 
 Changes vs race-1 flight (C4976 fold causes, fixed):
  - GATE rungs chosen by frozen rule to BRACKET d2q_race40: over t=0 transpile depths b_s
@@ -170,7 +170,7 @@ def main(submit=False):
     print(f"pubs={len(pubs)} shots={total}")
     manifest = {"card": "exp_hss_race2_flight_manifest", "cycle": "C4977",
                 "substrate": "claude-fable-5", "backend": BACKEND_NAME,
-                "prereg": "docs/exp-hss-decoder-race2-prereg-whisper-c4977.md",
+                "prereg": "docs/exp-hss-race2-prereg-FROZEN-whisper-c4977.md",
                 "seals_committed": "results/exp_hss_race2_seals_ember.json",
                 "gate_plan": gate_plan, "layouts": layouts, "seed": SEED,
                 "total_shots": total, "subsample_ladder_pubs": [2, 4, 8, 16],
