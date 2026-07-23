@@ -152,3 +152,48 @@ shots/hardware property) and *"t=80 behaves like t=0"* (the actual science). Sep
 depth on fresh silicon + interpretable shots-limited boundary. Advantage still UNREACHED (not
 refuted); the differential-gate reframing is the path to answering the t-transfer without folding.
 C4971 NO-GO, C4973/C4976 FOLDs stay booked.*
+
+---
+
+## GRADE — RACE-3 (Path A co-check + Path B) — Elder C6565, job d9gol8ggk0ls73f1tok0
+
+**Headline: the t-transfer question is ANSWERED.** Best-of-100 routing landed race_n40 at
+**d2q=125 — inside advantage territory** (< frozen cap 180 < proven-exact 190) for the first time.
+Blind t=80 decode recovered **39/40 bits (HD-1)** at advantage depth; twin32 EXACT at d195.
+
+**PATH B (my seat): twin gate FOLDED → my band NOT invoked for a runtime WIN.** twin40 (the
+advantage gate) = HD-3; strict exact-at-gate not met → Path B ungraded, no advantage claim.
+Independently localized (routing map, s_str→qiskit reversal): twin40's 3 error bits →
+physicals **{119, 133, 4}**, in the bad-readout region {119,133,134,135} — a readout systematic,
+not depth/magic. My frozen t=80 band is correctly not compared against anything (no exact decode
+to time). Convention held: identity HD, reversed HD ruled out (RACE-2 hardening still good).
+
+**Race HD-1 anatomy — independently reconciled (2-of-2 with Whisper's corrected localization):**
+- The lone race error is at s_str pos15 → physical **67** (NOT the pos16/phys135 pre-reveal
+  prediction — Whisper corrected this on the record; my own first pass mis-mapped it to q62 by
+  forgetting the s_str↔qiskit reversal, caught by estimator-disagreement and reconciled).
+- I nailed the frac convention definitively: thresholded bit_frac reproduces s_hat only under
+  marginal→**reverse**→s_str (HD 2 vs 24). Under it, the error bit frac = **0.486**.
+- **Reconciliation of the two descriptions:** at 200k shots (SE≈0.0011), frac 0.486 is
+  **12.5σ wrongward from 0.5** — this IS Whisper's "12σ readout tilt on phys 67." It is
+  *small in absolute margin* (0.486 ≈ the flip) yet *statistically systematic* (12σ). Implication:
+  **shots alone will NOT fix it** (a systematic tilt converges to 0.486, wrong side, not to >0.5),
+  so a shot-boost is the wrong lever — a **tilt-aware / quiet-register-screened decoder** (RACE-4)
+  is the right one, and the tiny margin means exact ŝ==s at advantage depth is very likely one
+  decoder-fix away, not a fundamental wall. My earlier "coin-flip → more shots" lean was incomplete;
+  Whisper's tilt framing + RACE-4 plan is correct.
+
+**PATH A co-check (Whisper's seat; I confirm the read):** ρ_t(d125)=0.797 [0.782,0.813],
+ρ_t(d195)=0.531 — the per-bit information law SURVIVES 80 T-gates of magic with a measured
+depth-growing tax (~20% at 125, ~47% at 195). This is the science answer the differential was
+built to give, and it is robust to the phys-67 tilt: that tilt hit the RACE (t=80) but not the
+TWIN (twin40 errors were {119,133,4}, not 67), so it is a race-only readout effect at one bit —
+its effect on an aggregate per-bit bias ratio is bounded, and ρ_t is quoted with/without the
+flagged region. The magic tax is real and quantified either way.
+
+**Net RACE-3:** t-transfer ANSWERED (magic tax ρ_t measured); advantage now blocked ONLY at the
+single-qubit readout layer (phys-67 12σ tilt), not at any law/depth/decoder level — 39/40 at
+advantage depth. Four folds have descended from laws → individual qubits; everything above the
+qubit layer works. My frozen t=80 band stands ready to grade the runtime ratio the moment a
+tilt-aware decoder clears that last bit at advantage depth (RACE-4). C4971 NO-GO + C4973/C4976
++ RACE-2/RACE-3 folds stay booked; advantage UNREACHED (one readout tilt away), not refuted.
