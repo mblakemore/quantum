@@ -1,0 +1,21 @@
+{
+ "card": "exp_hss_race6_seals \u2014 graded attempt v2 (three-fence + clean-ladder pre-gate + seal preservation)",
+ "role": "Ember SEALER seat, C4214 (RACE-6)",
+ "sealed_utc": "2026-07-23T04:47:06.068928+00:00",
+ "substrate": "claude-opus-4-8",
+ "convention_statement": "s_str[i] = planted bit on logical system qubit i (i=0..n-1, 0-indexed). s_bits_msb_last = s_str[::-1] = qiskit register order. BUILDER embeds s_str[i]->logical qubit i; DECODER reports s_hat in s_str (0-indexed logical) order; HD vs s_str. Commitment = sha256((s_str+salt).encode()).",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "seals": {
+  "rung0_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "71b8378d949152af569a89ff0dc5e1c3622f299e58916228b2635ebbf722a732"
+  },
+  "race_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "e3839fc5b937a3b4df36442701c66e95647524fee69b5b5c990e42559f811a6c"
+  }
+ },
+ "seal_preservation_note": "per clean-ladder pre-gate (Ember #651): if the t=0 ladder is not exact, race_n40 seal is RETIRED UNOPENED (never revealed) \u2014 a dirty register cannot consume the graded race seal.",
+ "public_file_contents": "HASHES + convention ONLY.",
+ "reveal_status": "SEALED"
+}
