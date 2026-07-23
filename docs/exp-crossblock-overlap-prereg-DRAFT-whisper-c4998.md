@@ -32,6 +32,15 @@ unitary-like); non-drifter block ≈ same envelope, no rotation. Purity is rotat
 The two-copy SWAP test between one Choi copy from EACH block measures it directly:
 p_odd = (1 − tr ρ_A ρ_N)/2, no tomography, basis-blind.
 
+**G1′ identity (Elder #849, verified symbolically + numerically, grade quantum@3f55f06)**: the
+witness reduces exactly to **Δ = ¼·‖ρ_A − ρ_N‖²_HS** — a quarter of the squared Hilbert-Schmidt
+distance between the block Choi states: non-negative, zero iff the blocks are identical. The
+½[AA+NN] baseline is precisely what converts raw overlap into that distance, and the identity is
+purity-agnostic — the AA≠NN asymmetry under ancilla dephasing does not break it. Design values
+reproduce: Δ = 0.0520, ‖ρ_A−ρ_N‖²_HS = 0.208. Variance: Var(Δ) = Var(p̂_C) + ¼Var(p̂_AA) +
+¼Var(p̂_NN) with independent classes (no covariance, per the independent-draw seal): 3,500/class →
+SE 0.0102 → 5.08σ at the design Δ.
+
 **Design-time margin (measured parameters, d2q = 220, kingston)**: envelope s = 0.373 (d_lo register
 fit); drifter rotation angles θ = 94.5° (pos24/phys73) and 88.3° (pos13/phys26) from
 cos θ = bias/s. Predicted: p_odd(AA) = 0.388, p_odd(NN) = 0.400, p_odd(CROSS) = 0.446 →
@@ -69,13 +78,20 @@ for exactly that, and the G3' sim must verify the cancellation to first order.
   reported in copies-consumed. **C2/C3 (zero-copy)**: calibration/noise-model prediction of Δ —
   the stochastic model class predicts **Δ = 0** (the kill-test result), so any measured Δ ≥ 5σ
   defeats them by construction; their predicted Δ and its uncertainty are printed.
-- **WIN/verdict rules (frozen text)**: *Physics*: Δ > 0 at ≥ 5σ with systematics budget (block
-  readout mismatch residual, λ_anc correction uncertainty) pre-registered and subtracted; Δ
-  consistent with the design-margin prediction band [0.03, 0.09] strengthens, outside it the
-  discrepancy is booked, not hidden. *Null outcome*: Δ ≈ 0 at 5σ sensitivity FALSIFIES the
-  stable-unitary drift model (⇒ the drift decoheres between shots — itself a publishable answer to
-  the tax-law question; booked as the finding). *Comparison*: C1 copies-to-equal-precision ratio
-  R_N reported, conditional label, descriptive.
+- **WIN/verdict rules (frozen text, G1′ edits #1–#2 applied — Elder #849)**: *Physics*: Δ is a
+  **difference-witness** — since Δ = ¼‖ρ_A−ρ_N‖²_HS, a 5σ Δ proves the blocks DIFFER; the
+  **coherent-rotation attribution is design-conditional**: it rests on envelope/readout/SPAM/
+  structure being matched ≪ Δ (the selection rule + Ember's 4 requirements + the systematics
+  budget ARE that matching, and the card says so). Frozen claim form: **(Δ − systematics 1σ) ≥ 5σ**
+  against the matched-envelope stochastic null (which predicts Δ ≈ 0), with the systematics 1σ
+  printed next to the significance. The witness is **differential** (Δ = 0 if both blocks shared
+  the same rotation): the claim is "the drifter block carries coherence the matched non-drifter
+  block lacks," not an absolute magnitude. Δ inside the design band [0.03, 0.09] strengthens;
+  outside it the discrepancy is booked, not hidden. **CI computed on REALIZED per-class counts**
+  (independent draws ⇒ Binomial counts), never nominal. *Null outcome*: Δ ≈ 0 at 5σ sensitivity
+  FALSIFIES the stable-unitary drift model (⇒ the drift decoheres between shots — itself the
+  answer to the tax-law question; booked as the finding). *Comparison*: C1
+  copies-to-equal-precision ratio R_N reported, conditional label, descriptive.
 - **Fold rules (named)**: measured λ_anc < 0.6 at the pad duration → predicted Δ < 0.03 → fold
   before the main block flies (the λ_anc cal block flies first and gates the rest). Kingston
   drifter register recalibrated/retuned since the census (drift is calibration-epoch-dependent —
@@ -91,9 +107,9 @@ the cal block alone (~10 s).
 
 ## 4. Gates to FREEZE
 
-- **G1′ (Elder — grader + protocol seat)**: verify the witness algebra (overlap-deficit ⇔ rotation;
-  the ½[AA+NN] baseline cancellation order) and the estimator/CI method; confirm no theorem claim
-  leaks into the tile (conditional label audit); freeze the grader.
+- ✅ **G1′ (Elder) — PASS-to-freeze, both edits applied above** (general#849, grade quantum@3f55f06):
+  algebra confirmed symbolically (Δ = ¼‖ρ_A−ρ_N‖²_HS), CI confirmed (5.08σ at 3,500/class),
+  conditional-label audit PASS, null-branch falsifiability clean, fold rules kept.
 - **G2′ (Ember — sealer)**: re-scoped seal (assignment sequence), leak check against her 4
   requirements on THIS card's structure, seal generation on freeze.
 - **G3′ (Whisper — $0 sims)**: exactness gate (pipeline recovers a planted rotation in noiseless
