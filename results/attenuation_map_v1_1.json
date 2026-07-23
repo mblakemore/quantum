@@ -646,5 +646,12 @@
     "corrected_design_rule": "avoid back-to-back identical pad pairs (interleave/shuffle); or avoid pads entirely (the C4985 organic design)"
    }
   }
+ },
+ "v1_2_organic_law_c4985": {
+  "magic_tax_proper": "T-LOCALIZED (stochastic core): rho_stochastic ~ 0.66-0.73, depth-FLAT (unsigned slope -0.00022 ~ 0; Elder #736 independent)",
+  "coherent_drift_component": "depth-growing few-bit coherent wrongward drift (1/3/2 bits to -0.57 across 181/233/287, organic, circuit-tied) \u2014 carries the signed slope -0.0027",
+  "conservative_all_in_pricing": "bias_t80(d) ~ b0*exp(-(lambda_bit + 0.0027)*d) \u2014 prices what a decoder experiences (both components); use with the coherent-bit budget (~1 bit @180 -> 2-5 by ~290)",
+  "lambda_x_status": "REFUTED-for-magic-tax (Elder #736, against his own hypothesis per #733 pre-commitment); re-interpreted as coherent-drift accumulation",
+  "precondition_note": "2/3 points failed the c4982b agreement criterion \u2014 decomposition booked, no clean single-lambda law claimed"
  }
 }
