@@ -1,0 +1,23 @@
+{
+ "card": "exp_hss_decoder_race_seals",
+ "role": "Ember SEALER seat, C4214",
+ "sealed_utc": "2026-07-23T02:26:44.105986+00:00",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str + salt_hex).encode('utf-8')), no separator; salt=128-bit; matches C4973 reveal convention",
+ "seals": {
+  "race_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "b87f789a3911208ce96bae34539f0fa22f8303c317461bf70d2a8dc9f2e37255"
+  },
+  "race_n32": {
+   "n_bits": 32,
+   "commitment_sha256": "ec40c383e783a789297c6896bc9043da1c409e96fa2a7954cd74ecaa57c54dba"
+  },
+  "rung0_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "7a463c0d62ef8cd00ceededff0995d54d4c59eff8e7f8b4468f3a1cde8cfcc08"
+  }
+ },
+ "reveal_protocol": "s_bits+salts delivered privately to Whisper (builder) for oracle embedding; reveals held in Ember's court; Ember commits reveal (s_str+salt) to quantum ONLY AFTER Whisper posts s_hat publicly. Blindness is procedural: frozen hash-pinned decoder takes only counts.",
+ "reveal_status": "SEALED \u2014 reveals withheld pending s_hat"
+}
