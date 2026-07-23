@@ -44,7 +44,7 @@ RIDER_SHOTS = 8000
 
 def verify_seals():
     """Abort unless Ember's private s payload matches her committed public hashes."""
-    priv = json.load(open(SEALS_PRIVATE))
+    priv = json.load(open(SEALS_PRIVATE))["seals"]
     pub = json.load(open(SEALS_PUBLIC))
     out = {}
     for key in ("race_n40", "race_n32", "rung0_n40"):
