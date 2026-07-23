@@ -1,0 +1,63 @@
+{
+ "card": "rho_t_reconciliation_c4982",
+ "kingston_167": {
+  "all_bits": {
+   "signed_rho": 0.7504,
+   "ci": [
+    0.7389,
+    0.7613
+   ],
+   "unsigned_rho": 0.854,
+   "bias_t0_signed": 0.5023,
+   "bias_t80_signed": 0.377
+  },
+  "flag_excluded": {
+   "signed_rho": 0.8011,
+   "ci": [
+    0.7885,
+    0.8141
+   ],
+   "unsigned_rho": 0.8104,
+   "bias_t0_signed": 0.4948,
+   "bias_t80_signed": 0.3964
+  }
+ },
+ "marrakesh_217": {
+  "all_bits": {
+   "signed_rho": 0.7427,
+   "ci": [
+    0.731,
+    0.7553
+   ],
+   "unsigned_rho": 0.7355,
+   "bias_t0_signed": 0.4987,
+   "bias_t80_signed": 0.3704
+  },
+  "flag_excluded": {
+   "signed_rho": 0.7544,
+   "ci": [
+    0.7416,
+    0.768
+   ],
+   "unsigned_rho": 0.745,
+   "bias_t0_signed": 0.4867,
+   "bias_t80_signed": 0.3672
+  }
+ },
+ "excl": {
+  "kingston": [
+   17,
+   26,
+   32,
+   33,
+   39
+  ],
+  "marrakesh": [
+   11,
+   12,
+   21,
+   31,
+   32
+  ]
+ }
+}

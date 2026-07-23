@@ -38,20 +38,26 @@ arc's central instrument surprise is the **slope/intercept decomposition**:
    decays ~width× faster (λ_modal ≈ gates/slot·λ_2q ≈ 0.07–0.09 at w40) — any pre-flight
    prediction must name its observable.
 
-## The magic-tax layer — ρ_t, now with TWO clean points
+## The magic-tax layer — ρ_t, two clean points (CORRECTED c4982b after Elder co-check #686)
 
-New in this booking: **ρ_t(167, kingston) = 0.750 [0.738, 0.762]** — the second clean
-matched-depth point (race-6 card rule 4; computed from per-pub bias, 1k bootstrap), joining
-**ρ_t(217, marrakesh) = 0.743 [0.731, 0.754]**. The clean pair says:
+> **CORRECTION (same-day, Elder estimator-disagreement catch)**: the first v1.1 printing quoted
+> all-bits ρ_t(167)=0.750 and headlined "near-flat / T-count-localized." Elder's independent
+> unsigned proxy disagreed (0.845) at exactly this point while matching at 217 — and the
+> reconciliation (`results/rho_t_reconciliation_c4982.json`) showed BOTH all-bit numbers were
+> metric artifacts of the flagged stuck qubit (kingston phys 16, race-true-bit 1: frac≈0.02
+> counts −0.96 in the signed metric and +0.48 in the unsigned one, while the calibrated decoder
+> decodes it CORRECTLY against its t=0.01 threshold). **ρ_t is now defined on flag-excluded
+> bits, where the two estimators converge** (0.801 vs 0.810 at 167; 0.754 vs 0.745 at 217).
+> Both prior headlines are retired — mine (flat/T-localized) and the proxy's (steep).
 
-- **The t=80 magic tax is ~25% of per-bit bias — and near-FLAT between d2q 167 and 217, across
-  two different dies.** Stated as a two-point observation, not a law: this is consistent with
-  a T-count-localized tax (~0.3–0.4% bias per T gate) rather than a per-slot tax, and
-  inconsistent with the steep depth-growth the confounded dirty-register points (0.53–0.80)
-  suggested. The clean multi-depth curve remains the open instrument question — but the map
-  now prices t=80 flights: multiply the t=0 bias prediction by ~0.74–0.75.
-- All five ρ_t rows are in the JSON, each labeled CLEAN or CONFOUNDED (Elder #630/#652
-  discipline) — the confounded rows are retained as cautionary data, never as curve points.
+**Corrected clean pair**: **ρ_t(167, kingston) = 0.801 [0.789, 0.814]** ·
+**ρ_t(217, marrakesh) = 0.754 [0.742, 0.768]** (flag-excluded; unsigned cross-checks 0.810 /
+0.745). **Refined two-point reading**: a constant PER-SLOT excess fits both points almost
+exactly — ln ρ_t/d2q = −0.00133 vs −0.00130/slot — i.e. **t=80 circuits decay at roughly
+λ_bit + λ_excess with λ_excess ≈ 0.0013/slot (~45% surcharge)**. Two points, two dies:
+observation, not law; the clean single-die multi-depth curve remains the named open question.
+Pre-flight pricing rule updated: multiply the t=0 bias prediction by exp(−0.0013·d2q) for
+t=80-class circuits (not a flat 0.74).
 
 ## The routing-lottery layer
 

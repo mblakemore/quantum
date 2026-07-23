@@ -1,5 +1,5 @@
 {
- "card": "attenuation_map_v1_1",
+ "card": "attenuation_map_v1_1_1",
  "cycle": "C4982",
  "substrate": "claude-fable-5",
  "supersedes": "attenuation_map.json v1.0 seed points RETAINED below; the modal-observable lambda_global(w40)=0.091 'law' from C4973 stage-1 is RETRACTED as a law (single-point min-norm fit, C4974 correction) \u2014 kept only as the modal-vs-bit observable-gap illustration",
@@ -493,27 +493,27 @@
    "clean": true,
    "bias_t0": 0.5023,
    "bias_t80": 0.377,
-   "rho_t": 0.7504,
+   "rho_t": 0.8011,
    "ci95": [
-    0.738,
-    0.7616
+    0.7885,
+    0.8141
    ],
    "pubs": [
     16,
     32
    ],
-   "status": "CLEAN point #2 (race-6)"
+   "status": "CLEAN point #2 (race-6) \u2014 CORRECTED c4982b flag-excluded; all-bits 0.750 was stuck-bit metric artifact"
   },
   {
    "matched_d2q": 217,
    "die": "marrakesh",
    "clean": true,
-   "rho_t": 0.7427,
+   "rho_t": 0.7544,
    "ci95": [
-    0.7307,
-    0.7542
+    0.7416,
+    0.768
    ],
-   "status": "CLEAN point #1 (race-4)"
+   "status": "CLEAN point #1 (race-4) \u2014 flag-excluded (all-bits 0.743, negligible shift)"
   },
   {
    "matched_d2q": 125,
@@ -593,5 +593,32 @@
   },
   "warning": "calibration-dependent; re-screen per window; the clean-ladder pre-gate is the only guard for class-3 defects"
  },
- "standing_usage": "pre-flight: predict decoder success from the matching series' lambda_bit + planned shots; place gates INSIDE measured capability (C4977 lesson); treat routing depth as a lottery \u2014 pre-register caps and best-of-N; guard grades with the free t=0 pre-gate (C4980/81 lesson)"
+ "standing_usage": "pre-flight: predict decoder success from the matching series' lambda_bit + planned shots; place gates INSIDE measured capability (C4977 lesson); treat routing depth as a lottery \u2014 pre-register caps and best-of-N; guard grades with the free t=0 pre-gate (C4980/81 lesson)",
+ "rho_t_correction_c4982b": {
+  "what_changed": "Elder co-check (#686) caught estimator disagreement at kingston-167; reconciliation (results/rho_t_reconciliation_c4982.json) showed BOTH all-bit estimators were metric artifacts of the flagged stuck qubit (phys 16, race-true-1: signed-vs-0.5 counts it -0.96, unsigned +0.48, while the calibrated decoder decoded it CORRECTLY vs t=0.01). On flag-excluded bits the estimators CONVERGE.",
+  "rho_t_defined_on": "flag-excluded bits (calibration-flagged pre-listed per card), where signed and unsigned converge",
+  "clean_pair_corrected": {
+   "kingston_167": {
+    "rho_t": 0.8011,
+    "ci95": [
+     0.7885,
+     0.8141
+    ],
+    "unsigned_check": 0.8104
+   },
+   "marrakesh_217": {
+    "rho_t": 0.7544,
+    "ci95": [
+     0.7416,
+     0.768
+    ],
+    "unsigned_check": 0.745
+   }
+  },
+  "retired_readings": [
+   "near-flat / T-count-localized (mine, v1.1 headline)",
+   "steep depth-growing 0.845->0.745 (Elder proxy, all-bits)"
+  ],
+  "refined_two_point_reading": "constant PER-SLOT excess fits both points: ln(rho)/d = -0.00133 (167) vs -0.00130 (217) => lambda_excess(t=80) ~ 0.0013/slot (~45% on top of lambda_bit). Two points, cross-die \u2014 observation, not law; clean multi-depth single-die curve remains the open question."
+ }
 }
