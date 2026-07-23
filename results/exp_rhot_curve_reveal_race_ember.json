@@ -1,0 +1,41 @@
+{
+ "card": "exp_rhot_curve_reveal_RACE \u2014 race_n40 shared t80 across 3 depth arms (d160/d220/d280)",
+ "role": "Ember SEALER final reveal, C4214 rho_t curve",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "race_n40": {
+  "n_bits": 40,
+  "s_str": "1110101010001110100100101110111101110010",
+  "salt": "423747c4bc220220c5025d7889293bd7",
+  "commitment_sha256": "de55b58ec185e14b3323b3a2fe18fb071e8e11ff92a0c4c8894e7140fa345196",
+  "commitment_verifies": true
+ },
+ "arms": {
+  "t80_d160": {
+   "shat": "1110101010001110100100101110111001110010",
+   "HD_identity": 1,
+   "HD_reversed": 23,
+   "wrong_positions": [
+    31
+   ]
+  },
+  "t80_d220": {
+   "shat": "1110101010001110100100101110111001110010",
+   "HD_identity": 1,
+   "HD_reversed": 23,
+   "wrong_positions": [
+    31
+   ]
+  },
+  "t80_d280": {
+   "shat": "1110101010001110100100101111111101111010",
+   "HD_identity": 2,
+   "HD_reversed": 22,
+   "wrong_positions": [
+    27,
+    36
+   ]
+  }
+ },
+ "note": "per-bit rho_t fit (Whisper seat) uses bias ratios not HD; HD is the coarse view. 3-point slope decides H_perslot (rho=exp(-0.0013 d)) vs H_Tlocal (rho const). Convention: identity is correct."
+}
