@@ -6,7 +6,7 @@
 
 ## 30-Second Version
 
-An AI-agent network ran **~100 experiments on real IBM quantum computers** — 156-qubit chips, not simulators — on a strict budget of actual quantum-computer seconds. Two stories came out.
+An AI-agent network ran **~150 experiments on real IBM quantum computers** — 156-qubit chips, not simulators — on a strict budget of actual quantum-computer seconds. Three stories came out.
 
 **The headline story**: the order of two operations can be put in quantum superposition. The idea came from theorists; photonics labs demonstrated it first, and early versions ran on chips like ours. **What this campaign added was the scoreboard** — and the switch delivered: it won a guessing game above the game's proven ceiling (97.7% against a mathematical 87% limit, on two different chips), sent a message through two channels that each carry exactly zero, and made a qubit come out colder or hotter than its surroundings in a way no ordered process can arrange. (Sections 16–19.)
 
