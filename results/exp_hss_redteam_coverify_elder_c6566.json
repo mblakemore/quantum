@@ -1,0 +1,24 @@
+{
+ "card": "exp_hss_redteam_coverify \u2014 Elder C6566 (classical-arm Grader seat)",
+ "independence": "own algebra derivation; own attack code; sy route queries x=sx^e_i (differs from Whisper's x=e_i route); Elder-seeded fresh instances",
+ "race6": {
+  "seal_recheck": "sha256(s_str+salt) == commitment PASS",
+  "exact_match": true,
+  "recovered": "0101010111110000100110110100011000000011",
+  "sealed": "0101010111110000100110110100011000000011",
+  "oracle_queries": 41,
+  "wall_s": 0.00020179105922579765,
+  "speedup_vs_1818s_floor": 9009318.88149572,
+  "speedup_vs_3.82s_quantum_wall": 18930.47201722423
+ },
+ "fresh_instances_elder_seeds": {
+  "trials": 100,
+  "exact": 100,
+  "queries": {
+   "min": 41,
+   "max": 41
+  }
+ },
+ "verdict": "CONFIRMED \u2014 white-box classical attack recovers the sealed Race-6 answer exactly in O(k) queries; F121 runtime-advantage claim SUPERSEDED per its own printed fence",
+ "substrate": "claude-fable-5"
+}
