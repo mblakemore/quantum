@@ -175,14 +175,27 @@ show a real advantage — this is not F121's "no advantage exists"; (ii) the raw
 outcomes are **not committed to git** (only decoded answers are — verified), so a *public*
 attacker cannot mount this; the seal holds. The defect is witness fidelity + copy accounting.
 
-**The clean-witness fix (gates re-clearing; remedy verification PENDING):** re-fly the conventional
-arm with **shots=1 per row** (fresh even-parity b per copy), matching the quantum arm's shots=1
-design. Structurally this kills the determinism attack (no within-row repetition to read variance
-from), and Elder's MC already gives the restored best-known single-copy cost (163/988/4833). I have
-**not** yet re-simulated the shots=1 conventional arm end-to-end to confirm the honest decoder
-still witnesses the separation cleanly — so this remedy is *well-supported but not yet verified*,
-and should be run before it is relied on as the clearing path. Until then the executed numbers carry
-the batched-b asterisk.
+**The clean-witness fix (gates re-clearing) — VERIFIED (C4215, Creator directive):** re-fly the
+conventional arm with **shots=1 per row** (fresh even-parity b per copy), matching the quantum arm's
+shots=1 design. I ran it end-to-end
+(`experiments/exp142_f119_shots1_remedy_verify_ember_c4215.py`), both claims measured, not asserted:
+
+- **(A) the determinism attack DIES.** Under shots=1 there is no within-row repetition, so per-qubit
+  marginals are 50/50 regardless of basis. The determinism decoder — even given 600 copies/qubit —
+  recovers exact P at exactly the **random-guess rate** (1.3% at n=4; 0.0% at n=6/8/10, matching
+  1/3ⁿ). The 36-copy crack is gone.
+- **(B) the exponential separation SURVIVES as a clean witness.** With the correct confirmation
+  threshold (conf = ⌈n·log₂3⌉+7 — needed to avoid false accepts, since a wrong basis passes one
+  parity check w.p. ½), the honest single-copy decoder returns the **correct** P 100% of the time at
+  cost (copies) **74 / 696 / 4421 at n=4/6/8** — monotone-exponential, matching Elder's best-known
+  achievability curve (140/843/4499). Two-copy (noiseless) is 2–4 copies. Separation **37× / 348× /
+  1105×**, growing. (On hardware, two-copy carries the noise overhead ~68 copies at n=10, so the
+  clean-witness separation there is exponential-single-copy vs ~68 — still large, still conditional
+  per §4.)
+
+So shots=1 is empirically sound: it removes the batched-b defect **and** preserves the separation.
+It does **not** change §4 — the advantage stays conditional (vs best-known single-copy; the (3/2)ⁿ
+floor is still open). A re-fly clears F0/§3b, not the conditionality.
 
 ## 4. Floor magnitude — the advantage is CONDITIONAL, not unconditional (CORRECTION)
 
@@ -234,7 +247,10 @@ headroom, not information cost.
 **F0 (the blocker) — the executed conventional witness is defective.** As flown (batched-b,
 12 shots/row) the conventional meter overcounts: a determinism decoder cracks the delivered data
 in 36 copies for any n (§3b). The executed 37×–7821× are NOT submittable as a clean witness.
-**Re-fly conventional at shots=1 per row before any submission.** This is the primary gate.
+**Re-fly conventional at shots=1 per row before any submission** — this is the primary gate. The
+fix is now VERIFIED in simulation (§3b): shots=1 kills the determinism attack (recovery → random
+rate) and preserves the exponential single-copy vs two-copy separation (37×/348×/1105× at n=4/6/8).
+The actual hardware re-fly still has to be flown to produce clean executed numbers.
 
 The result is durable **only** framed as what it is:
 
