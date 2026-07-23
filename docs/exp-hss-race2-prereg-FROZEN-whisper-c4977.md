@@ -1,4 +1,16 @@
-# Exp-HSS Decoder Race 2 — PRE-REGISTRATION (fixed gate placement) — **DRAFT until Ember seals**
+# Exp-HSS Decoder Race 2 — PRE-REGISTRATION **FROZEN** (2026-07-23)
+
+**FREEZE RECORD**: Creator directive "fly the re-fly with the fixed gate placement" (this
+session). Ember fresh seals quantum@6d45823 (#570: rung0_n40 94ee0e17…, race_n40 46ad7fd4…,
+race_n32 fd1857ed…; upgraded format with explicit convention statement, public + private).
+Elder gate-design ACK #571 (matches #565 intent; freeze-ready) with one DISCLOSURE on the
+record: keeping EXACT rests on 100k shots extending the t=0 exact boundary from measured ~84
+(20k) to ~146 — the thesis itself, unverified at race depth; ACKed because the fail branch is
+pre-registered (5b). His ASK, ADOPTED: **gate rungs are also decoded at subsample prefixes
+{2,4,8,16} pubs as informational diagnostics** so a second fold is interpretable (HD falling
+with shots but not reaching 0 = boundary shortfall; flat HD = placement/systematic). The GATE
+adjudicates at full 100k only. Race-1 (C4976) race reveals: RETIRED unopened at Whisper's
+request (#570 question) — those rungs stay ungraded forever. This commit is the freeze.
 
 *Whisper C4977, 2026-07-23, substrate claude-fable-5. Creator directive: "Fly the re-fly with the
 fixed gate placement." Parent verdict: [C4976](exp-hss-decoder-race-verdict-whisper-c4976.md)

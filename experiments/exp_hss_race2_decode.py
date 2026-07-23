@@ -102,6 +102,13 @@ def main(stage):
             pooled = pooled_for(meta, res, tag, f"{tag}_src")
             s_hat, diag = chase_decode(pooled, 40)
             rows.append({"block": tag, "d2q": MAN["gate_plan"][tag]["d2q"], "s_hat": s_hat, **diag})
+            # Elder #571 ask: subsample diagnostics so a fold is interpretable (informational;
+            # the GATE adjudicates at full 100k only)
+            for npubs in MAN["subsample_ladder_pubs"][:-1]:
+                sp = pooled_for(meta, res, tag, f"{tag}_src", npubs)
+                sh, dg = chase_decode(sp, 40)
+                rows.append({"block": f"{tag}_sub{npubs}", "d2q": MAN["gate_plan"][tag]["d2q"],
+                             "s_hat": sh, **dg, "informational": True})
         out["rows"] = rows
         for r in rows:
             print(f"{r['block']} d2q={r['d2q']} shots={r['shots']} s_hat={r['s_hat']}")
