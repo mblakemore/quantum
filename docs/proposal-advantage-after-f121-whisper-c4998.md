@@ -75,7 +75,7 @@ every arm, and the single-copy floor is a theorem.
 | Arm | Access | Cost currency | Role |
 |---|---|---|---|
 | **Q** — two-copy Bell-probe learner | samples of the channel, quantum memory | samples to reach accuracy ε | the claim |
-| **C1** — best single-copy strategy, executed same-chip same-window | samples of the channel, no quantum memory | samples to reach ε | the theorem-floored competitor (Ω(2^(n/3))). **F119-audit fence: fresh randomness per copy (shots=1 per setting), no fixed-basis batching; both arms billed in copies consumed** |
+| **C1** — best single-copy strategy, executed same-chip same-window | samples of the channel, no quantum memory | samples to reach ε | the theorem-floored competitor (Ω(2^(n/3))). **F119-audit fence: fresh randomness per copy (shots=1 per setting), no fixed-basis batching; both arms billed in copies consumed** — sim-verified by Ember's remedy check (general#815, quantum@b8a29fe): batching's determinism attack dies at shots=1 AND the separation survives (37×/348×/1105× at n=4/6/8) |
 | **C2** — calibration-prediction, zero samples | published backend properties only | 0 samples | the F121-analog. The claim must show the target carries structure C2 gets wrong by ≫ ε |
 | **C3** — full noise-model simulation from calibration | published properties + simulator | 0 samples, CPU-seconds logged | C2's strongest form; same role |
 
