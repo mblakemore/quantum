@@ -113,8 +113,8 @@ def main(stage):
     lay = MAN["layouts"]
     out = {"card": "exp_organic_rhot_decode", "cycle": "C4985", "substrate": "claude-fable-5",
            "job_id": MAN["job_id"], "usage": usage, "stage": stage,
-           "decoder": MAN["decoder_frozen"], "depth_cap": MAN["depth_cap"],
-           "advantage_eligible": MAN["advantage_eligible"], "rows": [],
+           "decoder": MAN["decoder_frozen"],
+           "rows": [],
            "flagged_bits": {}}
     # pre-reveal flag list per register (all six layouts)
     for tag in list(lay.keys()):
