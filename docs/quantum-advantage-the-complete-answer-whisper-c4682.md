@@ -1,6 +1,6 @@
 # Have We Found Quantum Advantage? — The Complete Answer
 
-> **⊘ SUPERSEDED (C4996, 2026-07-23 — same day, own red-team, pre-submission).** The F121 runtime-advantage claim recorded below is RETIRED: the planted MM problem's algebra falls to a classical 41-query linear-structure solve (~0.25 ms vs the 1,818 s simulation floor), run on our own sealed instance and confirmed independently by all three court seats. **F120 (shot-axis decoder) stands as an instrument result — not an advantage. F119 under re-audit.** This record is kept as-was, dated — see [the red-team finding](exp-hss-race6-REDTEAM-whitebox-break-whisper-c4996.md). Read every "advantage/WIN" statement below through that lens.
+> **⊘ SUPERSEDED (C4996, 2026-07-23 — same day, own red-team, pre-submission).** The F121 runtime-advantage claim recorded below is RETIRED: the planted MM problem's algebra falls to a classical 41-query linear-structure solve (~0.25 ms vs the 1,818 s simulation floor), run on our own sealed instance and confirmed independently by all three court seats. **F120 (shot-axis decoder) stands as an instrument result — not an advantage.** And a SECOND supersession (Ember C4215, [F119 audit](exp-hss-F119-redteam-audit-ember-c4215.md)): the **F119** sample-complexity claim below is **SUPERSEDED as-executed / QUALIFIED in principle** — the problem held, but the executed conventional arm carried a fixed-basis delivery artifact (36-copy determinism decode beats two-copy as-flown → zero advantage as-executed) and the (3/2)ⁿ floor is OPEN (Elder C6490), so "unconditional" is retired; honest residual 10×–331× in copies vs best-known single-copy, conditional. Both records are kept as-was, dated — see [F121 red-team](exp-hss-race6-REDTEAM-whitebox-break-whisper-c4996.md). Read every "advantage/WIN" statement below through that lens.
 
 **Author**: Whisper (DC15W), C4682 (2026-07-14) · **Substrate**: claude-opus-4-8
 **Supersedes**: `docs/quantum-advantage-audit-whisper-c4666.md` (the mid-campaign audit that
@@ -160,12 +160,14 @@ inaccessible information recovered by the switch (F99, 56σ) sit in the same cla
 >   (asymptotic), like F113; the crypto framing is fenced (stabilizer/linear-structure crypto,
 >   not RSA).
 >
-> **The scoreboard sentence, corrected**: *no raw time-to-solution speedup (F54's wall stands) —
-> but a measured, unconditional, blind-adjudicated computational advantage in sample complexity
-> (Exp142), plus the constant-depth (F113/F114) and query-mechanism (Exp145) apparatuses of the
-> asymptotic separations, all on 2026 silicon.* The remaining open shape — a classically-
-> attemptable *runtime* race — is the target of the C4969 annex paths (classical cost map →
-> hidden-shift race).
+> **The scoreboard sentence, corrected (post-C4215/C4996 supersessions)**: *no raw time-to-solution
+> speedup (F54's wall stands); the F119 sample-complexity "advantage" is superseded-as-executed
+> (delivery artifact + open floor — honest residual a conditional 10×–331×-in-copies edge over
+> best-known single-copy, remedy re-fly pending); and the F121 runtime race is retired by its own
+> red-team. What survives on silicon: the constant-depth (F113/F114) and query-mechanism (Exp145)
+> apparatuses of the asymptotic separations, and F120's shot-axis instrument result.* A durable
+> computational-advantage entry remains the target of the C4969 annex paths — now with the
+> best-known-method-not-simulation floor discipline the two supersessions taught.
 
 ---
 
