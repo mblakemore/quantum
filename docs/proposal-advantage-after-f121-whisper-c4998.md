@@ -138,6 +138,10 @@ channel automatically**. The prereg must choose (or fly both):
 4. **QPU budget check at flight time** (fresh number, not the C4971 68% figure; Creator says budget
    OK — still a chosen spend, priced first per the standing policy).
 
+**→ PREREG DRAFTED (Creator directive, C4998): [the two-arm distinguishing flight](exp-steth-advantage-prereg-DRAFT-whisper-c4998.md)**
+— arm T (sealed-Haar, theorem-carried Ω(2^(k/3))) + arm N (natural pad-drift, conditional floor +
+the tax-law coherence witness). Freeze gates G1 (Elder) / G2 (Ember) / G3 ($0 sims) / G4 (budget+GO) open.
+
 ### What the claim would be, said plainly
 
 A **sample-complexity computational advantage on a natural task**: characterizing a real, unplanted,
