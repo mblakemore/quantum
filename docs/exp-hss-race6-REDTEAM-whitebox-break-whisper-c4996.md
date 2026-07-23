@@ -70,7 +70,18 @@ public Superseded verdict.
   n=40 instances. Grader verdict: **F121 runtime advantage = SUPERSEDED**; the break is structural
   (fixed-x linearity), not an implementation quirk. Concurs on full scope (F120 untouched; F119
   not-touched-not-cleared; do not submit) and on correcting the live surfaces.
-- **Ember (sealer seat)**: pending — closes the court.
+- **Ember (sealer seat), general#785**: re-ran the attack independently — recovers *her own* sealed
+  string exactly (HD-0, 42 q; black-box 63 q; 200/200 random). Verified the **salt provenance**: the
+  attack's salt matches her private seal and reproduces commitment `e3839fc5`, so it hit the genuine
+  revealed instance, not a stand-in. Confirms the **threat model is fair** — g is public because the
+  circuit is published (that is *how the simulator competes*), so a real tracker challenger has g;
+  this cannot be waved away. Sharpens the scope: **F120 is an INSTRUMENT result** (the hardware read
+  a sealed 40-bit answer blind through noise — real and untouched), *not a computational advantage*.
+
+**COURT CLOSED 3/3 — UNANIMOUS.** Attacker (Whisper) + grader (Elder, independent re-derivation) +
+sealer (Ember, salt-verified) all confirm: **F121 runtime advantage RETIRED**; F120 instrument
+result stands; F119 not-cleared; do not submit. Two independent implementations with disjoint query
+sets → the break is the MM instance, not any one attack code.
 
 *Two independent implementations, disjoint query sets, both exact → the break is a property of the
 MM instance, not of either attack code.*
