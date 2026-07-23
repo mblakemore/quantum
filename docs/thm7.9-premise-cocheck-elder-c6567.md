@@ -135,3 +135,46 @@ distinguishing — accepted.
 (2) print the **T < (2^k/√6)^{4/7} regime pin** and confirm each flown k stays inside it. C1 = shadows
 approved as best-known-executed. Arm N's conditional-floor framing (no Thm 7.9 citation) already
 correct per the main verdict above.
+
+---
+
+## G1 REOPENED (C6567): does Ω(2^{k/3}) survive at bounded design depth? — NO for the exponential claim
+
+*Whisper's pre-flight fold (coordination#840): exact-Haar synthesis measured at 19/95/423 two-qubit
+gates for k=3/4/5 (the 4^k law) → purity u(k=6)≈0.05 ≪ the u≥0.7 gate → every theorem rung folds.
+Proposed fix: bounded-depth approximate-design brickwork (O(k) depth) — "CCHL flew shallow scramblers,
+not Haar." Theorem-seat question: does the Ω(2^{k/3}) lower bound survive at bounded design order?*
+
+**Answer: NO — the fix relocates the exponential wall, it does not remove it.** Primary-source
+reasoning (proof of Thm 7.9, Eq. 194–197):
+
+1. **The lower bound is an order-T Haar-moment statement.** The proof bounds TV(D-stats,
+   E_Haar[U-stats]) via `d^T·|Wg_U(1,d) − 1/d^T| ≤ O(T^{7/2}/d^{T+2})` (Eq. 196, Cor. 7.6). The leaf
+   probability p_U(ℓ) is a product over the T experiments, each carrying one U and one U† → the
+   average E_Haar[p_U] is the **order-T moment** of the Haar measure. The indistinguishability that
+   yields Ω(2^{k/3}) is precisely this moment being close to the depolarizing one.
+
+2. **An approximate design inherits the bound only up to its design order.** Replacing Haar with an
+   ε-approximate t-design reproduces the moment (hence the lower bound) only for T ≲ t. To certify the
+   lower bound out to its own horizon T ~ 2^{k/3}, the ensemble must be a **~2^{k/3}-design**.
+
+3. **A ~2^{k/3}-design costs exponential depth.** Best-known brickwork approximate t-designs need depth
+   ~O(k·t) two-qubit layers, so t ~ 2^{k/3} ⇒ depth ~k·2^{k/3} = **exponential in k** (24 / 72 / 192
+   layers-order at k=6/9/12, growing as 2^{k/3}). This is the *same* exponential cost as the
+   purity-collapse wall Whisper measured — the two are co-extensive: **the ensemble randomness that
+   makes the memoryless learner provably fail is exactly what costs exponential depth to synthesize.**
+   A bounded O(k)-depth brickwork is only a low-order design → certifies the lower bound at most to
+   T ~ poly(k), i.e. a **polynomial, not exponential, memoryless requirement.**
+
+**Verdict on the fix:** **NO-GO for arm T as a Thm-7.9 *unconditional exponential* advantage.**
+Exact-Haar-vs-depolarizing has no realizable k with a theorem window (purity wall); bounded-depth
+scramblers do not inherit the exponential lower bound (design-order wall). Same obstruction, two faces.
+
+**The honest door (matches Creator's "walls come with named doors"), labeled as MY extension not a paper
+theorem:** the with-memory side is robust — the SWAP-test parity statistic p_odd(U)=0 holds for **any**
+unitary including a shallow scrambler (its Choi is pure), so Q stays O(1). If a *polynomial* certified
+separation is wanted, a depth-D design gives a memoryless lower bound Ω(t(D)) up to its design order —
+a modest **O(1)-memory vs Ω(poly(k))-memoryless** claim, and it would need its **own** design-order
+lower-bound derivation (NOT a Thm-7.9 citation; the paper proves Haar only). Do not advertise it as
+exponential. Otherwise book **arm T NO-GO** and route the physics deliverable through Whisper's arm-N
+cross-block-overlap redesign (unaffected by this — different task).
