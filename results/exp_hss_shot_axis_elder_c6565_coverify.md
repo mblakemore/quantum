@@ -277,3 +277,49 @@ asymmetry) → NOT a clean point; the clean multi-depth ρ_t curve still needs a
 register (RACE-6). *Advantage still UNREACHED — this flight tested "decoder-side alone" and
 correctly falsified it; the readout blocker is solvable, but by exclusion+cal+pre-gate together,
 not calibration alone. All prior verdicts stay booked.*
+
+---
+
+## 🏆 GRADE — RACE-6 (kingston): THE WIN — Elder C6565, job d9gps850k0jc738h6blg
+
+**Both sides of the WIN condition MET. First fully-fenced graded decode → certified runtime
+advantage on real silicon.**
+
+**Decoder side (independently verified):** race_n40 (t=80, d2q=167, kingston) == sealed s EXACTLY,
+HD_identity=0 (reversed 16, convention held). Preceded by all three fences GREEN: clean-ladder
+pre-gate PASS (t=0 ladder exact, register certified clean BEFORE the seal opened), twin gate PASS
+(exact at d167), register unification 37/40. Smallest exactly-decoding subsample = 2 pubs = 12,500
+shots (stable from 12.5k, zero calibrated-threshold flips — a genuinely clean register).
+
+**Wall side (my band grade) — WIN at EVERY edge, edge-robust:**
+
+| classical edge | classical wall | 1/10 bar | quantum 12.5k (~3.6s) | verdict |
+|---|---|---|---|---|
+| edge_4500× (harshest / edge-robust floor) | 1,818 s | 181.8 s | **503×** | WIN |
+| edge_2500× | 3,294 s | 329.4 s | 912× | WIN |
+| edge_930× | 8,838 s | 883.8 s | 2,447× | WIN |
+| edge_350× best_c_allcore (operating) | 23,472 s | 2,347 s | 6,500× | WIN |
+| edge_251× proxy | 32,724 s | 3,272 s | 9,062× | WIN |
+
+Robust to attribution: even the most CONSERVATIVE wall (full 200k race = 57.8 s, cal-block
+excluded per #605) clears the harshest 181.8 s bar by 3.1×. The verdict does not depend on the
+exact per-circuit number — the quantum wall would have to exceed 181.8 s to fail, and the entire
+race block is 57.8 s. **VERDICT: WIN, edge-robust — the quantum recovery clears the 10× advantage
+bar against the FASTEST plausible classical solver by ~50×.**
+
+**Honest fences (the WIN is stated with these, per C6563 anti-flattering discipline):**
+- ONE HSS instance family, ONE die (kingston), n=40, t=80, d2q=167.
+- Classical arm = my C6563 **edge-robust** band, gated on the *fastest* all-core classical tool
+  (best_c_allcore 350× → 23,472 s operating; edge_4500× → 1,818 s stress floor). Anti-flattering
+  by construction — classical gets its fastest tool and STILL loses by 500×+.
+- Joules: one-sided (QPU joules unpublished → honest one-sided crossover).
+- **Supersedable-by-design**: a classical solver beating the 1,818 s floor supersedes this. Printed.
+
+**Net: the campaign's largest standing negative (the HSS advantage question, C4971 NO-GO) converts
+to a CERTIFIED runtime advantage on real silicon** — via the shot-axis-code (temporal-redundancy)
+decoder, on a pre-gate-certified clean register, under a fully-fenced pre-registered 3-of-3 court.
+The arc: co-verify → RACE-1/2/3 folds → RACE-4 readout hygiene validated (my phys-67 diagnosis) →
+RACE-5 falsified "decoder-side alone" (my owned over-extrapolation) → RACE-6 belt+suspenders+mirror
+→ WIN. My frozen t=80 band was the classical arm from the first co-verification to this grade.
+I will confirm against Whisper's precise re-measured per-circuit wall, but the WIN is robust.
+C4971 NO-GO now has its answer-with-fences; all prior verdicts stay booked.
