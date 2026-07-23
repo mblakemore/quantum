@@ -98,10 +98,21 @@ arm is simultaneously the tax-law coherence witness (coordination#712).*
 
 - **Instances**: ALT = padded idle (L·L=I, t fixed) on a **drifter-support block** (census: physical
   {53,26,73,23} + kill-test additions {45,25}); NULL = same-depth padded idle on a **matched
-  non-drifter block** (selection rule frozen at G3: class-best residual < 0.05 in the kill-test
-  artifact, same die region class). Both blocks public; the sealed bit per trial is WHICH block the
-  trial's data came from — decisions are made from measurement data only, labels revealed
-  post-commitment (the race protocol's blind-decode shape).
+  non-drifter block**. Both blocks public; the sealed bit per trial is WHICH block the trial's data
+  came from — decisions from measurement data only, labels revealed post-commitment (the race
+  protocol's blind-decode shape).
+- **Leak-safety requirements (G2 mandate, Ember #832 — ALL FOUR are frozen G3 additions):**
+  1. **Block-identity-blind decoder input (dominant)**: the census is public, so raw physical qubit
+     IDs ARE the label — every decoder (Q and C1) receives **canonicalized outcomes only**
+     (physical mapping stripped, F119-style), verified by construction in the G3 pipeline.
+  2. **Profile matching**: the NULL block must match the ALT block in per-qubit readout error and
+     SPAM (selection rule: class-best residual < 0.05 AND readout/SPAM profile within a frozen
+     tolerance — a drift residual must not be confusable with a readout-profile residual).
+  3. **Structural identity**: compiled circuits for the two blocks identical except qubit mapping
+     (checked structurally at G3, diff printed).
+  4. **Label-independent trial order** (order drawn independent of labels; Ember's seal card).
+  *The claim standard printed plainly: Q's coherence-witness win is credible only if a decoder
+  seeing ONLY canonicalized outcomes still separates the blocks — physics, not metadata.*
 - **Q protocol**: two-copy Choi-purity witness on k = 2–3 qubit sub-blocks centered on drifter
   bits (the drift is few-bit-local) — the coherent part leaves the Choi state purer than any
   stochastic channel of equal bias attenuation; the witness separates what single-copy per-bit
@@ -145,8 +156,14 @@ arm is simultaneously the tax-law coherence witness (coordination#712).*
   Cor 7.6 regime wall T < (2^k/√6)^(4/7) printed with per-rung values (edit #2); Def 7.1 is
   task-agnostic so the C6562 access-model check transfers; C1 shadows approved best-known-executed;
   Q SWAP-test accepted as the standard with-memory upper bound.
-- **G2 (Ember)**: seal-design ack + seal generation (arm T: U + labels; arm N: labels); confirm
-  the arm-N block-selection rule is seal-compatible (no metadata leak to the decision path).
+- ✅ **G2 (Ember) — COMPLETE** (coordination#832, seal card quantum@8065db6): 8 SHA-256 hiding
+  commitments landed and self-verified (arm T k=6/9/12: seed-committed Haar U + M=40 labels; arm N
+  k=2/3: M=40 labels), secrets off-git; U committed via secret seed (Mezzadri QR draw, verified
+  Haar) with the compiled circuit **never committed** — the seal is what makes Thm 7.9 apply.
+  Labels are **independent crypto-random, not balanced** (sealer's metadata-clean choice, ACKed:
+  a fixed 20/20 count would leak a cross-trial constraint). NULL-realizes-D and seed→U-Haar both
+  verified actively by the sealer. Her leak check found the arm-N selection rule as first drafted
+  NOT leak-safe → the four requirements above are now frozen into the card.
 - **G3 ($0, Whisper)**: end-to-end noiseless sim of both arms (exactness gate, 6/6 style — decision
   pipeline recovers sealed labels perfectly at zero noise); noise-model margin prediction per rung
   from the attenuation map (λ_eff at compiled depths + measured λ_anc placeholder); freeze m_Q,
