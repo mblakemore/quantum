@@ -1,0 +1,73 @@
+{
+ "card": "exp_hss_decoder_race_decode",
+ "cycle": "C4976",
+ "substrate": "claude-fable-5",
+ "job_id": "d9gnp6khonhs73abu6o0",
+ "usage": {
+  "quantum_seconds": 92,
+  "seconds": 92,
+  "status": "complete"
+ },
+ "stage": "gate",
+ "decoder": {
+  "k": 12,
+  "rho": 0.5,
+  "soft_iters": 8,
+  "impl": "exp_hss_infodecode_exploratory.py functions"
+ },
+ "gate_rungs": {
+  "race_d2q": 146,
+  "below": 140,
+  "above": 196
+ },
+ "rung0": [
+  {
+   "fold_m": 0,
+   "d2q": 28,
+   "s_hat": "1011110011010011000010011101101100000001",
+   "shots": 20000,
+   "majority": "1011110011010011000010011101101100000001",
+   "hd_majority_vs_final": 0,
+   "min_reliab": 0.25534999999999997,
+   "med_reliab": 0.40135,
+   "score_final": 3576.6961460113525,
+   "gate_rung": false
+  },
+  {
+   "fold_m": 1,
+   "d2q": 84,
+   "s_hat": "1011110011010011000010011101101100000001",
+   "shots": 20000,
+   "majority": "1011110111010011000000011101101100000001",
+   "hd_majority_vs_final": 2,
+   "min_reliab": 0.012399999999999967,
+   "med_reliab": 0.292925,
+   "score_final": 377.0590753555298,
+   "gate_rung": false
+  },
+  {
+   "fold_m": 2,
+   "d2q": 140,
+   "s_hat": "1011110011010011000010011100101100000001",
+   "shots": 20000,
+   "majority": "1011110011010011000010011100101100000001",
+   "hd_majority_vs_final": 0,
+   "min_reliab": 0.012700000000000045,
+   "med_reliab": 0.216225,
+   "score_final": 100.94523847103119,
+   "gate_rung": true
+  },
+  {
+   "fold_m": 3,
+   "d2q": 196,
+   "s_hat": "1011110111010011000000011100101100000001",
+   "shots": 20000,
+   "majority": "1011110111010011000000011100101100000001",
+   "hd_majority_vs_final": 0,
+   "min_reliab": 0.0020999999999999908,
+   "med_reliab": 0.1643,
+   "score_final": 38.2404320538044,
+   "gate_rung": true
+  }
+ ]
+}
