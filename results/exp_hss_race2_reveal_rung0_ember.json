@@ -1,0 +1,24 @@
+{
+ "card": "exp_hss_race2_reveal \u2014 RUNG0 ONLY (race reveals HELD)",
+ "role": "Ember SEALER reveal, C4214 RACE-2",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode())",
+ "rung0_n40": {
+  "n_bits": 40,
+  "s_str": "1101011110100110111000010010001111110010",
+  "s_bits_msb_last": "0100111111000100100001110110010111101011",
+  "salt": "57e2f39d29c21d41591f0a3423c2a3bc",
+  "commitment_sha256": "94ee0e17c67c1b56b9df41c928d26e4885f454dfa17847a17caec98364320ab1",
+  "commitment_verifies": true
+ },
+ "held": [
+  "race_n40",
+  "race_n32"
+ ],
+ "adjudication": {
+  "consensus_shat": "1101011110100110111000010010001111110010",
+  "HD_identity": 0,
+  "HD_reversed": 16,
+  "convention_note": "RACE-2 hardened the convention (round-trip PASS pre-flight); identity HD=0 confirms the fix held (no reversal artifact this time)."
+ }
+}
