@@ -4,49 +4,35 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="An interactive quantum switch: explore how a control qubit holds two causal orders in superposition simultaneously — and why a classical coin-flip cannot. All numbers measured on IBM Heron silicon.">
-<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M4%204C8%208%208%208%2012%2012%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12%204C8%208%208%208%204%2012%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.7%22%20fill%3D%22%23e5e7eb%22%2F%3E%3C%2Fsvg%3E">
-<title>Quantum Switch — a causal-order demo on real silicon</title>
+<meta property="og:title" content="The Quantum Switch — order of events in superposition, on real silicon">
+<meta property="og:description" content="Drag the order-coherence dial and watch a causal witness live and die by the cosine law — measured at Pearson 0.9992 on ibm_kingston, ≥72σ past every classical order.">
+<meta name="theme-color" content="#04060c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
+<title>The Quantum Switch — a causal-order demo on real silicon | The Quantum Museum</title>
 <style>
   :root {
-    --ink: #0b0d13;
-    --surface: #141826;
-    --surface-2: #1b2032;
-    --edge: #2a3145;
-    --text: #e2e6f0;
-    --muted: #8b93a7;
-    --faint: #7a8499;
-    --coherent: #45d6cf;      /* superconducting-qubit phosphor cyan — the switch resource */
-    --coherent-dim: #2b7d79;
-    --measured: #e6a94e;      /* hardware data points (cyan↔amber = CVD-safe pair) */
-    --classical: #7e8699;     /* decohered / order-blind */
-    --grid: rgba(138,147,167,0.14);
+    /* Quantum Museum template tokens — single theme, no switching */
+    --ink: #04060c;           /* page ground */
+    --surface: #0a0e18;
+    --surface-2: #0d1220;
+    --edge: #1a2234;
+    --text: #dbe6f5;
+    --muted: #9fb4d0;
+    --faint: #7d8ca3;
+    --coherent: #62e6ff;      /* the switch resource — museum signature cyan */
+    --coherent-dim: #2f8ba0;
+    --measured: #ffc86b;      /* hardware data points (cyan↔amber = CVD-safe pair) */
+    --classical: #7d8ca3;     /* decohered / order-blind */
+    --grid: rgba(159,180,208,0.14);
     --live-accent: var(--coherent);   /* driven by φ in JS */
-    --live-accent-soft: rgba(69,214,207,0.14);
-    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", "Roboto Mono", Menlo, monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --live-accent-soft: rgba(98,230,255,0.14);
+    --mich: 'Michroma', sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, "SF Mono", Menlo, monospace;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --maxw: 900px;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --ink: #eef0f5; --surface: #ffffff; --surface-2: #f4f6fb; --edge: #dce0ea;
-      --text: #171b26; --muted: #5c6479; --faint: #5f6a83;
-      --coherent: #0a6b66; --coherent-dim: #79ccc7; --measured: #8f5d10;
-      --classical: #7b8296; --grid: rgba(92,100,121,0.16);
-      --live-accent: var(--coherent); --live-accent-soft: rgba(16,168,159,0.12);
-    }
-  }
-  :root[data-theme="dark"] {
-    --ink: #0b0d13; --surface: #141826; --surface-2: #1b2032; --edge: #2a3145;
-    --text: #e2e6f0; --muted: #8b93a7; --faint: #7a8499; --coherent: #45d6cf; --coherent-dim: #2b7d79;
-    --measured: #e6a94e; --classical: #7e8699; --grid: rgba(138,147,167,0.14);
-    --live-accent-soft: rgba(69,214,207,0.14);
-  }
-  :root[data-theme="light"] {
-    --ink: #eef0f5; --surface: #ffffff; --surface-2: #f4f6fb; --edge: #dce0ea;
-    --text: #171b26; --muted: #5c6479; --faint: #5f6a83; --coherent: #0a6b66; --coherent-dim: #79ccc7;
-    --measured: #8f5d10; --classical: #7b8296; --grid: rgba(92,100,121,0.16);
-    --live-accent-soft: rgba(16,168,159,0.12);
   }
 
   * { box-sizing: border-box; }
@@ -58,19 +44,24 @@
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
-  h1, h2, h3 { font-family: var(--mono); font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; line-height: 1.15; }
+  h1, h2, h3 { font-family: var(--sans); font-weight: 300; letter-spacing: -0.015em; text-wrap: balance; line-height: 1.12; color: #e8f2ff; }
+  h1 strong, h2 strong { font-weight: 600; }
   a { color: var(--live-accent); }
   .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-  .eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .eyebrow { font-family: var(--mich); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--faint); }
+  .skip { position: absolute; left: 8px; top: -48px; z-index: 1000; background: var(--coherent); color: #04121a;
+    padding: 8px 14px; border-radius: 8px; font-family: var(--mono); font-size: 13px; font-weight: 600; transition: top .12s; text-decoration: none; }
+  .skip:focus { top: 8px; outline: 2px solid var(--text); }
 
   /* ---------- hero ---------- */
   header { border-bottom: 1px solid var(--edge); background:
       radial-gradient(120% 90% at 82% -10%, var(--live-accent-soft), transparent 60%); }
   .hero { padding: 62px 0 46px; }
   .hero h1 { font-size: clamp(30px, 6.2vw, 52px); margin: 14px 0 16px; }
-  .hero h1 .hl { color: var(--live-accent); }
+  .hero h1 .hl { color: var(--live-accent); font-weight: 600; }
   .lede { font-size: clamp(17px, 2.4vw, 20px); color: var(--text); max-width: 60ch; margin: 0 0 26px; }
   .lede b { color: var(--live-accent); font-weight: 600; }
+  .lede strong { font-weight: 600; color: #e8f2ff; }
   .statrow { display: flex; flex-wrap: wrap; gap: 14px; }
   .stat { background: var(--surface); border: 1px solid var(--edge); border-radius: 12px; padding: 14px 18px; min-width: 130px; }
   .stat .n { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--live-accent); font-variant-numeric: tabular-nums; }
@@ -79,7 +70,7 @@
   .chip { font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px solid var(--edge);
           border-radius: 999px; padding: 4px 11px; background: var(--surface); }
   .specbtn { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 13.5px;
-          font-weight: 700; text-decoration: none; color: #ffffff; background: var(--coherent);
+          font-weight: 600; text-decoration: none; color: #04121a; background: var(--coherent);
           border: 1.5px solid var(--coherent); border-radius: 11px; padding: 10px 18px; margin-top: 20px;
           transition: transform .12s ease, box-shadow .12s ease; }
   .specbtn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px var(--live-accent-soft); }
@@ -103,7 +94,7 @@
            box-shadow: 0 0 0 1px rgba(0,0,0,0.15), 0 26px 60px -30px var(--live-accent-soft); }
   .panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
                 padding: 16px 20px; border-bottom: 1px solid var(--edge); flex-wrap: wrap; }
-  .panel-head .title { font-family: var(--mono); font-weight: 700; letter-spacing: -0.01em; }
+  .panel-head .title { font-family: var(--mich); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
   .verdict { font-family: var(--mono); font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em;
              padding: 5px 12px; border-radius: 999px; border: 1px solid var(--live-accent);
              color: var(--live-accent); background: var(--live-accent-soft); white-space: nowrap; }
