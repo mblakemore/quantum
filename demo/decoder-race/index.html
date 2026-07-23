@@ -25,10 +25,37 @@
   .btn{font-family:var(--mono);font-size:13px;background:none;border:1px solid var(--cyan);color:var(--cyan);border-radius:8px;padding:7px 14px;cursor:pointer}
   .btn:hover{background:color-mix(in srgb,var(--cyan) 12%,transparent)}
   .btn.warn{border-color:var(--edge);color:var(--ink-3)}
-  .bits{display:grid;grid-template-columns:repeat(20,1fr);gap:4px;margin:14px 0}
-  .bit{aspect-ratio:1;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;border:1px solid var(--edge);color:var(--ink-3);transition:background .2s}
-  .bit.ok{background:color-mix(in srgb,var(--cyan) 30%,transparent);color:var(--ink);border-color:var(--cyan)}
-  .bit.bad{background:color-mix(in srgb,#ef4444 35%,transparent);color:var(--ink);border-color:#ef4444}
+  .depthstat{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:2px 0 6px}
+  .depthstat b{color:var(--ink)}
+  .stg{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:22px 0 8px}
+  .stg .no{color:var(--cyan);font-weight:700}
+  .stg .hint{letter-spacing:0;text-transform:none;color:var(--ink-3)}
+  .shotrow,.bitrow{display:grid;grid-template-columns:repeat(20,1fr);gap:3px;font-family:var(--mono)}
+  .sr-cell{height:19px;display:flex;align-items:center;justify-content:center;font-size:10.5px;border:1px solid var(--edge);border-radius:3px;color:var(--ink-2)}
+  .sr-cell.typo{background:color-mix(in srgb,#ef4444 30%,transparent);border-color:#ef4444;color:var(--ink)}
+  .typoline{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:7px 0 0}
+  .typoline b.t{color:#ef4444} .typoline b.p{color:var(--cyan)}
+  .chamber{position:relative;height:112px;margin:4px 0 2px;display:grid;grid-template-columns:repeat(40,1fr);gap:2px;border:1px solid var(--edge);border-radius:10px;padding:6px 8px;background:color-mix(in srgb,var(--ink) 2%,transparent)}
+  .vcol{position:relative}
+  .vup,.vdn{position:absolute;left:12%;right:12%;border-radius:2px;background:var(--ink-3);transition:height .15s linear}
+  .vup{bottom:50%} .vdn{top:50%}
+  .vcol.und .vup,.vcol.und .vdn{background:var(--amber)}
+  .vcol.ok  .vup,.vcol.ok  .vdn{background:var(--cyan)}
+  .vcol.bad .vup,.vcol.bad .vdn{background:#ef4444}
+  .band{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:100%;background:color-mix(in srgb,var(--ink) 8%,transparent);pointer-events:none;transition:height .2s}
+  .mid{position:absolute;left:0;right:0;top:50%;border-top:1px dashed var(--edge);pointer-events:none}
+  .axlab{position:absolute;left:5px;font-family:var(--mono);font-size:9.5px;color:var(--ink-3);pointer-events:none}
+  .axlab.one{top:3px} .axlab.zero{bottom:3px}
+  .legend{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);line-height:1.7;margin:6px 0 0}
+  .legend .a{color:var(--amber)} .legend .c{color:var(--cyan)} .legend .r{color:#ef4444}
+  .rowlab{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-3);margin:9px 0 3px}
+  .br-cell{height:19px;display:flex;align-items:center;justify-content:center;font-size:10.5px;border-radius:3px;border:1px solid transparent}
+  .br-cell.s{color:var(--ink-2);border-color:var(--edge);border-style:dashed}
+  .br-cell.idle{color:var(--ink-3)}
+  .br-cell.und{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 40%,transparent)}
+  .br-cell.ok{background:color-mix(in srgb,var(--cyan) 26%,transparent);color:var(--ink);border-color:var(--cyan)}
+  .br-cell.bad{background:color-mix(in srgb,#ef4444 32%,transparent);color:var(--ink);border-color:#ef4444}
+  @media (prefers-reduced-motion: reduce){.vup,.vdn,.band{transition:none}}
   .stat{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--mono);font-size:13px;color:var(--ink-2);margin:8px 0}
   .stat b{color:var(--ink)} .stat .good{color:var(--cyan)} .stat .dead{color:#ef4444} .stat .amber{color:var(--amber)}
   .verdict{font-family:var(--mono);font-size:15px;padding:10px 14px;border-radius:10px;border:1px dashed var(--edge);color:var(--ink-3);margin-top:10px}
@@ -61,21 +88,41 @@
 
   <section class="panel">
     <h2>▶ FIRE SHOTS — the shout dies, the whisper survives</h2>
-    <p style="font-size:14px;color:var(--ink-2);max-width:70ch">The hidden answer below is the <em>actual sealed string from the winning race</em> (revealed post-grade). Pick a circuit depth, fire shots, and watch two decoders race: the <b>modal decoder</b> (waits for one shot to be perfectly correct — all 40 bits at once) vs the <b>shot-axis decoder</b> (per-bit majority across every shot). The noise model uses the measured constants: per-bit bias 0.91·e<sup>−0.0029·d</sup> (clean-register law), ×0.75 magic tax for t=80 circuits.</p>
+    <p style="font-size:14px;color:var(--ink-2);max-width:70ch">The hidden answer below is the <em>actual sealed string from the winning race</em> (revealed post-grade). Every shot of the circuit returns that answer <em>with typos</em>. The <b>modal decoder</b> needs one shot with zero typos; the <b>shot-axis decoder</b> lets every shot vote, bit by bit, and reads the majority. Fire shots and watch the pipeline run: a noisy shot arrives → its votes pile onto 40 running tallies → each tally climbs out of the coin-flip zone and locks. Noise model = the measured constants: per-bit bias 0.91·e<sup>−0.0029·d</sup>, ×0.75 magic tax for t=80 circuits.</p>
     <div class="ctl">
       <label>depth d2q: <b id="dv">167</b></label>
       <input type="range" id="depth" min="40" max="300" value="167">
-      <button class="btn" id="fire100">fire 100 shots</button>
+      <button class="btn" id="fire1">fire 1 shot</button>
+      <button class="btn" id="fire100">fire 100</button>
       <button class="btn" id="fire2k">fire 2,500</button>
       <button class="btn warn" id="reset">reset</button>
     </div>
-    <div class="stat">
-      <span>shots: <b id="shots">0</b></span>
-      <span>modal decoder (loudest single answer): <b class="dead" id="modal">—</b></span>
-      <span>majority decoder: <b id="hd">HD — </b></span>
+    <div class="depthstat">at this depth: per-bit P(correct) ≈ <b id="pval">—</b> · expected typos per shot ≈ <b id="typoexp">—</b> of 40 · P(one perfect shot) ≈ <b id="pperf">—</b></div>
+
+    <div class="stg"><span class="no">①</span> SHOT ARRIVES <span class="hint">— the latest shot; red cells are its typos</span></div>
+    <div class="shotrow" id="shotrow"></div>
+    <div class="typoline" id="typoline">no shots yet — every shot will be the answer, scrambled a little</div>
+
+    <div class="stg"><span class="no">②</span> VOTES ACCUMULATE <span class="hint">— each column: fraction of all shots voting “1” for that bit</span></div>
+    <div class="chamber" id="chamber" role="img" aria-label="40 vote tallies, one per bit, drifting away from the 50 percent midline as shots accumulate">
+      <div class="band" id="band"></div>
+      <div class="mid"></div>
+      <span class="axlab one">1</span><span class="axlab zero">0</span>
     </div>
-    <div class="bits" id="bits" aria-label="per-bit majority state"></div>
-    <div class="verdict" id="verdict">Fire shots. Green = majority has that bit right; red = wrong; the modal decoder needs one shot with ALL 40 green at once.</div>
+    <div class="legend">grey band = coin-flip zone (±2σ, shrinks as √shots) · <span class="a">amber = still inside it, undecided</span> · <span class="c">cyan = locked on the sealed bit</span> · <span class="r">red = locked wrong</span></div>
+
+    <div class="stg"><span class="no">③</span> MAJORITY READS <span class="hint">— per-bit majority vs the sealed answer</span></div>
+    <div class="rowlab">sealed answer S (revealed post-grade)</div>
+    <div class="bitrow" id="rowS"></div>
+    <div class="rowlab">majority read ŝ</div>
+    <div class="bitrow" id="rowM"></div>
+    <div class="stat" style="margin-top:10px">
+      <span>shots: <b id="shots">0</b></span>
+      <span>avg typos/shot: <b id="avgtypo">—</b></span>
+      <span>modal decoder: <b class="dead" id="modal">—</b></span>
+      <span>majority decoder: <b id="hd">HD —</b></span>
+    </div>
+    <div class="verdict" id="verdict">Fire 1 shot and watch it arrive full of typos. Then fire volleys — the columns climb out of the coin-flip band and the answer locks in, bit by bit.</div>
   </section>
 
   <section class="panel">
@@ -111,53 +158,123 @@
 (function(){
   const S = "0101010111110000100110110100011000000011"; // race-6 revealed sealed string
   const N = 40, B0 = 0.91, LAM = 0.0029, RHO_T = 0.75;
-  const bitsEl = document.getElementById('bits');
-  const cells = [];
-  for (let i = 0; i < N; i++) {
-    const d = document.createElement('div');
-    d.className = 'bit'; d.textContent = '·';
-    bitsEl.appendChild(d); cells.push(d);
-  }
-  let ones = new Array(N).fill(0), shots = 0, modalHits = 0;
   const $ = id => document.getElementById(id);
-  function q(d){ return 0.5 + 0.5 * B0 * Math.exp(-LAM * d) * RHO_T; }
-  function fire(n){
-    const depth = +$('depth').value, p = q(depth);
-    for (let k = 0; k < n; k++) {
-      let all = true;
-      for (let i = 0; i < N; i++) {
-        const correct = Math.random() < p;
-        const bit = correct ? +S[i] : 1 - +S[i];
-        ones[i] += bit;
-        if (!correct) all = false;
-      }
-      if (all) modalHits++;
-    }
-    shots += n; render();
+  const q = d => 0.5 + 0.5 * B0 * Math.exp(-LAM * d) * RHO_T;
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // build the three stages' cells
+  const shotCells = [], cols = [], sCells = [], mCells = [];
+  const shotEl = $('shotrow'), chamber = $('chamber'), rowS = $('rowS'), rowM = $('rowM');
+  for (let i = 0; i < N; i++) {
+    const sr = document.createElement('div'); sr.className = 'sr-cell'; sr.textContent = '·';
+    shotEl.appendChild(sr); shotCells.push(sr);
+    const col = document.createElement('div'); col.className = 'vcol';
+    const up = document.createElement('div'); up.className = 'vup';
+    const dn = document.createElement('div'); dn.className = 'vdn';
+    col.appendChild(up); col.appendChild(dn); chamber.appendChild(col); cols.push({col, up, dn});
+    const sc = document.createElement('div'); sc.className = 'br-cell s'; sc.textContent = S[i];
+    rowS.appendChild(sc); sCells.push(sc);
+    const mc = document.createElement('div'); mc.className = 'br-cell idle'; mc.textContent = '·';
+    rowM.appendChild(mc); mCells.push(mc);
   }
-  function render(){
-    let hd = 0;
+
+  let ones = new Array(N).fill(0), shots = 0, modalHits = 0, typoSum = 0, last = null;
+  let pending = 0, raf = null;
+
+  function fireOne(p){
+    let typos = 0; const bits = new Array(N);
     for (let i = 0; i < N; i++) {
-      const maj = (ones[i] * 2 > shots) ? 1 : 0;
-      const ok = shots > 0 && maj === +S[i];
-      cells[i].textContent = shots ? String(maj) : '·';
-      cells[i].className = 'bit' + (shots ? (ok ? ' ok' : ' bad') : '');
+      const correct = Math.random() < p;
+      const b = correct ? +S[i] : 1 - +S[i];
+      bits[i] = b; ones[i] += b;
+      if (!correct) typos++;
+    }
+    if (typos === 0) modalHits++;
+    typoSum += typos; shots++; last = {bits, typos};
+  }
+  // stream shots across frames so the accumulation is watchable
+  function pump(){
+    const p = q(+$('depth').value);
+    const n = REDUCED ? pending : (pending > 600 ? 60 : pending > 30 ? 3 : 1);
+    for (let k = 0; k < n && pending > 0; k++) { fireOne(p); pending--; }
+    render();
+    raf = pending > 0 ? requestAnimationFrame(pump) : null;
+  }
+  function fire(n){ pending += n; if (!raf) raf = requestAnimationFrame(pump); }
+
+  function render(){
+    // ① the latest shot, typos marked
+    if (last) {
+      for (let i = 0; i < N; i++) {
+        shotCells[i].textContent = last.bits[i];
+        shotCells[i].className = 'sr-cell' + (last.bits[i] !== +S[i] ? ' typo' : '');
+      }
+      $('typoline').innerHTML = last.typos === 0
+        ? 'typos this shot: <b class="p">0 — PERFECT, the modal decoder accepts it</b>'
+        : 'typos this shot: <b class="t">' + last.typos + '</b> of 40 — the modal decoder throws it away; the majority keeps all 40 votes';
+    } else {
+      for (let i = 0; i < N; i++) { shotCells[i].textContent = '·'; shotCells[i].className = 'sr-cell'; }
+      $('typoline').textContent = 'no shots yet — every shot will be the answer, scrambled a little';
+    }
+    // ② vote chamber: bar = deviation of the "1"-vote fraction from 50%; band = ±2σ coin-flip zone
+    $('band').style.height = (shots ? Math.min(100, 200 / Math.sqrt(shots)) : 100) + '%';
+    let hd = 0, lockedCount = 0;
+    for (let i = 0; i < N; i++) {
+      const frac = shots ? ones[i] / shots : 0.5;
+      const dev = frac - 0.5;
+      const maj = shots && ones[i] * 2 > shots ? 1 : 0;
+      const ok = maj === +S[i];
+      const locked = shots > 0 && Math.abs(ones[i] - shots / 2) > Math.sqrt(shots);
+      if (locked) lockedCount++;
+      const cls = !shots ? 'idle' : !locked ? 'und' : ok ? 'ok' : 'bad';
+      cols[i].col.className = 'vcol ' + cls;
+      cols[i].up.style.height = (Math.max(0, dev) * 100) + '%';
+      cols[i].dn.style.height = (Math.max(0, -dev) * 100) + '%';
+      // ③ majority readout
+      mCells[i].textContent = shots ? String(maj) : '·';
+      mCells[i].className = 'br-cell ' + cls;
       if (shots && !ok) hd++;
     }
+    // stats
     $('shots').textContent = shots.toLocaleString();
-    $('modal').textContent = shots ? (modalHits + ' perfect shot' + (modalHits===1?'':'s')) : '—';
+    $('avgtypo').textContent = shots ? (typoSum / shots).toFixed(1) : '—';
+    $('modal').textContent = shots ? (modalHits + ' perfect shot' + (modalHits === 1 ? '' : 's')) : '—';
     $('modal').className = modalHits > 0 ? 'good' : 'dead';
     $('hd').textContent = shots ? ('HD ' + hd) : 'HD —';
+    // verdict: won only when exact AND every bit has left the coin-flip band
     const v = $('verdict');
-    if (!shots) { v.className='verdict'; v.textContent='Fire shots. Green = majority has that bit right; red = wrong; the modal decoder needs one shot with ALL 40 bits right at once.'; return; }
-    if (hd === 0) { v.className='verdict won'; v.textContent='✓ DECODED — the majority reads the sealed answer exactly (' + shots.toLocaleString() + ' shots), ' + (modalHits===0 ? 'while not one single shot was perfect. The whisper beat the shout.' : 'modal also survived at this shallow depth — deepen the slider.'); }
-    else { v.className='verdict'; v.textContent='Majority still ' + hd + ' bit' + (hd===1?'':'s') + ' from the answer — keep firing, or note how the red cells thin as shots grow while the modal count stays near zero at depth.'; }
+    if (!shots) { v.className = 'verdict'; v.textContent = 'Fire 1 shot and watch it arrive full of typos. Then fire volleys — the columns climb out of the coin-flip band and the answer locks in, bit by bit.'; return; }
+    if (hd === 0 && lockedCount === N) {
+      v.className = 'verdict won';
+      v.textContent = '✓ DECODED — all 40 tallies locked outside the noise band and the majority reads the sealed answer exactly (' + shots.toLocaleString() + ' shots), ' + (modalHits === 0 ? 'while not one single shot was perfect. The whisper beat the shout.' : 'though at this shallow depth the modal decoder also survived — deepen the slider and reset.');
+    } else if (hd === 0) {
+      v.className = 'verdict';
+      v.textContent = 'Majority currently matches all 40 — but ' + (N - lockedCount) + ' tall' + (N - lockedCount === 1 ? 'y is' : 'ies are') + ' still amber inside the coin-flip band. Keep firing until every column locks.';
+    } else {
+      v.className = 'verdict';
+      v.textContent = 'Majority still ' + hd + ' bit' + (hd === 1 ? '' : 's') + ' from the answer — keep firing and watch the amber columns drift out of the band while the modal count stays at zero.';
+    }
   }
-  $('depth').addEventListener('input', () => { $('dv').textContent = $('depth').value; });
+
+  function updDepth(){
+    const d = +$('depth').value, p = q(d);
+    $('dv').textContent = d;
+    $('pval').textContent = p.toFixed(3);
+    $('typoexp').textContent = (N * (1 - p)).toFixed(1);
+    const pp = Math.pow(p, N);
+    $('pperf').textContent = pp >= 0.01 ? (pp * 100).toFixed(0) + '%' : '1 in ' + Math.round(1 / pp).toLocaleString();
+  }
+
+  $('depth').addEventListener('input', updDepth);
+  $('fire1').addEventListener('click', () => fire(1));
   $('fire100').addEventListener('click', () => fire(100));
   $('fire2k').addEventListener('click', () => fire(2500));
-  $('reset').addEventListener('click', () => { ones.fill(0); shots = 0; modalHits = 0; render(); });
-  render();
+  $('reset').addEventListener('click', () => {
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    pending = 0; ones.fill(0); shots = 0; modalHits = 0; typoSum = 0; last = null;
+    render();
+  });
+  updDepth(); render();
 })();
 </script>
 </body>
