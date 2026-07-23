@@ -1,0 +1,481 @@
+{
+ "twin_drifters": [
+  {
+   "pos": 3,
+   "phys_twin": 53,
+   "ladder66": 0.636,
+   "ladder198": 0.3,
+   "twin160": 0.409,
+   "twin220": 0.283,
+   "twin280": 0.045,
+   "organic_pred280": 0.188
+  },
+  {
+   "pos": 13,
+   "phys_twin": 26,
+   "ladder66": 0.7,
+   "ladder198": -0.0,
+   "twin160": 0.345,
+   "twin220": 0.011,
+   "twin280": -0.277,
+   "organic_pred280": null
+  },
+  {
+   "pos": 24,
+   "phys_twin": 73,
+   "ladder66": 0.7,
+   "ladder198": 0.32,
+   "twin160": 0.345,
+   "twin220": -0.029,
+   "twin280": -0.321,
+   "organic_pred280": 0.197
+  },
+  {
+   "pos": 30,
+   "phys_twin": 23,
+   "ladder66": 0.906,
+   "ladder198": 0.413,
+   "twin160": 0.545,
+   "twin220": 0.222,
+   "twin280": -0.087,
+   "organic_pred280": 0.253
+  }
+ ],
+ "twin_bit_table": [
+  {
+   "pos": 0,
+   "phys_twin": 49,
+   "ladder66": 0.578,
+   "ladder198": 0.186,
+   "twin160": 0.372,
+   "twin220": 0.251,
+   "twin280": 0.124,
+   "organic_pred280": 0.092
+  },
+  {
+   "pos": 1,
+   "phys_twin": 50,
+   "ladder66": 0.471,
+   "ladder198": 0.068,
+   "twin160": 0.066,
+   "twin220": 0.012,
+   "twin280": -0.017,
+   "organic_pred280": 0.021
+  },
+  {
+   "pos": 2,
+   "phys_twin": 58,
+   "ladder66": 0.855,
+   "ladder198": 0.745,
+   "twin160": 0.827,
+   "twin220": 0.828,
+   "twin280": 0.83,
+   "organic_pred280": 0.684
+  },
+  {
+   "pos": 3,
+   "phys_twin": 53,
+   "ladder66": 0.636,
+   "ladder198": 0.3,
+   "twin160": 0.409,
+   "twin220": 0.283,
+   "twin280": 0.045,
+   "organic_pred280": 0.188
+  },
+  {
+   "pos": 4,
+   "phys_twin": 70,
+   "ladder66": 0.909,
+   "ladder198": 0.763,
+   "twin160": 0.874,
+   "twin220": 0.902,
+   "twin280": 0.898,
+   "organic_pred280": 0.684
+  },
+  {
+   "pos": 5,
+   "phys_twin": 17,
+   "ladder66": 0.942,
+   "ladder198": 0.429,
+   "twin160": 0.799,
+   "twin220": 0.713,
+   "twin280": 0.606,
+   "organic_pred280": 0.263
+  },
+  {
+   "pos": 6,
+   "phys_twin": 30,
+   "ladder66": 0.746,
+   "ladder198": 0.454,
+   "twin160": 0.659,
+   "twin220": 0.66,
+   "twin280": 0.637,
+   "organic_pred280": 0.334
+  },
+  {
+   "pos": 7,
+   "phys_twin": 54,
+   "ladder66": 0.843,
+   "ladder198": 0.536,
+   "twin160": 0.821,
+   "twin220": 0.816,
+   "twin280": 0.814,
+   "organic_pred280": 0.405
+  },
+  {
+   "pos": 8,
+   "phys_twin": 48,
+   "ladder66": 0.64,
+   "ladder198": 0.233,
+   "twin160": 0.522,
+   "twin220": 0.347,
+   "twin280": 0.205,
+   "organic_pred280": 0.125
+  },
+  {
+   "pos": 9,
+   "phys_twin": 34,
+   "ladder66": 0.805,
+   "ladder198": 0.617,
+   "twin160": 0.632,
+   "twin220": 0.559,
+   "twin280": 0.408,
+   "organic_pred280": 0.523
+  },
+  {
+   "pos": 10,
+   "phys_twin": 24,
+   "ladder66": 0.613,
+   "ladder198": 0.071,
+   "twin160": 0.249,
+   "twin220": 0.025,
+   "twin280": -0.09,
+   "organic_pred280": 0.018
+  },
+  {
+   "pos": 11,
+   "phys_twin": 27,
+   "ladder66": 0.497,
+   "ladder198": 0.029,
+   "twin160": 0.434,
+   "twin220": 0.401,
+   "twin280": 0.345,
+   "organic_pred280": 0.005
+  },
+  {
+   "pos": 12,
+   "phys_twin": 3,
+   "ladder66": 0.973,
+   "ladder198": 0.967,
+   "twin160": 0.913,
+   "twin220": 0.906,
+   "twin280": 0.893,
+   "organic_pred280": 0.963
+  },
+  {
+   "pos": 13,
+   "phys_twin": 26,
+   "ladder66": 0.7,
+   "ladder198": -0.0,
+   "twin160": 0.345,
+   "twin220": 0.011,
+   "twin280": -0.277,
+   "organic_pred280": null
+  },
+  {
+   "pos": 14,
+   "phys_twin": 75,
+   "ladder66": 0.975,
+   "ladder198": 0.954,
+   "twin160": 0.903,
+   "twin220": 0.893,
+   "twin280": 0.892,
+   "organic_pred280": 0.941
+  },
+  {
+   "pos": 15,
+   "phys_twin": 32,
+   "ladder66": 0.642,
+   "ladder198": 0.263,
+   "twin160": 0.505,
+   "twin220": 0.433,
+   "twin280": 0.183,
+   "organic_pred280": 0.151
+  },
+  {
+   "pos": 16,
+   "phys_twin": 47,
+   "ladder66": 0.957,
+   "ladder198": 0.827,
+   "twin160": 0.714,
+   "twin220": 0.661,
+   "twin280": 0.655,
+   "organic_pred280": 0.755
+  },
+  {
+   "pos": 17,
+   "phys_twin": 141,
+   "ladder66": 0.969,
+   "ladder198": 0.944,
+   "twin160": 0.925,
+   "twin220": 0.927,
+   "twin280": 0.93,
+   "organic_pred280": 0.929
+  },
+  {
+   "pos": 18,
+   "phys_twin": 45,
+   "ladder66": 0.622,
+   "ladder198": 0.176,
+   "twin160": 0.164,
+   "twin220": -0.164,
+   "twin280": -0.092,
+   "organic_pred280": 0.08
+  },
+  {
+   "pos": 19,
+   "phys_twin": 29,
+   "ladder66": 0.456,
+   "ladder198": 0.01,
+   "twin160": 0.328,
+   "twin220": 0.216,
+   "twin280": 0.14,
+   "organic_pred280": 0.001
+  },
+  {
+   "pos": 20,
+   "phys_twin": 38,
+   "ladder66": 0.746,
+   "ladder198": 0.359,
+   "twin160": 0.545,
+   "twin220": 0.387,
+   "twin280": 0.198,
+   "organic_pred280": 0.228
+  },
+  {
+   "pos": 21,
+   "phys_twin": 52,
+   "ladder66": 0.715,
+   "ladder198": 0.484,
+   "twin160": 0.62,
+   "twin220": 0.578,
+   "twin280": 0.538,
+   "organic_pred280": 0.379
+  },
+  {
+   "pos": 22,
+   "phys_twin": 71,
+   "ladder66": 0.874,
+   "ladder198": 0.674,
+   "twin160": 0.731,
+   "twin220": 0.682,
+   "twin280": 0.567,
+   "organic_pred280": 0.574
+  },
+  {
+   "pos": 23,
+   "phys_twin": 55,
+   "ladder66": 0.771,
+   "ladder198": 0.478,
+   "twin160": 0.69,
+   "twin220": 0.641,
+   "twin280": 0.607,
+   "organic_pred280": 0.355
+  },
+  {
+   "pos": 24,
+   "phys_twin": 73,
+   "ladder66": 0.7,
+   "ladder198": 0.32,
+   "twin160": 0.345,
+   "twin220": -0.029,
+   "twin280": -0.321,
+   "organic_pred280": 0.197
+  },
+  {
+   "pos": 25,
+   "phys_twin": 7,
+   "ladder66": 0.756,
+   "ladder198": 0.31,
+   "twin160": 0.375,
+   "twin220": 0.238,
+   "twin280": 0.187,
+   "organic_pred280": 0.178
+  },
+  {
+   "pos": 26,
+   "phys_twin": 33,
+   "ladder66": 0.777,
+   "ladder198": 0.491,
+   "twin160": 0.717,
+   "twin220": 0.742,
+   "twin280": 0.69,
+   "organic_pred280": 0.369
+  },
+  {
+   "pos": 27,
+   "phys_twin": 72,
+   "ladder66": 0.745,
+   "ladder198": 0.46,
+   "twin160": 0.644,
+   "twin220": 0.558,
+   "twin280": 0.441,
+   "organic_pred280": 0.341
+  },
+  {
+   "pos": 28,
+   "phys_twin": 51,
+   "ladder66": 0.783,
+   "ladder198": 0.587,
+   "twin160": 0.6,
+   "twin220": 0.405,
+   "twin280": 0.31,
+   "organic_pred280": 0.49
+  },
+  {
+   "pos": 29,
+   "phys_twin": 39,
+   "ladder66": 0.843,
+   "ladder198": 0.591,
+   "twin160": 0.691,
+   "twin220": 0.61,
+   "twin280": 0.369,
+   "organic_pred280": 0.474
+  },
+  {
+   "pos": 30,
+   "phys_twin": 23,
+   "ladder66": 0.906,
+   "ladder198": 0.413,
+   "twin160": 0.545,
+   "twin220": 0.222,
+   "twin280": -0.087,
+   "organic_pred280": 0.253
+  },
+  {
+   "pos": 31,
+   "phys_twin": 28,
+   "ladder66": 0.781,
+   "ladder198": 0.039,
+   "twin160": 0.724,
+   "twin220": 0.683,
+   "twin280": 0.641,
+   "organic_pred280": 0.006
+  },
+  {
+   "pos": 32,
+   "phys_twin": 2,
+   "ladder66": 0.97,
+   "ladder198": 0.939,
+   "twin160": 0.895,
+   "twin220": 0.831,
+   "twin280": 0.837,
+   "organic_pred280": 0.921
+  },
+  {
+   "pos": 33,
+   "phys_twin": 25,
+   "ladder66": 0.845,
+   "ladder198": 0.2,
+   "twin160": -0.393,
+   "twin220": 0.267,
+   "twin280": 0.068,
+   "organic_pred280": 0.082
+  },
+  {
+   "pos": 34,
+   "phys_twin": 59,
+   "ladder66": 0.96,
+   "ladder198": 0.94,
+   "twin160": 0.858,
+   "twin220": 0.834,
+   "twin280": 0.816,
+   "organic_pred280": 0.927
+  },
+  {
+   "pos": 35,
+   "phys_twin": 35,
+   "ladder66": 0.824,
+   "ladder198": 0.589,
+   "twin160": 0.758,
+   "twin220": 0.719,
+   "twin280": 0.693,
+   "organic_pred280": 0.478
+  },
+  {
+   "pos": 36,
+   "phys_twin": 57,
+   "ladder66": 0.902,
+   "ladder198": 0.636,
+   "twin160": 0.797,
+   "twin220": 0.715,
+   "twin280": 0.57,
+   "organic_pred280": 0.512
+  },
+  {
+   "pos": 37,
+   "phys_twin": 142,
+   "ladder66": 0.963,
+   "ladder198": 0.945,
+   "twin160": 0.932,
+   "twin220": 0.926,
+   "twin280": 0.927,
+   "organic_pred280": 0.935
+  },
+  {
+   "pos": 38,
+   "phys_twin": 37,
+   "ladder66": 0.689,
+   "ladder198": 0.384,
+   "twin160": 0.601,
+   "twin220": 0.55,
+   "twin280": 0.541,
+   "organic_pred280": 0.268
+  },
+  {
+   "pos": 39,
+   "phys_twin": 31,
+   "ladder66": 0.674,
+   "ladder198": 0.29,
+   "twin160": 0.608,
+   "twin220": 0.531,
+   "twin280": 0.434,
+   "organic_pred280": 0.172
+  }
+ ],
+ "t80_drifters": [
+  {
+   "pos": 13,
+   "phys_race": 46,
+   "t80_160": 0.171,
+   "t80_220": 0.114,
+   "t80_280": 0.044
+  },
+  {
+   "pos": 27,
+   "phys_race": 70,
+   "t80_160": 0.357,
+   "t80_220": 0.028,
+   "t80_280": -0.199
+  },
+  {
+   "pos": 36,
+   "phys_race": 57,
+   "t80_160": 0.365,
+   "t80_220": 0.217,
+   "t80_280": -0.005
+  }
+ ],
+ "card": "pad_drift_localization",
+ "cycle": "C4984",
+ "substrate": "claude-fable-5",
+ "mechanism_verdict": {
+  "arm_disjointness": "twin drifter physicals {23,26,53,73} vs t80 {46,57,70} \u2014 ZERO overlap => circuit-structure-tied (each arm's own repeated pad layers), NOT per-qubit hardware",
+  "coherence_smoking_gun": "3 of 7 drifters reach SIGNIFICANTLY NEGATIVE bias (-0.32/-0.28/-0.20 at 50-100k shots): incoherent noise floors at 0; only coherent evolution anti-correlates a bit with truth",
+  "rotation_rate": "monotone cosine-like decline vs pad count; e.g. twin pos24: 0.345 -> -0.029 -> -0.321 at 47/77/107 pads => ~1.4 deg/pad-pair coherent rotation \u2014 inside the known 1-3 deg coherent gate-error band",
+  "race_misses_explained": "t80 drifters {pos27,36} ARE the HD-2 misses at d280",
+  "conclusion": "the pad-dose estimator divergence (c4983b) is a small coherent under-rotation per L.L pair accumulating linearly on layer-participant bits \u2014 the L.L pair is identity only in the Pauli/stochastic sector; its coherent residual (e.g. ZZ during CZ) adds, not cancels",
+  "design_rule": "if padding is used as a depth knob: TWIRL THE PAD PAIRS INDEPENDENTLY per repetition (randomized compiling makes the coherent residual stochastic) \u2014 untested prediction, named for any future pad-based design",
+  "followup_not_done": "exact pad-layer membership map needs circuit rebuild (calibration-drift-sensitive) \u2014 not required for the mechanism verdict"
+ }
+}

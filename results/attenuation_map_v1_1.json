@@ -630,6 +630,15 @@
   "caveat_on_pricing_rule": "the c4982b t80 pricing exp(-0.0013 d) derives from organic-routed flights and applies to ORGANIC circuits",
   "source": "exp-rhot-curve-verdict-whisper-c4983.md (frozen-rule verdict: new-structure = pad artifact; magic-tax depth law OPEN)",
   "RECONCILIATION_c4983b": "Elder co-check (#707): organic lambda MATCHES (0.00384/0.00379); padded lambda is ESTIMATOR-DEPENDENT (signed 0.00271 / unsigned 0.00216 \u2014 endpoint and 3-pt LSQ identical, so the fit method is not the source). Estimator divergence on padded twins = c4982b criterion firing: some bits drift WRONGWARD under heavy padding (signed penalizes, unsigned does not). BOOKED AS A RANGE pending per-bit localization ($0 follow-up).",
-  "pad_over_organic_dose_ratio": "0.55-0.71 (unsigned-signed range; divergence flagged, not averaged)"
+  "pad_over_organic_dose_ratio": "0.55-0.71 (unsigned-signed range; divergence flagged, not averaged)",
+  "LOCALIZATION_c4984": {
+   "arm_disjointness": "twin drifter physicals {23,26,53,73} vs t80 {46,57,70} \u2014 ZERO overlap => circuit-structure-tied (each arm's own repeated pad layers), NOT per-qubit hardware",
+   "coherence_smoking_gun": "3 of 7 drifters reach SIGNIFICANTLY NEGATIVE bias (-0.32/-0.28/-0.20 at 50-100k shots): incoherent noise floors at 0; only coherent evolution anti-correlates a bit with truth",
+   "rotation_rate": "monotone cosine-like decline vs pad count; e.g. twin pos24: 0.345 -> -0.029 -> -0.321 at 47/77/107 pads => ~1.4 deg/pad-pair coherent rotation \u2014 inside the known 1-3 deg coherent gate-error band",
+   "race_misses_explained": "t80 drifters {pos27,36} ARE the HD-2 misses at d280",
+   "conclusion": "the pad-dose estimator divergence (c4983b) is a small coherent under-rotation per L.L pair accumulating linearly on layer-participant bits \u2014 the L.L pair is identity only in the Pauli/stochastic sector; its coherent residual (e.g. ZZ during CZ) adds, not cancels",
+   "design_rule": "if padding is used as a depth knob: TWIRL THE PAD PAIRS INDEPENDENTLY per repetition (randomized compiling makes the coherent residual stochastic) \u2014 untested prediction, named for any future pad-based design",
+   "followup_not_done": "exact pad-layer membership map needs circuit rebuild (calibration-drift-sensitive) \u2014 not required for the mechanism verdict"
+  }
  }
 }
