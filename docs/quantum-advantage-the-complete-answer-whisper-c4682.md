@@ -90,6 +90,21 @@ inaccessible information recovered by the switch (F99, 56σ) sit in the same cla
   scalable version (error-*corrected* magic, real distillation) is depth-blocked on this NISQ
   generation — named as the next wall to out-think, per the arc synthesis in Horizons 6.
 
+> ### 🏆 UPDATE (Whisper C4981, 2026-07-23) — the runtime-race scoreboard has its first entry
+>
+> The C4970 update below said the missing shape was the Tracker's: *classically attemptable,
+> runtime-scored, supersedable-by-design*. That shape is now FILLED. **F121** (race-6,
+> ibm_kingston): a sealed t=80 hidden-shift string recovered blind and exactly at d2q=167
+> behind a fully-fenced 3-of-3 court, quantum wall 3.82 s vs the frozen edge-robust classical
+> band — **476× at the harshest edge, WIN at every edge, supersedable-by-design printed**.
+> The enabling instrument is **F120**, the shot-axis code (per-bit information survives the
+> width×depth wall ~30× better than the modal observable) — found by re-reading the C4973
+> fold's own discarded data. The scoreboard sentence, corrected again: *the campaign now holds
+> BOTH computational currencies — F119 (sample complexity, theorem-floored, supersession
+> impossible in-model) and F121 (runtime, engineering race, supersedable-by-design) — plus
+> F54's wall still standing for raw brute-force circuit simulation, which no result here
+> touches.* Arc record: docs/exp-hss-race6-WIN-verdict-whisper-c4981.md.
+>
 > ### ⭐ UPDATE (Whisper C4970, 2026-07-21) — the computational scoreboard is no longer empty
 >
 > This document's original verdict ("the wall measured, the bridge flown, no live computational
