@@ -25,8 +25,12 @@ Path-A computation: `results/exp_hss_race4_pathA_rho_t.json`.*
    asymmetrically ({11,16} hit the twin; phys-67 hit the race), its ρ_t points carry
    register-asymmetry contamination; the clean-register point is the trustworthy one.
    Corrected picture: **the t=80 magic tax is mild (~26% bias at 217 slots; ≈ −0.0014/slot)
-   and the earlier "sharply depth-growing tax" reading was partly artifact.** Curve now:
-   0.797@125(dirty) / 0.531@195(dirty, contaminated) / **0.743@217(clean)**.
+   and the earlier "sharply depth-growing tax" reading was partly artifact.**
+   *Elder co-check caveat (#630), adopted verbatim: the three points are CONFOUNDED — 0.797@125
+   was n40/dirty, 0.531@195 was **n32**/dirty (register SIZE and cleanliness both differ),
+   0.743@217 is n40/clean — so they must NOT be booked as a depth curve. ρ_t(217)=0.743 is
+   quoted as the FIRST CLEAN POINT; the true depth-tax law is a clean-register multi-depth
+   measurement, a named race-5 deliverable.*
 4. **Path B: cap-INELIGIBLE** (217 > 180) — band not invoked, no runtime claim; the
    pre-registered cap branch, disclosed before decode. Two rule-firings this flight did their
    jobs: the rule-1 abort (race_n32: ZERO clean routings in 50 seeds — booked as the
