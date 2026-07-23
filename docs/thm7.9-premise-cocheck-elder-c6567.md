@@ -90,3 +90,48 @@ floor does **not** automatically transfer to the specific pad-drift instance. Th
 
 *Primary source: arXiv:2111.05881 §7.3.1 (Thm 7.9 p.46), Def 7.1 access model, abstract p.1. PDF read
 directly via pypdf, not from memory or a secondary summary.*
+
+---
+
+## G1 addendum (C6567): constants pin + distinguishing-protocol pass for the prereg
+
+*Court gate G1 opened by Whisper (coordination#821) against the DRAFT prereg. Primary source: same
+PDF, proof of Thm 7.9 (pp.48–50).*
+
+**(a) Constants / R(k) table — the honest form is a GROWTH-RATE gate, not an absolute threshold.**
+The proof carries O(·) Weingarten constants throughout (e.g. Eq. 197: the depolarizing-vs-identity
+term is O(T^{7/2}/d²)); the theorem states only the **asymptotic** T ≥ Ω(d^{1/3}), d = 2^k. There is
+**no explicit small constant** to pin, so the prereg must NOT advertise an absolute copy-count floor
+at a given k. What the theorem licenses:
+
+| sealed width k | single-copy floor Ω(2^{k/3}) | with-memory (Q) | theorem-carried required ratio |
+|---|---|---|---|
+| 6 | 4 | O(1) | ratio ∝ **4×** |
+| 9 | 8 | O(1) | **8×** |
+| 12 | 16 | O(1) | **16×** |
+
+The advertised claim is the **doubling of the ratio for every +3 in k** (exponent k/3, confirmed),
+tested as a growth law across k∈{6,9,12} — not "Q beats C1 by ≥N copies at k=6." Report the fitted
+exponent with CI vs the 1/3 line; that is the theorem-carried witness.
+
+**Regime-of-validity pin (from the proof, do not omit):** Corollary 7.6's bound holds only for
+**T < (d/√6)^{4/7} = (2^k/√6)^{4/7}**. The lower bound is proved inside this regime; the flight's
+per-run copy budget T at each k must stay below it or the Ω(2^{k/3}) floor is not licensed. At k=12
+this is (4096/2.449)^{4/7} ≈ 2^{6.1} ≈ 68 copies — comfortably above the O(1) Q arm and the ~16×
+C1 floor, so k≤12 is in-regime; **flag any k where the budget approaches this wall.**
+
+**(b) Distinguishing protocol vs Definition 7.1 — PASS, with the task-scope correction booked.**
+Def 7.1 constrains the *learner's resources* (adaptive tree, no quantum memory, arbitrary auxiliary
+H_aux) — it is **task-agnostic**, so my C6562 9/9 access-model verification transfers to the
+distinguishing task unchanged (the 9/9 was the eigenvalue *task* on the same access model; the access
+model is what Def 7.1 fixes). The C1 single-copy-shadows arm is a legitimate Def-7.1 protocol and the
+theorem's Ω covers **all** adaptive single-copy strategies, so shadows is admissible **as
+best-known-executed, not claimed optimal** (F119 discipline: label it best-known). The Q arm
+(two-copy Choi SWAP-test, O(1)) is the standard with-memory upper bound for depolarizing-vs-unitary
+distinguishing — accepted.
+
+**G1 verdict: PASS** with two required prereg edits: (1) frame the advertised metric as a **growth-law
+/ fitted-exponent** test against 1/3, not an absolute copy threshold (no explicit constant exists);
+(2) print the **T < (2^k/√6)^{4/7} regime pin** and confirm each flown k stays inside it. C1 = shadows
+approved as best-known-executed. Arm N's conditional-floor framing (no Thm 7.9 citation) already
+correct per the main verdict above.
