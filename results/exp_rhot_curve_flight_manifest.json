@@ -1,0 +1,832 @@
+{
+ "card": "exp_rhot_curve_flight_manifest",
+ "cycle": "C4983",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_kingston",
+ "prereg": "docs/exp-hss-race6-prereg-FROZEN-whisper-c4981.md",
+ "seals_committed": "results/exp_rhot_curve_seals_ember.json",
+ "depth_cap": 200,
+ "excluded_physicals": [],
+ "advantage_eligible": {
+  "race_n40": true
+ },
+ "depths": [
+  160,
+  220,
+  280
+ ],
+ "twin_plans": {
+  "160": {
+   "seed_off": 6,
+   "fold_m": 0,
+   "pad_pairs_arith": 47,
+   "pad_layer_pairs_used": 47
+  },
+  "220": {
+   "pad_layer_pairs_used": 30,
+   "from": "twin_base"
+  },
+  "280": {
+   "pad_layer_pairs_used": 60,
+   "from": "twin_base"
+  }
+ },
+ "t80_plans": {
+  "160": {
+   "pad_layer_pairs_used": 0
+  },
+  "220": {
+   "pad_layer_pairs_used": 30,
+   "from": "t40"
+  },
+  "280": {
+   "pad_layer_pairs_used": 60,
+   "from": "t40"
+  }
+ },
+ "layouts": {
+  "race_n40": {
+   "initial": [
+    52,
+    32,
+    142,
+    38,
+    34,
+    59,
+    46,
+    2,
+    37,
+    16,
+    39,
+    47,
+    51,
+    28,
+    17,
+    50,
+    31,
+    72,
+    54,
+    27,
+    71,
+    33,
+    141,
+    29,
+    35,
+    75,
+    45,
+    3,
+    25,
+    23,
+    53,
+    48,
+    58,
+    49,
+    7,
+    70,
+    30,
+    73,
+    55,
+    26
+   ],
+   "final": [
+    71,
+    31,
+    142,
+    57,
+    35,
+    59,
+    37,
+    2,
+    25,
+    16,
+    32,
+    58,
+    70,
+    17,
+    7,
+    72,
+    54,
+    73,
+    55,
+    26,
+    53,
+    47,
+    141,
+    48,
+    39,
+    75,
+    46,
+    3,
+    28,
+    23,
+    30,
+    38,
+    50,
+    49,
+    27,
+    51,
+    33,
+    52,
+    34,
+    29
+   ],
+   "d2q": 160
+  },
+  "rung0_base": {
+   "initial": [
+    71,
+    31,
+    142,
+    57,
+    35,
+    59,
+    37,
+    2,
+    25,
+    16,
+    32,
+    58,
+    70,
+    17,
+    7,
+    72,
+    54,
+    73,
+    55,
+    26,
+    53,
+    47,
+    141,
+    48,
+    39,
+    75,
+    46,
+    3,
+    28,
+    23,
+    30,
+    38,
+    50,
+    49,
+    27,
+    51,
+    33,
+    52,
+    34,
+    29
+   ],
+   "final": [
+    31,
+    37,
+    142,
+    57,
+    35,
+    59,
+    25,
+    2,
+    28,
+    23,
+    39,
+    51,
+    72,
+    33,
+    7,
+    73,
+    55,
+    71,
+    52,
+    38,
+    29,
+    45,
+    141,
+    47,
+    32,
+    75,
+    26,
+    3,
+    27,
+    24,
+    34,
+    48,
+    54,
+    30,
+    17,
+    70,
+    53,
+    58,
+    50,
+    49
+   ],
+   "d2q": 66,
+   "race_register_overlap": 38
+  },
+  "twin_src": {
+   "initial": [
+    71,
+    31,
+    142,
+    57,
+    35,
+    59,
+    37,
+    2,
+    25,
+    16,
+    32,
+    58,
+    70,
+    17,
+    7,
+    72,
+    54,
+    73,
+    55,
+    26,
+    53,
+    47,
+    141,
+    48,
+    39,
+    75,
+    46,
+    3,
+    28,
+    23,
+    30,
+    38,
+    50,
+    49,
+    27,
+    51,
+    33,
+    52,
+    34,
+    29
+   ],
+   "final": [
+    31,
+    37,
+    142,
+    57,
+    35,
+    59,
+    25,
+    2,
+    28,
+    23,
+    39,
+    51,
+    72,
+    33,
+    7,
+    73,
+    55,
+    71,
+    52,
+    38,
+    29,
+    45,
+    141,
+    47,
+    32,
+    75,
+    26,
+    3,
+    27,
+    24,
+    34,
+    48,
+    54,
+    30,
+    17,
+    70,
+    53,
+    58,
+    50,
+    49
+   ],
+   "d2q": 66,
+   "race_register_overlap": 38
+  }
+ },
+ "seed": 2026072307,
+ "total_shots": 510000,
+ "subsample_pubs": {
+  "twin": [
+   2,
+   4,
+   8
+  ],
+  "t80": [
+   2,
+   4,
+   8,
+   16
+  ]
+ },
+ "decoder_frozen": {
+  "graded": "calibrated per-bit majority (t_i=(p01+1-p10)/2)",
+  "diagnostics": "chase12 rho=0.5 soft<=8 (NOT graded)",
+  "report_order": "s_str display order, 0-indexed positions"
+ },
+ "pubs_meta": [
+  {
+   "block": "cal_all0",
+   "shots": 10000
+  },
+  {
+   "block": "cal_all1",
+   "shots": 10000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 0,
+   "d2q": 66,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 1,
+   "d2q": 66,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 2,
+   "d2q": 66,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 3,
+   "d2q": 66,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 0,
+   "d2q": 198,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 1,
+   "d2q": 198,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 2,
+   "d2q": 198,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 3,
+   "d2q": 198,
+   "shots": 5000
+  },
+  {
+   "block": "twin_d160",
+   "twirl": 0,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d160",
+   "twirl": 1,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d160",
+   "twirl": 2,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d160",
+   "twirl": 3,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d160",
+   "twirl": 4,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d160",
+   "twirl": 5,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d160",
+   "twirl": 6,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d160",
+   "twirl": 7,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 0,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 1,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 2,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 3,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 4,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 5,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 6,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 7,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 8,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 9,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 10,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 11,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 12,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 13,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 14,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d160",
+   "twirl": 15,
+   "d2q": 160,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d220",
+   "twirl": 0,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d220",
+   "twirl": 1,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d220",
+   "twirl": 2,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d220",
+   "twirl": 3,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d220",
+   "twirl": 4,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d220",
+   "twirl": 5,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d220",
+   "twirl": 6,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d220",
+   "twirl": 7,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 0,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 1,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 2,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 3,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 4,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 5,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 6,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 7,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 8,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 9,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 10,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 11,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 12,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 13,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 14,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d220",
+   "twirl": 15,
+   "d2q": 220,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d280",
+   "twirl": 0,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d280",
+   "twirl": 1,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d280",
+   "twirl": 2,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d280",
+   "twirl": 3,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d280",
+   "twirl": 4,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d280",
+   "twirl": 5,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d280",
+   "twirl": 6,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "twin_d280",
+   "twirl": 7,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 0,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 1,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 2,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 3,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 4,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 5,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 6,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 7,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 8,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 9,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 10,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 11,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 12,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 13,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 14,
+   "d2q": 280,
+   "shots": 6250
+  },
+  {
+   "block": "t80_d280",
+   "twirl": 15,
+   "d2q": 280,
+   "shots": 6250
+  }
+ ],
+ "job_id": "d9gqnfbsbqfc73ep3mdg",
+ "submitted_utc": "2026-07-23T05:50:53Z"
+}
