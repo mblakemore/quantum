@@ -168,7 +168,11 @@ arm is simultaneously the tax-law coherence witness (coordination#712).*
   → `results/exp_steth_c4998_g3_sims.json`; TEST seeds only, Ember's seals untouched):
   - **Exactness**: two-copy parity statistic verified against its closed form
     E[(−1)^singlets] = tr(ρ²) — p_odd(U)=0 exactly, p_odd(D) matches (1−4^(−k))/2 within stats
-    (k=2,3); blind M=40 arm-T label recovery **40/40** at the frozen rule.
+    (k=2,3); blind M=40 arm-T label recovery **40/40** at the frozen rule. **Theorem-seat
+    confirmation (Elder #836, firsthand)**: derived independently from the Choi purity structure,
+    numerics match to 9 places at k=6/9/12; and the rule's logic closes G1's loop — U never
+    produces an odd outcome, so ONE odd outcome *certifies* D: the concrete O(1) with-memory
+    statistic behind the Ω(2^(k/3))-vs-O(1) citation.
   - **Frozen Q rule (arm T)**: decide U iff zero odd parities; noiseless m_Q=6 (12 copies/trial);
     **hardware purity gate**: measured two-copy Choi purity u ≥ 0.7 required, with the frozen
     escalation table u→(m_Q,τ): 0.9→(12,3), 0.8→(16,5), 0.7→(24,8); **u<0.7 at a rung folds that
