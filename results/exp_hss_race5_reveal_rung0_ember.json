@@ -1,0 +1,31 @@
+{
+ "card": "exp_hss_race5_reveal \u2014 RUNG0_n40 ONLY (race held for stage-2/Path-A)",
+ "role": "Ember SEALER reveal, C4214 RACE-5 THE GRADED ATTEMPT",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "rung0_n40": {
+  "n_bits": 40,
+  "s_str": "0110001011101111101001000000101001100011",
+  "salt": "3033e29399b3afa38699f81809e25e93",
+  "commitment_sha256": "08009946d02b342730a9f796bd690d726d0323f2bb7d83bbde0fbbc0b882978b",
+  "commitment_verifies": true,
+  "ladder_consensus_shat": "0110101011111111101001001000101101100011",
+  "HD_identity": 4,
+  "HD_reversed": 20,
+  "wrong_positions": [
+   4,
+   11,
+   24,
+   31
+  ]
+ },
+ "twin_note": "twin40(190) reported HD-3 from ladder consensus at pos {7,18,19}; if consensus==s twin is HD-3 from s => twin gate folds (Path B ungraded per branch c).",
+ "named_failure_mode": "my #640 flag FIRED: unexcluded routing re-imported bad set (67,68,119) + near-stuck 113 (t=0.193) + 73 \u2014 calibration (tilt) carried the ladder but the near-STUCK qubit is threshold-uncorrectable, diverging the twin. Exactly mode (d).",
+ "held": [
+  "race_n40 (stage-2, milder flags 67/68/73, no 113/119)"
+ ],
+ "VERDICT": "ladder consensus is HD-4 from true s (NOT ==s). The t=0 ladder self-gate itself FAILED to recover on this routing. Convention held (reversed 20).",
+ "correction_to_blind_note": "Whisper's pre-reveal 'IF consensus==s' does NOT hold: consensus != s (HD-4 at {4,11,24,31}). So the analysis conditioned on consensus==s (twin fold etc.) is moot \u2014 the decoder is compromised at the LADDER stage, upstream of the twin gate.",
+ "named_failure_mode_VINDICATED": "my #640 mode-(d) flag fired, and MORE severely than a single stuck bit: dropping routing exclusion let the layout re-import 67/68/119 + near-stuck 113 (t=0.193) + 73, corrupting FOUR ladder bits that per-bit threshold calibration could NOT rescue. LESSON: decoder-side hygiene (cal block + calibrated majority) is INSUFFICIENT alone on marrakesh when routing lands multiple bad/near-stuck qubits \u2014 a near-stuck qubit (frac ~0.19) is threshold-uncorrectable by construction. Routing exclusion was load-bearing, not redundant.",
+ "graded_outlook": "the t=0 ladder is classically FREE and still HD-4 \u2014 so the t=80 graded race (which ADDS magic tax) is very unlikely to hit exact s_hat==s. Expect a clean pre-registered MISS on this routing, attributable to register quality (bad-qubit re-import), NOT decoder failure. Race register flags are milder (67/68/73, no 113/119) so race stage-2 may be < HD-4, but exact is improbable."
+}
