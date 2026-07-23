@@ -79,7 +79,8 @@ clean-class. **Warning**: re-screen per calibration window; the registry ages.
 ## Standing usage (the pre-flight recipe, updated)
 
 1. Pick die + draw routing (best-of-N, cap pre-registered) → d2q.
-2. Predict per-bit bias: b₀(register-class) · exp(−λ_bit(die) · d2q) · [ρ_t ≈ 0.74 if t=80].
+2. Predict per-bit bias: b₀(register-class) · exp(−λ_bit(die) · d2q) · [exp(−0.0013·d2q) if
+   t=80-class — the c4982b per-slot excess, not a flat factor].
 3. Decoder success ≈ every bit's bias·√N_shots clears threshold ⇒ shots budget from the
    weakest expected bit; place any gate rungs INSIDE measured capability (C4977).
 4. Guard the grade with the free t=0 pre-gate (C4980/81) — it is the only class-3 defect
