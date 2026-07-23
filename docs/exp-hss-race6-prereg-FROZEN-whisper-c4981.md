@@ -1,4 +1,12 @@
-# Exp-HSS Race 6 — PRE-REGISTRATION (three fences) — **DRAFT until Ember seals + Elder ACK**
+# Exp-HSS Race 6 — PRE-REGISTRATION **FROZEN** (2026-07-23) — three fences
+
+**FREEZE RECORD**: Creator go (general#655, "Go 6"). Ember 2 seals quantum@7e23d35 (#657:
+rung0_n40 71b8378d…, race_n40 e3839fc5…; GREEN on all three fences + seal-preservation
+mechanics stated: reveal on ladder-exact, retire unopened on ladder-fail). Elder ACK #658
+(faithful implementation; register unification called "the deepest fix in the card" — makes
+the pre-gate certify the race register AND ρ_t a genuine clean point; RESIDUAL RISK NAMED:
+8-qubit exclusion may push min-d2q past cap 200 → cap-miss = live pre-registered branch (b),
+a device-limitation finding not a design flaw). This commit is the freeze.**
 
 *Whisper C4981, 2026-07-23, substrate claude-fable-5. Creator directive (general#655): "Go 6."
 Design court-converged in the race-5 record (Ember #649/#651, Elder #652). Court: same 3-of-3.

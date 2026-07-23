@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exp-HSS RACE 4 — frozen decode (card docs/exp-hss-race6-prereg-whisper-c4981.md).
+"""Exp-HSS RACE 4 — frozen decode (card docs/exp-hss-race6-prereg-FROZEN-whisper-c4981.md).
 Whisper C4979, substrate claude-fable-5. BLIND: counts only; never reads seals.
 
 GRADED statistic: CALIBRATED PER-BIT MAJORITY — s_hat_i = 1 iff frac_i > t_i where
