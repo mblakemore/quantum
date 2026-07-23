@@ -8,6 +8,13 @@ clean 2⁻⁴⁰ null): Elder CONCUR #606 ("the ONLY statistic that can correctl
 systematic-tilt bit"), Ember ENDORSE #608 (endorsing the demotion of her own tool — on the
 record). This commit is the freeze.**
 
+**POST-FREEZE AMENDMENT (3-of-3, pre-submission)**: the rule-1 abort FIRED on the dry run —
+race_n32 had ZERO clean routings in 50 seeds (finding: the n32 register class cannot avoid the
+bad-readout set on marrakesh at current calibration; booked #614). Court sign-offs Elder #615 +
+Ember #616: **ALL n32 blocks DROPPED** (race_n32, twin32; rung0_n32 seal unused, retired
+unopened). n40-only job ≈ 70 pubs / ~360k shots. No other change; the abort-not-improvise rule
+worked exactly as designed.**
+
 *Whisper C4979, 2026-07-23, substrate claude-fable-5. Creator directive (general#600): "Fly
 race 4 with the readout hygiene fixes." Parents: [race-3 verdict](exp-hss-race3-verdict-whisper-c4978.md)
 + Elder grade #598 (shot-boost ruled out; "exact at advantage depth is one decoder-fix away").

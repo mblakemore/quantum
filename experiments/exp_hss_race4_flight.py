@@ -22,6 +22,7 @@ from exp_hss_generator import make_g_spec, build_hss_circuit
 from qiskit import QuantumCircuit, transpile
 
 SEED = 2026072304
+INCLUDE_N32 = False   # card amendment (coordination#614): n32 dropped — zero clean routings, pre-registered abort fired
 DEPTH_CAP = 180
 EXCLUDED = {4, 67, 119, 133, 134, 135}
 SEALS_PRIVATE = "/droid/repos/dc_shared/workspace/exp-hss-race4-seals-ember-to-whisper.json"
@@ -181,35 +182,36 @@ def main(submit=False):
         pubs.append((mc, None, 6250))
         meta.append({"block": "race_n40", "twirl": tw, "d2q": d2q40, "shots": 6250})
 
-    qc32 = build_hss_circuit(16, np.asarray(seals["race_n32"]["s_bits"]),
-                             make_g_spec(16, 10, SEED + 1), measure=False)
-    t32 = clean_best_of_seeds(qc32, backend, 50)
-    assert all(i.operation.name == "cz" for i in t32.data if i.operation.num_qubits == 2)
-    book(t32, "race_n32")
-    d2q32 = layouts["race_n32"]["d2q"]
-    print(f"race_n32 d2q={d2q32} (CAP {DEPTH_CAP}: eligible={d2q32 <= DEPTH_CAP})")
-    qc0b = build_hss_circuit(16, np.asarray(seals["rung0_n32"]["s_bits"]),
-                             make_g_spec(16, 0, SEED + 1), measure=False)
-    t0s32 = {}
-    for s in range(30):
-        t = transpile(qc0b, backend, optimization_level=3, seed_transpiler=SEED + 200 + s,
-                      initial_layout=layouts["race_n32"]["initial"])
-        if clean(t) and all(i.operation.name == "cz" for i in t.data if i.operation.num_qubits == 2):
-            t0s32[s] = t
-    assert t0s32, "no clean t=0 n32 candidates — abort"
-    twin32, twin32_plan = build_twin(t0s32, d2q32)
-    book(t0s32[twin32_plan["seed_off"]], "twin32_src")
-    for tw in range(16):
-        twc = twirl_circuit(twin32, np.random.default_rng(SEED + 6000 + tw))
-        mc = twc.copy(); mc.measure_all()
-        pubs.append((mc, None, 6250))
-        meta.append({"block": "twin32", "twirl": tw, "d2q": d2q32, "shots": 6250})
-    for tw in range(16):
-        twc = twirl_circuit(t32, np.random.default_rng(SEED + 3000 + tw))
-        mc = twc.copy(); mc.measure_all()
-        pubs.append((mc, None, 6250))
-        meta.append({"block": "race_n32", "twirl": tw, "d2q": d2q32, "shots": 6250})
-    print("twin32 plan:", json.dumps(twin32_plan))
+    if INCLUDE_N32:
+        qc32 = build_hss_circuit(16, np.asarray(seals["race_n32"]["s_bits"]),
+                                 make_g_spec(16, 10, SEED + 1), measure=False)
+        t32 = clean_best_of_seeds(qc32, backend, 50)
+        assert all(i.operation.name == "cz" for i in t32.data if i.operation.num_qubits == 2)
+        book(t32, "race_n32")
+        d2q32 = layouts["race_n32"]["d2q"]
+        print(f"race_n32 d2q={d2q32} (CAP {DEPTH_CAP}: eligible={d2q32 <= DEPTH_CAP})")
+        qc0b = build_hss_circuit(16, np.asarray(seals["rung0_n32"]["s_bits"]),
+                                 make_g_spec(16, 0, SEED + 1), measure=False)
+        t0s32 = {}
+        for s in range(30):
+            t = transpile(qc0b, backend, optimization_level=3, seed_transpiler=SEED + 200 + s,
+                          initial_layout=layouts["race_n32"]["initial"])
+            if clean(t) and all(i.operation.name == "cz" for i in t.data if i.operation.num_qubits == 2):
+                t0s32[s] = t
+        assert t0s32, "no clean t=0 n32 candidates — abort"
+        twin32, twin32_plan = build_twin(t0s32, d2q32)
+        book(t0s32[twin32_plan["seed_off"]], "twin32_src")
+        for tw in range(16):
+            twc = twirl_circuit(twin32, np.random.default_rng(SEED + 6000 + tw))
+            mc = twc.copy(); mc.measure_all()
+            pubs.append((mc, None, 6250))
+            meta.append({"block": "twin32", "twirl": tw, "d2q": d2q32, "shots": 6250})
+        for tw in range(16):
+            twc = twirl_circuit(t32, np.random.default_rng(SEED + 3000 + tw))
+            mc = twc.copy(); mc.measure_all()
+            pubs.append((mc, None, 6250))
+            meta.append({"block": "race_n32", "twirl": tw, "d2q": d2q32, "shots": 6250})
+        print("twin32 plan:", json.dumps(twin32_plan))
 
     total = sum(m["shots"] for m in meta)
     print(f"pubs={len(pubs)} shots={total}")
@@ -218,12 +220,10 @@ def main(submit=False):
                 "prereg": "docs/exp-hss-race4-prereg-FROZEN-whisper-c4979.md",
                 "seals_committed": "results/exp_hss_race4_seals_ember.json",
                 "depth_cap": DEPTH_CAP, "excluded_physicals": sorted(EXCLUDED),
-                "advantage_eligible": {"race_n40": d2q40 <= DEPTH_CAP,
-                                       "race_n32": d2q32 <= DEPTH_CAP},
-                "twin40_plan": twin40_plan, "twin32_plan": twin32_plan,
+                "advantage_eligible": {"race_n40": d2q40 <= DEPTH_CAP},
+                "twin40_plan": twin40_plan,
                 "layouts": layouts, "seed": SEED, "total_shots": total,
-                "subsample_pubs": {"twin40": [2, 4, 8, 16], "race_n40": [2, 4, 8, 16, 32],
-                                   "twin32": [2, 4, 8, 16], "race_n32": [2, 4, 8, 16]},
+                "subsample_pubs": {"twin40": [2, 4, 8, 16], "race_n40": [2, 4, 8, 16, 32]},
                 "decoder_frozen": {"graded": "calibrated per-bit majority (t_i=(p01+1-p10)/2)",
                                    "diagnostics": "chase12 rho=0.5 soft<=8 (NOT graded)",
                                    "report_order": "s_str display order, 0-indexed positions"},
