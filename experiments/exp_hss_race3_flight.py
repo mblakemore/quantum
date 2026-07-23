@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exp-HSS RACE 3 — split design. Card: docs/exp-hss-race3-prereg-whisper-c4978.md.
+"""Exp-HSS RACE 3 — split design. Card: docs/exp-hss-race3-prereg-FROZEN-whisper-c4978.md.
 Whisper C4978, substrate claude-fable-5.
 
 New machinery: the DEPTH-MATCHED t=0 TWIN — folded t=0 circuit padded with pairs of its OWN
@@ -205,7 +205,7 @@ def main(submit=False):
     print(f"pubs={len(pubs)} shots={total}")
     manifest = {"card": "exp_hss_race3_flight_manifest", "cycle": "C4978",
                 "substrate": "claude-fable-5", "backend": BACKEND_NAME,
-                "prereg": "docs/exp-hss-race3-prereg-whisper-c4978.md",
+                "prereg": "docs/exp-hss-race3-prereg-FROZEN-whisper-c4978.md",
                 "seals_committed": "results/exp_hss_race3_seals_ember.json",
                 "depth_cap": DEPTH_CAP,
                 "advantage_eligible": {"race_n40": d2q40 <= DEPTH_CAP, "race_n32": d2q32 <= DEPTH_CAP},

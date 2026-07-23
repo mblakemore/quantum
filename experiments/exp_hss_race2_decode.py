@@ -32,35 +32,42 @@ def marginalize(counts, layout):
 
 
 def chase_decode(counts, n):
-    ones = np.zeros(n); tot = 0; arrs = []
-    for s, c in counts.items():
-        a = (np.frombuffer(s.encode(), np.uint8).astype(np.int64) - 48)
-        ones += c * a; tot += c; arrs.append((a, c))
-    frac = ones / tot
-    mhat = (frac > 0.5).astype(np.int64)
-    weak = np.argsort(np.abs(frac - 0.5))[:K_CHASE]
-
-    def score(cand):
-        return sum(c * RHO ** int((a != cand).sum()) for a, c in arrs)
-
-    best, bs = mhat.copy(), score(mhat)
-    for r in range(1, K_CHASE + 1):
-        for combo in combinations(weak, r):
-            cand = mhat.copy(); cand[list(combo)] ^= 1
-            sc = score(cand)
-            if sc > bs:
-                best, bs = cand, sc
-    est = best
+    """Frozen algorithm (k=12, rho=0.5, soft<=8) — vectorized implementation, mathematically
+    identical to the exploratory-script loops: candidate set = majority + ALL 2^12 flip patterns
+    of the k least-reliable bits; score(cand) = sum_shots count*rho^HD(shot,cand), computed by
+    grouping shots into u[w] = sum count*rho^HD_strong per weak-bit pattern w, then
+    score(p) = sum_w u[w]*rho^popcount(w XOR p). (Tie-break: lowest pattern index — exact score
+    ties across candidates have probability ~0 and none occurred.)"""
+    S = len(counts)
+    A = np.empty((S, n), dtype=np.int8)
+    c = np.empty(S, dtype=np.float64)
+    for i, (s, cnt) in enumerate(counts.items()):
+        A[i] = np.frombuffer(s.encode(), np.uint8).astype(np.int8) - 48
+        c[i] = cnt
+    tot = c.sum()
+    frac = (c @ A) / tot
+    mhat = (frac > 0.5).astype(np.int8)
+    order = np.argsort(np.abs(frac - 0.5))
+    weak, strong = order[:K_CHASE], order[K_CHASE:]
+    hd_strong = (A[:, strong] != mhat[strong]).sum(1)
+    pow2 = (1 << np.arange(K_CHASE)).astype(np.int64)
+    w_int = ((A[:, weak].astype(np.int64)) @ pow2)
+    u = np.zeros(1 << K_CHASE)
+    np.add.at(u, w_int, c * (RHO ** hd_strong))
+    pc = np.array([bin(x).count("1") for x in range(1 << K_CHASE)])
+    rho_pc = RHO ** pc
+    scores = np.array([u @ rho_pc[np.arange(1 << K_CHASE) ^ p] for p in range(1 << K_CHASE)])
+    p_best = int(np.argmax(scores))
+    best = mhat.copy()
+    best[weak] = (p_best >> np.arange(K_CHASE)) & 1
+    est = best.astype(np.int8)
     for _ in range(SOFT_ITERS):
-        num = np.zeros(n); den = 0.0
-        for a, c in arrs:
-            w = c * RHO ** int((a != est).sum())
-            num += w * a; den += w
-        new = (num / den > 0.5).astype(np.int64)
+        w_s = c * (RHO ** (A != est).sum(1))
+        new = ((w_s @ A) / w_s.sum() > 0.5).astype(np.int8)
         if (new == est).all():
             break
         est = new
-    marg = "".join(str(b) for b in est)
+    marg = "".join(str(int(b)) for b in est)
     return marg[::-1], {"shots": int(tot),  # display order (card §3c)
                         "min_reliab": float(np.abs(frac - 0.5).min()),
                         "med_reliab": float(np.median(np.abs(frac - 0.5)))}

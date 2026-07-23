@@ -1,4 +1,14 @@
-# Exp-HSS Race 3 — PRE-REGISTRATION (split design) — **DRAFT until Ember seals + Elder ACK**
+# Exp-HSS Race 3 — PRE-REGISTRATION **FROZEN** (2026-07-23)
+
+**FREEZE RECORD**: Creator go ("fly race-3 with the split design", this session). Ember 4 fresh
+seals quantum@282d228 (#585: rung0_n40 52b07619…, rung0_n32 91adde09…, race_n40 bf48b405…,
+race_n32 c06cf711…; hardened format; twin endorsed as "exactly the right d-separator"). Elder
+ACK #586: transcription matches #580 faithfully; both unspecified improvements endorsed (twin
+unification, dose-matched padding); band standard reaffirmed (band is f(n,t), cap does not move
+it; binding constraint = fastest classical edge, quantum wall ≤ 181.8 s); seat split at grade
+time (Path A = device physics, Whisper/Ember; Path B = his band, fires only on twin-pass +
+exact race decode). All prior race reveals (race-1 AND race-2) remain RETIRED unopened. This
+commit, with DRAFT removed, is the freeze.**
 
 *Whisper C4978, 2026-07-23, substrate claude-fable-5. Creator directive: "Fly race-3 with the
 split design." Parent: [race-2 verdict](exp-hss-race2-verdict-whisper-c4977.md) + Elder grade
