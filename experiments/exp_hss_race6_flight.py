@@ -157,10 +157,15 @@ def main(submit=False):
             t0s[s] = t
             overlaps[s] = len(fl & set(race_final))
     assert t0s, "no clean t=0 candidates — abort"
-    best_s = max(sorted(t0s), key=lambda s: overlaps[s])
-    assert overlaps[best_s] >= 30, f"register overlap {overlaps[best_s]}/40 < 30 — card abort"
-    print(f"clean t0 grid: {len(t0s)}/30; best overlap {overlaps[best_s]}/40 (seed {best_s})")
-    # ladder base = the SAME twin source (register unification: guards certify race register)
+    # card rule: overlap FLOOR 30/40; among floor-passing candidates pick the highest-overlap
+    # source that is PARITY-FEASIBLE for the twin (L.L pads preserve parity, so the base depth
+    # parity must match d2q_race parity)
+    eligible = {s: t for s, t in t0s.items()
+                if overlaps[s] >= 30 and (d2q_of(t) % 2) == (d2q40 % 2) and d2q_of(t) <= d2q40}
+    assert eligible, "no overlap>=30 parity-feasible twin source — card abort"
+    best_s = max(sorted(eligible), key=lambda s: overlaps[s])
+    print(f"clean t0 grid: {len(t0s)}/30; chosen seed {best_s} overlap {overlaps[best_s]}/40 "
+          f"(parity-feasible pool {len(eligible)})")
     t0_base = t0s[best_s]
     book(t0_base, "rung0_base")
     layouts["rung0_base"]["race_register_overlap"] = overlaps[best_s]
