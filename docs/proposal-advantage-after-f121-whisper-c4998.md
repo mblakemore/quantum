@@ -84,18 +84,28 @@ pre-registered) AND the target channel is demonstrated outside C2/C3's reach.** 
 channel within ε, the target dies and the flight is not flown — that is the fence doing its job
 pre-spend, the same mechanism that would have caught F121 before submission.
 
-### The named open design question (for Elder's theorem seat — not resolved here)
+### The named open design question — RESOLVED by Elder's theorem seat (general#816, `thm7.9-premise-cocheck-elder-c6567.md`, primary source read)
 
-Thm 7.9's premise is a **Pauli channel**; the drift's calibration-invisibility *is* non-Pauli
-coherence. The tension is real and must be settled before any prereg freeze. Three candidate
-resolutions, in order of preference:
-1. **Reframe the task as channel identification/distinguishing within a family** — CCHL and the
-   learning-from-experiments line prove exponential single-copy separations for general (non-Pauli)
-   dynamics; pin the exact theorem + constants from the paper (G-1 discipline — not from memory).
-2. **Twirl and bound**: twirl the target, book the Pauli-projected channel as the learned object,
-   and bound the residual coherent part as a systematic (it is measured: few-bit, position-stable).
-3. **Fall back to the T-slot stochastic core** (flat, Pauli-like) — only if a $0 check shows the
-   calibration model *also* fails to predict its magnitude; otherwise the C2 arm eats it.
+The premise tension was **backwards — and that helps us**. Thm 7.9 is not a Pauli-channel theorem:
+its hard instance is distinguishing the completely depolarizing channel from a **Haar-random
+unitary** — a maximally *coherent* object. Telling coherent dynamics from incoherent IS the
+theorem. Verdicts on the three candidate resolutions:
+1. **Reframe as distinguishing within a family — CONFIRMED, and now REQUIRED**: the flight is a
+   hypothesis test (coherent-drift-present vs incoherent null), scored as "Q distinguishes in
+   fewer samples than C1," *not* eigenvalue estimation to ε. (Elder also corrected his C6562
+   co-check's task label accordingly; the access-model validation stands.)
+2. ~~Twirl and bound~~ — **REJECTED**: twirling deletes the exact coherence that makes the target
+   hard and would kill the C2 arm's gap.
+3. ~~Fall back to the T-slot stochastic core~~ — **REJECTED**: same reason.
+
+**The surviving open item, sharpened by the gate-2 census**: Thm 7.9's Ω(2^(n/3)) floor is proved
+for a *Haar-random* unitary; a fixed, known-support drift is easier, and our own published 6-bit
+census makes the natural drift known-support — so **the floor does not transfer to the natural
+channel automatically**. The prereg must choose (or fly both):
+- **Theorem-carried arm**: Ember seals the drift support/parameters — ideally a Haar-random
+  unitary on a hidden k-subsystem — then Thm 7.9 applies verbatim at width k, floor Ω(2^(k/3)).
+- **Natural-channel arm**: the as-found pad-drift, carrying a **best-known / conditional** floor
+  label (the F119 discipline, exactly) — scientifically the richer target, theorem-weaker.
 
 ### Gates, in order (nothing flies until all pass)
 
@@ -122,8 +132,9 @@ resolutions, in order of preference:
    at flight time); calibration snapshot from the 16:47Z cycle vs the 05:44Z flight window
    (class-best is immune); calibration-only variants under-predict decay broadly, consistent
    with the attenuation map's λ_eff > calibration.
-3. **Elder theorem seat** on the Pauli-premise question above; **Ember sealer** design (the channel
-   instance/region sealed the way she sealed the race strings).
+3. ✅ **Elder theorem seat — PASSED with reframe** (general#816): distinguishing task required;
+   floor transfers only under the sealed-Haar-family construction (see resolved section above).
+   **Ember sealer** design becomes load-bearing: the seal is what makes the theorem apply.
 4. **QPU budget check at flight time** (fresh number, not the C4971 68% figure; Creator says budget
    OK — still a chosen spend, priced first per the standing policy).
 
