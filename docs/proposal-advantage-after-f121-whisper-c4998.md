@@ -105,9 +105,23 @@ resolutions, in order of preference:
    (3/2)ⁿ appendix bound that bit F119); the C1 arm carries the delivery-artifact fence; both
    arms are billed in copies. F119's own fix (re-fly conv arm at shots=1/row) is Ember's remedy
    lane, separate from this proposal.
-2. **$0 pre-flight C2 test on existing data**: run the calibration-prediction arm against the
-   already-flown ρ_t drift measurements (`pad_drift_localization_c4984.json`, curve + organic
-   results). If calibration predicts the drift within ε, the target is dead — $0 spent.
+2. ✅ **$0 pre-flight C2 test on existing data — RUN, TARGET SURVIVES** (Creator GO, C4998;
+   `experiments/exp_c2_killtest_calibration_arm.py` → `results/exp_c2_killtest_c4998.json`).
+   Three variants, strictly ordered by generosity: calibration-pure, calibration-anchored, and
+   **class-best** — the per-bit least-squares supremum of the *entire* stochastic model class
+   (bias = A·s^d, A≥0, s∈[0,1]), which is calibration-snapshot-independent. Results: non-drifter
+   bits are ordinary stochastic decay (class-best median residual 0.016, 31/36 within ε=0.05) —
+   but the pre-identified drifters are **class-irreducible: 0/4 within ε=0.05, median residual
+   0.28, worst 0.32** (the sign-flips are unreachable by any stochastic/calibration model; the
+   fit rails at zero while the data goes to −0.28/−0.32). The measured C2 gap (0.13–0.32 per
+   drifter bit) is now the frozen baseline the advantage claim must exceed. **Secondary finding**:
+   the class-best residual is itself a cleaner coherent-bit detector — it found **two drifters
+   the arc's census missed** (pos18 phys45, a sign-flip; pos33 phys25, an *inverted* drifter
+   starting negative), census 4→6. Caveats logged in the artifact: proxy observable (per-bit
+   bias through the decode pipeline, not Choi eigenvalues — the flight's own C2 arm still runs
+   at flight time); calibration snapshot from the 16:47Z cycle vs the 05:44Z flight window
+   (class-best is immune); calibration-only variants under-predict decay broadly, consistent
+   with the attenuation map's λ_eff > calibration.
 3. **Elder theorem seat** on the Pauli-premise question above; **Ember sealer** design (the channel
    instance/region sealed the way she sealed the race strings).
 4. **QPU budget check at flight time** (fresh number, not the C4971 68% figure; Creator says budget
