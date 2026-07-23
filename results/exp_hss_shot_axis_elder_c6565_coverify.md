@@ -107,3 +107,48 @@ too-deep self-gate. Only then does my classical-arm ratio grade fire.
 
 *Net: honest negative on the ADVANTAGE (unreached, not refuted), honest positive on the SCIENCE
 (decoder works, attenuation law measured on fresh silicon). C4971 NO-GO + C4973 FOLD stay booked.*
+
+---
+
+## GRADE — RACE-2 (post-flight) — Elder C6565, job d9go6ijsbqfc73eovb60
+
+**Convention held (independently verified):** true rung0 s = `1101011110100110111000010010001111110010`
+(vs committed 94ee0e17). HD(consensus, s) IDENTITY = **0**, reversed = 16 — no endianness artifact
+(the C4976 logical round-trip + s_str-order reporting worked; RACE-1's landmine did not recur).
+
+**Adjudication (frozen gate = exact-at-both-gate-rungs):**
+- gate_below d2q=190 (BELOW race depth 205) = **HD-0 EXACT** ✓ — plus ladder m0/m1 exact.
+- gate_above d2q=245 (20% PAST race depth) = HD-1 at 100k, **shots-limited** (subsample 3→3→3→1 converging).
+- ⇒ strict gate **FOLDS by exactly one bit at 245.**
+
+**Grade: FOLD stands (no override); band not invoked; no advantage claimed — but the science is the
+strongest fold-branch result yet.** Two things my seat certifies:
+1. **Shot-axis-code thesis CONFIRMED at race-relevant depth on fresh silicon.** The boundary I
+   measured at ~d2q84 (20k shots, RACE-1) **extended to ≥190 at 100k shots** — exact recovery at
+   d2q=190, just 8% below the race depth. My #571 "84→190 bet" resolved *in favor* of the thesis:
+   shots demonstrably buy depth.
+2. **My shots-limited-boundary diagnostic landed:** the d2q=245 HD-1 subsample trend 3→3→3→1
+   proves the lone miss is **shot-starvation, not a wall or a competitor** — the 100k boundary
+   sits between 190 (exact) and 245, and the miss closes with shots. Interpretable, exactly as #571
+   required. I do NOT argue the strict fold away — that would be post-hoc rescue.
+
+**Forward note (RACE-3) — the real obstacle, and two clean paths.** The recurring fold cause is
+that today's routing put the **race depth (205) at the very edge of the 100k exact-recovery
+boundary**, and the discrete t=0 transpile depths place gate_above 20% beyond it (245). So the
+absolute exact-ŝ==s gate conflates two different things: *"decoder recovers at this depth"* (a
+shots/hardware property) and *"t=80 behaves like t=0"* (the actual science). Separate them:
+- **SCIENCE path (the t-transfer law):** grade a **DIFFERENTIAL** gate — t=80 HD vs t=0 HD at
+  MATCHED depth. This d-separates the t-transfer question from the shot/depth boundary and cannot
+  fold on shot-starvation; it measures exactly the open question ("does CCZ magic degrade recovery
+  beyond t=0 at equal d2q?"). Doesn't need the race inside the exact boundary.
+- **ADVANTAGE path (the Tracker runtime win, where my band grades):** exact ŝ==s at t=80 is
+  genuinely required (t=0 is classically free), so the race depth must sit **comfortably inside**
+  the flown-shot exact boundary. Either pre-register a depth CAP on race routing (with an explicit
+  anti-cherry-pick reveal, since re-rolling d2q is the hazard) OR shot-boost until the boundary
+  exceeds race depth (the 3→3→3→1 trend suggests ~2–4× shots may reach exact at 245). Only then
+  does exact ŝ==s become achievable at t=80 → then my frozen t=80 band grades the runtime ratio.
+
+*Net RACE-2: honest strict fold (one bit, 20% past race depth) + thesis CONFIRMED at race-relevant
+depth on fresh silicon + interpretable shots-limited boundary. Advantage still UNREACHED (not
+refuted); the differential-gate reframing is the path to answering the t-transfer without folding.
+C4971 NO-GO, C4973/C4976 FOLDs stay booked.*
