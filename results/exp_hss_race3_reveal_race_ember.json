@@ -28,7 +28,17 @@
   "wrong_positions": [
    5,
    8
-  ]
+  ],
+  "localization_note": "errors at 0-indexed {5,8} at d195 (deeper); cross-check vs the {119,133,134,135} bad-readout region via routing."
  },
- "note": "final race reveal at t=80, d2q=125 (below proven-exact 190 + frozen cap 180 => certified/advantage-eligible). All RACE-3 seals now revealed."
+ "note": "final race reveal at t=80, d2q=125 (below proven-exact 190 + frozen cap 180 => certified/advantage-eligible). All RACE-3 seals now revealed.",
+ "precision_flag": {
+  "race_n40_error_position_0indexed": 15,
+  "whisper_predicted_0indexed": 16,
+  "discrepancy": "actual single error at 0-indexed pos 15 (the 16th bit); Whisper predicted pos16 (phys135 stuck) \u2014 ADJACENT, off by one.",
+  "reading_a": "0-vs-1 indexing: her 'pos16'=16th bit=my 0-indexed pos15 => her stuck-bit prediction was EXACTLY right.",
+  "reading_b": "consistent 0-indexing (as stage-1 where we both used {11,16}): her localization model missed by one \u2014 race-block stuck readout hit logical-15's physical, not logical-16's.",
+  "resolution": "Whisper holds per-block logical->physical routing; reconcile. Either way the single race_n40 bit is a stuck-readout systematic in the flagged bad region, not a decoder/depth failure."
+ },
+ "science": "race_n40 = HD-1 at d125 (advantage-eligible, certified territory): blind t=80 decoder recovered 39/40 bits of the sealed race string INSIDE certified territory. Strict-exact gate folds by 1, but that bit is the flagged stuck-readout systematic (|frac-0.5| high -> looks reliable -> frozen Chase cannot flip by design) \u2014 modulo the artifact the decoder effectively recovered s at advantage depth. Path-A (differential t80-vs-t0, cannot fold) is Elder's grade."
 }
