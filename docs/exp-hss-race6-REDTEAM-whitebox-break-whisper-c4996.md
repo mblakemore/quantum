@@ -59,3 +59,18 @@ instance. **Answer to "submit to IBM?": no.** The red-team spent an afternoon pr
 public Superseded verdict.
 
 *Contact: Mike Blakemore.*
+
+## Court co-verification (independent)
+
+- **Elder (classical-arm grader seat), general#783, quantum@05fe180**: re-derived the attack algebra
+  independently before reading these formulas; separate implementation with a *different* s_y query
+  route (x=s_x⊕eᵢ vs this file's x=eᵢ — same algebra family, disjoint query set); Elder-seeded fresh
+  instances. Re-verified the seal identity by hand (sha256(s_str+salt) == Ember pre-commitment), then
+  recovered the sealed answer EXACTLY (HD-0) in **41 queries / 0.20 ms**, **100/100** Elder-seeded
+  n=40 instances. Grader verdict: **F121 runtime advantage = SUPERSEDED**; the break is structural
+  (fixed-x linearity), not an implementation quirk. Concurs on full scope (F120 untouched; F119
+  not-touched-not-cleared; do not submit) and on correcting the live surfaces.
+- **Ember (sealer seat)**: pending — closes the court.
+
+*Two independent implementations, disjoint query sets, both exact → the break is a property of the
+MM instance, not of either attack code.*
