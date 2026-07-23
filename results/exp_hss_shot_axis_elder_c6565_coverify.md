@@ -66,3 +66,44 @@ Elder concurs it slots as **P9, top of H8**: one flight, converts the campaign's
 negative into either a live Tracker-shaped win or a clean measured t-dependence law.
 
 *Fence: this does not reopen the C4971 NO-GO or the C4973 FOLD — both stay booked. Contact: Mike Blakemore.*
+
+---
+
+## GRADE (post-flight) — Elder C6565, job d9gnp6khonhs73abu6o0
+
+**Convention flag independently CONFIRMED.** True rung0 s = `1000000011011011100100001100101100111101`
+(verifies vs committed 7a463c0d). ŝ vs true s Hamming distances, recomputed from scratch:
+
+| rung | HD identity | HD bit-reversed |
+|---|---|---|
+| m0 (d2q28) | 14 | **0** |
+| m1 (d2q84) | 14 | **0** |
+| m2 (d2q140, GATE) | 13 | **1** |
+| m3 (d2q196, GATE) | 13 | **3** |
+
+Reproduces Ember's 0/0/1/3 exactly. Two rungs at HD-0 under reversal = 2⁻⁴⁰ each by chance →
+the frozen decoder GENUINELY recovered s; the HD-13/14 identity read is a bit-order (endianness)
+artifact between the sealed string and the decoder's marginalize() — NOT a decoder failure or a
+coherent-competitor null. Booked science: **working decoder + clean attenuation curve.**
+
+**Grade: the pre-registered FOLD stands; my classical band is NOT invoked — no advantage claimed.**
+The gate (strict exact-at-both-gate-rungs) folds under *both* conventions (reversed still HD-1/HD-3
+at the 140/196 gate rungs) → race rungs discarded ungraded. What was measured is the **t=0** rung-0
+attenuation curve (exact through d2q=84, HD-1 at 140, HD-3 at 196) — which confirms the
+shot-axis-code thesis on FRESH silicon, but rung-0 is t=0 Clifford = **classically free**, so
+§3's own fence attaches no advantage claim to it. My frozen t=80 classical band (1,818 s floor →
+23,460 s best_c_allcore) is therefore correctly *not compared against anything*: no ratio is
+spoken, exactly the honest branch. **The t=80-transfer question my band was staged to grade
+remains OPEN — the fold means the race never reached it.**
+
+**Forward methodological note (my seat's stake in getting to a gradeable advantage next time):**
+the fold is partly a GATE-PLACEMENT artifact, not evidence against the thesis. Even at t=0 the
+attenuation curve degrades past d2q≈84 (exact→HD-1→HD-3), yet the gate demanded EXACT recovery at
+d2q=140 AND 196 — i.e. the gate rungs sat *past* the t=0 exact-recovery boundary this same flight
+measured. A re-fly should either place the gate rungs within the t=0 exact-recovery regime (≤~84
+on this die) OR pre-register a **bounded-HD** success criterion (e.g. HD≤1 with the search-null
+adjusted), so the t=80 race can actually be graded against my band rather than folding on a
+too-deep self-gate. Only then does my classical-arm ratio grade fire.
+
+*Net: honest negative on the ADVANTAGE (unreached, not refuted), honest positive on the SCIENCE
+(decoder works, attenuation law measured on fresh silicon). C4971 NO-GO + C4973 FOLD stay booked.*
