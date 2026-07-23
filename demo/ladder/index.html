@@ -2,80 +2,129 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="The Ladder of Causation: climb from association to intervention to counterfactual reasoning, illustrated with quantum causal structure measured on IBM Heron silicon.">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M4%204C8%208%208%208%2012%2012%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12%204C8%208%208%208%204%2012%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.7%22%20fill%3D%22%23e5e7eb%22%2F%3E%3C%2Fsvg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Ladder of Causation, Climbed on Real Silicon</title>
+<title>The Ladder of Causation — climbed on real silicon | The Quantum Museum</title>
+<meta name="description" content="Judea Pearl's three rungs — seeing, doing, imagining — each demonstrated with a measured experiment on IBM Heron silicon; then the step off the ladder: a superposition of causal orders no rung can type, certified at 216.8σ and replicated across two chips, two vendors, and two hardware modalities.">
+<meta property="og:title" content="The Ladder of Causation — climbed on real silicon">
+<meta property="og:description" content="Seeing, doing, imagining — one measured experiment per rung. Then the quantum switch steps off the ladder: an amplitude over causal orders, 216.8σ past the definite-order ceiling, replicated cross-chip, cross-vendor, cross-modality.">
+<meta name="theme-color" content="#04060c">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
-    --ink:#171b26; --panel:#1e2331; --line:#2a3145; --text:#e2e6f0; --muted:#8b93a7;
-    --dim:#8691b0; --cyan:#45d6cf; --gold:#e6a94e; --golddark:#d4880a; --green:#3dbd7d;
-    --red:#e05c6e; --zone:#06201f;
-    --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
-    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
   }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--ink);color:var(--text);font-family:var(--sans);line-height:1.6}
-  .wrap{max-width:860px;margin:auto;padding:48px 22px 80px}
-  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-  h1{font-family:var(--mono);font-weight:700;letter-spacing:-.02em;line-height:1.2;font-size:clamp(26px,4.5vw,38px);margin:.3em 0 .4em}
-  .lede{color:var(--muted);font-size:17px;max-width:64ch}
-  .lede b{color:var(--text)}
-  .rail{position:relative;margin-top:56px;padding-left:34px;border-left:3px solid var(--line)}
-  .stop{position:relative;margin-bottom:64px}
-  .stop::before{content:"";position:absolute;left:-45px;top:6px;width:17px;height:17px;border-radius:50%;
-    background:var(--ink);border:3px solid var(--gold)}
-  .stop.off::before{border-color:var(--cyan);box-shadow:0 0 14px rgba(69,214,207,.55)}
-  .rung{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--golddark)}
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:
+      radial-gradient(70% 42% at 55% -5%, rgba(98,230,255,.06), transparent 65%),
+      var(--bg);
+    color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .wrap{max-width:900px;margin:0 auto;padding:0 clamp(16px,4vw,32px) 72px}
+
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 26px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--cyan);font-weight:400}
+
+  .eyebrow{font-family:var(--mich);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-4);
+    margin:0 0 20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .eyebrow .dot{width:4px;height:4px;border-radius:50%;background:var(--hair-2)}
+
+  h1{font-family:var(--sans);font-weight:300;font-size:clamp(30px,4.8vw,46px);line-height:1.1;letter-spacing:-.015em;
+    margin:0 0 18px;color:var(--ink);text-wrap:balance;max-width:22ch}
+  h1 b{font-weight:600;color:var(--cyan)}
+  .lede{font-size:clamp(15px,2vw,17.5px);color:var(--ink-3);max-width:68ch;margin:0 0 8px}
+  .lede b{color:var(--ink);font-weight:600}
+
+  .specbtn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13px;font-weight:600;
+    text-decoration:none;color:#04121a;background:var(--cyan);border-radius:10px;padding:11px 18px;margin:18px 12px 4px 0}
+  .specbtn:hover{filter:brightness(1.08);text-decoration:none}
+  .md-link{font-family:var(--mono);font-size:12px;color:var(--ink-4);text-decoration:underline}
+  .md-link:hover{color:var(--cyan)}
+
+  /* ── the rail ─────────────────────────────────────────────── */
+  .rail{position:relative;margin-top:54px;padding-left:40px}
+  .rail::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg,var(--amber) 0%,var(--amber) 62%,var(--cyan) 78%,var(--cyan) 100%);opacity:.45}
+  .stop{position:relative;margin-bottom:60px}
+  .stop::before{content:"";position:absolute;left:-40px;top:5px;width:16px;height:16px;border-radius:50%;
+    background:var(--bg);border:3px solid var(--amber)}
+  .stop.off::before{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(98,230,255,.12), 0 0 18px rgba(98,230,255,.5)}
+  .rung{font-family:var(--mich);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
   .stop.off .rung{color:var(--cyan)}
-  h2{font-size:24px;margin:.25em 0 .45em;line-height:1.25}
-  .stop p{max-width:66ch;margin:.5em 0}
-  .muted{color:var(--muted)}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:16px 0;max-width:640px}
-  .card .k{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
-  .num{font-family:var(--mono);color:var(--gold);font-size:15px}
+  h2{font-family:var(--sans);font-weight:500;font-size:clamp(19px,2.6vw,24px);line-height:1.25;letter-spacing:-.01em;
+    margin:0 0 10px;color:var(--ink);text-wrap:balance}
+  .stop p{max-width:68ch;margin:.5em 0;font-size:15px}
+  .stop p em{color:var(--ink-2)}
+
+  .card{background:var(--panel);border:1px solid var(--hair);border-radius:13px;padding:16px 18px;margin:14px 0;
+    max-width:660px;box-shadow:var(--shadow)}
+  .card .k{font-family:var(--mich);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
+  .card p{margin:0;font-size:14.5px;color:var(--ink-2)}
+  .num{font-family:var(--mono);font-size:.95em;color:var(--amber);font-weight:600}
   .stop.off .num{color:var(--cyan)}
-  .exp{font-family:var(--mono);font-size:12.5px;color:var(--dim)}
-  .exp a{color:var(--dim)}
-  code{font-family:var(--mono);font-size:.92em;background:var(--panel);border:1px solid var(--line);
-    border-radius:4px;padding:1px 5px;white-space:nowrap}
-  .zone{background:var(--zone);border:1px solid rgba(69,214,207,.35);border-radius:10px;padding:18px 20px;margin:18px 0;max-width:640px}
-  .foot{margin-top:70px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim);font-size:13.5px}
-  .foot a{color:var(--cyan)}
-  a{color:var(--cyan)}
-  .specbtn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13.5px;font-weight:600;
-    text-decoration:none;color:#06201f;background:var(--cyan);border:1.5px solid var(--cyan);border-radius:11px;
-    padding:10px 18px;margin:20px 0 4px;transition:transform .12s, box-shadow .12s}
-  .specbtn:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(69,214,207,.35)}
-  .specbtn .arw{font-size:15px}
+  .exp{font-family:var(--mono);font-size:12px;color:var(--ink-4);max-width:68ch}
+  .exp a{color:var(--ink-4);text-decoration:underline} .exp a:hover{color:var(--cyan)}
+  code{font-family:var(--mono);font-size:.88em;background:var(--panel-2);border:1px solid var(--hair);
+    border-radius:5px;padding:1px 6px;color:var(--ink-3);overflow-wrap:anywhere}
+
+  .zone{background:color-mix(in srgb,var(--cyan) 6%,var(--panel));border:1px solid color-mix(in srgb,var(--cyan) 32%,transparent);
+    border-radius:13px;padding:18px 20px;margin:16px 0;max-width:660px;box-shadow:var(--shadow)}
+  .zone .k{font-family:var(--mich);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+  .zone p{margin:0;font-size:14.5px;color:var(--ink-2)}
+  .zone .plat{margin-top:10px;padding-top:10px;border-top:1px dashed color-mix(in srgb,var(--cyan) 25%,transparent);
+    font-size:13px;color:var(--ink-3)}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none}}
+
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--hair);font-size:13px;color:var(--ink-4);max-width:70ch}
+  footer a{color:var(--cyan)}
+  .footmarks{margin-top:16px;font-family:var(--mich);font-size:9px;letter-spacing:.2em;color:var(--ink-4);
+    display:flex;gap:8px 20px;flex-wrap:wrap;text-transform:uppercase}
 </style>
 </head>
 <body>
-<main id="main" class="wrap">
-  <div class="eyebrow">A guided tour · real experiments · one idea</main>
-  <h1>The Ladder of Causation,<br>climbed on real silicon</h1>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<nav class="topbar"><a href="../">← The Museum</a><span class="sp"></span><span class="wing">WING <b>I</b> · The Causal Switch</span></nav>
+<main id="main">
+  <p class="eyebrow">A GUIDED TOUR<span class="dot"></span>REAL EXPERIMENTS<span class="dot"></span>ONE IDEA</p>
+  <h1>The Ladder of Causation, <b>climbed on real silicon</b></h1>
   <p class="lede">Judea Pearl taught a generation that causal questions come in three rungs —
-  <strong>seeing</strong>, <strong>doing</strong>, and <strong>imagining</strong> — and that no rung can be answered from the
-  one below it. This repository, it turns out, climbed the whole ladder on a quantum processor
-  without planning to. Here is the tour: one real experiment per rung, with the measured
-  numbers — and at the top, a step off the ladder that Pearl's framework can name only by its
-  absence.</p>
+  <b>seeing</b>, <b>doing</b>, and <b>imagining</b> — and that no rung can be answered from the
+  one below it. This campaign, it turns out, climbed the whole ladder on a quantum processor
+  without planning to. Here is the tour: one measured experiment per rung — and at the top,
+  a step off the ladder that Pearl's framework can name only by its absence.</p>
 
-  <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
+  <a class="specbtn" href="./spec.html"><span aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+  <a href="./spec.md" class="md-link">plain-text (.md)</a>
 
   <div class="rail">
 
-    <div class="stop">
-      <div class="rung">Rung 1 · Association — "What do I see?"</div>
+    <div class="stop reveal">
+      <div class="rung">Rung 1 · Association — “What do I see?”</div>
       <h2>Watching the chip's noise, and finding structure in it</h2>
       <p>Rung 1 is pure observation: correlations, patterns, P(y|x). Months of characterization
       work lived here — mapping which qubits are quiet, which measurement directions are noisy,
       where the depth wall sits.</p>
       <div class="card">
-        <div class="k">The exhibit — Finding 3, X-basis noise immunity</div>
-        <p style="margin:0">Read a qubit one way (X) and the dominant noise largely misses it;
+        <div class="k">The exhibit — Finding 3 · X-basis noise immunity</div>
+        <p>Read a qubit one way (X) and the dominant noise largely misses it;
         read it another way (Z) and it doesn't. Same circuit, different viewing angle,
         <span class="num">up to 3× cleaner</span> — confirmed three independent times, and the
         <em>ordering</em> replicated on a second chip. Nothing was intervened on. This is
@@ -85,29 +134,29 @@
       (F57–F70), the calibration-window lottery (F81/F84).</p>
     </div>
 
-    <div class="stop">
-      <div class="rung">Rung 2 · Intervention — "What if I do?"</div>
+    <div class="stop reveal">
+      <div class="rung">Rung 2 · Intervention — “What if I do?”</div>
       <h2>Surgery on a circuit: the do() operator, executed</h2>
       <p>Rung 2 asks what observation cannot answer: what happens if I <em>make</em> it so? On
       this chip, gate count and circuit duration normally rise together — hopelessly
       confounded, like diet and exercise. The fix is Pearl's: sever the link by intervention.</p>
       <div class="card">
-        <div class="k">The exhibit — Finding 11, the gate-overhead dose-response law</div>
-        <p style="margin:0">A do()-style experiment held duration fixed while adding gates, and
+        <div class="k">The exhibit — Finding 11 · the gate-overhead dose-response law</div>
+        <p>A do()-style experiment held duration fixed while adding gates, and
         vice versa, splitting the cost of a two-qubit gate into
         <span class="num">~78% time-decoherence + ~22% gate-specific noise</span> — two numbers
         no amount of passive watching could separate.</p>
       </div>
       <div class="card">
-        <div class="k">Second exhibit — Finding 18, H-gate surgery</div>
-        <p style="margin:0">Do the H-gates <em>cause</em> the measured advantage, or merely
+        <div class="k">Second exhibit — Finding 18 · H-gate surgery</div>
+        <p>Do the H-gates <em>cause</em> the measured advantage, or merely
         accompany it? Surgically removing them (intervention) degraded the answers directly —
         association upgraded to causation, exactly per the textbook.</p>
       </div>
     </div>
 
-    <div class="stop">
-      <div class="rung">Rung 3 · Counterfactuals — "What if I had?"</div>
+    <div class="stop reveal">
+      <div class="rung">Rung 3 · Counterfactuals — “What if I had?”</div>
       <h2>Frozen predictions: counterfactuals with receipts</h2>
       <p>Rung 3 reasons about worlds that didn't happen. Our version is methodological: every
       hardware experiment ships with a <em>pre-registration</em> — a frozen, committed statement
@@ -116,7 +165,7 @@
       against a committed counterfactual one.</p>
       <div class="card">
         <div class="k">The exhibit — the depth-decay law's blind test</div>
-        <p style="margin:0">Before Exp108 returned, two futures were filed: the noise model said
+        <p>Before Exp108 returned, two futures were filed: the noise model said
         Δ ≈ 0.2275; our cross-arc law said Δ ≈ 0.201. The hardware said
         <span class="num">Δ = 0.1796 ± 0.0085</span> — closer to the law by 2.3×. Both
         counterfactual worlds were written down first; that is what made the win mean
@@ -127,41 +176,67 @@
       retests.</p>
     </div>
 
-    <div class="stop off">
-      <div class="rung">Off the ladder · "What if there is no order?"</div>
+    <div class="stop off reveal">
+      <div class="rung">Off the ladder · “What if there is no order?”</div>
       <h2>The step Pearl's ladder cannot type</h2>
       <p>Every rung — seeing, doing, imagining — quietly assumes one thing: that a definite
       causal structure <em>exists</em>. Some DAG, maybe unknown, maybe latent-mixed, but there.
       The quantum switch breaks exactly that assumption: two operations are applied in a
-      coherent superposition of <strong>A-then-B</strong> and <strong>B-then-A</strong>. Not a hidden order. Not a
-      coin-flip over orders — we ran that as a control arm, and it behaves just as Pearl
-      predicts. An amplitude over orders.</p>
+      coherent superposition of <b style="color:var(--ink)">A-then-B</b> and
+      <b style="color:var(--ink)">B-then-A</b>. Not a hidden order. Not a coin-flip over orders
+      — we ran that as a control arm, and it behaves just as Pearl predicts. An amplitude over
+      orders.</p>
       <div class="zone">
-        <div class="k" style="color:var(--cyan);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">The measured step off</div>
-        <p style="margin:0">A discrimination game whose ceiling for <em>any</em> definite-order
-        strategy is provably <strong>0.8695</strong> was won at <span class="num">0.9769 — 216.8σ above
-        the ceiling</span> — and replicated on a second chip the next day (0.9738, 201σ). Two
-        channels that each transmit exactly zero information carried
-        <span class="num">0.0436 bits</span> through their superposition of orders. The
-        definite-order null arms, run in the same jobs, scored exactly what the ladder says
-        they must.</p>
+        <div class="k">The measured step off</div>
+        <p>A discrimination game whose ceiling for <em>any</em> definite-order
+        strategy is provably <b style="color:var(--ink)">0.8695</b> was won at
+        <span class="num">0.9769 — 216.8σ</span> above the ceiling (within-run precision) — and
+        <em>replicated on a second chip the next day</em> at 0.9738; the two-chip concordance is
+        the physical carrier of the claim. Two channels that each transmit exactly zero
+        information carried <span class="num">0.0436 bits</span> through their superposition of
+        orders. The definite-order null arms, run in the same jobs, scored exactly what the
+        ladder says they must.</p>
+        <div class="plat">And the step off is not an artifact of one machine: the same frozen
+        causal witness certifies <b style="color:var(--ink)">cross-vendor</b> (Rigetti
+        Cepheus-1-108Q, W&nbsp;1.2165&nbsp;±&nbsp;0.0224, 54.4σ over the causal bound) and
+        <b style="color:var(--ink)">cross-modality</b> (IonQ Forte-1 trapped ion, W&nbsp;1.910
+        at 13.5σ, with a validated definite-order null) — different fabs, different physics,
+        same absent order.</div>
       </div>
       <p>The ladder isn't wrong — inside its world it was quantitatively correct on this same
-      hardware, in the same calibration windows. It is <strong>typed</strong>: its input is a causal
-      structure, and this object isn't one. We even fed the switch data to standard
-      causal-discovery algorithms (PC, GES): they returned an ordinary causal graph, no
-      warning — the output format itself cannot say "there is no order here"
+      hardware, in the same calibration windows. It is <b style="color:var(--ink)">typed</b>:
+      its input is a causal structure, and this object isn't one. We even fed the switch data
+      to standard causal-discovery algorithms (PC, GES): they returned an ordinary causal
+      graph, no warning — the output format itself cannot say "there is no order here"
       (<code>docs/causal-discovery-stress-test-whisper-c4587.md</code>).</p>
     </div>
 
   </div>
 
-  <footer class="foot">
+  <footer>
     Every number above is a measured, pre-registered, frozen-rule-graded result with public job
     IDs — see the <a href="../../docs/quantum-switch-spec.md">switch spec sheet</a>, the
     <a href="../../docs/beyond-the-ladder.md">Beyond the Ladder (the full argument)</a>, and the
-    <a href="../../README.md">repository front door</a>. Built by the DC network (Whisper C4587).
+    <a href="../../README.md">repository front door</a>. Built by the DC network
+    (Whisper C4587 · retheme Elder C6567).
+    <div class="footmarks">
+      <span>WING I · THE CAUSAL SWITCH</span><span>3 RUNGS + 1 STEP OFF</span><span>EVERY NUMBER A JOB ID</span>
+    </div>
   </footer>
+</main>
 </div>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches){
+      els.forEach(function(e){ e.classList.add('in'); }); return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting || en.boundingClientRect.top < 0){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {rootMargin:'100000px 0px -8% 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
 </body>
 </html>
