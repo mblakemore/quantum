@@ -14,7 +14,7 @@ scoped five routes). This is the completion: every route flown, every scope name
 21σ–341σ; and on the fifth (computational), the constant-depth solver the only depth-separation
 theorem is built on now runs on silicon at 90%. What we have *not* found is a brute-force
 time-to-solution speedup, and F54 measured exactly the wall that forbids it. Every claim is
-scoped to the assumption its hardware honestly provides.**
+scoped to the assumption its hardware actually provides.**
 
 The question is not one claim but five scoreboards. Here is where each stands, with receipts.
 
@@ -51,7 +51,7 @@ The three great no-go theorems — nonlocality (Bell), indefinite causal order (
 The ICO engine arc: refrigeration forbidden to ordered processes (21.1σ, F86; native-fluid
 retest colder than the coldest reservoir, F88); certified population inversion from passive
 baths (F94); full thermodynamic cycle, books audited (F95); certified negative local energy
-(F97). Scope kept honest: per-interaction resource advantages, not power plants; and the
+(F97). Scope: per-interaction resource advantages, not power plants; and the
 coherent-erasure advantage was found **below** NISQ's 5σ certification floor three instrument-
 walls deep (F104/F105) — the null is part of the record.
 
@@ -65,8 +65,8 @@ inaccessible information recovered by the switch (F99, 56σ) sit in the same cla
 
 - **The wall (no brute-force speedup)**: F54 — the Grover/QAE crossover needs ~10⁴ two-qubit
   gates against a ~10³ scrambling wall (F05). No stack of constant factors closes a 10× depth
-  deficit. Honestly measured, not hand-waved.
-- **The bridge (the honest depth advantage)**: Bravyi–Gosset–König is the only *unconditional*
+  deficit. Measured, not hand-waved.
+- **The bridge (the assumption-free depth advantage)**: Bravyi–Gosset–König is the only *unconditional*
   computational-separation theorem at our depth (constant-depth quantum solves 2D-HLF; any
   bounded-fan-in classical circuit needs Ω(log n)). We **flew it**: the constant-depth solver
   runs on silicon at **P(valid) = 0.9017, 438σ over the random-chance floor 0.25** (a fidelity number, not a beaten classical bound), covering the full solution coset
@@ -191,7 +191,7 @@ correlated-noise probe, F111), the transporter's exam (the three-axis bench trav
 chip, device-independent, F112). With F106 (Kobayashi Maru) and the earlier H1–H4, the round
 closed complete.
 
-**The trust ladder (the deepest honest-path arc, six cycles):** the campaign's cleanest lesson
+**The trust ladder (the arc that corrected its own scope, six cycles):** the campaign's cleanest lesson
 in claiming *exactly* the assumption the hardware provides.
 - F115 — on-chip CHSH: a 53σ quantum-behaviour witness. The device-independent randomness
   number *evaporated* (no-signaling unmet on one chip) and was quarantined to a labeled
@@ -204,7 +204,7 @@ in claiming *exactly* the assumption the hardware provides.
   qubit, boundary-validated.
 - F117 — **the rigorous certificate: 0.65 certified private random bits per use, from
   measured assemblage tomography** (bias-disclosed: a +0.006 method bias ≈1 SE the bootstrap can't
-  see is the limiting factor, not the ~100σ statistical margin; audit C4713). What F115 wanted but could not honestly claim via DI,
+  see is the limiting factor, not the ~100σ statistical margin; audit C4713). What F115 wanted but could not claim via DI,
   delivered at the one-sided-DI rung a single chip genuinely holds.
 
 The ladder of trust, each rung claiming exactly its assumption: full-trust Born randomness →
@@ -249,7 +249,7 @@ claim the rung the hardware provides — is what makes the "yes" defensible.
 The campaign found **measurable quantum advantage** on the defensible axes where the ceiling is
 a theorem: games, communication, thermodynamics, information — 53σ to 341σ. It measured the
 **wall** that forbids a brute-force speedup, and flew the **constant-depth bridge** that is the
-honest route toward the computational scoreboard, tied by the same contextuality resource to the
+grounded route toward the computational scoreboard, tied by the same contextuality resource to the
 games. And it built the tools — an exact randomness SDP, a scheduling oracle — that turn the
 one-off certificates into standing capabilities.
 
