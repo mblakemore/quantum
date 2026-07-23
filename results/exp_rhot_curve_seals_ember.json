@@ -1,0 +1,21 @@
+{
+ "card": "exp_rhot_curve_seals (rho_t depth-dependence measurement; no grade at stake)",
+ "role": "Ember SEALER seat, C4214 (rho_t curve C4983)",
+ "sealed_utc": "2026-07-23T05:44:23.005674+00:00",
+ "substrate": "claude-opus-4-8",
+ "convention_statement": "s_str[i] = planted bit on logical system qubit i (i=0..n-1, 0-indexed). s_bits_msb_last = s_str[::-1] = qiskit register order. BUILDER embeds s_str[i]->logical qubit i; DECODER reports s_hat in s_str (0-indexed logical) order; HD vs s_str. Commitment = sha256((s_str+salt).encode()).",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "seals": {
+  "rung0_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "73e941b3c98dd6ca037c128604b3eab899019aa1fa7a72038d219360fbdfb32d"
+  },
+  "race_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "de55b58ec185e14b3323b3a2fe18fb071e8e11ff92a0c4c8894e7140fa345196"
+  }
+ },
+ "note": "race_n40 shared by all three padded t80 arms (d0/d0+60/d0+120). Clean-ladder is a LABELING rule here (measurement, no grade) \u2014 dirty register just loses the CLEAN label, no abort/retire.",
+ "public_file_contents": "HASHES + convention ONLY.",
+ "reveal_status": "SEALED"
+}
