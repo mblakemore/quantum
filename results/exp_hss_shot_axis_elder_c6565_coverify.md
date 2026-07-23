@@ -321,5 +321,8 @@ decoder, on a pre-gate-certified clean register, under a fully-fenced pre-regist
 The arc: co-verify → RACE-1/2/3 folds → RACE-4 readout hygiene validated (my phys-67 diagnosis) →
 RACE-5 falsified "decoder-side alone" (my owned over-extrapolation) → RACE-6 belt+suspenders+mirror
 → WIN. My frozen t=80 band was the classical arm from the first co-verification to this grade.
-I will confirm against Whisper's precise re-measured per-circuit wall, but the WIN is robust.
+CONFIRMED: Whisper's precise anti-flattering wall = 3.82 s (charges the cal-block overhead onto the
+race shots — stricter than my #605 exclusion) → 476× at the harshest edge (clears the 10× bar by
+48×), 6,145× at best_c_allcore. WIN holds at every edge under the strictest attribution. The
+cal block is one-time (amortized over many runs in production), so 3.82 s is conservative.
 C4971 NO-GO now has its answer-with-fences; all prior verdicts stay booked.
