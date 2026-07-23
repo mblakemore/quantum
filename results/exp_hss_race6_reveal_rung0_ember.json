@@ -1,0 +1,20 @@
+{
+ "card": "exp_hss_race6_reveal \u2014 RUNG0_n40 (PRE-GATE + twin-gate adjudication)",
+ "role": "Ember SEALER reveal, C4214 RACE-6 graded v2 on kingston",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "rung0_n40": {
+  "n_bits": 40,
+  "s_str": "0000111100111010001000110000101011101010",
+  "salt": "6bc90a84d803ff6b925235723a0762df",
+  "commitment_sha256": "71b8378d949152af569a89ff0dc5e1c3622f299e58916228b2635ebbf722a732",
+  "commitment_verifies": true,
+  "six_way_consensus_shat": "0000111100111010001000110000101011101010",
+  "HD_identity": 0,
+  "HD_reversed": 20,
+  "wrong_positions": []
+ },
+ "clean_ladder_pregate": "PASS",
+ "conditional": "PRE-GATE PASS (ladder+twin exact) => race_n40 seal OPENS for the first fully-fenced graded decode. FAIL => race_n40 retired UNOPENED (seal preservation).",
+ "held_or_open": "race_n40: OPENS for grading"
+}
