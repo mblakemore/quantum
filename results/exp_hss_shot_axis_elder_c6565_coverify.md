@@ -235,3 +235,45 @@ standard unchanged and ready.
 *Path A ρ_t at d217 (third/deepest matched depth) is Whisper's observable — I co-check at stage-2.
 Advantage still UNREACHED (now a pure cap-vs-depth gap with the readout blocker SOLVED), not
 refuted. All prior verdicts stay booked.*
+
+---
+
+## GRADE — RACE-5 (the graded attempt) — Elder C6565, job d9gpc50gk0ls73f1v0d0
+
+**Path B: pre-registered MISS — register-quality, NOT decoder failure; my band NOT invoked.**
+Independently verified: the classically-FREE t=0 LADDER itself is HD-4 from truth (wrong at s_str
+{4,11,24,31}, identity 4 / reversed 20 — convention held). I mapped those 4 bits to physicals
+**{113,114,115,119}** — a CONTIGUOUS bad-readout neighborhood re-imported the moment routing
+exclusion was dropped: 113 near-stuck (frac 0.193, threshold-uncorrectable by construction) + its
+neighbors 114/115 + old-region 119. Twin HD-7, race unstable (flips 2-7 across subsamples). The
+gate folds upstream of the twin — the register was too dirty for the classically-free self-gate,
+so no advantage was gradeable. Clean MISS, exactly the pre-registered branch.
+
+**HONEST OWNERSHIP — my RACE-4→RACE-5 framing was OVER-EXTRAPOLATED and is falsified.** My RACE-4
+grade said "decoder-side tilt-priors fix the tilt at ZERO quantum-layer cost … the scalable lever
+is decoder-side, not routing-side," and I shaped + ACKed dropping exclusion on that basis. The
+graded attempt falsified it. RACE-4's clean d217 depended on exclusion AND the cal block, not the
+cal block alone. Two mechanisms exclusion catches that calibration fundamentally CANNOT:
+1. **Near-stuck readout qubits** (113, frac 0.193): a calibrated threshold cannot flip an
+   ~81%-confidently-wrong bit — uncorrectable by construction (Ember mode d).
+2. **Circuit-level-bad qubits** (114/115): bad at DEPTH with NO readout signature → invisible to
+   the readout-cal block (measured on all-0/all-1) → the calibrated threshold never sees them.
+Exclusion and calibration are **COMPLEMENTARY, not substitutes.** I co-own endorsing the drop; the
+value of pre-registration is that a wrong hypothesis falsifies cleanly and informatively — which
+it did — but the lesson is booked plainly: **routing exclusion was load-bearing, not redundant.**
+
+**RACE-6 (corrected synthesis — "belt, suspenders, and a mirror"):**
+- **Belt** — restore exclusion, but MINIMAL/targeted: only the near-stuck (|frac−0.5| beyond the
+  calibratable band) AND circuit-level-bad qubits, not RACE-4's blanket 6 (keeps depth cost low).
+- **Suspenders** — keep the cal block + calibrated-majority for the MODERATE tilts it demonstrably
+  handles (RACE-4 cured 3 tilted qubits at d217).
+- **Mirror** — a clean-ladder/clean-twin PRE-GATE: if the classically-free t=0 recovery isn't
+  exact on the chosen routing, abort/re-route BEFORE spending the graded attempt (catches
+  circuit-level-bad qubits that have no readout signature — the one failure mode neither exclusion-
+  by-known-list nor readout-cal can see a priori).
+
+**Path A ρ_t(190):** CONFOUNDED on this flight (ladder HD-4 + twin HD-7 + twin/race register
+asymmetry) → NOT a clean point; the clean multi-depth ρ_t curve still needs a genuinely clean
+register (RACE-6). *Advantage still UNREACHED — this flight tested "decoder-side alone" and
+correctly falsified it; the readout blocker is solvable, but by exclusion+cal+pre-gate together,
+not calibration alone. All prior verdicts stay booked.*
