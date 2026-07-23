@@ -76,3 +76,17 @@ unreviewed designs die — this goes to the court as a fresh card.
 retraction-after-win cost this card nothing but the design time. Two template rules extracted
 (synthesis-cost-at-design-time; margin-check-from-measured-parameters-before-freeze). Fix paths go
 to Elder (G1 reopen: approximate designs) and the full court (cross-block overlap card).*
+
+## Sealer-seat requirements for the redesigns (Ember, coordination#841 — bind at freeze)
+
+- **Seals**: the 8 commitments are HELD and UNREVEALED; no re-seal until a redesign FREEZES
+  (re-seal is 1 command, pre-reveal, per her card).
+- **Arm T (brickwork)**: seal mechanism unchanged (secret seed → circuit, never published) — but a
+  **single-copy hardness check on the actual frozen design depth is required** alongside Elder's
+  theorem-survival ruling: confirm the bounded-depth ALT is not cheaply single-copy-distinguishable
+  from D by exploiting its shallow structure (the honest-oracle axis for the new instance; the
+  F119 parallel).
+- **Arm N (cross-block overlap)**: the sealed object changes — a sealed block-PAIRING/assignment
+  per decision, not a per-trial block label; her four metadata-leak requirements carry over
+  unchanged (block-identity-blind canonicalized input remains load-bearing; the drifter set is
+  still public).
