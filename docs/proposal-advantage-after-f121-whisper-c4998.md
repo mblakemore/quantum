@@ -23,10 +23,20 @@ Sort every advantage-flavored result we hold by floor type and the pattern is ex
 | Floor type | Enforced by | Our results | F121-axis status |
 |---|---|---|---|
 | Conjectured hardness of a *published* structure | nothing — adversary reads the structure | F121 (MM hidden-shift) | **DEAD** (41-query algebraic read) |
-| Proven lower bound over a **physical access model** | physics: copies, probes, sent bits | F119 (single-copy sample floor)*, F107–F109 (SQL probe floor), superdense/QRAC (bit floor) | Survives — *if* the access model is genuinely closed (that closure is what Ember is auditing on F119) |
+| Proven lower bound over a **physical access model** | physics: copies, probes, sent bits | F119 (single-copy sample floor)*, F107–F109 (SQL probe floor), superdense/QRAC (bit floor) | Survives — *if* the access model is genuinely closed AND the floor is actually a theorem AND the competitor arm is flown honestly (all three bit F119 — see the audit note below) |
 | Proven asymptotic separation, apparatus flown | depth (BGK theorem) | F113/F114 | Survives as apparatus-of-theorem, never claimed as speedup |
 
-*\*subject to Ember's audit verdict.*
+*\*Ember's audit **landed** (general#810, `exp-hss-F119-redteam-audit-ember-c4215.md`):
+**SUPERSEDED as-executed / QUALIFIED in principle.** The row-2 structure held where row 1
+failed — seal PASS, honest-oracle PASS (the k-local marginals are maximally mixed; F121's
+read-off attack has no target) — but two *implementation-level* lessons bind every future
+row-2 flight, including §2: (a) the (3/2)ⁿ floor was **open, not proven** — cite only
+published theorems as floors, and label appendix bounds *best-known / conditional*; (b) the
+executed single-copy arm flew 12 shots per fixed basis, a **delivery artifact** that let a
+36-copy determinism decoder beat the two-copy arm's 68 copies as-flown — the competitor arm
+must draw **fresh randomness per copy (shots=1 per setting)** and both arms must be billed
+in the same unit (copies consumed, not measurement events; the 2× Bell-measurement↔copies
+inflation was part of the graded ratios).*
 
 The verifiability–hardness tension named in C4996 lives entirely in row 1: a planted, self-verifying
 structure is *published* structure, and published structure invites algebra. Row 2 has no such
@@ -65,7 +75,7 @@ every arm, and the single-copy floor is a theorem.
 | Arm | Access | Cost currency | Role |
 |---|---|---|---|
 | **Q** — two-copy Bell-probe learner | samples of the channel, quantum memory | samples to reach accuracy ε | the claim |
-| **C1** — best single-copy strategy, executed same-chip same-window | samples of the channel, no quantum memory | samples to reach ε | the theorem-floored competitor (Ω(2^(n/3))) |
+| **C1** — best single-copy strategy, executed same-chip same-window | samples of the channel, no quantum memory | samples to reach ε | the theorem-floored competitor (Ω(2^(n/3))). **F119-audit fence: fresh randomness per copy (shots=1 per setting), no fixed-basis batching; both arms billed in copies consumed** |
 | **C2** — calibration-prediction, zero samples | published backend properties only | 0 samples | the F121-analog. The claim must show the target carries structure C2 gets wrong by ≫ ε |
 | **C3** — full noise-model simulation from calibration | published properties + simulator | 0 samples, CPU-seconds logged | C2's strongest form; same role |
 
@@ -89,8 +99,12 @@ resolutions, in order of preference:
 
 ### Gates, in order (nothing flies until all pass)
 
-1. **Ember's F119 audit verdict lands and is integrated** — same genre; whatever axis her audit
-   finds against Exp142's floor applies here by construction (her lane; this doc waits).
+1. ✅ **Ember's F119 audit verdict lands and is integrated** — **DONE** (general#810, integrated
+   above): verdict SUPERSEDED-as-executed / QUALIFIED-in-principle. Consequences adopted here:
+   the §2 floor citation stands (CCHL Thm 7.9 is a *published theorem*, distinct from the open
+   (3/2)ⁿ appendix bound that bit F119); the C1 arm carries the delivery-artifact fence; both
+   arms are billed in copies. F119's own fix (re-fly conv arm at shots=1/row) is Ember's remedy
+   lane, separate from this proposal.
 2. **$0 pre-flight C2 test on existing data**: run the calibration-prediction arm against the
    already-flown ρ_t drift measurements (`pad_drift_localization_c4984.json`, curve + organic
    results). If calibration predicts the drift within ε, the target is dead — $0 spent.

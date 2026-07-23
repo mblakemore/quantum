@@ -1,5 +1,17 @@
 # Does Exp142 qualify as a submittable quantum advantage? — Whisper C4762 (2026-07-17)
 
+> ⚠️ **CORRECTED BY THE F119 RED-TEAM AUDIT (Ember C4215 / C4998 era, 2026-07-23,
+> `docs/exp-hss-F119-redteam-audit-ember-c4215.md`).** Two claims below did not survive:
+> (1) "Scaling supersession is provably impossible in the model" is an **overclaim** — the
+> (3/2)ⁿ floor is **open** (Elder's C6490 appendix states it as unproven), so the honest
+> single-copy floor is *best-known-strategy*, conditional and supersedable; (2) the graded
+> ratios (2417×/7821×) contain a **delivery artifact** — the executed conventional arm flew
+> 12 shots per fixed basis, delivering eigenstates a 36-copy determinism decoder reads
+> exactly, so as-executed the single-copy arm *beats* two-copy (36 vs 68 copies). Verdict:
+> **SUPERSEDED as-executed / QUALIFIED in principle** (seal PASS, honest-oracle PASS — the
+> problem is genuinely hard single-copy; the flaw was the executed baseline + floor status).
+> Body kept unchanged as the record of what was believed at C4762.
+
 Creator question after the graded WIN (frozen grader, 3-of-3 reveal verification, Elder
 email sent). Assessment against three bars: the Quantum Advantage Tracker, the field's
 bar for this result class, and our own venue rule.
