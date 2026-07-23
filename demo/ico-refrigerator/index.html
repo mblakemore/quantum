@@ -3,98 +3,126 @@
 <head>
 <meta charset="utf-8">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M4%204C8%208%208%208%2012%2012%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12%204C8%208%208%208%204%2012%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.7%22%20fill%3D%22%23e5e7eb%22%2F%3E%3C%2Fsvg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The ICO Refrigerator — cooling from the order of operations | The Quantum Museum</title>
 <meta name="description" content="Put two operations in a superposition of orders and a target qubit splits colder or hotter by control outcome — a refrigeration forbidden to any definite-order process (causal value 0). Split Δ=0.1796 at 21.1σ; a full engine cycle extracts 0.0340 E/run; the cold branch is spent to reset an external qubit sub-bath at 5σ. Real hardware data (F86/F88/F95/F118, jobs d98vqfsqp3as739tfg0g, d9bdgrug26ic73dfr010).">
-<link rel="stylesheet" href="../museum.css">
+<meta property="og:title" content="The ICO Refrigerator — cooling from the order of operations">
+<meta property="og:description" content="Superpose the ORDER of two thermalizing channels and the target splits colder/hotter by control outcome — forbidden to every definite-order process. Δ=0.1796 at 21.1σ, a full engine cycle, and a sub-bath reset at 5σ. All measured on IBM Heron silicon.">
+<meta name="theme-color" content="#04060c">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
-  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
-  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
-  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
-  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
-    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
-  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --cold:#62e6ff; --hot:#ff6b5e;
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:
+      radial-gradient(60% 42% at 28% -6%, rgba(98,230,255,.08), transparent 68%),
+      radial-gradient(50% 36% at 85% -4%, rgba(255,107,94,.05), transparent 70%),
+      var(--bg);
+    color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell{max-width:940px;margin:0 auto;padding:0 clamp(16px,4vw,30px) 70px}
 
-  .hero { padding: clamp(20px,4vw,40px) 0 10px; position:relative; }
-  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
-    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,#3b9dff 16%,transparent), transparent 70%); }
-  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
-  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
-    font-size:clamp(29px,5.6vw,50px); margin:12px 0 14px; text-wrap:balance; }
-  h1 .cold { color:#3b9dff; } h1 .hot { color:#ff6b5e; }
-  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:64ch; margin:0 0 12px; }
-  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
-    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
-  .scope b { color: var(--amber); font-weight:600; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--cyan);font-weight:400}
 
-  .herobtns { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:14px 0 6px; }
-  .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13.5px; font-weight:600;
-    text-decoration:none; color:#04201e; background:var(--cyan); border:1.5px solid var(--cyan);
-    border-radius:11px; padding:10px 18px; transition:transform .12s, box-shadow .12s; box-shadow:var(--shadow); }
-  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--cyan) 35%,transparent); }
-  .specbtn .arw { font-size:15px; }
+  .hero{padding:clamp(18px,3.5vw,34px) 0 10px}
+  .eyebrow{font-family:var(--mich);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-4);
+    margin:0 0 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .eyebrow .dot{width:4px;height:4px;border-radius:50%;background:var(--hair-2)}
+  h1{font-family:var(--sans);font-weight:300;font-size:clamp(30px,5.2vw,48px);line-height:1.08;letter-spacing:-.015em;
+    margin:0 0 16px;color:var(--ink);text-wrap:balance;max-width:22ch}
+  h1 .cold{color:var(--cold);font-weight:600} h1 .hot{color:var(--hot);font-weight:600}
+  .lede{font-size:clamp(15px,2.1vw,17.5px);color:var(--ink-3);max-width:66ch;margin:0 0 14px}
+  .lede em{color:var(--ink-2)} .lede .cold{color:var(--cold)} .lede .hot{color:var(--hot)}
+  .scope{display:inline-block;line-height:1.5;font-family:var(--mono);font-size:11.5px;
+    color:var(--ink-4);border:1px solid var(--hair);border-radius:999px;padding:5px 12px}
+  .scope b{color:var(--amber);font-weight:600}
+  .herobtns{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:16px 0 6px}
+  .specbtn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13px;font-weight:600;
+    text-decoration:none;color:#04121a;background:var(--cyan);border-radius:10px;padding:11px 18px}
+  .specbtn:hover{filter:brightness(1.08);text-decoration:none}
+  .md-link{font-family:var(--mono);font-size:12px;color:var(--ink-4);text-decoration:underline}
+  .md-link:hover{color:var(--cyan)}
 
-  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
-    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
-  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
-    margin:0 0 4px; font-weight:600; color: var(--cyan); }
-  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
-  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:66ch; }
+  .panel{background:var(--panel);border:1px solid var(--hair);border-radius:13px;
+    padding:clamp(18px,3vw,26px);margin-top:22px;box-shadow:var(--shadow)}
+  .panel-label{font-family:var(--mich);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+    margin:0 0 6px;color:var(--cyan)}
+  .panel h2{font-family:var(--sans);font-weight:500;font-size:clamp(18px,2.6vw,23px);margin:0 0 6px;
+    letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+  .panel .sub{color:var(--ink-3);font-size:14px;margin:0 0 20px;max-width:66ch}
+  .panel .sub strong{color:var(--ink-2)}
 
-  .fridge { display:grid; grid-template-columns: 1fr auto; gap:clamp(20px,4vw,40px); align-items:center; }
-  @media (max-width:680px){ .fridge { grid-template-columns:1fr; } }
-  .therms { display:flex; gap:26px; justify-content:center; }
-  .thermo { text-align:center; }
-  .tube { position:relative; width:44px; height:230px; margin:0 auto; border:2px solid var(--edge-2);
-    border-radius:22px; background:var(--surface-2); overflow:hidden; }
-  .merc { position:absolute; left:0; right:0; bottom:0; border-radius:0 0 20px 20px; transition:height .12s ease, background .12s ease; }
-  @media (prefers-reduced-motion: reduce){ .merc { transition:none; } }
-  .baseline { position:absolute; left:-6px; right:-6px; border-top:2px dashed var(--ink-3); }
-  .baseline span { position:absolute; right:100%; margin-right:8px; white-space:nowrap; font-family:var(--mono);
-    font-size:10px; color:var(--ink-3); top:-7px; }
-  .thermo .name { font-family:var(--mono); font-size:12.5px; margin-top:10px; color:var(--ink); font-weight:600; }
-  .thermo .p1 { font-family:var(--mono); font-size:20px; font-weight:700; margin-top:3px; font-variant-numeric:tabular-nums; }
-  .thermo.cold .p1 { color:#3b9dff; } .thermo.hot .p1 { color:#ff6b5e; }
-  .thermo .state { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-top:2px; }
+  .fridge{display:grid;grid-template-columns:1fr auto;gap:clamp(20px,4vw,40px);align-items:center}
+  @media (max-width:680px){.fridge{grid-template-columns:1fr}}
+  .therms{display:flex;gap:26px;justify-content:center}
+  .thermo{text-align:center}
+  .tube{position:relative;width:44px;height:230px;margin:0 auto;border:2px solid var(--hair-2);
+    border-radius:22px;background:var(--panel-2);overflow:hidden}
+  .merc{position:absolute;left:0;right:0;bottom:0;border-radius:0 0 20px 20px;transition:height .12s ease, background .12s ease}
+  @media (prefers-reduced-motion: reduce){.merc{transition:none}}
+  .baseline{position:absolute;left:-6px;right:-6px;border-top:2px dashed var(--ink-4)}
+  .baseline span{position:absolute;right:100%;margin-right:8px;white-space:nowrap;font-family:var(--mono);
+    font-size:10px;color:var(--ink-4);top:-7px}
+  .thermo .name{font-family:var(--mich);font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-top:12px;color:var(--ink-2)}
+  .thermo .p1{font-family:var(--mono);font-size:20px;font-weight:600;margin-top:4px;font-variant-numeric:tabular-nums}
+  .thermo.cold .p1{color:var(--cold)} .thermo.hot .p1{color:var(--hot)}
+  .thermo .state{font-family:var(--mono);font-size:10.5px;color:var(--ink-4);margin-top:2px}
 
-  .readout-split { font-family:var(--mono); margin-bottom:16px; }
-  .readout-split .d { font-size:clamp(30px,7vw,44px); font-weight:720; letter-spacing:-.02em; color:var(--ink); }
-  .readout-split .cap { font-size:12.5px; color:var(--ink-3); }
-  .readout-split .cap b { color: var(--good); }
-  .causal { font-family:var(--mono); font-size:12px; color:var(--ink-3); border-left:2px solid var(--amber);
-    padding-left:12px; margin:14px 0; }
-  .causal b { color: var(--amber); }
-  .slider-wrap { margin-top:8px; }
-  .slabel { display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--ink-3); margin-bottom:8px; }
-  input[type=range]{ -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:999px;
-    background:linear-gradient(90deg,var(--ink-3),#3b9dff); cursor:pointer; }
-  input[type=range]:focus-visible{ outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 999px; }
-  input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:22px; height:22px; border-radius:50%;
-    background:var(--ink); border:3px solid var(--cyan); box-shadow:0 2px 8px rgba(0,0,0,.4); }
-  input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%; background:var(--ink); border:3px solid var(--cyan); }
-  .verdict { margin-top:14px; font-size:14px; color:var(--ink-2); min-height:3em; max-width:56ch; }
-  .verdict b { color: var(--ink); } .verdict .forbid { color:#3b9dff; font-weight:700; }
+  .readout-split{font-family:var(--mono);margin-bottom:16px}
+  .readout-split .d{font-size:clamp(30px,7vw,44px);font-weight:600;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+  .readout-split .cap{font-size:12.5px;color:var(--ink-4)}
+  .readout-split .cap strong{color:var(--cyan)}
+  .causal{font-family:var(--mono);font-size:12px;color:var(--ink-3);border-left:2px solid var(--amber);
+    padding-left:12px;margin:14px 0;max-width:56ch}
+  .causal strong,.causal b{color:var(--amber)}
+  .slider-wrap{margin-top:8px}
+  .slabel{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--ink-4);margin-bottom:8px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:999px;
+    background:linear-gradient(90deg,var(--hair-2),var(--cold));cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;
+    background:var(--ink);border:3px solid var(--cyan);box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--ink);border:3px solid var(--cyan)}
+  .verdict{margin-top:14px;font-size:14px;color:var(--ink-2);min-height:3em;max-width:56ch}
+  .verdict b,.verdict strong{color:var(--ink)} .verdict .forbid{color:var(--cold);font-weight:600}
 
   /* cycle */
-  .cycle { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
-  @media (max-width:680px){ .cycle { grid-template-columns:1fr 1fr; } }
-  .stage { border:1px solid var(--edge); border-radius:12px; padding:14px; background:var(--surface-2); position:relative; }
-  .stage .n { font-family:var(--mono); font-size:11px; color:var(--cyan); font-weight:700; }
-  .stage .t { font-size:14px; font-weight:620; margin:6px 0 4px; color:var(--ink); }
-  .stage .v { font-family:var(--mono); font-size:12.5px; color:var(--ink-2); }
-  .stage .v b { color:var(--good); }
-  .ledger { display:flex; flex-wrap:wrap; gap:12px 24px; margin-top:18px; font-family:var(--mono); font-size:12.5px; align-items:baseline; }
-  .ledger .work { font-size:clamp(22px,5vw,32px); font-weight:720; color:var(--good); letter-spacing:-.02em; }
-  .ledger .lab { color:var(--ink-3); }
-  .ledger .win { color:var(--good); } .ledger .loss { color:var(--amber); }
+  .cycle{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media (max-width:680px){.cycle{grid-template-columns:1fr 1fr}}
+  .stage{border:1px solid var(--hair);border-radius:11px;padding:14px;background:var(--panel-2)}
+  .stage .n{font-family:var(--mich);font-size:8.5px;letter-spacing:.16em;color:var(--cyan)}
+  .stage .t{font-size:14px;font-weight:600;margin:7px 0 4px;color:var(--ink)}
+  .stage .v{font-family:var(--mono);font-size:12.5px;color:var(--ink-3)}
+  .stage .v strong{color:var(--good)}
+  .ledger{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:18px;font-family:var(--mono);font-size:12.5px;align-items:baseline}
+  .ledger .work{font-size:clamp(22px,5vw,32px);font-weight:600;color:var(--good);letter-spacing:-.02em}
+  .ledger .lab{color:var(--ink-4);max-width:52ch}
+  .ledger .lab strong{color:var(--ink-3)}
+  .ledger .win{color:var(--good);font-weight:600} .ledger .loss{color:var(--amber)}
+  .ledger .sp{flex:1}
 
-  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
-    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
-  .badge-row .sig { color: var(--cyan); font-weight:600; }
-  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
-  .badge-row .sp { flex:1; }
+  footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--hair);font-family:var(--mich);
+    font-size:9px;letter-spacing:.2em;color:var(--ink-4);display:flex;gap:8px 20px;flex-wrap:wrap;text-transform:uppercase;align-items:baseline}
+  footer .sig{color:var(--cyan)}
+  footer a{font-family:var(--mono);font-size:11.5px;letter-spacing:0;text-transform:none;color:var(--ink-3)}
+  footer a:hover{color:var(--cyan)}
+  footer .sp{flex:1}
 </style>
 </head>
 <body>
@@ -102,24 +130,23 @@
 <div class="shell">
 
   <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <span class="wingtag">· Wing I · The Causal Switch</span>
+    <a href="../">← The Museum</a>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+    <span class="wing">WING <b>I</b> · The Causal Switch</span>
   </nav>
 
   <main id="main">
   <header class="hero">
-    <p class="eyebrow">Indefinite-causal-order thermodynamics</p>
+    <p class="eyebrow">INDEFINITE-CAUSAL-ORDER THERMODYNAMICS<span class="dot"></span>EVERY NUMBER MEASURED</p>
     <h1>Cooling from the <span class="cold">order</span> of operations.</h1>
     <p class="lede">Send a qubit through two thermalizing channels — but put the <em>order</em> of the two
     channels into a quantum superposition. Read a control qubit, and the target comes out <span class="cold">colder</span>
     or <span class="hot">hotter</span> than the baths it touched. No definite-order process can do this: its causal
     value is exactly zero. Turn the knob and watch it happen — every number is measured hardware data.</p>
-    <span class="scope">Resource identified by <strong>Felce–Vedral (2020)</strong>. The contribution: the frozen-court measurement on silicon.</span>
+    <span class="scope">Resource identified by <b>Felce–Vedral (2020)</b>. The contribution: the frozen-court measurement on silicon.</span>
     <div class="herobtns">
-      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
+      <a class="specbtn" href="./spec.html"><span aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link">plain-text (.md)</a>
     </div>
   </header>
 
@@ -175,7 +202,7 @@
     </div>
     <div class="ledger">
       <span class="work">0.0340 E</span><span class="lab">net work per run — routed through the order-coherence and the demon's record; the passive baths alone can power nothing</span>
-      <span class="sp" style="flex:1"></span>
+      <span class="sp"></span>
       <span class="win">W2 WIN</span><span class="loss">W1 LOSS (0.7σ short — kept in the record)</span>
     </div>
   </section>
@@ -192,7 +219,7 @@
     <div class="fridge">
       <div>
         <div class="readout-split">
-          <div class="d" style="color:#3b9dff">p₁ = 0.2100</div>
+          <div class="d" style="color:var(--cold)">p₁ = 0.2100</div>
           <div class="cap">the external data qubit after <strong>ICO reset</strong> (heralded on control = +) · ±0.0038</div>
         </div>
         <div class="causal">Sub-bath at <strong>5σ</strong> (0.2100 + 5·SE = 0.229 &lt; 0.25) and colder than the same-chip
@@ -205,15 +232,15 @@
       </div>
       <div class="therms">
         <div class="thermo hot">
-          <div class="tube"><div class="baseline" style="bottom:50%"><span>bath 0.25</span></div><div class="merc" style="height:52%;background:#ff6b5e"></div></div>
+          <div class="tube"><div class="baseline" style="bottom:50%"><span>bath 0.25</span></div><div class="merc" style="height:52%;background:var(--hot)"></div></div>
           <div class="name">definite order</div>
-          <div class="p1" style="color:#ff6b5e">0.260</div>
+          <div class="p1" style="color:var(--hot)">0.260</div>
           <div class="state">reset → bath (null)</div>
         </div>
         <div class="thermo cold">
-          <div class="tube"><div class="baseline" style="bottom:50%"></div><div class="merc" style="height:42%;background:#3b9dff"></div></div>
+          <div class="tube"><div class="baseline" style="bottom:50%"></div><div class="merc" style="height:42%;background:var(--cold)"></div></div>
           <div class="name">ICO reset +</div>
-          <div class="p1" style="color:#3b9dff">0.210</div>
+          <div class="p1" style="color:var(--cold)">0.210</div>
           <div class="state">below the bath</div>
         </div>
       </div>
@@ -221,10 +248,10 @@
     <div class="ledger">
       <span class="win">WIN both legs</span>
       <span class="lab">sub-bath 5σ · colder than definite-order reset · deco/retention clean</span>
-      <span class="sp" style="flex:1"></span>
+      <span class="sp"></span>
       <span class="lab" style="color:var(--amber)">scope: beats <strong>definite-order</strong> reset (0.25), <strong>not</strong> the chip's native reset (~0.01) — a resource-theory result</span>
     </div>
-    <p class="sub" style="margin:14px 0 0;font-size:12.5px;color:var(--ink-3)">Honest arc: the first flight graded
+    <p class="sub" style="margin:14px 0 0;font-size:12.5px;color:var(--ink-4)">Honest arc: the first flight graded
     <strong>NO-TEST</strong> — a quality sentinel came in under a floor I'd set too optimistically. The re-fly changed exactly one
     pre-registered number (re-derived from the measured data), ran a fresh job, and won cleanly on a better window that
     clears the older established bar independently — so the win does not hinge on the loosened floor.</p>
@@ -240,9 +267,10 @@
   </section>
 
   </main>
-  <footer class="badge-row">
-    <span>MEASURED · <span class="sig">F86 / F88 / F95 / F118</span> · jobs <span class="sig">d98vqfsqp3as739tfg0g · d9bdgrug26ic73dfr010</span></span>
-    <span>ibm_marrakesh · causal value = 0 · split 21.1σ · sub-bath reset 5σ</span>
+  <footer role="contentinfo">
+    <span>MEASURED · <span class="sig">F86 / F88 / F95 / F118</span></span>
+    <span>JOBS <span class="sig">d98vqfsqp3as739tfg0g · d9bdgrug26ic73dfr010</span></span>
+    <span>IBM_MARRAKESH · CAUSAL VALUE = 0 · SPLIT 21.1σ · SUB-BATH RESET 5σ</span>
     <span class="sp"></span>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
@@ -252,14 +280,6 @@
 
 <script>
   (function () {
-    var root = document.documentElement, KEY = "qmuseum-theme";
-    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
-    document.getElementById("themeBtn").addEventListener("click", function () {
-      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
-      try { localStorage.setItem(KEY, nx); } catch (e) {}
-    });
-
     // ---- data kernel (F86, exp108_grade.json) ----
     var BASE = 0.25;           // definite-order bath population (measured null 0.2496)
     var P1P_FULL = 0.2098;     // + branch, colder (measured)
@@ -270,9 +290,9 @@
 
     var merc = { p: document.getElementById("mercPlus"), m: document.getElementById("mercMinus") };
     function tempColor(p1) {
-      // p1 0.10 (cold blue) -> 0.25 (neutral) -> 0.40 (hot red)
+      // p1 0.10 (cold cyan) -> 0.25 (neutral) -> 0.40 (hot red)
       var t = Math.max(0, Math.min(1, (p1 - 0.10) / (0.40 - 0.10)));
-      var cold = [59,157,255], hot = [255,107,94];
+      var cold = [98,230,255], hot = [255,107,94];
       var c = cold.map(function (x, i) { return Math.round(x + (hot[i] - x) * t); });
       return "rgb(" + c[0] + "," + c[1] + "," + c[2] + ")";
     }
