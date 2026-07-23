@@ -1,0 +1,82 @@
+{
+ "card": "exp_hss_race3_reveal \u2014 RUNG0_n40 + RUNG0_n32 ONLY (race reveals HELD)",
+ "role": "Ember SEALER reveal, C4214 RACE-3",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode())",
+ "rung0_n40": {
+  "n_bits": 40,
+  "s_str": "1011100100100001000101010100111111001101",
+  "salt": "e1bb66e2384cffe64de36c86a53d8702",
+  "commitment_sha256": "52b076199ae2aea38342fd257607240027defddc31721115e0e8792069c86c01",
+  "commitment_verifies": true
+ },
+ "rung0_n32": {
+  "n_bits": 32,
+  "s_str": "10001100111011100001111011011100",
+  "salt": "4bc7a6ce984e8280298a8911361a15ea",
+  "commitment_sha256": "91adde09776304abae9be80323c11461c5ad80534b0feb236a77b8fc92efdfee",
+  "commitment_verifies": true
+ },
+ "held": [
+  "race_n40",
+  "race_n32"
+ ],
+ "adjudication": {
+  "ladder_m0_d64": {
+   "shat": "1011100100110001100101010100111011001101",
+   "target": "rung0_n40",
+   "HD_identity": 3,
+   "HD_reversed": 17
+  },
+  "ladder_m1_d192": {
+   "shat": "1011001100110001100001010101111111001101",
+   "target": "rung0_n40",
+   "HD_identity": 6,
+   "HD_reversed": 16
+  },
+  "twin40_d125": {
+   "shat": "1011100100110001100001010100111111001101",
+   "target": "rung0_n40",
+   "HD_identity": 3,
+   "HD_reversed": 17
+  },
+  "twin32_d195": {
+   "shat": "10001100111011100001111011011100",
+   "target": "rung0_n32",
+   "HD_identity": 0,
+   "HD_reversed": 20
+  }
+ },
+ "convention_note": "identity is the certified RACE-2 convention; HD_reversed shown per Ember reveal-convention-court discipline (c4214_002).",
+ "systematic_localization": {
+  "finding": "positions 11 & 16 (logical, s_str order) are wrong in ALL THREE n40 decodes (ladder_m0 d64, ladder_m1 d192, twin40 d125) at every depth incl. shallowest d64 => a 2-bit LAYOUT/readout SYSTEMATIC, not depth noise, not decoder failure, not convention (n32 twin HD-0 identity confirms convention held).",
+  "per_decode_wrong_positions": {
+   "ladder_m0_d64": [
+    11,
+    16,
+    31
+   ],
+   "ladder_m1_d192": [
+    4,
+    6,
+    11,
+    16,
+    19,
+    27
+   ],
+   "twin40_d125": [
+    11,
+    16,
+    19
+   ]
+  },
+  "systematic_core": [
+   11,
+   16
+  ],
+  "depth_ride": "HD = systematic(2) + depth-accumulated: d64->+1(HD3), d125->+1(HD3), d192->+4(HD6). Clean attenuation on top of a fixed 2-bit floor.",
+  "n32_twin": "twin32 d195 = rung0_n32 EXACTLY (HD-0) => n32 layout clean, convention correct.",
+  "cross_seed_note": "positions 11&16 bad in BOTH seed0 (ladder) and seed16 (twin40) routings despite different physical qubit sets \u2014 either shared physical qubits at those logical slots or a readout-level systematic; Whisper has the routing/layout data to map logical 11&16 -> physical qubits.",
+  "pathB_adjudication": "twin40 (advantage gate @ race depth 125) = HD-3 => strict-exact gate FOLDS, but 2/3 error bits are the systematic; net decoder+depth miss at race depth is effectively 1 bit beyond the 2-bit systematic floor. Fold-on-twin-systematics, NOT a genuine advantage-depth decoder failure."
+ }
+}
