@@ -1,0 +1,667 @@
+{
+ "card": "exp_hss_race4_flight_manifest",
+ "cycle": "C4979",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_marrakesh",
+ "prereg": "docs/exp-hss-race4-prereg-FROZEN-whisper-c4979.md",
+ "seals_committed": "results/exp_hss_race4_seals_ember.json",
+ "depth_cap": 180,
+ "excluded_physicals": [
+  4,
+  67,
+  119,
+  133,
+  134,
+  135
+ ],
+ "advantage_eligible": {
+  "race_n40": false
+ },
+ "twin40_plan": {
+  "seed_off": 0,
+  "fold_m": 2,
+  "pad_pairs_arith": 1,
+  "pad_layer_pairs_used": 1
+ },
+ "layouts": {
+  "race_n40": {
+   "initial": [
+    70,
+    87,
+    108,
+    92,
+    72,
+    6,
+    106,
+    77,
+    78,
+    97,
+    98,
+    90,
+    85,
+    73,
+    50,
+    109,
+    2,
+    68,
+    35,
+    51,
+    89,
+    88,
+    111,
+    93,
+    58,
+    7,
+    105,
+    65,
+    69,
+    107,
+    112,
+    91,
+    86,
+    79,
+    49,
+    110,
+    3,
+    71,
+    19,
+    52
+   ],
+   "final": [
+    86,
+    69,
+    107,
+    93,
+    50,
+    6,
+    105,
+    65,
+    68,
+    78,
+    112,
+    111,
+    85,
+    79,
+    49,
+    110,
+    2,
+    51,
+    35,
+    52,
+    97,
+    87,
+    109,
+    92,
+    71,
+    7,
+    108,
+    77,
+    70,
+    106,
+    91,
+    98,
+    90,
+    73,
+    72,
+    89,
+    3,
+    88,
+    19,
+    58
+   ],
+   "d2q": 217
+  },
+  "rung0_base": {
+   "initial": [
+    70,
+    87,
+    108,
+    92,
+    72,
+    6,
+    106,
+    77,
+    78,
+    97,
+    98,
+    90,
+    85,
+    73,
+    50,
+    109,
+    2,
+    68,
+    35,
+    51,
+    89,
+    88,
+    111,
+    93,
+    58,
+    7,
+    105,
+    65,
+    69,
+    107,
+    112,
+    91,
+    86,
+    79,
+    49,
+    110,
+    3,
+    71,
+    19,
+    52
+   ],
+   "final": [
+    70,
+    88,
+    109,
+    92,
+    78,
+    6,
+    105,
+    77,
+    71,
+    97,
+    89,
+    98,
+    87,
+    73,
+    50,
+    108,
+    2,
+    72,
+    33,
+    52,
+    69,
+    86,
+    110,
+    93,
+    90,
+    7,
+    106,
+    65,
+    68,
+    107,
+    91,
+    111,
+    85,
+    79,
+    49,
+    112,
+    3,
+    58,
+    39,
+    53
+   ],
+   "d2q": 43
+  },
+  "twin40_src": {
+   "initial": [
+    70,
+    87,
+    108,
+    92,
+    72,
+    6,
+    106,
+    77,
+    78,
+    97,
+    98,
+    90,
+    85,
+    73,
+    50,
+    109,
+    2,
+    68,
+    35,
+    51,
+    89,
+    88,
+    111,
+    93,
+    58,
+    7,
+    105,
+    65,
+    69,
+    107,
+    112,
+    91,
+    86,
+    79,
+    49,
+    110,
+    3,
+    71,
+    19,
+    52
+   ],
+   "final": [
+    70,
+    88,
+    109,
+    92,
+    78,
+    6,
+    105,
+    77,
+    71,
+    97,
+    89,
+    98,
+    87,
+    73,
+    50,
+    108,
+    2,
+    72,
+    33,
+    52,
+    69,
+    86,
+    110,
+    93,
+    90,
+    7,
+    106,
+    65,
+    68,
+    107,
+    91,
+    111,
+    85,
+    79,
+    49,
+    112,
+    3,
+    58,
+    39,
+    53
+   ],
+   "d2q": 43
+  }
+ },
+ "seed": 2026072304,
+ "total_shots": 360000,
+ "subsample_pubs": {
+  "twin40": [
+   2,
+   4,
+   8,
+   16
+  ],
+  "race_n40": [
+   2,
+   4,
+   8,
+   16,
+   32
+  ]
+ },
+ "decoder_frozen": {
+  "graded": "calibrated per-bit majority (t_i=(p01+1-p10)/2)",
+  "diagnostics": "chase12 rho=0.5 soft<=8 (NOT graded)",
+  "report_order": "s_str display order, 0-indexed positions"
+ },
+ "pubs_meta": [
+  {
+   "block": "cal_all0",
+   "shots": 10000
+  },
+  {
+   "block": "cal_all1",
+   "shots": 10000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 0,
+   "d2q": 43,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 1,
+   "d2q": 43,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 2,
+   "d2q": 43,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 3,
+   "d2q": 43,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 0,
+   "d2q": 129,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 1,
+   "d2q": 129,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 2,
+   "d2q": 129,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 3,
+   "d2q": 129,
+   "shots": 5000
+  },
+  {
+   "block": "twin40",
+   "twirl": 0,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 1,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 2,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 3,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 4,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 5,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 6,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 7,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 8,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 9,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 10,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 11,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 12,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 13,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 14,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 15,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 0,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 1,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 2,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 3,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 4,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 5,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 6,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 7,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 8,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 9,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 10,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 11,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 12,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 13,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 14,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 15,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 16,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 17,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 18,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 19,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 20,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 21,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 22,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 23,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 24,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 25,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 26,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 27,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 28,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 29,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 30,
+   "d2q": 217,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 31,
+   "d2q": 217,
+   "shots": 6250
+  }
+ ],
+ "job_id": "d9gp1bkhonhs73ac0af0",
+ "submitted_utc": "2026-07-23T03:55:26Z"
+}
