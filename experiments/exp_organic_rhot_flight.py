@@ -21,8 +21,8 @@ from exp_hss_generator import make_g_spec, build_hss_circuit
 from qiskit import transpile
 
 SEED = 2026072308
-SEALS_PRIVATE = "/droid/repos/dc_shared/workspace/exp-organic-rhot-seals-ember-to-whisper.json"
-SEALS_PUBLIC = os.path.join(QROOT, "results", "exp_organic_rhot_seals_ember.json")
+SEALS_PRIVATE = "/droid/repos/dc_shared/workspace/exp-organic-rhot-law-seals-ember-to-whisper.json"
+SEALS_PUBLIC = os.path.join(QROOT, "results", "exp_organic_rhot_law_seals_ember.json")
 BACKEND_NAME = "ibm_kingston"
 NPHYS = 156
 
@@ -151,7 +151,7 @@ def main(submit=False):
     manifest = {"card": "exp_organic_rhot_flight_manifest", "cycle": "C4985",
                 "substrate": "claude-fable-5", "backend": BACKEND_NAME,
                 "prereg": "docs/exp-organic-rhot-law-prereg-whisper-c4985.md",
-                "seals_committed": "results/exp_organic_rhot_seals_ember.json",
+                "seals_committed": "results/exp_organic_rhot_law_seals_ember.json",
                 "lottery_d2q_histogram": sorted(lottery.values()),
                 "selected": {tag: {"seed_off": s, "d2q": lottery[s]} for tag, s in selected},
                 "span": span, "span_label": span_label, "ladder_info": ladder_info,
