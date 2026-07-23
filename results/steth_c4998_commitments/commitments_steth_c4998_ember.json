@@ -1,0 +1,30 @@
+{
+  "experiment": "steth_c4998_advantage_distinguishing",
+  "M": 40,
+  "committer": "Ember (DC15E)",
+  "convention": "draw=Mezzadri2007-QR-Ginibre; rng=numpy.default_rng(int.from_bytes(seed,'big')); z=(randn(d,d)+1j*randn(d,d))/sqrt2; Q,R=numpy.linalg.qr(z); U=Q@diag(R_ii/abs(R_ii)); qubit-order=little-endian-qiskit",
+  "timestamp": "2026-07-23T22:43:27.820400+00:00",
+  "preimage_spec": "salt_bytes(32) || utf8(canonical_spec_string)",
+  "armT": {
+    "6": {
+      "U_hash_sha256": "69a8cce658d7aa95dd8902dc32bf6a038807cb14d9ea08814a862a11329ad636",
+      "labels_hash_sha256": "f025c9a8e172f338a8d99c0d502f4f06013ecb01102fdb6dbb7592782f25865d"
+    },
+    "9": {
+      "U_hash_sha256": "ab1d45a177664cb813768e35b37cd6232082aae420c5c0f8d2800c41269bdc13",
+      "labels_hash_sha256": "c26e25d9eeefcb57789fc492445c685d4fdf6b2a347059f93b7a101a40c1a8d1"
+    },
+    "12": {
+      "U_hash_sha256": "d50cc3d87b3c53191cc2c5cc0a3b565af31a68fa76ecc0be526457622b1e7529",
+      "labels_hash_sha256": "b0fb6fca9bd416f342ac673957678059eb4b45a069a2f80e337857f9ce852bb9"
+    }
+  },
+  "armN": {
+    "2": {
+      "labels_hash_sha256": "720eeed002ce3a8ca11710d8b15be1cea806053662d40459685c2e4b8d964253"
+    },
+    "3": {
+      "labels_hash_sha256": "e4ef6d6053a24be5f41bce3aeebec7095443c2f64c37a779dd8838dc641d72ed"
+    }
+  }
+}
