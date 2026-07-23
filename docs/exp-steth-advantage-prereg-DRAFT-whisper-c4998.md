@@ -164,10 +164,30 @@ arm is simultaneously the tax-law coherence witness (coordination#712).*
   a fixed 20/20 count would leak a cross-trial constraint). NULL-realizes-D and seed→U-Haar both
   verified actively by the sealer. Her leak check found the arm-N selection rule as first drafted
   NOT leak-safe → the four requirements above are now frozen into the card.
-- **G3 ($0, Whisper)**: end-to-end noiseless sim of both arms (exactness gate, 6/6 style — decision
-  pipeline recovers sealed labels perfectly at zero noise); noise-model margin prediction per rung
-  from the attenuation map (λ_eff at compiled depths + measured λ_anc placeholder); freeze m_Q,
-  R_N, block-selection, and the accuracy CI method from these sims.
+- ✅ **G3 ($0, Whisper) — RUN, PASS, constants frozen** (`experiments/exp_steth_c4998_g3_sims.py`
+  → `results/exp_steth_c4998_g3_sims.json`; TEST seeds only, Ember's seals untouched):
+  - **Exactness**: two-copy parity statistic verified against its closed form
+    E[(−1)^singlets] = tr(ρ²) — p_odd(U)=0 exactly, p_odd(D) matches (1−4^(−k))/2 within stats
+    (k=2,3); blind M=40 arm-T label recovery **40/40** at the frozen rule.
+  - **Frozen Q rule (arm T)**: decide U iff zero odd parities; noiseless m_Q=6 (12 copies/trial);
+    **hardware purity gate**: measured two-copy Choi purity u ≥ 0.7 required, with the frozen
+    escalation table u→(m_Q,τ): 0.9→(12,3), 0.8→(16,5), 0.7→(24,8); **u<0.7 at a rung folds that
+    rung** (no m_Q≤24 reaches 95%). Mapping u to compiled Haar depth via the attenuation map is a
+    flight-compile check.
+  - **Frozen arm-N rule**: ALT iff zero odd parities, m_Q=24 (48 copies/trial), from the arm's OWN
+    purity gap (coherent 1.0 vs matched-stochastic ≈0.74) — **the gate caught that the D-vs-U
+    table did not transfer** (first run at borrowed constants: 70% → re-derived rule: 40/40).
+    Second catch: a Bell-half Z-probe C1 is chance *by construction* — replaced with the honest
+    |0⟩-probe C1, which sits at chance (45%) for the REAL reason (bias matched exactly:
+    equatorial coherent axis, X/Y-only stochastic flips). Both catches booked; exactness gates
+    exist to catch exactly this.
+  - **C1-executed in sim**: single-copy shadows need **>512 copies** at k=2 and k=3 (sim range
+    exhausted) vs Q's 12 — the cost asymmetry is present at tiny k already; the growth-law fit
+    itself comes from the hardware sweep (sim points are variance-bounded, not floor-bounded, and
+    say so). At Q's copy budget, C1-shadows is at chance — the per-rung criterion is sim-supported.
+  - **Wall margins printed** (§1 regime pin): windows 1.61×/2.65×/4.34×/7.12× at k=6/9/12/15.
+  - Leak-safety reqs 2–4 (profile match, structural identity, label-independent order) are
+    flight-compile checks — listed TODO-at-freeze in the artifact.
 - **G4 (Creator + budget)**: fresh QPU-pool number at freeze (not the stale C4971 68%); predicted
   QPU-seconds quoted per rung with fold-before-fly rules; Creator GO.
 

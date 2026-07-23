@@ -1,0 +1,144 @@
+{
+ "card": "exp_steth_c4998_g3_sims",
+ "cycle": "C4998",
+ "substrate": "claude-fable-5",
+ "prereg": "docs/exp-steth-advantage-prereg-DRAFT-whisper-c4998.md",
+ "seeds": "TEST seeds only \u2014 Ember's sealed seeds untouched",
+ "A_arm_t_exactness": [
+  {
+   "k": 2,
+   "n_meas": 400,
+   "p_odd_U_measured": 0.0,
+   "p_odd_U_theory": 0.0,
+   "p_odd_D_measured": 0.4625,
+   "p_odd_D_theory": 0.46875,
+   "closed_form": "E[(-1)^singlets]=tr(rho^2); D-average purity 4^-k",
+   "pass_U": true,
+   "pass_D": true
+  },
+  {
+   "k": 3,
+   "n_meas": 400,
+   "p_odd_U_measured": 0.0,
+   "p_odd_U_theory": 0.0,
+   "p_odd_D_measured": 0.4925,
+   "p_odd_D_theory": 0.4921875,
+   "closed_form": "E[(-1)^singlets]=tr(rho^2); D-average purity 4^-k",
+   "pass_U": true,
+   "pass_D": true
+  }
+ ],
+ "B_q_rule_purity_table": [
+  {
+   "choi_purity_u": 1.0,
+   "p_odd_U": 0.0,
+   "m95": {
+    "m_Q": 6,
+    "tau": 1,
+    "copies_per_trial": 12
+   }
+  },
+  {
+   "choi_purity_u": 0.9,
+   "p_odd_U": 0.04999999999999999,
+   "m95": {
+    "m_Q": 12,
+    "tau": 3,
+    "copies_per_trial": 24
+   }
+  },
+  {
+   "choi_purity_u": 0.8,
+   "p_odd_U": 0.09999999999999998,
+   "m95": {
+    "m_Q": 16,
+    "tau": 5,
+    "copies_per_trial": 32
+   }
+  },
+  {
+   "choi_purity_u": 0.7,
+   "p_odd_U": 0.15000000000000002,
+   "m95": {
+    "m_Q": 24,
+    "tau": 8,
+    "copies_per_trial": 48
+   }
+  },
+  {
+   "choi_purity_u": 0.6,
+   "p_odd_U": 0.2,
+   "m95": null
+  },
+  {
+   "choi_purity_u": 0.5,
+   "p_odd_U": 0.25,
+   "m95": null
+  },
+  {
+   "choi_purity_u": 0.4,
+   "p_odd_U": 0.3,
+   "m95": null
+  }
+ ],
+ "C_wall_margins": [
+  {
+   "k": 6,
+   "wall_copies": 6.5,
+   "floor_2^(k/3)": 4.0,
+   "window_ratio": 1.61,
+   "theorem_carrying": false
+  },
+  {
+   "k": 9,
+   "wall_copies": 21.2,
+   "floor_2^(k/3)": 8.0,
+   "window_ratio": 2.65,
+   "theorem_carrying": true
+  },
+  {
+   "k": 12,
+   "wall_copies": 69.5,
+   "floor_2^(k/3)": 16.0,
+   "window_ratio": 4.34,
+   "theorem_carrying": true
+  },
+  {
+   "k": 15,
+   "wall_copies": 228.0,
+   "floor_2^(k/3)": 32.0,
+   "window_ratio": 7.12,
+   "theorem_carrying": true
+  }
+ ],
+ "D_c1_shadows": [
+  {
+   "k": 2,
+   "copies_to_95": ">512",
+   "trials": 30
+  },
+  {
+   "k": 3,
+   "copies_to_95": ">512",
+   "trials": 30
+  }
+ ],
+ "E_arm_n_toy": {
+  "lambda_matched": 0.85,
+  "M": 40,
+  "m_Q": 24,
+  "tau": 1,
+  "Q_copies_per_trial": 48,
+  "C1_copies_per_trial": 48,
+  "Q_blind_accuracy": 1.0,
+  "C1_bias_decoder_accuracy": 0.45,
+  "canonicalization": "decoders receive outcome bitstrings only; block identity absent from decision path (req 1). Reqs 2-4 (profile match, structural identity, label-independent order) are flight-compile checks \u2014 TODO at freeze.",
+  "note": "C1-bias at chance = the kill-test class result seen from the quantum side; a STRONGER C1 (single-copy tomography of coherences) exists and is why arm N's floor stays best-known/conditional."
+ },
+ "A2_blind_recovery_k3": {
+  "M": 40,
+  "m_Q": 6,
+  "accuracy": 1.0,
+  "rule": "U iff zero odd parities"
+ }
+}
