@@ -6,7 +6,7 @@
 <title>Quantum Advantage — The Scoreboard</title>
 <meta name="description" content="Have we found quantum advantage? The five-scoreboard answer from a ~110-experiment IBM Heron campaign, F01–F121 — four theorem ceilings cleared at 21σ–341σ, and a court-graded 476× decoder race.">
 <meta property="og:title" content="Quantum Advantage — The Scoreboard">
-<meta property="og:description" content="Five scoreboards, every number a job ID: no-go games at 216.8σ, superdense at 341σ, ICO thermodynamics at 21.1σ, negative conditional entropy at 42σ, and a sealed 40-bit answer decoded 476× past the classical floor.">
+<meta property="og:description" content="Five scoreboards, every number a job ID: no-go games at 216.8σ (within-run, two-chip replicated), superdense at 341σ, ICO thermodynamics at 21.1σ, negative conditional entropy at 42σ, and a sealed 40-bit answer decoded 476× past the classical floor.">
 <meta name="theme-color" content="#04060c">
 <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -127,7 +127,7 @@
     <div class="tile">
       <div class="tile-top"><span class="led good" aria-hidden="true"></span><span class="tile-name">Games &amp; correlations</span><span class="pill good">FOUND</span></div>
       <div class="metric">216.8σ <small>causal-order game</small></div>
-      <div class="tile-note">The three great no-go theorems in one court — Bell, indefinite causal order, contextuality (8/9 at 196σ). <code>F82 · F106</code></div>
+      <div class="tile-note">The three great no-go theorems in one court — Bell, indefinite causal order, contextuality (8/9 at 196σ). 216.8σ is within-run precision; the physical carrier is the two-chip replication (ibm_fez, ~34σ concordance). <code>F82 · F106</code></div>
     </div>
     <div class="tile">
       <div class="tile-top"><span class="led good" aria-hidden="true"></span><span class="tile-name">Communication &amp; sensing</span><span class="pill good">FOUND</span></div>
@@ -164,6 +164,7 @@
     <h2 class="sect-label">What is not claimed</h2>
     <ul>
       <li><b>Not a hardness theorem</b> — the 476× is against the best-known <b>fielded classical simulation</b> of the circuit family; a solver attacking the planted problem's algebra directly could retire it. That path is priced in: the bounty is printed. <code>F121</code></li>
+      <li><b>No moving bar</b> — the WIN threshold (exact recovery + wall ≤ 1/10 of the band at every edge) was frozen word-for-word across a prior pre-registered miss (Race 5); only device-hygiene fences changed between attempts. The bar never moved.</li>
       <li><b>One family, one die</b> — Maiorana–McFarland n=40, t=80, ibm_kingston, one calibration window; joules one-sided.</li>
       <li><b>No brute-force speedup</b> — F54's 10× depth wall, measured; the decoder race is a different task and leaves it standing.</li>
       <li><b>No on-chip QNC⁰≠NC⁰ proof</b> — the separation is asymptotic; the apparatus is real.</li>
@@ -181,7 +182,7 @@
 <script>
   const rows = [
     { name: "Superdense coding",            sig: 341,   nul: "over 0.5 (unassisted)" },
-    { name: "Causal-order game",            sig: 216.8, nul: "over 0.8695 (SDP)" },
+    { name: "Causal-order game",            sig: 216.8, nul: "over 0.8695 (SDP) · within-run" },
     { name: "Magic-square contextuality",   sig: 196,   nul: "over 8/9 (enumerated)" },
     { name: "GHZ metrology",                sig: 168,   nul: "over executed SQL" },
     { name: "One-sided-DI steering",        sig: 96,    nul: "over LHS bound 1" },
