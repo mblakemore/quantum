@@ -1,0 +1,47 @@
+{
+ "card": "exp_organic_rhot_law_reveal \u2014 RUNG0_n40 (per-register CLEAN labels + convention check)",
+ "role": "Ember SEALER reveal, C4214 organic rho_t law",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "rung0_n40": {
+  "n_bits": 40,
+  "s_str": "1100010011011111111000010110011000101101",
+  "salt": "a8c88ccb28b97597173be782cac4d4e0",
+  "commitment_sha256": "c65e03a01073e4e6a6a7ec1954b0287ad58263e72eb16d3839ef7281c8cc96c7",
+  "commitment_verifies": true
+ },
+ "per_register": {
+  "lad_d_lo": {
+   "rung_HDs": [
+    0,
+    1,
+    1
+   ],
+   "label": "NOT-CLEAN",
+   "misses": "m1@d156 pos32, m2@d260 pos19 (shots-limited)"
+  },
+  "lad_d_mid": {
+   "rung_HDs": [
+    0,
+    0,
+    1
+   ],
+   "label": "NOT-CLEAN",
+   "misses": "m2@d280 pos9 (shots-limited)"
+  },
+  "lad_d_hi": {
+   "rung_HDs": [
+    0,
+    0,
+    0
+   ],
+   "label": "CLEAN",
+   "note": "m2 at d2q=310 EXACT = campaign-deepest exact t0 consensus"
+  }
+ },
+ "convention_check": "min reversed-HD across all 9 rungs = 20 (>>0) => identity convention correct on ALL 3 registers, NO endianness slip. Heterogeneity is REAL, not a convention artifact.",
+ "cause": "3 deviations at DIFFERENT positions {32,19,9}, flips=0 => shots-limited on deep 20k-shot rungs, NOT stuck bits/register dirt. NOT-CLEAN labels are conservative (registers are clean; deep marginal bits thin out).",
+ "held": [
+  "race_n40 (stage-2, 3 routings)"
+ ]
+}
