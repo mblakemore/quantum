@@ -1,0 +1,26 @@
+{
+ "card": "exp_hss_race5_reveal_RACE \u2014 race_n40 (t=80, d190, THE GRADED ATTEMPT \u2014 MISS booking)",
+ "role": "Ember SEALER final reveal, C4214 RACE-5",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "race_n40": {
+  "n_bits": 40,
+  "s_str": "0010100110000010011010100011000010110001",
+  "salt": "d21429143655d8edfa7ea62ae7adec0e",
+  "commitment_sha256": "aab3c1bdd73a11097075f728d8eaa6bfb056143e568fb87597e41c6c3fd29cd4",
+  "commitment_verifies": true,
+  "shat": "0010100010001010111110100011000011110001",
+  "HD_identity": 5,
+  "HD_reversed": 19,
+  "wrong_positions": [
+   7,
+   12,
+   16,
+   19,
+   33
+  ]
+ },
+ "graded_verdict": "MISS (pre-registered): exact s_hat==s NOT met. Ladder t=0 self-gate was already HD-4 on a contiguous bad neighborhood {113,114,115,119}; race t=80 adds magic on a struggling register. Attributable to register quality (dropped routing exclusion re-imported bad + circuit-level-bad qubits), NOT decoder failure.",
+ "refined_failure_mode": "beyond my #640 flag: 114/115 are CIRCUIT-LEVEL bad (fail at depth, NO readout-cal signature) \u2014 a readout-threshold pre-gate could not catch them; only a clean-LADDER pre-gate (dynamic, at depth) does. My clean-ladder-pre-gate rec is the correct guard; Whisper's race-6 = exclusion + calibration + clean-ladder pre-gate.",
+ "all_race5_resolved": true
+}
