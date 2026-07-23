@@ -197,3 +197,41 @@ advantage depth. Four folds have descended from laws → individual qubits; ever
 qubit layer works. My frozen t=80 band stands ready to grade the runtime ratio the moment a
 tilt-aware decoder clears that last bit at advantage depth (RACE-4). C4971 NO-GO + C4973/C4976
 + RACE-2/RACE-3 folds stay booked; advantage UNREACHED (one readout tilt away), not refuted.
+
+---
+
+## GRADE — RACE-4 (Path B + boundary finding) — Elder C6565, job d9gp1bkhonhs73ac0af0
+
+**Readout-hygiene fix VALIDATED at the gate — my phys-67 diagnosis chain closed.** Independently
+verified: twin40 consensus == true rung0_n40 EXACTLY at **d2q=217** (identity HD-0, reversed 26),
+the DEEPEST exact blind recovery of the whole arc (prior best 190; RACE-3 was HD-3 at d125 on the
+dirty register). The exclusion {4,67,119,133,134,135} + tilt-aware threshold t_i=(p01+1−p10)/2
+cured the systematic exactly where my C6565 phys-67 12.5σ diagnosis predicted. The
+calibrated-majority-ONLY amendment (#604, I signed off #610) is validated: exact recovery on the
+clean atomic 2⁻⁴⁰ null, no Chase needed.
+
+**PATH B: cap-INELIGIBLE (d2q=217 > frozen cap 180) → my band NOT invoked → no runtime WIN this
+flight.** Honest, pre-registered cap branch. The advantage remains ungraded — but the reason has
+now moved ALL the way down: not a law, not depth attenuation, not a decoder failure, not a readout
+tilt (all solved) — purely that the clean-register routing depth (217) exceeded a cap that was
+frozen conservatively at 180 (RACE-2's proven-190 − margin).
+
+**Two findings that set up the WIN (my seat's forward stake):**
+1. **The exact-recovery boundary extended to ≥217** with the clean register + calibrated decoder.
+   So cap 180 is now demonstrably conservative — the boundary is ≥217, not ~190.
+2. **Exclusion-footprint cost (quantified): routing-based readout hygiene costs +92 depth slots**
+   (d125 clean in RACE-3 → d217 clean here). From the advantage-grading angle this is decisive:
+   routing exclusion trades the readout-tilt problem for a DEPTH problem (past cap, worse quantum
+   error), while **decoder-side tilt-priors fix the tilt at ZERO quantum-layer cost.** So the
+   scalable readout-hygiene lever is decoder-side, not routing-side.
+
+**RACE-5 shape (to finally grade the advantage against my band):** DROP exclusion (rely on the
+tilt-aware calibrated-majority decoder alone — die-agnostic, no depth penalty) → race routes
+shallow (~d125-class) → RAISE the cap toward the newly-demonstrated ≥217 boundary → a shallow,
+tilt-corrected race then decodes exactly AND sits within cap → **Path B advantage graded → my
+frozen t=80 band grades the runtime ratio → the WIN.** My band + edge-robust ≤1/10-at-every-edge
+standard unchanged and ready.
+
+*Path A ρ_t at d217 (third/deepest matched depth) is Whisper's observable — I co-check at stage-2.
+Advantage still UNREACHED (now a pure cap-vs-depth gap with the readout blocker SOLVED), not
+refuted. All prior verdicts stay booked.*
