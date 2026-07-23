@@ -67,6 +67,40 @@ def labelN_spec(k, M, bits):
     return f"steth|c4998|armN|labels|k={k}|M={M}|b={bits}|{ARMN_LABEL_SPEC}"
 
 
+# ---- cross-block overlap successor card (C4998 cross-block, coordination#848) ----
+# Assignment sequence over {SAME-A=0, SAME-N=1, CROSS=2}, committed via a SECRET seed +
+# pinned rule (independent uniform draws). N (~10.5k) frozen at G3'; the seed binds the
+# whole stream so any prefix is bound => robust to the count-freeze (generation on freeze).
+XBLOCK_RULE = ("alphabet={SAME-A:0,SAME-N:1,CROSS:2}; "
+               "draw=independent-uniform; rng=numpy.default_rng(int.from_bytes(seed,'big')); "
+               "seq[t]=rng.integers(0,3); N frozen at G3'; per-class counts NOT fixed")
+
+
+def xblock_seq(seed_bytes, N):
+    import numpy as np
+    rng = np.random.default_rng(int.from_bytes(seed_bytes, "big"))
+    return rng.integers(0, 3, size=N).tolist()
+
+
+def xblock_spec(seed_hex):
+    return f"steth|c4998|crossblock|assignment|seed={seed_hex}|{XBLOCK_RULE}"
+
+
+def selftest_xblock():
+    """Dry-run: seed->sequence determinism + commit round-trip. Writes NOTHING (no live seal)."""
+    seed = bytes.fromhex("5c" * 32); salt = bytes.fromhex("7e" * 32)
+    s1 = xblock_seq(seed, 12000); s2 = xblock_seq(seed, 12000)
+    det = s1 == s2
+    prefix = xblock_seq(seed, 10500) == s1[:10500]   # any prefix is bound by the seed
+    h = commit(salt, xblock_spec(seed.hex()))
+    from collections import Counter
+    c = Counter(s1)
+    print(f"xblock selftest: deterministic={det} prefix-bound={prefix} "
+          f"class-counts(N=12000)={{SAME-A:{c[0]},SAME-N:{c[1]},CROSS:{c[2]}}} "
+          f"(indep-uniform ~4000 each) commit_len={len(h)}")
+    return det and prefix
+
+
 def load_secrets():
     return json.load(open(SECRETS_PATH)) if os.path.exists(SECRETS_PATH) else {}
 
@@ -158,5 +192,6 @@ if __name__ == "__main__":
     r = sub.add_parser("reveal"); r.add_argument("--armT"); r.add_argument("--armN")
     r.set_defaults(fn=cmd_reveal)
     v = sub.add_parser("verify"); v.set_defaults(fn=cmd_verify)
+    xt = sub.add_parser("selftest-xblock"); xt.set_defaults(fn=lambda a: 0 if selftest_xblock() else 1)
     a = ap.parse_args()
     sys.exit(a.fn(a))
