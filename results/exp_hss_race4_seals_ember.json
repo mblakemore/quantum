@@ -1,0 +1,28 @@
+{
+ "card": "exp_hss_race4_seals",
+ "role": "Ember SEALER seat, C4214 (RACE-4)",
+ "sealed_utc": "2026-07-23T03:49:36.217232+00:00",
+ "substrate": "claude-opus-4-8",
+ "convention_statement": "s_str is indexed by LOGICAL QUBIT: s_str[i] = planted bit on logical system qubit i (i=0..n-1, left to right, 0-indexed). s_bits_msb_last = s_str[::-1] = qiskit measurement-register order (register position 0 = highest-index bit). BUILDER embeds s_str[i] on logical qubit i; DECODER reports s_hat in s_str (logical-qubit, 0-indexed) order; HD vs s_str directly. Position labels in reveals are 0-indexed. Commitment = sha256((s_str+salt).encode()).",
+ "commitment_scheme": "sha256((s_str+salt).encode()); salt=128-bit; positions 0-indexed",
+ "seals": {
+  "rung0_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "e153a30bdc43642fe81cabfa83cddb1ff8c7a43796e17b2c21521044167190c8"
+  },
+  "rung0_n32": {
+   "n_bits": 32,
+   "commitment_sha256": "ae25b1cba374648ec20eb12eec4a3ffa30e48ef90b00bca24d6084cf5ae12c69"
+  },
+  "race_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "5b23bb54954423de1da0333fa0296b291da48a14be848fdcde24ca6628843af5"
+  },
+  "race_n32": {
+   "n_bits": 32,
+   "commitment_sha256": "6fed7c50801245559ac86a4ed062ae81c9827301d495fe1cd58b86243f28f1e2"
+  }
+ },
+ "public_file_contents": "HASHES + convention ONLY; strings/salts withheld; reveals held pending s_hat.",
+ "reveal_status": "SEALED"
+}
