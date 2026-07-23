@@ -3,100 +3,129 @@
 <head>
 <meta charset="utf-8">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M4%204C8%208%208%208%2012%2012%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12%204C8%208%208%208%204%2012%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.7%22%20fill%3D%22%23e5e7eb%22%2F%3E%3C%2Fsvg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Magic Square — a puzzle with no solution, solved by a quantum computer | The Quantum Museum</title>
 <meta name="description" content="Fill a 3×3 square of +1/−1 obeying six rules — you can't, ever, beyond 5 of 6. A quantum computer wins all nine contexts at 96.9%, past the enumerated 8/9 classical ceiling by 196σ. Real hardware data (F106, job d9akl8fu62qs738o68pg).">
-<link rel="stylesheet" href="../museum.css">
+<meta property="og:title" content="The Magic Square — a puzzle with no solution, solved by a quantum computer">
+<meta property="og:description" content="A 3×3 sign square whose six rules cannot all hold (5 of 6, always) — capping every classical team at the enumerated 8/9 ceiling. Swap the numbers for Pauli measurements and a quantum computer wins all nine contexts: 96.9%, 196σ past the wall. Measured on IBM Heron silicon.">
+<meta name="theme-color" content="#04060c">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
-  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
-  .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
-  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
-  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
-    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
-  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:
+      radial-gradient(58% 40% at 30% -6%, rgba(167,139,250,.09), transparent 68%),
+      var(--bg);
+    color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell{max-width:940px;margin:0 auto;padding:0 clamp(16px,4vw,30px) 70px}
 
-  .hero { padding: clamp(20px,4vw,40px) 0 10px; position:relative; }
-  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
-    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
-  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
-  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
-    font-size:clamp(29px,5.6vw,50px); margin:12px 0 14px; text-wrap:balance; }
-  h1 .hl { color: var(--cyan); }
-  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:64ch; margin:0 0 12px; }
-  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
-    color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
-  .scope b { color: var(--amber); font-weight:600; }
-  .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13.5px; font-weight:600;
-    text-decoration:none; color:#04201e; background:var(--cyan); border:1.5px solid var(--cyan);
-    border-radius:11px; padding:10px 18px; transition:transform .12s, box-shadow .12s; box-shadow:var(--shadow); }
-  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--cyan) 35%,transparent); }
-  .specbtn .arw { font-size:15px; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--violet);font-weight:400}
 
-  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
-    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
-  .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
-    margin:0 0 4px; font-weight:600; }
-  .panel-label.wall { color: var(--amber); } .panel-label.key { color: var(--cyan); }
-  .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
-  .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:66ch; }
+  .hero{padding:clamp(18px,3.5vw,34px) 0 10px}
+  .eyebrow{font-family:var(--mich);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-4);
+    margin:0 0 18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .eyebrow .dot{width:4px;height:4px;border-radius:50%;background:var(--hair-2)}
+  h1{font-family:var(--sans);font-weight:300;font-size:clamp(30px,5.2vw,48px);line-height:1.08;letter-spacing:-.015em;
+    margin:0 0 16px;color:var(--ink);text-wrap:balance;max-width:20ch}
+  h1 .hl{color:var(--cyan);font-weight:600}
+  .lede{font-size:clamp(15px,2.1vw,17.5px);color:var(--ink-3);max-width:64ch;margin:0 0 12px}
+  .lede strong{color:var(--ink)}
+  .scope{display:inline-block;line-height:1.5;font-family:var(--mono);font-size:11.5px;
+    color:var(--ink-4);border:1px solid var(--hair);border-radius:999px;padding:5px 12px}
+  .scope b,.scope strong{color:var(--amber);font-weight:600}
+  .specbtn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13px;font-weight:600;
+    text-decoration:none;color:#04121a;background:var(--cyan);border-radius:10px;padding:11px 18px;margin-right:10px}
+  .specbtn:hover{filter:brightness(1.08);text-decoration:none}
+  .md-link{font-family:var(--mono);font-size:12px;color:var(--ink-4);text-decoration:underline}
+  .md-link:hover{color:var(--cyan)}
 
-  .board { display:grid; grid-template-columns: repeat(3, 1fr) auto; gap:8px; max-width:360px; }
-  .cell { aspect-ratio:1; border:1.5px solid var(--edge-2); border-radius:10px; background:var(--card);
-    font-family:var(--mono); font-size:clamp(24px,7vw,34px); font-weight:700; cursor:pointer; color:var(--ink);
-    display:flex; align-items:center; justify-content:center; transition:transform .1s ease, border-color .12s; }
-  .cell:hover { transform: translateY(-2px); border-color: var(--cyan); }
-  .cell.plus { color: var(--good); } .cell.minus { color: var(--bad); }
-  .rtarget { display:flex; align-items:center; justify-content:center; font-family:var(--mono);
-    font-size:13px; gap:5px; color:var(--ink-3); min-width:40px; }
-  .ctargets { display:grid; grid-template-columns: repeat(3,1fr) auto; gap:8px; max-width:360px; margin-top:8px; }
-  .ctarget { text-align:center; font-family:var(--mono); font-size:13px; color:var(--ink-3); }
-  .ok { color: var(--good); } .bad { color: var(--bad); }
-  .rulechip { font-family:var(--mono); font-size:11px; }
+  .panel{background:var(--panel);border:1px solid var(--hair);border-radius:13px;
+    padding:clamp(18px,3vw,26px);margin-top:22px;box-shadow:var(--shadow)}
+  .panel-label{font-family:var(--mich);font-size:9px;letter-spacing:.2em;text-transform:uppercase;margin:0 0 6px}
+  .panel-label.wall{color:var(--amber)} .panel-label.key{color:var(--cyan)}
+  .panel h2{font-family:var(--sans);font-weight:500;font-size:clamp(18px,2.6vw,23px);margin:0 0 6px;
+    letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+  .panel .sub{color:var(--ink-3);font-size:14px;margin:0 0 20px;max-width:66ch}
+  .panel .sub em{color:var(--ink-2)} .panel .sub strong{color:var(--ink-2)}
 
-  .counter { font-family:var(--mono); margin-top:18px; }
-  .counter .n { font-size:clamp(30px,7vw,44px); font-weight:720; color:var(--ink); letter-spacing:-.02em; }
-  .counter .n b { color: var(--amber); }
-  .counter .c { font-size:12.5px; color:var(--ink-3); }
-  .hint { margin-top:14px; font-size:13.5px; color:var(--ink-2); max-width:60ch;
-    border-left:2px solid var(--amber); padding-left:12px; }
-  .layout { display:grid; grid-template-columns: auto 1fr; gap:clamp(20px,4vw,40px); align-items:start; }
-  @media (max-width:680px){ .layout { grid-template-columns:1fr; } }
+  .board{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:8px;max-width:360px}
+  .cell{aspect-ratio:1;border:1.5px solid var(--hair-2);border-radius:10px;background:var(--panel-2);
+    font-family:var(--mono);font-size:clamp(24px,7vw,34px);font-weight:600;cursor:pointer;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;transition:transform .1s ease, border-color .12s}
+  .cell:hover{transform:translateY(-2px);border-color:var(--cyan)}
+  .cell.plus{color:var(--good)} .cell.minus{color:var(--bad)}
+  .rtarget{display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+    font-size:13px;gap:5px;color:var(--ink-4);min-width:40px}
+  .ctargets{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:8px;max-width:360px;margin-top:8px}
+  .ctarget{text-align:center;font-family:var(--mono);font-size:13px;color:var(--ink-4)}
+  .ok{color:var(--good)} .bad{color:var(--bad)}
+  .rulechip{font-family:var(--mono);font-size:11px}
 
-  .btn { font-family:var(--mono); font-size:13px; font-weight:600; padding:10px 18px; border-radius:10px;
-    border:1px solid var(--edge); color:var(--ink); background:var(--surface); cursor:pointer;
-    transition:transform .14s ease, box-shadow .14s ease; margin-top:18px; }
-  .btn:hover { transform:translateY(-2px); box-shadow:var(--shadow); }
-  .btn.accent { background:var(--cyan); color:#04201e; border-color:var(--cyan); }
-  .proof { font-family:var(--mono); font-size:13px; margin-top:16px; color:var(--ink-2); min-height:2.4em; }
-  .proof b { color:var(--ink); } .proof .ceil { color: var(--amber); font-weight:700; }
+  .counter{font-family:var(--mono);margin-top:18px}
+  .counter .n{font-size:clamp(30px,7vw,44px);font-weight:600;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .counter .n strong{color:var(--amber)}
+  .counter .c{font-size:12.5px;color:var(--ink-4)}
+  .hint{margin-top:14px;font-size:13.5px;color:var(--ink-3);max-width:60ch;border-left:2px solid var(--amber);padding-left:12px}
+  .hint strong{color:var(--ink)}
+  .layout{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,40px);align-items:start}
+  @media (max-width:680px){.layout{grid-template-columns:1fr}}
+
+  .btn{font-family:var(--mono);font-size:13px;font-weight:600;padding:10px 18px;border-radius:10px;
+    border:1.5px solid var(--hair-2);color:var(--ink-2);background:var(--panel-2);cursor:pointer;
+    transition:transform .14s ease, box-shadow .14s ease, border-color .12s;margin-top:18px}
+  .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--cyan);color:var(--cyan)}
+  .btn.accent{background:var(--cyan);color:#04121a;border-color:var(--cyan)}
+  .btn.accent:hover{filter:brightness(1.08);color:#04121a}
+  .btn:disabled{opacity:.55;cursor:default;transform:none}
+  .proof{font-family:var(--mono);font-size:13px;margin-top:16px;color:var(--ink-3);min-height:2.4em}
+  .proof strong{color:var(--ink)} .proof .ceil{color:var(--amber);font-weight:600}
 
   /* panel B */
-  .opgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; max-width:300px; }
-  .op { aspect-ratio:1.5; border:1px solid var(--edge); border-radius:8px; background:var(--surface-2);
-    display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-weight:700;
-    font-size:clamp(15px,4vw,20px); color:var(--cyan); }
-  .heat { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; max-width:300px; }
-  .hc { aspect-ratio:1.4; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center;
-    font-family:var(--mono); border:1px solid var(--edge); opacity:0; transform:scale(.85);
-    transition:opacity .4s ease, transform .4s cubic-bezier(.34,1.4,.5,1); }
-  .hc.show { opacity:1; transform:none; }
-  .hc .v { font-size:clamp(15px,4vw,20px); font-weight:700; color:var(--ink); }
-  .hc .lab { font-size:9px; color:var(--ink-3); }
-  @media (prefers-reduced-motion: reduce){ .hc { transition:none; } }
-  .readouts { display:flex; flex-wrap:wrap; gap:12px 26px; margin-top:22px; }
-  .ro { font-family:var(--mono); }
-  .ro .big { font-size:clamp(26px,6vw,38px); font-weight:720; letter-spacing:-.02em; line-height:1; }
-  .ro.q .big { color: var(--good); } .ro.c .big { color: var(--amber); } .ro.n .big { color: var(--ink-3); }
-  .ro .lab { font-size:11.5px; color:var(--ink-3); margin-top:5px; }
-  .ro .lab b { color: var(--cyan); }
+  .opgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;max-width:300px}
+  .op{aspect-ratio:1.5;border:1px solid var(--hair);border-radius:8px;background:var(--panel-2);
+    display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;
+    font-size:clamp(15px,4vw,20px);color:var(--cyan)}
+  .heat{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;max-width:300px}
+  .hc{aspect-ratio:1.4;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-family:var(--mono);border:1px solid var(--hair);opacity:0;transform:scale(.85);
+    transition:opacity .4s ease, transform .4s cubic-bezier(.34,1.4,.5,1)}
+  .hc.show{opacity:1;transform:none}
+  .hc .v{font-size:clamp(15px,4vw,20px);font-weight:600;color:var(--ink)}
+  .hc .lab{font-size:9px;color:var(--ink-4)}
+  @media (prefers-reduced-motion: reduce){.hc{transition:none}}
+  .readouts{display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:22px}
+  .ro{font-family:var(--mono)}
+  .ro .big{font-size:clamp(26px,6vw,38px);font-weight:600;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+  .ro.q .big{color:var(--good)} .ro.c .big{color:var(--amber)} .ro.n .big{color:var(--ink-3)}
+  .ro .lab{font-size:11.5px;color:var(--ink-4);margin-top:5px}
+  .ro .lab b,.ro .lab strong{color:var(--cyan)}
 
-  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
-    padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
-  .badge-row .sig { color: var(--cyan); font-weight:600; }
-  .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
-  .badge-row .sp { flex:1; }
+  footer{margin-top:30px;padding-top:18px;border-top:1px solid var(--hair);font-family:var(--mich);
+    font-size:9px;letter-spacing:.2em;color:var(--ink-4);display:flex;gap:8px 20px;flex-wrap:wrap;text-transform:uppercase;align-items:baseline}
+  footer .sig{color:var(--cyan)}
+  footer a{font-family:var(--mono);font-size:11.5px;letter-spacing:0;text-transform:none;color:var(--ink-3)}
+  footer a:hover{color:var(--cyan)}
+  footer .sp{flex:1}
 </style>
 </head>
 <body>
@@ -104,22 +133,21 @@
 <div class="shell">
 
   <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <span class="wingtag">· Wing II · The No-Go Games</span>
+    <a href="../">← The Museum</a>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
+    <span class="wing">WING <b>II</b> · The No-Go Games</span>
   </nav>
 
   <main id="main">
   <header class="hero">
-    <p class="eyebrow">Peres–Mermin pseudo-telepathy</p>
+    <p class="eyebrow">PERES–MERMIN PSEUDO-TELEPATHY<span class="dot"></span>8/9 CEILING ENUMERATED<span class="dot"></span>EVERY NUMBER MEASURED</p>
     <h1>A puzzle with <span class="hl">no solution</span> — solved anyway.</h1>
     <p class="lede">Fill a 3×3 square with +1 and −1 so that every row multiplies to +1 and the columns
     multiply to +1, +1, −1. It cannot be done — you'll always break exactly one rule. That single broken
     rule caps any classical team at 8 wins in 9. A quantum computer wins all nine. Play it, then watch the machine.</p>
     <span class="scope">Pseudo-telepathy is textbook (Mermin–Peres). The contribution: the <strong>frozen-court, enumerated-bound</strong> measurement.</span>
     <div style="margin-top:16px;"><a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
-      <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a></div>
+      <a href="./spec.md" class="md-link">plain-text (.md)</a></div>
   </header>
 
   <!-- PANEL A -->
@@ -170,9 +198,9 @@
   </section>
 
   </main>
-  <footer class="badge-row">
-    <span>MEASURED · <span class="sig">F106</span> · job <span class="sig">d9akl8fu62qs738o68pg</span></span>
-    <span>ibm_marrakesh · 8/9 enumerated over 4096 strategy pairs</span>
+  <footer role="contentinfo">
+    <span>MEASURED · <span class="sig">F106</span> · JOB <span class="sig">d9akl8fu62qs738o68pg</span></span>
+    <span>IBM_MARRAKESH · 8/9 ENUMERATED OVER 4096 STRATEGY PAIRS · 196σ</span>
     <span class="sp"></span>
     <a href="../scoreboard/">Scoreboard</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
@@ -182,15 +210,6 @@
 
 <script>
   (function () {
-    // theme
-    var root = document.documentElement, KEY = "qmuseum-theme";
-    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
-    document.getElementById("themeBtn").addEventListener("click", function () {
-      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
-      try { localStorage.setItem(KEY, nx); } catch (e) {}
-    });
-
     // ---- correctness kernel ----
     var ROW_P = [1, 1, 1], COL_P = [1, 1, -1];
     function prod(a) { return a[0] * a[1] * a[2]; }
