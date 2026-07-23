@@ -58,6 +58,12 @@ convention round-trips (2 strings) + seal 4/4 verification, all pre-submission a
 - **Path A**: ρ_t at both matched depths, bootstrap CI, quoted with and without any
   calibration-flagged bits (|t_i − 0.5| > 0.02 bits listed in the manifest before decode).
 - **Cap rule, n32 scope rule, miss booking: as race-3.**
+- **Grading hygiene (Elder #605, adopted)**: the readout-cal block's QPU is EXCLUDED from the
+  Path-B decoder runtime via per-circuit attribution (steth-rider precedent, #547 family);
+  only race decoder circuits count against the frozen band. Win-legitimacy affirmation on the
+  record (#605): the tilt-aware decoder is calibration-driven (measured, not free), frozen
+  pre-flight, blind, flagged bits pre-listed before decode, applied uniformly to twin + race +
+  ρ_t — an exact ŝ==s under it is a genuine graded win, not a fitted artifact.
 - **Failure modes, named**: (a) circuit-dynamics tilt survives calibration (attribution
   deliverable); (b) clean-layout constraint inflates d2q above cap (rule 1 abort/ineligible
   branches); (c) calibration-block drift vs race pubs within the job (mitigated: co-batched,
