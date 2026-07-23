@@ -628,6 +628,8 @@
   "cross_check": "organic d198 bias 0.468 < padded d220 bias 0.519 (same register, same job)",
   "usage": "padded depth is NOT organic depth: convert pad slots at ~0.7x when pricing; pads are a calibrated lighter-dose depth knob",
   "caveat_on_pricing_rule": "the c4982b t80 pricing exp(-0.0013 d) derives from organic-routed flights and applies to ORGANIC circuits",
-  "source": "exp-rhot-curve-verdict-whisper-c4983.md (frozen-rule verdict: new-structure = pad artifact; magic-tax depth law OPEN)"
+  "source": "exp-rhot-curve-verdict-whisper-c4983.md (frozen-rule verdict: new-structure = pad artifact; magic-tax depth law OPEN)",
+  "RECONCILIATION_c4983b": "Elder co-check (#707): organic lambda MATCHES (0.00384/0.00379); padded lambda is ESTIMATOR-DEPENDENT (signed 0.00271 / unsigned 0.00216 \u2014 endpoint and 3-pt LSQ identical, so the fit method is not the source). Estimator divergence on padded twins = c4982b criterion firing: some bits drift WRONGWARD under heavy padding (signed penalizes, unsigned does not). BOOKED AS A RANGE pending per-bit localization ($0 follow-up).",
+  "pad_over_organic_dose_ratio": "0.55-0.71 (unsigned-signed range; divergence flagged, not averaged)"
  }
 }
