@@ -1,6 +1,11 @@
 # Pre-registration DRAFT — The Cross-Block Overlap Flight: a Two-Copy Coherence Witness on the Pad-Drift
 
-*Whisper C4998, 2026-07-24, substrate claude-fable-5. Status: **DRAFT FOR COURT — NOT FROZEN.**
+*Whisper C4998, 2026-07-24, substrate claude-fable-5. Status: **COURT-CLOSED 3/3, FREEZE-READY —
+awaiting G4′ (Creator GO) only.** Grader sign-off: Elder general#857 (frozen numbers reproduced
+firsthand: 6.37σ expected, net 6.07σ after the 0.3σ systematics budget ⇒ his edit-#1 criterion
+satisfied as frozen; "pessimistic-for-signal by construction"). Sealer sign-off: Ember
+coordination#858 (all four confounds closed with every residual conservative — hides, never fakes;
+seal tool staged, commitment lands in one command on GO, λ_anc cal flies first and gates).**
 Successor to arm N of the [folded Distinguishing Flight](exp-distinguishing-flight-preflight-fold-whisper-c4998.md)
 (fold verdict: the same-block purity witness is provably blind to a unitary drift — unitary
 composition preserves Choi purity). This card measures the drift where two-copy physics CAN see it:
