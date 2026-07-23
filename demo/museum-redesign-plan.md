@@ -2,7 +2,7 @@
 
 **Status**: PROPOSAL — awaiting Creator approval (options are marked; nothing here is implemented except the two proof artifacts noted in §8)
 **Author**: Whisper C4989 (plan requested by Creator 2026-07-23)
-**Companion artifact**: [`museum-redesign-tile.html`](museum-redesign-tile.html) — the proposed theme rendered live: palette with printed contrast ratios, type specimen, masthead, an exhibit card with a real captured thumbnail, controls, verdict voice, and two alternate directions.
+**Companion artifact**: [`museum-redesign-tile.html`](museum-redesign-tile.html) — the proposed theme rendered live (v2, "The Layered Museum"): the three zoned surfaces, the framed-case-with-label exhibit card holding a real captured thumbnail, placard and vitrine voices, controls, and the full token set with printed contrast ratios.
 
 ---
 
@@ -45,45 +45,52 @@ BEFORE                                  AFTER
 - **`demo/index.html` becomes a redirect stub** (meta refresh + link + `rel=canonical` to root) so every deep link and search result keeps working. Exhibit URLs do not move — 45 directories untouched, zero link rot.
 - **Relative paths**: the new root landing references exhibits as `demo/<x>/` (the old root already does this; the museum grid's hrefs get the `demo/` prefix when the page moves up — a mechanical one-pass edit).
 
-## 3. One theme: "Gallery Dusk" (recommended — see tile)
+## 3. One theme: "The Layered Museum" (v2 — see tile)
 
-**Concept**: a museum open at night. Twilight-slate walls — unmistakably not black, unmistakably not paper — warm limestone type, and section lighting done with soft radial "spotlight" washes (one warm, one cool) over a subtle top-to-bottom gradient. The existing cyan instrument signature survives (it is the campaign's identity across 45 exhibits) but is retuned for the mid-tone ground.
+> **v2 note**: the first proposal ("Gallery Dusk", a single L\*30 slate ground) was rejected by Creator as too close to the current dark theme — correctly: it moved a luminance dial instead of finding a new idea. v2 changes the *composition*, not the dial.
 
-**Why not a true mid-gray**: backgrounds near L\*50 make 4.5:1 unreachable for *both* light and dark text — AA forces the ground to commit. L\*≈30 slate is the honest "in-between": it reads as neither mode, keeps luminous accents, and passes AA with headroom everywhere.
+**Concept**: build the page the way a physical museum is built. Real galleries are never white or black — the **walls** are a mid-tone (putty, sage, clay), the **placards** are paper cards with dark ink, and the **display cases** are dark vitrines lit from within. The theme is that building, as three zoned surfaces coexisting on every page:
+
+- **WALL** `#A8A296` — a true mid-tone putty ground: the literal "in-between." Carries dark-ink signage only; white type never sits on the wall.
+- **PLACARD** `#F7F5EF` — paper cards for prose, labels, and exhibit text. Accents on paper are deep engraving colors (teal, rust), never luminous.
+- **VITRINE** `#131720` — dark display cases used *only where luminous data earns it*: charts, interactive demos, screenshot thumbnails, verdicts. All the existing luminous accents (cyan, amber, good, bad) live exclusively behind this glass.
+
+This is "in between" by composition rather than by averaging: light and dark genuinely coexist, zoned by function — and it resolves the underlying tension for free (instrument data looks best glowing on dark; reading is best on paper; there is still exactly one theme, no switch).
+
+**The signature**: every exhibit card becomes a **lit case with its wall label** — dark vitrine frame holding the captured screenshot with a job-ID strip, paper placard hanging beneath with title, hook, and finding numbers. The gallery landing literally becomes a hung gallery.
 
 ### Token set (every ratio computed, not eyeballed)
 
-| Token | Hex | Role | Contrast (on bg / on card) |
+| Token | Hex | Zone / role | Contrast |
 |---|---|---|---|
-| `--bg` | `#252B38` | ground | — |
-| `--bg-deep` | `#1F2530` | gradient floor, thumbnail wells | — |
-| `--surface` | `#2C3342` | panels | — |
-| `--card` | `#303950` | exhibit cards | — |
-| `--edge` | `#4A546E` | decorative hairlines | 1.9:1 (decorative only) |
-| `--edge-strong` | `#78839E` | control borders (WCAG 1.4.11) | **3.7:1 / 3.0:1** ✓ |
-| `--ink` | `#EFECE3` | primary text (warm limestone) | **12.0:1 / 9.7:1** ✓ |
-| `--ink-2` | `#C2C6D2` | secondary text | **8.3:1 / 6.7:1** ✓ |
-| `--ink-3` | `#9BA3B5` | captions, eyebrows | **5.6:1 / 4.5:1** ✓ |
-| `--cyan` | `#6FDCD3` | signature, links, wins | **8.7:1 / 7.0:1** ✓ |
-| `--cyan-ui` | `#3FBDB3` | chart fills, range accents | **6.2:1** ✓ (needs 3:1) |
-| `--amber` | `#EFB964` | verdicts, graded results | **8.0:1 / 6.5:1** ✓ |
-| `--violet` | `#B3A9F5` | secondary wing accent | **6.7:1** ✓ |
-| `--good` | `#7ED99A` | pass/live | **8.3:1** ✓ |
-| `--bad` | `#F59B92` | fail/wrong | **6.7:1 / 5.5:1** ✓ |
-| btn text on `--cyan` | `#12261F` | primary buttons | **8.7:1** ✓ |
+| `--wall` | `#A8A296` | ground | ink **5.9:1** ✓ |
+| `--wall-deep` | `#9C968A` | gradient floor | ink **5.1:1** ✓ |
+| `--wall-ink` | `#23272E` | signage, headings on wall | — |
+| `--edge-wall` | `#4A4841` | control borders on wall (1.4.11) | **3.6:1 / 3.1:1** ✓ |
+| `--placard` | `#F7F5EF` | paper cards | ink **13.9:1** ✓ |
+| `--placard-ink` | `#22262D` | label text | — |
+| `--teal` | `#0C6B65` | accent text on paper | **5.8:1** ✓ |
+| `--rust` | `#8A4A12` | secondary accent on paper | **6.3:1** ✓ |
+| `--vitrine` | `#131720` | display cases | ink **15.3:1** ✓ |
+| `--vitrine-2` | `#1A1F2B` | case interior wells | — |
+| `--cyan` | `#5BD8CE` | signature, vitrine only | **10.4:1** ✓ (charts: needs 3:1) |
+| `--amber` | `#E8B45C` | verdicts, vitrine only | **9.5:1** ✓ |
+| `--good` | `#79D695` | pass, vitrine only | **10.1:1** ✓ |
+| `--bad` | `#F09A90` | fail, vitrine only | **8.3:1** ✓ |
+| btn: vitrine bg + cyan text | — | primary button = "a lit case" | **10.4:1** ✓ |
 
-Verification script ships as `tools/contrast-check.js` (exists as scratch; formalized in Phase 0) and runs in CI-style before any palette edit lands.
+**Zone rules (enforced, not vibes)**: luminous accents appear only on vitrine surfaces; paper accents are deep; wall carries ink only. White-on-wall is banned (2.3:1 — the one pairing the math rejects). Verification script ships as `tools/contrast-check.js` and gates any palette edit.
 
 ### What gets deleted (the "no switching" sweep)
-- The two `:root[data-theme=…]` blocks + the `prefers-color-scheme` block in museum.css → single token set.
+- The two `:root[data-theme=…]` blocks + the `prefers-color-scheme` block in museum.css → single three-zone token set.
 - The `qm-theme-restore` inline script on **69 pages**; the theme button + its JS on **61 pages** (scripted removal, per-page verify).
-- Per-page inline light-theme overrides where they exist. Print styles **stay** (print is a medium, not a theme).
-- `<meta name="theme-color" content="#252B38">` added site-wide for mobile chrome.
+- Per-page inline light-theme overrides where they exist. Print styles **stay** (print is a medium, not a theme — placard tokens map to print naturally).
+- `<meta name="theme-color" content="#A8A296">` added site-wide for mobile chrome.
 
-### Alternates considered (anchors contrast-checked, not developed)
-- **B · Warm Graphite** `#2E2B28` ground — "printed matter after dark." Passes AA (ink 11.8:1). Risk: abandons the observatory-blue identity every exhibit already carries.
-- **C · Deep Harbor** `#1F3038` blue-green, amber-led. Passes AA. Risk: reads closer to the current dark theme than to a third thing.
-- Recommendation: **A · Gallery Dusk**. The tile renders A; B/C are one-token-set swaps if Creator prefers their temperature.
+### Rejected directions (kept for the record)
+- **Gallery Dusk** `#252B38` single slate ground — rejected by Creator (C4989): too close to the current dark theme. Correct diagnosis; it was a luminance change, not an idea.
+- **Warm Graphite** `#2E2B28` / **Deep Harbor** `#1F3038` — same critique applies; both are single-dark-ground variants.
+- **True mid-gray everything** — AA-impossible for text at L\*≈50; the three-surface composition is how a mid-tone ground becomes usable at all (the wall never carries body prose — paper does).
 
 ## 4. The entrance (new root landing)
 
@@ -115,7 +122,7 @@ Structure, top to bottom — ASCII wireframe:
 └──────────────────────────────────────────────────────────────┘
 ```
 
-**Signature element — the Gallery Wall**: the hero's graphic is a perspective-tilted strip of *actual exhibit screenshots* (the decoder-race skyline, the switch cosine curve, the scoreboard bars…), drifting slowly (CSS transform animation, fully disabled under `prefers-reduced-motion`, `aria-hidden` with the content duplicated by the wing cards). The museum's proudest claim — *every number is measured* — becomes the literal wallpaper. No stock art, no abstract blobs: the decoration IS the data.
+**Signature element — the Hung Gallery**: the hero's graphic is a row of *lit vitrines* — actual exhibit screenshots in dark case frames with job-ID strips, hung on the putty wall exactly like works in a gallery (optionally a slow drift, fully disabled under `prefers-reduced-motion`, `aria-hidden` with content duplicated by the wing cards). The museum's proudest claim — *every number is measured* — becomes the literal artwork on the wall. No stock art, no abstract blobs: the decoration IS the data, behind glass.
 
 **The graphics pipeline** (`tools/museum-shots.js`, proven this cycle):
 - playwright-core + system Chromium; per-exhibit manifest: URL, viewport, optional **pre-interaction** (e.g. decoder-race fires 100 shots first so its thumbnail shows the mid-consensus state; the switch drags coherence to the sweet spot) and capture target (element selector).
@@ -126,7 +133,7 @@ Structure, top to bottom — ASCII wireframe:
 
 ## 5. The exhibit lift
 
-- **Tokens cascade**: all 45 exhibits import museum.css, so the single Gallery Dusk token set restyles them in one edit. The atmosphere (gradient ground + spotlight washes) moves into museum.css `body` so exhibits inherit the entrance's light.
+- **Tokens cascade**: all 45 exhibits import museum.css, so the three-zone token set restyles them in one edit — the wall ground lands on `body`, and the existing `.panel`/`.card` classes map to the vitrine and placard treatments respectively. Exhibit pages become what they already are semantically: prose placards between lit instrument cases. Their luminous data colors barely change (they already live on dark panels); the room around them changes.
 - **Hardcoded-hex audit**: scripted grep across `demo/*/index.html` for `#RRGGBB` literals; each mapped to a token (`#ef4444` → `--bad`, etc.) or consciously kept (SVG art). Estimated small: the design system already pushed most color through vars.
 - **Shared masthead**: exhibits get one consistent top bar (museum brand ← back-link, wing label, provenance chip) replacing today's per-page ad-hoc topbars — one class in museum.css, one markup swap per page.
 - **Verification contact sheet**: the screenshot pipeline doubles as QA — after the sweep it captures all 45 exhibits and the landing; one eyeball pass catches any page the retheme broke.
@@ -174,7 +181,7 @@ Total ≈ 8–12 cycles. Phases are independent enough to ship incrementally (P0
 
 ## 9. Open questions for Creator
 
-1. **Theme direction**: A · Gallery Dusk (recommended) — or B/C temperature from §3?
+1. **Theme**: does "The Layered Museum" (v2) land? Wall temperature is tunable (current putty `#A8A296`; sage `#9FAA9B` and slate-blue `#96A3B4` are drop-in wall swaps with the same zone rules) — pick a wall color preference if any.
 2. **Horizons + Scoreboard**: restyle inside this effort (adds ~1 cycle to P4) or follow-up? (Recommend: inside — they're both linked from the entrance.)
 3. **Gallery-wall motion**: slow drift (motion-safe) vs fully static wall — comfort call.
 4. **Root hero headline**: keep "questions the textbooks call impossible" (recommended) or return to the old root's "order of events into superposition" line?

@@ -4,169 +4,183 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>PROPOSAL — “Gallery Dusk” style tile · Quantum Museum redesign</title>
-<meta name="theme-color" content="#252B38">
+<title>PROPOSAL v2 — “The Layered Museum” style tile · Quantum Museum redesign</title>
+<meta name="theme-color" content="#A8A296">
 <style>
-  /* ── GALLERY DUSK tokens (proposed single theme — no switching) ── */
+  /* ── THE LAYERED MUSEUM — one theme, three zoned surfaces ──
+     WALL (true mid-tone putty; the atmosphere; dark ink only)
+     PLACARD (paper cards; prose and labels; museum-label ink)
+     VITRINE (dark display cases; ONLY where luminous data lives) */
   :root{
-    --bg:#252B38; --bg-deep:#1F2530; --surface:#2C3342; --card:#303950;
-    --edge:#4A546E; --edge-strong:#78839E;
-    --ink:#EFECE3; --ink-2:#C2C6D2; --ink-3:#9BA3B5;
-    --cyan:#6FDCD3; --cyan-ui:#3FBDB3; --amber:#EFB964; --violet:#B3A9F5;
-    --good:#7ED99A; --bad:#F59B92;
-    --glow-warm: radial-gradient(70% 55% at 22% 0%, rgba(239,185,100,.07), transparent 65%);
-    --glow-cool: radial-gradient(60% 60% at 85% 8%, rgba(111,220,211,.09), transparent 70%);
-    --shadow: 0 1px 2px rgba(15,18,26,.5), 0 16px 44px rgba(15,18,26,.45);
+    --wall:#A8A296; --wall-deep:#9C968A; --wall-ink:#23272E; --wall-ink-2:#3A3E46;
+    --edge-wall:#4A4841;            /* controls on wall — 3.6:1 */
+    --placard:#F7F5EF; --placard-2:#EFECE4; --placard-ink:#22262D; --placard-ink-2:#4A4F58;
+    --edge-placard:#B8B4A8;
+    --teal:#0C6B65; --rust:#8A4A12;  /* accents ON PAPER (deep, 5.8:1 / 6.3:1) */
+    --vitrine:#131720; --vitrine-2:#1A1F2B; --vitrine-ink:#EAEDF3; --vitrine-ink-2:#AEB5C4;
+    --edge-vitrine:#3B4356;
+    --cyan:#5BD8CE; --amber:#E8B45C; --good:#79D695; --bad:#F09A90;  /* luminous — vitrine only */
+    --shadow-case: 0 2px 5px rgba(26,24,20,.28), 0 22px 48px rgba(26,24,20,.30);
+    --shadow-card: 0 1px 2px rgba(26,24,20,.18), 0 10px 26px rgba(26,24,20,.16);
     --mono: ui-monospace,"SF Mono","JetBrains Mono","Cascadia Mono",Menlo,monospace;
     --sans: -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,sans-serif;
   }
   *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
-  body{margin:0;font-family:var(--sans);line-height:1.6;color:var(--ink);
-    background:var(--glow-warm),var(--glow-cool),linear-gradient(180deg,var(--bg) 0%,var(--bg-deep) 100%);
+  body{margin:0;font-family:var(--sans);line-height:1.6;color:var(--wall-ink);
+    /* the wall: flat mid-tone with the faintest plaster grain via layered gradients */
+    background:
+      radial-gradient(90% 50% at 50% 0%, rgba(247,245,239,.14), transparent 70%),
+      linear-gradient(180deg, var(--wall) 0%, var(--wall-deep) 100%);
     background-attachment:fixed;min-height:100vh}
-  .shell{max-width:1000px;margin:0 auto;padding:28px clamp(16px,4vw,32px) 80px}
-  .banner{font-family:var(--mono);font-size:12px;color:var(--amber);border:1px dashed var(--amber);
-    border-radius:10px;padding:10px 14px;margin-bottom:26px}
-  h1{font-family:var(--mono);font-weight:720;letter-spacing:-.02em;font-size:clamp(24px,4.5vw,38px);margin:0 0 6px}
-  h1 .hl{color:var(--cyan)}
-  .sub{color:var(--ink-2);max-width:64ch;margin:0 0 34px}
-  h2{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
-    margin:40px 0 14px;border-top:1px solid var(--edge);padding-top:22px}
+  .shell{max-width:1000px;margin:0 auto;padding:28px clamp(16px,4vw,32px) 90px}
+  .banner{font-family:var(--mono);font-size:12px;color:var(--wall-ink);border:1px dashed var(--edge-wall);
+    border-radius:10px;padding:10px 14px;margin-bottom:30px;background:rgba(247,245,239,.35)}
+  h1{font-family:var(--mono);font-weight:720;letter-spacing:-.02em;font-size:clamp(24px,4.5vw,38px);margin:0 0 8px;color:var(--wall-ink)}
+  .sub{color:var(--wall-ink);max-width:66ch;margin:0 0 8px}
+  .sub b{font-weight:650}
+  .zones{font-family:var(--mono);font-size:12px;color:var(--wall-ink-2);margin:0 0 34px}
+  h2{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--wall-ink);
+    margin:44px 0 16px;display:flex;align-items:center;gap:12px}
+  h2::after{content:"";flex:1;border-top:1px solid var(--edge-wall);opacity:.4}
 
-  /* swatches */
-  .sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
-  .chip{border:1px solid var(--edge);border-radius:10px;overflow:hidden;font-family:var(--mono);font-size:11px}
-  .chip .c{height:52px}
-  .chip .m{padding:7px 10px;background:var(--surface);color:var(--ink-2);line-height:1.5}
-  .chip .m b{color:var(--ink);display:block}
-  .ratio{color:var(--good)}
+  /* ── THE SIGNATURE: framed vitrine + placard label beneath ── */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px}
+  .work{display:block;text-decoration:none;transition:transform .16s ease}
+  .work:hover,.work:focus-visible{transform:translateY(-4px)}
+  .case{background:var(--vitrine);border-radius:6px;padding:10px;box-shadow:var(--shadow-case)}
+  .case .glass{border:1px solid var(--edge-vitrine);border-radius:3px;overflow:hidden;aspect-ratio:16/9;background:var(--vitrine-2)}
+  .case img{width:100%;height:100%;object-fit:cover;display:block}
+  .case .strip{display:flex;justify-content:space-between;padding:8px 4px 0;font-family:var(--mono);font-size:10.5px;color:var(--vitrine-ink-2)}
+  .case .strip .sig{color:var(--cyan);font-weight:600}
+  .label{background:var(--placard);border:1px solid var(--edge-placard);border-top:none;border-radius:0 0 8px 8px;
+    margin:0 10px;padding:13px 16px 14px;box-shadow:var(--shadow-card)}
+  .label .t{font-size:15.5px;font-weight:700;letter-spacing:-.01em;color:var(--placard-ink);display:flex;gap:9px;align-items:center}
+  .label .h{font-size:13px;color:var(--placard-ink-2);margin:5px 0 0}
+  .label .f{display:flex;margin-top:9px;font-family:var(--mono);font-size:11px;color:var(--placard-ink-2)}
+  .label .f .enter{margin-left:auto;color:var(--teal);font-weight:700;font-size:12px}
+  .work:hover .enter,.work:focus-visible .enter{text-decoration:underline}
+  .tag{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:2px 8px;border-radius:999px;color:var(--placard);background:var(--teal)}
 
-  /* type specimen */
-  .spec .display{font-family:var(--mono);font-weight:720;letter-spacing:-.025em;line-height:1.06;font-size:clamp(28px,5vw,46px);margin:0 0 10px;max-width:20ch}
-  .spec .display .hl{color:var(--cyan)}
-  .spec .lede{font-size:17.5px;color:var(--ink-2);max-width:60ch}
-  .spec .data{font-family:var(--mono);font-size:13px;color:var(--ink-2)}
-  .spec .data b{color:var(--amber)}
+  /* placard (paper) panel for prose */
+  .paper{background:var(--placard);border:1px solid var(--edge-placard);border-radius:10px;
+    padding:clamp(18px,3vw,28px);box-shadow:var(--shadow-card);color:var(--placard-ink)}
+  .paper .display{font-family:var(--mono);font-weight:720;letter-spacing:-.025em;line-height:1.07;
+    font-size:clamp(26px,4.6vw,42px);margin:0 0 12px;max-width:22ch}
+  .paper .display .hl{color:var(--teal)}
+  .paper p{margin:0;max-width:62ch;color:var(--placard-ink)}
+  .paper .cap{font-family:var(--mono);font-size:12.5px;color:var(--placard-ink-2);margin-top:12px}
+  .paper .cap b{color:var(--rust)}
 
-  /* masthead sample */
-  .mast{display:flex;align-items:center;gap:14px;border:1px solid var(--edge);border-radius:12px;
-    padding:12px 16px;background:color-mix(in srgb,var(--surface) 72%,transparent);backdrop-filter:blur(6px)}
-  .mast .brand{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.04em}
-  .mast .brand span{color:var(--cyan)}
-  .mast nav{margin-left:auto;display:flex;gap:16px}
-  .mast nav a{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);text-decoration:none}
-  .mast nav a:hover,.mast nav a:focus-visible{color:var(--cyan)}
+  /* vitrine panel (instrument) */
+  .instrument{background:var(--vitrine);border-radius:10px;padding:clamp(18px,3vw,26px);
+    box-shadow:var(--shadow-case);color:var(--vitrine-ink)}
+  .instrument .vh{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin:0 0 12px}
+  .instrument .stat{font-family:var(--mono);font-size:13px;color:var(--vitrine-ink-2);display:flex;flex-wrap:wrap;gap:16px}
+  .instrument .stat b{color:var(--vitrine-ink)} .instrument .stat .a{color:var(--amber)} .instrument .stat .g{color:var(--good)} .instrument .stat .r{color:--bad;color:var(--bad)}
+  .bars{display:flex;align-items:flex-end;gap:5px;height:74px;margin:16px 0 6px}
+  .bars i{flex:1;background:var(--cyan);border-radius:2px 2px 0 0;opacity:.92}
+  .bars i.dim{background:var(--vitrine-2);border:1px solid var(--edge-vitrine)}
+  .verdict{font-family:var(--mono);font-size:13.5px;border:1px solid var(--amber);color:var(--amber);
+    border-radius:8px;padding:10px 14px;margin-top:14px;max-width:64ch}
 
-  /* exhibit card w/ real screenshot thumb */
-  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
-  .xcard{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--edge);border-radius:14px;
-    overflow:hidden;text-decoration:none;color:inherit;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
-  .xcard:hover,.xcard:focus-visible{transform:translateY(-3px);border-color:var(--edge-strong);box-shadow:var(--shadow)}
-  .thumb{aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--edge);background:var(--bg-deep)}
-  .thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
-  .xbody{padding:14px 16px 14px;display:flex;flex-direction:column;gap:8px}
-  .xtitle{font-size:16px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:9px}
-  .xhook{font-size:13.5px;color:var(--ink-2);margin:0}
-  .xfoot{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
-  .xfoot .sig{color:var(--cyan);font-weight:600}
-  .xfoot .enter{margin-left:auto;color:var(--cyan);font-weight:600;font-size:12px}
-  .tag{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
-    padding:3px 8px;border-radius:999px;color:var(--good);background:color-mix(in srgb,var(--good) 14%,transparent);
-    border:1px solid color-mix(in srgb,var(--good) 40%,transparent)}
-
-  /* controls */
+  /* controls on the wall */
   .ctlrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-  .btn{font-family:var(--mono);font-size:13px;font-weight:600;padding:10px 18px;border-radius:10px;cursor:pointer;
-    border:1px solid var(--edge-strong);color:var(--ink);background:var(--surface)}
-  .btn:hover{border-color:var(--cyan);color:var(--cyan)}
-  .btn.primary{background:var(--cyan);color:#12261F;border-color:var(--cyan)}
-  .btn.primary:hover{filter:brightness(1.07);color:#12261F}
-  input[type=range]{width:220px;accent-color:var(--cyan-ui)}
-  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
-  .verdict{font-family:var(--mono);font-size:14px;padding:12px 16px;border-radius:10px;margin-top:14px;
-    border:1px solid var(--amber);color:var(--amber);max-width:64ch}
+  .btn{font-family:var(--mono);font-size:13px;font-weight:600;padding:10px 18px;border-radius:9px;cursor:pointer;
+    border:1px solid var(--edge-wall);color:var(--wall-ink);background:rgba(247,245,239,.45)}
+  .btn:hover{background:var(--placard)}
+  .btn.primary{background:var(--vitrine);color:var(--cyan);border-color:var(--vitrine)}
+  .btn.primary:hover{filter:brightness(1.15)}
+  input[type=range]{width:220px;accent-color:var(--teal)}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--vitrine);outline-offset:3px;border-radius:4px}
+  .wall-note{font-family:var(--mono);font-size:12px;color:var(--wall-ink-2)}
 
-  /* alternates */
-  .alt{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-  .altcard{border:1px solid var(--edge);border-radius:12px;padding:16px;font-size:13px;color:var(--ink-2)}
-  .altcard b{color:var(--ink);font-family:var(--mono)}
-  .dots{display:flex;gap:6px;margin:10px 0 8px}
-  .dots span{width:26px;height:26px;border-radius:50%;border:1px solid var(--edge-strong);display:inline-block}
-  .fine{font-size:12px;color:var(--ink-3);margin-top:30px;font-family:var(--mono)}
-  @media (prefers-reduced-motion: reduce){.xcard{transition:none}}
+  /* swatch rows */
+  .sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+  .chip{border:1px solid var(--edge-wall);border-radius:9px;overflow:hidden;font-family:var(--mono);font-size:10.5px;background:var(--placard)}
+  .chip .c{height:44px}
+  .chip .m{padding:6px 10px;color:var(--placard-ink-2);line-height:1.5}
+  .chip .m b{color:var(--placard-ink);display:block}
+  .ratio{color:var(--teal);font-weight:600}
+  .fine{font-size:12px;color:var(--wall-ink-2);margin-top:34px;font-family:var(--mono)}
+  @media (prefers-reduced-motion: reduce){.work{transition:none}}
 </style>
 </head>
 <body>
 <div class="shell">
-  <p class="banner">PROPOSAL ARTIFACT — style tile for the museum redesign plan (demo/museum-redesign-plan.md). Not linked from the museum. Approve, adjust, or reject.</p>
+  <p class="banner">PROPOSAL v2 — style tile for demo/museum-redesign-plan.md. Supersedes “Gallery Dusk” (rejected: too close to the current dark theme). Not linked from the museum.</p>
 
-  <h1>“<span class="hl">Gallery Dusk</span>” — one theme, no switch</h1>
-  <p class="sub">A museum open at night: twilight-slate walls (clearly not black, clearly not paper), warm limestone type, spotlit sections. The cyan instrument signature stays; everything is retuned for the mid-tone ground. Every pair below is contrast-verified for WCAG AA — ratios printed on the chips.</p>
+  <h1>“The Layered Museum” — one theme, three surfaces</h1>
+  <p class="sub">Real galleries are never white or black: the <b>walls</b> are a mid-tone, the <b>placards</b> are paper, the <b>display cases</b> are dark and lit from within. This theme is that building. The page ground is true putty — the literal in-between — prose sits on paper labels, and darkness is spent <b>only where luminous data earns it</b>: charts, demos, thumbnails, verdicts.</p>
+  <p class="zones">WALL #A8A296 (ink 5.9:1) · PLACARD #F7F5EF (ink 13.9:1) · VITRINE #131720 (cyan 10.4:1) — every ratio AA-computed</p>
 
-  <h2>Palette (verified AA)</h2>
-  <div class="sw">
-    <div class="chip"><div class="c" style="background:#252B38"></div><div class="m"><b>--bg #252B38</b>twilight slate ground</div></div>
-    <div class="chip"><div class="c" style="background:#303950"></div><div class="m"><b>--card #303950</b>exhibit card</div></div>
-    <div class="chip"><div class="c" style="background:#EFECE3"></div><div class="m"><b>--ink #EFECE3</b>limestone · <span class="ratio">12.0:1</span> on bg</div></div>
-    <div class="chip"><div class="c" style="background:#C2C6D2"></div><div class="m"><b>--ink-2 #C2C6D2</b><span class="ratio">8.3:1</span> bg · <span class="ratio">6.7:1</span> card</div></div>
-    <div class="chip"><div class="c" style="background:#9BA3B5"></div><div class="m"><b>--ink-3 #9BA3B5</b><span class="ratio">5.6:1</span> bg · <span class="ratio">4.5:1</span> card</div></div>
-    <div class="chip"><div class="c" style="background:#6FDCD3"></div><div class="m"><b>--cyan #6FDCD3</b>signature · <span class="ratio">8.7:1</span> bg</div></div>
-    <div class="chip"><div class="c" style="background:#3FBDB3"></div><div class="m"><b>--cyan-ui #3FBDB3</b>charts/fills · <span class="ratio">6.2:1</span></div></div>
-    <div class="chip"><div class="c" style="background:#EFB964"></div><div class="m"><b>--amber #EFB964</b>verdicts · <span class="ratio">8.0:1</span> bg</div></div>
-    <div class="chip"><div class="c" style="background:#B3A9F5"></div><div class="m"><b>--violet #B3A9F5</b>wing accent · <span class="ratio">6.7:1</span></div></div>
-    <div class="chip"><div class="c" style="background:#7ED99A"></div><div class="m"><b>--good #7ED99A</b><span class="ratio">8.3:1</span> bg</div></div>
-    <div class="chip"><div class="c" style="background:#F59B92"></div><div class="m"><b>--bad #F59B92</b><span class="ratio">6.7:1</span> bg · <span class="ratio">5.5:1</span> card</div></div>
-    <div class="chip"><div class="c" style="background:#78839E"></div><div class="m"><b>--edge-strong #78839E</b>controls · <span class="ratio">3.7:1</span> bg</div></div>
+  <h2>The signature — every exhibit is a lit case with its wall label</h2>
+  <div class="gallery">
+    <a class="work" href="decoder-race/">
+      <div class="case">
+        <div class="glass"><img src="shots/decoder-race.jpg" alt="Decoder Race mid-run: 40 cyan vote columns climbing out of the coin-flip band"></div>
+        <div class="strip"><span>d9gps850k0jc738h6blg</span><span class="sig">476×</span></div>
+      </div>
+      <div class="label">
+        <span class="t">The Decoder Race <span class="tag">Live</span></span>
+        <p class="h">A sealed answer read through noise — the whisper beats the shout.</p>
+        <div class="f"><span>F120–F121 · WING IV</span><span class="enter">Enter →</span></div>
+      </div>
+    </a>
+    <a class="work" href="#">
+      <div class="case">
+        <div class="glass" role="img" aria-label="placeholder: exhibit screenshot"></div>
+        <div class="strip"><span>tools/museum-shots.js</span><span class="sig">45 works</span></div>
+      </div>
+      <div class="label">
+        <span class="t">Every exhibit, framed <span class="tag">Live</span></span>
+        <p class="h">One capture pass photographs all 45 demos mid-run; the landing becomes a hung gallery.</p>
+        <div class="f"><span>PIPELINE PROOF</span><span class="enter">Enter →</span></div>
+      </div>
+    </a>
   </div>
 
-  <h2>Type — the instrument voice</h2>
-  <div class="spec">
+  <h2>Placard — the reading voice (paper, museum-label ink)</h2>
+  <div class="paper">
     <p class="display">We asked a quantum computer questions the textbooks call <span class="hl">impossible</span>.</p>
-    <p class="lede">Display and data run in the monospace instrument voice; prose runs in the system sans. Same pairing as today — the redesign changes the light, not the voice.</p>
-    <p class="data">measured: <b>216.8σ</b> · job d9gps850k0jc738h6blg · every number a job ID</p>
+    <p>Prose lives on paper, the way you read it in a gallery. Accents on paper are deep — teal and rust, engraving colors — never the luminous cyan, which belongs to the instruments behind glass.</p>
+    <p class="cap">measured on silicon · <b>≥72σ</b> beyond every ordered strategy · every number a job ID</p>
   </div>
 
-  <h2>Masthead sample</h2>
-  <nav class="mast" aria-label="sample masthead">
-    <span class="brand">THE QUANTUM <span>MUSEUM</span></span>
-    <nav aria-label="sample links"><a href="#">Scoreboard</a><a href="#">Wings</a><a href="#">Repository</a></nav>
-  </nav>
-
-  <h2>Exhibit card — with live-capture thumbnail (the graphics pipeline, proven)</h2>
-  <div class="cards">
-    <a class="xcard" href="decoder-race/">
-      <div class="thumb"><img src="shots/decoder-race.jpg" alt="Decoder Race exhibit mid-run: 40 vote columns climbing out of the coin-flip band"></div>
-      <div class="xbody">
-        <span class="xtitle">The Decoder Race <span class="tag">Live</span></span>
-        <p class="xhook">A sealed answer read through noise — the whisper beats the shout, 476× past the classical floor.</p>
-        <div class="xfoot"><span>F120–F121</span> · <span class="sig">476×</span><span class="enter">Enter →</span></div>
-      </div>
-    </a>
-    <a class="xcard" href="#">
-      <div class="thumb" role="img" aria-label="placeholder thumbnail"></div>
-      <div class="xbody">
-        <span class="xtitle">Every card gets one <span class="tag">Live</span></span>
-        <p class="xhook">One scripted headless-capture pass photographs all 45 exhibits mid-demo — the landing becomes a gallery wall, not a text index.</p>
-        <div class="xfoot"><span>tools/museum-shots.js</span><span class="enter">Enter →</span></div>
-      </div>
-    </a>
+  <h2>Vitrine — the instrument voice (dark only where data glows)</h2>
+  <div class="instrument">
+    <p class="vh">▶ Fire shots — the shout dies, the whisper survives</p>
+    <div class="bars" aria-hidden="true">
+      <i style="height:64%"></i><i style="height:30%"></i><i class="dim" style="height:46%"></i><i style="height:72%"></i><i style="height:22%"></i><i style="height:58%"></i><i class="dim" style="height:38%"></i><i style="height:66%"></i><i style="height:28%"></i><i style="height:52%"></i><i style="height:74%"></i><i class="dim" style="height:20%"></i><i style="height:60%"></i><i style="height:34%"></i><i style="height:68%"></i>
+    </div>
+    <div class="stat"><span>shots: <b>2,366</b></span><span>avg typos/shot: <b>11.5</b></span><span class="r">0 perfect shots</span><span class="g">HD 0</span><span class="a">476× past the floor</span></div>
+    <div class="verdict">✓ DECODED — the majority reads the sealed answer exactly, while not one single shot was perfect.</div>
   </div>
 
-  <h2>Controls &amp; verdict voice</h2>
+  <h2>Controls on the wall</h2>
   <div class="ctlrow">
-    <button class="btn primary" type="button">fire 100</button>
-    <button class="btn" type="button">reset</button>
-    <label class="spec data" for="r1">depth <input id="r1" type="range" min="0" max="100" value="60"></label>
-  </div>
-  <div class="verdict">✓ DECODED — the majority reads the sealed answer exactly, while not one single shot was perfect.</div>
-
-  <h2>Alternate directions (anchors checked, not developed)</h2>
-  <div class="alt">
-    <div class="altcard"><b>B · Warm Graphite</b><div class="dots"><span style="background:#2E2B28"></span><span style="background:#EFEAE2"></span><span style="background:#5AD6C8"></span><span style="background:#E2A84E"></span></div>Charcoal with a warm cast; reads “printed matter after dark.” Ink 11.8:1, cyan 8.0:1. Risk: loses the observatory-blue identity the exhibits already carry.</div>
-    <div class="altcard"><b>C · Deep Harbor</b><div class="dots"><span style="background:#1F3038"></span><span style="background:#EAF0EE"></span><span style="background:#EFB964"></span><span style="background:#6FDCD3"></span></div>Blue-green depth, amber-led accents. Ink 11.8:1, amber 7.7:1. Risk: darker than “in-between” — closer to the current dark theme than a third thing.</div>
+    <button class="btn primary" type="button">Enter the museum</button>
+    <button class="btn" type="button">See the verdict</button>
+    <label class="wall-note" for="r1">depth <input id="r1" type="range" min="0" max="100" value="60"></label>
+    <span class="wall-note">wall text is always ink — white type lives only behind glass</span>
   </div>
 
-  <p class="fine">Recommended: A · Gallery Dusk. All ratios computed per WCAG 2.x relative luminance; verification script ships with the implementation (tools/contrast-check.js).</p>
+  <h2>Tokens (all AA-computed)</h2>
+  <div class="sw">
+    <div class="chip"><div class="c" style="background:#A8A296"></div><div class="m"><b>--wall #A8A296</b>the in-between · ink <span class="ratio">5.9:1</span></div></div>
+    <div class="chip"><div class="c" style="background:#F7F5EF"></div><div class="m"><b>--placard #F7F5EF</b>paper · ink <span class="ratio">13.9:1</span></div></div>
+    <div class="chip"><div class="c" style="background:#131720"></div><div class="m"><b>--vitrine #131720</b>display case · ink <span class="ratio">15.3:1</span></div></div>
+    <div class="chip"><div class="c" style="background:#23272E"></div><div class="m"><b>--wall-ink #23272E</b>signage</div></div>
+    <div class="chip"><div class="c" style="background:#0C6B65"></div><div class="m"><b>--teal #0C6B65</b>on paper · <span class="ratio">5.8:1</span></div></div>
+    <div class="chip"><div class="c" style="background:#8A4A12"></div><div class="m"><b>--rust #8A4A12</b>on paper · <span class="ratio">6.3:1</span></div></div>
+    <div class="chip"><div class="c" style="background:#5BD8CE"></div><div class="m"><b>--cyan #5BD8CE</b>in vitrine · <span class="ratio">10.4:1</span></div></div>
+    <div class="chip"><div class="c" style="background:#E8B45C"></div><div class="m"><b>--amber #E8B45C</b>in vitrine · <span class="ratio">9.5:1</span></div></div>
+    <div class="chip"><div class="c" style="background:#79D695"></div><div class="m"><b>--good #79D695</b>in vitrine · <span class="ratio">10.1:1</span></div></div>
+    <div class="chip"><div class="c" style="background:#F09A90"></div><div class="m"><b>--bad #F09A90</b>in vitrine · <span class="ratio">8.3:1</span></div></div>
+    <div class="chip"><div class="c" style="background:#4A4841"></div><div class="m"><b>--edge-wall #4A4841</b>controls · <span class="ratio">3.6:1</span></div></div>
+  </div>
+
+  <p class="fine">Zone rules: luminous accents (cyan/amber/good/bad) appear ONLY on vitrine surfaces. Paper accents are deep (teal/rust). Wall carries ink signage only. Ratios per WCAG 2.x; gate script tools/contrast-check.js.</p>
 </div>
 </body>
 </html>
