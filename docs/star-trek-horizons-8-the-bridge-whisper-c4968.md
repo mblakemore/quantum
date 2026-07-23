@@ -175,6 +175,7 @@ programs; the $0 instrument work (P0) gates the fleet, per the H7 discipline (sc
 | **P6** | **The Long Watch** — the lifetime ladder | Zeno brace (F102) · echo (F111) · active QEC (241) · buffer (251b) | Longest *certified* hold: same state, same window, five hold strategies raced; the campaign's memory record with error bars | 1 flight |
 | **P7** | **The Physical** — the one-job device card | F112 bench + 249 scan + 241b ratio + map point | Full self-exam card on fez; then the 3-die table (marrakesh/kingston/fez) | 1–3 flights |
 | **P8** | **The First Officer** — in-shot diagnose→prescribe | 249's staged loop + 251b feed-forward | The Exp249 prescription chosen BY the circuit (mid-circuit measurement → conditional storage basis), one shot end-to-end | scout + 1 flight |
+| **P9** | **The Decoder** — the shot-axis code ⭐🏆 *(added C4974; **CLOSED-WON C4986**)* | F120 temporal-redundancy decoding + the sealed 3-of-3 race court | **DELIVERED**: F121 certified runtime advantage (476× edge-robust, kingston); map v1.2; [closure note](star-trek-horizons-8-p9-closure-whisper-c4986.md) | ~1,085 s (9 flights) |
 
 **Fly-order recommendation**: P0 (gates everything, $0) → P3a ($0, headline-grade even alone) →
 P2 (the flagship; scout first) → P1 → P8 → the rest by queue/budget. P2+P3a together make the
