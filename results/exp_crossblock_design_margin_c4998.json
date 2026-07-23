@@ -1,0 +1,17 @@
+{
+ "card": "exp_crossblock_design_margin", "cycle": "C4998", "substrate": "claude-fable-5",
+ "rule_honored": "margin-check-from-measured-parameters at DESIGN time (C4998m fold template rule)",
+ "measured_inputs": {
+  "envelope_s_220": 0.373, "envelope_source": "d_lo register fit b0=0.9354 lambda_bit=0.00418 (exp_organic_rhot_pathA / curve arc)",
+  "drifter_thetas_deg_at_220": {"pos24_phys73": 94.5, "pos13_phys26": 88.3},
+  "theta_rule": "cos(theta_i) = measured_bias_i(220)/s(220), biases from pad_drift_localization_c4984.json",
+  "ancilla_dephasing_factor": 0.829, "ancilla_model": "exp(-15us/80us) pad duration vs ancilla T2, both blocks equally"
+ },
+ "predicted_witness": {
+  "ideal_ancilla":    {"p_odd_AA": 0.3646, "p_odd_NN": 0.3646, "p_odd_CROSS": 0.4338, "Delta": 0.0692, "meas_per_class_5sigma": 1961},
+  "dephased_ancilla": {"p_odd_AA": 0.3883, "p_odd_NN": 0.4002, "p_odd_CROSS": 0.4462, "Delta": 0.0519, "meas_per_class_5sigma": 3481},
+  "note_baseline_asymmetry": "dephasing makes AA != NN (rotation-dephasing interaction) — the 0.5*[AA+NN] baseline subtraction is designed for exactly this; sim caught it at design time"
+ },
+ "depth_choice": {"primary_d2q": 220, "reject_280": "pos24 |bias| 0.321 > s(280)=0.290 — simple envelope model saturates (cos<-1); 220 is in-model with theta ~90-95deg = near-maximal signal"},
+ "budget_estimate": {"Q_swap_measurements": 10443, "classes": 3, "per_class": 3481, "qpu_estimate_s": "90-150 (worst-case quote 200) incl C1 arm + lambda_anc + profile cal blocks", "remaining_pool_s": 2131}
+}
