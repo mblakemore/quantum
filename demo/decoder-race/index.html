@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Decoder Race — a sealed answer read through noise, 476× past the classical floor | The Quantum Museum</title>
+<meta name="description" content="Every shot of a deep quantum circuit whispers the hidden answer with typos. Average the whispers and read what no single shot can say — then race the classical solver. F120/F121, job d9gps850k0jc738h6blg, 476× edge-robust, graded 3-of-3.">
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .shell{max-width:960px;margin:0 auto;padding:0 clamp(16px,4vw,30px) 70px}
+  .topbar{display:flex;align-items:center;gap:14px;padding:16px 0;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-2)}.topbar a:hover{color:var(--cyan)}.topbar .sp{flex:1}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3)}
+  h1{font-family:var(--mono);font-weight:720;letter-spacing:-.02em;line-height:1.08;font-size:clamp(27px,5vw,46px);margin:12px 0 14px;text-wrap:balance}
+  h1 .hl{color:var(--cyan)} h1 .win{color:var(--amber)}
+  .lede{font-size:clamp(15px,2vw,17.5px);color:var(--ink-2);max-width:66ch;margin:0 0 12px}
+  .scope{display:inline-block;line-height:1.5;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);border:1px solid var(--edge);border-radius:999px;padding:5px 12px;margin:4px 0 18px}
+  .scope b{color:var(--amber);font-weight:600}
+  .panel{border:1px solid var(--edge);border-radius:14px;padding:clamp(14px,3vw,22px);margin:18px 0;background:color-mix(in srgb,var(--ink) 3%,transparent)}
+  .panel h2{font-family:var(--mono);font-size:15px;color:var(--cyan);margin:0 0 10px;letter-spacing:.04em}
+  .ctl{display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-family:var(--mono);font-size:13px;margin:10px 0}
+  .ctl label{color:var(--ink-2)}
+  .ctl input[type=range]{width:min(280px,50vw);accent-color:var(--cyan)}
+  .btn{font-family:var(--mono);font-size:13px;background:none;border:1px solid var(--cyan);color:var(--cyan);border-radius:8px;padding:7px 14px;cursor:pointer}
+  .btn:hover{background:color-mix(in srgb,var(--cyan) 12%,transparent)}
+  .btn.warn{border-color:var(--edge);color:var(--ink-3)}
+  .bits{display:grid;grid-template-columns:repeat(20,1fr);gap:4px;margin:14px 0}
+  .bit{aspect-ratio:1;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;border:1px solid var(--edge);color:var(--ink-3);transition:background .2s}
+  .bit.ok{background:color-mix(in srgb,var(--cyan) 30%,transparent);color:var(--ink);border-color:var(--cyan)}
+  .bit.bad{background:color-mix(in srgb,#ef4444 35%,transparent);color:var(--ink);border-color:#ef4444}
+  .stat{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--mono);font-size:13px;color:var(--ink-2);margin:8px 0}
+  .stat b{color:var(--ink)} .stat .good{color:var(--cyan)} .stat .dead{color:#ef4444} .stat .amber{color:var(--amber)}
+  .verdict{font-family:var(--mono);font-size:15px;padding:10px 14px;border-radius:10px;border:1px dashed var(--edge);color:var(--ink-3);margin-top:10px}
+  .verdict.won{border-color:var(--amber);color:var(--amber);border-style:solid}
+  .racebar{margin:12px 0}
+  .rb-row{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;margin:7px 0}
+  .rb-label{width:220px;color:var(--ink-2);flex-shrink:0}
+  .rb-track{flex:1;height:16px;border:1px solid var(--edge);border-radius:8px;position:relative;overflow:hidden}
+  .rb-fill{position:absolute;inset:0 auto 0 0;border-radius:8px}
+  .rb-q .rb-fill{background:var(--cyan)} .rb-c1 .rb-fill{background:#ef4444} .rb-c2 .rb-fill{background:color-mix(in srgb,#ef4444 45%,transparent)}
+  .rb-val{width:100px;text-align:right;color:var(--ink)}
+  .timeline{display:grid;gap:8px;font-size:13.5px;color:var(--ink-2)}
+  .tl{display:flex;gap:10px;align-items:baseline}
+  .tl .n{font-family:var(--mono);color:var(--ink-3);flex-shrink:0;width:66px}
+  .tl b{color:var(--ink)} .tl .won{color:var(--amber);font-weight:700}
+  .fine{font-size:12.5px;color:var(--ink-3);line-height:1.55;margin-top:14px}
+  .fine a{color:var(--cyan)}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="topbar"><a href="../">← The Museum</a><span class="sp"></span><span style="color:var(--ink-3)">WING IV · The Advantage Ladder</span></nav>
+
+  <header class="hero">
+    <div class="eyebrow">F120 · F121 — the decoder-race arc, July 2026</div>
+    <h1>The <span class="hl">Decoder</span> Race<br><span class="win">— a sealed answer, read through noise</span></h1>
+    <p class="lede">A deep quantum circuit's single loudest output dies exponentially with depth — the campaign measured that wall and published <em>window-closed</em>. Then a re-read of the fold's own discarded data showed every shot still whispers the hidden 40-bit answer with a few typos. <strong>Average the whispers letter-by-letter and you can read what no single shot can say.</strong> Six sealed races later, that decoder read a cryptographically-committed answer exactly, in 3.82&nbsp;s, against a frozen classical floor of 1,818&nbsp;s — <strong>476× at the harshest edge, graded by three independent AI seats</strong>.</p>
+    <span class="scope"><b>Scope:</b> one instance family · one die per race · best-known-solver engineering race, not a complexity theorem · supersedable-by-design (a faster classical solver retires the number) · F54's brute-force wall untouched</span>
+  </header>
+
+  <section class="panel">
+    <h2>▶ FIRE SHOTS — the shout dies, the whisper survives</h2>
+    <p style="font-size:14px;color:var(--ink-2);max-width:70ch">The hidden answer below is the <em>actual sealed string from the winning race</em> (revealed post-grade). Pick a circuit depth, fire shots, and watch two decoders race: the <b>modal decoder</b> (waits for one shot to be perfectly correct — all 40 bits at once) vs the <b>shot-axis decoder</b> (per-bit majority across every shot). The noise model uses the measured constants: per-bit bias 0.91·e<sup>−0.0029·d</sup> (clean-register law), ×0.75 magic tax for t=80 circuits.</p>
+    <div class="ctl">
+      <label>depth d2q: <b id="dv">167</b></label>
+      <input type="range" id="depth" min="40" max="300" value="167">
+      <button class="btn" id="fire100">fire 100 shots</button>
+      <button class="btn" id="fire2k">fire 2,500</button>
+      <button class="btn warn" id="reset">reset</button>
+    </div>
+    <div class="stat">
+      <span>shots: <b id="shots">0</b></span>
+      <span>modal decoder (loudest single answer): <b class="dead" id="modal">—</b></span>
+      <span>majority decoder: <b id="hd">HD — </b></span>
+    </div>
+    <div class="bits" id="bits" aria-label="per-bit majority state"></div>
+    <div class="verdict" id="verdict">Fire shots. Green = majority has that bit right; red = wrong; the modal decoder needs one shot with ALL 40 green at once.</div>
+  </section>
+
+  <section class="panel">
+    <h2>⏱ THE RACE — measured, both arms</h2>
+    <div class="racebar">
+      <div class="rb-row rb-q"><span class="rb-label">quantum (race-6, kingston, 12.5k shots)</span><div class="rb-track"><div class="rb-fill" style="width:2.2%"></div></div><span class="rb-val">3.82 s</span></div>
+      <div class="rb-row rb-c1"><span class="rb-label">classical floor (fastest edge, ×4500)</span><div class="rb-track"><div class="rb-fill" style="width:56%"></div></div><span class="rb-val">1,818 s</span></div>
+      <div class="rb-row rb-c2"><span class="rb-label">classical operating (best all-core)</span><div class="rb-track"><div class="rb-fill" style="width:100%"></div></div><span class="rb-val">23,460 s</span></div>
+    </div>
+    <div class="stat"><span class="amber"><b>476×</b> at the harshest edge (WIN bar was 10×; cleared 48×)</span><span><b>~6,100×</b> vs operating</span><span>wall attribution anti-flattering (cal overhead charged to the race)</span></div>
+  </section>
+
+  <section class="panel">
+    <h2>📜 SIX RACES — every fence forged from the previous miss</h2>
+    <div class="timeline">
+      <div class="tl"><span class="n">RACE 0</span><span><b>Window-closed.</b> The modal observable dies by depth × width — verdict published with the number to beat. Then the discarded calibration data revealed the whisper code (F120: per-bit information decays ~30× slower).</span></div>
+      <div class="tl"><span class="n">RACE 1</span><span><b>Fold — endianness.</b> The decoder worked; a bit-order convention crossed between the sealer and builder. Caught by the court in minutes; convention round-trips added to every later flight.</span></div>
+      <div class="tl"><span class="n">RACE 2</span><span><b>Fold — one bit.</b> Gate rung placed 20% past race depth by fold arithmetic; missed exact by a single bit whose trend showed it was shots-starved. Fix: gates AT race depth.</span></div>
+      <div class="tl"><span class="n">RACE 3</span><span><b>Fold — bad wires.</b> Two readout-defective qubits corrupted the gate. Fix: whole-chip readout calibration folded into the decoder's per-bit thresholds.</span></div>
+      <div class="tl"><span class="n">RACE 4</span><span><b>Cap branch.</b> Hygiene validated — exact blind recovery at record depth 217 — but excluding bad qubits cost +92 depth and the routing drew past the cap. Lesson: fix defects in the decoder, not the routing.</span></div>
+      <div class="tl"><span class="n">RACE 5</span><span><b>Miss — the control experiment.</b> Dropped the routing exclusion to test whether it was load-bearing. It was (the free t=0 self-test caught the dirty register at zero seal cost). The pre-registered miss bought the final fence.</span></div>
+      <div class="tl"><span class="n">RACE 6</span><span class="won">WIN.</span> <span>Clean register certified by the free self-test <em>before</em> the seal was risked; twin exact at race depth; the sealed 40-bit answer read <b>exactly</b> from 12,500 shots. All three court seats concur. <b>F121.</b></span></div>
+    </div>
+  </section>
+
+  <p class="fine">
+    Sealed-commitment protocol: one AI (Ember) generates the answer and commits SHA-256(answer‖salt) to the public repo before any circuit exists; a second (Whisper) builds, flies, and decodes blind — ŝ posted publicly before the seal opens; a third (Elder) grades against a classical band frozen days earlier. The win prints its own expiry: a classical solver beating 1,818&nbsp;s on this family retires the entry.
+    Numbers: <a href="spec.html">specification sheet</a> · <a href="https://github.com/mblakemore/quantum/blob/main/docs/exp-hss-race6-WIN-verdict-whisper-c4981.md">WIN verdict</a> · <a href="https://github.com/mblakemore/quantum/blob/main/docs/star-trek-horizons-8-p9-closure-whisper-c4986.md">program closure</a>. Job <code>d9gps850k0jc738h6blg</code> (ibm_kingston).
+  </p>
+</div>
+
+<script>
+(function(){
+  const S = "0101010111110000100110110100011000000011"; // race-6 revealed sealed string
+  const N = 40, B0 = 0.91, LAM = 0.0029, RHO_T = 0.75;
+  const bitsEl = document.getElementById('bits');
+  const cells = [];
+  for (let i = 0; i < N; i++) {
+    const d = document.createElement('div');
+    d.className = 'bit'; d.textContent = '·';
+    bitsEl.appendChild(d); cells.push(d);
+  }
+  let ones = new Array(N).fill(0), shots = 0, modalHits = 0;
+  const $ = id => document.getElementById(id);
+  function q(d){ return 0.5 + 0.5 * B0 * Math.exp(-LAM * d) * RHO_T; }
+  function fire(n){
+    const depth = +$('depth').value, p = q(depth);
+    for (let k = 0; k < n; k++) {
+      let all = true;
+      for (let i = 0; i < N; i++) {
+        const correct = Math.random() < p;
+        const bit = correct ? +S[i] : 1 - +S[i];
+        ones[i] += bit;
+        if (!correct) all = false;
+      }
+      if (all) modalHits++;
+    }
+    shots += n; render();
+  }
+  function render(){
+    let hd = 0;
+    for (let i = 0; i < N; i++) {
+      const maj = (ones[i] * 2 > shots) ? 1 : 0;
+      const ok = shots > 0 && maj === +S[i];
+      cells[i].textContent = shots ? String(maj) : '·';
+      cells[i].className = 'bit' + (shots ? (ok ? ' ok' : ' bad') : '');
+      if (shots && !ok) hd++;
+    }
+    $('shots').textContent = shots.toLocaleString();
+    $('modal').textContent = shots ? (modalHits + ' perfect shot' + (modalHits===1?'':'s')) : '—';
+    $('modal').className = modalHits > 0 ? 'good' : 'dead';
+    $('hd').textContent = shots ? ('HD ' + hd) : 'HD —';
+    const v = $('verdict');
+    if (!shots) { v.className='verdict'; v.textContent='Fire shots. Green = majority has that bit right; red = wrong; the modal decoder needs one shot with ALL 40 bits right at once.'; return; }
+    if (hd === 0) { v.className='verdict won'; v.textContent='✓ DECODED — the majority reads the sealed answer exactly (' + shots.toLocaleString() + ' shots), ' + (modalHits===0 ? 'while not one single shot was perfect. The whisper beat the shout.' : 'modal also survived at this shallow depth — deepen the slider.'); }
+    else { v.className='verdict'; v.textContent='Majority still ' + hd + ' bit' + (hd===1?'':'s') + ' from the answer — keep firing, or note how the red cells thin as shots grow while the modal count stays near zero at depth.'; }
+  }
+  $('depth').addEventListener('input', () => { $('dv').textContent = $('depth').value; });
+  $('fire100').addEventListener('click', () => fire(100));
+  $('fire2k').addEventListener('click', () => fire(2500));
+  $('reset').addEventListener('click', () => { ones.fill(0); shots = 0; modalHits = 0; render(); });
+  render();
+})();
+</script>
+</body>
+</html>

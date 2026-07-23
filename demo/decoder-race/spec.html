@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spec — The Decoder Race (F120/F121) | The Quantum Museum</title>
+<link rel="stylesheet" href="../museum.css">
+<style>
+  .doc{max-width:840px;margin:0 auto;padding:0 clamp(16px,4vw,30px) 90px}
+  .topbar{display:flex;align-items:center;gap:14px;padding:16px 0;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-2)}.topbar a:hover{color:var(--cyan)}.topbar .sp{flex:1}
+  .kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  h1{font-family:var(--mono);font-weight:720;font-size:clamp(24px,4.4vw,38px);margin:10px 0 12px}
+  h1 .hl{color:var(--cyan)}
+  .idline{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-bottom:8px}
+  .verdict{font-family:var(--mono);font-size:14px;color:var(--amber);border:1px solid var(--amber);border-radius:10px;padding:9px 14px;margin:12px 0 20px;display:inline-block}
+  h2{font-family:var(--mono);font-size:16px;color:var(--cyan);margin:26px 0 8px}
+  p,li{font-size:14.5px;color:var(--ink-2);line-height:1.62}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin:10px 0}
+  th,td{border:1px solid var(--edge);padding:7px 10px;text-align:left;color:var(--ink-2)}
+  th{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+  code{font-family:var(--mono);font-size:12.5px;color:var(--cyan)}
+  b{color:var(--ink)}
+  a{color:var(--cyan)}
+</style>
+</head>
+<body>
+<div class="doc">
+  <nav class="topbar"><a href="index.html">← The exhibit</a><a href="../">The Museum</a><span class="sp"></span><span style="color:var(--ink-3)">WING IV</span></nav>
+  <header>
+    <div class="kicker">Full specification sheet</div>
+    <h1>The <span class="hl">Decoder Race</span> — a sealed answer read through noise</h1>
+    <div class="idline"><span>Findings F120 · F121</span><span>Exp-HSS races 1–6 (C4973–C4985)</span><span>ibm_marrakesh · ibm_kingston</span><span>winning job <code>d9gps850k0jc738h6blg</code></span><span>H8 P9 — CLOSED-WON</span></div>
+    <div class="verdict">🏆 CERTIFIED RUNTIME ADVANTAGE · 476× edge-robust · graded 3-of-3 · supersedable-by-design</div>
+  </header>
+
+  <h2>1 · The idea, in plain language</h2>
+  <p>The Roetteler hidden-shift problem plants a secret 40-bit string in a scrambled Boolean function; a quantum circuit can read it out directly, while the best classical solvers pay ~2<sup>αT</sup> in the T-gate count. At useful depths the chip's single most-frequent output decays to uselessness — measured and published as <b>window-closed</b> (C4973), with the number a future machine would need. A re-read of that verdict's own discarded calibration data (C4974) found the deep outputs were the planted answer <b>with a few typos</b>: each shot is answer ⊕ sparse errors, so N shots are N noisy transmissions of one codeword. Per-bit majority across shots reads the answer through noise that destroys every individual shot. <b>F120</b>: per-bit information decays at λ_bit ≈ 0.003/slot — ~30× slower than the modal-answer law.</p>
+
+  <h2>2 · The court</h2>
+  <p><b>Sealer (Ember)</b>: commits SHA-256(answer‖salt) to the public repo before any circuit exists; holds the reveal until the decoded answer is posted. <b>Flyer/Decoder (Whisper)</b>: builds, flies, decodes with a frozen mechanical decoder consuming only counts; posts ŝ before any reveal. <b>Grader (Elder)</b>: owns the classical band, frozen days earlier, edge-robust (the classical side is granted its fastest plausible tool). Every card frozen before data; no rescue rules; every fold booked.</p>
+
+  <h2>3 · The winning race (race-6, C4981)</h2>
+  <table>
+    <tr><th>Quantity</th><th>Value</th><th>Source</th></tr>
+    <tr><td>Die / job</td><td>ibm_kingston / <code>d9gps850k0jc738h6blg</code></td><td>manifest</td></tr>
+    <tr><td>Race depth</td><td>d2q = 167 (best-of-100; cap 200)</td><td>manifest</td></tr>
+    <tr><td>Pre-gate</td><td>free t=0 ladder EXACT ×2 — register certified <em>before</em> the seal was risked</td><td>reveal #670</td></tr>
+    <tr><td>Twin gate</td><td>t=0 twin EXACT at race depth (register unification 37/40)</td><td>reveal #670</td></tr>
+    <tr><td>Decode</td><td><b>ŝ == s exactly (HD-0)</b> from 12,500 shots (smallest pre-registered subsample)</td><td>reveal #672</td></tr>
+    <tr><td>Decoder</td><td>frozen calibrated per-bit majority · atomic 2⁻⁴⁰ null · no rescue</td><td>card c4980</td></tr>
+    <tr><td>Quantum wall</td><td><b>3.82 s</b> (anti-flattering attribution)</td><td><code>exp_hss_race6_quantum_wall.json</code></td></tr>
+    <tr><td>Classical floor (harshest edge)</td><td>1,818 s → <b>476×</b> (bar 10×, cleared 48×)</td><td>Elder band C6563; grade quantum@52c689c</td></tr>
+    <tr><td>Classical operating</td><td>23,460 s → ~6,100×</td><td>same</td></tr>
+    <tr><td>Robustness</td><td>maximally conservative wall (57.8 s, full budget) clears 3×</td><td>grade #674</td></tr>
+  </table>
+
+  <h2>4 · The fold ladder</h2>
+  <p>C4973: wrong observable → F120. Race-1: endianness convention → round-trip gates. Race-2: fold by ONE bit, gate placed 20% past race depth → gates at race depth, shot-matched. Race-3: two readout-defective qubits → whole-chip calibration in the decoder. Race-4: hygiene validated (exact blind at d2q=217) but exclusion cost +92 depth → fix defects in the estimator, not the routing. Race-5: pre-registered control (dropped the exclusion; it was load-bearing) → the clean-ladder pre-gate with seal preservation. Race-6: WIN.</p>
+
+  <h2>5 · The physics the arc measured</h2>
+  <ul>
+    <li><b>Per-bit law</b>: bias(d) ≈ b₀·e<sup>−λ_bit·d</sup>; the slope is a die bulk constant, the <b>intercept is a register-quality meter</b> (0.96/0.91 clean vs 0.69 dirty).</li>
+    <li><b>Magic-tax decomposition</b> (organic flight; the classical seat graded against its own hypothesis): the stochastic tax of 80 T-gates is <b>T-localized and depth-flat</b> (ρ ≈ 0.66–0.75); the apparent per-slot decay is a depth-growing <b>coherent few-bit drift</b> — RC-resistant, readout-cal-invisible, detected by estimator divergence.</li>
+    <li><b>Routing lottery</b>: d2q is a per-day random variable (125–287 across draws of one circuit class).</li>
+    <li><b>Defect taxonomy</b>: tilted (threshold-correctable) · stuck-at-readout (cal-visible, uncorrectable) · circuit-level-bad (cal-invisible; only a dynamic pre-gate catches it).</li>
+  </ul>
+
+  <h2>6 · Fences, printed on the result</h2>
+  <p>One instance family (Maiorana–McFarland hidden shift, n=40, t=80). One die per race, one calibration window. Best-known-solver <b>engineering race</b> — not a complexity theorem (F119 holds the theorem-floored seat, in sample-complexity currency). Joules one-sided. <b>Supersedable-by-design</b>: a classical solver beating 1,818 s on this family retires the entry — that mechanism is the point. F54's brute-force circuit-simulation wall is untouched and unclaimed.</p>
+
+  <h2>7 · Exhibit model note</h2>
+  <p>The interactive uses the measured clean-register constants (b₀ = 0.91, λ_bit = 0.0029, ρ_t = 0.75) with i.i.d. per-bit flips — a simplification (real silicon adds the coherent few-bit drift at depth, which is why the real races needed the full fence stack). The hidden string in the demo is the actual race-6 revealed answer. Deep links: <a href="https://github.com/mblakemore/quantum/blob/main/docs/exp-hss-race6-WIN-verdict-whisper-c4981.md">WIN verdict</a> · <a href="https://github.com/mblakemore/quantum/blob/main/docs/campaign-arcs.md">campaign arcs</a> · <a href="https://github.com/mblakemore/quantum/blob/main/docs/star-trek-horizons-8-p9-closure-whisper-c4986.md">P9 closure</a> · <a href="https://github.com/mblakemore/quantum/blob/main/docs/attenuation-map-v1.1-whisper-c4982.md">the map v1.1→v1.2</a>.</p>
+</div>
+</body>
+</html>
