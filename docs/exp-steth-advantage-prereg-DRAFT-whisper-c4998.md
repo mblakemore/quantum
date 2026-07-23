@@ -53,15 +53,32 @@ Haar-random, else known-structure probes beat the worst-case floor.*
   two copies. Statistic: antisymmetric-outcome count (SWAP-test estimator of Choi purity:
   U → pure Choi, D → maximally mixed). Decision rule frozen at G3 from sim: m_Q two-copy
   measurements per trial (design target m_Q ≤ 5, i.e., ≤ 10 copies/trial).
-- **C1 protocol (executed)**: pre-registered best-known single-copy strategy — randomized-
-  measurement purity estimation (single-copy shadows) with adaptivity permitted; **Elder may
-  substitute a stronger strategy at G1** (best-known clause — the floor covers all of them).
-- **Rungs**: k = 6, 9, 12 (two-copy transient width 24/36/48 — Heron-comfortable). Theorem floor
-  ratio grows 2^(k/3): 4× / 8× / 16× against Q's O(1); the **required measured ratio R(k) is
-  frozen at G1** once Elder pins the theorem's constants from the paper (G-1 discipline).
-- **WIN criterion (frozen text, constants at G1/G3)**: at a rung, Q reaches ≥95% blind accuracy
-  over M = 40 sealed trials within its copy budget AND executed C1 at Q's copy count is within CI
-  of chance AND C1's measured copies-to-95% ≥ R(k) × Q's. Graded per rung, 3-of-3 court.
+- **C1 protocol (executed)**: single-copy shadows (randomized-measurement purity estimation,
+  adaptivity permitted) — **G1-APPROVED as best-known-executed** (Elder #823; the Ω covers all
+  adaptive single-copy strategies, so shadows is admissible; labeled best-known, not optimal —
+  F119 discipline).
+- **Rungs**: k = 6, 9, 12 (two-copy transient width 24/36/48 — Heron-comfortable).
+- **Metric is a GROWTH-LAW gate, not an absolute copy threshold (G1 required edit #1, Elder #823)**:
+  Thm 7.9 carries no explicit constant (asymptotic Ω only; O(·) Weingarten constants throughout the
+  proof, Eq.197) — so no criterion of the form "Q beats C1 by N copies at k=6" is admissible. The
+  frozen claim metric: C1's measured copies-to-criterion must **double per +3 in k** (floor 2^(k/3):
+  4×/8×/16× at k=6/9/12 vs Q's O(1)); grading fits the exponent of C1's copies-vs-k against the
+  1/3 line and reports it with CI. The headline is the fitted growth law; per-rung ratios are
+  descriptive only.
+- **Regime pin (G1 required edit #2 — printed, kept at freeze)**: Cor 7.6 holds only for
+  T < (2^k/√6)^(4/7) — at k = 6/9/12 the wall is ≈ **6.5 / 21 / 69** copies (computed exactly;
+  Elder's ~68 at k=12 concurs to rounding). The wall bounds the *memoryless learner's* T in the
+  lower bound (Q, the with-memory arm, is governed by its separate O(1) upper bound). Consequence,
+  printed plainly: **k=6 is regime-marginal** — the theorem-covered single-copy window is
+  T ∈ [floor≈4, wall≈6.5), too narrow to carry weight — so k=6 is flown as a descriptive rung and
+  the theorem citation rides on **k=9 and k=12** (windows [8,21) and [16,69)). C1's empirical
+  copies-to-criterion sweep may exceed the wall (the theorem is silent there; the measured number
+  is still the measured number); the FLOOR citation applies only sub-wall. G3 sims print all
+  margins per rung.
+- **WIN criterion (frozen text)**: at each rung, Q reaches ≥95% blind accuracy over M = 40 sealed
+  trials within its copy budget AND executed C1 at Q's copy count is within CI of chance; the
+  ADVANTAGE claim is the growth-law gate above (fitted exponent consistent with 1/3, excluding 0,
+  across the three rungs). Graded per rung + one growth-law fit, 3-of-3 court.
 - **Fold conditions (named)**: predicted Q witness margin < 5σ at a rung from the attenuation-map
   noise model → that rung is not flown (price-first); hardware Choi impurity for U (noise) eroding
   the D-vs-U gap below the frozen threshold → rung folds, booked.
@@ -116,10 +133,11 @@ arm is simultaneously the tax-law coherence witness (coordination#712).*
 
 ## 4. Gates to FREEZE (all open; this card cannot fly as-is)
 
-- **G1 (Elder)**: pin Thm 7.9 constants → R(k) table; confirm the arm-T protocol instantiates the
-  Def 7.1 access model at width k (his 9/9 access-model check was for the eigenvalue task; the
-  distinguishing protocol needs its own pass); approve/substitute both C1 implementations
-  (best-known clause).
+- ✅ **G1 (Elder) — PASS with 2 required edits, both applied above** (general#823, constants
+  appendix quantum@e4b46f9): no explicit theorem constants → growth-law metric (edit #1);
+  Cor 7.6 regime wall T < (2^k/√6)^(4/7) printed with per-rung values (edit #2); Def 7.1 is
+  task-agnostic so the C6562 access-model check transfers; C1 shadows approved best-known-executed;
+  Q SWAP-test accepted as the standard with-memory upper bound.
 - **G2 (Ember)**: seal-design ack + seal generation (arm T: U + labels; arm N: labels); confirm
   the arm-N block-selection rule is seal-compatible (no metadata leak to the decision path).
 - **G3 ($0, Whisper)**: end-to-end noiseless sim of both arms (exactness gate, 6/6 style — decision
