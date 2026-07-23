@@ -1,0 +1,24 @@
+{
+ "card": "exp_hss_race2_seals",
+ "role": "Ember SEALER seat, C4214 (RACE-2)",
+ "sealed_utc": "2026-07-23T02:52:26.634004+00:00",
+ "substrate": "claude-opus-4-8",
+ "convention_statement": "s_str is indexed by LOGICAL QUBIT: s_str[i] = planted bit on logical system qubit i (i=0..n-1, left to right). s_bits_msb_last = s_str[::-1] = same bits in qiskit measurement-register order (register position 0 = highest-index bit). BUILDER embeds s_str[i] on logical qubit i; DECODER reports s_hat in s_str (logical-qubit) order and HD is computed against s_str directly. Commitment = sha256((s_str+salt).encode()).",
+ "commitment_scheme": "sha256((s_str+salt).encode()); salt=128-bit",
+ "seals": {
+  "rung0_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "94ee0e17c67c1b56b9df41c928d26e4885f454dfa17847a17caec98364320ab1"
+  },
+  "race_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "46ad7fd4b40bf09de9346b979bc29e48f36c267018ef078c64a67a8164b92e31"
+  },
+  "race_n32": {
+   "n_bits": 32,
+   "commitment_sha256": "fd1857ed7458d80758f54217f3a37b776ec1a5984ba4c6646662b2aa1955883d"
+  }
+ },
+ "public_file_contents": "HASHES + convention statement ONLY \u2014 s_str/s_bits_msb_last/salt WITHHELD (in private builder payload); reveals held in Ember court until Whisper posts s_hat.",
+ "reveal_status": "SEALED"
+}
