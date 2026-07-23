@@ -82,8 +82,54 @@ def xblock_seq(seed_bytes, N):
     return rng.integers(0, 3, size=N).tolist()
 
 
-def xblock_spec(seed_hex):
-    return f"steth|c4998|crossblock|assignment|seed={seed_hex}|{XBLOCK_RULE}"
+def xblock_spec(seed_hex, n_bind):
+    return f"steth|c4998|crossblock|assignment|seed={seed_hex}|N_bind={n_bind}|{XBLOCK_RULE}"
+
+
+XBLOCK_COMMIT = os.path.join(COMMIT_DIR, "commitments_crossblock_c4998_ember.json")
+XBLOCK_SECRETS = os.path.expanduser("~/.ember-crossblock-c4998-secrets.json")
+
+
+def cmd_seal_xblock(args):
+    """Seal the cross-block assignment stream: secret seed binds the whole stream up to
+    N_bind; flight takes the first N (adaptive within [5500,8000]/class -> <=24k total)."""
+    import numpy as np
+    os.makedirs(COMMIT_DIR, exist_ok=True)
+    if os.path.exists(XBLOCK_SECRETS) and not args.force:
+        print("REFUSE: crossblock secret exists (use --force to redraw BEFORE any commit published)")
+        return 1
+    seed = secrets.token_bytes(32); salt = secrets.token_bytes(32)
+    h = commit(salt, xblock_spec(seed.hex(), args.n_bind))
+    # sanity: regenerate + class balance at N_bind (no secrets printed)
+    seq = xblock_seq(seed, args.n_bind)
+    from collections import Counter
+    c = Counter(seq)
+    json.dump({"seed_hex": seed.hex(), "salt_hex": salt.hex(), "n_bind": args.n_bind},
+              open(XBLOCK_SECRETS, "w"), indent=2); os.chmod(XBLOCK_SECRETS, 0o600)
+    commitment = {"experiment": "steth_c4998_crossblock_overlap",
+                  "sealed_object": "per-SWAP assignment sequence over {SAME-A:0,SAME-N:1,CROSS:2}",
+                  "assignment_hash_sha256": h, "N_bind": args.n_bind,
+                  "rule": XBLOCK_RULE, "preimage_spec": "salt(32) || utf8(spec_with_seed_and_N_bind)",
+                  "flight_rule": "flight consumes the first N (adaptive in [5500,8000]/class); seed binds all N<=N_bind",
+                  "committer": "Ember (DC15E)", "timestamp": datetime.now(timezone.utc).isoformat()}
+    json.dump(commitment, open(XBLOCK_COMMIT, "w"), indent=2)
+    print(f"CROSSBLOCK SEALED (secret off-git {XBLOCK_SECRETS} chmod 600). "
+          f"class balance @N_bind={args.n_bind}: SAME-A {c[0]} / SAME-N {c[1]} / CROSS {c[2]}\n"
+          f"{json.dumps(commitment, indent=2)}")
+    return 0
+
+
+def cmd_reveal_xblock(args):
+    s = json.load(open(XBLOCK_SECRETS))
+    json.dump(s, open(os.path.join(COMMIT_DIR, "reveal_crossblock_c4998_ember.json"), "w"), indent=2)
+    print("crossblock revealed"); return 0
+
+
+def cmd_verify_xblock(args):
+    C = json.load(open(XBLOCK_COMMIT)); s = json.load(open(XBLOCK_SECRETS))
+    h = commit(bytes.fromhex(s["salt_hex"]), xblock_spec(s["seed_hex"], C["N_bind"]))
+    ok = h == C["assignment_hash_sha256"]
+    print("crossblock VERIFY", "OK" if ok else "FAIL"); return 0 if ok else 1
 
 
 def selftest_xblock():
@@ -193,5 +239,9 @@ if __name__ == "__main__":
     r.set_defaults(fn=cmd_reveal)
     v = sub.add_parser("verify"); v.set_defaults(fn=cmd_verify)
     xt = sub.add_parser("selftest-xblock"); xt.set_defaults(fn=lambda a: 0 if selftest_xblock() else 1)
+    xs = sub.add_parser("seal-xblock"); xs.add_argument("--n_bind", type=int, default=24000)
+    xs.add_argument("--force", action="store_true"); xs.set_defaults(fn=cmd_seal_xblock)
+    xr = sub.add_parser("reveal-xblock"); xr.set_defaults(fn=cmd_reveal_xblock)
+    xv = sub.add_parser("verify-xblock"); xv.set_defaults(fn=cmd_verify_xblock)
     a = ap.parse_args()
     sys.exit(a.fn(a))
