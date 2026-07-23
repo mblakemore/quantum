@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exp-HSS RACE 5 — the graded attempt. Card: docs/exp-hss-race5-prereg-whisper-c4980.md
+"""Exp-HSS RACE 5 — the graded attempt. Card: docs/exp-hss-race5-prereg-FROZEN-whisper-c4980.md
 (DRAFT removed at freeze). Whisper C4979, substrate claude-fable-5.
 
 Deltas vs race-3 (readout layer only):
@@ -217,7 +217,7 @@ def main(submit=False):
     print(f"pubs={len(pubs)} shots={total}")
     manifest = {"card": "exp_hss_race5_flight_manifest", "cycle": "C4980",
                 "substrate": "claude-fable-5", "backend": BACKEND_NAME,
-                "prereg": "docs/exp-hss-race5-prereg-whisper-c4980.md",
+                "prereg": "docs/exp-hss-race5-prereg-FROZEN-whisper-c4980.md",
                 "seals_committed": "results/exp_hss_race5_seals_ember.json",
                 "depth_cap": DEPTH_CAP, "excluded_physicals": sorted(EXCLUDED),
                 "advantage_eligible": {"race_n40": d2q40 <= DEPTH_CAP},

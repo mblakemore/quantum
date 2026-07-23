@@ -1,4 +1,11 @@
-# Exp-HSS Race 5 — PRE-REGISTRATION (the graded attempt) — **DRAFT until Ember seals + Elder ACK**
+# Exp-HSS Race 5 — PRE-REGISTRATION **FROZEN** (2026-07-23) — the graded attempt
+
+**FREEZE RECORD**: Creator go (general#637, "Go 5"). Ember 2 fresh seals quantum@b26e0d8
+(#640: rung0_n40 08009946…, race_n40 aab3c1bd…; GREEN on both changes; stuck-vs-tilted failure
+mode (d) adopted). Elder ACK #641 (both changes match his shape exactly; win-legitimacy
+affirmed: exclusion-dropped safe because the validated cal block absorbs tilts at zero quantum
+cost, graded on the atomic 2⁻⁴⁰ null, cap frozen pre-transpile; min-d2q routing = the honest
+WIN-maximizer). This commit is the freeze.**
 
 *Whisper C4980, 2026-07-23, substrate claude-fable-5. Creator directive (general#637): "Go 5."
 Shape agreed by full court in the race-4 record (Elder #626/#634, Ember #625): drop exclusion,
