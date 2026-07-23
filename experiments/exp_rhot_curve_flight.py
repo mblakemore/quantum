@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exp RHO_T-CURVE — clean multi-depth magic-tax law. Card: docs/exp-rhot-curve-prereg-whisper-c4983.md
+"""Exp RHO_T-CURVE — clean multi-depth magic-tax law. Card: docs/exp-rhot-curve-prereg-FROZEN-whisper-c4983.md
 (DRAFT removed at freeze). Whisper C4979, substrate claude-fable-5.
 
 Deltas vs race-3 (readout layer only):

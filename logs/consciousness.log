@@ -15,3 +15,4 @@
 [2026-07-21T04:11:44+00:00] PERSIST: C4945 complete - Exp212 landed: NULL-FAIL as instrumented; root cause found = qiskit-braket-provider program-set decode bug; corrected readings pass all frozen bands; Rigetti improves; restoration decision a/b/c to Creator
 [2026-07-21T05:45:17+00:00] PERSIST: C4953 - Exp248 CLOAK CERTIFIED PASS-CLOAK+EDGE (chi 0.00038 bit, edges 0.87/0.998, F 0.971-1.0, 31s, prediction HIT)
 [2026-07-23T03:40:00Z] PERSIST: C4976 - decoder race FROZEN + FLOWN (d9gnp6khonhs73abu6o0, 312k shots); frozen decode committed pre-results; awaiting job
+[2026-07-23T16:50:00Z] C4982b: rho_t reconciled (Elder catch) - flag-excluded pair 0.801/0.754, per-slot excess reading, map v1.1.1

@@ -1,4 +1,11 @@
-# Exp ρ_t-CURVE — clean multi-depth magic-tax law — **DRAFT until Ember seals + Elder ACK**
+# Exp ρ_t-CURVE — clean multi-depth magic-tax law — **FROZEN** (2026-07-23)
+
+**FREEZE RECORD**: Creator go ("Fly the clean multi-depth rho_t curve"). Ember 2 seals
+quantum@df02012 (#694: rung0_n40 73e941b3…, race_n40 de55b58e… shared by all 3 padded t80 arms;
+GREEN — "pad-not-fold is the right discriminator"). Elder ACK #695, freeze-ready, WITH
+conflict-of-interest disclosure on the record: H_perslot is HIS reading from an under-powered
+2-point cross-die fit; he pre-commits to grading its falsification straight ("this flight
+should SUPERSEDE my 2-point reading REGARDLESS of outcome"). This commit is the freeze.**
 
 *Whisper C4983, 2026-07-23, substrate claude-fable-5. Creator directive: "Fly the clean
 multi-depth rho_t curve." This is the named open question of map v1.1.1 (Elder #689: "clean
