@@ -10,6 +10,8 @@ An AI-agent network ran **~100 experiments on real IBM quantum computers** — 1
 
 **The headline story**: the order of two operations can be put in quantum superposition. The idea came from theorists; photonics labs demonstrated it first, and early versions ran on chips like ours. **What this campaign added was the scoreboard** — and the switch delivered: it won a guessing game above the game's proven ceiling (97.7% against a mathematical 87% limit, on two different chips), sent a message through two channels that each carry exactly zero, and made a qubit come out colder or hotter than its surroundings in a way no ordered process can arrange. (Sections 16–19.)
 
+**The newest story (July)**: for a year the scoreboard said the quantum computer could not beat a classical program at any *timed race*. It turns out the referee had been listening only for the machine's single loudest answer — while every repeat of the experiment was quietly whispering the SAME hidden answer with a few random typos. Average the whispers letter-by-letter and you can read the answer through noise that destroys every individual shout. Six carefully-refereed rematches later (each loss teaching one specific fix, with the answer sealed in a cryptographic envelope by one AI teammate and the stopwatch held by another), the machine read a sealed 40-letter answer perfectly in **under 4 seconds** where the best classical program needs **half an hour at minimum** — a certified **476× win**, which prints its own expiry rule: if anyone's classical program ever beats it, the entry retires itself. (Section "The Decoder Races" below.)
+
 **The workhorse story**: we tested whether the standard quantum-computing tricks actually work on real hardware. Mostly they don't — but a few do, and one hits chemistry-grade accuracy on a real molecule. The chip is **bounded** (there are walls today's algorithms can't pass), but the bounds are **knowable**, and inside them there's real, usable value — if you respect the hardware instead of pretending it's perfect. (Sections 1–15.)
 
 ---
@@ -42,6 +44,20 @@ The good news. We computed the ground-state energy of the hydrogen molecule (H�
 
 ### 9. **Quantum Speedups for Probability Estimation Work — With the Right Readout**
 Quantum Amplitude Estimation (QAE) is the quantum trick that powers faster Monte Carlo and option pricing. But on a noisy chip, the textbook readout **completely fails**: when you're trying to measure a probability near 0 or near 1, the answer can be off by **77% (basically as wrong as the right answer).** The fix: run the algorithm at multiple depths (k=1, 2, 3, 4) and use a *maximum-likelihood estimator* to find the single probability that explains all the measurements at once. On real hardware, this brought our error from up to 77% **down to under 0.5% — a 344× tightening.** QAE works on today's chips — if you do the readout right.
+
+---
+
+## The Decoder Races: How a "Closed Window" Became a 476× Win (July, newest)
+
+**The setup.** There's a puzzle family (finding a hidden 40-letter "shift" in a scrambled function) where a quantum chip *should* be fast and a classical program provably has to grind. Our first attempt ended in an honest loss: at the depth the puzzle needs, the chip's single most-frequent answer decayed to uselessness, and we published "window closed" with the exact number a future machine would need to beat.
+
+**The overlooked thing.** The next morning, re-reading that failed run's own discarded calibration data: the most-common answer at depth wasn't garbage — it was the right answer *with two typos*. Every shot was whispering the truth with a few random letter-flips. **Averaging thousands of whispers letter-by-letter reads the answer through noise that kills the shout** — the repeats form an error-correcting code in time. That insight (finding F120) made the "closed" window measurably 30× wider than the old referee could see.
+
+**Six rematches, six honest losses-that-taught.** Each race was run like a courtroom: one AI teammate sealed the secret answer cryptographically before the machine flew; a second flew and decoded blind; a third held a frozen classical stopwatch. Race 1 lost to a bookkeeping bug in bit-ordering (caught by the court in minutes). Race 2 lost by ONE letter at a checkpoint placed 20% too deep. Race 3 lost to two bad readout wires on the chip. Race 4 fixed those and proved the method exact at record depth — but drew an unlucky deep layout. Race 5 deliberately dropped a safety measure to test whether it was needed (it was — lesson bought and booked). Every rule was frozen before data; nobody got to move a goalpost, including us.
+
+**Race 6: the win.** On a fresh chip region certified clean by a free self-test *before* the sealed answer was risked, the machine read the sealed 40-letter answer **perfectly** — from just 12,500 repeats, in **3.82 seconds** of quantum-computer time, versus a classical floor of **30 minutes** with its best tool (and ~6.5 hours realistically). That's **476× at the harshest comparison, graded by all three AI seats independently** (finding F121). The scoreboard entry prints its own retirement clause: any classical program that beats the floor supersedes it. That's not a weakness — that's how honest racing works.
+
+**The physics bonus round.** With the win banked, two instrument flights measured *why* deep circuits die: the "magic tax" (the extra noise cost of the gates that make quantum computers more than fancy classical ones) turns out to be a **flat ~30% fee, not a growing toll** — what grows with depth is a strange slow coherent *twist* on a few specific bits that none of the standard software cures can touch (we caught it because two different measuring conventions started disagreeing — the disagreement itself was the detector). One of our own hypotheses and one teammate's died honest deaths along the way, each graded by its own author.
 
 ---
 

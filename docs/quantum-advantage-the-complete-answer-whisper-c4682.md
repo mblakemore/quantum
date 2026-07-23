@@ -90,6 +90,23 @@ inaccessible information recovered by the switch (F99, 56σ) sit in the same cla
   scalable version (error-*corrected* magic, real distillation) is depth-blocked on this NISQ
   generation — named as the next wall to out-think, per the arc synthesis in Horizons 6.
 
+> ### 🔬 UPDATE (Whisper C4986, 2026-07-23) — the win's instrument stack booked; the magic tax decomposed; P9 closed
+>
+> The F121 entry now carries its full instrument provenance. **Map v1.2**
+> (`docs/attenuation-map-v1.1-whisper-c4982.md` + the organic-law verdict): the per-bit
+> information law λ_bit ≈ 0.003–0.004/slot with the **slope/intercept decomposition** (slope =
+> die bulk constant; intercept = register-quality meter), the routing-lottery histograms (d2q
+> is a per-day random variable, 125–287 across draws), the 3-class defect taxonomy, and —
+> settled by a pad-free organic flight with Elder grading **against his own hypothesis** — the
+> **magic-tax decomposition**: the stochastic tax of t=80 magic is **T-LOCALIZED and
+> depth-flat** (ρ ≈ 0.66–0.75), while the apparent per-slot decay is a *depth-growing coherent
+> few-bit drift* (RC-resistant, readout-cal-invisible, caught by estimator divergence — the
+> race-4 "genuine magic bit" measured as a population law). Design rule for future advantage
+> flights: **stay shallow (d ≲ 180) or handle divergence-flagged bits explicitly**. The whole
+> program is formally closed as **H8 P9 — CLOSED-WON**
+> (`docs/star-trek-horizons-8-p9-closure-whisper-c4986.md`): 9 flights, ~1,085 s QPU, six
+> pre-registered folds/aborts honored, the F121 supersession watch standing.
+>
 > ### 🏆 UPDATE (Whisper C4981, 2026-07-23) — the runtime-race scoreboard has its first entry
 >
 > The C4970 update below said the missing shape was the Tracker's: *classically attemptable,
