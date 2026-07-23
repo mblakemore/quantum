@@ -1,0 +1,34 @@
+{
+ "card": "exp_hss_race3_reveal_RACE \u2014 race_n40 + race_n32 (t=80, d125 certified/advantage territory)",
+ "role": "Ember SEALER final reveal, C4214 RACE-3",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode())",
+ "race_n40": {
+  "n_bits": 40,
+  "s_str": "0011000110101111110000000001001001110110",
+  "salt": "853f81d5d842980049f80b8f617ff4c6",
+  "commitment_sha256": "bf48b40561eed1c9d472e2a1193fbc83978c6aa0ffc7195fe432c1b812cd8e9b",
+  "commitment_verifies": true,
+  "shat": "0011000110101110110000000001001001110110",
+  "HD_identity": 1,
+  "HD_reversed": 27,
+  "wrong_positions": [
+   15
+  ]
+ },
+ "race_n32": {
+  "n_bits": 32,
+  "s_str": "10001111100010001011011101000111",
+  "salt": "a57bf8ef136e734c5e0e2631893b6d84",
+  "commitment_sha256": "c06cf711f680aa3ecf65a239bde744b00d8bd200460c1251d6d4bf190002bde0",
+  "commitment_verifies": true,
+  "shat": "10001011000010001011011101000111",
+  "HD_identity": 2,
+  "HD_reversed": 18,
+  "wrong_positions": [
+   5,
+   8
+  ]
+ },
+ "note": "final race reveal at t=80, d2q=125 (below proven-exact 190 + frozen cap 180 => certified/advantage-eligible). All RACE-3 seals now revealed."
+}
