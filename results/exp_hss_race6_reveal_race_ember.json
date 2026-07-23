@@ -1,0 +1,20 @@
+{
+ "card": "exp_hss_race6_reveal_RACE \u2014 race_n40 (t=80, d167, kingston) \u2014 FULLY-FENCED GRADED DECODE",
+ "role": "Ember SEALER final reveal, C4214 RACE-6",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "race_n40": {
+  "n_bits": 40,
+  "s_str": "0101010111110000100110110100011000000011",
+  "salt": "e9634e6c3f67a4d228f8a6d4e3392aa5",
+  "commitment_sha256": "e3839fc5b937a3b4df36442701c66e95647524fee69b5b5c990e42559f811a6c",
+  "commitment_verifies": true,
+  "graded_shat": "0101010111110000100110110100011000000011",
+  "HD_identity": 0,
+  "HD_reversed": 16,
+  "wrong_positions": []
+ },
+ "decoder_verdict": "EXACT MATCH \u2014 DECODER WIN (s_hat==s)",
+ "win_condition": "decoder side (exact s_hat==s) MET; quantum-wall side (kingston re-measured <= 1/10 Elder band, binding 181.8s) is Whisper/Elder's grade \u2014 smallest exactly-decoding subsample 2 pubs = 12.5k shots per Whisper.",
+ "pre_gate": "PASS (rung0 HD-0, register certified clean, all 3 fences green)."
+}
