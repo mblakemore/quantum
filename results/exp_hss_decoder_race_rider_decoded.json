@@ -1,0 +1,56 @@
+{
+ "card": "exp_hss_decoder_race_rider_steth_anc",
+ "cycle": "C4976",
+ "substrate": "claude-fable-5",
+ "job_id": "d9gnp6khonhs73abu6o0",
+ "pairs": [
+  [
+   88,
+   91
+  ],
+  [
+   89,
+   90
+  ]
+ ],
+ "rows": [
+  {
+   "pauli": "X",
+   "anc_qubit": 91,
+   "corr_delay": 0.767,
+   "corr_nodelay": 0.89,
+   "lambda_anc": 0.8618,
+   "approx_se": 0.0136
+  },
+  {
+   "pauli": "X",
+   "anc_qubit": 90,
+   "corr_delay": 0.5713,
+   "corr_nodelay": 0.904,
+   "lambda_anc": 0.6319,
+   "approx_se": 0.01
+  },
+  {
+   "pauli": "Z",
+   "anc_qubit": 91,
+   "corr_delay": 0.8097,
+   "corr_nodelay": 0.8888,
+   "lambda_anc": 0.9111,
+   "approx_se": 0.0144
+  },
+  {
+   "pauli": "Z",
+   "anc_qubit": 90,
+   "corr_delay": 0.737,
+   "corr_nodelay": 0.879,
+   "lambda_anc": 0.8385,
+   "approx_se": 0.0133
+  }
+ ],
+ "flown_zzaware_ratios_for_comparison": {
+  "n1_X": 0.638,
+  "n1_Z": 0.905,
+  "n2_X": 0.873,
+  "n2_Z": 0.852
+ }
+}
