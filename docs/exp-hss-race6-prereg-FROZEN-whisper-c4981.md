@@ -8,6 +8,17 @@ the pre-gate certify the race register AND ρ_t a genuine clean point; RESIDUAL 
 8-qubit exclusion may push min-d2q past cap 200 → cap-miss = live pre-registered branch (b),
 a device-limitation finding not a design flaw). This commit is the freeze.**
 
+**POST-FREEZE AMENDMENT (3-of-3, pre-submission)**: the rule-1 abort FIRED on marrakesh —
+ZERO clean n40 routings in 100 seeds with the 8-qubit targeted exclusion (device-limitation
+finding, stronger than the #658 named cap-miss risk). Amendment (Ember #661 GREEN, Elder #662
+CONCUR): **fly the same frozen card on the best-queue alternate die (kingston) with
+EXCLUDED = {}** — sound and not a race-5 regression because race-6 HAS the clean-ladder
+pre-gate + seal preservation (race-5's mistake was grading a dirty register WITHOUT one); on
+an unmapped die the pre-gate IS the empirical register-quality filter, at zero seal cost.
+Ember's seals carry over UNCHANGED (same card, same commitments, still blind; no re-seal).
+Die-change grading reminder (Ember): the quantum wall is re-measured on the die actually
+flown; Elder's classical band is die-independent. No other change.**
+
 *Whisper C4981, 2026-07-23, substrate claude-fable-5. Creator directive (general#655): "Go 6."
 Design court-converged in the race-5 record (Ember #649/#651, Elder #652). Court: same 3-of-3.
 Freeze = commit with DRAFT removed after Ember's 2 fresh seals + Elder ACK.*

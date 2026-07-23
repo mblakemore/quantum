@@ -24,10 +24,10 @@ from qiskit import QuantumCircuit, transpile
 SEED = 2026072306
 INCLUDE_N32 = False   # card amendment (coordination#614): n32 dropped — zero clean routings, pre-registered abort fired
 DEPTH_CAP = 200
-EXCLUDED = {67, 113, 114, 115, 119, 133, 134, 135}   # race-6: MINIMAL-TARGETED (fence 1)
+EXCLUDED = set()   # amendment: unmapped die (kingston) — fences 2+3 are the guards
 SEALS_PRIVATE = "/droid/repos/dc_shared/workspace/exp-hss-race6-seals-ember-to-whisper.json"
 SEALS_PUBLIC = os.path.join(QROOT, "results", "exp_hss_race6_seals_ember.json")
-BACKEND_NAME = "ibm_marrakesh"
+BACKEND_NAME = "ibm_kingston"   # amendment 3-of-3 (#661,#662): marrakesh infeasible
 NPHYS = 156
 
 
