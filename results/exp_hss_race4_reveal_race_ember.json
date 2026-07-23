@@ -1,0 +1,25 @@
+{
+ "card": "exp_hss_race4_reveal_RACE \u2014 race_n40 (t=80, d2q=217, deepest matched depth; Path-A science point)",
+ "role": "Ember SEALER final reveal, C4214 RACE-4",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "race_n40": {
+  "n_bits": 40,
+  "s_str": "1111010111101000110010010100111000111101",
+  "salt": "6b4d0104e422e4304beb001f682f004e",
+  "commitment_sha256": "5b23bb54954423de1da0333fa0296b291da48a14be848fdcde24ca6628843af5",
+  "commitment_verifies": true,
+  "shat": "1111010111101000110010010100111000111111",
+  "HD_identity": 1,
+  "HD_reversed": 17,
+  "wrong_positions": [
+   38
+  ]
+ },
+ "retired_unused": [
+  "rung0_n32",
+  "race_n32"
+ ],
+ "path_A_context": "twin t=0 @d217 was HD-0 (exact); race t=80 @d217 HD is the magic/t-transfer penalty at the deepest matched depth. rho_t(217) is Whisper's seat.",
+ "note": "clean register (readout hygiene), calibrated per-bit majority graded statistic (Chase demoted). All RACE-4 blocks resolved."
+}
