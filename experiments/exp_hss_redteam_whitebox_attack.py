@@ -86,6 +86,29 @@ def whitebox_attack(fs, g_spec, k):
     return s_x, s_y, q
 
 
+def blackbox_attack(f_oracle, fs, k):
+    """Escape-hatch closer: recover s with NO analytic g — only oracle access to the UNSHIFTED f and
+    the shifted f_s (both are given in any hidden-shift problem). Uses g(z)=bit(f(z,0)) since
+    f(z,0)=(-1)^g(z). Proves 'a real challenger wouldn't have g' is not a rescue."""
+    q = 0
+    e = [np.zeros(k, dtype=np.int8) for _ in range(k)]
+    for i in range(k):
+        e[i][i] = 1
+    zero = np.zeros(k, dtype=np.int8)
+    # s_x from f_s slope (no g at all)
+    base_y = fs(zero, zero); q += 1
+    s_x = np.array([fs(zero, e[i]) ^ base_y for i in range(k)], dtype=np.int8); q += k
+    # g values via the UNSHIFTED oracle: g(z) = bit(f(z,0))
+    g_sx = f_oracle(s_x, zero); q += 1
+    base_x = fs(zero, zero); q += 1
+    s_y = np.zeros(k, dtype=np.int8)
+    for i in range(k):
+        g_sxi = f_oracle((s_x ^ e[i]) & 1, zero); q += 1
+        fx = fs(e[i], zero); q += 1
+        s_y[i] = g_sx ^ g_sxi ^ base_x ^ fx
+    return s_x, s_y, q
+
+
 def main():
     print("=" * 74)
     print("RED-TEAM: white-box classical attack on the RACE-6 winning instance")
@@ -131,6 +154,13 @@ def main():
         print("  VERDICT: the white-box runtime advantage is SUPERSEDED. The number is retired.")
     else:
         print("  VERDICT: attack did NOT recover s — the white-box path does not trivially break this.")
+
+    # --- escape-hatch closer: black-box (no analytic g) on the exact race-6 instance ---
+    f_oracle = lambda x, y: f_eval(x & 1, y & 1, g_spec)   # unshifted oracle, as given in the problem
+    bx, by, bq = blackbox_attack(f_oracle, fs, K)
+    bb_str = "".join(str(int(b)) for b in np.concatenate([bx, by]))
+    bb_exact = (bb_str == S_STR)
+    print(f"\nblack-box variant (no analytic g, only f & f_s oracles): exact={bb_exact}, queries={bq}")
 
     # --- robustness: is race-6 a fluke? attack random planted instances at n=40 ---
     print("\nrobustness sweep — 200 random (s, g) instances at n=40, distinct seeds:")
