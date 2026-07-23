@@ -43,7 +43,8 @@ def verify_seals():
         committed = pub["seals"][key]["commitment_sha256"]
         assert h == committed, f"SEAL MISMATCH {key}"
         assert "s_bits_msb_last" in p, f"{key}: seal format must carry s_bits_msb_last (card §3a)"
-        bits = p["s_bits_msb_last"]
+        raw = p["s_bits_msb_last"]                       # list of ints OR "0101..." string
+        bits = [int(b) for b in raw]
         assert "".join(str(b) for b in bits[::-1]) == s_str, f"{key}: bits/s_str inconsistent"
         out[key] = {"s_bits": bits, "s_str": s_str}
     print("seal verification: 3/3 hashes + bit-order consistency")
@@ -55,17 +56,20 @@ def marginalize_str(bitstr156, layout):
     return "".join(bitstr156[i] for i in idx)
 
 
-def roundtrip_gate(twirled_meas_circ, final_layout, s_str):
-    """Noiseless stabilizer sim of the flown-form t=0 circuit; marginal reversed to display
-    order must equal sealed s_str."""
+def roundtrip_gate(logical_meas_circ, s_str):
+    """Noiseless stabilizer sim of the LOGICAL t=0 circuit (h/x/z/cz — exactly Clifford);
+    modal count string (display order) must equal sealed s_str. Catches every builder/seal
+    format crossing (the C4976 bug class). NOTE: the ISA-transpiled form is only
+    epsilon-Clifford (O3 error-aware 1q resynthesis emits off-grid rz) so it cannot be
+    stabilizer-simmed; the remaining marginalize()+final-layout direction is pinned by the
+    C4976 flown-data sim and re-anchored in-data at decode (ladder m=0 must reveal exact —
+    it is part of the gate adjudication record)."""
     sim = AerSimulator(method="stabilizer")
-    counts = sim.run(transpile(twirled_meas_circ, sim), shots=256,
+    counts = sim.run(transpile(logical_meas_circ, sim), shots=256,
                      seed_simulator=7).result().get_counts()
     modal = max(counts.items(), key=lambda kv: kv[1])[0].replace(" ", "")
-    marg = marginalize_str(modal, final_layout)
-    disp = marg[::-1]
-    ok = disp == s_str
-    print(f"convention round-trip: marginal-reversed == s_str : {ok}")
+    ok = modal == s_str
+    print(f"convention round-trip (logical): modal == s_str : {ok}")
     return ok
 
 
@@ -93,6 +97,11 @@ def main(submit=False):
     book(t40, "race_n40")
     d2q_race = layouts["race_n40"]["d2q"]
 
+    # convention round-trip on the logical t=0 circuit (card §3b; C4976 endianness class)
+    qc0m = build_hss_circuit(20, np.asarray(seals["rung0_n40"]["s_bits"]),
+                             make_g_spec(20, 0, SEED), measure=True)
+    assert roundtrip_gate(qc0m, seals["rung0_n40"]["s_str"]), "ROUND-TRIP FAIL — ABORT"
+
     # t=0 transpiles over 20 seeds at the pinned layout -> gate-rung candidates
     qc0 = build_hss_circuit(20, np.asarray(seals["rung0_n40"]["s_bits"]),
                             make_g_spec(20, 0, SEED), measure=False)
@@ -116,20 +125,15 @@ def main(submit=False):
                  "gate_above": {"d2q": above[0], "seed_off": above[1], "fold_m": above[2]}}
     print("GATE PLAN:", json.dumps(gate_plan))
 
-    # LADDER m=0,1 from base seed SEED+0 (curve + convention anchor)
+    # LADDER m=0,1 from base seed SEED+0 (curve + in-data convention anchor at decode)
     t0_base = t0s[0]
     book(t0_base, "rung0_base")
-    rt_done = False
     for m in (0, 1):
         folded = to_basis_only(fold_circuit(t0_base, m))
         assert d2q_of(folded) == (2 * m + 1) * d2q_of(t0_base)
         for tw in range(4):
             twc = twirl_circuit(folded, np.random.default_rng(SEED + 1000 + 10 * m + tw))
             mc = twc.copy(); mc.measure_all()
-            if not rt_done:   # convention round-trip on the exact flown form (card §3b)
-                assert roundtrip_gate(mc, layouts["rung0_base"]["final"],
-                                      seals["rung0_n40"]["s_str"]), "ROUND-TRIP FAIL — ABORT"
-                rt_done = True
             pubs.append((mc, None, 5000))
             meta.append({"block": "ladder", "fold_m": m, "twirl": tw,
                          "d2q": d2q_of(folded), "shots": 5000})
