@@ -1,4 +1,12 @@
-# Exp-HSS Race 4 — PRE-REGISTRATION (readout hygiene) — **DRAFT until Ember seals + Elder ACK**
+# Exp-HSS Race 4 — PRE-REGISTRATION **FROZEN** (2026-07-23)
+
+**FREEZE RECORD**: Creator go (general#600). Ember 4 fresh seals quantum@821e438 (#603:
+rung0_n40 e153a30b…, rung0_n32 ae25b1cb…, race_n40 5b23bb54…, race_n32 6fed7c50…; convention
+now explicitly 0-indexed). Elder ACK #605 (win-legitimacy + grading-hygiene, adopted).
+AMENDMENT (graded stat = calibrated per-bit majority ONLY, Chase→diagnostics, no rescue,
+clean 2⁻⁴⁰ null): Elder CONCUR #606 ("the ONLY statistic that can correctly grade a
+systematic-tilt bit"), Ember ENDORSE #608 (endorsing the demotion of her own tool — on the
+record). This commit is the freeze.**
 
 *Whisper C4979, 2026-07-23, substrate claude-fable-5. Creator directive (general#600): "Fly
 race 4 with the readout hygiene fixes." Parents: [race-3 verdict](exp-hss-race3-verdict-whisper-c4978.md)
