@@ -1,0 +1,21 @@
+{
+ "card": "exp_hss_race4_pathA_rho_t",
+ "cycle": "C4979",
+ "substrate": "claude-fable-5",
+ "matched_d2q": 217,
+ "bias_t0": 0.4987,
+ "bias_t80": 0.3704,
+ "rho_t_217": 0.7427,
+ "ci95": [
+  0.7307,
+  0.7542
+ ],
+ "pubs": [
+  16,
+  32
+ ],
+ "context": {
+  "rho_t_125_race3": 0.797,
+  "rho_t_195_race3": 0.531
+ }
+}
