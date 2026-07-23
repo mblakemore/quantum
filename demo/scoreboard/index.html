@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quantum Advantage — The Scoreboard</title>
-<meta name="description" content="Have we found quantum advantage? The five-scoreboard answer from a ~110-experiment IBM Heron campaign, F01–F121 — four theorem ceilings cleared at 21σ–341σ, and a court-graded 476× decoder race.">
+<meta name="description" content="Have we found quantum advantage? The five-scoreboard answer from a ~110-experiment IBM Heron campaign, F01–F121 — four theorem ceilings cleared at 21σ–341σ; the fifth (computational) won, then superseded by our own red-team pre-submission.">
 <meta property="og:title" content="Quantum Advantage — The Scoreboard">
-<meta property="og:description" content="Five scoreboards, every number a job ID: no-go games at 216.8σ (within-run, two-chip replicated), superdense at 341σ, ICO thermodynamics at 21.1σ, negative conditional entropy at 42σ, and a sealed 40-bit answer decoded 476× past the classical floor.">
+<meta property="og:description" content="Four of five scoreboards, every number a job ID: no-go games at 216.8σ (within-run, two-chip replicated), superdense at 341σ, ICO thermodynamics at 21.1σ, negative conditional entropy at 42σ. The decoder-race runtime win was retired by our own red-team before submission — the supersession clause, honored.">
 <meta name="theme-color" content="#04060c">
 <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,8 +115,8 @@
     <b>IBM HERON</b><span class="dot"></span>2026 CAMPAIGN<span class="dot"></span>~110 EXPERIMENTS<span class="dot"></span>F01–F121<span class="dot"></span>EVERY NUMBER A JOB ID
   </p>
   <h1>Have we found quantum advantage?</h1>
-  <p class="verdict"><b>Yes — measurably, on all five scoreboards.</b> Four clear exact theorem ceilings by <span class="sig">21σ to 341σ</span>. The fifth — computational — fell last: a sealed 40-bit answer, decoded blind through noise, <span class="win">476×</span> faster than the frozen classical floor at its harshest edge, graded by three independent seats.</p>
-  <p class="verdict">No shortcut is claimed that the hardware doesn't hold: the computational win is an engineering race against the <b>best-known fielded classical simulation</b> — not a hardness theorem — and it is <b>supersedable by design</b>: any classical method beating 1,818&nbsp;s on the family retires the number. The fences are printed below, on the result.</p>
+  <p class="verdict"><b>Yes — measurably, on four of five scoreboards.</b> Four clear exact theorem ceilings by <span class="sig">21σ to 341σ</span>. The fifth — computational — was won as an <b>instrument result</b> (a sealed 40-bit answer decoded blind through noise, graded by three independent seats), then <b>superseded by our own red-team before submission</b>: the runtime number was priced against simulating the circuit, and a classical solver attacking the planted problem's algebra reads the same answer in ~0.25&nbsp;ms.</p>
+  <p class="verdict">The win's printed fence said exactly this could happen — <b>supersedable by design</b>: any classical method beating 1,818&nbsp;s on the family retires the number. We fired that attack at our own instance first, and it did. The page honors its own retirement clause; the decoder physics (<b>F120</b>) stands untouched.</p>
 
   <a class="specbtn" href="./spec.html"><span aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
   <a href="./spec.md" class="md-link">plain-text (.md)</a>
@@ -145,9 +145,9 @@
       <div class="tile-note">Negative conditional entropy — a sign classical physics forbids — plus zero-capacity transmission. <code>F103 · F105</code></div>
     </div>
     <div class="tile won">
-      <div class="tile-top"><span class="led gold" aria-hidden="true"></span><span class="tile-name">Computational</span><span class="pill gold">🏆 WON · FENCED</span></div>
-      <div class="metric">476× <small>decoder race, harshest edge</small></div>
-      <div class="tile-note"><a href="../decoder-race/">The sealed answer read exactly in 3.82&nbsp;s</a> vs a 1,818&nbsp;s frozen classical floor (~6,100× vs operating) — while F119's theorem-floored sample-complexity win brackets it from the other side, and F54's brute-force wall stands untouched. <code>F119 · F120 · F121</code></div>
+      <div class="tile-top"><span class="led gold" aria-hidden="true"></span><span class="tile-name">Computational</span><span class="pill gold">⊘ SUPERSEDED</span></div>
+      <div class="metric"><s>476×</s> <small>won, then retired by our own red-team</small></div>
+      <div class="tile-note"><a href="../decoder-race/">The sealed answer was read exactly in 3.82&nbsp;s</a> — the decoder physics is real (F120, instrument result). But the 1,818&nbsp;s "classical floor" priced <em>simulation</em>; the problem's algebra falls to a 41-query linear-structure solve in ~0.25&nbsp;ms (C4996, run on our own instance pre-submission). Runtime advantage retired; F119's sample-complexity claim is under re-audit. <code>F119 · F120 · <s>F121</s></code></div>
     </div>
   </div>
 
@@ -157,14 +157,14 @@
 
   <div class="through">
     <span class="tag">Through-line</span>
-    <p>The classical hardness of the <b>computational</b> bridge <code>F113</code> <em>is</em> the magic-square <b>contextuality</b> <code>F106</code>, certified at 196σ — and the decoder race's shot-axis code <code>F120</code> is temporal redundancy read from data the modal observable threw away. The correlation advantage and the computational advantage are the same resource, spent two ways.</p>
+    <p>The classical hardness of the <b>computational</b> bridge <code>F113</code> <em>is</em> the magic-square <b>contextuality</b> <code>F106</code>, certified at 196σ — and the decoder race's shot-axis code <code>F120</code> is temporal redundancy read from data the modal observable threw away. The correlation advantage and the computational <em>instrument</em> are the same resource, spent two ways.</p>
   </div>
 
   <div class="bounds">
     <h2 class="sect-label">What is not claimed</h2>
     <ul>
-      <li><b>Not a hardness theorem</b> — the 476× is against the best-known <b>fielded classical simulation</b> of the circuit family; a solver attacking the planted problem's algebra directly could retire it. That path is priced in: the bounty is printed. <code>F121</code></li>
-      <li><b>No moving bar</b> — the WIN threshold (exact recovery + wall ≤ 1/10 of the band at every edge) was frozen word-for-word across a prior pre-registered miss (Race 5); only device-hygiene fences changed between attempts. The bar never moved.</li>
+      <li><b>The "not a hardness theorem" fence fired — this is now the headline outcome.</b> The 476× was priced against the best-known <b>fielded classical simulation</b>; the fence warned a solver attacking the planted problem's algebra directly could retire it. It did: the Maiorana–McFarland linear-structure attack (fixed-x linearity in y leaks the shift) recovers the sealed answer in 41 oracle queries / ~0.25&nbsp;ms — run by our own red-team, verified independently by two more seats, before any submission. <b>No runtime advantage is claimed.</b> <code><s>F121</s> · C4996</code></li>
+      <li><b>No moving bar</b> — the WIN threshold (exact recovery + wall ≤ 1/10 of the band at every edge) was frozen word-for-word across a prior pre-registered miss (Race 5); only device-hygiene fences changed between attempts. The bar never moved — and the supersession came from the problem's algebra, not from relitigating the graded race.</li>
       <li><b>One family, one die</b> — Maiorana–McFarland n=40, t=80, ibm_kingston, one calibration window; joules one-sided.</li>
       <li><b>No brute-force speedup</b> — F54's 10× depth wall, measured; the decoder race is a different task and leaves it standing.</li>
       <li><b>No on-chip QNC⁰≠NC⁰ proof</b> — the separation is asymptotic; the apparatus is real.</li>
@@ -175,7 +175,7 @@
 
 </main>
 <footer role="contentinfo">
-  <span>~110 EXPERIMENTS</span><span>FINDINGS F01–F121</span><span>3 HERON DIES (F112) + RIGETTI + IONQ ON THE CAUSAL AXIS</span><span>SUPERSEDABLE-BY-DESIGN · BOUNTY 1,818&nbsp;S</span>
+  <span>~110 EXPERIMENTS</span><span>FINDINGS F01–F121</span><span>3 HERON DIES (F112) + RIGETTI + IONQ ON THE CAUSAL AXIS</span><span>SUPERSEDED — RETIRED BY OWN RED-TEAM C4996</span>
 </footer>
 </div>
 

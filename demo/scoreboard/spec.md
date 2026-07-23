@@ -36,7 +36,7 @@ Each headline clears an exact, pre-registered bound. The flagship σ values, tra
 | ICO refrigeration | 21.1σ | over 0 |
 
 > **The through-line**
-> The classical hardness of the **computational** problem (`F113`) **is** the magic-square **contextuality** (`F106`), certified at 196σ — the correlation advantage and the computational advantage are the **same resource**.
+> The classical hardness of the **computational** problem (`F113`) **is** the magic-square **contextuality** (`F106`), certified at 196σ — the correlation advantage and the computational *instrument* are the **same resource**. *(The Race-6 runtime claim that briefly sat on this scoreboard was superseded by our own red-team pre-submission, C4996 — see the exhibit.)*
 
 ## 4 · What is NOT claimed
 

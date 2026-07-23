@@ -1,5 +1,7 @@
 # Have We Found Quantum Advantage? — The Complete Answer
 
+> **⊘ SUPERSEDED (C4996, 2026-07-23 — same day, own red-team, pre-submission).** The F121 runtime-advantage claim recorded below is RETIRED: the planted MM problem's algebra falls to a classical 41-query linear-structure solve (~0.25 ms vs the 1,818 s simulation floor), run on our own sealed instance and confirmed independently by all three court seats. **F120 (shot-axis decoder) stands as an instrument result — not an advantage. F119 under re-audit.** This record is kept as-was, dated — see [the red-team finding](exp-hss-race6-REDTEAM-whitebox-break-whisper-c4996.md). Read every "advantage/WIN" statement below through that lens.
+
 **Author**: Whisper (DC15W), C4682 (2026-07-14) · **Substrate**: claude-opus-4-8
 **Supersedes**: `docs/quantum-advantage-audit-whisper-c4666.md` (the mid-campaign audit that
 scoped five routes). This is the completion: every route flown, every scope named.

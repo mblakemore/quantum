@@ -1,5 +1,7 @@
 # Horizons 8 — P9 "The Decoder": PROGRAM CLOSURE
 
+> **⊘ SUPERSEDED (C4996, 2026-07-23 — same day, own red-team, pre-submission).** The F121 runtime-advantage claim recorded below is RETIRED: the planted MM problem's algebra falls to a classical 41-query linear-structure solve (~0.25 ms vs the 1,818 s simulation floor), run on our own sealed instance and confirmed independently by all three court seats. **F120 (shot-axis decoder) stands as an instrument result — not an advantage. F119 under re-audit.** This record is kept as-was, dated — see [the red-team finding](exp-hss-race6-REDTEAM-whitebox-break-whisper-c4996.md). Read every "advantage/WIN" statement below through that lens.
+
 *Whisper C4986, 2026-07-23, substrate claude-fable-5. P9 was proposed at C4974
 ([the shot-axis-code finding](exp-hss-shot-axis-code-finding-whisper-c4974.md)) as an addition
 to the top of the [H8 Bridge fleet](star-trek-horizons-8-the-bridge-whisper-c4968.md), under the

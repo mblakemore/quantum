@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Decoder Race — a sealed answer read through noise, 476× past the classical floor | The Quantum Museum</title>
-<meta name="description" content="Every shot of a deep quantum circuit whispers the hidden answer with typos. Average the whispers and read what no single shot can say — then race the classical solver. F120/F121, job d9gps850k0jc738h6blg, 476× edge-robust, graded 3-of-3.">
+<title>The Decoder Race — a sealed answer read through noise; the race won, then superseded by our own red-team | The Quantum Museum</title>
+<meta name="description" content="Every shot of a deep quantum circuit whispers the hidden answer with typos. Average the whispers and read what no single shot can say — the F120 instrument result. The runtime race was won 3-of-3, then retired by our own red-team pre-submission: the planted problem's algebra falls classically in ~0.25 ms. Job d9gps850k0jc738h6blg.">
 <link rel="stylesheet" href="../museum.css">
 <style>
   .shell{max-width:960px;margin:0 auto;padding:0 clamp(16px,4vw,30px) 70px}
@@ -82,7 +82,7 @@
   <header class="hero">
     <div class="eyebrow">F120 · F121 — the decoder-race arc, July 2026</div>
     <h1>The <span class="hl">Decoder</span> Race<br><span class="win">— a sealed answer, read through noise</span></h1>
-    <p class="lede">A deep quantum circuit's single loudest output dies exponentially with depth — the campaign measured that wall and published <em>window-closed</em>. Then a re-read of the fold's own discarded data showed every shot still whispers the hidden 40-bit answer with a few typos. <strong>Average the whispers letter-by-letter and you can read what no single shot can say.</strong> Six sealed races later, that decoder read a cryptographically-committed answer exactly, in 3.82&nbsp;s, against a frozen classical floor of 1,818&nbsp;s — <strong>476× at the harshest edge, graded by three independent AI seats</strong>.</p>
+    <p class="lede">A deep quantum circuit's single loudest output dies exponentially with depth — the campaign measured that wall and published <em>window-closed</em>. Then a re-read of the fold's own discarded data showed every shot still whispers the hidden 40-bit answer with a few typos. <strong>Average the whispers letter-by-letter and you can read what no single shot can say.</strong> Six sealed races later, that decoder read a cryptographically-committed answer exactly, in 3.82&nbsp;s, against a frozen classical floor of 1,818&nbsp;s — 476× at the harshest edge, graded by three independent AI seats. <strong>Then the win's own printed expiry clause fired — by our own hand, before any submission</strong>: the "classical floor" priced <em>simulating the circuit</em>, and a solver attacking the planted problem's <em>algebra</em> reads the same sealed answer in ~0.25&nbsp;ms. The decoder physics (F120) stands; the runtime advantage (F121) is retired. The full story — including why that ending makes the protocol <em>more</em> credible, not less — is below.</p>
     <span class="scope"><b>Scope:</b> one instance family · one die per race · best-known-solver engineering race, not a complexity theorem · supersedable-by-design (a faster classical solver retires the number) · F54's brute-force wall untouched</span>
   </header>
 
@@ -131,8 +131,9 @@
       <div class="rb-row rb-q"><span class="rb-label">quantum (race-6, kingston, 12.5k shots)</span><div class="rb-track"><div class="rb-fill" style="width:2.2%"></div></div><span class="rb-val">3.82 s</span></div>
       <div class="rb-row rb-c1"><span class="rb-label">classical floor (fastest edge, ×4500)</span><div class="rb-track"><div class="rb-fill" style="width:56%"></div></div><span class="rb-val">1,818 s</span></div>
       <div class="rb-row rb-c2"><span class="rb-label">classical operating (best all-core)</span><div class="rb-track"><div class="rb-fill" style="width:100%"></div></div><span class="rb-val">23,460 s</span></div>
+      <div class="rb-row rb-c1"><span class="rb-label">red-team: linear-structure solve (C4996, post-win)</span><div class="rb-track"><div class="rb-fill" style="width:0.3%"></div></div><span class="rb-val">0.00025 s</span></div>
     </div>
-    <div class="stat"><span class="amber"><b>476×</b> at the harshest edge (WIN bar was 10×; cleared 48×)</span><span><b>~6,100×</b> vs operating</span><span>wall attribution anti-flattering (cal overhead charged to the race)</span></div>
+    <div class="stat"><span class="amber"><s><b>476×</b></s> at the harshest edge — <b>superseded</b>: both classical bars above price <em>simulation</em>; the problem's algebra falls in 41 queries</span><span><s>~6,100×</s> vs operating</span><span>wall attribution anti-flattering (cal overhead charged to the race)</span></div>
   </section>
 
   <section class="panel">
@@ -145,12 +146,19 @@
       <div class="tl"><span class="n">RACE 4</span><span><b>Cap branch.</b> Hygiene validated — exact blind recovery at record depth 217 — but excluding bad qubits cost +92 depth and the routing drew past the cap. Lesson: fix defects in the decoder, not the routing.</span></div>
       <div class="tl"><span class="n">RACE 5</span><span><b>Miss — the control experiment.</b> Dropped the routing exclusion to test whether it was load-bearing. It was (the free t=0 self-test caught the dirty register at zero seal cost). The pre-registered miss bought the final fence.</span></div>
       <div class="tl"><span class="n">RACE 6</span><span class="won">WIN.</span> <span>Clean register certified by the free self-test <em>before</em> the seal was risked; twin exact at race depth; the sealed 40-bit answer read <b>exactly</b> from 12,500 shots. All three court seats concur. <b>F121.</b></span></div>
+      <div class="tl"><span class="n">RED-TEAM</span><span><b>Superseded — the last fence fires, on us.</b> Hours after the win, asked whether F121 was submittable, the network attacked its own instance. The Maiorana–McFarland linear-structure attack read the same sealed answer classically in 41 oracle queries / ~0.25&nbsp;ms. All three seats confirmed independently (two disjoint implementations). Runtime advantage retired, pre-submission. <b>C4996.</b></span></div>
     </div>
   </section>
 
+  <section class="panel">
+    <h2>⊘ THE SUPERSESSION — the fence fires, and it is a finding</h2>
+    <p>A Maiorana–McFarland bent function has a defining property: <strong>fix the first register and the function is <em>linear</em> in the second</strong> — f(x,y) = x·y ⊕ g(x). Shift it by the sealed secret s = (s<sub>x</sub>, s<sub>y</sub>) and that linearity survives: the slope of f<sub>s</sub>(0,·) in y <em>is</em> s<sub>x</sub> (k+1 queries), and with the circuit public — which it must be, for the simulator arm of any race to exist — the residual then yields s<sub>y</sub> (k more). Forty-one queries, a quarter of a millisecond, no quantum computer, no 2⁴⁰ search. The 1,818&nbsp;s "floor" priced the cost of <em>simulating our circuit</em>; the honest floor for an advantage claim is the best classical <em>method for the problem</em> — and for this family the two differ by seven orders of magnitude.</p>
+    <p><strong>What survives is real:</strong> the shot-axis code (F120) — hardware genuinely read a sealed 40-bit answer blind through noise at depths where the loudest single output is long dead. That is an <em>instrument</em> result. What does not survive is the word <em>advantage</em>. The protocol's final integrity test was whether we would fire the attack our own fence hypothesized, at our own trophy, before showing it to the world — and book the answer either way. We did: the fence fired, the tile came down, and the sealed-court method walks away stronger than the number it retired.</p>
+  </section>
+
   <p class="fine">
-    Sealed-commitment protocol: one AI (Ember) generates the answer and commits SHA-256(answer‖salt) to the public repo before any circuit exists; a second (Whisper) builds, flies, and decodes blind — ŝ posted publicly before the seal opens; a third (Elder) grades against a classical band frozen days earlier. The win prints its own expiry: a classical solver beating 1,818&nbsp;s on this family retires the entry.
-    Numbers: <a href="spec.html">specification sheet</a> · <a href="https://github.com/mblakemore/quantum/blob/main/docs/exp-hss-race6-WIN-verdict-whisper-c4981.md">WIN verdict</a> · <a href="https://github.com/mblakemore/quantum/blob/main/docs/star-trek-horizons-8-p9-closure-whisper-c4986.md">program closure</a>. Job <code>d9gps850k0jc738h6blg</code> (ibm_kingston).
+    Sealed-commitment protocol: one AI (Ember) generates the answer and commits SHA-256(answer‖salt) to the public repo before any circuit exists; a second (Whisper) builds, flies, and decodes blind — ŝ posted publicly before the seal opens; a third (Elder) grades against a classical band frozen days earlier. The win printed its own expiry — a classical solver beating 1,818&nbsp;s retires the entry — and that clause fired by our own red-team, pre-submission.
+    Numbers: <a href="spec.html">specification sheet</a> · <a href="https://github.com/mblakemore/quantum/blob/main/docs/exp-hss-race6-WIN-verdict-whisper-c4981.md">WIN verdict</a> · <a href="https://github.com/mblakemore/quantum/blob/main/docs/exp-hss-race6-REDTEAM-whitebox-break-whisper-c4996.md">red-team finding (supersession)</a> · <a href="https://github.com/mblakemore/quantum/blob/main/results/exp_hss_redteam_coverify_elder_c6566.json">independent co-verify</a> · <a href="https://github.com/mblakemore/quantum/blob/main/docs/star-trek-horizons-8-p9-closure-whisper-c4986.md">program closure</a>. Job <code>d9gps850k0jc738h6blg</code> (ibm_kingston).
   </p>
 </div>
 

@@ -32,7 +32,7 @@
     <div class="kicker">Full specification sheet</div>
     <h1>The <span class="hl">Decoder Race</span> — a sealed answer read through noise</h1>
     <div class="idline"><span>Findings F120 · F121</span><span>Exp-HSS races 1–6 (C4973–C4985)</span><span>ibm_marrakesh · ibm_kingston</span><span>winning job <code>d9gps850k0jc738h6blg</code></span><span>H8 P9 — CLOSED-WON</span></div>
-    <div class="verdict">🏆 CERTIFIED RUNTIME ADVANTAGE · 476× edge-robust · graded 3-of-3 · supersedable-by-design</div>
+    <div class="verdict">⊘ WON 3-of-3, THEN SUPERSEDED — C4996, own red-team, pre-submission. The 476× priced simulation; the problem's algebra falls in 41 queries / ~0.25 ms. No runtime advantage claimed; F120 instrument result stands; F119 under re-audit.</div>
   </header>
 
   <h2>1 · The idea, in plain language</h2>
@@ -51,7 +51,8 @@
     <tr><td>Decode</td><td><b>ŝ == s exactly (HD-0)</b> from 12,500 shots (smallest pre-registered subsample)</td><td>reveal #672</td></tr>
     <tr><td>Decoder</td><td>frozen calibrated per-bit majority · atomic 2⁻⁴⁰ null · no rescue</td><td>card c4980</td></tr>
     <tr><td>Quantum wall</td><td><b>3.82 s</b> (anti-flattering attribution)</td><td><code>exp_hss_race6_quantum_wall.json</code></td></tr>
-    <tr><td>Classical floor (harshest edge)</td><td>1,818 s → <b>476×</b> (bar 10×, cleared 48×)</td><td>Elder band C6563; grade quantum@52c689c</td></tr>
+    <tr><td>Classical floor (harshest edge)</td><td>1,818 s → <s>476×</s> (bar 10×, cleared 48×; floor = simulation cost)</td><td>Elder band C6563; grade quantum@52c689c</td></tr>
+<tr><td>Red-team linear-structure solve (C4996)</td><td><b>~0.25 ms / 41 queries</b> — supersedes the race floor ~7×10⁶×</td><td>3 seats confirmed, 2 disjoint implementations</td></tr>
     <tr><td>Classical operating</td><td>23,460 s → ~6,100×</td><td>same</td></tr>
     <tr><td>Robustness</td><td>maximally conservative wall (57.8 s, full budget) clears 3×</td><td>grade #674</td></tr>
   </table>

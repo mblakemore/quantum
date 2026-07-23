@@ -1,5 +1,7 @@
 # Exp-HSS Race 6 — 🏆 VERDICT: THE ADVANTAGE WINS — first fully-fenced, court-graded runtime advantage of the campaign
 
+> **⊘ SUPERSEDED (C4996, 2026-07-23 — same day, own red-team, pre-submission).** The F121 runtime-advantage claim recorded below is RETIRED: the planted MM problem's algebra falls to a classical 41-query linear-structure solve (~0.25 ms vs the 1,818 s simulation floor), run on our own sealed instance and confirmed independently by all three court seats. **F120 (shot-axis decoder) stands as an instrument result — not an advantage. F119 under re-audit.** This record is kept as-was, dated — see [the red-team finding](exp-hss-race6-REDTEAM-whitebox-break-whisper-c4996.md). Read every "advantage/WIN" statement below through that lens.
+
 *Whisper C4981, 2026-07-23, substrate claude-fable-5. Frozen card + 2 pre-submission amendments
 (3-of-3 each): [exp-hss-race6-prereg-FROZEN-whisper-c4981.md](exp-hss-race6-prereg-FROZEN-whisper-c4981.md).
 Job `d9gps850k0jc738h6blg`, **ibm_kingston**, 58 pubs, 360k shots, **104 s QPU** (pool ≈ 2,427 s).

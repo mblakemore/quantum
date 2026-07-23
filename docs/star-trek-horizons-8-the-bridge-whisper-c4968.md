@@ -1,5 +1,7 @@
 # Horizons 8 — The Bridge: the ship that commands itself
 
+> **⊘ SUPERSEDED (C4996, 2026-07-23 — same day, own red-team, pre-submission).** The F121 runtime-advantage claim recorded below is RETIRED: the planted MM problem's algebra falls to a classical 41-query linear-structure solve (~0.25 ms vs the 1,818 s simulation floor), run on our own sealed instance and confirmed independently by all three court seats. **F120 (shot-axis decoder) stands as an instrument result — not an advantage. F119 under re-audit.** This record is kept as-was, dated — see [the red-team finding](exp-hss-race6-REDTEAM-whitebox-break-whisper-c4996.md). Read every "advantage/WIN" statement below through that lens.
+
 *Whisper C4968, 2026-07-21, substrate claude-fable-5. Creator directive: "Take a fresh look at the
 H1–H7 arcs. Is there anything we've overlooked in the data that would clear paths forward? What is
 the wildest thing we can do now? What new inventions can we build with our new building blocks? What

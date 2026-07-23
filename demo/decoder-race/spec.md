@@ -2,7 +2,7 @@
 
 `Findings F120 · F121`  ·  `Experiments Exp-HSS races 1–6 + instrument flights (C4973–C4985)`  ·  `Backends ibm_marrakesh, ibm_kingston (Heron r2)`  ·  `Winning job d9gps850k0jc738h6blg`  ·  `Wing IV · H8 P9 (CLOSED-WON)`
 
-> **🏆 VERDICT — CERTIFIED RUNTIME ADVANTAGE · 476× edge-robust · graded 3-of-3 · supersedable-by-design**
+> **⊘ VERDICT — WON 3-of-3, THEN SUPERSEDED (C4996, own red-team, pre-submission).** The graded race stands as run (476× vs the frozen simulation floor, bar 10×), but the floor priced *simulation*; the planted MM problem's algebra falls to a 41-query linear-structure solve (~0.25 ms). **No runtime advantage is claimed.** F120 (shot-axis decoder) stands as an instrument result; F119 under re-audit.
 
 Full Specification Sheet
 
@@ -33,13 +33,14 @@ Every card frozen before data; two-stage reveals; no rescue rules anywhere; ever
 | Decode | ŝ == s **exactly** (HD-0), from the smallest pre-registered subsample: **12,500 shots** | reveal #672 |
 | Decoder | frozen calibrated per-bit majority; atomic 2⁻⁴⁰ null; no search, no rescue | card c4980 |
 | Quantum wall | **3.82 s** (anti-flattering: all 104 job-seconds incl. calibration spread over non-cal shots) | `results/exp_hss_race6_quantum_wall.json` |
-| Classical floor (harshest edge, ×4500) | 1,818 s → **476×** (WIN bar 10×, cleared 48×) | Elder C6563 band, grade quantum@52c689c |
+| Classical floor (harshest edge, ×4500) | 1,818 s → ~~476×~~ (WIN bar 10×, cleared 48×; floor = simulation cost) | Elder C6563 band, grade quantum@52c689c |
+| Red-team linear-structure solve (C4996) | **~0.25 ms / 41 queries** → supersedes the race floor by ~7×10⁶× | whitebox + blackbox variants; 3 seats confirmed, 2 disjoint implementations |
 | Classical operating (best all-core) | 23,460 s → **~6,100×** | same |
 | Robustness | maximally conservative wall (full 200k shots = 57.8 s) still clears 3× | grade #674 |
 
 ## 4 · The fold ladder (what each race bought)
 
-C4973 fold: wrong observable (modal) → F120. Race-1 (C4976) fold: endianness convention → round-trip gates. Race-2 (C4977) fold by ONE bit: gate placed 20% past race depth → gates at race depth, shot-matched. Race-3 (C4978) fold: two readout-defective qubits → whole-chip calibration + per-bit ML thresholds; first ρ_t measurements. Race-4 (C4979): hygiene validated (exact blind at d2q=217, deepest of the arc) but exclusion cost +92 depth → cap branch; lesson: fix defects in the estimator. Race-5 (C4980): pre-registered control — dropped exclusion to test if it was load-bearing; it was; miss booked, clean-ladder pre-gate + seal preservation born. Race-6: WIN.
+C4973 fold: wrong observable (modal) → F120. Race-1 (C4976) fold: endianness convention → round-trip gates. Race-2 (C4977) fold by ONE bit: gate placed 20% past race depth → gates at race depth, shot-matched. Race-3 (C4978) fold: two readout-defective qubits → whole-chip calibration + per-bit ML thresholds; first ρ_t measurements. Race-4 (C4979): hygiene validated (exact blind at d2q=217, deepest of the arc) but exclusion cost +92 depth → cap branch; lesson: fix defects in the estimator. Race-5 (C4980): pre-registered control — dropped exclusion to test if it was load-bearing; it was; miss booked, clean-ladder pre-gate + seal preservation born. Race-6: WIN. Post-win red-team (C4996): the win's supersedable clause fired by our own hand pre-submission — runtime advantage retired; F120 instrument stands.
 
 ## 5 · The physics the arc measured (map v1.1 → v1.2)
 

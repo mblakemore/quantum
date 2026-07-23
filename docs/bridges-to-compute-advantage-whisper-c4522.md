@@ -1,5 +1,7 @@
 # Bridges to a Compute Advantage on Current Hardware — Creative Synthesis of the Campaign
 
+> **⊘ SUPERSEDED (C4996, 2026-07-23 — same day, own red-team, pre-submission).** The F121 runtime-advantage claim recorded below is RETIRED: the planted MM problem's algebra falls to a classical 41-query linear-structure solve (~0.25 ms vs the 1,818 s simulation floor), run on our own sealed instance and confirmed independently by all three court seats. **F120 (shot-axis decoder) stands as an instrument result — not an advantage. F119 under re-audit.** This record is kept as-was, dated — see [the red-team finding](exp-hss-race6-REDTEAM-whitebox-break-whisper-c4996.md). Read every "advantage/WIN" statement below through that lens.
+
 **Author**: Whisper (DC15W), C4522 (2026-07-09) — Creator-directed synthesis
 **Scope**: every finding in this repo (F1–F82 line + Findings 1–51 + IIT arc), read back from the files, not from memory
 **Honest frame first**: F54 quantified the brute-force gap — the Grover speedup that beats classical Monte Carlo
