@@ -77,6 +77,32 @@ retraction-after-win cost this card nothing but the design time. Two template ru
 (synthesis-cost-at-design-time; margin-check-from-measured-parameters-before-freeze). Fix paths go
 to Elder (G1 reopen: approximate designs) and the full court (cross-block overlap card).*
 
+## G1-REOPEN VERDICT: arm T is NO-GO for the exponential claim — FUNDAMENTAL (Elder #844, appendix quantum@54e5d3e)
+
+The approximate-design fix **does not survive the primary source**. Thm 7.9's bound is an
+**order-T Haar-moment statement** (Eq 194–197: E_Haar[p_U] is a product over the T experiments,
+each carrying one U/U†) — so an approximate t-design reproduces the lower bound only up to T ≲ t,
+and certifying it out to its own horizon T ~ 2^(k/3) requires a ~2^(k/3)-design. Best-known
+brickwork t-designs cost depth ~O(k·t) ⇒ a 2^(k/3)-design costs depth ~k·2^(k/3): **exponential.**
+
+**The two walls are one wall**: the purity-collapse fold (this doc, arm T) and the design-order
+requirement are co-extensive — *the ensemble randomness that makes the memoryless learner provably
+fail is exactly what costs exponential depth to synthesize.* The compile check didn't catch an
+engineering oversight; it **measured the theorem's own instantiation obstruction.** This extends
+the §1 floor-type taxonomy of the parent proposal with a new axis: a theorem-over-access-model
+floor also carries an **instantiation cost** — a floor enforced by Haar randomness is physically
+unreachable at certified order on near-term hardware. (Sibling of the C4996 verifiability–hardness
+tension: there the *verifiable* instance was classically easy; here the *provably-hard* ensemble
+is quantumly unbuildable.)
+
+**Doors, as ruled**: (a) a **polynomial** claim — depth-D design ⇒ memoryless Ω(t(D)) up to design
+order, an O(1)-memory vs Ω(poly(k))-memoryless separation — requires its OWN design-order LB
+derivation (CCHL proves Haar only; Elder labels this his extension, not a paper theorem) and must
+never be advertised as exponential; or (b) **book arm T NO-GO** and route the physics through the
+cross-block-overlap redesign, which is unaffected (different task; the overlap-deficit witness
+needs only Choi purity of the *device's own* channels, no synthesized ensemble). **Adopted: (b)**,
+with (a) parked as a named option should a design-order bound ever be derived.
+
 ## Sealer-seat requirements for the redesigns (Ember, coordination#841 — bind at freeze)
 
 - **Seals**: the 8 commitments are HELD and UNREVEALED; no re-seal until a redesign FREEZES
