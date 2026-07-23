@@ -1,0 +1,119 @@
+{
+ "card": "exp_hss_race2_decode",
+ "cycle": "C4977",
+ "substrate": "claude-fable-5",
+ "job_id": "d9go6ijsbqfc73eovb60",
+ "usage": {
+  "quantum_seconds": 132,
+  "seconds": 132,
+  "status": "complete"
+ },
+ "stage": "gate",
+ "decoder": {
+  "k": 12,
+  "rho": 0.5,
+  "soft_iters": 8,
+  "report_order": "s_str display order (reverse of marginal)"
+ },
+ "gate_plan": {
+  "d2q_race": 205,
+  "gate_below": {
+   "d2q": 190,
+   "seed_off": 6,
+   "fold_m": 2
+  },
+  "gate_above": {
+   "d2q": 245,
+   "seed_off": 17,
+   "fold_m": 3
+  }
+ },
+ "rows": [
+  {
+   "block": "ladder_m0",
+   "d2q": 36,
+   "s_hat": "1101011110100110111000010010001111110010",
+   "shots": 20000,
+   "min_reliab": 0.15739999999999998,
+   "med_reliab": 0.430875
+  },
+  {
+   "block": "ladder_m1",
+   "d2q": 108,
+   "s_hat": "1101011110100110111000010010001111110010",
+   "shots": 20000,
+   "min_reliab": 0.006350000000000022,
+   "med_reliab": 0.3639
+  },
+  {
+   "block": "gate_below",
+   "d2q": 190,
+   "s_hat": "1101011110100110111000010010001111110010",
+   "shots": 100000,
+   "min_reliab": 0.0018099999999999783,
+   "med_reliab": 0.318545
+  },
+  {
+   "block": "gate_below_sub2",
+   "d2q": 190,
+   "s_hat": "1101011110100110111000010010001111110010",
+   "shots": 12500,
+   "min_reliab": 0.015599999999999947,
+   "med_reliab": 0.3228,
+   "informational": true
+  },
+  {
+   "block": "gate_below_sub4",
+   "d2q": 190,
+   "s_hat": "1101011110100110111000010011001111110010",
+   "shots": 25000,
+   "min_reliab": 0.03424000000000005,
+   "med_reliab": 0.31823999999999997,
+   "informational": true
+  },
+  {
+   "block": "gate_below_sub8",
+   "d2q": 190,
+   "s_hat": "1101011110100110111000010010001111110010",
+   "shots": 50000,
+   "min_reliab": 0.009660000000000002,
+   "med_reliab": 0.31796,
+   "informational": true
+  },
+  {
+   "block": "gate_above",
+   "d2q": 245,
+   "s_hat": "1101011110100110111000010011001111110010",
+   "shots": 100000,
+   "min_reliab": 0.0020000000000000018,
+   "med_reliab": 0.23159000000000002
+  },
+  {
+   "block": "gate_above_sub2",
+   "d2q": 245,
+   "s_hat": "1101011110100110111100010010000111110010",
+   "shots": 12500,
+   "min_reliab": 0.013839999999999963,
+   "med_reliab": 0.2332,
+   "informational": true
+  },
+  {
+   "block": "gate_above_sub4",
+   "d2q": 245,
+   "s_hat": "1101011110100110111100010010000111110010",
+   "shots": 25000,
+   "min_reliab": 0.01636000000000004,
+   "med_reliab": 0.23674,
+   "informational": true
+  },
+  {
+   "block": "gate_above_sub8",
+   "d2q": 245,
+   "s_hat": "1101011110100110111100010010000111110010",
+   "shots": 50000,
+   "min_reliab": 0.0028399999999999537,
+   "med_reliab": 0.24107,
+   "informational": true
+  }
+ ]
+}
