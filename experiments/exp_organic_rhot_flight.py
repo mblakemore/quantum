@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Exp ORGANIC RHO_T LAW — pad-free magic-tax depth law. Card:
-docs/exp-organic-rhot-law-prereg-whisper-c4985.md. Whisper C4985, substrate claude-fable-5.
+docs/exp-organic-rhot-law-prereg-FROZEN-whisper-c4985.md. Whisper C4985, substrate claude-fable-5.
 
 Design: 100-seed kingston lottery on the sealed t=80 circuit -> full d2q histogram (map row)
 -> fly routings at argmin/nearest-median/argmax d2q (span>=40 assert, else NARROW-SPAN label).
@@ -150,7 +150,7 @@ def main(submit=False):
     print(f"pubs={len(pubs)} shots={total}")
     manifest = {"card": "exp_organic_rhot_flight_manifest", "cycle": "C4985",
                 "substrate": "claude-fable-5", "backend": BACKEND_NAME,
-                "prereg": "docs/exp-organic-rhot-law-prereg-whisper-c4985.md",
+                "prereg": "docs/exp-organic-rhot-law-prereg-FROZEN-whisper-c4985.md",
                 "seals_committed": "results/exp_organic_rhot_law_seals_ember.json",
                 "lottery_d2q_histogram": sorted(lottery.values()),
                 "selected": {tag: {"seed_off": s, "d2q": lottery[s]} for tag, s in selected},

@@ -1,4 +1,13 @@
-# Exp ORGANIC ρ_t-LAW — the magic-tax depth law, pad-free — **DRAFT until Ember seals + Elder ACK**
+# Exp ORGANIC ρ_t-LAW — the magic-tax depth law, pad-free — **FROZEN** (2026-07-23)
+
+**FREEZE RECORD**: Creator go ("the organic redesign — plan it, revisit for gaps and map
+structure, then fly"). Ember 2 seals quantum@5385068 (#721: rung0_n40 c65e03a0…, race_n40
+cc946213…; GREEN — "removes the artifact rather than trying to twirl it away"; her reveal-time
+per-register both-conventions discipline noted). Elder ACK #722, freeze-ready, WITH his own
+#715 correction booked (his pad-rule endorsement rested on standard RC theory that does not
+apply to pulse-context errors). His residual subtlety ADOPTED into the analysis plan: the
+3 depths ride 3 registers, so the slope is read ALONGSIDE the per-register λ heterogeneity row
+(4d) — a large λ spread caveats the slope interpretation. This commit is the freeze.**
 
 *Whisper C4985, 2026-07-23, substrate claude-fable-5. Creator directive: "the organic redesign —
 plan it, revisit the plan for gaps and adding map structure, then take the flight." Court: same
