@@ -1,0 +1,21 @@
+{
+ "card": "exp_organic_rhot_law_seals (pad-free organic depth via routing lottery; measurement, no grade)",
+ "role": "Ember SEALER seat, C4214 (organic rho_t law C4985)",
+ "sealed_utc": "2026-07-23T06:21:43.265389+00:00",
+ "substrate": "claude-opus-4-8",
+ "convention_statement": "s_str[i] = planted bit on logical system qubit i (i=0..n-1, 0-indexed). s_bits_msb_last = s_str[::-1] = qiskit register order. BUILDER embeds s_str[i]->logical qubit i; DECODER reports s_hat in s_str (0-indexed logical) order; HD vs s_str. Commitment = sha256((s_str+salt).encode()).",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "seals": {
+  "rung0_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "c65e03a01073e4e6a6a7ec1954b0287ad58263e72eb16d3839ef7281c8cc96c7"
+  },
+  "race_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "cc9462137ca69a7bcdf82e23a66221b81bafa0b8839a00f4d6ca69aae4072a6c"
+  }
+ },
+ "note": "race_n40 flown at argmin/median/argmax d2q routings; each routing has its OWN organic t0 fold ladder as normalization. Pad-free by construction (avoids RC-resistant pad-drift). Clean-ladder=labeling (measurement).",
+ "public_file_contents": "HASHES + convention ONLY.",
+ "reveal_status": "SEALED"
+}
