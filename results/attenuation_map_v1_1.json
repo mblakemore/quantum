@@ -620,5 +620,14 @@
    "steep depth-growing 0.845->0.745 (Elder proxy, all-bits)"
   ],
   "refined_two_point_reading": "constant PER-SLOT excess fits both points: ln(rho)/d = -0.00133 (167) vs -0.00130 (217) => lambda_excess(t=80) ~ 0.0013/slot (~45% on top of lambda_bit). Two points, cross-die \u2014 observation, not law; clean multi-depth single-die curve remains the open question."
+ },
+ "pad_dose_row_c4983": {
+  "finding": "identity-padding (L.L own-layer pairs) carries ~0.7x the per-slot dose of organic slots",
+  "organic_t0_lambda_kingston": 0.00384,
+  "padded_t0_lambda_kingston": 0.00271,
+  "cross_check": "organic d198 bias 0.468 < padded d220 bias 0.519 (same register, same job)",
+  "usage": "padded depth is NOT organic depth: convert pad slots at ~0.7x when pricing; pads are a calibrated lighter-dose depth knob",
+  "caveat_on_pricing_rule": "the c4982b t80 pricing exp(-0.0013 d) derives from organic-routed flights and applies to ORGANIC circuits",
+  "source": "exp-rhot-curve-verdict-whisper-c4983.md (frozen-rule verdict: new-structure = pad artifact; magic-tax depth law OPEN)"
  }
 }

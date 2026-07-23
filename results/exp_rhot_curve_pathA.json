@@ -1,0 +1,75 @@
+{
+ "card": "exp_rhot_curve_pathA",
+ "cycle": "C4983",
+ "substrate": "claude-fable-5",
+ "label": "NOT-CLEAN per rule-1 letter; cause=shots-limited (Ember #701: same qubit exact at d66) \u2014 register clean, arms trustworthy",
+ "flag_excluded_positions": [
+  30
+ ],
+ "points": [
+  {
+   "d2q": 160,
+   "rho_signed": 0.7152,
+   "rho_unsigned": 0.7172,
+   "ci95": [
+    0.7034,
+    0.7267
+   ],
+   "estimators_agree_0.03": true,
+   "bias_t0": 0.5949,
+   "bias_t80": 0.4255,
+   "pubs": [
+    8,
+    16
+   ]
+  },
+  {
+   "d2q": 220,
+   "rho_signed": 0.7265,
+   "rho_unsigned": 0.7314,
+   "ci95": [
+    0.7114,
+    0.7428
+   ],
+   "estimators_agree_0.03": true,
+   "bias_t0": 0.527,
+   "bias_t80": 0.3828,
+   "pubs": [
+    8,
+    16
+   ]
+  },
+  {
+   "d2q": 280,
+   "rho_signed": 0.8042,
+   "rho_unsigned": 0.7596,
+   "ci95": [
+    0.7762,
+    0.835
+   ],
+   "estimators_agree_0.03": false,
+   "bias_t0": 0.4421,
+   "bias_t80": 0.3555,
+   "pubs": [
+    8,
+    16
+   ]
+  }
+ ],
+ "slope_fit": {
+  "slope_median": 0.000994098271454991,
+  "ci95": [
+   0.0006573613840436863,
+   0.0013036022104604165
+  ],
+  "lambda_x_implied": -0.00099
+ },
+ "mean_rho": 0.7486,
+ "frozen_rule_verdict": "new_structure",
+ "H_perslot_prediction": {
+  "160": 0.812,
+  "220": 0.751,
+  "280": 0.695
+ },
+ "H_Tlocal_prediction": "0.75-0.80 const"
+}
