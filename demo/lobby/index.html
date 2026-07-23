@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Quantum Museum — Lobby</title>
+<meta name="description" content="Walk the Quantum Museum: 45 interactive exhibits across 8 wings, every number measured on IBM Heron silicon. Left nav, no page reloads.">
+<meta name="theme-color" content="#04060c">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --edge:#1a2234; --edge-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --navw:292px;
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  html,body{margin:0;height:100%}
+  body{background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+
+  .app{display:grid;grid-template-columns:var(--navw) 1fr;height:100vh}
+
+  /* ── left nav: the sitemap ── */
+  .side{background:linear-gradient(180deg,#070b14 0%,var(--bg) 30%);border-right:1px solid var(--edge);
+    display:flex;flex-direction:column;min-height:0}
+  .brand{display:flex;align-items:center;gap:12px;padding:18px 18px 14px;border-bottom:1px solid var(--edge);flex-shrink:0}
+  .brand a{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
+  .orb{width:30px;height:30px;flex-shrink:0}
+  .brand .t{font-family:var(--mich);font-size:12.5px;letter-spacing:.22em;color:var(--ink)}
+  .brand .t span{color:var(--cyan)}
+  nav.map{overflow-y:auto;flex:1;padding:10px 0 26px;scrollbar-width:thin;scrollbar-color:var(--edge-2) transparent}
+  nav.map::-webkit-scrollbar{width:9px} nav.map::-webkit-scrollbar-thumb{background:var(--edge-2);border-radius:99px}
+  .navlink{display:flex;align-items:center;gap:10px;padding:7px 18px;color:var(--ink-3);text-decoration:none;
+    font-size:13.5px;border-left:2px solid transparent}
+  .navlink:hover{color:var(--cyan-soft);background:rgba(98,230,255,.045)}
+  .navlink[aria-current="page"]{color:var(--ink);border-left-color:var(--cyan);background:rgba(98,230,255,.07)}
+  .navlink[aria-current="page"]::after{content:"●";margin-left:auto;font-size:8px;color:var(--cyan)}
+  .navlink:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
+  .lobbylink{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px}
+  .wing{margin-top:16px}
+  .winghead{display:flex;align-items:baseline;gap:9px;padding:6px 18px 5px;font-family:var(--mich);font-size:9.5px;
+    letter-spacing:.18em;color:var(--ink-4);text-transform:uppercase}
+  .winghead .n{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.06em}
+  .w-0 .n{color:var(--cyan)} .w-1 .n{color:var(--violet)} .w-2 .n{color:var(--amber)} .w-3 .n{color:var(--pink)}
+  .sidefoot{border-top:1px solid var(--edge);padding:12px 0 14px;flex-shrink:0}
+  .sidefoot .navlink{font-size:12.5px}
+  .ext::after{content:"↗";margin-left:auto;color:var(--ink-4);font-size:11px}
+
+  /* ── content ── */
+  .stage{display:flex;flex-direction:column;min-width:0;min-height:0}
+  .stagebar{display:flex;align-items:center;gap:14px;padding:10px 20px;border-bottom:1px solid var(--edge);
+    font-family:var(--mono);font-size:12px;color:var(--ink-4);flex-shrink:0;min-height:44px}
+  .stagebar .crumb b{color:var(--ink-2);font-weight:500}
+  .stagebar .crumb .w{color:var(--ink-4)}
+  .stagebar .open{margin-left:auto;color:var(--ink-3);text-decoration:none;padding:4px 10px;border:1px solid var(--edge);border-radius:7px;white-space:nowrap}
+  .stagebar .open:hover{color:var(--cyan);border-color:var(--edge-2)}
+  .stagebar .open:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .loadbar{position:relative;height:2px;background:transparent;flex-shrink:0;margin-top:-2px;z-index:5}
+  .loadbar.on::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+    animation:sweep 1s linear infinite}
+  @keyframes sweep{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+  .frame{flex:1;min-height:0;position:relative}
+  .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:var(--bg)}
+
+  /* ── the lobby (welcome) ── */
+  .lobby{position:absolute;inset:0;overflow-y:auto;padding:clamp(28px,6vh,72px) clamp(22px,5vw,64px)}
+  .lobby .eyebrow{font-family:var(--mich);font-size:10.5px;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin:0 0 22px}
+  .lobby h1{font-family:var(--sans);font-weight:300;letter-spacing:-.015em;line-height:1.12;color:var(--ink);
+    font-size:clamp(30px,4.6vw,54px);margin:0 0 18px;max-width:19ch;text-wrap:balance}
+  .lobby h1 b{font-weight:600;color:var(--cyan)}
+  .lobby .lede{font-size:clamp(15px,1.8vw,17.5px);color:var(--ink-3);max-width:62ch;margin:0 0 30px}
+  .lobby .lede b{color:var(--ink-2);font-weight:500}
+  .doors{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 38px}
+  .door{font-family:var(--mono);font-size:13px;font-weight:500;padding:11px 18px;border-radius:9px;text-decoration:none;
+    border:1px solid var(--edge-2);color:var(--ink-2);background:var(--panel)}
+  .door:hover{border-color:var(--cyan);color:var(--cyan-soft)}
+  .door.primary{background:var(--cyan);border-color:var(--cyan);color:#04121a;font-weight:600}
+  .door.primary:hover{color:#04121a;filter:brightness(1.08)}
+  .door:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  .statrow{display:flex;flex-wrap:wrap;gap:10px 30px;font-family:var(--mono);font-size:12px;color:var(--ink-4);
+    border-top:1px solid var(--edge);padding-top:22px;max-width:720px}
+  .statrow b{color:var(--cyan);font-weight:500}
+  .lobby .fine{font-family:var(--mono);font-size:11.5px;color:var(--ink-4);margin-top:34px;max-width:70ch;line-height:1.7}
+  .lobby .fine a{color:var(--ink-3);text-decoration:underline} .lobby .fine a:hover{color:var(--cyan)}
+
+  /* ── mobile drawer ── */
+  .menubtn{display:none}
+  .backdrop{display:none;position:fixed;inset:0;background:rgba(2,4,9,.6);z-index:55;border:0;padding:0}
+  @media (max-width:900px){
+    .app{grid-template-columns:1fr}
+    .side{position:fixed;inset:0 auto 0 0;width:min(84vw,320px);z-index:60;transform:translateX(-102%);transition:transform .2s ease;box-shadow:12px 0 40px rgba(0,0,0,.5)}
+    .side.open{transform:none}
+    .menubtn{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--edge-2);color:var(--ink-2);
+      font-family:var(--mono);font-size:12px;border-radius:8px;padding:7px 12px;cursor:pointer}
+    .menubtn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+    .backdrop.on{display:block}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#stage">Skip to exhibit</a>
+<div class="app">
+
+  <aside class="side" id="side">
+    <div class="brand">
+      <a href="#/" title="Lobby">
+        <svg class="orb" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="16" cy="16" r="12.5" fill="none" stroke="#62e6ff" stroke-width="2"/>
+          <ellipse cx="16" cy="16" rx="12.5" ry="4.5" fill="none" stroke="#a78bfa" stroke-width="1.2" opacity=".75"/>
+          <circle cx="16" cy="16" r="3.4" fill="#e8f2ff"/>
+        </svg>
+        <span class="t">QUANTUM <span>MUSEUM</span></span>
+      </a>
+    </div>
+    <nav class="map" aria-label="Exhibit sitemap" id="map">
+      <a class="navlink lobbylink" href="#/">Lobby</a>
+      <!-- wings injected -->
+    </nav>
+    <div class="sidefoot">
+      <a class="navlink" href="#/horizons">🖖 Horizons — plain words</a>
+      <a class="navlink ext" href="https://github.com/mblakemore/quantum" target="_blank" rel="noopener">Repository<span class="sr-only"> (opens in new tab)</span></a>
+    </div>
+  </aside>
+  <button class="backdrop" id="backdrop" tabindex="-1" aria-hidden="true"></button>
+
+  <main class="stage" id="stage">
+    <div class="stagebar">
+      <button class="menubtn" id="menubtn" aria-expanded="false" aria-controls="side">☰ Wings</button>
+      <span class="crumb" id="crumb"><b>Lobby</b></span>
+      <a class="open" id="openlink" href="./" hidden>standalone ↗</a>
+    </div>
+    <div class="loadbar" id="loadbar"></div>
+    <div class="frame">
+      <section class="lobby" id="lobby" aria-label="Lobby">
+        <p class="eyebrow">Est. 2026 · IBM Heron · Every number a job ID</p>
+        <h1>We asked a quantum computer questions the textbooks call <b>impossible</b>.</h1>
+        <p class="lede">Then we pre-registered the answers and ran them on real silicon. <b>45 exhibits across 8 wings</b> — indefinite causal order, no-go games, a decoder that reads sealed answers through noise — and every exhibit renders <b>measured hardware data</b>, not a simulation. Pick a wing on the left; the museum never reloads.</p>
+        <div class="doors">
+          <a class="door primary" href="#/switch">Start with the switch →</a>
+          <a class="door" href="#/scoreboard">See the verdict</a>
+          <a class="door" href="#/decoder-race">🏆 The Decoder Race</a>
+        </div>
+        <div class="statrow">
+          <span><b>8</b> wings</span><span><b>45</b> exhibits</span><span><b>~110</b> pre-registered experiments</span><span><b>F01–F121</b> findings</span><span><b>3</b> Heron dies</span>
+        </div>
+        <p class="fine">Sealed-commitment protocol: answers committed by hash before circuits exist; decoded blind; graded against frozen classical bands by three independent AI seats. <a href="https://github.com/mblakemore/quantum" target="_blank" rel="noopener">Full report</a> · <a href="../scoreboard/" target="_blank" rel="noopener">scoreboard</a>. Every exhibit is also a standalone page — the ↗ link above each one.</p>
+      </section>
+      <iframe id="viewer" title="Exhibit" hidden></iframe>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  // ── sitemap (static; source of truth: the wing grids) ──
+  const WINGS = [
+    ["I","The Causal Switch",[["switch","The Interactive Switch"],["ladder","The Ladder of Causation"],["ico-refrigerator","The ICO Refrigerator"],["teleported-witness","The Teleported Witness"]]],
+    ["II","The No-Go Games",[["static-duel","The Bot Duel: STATIC"],["casebook","The Interrogation"],["magic-square","The Magic Square"],["no-go-triptych","The No-Go Triptych"],["cloning-replicator","The Cloning Replicator"]]],
+    ["III","Foundations on Silicon",[["grandfather","The Grandfather Paradox"],["zeno-tractor","The Zeno Tractor Beam"],["twin-paradox","The Twin Paradox"],["quantum-darwinism","Quantum Darwinism"],["hayden-preskill","The Hayden–Preskill Mirror"],["negative-energy","Negative Energy"]]],
+    ["IV","The Advantage Ladder",[["decoder-race","🏆 The Decoder Race"],["scoreboard","The Scoreboard"],["ghz-sextant","The GHZ Sextant"],["blind-spot","The Blind Spot"],["time-crystal","The Time Crystal"],["sensor","The Sensor"],["anyon-braid","The Anyon Loop"],["remote-gate","The Remote Handshake"],["relay-computer","The Relay Computer"],["distributed-computer","The Two Computers"],["vault","The Vault"],["relay-key","The Untrusted Relay"],["subspace-channel","The Subspace Channel"],["swap","The Matchmaker"],["relay","The Relay"],["teleportation","Teleportation"],["tricorder","The Tricorder"],["shallow-solver","The Shallow-Circuit Solver"],["trust-ladder","The Trust Ladder"],["pocket-dictionary","The Pocket Dictionary"]]],
+    ["V","The Instruments",[["weather","The QPU Weather Report"],["casebook-pnp","The Casebook: Print & Play"],["switch-bench","The Switch-Bench Readout"]]],
+    ["VI","Time & the Observer",[["past-not-fixed","The Past Is Not Fixed"],["facts-not-absolute","Facts Are Not Absolute"],["delayed-eraser","The Delayed-Choice Eraser"],["energy-teleport","Beam the Power"]]],
+    ["VII","The Shields",[["shields","The Shields"]]],
+    ["VIII","The Living Ship",[["self-healing","The Self-Healing Qubit"],["programmable-rotation","The Programmable Rotation"]]]
+  ];
+  const SPECIAL = { horizons: { title:"Horizons — plain words", src:"../../horizons.html", open:"../../horizons.html" } };
+
+  const $ = id => document.getElementById(id);
+  const map = $('map'), viewer = $('viewer'), lobby = $('lobby'),
+        crumb = $('crumb'), openlink = $('openlink'), loadbar = $('loadbar');
+  const registry = {}; // slug -> {title, wing}
+
+  // build nav
+  WINGS.forEach(([num, name, exhibits], wi) => {
+    const wing = document.createElement('div'); wing.className = 'wing w-' + (wi % 4);
+    const head = document.createElement('div'); head.className = 'winghead';
+    head.innerHTML = '<span class="n">' + num + '</span><span>' + name + '</span>';
+    wing.appendChild(head);
+    exhibits.forEach(([slug, title]) => {
+      registry[slug] = { title, wing: num };
+      const a = document.createElement('a');
+      a.className = 'navlink'; a.href = '#/' + slug; a.textContent = title;
+      a.dataset.slug = slug;
+      wing.appendChild(a);
+    });
+    map.appendChild(wing);
+  });
+
+  // ── router: hash <-> iframe, no page reloads ──
+  function slugFromHash(){
+    const h = location.hash.replace(/^#\/?/, '').replace(/\/$/, '');
+    return h || '';
+  }
+  function show(slug){
+    const links = map.querySelectorAll('.navlink');
+    links.forEach(a => { if (a.dataset.slug === slug) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    if (!slug) { // lobby
+      viewer.hidden = true;
+      // location.replace keeps iframe navigations OUT of session history:
+      // Back/Forward walk the shell's hash entries only
+      if (viewer.dataset.slug) { viewer.dataset.slug = ''; try { viewer.contentWindow.location.replace('about:blank'); } catch (e) {} }
+      lobby.hidden = false;
+      crumb.innerHTML = '<b>Lobby</b>';
+      openlink.hidden = true; loadbar.classList.remove('on');
+      document.title = 'The Quantum Museum — Lobby';
+      return;
+    }
+    const sp = SPECIAL[slug], reg = registry[slug];
+    if (!sp && !reg) { location.hash = '#/'; return; }
+    const title = sp ? sp.title : reg.title;
+    const src = sp ? sp.src : '../' + slug + '/index.html';
+    lobby.hidden = true; viewer.hidden = false;
+    if (viewer.dataset.slug !== slug) {
+      loadbar.classList.add('on');
+      viewer.dataset.slug = slug;
+      const url = new URL(src, location.href).href;
+      try { viewer.contentWindow.location.replace(url); } catch (e) { viewer.src = url; }
+    }
+    viewer.title = title;
+    crumb.innerHTML = (reg ? '<span class="w">WING ' + reg.wing.replace('WING ','') + ' · </span>' : '') + '<b></b>';
+    crumb.querySelector('b').textContent = title;
+    openlink.href = src; openlink.hidden = false;
+    document.title = title + ' — The Quantum Museum';
+    closeDrawer();
+  }
+  viewer.addEventListener('load', () => {
+    loadbar.classList.remove('on');
+    // same-origin courtesy patch: museum-internal links inside the exhibit
+    // stay inside the shell instead of navigating the iframe to the old landing
+    try {
+      const doc = viewer.contentDocument;
+      if (!doc) return;
+      doc.querySelectorAll('a[href]').forEach(a => {
+        const href = a.getAttribute('href');
+        if (!href || /^(https?:|mailto:|#)/.test(href)) return;
+        const url = new URL(href, doc.baseURI);
+        const m = url.pathname.match(/\/demo\/(?:([a-z0-9-]+)\/)?(?:index\.html)?$/);
+        if (m) {
+          const target = m[1] || '';
+          if (!target || registry[target]) {
+            a.addEventListener('click', e => { e.preventDefault(); parent.location.hash = '#/' + target; });
+          }
+        }
+      });
+    } catch (e) { /* cross-origin or sandbox: leave links alone */ }
+  });
+  window.addEventListener('hashchange', () => show(slugFromHash()));
+
+  // ── mobile drawer ──
+  const side = $('side'), menubtn = $('menubtn'), backdrop = $('backdrop');
+  function closeDrawer(){ side.classList.remove('open'); backdrop.classList.remove('on'); menubtn.setAttribute('aria-expanded','false'); }
+  menubtn.addEventListener('click', () => {
+    const open = side.classList.toggle('open');
+    backdrop.classList.toggle('on', open);
+    menubtn.setAttribute('aria-expanded', String(open));
+  });
+  backdrop.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+  show(slugFromHash());
+})();
+</script>
+</body>
+</html>
