@@ -1,0 +1,25 @@
+{
+ "card": "exp_hss_race4_reveal \u2014 RUNG0_n40 ONLY (rung0_n32 RETIRED-unopened; race held for stage-2)",
+ "role": "Ember SEALER reveal, C4214 RACE-4",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode()); positions 0-indexed",
+ "rung0_n40": {
+  "n_bits": 40,
+  "s_str": "0001011011010100111110010101010000100101",
+  "salt": "93ad6efbf6736a3db6113cba97b3ddbf",
+  "commitment_sha256": "e153a30bdc43642fe81cabfa83cddb1ff8c7a43796e17b2c21521044167190c8",
+  "commitment_verifies": true,
+  "consensus_shat": "0001011011010100111110010101010000100101",
+  "HD_identity": 0,
+  "HD_reversed": 26,
+  "wrong_positions": []
+ },
+ "retired_unused": [
+  "rung0_n32 (ae25b1cb)",
+  "race_n32 (6fed7c50)"
+ ],
+ "held": [
+  "race_n40 (stage-2)"
+ ],
+ "readout_hygiene_check": "race-3 twin was HD-3 at d125 on the DIRTY register; if this HD-0 at d217, the clean register + calibrated-majority extends EXACT blind recovery to d2q=217 (vs 190 prior best) => hygiene thesis validated."
+}
