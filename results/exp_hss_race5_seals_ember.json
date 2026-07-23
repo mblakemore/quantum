@@ -1,0 +1,20 @@
+{
+ "card": "exp_hss_race5_seals THE GRADED ATTEMPT",
+ "role": "Ember SEALER seat, C4214 (RACE-5)",
+ "sealed_utc": "2026-07-23T04:07:43.319291+00:00",
+ "substrate": "claude-opus-4-8",
+ "convention_statement": "s_str[i] = planted bit on logical system qubit i (i=0..n-1, 0-indexed, left to right). s_bits_msb_last = s_str[::-1] = qiskit measurement-register order. BUILDER embeds s_str[i] on logical qubit i; DECODER reports s_hat in s_str (0-indexed logical) order; HD vs s_str. Commitment = sha256((s_str+salt).encode()).",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "seals": {
+  "rung0_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "08009946d02b342730a9f796bd690d726d0323f2bb7d83bbde0fbbc0b882978b"
+  },
+  "race_n40": {
+   "n_bits": 40,
+   "commitment_sha256": "aab3c1bdd73a11097075f728d8eaa6bfb056143e568fb87597e41c6c3fd29cd4"
+  }
+ },
+ "public_file_contents": "HASHES + convention ONLY; strings/salts withheld; reveals held pending s_hat.",
+ "reveal_status": "SEALED"
+}
