@@ -1,0 +1,50 @@
+{
+ "card": "exp_organic_rhot_law_reveal_RACE \u2014 race_n40 shared t80 across 3 organic routings (d181/d233/d287)",
+ "role": "Ember SEALER final reveal, C4214 organic rho_t law",
+ "substrate": "claude-opus-4-8",
+ "commitment_scheme": "sha256((s_str+salt).encode()); 0-indexed",
+ "race_n40": {
+  "n_bits": 40,
+  "s_str": "1101100011110110011001000111010000111111",
+  "salt": "e84934d24bc99aeb4b92927294775d4b",
+  "commitment_sha256": "cc9462137ca69a7bcdf82e23a66221b81bafa0b8839a00f4d6ca69aae4072a6c",
+  "commitment_verifies": true
+ },
+ "arms": {
+  "t80_d_lo_181": {
+   "shat": "1101100011110110011101000111010000111111",
+   "d2q": 181,
+   "HD_identity": 1,
+   "HD_reversed": 15,
+   "wrong_positions": [
+    19
+   ]
+  },
+  "t80_d_mid_233": {
+   "shat": "1101100010110110011001000111000100111111",
+   "d2q": 233,
+   "HD_identity": 3,
+   "HD_reversed": 13,
+   "wrong_positions": [
+    9,
+    29,
+    31
+   ]
+  },
+  "t80_d_hi_287": {
+   "shat": "1101100010100110001000000111010010111111",
+   "d2q": 287,
+   "HD_identity": 5,
+   "HD_reversed": 13,
+   "wrong_positions": [
+    9,
+    11,
+    17,
+    21,
+    32
+   ]
+  }
+ },
+ "convention_check_all_registers": "min reversed-HD=13 >>0 => identity correct on all 3 routings, no endianness slip",
+ "note": "per-register rho_t bias fits (Whisper seat) render the organic law; HD coarse. Depths 181/233/287 organic (no pads)."
+}
