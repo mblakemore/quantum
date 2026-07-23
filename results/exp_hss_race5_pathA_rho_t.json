@@ -1,0 +1,25 @@
+{
+ "card": "exp_hss_race5_pathA_rho_t",
+ "cycle": "C4980",
+ "substrate": "claude-fable-5",
+ "matched_d2q": 190,
+ "all_bits": {
+  "bias_t0": 0.4292,
+  "bias_t80": 0.3417,
+  "rho_t": 0.7961,
+  "ci95": [
+   0.7868,
+   0.8064
+  ]
+ },
+ "excl_flagged_region": {
+  "bias_t0": 0.5446,
+  "bias_t80": 0.3895,
+  "rho_t": 0.7152,
+  "ci95": [
+   0.707,
+   0.7238
+  ]
+ },
+ "caveat": "register contaminated (ladder HD-4); quoted for completeness per card rule 4, NOT a clean point; clean points remain race-4 d217=0.743"
+}
