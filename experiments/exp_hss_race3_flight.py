@@ -87,16 +87,27 @@ def build_twin(t0s, d2q_target):
     assert d2q_of(folded) == (2 * m + 1) * d2q_of(t0s[s])
     layers = two_q_layers(folded)
     li = 0
-    guard = 0
+    inserted = 0
     while d2q_of(folded) < d2q_target:
-        L = layers[li % len(layers)]; li += 1
-        for _ in range(2):                      # L . L = I (CZ self-inverse, disjoint pairs)
-            for (a, b2) in L:
-                folded.cz(a, b2)
-        guard += 1
-        assert guard <= j + 25, "twin padding not converging — abort"
-    assert d2q_of(folded) == d2q_target, f"twin overshoot {d2q_of(folded)} != {d2q_target} — abort"
-    return folded, {"seed_off": s, "fold_m": m, "pad_pairs_arith": j, "pad_layer_pairs_used": guard}
+        # only a layer touching the current critical path advances d2q; cycle the circuit's
+        # own layers and keep the first that advances by exactly +2 (parity preserved)
+        advanced = False
+        for _ in range(len(layers)):
+            L = layers[li % len(layers)]; li += 1
+            test = folded.copy()
+            for _ in range(2):                  # L . L = I (CZ self-inverse, disjoint pairs)
+                for (a, b2) in L:
+                    test.cz(a, b2)
+            if d2q_of(test) == d2q_of(folded) + 2:
+                folded = test
+                advanced = True
+                break
+        assert advanced, "no own-layer pair advances d2q by 2 — abort (card 8c)"
+        inserted += 1
+        assert inserted <= j + 40, "twin padding not converging — abort"
+    assert d2q_of(folded) == d2q_target, f"twin depth {d2q_of(folded)} != {d2q_target} — abort"
+    return folded, {"seed_off": s, "fold_m": m, "pad_pairs_arith": j,
+                    "pad_layer_pairs_used": inserted}
 
 
 def main(submit=False):

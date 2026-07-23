@@ -1,0 +1,1006 @@
+{
+ "card": "exp_hss_race3_flight_manifest",
+ "cycle": "C4978",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_marrakesh",
+ "prereg": "docs/exp-hss-race3-prereg-FROZEN-whisper-c4978.md",
+ "seals_committed": "results/exp_hss_race3_seals_ember.json",
+ "depth_cap": 180,
+ "advantage_eligible": {
+  "race_n40": true,
+  "race_n32": false
+ },
+ "twin40_plan": {
+  "seed_off": 16,
+  "fold_m": 0,
+  "pad_pairs_arith": 29,
+  "pad_layer_pairs_used": 29
+ },
+ "twin32_plan": {
+  "seed_off": 1,
+  "fold_m": 2,
+  "pad_pairs_arith": 0,
+  "pad_layer_pairs_used": 0
+ },
+ "layouts": {
+  "race_n40": {
+   "initial": [
+    3,
+    107,
+    71,
+    139,
+    67,
+    78,
+    66,
+    90,
+    111,
+    87,
+    88,
+    117,
+    86,
+    98,
+    105,
+    2,
+    63,
+    70,
+    46,
+    65,
+    4,
+    106,
+    72,
+    135,
+    57,
+    69,
+    47,
+    92,
+    110,
+    97,
+    89,
+    104,
+    85,
+    91,
+    108,
+    16,
+    62,
+    58,
+    68,
+    64
+   ],
+   "final": [
+    2,
+    109,
+    72,
+    139,
+    46,
+    58,
+    47,
+    98,
+    111,
+    91,
+    105,
+    117,
+    86,
+    92,
+    104,
+    3,
+    62,
+    71,
+    57,
+    63,
+    4,
+    108,
+    68,
+    135,
+    67,
+    78,
+    65,
+    90,
+    107,
+    88,
+    97,
+    106,
+    77,
+    89,
+    87,
+    16,
+    64,
+    69,
+    70,
+    66
+   ],
+   "d2q": 125
+  },
+  "rung0_base": {
+   "initial": [
+    3,
+    107,
+    71,
+    139,
+    67,
+    78,
+    66,
+    90,
+    111,
+    87,
+    88,
+    117,
+    86,
+    98,
+    105,
+    2,
+    63,
+    70,
+    46,
+    65,
+    4,
+    106,
+    72,
+    135,
+    57,
+    69,
+    47,
+    92,
+    110,
+    97,
+    89,
+    104,
+    85,
+    91,
+    108,
+    16,
+    62,
+    58,
+    68,
+    64
+   ],
+   "final": [
+    2,
+    108,
+    71,
+    135,
+    67,
+    78,
+    64,
+    90,
+    119,
+    97,
+    87,
+    57,
+    86,
+    91,
+    105,
+    45,
+    62,
+    70,
+    66,
+    63,
+    4,
+    117,
+    73,
+    134,
+    37,
+    65,
+    68,
+    98,
+    133,
+    107,
+    88,
+    47,
+    84,
+    79,
+    106,
+    46,
+    77,
+    58,
+    89,
+    69
+   ],
+   "d2q": 64
+  },
+  "twin40_src": {
+   "initial": [
+    3,
+    107,
+    71,
+    139,
+    67,
+    78,
+    66,
+    90,
+    111,
+    87,
+    88,
+    117,
+    86,
+    98,
+    105,
+    2,
+    63,
+    70,
+    46,
+    65,
+    4,
+    106,
+    72,
+    135,
+    57,
+    69,
+    47,
+    92,
+    110,
+    97,
+    89,
+    104,
+    85,
+    91,
+    108,
+    16,
+    62,
+    58,
+    68,
+    64
+   ],
+   "final": [
+    2,
+    108,
+    71,
+    134,
+    47,
+    69,
+    77,
+    90,
+    113,
+    97,
+    88,
+    43,
+    87,
+    91,
+    117,
+    36,
+    62,
+    70,
+    57,
+    65,
+    4,
+    106,
+    79,
+    133,
+    46,
+    68,
+    66,
+    98,
+    119,
+    107,
+    89,
+    42,
+    86,
+    93,
+    105,
+    41,
+    85,
+    58,
+    78,
+    67
+   ],
+   "d2q": 67,
+   "d2q_padded": 125
+  },
+  "race_n32": {
+   "initial": [
+    90,
+    87,
+    2,
+    88,
+    135,
+    89,
+    117,
+    78,
+    83,
+    98,
+    77,
+    106,
+    108,
+    103,
+    97,
+    104,
+    91,
+    86,
+    1,
+    85,
+    139,
+    92,
+    125,
+    69,
+    101,
+    111,
+    84,
+    105,
+    109,
+    96,
+    107,
+    102
+   ],
+   "final": [
+    92,
+    84,
+    2,
+    88,
+    135,
+    111,
+    86,
+    69,
+    102,
+    110,
+    77,
+    125,
+    108,
+    96,
+    98,
+    101,
+    90,
+    85,
+    1,
+    117,
+    139,
+    89,
+    103,
+    78,
+    105,
+    107,
+    83,
+    97,
+    87,
+    106,
+    91,
+    104
+   ],
+   "d2q": 195
+  },
+  "twin32_src": {
+   "initial": [
+    90,
+    87,
+    2,
+    88,
+    135,
+    89,
+    117,
+    78,
+    83,
+    98,
+    77,
+    106,
+    108,
+    103,
+    97,
+    104,
+    91,
+    86,
+    1,
+    85,
+    139,
+    92,
+    125,
+    69,
+    101,
+    111,
+    84,
+    105,
+    109,
+    96,
+    107,
+    102
+   ],
+   "final": [
+    91,
+    88,
+    2,
+    83,
+    135,
+    90,
+    117,
+    89,
+    96,
+    98,
+    87,
+    104,
+    108,
+    101,
+    97,
+    105,
+    92,
+    77,
+    1,
+    85,
+    139,
+    78,
+    125,
+    69,
+    84,
+    111,
+    86,
+    103,
+    109,
+    102,
+    107,
+    106
+   ],
+   "d2q": 39
+  }
+ },
+ "seed": 2026072303,
+ "total_shots": 540000,
+ "subsample_pubs": {
+  "twin40": [
+   2,
+   4,
+   8,
+   16
+  ],
+  "race_n40": [
+   2,
+   4,
+   8,
+   16,
+   32
+  ],
+  "twin32": [
+   2,
+   4,
+   8,
+   16
+  ],
+  "race_n32": [
+   2,
+   4,
+   8,
+   16
+  ]
+ },
+ "decoder_frozen": {
+  "k": 12,
+  "rho": 0.5,
+  "soft_iters": 8,
+  "report_order": "s_str display order"
+ },
+ "pubs_meta": [
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 0,
+   "d2q": 64,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 1,
+   "d2q": 64,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 2,
+   "d2q": 64,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 0,
+   "twirl": 3,
+   "d2q": 64,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 0,
+   "d2q": 192,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 1,
+   "d2q": 192,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 2,
+   "d2q": 192,
+   "shots": 5000
+  },
+  {
+   "block": "ladder",
+   "fold_m": 1,
+   "twirl": 3,
+   "d2q": 192,
+   "shots": 5000
+  },
+  {
+   "block": "twin40",
+   "twirl": 0,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 1,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 2,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 3,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 4,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 5,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 6,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 7,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 8,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 9,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 10,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 11,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 12,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 13,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 14,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin40",
+   "twirl": 15,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 0,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 1,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 2,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 3,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 4,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 5,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 6,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 7,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 8,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 9,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 10,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 11,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 12,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 13,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 14,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 15,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 16,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 17,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 18,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 19,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 20,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 21,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 22,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 23,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 24,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 25,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 26,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 27,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 28,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 29,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 30,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "race_n40",
+   "twirl": 31,
+   "d2q": 125,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 0,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 1,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 2,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 3,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 4,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 5,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 6,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 7,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 8,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 9,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 10,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 11,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 12,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 13,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 14,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "twin32",
+   "twirl": 15,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 0,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 1,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 2,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 3,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 4,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 5,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 6,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 7,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 8,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 9,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 10,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 11,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 12,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 13,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 14,
+   "d2q": 195,
+   "shots": 6250
+  },
+  {
+   "block": "race_n32",
+   "twirl": 15,
+   "d2q": 195,
+   "shots": 6250
+  }
+ ],
+ "job_id": "d9gol8ggk0ls73f1tok0",
+ "submitted_utc": "2026-07-23T03:29:38Z"
+}
