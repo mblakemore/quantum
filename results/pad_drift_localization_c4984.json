@@ -477,5 +477,11 @@
   "conclusion": "the pad-dose estimator divergence (c4983b) is a small coherent under-rotation per L.L pair accumulating linearly on layer-participant bits \u2014 the L.L pair is identity only in the Pauli/stochastic sector; its coherent residual (e.g. ZZ during CZ) adds, not cancels",
   "design_rule": "if padding is used as a depth knob: TWIRL THE PAD PAIRS INDEPENDENTLY per repetition (randomized compiling makes the coherent residual stochastic) \u2014 untested prediction, named for any future pad-based design",
   "followup_not_done": "exact pad-layer membership map needs circuit rebuild (calibration-drift-sensitive) \u2014 not required for the mechanism verdict"
+ },
+ "CORRECTION_c4985": {
+  "what": "the stored design rule \"twirl the pad pairs\" was ALREADY REFUTED by the flown data \u2014 the curve pads WERE twirled (twirl_circuit dresses every CZ) and the drift survived",
+  "audit": "pad+twirl noiseless exactness 6/6 PASS + control (no compensation-algebra bug)",
+  "corrected_mechanism": "RC-RESISTANT context-dependent coherent error: back-to-back identical CZ pairs form a pulse context randomized compiling does not alter \u2014 a structure the standard cure does not cure (sharpens the finding)",
+  "corrected_design_rule": "avoid back-to-back identical pad pairs (interleave/shuffle); or avoid pads entirely (the C4985 organic design)"
  }
 }
