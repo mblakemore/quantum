@@ -16,16 +16,22 @@ Court: same 3-of-3. Freeze = commit with DRAFT removed after Ember's 4 fresh sea
    all-|1⟩ (X on every qubit), measure_all, 10k shots each (20k total, ~2 s). Yields per-qubit
    p01 (read 1 | prepared 0) and p10 (read 0 | prepared 1) under the flight's own calibration
    snapshot, for every physical qubit, so every block's decoder uses its own register's rates.
-3. **Tilt-aware frozen decoder**: per-bit calibrated threshold t_i = (p01_i + 1 − p10_i)/2
-   (the midpoint of the two conditional read-1 means — the per-bit ML decision boundary under
-   the measured readout model). Majority decision: bit=1 iff frac_i > t_i. Reliability =
-   |frac_i − t_i| (feeds the Chase-12 weak-bit selection). Chase-12 (ρ=0.5) + soft-refine ≤8
-   unchanged otherwise; ŝ in s_str display order; search-adjusted null ≤ 2⁻²⁸ unchanged.
-   This is the exact fix for the C4978 failure class: phys-67's frac converged to 0.486
-   against a 0.5 threshold; against its calibrated boundary the same evidence decodes true.
-   Named residual risk: a tilt of CIRCUIT-DYNAMICS origin (not readout) survives calibration —
-   if a bit still blocks, the calibration block cleanly attributes it (readout now ruled out),
-   and that attribution is the deliverable of a miss.
+3. **Tilt-aware frozen decoder — the graded statistic is CALIBRATED PER-BIT MAJORITY**:
+   per-bit calibrated threshold t_i = (p01_i + 1 − p10_i)/2 (the per-bit ML decision boundary
+   under the measured readout model); ŝ_i = 1 iff frac_i > t_i; ŝ in s_str display order.
+   **Chase-12 + soft-refine are DEMOTED to reported diagnostics** (not the graded ŝ) — design
+   rationale, stated pre-freeze: the Chase/soft score follows raw shot-proximity (ρ^HD), so on
+   a tilted bit it would UNDO the calibrated-threshold fix (the raw data genuinely prefers the
+   wrong value — that is what a 12σ wrongward tilt means); and in every flown race the graded
+   recoveries were achieved by majority alone while the observed failure classes (systematics,
+   tilts) are Chase-immune or Chase-hurt. Calibrated majority's null needs no search
+   adjustment (single candidate: 2⁻⁴⁰-class). NO rescue rule: if calibrated majority misses
+   exact, the rung is a MISS regardless of what the diagnostics show. This is the exact fix
+   for the C4978 failure class: phys-67's frac converged to 0.486 against a 0.5 threshold;
+   against its calibrated boundary the same evidence decodes true. Named residual risk: a tilt
+   of CIRCUIT-DYNAMICS origin (not readout) survives calibration — if a bit still blocks, the
+   calibration block cleanly attributes it (readout ruled out), and that attribution is the
+   deliverable of a miss.
 4. All race-3 structure HELD: depth-matched twins (Path A differential + Path B gate at race
    depth, twin decoded with the SAME tilt-aware decoder), depth cap 180 (frozen
    pre-transpile), race_n40 at 200k (32 twirls), subsample ladders {2,4,8,16(,32)}, two-stage
