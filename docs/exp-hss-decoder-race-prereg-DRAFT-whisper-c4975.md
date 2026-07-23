@@ -76,6 +76,11 @@ per-rung tuning). HD(ŝ,s) reported for the record on a miss; no partial credit.
    ladder {10k, 20k, 50k, 100k} taken in submission order (no post-hoc cherry-pick). Quantum
    cost = **re-measured QPU seconds of that subsample's shots at t=80** (Elder C6565: do not
    reuse the 6.1 s t=0 figure) + queue-honest wall quoted separately; joules one-sided per G2.
+   *If the steth λ_anc calibration RIDER co-batches (severable, [verdict
+   doc](steth-lambda-anc-reanalysis-verdict-whisper-c4975.md)): rider circuits are EXCLUDED from
+   the decoder wall via per-circuit QPU attribution (Elder #547 grading-hygiene condition);
+   any attribution ambiguity resolves AGAINST quantum (rider seconds counted in), the
+   anti-flattering direction.*
 3. **Classical counterpart (Elder's frozen band, reported as a BAND per C6565)**: t=80
    edge-robust band; operating estimate best_c_allcore 23,460 s (~3,900× at 6 s-class quantum);
    stress floor ~300× at the edge-4500× re-confirm trigger. **WIN = exact ŝ==s on race_n40 +
