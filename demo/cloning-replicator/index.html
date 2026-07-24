@@ -324,7 +324,7 @@
       // ceiling line (drawn last, on top)
       var yc=Y(CEIL);
       s+='<line x1="'+(x0-4)+'" x2="'+x1+'" y1="'+yc.toFixed(1)+'" y2="'+yc.toFixed(1)+'" stroke="'+C("--bad")+'" stroke-width="2" stroke-dasharray="6 4"/>';
-      s+='<text x="'+x1+'" y="'+(yc-5).toFixed(1)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9.5" font-weight="700" fill="'+C("--bad")+'">5/6 ceiling · 0.8333</text>';
+      s+='<text x="'+x1+'" y="'+(yc-20).toFixed(1)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9.5" font-weight="700" fill="'+C("--bad")+'">5/6 ceiling · 0.8333</text>';
       chart.innerHTML=s;
       chartCap.textContent = "copy fidelity by measurement basis — "+cp.name;
     }
