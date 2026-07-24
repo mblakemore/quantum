@@ -1,0 +1,150 @@
+{
+ "card": "exp_crossblock_cal_decode",
+ "cycle": "C4999",
+ "substrate": "claude-fable-5",
+ "job": "d9hansogk0ls73f2ns90",
+ "hold_candidates": {
+  "74": {
+   "ramsey_pad": {
+    "p0": 0.9928,
+    "lambda_raw": 0.9855,
+    "lambda_corrected": 1.0033
+   },
+   "ramsey_idle": {
+    "p0": 0.9474,
+    "lambda_raw": 0.8947,
+    "lambda_corrected": 0.9109
+   },
+   "crosstalk_ratio_pad_over_idle": 1.101
+  },
+  "79": {
+   "ramsey_pad": {
+    "p0": 0.9978,
+    "lambda_raw": 0.9955,
+    "lambda_corrected": 1.0133
+   },
+   "ramsey_idle": {
+    "p0": 0.9016,
+    "lambda_raw": 0.8033,
+    "lambda_corrected": 0.8176
+   },
+   "crosstalk_ratio_pad_over_idle": 1.239
+  },
+  "22": {
+   "ramsey_pad": {
+    "p0": 0.9885,
+    "lambda_raw": 0.977,
+    "lambda_corrected": 1.0024
+   },
+   "ramsey_idle": {
+    "p0": 0.908,
+    "lambda_raw": 0.816,
+    "lambda_corrected": 0.8372
+   },
+   "crosstalk_ratio_pad_over_idle": 1.197
+  },
+  "44": {
+   "ramsey_pad": {
+    "p0": 0.9986,
+    "lambda_raw": 0.9972,
+    "lambda_corrected": 1.0043
+   },
+   "ramsey_idle": {
+    "p0": 0.9597,
+    "lambda_raw": 0.9195,
+    "lambda_corrected": 0.926
+   },
+   "crosstalk_ratio_pad_over_idle": 1.085
+  },
+  "6": {
+   "ramsey_pad": {
+    "p0": 0.9954,
+    "lambda_raw": 0.9908,
+    "lambda_corrected": 1.0056
+   },
+   "ramsey_idle": {
+    "p0": 0.9074,
+    "lambda_raw": 0.8148,
+    "lambda_corrected": 0.827
+   },
+   "crosstalk_ratio_pad_over_idle": 1.216
+  },
+  "8": {
+   "ramsey_pad": {
+    "p0": 0.9898,
+    "lambda_raw": 0.9795,
+    "lambda_corrected": 1.0064
+   },
+   "ramsey_idle": {
+    "p0": 0.9021,
+    "lambda_raw": 0.8042,
+    "lambda_corrected": 0.8263
+   },
+   "crosstalk_ratio_pad_over_idle": 1.218
+  }
+ },
+ "bell_sites": {
+  "73-74": {
+   "bell_pad": 0.2435,
+   "bell_idle": 0.5917
+  },
+  "23-22": {
+   "bell_pad": 0.3141,
+   "bell_idle": 0.1984
+  },
+  "45-44": {
+   "bell_pad": 0.2462,
+   "bell_idle": 0.1944
+  },
+  "7-6": {
+   "bell_pad": 0.2366,
+   "bell_idle": 0.266
+  }
+ },
+ "fold_gate": {
+  "per_site": {
+   "73": {
+    "best_hold": 79,
+    "lambda_hold_witness": 1.0133,
+    "pass_0.6": true
+   },
+   "23": {
+    "best_hold": 22,
+    "lambda_hold_witness": 1.0024,
+    "pass_0.6": true
+   },
+   "45": {
+    "best_hold": 44,
+    "lambda_hold_witness": 1.0043,
+    "pass_0.6": true
+   },
+   "7": {
+    "best_hold": 8,
+    "lambda_hold_witness": 1.0064,
+    "pass_0.6": true
+   }
+  },
+  "ALL_PASS": true
+ },
+ "adaptive_N": {
+  "lambda_hold_min": 1.0024,
+  "delta_pred": 0.0521,
+  "N_per_class": 5500,
+  "verdict": "GO at N/class=5500"
+ },
+ "drift_alive_scout": {
+  "73-74": {
+   "bell_pad": 0.2435,
+   "deficit_vs_null_site": -0.0069
+  },
+  "23-22": {
+   "bell_pad": 0.3141,
+   "deficit_vs_null_site": -0.0775
+  },
+  "45-44": {
+   "bell_pad": 0.2462,
+   "deficit_vs_null_site": -0.0096
+  },
+  "caveat": "scout-grade: per-site envelope heterogeneity not yet normalized; graded drift evidence comes from the main block"
+ }
+}
