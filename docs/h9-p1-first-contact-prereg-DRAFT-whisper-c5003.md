@@ -8,6 +8,36 @@ Builds on the extensive prior work; nothing below rebuilds it: the frozen exp142
 the [P3 grade](h9-p3-prime-directive-audit-whisper-c5001.md) (F119 = NEEDS-GATE, best-known-conditional),
 and the [field audit](field-audit-google-learning-advantage-obstruction-elder-c6567.md).*
 
+## ⟵⟵ FROZEN REGISTRATION (Creator "Re-fly go" #1216; freeze pending Elder decoder + Ember kit-confirm)
+
+**The re-fly is authorized (binary spend GO).** This block is the frozen registration for the blind
+court — no seal until it is committed. Estimator frozen pre-reveal; secret P held by Ember alone;
+Whisper never sees P (provides only the P-independent spec).
+
+**Spec** (C5003, all gates cleared): distribution Def 2 — ½ null (I/2ⁿ, O=uniform Pauli∖I), ½ alt
+((I+0.95·sP)/2ⁿ, O=P), **P uniform over ALL Paulis∖{I}** (option (a) → floor 1/(2ⁿ+1) verbatim),
+s=±1; **α=0.95** (off the authors' open α=1 boundary); **prep = 0-CZ shot-ensemble** (per shot: 0.95
+random +1-eigenstate of P / 0.05 random comp-basis — verified fidelity-safe); **task** = identify-P
+SPRT kit + the identify≥distinguish reduction (floor transfers); **decoder** = support-parity
+(measure over each candidate P's support, not all n bits — Elder's variable-weight fix).
+
+**Ember's three handoff riders (#1217) — folded as freeze conditions:**
+1. **Validity keystone**: the public-test-P (XYZX…) G3 PASS transfers to the sealed P because the
+   two-copy Bell READOUT (CX(i,n+i)+H+measure) is **P-independent**; only prep angles are P-dependent
+   (same single-qubit-fidelity class). Blindness preserved — not reopened.
+2. **Edge/epoch binding** (the P2 drift-census lesson): the G3 cert is bound to those Bell-pair edges
+   at that calibration. **Gate B flies the same G3-certified edges OR re-runs `--predict` at flight
+   epoch to re-cert ($0) BEFORE seal** if the calibration boundary moved. Ember owns `pick_layouts`;
+   no silently-stale PASS.
+3. **Per-n rate billing**: constraint-error 0.067→0.118→0.154 steepens the copy-vs-n slope; the
+   SPRT/C1 decoder bills copies against the **per-n** on-device rate (a flat average understates n=8
+   erosion). The executed margin is the per-n-billed one; the advantage rides on slope-vs-floor.
+
+**Freeze/seal order**: (i) Elder finalizes decoder + support-parity + Def 2 wording; (ii) Ember
+confirms kit takes the α=0.95 all-Paulis prep + pins/re-certs edges; (iii) Whisper commits this as
+FROZEN; (iv) *only then* Ember seals (secret P) + submits blind (~240 jobs); (v) decode (Elder C1/SPRT)
+→ court grades. **Everything below is the derivation trail behind this block.**
+
 ## ⟵ GATE A RESOLVED (Elder #1194, primary source read verbatim; doc 10752ad) + realization verified (Whisper #1196)
 
 **CONDITIONAL PASS — the α=1 worry was RIGHT (authors' own flagged gap), with a clean paper-endorsed fix.**
