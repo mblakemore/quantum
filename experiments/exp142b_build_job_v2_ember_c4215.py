@@ -23,7 +23,9 @@ import exp142b_conv_emission_ember_c4215 as V2
 GRID = {4: 20, 6: 20, 8: 5}
 SECRET = os.path.expanduser("~/.ember-exp142-secrets.json")
 ENSEMBLE = "fullweight_eps1_v2"
-MAX_PUBS_PER_JOB = 100          # conservative split threshold (open-plan safe)
+MAX_ROWS_PER_JOB = 100000       # catch #9: split by TOTAL param-ROWS/job (control-hw OOM, err 6073).
+                                # calibrated: n6b DONE @17.4k rows, failed @494.5k -> 100k safe (Whisper
+                                # ~10-20 n=8 jobs). No single PUB exceeds 8192 rows so grouping always fits.
 
 
 def measured_q_n(backend, conv_layout):
@@ -135,14 +137,26 @@ def main():
                                                   else conv_layout)
             tqc = transpile(qc, backend, initial_layout=il, optimization_level=1, seed_transpiler=142)
             tpubs.append(((tqc, rows, shots) if rows is not None else (tqc, None, shots), meta))
-        # split into jobs of <= MAX_PUBS_PER_JOB, submit each
+        # split into jobs capped by TOTAL ROWS/JOB (catch #9), submit each
+        def prows(meta):
+            return meta.get("rows", 1)   # conv/quantum carry 'rows'; cal/sentinel ~1
         sampler = SamplerV2(mode=backend)
-        jobs = []
-        for lo in range(0, len(tpubs), MAX_PUBS_PER_JOB):
-            grp = tpubs[lo:lo + MAX_PUBS_PER_JOB]
-            job = sampler.run([p for p, _ in grp])
-            jid = job.job_id(); jobs.append({"job_id": jid, "pub_lo": lo, "pub_hi": lo + len(grp)})
-            print(f"  submitted job {len(jobs)}: {jid}  (PUBs {lo}..{lo+len(grp)})")
+        jobs = []; grp = []; grp_rows = 0; grp_lo = 0
+        def flush(hi):
+            nonlocal grp, grp_rows
+            if not grp:
+                return
+            job = sampler.run([p for p in grp])
+            jid = job.job_id()
+            jobs.append({"job_id": jid, "pub_lo": grp_lo, "pub_hi": hi, "rows": grp_rows})
+            print(f"  job {len(jobs)}: {jid}  (PUBs {grp_lo}..{hi}, {grp_rows:,} rows)")
+            grp = []; grp_rows = 0
+        for i, (p, meta) in enumerate(tpubs):
+            r = prows(meta)
+            if grp and grp_rows + r > MAX_ROWS_PER_JOB:
+                flush(i); grp_lo = i
+            grp.append(p); grp_rows += r
+        flush(len(tpubs))
         manifest = {"experiment": "exp142b_f119_remedy_refly", "n": n, "M": M, "C": C, "q_n": q_n,
                     "ensemble": ENSEMBLE, "backend": args.backend, "bell_pairs": bell_pairs,
                     "conv_layout": conv_layout, "q_layout": q_layout, "jobs": jobs,
