@@ -1,0 +1,122 @@
+{
+ "card": "exp_crossblock_cal",
+ "cycle": "C4998",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_kingston",
+ "register_drift": {
+  "active_2q_qubits": [
+   2,
+   3,
+   7,
+   16,
+   17,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   37,
+   38,
+   39,
+   45,
+   46,
+   47,
+   48,
+   49,
+   50,
+   51,
+   52,
+   53,
+   54,
+   55,
+   57,
+   58,
+   59,
+   70,
+   71,
+   72,
+   73,
+   75,
+   141,
+   142
+  ],
+  "outside_flown_register": [
+   16,
+   46
+  ]
+ },
+ "pad_plan": {
+  "pad_layer_pairs_used": 30,
+  "from": "twin_base"
+ },
+ "cal_qubits": [
+  74,
+  79,
+  22,
+  44,
+  6,
+  8
+ ],
+ "bell_pairs": [
+  [
+   73,
+   74,
+   []
+  ],
+  [
+   23,
+   22,
+   []
+  ],
+  [
+   45,
+   44,
+   []
+  ],
+  [
+   7,
+   6,
+   []
+  ]
+ ],
+ "pubs_meta": [
+  {
+   "block": "cal_all0",
+   "shots": 10000
+  },
+  {
+   "block": "cal_all1",
+   "shots": 10000
+  },
+  {
+   "block": "ramsey_pad",
+   "shots": 8000,
+   "d2q": 220
+  },
+  {
+   "block": "ramsey_idle",
+   "shots": 8000,
+   "d2q": 0
+  },
+  {
+   "block": "bell_pad",
+   "shots": 8000,
+   "d2q": 220
+  },
+  {
+   "block": "bell_idle",
+   "shots": 8000,
+   "d2q": 2
+  }
+ ],
+ "fold_gate": "lambda_hold_witness < 0.6 -> main block folds",
+ "seed": 2026072307
+}
