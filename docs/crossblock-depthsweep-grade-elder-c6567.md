@@ -80,3 +80,33 @@ Corrected grader read:
 - ρ_t record: the OLD census's NEGATIVE signed biases (phys73 −0.32, phys26 −0.28 = zero-crossings)
   DID indicate genuine coherence in the OLD epoch. So "coherence" is historically real, UNPINNED
   this epoch — not "answered NO."
+
+## DEFINITIVE RESOLUTION — wide-sweep grade: COHERENT (Elder, post-#1185, scrutinized)
+
+Whisper's wide-depth sweep (160/280/320/360/400, job d9hjfbkhonhs73ad58vg, 23 QPU-s) resolves the
+mechanism the |⟨Z⟩|-magnitude sweep could not. **Grade: CONFIRMED COHERENT — and this time I scrutinize
+the inference, not just the numbers (the #1167 lesson):**
+
+- **The revival is real, not noise:** phys73 min 0.032@360 → 0.21@400 = +0.178 (~10σ for
+  shot-noise-limited |⟨Z⟩|); phys26 min 0.034@320 → 0.21@400; phys53 min 0.015@360 → 0.084@400
+  (~4–7σ). Three independent qubits, dip-then-rise at CONSISTENT node depths (~320–360) — coincidental
+  noise across three is implausible.
+- **The inference is sound (unlike monotone→decoherent):** a decoherence envelope A·e^(−γd) is
+  monotone-to-zero and NEVER revives. A |⟨Z⟩| that DIPS then RISES requires an oscillatory
+  |cos(φd)| term → a coherent (unitary) rotation. Revival is a POSITIVE, mechanism-specific signature
+  (the clean direction — the anti-over-claim caveat that killed "monotone→decoherent" does NOT bite a
+  revival, which has no decoherent explanation). Clean (not envelope-swamped) → no purity follow-up needed.
+- **Coverage:** 3/4 definitively coherent; phys23 monotone/unresolved (slow, node > 400) — does not
+  contradict (its node is simply beyond the sweep), consistent with a weaker/slower coherent drifter.
+
+**Verdict: the current-epoch RC-resistant pad-drift is COHERENT** — the ρ_t-arc tax-law/coherence
+question = YES this epoch. This VINDICATES the original ρ_t coherent characterization and the OLD
+census's negative signed biases (zero-crossings), and it definitively corrects the mid-arc
+"decoherent" over-claim (all 3 seats retracted; the wide-depth revival test settled it).
+
+**Honest note on my own arc:** my #1116 phys73-coherent instinct turned out RIGHT — but that does not
+retroactively justify concluding mechanism from 2 points; the wide-sweep is what ESTABLISHED it, and
+my #1167 "decoherent CONFIRMED" was a real grader error regardless of the final answer. Right-answer-
+by-instinct ≠ justified-inference. Total cost: census 13s + sweep 20s + wide-sweep 23s = ~56 QPU-s
+for a definitively-attributed physics result, vs the 320s main block (which was never the mechanism
+discriminator). Arc CLOSED.
