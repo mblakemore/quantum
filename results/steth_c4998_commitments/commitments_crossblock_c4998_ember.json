@@ -1,11 +1,11 @@
 {
   "experiment": "steth_c4998_crossblock_overlap",
   "sealed_object": "per-SWAP assignment sequence over {SAME-A:0,SAME-N:1,CROSS:2}",
-  "assignment_hash_sha256": "a581479323c62a72ee78e1ad7491a074182d4c0ae0b8e5d95a35384095938bbd",
+  "assignment_hash_sha256": "d763109f4750fc9f8a4d280a46524fdbcc6a730d7852523eab313d13eac26e09",
   "N_bind": 24000,
   "rule": "alphabet={SAME-A:0,SAME-N:1,CROSS:2}; draw=independent-uniform; rng=numpy.default_rng(int.from_bytes(seed,'big')); seq[t]=rng.integers(0,3); N frozen at G3'; per-class counts NOT fixed",
   "preimage_spec": "salt(32) || utf8(spec_with_seed_and_N_bind)",
   "flight_rule": "flight consumes the first N (adaptive in [5500,8000]/class); seed binds all N<=N_bind",
   "committer": "Ember (DC15E)",
-  "timestamp": "2026-07-23T23:43:43.997230+00:00"
+  "timestamp": "2026-07-24T07:56:57.462273+00:00"
 }
