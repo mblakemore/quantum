@@ -35,6 +35,37 @@ def commit_hash(P, salt):
     return hashlib.sha256((P + "|" + salt).encode()).hexdigest()
 
 
+def recert_edges(backend, n, bell_pairs, floor=0.75):
+    """Re-cert the flight's Q Bell-pair edges at the CURRENT epoch: routed 2q-depth==1 (native, no SWAP)
+    AND noise-model two-copy constraint-rate >= floor on a PUBLIC test-P. Returns (pass, depth2q, rate)."""
+    from qiskit import transpile
+    from qiskit_aer.noise import NoiseModel
+    from qiskit_aer.primitives import SamplerV2 as AerSampler
+    import exp142_robust_decoder_sim as G2
+    from exp142_p1_prep_confirm_ember_c4215 import prep_angles, pauli_to_bits
+    TEST_P = SC.TEST_P[n]
+    q_layout = [p[0] for p in bell_pairs] + [p[1] for p in bell_pairs]
+    qc, params = K.quantum_template(n)
+    tqc = transpile(qc, backend, initial_layout=q_layout, optimization_level=1, seed_transpiler=142)
+    depth2q = tqc.depth(lambda i: i.operation.num_qubits == 2)
+    nm = NoiseModel.from_backend(backend)
+    samp = AerSampler(options={"backend_options": {"noise_model": nm}})
+    mapping = G2.calibrate_bell_mapping(); csign = G2.calibrate_constraint_sign(mapping)
+    rng = np.random.default_rng(917 + n)
+    rows = []
+    for _ in range(8):
+        t1, p1 = prep_angles(n, TEST_P, rng); t2, p2 = prep_angles(n, TEST_P, rng)
+        rows.append(list(t1) + list(t2) + list(p1) + list(p2))
+    pr = samp.run([(tqc, K.named_rows(params, np.array(rows)), 256)]).result()[0]
+    Pb = pauli_to_bits(TEST_P); want = csign[TEST_P.count("Y") % 2]
+    g = t = 0
+    for i in range(len(rows)):
+        for bs, c in pr.data.c[i].get_counts().items():
+            Q = G2.outcome_to_bits(bs, n, mapping); g += c * (int(G2.sp_inner(Q, Pb, n)) == want); t += c
+    rate = g / t
+    return (depth2q == 1 and rate >= floor), int(depth2q), float(rate)
+
+
 def integrity_check(man, pubs, n):
     """P-INDEPENDENCE + arms + shots discipline + job-count. Manifest must be byte-identical to a
     DIFFERENT-P build (the blind invariant), carry both arms, all shots=1, emission=3^n."""
@@ -102,7 +133,18 @@ def main():
         from qiskit import transpile
         from qiskit_ibm_runtime import SamplerV2
         svc = _get_ibm_service(); backend = svc.backend(args.backend)
-        q_layout, conv_layout, bell_pairs = K.pick_layouts(backend, n)   # pinned G3 edges (re-cert clean)
+        q_layout, conv_layout, bell_pairs = K.pick_layouts(backend, n)
+        # RE-CERT AT FLIGHT EPOCH (freeze condition / rider #2): calibration drifts, so pick_layouts may
+        # pick different edges than the G3 cert. Do NOT fly un-certified edges — certify THESE now
+        # (routed depth-1 + noise-model constraint-rate PASS), ABORT if they fail. (Fix after n=4 flew
+        # on drifted-but-retro-certified edges: cert BEFORE fly, not after.)
+        ok, depth2q, rate = recert_edges(backend, n, bell_pairs)
+        print(f"  edge re-cert @flight epoch: edges={bell_pairs} routed-depth={depth2q} "
+              f"noise-model rate={rate:.3f} -> {'PASS' if ok else 'FAIL'}")
+        if not ok:
+            print(f"  ABORT: flight edges failed re-cert (depth {depth2q}, rate {rate:.3f}). Not flying "
+                  f"n={n} on un-certified edges. (P sealed but unused; re-run when cal recovers.)")
+            return 3
         pubs, man = SC.build_flight(n, P, os_rng, c_per_basis=C_PER_BASIS)
         integrity_check(man, pubs, n)
         print(f"  built: {man['emission_bases']}=3^n bases, {man['n_jobs_est']} arm-jobs, pinned edges={bell_pairs}")
