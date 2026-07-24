@@ -8,6 +8,34 @@ Builds on the extensive prior work; nothing below rebuilds it: the frozen exp142
 the [P3 grade](h9-p3-prime-directive-audit-whisper-c5001.md) (F119 = NEEDS-GATE, best-known-conditional),
 and the [field audit](field-audit-google-learning-advantage-obstruction-elder-c6567.md).*
 
+## ⟵ GATE A RESOLVED (Elder #1194, primary source read verbatim; doc 10752ad) + realization verified (Whisper #1196)
+
+**CONDITIONAL PASS — the α=1 worry was RIGHT (authors' own flagged gap), with a clean paper-endorsed fix.**
+
+- **Q2 (access model): PASS.** Google's "conventional/no-quantum-memory" bound covers arbitrary
+  *adaptive* single-copy POVMs — eq C1 uses adaptive rank-1 POVMs, App B.2 (Naimark, eq B6) reduces
+  ANY general POVM (incl. ancilla-entangled) to rank-1 WLOG; only *cross-copy coherence* is
+  restricted. F119's C1 single-copy benchmark sits **inside** the lower-bounded class. Not
+  fixed-basis-only. **The real classical competitor is bounded.**
+- **Q1 (holds AT α=1?): FAIL — authors' own open gap.** The D.4 hard instance is (I+0.9sP)/2ⁿ; the
+  bound rides on 0.9²=0.81 (D38). Authors' verbatim footnote: the α=1 case (I+sP)/2ⁿ has "a technical
+  difficulty… unclear whether this difficulty is fundamental." F119's (I+P)/2ⁿ **is** that open case.
+  The theorem does **not** cover F119-at-α=1.
+- **THE FIX (paper-endorsed, Google-precedented): fly at α=0.95, not the α=1 projector.** The theorem
+  covers any constant <1 → at 0.95 the Ω(2ⁿ) floor applies directly → **theorem-over-access**. Google's
+  own experiment flew α∈{−0.95, 0.95} (App A.2).
+- **Realization de-risk (Whisper #1196, VERIFIED n=3 max|dev|=6e-17): α=0.95 does NOT re-wash.**
+  (I+0.95P)/2ⁿ = 0.95·(uniform +1-eigenstate mixture) + 0.05·(maximally mixed) → realizable by a
+  **0-CZ product-state SHOT-ENSEMBLE** (per shot: 0.95 random +1-eigenstate of P / 0.05 random
+  computational-basis state). No CZ-ancilla-trace prep → the exp142c washout mechanism is avoided; the
+  prep stays fidelity-safe. Only the **two-copy Bell readout** remains fragile (Ember G3).
+
+**Net**: theorem-over-access F119 is **reachable AND flyable**. Remaining gates before it's a claim:
+(b) the ~240-job α=0.95 re-fly [Creator binary spend], Ember's two-copy Bell G3, and Elder's
+task-match (is the identify-among-4ⁿ-Paulis task the D.4-covered hard task — which the SPRT kit
+already runs — or must the decoder align to predict-|tr(Pρ)|?). **Sections below are the pre-Gate-A
+framing, retained for the record; the α=0.95 result supersedes the α=1 assumption throughout.**
+
 ## Three separable things — and only two of them can build an advantage
 
 F119's original Exp142 produced big ratios (4.9×/31.5×/266.6×/2417.5×) but was **superseded-as-
