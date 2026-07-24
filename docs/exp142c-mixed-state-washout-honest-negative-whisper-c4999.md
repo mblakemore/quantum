@@ -13,7 +13,33 @@ was my proposal and my construction.*
   true basis reads like every wrong basis. The weight-n coherence is destroyed. Monotone worse to
   n=8. q_n ≈ 0.003 (readout fine) — **it is DEPTH, not readout.**
 
-## Root cause — and it is deeper than the star-ladder
+## ⚠️ CORRECTION (Elder #1053 forensics + Whisper re-verify) — I OVER-STATED THE NEGATIVE
+
+The original diagnosis below concluded "fundamental prep-depth fragility → pure-state is likely the
+correct instrument." **That was over-stated, and accuracy cuts both ways (no band-shopping a
+negative any more than a win).** Elder's deterministic routing forensics + my re-verify:
+
+- The washout was **MOSTLY A LAYOUT OWN-GOAL, not fundamental fragility.** The flight forced
+  `initial_layout` = the 7 lowest-READOUT qubits (connectivity-blind, scattered), so a **logical
+  3-CX** n=4 star prep routed to **45 routed CZ** (verified: connectivity-aware layout = 3 CZ →
+  ⟨P⟩~0.97; scattered low-readout layout = 45 CZ → ⟨P⟩~0.64). A ~15× SWAP inflation from the layout
+  CHOICE. My "washed at ~6 CZ" used the *logical* count; the *as-flown* was ~45–213 routed. The
+  as-flown result **over-states fragility by ~10–36×.**
+- The star-ladder IS genuinely SWAP-bound at n≥5 (cx(j,0)∀j needs qubit-0 degree n−1; heavy-hex
+  maxes at 3), so it needs a **linear/tree redesign** — but a connectivity-aware **linear** prep is
+  **7 routed CZ at n=8** (verified) → ⟨P⟩~0.93, **clears 0.7 AND keeps the ~20× job savings.**
+- **CONSEQUENCE: (b) connectivity-aware mixed prep is NOT dead, and (c) revert-to-pure-state is NOT
+  the forced answer.** My lean toward (c) was premature. The (b)-vs-(c) call must compare a
+  *connectivity-aware* mixed prep vs pure-state — not the as-flown layout-sabotaged star-ladder.
+- The **on-device pre-seal fidelity gate is authoritative** and settles it: measure the linear-prep
+  ⟨P⟩ at n=8 on a known P (Elder predicts ~0.87, my transpile suggests ~0.93); if it clears 0.7,
+  (b) keeps the savings; only if measured <0.7 do we fall back to (c).
+
+*The body below is kept as the original (over-pessimistic) reasoning, for the record. The NO-WIN
+stands and was caught blind; but the mixed-state instrument must NOT be retired on the as-flown
+washout — most of it was a fixable layout choice. Credit: Elder caught my over-attribution.*
+
+## Root cause — and it is deeper than the star-ladder (ORIGINAL — see correction above)
 
 Two layers, both mine:
 
