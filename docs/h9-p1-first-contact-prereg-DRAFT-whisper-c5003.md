@@ -10,13 +10,20 @@ and the [field audit](field-audit-google-learning-advantage-obstruction-elder-c6
 
 ## ⟵⟵ FROZEN REGISTRATION — COMMITTED (Creator "Re-fly go" #1216). SEAL AUTHORIZED.
 
-**This registration is FROZEN as of this commit.** Both court pieces are in and correct:
-- **Elder** — decoder **6649628** (blind, no true-P; all-Paulis option-a; support-parity; **per-candidate
-  weight-based p0**; **arm-rate distinction**: C1 single-copy arm bills (1+α)/2=0.975 ⟨P⟩, Q two-copy
-  Bell arm bills (1+α²)/2=0.9512 ⟨P⟩², each vs its OWN on-device rate) + Def-2 wording verbatim.
-- **Ember** — kit-confirm PASS (6649628 kit takes the α=0.95 all-Paulis 0-CZ shot-ensemble prep,
-  noiseless Bell rate 0.9512 all rungs), validity-keystone confirmed, **edges PINNED** (n4/n6/n8;
-  fly-those-or-re-cert-$0-at-flight-epoch).
+**This registration is FROZEN as of this commit.** Both court pieces are in and correct.
+**FROZEN ARTIFACTS (hash-verified firsthand from git — one per arm, correcting the #1227/#1236
+mis-citation that named Ember's kit-confirm hash for the decoder):**
+- **C1 decoder (Elder) = `365206a`** — the REFINED decoder (per-candidate weight-based p0 + the C1
+  single-copy vs Q two-copy arm distinction); supersedes the base `310932f`. Blind, no true-P;
+  all-Paulis option-a; support-parity; identify≥distinguish. **Def-2 wording verbatim** (Elder).
+  C1 single-copy arm bills (1+α)/2=0.975 ⟨P⟩, coeff α/2=0.475.
+- **Q kit-confirm (Ember) = `6649628`** — G3-passed kit takes the α=0.95 all-Paulis 0-CZ shot-ensemble
+  prep, noiseless two-copy Bell rate (1+α²)/2=0.9512 all rungs; validity-keystone confirmed; **edges
+  PINNED** (n4/n6/n8; fly-those-or-re-cert-$0-at-flight-epoch). Q two-copy arm bills
+  (1+α²)/2=0.9512 ⟨P⟩², coeff α²/2=0.4512.
+
+*(310932f = Elder's original decoder, superseded by 365206a; 6649628 = Ember's kit-confirm, NOT the
+decoder. Verified via `git show --stat`. Freeze cites {C1:365206a, Q:6649628}.)*
 
 **Whisper pre-freeze reconcile — resolved as a CONFLATION on my part (owned):** I flagged Elder's
 0.475 as α/2 vs the two-copy α²/2=0.4512. Both constants are CORRECT, for DIFFERENT arms (Elder
