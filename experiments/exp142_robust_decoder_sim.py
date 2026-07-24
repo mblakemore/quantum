@@ -137,7 +137,7 @@ def pauli_to_bits(P):
     n = len(P)
     v = np.zeros(2 * n, dtype=np.int8)
     for i, p in enumerate(P):
-        x, z = {"X": (1, 0), "Y": (1, 1), "Z": (0, 1)}[p]
+        x, z = {"I": (0, 0), "X": (1, 0), "Y": (1, 1), "Z": (0, 1)}[p]  # I->(0,0): all-Paulis∖{I} safe (Elder #1290)
         v[i], v[n + i] = x, z
     return v
 
