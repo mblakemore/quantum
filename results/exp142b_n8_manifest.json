@@ -1,0 +1,1333 @@
+{
+ "experiment": "exp142b_f119_remedy_refly",
+ "n": 8,
+ "M": 5,
+ "C": 42,
+ "q_n": 0.00335693359375,
+ "ensemble": "fullweight_eps1_v2",
+ "backend": "ibm_fez",
+ "bell_pairs": [
+  [
+   21,
+   22
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   9,
+   10
+  ],
+  [
+   58,
+   71
+  ],
+  [
+   25,
+   26
+  ],
+  [
+   13,
+   14
+  ],
+  [
+   114,
+   115
+  ],
+  [
+   146,
+   147
+  ]
+ ],
+ "conv_layout": [
+  22,
+  36,
+  14,
+  18,
+  110,
+  142,
+  86,
+  114
+ ],
+ "q_layout": [
+  21,
+  4,
+  9,
+  58,
+  25,
+  13,
+  114,
+  146,
+  22,
+  5,
+  10,
+  71,
+  26,
+  14,
+  115,
+  147
+ ],
+ "jobs": [
+  {
+   "job_id": "d9hds1chonhs73actgfg",
+   "pub_lo": 0,
+   "pub_hi": 100
+  },
+  {
+   "job_id": "d9hds2d0k0jc738i1u30",
+   "pub_lo": 100,
+   "pub_hi": 180
+  }
+ ],
+ "shots_est": 1379360,
+ "pubs": [
+  {
+   "kind": "sentinel_start",
+   "shots": 400
+  },
+  {
+   "kind": "cal",
+   "pauli": "ZXZZZXZX",
+   "b": "11110011",
+   "shots": 100
+  },
+  {
+   "kind": "cal",
+   "pauli": "YYYYXXYY",
+   "b": "11010100",
+   "shots": 100
+  },
+  {
+   "kind": "cal",
+   "pauli": "ZZZZZYYX",
+   "b": "00010010",
+   "shots": 100
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 32768,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 40960,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 49152,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 57344,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 65536,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 73728,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 81920,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 90112,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 98304,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 106496,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 114688,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 122880,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 131072,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 139264,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 147456,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 155648,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 163840,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 172032,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 180224,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 188416,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 196608,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 204800,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 212992,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 221184,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 229376,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 237568,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 245760,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 253952,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 262144,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 270336,
+   "rows": 5226,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "quantum",
+   "rep": 0,
+   "rows": 90,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 32768,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 40960,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 49152,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 57344,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 65536,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 73728,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 81920,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 90112,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 98304,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 106496,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 114688,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 122880,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 131072,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 139264,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 147456,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 155648,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 163840,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 172032,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 180224,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 188416,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 196608,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 204800,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 212992,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 221184,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 229376,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 237568,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 245760,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 253952,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 262144,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 270336,
+   "rows": 5226,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "quantum",
+   "rep": 1,
+   "rows": 90,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 32768,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 40960,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 49152,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 57344,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 65536,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 73728,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 81920,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 90112,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 98304,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 106496,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 114688,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 122880,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 131072,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 139264,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 147456,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 155648,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 163840,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 172032,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 180224,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 188416,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 196608,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 204800,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 212992,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 221184,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 229376,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 237568,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 245760,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 253952,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 262144,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 270336,
+   "rows": 5226,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "quantum",
+   "rep": 2,
+   "rows": 90,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 32768,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 40960,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 49152,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 57344,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 65536,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 73728,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 81920,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 90112,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 98304,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 106496,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 114688,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 122880,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 131072,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 139264,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 147456,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 155648,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 163840,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 172032,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 180224,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 188416,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 196608,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 204800,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 212992,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 221184,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 229376,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 237568,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 245760,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 253952,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 262144,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 270336,
+   "rows": 5226,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "quantum",
+   "rep": 3,
+   "rows": 90,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 32768,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 40960,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 49152,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 57344,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 65536,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 73728,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 81920,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 90112,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 98304,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 106496,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 114688,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 122880,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 131072,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 139264,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 147456,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 155648,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 163840,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 172032,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 180224,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 188416,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 196608,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 204800,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 212992,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 221184,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 229376,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 237568,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 245760,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 253952,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 262144,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 270336,
+   "rows": 5226,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "quantum",
+   "rep": 4,
+   "rows": 90,
+   "shots": 1
+  },
+  {
+   "kind": "sentinel_end",
+   "shots": 400
+  }
+ ],
+ "committer": "Ember (DC15E)"
+}

@@ -112,7 +112,7 @@ def main():
             print("--submit requires --n"); return 2
         n, M = args.n, GRID[args.n]
         with open(SECRET) as f:
-            P = json.load(f)[ENSEMBLE][str(n)]["P"]
+            P = json.load(f)[f"{ENSEMBLE}:{n}"]["P"]
         from run_exp66_qpu_partb import _get_ibm_service
         from qiskit import transpile
         from qiskit_ibm_runtime import SamplerV2

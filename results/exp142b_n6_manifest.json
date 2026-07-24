@@ -1,0 +1,779 @@
+{
+ "experiment": "exp142b_f119_remedy_refly",
+ "n": 6,
+ "M": 20,
+ "C": 35,
+ "q_n": 0.0032145182291666665,
+ "ensemble": "fullweight_eps1_v2",
+ "backend": "ibm_fez",
+ "bell_pairs": [
+  [
+   21,
+   22
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   9,
+   10
+  ],
+  [
+   58,
+   71
+  ],
+  [
+   25,
+   26
+  ],
+  [
+   13,
+   14
+  ]
+ ],
+ "conv_layout": [
+  22,
+  36,
+  14,
+  18,
+  110,
+  142
+ ],
+ "q_layout": [
+  21,
+  4,
+  9,
+  58,
+  25,
+  13,
+  22,
+  5,
+  10,
+  71,
+  26,
+  14
+ ],
+ "jobs": [
+  {
+   "job_id": "d9hdrochonhs73actg40",
+   "pub_lo": 0,
+   "pub_hi": 100
+  },
+  {
+   "job_id": "d9hdrorsbqfc73eptna0",
+   "pub_lo": 100,
+   "pub_hi": 105
+  }
+ ],
+ "shots_est": 513000,
+ "pubs": [
+  {
+   "kind": "sentinel_start",
+   "shots": 400
+  },
+  {
+   "kind": "cal",
+   "pauli": "XZXZXY",
+   "b": "000000",
+   "shots": 100
+  },
+  {
+   "kind": "cal",
+   "pauli": "XXXZXZ",
+   "b": "110110",
+   "shots": 100
+  },
+  {
+   "kind": "cal",
+   "pauli": "YYZYYZ",
+   "b": "011000",
+   "shots": 100
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "quantum",
+   "rep": 0,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "quantum",
+   "rep": 1,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "quantum",
+   "rep": 2,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "quantum",
+   "rep": 3,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "quantum",
+   "rep": 4,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 5
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 5
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 5
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 5
+  },
+  {
+   "kind": "quantum",
+   "rep": 5,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 6
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 6
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 6
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 6
+  },
+  {
+   "kind": "quantum",
+   "rep": 6,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 7
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 7
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 7
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 7
+  },
+  {
+   "kind": "quantum",
+   "rep": 7,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 8
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 8
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 8
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 8
+  },
+  {
+   "kind": "quantum",
+   "rep": 8,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 9
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 9
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 9
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 9
+  },
+  {
+   "kind": "quantum",
+   "rep": 9,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 10
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 10
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 10
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 10
+  },
+  {
+   "kind": "quantum",
+   "rep": 10,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 11
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 11
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 11
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 11
+  },
+  {
+   "kind": "quantum",
+   "rep": 11,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 12
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 12
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 12
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 12
+  },
+  {
+   "kind": "quantum",
+   "rep": 12,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 13
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 13
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 13
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 13
+  },
+  {
+   "kind": "quantum",
+   "rep": 13,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 14
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 14
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 14
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 14
+  },
+  {
+   "kind": "quantum",
+   "rep": 14,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 15
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 15
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 15
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 15
+  },
+  {
+   "kind": "quantum",
+   "rep": 15,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 16
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 16
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 16
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 16
+  },
+  {
+   "kind": "quantum",
+   "rep": 16,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 17
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 17
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 17
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 17
+  },
+  {
+   "kind": "quantum",
+   "rep": 17,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 18
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 18
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 18
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 18
+  },
+  {
+   "kind": "quantum",
+   "rep": 18,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 19
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 8192,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 19
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 16384,
+   "rows": 8192,
+   "shots": 1,
+   "rep": 19
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 24576,
+   "rows": 939,
+   "shots": 1,
+   "rep": 19
+  },
+  {
+   "kind": "quantum",
+   "rep": 19,
+   "rows": 80,
+   "shots": 1
+  },
+  {
+   "kind": "sentinel_end",
+   "shots": 400
+  }
+ ],
+ "committer": "Ember (DC15E)"
+}

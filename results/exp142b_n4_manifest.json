@@ -1,0 +1,340 @@
+{
+ "experiment": "exp142b_f119_remedy_refly",
+ "n": 4,
+ "M": 20,
+ "C": 27,
+ "q_n": 0.003082275390625,
+ "ensemble": "fullweight_eps1_v2",
+ "backend": "ibm_fez",
+ "bell_pairs": [
+  [
+   21,
+   22
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   9,
+   10
+  ],
+  [
+   58,
+   71
+  ]
+ ],
+ "conv_layout": [
+  22,
+  36,
+  14,
+  18
+ ],
+ "q_layout": [
+  21,
+  4,
+  9,
+  58,
+  22,
+  5,
+  10,
+  71
+ ],
+ "jobs": [
+  {
+   "job_id": "d9hdrg3sbqfc73eptmug",
+   "pub_lo": 0,
+   "pub_hi": 45
+  }
+ ],
+ "shots_est": 46040,
+ "pubs": [
+  {
+   "kind": "sentinel_start",
+   "shots": 400
+  },
+  {
+   "kind": "cal",
+   "pauli": "ZZXZ",
+   "b": "0101",
+   "shots": 100
+  },
+  {
+   "kind": "cal",
+   "pauli": "XZZX",
+   "b": "1001",
+   "shots": 100
+  },
+  {
+   "kind": "cal",
+   "pauli": "XZYX",
+   "b": "0000",
+   "shots": 100
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 0
+  },
+  {
+   "kind": "quantum",
+   "rep": 0,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 1
+  },
+  {
+   "kind": "quantum",
+   "rep": 1,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 2
+  },
+  {
+   "kind": "quantum",
+   "rep": 2,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 3
+  },
+  {
+   "kind": "quantum",
+   "rep": 3,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 4
+  },
+  {
+   "kind": "quantum",
+   "rep": 4,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 5
+  },
+  {
+   "kind": "quantum",
+   "rep": 5,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 6
+  },
+  {
+   "kind": "quantum",
+   "rep": 6,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 7
+  },
+  {
+   "kind": "quantum",
+   "rep": 7,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 8
+  },
+  {
+   "kind": "quantum",
+   "rep": 8,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 9
+  },
+  {
+   "kind": "quantum",
+   "rep": 9,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 10
+  },
+  {
+   "kind": "quantum",
+   "rep": 10,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 11
+  },
+  {
+   "kind": "quantum",
+   "rep": 11,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 12
+  },
+  {
+   "kind": "quantum",
+   "rep": 12,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 13
+  },
+  {
+   "kind": "quantum",
+   "rep": 13,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 14
+  },
+  {
+   "kind": "quantum",
+   "rep": 14,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 15
+  },
+  {
+   "kind": "quantum",
+   "rep": 15,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 16
+  },
+  {
+   "kind": "quantum",
+   "rep": 16,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 17
+  },
+  {
+   "kind": "quantum",
+   "rep": 17,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 18
+  },
+  {
+   "kind": "quantum",
+   "rep": 18,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "conv_v2",
+   "row_lo": 0,
+   "rows": 2187,
+   "shots": 1,
+   "rep": 19
+  },
+  {
+   "kind": "quantum",
+   "rep": 19,
+   "rows": 60,
+   "shots": 1
+  },
+  {
+   "kind": "sentinel_end",
+   "shots": 400
+  }
+ ],
+ "committer": "Ember (DC15E)"
+}
