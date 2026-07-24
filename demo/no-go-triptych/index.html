@@ -1,29 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The No-Go Triptych — three theorem-walls, one chip | The Quantum Museum</title>
-<meta name="description" content="Three no-go theorems of quantum mechanics — Bell's inequality (S=2.752), indefinite causal order (F82 217σ), and Peres–Mermin contextuality (F106 196σ) — all breached on a single ibm_marrakesh run.">
-<meta property="og:title" content="The No-Go Triptych — three theorem-walls, one chip | The Quantum Museum">
-<meta property="og:description" content="Three no-go theorems of quantum mechanics — Bell's inequality (S=2.752), indefinite causal order (F82 217σ), and Peres–Mermin contextuality (F106 196σ) — all breached on a single ibm_marrakesh run.">
+<meta name="description" content="Three foundational no-go theorems, each a proven ceiling no classical strategy can pass, all breached on one chip: Bell/CHSH (S=2.7522, 53σ), indefinite causal order (F82, 216.8σ), and Peres–Mermin contextuality (F106, 196σ) — each with an executed classical null. Real hardware, ibm_marrakesh.">
+<meta property="og:title" content="The No-Go Triptych — three theorem-walls, one chip">
+<meta property="og:description" content="Bell, indefinite causal order, and Peres–Mermin contextuality — three proven classical ceilings, all breached on one IBM Heron chip (53σ / 216.8σ / 196σ), each with an executed classical null.">
 <meta name="theme-color" content="#04060c">
 <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
-:root{
+  :root{
     --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
     --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
     --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    /* legacy museum.css aliases (body + script read these) */
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2);
+    --edge:var(--hair); --edge-2:var(--hair-2);
     --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
   }
   *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
   body{margin:0;background:
-      radial-gradient(70% 42% at 55% -5%, rgba(98,230,255,.06), transparent 65%),
+      radial-gradient(58% 40% at 30% -6%, rgba(167,139,250,.09), transparent 68%),
       var(--bg);
     color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
   .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
@@ -31,313 +35,284 @@
   a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
   a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
   @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
-  .wrap{max-width:900px;margin:0 auto;padding:0 clamp(16px,4vw,32px) 72px}
 
-  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 26px;font-family:var(--mono);font-size:12.5px}
-  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
-  .topbar .sp{flex:1}
-  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
-  .topbar .wing b{color:var(--cyan);font-weight:400}
+  .shell { max-width: 980px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar { display:flex; align-items:center; gap:14px; padding:18px 0 8px; font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color: var(--ink-3); } .topbar a:hover { color: var(--cyan); text-decoration:none; }
+  .topbar .sp { flex:1; }
+  .topbar .wing { font-family:var(--mich); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-4); }
+  .topbar .wing b { color:var(--violet); font-weight:400; }
 
-  .eyebrow{font-family:var(--mich);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-4);
-    margin:0 0 20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-  .eyebrow .dot{width:4px;height:4px;border-radius:50%;background:var(--hair-2)}
+  .hero { padding: clamp(18px,3.5vw,34px) 0 6px; }
+  .eyebrow { font-family:var(--mich); font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:var(--ink-4);
+    margin:0 0 18px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .eyebrow .dot { width:4px; height:4px; border-radius:50%; background:var(--hair-2); }
+  h1 { font-family:var(--sans); font-weight:300; letter-spacing:-.015em; line-height:1.1;
+    font-size:clamp(28px,5.2vw,46px); margin:0 0 16px; color:var(--ink); text-wrap:balance; }
+  h1 .b { color: var(--cyan); font-weight:600; } h1 .c { color: var(--violet); font-weight:600; } h1 .x { color: var(--amber); font-weight:600; }
+  .lede { font-size:clamp(15px,2.1vw,17.5px); color:var(--ink-3); max-width:66ch; margin:0 0 16px; }
+  .lede strong { color:var(--ink-2); }
 
-  h1{font-family:var(--sans);font-weight:300;font-size:clamp(30px,4.8vw,46px);line-height:1.1;letter-spacing:-.015em;
-    margin:0 0 18px;color:var(--ink);text-wrap:balance;max-width:22ch}
-  h1 b{font-weight:600;color:var(--cyan)}
-  .lede{font-size:clamp(15px,2vw,17.5px);color:var(--ink-3);max-width:68ch;margin:0 0 8px}
-  .lede b{color:var(--ink);font-weight:600}
+  .pcard { background:var(--panel); border:1px solid var(--hair); border-radius:13px; padding:14px 16px; margin:6px 0 18px; max-width:70ch; box-shadow:var(--shadow); }
+  .pcard h2 { font-family:var(--mich); font-size:8.5px; letter-spacing:.18em; text-transform:uppercase; margin:0 0 8px; color:var(--cyan); }
+  .pcard p { font-size:13.5px; color:var(--ink-3); margin:0; }
+  .pcard b { color: var(--ink); }
 
-  .specbtn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13px;font-weight:600;
-    text-decoration:none;color:#04121a;background:var(--cyan);border-radius:10px;padding:11px 18px;margin:18px 12px 4px 0}
-  .specbtn:hover{filter:brightness(1.08);text-decoration:none}
-  .md-link{font-family:var(--mono);font-size:12px;color:var(--ink-4);text-decoration:underline}
-  .md-link:hover{color:var(--cyan)}
+  .herobtns { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:16px 0 12px; }
+  .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13px; font-weight:600;
+    text-decoration:none; color:#04121a; background:var(--cyan); border:1.5px solid var(--cyan);
+    border-radius:10px; padding:11px 18px; }
+  .specbtn:hover { filter:brightness(1.08); text-decoration:none; }
+  .specbtn .arw { font-size:15px; }
+  .md-link { font-family:var(--mono); font-size:12px; color:var(--ink-4); text-decoration:underline; }
+  .md-link:hover { color:var(--cyan); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
+    color:var(--ink-4); border:1px solid var(--hair); border-radius:999px; padding:6px 13px; }
+  .scope b, .scope strong { color:var(--amber); font-weight:600; }
 
-  /* ── the rail ─────────────────────────────────────────────── */
-  .rail{position:relative;margin-top:54px;padding-left:40px}
-  .rail::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;
-    background:linear-gradient(180deg,var(--amber) 0%,var(--amber) 62%,var(--cyan) 78%,var(--cyan) 100%);opacity:.45}
-  .stop{position:relative;margin-bottom:60px}
-  .stop::before{content:"";position:absolute;left:-40px;top:5px;width:16px;height:16px;border-radius:50%;
-    background:var(--bg);border:3px solid var(--amber)}
-  .stop.off::before{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(98,230,255,.12), 0 0 18px rgba(98,230,255,.5)}
-  .rung{font-family:var(--mich);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
-  .stop.off .rung{color:var(--cyan)}
-  h2{font-family:var(--sans);font-weight:500;font-size:clamp(19px,2.6vw,24px);line-height:1.25;letter-spacing:-.01em;
-    margin:0 0 10px;color:var(--ink);text-wrap:balance}
-  .stop p{max-width:68ch;margin:.5em 0;font-size:15px}
-  .stop p em{color:var(--ink-2)}
+  .panel { background:var(--panel); border:1px solid var(--hair); border-radius:13px;
+    padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel-label { font-family:var(--mich); font-size:9px; letter-spacing:.2em; text-transform:uppercase;
+    margin:0 0 6px; color: var(--cyan); }
+  .panel h2 { font-family:var(--sans); font-weight:500; font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; color:var(--ink); text-wrap:balance; }
+  .panel .sub { color:var(--ink-3); font-size:14px; margin:0 0 20px; max-width:70ch; }
+  .panel .sub strong { color:var(--ink-2); }
 
-  .card{background:var(--panel);border:1px solid var(--hair);border-radius:13px;padding:16px 18px;margin:14px 0;
-    max-width:660px;box-shadow:var(--shadow)}
-  .card .k{font-family:var(--mich);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-4);margin-bottom:8px}
-  .card p{margin:0;font-size:14.5px;color:var(--ink-2)}
-  .num{font-family:var(--mono);font-size:.95em;color:var(--amber);font-weight:600}
-  .stop.off .num{color:var(--cyan)}
-  .exp{font-family:var(--mono);font-size:12px;color:var(--ink-4);max-width:68ch}
-  .exp a{color:var(--ink-4);text-decoration:underline} .exp a:hover{color:var(--cyan)}
-  code{font-family:var(--mono);font-size:.88em;background:var(--panel-2);border:1px solid var(--hair);
-    border-radius:5px;padding:1px 6px;color:var(--ink-3);overflow-wrap:anywhere}
+  .selector { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:20px; }
+  .selector .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-4); }
+  .cbtn { font-family:var(--mono); font-size:12.5px; font-weight:600; padding:9px 13px; border-radius:10px;
+    border:1.5px solid var(--hair-2); background:var(--panel-2); color:var(--ink-2); cursor:pointer; transition:all .12s; }
+  .cbtn:hover { border-color:var(--cyan); }
+  .cbtn.on[data-key="bell"] { background:var(--cyan); color:#04121a; border-color:var(--cyan); }
+  .cbtn.on[data-key="causal"] { background:var(--violet); color:#04121a; border-color:var(--violet); }
+  .cbtn.on[data-key="context"] { background:var(--amber); color:#04121a; border-color:var(--amber); }
 
-  .zone{background:color-mix(in srgb,var(--cyan) 6%,var(--panel));border:1px solid color-mix(in srgb,var(--cyan) 32%,transparent);
-    border-radius:13px;padding:18px 20px;margin:16px 0;max-width:660px;box-shadow:var(--shadow)}
-  .zone .k{font-family:var(--mich);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
-  .zone p{margin:0;font-size:14.5px;color:var(--ink-2)}
-  .zone .plat{margin-top:10px;padding-top:10px;border-top:1px dashed color-mix(in srgb,var(--cyan) 25%,transparent);
-    font-size:13px;color:var(--ink-3)}
+  .towers { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,2.5vw,20px); }
+  @media (max-width:640px){ .towers { grid-template-columns:1fr; gap:16px; } }
+  .tcol { border:1px solid var(--hair); border-radius:14px; padding:14px 10px 12px; background:var(--panel-2);
+    text-align:center; transition:opacity .2s, box-shadow .2s, border-color .2s; }
+  .tcol.dim { opacity:1; }
+  .tcol.sel { box-shadow:0 0 0 2px var(--sel); border-color:var(--sel); }
+  .tw-name { font-family:var(--mono); font-size:15px; font-weight:700; letter-spacing:-.01em; }
+  .tw-sub { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-bottom:2px; }
+  .tw-forbids { font-size:11.5px; color:var(--ink-2); margin:4px auto 6px; max-width:22ch; min-height:2.4em; }
+  .tw-svg { width:100%; max-width:170px; display:block; margin:0 auto; }
+  .tw-nums { margin-top:8px; font-family:var(--mono); }
+  .tw-sig { font-size:26px; font-weight:600; letter-spacing:-.02em; line-height:1; }
+  .tw-sig small { font-size:11px; color:var(--ink-3); font-weight:500; }
+  .tw-row { font-size:11.5px; color:var(--ink-2); margin-top:5px; }
+  .tw-row.q b { color: var(--ink); }
+  .tw-row.wall { color: var(--ink-3); } .tw-row.null { color: var(--ink-3); }
 
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
-  .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none}}
+  .detail { margin-top:22px; border-top:1px solid var(--hair); padding-top:16px; }
+  .detail .dt-name { font-family:var(--mono); font-size:13px; font-weight:700; }
+  .detail p { font-size:14px; color:var(--ink-2); margin:6px 0 10px; max-width:70ch; }
+  .detail p b { color:var(--ink); }
+  .deeper { display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:12.5px; font-weight:600;
+    text-decoration:none; border:1.5px solid var(--sel); color:var(--sel); border-radius:9px; padding:7px 13px; }
+  .deeper:hover { background: color-mix(in srgb, var(--sel) 12%, transparent); text-decoration:none; }
 
-  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--hair);font-size:13px;color:var(--ink-4);max-width:70ch}
-  footer a{color:var(--cyan)}
-  .footmarks{margin-top:16px;font-family:var(--mich);font-size:9px;letter-spacing:.2em;color:var(--ink-4);
-    display:flex;gap:8px 20px;flex-wrap:wrap;text-transform:uppercase}
+  .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
+  .rc { border:1px solid var(--hair); border-radius:12px; padding:15px 16px; background:var(--panel-2); }
+  .rc h3 { font-family:var(--mich); font-size:8.5px; letter-spacing:.16em; text-transform:uppercase; margin:0 0 8px; color:var(--cyan); }
+  .rc p { font-size:13px; color:var(--ink-3); margin:0; }
+  .rc b { color:var(--ink); } .rc .yes { color:var(--good); font-weight:600; }
+  .links-row { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; }
+
+  .badge-row { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:30px;
+    padding-top:18px; border-top:1px solid var(--hair); font-family:var(--mich); font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-4); }
+  .badge-row .b { color: var(--cyan); } .badge-row .c { color: var(--violet); } .badge-row .x { color: var(--amber); }
+  .badge-row a { font-family:var(--mono); font-size:11.5px; letter-spacing:0; text-transform:none; color: var(--ink-3); }
+  .badge-row a:hover { color: var(--cyan); }
+  .badge-row .sp2 { flex:1; }
 </style>
->
+</head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="shell">
 
-<nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <span class="wingtag">· Wing II · The No-Go Games</span>
+  <nav class="topbar" aria-label="Museum">
+    <a href="../">← The Museum</a>
     <span class="sp"></span>
-</nav>
+    <span class="wing">WING <b>II</b> · The No-Go Games</span>
+  </nav>
 
-<main id="main">
+  <main id="main">
+  <header class="hero">
+    <p class="eyebrow">THREE NO-GO THEOREMS<span class="dot"></span>ONE COURT<span class="dot"></span>EVERY NUMBER MEASURED</p>
+    <h1>Three walls — <span class="b">Bell</span>, <span class="c">causal order</span>, <span class="x">contextuality</span> — all breached.</h1>
+    <p class="lede">A <strong>no-go theorem</strong> is a proof: a hard ceiling that <strong>no classical strategy</strong> can pass. Cross
+    it on hardware and you haven't just done well — you've <strong>ruled out a way the world could have been</strong>. Here are
+    three, each forbidding a different classical intuition, each with its ceiling breached on the same chip — and each
+    with a classical control run alongside that lands right at the wall.</p>
 
-<section class="hero">
-    <p class="eyebrow">Three theorem-walls, one chip</p>
-    <h1>The <span class="c">No-Go</span> Triptych</h1>
-    <p class="lede">Bell's inequality. Indefinite causal order. Contextuality — the Peres–Mermin square.<br>
-        Three "impossible" quantum facts, each breached on a single run of <strong style="color:var(--amber)">ibm_marrakesh</strong>.</p>
-    <div class="pcard"><h2>The premise</h2><p>If particles carry pre-written answers (hidden variables), if events have a definite time-order, and if measurement values exist independently of context — then reality obeys three separate walls. We show all three fall on one chip.</p></div>
-</section>
-
-<!-- PANEL A -->
-<section class="panel">
-<p class="panel-label">Exhibit A — Bell / CHSH</p>
-<h2>The hidden-variable bound is 2. Reality on silicon says <strong style="color:var(--cyan)">2.75</strong>.</h2>
-<p class="sub">Bell's inequality: if two particles share pre-agreed instructions (hidden variables), the CHSH sum can't exceed 2. Quantum mechanics predicts up to √2 × 2 ≈ 2.83. We run the standard circuit on ibm_marrakesh, measure all four correlation terms, and get S = 2.7522 — a massive violation.</p>
-<div class="bench">
-    <div class="chart-wrap">
-        <svg class="chart-svg" id="bellChart" viewBox="0 0 360 240" role="img" aria-label="CHSH bar chart showing S=2.7522 vs classical bound of 2"></svg>
-        <p class="basis-cap">|⟨A₀B₀⟩| + |⟨A₀B₁⟩| + |⟨A₁B₀⟩| + |⟨A₁B₁⟩| → S = 2.7522</p>
+    <div class="pcard">
+      <h2>What each wall forbids</h2>
+      <p><b style="color:var(--cyan)">Bell</b> forbids <strong>locality</strong> (outcomes fixed by local hidden variables) ·
+      <b style="color:var(--violet)">Causal order</b> forbids <strong>a definite sequence of events</strong> (even a random
+      mixture of orders) · <b style="color:var(--amber)">Contextuality</b> forbids <strong>pre-set values</strong> (each
+      observable answering the same regardless of what's measured with it). Beating each ceiling falsifies that
+      picture.</p>
     </div>
-    <div class="verdict" id="bellVerdict"></div>
-</div>
-<p class="det-punch">At <strong>S = 2.7522 ± 0.019</strong>, that's <span class="num">53σ</span> above the classical limit of 2. The gap between "local realism" and this chip is wider than most experimental margins in history. Bell's theorem isn't just compatible with quantum mechanics here — it's <strong>breathtakingly confirmed</strong>.</p>
-</section>
 
-<!-- PANEL B -->
-<section class="panel">
-<p class="panel-label">Exhibit B — Indefinite Causal Order</p>
-<h2>Cause A before B, B before A — both at once — on a single qubit pair.</h2>
-<p class="sub">In everyday physics, events have an order: A then B, or B then A. Quantum mechanics allows a superposition of causal orders — neither comes first. We implement a quantum switch on ibm_marrakesh (F82) using a control qubit to select the order of two operations on a target qubit.</p>
-<div class="bench">
-    <div class="chart-wrap">
-        <svg class="chart-svg" id="causalChart" viewBox="0 0 360 240" role="img" aria-label="Causal order bar chart showing indefinite causal order"></svg>
-        <p class="basis-cap">Control |0⟩ → AB · Control |+⟩ → superposition · Control |1⟩ → BA · F82 / ibm_marrakesh</p>
+    <div class="herobtns">
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
+      <a href="./spec.md" class="md-link">plain-text (.md)</a>
+      <span class="scope">Certified <strong>game / correlation</strong> advantages, not computational speedup. Device-characterized, not loophole-free.</span>
     </div>
-    <div class="verdict" id="causalVerdict"></div>
-</div>
-<p class="det-punch">The interference signature at <span class="num">217σ</span> means the causal order genuinely had no definite value during the computation. This isn't "we didn't measure which came first" — it's that neither ordering existed. The universe ran both causal structures in parallel, and we caught them interfering with themselves.</p>
-</section>
+  </header>
 
-<!-- PANEL C -->
-<section class="panel">
-<p class="panel-label">Exhibit C — Peres–Mermin contextuality (F106)</p>
-<h2>The result depends on what else you ask — even when the questions commute.</h2>
-<p class="sub">Kochen–Specker: if a quantum system has fixed values for all observables (non-contextual hidden variables), those values must satisfy certain constraints. The Peres–Mermin square is the simplest proof: nine operators arranged in a 3×3 grid where each row/column multiplies to I, but the product of rows vs columns gives a contradiction.</p>
-<div class="bench">
-    <div class="chart-wrap">
-        <svg class="chart-svg" id="pmChart" viewBox="0 0 360 240" role="img" aria-label="Peres-Mermin contextuality chart"></svg>
-        <p class="basis-cap">Row products · Column products · F106 / ibm_marrakesh</p>
+  <!-- PANEL A -->
+  <section class="panel">
+    <p class="panel-label">Exhibit A — The three walls</p>
+    <h2>Each classical ceiling, and the quantum value cresting over it</h2>
+    <p class="sub">Each tower is one theorem. The shaded block is <strong>classical territory</strong> — everything a classical
+    strategy can reach, capped by the proven wall. The bright line is the <strong>measured quantum value</strong>, cresting into
+    the region only quantum mechanics can reach; the hollow dot is the <strong>executed classical control</strong>, sitting at
+    the wall. Each tower has its own scale — the σ clearance is the comparable headline.</p>
+
+    <div class="selector" role="group" aria-label="Choose a no-go theorem">
+      <span class="lbl">focus a wall:</span>
+      <button class="cbtn" data-key="bell" type="button" aria-pressed="true">Bell</button>
+      <button class="cbtn" data-key="causal" type="button" aria-pressed="false">Causal order</button>
+      <button class="cbtn" data-key="context" type="button" aria-pressed="false">Contextuality</button>
     </div>
-    <div class="verdict" id="pmVerdict"></div>
-</div>
-<p class="det-punch">The contextuality gap hits <span class="num">196σ</span>. A non-contextual world can't assign consistent values to even this tiny set of commuting observables — and silicon confirms it with room to spare. The measurement outcome genuinely depends on which other compatible measurements you choose alongside it.</p>
-</section>
 
-<!-- PANEL D -->
-<section class="panel">
-<p class="panel-label">Exhibit D — What's real here</p>
-<h2>The receipts</h2>
-<p class="sub">Three different no-go theorems, each with its own flavor of "impossible," all breached on the same chip in a single session.</p>
-<div class="receipts">
-    <div class="rc"><h3>1 · Bell — local realism is dead</h3><p>S = <strong>2.7522 ± 0.019</strong> (classical bound: 2). That's <strong>53σ</strong>. Not just "quantum" — maximally quantum for this circuit. All four correlators measured independently. <span class="yes">No loophole.</span></p></div>
-    <div class="rc"><h3>2 · Causal order — time has superpositions too</h3><p>Quantum switch interference at <strong>217σ</strong> — neither A-before-B nor B-before-A is true during computation. The control qubit puts causal structure itself into superposition. <span class="yes">Cross-chip verified.</span></p></div>
-    <div class="rc"><h3 style="color:var(--violet)">3 · Contextuality — values depend on context</h3><p>Peres–Mermin square with <strong>196σ</strong> gap. Nine operators, three rows, three columns — the product rules can't all hold simultaneously. Non-contextual hidden variables can't even assign consistent numbers to commuting observables. <span class="yes">F106 confirmed.</span></p></div>
-</div>
-<div class="links-row">
-    <a class="deeper" href="../cloning-replicator/">← Its sibling → The Cloning Replicator</a>
-    <a class="deeper amber" href="../scoreboard/">The Scoreboard</a>
-    <a class="deeper violet" href="../ladder/">Wing I · The Ladder of Causation</a>
-</div>
-</section>
+    <div class="towers" id="towers"></div>
 
-</main>
-<footer class="badge-row">
-<span>BREACHED · <span class="c">Bell S=2.75 (53σ)</span> · causal order <span class="w">(217σ)</span> · <span class="v">contextuality F106 (196σ)</span></span>
-<span>ibm_marrakesh · Wing II · three no-go theorems, one chip</span>
-<span class="sp2"></span>
-<a href="https://github.com/mblakemore/quantum/blob/main/findings/F082-bell-inequality-chsh-s2p7522-on-heron-whisper-c4660.md">Finding F082</a>
-<a href="https://github.com/mblakemore/quantum/blob/main/findings/F083-indefinite-causal-order-whisper-c4660.md">F083</a>
-<a href="https://github.com/mblakemore/quantum/blob/main/findings/F106-peres-mermin-contextuality-square-whisper-c4716-ember-numbered-c4166.md">F106</a>
-</footer>
+    <div class="detail" id="detail" aria-live="polite"></div>
+  </section>
+
+  <!-- PANEL B -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B — One court</p>
+    <h2>Three disciplines, held to one standard</h2>
+    <p class="sub">What makes this a single verdict rather than three loose brags: the ceilings are proven, the
+    controls were run, and it's all the same silicon.</p>
+    <div class="receipts">
+      <div class="rc">
+        <h3>1 · The bounds are proven, not cited</h3>
+        <p>The causal wall <strong>0.869</strong> is re-solved by SDP; the contextuality wall <strong>8/9</strong> is
+        <strong>enumerated in-code over all 4,096</strong> classical strategies; Bell's <strong>2</strong> is the textbook CHSH bound.
+        <span class="yes">Each ceiling is provable inside the grader.</span></p>
+      </div>
+      <div class="rc">
+        <h3>2 · Every wall has an executed null</h3>
+        <p>A real classical control ran on the same chip for each: Bell <strong>0.036</strong>, fixed-order <strong>0.615</strong>,
+        no-entanglement <strong>0.657</strong> — each landing <strong>at its wall</strong>. The breach is a measured <strong>contrast</strong>, not
+        an absolute reading.</p>
+      </div>
+      <div class="rc">
+        <h3>3 · One chip — and one crossed devices</h3>
+        <p>All three on <strong>ibm_marrakesh</strong>. And the causal-order game <strong>reproduced on a second device</strong>
+        (ibm_fez, 0.9738, 201σ — 0.3pp concordance), so its wall didn't fall to one machine's quirk.</p>
+      </div>
+    </div>
+    <div class="links-row">
+      <a class="deeper" style="--sel:var(--violet)" href="../casebook/">Deeper → The Interrogation (causal game)</a>
+      <a class="deeper" style="--sel:var(--amber)" href="../magic-square/">Deeper → The Magic Square (contextuality)</a>
+      <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Full Spec Sheet</a>
+    </div>
+  </section>
+
+  </main>
+  <footer class="badge-row">
+    <span>MEASURED · <span class="b">CHSH 53σ</span> · <span class="c">F82 217σ</span> · <span class="x">F106 196σ</span></span>
+    <span>IBM_MARRAKESH · EACH WITH AN EXECUTED NULL</span>
+    <span class="sp2"></span>
+    <a href="./spec.html">Full Spec</a>
+    <a href="../scoreboard/">Scoreboard</a>
+    <a href="https://github.com/mblakemore/quantum">Repository</a>
+  </footer>
 
 </div>
 
 <script>
-(function () {
+  (function () {
     var css = getComputedStyle(document.documentElement);
     function C(v){ return css.getPropertyValue(v).trim(); }
 
-    // ---- Bell / CHSH chart ----
-    (function(){
-        var svg = document.getElementById("bellChart");
-        var W=360, H=240, PADL=34, PADR=14, PADT=16, PADB=40;
-        var x0=PADL, x1=W-PADR, y0=PADT, y1=H-PADB;
-        function Y(v){ return y1 - v*(y1-y0)/3; }  // scale 0..3
-        var s = "";
-        for(var g=0.5; g<=3; g+=0.5){
-            var yy=Y(g).toFixed(1);
-            s+='<line x1="'+x0+'" x2="'+x1+'" y1="'+yy+'" y2="'+yy+'" stroke="'+C("--edge")+'" stroke-width="1"/>';
-            s+='<text x="'+(x0-6)+'" y="'+(Y(g)+3.5).toFixed(1)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">'+g.toFixed(1)+'</text>';
-        }
-        var yc=Y(2);
-        s+='<line x1="'+(x0-4)+'" x2="'+x1+'" y1="'+yc.toFixed(1)+'" y2="'+yc.toFixed(1)+'" stroke="'+C("--bad")+'" stroke-width="2" stroke-dasharray="6 4"/>';
-        s+='<text x="'+x1+'" y="'+(yc-5).toFixed(1)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9.5" font-weight="700" fill="'+C("--bad")+'">classical bound · S ≤ 2</text>';
-        var data = [
-            {label:"|⟨A₀B₀⟩|", value:0.6882},
-            {label:"|⟨A₀B₁⟩|", value:0.6875},
-            {label:"|⟨A₁B₀⟩|", value:0.6883},
-            {label:"|⟨A₁B₁⟩|", value:0.6882}
-        ];
-        var n=data.length, slot=(x1-x0)/n, bw=Math.min(52, slot*0.5);
-        data.forEach(function(d,i){
-            var cx=x0+slot*(i+0.5), bx=cx-bw/2;
-            var top=Y(d.value);
-            s+='<rect x="'+bx.toFixed(1)+'" y="'+top.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+(y1-top).toFixed(1)+'" rx="4" fill="'+C("--cyan")+'" fill-opacity="0.82"/>';
-            s+='<text x="'+cx.toFixed(1)+'" y="'+(top-6).toFixed(1)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="11" font-weight="700" fill="'+C("--cyan")+'">'+d.value.toFixed(4)+'</text>';
-            s+='<text x="'+cx.toFixed(1)+'" y="'+(y1+15).toFixed(1)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-2")+'">'+d.label+'</text>';
-        });
-        s+='<text x="'+((x0+x1)/2).toFixed(1)+'" y="'+(y1+30).toFixed(1)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="11" font-weight="700" fill="'+C("--cyan")+'">S = 2.7522</text>';
-        svg.innerHTML = s;
+    // ---- data kernel (three no-go walls, ibm_marrakesh) ----
+    var WALLS = [
+      { key:"bell", name:"Bell", sub:"nonlocality · CHSH", color:"--cyan", forbids:"local hidden variables",
+        ceiling:2.0, ceilLab:"|S| ≤ 2", measured:2.7522, measLab:"S = 2.7522", sigma:"53σ",
+        nullv:0.036, nullLab:"null 0.04", niceMin:0, niceMax:2.83, qLab:"Tsirelson 2.83",
+        note:"The <strong>CHSH</strong> correlator reaches <strong>S = 2.7522 ± 0.014</strong> — <strong>53σ</strong> past the local-realistic bound of 2, nearing the Tsirelson ceiling 2.83. No theory where distant outcomes are fixed by local hidden variables can do this. The separable control reads S ≈ 0.04.",
+        deeper:null, deeperLab:null },
+      { key:"causal", name:"Causal order", sub:"no definite order · F82", color:"--violet", forbids:"a definite order of events",
+        ceiling:0.869, ceilLab:"≤ 0.869", measured:0.9769, measLab:"0.9769", sigma:"217σ",
+        nullv:0.615, nullLab:"fixed-order 0.62", niceMin:0.55, niceMax:1.0, qLab:"max 1.0",
+        note:"The Araújo et al. commute/anticommute game, won at <strong>0.9769 ± 0.0005</strong> vs the causally-separable bound <strong>0.869</strong> — <strong>216.8σ</strong>. No fixed order of the two operations, nor any random mixture, can win this often; the fixed-order control buys exactly 0.615. <strong>Reproduced on a second device</strong> (ibm_fez, 0.9738, 201σ).",
+        deeper:"../casebook/", deeperLab:"The Interrogation" },
+      { key:"context", name:"Contextuality", sub:"pre-set values · F106", color:"--amber", forbids:"pre-set (non-contextual) values",
+        ceiling:0.8889, ceilLab:"≤ 8/9", measured:0.96901, measLab:"0.9690", sigma:"196σ",
+        nullv:0.657, nullLab:"no-entangle 0.66", niceMin:0.6, niceMax:1.0, qLab:"max 1.0",
+        note:"The Peres–Mermin magic-square game, value <strong>0.96901 ± 0.0004</strong> vs the non-contextual ceiling <strong>8/9</strong> — <strong>196σ</strong>, with the ceiling enumerated over all 4,096 classical strategies. Even the worst single context clears 8/9 at 37.8σ. The no-entanglement control reads 0.657.",
+        deeper:"../magic-square/", deeperLab:"The Magic Square" }
+    ];
+    WALLS.forEach(function(w){ console.assert(w.measured > w.ceiling && w.nullv <= w.ceiling + 1e-9, "measured crests, null at/below wall: "+w.key); });
 
-        document.getElementById("bellVerdict").innerHTML =
-            '<div class="vd-tag ok">✔ BELL INEQUALITY BREACHED</div>'+
-            '<div class="vd-headline" style="color:'+C("--cyan")+'">S = 2.7522 — local realism defeated by 53σ</div>'+
-            '<p class="vd-note">Four correlation terms, each independently measured on <strong>ibm_marrakesh</strong>. Sum exceeds the classical bound of 2 by nearly half a standard deviation per term. The quantum prediction is S ≤ √2 × 2 ≈ 2.83 — we hit <strong>97% of the Tsirelson bound</strong>.</p>'+
-            '<div class="vd-rows">'+
-                '<div><span class="k">|⟨A₀B₀⟩|</span><strong>0.6882</strong></div>'+
-                '<div><span class="k">|⟨A₀B₁⟩|</span><strong>0.6875</strong></div>'+
-                '<div><span class="k">|⟨A₁B₀⟩|</span><strong>0.6883</strong></div>'+
-                '<div><span class="k">|⟨A₁B₁⟩|</span><strong>0.6882</strong></div>'+
-                '<div style="border-top:1px solid '+C("--edge")+';padding-top:4px;margin-top:4px"><span class="k" style="font-weight:700;color:'+C("--cyan")+'">S (sum)</span><strong style="color:'+C("--cyan")+'">2.7522</strong></div>'+
-                '<div><span class="k">σ over classical</span><strong>53σ</strong></div>'+
-                '<div><span class="k">% of Tsirelson bound</span><strong>97%</strong></div>'+
-            '</div>';
-    })();
+    // ---- build towers ----
+    var towers = document.getElementById("towers");
+    var TY0=22, TY1=250, cx=80;
+    function tsvg(w){
+      function y(v){ return TY1 - (v-w.niceMin)/(w.niceMax-w.niceMin)*(TY1-TY0); }
+      var yC=y(w.ceiling), yM=y(w.measured), yN=y(w.nullv), col=C(w.color);
+      var s='<svg class="tw-svg" viewBox="0 0 160 268" role="img" aria-label="'+w.name+' tower: measured value above the classical wall">';
+      // quantum-only region (ceiling..top)
+      s+='<rect x="54" y="'+TY0+'" width="52" height="'+(yC-TY0)+'" rx="3" fill="'+col+'" fill-opacity="0.12"/>';
+      // classical wall block (ceiling..bottom)
+      s+='<rect x="54" y="'+yC.toFixed(1)+'" width="52" height="'+(TY1-yC).toFixed(1)+'" fill="'+C("--ink-3")+'" fill-opacity="0.17"/>';
+      // tower outline
+      s+='<rect x="52" y="'+TY0+'" width="56" height="'+(TY1-TY0)+'" rx="10" fill="none" stroke="'+C("--edge-2")+'" stroke-width="1.4"/>';
+      // wall line + label
+      s+='<line x1="44" x2="116" y1="'+yC.toFixed(1)+'" y2="'+yC.toFixed(1)+'" stroke="'+C("--ink-2")+'" stroke-width="2"/>';
+      s+='<text x="80" y="'+(yC+13).toFixed(1)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">classical wall</text>';
+      // null dot
+      s+='<circle cx="80" cy="'+yN.toFixed(1)+'" r="4" fill="'+C("--card")+'" stroke="'+C("--ink-3")+'" stroke-width="1.6"/>';
+      // measured crest
+      s+='<line x1="40" x2="120" y1="'+yM.toFixed(1)+'" y2="'+yM.toFixed(1)+'" stroke="'+col+'" stroke-width="2.6"/>';
+      s+='<circle cx="80" cy="'+yM.toFixed(1)+'" r="6" fill="'+C("--card")+'" stroke="'+col+'" stroke-width="2.6"/>';
+      s+='<text x="80" y="'+(yM-10).toFixed(1)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9.5" font-weight="700" fill="'+col+'">▲ quantum</text>';
+      s+='</svg>';
+      return s;
+    }
+    WALLS.forEach(function(w){
+      var d=document.createElement("div"); d.className="tcol"; d.dataset.key=w.key; d.style.setProperty("--sel", C(w.color));
+      d.innerHTML =
+        '<div class="tw-name" style="color:'+C(w.color)+'">'+w.name+'</div>'+
+        '<div class="tw-sub">'+w.sub+'</div>'+
+        '<div class="tw-forbids">forbids '+w.forbids+'</div>'+
+        tsvg(w)+
+        '<div class="tw-nums">'+
+          '<div class="tw-sig" style="color:'+C(w.color)+'">'+w.sigma+' <small>over the wall</small></div>'+
+          '<div class="tw-row q">quantum <strong>'+w.measLab+'</strong></div>'+
+          '<div class="tw-row wall">wall '+w.ceilLab+'</div>'+
+          '<div class="tw-row null">'+w.nullLab+'</div>'+
+        '</div>';
+      d.setAttribute("role", "button");
+      d.setAttribute("tabindex", "0");
+      d.setAttribute("aria-pressed", "false");
+      d.addEventListener("click", function(){ select(w.key); });
+      d.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); select(w.key); } });
+      towers.appendChild(d);
+    });
 
-    // ---- Indefinite Causal Order chart ----
-    (function(){
-        var svg = document.getElementById("causalChart");
-        var W=360, H=240, PADL=34, PADR=14, PADT=16, PADB=40;
-        var x0=PADL, x1=W-PADR, y0=PADT, y1=H-PADB;
-        function Y(v){ return y1 - v*(y1-y0); }  // scale 0..1
-        var s = "";
-        [0.25,0.5,0.75,1].forEach(function(g){
-            var yy=Y(g).toFixed(1);
-            s+='<line x1="'+x0+'" x2="'+x1+'" y1="'+yy+'" y2="'+yy+'" stroke="'+C("--edge")+'" stroke-width="1"/>';
-            s+='<text x="'+(x0-6)+'" y="'+(Y(g)+3.5).toFixed(1)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">'+g.toFixed(2)+'</text>';
-        });
-        var data = [
-            {label:"Control |0⟩", value:0.89, sub:"→ AB order"},
-            {label:"Control |+⟩", value:0.94, sub:"→ superposition"},
-            {label:"Control |1⟩", value:0.87, sub:"→ BA order"}
-        ];
-        var n=data.length, slot=(x1-x0)/n, bw=Math.min(72, slot*0.5);
-        data.forEach(function(d,i){
-            var cx=x0+slot*(i+0.5), bx=cx-bw/2;
-            var top=Y(d.value);
-            s+='<rect x="'+bx.toFixed(1)+'" y="'+top.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+(y1-top).toFixed(1)+'" rx="4" fill="'+C("--cyan")+'" fill-opacity="0.82"/>';
-            s+='<text x="'+cx.toFixed(1)+'" y="'+(top-6).toFixed(1)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="11" font-weight="700" fill="'+C("--cyan")+'">'+d.value.toFixed(2)+'</text>';
-            s+='<text x="'+cx.toFixed(1)+'" y="'+(y1+15).toFixed(1)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-2")+'">'+d.label+'</text>';
-            s+='<text x="'+cx.toFixed(1)+'" y="'+(y1+27).toFixed(1)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="8" fill="'+C("--ink-3")+'">'+d.sub+'</text>';
-        });
-        svg.innerHTML = s;
+    var detail = document.getElementById("detail"), btns = document.querySelectorAll(".cbtn"), cols = document.querySelectorAll(".tcol");
+    function select(key){
+      var w = WALLS.filter(function(x){return x.key===key;})[0];
+      cols.forEach(function(c){ var on=c.dataset.key===key; c.classList.toggle("sel",on); c.classList.toggle("dim",!on); c.setAttribute("aria-pressed",on?"true":"false"); });
+      btns.forEach(function(b){ var on=b.dataset.key===key; b.classList.toggle("on",on); b.setAttribute("aria-pressed",on?"true":"false"); });
+      var deep = w.deeper ? '<a class="deeper" style="--sel:'+C(w.color)+'" href="'+w.deeper+'">Deeper → '+w.deeperLab+'</a>' : '';
+      detail.innerHTML =
+        '<div class="dt-name" style="color:'+C(w.color)+'">'+w.name+' — forbids '+w.forbids+'</div>'+
+        '<p>'+w.note+'</p>'+ deep;
+    }
+    btns.forEach(function(b){ b.addEventListener("click", function(){ select(b.dataset.key); }); });
 
-        document.getElementById("causalVerdict").innerHTML =
-            '<div class="vd-tag ok">✔ INDEFINITE CAUSAL ORDER</div>'+
-            '<div class="vd-headline" style="color:'+C("--cyan")+'">Interference at 217σ — no definite order during computation</div>'+
-            '<p class="vd-note">A control qubit selects the order of two gates on a target. When the control is in superposition, <strong>neither ordering exists</strong>. The interference pattern (measured fidelity 0.94 for |+⟩) proves both causal structures ran simultaneously. Cross-chip and cross-vendor verified.</p>'+
-            '<div class="vd-rows">'+
-                '<div><span class="k">Control |0⟩ → AB</span><strong>0.89</strong></div>'+
-                '<div><span class="k">Control |+⟩ → A∥B</span><strong style="color:'+C("--cyan")+'">0.94</strong></div>'+
-                '<div><span class="k">Control |1⟩ → BA</span><strong>0.87</strong></div>'+
-                '<div><span class="k">σ over random</span><strong>217σ</strong></div>'+
-            '</div>';
-    })();
-
-    // ---- Peres–Mermin chart ----
-    (function(){
-        var svg = document.getElementById("pmChart");
-        var W=360, H=240, PADL=34, PADR=14, PADT=16, PADB=50;
-        var x0=PADL, x1=W-PADR, y0=PADT, y1=H-PADB;
-        function Y(v){ return y1 - v*(y1-y0); }  // scale -1..+1 mapped to 0..1 for bar height
-        var s = "";
-        [-1,0,1].forEach(function(g){
-            var yy=Y((g+1)/2).toFixed(1);
-            s+='<line x1="'+x0+'" x2="'+x1+'" y1="'+yy+'" y2="'+yy+'" stroke="'+C("--edge")+'" stroke-width="1"/>';
-            s+='<text x="'+(x0-6)+'" y="'+(Y((g+1)/2)+3.5).toFixed(1)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">'+(g>=0?'+':'')+g.toFixed(0)+'</text>';
-        });
-        var data = [
-            {label:"Row 1", value:0.96, sub:"XX ⊗ I"},
-            {label:"Row 2", value:0.94, sub:"YY ⊗ I"},
-            {label:"Row 3", value:0.97, sub:"ZZ ⊗ ZZ"},
-            {label:"Col 1", value:0.95, sub:"X⊗I · Y⊗I"},
-            {label:"Col 2", value:0.93, sub:"Z⊗I · X⊗X"},
-            {label:"Col 3", value:-0.96, sub:"Z⊗Z · Y⊗Y"}
-        ];
-        function mapY(v){ return y1 - (v+1)*(y1-y0)/2; }  // -1→bottom, +1→top
-        [-1,0,1].forEach(function(g){
-            var yy=mapY(g).toFixed(1);
-            s+='<line x1="'+x0+'" x2="'+x1+'" y1="'+yy+'" y2="'+yy+'" stroke="'+C("--edge")+'" stroke-width="1"/>';
-            s+='<text x="'+(x0-6)+'" y="'+(mapY(g)+3.5).toFixed(1)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">'+(g>=0?'+':'')+g.toFixed(0)+'</text>';
-        });
-        var n=data.length, slot=(x1-x0)/n, bw=Math.min(38, slot*0.5);
-        data.forEach(function(d,i){
-            var cx=x0+slot*(i+0.5), bx=cx-bw/2;
-            var zero=mapY(0);
-            var top=mapY(Math.abs(d.value));
-            var yPos = d.value >= 0 ? mapY(d.value).toFixed(1) : zero.toFixed(1);
-            var barH = Math.abs(mapY(d.value) - zero).toFixed(1);
-            if(barH < 1) barH = "1";
-            s+='<rect x="'+bx.toFixed(1)+'" y="'+yPos+'" width="'+bw.toFixed(1)+'" height="'+barH+'" rx="4" fill="'+C("--violet")+'" fill-opacity="0.82"/>';
-            var labelY = d.value >= 0 ? (mapY(d.value)-6).toFixed(1) : (mapY(d.value)+10).toFixed(1);
-            s+='<text x="'+cx.toFixed(1)+'" y="'+labelY+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10" font-weight="700" fill="'+C("--violet")+'">'+d.value.toFixed(2)+'</text>';
-            s+='<text x="'+cx.toFixed(1)+'" y="'+(y1+15).toFixed(1)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-2")+'">'+d.label+'</text>';
-        });
-        svg.innerHTML = s;
-
-        document.getElementById("pmVerdict").innerHTML =
-            '<div class="vd-tag ok">✔ CONTEXTUALITY CONFIRMED</div>'+
-            '<div class="vd-headline" style="color:'+C("--violet")+'">Peres–Mermin gap at 196σ — values depend on measurement context</div>'+
-            '<p class="vd-note">Nine operators in a 3×3 grid. Row products all equal +1, but multiplying the first three columns gives −1 for the last. A non-contextual assignment can\'t satisfy both. Measured on <strong>ibm_marrakesh</strong>, the contradiction is clear: <strong>the same observable takes different values depending on what else you measure alongside it.</strong></p>'+
-            '<div class="vd-rows">'+
-                '<div><span class="k">Row 1 product</span><strong>+0.96</strong></div>'+
-                '<div><span class="k">Row 2 product</span><strong>+0.94</strong></div>'+
-                '<div><span class="k">Row 3 product</span><strong>+0.97</strong></div>'+
-                '<div><span class="k">Col 3 product</span><strong style="color:'+C("--amber")+'">−0.96</strong></div>'+
-                '<div><span class="k">Contextuality gap σ</span><strong style="color:'+C("--violet")+'">196σ</strong></div>'+
-            '</div>';
-    })();
-})();
+    select("bell");
+  })();
 </script>
 </body>
 </html>
