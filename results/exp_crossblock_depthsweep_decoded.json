@@ -87,5 +87,13 @@
    "n_rises_gt0.03": 0,
    "mechanism": "DECOHERENT (monotone decay)"
   }
+ },
+ "CORRECTION_over_claim": {
+  "the_error": "My decode inferred 'monotone |<Z>| decay => DECOHERENT' and I reported (#1165) 'coherence question answered NO'. THAT IS TOO STRONG. A coherent rotation <Z>=A*cos(phi*depth) ALSO gives monotone |<Z>| decrease while phi*depth < pi/2 (|cos| decreasing before the first node). The 4-point |<Z>| only RULES OUT a coherent REVIVAL (a rise from crossing pi/2 within 160-280), NOT coherence itself.",
+  "what_the_sweep_DID_settle": "(a) phys73's 2-point |<Z>|-GROWTH anomaly is RETIRED \u2014 no revival at 4 points (that specific 'coherent' read was 2-point aliasing); (b) NO coherent revival on any drifter in 160-280.",
+  "what_it_did_NOT_settle": "coherent-under-pi/2 vs decoherent for {53,26} \u2014 |<Z>| MAGNITUDE alone cannot distinguish (the sweep measured |<Z>|, not signed bias or purity).",
+  "old_epoch_note": "the OLD \u03c1_t census had SIZABLE NEGATIVE signed biases (phys73 -0.32, phys26 -0.28) = real sign-flips (crossing zero) => the OLD epoch likely had a GENUINE coherent component. So the mechanism may be epoch-dependent (coherent then) OR the current epoch differs \u2014 unresolved by |<Z>| magnitude.",
+  "corrected_verdict": "MECHANISM STILL UNPINNED for {53,26} this epoch (coherent-under-pi/2 or decoherent). To settle: a SIGNED-bias sweep, or a PURITY measurement, or a wider depth range past pi/2. The main-block Delta-witness is purity-sensitive and could contribute, but Delta alone is also mechanism-ambiguous (Elder's original point).",
+  "value_stands": "option-B was STILL the right cheap call: retired the phys73 anomaly + ruled out a revival for ~20s. But it did NOT answer the coherence question \u2014 I over-claimed that."
  }
 }
