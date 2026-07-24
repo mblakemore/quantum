@@ -1,0 +1,337 @@
+{
+ "experiment": "exp142_p1_first_contact_refly",
+ "n": 8,
+ "commit_hash": "809ea9e53efc19dc4dddfe165a7629bfcd45585bd36c98b62bc3e2948a32e09d",
+ "scaffold": "whisper_c5003_eb76930",
+ "backend": "ibm_fez",
+ "bell_pairs": [
+  [
+   59,
+   75
+  ],
+  [
+   109,
+   110
+  ],
+  [
+   22,
+   23
+  ],
+  [
+   5,
+   6
+  ],
+  [
+   137,
+   147
+  ],
+  [
+   142,
+   143
+  ],
+  [
+   58,
+   71
+  ],
+  [
+   84,
+   85
+  ]
+ ],
+ "conv_layout": [
+  6,
+  110,
+  59,
+  132,
+  4,
+  147,
+  154,
+  136
+ ],
+ "c_per_basis": 64,
+ "emission_bases": 6561,
+ "c1_basis_of_row": {
+  "generator": "full_weight_bases(8) in Elder committed order, each repeated c_per_basis=64, concatenated",
+  "total_rows": 419904,
+  "note": "deterministic emission \u2014 regenerate for covering_decode, not stored verbatim (was 5.8MB)"
+ },
+ "jobs": [
+  {
+   "job_id": "d9hrobggk0ls73f3frug",
+   "kind": "sentinel_start",
+   "rows": 1
+  },
+  {
+   "job_id": "d9hroc3sbqfc73eqi98g",
+   "kind": "quantum",
+   "rows": 90
+  },
+  {
+   "job_id": "d9hrocbsbqfc73eqi990",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrocjsbqfc73eqi9ag",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrocshonhs73adhtug",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrodd0k0jc738imc8g",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrodkhonhs73adhu00",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrodshonhs73adhu10",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroe0gk0ls73f3fs1g",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroed0k0jc738imc9g",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroekhonhs73adhu20",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroeogk0ls73f3fs30",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrof3sbqfc73eqi9d0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrofbsbqfc73eqi9e0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrofjsbqfc73eqi9f0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrofrsbqfc73eqi9fg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrogbsbqfc73eqi9gg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrogjsbqfc73eqi9h0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrogl0k0jc738imccg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroh3sbqfc73eqi9i0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroh0gk0ls73f3fs60",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroh8gk0ls73f3fs70",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrohjsbqfc73eqi9j0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrohshonhs73adhu50",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroi4honhs73adhu70",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroi8gk0ls73f3fs8g",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroijsbqfc73eqi9kg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroit0k0jc738imcfg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroj8gk0ls73f3fsag",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrojggk0ls73f3fsb0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrojt0k0jc738imchg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrok0gk0ls73f3fsd0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrokchonhs73adhuag",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrokjsbqfc73eqi9mg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrokogk0ls73f3fseg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrol3sbqfc73eqi9ng",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrold0k0jc738imckg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrolkhonhs73adhug0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrologk0ls73f3fsh0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrom50k0jc738imcmg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hromd0k0jc738imcn0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hromjsbqfc73eqi9sg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hromt0k0jc738imcp0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hron50k0jc738imcpg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hronchonhs73adhul0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hronl0k0jc738imcr0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hront0k0jc738imcrg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroo50k0jc738imcs0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroochonhs73adhun0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrool0k0jc738imct0",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hroot0k0jc738imctg",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hrop50k0jc738imcug",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hropbsbqfc73eqia2g",
+   "kind": "c1_covering",
+   "rows": 8192
+  },
+  {
+   "job_id": "d9hropchonhs73adhuq0",
+   "kind": "c1_covering",
+   "rows": 2112
+  },
+  {
+   "job_id": "d9hropjsbqfc73eqia3g",
+   "kind": "sentinel_end",
+   "rows": 1
+  }
+ ],
+ "committer": "Ember (DC15E)",
+ "blind": "P off-git; manifest P-independent"
+}
