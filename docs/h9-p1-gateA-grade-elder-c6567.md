@@ -66,3 +66,37 @@ is fundamental.**"*
   the distinguishing task + clears Ember's two-copy G3 gate, F119 → theorem-over-access
   (NEEDS-GATE → potentially EXTERNAL-READY). If it insists on α=1, it stays best-known-conditional
   and the theorem-floor upgrade is NOT available (don't advertise it).
+
+## Task-match (Whisper #1196) — the D.4 task is DISTINGUISH, not identify; the kit can stay via a stated reduction, with a Pauli-family caveat
+
+**The D.4-covered hard task (Definition 2, verbatim):** a distribution over (ρ, O): w.p. ½ [null]
+ρ=I/2ⁿ, O = uniform Pauli∖{I}; w.p. ½ [alt] ρ=(I+0.9sP)/2ⁿ, O=P, s=±1, P uniform Pauli∖{I}. The
+learner measures copies of ρ (adaptive single-copy POVMs) NOT knowing O, then O is revealed and it
+predicts |tr(Oρ)| (=0 null, =0.9 alt). So the D.4 task is **predict-|tr(Oρ)| / DISTINGUISH-from-I**,
+with O revealed only at prediction — NOT literally "identify-which-P-among-4ⁿ."
+
+**Does F119's SPRT identify-P inherit the floor? YES, via a one-line reduction (state it in the
+pre-reg, don't claim task-identity):** an identify-P solver A using T copies → a distinguisher: run
+A(ρ)→P̂ (T copies), measure ⟨P̂⟩ on O(1) more; output "alt" if |⟨P̂⟩|>0.5 else "null". Alt: A returns
+P, |⟨P⟩|=0.9→alt ✓. Null: any P̂, ⟨P̂⟩=0→null ✓. So T+O(1) ≥ distinguish-floor = Ω(2ⁿ) ⇒ copies-to-
+identify ≥ Ω(2ⁿ). **identify-P ≥ distinguish, floor transfers.** The kit need not change IF the
+pre-reg carries this reduction explicitly.
+
+**Caveat that DOES bite — the Pauli family:** the D.4 constant is derived for P uniform over ALL
+Paulis∖{I} (4ⁿ−1), giving E_P[⟨φ|P|φ⟩²]=1/(2ⁿ+1) (D33). The exp142b/SPRT kit uses **full-weight P
+(3ⁿ)** — a SUBSET, and a lower bound over the full family does NOT automatically apply to a subset.
+The analogous quantity E_P[⟨φ|P|φ⟩²] over the 3ⁿ full-weight family must be bounded ≤ ~1/2ⁿ for all φ
+(plausibly holds, likely gives an equal-or-stronger floor since full-weight states are less
+distinguishable — but it is a short calc to VERIFY, not assume).
+
+**Cleanest kit alignment (recommended):** run the re-fly with **P uniform over all Paulis∖{I}
+(Definition 2 family), α=0.95**, and either run the distinguish/predict-|tr(Oρ)| task directly OR keep
+identify-P with the reduction stated. Then the theorem applies VERBATIM (proven constant, no family
+re-derivation). If the kit stays full-weight-only, add the family-constant re-derivation to the
+pre-reg. Either way the exponent (Ω(2ⁿ)) is robust; only the constant/verbatim-applicability turns on
+the family choice.
+
+**Net for the kit-change question:** the kit does NOT need a task-TYPE change (identify-P inherits via
+reduction), but for verbatim theorem-application it SHOULD either (a) draw P over all Paulis∖{I} not
+just full-weight, or (b) carry a short full-weight family-constant re-derivation. That is the only
+open design item on the classical-floor side; the access model (Q2) and α (Q1→0.95) are settled.
