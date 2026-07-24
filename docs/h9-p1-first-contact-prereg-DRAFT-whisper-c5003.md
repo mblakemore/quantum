@@ -30,11 +30,24 @@ and the [field audit](field-audit-google-learning-advantage-obstruction-elder-c6
   computational-basis state). No CZ-ancilla-trace prep → the exp142c washout mechanism is avoided; the
   prep stays fidelity-safe. Only the **two-copy Bell readout** remains fragile (Ember G3).
 
-**Net**: theorem-over-access F119 is **reachable AND flyable**. Remaining gates before it's a claim:
-(b) the ~240-job α=0.95 re-fly [Creator binary spend], Ember's two-copy Bell G3, and Elder's
-task-match (is the identify-among-4ⁿ-Paulis task the D.4-covered hard task — which the SPRT kit
-already runs — or must the decoder align to predict-|tr(Pρ)|?). **Sections below are the pre-Gate-A
-framing, retained for the record; the α=0.95 result supersedes the α=1 assumption throughout.**
+**Task-match RESOLVED (Elder #1197 from Def 2 verbatim + Whisper #1199 verified):** the D.4 task is
+distinguish/predict-|tr(Oρ)| (O revealed at prediction → that's what forces Ω(2ⁿ)), *not*
+identify-among-4ⁿ. But the SPRT identify-P kit inherits the floor via a one-line reduction
+(identify-P + verify ⟨P̂⟩ ⇒ a distinguisher; identify ≥ distinguish ⇒ floor transfers) — **task-type
+does not change.** The one caveat that bites is the **Pauli family**: D.4's constant 1/(2ⁿ+1) is
+derived over *all* Paulis∖{I} (4ⁿ−1), and the kit's **full-weight** subset (3ⁿ) does NOT inherit it —
+**verified** (Whisper #1199): worst-case φ is a maximally-entangled stabilizer state (Bell → Σ_fw=3 >
+(3/2)²; GHZ → Σ_fw=4 > (3/2)³), so E_fw > 1/2ⁿ. **Clean fix = option (a): draw P over all Paulis∖{I}**
+→ E_P = 1/(2ⁿ+1) *exactly, φ-independent* (verified dev ~1e-16) → theorem verbatim, no re-derivation;
+prep stays 0-CZ for any P (incl. low-weight), and lower average weight is *less* fragile on-device.
+(Option (b) keep full-weight → floor 3ⁿ/maxΣ_fw ≈ 2ⁿ, still Ω(2ⁿ) but constant ~1.2–1.33× worse,
+needs a proven maxΣ_fw bound — reserve for a secondary dramatic-ratio panel.)
+
+**Net**: theorem-over-access F119 is **reachable AND flyable**. Gate-set status: Q2 access ✓,
+Q1 α→0.95 ✓, prep 0-CZ shot-ensemble ✓, task-type reduction ✓, family → option (a) verbatim ✓.
+**The only open technical gate is Ember's two-copy Bell G3**; then the Creator's binary spend on the
+~240-job α=0.95 re-fly. **Sections below are the pre-Gate-A framing, retained for the record; the
+α=0.95 + option-(a) results supersede the α=1 / full-weight assumptions throughout.**
 
 ## Three separable things — and only two of them can build an advantage
 
