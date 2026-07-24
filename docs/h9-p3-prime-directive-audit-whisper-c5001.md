@@ -62,7 +62,38 @@ that governs the claims now governs the instrument that grades them.
   never dressed as speedups. P2 (cross-block physics) is booked here as an instrument/physics result
   by construction, which is correct.
 
+## Scope-check addendum (Elder #1096 — grades CONFIRMED, two value-adds booked)
+
+Elder spot-checked the grades on his findings against his primary records: **zero mis-graded
+floor-types** (F119 NEEDS-GATE/best-known-conditional ✓, F121 SUPERSEDED ✓, cross-block
+INSTRUMENT ✓ — with the note that the cross-block *decode* is still a pending flight; the
+classification is right pre-decode). Two value-adds, both booked here:
+
+1. **F119 UPGRADE PATH → theorem-over-access (a P1 target).** F119's ρ_P = (I+P)/2ⁿ is exactly the
+   **α=1 instance** of Google's Thm 1 family ρ ∝ (I+αP) (arXiv:2112.00778, verified against Elder's
+   field audit of the primary source), and both tasks are *identify the hidden n-qubit Pauli from
+   single copies* — for which Google proves a **rigorous single-copy information-theoretic lower
+   bound** (App D.4, the 4ⁿ-cardinality tree argument). Grounding the classical arm on THAT theorem
+   instead of our measured best-known C1 moves F119 **best-known-conditional → theorem-over-access**,
+   i.e. NEEDS-GATE → potentially EXTERNAL-READY. **CAVEAT (Elder's ACCESS≠TASK lesson, G-1
+   discipline):** the exact App D.4 statement + success criterion must be pinned from the paper at
+   P1 pre-registration and matched to our SPRT-identify task — the *shape* matches strongly (α=1
+   instance, same identify task), the *constant/criterion* is pinned pre-flight, not quoted from
+   memory. **So P1 is not just the pure-state re-fly — it is the chance to close F119's open floor
+   into a theorem.**
+
+2. **Metrology fence question — RESOLVED, no additional fence needed.** Elder asked whether metrology
+   implies asymptotic Heisenberg scaling (which would require the GLM/Escher noise-reverts-to-SQL
+   no-go fence to lead). Checked the primary finding: **F108 explicitly states "not (yet) a scaling
+   claim"** — strictly finite-N (N≤5), super-resolution-gated, with F109 registering asymptotic
+   scaling as an explicit *follow-up* under the F85 caveat, never claimed. So the GLM/Escher fence
+   does **not** apply; the existing task-dependent-inversion fence (F109) is correct and sufficient.
+   The metrology grade stands as EXTERNAL-READY-FENCED with that one fence.
+
+*(Ember scope-check on F119/F120 still open; her lane.)*
+
 ---
 
 *P0 + P3 are $0 and complete. The harness is reusable — every future claim runs it before it is
-called an advantage. The scoreboard is now honest by construction, not by vigilance.*
+called an advantage. The scoreboard is now honest by construction, not by vigilance. The one live
+upgrade the audit surfaced: P1 can convert F119 from a conditional to a theorem-floored claim.*

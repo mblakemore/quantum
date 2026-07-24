@@ -1,5 +1,5 @@
 {
- "ledger": "H9 P3 — The Prime Directive Audit: every advantage-flavored column graded through the P0 five-gate harness (Whisper C5001). Floor-type/gate assignments sourced from the primary findings + the C4998-4999 arc. This is the scoreboard an external auditor would demand.",
+ "ledger": "H9 P3 \u2014 The Prime Directive Audit: every advantage-flavored column graded through the P0 five-gate harness (Whisper C5001). Floor-type/gate assignments sourced from the primary findings + the C4998-4999 arc. This is the scoreboard an external auditor would demand.",
  "claims": [
   {
    "id": "causal-order (switch, 216.8sigma)",
@@ -23,7 +23,7 @@
    "on_device_fidelity": "not-applicable",
    "sealed_court": true,
    "own_hand_red_team": "yes",
-   "scope_fence": "DI-quarantined randomness scope (F115) — witness not device-independent certificate"
+   "scope_fence": "DI-quarantined randomness scope (F115) \u2014 witness not device-independent certificate"
   },
   {
    "id": "superdense capacity (341sigma) / QRAC (110sigma)",
@@ -46,7 +46,8 @@
    "on_device_fidelity": "not-applicable",
    "sealed_court": true,
    "own_hand_red_team": "yes",
-   "scope_fence": "task-dependent inversion at some tasks (F109) — noted"
+   "scope_fence": "task-dependent inversion at some tasks (F109) \u2014 noted",
+   "fence_resolved": "F108 explicit 'not a scaling claim' (finite N<=5, super-resolution-gated) => GLM/Escher asymptotic no-go fence N/A; task-dependent-inversion fence sufficient (Elder #1096 question answered)"
   },
   {
    "id": "BGK shallow-circuit solver (F113)",
@@ -69,13 +70,14 @@
    "on_device_fidelity": "gate-PENDING",
    "sealed_court": true,
    "own_hand_red_team": "yes",
-   "scope_fence": "pure-state re-fly hardware-confirmed fidelity-correct (0.96); mixed-state washed (blind NO-WIN); pre-seal gate now mandatory"
+   "scope_fence": "pure-state re-fly hardware-confirmed fidelity-correct (0.96); mixed-state washed (blind NO-WIN); pre-seal gate now mandatory",
+   "upgrade_path": "theorem-over-access IF Google Thm1 App-D.4 single-copy bound pins + SPRT-identify task-criterion matches (F119 = alpha=1 instance of rho\u221d(I+alpha P)); G-1: pin at P1 pre-reg, don't quote from memory (Elder #1096)"
   },
   {
    "id": "F120 shot-axis code / blind decode",
    "finding": "F120",
    "floor_type": "none",
-   "theorem": "none (a decoding INSTRUMENT — per-bit info survives depth ~30x the modal answer)",
+   "theorem": "none (a decoding INSTRUMENT \u2014 per-bit info survives depth ~30x the modal answer)",
    "access_model": "n/a",
    "instantiation": "native-shallow",
    "on_device_fidelity": "not-applicable",
@@ -87,7 +89,7 @@
    "id": "F121 runtime (hidden-shift decoder race)",
    "finding": "F121",
    "floor_type": "best-known-conditional",
-   "superseded": "own red-team, C4996 — MM linear-structure attack reads the sealed answer in 41 queries / ~0.25ms; floor priced simulation not the problem (poly-time)",
+   "superseded": "own red-team, C4996 \u2014 MM linear-structure attack reads the sealed answer in 41 queries / ~0.25ms; floor priced simulation not the problem (poly-time)",
    "instantiation": "native-shallow",
    "on_device_fidelity": "not-applicable",
    "sealed_court": true,
