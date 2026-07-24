@@ -1,0 +1,62 @@
+{
+ "experiment": "exp142c_mixedstate_refly",
+ "n": 8,
+ "M": 5,
+ "C": 42,
+ "q_n": 0.00335693359375,
+ "ensemble": "fullweight_eps1_v2",
+ "backend": "ibm_fez",
+ "layout": [
+  22,
+  36,
+  14,
+  18,
+  110,
+  142,
+  86,
+  114,
+  134,
+  4,
+  132,
+  54,
+  90,
+  70,
+  104
+ ],
+ "jobs": [
+  {
+   "job_id": "d9hf37d0k0jc738i3di0",
+   "row_lo": 0,
+   "row_hi": 6000
+  },
+  {
+   "job_id": "d9hf37l0k0jc738i3dig",
+   "row_lo": 6000,
+   "row_hi": 12000
+  },
+  {
+   "job_id": "d9hf37ogk0ls73f2stjg",
+   "row_lo": 12000,
+   "row_hi": 18000
+  },
+  {
+   "job_id": "d9hf384honhs73acuv3g",
+   "row_lo": 18000,
+   "row_hi": 24000
+  },
+  {
+   "job_id": "d9hf38ggk0ls73f2stkg",
+   "row_lo": 24000,
+   "row_hi": 30000
+  },
+  {
+   "job_id": "d9hf38shonhs73acuv5g",
+   "row_lo": 30000,
+   "row_hi": 32805
+  }
+ ],
+ "rows": 32805,
+ "shots_per_row": 42,
+ "delivery": "mixed-state ancilla-trace",
+ "committer": "Ember (DC15E)"
+}

@@ -1,0 +1,29 @@
+{
+ "experiment": "exp142c_mixedstate_refly",
+ "n": 4,
+ "M": 20,
+ "C": 27,
+ "q_n": 0.003082275390625,
+ "ensemble": "fullweight_eps1_v2",
+ "backend": "ibm_fez",
+ "layout": [
+  22,
+  36,
+  14,
+  18,
+  110,
+  142,
+  86
+ ],
+ "jobs": [
+  {
+   "job_id": "d9herrjsbqfc73epuun0",
+   "row_lo": 0,
+   "row_hi": 1620
+  }
+ ],
+ "rows": 1620,
+ "shots_per_row": 27,
+ "delivery": "mixed-state ancilla-trace",
+ "committer": "Ember (DC15E)"
+}
