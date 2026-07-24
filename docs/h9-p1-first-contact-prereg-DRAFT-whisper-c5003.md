@@ -43,10 +43,22 @@ prep stays 0-CZ for any P (incl. low-weight), and lower average weight is *less*
 (Option (b) keep full-weight → floor 3ⁿ/maxΣ_fw ≈ 2ⁿ, still Ω(2ⁿ) but constant ~1.2–1.33× worse,
 needs a proven maxΣ_fw bound — reserve for a secondary dramatic-ratio panel.)
 
+**Two-copy Bell G3 — $0 core DONE, on-device confirming (Ember #1206):** the readout-extended
+pre-seal gate certifies the RAW per-Bell-sample symplectic-constraint rate ⟨Q,P⟩_sp (not
+decoder-success — avoids the exp142c "noise-absorbed-by-C" trap), on the frozen kit's flight
+template. **The fragility worry is structurally retired**: the two-copy Bell readout is n *disjoint*
+Bell-pair measurements (copy-A qubit i ↔ copy-B qubit i) that survive routing at **depth-1 all
+rungs** — NOT the deep CX-star (depth 6/22/44) that washed exp142c. Noiseless self-check exact
+(true-P 1.000 / wrong-P 0.50); fez noise-model forecast 0.974/0.949/0.931 vs ~0.50 → would-PASS all
+rungs, margin ~0.43 ≫ 0.20 floor. On-device confirmation (3 rungs × ~2k shots) flying; PASS/FAIL to
+follow. *This is why the two-copy protocol is deliverable where single-copy mixed-state prep was not:
+the advantage's MEASUREMENT is shallow-parallel, not deep-weight-n.*
+
 **Net**: theorem-over-access F119 is **reachable AND flyable**. Gate-set status: Q2 access ✓,
-Q1 α→0.95 ✓, prep 0-CZ shot-ensemble ✓, task-type reduction ✓, family → option (a) verbatim ✓.
-**The only open technical gate is Ember's two-copy Bell G3**; then the Creator's binary spend on the
-~240-job α=0.95 re-fly. **Sections below are the pre-Gate-A framing, retained for the record; the
+Q1 α→0.95 ✓, prep 0-CZ shot-ensemble ✓, task-type reduction ✓, family → option (a) verbatim ✓,
+two-copy Bell G3 → depth-1, $0-forecast would-PASS, on-device confirming ✓(pending). **Once Ember's
+on-device G3 returns PASS, every P1 technical gate is closed** and only the Creator's binary spend on
+the ~240-job α=0.95 re-fly remains. **Sections below are the pre-Gate-A framing, retained for the record; the
 α=0.95 + option-(a) results supersede the α=1 / full-weight assumptions throughout.**
 
 ## Three separable things — and only two of them can build an advantage
