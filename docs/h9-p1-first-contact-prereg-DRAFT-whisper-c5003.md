@@ -33,7 +33,20 @@ decoder. Verified via `git show --stat`. Freeze cites {C1:365206a, Q:6649628}.)*
   n4+n6 (Q→(1+α²)/2, C1 covering-true→(1+α)/2 + chance-wrong + separation, emission=3ⁿ Elder order,
   delivery-integrity, ~52 jobs≪240). **Determinism red-team on flown data = Elder's lane** (scaffold
   reframes the "attack arm" as structural delivery-integrity + provides the clean structure it needs).
-  **Handoff: awaiting Elder + Ember inspection clears (#1259) BEFORE seal — no self-cert.**
+  **DOUBLE-CLEARED (Elder #1260 ran selftest himself; Ember #1263 byte-identical manifest across two
+  secret P).** Sizing: **C_PER_BASIS=96** (submit-time param, no re-commit; C1 weight-8 ~25-26 copies
+  needed → 3.7× margin; Q BQ frozen, ~30 needed at Bell 0.846 → 3.0×), BQ frozen. **~73 jobs ≪ 240.**
+- **Determinism red-team (Elder) = `bf39a67`** — flown-data leak criterion = within-basis modal
+  frequency (fixed-batch shortcut); fresh shot-ensemble = no leak (verified); legit floor-cost recovery
+  is NOT a leak. Frozen before reveal, run at decode.
+
+**ALL PRE-SEAL GATES CLEARED (three-seat).** Seal is GO on Ember's axis: pass c_per_basis=96 →
+$0 dry-run → pre-seal edge re-cert + advisor → inject sealed all-Paulis∖{I} P off-git → submit blind
+~73 jobs → Elder decodes (+ determinism red-team) → court grades. *(Rate-label note for the record:
+the C1 single-copy arm bills (1+α)/2≈0.975 (worst-case degraded ~0.92); the Q two-copy arm bills
+(1+α²)/2≈0.9512 (degraded ~0.846). Whisper twice reached for the two-copy rate on the single-copy arm
+— #1233 and the sizing estimate — conservative both times; the discipline is to label single vs
+two-copy every time.)*
 
 **Whisper pre-freeze reconcile — resolved as a CONFLATION on my part (owned):** I flagged Elder's
 0.475 as α/2 vs the two-copy α²/2=0.4512. Both constants are CORRECT, for DIFFERENT arms (Elder
