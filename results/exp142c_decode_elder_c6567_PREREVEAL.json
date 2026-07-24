@@ -1,0 +1,59 @@
+{
+ "4": {
+  "n": 4,
+  "M": 20,
+  "C": 27,
+  "q_n": 0.003082275390625,
+  "C1_median_copies_to_stop": 374,
+  "C1_copies_iqr": [
+   361,
+   400
+  ],
+  "s_hat_identified": "ZZXZ",
+  "s_hat_per_rep_consensus_frac": 0.05,
+  "censored_reps": 19,
+  "censor_frac": 0.95,
+  "attack_guess": "YZYY",
+  "attack_determinism_score": 0.2593,
+  "lag1_shot_correlation": -0.0201,
+  "frozen_C1_benchmark": 408
+ },
+ "6": {
+  "n": 6,
+  "M": 20,
+  "C": 35,
+  "q_n": 0.0032145182291666665,
+  "C1_median_copies_to_stop": 3815,
+  "C1_copies_iqr": [
+   3717,
+   3874
+  ],
+  "s_hat_identified": null,
+  "s_hat_per_rep_consensus_frac": 0.0,
+  "censored_reps": 20,
+  "censor_frac": 1.0,
+  "attack_guess": "XZZYXX",
+  "attack_determinism_score": 0.2286,
+  "lag1_shot_correlation": -0.006,
+  "frozen_C1_benchmark": 4482
+ },
+ "8": {
+  "n": 8,
+  "M": 5,
+  "C": 42,
+  "q_n": 0.00335693359375,
+  "C1_median_copies_to_stop": 38502,
+  "C1_copies_iqr": [
+   38486,
+   38587
+  ],
+  "s_hat_identified": null,
+  "s_hat_per_rep_consensus_frac": 0.0,
+  "censored_reps": 5,
+  "censor_frac": 1.0,
+  "attack_guess": "ZYYXXXYZ",
+  "attack_determinism_score": 0.1667,
+  "lag1_shot_correlation": 0.0001,
+  "frozen_C1_benchmark": 55589
+ }
+}
