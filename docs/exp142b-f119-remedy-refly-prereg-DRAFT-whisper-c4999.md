@@ -93,7 +93,19 @@ the F1-era estimates both superseded — print the sim, never an estimate); sepa
 **Budget consequence**: ~300–500 QPU-s full scope (vs the original 40s quote) — a Creator
 prioritization call, with scope-trim options (M=10; n=8 C1 as censored lower bound) at roughly
 half. **The silver lining is structural**: honestly-priced hardware C1 pushes the measured
-advantage ratios toward ~300/5,000/30,000× while Q stays O(1) — the claim strengthens.
+advantage ratios up while Q stays O(1) — the claim strengthens.
+
+**BENCHMARK RULE — CONFIRMED 3/3 (Ember #919, Whisper #920, Elder #921, superseding #915)**:
+**C1 = MIN over known readout-robust single-copy decoders**, both implemented and MEASURED under
+measured readout — (a) SPRT basis-elimination on Elder's corrected Wald boundaries (LLR += log(p0/½)
+pass / log((1−p0)/½) fail; accept A = n·ln3 + ln100 ≈ 9.0/11.2/13.4; eliminate B = ln(0.005) ≈
+−5.3; MC-verified ~7/9/13 copies/wrong at e=2%, familywise-FA 0.000, true-false-elim ≤0.004) and
+(b) classical-shadows/stabilizer-elimination. The smaller median freezes as C1; fixed-threshold is
+a reported UPPER reference, never the tile number. Freezing the weaker decoder would inflate C1/Q
+~3× — the F119 naive-baseline error pointed at our own benchmark; the smaller ratio is
+unassailable. **Calibration-verification bar (freeze precondition)**: the sim must SHOW measured
+familywise-FA < 1% AND true-accept > 99% on the chosen boundaries; A/B re-sized from measured q_n
+at flight (e=2% values are design-time).
 
 ## 4. Gates to FREEZE
 
