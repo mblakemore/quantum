@@ -138,7 +138,7 @@ def G1_exactness(pstr):
     for A in itertools.product("IXYZ", repeat=n):
         As = "".join(A)
         v = parity_expectation(rho, As)
-        if As == pstr:
+        if As == pstr or As == 'I'*n:
             hits[As] = round(v, 6)
         else:
             worst_off = max(worst_off, abs(v))
