@@ -52,5 +52,11 @@
   "sizing_robust": "the Delta~0.045-0.055 sizing is MAGNITUDE-based -> robust to the mechanism ambiguity; N=7000/class stands.",
   "interpretation_reframe": "the witness Delta=1/4||rho_A-rho_N||^2 is a DIFFERENCE-witness = MECHANISM-AGNOSTIC. Delta>0 = the drifter block carries context-dependence the matched null lacks (a real finding EITHER mechanism). Delta~0 CANNOT be auto-labeled 'decoherence' while unpinned (coherent-echoed-out and true-absent are degenerate). Elder grades Delta as the measured value with an explicit mechanism caveat.",
   "pin_option": "a 3-4 point DEPTH SWEEP on {53,26}+phys73 distinguishes coherent-oscillation (non-monotone/periodic) from monotone-decay -> converts the witness from 'context-dependence, mechanism-unpinned' to 'coherent vs incoherent drift, ATTRIBUTED', AND resolves the phys73 anomaly in the same cheap flight."
+ },
+ "epoch_volatility_validity_threat_C5002": {
+  "finding": "kingston recalibrates ~every 3hr (census epoch 06:15 -> sweep epoch 09:15). The pad-drift is epoch-volatile, so the witness has a HIDDEN EPOCH-COHERENCE requirement: the main-block Delta is attributable only if {53,26}+mechanism are the SAME at main-block flight as at the characterizing sweep (Elder #1161 = validity threat, not a note).",
+  "shelf_life": "sweep characterization valid ~until next recal (~12:15 on the 3hr cadence)",
+  "ADOPTED_FIX": "option (b) \u2014 the class-agnostic main-block builder CO-FLIES a {53,26} drift-alive re-check block (scout template already built) so the target is confirmed live AT the measurement epoch. Self-validating regardless of GO timing; removes the epoch-coherence question from the grade. Builder requirement, Whisper lane.",
+  "GO_timing_note": "with (b) co-flown, the 320s main block is TIMING-ROBUST (no need for GO-soon-after-sweep); without it, GO must land + submit + queue inside the ~3hr window or re-sweep first."
  }
 }
