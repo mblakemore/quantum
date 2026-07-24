@@ -92,7 +92,7 @@
       is how often Alice's and Bob's key bits disagree — low enough, and a secret key survives; too high, and the key
       is thrown away. Flip the eavesdropper on and watch both move.</p>
     <div class="seg" role="tablist">
-      <button id="bh" type="button" class="on">🔓 honest channel</button>
+      <button id="bh" type="button" class="on">🔓 clear channel</button>
       <button id="be" type="button">🕵 eavesdropper listening</button>
     </div>
     <figure aria-label="Bell certificate and error-rate gauges"><svg id="viz" viewBox="0 0 860 210"></svg></figure>
@@ -109,7 +109,7 @@
       also scales: instead of a two-party Bell test, a genuine three-party one — the <b>Mermin</b> value, whose
       classical ceiling is 2 and whose quantum maximum (GHZ) is 4. Toggle the eavesdropper.</p>
     <div class="seg" role="tablist">
-      <button id="ch" type="button" class="on">🔓 honest conference</button>
+      <button id="ch" type="button" class="on">🔓 clear conference</button>
       <button id="ce" type="button">🕵 eavesdropper on Charlie</button>
     </div>
     <figure aria-label="Mermin certificate gauge for the conference key"><svg id="cviz" viewBox="0 0 860 150"></svg></figure>
@@ -120,7 +120,7 @@
 
   <section class="panel" aria-labelledby="pc">
     <h2 id="pc">The court</h2>
-    <p class="sub">why the key is trustworthy, why the tap can't hide, and the honest fine print</p>
+    <p class="sub">why the key is trustworthy, why the tap can't hide, and the fine print</p>
     <div class="court">
       <div class="receipt"><div class="rt">THE KEY IS CERTIFIED, NOT ASSUMED</div>
         <p>S = 2.179 beats the classical limit of 2 at 6σ — the shared randomness is genuine entanglement, which
@@ -134,7 +134,7 @@
         <p>Eve listens in Z, so the Z-basis error stays clean (8%) while the X-basis error explodes (51%). A protocol
         checking one basis would have missed her completely. This is exactly why BB84/E91 use conjugate bases —
         here it's in the data, not the textbook.</p></div>
-      <div class="receipt"><div class="rt">THE FINE PRINT — AND AN HONEST DEAD END</div>
+      <div class="receipt"><div class="rt">THE FINE PRINT — AND A DEAD END</div>
         <p>The secret fraction is thin (0.04): swap-grade fidelity barely clears the key threshold. The obvious fix —
         run <a href="../swap/" style="color:var(--cyan)">purification</a> first — we <em>tried</em>, and it did
         <em>not</em> pay: two bracketing flights (Exp167) showed single-round distillation is underwater on this
@@ -157,7 +157,7 @@
 const D={
  honest:{S:2.179,ssig:"+6σ",qz:0.060,qx:0.147,sf:0.040,
    cipher:"bd ba be b2 df b2 ba df aa af",out:"BEAM ME UP",ok:true,
-   story:"<b>The honest channel.</b> The Bell test reads 2.179 — past the classical 2 at 6σ, so the shared key is certified genuine entanglement no one else can hold. The error rate (10%) is low enough to distill a secret key, and the message comes through: BEAM ME UP, every character correct.",
+   story:"<b>The clear channel.</b> The Bell test reads 2.179 — past the classical 2 at 6σ, so the shared key is certified genuine entanglement no one else can hold. The error rate (10%) is low enough to distill a secret key, and the message comes through: BEAM ME UP, every character correct.",
    verdict:"SECURE — key certified, message delivered",vclass:"good"},
  eve:{S:1.184,ssig:"below 2",qz:0.081,qx:0.507,sf:0.0,
    cipher:"— key aborted —",out:"▓▓▓▓ ▓▓ ▓▓",ok:false,
@@ -201,7 +201,7 @@ draw("honest");
 // conference-key panel (Exp168 GHZ / Mermin, real fez data)
 const C={
  honest:{M:3.467,msig:"+23σ",q:0.037,sf:0.547,ok:true,out:"ENGAGE",
-   story:"<b>The honest conference.</b> The Mermin value reads 3.467 — past the classical ceiling of 2 at 23σ, genuine three-party entanglement no one else shares. All three parties recover the same key and read the broadcast: ENGAGE. One GHZ trio, one certified key, three holders.",
+   story:"<b>The clear conference.</b> The Mermin value reads 3.467 — past the classical ceiling of 2 at 23σ, genuine three-party entanglement no one else shares. All three parties recover the same key and read the broadcast: ENGAGE. One GHZ trio, one certified key, three holders.",
    verdict:"SECURE — conference key certified, broadcast delivered to all three",vclass:"good"},
  eve:{M:-0.032,msig:"below 2",q:0.043,sf:0.0,ok:false,out:"▓▓▓▓▓▓",
    story:"<b>Eavesdropper on Charlie.</b> Intercepting one party's qubit collapses the whole GHZ coherence — the Mermin value falls to ≈0, far below the classical 2 (every three-party correlation dies at once, a sharper collapse than the two-party line). The conference aborts. The key basis alone would look clean; the Mermin certificate is what catches the tap.",

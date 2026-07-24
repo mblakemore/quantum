@@ -218,11 +218,11 @@
   <!-- PANEL D -->
   <section class="panel">
     <p class="panel-label">Exhibit D — Why this counts</p>
-    <h2>Three receipts, and the honest fence</h2>
+    <h2>Three receipts, and the fence</h2>
     <div class="receipts">
       <div class="rc"><h3>1 · Correct, not discard</h3><p>Every earlier code <strong>threw the bad run away</strong>. This one identifies the error and <strong>keeps the run</strong> — the capability that gates every scalable fault-tolerant scheme. <span class="yes">The run survives.</span></p></div>
       <div class="rc"><h3>2 · A clean control</h3><p>The "sham" is the <strong>identical 5-qubit circuit with the fix switched off</strong> — same qubits, same machinery. So the growing gap is the <strong>correction's</strong> doing, not lucky qubit choice. <span class="yes">No confound.</span></p></div>
-      <div class="rc"><h3>3 · The honest fence</h3><p>This is error-<strong>detected</strong> / <strong>injected</strong> errors on distance-2–3 codes — the <strong>mechanism</strong> of fault tolerance. <strong>Not</strong> a below-threshold fidelity, <strong>not</strong> a supremacy claim.</p></div>
+      <div class="rc"><h3>3 · The fence</h3><p>This is error-<strong>detected</strong> / <strong>injected</strong> errors on distance-2–3 codes — the <strong>mechanism</strong> of fault tolerance. <strong>Not</strong> a below-threshold fidelity, <strong>not</strong> a supremacy claim.</p></div>
     </div>
     <div class="links-row">
       <a class="deeper" href="../shields/">The Shields (error detection)</a>
@@ -258,7 +258,7 @@
     // ---- verified data kernels (ibm_fez) ----
     // Exp236: 3-qubit bit-flip corrected fidelity (mean of |0>,|1>); uncorrected≈flipped, bare≈0.004
     // corr = mean of the two measured basis fidelities |0_L>,|1_L>; bare 0.004 measured;
-    // "unc" (coded-but-unfixed) was NOT measured for the 3-qubit flight -> null (honest)
+    // "unc" (coded-but-unfixed) was NOT measured for the 3-qubit flight -> null (no fabricated value)
     var BITFLIP = {
       none:{corr:0.9965, unc:null, bare:null, synd:[0,0], culprit:null},
       X0:{corr:0.919, unc:null, bare:0.004, synd:[1,0], culprit:0},

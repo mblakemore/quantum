@@ -188,7 +188,7 @@
     <p class="panel-label">Exhibit A — The copy bench</p>
     <h2>Feed a qubit in; read the two copies out in three bases</h2>
     <p class="sub">Pick a copier. The bars are the <strong>measured copy fidelity</strong> in each measurement basis (Z, Y, X)
-    on <strong>ibm_marrakesh</strong>; the red line is the <strong>5/6 ceiling</strong>. The honest cloner sits flat, a hair under the
+    on <strong>ibm_marrakesh</strong>; the red line is the <strong>5/6 ceiling</strong>. The optimal cloner sits flat, a hair under the
     line, in every basis. The cheat poking <i>above</i> the line in one basis is the tell — watch what it costs.</p>
 
     <div class="selector" role="group" aria-label="Choose a copier">
@@ -211,7 +211,7 @@
     <p class="panel-label">Exhibit B — The cheat-detector</p>
     <h2>Flatness is the measurement — the null weaponized</h2>
     <p class="sub">The cheat arm was <strong>pre-registered to fail</strong>, and its failure mode <i>is</i> the detector. An
-    honest universal cloner is the <strong>same</strong> in every basis (tiny spread); any basis-reading cheat is loud
+    optimal universal cloner is the <strong>same</strong> in every basis (tiny spread); any basis-reading cheat is loud
     (huge spread). So you don't need to know a copier's secret — just measure how much it varies across bases.</p>
 
     <div class="gauges" id="gauges"></div>
@@ -277,7 +277,7 @@
       optimal: {
         name:"Optimal universal cloner", color:"--cyan",
         bases:{ Z:0.8265, Y:0.8121, X:0.8047 }, spread:0.022, mean:0.814,
-        ok:true, tag:"UNIVERSAL — honest best",
+        ok:true, tag:"UNIVERSAL — optimal",
         headline:"Flat at ~0.81 in every basis, never over 5/6.",
         note:"Two copies, each at essentially the same fidelity <strong>no matter how you read them</strong> — the definition of "+
              "<i>universal</i>. The tiny 0.019 shortfall from 5/6 is <strong>11-CZ hardware noise</strong>, not strategy. "+
@@ -361,7 +361,7 @@
           '<div style="font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:5px">'+note+'</div></div>';
       }
       g.innerHTML =
-        gauge("opt","Optimal universal cloner", 0.022, "flat across Z/Y/X → below threshold → HONEST") +
+        gauge("opt","Optimal universal cloner", 0.022, "flat across Z/Y/X → below threshold → PASSES") +
         gauge("che","The cheat (tuned for Z)", 0.492, "wild across Z/Y/X → past threshold → CHEAT DETECTED");
     })();
 
