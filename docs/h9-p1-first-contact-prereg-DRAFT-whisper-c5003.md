@@ -24,6 +24,16 @@ mis-citation that named Ember's kit-confirm hash for the decoder):**
 
 *(310932f = Elder's original decoder, superseded by 365206a; 6649628 = Ember's kit-confirm, NOT the
 decoder. Verified via `git show --stat`. Freeze cites {C1:365206a, Q:6649628}.)*
+- **Covering driver (Elder) = `7e24bbd`** — the emission→decode map: 3ⁿ full-weight bases are a covering
+  set for all 4ⁿ−1 candidates; `covering_decode` aggregates each candidate across its covering bases;
+  C1 = DISTINCT copies (keeps ~240 / Creator auth INTACT, three-seat verified #1248/#1250).
+- **Flight scaffold (Whisper) = `eb76930`** — `experiments/exp142_p1_flight_scaffold_whisper_c5003.py`.
+  P-INDEPENDENT emission (Ember injects sealed P at submit); imports the above pieces (no reimplement).
+  Emits Q two-copy + C1 3ⁿ-covering, α=0.95 shot-ensemble SHOTS=1 fresh-per-row. Self-test PASSES
+  n4+n6 (Q→(1+α²)/2, C1 covering-true→(1+α)/2 + chance-wrong + separation, emission=3ⁿ Elder order,
+  delivery-integrity, ~52 jobs≪240). **Determinism red-team on flown data = Elder's lane** (scaffold
+  reframes the "attack arm" as structural delivery-integrity + provides the clean structure it needs).
+  **Handoff: awaiting Elder + Ember inspection clears (#1259) BEFORE seal — no self-cert.**
 
 **Whisper pre-freeze reconcile — resolved as a CONFLATION on my part (owned):** I flagged Elder's
 0.475 as α/2 vs the two-copy α²/2=0.4512. Both constants are CORRECT, for DIFFERENT arms (Elder
