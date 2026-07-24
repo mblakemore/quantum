@@ -1,0 +1,126 @@
+# H9 · P1 — First Contact: the external-ready F119 sample-complexity claim (PREREG DRAFT)
+
+*Whisper C5003, 2026-07-25, substrate claude-fable-5. H9 program P1 (Creator: "Fly P1"). Prepares
+the F119 two-copy Pauli-learning advantage to survive First Contact with an external auditor — it
+must clear all five gates ([P0 harness](../tools/claim_grade_harness.py)) and print its floor-type.
+Builds on the extensive prior work; nothing below rebuilds it: the frozen exp142b pure-state kit
+(shots=1, SPRT min-decoder, attack gate, realized-count freeze), the [F119 audit](exp142c-mixed-state-washout-honest-negative-whisper-c4999.md),
+the [P3 grade](h9-p3-prime-directive-audit-whisper-c5001.md) (F119 = NEEDS-GATE, best-known-conditional),
+and the [field audit](field-audit-google-learning-advantage-obstruction-elder-c6567.md).*
+
+## Three separable things — and only two of them can build an advantage
+
+F119's original Exp142 produced big ratios (4.9×/31.5×/266.6×/2417.5×) but was **superseded-as-
+executed**. The advisor pass (C5003) forced a clean separation that the earlier framing blurred:
+
+- **(a) The theorem** — "F119's identify-P task has a *provable* single-copy floor" (from Google
+  arXiv:2112.00778 Thm 1 / App D.4). A theory note. Valid at **$0 IF it pins** (it may not — see
+  Gate A). This changes what the quantum arm is compared *against*.
+- **(b) A clean executed quantum measurement that beats the floor** — requires the **delivery
+  re-fly** (frozen exp142b pure-state kit: shots=1 fresh-b, SPRT min-decoder, attack-gate). **~240
+  jobs.** This is the measurement itself.
+- **(c) The original Exp142 numbers** — **unusable.** They carry the fixed-basis-batching artifact
+  the determinism attack exploits, which means the *quantum arm's own executed numbers* may be a
+  classically-attackable product of the delivery, not a quantum result. Re-grounding the floor (a)
+  does nothing to clean (c) — it changes the comparison target, not the contaminated measurement.
+
+**A First-Contact advantage needs (a) + (b).** (a) alone is theory, not a win; (c) is off the table
+entirely (shipping (a)+(c) would be a proven floor bolted onto contaminated numbers — better
+packaging on an unusable result, and the exact band-shopping the Creator prohibited). So the spend
+decision is **binary**, and I state it that way to the Creator: **either the clean re-fly (b) is
+authorized, or F119 stays NEEDS-GATE and is not shipped as an advantage.** There is no $0 shortcut to
+the advantage — Gate A at $0 buys the *theorem*, not the claim.
+
+**Sequencing (kept):** Gate A first ($0) — it gates whether proposing the ~240-job spend is even
+worth it. If A fails to pin, the re-fly still gives a best-known-conditional claim (weaker), and the
+Creator should know that before authorizing (b).
+
+## Gate A — does the theorem even cover our instance? ($0, Elder's seat, G-1 discipline)
+
+**Do NOT presuppose inheritance.** The earlier framing treated "F119 is the α=1 instance of Google's
+ρ∝(I+αP) family" as if the floor near-certainly carries and only the constant needs pinning. The
+advisor pass flagged this as the **load-bearing uncertainty**, and the reason is specific: **α=1 is
+the special, easiest case.** The states {(I+P)/2ⁿ} are *maximally* pairwise-distinguishable at α=1,
+so single-copy identification may be materially *easier* there than at small α — which means Google's
+exponential floor could be proven precisely in a regime (small α, weakly-distinguishable) that
+**excludes** our α=1 instance. Being "the α=1 instance of the family" is exactly as likely to *escape*
+the floor as to inherit it, until the source says otherwise.
+
+**What Elder pins from the primary source** (the two discriminating questions, not just the constant):
+1. **Does App D.4's bound hold AT α=1** — the fully-distinguishable case — or only asymptotically /
+   for small α? (This is the make-or-break question.)
+2. **Does it cover adaptive, entangled single-copy POVMs** — the strongest single-copy strategy — or
+   only fixed Pauli-basis single-copy measurements? (A floor that only bounds weak measurements
+   doesn't bound the real classical competitor.)
+3. Then, and only if 1–2 hold: the floor's exact form (Ω(2ⁿ)? constant?) and success criterion,
+   matched to our SPRT-identify-P task.
+
+**Outcomes**: if 1 and 2 both hold → F119 floor-type = theorem-over-access (the floor covers our
+instance and the strongest classical strategy). **If either fails** → F119 stays best-known-
+conditional; the theorem covers a different regime than ours, and the re-fly (b) then buys a weaker
+(conditional-floor) claim, not a theorem-floored one. That is the fact of the matter, and the Creator
+needs it *before* deciding the spend.
+
+## Gate B — the delivery re-fly (~240 jobs, Creator cost-call)
+
+The frozen exp142b pure-state kit, unchanged except sizing: shots=1 fresh-b per copy (kills the
+determinism attack, sim-verified #815), SPRT min-decoder (C1 = min over best-known readout-robust
+decoders, Wald boundaries, realized-count-weighted CI), the **attack gate** (determinism decoder on
+the flown data → chance or DELIVERY-FAIL), 3-arm court (Q / C1 / attack). Logistics: shots=1 param-
+rows → ~240 small jobs at the 10k control-hardware cap (n=4: 8, n=6: 94, n=8: 138). This is the OOM
+wall; the mixed-state escape that tried to collapse it **washed** (prep depth destroyed the fragile
+weight-n observable), so pure-state at the job cost is the path with a fidelity-correct *prep* — with
+the two-copy Bell readout still to be certified on-device (Gate 3 below).
+
+## The five gates (P0 harness) — P1 status
+
+1. **Floor-type**: best-known-conditional NOW → theorem-over-access IF Gate A pins (the P1 point).
+2. **Instantiation**: native-shallow (pure-state = 0-CZ product eigenstates — the mixed-state's
+   exp-depth-Haar problem does not arise; this is why pure-state is fidelity-correct).
+3. **On-device fidelity** — **must certify the FULL two-copy protocol, not just prep.** The advantage
+   is generated by the *cross-register Bell measurement across two copies*, and that sub-circuit is
+   NOT 0-CZ — it is exactly the kind of fragile weight-n observable that washed the mixed-state
+   delivery. Ember's pre-seal gate PASSED the single-copy *prep* (0.99/0.98/0.97, readout-limited,
+   0-CZ epoch-robust), but that is **necessary, not sufficient**. G3 for P1 requires a public-test-P
+   fly of prep **+ the two-copy Bell readout** that survives on-device before any seal. If the gate
+   as built only certifies prep, it is incomplete for this claim and must be extended (Ember's lane).
+4. **Sealed court**: yes (frozen estimator pre-reveal, Ember sealer, Elder grader).
+5. **Own-hand red-team**: yes (the attack gate IS the red-team, run on the flown data).
+
+## Gates to freeze / decision points
+
+- ✅→ **Gate A (Elder, $0, do first)**: from the primary source, answer the two discriminating
+  questions above — does the floor hold **at α=1**, and does it cover **adaptive entangled single-copy
+  POVMs**. Outcome: theorem-over-access (both hold) or stays best-known-conditional (either fails).
+  This gates whether the spend is even worth proposing, and at what claim-strength.
+- **Gate B spend (Creator, binary)**: the delivery re-fly (b) is the ONLY path to an executed
+  advantage — there is no $0 shortcut, and the original numbers (c) are unusable (artifact-
+  contaminated). ~240 jobs, ~300–500s, on the batched-job orchestration the P2 arc showed is fragile.
+  Scope sub-options *within* authorizing (b): full n=4/6/8 (a slope with a CI), or n=4/6 (~102 jobs,
+  2-point growth, no slope CI). **The decision is: authorize (b), or F119 stays NEEDS-GATE.**
+- **G3 extension (Ember)**: extend the pre-seal gate to certify the **two-copy Bell readout**, not
+  just prep, on a public test-P at the flight epoch. Mandatory before seal.
+- **Build/submit**: I provide the P-independent scaffold + K1–K7; Ember injects the secret + submits
+  blind (the exp142b division).
+
+## Recommendation
+
+**Do Gate A now ($0)** — but as a *test of whether the theorem covers our instance*, not a formality
+expected to pass. The α=1 special-case concern is real and could leave F119 best-known-conditional.
+**Report Gate A's result to the Creator, then let them make the binary (b) spend call** with the true
+claim-strength in hand:
+- If Gate A pins → the re-fly buys a **theorem-over-access** F119 (potentially EXTERNAL-READY) — the
+  strongest outcome, worth the 240 jobs.
+- If Gate A fails → the re-fly buys a **best-known-conditional** F119 (ADVANTAGE-CONDITIONAL) — still
+  a real clean measurement, but a weaker claim; the Creator may reasonably defer the spend.
+
+Either way, **I will not present "theorem-upgrade likely + we can skip the re-fly"** — neither half is
+established, and the skip-path (shipping the contaminated original numbers) is off the table.
+
+---
+
+*Draft ends. Gate A is Elder's $0 primary-source pin (a genuine test, not a rubber stamp); Gate B is
+the Creator's binary cost-call for the only path to an executed advantage; the two-copy G3 extension
+is Ember's mandatory check. No QPU spent by this document. First Contact = the F119 claim graded by
+all five gates before it ever meets an outside auditor — including the gate that asks whether the
+theorem we want to lean on actually reaches us.*
