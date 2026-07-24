@@ -39,24 +39,32 @@ def support(P):                      # indices where P_i != I
 def support_parity(bits, P):         # parity over P's support ONLY (identity qubits excluded)
     return int(sum(bits[i] for i in support(P))) & 1
 
-def p0_of(n, r_ro):                  # α=0.95 true-basis support-parity even-prob, per-n readout-billed
-    return 0.5 + 0.475 * r_ro        # ideal r_ro=1 -> 0.975; degraded r_ro<1 -> toward 0.5
+def p_flip(w, q):                    # parity-readout flip prob over a weight-w support (odd # flips)
+    return (1 - (1 - 2*q)**w) / 2
 
-def wald(n, r_ro, eps_fa=0.01, eps_el=0.005):
-    """A=log((4^n-1)/eps_fa) familywise-FA over the all-Paulis candidate set; B=log(eps_el)."""
-    p0 = p0_of(n, r_ro)
-    A = math.log((4**n - 1) / eps_fa)
-    B = math.log(eps_el)
-    return A, B, math.log(p0/0.5), math.log((1-p0)/0.5), p0
+def p0_of(P, alpha, q):
+    """PER-CANDIDATE α-and-weight true-basis support-parity even-prob. If candidate P were the true
+    Pauli: ideal even-rate = (1+α)/2 (α from the shot-ensemble); readout flips the SUPPORT-parity w.p.
+    p_flip(weight(P), q) — WEIGHT-DEPENDENT (a weight-8 support flips more than weight-2), so p0 is
+    per-candidate, NOT a flat per-rung rate. (Distinct from Ember's TWO-copy Bell rate (1+α²)/2=0.9512;
+    the C1 arm is SINGLE-copy → (1+α)/2=0.975 ideal.)"""
+    e = (1 + alpha) / 2
+    pf = p_flip(len([c for c in P if c != "I"]), q)
+    return e * (1 - pf) + (1 - e) * pf
 
-def sprt_identify(parities_by_cand, order, n, r_ro):
-    """Walk candidates in committed order; per-candidate Wald SPRT on its SUPPORT-parity stream.
-    ACCEPT (LLR>=A) -> P_hat; ELIMINATE (LLR<=B) -> next. Returns (P_hat|None, copies_used)."""
-    A, B, s_even, s_odd, _ = wald(n, r_ro)
+def wald_AB(n, eps_fa=0.01, eps_el=0.005):
+    return math.log((4**n - 1) / eps_fa), math.log(eps_el)   # familywise-FA over 4^n-1 candidates
+
+def sprt_identify(parities_by_cand, order, n, alpha, q):
+    """Walk candidates in committed order; per-candidate Wald SPRT on its SUPPORT-parity stream, with
+    the candidate's OWN weight-based p0. ACCEPT (LLR>=A)->P_hat; ELIMINATE (LLR<=B)->next."""
+    A, B = wald_AB(n)
     used = 0
     for P in order:
+        p0 = p0_of(P, alpha, q)                  # this candidate's own α+weight even-prob
+        s_even, s_odd = math.log(p0/0.5), math.log((1-p0)/0.5)
         llr = 0.0
-        for par in parities_by_cand[P]:          # par already support-parity for THIS candidate
+        for par in parities_by_cand[P]:          # par = support-parity for THIS candidate
             used += 1
             llr += s_even if par == 0 else s_odd
             if llr >= A: return P, used
@@ -76,20 +84,28 @@ def two_copy_Q(bell_constraint_rate_stream, n, r_bell):
     return used
 
 # ---- decode driver (blind): flown data -> C1 (identify) + Q (two-copy) meters, P-blind ----
-def decode(flown, n, r_ro, r_bell):
-    """flown: {candidate_P: [support-parity bits]} per candidate (from single-copy measurements in
-    each candidate's eigenbasis) + flown['_bell'] the two-copy constraint stream. NO true-P input."""
+def decode(flown, n, alpha, q_single, r_bell):
+    """flown: {candidate_P: [support-parity bits]} per candidate (single-copy measurements in each
+    candidate's eigenbasis) + flown['_bell'] the two-copy constraint stream. NO true-P input.
+    alpha=0.95 (spec); q_single = SINGLE-copy readout error/qubit (per-n from flown control); r_bell =
+    two-copy Bell constraint-rate (per-n, Ember G3, distinct from the single-copy arm)."""
     order = candidates(n)
-    P_hat, c1 = sprt_identify({P: flown[P] for P in order}, order, n, r_ro)
+    P_hat, c1 = sprt_identify({P: flown[P] for P in order}, order, n, alpha, q_single)
     q = two_copy_Q(flown.get("_bell", []), n, r_bell)
     return {"n": n, "P_hat": P_hat, "C1_copies_to_identify": c1, "Q_copies": q,
-            "r_ro_used": r_ro, "r_bell_used": r_bell, "p0": p0_of(n, r_ro),
+            "alpha": alpha, "q_single": q_single, "r_bell_used": r_bell,
+            "p0_of_Phat": (p0_of(P_hat, alpha, q_single) if P_hat else None),
             "candidates": 4**n - 1,
-            "note": "C1>=Omega(2^n) via identify>=distinguish reduction; margin=C1/Q billed per-n on-device"}
+            "note": "C1>=Omega(2^n) via identify>=distinguish; C1 arm bills SINGLE-copy per-candidate "
+                    "weight p0=(1+a)/2 flip-adj; Q arm bills TWO-copy Bell (1+a^2)/2; margin=C1/Q per-n"}
 
 if __name__ == "__main__":
-    print("P1 FROZEN C1/SPRT decoder — BLIND, all-Paulis, support-parity, α=0.95, per-n rate-billed.")
-    for n, r in [(4, 0.933), (6, 0.882), (8, 0.846)]:   # illustrative single-copy ~ Bell rate order
-        A, B, se, so, p0 = wald(n, r)
-        print(f"  n={n}: candidates={4**n-1}  p0(r={r})={p0:.3f}  Wald A={A:.2f} B={B:.2f}")
-    print("  Def-2 distribution + identify>=distinguish reduction as in the C5003 pre-reg (Gate-A verbatim).")
+    print("P1 FROZEN C1/SPRT decoder — BLIND, all-Paulis, support-parity, α=0.95, PER-CANDIDATE-weight p0.")
+    a = 0.95
+    for n, qs in [(4, 0.004), (6, 0.005), (8, 0.006)]:   # illustrative single-copy readout/qubit
+        A, B = wald_AB(n)
+        # p0 for a weight-n (worst) vs weight-2 candidate at this q
+        p0_hi = p0_of("X"*n, a, qs); p0_lo = p0_of("X"*2 + "I"*(n-2), a, qs)
+        print(f"  n={n}: cand={4**n-1}  p0(w={n})={p0_hi:.3f}  p0(w=2)={p0_lo:.3f}  (ideal 0.975) Wald A={A:.2f} B={B:.2f}")
+    print("  C1 single-copy (1+α)/2=0.975 ideal ≠ Ember two-copy Bell (1+α²)/2=0.9512 — distinct arms.")
+    print("  Def-2 distribution + identify≥distinguish reduction as in the C5003 pre-reg (Gate-A verbatim).")
