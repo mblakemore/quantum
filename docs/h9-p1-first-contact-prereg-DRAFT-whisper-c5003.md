@@ -33,10 +33,12 @@ SPRT kit + the identify≥distinguish reduction (floor transfers); **decoder** =
    SPRT/C1 decoder bills copies against the **per-n** on-device rate (a flat average understates n=8
    erosion). The executed margin is the per-n-billed one; the advantage rides on slope-vs-floor.
 
-**Freeze/seal order**: (i) Elder finalizes decoder + support-parity + Def 2 wording; (ii) Ember
-confirms kit takes the α=0.95 all-Paulis prep + pins/re-certs edges; (iii) Whisper commits this as
-FROZEN; (iv) *only then* Ember seals (secret P) + submits blind (~240 jobs); (v) decode (Elder C1/SPRT)
-→ court grades. **Everything below is the derivation trail behind this block.**
+**Freeze/seal order**: (i) Elder finalizes decoder + support-parity + Def 2 wording — **✓ IN
+(310932f, BLIND, committed pre-seal; Def-2 verbatim confirmed; per-n billing; all-Paulis
+support-parity validated on interleaved-i.i.d. flown shape)**; (ii) Ember confirms kit takes the
+α=0.95 all-Paulis prep + pins/re-certs edges — **⏳ awaiting**; (iii) Whisper commits this as FROZEN;
+(iv) *only then* Ember seals (secret P) + submits blind (~240 jobs); (v) decode (Elder C1/SPRT) → court
+grades. **Everything below is the derivation trail behind this block.**
 
 ## ⟵ GATE A RESOLVED (Elder #1194, primary source read verbatim; doc 10752ad) + realization verified (Whisper #1196)
 
