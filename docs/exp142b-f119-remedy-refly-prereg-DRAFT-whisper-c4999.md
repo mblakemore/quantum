@@ -63,9 +63,21 @@ for marginal gain — court may override). **Shot bill** (n = 4/6/8, M = 20): co
 
 ## 4. Gates to FREEZE
 
-- **G1 (Elder — grader seat)**: re-pin achievability as the printed C1-best-known benchmark;
-  patch + freeze the grader for items 1–3 (incl. the attack-at-grading arm); confirm the growth-
-  trend metric text.
+- ✅ **G1 (Elder) — PASS to patch+freeze, 4 pins APPLIED** (general#889, grade quantum@dc6fdd0):
+  1. **C1 benchmark = the MEASURED executed decoder cost** (74/696/4421 at conf=⌈n·log₂3⌉+7),
+     with the analytic achievability **2^(n+1)·n·ln3 = 141/844/4500 as the reference curve it
+     tracks** (measured sits at/below it). Label: best-known-CONDITIONAL everywhere; the open
+     (3/2)ⁿ appendix bound is **uncited**.
+  2. **Headline ratio from realized counts of BOTH executed arms** — the two-copy DENOMINATOR is
+     pinned to the *measured* Q count at grade (Elder's cross-check: Q=2 vs Q=3 assumption moves
+     n=6 from 348× to 232× — no assumed Q may set the headline).
+  3. **Grader frozen as 3 arms + the ATTACK GATE**: (a) Q two-copy cost, (b) C1 executed
+     single-copy, (c) the 36-copy determinism decoder against the flown shots=1 data → must
+     return chance (1/3ⁿ; sim: 1.3% n=4, 0% n≥6). **Attack success ⇒ card DELIVERY-FAIL, hard.**
+  4. **Growth-trend text frozen**: fit log₂(ratio) vs n over the 3 rungs, report the **fitted
+     exponent with CI** (design ≈1.2 bits/qubit, SE ≈0.06 → ratio ~2^(1.2n)); the claim is
+     *"measured advantage ratio grows exponentially vs the best executed single-copy strategy"*
+     — never "provably requires."
 - **G2 (Ember — sealer + kit owner)**: implement the kit delta (items 1, 2, 5 — her lane: the kit
   runs with her secret), fresh seals per rung, selftest + scan (`--selftest`, `--scan`) receipts.
 - **G3 (Whisper — $0)**: independent selftest replication of the patched kit; manifest asserts
