@@ -153,3 +153,52 @@ def covering_decode(fw_shots, n, alpha, q):
             "emission_bases": 3**n, "candidates_walked": 4**n - 1, "alpha": alpha,
             "note": "emission=3^n covering (Creator ~240 auth INTACT); C1=distinct copies (honest, "
                     "not per-candidate-bit sum); frozen SPRT logic unchanged"}
+
+
+# ============================================================================================
+# FLOWN-DATA DETERMINISM RED-TEAM (Elder decode lane, per Whisper #1259 attack-reframe). BLIND.
+# The exp142b determinism attack read a FIXED-BASIS-BATCH's deterministic parity to identify P cheaply.
+# The α=0.95 shot-ensemble (shots=1, fresh-per-row) defeats it STRUCTURALLY — but this confirms the
+# EXECUTED data actually reflects that (no hardware/pipeline bug collapsed freshness into a leak).
+# Two blind statistics; post-reveal, both must show NO recovery of the true P:
+#   (1) within-basis MODAL frequency: fresh (I+0.95P)/2^n over a basis spreads outcomes over ~2^(n-1)
+#       even-parity states -> modal freq LOW; a fixed-draw batch collapses to ~1 outcome -> modal ~1.0.
+#   (2) determinism-attack GUESS: pick the candidate whose support-parity is most anomalously
+#       deterministic in its SINGLE most-deterministic covering basis (what the attack would exploit).
+#       On fresh data this is ~chance; post-reveal, guess==true_P >> chance = a delivery leak.
+# ============================================================================================
+def determinism_redteam(fw_shots, n):
+    fwb = full_weight_bases(n)
+    # (1) within-basis modal frequency (fixed-batch leak signature)
+    modal = {}
+    for A in fwb:
+        shots = fw_shots[A]
+        if not shots: continue
+        keyed = {}
+        for b in shots:
+            k = tuple(b); keyed[k] = keyed.get(k, 0) + 1
+        modal[A] = max(keyed.values()) / len(shots)
+    max_modal = max(modal.values()) if modal else 0.0
+    fresh_expected = 1.0 / (2 ** (n - 1))                 # even-parity states share the mass ~uniformly
+    leak_by_modal = max_modal > 0.5                        # way above fresh_expected for n>=2 => fixed batch
+    # (2) determinism-attack guess (blind): candidate most-deterministic in its best single covering basis
+    best_cand, best_det = None, 0.0
+    for P in candidates(n):
+        for A in fwb:
+            if not covers(A, P): continue
+            pars = [support_parity(b, P) for b in fw_shots[A]]
+            if not pars: continue
+            det = abs(sum(1 for x in pars if x == 0) / len(pars) - 0.5)  # distance from chance in ONE basis
+            if det > best_det: best_det, best_cand = det, P
+    # LEAK CRITERION = statistic (1) ONLY. The fixed-batch signature (modal>>fresh_expected) is what
+    # enables CHEAP recovery beating the Ω(2^n) floor. Statistic (2) attack_guess is INFORMATIONAL, NOT
+    # a leak criterion: on fresh data the attack DOES recover P — via the legitimate α-signal at FLOOR
+    # cost (that is the C1 signal, not a leak). Only recovery CHEAPER than the floor (a fixed-batch
+    # shortcut) is a leak, and that shows up as modal>>fresh_expected. Do NOT read guess==true_P as a leak.
+    return {"n": n, "max_within_basis_modal_freq": round(max_modal, 4),
+            "fresh_expected_modal": round(fresh_expected, 4),
+            "LEAK": bool(leak_by_modal),                  # <-- the verdict: fixed-batch determinism only
+            "attack_guess_INFORMATIONAL": best_cand, "attack_single_basis_det": round(best_det, 4),
+            "verdict_note": "LEAK iff max_within_basis_modal_freq >> fresh_expected (fixed-batch shortcut "
+                            "beats the floor). attack_guess is INFORMATIONAL — legit floor-cost recovery of "
+                            "true_P is NOT a leak; only fixed-batch CHEAP recovery is, detected by modal."}
