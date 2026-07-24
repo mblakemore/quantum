@@ -37,5 +37,13 @@
   "sizing": "main-block Delta-resolution sized to the WEAKER drifter phys26 (0.45) so BOTH resolvable -> a null is unambiguous decoherence for the whole block",
   "phys73_followup": "OPTIONAL non-blocking: cheap 3-4 point depth sweep distinguishes coherent oscillation (non-monotone/periodic) from monotone \u2014 its own mini-investigation, not folded into the witness",
   "gradeability": "X=0.45-0.70 -> Elder bar MET; on Creator GO: Ember re-seals {53,26}+re-sized N, Elder freezes Delta-estimator to the band"
+ },
+ "main_block_resizing_C5002": {
+  "current_epoch_Delta": "~0.045-0.055 ({53,26} coherent rotations from decay ratios: phys53 theta~77deg, phys26 theta~62deg)",
+  "N_per_class_5sigma": 7000,
+  "sizing_rule": "sized to the WEAKER drifter phys26 (Delta~0.045) so BOTH {53,26} resolvable (Elder bar) \u2014 conservative vs the measured-both 5000",
+  "swaps_total": 21000,
+  "budget_requote": "~300-320s (up from the stale 250s quote at 5500/class) \u2014 sizing to the weaker drifter needs more N",
+  "consistency": "current-epoch Delta~0.05 matches the original design band [0.03,0.09] and old prediction 0.052 \u2014 the drift magnitude is comparable, only the drifter SET moved"
  }
 }
