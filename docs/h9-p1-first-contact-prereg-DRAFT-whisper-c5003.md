@@ -8,11 +8,34 @@ Builds on the extensive prior work; nothing below rebuilds it: the frozen exp142
 the [P3 grade](h9-p3-prime-directive-audit-whisper-c5001.md) (F119 = NEEDS-GATE, best-known-conditional),
 and the [field audit](field-audit-google-learning-advantage-obstruction-elder-c6567.md).*
 
-## ⟵⟵ FROZEN REGISTRATION (Creator "Re-fly go" #1216; freeze pending Elder decoder + Ember kit-confirm)
+## ⟵⟵ FROZEN REGISTRATION — COMMITTED (Creator "Re-fly go" #1216). SEAL AUTHORIZED.
 
-**The re-fly is authorized (binary spend GO).** This block is the frozen registration for the blind
-court — no seal until it is committed. Estimator frozen pre-reveal; secret P held by Ember alone;
-Whisper never sees P (provides only the P-independent spec).
+**This registration is FROZEN as of this commit.** Both court pieces are in and correct:
+- **Elder** — decoder **6649628** (blind, no true-P; all-Paulis option-a; support-parity; **per-candidate
+  weight-based p0**; **arm-rate distinction**: C1 single-copy arm bills (1+α)/2=0.975 ⟨P⟩, Q two-copy
+  Bell arm bills (1+α²)/2=0.9512 ⟨P⟩², each vs its OWN on-device rate) + Def-2 wording verbatim.
+- **Ember** — kit-confirm PASS (6649628 kit takes the α=0.95 all-Paulis 0-CZ shot-ensemble prep,
+  noiseless Bell rate 0.9512 all rungs), validity-keystone confirmed, **edges PINNED** (n4/n6/n8;
+  fly-those-or-re-cert-$0-at-flight-epoch).
+
+**Whisper pre-freeze reconcile — resolved as a CONFLATION on my part (owned):** I flagged Elder's
+0.475 as α/2 vs the two-copy α²/2=0.4512. Both constants are CORRECT, for DIFFERENT arms (Elder
+first-principles #1230, verified n=2 P=ZZ; Ember #1229 concurs on the physics):
+- **C1 classical single-copy arm** measures ⟨P⟩=α directly → rate (1+α)/2 = **0.975**, signal
+  **α/2 = 0.475** (Elder's decoder constant — correct). Shot-ensemble cross-check: 0.95·1 + 0.05·½ =
+  0.975 exactly.
+- **Q quantum two-copy Bell arm** measures ⟨P⊗P⟩=α² → rate (1+α²)/2 = **0.9512**, signal
+  **α²/2 = 0.4512** (Ember's arm — the α²-law, quadratic functional of ρ off ρ⊗ρ).
+
+The single-copy ceiling 0.975 is HIGHER than the two-copy 0.9512 (two copies square α); "on-device ≤
+noiseless" holds per-arm, 0.975 exceeds nothing — I had measured the single-copy arm against the
+two-copy ceiling. **Decoder stays 6649628, no re-commit.** The brief hold was cheap; pre-freeze is
+where such checks belong, and applying the "fix" (α²/2 on the C1 arm) would itself have overstated
+the margin — the error it warned against, on the wrong arm.
+
+**Blind-court invariants (hold through seal):** estimator frozen pre-reveal (decoder 6649628 committed
+public before any seal); secret P held by **Ember alone**; Whisper never sees P (P-independent spec
+only); the flight flies the pinned G3 edges or re-certs $0 at flight epoch.
 
 **Spec** (C5003, all gates cleared): distribution Def 2 — ½ null (I/2ⁿ, O=uniform Pauli∖I), ½ alt
 ((I+0.95·sP)/2ⁿ, O=P), **P uniform over ALL Paulis∖{I}** (option (a) → floor 1/(2ⁿ+1) verbatim),
