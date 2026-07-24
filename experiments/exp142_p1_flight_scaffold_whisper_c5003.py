@@ -197,6 +197,20 @@ def selftest(n=4, c=48, seed=1421):
     print(f"  C1 aggregated true-P = {true_even:.4f} vs (1+a)/2={(1+a)/2:.4f} | wrong median={wrong_med:.4f} "
           f"max={wrong_max:.4f} | separation={sep:.4f}(>0.25)  {'✓' if c1_ok else 'FAIL'}")
 
+    # ---- I-COVERAGE (C5003, Elder #1290): the real flight P is all-Paulis∖{I} = I-CONTAINING (low-weight);
+    #      a FULL-WEIGHT TEST_P never exercises the I-decode path, which is exactly where the committed
+    #      pauli_to_bits I-omission bug hid (KeyError on I). Exercise an I-containing public P through the
+    #      SAME Q path so this class is caught in the self-test, not at flight grade. ----
+    P_i = {4: "XIZY", 6: "XIZYIX", 8: "XIZYIXZI"}[n]                 # PUBLIC, I-containing (weight < n)
+    qrows_i = q_arm_rows(n, P_i, rng, 3000)
+    cnt_i = sim.run(qqc, parameter_binds=[{p: qrows_i[:, k] for k, p in enumerate(qparams)}], shots=1).result().get_counts()
+    cnt_i = cnt_i if isinstance(cnt_i, list) else [cnt_i]
+    qr_i = constraint_rate(cnt_i, n, P_i, mapping, csign)           # uses pauli_to_bits(P_i) — hits the I path
+    i_ok = abs(qr_i - (1 + a ** 2) / 2) < 0.03
+    ok &= i_ok
+    print(f"  I-coverage Q (test-P {P_i}, weight {sum(c!='I' for c in P_i)}<n) = {qr_i:.4f} vs (1+a²)/2  "
+          f"{'✓' if i_ok else 'FAIL'}  (exercises pauli_to_bits I-handling the full-weight TEST_P missed)")
+
     # ---- delivery integrity (structurally defeats the determinism attack; flown-data red-team = Elder) ----
     di = delivery_integrity(n, rng)
     di_ok = di["shots1_all_arms"] and di["manifest_P_independent"] and di["fresh_per_row"]
