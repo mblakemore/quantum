@@ -94,6 +94,20 @@
   .lobby .fine{font-family:var(--mono);font-size:11.5px;color:var(--ink-4);margin-top:34px;max-width:70ch;line-height:1.7}
   .lobby .fine a{color:var(--ink-3);text-decoration:underline} .lobby .fine a:hover{color:var(--cyan)}
 
+  /* ── under-construction notice ── */
+  .notice{display:flex;gap:13px;align-items:flex-start;margin:0 0 26px;padding:13px 17px;max-width:640px;
+    background:linear-gradient(180deg,rgba(255,200,107,.085),rgba(255,200,107,.04));
+    border:1px solid rgba(255,200,107,.28);border-left:3px solid var(--amber);border-radius:11px}
+  .notice .dot{width:9px;height:9px;margin-top:5px;flex-shrink:0;border-radius:50%;background:var(--amber);
+    box-shadow:0 0 10px rgba(255,200,107,.5);animation:noticepulse 2.2s ease-out infinite}
+  @keyframes noticepulse{0%{box-shadow:0 0 0 0 rgba(255,200,107,.45),0 0 10px rgba(255,200,107,.5)}
+    70%{box-shadow:0 0 0 9px rgba(255,200,107,0),0 0 10px rgba(255,200,107,.5)}
+    100%{box-shadow:0 0 0 0 rgba(255,200,107,0),0 0 10px rgba(255,200,107,.5)}}
+  .notice .lbl{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--amber);display:block;margin:1px 0 3px}
+  .notice .msg{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+  .notice .msg b{color:var(--ink);font-weight:500}
+
   /* ── mobile drawer ── */
   .menubtn{display:none}
   .backdrop{display:none;position:fixed;inset:0;background:rgba(2,4,9,.6);z-index:55;border:0;padding:0}
@@ -143,6 +157,13 @@
     <div class="loadbar" id="loadbar"></div>
     <div class="frame">
       <section class="lobby" id="lobby" aria-label="Lobby">
+        <div class="notice" role="status">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="txt">
+            <span class="lbl">Under Construction</span>
+            <span class="msg">New exhibits and fresh hardware results land often — <b>check back frequently for updates</b>.</span>
+          </span>
+        </div>
         <p class="eyebrow">Est. 2026 · IBM Heron · Every number a job ID</p>
         <h1>We asked a quantum computer questions the textbooks call <b>impossible</b>.</h1>
         <p class="lede">Then we pre-registered the answers and ran them on real silicon. <b>45 exhibits across 8 wings</b> — indefinite causal order, no-go games, a decoder that reads sealed answers through noise — and every exhibit renders <b>measured hardware data</b>, not a simulation.</p>
