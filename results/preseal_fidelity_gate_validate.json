@@ -1,0 +1,38 @@
+{
+ "4_pure-state": {
+  "p_P": 0.992,
+  "p_wrong_mean": 0.483,
+  "PASS": true,
+  "job": "d9hgfht0k0jc738i5880"
+ },
+ "4_mixed-state": {
+  "p_P": 0.604,
+  "p_wrong_mean": 0.529,
+  "PASS": false,
+  "job": "d9hgfmbsbqfc73eq14mg"
+ },
+ "6_pure-state": {
+  "p_P": 0.975,
+  "p_wrong_mean": 0.508,
+  "PASS": true,
+  "job": "d9hgge0gk0ls73f2urb0"
+ },
+ "6_mixed-state": {
+  "p_P": 0.547,
+  "p_wrong_mean": 0.497,
+  "PASS": false,
+  "job": "d9hgh23sbqfc73eq178g"
+ },
+ "8_pure-state": {
+  "p_P": 0.969,
+  "p_wrong_mean": 0.51,
+  "PASS": true,
+  "job": "d9hghcl0k0jc738i5bjg"
+ },
+ "8_mixed-state": {
+  "p_P": 0.674,
+  "p_wrong_mean": 0.478,
+  "PASS": false,
+  "job": "d9hghm4honhs73ad0uvg"
+ }
+}
