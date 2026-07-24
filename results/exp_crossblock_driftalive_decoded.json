@@ -30,5 +30,12 @@
  "verdict": "DRIFT-ALIVE",
  "drift_strength_X": 0.3129,
  "n_drifters_confirmed_3sigma": 2,
- "sizing_note": "main-block Delta-resolution must be <= X~0.3129 (Elder gradeability bar)"
+ "sizing_note": "main-block Delta-resolution must be <= X~0.3129 (Elder gradeability bar)",
+ "elder_grader_read": {
+  "phys73": "COHERENT/unitary process, NOT decoherence-drifter \u2014 |<Z>|-grows-with-depth incompatible with monotone incoherent decay. Likely: recalibrated Z-over-rotation aliased by 2-depth sampling (<Z>=A cos(phi*depth)), or TLS revival. Census excess-decay metric assumes monotone decay -> phys73's number is not 'drift'; EXCLUSION is correct (a decoherence witness must not carry a coherent contaminant).",
+  "block_decision": "current-epoch gradeable block = {53,26} (both monotone-decay, 5.98/3.87sigma); phys73 excluded, phys23 below 3sigma dropped",
+  "sizing": "main-block Delta-resolution sized to the WEAKER drifter phys26 (0.45) so BOTH resolvable -> a null is unambiguous decoherence for the whole block",
+  "phys73_followup": "OPTIONAL non-blocking: cheap 3-4 point depth sweep distinguishes coherent oscillation (non-monotone/periodic) from monotone \u2014 its own mini-investigation, not folded into the witness",
+  "gradeability": "X=0.45-0.70 -> Elder bar MET; on Creator GO: Ember re-seals {53,26}+re-sized N, Elder freezes Delta-estimator to the band"
+ }
 }
