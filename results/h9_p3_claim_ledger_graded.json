@@ -1,0 +1,147 @@
+{
+ "harness": "claim_grade_harness P0 (C5001)",
+ "graded": [
+  {
+   "id": "causal-order (switch, 216.8sigma)",
+   "finding": "F73-F94 / Exp105",
+   "floor_type": "theorem-over-access",
+   "theorem": "SDP causally-separable ceiling 0.8690 (fixed+mixed+dynamical definite order)",
+   "access_model": "definite causal order (device-characterized gate-model reproduction)",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "scope_fence": "device-characterized, NOT spatially-enforced indefinite order (photonic DI is orthogonal)",
+   "verdict": "EXTERNAL-READY-FENCED",
+   "grade_notes": [
+    "all gates clear; SCOPE FENCE must lead the claim externally: device-characterized, NOT spatially-enforced indefinite order (photonic DI is orthogonal)"
+   ]
+  },
+  {
+   "id": "CHSH / contextuality (196sigma)",
+   "finding": "F115-F117",
+   "floor_type": "theorem-over-access",
+   "theorem": "Tsirelson/CHSH bound (local-realist)",
+   "access_model": "locality / no-signaling",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "scope_fence": "DI-quarantined randomness scope (F115) \u2014 witness not device-independent certificate",
+   "verdict": "EXTERNAL-READY-FENCED",
+   "grade_notes": [
+    "all gates clear; SCOPE FENCE must lead the claim externally: DI-quarantined randomness scope (F115) \u2014 witness not device-independent certificate"
+   ]
+  },
+  {
+   "id": "superdense capacity (341sigma) / QRAC (110sigma)",
+   "finding": "F107 etc",
+   "floor_type": "theorem-over-access",
+   "theorem": "Holevo / classical channel-capacity bound",
+   "access_model": "bits transmitted",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "verdict": "EXTERNAL-READY",
+   "grade_notes": [
+    "all five gates clear (or n/a) \u2014 prepared to survive First Contact; submission is the Creator's call."
+   ]
+  },
+  {
+   "id": "Heisenberg metrology (168sigma, N=5)",
+   "finding": "F108-F109",
+   "floor_type": "theorem-over-access",
+   "theorem": "standard quantum limit (shot-noise)",
+   "access_model": "probe count",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "scope_fence": "task-dependent inversion at some tasks (F109) \u2014 noted",
+   "verdict": "EXTERNAL-READY-FENCED",
+   "grade_notes": [
+    "all gates clear; SCOPE FENCE must lead the claim externally: task-dependent inversion at some tasks (F109) \u2014 noted"
+   ]
+  },
+  {
+   "id": "BGK shallow-circuit solver (F113)",
+   "finding": "F113-F114",
+   "floor_type": "asymptotic-apparatus",
+   "theorem": "BGK constant-depth vs bounded-fan-in depth separation (asymptotic)",
+   "access_model": "n/a (apparatus of a theorem, not a raw speedup)",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "n/a",
+   "verdict": "INSTRUMENT-NOT-ADVANTAGE",
+   "grade_notes": [
+    "G1: apparatus of an asymptotic theorem, not a raw speedup \u2014 labeled as instrument."
+   ]
+  },
+  {
+   "id": "F119 sample-complexity (two-copy Pauli learning)",
+   "finding": "Exp142 / Exp142c",
+   "floor_type": "best-known-conditional",
+   "theorem": "CCHL single-copy floor (adaptive); (3/2)^n appendix OPEN => best-known not unconditional",
+   "access_model": "copies of rho_P, no quantum memory",
+   "instantiation": "native-shallow (pure-state) / needs conn-aware prep (mixed-state)",
+   "on_device_fidelity": "gate-PENDING",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "scope_fence": "pure-state re-fly hardware-confirmed fidelity-correct (0.96); mixed-state washed (blind NO-WIN); pre-seal gate now mandatory",
+   "verdict": "NEEDS-GATE",
+   "grade_notes": [
+    "G3: pre-seal gate not yet run (experiments/exp142_preseal_fidelity_gate_ember_c4215.py) \u2014 must PASS before First Contact.",
+    "G1: best-known-conditional floor \u2014 advantage is real vs best-known, supersedable; label conditional, never 'unconditional'."
+   ]
+  },
+  {
+   "id": "F120 shot-axis code / blind decode",
+   "finding": "F120",
+   "floor_type": "none",
+   "theorem": "none (a decoding INSTRUMENT \u2014 per-bit info survives depth ~30x the modal answer)",
+   "access_model": "n/a",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "scope_fence": "instrument result, explicitly NOT an advantage; blind-exact decode to d2q=310",
+   "verdict": "INSTRUMENT-NOT-ADVANTAGE",
+   "grade_notes": [
+    "G1: no theorem floor \u2014 measurement/resource result, not an advantage."
+   ]
+  },
+  {
+   "id": "F121 runtime (hidden-shift decoder race)",
+   "finding": "F121",
+   "floor_type": "best-known-conditional",
+   "superseded": "own red-team, C4996 \u2014 MM linear-structure attack reads the sealed answer in 41 queries / ~0.25ms; floor priced simulation not the problem (poly-time)",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "verdict": "SUPERSEDED/RETIRED",
+   "grade_notes": [
+    "floor broken: own red-team, C4996 \u2014 MM linear-structure attack reads the sealed answer in 41 queries / ~0.25ms; floor priced simulation not the problem (poly-time)"
+   ]
+  },
+  {
+   "id": "cross-block coherence witness (pending flight)",
+   "finding": "Exp (cross-block, cal-passed)",
+   "floor_type": "none",
+   "theorem": "none (a PHYSICS coherence witness Delta=1/4||rho_A-rho_N||^2_HS, not a computational advantage)",
+   "access_model": "n/a",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "gate-PENDING",
+   "sealed_court": true,
+   "own_hand_red_team": "n/a",
+   "scope_fence": "cal-passed lambda_hold~1.0 (ideal difference-witness); physics result not advantage",
+   "verdict": "INSTRUMENT-NOT-ADVANTAGE",
+   "grade_notes": [
+    "G3: pre-seal gate not yet run (experiments/exp142_preseal_fidelity_gate_ember_c4215.py) \u2014 must PASS before First Contact.",
+    "G1: no theorem floor \u2014 measurement/resource result, not an advantage."
+   ]
+  }
+ ]
+}

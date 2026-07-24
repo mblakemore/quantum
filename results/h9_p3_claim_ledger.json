@@ -1,0 +1,109 @@
+{
+ "ledger": "H9 P3 — The Prime Directive Audit: every advantage-flavored column graded through the P0 five-gate harness (Whisper C5001). Floor-type/gate assignments sourced from the primary findings + the C4998-4999 arc. This is the scoreboard an external auditor would demand.",
+ "claims": [
+  {
+   "id": "causal-order (switch, 216.8sigma)",
+   "finding": "F73-F94 / Exp105",
+   "floor_type": "theorem-over-access",
+   "theorem": "SDP causally-separable ceiling 0.8690 (fixed+mixed+dynamical definite order)",
+   "access_model": "definite causal order (device-characterized gate-model reproduction)",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "scope_fence": "device-characterized, NOT spatially-enforced indefinite order (photonic DI is orthogonal)"
+  },
+  {
+   "id": "CHSH / contextuality (196sigma)",
+   "finding": "F115-F117",
+   "floor_type": "theorem-over-access",
+   "theorem": "Tsirelson/CHSH bound (local-realist)",
+   "access_model": "locality / no-signaling",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "scope_fence": "DI-quarantined randomness scope (F115) — witness not device-independent certificate"
+  },
+  {
+   "id": "superdense capacity (341sigma) / QRAC (110sigma)",
+   "finding": "F107 etc",
+   "floor_type": "theorem-over-access",
+   "theorem": "Holevo / classical channel-capacity bound",
+   "access_model": "bits transmitted",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes"
+  },
+  {
+   "id": "Heisenberg metrology (168sigma, N=5)",
+   "finding": "F108-F109",
+   "floor_type": "theorem-over-access",
+   "theorem": "standard quantum limit (shot-noise)",
+   "access_model": "probe count",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "scope_fence": "task-dependent inversion at some tasks (F109) — noted"
+  },
+  {
+   "id": "BGK shallow-circuit solver (F113)",
+   "finding": "F113-F114",
+   "floor_type": "asymptotic-apparatus",
+   "theorem": "BGK constant-depth vs bounded-fan-in depth separation (asymptotic)",
+   "access_model": "n/a (apparatus of a theorem, not a raw speedup)",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "n/a"
+  },
+  {
+   "id": "F119 sample-complexity (two-copy Pauli learning)",
+   "finding": "Exp142 / Exp142c",
+   "floor_type": "best-known-conditional",
+   "theorem": "CCHL single-copy floor (adaptive); (3/2)^n appendix OPEN => best-known not unconditional",
+   "access_model": "copies of rho_P, no quantum memory",
+   "instantiation": "native-shallow (pure-state) / needs conn-aware prep (mixed-state)",
+   "on_device_fidelity": "gate-PENDING",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "scope_fence": "pure-state re-fly hardware-confirmed fidelity-correct (0.96); mixed-state washed (blind NO-WIN); pre-seal gate now mandatory"
+  },
+  {
+   "id": "F120 shot-axis code / blind decode",
+   "finding": "F120",
+   "floor_type": "none",
+   "theorem": "none (a decoding INSTRUMENT — per-bit info survives depth ~30x the modal answer)",
+   "access_model": "n/a",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes",
+   "scope_fence": "instrument result, explicitly NOT an advantage; blind-exact decode to d2q=310"
+  },
+  {
+   "id": "F121 runtime (hidden-shift decoder race)",
+   "finding": "F121",
+   "floor_type": "best-known-conditional",
+   "superseded": "own red-team, C4996 — MM linear-structure attack reads the sealed answer in 41 queries / ~0.25ms; floor priced simulation not the problem (poly-time)",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "not-applicable",
+   "sealed_court": true,
+   "own_hand_red_team": "yes"
+  },
+  {
+   "id": "cross-block coherence witness (pending flight)",
+   "finding": "Exp (cross-block, cal-passed)",
+   "floor_type": "none",
+   "theorem": "none (a PHYSICS coherence witness Delta=1/4||rho_A-rho_N||^2_HS, not a computational advantage)",
+   "access_model": "n/a",
+   "instantiation": "native-shallow",
+   "on_device_fidelity": "gate-PENDING",
+   "sealed_court": true,
+   "own_hand_red_team": "n/a",
+   "scope_fence": "cal-passed lambda_hold~1.0 (ideal difference-witness); physics result not advantage"
+  }
+ ]
+}
