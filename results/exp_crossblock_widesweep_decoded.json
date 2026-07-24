@@ -1,0 +1,83 @@
+{
+ "card": "exp_crossblock_widesweep_decode",
+ "job": "d9hjfbkhonhs73ad58vg",
+ "cal_epoch": "2026-07-24 09:15:04+00:00",
+ "drifters": {
+  "73": {
+   "depths": [
+    160,
+    280,
+    320,
+    360,
+    400
+   ],
+   "absZ": [
+    0.6828,
+    0.2315,
+    0.0559,
+    0.0321,
+    0.2099
+   ],
+   "min_at_depth": 360,
+   "revival_amplitude": 0.1778,
+   "mechanism": "COHERENT (|<Z>| REVIVES past node)"
+  },
+  "26": {
+   "depths": [
+    160,
+    280,
+    320,
+    360,
+    400
+   ],
+   "absZ": [
+    0.5522,
+    0.1657,
+    0.0345,
+    0.0914,
+    0.2094
+   ],
+   "min_at_depth": 320,
+   "revival_amplitude": 0.1749,
+   "mechanism": "COHERENT (|<Z>| REVIVES past node)"
+  },
+  "53": {
+   "depths": [
+    160,
+    280,
+    320,
+    360,
+    400
+   ],
+   "absZ": [
+    0.5506,
+    0.1924,
+    0.0869,
+    0.0149,
+    0.0841
+   ],
+   "min_at_depth": 360,
+   "revival_amplitude": 0.0692,
+   "mechanism": "COHERENT (|<Z>| REVIVES past node)"
+  },
+  "23": {
+   "depths": [
+    160,
+    280,
+    320,
+    360,
+    400
+   ],
+   "absZ": [
+    0.8046,
+    0.5776,
+    0.523,
+    0.447,
+    0.3784
+   ],
+   "min_at_depth": 400,
+   "revival_amplitude": 0.0,
+   "mechanism": "no revival in range (decoherent OR node beyond 400)"
+  }
+ }
+}
