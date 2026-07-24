@@ -45,5 +45,12 @@
   "swaps_total": 21000,
   "budget_requote": "~300-320s (up from the stale 250s quote at 5500/class) \u2014 sizing to the weaker drifter needs more N",
   "consistency": "current-epoch Delta~0.05 matches the original design band [0.03,0.09] and old prediction 0.052 \u2014 the drift magnitude is comparable, only the drifter SET moved"
+ },
+ "mechanism_reconcile_C5002": {
+  "the_error": "BOTH over-attributed from 2 depth points: Elder #1116 called {53,26} decoherence, Whisper #1120 modeled them coherent (theta~77/62). A monotone |<Z>| decay is consistent with coherent OR incoherent OR mixed \u2014 2 points cannot distinguish (the exact limitation correctly flagged for phys73, mis-applied to {53,26}).",
+  "honest_state": "{53,26} mechanism UNPINNED; only phys73 has a CONFIRMED coherent component (|<Z>|-growth impossible for pure decoherence).",
+  "sizing_robust": "the Delta~0.045-0.055 sizing is MAGNITUDE-based -> robust to the mechanism ambiguity; N=7000/class stands.",
+  "interpretation_reframe": "the witness Delta=1/4||rho_A-rho_N||^2 is a DIFFERENCE-witness = MECHANISM-AGNOSTIC. Delta>0 = the drifter block carries context-dependence the matched null lacks (a real finding EITHER mechanism). Delta~0 CANNOT be auto-labeled 'decoherence' while unpinned (coherent-echoed-out and true-absent are degenerate). Elder grades Delta as the measured value with an explicit mechanism caveat.",
+  "pin_option": "a 3-4 point DEPTH SWEEP on {53,26}+phys73 distinguishes coherent-oscillation (non-monotone/periodic) from monotone-decay -> converts the witness from 'context-dependence, mechanism-unpinned' to 'coherent vs incoherent drift, ATTRIBUTED', AND resolves the phys73 anomaly in the same cheap flight."
  }
 }
