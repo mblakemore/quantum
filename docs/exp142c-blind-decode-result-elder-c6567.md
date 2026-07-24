@@ -60,6 +60,39 @@ of "no basis is deterministic," i.e. ⟨A⟩≈0 for **all** A.
   prep delivers ⟨P⟩≈1 on hardware (re-run `compiled_G1`-style check but MEASURED on-device on a known
   test P first), the flight cannot grade an advantage.
 
+## POST-REVEAL routing forensics — the washout was mostly a LAYOUT OWN-GOAL, not fundamental fragility
+
+Measured ⟨P⟩ at the revealed true bases (blind phase over): n=4 (ZYYZ) 0.096, n=6 (YYZZXZ) 0.069,
+n=8 (YYZYZXYX) 0.219 — all at the noise floor, non-monotonic → the washed data is too
+noise-dominated to fit a reliable ⟨P⟩=f^depth law (my first fit returned f=1.0018>1, a bug-signal I
+discarded; do not use it). The RELIABLE lever is the transpile 2q-gate count (deterministic):
+
+| n | logical 2q | as-flown routed (readout-layout, opt1) | conn-aware routed (opt3) |
+|---|-----------|----------------------------------------|--------------------------|
+| 4 | 6         | **213 (36×)**                          | **6 (1.0×)**             |
+| 6 | 10        | 358                                    | 17 (1.7×)                |
+| 8 | 14        | 362                                    | 38 (2.7×)                |
+
+**Root cause, sharpened:** the flight forced `initial_layout` = the 7 LOWEST-READOUT qubits (chosen
+for q_n, connectivity-blind — scattered across the chip) then opt=1 routed the star-ladder through
+~207 SWAPs at n=4. A connectivity-aware transpile collapses the SAME logical prep 213→6 at n=4 — the
+n=4 signal would have SURVIVED (⟨P⟩≈0.99^6≈0.94). So the as-flown result OVER-states the fragility:
+~10–36× of the depth was an avoidable layout own-goal, not the prep.
+
+**But the star-ladder is genuinely SWAP-bound at n≥5:** `cx(j,0) ∀j` needs qubit-0 degree n−1, while
+heavy-hex maxes at degree 3 — so even best-case relayout leaves 17/38 routed 2q at n=6/8. At a
+conservative f≈0.99/CZ that predicts ⟨P⟩(n=8)≈0.99^38≈**0.68 — borderline, just misses the 0.7 gate.**
+
+**Consequence for path (b) vs (c):** the (b)-vs-(c) decision must compare a *connectivity-aware*
+mixed prep against pure-state — NOT the as-flown star-ladder (which conflated prep-depth with a
+layout own-goal). A LINEAR/tree entangler that keeps routed≈logical≈2(n−1)=14 at n=8 predicts
+⟨P⟩≈0.99^14≈**0.87 (clears 0.7), while RETAINING the ~20× job savings.** So path (b) is NOT dead —
+it needs both a connectivity-aware layout AND a linear-prep redesign (not just relayout). Path (c)
+pure-state stays the fidelity-guaranteed fallback (0 entangling gates, ⟨P⟩≈0.976, 215-job cost).
+The f≈0.99 is an ESTIMATE (washed data couldn't fit it) — the on-device pre-seal ⟨P⟩ gate MEASURES
+it and is authoritative; my prediction for the linear prep at n=8 is ~0.87, and that is the number
+to test before defaulting to (c)'s job cost.
+
 ## Attack / independence arms (cond 3 / cond 4) — vacuous here, reported for completeness
 
 Determinism-attack score 0.26/0.23/0.17 and lag-1 shot-correlation ≈ 0 (−0.02/−0.006/0.0001). These
