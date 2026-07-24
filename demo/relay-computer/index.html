@@ -3,22 +3,42 @@
 <head>
 <meta charset="utf-8">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Ccircle%20cx%3D%223%22%20cy%3D%228%22%20r%3D%221.8%22%20fill%3D%22%2345d6cf%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%224%22%20r%3D%221.4%22%20fill%3D%22%23e6a94e%22%2F%3E%3Ccircle%20cx%3D%2213%22%20cy%3D%228%22%20r%3D%221.8%22%20fill%3D%22%2345d6cf%22%2F%3E%3Cpath%20d%3D%22M4.5%208%20L8%205%20L11.5%208%22%20fill%3D%22none%22%20stroke%3D%22%23e6a94e%22%20stroke-width%3D%221.2%22%20stroke-dasharray%3D%221.2%201.2%22%2F%3E%3C%2Fsvg%3E">
+<meta property="og:title" content="The Relay Computer — a gate run on entanglement from a relay, and the tax the stack charges">
+<meta property="og:description" content="The first composition of the network wing: a nonlocal CNOT (Exp170) executed through an e-bit forged by an entanglement-swapping relay (Exp162). It works — 6σ over the witness — and the pre-registered composition test finds the stack costs more than the product of its layers. Exp175.">
+<meta name="theme-color" content="#04060c">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Relay Computer — a gate run on entanglement from a relay, and the tax the stack charges | The Quantum Museum</title>
 <meta name="description" content="The first composition of the network wing: a nonlocal CNOT (Exp170) executed through an e-bit forged by an entanglement-swapping relay (Exp162). It works — 6σ over the witness — and the pre-registered composition test finds the stack costs more than the product of its layers. Exp175.">
-<link rel="stylesheet" href="../museum.css">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
-  .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
-  .topbar a { color: var(--ink-2); text-decoration:none; } .topbar a:hover { color: var(--cyan); }
-  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
-  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
-    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
-  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--pink);font-weight:400}
   .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
   .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1;
-    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 15%,transparent), transparent 70%); }
+    background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--pink) 15%,transparent), transparent 70%); }
   .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
   h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
     font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
@@ -39,7 +59,8 @@
   .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
   .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
   .grid2 { display:grid; grid-template-columns:1.15fr 1fr; gap:18px; align-items:start; }
-  @media (max-width:680px){ .gr2 { grid-template-columns:1fr; } .grid2 { grid-template-columns:1fr; } }
+  .grid2 > * { min-width:0; }
+  @media (max-width:680px){ .grid2 { grid-template-columns:1fr; } }
   .tt { font-family:var(--mono); font-size:13px; }
   .tt .row { display:flex; align-items:center; gap:10px; padding:5px 0; }
   .tt .io { color:var(--ink-2); } .tt .arr { color:var(--ink-3); }
@@ -58,20 +79,21 @@
   .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
   .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
   .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
-  .foot { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
-  .foot a { color:var(--ink-2); text-decoration:none; } .foot a:hover{ color:var(--cyan); }
+  footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
   @media (max-width:680px){ .court { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
   <nav class="topbar" aria-label="museum">
     <a href="../index.html">← The Quantum Museum</a>
-    <span class="wingtag">/ quantum network</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button">◐ theme</button>
+    <span class="wing">WING <b>IV</b> · The Advantage Ladder</span>
   </nav>
 
+  <main id="main">
   <header class="hero">
     <div class="eyebrow">A discovery from the Heron 2026 campaign</div>
     <h1>The Relay Computer<span class="hl">.</span></h1>
@@ -134,14 +156,15 @@
         measurement, not a constant. <code>Exp175 · job d9dvseineu4c739nrb2g</code></p></div>
     </div>
   </section>
+  </main>
 
-  <div class="foot">
+  <footer role="contentinfo">
     <span>Exp175 · ibm_fez · 23 circuits · 4096 shots</span>
     <span>C4863 · 2026-07-18</span>
     <a href="../swap/">← the relay (Matchmaker)</a>
     <a href="../remote-gate/">← the remote gate</a>
     <a href="../index.html">← all exhibits</a>
-  </div>
+  </footer>
 </div>
 
 <script>
@@ -212,12 +235,6 @@ const seg=document.getElementById("seg");
 Object.keys(ARMS).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;
   b.textContent=ARMS[k].lbl;b.addEventListener("click",()=>draw(k));seg.appendChild(b);});
 draw("relaygate");
-document.getElementById("themeBtn").addEventListener("click",()=>{
-  const cur=document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
-  const next=cur==="dark"?"light":"dark";
-  document.documentElement.setAttribute("data-theme",next);
-  try{localStorage.setItem("qmuseum-theme",next);}catch(e){}
-});
 </script>
 </body>
 </html>
