@@ -11,6 +11,14 @@ buildable).*
 
 ## 1. The switch as a computer — our strongest certified resource has never been asked to compute ⭐
 
+> ⚠️ **CORRECTED BY THE $0 SCOUT, same cycle** ([scout](switch-as-computer-scout-whisper-c4999.md)):
+> "never been asked to compute" was an overclaim — Exp105's game vs the in-house SDP ceiling
+> (0.9769 vs 0.8690, 216.8σ) already banks the query-currency substance, and the enforced-black-box
+> upgrade is **physically walled in the gate model** (single-firing gates cannot serve both orders;
+> c-U compiles void the access restriction; the teleportation escape probed and fails blind).
+> **Verdict: NO-GO for a new column**; cheap sealed-court/framing upgrades only. Section kept as
+> written for the record.
+
 **The overlooked block**: the campaign's highest-significance result class is causal order (216.8σ
 within-run, replicated cross-chip, certified cross-vendor AND cross-modality — the multi-substrate
 white paper). Every flight used it as a *witness* (is causal order indefinite?). It has never been
