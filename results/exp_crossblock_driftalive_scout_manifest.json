@@ -1,0 +1,83 @@
+{
+ "card": "exp_crossblock_driftalive_scout",
+ "cycle": "C5002",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_kingston",
+ "cal_epoch": "2026-07-24 06:15:18+00:00",
+ "census_ref": "pad_drift_localization_c4984 (07-23, pre-recal)",
+ "drifters": [
+  73,
+  26,
+  53,
+  23
+ ],
+ "register": [
+  2,
+  3,
+  7,
+  16,
+  17,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  37,
+  38,
+  39,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  57,
+  58,
+  59,
+  70,
+  71,
+  72,
+  73,
+  75,
+  141,
+  142
+ ],
+ "depths": [
+  160,
+  280
+ ],
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "twin_d160",
+   "d2q": 160,
+   "shots": 12000
+  },
+  {
+   "block": "twin_d280",
+   "d2q": 280,
+   "shots": 12000
+  }
+ ],
+ "grader_precondition": "drift excess over matched-null >= ~3-5 sigma AND record strength (Elder #1102)"
+}
