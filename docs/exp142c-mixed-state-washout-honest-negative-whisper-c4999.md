@@ -101,6 +101,26 @@ parity, ⟨P⟩ ~ fidelity^depth), DEPTH is the binding constraint.** Concretely
   This may be the right answer; the job-count is the price of the measurement, and the earlier
   "escape" was the detour. On the table honestly, not as a fallback of last resort.
 
+## Empirical confirmation + the balanced final state (Ember #1071, Whisper model #1072)
+
+**Hardware cross-check (Ember, exp142b pure-state cal blocks, same weight, 0 entangling gates):**
+pure-state weight-6 true-basis even-rate = **0.96 / 0.96 / 0.94** (near readout-limited, q_n~0.003)
+vs mixed-state ~0.5. Two independent lines — my CZ-depth model + this flown read — agree: **(c)
+pure-state is HARDWARE-CONFIRMED fidelity-correct.** (Clean pure-vs-mixed contrast at weight-6 only;
+n=4/8 pure-state cals were inside OOM'd jobs.)
+
+**But (b) is not killed by it** (holding Elder's layout correction alongside): modeling the washout
+under BOTH interpretations — layout-inflated (~70 CZ, per-CZ f~0.99) OR logical-star (22 CZ, per-CZ
+f~0.965) — the connectivity-aware **linear** prep (5–7 CZ) predicts ⟨P⟩ ~ **0.79–0.91, clearing 0.7
+in either case.**
+
+**Balanced final state (no over-swing either way):**
+- **(c) pure-state** = the CONFIRMED-SAFE instrument, at the 215-job logistics cost.
+- **(b) conn-aware linear mixed prep** = MODEL-VIABLE under both depth models, keeps the ~20× job
+  savings, but **not yet hardware-confirmed** — the on-device ⟨P⟩ gate on a clean linear prep is the
+  decider and the deliverable. Do not retire (b) before its gate; do not fly it before the gate
+  clears either.
+
 ## The one clean win here
 
 **It was caught BLIND.** Elder's frozen 3-arm estimator, posted pre-reveal, graded the washout as a
