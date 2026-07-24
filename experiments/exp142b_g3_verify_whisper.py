@@ -104,3 +104,33 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def k7_censoring_selftest(rungs=(4, 6, 8), L_mult=2.0, reps=300, readout_err=0.02, seed=42):
+    """K7 (Elder #903 proviso): measured censoring < 1/20 per rung at L = L_mult x achievability.
+    Uses Ember's VERIFIED honest decoder (exp142_f119_shots1_remedy_verify_ember_c4215) with
+    max_copies = L(n); a rep returning None within L = censored. Any rung > 1/20 -> bump to 3x."""
+    import numpy as np
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from exp142_f119_shots1_remedy_verify_ember_c4215 import honest_singlecopy_identify
+    ACH = {4: 74, 6: 696, 8: 4421}
+    rng = np.random.default_rng(seed)
+    verdicts = {}
+    for n in rungs:
+        L = int(L_mult * ACH[n])
+        cens = 0
+        for _ in range(reps):
+            P = "".join(rng.choice(list("XYZ")) for _ in range(n))
+            copies, found = honest_singlecopy_identify(P, rng, readout_err=readout_err,
+                                                       max_copies=L)
+            if found != P:
+                cens += 1
+        rate = cens / reps
+        verdicts[n] = {"L": L, "censoring_rate": round(rate, 4), "pass_1_in_20": rate < 0.05}
+        print(f"K7 n={n}: L={L} censoring={rate:.4f} ({'PASS' if rate < 0.05 else 'BUMP TO 3x'})")
+    return verdicts
+
+
+if __name__ == "__main__" and "--k7-only" in sys.argv:
+    import os
+    k7_censoring_selftest()
