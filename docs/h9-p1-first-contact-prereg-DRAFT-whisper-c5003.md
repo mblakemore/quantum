@@ -54,11 +54,26 @@ rungs, margin ~0.43 ≫ 0.20 floor. On-device confirmation (3 rungs × ~2k shots
 follow. *This is why the two-copy protocol is deliverable where single-copy mixed-state prep was not:
 the advantage's MEASUREMENT is shallow-parallel, not deep-weight-n.*
 
-**Net**: theorem-over-access F119 is **reachable AND flyable**. Gate-set status: Q2 access ✓,
-Q1 α→0.95 ✓, prep 0-CZ shot-ensemble ✓, task-type reduction ✓, family → option (a) verbatim ✓,
-two-copy Bell G3 → depth-1, $0-forecast would-PASS, on-device confirming ✓(pending). **Once Ember's
-on-device G3 returns PASS, every P1 technical gate is closed** and only the Creator's binary spend on
-the ~240-job α=0.95 re-fly remains. **Sections below are the pre-Gate-A framing, retained for the record; the
+**G3 ON-DEVICE PASS (Ember #1211, real ibm_fez):** Bell constraint-rate 0.933/0.882/0.846 (n=4/6/8)
+vs wrong ~0.49, all ≫ 0.75 floor, margins 0.36–0.43, all depth-1 (jobs d9hq11l0…/d9hq460g…/
+d9hq4aog…). Prep ~0.99 + this readout ⇒ the **full two-copy protocol is fidelity-correct on
+hardware**. **Every P1 technical gate is CLOSED.**
+
+**The degraded-rate nuance — separation robust, margin reduced (Whisper structural check):** the
+on-device Bell rate is ~0.85–0.93 (<1) and decays with n (readout-limited), so each sample carries
+<1 clean bit. Checked whether this erodes the advantage: the quantum copy-count blowup is a
+*constant-ish* factor (~1.3× at n=4 → ~2.1× at n=8, a slow readout-**linear** decay c≈0.02), NOT
+exponential, while the classical floor stays Ω(2ⁿ). **So the exponential separation is robust; only
+the executed finite-n MARGIN shrinks ~O(2×) at n=8** (still a large multiple, and notably below the
+ideal 2417×). Exact copy-sizing billed against the 0.846 rate is Elder's SPRT lane.
+
+**Net**: theorem-over-access F119 is reachable, flyable, and **all technical gates cleared**. Gate-set:
+Q2 access ✓, Q1 α→0.95 ✓, prep 0-CZ shot-ensemble ✓, task-type reduction ✓, family → option (a)
+verbatim ✓, two-copy Bell G3 on-device PASS ✓. **Only the Creator's binary spend on the ~240-job
+α=0.95 re-fly remains** — it buys a theorem-floored (Ω(2ⁿ) verbatim) real exponential separation,
+delivered fidelity-correct, with an executed finite-n margin reduced by readout (the claim is the
+separation + floor, not a headline ratio). Alternative: hold, F119 stays best-known-conditional at no
+loss. **Sections below are the pre-Gate-A framing, retained for the record; the
 α=0.95 + option-(a) results supersede the α=1 / full-weight assumptions throughout.**
 
 ## Three separable things — and only two of them can build an advantage
