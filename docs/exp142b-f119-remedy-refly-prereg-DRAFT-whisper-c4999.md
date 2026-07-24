@@ -54,9 +54,16 @@ decode protocol; Elder frozen grader (`exp142_grader.py` + grade-on-reveal, patc
 | 8 | 4,421 / 4,499 | ~22–44 | ~100–200× |
 | 10 | *(reach — no sim point; extrapolated ~25–30k)* | ~34–68 | *(reach, budget-gated)* |
 
-**Trials**: M = 20 blind trials per rung (each trial = fresh sealed P? No — one sealed P per rung,
-M independent decode repetitions on disjoint copy blocks; the P-per-trial variant costs M× seals
-for marginal gain — court may override). **Shot bill** (n = 4/6/8, M = 20): conventional ≈
+**Trials**: M = 20 blind trials per rung — one sealed P per rung, M independent decode repetitions
+on **disjoint copy blocks** (Ember G2 accepted; the Amendment-A single-instance bound carries as
+in v1).
+
+**Billing rule (pinned now so grade time cannot re-litigate it)**: the flight submits the FULL
+committed schedule (hardware jobs are static); the decoder replays rows in the committed order and
+**stops at parity-confirm — the C1 bill per trial = copies CONSUMED up to the stop**, under the
+frozen stop rule. Rows flown beyond the stop are apparatus, not bill (identical convention to v1's
+meter; the stop rule is frozen pre-flight, so the bill cannot be gamed). Q arm billed identically:
+measured two-copy count to identification (Elder pin 2). **Shot bill** (n = 4/6/8, M = 20): conventional ≈
 (74+696+4421)×20 ≈ 104k rows shots=1 (chunked ≤8,192 rows/PUB) + quantum ≈ 4.6k + cals/sentinels
 ≈ **~112k shots ≈ 15–25 QPU-s** (quote 40 s worst-case) against the 2,131 s pool. n=10 reach adds
 ~500k rows — flown only if the court wants it and the pool allows.
