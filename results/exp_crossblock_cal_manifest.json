@@ -118,5 +118,6 @@
   }
  ],
  "fold_gate": "lambda_hold_witness < 0.6 -> main block folds",
- "seed": 2026072307
+ "seed": 2026072307,
+ "job_id": "d9hansogk0ls73f2ns90"
 }

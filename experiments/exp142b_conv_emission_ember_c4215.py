@@ -21,13 +21,25 @@ GRID = {4: 20, 6: 20, 8: 5}     # ALPHA: (rung -> M)
 def p_flip(n, e):
     return (1 - (1 - 2*e)**n) / 2
 
-def confirm_C(n, q_n, margin=8):
-    """Uniform copies/basis: enough for the true basis to reach the Wald CONFIRM boundary A.
-    C = ceil(A / E[LLR step | true]) + margin. q_n = measured per-copy readout (design-time 0.02)."""
+def confirm_C(n, q_n, pct=99.0, trials=20000, seed=99):
+    """Uniform copies/basis = p99 of the MEASURED true-basis SPRT confirm-stop distribution.
+    CATCH #7 (Whisper K7): the mean-sized C (A/E[step]+const) misses the HEAVY UPPER TAIL of the
+    confirm-walk -> truncates 14-19% of TRUE-P reps. The right quantity is a high percentile of
+    the confirm-stop time, NOT mean+const (Elder's cushion governs p99 here). Reproduces 44/64/92
+    at q_n=0.02. q_n = measured per-copy readout (design-time 0.02)."""
     pf = p_flip(n, q_n); p0 = 1 - pf
-    A = n*np.log(3) + np.log(100)
-    step_true = p0*np.log(p0/0.5) + pf*np.log(pf/0.5)     # mean LLR step under H1 (true basis)
-    return int(np.ceil(A / step_true)) + margin
+    A = n*np.log(3) + np.log(100); B = np.log(0.005)
+    s_even = np.log(p0/0.5); s_odd = np.log((1-p0)/0.5)
+    rng = np.random.default_rng(seed + n)
+    stops = np.empty(trials, dtype=int)
+    for t in range(trials):
+        llr = 0.0; c = 0
+        while True:                                       # true-basis SPRT walk to CONFIRM (>=A)
+            c += 1
+            llr += s_even if rng.random() < p0 else s_odd
+            if llr >= A: stops[t] = c; break
+            if llr <= B: stops[t] = c; break              # true basis false-elim (rare ~0.3%)
+    return int(np.ceil(np.percentile(stops, pct)))
 
 def build_conv_rep(n, P, C, rng):
     """One decode block (rep): committed random basis order, C fresh-b shots=1 copies per basis.
@@ -79,6 +91,24 @@ def selftest():
             assert 0.35 < rate < 0.65, f"wrong-basis odd-rate {rate} (must be ~0.5)"
     print("  selftest PASS: shots==1, fresh-b per copy, uniform C=%d, true-basis parity EVEN, "
           "wrong-basis ~0.5 (angle table intact)." % C)
+    # (5) CENSORING GUARD (catch #7): C=confirm_C(p99) must truncate <2.5% of TRUE-P confirm-walks.
+    for nn in (4, 6, 8):
+        Cn = confirm_C(nn, 0.02)
+        pf = p_flip(nn, 0.02); p0 = 1 - pf
+        A = nn*np.log(3) + np.log(100); B = np.log(0.005)
+        se, so = np.log(p0/0.5), np.log((1-p0)/0.5)
+        rg = np.random.default_rng(7*nn); trunc = 0; TT = 8000
+        for _ in range(TT):
+            llr = 0.0
+            for c in range(Cn):                            # capped at C copies for this basis
+                llr += se if rg.random() < p0 else so
+                if llr >= A: break                         # confirmed within C
+                if llr <= B: break                         # (false-elim, separate)
+            else:
+                trunc += 1                                 # never resolved in C -> truncated
+        rate = trunc/TT
+        assert rate < 0.025, f"n={nn} C={Cn}: true-basis truncation {rate:.3f} >= 2.5%"
+        print(f"    censoring guard n={nn}: C=p99={Cn}  true-basis truncation {rate*100:.2f}% [<2.5% PASS]")
 
 def scan(q_n=0.02):
     """FREE budget scan (no submission): per-rung C, emission-L=C*3^n, shots, PUB counts, at
@@ -94,7 +124,8 @@ def scan(q_n=0.02):
         print(f"   n={n} M={M}: C={C:3d}  emission-L=C*3^n={L:7d}/rep  {rep_pubs} PUBs/rep  "
               f"conv shots={shots:,}")
     print(f"   CONV TOTAL ~{tot_shots:,} shots (+ quantum arm ~4.6k + cals/sentinels). "
-          f"ALPHA ~ matches the ~2.0M / 290-480s quote.")
+          f"With C=p99 (catch #7 fix) this is ~520-720s > the ~300-500s ALPHA envelope -> Creator "
+          f"re-ack or n=8 sub-trim (M=5->3, or n=8 censored-LB). Re-sizes from measured q_n at flight.")
 
 if __name__ == "__main__":
     if "--selftest" in sys.argv:
