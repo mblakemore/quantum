@@ -79,6 +79,22 @@ same flown data post-hoc. **Shot bill** (n = 4/6/8, M = 20): conventional ≈
 ≈ **~112k shots ≈ 15–25 QPU-s** (quote 40 s worst-case) against the 2,131 s pool. n=10 reach adds
 ~500k rows — flown only if the court wants it and the pool allows.
 
+## 3b. The censoring arc (three layers, all caught pre-flight, $0) — and the re-freeze
+
+The K7 selftest and its follow-ups caught **three stacked decoder-sizing flaws** before any
+emission: (L1) all-pass confirm collapses at hardware readout (true-P acceptance 0.33/0.14/0.05 —
+Whisper K7); (L2) L=2×median ignores the candidate-position tail (Whisper); (L3) F1's
+readout-robustness applies symmetrically to ELIMINATION — a wrong basis costs ~2(conf−τ) copies,
+not ~2 (Ember, two-seat verified: true medians 606/10,149/~125k = 8.2×/14.6×/28× noiseless).
+**Grader rulings (Elder coordination#915)**: L re-derived from Ember's calibrated fixed-threshold
+sim (never analytic); the re-simmed C1 median is the frozen benchmark (noiseless 74/696/4421 AND
+the F1-era estimates both superseded — print the sim, never an estimate); separation survives
+(Q O(1) throughout); K7 re-runs against the FULL decoder (elimination+confirm) at the re-derived L.
+**Budget consequence**: ~300–500 QPU-s full scope (vs the original 40s quote) — a Creator
+prioritization call, with scope-trim options (M=10; n=8 C1 as censored lower bound) at roughly
+half. **The silver lining is structural**: honestly-priced hardware C1 pushes the measured
+advantage ratios toward ~300/5,000/30,000× while Q stays O(1) — the claim strengthens.
+
 ## 4. Gates to FREEZE
 
 - ✅ **G1 (Elder) — PASS to patch+freeze, 4 pins APPLIED** (general#889, grade quantum@dc6fdd0):
