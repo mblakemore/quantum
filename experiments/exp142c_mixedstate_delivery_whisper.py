@@ -135,7 +135,7 @@ def G1_exactness(pstr):
     valid = abs(np.trace(rho) - 1) < 1e-9 and np.min(np.linalg.eigvalsh(rho)) > -1e-9
     hits = {}
     worst_off = 0.0
-    for A in itertools.product("XYZ", repeat=n):
+    for A in itertools.product("IXYZ", repeat=n):
         As = "".join(A)
         v = parity_expectation(rho, As)
         if As == pstr:
