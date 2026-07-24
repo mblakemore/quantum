@@ -109,3 +109,47 @@ if __name__ == "__main__":
         print(f"  n={n}: cand={4**n-1}  p0(w={n})={p0_hi:.3f}  p0(w=2)={p0_lo:.3f}  (ideal 0.975) Wald A={A:.2f} B={B:.2f}")
     print("  C1 single-copy (1+α)/2=0.975 ideal ≠ Ember two-copy Bell (1+α²)/2=0.9512 — distinct arms.")
     print("  Def-2 distribution + identify≥distinguish reduction as in the C5003 pre-reg (Gate-A verbatim).")
+
+
+# ============================================================================================
+# COVERING-DECODE driver (Elder, post-#1247 — keeps emission at 3^n, Creator ~240-job auth intact).
+# The 3^n FULL-WEIGHT bases are a COVERING SET for all 4^n-1 candidates: a candidate P (support S) is
+# read from any full-weight basis A that AGREES with P on S (3^(n-w) such bases). So emit 3^n
+# full-weight bases (NOT 4^n-1 per-candidate), and EXTRACT every candidate's support-parity from the
+# covering measurements. C1 = DISTINCT full-weight COPIES consumed (a copy reused across candidates it
+# covers is ONE copy) — the honest best-known-classical count; per-candidate-basis emission OR
+# per-candidate-bit counting would INFLATE C1 = inflate our own advantage (Ember c4215_002 tripwire).
+# Frozen SPRT logic (p0_of / wald_AB / support_parity) UNCHANGED — this is the emission->decode map.
+# ============================================================================================
+def full_weight_bases(n):
+    return ["".join(t) for t in itertools.product("XYZ", repeat=n)]      # 3^n, committed lex order
+
+def covers(A, P):                     # full-weight basis A covers candidate P iff A agrees with P on P's support
+    return all(A[i] == P[i] for i in support(P))
+
+def covering_decode(fw_shots, n, alpha, q):
+    """fw_shots: {full_weight_basis A: [shot_bits,...]} — the 3^n emitted bases, C shots each. BLIND.
+    Walks all 4^n-1 candidates (frozen SPRT, per-candidate weight p0); each candidate's parity stream
+    is EXTRACTED from its covering bases; C1 = DISTINCT (basis,shot) copies consumed across the walk."""
+    A_wald, B_wald = wald_AB(n)
+    order = candidates(n); fwb = full_weight_bases(n)
+    cov = {P: [Ab for Ab in fwb if covers(Ab, P)] for P in order}         # covering bases per candidate
+    consumed = set()                                                     # DISTINCT (basis, shot_idx) copies
+    P_hat = None
+    for P in order:
+        p0 = p0_of(P, alpha, q); s_even, s_odd = math.log(p0/0.5), math.log((1-p0)/0.5)
+        llr = 0.0; stop = False
+        # consume covering shots in committed order: basis-lex, then shot-index
+        for Ab in cov[P]:
+            for si, bits in enumerate(fw_shots[Ab]):
+                consumed.add((Ab, si))                                    # one physical copy (reused across candidates it covers)
+                par = support_parity(bits, P)
+                llr += s_even if par == 0 else s_odd
+                if llr >= A_wald: P_hat = P; stop = True; break
+                if llr <= B_wald: stop = True; break                      # eliminate -> next candidate
+            if stop: break
+        if P_hat is not None: break
+    return {"n": n, "P_hat": P_hat, "C1_distinct_copies": len(consumed),
+            "emission_bases": 3**n, "candidates_walked": 4**n - 1, "alpha": alpha,
+            "note": "emission=3^n covering (Creator ~240 auth INTACT); C1=distinct copies (honest, "
+                    "not per-candidate-bit sum); frozen SPRT logic unchanged"}
