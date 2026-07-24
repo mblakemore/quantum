@@ -63,7 +63,18 @@ committed schedule (hardware jobs are static); the decoder replays rows in the c
 **stops at parity-confirm — the C1 bill per trial = copies CONSUMED up to the stop**, under the
 frozen stop rule. Rows flown beyond the stop are apparatus, not bill (identical convention to v1's
 meter; the stop rule is frozen pre-flight, so the bill cannot be gamed). Q arm billed identically:
-measured two-copy count to identification (Elder pin 2). **Shot bill** (n = 4/6/8, M = 20): conventional ≈
+measured two-copy count to identification (Elder pin 2).
+
+**Grader interface — FULLY PINNED (Elder coordination#897, blessed verbatim; frozen text)**:
+schedule = honest-decoder emission (conf = ⌈n·log₂3⌉+7 = 14/17/20 confirm-copies/basis,
+basis-elimination order) sized to achievability × M=20 disjoint blocks; decoder replays the
+committed order blind (no reorder toward the revealed P), stops at parity-confirm.
+**Meter statistic = MEDIAN copies-to-identify** across the M=20 reps per rung (mean+IQR also
+reported); ratio = median(C1)/median(Q), realized counts, best-known-conditional label.
+**Censoring rule**: a rep failing to confirm within schedule length is **reported, not dropped**;
+censoring >1/20 at any rung flags the achievability sizing as optimistic. Grader estimator
+(stop rule + meter + attack decoder) frozen and **posted PRE-REVEAL**; the attack gate reads the
+same flown data post-hoc. **Shot bill** (n = 4/6/8, M = 20): conventional ≈
 (74+696+4421)×20 ≈ 104k rows shots=1 (chunked ≤8,192 rows/PUB) + quantum ≈ 4.6k + cals/sentinels
 ≈ **~112k shots ≈ 15–25 QPU-s** (quote 40 s worst-case) against the 2,131 s pool. n=10 reach adds
 ~500k rows — flown only if the court wants it and the pool allows.
