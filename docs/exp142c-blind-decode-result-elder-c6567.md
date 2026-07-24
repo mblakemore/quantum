@@ -93,6 +93,36 @@ The f≈0.99 is an ESTIMATE (washed data couldn't fit it) — the on-device pre-
 it and is authoritative; my prediction for the linear prep at n=8 is ~0.87, and that is the number
 to test before defaulting to (c)'s job cost.
 
+## HARDWARE-CALIBRATED fidelity (Ember's pure-state cross-check) — (b)-linear predicted to CLEAR the gate
+
+Ember pulled the exp142b pure-state cal blocks (0 entangling gates) at weight-6: true-basis even-rate
+**0.96/0.96/0.94** (preserved, readout-limited) vs the as-flown mixed ~0.534 (washed). This gives TWO
+hardware points at the SAME weight → a per-CZ fidelity fit **grounded on hardware**, not literature:
+
+- ⟨P⟩=2·even−1: pure-state floor ⟨P⟩=0.92 @ 0 CZ; as-flown mixed ⟨P⟩=0.068 @ **358 routed CZ** (my
+  transpile forensics — NOT the 22 *logical* CZ; the flown depth was the layout-own-goal count).
+- ⟨P⟩ = ⟨P⟩_floor · f^depth ⇒ **f = 0.9928 per routed CZ**. Self-validates: predicts as-flown n=8
+  (362 CZ) ⟨P⟩=0.066, matching the observed ~0 washout.
+
+**Applying f to the connectivity-aware LINEAR prep (the (b)-anchor):**
+
+| prep | routed CZ (n=8) | predicted ⟨P⟩ | even-rate | gate |
+|------|-----------------|---------------|-----------|------|
+| linear, both layers 2(n−1) | 14 | 0.83 | 0.92 | CLEARS 0.7 |
+| linear, ladder-only n−1    | 7  | 0.87 | 0.94 | CLEARS 0.7 |
+| pure-state (c)             | 0  | 0.92 | 0.96 | reference |
+| as-flown star (washed)     | 362| 0.07 | 0.53 | — |
+
+**Precise scope (the grader point):** Ember's cross-check empirically settles "0 CZ good vs 358 CZ
+bad" — it does NOT test the ~7–14-CZ linear prep. The hardware-calibrated extrapolation (to FEWER
+gates — the reliable direction, less error compounding) predicts (b)-linear clears 0.7 at both rungs.
+So **(c) is not yet empirically favored over (b)-linear**; the on-device pre-seal gate ON THE LINEAR
+PREP is what decides, and the calibrated prediction favors (b) keeping the ~20× job savings. Honest
+caveats: (i) the gate is authoritative — run it, don't cite the 0.83–0.87 prediction; (ii) (b)-linear
+⟨P⟩≈0.85 < pure 0.92, so the SPRT confirm needs a somewhat larger copy budget C (more *shots* per
+circuit, not more circuits → job count stays low, savings hold); (iii) pure-state cal data existed
+only at n=6 (n=4/8 were in the OOM'd jobs), so the direct pure-vs-mixed hardware contrast is weight-6.
+
 ## Attack / independence arms (cond 3 / cond 4) — vacuous here, reported for completeness
 
 Determinism-attack score 0.26/0.23/0.17 and lag-1 shot-correlation ≈ 0 (−0.02/−0.006/0.0001). These
