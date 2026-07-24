@@ -34,6 +34,7 @@ def main():
             "n_rises_gt0.03":len(rises),
             "mechanism":"DECOHERENT (monotone decay)" if mono else "COHERENT (non-monotone/oscillation -> unitary phi*depth)"}
     json.dump(out,open(os.path.join(QROOT,"results","exp_crossblock_depthsweep_decoded.json"),"w"),indent=1)
-    for q,d in out["drifters"].items(): print(f"phys{q}: absZ={d[\'absZ\']} -> {d[\'mechanism\']}")
+    for q,dd in out["drifters"].items():
+        print("phys%s: absZ=%s -> %s" % (q, dd["absZ"], dd["mechanism"]))
     print(f"usage={job.usage()}s")
 if __name__=="__main__": main()

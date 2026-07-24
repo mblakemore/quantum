@@ -1,0 +1,91 @@
+{
+ "card": "exp_crossblock_depthsweep_decode",
+ "job": "d9hj9krsbqfc73eq5ds0",
+ "cal_epoch": "2026-07-24 09:15:04+00:00",
+ "drifters": {
+  "73": {
+   "depths": [
+    160,
+    200,
+    240,
+    280
+   ],
+   "absZ": [
+    0.6705,
+    0.5067,
+    0.4162,
+    0.2303
+   ],
+   "diffs": [
+    -0.1638,
+    -0.0905,
+    -0.1859
+   ],
+   "n_rises_gt0.03": 0,
+   "mechanism": "DECOHERENT (monotone decay)"
+  },
+  "26": {
+   "depths": [
+    160,
+    200,
+    240,
+    280
+   ],
+   "absZ": [
+    0.5398,
+    0.4161,
+    0.2792,
+    0.1332
+   ],
+   "diffs": [
+    -0.1237,
+    -0.1369,
+    -0.146
+   ],
+   "n_rises_gt0.03": 0,
+   "mechanism": "DECOHERENT (monotone decay)"
+  },
+  "53": {
+   "depths": [
+    160,
+    200,
+    240,
+    280
+   ],
+   "absZ": [
+    0.5518,
+    0.4013,
+    0.293,
+    0.1791
+   ],
+   "diffs": [
+    -0.1505,
+    -0.1083,
+    -0.1139
+   ],
+   "n_rises_gt0.03": 0,
+   "mechanism": "DECOHERENT (monotone decay)"
+  },
+  "23": {
+   "depths": [
+    160,
+    200,
+    240,
+    280
+   ],
+   "absZ": [
+    0.7974,
+    0.7173,
+    0.636,
+    0.5769
+   ],
+   "diffs": [
+    -0.0801,
+    -0.0813,
+    -0.0591
+   ],
+   "n_rises_gt0.03": 0,
+   "mechanism": "DECOHERENT (monotone decay)"
+  }
+ }
+}
