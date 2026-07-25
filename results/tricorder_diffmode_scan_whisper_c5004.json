@@ -11,7 +11,8 @@
  "epochs": {
   "device_fingerprint": "2026-07-24 06:15:18+00:00",
   "coherence_overlay": "2026-07-24 09:15:04+00:00",
-  "note": "cross-epoch overlay \u2014 honest caveat, drifter set is consistent across the arc"
+  "note": "cross-epoch overlay ~3h apart (Elder #1423): the drifter SET is consistent across the arc, BUT the per-site coherent/decoherent MECHANISM label assumes it did NOT flip in the gap \u2014 and calibration-epoch volatility (mechanism shifts across recals; kingston ~3hr recal cadence) makes that a real threat, not just a set-membership question. Museum-demo: instrument works [GROUNDED]. Actionable correctable/retire verdict: needs a SAME-EPOCH drift+revival pass to pin the mechanism to the fingerprint it labels.",
+  "actionable_fix": "same-epoch drift+revival pass (pins mechanism to the fingerprint)"
  },
  "flag_threshold_sigma": 3.0,
  "sites": {
@@ -21,7 +22,7 @@
    "coherence": "COHERENT (|<Z>| REVIVES past node)",
    "revival_amplitude": 0.1778,
    "verdict": "ANOMALOUS (signal GREW vs reference \u2014 inverted drift)",
-   "action": "coherent drift = UNITARY = in-principle correctable (recalibrate phase / track)"
+   "action": "coherent drift = UNITARY = in-principle correctable (recalibrate phase / track) [mechanism is CROSS-EPOCH \u2014 pin with a same-epoch pass before acting]"
   },
   "phys26": {
    "drift_sigma": 3.87,
@@ -29,7 +30,7 @@
    "coherence": "COHERENT (|<Z>| REVIVES past node)",
    "revival_amplitude": 0.1749,
    "verdict": "DRIFTED (flagged)",
-   "action": "coherent drift = UNITARY = in-principle correctable (recalibrate phase / track)"
+   "action": "coherent drift = UNITARY = in-principle correctable (recalibrate phase / track) [mechanism is CROSS-EPOCH \u2014 pin with a same-epoch pass before acting]"
   },
   "phys53": {
    "drift_sigma": 5.98,
@@ -37,7 +38,7 @@
    "coherence": "COHERENT (|<Z>| REVIVES past node)",
    "revival_amplitude": 0.0692,
    "verdict": "DRIFTED (flagged)",
-   "action": "coherent drift = UNITARY = in-principle correctable (recalibrate phase / track)"
+   "action": "coherent drift = UNITARY = in-principle correctable (recalibrate phase / track) [mechanism is CROSS-EPOCH \u2014 pin with a same-epoch pass before acting]"
   },
   "phys23": {
    "drift_sigma": 1.5,

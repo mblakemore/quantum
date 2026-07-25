@@ -35,7 +35,14 @@ def diff_scan(device_sites, ref_baseline, ref_sigma, coherence_map, epoch_dev=No
               "separation_owed": "two-copy sample-advantage for the DIFF not claimed (single-copy depth-sweep data)",
               "reference": {"baseline_decay": ref_baseline, "robust_sigma": ref_sigma},
               "epochs": {"device_fingerprint": epoch_dev, "coherence_overlay": epoch_coh,
-                         "note": "cross-epoch overlay — honest caveat, drifter set is consistent across the arc"},
+                         "note": ("cross-epoch overlay ~3h apart (Elder #1423): the drifter SET is consistent "
+                                  "across the arc, BUT the per-site coherent/decoherent MECHANISM label assumes it "
+                                  "did NOT flip in the gap — and calibration-epoch volatility (mechanism shifts "
+                                  "across recals; kingston ~3hr recal cadence) makes that a real threat, not just a "
+                                  "set-membership question. Museum-demo: instrument works [GROUNDED]. Actionable "
+                                  "correctable/retire verdict: needs a SAME-EPOCH drift+revival pass to pin the "
+                                  "mechanism to the fingerprint it labels."),
+                         "actionable_fix": "same-epoch drift+revival pass (pins mechanism to the fingerprint)"},
               "flag_threshold_sigma": FLAG_SIGMA, "sites": {}}
     flagged, stable, anomalous = [], [], []
     for site, excess in device_sites.items():
@@ -58,10 +65,11 @@ def diff_scan(device_sites, ref_baseline, ref_sigma, coherence_map, epoch_dev=No
             stable.append(site)
         # actionable recommendation from the coherence character
         if entry["verdict"].startswith(("DRIFTED", "ANOMALOUS")):
+            xep = " [mechanism is CROSS-EPOCH — pin with a same-epoch pass before acting]"
             if "COHERENT" in mech:
-                entry["action"] = "coherent drift = UNITARY = in-principle correctable (recalibrate phase / track)"
+                entry["action"] = "coherent drift = UNITARY = in-principle correctable (recalibrate phase / track)" + xep
             elif "no revival" in mech or "decoher" in mech.lower():
-                entry["action"] = "decoherent = information loss = NOT correctable by phase (recalibrate/retire site)"
+                entry["action"] = "decoherent = information loss = NOT correctable by phase (recalibrate/retire site)" + xep
             else:
                 entry["action"] = "characterize coherence before deciding (run revival test)"
         report["sites"][f"phys{site}"] = entry
