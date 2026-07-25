@@ -1,0 +1,109 @@
+{
+ "card": "exp_tricorder_sameepoch_marrakesh",
+ "cycle": "C5004",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_marrakesh",
+ "cal_epoch": "2026-07-25 18:18:51+00:00",
+ "depths": [
+  160,
+  280,
+  320,
+  360,
+  400
+ ],
+ "register": [
+  2,
+  3,
+  7,
+  16,
+  17,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  37,
+  38,
+  39,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  57,
+  58,
+  59,
+  70,
+  71,
+  72,
+  73,
+  75,
+  141,
+  142
+ ],
+ "seed": 2026072307,
+ "purpose": "Tricorder Diff-Mode SAME-EPOCH graduation: drift (160->280) + coherence (revival) in one window -> mechanism pinned to fingerprint",
+ "prereg_scope": {
+  "graduates": "the instrument on a fresh chip (same-epoch, mechanism-pinned)",
+  "does_not_claim": [
+   "two-copy sample-advantage (SEPARATION-OWED, single-copy data)",
+   "marrakesh replicates kingston (this is FRESH characterization)",
+   "fix the kingston scan's cross-epoch asterisk (needs same-epoch KINGSTON pass)"
+  ],
+  "valid_outcomes": [
+   "drifters found + same-epoch-pinned coherence verdicts",
+   "NO drifters / stable population (equally valid instrument demo)"
+  ],
+  "drifter_id": "IN DECODE vs the marrakesh population (NOT the kingston {73,26,53,23})"
+ },
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "twin_d160",
+   "d2q": 160,
+   "shots": 12000
+  },
+  {
+   "block": "twin_d280",
+   "d2q": 280,
+   "shots": 12000
+  },
+  {
+   "block": "twin_d320",
+   "d2q": 320,
+   "shots": 12000
+  },
+  {
+   "block": "twin_d360",
+   "d2q": 360,
+   "shots": 12000
+  },
+  {
+   "block": "twin_d400",
+   "d2q": 400,
+   "shots": 12000
+  }
+ ],
+ "job_id": "d9ig9h0ii2cc73edhha0"
+}
