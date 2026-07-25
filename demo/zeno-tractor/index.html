@@ -43,21 +43,21 @@
   .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
   h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06;
     font-size:clamp(29px,5.6vw,50px); margin:12px 0 14px; text-wrap:balance; }
-  h1 .hl { color: var(--amber); }
+  h1 .hl { color: var(--violet); }
   .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:64ch; margin:0 0 12px; }
   .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px;
     color:var(--ink-3); border:1px solid var(--edge); border-radius:12px; padding:8px 14px; max-width:70ch; }
   .scope b { color: var(--amber); font-weight:600; }
   .specbtn { display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:13.5px; font-weight:600;
-    text-decoration:none; color:#04121a; background:var(--amber); border:1.5px solid var(--amber);
+    text-decoration:none; color:#fff; background:var(--violet); border:1.5px solid var(--violet);
     border-radius:11px; padding:10px 18px; transition:transform .12s, box-shadow .12s; box-shadow:var(--shadow); }
-  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--amber) 35%,transparent); }
+  .specbtn:hover { transform:translateY(-1px); box-shadow:0 8px 22px color-mix(in srgb,var(--violet) 35%,transparent); }
   .specbtn .arw { font-size:15px; }
 
   .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px;
     padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
   .panel-label { font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
-    margin:0 0 4px; font-weight:600; color: var(--amber); }
+    margin:0 0 4px; font-weight:600; color: var(--violet); }
   .panel h2 { font-size:clamp(18px,2.6vw,23px); margin:0 0 6px; letter-spacing:-.01em; }
   .panel .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; max-width:66ch; }
 
@@ -68,39 +68,39 @@
   .gcol { display:inline-flex; gap:14px; align-items:stretch; }
   .gbar { position:relative; width:52px; height:220px; border:2px solid var(--edge-2); border-radius:12px;
     background:var(--surface-2); overflow:hidden; }
-  .gfill { position:absolute; left:0; right:0; bottom:0; background:linear-gradient(180deg,var(--amber),color-mix(in srgb,var(--amber) 60%,transparent));
+  .gfill { position:absolute; left:0; right:0; bottom:0; background:linear-gradient(180deg,var(--violet),color-mix(in srgb,var(--violet) 60%,transparent));
     transition:height .35s cubic-bezier(.34,1.3,.5,1); }
   @media (prefers-reduced-motion: reduce){ .gfill { transition:none; } }
   .glabels { display:flex; flex-direction:column; justify-content:space-between; font-family:var(--mono); font-size:10.5px; color:var(--ink-3); padding:2px 0; }
-  .glabels .on { color:var(--amber); } .glabels .off { color:var(--bad); }
+  .glabels .on { color:var(--violet); } .glabels .off { color:var(--bad); }
   .gnum { font-family:var(--mono); font-weight:720; font-size:clamp(40px,10vw,64px); letter-spacing:-.03em; line-height:1; color:var(--ink); margin-top:12px; }
   .gnum small { font-size:13px; color:var(--ink-3); font-weight:500; }
   .verdict { margin-top:14px; font-size:14px; color:var(--ink-2); min-height:3.4em; max-width:46ch; margin-inline:auto; }
-  .verdict b { color:var(--ink); } .verdict .front { color:var(--pink); font-weight:700; }
+  .verdict b { color:var(--ink); } .verdict .front { color:var(--amber); font-weight:700; }
 
   .controls { margin-top:2px; }
   .dial { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
   .dial .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
   .cbtn { font-family:var(--mono); font-size:13px; font-weight:600; padding:9px 13px; border-radius:10px;
     border:1.5px solid var(--edge); background:var(--surface-2); color:var(--ink-2); cursor:pointer; transition:all .12s; }
-  .cbtn:hover { border-color:var(--amber); }
-  .cbtn.on { background:var(--amber); color:#04121a; border-color:var(--amber); }
+  .cbtn:hover { border-color:var(--violet); }
+  .cbtn.on { background:var(--violet); color:#fff; border-color:var(--violet); }
   .looks { display:flex; gap:5px; flex-wrap:wrap; margin-top:18px; min-height:16px; align-items:center; }
-  .looks .lk { width:10px; height:10px; border-radius:50%; background:var(--amber); opacity:.85; }
+  .looks .lk { width:10px; height:10px; border-radius:50%; background:var(--violet); opacity:.85; }
   .looks .txt { font-family:var(--mono); font-size:11px; color:var(--ink-3); }
 
   /* law plot */
   .lawwrap { max-width:520px; margin:0 auto; }
   .law-curve { fill:none; stroke:var(--ink-3); stroke-width:1.6; stroke-dasharray:4 4; opacity:.65; }
-  .meas-curve { fill:none; stroke:var(--amber); stroke-width:2.2; }
-  .dot-m { fill:var(--card); stroke:var(--amber); stroke-width:2.4; }
+  .meas-curve { fill:none; stroke:var(--violet); stroke-width:2.2; }
+  .dot-m { fill:var(--card); stroke:var(--violet); stroke-width:2.4; }
   .axis { stroke:var(--edge-2); stroke-width:1; }
   .axlabel { font-family:var(--mono); font-size:9px; fill:var(--ink-3); }
-  .front-mark { stroke:var(--pink); stroke-width:1.4; stroke-dasharray:3 3; }
+  .front-mark { stroke:var(--amber); stroke-width:1.4; stroke-dasharray:3 3; }
 
   footer { display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:26px;
     padding-top:18px; border-top:1px solid var(--edge); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
-  footer .sig { color: var(--amber); font-weight:600; }
+  footer .sig { color: var(--violet); font-weight:600; }
   footer a { color: var(--ink-2); } footer a:hover { color: var(--cyan); }
   footer .sp { flex:1; }
 </style>
@@ -179,7 +179,7 @@
         <text class="axlabel" x="24" y="214">0</text>
         <text class="axlabel" x="44" y="228">N=2</text>
         <text class="axlabel" x="360" y="228">N=16</text>
-        <text class="axlabel" id="frontLabel" fill="var(--pink)"></text>
+        <text class="axlabel" id="frontLabel" fill="var(--amber)"></text>
         <text class="axlabel" x="150" y="14" fill="var(--ink-3)">dashed = ideal Zeno law [cos²(π/2N)]^N</text>
       </svg>
     </div>
