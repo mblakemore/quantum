@@ -1,0 +1,16 @@
+{
+ "n": 6,
+ "manifest_hash": "399b735ac41453810bd34f7ed186b5207188b9c561e52b984c49e3839719ab75",
+ "q_used": 0.055,
+ "P_hat_C1": "IYXZXY",
+ "result": {
+  "n": 6,
+  "P_hat": "IYXZXY",
+  "C1_distinct_copies": 4631,
+  "emission_bases": 729,
+  "candidates_walked": 4095,
+  "alpha": 0.95,
+  "note": "emission=3^n covering (Creator ~240 auth INTACT); C1=distinct copies (honest, not per-candidate-bit sum); frozen SPRT logic unchanged"
+ },
+ "expect": "IYXZXY"
+}
