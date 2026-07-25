@@ -1,0 +1,19 @@
+{
+ "artifact": "p1 n6 Q-arm decode provenance (closes the gap Elder #1407 flagged: pair revealed-P + job + decoder)",
+ "by": "whisper c5004",
+ "blind_safe": "n6 REVEALED (Ember #1287-era); n8 untouched",
+ "n": 6,
+ "quantum_job": "d9hrarshonhs73adh7og",
+ "manifest_commit": "399b735a",
+ "revealed_seal": "IYXZXY",
+ "decoder_CORRECT": "exp142_g3 constraint_rate + G2.calibrate_bell_mapping/csign + candidates() walk (the p1 alpha=0.95 shot-ensemble path)",
+ "reproduction": {
+  "winner": "IYXZXY",
+  "rate": 0.875,
+  "runner_up": "ZZZYIY",
+  "runner_rate": 0.7,
+  "matches_seal": true
+ },
+ "decoder_WRONG": "exp142_decode_meter.quantum_decode (C4746 full-weight alpha=1 tool) -> ZXXXZY (pos0 I->Z, the I-inflation the fresh-per-shot shot-ensemble fixes; decode_meter does not model the p1 convention)",
+ "rule": "known-answer reproduction on a REVEALED rung selects the flown-matched decoder; synthetic self-consistency does NOT (a wrong tool can pass synthetic and fail flown). Use constraint_rate path for n8 Q."
+}
