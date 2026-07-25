@@ -4,7 +4,13 @@
 <meta name="description" content="The Casebook of Detective Whisper — print-and-play tabletop games exploring quantum entanglement and causal order. Cut out the cards and play.">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M4%204C8%208%208%208%2012%2012%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12%204C8%208%208%208%204%2012%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.7%22%20fill%3D%22%23e5e7eb%22%2F%3E%3C%2Fsvg%3E">
+<meta property="og:title" content="The Casebook of Detective Whisper — Print &amp; Play">
+<meta property="og:description" content="Print-and-play tabletop games exploring quantum entanglement and causal order. Cut out the cards and play.">
+<meta name="theme-color" content="#04060c">
 <title>The Casebook of Detective Whisper — Print &amp; Play</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
  @page { size letter; margin: 0.55in; }
  * { box-sizing: border-box; }
@@ -44,7 +50,41 @@
    border-radius:8px; padding:7px 14px; margin:2px 0 10px; }
  .specbtn .arw { font-size:12pt; }
  @media print { .specbtn { display:none; } }
+
+ /* ---- museum wrapper chrome — screen only; the printable booklet content above is untouched ---- */
+ @media screen {
+  html, body { background:#04060c; }
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:#62e6ff;color:#04121a;padding:8px 14px;
+    border-radius:8px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:13px;font-weight:600;
+    transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid #e8f2ff}
+  .m-topbar{max-width:900px;margin:0 auto;padding:18px 22px 8px;font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-size:12.5px;display:flex;align-items:center;gap:14px;color:#9fb4d0}
+  .m-topbar a{color:#9fb4d0;text-decoration:none} .m-topbar a:hover{color:#62e6ff}
+  .m-topbar a:focus-visible{outline:2px solid #62e6ff;outline-offset:3px}
+  .m-topbar .sp{flex:1}
+  .m-topbar .wing{font-family:'Michroma',sans-serif;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#7d8ca3}
+  .m-topbar .wing b{color:#62e6ff;font-weight:400}
+  .m-shell{max-width:900px;margin:0 auto;padding:0 22px 40px}
+  .page, div.page{background:#fff;box-shadow:0 14px 44px rgba(0,0,0,.5);border-radius:4px;margin-bottom:24px}
+  .m-footer{max-width:900px;margin:0 auto;padding:18px 22px 60px;font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-size:12px;color:#9fb4d0}
+  .m-footer a{color:#9fb4d0;text-decoration:none} .m-footer a:hover{color:#62e6ff}
+  .m-footer a:focus-visible{outline:2px solid #62e6ff;outline-offset:3px}
+ }
+ @media print {
+  .skip, .m-topbar, .m-footer { display:none !important; }
+  .m-shell { margin:0!important; padding:0!important; max-width:none!important; }
+  .page, div.page { background:none!important; box-shadow:none!important; border-radius:0!important; margin-bottom:0!important; }
+ }
 </style></head><body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="m-topbar" aria-label="Museum">
+  <a href="../">← The Quantum Museum</a>
+  <span class="sp"></span>
+  <span class="wing">WING <b>V</b> · The Instruments</span>
+</nav>
+<div class="m-shell">
 
 <!-- ============================ PAGE 1 ============================ -->
 <main class="page" id="main">
@@ -233,4 +273,8 @@
   default margins, background graphics ON. Booklet v1 &middot; Whisper C4541 &middot; 2026-07-10.</p>
  </div>
 </main>
+</div>
+<footer class="m-footer" role="contentinfo">
+  <a href="../">← The Quantum Museum</a> · <a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </body></html>
