@@ -373,7 +373,7 @@
         c.setAttribute("fill",C("--card")); c.setAttribute("stroke",C(col)); c.setAttribute("stroke-width",2.6); g.appendChild(c);
         var t=document.createElementNS(ns,"text"); t.setAttribute("class","siglab"); t.setAttribute("x",x); t.setAttribute("y", up?y-12:y+20);
         t.setAttribute("text-anchor","middle"); t.setAttribute("fill",C(col)); t.textContent=lab; g.appendChild(t);
-        if(sub){ var s=document.createElementNS(ns,"text"); s.setAttribute("class","ptlab"); s.setAttribute("x",x); s.setAttribute("y", up?y-25:y+33);
+        if(sub){ var s=document.createElementNS(ns,"text"); s.setAttribute("class","ptlab"); s.setAttribute("x",x); s.setAttribute("y", up?y-28:y+33);
           s.setAttribute("text-anchor","middle"); s.setAttribute("fill",C("--ink-3")); s.textContent=sub; g.appendChild(s); }
       }
       pt(CLASS_ARM, "--amber", "0.748", "classical arm", true);

@@ -153,7 +153,7 @@ function draw(key){
   const viz=document.getElementById("viz"); viz.innerHTML="";
   if(key==="i"){ // truth table: 4 inputs, logical vs bare, coin-flip reference
     const rows=[["00→00",0.992,0.946],["01→01",0.992,0.938],["10→11",0.991,0.925],["11→10",0.991,0.934]];
-    const L=110,R=430,T=26,rowH=56;
+    const L=110,R=402,T=26,rowH=56;
     el(viz,"text",{x:16,y:16,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="P(correct) — logical (cyan) vs bare (grey)";
     rows.forEach((r,i)=>{
       const y=T+i*rowH;
@@ -182,10 +182,10 @@ function draw(key){
   } else { // iii: 3-node network diagram
     const A={x:230,y:60}, B={x:110,y:220}, C={x:350,y:220};
     el(viz,"text",{x:16,y:16,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="logical GHZ across three shielded nodes";
-    [[A,B,"⟨Z̄AZ̄B⟩ 0.905 (163σ)"],[A,C,"⟨Z̄AZ̄C⟩ 0.879 (141σ)"]].forEach(e=>{
-      const[p,q,lbl]=e;
+    [[A,B,"0.905 (163σ)",142,166],[A,C,"0.879 (141σ)",318,166]].forEach(e=>{
+      const[p,q,lbl,lx,ly]=e;
       el(viz,"line",{x1:p.x,y1:p.y,x2:q.x,y2:q.y,style:"stroke:var(--good);stroke-width:2.5"});
-      el(viz,"text",{x:(p.x+q.x)/2,y:(p.y+q.y)/2-8,"text-anchor":"middle",style:"fill:var(--good);font-family:var(--mono);font-size:10.5px;font-weight:700"}).textContent=lbl;
+      el(viz,"text",{x:lx,y:ly,"text-anchor":"middle",style:"fill:var(--good);font-family:var(--mono);font-size:10.5px;font-weight:700"}).textContent=lbl;
     });
     [["A",A],["B",B],["C",C]].forEach(n=>{
       const[lbl,p]=n;

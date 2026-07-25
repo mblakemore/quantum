@@ -160,7 +160,7 @@
     </div>
 
     <div class="gauge-wrap">
-      <svg id="sgauge" viewBox="0 0 560 96" role="img" aria-label="facts-CHSH gauge" style="width:100%;height:auto"></svg>
+      <svg id="sgauge" viewBox="0 0 560 112" role="img" aria-label="facts-CHSH gauge" style="width:100%;height:auto"></svg>
     </div>
     <p class="verdict" id="verdict" aria-live="polite"></p>
   </section>
@@ -236,7 +236,7 @@
       var val=W[state.rec].S, x=gx(val), col = val>BOUND ? C("--obs") : C("--restore");
       s+='<line x1="'+x+'" y1="28" x2="'+x+'" y2="58" stroke="'+col+'" stroke-width="2.4"/>';
       s+='<circle cx="'+x+'" cy="44" r="8" fill="'+C("--card")+'" stroke="'+col+'" stroke-width="3"/>';
-      s+='<text x="'+x+'" y="'+ (val>BOUND?18:92) +'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="13" font-weight="700" fill="'+col+'">S = '+val.toFixed(3)+'</text>';
+      s+='<text x="'+x+'" y="'+ (val>BOUND?18:100) +'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="13" font-weight="700" fill="'+col+'">S = '+val.toFixed(3)+'</text>';
       svg.innerHTML=s;
     }
     function render(){

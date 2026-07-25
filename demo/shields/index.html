@@ -152,18 +152,18 @@ const STAGES={
 function draw(key){
   const viz=document.getElementById("viz"); viz.innerHTML="";
   if(key==="i"){ // rejection meter
-    const L=90,R=420,y1=90,y2=170;
+    const L=90,R=370,LBLX=384,y1=90,y2=170;
     el(viz,"text",{x:20,y:40,style:"fill:var(--ink-2);font-family:var(--mono);font-size:13px"}).textContent="inject a deliberate error →";
     [[y1,"caught by the shield",0.963,"var(--good)"],[y2,"escaped AND corrupted",0.02,"var(--bad)"]].forEach(r=>{
       el(viz,"rect",{x:L,y:r[0]-16,width:(R-L),height:32,rx:8,style:"fill:none;stroke:var(--edge);stroke-width:1"});
       el(viz,"rect",{x:L,y:r[0]-16,width:(R-L)*r[2],height:32,rx:8,style:`fill:${r[3]};opacity:.85`});
       el(viz,"text",{x:L,y:r[0]-24,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=r[1];
-      el(viz,"text",{x:R+4,y:r[0]+5,"text-anchor":"end",style:`fill:${r[3]};font-family:var(--mono);font-size:14px;font-weight:700`}).textContent=(r[2]*100).toFixed(1)+"%";});
-    el(viz,"text",{x:L,y:230,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent="escapees are double-error shots — exactly what distance-2 means";
+      el(viz,"text",{x:LBLX,y:r[0]+5,style:`fill:${r[3]};font-family:var(--mono);font-size:14px;font-weight:700`}).textContent=(r[2]*100).toFixed(1)+"%";});
+    el(viz,"text",{x:L,y:230,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="escapees = double-error shots";
   } else if(key==="ii"){ // pays curve
     const L=70,R=430,T=30,B=220; const X=us=>L+(R-L)*us/4; const Y=r=>B-(B-T)*Math.min(r,2)/2;
     el(viz,"text",{x:16,y:18,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="logical/bare error ratio (fair echoes)";
-    [[0.5,"0.5"],[1,"1.0 — break-even"],[1.5,"1.5"]].forEach(g=>{
+    [[0.5,"0.5"],[1,"1.0"],[1.5,"1.5"]].forEach(g=>{
       el(viz,"line",{x1:L,y1:Y(g[0]),x2:R,y2:Y(g[0]),style:`stroke:${g[0]===1?"var(--bad)":"var(--edge)"};stroke-width:${g[0]===1?2:1};${g[0]===1?"stroke-dasharray:6 4":""}`});
       el(viz,"text",{x:L-6,y:Y(g[0])+4,"text-anchor":"end",style:`fill:${g[0]===1?"var(--bad)":"var(--ink-3)"};font-family:var(--mono);font-size:10px`}).textContent=g[1];});
     [[0,"0"],[1,"1μs"],[2,"2μs"],[4,"4μs"]].forEach(t=>el(viz,"text",{x:X(t[0]),y:B+18,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"}).textContent=t[1]);
@@ -173,10 +173,10 @@ function draw(key){
     for(let i=0;i<solid.length-1;i++) el(viz,"line",{x1:X(solid[i][0]),y1:Y(solid[i][1]),x2:X(solid[i+1][0]),y2:Y(solid[i+1][1]),style:"stroke:var(--cyan);stroke-width:2"});
     solid.forEach(p=>el(viz,"circle",{cx:X(p[0]),cy:Y(p[1]),r:6,style:"fill:var(--cyan);stroke:var(--bg);stroke-width:1.5"}));
     hollow.forEach(p=>el(viz,"circle",{cx:X(p[0]),cy:Y(p[1]),r:6,style:"fill:none;stroke:var(--bad);stroke-width:2"}));
-    el(viz,"text",{x:X(3),y:Y(1.42),style:"fill:var(--bad);font-family:var(--mono);font-size:10px"}).textContent="the failed flight (hollow)";
+    el(viz,"text",{x:X(2.85),y:Y(1.42),"text-anchor":"end",style:"fill:var(--bad);font-family:var(--mono);font-size:10px"}).textContent="the failed flight (hollow)";
     el(viz,"text",{x:X(0.28),y:Y(0.40),style:"fill:var(--cyan);font-family:var(--mono);font-size:10px"}).textContent="shield wins";
   } else if(key==="iii"){ // S gauge with control
-    const gx=200,T=30,B=240,LO=0,HI=2.2; const gy=v=>B-(B-T)*(v-LO)/(HI-LO);
+    const gx=235,T=30,B=240,LO=0,HI=2.2; const gy=v=>B-(B-T)*(v-LO)/(HI-LO);
     el(viz,"text",{x:gx,y:16,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="S = ⟨X̄X̄⟩ + ⟨Z̄Z̄⟩";
     el(viz,"line",{x1:gx,y1:T,x2:gx,y2:B,style:"stroke:var(--edge-2);stroke-width:3"});
     el(viz,"line",{x1:gx-40,y1:gy(1),x2:gx+44,y2:gy(1),style:"stroke:var(--bad);stroke-width:2.5;stroke-dasharray:6 4"});
@@ -192,7 +192,7 @@ function draw(key){
     const L=90,W=340,T=40,B=230; const Y=p=>B-(B-T)*p;
     el(viz,"text",{x:16,y:18,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="teleport success (accepted ensembles)";
     el(viz,"line",{x1:L-20,y1:Y(0.5),x2:L+W+10,y2:Y(0.5),style:"stroke:var(--bad);stroke-width:1.5;stroke-dasharray:5 4"});
-    el(viz,"text",{x:L+W+12,y:Y(0.5)+4,style:"fill:var(--bad);font-family:var(--mono);font-size:10px"}).textContent="coin flip";
+    el(viz,"text",{x:456,y:Y(0.5)+4,"text-anchor":"end",style:"fill:var(--bad);font-family:var(--mono);font-size:10px"}).textContent="coin flip";
     groups.forEach((g,gi)=>{
       const gx=L+gi*(W/2)+20; const bw=36;
       [[g[1],"var(--good)","shielded"],[g[2],"var(--ink-3)","bare"],[g[3],"var(--bad)","no pair"]].forEach((b,i)=>{

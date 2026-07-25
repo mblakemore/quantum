@@ -273,7 +273,7 @@
   var MELT_BOUND = [0.331,0.202,0.190];   // eps_melt per W column
   function drawMelt(){
     var svg=document.getElementById("plotMelt"); svg.innerHTML="";
-    var mL=52,mT=16,mR=18,mB=40,W=640,H=250;
+    var mL=80,mT=16,mR=18,mB=40,W=640,H=250;
     var cols=MELT_W.length, rows=MELT_EPS.length;
     var cw=(W-mL-mR)/cols, ch=(H-mT-mB)/rows;
     function epsY(eps){ // map eps (0.04..0.40) to y within plot

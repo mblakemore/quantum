@@ -171,11 +171,11 @@ const bars=document.getElementById("bars");
 function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
 function draw(key){
   const A=ARMS[key]; bars.innerHTML="";
-  const L=56,R=845,T=14,B=190; const py=v=>B-(B-T)*v;
+  const L=56,R=845,T=26,B=190; const py=v=>B-(B-T)*v;
   [0,0.5,1].forEach(g=>{el(bars,"line",{x1:L,y1:py(g),x2:R,y2:py(g),style:"stroke:var(--edge);stroke-width:1"});
     el(bars,"text",{x:L-8,y:py(g)+4,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=g.toFixed(1);});
   el(bars,"line",{x1:L,y1:py(2/3),x2:R,y2:py(2/3),style:"stroke:var(--amber);stroke-width:1.6;stroke-dasharray:6 5"});
-  el(bars,"text",{x:R,y:py(2/3)-6,"text-anchor":"end",style:"fill:var(--amber);font-family:var(--mono);font-size:11.5px"}).textContent="2/3 classical bound";
+  el(bars,"text",{x:L+6,y:py(2/3)-6,style:"fill:var(--amber);font-family:var(--mono);font-size:11.5px"}).textContent="2/3 classical bound";
   const n=STATES.length,bw=(R-L)/n*0.5;
   A.vals.forEach((v,i)=>{const x=L+(R-L)*(i+0.5)/n;
     el(bars,"rect",{x:x-bw/2,y:py(v),width:bw,height:B-py(v),rx:4,style:`fill:${A.col};opacity:.9`});

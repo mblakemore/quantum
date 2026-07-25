@@ -223,14 +223,14 @@ function drawGauge(A){
   el(viz,"text",{x:gx+32,y:gy(2.828)+4,style:"fill:var(--ink-3);font-family:var(--mono);font-size:9.5px"}).textContent="2√2 quantum max";
   if(A.ghost){ // the pre-registered Werner prediction — BELOW the measured point
     el(viz,"circle",{cx:gx,cy:gy(1.97),r:9,style:"fill:none;stroke:var(--amber);stroke-width:2;stroke-dasharray:3 3"});
-    el(viz,"text",{x:gx+34,y:gy(1.97)+16,style:"fill:var(--amber);font-family:var(--mono);font-size:10px"}).textContent="model said: 1.97, fails";
+    el(viz,"text",{x:gx+34,y:gy(1.97)+24,style:"fill:var(--amber);font-family:var(--mono);font-size:10px"}).textContent="model: 1.97";
     el(viz,"line",{x1:gx+16,y1:gy(1.97),x2:gx+16,y2:gy(A.S),style:"stroke:var(--amber);stroke-width:2"});
   }
   const mc=A.ok?"var(--cyan)":"var(--bad)";
   el(viz,"line",{x1:gx,y1:gy(A.S-A.se),x2:gx,y2:gy(A.S+A.se),style:`stroke:${mc};stroke-width:5`});
   el(viz,"circle",{cx:gx,cy:gy(A.S),r:11,style:`fill:${mc};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${mc})`});
   el(viz,"text",{x:gx,y:gy(A.S)-18,"text-anchor":"middle",style:`fill:${mc};font-family:var(--mono);font-size:15px;font-weight:700`}).textContent=A.S.toFixed(3);
-  el(viz,"text",{x:gx,y:B+22,"text-anchor":"middle",style:`fill:${A.ok?"var(--good)":"var(--bad)"};font-family:var(--mono);font-size:11px`})
+  el(viz,"text",{x:125,y:B+22,"text-anchor":"middle",style:`fill:${A.ok?"var(--good)":"var(--bad)"};font-family:var(--mono);font-size:11px`})
     .textContent=A.ok?`certified: +${A.sig}σ over 2`:"S ≈ 0 — no correlation at all";
 }
 function drawTopo(A){

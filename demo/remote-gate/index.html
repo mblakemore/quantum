@@ -172,7 +172,7 @@ function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)
 function draw(key){
   const A=ARMS[key]; viz.innerHTML="";
   // gauge (left column of svg): vertical, 0.2..1.0, witness at 0.5
-  const gx=70,T=20,B=250; const gy=v=>B-(B-T)*(v-0.2)/0.8;
+  const gx=70,T=56,B=250; const gy=v=>B-(B-T)*(v-0.2)/0.8;
   el(viz,"text",{x:gx,y:14,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="Bell F";
   el(viz,"line",{x1:gx,y1:T,x2:gx,y2:B,style:"stroke:var(--edge-2);stroke-width:3"});
   [[0.25,"0.25"],[0.5,"1/2"],[0.75,"0.75"],[1,"1.0"]].forEach(g=>{

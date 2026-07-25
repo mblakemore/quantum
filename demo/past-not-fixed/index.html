@@ -195,7 +195,7 @@ function segify(id,states,cb){
 // R1: 184 — F gauge vs 1/2 witness
 segify("seg1",[["bell","late choice: BELL measurement"],["prod","late choice: product measurement"]],k=>{
   const v=document.getElementById("viz1");
-  if(k==="bell") gauge(v,0.832,0,1,0.5,"separable witness 1/2","ENTANGLED across time — 40σ","var(--good)");
+  if(k==="bell") gauge(v,0.832,0,1,0.5,"separable witness 1/2","entangled — 40σ","var(--good)");
   else gauge(v,0.249,0,1,0.5,"separable witness 1/2","the same early data: separable","var(--bad)");
 });
 // R2: 185b — tick dial + off switch
@@ -204,7 +204,7 @@ segify("seg2",[["on","time ON (entangled)"],["off","TIME OFF (cut the entangleme
   const svg=document.getElementById("viz2"); svg.innerHTML="";
   const cx=120,cy=88,r=62;
   el(svg,"circle",{cx:cx,cy:cy,r:r,style:"fill:none;stroke:var(--edge);stroke-width:1.5"});
-  el(svg,"text",{x:cx,y:16,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:11.5px"}).textContent="the system, conditioned on each clock tick";
+  el(svg,"text",{x:8,y:16,style:"fill:var(--ink-2);font-family:var(--mono);font-size:11.5px"}).textContent="the system, conditioned on each clock tick";
   for(let t=0;t<4;t++){
     const b = k==="on"?TICKS[t]:TICKS[0];
     const x=cx+r*0.85*b[0], y=cy-r*0.85*b[1];
@@ -213,14 +213,15 @@ segify("seg2",[["on","time ON (entangled)"],["off","TIME OFF (cut the entangleme
     el(svg,"circle",{cx:x,cy:y,r:6,style:`fill:${col}`});
     if(k==="on") el(svg,"text",{x:x+(b[0]>=0?10:-10),y:y+4,"text-anchor":b[0]>=0?"start":"end",style:`fill:${col};font-family:var(--mono);font-size:10px`}).textContent="t="+t;
   }
-  el(svg,"text",{x:300,y:60,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=k==="on"?"inside: 90°/tick sweep":"inside: NOTHING MOVES";
-  el(svg,"text",{x:300,y:80,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=k==="on"?"mean F(evolving) = 0.973":"every tick identical, F = 0.998";
-  el(svg,"text",{x:300,y:108,style:`fill:${k==="on"?"var(--good)":"var(--amber)"};font-family:var(--mono);font-size:11.5px;font-weight:700`}).textContent=k==="on"?"time exists for the inhabitants":"time switched OFF by removing 2 gates";
+  el(svg,"text",{x:210,y:60,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=k==="on"?"inside: 90°/tick sweep":"inside: NOTHING MOVES";
+  el(svg,"text",{x:210,y:80,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=k==="on"?"mean F(evolving) = 0.973":"every tick identical, F = 0.998";
+  el(svg,"text",{x:210,y:100,style:`fill:${k==="on"?"var(--good)":"var(--amber)"};font-family:var(--mono);font-size:11.5px;font-weight:700`}).textContent=k==="on"?"time exists for the":"time switched OFF by";
+  el(svg,"text",{x:210,y:117,style:`fill:${k==="on"?"var(--good)":"var(--amber)"};font-family:var(--mono);font-size:11.5px;font-weight:700`}).textContent=k==="on"?"inhabitants":"removing 2 gates";
 });
 // R3: 186 — K3 needle
 segify("seg3",[["q","coherent (the quantum world)"],["deph","dephased (the classical control)"]],k=>{
   const v=document.getElementById("viz3");
-  if(k==="q") gauge(v,1.465,0,1.6,1.0,"macrorealist bound 1","K₃ = 1.465 — 24σ: no definite value between looks","var(--good)");
+  if(k==="q") gauge(v,1.465,0,1.6,1.0,"macrorealist bound 1","K₃=1.465 — 24σ","var(--good)");
   else gauge(v,0.695,0,1.6,1.0,"macrorealist bound 1","dephased: classicality restored on demand","var(--cyan)");
 });
 // R4: 187b — sorted-ensemble Z markers vs the equator

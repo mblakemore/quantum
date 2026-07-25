@@ -222,7 +222,7 @@ function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)
 function draw(key){
   const A=ARMS[key]; viz.innerHTML="";
   // correlation bars: signed, -1..+1
-  const L=70,R=560,T=16,B=196,mid=(T+B)/2; const py=v=>mid-(B-T)/2*v;
+  const L=70,R=560,T=34,B=196,mid=(T+B)/2; const py=v=>mid-(B-T)/2*v;
   [[-1,"−1"],[0,"0"],[1,"+1"]].forEach(g=>{
     el(viz,"line",{x1:L,y1:py(g[0]),x2:R,y2:py(g[0]),style:`stroke:var(--edge);stroke-width:${g[0]===0?2:1}`});
     el(viz,"text",{x:L-8,y:py(g[0])+4,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=g[1];});
@@ -232,7 +232,7 @@ function draw(key){
       style:`fill:${A.col};opacity:.9`});
     el(viz,"text",{x:x,y:py(b[1])+(b[1]>=0?-8:16),"text-anchor":"middle",
       style:`fill:${A.col};font-family:var(--mono);font-size:12.5px;font-weight:700`}).textContent=(b[1]>0?"+":"")+b[1].toFixed(3);
-    el(viz,"text",{x:x,y:B+22,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:13px"}).textContent=b[0];});
+    el(viz,"text",{x:x,y:B+38,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:13px"}).textContent=b[0];});
   // fidelity gauge: 0.2..1.0 with witness at 0.5
   const GL=640,GR=830; const gy=v=>B-(B-T)*(v-0.2)/0.8;
   el(viz,"line",{x1:(GL+GR)/2,y1:T,x2:(GL+GR)/2,y2:B,style:"stroke:var(--edge-2);stroke-width:3"});
@@ -241,7 +241,7 @@ function draw(key){
     el(viz,"text",{x:(GL+GR)/2,y:gy(g[0])-6,"text-anchor":"middle",style:`fill:${g[0]===0.5?"var(--amber)":"var(--ink-3)"};font-family:var(--mono);font-size:10.5px`}).textContent=g[1];});
   el(viz,"circle",{cx:(GL+GR)/2,cy:gy(A.F),r:10,style:`fill:${A.col};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${A.col})`});
   el(viz,"text",{x:(GL+GR)/2,y:gy(A.F)+28,"text-anchor":"middle",style:`fill:${A.col};font-family:var(--mono);font-size:15px;font-weight:700`}).textContent="F = "+A.F.toFixed(3);
-  el(viz,"text",{x:(GL+GR)/2,y:B+22,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12.5px"}).textContent="Bell fidelity";
+  el(viz,"text",{x:(GL+GR)/2,y:B+38,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12.5px"}).textContent="Bell fidelity";
   document.getElementById("story").innerHTML=A.story;
   document.querySelectorAll("#segbtns button").forEach(b=>b.classList.toggle("on",b.dataset.k===key));
 }
@@ -266,12 +266,12 @@ draw("swap");
   TAU.forEach(t=>{el(s,"line",{x1:px(t),y1:B2,x2:px(t),y2:B2+5,style:"stroke:var(--edge-2);stroke-width:1"});
     el(s,"text",{x:px(t),y:B2+20,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=t;});
   el(s,"text",{x:(L+R)/2,y:B2+40,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12.5px"}).textContent="storage time τ (μs, √ scale)";
-  CURVES.forEach(cv=>{
+  CURVES.forEach((cv,ci)=>{
     el(s,"polyline",{points:TAU.map((t,i)=>`${px(t).toFixed(1)},${py(cv.F[i]).toFixed(1)}`).join(" "),
       fill:"none",style:`stroke:${cv.c};stroke-width:2.6;opacity:.92`});
     TAU.forEach((t,i)=>el(s,"circle",{cx:px(t),cy:py(cv.F[i]),r:4,style:`fill:${cv.c};stroke:var(--bg);stroke-width:1.4`}));
     el(s,"circle",{cx:px(cv.t50),cy:py(0.5),r:6,style:`fill:none;stroke:${cv.c};stroke-width:2.4`});
-    el(s,"text",{x:px(cv.t50),y:py(0.5)+24,"text-anchor":"middle",style:`fill:${cv.c};font-family:var(--mono);font-size:11.5px;font-weight:700`}).textContent=cv.t50+"μs";});
+    el(s,"text",{x:px(cv.t50),y:py(0.5)+22+ci*22,"text-anchor":"middle",style:`fill:${cv.c};font-family:var(--mono);font-size:11.5px;font-weight:700`}).textContent=cv.t50+"μs";});
   CURVES.forEach((cv,i)=>{const lx=R-235,ly=T2+16+i*20;
     el(s,"line",{x1:lx,y1:ly,x2:lx+22,y2:ly,style:`stroke:${cv.c};stroke-width:3`});
     el(s,"text",{x:lx+30,y:ly+4,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=cv.n;});
