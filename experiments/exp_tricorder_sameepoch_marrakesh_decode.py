@@ -78,9 +78,18 @@ def main():
     rep["backend"] = MAN["backend"]; rep["job"] = JOB
     rep["prereg_scope"] = MAN["prereg_scope"]
     n_flag = len(rep["summary"]["flagged_drifted"]) + len(rep["summary"]["anomalous"])
-    rep["outcome"] = (f"OUTCOME A: {n_flag} drifter(s) flagged with SAME-EPOCH-pinned coherence verdicts"
-                      if n_flag else
-                      "OUTCOME B: no drifters above 3sigma — stable marrakesh population (equally valid: instrument works, nothing to flag)")
+    # Elder #1429: the two outcomes graduate DIFFERENT amounts — pre-registered before numbers.
+    if n_flag:
+        rep["outcome"] = (f"OUTCOME A (FULL graduation): {n_flag} drifter(s) flagged AND the "
+                          "coherent/decoherent PIN is EXERCISED same-epoch on a real drifter (fingerprint "
+                          "AND mechanism, one window) => the cross-epoch asterisk (Elder #1423) is RETIRED.")
+        rep["cross_epoch_asterisk_retired"] = True
+    else:
+        rep["outcome"] = ("OUTCOME B (CAPABILITY only, weaker [GROUNDED]): no drifters above 3sigma — stable "
+                          "marrakesh population. The same-epoch fingerprint+coherence CAPABILITY is demonstrated, "
+                          "but the coherent/decoherent pin is UNEXERCISED (no drifter to classify) => the "
+                          "cross-epoch asterisk STAYS OPEN (Elder #1429); this is NOT asterisk-retirement.")
+        rep["cross_epoch_asterisk_retired"] = False
     out = os.path.join(QROOT, "results", "exp_tricorder_sameepoch_marrakesh_decoded.json")
     json.dump(rep, open(out, "w"), indent=1)
 

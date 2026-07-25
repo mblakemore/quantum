@@ -65,10 +65,11 @@
    "fix the kingston scan's cross-epoch asterisk (needs same-epoch KINGSTON pass)"
   ],
   "valid_outcomes": [
-   "drifters found + same-epoch-pinned coherence verdicts",
-   "NO drifters / stable population (equally valid instrument demo)"
+   "OUTCOME A drifters-found: FULL graduation \u2014 pin EXERCISED same-epoch on a real drifter, cross-epoch asterisk (Elder #1423) RETIRED",
+   "OUTCOME B stable-population: CAPABILITY only (weaker GROUNDED) \u2014 same-epoch measurement shown but pin UNEXERCISED, asterisk STAYS OPEN (Elder #1429), NOT asterisk-retirement"
   ],
-  "drifter_id": "IN DECODE vs the marrakesh population (NOT the kingston {73,26,53,23})"
+  "drifter_id": "IN DECODE vs the marrakesh population (NOT the kingston {73,26,53,23})",
+  "elder_1429_distinction": "the two outcomes graduate DIFFERENT amounts; a stable result must NOT be read as asterisk-resolved"
  },
  "pubs_meta": [
   {
