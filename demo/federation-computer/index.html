@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:title" content="The Federation Computer — a logical gate across a shielded cut">
+<meta property="og:description" content="P6 on ibm_fez: a logical CNOT executes across two shielded nodes welded by one classical bit (Exp217), proven genuinely quantum via a logical Bell pair (Exp218), then scaled to a three-node logical GHZ network (Exp219).">
+<meta name="theme-color" content="#04060c">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Federation Computer — a logical gate across a shielded cut | The Quantum Museum</title>
+<meta name="description" content="P6 on ibm_fez: a logical CNOT executes across two shielded nodes welded by one classical bit (Exp217), proven genuinely quantum via a logical Bell pair (Exp218), then scaled to a three-node logical GHZ network (Exp219).">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="10" cy="16" r="5" fill="none" stroke="%23ffc86b" stroke-width="2.5"/><circle cx="22" cy="16" r="5" fill="none" stroke="%23ffc86b" stroke-width="2.5"/><line x1="15" y1="16" x2="17" y2="16" stroke="%23e8f2ff" stroke-width="2"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--amber);font-weight:400}
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--amber) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:16px; font-weight:700; }
+  .val.good { color:var(--good); } .val.bad { color:var(--bad); } .val.cy { color:var(--cyan); } .val.am { color:var(--amber); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="sp"></span>
+    <span class="wing">WING <b>VII</b> · The Federation Computer</span>
+  </nav>
+  <main id="main">
+  <header class="hero">
+    <div class="eyebrow">P6 · Horizons-5 · the Heron 2026 campaign</div>
+    <h1>The Federation Computer<span class="hl">.</span></h1>
+    <p class="lede">The Shields protect <em>one</em> block. Here the shield becomes a network
+      primitive: a logical gate executed <b>across a shielded cut</b>, welded by nothing but
+      <b>one classical bit</b> — no gate ever crosses between the nodes. Three flights: the gate
+      <em>executes</em>, then is proven genuinely <em>quantum</em>, then <em>scales</em> to a
+      three-node network.</p>
+    <span class="scope">Scope: <b>[[4,2,2]] shielded nodes</b> (Exp217–219) — a distributed logical
+      CNOT, its coherence witness, and a three-node logical GHZ. Textbook non-local CNOT
+      (Eisert–Jozsa–Wilkens) composed with the campaign's own shield + weld machinery.</span>
+  </header>
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Climb the arc</h2>
+    <p class="sub">3 flights · ibm_fez · jobs d9emnni… / d9en584… / d9end0k…</p>
+    <p class="primer"><b>How to read it.</b> Each flight is one submission, its verdict drawn
+      straight from the decode files. Watch the <b>frame-off falsifier</b> at every stage: strip
+      the classical bit(s) and every correlator collapses to a coin flip — proof the weld, not
+      luck, is doing the work.</p>
+    <div class="seg" role="group" id="seg"></div>
+    <figure aria-label="flight visualization"><svg id="viz" viewBox="0 0 460 280"></svg></figure>
+    <p class="story" id="story"></p>
+    <div class="verdict" id="vbox"></div>
+  </section>
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">the twist: the cheapest weld won, and the network was one architectural change away</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">SOFTWARE BEATS THE LIVE WIRE</div>
+        <p>Flight 2 flew both welds side by side: a software frame applied after the fact, and live
+        feed-forward via a dynamic circuit. Theory says both are coherent. On <b>this hardware,
+        this generation of dynamic circuits</b>, they were not: SW ⟨X̄X̄⟩ 0.890 vs FF ⟨X̄X̄⟩ 0.339 —
+        the live conditional gate's added latency lets the data qubits decohere while they wait.
+        Post-hoc bookkeeping beat a live classical channel.</p></div>
+      <div class="receipt"><div class="rt">ONE ARCHITECTURAL CHANGE UNLOCKED THE WITNESS</div>
+        <p>Flight 1 put each ebit inside its data block; the code's shared-q0 structure then forbids
+        reading a data qubit and its own ebit in incompatible bases, so the coherence witness was
+        unreachable — only the truth table could be certified. Flight 2 moved the ebits to a
+        physical relay outside the shield, and the same gate became fully witnessed.</p></div>
+      <div class="receipt"><div class="rt">THE WELD, REUSED AND COMPOSED</div>
+        <p>Every flight here reuses the campaign's own moves: the 197 relay's classical-bit weld
+        (no feed-forward needed), and the in-block logical gates from 206/214. New content is the
+        <b>composition</b> — a gate split across a cut, then proven quantum, then multiplied across
+        two cuts into a network.</p></div>
+      <div class="receipt"><div class="rt">SCOPE &amp; FENCE</div>
+        <p>Per-variant <b>partial</b> shield (one stabilizer type checked per basis, not both at
+        once, as in 197/217). Physical relay ebits are a transient resource, not themselves
+        shielded — the shield protects the data. Flight 3's GHZ certificate uses two Z-correlators
+        plus the three-body ⟨X̄X̄X̄⟩ phase, which excludes separable/classical-mixture states at &gt;100σ; a full
+        Mermin-type witness would be stronger but was not flown.</p></div>
+    </div>
+  </section>
+  </main>
+  <footer role="contentinfo">
+    <span>Exp217–219 · ibm_fez · 3 flights</span><span>C4906–C4908 · 2026-07-20</span>
+    <a href="../shields/">← the single shield</a><a href="../index.html">← all exhibits</a>
+  </footer>
+</div>
+<script>
+"use strict";
+const SVGNS="http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+const STAGES={
+ i:{lbl:"217 · the gate executes",story:"<b>The execution.</b> A logical CNOT runs across the A–B cut: after a shared logical Bell pair, no gate crosses the cut — one classical bit welds the correction at decode time, no feed-forward. Mean truth-table accuracy <b>0.992</b>, every one of the four basis inputs at least <b>627σ</b> over the ¼-uniform floor. The error-detected distributed gate beats its unencoded (bare) counterpart by +0.056 at 37.7σ. Strip the classical bit and the target collapses to a coin flip (0.496) — the weld IS the one bit.",
+   verd:[["truth table (mean)","0.992 (min 627σ)","good"],["shield beats bare","+0.056 (37.7σ)","good"],["frame-off falsifier","0.496 — coin","bad"]]},
+ ii:{lbl:"218 · it's quantum",story:"<b>The coherence.</b> On |+̄⟩_A|0̄⟩_B the same distributed gate makes a genuine logical Bell pair: ⟨Z̄_AZ̄_B⟩ = <b>0.873</b> AND ⟨X̄_AX̄_B⟩ = <b>0.890</b>, both far past 5σ over zero — a classical correlation would give ⟨X̄X̄⟩ ≈ 0. Truth table still holds at 0.928 (210σ). The bonus: flown side by side, the software-frame weld beat live feed-forward on hardware (0.890 vs 0.339) — shown at right. Frame-off again collapses both correlators to ≈0.",
+   verd:[["⟨Z̄Z̄⟩ / ⟨X̄X̄⟩","0.873 / 0.890","good"],["truth table","0.928 (210σ)","good"],["SW weld vs live FF","0.890 vs 0.339","cy"]]},
+ iii:{lbl:"219 · it scales",story:"<b>The network.</b> Two distributed CNOTs from one common control weld a logical GHZ state across THREE shielded nodes — B and C share no gate anywhere, each touches only A through its own physical relay. Both cut correlators land ≥0.88 at ≥140σ, and the three-body phase ⟨X̄_AX̄_BX̄_C⟩ = <b>0.831</b> at 112σ proves genuine multipartite entanglement, not a classical mixture. Frame-off collapses all three correlators to ≈0.01. One cut became a link; two cuts became a network.",
+   verd:[["⟨Z̄AZ̄B⟩ / ⟨Z̄AZ̄C⟩","0.905 / 0.879","good"],["⟨X̄AX̄BX̄C⟩ phase","0.831 (112σ)","good"],["frame-off (all 3)","≈0.01 — collapse","bad"]]}};
+function draw(key){
+  const viz=document.getElementById("viz"); viz.innerHTML="";
+  if(key==="i"){ // truth table: 4 inputs, logical vs bare, coin-flip reference
+    const rows=[["00→00",0.992,0.946],["01→01",0.992,0.938],["10→11",0.991,0.925],["11→10",0.991,0.934]];
+    const L=110,R=430,T=26,rowH=56;
+    el(viz,"text",{x:16,y:16,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="P(correct) — logical (cyan) vs bare (grey)";
+    rows.forEach((r,i)=>{
+      const y=T+i*rowH;
+      el(viz,"text",{x:L-8,y:y+13,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=r[0];
+      el(viz,"rect",{x:L,y:y,width:(R-L),height:14,rx:6,style:"fill:none;stroke:var(--edge);stroke-width:1"});
+      el(viz,"rect",{x:L,y:y,width:(R-L)*r[2],height:14,rx:6,style:"fill:var(--ink-3);opacity:.55"});
+      el(viz,"rect",{x:L,y:y+18,width:(R-L),height:14,rx:6,style:"fill:none;stroke:var(--edge);stroke-width:1"});
+      el(viz,"rect",{x:L,y:y+18,width:(R-L)*r[1],height:14,rx:6,style:"fill:var(--cyan);opacity:.9"});
+      el(viz,"text",{x:R+4,y:y+30,style:"fill:var(--cyan);font-family:var(--mono);font-size:11px;font-weight:700"}).textContent=r[1].toFixed(3);
+    });
+    el(viz,"line",{x1:L+(R-L)*0.5,y1:T-4,x2:L+(R-L)*0.5,y2:T+4*rowH,style:"stroke:var(--bad);stroke-width:1;stroke-dasharray:4 4;opacity:.6"});
+    el(viz,"text",{x:L+(R-L)*0.5,y:T+4*rowH+14,"text-anchor":"middle",style:"fill:var(--bad);font-family:var(--mono);font-size:10px"}).textContent="coin flip 0.5";
+  } else if(key==="ii"){ // SW vs FF bar comparison
+    const groups=[["⟨Z̄Z̄⟩",0.873,0.787],["⟨X̄X̄⟩",0.890,0.339]];
+    const L=70,W=340,T=30,B=230; const Y=v=>B-(B-T)*Math.max(v,0);
+    el(viz,"text",{x:16,y:16,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="software weld (cyan) vs live feed-forward (amber)";
+    el(viz,"line",{x1:L-20,y1:Y(0),x2:L+W+30,y2:Y(0),style:"stroke:var(--edge-2);stroke-width:1.5"});
+    groups.forEach((g,gi)=>{
+      const gx=L+gi*(W/2)+30; const bw=44;
+      [[g[1],"var(--cyan)","SW"],[g[2],"var(--amber)","FF"]].forEach((b,i)=>{
+        const x=gx+i*(bw+10);
+        el(viz,"rect",{x:x,y:Y(b[0]),width:bw,height:B-Y(b[0]),rx:4,style:`fill:${b[1]};opacity:.9`});
+        el(viz,"text",{x:x+bw/2,y:Y(b[0])-8,"text-anchor":"middle",style:`fill:${b[1]};font-family:var(--mono);font-size:11px;font-weight:700`}).textContent=b[0].toFixed(3);
+        el(viz,"text",{x:x+bw/2,y:B+16,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent=b[2];});
+      el(viz,"text",{x:gx+bw,y:B+32,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=g[0];});
+  } else { // iii: 3-node network diagram
+    const A={x:230,y:60}, B={x:110,y:220}, C={x:350,y:220};
+    el(viz,"text",{x:16,y:16,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="logical GHZ across three shielded nodes";
+    [[A,B,"⟨Z̄AZ̄B⟩ 0.905 (163σ)"],[A,C,"⟨Z̄AZ̄C⟩ 0.879 (141σ)"]].forEach(e=>{
+      const[p,q,lbl]=e;
+      el(viz,"line",{x1:p.x,y1:p.y,x2:q.x,y2:q.y,style:"stroke:var(--good);stroke-width:2.5"});
+      el(viz,"text",{x:(p.x+q.x)/2,y:(p.y+q.y)/2-8,"text-anchor":"middle",style:"fill:var(--good);font-family:var(--mono);font-size:10.5px;font-weight:700"}).textContent=lbl;
+    });
+    [["A",A],["B",B],["C",C]].forEach(n=>{
+      const[lbl,p]=n;
+      el(viz,"circle",{cx:p.x,cy:p.y,r:26,style:"fill:var(--surface-2);stroke:var(--cyan);stroke-width:2.5"});
+      el(viz,"text",{x:p.x,y:p.y+6,"text-anchor":"middle",style:"fill:var(--ink);font-family:var(--mono);font-size:15px;font-weight:700"}).textContent=lbl;
+    });
+    el(viz,"rect",{x:150,y:120,width:160,height:34,rx:8,style:"fill:none;stroke:var(--edge);stroke-width:1"});
+    el(viz,"text",{x:230,y:141,"text-anchor":"middle",style:"fill:var(--cyan);font-family:var(--mono);font-size:12px;font-weight:700"}).textContent="⟨X̄AX̄BX̄C⟩ = 0.831 (112σ)";
+    el(viz,"text",{x:230,y:262,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"}).textContent="B and C share no gate — each touches A only through a relay";
+  }
+  document.getElementById("story").innerHTML=STAGES[key].story;
+  document.getElementById("vbox").innerHTML=STAGES[key].verd.map((v,i)=>
+    `<div class="box${i===0?' hl':''}"><span class="lbl">${v[0]}</span><span class="val ${v[2]}">${v[1]}</span></div>`).join("");
+  document.querySelectorAll("#seg button").forEach(b=>{b.classList.toggle("on",b.dataset.k===key);b.setAttribute("aria-pressed",String(b.dataset.k===key));});
+}
+const seg=document.getElementById("seg");
+Object.keys(STAGES).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;b.textContent=STAGES[k].lbl;b.addEventListener("click",()=>draw(k));seg.appendChild(b);});
+draw("iii");
+</script>
+</body>
+</html>
