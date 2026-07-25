@@ -47,7 +47,11 @@
   .navlink[aria-current="page"]{color:var(--ink);border-left-color:var(--cyan);background:rgba(98,230,255,.07)}
   .navlink[aria-current="page"]::after{content:"●";margin-left:auto;font-size:8px;color:var(--cyan)}
   .navlink:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
-  .lobbylink{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px}
+  .lobbylink{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;
+    color:var(--cyan-soft);font-weight:600;border-bottom:1px solid var(--edge);padding-bottom:12px;margin-bottom:4px}
+  .lobbylink .licon{width:13px;height:13px;flex-shrink:0}
+  .lobbylink:hover{color:var(--cyan)}
+  .lobbylink[aria-current="page"]{color:var(--ink)}
   .wing{margin-top:16px}
   .winghead{display:flex;align-items:baseline;gap:9px;padding:6px 18px 5px;font-family:var(--mich);font-size:9.5px;
     letter-spacing:.18em;color:var(--ink-4);text-transform:uppercase}
@@ -138,7 +142,7 @@
       </a>
     </div>
     <nav class="map" aria-label="Exhibit sitemap" id="map">
-      <a class="navlink lobbylink" href="#/">Lobby</a>
+      <a class="navlink lobbylink" href="#/"><svg class="licon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="1.8" fill="currentColor"/></svg>Lobby</a>
       <!-- wings injected -->
     </nav>
     <div class="sidefoot">
