@@ -39,6 +39,7 @@ one.
 | **Scramblon ripples** | F4 (Loschmidt, non-Markovian) | The noise has *coherent, structured* dynamics — not white |
 | **Epoch volatility** | Calibration-epoch finding (this arc) | Device drift set AND mechanism shift at recal boundaries; the drift is **coherent** |
 | **Theorem-beaten bounds** | Holevo/superdense, Tsirelson/CHSH, SQL/metrology | Provable classical ceilings we already cross on hardware |
+| **The Assay** *(Elder #1400)* | The A-side machinery (same-currency margin + one Wald-SPRT + red-team-your-own-claim) | The discipline is itself a PART — it's what stops every gadget below from reprising an "exponential-in-hand" oversell; the thing that makes the others *shippable* |
 
 ---
 
@@ -105,9 +106,28 @@ We have both a sample-complexity advantage (F119) and an information-thermodynam
 ledgers). The bridge nobody has priced: a Maxwell demon that measures **two copies** — does quantum
 memory let it extract more work per bit than a single-copy demon, or is the advantage strictly
 informational and thermodynamically free? A clean, deep question that unites our two most separate
-sub-campaigns.
+sub-campaigns. **Currency caveat (Elder #1400, the discipline one floor up):** "fewer samples" is
+*information*-theoretic; "work" is *thermodynamic* — a different resource. The bridge must not smuggle
+a sample-advantage into a free-energy claim; the same currency-consistency that turned the n=4 margin
+honest (copies vs samples) governs this one (bits vs joules).
 
 ---
+
+### 8. **The Diff-Mode Tricorder** — scan the *difference*, not the fingerprint  *(Elder #1400)*  **[SEPARATION-OWED]**
+Bridge: the P2 difference-witness as a *second Tricorder mode*.
+The Tricorder (#1) reads one device's fingerprint; Diff-Mode reads the **difference between two**
+devices, or one device *before vs. after* an event — drift, tamper, degradation by differential
+signature. This is the nearest real customer for the whole scanner family. Owed: the two-copy
+sample-saving is proven for the fingerprint; that the *difference* inherits the same saving is its own
+argument, not a free ride.
+
+### 9. **The Clean-Room Certificate** — certify *absence*, not just detect  *(Elder #1400)*  **[SEPARATION-OWED]**
+Bridge: the difference-witness + Elder's under-powered-null≠absence rule.
+Every gadget above *detects* a property. The harder, more valuable device **certifies absence** —
+"this channel has NO coherent leak / this device is untampered" — with a **sized, detector-independent**
+test (an under-powered null is not a clean room). Pairs with the Fingerprint Lock: authentication
+wants "provably clean," not merely "matches a fingerprint." Owed: absence-certification is a distinct
+separation claim from detection.
 
 ## What we don't know yet (the frontier, as questions)
 
@@ -134,9 +154,11 @@ These are the load-bearing unknowns — answering any one *unlocks* an invention
 
 Ordered by (ceiling ÷ cost), the imagineering discipline:
 
-1. **The Tricorder [GROUNDED, ~$0-cheap]** — it's mostly *packaging* F119 + P2 + F14 into one
-   instrument; the parts are flown. Highest certainty, immediately useful, and it's the platform the
-   other GROUNDED inventions plug into.
+1. **The Tricorder + Diff-Mode [GROUNDED / SEPARATION-OWED, ~$0-cheap]** — it's mostly *packaging*
+   F119 + P2 + F14 into one instrument; the parts are flown. Highest certainty, immediately useful,
+   and it's the platform the other inventions plug into. **Add Diff-Mode (Elder #1400): drift/tamper
+   detection by differential fingerprint is the nearest real customer** — build the scanner, run it in
+   difference mode first.
 2. **Frontier Q2 (drift: clock or coin?) [cheap data question]** — a few cross-epoch witness
    flights answer it, and the answer forks the Sundial, noise-forecasting, and the Fingerprint Lock's
    robustness. Highest information-per-shot.
