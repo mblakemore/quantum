@@ -1,0 +1,61 @@
+{
+ "instrument": "Tricorder Diff-Mode",
+ "by": "whisper c5004",
+ "mode": "DIFFERENCE (device vs reference population)",
+ "grounded": "instrument demonstrated on flown drift data",
+ "separation_owed": "two-copy sample-advantage for the DIFF not claimed (single-copy depth-sweep data)",
+ "reference": {
+  "baseline_decay": 0.9189,
+  "robust_sigma": 0.1166
+ },
+ "epochs": {
+  "device_fingerprint": "2026-07-24 06:15:18+00:00",
+  "coherence_overlay": "2026-07-24 09:15:04+00:00",
+  "note": "cross-epoch overlay \u2014 honest caveat, drifter set is consistent across the arc"
+ },
+ "flag_threshold_sigma": 3.0,
+ "sites": {
+  "phys73": {
+   "drift_sigma": -6.71,
+   "excess_raw": -0.7823,
+   "coherence": "COHERENT (|<Z>| REVIVES past node)",
+   "revival_amplitude": 0.1778,
+   "verdict": "ANOMALOUS (signal GREW vs reference \u2014 inverted drift)",
+   "action": "coherent drift = UNITARY = in-principle correctable (recalibrate phase / track)"
+  },
+  "phys26": {
+   "drift_sigma": 3.87,
+   "excess_raw": 0.4509,
+   "coherence": "COHERENT (|<Z>| REVIVES past node)",
+   "revival_amplitude": 0.1749,
+   "verdict": "DRIFTED (flagged)",
+   "action": "coherent drift = UNITARY = in-principle correctable (recalibrate phase / track)"
+  },
+  "phys53": {
+   "drift_sigma": 5.98,
+   "excess_raw": 0.6975,
+   "coherence": "COHERENT (|<Z>| REVIVES past node)",
+   "revival_amplitude": 0.0692,
+   "verdict": "DRIFTED (flagged)",
+   "action": "coherent drift = UNITARY = in-principle correctable (recalibrate phase / track)"
+  },
+  "phys23": {
+   "drift_sigma": 1.5,
+   "excess_raw": 0.1748,
+   "coherence": "no revival in range (decoherent OR node beyond 400)",
+   "revival_amplitude": 0.0,
+   "verdict": "MARGINAL (sub-threshold drift)"
+  }
+ },
+ "summary": {
+  "flagged_drifted": [
+   "phys26",
+   "phys53"
+  ],
+  "anomalous": [
+   "phys73"
+  ],
+  "stable": [],
+  "scan_verdict": "DRIFT DETECTED at 3 site(s) (2 drifted, 1 anomalous); differential fingerprint distinguishes them from the stable reference"
+ }
+}
