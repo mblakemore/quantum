@@ -1,0 +1,22 @@
+{
+ "seat": "whisper-independent",
+ "n": 6,
+ "P_hat_C1": "IYXZXY",
+ "C1_copies": 1877,
+ "revealed_seal": "IYXZXY",
+ "match": true,
+ "nominal_q": 0.015,
+ "seam_checks": {
+  "basis_of_row_generator_matches_stored": true,
+  "bit_order": "qiskit-reversed bits[i]=qubit i"
+ },
+ "note": "independent flown covering-extraction (Elder #1478 two-seat); winner q-robust, C1 meter q-dependent",
+ "chunks": [
+  "d9hras4honhs73adh7q0",
+  "d9hrasbsbqfc73eqhii0",
+  "d9hrasshonhs73adh7r0",
+  "d9hrat3sbqfc73eqhik0",
+  "d9hratbsbqfc73eqhilg",
+  "d9hratggk0ls73f3f5b0"
+ ]
+}
