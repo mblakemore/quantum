@@ -28,6 +28,7 @@
   .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
   .skip:focus{top:8px;outline:2px solid var(--ink)}
   a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a{text-decoration:underline}  /* WCAG 1.4.1: link-in-text-block needs a non-color cue */
   a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
   @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
@@ -116,7 +117,7 @@
       correlations that prove it; the table is the gate's classical job. Walk the arms left to right and watch the
       stack assemble: plain gate → gate over a local e-bit → gate over a <b>relay-forged</b> e-bit. On the full stack,
       a <b>ghost marker</b> appears: where the fidelity <em>should</em> land if layer costs simply multiplied. It lands lower.</p>
-    <div class="seg" role="tablist" id="seg"></div>
+    <div class="seg" role="group" id="seg"></div>
     <div class="grid2">
       <figure aria-label="Bell fidelity gauge with composition prediction, and correlation bars"><svg id="viz" viewBox="0 0 460 300"></svg></figure>
       <div>

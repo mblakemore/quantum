@@ -28,6 +28,7 @@
   .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
   .skip:focus{top:8px;outline:2px solid var(--ink)}
   a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a{text-decoration:underline}  /* WCAG 1.4.1: link-in-text-block needs a non-color cue */
   a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
   @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
@@ -106,7 +107,7 @@
       bases at once</em>: ZZ and XX near +1, YY near −1 — something no coin-flip story can do simultaneously. The
       bars show the measured correlations; the gauge below folds them into the Bell-state fidelity
       F = (1 + ZZ + XX − YY)/4. Above the dashed 1/2 line, the pair is provably entangled. Pick an arm.</p>
-    <div class="seg" role="tablist" id="segbtns"></div>
+    <div class="seg" role="group" id="segbtns"></div>
     <figure aria-label="measured two-qubit correlations and fidelity gauge"><svg id="viz" viewBox="0 0 860 300"></svg></figure>
     <p class="story" id="story"></p>
     <div class="verdict">

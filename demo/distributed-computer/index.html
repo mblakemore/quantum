@@ -28,6 +28,7 @@
   .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
   .skip:focus{top:8px;outline:2px solid var(--ink)}
   a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a{text-decoration:underline}  /* WCAG 1.4.1: link-in-text-block needs a non-color cue */
   a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
   @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
@@ -121,9 +122,9 @@
       needs one query per bit. The distributed machine does this with its oracle split across the cut —
       then try the third machine, where the e-bits are removed and nothing else changes.</p>
     <span class="seglbl">the secret (programs the oracle)</span>
-    <div class="seg" role="tablist" id="segS"></div>
+    <div class="seg" role="group" id="segS"></div>
     <span class="seglbl">the machine</span>
-    <div class="seg" role="tablist" id="segM"></div>
+    <div class="seg" role="group" id="segM"></div>
     <div class="grid2">
       <figure aria-label="two-register machine sketch with cut and teleported gates"><svg id="topo" viewBox="0 0 460 190"></svg></figure>
       <div>

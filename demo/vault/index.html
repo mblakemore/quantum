@@ -193,8 +193,8 @@ function drawStream(){
   const row=(who,bits)=>`<span class="who">${who}</span>`+bits.map((b,i)=>`<span class="b${miss[i]?' miss':''}">${b}</span>`).join("");
   document.getElementById("stream").innerHTML=
     `<div class="lbl">alice's secret vs ${VIEWERS[curV]}</div>`+
-    `<div class="row">${row("Alice",alice)}</div>`+
-    `<div class="row">${row("guess",guess)}</div>`+
+    `<div class="row" tabindex="0">${row("Alice",alice)}</div>`+
+    `<div class="row" tabindex="0">${row("guess",guess)}</div>`+
     `<div class="note">error rate ${(rate*100).toFixed(1)}% (measured) — illustrative stream at the measured rate; real data = 8000 shots/setting in the decode file</div>`;
 }
 function draw(){

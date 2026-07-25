@@ -27,6 +27,7 @@
   .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
   .skip:focus{top:8px;outline:2px solid var(--ink)}
   a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a{text-decoration:underline}  /* WCAG 1.4.1: link-in-text-block needs a non-color cue */
   a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
   @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   .shell{max-width:960px;margin:0 auto;padding:0 clamp(16px,4vw,30px) 70px}
@@ -118,7 +119,7 @@
     <h2>▶ FIRE SHOTS — the shout dies, the whisper survives</h2>
     <p style="font-size:14px;color:var(--ink-2);max-width:70ch">The hidden answer below is the <em>actual sealed string from the winning race</em> (revealed post-grade). Every shot of the circuit returns that answer <em>with typos</em>. The <b>modal decoder</b> needs one shot with zero typos; the <b>shot-axis decoder</b> lets every shot vote, bit by bit, and reads the majority. Fire shots and watch the pipeline run: a noisy shot arrives → its votes pile onto 40 running tallies → each tally climbs out of the coin-flip zone and locks. Noise model = the measured constants: per-bit bias 0.91·e<sup>−0.0029·d</sup>, ×0.75 magic tax for t=80 circuits.</p>
     <div class="ctl">
-      <label>depth d2q: <b id="dv">167</b></label>
+      <label for="depth">depth d2q: <b id="dv">167</b></label>
       <input type="range" id="depth" min="40" max="300" value="167">
       <button class="btn" id="fire1">fire 1 shot</button>
       <button class="btn" id="fire100">fire 100</button>

@@ -28,6 +28,7 @@
   .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
   .skip:focus{top:8px;outline:2px solid var(--ink)}
   a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a{text-decoration:underline}  /* WCAG 1.4.1: link-in-text-block needs a non-color cue */
   a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
   @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
@@ -214,7 +215,7 @@
         (H·z = 0) at d = 3, 5, 7 — the syndrome check is blind to it by construction, not by noise.</p></div>
     </div>
     <p style="margin:16px 0 0;font-size:13px;color:var(--ink-3);font-family:var(--mono)">Companion exhibit →
-      <a href="../index.html" style="color:var(--amber);text-decoration:none">The Trust Ladder</a> — how much you can
+      <a href="../index.html" style="color:var(--amber)">The Trust Ladder</a> — how much you can
       trust a claim; this exhibit is the failure a self-check cannot see at all.</p>
   </section>
   </main>

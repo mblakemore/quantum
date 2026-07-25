@@ -28,6 +28,7 @@
   .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
   .skip:focus{top:8px;outline:2px solid var(--ink)}
   a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a{text-decoration:underline}  /* WCAG 1.4.1: link-in-text-block needs a non-color cue */
   a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
   @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
@@ -125,7 +126,7 @@
       this being classical noise are astronomically small). On the right: the two parties' sifted key
       bits — disagreements flagged ▲ at the measured error rate. Add relays and watch S walk down
       toward the red line… then pull the entanglement out entirely.</p>
-    <div class="seg" role="tablist" id="seg"></div>
+    <div class="seg" role="group" id="seg"></div>
     <div class="grid2">
       <figure aria-label="CHSH S gauge with classical bound at 2 and Tsirelson bound at 2.83"><svg id="viz" viewBox="0 0 250 320"></svg></figure>
       <div>
@@ -259,9 +260,9 @@ function drawStream(A){
   const row=(who,bits)=>`<span class="who">${who}</span>`+bits.map((b,i)=>`<span class="b${miss[i]?' miss':''}">${b}</span>`).join("");
   document.getElementById("stream").innerHTML=
     `<div class="lbl">the sifted key bits</div>`+
-    `<div class="row">${row("Alice",alice)}</div>`+
-    `<div class="row">${row("Bob",bob)}</div>`+
-    `<div class="row"><span class="who"></span>${miss.map(m=>`<span class="mrk">${m?"▲":""}</span>`).join("")}</div>`+
+    `<div class="row" tabindex="0">${row("Alice",alice)}</div>`+
+    `<div class="row" tabindex="0">${row("Bob",bob)}</div>`+
+    `<div class="row" tabindex="0"><span class="who"></span>${miss.map(m=>`<span class="mrk">${m?"▲":""}</span>`).join("")}</div>`+
     `<div class="note">disagreement rate ${(A.qber*100).toFixed(1)}% (measured) — illustrative stream drawn at the measured error rate; the real key is 8&thinsp;000 shots per setting in the decode file</div>`;
 }
 function draw(key){
