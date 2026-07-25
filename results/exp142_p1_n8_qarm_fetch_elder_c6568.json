@@ -101,12 +101,31 @@
  ],
  "bitstrings_sha256": "98047e1bba47e5fd3d834835158faa4687546fb742fae42981c00401333c1f45",
  "decoder": "exp142_decode_meter.quantum_decode (frozen, Whisper C4746)",
- "status": "BLOCKED \u2014 P_hat NOT committed. Frozen decoder reproduces synthetic full-weight (8/8) but does NOT reproduce the recorded p1 n6 flown answer (IYXZXY). Reconciliation question posted to Ember/court general#1407. Awaiting: (1) is d9hrarsh the IYXZXY job? (2) which decoder/version/mapping produced IYXZXY from flown bits?",
+ "status": "Q-ARM RESOLVED (blind) \u2014 P_hat_Q=IZYXZXZZ committed via validated flown-path decoder. Full n=8 margin (C1/Q) still pending the 27 C1 covering chunks clearing the IBM queue.",
  "note": "ZYYXXYZZ in answers_n8_*_elder = 2026-07-16 PRIOR wave, NOT this sealed job (809ea9e5, sealed 2026-07-24). Sentinels deferred to a later fetch. P off-git.",
  "path_test": {
   "decoder": "exp142_decode_meter.quantum_decode (frozen Whisper C4746)",
   "synthetic_full_weight": "8/8 PASS (ZZZZZZZZ,XYXYXYXY + 6 random full-weight n=8; meters 11-18 << 90)",
   "synthetic_I_site": "FAIL (XYZIXYZI->XYZZXYZZ) \u2014 traced to g2.shot_circuit sim-prep I-handling, NOT decoder; sealed P-space is FULL-WEIGHT only (n4 XXXX / n6 YYXYZY / n8-prior ZYYXXYZZ / n10 YYXZXXXYZZ) so I-site is off-distribution",
   "gold_standard_flown": "MISMATCH \u2014 p1 n6 job d9hrarsh decoded ZXXXZY (meter 34) but commit 8ce444c records p1 n6 seal = IYXZXY. Pos0 I->Z = the 6649628 I-inflation symptom. IYXZXY decode recorded ONLY in commit msg, no job-paired results artifact."
+ },
+ "q_blind_resolve": {
+  "decoder": "constraint_rate/G2/csign candidate-walk over all 4^n-1 (Ember G3 machinery, exp142_g3_twocopy_bell_gate) \u2014 the p1-matched flown-path decoder, NOT decode_meter",
+  "known_answer_gate_n6": {
+   "job": "d9hrarsh",
+   "winner": "IYXZXY",
+   "rate": 0.875,
+   "runner_up": "ZZZYIY",
+   "runner_rate": 0.7,
+   "result": "REPRODUCES sealed IYXZXY through my invocation \u2014 matches Whisper general#1409"
+  },
+  "P_hat_Q": "IZYXZXZZ",
+  "rate": 0.856,
+  "runner_up": "ZYZXXYZX",
+  "runner_up_rate": 0.8,
+  "separation": 0.056,
+  "separation_note": "THIN (~1.4 SE at 90 shots) vs n6 clean 0.175 \u2014 n8 hardware-noise floor; winner is unique argmax; runner-up differs in 6/8 sites (not a near-miss). Reveal adjudicates.",
+  "committed_blind_at_utc": "2026-07-25T07:04:47Z",
+  "note": "BLIND: P still sealed off-git; decode run-once + committed. I-site at pos0 (I...) \u2014 handled correctly by constraint_rate; decode_meter would mis-read I->Z (the original bug my path-test caught)."
  }
 }
