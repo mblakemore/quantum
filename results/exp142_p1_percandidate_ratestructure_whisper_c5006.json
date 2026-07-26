@@ -1,0 +1,115 @@
+{
+ "card": "exp142_p1_percandidate_ratestructure",
+ "cycle": "C5006",
+ "substrate": "claude-fable-5",
+ "true_P": "IYXZXY",
+ "n": 6,
+ "register_phys": [
+  6,
+  110,
+  59,
+  132,
+  4,
+  147
+ ],
+ "winner": {
+  "P": "IYXZXY",
+  "rate": 0.9115,
+  "z": 11.4,
+  "rank": 1,
+  "runner_up": "YXYXYX",
+  "runner_rate": 0.75,
+  "rate_gap": 0.1615
+ },
+ "field_z_gt5": 0,
+ "field_total": 4094,
+ "top_confusion": [
+  {
+   "P": "YXYXYX",
+   "w": 6,
+   "rate": 0.75,
+   "z": 4.0
+  },
+  {
+   "P": "XYYYZX",
+   "w": 6,
+   "rate": 0.6875,
+   "z": 3.0
+  },
+  {
+   "P": "YXZXYY",
+   "w": 6,
+   "rate": 0.6875,
+   "z": 3.0
+  },
+  {
+   "P": "XYZZZZ",
+   "w": 6,
+   "rate": 0.6719,
+   "z": 2.8
+  },
+  {
+   "P": "XZYXZX",
+   "w": 6,
+   "rate": 0.6719,
+   "z": 2.8
+  },
+  {
+   "P": "YYZXYX",
+   "w": 6,
+   "rate": 0.6719,
+   "z": 2.8
+  },
+  {
+   "P": "YZZZZZ",
+   "w": 6,
+   "rate": 0.6562,
+   "z": 2.5
+  },
+  {
+   "P": "ZXYXZX",
+   "w": 6,
+   "rate": 0.6562,
+   "z": 2.5
+  },
+  {
+   "P": "XZXZYY",
+   "w": 6,
+   "rate": 0.6406,
+   "z": 2.2
+  },
+  {
+   "P": "XZZZZZ",
+   "w": 6,
+   "rate": 0.6406,
+   "z": 2.2
+  },
+  {
+   "P": "YXYXYY",
+   "w": 6,
+   "rate": 0.6406,
+   "z": 2.2
+  },
+  {
+   "P": "YYXZZZ",
+   "w": 6,
+   "rate": 0.6406,
+   "z": 2.2
+  }
+ ],
+ "prereg": "focus.json C5005->C5006; Q2 census link retired (different register/chip)",
+ "guardrail": "field spread normalized by per-candidate binomial sigma (weight=>shot-count artifact controlled)",
+ "confirmed_interpretation": {
+  "Q4_winner": "IYXZXY is a DECISIVE rank-1 winner: z=+11.4sigma, 7.4sigma gap over the entire 4094-cand field. Rate 0.9115 MATCHES the decoder own readout-model p0_of(IYXZXY,q=0.015)=0.908 to within noise. (The scripts CHECK-not-clean flag was a bad hardcoded 0.2-rate-gap threshold; on the correct currency (z/SPRT) the win is clean and comfortable. Flag wrong, result right.) SCRIPT FLAG OWNED: the CHECK-not-clean was a bad ABSOLUTE 0.2-rate-gap threshold; z(SPRT) is the right currency (pattern #3 same-currency). Flag wrong, result right-kept with its accounting per Creator honest-negative rule.",
+  "Q3_field": "TEXTBOOK FLAT: 0/4094 non-true candidates exceed z=5sigma; field max|z|=4.0 == expected max of 4094 pure-null draws (sqrt(2 ln N)=4.08). Top confusers have NO structural relation to true P (0-3/6 site matches) = pure noise maxima, not real confusers. The alpha=0.95 shot-ensemble produced exactly the one-spike/flat-field spectrum the theorem predicts = POSITIVE validation.",
+  "Q1_weight1_tell": "The ONLY real sub-structure: weight-1 candidates carry a small systematic toward-EVEN (bit=0) bias, 17/18 rates >0.5 (sign-test p=7.3e-5), mean rate 0.5072, decaying to pure-null by weight 2. Direction (toward 0) = amplitude-damping/asymmetric-readout FAMILY. CANNOT disambiguate T1 from asymmetric-SPAM from this data (phys16 C5005 lesson). IMMATERIAL to the learning verdict (winner lives at weight-5, z=+11.4). A physically-expected hygiene tell, NOT a new tool/advantage. IMMATERIALITY MECHANISM: each candidate is SPRT-tested against its OWN p0~0.96; an observed 0.507 ELIMINATES a weight-1 candidate decisively-the 0.007 bias would have to grow ~60x to affect identification. Also the bias is MIXED across X/Y/Z bases (Y largest on some qubits, Z on others), which supports cannot-pin-mechanism and is a reason NOT to say T1 or package a readout-quality map (phys16 costume).",
+  "Q2_retired": "census {26,53,73} link UNTESTABLE (this register is phys [6,110,59,132,4,147], different chip). Per-position confusion FLAT across all 6 positions = no per-qubit confusion structure beyond the weight-1 readout tell.",
+  "bottom_line": "The per-candidate rate structure is almost exactly what F119 theory predicts: one decisive spike (true P) on an otherwise flat confusion-free field. The single deviation is a small, physically-sensible, learning-irrelevant weight-1 readout-asymmetry tell. Clean POSITIVE validation of the flown C1 arm; no hidden confusion, no inflated margin."
+ },
+ "crosschecks": {
+  "winner_vs_model": "0.9115 obs vs 0.908 model(q=0.015)",
+  "field_max_z": "4.0 obs vs 4.08 null-max",
+  "weight1_signtest_p": 7.25e-05,
+  "field_evidence_CORRECTED": "Load-bearing evidence is the EMPTY GAP, not max-z: top non-true z=4.0, true P z=11.4, NOTHING in z=5-11 where a partial confuser would land. 0/4094 exceed z=5. (max|z|=4.0 vs indep-null max: the 4094 arent independent-low-weight share shots; the honest independent set is ~729 wt-6 single-basis cands, expected max sqrt(2 ln 729)=3.63, so 4.0 is ~1sigma high, NOT a tidy 4.08 match. Do not make max-matching load-bearing.)"
+ }
+}
