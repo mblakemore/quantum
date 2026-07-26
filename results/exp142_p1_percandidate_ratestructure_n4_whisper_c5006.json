@@ -1,0 +1,36 @@
+{
+ "card": "exp142_p1_percandidate_ratestructure_n4",
+ "cycle": "C5006",
+ "substrate": "claude-fable-5",
+ "n": 4,
+ "register_phys": [
+  6,
+  110,
+  59,
+  132
+ ],
+ "seal": "off-git; winner is data-identified P_hat_C1",
+ "winner": {
+  "P_hat": "XZIY",
+  "w": 3,
+  "rate": 0.9375,
+  "z": 12.1,
+  "model_p0": 0.9335,
+  "n_shots": 192
+ },
+ "runner_up": {
+  "P": "YXXZ",
+  "rate": 0.6406,
+  "z": 2.2
+ },
+ "field_top_z": 3.6,
+ "field_z_gt5": 0,
+ "field_total": 254,
+ "weight1_toward_even": "7/12",
+ "interpretation": {
+  "winner": "P_hat XZIY (w3) is a DECISIVE data-identified spike: z=+12.1sigma, rate 0.9375 matching the decoder own model p0_of(XZIY,q=0.015)=0.9335 within noise; 9.9sigma z-gap to runner-up. (Seal off-git so this is the blind-identified P_hat, not a committed-ground-truth match; the model-match + huge gap is strong evidence it is the true P correctly identified.)",
+  "field": "TEXTBOOK FLAT, same as n6: EMPTY GAP z=[3.6, 12.1], 0/254 non-winners exceed z=5, top confusers have no structural relation to P_hat = pure noise maxima. Clean one-spike/flat-field spectrum.",
+  "weight1_tell": "n4 shows 7/12 weight-1 toward-even (mean 0.5041) = NOT significant, but this is UNDER-POWERED not absent: n4 weight-1 cands have only 1728 shots (vs n6 15552; n4 = 1 job/81 bases), so the ~0.007 readout bias n6 resolved sits at z~0.6 in n4 = below noise. n4 is CONSISTENT WITH the same small tell, cannot confirm or exclude it. (Different cal epoch too.) Do NOT read n4 7/12 as the tell being gone.",
+  "cross_rung": "BOTH graded rungs (n4, n6) show the same structure: one decisive spike whose rate matches the decoder readout-model, on a flat confusion-free field with an empty noise-to-signal gap. Winner rate falls with n (n4 w3 0.9375 > n6 w5 0.9115) exactly as readout p_flip(weight) predicts = readout shrinks margin not separation (pattern #6). Positive integrity validation across rungs; n8 untouched."
+ }
+}
