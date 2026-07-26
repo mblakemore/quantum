@@ -1,0 +1,36 @@
+{
+ "card": "exp142_p1_n6_qarm_confusion_spectrum",
+ "cycle": "C5008",
+ "substrate": "claude-fable-5",
+ "n": 6,
+ "q_bell_samples": 80,
+ "q_copies": 160,
+ "true_P": "IYXZXY",
+ "q_true_P": {
+  "rate": 0.875,
+  "z": 6.7,
+  "rank": 1
+ },
+ "q_runner_up": {
+  "P": "ZZZYIY",
+  "rate": 0.7,
+  "z": 3.6
+ },
+ "q_field_top_z": 3.6,
+ "q_field_zgt5": 0,
+ "cross_arm": {
+  "Q": {
+   "winner_z": 6.7,
+   "bell_samples": 80,
+   "copies": 160
+  },
+  "C1": {
+   "winner_z": 11.4,
+   "copies": 1877
+  },
+  "copies_ratio_DEFERRED": "do NOT state a cross-arm ratio: 1877/160=11.7x but that may still mix SPRT-stop vs total-flown units; the official 24.3x margin needs same-currency pinning (Ember/Elder lane). No ratio on the wire."
+ },
+ "RETRACTED": "a 'z^2/copy ~4x' per-copy Fisher ratio \u2014 mixed currencies (C1 winner-z on 192 shots / 1877 full-decode copies) AND wrong lens (advantage is candidate-space search per Bell constraint, not single-Pauli per-copy signal, which actually favors C1 0.91>0.875)",
+ "framing": "DEFENSIBLE FINDING (thin, honest): first per-candidate look at the ADVANTAGE arm; winner IYXZXY is a clean rank-1 matching the revealed seal; NO confuser resolvable at 80 samples. NOT a cross-arm ratio claim, NOT a well-powered clean-field claim. Two over-reaches caught+dropped (z2/copy Fisher; 24x currency mix).",
+ "field_power_correction": "\"clean field\" here = NO confuser RESOLVABLE at 80 Bell samples (sigma=0.056; z5 needs rate>0.78; a real confuser at rate~0.62 sits at z~2.1 = INVISIBLE). This is UNDER-POWERED-clean, NOT the well-powered clean of the C1 arm (46656 shots). Same \"under-powered not absent\" call as C5006 n4."
+}
