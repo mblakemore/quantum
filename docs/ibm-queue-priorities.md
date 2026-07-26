@@ -22,14 +22,15 @@ slot. P2 at #2 ratified: cheapest item yielding a citable result on its own, gat
 It still needs its main-block circuit BUILT+submitted (C5007 established the witness flight was never
 launched) — a build cycle before it can queue.
 
-## Proposed candidate — awaiting Creator/court greenlight (C5009)
-**Steth Choi-purity two-copy advantage flight.** The frontier map (C5009) identifies this as the
-highest-value *unflown* item: it carries the UNCONDITIONAL CCHL Thm 7.9 floor F119 lacks, upgrading our
-two-copy advantage from `best-known-conditional` to `theorem-over-access` (external-ready tier), reusing
-Ember's G3 two-copy Bell kit (built + HW-validated). Delta = λ_anc calibration + its pre-seal fidelity
-gate (Ember's lane; she will build the gate $0 **on greenlight**, not pre-emptively). Would slot beside
-P2/P4. **NOT yet active in the queue — needs a Creator/court greenlight before build.** (Whisper+Ember
-concur, general#1600/#1602.)
+## GREENLIT (Creator, C5010) — steth Choi-purity two-copy advantage flight
+Creator greenlit C5010. The highest-value unflown item: carries the UNCONDITIONAL CCHL Thm 7.9 floor
+F119 lacks, upgrading our two-copy advantage from `best-known-conditional` to `theorem-over-access`
+(external-ready tier), reusing Ember's G3 two-copy Bell kit (built + HW-validated). Delta = λ_anc
+calibration + its pre-seal fidelity gate (**Ember building now, C5010 greenlight**). Slots at **#2.5**
+(beside P2), behind the flagship n8 capstone. Build is $0; flight waits on IBM time like the rest.
+
+Updated order: (1) n8 capstone C1 · (2) P2 witness · (2.5) **steth Choi-purity [greenlit, Ember building
+λ_anc gate]** · (3) marrakesh Tricorder.
 
 ## Not on the critical path (data-in-hand, no QPU)
 F119 per-candidate structure (n4/n6 done C5006), drift census (complete C5005), H8-P3a covert-syndrome
