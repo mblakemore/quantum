@@ -1,0 +1,44 @@
+{
+ "card": "exp247_p3a_covert_syndrome_leak_CORRECTED",
+ "cycle": "C5007",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_fez",
+ "tau_us": 30,
+ "shots_per_class": 8000,
+ "retraction": "first pass used exp247 full-decoder accuracies (final readout USED) = wrong quantity; this uses syndrome records ONLY. Kept per honest-negative rule.",
+ "method": "held-out syndrome-only ML decoder; decision-MI + Fano; label-shuffle null",
+ "scope": "Leak arises ENTIRELY from amplitude-damping being logical-ASYMMETRIC: by CODE DESIGN both codewords |000> and |111> give the trivial (00) syndrome, so noiselessly the syndrome carries ZERO logical info; T1 breaks that (|111> decays, |000> cannot). CONTRIBUTION = quantifying an ANTICIPATED side-channel in certified bits with a clean null, NOT discovering a hidden channel (a QEC person expects the asymmetry qualitatively).",
+ "leak_bits": {
+  "R2": {
+   "acc_e0": 0.9367,
+   "acc_e1": 0.856,
+   "balanced": 0.8964,
+   "fano_bits": 0.52,
+   "decision_mi_bits": 0.528,
+   "null_shuffle_mi_bits": 0.0
+  },
+  "R3": {
+   "acc_e0": 0.9042,
+   "acc_e1": 0.9337,
+   "balanced": 0.919,
+   "fano_bits": 0.594,
+   "decision_mi_bits": 0.596,
+   "null_shuffle_mi_bits": 0.0
+  },
+  "R4": {
+   "acc_e0": 0.9277,
+   "acc_e1": 0.924,
+   "balanced": 0.9259,
+   "fano_bits": 0.619,
+   "decision_mi_bits": 0.619,
+   "null_shuffle_mi_bits": 0.0
+  }
+ },
+ "strongest": {
+  "where": "R4",
+  "bits": 0.619
+ },
+ "scope_computational_basis_only": "X = WHICH COMPUTATIONAL-BASIS state was prepared (e0/e1). Says NOTHING about leaking a superposition logical state (|+_L> would have a far smaller syndrome signature). The covert-channel/eavesdropper framing is valid ONLY for the computational-basis-memory scenario.",
+ "uncertainty": "0.62 is a POINT estimate with ~+/-0.02 shot noise AND is itself a LOWER bound (true leak >= this, by data-processing). R3->R4 (0.596->0.619) is within shot noise + confounds more-syndrome-data with more-idle-time (more decay) => report the number, do NOT claim monotone growth.",
+ "coordination": "QEC decoding is Elder lane; broadcast invites his check on the syndrome-only decoder, not a closed result."
+}
