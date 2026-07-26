@@ -42,9 +42,28 @@
  ],
  "jobs": [
   {
-   "job_id": "d9hdrg3sbqfc73eptmug",
+   "job_id": "d9heha3sbqfc73epuikg",
    "pub_lo": 0,
-   "pub_hi": 45
+   "pub_hi": 16,
+   "rows": 13486
+  },
+  {
+   "job_id": "d9heha8gk0ls73f2s8vg",
+   "pub_lo": 16,
+   "pub_hi": 28,
+   "rows": 13482
+  },
+  {
+   "job_id": "d9hehaogk0ls73f2s910",
+   "pub_lo": 28,
+   "pub_hi": 40,
+   "rows": 13482
+  },
+  {
+   "job_id": "d9hehb3sbqfc73epuiog",
+   "pub_lo": 40,
+   "pub_hi": 45,
+   "rows": 4495
   }
  ],
  "shots_est": 46040,
@@ -55,20 +74,20 @@
   },
   {
    "kind": "cal",
-   "pauli": "ZZXZ",
-   "b": "0101",
+   "pauli": "ZZXY",
+   "b": "0110",
    "shots": 100
   },
   {
    "kind": "cal",
-   "pauli": "XZZX",
+   "pauli": "ZZXY",
    "b": "1001",
    "shots": 100
   },
   {
    "kind": "cal",
-   "pauli": "XZYX",
-   "b": "0000",
+   "pauli": "ZXYX",
+   "b": "1010",
    "shots": 100
   },
   {

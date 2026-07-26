@@ -23,7 +23,7 @@ import exp142b_conv_emission_ember_c4215 as V2
 GRID = {4: 20, 6: 20, 8: 5}
 SECRET = os.path.expanduser("~/.ember-exp142-secrets.json")
 ENSEMBLE = "fullweight_eps1_v2"
-MAX_ROWS_PER_JOB = 100000       # catch #9: split by TOTAL param-ROWS/job (control-hw OOM, err 6073).
+MAX_ROWS_PER_JOB = 10000        # catch #9: split by TOTAL param-ROWS/job (control-hw OOM, err 6073).
                                 # calibrated: n6b DONE @17.4k rows, failed @494.5k -> 100k safe (Whisper
                                 # ~10-20 n=8 jobs). No single PUB exceeds 8192 rows so grouping always fits.
 

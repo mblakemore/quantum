@@ -17,3 +17,4 @@
 [2026-07-23T03:40:00Z] PERSIST: C4976 - decoder race FROZEN + FLOWN (d9gnp6khonhs73abu6o0, 312k shots); frozen decode committed pre-results; awaiting job
 [2026-07-23T16:50:00Z] C4982b: rho_t reconciled (Elder catch) - flag-excluded pair 0.801/0.754, per-slot excess reading, map v1.1.1
 [2026-07-24T09:30:00+00:00] C4999i: layer-3 verified (8-28x); decision space posted; awaiting court pick
+[2026-07-24T15:00:00+00:00] C4999x: K7 catch #7 (confirm-tail truncation); fix C=p99 verified; budget re-quote

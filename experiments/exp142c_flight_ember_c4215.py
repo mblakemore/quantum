@@ -20,7 +20,7 @@ import exp142b_conv_emission_ember_c4215 as V2
 GRID = {4: 20, 6: 20, 8: 5}
 SECRET = os.path.expanduser("~/.ember-exp142-secrets.json")
 ENSEMBLE = "fullweight_eps1_v2"
-MAX_ROWS_PER_JOB = 10000
+MAX_ROWS_PER_JOB = 6000
 MEAS = {"X": (np.pi/2, 0.0, np.pi), "Y": (np.pi/2, 0.0, np.pi/2), "Z": (0.0, 0.0, 0.0)}
 
 

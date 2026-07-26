@@ -70,14 +70,94 @@
  ],
  "jobs": [
   {
-   "job_id": "d9hds1chonhs73actgfg",
+   "job_id": "d9heec0gk0ls73f2s350",
    "pub_lo": 0,
-   "pub_hi": 100
+   "pub_hi": 16,
+   "rows": 98308
   },
   {
-   "job_id": "d9hds2d0k0jc738i1u30",
-   "pub_lo": 100,
-   "pub_hi": 180
+   "job_id": "d9heecd0k0jc738i2jcg",
+   "pub_lo": 16,
+   "pub_hi": 28,
+   "rows": 98304
+  },
+  {
+   "job_id": "d9heecogk0ls73f2s37g",
+   "pub_lo": 28,
+   "pub_hi": 41,
+   "rows": 95428
+  },
+  {
+   "job_id": "d9heed8gk0ls73f2s380",
+   "pub_lo": 41,
+   "pub_hi": 53,
+   "rows": 98304
+  },
+  {
+   "job_id": "d9heedt0k0jc738i2jfg",
+   "pub_lo": 53,
+   "pub_hi": 65,
+   "rows": 98304
+  },
+  {
+   "job_id": "d9heeed0k0jc738i2jg0",
+   "pub_lo": 65,
+   "pub_hi": 78,
+   "rows": 95428
+  },
+  {
+   "job_id": "d9heeekhonhs73acu640",
+   "pub_lo": 78,
+   "pub_hi": 90,
+   "rows": 98304
+  },
+  {
+   "job_id": "d9heef0gk0ls73f2s3ag",
+   "pub_lo": 90,
+   "pub_hi": 102,
+   "rows": 98304
+  },
+  {
+   "job_id": "d9heefl0k0jc738i2ji0",
+   "pub_lo": 102,
+   "pub_hi": 115,
+   "rows": 95428
+  },
+  {
+   "job_id": "d9heefrsbqfc73epude0",
+   "pub_lo": 115,
+   "pub_hi": 127,
+   "rows": 98304
+  },
+  {
+   "job_id": "d9heeg8gk0ls73f2s3dg",
+   "pub_lo": 127,
+   "pub_hi": 139,
+   "rows": 98304
+  },
+  {
+   "job_id": "d9heegggk0ls73f2s3f0",
+   "pub_lo": 139,
+   "pub_hi": 152,
+   "rows": 95428
+  },
+  {
+   "job_id": "d9heeh4honhs73acu67g",
+   "pub_lo": 152,
+   "pub_hi": 164,
+   "rows": 98304
+  },
+  {
+   "job_id": "d9heehchonhs73acu68g",
+   "pub_lo": 164,
+   "pub_hi": 176,
+   "rows": 98304
+  },
+  {
+   "job_id": "d9heehggk0ls73f2s3h0",
+   "pub_lo": 176,
+   "pub_hi": 180,
+   "rows": 13509
   }
  ],
  "shots_est": 1379360,
@@ -88,20 +168,20 @@
   },
   {
    "kind": "cal",
-   "pauli": "ZXZZZXZX",
-   "b": "11110011",
+   "pauli": "XZZYXXXY",
+   "b": "11111001",
    "shots": 100
   },
   {
    "kind": "cal",
-   "pauli": "YYYYXXYY",
-   "b": "11010100",
+   "pauli": "XZYYYZXX",
+   "b": "10110100",
    "shots": 100
   },
   {
    "kind": "cal",
-   "pauli": "ZZZZZYYX",
-   "b": "00010010",
+   "pauli": "YZZYZXZZ",
+   "b": "01100110",
    "shots": 100
   },
   {

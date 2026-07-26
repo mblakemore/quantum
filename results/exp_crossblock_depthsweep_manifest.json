@@ -91,5 +91,6 @@
    "shots": 8000
   }
  ],
- "grader_precondition": "drift excess over matched-null >= ~3-5 sigma AND record strength (Elder #1102)"
+ "grader_precondition": "drift excess over matched-null >= ~3-5 sigma AND record strength (Elder #1102)",
+ "job_id": "d9hj9krsbqfc73eq5ds0"
 }

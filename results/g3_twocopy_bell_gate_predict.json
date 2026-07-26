@@ -1,7 +1,7 @@
 {
  "4": {
-  "pred_rate_P": 0.974,
-  "pred_rate_wrong": 0.512,
+  "pred_rate_P": 0.969,
+  "pred_rate_wrong": 0.507,
   "routed_2q_gates": 4,
   "routed_2q_depth": 1,
   "bell_pairs": [
@@ -25,8 +25,8 @@
   "WOULD_PASS": true
  },
  "6": {
-  "pred_rate_P": 0.949,
-  "pred_rate_wrong": 0.484,
+  "pred_rate_P": 0.948,
+  "pred_rate_wrong": 0.509,
   "routed_2q_gates": 6,
   "routed_2q_depth": 1,
   "bell_pairs": [
@@ -58,8 +58,8 @@
   "WOULD_PASS": true
  },
  "8": {
-  "pred_rate_P": 0.931,
-  "pred_rate_wrong": 0.506,
+  "pred_rate_P": 0.93,
+  "pred_rate_wrong": 0.487,
   "routed_2q_gates": 8,
   "routed_2q_depth": 1,
   "bell_pairs": [
