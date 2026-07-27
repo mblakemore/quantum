@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:title" content="The Superposed Relay — a network's route held in quantum superposition">
+<meta property="og:description" content="P8 on ibm_fez: a message routed through two relay stations at once carries a routing-coherence resource (DISC≈2) that neither a fixed path nor a classical coin-flip between paths can carry (Exp224) — then the same superposed route survives behind the [[4,2,2]] shield (Exp225).">
+<meta name="theme-color" content="#04060c">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Superposed Relay — a network's route in superposition | The Quantum Museum</title>
+<meta name="description" content="P8 on ibm_fez: a message routed through two relay stations at once carries a routing-coherence resource (DISC≈2) that neither a fixed path nor a classical coin-flip between paths can carry (Exp224) — then the same superposed route survives behind the [[4,2,2]] shield (Exp225).">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="4" fill="none" stroke="%23e8f2ff" stroke-width="2"/><path d="M4 16 Q10 8 16 16 Q22 24 28 16" fill="none" stroke="%23ffc86b" stroke-width="2.2"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--amber);font-weight:400}
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--amber) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:66ch; margin:0 0 14px; }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .verdict { display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:16px; font-family:var(--mono); font-size:14px; }
+  .verdict .box { border:1px solid var(--edge); border-radius:11px; padding:11px 15px; flex:1; min-width:190px; }
+  .verdict .lbl { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:5px; }
+  .verdict .val { font-size:16px; font-weight:700; }
+  .val.good { color:var(--good); } .val.bad { color:var(--bad); } .val.cy { color:var(--cyan); } .val.am { color:var(--amber); }
+  .box.hl { border-color:color-mix(in srgb,var(--cyan) 50%,var(--edge)); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="sp"></span>
+    <span class="wing">WING <b>VII</b> · The Superposed Relay</span>
+  </nav>
+  <main id="main">
+  <header class="hero">
+    <div class="eyebrow">P8 · Horizons-5 · the Heron 2026 campaign</div>
+    <h1>The Superposed Relay<span class="hl">.</span></h1>
+    <p class="lede">The Federation Computer sent a gate across a shielded cut over one fixed path.
+      Here the <b>path itself</b> goes quantum: a message crosses a coherent superposition of
+      <b>two relay stations at once</b>, and that superposed route carries a resource — routing
+      coherence — that neither a definite path nor a classical coin-flip between paths can carry.
+      Then the same superposed route is put behind the shield.</p>
+    <span class="scope">Scope: <b>DISC routing-coherence witness</b> (Exp224–225) — indefinite
+      network topology as a resource, bare and then error-corrected. Superposition-of-trajectories
+      (Abbott–Wechs–Branciard; Chiribella–Kristjánsson) composed with the campaign's own switch +
+      shield machinery.</span>
+  </header>
+  <section class="panel" aria-labelledby="pa">
+    <h2 id="pa">Climb the arc</h2>
+    <p class="sub">2 flights · ibm_fez · jobs d9eoau4… / d9eogq2…</p>
+    <p class="primer"><b>How to read it.</b> Each flight measures the same witness, DISC, across
+      three arms: the route held in <b>coherent superposition</b>, a <b>single fixed path</b>, and a
+      <b>classical mixture</b> of the two paths (an eavesdropper ancilla dephases the route before
+      the message travels it). Only the coherent arm should light up — that's the whole claim.</p>
+    <div class="seg" role="group" id="seg"></div>
+    <figure aria-label="flight visualization"><svg id="viz" viewBox="0 0 460 300"></svg></figure>
+    <p class="story" id="story"></p>
+    <div class="verdict" id="vbox"></div>
+  </section>
+  <section class="panel" aria-labelledby="pc">
+    <h2 id="pc">The court</h2>
+    <p class="sub">the twist: using both relays isn't the resource — holding the route in superposition is</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE MIXTURE NULL IS THE POINT</div>
+        <p>A classical coin-flip between the two relays sounds like "using both paths" too — but it
+        measures dark (DISC 0.060). Only when the route is a genuine quantum superposition does DISC
+        climb to 1.94. The resource is the <b>coherence</b> of the routing, not the fact that two
+        relays exist.</p></div>
+      <div class="receipt"><div class="rt">THE SHIELD KEPT 96% OF IT</div>
+        <p>Behind the [[4,2,2]] block, DISC lands at 1.866 — 96% of the bare 1.937 — while both nulls
+        (definite, decohered) stay dark at the same near-zero level as the unshielded flight. Error
+        detection protects the quantum topology itself, not just the message riding on it.</p></div>
+      <div class="receipt"><div class="rt">WHAT IT COMPOSES</div>
+        <p>The DISC witness began as <a href="../switch/">the quantum switch's</a> causal-order tool
+        (F73–F77) — is a control qubit's superposition of <em>when</em> two operations happen a
+        resource? Here it's reused to ask the same question of <em>where</em> a message goes. Exp225
+        composes that witness with the shield concept from <a href="../shields/">the shields</a> —
+        the first error-corrected quantum network topology.</p></div>
+      <div class="receipt"><div class="rt">SCOPE &amp; FENCE</div>
+        <p>Bare physical control + target + one eavesdropper ancilla (224); a per-block ZZZZ shield,
+        one stabilizer, exp208-style (225). n=2 relays, a single message. Textbook coherently-controlled
+        channels, on silicon, for the first time framed as network topology.</p></div>
+    </div>
+  </section>
+  </main>
+  <footer role="contentinfo">
+    <span>Exp224–225 · ibm_fez · 2 flights</span><span>C4911–C4912 · 2026-07-20</span>
+    <a href="../switch/">← the quantum switch</a><a href="../shields/">← the shields</a><a href="../federation-computer/">← the federation computer</a><a href="../index.html">← all exhibits</a>
+  </footer>
+</div>
+<script>
+"use strict";
+const SVGNS="http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+const STAGES={
+ i:{lbl:"224 · the route in superposition",story:"<b>The resource.</b> A message crosses a coherent superposition of two relay stations. The routing-coherence witness DISC = ⟨X̄_c⟩<sub>commute</sub> − ⟨X̄_c⟩<sub>anti</sub> reads <b>+1.942 at 515σ</b> — 97% of the noiseless ceiling of 2, on the shallowest flight of the whole campaign (2 two-qubit gates). A single fixed path carries no signal (0.007), and neither does a classical coin-flip between the two paths (0.060) — an eavesdropper ancilla dephases the route into a mixture <em>before</em> the message travels it, and that mixture is just as dark as a fixed path.",
+   verd:[["DISC coherent (superposed route)","+1.942 (515σ)","good"],["DISC definite (single path)","+0.007","bad"],["DISC decohered (mixture of routes)","+0.060","bad"]]},
+ ii:{lbl:"225 · the route, shielded",story:"<b>The composition.</b> The same superposed route, now carrying its message inside a [[4,2,2]] error-detecting block. Behind the shield DISC reads <b>+1.866 at 311σ</b> — 96% of the bare +1.937 measured alongside it — while the definite (0.002) and decohered (0.055) arms stay just as dark as before. Error detection preserves the coherent-routing resource specifically; it still can't be faked by a classical mixture of paths. The first error-corrected quantum network topology.",
+   verd:[["DISC shielded coherent","+1.866 (311σ)","good"],["DISC shielded definite","+0.002","bad"],["DISC shielded decohered","+0.055","bad"],["vs bare coherent (ref)","1.866 vs 1.937","cy"]]}};
+function draw(key){
+  const viz=document.getElementById("viz"); viz.innerHTML="";
+  const rows = key==="i"
+    ? [["coherent",1.942,"515σ","var(--good)"],["definite",0.007,null,"var(--bad)"],["decohered",0.060,null,"var(--bad)"]]
+    : [["shielded\ncoherent",1.866,"311σ","var(--good)"],["shielded\ndefinite",0.002,null,"var(--bad)"],["shielded\ndecohered",0.055,null,"var(--bad)"]];
+  const L=78,R=430,T=34,B=250; const X=v=>L+(R-L)*(v/2.1);
+  el(viz,"text",{x:16,y:16,style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent="DISC witness (ceiling = 2)";
+  el(viz,"line",{x1:X(0),y1:T-4,x2:X(0),y2:B+8,style:"stroke:var(--edge-2);stroke-width:1.5"});
+  el(viz,"line",{x1:X(2),y1:T-10,x2:X(2),y2:B+8,style:"stroke:var(--edge);stroke-width:1;stroke-dasharray:3 4;opacity:.6"});
+  el(viz,"text",{x:X(2),y:T-14,"text-anchor":"middle",style:"fill:var(--ink-4);font-family:var(--mono);font-size:9.5px"}).textContent="noiseless 2";
+  const rowH=(B-T)/3;
+  rows.forEach((r,i)=>{
+    const y=T+i*rowH+10, h=26;
+    r[0].split("\n").forEach((ln,li)=>{
+      el(viz,"text",{x:L-8,y:y+h/2+5+(li-((r[0].split("\n").length-1)/2))*12,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=ln;
+    });
+    el(viz,"rect",{x:X(0),y:y,width:Math.max(X(Math.max(r[1],0))-X(0),2),height:h,rx:5,style:`fill:${r[3]};opacity:.88`});
+    const vx = r[1] > 1.55 ? X(r[1]) - 8 : X(r[1]) + 8;
+    const anchor = r[1] > 1.55 ? "end" : "start";
+    el(viz,"text",{x:vx,y:y+h/2+4,"text-anchor":anchor,style:`fill:${r[3]};font-family:var(--mono);font-size:11.5px;font-weight:700`}).textContent=r[1].toFixed(3)+(r[2]?` (${r[2]})`:"");
+  });
+  if(key==="ii"){
+    el(viz,"line",{x1:X(1.937),y1:T-2,x2:X(1.937),y2:B+6,style:"stroke:var(--amber);stroke-width:1.5;stroke-dasharray:4 3"});
+    el(viz,"text",{x:X(1.937),y:B+20,"text-anchor":"middle",style:"fill:var(--amber);font-family:var(--mono);font-size:10px"}).textContent="bare ref 1.937";
+  }
+  document.getElementById("story").innerHTML=STAGES[key].story;
+  document.getElementById("vbox").innerHTML=STAGES[key].verd.map((v,i)=>
+    `<div class="box${i===0?' hl':''}"><span class="lbl">${v[0]}</span><span class="val ${v[2]}">${v[1]}</span></div>`).join("");
+  document.querySelectorAll("#seg button").forEach(b=>{b.classList.toggle("on",b.dataset.k===key);b.setAttribute("aria-pressed",String(b.dataset.k===key));});
+}
+const seg=document.getElementById("seg");
+Object.keys(STAGES).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;b.textContent=STAGES[k].lbl;b.addEventListener("click",()=>draw(k));seg.appendChild(b);});
+draw("ii");
+</script>
+</body>
+</html>
