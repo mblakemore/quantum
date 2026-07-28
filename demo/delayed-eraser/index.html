@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <meta property="og:title" content="The Delayed-Choice Eraser — a future coin edits the past's fringe">
-<meta property="og:description" content="Mark which path a qubit took and its interference fringe dies; erase the mark later — even after the qubit is measured — and the fringe returns. A choice in the qubit's future toggles whether its past shows a fringe (+0.642), yet the raw marginal stays flat (0.055): edits the pattern, sends no message. Real hardware (ibm_fez, Exp155).">
+<meta property="og:description" content="Mark which path a qubit took and its interference fringe dies; erase the mark later — even after the qubit is measured — and the fringe returns. A choice in the qubit's future toggles whether its past shows a fringe (+0.642), yet the raw marginal stays flat (0.055): edits the pattern, sends no message. A second flight adds which past: the eraser's two outcomes give opposite fringes (+0.959 / −0.951). Real hardware (ibm_fez, Exp155 + Exp230).">
 <meta name="theme-color" content="#04060c">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Delayed-Choice Eraser — a future coin edits the past's fringe | The Quantum Museum</title>
-<meta name="description" content="Mark which path a qubit took and its interference fringe dies; erase the mark later — even after the qubit is measured — and the fringe returns. A choice in the qubit's future toggles whether its past shows a fringe (+0.642), yet the raw marginal stays flat (0.055): edits the pattern, sends no message. Real hardware (ibm_fez, Exp155).">
+<meta name="description" content="Mark which path a qubit took and its interference fringe dies; erase the mark later — even after the qubit is measured — and the fringe returns. A choice in the qubit's future toggles whether its past shows a fringe (+0.642), yet the raw marginal stays flat (0.055): edits the pattern, sends no message. A second flight adds which past: the eraser's two outcomes give opposite fringes (+0.959 / −0.951). Real hardware (ibm_fez, Exp155 + Exp230).">
 <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,6 +167,39 @@
     choice; no <em>information</em> does. The flat marginal is the fence <em>and</em> a measured number.</p>
   </section>
 
+  <!-- PANEL B2 -->
+  <section class="panel">
+    <p class="panel-label">Exhibit B2 — Selecting the past <span style="color:var(--ink-3);font-weight:400">· a second, later flight</span></p>
+    <h2>Not just <em>whether</em> there was a fringe — <em>which</em> one</h2>
+    <p class="sub">Everything above is Exp155. This panel is a different flight, <strong>Exp230</strong>, and it
+    answers a different question. Exp155 asked whether erasing the mark brings the fringe back (it does).
+    Exp230 asks what the eraser's own <strong>outcome</strong> decides — and the answer is that the two
+    outcomes give <strong>opposite pasts</strong>. Note the direction of the comparison plainly: Exp155's
+    DYNAMIC mode is the <em>stronger</em> delayed choice of the two, because its choice is a real quantum
+    coin measured after the fact with feed-forward. Exp230's choice is the standard eraser postselection.
+    It is not "more delayed" — it is a different axis.</p>
+
+    <div class="ctl-row" role="group" aria-label="eraser outcome">
+      <span class="lbl">read the marker:</span>
+      <div class="seg" id="selSeg">
+        <button data-sel="m0" class="on" type="button">erase → m = 0</button>
+        <button data-sel="m1" type="button">erase → m = 1</button>
+        <button data-sel="both" type="button">both at once</button>
+        <button data-sel="keep" type="button">keep the record</button>
+      </div>
+    </div>
+
+    <div class="plotwrap">
+      <svg id="select" viewBox="0 0 640 280" role="img" aria-label="measured fringes for each eraser outcome versus phase" style="width:100%;height:auto"></svg>
+    </div>
+    <p class="vlabel" id="sellabel" aria-live="polite"></p>
+    <p class="sub" style="margin-top:14px">The dots are the eight measured phase points, not a fitted curve.
+    <strong>V(m=0) = +0.959</strong>, <strong>V(m=1) = −0.951</strong> — a separation of <strong>1.910</strong>, i.e. the
+    two subensembles are near-perfect mirror images. Keep the which-path record instead and it is flat
+    (<strong>0.026</strong>). And the screen nobody sorted stays flat throughout (<strong>0.027</strong>): a past can be
+    <em>selected</em>, and still cannot be <em>signalled</em>.</p>
+  </section>
+
   <!-- PANEL C -->
   <section class="panel">
     <p class="panel-label">Exhibit C — Why this counts</p>
@@ -186,6 +219,8 @@
   <footer role="contentinfo">
     <span>MEASURED · <span class="sig">Exp155</span> · ibm_fez · job d9dr5vqneu4c739nkt20</span>
     <span>erase 0.946 · which-path 0.068 · coin 0.797/0.155 · marginal 0.055 · 24 circuits · 4000 shots</span>
+    <span>MEASURED · <span class="sig">Exp230</span> · ibm_fez · job d9eq5chhtsac739eia1g</span>
+    <span>V(m=0) +0.959 · V(m=1) −0.951 · which-path 0.026 · marginal 0.027 · 16 circuits · 8000 shots</span>
     <span class="sp2"></span>
     <a href="../">Museum</a>
     <a href="https://github.com/mblakemore/quantum">Repository</a>
@@ -263,6 +298,82 @@
       state.mode=b.dataset.mode; state.choice = state.mode==="static" ? "erase" : "coin1"; renderChoices(); render();
     }); });
     renderChoices(); render();
+  })();
+
+  // ---- Exhibit B2 : Exp230 "Selecting the Past" (ibm_fez, job d9eq5chhtsac739eia1g) ----
+  (function () {
+    var css = getComputedStyle(document.documentElement);
+    function C(v){ return css.getPropertyValue(v).trim(); }
+
+    // verified data kernel (Exp230 decode) : per-phase conditioned signal, phi/pi = 0 .. 1.75
+    var P   = [0,0.25,0.5,0.75,1.0,1.25,1.5,1.75];
+    var E0  = [0.9732164597029462,0.7139346276726468,0.061758294986679584,-0.6561151079136691,
+               -0.9443760767905488,-0.680635838150289,0.004211047807778053,0.6628599801390268];
+    var E1  = [-0.9337272026714616,-0.6642075807682524,0.03952467062774477,0.6861618798955613,
+               0.9598679197358395,0.6787941787941788,0.015897047691143074,-0.6737160120845922];
+    var V0=0.959, V1=-0.951, VKEEP=0.026, VMARG=0.027;
+    console.assert(V0>0.7 && Math.abs(V1)>0.7 && V0*V1<0 && Math.abs(V0-V1)>=1.4 &&
+                   VKEEP<=0.25 && VMARG<=0.25, "G1 erased fringes, G2 opposite signs sep>=1.4, G3 nulls flat");
+
+    var sel = "m0";
+    var x0=52, x1=612, y0=30, y1=232, mid=(y0+y1)/2;
+    function X(p){ return x0 + (p/2)*(x1-x0); }
+    function Y(v){ return mid - v*(y1-y0)/2; }
+
+    function series(vals,col,dash){
+      var d="", dots="";
+      for(var i=0;i<vals.length;i++){
+        var x=X(P[i]), y=Y(vals[i]);
+        d += (i?"L":"M")+x.toFixed(1)+","+y.toFixed(1);
+        dots += '<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="4.5" fill="'+col+'"/>';
+      }
+      return '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2.4" opacity="'+(dash?0.55:0.85)+'"'+
+             (dash?' stroke-dasharray="5 4"':'')+'/>'+dots;
+    }
+
+    function draw(){
+      var s="";
+      // frame
+      s+='<line x1="'+x0+'" y1="'+y1+'" x2="'+x1+'" y2="'+y1+'" stroke="'+C("--edge-2")+'" stroke-width="1"/>';
+      s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x0+'" y2="'+y1+'" stroke="'+C("--edge-2")+'" stroke-width="1"/>';
+      // the un-sorted screen: a flat band of half-height 0.027, drawn in every view
+      s+='<rect x="'+x0+'" y="'+Y(VMARG).toFixed(1)+'" width="'+(x1-x0)+'" height="'+(Y(-VMARG)-Y(VMARG)).toFixed(1)+
+         '" fill="'+C("--flat")+'" opacity="0.35"/>';
+      s+='<line x1="'+x0+'" y1="'+mid+'" x2="'+x1+'" y2="'+mid+'" stroke="'+C("--edge")+'" stroke-width="1" stroke-dasharray="2 3"/>';
+      // y ticks
+      s+='<text x="'+(x0-6)+'" y="'+(y0+4)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">+1</text>';
+      s+='<text x="'+(x0-6)+'" y="'+(mid+3)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">0</text>';
+      s+='<text x="'+(x0-6)+'" y="'+(y1+3)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="9" fill="'+C("--ink-3")+'">−1</text>';
+      // x ticks
+      [[0,"0"],[0.5,"π/2"],[1,"π"],[1.5,"3π/2"],[2,"2π"]].forEach(function(t){
+        s+='<text x="'+X(t[0]).toFixed(1)+'" y="'+(y1+18)+'" text-anchor="middle" font-family="'+C("--mono")+
+           '" font-size="9" fill="'+C("--ink-3")+'">'+t[1]+'</text>';
+      });
+      s+='<text x="'+((x0+x1)/2)+'" y="'+(y1+40)+'" text-anchor="middle" font-family="'+C("--mono")+
+         '" font-size="10" fill="'+C("--ink-3")+'">phase φ</text>';
+      s+='<text x="'+(x0+6)+'" y="'+(y0-10)+'" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--ink-3")+
+         '">signal, conditioned on the marker</text>';
+      // series
+      if(sel==="m0"||sel==="both") s+=series(E0, C("--fringe"), false);
+      if(sel==="m1"||sel==="both") s+=series(E1, C("--obs"),    false);
+      if(sel==="keep"){
+        // the recorded past is definite: |V| = 0.026, flat inside the band
+        s+='<line x1="'+x0+'" y1="'+Y(VKEEP).toFixed(1)+'" x2="'+x1+'" y2="'+Y(VKEEP).toFixed(1)+
+           '" stroke="'+C("--flat")+'" stroke-width="2.6"/>';
+      }
+      document.getElementById("select").innerHTML=s;
+
+      var L=document.getElementById("sellabel");
+      if(sel==="m0")        L.innerHTML='Erase, and the marker reads <b>0</b> → the fringe is <span class="f">back</span>, V = <b>+0.959</b>. One past.';
+      else if(sel==="m1")   L.innerHTML='Erase, and the marker reads <b>1</b> → the fringe is back <span class="f">inverted</span>, V = <b>−0.951</b>. The opposite past, from the same blank present.';
+      else if(sel==="both") L.innerHTML='Both outcomes together: near-perfect mirror images, separation <b>1.910</b>. Their sum is the flat band — which is why the un-sorted screen shows nothing.';
+      else                  L.innerHTML='Keep the which-path record → <span class="z">flat</span>, |V| = <b>0.026</b>. The past is definite, and there is nothing left to select.';
+      document.querySelectorAll("#selSeg button").forEach(function(b){ b.classList.toggle("on", b.dataset.sel===sel); });
+    }
+    document.querySelectorAll("#selSeg button").forEach(function(b){
+      b.addEventListener("click", function(){ sel=b.dataset.sel; draw(); });
+    });
+    draw();
   })();
 </script>
 </body>
