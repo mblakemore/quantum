@@ -68,14 +68,39 @@ committed together, **before any real P exists**:
   (i) α = 0.95 by design → ideal two-copy Bell rate (1+α²)/2 = 0.9512, not 1.0 (A2 —
   a noiseless gate would compute winner rate 1.0, trivially pass, and predict nothing);
   (ii) hardware retention on the deviation-from-0.5, calibrated on the executed rungs
-  (n=4: 0.849, n=6: 0.831, n=8: 0.788; declining ~−0.015/qubit) → **frozen n=10 retention
-  = 0.757 (the LOW end of the extrapolation)**. An α-pinned but noise-free gate sees a gap
+  (n=4: 0.849, n=6: 0.831, n=8: 0.788; declining ~−0.0153/qubit) → **frozen n=10 retention
+  = 0.757 (the LOW end of the extrapolation)**. **Citable source (pinned)**:
+  `experiments/exp142_p1_q_noise_retention_elder_c6575.py` +
+  `results/exp142_p1_q_noise_retention_elder_c6575.json` (quantum@fcb1ce0) — per-rung
+  retention with job ID and revealed seal as source; sim imports `retention(n)` /
+  `extrapolate(n_target)` rather than hardcoding. Elder's own caveat carried forward: a
+  3-point linear fit in n is the weak-link class this gate exists to replace — if the sim
+  can model device noise DIRECTLY (depolarizing + readout on the actual conv_layout) and
+  that model passes the §4.2c validation gate, the direct model is preferred and the
+  extrapolation becomes its cross-check. An α-pinned but noise-free gate sees a gap
   ~1.32× larger than the flight will and says FLY when reality may be NO-FLY — the wrong
   failure direction for a safety gate. Both winner and confuser deviations scale by the same
   retention, so the gap scales with it (checked on the real n=8 pair: measured gap 0.0556,
   de-noised 0.0706 = 1.27×). The **C1 benchmark stays noiseless-ideal**; that asymmetry IS
   the floor argument and is intentional — conservative on the C1 side, realistic on the Q
   side, each conservative in its own claim's direction.
+  **What the gate is actually testing (Elder's three-effects decomposition)**: the shrinking
+  identification margin is not one effect but three with different n-dependence — (1) α-ideal
+  structure (pins the winner), (2) hardware retention (scales both deviations down), and
+  (3) field crowding (the confuser population grows 16× per +2n). The gate exists to measure
+  their combination at n=10 before any QPU is spent.
+
+- **(c) SIM VALIDATION GATE (known-answer, runs before (a) and (b) are trusted)**: the Q-side
+  sim must REPRODUCE the measured n=6 and n=8 confusion spectra from the executed rungs —
+  winner rate, runner-up rate, and best-confuser z within stated tolerances (frozen with the
+  sim code pin) — before its n=10 output is valid. This is the decoder known-answer discipline
+  (§4.5) applied to the sim itself. **Mechanism note driving this**: for the ideal ensemble
+  state (I+αP)/2ⁿ, every wrong candidate's constraint rate is analytically EXACTLY 0.5 (the
+  symplectic character sum vanishes for Q ∉ {I, P}) — so the measured confuser elevation
+  (n=6 runner-up @0.700, n=8 @0.800) is NOT ideal-signal structure. It must come from the
+  finite-row preparation structure (each row is a pure stabilizer state; a wrong candidate
+  landing in a row's stabilizer group is elevated in that row) and/or device noise. A sim
+  that fails to model whichever mechanism is real will fail this gate — by design.
   - **NO-FLY rule**: if best-confuser rate ≥ true-P rate in **> 5%** of draws, n=10 is not
     identifiable by this estimator at ANY budget (both z scale as √m — more samples converge
     to the wrong Pauli). **We do not spend the QPU.** The gate result itself publishes as the
