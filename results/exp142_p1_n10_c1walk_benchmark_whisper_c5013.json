@@ -1,0 +1,16 @@
+{
+ "card": "exp142_p1_n10_c1walk_benchmark",
+ "cycle": "C5013",
+ "seed_source_commit": "7bde06ba3a1344cdeb95fe277b8fad91944cc43c",
+ "n": 10,
+ "M": 200,
+ "alpha": 0.95,
+ "noise": "noiseless-ideal (q=0) per prereg \u2014 the floor benchmark",
+ "walk_median_C1_copies": 322833,
+ "interval_90pct": [
+  57234,
+  685346
+ ],
+ "decode_correct": "200/200",
+ "equivalence_gate": "must be run and PASS in the same pinned code state"
+}
