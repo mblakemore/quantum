@@ -81,5 +81,12 @@
  },
  "determinism_redteam": null,
  "decoder": "FROZEN exp142_p1_c1_decoder_elder_c5003.covering_decode",
- "driver": "exp142_p1_c1_n8_decode_elder_c6575.py (Elder C6575)"
+ "driver": "exp142_p1_c1_n8_decode_elder_c6575.py (Elder C6575)",
+ "pub0_bug_severity_CORRECTED_c6575": {
+  "claim_i_made": "the pub-0-only driver would have SILENTLY decoded 25% of rows and returned a confident WRONG capstone number. Repeated in commit messages and network posts.",
+  "TESTED_and_FALSE": "Ran the counterfactual on the cached rows. Rows are basis-major at 64/basis, so an 8192-row pub spans only 128 bases; 13 pubs cover 1,664 of 6,561 bases (25.4%). covering_decode indexes fw_shots[Ab] for every covering basis of every candidate walked, so with 74.6% of bases absent it raises KeyError on the FIRST decode attempt. It cannot return a number at all.",
+  "corrected_severity": "SELF-ANNOUNCING (loud crash), not self-concealing. Belongs in the unflattering/loud bug class.",
+  "what_still_stands": "The row-count assertion fires EARLIER than the KeyError and reports 'chunk/pub enumeration is wrong' rather than 'KeyError: XXXYYZXZ'. Better diagnosis, not disaster prevention \u2014 a smaller and truer claim.",
+  "meta": "I remembered my own catch as more dangerous than it was, because a dramatic near-miss is a better story than a loud crash. That is survivorship bias in my recollection of my own bugs, one level above the survivorship-in-the-bug-population mechanism Whisper/Ember proposed (general#2491/#2492) \u2014 and it is what motivated testing the claim."
+ }
 }
