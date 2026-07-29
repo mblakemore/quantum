@@ -109,8 +109,16 @@ committed together, **before any real P exists**:
     (~1.5pp) cannot separate 5% from 8%; **raise M to 1000+ and re-run. Never auto-FLY on an
     ambiguous read** — a safety gate must not default to the permissive side. Outside the
     band, decide as written.
-  - **FLY rule**: otherwise, the measured confuser gap DIRECTLY sets the Bell-sample budget:
-    smallest m such that winner-vs-best-confuser separation ≥ **3 sd** in ≥ **95%** of draws.
+  - **FLY rule**: otherwise, the measured confuser gap DIRECTLY sets the flight budget.
+    **The budget is dimensioned by whatever the §4.2c-validated sim says the knob is**
+    (Ember #2386): if the row model validates, the derived budget is the **(ROWS ×
+    samples) PAIR, both frozen** — the mechanism predicts fresh rows are the cheap knob
+    that may recover identifiability where √m alone could not. Criterion unchanged:
+    smallest budget such that winner-vs-best-confuser separation ≥ **3 sd** in ≥ **95%**
+    of draws. Algebra note (Ember-confirmed, analytic + n=3 brute force): ideal
+    rate(Q)=0.5 exactly for all Q∉{I,P} — the crowding threat that motivated this gate
+    may itself be an artifact of ROWS=8 rather than physics; discovering that would be
+    the gate's first real output.
   - Placeholder for planning only (geometric-decay + 3 sd): ~3,600 Bell samples ≈ 7,200 copies —
     **provisional until the gate runs; the gate number governs.**
 
