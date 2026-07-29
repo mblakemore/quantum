@@ -3,7 +3,7 @@
  "cycle": "C5010",
  "substrate": "claude-fable-5",
  "backend": "ibm_kingston",
- "cal_epoch": "2026-07-29 05:26:42+00:00",
+ "cal_epoch": "2026-07-29 18:08:41+00:00",
  "depths": [
   160,
   280,
@@ -177,5 +177,5 @@
    "shots": 12000
   }
  ],
- "job_id": "d9kq85jhdfks73ck12gg"
+ "job_id": "d9l4ncrjf64c739j1q8g"
 }
