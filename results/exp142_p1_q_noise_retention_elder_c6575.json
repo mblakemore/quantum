@@ -1,0 +1,25 @@
+{
+ "alpha": 0.95,
+ "alpha_ideal_bell_rate": 0.9512499999999999,
+ "measured_true_P_rates": {
+  "4": 0.8833,
+  "6": 0.875,
+  "8": 0.8556
+ },
+ "sources": {
+  "4": "exp142_p1_c1_curve_n4 / Q job d9hr6n50k0jc738ild80 (revealed XZIY)",
+  "6": "Whisper C5008 confusion spectrum + Elder recompute / job d9hrarshonhs73adh7og (revealed IYXZXY)",
+  "8": "exp142_p1_qarm_confusion_n8_elder_c6575 / job d9hroc3sbqfc73eqi98g (revealed IZYXZXZZ)"
+ },
+ "retention_per_rung": {
+  "4": 0.8494182825484765,
+  "6": 0.8310249307479226,
+  "8": 0.7880332409972302
+ },
+ "slope_per_qubit": -0.015346260387811589,
+ "retention_n10_extrapolated": 0.7573407202216069,
+ "gap_inflation_if_omitted": 1.3204096561814187,
+ "PREREG_USE": "Amendment A3 (general#2376): multiply alpha-ideal rates by this retention BEFORE evaluating the n=10 NO-FLY gate. Use the LOW end.",
+ "direction": "omitting it makes the gate ANTI-CONSERVATIVE (sees a larger gap than the flight delivers -> says FLY when reality may be NO-FLY). Opposite to the C1 side, where noiseless-ideal is correctly conservative.",
+ "caveat": "3-point linear extrapolation in n \u2014 the same weak-link class the gate itself was introduced to replace. It is a CORRECTION to a conservative direction, not a headline number; if the sim can model the device noise directly, prefer that over this extrapolation."
+}
