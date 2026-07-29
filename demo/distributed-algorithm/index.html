@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <meta property="og:title" content="The Federation Runs a Program — algorithms across a shielded cut">
-<meta property="og:description" content="P6 on ibm_fez: Deutsch's algorithm with its oracle split across two error-corrected nodes that share no gate (separation 1.861 at 446σ, Exp220); a logical cluster state welded across the same cut (0.887/0.901, Exp221); and the BGK constant-depth algorithm run distributed (P(valid)=0.855 post-selected, 255σ, Exp222). In every one, deleting the classical weld bits collapses the result.">
+<meta property="og:description" content="P6 on ibm_fez: Deutsch's algorithm with its oracle split across two error-corrected nodes that share no gate (separation 1.861 at 446σ, Exp220); a logical cluster state welded across the same cut (0.887/0.901, Exp221); the BGK constant-depth algorithm run distributed (P(valid)=0.855 post-selected, 255σ, Exp222); and a Hadamard applied purely by measuring, delivered across the cut (≈0.88 on three inputs, Exp226). In every one, deleting the classical weld bits collapses the result.">
 <meta name="theme-color" content="#04060c">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Federation Runs a Program — algorithms across a shielded cut | The Quantum Museum</title>
-<meta name="description" content="P6 on ibm_fez: Deutsch's algorithm with its oracle split across two error-corrected nodes that share no gate (separation 1.861 at 446σ, Exp220); a logical cluster state welded across the same cut (0.887/0.901, Exp221); and the BGK constant-depth algorithm run distributed (P(valid)=0.855 post-selected, 255σ, Exp222). In every one, deleting the classical weld bits collapses the result.">
+<meta name="description" content="P6 on ibm_fez: Deutsch's algorithm with its oracle split across two error-corrected nodes that share no gate (separation 1.861 at 446σ, Exp220); a logical cluster state welded across the same cut (0.887/0.901, Exp221); the BGK constant-depth algorithm run distributed (P(valid)=0.855 post-selected, 255σ, Exp222); and a Hadamard applied purely by measuring, delivered across the cut (≈0.88 on three inputs, Exp226). In every one, deleting the classical weld bits collapses the result.">
 <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect x="3" y="11" width="9" height="10" rx="2" fill="none" stroke="%23ffc86b" stroke-width="2"/><rect x="20" y="11" width="9" height="10" rx="2" fill="none" stroke="%23ffc86b" stroke-width="2"/><path d="M12 16 h8" stroke="%23e8f2ff" stroke-width="2" stroke-dasharray="2 2"/></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,18 +88,20 @@
     <h1>The Federation Runs a Program<span class="hl">.</span></h1>
     <p class="lede">The <a href="../federation-computer/">Federation Computer</a> built a
       <b>gate</b> that crosses a shielded cut — two error-corrected nodes that share no wire,
-      welded by classical bits. Three flights later it runs <b>programs</b>: the first quantum
-      algorithm ever written, with its oracle split across the cut · a logical cluster state
-      welded into being · and a constant-depth quantum-advantage algorithm with its own internal
-      edges distributed. In all three, delete the classical weld bits and the answer collapses.</p>
+      welded by classical bits. Four flights later it runs <b>programs</b>: the first quantum
+      algorithm ever written, with its oracle split across the cut · a logical cluster state welded
+      into being · a constant-depth quantum-advantage algorithm with its own internal edges
+      distributed · and a gate applied by nothing but a <b>measurement</b>, its output delivered to
+      the far shield. In all four, delete the classical weld bits and the answer collapses.</p>
     <div class="badges">
       <span class="badge">Exp220 <b>446σ</b> oracle</span>
       <span class="badge">Exp221 <b>0.887 / 0.901</b> cluster</span>
       <span class="badge">Exp222 <b>255σ</b> distributed BGK</span>
+      <span class="badge">Exp226 <b>≈0.88</b> gate by measurement</span>
     </div>
-    <span class="scope">Scope: three certified flights on <b>ibm_fez</b>, [[4,2,2]] error-detected
+    <span class="scope">Scope: four certified flights on <b>ibm_fez</b>, [[4,2,2]] error-detected
       nodes. These run algorithms <em>distributed</em>; none of them claims a beaten classical
-      bound — see the two caveats below, both stated by the flights themselves.</span>
+      bound — see the caveats below, all stated by the flights themselves.</span>
   </header>
 
   <section class="panel" aria-labelledby="p1">
@@ -193,6 +195,46 @@
       rooms 1 and 2, same answer: the classical bits are carrying the distributed logic.</div>
   </section>
 
+  <section class="panel" aria-labelledby="p4">
+    <h2 id="p4">Room 4 — Computing by Looking</h2>
+    <p class="sub">Exp226 · job d9eopr1htsac739egj7g · 6 circuits · 8000 shots</p>
+    <p class="primer"><b>The three rooms above compute by <em>acting</em> — you apply a gate.</b>
+      This one computes by <em>measuring</em>. A qubit sits in shield A, another in shield B, and
+      the two are joined by a distributed entangling bond across the cut. Then A is simply
+      <b>measured</b> — and a Hadamard appears on B's qubit, delivered across the cut, with no
+      Hadamard instruction anywhere in the circuit. What decided <em>which</em> gate arrived was the
+      <b>choice of measurement basis</b>. That is the measurement-based model of computation, and
+      here it runs distributed.<br><br>
+      The strange part is not that a measurement did something — it is <b>what the machine knew and
+      when</b>. The entangling bond is built first and it is <em>program-agnostic</em>: nothing
+      about it knows a Hadamard is coming, and the same bond would have supported a different gate
+      just as well. Every program-specific decision happens at read-time. <b>The machine was
+      assembled in advance, generically; the program was chosen at the moment of looking</b> — and
+      looking is not passive here, because the outcome is random, so the answer only exists relative
+      to the correction bit that outcome produces.</p>
+    <div class="seg" id="seg4" role="group" aria-label="which part to remove"></div>
+    <figure><svg id="viz4" viewBox="0 0 460 200" role="img" aria-label="output on shield B for each of three inputs"></svg></figure>
+    <p class="story" id="story4"></p>
+    <div class="caveat"><span class="ct">Read the claim precisely</span>
+      "Computing by looking" is the shape of the result, but taken literally it would overstate it:
+      the entangling bond <em>is</em> a gate and it is applied first — omit it and B carries nothing
+      (that is the middle toggle, and it is why the bond is necessary rather than decorative). What
+      the measurement does is <b>program</b> which gate gets enacted and teleport its output across
+      the cut. And this certifies the MBQC <b>primitive</b>, not a universal measurement-based
+      processor: the X̄ measurement gives Clifford gates, while continuous-angle rotations need a
+      measurement in the X̄–Ȳ plane, which runs into the same [[4,2,2]] Ȳ-readout wall that has
+      gated other flights in this campaign.</div>
+    <div class="audit">AUDIT — all three inputs land on H|ψ⟩ with the correct sign at ≈0.88, each
+      over <b>140σ</b>. Two separate falsifiers, not one: remove the <b>bond</b> and the outputs
+      go to <b>0.030 / 0.012 / 0.016</b> per input (that per-input breakdown is quoted from the
+      flight's status note; the decode record itself carries the bond null only as a single
+      aggregate, <b>0.016</b>); keep the bond but ignore the <b>byproduct bit</b> from A's
+      measurement and the Z-output case collapses to <b>−0.012</b>. The gate needs both the quantum
+      bond and the classical correction, and the frame is what makes the second falsifier the
+      sharper one — it says the measurement outcome is not merely noise to be discarded but part of
+      the program's correctness. Same lesson rooms 1–3 keep landing on.</div>
+  </section>
+
   <section class="panel">
     <h2>The court</h2>
     <p class="sub">how we know we're not fooling ourselves</p>
@@ -200,8 +242,10 @@
       <div class="receipt"><div class="rt">THE SAME FALSIFIER, THREE TIMES</div>
         <p>Every room here ships with the same destructive test: discard the classical weld bits
         and re-decode. Deutsch's balanced oracles go to +0.03/+0.02; both cluster stabilizers go
-        to −0.015/+0.027; the BGK run goes to 0.242, which is uniform. A result that survives its
-        own falsifier is worth more than one that was never given the chance to fail.</p></div>
+        to −0.015/+0.027; the BGK run goes to 0.242, which is uniform; the measured gate's Z-output
+        case goes to −0.012, and removing its entangling bond instead leaves 0.030/0.012/0.016.
+        A result that survives its own falsifier is worth more than one that was never given the
+        chance to fail.</p></div>
       <div class="receipt"><div class="rt">PRE-REGISTERED BEFORE THE FLIGHT</div>
         <p>All three had their pass criteria frozen and committed before submission, and the
         verdicts quote those criteria rather than criteria chosen afterwards. Exp221's bare
@@ -218,12 +262,12 @@
         any number on this page. Provenance: the measured values were re-checked against the decode
         records; the gate counts (25 vs 7, 33 vs 7, two relays) are quoted as documented in the
         flights' own status notes and were not independently re-derived.
-        <code>Exp220–222 · findings in the repo</code></p></div>
+        <code>Exp220–222 · Exp226 · findings in the repo</code></p></div>
     </div>
   </section>
   </main>
   <footer role="contentinfo">
-    <span>Exp220 · Exp221 · Exp222 · ibm_fez · 3 flights</span><span>C4908–C4910 · 2026-07-20</span>
+    <span>Exp220 · Exp221 · Exp222 · Exp226 · ibm_fez · 4 flights</span><span>C4908–C4912 · 2026-07-20</span>
     <a href="../federation-computer/">← the distributed gate</a>
     <a href="../shields/">← the single shield</a>
     <a href="../index.html">← all exhibits</a>
@@ -342,6 +386,35 @@ function r3(k){
     : 'With the falsifier: discard the relay frame bits and the distributed run drops to <b>0.242</b> — below even the 0.25 uniform-over-valid floor, i.e. indistinguishable from guessing. Everything the algorithm achieved came through the classical weld.';
 }
 segify("seg3",[["cmp","bare vs distributed"],["all","add the falsifier"]],r3);
+
+// Room 4 — Exp226: output on B for each input, measured vs each falsifier
+// [label, ideal-target text, measured, no-bond, frame-off]
+const MBQC=[["|0̄⟩ → |+̄⟩", 0.892, 0.030, 0.065],
+            ["|1̄⟩ → |−̄⟩", -0.883, 0.012, 0.028],
+            ["|+̄⟩ → |0̄⟩", 0.881, 0.016, -0.012]];
+function r4(k){
+  const svg=document.getElementById("viz4"); svg.innerHTML="";
+  const Z=250,S=170,top=42,h=28,gap=20;
+  const X=v=>Z+S*v;
+  el(svg,"text",{x:8,y:18,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"})
+    .textContent="what shield B carries · dashed = ideal ±1";
+  [1,-1].forEach(t=>el(svg,"line",{x1:X(t),y1:28,x2:X(t),y2:178,style:"stroke:var(--edge-2);stroke-width:1.5;stroke-dasharray:4 4"}));
+  el(svg,"line",{x1:Z,y1:28,x2:Z,y2:178,style:"stroke:var(--edge-2);stroke-width:2"});
+  MBQC.forEach((m,i)=>{
+    const v = k==="ok"? m[1] : (k==="nobond"? m[2] : m[3]);
+    const y = top+i*(h+gap);
+    const col = Math.abs(v)>0.5 ? "var(--good)" : "var(--bad)";
+    el(svg,"text",{x:8,y:y+h-9,style:"fill:var(--ink-2);font-family:var(--mono);font-size:11px"}).textContent=m[0];
+    el(svg,"rect",{x:Math.min(Z,X(v)),y:y,width:Math.max(2,Math.abs(X(v)-Z)),height:h,rx:3,style:`fill:${col};opacity:.85`});
+    el(svg,"text",{x:452,y:y+h-9,"text-anchor":"end",style:`fill:${col};font-family:var(--mono);font-size:11.5px;font-weight:700`})
+      .textContent=(v>=0?"+":"")+v.toFixed(3);
+  });
+  const st=document.getElementById("story4");
+  if(k==="ok") st.innerHTML='All three inputs arrive on B as <b>H|ψ⟩</b>, correct sign, ≈0.88 each and over 140σ. No Hadamard instruction was ever issued — measuring A in the X̄ basis is what applied it.';
+  else if(k==="nobond") st.innerHTML='Bond removed: <b>0.030 / 0.012 / 0.016</b>. Without the distributed entangling bond there is nothing to teleport along — B carries no trace of A\'s input. The bond is a real gate and it is doing real work.';
+  else st.innerHTML='Byproduct bit ignored: the Z-output case collapses to <b>−0.012</b>. A\'s measurement outcome is random, so its result has to be sent across and applied as a correction; discard that one classical bit and the teleported gate is incomplete.';
+}
+segify("seg4",[["ok","measured"],["nobond","omit the bond"],["frame","ignore the byproduct bit"]],r4);
 </script>
 </body>
 </html>
