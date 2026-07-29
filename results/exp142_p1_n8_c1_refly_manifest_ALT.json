@@ -1,0 +1,153 @@
+{
+ "experiment": "exp142_p1_n8_c1_refly",
+ "n": 8,
+ "commit_hash": "809ea9e53efc19dc4dddfe165a7629bfcd45585bd36c98b62bc3e2948a32e09d",
+ "seal": "UNCHANGED 809ea9e5",
+ "backend": "ibm_fez",
+ "conv_layout": [
+  2,
+  90,
+  5,
+  50,
+  6,
+  124,
+  4,
+  18
+ ],
+ "readout_cal_jobs": {
+  "cal0": "d9kpts8ii2cc73eghi7g",
+  "cal1": "d9kptsrhdfks73ck0m40"
+ },
+ "readout_cal_spec": "cal0=prep|0> measure P(read1)=p01; cal1=prep|1> measure P(read0)=p10; per-qubit on conv_layout (this order). Elder builds per-qubit {p01,p10} -> p0_of weight-dependent p_flip; normalize C1/Q margin to this C1-epoch q + Q-vs-C1 gap.",
+ "q_backend_props_per_qubit": {
+  "2": {
+   "p01": 0.0028076171875,
+   "p10": 0.0028076171875,
+   "q": 0.0028076171875
+  },
+  "90": {
+   "p01": 0.0028076171875,
+   "p10": 0.0028076171875,
+   "q": 0.0028076171875
+  },
+  "5": {
+   "p01": 0.003173828125,
+   "p10": 0.003173828125,
+   "q": 0.003173828125
+  },
+  "50": {
+   "p01": 0.003173828125,
+   "p10": 0.003173828125,
+   "q": 0.003173828125
+  },
+  "6": {
+   "p01": 0.0032958984375,
+   "p10": 0.0032958984375,
+   "q": 0.0032958984375
+  },
+  "124": {
+   "p01": 0.0032958984375,
+   "p10": 0.0032958984375,
+   "q": 0.0032958984375
+  },
+  "4": {
+   "p01": 0.00341796875,
+   "p10": 0.00341796875,
+   "q": 0.00341796875
+  },
+  "18": {
+   "p01": 0.0035400390625,
+   "p10": 0.0035400390625,
+   "q": 0.0035400390625
+  }
+ },
+ "cal_shots": 4096,
+ "c_per_basis": 64,
+ "emission_bases": 6561,
+ "c1_basis_of_row_generator": "full_weight_bases(8) x C_PER_BASIS, Elder order",
+ "batch_chunks": 4,
+ "jobs": [
+  {
+   "job_id": "d9kpu03hdfks73ck0m80",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 0
+  },
+  {
+   "job_id": "d9kpu38ii2cc73eghifg",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 1
+  },
+  {
+   "job_id": "d9kpu5abr2fc73e7mvig",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 2
+  },
+  {
+   "job_id": "d9kpu7bjf64c739ihrv0",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 3
+  },
+  {
+   "job_id": "d9kpu92br2fc73e7mvn0",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 4
+  },
+  {
+   "job_id": "d9kpub2br2fc73e7mvp0",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 5
+  },
+  {
+   "job_id": "d9kpucqbr2fc73e7mvr0",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 6
+  },
+  {
+   "job_id": "d9kpueabr2fc73e7mvtg",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 7
+  },
+  {
+   "job_id": "d9kpug0ii2cc73eghiug",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 8
+  },
+  {
+   "job_id": "d9kpuhrjf64c739ihse0",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 9
+  },
+  {
+   "job_id": "d9kpujbhdfks73ck0mv0",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 10
+  },
+  {
+   "job_id": "d9kpulbhdfks73ck0n1g",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 11
+  },
+  {
+   "job_id": "d9kpumqbr2fc73e7n070",
+   "kind": "c1_covering",
+   "chunks": 4,
+   "batch": 12
+  }
+ ],
+ "committer": "Ember (DC15E)",
+ "q_arm_job": [
+  "d9hroc3sbqfc73eqi98g"
+ ]
+}
