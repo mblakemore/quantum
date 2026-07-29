@@ -148,8 +148,20 @@ def vector_walk(master_hex, draw, n, P, chunk=8192):
             accept[idxs] = anyA & (iA < iB)                 # crossed A strictly before B
             stops[idxs] = np.minimum(first + 1, SHOTS_PER_BASIS)
 
-        # rare: unresolved within first basis -> frozen-semantics slow path (spillover)
-        for idx in np.nonzero(~resolved)[0]:
+        # rare: unresolved within first basis -> frozen-semantics slow path (spillover).
+        # ORDERING (Ember #2394 review finding): the frozen walk stops at the FIRST accept,
+        # so an unresolved candidate positioned AFTER the accepting one is never walked and
+        # must not be billed. Process unresolved candidates in ascending walk order, and only
+        # while they precede the current first-accept; a slow-path accept moves the stop
+        # earlier and ends processing (everything later is unreachable).
+        def _first_accept():
+            acc = np.nonzero(accept)[0]
+            return int(acc[0]) if len(acc) else None
+
+        for idx in np.nonzero(~resolved)[0]:                # ascending order by construction
+            fa = _first_accept()
+            if fa is not None and idx > fa:
+                break                                       # after the walk's stop: never walked
             Qs = _int_to_str(int(cand_ints[idx]), n)
             llr = 0.0; consumed_here = []
             done = False
@@ -169,10 +181,10 @@ def vector_walk(master_hex, draw, n, P, chunk=8192):
             for b, hw in per_b.items():
                 highwater[b] = max(highwater.get(b, 0), hw)
             stops[idx] = 0                                  # already accounted above
+            resolved[idx] = True
 
         # walk stops at the FIRST accepting candidate (frozen: break on accept)
-        acc_idx = np.nonzero(accept)[0]
-        stop_at = acc_idx[0] if len(acc_idx) else None
+        stop_at = _first_accept()
         upto = (stop_at + 1) if stop_at is not None else len(cand_ints)
         for idx in range(upto):
             if stops[idx]:
@@ -209,6 +221,12 @@ def equivalence_gate():
 
 # ---------------------------------------------------------------- n=10 benchmark
 def benchmark(commit_hash, M, n):
+    # ENFORCED, not procedural (Ember #2394): the benchmark is only valid if the vectorized
+    # walk is frozen-equivalent IN THIS EXACT CODE STATE — so run the gate here and abort on
+    # fail, per the same mechanical-from-frozen standard as A1.
+    print("=== pre-benchmark frozen-equivalence gate (mandatory) ===")
+    if not equivalence_gate():
+        sys.exit("EQUIVALENCE GATE FAILED — benchmark aborted; fix the divergence first.")
     master = hashlib.sha256(commit_hash.encode()).hexdigest()     # §4.1 seed rule
     copies, correct = [], 0
     for d in range(M):
