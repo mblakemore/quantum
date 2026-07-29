@@ -1,0 +1,123 @@
+{
+ "curve": {
+  "4": {
+   "C1_copies": 279,
+   "C1_q": 0.004883,
+   "P_hat_C1": "XZIY",
+   "Q": {
+    "P_hat_Q": "XZIY",
+    "rate": 0.8833333333333333,
+    "runner_up": "ZIZZ",
+    "runner_rate": 0.65,
+    "separation": 0.23333333333333328,
+    "bell_samples_available": 60,
+    "bell_samples_used": 21,
+    "copies": 42,
+    "r_bell": 0.933,
+    "wald_A": 10.146433731146518,
+    "RESOLVED": true,
+    "censored": false
+   },
+   "cross_arm_agree": true,
+   "margin": 6.642857142857143,
+   "C1_copies_alt_q": 273,
+   "alt_q": "0.003189",
+   "margin_alt_q": 6.5
+  },
+  "6": {
+   "C1_copies": 1373,
+   "C1_q": 0.004883,
+   "P_hat_C1": "IYXZXY",
+   "Q": {
+    "P_hat_Q": "IYXZXY",
+    "rate": 0.875,
+    "runner_up": "ZZZYIY",
+    "runner_rate": 0.7,
+    "separation": 0.17500000000000004,
+    "bell_samples_available": 80,
+    "bell_samples_used": 30,
+    "copies": 60,
+    "r_bell": 0.882,
+    "wald_A": 12.922692182275261,
+    "RESOLVED": true,
+    "censored": false
+   },
+   "cross_arm_agree": true,
+   "margin": 22.883333333333333,
+   "C1_copies_alt_q": 1295,
+   "alt_q": "0.003189",
+   "margin_alt_q": 21.583333333333332
+  },
+  "8": {
+   "C1_copies": 25761,
+   "C1_q": 0.004883,
+   "P_hat_C1": "IZYXZXZZ",
+   "Q": {
+    "P_hat_Q": "IZYXZXZZ",
+    "rate": 0.8555555555555555,
+    "runner_up": "ZYZXXYZX",
+    "runner_rate": 0.8,
+    "separation": 0.05555555555555547,
+    "bell_samples_available": 90,
+    "bell_samples_used": 59,
+    "copies": 118,
+    "r_bell": 0.846,
+    "wald_A": 15.695509816041737,
+    "RESOLVED": true,
+    "censored": false
+   },
+   "cross_arm_agree": true,
+   "margin": 218.3135593220339,
+   "C1_copies_alt_q": 23657,
+   "alt_q": "0.003189",
+   "margin_alt_q": 200.48305084745763
+  }
+ },
+ "currency": "copies of rho both arms (Q = 2 x Bell samples)",
+ "criterion": "one Wald SPRT per rung, A(n)=log((4^n-1)/0.01)",
+ "claim": "SEPARATION IN SCALING: C1 ~ 3^n emission-covering, Q ~ linear in n",
+ "seal_free_validation": "C1 and Q are independent estimators; agreement is checkable without the seal (chance agreement = 1/(4^n-1))",
+ "caveats": [
+  "n=4/n=6 predate the in-flight readout cal; headline curve uses a COMMON q so the SHAPE is not confounded by epoch drift",
+  "each rung is ONE draw of P; the C1 meter depends on where P falls in the committed candidate walk order (n=8 P sits 22.6% in => cheaper C1 => SMALLER margin, i.e. the conservative direction)",
+  "n=8 seal NOT revealed at time of writing; both P_hat are blind estimates"
+ ],
+ "walk_position_decomposition": {
+  "finding": "The measured C1 cost is driven by WHERE the sealed P sorts in the committed lexicographic candidate order, not by the 3^n emission: C1/walk_position is near-constant (2.45/2.18/1.74 copies per candidate walked) while C1/3^n varies 2.1x.",
+  "why_it_matters": "The classical arm as pre-registered walks candidates in a fixed committed order, so its cost genuinely depends on where the truth sits. Expected cost over a uniformly random sealed P is the walk-median value.",
+  "direction_of_bias": "ALL THREE draws landed BELOW the 50% median walk position (44.7% / 15.4% / 22.6%), so every as-executed C1 is CHEAPER than expected and every as-executed margin UNDERSTATES the expected-over-P margin. Conservative.",
+  "independent_corroboration": "Median-normalizing reproduces the PRE-REGISTERED frozen_C1_benchmark (exp142c_decode_elder_c6567_PREREVEAL.json) to 1.00x at n=6 and 1.02x at n=8 - the flown data recovers a benchmark fixed before it.",
+  "per_rung": {
+   "4": {
+    "walk_pos": 114,
+    "walk_pct": 44.705882352941174,
+    "copies_per_candidate": 2.4473684210526314,
+    "C1_at_median_pos": 313.2631578947368,
+    "frozen_benchmark": 408,
+    "ratio_to_frozen": 0.7678018575851393,
+    "margin_executed": 6.642857142857143,
+    "margin_at_median": 7.458646616541353
+   },
+   "6": {
+    "walk_pos": 630,
+    "walk_pct": 15.384615384615385,
+    "copies_per_candidate": 2.179365079365079,
+    "C1_at_median_pos": 4463.339682539682,
+    "frozen_benchmark": 4482,
+    "ratio_to_frozen": 0.99583660922349,
+    "margin_executed": 22.883333333333333,
+    "margin_at_median": 74.3889947089947
+   },
+   "8": {
+    "walk_pos": 14815,
+    "walk_pct": 22.60624093995575,
+    "copies_per_candidate": 1.7388457644279447,
+    "C1_at_median_pos": 56978.49800877489,
+    "frozen_benchmark": 55589,
+    "ratio_to_frozen": 1.024995916616145,
+    "margin_executed": 218.3135593220339,
+    "margin_at_median": 482.86862719300757
+   }
+  }
+ }
+}

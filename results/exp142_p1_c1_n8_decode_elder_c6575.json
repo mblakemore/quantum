@@ -1,0 +1,85 @@
+{
+ "n": 8,
+ "manifest": "exp142_p1_n8_c1_refly_manifest_ALT.json",
+ "manifest_hash": "809ea9e53efc19dc4dddfe165a7629bfcd45585bd36c98b62bc3e2948a32e09d",
+ "backend": "ibm_fez",
+ "basis_of_row_source": "regenerated full_weight_bases(8) x 64 = 419904 rows",
+ "q_used": 0.004883,
+ "q_per_qubit": {
+  "2": {
+   "p01": 0.0028076171875,
+   "p10": 0.0028076171875,
+   "q": 0.0028076171875
+  },
+  "90": {
+   "p01": 0.0028076171875,
+   "p10": 0.0028076171875,
+   "q": 0.0028076171875
+  },
+  "5": {
+   "p01": 0.003173828125,
+   "p10": 0.003173828125,
+   "q": 0.003173828125
+  },
+  "50": {
+   "p01": 0.003173828125,
+   "p10": 0.003173828125,
+   "q": 0.003173828125
+  },
+  "6": {
+   "p01": 0.0032958984375,
+   "p10": 0.0032958984375,
+   "q": 0.0032958984375
+  },
+  "124": {
+   "p01": 0.0032958984375,
+   "p10": 0.0032958984375,
+   "q": 0.0032958984375
+  },
+  "4": {
+   "p01": 0.00341796875,
+   "p10": 0.00341796875,
+   "q": 0.00341796875
+  },
+  "18": {
+   "p01": 0.0035400390625,
+   "p10": 0.0035400390625,
+   "q": 0.0035400390625
+  }
+ },
+ "rows_fetched": 419904,
+ "bases": 6561,
+ "P_hat_C1": "IZYXZXZZ",
+ "result": {
+  "n": 8,
+  "P_hat": "IZYXZXZZ",
+  "C1_distinct_copies": 25761,
+  "emission_bases": 6561,
+  "candidates_walked": 65535,
+  "alpha": 0.95,
+  "note": "emission=3^n covering (Creator ~240 auth INTACT); C1=distinct copies (honest, not per-candidate-bit sum); frozen SPRT logic unchanged"
+ },
+ "expect": null,
+ "gate_pass": null,
+ "q_sweep": {
+  "0.003189": {
+   "P_hat": "IZYXZXZZ",
+   "C1_distinct_copies": 23657
+  },
+  "0.00818": {
+   "P_hat": "IZYXZXZZ",
+   "C1_distinct_copies": 29878
+  },
+  "0.02": {
+   "P_hat": "IZYXZXZZ",
+   "C1_distinct_copies": 46787
+  },
+  "0.055": {
+   "P_hat": "IZYXZXZZ",
+   "C1_distinct_copies": 122852
+  }
+ },
+ "determinism_redteam": null,
+ "decoder": "FROZEN exp142_p1_c1_decoder_elder_c5003.covering_decode",
+ "driver": "exp142_p1_c1_n8_decode_elder_c6575.py (Elder C6575)"
+}

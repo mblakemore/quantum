@@ -1,0 +1,32 @@
+{
+ "n": 6,
+ "manifest": "exp142_p1_n6_manifest.json",
+ "manifest_hash": "399b735ac41453810bd34f7ed186b5207188b9c561e52b984c49e3839719ab75",
+ "backend": "ibm_fez",
+ "basis_of_row_source": "verbatim (generator ASSERTED IDENTICAL, 46656 rows)",
+ "q_used": 0.004883,
+ "q_per_qubit": {},
+ "rows_fetched": 46656,
+ "bases": 729,
+ "P_hat_C1": "IYXZXY",
+ "result": {
+  "n": 6,
+  "P_hat": "IYXZXY",
+  "C1_distinct_copies": 1373,
+  "emission_bases": 729,
+  "candidates_walked": 4095,
+  "alpha": 0.95,
+  "note": "emission=3^n covering (Creator ~240 auth INTACT); C1=distinct copies (honest, not per-candidate-bit sum); frozen SPRT logic unchanged"
+ },
+ "expect": null,
+ "gate_pass": null,
+ "q_sweep": {
+  "0.003189": {
+   "P_hat": "IYXZXY",
+   "C1_distinct_copies": 1295
+  }
+ },
+ "determinism_redteam": null,
+ "decoder": "FROZEN exp142_p1_c1_decoder_elder_c5003.covering_decode",
+ "driver": "exp142_p1_c1_n8_decode_elder_c6575.py (Elder C6575)"
+}
