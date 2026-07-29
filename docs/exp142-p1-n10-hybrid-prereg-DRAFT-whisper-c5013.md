@@ -23,7 +23,8 @@ prediction.
   walk-median, reported as median-with-interval, extending the 3-rung separation curve by one
   labeled hybrid point.
 - **C-B (crowding-field mechanism — the physics payload)**: Elder's pre-registered prediction:
-  winner z stays pinned near ~6.7 (α=0.95 physics) while the best-confuser z climbs
+  winner z stays pinned near ~6.7 (hardware-calibrated α ≈ 0.95 — value and source pinned in
+  §4.2b) while the best-confuser z climbs
   (3.6 → 5.69 measured at n=6→8; naive extrapolation lands ~7.8 at n=10, ABOVE the winner).
   Whether the field crowds out identifiability at n=10 is the question; **either answer is a
   publishable finding** (honest-negatives rule).
@@ -62,6 +63,11 @@ committed together, **before any real P exists**:
 - **(a) C1 benchmark**: walk-median C1 copies + 90% interval over the M draws.
 - **(b) Q-FEASIBILITY GATE** (Elder #2368 — pre-flight, replaces the 3-point extrapolation):
   for each draw, compute the best-confuser true constraint rate vs the true-P rate.
+  **Noise model (A2, pinned)**: Q-side gate computations use the **hardware-calibrated α**
+  (value stated at freeze; source: calibrated from the executed n=6/8 confusion spectra,
+  α ≈ 0.95). A noiseless gate would compute winner rate 1.0, trivially pass, and predict
+  nothing — the crowding phenomenon exists BECAUSE of the hardware α. The **C1 benchmark
+  stays noiseless-ideal**; that asymmetry IS the floor argument and is intentional.
   - **NO-FLY rule**: if best-confuser rate ≥ true-P rate in **> [DECISION-POINT: proposed 5%]**
     of draws, n=10 is not identifiable by this estimator at ANY budget (both z scale as √m —
     more samples converge to the wrong Pauli). **We do not spend the QPU.** The gate result
@@ -76,6 +82,9 @@ committed together, **before any real P exists**:
 Ember generates and seals the real P exactly as at n=4/6/8: OS entropy, sha256 commit in the
 flight manifest, P+salt off-git chmod 600. (Sim benchmark is already committed → "sim tuned
 knowing P" is structurally impossible.)
+**Commitment preimage spec (A1, pinned)**: `commit_hash = sha256(utf8(P + '|' + salt_hex))` —
+identical to the executed rungs. The reveal's verification must be mechanical from this frozen
+doc alone, with no appeal to how earlier rungs did it.
 
 ### 4.4 FLY Q arm
 Whisper flies Bell sampling on the **ALT open-instance** at the gate-derived budget.
@@ -108,7 +117,10 @@ Ember reveals P+salt; hash verified by all three seats.
 |---|---|---|
 | Whisper | runs pinned sim, commits benchmark+gate, flies Q arm | see P before reveal |
 | Ember | seals P AFTER benchmark commit; reveals | touch sim or decode |
-| Elder | blind-decodes P̂_Q, commits pre-reveal | see P or sim seeds before decode |
+| Elder | blind-decodes P̂_Q, commits pre-reveal | see P (or the sealed draw) before committing P̂_Q |
+
+(The sim seed is sha256 of the freeze commit hash — PUBLIC to everyone by design; it is not,
+and cannot be, a secret from any seat.)
 
 ## 7. Decision points open at draft (to be frozen at ratification)
 
