@@ -1,0 +1,109 @@
+{
+ "n": 8,
+ "true_P": "IZYXZXZZ",
+ "sequential_walk_copies": 25761,
+ "theorem_floor_2n": 256,
+ "sweep": [
+  {
+   "m": 256,
+   "argmax": "YYZIIIII",
+   "correct": false,
+   "top_llr": 5.9400475987988495,
+   "runner_llr": 5.882346768923405,
+   "llr_margin": 0.05770082987544445,
+   "true_P_llr": 0.0,
+   "wald_A": 15.695509816041737,
+   "true_P_clears_A": false
+  },
+  {
+   "m": 512,
+   "argmax": "IIZIZIYY",
+   "correct": false,
+   "top_llr": 7.137867879767705,
+   "runner_llr": 6.488970799788822,
+   "llr_margin": 0.6488970799788829,
+   "true_P_llr": 0.0,
+   "wald_A": 15.695509816041737,
+   "true_P_clears_A": false
+  },
+  {
+   "m": 1024,
+   "argmax": "IZYIYIIX",
+   "correct": false,
+   "top_llr": 7.137867879767705,
+   "runner_llr": 5.798016934081326,
+   "llr_margin": 1.3398509456863792,
+   "true_P_llr": -2.179731883760941,
+   "wald_A": 15.695509816041737,
+   "true_P_clears_A": false
+  },
+  {
+   "m": 2048,
+   "argmax": "YZYYIIYI",
+   "correct": false,
+   "top_llr": 8.374913349228581,
+   "runner_llr": 7.086465141654953,
+   "llr_margin": 1.2884482075736283,
+   "true_P_llr": 0.0,
+   "wald_A": 15.695509816041737,
+   "true_P_clears_A": false
+  },
+  {
+   "m": 4096,
+   "argmax": "YYIXIXYX",
+   "correct": false,
+   "top_llr": 7.035326601772176,
+   "runner_llr": 6.898592451814435,
+   "llr_margin": 0.13673414995774102,
+   "true_P_llr": 1.2699003861468654,
+   "wald_A": 15.695509816041737,
+   "true_P_clears_A": false
+  },
+  {
+   "m": 8192,
+   "argmax": "XIYXXXIY",
+   "correct": false,
+   "top_llr": 7.3333798430804595,
+   "runner_llr": 7.3333798430804595,
+   "llr_margin": 0.0,
+   "true_P_llr": 2.539800772293731,
+   "wald_A": 15.695509816041737,
+   "true_P_clears_A": false
+  },
+  {
+   "m": 16384,
+   "argmax": "IYYZYZZI",
+   "correct": false,
+   "top_llr": 9.593627184234785,
+   "runner_llr": 6.98445212380776,
+   "llr_margin": 2.6091750604270256,
+   "true_P_llr": 4.444651351514029,
+   "wald_A": 15.695509816041737,
+   "true_P_clears_A": false
+  }
+ ],
+ "parallel_first_correct_m": null,
+ "speedup_vs_committed_walk": null,
+ "implication": "committed walk not beaten by parallel scoring in swept range",
+ "caveat": "coarse grid, single subsample draw per m, one sealed P. Establishes an UPPER bound on the parallel decoder's cost, hence a bound on how much the margin shrinks \u2014 not a precise replacement number.",
+ "context": "raised against Whisper's n=10 hybrid proposal general#2357 rationale (3): 'noiseless simulated C1 = strongest possible classical competitor' holds only WITHIN the frozen algorithm.",
+ "llr_extrapolation": {
+  "true_P_llr_trajectory": {
+   "256": 0.0,
+   "512": 0.0,
+   "1024": -2.179731883760941,
+   "2048": 0.0,
+   "4096": 1.2699003861468654,
+   "8192": 2.539800772293731,
+   "16384": 4.444651351514029
+  },
+  "slope_llr_per_copy": 0.00028050720025100495,
+  "wald_A": 15.695509816041737,
+  "parallel_copies_needed_est": 55954.035411558056,
+  "committed_walk_copies": 25761,
+  "walk_is_better_by": 2.1720443853716103,
+  "reading": "The parallel decoder is WORSE, not better. Mechanism: the sealed P has weight 7, so it is covered by only 3^(n-w)=3 of the 6561 emitted bases \u2014 uniform sampling spends ~99.95% of copies on bases that cannot see it. The committed sequential walk implicitly CONCENTRATES measurement on bases covering the candidate under test, which is a real (if unremarked) adaptive advantage. My 'linear search is obviously weak' intuition was wrong."
+ },
+ "verdict_on_the_challenge": "RAISED, TESTED, REFUTED. The published C1 cost survives the most obvious stronger-classical alternative. This is ONE alternative, not a proof of optimality \u2014 best-known-classical remains open, and a genuinely adaptive basis-selection strategy is untested.",
+ "implementation_warning": "FIRST implementation scored candidates by RAW RATE and produced the SAME (flattering) negative conclusion for an entirely WRONG reason \u2014 unequal covered-row counts across weights (m/3^w) meant a spurious 1.0 from 3 rows outranked a real 0.97 from 3000. Right answer, wrong reason. Rescored by LLR. A flattering conclusion earned the extra check."
+}
