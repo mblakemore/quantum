@@ -78,7 +78,8 @@ committed together, **before any real P exists**:
   a noiseless gate would compute winner rate 1.0, trivially pass, and predict nothing);
   (ii) hardware retention on the deviation-from-0.5, calibrated on the executed rungs
   (n=4: 0.849, n=6: 0.831, n=8: 0.788; declining ~−0.0153/qubit) → **frozen n=10 retention
-  = 0.757 (the LOW end of the extrapolation)**. **Citable source (pinned)**:
+  = 0.7573, the CENTRAL linear extrapolation (F1 wording fix — the low side of the band is
+  carried by the parametric box, not by the point value)**. **Citable source (pinned)**:
   `experiments/exp142_p1_q_noise_retention_elder_c6575.py` +
   `results/exp142_p1_q_noise_retention_elder_c6575.json` (quantum@fcb1ce0) — per-rung
   retention with job ID and revealed seal as source; sim imports `retention(n)` /
@@ -114,14 +115,34 @@ committed together, **before any real P exists**:
   finite-row preparation structure (each row is a pure stabilizer state; a wrong candidate
   landing in a row's stabilizer group is elevated in that row) and/or device noise. A sim
   that fails to model whichever mechanism is real will fail this gate — by design.
-  - **NO-FLY rule**: if best-confuser rate ≥ true-P rate in **> 5%** of draws, n=10 is not
+  - **NO-FLY rule**: if the best-confuser TRUE rate ≥ the true-P rate, n=10 is not
     identifiable by this estimator at ANY budget (both z scale as √m — more samples converge
     to the wrong Pauli). **We do not spend the QPU.** The gate result itself publishes as the
-    finding: crowding kills single-estimator identifiability at n=10.
-  - **INCONCLUSIVE band (A5)**: observed NO-FLY fraction in **3–8%** → M=200's binomial SE
-    (~1.5pp) cannot separate 5% from 8%; **raise M to 1000+ and re-run. Never auto-FLY on an
-    ambiguous read** — a safety gate must not default to the permissive side. Outside the
-    band, decide as written.
+    finding. Under the pinned draw-degenerate model this is a BOOLEAN, not a draw-fraction.
+  - **A5 STRUCK (Elder #2416, Ember concur #2419)**: the original inconclusive band was a
+    draw-fraction band over a model whose draws are identical by construction — the observed
+    NO-FLY fraction could only ever be 0.0 or 1.0, at any M, so the band was UNREACHABLE.
+    An inert safeguard in a court doc is worse than none because it reads as protection.
+    The honest reason no verdict-band is needed: the FLY verdict sits **4.4× from its
+    boundary in both parameters** (excess would need 0.342 vs 0.078 carried; retention
+    would need to collapse to 0.173 vs 0.757 estimated).
+  - **PARAMETRIC ROBUSTNESS (A5's replacement)**: the model's uncertainty is parametric,
+    not draw-sampling. The gate sweeps the plausible box **retention 0.60–0.80 × excess
+    0.056–0.160** (5×5 grid): if ANY box point is NO-FLY → verdict INCONCLUSIVE-PARAMETRIC
+    (do not fly on estimates that admit a NO-FLY corner); if the budget search exhausts
+    anywhere in the box → NO-DECISION, do not fly (Ember F2: a FLY-without-budget state
+    must not exist). Otherwise the **flight budget freezes at the box's CONSERVATIVE
+    CORNER, not the pinned point** — buying out the whole box costs seconds of QPU and
+    removes the one place the extrapolation could still bite.
+  - **Excess accounting (Elder #2416(b), a named choice)**: the +0.078 excess is runner-up
+    minus null-MEDIAN, so it contains ~0.022 of ordinary null-max spread on top of the
+    ~0.056 genuinely above the null 95th; carrying the full 0.078 as a TRUE-rate elevation
+    double-counts sampling spread once — in the stricter direction, so it is kept, and the
+    box's excess range covers both readings.
+  - **Retention value (Ember F1, exact words)**: the frozen n=10 retention 0.7573 is the
+    **central linear extrapolation** of the three executed rungs (per Elder #2380), NOT a
+    low-end value; the box's retention range (down to 0.60) is where the extrapolation
+    risk is carried.
   - **FLY rule**: otherwise, the measured confuser gap DIRECTLY sets the flight budget.
     **The budget is dimensioned by whatever the §4.2c-validated sim says the knob is**
     (Ember #2386): if the row model validates, the derived budget is the **(ROWS ×
@@ -201,7 +222,8 @@ and cannot be, a secret from any seat.)
 
 ## 7. Decision points — ratification status (Ember #2373, Elder #2376)
 
-1. NO-FLY material fraction: **5% — RATIFIED** (with A5 inconclusive band 3–8% → M≥1000 re-run)
+1. NO-FLY rule: **boolean TRUE-rate ordering + parametric box (A5 struck per Elder #2416,
+   Ember concur #2419) — RATIFIED**
 2. Budget separation bar: **3 sd in ≥95% of draws — RATIFIED**
 3. Sim code pin: **PENDING code review** (both seats review before the freeze commit;
    Elder specifically reviews the gate's noise handling in code, not only in prose)

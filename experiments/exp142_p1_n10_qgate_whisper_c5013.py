@@ -10,7 +10,10 @@ THE TWO ARMS DO NOT SHARE A NOISE KNOB (Elder #2390 / Ember #2378):
   WINNER arm:   true-P rate = 0.5 + (alpha-ideal − 0.5) × retention(n)
                 alpha-ideal = (1+α²)/2 = 0.95125 (two-copy Bell, design α=0.95)
                 retention imported from exp142_p1_q_noise_retention_elder_c6575 (A3
-                artifact: per-rung job IDs + revealed seals; n=10 by low-end extrapolation).
+                artifact: per-rung job IDs + revealed seals). n=10 value = extrapolate()[2]
+                = 0.7573, the CENTRAL linear extrapolation, frozen per Elder #2380 (Ember
+                review F1: say what the code does). The parametric sweep below covers the
+                band down to retention 0.60, which is where the extrapolation risk lives.
   CONFUSER arm: ideal true rate is EXACTLY 0.5 for every wrong candidate (character-sum
                 result, #2384/#2386, Ember-verified analytically + n=3 brute force). The
                 observed runner-up elevation is EXTREME-VALUE: max over K=4^n−1 estimates
@@ -20,19 +23,30 @@ THE TWO ARMS DO NOT SHARE A NOISE KNOB (Elder #2390 / Ember #2378):
                 best confuser's true rate. Failure direction: the excess makes the gate
                 STRICTER (harder to fly), per the A3 safety-direction rule.
 
-DECISION RULES (frozen in the prereg):
-  NO-FLY:        best-confuser true rate ≥ true-P rate in > 5% of draws
-                 (√m cannot fix a wrong ordering of TRUE rates).
-  INCONCLUSIVE:  observed NO-FLY fraction in 3–8% → raise M to ≥1000, re-run (A5).
-  FLY:           otherwise; budget = smallest m with
-                 P(winner_hat − bestconfuser_hat ≥ 3·σ_bin(m)) ≥ 0.95,  σ_bin = √(0.25/m),
-                 computed with the worst-case excess carried. Ties in argmax count as
-                 failure (conservative).
+DECISION RULES (frozen in the prereg; A5 STRUCK per Elder #2416):
+  NO-FLY:        best-confuser true rate ≥ true-P rate (a TRUE-rate ordering √m cannot fix).
+                 Under the pinned draw-degenerate model this is a boolean, not a fraction —
+                 the original A5 draw-fraction band was INERT (nofly_frac could only be 0.0
+                 or 1.0 at any M) and an inert safeguard reads as protection. Struck.
+  PARAMETRIC ROBUSTNESS (A5's replacement — the uncertainty here is parametric, not
+                 draw-sampling): (1) report the verdict's distance to its boundary in both
+                 parameters (excess needed to flip at pinned retention; retention collapse
+                 needed at pinned excess); (2) sweep the plausible box
+                 retention 0.60–0.80 × excess 0.056–0.160 — if ANY box point is NO-FLY,
+                 verdict escalates to INCONCLUSIVE-PARAMETRIC (do not fly on estimates that
+                 admit a NO-FLY corner); otherwise the FLIGHT budget freezes at the
+                 CONSERVATIVE CORNER of the box, not the pinned point.
+  FLY:           budget(m) = smallest m with
+                 P(winner_hat − bestconfuser_hat ≥ 3·σ_bin(m)) ≥ 0.95,  σ_bin = √(0.25/m).
+                 Ties in argmax count as failure (conservative). If the budget search
+                 exhausts without meeting the bar, verdict = NO-DECISION, do not fly
+                 (Ember review F2: a FLY-without-budget state must not exist).
 
-Under the pinned model the per-draw rates are draw-independent (uniform-P symmetry of the
-null; retention is per-rung not per-P), so the M-draw loop is degenerate here by
-construction — kept explicit so any future per-P model (e.g. weight-dependent retention)
-drops in without changing the decision plumbing. Draw-degeneracy is REPORTED, not hidden.
+EXCESS NOTE (Elder #2416(b), documented not hidden): the +0.078 excess is runner-up MINUS
+null-MEDIAN, so it contains ~0.022 of ordinary null-max spread on top of the ~0.056 that
+genuinely exceeds the null 95th. Carrying the full 0.078 as a TRUE-rate elevation
+double-counts sampling spread once — in the STRICTER direction (bigger budget), so it is
+kept; the parametric box (excess up to 0.160) covers both readings.
 
 Usage:
   --validate            run the §4.2c validation gate only (n=6, n=8 known answers)
@@ -66,10 +80,13 @@ TOL_NULL_MEDIAN = 0.03      # null-max median vs measured runner-up, WHERE null 
 N8_EXCESS = 0.078           # the sole real excess: n=8 runner-up MINUS NULL-MAX MEDIAN
                             # (0.800 − 0.7222; it also exceeds the null 95th = "real")
 
-NOFLY_FRAC = 0.05
-INCONCLUSIVE_BAND = (0.03, 0.08)
 SEP_SD = 3.0
 SEP_CONF = 0.95
+# parametric robustness box (A5 replacement, Elder #2416): retention x excess
+BOX_RETENTION = (0.60, 0.80)
+BOX_EXCESS = (0.056, 0.160)
+BOX_GRID = 5                # 5x5 grid incl. corners
+BUDGET_M_MAX = 20000
 
 
 def winner_rate(n):
@@ -101,7 +118,11 @@ def p_separation(m, p_w, K, sd, confuser_true):
     gap = sd * math.sqrt(0.25 / m)
     w = np.arange(m + 1)
     pmf_w = binom.pmf(w, m, p_w)
-    thresh = np.ceil((w / m - gap) * m) - 1              # max count c with c/m <= w/m - gap ... strict
+    # ceil(x)-1 == floor(x) EXCEPT at integral x (m = 4k^2 for sd=3), where it is
+    # floor(x)-1 — off by one in the STRICTER direction (Elder #2416(a)). Intentional:
+    # at the exact boundary the separation criterion is read STRICTLY (> gap, not >=).
+    # Do not "fix" to floor(): that would weaken the bar precisely at those m.
+    thresh = np.ceil((w / m - gap) * m) - 1              # max confuser count strictly below the bar
     thresh = np.clip(thresh, -1, m).astype(int)
     F_null = np.where(thresh >= 0, binom.cdf(thresh, m, 0.5), 0.0)
     F_conf = np.where(thresh >= 0, binom.cdf(thresh, m, confuser_true), 0.0)
@@ -141,46 +162,81 @@ def validate():
 
 
 # ------------------------------------------------------------------ §4.2b gate
+def _min_budget(p_w, K, conf_true):
+    """Smallest m meeting the separation bar; None if the search exhausts."""
+    for m in range(20, BUDGET_M_MAX + 1):
+        if p_separation(m, p_w, K, SEP_SD, conf_true) >= SEP_CONF:
+            return m
+    return None
+
+
 def gate(commit_hash, M, n):
     if not validate():
         sys.exit("§4.2c VALIDATION FAILED — the n=10 gate output is not valid. Stop.")
-    master = hashlib.sha256(commit_hash.encode()).hexdigest()     # §4.1 seed rule (parity
-    # with the C1 sim; the pinned model is draw-degenerate, see docstring — seeded anyway)
 
     K = 4 ** n - 1
     p_w, r_used = winner_rate(n)
-    conf_true_worst = 0.5 + N8_EXCESS                    # worst-case excess carried forward
+    conf_true_worst = 0.5 + N8_EXCESS
 
-    # NO-FLY test over M draws (draw-degenerate under pinned model — reported as such)
-    nofly_frac = float(np.mean([conf_true_worst >= p_w for _ in range(M)]))
-    if nofly_frac > NOFLY_FRAC:
+    # -- verdict at the pinned point (boolean: TRUE-rate ordering, draw-degenerate) --
+    pinned_nofly = conf_true_worst >= p_w
+
+    # -- parametric robustness (A5 replacement, Elder #2416) --
+    excess_to_flip = (ALPHA_IDEAL - 0.5) * r_used            # excess at which NO-FLY at pinned retention
+    retention_to_flip = N8_EXCESS / (ALPHA_IDEAL - 0.5)      # retention collapse for NO-FLY at pinned excess
+    sweep, box_nofly, budgets = [], False, []
+    for rr in np.linspace(*BOX_RETENTION, BOX_GRID):
+        p_w_r = 0.5 + (ALPHA_IDEAL - 0.5) * rr
+        for ex in np.linspace(*BOX_EXCESS, BOX_GRID):
+            ct = 0.5 + ex
+            if ct >= p_w_r:
+                box_nofly = True
+                sweep.append({"retention": round(rr, 3), "excess": round(ex, 3), "NO-FLY": True})
+                continue
+            b = _min_budget(p_w_r, K, ct)
+            budgets.append(b)
+            sweep.append({"retention": round(rr, 3), "excess": round(ex, 3), "budget": b})
+
+    if pinned_nofly:
         verdict = "NO-FLY"
-    elif INCONCLUSIVE_BAND[0] <= nofly_frac <= INCONCLUSIVE_BAND[1]:
-        verdict = "INCONCLUSIVE — raise M to ≥1000 and re-run (A5)"
+        flight_budget = None
+    elif box_nofly:
+        verdict = "INCONCLUSIVE-PARAMETRIC — box contains a NO-FLY corner; tighten estimates, do not fly"
+        flight_budget = None
+    elif any(b is None for b in budgets):
+        verdict = "NO-DECISION — budget search exhausted inside the box; do not fly (F2)"
+        flight_budget = None
     else:
         verdict = "FLY"
+        flight_budget = max(budgets)                          # CONSERVATIVE CORNER, frozen
 
-    # budget derivation (FLY only): smallest m meeting the separation bar, worst case
-    budget = None
-    frozen_ref = {}
-    if verdict == "FLY":
-        for m in range(20, 20001):
-            if p_separation(m, p_w, K, SEP_SD, conf_true_worst) >= SEP_CONF:
-                budget = m
-                break
-        frozen_ref = {"m": 110, "p_argmax_correct_null": p_argmax_correct(110, p_w, K, 0.5),
-                      "p_argmax_correct_worstcase": p_argmax_correct(110, p_w, K, conf_true_worst)}
+    pinned_budget = _min_budget(p_w, K, conf_true_worst)
+    frozen_ref = {"m": 110, "p_argmax_correct_null": p_argmax_correct(110, p_w, K, 0.5),
+                  "p_argmax_correct_worstcase": p_argmax_correct(110, p_w, K, conf_true_worst)}
 
     out = {"card": "exp142_p1_n10_q_feasibility_gate", "cycle": "C5013",
-           "seed_source_commit": commit_hash, "n": n, "M": M,
-           "draw_degenerate_under_pinned_model": True,
+           "seed_source_commit": commit_hash, "n": n,
+           "model": "draw-degenerate (uniform-P symmetry; retention per-rung) — uncertainty is parametric",
            "winner_true_rate": round(p_w, 4), "retention_used": round(r_used, 4),
+           "retention_note": "central linear extrapolation, frozen per Elder #2380 (F1)",
            "retention_source": "exp142_p1_q_noise_retention_elder_c6575 (A3 artifact)",
-           "confuser_model": f"extreme-value null (K={K}) + worst-case n=8 excess {N8_EXCESS}",
-           "nofly_fraction": nofly_frac, "VERDICT": verdict,
-           "derived_bell_sample_budget": budget,
-           "frozen_budget_reference": frozen_ref,
-           "budget_rule": f"smallest m with P(sep >= {SEP_SD} sd) >= {SEP_CONF}, worst-case excess carried"}
+           "confuser_model": f"extreme-value null (K={K}) + worst-case n=8 excess {N8_EXCESS} "
+                             "(contains ~0.022 null spread — double-counted, stricter direction, #2416(b))",
+           "VERDICT": verdict,
+           "verdict_robustness": {
+               "excess_needed_to_flip": round(excess_to_flip, 4),
+               "excess_carried": N8_EXCESS,
+               "excess_margin_x": round(excess_to_flip / N8_EXCESS, 2),
+               "retention_needed_to_flip": round(retention_to_flip, 4),
+               "retention_used": round(r_used, 4),
+               "retention_margin_x": round(r_used / retention_to_flip, 2)},
+           "FLIGHT_BUDGET_bell_samples": flight_budget,
+           "flight_budget_rule": "CONSERVATIVE CORNER of the parametric box (Elder #2416), "
+                                 f"P(sep >= {SEP_SD} sd) >= {SEP_CONF}",
+           "pinned_point_budget": pinned_budget,
+           "parametric_box": {"retention": BOX_RETENTION, "excess": BOX_EXCESS,
+                              "grid": f"{BOX_GRID}x{BOX_GRID}", "sweep": sweep},
+           "frozen_budget_reference": frozen_ref}
     path = os.path.join(HERE, "..", "results", f"exp142_p1_n{n}_qgate_whisper_c5013.json")
     json.dump(out, open(path, "w"), indent=1)
     print(json.dumps(out, indent=1))
