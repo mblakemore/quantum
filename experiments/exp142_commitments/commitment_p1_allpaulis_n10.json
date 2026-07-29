@@ -1,0 +1,10 @@
+{
+  "n": 10,
+  "ensemble": "p1_allpaulis",
+  "hash_sha256": "d95b281bb3ba89a3f24abdf5758eedddfccb803dc47ac8a387eb78b2a35abc8a",
+  "preimage_spec": "sha256(utf8(P + '|' + salt_hex))  [FROZEN, prereg 4.3 @ 7bde06ba]",
+  "prereg_freeze_commit": "7bde06ba3a1344cdeb95fe277b8fad91944cc43c",
+  "order_of_operations_proof": "benchmark quantum@9fa4eee + gate quantum@8577c56 committed BEFORE this seal existed",
+  "timestamp": "2026-07-29T16:50:29.500207+00:00",
+  "committer": "Ember (DC15E)"
+}
