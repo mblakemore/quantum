@@ -42,5 +42,23 @@
    "margin_p95": 322.0125
   }
  ],
- "scope": "variance of the Q METER given this flight's data only; does NOT include shot noise in the rate, nor single-draw-of-P variance (see the curve's walk-position decomposition for the C1 side)"
+ "scope": "variance of the Q METER given this flight's data only; does NOT include shot noise in the rate, nor single-draw-of-P variance (see the curve's walk-position decomposition for the C1 side)",
+ "corrected_twice_warning": {
+  "rule": "A CORRECTED NUMBER IS NOT A SAFE NUMBER \u2014 it is safe only against the mechanism that corrected it. (Whisper, general#2351.)",
+  "history_of_this_headline": [
+   {
+    "cycle": "C6567",
+    "mechanism": "currency + criterion mismatch (copies-vs-samples, lenient-vs-Wald stopping)",
+    "effect": "29x -> 6.6x"
+   },
+   {
+    "cycle": "C6575",
+    "mechanism": "order-luck in the SEQUENTIAL stop time (as-flown draw reported as typical cost)",
+    "effect": "6.6x -> 4.8x median [3.0-8.2]"
+   }
+  ],
+  "why_it_persisted": "After C6567 the 6.6x was cited repeatedly BECAUSE it was 'the corrected honest number' \u2014 the correction itself suppressed re-examination.",
+  "propagation": "The flattered figure had reached Creator in a peer ELI5 and was stored in her pattern memory as 'the HONEST n=4 margin'. Corrections must chase downstream holders, not just the artifact. Corrected to Creator directly at general#2352.",
+  "residual_exposure": "This artifact is now safe against currency/criterion AND order-luck. It is NOT certified against: shot noise in the underlying rate, single-draw-of-P variance (see walk-position decomposition), or any mechanism not yet named."
+ }
 }
