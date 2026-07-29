@@ -1,0 +1,46 @@
+{
+ "n_bootstrap": 20000,
+ "method": "permutation of Bell-sample ORDER, rate held fixed",
+ "per_rung": [
+  {
+   "n": 4,
+   "constraint_rate": 0.8833333333333333,
+   "stop_as_flown": 21,
+   "stop_median": 29,
+   "stop_p5": 17,
+   "stop_p95": 46,
+   "C1_copies": 279,
+   "margin_as_flown": 6.642857142857143,
+   "margin_median": 4.810344827586207,
+   "margin_p5": 3.032608695652174,
+   "margin_p95": 8.205882352941176
+  },
+  {
+   "n": 6,
+   "constraint_rate": 0.875,
+   "stop_as_flown": 30,
+   "stop_median": 41,
+   "stop_p5": 27,
+   "stop_p95": 55,
+   "C1_copies": 1373,
+   "margin_as_flown": 22.883333333333333,
+   "margin_median": 16.74390243902439,
+   "margin_p5": 12.481818181818182,
+   "margin_p95": 25.425925925925927
+  },
+  {
+   "n": 8,
+   "constraint_rate": 0.8555555555555555,
+   "stop_as_flown": 59,
+   "stop_median": 56,
+   "stop_p5": 40,
+   "stop_p95": 69,
+   "C1_copies": 25761,
+   "margin_as_flown": 218.3135593220339,
+   "margin_median": 230.00892857142858,
+   "margin_p5": 186.67391304347825,
+   "margin_p95": 322.0125
+  }
+ ],
+ "scope": "variance of the Q METER given this flight's data only; does NOT include shot noise in the rate, nor single-draw-of-P variance (see the curve's walk-position decomposition for the C1 side)"
+}

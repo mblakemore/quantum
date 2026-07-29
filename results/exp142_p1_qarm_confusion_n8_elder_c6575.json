@@ -1,0 +1,120 @@
+{
+ "n": 8,
+ "bell_samples": 90,
+ "true_P": "IZYXZXZZ",
+ "true_rate": 0.8555555555555555,
+ "true_rank": 1,
+ "runner_up": "ZYZXXYZX",
+ "runner_rate": 0.8,
+ "margin_over_runner": 0.05555555555555547,
+ "null_mean": 0.5003341776787622,
+ "null_sd": 0.05265025442673329,
+ "null_max": 0.8,
+ "z_over_null_bulk": 6.74681218057759,
+ "z_over_null_max": 1.0551811412965748,
+ "binomial_se": 0.0370555509282393,
+ "margin_in_binomial_se": 1.4992505620316574,
+ "null_max_z": 5.691631039281015,
+ "upper_tail_counts": {
+  "0.60": 2411,
+  "0.65": 132,
+  "0.70": 7,
+  "0.75": 1,
+  "0.80": 1
+ },
+ "gaussian_null_model": "REJECTED \u2014 implies more effective comparisons than candidates exist; upper tail carries genuine partial signal from structurally-related candidates",
+ "nominal_candidates": 65535,
+ "verdict": "GENUINELY THIN \u2014 the winner did not clear the observed null max by a comfortable margin; the n=8 call was fragile and n=10 must not be sized like it",
+ "n10_sizing": {
+  "observed_separations_4_6_8": [
+   0.233,
+   0.175,
+   0.056
+  ],
+  "sep10_linear": 0.005,
+  "sep10_geometric": 0.017920000000000002,
+  "caveat": "separation at n=10 is EXTRAPOLATED from 3 rungs; the null width is MEASURED. Sizes a budget, does not promise an outcome."
+ },
+ "top20": [
+  {
+   "P": "IZYXZXZZ",
+   "rate": 0.8555555555555555
+  },
+  {
+   "P": "ZYZXXYZX",
+   "rate": 0.8
+  },
+  {
+   "P": "YZXYXYXI",
+   "rate": 0.7111111111111111
+  },
+  {
+   "P": "YZXZXXIX",
+   "rate": 0.7111111111111111
+  },
+  {
+   "P": "XZYZIYXX",
+   "rate": 0.7
+  },
+  {
+   "P": "YZYXZXYX",
+   "rate": 0.7
+  },
+  {
+   "P": "ZIXIZZIZ",
+   "rate": 0.7
+  },
+  {
+   "P": "ZZXIIYZX",
+   "rate": 0.7
+  },
+  {
+   "P": "IIIXIZXX",
+   "rate": 0.6888888888888889
+  },
+  {
+   "P": "IIIZIZXY",
+   "rate": 0.6888888888888889
+  },
+  {
+   "P": "IIYIYZIY",
+   "rate": 0.6888888888888889
+  },
+  {
+   "P": "IYZYIIZI",
+   "rate": 0.6888888888888889
+  },
+  {
+   "P": "XIXZYZYZ",
+   "rate": 0.6888888888888889
+  },
+  {
+   "P": "XXIIIXIX",
+   "rate": 0.6888888888888889
+  },
+  {
+   "P": "YIZZXXYX",
+   "rate": 0.6888888888888889
+  },
+  {
+   "P": "YXIZXZXY",
+   "rate": 0.6888888888888889
+  },
+  {
+   "P": "YXYXZZYI",
+   "rate": 0.6888888888888889
+  },
+  {
+   "P": "YYZYYXYX",
+   "rate": 0.6888888888888889
+  },
+  {
+   "P": "YZXYYYXZ",
+   "rate": 0.6888888888888889
+  },
+  {
+   "P": "ZXYIZIII",
+   "rate": 0.6888888888888889
+  }
+ ]
+}
