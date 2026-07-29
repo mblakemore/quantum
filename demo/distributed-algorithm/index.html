@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:title" content="The Federation Runs a Program — algorithms across a shielded cut">
+<meta property="og:description" content="P6 on ibm_fez: Deutsch's algorithm with its oracle split across two error-corrected nodes that share no gate (separation 1.861 at 446σ, Exp220); a logical cluster state welded across the same cut (0.887/0.901, Exp221); and the BGK constant-depth algorithm run distributed (P(valid)=0.855 post-selected, 255σ, Exp222). In every one, deleting the classical weld bits collapses the result.">
+<meta name="theme-color" content="#04060c">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Federation Runs a Program — algorithms across a shielded cut | The Quantum Museum</title>
+<meta name="description" content="P6 on ibm_fez: Deutsch's algorithm with its oracle split across two error-corrected nodes that share no gate (separation 1.861 at 446σ, Exp220); a logical cluster state welded across the same cut (0.887/0.901, Exp221); and the BGK constant-depth algorithm run distributed (P(valid)=0.855 post-selected, 255σ, Exp222). In every one, deleting the classical weld bits collapses the result.">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect x="3" y="11" width="9" height="10" rx="2" fill="none" stroke="%23ffc86b" stroke-width="2"/><rect x="20" y="11" width="9" height="10" rx="2" fill="none" stroke="%23ffc86b" stroke-width="2"/><path d="M12 16 h8" stroke="%23e8f2ff" stroke-width="2" stroke-dasharray="2 2"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a,.audit a{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--amber);font-weight:400}
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--amber) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(28px,5.5vw,48px); margin:12px 0 14px; }
+  h1 .hl { color: var(--amber); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:68ch; margin:0 0 14px; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; font-family:var(--mono); font-size:11.5px; }
+  .badge { border:1px solid var(--edge); border-radius:999px; padding:4px 11px; color:var(--ink-2); }
+  .badge b { color:var(--amber); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--amber); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--amber) 16%,transparent); color:var(--amber); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .audit { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px dashed var(--edge); margin-top:14px; padding-top:9px; line-height:1.55; }
+  .audit b { color:var(--good); }
+  .caveat { border-left:3px solid var(--amber); background:var(--surface-2); border-radius:0 11px 11px 0; padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.55; }
+  .caveat .ct { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); display:block; margin-bottom:5px; }
+  .caveat b { color:var(--ink); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--amber); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="sp"></span>
+    <span class="wing">WING <b>VII</b> · The Federation Runs a Program</span>
+  </nav>
+  <main id="main">
+  <header class="hero">
+    <div class="eyebrow">P6 · Horizons-5 · the Heron 2026 campaign</div>
+    <h1>The Federation Runs a Program<span class="hl">.</span></h1>
+    <p class="lede">The <a href="../federation-computer/">Federation Computer</a> built a
+      <b>gate</b> that crosses a shielded cut — two error-corrected nodes that share no wire,
+      welded by classical bits. Three flights later it runs <b>programs</b>: the first quantum
+      algorithm ever written, with its oracle split across the cut · a logical cluster state
+      welded into being · and a constant-depth quantum-advantage algorithm with its own internal
+      edges distributed. In all three, delete the classical weld bits and the answer collapses.</p>
+    <div class="badges">
+      <span class="badge">Exp220 <b>446σ</b> oracle</span>
+      <span class="badge">Exp221 <b>0.887 / 0.901</b> cluster</span>
+      <span class="badge">Exp222 <b>255σ</b> distributed BGK</span>
+    </div>
+    <span class="scope">Scope: three certified flights on <b>ibm_fez</b>, [[4,2,2]] error-detected
+      nodes. These run algorithms <em>distributed</em>; none of them claims a beaten classical
+      bound — see the two caveats below, both stated by the flights themselves.</span>
+  </header>
+
+  <section class="panel" aria-labelledby="p1">
+    <h2 id="p1">Room 1 — The Distributed Oracle</h2>
+    <p class="sub">Exp220 · job d9enkqkjeosc73fj09u0 · 4 circuits · 8000 shots</p>
+    <p class="primer"><b>Deutsch's algorithm, 1985 — the first quantum algorithm there was.</b>
+      It decides in a <em>single</em> query whether a one-bit function is <b>constant</b> (same
+      answer for both inputs) or <b>balanced</b> (different answers). Here the function itself is
+      torn in half: the query qubit lives in shield A, the function's target lives in shield C,
+      and the two shields share no gate. The balanced oracle is a logical CNOT welded across the
+      cut by one classical bit. Toggle that bit away and watch the algorithm stop working.</p>
+    <div class="seg" id="seg1" role="group" aria-label="weld bit"></div>
+    <figure><svg id="viz1" viewBox="0 0 460 210" role="img" aria-label="query expectation value for each of four oracles"></svg></figure>
+    <p class="story" id="story1"></p>
+    <div class="audit">AUDIT — the separation is <b>1.861 at 446σ</b> (ideal 2.0): constant and
+      balanced are resolved with an enormous margin. The falsifier is the interesting half — with
+      the weld bit ignored, the two balanced oracles read <b>+0.030</b> and <b>+0.020</b>, i.e.
+      indistinguishable from constant. The classical bit is not bookkeeping; it is the thing that
+      carries the function across the cut.</div>
+  </section>
+
+  <section class="panel" aria-labelledby="p2">
+    <h2 id="p2">Room 2 — The Cluster Welded Across the Cut</h2>
+    <p class="sub">Exp221 · job d9enrg1htsac739efji0 · 4 circuits · 8000 shots</p>
+    <p class="primer"><b>A cluster state is the raw material of measurement-based computing</b> —
+      the resource you consume to compute by measuring. Making one needs a CZ gate between two
+      qubits. This flight makes a <b>logical</b> CZ between qubits in two different shields, with
+      no gate crossing between them, and certifies the result with <em>both</em> cluster
+      stabilizers. Both reading +1 is what pins the state down: it identifies the cluster state
+      uniquely among stabilizer states, so this is a real distributed CZ rather than two qubits
+      that merely happen to be correlated.</p>
+    <div class="seg" id="seg2" role="group" aria-label="weld bit"></div>
+    <figure><svg id="viz2" viewBox="0 0 460 200" role="img" aria-label="both cluster stabilizers, welded and frame-off"></svg></figure>
+    <p class="story" id="story2"></p>
+    <div class="caveat"><span class="ct">What this room does not claim</span>
+      The flight also recorded a bare (unshielded) reference, and it is <b>not</b> a fair
+      side-by-side. The bare run's XZ frame was not search-matched the way the logical decode's
+      was, so only the ZX arm can be compared at all (bare <b>0.873</b>, shielded <b>0.901</b>).
+      That comparison is descriptive and was deliberately left <b>out of the registered verdict</b>
+      by the flight's author. It is not evidence that the shield beat the bare run here, and this
+      page does not present it as any.</div>
+  </section>
+
+  <section class="panel" aria-labelledby="p3">
+    <h2 id="p3">Room 3 — The Advantage Algorithm, Distributed</h2>
+    <p class="sub">Exp222 · job d9envt1htsac739efns0 · 2 circuits · 8000 shots</p>
+    <p class="primer"><b>BGK's 2D hidden-linear-function problem</b> is the flagship
+      <em>constant-depth</em> quantum algorithm — the one used to prove that a fixed-depth quantum
+      circuit can do something a fixed-depth classical circuit cannot. This flight runs it with its
+      internal CZ edges <b>distributed across the shielded cut</b>: the computation split between
+      two error-corrected nodes joined only by classical bits. Four of the sixteen possible outputs
+      are valid; the run has to land in that set. One convention to hold on to before reading the
+      numbers: these shields <b>detect</b> errors rather than correcting them, so the logical arm's
+      score is taken over the shots that passed the check, while the bare arm's is taken over all
+      of them. Both acceptances are stated wherever a logical number appears.</p>
+    <div class="seg" id="seg3" role="group" aria-label="arm"></div>
+    <figure><svg id="viz3" viewBox="0 0 460 210" role="img" aria-label="probability of a valid output for each arm"></svg></figure>
+    <p class="story" id="story3"></p>
+    <div class="caveat"><span class="ct">Two things this room does not claim</span>
+      <b>1 — the shielded arm did not beat the bare one here.</b> Logical <b>0.855</b>
+      (post-selected, acceptance <b>0.760</b>) sits <em>below</em> bare <b>0.904</b> (all shots),
+      and that is the expected direction: distributing the edges costs <b>33</b> two-qubit gates
+      against bare's <b>7</b>, plus two relays, and at this size that depth outweighs what error
+      detection returns. Error detection <em>does</em> pay for itself when the shield stays inside
+      a single block: a separate flight (Exp206) ran the same algorithm un-distributed and measured
+      logical <b>0.974</b> (post-selected, acceptance <b>0.806</b>) against bare <b>0.897</b>
+      (all shots) — a margin of <b>+0.077 at 19.7σ</b>, at 25 gates against 7. The two comparisons
+      are like-for-like with each other: same observable, each with its own bare arm flown in the
+      same job, and the logical arm post-selected in both by the same detection-mode convention.
+      Both results stand and they answer different questions. What is certified <em>here</em> is
+      that the algorithm <em>runs at all</em> with its logic split across the cut — not that
+      splitting it makes it better.<br><br>
+      <b>2 — no classical bound was beaten.</b> "Advantage" names the algorithm, not the outcome.
+      Stated the way a claim like this should be:<br>
+      <b>· The baseline is</b> uniform random guessing over the 16 possible outputs, and the
+      stricter floor of 0.250 for guessing uniformly <em>within</em> the valid set. Not "classical
+      computers" — those two specific floors.<br>
+      <b>· What was tested against it</b> is the run itself, plus its own falsifier: strip the weld
+      bits and it falls to 0.242, at the floor. That is what the σ figures are measured over.<br>
+      <b>· What remains open</b> is everything a classical competitor would need: no classical
+      algorithm was run against this instance, and none was beaten. P(valid) over a uniform floor
+      is a <em>fidelity</em> — evidence the machine executed the thing — not an <em>advantage</em>,
+      which would need a classical method named, run, and outrun. The constant-depth separation BGK
+      proves is a theorem about the algorithm; running that algorithm on hardware is a different
+      claim from demonstrating the separation.</div>
+    <div class="audit">AUDIT — logical <b>0.855 at 255σ</b> (post-selected; error <em>detection</em>
+      discards the flagged shots, acceptance 0.760 — the bare arm keeps all of its) over the uniform floor, and
+      <b>134σ</b> over the stricter uniform-over-valid floor of 0.250. Every valid output appears
+      (min coverage 0.208, near the 0.25 an even split would give). Acceptance 0.760. Ignore the
+      relay frame bits and it falls to <b>0.242</b> — uniform, i.e. nothing. Same falsifier as
+      rooms 1 and 2, same answer: the classical bits are carrying the distributed logic.</div>
+  </section>
+
+  <section class="panel">
+    <h2>The court</h2>
+    <p class="sub">how we know we're not fooling ourselves</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE SAME FALSIFIER, THREE TIMES</div>
+        <p>Every room here ships with the same destructive test: discard the classical weld bits
+        and re-decode. Deutsch's balanced oracles go to +0.03/+0.02; both cluster stabilizers go
+        to −0.015/+0.027; the BGK run goes to 0.242, which is uniform. A result that survives its
+        own falsifier is worth more than one that was never given the chance to fail.</p></div>
+      <div class="receipt"><div class="rt">PRE-REGISTERED BEFORE THE FLIGHT</div>
+        <p>All three had their pass criteria frozen and committed before submission, and the
+        verdicts quote those criteria rather than criteria chosen afterwards. Exp221's bare
+        comparison was explicitly kept <em>out</em> of its registered verdict by its author once
+        the frame mismatch was found — the caveat above is his, not a later softening.</p></div>
+      <div class="receipt"><div class="rt">WHAT "DISTRIBUTED" MEANS HERE</div>
+        <p>Two [[4,2,2]] error-detected blocks that share no two-qubit gate, on one chip, joined
+        by mid-circuit measurement and classical feed-forward. It is not two separate machines and
+        not a network over distance — it is the logical structure of a distributed computation,
+        with the cut real and the weld classical.</p></div>
+      <div class="receipt"><div class="rt">FENCES</div>
+        <p>One device (ibm_fez), one seed, 8000 shots per circuit; n = 4 logical bits; error
+        <em>detection</em> with post-selection, not correction. No classical bound is beaten by
+        any number on this page. Provenance: the measured values were re-checked against the decode
+        records; the gate counts (25 vs 7, 33 vs 7, two relays) are quoted as documented in the
+        flights' own status notes and were not independently re-derived.
+        <code>Exp220–222 · findings in the repo</code></p></div>
+    </div>
+  </section>
+  </main>
+  <footer role="contentinfo">
+    <span>Exp220 · Exp221 · Exp222 · ibm_fez · 3 flights</span><span>C4908–C4910 · 2026-07-20</span>
+    <a href="../federation-computer/">← the distributed gate</a>
+    <a href="../shields/">← the single shield</a>
+    <a href="../index.html">← all exhibits</a>
+  </footer>
+</div>
+<script>
+"use strict";
+const SVGNS="http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function segify(id,states,cb){
+  const seg=document.getElementById(id);
+  states.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.dataset.k=s[0];b.textContent=s[1];
+    b.addEventListener("click",()=>{cb(s[0]);seg.querySelectorAll("button").forEach(x=>{x.classList.toggle("on",x.dataset.k===s[0]);x.setAttribute("aria-pressed",String(x.dataset.k===s[0]));});});
+    seg.appendChild(b);});
+  cb(states[0][0]); seg.querySelector("button").classList.add("on");
+  seg.querySelector("button").setAttribute("aria-pressed","true");
+}
+// ---- verified data kernels (STATUS docs, ibm_fez) ----
+// Exp220: <Xbar_q> per oracle, welded vs frame-off
+const ORACLES=[["f0 constant",0.999,0.999],["f1 constant",0.998,0.998],
+               ["f2 balanced",-0.867,0.030],["f3 balanced",-0.859,0.020]];
+// Exp221: cluster stabilizers, welded vs frame-off
+const STAB=[["⟨X̄ᴀ Z̄ʙ⟩",0.887,-0.015,"161σ"],["⟨Z̄ᴀ X̄ʙ⟩",0.901,0.027,"170σ"]];
+// Exp222: P(valid) per arm
+const ARMS=[["bare",0.904,"all shots · 311σ · 7 two-qubit gates"],
+            ["logical",0.855,"post-selected, acceptance 0.760 · 255σ · 33 gates"],
+            ["frame-off",0.242,"the weld bits discarded"]];
+
+// Room 1 — signed bars, zero in the middle
+function r1(k){
+  const svg=document.getElementById("viz1"); svg.innerHTML="";
+  const Z=250,S=170,top=30,h=26,gap=17;
+  const X=v=>Z+S*v;
+  el(svg,"text",{x:8,y:18,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"})
+    .textContent="⟨X̄ of the query qubit⟩ · dashed = ideal ±1";
+  [1,-1].forEach(t=>el(svg,"line",{x1:X(t),y1:26,x2:X(t),y2:190,style:"stroke:var(--edge-2);stroke-width:1.5;stroke-dasharray:4 4"}));
+  el(svg,"line",{x1:Z,y1:26,x2:Z,y2:190,style:"stroke:var(--edge-2);stroke-width:2"});
+  ORACLES.forEach((o,i)=>{
+    const v = k==="weld"? o[1] : o[2];
+    const y = top+i*(h+gap);
+    const bal = o[0].indexOf("balanced")>=0;
+    const col = bal ? (v<-0.5?"var(--amber)":"var(--bad)") : "var(--cyan)";
+    el(svg,"text",{x:8,y:y+h-8,style:"fill:var(--ink-2);font-family:var(--mono);font-size:11px"}).textContent=o[0];
+    el(svg,"rect",{x:Math.min(Z,X(v)),y:y,width:Math.abs(X(v)-Z),height:h,rx:3,style:`fill:${col};opacity:.85`});
+    el(svg,"text",{x:452,y:y+h-8,"text-anchor":"end",style:`fill:${col};font-family:var(--mono);font-size:11.5px;font-weight:700`})
+      .textContent=(v>=0?"+":"")+v.toFixed(3);
+  });
+  document.getElementById("story1").innerHTML = k==="weld"
+    ? 'With the weld bit: the two <b>constant</b> oracles sit at +1.00 and the two <b>balanced</b> ones swing to −0.87. One distributed query separates the classes by <b>1.861</b>, at 446σ.'
+    : 'Weld bit discarded: the constant oracles are unchanged — they never needed the cut — but both <b>balanced</b> oracles collapse to <b>+0.03</b> and <b>+0.02</b>. The algorithm can no longer tell the two classes apart.';
+}
+segify("seg1",[["weld","with the weld bit"],["off","weld bit discarded"]],r1);
+
+// Room 2 — stabilizer bars against +1
+function r2(k){
+  const svg=document.getElementById("viz2"); svg.innerHTML="";
+  const L=118,R=430,top=44,h=30,gap=30;
+  const X=v=>L+(R-L)*v;
+  el(svg,"text",{x:8,y:20,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"})
+    .textContent="both stabilizers must read +1 to pin the cluster state";
+  el(svg,"line",{x1:X(1),y1:34,x2:X(1),y2:170,style:"stroke:var(--edge-2);stroke-width:1.5;stroke-dasharray:4 4"});
+  el(svg,"text",{x:X(1),y:184,"text-anchor":"middle",style:"fill:var(--ink-4);font-family:var(--mono);font-size:10px"}).textContent="+1";
+  el(svg,"line",{x1:L,y1:34,x2:L,y2:170,style:"stroke:var(--edge-2);stroke-width:2"});
+  STAB.forEach((s,i)=>{
+    const v = k==="weld"? s[1] : s[2];
+    const y = top+i*(h+gap);
+    const col = v>0.5?"var(--good)":"var(--bad)";
+    el(svg,"text",{x:8,y:y+h-14,style:"fill:var(--ink-2);font-family:var(--mono);font-size:11.5px"}).textContent=s[0];
+    if(k==="weld") el(svg,"text",{x:8,y:y+h+1,style:"fill:var(--ink-4);font-family:var(--mono);font-size:10px"}).textContent=s[3];
+    const bw=Math.max(2,X(Math.max(v,0))-L);
+    el(svg,"rect",{x:L,y:y,width:bw,height:h,rx:3,style:`fill:${col};opacity:.85`});
+    // A near-full bar leaves no room to the right: at 390px "+0.887" ran off the SVG edge.
+    // Put the value INSIDE the bar when the bar is wide enough to hold it, outside otherwise.
+    const inside = bw > 110;
+    el(svg,"text",{x: inside ? L+bw-10 : L+bw+8, y:y+h-9,
+      "text-anchor": inside ? "end" : "start",
+      style:`fill:${inside?"var(--bg)":col};font-family:var(--mono);font-size:12px;font-weight:700`})
+      .textContent=(v>=0?"+":"")+v.toFixed(3);
+  });
+  document.getElementById("story2").innerHTML = k==="weld"
+    ? 'Both stabilizers land near +0.9, at 161σ and 170σ. Both being positive together is what identifies the state as the cluster state — a single one would not.'
+    : 'Frame bits discarded: <b>−0.015</b> and <b>+0.027</b>. The cluster state does not survive without the classical weld; there is nothing left to identify.';
+}
+segify("seg2",[["weld","with the weld bits"],["off","frame bits discarded"]],r2);
+
+// Room 3 — P(valid) bars with the two floors
+function r3(k){
+  const svg=document.getElementById("viz3"); svg.innerHTML="";
+  const L=104,R=396,top=48,h=28,gap=22;
+  const X=v=>L+(R-L)*v;
+  el(svg,"text",{x:8,y:19,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10.5px"})
+    .textContent="P(landing in the 4-output valid set)";
+  // Floor lines are drawn ONLY across each bar's own band, not the full height: as full-height
+  // rules they ran straight through the sublabels underneath each bar, which no label-overlap
+  // check catches (line vs text) but which is plainly harder to read on a phone.
+  const bands=[];
+  ARMS.forEach((a,i)=>{ if((k==="all")||(k==="cmp"&&a[0]!=="frame-off")) bands.push(top+i*(h+gap)); });
+  bands.forEach(by=>{
+    el(svg,"line",{x1:X(0.0625),y1:by-5,x2:X(0.0625),y2:by+h+5,style:"stroke:var(--edge-2);stroke-width:1.5;stroke-dasharray:3 3"});
+    el(svg,"line",{x1:X(0.25),y1:by-5,x2:X(0.25),y2:by+h+5,style:"stroke:var(--bad);stroke-width:1.5;stroke-dasharray:5 4"});
+  });
+  el(svg,"text",{x:X(0.25),y:194,"text-anchor":"middle",style:"fill:var(--bad);font-family:var(--mono);font-size:10px"}).textContent="0.25 floor";
+  el(svg,"line",{x1:L,y1:34,x2:L,y2:180,style:"stroke:var(--edge-2);stroke-width:2"});
+  ARMS.forEach((a,i)=>{
+    const shown = (k==="all") || (k==="cmp" && a[0]!=="frame-off");
+    if(!shown) return;
+    const y = top+i*(h+gap);
+    const col = a[0]==="logical"?"var(--amber)":(a[0]==="bare"?"var(--cyan)":"var(--bad)");
+    el(svg,"text",{x:8,y:y+h-9,style:"fill:var(--ink-2);font-family:var(--mono);font-size:11.5px"}).textContent=a[0];
+    el(svg,"rect",{x:L,y:y,width:Math.max(2,X(a[1])-L),height:h,rx:3,style:`fill:${col};opacity:.85`});
+    el(svg,"text",{x:X(a[1])+8,y:y+h-9,style:`fill:${col};font-family:var(--mono);font-size:12px;font-weight:700`}).textContent=a[1].toFixed(3);
+    el(svg,"text",{x:8,y:y+h+8,style:"fill:var(--ink-4);font-family:var(--mono);font-size:9.5px"}).textContent=a[2];
+  });
+  document.getElementById("story3").innerHTML = k==="cmp"
+    ? 'Bare <b>0.904</b> over all shots; distributed-logical <b>0.855</b> after post-selection (acceptance 0.760). The logical arm is <em>lower</em>, and that is the shape of the result: 33 two-qubit gates against 7 is a real cost, and at this size it outweighs what error detection returns. The certified claim is that it runs distributed, not that it wins.'
+    : 'With the falsifier: discard the relay frame bits and the distributed run drops to <b>0.242</b> — below even the 0.25 uniform-over-valid floor, i.e. indistinguishable from guessing. Everything the algorithm achieved came through the classical weld.';
+}
+segify("seg3",[["cmp","bare vs distributed"],["all","add the falsifier"]],r3);
+</script>
+</body>
+</html>
