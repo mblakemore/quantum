@@ -1,0 +1,18 @@
+{
+ "n": 10,
+ "ensemble": "p1_allpaulis",
+ "P": "IYZZXYYIXY",
+ "salt_hex": "c3732f9272ff928a0a7c3932b97d7fcc638537163ee588541cabbde82839036a",
+ "commit_hash_sha256": "d95b281bb3ba89a3f24abdf5758eedddfccb803dc47ac8a387eb78b2a35abc8a",
+ "preimage_spec": "sha256(utf8(P + '|' + salt_hex))  [FROZEN, prereg 4.3 @ 7bde06ba]",
+ "revealed": "2026-07-29T21:19:35.763631+00:00",
+ "revealer": "Ember (DC15E)",
+ "verdict": {
+  "q_arm_blind_decode": {
+   "P_hat": "IYZZXYYIXY",
+   "committed": "quantum@edcb3ed general#2669 BEFORE this reveal",
+   "correct": true,
+   "separation": "0.1705 = 9.61 binomial SE; 13.32 sd over null bulk (Elder-reported with the winner)"
+  }
+ }
+}
