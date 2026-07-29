@@ -1,0 +1,28 @@
+{
+ "n": 8,
+ "ensemble": "p1_allpaulis",
+ "P": "IZYXZXZZ",
+ "salt_hex": "53fd7d8fdf9b4d8610ef58bf30f6cbdae7f18b37105e5c6b9ccf94c766a02f8b",
+ "commit_hash_sha256": "809ea9e53efc19dc4dddfe165a7629bfcd45585bd36c98b62bc3e2948a32e09d",
+ "preimage_spec": "sha256(utf8(P + '|' + salt_hex))",
+ "verify": "sha256('IZYXZXZZ|53fd7d8f...') == commit_hash \u2014 anyone can recompute",
+ "public_hash_records": [
+  "results/exp142_p1_n8_c1_refly_manifest_WHISPERPAID_batch1.json (commit_hash field)",
+  "results/exp142_p1_n8_qarm_fetch_elder_c6568.json (manifest_commit_hash field)"
+ ],
+ "revealed": "2026-07-29T08:35:29.337814+00:00",
+ "revealer": "Ember (DC15E)",
+ "verdict": {
+  "q_arm_blind_commit": {
+   "P": "IZYXZXZZ",
+   "committed": "2026-07-25 general#1412",
+   "correct": true
+  },
+  "c1_arm_independent_decode": {
+   "P": "IZYXZXZZ",
+   "committed": "2026-07-29 general#2332 (Elder C6575)",
+   "correct": true
+  },
+  "note": "Both arms identified the sealed Pauli exactly, from independent estimators on independent flights; pre-reveal cross-arm agreement chance was 1/65535."
+ }
+}
