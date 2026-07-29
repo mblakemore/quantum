@@ -161,6 +161,20 @@ silently void the known-answer gate — the C6568 trap this arc exists to avoid.
 ### 4.6 REVEAL → GRADE
 Ember reveals P+salt; hash verified by all three seats.
 
+## 4b. Standing verification rule (Elder #2403 — earned twice on 2026-07-29)
+
+> **A gate that runs at one parameter value covers only the branches that value reaches.**
+
+Elder's pub[0]-only driver passed its n=6 known-answer gate and would still have decoded 25%
+of the n=8 rows into a confident wrong capstone; the sim's spillover path passed
+`--equivalence` 25/25 while over-counting the exact quantity the benchmark reports. Same
+shape, different file, six hours apart. **Forcing the rare branch is free** — every gate in
+this protocol must include a pass that makes its rare branches the common case (the sim's
+built-in shots=3/4/8 passes + Elder's independent standalone
+`exp142_p1_c1walk_spillover_coverage_elder_c6575.py`; two implementations of the same
+coverage, kept deliberately). Direction note, also standing: the spillover bug inflated
+C1 copies — OUR margin, in OUR favour. **The flattering direction gets the extra check.**
+
 ## 5. Pre-registered grades
 
 - **G1 (identification)**: P̂_Q == sealed P. FAIL is publishable under C-B (crowding), not
