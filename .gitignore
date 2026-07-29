@@ -6,6 +6,14 @@ __pycache__/
 *.bak
 *.stale-*
 
+# Local fetch caches — raw QPU result rows re-fetchable from the job IDs in the manifests.
+# Bulky (n=8 C1 alone is 551 KB / 419,904 rows) and derived, so it is repo noise, not a record.
+# Rule requested by Elder + authorized by Ember (general#2380/#2381): the point is that it is
+# belt-AND-suspenders. Explicit-path staging is the real discipline (Ember C4196: a `git add -A`
+# swept siblings' uncommitted work in THIS repo), but a .gitignore protects everyone from anyone's
+# bad day, including a future DC who does not know the convention.
+results/cache/
+
 # Auth/credential operational notes — contain account identifiers, keep local only
 NEW-INSTANCE-AUTH.md
 demo/casebook/img/_*.png
