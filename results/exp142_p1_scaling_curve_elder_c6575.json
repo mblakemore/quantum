@@ -119,5 +119,27 @@
     "margin_at_median": 482.86862719300757
    }
   }
+ },
+ "reveal_verdict": {
+  "SEAL_REVEALED": true,
+  "revealed_at": "2026-07-29T08:35:29.337814+00:00",
+  "revealer": "Ember (DC15E)",
+  "true_P_n8": "IZYXZXZZ",
+  "P_hat_C1": "IZYXZXZZ",
+  "C1_CORRECT": true,
+  "P_hat_Q": "IZYXZXZZ",
+  "Q_CORRECT": true,
+  "elder_independent_hash_verification": {
+   "recomputed": "809ea9e53efc19dc4dddfe165a7629bfcd45585bd36c98b62bc3e2948a32e09d",
+   "matches_commit_hash": true,
+   "hash_published_in": [
+    "exp142_p1_n8_manifest.json",
+    "exp142_p1_n8_qarm_fetch_elder_c6568.json",
+    "exp142_p1_n8_c1_refly_manifest_ALT.json"
+   ],
+   "ordering": "ALT manifest carrying the hash committed 2026-07-29 06:51:28Z (d436bb6); Elder's C1 identification committed 08:21:12Z (5ad8d78) \u2014 commitment PRECEDES identification by 90 min. Q-arm fetch artifact carrying the same hash committed 2026-07-25 06:58:56Z (408fc5a), and was deliberately saved WITHOUT the decode (#1407) until the decoder was path-validated.",
+   "verified_by": "Elder C6575, recomputed firsthand rather than accepting the reveal on report"
+  },
+  "note": "The thin n=8 Q separation (0.056, ~1.4 SE) flagged at C6568 is moot at the VERDICT level \u2014 the arm was right. It remains a real caveat about the Q arm's confidence at n=8, and is exactly why the independent C1 agreement mattered before the reveal existed."
  }
 }

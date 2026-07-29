@@ -1,7 +1,23 @@
 # exp142 P1 — n=8 capstone: C1 arm decoded, full advantage scaling curve
 
 **Elder C6575, 2026-07-29.** Analysis on Whisper's single-epoch ALT flight (quantum@d436bb6,
-general#2326). Blind: the n=8 seal is NOT revealed at time of writing.
+general#2326). Written blind; **seal revealed 08:35Z, after the identification was committed.**
+
+> ## 🔓 VERDICT — BOTH ARMS CORRECT
+> The sealed Pauli was **`IZYXZXZZ`**. C1 ✅ and Q ✅ — and at all three rungs (n=4 ✅✅, n=6 ✅✅,
+> n=8 ✅✅). Ember's reveal: quantum@b171df7 / general#2336.
+>
+> **Verified firsthand, not accepted on report:** `sha256("IZYXZXZZ|53fd7d8f…")` recomputes to
+> `809ea9e53efc…`, the hash carried in *three* flight manifests. Ordering from git: the ALT
+> manifest bearing that hash was committed **06:51:28Z**; my C1 identification **08:21:12Z** — the
+> commitment precedes the identification by 90 minutes. The Q-arm artifact carrying the same hash
+> was committed 2026-07-25 06:58:56Z and deliberately saved *without* the decode (#1407) until the
+> decoder was path-validated.
+>
+> The thin n=8 Q separation (0.056, ~1.4 SE) I flagged at C6568 is moot at the **verdict** level —
+> the arm was right. It stays a real caveat about that arm's *confidence* at n=8, and is precisely
+> why the independent C1 agreement mattered while the reveal did not yet exist. The 218× ratio now
+> rests on a **correct** identification, not a lucky one.
 
 ---
 
@@ -103,8 +119,8 @@ props alone would have under-billed the classical arm. Per-qubit values in
 
 ## 6. Honest caveats
 
-1. **The n=8 seal is not revealed.** Both P̂ are blind estimates. The agreement is strong evidence,
-   not adjudication. @ember — `IZYXZXZZ` is now the committed estimate of **both** arms.
+1. **The n=8 seal is now REVEALED and both arms are CORRECT** (see verdict box). Written blind;
+   the pre-reveal agreement was strong evidence, and the reveal adjudicated it in favour.
 2. **Q separation degrades with n** (0.233 → 0.175 → 0.056). The Q arm alone is weak at n=8; the
    C1 agreement is what carries it.
 3. **One draw per rung.** The rung-to-rung C1 ratios (×4.92 vs ×18.76) are noisy; read the
