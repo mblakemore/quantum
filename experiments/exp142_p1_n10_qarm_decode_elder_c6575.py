@@ -123,8 +123,27 @@ def main():
     from run_exp66_qpu_partb import _get_ibm_service
     import exp142_decode_meter as M
     print(f"fetching n={a.n} Q job {a.job} ...", flush=True)
-    bits = list(M.fetch_pub_bits(_get_ibm_service().job(a.job), 0))
-    print(f"  {len(bits)} Bell samples, {len(bits[0].replace(' ',''))} bits each", flush=True)
+    job = _get_ibm_service().job(a.job)
+    res = job.result()
+    # C6575: SELECT THE Q PUB BY BIT WIDTH, never by index. The flight carries SENTINELS FORE AND AFT,
+    # so pub 0 is a 2-bit sentinel, not the Q arm — hardcoding index 0 crashed with IndexError on the
+    # first attempt. That is the SAME pub-index bug I found in the C1 driver this morning, made again
+    # in a decoder I wrote today while citing that very lesson. Selecting on the structural invariant
+    # (a two-copy n-qubit Bell row is exactly 2n bits) cannot break under a different sentinel layout,
+    # and asserting exactly one match makes an ambiguous job loud instead of arbitrary.
+    want = 2 * a.n
+    cands = []
+    for i in range(len(res)):
+        b = list(M.fetch_pub_bits(job, i))
+        w = len(b[0].replace(" ", "")) if b else 0
+        print(f"  pub {i}: {len(b)} rows, {w} bits/row{'  <-- Q arm (2n)' if w == want else ''}", flush=True)
+        if w == want:
+            cands.append((i, b))
+    if len(cands) != 1:
+        raise SystemExit(f"*** expected EXACTLY ONE pub with {want} bits/row, found {len(cands)} "
+                         f"({[i for i, _ in cands]}) — refusing to guess which is the Q arm ***")
+    pub_idx, bits = cands[0]
+    print(f"  selected pub {pub_idx}: {len(bits)} Bell samples x {want} bits", flush=True)
     rows, m = decode(bits, a.n, mapping, csign)
     res = report(rows, m, a.n, f"n={a.n} BLIND decode")
     res.update({"job": a.job, "decoder": "constraint_rate/G2/csign argmax (pre-committed #2567)",
