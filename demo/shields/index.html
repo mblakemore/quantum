@@ -184,7 +184,10 @@ function draw(key){
     el(viz,"circle",{cx:gx,cy:gy(1.970),r:11,style:"fill:var(--good);stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px var(--good))"});
     el(viz,"text",{x:gx-20,y:gy(1.970)+4,"text-anchor":"end",style:"fill:var(--good);font-family:var(--mono);font-size:13px;font-weight:700"}).textContent="entangled pair 1.970 (57σ)";
     el(viz,"circle",{cx:gx,cy:gy(0.998),r:9,style:"fill:var(--cyan);stroke:var(--bg);stroke-width:2"});
-    el(viz,"text",{x:gx-16,y:gy(0.998)+22,"text-anchor":"end",style:"fill:var(--cyan);font-family:var(--mono);font-size:11px"}).textContent="product pair 0.998 — same shots";
+    // two lines, not one: as a single string this ran off the SVG's left edge on a phone
+    // (SVG text does not wrap, and the CSS-px font-size does not shrink with the chart).
+    el(viz,"text",{x:gx-16,y:gy(0.998)+22,"text-anchor":"end",style:"fill:var(--cyan);font-family:var(--mono);font-size:11px"}).textContent="product pair 0.998";
+    el(viz,"text",{x:gx-16,y:gy(0.998)+36,"text-anchor":"end",style:"fill:var(--cyan);font-family:var(--mono);font-size:11px"}).textContent="same shots";
     el(viz,"line",{x1:gx+22,y1:gy(1.902),x2:gx+34,y2:gy(1.902),style:"stroke:var(--ink-3);stroke-width:2"});
     el(viz,"text",{x:gx+40,y:gy(1.902)+4,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="bare Bell 1.902";
   } else { // iv transporter bars

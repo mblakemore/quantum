@@ -214,7 +214,10 @@ function gauge(svg,val,lo,hi,line,lineLbl,lbl,col){
   el(svg,"text",{x:X(line),y:y+40,"text-anchor":"middle",style:"fill:var(--bad);font-family:var(--mono);font-size:10.5px"}).textContent=lineLbl;
   el(svg,"circle",{cx:X(val),cy:y,r:11,style:`fill:${col};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${col})`});
   el(svg,"text",{x:X(val),y:y-20,"text-anchor":"middle",style:`fill:${col};font-family:var(--mono);font-size:14px;font-weight:700`}).textContent=val.toFixed(3);
-  el(svg,"text",{x:X(val),y:y+40,"text-anchor":"middle",style:`fill:${col};font-family:var(--mono);font-size:10.5px`}).textContent=lbl;
+  // the value's own caption sits a row BELOW the bound caption — when the needle lands near
+  // the bound (dephased K3, the separable arm) the two are centred within a few px of each
+  // other and a shared y made them overlap outright.
+  el(svg,"text",{x:X(val),y:y+58,"text-anchor":"middle",style:`fill:${col};font-family:var(--mono);font-size:10.5px`}).textContent=lbl;
 }
 function segify(id,states,cb){
   const seg=document.getElementById(id);
@@ -266,10 +269,19 @@ function r4(k){
   if(k==="x"){pts=[[0.218,"ψ₊ (+17σ)"],[-0.657,"ψ₋ (29σ)"]];lbl="X-sort: OFF the equator — no definite order";col="var(--good)";}
   else if(k==="echo"){pts=[[0.467,"ψ₊ echoed"],[-0.814,"ψ₋ echoed"]];lbl="echoed late choice: beats measure-now (0.467 vs 0.345)";col="var(--cyan)";}
   else {pts=[[0.076,"sorted +"],[0.003,"sorted −"]];lbl="decohered control: sorting does nothing (mixture behavior)";col="var(--ink-3)";}
+  // stagger captions when two markers land close together — the decohered arm puts both
+  // sorts within ~15px of the equator (that IS the result), which collided their labels.
+  let prevX=null;
   pts.forEach(p=>{
-    el(svg,"circle",{cx:X(p[0]),cy:y,r:10,style:`fill:${col};stroke:var(--bg);stroke-width:2`});
-    el(svg,"text",{x:X(p[0]),y:y-18,"text-anchor":"middle",style:`fill:${col};font-family:var(--mono);font-size:10.5px;font-weight:700`}).textContent=p[1];});
-  el(svg,"text",{x:L,y:16,style:`fill:${col};font-family:var(--mono);font-size:11.5px`}).textContent=lbl;
+    const px=X(p[0]);
+    const ly = (prevX!==null && Math.abs(px-prevX)<70) ? y-36 : y-18;
+    prevX=px;
+    el(svg,"circle",{cx:px,cy:y,r:10,style:`fill:${col};stroke:var(--bg);stroke-width:2`});
+    el(svg,"text",{x:px,y:ly,"text-anchor":"middle",style:`fill:${col};font-family:var(--mono);font-size:10.5px;font-weight:700`}).textContent=p[1];});
+  // start the caption at the SVG's own left edge, not the axis start (L=40): the longest
+  // caption here ran to within 0.2px of the right edge — inside the scanner's tolerance,
+  // so it passed as "not clipped" while being one character from it.
+  el(svg,"text",{x:8,y:16,style:`fill:${col};font-family:var(--mono);font-size:11.5px`}).textContent=lbl;
 }
 segify("seg4",[["x","X-sort (delayed)"],["echo","X-sort (delayed + ECHO)"],["dec","decohered control"]],r4);
 // R5: 229 — the two crossings on one axis, and 229's correlator breakdown
