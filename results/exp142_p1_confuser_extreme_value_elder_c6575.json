@@ -1,0 +1,62 @@
+{
+ "whisper_algebra": "CONFIRMED \u2014 ideal E[rate]=0.5 for all wrong candidates",
+ "null_validation": {
+  "6": {
+   "m": 80,
+   "null_max_q05": 0.675,
+   "null_max_med": 0.7,
+   "null_max_q95": 0.7375,
+   "observed_runner": 0.7,
+   "within_null_90pct": true
+  },
+  "8": {
+   "m": 90,
+   "null_max_q05": 0.7,
+   "null_max_med": 0.7222222222222222,
+   "null_max_q95": 0.7444444444444445,
+   "observed_runner": 0.8,
+   "within_null_90pct": false
+  }
+ },
+ "curve": {
+  "6": {
+   "m": 80,
+   "z_max_analytic": 4.078608094996912,
+   "z_winner": 6.708002686381394,
+   "gap_sd": 2.6293945913844823,
+   "p_argmax_correct": 0.9998726269017255,
+   "p_true_rate": 0.87498875
+  },
+  "8": {
+   "m": 90,
+   "z_max_analytic": 4.709636850130517,
+   "z_winner": 6.7467510107458395,
+   "gap_sd": 2.0371141606153227,
+   "p_argmax_correct": 0.998506495283647,
+   "p_true_rate": 0.855585
+  },
+  "10": {
+   "m": 110,
+   "z_max_analytic": 5.265537514352003,
+   "z_winner": 7.165383390034862,
+   "gap_sd": 1.8998458756828587,
+   "p_argmax_correct": 0.99735343884576,
+   "p_true_rate": 0.8415962499999999
+  }
+ },
+ "finding": "the measured confuser elevation is consistent with the pure finite-sample null (max of 4^n-1 Binomial(m,0.5) estimates); no row-structure or device-noise mechanism is required to explain it",
+ "self_correction": "my crowding-field growth law was a 2-point LINEAR extrapolation of an EXTREME-VALUE statistic. The principled law is E[z_max] ~ sqrt(2n ln4) (grows as sqrt(n)), which makes n=10 materially more feasible than my NO-FLY alarm implied.",
+ "caveat": "exact under INDEPENDENCE of candidate rates; candidates are not strictly independent. Validated against the measured n=6/n=8 runner-ups rather than assumed \u2014 but 2 validation points, and the max is a high-variance statistic.",
+ "retention_used": {
+  "4": 0.849,
+  "6": 0.831,
+  "8": 0.788,
+  "10": 0.757
+ },
+ "BQ": {
+  "4": 60,
+  "6": 80,
+  "8": 90,
+  "10": 110
+ }
+}
