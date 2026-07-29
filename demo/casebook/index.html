@@ -330,7 +330,9 @@
  </div>
 
  <h3 id="log-h">Case log</h3>
- <div class="log" id="log" role="log" aria-live="polite" aria-labelledby="log-h"></div>
+ <!-- tabindex="0": this log scrolls once enough rounds have been played, and a scrollable
+      region that cannot be focused is unreachable by keyboard. Harmless while it still fits. -->
+ <div class="log" id="log" role="log" tabindex="0" aria-live="polite" aria-labelledby="log-h"></div>
 
  <dialog class="badge" id="badge" aria-labelledby="badge-t">
   <p id="badge-t" style="margin-top:0"><strong>⚡ SWITCH BADGE EARNED.</strong> Ten rounds played.</p>

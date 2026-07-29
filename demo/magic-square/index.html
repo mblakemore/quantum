@@ -110,8 +110,13 @@
     font-family:var(--mono);border:1px solid var(--hair);opacity:0;transform:scale(.85);
     transition:opacity .4s ease, transform .4s cubic-bezier(.34,1.4,.5,1)}
   .hc.show{opacity:1;transform:none}
-  .hc .v{font-size:clamp(15px,4vw,20px);font-weight:600;color:var(--ink)}
-  .hc .lab{font-size:9px;color:var(--ink-4)}
+  /* These sit on a GREEN heat background (set per-cell in JS), not on the page background,
+     so the usual dim-ink tokens fail AA badly there: --ink-4 on the strongest green measured
+     1.35:1 and --ink measured 4.07:1 against the 4.5 floor. Both are white here, and the
+     value/label hierarchy comes from size and weight rather than from dimming the label —
+     on these backgrounds there is no headroom to dim anything. */
+  .hc .v{font-size:clamp(15px,4vw,20px);font-weight:600;color:#fff}
+  .hc .lab{font-size:10px;letter-spacing:.06em;color:#fff}
   @media (prefers-reduced-motion: reduce){.hc{transition:none}}
   .readouts{display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:22px}
   .ro{font-family:var(--mono)}
@@ -300,7 +305,10 @@
       var w = WIN[r][c];
       // green intensity scaled by margin above 8/9 (0.889..0.985)
       var t = Math.max(0, Math.min(1, (w - 0.889) / (0.985 - 0.889)));
-      d.style.background = "color-mix(in srgb, var(--good) " + (16 + t * 40).toFixed(0) + "%, var(--card))";
+      // top of the range capped at 50% (was 56%): the lightest green left white text at only
+      // 4.73:1, a pass by 0.23 — right, but thin. 50% gives ~5.4:1 with no visible loss of
+      // heat range. The encoding is unchanged, only its ceiling.
+      d.style.background = "color-mix(in srgb, var(--good) " + (16 + t * 34).toFixed(0) + "%, var(--card))";
       d.innerHTML = '<span class="v">' + (w * 100).toFixed(1) + '%</span><span class="lab">r' + (r+1) + 'c' + (c+1) + '</span>';
       heat.appendChild(d); cells.push(d);
     }
