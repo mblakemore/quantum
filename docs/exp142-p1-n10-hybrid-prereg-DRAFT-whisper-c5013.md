@@ -63,18 +63,29 @@ committed together, **before any real P exists**:
 - **(a) C1 benchmark**: walk-median C1 copies + 90% interval over the M draws.
 - **(b) Q-FEASIBILITY GATE** (Elder #2368 — pre-flight, replaces the 3-point extrapolation):
   for each draw, compute the best-confuser true constraint rate vs the true-P rate.
-  **Noise model (A2, pinned)**: Q-side gate computations use the **hardware-calibrated α**
-  (value stated at freeze; source: calibrated from the executed n=6/8 confusion spectra,
-  α ≈ 0.95). A noiseless gate would compute winner rate 1.0, trivially pass, and predict
-  nothing — the crowding phenomenon exists BECAUSE of the hardware α. The **C1 benchmark
-  stays noiseless-ideal**; that asymmetry IS the floor argument and is intentional.
-  - **NO-FLY rule**: if best-confuser rate ≥ true-P rate in **> [DECISION-POINT: proposed 5%]**
-    of draws, n=10 is not identifiable by this estimator at ANY budget (both z scale as √m —
-    more samples converge to the wrong Pauli). **We do not spend the QPU.** The gate result
-    itself publishes as the finding: crowding kills single-estimator identifiability at n=10.
+  **Noise model (A2 + A3, pinned)**: Q-side gate rates = **α-ideal × hardware retention**.
+  Two separate degradations, both required:
+  (i) α = 0.95 by design → ideal two-copy Bell rate (1+α²)/2 = 0.9512, not 1.0 (A2 —
+  a noiseless gate would compute winner rate 1.0, trivially pass, and predict nothing);
+  (ii) hardware retention on the deviation-from-0.5, calibrated on the executed rungs
+  (n=4: 0.849, n=6: 0.831, n=8: 0.788; declining ~−0.015/qubit) → **frozen n=10 retention
+  = 0.757 (the LOW end of the extrapolation)**. An α-pinned but noise-free gate sees a gap
+  ~1.32× larger than the flight will and says FLY when reality may be NO-FLY — the wrong
+  failure direction for a safety gate. Both winner and confuser deviations scale by the same
+  retention, so the gap scales with it (checked on the real n=8 pair: measured gap 0.0556,
+  de-noised 0.0706 = 1.27×). The **C1 benchmark stays noiseless-ideal**; that asymmetry IS
+  the floor argument and is intentional — conservative on the C1 side, realistic on the Q
+  side, each conservative in its own claim's direction.
+  - **NO-FLY rule**: if best-confuser rate ≥ true-P rate in **> 5%** of draws, n=10 is not
+    identifiable by this estimator at ANY budget (both z scale as √m — more samples converge
+    to the wrong Pauli). **We do not spend the QPU.** The gate result itself publishes as the
+    finding: crowding kills single-estimator identifiability at n=10.
+  - **INCONCLUSIVE band (A5)**: observed NO-FLY fraction in **3–8%** → M=200's binomial SE
+    (~1.5pp) cannot separate 5% from 8%; **raise M to 1000+ and re-run. Never auto-FLY on an
+    ambiguous read** — a safety gate must not default to the permissive side. Outside the
+    band, decide as written.
   - **FLY rule**: otherwise, the measured confuser gap DIRECTLY sets the Bell-sample budget:
-    smallest m such that winner-vs-best-confuser separation ≥ **[DECISION-POINT: proposed 3 sd]**
-    in ≥ **[DECISION-POINT: proposed 95%]** of draws.
+    smallest m such that winner-vs-best-confuser separation ≥ **3 sd** in ≥ **95%** of draws.
   - Placeholder for planning only (geometric-decay + 3 sd): ~3,600 Bell samples ≈ 7,200 copies —
     **provisional until the gate runs; the gate number governs.**
 
@@ -93,7 +104,13 @@ measured, exp142b costing); ALT has 440/600s free this window. Pre-launch: `ps a
 coordination claim per C4038.
 
 ### 4.5 BLIND DECODE
-Elder identifies P̂_Q blind (frozen decoder, LLR-scored per §3), commits P̂_Q before reveal.
+Elder identifies P̂_Q blind using the **frozen Q decoder (constraint_rate/G2/csign)** — the
+decoder validated by the n=6 known-answer gate (reproduces IYXZXY @0.875, runner-up ZZZYIY
+@0.700) — and commits P̂_Q before reveal. **(A4)**: §3's LLR rule does NOT apply here — it
+exists for cross-candidate comparisons with UNEQUAL coverage (C1's m/3^w rows); in the Q arm
+every Bell sample is evaluated against every candidate, coverage is equal by construction,
+and raw-rate argmax is correct (LLR ranking is identical anyway). Swapping decoders would
+silently void the known-answer gate — the C6568 trap this arc exists to avoid.
 
 ### 4.6 REVEAL → GRADE
 Ember reveals P+salt; hash verified by all three seats.
@@ -122,12 +139,13 @@ Ember reveals P+salt; hash verified by all three seats.
 (The sim seed is sha256 of the freeze commit hash — PUBLIC to everyone by design; it is not,
 and cannot be, a secret from any seat.)
 
-## 7. Decision points open at draft (to be frozen at ratification)
+## 7. Decision points — ratification status (Ember #2373, Elder #2376)
 
-1. NO-FLY material fraction (proposed **5%**)
-2. Budget separation bar (proposed **3 sd** in ≥ **95%** of draws)
-3. Sim code pin (commit hash of the sim implementing §3's walk + §4.2's gate)
-4. Backend for the Q arm (proposed: same device family as executed rungs; name at freeze)
+1. NO-FLY material fraction: **5% — RATIFIED** (with A5 inconclusive band 3–8% → M≥1000 re-run)
+2. Budget separation bar: **3 sd in ≥95% of draws — RATIFIED**
+3. Sim code pin: **PENDING code review** (both seats review before the freeze commit;
+   Elder specifically reviews the gate's noise handling in code, not only in prose)
+4. Backend for the Q arm: same device family as executed rungs — **name at freeze**
 
 **Creator gate**: flight (§4.4) does not launch until Creator has seen the frozen prereg and
 the §4.2 gate result. A NO-FLY gate outcome goes to Creator as a finding, not a failure.
