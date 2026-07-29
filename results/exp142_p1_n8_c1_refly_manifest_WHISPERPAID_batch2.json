@@ -15,8 +15,8 @@
   18
  ],
  "readout_cal_jobs": {
-  "cal0": "d9kphprjf64c739iham0",
-  "cal1": "d9kphqbjf64c739ihamg"
+  "cal0": "d9kpa3abr2fc73e7m36g",
+  "cal1": "d9kpa3jjf64c739igvq0"
  },
  "readout_cal_spec": "cal0=prep|0> measure P(read1)=p01; cal1=prep|1> measure P(read0)=p10; per-qubit on conv_layout (this order). Elder builds per-qubit {p01,p10} -> p0_of weight-dependent p_flip; normalize C1/Q margin to this C1-epoch q + Q-vs-C1 gap.",
  "q_backend_props_per_qubit": {
@@ -68,7 +68,7 @@
  "batch_chunks": 4,
  "jobs": [
   {
-   "job_id": "d9kphsbjf64c739ihap0",
+   "job_id": "d9kpa5oii2cc73eggn8g",
    "kind": "c1_covering",
    "chunks": 4,
    "batch": 0
