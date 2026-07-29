@@ -120,18 +120,14 @@ def main():
     cal0_job = sampler.run([(tcal0, None, CAL_SHOTS)]); cal1_job = sampler.run([(tcal1, None, CAL_SHOTS)])
     readout_cal_jobs = {"cal0": cal0_job.job_id(), "cal1": cal1_job.job_id()}
     print(f"  cal0={readout_cal_jobs['cal0']} cal1={readout_cal_jobs['cal1']}")
-    # 2. cancel old queued C1 chunks (done ones no-op)
+    # 2. SKIPPED on WhisperPaid re-runs (Whisper C5012): the 27 old open-instance chunks were
+    # already cancelled directly via the API on 2026-07-28 (all confirmed CANCELLED). Re-running
+    # this loop against a WhisperPaid-scoped service handle can't even reach those open-instance
+    # job IDs (instance mismatch -> each lookup fails slowly) -- it just burns the exec timeout
+    # for nothing, which is exactly what happened on the first repeat run (timed out, submitted
+    # nothing). No-op here by design, not an oversight.
     old = json.load(open(OLD_MANIFEST))
-    old_c1 = [j["job_id"] for j in old["jobs"] if j["kind"] == "c1_covering"]
-    cancelled = 0
-    for jid in old_c1:
-        try:
-            j = svc.job(jid)
-            if str(j.status()) in ("QUEUED", "INITIALIZING", "VALIDATING"):
-                j.cancel(); cancelled += 1
-        except Exception:
-            pass
-    print(f"  cancelled {cancelled} old queued C1 chunks (of {len(old_c1)})")
+    print(f"  (cancel-old-chunks step skipped -- already handled directly against open-instance)")
     # 3. transpile C1 pubs on conv_layout, submit in small batches
     tc1 = [(_t(circ, backend, initial_layout=conv_layout, optimization_level=1, seed_transpiler=142),
             rows, shots) for (circ, rows, shots) in c1pubs]
