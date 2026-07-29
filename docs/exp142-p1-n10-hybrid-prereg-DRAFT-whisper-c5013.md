@@ -22,12 +22,21 @@ prediction.
 - **C-A (scaling extension)**: executed Q copies at n=10 vs the pre-committed simulated C1
   walk-median, reported as median-with-interval, extending the 3-rung separation curve by one
   labeled hybrid point.
-- **C-B (crowding-field mechanism — the physics payload)**: Elder's pre-registered prediction:
-  winner z stays pinned near ~6.7 (hardware-calibrated α ≈ 0.95 — value and source pinned in
-  §4.2b) while the best-confuser z climbs
-  (3.6 → 5.69 measured at n=6→8; naive extrapolation lands ~7.8 at n=10, ABOVE the winner).
-  Whether the field crowds out identifiability at n=10 is the question; **either answer is a
-  publishable finding** (honest-negatives rule).
+- **C-B (crowding-field mechanism — the physics payload)**: REVISED per Elder #2390
+  (quantum@4b82b1c), which WITHDREW the original linear-extrapolation alarm (~7.8 confuser z
+  at n=10, the 14×–417× budget demand) as a 2-point linear fit to an extreme-value statistic
+  — the same weak-link class the gate was introduced to replace. The principled null law is
+  **E[z_max] ~ √(2n·ln4)** (√n growth, not linear): expected null-max z at n=10 ≈ 5.27 vs
+  winner ≈ 7.17 (hardware-calibrated α ≈ 0.95 — value and source pinned in §4.2b), gap
+  ≈ 1.90; P(argmax correct) at the frozen BQ[10]=110 ≈ 0.9974. Even carrying the full
+  measured n=8 excess forward, the winner leads by +0.39 to +0.77 sd.
+  **Pre-registered expectation: n=10 REPEATS the n=8 thinness — expected gate verdict is
+  FLY at or near the frozen budget, not NO-FLY.** Extreme-value discipline (Elder #2390):
+  the n=6 runner-up (0.700) sits EXACTLY at the null-max median — pure extreme-value noise,
+  NOT evidence, and must not be fitted as a trend point. The n=8 runner-up (0.800) is above
+  the null-max 95th percentile — a REAL, uncharacterised excess of +0.078. One data point of
+  real structure, not two. Whether the sim explains that excess is the mechanism question;
+  **either answer is a publishable finding** (honest-negatives rule).
 
 ## 3. Classical baseline (the baseline choice IS the claim — Elder C6566)
 
@@ -91,9 +100,13 @@ committed together, **before any real P exists**:
   their combination at n=10 before any QPU is spent.
 
 - **(c) SIM VALIDATION GATE (known-answer, runs before (a) and (b) are trusted)**: the Q-side
-  sim must REPRODUCE the measured n=6 and n=8 confusion spectra from the executed rungs —
-  winner rate, runner-up rate, and best-confuser z within stated tolerances (frozen with the
-  sim code pin) — before its n=10 output is valid. This is the decoder known-answer discipline
+  sim must REPRODUCE the measured n=6 and n=8 confusion spectra from the executed rungs.
+  **Sharpened target (Elder #2390)**: the discriminating quantity is the **n=8 EXCESS ABOVE
+  the extreme-value null (+0.078)** — reproducing the raw runner-up rate 0.800 is trivial
+  when the null-max alone gives 0.722. The winner side and the confuser side of the gate get
+  **separate treatments** (winner: α-ideal × retention; confuser: extreme-value null +
+  whatever mechanism explains the n=8 excess) — they must NOT share one noise knob.
+  Tolerances frozen with the sim code pin — This is the decoder known-answer discipline
   (§4.5) applied to the sim itself. **Mechanism note driving this**: for the ideal ensemble
   state (I+αP)/2ⁿ, every wrong candidate's constraint rate is analytically EXACTLY 0.5 (the
   symplectic character sum vanishes for Q ∉ {I, P}) — so the measured confuser elevation
