@@ -134,6 +134,13 @@ committed together, **before any real P exists**:
     must not exist). Otherwise the **flight budget freezes at the box's CONSERVATIVE
     CORNER, not the pinned point** — buying out the whole box costs seconds of QPU and
     removes the one place the extrapolation could still bite.
+    **Reachability note (Elder #2431, fire-tested)**: all three verdict guards were forced
+    to FIRE with out-of-box inputs before ratification. INCONCLUSIVE-PARAMETRIC is
+    **dormant-by-construction inside THIS frozen box** — box-max excess 0.160 sits below
+    the NO-FLY threshold at every box retention (0.271 at r=0.60); that is the 4.4× margin
+    restated, not a defect. The guard protects a FUTURE re-run with wider or
+    worse-calibrated parameters. A referee who tests reachability inside the frozen box
+    will find it silent; this sentence is why.
   - **Excess accounting (Elder #2416(b), a named choice)**: the +0.078 excess is runner-up
     minus null-MEDIAN, so it contains ~0.022 of ordinary null-max spread on top of the
     ~0.056 genuinely above the null 95th; carrying the full 0.078 as a TRUE-rate elevation
