@@ -1,0 +1,167 @@
+{
+ "card": "exp142_p1_n10_q_feasibility_gate",
+ "cycle": "C5013",
+ "seed_source_commit": "7bde06ba3a1344cdeb95fe277b8fad91944cc43c",
+ "n": 10,
+ "model": "draw-degenerate (uniform-P symmetry; retention per-rung) \u2014 uncertainty is parametric",
+ "winner_true_rate": 0.8417,
+ "retention_used": 0.7573,
+ "retention_note": "central linear extrapolation, frozen per Elder #2380 (F1)",
+ "retention_source": "exp142_p1_q_noise_retention_elder_c6575 (A3 artifact)",
+ "confuser_model": "extreme-value null (K=1048575) + worst-case n=8 excess 0.078 (contains ~0.022 null spread \u2014 double-counted, stricter direction, #2416(b))",
+ "VERDICT": "FLY",
+ "verdict_robustness": {
+  "excess_needed_to_flip": 0.3418,
+  "excess_carried": 0.078,
+  "excess_margin_x": 4.38,
+  "retention_needed_to_flip": 0.1729,
+  "retention_used": 0.7573,
+  "retention_margin_x": 4.38
+ },
+ "FLIGHT_BUDGET_bell_samples": 528,
+ "flight_budget_rule": "CONSERVATIVE CORNER of the parametric box (Elder #2416), P(sep >= 3.0 sd) >= 0.95",
+ "pinned_point_budget": 176,
+ "parametric_box": {
+  "retention": [
+   0.6,
+   0.8
+  ],
+  "excess": [
+   0.056,
+   0.16
+  ],
+  "grid": "5x5",
+  "sweep": [
+   {
+    "retention": 0.6,
+    "excess": 0.056,
+    "budget": 294
+   },
+   {
+    "retention": 0.6,
+    "excess": 0.082,
+    "budget": 295
+   },
+   {
+    "retention": 0.6,
+    "excess": 0.108,
+    "budget": 299
+   },
+   {
+    "retention": 0.6,
+    "excess": 0.134,
+    "budget": 347
+   },
+   {
+    "retention": 0.6,
+    "excess": 0.16,
+    "budget": 528
+   },
+   {
+    "retention": 0.65,
+    "excess": 0.056,
+    "budget": 248
+   },
+   {
+    "retention": 0.65,
+    "excess": 0.082,
+    "budget": 249
+   },
+   {
+    "retention": 0.65,
+    "excess": 0.108,
+    "budget": 251
+   },
+   {
+    "retention": 0.65,
+    "excess": 0.134,
+    "budget": 269
+   },
+   {
+    "retention": 0.65,
+    "excess": 0.16,
+    "budget": 360
+   },
+   {
+    "retention": 0.7,
+    "excess": 0.056,
+    "budget": 211
+   },
+   {
+    "retention": 0.7,
+    "excess": 0.082,
+    "budget": 211
+   },
+   {
+    "retention": 0.7,
+    "excess": 0.108,
+    "budget": 212
+   },
+   {
+    "retention": 0.7,
+    "excess": 0.134,
+    "budget": 222
+   },
+   {
+    "retention": 0.7,
+    "excess": 0.16,
+    "budget": 255
+   },
+   {
+    "retention": 0.75,
+    "excess": 0.056,
+    "budget": 183
+   },
+   {
+    "retention": 0.75,
+    "excess": 0.082,
+    "budget": 184
+   },
+   {
+    "retention": 0.75,
+    "excess": 0.108,
+    "budget": 184
+   },
+   {
+    "retention": 0.75,
+    "excess": 0.134,
+    "budget": 186
+   },
+   {
+    "retention": 0.75,
+    "excess": 0.16,
+    "budget": 203
+   },
+   {
+    "retention": 0.8,
+    "excess": 0.056,
+    "budget": 156
+   },
+   {
+    "retention": 0.8,
+    "excess": 0.082,
+    "budget": 156
+   },
+   {
+    "retention": 0.8,
+    "excess": 0.108,
+    "budget": 157
+   },
+   {
+    "retention": 0.8,
+    "excess": 0.134,
+    "budget": 158
+   },
+   {
+    "retention": 0.8,
+    "excess": 0.16,
+    "budget": 167
+   }
+  ]
+ },
+ "frozen_budget_reference": {
+  "m": 110,
+  "p_argmax_correct_null": 0.9973894876673808,
+  "p_argmax_correct_worstcase": 0.997386955104317
+ }
+}
