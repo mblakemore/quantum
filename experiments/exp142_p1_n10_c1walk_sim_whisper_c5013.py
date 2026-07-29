@@ -45,8 +45,11 @@ from exp142_p1_c1_decoder_elder_c5003 import (          # FROZEN — imported, n
     candidates, covering_decode, covers, full_weight_bases, p0_of, support, wald_AB)
 
 ALPHA = 0.95
-SHOTS_PER_BASIS = 256      # ample: wrong-candidate SPRT drift ~-0.82/copy to B~-5.3;
-                           # true-P drift ~+0.59/copy to A~18.5 (~31 copies at n=10)
+SHOTS_PER_BASIS = 64       # mirrors the FLOWN emission geometry (C_PER_BASIS=64, Elder #2397).
+                           # Numerically ample: wrong-candidate SPRT drift ~-0.82/copy to B~-5.3
+                           # (~7 copies typ.); true-P drift ~+0.59/copy to A~18.5 (~31 copies at
+                           # n=10). Spillover past one basis is astronomically rare at 64 — and
+                           # the equivalence gate FORCES that branch anyway (shots=3/4/8 passes).
 
 LETTERS = "IXYZ"
 
@@ -57,10 +60,14 @@ def _key(master_hex: str, draw: int, basis: str) -> np.random.Philox:
     return np.random.Philox(key=int.from_bytes(h[:8], "big"))
 
 
-def _basis_block(master_hex, draw, basis, P, n, shots=SHOTS_PER_BASIS):
+def _basis_block(master_hex, draw, basis, P, n, shots=None):
     """Shots x n uint8 bit block for one full-weight basis — THE single source of bits
     for both the frozen decoder path and the vectorized path (equivalence by shared
-    generation, not by parallel implementations of the noise model)."""
+    generation, not by parallel implementations of the noise model).
+    shots=None reads the module constant AT CALL TIME so the equivalence gate can force
+    low-shots spillover coverage (Elder #2397) through every code path uniformly."""
+    if shots is None:
+        shots = SHOTS_PER_BASIS
     gen = np.random.Generator(_key(master_hex, draw, basis))
     bits = (gen.random((shots, n)) < 0.5).astype(np.uint8)
     if covers(basis, P):                                   # bias supp(P) parity to even w.p. (1+a)/2
@@ -200,21 +207,35 @@ def vector_walk(master_hex, draw, n, P, chunk=8192):
 # ---------------------------------------------------------------- equivalence gate
 def equivalence_gate():
     """Frozen covering_decode vs vector_walk on IDENTICAL fw_shots: exact match required.
-    n=4 x 20 draws, n=6 x 5 draws (frozen decoder cost bounds the count)."""
+
+    TWO COVERAGE REGIMES (Elder #2397): the production shots/basis never exercises the
+    spillover slow path (P~1e-30), so a gate run only at production parameters validates
+    the fast path and reports PASS for the whole file — the pub[0]-only failure class.
+    The low-shots passes FORCE spillover (basis exhaustion is common at 3-8 shots) so the
+    slow path earns its PASS empirically, every run, not by argument."""
+    global SHOTS_PER_BASIS
     master = hashlib.sha256(b"equivalence-gate-fixed-test-seed").hexdigest()
     all_ok = True
-    for n, draws in [(4, 20), (6, 5)]:
-        for d in range(draws):
-            P = draw_P(master, d, n)
-            fw = {b: [list(map(int, r)) for r in _basis_block(master, d, b, P, n)]
-                  for b in full_weight_bases(n)}
-            frozen = covering_decode(fw, n, ALPHA, 0.0)
-            fast = vector_walk(master, d, n, P)
-            ok = (frozen["P_hat"] == fast["P_hat"]
-                  and frozen["C1_distinct_copies"] == fast["C1_distinct_copies"])
-            all_ok &= ok
-            print(f"  n={n} draw={d:2d} true={P}  frozen=({frozen['P_hat']},{frozen['C1_distinct_copies']})"
-                  f"  vector=({fast['P_hat']},{fast['C1_distinct_copies']})  {'OK' if ok else 'MISMATCH'}")
+    passes = [(4, 20, SHOTS_PER_BASIS), (6, 5, SHOTS_PER_BASIS),   # production geometry
+              (4, 16, 8), (4, 16, 4), (4, 16, 3)]                  # forced-spillover coverage
+    saved = SHOTS_PER_BASIS
+    try:
+        for n, draws, shots in passes:
+            SHOTS_PER_BASIS = shots
+            for d in range(draws):
+                P = draw_P(master, d, n)
+                fw = {b: [list(map(int, r)) for r in _basis_block(master, d, b, P, n)]
+                      for b in full_weight_bases(n)}
+                frozen = covering_decode(fw, n, ALPHA, 0.0)
+                fast = vector_walk(master, d, n, P)
+                ok = (frozen["P_hat"] == fast["P_hat"]
+                      and frozen["C1_distinct_copies"] == fast["C1_distinct_copies"])
+                all_ok &= ok
+                print(f"  n={n} shots={shots:3d} draw={d:2d} true={P}  "
+                      f"frozen=({frozen['P_hat']},{frozen['C1_distinct_copies']})"
+                      f"  vector=({fast['P_hat']},{fast['C1_distinct_copies']})  {'OK' if ok else 'MISMATCH'}")
+    finally:
+        SHOTS_PER_BASIS = saved
     print(f"\nEQUIVALENCE GATE: {'PASS' if all_ok else 'FAIL'}")
     return all_ok
 
