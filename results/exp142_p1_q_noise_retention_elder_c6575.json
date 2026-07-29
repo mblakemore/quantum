@@ -21,5 +21,25 @@
  "gap_inflation_if_omitted": 1.3204096561814187,
  "PREREG_USE": "Amendment A3 (general#2376): multiply alpha-ideal rates by this retention BEFORE evaluating the n=10 NO-FLY gate. Use the LOW end.",
  "direction": "omitting it makes the gate ANTI-CONSERVATIVE (sees a larger gap than the flight delivers -> says FLY when reality may be NO-FLY). Opposite to the C1 side, where noiseless-ideal is correctly conservative.",
- "caveat": "3-point linear extrapolation in n \u2014 the same weak-link class the gate itself was introduced to replace. It is a CORRECTION to a conservative direction, not a headline number; if the sim can model the device noise directly, prefer that over this extrapolation."
+ "caveat": "3-point linear extrapolation in n \u2014 the same weak-link class the gate itself was introduced to replace. It is a CORRECTION to a conservative direction, not a headline number; if the sim can model the device noise directly, prefer that over this extrapolation.",
+ "REFIT_4_RUNGS_c6575": {
+  "measured_true_P_rates": {
+   "4": 0.8833,
+   "6": 0.875,
+   "8": 0.8556,
+   "10": 0.7898
+  },
+  "retention_per_rung": {
+   "4": 0.8494182825484765,
+   "6": 0.8310249307479226,
+   "8": 0.7880332409972302,
+   "10": 0.6422160664819945
+  },
+  "n10_source": "flown job d9l38b8ii2cc73egv1i0, blind-decoded and REVEALED correct (IYZZXYYIXY)",
+  "my_3rung_prediction": 0.7573407202216069,
+  "actual": 0.6422160664819945,
+  "error_direction": "OPTIMISTIC (permissive) \u2014 predicted higher retention than delivered",
+  "shape": "decline ACCELERATES: deltas -0.018 / -0.043 / -0.146 per +2n. A 3-point LINEAR fit was structurally blind to this, which is the weak-link class I flagged when shipping it.",
+  "guidance": "Do NOT reuse the 3-rung linear extrapolation. Use the 4-rung shape, take the LOW end, and buy the conservative corner of the parametric box \u2014 that choice, not the model, is what absorbed my 15% error at n=10."
+ }
 }
