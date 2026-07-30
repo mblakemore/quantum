@@ -62,5 +62,32 @@
  },
  "NO_OVERCORRECTION": "'cannot reject constancy' at k=4 is WEAK evidence OF constancy. The chi2 needs observed sd ~1.6x the within-SE to fire, so a true day-dependence with sigma up to ~0.036 would go undetected; observed excess is 0.026, inside that blind spot. Honest statement: 'no detectable day-dependence, power to detect sigma >~0.036' \u2014 NOT 'the n-effect is constant'.",
  "observation_no_mechanism": "the five n=14 retentions (0.5562/0.6105/0.5584/0.5627/0.6116) cluster 3 low and 2 high with little between. Could be a two-state calibration pattern or could be five points doing what five points do. NO cause named \u2014 n=5 with a suggestive gap is exactly the shape of the mechanism-on-tiny-n error. Recorded so a later k can check it.",
- "net": "curve in better standing than at midday: n-effect looks stable, per-flight term bounded <0.065 at n=14. The n=14 outlier remains UNATTRIBUTED (pairs 1 and 4 reproduce it high, 2 and 3 land on the original). D0 untouched; no n_max licensed."
+ "net": "curve in better standing than at midday: n-effect looks stable, per-flight term bounded <0.065 at n=14. The n=14 outlier remains UNATTRIBUTED (pairs 1 and 4 reproduce it high, 2 and 3 land on the original). D0 untouched; no n_max licensed.",
+ "level_shift_test": {
+  "hypothesis": "Ember general#2995: a COMMON day shift moves both rungs together => the two rungs' deviations should CORRELATE across pairs. This is the BENIGN case (curve moves bodily, shape survives, ladder recoverable after a level correction).",
+  "deviations": {
+   "pair1": [
+    0.0011,
+    0.0247
+   ],
+   "pair2": [
+    0.0261,
+    -0.0274
+   ],
+   "pair3": [
+    -0.0196,
+    -0.0232
+   ],
+   "pair4": [
+    -0.0076,
+    0.0258
+   ]
+  },
+  "pearson_r": -0.254,
+  "n_points": 4,
+  "reading": "NEGATIVE \u2014 common-shift signature absent; pairs 2 and 4 move the two rungs in OPPOSITE directions, which a level term cannot do.",
+  "CAVEAT_LARGER_THAN_THE_RESULT": "r from n=4 is almost uninformative; its 95% CI spans essentially (-1,+1). This RULES OUT NOTHING. Recorded as FAILING TO SUPPORT the benign reading, explicitly not as evidence against it.",
+  "counterweight": "Ember's observation that both new pairs came in ABOVE historical at both rungs remains true and is the strongest thing pointing the benign way."
+ },
+ "combined_statement": "two questions, two statistics, BOTH BOUNDED RATHER THAN RESOLVED: no detectable n-dependence (power to sigma~0.036), per-flight term below ~0.065 at n=14, no confirmed level-shift structure to correct for. The curve is USABLE WITH A STATED ERROR TERM and not interpretable in the strong sense \u2014 better than midday, short of what an n_max claim needs."
 }
