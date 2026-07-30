@@ -29,5 +29,33 @@
  "fwht_comparison": {
   "n14_seconds": 16.3,
   "speedup_vs_measured_exhaustive": 423
+ },
+ "threading_MEASURED": {
+  "sweep_n15_production_geometry": {
+   "1": 96.6,
+   "2": 74.3,
+   "4": 65.9,
+   "8": 64.3,
+   "16": 63.7
+  },
+  "speedup_cap": 1.52,
+  "saturates_at_workers": 4,
+  "cores_available": 16,
+  "result_invariance": "winner identical at every worker count, verified against the revealed n=13 answer",
+  "corrected_threaded_projection_hours": {
+   "16": 26.7,
+   "17": 123.0
+  },
+  "note": "threading takes about a third off and stops. It does NOT change the out-of-core build calculus."
+ },
+ "mechanism_of_the_7pct_excess": {
+  "candidates": [
+   "noise on two points",
+   "memory hierarchy (working set outgrowing cache levels)"
+  ],
+  "NEW_EVIDENCE_FOR_MEMORY_HIERARCHY": "the threading saturation at 1.52x across 16 cores shows the butterfly is MEMORY-BANDWIDTH-BOUND, not compute-bound. That is the same physical fact that would make the per-rung ratio exceed the arithmetic-operation count: if the working set outruns the memory system then extra cores buy nothing AND each 4x larger array degrades further as it exhausts successive cache levels. Measured on a different axis, and before the hypothesis existed.",
+  "consequence": "4.60x should be treated as a FLOOR and the n>=17 figures as OPTIMISTIC \u2014 the opposite of the reassuring direction the table correction alone pointed in.",
+  "blind_prediction_registered": "Ember general#2924: n=15 exhaustive near 8.2 h => noise; near 8.8 h or above => structural, raise n>=17. Recorded BEFORE the fact.",
+  "PROBLEM": "Item 1 makes the FWHT the decoder of record from n=15, so nobody has a reason to run the 8-hour exhaustive again \u2014 the third point that settles the mechanism never gets collected. The scaling law of the retired tool becomes unfalsifiable the moment it is retired. Options: (a) run n=15 exhaustive once as the scaling test + a sixth FWHT cross-check, or (b) strike the n>=15 projections from the amendment rather than carry numbers nobody will check."
  }
 }
