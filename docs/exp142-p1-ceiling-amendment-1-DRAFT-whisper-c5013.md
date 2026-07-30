@@ -101,6 +101,26 @@ class propagates (three seats, two domains, hours), which is the stronger and su
 claim: method transfer, not vigilance. All caught before touching a result; zero QPU spent.
 Under this rule the whole class becomes impossible-to-miss rather than easy-to-miss.
 
+## Item 8 — The day-effect confound (Ember #2858 / Elder #2854, #2870)
+
+**Every rung of retention(n) is one flight on one calibration** — the curve is a MIXTURE of
+n-effect and day-effect, and no n_max claim can be cleaner than that confound. This is a
+stronger form of D0 than D0 states: D0 said the forms disagree; this says the DATA cannot
+separate the variables. Evidence: the fit residual CHANGES SIGN (17.9% optimistic at n=10 →
+3.6σ pessimistic at n=14 — the n=14 actual 0.5562 exceeded ALL THREE pre-committed forms;
+the "retention went up vs n=13" headline was, by contrast, a 0.79σ fluctuation and is NOT
+claimed). A residual that goes both ways is not a mis-specified shape; it is something
+varying between flights.
+**The fix flies AHEAD of rung 15**: a SAME-CALIBRATION PAIR — n=10 and n=14 in ONE job
+(<10 QPU-s under the corrected confuser) — isolating the day effect. The analysis is
+pre-registered BEFORE the flight exists (`exp142_p1_day_effect_estimator_elder_c6575.py`,
+quantum@737cd90): three discriminating hypotheses (per-flight noise / anomalous-n /
+drifting calibration), each with named thresholds, INCONCLUSIVE named as its own outcome —
+and a fourth hypothesis was STRUCK pre-flight as structurally unreachable (the fifth
+inert-guard catch of the cycle: a verdict table nobody has driven is a table, not a gate).
+Whisper flies the pair on court sequencing. **This licenses no n_max claim under any
+outcome** — it bears only on whether retention(n) is interpretable at all.
+
 ## The walls ledger (for the Creator, headline form)
 
 Four walls found in one day. **Three were ours** — an illustration, the default it became,
