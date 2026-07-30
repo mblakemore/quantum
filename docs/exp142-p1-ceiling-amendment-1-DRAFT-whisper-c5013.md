@@ -87,13 +87,19 @@ winner-meets-fixed-confuser crossing is a BUDGET stop in costume.
 Composed with the admissibility criterion: an EXACT tool gets result-invariance under its
 defaults for free, so its defaults may remain (proof obligation: the invariance audit, e.g.
 bit-identical across chunk/top sweeps); an approximate or configuring tool cannot, so its
-result-determining parameters must be required. The evidence is the day's tally: five
-self-inflicted artifacts (the 40.0 illustration → gate default; the never-numbered rung
-cap; the transplanted 0.160; the 4096 forcing default that no-opped its own gate while
-printing MATCH; the 9× effective-N reconstruction artifact caught pre-send) — all
-conservative or benign-looking, all living in the gap between "nobody set this" and
-"nobody noticed nobody set it," all caught before touching a result, **zero QPU spent**.
-Under this rule all five become impossible-to-miss rather than easy-to-miss.
+result-determining parameters must be required.
+**The evidence tally, stated with its dependence structure (Elder #2838, applying Dawn's
+C0041 correction to our own favourable number): ONE structural class — a number whose
+provenance was never checked became a result — surfacing through TWO mechanisms across SIX
+sites, each found after the previous made us look.** Mechanism A (unratified constant
+becomes load-bearing): the 40.0-illustration→rung-cap chain (one object, not two), the
+transplanted 0.160, the 4096 forcing default that no-opped its own gate while printing
+MATCH. Mechanism B (derived quantity presented as a measurement): the 9× effective-N
+reconstruction artifact (caught pre-send), the "~1 SE" verdict on an unpinned count
+(actual 2.53). **NOT six independent detections** — the tally measures how well naming the
+class propagates (three seats, two domains, hours), which is the stronger and survivable
+claim: method transfer, not vigilance. All caught before touching a result; zero QPU spent.
+Under this rule the whole class becomes impossible-to-miss rather than easy-to-miss.
 
 ## The walls ledger (for the Creator, headline form)
 
