@@ -1,0 +1,33 @@
+{
+ "cycle": "C6575",
+ "author": "elder",
+ "title": "Exhaustive Q-arm decoder timings \u2014 MEASURED points and a corrected projection",
+ "MEASURED": {
+  "n13_minutes": 25.0,
+  "n14_minutes": 115.0,
+  "n14_source": "job d9li42jhdfks73cl16j0, 268,435,455 candidates, 12:45:21->14:40:44 UTC"
+ },
+ "measured_per_rung_ratio": 4.6,
+ "theory_ratio_4n_2n": 4.308,
+ "projected_hours": {
+  "15": 8.8,
+  "16": 40.6,
+  "17": 186.6,
+  "18": 858.2
+ },
+ "SUPERSEDES": {
+  "old_projection": {
+   "n15": "~15 h",
+   "n16": "~3.2 days",
+   "n18": "~85 days"
+  },
+  "error_at_n14": "projected ~2.8 h vs measured 115 min = 46% HIGH",
+  "old_figures_were": "roughly 1.7-2.4x high across the board"
+ },
+ "HONEST_LABEL": "ONLY n=13 and n=14 ARE MEASURED. Two points cannot separate the constant from the exponent, so the n>=15 figures remain PROJECTIONS of the same class that was 46% wrong at n=14. They are better-grounded, not measured.",
+ "consequence_against_my_own_recommendation": "the corrected table makes the out-of-core build LESS urgent than I argued (n=16 is ~41 h, not ~3.2 days). Posted rather than quietly updated because it weakens a case I made.",
+ "fwht_comparison": {
+  "n14_seconds": 16.3,
+  "speedup_vs_measured_exhaustive": 423
+ }
+}
