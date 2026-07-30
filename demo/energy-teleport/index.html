@@ -84,6 +84,9 @@
   .verdict b { color:var(--ink); } .verdict .info { color:var(--info); font-weight:700; } .verdict .no { color:var(--noinfo); font-weight:700; }
 
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  /* the provenance receipt carries more text than the three short ones — give it its own
+     full row rather than leaving a ragged gap beside two empty cells */
+  .rc.wide { grid-column: 1 / -1; }
   @media (max-width:680px){ .receipts { grid-template-columns:1fr; } }
   .rc { border:1px solid var(--edge); border-radius:12px; padding:15px 16px; background:var(--surface-2); }
   .rc h3 { font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; margin:0 0 6px; color:var(--energy); }
@@ -181,11 +184,12 @@
   <!-- PANEL C -->
   <section class="panel">
     <p class="panel-label">Exhibit C — Why this counts</p>
-    <h2>Three receipts, and the fence</h2>
+    <h2>Four receipts, and the fence</h2>
     <div class="receipts">
       <div class="rc"><h3>1 · Gate-identical arms</h3><p>QET and coin are the <strong>same gates</strong>; only the bit's information differs. So the <strong>−0.198</strong> gap is the information, not the wiring. <span class="yes">Confound cancelled by construction.</span></p></div>
       <div class="rc"><h3>2 · The falsifiers pay</h3><p>Both no-information arms move Bob's energy the <strong>wrong way</strong> (+0.229, +0.191 — heated, not cooled). Information-free bits can't extract. <span class="yes">The control works.</span></p></div>
       <div class="rc"><h3>3 · The fence</h3><p>The <strong>absolute</strong> E_B is still noise-heated above the ground (+0.031) — the certified claim is the <strong>differential</strong>. No free energy; no FTL. One die.</p></div>
+      <div class="rc wide"><h3>4 · This is the re-fly, and the first one failed</h3><p>An earlier flight of this experiment (<strong>Exp195b</strong>, job <code>d9e70cs…</code>) pre-registered the <strong>absolute</strong> extraction — Bob's energy dropping below the ground baseline — and <strong>did not hold</strong>: it came back the <strong>wrong side of zero</strong> (+0.089, −4.4σ). Diagnosed, not explained away: absolute extraction needs &gt;94.3% contrast survival and the fabric delivered ~89%, so the <strong>noise budget</strong> failed, not the physics. The differential you see above was then pre-registered as the new primary <strong>before</strong> this flight, with its band <strong>[−0.30, −0.10]</strong> committed in advance — and landed dead-centre at −0.198. <span class="yes">The observable changed after a failure; it changed in advance of the data, and the failure is on the record.</span></p></div>
     </div>
     <div class="links-row">
       <a class="deeper" href="../negative-energy/">Negative Energy (the sibling)</a>
