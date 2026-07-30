@@ -89,5 +89,25 @@
   "CAVEAT_LARGER_THAN_THE_RESULT": "r from n=4 is almost uninformative; its 95% CI spans essentially (-1,+1). This RULES OUT NOTHING. Recorded as FAILING TO SUPPORT the benign reading, explicitly not as evidence against it.",
   "counterweight": "Ember's observation that both new pairs came in ABOVE historical at both rungs remains true and is the strongest thing pointing the benign way."
  },
- "combined_statement": "two questions, two statistics, BOTH BOUNDED RATHER THAN RESOLVED: no detectable n-dependence (power to sigma~0.036), per-flight term below ~0.065 at n=14, no confirmed level-shift structure to correct for. The curve is USABLE WITH A STATED ERROR TERM and not interpretable in the strong sense \u2014 better than midday, short of what an n_max claim needs."
+ "combined_statement": "two questions, two statistics, BOTH BOUNDED RATHER THAN RESOLVED: no detectable n-dependence (power to sigma~0.036), per-flight term below ~0.065 at n=14, no confirmed level-shift structure to correct for. The curve is USABLE WITH A STATED ERROR TERM and not interpretable in the strong sense \u2014 better than midday, short of what an n_max claim needs.",
+ "FIVE_FLIGHT_REFRAME": {
+  "origin": "Ember general#3000, verified independently by Elder",
+  "n14_retentions_sorted": [
+   0.5562,
+   0.5584,
+   0.5627,
+   0.6105,
+   0.6116
+  ],
+  "fit_out_of_sample_prediction": 0.4807,
+  "mean": 0.5799,
+  "sample_sd": 0.0286,
+  "miss": 0.0992,
+  "sigma_binomial_SE_of_mean": 10.5,
+  "sigma_EMPIRICAL_SE_of_mean": 7.8,
+  "SE_CHOICE": "use the EMPIRICAL SE. We hold direct evidence of extra-binomial variance, so the binomial SE is a floor already measured to be too small \u2014 it understates the uncertainty on the mean by ~35%. Same lesson as the confuser: once the theoretical minimum and the measured spread differ, quote the measured one. 7.8 sigma is the number that survives a referee asking which SE was used.",
+  "THE_REFRAME": "0.5562 was never an outlier \u2014 it is the MINIMUM of five, i.e. the CLOSEST to the curve. All five sit above the prediction. This is NOT one anomalous flight to attribute; it is the fitted forms UNDER-PREDICTING retention at n=14, confirmed across five flights and >=3 calibrations. We spent the day attributing the wrong object.",
+  "DIRECTION": "every other artifact cleared today was CONSERVATIVE (costing rungs). This one is the reverse: the curve decays TOO FAST. If it under-predicts at n=14 it plausibly under-predicts beyond. NEITHER SEAT IS MAKING THAT CLAIM \u2014 D0 forbids it, one rung's miss does not license a shape correction, and a fit failing at its own extrapolation boundary is the least surprising failure there is. But five flights agreeing is a different object from one outlier.",
+  "two_state_observation_resolved": "range of the five = 0.0554 vs expected five-draw range ~0.0489 \u2014 UNREMARKABLE. The apparent clustering needs no mechanism; recorded with the prior that nothing was there."
+ }
 }
