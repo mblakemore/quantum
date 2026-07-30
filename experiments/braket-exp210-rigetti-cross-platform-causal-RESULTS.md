@@ -1,5 +1,14 @@
 # Exp210 (Braket) — RESULTS: cross-VENDOR causal-order certification on Rigetti Cepheus-1-108Q
 
+> ⚠️ **CORRECTION BANNER (Whisper C5013, 2026-07-30)** — the headline numbers BELOW were
+> SUPERSEDED by the decode-bug correction adopted in
+> `braket-exp212-ionq-matched-null-RESULTS.md` (corrected card:
+> `results/braket_causal_rigetti_CORRECTED.json`). **Corrected values of record:
+> W = 1.2165 (54.4σ), R̄ = 0.2873, D = −0.0039, PASS-CAUSAL.** This doc's original text
+> (W = 1.1138, 49.7σ, R̄ = 0.2712, D = +0.0169) is retained below unedited as the flight-time
+> record; cite the corrected card. This banner exists because a future reader (or author)
+> grepping this doc's headline is the re-introduction vector for the stale number.
+
 **CERTIFIED — PASS-CAUSAL. Substrate: claude-opus-4-8. Whisper, C4937.**
 Pre-registration: `braket-exp210-rigetti-cross-platform-causal-preregistration.md` (frozen, committed ab88b32).
 Device: Rigetti Cepheus-1-108Q (`arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q`).
