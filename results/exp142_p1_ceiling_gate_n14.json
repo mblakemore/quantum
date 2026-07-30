@@ -1,0 +1,43 @@
+{
+ "card": "exp142_p1_ceiling_gate",
+ "rung_n": 14,
+ "freeze_commit": "2adf197ff7e472683e7aefd60ea46b307fa1a4e4",
+ "retention_artifact": "REFIT_6_RUNGS_c6575_rung13",
+ "per_form": {
+  "linear": {
+   "retention": 0.497,
+   "winner_rate": 0.7243,
+   "NO_FLY_true_rate_ordering": false,
+   "feasible_within_rung_cap": true,
+   "budget_at_own_r": 1591
+  },
+  "per-qubit": {
+   "retention": 0.5225,
+   "winner_rate": 0.7358,
+   "NO_FLY_true_rate_ordering": false,
+   "feasible_within_rung_cap": true,
+   "budget_at_own_r": 1142
+  },
+  "gaussian": {
+   "retention": 0.4807,
+   "winner_rate": 0.7169,
+   "NO_FLY_true_rate_ordering": false,
+   "feasible_within_rung_cap": true,
+   "budget_at_own_r": 2040
+  }
+ },
+ "low_end_form": "gaussian",
+ "sizing": {
+  "r_low": 0.4807,
+  "winner_rate_low": 0.7169,
+  "excess_verdict": 0.078,
+  "excess_sizing_box_corner": 0.16,
+  "criterion": "P(sep>=3.0sd)>=0.95"
+ },
+ "D4_mandatory_trigger_fired": false,
+ "VERDICT": "FLY",
+ "FLIGHT_BUDGET_bell_samples": 2040,
+ "est_qpu_seconds": 15.5,
+ "rung_cap_seconds": 40.0,
+ "m_cap_samples": 5263
+}

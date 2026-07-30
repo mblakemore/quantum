@@ -37,8 +37,10 @@ EXCESS_SIZING = 0.160            # box maximum — the conservative corner of th
 
 
 def form_retention(fit, n, name=""):
+    if f"n{n}" in fit:
+        return fit[f"n{n}"]                              # committed prediction (REFIT_6 schema)
     if "pred" in fit and str(n) in fit["pred"]:
-        return fit["pred"][str(n)]                       # committed prediction, preferred
+        return fit["pred"][str(n)]                       # committed prediction (REFIT_5 schema)
     p = fit["params"]
     form = fit.get("form", name)
     if "linear" in form:
@@ -49,10 +51,20 @@ def form_retention(fit, n, name=""):
 
 
 def min_budget(p_w, K, conf_true, m_cap):
-    for m in range(20, m_cap + 1):
+    # coarse stride then binary refine — same answer as the linear scan (p_separation is
+    # monotone-increasing in m up to integer-grid wiggles; the refine step re-checks exactly)
+    hit = None
+    for m in range(20, m_cap + 1, 64):
+        if p_separation(m, p_w, K, SEP_SD, conf_true) >= SEP_CONF:
+            hit = m
+            break
+    if hit is None:
+        return None
+    lo = max(20, hit - 64)
+    for m in range(lo, hit + 1):
         if p_separation(m, p_w, K, SEP_SD, conf_true) >= SEP_CONF:
             return m
-    return None
+    return hit
 
 
 def main():
