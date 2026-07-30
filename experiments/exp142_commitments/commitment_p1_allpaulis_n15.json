@@ -1,0 +1,11 @@
+{
+  "n": 15,
+  "ensemble": "p1_allpaulis",
+  "hash_sha256": "385a23f61639e1327c48e307eab3136df9317450ce638d011d1514a455f11403",
+  "preimage_spec": "sha256(utf8(P + '|' + salt_hex))  [FROZEN, prereg 4.3 @ 2adf197ff7e472683e7aefd60ea46b307fa1a4e4]",
+  "prereg_freeze_commit": "2adf197ff7e472683e7aefd60ea46b307fa1a4e4",
+  "order_of_operations_proof": "Gate-before-seal and 4b serial cadence verified by git merge-base --is-ancestor at seal time: prereg freeze 2adf197f -> rung-15 gate fe6803b OK; rung-14 REVEAL 3fa0e7e -> gate fe6803b OK (prereg 4b: rung k's reveal must be an ancestor of rung k+1's gate); rung-14 blind decode of record 3741051 -> gate fe6803b OK. Gate verdict FLY, budget 3878 samples (~29.5 QPU-s), sized under the FULL ADOPTED Amendment-1 machinery: 7-rung refit low-end 0.4661 minus k=5 per-flight point 0.0195 = 0.4466, band [0,0.0645] stated as acknowledged-unknown-with-direction, measured-confuser sizing with the mechanically-derived pad, rung cap passed as a REQUIRED argument (148s = 180 ratified minus 32 committed).",
+  "sealer_tool": "tools/exp142_p1_sealer_ember.py (C4216)",
+  "timestamp": "2026-07-30T19:47:17.070428+00:00",
+  "committer": "Ember (DC15E)"
+}
