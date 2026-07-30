@@ -56,7 +56,31 @@
   "NEW_EVIDENCE_FOR_MEMORY_HIERARCHY": "the threading saturation at 1.52x across 16 cores shows the butterfly is MEMORY-BANDWIDTH-BOUND, not compute-bound. That is the same physical fact that would make the per-rung ratio exceed the arithmetic-operation count: if the working set outruns the memory system then extra cores buy nothing AND each 4x larger array degrades further as it exhausts successive cache levels. Measured on a different axis, and before the hypothesis existed.",
   "consequence": "4.60x should be treated as a FLOOR and the n>=17 figures as OPTIMISTIC \u2014 the opposite of the reassuring direction the table correction alone pointed in.",
   "blind_prediction_registered": "Ember general#2924: n=15 exhaustive near 8.2 h => noise; near 8.8 h or above => structural, raise n>=17. Recorded BEFORE the fact.",
-  "PROBLEM": "Item 1 makes the FWHT the decoder of record from n=15, so nobody has a reason to run the 8-hour exhaustive again \u2014 the third point that settles the mechanism never gets collected. The scaling law of the retired tool becomes unfalsifiable the moment it is retired. Options: (a) run n=15 exhaustive once as the scaling test + a sixth FWHT cross-check, or (b) strike the n>=15 projections from the amendment rather than carry numbers nobody will check."
+  "PROBLEM": "Item 1 makes the FWHT the decoder of record from n=15, so nobody has a reason to run the 8-hour exhaustive again \u2014 the third point that settles the mechanism never gets collected. The scaling law of the retired tool becomes unfalsifiable the moment it is retired. Options: (a) run n=15 exhaustive once as the scaling test + a sixth FWHT cross-check, or (b) strike the n>=15 projections from the amendment rather than carry numbers nobody will check.",
+  "RETRACTION": "I offered the FWHT threading saturation (1.52x) as evidence for the memory-hierarchy mechanism. RETRACTED \u2014 they are different effects. BANDWIDTH-bound (bus saturates, cores idle) is constant in n; HIERARCHY-degrading (working set outgrows cache) rises with size. Blocking fixes the second and cannot fix the first, so the FWHT is legitimately bandwidth-bound AND scales at theory.",
+  "DISCRIMINATING_TEST_RUN": {
+   "design": "4-worker speedup at three rungs spanning 16x in array size; bandwidth-bound predicts CONSTANT, hierarchy-degrading predicts WORSENING",
+   "n13": {
+    "array_gb": 0.13,
+    "w1_s": 5.2,
+    "w4_s": 4.1,
+    "speedup": 1.27
+   },
+   "n14": {
+    "array_gb": 0.54,
+    "w1_s": 22.3,
+    "w4_s": 14.8,
+    "speedup": 1.5
+   },
+   "n15": {
+    "array_gb": 2.15,
+    "w1_s": 93.6,
+    "w4_s": 62.8,
+    "speedup": 1.49
+   },
+   "RESULT": "FLAT at ~1.5x across a 16x span => bandwidth-bound confirmed, hierarchy ABSENT in the FWHT. The n=13 1.27x is the opposite regime (fixed per-worker overhead on a 0.13 GB array), so the curve is overhead-limited below ~0.5 GB and bandwidth-limited above, with no size-dependent degradation.",
+   "consequence": "the ONLY evidence for the hierarchy mechanism is the exhaustive's 1.068 excess, now isolated to that algorithm's access pattern."
+  }
  },
  "FWHT_scaling_MEASURED": {
   "sweep_same_process_identical_config": {
@@ -86,5 +110,6 @@
    "18_min": 80
   },
   "REGIME_LIMIT": "n>=17 runs OUT-OF-CORE (34 GB / 137 GB), a different regime with strided disk in the loop. A resident law measured entirely inside RAM does NOT license an out-of-core figure. Half (B) remains required; resident scaling measured and stable, out-of-core scaling UNMEASURED."
- }
+ },
+ "stale_number_note": "an earlier 89.8 s n=15 figure of mine was the int32 pre-blocking build; 65.0 s is int16 + two-axis blocking. Same tool NAME, different tool. Posted without a configuration tag, it was reasonably picked up as measuring the current build. Every timing posted from here carries its config."
 }
