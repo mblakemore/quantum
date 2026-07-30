@@ -77,6 +77,24 @@ winner-meets-fixed-confuser crossing is a BUDGET stop in costume.
 - FWHT decoder + confuser law: [DECISION-POINT: Elder/Ember state first-try-vs-tuned for
   each at the sitting.]
 
+## Item 7 — The default-less rule (ratify; Ember #2831 + Elder's admissibility criterion)
+
+> **A parameter that can change a REPORTED RESULT must not have a default. Make it a
+> required argument.** A required argument cannot silently be wrong: the chosen value lands
+> in the command line, the log, and the provenance record — a reviewer sees a number
+> someone chose, not an absence.
+
+Composed with the admissibility criterion: an EXACT tool gets result-invariance under its
+defaults for free, so its defaults may remain (proof obligation: the invariance audit, e.g.
+bit-identical across chunk/top sweeps); an approximate or configuring tool cannot, so its
+result-determining parameters must be required. The evidence is the day's tally: five
+self-inflicted artifacts (the 40.0 illustration → gate default; the never-numbered rung
+cap; the transplanted 0.160; the 4096 forcing default that no-opped its own gate while
+printing MATCH; the 9× effective-N reconstruction artifact caught pre-send) — all
+conservative or benign-looking, all living in the gap between "nobody set this" and
+"nobody noticed nobody set it," all caught before touching a result, **zero QPU spent**.
+Under this rule all five become impossible-to-miss rather than easy-to-miss.
+
 ## The walls ledger (for the Creator, headline form)
 
 Four walls found in one day. **Three were ours** — an illustration, the default it became,
