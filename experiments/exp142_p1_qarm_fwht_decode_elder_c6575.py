@@ -44,12 +44,20 @@ the agreement count of ALL 4^n candidates at once:
 Cost O(4^n * 2n) rather than O(4^n * m), and m (528-2040) is much larger than 2n (16-36). It is exact
 because the WHT is an identity, not an estimate.
 
-WHERE THIS ALSO STOPS — stated up front, because the honest limit is the deliverable:
-the transform needs the FULL 4^n array resident. int32 (safe: |F| <= m):
-    n=13   268 MB      n=14   1.1 GB      n=15   4.3 GB      n=16   17 GB (host RAM is maxed)
-So this buys roughly rungs 14-15 and then hits a MEMORY wall, where the exhaustive walk hits a TIME
-wall. It does NOT deliver n=18. If the frozen ladder truly runs to 18, n_max may be DECODER-bound
-rather than hardware-bound, and that is a finding about the prereg, not about the QPU.
+WHERE THIS STOPS — MEASURED, at int16 with a blocked butterfly (see fwht_inplace/dtype notes):
+the transform needs the FULL 4^n array resident, and peak is now ~1.05x the array rather than ~2x.
+    n=13  134 MB    n=14  537 MB    n=15  2.1 GB    n=16  8.6 GB    n=17  34 GB    n=18  137 GB
+Against 38 GB available RAM (shared with four crew) and 423 GB free on /mnt/droid.
+
+*** THREE DISTINCT STOPPING CONDITIONS, and the frozen prereg names only one (Ember general#2788). ***
+  n_max         the CHIP stops resolving                     <- the deliverable
+  n_readable    we cannot decode it exactly on this host      <- this file's limit
+  n_affordable  the QPU cap runs out                          <- the budget limit
+If the arc terminates on n_readable or n_affordable, THAT MUST NOT BE REPORTED AS n_max. It would be
+an instrument reporting its own limit as a datum about the world — the one error here that would look
+like a result. The honest form is "blind identification succeeded through n=K; the hardware ceiling
+was NOT reached because the decoder/host/budget stopped first" — a bound, publishable, and a
+statement about our host rather than about the chip.
 
   --validate            reproduce EVERY revealed rung exactly (winner, rate, runner-up). The gate.
   --job <id> --n <n>    decode a flown job
@@ -76,17 +84,33 @@ REVEALED = [
 ]
 
 
-def fwht_inplace(a):
-    """Fast Walsh-Hadamard transform, natural binary indexing (so <a,p> is the bit XOR-AND)."""
+def fwht_inplace(a, temp_bytes=1 << 26):
+    """Fast Walsh-Hadamard transform, natural binary indexing (so <a,p> is the bit XOR-AND).
+
+    BLOCKED so the scratch buffer is bounded (~64 MB) instead of half the array. The obvious
+    implementation copies a[:,0,:] whole, which makes peak RSS ~2x the array — at n=16 that is the
+    difference between 8.6 GB resident and 13 GB. Blocking costs nothing and removes the factor.
+    """
     N = a.shape[0]
+    it = a.itemsize
     h = 1
     while h < N:
-        a = a.reshape(-1, 2, h)
-        x = a[:, 0, :].copy()
-        y = a[:, 1, :]
-        a[:, 0, :] = x + y
-        a[:, 1, :] = x - y
-        a = a.reshape(N)
+        v = a.reshape(-1, 2, h)
+        rows = v.shape[0]
+        # MUST block BOTH axes. Blocking rows alone has a hole: once a single row (h elements)
+        # exceeds temp_bytes the clamp to >=1 row silently restores a half-array copy, and at the
+        # final stage h = N/2 — so peak went straight back to ~2x the array. Measured 2.02x at n=16
+        # before this fix, which is exactly the bug reappearing at the last butterfly.
+        rstep = max(1, min(rows, temp_bytes // max(1, h * it)))
+        cstep = max(1, min(h, temp_bytes // max(1, rstep * it)))
+        for s0 in range(0, rows, rstep):
+            s1 = min(s0 + rstep, rows)
+            for c0 in range(0, h, cstep):
+                c1 = min(c0 + cstep, h)
+                x = v[s0:s1, 0, c0:c1].copy()          # scratch <= temp_bytes, ALWAYS
+                y = v[s0:s1, 1, c0:c1]
+                v[s0:s1, 0, c0:c1] = x + y
+                v[s0:s1, 1, c0:c1] = x - y
         h <<= 1
     return a
 
@@ -112,11 +136,20 @@ def decode_fwht(bits, n, mapping, csign, top=8, chunk=1 << 22):
     for j in range(n):
         Aidx |= (Q[:, n + j].astype(np.int64) & 1) << j            # Q_z -> multiplies P_x
         Aidx |= (Q[:, j].astype(np.int64) & 1) << (n + j)          # Q_x -> multiplies P_z
-    # NOT np.bincount: it returns int64, so at n=15 it would allocate 8.6 GB and then a further
-    # 4.3 GB for the .astype(int32) copy — 13 GB to build a 4.3 GB histogram, on a host shared with
-    # four other crew. Accumulate directly into int32 instead. (C6249: an OOM here is not my own
-    # problem to absorb, it is everyone's.)
-    f = np.zeros(N, dtype=np.int32)
+    # NOT np.bincount: it returns int64, so it would allocate 4x the final size and then copy down.
+    # Accumulate directly at the target width. (C6249: an OOM here is not mine alone to absorb.)
+    #
+    # DTYPE: int16, and the safety is a BOUND not a hope (Ember general#2788, verified). Every FWHT
+    # intermediate is a +/- combination of a SUBSET of the inputs, and the inputs are non-negative
+    # counts summing to m, so |value| <= m at EVERY stage including mid-butterfly. Checked empirically
+    # over 200 random cases: max|intermediate|/m = 1.0000 exactly (the bound is tight, not loose).
+    # So int16 is safe whenever m < 32767 — 16x headroom at the flown m~2040 — and it HALVES the
+    # array, which is the whole ceiling. I had used int32 for no reason at all.
+    if m >= np.iinfo(np.int16).max:
+        dt = np.int32                      # refuse to rely on the bound where it does not hold
+    else:
+        dt = np.int16
+    f = np.zeros(N, dtype=dt)
     np.add.at(f, Aidx, 1)
     F = fwht_inplace(f)                                            # F[p] = m - 2*disagreements
 
@@ -130,7 +163,7 @@ def decode_fwht(bits, n, mapping, csign, top=8, chunk=1 << 22):
         pz = (idx >> n) & xmask
         ypar = _popcount_parity(px & pz).astype(np.int32)           # Y where both x and z set
         want = np.where(ypar == 0, want0, want1)
-        Fc = F[lo:hi].astype(np.int32)
+        Fc = F[lo:hi].astype(np.int32)   # widen for the (m +/- F)//2 arithmetic; F itself stays int16
         hits = np.where(want == 0, (m + Fc) // 2, (m - Fc) // 2)
         if lo == 0:
             hits[0] = -1                                           # identity excluded from ensemble
