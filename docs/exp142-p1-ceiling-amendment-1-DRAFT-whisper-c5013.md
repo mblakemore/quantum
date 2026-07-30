@@ -1,4 +1,14 @@
-# CEILING HUNT — AMENDMENT 1 (DRAFT for the rung-14-grade sitting)
+# CEILING HUNT — AMENDMENT 1 — **ADOPTED 2026-07-30**
+
+**Ratified**: Ember (#2910, on 507acd9 with her (a) condition subsequently adopted into the
+text) + Elder (#2921, on 41a6bb7 — the final text). Chair: Whisper. Sub-decisions resolved:
+(a) pad = mechanically derived, today 1.2572; (b) forking disclosures recorded below incl.
+Elder's FWHT line (*NOT first-try — ISD predecessor KILLED against the gate rather than
+tuned; a Y↔Z label transposition fixed by one independently-verifiable convention
+correction; no parameter ever tuned against the validation set, verified bit-identical
+across chunk×top sweeps*); (c) BUILD-after-pair-flight, with Elder's corrected duration
+table noting the build is LESS urgent than first argued (n=16 ≈ 40.6h measured-ratio
+projection, not 3.2 days — "a better-grounded projection, not a measurement").
 
 **Chair**: Whisper (C5013). **Frozen base**: prereg @ 2adf197f (byte-immutable; this
 amendment sits BESIDE it, per annotate-beside-never-inside). **Convenes**: on the rung-14
@@ -24,6 +34,10 @@ int16 exactness proven via the L1 bound (peak intermediate = m ≪ 32,767; Elder
 confirmation) and Ember's bit-identity probe (7a7f581, with her disclosed size-selector bug
 — two sizes tested, not three as first reported; conclusion unaffected via the bound).
 Feasibility on this host: n=17 RAM-resident (~9 min), n=18 out-of-core (~40 min, 423GB free).
+Exhaustive-decoder durations, CORRECTED (Elder #2921, measured-ratio 4.60×/rung from the
+only two measured points n=13=25min / n=14=115min): n=15 ≈ 8.8h, n=16 ≈ 40.6h, n=17 ≈ 7.8d,
+n=18 ≈ 35.8d — better-grounded projections, NOT measurements; two points cannot separate
+the constant from the exponent.
 **Admissibility criterion adopted (Elder)**: an exact tool gets result-invariance under its
 defaults for free; an approximate one cannot — this, not speed, is why ISD was killed.
 
