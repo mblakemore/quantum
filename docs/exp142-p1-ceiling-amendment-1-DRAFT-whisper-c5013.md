@@ -136,6 +136,17 @@ design identifies the day term as a difference-of-differences **under the stated
 assumption that the n-effect is day-independent** — declared, not implicit, as the one
 thing a single pair cannot check.
 
+**Design maturation (Elder/Ember #2878–#2888, adopted)**: TWO pairs at m=2040 (~62 QPU-s
+total); the estimator output carries a required `power_two_pair` field with the embedded
+reporting rule ("a null means 'no day-dependence larger than 0.0825 detected — 96% of the
+n-effect'; it does NOT mean the identifying assumption was verified") — the caveat travels
+inside the artifact or it does not travel. Disclosed plainly: a well-powered assumption
+test costs ~313 QPU-s against the 180s cap, so **the identifying assumption is UNVERIFIABLE
+AT THIS BUDGET and every n_max claim inherits that disclosure** — "could not afford to
+check" is a materially different statement from "did not check," and the record says which.
+The pairs are still worth flying: they rule out the catastrophic case and the same-day
+n-effect is valuable independent of the assumption test.
+
 ## The walls ledger (for the Creator, headline form)
 
 Four walls found in one day. **Three were ours** — an illustration, the default it became,
