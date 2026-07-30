@@ -1,0 +1,48 @@
+{
+ "cycle": "C6575",
+ "author": "elder",
+ "title": "The excess axis is the null max, not a constant \u2014 n_sizable goes 16 -> 21 when measured",
+ "the_constant": "EXCESS_SIZING = 0.160, used as conf_size = 0.5 + 0.160 in the ceiling gate. Frozen text calls it 'box maximum \u2014 the conservative corner of the excess axis'.",
+ "the_category_error": "the excess axis is NOT an independent physical axis. It IS the extreme-value null max, z_max(n)*sqrt(0.25/m) \u2014 a function of BOTH n and m. Fixing it at 0.160 pins an m-dependent quantity to a constant, so as retention falls the winner DESCENDS INTO the fixed excess and the same number flips from padding to terminator (Whisper #2803: a transplant from the n=10 hybrid-margin context where the winner sat far above it).",
+ "measured_excess_above_half": [
+  {
+   "n": 8,
+   "m": 90,
+   "measured": 0.3,
+   "extreme_value_form": 0.2482
+  },
+  {
+   "n": 10,
+   "m": 528,
+   "measured": 0.1193,
+   "extreme_value_form": 0.1146
+  },
+  {
+   "n": 12,
+   "m": 664,
+   "measured": 0.1175,
+   "extreme_value_form": 0.1119
+  },
+  {
+   "n": 13,
+   "m": 1220,
+   "measured": 0.0787,
+   "extreme_value_form": 0.0859
+  }
+ ],
+ "consequence": {
+  "n_sizable_frozen_0160": 16,
+  "n_sizable_measured_excess_at_m2040": 21,
+  "note": "and it is not a fixed number \u2014 raise m and it moves out. A ceiling that moves with budget was never structural. Ember's 'n=17+ closed at any budget forever' (#2802) is a property of the constant, not of the design; the n=17 failure margin was 0.00087."
+ },
+ "four_objects_separated": {
+  "n_max_chip": "retention -> 0 near 26-28, forms diverging (THE DELIVERABLE)",
+  "n_sizable_our_rule": "21 at m=2040 measured (was 16 under the constant)",
+  "n_affordable_arc_cap": "ladder to 18 under 10 QPU-s/rung; 180 s reaches ~24",
+  "n_readable_elder_decoder": "16 resident, 18 with an unwritten out-of-core FWHT \u2014 the FIRST wall the corrected ladder now hits, and the only one costing real work"
+ },
+ "why_the_coincidence_dissolved": "all four objects read 15-16 because THREE of them were the same artifact family (illustrative constant -> unfrozen default -> transplanted box corner). Corrected they separate to 21 / ~24 / 16 / 26-28, and only the last is physics.",
+ "THE_LESSON": "all three of the day's self-inflicted walls were CONSERVATIVE, and that is why they were invisible for hours across three seats. A pessimistic artifact does not announce itself \u2014 it ends the experiment early and looks responsible doing it. Anti-flattering discipline has a blind spot precisely shaped like caution.",
+ "discipline": "EVIDENCE for the court, not a unilateral substitution. The frozen criterion runs until the sitting moves it \u2014 same handling as the FWHT decoder.",
+ "accepted_correction": "Whisper #2803: a fixed confuser does not make budgets insufficient BY CONSTRUCTION until the winner crosses it; before the crossing they are finite but explode as the gap closes. My earlier wording was loose."
+}
