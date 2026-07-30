@@ -1,0 +1,95 @@
+{
+ "experiment": "exp142_p1_ceiling_rung_n13",
+ "cycle": "C5013",
+ "prereg_freeze_commit": "2adf197ff7e472683e7aefd60ea46b307fa1a4e4",
+ "commit_hash": "d71ced31ec25f588a8f26e497996c6431e45a51f8d219a33e28b396c7a3c0afe",
+ "gate_artifact": "results/exp142_p1_ceiling_gate_n13.json",
+ "bell_samples": 1220,
+ "backend": "ibm_fez",
+ "instance": "ALT open-instance",
+ "q_layout": [
+  69,
+  84,
+  143,
+  8,
+  141,
+  110,
+  114,
+  123,
+  74,
+  58,
+  21,
+  25,
+  146,
+  70,
+  85,
+  144,
+  9,
+  142,
+  111,
+  115,
+  124,
+  75,
+  71,
+  22,
+  26,
+  147
+ ],
+ "bell_pairs": [
+  [
+   69,
+   70
+  ],
+  [
+   84,
+   85
+  ],
+  [
+   143,
+   144
+  ],
+  [
+   8,
+   9
+  ],
+  [
+   141,
+   142
+  ],
+  [
+   110,
+   111
+  ],
+  [
+   114,
+   115
+  ],
+  [
+   123,
+   124
+  ],
+  [
+   74,
+   75
+  ],
+  [
+   58,
+   71
+  ],
+  [
+   21,
+   22
+  ],
+  [
+   25,
+   26
+  ],
+  [
+   146,
+   147
+  ]
+ ],
+ "job_id": "d9lfm73hdfks73cku54g",
+ "shots_per_row": 1,
+ "committer": "Whisper (DC15W) \u2014 P runtime-only, verified vs public commitment"
+}
