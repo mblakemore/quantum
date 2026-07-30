@@ -1,0 +1,49 @@
+{
+ "P_hat_Q": "IZIZZXYYYXYZ",
+ "rate": 0.7530120481927711,
+ "runner_up": "IIIIXIIIIIII",
+ "runner_rate": 0.6174698795180723,
+ "separation": 0.13554216867469882,
+ "separation_binomial_SE": 8.098780395987971,
+ "z_over_null_bulk": 13.039328831866392,
+ "m_samples": 664,
+ "candidates": 16777215,
+ "top": [
+  {
+   "P": "IZIZZXYYYXYZ",
+   "rate": 0.7530120481927711
+  },
+  {
+   "P": "IIIIXIIIIIII",
+   "rate": 0.6174698795180723
+  },
+  {
+   "P": "XXZIIYZYZYZI",
+   "rate": 0.608433734939759
+  },
+  {
+   "P": "YZIYXZZXIIXY",
+   "rate": 0.5963855421686747
+  },
+  {
+   "P": "XZYIZZXYXYXZ",
+   "rate": 0.5963855421686747
+  },
+  {
+   "P": "ZZXIIZXYZIXZ",
+   "rate": 0.5948795180722891
+  },
+  {
+   "P": "XYYYYYYXYXYZ",
+   "rate": 0.5948795180722891
+  },
+  {
+   "P": "XYYIYIZIYZZI",
+   "rate": 0.5948795180722891
+  }
+ ],
+ "job": "d9leutrhdfks73ckt45g",
+ "decoder": "constraint_rate/G2/csign argmax (pre-committed #2567)",
+ "blind": "decoded before reveal",
+ "cycle": "C6575"
+}
