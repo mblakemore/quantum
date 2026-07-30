@@ -44,5 +44,18 @@
  "job": "d9li42jhdfks73cl16j0",
  "decoder": "FWHT exact \u2014 FIFTH GATE, cross-check only",
  "authority": "the FROZEN exhaustive decoder owns the blind answer; this is a parallel cross-check on FRESH UNREVEALED data",
- "cycle": "C6575"
+ "cycle": "C6575",
+ "CORRECTION_c6575": {
+  "retracted_claim": "retention went UP, breaking the monotone decline",
+  "why": "the n=13 -> n=14 retention step is +0.0277 with SE-of-difference 0.0350 = z 0.79. NOT SIGNIFICANT. Ember general#2858 caught it; I verified independently and agree.",
+  "note_on_the_git_record": "the commit message for this artifact (72f5fdc) contains the retracted phrasing 'breaks monotone decline'. History is pushed and not being rewritten, so the correction lives here, in the artifact the commit added.",
+  "what_survives": {
+   "claim": "out-of-sample residuals vs the pre-committed forms are significant in BOTH directions, so the residual is not a mis-specified shape but an unmodelled per-flight term",
+   "n10": "predicted 0.7570 (3-pt linear on n=4,6,8), actual 0.6422 +/- 0.0393 -> OPTIMISTIC 2.92 sigma",
+   "n14": "predicted 0.4807 (low-end of 6-rung fit), actual 0.5562 +/- 0.0212 -> PESSIMISTIC 3.56 sigma"
+  },
+  "hypothesis_not_finding": "day-to-day calibration drift confounded with n. Each rung is ONE flight on ONE calibration, so retention(n) is a MIXTURE of n-effect and day-effect. This is a live hypothesis for the sign flip, NOT an established mechanism \u2014 and I attached it to a 0.8 sigma step before checking, which is the error being corrected here.",
+  "proposed_test": "re-fly an EARLIER rung in the SAME job as a later one (n=10 alongside n=14). At <10 QPU-s under the measured confuser this is the cheapest informative measurement left, and the only one proposed that can separate n-dependence from day-dependence.",
+  "self_note": "I wrote the memory 'a named mechanism makes a single data point feel like a finding' roughly 90 minutes before committing this error, on a difference between two noisy numbers \u2014 the noisiest object available."
+ }
 }
