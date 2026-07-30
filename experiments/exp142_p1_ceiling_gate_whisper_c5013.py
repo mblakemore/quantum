@@ -28,15 +28,22 @@ from exp142_p1_n10_qgate_whisper_c5013 import (ALPHA_IDEAL, N8_EXCESS,      # fr
 
 FREEZE = "2adf197ff7e472683e7aefd60ea46b307fa1a4e4"
 ARTIFACT = os.path.join(HERE, "..", "results", "exp142_p1_retention_form_elder_c6575.json")
+# D3 mechanical updates land in Elder's retention artifact under REFIT_* keys with
+# precomputed per-rung predictions; the LATEST refit key (by rung suffix) supersedes the
+# original 4-rung fits. Predictions are read from the committed file, never from the bus.
+REFIT_FILE = os.path.join(HERE, "..", "results", "exp142_p1_q_noise_retention_elder_c6575.json")
 SECONDS_PER_1000_SAMPLES = 7.6   # measured: n=10 flight, 528 samples = 4 QPU-s
 EXCESS_SIZING = 0.160            # box maximum — the conservative corner of the excess axis
 
 
-def form_retention(fit, n):
+def form_retention(fit, n, name=""):
+    if "pred" in fit and str(n) in fit["pred"]:
+        return fit["pred"][str(n)]                       # committed prediction, preferred
     p = fit["params"]
-    if "linear" in fit["form"]:
+    form = fit.get("form", name)
+    if "linear" in form:
         return p["a"] + p["b"] * n
-    if "per-qubit" in fit["form"]:
+    if "per-qubit" in form or "qubit" in form:
         return p["A"] * p["c"] ** n
     return p["A"] * math.exp(-p["b"] * n * n)
 
@@ -55,13 +62,19 @@ def main():
     a = ap.parse_args()
     n, K = a.n, 4 ** a.n - 1
     art = json.load(open(ARTIFACT))
+    refit = json.load(open(REFIT_FILE))
+    rkeys = sorted(k for k in refit if k.startswith("REFIT_"))
+    if rkeys:
+        latest = rkeys[-1]
+        art = {"fits": refit[latest]["fits"], "_refit_key": latest}
+        print(f"  using committed refit: {latest}")
     m_cap = int(a.rung_cap_s / SECONDS_PER_1000_SAMPLES * 1000)
     conf_true = 0.5 + N8_EXCESS          # frozen VERDICT rule (true-rate ordering)
     conf_size = 0.5 + EXCESS_SIZING      # box-corner excess for SIZING only
 
     per_form = {}
     for name, fit in art["fits"].items():
-        r = form_retention(fit, n)
+        r = form_retention(fit, n, name)
         p_w = 0.5 + (ALPHA_IDEAL - 0.5) * r
         nofly = conf_true >= p_w
         b = None if nofly else min_budget(p_w, K, conf_size, m_cap)
@@ -87,7 +100,7 @@ def main():
             verdict = "FLY"
 
     out = {"card": "exp142_p1_ceiling_gate", "rung_n": n, "freeze_commit": FREEZE,
-           "retention_artifact": "exp142_p1_retention_form_elder_c6575.json (pinned)",
+           "retention_artifact": art.get("_refit_key", "exp142_p1_retention_form_elder_c6575.json (pinned)"),
            "per_form": per_form, "low_end_form": low_form,
            "sizing": {"r_low": round(r_low, 4), "winner_rate_low": round(p_w_low, 4),
                       "excess_verdict": N8_EXCESS, "excess_sizing_box_corner": EXCESS_SIZING, "criterion": f"P(sep>={SEP_SD}sd)>={SEP_CONF}"},
