@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:title" content="One Dial for the Arrow of Time — information and energy on the same knob">
+<meta property="og:description" content="Exp227 on ibm_fez: one knob — how much the environment records of an event — sets four physically distinct quantities at once, each by its own predicted law. Coherence fades as κ, objectivity sharpens as κ², the correlation binding them tracks κ (all three certified across five dial settings). The fourth is reported, NOT certified: the energy one classical bit can teleport into the recording bath rises as 1−κ², measured at 0.846 of the maximum this protocol can extract, short of the ideal at every setting.">
+<meta name="theme-color" content="#04060c">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One Dial for the Arrow of Time — information and energy on one knob | The Quantum Museum</title>
+<meta name="description" content="Exp227 on ibm_fez: one knob — how much the environment records of an event — sets four physically distinct quantities at once, each by its own predicted law. Coherence fades as κ, objectivity sharpens as κ², the correlation binding them tracks κ (all three certified across five dial settings). The fourth is reported, NOT certified: the energy one classical bit can teleport into the recording bath rises as 1−κ², measured at 0.846 of the maximum this protocol can extract, short of the ideal at every setting.">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11" fill="none" stroke="%23a78bfa" stroke-width="2"/><path d="M16 16 L16 6" stroke="%23e8f2ff" stroke-width="2.4" stroke-linecap="round"/><circle cx="16" cy="16" r="2" fill="%23e8f2ff"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a,.audit a,.caveat a{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--violet);font-weight:400}
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 15%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(27px,5.2vw,46px); margin:12px 0 14px; }
+  h1 .hl { color: var(--violet); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:68ch; margin:0 0 14px; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; font-family:var(--mono); font-size:11.5px; }
+  .badge { border:1px solid var(--edge); border-radius:999px; padding:4px 11px; color:var(--ink-2); }
+  .badge b { color:var(--violet); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--violet); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .lgd { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:8px; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .lgd span { display:inline-flex; align-items:center; gap:7px; }
+  .lgd i { width:20px; height:0; border-top-width:3px; border-top-style:solid; display:inline-block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--violet) 18%,transparent); color:var(--violet); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .audit { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px dashed var(--edge); margin-top:14px; padding-top:9px; line-height:1.55; }
+  .audit b { color:var(--good); }
+  .caveat { border-left:3px solid var(--violet); background:var(--surface-2); border-radius:0 11px 11px 0; padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.55; }
+  .caveat .ct { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--violet); display:block; margin-bottom:5px; }
+  .caveat b { color:var(--ink); }
+  .notgated { border-left:3px solid var(--amber); background:var(--surface-2); border-radius:0 11px 11px 0; padding:12px 15px; margin:0 0 16px; font-size:13px; line-height:1.55; }
+  .notgated .vt { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); display:block; margin-bottom:5px; }
+  .notgated b { color:var(--ink); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--violet); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="sp"></span>
+    <span class="wing">WING <b>VI</b> · Time &amp; the Observer</span>
+  </nav>
+  <main id="main">
+  <header class="hero">
+    <div class="eyebrow">Exp227 · P3 · Horizons-5 · the Heron 2026 campaign</div>
+    <h1>One dial for the arrow of <span class="hl">time</span>.</h1>
+    <p class="lede">There is a knob on this experiment and it controls exactly one thing:
+      <b>how much the environment remembers</b> of what happened to a qubit. <b>That single knob sets
+      four physically distinct quantities at once</b>, each by its own predicted law — how wave-like
+      the system still is, how objective the fact has become, how strongly the two are linked, and
+      how much energy a single classical bit can pour into the environment that did the recording.
+      The unification is the result. The energy is the part that sounds impossible, and it is the
+      illustration, not the claim.</p>
+    <div class="badges">
+      <span class="badge">coherence <b>= κ</b></span>
+      <span class="badge">objectivity <b>= κ²</b></span>
+      <span class="badge">channel <b>= κ</b></span>
+      <span class="badge">energy <b>= 1−κ²</b> · reported</span>
+    </div>
+    <span class="scope">Scope: one 2-qubit apparatus (system + bath) on <b>ibm_fez</b>, five dial
+      settings. The three <em>faces</em> are the registered verdict and all held. The energy curve is
+      <b>reported, NOT certified</b> — see the marked block in room 2, which is where it belongs.</span>
+  </header>
+
+  <section class="panel" aria-labelledby="p1">
+    <h2 id="p1">Room 1 — Three faces, one knob</h2>
+    <p class="sub">Exp227 · job d9ep30qneu4c739on4v0 · 10 circuits · 8000 shots · CERTIFIED (G1∧G2∧G3)</p>
+    <p class="primer"><b>The knob is θ, and κ = cos(θ/2) is how strongly the bath recorded the
+      system</b> (that mapping is the flight's own, from its committed manifest, not a convention
+      chosen for this page). At κ = 1 nothing was recorded and the system is still a clean wave. At κ = 0 the
+      record is complete and the wave is gone. The claim is not that these three quantities are
+      <em>correlated</em> — it is that each is a specific <em>function</em> of the same κ, predicted
+      in advance, and the chip drew all three.</p>
+    <div class="seg" id="seg1" role="group" aria-label="which face"></div>
+    <figure><svg id="viz1" viewBox="0 0 460 250" role="img" aria-label="three measured correlators against the record-strength dial"></svg>
+      <figcaption class="lgd" id="lgd1"></figcaption></figure>
+    <p class="story" id="story1"></p>
+    <div class="audit">AUDIT — all three registered gates held. The measured points sit on their
+      predicted laws without fitting: the dashed curves are <b>κ</b> and <b>κ²</b> as written down
+      before the flight, not regressions through the data. All three faces come from
+      <em>one</em> circuit per setting — the system measured in X and the bath in Z gives every
+      correlator at once, so no face can drift relative to another through a separate calibration.</div>
+  </section>
+
+  <section class="panel" aria-labelledby="p2">
+    <h2 id="p2">Room 2 — And energy rides the same knob</h2>
+    <p class="sub">Exp227 G4 · the same apparatus, plus a bath field and one classical bit</p>
+    <div class="notgated"><span class="vt">Reported, NOT certified — outside the registered verdict</span>
+      Everything in this room sits <b>outside the registered verdict</b>. The flight's pre-registered
+      criteria were the three faces in room 1; this energy measurement was pre-registered as a
+      <b>reported</b> headline with its hardware cost priced in advance, deliberately kept out of the
+      pass/fail. That is visible in the record itself: the decode file carries
+      <code>g1</code>, <code>g2</code>, <code>g3</code> and a verdict flag, and <b>no g4 at all</b>.
+      It is here because it is the most interesting thing the apparatus does — not because it was
+      certified, and the page should not let those blur.</div>
+    <p class="primer"><b>Quantum energy teleportation.</b> Alice measures her qubit and sends Bob one
+      classical bit. Bob rotates his own qubit according to that bit and extracts energy from it —
+      energy that was <em>not</em> locally available to him a moment earlier. The prediction is that
+      the amount tracks <b>1 − κ²</b>: the <em>more</em> completely the bath has recorded the event,
+      the <em>more</em> energy a single bit can put into it. At full record the bath is a maximally
+      mixed, locally useless fog — and that is exactly where one bit does the most.</p>
+    <div class="seg" id="seg2" role="group" aria-label="what to show"></div>
+    <figure><svg id="viz2" viewBox="0 0 460 250" role="img" aria-label="teleported energy against the record-strength dial, measured versus ideal"></svg>
+      <figcaption class="lgd" id="lgd2"></figcaption></figure>
+    <p class="story" id="story2"></p>
+    <div class="caveat"><span class="ct">What 0.846 does and does not mean</span>
+      <b>The energy is not carried by the bit.</b> This is the misreading the number invites, so it
+      goes first, in the flight designer's own words: <em>the measurement at S pays for and injects
+      the energy; the classical bit only tells B which local operation unlocks its share. Nothing is
+      transported, and nothing is free — the protocol converts measurement back-action plus one bit
+      of communication into locally extractable work.</em> A reader who gets the magnitude wrong has
+      a small problem; a reader who thinks a bit delivered energy to a distant qubit has the physics
+      wrong.<br><br>
+      <b>It is a normalized figure.</b> 0.846 is <b>of the maximum this protocol can extract</b> —
+      not 0.846 of the energy in any absolute sense, and not a fraction of some larger reservoir.
+      The sentence that writes itself here only keeps its meaning with that clause attached, so it
+      is attached.<br><br>
+      <b>And the shortfall is a priced cost that varies along the dial.</b> The measured curve tracks
+      the predicted shape but sits below it at <em>every</em> setting — 71%, 73%, 80% and 85% of
+      ideal — a deficit of <b>15–29% across the dial, narrowing toward full record</b> (29%, 27%,
+      20%, 15% as κ falls). The deficit shrinking with record strength is a real fact about the
+      hardware, not a constant tax. Note which end 0.846 sits at: quoting "about 15% short" alongside it would be
+      quoting the most flattering point on the very curve being illustrated. The cause is the
+      feed-forward — Bob's rotation waits on Alice's bit travelling a real classical path and the
+      qubits decohere meanwhile — and that cost was quantified from an earlier flight's measured
+      penalty and written into this flight's pre-registration <em>in advance</em>. So this is a
+      number measured through a channel whose price was known before the data existed: which is both
+      why it can be reported as-is, and why it is not certified.<br><br>
+      <b>One more thing you can see on the chart:</b> at zero record the measured curve starts a hair
+      <em>below</em> zero, at −0.0065 where the law says exactly 0. That is noise at a point where
+      there is nothing to extract, not a negative extraction — it is left visible rather than cropped
+      away.</div>
+  </section>
+
+  <section class="panel" aria-labelledby="p3">
+    <h2 id="p3">What this adds, and what it doesn't</h2>
+    <p class="primer"><b>The museum already has a page saying energy teleportation works.</b>
+      <a href="../energy-teleport/">Beam the Power</a> certifies <em>that</em> the effect exists —
+      an informed bit moves Bob's energy where a coin flip does not, as a differential between
+      gate-identical arms. This page is a different question on the same physics: not whether it
+      happens, but <b>what it costs in record strength</b> — the dial law. Neither number derives
+      from the other and neither replaces the other. One shows the effect exists; the other shows how
+      it scales.</p>
+    <div class="caveat"><span class="ct">The claim, scoped</span>
+      What is <b>certified</b> here: three quantities that look like different physics — a wave's
+      visibility, a fact's objectivity, and the correlation between a system and its environment —
+      are each a predicted function of one recording strength, measured across five settings on one
+      apparatus. What is <b>reported</b>: the energy a single classical bit can teleport into that
+      environment rises as the record completes, tracking 1 − κ² in shape at 71–85% of its ideal
+      level. What is <b>not claimed</b>: no energy came from nowhere — Alice's measurement pays for
+      it up front — and nothing here travels faster than the bit does.</div>
+  </section>
+
+  <section class="panel">
+    <h2>The court</h2>
+    <p class="sub">how we know we're not fooling ourselves</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE LAWS WERE WRITTEN DOWN FIRST</div>
+        <p>κ, κ² and 1−κ² are not fits. They were derived and checked against an exact statevector
+        simulation before the flight, then compared to hardware. A curve that matches a law chosen
+        in advance is a different kind of evidence from a curve with a line drawn through it
+        afterwards.</p></div>
+      <div class="receipt"><div class="rt">ONE CIRCUIT, THREE FACES</div>
+        <p>Each dial setting is a single circuit: measure the system in X, the bath in Z, and all
+        three correlators fall out of the same shots. The faces cannot drift apart through separate
+        calibrations, because there are no separate calibrations.</p></div>
+      <div class="receipt"><div class="rt">THE UNCERTIFIED PART IS MARKED AS SUCH</div>
+        <p>The energy result is reported, NOT certified, and its room says so before it shows a number. The decode
+        record carries g1/g2/g3 and no g4 — the absence is mechanical, not editorial. Pricing a
+        known hardware cost into a pre-registration and then reporting the result honestly is not
+        the same as certifying it.</p></div>
+      <div class="receipt"><div class="rt">FENCES</div>
+        <p>Two qubits; five dial settings; one device; a bath <em>field</em> standing in for a real
+        environment. This is a toy apparatus for a real law, not a thermodynamic engine.
+        <code>Exp227 · findings in the repo</code></p></div>
+    </div>
+  </section>
+  </main>
+  <footer role="contentinfo">
+    <span>Exp227 · ibm_fez · job d9ep30qneu4c739on4v0</span><span>C4913 · 2026-07-20</span>
+    <a href="../energy-teleport/">← Beam the Power (that it works)</a>
+    <a href="../past-not-fixed/">The Past Is Not Fixed</a>
+    <a href="../index.html">← all exhibits</a>
+  </footer>
+</div>
+<script>
+"use strict";
+const SVGNS="http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function segify(id,states,cb){
+  const seg=document.getElementById(id);
+  states.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.dataset.k=s[0];b.textContent=s[1];
+    b.addEventListener("click",()=>{cb(s[0]);seg.querySelectorAll("button").forEach(x=>{x.classList.toggle("on",x.dataset.k===s[0]);x.setAttribute("aria-pressed",String(x.dataset.k===s[0]));});});
+    seg.appendChild(b);});
+  cb(states[0][0]); seg.querySelector("button").classList.add("on");
+  seg.querySelector("button").setAttribute("aria-pressed","true");
+}
+// ---- verified data kernel: results/exp227_guardian_decode.json ----
+const TH=[0,0.25,0.5,0.75,1.0];                       // theta / pi
+const K =TH.map(t=>Math.cos(t*Math.PI/2));            // kappa = cos(theta/2)
+const XS =[0.99675,0.91575,0.7065,0.39775,0.0395];    // coherence, law kappa
+const ZB =[0.998,0.85,0.52975,0.15875,-0.009];        // record energy / objectivity, law kappa^2
+const XSZB=[0.99475,0.89425,0.67275,0.344,-0.027];    // channel, law kappa
+const WM =[-0.0065,0.104,0.36675,0.68625,0.846];      // teleported energy, measured
+const WI =[0,0.14644660940672627,0.5,0.8535533905932737,1.0];  // ideal 1 - kappa^2
+
+function frame(svg,ylo,yhi,ylab){
+  const L=54,R=430,T=30,B=190;
+  const X=t=>L+(R-L)*t;
+  const Y=v=>T+(B-T)*(yhi-v)/(yhi-ylo);
+  el(svg,"line",{x1:L,y1:T,x2:L,y2:B,style:"stroke:var(--edge-2);stroke-width:1.5"});
+  for(let v=ylo; v<=yhi+1e-9; v+=0.25){
+    const yy=Y(v);
+    el(svg,"line",{x1:L,y1:yy,x2:R,y2:yy,style:`stroke:${Math.abs(v)<1e-9?"var(--edge-2)":"var(--edge)"};stroke-width:1;stroke-dasharray:${Math.abs(v)<1e-9?"5 4":"2 4"}`});
+    el(svg,"text",{x:L-6,y:yy+3.5,"text-anchor":"end",style:"fill:var(--ink-4);font-family:var(--mono);font-size:9px"}).textContent=v.toFixed(2);
+  }
+  TH.forEach(t=>el(svg,"text",{x:X(t),y:B+18,"text-anchor":"middle",style:"fill:var(--ink-4);font-family:var(--mono);font-size:9.5px"})
+    .textContent = t===0?"0":(t===1?"π":t+"π"));
+  el(svg,"text",{x:(L+R)/2,y:B+36,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="θ  —  turning up how much the bath records →";
+  el(svg,"text",{x:8,y:18,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent=ylab;
+  return {X,Y};
+}
+function curve(svg,g,vals,col,dash,dots){
+  let d="";
+  vals.forEach((v,i)=>{ d+=(i?"L":"M")+g.X(TH[i]).toFixed(1)+","+g.Y(v).toFixed(1); });
+  el(svg,"path",{d:d,fill:"none",style:`stroke:${col};stroke-width:${dash?2:2.6}`+(dash?";stroke-dasharray:6 4;opacity:.75":"")});
+  if(dots) vals.forEach((v,i)=>el(svg,"circle",{cx:g.X(TH[i]),cy:g.Y(v),r:4.5,style:`fill:${col}`}));
+}
+// Room 1 — the three faces
+const FACES={
+  xs:  {vals:XS,  law:K,            col:"var(--cyan)",  name:"⟨X of the system⟩ — the wave",      law_n:"κ",  story:'The wave fades exactly as <b>κ</b>. At full record it is gone: <b>0.040</b> where the law says 0.'},
+  zb:  {vals:ZB,  law:K.map(k=>k*k),col:"var(--amber)", name:"⟨Z of the bath⟩ — the fact",        law_n:"κ²", story:'The fact sharpens as <b>κ²</b> — the bath\'s stored energy IS its objectivity, the same number twice.'},
+  xszb:{vals:XSZB,law:K,            col:"var(--good)",  name:"⟨X·Z⟩ — the channel",               law_n:"κ",  story:'The correlation carrying information between them also tracks <b>κ</b>: <b>0.995 → −0.027</b> across the dial.'}
+};
+function r1(k){
+  const svg=document.getElementById("viz1"); svg.innerHTML="";
+  const g=frame(svg,-0.25,1.0,"measured correlator");
+  const lg=[];
+  const show = k==="all" ? Object.keys(FACES) : [k];
+  show.forEach(id=>{
+    const f=FACES[id];
+    curve(svg,g,f.law,f.col,true,false);
+    curve(svg,g,f.vals,f.col,false,true);
+    lg.push(`<span><i style="border-top-color:${f.col}"></i>${f.name} · law ${f.law_n}</span>`);
+  });
+  lg.push('<span><i style="border-top-color:var(--ink-4);border-top-style:dashed"></i>dashed = the law, written before the flight</span>');
+  document.getElementById("lgd1").innerHTML=lg.join("");
+  document.getElementById("story1").innerHTML = k==="all"
+    ? 'Three different physical questions — is it still a wave, is the fact objective, how strong is the link — and one knob answers all of them. Each measured series sits on a curve that was written down in advance.'
+    : FACES[k].story;
+}
+segify("seg1",[["all","all three faces"],["xs","the wave (κ)"],["zb","the fact (κ²)"],["xszb","the channel (κ)"]],r1);
+
+// Room 2 — the energy curve
+function r2(k){
+  const svg=document.getElementById("viz2"); svg.innerHTML="";
+  const g=frame(svg,-0.25,1.0,"energy one classical bit can teleport");
+  curve(svg,g,WI,"var(--ink-4)",true,false);
+  if(k!=="ideal"){ curve(svg,g,WM,"var(--violet)",false,true); }
+  document.getElementById("lgd2").innerHTML =
+    (k!=="ideal" ? '<span><i style="border-top-color:var(--violet)"></i>measured · reported, NOT certified</span>' : '')
+    + '<span><i style="border-top-color:var(--ink-4);border-top-style:dashed"></i>ideal law 1 − κ²</span>';
+  document.getElementById("story2").innerHTML = k==="ideal"
+    ? 'The prediction alone: energy rises as <b>1 − κ²</b>. The more the bath has recorded, the more a single classical bit can put into it — maximum at exactly the point where the bath is locally most useless.'
+    : 'Measured against prediction. The shape is unmistakable and the level is short at every setting — <b>0.104 / 0.367 / 0.686 / 0.846</b> against an ideal <b>0.146 / 0.500 / 0.854 / 1.000</b>. Real classical bits take real time to arrive, and the qubits decohere while they travel.';
+}
+segify("seg2",[["both","measured vs the law"],["ideal","the prediction alone"]],r2);
+</script>
+</body>
+</html>
