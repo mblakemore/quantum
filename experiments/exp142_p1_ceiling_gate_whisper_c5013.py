@@ -32,6 +32,8 @@ ARTIFACT = os.path.join(HERE, "..", "results", "exp142_p1_retention_form_elder_c
 # precomputed per-rung predictions; the LATEST refit key (by rung suffix) supersedes the
 # original 4-rung fits. Predictions are read from the committed file, never from the bus.
 REFIT_FILE = os.path.join(HERE, "..", "results", "exp142_p1_q_noise_retention_elder_c6575.json")
+# 7-rung refit (post-rung-14) lives in its own artifact with per-n low ends:
+REFIT7_FILE = os.path.join(HERE, "..", "results", "exp142_p1_retention_refit_7rungs_elder_c6575.json")
 SECONDS_PER_1000_SAMPLES = 7.6   # measured: n=10 flight, 528 samples = 4 QPU-s
 EXCESS_SIZING = 0.160            # box maximum — the conservative corner of the excess axis
 
@@ -70,16 +72,30 @@ def min_budget(p_w, K, conf_true, m_cap):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, required=True)
-    ap.add_argument("--rung-cap-s", type=float, default=40.0)
+    # Amendment Item 2 (option d): the per-rung cap derives from the ratified 180s arc cap
+    # minus committed spend — REQUIRED, computed by the caller from the flight manifests,
+    # never defaulted (Item 7: result-determining parameters have no defaults).
+    ap.add_argument("--rung-cap-s", type=float, required=True)
+    # Chair ruling 2026-07-30 (#2980): sizing retention = low-end MINUS the per-flight
+    # point term, with the band stated in the output. REQUIRED (result-determining).
+    ap.add_argument("--per-flight-point", type=float, required=True)
+    ap.add_argument("--per-flight-band", type=str, required=True,
+                    help='e.g. "[0, 0.0645] (90%, k=5, n=14)" — stated verbatim in the artifact')
     a = ap.parse_args()
     n, K = a.n, 4 ** a.n - 1
     art = json.load(open(ARTIFACT))
-    refit = json.load(open(REFIT_FILE))
-    rkeys = sorted(k for k in refit if k.startswith("REFIT_"))
-    if rkeys:
-        latest = rkeys[-1]
-        art = {"fits": refit[latest]["fits"], "_refit_key": latest}
-        print(f"  using committed refit: {latest}")
+    if os.path.exists(REFIT7_FILE):
+        r7 = json.load(open(REFIT7_FILE))
+        art = {"fits": r7["fits"], "_refit_key": "refit_7rungs (dedicated artifact)",
+               "_low_end": r7["low_end_across_forms"]}
+        print("  using committed 7-rung refit artifact")
+    else:
+        refit = json.load(open(REFIT_FILE))
+        rkeys = sorted(k for k in refit if k.startswith("REFIT_"))
+        if rkeys:
+            latest = rkeys[-1]
+            art = {"fits": refit[latest]["fits"], "_refit_key": latest}
+            print(f"  using committed refit: {latest}")
     m_cap = int(a.rung_cap_s / SECONDS_PER_1000_SAMPLES * 1000)
     conf_true = 0.5 + N8_EXCESS          # frozen VERDICT rule (true-rate ordering)
     conf_size = 0.5 + EXCESS_SIZING      # box-corner excess for SIZING only
@@ -98,6 +114,10 @@ def main():
     d4_mandatory = len(set(feas)) > 1                       # forms DISAGREE on feasibility-within-cap
     low_form = min(per_form, key=lambda k: per_form[k]["retention"])
     r_low = per_form[low_form]["retention"]
+    if "_low_end" in art and str(n) in art["_low_end"]:
+        r_low = min(r_low, art["_low_end"][str(n)])       # committed low-end governs
+    r_low_stated = r_low
+    r_low = r_low - a.per_flight_point                     # chair ruling: point widening
     p_w_low = 0.5 + (ALPHA_IDEAL - 0.5) * r_low
     if conf_true >= p_w_low and all(v["NO_FLY_true_rate_ordering"] for v in per_form.values()):
         verdict, budget = "NO-FLY (unanimous true-rate ordering) — D4 test-once applies", None
@@ -114,7 +134,12 @@ def main():
     out = {"card": "exp142_p1_ceiling_gate", "rung_n": n, "freeze_commit": FREEZE,
            "retention_artifact": art.get("_refit_key", "exp142_p1_retention_form_elder_c6575.json (pinned)"),
            "per_form": per_form, "low_end_form": low_form,
-           "sizing": {"r_low": round(r_low, 4), "winner_rate_low": round(p_w_low, 4),
+           "sizing": {"r_low_committed": round(r_low_stated, 4),
+                      "per_flight_point_subtracted": a.per_flight_point,
+                      "per_flight_band_stated": a.per_flight_band,
+                      "per_flight_status": "acknowledged unknown with a direction — NOT a "
+                                           "calibrated correction (band includes zero)",
+                      "r_low": round(r_low, 4), "winner_rate_low": round(p_w_low, 4),
                       "excess_verdict": N8_EXCESS, "excess_sizing_box_corner": EXCESS_SIZING, "criterion": f"P(sep>={SEP_SD}sd)>={SEP_CONF}"},
            "D4_mandatory_trigger_fired": d4_mandatory,
            "VERDICT": verdict, "FLIGHT_BUDGET_bell_samples": budget,

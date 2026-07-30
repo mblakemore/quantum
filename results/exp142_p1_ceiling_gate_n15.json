@@ -1,0 +1,47 @@
+{
+ "card": "exp142_p1_ceiling_gate",
+ "rung_n": 15,
+ "freeze_commit": "2adf197ff7e472683e7aefd60ea46b307fa1a4e4",
+ "retention_artifact": "refit_7rungs (dedicated artifact)",
+ "per_form": {
+  "linear": {
+   "retention": 0.4832,
+   "winner_rate": 0.718,
+   "NO_FLY_true_rate_ordering": false,
+   "feasible_within_rung_cap": true,
+   "budget_at_own_r": 1968
+  },
+  "per-qubit": {
+   "retention": 0.5061,
+   "winner_rate": 0.7284,
+   "NO_FLY_true_rate_ordering": false,
+   "feasible_within_rung_cap": true,
+   "budget_at_own_r": 1415
+  },
+  "gaussian": {
+   "retention": 0.4661,
+   "winner_rate": 0.7103,
+   "NO_FLY_true_rate_ordering": false,
+   "feasible_within_rung_cap": true,
+   "budget_at_own_r": 2618
+  }
+ },
+ "low_end_form": "gaussian",
+ "sizing": {
+  "r_low_committed": 0.4661,
+  "per_flight_point_subtracted": 0.0195,
+  "per_flight_band_stated": "[0, 0.0645] (90% band, k=5 measurements, n=14)",
+  "per_flight_status": "acknowledged unknown with a direction \u2014 NOT a calibrated correction (band includes zero)",
+  "r_low": 0.4466,
+  "winner_rate_low": 0.7015,
+  "excess_verdict": 0.078,
+  "excess_sizing_box_corner": 0.16,
+  "criterion": "P(sep>=3.0sd)>=0.95"
+ },
+ "D4_mandatory_trigger_fired": false,
+ "VERDICT": "FLY",
+ "FLIGHT_BUDGET_bell_samples": 3878,
+ "est_qpu_seconds": 29.5,
+ "rung_cap_seconds": 148.0,
+ "m_cap_samples": 19473
+}
