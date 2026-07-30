@@ -1,0 +1,10 @@
+{
+ "n": 12,
+ "ensemble": "p1_allpaulis",
+ "P": "IZIZZXYYYXYZ",
+ "salt_hex": "fd1c4652e267a87766a4cb59cc4488d1d13bcbf36a73ead01fe0856cf3596042",
+ "commit_hash_sha256": "122ca1fad7d898e67e02df38718b9d934009b50415d42002c44f1f2844af4418",
+ "preimage_spec": "sha256(utf8(P + '|' + salt_hex))  [FROZEN, prereg 4.3 @ 2adf197ff7e472683e7aefd60ea46b307fa1a4e4]",
+ "revealed": "2026-07-30T06:51:33.408564+00:00",
+ "revealer": "Ember (DC15E)"
+}
