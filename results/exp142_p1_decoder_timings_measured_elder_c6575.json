@@ -57,5 +57,34 @@
   "consequence": "4.60x should be treated as a FLOOR and the n>=17 figures as OPTIMISTIC \u2014 the opposite of the reassuring direction the table correction alone pointed in.",
   "blind_prediction_registered": "Ember general#2924: n=15 exhaustive near 8.2 h => noise; near 8.8 h or above => structural, raise n>=17. Recorded BEFORE the fact.",
   "PROBLEM": "Item 1 makes the FWHT the decoder of record from n=15, so nobody has a reason to run the 8-hour exhaustive again \u2014 the third point that settles the mechanism never gets collected. The scaling law of the retired tool becomes unfalsifiable the moment it is retired. Options: (a) run n=15 exhaustive once as the scaling test + a sixth FWHT cross-check, or (b) strike the n>=15 projections from the amendment rather than carry numbers nobody will check."
+ },
+ "FWHT_scaling_MEASURED": {
+  "sweep_same_process_identical_config": {
+   "13": 3.8,
+   "14": 15.5,
+   "15": 65.0,
+   "16": 271.9
+  },
+  "per_rung_ratios": {
+   "13->14": 4.09,
+   "14->15": 4.19,
+   "15->16": 4.19
+  },
+  "theory": {
+   "13->14": 4.31,
+   "14->15": 4.29,
+   "15->16": 4.27
+  },
+  "ratio_over_theory": {
+   "13->14": 0.95,
+   "14->15": 0.978,
+   "15->16": 0.981
+  },
+  "FINDING": "the FWHT runs at 0.95-0.98 of theory while the EXHAUSTIVE ran at 1.068 of it. The excess is a property of the exhaustive's ACCESS PATTERN, not of this host, and the tool of record does not have it. Likely mechanism: the FWHT is blocked by construction (bounded row-blocks and column slabs) so the working set stays resident in cache, while the exhaustive walks 268M candidates against a fixed sample matrix with no such control. Evidence FOR Ember's memory-hierarchy candidate over noise, and simultaneously evidence it does not affect the kept tool.",
+  "resident_projection_NOT_A_QUOTE": {
+   "17_min": 19,
+   "18_min": 80
+  },
+  "REGIME_LIMIT": "n>=17 runs OUT-OF-CORE (34 GB / 137 GB), a different regime with strided disk in the loop. A resident law measured entirely inside RAM does NOT license an out-of-core figure. Half (B) remains required; resident scaling measured and stable, out-of-core scaling UNMEASURED."
  }
 }
