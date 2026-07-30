@@ -36,8 +36,12 @@ genuinely traversed on data that would have fit — and validated against the RE
 n=8/10/12/13, not against synthetic data. Same six-way known-answer discipline that killed the ISD
 decoder this morning: if it fails any rung it is not proposed.
 
-  --validate [--row-block N --col-slab N]   revealed rungs through the out-of-core path (the gate)
-  --job <id> --n <n>                        decode a flown job out-of-core
+  --row-block N --col-slab N   REQUIRED, no defaults. They decide whether the tested path is the
+                               production path, so they can change a reported result — and a
+                               parameter that can change a reported result must be stated by the
+                               caller, not supplied invisibly by me.
+  --validate --row-block N --col-slab N   revealed rungs through the out-of-core path (the gate)
+  --job <id> --n <n> --row-block N --col-slab N   decode a flown job out-of-core
 """
 import argparse, json, math, os, sys, tempfile
 import numpy as np
@@ -196,12 +200,27 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--validate", action="store_true")
     ap.add_argument("--job"); ap.add_argument("--n", type=int)
-    # DEFAULTS DELIBERATELY SMALL. The previous default (4096) is the exact value that FAILED to
-    # force blocking at n<=12 — a default that silently disables the gate it belongs to. Given that
-    # today produced three separate cases of a default becoming load-bearing, the default here is set
-    # so the DEFAULT INVOCATION is a genuine multi-pass gate; the assertion catches it either way.
-    ap.add_argument("--row-block", type=int, default=64)
-    ap.add_argument("--col-slab", type=int, default=64)
+    # *** NO DEFAULT. REQUIRED ARGUMENTS. (Ember general#2831 — and it indicts my own previous fix.) ***
+    # These two decide whether the path under TEST is the path that runs in PRODUCTION, so they can
+    # change a reported result. The rule: A PARAMETER THAT CAN CHANGE A REPORTED RESULT MUST NOT HAVE
+    # A DEFAULT — make it required. A required argument cannot silently be wrong: the caller must state
+    # a value, and that value then lands in the command line, the shell history, the log and the
+    # provenance record, so a reviewer sees A NUMBER SOMEONE CHOSE rather than an absence.
+    #
+    # History, because it is the whole argument: I first shipped default=4096, which silently no-opped
+    # the multi-pass path at 3 of 4 rungs while printing MATCH — a guard against unratified defaults,
+    # disabled by an unratified default. I then "fixed" it with default=64, i.e. a BETTER default, which
+    # does not touch the class at all: the next caller still gets a value chosen by me, invisibly.
+    #
+    # Contrast the resident decoder's chunk/top/temp_bytes, which keep their defaults LEGITIMATELY —
+    # measured bit-identical across chunk in {2^18,2^22,2^24} x top in {4,8,16}, i.e. performance-only
+    # BY CONSTRUCTION. An exact tool gets result-invariance under its defaults for free; a CONFIGURING
+    # tool does not, so its result-determining parameters must be required.
+    ap.add_argument("--row-block", type=int, required=True,
+                    help="rows per block (REQUIRED, no default — decides whether the multi-pass "
+                         "strided path is actually exercised)")
+    ap.add_argument("--col-slab", type=int, required=True,
+                    help="columns per slab (REQUIRED, no default — sets bytes per strided row read)")
     ap.add_argument("--out")
     a = ap.parse_args()
     if a.validate:
