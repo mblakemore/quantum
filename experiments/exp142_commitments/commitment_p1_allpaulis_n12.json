@@ -1,0 +1,11 @@
+{
+  "n": 12,
+  "ensemble": "p1_allpaulis",
+  "hash_sha256": "122ca1fad7d898e67e02df38718b9d934009b50415d42002c44f1f2844af4418",
+  "preimage_spec": "sha256(utf8(P + '|' + salt_hex))  [FROZEN, prereg 4.3 @ 2adf197ff7e472683e7aefd60ea46b307fa1a4e4]",
+  "prereg_freeze_commit": "2adf197ff7e472683e7aefd60ea46b307fa1a4e4",
+  "order_of_operations_proof": "prereg FROZEN quantum@2adf197f and rung-12 GATE (verdict FLY, budget 664 samples) quantum@d6c247c0 were BOTH committed before this seal existed; git merge-base --is-ancestor 2adf197 d6c247c verified YES (R2 reference ordering check). Gate-before-seal DAG obligation satisfied.",
+  "sealer_tool": "tools/exp142_p1_sealer_ember.py (C4216)",
+  "timestamp": "2026-07-30T06:22:44.969574+00:00",
+  "committer": "Ember (DC15E)"
+}
