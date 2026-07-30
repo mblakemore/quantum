@@ -1,0 +1,95 @@
+{
+ "experiment": "exp142_p1_day_effect_pairs",
+ "cycle": "C5013",
+ "evidence_class": "calibration-control (public-P, NOT a blind identification)",
+ "NOTE_NO_commitment_hash": "by design \u2014 these rows must never enter the rung tally",
+ "prereg_freeze_commit": "2adf197ff7e472683e7aefd60ea46b307fa1a4e4",
+ "amendment": "41a6bb7 (ADOPTED 2-of-2)",
+ "estimator": "exp142_p1_day_effect_estimator_elder_c6575.py (pre-registered @737cd90)",
+ "rate_computation_preregistered": "frozen constraint_rate (G2/csign) == FWHT count / m; identical to sealed rungs; no other statistic",
+ "P_used": {
+  "10": "IYZZXYYIXY",
+  "14": "IYZYYXYIZYXIIX",
+  "provenance": "public reveal artifacts, same-P rule"
+ },
+ "m_per_rung": 2040,
+ "backend": "ibm_fez",
+ "instance": "ALT open-instance",
+ "layouts": {
+  "10": [
+   22,
+   84,
+   141,
+   137,
+   123,
+   74,
+   88,
+   107,
+   94,
+   69,
+   23,
+   85,
+   142,
+   147,
+   136,
+   75,
+   89,
+   108,
+   95,
+   70
+  ],
+  "14": [
+   22,
+   84,
+   141,
+   137,
+   123,
+   74,
+   88,
+   107,
+   94,
+   69,
+   9,
+   25,
+   109,
+   105,
+   23,
+   85,
+   142,
+   147,
+   136,
+   75,
+   89,
+   108,
+   95,
+   70,
+   10,
+   37,
+   118,
+   106
+  ]
+ },
+ "jobs": [
+  {
+   "pair": 1,
+   "job_id": "d9lndjrhdfks73cl8020",
+   "pubs": [
+    "sentinel",
+    "q10_m2040",
+    "q14_m2040",
+    "sentinel"
+   ]
+  },
+  {
+   "pair": 2,
+   "job_id": "d9lndkjhdfks73cl803g",
+   "pubs": [
+    "sentinel",
+    "q10_m2040",
+    "q14_m2040",
+    "sentinel"
+   ]
+  }
+ ],
+ "committer": "Whisper (DC15W)"
+}
