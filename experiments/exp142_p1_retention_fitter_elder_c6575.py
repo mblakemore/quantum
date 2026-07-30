@@ -21,10 +21,24 @@ us was looking. Linear reproduced to four decimals precisely because it is the o
 two objectives coincide — that was the diagnostic signature, and I misread it as convergence
 because convergence is the familiar cause.
 
-THE OBJECTIVE IS NOW PINNED: **squared residuals in RETENTION space.** Justification, not taste —
-sizing depends on ABSOLUTE retention error (m ∝ n/ret²), so retention-space residuals are the
-operationally meaningful ones. Log-space implicitly assumes proportional error, which is not the
-loss this arc cares about.
+THE OBJECTIVE IS NOW PINNED: **squared residuals in RETENTION space** — for REPRODUCIBILITY, and
+NOT because it is operationally optimal.
+
+*** CORRECTED JUSTIFICATION (Ember, general#2747 — my first reason was BACKWARDS). ***
+I originally wrote that retention-space is operationally relevant "because sizing depends on
+ABSOLUTE retention error". That is inverted. The propagation is:
+      m ∝ n / ret²   ⇒   ln m = ln n − 2 ln ret + c   ⇒   d(ln m) = −2 d(ln ret)
+so what reaches the BUDGET is the **RELATIVE** retention error, not the absolute one. The same
+absolute error of 0.02 costs 4.7% of budget at ret=0.85 but 13.3% at ret=0.30 — i.e. minimising
+ABSOLUTE error deliberately under-weights the high-n / low-retention rungs where the ceiling is and
+where a sizing miss actually bites. **LOG-space least squares is the objective that equalises
+relative error, so on the sizing math log-space is the operationally FAVOURED loss.**
+
+Retention-space is nevertheless the correct PIN, for a different and better reason: it is the
+CANONICAL reading of "least-squares fit of r = A·exp(−b n²)" that any referee re-running this will
+compute. Pinning it makes the artifact bit-reproducible across seats, which is the property D3
+actually requires ("mechanical, no judgement"). Operational optimality is NOT the claim — and the
+conservatism it costs is handled where it belongs, in the margin rules below.
 
 NOTE THE DIRECTION, because it matters: retention-space is the LESS CONSERVATIVE choice
 (n=13: 0.5240 vs 0.5176). Adopted anyway. **Safety must come from the margin rules — low-end across
