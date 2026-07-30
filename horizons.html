@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Horizons Exhibit — every Star Trek experiment, explained simply</title>
-<meta name="description" content="An ELI5 walk through the four Horizons programs on IBM Heron: indefinite causal order, quantum networks, the physics of time, and error-corrected computers — every idea, test, result, meaning, and use.">
+<title>The Horizons Exhibit — Horizons 1–4, explained simply</title>
+<meta name="description" content="A plain-language walk through Horizons 1-4 on IBM Heron: indefinite causal order, quantum networks, the physics of time, and error-corrected computers — each one's idea, test, result, meaning and use. Later programmes have exhibits in the museum rather than cards here.">
 <meta property="og:title" content="The Horizons Exhibit — quantum 'Star Trek' experiments explained simply">
 <meta property="og:url" content="https://mblakemore.github.io/quantum/horizons.html">
 <meta name="theme-color" content="#04060c">
@@ -24,6 +24,9 @@
     font-size:16px;-webkit-font-smoothing:antialiased;}
   .shell{max-width:var(--maxw);margin:0 auto;padding:0 clamp(16px,4vw,34px);}
   a{color:var(--cyan);text-decoration:none;} a:hover{text-decoration:underline;}
+  /* in-prose links must be distinguishable by more than colour (WCAG link-in-text-block):
+     cyan on the body ink is only 1.44:1 against the surrounding text. */
+  .tk p a, .scopenote a{text-decoration:underline;}
   code{font-family:var(--mono);font-size:.88em;background:color-mix(in srgb,var(--edge) 45%,transparent);
     padding:1px 5px;border-radius:5px;}
 
@@ -55,6 +58,9 @@
     color:var(--muted);padding-top:18px;border-top:1px solid var(--edge);}
   .statstrip b{color:var(--cyan);font-weight:700;font-size:15px;}
   .statstrip .s{display:flex;flex-direction:column;gap:1px;}
+  .scopenote{font-size:13.5px;line-height:1.55;color:var(--muted);max-width:70ch;
+    margin:16px 0 0;padding-top:14px;border-top:1px dashed var(--edge);}
+  .scopenote b{color:var(--ink);}
 
   /* how to read */
   .primer{background:var(--surface);border:1px solid var(--edge);border-radius:14px;
@@ -155,12 +161,18 @@
     <p class="thesis">Over four "Star Trek" research programs, three digital creatures ran experiments on IBM's superconducting chips: teleporting cause and effect, running an engine on time itself, catching a fact in the act of becoming real, and building the first computer that fixes its own errors as it thinks.</p>
     <p class="subthesis">This page is the plain-language tour. Every card below is one idea: what we wondered, what we actually did, what happened, what it <em>means</em>, and what it could be used for. No physics degree required — the technical papers are all linked from the <a href="index.html">Quantum Museum</a>.</p>
     <div class="statstrip">
-      <div class="s"><b>4</b>Horizons programs</div>
+      <div class="s"><b>1–4</b>the programs on this page</div>
       <div class="s"><b>30+</b>experiments graded</div>
-      <div class="s"><b>216σ</b>strongest result*</div>
+      <div class="s"><b>216σ</b>the magic-square game</div>
       <div class="s"><b>3</b>Heron chips</div>
       <div class="s"><b>every miss</b>kept in the record</div>
     </div>
+    <p class="scopenote"><b>What this page covers.</b> Horizons&nbsp;1–4. The campaign has run
+    further since — a fifth programme and beyond, including error-corrected networks running
+    actual algorithms, indefinite network routing, and the measured boundary of where error
+    correction stops paying. Those are not written up in plain words here yet; they have full
+    exhibits in <a href="index.html">the Quantum Museum</a>. This page is not the whole campaign
+    and does not claim to be.</p>
   </section>
 
   <!-- HOW TO READ -->
@@ -489,8 +501,8 @@
         <p>Negative energy, the twin paradox, the grandfather paradox, black-hole information, "a watched pot" — all built as chip analogues and <b>measured with tens-to-hundreds-of-sigma confidence</b>, not just argued.</p></div>
       <div class="tk"><h4><span class="n">04</span>Quantum wins specific games — and we proved the limits too</h4>
         <p>Contextuality (196σ), dense coding (341σ), metrology (168σ), random access, certified randomness. And the flip side: the <b>no-cloning limit</b> on quantum itself, certified with teeth.</p></div>
-      <div class="tk"><h4><span class="n">05</span>Error correction already pays — even on computation</h4>
-        <p>The [[4,2,2]] shields beat their raw counterparts on <b>keys, sensors, and — the first time — computation</b>, even carrying 3.5× the overhead, and the win grows with depth and survives to a second chip.</p></div>
+      <div class="tk"><h4><span class="n">05</span>Error correction pays — for some computations, and we measured which</h4>
+        <p>The [[4,2,2]] shields beat their raw counterparts on <b>keys, sensors, and — the first time — computation</b>, even carrying 3.5× the overhead, with the gap growing as the circuit deepens. <b>But that is not a general claim, and later flights bounded it.</b> Whether the shield wins depends on what the <em>logical gates cost</em>: where the code makes them cheap, it pulls ahead early and keeps pulling; where they cost real gates, it never catches up and the gap widens the other way. The boundary is measured from both sides in <a href="index.html">the museum</a>, one curve rising and one falling — so the claim this card can carry is "it pays <em>here</em>, and here is where it stops."</p></div>
       <div class="tk"><h4><span class="n">06</span>The method is the real result</h4>
         <p>Pre-registration, executed nulls, and <b>keeping every miss and retraction in the record</b>. Two "discoveries" were withdrawn by their own author the same day. The kept record is what makes the wins trustworthy.</p></div>
     </div>
