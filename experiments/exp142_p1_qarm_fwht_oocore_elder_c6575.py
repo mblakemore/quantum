@@ -170,11 +170,22 @@ def validate(row_block, col_slab):
         res_rows, _ = RES_IMPL.decode_fwht(bits, n, mapping, csign, top=8)
         setmatch = {(p, round(r, 6)) for p, r in rows} == {(p, round(r, 6)) for p, r in res_rows}
         good &= setmatch
+        # *** ASSERT THE FORCING ACTUALLY HAPPENED (Ember general#2824). ***
+        # A test that CONFIGURES a condition must ASSERT the condition was achieved, not assume the
+        # configuration achieved it. My first run of this very gate set row_block=col_slab=4096 and
+        # the blocking silently did NOT happen at n=8/10/12 — the block exceeded the matrix dimension,
+        # one block covered everything, the strided multi-pass path was never traversed, and it still
+        # printed MATCH. The flag was set; the condition was not met. A forced-blocking gate that does
+        # not assert blocks > 1 is a FLAG, NOT A GATE.
+        rblocks = -(-geom["rows"] // row_block)      # ceil
+        cblocks = -(-geom["cols"] // col_slab)
+        forced = (rblocks > 1) and (cblocks > 1)
+        good &= forced
         ok_all &= good
-        passes = max(1, geom["rows"] // row_block) + max(1, geom["cols"] // col_slab)
         print(f"  n={n:<3} {P:<14} rate {rate:.4f} (exp {exp_rate:.4f})  {geom['rows']}x{geom['cols']} "
-              f"{passes} blocks  top8-set {'=' if setmatch else 'DIFFERS'}  {dt:6.1f}s  "
-              f"{'MATCH' if good else '*** FAIL ***'}")
+              f"{rblocks}r x {cblocks}c blocks  top8-set {'=' if setmatch else 'DIFFERS'}  {dt:6.1f}s  "
+              f"{'MATCH' if good else '*** FAIL ***'}"
+              + ("" if forced else "  <-- NOT FORCED: one block covers the axis, strided path NOT exercised"))
     print(f"\n  OUT-OF-CORE PATH: {'EXACT on every revealed rung AND top-8-set-identical to the resident impl' if ok_all else 'FAILED — not proposable'}")
     print("  NOTE: this is correctness ONLY. No throughput claim is made or implied — half (B) has")
     print("  not run, so there is still NO honest n=18 duration.")
@@ -185,8 +196,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--validate", action="store_true")
     ap.add_argument("--job"); ap.add_argument("--n", type=int)
-    ap.add_argument("--row-block", type=int, default=1 << 12)
-    ap.add_argument("--col-slab", type=int, default=1 << 12)
+    # DEFAULTS DELIBERATELY SMALL. The previous default (4096) is the exact value that FAILED to
+    # force blocking at n<=12 — a default that silently disables the gate it belongs to. Given that
+    # today produced three separate cases of a default becoming load-bearing, the default here is set
+    # so the DEFAULT INVOCATION is a genuine multi-pass gate; the assertion catches it either way.
+    ap.add_argument("--row-block", type=int, default=64)
+    ap.add_argument("--col-slab", type=int, default=64)
     ap.add_argument("--out")
     a = ap.parse_args()
     if a.validate:
