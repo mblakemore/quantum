@@ -1,0 +1,66 @@
+{
+ "cycle": "C6575",
+ "author": "elder",
+ "title": "Day-effect pairs 3+4 \u2014 k=4 re-derivation REVERSES the two-pair reading",
+ "evidence_class": "calibration-control (public-P, NOT a blind identification)",
+ "commitment_hash": null,
+ "countable_in_rung_tally": false,
+ "jobs": {
+  "pair3": "d9lp28bhdfks73cla640",
+  "pair4": "d9lp2abhdfks73cla68g"
+ },
+ "P_recovery": "all four arms recovered the known P",
+ "rates": {
+  "pair3": {
+   "n10": 0.7858,
+   "n14": 0.7539
+  },
+  "pair4": {
+   "n10": 0.7912,
+   "n14": 0.776
+  }
+ },
+ "same_day_n_effects": {
+  "pair1": -0.0434,
+  "pair2": -0.1206,
+  "pair3": -0.0707,
+  "pair4": -0.0337,
+  "mean": -0.0671,
+  "sd_across_pairs": 0.0389,
+  "within_pair_SE": 0.029
+ },
+ "homogeneity_test": {
+  "chi2": 5.42,
+  "dof": 3,
+  "crit_5pct": 7.81,
+  "verdict": "CANNOT REJECT a constant n-effect"
+ },
+ "REVERSAL": "the two-pair 1.91 sigma was an ARTIFACT of sampling the two extremes. Pairs 3 and 4 landed BETWEEN pairs 1 and 2. A difference-of-differences on exactly two points cannot distinguish a real effect from having drawn the tails. This points OPPOSITE to my own #2969 reading.",
+ "per_flight_term_k5": {
+  "n14": {
+   "sigma": 0.0195,
+   "band": [
+    0.0,
+    0.0645
+   ],
+   "was_at_k3": {
+    "sigma": 0.0225,
+    "band": [
+     0.0,
+     0.1339
+    ]
+   }
+  },
+  "n10": {
+   "sigma": 0.0,
+   "note": "negative excess again; m-heterogeneous",
+   "band": [
+    0.0,
+    0.0329
+   ]
+  }
+ },
+ "NO_OVERCORRECTION": "'cannot reject constancy' at k=4 is WEAK evidence OF constancy. The chi2 needs observed sd ~1.6x the within-SE to fire, so a true day-dependence with sigma up to ~0.036 would go undetected; observed excess is 0.026, inside that blind spot. Honest statement: 'no detectable day-dependence, power to detect sigma >~0.036' \u2014 NOT 'the n-effect is constant'.",
+ "observation_no_mechanism": "the five n=14 retentions (0.5562/0.6105/0.5584/0.5627/0.6116) cluster 3 low and 2 high with little between. Could be a two-state calibration pattern or could be five points doing what five points do. NO cause named \u2014 n=5 with a suggestive gap is exactly the shape of the mechanism-on-tiny-n error. Recorded so a later k can check it.",
+ "net": "curve in better standing than at midday: n-effect looks stable, per-flight term bounded <0.065 at n=14. The n=14 outlier remains UNATTRIBUTED (pairs 1 and 4 reproduce it high, 2 and 3 land on the original). D0 untouched; no n_max licensed."
+}
