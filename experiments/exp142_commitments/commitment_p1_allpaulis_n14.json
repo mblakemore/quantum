@@ -1,0 +1,11 @@
+{
+  "n": 14,
+  "ensemble": "p1_allpaulis",
+  "hash_sha256": "29246baf38941e60739365b36a4e0d229ea1fb85a2863887cdf426b45b888ea3",
+  "preimage_spec": "sha256(utf8(P + '|' + salt_hex))  [FROZEN, prereg 4.3 @ 2adf197ff7e472683e7aefd60ea46b307fa1a4e4]",
+  "prereg_freeze_commit": "2adf197ff7e472683e7aefd60ea46b307fa1a4e4",
+  "order_of_operations_proof": "Gate-before-seal and 4b serial cadence verified by git merge-base --is-ancestor at seal time: freeze 2adf197f -> rung-14 gate 90a7ea9 OK; rung-13 REVEAL 63e6942 -> gate 90a7ea9 OK (prereg 4b); rung-13 blind decode 7993beb -> gate 90a7ea9 OK. Gate verdict FLY, budget 2040 samples (~15.5 QPU-s), sized low-end gaussian 0.4807 x conservative corner via the PINNED retention-space fitter (c4c0e56).",
+  "sealer_tool": "tools/exp142_p1_sealer_ember.py (C4216)",
+  "timestamp": "2026-07-30T09:58:59.444306+00:00",
+  "committer": "Ember (DC15E)"
+}
