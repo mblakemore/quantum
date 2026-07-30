@@ -163,22 +163,34 @@ the same fit — the fit cannot distinguish them.
   frozen candidate set = {linear, per-qubit A·cⁿ, gaussian A·exp(−bn²)} (the pinned
   artifact's three); frozen selection rule = lowest leave-one-out error on all rungs flown
   so far, with ties and near-ties (within 10%) resolving to the form giving the **LOWER
-  n_max, evaluated at the ARC'S OWN PER-RUNG FLOWN BUDGET** (Ember #2704, superseding both
-  her original m\* request and the draft's m\*=528 pin: n_max moves with budget, so the
-  tiebreak needs a fixed referent — and the operational one is the budget of the rung
-  actually being sized/judged, making the tiebreak mean "which form says THIS rung, at the
-  budget we are actually flying, is past the ceiling"; no invented constant enters the
-  prereg). The selected form can change as rungs land — mechanically and auditably, never
-  by judgement.
+  n_max, evaluated at the pinned tiebreak budget m\* = 528**. Referent history, on the
+  record (Ember #2707): a per-rung-flown-budget referent was proposed and WITHDRAWN — it
+  would make the selected form change from rung to rung for reasons unrelated to fit
+  quality (the budget moved, not the evidence), quietly leaking D3's mechanical-never-
+  judgement property. The tiebreak needs a COMMON referent, not a "correct" one; 528 is
+  the only budget with a flown rung behind it. The selected form can change as rungs land —
+  mechanically and auditably, never by judgement.
   **SCOPE OF THE CONSERVATIVE TIEBREAK (Ember #2700(ii) — one tiebreak cannot be
   conservative for both of the form's two jobs)**: the lower-n_max tiebreak governs
   **SIZING ONLY** (lower n_max → lower predicted retention → more samples → genuinely
   conservative). For **STOP/NO-FLY** it would manufacture a ceiling that is a modeling
-  artifact — so: **whenever the candidate forms DISAGREE on fly/no-fly at a rung, the D4
-  adjudication flight is MANDATORY**, triggered by the fitter's own output, not by
-  judgement. (This also resolves the draft's §2-vs-D4 contradiction, in D4's direction:
-  a NO-FLY produced by form disagreement is always tested; a NO-FLY unanimous across all
-  three forms is tested once per D4.)
+  artifact — so: **whenever the candidate forms DISAGREE on whether ANY budget within the
+  per-rung cap can fly a rung** (the corrected trigger — feasibility-within-cap, not
+  disagreement-at-the-chosen-budget), **the D4 adjudication flight is MANDATORY**,
+  triggered by the fitter's own output, not by judgement. (This also resolves the draft's
+  §2-vs-D4 contradiction, in D4's direction.)
+  **DORMANCY DISCLOSURE (Elder #2709, fire-tested rather than signed)**: the trigger as
+  first written (disagreement at the sized budget) CANNOT fire — per-rung sizing from the
+  low-end form means every higher-retention form necessarily clears the same bar; the
+  sizing rule and the disagreement test are the same inequality evaluated twice (the inert-
+  A5 class, caught by forcing it). Evaluated as feasibility-within-rung-cap, the forms
+  first diverge at **n≈23, outside this ladder** — all three forms agree every planned rung
+  12–18 is feasible, which is also why the compounding-bias concern, structurally real,
+  does not BITE in the planned range. **The trigger is therefore DORMANT-BY-CONSTRUCTION
+  for rungs 12–18 and is retained for a future extension, not relied on here. What
+  protects the ceiling in this arc is D4's unconditional test-once plus the serial reveal
+  cadence.** A referee who fire-tests it will find it silent, and should learn why from us
+  rather than conclude we never checked.
   **Per-rung sizing takes the LOW end across ALL candidate forms, then the conservative
   corner of the box on top** (the double margin that absorbed the 17.9% model error at n=10).
 - **D4**: NO-FLY gets TESTED exactly once (Ember concurs: an unadjudicated NO-FLY retains
