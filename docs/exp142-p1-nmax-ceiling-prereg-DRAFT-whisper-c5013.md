@@ -85,8 +85,9 @@ WHEN its trigger is visible, so the rule is split)**:
 
 ## 4. Budget envelope
 
-Per-rung QPU: gate-derived; expectation from the per-qubit model is seconds at n=12/14,
-tens of seconds at 16/18 as required samples grow with 1/retention². **Arc cap (D2): 120
+Per-rung QPU: gate-derived; required samples grow as **m ∝ n / retention²** (Elder #2693
+correction: the null-max bar itself rises as √(2n·ln4), so both terms grow with n) —
+seconds at n=12/14, tens of seconds at 16/18. **Arc cap (D2): 120
 QPU-seconds total across all rungs including the diagnostic re-fly** — checked against the
 ALT window before each flight; the ladder pauses (not dies) if the window is short, resuming
 next window. Cost-conscious ordering: rungs fly lowest-n first; each reveal updates the
@@ -118,14 +119,25 @@ agreement is not form confirmation; (ii) any published retention base must state
 reading, since c^(2n) ≡ (c²)ⁿ makes **0.9564 per rung** and **0.9780 per physical qubit**
 the same fit — the fit cannot distinguish them.
 
-- **D1**: rung list 12/14/16/18 + **data-driven densification (Ember #2690)**: a rung that
-  PASSES with separation below the D5 floor inserts the intermediate odd rung before
-  proceeding — localization only when the data asks for it, no discretion.
+- **D1 — DENSE LADDER: n = 12, 13, 14, 15, 16, 17, 18** (Elder #2693 costing: the whole
+  dense ladder needs ~1,650–2,750 samples ≈ **12–21 QPU-seconds**, ~6× inside the arc cap —
+  the extra cost is seals and flights, not QPU, and with the forms disagreeing by 16 rungs
+  the single most valuable output is a TIGHTLY LOCALISED boundary; denser rungs also feed
+  the D3 selection rule faster, which is how the form question actually gets settled).
+  Ember's densification rule is thereby subsumed; expectation at the flown budget is 14–16
+  (all-forms range), so n=17/18 may sit past the ceiling — acceptable for a ceiling hunt.
 - **D2**: arc QPU cap 120s; diagnostic re-fly ≤ 1× the failed rung's budget.
-- **D3**: mid-arc update = mechanical re-run of the pinned fitter per new revealed point,
-  ALL THREE forms carried; **per-rung sizing takes the LOW end across forms, then the
-  conservative corner of the box on top** (Elder rec 2 — the double margin is the
-  model-error insurance that absorbed the 17.9% error at n=10).
+- **D3 — FREEZE THE MODEL SET AND THE SELECTION RULE, NOT THE WINNER (Elder #2693,
+  replacing the draft's "form frozen")**: freezing one form would make every gate inherit
+  what four points happened to favour and deny the arc its own best evidence (each new rung
+  is worth more than any refit of four points); unfreezing invites discretion. Instead:
+  frozen candidate set = {linear, per-qubit A·cⁿ, gaussian A·exp(−bn²)} (the pinned
+  artifact's three); frozen selection rule = lowest leave-one-out error on all rungs flown
+  so far, with ties and near-ties (within 10%) resolving to the form giving the **LOWER
+  n_max** (conservative tiebreak). The selected form can change as rungs land — mechanically
+  and auditably, never by judgement. **Per-rung sizing then takes the LOW end across ALL
+  candidate forms, then the conservative corner of the box on top** (the double margin that
+  absorbed the 17.9% model error at n=10).
 - **D4**: NO-FLY gets TESTED exactly once (Ember concurs: an unadjudicated NO-FLY retains
   untested-guard status) — one flight at cap; either outcome is a finding.
 - **D5**: mode-(a) floor = **3 SE** (Ember: the gate's own budgeting criterion — "flew at a
