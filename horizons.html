@@ -109,6 +109,11 @@
   .field .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
     color:var(--amber);display:block;margin-bottom:2px;}
   .field.mean .lab{color:var(--violet);}
+  /* in-card caveat: a field variant, deliberately NOT the .fences panel class, which is a
+     full-width amber box and renders wrong inside a card. */
+  .field.caveat{border-left:2px solid color-mix(in srgb,var(--red) 55%,transparent);
+    padding-left:10px;margin-top:2px;}
+  .field.caveat .lab{color:var(--red);}
   .field.use .lab{color:var(--green);}
   .field .val{color:var(--text);}
   .field.result .val{color:var(--text);}
@@ -146,7 +151,7 @@
     <a href="#h1">1 · Order</a>
     <a href="#h2">2 · Time</a>
     <a href="#h3">3 · Limits</a>
-    <a href="#h4">4 · Shields</a>
+    <a href="#h4">4 · Shields</a><a href="#h5">5 · Five-year mission</a>
     <a href="#end">Conclusions</a>
     <a href="index.html">Museum</a>
   </nav>
@@ -483,6 +488,87 @@
         <div class="field result"><span class="lab">What happened</span><span class="val">No Eagle chip is available to us. Rather than fake it, we <em>wrote the boundary down</em> and did the strongest available version (a second Heron chip) — and froze the bench so it's ready the day an Eagle opens up.</span></div>
         <div class="field mean"><span class="lab">What it means</span><span class="val">Knowing where the warp core <em>can't</em> go is part of the map. Cross-<em>generation</em> portability stays an open question, marked on the map.</span></div>
         <div class="field use"><span class="lab">Use</span><span class="val">A ready-to-run exam for whenever new hardware appears.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HORIZONS 5 ============ -->
+  <section class="prog" id="h5">
+    <div class="prog-head">
+      <span class="prog-num">HORIZONS 5</span>
+      <span class="prog-name">The five-year mission</span>
+      <span class="prog-tag">error-corrected machines that run real programs · a network whose route is in superposition · where error correction stops paying</span>
+    </div>
+    <p class="prog-lede">Horizons 1–4 built the parts. This programme puts them to work: two
+      error-corrected nodes that share no wire are made to run <b>actual algorithms</b> between them,
+      a message is sent through <b>two relay stations at once</b>, and — the question the whole field
+      wants answered — the point where error correction <b>starts</b> paying is measured, along with
+      the point where it <b>stops</b>. Every card here has a full exhibit in the museum, and the
+      exhibit is the claim of record.</p>
+
+    <div class="grid">
+      <div class="card lead">
+        <div class="card-top">
+          <div class="card-title"><span class="em">The Federation Runs a Program</span> — algorithms across a shielded cut</div>
+          <div class="tag-row"><span class="pill win">CERTIFIED</span></div>
+        </div>
+        <div class="tag-row"><span class="ref">Exp220–222 · Exp226</span><span class="ref">ibm_fez</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Take two error-corrected blocks of qubits that share <em>no</em> gate — nothing quantum passes between them — and join them only with ordinary classical bits. Can they still run a program <em>together</em>, as one machine?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Yes, four different ways. The first quantum algorithm ever written (Deutsch's, 1985) ran with its question split across the two halves. A shared entangled state was welded into being across the gap. A constant-depth algorithm ran with its internal wiring distributed. And a gate was applied to one qubit <b>purely by measuring another</b>, its result delivered across the cut. In every one, delete the classical bits and the answer collapses to noise — those bits are carrying the computation.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">A quantum computer does not have to be one lump of hardware. It can be several protected islands that never touch, stitched together by ordinary communication — which is what a real quantum datacentre would have to be.</span></div>
+        <div class="field use"><span class="lab">What we can build with it</span><span class="val">Modular quantum machines: add capacity by adding nodes rather than by making one chip bigger.</span></div>
+        <div class="field caveat"><span class="lab">What this is NOT</span><span class="val">One of these algorithms has "quantum advantage" in its <em>name</em>, and nothing here beat a classical competitor — no classical method was named, run, or outrun. Running an advantage algorithm is a different claim from demonstrating advantage. And in that particular run the shielded version scored <em>lower</em> than the unshielded one; distributing the work costs gates, and at this size that cost outweighs what the shield saves.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title"><span class="em">Where the Shield Starts to Pay</span> — and where it stops</div>
+          <div class="tag-row"><span class="pill win">CERTIFIED</span><span class="pill wall">WALL</span></div>
+        </div>
+        <div class="tag-row"><span class="ref">Exp231 + Exp233</span><span class="ref">ibm_fez</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Error correction costs something before it saves anything — you spend extra gates to protect a computation. So the real question is not "does it work" but <b>when does it start winning</b>.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Two flights, and they answer in opposite directions on purpose. Where the code makes the logical gates <em>cheap</em>, the protected computation overtakes the unprotected one and the gap keeps growing with depth. Where the logical gates cost <em>real</em> gates, it never overtakes and the gap widens the other way. The second flight <b>missed its own pre-set target</b> — and that miss is the finding, published beside the win.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Whether error correction pays is not a property of the code. It is a property of <b>the computation you run on it</b>. And the reason the good case improves with depth is worth stating precisely: the shield <em>holds nearly still</em> while the unprotected circuit decays — the advantage grows because the baseline falls, not because the protection gets better — the shielded computation barely moves while the unprotected one decays about <b>eighteen times further</b>.</span></div>
+        <div class="field use"><span class="lab">What we can build with it</span><span class="val">A rule for deciding <em>which</em> computations to protect on today's hardware, instead of guessing.</span></div>
+        <div class="field caveat"><span class="lab">What this is NOT</span><span class="val">Not a general "error correction works" result — the companion flight on the same page is the counterexample, run by the same people on the same chip. Distance-2 <em>detection</em> with post-selection, two logical qubits, one device.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title"><span class="em">The Superposed Relay</span> — a message that takes both routes</div>
+          <div class="tag-row"><span class="pill win">CERTIFIED</span></div>
+        </div>
+        <div class="tag-row"><span class="ref">Exp224 + Exp225</span><span class="ref">ibm_fez</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">A network sends a message along <em>a</em> route. What if the route itself is in superposition — the message passing through two relay stations at once?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">The superposed route carries a resource that neither a fixed path nor a coin-flip between paths can carry, and the measurement that proves it fires far above both of those controls. Then the same superposed route was put <b>behind the error-correcting shield</b> and survived, at 96% of its unshielded strength.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Indefinite order is not only something you can do to operations inside one chip — it is something a <em>network</em> can have, and it is compatible with error correction rather than destroyed by it.</span></div>
+        <div class="field use"><span class="lab">What we can build with it</span><span class="val">Routing as a quantum resource: network topologies that carry more than any single definite path could.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title"><span class="em">One Dial for the Arrow of Time</span> — information and energy on one knob</div>
+          <div class="tag-row"><span class="pill win">CERTIFIED</span></div>
+        </div>
+        <div class="tag-row"><span class="ref">Exp227</span><span class="ref">ibm_fez</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">There is one knob: <b>how much the environment recorded</b> of what happened to a qubit. Turn it up and the qubit stops behaving like a wave and the event becomes a definite fact. Do other quantities ride the same knob?</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Three of them do, each following a law written down before the flight, measured across five settings on one apparatus: how wave-like the system still is, how objective the fact has become, and how strongly the two are linked.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Quantities that look like different physics — a wave's visibility, a fact's objectivity, the link between a system and its surroundings — turn out to be one number read three ways. That single number is what "the past became definite" actually <em>means</em> here.</span></div>
+        <div class="field use"><span class="lab">What we can build with it</span><span class="val">A measurable handle on decoherence: how far a computation has slid toward classical, as one dial reading.</span></div>
+        <div class="field caveat"><span class="lab">Reported, not certified</span><span class="val">The same apparatus also shows a fourth quantity on the knob — the energy one classical bit can unlock in the recording environment, which <em>rises</em> as the record completes. That measurement was deliberately kept <b>outside</b> the pass/fail test and is reported as-is, so it is not a certified result. And it is not free energy: the <b>measurement</b> pays for and injects the energy; the bit only tells the far end which local operation unlocks its share. Nothing is transported.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title"><span class="em">The past, reopened</span> — crossing an old wall a second way</div>
+          <div class="tag-row"><span class="pill win">CERTIFIED</span></div>
+        </div>
+        <div class="tag-row"><span class="ref">Exp229 + Exp230</span><span class="ref">ibm_fez</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Earlier programmes showed a qubit has no definite value between looks, and that erasing a which-path record can bring back an interference pattern. Both were revisited — one to cross the same wall by a cheaper route, one to ask a sharper question.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">The "no definite value" wall was crossed again by a much simpler circuit, independently. And the eraser question got sharper: it is not only <em>whether</em> the pattern returns — the eraser's own outcome selects <b>which</b> of two opposite patterns was there, while the unsorted data stays flat the whole time.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">A later choice can sort an already-recorded past into one of two mutually exclusive stories. It cannot <em>send</em> anything backwards — the flat unsorted data is the proof — but which story you can tell is not settled until you look.</span></div>
+        <div class="field use"><span class="lab">What we can build with it</span><span class="val">Sharper tests of what "a measurement happened" means, on hardware rather than on paper.</span></div>
+        <div class="field caveat"><span class="lab">What this is NOT</span><span class="val">The simpler re-crossing does <em>not</em> replace the original: it uses a plainer kind of measurement that leaves open the standard objection ("your measurement disturbed it"), which the original closed. Both results stand, and the museum page says which is the stronger protocol.</span></div>
       </div>
     </div>
   </section>
