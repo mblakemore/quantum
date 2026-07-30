@@ -41,5 +41,90 @@
   "error_direction": "OPTIMISTIC (permissive) \u2014 predicted higher retention than delivered",
   "shape": "decline ACCELERATES: deltas -0.018 / -0.043 / -0.146 per +2n. A 3-point LINEAR fit was structurally blind to this, which is the weak-link class I flagged when shipping it.",
   "guidance": "Do NOT reuse the 3-rung linear extrapolation. Use the 4-rung shape, take the LOW end, and buy the conservative corner of the parametric box \u2014 that choice, not the model, is what absorbed my 15% error at n=10."
+ },
+ "REFIT_5_RUNGS_c6575_rung12": {
+  "measured_true_P_rates": {
+   "4": 0.8833,
+   "6": 0.875,
+   "8": 0.8556,
+   "10": 0.7898,
+   "12": 0.753
+  },
+  "retention_per_rung": {
+   "4": 0.8494182825484765,
+   "6": 0.8310249307479226,
+   "8": 0.7880332409972302,
+   "10": 0.6422160664819945,
+   "12": 0.5606648199445984
+  },
+  "n12_source": "flown job d9leutrhdfks73ckt45g, blind-decoded 4f13839, REVEALED CORRECT (IZIZZXYYYXYZ)",
+  "fits": {
+   "linear": {
+    "loo": 0.05282627621685805,
+    "params": {
+     "a": 1.0407977839335183,
+     "b": -0.03831578947368426
+    },
+    "pred": {
+     "13": 0.5426925207756229,
+     "14": 0.5043767313019386,
+     "15": 0.4660609418282544,
+     "16": 0.4277451523545701,
+     "17": 0.3894293628808858,
+     "18": 0.3511135734072016
+    }
+   },
+   "per-qubit": {
+    "loo": 0.06306872404706343,
+    "params": {
+     "A": 1.1205744771540194,
+     "c": 0.9470251788165132,
+     "c_two_copy": 0.9731521868734166
+    },
+    "pred": {
+     "13": 0.5522561522685463,
+     "14": 0.5230004813546395,
+     "15": 0.49529462437599997,
+     "16": 0.4690564802165391,
+     "17": 0.44420829705211223,
+     "18": 0.4206764419475553
+    }
+   },
+   "gaussian": {
+    "loo": 0.03306368895117604,
+    "params": {
+     "A": 0.9310284294842526,
+     "b": 0.0034740255535637976
+    },
+    "pred": {
+     "13": 0.5175879667550052,
+     "14": 0.4712462611423409,
+     "15": 0.4260829577282328,
+     "16": 0.3825805699975498,
+     "17": 0.3411411865283056,
+     "18": 0.3020841237228269
+    }
+   }
+  },
+  "SELECTED_FORM": "gaussian",
+  "selection_rule": "lowest LOO on all rungs flown; frozen D3 rule, no judgement",
+  "PRE_FLIGHT_ACCURACY_n12": {
+   "linear": 0.6115,
+   "per-qubit": 0.6185,
+   "gaussian": 0.5734,
+   "ACTUAL": 0.5606648199445984,
+   "note": "all three OPTIMISTIC; 4th consecutive optimistic prediction. The D3 LOW-END (0.5734) was itself above the actual (0.5607) \u2014 low-end alone under-sizes; the conservative corner absorbed it."
+  },
+  "RUNG13_SIZING_INPUT": {
+   "low_end_across_forms": 0.5175879667550052,
+   "selected_form_pred": 0.5175879667550052,
+   "instruction": "size rung 13 from the LOW END (0.5176) then apply the conservative corner. Expect it to still be optimistic \u2014 that is now a measured property, not a worry."
+  },
+  "top_confuser_weight_watch": {
+   "n8": "ZYXZXXIX (high weight)",
+   "n10": "YIZIYIYYYX (high weight)",
+   "n12": "IIIIXIIIIIII (WEIGHT 1)",
+   "note": "possible single-qubit readout bias becoming dominant competitor -> prereg mode (b) would arrive from hardware asymmetry, not crowding. Report weight per rung."
+  }
  }
 }
