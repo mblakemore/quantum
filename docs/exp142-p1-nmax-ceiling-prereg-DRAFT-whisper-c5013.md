@@ -140,7 +140,22 @@ the same fit — the fit cannot distinguish them.
   ceiling lands HIGHER than expected — truncating the arc precisely when the result is most
   interesting. 180s carries the success case with margin; the ALT window (600s/rolling
   month, ~380–400s free after current jobs) covers it. §4's pause-not-die clause stands for
-  window shortfalls. Diagnostic re-fly ≤ 1× the failed rung's budget, counted inside the cap.
+  window shortfalls, **with the DRIFT SENTINEL pre-registered (Ember #2704)**: a
+  cross-window pause puts the high-n rungs on a different calibration epoch than the low-n
+  ones — a confound in retention(n), the primary deliverable, at exactly the end where the
+  ceiling lives. On any resume: **RE-FLY the last completed low rung (n=12, ~900 samples,
+  ~7 QPU-s, counted inside the cap) as a drift sentinel** — retention reproduces within
+  band → epochs poolable, curve stands; it does not → the split is visible instead of
+  silent. Diagnostic re-fly ≤ 1× the failed rung's budget, counted inside the cap.
+  **COMPOUNDING-BIAS NOTE (Ember #2704, the reason D2 and D4 are load-bearing TOGETHER)**:
+  the arc as first drafted carried TWO independent downward biases on its one primary
+  number — the conservative tiebreak stops the ladder sooner (model side) and a tight cap
+  truncates the run-to-18 case (budget side); both make the measured ceiling read LOWER
+  than the hardware's true one, and neither is visible reviewing D2 and D3 separately.
+  "A ceiling hunt with two structural downward biases is measuring its own conservatism as
+  much as the chip." The 180s cap removes the budget bias; the mandatory
+  D4-on-forms-disagreement is what stands between "the hardware stopped us" and "our model
+  stopped us."
 - **D3 — FREEZE THE MODEL SET AND THE SELECTION RULE, NOT THE WINNER (Elder #2693,
   replacing the draft's "form frozen")**: freezing one form would make every gate inherit
   what four points happened to favour and deny the arc its own best evidence (each new rung
@@ -148,11 +163,13 @@ the same fit — the fit cannot distinguish them.
   frozen candidate set = {linear, per-qubit A·cⁿ, gaussian A·exp(−bn²)} (the pinned
   artifact's three); frozen selection rule = lowest leave-one-out error on all rungs flown
   so far, with ties and near-ties (within 10%) resolving to the form giving the **LOWER
-  n_max, evaluated at the pinned tiebreak budget m\* = 528** (Ember #2700(i): n_max is a
-  function of budget — the forms' ordering can flip with m, so the tiebreak needs a fixed
-  referent; 528 is the only budget with a flown rung behind it, and the tiebreak needs a
-  COMMON referent, not a "correct" one). The selected form can change as rungs land —
-  mechanically and auditably, never by judgement.
+  n_max, evaluated at the ARC'S OWN PER-RUNG FLOWN BUDGET** (Ember #2704, superseding both
+  her original m\* request and the draft's m\*=528 pin: n_max moves with budget, so the
+  tiebreak needs a fixed referent — and the operational one is the budget of the rung
+  actually being sized/judged, making the tiebreak mean "which form says THIS rung, at the
+  budget we are actually flying, is past the ceiling"; no invented constant enters the
+  prereg). The selected form can change as rungs land — mechanically and auditably, never
+  by judgement.
   **SCOPE OF THE CONSERVATIVE TIEBREAK (Ember #2700(ii) — one tiebreak cannot be
   conservative for both of the form's two jobs)**: the lower-n_max tiebreak governs
   **SIZING ONLY** (lower n_max → lower predicted retention → more samples → genuinely
