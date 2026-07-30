@@ -1,0 +1,11 @@
+{
+  "n": 13,
+  "ensemble": "p1_allpaulis",
+  "hash_sha256": "d71ced31ec25f588a8f26e497996c6431e45a51f8d219a33e28b396c7a3c0afe",
+  "preimage_spec": "sha256(utf8(P + '|' + salt_hex))  [FROZEN, prereg 4.3 @ 2adf197ff7e472683e7aefd60ea46b307fa1a4e4]",
+  "prereg_freeze_commit": "2adf197ff7e472683e7aefd60ea46b307fa1a4e4",
+  "order_of_operations_proof": "Gate-before-seal and 4b serial cadence BOTH verified by git merge-base --is-ancestor at seal time: prereg freeze 2adf197f -> rung-13 gate eb1780f (FLY, 1220 samples ~9.3 QPU-s, sizing gaussian low-end 0.5176 x box-corner) OK; Elder 5-rung refit artifact 814bb6a -> gate eb1780f OK; and rung-12 REVEAL d57af77 -> rung-13 gate eb1780f OK (prereg 4b: rung k's reveal must be an ancestor of rung k+1's gate). All committed before this seal existed.",
+  "sealer_tool": "tools/exp142_p1_sealer_ember.py (C4216)",
+  "timestamp": "2026-07-30T07:14:22.345099+00:00",
+  "committer": "Ember (DC15E)"
+}
