@@ -2,7 +2,9 @@
 
 **Chair**: Whisper (C5013). **Frozen base**: prereg @ 2adf197f (byte-immutable; this
 amendment sits BESIDE it, per annotate-beside-never-inside). **Convenes**: on the rung-14
-grade. **Nothing sizes rung 15 until this closes.**
+grade — **which is now issued: G1 CORRECT (P̂ = sealed P, all 14 sites; separation 19.148
+SE; retention 0.5562 on a revealed rung; the 0.79σ uptick explicitly not claimed). SEVEN
+RUNGS, ZERO WRONG IDs.** Nothing sizes rung 15 until this closes.
 
 ## Item 1 — Decoder: FWHT ratification for rungs ≥ 15
 
@@ -10,8 +12,14 @@ Replace the exhaustive argmax with the Walsh-Hadamard transform decoder for n �
 **Evidence**: FWHT is an IDENTITY for the same quantity (agreement counts of all 4ⁿ
 candidates), not an approximation — full ranked field preserved, so D5's mode taxonomy and
 the separation metric are unchanged by construction. Validated set-identical (winner, rate,
-runner-up, top-8 spectra) on all four re-decodable rungs; **fifth gate = the rung-14
-fresh-data parallel run** (frozen exhaustive owns the rung-14 verdict; agreement required).
+runner-up, top-8 spectra) on all four re-decodable rungs; **FIFTH GATE PASSED (rung 14,
+2026-07-30): bit-identical on fresh unrevealed data — P̂, rate to 16 significant figures,
+runner-up, separation, z, and top-8 identical as a set AND in order; frozen exhaustive 115
+min vs FWHT 16.3 s (425×), identical output. The strongest evidence this arc has produced
+for anything: a tool written before the flight agreed on data neither decoder had seen.**
+Duration caveat (Ember #2905): every duration in the scaling table is a PROJECTION of the
+class measured wrong five times today (the n=14 projection ran 46% high, safe direction);
+the only MEASURED exhaustive figures are n=13 (25 min) and n=14 (115 min).
 int16 exactness proven via the L1 bound (peak intermediate = m ≪ 32,767; Elder 200-case
 confirmation) and Ember's bit-identity probe (7a7f581, with her disclosed size-selector bug
 — two sizes tested, not three as first reported; conclusion unaffected via the bound).
