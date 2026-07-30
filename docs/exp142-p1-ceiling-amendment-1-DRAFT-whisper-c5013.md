@@ -55,7 +55,11 @@ STOP / NO-FLY-adjudicated / mode-(a) resolution-floor / mode-(b) inversion.** On
 last two license an n_max claim; resource stops license only the lower bound
 "identification succeeded through n=K." **The four-object report (Ember)** goes in every
 results card so no coincidence masquerades as the chip:
-- **n_max (chip)** — retention → 0; forms diverge (gaussian ~26–28); THE deliverable.
+- **n_max (chip)** — **NOT PREDICTED, by D0 (enforced, Ember #2810 — its first real test,
+  against a number we liked).** Extrapolating the three pinned forms 13–15 rungs past the
+  data gives retention≈0.05 at n=25.5 (linear) / 29.8 (gaussian) / 57.8 (per-qubit) — a
+  **32-rung disagreement**, double the spread D0 was written against. The search is the
+  registration; this row stays empty until the ladder fills it. THE deliverable.
 - **n_sizable (our rule)** — 21 at m=2040 under the measured confuser (was "16" under the
   artifact); budget-dependent, therefore never a ceiling.
 - **n_affordable (our cap)** — ~24 at 180s under the measured confuser.
@@ -79,5 +83,15 @@ Four walls found in one day. **Three were ours** — an illustration, the defaul
 a transplanted box corner — all three CONSERVATIVE and therefore invisible ("a pessimistic
 artifact does not announce itself; it quietly ends the experiment early and looks
 responsible doing it"), all three found and fixed at **zero QPU cost** before any rung was
-lost. The fourth wall is retention → 0 near n≈26–28, and that one is the chip — the
-deliverable this arc was chartered to measure.
+lost. The fourth wall is retention → 0 — location NOT PREDICTED (D0; the forms disagree by 32
+rungs when pushed there) — and that one is the chip: the deliverable this arc was
+chartered to measure, by climbing, not by guessing.
+
+## Item 6 — The one remaining question that costs real work
+
+With items 2–3 deleting the constant-walls, **the decoder is the first wall the ladder
+hits**: n_readable = 16 resident against n_sizable = 21 (at m=2040) and n_affordable ≈ 24.
+The sitting decides: **is n=17–18 worth Elder's out-of-core FWHT build?** (Ember's
+feasibility probe says ~40 min/decode at n=18 with 423GB free — the work is the build,
+not the runtime.) [DECISION-POINT: build now / build when rung 16 grades / don't build,
+ladder ends at n_readable recorded as a COMPUTE STOP.]
