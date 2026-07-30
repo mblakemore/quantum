@@ -126,5 +126,81 @@
    "n12": "IIIIXIIIIIII (WEIGHT 1)",
    "note": "possible single-qubit readout bias becoming dominant competitor -> prereg mode (b) would arrive from hardware asymmetry, not crowding. Report weight per rung."
   }
+ },
+ "REFIT_6_RUNGS_c6575_rung13": {
+  "OBJECTIVE": "retention-space squared residuals, PINNED (exp142_p1_retention_fitter_elder_c6575.py)",
+  "measured_true_P_rates": {
+   "4": 0.8833,
+   "6": 0.875,
+   "8": 0.8556,
+   "10": 0.7898,
+   "12": 0.753,
+   "13": 0.7385
+  },
+  "retention_per_rung": {
+   "4": 0.8494,
+   "6": 0.831,
+   "8": 0.788,
+   "10": 0.6422,
+   "12": 0.5607,
+   "13": 0.5285
+  },
+  "n13_source": "flown job d9lfm73hdfks73cku54g, blind-decoded, PENDING REVEAL at time of write",
+  "fits": {
+   "linear": {
+    "sse": 0.00550635,
+    "loo_mae": 0.0394,
+    "n14": 0.497
+   },
+   "per-qubit": {
+    "sse": 0.00823476,
+    "loo_mae": 0.0534,
+    "n14": 0.5225
+   },
+   "gaussian": {
+    "sse": 0.00308622,
+    "loo_mae": 0.0282,
+    "n14": 0.4807
+   }
+  },
+  "SELECTED_FORM": "gaussian (3rd consecutive selection; LOO improving 0.0622->0.0365->0.0282)",
+  "RUNG14_SIZING_INPUT": {
+   "low_end_across_forms": 0.4807,
+   "downstream_low_end": {
+    "15": 0.4365,
+    "16": 0.3936,
+    "18": 0.3138
+   },
+   "instruction": "low end THEN conservative corner, per D3."
+  },
+  "PATTERN_BREAK_n13": {
+   "predicted_low_end": 0.524,
+   "actual": 0.5285,
+   "direction": "CONSERVATIVE \u2014 the pinned low-end came in BELOW actual",
+   "significance": "FIRST conservative prediction after FOUR consecutive optimistic ones (n=10 by 17.9%, n=12 by all three forms). Do NOT read one conservative rung as the optimism being cured \u2014 n=13 is a fresh point the fit had not seen, the margin is 0.0045 (small vs the 0.0282 LOO), and the honest reading is that the fit is now tracking rather than that the bias flipped. Keep the double margin."
+  },
+  "TOP_CONFUSER_WEIGHT_WATCH": {
+   "8": {
+    "P": "ZYXZXXIX",
+    "weight": 7,
+    "rate": 0.8
+   },
+   "10": {
+    "P": "YIZIYIYYYX",
+    "weight": 7,
+    "rate": 0.6193
+   },
+   "12": {
+    "P": "IIIIXIIIIIII",
+    "weight": 1,
+    "rate": 0.6175
+   },
+   "13": {
+    "P": "IXXYYXZXIXYIX",
+    "weight": 10,
+    "rate": 0.5787
+   },
+   "VERDICT": "my n=12 weight-1 flag did NOT persist. n=13 is weight 10. The single-qubit-readout-bias hypothesis I raised is NOT supported by the next rung \u2014 n=12 looks like a one-off draw, not a trend. Retracting the hardware-asymmetry lean; keep reporting weight per rung since one non-recurrence is also not proof of absence."
+  }
  }
 }
