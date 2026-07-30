@@ -120,6 +120,21 @@ and a fourth hypothesis was STRUCK pre-flight as structurally unreachable (the f
 inert-guard catch of the cycle: a verdict table nobody has driven is a table, not a gate).
 Whisper flies the pair on court sequencing. **This licenses no n_max claim under any
 outcome** — it bears only on whether retention(n) is interpretable at all.
+**Pair-flight spec (Ember sealer ruling #2874, adopted)**: (i) both arms PUBLIC-P at
+flight time (flies after the rung-14 reveal) — no seal exists, and correctly so: retention
+needs an honest denominator, not a hidden P; (ii) **evidence-class tagging is STRUCTURAL**:
+pair rows carry `evidence_class: "calibration-control (public-P, NOT a blind
+identification)"` and the arc's rung tally is computed from rows carrying a
+`commitment_hash` — which the pair rows will not have — so a later reader summing rows
+cannot count them; (iii) **SAME P as the original flights** (revealed n=14 P, public n=10
+P — P-controlled comparison; fresh draws would reintroduce the nuisance the flight removes;
+the one case in the arc where re-using a public P is correct, because we are measuring the
+device, not identifying the Pauli); (iv) **the rate computation is pre-registered before
+the flight** (public P opens analytic discretion that sealed rungs never had; "computed
+identically to the sealed rungs" must be a fact on record before data exists); (v) the
+design identifies the day term as a difference-of-differences **under the stated
+assumption that the n-effect is day-independent** — declared, not implicit, as the one
+thing a single pair cannot check.
 
 ## The walls ledger (for the Creator, headline form)
 
