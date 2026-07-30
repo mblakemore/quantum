@@ -1,0 +1,62 @@
+{
+ "cycle": "C6575",
+ "author": "elder",
+ "title": "The Q-arm sizing confuser is the random NULL MAX, not a fixed 0.660 \u2014 measured on 4 revealed rungs",
+ "why_it_matters": "The frozen gate sizes against conf_size=0.660. That model, not the QPU and not retention, is what returns NO-FLY at n=16 and terminates the ladder. It is contradicted by every measured spectrum and is mis-specified in FORM.",
+ "measured": [
+  {
+   "n": 8,
+   "m": 90,
+   "winner": 0.8556,
+   "confuser": 0.8,
+   "null_max": 0.7482,
+   "delta_vs_null_max": 0.0518
+  },
+  {
+   "n": 10,
+   "m": 528,
+   "winner": 0.7898,
+   "confuser": 0.6193,
+   "null_max": 0.6146,
+   "delta_vs_null_max": 0.0047
+  },
+  {
+   "n": 12,
+   "m": 664,
+   "winner": 0.753,
+   "confuser": 0.6175,
+   "null_max": 0.6119,
+   "delta_vs_null_max": 0.0056
+  },
+  {
+   "n": 13,
+   "m": 1220,
+   "winner": 0.7385,
+   "confuser": 0.5787,
+   "null_max": 0.5859,
+   "delta_vs_null_max": -0.0072
+  }
+ ],
+ "finding": "the measured top confuser tracks the random null max to within +-0.007 for every n>=10. n=8 shows +0.052 of genuine STRUCTURAL excess at m=90 \u2014 an argument for PADDING the null max, not for replacing it with a constant.",
+ "the_form_error": "the null max falls as 1/sqrt(m); a constant confuser does not. A confuser constant in m asserts that SAMPLES CANNOT HELP, which makes every budget insufficient by construction. Directly refuted: the same confuser goes 0.800 at m=90 to 0.579 at m=1220.",
+ "affordability_under_validated_confuser": {
+  "criterion": "m for 3sd over null max, 7.6 QPU-s/1000 samples, retention = low end across 3 forms fitted to 6 revealed rungs",
+  "n14": 3.4,
+  "n16": 5.6,
+  "n18": 9.6,
+  "n20": 17.2,
+  "n22": 32.7,
+  "n24": 107.2,
+  "n26": 1894.9,
+  "note": "the entire frozen ladder to 18 costs under 10 QPU-s per rung; the 180 s arc cap was never the binding constraint"
+ },
+ "correction_to_whisper_2799": "the winner-vs-confuser crossing is NOT cap-independent. w(n) is independent of m but the confuser falls as 1/sqrt(m), so the crossing moves with budget \u2014 for any retention>0 some m clears it. It is a BUDGET stop in mode-adjacent costume. Only retention -> 0 is unbeatable by samples, and that alone licenses an n_max claim.",
+ "ORDERING_OF_WALLS": [
+  "confuser-model artifact (fixable, free)",
+  "rung-cap artifact from an Elder illustration (fixable, free)",
+  "Elder decoder n_readable: 16 resident / 18 needs an unwritten out-of-core FWHT (real work)",
+  "retention -> 0 near n=26-28 (THE DELIVERABLE)"
+ ],
+ "honest_bound": "SIX points, extrapolated. The three forms diverge hard past n=20 (at n=28: linear -0.05, gaussian 0.068, per-qubit 0.246). Any single n_max past 20 is a claim about the FORM, not the hardware. Report the RANGE; gaussian is the conservative corner.",
+ "discipline": "3sd-over-null-max is ELDER's criterion; p_separation-at-0.660 is the FROZEN one. This is EVIDENCE for the court, not a unilateral substitution \u2014 same handling as the FWHT decoder."
+}
