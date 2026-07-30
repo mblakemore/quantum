@@ -1,0 +1,78 @@
+{
+ "job_id": "d9eqha1htsac739einf0",
+ "shots_flown_per_pub": 8000,
+ "per_depth": {
+  "1": {
+   "accepted_logical": 7596,
+   "total_logical": 8000,
+   "acceptance": 0.9495,
+   "bare_shots": 8000,
+   "F_logical": 0.9964454976303317,
+   "F_bare": 0.998125,
+   "matches_committed_decode": true,
+   "Delta": -0.0016795023696682954,
+   "SE_Delta": 0.0008367892240312434,
+   "z_Delta": -2.01
+  },
+  "2": {
+   "accepted_logical": 7625,
+   "total_logical": 8000,
+   "acceptance": 0.9531,
+   "bare_shots": 8000,
+   "F_logical": 0.9954098360655738,
+   "F_bare": 0.99225,
+   "matches_committed_decode": true,
+   "Delta": 0.0031598360655737956,
+   "SE_Delta": 0.0012491868048188875,
+   "z_Delta": 2.53
+  },
+  "4": {
+   "accepted_logical": 7599,
+   "total_logical": 8000,
+   "acceptance": 0.9499,
+   "bare_shots": 8000,
+   "F_logical": 0.9967100934333465,
+   "F_bare": 0.982875,
+   "matches_committed_decode": true,
+   "Delta": 0.013835093433346435,
+   "SE_Delta": 0.0015923196523825764,
+   "z_Delta": 8.69
+  },
+  "6": {
+   "accepted_logical": 7548,
+   "total_logical": 8000,
+   "acceptance": 0.9435,
+   "bare_shots": 8000,
+   "F_logical": 0.9948330683624801,
+   "F_bare": 0.97425,
+   "matches_committed_decode": true,
+   "Delta": 0.02058306836248014,
+   "SE_Delta": 0.0019536819961567275,
+   "z_Delta": 10.54
+  },
+  "8": {
+   "accepted_logical": 7517,
+   "total_logical": 8000,
+   "acceptance": 0.9396,
+   "bare_shots": 8000,
+   "F_logical": 0.9954769189836371,
+   "F_bare": 0.970625,
+   "matches_committed_decode": true,
+   "Delta": 0.024851918983637145,
+   "SE_Delta": 0.002040344494762017,
+   "z_Delta": 12.18
+  },
+  "12": {
+   "accepted_logical": 7372,
+   "total_logical": 8000,
+   "acceptance": 0.9215,
+   "bare_shots": 8000,
+   "F_logical": 0.9940314704286489,
+   "F_bare": 0.954,
+   "matches_committed_decode": true,
+   "Delta": 0.04003147042864896,
+   "SE_Delta": 0.002508044902520381,
+   "z_Delta": 15.96
+  }
+ }
+}
