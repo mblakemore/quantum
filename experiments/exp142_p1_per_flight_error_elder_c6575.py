@@ -148,11 +148,13 @@ def main():
         if e["excess_variance_RAW"] < 0:
             print(f"     ⚠️  {e['status']}")
         print()
+    ks = sorted({e["k"] for e in res.values()})
     print("  READING THIS HONESTLY:")
-    print("   • k is TINY. A variance from k=3 has a 90% band spanning roughly 0.5x-3.7x the point,")
+    print(f"   • k is TINY (k={','.join(str(x) for x in ks)}). A variance estimate has a chi-square")
+    print("     sampling distribution on k-1 dof — at k=3 the 90% band spans ~0.5x-3.7x the point —")
     print("     so the BAND is the result and the point estimate alone would be a flattering number.")
-    print("   • A negative excess is reported, not clamped away — at k=3 it is expected some of the")
-    print("     time even when a real term exists, so it is NOT evidence of absence.")
+    print("   • A negative excess is reported, not clamped away — at small k it is expected some of")
+    print("     the time even when a real term exists, so it is NOT evidence of absence.")
     print("   • DIRECTION: a per-flight term widens each rung's uncertainty, pushing the sizing")
     print("     low-end DOWN and demanding MORE samples. This uncertainty bites the SAFE way.")
     return 0
