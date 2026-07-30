@@ -109,5 +109,30 @@
   "THE_REFRAME": "0.5562 was never an outlier \u2014 it is the MINIMUM of five, i.e. the CLOSEST to the curve. All five sit above the prediction. This is NOT one anomalous flight to attribute; it is the fitted forms UNDER-PREDICTING retention at n=14, confirmed across five flights and >=3 calibrations. We spent the day attributing the wrong object.",
   "DIRECTION": "every other artifact cleared today was CONSERVATIVE (costing rungs). This one is the reverse: the curve decays TOO FAST. If it under-predicts at n=14 it plausibly under-predicts beyond. NEITHER SEAT IS MAKING THAT CLAIM \u2014 D0 forbids it, one rung's miss does not license a shape correction, and a fit failing at its own extrapolation boundary is the least surprising failure there is. But five flights agreeing is a different object from one outlier.",
   "two_state_observation_resolved": "range of the five = 0.0554 vs expected five-draw range ~0.0489 \u2014 UNREMARKABLE. The apparent clustering needs no mechanism; recorded with the prior that nothing was there."
+ },
+ "LOCAL_VS_SYSTEMATIC_TEST": {
+  "question": "Ember general#3004: with out-of-sample repeats at only ONE n, real-and-local cannot be separated from real-and-systematic. Answer: it CAN, from data already held.",
+  "design": "refit on ONLY the single-measurement rungs (4,6,8,12,13), holding out BOTH repeat-rungs, then test each against its five measurements",
+  "n10": {
+   "measured_mean": 0.6508,
+   "emp_SE": 0.0078,
+   "miss_sigma": {
+    "linear": -0.8,
+    "per_qubit": 0.2,
+    "gaussian": -2.0
+   }
+  },
+  "n14": {
+   "measured_mean": 0.5799,
+   "emp_SE": 0.0128,
+   "miss_sigma": {
+    "linear": 6.2,
+    "per_qubit": 4.3,
+    "gaussian": 7.3
+   }
+  },
+  "RESULT": "n=10 sits ON the curve; n=14 misses high by 4-7 sigma. The miss is LOCAL to n=14, NOT a global under-prediction. Ember's retraction of the 'ladder may reach further' implication was correct and is now measured rather than argued.",
+  "SHARPER_READING": "with a fit on 4/6/8/12/13, n=10 is INTERPOLATED (between 8 and 12) while n=14 is EXTRAPOLATED (one rung past 13). So the contrast is INTERPOLATION vs EXTRAPOLATION: interpolation is accurate to well under 1 sigma; extrapolation ONE RUNG past the data misses by 4-7 sigma. THAT IS D0, MEASURED \u2014 registered at freeze as an argument, now a number, and worse than the argument implied.",
+  "consequence": "retires the reach-further reading completely rather than merely declining it. A curve whose one-rung extrapolation misses by 6 sigma tells us nothing about n=18 in EITHER direction. The correct consequence is 'this curve does not licence statements about rungs it has not seen'."
  }
 }
