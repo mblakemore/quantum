@@ -53,9 +53,21 @@ Each rung runs the FULL n=10 court, unchanged:
 **STOP RULE (frozen)**: the ladder stops at the first rung where identification FAILS
 (P̂ ≠ P at reveal) or where the gate returns NO-FLY at the budget cap. That rung bounds
 n_max, and the arc's remaining work is CHARACTERIZING the failure, not retrying it:
-one pre-registered diagnostic re-fly at the SAME n with the budget cap (D2) is permitted
-solely to distinguish failure modes (D5), then the arc closes. **No band-shopping, no
+one pre-registered diagnostic re-fly at the SAME n within the budget cap (D2) is permitted
+solely to distinguish failure modes, then the arc closes. **No band-shopping, no
 "one more try" outside the diagnostic re-fly.**
+
+**DIAGNOSTIC RE-FLY BLINDNESS RULE (Ember R1, #2690 — the re-fly's blindness depends on
+WHEN its trigger is visible, so the rule is split)**:
+- Failure modes (a) resolution-floor and (c) delivery-fault are visible **at decode,
+  before any reveal** → the re-fly runs **BEFORE the reveal, with the SAME sealed P**.
+  Both decodes stay blind, and same-P reproduction cleanly separates a stable effect from
+  noise-fluctuation or a delivery fault.
+- Failure mode (b) identification-inversion is invisible until the reveal (confident but
+  wrong) → the same P is now PUBLIC, so the re-fly **MUST use a FRESH sealed P**, accepting
+  that it separates P-specific from systematic effects only statistically.
+- A post-reveal same-P re-fly is PROHIBITED — it would be silently unblind, the exact
+  class this court exists to prevent.
 
 ## 3. Per-rung and arc-level grades
 
@@ -64,10 +76,12 @@ solely to distinguish failure modes (D5), then the arc closes. **No band-shoppin
   to the re-fit's prediction WITH its band (each rung is also a live test of the re-fit).
 - **G-ARC**: the retention(n) curve over all flown rungs + the n_max bound + failure-mode
   characterization at the boundary. Pre-registered failure modes to distinguish (D5):
-  (a) winner-sinks-into-null (rate ordering still correct but separation < criterion —
-  "resolution floor"), vs (b) wrong argmax (a confuser genuinely overtakes — "identification
-  inversion"), vs (c) delivery/decode fault (sentinel or integrity check fails — excluded
-  from n_max evidence entirely).
+  (a) winner-sinks-into-null (rate ordering still correct but separation < the D5 floor —
+  "resolution floor"; **visible at decode, pre-reveal**), vs (b) wrong argmax (a confuser
+  genuinely overtakes — "identification inversion"; **invisible until reveal**), vs
+  (c) delivery/decode fault (sentinel or integrity check fails; **visible at decode** —
+  excluded from n_max evidence entirely). The visibility classes drive the re-fly
+  blindness rule in §2.
 
 ## 4. Budget envelope
 
@@ -79,19 +93,49 @@ next window. Cost-conscious ordering: rungs fly lowest-n first; each reveal upda
 re-fit before the next gate runs (D3: re-fit update is mechanical re-run of Elder's pinned
 fitter with the new point — no refitting discretion mid-arc).
 
+## 4b. Reveal cadence — SERIAL (decided, Ember #2688)
+
+Each rung **reveals and grades before the next rung's seal exists**. Rationale (Ember's,
+adopted): the re-fit needs rung k's ACTUAL winner rate before rung k+1 is sized — this is
+exactly how the 15%-optimistic retention model was caught at n=10 — and a parallel
+(accumulate-seals, reveal-at-the-ceiling) design would discover a mid-ladder wrong ID only
+after QPU had been spent on every rung above it. Serial costs nothing here because no rung's
+blindness depends on a later rung's secret. The per-rung DAG obligation therefore extends
+to: **rung k's reveal commit must be an ancestor of rung k+1's gate run.**
+
 ## 5. Decision points for the court (open at draft)
 
-- **D1**: rung list 12/14/16/18 as proposed, or denser (13,15,…) near the predicted ceiling?
-  (Denser = better boundary localization, more seals/flights; the per-qubit model predicts
-  n_max ≈ 16–20 but the whole point is not to trust that.)
-- **D2**: arc QPU cap (proposed 120s) and diagnostic re-fly budget (proposed ≤ 1× the
-  failed rung's budget).
-- **D3**: mid-arc re-fit update rule (proposed: mechanical re-run per new point, form frozen).
-- **D4**: if the gate says NO-FLY, do we trust it (arc closes, gate-predicted bound) or
-  test it (one flight at cap to adjudicate the gate itself)? Proposed: TEST it exactly once
-  — a gate-vs-reality adjudication is worth one flight, and either outcome is a finding.
-- **D5**: failure-mode criteria thresholds (separation floor for mode (a), in SE units).
-- **D6**: the optional n=12 C1 sim benchmark bonus (labeled hybrid point) — yes/no.
+**D0 — NO n_max PREDICTION IS REGISTERED (Elder re-fit, quantum@68866a1, binding).**
+The four-rung re-fit is a NEGATIVE result on extrapolation: three functional forms
+(gaussian / linear / per-qubit-exponential) carry leave-one-out errors of 30–40% of the
+total retention range, predict held-out ENDPOINTS worst, and disagree on n_max by up to
+SIXTEEN rungs at high budget — the disagreement grows exactly where a ceiling hunt
+operates. **This arc registers the SEARCH, not a prediction**: climb, stop at failure;
+the honest current expectation at the flown budget is 14–16, held as expectation, not claim.
+Two authorship corrections carried on the record: (i) Whisper's "consistent with ~0.96ⁿ"
+(general#2683) was a right-looking parameter inside the WORST-fitting form — numeric
+agreement is not form confirmation; (ii) any published retention base must state its
+reading, since c^(2n) ≡ (c²)ⁿ makes **0.9564 per rung** and **0.9780 per physical qubit**
+the same fit — the fit cannot distinguish them.
+
+- **D1**: rung list 12/14/16/18 + **data-driven densification (Ember #2690)**: a rung that
+  PASSES with separation below the D5 floor inserts the intermediate odd rung before
+  proceeding — localization only when the data asks for it, no discretion.
+- **D2**: arc QPU cap 120s; diagnostic re-fly ≤ 1× the failed rung's budget.
+- **D3**: mid-arc update = mechanical re-run of the pinned fitter per new revealed point,
+  ALL THREE forms carried; **per-rung sizing takes the LOW end across forms, then the
+  conservative corner of the box on top** (Elder rec 2 — the double margin is the
+  model-error insurance that absorbed the 17.9% error at n=10).
+- **D4**: NO-FLY gets TESTED exactly once (Ember concurs: an unadjudicated NO-FLY retains
+  untested-guard status) — one flight at cap; either outcome is a finding.
+- **D5**: mode-(a) floor = **3 SE** (Ember: the gate's own budgeting criterion — "flew at a
+  budget sized for 3 sd and achieved less" is resolution-floor by the gate's own standard;
+  no new number invented).
+- **D6**: the n=12 C1 sim benchmark is **DEFERRED OUT of this arc** (Ember: it is $0-QPU and
+  seed-rule-reproducible post-hoc any time; bundling hours of compute into a hardware arc
+  couples what needn't be coupled).
+- **R2**: the reference ordering check for every per-rung DAG obligation is
+  `git merge-base --is-ancestor` — the unforgeable one.
 
 ## 6. Lineage and lessons carried in
 
