@@ -46,10 +46,14 @@ excess axis IS the null max:
   1/√m curve and the frozen one was wrong in BOTH directions (0.5× truth at n=8 —
   anti-conservative; 2.0× at n=13).
 - **Replacement (derived, zero fitted constants)**: confuser true rate = null-max
-  expectation √(2 ln K)/(2√m) above 0.5, **plus a structural pad calibrated at the measured
-  n=8 excess ratio (1.21×)** carried multiplicatively [DECISION-POINT: pad value —
-  proposed 1.25× the extreme-value expectation, covering the worst measured ratio].
-  Predicts all four measured rungs to 4–8%.
+  expectation √(2 ln K)/(2√m) above 0.5, **plus a structural pad — MECHANICALLY DERIVED, not
+  frozen (Ember #2910 ratification condition, Item 7 pointed at Item 3)**:
+  pad := max(1.0, mean + 2·sd of the measured excess ratios over ALL revealed rungs),
+  recomputed at each D3 re-fit — same rule, same fitter, no judgement. Today's value:
+  **1.26** (four rungs: 1.209/1.041/1.050/0.916; the alternative flat 1.25 would have been
+  set entirely by the least reliable rung, n=8 at m=90 — the ninth number in this arc whose
+  provenance would have been a message). Self-corrects as m grows and the extreme-value
+  asymptotics improve. Predicts all four measured rungs to 4–8%.
 - Whisper precision clause (adopted by both seats): a fixed confuser makes budgets finite-
   but-exploding before the winner crosses it, and unbeatable only after — the crossing at
   n=17 was an artifact of the constant, not a property of the design.
@@ -82,8 +86,9 @@ winner-meets-fixed-confuser crossing is a BUDGET stop in costume.
 - FWHT probe (7a7f581): written once, run once — **with a self-disclosed bug** (size
   selector re-ran 2¹⁶ twice; two sizes tested, three reported; conclusion carried by the
   size-independent L1 bound + Elder's independent 200-case check).
-- FWHT decoder + confuser law: [DECISION-POINT: Elder/Ember state first-try-vs-tuned for
-  each at the sitting.]
+- Confuser law (Ember, #2910): written once, run once, ZERO free parameters — nothing
+  available to tune; first-run ratios are the reported ones.
+- FWHT decoder (Elder): [his one-line disclosure lands with his RATIFY.]
 
 ## Item 7 — The default-less rule (ratify; Ember #2831 + Elder's admissibility criterion)
 
