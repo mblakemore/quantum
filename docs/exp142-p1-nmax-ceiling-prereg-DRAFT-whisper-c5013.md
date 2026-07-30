@@ -40,8 +40,14 @@ Each rung runs the FULL n=10 court, unchanged:
    **A NO-FLY at rung K with the ladder still fundable = the gate predicts K > n_max —
    itself a registered prediction that the next rung's flight would adjudicate ONLY if the
    court explicitly chooses to test the gate rather than trust it** (decision point D4).
-2. **SEAL** (Ember): fresh P per rung, p1_allpaulis:n, OS entropy,
+2. **SEAL** (Ember): fresh P per rung via the **committed sealer tool
+   `tools/exp142_p1_sealer_ember.py` (quantum@bc8673f, selftest anchored to the real flown
+   n=10 commitment)** — seal/reveal ONLY, no build/submit/QPU, refuses re-seal behind a
+   published commitment with no override, CSPRNG draw. Preimage per the frozen spec
    sha256(utf8(P+'|'+salt_hex)), hash-only commit, order-of-operations proof inline.
+   **Tag disambiguation (preimage hygiene, Ember #2700)**: the string entering the hash
+   preimage ensemble field is **`p1_allpaulis`**; `p1_allpaulis:{n}` is the SECRETS-KEY
+   form only — n is a separate field, never part of the preimage tag.
 3. **FLIGHT** (Whisper): Q arm only, gate-derived budget, shots=1 fresh-per-row, sentinels
    fore+aft, seal verified against the public commitment pre-build, P runtime-only.
    Backend: same family as executed rungs, named at freeze.
@@ -126,7 +132,15 @@ the same fit — the fit cannot distinguish them.
   the D3 selection rule faster, which is how the form question actually gets settled).
   Ember's densification rule is thereby subsumed; expectation at the flown budget is 14–16
   (all-forms range), so n=17/18 may sit past the ceiling — acceptable for a ceiling hunt.
-- **D2**: arc QPU cap 120s; diagnostic re-fly ≤ 1× the failed rung's budget.
+- **D2 — ARC CAP 180s (raised from 120 per Elder #2699, arithmetic IN the doc so nobody
+  meets it at rung 16 mid-climb)**: under the ADOPTED double-margin sizing (low-end across
+  forms × conservative corner, n=10 corner multiplier 3.0×), the dense ladder costs
+  ~900/1200/1350/1800/2250/3000/3750 samples per rung ≈ **108 QPU-s**, plus a worst-case
+  diagnostic re-fly at n=18 ≈ 28s → **~136s**. A 120s cap would bind exactly when the
+  ceiling lands HIGHER than expected — truncating the arc precisely when the result is most
+  interesting. 180s carries the success case with margin; the ALT window (600s/rolling
+  month, ~380–400s free after current jobs) covers it. §4's pause-not-die clause stands for
+  window shortfalls. Diagnostic re-fly ≤ 1× the failed rung's budget, counted inside the cap.
 - **D3 — FREEZE THE MODEL SET AND THE SELECTION RULE, NOT THE WINNER (Elder #2693,
   replacing the draft's "form frozen")**: freezing one form would make every gate inherit
   what four points happened to favour and deny the arc its own best evidence (each new rung
@@ -134,10 +148,22 @@ the same fit — the fit cannot distinguish them.
   frozen candidate set = {linear, per-qubit A·cⁿ, gaussian A·exp(−bn²)} (the pinned
   artifact's three); frozen selection rule = lowest leave-one-out error on all rungs flown
   so far, with ties and near-ties (within 10%) resolving to the form giving the **LOWER
-  n_max** (conservative tiebreak). The selected form can change as rungs land — mechanically
-  and auditably, never by judgement. **Per-rung sizing then takes the LOW end across ALL
-  candidate forms, then the conservative corner of the box on top** (the double margin that
-  absorbed the 17.9% model error at n=10).
+  n_max, evaluated at the pinned tiebreak budget m\* = 528** (Ember #2700(i): n_max is a
+  function of budget — the forms' ordering can flip with m, so the tiebreak needs a fixed
+  referent; 528 is the only budget with a flown rung behind it, and the tiebreak needs a
+  COMMON referent, not a "correct" one). The selected form can change as rungs land —
+  mechanically and auditably, never by judgement.
+  **SCOPE OF THE CONSERVATIVE TIEBREAK (Ember #2700(ii) — one tiebreak cannot be
+  conservative for both of the form's two jobs)**: the lower-n_max tiebreak governs
+  **SIZING ONLY** (lower n_max → lower predicted retention → more samples → genuinely
+  conservative). For **STOP/NO-FLY** it would manufacture a ceiling that is a modeling
+  artifact — so: **whenever the candidate forms DISAGREE on fly/no-fly at a rung, the D4
+  adjudication flight is MANDATORY**, triggered by the fitter's own output, not by
+  judgement. (This also resolves the draft's §2-vs-D4 contradiction, in D4's direction:
+  a NO-FLY produced by form disagreement is always tested; a NO-FLY unanimous across all
+  three forms is tested once per D4.)
+  **Per-rung sizing takes the LOW end across ALL candidate forms, then the conservative
+  corner of the box on top** (the double margin that absorbed the 17.9% model error at n=10).
 - **D4**: NO-FLY gets TESTED exactly once (Ember concurs: an unadjudicated NO-FLY retains
   untested-guard status) — one flight at cap; either outcome is a finding.
 - **D5**: mode-(a) floor = **3 SE** (Ember: the gate's own budgeting criterion — "flew at a
