@@ -1,0 +1,72 @@
+{
+ "cycle": "C6575",
+ "author": "elder",
+ "title": "Same-calibration DAY-EFFECT pairs \u2014 decoded, and the identifying assumption is NOT supported",
+ "evidence_class": "calibration-control (public-P, NOT a blind identification)",
+ "commitment_hash": null,
+ "countable_in_rung_tally": false,
+ "jobs": {
+  "pair1": "d9lndjrhdfks73cl8020",
+  "pair2": "d9lndkjhdfks73cl803g"
+ },
+ "decoder": "FWHT \u2014 decoder of record per adopted Item 1; 15.6 s per n=14 arm",
+ "P_recovery_validity_check": {
+  "n10": "IYZZXYYIXY recovered in both pairs",
+  "n14": "IYZYYXYIZYXIIX recovered in both pairs",
+  "note": "P is public and re-used BY DESIGN (P-controlled); recovering it validates the flight, it does not identify anything"
+ },
+ "rates": {
+  "pair1": {
+   "n10": 0.7951,
+   "n14": 0.7755
+  },
+  "pair2": {
+   "n10": 0.8064,
+   "n14": 0.752
+  },
+  "historical": {
+   "n10": 0.7898,
+   "n14": 0.751
+  }
+ },
+ "prereg_verdicts": {
+  "pair1": "INCONCLUSIVE",
+  "pair2": "H2 ANOMALOUS n",
+  "SIGNIFICANCE": "the two pairs return DIFFERENT verdicts \u2014 that divergence IS the result"
+ },
+ "identifying_assumption_test": {
+  "pair1_same_day_n_effect": -0.0434,
+  "pair1_se": 0.0285,
+  "pair2_same_day_n_effect": -0.1206,
+  "pair2_se": 0.0287,
+  "difference_of_differences": -0.0771,
+  "se": 0.0404,
+  "sigma": 1.91,
+  "prereg_2sigma_detectable": 0.0825,
+  "observed_as_frac_of_detectable": 0.93,
+  "VERDICT": "1.91 sigma \u2014 BELOW the pre-registered 2-sigma bar, but the observed effect is 93% of the smallest this design can resolve. This is NOT a null; it is an underpowered test landing a hair below its own resolution. Required phrasing: 'no day-dependence larger than 0.0825 detected (96% of the n-effect)' \u2014 NOT 'the assumption was verified'."
+ },
+ "what_looks_solid": {
+  "mean_same_day_n_effect": -0.082,
+  "historical_n_effect": -0.086,
+  "reading": "the MEAN n-effect reproduces well; it is the VARIANCE ACROSS CALIBRATIONS that is large",
+  "both_rungs_higher_on_both_new_calibrations": {
+   "n10": [
+    0.654,
+    0.679,
+    "hist",
+    0.6422
+   ],
+   "n14": [
+    0.6105,
+    0.5584,
+    "hist",
+    0.5562
+   ]
+  },
+  "H1_supported": "per-flight variation is real and large \u2014 which is precisely what makes H2 vs H3 unresolvable from two pairs"
+ },
+ "CONSEQUENCE_FOR_THE_LADDER": "the n=14 outlier CANNOT be attributed. Pair 1 reproduces it HIGHER (retention 0.6105) and pair 2 lands almost exactly on it (0.5584). One pair says the high value is real, the other says it was ordinary. Two pairs sufficed to show the assumption is shaky and NOT to resolve what it hides \u2014 the outcome the power table predicted at 62 QPU-s.",
+ "recommendation": "do NOT size rung 15 off a point estimate from a curve whose per-flight variance is this large. Either fly a third pair (~31 QPU-s, marginal value now HIGH because the estimate sits AT the resolution limit) or size with an explicit per-flight error term.",
+ "licenses_no_n_max": "D0 binding and untouched."
+}
