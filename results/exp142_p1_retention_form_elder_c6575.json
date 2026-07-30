@@ -1,0 +1,93 @@
+{
+ "rungs": {
+  "n": [
+   4.0,
+   6.0,
+   8.0,
+   10.0
+  ],
+  "retention": [
+   0.849,
+   0.831,
+   0.788,
+   0.642
+  ]
+ },
+ "n10_source": "flown job d9l38b8ii2cc73egv1i0, blind-decoded and REVEALED correct",
+ "fits": {
+  "linear": {
+   "form": "linear  r = a + b n",
+   "rmse": 0.03316700167334996,
+   "loo_mean": 0.07619047619047603,
+   "loo_per_point": [
+    0.0937,
+    0.029,
+    0.0624,
+    0.1197
+   ],
+   "params": {
+    "a": 1.0098999999999998,
+    "b": -0.03319999999999998
+   },
+   "pred_n12": 0.6115
+  },
+  "per-qubit": {
+   "form": "per-qubit  r = A c^n",
+   "rmse": 0.03626283086278324,
+   "loo_mean": 0.08574957916588016,
+   "loo_per_point": [
+    0.1207,
+    0.0324,
+    0.0687,
+    0.1212
+   ],
+   "params": {
+    "A": 1.0559903935209392,
+    "c": 0.9564017461535622,
+    "c_two_copy": 0.9779579470271522
+   },
+   "pred_n12": 0.6185065336400875
+  },
+  "gaussian": {
+   "form": "gaussian  r = A exp(-b n^2)",
+   "rmse": 0.027243993800128166,
+   "loo_mean": 0.06218626253647913,
+   "loo_per_point": [
+    0.0735,
+    0.0157,
+    0.055,
+    0.1045
+   ],
+   "params": {
+    "A": 0.9245620565326033,
+    "b": 0.0033171542467149233
+   },
+   "pred_n12": 0.573438079625944
+  }
+ },
+ "n_max_by_form_and_budget": {
+  "528": {
+   "linear": 16,
+   "per-qubit": 16,
+   "gaussian": 14
+  },
+  "2000": {
+   "linear": 22,
+   "per-qubit": 28,
+   "gaussian": 18
+  },
+  "10000": {
+   "linear": 26,
+   "per-qubit": 40,
+   "gaussian": 24
+  },
+  "100000": {
+   "linear": 28,
+   "per-qubit": 40,
+   "gaussian": 30
+  }
+ },
+ "HONESTY_BOUND": "FOUR points. Model selection is WEAK; several forms fit comparably and I have already over-read a shape once on this dataset. The deliverable is the ranking PLUS the spread across forms, and n_max as a RANGE. Where forms disagree, that disagreement is the finding.",
+ "two_copy_caveat": "c^(2n) and c^n are the same functional family; the fit cannot distinguish them. Any 'per-qubit fidelity' figure must state whether it is per LOGICAL rung or per PHYSICAL qubit (2n of them).",
+ "guidance": "Do NOT reuse the retired 3-point linear extrapolation. Use the low end across forms and buy the conservative corner of the parametric box."
+}
