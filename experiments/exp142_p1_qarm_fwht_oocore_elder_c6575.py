@@ -89,7 +89,53 @@ def _wht_axis0(mat, col_slab):
         mat[:, c0:c1] = slab.astype(mat.dtype)
 
 
-def decode_oocore(bits, n, mapping, csign, row_block, col_slab, top=8, keep=False):
+
+# ---------------------------------------------------------------------------
+# PARALLEL BLOCK WORKERS. Measured premise (C6575): the single-threaded run uses
+# 0.97 of 16 cores — numpy's elementwise butterfly (reshape/add/subtract) is
+# memory-bandwidth-bound and does NOT thread. At n=18 compute is ~86% of the total,
+# so this is the only term where effort still buys anything.
+#
+# SAFETY: np.memmap is MAP_SHARED, so disjoint BYTE ranges are safe across processes
+# even when two workers touch the same page — the kernel backs both mappings with one
+# shared page and each writes only its own bytes. Pass 1 partitions whole ROWS
+# (trivially disjoint); pass 2 partitions COLUMN RANGES (disjoint within each row).
+# No cross-block communication exists because the transform FACTORISES across the
+# index-bit split, which is the same property that makes the two-pass form correct.
+#
+# --workers is PERFORMANCE-ONLY and so may legitimately keep a default (unlike
+# row_block/col_slab, which decide whether the tested path is the production path).
+# That claim is not assumed: result-invariance across worker counts is asserted by
+# the validation gate, exactly as chunk/top were audited for the resident decoder.
+def _p1(a):
+    path, dts, R, C, rb, r0, r1 = a
+    f = np.memmap(path, dtype=np.dtype(dts), mode="r+", shape=(R * C,)).reshape(R, C)
+    _wht_axis1(f[r0:r1, :], rb)
+    f.flush(); del f
+    return r1 - r0
+
+
+def _p2(a):
+    path, dts, R, C, cs, c0, c1 = a
+    f = np.memmap(path, dtype=np.dtype(dts), mode="r+", shape=(R * C,)).reshape(R, C)
+    _wht_axis0(f[:, c0:c1], cs)
+    f.flush(); del f
+    return c1 - c0
+
+
+def _spread(total, unit, workers):
+    """Partition [0,total) into ~workers chunks, each a whole number of `unit` blocks."""
+    nblocks = -(-total // unit)
+    per = max(1, -(-nblocks // workers))
+    out = []
+    b = 0
+    while b < nblocks:
+        out.append((b * unit, min(total, (b + per) * unit)))
+        b += per
+    return out
+
+
+def decode_oocore(bits, n, mapping, csign, row_block, col_slab, top=8, keep=False, workers=1):
     """Exact constraint-rate argmax via a two-pass out-of-core WHT over a memmap."""
     Q = np.array([G2.outcome_to_bits(s, n, mapping) for s in bits], dtype=np.uint8)
     m = Q.shape[0]
@@ -113,11 +159,22 @@ def decode_oocore(bits, n, mapping, csign, row_block, col_slab, top=8, keep=Fals
         np.add.at(f, Aidx, 1)
         f.flush()
 
-        mat = f.reshape(R, C)
-        _wht_axis1(mat, row_block)      # contiguous pass
-        f.flush()
-        _wht_axis0(mat, col_slab)       # strided pass — the one that must be exercised
-        f.flush()
+        if workers <= 1:
+            mat = f.reshape(R, C)
+            _wht_axis1(mat, row_block)      # contiguous pass
+            f.flush()
+            _wht_axis0(mat, col_slab)       # strided pass — the one that must be exercised
+            f.flush()
+        else:
+            f.flush(); del f                # release this process's mapping first
+            from concurrent.futures import ProcessPoolExecutor
+            dts = np.dtype(dt).name
+            with ProcessPoolExecutor(max_workers=workers) as ex:
+                list(ex.map(_p1, [(path, dts, R, C, row_block, a0, a1)
+                                  for a0, a1 in _spread(R, row_block, workers)]))
+                list(ex.map(_p2, [(path, dts, R, C, col_slab, c0, c1)
+                                  for c0, c1 in _spread(C, col_slab, workers)]))
+            f = np.memmap(path, dtype=dt, mode="r+", shape=(N,))
 
         want0, want1 = int(csign[0]), int(csign[1])
         xmask = (1 << n) - 1
@@ -151,7 +208,7 @@ def decode_oocore(bits, n, mapping, csign, row_block, col_slab, top=8, keep=Fals
             "bytes_per_row_read": col_slab * np.dtype(dt).itemsize}
 
 
-def validate(row_block, col_slab):
+def validate(row_block, col_slab, workers=1):
     import time
     mapping = G2.calibrate_bell_mapping(); csign = G2.calibrate_constraint_sign(mapping)
     print("OUT-OF-CORE FWHT VALIDATION — the REVEALED answers, through the two-pass strided path.")
@@ -164,7 +221,7 @@ def validate(row_block, col_slab):
         except SystemExit as e:
             print(f"  n={n:<3} SKIP ({e})"); continue
         t0 = time.time()
-        rows, m, geom = decode_oocore(bits, n, mapping, csign, row_block, col_slab)
+        rows, m, geom = decode_oocore(bits, n, mapping, csign, row_block, col_slab, workers=workers)
         dt = time.time() - t0
         P, rate = rows[0]; r2, r2r = rows[1]
         good = (P == trueP) and abs(rate - exp_rate) < 5e-4
@@ -221,10 +278,13 @@ def main():
                          "strided path is actually exercised)")
     ap.add_argument("--col-slab", type=int, required=True,
                     help="columns per slab (REQUIRED, no default — sets bytes per strided row read)")
+    ap.add_argument("--workers", type=int, default=1,
+                    help="parallel block workers (performance-only; result-invariance ASSERTED by "
+                         "--validate, so a default is legitimate here)")
     ap.add_argument("--out")
     a = ap.parse_args()
     if a.validate:
-        return validate(a.row_block, a.col_slab)
+        return validate(a.row_block, a.col_slab, a.workers)
     if not (a.job and a.n):
         sys.exit("--validate, or --job <id> --n <n>")
     mapping = G2.calibrate_bell_mapping(); csign = G2.calibrate_constraint_sign(mapping)
@@ -238,7 +298,7 @@ def main():
             cands.append((i, b))
     if len(cands) != 1:
         raise SystemExit(f"expected EXACTLY ONE pub with {want} bits/row, found {len(cands)}")
-    rows, m, geom = decode_oocore(cands[0][1], a.n, mapping, csign, a.row_block, a.col_slab)
+    rows, m, geom = decode_oocore(cands[0][1], a.n, mapping, csign, a.row_block, a.col_slab, workers=a.workers)
     out = RES_IMPL.report(rows, m, a.n, f"n={a.n} decode (out-of-core FWHT, exact)")
     out.update({"job": a.job, "geometry": geom, "cycle": "C6575",
                 "decoder": "out-of-core FWHT — EXACT, two-pass separable WHT"})

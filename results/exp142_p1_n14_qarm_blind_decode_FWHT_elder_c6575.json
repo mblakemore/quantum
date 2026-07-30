@@ -1,0 +1,48 @@
+{
+ "P_hat_Q": "IYZYYXYIZYXIIX",
+ "rate": 0.7509803921568627,
+ "runner_up": "YZZIIXYZXYZYYY",
+ "runner_rate": 0.5676470588235294,
+ "separation_binomial_SE": 19.14808942833662,
+ "z_over_null_bulk": 22.67174106982644,
+ "m_samples": 2040,
+ "candidates": 268435455,
+ "top": [
+  {
+   "P": "IYZYYXYIZYXIIX",
+   "rate": 0.7509803921568627
+  },
+  {
+   "P": "YZZIIXYZXYZYYY",
+   "rate": 0.5676470588235294
+  },
+  {
+   "P": "YIZXXXIYZIYXZZ",
+   "rate": 0.5637254901960784
+  },
+  {
+   "P": "XIYXYXIYYZXIZX",
+   "rate": 0.5627450980392157
+  },
+  {
+   "P": "XXYXIZXXXIXYZX",
+   "rate": 0.5622549019607843
+  },
+  {
+   "P": "ZIXYXIXYXZZIZI",
+   "rate": 0.5607843137254902
+  },
+  {
+   "P": "ZZXIZXYYXXXYZX",
+   "rate": 0.5602941176470588
+  },
+  {
+   "P": "XIIXZZIZYZYXXY",
+   "rate": 0.5598039215686275
+  }
+ ],
+ "job": "d9li42jhdfks73cl16j0",
+ "decoder": "FWHT exact \u2014 FIFTH GATE, cross-check only",
+ "authority": "the FROZEN exhaustive decoder owns the blind answer; this is a parallel cross-check on FRESH UNREVEALED data",
+ "cycle": "C6575"
+}
