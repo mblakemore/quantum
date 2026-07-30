@@ -61,6 +61,41 @@ table. A verdict table nobody has driven is a table, not a gate.
 H1/H2/H3 make OPPOSITE predictions on the two day effects, so the design discriminates. That is the
 whole point of pre-registering: the outcome table below cannot be redrawn after the numbers land.
 
+*** THE IDENTIFYING ASSUMPTION, STATED BECAUSE ONE PAIR CANNOT CHECK IT (Ember general#2874). ***
+        historical:  r_B(day2) - r_A(day1)  =  n-effect + (day2 - day1)
+        pair:        r_B(day3) - r_A(day3)  =  n-effect
+        difference of those differences     =  the day term
+This identifies the day term ONLY IF THE n-EFFECT IS ITSELF DAY-INDEPENDENT. If the n-effect varies
+between calibrations — i.e. if the decay rate per rung is worse on a bad day, not merely the level —
+then the "n-effect" measured on day 3 is not the same quantity that appeared in the historical
+difference, and H1/H2/H3 are NOT separable by a single pair. **A single pair cannot test this
+assumption; TWO pairs on different days can** (compare their same-day n-effects directly). Stating it
+here rather than leaving it implicit, since it is the one thing this design cannot self-check.
+
+*** EVIDENCE CLASS — THESE ROWS ARE NOT IDENTIFICATION RUNGS (Ember's sealer ruling, general#2874). ***
+The pair flies AFTER the rung-14 grade, so both Paulis are PUBLIC at flight time: nothing is sealed and
+there is no blind commitment behind these retention points. They will nonetheless land in the same
+curve beside seven rungs that each carry a blind-committed P̂, next to the arc's headline
+"seven rungs, zero wrong IDs". **A retention point with no blind decode behind it must never be
+countable in that tally**, and the way that goes wrong is a later reader summing rows — not malice.
+So every output of this tool carries `evidence_class = "calibration-control (public-P, NOT a blind
+identification)"` and no `commitment_hash`. **The rung tally is to be computed from rows that HAVE a
+commitment_hash**, which makes the distinction structural rather than remembered — the whole lesson of
+this cycle being that five artifacts got through because a number's provenance lived in someone's head
+instead of in the record.
+
+Two further design points adopted from the same ruling:
+  · **Re-use the SAME Paulis as the original flights** (revealed n=14 P, public n=10 P), not fresh
+    draws. Some Paulis are harder than others on a given layout, so re-use makes the comparison
+    P-CONTROLLED and keeps a P-specific term out of the day estimate. This is the one place in the arc
+    where re-using a public P is correct rather than forbidden — we are measuring the DEVICE, not
+    identifying the Pauli.
+  · **The rate computation is pre-registered as IDENTICAL to the sealed rungs**: parity-match count
+    over the full flown denominator, retention = (rate - 0.5)/(alpha_ideal - 0.5), alpha_ideal =
+    (1+0.95^2)/2. With P public there is analytic discretion where previously there was none, so
+    "computed the same way as the sealed rungs" is on the record BEFORE the data exists rather than
+    asserted afterwards.
+
 *** WHAT THIS TOOL DOES NOT DO. *** It does not license an n_max claim under any outcome. D0 is
 binding and unaffected: the forms disagree by 32 rungs at the ceiling and this measurement changes
 nothing about that. It bears on whether retention(n) is INTERPRETABLE, not on where the chip stops.
@@ -122,6 +157,15 @@ def analyse(a, rate_a, m_a, b, rate_b, m_b, fit_pred_b=None):
         v = ("INCONCLUSIVE", "the outcome falls between the pre-registered patterns. Report it as "
              "inconclusive and state which thresholds were missed — do NOT pick the nearest hypothesis")
     out["verdict"], out["verdict_reason"] = v
+    # Structural, not remembered (Ember general#2874): these rows are calibration controls, not
+    # identification rungs. No commitment_hash -> excluded from any "N rungs, zero wrong IDs" tally.
+    out["evidence_class"] = "calibration-control (public-P, NOT a blind identification)"
+    out["commitment_hash"] = None
+    out["countable_in_rung_tally"] = False
+    out["identifying_assumption"] = ("the n-effect is itself DAY-INDEPENDENT. A single pair cannot test "
+        "this; two pairs on different days can. If it fails, H1/H2/H3 are not separable by one pair.")
+    out["rate_computation_prereg"] = ("parity-match count over the FULL flown denominator; retention = "
+        "(rate-0.5)/(alpha_ideal-0.5), alpha_ideal=(1+0.95^2)/2 — identical to the sealed rungs")
     return out
 
 
@@ -182,6 +226,9 @@ def main():
     o = analyse(a.rung_a, a.rate_a_new, a.m_a_new, a.rung_b, a.rate_b_new, a.m_b_new)
     print(f"SAME-CALIBRATION DAY-EFFECT ANALYSIS — n={a.rung_a} and n={a.rung_b} in one job\n")
     _show(o)
+    print(f"\n  EVIDENCE CLASS: {o['evidence_class']}")
+    print(f"  countable in the rung tally: {o['countable_in_rung_tally']}  (no commitment_hash)")
+    print(f"  IDENTIFYING ASSUMPTION: {o['identifying_assumption']}")
     print("\n  This bears on whether retention(n) is INTERPRETABLE. It licenses NO n_max claim under any")
     print("  outcome — D0 is binding and unaffected.")
     if a.out:
