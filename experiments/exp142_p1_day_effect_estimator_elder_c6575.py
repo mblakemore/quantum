@@ -101,6 +101,7 @@ binding and unaffected: the forms disagree by 32 rungs at the ceiling and this m
 nothing about that. It bears on whether retention(n) is INTERPRETABLE, not on where the chip stops.
 
   --selftest                     inject a KNOWN day effect and confirm the estimator recovers it
+  --power M                      detectable day-dependence for TWO pairs at M samples/rung
   --rung-a N --rate-a-new R --m-a-new M --rung-b N --rate-b-new R --m-b-new M
 """
 import argparse, json, math, os, sys
@@ -117,6 +118,29 @@ FIT_LOO = {4: 0.8798, 6: 0.8080, 8: 0.7420, 10: 0.6803, 12: 0.6013, 13: 0.5588, 
 
 def ret_se(rate, m):
     return (rate - 0.5) / K, math.sqrt(rate * (1 - rate) / m) / K
+
+
+
+def power(m_per_rung, a=10, b=14):
+    """Detectable day-dependence of the n-effect from TWO pairs at m_per_rung each.
+
+    REQUIRED alongside any null (Ember general#2881, verified independently). A null from an
+    underpowered test reported as confirmation is the same failure as a caveat that gets stripped:
+    the number travels, the power does not. So power is a FIELD, not a sentence.
+    """
+    _, s_a = ret_se(OLD[a][0], m_per_rung)
+    _, s_b = ret_se(OLD[b][0], m_per_rung)
+    se_n = math.hypot(s_a, s_b)                 # one pair's same-day n-effect
+    se_dod = math.hypot(se_n, se_n)             # two independent pairs differenced
+    hist_n = abs((OLD[b][0] - 0.5) / K - (OLD[a][0] - 0.5) / K)
+    det = 2 * se_dod
+    return {"m_per_rung": m_per_rung, "se_n_effect": se_n, "se_diff_of_diffs": se_dod,
+            "detectable_at_2sigma": det, "historical_n_effect": hist_n,
+            "detectable_as_frac_of_effect": det / hist_n,
+            "qpu_s_four_rungs": 4 * m_per_rung * 7.6 / 1000,
+            "REPORTING_RULE": (f"a null from this design means 'no day-dependence larger than "
+                               f"{det:.4f} detected ({det/hist_n:.0%} of the n-effect)'. It does NOT "
+                               f"mean the identifying assumption was verified.")}
 
 
 def analyse(a, rate_a, m_a, b, rate_b, m_b, fit_pred_b=None):
@@ -166,6 +190,7 @@ def analyse(a, rate_a, m_a, b, rate_b, m_b, fit_pred_b=None):
         "this; two pairs on different days can. If it fails, H1/H2/H3 are not separable by one pair.")
     out["rate_computation_prereg"] = ("parity-match count over the FULL flown denominator; retention = "
         "(rate-0.5)/(alpha_ideal-0.5), alpha_ideal=(1+0.95^2)/2 — identical to the sealed rungs")
+    out["power_two_pair"] = power(min(m_a, m_b), a, b)
     return out
 
 
@@ -212,12 +237,22 @@ def selftest():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--power", type=int)
     ap.add_argument("--rung-a", type=int); ap.add_argument("--rate-a-new", type=float); ap.add_argument("--m-a-new", type=int)
     ap.add_argument("--rung-b", type=int); ap.add_argument("--rate-b-new", type=float); ap.add_argument("--m-b-new", type=int)
     ap.add_argument("--out")
     a = ap.parse_args()
     if a.selftest:
         return selftest()
+    if a.power:
+        pw = power(a.power)
+        print(f"TWO-PAIR POWER at m={a.power}/rung ({pw['qpu_s_four_rungs']:.0f} QPU-s for 4 rungs):")
+        print(f"  SE(same-day n-effect)   {pw['se_n_effect']:.4f}")
+        print(f"  SE(diff of diffs)       {pw['se_diff_of_diffs']:.4f}")
+        print(f"  DETECTABLE at 2 sigma   {pw['detectable_at_2sigma']:.4f}  "
+              f"= {pw['detectable_as_frac_of_effect']:.0%} of the n-effect {pw['historical_n_effect']:.4f}")
+        print(f"  {pw['REPORTING_RULE']}")
+        return 0
     need = [a.rung_a, a.rate_a_new, a.m_a_new, a.rung_b, a.rate_b_new, a.m_b_new]
     if any(x is None for x in need):
         sys.exit("--selftest, or all of --rung-a/--rate-a-new/--m-a-new/--rung-b/--rate-b-new/--m-b-new")
@@ -229,6 +264,11 @@ def main():
     print(f"\n  EVIDENCE CLASS: {o['evidence_class']}")
     print(f"  countable in the rung tally: {o['countable_in_rung_tally']}  (no commitment_hash)")
     print(f"  IDENTIFYING ASSUMPTION: {o['identifying_assumption']}")
+    pw = o["power_two_pair"]
+    print(f"\n  POWER (two pairs at m={pw['m_per_rung']}/rung, {pw['qpu_s_four_rungs']:.0f} QPU-s for 4 rungs):")
+    print(f"    detectable day-dependence at 2 sigma: {pw['detectable_at_2sigma']:.4f} "
+          f"= {pw['detectable_as_frac_of_effect']:.0%} of the n-effect ({pw['historical_n_effect']:.4f})")
+    print(f"    {pw['REPORTING_RULE']}")
     print("\n  This bears on whether retention(n) is INTERPRETABLE. It licenses NO n_max claim under any")
     print("  outcome — D0 is binding and unaffected.")
     if a.out:
