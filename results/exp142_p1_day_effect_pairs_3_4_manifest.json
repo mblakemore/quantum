@@ -1,0 +1,96 @@
+{
+ "experiment": "exp142_p1_day_effect_pairs_3_4",
+ "cycle": "C5013",
+ "evidence_class": "calibration-control (public-P, NOT a blind identification)",
+ "NOTE_NO_commitment_hash": "by design \u2014 these rows must never enter the rung tally",
+ "prereg_freeze_commit": "2adf197ff7e472683e7aefd60ea46b307fa1a4e4",
+ "amendment": "41a6bb7 (ADOPTED 2-of-2)",
+ "estimator": "exp142_p1_day_effect_estimator_elder_c6575.py (pre-registered @737cd90)",
+ "rate_computation_preregistered": "frozen constraint_rate (G2/csign) == FWHT count / m; identical to sealed rungs; no other statistic",
+ "P_used": {
+  "10": "IYZZXYYIXY",
+  "14": "IYZYYXYIZYXIIX",
+  "provenance": "public reveal artifacts, same-P rule"
+ },
+ "m_per_rung": 2040,
+ "backend": "ibm_fez",
+ "instance": "ALT open-instance",
+ "layouts": {
+  "10": [
+   22,
+   84,
+   141,
+   137,
+   123,
+   74,
+   88,
+   107,
+   94,
+   69,
+   23,
+   85,
+   142,
+   147,
+   136,
+   75,
+   89,
+   108,
+   95,
+   70
+  ],
+  "14": [
+   22,
+   84,
+   141,
+   137,
+   123,
+   74,
+   88,
+   107,
+   94,
+   69,
+   9,
+   25,
+   109,
+   105,
+   23,
+   85,
+   142,
+   147,
+   136,
+   75,
+   89,
+   108,
+   95,
+   70,
+   10,
+   37,
+   118,
+   106
+  ]
+ },
+ "jobs": [
+  {
+   "pair": 3,
+   "job_id": "d9lp28bhdfks73cla640",
+   "pubs": [
+    "sentinel",
+    "q10_m2040",
+    "q14_m2040",
+    "sentinel"
+   ]
+  },
+  {
+   "pair": 4,
+   "job_id": "d9lp2abhdfks73cla68g",
+   "pubs": [
+    "sentinel",
+    "q10_m2040",
+    "q14_m2040",
+    "sentinel"
+   ]
+  }
+ ],
+ "committer": "Whisper (DC15W)",
+ "NOTE_overfly": "Chair ordered ONE third pair; the flight script is hardcoded to submit two, so pairs 3 AND 4 flew (~10 QPU-s vs the intended ~5). Owned by Whisper; the extra pair strictly improves the diff-of-diffs resolution (4 pairs = 6 pairwise comparisons). Script also overwrote the pairs-1/2 manifest at the shared filename -- restored from git (c0d12be) as ..._pairs_1_2_manifest.json; this file renamed to the _3_4 name. Both slips are the manifest-filename lesson from C5012, repeated by its own author."
+}
