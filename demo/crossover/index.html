@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:title" content="Where the Shield Starts to Pay — the crossover, measured from both sides">
+<meta property="og:description" content="Two flights on ibm_fez bracket the fault-tolerance question. With cheap logical gates the error-detected computation overtakes the bare one and the gap grows with depth, +0.040 by depth 12 (Exp231). With expensive logical gates it never overtakes and the gap widens the other way, −0.038 by depth 8 (Exp233, pre-registered criteria missed — the miss is the finding). Where error correction pays is set by the gate-cost structure of the computation.">
+<meta name="theme-color" content="#04060c">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where the Shield Starts to Pay — the crossover, from both sides | The Quantum Museum</title>
+<meta name="description" content="Two flights on ibm_fez bracket the fault-tolerance question. With cheap logical gates the error-detected computation overtakes the bare one and the gap grows with depth, +0.040 by depth 12 (Exp231). With expensive logical gates it never overtakes and the gap widens the other way, −0.038 by depth 8 (Exp233, pre-registered criteria missed — the miss is the finding). Where error correction pays is set by the gate-cost structure of the computation.">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M3 22 L29 10" fill="none" stroke="%234ade80" stroke-width="2.4"/><path d="M3 12 L29 24" fill="none" stroke="%23ff6b5e" stroke-width="2.4"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a,.audit a,.caveat a{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--amber);font-weight:400}
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--amber) 14%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(27px,5.2vw,46px); margin:12px 0 14px; }
+  h1 .hl { color: var(--amber); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:68ch; margin:0 0 14px; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; font-family:var(--mono); font-size:11.5px; }
+  .badge { border:1px solid var(--edge); border-radius:999px; padding:4px 11px; color:var(--ink-2); }
+  .badge b { color:var(--good); } .badge.neg b { color:var(--bad); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--amber); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--amber) 16%,transparent); color:var(--amber); font-weight:700; }
+  .lgd { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:8px; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .lgd span { display:inline-flex; align-items:center; gap:7px; }
+  .lgd i { width:20px; height:0; border-top-width:3px; border-top-style:solid; display:inline-block; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .audit { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px dashed var(--edge); margin-top:14px; padding-top:9px; line-height:1.55; }
+  .audit b { color:var(--good); }
+  .caveat { border-left:3px solid var(--amber); background:var(--surface-2); border-radius:0 11px 11px 0; padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.55; }
+  .caveat .ct { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); display:block; margin-bottom:5px; }
+  .caveat b { color:var(--ink); }
+  .verdictbox { border-left:3px solid var(--bad); background:var(--surface-2); border-radius:0 11px 11px 0; padding:12px 15px; margin:0 0 16px; font-size:13px; line-height:1.55; font-family:var(--mono); }
+  .verdictbox .vt { font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--bad); display:block; margin-bottom:5px; }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--amber); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="sp"></span>
+    <span class="wing">WING <b>VII</b> · Where the Shield Pays</span>
+  </nav>
+  <main id="main">
+  <header class="hero">
+    <div class="eyebrow">Exp231 + Exp233 · Horizons-5 · the Heron 2026 campaign</div>
+    <h1>Where the Shield Starts to Pay<span class="hl">.</span></h1>
+    <p class="lede">Error correction costs something before it saves anything: you spend extra gates
+      to protect a computation. So the honest question is not <em>does it work</em> but <b>when does
+      it start winning</b> — and the answer is not a property of the code. It is a property of
+      <b>the computation you run on it</b>. Two flights measured the boundary from both sides: one
+      where the shield pulls ahead and keeps pulling, one where it falls behind and keeps falling.
+      Same code, same chip, same week.</p>
+    <div class="badges">
+      <span class="badge">cheap gates <b>+0.040</b> by depth 12</span>
+      <span class="badge neg">expensive gates <b>−0.038</b> by depth 8</span>
+    </div>
+    <span class="scope">Scope: <b>[[4,2,2]]</b> distance-2 error <em>detection</em> with
+      post-selection, 2 logical vs 2 physical qubits, mirror circuits on <b>ibm_fez</b>. This
+      measures where the crossover sits for these two circuit classes — it is not a claim about
+      error correction in general.</span>
+  </header>
+
+  <section class="panel" aria-labelledby="pm">
+    <h2 id="pm">The boundary, both sides at once</h2>
+    <p class="sub">Δ = F(shielded) − F(bare) · above the line the shield is winning</p>
+    <p class="primer"><b>One number, plotted against depth.</b> Δ is how much better the shielded
+      computation did than the unshielded one at the same depth. Positive means the shield is
+      ahead. The two curves are <b>different circuit families</b>, not two runs of one experiment —
+      they are drawn separately and never joined, because the whole point is that they diverge.</p>
+    <div class="seg" id="seg1" role="group" aria-label="which regime"></div>
+    <figure><svg id="viz1" viewBox="0 0 460 260" role="img" aria-label="advantage versus circuit depth for both regimes"></svg>
+      <figcaption class="lgd" id="lgd1"></figcaption></figure>
+    <p class="story" id="story1"></p>
+    <div class="caveat"><span class="ct">Where the advantage actually comes from</span>
+      Not from error detection alone, and saying otherwise would be the easy overstatement here.
+      The winning circuit is <b>Clifford-heavy</b>, and on this code an in-block logical CZ costs
+      <b>zero physical two-qubit gates</b> — so the shielded arm runs at a <em>constant</em> 3
+      two-qubit gates (the encoding prep) while the bare arm pays a real gate per layer, 4 climbing
+      to 48. The code makes that computation <b>cheaper as well as cleaner</b>. The losing circuit
+      is the same code with a logical gate that costs real two-qubit gates (9 climbing to 51), and
+      there the overhead outruns what detection can remove. Both are genuine features of
+      error-corrected computing; together they are why the boundary exists at all.</div>
+  </section>
+
+  <section class="panel" aria-labelledby="p1">
+    <h2 id="p1">The rising curve — where the shield pays</h2>
+    <p class="sub">Exp231 · job d9eqha1htsac739einf0 · 12 circuits · 8000 shots · CERTIFIED</p>
+    <p class="primer"><b>The headline is the slope, not the crossing.</b> A single crossing point
+      could be one lucky draw. What is hard to explain away is that the advantage grows
+      <b>monotonically across six depths</b> once past the first — a constant offset or a one-off
+      artifact cannot produce a rising gap.<br><br>
+      But say <em>why</em> it grows, because the obvious phrasing gets it backwards. The shield does
+      not get better with depth. It <b>holds nearly still</b> — the shielded fidelity moves from
+      0.9964 to 0.9940 across a twelvefold increase in depth, a total drop of 0.0024 — while the
+      unprotected circuit decays from 0.9981 to 0.9540, about <b>eighteen times further</b>. The
+      advantage grows because <b>the baseline falls</b>. <b>The shield holds; the bare circuit
+      decays.</b></p>
+    <div class="seg" id="seg2" role="group" aria-label="what to show"></div>
+    <figure><svg id="viz2" viewBox="0 0 460 240" role="img" aria-label="shielded and bare fidelity versus depth, cheap-gate regime"></svg>
+      <figcaption class="lgd" id="lgd2"></figcaption></figure>
+    <p class="story" id="story2"></p>
+    <div class="caveat"><span class="ct">Two different "crossover depths", and which is which</span>
+      The <b>sign</b> crosses between depth 1 and depth 2 — but neither of those two points is
+      certified, and both are worth stating precisely.<br><br>
+      <b>Depth 1: Δ = −0.0017, negative at 2.0σ.</b> At trivial depth the shield measurably
+      <em>costs</em> — you pay for the encoding and get nothing back yet. Not certified, and kept on
+      the page deliberately: it is the evidence that this is a real transition rather than a fixed
+      offset. Below the crossover, protection hurts.<br>
+      <b>Depth 2: Δ = +0.0032, positive at 2.5σ.</b> Suggestive, and short of the bar twice over —
+      below the pre-registered 3σ, and below the 2.64 needed once you account for having looked at
+      <em>six</em> depths rather than one. A maximum over six examined points is elevated by
+      construction.<br>
+      <b>Depth 4 is the first certified crossover, at 8.7σ</b> — and that is why this page cites the
+      decode record's crossover depth of 4 rather than the "≈2" reading: the registered rule
+      requires 3σ, and depth 2 does not clear it. Not a preference between two sources; the
+      pre-registration decides it.</div>
+    <div class="audit">AUDIT — shielded fidelity is <b>post-selected</b> on the ZZZZ stabilizer;
+      the bare arm keeps all 8000 shots at every depth. Acceptance is uniform across the sweep,
+      <b>0.9215–0.9531</b>, so the six points are comparable in sample size rather than only in
+      value. Per-depth significance, from the accepted-shot counts published with the flight:
+      <b>−2.01 · +2.53 · +8.69 · +10.54 · +12.18 · +15.96</b> at depths 1/2/4/6/8/12. The circuit is a <em>mirror</em> circuit — an exact identity at every
+      depth, verified — so the ideal answer is known and any drift is error. Barriers were added to
+      stop the transpiler cancelling the layers, a trap caught before flight rather than after.</div>
+  </section>
+
+  <section class="panel" aria-labelledby="p2">
+    <h2 id="p2">The falling curve — where it does not</h2>
+    <p class="sub">Exp233 · job d9eqnbcinv1c73aqi9c0 · 10 circuits · 8000 shots</p>
+    <div class="verdictbox"><span class="vt">Registered verdict, quoted as it stands</span>
+      G1 trend: <b>MISS</b>. G2 hard crossover: <b>NOT REACHED</b> — and that is the result. This
+      flight's pre-registered criteria were <b>missed</b>. It is published here because the miss is
+      the finding: the instrument worked, the measurement is clean, and the answer was no.</div>
+    <p class="primer"><b>Same code, same chip, a computation built from expensive logical gates.</b>
+      Here the shielded arm has to pay real two-qubit gates for its logical operations — 9 climbing
+      to 51, against bare's 4 to 32 — and it never gets ahead. Δ starts marginally positive, flips
+      negative between depth 1 and 2, and the gap <em>widens</em> from there. Acceptance falls too,
+      0.94 down to 0.80, because more real gates mean more detected errors thrown away.</p>
+    <div class="seg" id="seg3" role="group" aria-label="what to show"></div>
+    <figure><svg id="viz3" viewBox="0 0 460 240" role="img" aria-label="shielded and bare fidelity versus depth, expensive-gate regime"></svg>
+      <figcaption class="lgd" id="lgd3"></figcaption></figure>
+    <p class="story" id="story3"></p>
+    <div class="audit">AUDIT — the mirror symmetry between the two flights is exact where it matters
+      and worth noticing: <b>both</b> curves flip sign between depth 1 and depth 2, and <b>both</b>
+      flips are thin — +0.0032 one way, −0.0029 the other. Neither thin flip is the finding. The
+      findings are what happens <em>after</em> the flip: one curve climbs to +0.040 and the other
+      falls to −0.038, and those are the parts that stand up.</div>
+  </section>
+
+  <section class="panel" aria-labelledby="p3">
+    <h2 id="p3">What the two curves settle</h2>
+    <p class="primer"><b>This museum already contained an apparent contradiction, and these flights
+      resolve it.</b> The <a href="../distributed-algorithm/">Federation</a> exhibit carries a
+      distributed algorithm where the shielded arm <em>loses</em> to bare (0.855 post-selected vs
+      0.904 all shots), and cites a separate flight where a shielded arm <em>wins</em> (+0.077 at
+      19.7σ). A reader is entitled to ask which it is. The answer is that neither was wrong: the
+      crossover is real and depth-dependent, and the losing run simply sat below it. What Exp231 and
+      Exp233 add is the boundary itself — measured, from both sides, rather than inferred from two
+      results that happened to disagree.</p>
+    <div class="caveat"><span class="ct">The claim, scoped the way it should be</span>
+      <b>For Clifford-heavy circuits on this code, error correction pays for itself on today's
+      hardware</b> — starting shallow and paying more with depth. Not "error correction works": the
+      companion flight on this page is the counterexample to that sentence, run by the same people
+      on the same chip. Where fault tolerance pays is set by the <b>gate-cost structure of the
+      computation</b>, and both flights are needed to say so.</div>
+  </section>
+
+  <section class="panel">
+    <h2>The court</h2>
+    <p class="sub">how we know we're not fooling ourselves</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">THE NEGATIVE WAS FLOWN ON PURPOSE</div>
+        <p>Exp233 was pre-registered and flown as the deliberate complement to Exp231, not salvaged
+        after a disappointment. Its criteria were committed before submission and they were missed,
+        and it is published with that verdict stated rather than softened. A campaign that only
+        shows its rising curves is not measuring a boundary; it is choosing one.</p></div>
+      <div class="receipt"><div class="rt">MIRROR CIRCUITS — THE ANSWER IS KNOWN IN ADVANCE</div>
+        <p>Both flights use mirror circuits: the whole sequence composes to the identity at every
+        depth, verified. So the correct output is known before the chip runs, every deviation is
+        error rather than interpretation, and "fidelity" here needs no model to define.</p></div>
+      <div class="receipt"><div class="rt">DETECTION, NOT CORRECTION</div>
+        <p>The [[4,2,2]] code used here <em>detects</em> one error; it does not correct. The
+        shielded arms post-select on the stabilizer and discard flagged shots — acceptance
+        0.92–0.95 in the rising flight, 0.94 down to 0.80 in the falling one. Wherever a shielded
+        number appears on this page it is a post-selected number, and the bare comparison keeps all
+        of its shots.</p></div>
+      <div class="receipt"><div class="rt">FENCES</div>
+        <p>Two logical qubits against two physical ones; one device; distance-2 detection; depth
+        swept to 12 in the rising flight and 8 in the falling one, with no silent cap. The two
+        curves are separate circuit families and are never joined into one line.
+        <code>Exp231 · Exp233 · findings in the repo</code></p></div>
+    </div>
+  </section>
+  </main>
+  <footer role="contentinfo">
+    <span>Exp231 CERTIFIED · Exp233 NOT REACHED · ibm_fez · 2 flights</span><span>C4914 · 2026-07-20</span>
+    <a href="../shields/">← the shield itself</a>
+    <a href="../distributed-algorithm/">the Federation programs</a>
+    <a href="../index.html">← all exhibits</a>
+  </footer>
+</div>
+<script>
+"use strict";
+const SVGNS="http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function segify(id,states,cb){
+  const seg=document.getElementById(id);
+  states.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.dataset.k=s[0];b.textContent=s[1];
+    b.addEventListener("click",()=>{cb(s[0]);seg.querySelectorAll("button").forEach(x=>{x.classList.toggle("on",x.dataset.k===s[0]);x.setAttribute("aria-pressed",String(x.dataset.k===s[0]));});});
+    seg.appendChild(b);});
+  cb(states[0][0]); seg.querySelector("button").classList.add("on");
+  seg.querySelector("button").setAttribute("aria-pressed","true");
+}
+// ---- verified data kernels (decode records, ibm_fez) ----
+// Exp231 CHEAP-Clifford regime: depth, delta, F_logical, acceptance, F_bare
+const CHEAP=[[1,-0.00168,0.9964,0.95,0.9981],[2,0.00316,0.9954,0.95,0.9923],[4,0.01384,0.9967,0.95,0.9829],
+             [6,0.02058,0.9948,0.94,0.9743],[8,0.02485,0.9955,0.94,0.9706],[12,0.04003,0.9940,0.92,0.9540]];
+// Exp233 EXPENSIVE-gate regime (registered criteria MISSED; the miss is the finding)
+const HARD =[[1,0.00508,0.9880,0.94,0.9829],[2,-0.00292,0.9748,0.92,0.9778],[4,-0.01536,0.9578,0.88,0.9731],
+             [6,-0.02160,0.9415,0.83,0.9631],[8,-0.03825,0.9121,0.80,0.9504]];
+
+// ---------- Panel 1 : both delta curves ----------
+function deltaPlot(k){
+  const svg=document.getElementById("viz1"); svg.innerHTML="";
+  const L=54,R=430,T=32,B=196;
+  const DX=d=>L+(R-L)*(d-1)/11;              // depth 1..12
+  const DY=v=>T+(B-T)*(0.05-v)/0.10;         // delta -0.05..+0.05
+  // axes
+  el(svg,"line",{x1:L,y1:T,x2:L,y2:B,style:"stroke:var(--edge-2);stroke-width:1.5"});
+  // Neutral, NOT --bad: red is the expensive-gate series on this chart, and a red zero-line
+  // would make the reference axis read as one of the two things being compared.
+  el(svg,"line",{x1:L,y1:DY(0),x2:R,y2:DY(0),style:"stroke:var(--ink-4);stroke-width:2;stroke-dasharray:5 4"});
+  el(svg,"text",{x:8,y:DY(0)+4,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="Δ = 0";
+  [[0.04,"+0.04"],[0.02,"+0.02"],[-0.02,"−0.02"],[-0.04,"−0.04"]].forEach(t=>{
+    el(svg,"line",{x1:L,y1:DY(t[0]),x2:R,y2:DY(t[0]),style:"stroke:var(--edge);stroke-width:1;stroke-dasharray:2 4"});
+    el(svg,"text",{x:L-6,y:DY(t[0])+3.5,"text-anchor":"end",style:"fill:var(--ink-4);font-family:var(--mono);font-size:9px"}).textContent=t[1];
+  });
+  [1,2,4,6,8,12].forEach(d=>el(svg,"text",{x:DX(d),y:B+18,"text-anchor":"middle",style:"fill:var(--ink-4);font-family:var(--mono);font-size:9.5px"}).textContent=d);
+  el(svg,"text",{x:(L+R)/2,y:B+36,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="circuit depth";
+  el(svg,"text",{x:8,y:18,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="Δ = shielded − bare";
+  // series — drawn separately, never joined: different circuit families
+  function series(data,col,dash,label,ly){
+    let d="";
+    data.forEach((p,i)=>{ d+=(i?"L":"M")+DX(p[0]).toFixed(1)+","+DY(p[1]).toFixed(1); });
+    el(svg,"path",{d:d,fill:"none",style:`stroke:${col};stroke-width:2.6`+(dash?";stroke-dasharray:6 4":"")});
+    data.forEach(p=>el(svg,"circle",{cx:DX(p[0]),cy:DY(p[1]),r:4.5,style:`fill:${col}`}));
+    const last=data[data.length-1];
+    // Value label only. The series NAME lives in the HTML legend below the figure: as SVG text
+    // it collided with this value label at 900px, and HTML wraps where SVG text cannot.
+    el(svg,"text",{x:DX(last[0])-6,y:DY(last[1])+ly,"text-anchor":"end",style:`fill:${col};font-family:var(--mono);font-size:11px;font-weight:700`})
+      .textContent=(last[1]>=0?"+":"−")+Math.abs(last[1]).toFixed(3);
+  }
+  const lg=[];
+  if(k==="both"||k==="cheap"){ series(CHEAP,"var(--good)",false,"",-10);
+    lg.push('<span><i style="border-top-color:var(--good)"></i>cheap logical gates · Exp231</span>'); }
+  if(k==="both"||k==="hard"){ series(HARD ,"var(--bad)", true, "",16);
+    lg.push('<span><i style="border-top-color:var(--bad);border-top-style:dashed"></i>expensive logical gates · Exp233</span>'); }
+  document.getElementById("lgd1").innerHTML=lg.join("");
+  const st=document.getElementById("story1");
+  if(k==="both") st.innerHTML='Same code, same chip. The only thing that differs is what the logical gates <b>cost</b> — and the two computations end up on opposite sides of zero, moving apart. The boundary between them is the result; neither curve alone is.';
+  else if(k==="cheap") st.innerHTML='Cheap logical gates: Δ rises from <b>−0.0017</b> to <b>+0.040</b>, monotone after the first depth. The shield is ahead by depth 2 and further ahead every depth after.';
+  else st.innerHTML='Expensive logical gates: Δ falls from <b>+0.0051</b> to <b>−0.038</b>. The shield never gets ahead, and the deficit grows — the encoding overhead outruns what detection removes.';
+}
+segify("seg1",[["both","both regimes"],["cheap","cheap gates only"],["hard","expensive gates only"]],deltaPlot);
+
+// ---------- Panels 2 and 3 : fidelity pairs ----------
+function fidPlot(svgId,data,storyId,k,rising){
+  const svg=document.getElementById(svgId); svg.innerHTML="";
+  const L=54,R=430,T=30,B=180;
+  const maxD=data[data.length-1][0];
+  const DX=d=>L+(R-L)*(d-1)/(maxD-1);
+  const lo=0.90,hi=1.0;
+  const FY=v=>T+(B-T)*(hi-v)/(hi-lo);
+  el(svg,"line",{x1:L,y1:T,x2:L,y2:B,style:"stroke:var(--edge-2);stroke-width:1.5"});
+  [1.00,0.98,0.96,0.94,0.92,0.90].forEach(t=>{
+    el(svg,"line",{x1:L,y1:FY(t),x2:R,y2:FY(t),style:"stroke:var(--edge);stroke-width:1;stroke-dasharray:2 4"});
+    el(svg,"text",{x:L-6,y:FY(t)+3.5,"text-anchor":"end",style:"fill:var(--ink-4);font-family:var(--mono);font-size:9px"}).textContent=t.toFixed(2);
+  });
+  data.forEach(p=>el(svg,"text",{x:DX(p[0]),y:B+18,"text-anchor":"middle",style:"fill:var(--ink-4);font-family:var(--mono);font-size:9.5px"}).textContent=p[0]);
+  el(svg,"text",{x:(L+R)/2,y:B+36,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="circuit depth";
+  el(svg,"text",{x:8,y:18,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"})
+    .textContent = k==="acc" ? "post-selection acceptance" : "fidelity (mirror circuit)";
+  function line(vals,col,dash,lbl,dy){
+    let d="";
+    vals.forEach((v,i)=>{ d+=(i?"L":"M")+DX(data[i][0]).toFixed(1)+","+FY(v).toFixed(1); });
+    el(svg,"path",{d:d,fill:"none",style:`stroke:${col};stroke-width:2.6`+(dash?";stroke-dasharray:6 4":"")});
+    vals.forEach((v,i)=>el(svg,"circle",{cx:DX(data[i][0]),cy:FY(v),r:4,style:`fill:${col}`}));
+  }
+  const lgId = svgId==="viz2" ? "lgd2" : "lgd3";
+  const armCol = rising?"var(--good)":"var(--bad)";
+  if(k==="acc"){
+    line(data.map(p=>p[3]),"var(--amber)",false,"",-9);
+    document.getElementById(lgId).innerHTML='<span><i style="border-top-color:var(--amber)"></i>shots kept after the error check</span>';
+  } else {
+    line(data.map(p=>p[2]),armCol,false,"",-9);
+    line(data.map(p=>p[4]),"var(--ink-3)",true,"",18);
+    document.getElementById(lgId).innerHTML=
+      '<span><i style="border-top-color:'+armCol+'"></i>shielded · post-selected</span>'+
+      '<span><i style="border-top-color:var(--ink-3);border-top-style:dashed"></i>bare · all shots</span>';
+  }
+  const st=document.getElementById(storyId);
+  if(k==="acc"){
+    st.innerHTML = rising
+      ? 'Acceptance stays high, <b>0.95 → 0.92</b>: the shielded arm runs at a constant 3 physical two-qubit gates, so there is little for the error check to catch and little is thrown away.'
+      : 'Acceptance falls hard, <b>0.94 → 0.80</b>: every extra real two-qubit gate is another chance to trip the check, so a fifth of the shots are being discarded by depth 8 — and it still is not enough.';
+  } else {
+    st.innerHTML = rising
+      ? 'The bare arm decays with depth, as anything on real hardware does. The shielded arm barely moves — <b>0.996 → 0.994</b> across a twelvefold increase in depth — because its gate count never grows.'
+      : 'Both arms decay, but the shielded one decays <b>faster</b> — 0.988 → 0.912 against a bare arm going 0.983 → 0.950. Protecting the computation cost more than the protection returned.';
+  }
+}
+segify("seg2",[["fid","fidelity"],["acc","what post-selection discards"]],k=>fidPlot("viz2",CHEAP,"story2",k,true));
+segify("seg3",[["fid","fidelity"],["acc","what post-selection discards"]],k=>fidPlot("viz3",HARD,"story3",k,false));
+</script>
+</body>
+</html>
