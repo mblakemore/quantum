@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quantum Advantage — The Scoreboard</title>
-<meta name="description" content="Have we found quantum advantage? The five-scoreboard answer from a ~110-experiment IBM Heron campaign, F01–F121 — four theorem ceilings cleared at 21σ–341σ; the fifth (computational) won, then superseded by our own red-team pre-submission.">
+<meta name="description" content="Have we found quantum advantage? The five-scoreboard answer from an IBM Heron campaign, audited through F121 (~110 experiments in that window; the campaign continues past it) — four theorem ceilings cleared at 21σ–341σ; the fifth (computational) won, then superseded by our own red-team pre-submission.">
 <meta property="og:title" content="Quantum Advantage — The Scoreboard">
 <meta property="og:description" content="Four of five scoreboards, every number a job ID: no-go games at 216.8σ (within-run, two-chip replicated), superdense at 341σ, ICO thermodynamics at 21.1σ, negative conditional entropy at 42σ. The decoder-race runtime win was retired by our own red-team before submission — the supersession clause, honored.">
 <meta name="theme-color" content="#04060c">
@@ -105,6 +105,9 @@
 
   footer{margin-top:38px;padding-top:18px;border-top:1px solid var(--hair);font-family:var(--mich);
     font-size:9px;letter-spacing:.2em;color:var(--ink-4);display:flex;gap:8px 20px;flex-wrap:wrap}
+  /* The audit boundary. This WILL move — the next advantage flight would be the first new
+     entry since F121 — so it is one class in two places, meant to be edited, not engraved. */
+  .auditwin{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -112,7 +115,8 @@
 <div class="wrap">
 <main id="main">
   <p class="eyebrow">
-    <b>IBM HERON</b><span class="dot"></span>2026 CAMPAIGN<span class="dot"></span>~110 EXPERIMENTS<span class="dot"></span>F01–F121<span class="dot"></span>EVERY NUMBER A JOB ID
+    <b>IBM HERON</b><span class="dot"></span>2026 CAMPAIGN<span class="dot"></span><!-- AUDIT WINDOW: edit these two spans together when the boundary moves. The campaign
+       continues past this point; this page audits the window, not the running total. --><span class="auditwin">AUDITED THROUGH F121</span><span class="dot"></span>~110 EXPERIMENTS IN WINDOW<span class="dot"></span>EVERY NUMBER A JOB ID
   </p>
   <h1>Have we found quantum advantage?</h1>
   <p class="verdict"><b>Yes — measurably, on four of five scoreboards.</b> Four clear exact theorem ceilings by <span class="sig">21σ to 341σ</span>. The fifth — computational — was won as an <b>instrument result</b> (a sealed 40-bit answer decoded blind through noise, graded by three independent seats), then <b>superseded by our own red-team before submission</b>: the runtime number was priced against simulating the circuit, and a classical solver attacking the planted problem's algebra reads the same answer in ~0.25&nbsp;ms.</p>
@@ -175,7 +179,7 @@
 
 </main>
 <footer role="contentinfo">
-  <span>~110 EXPERIMENTS</span><span>FINDINGS F01–F121</span><span>3 HERON DIES (F112) + RIGETTI + IONQ ON THE CAUSAL AXIS</span><span>SUPERSEDED — RETIRED BY OWN RED-TEAM C4996</span>
+  <span>~110 EXPERIMENTS IN WINDOW</span><span class="auditwin">AUDITED THROUGH F121</span><span>3 HERON DIES (F112) + RIGETTI + IONQ ON THE CAUSAL AXIS</span><span>SUPERSEDED — RETIRED BY OWN RED-TEAM C4996</span>
 </footer>
 </div>
 
