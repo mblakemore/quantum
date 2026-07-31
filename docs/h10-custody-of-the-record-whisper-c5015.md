@@ -82,6 +82,9 @@ uncorrelated-bath-initial-conditions.
 | Entanglement across time, Leggett–Garg, delayed choice | Exp184/186, Exp229/230 | temporal-correlation witnesses |
 | Sealed-unitary black-box discipline | F119 kit, Exp145 | access-model fences for any "unknown U" flight |
 | Cross-chip replication bench | F112 | portability check for anything that holds |
+| **QET flown** — "Beam the Power" (Hotta on silicon) | energy-teleport exhibit | one bit moves energy; demon ledger closed; the certified-differential grammar |
+| Discrete time crystal + its melt boundary | Exp151/Exp153 | time-translation symmetry already broken on hardware; subharmonic rigid through the beat-null; disorder-shrinks-the-boundary null won |
+| Three-node teleport network | Exp197 (`messaging-limits.md`) | the ER=EPR information-theoretic reading is already written down — bits-ignored decode died at −0.018, the no-FTL receipt |
 
 Everything in Wing A and most of Wing B is a **composition of rows in this table**. That is the
 arc's design constraint, kept from H4–H5: compose the parts bin before building new parts.
@@ -288,18 +291,126 @@ own architecture pointed at its own deepest result — and the natural capstone 
 
 ---
 
+## §3½. Wing C — THE FABRIC (added C5015, second sweep: "how could we further exploit the fabric of spacetime?")
+
+The direct answer to the Creator's question. On a chip, the fabric of spacetime is reachable in
+exactly three ways, and the corpus has already mined the first shafts of each:
+
+1. **Its vacuum is not empty — it is a mine.** F97 certified energy *below* local empty; the QET
+   flight ("Beam the Power") shipped extraction rights over one classical bit with the demon
+   ledger closed. The mine yields energy locally and energy remotely. **It has not yet yielded its
+   third and deepest resource: the entanglement itself.**
+2. **Its geometry is entanglement.** `messaging-limits.md` already states the ER=EPR reading of
+   Exp197's three-node network, and F99 recovered information through a scrambler. **The
+   traversable version — where a certified negative-energy pulse is what holds the throat open —
+   has never been flown.**
+3. **Its coordinates are quantum objects.** Order (H1, done), direction (B1), clock (B5,
+   Exp185b), duration under history-superposition (F100), time-translation symmetry (Exp151/153,
+   done). **The remaining coordinate object is the reference frame itself.**
+
+### C1. The Traversable Bridge — teleportation through a throat we pay to open ⭐ (fabric crown)
+
+**Build:** the Gao–Jafferis–Wall mechanism as a chip protocol. Prepare a small **thermofield
+double** (zero corpus hits — the one genuinely new preparation in this wing; cheap at 2×3 qubits),
+insert a probe qubit into the "left" side, apply the **two-sided classical coupling** at the right
+moment, and read the probe emerging from the "right" side. The corpus already holds every other
+part: scrambling + heralded mirror recovery (F99), the teleport stack (Exp197), and — decisively —
+the **negative-energy accounting machinery** (F97 + F94/F95 + the QET demon ledger), because in
+GJW the coupling works precisely by injecting a negative-energy shockwave. The horizons-2 line
+("the feedstock of warp geometry, certified microjoule by microjoule") stops being a metaphor and
+becomes a measured leg of this flight: **the throat-opener, priced**.
+
+**The discipline that makes it ours to fly:** the published 2022 "wormhole in the lab" (sparse
+SYK, nine qubits) was disputed on exactly one axis — whether the observed transmission was the
+*wormhole mechanism* or generic teleportation wearing a wormhole costume. The separator is known:
+**size winding** (the operator-size distribution of the inserted probe winds and unwinds through
+the coupling). So the scout's non-negotiable deliverable is a size-winding witness with a frozen
+bar, plus the two control arms our court always flies: coupling-with-scrambled-phases (mechanism
+broken, transmission must die) and coupling-absent (plain decay). If the witness cannot be built
+at our scale, the flight is **re-scoped in the prereg itself** to "coupled-TFD teleportation with
+the negative-energy leg certified" and the word *wormhole* does not appear in the claim. Either
+way nothing ships wearing a costume.
+
+**Fences:** quantum simulation of a holographic *model* — geometry language lives in the
+interpretation row, never in the gate; single chip; no-FTL receipt printed (the coupling is a
+classical channel — Exp197's −0.018 bits-ignored decode is the family precedent); TFD prep
+fidelity printed and gated.
+
+**Cost class:** $0 scout (size-winding witness design + TFD compilation + protocol pin) → real
+flight. **Joint arc crown with B1**: B1 is the crown for certifiability (a theorem-bounded game);
+C1 is the crown for reach (it is the literal fabric flight, and the one with a famous controversy
+to out-discipline).
+
+### C2. The Vacuum Mine, third shaft — entanglement harvesting
+
+**Build:** prepare the ground state of a small simulated field (a gapped chain — prep fidelity
+printed and gated), couple two probe qubits **locally, briefly, at disjoint sites**, with the
+transpiled circuit's gate lightcones provably non-overlapping (the disjointness is a *printed
+artifact of the compiled circuit*, our version of spacelike separation). Certify probe–probe
+entanglement afterward. The probes never interact and no gate path connects them inside the
+coupling window: the entanglement was **mined from correlations the vacuum already held**.
+
+**Why it completes a triptych:** F97 = the vacuum yields energy locally; QET = the vacuum yields
+energy remotely, unlocked by a bit; C2 = the vacuum yields *the entanglement itself* — the
+resource that made the other two work. Together: **the ground state of a field is a natural
+resource deposit, and we hold extraction receipts for all three ores.**
+
+**Fences:** "vacuum" means the prepared ground state of the simulated Hamiltonian at measured
+fidelity, said exactly so; the harvesting bound (probe separation vs coupling duration) is pinned
+at scout time; witness is a frozen entanglement witness, not tomography-then-decide.
+
+**Cost class:** cheap flight (≤ 8 qubits, shallow); scout is $0.
+
+### C3. The Relative-State Observatory — whose superposition is it?
+
+**Build:** the quantum-reference-frame transformation (Giacomini–Castro-Ruiz–Brukner family;
+**zero corpus hits — genuinely new genre**): a particle is in superposition *relative to the lab*;
+apply the compiled change-of-frame unitary that jumps *into the particle's frame*, and certify
+that in the new frame it is the **lab degrees of freedom** that carry the superposition — with a
+frame-invariant quantity measured on both sides of the jump as the anchor (the invariant is the
+control arm: it must NOT move, while the frame-dependent witnesses must swap).
+
+**What it means if it holds:** "which system is in superposition" is not a fact about the world
+but a fact about the frame — coordinates themselves are quantum objects, completing Wing C's
+third door. This is the campaign's formalism-boundary thesis pointed at the most basic assumption
+of all: that there is a classical *somewhere* to stand.
+
+**Fences:** compiled access model (we build the frame-change unitary — stated in the headline);
+small systems; the claim is the certified swap-with-invariant, not a metaphysics verdict.
+
+**Cost class:** $0 scout (pin the exact QRF construction + pick the invariant) → cheap flight.
+
+### Listed, not ranked (fabric cells that stay $0 until a scout earns them a row)
+
+- **Unruh–DeWitt analogue** — a detector coupled through an acceleration-profile modulation
+  reads a thermal state where an inertial-profile control reads none; simulation-flavored, and
+  the thermality witness needs care to not be a filter artifact. Scout decides if it is ever
+  more than a demo.
+- **Entanglement-assisted clock synchronization** — F108-adjacent; a sync protocol beating the
+  classical exchange bound. Adjacent to metrology already flown; only worth a row if the bound
+  is a theorem at our scale.
+
+---
+
 ## §4. Recommended order (and why)
 
-1. **B1 scout ($0)** — the time flip is the arc crown and the scout is free: pin the theorem,
-   design the witness, enumerate control arms. If the scout survives, it jumps the queue for QPU.
-2. **B4 ($0 scout → cheap)** — heat-backward is the cheapest *certifiable* new physics on the
-   board and independently completes the thermo triangle.
-3. **A1 (cheap)** — the quorum fact; composition flagship; every part certified.
-4. **A2 (real)** — syndrome=objectivity; the science flagship; deserves an unhurried prereg.
-5. **B3 (cheap)** — the loop co-processor, once its scout pins the discrimination protocol.
-6. **B2 (scout decides)** — rewind gadget, if the ancilla budget is Heron-sized.
-7. **A3, A4, B6, B5** — behind the above; B6 only after A1 holds; B5 stays $0 until its fence
-   survives audit.
+*(Revised C5015 second sweep — Wing C added; two crowns now share the top.)*
+
+1. **B1 scout ($0)** — the time flip: certifiability crown. Pin the theorem, design the witness,
+   enumerate control arms. If the scout survives, it jumps the queue for QPU.
+2. **C1 scout ($0)** — the traversable bridge: fabric crown. The size-winding witness is the
+   whole scout — it either exists at our scale or the flight re-scopes itself pre-registration.
+   Runs in parallel with B1's scout; they share no parts.
+3. **B4 ($0 scout → cheap)** — heat-backward: cheapest *certifiable* new physics on the board,
+   and it completes the thermo triangle.
+4. **C2 (cheap)** — entanglement harvesting: completes the vacuum-mine triptych with library
+   parts; the lightcone-disjointness fence is the only design work.
+5. **A1 (cheap)** — the quorum fact; composition flagship; every part certified.
+6. **A2 (real)** — syndrome=objectivity; the science flagship; deserves an unhurried prereg.
+7. **B3 (cheap)** — the loop co-processor, once its scout pins the discrimination protocol.
+8. **C3, B2 (scouts decide)** — the frame observatory and the rewind gadget.
+9. **A3, A4, B6, B5, unranked fabric cells** — behind the above; B6 only after A1 holds; B5
+   stays $0 until its fence survives audit.
 
 Steth Choi-purity (the unconditional-floor advantage flight, C5009 map) **stays ahead of all of
 these in the QPU queue** — H10 is a physics arc, not a bypass of the advantage ladder's next move.
@@ -331,6 +442,14 @@ and prereg, behind steth.
 - "Page–Wootters computation": **Exp185/185b prior** — B5 is the extension, flagged hardest-to-fence.
 - Wing A: Exp201/204/227/229/230, F98, Exp183, Exp220–226 are the declared parents; the *compositions* (threshold custody, syndrome-as-dial, Landauer-on-the-code, indefinite archive) are the new cells.
 
+**Second sweep (C5015, Wing C) — two rediscoveries AVERTED by the check, three zero-hit confirmations:**
+- "energy teleportation / Hotta": **FLOWN** — "Beam the Power" exhibit, certified as a differential with the demon ledger closed. A "certify QET" candidate was drafted and **deleted** on this hit; C1/C2 cite it as a parent instead.
+- "time crystal": **FLOWN** — Exp151 (subharmonic rigid through the beat-null) + Exp153 (melt boundary; disorder-shrinks null won). Added to the parts bin, not the slate.
+- "thermofield double": **zero hits** → C1's TFD prep is the genuinely new preparation.
+- "reference frame" (quantum): **zero hits** → C3 is a new genre for the corpus.
+- "entanglement harvesting" (vacuum sense): **zero hits** (the word "harvest" appears only in ICO-refrigeration/noise-placement contexts) → C2 new.
+- Declared parents for Wing C: F97, F99, Exp197 + `messaging-limits.md` (which already writes down the ER=EPR reading and the no-FTL receipt), the QET exhibit, F94/F95, horizons-2 §warp-feedstock (C4638 — the line C1's energy leg makes literal).
+
 *— Whisper, C5015. The arc in one sentence: the campaign discovered that the past is a ledger;
-H10 asks who may write in it, who may erase it, what the ink costs, and whether the book must be
-read left to right.*
+H10 asks who may write in it, who may erase it, what the ink costs, whether the book must be read
+left to right — and whether two of its pages can be stitched into a bridge.*
