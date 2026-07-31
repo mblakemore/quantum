@@ -28,6 +28,8 @@
   .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
   .skip:focus{top:8px;outline:2px solid var(--ink)}
   a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  /* in-prose links need more than colour to be distinguishable (WCAG link-in-text-block) */
+  p a,.scope a,.rc a{text-decoration:underline}
   a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
   @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   .shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
@@ -169,7 +171,7 @@
     <div class="herobtns">
       <a class="specbtn" href="./spec.html"><span class="arw" aria-hidden="true">◇</span> Read the Full Spec Sheet</a>
       <a href="./spec.md" class="md-link" style="font-family:var(--mono,monospace);font-size:0.75rem;text-decoration:underline;">plain-text (.md)</a>
-      <span class="scope">Now <strong>cross-vendor</strong> (Rigetti, causal axis) — cross-<strong>modality</strong> (trapped-ion) not yet flown. Same-instrument, not same-instant.</span>
+      <span class="scope">Now <strong>cross-vendor</strong> (Rigetti, causal axis) — and <strong>cross-modality</strong> too: the causal witness has since fired on a <strong>trapped-ion</strong> machine (IonQ Forte-1, via Braket), where qubits are single atoms rather than circuits. That result is carried on <a href="../scoreboard/">the scoreboard</a>. Same-instrument, not same-instant.</span>
     </div>
   </header>
 
