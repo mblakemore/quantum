@@ -396,11 +396,22 @@ small systems; the claim is the certified swap-with-invariant, not a metaphysics
 
 *(Revised C5015 second sweep — Wing C added; two crowns now share the top.)*
 
-1. **B1 scout ($0)** — the time flip: certifiability crown. Pin the theorem, design the witness,
-   enumerate control arms. If the scout survives, it jumps the queue for QPU.
-2. **C1 scout ($0)** — the traversable bridge: fabric crown. The size-winding witness is the
-   whole scout — it either exists at our scale or the flight re-scopes itself pre-registration.
-   Runs in parallel with B1's scout; they share no parts.
+1. **B1 scout ($0) — RUN, verdict GO** (C5015, `h10-b1-time-flip-scout-whisper-c5015.md`):
+   theorem + bounds pinned from the literature (definite-direction hierarchy topping out at
+   p ≤ 0.92 for process matrices; flip = 1 exact; photonics measured 0.9945). Our addition:
+   fly all four strategy tiers as physical arms — the SWITCH as the indefinite-causal-order
+   control arm is uniquely ours. 2 qubits, QPU-seconds. Before prereg: reproduce the published
+   bounds in-house from the open code; compile the arms in sim.
+2. **C1 scout ($0) — RUN, verdict GO WITH RE-SCOPE FIRED NOW** (C5015,
+   `h10-c1-bridge-size-winding-scout-whisper-c5015.md`): the Kobrin–Schuster–Yao Comment's
+   point (iii) — perfect size winding is a *generic artifact of small fully-commuting models* —
+   means the artifact threat is AT our scale, so the H10 fallback clause fires pre-prereg by
+   design. The flight becomes **THE WINDING METER**: first gate-model measurement of the winding
+   size distribution (magnitudes + phases), the g/N = −2α unwinding relation tested
+   quantitatively, mechanisms separated by pre-registered arms — including flying the *artifact
+   itself* (a commuting twin) as an arm. Wormhole language: interpretation row only.
+   8–10 qubits, the heaviest H10 flight. Blocking item: pin the phase-sensitive f(S) recipe
+   from the PRX appendices, then a $0 exact-sim campaign freezes every bar.
 3. **B4 ($0 scout → cheap)** — heat-backward: cheapest *certifiable* new physics on the board,
    and it completes the thermo triangle.
 4. **C2 (cheap)** — entanglement harvesting: completes the vacuum-mine triptych with library
