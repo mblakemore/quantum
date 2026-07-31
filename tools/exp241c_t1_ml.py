@@ -45,6 +45,12 @@ def loglik_t1(recs_s, out_s, enc, p10, p01, q, rf):
 
 def main():
     from qiskit_ibm_runtime import QiskitRuntimeService
+    # ACCOUNT SCOPE (C5016 reader audit): fetches a PINNED historical Exp241-era job
+    # living on the SAVED DEFAULT account (flown pre-ALT-migration). Do NOT re-point
+    # to ALT -- it would 404. A pinned-ID fetch fails LOUD on the wrong account,
+    # unlike ambient readers whose wrong-scope output still looks right, so this is
+    # labeled rather than re-plumbed. Cross-account lookup if ever needed:
+    # scripts/check_job_status.py sweeps both instances.
     res = QiskitRuntimeService().job("d9f3ov4jeosc73fjen3g").result()
     report = {}
     for R, idx in [(3,10),(4,13)]:

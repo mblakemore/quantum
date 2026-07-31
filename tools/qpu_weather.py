@@ -125,7 +125,30 @@ def main():
     n = args.n
 
     from qiskit_ibm_runtime import QiskitRuntimeService
-    svc = QiskitRuntimeService()
+
+    # ACCOUNT SCOPING (C5016; reader audit C4217/C4218). This was a bare
+    # QiskitRuntimeService() — the DEFAULT account, where none of our flights
+    # run — while the tool's output reads as network-wide QPU conditions, and
+    # its nowcast flights would SUBMIT to the wrong account too. Account
+    # QUERIED says nothing about WHOSE: the scope is now resolved ALT-first
+    # and PRINTED, never implicit. Auth is IMPORTED from scripts/
+    # check_job_status.py (eadb8bd) rather than reimplemented — a second
+    # implementation is exactly how four divergent account-blind readers
+    # happened.
+    import sys as _sys
+    _sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
+    from check_job_status import _load_alt_token, ALT_CRN
+
+    _alt = _load_alt_token()
+    if _alt:
+        svc = QiskitRuntimeService(channel="ibm_quantum_platform",
+                                   token=_alt, instance=ALT_CRN)
+        print("[account: ALT open-instance — where the network's flights run]")
+    else:
+        svc = QiskitRuntimeService()
+        print("[account: SAVED DEFAULT — ALT token not found; this is NOT "
+              "the account the network flies on. Weather/nowcast scope is "
+              "the default account only.]")
     backend = svc.backend(args.backend)
     line, cost, err, ro = pick_line(backend, n)
     edges = [(line[i], line[i + 1]) for i in range(n - 1)]

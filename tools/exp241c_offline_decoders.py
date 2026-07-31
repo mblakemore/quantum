@@ -87,6 +87,12 @@ def hmm_loglik(recs_s, out_s, enc, p, q, rf):
 
 def main():
     from qiskit_ibm_runtime import QiskitRuntimeService
+    # ACCOUNT SCOPE (C5016 reader audit): fetches a PINNED historical Exp241-era job
+    # living on the SAVED DEFAULT account (flown pre-ALT-migration). Do NOT re-point
+    # to ALT -- it would 404. A pinned-ID fetch fails LOUD on the wrong account,
+    # unlike ambient readers whose wrong-scope output still looks right, so this is
+    # labeled rather than re-plumbed. Cross-account lookup if ever needed:
+    # scripts/check_job_status.py sweeps both instances.
     res = QiskitRuntimeService().job(JOB).result()
     # pub order per exp241 submit: for R in 0..4: corrected, sham, bare
     report = {}
