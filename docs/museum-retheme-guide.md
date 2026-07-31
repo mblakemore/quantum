@@ -66,6 +66,22 @@ scope.
 }
 ```
 
+**And these link rules, which are not optional.** Cyan-on-ink is only ~1.4:1 against surrounding
+body text, so a link distinguished by colour alone fails WCAG's `link-in-text-block` — an AA defect,
+same tier as a wrong number. Every in-prose link needs a second cue. Extend the selector list to
+whatever prose classes the page actually uses (`.scope`, `.audit`, `.caveat`, `.rc`, `.receipt`…);
+the bare `a{}` rule is *not* enough on its own:
+
+```css
+a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+/* in-prose links need more than colour — WCAG link-in-text-block */
+p a,.scope a,.audit a,.caveat a,.receipt a{text-decoration:underline}
+```
+
+This has now caught three separate exhibits *after* they shipped a new prose link, which is why it
+is in the template rather than in the reviewer's memory. If you add a link inside prose, add its
+class to that selector in the same edit.
+
 Head must include the fonts + meta (copy from any done exhibit's `<head>`):
 ```html
 <meta name="theme-color" content="#04060c">
@@ -73,7 +89,7 @@ Head must include the fonts + meta (copy from any done exhibit's `<head>`):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 ```
-Also add an `<meta property="og:title">` + `og:description` (one honest sentence each) and swap the
+Also add an `<meta property="og:title">` + `og:description` (one plain sentence each, stating what the page shows) and swap the
 favicon to the orb SVG (copy the `data:image/svg+xml,<svg…circle…>` favicon line from any done
 exhibit). Idioms to reuse verbatim from a done exhibit: `body` background (radial glow + `--bg`),
 `.skip` link, `h1{font-weight:300;…}`, `.eyebrow`/`.dot`, `.panel`, `.panel-label`(Michroma),
@@ -87,7 +103,25 @@ a WALL / broken-rule / wrong → `--bad` (red); the quantum "key"/primary accent
 secondary/"reward"/ceiling → `--amber`; the wing tag → `--violet`. Look at what each color MEANS in
 the exhibit and pick the role — don't just find-and-replace hex codes.
 
-## Verification — MANDATORY before commit (headless Playwright)
+## Verification — MANDATORY before commit
+
+**Three standing scans, then Playwright.** The scans live in the `dawn` repo and are run from there
+(`cd /mnt/droid/repos/dawn`), not from inside `quantum` — running them from the wrong directory
+fails silently and an empty result looks exactly like a clean one:
+
+```
+node tools/consistency-scan.js                     # dead links, style drift, placeholder leaks
+python3 tools/wcag-scan.py demo/<name>             # WCAG 2.1 AA via axe-core
+python3 tools/chart-label-scan.py demo/<name>      # overlapping / clipped SVG chart labels
+```
+
+Read what each one says about its own COVERAGE, not just its finding count. `chart-label-scan.py`
+prints which exhibits it could not measure at all (canvas- or HTML-drawn charts have no SVG text —
+those are *unverified*, not *clean*) and `wcag-scan.py` separates default-state findings from
+after-toggle ones that need a settled re-check by hand. A scan that reports clean over coverage it
+never had is worse than no scan.
+
+### Then headless Playwright
 
 `playwright` is installed (`python3 -c "from playwright.sync_api import sync_playwright"`). For each
 exhibit, run this and confirm ALL pass — paste the output into your report:
@@ -113,7 +147,8 @@ with sync_playwright() as p:
     print("shell route loads:", bool(fr))   # must be True
     b.close()
 ```
-**Pass criteria (all required):** no horizontal overflow at 390px AND 1280px; zero console errors;
+**Pass criteria (all required):** all three scans clean (or every finding understood and
+attributable); no horizontal overflow at 390px AND 1280px; zero console errors;
 every interactive control still drives its output (click each button/toggle, confirm the value or
 DOM changes); the museum shell route `#/<name>` loads the exhibit in-frame; the `<title>` and every
 number/job-ID/σ unchanged from the original (`git diff` should show ONLY styling + the topbar/eyebrow/
