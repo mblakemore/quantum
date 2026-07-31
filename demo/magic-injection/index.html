@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:title" content="Magic, Delivered — the gate that turns a coded memory into a coded computer">
+<meta property="og:description" content="Exp243 on ibm_fez: a non-Clifford gate applied to a protected qubit without ever acting on it — by consuming a prepared 'magic' state and teleporting its gate across. The injected value lands at 0.690 where stabilizer states are only allowed 0 or ±1, so the state is provably magic. Remove the one connecting gate and it reads 0.998: nothing arrived.">
+<meta name="theme-color" content="#04060c">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magic, Delivered — the gate that makes a coded computer | The Quantum Museum</title>
+<meta name="description" content="Exp243 on ibm_fez: a non-Clifford gate applied to a protected qubit without ever acting on it — by consuming a prepared 'magic' state and teleporting its gate across. The injected value lands at 0.690 where stabilizer states are only allowed 0 or ±1, so the state is provably magic. Remove the one connecting gate and it reads 0.998: nothing arrived.">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 4 L18.6 12.4 L27 15 L18.6 17.6 L16 26 L13.4 17.6 L5 15 L13.4 12.4 Z" fill="none" stroke="%23ff6bd6" stroke-width="2" stroke-linejoin="round"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a,.audit a,.caveat a,.receipt a{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--pink);font-weight:400}
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--pink) 14%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(27px,5.2vw,46px); margin:12px 0 14px; }
+  h1 .hl { color: var(--pink); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:68ch; margin:0 0 14px; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; font-family:var(--mono); font-size:11.5px; }
+  .badge { border:1px solid var(--edge); border-radius:999px; padding:4px 11px; color:var(--ink-2); }
+  .badge b { color:var(--pink); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:999px; padding:5px 12px; }
+  .scope b { color: var(--pink); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  .lgd { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:8px; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .lgd span { display:inline-flex; align-items:center; gap:7px; }
+  .lgd i { width:20px; height:0; border-top-width:3px; border-top-style:solid; display:inline-block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:999px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--pink) 16%,transparent); color:var(--pink); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .audit { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px dashed var(--edge); margin-top:14px; padding-top:9px; line-height:1.55; }
+  .audit b { color:var(--good); }
+  .caveat { border-left:3px solid var(--pink); background:var(--surface-2); border-radius:0 11px 11px 0; padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.55; }
+  .caveat .ct { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--pink); display:block; margin-bottom:5px; }
+  .caveat b { color:var(--ink); }
+  .quote { border-left:3px solid var(--amber); background:var(--surface-2); border-radius:0 11px 11px 0; padding:14px 17px; margin:14px 0 0; font-size:13.5px; line-height:1.6; }
+  .quote .qt { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); display:block; margin-bottom:7px; }
+  .quote p { margin:0 0 9px; } .quote p:last-child { margin-bottom:0; }
+  .quote b { color:var(--ink); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--pink); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="sp"></span>
+    <span class="wing">WING <b>VIII</b> · The Living Ship</span>
+  </nav>
+  <main id="main">
+  <header class="hero">
+    <div class="eyebrow">Exp243 · Horizons-6 · the Heron 2026 campaign</div>
+    <h1>Magic, <span class="hl">delivered</span>.</h1>
+    <p class="lede">Protecting a qubit and <b>computing</b> with a protected qubit are different
+      problems. A code that detects and repairs errors buys you a reliable <em>memory</em> — but the
+      operations such codes perform safely are a restricted set, and a computer limited to them can
+      be simulated by an ordinary laptop. Getting past that ceiling needs one more kind of gate, and
+      the direct way of applying it is provably incompatible with the protection. So it is not
+      applied directly at all: a separately prepared state is <b>consumed</b>, and its gate is
+      teleported onto the data. That gadget is what this flight ran.</p>
+    <div class="badges">
+      <span class="badge">injected <b>0.690</b> where stabilizers allow only 0, ±1</span>
+      <span class="badge">without the link <b>0.998</b> — nothing arrives</span>
+    </div>
+    <span class="scope">Scope: <b>[[4,2,2]] error detection</b> with post-selection on <b>ibm_fez</b> —
+      the four gadget circuits accept at <b>0.81–0.84</b>, the no-link control higher at
+      <b>0.89</b>. This certifies the injection <em>mechanism</em> and that what
+      lands is genuinely magic — it does <b>not</b> claim a fault-tolerant fidelity, and the ancilla
+      here stands in for a distillery it does not contain.</span>
+  </header>
+
+  <section class="panel" aria-labelledby="p1">
+    <h2 id="p1">Room 1 — A gate applied by consuming a state</h2>
+    <p class="sub">Exp243 · job d9f5ahhhtsac739evee0 · 5 circuits · 8000 shots · CERTIFIED (G1∧G2)</p>
+    <p class="primer"><b>Why not just apply the gate?</b> Because the gates a code can perform
+      <em>safely</em> — each qubit handled independently, so one error stays one error — provably
+      cannot include the one that gets you past the classical-simulation ceiling. That is a theorem,
+      not an engineering gap. The way around it is to prepare the awkward part <b>separately</b>, as
+      a state rather than an operation, and then spend it: link the prepared state to the data with
+      safe gates only, measure it, and its gate lands on the data. The state is consumed. Every
+      scalable quantum computer is expected to apply these gates this way.</p>
+    <div class="seg" id="seg1" role="group" aria-label="which angle"></div>
+    <figure><svg id="viz1" viewBox="0 0 460 250" role="img" aria-label="injected gate angle versus measured value on the data qubit"></svg>
+      <figcaption class="lgd" id="lgd1"></figcaption></figure>
+    <p class="story" id="story1"></p>
+    <div class="audit">AUDIT — the giveaway is <em>which</em> value lands. A protected qubit holding
+      an ordinary (stabilizer) state can only read <b>0</b> or <b>±1</b> on this axis; those are the
+      only values available. The magic point reads <b>+0.690</b>, which is none of them, and sits
+      beside its ideal <b>+0.707</b>. That is not a near-miss on a target — it is a value the
+      ordinary states are not permitted to have. The three Clifford checkpoints land where they must
+      (+0.996 → −0.018 → −0.993 against +1 → 0 → −1), so the sweep is tracing the intended curve
+      rather than drifting onto the magic value by luck.</div>
+  </section>
+
+  <section class="panel" aria-labelledby="p2">
+    <h2 id="p2">Room 2 — Cut the link and nothing arrives</h2>
+    <p class="primer"><b>The obvious objection is that the data qubit was magic all along</b> — that
+      the ancilla did nothing and the value came from somewhere else. So the flight ran the same
+      circuit with the one connecting gate removed, and everything else identical.</p>
+    <div class="seg" id="seg2" role="group" aria-label="link present or removed"></div>
+    <figure><svg id="viz2" viewBox="0 0 460 200" role="img" aria-label="data qubit value with the connecting gate present versus removed"></svg>
+      <figcaption class="lgd" id="lgd2"></figcaption></figure>
+    <p class="story" id="story2"></p>
+    <div class="caveat"><span class="ct">A detail that turned into a better measurement</span>
+      Teleporting a gate normally leaves a random by-product that has to be corrected afterwards, and
+      the expectation here was that it would wreck this particular reading. It does not — the
+      by-product for this gadget acts in a direction that leaves <em>this</em> axis untouched, which
+      the two measurement branches confirm by landing together (<b>+0.686</b> and <b>+0.695</b>
+      where they could have landed apart). So the magic shows up without any active correction, which
+      is what let the check avoid a readout direction this code handles badly. The by-product still
+      matters for the rest of the state; it simply does not touch the thing being measured.</div>
+  </section>
+
+  <section class="panel">
+    <h2>The court</h2>
+    <p class="sub">how we know we're not fooling ourselves</p>
+
+    <div class="quote"><span class="qt">A receipt from the same programme, in the author's words</span>
+      <p>This wing's other flights include one whose first run reported a large, clean-looking win —
+      and whose author killed it himself before anyone else saw it. Quoted in full, because the last
+      line is the point:</p>
+      <p><em>"The first run said majority-vote-of-3 beat single qubits by +0.338 and the gate passed.
+      That number was not a discovery, it was a tell — it was better than the physics allows.
+      Majority vote cannot rescue three coins that each land tails more than half the time; if
+      survival is below one half, voting makes it <b>worse</b>, not better. So a large positive
+      advantage there meant I was comparing against the wrong baseline, not that the code was
+      working. Pinned to the same qubits with a <b>matched</b> reference, the real advantage was
+      <b>+0.056</b>. About <b>85% of my headline was the confound.</b>"</em></p>
+      <p>The re-run was published as the modest result it is. That is the standard the numbers on
+      <em>this</em> page are held to.</p>
+    </div>
+
+    <div class="court">
+      <div class="receipt"><div class="rt">THE VALUE IS THE PROOF, NOT THE TARGET</div>
+        <p>This does not rest on hitting a predicted number closely. It rests on landing on a value
+        that the ordinary states are <em>not allowed</em> to occupy. A sloppy result drifting toward
+        0.707 would be as telling as a precise one, because the permitted values are 0 and ±1 and
+        nothing in between.</p></div>
+      <div class="receipt"><div class="rt">THE DESTRUCTIVE TEST</div>
+        <p>Remove the single gate that links ancilla to data and the data reads <b>+0.998</b> — its
+        original untouched state. The magic does not arrive. The gadget is doing the work, and the
+        control says so in the same run rather than in an argument.</p></div>
+      <div class="receipt"><div class="rt">WHAT THE ANCILLA IS STANDING IN FOR</div>
+        <p>The magic state here is prepared directly, as a stand-in for a <em>distillery</em> — the
+        machinery a real fault-tolerant computer would use to manufacture these states cleanly. What
+        is demonstrated is the <b>injection</b>, downstream of wherever the magic came from. The
+        distillery itself is not on this chip and is not claimed.</p></div>
+      <div class="receipt"><div class="rt">FENCES</div>
+        <p>Distance-2 <em>detection</em>: it post-selects and discards, which is a real cost. The four
+        gadget circuits accept at <b>0.81–0.84</b>; the no-link control accepts higher, at
+        <b>0.89</b> — as it must, having one fewer entangling gate to fail on, which is the same
+        fact the falsifier room rests on. It can neither correct nor distil. Two ideals were named and
+        deliberately not flown — injecting into a correcting code, and distillation itself — because
+        both need 100+ two-qubit gates after routing, and at that depth a result would not be
+        readable as code-versus-depth. They are the next hardware's climb, not this one's.
+        <code>Exp243 · findings in the repo</code></p></div>
+    </div>
+  </section>
+  </main>
+  <footer role="contentinfo">
+    <span>Exp243 · ibm_fez · job d9f5ahhhtsac739evee0</span><span>C4922 · 2026-07-20</span>
+    <a href="../self-healing/">← the qubit that heals itself</a>
+    <a href="../crossover/">where the shield pays</a>
+    <a href="../index.html">← all exhibits</a>
+  </footer>
+</div>
+<script>
+"use strict";
+const SVGNS="http://www.w3.org/2000/svg";
+function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+function segify(id,states,cb){
+  const seg=document.getElementById(id);
+  states.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.dataset.k=s[0];b.textContent=s[1];
+    b.addEventListener("click",()=>{cb(s[0]);seg.querySelectorAll("button").forEach(x=>{x.classList.toggle("on",x.dataset.k===s[0]);x.setAttribute("aria-pressed",String(x.dataset.k===s[0]));});});
+    seg.appendChild(b);});
+  cb(states[0][0]); seg.querySelector("button").classList.add("on");
+  seg.querySelector("button").setAttribute("aria-pressed","true");
+}
+// ---- verified data kernel (Exp243 STATUS table, ibm_fez, job d9f5ahhhtsac739evee0) ----
+// [label, theta/pi, measured <Xbar_A>, ideal cos(theta), m=0, m=1, acceptance, magic?]
+const PTS=[["I",   0,    0.996, 1.000,  0.996,  0.996, 0.83, false],
+           ["T",   0.25, 0.690, 0.707,  0.686,  0.695, 0.83, true ],
+           ["S",   0.5, -0.018, 0.000,  0.012, -0.048, 0.84, false],
+           ["Z",   1.0, -0.993,-1.000, -0.992, -0.994, 0.81, false]];
+const NOLINK = 0.998;   // no-CNOT control at the magic angle
+
+function frame(svg,B){
+  const L=54,R=430,T=34;
+  const X=t=>L+(R-L)*t;
+  const Y=v=>T+(B-T)*(1-v)/2;
+  el(svg,"line",{x1:L,y1:T,x2:L,y2:B,style:"stroke:var(--edge-2);stroke-width:1.5"});
+  [1,0.5,0,-0.5,-1].forEach(v=>{
+    const yy=Y(v);
+    el(svg,"line",{x1:L,y1:yy,x2:R,y2:yy,style:`stroke:${v===0?"var(--edge-2)":"var(--edge)"};stroke-width:1;stroke-dasharray:${v===0?"5 4":"2 4"}`});
+    el(svg,"text",{x:L-6,y:yy+3.5,"text-anchor":"end",style:"fill:var(--ink-4);font-family:var(--mono);font-size:9px"}).textContent=v>0?"+"+v.toFixed(1):v.toFixed(1);
+  });
+  return {X,Y,L,R,T,B};
+}
+// Room 1 — the cos sweep with the magic point called out
+function r1(k){
+  const svg=document.getElementById("viz1"); svg.innerHTML="";
+  const g=frame(svg,190);
+  // the ideal cos curve
+  let d="";
+  for(let i=0;i<=120;i++){ const t=i/120; d+=(i?"L":"M")+g.X(t).toFixed(1)+","+g.Y(Math.cos(t*Math.PI)).toFixed(1); }
+  el(svg,"path",{d:d,fill:"none",style:"stroke:var(--ink-4);stroke-width:2;stroke-dasharray:6 4;opacity:.8"});
+  // the band of values an ordinary (stabilizer) state may take: 0 and +/-1 only
+  if(k!=="plain"){
+    [1,0,-1].forEach(v=>el(svg,"line",{x1:g.L,y1:g.Y(v),x2:g.R,y2:g.Y(v),style:"stroke:var(--good);stroke-width:2.4;opacity:.5"}));
+  }
+  PTS.forEach(p=>{
+    const col = p[7] ? "var(--pink)" : "var(--cyan)";
+    el(svg,"circle",{cx:g.X(p[1]),cy:g.Y(p[2]),r:p[7]?7:5,style:`fill:${col}`});
+    // Value labels sit BESIDE the point, not above/below it: stacked vertically they collided
+    // with the axis title at the top of the range and with the tick row at the bottom.
+    const far = p[1] > 0.75;
+    el(svg,"text",{x:g.X(p[1])+(far?-9:9),y:g.Y(p[2])+4,"text-anchor":far?"end":"start",
+      style:`fill:${col};font-family:var(--mono);font-size:11px;font-weight:700`}).textContent=(p[2]>=0?"+":"")+p[2].toFixed(3);
+    el(svg,"text",{x:g.X(p[1]),y:g.B+18,"text-anchor":"middle",style:"fill:var(--ink-4);font-family:var(--mono);font-size:10px"}).textContent=p[0];
+  });
+  el(svg,"text",{x:(g.L+g.R)/2,y:g.B+38,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="which gate was injected";
+  el(svg,"text",{x:8,y:20,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="what the protected data qubit reads";
+  const lg=['<span><i style="border-top-color:var(--ink-4);border-top-style:dashed"></i>the curve the injected angle should trace</span>'];
+  if(k!=="plain") lg.push('<span><i style="border-top-color:var(--good)"></i>the only values an ordinary state may hold</span>');
+  lg.push('<span><i style="border-top-color:var(--pink)"></i>the magic point</span>');
+  document.getElementById("lgd1").innerHTML=lg.join("");
+  document.getElementById("story1").innerHTML = k==="plain"
+    ? 'Four gates injected, four readings, tracing the curve they should. On its own this says the gadget transfers <em>something</em> faithfully — the Clifford checkpoints land at <b>+0.996</b>, <b>−0.018</b> and <b>−0.993</b> where +1, 0 and −1 are expected.'
+    : 'Now the constraint. An ordinary protected state can only read <b>0</b> or <b>±1</b> here — the three green lines are the entire menu. Three of the four points sit on that menu. The magic point does not: <b>+0.690</b>, against an ideal of +0.707. It is not close to a permitted value; it is in the gap between them, which is what makes it magic rather than merely accurate.';
+}
+segify("seg1",[["plain","the four injected gates"],["magic","what an ordinary state may read"]],r1);
+
+// Room 2 — the destructive control
+function r2(k){
+  const svg=document.getElementById("viz2"); svg.innerHTML="";
+  const g=frame(svg,150);
+  const val = k==="link" ? 0.690 : NOLINK;
+  const col = k==="link" ? "var(--pink)" : "var(--bad)";
+  [1,0,-1].forEach(v=>el(svg,"line",{x1:g.L,y1:g.Y(v),x2:g.R,y2:g.Y(v),style:"stroke:var(--good);stroke-width:2.4;opacity:.5"}));
+  el(svg,"line",{x1:g.L,y1:g.Y(val),x2:g.R,y2:g.Y(val),style:`stroke:${col};stroke-width:3`});
+  el(svg,"text",{x:g.R-6,y:g.Y(val)-9,"text-anchor":"end",style:`fill:${col};font-family:var(--mono);font-size:13px;font-weight:700`}).textContent="+"+val.toFixed(3);
+  el(svg,"text",{x:8,y:20,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="what the data qubit reads at the magic angle";
+  document.getElementById("lgd2").innerHTML=
+    '<span><i style="border-top-color:var(--good)"></i>values an ordinary state may hold</span>'+
+    `<span><i style="border-top-color:${col}"></i>${k==="link"?"gadget intact":"connecting gate removed"}</span>`;
+  document.getElementById("story2").innerHTML = k==="link"
+    ? 'With the gadget intact the data reads <b>+0.690</b> — off the permitted menu, magic present.'
+    : 'With the single connecting gate removed and nothing else changed, the data reads <b>+0.998</b> — back on the menu, sitting at the untouched state it started in. The magic did not leak in from anywhere: it arrived through that gate or not at all.';
+}
+segify("seg2",[["link","gadget intact"],["cut","connecting gate removed"]],r2);
+</script>
+</body>
+</html>
