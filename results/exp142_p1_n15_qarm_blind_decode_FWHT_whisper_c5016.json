@@ -1,0 +1,47 @@
+{
+ "P_hat_Q": "ZXYIZYXYXZIZXIX",
+ "rate": 0.7614749871067561,
+ "runner_up": "XXYXYZYXZIYXZII",
+ "runner_rate": 0.5489943269726664,
+ "separation_binomial_SE": 31.047635005458712,
+ "z_over_null_bulk": 32.56597223644648,
+ "m_samples": 3878,
+ "candidates": 1073741823,
+ "top": [
+  {
+   "P": "ZXYIZYXYXZIZXIX",
+   "rate": 0.7614749871067561
+  },
+  {
+   "P": "XXYXYZYXZIYXZII",
+   "rate": 0.5489943269726664
+  },
+  {
+   "P": "IZIZXIXYYZXIZIX",
+   "rate": 0.5461578133058278
+  },
+  {
+   "P": "IXYIZXXYXXYIXIX",
+   "rate": 0.5458999484270243
+  },
+  {
+   "P": "YZIXXYYXYYZIYZY",
+   "rate": 0.5456420835482207
+  },
+  {
+   "P": "YXZYZZIZXZYYZZI",
+   "rate": 0.5456420835482207
+  },
+  {
+   "P": "ZXXZZZZZIIXYXXZ",
+   "rate": 0.5453842186694172
+  },
+  {
+   "P": "XIXZZIYZIIYXIYI",
+   "rate": 0.5453842186694172
+  }
+ ],
+ "job": null,
+ "decoder": "FWHT \u2014 EXACT reorganisation of constraint_rate argmax",
+ "cycle": "C6575"
+}
