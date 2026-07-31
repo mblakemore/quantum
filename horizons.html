@@ -151,7 +151,7 @@
     <a href="#h1">1 · Order</a>
     <a href="#h2">2 · Time</a>
     <a href="#h3">3 · Limits</a>
-    <a href="#h4">4 · Shields</a><a href="#h5">5 · Five-year mission</a>
+    <a href="#h4">4 · Shields</a><a href="#h5">5 · Five-year mission</a><a href="#h6">6 · Living ship</a>
     <a href="#end">Conclusions</a>
     <a href="index.html">Museum</a>
   </nav>
@@ -569,6 +569,75 @@
         <div class="field mean"><span class="lab">What it means</span><span class="val">A later choice can sort an already-recorded past into one of two mutually exclusive stories. It cannot <em>send</em> anything backwards — the flat unsorted data is the proof — but which story you can tell is not settled until you look.</span></div>
         <div class="field use"><span class="lab">What we can build with it</span><span class="val">Sharper tests of what "a measurement happened" means, on hardware rather than on paper.</span></div>
         <div class="field caveat"><span class="lab">What this is NOT</span><span class="val">The simpler re-crossing does <em>not</em> replace the original: it uses a plainer kind of measurement that leaves open the standard objection ("your measurement disturbed it"), which the original closed. Both results stand, and the museum page says which is the stronger protocol.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HORIZONS 6 ============ -->
+  <section class="prog" id="h6">
+    <div class="prog-head">
+      <span class="prog-num">HORIZONS 6</span>
+      <span class="prog-name">The living ship</span>
+      <span class="prog-tag">from surviving errors to healing them · and the one gate that makes a coded computer universal</span>
+    </div>
+    <p class="prog-lede">Every shield up to this point could only <em>notice</em> that something had
+      gone wrong and throw the run away. That is survivable for a short calculation and hopeless for
+      a long one — discard often enough and you never finish. This programme crosses the line that
+      actually matters: a code that works out <b>which</b> qubit broke, <b>fixes it</b>, and keeps
+      going. And then it reaches for the gate that decides whether a protected machine can compute
+      anything interesting at all.</p>
+
+    <div class="grid">
+      <div class="card lead">
+        <div class="card-top">
+          <div class="card-title"><span class="em">The self-healing qubit</span> — correction, not discarding</div>
+          <div class="tag-row"><span class="pill win">CERTIFIED</span></div>
+        </div>
+        <div class="tag-row"><span class="ref">Exp236 · 238 · 240 · 241</span><span class="ref">ibm_fez</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Detecting an error means "a typo happened, delete the page". Correcting it means "fix the typo and keep typing". Only the second one lets a long computation finish, and it needs the machine to identify <em>which</em> qubit broke <b>without looking at the data it holds</b> — because looking would destroy it.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">It works, live, mid-circuit. Helper qubits point at the culprit, a corrective pulse fires while the computation is still running, and the run <b>survives</b>. Run the correction loop repeatedly and the advantage <b>compounds</b>: the corrected qubit ages slowly while an identical circuit with the fix switched off falls apart.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">This is the mechanism every scalable quantum computer is built on. Not a faster answer — a machine that can still be computing after the point where an unprotected one has become noise.</span></div>
+        <div class="field use"><span class="lab">What we can build with it</span><span class="val">Computations longer than the hardware's own patience.</span></div>
+        <div class="field caveat"><span class="lab">What this is NOT</span><span class="val">The errors are <b>deliberately injected</b>, not ambient — these are qubits broken on purpose, in a known way, to test whether the code puts them back. Small codes, and this demonstrates the <em>mechanism</em> of fault tolerance rather than a below-threshold machine. Nothing here outruns a laptop.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title"><span class="em">The phase dual</span> — it worked, and the verdict is still "not held"</div>
+          <div class="tag-row"><span class="pill mix">SPLIT / KEPT</span></div>
+        </div>
+        <div class="tag-row"><span class="ref">Exp237</span><span class="ref">ibm_fez</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">A qubit can break in a second, subtler way — losing its <b>phase</b> rather than flipping its value. That needs its own code, the mirror image of the first one.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">The code plainly works: given a deliberate phase flip, it brings the logical value back where an unprotected qubit is not merely degraded but <b>gone</b> — flipped to the opposite state. And the flight is recorded as <b>NOT HELD</b>, because one of eight test cells landed <b>one thousandth</b> below the pass mark that had been fixed in advance.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">Both of those are true at once, and the second is the point. A bar you set beforehand is only worth having if it can be missed by a thousandth — and then not moved. There was no second attempt and no adjustment to the mark. Shopping for a threshold your result already clears is the failure the whole practice exists to prevent.</span></div>
+        <div class="field use"><span class="lab">What we can build with it</span><span class="val">Together with the bit-flip code above, coverage of both ways a qubit breaks.</span></div>
+        <div class="field caveat"><span class="lab">What this is NOT</span><span class="val">This code guards the <b>phase</b> channel only — a value flip goes straight through it, exactly as the other code is blind to phase. Neither half closes alone; the pair is what closes.</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title"><span class="em">Where the stair runs out</span> — two corrected qubits, one gate</div>
+          <div class="tag-row"><span class="pill mix">SPLIT / KEPT</span><span class="pill wall">WALL</span></div>
+        </div>
+        <div class="tag-row"><span class="ref">Exp242</span><span class="ref">ibm_fez</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">The frontier: not one protected qubit but <b>two</b>, with a gate acting between them while both are being corrected live.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">Half of it held. Correction <b>measurably helps</b> the two-qubit gate compared with the identical circuit with the fix switched off. The other half missed: a protected entangled pair needs both of its halves intact, and one collapsed entirely — because this code cannot see phase errors, and the circuit was deep enough to erase that half. <b>That failure was named as the risk before the flight, and it landed exactly there.</b></span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">The stair does not stop here because something broke unexpectedly. It stops because the thing everyone expected to break, broke, on schedule. The next rung needs a code that protects both channels at once.</span></div>
+        <div class="field use"><span class="lab">What we can build with it</span><span class="val">A specific, measured requirement for the next generation of codes rather than a guess.</span></div>
+        <div class="field caveat"><span class="lab">Read the certified claim precisely</span><span class="val">What was tested is a <b>difference</b> — corrected must beat the fix-switched-off control by a set margin, and it does. That says nothing about absolute quality, and the absolute numbers are modest: the gate is right about six times in ten, and its worst case is only a little better than guessing — and on a two-bit outcome, guessing is right just one time in four. <b>Correction measurably helps a two-qubit logical gate, at fidelities still well short of useful.</b></span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title"><span class="em">Magic, delivered</span> — the gate that makes a coded computer</div>
+          <div class="tag-row"><span class="pill win">CERTIFIED</span></div>
+        </div>
+        <div class="tag-row"><span class="ref">Exp243</span><span class="ref">ibm_fez</span></div>
+        <div class="field"><span class="lab">The idea</span><span class="val">Protecting a qubit and <em>computing</em> with it are different problems. The operations a code can perform safely are a restricted set, and a machine limited to them can be simulated by an ordinary laptop. Getting past that needs one more kind of gate — and applying it directly is provably incompatible with the protection. So it is not applied directly: a separately prepared state is <b>consumed</b>, and its gate teleported onto the data.</span></div>
+        <div class="field result"><span class="lab">What happened</span><span class="val">The gadget runs. The giveaway is <em>which value</em> arrives: an ordinary protected state is only permitted to read certain values on this measurement, and what landed is <b>none of them</b> — it sits in the gap between the allowed ones, which is what makes it the useful kind of state. Remove the single gate linking the prepared state to the data and nothing arrives at all.</span></div>
+        <div class="field mean"><span class="lab">What it means</span><span class="val">This is the route every scalable universal quantum computer is expected to take for these gates. Detection and correction buy <em>fidelity</em>; this buys <b>universality</b> — the difference between a protected memory and a protected computer.</span></div>
+        <div class="field use"><span class="lab">What we can build with it</span><span class="val">The missing piece between "a coded qubit survives" and "a coded qubit computes something a classical machine cannot follow".</span></div>
+        <div class="field caveat"><span class="lab">What this is NOT</span><span class="val">Error <b>detection</b>, not correction: it discards the runs that fail its check, which is a real cost. The prepared state is made directly here as a stand-in for the factory a real machine would use — what is demonstrated is the <em>delivery</em>, downstream of wherever the state came from. And this certifies the mechanism, not a fault-tolerant quality of result.</span></div>
       </div>
     </div>
   </section>
