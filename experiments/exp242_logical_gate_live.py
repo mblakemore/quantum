@@ -23,8 +23,14 @@ withheld. Any corrected-vs-sham gap is the correction, not qubits/machinery.
 
 FROZEN GATES:
   G1_GATE_CORRECTED (Z-bar, certified): mean logical-CNOT truth-table fidelity over the 4 inputs,
-     corrected - sham >= 0.05, after gate + idle. HELD = the logical CNOT works on two live-corrected
-     qubits AND correction improves the observable the code protects.
+     corrected - sham >= 0.05, after gate + idle. HELD = CORRECTION MEASURABLY HELPS the observable
+     the code protects. This is a DIFFERENCE threshold; it certifies NOTHING about absolute fidelity.
+     [Comment corrected C5014. It previously read "HELD = the logical CNOT works on two live-corrected
+     qubits", which glosses a difference test as a works claim. Caught by Dawn at exhibit review, as it
+     was about to propagate into a public page sounding author-authorised. The measured truth table is
+     0.976/0.561/0.364/0.588, mean 0.622 -- one row BELOW 0.5, i.e. worse than chance on a 2-bit
+     outcome. "Correction helps" is certified; "the gate is clean" is not, and this gate cannot
+     distinguish them. Do not restore the old wording.]
   G2_ENTANGLES (reported, not gated on correction): the transversal CNOT on |+_L>|0_L> yields a logical
      Bell pair with <Z-barZ-bar> >= 0.5 AND <X-barX-bar> >= 0.5 (logical entanglement demonstrated).
   Registered verdict = G1 and G2. REPORTED: per-input truth table, both Bell legs corr vs sham (with
