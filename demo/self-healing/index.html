@@ -234,6 +234,70 @@
     <svg id="roundSvg" viewBox="0 0 620 240" role="img" aria-label="fidelity vs rounds" style="width:100%;height:auto"></svg>
   </section>
 
+  <!-- PANEL E — Exp237, the phase dual, missed by one thousandth -->
+  <section class="panel">
+    <p class="panel-label">Exhibit E — The other half of the stair</p>
+    <h2>The phase dual: it works, and the verdict is still NOT HELD</h2>
+    <p class="sub">Everything above fixes a <strong>bit</strong> flip. A qubit can also lose its
+    <strong>phase</strong> — a different kind of damage, needing its own code. This is that code
+    (Exp237), and it is the flight where a pre-registered floor did its job.</p>
+    <p class="sub"><strong>How the test was run, because it changes what the numbers mean.</strong>
+    The errors here were <strong>deliberately injected</strong>: a single Z-flip applied at one
+    specified location, swept across all eight combinations of input state and error position. These
+    are not qubits that drifted — they are qubits somebody broke on purpose, in a known way, to see
+    whether the code puts them back.</p>
+    <figure><svg id="phaseGrid" viewBox="0 0 620 210" role="img" aria-label="corrected fidelity for each input and error location against the pre-registered floor"></svg></figure>
+    <p class="sub" style="margin-top:12px"><strong>Seven of eight cells clear the pre-registered floor
+    of 0.900. One lands at 0.899.</strong> The registered verdict is therefore <strong>NOT HELD</strong>,
+    by one thousandth — and it was kept that way: no re-fly, no adjustment to the floor. Shopping for a
+    threshold your result already sits on is the anti-pattern the whole pre-registration discipline
+    exists to prevent, and a floor is only worth having if it can be missed by a thousandth.</p>
+    <div class="receipts" style="margin-top:16px">
+      <div class="rc"><h3>What plainly worked</h3><p>On the errored runs the corrected logical value
+      came back at <strong>0.934</strong>, against <strong>0.006</strong> for a bare qubit given the
+      same deliberate phase flip. The bare qubit does not degrade — it is <strong>gone</strong>,
+      flipped to the opposite state. The code recovers a value the unprotected qubit has completely
+      lost. <span class="yes">That leg held decisively.</span></p></div>
+      <div class="rc"><h3>The fence</h3><p><strong>Phase channel only.</strong> This code is distance-3
+      against Z errors and an X error is <strong>unprotected</strong> — the exact mirror of the
+      bit-flip code above, which is blind to phase. Neither half closes alone; the pair is what
+      closes.</p></div>
+    </div>
+  </section>
+
+  <!-- PANEL F — Exp242, the frontier -->
+  <section class="panel">
+    <p class="panel-label">Exhibit F — Where the stair runs out</p>
+    <h2>Two corrected qubits, one gate between them — and the honest half-result</h2>
+    <p class="sub">The frontier flight (Exp242): not one protected qubit but <strong>two</strong>, with
+    a logical gate acting between them while both are being corrected live. Its registered verdict is
+    <strong>NOT HELD</strong> — and the interesting part is <em>which</em> half missed.</p>
+    <figure><svg id="cnotBars" viewBox="0 0 620 230" role="img" aria-label="logical CNOT truth table, corrected versus sham"></svg></figure>
+    <p class="sub" style="margin-top:12px"><strong>What is certified is that correction HELPS — not
+    that the gate is clean.</strong> The registered test is a <em>difference</em>: corrected must beat
+    the sham by at least 0.05 on the protected observable. It does, by <strong>+0.075</strong> on
+    average. It says nothing at all about absolute quality, and the absolute numbers say plenty on
+    their own — a mean of <strong>0.622</strong>, with one row at <strong>0.364</strong> against the
+    <strong>0.25</strong> you would score by guessing at random — barely above noise, and nowhere
+    near useful. The accurate sentence is that <strong>correction measurably helps a
+    two-qubit logical gate, at absolute fidelities still well short of useful.</strong></p>
+    <div class="receipts" style="margin-top:16px">
+      <div class="rc"><h3>The half that held</h3><p>The gate runs, on two simultaneously
+      error-corrected qubits, and correction beats the identical circuit with the fix switched off.
+      That capability is real and it is the frontier being reached at all. <span class="yes">G1
+      held.</span></p></div>
+      <div class="rc"><h3>The half that missed, exactly where it was predicted to</h3><p>The second
+      test wanted a live entangled pair with <em>both</em> its legs intact. One leg collapsed to
+      <strong>+0.000</strong> — because this code is blind to phase, an entangled pair's phase leg is
+      unprotected, and a circuit this deep dephased it away. That failure was <strong>named as the
+      risk before the flight</strong> and it landed precisely there.</p></div>
+      <div class="rc"><h3>Why this is a result</h3><p>A prediction that comes true is information
+      whichever way it points. The stair does not stop here because something broke unexpectedly — it
+      stops because the thing everyone expected to break, broke, on schedule. The next rung needs a
+      code that protects both channels at once.</p></div>
+    </div>
+  </section>
+
   <!-- PANEL D -->
   <section class="panel">
     <p class="panel-label">Exhibit D — Why this counts</p>
@@ -251,7 +315,7 @@
 
   </main>
   <footer class="badge-row" role="contentinfo">
-    <span>MEASURED · <span class="sig">Exp236 / 238 / 240 / 241</span> · ibm_fez</span>
+    <span>MEASURED · <span class="sig">Exp236 / 237 / 238 / 240 / 241 / 242</span> · ibm_fez</span>
     <span>jobs d9erdp1… · d9es1m1… · d9f3d4k… · d9f3ov4…</span>
     <span class="sp2"></span>
     <a href="../">Museum</a>
@@ -417,6 +481,82 @@
     document.getElementById("rSlider").addEventListener("input", function(){ drawRounds(+this.value); });
 
     renderA(); drawRounds(4);
+  })();
+
+  // ---- Exp237: the 8-cell phase-correction grid against its pre-registered floor ----
+  (function(){
+    var svg=document.getElementById("phaseGrid"); if(!svg) return;
+    var css=getComputedStyle(document.documentElement); function C(v){return css.getPropertyValue(v).trim();}
+    // verified data kernel: exp237 STATUS table, corrected logical fidelity (no postselection)
+    var ROWS=[["|0\u2097\u27e9",[0.999,0.927,0.955,0.935]],
+              ["|1\u2097\u27e9",[0.995,0.899,0.960,0.927]]];
+    var COLS=["no error","Z on q0","Z on q1","Z on q2"];
+    var FLOOR=0.900, L=96,R=598,T=44,B=150, lo=0.85, hi=1.0;
+    var Y=function(v){return T+(B-T)*(hi-v)/(hi-lo);};
+    var s="";
+    // floor line
+    s+='<line x1="'+L+'" y1="'+Y(FLOOR)+'" x2="'+R+'" y2="'+Y(FLOOR)+'" stroke="'+C("--err")+'" stroke-width="2" stroke-dasharray="6 4"/>';
+    s+='<text x="'+(L-8)+'" y="'+(Y(FLOOR)+4)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--err")+'">0.900 floor</text>';
+    [1.0,0.95].forEach(function(v){
+      s+='<line x1="'+L+'" y1="'+Y(v)+'" x2="'+R+'" y2="'+Y(v)+'" stroke="'+C("--edge")+'" stroke-width="1" stroke-dasharray="2 4"/>';
+      s+='<text x="'+(L-8)+'" y="'+(Y(v)+4)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--ink-3")+'">'+v.toFixed(2)+'</text>';
+    });
+    var gw=(R-L)/4;
+    ROWS.forEach(function(row,ri){
+      row[1].forEach(function(v,ci){
+        var cx=L+gw*ci+gw/2 + (ri?18:-18);
+        var below=v<FLOOR;
+        var col= below ? C("--err") : C("--heal");
+        s+='<circle cx="'+cx+'" cy="'+Y(v)+'" r="'+(below?7:5)+'" fill="'+col+'"/>';
+        if(below){
+          s+='<text x="'+cx+'" y="'+(Y(v)+22)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="11" font-weight="700" fill="'+col+'">'+v.toFixed(3)+'</text>';
+        }
+      });
+    });
+    COLS.forEach(function(c,ci){
+      s+='<text x="'+(L+gw*ci+gw/2)+'" y="'+(B+22)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10.5" fill="'+C("--ink-3")+'">'+c+'</text>';
+    });
+    s+='<text x="8" y="20" font-family="'+C("--mono")+'" font-size="10.5" fill="'+C("--ink-3")+'">corrected fidelity, all 8 cells \u00b7 left dot = |0\u2097\u27e9 input, right dot = |1\u2097\u27e9</text>';
+    s+='<text x="'+((L+R)/2)+'" y="'+(B+44)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--ink-3")+'">which phase error was injected</text>';
+    svg.innerHTML=s;
+  })();
+
+  // ---- Exp242: logical CNOT truth table, corrected vs sham ----
+  (function(){
+    var svg=document.getElementById("cnotBars"); if(!svg) return;
+    var css=getComputedStyle(document.documentElement); function C(v){return css.getPropertyValue(v).trim();}
+    // verified data kernel: exp242 STATUS truth table (majority readout)
+    var T4=[["|0\u27e9|0\u27e9",0.976,0.986],["|0\u27e9|1\u27e9",0.561,0.436],
+            ["|1\u27e9|0\u27e9",0.364,0.251],["|1\u27e9|1\u27e9",0.588,0.517]];
+    var L=112,R=498,T=44,rowh=34,gap=12;
+    var X=function(v){return L+(R-L)*v;};
+    var s="";
+    // The reference is RANDOM GUESSING. The outcome is a PAIR of logical bits — four
+    // possibilities — so chance is 0.25, not 0.5. Drawn at 0.5 this made the worst row look
+    // worse than guessing, which is false: overstatement against ourselves is still overstatement.
+    var lastY=T+3*(rowh+gap)+26;
+    s+='<line x1="'+X(0.25)+'" y1="'+(T-10)+'" x2="'+X(0.25)+'" y2="'+(lastY+6)+'" stroke="'+C("--err")+'" stroke-width="1.5" stroke-dasharray="5 4"/>';
+    s+='<text x="'+X(0.25)+'" y="'+(lastY+20)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="10" fill="'+C("--err")+'">0.25 \u2014 random guessing</text>';
+    T4.forEach(function(r,i){
+      var y=T+i*(rowh+gap);
+      s+='<text x="8" y="'+(y+17)+'" font-family="'+C("--mono")+'" font-size="11" fill="'+C("--ink-2")+'">'+r[0]+'</text>';
+      s+='<rect x="'+L+'" y="'+y+'" width="'+Math.max(2,X(r[1])-L)+'" height="14" rx="3" fill="'+C("--heal")+'" opacity="0.9"/>';
+      s+='<rect x="'+L+'" y="'+(y+16)+'" width="'+Math.max(2,X(r[2])-L)+'" height="10" rx="3" fill="'+C("--amber")+'" opacity="0.75"/>';
+      // One label per row, right-aligned: stacked corrected/sham labels overlapped each other
+      // whenever the two bars were close in length, which is most rows.
+      // ONE text node per row, colour carried by tspans. Two separate <text> elements
+      // overlapped no matter how far apart they were stacked, because the box is taller
+      // than the font size; a single node cannot collide with itself.
+      s+='<text x="612" y="'+(y+21)+'" text-anchor="end" font-family="'+C("--mono")+'" font-size="11">'
+        +'<tspan font-weight="700" fill="'+C("--heal")+'">'+r[1].toFixed(3)+'</tspan>'
+        +'<tspan fill="'+C("--ink-3")+'"> / </tspan>'
+        +'<tspan fill="'+C("--amber")+'">'+r[2].toFixed(3)+'</tspan></text>';
+    });
+    s+='<text x="8" y="18" font-family="'+C("--mono")+'" font-size="10.5" fill="'+C("--ink-3")+'">how often the gate gave the right answer</text>';
+    s+='<text x="612" y="18" text-anchor="end" font-family="'+C("--mono")+'" font-size="10">'
+      +'<tspan fill="'+C("--heal")+'">corrected</tspan><tspan fill="'+C("--ink-3")+'"> / </tspan>'
+      +'<tspan fill="'+C("--amber")+'">sham</tspan></text>';
+    svg.innerHTML=s;
   })();
 </script>
 </body>
