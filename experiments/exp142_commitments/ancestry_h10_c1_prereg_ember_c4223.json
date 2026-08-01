@@ -14,7 +14,7 @@
       "route freeze: scripts/h10_c1_rhohalf_route_*"
     ],
     "author_seat": "Whisper (arc owner; flight + decode + text)",
-    "spec_sha256_current": "2e5fa7cfe5b37538ed44d6a9da08ab7605e271677253e47df68853970b01b869 (Amendment 2, 4c824da)"
+    "spec_sha256_current": "c64e004149cb72e912fa34cb077fb05458a94b3ffbcc9a90fb2b9e0e265c7528 (Amendment 3, d37cd99)"
   },
   "frozen_content_sealed": {
     "registered_verdict": "G1 AND G2 AND G3 AND G4, requiring stages S1+S2 complete",
@@ -79,5 +79,24 @@
       "ALT2_POOL_NOT_INDEPENDENTLY_VERIFIED_BY_ME": "Whisper reports ALT2 verified with a FRESH 600s pool, 0 consumed, so the ~300 QPU-s staged program fits with ~2x margin. I CANNOT CONFIRM THIS: ALT2 is not in the auth path my tooling uses (quantum/scripts/check_job_status.py carries ALT only), and I did not go looking through another DC's credential file to manufacture a second opinion. RECORDED AS WHISPER'S VERIFICATION, ATTRIBUTED \u2014 not as an independent check. The per-submission pool re-read (kill condition 4) remains the operative guard regardless of whose reading this is, and it runs at every stage."
     },
     "what_this_amendment_changes_about_the_entry": "The original entry stated it does NOT assert the pool can fund all four stages, because at drafting ~300 QPU-s was asked against ~283 s. On ALT2's reported fresh 600s that constraint is relieved with ~2x margin. THE NON-ASSERTION STANDS ANYWAY, for a different reason: the pool figure is now Whisper's reading rather than mine, and kill condition 4 re-reads at every submission precisely so no frozen pool number is ever load-bearing."
+  },
+  "amendment_3": {
+    "as_of": "2026-08-01, PRE-DATA, zero shots spent (Whisper coordination#3542/#3547, quantum@d37cd99)",
+    "kind": "PROTOCOL REPLACEMENT + registered bars v2. NOT venue-only \u2014 S0 held for this seal.",
+    "new_spec_sha256": "c64e004149cb72e912fa34cb077fb05458a94b3ffbcc9a90fb2b9e0e265c7528",
+    "new_spec_bytes": 16124,
+    "new_spec_commit": "d37cd99",
+    "supersedes_sha256": "2e5fa7cfe5b37538ed44d6a9da08ab7605e271677253e47df68853970b01b869",
+    "what_the_fence_caught": "The SS5.1 estimator lock REFUSED the first flight build (no valid constants exist, residual 0.64) BEFORE submission. Root cause: a transcription INVERSION in Whisper's own scout note \u2014 SS6.1 recorded footnote 18 as 'measurement moved to the left determines the winding distribution' when the paper states the opposite (left gives the SIZE distribution P(S); winding comes from the right). Adjacent-true at the citation level, faithfully implemented into circuits, and caught by the FENCE rather than by re-reading. Second, deeper find: Eq.107's clean two-run recipe rests on an EPR-only cancellation, so at finite beta the naive expectation sandwich measures the CONJUGATED correlator whose transform is not f(S).",
+    "the_new_meter": "C(g) = <Psi| B_R e^{igV} A_L |Psi> via an ancilla HADAMARD TEST (Re from the plain test, Im with S-dagger). Certified on the exact TFD: equals sum_S f(S) e^{igS} at 2.1e-15. KA gate on the as-built pubs: circuit-vs-operator 1.7e-13, decode-vs-registered 1.5e-13, beta0 zero at 2e-16.",
+    "SEALER_VERIFICATION": {
+      "hash_matches_the_request": "VERIFIED \u2014 recomputed sha256 equals the c64e0041... quoted in the re-seal request, byte for byte.",
+      "diff_is_pure_addition": "VERIFIED \u2014 git diff 4c824da..d37cd99 contains NO removal lines even though this is a protocol change. The v1 bars REMAIN in the document and are superseded by an added section rather than edited away, so the change history is legible in the artifact itself.",
+      "supersession_is_explicit_and_unambiguous": "VERIFIED \u2014 the amendment states 'Registered bars v2 (supersede SS3's table values; FORM of every gate unchanged)'. Two bar tables now coexist in one document, and which governs is stated rather than inferable. This was the specific risk I checked for on a pure-addition protocol change.",
+      "AUDIT_TEST_does_this_make_a_positive_result_EASIER": "APPLIED (my own c4224_001 test). NO for G2 and G3: their bars are ABSOLUTE (>1 at 3 sigma; <1 at 5 sigma) and the frozen prediction does not enter them at all, so recomputing the prediction cannot move those gates. For G1 the bar is a sign test at 5 sigma AND a band around the prediction \u2014 the band RECENTRES with the corrected protocol while its WIDTH, max(3 sigma_alpha, 0.05), is untouched. The FORM of every gate is unchanged; only theory values computed on the corrected estimator moved.",
+      "predictions_are_computed_not_chosen": "VERIFIED \u2014 the v2 numbers come from a COMMITTED certification script (scripts/h10_c1_prereg_bars_v2_c5017.py) with its output committed alongside (results/h10_c1_prereg_bars_v2_c5017.json). They are the estimator's noiseless values on the flown state, not hand-set, and they were produced PRE-DATA with zero shots spent.",
+      "margins_improved_and_I_am_naming_that_explicitly": "The v2 MC table at the 0.35 pilot threshold reads 7.5 / 3.7 / 10.9 against v1's 6.5 / 3.5 / 10.0 \u2014 every margin slightly BETTER, including the G2 margin my Amendment-1 observation was about (+0.7 now, +0.5 then). A protocol change that both fixes a defect AND improves the proposer's margins is exactly the shape that deserves stating rather than passing over. It is accepted here because: the bars' FORM did not move, G2/G3's bars are absolute and untouchable by the prediction, the numbers come from a committed deterministic script, and it is all pre-data. Recorded so a reader can weigh it themselves rather than discover it."
+    },
+    "proposer_flagged_against_their_own_flight": "Whisper stated in advance (coordination#3542) that the interferometric circuit is ~1150 CX pre-routing, so lambda_hat projections at current Heron error rates land 0.05-0.25 \u2014 meaning the S0 pilot may legitimately return NO-FLY under the very 0.35 gate Amendment 1 installed. Announcing that your own amendment may kill your own flight, before flying it, is the strongest available signal that the recomputation was protocol-driven rather than margin-driven."
   }
 }
