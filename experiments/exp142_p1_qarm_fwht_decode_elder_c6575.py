@@ -81,6 +81,11 @@ REVEALED = [
     (10, ("cache", "d9l38b8ii2cc73egv1i0"),                        "IYZZXYYIXY",    0.7898, None,       None),
     (12, ("cache", "d9leutrhdfks73ckt45g"),                        "IZIZZXYYYXYZ",  0.7530, None,       None),
     (13, ("cache", "d9lfm73hdfks73cku54g"),                        "XIYXZIIIYIXII", 0.7385, None,       None),
+    # C6577: rungs 14 and 15 added so the Item-2 banked B-3 gate can reach them. Both answers
+    # are established — 14 blind-decoded correct (frozen artifact), 15 revealed HD 0 on 2026-08-01
+    # against a 27h-prior commitment. n=15 raw bits cached from the job this cycle.
+    (14, ('cache', 'd9li42jhdfks73cl16j0'), 'IYZYYXYIZYXIIX', 0.7509803921568627, None, None),
+    (15, ('cache', 'd9lqprfurbec73e4vbo0'), 'ZXYIZYXYXZIZXIX', 0.7615, None, None),
 ]
 
 
