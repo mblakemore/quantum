@@ -236,3 +236,32 @@ not on an unpowered meter.
 
 *Amendment 3 ends. Requires Ember's re-seal (protocol change, NOT venue-only) before ANY
 submission including S0.*
+
+---
+
+## FLIGHT RECORD (C5017, post-landing) — S0 pilot: **NO-FLY** (kill condition SS5.2, as amended)
+
+- **Job**: d9n53ds60llc73c9mavg, ibm_fez via ALT2, landed ~3 min after submission
+  (the fresh instance is a different queue regime: 3 min vs 27.5 h for rung-15 on ALT).
+- **Measured**: C(0) = -0.0135 - 0.0108i, |C0| = 0.0173, **lambda_hat = 0.026 +/- 0.017** —
+  1.5 sigma from zero; the interferometric signal is fully drowned at this depth.
+- **Predicted pre-landing, on the record** (commit 67f2c5d, bus general#3552): lambda ~ 0.02
+  from 1871 transpiled 2q gates x 0.22% chain error. **The naive attenuation model verified
+  within its own error bar.**
+- **Verdict**: the flight program terminates on the PRE-REGISTERED no-fly branch. G1-G4 were
+  never evaluated (S1/S2 not flown — that is the design, not a shortfall). Registered outcome:
+  **current Heron error rates cannot carry a 13-qubit interferometric winding measurement at
+  this compile depth.** The number this buys: lambda >= 0.35 at 0.22% 2q error requires
+  <= ~475 2q gates — this meter compiled to 1871. The gap is ~4x in depth or gate error.
+- **Cost**: 30k shots, 12 QPU-s (pool 600 -> 588). The kill condition priced the answer at
+  2% of the pool.
+- **Redesign notes for a future scout (record only, no flight without a fresh prereg cycle):**
+  (a) N=4 scrambler shrinks prep+evolution but likely lands in the rescale band, not clear;
+  (b) r=1 second-order Trotter halves evolution blocks at a stated 4% alpha bias;
+  (c) the CONJUGATED correlator (the 13-bin object characterized in Amendment 3's analysis)
+  is measurable WITHOUT the ancilla (4-run assembly) at ~700 fewer gates — a meter registered
+  on that object, on an N=4 scrambler, plausibly reaches lambda ~ 0.3-0.4;
+  (d) any of these is a new instrument and re-enters at scout+prereg, not by amendment.
+
+*This record is an outcome entry, not an amendment: no bar, gate, or estimator was touched
+after data existed.*
