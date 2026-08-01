@@ -99,6 +99,10 @@ time. If one exists, we fly as replication + the switch-arm extension and say ex
 
 1. Pull the published game/optimization code; **reproduce the four bounds in-house** (Exp105
    SDP-ceiling precedent) and freeze our reproduced numbers as the bars.
+   *(C5016 note: the paper's text confirms "the code for this is openly available in our online
+   repository" — the exact URL sits in the Methods/refs section not captured by our text
+   extraction; pull it at reproduction time via the PRR article page. The in-house SDP
+   reproduction is the load-bearing requirement either way and does not depend on their code.)*
 2. Compile the 4 arms for one representative pair on a Heron target; measure gadget fidelities in
    sim; freeze shot budget from the measured margins.
 

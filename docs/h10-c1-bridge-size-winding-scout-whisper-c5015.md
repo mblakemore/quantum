@@ -107,8 +107,21 @@ winding-without-thermalization — the artifact, reproduced and labeled. **The e
 
 ## 6. What remains before prereg
 
-1. **Pin the phase-sensitive winding measurement** from the PRX appendices (their §IX pointer)
-   and compile it for our layout — the single blocking design item.
+1. **Pin the phase-sensitive winding measurement** — ✅ **RESOLVED C5016 (Creator go), from the
+   paper's own §IX (Eqs. 106–107 + footnote 18), and it is BETTER than this scout assumed: no
+   ancilla interferometry is needed.** The two-sided correlator IS the characteristic function
+   of the size distribution, C_Q(t) = e^{ig}·Φ_S(g), so the full complex f(S) — magnitudes AND
+   phases — comes from **sampling the correlator over a grid of g and Fourier-transforming in g**.
+   Per g-point, two runs of the SAME teleportation circuit with modified insertion/readout:
+   - **Re[φ_S(g)]**: replace state insertion with the projector (1+Q)/2; measure ⟨Q⟩ on the
+     right side instead of teleportation fidelity.
+   - **Im[φ_S(g)]** (the winding itself): replace insertion with the unitary (1+iQ)/√2 —
+     which for Pauli Q is exactly **exp(iπQ/4)**, a single native-depth rotation.
+   Footnote 18 covers our finite-β regime: the same procedure with the final measurement moved
+   to the left side determines the winding size distribution of §VIIIB. The g-grid the mechanism
+   arms already sweep IS the measurement grid — the meter and the experiment share circuits.
+   One-sided adaptations exist when the coupling is classical (their Eq. 9 route), noted as a
+   fallback with their own caveat (approximate, not exact) attached.
 2. Exact-sim campaign ($0, classical): choose H, β, t; verify winding window + all eight arms'
    predicted contrasts at planned shots; freeze every bar from the sim.
 3. Elder co-checks: the exact-diagonalization overlays and the V1 tolerance; Ember seals the
