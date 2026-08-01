@@ -1,10 +1,9 @@
 {
-  "record": "H10 arc — prereg ancestry chain entry (spec-freeze, no secret held)",
+  "record": "H10 arc \u2014 prereg ancestry chain entry (spec-freeze, no secret held)",
   "entry": "H10-C1 Winding Meter pre-registration",
   "sealed_by": "Ember (DC15E)",
   "sealed_at": "2026-08-01T08:50:00Z",
   "cycle": 4223,
-
   "ancestry": {
     "spec_file": "docs/h10-c1-prereg-whisper-c5017.md",
     "spec_commit": "1359ca0",
@@ -14,45 +13,57 @@
       "scout: h10-c1-bridge-size-winding-scout-whisper-c5015.md (GO with target, SS7-SS10)",
       "route freeze: scripts/h10_c1_rhohalf_route_*"
     ],
-    "author_seat": "Whisper (arc owner; flight + decode + text)"
+    "author_seat": "Whisper (arc owner; flight + decode + text)",
+    "spec_sha256_current": "d6602cf23802502bb795b657d9b8754862de9d709e417a1ac05ea6cb1c71140f (Amendment 1, 7f34fe1)"
   },
-
   "frozen_content_sealed": {
     "registered_verdict": "G1 AND G2 AND G3 AND G4, requiring stages S1+S2 complete",
-    "G1": "winding exists with the right sign: alpha_hat < 0 at >=5 sigma AND within -0.1881 +/- max(3 sigma_alpha, 0.05) — note this is a TWO-SIDED BAND, not merely a sign test",
+    "G1": "winding exists with the right sign: alpha_hat < 0 at >=5 sigma AND within -0.1881 +/- max(3 sigma_alpha, 0.05) \u2014 note this is a TWO-SIDED BAND, not merely a sign test",
     "G2": "unwinding at g*: R_unwind > 1 at >=3 sigma (frozen 1.0697)",
     "G3": "wrong-sign dies: R_wrong < 1 at >=5 sigma (frozen 0.8147)",
     "G4": "beta=0 winding ABSENT: |alpha_hat_beta0| <= 3 sigma_alpha_beta0 (frozen exactly 0)",
-    "shortfall_rule": "a stage shortfall = verdict INCOMPLETE, loudly — non-completion never reads as pass or fail",
+    "shortfall_rule": "a stage shortfall = verdict INCOMPLETE, loudly \u2014 non-completion never reads as pass or fail",
     "reported_not_registered": "R1 lambda_hat self-calibration, R2 full f_hat(S) table vs as-flown overlay (magnitudes AND phases), R3 energy books dE_R = dE_L = +0.790 at g*",
     "budget": "staged S0 pilot 18k / S1 720k / S2 288k / S3 156k shots; ~1.18M total ~ 300 QPU-s ESTIMATE",
     "degradation_order": "S3 drops first (reported rows become not-run, stated), then S2 (verdict INCOMPLETE)",
-    "kill_conditions": "KA gate: exact sim of the ACTUAL pubs must reproduce every SS3 number to 1e-6 including the circuit-level grading identity, any non-completion is a FAIL; pilot gate on lambda_hat (<0.3 hold, 0.15-0.3 fly only with shots rescaled by (0.3/lambda_hat)^2 within pool, <0.15 NO-FLY); backend median 2q error >1% hold (tighter than B4's 2% — this is the deepest H10 flight at ~520 CX pre-routing); pool re-read at every stage submission, any stage that would overdraw is not submitted"
+    "kill_conditions": "KA gate: exact sim of the ACTUAL pubs must reproduce every SS3 number to 1e-6 including the circuit-level grading identity, any non-completion is a FAIL; pilot gate on lambda_hat (<0.3 hold, 0.15-0.3 fly only with shots rescaled by (0.3/lambda_hat)^2 within pool, <0.15 NO-FLY); backend median 2q error >1% hold (tighter than B4's 2% \u2014 this is the deepest H10 flight at ~520 CX pre-routing); pool re-read at every stage submission, any stage that would overdraw is not submitted"
   },
-
   "observations_recorded_at_seal": {
-    "G2_HAS_ZERO_MARGIN_AT_THE_PILOT_GATE_FLOOR": "The MC error table gives, at lambda=0.3 (exactly the pilot gate's fly/hold threshold): G1 5.6 sigma against a >=5 bar (+0.6 margin), G3 8.6 against >=5 (+3.6), and G2 3.0 against a >=3 bar — MARGIN EXACTLY ZERO. So if lambda_hat lands at or just above 0.3 and the flight proceeds, G2's registered verdict rests on the sigma model being exact rather than approximately right. This is not an objection and not a blocker — the pilot gate, the bars and the power table are all the arc owner's to set, and they are internally consistent. It is recorded because a gate whose power exactly equals its bar at the threshold that licenses flying is the one place where a small sigma-model error changes the verdict, and a future reader deserves to see it noted BEFORE the data rather than discovered after.",
+    "G2_HAS_ZERO_MARGIN_AT_THE_PILOT_GATE_FLOOR": "The MC error table gives, at lambda=0.3 (exactly the pilot gate's fly/hold threshold): G1 5.6 sigma against a >=5 bar (+0.6 margin), G3 8.6 against >=5 (+3.6), and G2 3.0 against a >=3 bar \u2014 MARGIN EXACTLY ZERO. So if lambda_hat lands at or just above 0.3 and the flight proceeds, G2's registered verdict rests on the sigma model being exact rather than approximately right. This is not an objection and not a blocker \u2014 the pilot gate, the bars and the power table are all the arc owner's to set, and they are internally consistent. It is recorded because a gate whose power exactly equals its bar at the threshold that licenses flying is the one place where a small sigma-model error changes the verdict, and a future reader deserves to see it noted BEFORE the data rather than discovered after. >>> RESOLVED pre-GO by Amendment 1 (see amendment_1): pilot threshold 0.30 -> 0.35, bars untouched, G2 margin now +0.5.",
     "H_2_HAS_PROPAGATED": "The shortfall rule cites the H-2 clause I authored for exp142 Amendment Item 2 ('non-completion never reads as pass or fail'), and the KA gate restates it as 'unknown-is-not-a-value'. A clause written for one arc's backstop is now load-bearing in a different arc's pre-registration, applied by its author's peer rather than by me.",
-    "POOL_DISCIPLINE_IS_NOW_STRUCTURAL": "The pool-re-read rule I raised at the B4 seal appears here three times — in the budget header, in the budget note, and as kill condition 4 — and has been upgraded from a caveat to a submission gate ('any stage that would overdraw the pool is not submitted'). The ask (~300 QPU-s) EXCEEDS the pool at drafting (~283 s), and staging is precisely what makes that legitimate rather than an overdraw."
+    "POOL_DISCIPLINE_IS_NOW_STRUCTURAL": "The pool-re-read rule I raised at the B4 seal appears here three times \u2014 in the budget header, in the budget note, and as kill condition 4 \u2014 and has been upgraded from a caveat to a submission gate ('any stage that would overdraw the pool is not submitted'). The ask (~300 QPU-s) EXCEEDS the pool at drafting (~283 s), and staging is precisely what makes that legitimate rather than an overdraw."
   },
-
   "what_this_entry_asserts": [
     "The text at 1359ca0, sha256 d1702ef7..., is FROZEN as of this seal and pre-dates submission.",
     "The four registered gates with their numeric bars and frozen values, the staged budget, the degradation order, the analysis, and the kill/no-fly conditions are fixed as recorded.",
     "The decode is frozen SS3 arithmetic with no discretion at grading time."
   ],
-
   "what_this_entry_does_NOT_assert": [
-    "It does NOT assert the flight is approved — the Creator's GO was OUTSTANDING at seal time, and the ask is the largest of the H10 arc.",
+    "It does NOT assert the flight is approved \u2014 the Creator's GO was OUTSTANDING at seal time, and the ask is the largest of the H10 arc.",
     "It does NOT assert the KA gate or the pilot gate have passed. Either can still refuse the flight, and lambda_hat < 0.15 is a hard NO-FLY.",
-    "It does NOT assert the pool can fund all four stages — it cannot at drafting (~300 QPU-s asked against ~283 s). Staging plus the per-submission pool re-read is what makes the ask legitimate; a stage that would overdraw is simply not submitted.",
-    "It does NOT assert anything about outcomes, nor that the registered gates are the RIGHT gates — only that they were fixed before the data existed."
+    "It does NOT assert the pool can fund all four stages \u2014 it cannot at drafting (~300 QPU-s asked against ~283 s). Staging plus the per-submission pool re-read is what makes the ask legitimate; a stage that would overdraw is simply not submitted.",
+    "It does NOT assert anything about outcomes, nor that the registered gates are the RIGHT gates \u2014 only that they were fixed before the data existed."
   ],
-
   "seats": {
     "whisper": "flight + decode + prereg text (decode frozen, no grading discretion)",
     "elder": "co-check",
-    "ember": "spec-seal — this ancestry commit; NO secret held",
-    "creator": "GO / budget authority — outstanding at seal time"
+    "ember": "spec-seal \u2014 this ancestry commit; NO secret held",
+    "creator": "GO / budget authority \u2014 outstanding at seal time"
+  },
+  "amendment_1": {
+    "as_of": "2026-08-01, pre-GO and pre-data (Whisper coordination#3520, quantum@7f34fe1)",
+    "change": "SS5.2 pilot gate lambda_hat >= 0.30 -> >= 0.35 to fly at registered shots; rescale branch widens to 0.15 <= lambda_hat < 0.35 with shots x(0.35/lambda_hat)^2 within pool; lambda_hat < 0.15 NO-FLY unchanged.",
+    "prompted_by": "The zero-margin observation this entry recorded at the original seal (Ember coordination#3518). The lever used is the one named there: the PILOT THRESHOLD, not the bar.",
+    "new_spec_sha256": "d6602cf23802502bb795b657d9b8754862de9d709e417a1ac05ea6cb1c71140f",
+    "new_spec_bytes": 10725,
+    "new_spec_commit": "7f34fe1",
+    "supersedes_sha256": "d1702ef76059f7eb0cf21182ff7bf215bee1efd85cd4276bc3e10229f5a637cf",
+    "SEALER_VERIFICATION": {
+      "diff_is_pure_addition": "VERIFIED \u2014 git diff 1359ca0..7f34fe1 on the spec contains NO removal or modification lines. Every gate bar, frozen prediction, estimator and budget row is byte-identical. The amendment only ADDS a section.",
+      "direction_strictly_conservative": "VERIFIED by construction: for 0.30 <= lambda_hat < 0.35 the old gate flew at registered shots and the new gate demands rescaling or holds. The change can only convert a would-have-flown marginal flight into a hold; it cannot enable any flight the old gate refused. The NO-FLY floor is untouched.",
+      "power_arithmetic": "VERIFIED independently. Linear-in-lambda from the MC lambda=0.3 row gives G1 6.5 / G2 3.5 / G3 10.0 at the new threshold \u2014 margins +1.5 / +0.5 / +5.0 against bars 5/3/5. Whisper's calibration claim holds exactly where it matters: linear predicts G2 = 3.0x(0.5/0.3) = 5.0 and the MC's own lambda=0.5 row reads 5.0.",
+      "where_the_linear_model_disagrees_it_UNDERSTATES": "Precision point, recorded so nobody reads it as a defect: at lambda=0.5 the MC gives G1 9.7 and G3 14.5 against linear predictions of 9.3 and 14.3, and at lambda=1.0 all three MC rows exceed linear (20.9/10.8/31.7 vs 18.7/10.0/28.7). The linear model therefore UNDERSTATES power everywhere it disagrees, so using it to justify the new margins is conservative rather than optimistic."
+    },
+    "observation_status": "RESOLVED. G2 no longer has zero margin at the threshold that licenses flying. The bar did not move \u2014 only the gate that decides whether the flight is powered enough to be worth attempting."
   }
 }
