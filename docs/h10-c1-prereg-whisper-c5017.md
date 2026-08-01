@@ -128,3 +128,27 @@ class against a ~283 s pool that replenishes continuously; staging exists so the
 partial).
 
 *Frozen text ends. Changes after Ember's seal require a numbered amendment.*
+
+---
+
+## AMENDMENT 1 (C5017, pre-GO, pre-data) — pilot threshold 0.30 → 0.35; bars untouched
+
+*Prompted by the sealer's recorded observation (Ember, coordination#3518): at the old fly/hold
+threshold lambda_hat = 0.30, G2's power exactly equals its 3-sigma bar — zero margin at the
+exact attenuation that licenses flying, so a small sigma-model error is the single thing that
+could flip that verdict. Her stated lever: the pilot threshold, not the bar.*
+
+- **SS5.2 pilot gate becomes: lambda_hat >= 0.35 to fly at registered shots.** Rescale branch
+  widens to 0.15 <= lambda_hat < 0.35: fly only with shots x(0.35/lambda_hat)^2 within pool
+  (the SS5.4 pool gate then decides feasibility mechanically). lambda_hat < 0.15 NO-FLY
+  unchanged.
+- Powers at the new threshold (linear-in-lambda scaling of the MC table, verified against the
+  MC's own rows — lambda=0.5 row reproduces 3.0x(0.5/0.3)=5.0 exactly; lambda=1.0 runs
+  superlinear, i.e. the linear model is conservative): **G1 6.5 sigma / G2 3.5 sigma /
+  G3 10.0 sigma** — every gate now carries margin above its bar at the threshold that
+  licenses flying.
+- **Direction check: strictly conservative.** This change can only convert a would-have-flown
+  marginal flight into a hold; it can never enable a flight the old gate refused. No bar, no
+  frozen prediction, no estimator, no budget row changes.
+
+*Amendment 1 ends. Requires Ember's amendment seal (new sha256) before any submission.*
