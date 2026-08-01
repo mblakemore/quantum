@@ -1,0 +1,67 @@
+{
+ "source": "h10_c1_rhohalf_route_c5017.json Lstar=L3",
+ "decode": "16pt DFT; alpha = 4pt frozen-set {1,2,3,4} unweighted fit; ratios from reconstruction",
+ "gstar": -0.395,
+ "alpha_4pt_registered": -0.1881499938509352,
+ "R_unwind_registered": 1.0696844838316766,
+ "R_wrong_registered": 0.814676381275673,
+ "C0_asflown": 0.6658429882815651,
+ "scrambled_g_arm_prediction": 0.0,
+ "beta0_alpha_4pt": -0.0,
+ "beta0_max_phase": 0.0,
+ "books_dE_R_at_gstar": 0.790296023509339,
+ "books_dE_L_at_gstar": 0.7902960235093404,
+ "books_E_R_baseline": -3.5580342065419597,
+ "V_grading_eigencheck_maxresid": 0.0,
+ "V_grading_gate_note": "V eigencheck passed here; flight script MUST additionally verify the circuit-level identity C(g)=sum f(S)e^{igS} at 1e-6 from the ACTUAL pubs before submission (prereg SS6)",
+ "mc_error_table_n15k": [
+  {
+   "lambda": 1.0,
+   "n_per_g_component": 15000,
+   "sigma_f": 0.0018396032009625777,
+   "alpha_mean": -0.1881558918856232,
+   "alpha_sigma": 0.008987016157772995,
+   "alpha_sig_neg": 20.93641410924632,
+   "R_unwind_sigma": 0.006475485129950761,
+   "unwind_sig_gt1": 10.768198181534407,
+   "R_wrong_sigma": 0.0058355566602084725,
+   "wrong_sig_lt1": 31.741501541562556
+  },
+  {
+   "lambda": 0.5,
+   "n_per_g_component": 15000,
+   "sigma_f": 0.0019945800879625575,
+   "alpha_mean": -0.18836339137351005,
+   "alpha_sigma": 0.01946821611390505,
+   "alpha_sig_neg": 9.675431496724176,
+   "R_unwind_sigma": 0.01403516796381166,
+   "unwind_sig_gt1": 4.966618674387547,
+   "R_wrong_sigma": 0.012773367960196378,
+   "wrong_sig_lt1": 14.503240959744142
+  },
+  {
+   "lambda": 0.3,
+   "n_per_g_component": 15000,
+   "sigma_f": 0.0020246705790565164,
+   "alpha_mean": -0.18785526101545916,
+   "alpha_sigma": 0.03349480469087636,
+   "alpha_sig_neg": 5.608489517976769,
+   "R_unwind_sigma": 0.023527481600540592,
+   "unwind_sig_gt1": 2.9733380666427953,
+   "R_wrong_sigma": 0.02158184369423784,
+   "wrong_sig_lt1": 8.566440834961261
+  },
+  {
+   "lambda": 0.15,
+   "n_per_g_component": 15000,
+   "sigma_f": 0.0020371215625117414,
+   "alpha_mean": -0.187424562410484,
+   "alpha_sigma": 0.07782558867839458,
+   "alpha_sig_neg": 2.408263986090677,
+   "R_unwind_sigma": 0.04838059522954066,
+   "unwind_sig_gt1": 1.4635939185805487,
+   "R_wrong_sigma": 0.04376776567159497,
+   "wrong_sig_lt1": 4.217760224894009
+  }
+ ]
+}
