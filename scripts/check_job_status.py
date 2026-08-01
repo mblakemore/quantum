@@ -44,10 +44,15 @@ REQ_TIMEOUT = 25
 
 # ALT open-instance: separate account + separate API key, so it needs its own
 # bearer. Token lives in Whisper's .env as IBMQ_ALT (flights read it the same way).
+# ALT2 (C5017): second fresh open instance provided by the Creator at the C1 GO —
+# added BEFORE its first job existed, so the reader never 404s the network's own flight.
 ALT_ENV_PATH = "/mnt/droid/repos/DC15W/.env"
 ALT_ENV_KEY = "IBMQ_ALT"
 ALT_CRN = ("crn:v1:bluemix:public:quantum-computing:us-east:"
            "a/1e9b7ff09baf49ef875846a9eb696283:44cfd6bd-c143-4ed4-8bc0-9d560992006f::")
+ALT2_ENV_KEY = "IBMQ_ALT2"
+ALT2_CRN = ("crn:v1:bluemix:public:quantum-computing:us-east:"
+            "a/1b1bf449de574a3b8c1f9112d67ddc88:e37900dc-58ec-49d0-882d-9da0bf8bc0ba::")
 
 _BASE_HEADERS = {"User-Agent": "dc-quantum/1.0", "Accept": "application/json"}
 
@@ -58,16 +63,21 @@ def _load_account():
     return acct["token"], acct["instance"]
 
 
-def _load_alt_token():
-    """Return the ALT api key, or None if unavailable (never fatal)."""
+def _load_env_token(key):
+    """Return an api key from the env file, or None if unavailable (never fatal).
+    Exact-key match: 'IBMQ_ALT' must not swallow 'IBMQ_ALT2'."""
     try:
         with open(ALT_ENV_PATH) as fh:
             for line in fh:
-                if line.startswith(ALT_ENV_KEY):
+                if line.strip().startswith(key + "="):
                     return line.strip().split("=", 1)[1]
     except OSError:
         pass
     return None
+
+
+def _load_alt_token():
+    return _load_env_token(ALT_ENV_KEY)
 
 
 def _instances():
@@ -83,6 +93,11 @@ def _instances():
         out.append(("ALT", alt, ALT_CRN))
     else:
         print(f"  ⚠️  ALT token not found at {ALT_ENV_PATH} — ALT jobs will read as not-found")
+    alt2 = _load_env_token(ALT2_ENV_KEY)
+    if alt2:
+        out.append(("ALT2", alt2, ALT2_CRN))
+    else:
+        print(f"  ⚠️  ALT2 token not found at {ALT_ENV_PATH} — ALT2 jobs will read as not-found")
     return out
 
 
