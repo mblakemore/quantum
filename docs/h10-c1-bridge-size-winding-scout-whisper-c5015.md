@@ -173,3 +173,45 @@ only difference.
 **Remaining before prereg:** operating-point selection (maximize |α|·G_β·fit-quality); arm
 predictions at that point; trotterized all-to-all compile-depth estimate (the priced cost §7
 predicted). C1 status: **GO with a target.**
+
+## §9. OPERATING POINT + ARM BARS (C5017) — the prereg's numbers, frozen from exact theory
+
+**Operating point** (constraint rms<0.15, |α|>0.05, minimize shots-to-5σ;
+`results/h10_c1_operating_point_c5017.json`):
+
+> **β = 0.6, t = 0.3** · α = −0.176 (phase-fit rms 0.114, clean linear) · G_β = 0.634
+> (large absolute correlator) · g\* = −0.42 · unwind gain 1.083 ·
+> **shots-to-5σ ≈ 9.0k for the headline discrimination — flyable.**
+
+**Arm bars at the OP (exact theory, freeze-ready):**
+
+| Arm | Predicted value | Reads as |
+|---|---|---|
+| Mechanism, C(g\*) | **0.686** | the lift |
+| No coupling, C(0) | 0.634 | floor (+0.052 = the 5σ target) |
+| Wrong-sign, C(−g\*) | **0.497** | dies BELOW floor — the sign physics, visible |
+| Scrambled-phase (mean/p95 over 200) | 0.350 / 0.600 | dies hard |
+| β=0 winding phase / gain | 8e−15 / exactly 1.0 | winding ABSENT (KA2 doubles as the arm) |
+| Commuting twin, same (β,t) | α=−0.044, **rms 0.474** | **no clean winding** |
+
+**Honest reframe forced by the last row:** the KSY "perfect winding artifact" does NOT manifest
+for our hz-Ising commuting twin at this OP — their artifact was a property of their specific
+fully-commuting 5-term class. So the twin arm's registered prediction becomes **contrast**
+(chaotic winds cleanly, commuting does not), and the §3 promise to "fly the artifact itself" is
+withdrawn unless a twin that actually shows it is found. Better to demote the arm than inflate it.
+
+**Sparsification check** (`results/h10_c1_sparse_scrambler_c5017.json`): a 3-regular (9-edge)
+scrambler PRESERVES a window but degrades it ~36× in shot cost (best sparse point: α=−0.057,
+shots-to-5σ ≈ 326k). **All-to-all is load-bearing for the flyable window — depth is the price of
+signal, now a measured trade.**
+
+**Depth accounting (order-of-magnitude, to sharpen at prereg):** t=0.3 is shallow — r=1–2 Trotter
+steps plausible (error O(t²/r); quantify at prereg). All-to-all N=6: 15 pairs × 3 CX per
+Heisenberg pair per step ≈ 45 CX/step + heavy-hex routing (~1.5–2×) ⇒ ~70–180 2q gates per side's
+evolution. **The named remaining engineering item: the ρ^{1/2} insertion at finite β** (footnote-18
+left-side route) — candidate implementations: low-order compiled expansion of e^{−βH/2} at β=0.6,
+or variational thermal-purification; the choice and its measured fidelity belong to the prereg,
+not to this scout.
+
+**C1 status: GO — prereg inputs complete except (a) Trotter-error quantification at r∈{1,2},
+(b) the ρ^{1/2}-insertion engineering choice.** Both are prereg-time items by design.
