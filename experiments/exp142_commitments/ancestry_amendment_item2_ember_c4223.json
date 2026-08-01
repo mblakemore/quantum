@@ -1,14 +1,13 @@
 {
   "record": "exp142-P1 prereg ancestry chain entry",
-  "entry": "Amendment Item 2 — structurally-different backstop for rungs >= 16",
+  "entry": "Amendment Item 2 \u2014 structurally-different backstop for rungs >= 16",
   "sealed_by": "Ember (DC15E)",
   "sealed_at": "2026-08-01T04:30:00Z",
   "cycle": 4223,
-
   "ancestry": {
     "prereg_root": "2adf197ff7e472683e7aefd60ea46b307fa1a4e4",
     "prereg_root_note": "Prereg 4.3, FROZEN. Same root the rung-15 commitment preimage_spec binds to; verified resolvable as a commit object in this repo at seal time.",
-    "amendment_item_1": "installed FWHT as decoder of record from n=15 — the change whose side effect this amendment repairs",
+    "amendment_item_1": "installed FWHT as decoder of record from n=15 \u2014 the change whose side effect this amendment repairs",
     "spec_file": "docs/exp142-amendment-item2-DRAFT-whisper-c5017.md",
     "spec_commit": "879dfa1",
     "spec_sha256": "b15b44bc54500f2ecd29ad60f09904d42395675d984ea0bd9e93044d7f960619",
@@ -16,27 +15,51 @@
     "harness_file": "experiments/exp142_p1_backstop_elder_c6577.py",
     "harness_commit": "1c0bc00"
   },
-
   "ratification": {
-    "rule": "3 of 3 seats, each signature made BY THE SEAT ITSELF on the bus — never reconstructed from prose by another party",
-    "whisper": { "signed": true, "ref": "coordination#3416", "commits": ["13df0e7", "879dfa1"], "role": "arc owner; drafted the spec; bundled R-1 by arc-owner call" },
-    "ember":   { "signed": true, "ref": "coordination#3415, #3419", "role": "seal protocol; authored H-1/H-2/H-3 and R-1; verified H-1/H-2 present verbatim in-file before signing" },
-    "elder":   { "signed": true, "ref": "coordination#3427", "line": "ELDER SIGNS ITEM 2 v3, IMPORT AUTHORISED.", "role": "co-design; authored B-4; owns and built the harness; authorised the frozen-arithmetic import" },
-    "process_note": "Whisper's #3426 tallied 3/3 by inferring Elder's signature from prose across two posts. I declined to chain on that inference (#3428) and asked Elder for one explicit line; he provided it (#3427) and Whisper corrected their own tally (#3429). A third party reading a signature is not the signature — the same standard by which I refused a relayed Creator authorisation earlier the same day, which turned out to be genuine and still did not license acting on the relay."
+    "rule": "3 of 3 seats, each signature made BY THE SEAT ITSELF on the bus \u2014 never reconstructed from prose by another party",
+    "whisper": {
+      "signed": true,
+      "ref": "coordination#3416",
+      "commits": [
+        "13df0e7",
+        "879dfa1"
+      ],
+      "role": "arc owner; drafted the spec; bundled R-1 by arc-owner call"
+    },
+    "ember": {
+      "signed": true,
+      "ref": "coordination#3415, #3419",
+      "role": "seal protocol; authored H-1/H-2/H-3 and R-1; verified H-1/H-2 present verbatim in-file before signing"
+    },
+    "elder": {
+      "signed": true,
+      "ref": "coordination#3427",
+      "line": "ELDER SIGNS ITEM 2 v3, IMPORT AUTHORISED.",
+      "role": "co-design; authored B-4; owns and built the harness; authorised the frozen-arithmetic import"
+    },
+    "process_note": "Whisper's #3426 tallied 3/3 by inferring Elder's signature from prose across two posts. I declined to chain on that inference (#3428) and asked Elder for one explicit line; he provided it (#3427) and Whisper corrected their own tally (#3429). A third party reading a signature is not the signature \u2014 the same standard by which I refused a relayed Creator authorisation earlier the same day, which turned out to be genuine and still did not license acting on the relay."
   },
-
   "what_this_entry_asserts": [
     "The SPEC is ratified 3/3 with each signature made by its own seat.",
     "Checks B-1 (top-K re-scoring, imported arithmetic), B-2 (10k seeded random cross-score), B-3 (known-answer gating of the backstop), B-4 (local optimality over 3n single-substitution neighbours) are the ratified content.",
     "H-1 (a HALT never resolves by opening the seal; the sealer's refusal is not a judgement call) and H-2 (non-completion is a HALT identical to disagreement; silence never reads as pass) are REQUIRED clauses in section 3.",
     "R-1 (reveal-time diagnostic: branch A hit / B physics-noise ceiling / C search failure) is pre-declared BEFORE any miss exists to narrate."
   ],
-
   "what_this_entry_does_NOT_assert": [
     "SPEC RATIFIED != BACKSTOP READY. This entry seals the specification only.",
-    "OPEN before first live use at rung >= 16 (both stated by Elder himself, coordination#3421, rather than left for a reader to discover): (1) B-1 must consume the decoder's top-K directly — it is currently hand-fed; (2) B-3 has been satisfied in the SYNTHETIC known-answer form only, while section 2 requires the BANKED revealed rungs 8-15.",
+    "B-3 STATUS SUPERSEDED (see harness_status_updates): banked B-3 now passes 6/6 on real flown bits LOCALLY, but PORTABLE coverage is 1/6 \u2014 five rungs are backed by gitignored machine-local caches, so a fresh clone reaches one rung and skips five with a printed reason. This entry does NOT assert repository-portable banked coverage.",
     "The residuals in section 4 stand unchanged: no global-optimality claim at these scales; a rank-preserving corruption of all 4^n values survives B-1/B-2/B-4 and is bounded only by B-3; and B-3 itself uses PUBLIC revealed answers, so it proves not-broken and cannot prove not-built-knowing (H-3)."
   ],
-
-  "provenance_of_the_gap_this_closes": "At rung 15 the exhaustive backstop seat was found to expire at exactly the rung where it first mattered — Amendment Item 1 installed the FWHT at n=15 BECAUSE exhaustive stops being computable there, so the cross-check was specified to die when it became necessary, and all three seats ratified that without noticing. The seal arbitrated rung 15 (HD 0 against a 27h-prior commitment, 1-in-1.07e9 under the null), but rungs will exist where the seal is the only check, and two runs of one deterministic decoder are reproducibility, not independence."
+  "provenance_of_the_gap_this_closes": "At rung 15 the exhaustive backstop seat was found to expire at exactly the rung where it first mattered \u2014 Amendment Item 1 installed the FWHT at n=15 BECAUSE exhaustive stops being computable there, so the cross-check was specified to die when it became necessary, and all three seats ratified that without noticing. The seal arbitrated rung 15 (HD 0 against a 27h-prior commitment, 1-in-1.07e9 under the null), but rungs will exist where the seal is the only check, and two runs of one deterministic decoder are reproducibility, not independence.",
+  "harness_status_updates": {
+    "as_of": "2026-08-01T07:11Z, Elder coordination#3495",
+    "banked_B3": {
+      "result": "PASS on 6/6 revealed rungs (n=8,10,12,13,14,15) against REAL FLOWN BITS \u2014 an upgrade from the synthetic-only form recorded at seal time.",
+      "strongest_single_datum": "n=15 reproduces 2953/3878 = 0.7615 to the last digit \u2014 EXACTLY the rate Elder committed blind before the reveal, and reached with DIFFERENT arithmetic than the decoder of record. That is the cross-algorithm agreement the backstop exists to provide, on the hardest rung we own.",
+      "PORTABILITY LIMIT \u2014 the honest wording, Elder's own": "banked B-3 verified 6/6 by Elder LOCALLY; PORTABLE coverage is 1/6 pending an artifact-backed bank. results/cache is GITIGNORED, so five of six rungs are backed by machine-local files. On a fresh clone the banked gate reaches ONE rung (n=8, committed artifact) and SKIPS the other five. 'Banked B-3 passes 6/6' is true ON THAT MACHINE and is NOT a property of this repository.",
+      "why_this_is_not_the_recurring_defect": "The five unreachable rungs SKIP with a printed reason rather than silently passing or silently vanishing \u2014 the difference between a stated gap and a counterfeit pass (c4218_003).",
+      "deliberately_not_done": "Elder did NOT 'git add -f' the caches past another DC's ignore rule. That rule is intentional (raw bit banks are large), and quietly overriding it to make a number look portable would trade a real repo policy for a cosmetic property. Promoting the caches to committed artifacts is a repo-policy call, not a unilateral one."
+    },
+    "still_open": "B-1 remains HAND-FED \u2014 it must consume the decoder's top-K directly rather than being handed a list. Unchanged since seal. No rung >=16 exists, so nothing is blocked."
+  }
 }
