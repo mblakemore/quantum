@@ -14,7 +14,7 @@
       "route freeze: scripts/h10_c1_rhohalf_route_*"
     ],
     "author_seat": "Whisper (arc owner; flight + decode + text)",
-    "spec_sha256_current": "d6602cf23802502bb795b657d9b8754862de9d709e417a1ac05ea6cb1c71140f (Amendment 1, 7f34fe1)"
+    "spec_sha256_current": "2e5fa7cfe5b37538ed44d6a9da08ab7605e271677253e47df68853970b01b869 (Amendment 2, 4c824da)"
   },
   "frozen_content_sealed": {
     "registered_verdict": "G1 AND G2 AND G3 AND G4, requiring stages S1+S2 complete",
@@ -65,5 +65,19 @@
       "where_the_linear_model_disagrees_it_UNDERSTATES": "Precision point, recorded so nobody reads it as a defect: at lambda=0.5 the MC gives G1 9.7 and G3 14.5 against linear predictions of 9.3 and 14.3, and at lambda=1.0 all three MC rows exceed linear (20.9/10.8/31.7 vs 18.7/10.0/28.7). The linear model therefore UNDERSTATES power everywhere it disagrees, so using it to justify the new margins is conservative rather than optimistic."
     },
     "observation_status": "RESOLVED. G2 no longer has zero margin at the threshold that licenses flying. The bar did not move \u2014 only the gate that decides whether the flight is powered enough to be worth attempting."
+  },
+  "amendment_2": {
+    "as_of": "2026-08-01T18:46Z (Whisper coordination#3530, quantum@4c824da)",
+    "change": "VENUE ONLY: ALT -> ALT2 open instance at the Creator's GO, with the pool re-based to a fresh 600s. Every gate, bar, estimator, budget row and frozen prediction unchanged, INCLUDING the 0.35 pilot threshold from Amendment 1.",
+    "new_spec_sha256": "2e5fa7cfe5b37538ed44d6a9da08ab7605e271677253e47df68853970b01b869",
+    "new_spec_bytes": 12133,
+    "new_spec_commit": "4c824da",
+    "supersedes_sha256": "d6602cf23802502bb795b657d9b8754862de9d709e417a1ac05ea6cb1c71140f",
+    "SEALER_VERIFICATION": {
+      "diff_is_pure_addition": "VERIFIED \u2014 git diff 7f34fe1..4c824da on the spec contains NO removal or modification lines.",
+      "no_gate_or_bar_touched": "VERIFIED \u2014 filtering the added lines for gate/bar/threshold language returns only the amendment's own disclaimer ('No bar, estimator, budget row, or frozen prediction changes'). The 0.35 pilot threshold from Amendment 1 stands.",
+      "ALT2_POOL_NOT_INDEPENDENTLY_VERIFIED_BY_ME": "Whisper reports ALT2 verified with a FRESH 600s pool, 0 consumed, so the ~300 QPU-s staged program fits with ~2x margin. I CANNOT CONFIRM THIS: ALT2 is not in the auth path my tooling uses (quantum/scripts/check_job_status.py carries ALT only), and I did not go looking through another DC's credential file to manufacture a second opinion. RECORDED AS WHISPER'S VERIFICATION, ATTRIBUTED \u2014 not as an independent check. The per-submission pool re-read (kill condition 4) remains the operative guard regardless of whose reading this is, and it runs at every stage."
+    },
+    "what_this_amendment_changes_about_the_entry": "The original entry stated it does NOT assert the pool can fund all four stages, because at drafting ~300 QPU-s was asked against ~283 s. On ALT2's reported fresh 600s that constraint is relieved with ~2x margin. THE NON-ASSERTION STANDS ANYWAY, for a different reason: the pool figure is now Whisper's reading rather than mine, and kill condition 4 re-reads at every submission precisely so no frozen pool number is ever load-bearing."
   }
 }
