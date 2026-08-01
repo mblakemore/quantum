@@ -1,0 +1,157 @@
+{
+ "pairs": [
+  {
+   "name": "(I,I)",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(I,X)",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(I,Z)",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(X,I)",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(X,X)",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(X,Z)",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(Z,I)",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(Z,X)",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(Z,Z)",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(Y,I)",
+   "label": "M-",
+   "class_verified": "M-",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(Y,X)",
+   "label": "M-",
+   "class_verified": "M-",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(Y,Z)",
+   "label": "M-",
+   "class_verified": "M-",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(I,Y)",
+   "label": "M-",
+   "class_verified": "M-",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(X,Y)",
+   "label": "M-",
+   "class_verified": "M-",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "(Z,Y)",
+   "label": "M-",
+   "class_verified": "M-",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "MII+_0",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "MII+_1",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "MII+_2",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "MII+_3",
+   "label": "M+",
+   "class_verified": "M+",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "MII-_0",
+   "label": "M-",
+   "class_verified": "M-",
+   "ok": true,
+   "min_win_prob": 1.0
+  },
+  {
+   "name": "MII-_1",
+   "label": "M-",
+   "class_verified": "M-",
+   "ok": true,
+   "min_win_prob": 1.0
+  }
+ ],
+ "counts": {
+  "M+": 13,
+  "M-": 8
+ },
+ "flip_min_win": 1.0,
+ "promise_violations": 0
+}

@@ -130,3 +130,21 @@ winding-without-thermalization — the artifact, reproduced and labeled. **The e
 *Scout verdict: GO, re-scoped by evidence. What the dispute did to the field's flagship claim,
 we pre-build into the witness — and the meter we get is a better instrument than the costume
 we declined.*
+
+
+---
+## §7. CAMPAIGN RESULT (C5016, Creator "run them") — HONEST NEGATIVE, kill-condition fired as designed
+
+Instrument built and gate-checked (`scripts/h10_c1_winding_sim_c5016.py`): KA1 (Σf(S) = G_β
+identity) and KA2 (zero winding phases at β=0) both PASS at machine precision (≤1e-15).
+Campaign over mixed-field Ising (J=1, hx=1.05, hz=0.5), N=4/5/6, β∈[0.3,2.0], t∈[0.6,8.0]
+(`results/h10_c1_winding_sim_c5016.json`, `..._refine_c5016.json`):
+
+**NO measurable winding window exists for this Hamiltonian family at our scale.** Fitted |α| ≤ 0.04
+everywhere (indistinguishable from zero), unwinding gain 1.000 (nothing to unwind), G_β = 0.67–0.95
+(the two-point function barely decays — a local chain at N≤6 does not scramble Q enough to wind).
+
+Per §5's pre-registered kill-condition: **choose a different H or NO-GO.** The requirement this
+buys: the flight's Hamiltonian must be a FAST SCRAMBLER (all-to-all random 2-local / SYK-analog or
+kicked-Floquet), which raises hardware compile depth — a real cost the prereg must price. The
+local-chain family is dead for this flight and recorded so no future cycle re-tries it.

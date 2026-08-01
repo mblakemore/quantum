@@ -107,3 +107,17 @@ time. If one exists, we fly as replication + the switch-arm extension and say ex
    sim; freeze shot budget from the measured margins.
 
 *Scout verdict: GO. The strangest flyable thing on the board is also one of the cheapest.*
+
+
+---
+## §7. GAME REPRODUCTION (C5016, Creator "run them") — COMPLETE
+
+Box 1's full pair table recovered from the paper PDF and verified
+(`scripts` inline run → `results/h10_b1_game_reproduction_c5016.json`):
+**21/21 pairs satisfy their promised class (zero violations); split = 13 M⁺ / 8 M⁻ exactly as
+published** — which also confirms the swap-partner inference for the eighth M⁻ pair our text
+extraction had cut. **Flip-arm determinism verified: min win probability 1.000000000000** across
+all pairs × random input states (branch operators (UVᵀ±UᵀV)/2; the promised-off branch vanishes
+identically). Compilation insight: for the Pauli pairs, **odd Y-count ⇔ M⁻** (Yᵀ = −Y is the whole
+game). Remaining before prereg: the four strategy-class CEILINGS (parallel/causal/process-matrix)
+— the SDP reproduction, Elder's co-check as assigned; and arm compilation in sim.
