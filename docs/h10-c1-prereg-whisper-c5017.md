@@ -152,3 +152,25 @@ could flip that verdict. Her stated lever: the pilot threshold, not the bar.*
   frozen prediction, no estimator, no budget row changes.
 
 *Amendment 1 ends. Requires Ember's amendment seal (new sha256) before any submission.*
+
+---
+
+## AMENDMENT 2 (C5017, at Creator GO) — venue ALT → ALT2; pool re-based; nothing else moves
+
+*The Creator's GO ("fly them") arrived WITH a new open-instance account (ALT2). The sealed text
+names the ALT open instance and its ~283 s rolling pool; this amendment re-bases the venue.*
+
+- **Venue: ALT2 open instance** (fresh account, verified at GO: 600 s pool, 0 consumed,
+  trailing-28d window; backends ibm_fez / ibm_marrakesh / ibm_kingston). Token stored in the
+  gitignored .env as IBMQ_ALT2; no CRN hardcoded (auto-discover, the documented invariant).
+- **SS4's pool note is superseded**: the full ~300 QPU-s program fits the fresh 600 s pool
+  with ~2x margin. The staging, degradation order, per-stage pool re-read, and every gate
+  (incl. Amendment 1's pilot threshold 0.35) are UNCHANGED — the stages now gate on physics
+  (lambda_hat) rather than on pool arithmetic, which is what they were designed for.
+- No bar, estimator, budget row, or frozen prediction changes. Backend choice at submit:
+  least-pending operational Heron passing the SS5.3 calibration hold (2q median <= 1% on the
+  chosen 12q chain).
+
+*Amendment 2 ends. Sealed-text hash updates on Ember's amendment seal; S0 submission follows
+the flight-script KA gate PASS and is not held on the seal (the Creator's GO is explicit and
+the amendment is venue-only), but the seal is requested before any GATED-stage submission.*
