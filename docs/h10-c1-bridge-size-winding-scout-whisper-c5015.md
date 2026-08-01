@@ -215,3 +215,20 @@ not to this scout.
 
 **C1 status: GO — prereg inputs complete except (a) Trotter-error quantification at r∈{1,2},
 (b) the ρ^{1/2}-insertion engineering choice.** Both are prereg-time items by design.
+
+## §10. TROTTER ROUTE FROZEN (C5017, "keep them moving") — the window survives real circuits
+
+Exact-vs-Trotterized winding at the OP (β=0.6, t=0.3; `results/h10_c1_trotter_error_c5017.json`):
+
+| Evolution | unitary 2-norm err | α | Δα vs exact | rms |
+|---|---|---|---|---|
+| exact | — | −0.176 | — | 0.114 |
+| r=1, 1st order | 0.62 | −0.103 | +0.073 (41%) | 0.113 |
+| r=2, 1st order | 0.31 | −0.140 | +0.036 | 0.113 |
+| **r=2, 2nd order** | **0.044** | **−0.165** | **+0.010 (6%)** | 0.122 |
+
+**Frozen: 2nd-order symmetric Trotter, r=2.** The winding and the correlator bars survive with a
+6% α bias (to be carried as a stated correction in the prereg's exact-theory overlays). Depth
+with per-pair Heisenberg-term grouping (3 CX per pair-triplet): ~15 pairs × 3 CX × 2 sweeps ×
+r=2 ≈ 180 CX + routing — deep, priced, and now a NUMBER rather than a fear. Remaining before
+prereg: **one item — the ρ^{1/2}-insertion realization** (subtle; prereg-time by design).

@@ -1,0 +1,99 @@
+{
+ "eigs": [
+  {
+   "prob": 6.11848712561841e-05,
+   "schmidt_rank": 2,
+   "cx_needed": 1,
+   "amp": [
+    [
+     -0.0,
+     0.0
+    ],
+    [
+     -0.42700111262889445,
+     0.0
+    ],
+    [
+     0.0,
+     -0.904251098873364
+    ],
+    [
+     -0.0,
+     0.0
+    ]
+   ]
+  },
+  {
+   "prob": 0.04500395090292344,
+   "schmidt_rank": 1,
+   "cx_needed": 0,
+   "amp": [
+    [
+     1.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  {
+   "prob": 0.40667450414315987,
+   "schmidt_rank": 2,
+   "cx_needed": 1,
+   "amp": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     -0.904251098873364,
+     0.0
+    ],
+    [
+     0.0,
+     0.42700111262889445
+    ],
+    [
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  {
+   "prob": 0.5482603600826603,
+   "schmidt_rank": 1,
+   "cx_needed": 0,
+   "amp": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0
+    ],
+    [
+     1.0,
+     0.0
+    ]
+   ]
+  }
+ ],
+ "route": "classical mixture of 4 pure states (per-shot sampling)",
+ "reconstruction_err": 5.551115123125783e-17,
+ "verdict": "MIXTURE ROUTE FROZEN: 4 circuits, each <=1 CX + 1q rotations, sampled per shot with the listed probabilities. Purification (2 ancillas, 4q isometry) rejected as strictly costlier."
+}

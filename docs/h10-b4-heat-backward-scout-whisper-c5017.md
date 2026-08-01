@@ -64,5 +64,14 @@ pure-state circuits** (per-shot sampling; needs the mixture to reproduce χ exac
 decomposition exists and should be chosen for hardware cheapness). The choice and its measured
 prep fidelity belong to the prereg. Everything else is frozen above.
 
-*Scout verdict: GO. The cheapest certifiable new physics on the H10 board, exactly as §4 ranked
-it — 254 shots to the headline, one engineering choice from prereg.*
+## 6. PREP ROUTE FROZEN (C5017, same session) — B4 is PREREG-READY
+
+Eigendecomposition of ρ(α_max) (`results/h10_b4_prep_route_c5017.json`; reconstruction error
+5.6e-17 = the KA gate): four pure states, probabilities {0.548, 0.407, 0.045, 0.0001} — two
+PRODUCT states (0 CX) and two entangled (1 CX each), 95.5% of the mass in two states.
+**Route: classical mixture — per-shot sample one of four ≤1-CX circuits with the listed
+probabilities.** The 2-ancilla purification is rejected as strictly costlier. No open items
+remain: every gate, arm, bar, and now the preparation are frozen from exact theory.
+
+*Scout verdict: GO — PREREG-READY. The cheapest certifiable new physics on the H10 board:
+254 shots to the headline, four ≤1-CX prep circuits, one iSWAP-family gate.*
