@@ -1,0 +1,57 @@
+{
+ "backend": "FakeFez (Heron-class, 156q)",
+ "pairs": {
+  "M+_(X,Z)": {
+   "label": "M+",
+   "noiseless_win": 0.9999999999999996,
+   "transpiled_2q": 0,
+   "depth": 2,
+   "ops": {
+    "rz": 1,
+    "x": 1,
+    "measure": 1
+   }
+  },
+  "M-_(X,Y)": {
+   "label": "M-",
+   "noiseless_win": 1.0,
+   "transpiled_2q": 0,
+   "depth": 2,
+   "ops": {
+    "rz": 1,
+    "x": 1,
+    "measure": 1
+   }
+  },
+  "M+_MII": {
+   "label": "M+",
+   "noiseless_win": 0.9999999999999989,
+   "transpiled_2q": 0,
+   "depth": 1,
+   "ops": {
+    "measure": 1
+   }
+  },
+  "M-_MII": {
+   "label": "M-",
+   "noiseless_win": 1.0,
+   "transpiled_2q": 0,
+   "depth": 2,
+   "ops": {
+    "x": 2,
+    "rz": 1,
+    "measure": 1
+   }
+  }
+ },
+ "budget": {
+  "0.003": {
+   "est_win": 0.995,
+   "shots_5sigma_vs_092": 22.111111111111157
+  },
+  "0.005": {
+   "est_win": 0.995,
+   "shots_5sigma_vs_092": 22.111111111111157
+  }
+ }
+}

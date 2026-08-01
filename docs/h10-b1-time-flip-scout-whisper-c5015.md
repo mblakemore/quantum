@@ -121,3 +121,33 @@ all pairs × random input states (branch operators (UVᵀ±UᵀV)/2; the promise
 identically). Compilation insight: for the Pauli pairs, **odd Y-count ⇔ M⁻** (Yᵀ = −Y is the whole
 game). Remaining before prereg: the four strategy-class CEILINGS (parallel/causal/process-matrix)
 — the SDP reproduction, Elder's co-check as assigned; and arm compilation in sim.
+
+
+---
+## §8. ARM COMPILATION (C5017) — the flip arm is 1q-ONLY, and the honest flag that forces
+
+Compiled on FakeFez (Heron-class, 156q), opt level 3, seed 142
+(`results/h10_b1_arm_compile_c5017.json`): representative pairs from all four families —
+**every flip circuit transpiles to ZERO two-qubit gates** (depth 1–2, 1q-only), noiseless win
+exactly 1.000000000000 on each.
+
+**Why (structure, not accident):** each select step |0⟩⟨0|A + |1⟩⟨1|B compiles to A then
+controlled-(A†B); for the Box-1 game, A†B ∈ {±I, iZ} throughout (Pauli symmetry/antisymmetry —
+Yᵀ=−Y again), and where the per-step controlled part is a CZ, **the two steps' CZs cancel**.
+The game's Cliffordness makes the flip arm native-cheap.
+
+**Budget (freeze-ready):** est. hardware win ≈ 0.995 (readout-dominated; 1q errors negligible)
+⇒ **22 shots/pair suffices for 5σ over the 0.92 process-matrix ceiling**; freeze 500/pair as
+luxury margin. Whole game, all four arms: still QPU-seconds.
+
+**THE HONEST FLAG:** a flip circuit with no entangling gates means the compiled-access
+certification is THIN for these pairs taken alone — the compiled object barely "queries" U and V
+in any operational sense. This is inherent to compiled access and the §3 fence already names it;
+the consequence for the design is that **the hardware content concentrates in the STAIRCASE**:
+the lower arms (parallel/sequential/switch) capping at their computed ceilings on the same chip,
+same pairs, same session, while the flip sits at ~1. The switch arm — the physically-flown
+indefinite-causal-order tier — carries the novel hardware demonstration; the flip arm is the
+(cheap) top step. Prereg language must weight it exactly so.
+
+**Remaining before prereg:** the four strategy-class SDP ceilings (Elder's co-check, queued) —
+now the ONLY open item. B1 status: **GO, one co-check out.**
