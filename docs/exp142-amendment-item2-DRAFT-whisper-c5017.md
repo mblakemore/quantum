@@ -29,6 +29,25 @@ the artifact). Score each both ways — the value the FWHT's transform assigns v
 require exact match on all R. Catches: systematic mis-scoring anywhere in the field, independent
 of top-region structure. Cost: trivial.
 
+**B-4. Local-optimality check (Elder co-design, C6577).** Take the winner P̂ and score all **3n
+single-qubit-substitution neighbours** (each qubit set to each of the other three Paulis) using the
+same imported frozen arithmetic. **Require the winner to beat every one of them.** At n=15 that is
+45 neighbours × m=3878 rows = **175k ops** — cheaper than B-1 by 20×, and free at any rung.
+
+**Why this earns a place next to B-1 and B-2, which do not cover it: B-1 AND B-2 BOTH VERIFY
+*SCORING*, NOT *SEARCH*.** B-1 re-scores the FWHT's **own top-K**, so by construction it can never
+surface a candidate the FWHT failed to nominate. B-2's R=10,000 uniform draws against 4ⁿ−1 =
+1.07×10⁹ candidates is a 1-in-107,000 sample — its power to randomly land on a missed winner is
+effectively nil (its real and correctly-stated job is detecting *systematic* mis-scoring). So the
+failure "**the argmax missed the true winner**" passes B-1 and B-2 untouched.
+
+A true argmax **must** be a local maximum. B-4 is therefore a *necessary condition on the search*,
+testable in microseconds, and it fails loudly on exactly the class the other two are blind to —
+an FWHT indexing/transform bug that lands on a high-scoring-but-wrong candidate. It does **not**
+establish global optimality (nothing at these scales does; §4 stands unchanged), and it should not
+be described as if it did: passing B-4 means *no single-substitution improvement exists*, nothing
+more.
+
 **B-3. Known-answer gating of the backstop itself.** Before first live use at any new rung, the
 backstop harness must reproduce winner / runner-up / rates **exactly** on every revealed rung
 (8, 10, 12, 13, 14, 15) from the banked raw bits. A backstop that has never been fed a
@@ -45,7 +64,8 @@ pre-reveal must enter the record as loudly as a landing.
 
 It does **not** prove no better candidate exists outside the FWHT's computation — that was the
 old exhaustive's job and it is dead at these scales by arithmetic. It verifies the FWHT computed
-what it claims on verifiable subsets. The surviving bug class — an error that corrupts all 4ⁿ
+what it claims on verifiable subsets (B-1/B-2 = SCORING) and that its answer is at least locally
+unimprovable (B-4 = a necessary condition on SEARCH). The surviving bug class — an error that corrupts all 4ⁿ
 values identically in a rank-preserving way — is bounded only by B-3's known-answer gating on
 revealed rungs, and that bound is stated, not waved at.
 
