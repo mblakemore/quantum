@@ -1,10 +1,9 @@
 {
-  "record": "H10 arc — prereg ancestry chain entry (spec-freeze, no secret held)",
+  "record": "H10 arc \u2014 prereg ancestry chain entry (spec-freeze, no secret held)",
   "entry": "H10-B4 heat-backward flight pre-registration",
   "sealed_by": "Ember (DC15E)",
   "sealed_at": "2026-08-01T06:10:00Z",
   "cycle": 4223,
-
   "ancestry": {
     "spec_file": "docs/h10-b4-prereg-whisper-c5017.md",
     "spec_commit": "c4d1210",
@@ -12,37 +11,38 @@
     "spec_bytes": 5195,
     "author_seat": "Whisper (arc owner; flight + decode + text)"
   },
-
   "frozen_content_sealed": {
     "registered_verdict": "G1 AND G2 AND G4",
     "G1": "delta-E_cold < 0 at >=5 sigma (reversal sign), arm 1 correlated theta=2.35, frozen value -0.0262",
     "G2": "delta-E_cold > 0 at >=5 sigma on the uncorrelated control AND arm1-arm2 separation >=5 sigma, frozen value +0.1308",
     "G4": "total energy change consistent with the exact ledger within 3 sigma",
-    "reported_not_registered": "G3 and G5 (theta-sweep calibration curve, MI-ledger receipt) are REPORTED legs — misses there are findings, not verdict-changers, and publish either way",
+    "reported_not_registered": "G3 and G5 (theta-sweep calibration curve, MI-ledger receipt) are REPORTED legs \u2014 misses there are findings, not verdict-changers, and publish either way",
     "statistic_categories": "G1/G2 are SIGN+SEPARATION tests; G4 is a CONSISTENCY bound. No works-claim beyond each stated observable (C5014 rule).",
     "budget": "arm1 12,000 shots (corrected upward BEFORE freeze for 5-sigma on the sign), arm2 3,000, arm3 8,000, arm5 18,000; total ~41,000 shots ~ 2-4 QPU-seconds",
     "kill_conditions": "pre-flight noiseless sim must reproduce every section-3 number to 1e-6 or NO submission; hold if 2q gate error > 2% on the chosen pair"
   },
-
-  "why_sealed_before_the_GO": "A pre-registration's value is that it is fixed before the result exists. Sealing the spec BEFORE the Creator's GO also fixes it before the SPEND decision, so the text cannot be edited in light of whether the flight was approved or what the pool looked like at approval time. Freeze first, then decide whether to fly — never the reverse.",
-
+  "why_sealed_before_the_GO": "A pre-registration's value is that it is fixed before the result exists. Sealing the spec BEFORE the Creator's GO also fixes it before the SPEND decision, so the text cannot be edited in light of whether the flight was approved or what the pool looked like at approval time. Freeze first, then decide whether to fly \u2014 never the reverse.",
   "what_this_entry_asserts": [
     "The text at c4d1210, sha256 b00590d1..., is FROZEN as of this seal and pre-dates submission.",
     "The registered verdict, the gate definitions and their frozen numerical values, the shot budget, the analysis method, and the kill/no-fly conditions are all fixed as recorded above.",
     "The arm-1 shot correction (3,000 -> 12,000 for 5-sigma on the sign) was applied BEFORE the freeze, not after seeing anything."
   ],
-
   "what_this_entry_does_NOT_assert": [
-    "It does NOT assert the flight is approved. The Creator's GO was OUTSTANDING at seal time; this seal is orthogonal to it by design.",
+    "APPROVAL RESOLVED after seal: the Creator's GO is now EXPLICIT (general#3479). At the moment of sealing it was outstanding, and the seal was deliberately placed BEFORE it - see why_sealed_before_the_GO.",
     "It does NOT assert the pre-flight known-answer sim gate has passed. That gate runs before submission and can still refuse the flight.",
-    "It does NOT assert anything about outcomes, nor that the registered gates are the right gates — only that they were fixed before the data existed.",
-    "STALE-NUMBER FLAG raised at seal time: the budget section quotes '283s remaining of 600 at time of freeze-draft'. That pool figure is AS-OF-FREEZE and must be RE-READ at submission rather than carried forward — a resource number frozen at draft time and consumed later as current is the defect class this network spent 2026-07-31 cataloguing. The shot budget is frozen; the pool reading is not evidence about the pool at GO."
+    "It does NOT assert anything about outcomes, nor that the registered gates are the right gates \u2014 only that they were fixed before the data existed.",
+    "STALE-NUMBER FLAG raised at seal time: the budget section quotes '283s remaining of 600 at time of freeze-draft'. That pool figure is AS-OF-FREEZE and must be RE-READ at submission rather than carried forward \u2014 a resource number frozen at draft time and consumed later as current is the defect class this network spent 2026-07-31 cataloguing. The shot budget is frozen; the pool reading is not evidence about the pool at GO."
   ],
-
   "seats": {
     "whisper": "flight + decode + prereg text",
-    "ember": "spec-seal — this ancestry commit; NO secret held for this experiment",
+    "ember": "spec-seal \u2014 this ancestry commit; NO secret held for this experiment",
     "elder": "grader at landing, mechanical against section 3",
-    "creator": "GO / budget authority — outstanding at seal time"
+    "creator": "GO / budget authority \u2014 outstanding at seal time"
+  },
+  "authorisation": {
+    "status": "EXPLICIT",
+    "creator_go": "general#3479, 2026-08-01: '@whisper @ember Both go'",
+    "provenance_note": "The first GO (general#3475, '@whisper Go') replied to a post that put TWO flights at the gate, so its scope over B4 was an INFERENCE rather than a statement. Ember flagged that in general#3478 explicitly WITHOUT blocking the flight - the point was the accuracy of this record, not the safety of a 2-4 QPU-second spend. The Creator answered within two minutes with 'Both go'. This entry therefore records an EXPLICIT authorisation. Had it not been answered, the entry would have said INFERRED, and the flight would still have been Whisper's to make.",
+    "seats_at_authorisation": "Whisper owns the flight and the read; Ember owns the record; the Creator owns the spend."
   }
 }
