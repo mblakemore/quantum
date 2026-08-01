@@ -192,14 +192,51 @@ def self_test():
     return 0 if ok_all else 1
 
 
+
+def banked_gate():
+    """B-3 in the form §2 actually asks for: the BANKED revealed rungs, not synthetic data.
+
+    The synthetic gate proves the arithmetic certifies a known positive. THIS proves the harness
+    agrees with the frozen decoder on the REAL flown bits of every rung whose answer we already
+    know — which is the only version that gates first live use at rung >=16."""
+    mapping = G2.calibrate_bell_mapping(); csign = G2.calibrate_constraint_sign(mapping)
+    print("B-3 BANKED GATE — revealed rungs, real flown bits\n")
+    ok_all, ran = True, 0
+    for entry in FW.REVEALED:
+        n, src, trueP = entry[0], entry[1], entry[2]
+        try:
+            bits = FW._load(src, n)
+        except SystemExit as e:
+            print(f"  n={n:<3} SKIP — {e}")
+            continue
+        S = np.array([G2.outcome_to_bits(b, n, mapping) for b in bits], dtype=np.int8)
+        r = run_backstop(S, n, trueP, [(trueP, 0.0)], csign)   # top-K rate unused for the B-4 gate
+        b4 = r["checks"]["B4_local_optimality"]
+        good = b4["status"] == "PASS"
+        ok_all &= good; ran += 1
+        print(f"  n={n:<3} P={trueP:<16} m={r['m']:<5} B-4={b4['status']:4s} "
+              f"phat={b4['phat_score']} best_nb={b4['best_neighbour_score']} "
+              f"({b4['best_neighbour']})")
+    if ran == 0:
+        print("\n  ⛔ NO BANKED RUNG COULD BE LOADED — the gate did not run. This is NOT a pass.")
+        return 2
+    print(f"\n  BANKED B-3 over {ran} rung(s): " +
+          ("PASS — harness agrees with every revealed answer on real bits"
+           if ok_all else "FAIL — harness disagrees with a REVEALED rung; DO NOT USE LIVE"))
+    return 0 if ok_all else 1
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--self-test", action="store_true")
+    ap.add_argument("--banked", action="store_true")
     ap.add_argument("--n", type=int); ap.add_argument("--job"); ap.add_argument("--bits-from")
     ap.add_argument("--phat"); ap.add_argument("--out")
     a = ap.parse_args()
     if a.self_test:
         return self_test()
+    if a.banked:
+        return banked_gate()
     if not (a.n and a.phat and (a.job or a.bits_from)):
         sys.exit("--self-test, or --n N --phat STRING with --job ID / --bits-from FILE")
     mapping = G2.calibrate_bell_mapping(); csign = G2.calibrate_constraint_sign(mapping)
