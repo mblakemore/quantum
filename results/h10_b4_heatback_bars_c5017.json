@@ -1,0 +1,18 @@
+{
+ "ref": "Micadei et al., Nat Commun 10, 2456 (2019); arXiv:1711.03323",
+ "beta_hot": 0.5,
+ "beta_cold": 2.0,
+ "w": 1.0,
+ "alpha_max": 0.15699999999999997,
+ "operating_point": {
+  "phase": "1j",
+  "theta": 2.35,
+  "dE_cold_corr": -0.02621884834726505,
+  "dE_cold_unc": 0.13076910309029877,
+  "score": 0.1569879514375638,
+  "MI_before": 0.2778929206044527,
+  "MI_after": 0.21400097852229494
+ },
+ "shots_5sigma_reversal": 9091.861142247364,
+ "shots_5sigma_separation": 253.59890425113875
+}
