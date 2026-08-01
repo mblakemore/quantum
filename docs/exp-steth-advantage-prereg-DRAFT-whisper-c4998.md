@@ -1,6 +1,9 @@
 # Pre-registration DRAFT — The Distinguishing Flight (two arms): Sample-Complexity Advantage via Quantum Memory
 
-*Whisper C4998, 2026-07-23, substrate claude-fable-5. Status: **DRAFT FOR COURT — NOT FROZEN.**
+*Whisper C4998, 2026-07-23, substrate claude-fable-5. Status (updated C5017, 2026-08-01):
+**G1 ✅ · G2 ✅ · G3 ✅ (closure block §7 below) — FROZEN PENDING G4 ONLY (Creator GO; pool
+RE-READ at submission per the C5017 seal-flag rule).** Original status line preserved: DRAFT FOR
+COURT — NOT FROZEN.
 Freeze requires: G1 (Elder theorem seat + grader), G2 (Ember seals), G3 ($0 sim gates), G4 (budget +
 Creator GO). Parent: [the advantage proposal](proposal-advantage-after-f121-whisper-c4998.md) (gates
 1–3 closed: F119 audit integrated, C2 kill-test TARGET-SURVIVES, theorem seat passed with reframe).
@@ -210,3 +213,39 @@ arm is simultaneously the tax-law coherence witness (coordination#712).*
 
 *Draft ends. Court: G1 Elder, G2 Ember — respond on coordination; G3 runs after G1 fixes the
 constants; G4 last. No QPU is spent by this document.*
+
+
+---
+## §7. G3 CLOSURE (Whisper C5017, 2026-08-01 — appended, body above untouched)
+
+**G3 is closed on the committed sim artifact** (`results/exp_steth_c4998_g3_sims.json`, C4998) +
+this block, which freezes the two numbers the body left at design-target:
+
+1. **R_N FROZEN = 3** (the body's design target, adopted). Sim basis: C1-shadows require **>512
+   copies at k=2 and k=3** (sim range exhausted) against Q's 12 — a ratio >42, sim-range-bounded.
+   Freezing at 3 keeps the criterion far inside the sim-supported region; the claim label stays
+   **best-known/conditional** regardless of measured size, per the body.
+2. **Predicted QPU budget, per rung (planning numbers at the conservative purity-0.7 row —
+   48 copies/trial, shots=1 per copy-pair):**
+
+   | Rung | Circuits (40 trials × 48) | Est. QPU-s |
+   |---|---|---|
+   | Arm T k=6 | 1,920 | ≤1 |
+   | Arm T k=9 | 1,920 | ≤1 |
+   | Arm T k=12 | 1,920 | ≤1.5 |
+   | Arm N k=2 (Q + C1-executed) | 3,840 + capped C1 extension ≤5,120 | ≤1.5 |
+   | Arm N k=3 (Q + C1-executed) | 3,840 + capped ≤5,120 | ≤1.5 |
+   | **Total** | **≈ 30k shots** | **≈ 4–8 QPU-s incl. overheads** |
+
+   **Fold-before-fly**: if the k=6 rung's measured Choi purity lands below 0.7, the q-rule table
+   re-prices later rungs BEFORE they submit (the table is in the G3 artifact); purity < 0.6 at
+   any rung = m95 undefined = that rung folds, stated in the artifact rather than stretched.
+3. **Leak-safety reqs 2–4** (readout/SPAM profile match · structural identity diff · label-
+   independent order) remain **flight-compile checks at submission** — by design, per the body
+   §arm-N and Ember's G2 card; req 1 (block-identity-blind canonicalized decoder input) is
+   verified **by construction** in the G3 pipeline (E_arm_n_toy.canonicalization).
+4. **Pool discipline (Ember's C5017 seal-flag, adopted here before it could bite):** the
+   G4 reading of the pool is **re-read at submission** — no pool number in this document is
+   current at any later time. (As-of-this-append: 283s remaining of 600; informational only.)
+
+**Remaining gate: G4 alone — Creator GO.**
