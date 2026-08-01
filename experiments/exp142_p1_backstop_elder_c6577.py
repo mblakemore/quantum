@@ -89,7 +89,8 @@ def neighbours(P):
     return out
 
 
-def run_backstop(shots_bits, n, phat, fwht_top, csign, verbose=True):
+def run_backstop(shots_bits, n, phat, fwht_top, csign, verbose=True,
+                 _bits_for_b1=None, _mapping_for_b1=None):
     """Returns a verdict dict. Every check reports PASS/FAIL explicitly; a check that could not
        run reports COULD_NOT_RUN and is NEVER silently counted as a pass."""
     res = {"n": n, "m": int(shots_bits.shape[0]), "phat": phat, "checks": {}}
@@ -109,7 +110,28 @@ def run_backstop(shots_bits, n, phat, fwht_top, csign, verbose=True):
             "k_checked": len(strs), "values_match": val_ok, "ordering_match": order_ok,
             "frozen_winner": strs[int(np.argmax(sc))], "frozen_winner_rate": float(frozen_rate.max())}
     else:
-        res["checks"]["B1_top_k_rescore"] = {"status": "COULD_NOT_RUN", "why": "no FWHT top-K supplied"}
+        # C6577 GAP CLOSED: derive the top-K from the decoder ourselves rather than being handed
+        # a list. A check whose input is supplied by the caller can be satisfied by supplying a
+        # convenient input — the harness must fetch what it is auditing. INDEPENDENCE LIVES IN THE
+        # SCORING (frozen arithmetic), not in the provenance of the candidate list: B-1's entire
+        # job is to re-score the DECODER'S OWN top-K by different means, so pulling that list
+        # from the decoder is correct and required, not a contamination.
+        try:
+            top_rows, _m = FW.decode_fwht(_bits_for_b1, n, _mapping_for_b1, csign, top=K_TOP)
+            strs = [t[0] for t in top_rows]; rates = [t[1] for t in top_rows]
+            M, yp = _cand_arrays(strs, n)
+            sc = frozen_scores(shots_bits, M, yp, csign, n)
+            frozen_rate = sc / shots_bits.shape[0]
+            val_ok = bool(np.allclose(frozen_rate, np.array(rates), atol=1e-12))
+            order_ok = bool(list(np.argsort(-sc)) == list(range(len(strs))))
+            res["checks"]["B1_top_k_rescore"] = {
+                "status": "PASS" if (val_ok and order_ok) else "FAIL",
+                "k_checked": len(strs), "values_match": val_ok, "ordering_match": order_ok,
+                "source": "derived from decoder (not hand-fed)",
+                "frozen_winner": strs[int(np.argmax(sc))], "frozen_winner_rate": float(frozen_rate.max())}
+        except Exception as e:
+            res["checks"]["B1_top_k_rescore"] = {"status": "COULD_NOT_RUN",
+                                                 "why": f"decoder top-K unavailable: {e}"}
 
     # ---- B-2 RANDOM CROSS-SCORE ----------------------------------------------------------
     N = 1 << (2 * n)
@@ -210,7 +232,8 @@ def banked_gate():
             print(f"  n={n:<3} SKIP — {e}")
             continue
         S = np.array([G2.outcome_to_bits(b, n, mapping) for b in bits], dtype=np.int8)
-        r = run_backstop(S, n, trueP, [(trueP, 0.0)], csign)   # top-K rate unused for the B-4 gate
+        r = run_backstop(S, n, trueP, None, csign,
+                         _bits_for_b1=bits, _mapping_for_b1=mapping)   # B-1 derives its own top-K
         b4 = r["checks"]["B4_local_optimality"]
         good = b4["status"] == "PASS"
         ok_all &= good; ran += 1
