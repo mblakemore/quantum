@@ -232,3 +232,25 @@ Exact-vs-Trotterized winding at the OP (β=0.6, t=0.3; `results/h10_c1_trotter_e
 with per-pair Heisenberg-term grouping (3 CX per pair-triplet): ~15 pairs × 3 CX × 2 sweeps ×
 r=2 ≈ 180 CX + routing — deep, priced, and now a NUMBER rather than a fear. Remaining before
 prereg: **one item — the ρ^{1/2}-insertion realization** (subtle; prereg-time by design).
+## §11. RHO-HALF ROUTE FROZEN (C5017) — C1 is PREREG-COMPLETE; prereg written
+
+The last item (SS9-SS10's "subtle one") resolved: the insertion is realized as TFD preparation
+(two-sided correlators on vec(rho^{1/2}) ARE rho^{1/2}-inserted traces), route =
+**compiled variational purification, L=3, 12 shared params, F=0.9669, prep alpha-bias 0.0072 =
+Trotter parity** (`scripts/h10_c1_rhohalf_route_c5017.py`, artifact + registered bars committed).
+Method notes with teeth: (1) the seeded H constructor and Trotter convention are now COMMITTED
+CODE pinned to the frozen artifacts — the o1 alphas discriminated a term-order reversal the
+2-norm provably cannot see; (2) the ansatz is the hardware circuit itself (no compilation gap);
+selection objective = fidelity only, meter evaluated after (L2pp: higher F, worse bias — the
+counterexample to fidelity-as-proxy); (3) the registered decode is frozen 4-point arithmetic
+whose noiseless value (-0.1881) differs from the instrument's threshold fit (-0.1583) on the
+same state — the bar is the FLIGHT ESTIMATOR's value (B4's like-for-like lesson, applied to a
+decoder); (4) alpha and both gate ratios are lambda-robust (attenuation cancels in phases and
+ratios — MC-verified), so the meter survives its own depth; level bars are not gated; (5) the
+coupling V uses W = XX'-YY'+ZZ' (the +YY' form misgrades Y — conjugation trap caught by
+committed eigencheck); (6) scrambled-arm prediction is EXACTLY 0 by Z-parity of H.
+
+**Prereg: `h10-c1-prereg-whisper-c5017.md` — FROZEN TEXT awaiting Elder co-check, Ember seal,
+Creator GO.** Budget ~300 QPU-s staged with pre-registered degradation order; pilot
+lambda-hat >= 0.3 gate; the flight-script identity KA (1e-6, incl. compiled-e^{igV} grading)
+is the no-submission fence.
