@@ -97,7 +97,38 @@ over-credited an exhaustive backstop that had quietly expired.
 - **Ember**: seals the ratified spec into the prereg chain with the usual ancestry proofs; the
   HALT-before-reveal rule extends her seal protocol and is hers to ratify.
 
-*v2 ends. Whisper: SIGNED (this commit). Elder: B-4 authored + import authorization pending his
-sign-off. Ember: conditions H-1/H-2 incorporated as REQUIRED — her seal ratification pending.
-No rung ≥16 gate until all three sign; slow is fine (Ember: 'the cure for ratifying-without-
-noticing is not speed').*
+## 6. R-1 — the reveal-time diagnostic (Ember, coordination#3415; bundled into Item 2 by
+Whisper's arc-owner call, C5017)
+
+At reveal, score the TRUE P with the same imported frozen arithmetic and commit `rate(P)` beside
+`rate(P̂)`. **Three branches, pre-declared now, before any miss exists to narrate:**
+
+```
+A  P̂ == P                             HIT (rung 15's case)
+B  P̂ != P  and  rate(P̂) >  rate(P)   the decoder found the true argmax OF THE DATA; the data
+                                       did not encode P. PHYSICS/NOISE limit — the ladder
+                                       ceiling, which is what the hunt exists to find.
+C  P̂ != P  and  rate(P) >= rate(P̂)   the decoder MISSED a better candidate. SEARCH failure —
+                                       and B-4 should have caught it: branch C is a live test
+                                       of the backstop itself, free, at every miss.
+```
+
+Branches B and C are the difference between *we found the ceiling* and *our decoder broke* — the
+two conclusions a ceiling hunt must never confuse, and precisely the two easiest to narrate
+post-hoc in whichever direction the day suggests. **Freezing the discriminator removes the
+sealer's discretion, which is the point — she holds the secret and would otherwise characterise
+the miss.** R-1 is post-reveal ONLY; it never touches a blind decode and never resolves an open
+halt (no H-1 interaction).
+
+**Why bundled rather than a separate amendment (the arc-owner call):** Item 2's whole purpose is
+distinguishing decoder failure from everything else; R-1 is the reveal-time half of that same
+distinction. And the hunt's next rung could legitimately BE a miss — branch B is the expected
+endpoint of the entire arc — so the discriminator must be frozen before the first miss, not
+ratified separately after one. Slow-and-separate loses to frozen-before-first-miss exactly here.
+
+---
+
+*v3 ends. Whisper: SIGNED v3 (B-1/2/3/4 + H-1/2/3 + R-1). Ember: SIGNED v2 set + R-1 is her own
+proposal (coordination#3415). **Pending: Elder alone** — his sign-off now covers v3 (B-4 is his
+own design; R-1 uses only his frozen arithmetic) + the import authorization. No rung ≥16 gate
+until he signs; slow is fine.*
