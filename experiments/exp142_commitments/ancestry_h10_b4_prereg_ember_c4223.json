@@ -44,5 +44,23 @@
     "creator_go": "general#3479, 2026-08-01: '@whisper @ember Both go'",
     "provenance_note": "The first GO (general#3475, '@whisper Go') replied to a post that put TWO flights at the gate, so its scope over B4 was an INFERENCE rather than a statement. Ember flagged that in general#3478 explicitly WITHOUT blocking the flight - the point was the accuracy of this record, not the safety of a 2-4 QPU-second spend. The Creator answered within two minutes with 'Both go'. This entry therefore records an EXPLICIT authorisation. Had it not been answered, the entry would have said INFERRED, and the flight would still have been Whisper's to make.",
     "seats_at_authorisation": "Whisper owns the flight and the read; Ember owns the record; the Creator owns the spend."
+  },
+  "outcome": {
+    "status": "REGISTERED VERDICT NOT HELD \u2014 graded as flown, bar unmoved",
+    "flight": "d9mpa8vbupns73e92vpg, ibm_fez/ALT, 74 pubs, 41,001 shots",
+    "decode_commit": "82bed40",
+    "graded_against_sealed_gates": {
+      "G1": "MISS \u2014 dE_cold = -0.00522 +/- 0.00230 (2.3 sigma) vs the SEALED bar of 5 sigma. Sign correct (reversal present, heat cold->hot) but magnitude ~1/5 of the sealed theory value -0.0262.",
+      "G2": "HELD \u2014 uncorrelated control +0.13695 at 22.0 sigma (sealed theory +0.1308), arm1-arm2 separation 21.4 sigma. Both legs of the sealed conjunct met.",
+      "G4": "MISS \u2014 dE_A + dE_B = +0.028 +/- 0.003 where the ledger requires 0. A hardware systematic (readout asymmetry or calibration), caught by exactly the gate built to catch it.",
+      "verdict": "G1 AND G2 AND G4 = NOT HELD. Mechanical application of the sealed conjunction; no gate was reinterpreted."
+    },
+    "reported_legs_published_either_way": {
+      "sweep_signs": "track theory at all four theta points",
+      "MI_ledger": "0.236 -> 0.091, delta -0.145 against theory -0.064 \u2014 over-spent; decoherence consumes correlations beyond what the protocol pays"
+    },
+    "seal_verification": "The gates GRADED are the gates SEALED, verbatim, including the 5-sigma threshold that the result missed at 2.3. THE BAR DID NOT MOVE. That is the entire product of freezing the text before the data existed, and this flight is the first live test of it on this arc.",
+    "finding_larger_than_the_verdict": "A DIFFERENTIAL DESIGN PROTECTS THE COMPARISON, NOT THE ABSOLUTE. The prereg declined readout mitigation on the argument that the claim was differential \u2014 and G2, the differential leg, held at 21 sigma exactly as that argument promised. But G1 was an ABSOLUTE sign test on a coherence-carried observable roughly one-fifth the size its noise floor could reach, and the differential immunity never covered it. Two gates, two exposure classes, one flight; the design split its own protection and the split was invisible at freeze (Whisper, general#3490).",
+    "no_refly_tonight": "Repair path recorded, not executed: readout mitigation for the ABSOLUTE legs + ~5x arm-1 shots + diagnose the books systematic first. No bar moves, ever."
   }
 }
