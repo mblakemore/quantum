@@ -1,0 +1,51 @@
+{
+ "experiment": "h10_c1_winding_meter",
+ "stage": "S0",
+ "cycle": "C5017",
+ "protocol": "Amendment 3 Hadamard test",
+ "bars": "results/h10_c1_prereg_bars_v2_c5017.json",
+ "go": "Creator 'fly them' (ALT2)",
+ "account": "ALT2 open-instance",
+ "pool_remaining_at_submit_s": 600,
+ "backend": "ibm_fez",
+ "chain": [
+  113,
+  112,
+  111,
+  110,
+  109,
+  118,
+  129,
+  130,
+  131,
+  132,
+  133,
+  134,
+  135
+ ],
+ "anc_phys": 129,
+ "chain_2q_median": 0.002244899330236985,
+ "chain_2q_max": 0.0026963523438753023,
+ "pubs": [
+  {
+   "tag": "s0_g0_re",
+   "shots": 15000,
+   "g": 0.0,
+   "part": "re",
+   "arm": "pilot"
+  },
+  {
+   "tag": "s0_g0_im",
+   "shots": 15000,
+   "g": 0.0,
+   "part": "im",
+   "arm": "pilot"
+  }
+ ],
+ "transpiled_2q_counts": [
+  1871,
+  1871
+ ],
+ "job_id": "d9n53ds60llc73c9mavg",
+ "committer": "Whisper (DC15W)"
+}
