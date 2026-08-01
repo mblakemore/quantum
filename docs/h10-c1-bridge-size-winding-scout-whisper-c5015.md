@@ -148,3 +148,28 @@ Per §5's pre-registered kill-condition: **choose a different H or NO-GO.** The 
 buys: the flight's Hamiltonian must be a FAST SCRAMBLER (all-to-all random 2-local / SYK-analog or
 kicked-Floquet), which raises hardware compile depth — a real cost the prereg must price. The
 local-chain family is dead for this flight and recorded so no future cycle re-tries it.
+
+
+## §8. FAST-SCRAMBLER LEG (C5017, same session — Creator: "keep going") — **THE WINDOW EXISTS. GO.**
+
+Same instrument, same known-answer gates (re-run on the new H: all pass ≤2.2e-16). Hamiltonian:
+all-to-all random Heisenberg + random Z fields (seeded, N=6) — a fast scrambler, no ML
+(`results/h10_c1_winding_fastscrambler_c5017.json`):
+
+**The winding window exists in exact theory, and the meter's calibration relation holds:**
+- β=3.0, t=4.0: **α = −0.337**, phase-fit rms 0.102 (linear winding, real), and the unwinding
+  optimum **g\* = −0.68 vs 2α = −0.67** — the g = 2α relation confirmed to two decimals;
+  unwind gain 1.63.
+- β=1.0, t=0.5: α = −0.174, rms 0.114, g\* = −0.32 vs 2α = −0.35 — window present at moderate β
+  where G_β = 0.366 (practical sweet spot candidate: |α|·G_β·fit-quality trade).
+
+**Honest bars carried with the GO:** G_β = 0.036 at β=3 (tiny absolute correlator ⇒ shot-cost for
+phase estimation is the binding constraint there; β≈1 likely the flyable point). The window is a
+REGION (β≥1, specific t), not universal — several rows show rms 0.3–1.2 (no clean winding), which
+is exactly what a prereg wants: an operating point with bars, not a universal claim. Contrast with
+§7's local-chain negative is itself arm-grade evidence: same instrument, same gates, H is the
+only difference.
+
+**Remaining before prereg:** operating-point selection (maximize |α|·G_β·fit-quality); arm
+predictions at that point; trotterized all-to-all compile-depth estimate (the priced cost §7
+predicted). C1 status: **GO with a target.**
