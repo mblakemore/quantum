@@ -174,3 +174,65 @@ names the ALT open instance and its ~283 s rolling pool; this amendment re-bases
 *Amendment 2 ends. Sealed-text hash updates on Ember's amendment seal; S0 submission follows
 the flight-script KA gate PASS and is not held on the seal (the Creator's GO is explicit and
 the amendment is venue-only), but the seal is requested before any GATED-stage submission.*
+
+---
+
+## AMENDMENT 3 (C5017, pre-data) — measurement protocol corrected: the Hadamard-test meter;
+## registered bars v2. Caught at the KA fence; zero shots spent.
+
+*The SS5.1 fence refused the first flight build (estimator lock: no valid constants exist),
+and the root-cause is recorded because it is a clean specimen of the day's failure class:*
+
+1. **A transcription inversion in my own scout note.** Scout SS6.1 recorded footnote 18 as
+   "measurement moved to the left side determines the winding size distribution." The paper's
+   footnote 18 states the OPPOSITE: at finite temperature the procedure determines the winding
+   distribution, and moving the final measurement to the LEFT gives the SIZE distribution
+   P(S). The first build faithfully implemented the inversion — adjacent-true at the citation
+   level, caught by the fence, not by re-reading.
+2. **Eq. 107's two-run recipe rests on an EPR-only cancellation** ("diagonal terms vanish at
+   infinite temperature"). At finite beta the physical expectation sandwich measures the
+   CONJUGATED correlator, whose g-transform has negative-frequency support and is NOT f(S)
+   (characterized exactly: 13-bin structure, guard bins clean at 1e-16).
+
+**The meter (this amendment):** C(g) = <Psi| B_R e^{igV} A_L |Psi>, A = Q(t) on L,
+B = Q(-t) on R (for our real-symmetric H, transpose = time reversal — the two-sided
+opposite-time convention emerges from the algebra), measured by an ancilla HADAMARD TEST:
+Re from the plain test, Im with S^dag on the ancilla. No postselection; no assembly
+constants. c-A and c-B cost one controlled-X each (the U-conjugations stay uncontrolled);
+c-e^{igV} uses the rank-1 structure of each pair block (eigenvalue +3 exactly on the pair's
+Phi+): Bell-conjugation + one doubly-controlled phase per block.
+
+**Certification (committed, `h10_c1_prereg_bars_v2_c5017.py`):** on the exact TFD the meter
+equals sum_S f(S)e^{igS} at 2.1e-15 — it provably reads the true winding distribution on the
+ideal state. On the flown state (real up to a global phase; genuine-complex residual 0.067)
+the registered numbers are the ESTIMATOR'S noiseless values — like-for-like at the state
+level. KA gate (flight script): circuit-vs-operator 1.7e-13, decode-vs-registered 1.5e-13,
+beta0 zero at 2e-16 — the as-built pubs compute the registered meter exactly.
+
+**Registered bars v2 (supersede SS3's table values; FORM of every gate unchanged):**
+
+| Gate | Frozen prediction (v2) | Bar (unchanged form) |
+|---|---|---|
+| G1 | alpha_4pt = **-0.2054** | alpha_hat < 0 at >=5 sigma AND within -0.2054 +/- max(3 sigma_alpha, 0.05) |
+| G2 | R_unwind = **1.0811** | > 1 at >=3 sigma |
+| G3 | R_wrong = **0.7882** | < 1 at >=5 sigma |
+| G4 | beta0 alpha = **0 exactly** | \|alpha_hat_beta0\| <= 3 sigma_alpha_beta0 |
+
+g* = -0.425 (frozen from the flown meter curve). lambda_hat = C_recon(0)/0.6677. Decode
+arithmetic unchanged in form (16-pt DFT; frozen 4-pt fit; ratios from reconstruction). MC
+at n=15k/part: lambda 0.35 -> alpha 7.5 sigma / unwind 3.7 / wrong 10.9 (all above bars at
+the pilot threshold, with margin — the Amendment-1 zero-margin condition is now met with
+room); lambda 0.2 -> 4.1/2.2/6.2 (rescale branch); 0.1 -> dies.
+
+**Budget v2 (simpler: 2 runs per g-point, no postselect doubling):** S0 pilot 30k; S1
+15 points x 30k = 450k; S2 beta0 16 x 20k = 320k; S3 unchanged in kind. Total ~950k shots.
+
+**Depth, stated against optimism:** the interferometric pub is ~1150 CX pre-routing plus
+ancilla weaving. At current Heron 2q error rates the projected lambda_hat lands 0.05-0.25 —
+below the 0.35 fly gate and possibly below the 0.15 NO-FLY floor. **A NO-FLY from the S0
+pilot is a legitimate registered outcome of this design** (the SS5 kill condition "depth
+drowns the phases," measured rather than feared); the pool is spent on a 30k-shot pilot,
+not on an unpowered meter.
+
+*Amendment 3 ends. Requires Ember's re-seal (protocol change, NOT venue-only) before ANY
+submission including S0.*
