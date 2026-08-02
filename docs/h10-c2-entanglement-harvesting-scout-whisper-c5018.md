@@ -138,3 +138,36 @@ Trotterized as-flown bars (the C1 like-for-like discipline) and the tomography b
 provably non-interacting halves become entangled by the vacuum they share, the product-state
 twin yields zero, and the exchange contribution is measured, not bounded. Remaining before
 prereg: L=6 depth-compliant re-sweep, Givens prep pricing, as-flown bars.*
+
+## §8. DEPTH LEG (C5018, same cycle) — L=6 honest negative; the r-door passes the wall
+
+**L=6 re-sweep** (`h10_c2_harvest_sim_c5018_L6.json`, 180 configs): **NO cut-evolution
+harvest exists** — N_cut = 0 in every configuration. The shrunk halves (3 sites each) plus
+edge proximity do not hold the cross-cut vacuum correlations the detectors tap. The naive
+depth-compliance route is dead, and recorded so no future cycle re-tries it.
+
+**The second door (don't-stop-at-the-first-wall): keep L=8, cut the Trotter step count,
+absorb the bias into as-flown bars** — the C1 §10 discipline. Circuit-faithful 2nd-order
+stepping (`h10_c2_asflown_r_c5018.py`; KA: r=64 reproduces the exact campaign N_cut at
+3.8e-6):
+
+| r | N_cut (as-flown) | N_full | logical 2q | routed ~1.6x |
+|---|---|---|---|---|
+| exact | 0.04835 | 0.04225 | — | — |
+| 12 | 0.04851 | 0.04238 | 520 | 832 |
+| 8 | 0.04865 | 0.04251 | 360 | 576 |
+| **6** | **0.04876** | **0.04268** | **280** | **~448 ✓ under ceiling** |
+
+The harvest observable is remarkably Trotter-robust: the r=6 bias is +0.9% on N_cut, the
+N_cut > N_full ordering (the exchange-damages-the-harvest specimen) is preserved, and the
+r-trend is smooth and monotone. **Route frozen: r=6 circuit-faithful o2 stepping; as-flown
+bars N_cut = 0.0488, N_full = 0.0427.**
+
+**C2 status: GO — PREREG-READY except one named construction item:** the Givens-network
+vacuum prep (the L=8 half-filled XX ground state is a Slater determinant — exactly
+preparable, no variational error; ~16 Givens rotations ≈ 40 logical 2q, INCLUDED in the
+table's totals). The prereg must construct the actual angles and KA the compiled prep
+against the exact vacuum, then freeze arm bars (A2 causal, A4 product, A5 cone at ε=π/4,
+A6 books) from the r=6 as-flown pipeline, with the tomography shot table. Depth verdict:
+the C1-calibrated ceiling is MET at the flyable point — the NO-FLY's budget, applied twice
+in one scout, priced one design out (L=6) and one design in (r=6).

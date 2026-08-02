@@ -25,7 +25,10 @@ import numpy as np
 import scipy.sparse as sp
 from scipy.sparse.linalg import expm_multiply, eigsh
 
-L = 8; J = 1.0
+# L=8 primary campaign (SS7); L=6 re-sweep is the depth-compliance leg (SS7c: L=8 prices
+# over the C1-calibrated 475-gate ceiling; L=6 projects under). argv override: sys.argv[1].
+L = int(sys.argv[1]) if len(sys.argv) > 1 else 8
+J = 1.0
 NQ = L + 2                      # field sites 0..L-1, detectors at axes L (d1), L+1 (d2)
 DIM = 2 ** NQ
 
@@ -134,7 +137,8 @@ def front_table(s1, ts):
 def run():
     psi0, E0, vac = vacuum()
     prod = np.zeros(DIM, complex); prod[0] = 1.0     # field |0..0> x detectors |00>
-    s1 = 2
+    s1 = 2 if L >= 8 else 1
+    DLIST = (3, 4, 5) if L >= 8 else (2, 3)
     out = {"L": L, "J": J, "s1": s1, "E0_field": E0,
            "convention": "detectors = last two qubits; |e>=|1>; ground |00>",
            "rows": [], "front": {}, "A4_shortlist": [], "convergence": {}}
@@ -143,12 +147,12 @@ def run():
     ft = front_table(s1, ts)
     out["front"] = {"ts": ts, "response": ft}
     Hc_cache = {}
-    for d in (3, 4, 5):
+    for d in DLIST:
         s2 = s1 + d
         Hc_cache[d] = couple_op(s1, s2)
     for Om in (0.5, 1.0, 1.5):
         H0 = build_static(Om)
-        for d in (3, 4, 5):
+        for d in DLIST:
             s2 = s1 + d
             eps = {round(t, 3): abs(ft[round(t, 3)][s2]) for t in ts}
             for T in (0.5, 1.0, 1.5, 2.0, 2.5):
@@ -171,7 +175,7 @@ def run():
                                             "eps_front": ef,
                                             "front_ratio": (ef / N if N > 1e-12 else None)})
     # convergence check on one mid config
-    cfg = dict(Om=1.0, d=4, T=1.5, lam=0.4, env="sine")
+    cfg = dict(Om=1.0, d=DLIST[1], T=1.5, lam=0.4, env="sine")
     for ns in (32, 64):
         psi = evolve(psi0, build_static(cfg["Om"]), Hc_cache[cfg["d"]], cfg["lam"],
                      cfg["T"], cfg["env"], nsteps=ns)
@@ -189,9 +193,10 @@ def run():
                                                           "N_cut", "exch_frac", "eps_front")},
                                     "N_product_control": negativity(rhoA4),
                                     "C_product_control": concurrence(rhoA4)})
+    suffix = "" if L == 8 else f"_L{L}"
     json.dump(out, open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                     "..", "results", "h10_c2_harvest_sim_c5018.json"), "w"),
-              indent=1, default=float)
+                                     "..", "results", f"h10_c2_harvest_sim_c5018{suffix}.json"),
+                        "w"), indent=1, default=float)
     print(f"vacuum E0 = {E0:.4f}; configs = {len(out['rows'])}; "
           f"convergence 32v64: {out['convergence']}")
     print("top CUT-evolution harvests (zero exchange by construction):")
