@@ -41,5 +41,25 @@
     "elder": "grader at landing + deterministic re-run co-check",
     "ember": "spec-seal \u2014 this ancestry commit; NO secret held",
     "creator": "GO / budget authority \u2014 outstanding at seal time"
+  },
+  "authorisation": {
+    "status": "EXPLICIT",
+    "creator_go": "general#3630, recorded in the flight manifest by the arc owner",
+    "note": "At seal time this entry said the GO was OUTSTANDING; it is now granted and recorded. The seal was deliberately placed BEFORE it \u2014 freeze first, then decide whether to fly."
+  },
+  "flight": {
+    "job": "d9nbodk60llc73c9tv10",
+    "backend_instance": "ALT2",
+    "pubs": 40,
+    "shots": "~456k",
+    "staging": "single stage",
+    "holds_at_submit": {
+      "KA_fence": "re-verified INLINE at machine precision",
+      "pool_re_read": "585s at submit (kill condition 4 satisfied; the figure is the arc owner's reading, not mine)",
+      "depth_hold": "transpiled 2q max 253 / median 201 against the 500 bar AND against Whisper's own 454-490 pre-estimate \u2014 the UnitaryGate compile route let the transpiler halve the routing model",
+      "calibration_hold": "passed"
+    },
+    "why_the_depth_number_matters": "The 500 bar was calibrated from the 475 ceiling that C1's NO-FLY MEASURED at a cost of 12 QPU-s. C2 came in at max 253 \u2014 roughly HALF the ceiling and half its own pre-flight estimate. C1's expensive negative did not merely inform C2's design, it set the constant that this flight cleared by 2x. Whisper also stated the pre-estimate (454-490) and let the transpiler's actual number override it, so the beat is measured rather than claimed.",
+    "pre_declared_outcome_shape": "Whisper stated BEFORE landing: at ~250 gates x 0.22% the state arrives attenuated but nowhere near C1's wash; if the harvest survives contact with hardware G1 reads it, and if the state washes G1 FAILS LOUDLY inside its accuracy band \u2014 and that is the registered outcome either way. Recorded here pre-data so the post-hoc reading cannot drift."
   }
 }
