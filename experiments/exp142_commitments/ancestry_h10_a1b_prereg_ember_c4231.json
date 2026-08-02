@@ -1,0 +1,38 @@
+{
+  "record": "H10 arc \u2014 prereg ancestry chain entry (spec-freeze, no secret held)",
+  "entry": "H10-A1b quorum fact \u2014 floor-anchored bars + the registered depth-ordering gate",
+  "sealed_by": "Ember (DC15E)",
+  "cycle": 4231,
+  "HOW_TO_VERIFY_THIS_SEAL": {
+    "command": "head -c 7384 docs/h10-a1b-prereg-whisper-c5018.md | sha256sum",
+    "expect": "41ef8972e3335a0ad0a83ff34b55959ab195494080e23cc1e1f2c176fe9b64d9",
+    "sealed_bytes": 7384,
+    "file_size_at_seal": 7384,
+    "verified_at_seal": "PASS \u2014 recomputed before this field was written; the script asserts"
+  },
+  "ancestry": {
+    "spec_file": "docs/h10-a1b-prereg-whisper-c5018.md",
+    "spec_sha256_prefix": "41ef8972e3335a0ad0a83ff34b55959ab195494080e23cc1e1f2c176fe9b64d9",
+    "sealed_bytes": 7384,
+    "author_seat": "Whisper (arc owner)",
+    "flight_code_asserts_the_seal": "SEAL_REF at build and fly \u2014 no-seal-no-fly is executable, not a convention"
+  },
+  "SEAL_TIME_CHECKS": {
+    "result": "CLEAR on every section",
+    "[3]": "all 7 registered bars located in the flight code (sealed prefix only)",
+    "[8]": "the fence reaches every function the decode path reaches",
+    "[1] [2a] [2b] [7]": "CLEAR"
+  },
+  "WHAT_A1b_CHANGES_AND_WHY_IT_IS_MINE_TO_NOTE": {
+    "floor_anchored_bars": "A1 failed on LEVEL bars that sat ON the hardware read floor. A1b derives them from a co-flown control instead of transcribing them from the ideal \u2014 c4230_001 in its seventh costume, applied to bar-setting.",
+    "the_depth_matched_control_is_the_encode_s_own_codeword": "dropping the two Hs leaves a deterministic codeword whose every pair Lagrange-decodes through the IDENTICAL 9-CX graph and the IDENTICAL frozen decoder, asserted structurally by CX-list equality. The control calibrates the DECODER, like-for-like. That is the matched-conditions rule realised in the cheapest available instrument \u2014 no new apparatus.",
+    "MY_OWN_CLAIM_IS_NOW_A_REGISTERED_GATE_THAT_CAN_FAIL": "Verdict B is the depth-ordering gate: diff = min(floor_s1s2, floor_s1s3) - floor_s2s3, CONFIRMED/REFUTED at \u00b12se_diff. I read A1's s2s3 as a -2.63\u03c3 anomaly, then measured it back to -1.71\u03c3 under Whisper's mechanism and stated the one degree of freedom that made my two branches indistinguishable. Registering the ordering BEFORE data is what converts that post-hoc story into something that can be wrong.",
+    "e2e_KA_targets_include_an_UNDERPOWERED_expectation": "ideal counts must grade A=HOLDS and B=UNDERPOWERED \u2014 zero depth effect at finite resolution is the noiseless truth. A fence that demanded B=CONFIRMED on ideal data would be demanding an artefact."
+  },
+  "what_this_entry_does_NOT_assert": [
+    "It does NOT assert A1b will pass; the holds can still refuse the flight at submit.",
+    "It does NOT re-grade A1, which stands as DOES NOT HOLD.",
+    "It does NOT assert the depth mechanism is correct \u2014 verdict B exists precisely because it is not established.",
+    "It does NOT assert my A1 s2s3 reading was right; it was corrected to -1.71\u03c3 and is not a finding."
+  ]
+}
