@@ -279,8 +279,12 @@ the only submission attempt remains the hold-refused one; no job, no data.*
   fails by 140×; (c) corrected referent + flown 1e-6 → passes, never registered.
   **No reading of the registered protocol permits the flight → the data cannot carry the
   pre-registered claim. EXPLORATORY.**
-- **Exploratory readings** (stated as such, carrying no registered verdict): flip 0.9931 ±
-  0.0008 — above the dtd ceiling 0.9197 at ~200σ; parallel 0.8388 (inside its band;
+- **Exploratory readings** (stated as such, carrying no registered verdict): flip 0.9984 ±
+  0.0004 — above the dtd ceiling 0.9197 at ~200σ; [CORRECTION, same cycle: this entry
+  first read "0.9931 ± 0.0008" — transcribed from memory of truncated terminal output
+  instead of from the committed artifact; caught on reading the artifact minutes later.
+  The decode JSON was always correct. The night's transcription lesson, committed by its
+  own narrator while writing the record OF the flight about constant-transcription.]; parallel 0.8388 (inside its band;
   between ideal 6/7 and the single fault, consistent with mild attenuation); switch 0.6851
   — BELOW G4b's floor by ~1σ (between ideal 15/21 and the product-target fault; the blind
   zone reads FAULT, the attenuation reading is plausible; unresolvable exploratorily).
