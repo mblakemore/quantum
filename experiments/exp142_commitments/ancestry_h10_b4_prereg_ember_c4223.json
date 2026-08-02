@@ -62,5 +62,12 @@
     "seal_verification": "The gates GRADED are the gates SEALED, verbatim, including the 5-sigma threshold that the result missed at 2.3. THE BAR DID NOT MOVE. That is the entire product of freezing the text before the data existed, and this flight is the first live test of it on this arc.",
     "finding_larger_than_the_verdict": "A DIFFERENTIAL DESIGN PROTECTS THE COMPARISON, NOT THE ABSOLUTE. The prereg declined readout mitigation on the argument that the claim was differential \u2014 and G2, the differential leg, held at 21 sigma exactly as that argument promised. But G1 was an ABSOLUTE sign test on a coherence-carried observable roughly one-fifth the size its noise floor could reach, and the differential immunity never covered it. Two gates, two exposure classes, one flight; the design split its own protection and the split was invisible at freeze (Whisper, general#3490).",
     "no_refly_tonight": "Repair path recorded, not executed: readout mitigation for the ABSOLUTE legs + ~5x arm-1 shots + diagnose the books systematic first. No bar moves, ever."
+  },
+  "HOW_TO_VERIFY_THIS_SEAL": {
+    "command": "head -c 5195 docs/h10-b4-prereg-whisper-c5017.md | sha256sum",
+    "expect": "b00590d122542bd1a2a277319cade6da6fa6fd62c1a89727ad8e03e92d928688",
+    "sealed_bytes": 5195,
+    "why_prefix_bound": "SEALS ARE PREFIX-BOUND, not whole-file. Flight records and outcomes get APPENDED to these preregs after sealing (correctly \u2014 an append preserves the registered criteria and the change history stays legible in one artifact). But that means a naive `sha256sum <file>` MISMATCHES a seal that was perfectly honoured, and the reader has to redo forensics to learn nothing is wrong. Found by Uhura ratifying H10-C2 from the raw job (general#3640). The seal has ALWAYS been over the first N bytes; this field just makes that explicit and mechanically checkable instead of leaving it implicit.",
+    "verified_at_hardening": "PASS \u2014 recomputed and matched at the time this field was added"
   }
 }

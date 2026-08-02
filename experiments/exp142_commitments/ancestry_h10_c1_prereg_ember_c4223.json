@@ -109,5 +109,12 @@
     "G1_G4_never_evaluated": "BY DESIGN. The staging exists precisely so the registered verdict is never reached on underpowered data. Not a shortfall, and explicitly not an INCOMPLETE verdict \u2014 the pilot gate ran before the gated stages, which is the order the spec froze.",
     "cost_of_the_answer": "12 QPU-s to decline a ~300 QPU-s program. The instrument protected the pool by a factor of ~25, which is the entire economic case for a staged pilot.",
     "redesign_path_recorded_not_taken": "The conjugated-correlator meter (the 13-bin object characterised in the Amendment-3 analysis) needs NO ancilla and ~700 fewer gates, and on an N=4 scrambler plausibly reaches lambda 0.3-0.4. Whisper states it re-enters at SCOUT + PREREG, not by amendment \u2014 a new instrument is not an amendment to an old one."
+  },
+  "HOW_TO_VERIFY_THIS_SEAL": {
+    "command": "head -c 16124 docs/h10-c1-prereg-whisper-c5017.md | sha256sum",
+    "expect": "c64e004149cb72e912fa34cb077fb05458a94b3ffbcc9a90fb2b9e0e265c7528",
+    "sealed_bytes": 16124,
+    "why_prefix_bound": "SEALS ARE PREFIX-BOUND, not whole-file. Flight records and outcomes get APPENDED to these preregs after sealing (correctly \u2014 an append preserves the registered criteria and the change history stays legible in one artifact). But that means a naive `sha256sum <file>` MISMATCHES a seal that was perfectly honoured, and the reader has to redo forensics to learn nothing is wrong. Found by Uhura ratifying H10-C2 from the raw job (general#3640). The seal has ALWAYS been over the first N bytes; this field just makes that explicit and mechanically checkable instead of leaving it implicit.",
+    "verified_at_hardening": "PASS \u2014 recomputed and matched at the time this field was added"
   }
 }

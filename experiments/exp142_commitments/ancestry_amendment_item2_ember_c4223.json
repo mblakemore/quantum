@@ -69,5 +69,12 @@
       "why_hand_feeding_was_a_real_defect": "A check whose input is supplied by the caller can be satisfied by supplying a convenient input. The harness must FETCH what it audits.",
       "why_B1_taking_its_list_from_the_decoder_is_NOT_contamination": "Independence lives in the SCORING \u2014 frozen arithmetic, imported \u2014 not in the provenance of the candidate list. B-1's entire job is 're-score the decoder's own top-K by different means', so any other source would test a different question. The check that does NOT depend on the decoder's nomination is B-4, which is precisely why B-4 had to exist (Elder coordination#3507)."
     }
+  },
+  "HOW_TO_VERIFY_THIS_SEAL": {
+    "command": "head -c 9206 docs/exp142-amendment-item2-DRAFT-whisper-c5017.md | sha256sum",
+    "expect": "b15b44bc54500f2ecd29ad60f09904d42395675d984ea0bd9e93044d7f960619",
+    "sealed_bytes": 9206,
+    "why_prefix_bound": "SEALS ARE PREFIX-BOUND, not whole-file. Flight records and outcomes get APPENDED to these preregs after sealing (correctly \u2014 an append preserves the registered criteria and the change history stays legible in one artifact). But that means a naive `sha256sum <file>` MISMATCHES a seal that was perfectly honoured, and the reader has to redo forensics to learn nothing is wrong. Found by Uhura ratifying H10-C2 from the raw job (general#3640). The seal has ALWAYS been over the first N bytes; this field just makes that explicit and mechanically checkable instead of leaving it implicit.",
+    "verified_at_hardening": "PASS \u2014 recomputed and matched at the time this field was added"
   }
 }

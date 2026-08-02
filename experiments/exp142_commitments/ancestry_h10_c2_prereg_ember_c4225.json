@@ -81,5 +81,12 @@
     "process_deviation_named_by_the_proposer": "This submission used device-median calibration and transpiler-chosen qubits rather than C1's per-chain greedy selection. Whisper states a best chain would not qualitatively change the wash at these depths, and put the deviation in the record anyway rather than leaving it for a reader to find.",
     "what_survives": "The $0 design results stand: the cut-decomposition construction, the exact-theory window, the exchange-damages-harvest specimen, the Trotter-robustness. Hardware one generation better carries this flight AS DESIGNED.",
     "repair_discipline": "Repair paths recorded ONLY-IF-PRICED; a new instrument re-enters at scout, per the laundry rule \u2014 an amendment chain must not become a way to relaunch a different experiment under an old seal."
+  },
+  "HOW_TO_VERIFY_THIS_SEAL": {
+    "command": "head -c 6343 docs/h10-c2-prereg-whisper-c5018.md | sha256sum",
+    "expect": "0b0d25be051b70410cc1c7496fdb4d74647a84eef0a52a90b630718e4c256055",
+    "sealed_bytes": 6343,
+    "why_prefix_bound": "SEALS ARE PREFIX-BOUND, not whole-file. Flight records and outcomes get APPENDED to these preregs after sealing (correctly \u2014 an append preserves the registered criteria and the change history stays legible in one artifact). But that means a naive `sha256sum <file>` MISMATCHES a seal that was perfectly honoured, and the reader has to redo forensics to learn nothing is wrong. Found by Uhura ratifying H10-C2 from the raw job (general#3640). The seal has ALWAYS been over the first N bytes; this field just makes that explicit and mechanically checkable instead of leaving it implicit.",
+    "verified_at_hardening": "PASS \u2014 recomputed and matched at the time this field was added"
   }
 }
