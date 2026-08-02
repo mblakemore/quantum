@@ -12,7 +12,7 @@ class label; the flip's controlled gate collapsing to +/-I is the game's own the
   P  4q:  Bell(0,1), Bell(2,3); U on 0, V on 2; FIXED 4q Helstrom rotation (eigenbasis of
           p+rho+ - p-rho-); measure all; outcome in S+ -> guess M+. Ideal 0.857143.
   S  3q:  Bell(t=0, anc=1), control=2 in |+>; UV on t; c-[(UV)^dag VU] (controlled 1q);
-          FIXED 3q Helstrom rotation; measure all. Ideal 15/21 = 0.714286.
+          FIXED 3q Helstrom rotation; measure all. Ideal 15/21 exactly.
 KA fence: exact walker over AS-BUILT pubs reproduces per-pair F wins = 1 and aggregate
 P/S values at 1e-9 before any submission.
 
