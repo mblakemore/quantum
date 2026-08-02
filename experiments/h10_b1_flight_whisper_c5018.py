@@ -310,6 +310,14 @@ def decode(job_id):
                  "sig": (pP - pS) / float(np.hypot(seP, seS))}
     out["G4a"] = {"pass": bool(0.78 <= pP <= 0.89), "value": pP}
     out["G4b"] = {"pass": bool(0.69 <= pS <= 0.75), "value": pS}
+    # A6.1: the A5.2 fault-zone edge is the EVALUATED formula, printed before any zone read.
+    zone_edge = 0.6659 + 3 * seS
+    out["A5_2_zone"] = {"evaluated_fault_edge": float(zone_edge),
+                        "reading": pS,
+                        "zone": ("FAULT" if pS <= zone_edge else
+                                 "ATTENUATION-CONSISTENT" if pS < 0.69 else
+                                 "PASS-BAND" if pS <= 0.75 else "WRONG-STRATEGY"),
+                        "sigma_from_edge": float((pS - zone_edge) / seS)}
     allpass = all(out[g]["pass"] for g in ("G1", "G2", "G3", "G4a", "G4b"))
     out["VERDICT"] = "HOLDS" if allpass else "DOES NOT HOLD"
     # Elder #3731: flights are append-only events; the decode path binds to its job so a
