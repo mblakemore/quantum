@@ -54,7 +54,7 @@ sys.path.insert(0, os.path.join(REPO, "experiments"))
 
 from exp_steth_lambda_anc_preseal_gate_ember_c4224 import (   # noqa: E402
     FLOOR_U, MARGIN, PUBLIC_HAAR_SEED, p_odd_targets,
-    choi_two_copy_circuit, lambda_anc_from_counts,
+    choi_two_copy_circuit, lambda_anc_circuit, lambda_anc_from_counts,
 )
 from exp_steth_3b_twocopy_ember import two_copy_estimator      # noqa: E402
 
@@ -223,7 +223,133 @@ def regrade_v1():
     return g
 
 
+def build_v2_circuits(k):
+    """Same arms as v1 (primitives imported), but each pub carries ITS OWN shot count.
+
+    THE ROOT CAUSE OF v1's INVERTED ALLOCATION, found while writing this: v1's submit
+    PRINTED
+
+        U 1 pub x {shots} sh | D {n} pubs x {per} sh | lambda_anc 1 x {shots}
+
+    and then ran `SamplerV2(...).run(tqc, shots=per)` -- a SINGLE shots argument applied
+    to every pub. So U and lambda_anc got `per` (=64), not `shots` (=4096). The intended
+    allocation was right; the implementation flattened it, and the console line described
+    the intention rather than the call. I read the console line. The manifest recorded the
+    truth (shots_per_pub 64) and the two never got compared.
+
+    v2 passes (circuit, params, shots) tuples so the allocation is expressed once, in the
+    same object that is submitted, and asserts the realized total before returning.
+    """
+    rng = np.random.default_rng(PUBLIC_HAAR_SEED + 1)
+    circs, shots, index = [], [], {}
+    index["U"] = [len(circs)]
+    circs.append(choi_two_copy_circuit(k, "haar", rng, dd=True)); shots.append(SHOTS_U)
+    d_idx = []
+    for _ in range(N_DRAWS_D):
+        d_idx.append(len(circs))
+        circs.append(choi_two_copy_circuit(k, "depol", rng, dd=True))
+        shots.append(SHOTS_PER_DRAW)
+    index["D"] = d_idx
+    index["lambda_anc"] = [len(circs)]
+    circs.append(lambda_anc_circuit(k)); shots.append(SHOTS_LAM)
+    want = SHOTS_U + SHOTS_LAM + N_DRAWS_D * SHOTS_PER_DRAW
+    assert sum(shots) == want, f"allocation mismatch {sum(shots)} != {want}"
+    assert shots[index["U"][0]] == SHOTS_U, "U pub did not receive its shots"
+    return circs, shots, index
+
+
+def submit_v2(k=2, backend_name="ibm_fez"):
+    """SPENDS QPU. Instance NAMED explicitly — never defaulted (the c4217_018 incident)."""
+    from qiskit import transpile
+    sys.path.insert(0, os.path.join(REPO, "scripts"))
+    from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2
+    import check_job_status as C2
+
+    se_u = power_forecast()
+    if (FLOOR_U - (1 - 2 * 0.22)) / se_u < Z_REQ:
+        return print("REFUSING TO FLY: forecast underpowered at z=%.0f" % Z_REQ) or 2
+
+    tok = C2._load_env_token(C2.ALT2_ENV_KEY)
+    if not tok:
+        raise RuntimeError("no ALT2 token — refusing to fall back to a default instance")
+    svc = QiskitRuntimeService(channel="ibm_cloud", token=tok, instance=C2.ALT2_CRN)
+    backend = svc.backend(backend_name)
+    print(f"  instance: ALT2 (named explicitly, not defaulted)")
+    try:
+        pool = str(svc.usage())[:200]
+    except Exception as exc:
+        pool = f"UNREADABLE ({type(exc).__name__})"
+    print(f"  pool at submit: {pool}")
+
+    circs, shots, index = build_v2_circuits(k)
+    tqc = transpile(circs, backend=backend, optimization_level=1, seed_transpiler=4227)
+    print(f"  {len(tqc)} circuits, max depth {max(c.depth() for c in tqc)}")
+    print(f"  U 1 x {SHOTS_U} | D {N_DRAWS_D} x {SHOTS_PER_DRAW} | lambda_anc 1 x {SHOTS_LAM}"
+          f"   (per-pub, asserted — not one shots= applied to all)")
+
+    job = SamplerV2(mode=backend).run([(t, None, s) for t, s in zip(tqc, shots)])
+    man = {"exp": "steth_lambda_anc_preseal_gate_v2", "builder": "Ember C4227",
+           "backend": backend_name, "job_id": job.job_id(), "k": k,
+           "shots_per_pub": {"U": SHOTS_U, "D": SHOTS_PER_DRAW, "lambda_anc": SHOTS_LAM},
+           "n_draws_D": N_DRAWS_D, "index": index, "floor_u": FLOOR_U,
+           "z_required": Z_REQ, "separation_is_REPORTED_not_gated": True,
+           "pool_at_submit": pool, "supersedes": "v1 job d9n93o4sfqic73aqp26g (UNDERPOWERED)",
+           "deviation_declared": "D arm is N_DRAWS_D pubs with independent draw pairs, "
+                                 "not per-shot rebuild (inherited from v1, unchanged)"}
+    mpath = MANIFEST.replace(".json", f"_{job.job_id()}.json")
+    json.dump(man, open(mpath, "w"), indent=1)
+    json.dump(man, open(MANIFEST, "w"), indent=1)   # legacy alias, job-named is canonical
+    print(f"  SUBMITTED {job.job_id()} -> {os.path.relpath(mpath, REPO)}")
+    return 0
+
+
+def decode_v2(job_id=None):
+    """Read back and grade through the SAME grade() the rehearsal uses."""
+    sys.path.insert(0, os.path.join(REPO, "scripts"))
+    from qiskit_ibm_runtime import QiskitRuntimeService
+    import check_job_status as C2
+    man = json.load(open(MANIFEST if not job_id else
+                         MANIFEST.replace(".json", f"_{job_id}.json")))
+    svc = QiskitRuntimeService(channel="ibm_cloud",
+                               token=C2._load_env_token(C2.ALT2_ENV_KEY),
+                               instance=C2.ALT2_CRN)
+    res = svc.job(man["job_id"]).result()
+    k, idx = man["k"], man["index"]
+
+    def counts_of(i):
+        d = res[i].data
+        return getattr(d, list(d.__dict__.keys())[0]).get_counts()
+
+    pu, se_pu, _, nu = p_odd_with_se(counts_of(idx["U"][0]), k)
+    u, se_u = 1 - 2 * pu, 2 * se_pu
+    draws = [p_odd_with_se(counts_of(i), k)[0] for i in idx["D"]]
+    pd = float(np.mean(draws))
+    se_pd = float(np.std(draws, ddof=1) / np.sqrt(len(draws)))
+    lam, raw = lambda_anc_from_counts(counts_of(idx["lambda_anc"][0]), k, man["shots_per_pub"]["lambda_anc"])
+    se_lam = float(np.sqrt(max(lam * (1 - lam), 1e-9) / man["shots_per_pub"]["lambda_anc"]))
+
+    g = grade(u, se_u, lam, se_lam, pd - pu, float(np.hypot(se_pd, se_pu)))
+    print(f"\nDECODE {man['job_id']} on {man['backend']} (ALT2), k={k}")
+    print(f"  u = {u:.4f} +/- {se_u:.4f}  (N={nu})   z vs floor {g['z_u_vs_floor']:+.2f}"
+          f"  -> {g['u_state']}")
+    print(f"  lambda_anc = {lam:.4f} +/- {se_lam:.4f}   (raw all-zero {raw:.4f})")
+    print(f"  separation = {pd-pu:.4f} +/- {np.hypot(se_pd, se_pu):.4f}   REPORTED, gates nothing")
+    print(f"  draw scatter sd = {np.std(draws, ddof=1):.4f} over {len(draws)} draws (MEASURED)")
+    print(f"  VERDICT {g['VERDICT']}   {g['attribution']}")
+    out = {**man, "decoded": {**g, "p_odd_U": pu, "p_odd_D": pd,
+                              "draw_sd": float(np.std(draws, ddof=1)), "n_draws": len(draws),
+                              "lambda_anc_raw_allzero": raw}}
+    p = OUT.replace(".json", f"_{man['job_id']}.json")
+    json.dump(out, open(p, "w"), indent=2)
+    print(f"  -> {os.path.relpath(p, REPO)}")
+    return 0
+
+
 if __name__ == "__main__":
+    if "--submit" in sys.argv:
+        sys.exit(submit_v2())
+    if "--decode" in sys.argv:
+        sys.exit(decode_v2())
     power_forecast()
     if "--regrade" in sys.argv:
         g = regrade_v1()
