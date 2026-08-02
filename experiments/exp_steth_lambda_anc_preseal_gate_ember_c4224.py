@@ -311,16 +311,63 @@ def submit_validate(k, backend_name, shots, out):
     return 0
 
 
+def decode_validate():
+    """Read the flown job back and grade. Reports BETWEEN-PUB SCATTER of the D arm per
+    Whisper's ask (general#3583): with the granularity deviation, the 64 pub-level p_odd
+    values MEASURE the draw-noise directly instead of inheriting an estimate of it."""
+    man = json.load(open(MANIFEST))
+    k, per, idx = man["k"], man["shots_per_pub"], man["index"]
+    sys.path.insert(0, os.path.join(REPO, "scripts"))
+    import check_job_status as C2
+    from qiskit_ibm_runtime import QiskitRuntimeService
+    svc = QiskitRuntimeService(channel="ibm_cloud",
+                               token=C2._load_env_token(C2.ALT2_ENV_KEY),
+                               instance=C2.ALT2_CRN)
+    res = svc.job(man["job_id"]).result()
+
+    def counts_of(i):
+        d = res[i].data
+        return getattr(d, list(d.__dict__.keys())[0]).get_counts()
+
+    pu, _ = _p_odd_from_counts(counts_of(idx["U"][0]), k, per)
+    u = 1.0 - 2.0 * pu
+
+    pub_p = [_p_odd_from_counts(counts_of(i), k, per)[0] for i in idx["D"]]
+    pd = float(np.mean(pub_p))
+    scatter = float(np.std(pub_p, ddof=1))
+    se_mean = scatter / (len(pub_p) ** 0.5)
+
+    lam, raw = lambda_anc_from_counts(counts_of(idx["lambda_anc"][0]), k, per)
+    v = verdict(u, pd - pu, lam)
+
+    print(f"DECODE {man['job_id']} on {man['backend']} (ALT2), k={k}")
+    print(f"  p_odd(U) = {pu:.5f}   ->  u = {u:.4f}      floor {FLOOR_U}")
+    print(f"  p_odd(D) = {pd:.5f}   separation = {pd-pu:.4f}   margin {MARGIN}")
+    print(f"  BETWEEN-PUB SCATTER (64 draws): sd={scatter:.4f}  SE(mean)={se_mean:.4f}")
+    print(f"    -> draw-noise MEASURED, not assumed (Whisper est. 0.012)")
+    print(f"  lambda_anc = {lam:.4f} (raw all-zero {raw:.4f})")
+    print(f"  VERDICT: {'PASS' if v['PASS'] else 'FAIL'}   ({v['attribution']})")
+    out = {**man, "decoded": {**v, "p_odd_U": pu, "p_odd_D": pd,
+                              "between_pub_sd": scatter, "between_pub_se_mean": se_mean,
+                              "lambda_anc_raw_allzero": raw, "n_pubs": len(pub_p)}}
+    json.dump(out, open(OUT, "w"), indent=2)
+    print(f"-> {OUT}")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sim-only", action="store_true", help="$0 noiseless self-check")
     ap.add_argument("--predict", action="store_true", help="$0 noise-model forecast")
     ap.add_argument("--validate", action="store_true", help="on-device (spends QPU)")
+    ap.add_argument("--decode", action="store_true", help="grade a flown job")
     ap.add_argument("--backend", default="ibm_fez")
     ap.add_argument("--k", type=int, default=2, choices=(2, 3))
     ap.add_argument("--shots", type=int, default=SHOTS)
     args = ap.parse_args()
 
+    if args.decode:
+        return decode_validate()
     if not (args.sim_only or args.predict or args.validate):
         print("choose one of --sim-only / --predict / --validate")
         return 2
