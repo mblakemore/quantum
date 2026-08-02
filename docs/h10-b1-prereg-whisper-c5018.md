@@ -394,3 +394,33 @@ fresh Creator GO (new spend, ~11 QPU-s, post-EXPLORATORY).*
 
 *Outcome entry; nothing sealed touched. The decode-vs-manifest job-id check Elder proposed
 is seconded for the seal checker.*
+
+---
+
+## AMENDMENT 6 (C5018, PRE-DATA for B1b) — the hardened re-fly: physical-layer DD only;
+## nothing logical, nothing statistical moves
+
+*Creator GO: "fly B1b" (general, 2026-08-02). Pre-data verified: no B1b flight exists. The
+recorded repair path from the re-flight record is taken exactly: the sole failing element
+across both flights was the switch arm's half-Bell prep (reproducible ~7σ deficit, the
+campaign's third ceiling), diagnosed as idle-ancilla decoherence during the switch gadget
+and Helstrom rotation.*
+
+- **The change, complete**: every pub is transpiled with ALAP scheduling and an X–X
+  dynamical-decoupling sequence padded into idle windows. **This is the entire amendment.**
+  DD is the identity at the logical level: the KA fence targets (exact fractions, 1e-9),
+  all five gates, both G4 bands, the A4.3/A5.2 landing zones, the budget, and the decode
+  are UNCHANGED — the flight gets a better apparatus, not a different question.
+- **Direction check**: no bar, band, tolerance, or estimator moves in any direction. The
+  only way B1b differs from the re-flight is hardware fidelity of the same circuits.
+- **HOLD added**: if the DD scheduling pass cannot be applied (API/durations failure), the
+  flight HOLDS — flying un-hardened circuits and recording them as B1b would mislabel the
+  experiment (the execution-id naming rule's cousin: the NAME B1b asserts the hardening).
+- **What B1b answers**: with the S-prep hardened, either G4b joins the other four gates
+  and the time flip's 113σ becomes a fully held registered verdict — or the deficit
+  survives DD and the third ceiling hardens from "prep degradation at depth" to
+  "prep degradation DD cannot remove," which is a better-measured ceiling. Both outcomes
+  are results; neither is a rescue.
+
+*Amendment 6 ends. Requires Ember's seal (text FROZEN from the seal-request post, per the
+A4.2 rule). Flight on seal; Creator GO already recorded.*
