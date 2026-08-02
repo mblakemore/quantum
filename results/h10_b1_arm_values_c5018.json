@@ -23,9 +23,10 @@
   },
   "switch_elder_c6578": {
    "correct": 0.7142857142857143,
-   "product_target": 0.6666666666666666,
+   "product_target": 0.665897,
    "control_only_readout": 0.5238095238095238,
-   "source": "scripts/h10_b1_switch_class_ladder_elder_c6578.py"
+   "source": "scripts/h10_b1_switch_class_ladder_elder_c6578.py",
+   "correction_note": "2026-08-02: product_target was stored as 14/21=0.666667 from a mislabeled gloss in coordination#3652; the SDP's true value is 0.665897 (Elder #3804). The 14/21 label was never correct."
   },
   "note": "Amendment-1 evidence: single-fault values that the G4 bands must EXCLUDE"
  }

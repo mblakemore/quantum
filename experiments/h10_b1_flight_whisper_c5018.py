@@ -311,7 +311,7 @@ def decode(job_id):
     out["G4a"] = {"pass": bool(0.78 <= pP <= 0.89), "value": pP}
     out["G4b"] = {"pass": bool(0.69 <= pS <= 0.75), "value": pS}
     # A6.1: the A5.2 fault-zone edge is the EVALUATED formula, printed before any zone read.
-    zone_edge = 0.6659 + 3 * seS
+    zone_edge = 0.665897 + 3 * seS   # A6.1: un-rounded SDP fault base (Elder #3804)
     out["A5_2_zone"] = {"evaluated_fault_edge": float(zone_edge),
                         "reading": pS,
                         "zone": ("FAULT" if pS <= zone_edge else

@@ -426,14 +426,16 @@ and Helstrom rotation.*
 sealed A5.2 text wrote the S-arm fault-zone edge twice at two precisions — the formula
 "0.6659 + 3σ" (unevaluated) and the parenthetical "≈0.679" (rounded) — with the evaluated
 value appearing nowhere: the fence-constant defect class, living in spec prose where the
-flight-code detectors are structurally blind. REGISTERED RESOLUTION: **the zone edge is
-the EVALUATED FORMULA, 0.6659 + 3·se(p̂_S), with se taken from the decode artifact of the
-flight being read; the B1b decode must PRINT the evaluated edge alongside the reading
-before any zone is read. The parenthetical "≈0.679" is VOID as a referent.** For the
-re-flight record already graded: edge evaluates to 0.679565, the reading 0.679238 sits
-0.07σ below it — the non-discriminating status stands exactly as corrected there (both
-candidate edges gave verdicts within 0.1σ; the ambiguity was harmless once, and this
-clause exists so it never gets a second chance to matter).
+flight-code detectors are structurally blind. REGISTERED RESOLUTION (base
+un-rounded per Elder #3804 — the edge had TWO rounded inputs, and the "14/21" gloss on the
+fault value was itself a mislabel, corrected in the ladder artifact): **the zone edge is
+0.665897 + 3·se(p̂_S)** — base = the SDP's exact product-target fault value, se from the
+decode artifact of the flight being read — **and the decode PRINTS the single evaluated
+number before any zone is read. The parentheticals "≈0.679", the rounded base "0.6659",
+and the "14/21" gloss are all VOID as referents.** For the graded re-flight: the edge
+evaluates to **0.679563** (Elder's full-precision number), the reading 0.679238 sits 0.07σ
+below — the non-discriminating status stands exactly as corrected. One representation per
+flight, evaluated, printed; nothing survives at two precisions.
 
 *Amendment 6 ends. Requires Ember's seal (text FROZEN from the seal-request post, per the
 A4.2 rule; this A6.1 addition was made UNDER the sealer's open hold at her direction —
