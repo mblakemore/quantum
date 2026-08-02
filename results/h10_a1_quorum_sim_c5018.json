@@ -1,0 +1,53 @@
+{
+ "construction": "coherent (2,3) Shamir over GF(4); shares 2 qubits each; D + 6 qubits",
+ "encoding_class": "all-Clifford (GF(4) linear algebra); depth estimate ~15-30 CX",
+ "W1_dial_threshold": {
+  "1": {
+   "min": 0.0,
+   "max": 0.0
+  },
+  "2": {
+   "min": 1.0,
+   "max": 1.0
+  },
+  "3": {
+   "min": 1.0000000000000002,
+   "max": 1.0000000000000002
+  }
+ },
+ "W1_dial_control": {
+  "1": {
+   "min": 1.0,
+   "max": 1.0
+  },
+  "2": {
+   "min": 1.0,
+   "max": 1.0
+  },
+  "3": {
+   "min": 1.0,
+   "max": 1.0
+  }
+ },
+ "W2_revival_ideal": 1.0,
+ "W2_initial_D_contrast": 0.0,
+ "W3_subquorum": {
+  "D_contrast_after_share3_twirl": 0.0,
+  "pair12_readability_after": 1.0
+ },
+ "W4_quorum_erase_readability": {
+  "single1": 2.134089551088852e-16,
+  "pair12": 0.8679425305924858,
+  "all3": 1.0000000000000036
+ },
+ "W4_FINDING": "the unitary-scramble vote-out FAILS BY PHYSICS: all-3 readability stays 1.0 exactly (information is invariant under known unitaries; a scramble is invertible by whoever holds its description). The vote-out has exactly TWO legal forms -- unanimous UNCOMPUTE (refund, W2) and MEASURED erasure (story-selection, W5) -- plus the DISCARD form below. Custody cannot be scrambled away.",
+ "W4b_discard_erase": {
+  "share1_readability_after_discarding_2_3": 0.0,
+  "note": "exile the shares and the system forgets; the fact's custody TRANSFERS to the exiled fragments"
+ },
+ "W5_story": {
+  "unsorted_X": 0.0,
+  "mean_abs_sorted_X": 0.9999999999999989,
+  "n_outcomes": 16
+ }
+}
