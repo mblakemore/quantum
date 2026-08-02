@@ -78,3 +78,52 @@ Elder: grader at landing. Creator: GO (~30k shots, 2–4 QPU-s, ALT2).
 
 *Frozen text ends. Changes after seal by numbered amendment; outcome entries append under
 the prefix convention; text freezes at the seal-request post.*
+
+---
+
+## FLIGHT RECORD — A1 (C5018, registered): **DOES NOT HOLD** (G1 one pair-bar, G4 pair-read
+## bars) — while every registered SHAPE lands at high σ and the control arm PREDICTS the
+## failing level
+
+- **Job**: d9nrh1ssfqic73arcr10, ibm_fez (median 2q 0.28%), 36 pubs / 26,000 shots
+  co-batched, DD 43→613 X pulses, ALT2 (420 s at submit), GO general#3843. Decode:
+  `results/h10_a1_decode_d9nrh1ssfqic73arcr10.json` (job-named; every post-counts line
+  pre-executed against known answers).
+- **Gate outcomes** (three-state, as registered): **G1 FAIL** — singles +0.032/−0.008/+0.040
+  (two PASS, s3 UNDERPOWERED at 2se); pairs 0.880 / 0.858 / **0.794** (two UNDERPOWERED,
+  s2s3 FAIL at 2.9σ below the 0.85 bar). **G2 PASS** — control singles 0.942/0.912/0.926.
+  **G3 PASS — revival contrast 0.994 ± 0.002** (the cleanest arm ever flown in this
+  campaign: an 18-CX encode–uncompute round trip returning 99.4% of D's coherence).
+  **G4 FAIL** — scramble D-contrast 0.000/−0.030/−0.040 (two PASS, one UNDERPOWERED:
+  sub-quorum cannot revive ✓) but pair-(1,2)-after-scramble 0.776/0.790/0.792, all FAIL
+  vs 0.85. **G5 PASS** — sorted story 0.887 ± 0.007 with the no-signalling receipt FLAT
+  (unsorted +0.007 ± 0.016, 0.44σ). **Registered verdict = DOES NOT HOLD.**
+- **What the numbers actually show, stated without rescue**: the registered conjunction
+  fails on LEVEL bars; every registered SHAPE is present at overwhelming significance —
+  the quorum STEP (singles ~0.02 → pairs ~0.84) is ~26σ; custody's two directions read
+  ~24σ apart (pair 0.79 vs single 0.03 post-scramble, D-contrast pinned at 0); refund
+  (0.994), conversion (0.887, flat receipt), and the blindness cap all land. The three
+  exits of the campaign's law each have their hardware demonstration inside a failed
+  conjunction.
+- **The control arm did its job and it PREDICTS the failure**: plain-copy reads floor at
+  ≈0.93 (all seven control dials 0.912–0.944) — the chip's 2-bit correlated-read
+  fidelity. The Lagrange pair read needs FOUR bits jointly correct: 0.93^2 ≈ 0.86 ≈
+  exactly where the unscrambled pairs landed (0.858–0.880); the record-state version
+  (D-correlated, +3 CX scramble in-line) pays more (0.78–0.79). **The 0.85 bar sat ON
+  the hardware's read floor, not under it** — B1-G4b's class (bar = ideal-minus-margin
+  instead of floor-minus-margin), second instance, this time with the calibration
+  measured IN the same job by the arm designed for it.
+- **Registration lesson (new edge for the doctrine)**: the resolution audit powered the
+  STEP (0.75 ≥ 17σ ✓ — it was) but not the BAR-CLEARANCE: at 500 shots/pub, 2se ≈ 0.03,
+  so PASS required hardware ≥ 0.88 — a window nothing pre-flight said the chip occupied.
+  Three pair-bars returned UNDERPOWERED for exactly this reason. **Power the margin to
+  the bar at the expected attenuation, not the effect size** — and when attenuation is
+  unknown, the bar for LEVEL gates should be derived from the co-flown control's floor,
+  which this design already measures.
+- **Paths, only-if-priced**: (i) A1b with pair bars derived from the measured floor
+  (0.93²-anchored, fresh amendment cycle, pre-data); (ii) readout-error mitigation on
+  the four read bits (new instrument, new scout per the laundry rule); (iii) rest here —
+  the shape claims are demonstrated, the level claims are refused by an honest bar.
+- **ALT2 usage**: job wall ~3 min on fez; pool to be re-read at next submission.
+
+*Outcome entry; nothing sealed touched.*
