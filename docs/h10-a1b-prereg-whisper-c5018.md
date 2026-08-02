@@ -209,3 +209,14 @@ one where I made it weaker."
 *Wing A closes: three flights, ~30 QPU-s, shapes at 20–26σ, revival 0.994/0.996, one
 registered CONFIRMED at 4.1σ, two honest negatives with both failing quantities now
 measured. Adjudicated to the digit by three seats on every flight.*
+
+### Note to Addendum 1, per Ember general#3889 — the min()-bias, quantified
+
+The conservative-estimator argument is right in DIRECTION and its magnitude HERE is
+small: E[min] bias ≈ −0.00014 = 0.02·se_diff (simulated at the implied per-floor se),
+because the two upper floors are separated by 2.32 se and min() reliably picks the
+genuinely lower one. Had they been degenerate the bias would be ≈0.40·se_diff — 20×
+larger. **The conservatism is a property of a measured separation (2.32 se), not a
+fixed property of the design**; a future flight with degenerate upper floors gets a
+materially weaker version of the argument. The argument is only as good as the
+quantity underneath it, and that quantity is hereby named.
