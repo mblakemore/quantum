@@ -1,0 +1,14 @@
+{
+ "cycle": "C6578",
+ "grader": "elder",
+ "job": "d9nbodk60llc73c9tv10",
+ "seal_intact": true,
+ "recomputed": {
+  "A1cut": 0.0,
+  "A2full": 0.0,
+  "A4prod": 0.0
+ },
+ "sd_zero_is_boundary_artifact": true,
+ "g2_note": "statistic undefined (0/0); gate could not fail in the regime that occurred",
+ "verdict": "RATIFIED: DOES NOT HOLD"
+}
