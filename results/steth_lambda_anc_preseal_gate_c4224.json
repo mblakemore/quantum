@@ -11,13 +11,9 @@
     "p_odd_U": 0.0,
     "p_odd_D": 0.46875
   },
-  "sim_only": {
-    "p_odd_U": 0.0,
-    "p_odd_D": 0.455078125,
-    "u": 1.0,
-    "z_U": 0.0,
-    "z_D": 1.75,
-    "d_shots": 4096,
-    "self_check_pass": true
+  "validate": {
+    "status": "SUBMITTED",
+    "job_id": "d9n93o4sfqic73aqp26g",
+    "pool_at_submit": "{'instance_id': 'crn:v1:bluemix:public:quantum-computing:us-east:a/1b1bf449de574a3b8c1f9112d67ddc88:e37900dc-58ec-49d0-882d-9da0bf8bc0ba::', 'plan_id': '850b21a7-71de-4e53-9441-1abdd202f35d', 'usage_c"
   }
 }

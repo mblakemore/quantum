@@ -219,6 +219,98 @@ def verdict(u, sep, lam):
     }
 
 
+# ---------------------------------------------------------------------------------------
+# on-device validate (SPENDS QPU)
+# ---------------------------------------------------------------------------------------
+N_TWIRL = 64          # independent twirl-draw PAIRS for the D arm (see the note below)
+MANIFEST = os.path.join(REPO, "results", "steth_lambda_anc_preseal_manifest_c4224.json")
+
+
+def build_validate_circuits(k):
+    """[U two-copy] + [N_TWIRL independent D two-copy] + [lambda_anc block].
+
+    DECLARED DEVIATION FROM THE LOCKED DESIGN, and it is a real one — not silent.
+    The design says the D arm is "shots=1, fresh twirl per shot" (c4215_006). Per-SHOT
+    rebuild is exact in simulation and impossible on hardware (it would be one job per
+    shot). Implemented instead as N_TWIRL pubs, each carrying an INDEPENDENT draw pair
+    (one draw per copy), run for shots/N_TWIRL each.
+
+    WHY THIS IS FAITHFUL RATHER THAN A CORNER CUT: a Pauli twirl applied to a pure Choi
+    state leaves it PURE, so a FIXED draw would read Tr[rho^2] = 1 and badly misestimate
+    the D side — which is exactly what c4215_006 warns about. The depolarised state only
+    exists as the MIXTURE over draws. The two-copy SWAP estimates Tr[rho_a rho_b] for the
+    pub's own draw pair, and averaging that over independent pairs converges to
+    Tr[rho_bar^2] = 4^-k. The estimator averages over draws identically whether the draws
+    are spread across shots or across pubs; what must NOT happen is one draw reused for
+    both copies or across the whole arm.
+    """
+    rng = np.random.default_rng(PUBLIC_HAAR_SEED + 1)
+    circs, index = [], {}
+    index["U"] = [len(circs)]
+    circs.append(choi_two_copy_circuit(k, "haar", rng, dd=True))
+    d_idx = []
+    for _ in range(N_TWIRL):
+        d_idx.append(len(circs))
+        circs.append(choi_two_copy_circuit(k, "depol", rng, dd=True))
+    index["D"] = d_idx
+    index["lambda_anc"] = [len(circs)]
+    circs.append(lambda_anc_circuit(k))
+    return circs, index
+
+
+def submit_validate(k, backend_name, shots, out):
+    print(f"\nVALIDATE on {backend_name} — ON-DEVICE, SPENDS QPU")
+    # C4224 INCIDENT FIX — the instance must be NAMED, never defaulted.
+    # First run of this function submitted to the DEFAULT open-instance, which had NO TIME
+    # AVAILABLE, because _get_ibm_service() takes whatever account is saved. The pool
+    # re-read caught it at submit and the job (d9n8vlcsfqic73aqosv0) was cancelled unrun.
+    # That is the second-tenant defect (c4217_018) committed by me, hours after fixing my
+    # own reader for it — a WRITE path defaulting to an instance while my READ path had
+    # been taught to sweep all three. Fixing a reader does not fix a writer.
+    try:
+        sys.path.insert(0, os.path.join(REPO, "scripts"))
+        from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2
+        import check_job_status as C2
+        alt2 = C2._load_env_token(C2.ALT2_ENV_KEY)
+        if not alt2:
+            raise RuntimeError("no ALT2 token — refusing to fall back to a default instance")
+        svc = QiskitRuntimeService(channel="ibm_cloud", token=alt2, instance=C2.ALT2_CRN)
+        backend = svc.backend(backend_name)
+        print(f"  instance: ALT2 (named explicitly, not defaulted)")
+    except Exception as exc:
+        print(f"  CANNOT REACH BACKEND: {type(exc).__name__}: {str(exc)[:120]}")
+        print("  Recorded as UNAVAILABLE, not as a pass — unknown is not a value.")
+        out["validate"] = {"status": "UNAVAILABLE", "error": type(exc).__name__}
+        return 3
+
+    # POOL RE-READ AT SUBMIT — no frozen pool number is ever current.
+    pool = None
+    try:
+        u = svc.usage()
+        pool = u if isinstance(u, (int, float)) else str(u)[:200]
+    except Exception as exc:
+        pool = f"UNREADABLE ({type(exc).__name__})"
+    print(f"  pool at submit: {pool}")
+
+    circs, index = build_validate_circuits(k)
+    per = max(1, shots // max(1, len(index["D"])))
+    tqc = transpile(circs, backend=backend, optimization_level=1, seed_transpiler=4224)
+    print(f"  {len(tqc)} circuits ({k*4} qubits), max depth {max(c.depth() for c in tqc)}")
+    print(f"  U 1 pub x {shots} sh | D {len(index['D'])} pubs x {per} sh | lambda_anc 1 x {shots}")
+
+    job = SamplerV2(mode=backend).run(tqc, shots=per)
+    man = {"exp": "steth_lambda_anc_preseal_gate", "builder": "Ember C4224",
+           "backend": backend_name, "job_id": job.job_id(), "k": k,
+           "shots_per_pub": per, "n_twirl": N_TWIRL, "index": index,
+           "floor_u": FLOOR_U, "margin": MARGIN, "pool_at_submit": pool,
+           "deviation_declared": "D arm is N_TWIRL pubs with independent draw pairs, not "
+                                 "per-shot rebuild; see build_validate_circuits docstring"}
+    json.dump(man, open(MANIFEST, "w"), indent=1)
+    print(f"  SUBMITTED {job.job_id()} -> {os.path.relpath(MANIFEST, REPO)}")
+    out["validate"] = {"status": "SUBMITTED", "job_id": job.job_id(), "pool_at_submit": pool}
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sim-only", action="store_true", help="$0 noiseless self-check")
@@ -298,12 +390,9 @@ def main():
 
     # ---------------- on-device: spends QPU -------------------------------------------
     if args.validate:
-        print(f"\nVALIDATE on {args.backend} — ON-DEVICE, SPENDS QPU")
-        print("  Not auto-running: this gate exists to be flown deliberately, and the")
-        print("  pool must be re-read at submit (no frozen pool number is current).")
-        print("  Arm it exactly like the n8 re-fly, with the pool printed at submit.")
-        out["validate"] = {"status": "ARMED-NOT-RUN",
-                           "reason": "on-device flight is a deliberate act; pool re-read required at submit"}
+        rc = submit_validate(k, args.backend, args.shots, out)
+        if rc:
+            return rc
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump(out, open(OUT, "w"), indent=2)
