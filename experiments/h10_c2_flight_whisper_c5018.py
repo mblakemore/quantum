@@ -276,7 +276,7 @@ def fly():
     job = sampler.run([(t, None, sh) for t, (_, __, sh, ___) in zip(tq, pubs)])
     man = {"experiment": "h10_c2_vacuum_harvest", "cycle": "C5018",
            "prereg": "docs/h10-c2-prereg-whisper-c5018.md SEALED 0b0d25be (coordination#3615)",
-           "go": "<record Creator GO ref before submission>",
+           "go": "Creator general#3630 'Go C2' (2026-08-02)",
            "account": "ALT2", "pool_remaining_at_submit_s": u["usage_remaining_seconds"],
            "backend": backend.name, "chain_2q_median": med,
            "pubs": [{"tag": tg, "shots": sh, **mt} for tg, _, sh, mt in pubs],

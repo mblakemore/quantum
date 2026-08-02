@@ -1,0 +1,308 @@
+{
+ "experiment": "h10_c2_vacuum_harvest",
+ "cycle": "C5018",
+ "prereg": "docs/h10-c2-prereg-whisper-c5018.md SEALED 0b0d25be (coordination#3615)",
+ "go": "Creator general#3630 'Go C2' (2026-08-02)",
+ "account": "ALT2",
+ "pool_remaining_at_submit_s": 585,
+ "backend": "ibm_fez",
+ "chain_2q_median": 0.0027718038939665707,
+ "pubs": [
+  {
+   "tag": "A1cut_XX",
+   "shots": 11000,
+   "arm": "A1cut",
+   "setting": "XX"
+  },
+  {
+   "tag": "A1cut_XY",
+   "shots": 11000,
+   "arm": "A1cut",
+   "setting": "XY"
+  },
+  {
+   "tag": "A1cut_XZ",
+   "shots": 11000,
+   "arm": "A1cut",
+   "setting": "XZ"
+  },
+  {
+   "tag": "A1cut_YX",
+   "shots": 11000,
+   "arm": "A1cut",
+   "setting": "YX"
+  },
+  {
+   "tag": "A1cut_YY",
+   "shots": 11000,
+   "arm": "A1cut",
+   "setting": "YY"
+  },
+  {
+   "tag": "A1cut_YZ",
+   "shots": 11000,
+   "arm": "A1cut",
+   "setting": "YZ"
+  },
+  {
+   "tag": "A1cut_ZX",
+   "shots": 11000,
+   "arm": "A1cut",
+   "setting": "ZX"
+  },
+  {
+   "tag": "A1cut_ZY",
+   "shots": 11000,
+   "arm": "A1cut",
+   "setting": "ZY"
+  },
+  {
+   "tag": "A1cut_ZZ",
+   "shots": 11000,
+   "arm": "A1cut",
+   "setting": "ZZ"
+  },
+  {
+   "tag": "A2full_XX",
+   "shots": 11000,
+   "arm": "A2full",
+   "setting": "XX"
+  },
+  {
+   "tag": "A2full_XY",
+   "shots": 11000,
+   "arm": "A2full",
+   "setting": "XY"
+  },
+  {
+   "tag": "A2full_XZ",
+   "shots": 11000,
+   "arm": "A2full",
+   "setting": "XZ"
+  },
+  {
+   "tag": "A2full_YX",
+   "shots": 11000,
+   "arm": "A2full",
+   "setting": "YX"
+  },
+  {
+   "tag": "A2full_YY",
+   "shots": 11000,
+   "arm": "A2full",
+   "setting": "YY"
+  },
+  {
+   "tag": "A2full_YZ",
+   "shots": 11000,
+   "arm": "A2full",
+   "setting": "YZ"
+  },
+  {
+   "tag": "A2full_ZX",
+   "shots": 11000,
+   "arm": "A2full",
+   "setting": "ZX"
+  },
+  {
+   "tag": "A2full_ZY",
+   "shots": 11000,
+   "arm": "A2full",
+   "setting": "ZY"
+  },
+  {
+   "tag": "A2full_ZZ",
+   "shots": 11000,
+   "arm": "A2full",
+   "setting": "ZZ"
+  },
+  {
+   "tag": "A4prod_XX",
+   "shots": 11000,
+   "arm": "A4prod",
+   "setting": "XX"
+  },
+  {
+   "tag": "A4prod_XY",
+   "shots": 11000,
+   "arm": "A4prod",
+   "setting": "XY"
+  },
+  {
+   "tag": "A4prod_XZ",
+   "shots": 11000,
+   "arm": "A4prod",
+   "setting": "XZ"
+  },
+  {
+   "tag": "A4prod_YX",
+   "shots": 11000,
+   "arm": "A4prod",
+   "setting": "YX"
+  },
+  {
+   "tag": "A4prod_YY",
+   "shots": 11000,
+   "arm": "A4prod",
+   "setting": "YY"
+  },
+  {
+   "tag": "A4prod_YZ",
+   "shots": 11000,
+   "arm": "A4prod",
+   "setting": "YZ"
+  },
+  {
+   "tag": "A4prod_ZX",
+   "shots": 11000,
+   "arm": "A4prod",
+   "setting": "ZX"
+  },
+  {
+   "tag": "A4prod_ZY",
+   "shots": 11000,
+   "arm": "A4prod",
+   "setting": "ZY"
+  },
+  {
+   "tag": "A4prod_ZZ",
+   "shots": 11000,
+   "arm": "A4prod",
+   "setting": "ZZ"
+  },
+  {
+   "tag": "A3floor_ZZ",
+   "shots": 10000,
+   "arm": "A3floor",
+   "setting": "ZZ"
+  },
+  {
+   "tag": "A5cone_t0",
+   "shots": 5000,
+   "arm": "A5cone",
+   "t": 0.35,
+   "rk": 2
+  },
+  {
+   "tag": "A5cone_t1",
+   "shots": 5000,
+   "arm": "A5cone",
+   "t": 0.7,
+   "rk": 2
+  },
+  {
+   "tag": "A5cone_t2",
+   "shots": 5000,
+   "arm": "A5cone",
+   "t": 1.05,
+   "rk": 3
+  },
+  {
+   "tag": "A5cone_t3",
+   "shots": 5000,
+   "arm": "A5cone",
+   "t": 1.4,
+   "rk": 4
+  },
+  {
+   "tag": "A5cone_t4",
+   "shots": 5000,
+   "arm": "A5cone",
+   "t": 1.75,
+   "rk": 5
+  },
+  {
+   "tag": "A5cone_t5",
+   "shots": 5000,
+   "arm": "A5cone",
+   "t": 2.1,
+   "rk": 6
+  },
+  {
+   "tag": "A5cone_t6",
+   "shots": 5000,
+   "arm": "A5cone",
+   "t": 2.45,
+   "rk": 6
+  },
+  {
+   "tag": "A5cone_t7",
+   "shots": 5000,
+   "arm": "A5cone",
+   "t": 2.8,
+   "rk": 7
+  },
+  {
+   "tag": "A6X1",
+   "shots": 10000,
+   "arm": "A6books",
+   "basis": "X",
+   "evolved": true
+  },
+  {
+   "tag": "A6Y1",
+   "shots": 10000,
+   "arm": "A6books",
+   "basis": "Y",
+   "evolved": true
+  },
+  {
+   "tag": "A6X0",
+   "shots": 10000,
+   "arm": "A6books",
+   "basis": "X",
+   "evolved": false
+  },
+  {
+   "tag": "A6Y0",
+   "shots": 10000,
+   "arm": "A6books",
+   "basis": "Y",
+   "evolved": false
+  }
+ ],
+ "transpiled_2q_counts": [
+  201,
+  201,
+  201,
+  201,
+  201,
+  201,
+  201,
+  201,
+  201,
+  253,
+  253,
+  253,
+  253,
+  253,
+  253,
+  253,
+  253,
+  253,
+  136,
+  136,
+  136,
+  136,
+  136,
+  136,
+  136,
+  136,
+  136,
+  144,
+  94,
+  94,
+  118,
+  142,
+  166,
+  190,
+  190,
+  214,
+  201,
+  201,
+  44,
+  44
+ ],
+ "job_id": "d9nbodk60llc73c9tv10",
+ "committer": "Whisper (DC15W)"
+}
