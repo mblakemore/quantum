@@ -10,8 +10,10 @@ flight to a depleted default instance and it sat unrunnable; Whisper found an in
 returned `token=None` on a missing env line, inside a flight script that had already flown and
 routed correctly only because the env line happened to exist.
 
-WHY A CHECKER AND NOT A MASS EDIT. 116 call sites across 93 files, ~78 of them unowned legacy that
-will never run again. Mass-converting frozen archival scripts risks breaking real artifacts to fix
+WHY A CHECKER AND NOT A MASS EDIT. 247 submission-path FAILs across 602 files in this repo
+(218 unowned legacy, 28 Ember, 1 Whisper, 0 Elder), most written when there was ONE account — so
+at the time defaulting was CORRECT and not a defect. They are not 247 live hazards; they are 247
+files that would misroute IF RE-RUN, and several are explicitly re-runnable (_refly_/_topup_/_submit_). Mass-converting frozen archival scripts risks breaking real artifacts to fix
 a defect that cannot fire on code nobody executes. The exposure is the subset that DOES run — so
 the gate belongs at the moment of flight, not in a sweep.
 
@@ -19,7 +21,7 @@ the gate belongs at the moment of flight, not in a sweep.
     python3 scripts/preflight_account_check.py --all          # audit the repo, exit 0 always
     python3 scripts/preflight_account_check.py --selftest
 
-Exit 0 = clear to fly · 1 = bare service on a submission path · 2 = bad usage.
+Exit 0 = clear to fly · 1 = IMPLICIT account resolution on a submission path · 2 = bad usage.
 
 HONEST LIMITS, so nobody reads more into a PASS than it carries:
   * Static, not execution. The bare-construction test is an AST parse (so prose about the defect is
@@ -28,7 +30,10 @@ HONEST LIMITS, so nobody reads more into a PASS than it carries:
   * A file with both a hardware branch and a simulator branch is flagged; the checker cannot know
     which branch today's flags take. FLAGGED IS NOT PROVEN — read the site.
   * A service built through an indirection this cannot see reads as clean.
-  * A PASS means "no bare construction found here", NOT "this script routes correctly".
+  * A PASS means "no implicit account resolution found here", NOT "this script routes
+    correctly". v2 of this checker matched ONE shape and returned PASS on 28 genuinely
+    exposed files; if you find a shape it misses, ADD IT TO DEFAULTING_HELPERS rather
+    than trusting the PASS.
 """
 import os
 import re
@@ -41,31 +46,55 @@ SIM = re.compile(r"StatevectorSampler|AerSimulator|FakeMarrakesh|FakeBrisbane|Ba
 SAFE_HELPER = re.compile(r"multi_account_service|service_for_submission|service_for_job")
 
 
+# Helpers that resolve an account IMPLICITLY. `_get_ibm_service()` walks a fallback chain and
+# leaves `instance` at None, so calling it is exactly as account-ambiguous as a bare constructor —
+# it just does not look like one.
+#
+# C6578, SECOND DEFECT IN THIS CHECKER, found by Ember trying to adopt it: v2 detected ONLY bare
+# `QiskitRuntimeService()`. Ember's 28 exposed files call `_get_ibm_service()` instead, so the gate
+# returned **PASS, exit 0, clear to fly** on the very files it was being adopted to guard.
+# A gate that green-lights the hazard is worse than no gate — no gate leaves you cautious, a
+# false PASS makes you confident. Same root shape as the defect it hunts: I matched the ONE form I
+# had in front of me instead of enumerating the forms that exist.
+DEFAULTING_HELPERS = {"_get_ibm_service"}
+
+
 def _bare_call_lines(src):
-    """Lines with a REAL no-argument QiskitRuntimeService() call.
+    """(lines, used_regex_fallback) for every call that picks an IBM account IMPLICITLY.
 
-    Parsed with `ast`, not grepped. The regex version flagged this checker's OWN companion module
-    at two lines that turned out to be the docstring showing `QiskitRuntimeService() -> ...` as an
-    example — the tool reported the documentation of the fix as an instance of the defect.
-    A checker that cannot tell code from prose about code will cry wolf, and a gate that cries wolf
-    gets ignored on the day it is right.
+    Three shapes count, not one:
+      * `QiskitRuntimeService()`                    — bare
+      * `QiskitRuntimeService(channel=...)`         — no token AND no instance = still the saved account
+      * `_get_ibm_service(...)`                     — resolves via a fallback chain, instance=None
 
-    Falls back to the regex only when the file does not parse (legacy py2 syntax), and that
-    fallback is reported so a noisy result is attributable rather than mysterious.
+    Parsed with `ast`, not grepped: the regex version flagged this checker's own companion module
+    at two lines that were the docstring DEMONSTRATING the fix — it reported documentation of the
+    remedy as an instance of the disease. A checker that cannot tell code from prose about code
+    cries wolf, and a gate that cries wolf goes unread on the day it is right.
+
+    Regex fallback only when the file does not parse (legacy py2), and the fallback is reported so
+    noise stays attributable.
     """
     import ast
     try:
         tree = ast.parse(src)
     except SyntaxError:
-        return [i + 1 for i, ln in enumerate(src.split("\n")) if BARE.search(ln)], True
+        lines = [i + 1 for i, ln in enumerate(src.split("\n"))
+                 if BARE.search(ln) or any(h + "(" in ln for h in DEFAULTING_HELPERS)]
+        return lines, True
     hits = []
     for node in ast.walk(tree):
-        if not isinstance(node, ast.Call) or node.args or node.keywords:
+        if not isinstance(node, ast.Call):
             continue
         f = node.func
         name = f.id if isinstance(f, ast.Name) else (f.attr if isinstance(f, ast.Attribute) else None)
-        if name == "QiskitRuntimeService":
+        if name in DEFAULTING_HELPERS:
             hits.append(node.lineno)
+        elif name == "QiskitRuntimeService":
+            kw = {k.arg for k in node.keywords if k.arg}
+            # An explicit token or instance means the author NAMED the account. That is the fix.
+            if not (kw & {"token", "instance"}):
+                hits.append(node.lineno)
     return sorted(set(hits)), False
 
 
@@ -97,12 +126,12 @@ def verdict(r):
         return "ERROR", r["error"]
     note = "  [regex fallback: file did not parse]" if r.get("regex_fallback") else ""
     if not r["bare_lines"]:
-        return "PASS", "no bare QiskitRuntimeService() construction" + note
+        return "PASS", "no implicit account resolution" + note
     where = ",".join(str(x) for x in r["bare_lines"])
     if r["submits"]:
         hedge = " (file also has a simulator branch — confirm which one this run takes)" if r["has_sim"] else ""
-        return "FAIL", f"bare service at line(s) {where} on a SUBMISSION path{hedge}" + note
-    return "WARN", f"bare service at line(s) {where} on a read path — wrong answers, not wrong actions" + note
+        return "FAIL", f"IMPLICIT account resolution at line(s) {where} on a SUBMISSION path{hedge}" + note
+    return "WARN", f"implicit account resolution at line(s) {where} on a read path — wrong answers, not wrong actions" + note
 
 
 def _selftest():
@@ -123,6 +152,17 @@ def _selftest():
         ("comment mentions it", '# svc = QiskitRuntimeService()  <- do not do this\n'
                                 'from ibm_multi_account import service_for_submission\n'
                                 'SamplerV2(mode=b).run(pubs)\n', "PASS"),
+        # regression: v2 PASSED this shape. Ember's 28 exposed files look exactly like it, so the
+        # gate said "clear to fly" on the files it was being adopted to guard.
+        ("helper-resolved submit", "from run_exp66_qpu_partb import _get_ibm_service\n"
+                                   "svc = _get_ibm_service()\n"
+                                   "SamplerV2(mode=svc.backend('x')).run(pubs)\n", "FAIL"),
+        # channel-only construction is still the SAVED account — no token, no instance named.
+        ("channel-only submit", "svc = QiskitRuntimeService(channel='ibm_quantum_platform')\n"
+                                "SamplerV2(mode=svc.backend('x')).run(pubs)\n", "FAIL"),
+        # naming the account explicitly IS the fix and must not be flagged.
+        ("explicit token submit", "svc = QiskitRuntimeService(channel='c', token=T, instance=CRN)\n"
+                                  "SamplerV2(mode=svc.backend('x')).run(pubs)\n", "PASS"),
     ]
     ok = True
     for name, src, want in cases:
