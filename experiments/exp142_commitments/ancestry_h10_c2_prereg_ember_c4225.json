@@ -61,5 +61,25 @@
     },
     "why_the_depth_number_matters": "The 500 bar was calibrated from the 475 ceiling that C1's NO-FLY MEASURED at a cost of 12 QPU-s. C2 came in at max 253 \u2014 roughly HALF the ceiling and half its own pre-flight estimate. C1's expensive negative did not merely inform C2's design, it set the constant that this flight cleared by 2x. Whisper also stated the pre-estimate (454-490) and let the transpiler's actual number override it, so the beat is measured rather than claimed.",
     "pre_declared_outcome_shape": "Whisper stated BEFORE landing: at ~250 gates x 0.22% the state arrives attenuated but nowhere near C1's wash; if the harvest survives contact with hardware G1 reads it, and if the state washes G1 FAILS LOUDLY inside its accuracy band \u2014 and that is the registered outcome either way. Recorded here pre-data so the post-hoc reading cannot drift."
+  },
+  "outcome": {
+    "status": "REGISTERED VERDICT DOES NOT HOLD \u2014 G1 FAIL, G2 PASS trivially. Bar unmoved.",
+    "decode_commit": "8cfdb9a",
+    "graded_against_sealed_gates": {
+      "G1": "FAIL \u2014 N_cut = 0.000 EXACTLY; every bootstrap partial-transpose positive. Sealed bar was N>0 at >=5 sigma within 0.0488 +/- max(3 sigma_N, 0.015).",
+      "G2": "PASS, trivially \u2014 the product control read consistent with 0 as registered, but on a flight where everything read 0, so it carries no independent weight and should not be cited as a success.",
+      "verdict": "G1 AND G2 = DOES NOT HOLD. Mechanical against the sealed section-3 arithmetic; no gate reinterpreted."
+    },
+    "THE_DIAGNOSIS_THE_ARMS_WERE_BUILT_TO_GIVE": {
+      "floor_arm": "P00 = 0.9867 \u2014 mapping, readout and idle fidelity all GOOD. This is what rules out the boring explanations.",
+      "cone_arm": "-0.047 against 0.437 expected \u2014 the FIELD state was destroyed by evolution decoherence. The cone certifier doubled as the noise thermometer.",
+      "detectors": "thermalised to Pe 0.63 / 0.50 against 0.063 predicted.",
+      "books": "vacuum bond correlations collapsed, -3.55 against +0.88.",
+      "why_this_matters": "A bare G1 FAIL would have been ambiguous between 'no harvest exists' and 'we could not measure it'. The reported arms \u2014 none of them gated \u2014 localise it to state destruction, with the floor arm positively excluding the instrumentation explanations. Same shape as the steth gate's lambda_anc block: a failing gate is only actionable if something SEPARATE measures the suspected cause."
+    },
+    "WHAT_THE_SHOTS_BOUGHT": "The campaign's SECOND calibrated ceiling: MANY-BODY-STATE SURVIVAL dies by ~250 transpiled 2q gates, far below C1's 475-gate INTERFEROMETRIC-CONTRAST ceiling. The distinction is the finding: a tomographic many-body claim needs the STATE to survive; an interferometric claim needs only a CONTRAST. Two different depth budgets, both now hardware-measured \u2014 C1 at 12 QPU-s, C2 at ~60 QPU-s.",
+    "process_deviation_named_by_the_proposer": "This submission used device-median calibration and transpiler-chosen qubits rather than C1's per-chain greedy selection. Whisper states a best chain would not qualitatively change the wash at these depths, and put the deviation in the record anyway rather than leaving it for a reader to find.",
+    "what_survives": "The $0 design results stand: the cut-decomposition construction, the exact-theory window, the exchange-damages-harvest specimen, the Trotter-robustness. Hardware one generation better carries this flight AS DESIGNED.",
+    "repair_discipline": "Repair paths recorded ONLY-IF-PRICED; a new instrument re-enters at scout, per the laundry rule \u2014 an amendment chain must not become a way to relaunch a different experiment under an old seal."
   }
 }
