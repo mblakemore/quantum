@@ -217,7 +217,7 @@ def fly():
     job = sampler.run([(t, None, SHOTS) for t in tq])
     man = {"experiment": "h10_b1_time_flip", "cycle": "C5018",
            "prereg": "docs/h10-b1-prereg-whisper-c5018.md chain 7117/4746ef9f + 9253/084a815c + 11779/e764938d",
-           "go": "Creator general#3674 'Go when ready!' (2026-08-02)",
+           "go": "RE-FLY: Creator general#3719 'Go B1' (2026-08-02, fresh GO post-EXPLORATORY); first flight general#3674",
            "account": "ALT2", "pool_remaining_at_submit_s": u["usage_remaining_seconds"],
            "backend": backend.name, "chain_2q_median": med,
            "pubs": [{"arm": p["arm"], "name": p["name"], "label": p["label"], "shots": SHOTS}
