@@ -42,7 +42,7 @@ def assert_seal():
     return h
 
 # ---- Creator GO (seats §5: no GO, no submission). Set to the GO reference when granted.
-GO_REF = None
+GO_REF = "Creator general#3843 'A1 Go' (2026-08-02 21:36Z)"
 
 # ---- GF(4): bits (c1,c0); add = xor; w^2 = w+1 ----
 def gmul(a, b):

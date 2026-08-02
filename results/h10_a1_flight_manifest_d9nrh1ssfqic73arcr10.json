@@ -1,0 +1,247 @@
+{
+ "experiment": "h10_a1_quorum_fact",
+ "cycle": "C5018",
+ "prereg": "docs/h10-a1-prereg-whisper-c5018.md",
+ "prereg_seal": {
+  "prefix": 5494,
+  "sha256_12": "a91a577d09b9",
+  "sealed_by": "ember coordination#3823"
+ },
+ "go": "Creator general#3843 'A1 Go' (2026-08-02 21:36Z)",
+ "account": "ALT2",
+ "pool_remaining_at_submit_s": 420,
+ "backend": "ibm_fez",
+ "median_2q_err": 0.002806927888841834,
+ "hardening": "ALAP + X-X dynamical decoupling (standard from B1b)",
+ "dd_x_pulses": [
+  43,
+  613
+ ],
+ "scramble_seeds": [
+  1101,
+  1102,
+  1103
+ ],
+ "pubs": [
+  {
+   "arm": "A1",
+   "name": "A1_dial_s1_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s2_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s3_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s1s2_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s1s3_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s2s3_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s1s2s3_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s1_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s2_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s3_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s1s2_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s1s3_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s2s3_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A1",
+   "name": "A1_dial_s1s2s3_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s1_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s2_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s3_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s1s2_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s1s3_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s2s3_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s1s2s3_b0",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s1_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s2_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s3_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s1s2_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s1s3_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s2s3_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A2",
+   "name": "A2_dial_s1s2s3_b1",
+   "shots": 500
+  },
+  {
+   "arm": "A3",
+   "name": "A3_revival",
+   "shots": 2000
+  },
+  {
+   "arm": "A4",
+   "name": "A4_seed1101_Dcontrast",
+   "shots": 1000
+  },
+  {
+   "arm": "A4",
+   "name": "A4_seed1101_pair12dial",
+   "shots": 1000
+  },
+  {
+   "arm": "A4",
+   "name": "A4_seed1102_Dcontrast",
+   "shots": 1000
+  },
+  {
+   "arm": "A4",
+   "name": "A4_seed1102_pair12dial",
+   "shots": 1000
+  },
+  {
+   "arm": "A4",
+   "name": "A4_seed1103_Dcontrast",
+   "shots": 1000
+  },
+  {
+   "arm": "A4",
+   "name": "A4_seed1103_pair12dial",
+   "shots": 1000
+  },
+  {
+   "arm": "A5",
+   "name": "A5_story",
+   "shots": 4000
+  }
+ ],
+ "transpiled_2q_counts": [
+  22,
+  22,
+  22,
+  22,
+  22,
+  22,
+  22,
+  22,
+  22,
+  22,
+  22,
+  22,
+  22,
+  22,
+  11,
+  11,
+  11,
+  11,
+  11,
+  11,
+  11,
+  11,
+  11,
+  11,
+  11,
+  11,
+  11,
+  11,
+  0,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  22
+ ],
+ "job_id": "d9nrh1ssfqic73arcr10",
+ "committer": "Whisper (DC15W)"
+}
