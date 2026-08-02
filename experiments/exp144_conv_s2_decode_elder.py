@@ -20,6 +20,9 @@ from qiskit_ibm_runtime import QiskitRuntimeService
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exp144_flight_kit import conv_probe          # frozen probe semantics
 from exp144_decode_meter import probe_outcomes    # +-1 product over probe sites
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..', 'scripts'))
+from ibm_multi_account import multi_account_service  # C6578: sweep ALL accounts, not the default one
 
 CUT2 = 0.10
 R = "../results"
@@ -27,7 +30,7 @@ MAP = f"{R}/exp144_conv_n4_survivor_map.json"
 if not os.path.exists(MAP):
     sys.exit("survivor map not published yet (awaiting Ember per chair C4809) — re-run when present")
 
-svc = QiskitRuntimeService()
+svc = multi_account_service()
 man = json.load(open(f"{R}/exp144_conv_n4_stage2_manifest.json"))
 F = man["s2_family"]
 smap = json.load(open(MAP))                        # {"n4_k1": {row_index: cand, ...}, ...}

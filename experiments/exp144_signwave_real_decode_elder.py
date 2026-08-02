@@ -33,6 +33,9 @@ import sys
 import math
 import itertools
 import numpy as np
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..', 'scripts'))
+from ibm_multi_account import multi_account_service  # C6578: sweep ALL accounts, not the default one
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 JOB_ID = "d9d8ouphtsac739cml0g"
@@ -85,7 +88,7 @@ def main():
     assert len(plan) == 30, f"plan has {len(plan)} rows, expected 30"
 
     from qiskit_ibm_runtime import QiskitRuntimeService
-    job = QiskitRuntimeService().job(JOB_ID)
+    job = multi_account_service().job(JOB_ID)
     st = str(job.status())
     if "DONE" not in st.upper() and "COMPLET" not in st.upper():
         sys.exit(f"job {JOB_ID} not DONE (status={st}) — re-run on landing")

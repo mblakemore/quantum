@@ -13,11 +13,14 @@ position j starts at cumulative pub offset sum(n_pubs[:j]).
 import json, math, os, sys, hashlib
 import numpy as np
 from qiskit_ibm_runtime import QiskitRuntimeService
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..', 'scripts'))
+from ibm_multi_account import multi_account_service  # C6578: sweep ALL accounts, not the default one
 
 ALPHA, BETA = 0.05, 0.01
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 4
 A = math.log((1 - BETA) / ALPHA); B = math.log(BETA / (1 - ALPHA))
-svc = QiskitRuntimeService()
+svc = multi_account_service()
 R = "../results"
 _jobcache = {}
 

@@ -25,6 +25,9 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from qiskit_ibm_runtime import QiskitRuntimeService
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..', 'scripts'))
+from ibm_multi_account import multi_account_service  # C6578: sweep ALL accounts, not the default one
 
 ALPHA, BETA = 0.05, 0.01
 OUT = os.path.join(HERE, "..", "results", "exp144_conv_s1_w1_verdicts_elder.json")
@@ -58,7 +61,7 @@ def sprt_verdict(outcomes, att):
 
 
 def main():
-    svc = QiskitRuntimeService()
+    svc = multi_account_service()
     out = {"decoder": "elder", "arm": "conv_stage1", "wave": 1, "schedule": "A2-rev1",
            "instances": {}}
     for mf in sorted(glob.glob(os.path.join(HERE, "..", "results",

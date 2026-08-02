@@ -11,10 +11,13 @@ product of all n bits). Row-indexed verdicts committed for 2-of-2.
 import glob, json, math, os, re, sys
 import numpy as np
 from qiskit_ibm_runtime import QiskitRuntimeService
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..', 'scripts'))
+from ibm_multi_account import multi_account_service  # C6578: sweep ALL accounts, not the default one
 
 ALPHA, BETA = 0.05, 0.01
 N, MAXW = 4, 2                          # rung, highest wave to fold in
-svc = QiskitRuntimeService()
+svc = multi_account_service()
 
 def even_parity_sum(bitstrings, n):
     """(sum of +1/-1 even-parity outcomes, shots) for a chunk of shots."""

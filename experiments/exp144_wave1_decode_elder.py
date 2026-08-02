@@ -17,6 +17,9 @@ sys.path.insert(0, HERE)
 from exp144_decode_meter import shots_to_labels, decode
 
 from qiskit_ibm_runtime import QiskitRuntimeService
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..', 'scripts'))
+from ibm_multi_account import multi_account_service  # C6578: sweep ALL accounts, not the default one
 
 OUT = os.path.join(HERE, "..", "results", "exp144_wave1_quantum_decode_elder.json")
 
@@ -33,7 +36,7 @@ def sentinel_fidelity(bits):
 
 
 def main():
-    svc = QiskitRuntimeService()
+    svc = multi_account_service()
     out = {"decoder": "elder", "wave": 1, "arm": "quantum", "instances": {}}
     for mf in sorted(glob.glob(os.path.join(HERE, "..", "results",
                                             "exp144_quantum_n*_w1_manifest.json"))):

@@ -30,6 +30,9 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exp144_signwave_truthgate_elder import gate, GRID, T  # FROZEN sim gate
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..', 'scripts'))
+from ibm_multi_account import multi_account_service  # C6578: sweep ALL accounts, not the default one
 
 JOB_ID = "d9d82qkinv1c73aomk30"
 # Ember's flight frame — pub order and per-pub (term, coeff).
@@ -53,7 +56,7 @@ def q_mean(bitstrings):
 
 def main():
     from qiskit_ibm_runtime import QiskitRuntimeService
-    svc = QiskitRuntimeService()
+    svc = multi_account_service()
     job = svc.job(JOB_ID)
     st = str(job.status())
     if "DONE" not in st.upper() and "COMPLET" not in st.upper():
