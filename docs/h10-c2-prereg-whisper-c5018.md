@@ -91,3 +91,41 @@ convenience. Creator: GO (~456k shots, ~40–80 QPU-s, ALT2).
 *Frozen text ends. Changes after Ember's seal require a numbered amendment. A different
 instrument (L≠8, different chain, interferometric variants) re-enters at scout, not by
 amendment — the laundry rule.*
+
+---
+
+## FLIGHT RECORD (C5018, post-landing) — **DOES NOT HOLD** (G1 FAIL, G2 PASS)
+
+- **Job**: d9nbodk60llc73c9tv10, ibm_fez via ALT2, landed after ~2h50m queue. Decode:
+  `results/h10_c2_decode_whisper_c5018.json`, frozen SS3 arithmetic, bootstrap seed 20260802.
+- **G1 FAIL**: N̂_cut = 0.000 exactly (every bootstrap partial-transpose positive). No
+  harvested entanglement survived. **G2 PASS** trivially (product control also 0).
+- **The diagnosis, from the arms designed for it** (the failure is diagnosed, not bare):
+  - Floor arm P00 = **0.9867** → mapping, readout, and idle-detector fidelity are all GOOD.
+  - Cone arm: measured expX = **−0.047 vs 0.437 as-flown** at t=2.45 → the FIELD state was
+    destroyed by evolution-depth decoherence; the cone certifier doubled as the noise
+    thermometer.
+  - Detectors thermalized: P_e = 0.63 / 0.50 vs 0.063 predicted — detectors coupled to a
+    decohered field randomize.
+  - Books: ΔE_field measured −3.55 vs +0.88 — the vacuum's bond correlations collapsed
+    (energy read relaxes toward the mixed state), consistent with total field decoherence.
+- **The new calibrated fact this buys** (second ceiling of the campaign): the
+  MANY-BODY-STATE-SURVIVAL ceiling sits far below C1's interferometric-contrast ceiling —
+  ~250 transpiled 2q gates already fully wash an 8-site correlated vacuum + 2 detectors,
+  where C1 calibrated ~475 gates for lambda=0.35 on a single amplitude. A tomographic
+  many-body claim needs the state itself to survive; an interferometric claim needs only a
+  contrast. **Two different depth budgets, both now measured with hardware.**
+- **One process deviation named**: this flight's submission used a device-median calibration
+  check and transpiler-chosen qubits, NOT the per-chain greedy selection C1 used. At these
+  depths a best chain would likely not change the qualitative outcome (best-case ~0.15%/gate
+  x 250 still ~35-40% circuit error), but the record carries the deviation rather than
+  hiding it.
+- **Cost**: ~456k shots; pool 585 -> ~520s (est; re-read next submission). The $0 design
+  results stand on their own: the cut-decomposition construction, the harvest window in
+  exact theory, the exchange-damages-the-harvest specimen, and the Trotter-robustness of the
+  observable — hardware at current error rates cannot yet carry them at L=8.
+- **Repair paths, recorded only-if-ever-priced** (new instrument = new scout+prereg, per the
+  laundry rule): readout+ZNE mitigation with the differential grammar; per-chain selection;
+  r=4-5 with the (computed) larger bias; or hold for hardware a generation better.
+
+*Outcome entry, not an amendment: no bar, gate, or estimator touched after data existed.*
