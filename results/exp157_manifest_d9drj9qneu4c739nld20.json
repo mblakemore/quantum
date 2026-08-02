@@ -1,0 +1,126 @@
+{
+ "exp": 157,
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "job_id": "d9drj9qneu4c739nld20",
+ "phases": [
+  0.0,
+  0.7853981633974483,
+  1.5707963267948966,
+  2.356194490192345,
+  3.141592653589793,
+  3.9269908169872414,
+  4.71238898038469,
+  5.497787143782138
+ ],
+ "order": [
+  [
+   "static_erase",
+   0
+  ],
+  [
+   "static_erase",
+   1
+  ],
+  [
+   "static_erase",
+   2
+  ],
+  [
+   "static_erase",
+   3
+  ],
+  [
+   "static_erase",
+   4
+  ],
+  [
+   "static_erase",
+   5
+  ],
+  [
+   "static_erase",
+   6
+  ],
+  [
+   "static_erase",
+   7
+  ],
+  [
+   "dynamic_nodd",
+   0
+  ],
+  [
+   "dynamic_nodd",
+   1
+  ],
+  [
+   "dynamic_nodd",
+   2
+  ],
+  [
+   "dynamic_nodd",
+   3
+  ],
+  [
+   "dynamic_nodd",
+   4
+  ],
+  [
+   "dynamic_nodd",
+   5
+  ],
+  [
+   "dynamic_nodd",
+   6
+  ],
+  [
+   "dynamic_nodd",
+   7
+  ],
+  [
+   "dynamic_dd",
+   0
+  ],
+  [
+   "dynamic_dd",
+   1
+  ],
+  [
+   "dynamic_dd",
+   2
+  ],
+  [
+   "dynamic_dd",
+   3
+  ],
+  [
+   "dynamic_dd",
+   4
+  ],
+  [
+   "dynamic_dd",
+   5
+  ],
+  [
+   "dynamic_dd",
+   6
+  ],
+  [
+   "dynamic_dd",
+   7
+  ]
+ ],
+ "transpiled_1q_gates": {
+  "nodd": 5.0,
+  "dd": 7.0
+ },
+ "prereg": {
+  "confidence": 0.55,
+  "gate": "(V_dd_erase - V_nodd_erase) > 2*sigma_bootstrap AND V_marginal < 0.1",
+  "null_is_first_class": "DD<=0 recovery => idle error is not DD-refocusable quasi-static dephasing (measurement crosstalk/leakage/T1)",
+  "not_sim_replicable": "noiseless XX=I; DD benefit is hardware-only"
+ },
+ "note": "DD echo on marker across feed-forward idle; static ceiling + dynamic no-DD/DD; within-job A/B; self-verifying (known phi); no-signaling fence",
+ "job_named_copy_note": "job-named home for the INCUMBENT record (Ember #3743: the restore recovered predecessors and left incumbents mutable; this closes the forward exposure). Legacy path retained for cross-references."
+}
