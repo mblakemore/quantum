@@ -251,6 +251,27 @@ def ka_gate(verbose=True):
     m = np.abs(np.asarray(Statevector(qc)) - rev7(sim.record_state())).max()
     ok &= m < 1e-9
     if verbose: print(f"  KA {'PASS' if m < 1e-9 else 'FAIL'}  campaign record state (max amp diff {m:.2e})")
+    # counts-path self-test (Elder coordination#3829, his [8]): the fence must exercise
+    # EVERY decode path the flight uses. outcome_iter_counts extracts bits from qiskit
+    # counts KEYS (string, MSB-left); synthesize those keys from the same exact
+    # distribution and assert both iterators yield identical statistics. A bit-convention
+    # mismatch here passes the exact fence and decodes every dial to a PLAUSIBLE wrong
+    # number — no absurd 13/21 rescues the reader.
+    value_keys = ("p", "contrast", "sorted_absX", "unsorted_X", "n_outcomes")
+    for p in pubs:
+        body = p["qc"].remove_final_measurements(inplace=False)
+        probs = Statevector(body).probabilities()
+        synth = {format(i, "07b"): float(pr) * p["shots"]
+                 for i, pr in enumerate(probs) if pr > 1e-14}
+        exact = pub_stats(p, outcome_iter_exact(p["qc"]))
+        via = pub_stats(p, outcome_iter_counts(synth))
+        worst = max(abs(exact[k] - via[k]) for k in value_keys if k in exact)
+        ok &= worst < 1e-9
+        if worst >= 1e-9 and verbose:
+            print(f"  KA FAIL  counts-path {p['name']}: exact vs via-counts diff {worst:.2e}")
+    if verbose:
+        print(f"  KA PASS  counts-path self-test: 36/36 pubs, both iterators agree" if ok
+              else "  KA counts-path self-test FAILED")
     n2q = [sum(1 for inst in p["qc"].data if len(inst.qubits) == 2 and inst.operation.name != "measure")
            for p in pubs]
     if verbose:
