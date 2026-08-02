@@ -1,0 +1,64 @@
+{
+ "cycle": "C6578",
+ "author": "elder",
+ "scope": "H10-B1 ceiling co-check, FULL",
+ "n_pairs": 21,
+ "flip_min_win": 0.999999999999999,
+ "tiers": {
+  "parallel": {
+   "value": 0.8826866983776975,
+   "published": [
+    0.88,
+    0.89
+   ],
+   "inside": true,
+   "heldout_dev": 7.927292600129476e-09,
+   "status": "optimal"
+  },
+  "causal": {
+   "value": 0.9055855150696779,
+   "published": [
+    0.9,
+    0.91
+   ],
+   "inside": true,
+   "heldout_dev": 1.9207109680507983e-08,
+   "status": "optimal"
+  },
+  "process": {
+   "value": 1.000000009619998,
+   "published": null,
+   "heldout_dev": 8.434608567142732e-11,
+   "status": "optimal",
+   "note": "UNRESTRICTED process cone \u2014 no time-direction constraint, so it contains the flip and is EXPECTED to reach 1.0. Not comparable to the published 0.91-0.92 definite-time-direction bar."
+  },
+  "per_pair_joint_parallel": {
+   "(I,I)": 0.7680763687405243,
+   "(I,X)": 0.9669250305700479,
+   "(I,Z)": 0.9669250343622993,
+   "(X,I)": 0.966925030570048,
+   "(X,X)": 0.9616317842828119,
+   "(X,Z)": 0.9468013558579218,
+   "(Z,I)": 0.9669250343622995,
+   "(Z,X)": 0.9468013558579215,
+   "(Z,Z)": 0.9616317866810968,
+   "(Y,I)": 0.9875523409682085,
+   "(Y,X)": 0.7843888228827924,
+   "(Y,Z)": 0.784389736365388,
+   "(I,Y)": 0.9875523409682079,
+   "(X,Y)": 0.784388822882793,
+   "(Z,Y)": 0.7843897363653884,
+   "MII+_0": 0.7680098010663572,
+   "MII+_1": 0.7680098010663572,
+   "MII+_2": 0.7680088892087427,
+   "MII+_3": 0.7680088892087427,
+   "MII-_0": 0.9495393518318476,
+   "MII-_1": 0.9495393518318477
+  }
+ },
+ "subset_parallel_alone": {
+  "paulis_15": 1.0000000140756637,
+  "mii_6": 0.9999998861365945
+ },
+ "verdict": "REPRODUCED (parallel + causal); process tier NOT ATTEMPTED \u2014 needs the definite-time-direction constraint this script does not implement"
+}

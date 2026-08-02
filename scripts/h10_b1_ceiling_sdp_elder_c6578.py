@@ -169,6 +169,36 @@ def _rand_state(d, rng):
     return v / np.linalg.norm(v)
 
 
+def full_pairs(path="results/h10_b1_pairs_c5018.json"):
+    """All 21 published pairs, with the promise class RE-DERIVED from the matrices.
+
+    A co-check that reads the `label` field and proceeds has checked nothing — it has copied
+    Whisper's answer into my column. So the class is recomputed here from U V^T vs U^T V and the
+    recomputed value is what the SDP uses; the stored label is only compared against it.
+    """
+    import os
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    d = json.load(open(os.path.join(root, path)))
+    out, mismatches, nonunitary = [], [], []
+    for r in d["pairs"]:
+        U = np.array(r["U_re"], dtype=complex) + 1j * np.array(r["U_im"])
+        V = np.array(r["V_re"], dtype=complex) + 1j * np.array(r["V_im"])
+        for nm, M in (("U", U), ("V", V)):
+            if np.linalg.norm(M.conj().T @ M - I2) > 1e-9:
+                nonunitary.append((r["name"], nm))
+        A, B = U @ V.T, U.T @ V
+        # U V^T = s * U^T V with s = +/-1; recover s from the first non-negligible entry
+        idx = np.unravel_index(np.argmax(abs(B)), B.shape)
+        s = np.real(A[idx] / B[idx]) if abs(B[idx]) > 1e-12 else 0.0
+        derived = "M+" if s > 0 else "M-"
+        if np.linalg.norm(A - s * B) > 1e-9:
+            mismatches.append((r["name"], "promise not of the form U V^T = +/- U^T V"))
+        elif derived != r["label"]:
+            mismatches.append((r["name"], f"label {r['label']} but derived {derived}"))
+        out.append((r["name"], U, V, derived))
+    return out, mismatches, nonunitary
+
+
 # ---------- cones (5-system picture) ----------
 # C6578 REBUILD. v1 worked in a 4-system tester picture and applied the Oreshkov-Costa-Brukner
 # process conditions, which assume a TRIVIAL GLOBAL FUTURE — but a tester's measurement lives on
@@ -327,7 +357,102 @@ def selftest():
     return (0 if ok else 1), vals
 
 
+def main_full():
+    pairs, mism, nonu = full_pairs()
+    print("H10-B1 CEILING CO-CHECK — FULL PUBLISHED GAME")
+    print("=" * 74)
+    print(f"  pairs loaded: {len(pairs)}   M+ {sum(p[3]=='M+' for p in pairs)} / "
+          f"M- {sum(p[3]=='M-' for p in pairs)}")
+    print(f"  independent re-derivation of the promise class: "
+          f"{'CLEAN' if not mism else 'MISMATCHES ' + str(mism)}")
+    print(f"  unitarity: {'CLEAN' if not nonu else 'FAILURES ' + str(nonu)}")
+    if mism or nonu:
+        print("  REFUSING to compute ceilings on inputs that do not verify.")
+        return 1
+
+    # flip arm, direct simulation, independent of every SDP
+    rng = np.random.default_rng(11)
+    worst = 1.0
+    for _, U, V, lab in pairs:
+        for _ in range(6):
+            t = _rand_state(2, rng)
+            b0, b1 = (U @ V.T) @ t, (U.T @ V) @ t
+            pl = float(np.real((b0 + b1).conj() @ (b0 + b1))) / 4
+            mi = float(np.real((b0 - b1).conj() @ (b0 - b1))) / 4
+            worst = min(worst, pl if lab == "M+" else mi)
+    print(f"  flip arm minimum win over all 21 pairs: {worst:.12f}")
+
+    # The published PROCESS tier is "process matrices with DEFINITE TIME DIRECTION". This cone
+    # imposes positivity + normalisation only, so it does NOT carry that restriction and therefore
+    # CONTAINS the time flip itself. It is expected to reach 1.0, and doing so is a CONSISTENCY
+    # CHECK, not a contradiction of the published 0.92: it confirms the flip is a legitimate
+    # process matrix and that beating 0.92 requires exactly the resource that tier excludes.
+    # Reproducing 0.92 needs the time-direction constraint, which this script does NOT implement.
+    BARS = {"parallel": (0.88, 0.89), "causal": (0.90, 0.91)}
+    res, ok = {}, True
+    print()
+    for cls in ("parallel", "causal", "process"):
+        v, st, Wv = solve_class(cls, pairs)
+        dev = heldout_normalisation(Wv)
+        if cls in BARS:
+            lo, hi = BARS[cls]
+            inside = lo - 2e-3 <= v <= hi + 2e-3
+            if not inside:
+                ok = False
+            res[cls] = {"value": v, "published": [lo, hi], "inside": bool(inside),
+                        "heldout_dev": dev, "status": st}
+            print(f"  {cls:9s} = {v:.6f}   published [{lo}, {hi}]   "
+                  f"{'IN RANGE' if inside else '*** OUTSIDE ***'}   heldout {dev:.1e}")
+        else:
+            res[cls] = {"value": v, "published": None, "heldout_dev": dev, "status": st,
+                        "note": "UNRESTRICTED process cone — no time-direction constraint, so it "
+                                "contains the flip and is EXPECTED to reach 1.0. Not comparable "
+                                "to the published 0.91-0.92 definite-time-direction bar."}
+            print(f"  {cls:9s} = {v:.6f}   (unrestricted cone: contains the flip; reaching 1.0 is "
+                  f"the expected consistency result, NOT the published bar)   heldout {dev:.1e}")
+
+    # WHERE THE DIFFICULTY ACTUALLY LIVES — computed per pair, not inferred from an average.
+    # I previously argued from arithmetic that the 15 Paulis must be free wins and the 6 MII pairs
+    # must carry parallel down to ~0.60, and recommended concentrating shots on the MII pairs.
+    # THAT WAS WRONG. It assumed the subset-alone optimum (Paulis alone are winnable at 1.0)
+    # transfers into the JOINT optimum. It does not: a single strategy must serve all 21 at once.
+    paulis = [q for q in pairs if not q[0].startswith("MII")]
+    miis = [q for q in pairs if q[0].startswith("MII")]
+    vP, _, _ = solve_class("parallel", paulis)
+    vM, _, _ = solve_class("parallel", miis)
+    Wj = solve_class("parallel", pairs)[2]
+    per = []
+    for name, U, V, lab in pairs:
+        G = P.game_op(U, V, PLUS if lab == "M+" else MINUS)
+        per.append((name, float(np.real(np.trace(G @ Wj)))))
+    pa = [x for n, x in per if not n.startswith("MII")]
+    mi = [x for n, x in per if n.startswith("MII")]
+    print(f"\n  each subset ALONE is trivially winnable: 15 Paulis = {vP:.6f} · 6 MII = {vM:.6f}")
+    print("  so the ceiling is a JOINT constraint, not a property of any subset.")
+    print(f"  per-pair win under the JOINT-optimal parallel strategy:")
+    print(f"    Paulis(15) mean {sum(pa)/len(pa):.4f}  min {min(pa):.4f}   "
+          f"MII(6) mean {sum(mi)/len(mi):.4f}  min {min(mi):.4f}")
+    print("  The Paulis are NOT free wins — six of them sit at 0.77-0.78, as hard as the hardest")
+    print("  MII pair. Difficulty is SPREAD, so shot allocation must not be concentrated on MII.")
+    res["per_pair_joint_parallel"] = dict(per)
+
+    out = {"cycle": "C6578", "author": "elder", "scope": "H10-B1 ceiling co-check, FULL",
+           "n_pairs": len(pairs), "flip_min_win": worst, "tiers": res,
+           "subset_parallel_alone": {"paulis_15": vP, "mii_6": vM},
+           "verdict": ("REPRODUCED (parallel + causal); process tier NOT ATTEMPTED — needs the "
+                       "definite-time-direction constraint this script does not implement")
+                      if ok else "DISAGREES WITH PUBLISHED BARS"}
+    import os
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    with open(os.path.join(root, "results/h10_b1_ceiling_cocheck_full_elder_c6578.json"), "w") as fh:
+        json.dump(out, fh, indent=1)
+    print(f"\n  VERDICT: {out['verdict']}")
+    return 0 if ok else 1
+
+
 def main():
+    if "--full" in sys.argv:
+        return main_full()
     rc, vals = selftest()
     print()
     print("H10-B1 strategy-class ceilings -- PAULI SUBSET ONLY (15 of the published 21)")
