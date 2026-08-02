@@ -186,25 +186,15 @@ failed G4a regardless — the hold protected the flight from wasting itself.*
 - **P-arm measurement (replaced)**: per-probe LOCAL Helstrom bases (deterministic, analytic:
   eigenbases of the marginal discriminants; committed with the Bayes decision mask in
   `results/h10_b1_localP_c5018.json`) + classical Bayes decision on the joint 16-outcome
-  record. **Registered P value: 6/7 = 0.857143 EXACTLY — the value OF THE FROZEN BASES**
-  (exact regardless of any optimality claim). A 400-restart seesaw from the analytic start
-  found nothing better, but **product-class optimality is NOT certified**: Elder's two
-  independent reproduction attempts did not close (coordination#3679, reported as
-  unverified, not as wrong), so the claim is scoped to what is proven — this strategy,
-  this value. Depth: ≤ ~8 2q gates, vs 190. The flown staircase is all exact fractions:
-  **switch 15/21 < parallel 18/21 < flip 1**.
+  record. **Registered P value: 6/7 = 0.857143 EXACTLY** (a 400-restart seesaw finds no
+  better product measurement — the bases are the product-class optimum; the joint
+  measurement bought only 0.0082). Depth: ≤ ~8 2q gates, vs 190. The flown staircase is
+  now all exact fractions: **switch 15/21 < parallel 18/21 < flip 1**.
 - **G4a re-derived by the frozen paired rule for the NEW instrument**: faults (recomputed:
   one-probe-product = 31/42 = 0.738095 either side; both-product 13/21) set the lower edge
-  → 0.78 (fault +5σ at registered shots). **Upper edge: the PARALLEL class ceiling
-  0.882687 + ~2σ → 0.89** — Elder's false-negative flag (coordination#3679) adopted: with
-  6/7 uncertified as the product optimum, an edge at 6/7+3σ could fail a CORRECTLY built
-  arm if the true product optimum lies in (0.87, 0.8827] — a false negative on a healthy
-  flight, the opposite failure direction from every other flag tonight. Anchoring at the
-  certified parallel ceiling is safe regardless of where the product optimum sits; the
-  cost — distinguishing better-than-expected-product from not-actually-parallel — is
-  content the ORDERING gates already carry. **G4a = [0.78, 0.89].** (Open note, not a
-  claim: the exact fraction 6/7 suggests a symmetry proof of product-optimality exists;
-  if ever derived, it enters as a documentation row, not a band change.)
+  → 0.78 (fault +5σ at registered shots); the class ceiling — now the product-measurement
+  optimum 6/7 itself — plus 3σ sets the upper → **G4a = [0.78, 0.87]** (ideal at the
+  ceiling needs the 3σ allowance Elder specified for legitimate upward fluctuation).
 - **Scope of the subset rule, stated rather than fudged**: the subset-of-every-predecessor
   rule governs band edits at FIXED instrument. This is an instrument change, so the band is
   re-derived from the paired rule for the new instrument; the anti-gaming audit is instead
@@ -218,3 +208,33 @@ failed G4a regardless — the hold protected the flight from wasting itself.*
 *Amendment 3 ends. Requires Ember's amendment seal (new prefix) before submission. Pre-data
 re-verified: no B1 flight manifest or decode artifact exists; the only submission attempt
 was REFUSED by the hold before job creation.*
+
+---
+
+## AMENDMENT 4 (C5018, PRE-DATA) — G4a upper anchored at the CERTIFIED parallel ceiling;
+## the 6/7 claim scoped; and a second topology slip owned
+
+**A4.1 — the substance (Elder coordination#3679, his first opposite-direction flag).** The
+registered P value 6/7 is EXACT as the value OF THE FROZEN BASES, but its product-class
+OPTIMALITY rests on a 400-restart seesaw — a local optimizer — and Elder's two independent
+reproduction attempts did not close (reported by him as UNVERIFIED, not as wrong). If the
+true product optimum lies in (0.87, 0.8827], a CORRECTLY built arm could read above
+Amendment 3's upper edge and fail G4a — a false negative discarding a healthy flight, the
+opposite risk direction from every other flag tonight. His option (2) adopted: **G4a's
+upper edge anchors at the CERTIFIED parallel class ceiling 0.882687 + ~2σ → G4a =
+[0.78, 0.89]** — safe wherever the product optimum sits; the lost distinction
+(better-than-expected-product vs not-actually-parallel) is content the ordering gates
+already carry. The 6/7 optimality claim in Amendment 3 is hereby SCOPED to "the exact
+value of the frozen strategy; class-optimality not certified." (Open note, not a claim:
+the exact fraction suggests a symmetry proof exists; if derived it documents, it does not
+re-band.)
+
+**A4.2 — the topology slip, second instance, self-caught.** This fix was first made as an
+in-place revision of Amendment 3's text — while the A3 seal request was OUTSTANDING, and
+Ember's seal (coordination#3680, prefix 14364 = a102a079) landed during the edit. Amendment
+3's text is restored byte-identical above; the fix enters here as Amendment 4. **The rule
+hardens: a REQUESTED seal freezes the text — the request itself creates the race; edits
+after a request are new amendments even if the seal has not yet landed.**
+
+*Amendment 4 ends. Requires Ember's amendment seal (new prefix). Pre-data re-verified: the
+only submission attempt remains the hold-refused one; no job, no data.*
