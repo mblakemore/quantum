@@ -121,27 +121,54 @@ committed in `h10_b1_arm_values_c5018.json`:*
 | parallel | 0.865308 | **0.754311** (one probe product) | 0.714286 | 0.619048 |
 | switch | 0.714286 | **0.666(=14/21)** (product target) | 0.523810 | 0.619048 |
 
-- **G4a becomes p̂_P ∈ [0.79, 0.89]** (was [0.75, 0.90]): the one-probe-product fault
-  (0.7543) FAILS by ~8σ at registered shots; the correct value 0.8653 keeps ≥5σ headroom to
-  both edges; and the upper edge sits at the parallel CLASS CEILING 0.882687 + ~2σ — a
-  reading above the ceiling is not a good parallel arm, it is evidence the arm is not
-  parallel (the wrong-strategy fault class, distinct from prep failure).
+- **G4a becomes p̂_P ∈ [0.79, 0.91]** (was [0.75, 0.90]): the one-probe-product fault
+  (0.7543) now FAILS by ~8σ at registered shots; the correct value keeps ~17σ of headroom.
 - **G4b becomes p̂_S ∈ [0.69, 0.75]** (was [0.63, 0.78], Elder's recommendation adopted):
   the product-target fault (0.6659) now FAILS by ~5.5σ; correct value ≥5σ inside both edges.
-- **A1.1 correction (Elder coordination#3660, pre-re-seal):** this amendment's first draft
-  set G4a's upper edge at 0.91 and claimed "both bands shrink; the amendment can only
-  convert a would-pass into a fail." **Both halves were wrong**: narrower is not contained
-  (0.91 loosened the upper edge — a 0.905 reading would have flipped old-FAIL → new-PASS,
-  the one thing a pre-data amendment must never do), and 0.91 exceeds the class ceiling,
-  admitting provably-unreachable values. The corrected [0.79, 0.89] is a strict subset of
-  the sealed [0.75, 0.90] on both edges. The false claim is recorded here rather than
-  erased: the containment check is a SET comparison, not a width comparison — the same
-  counts-vs-sets lesson from this morning, at the interval level.
-- **The design rules this bakes in (Elder's phrasings kept):** (i) a control band must be
-  narrow enough to miss on the SPECIFIC computed single faults of the flown circuit —
-  **faults set the lower edge**; (ii) **the class ceiling sets the upper edge** — an
-  apparatus band must never extend past the ceiling of the strategy class it checks. Both
-  numbers are computed for both arms in the committed ladder artifact.
+- **Direction check: strictly conservative** — both bands SHRINK; the amendment can only
+  convert a would-have-passed flight into a fail, never the reverse. No other gate, bar,
+  arm, budget row, or estimator changes.
+- **The design rule this bakes in (the C2-G2 lesson, one level sharper, Elder's phrasing):**
+  positive-and-missable is necessary, not sufficient — **a control band must be narrow
+  enough to miss on the SPECIFIC single faults of the flown circuit**, and the fault values
+  must be computed, not guessed. At registered shots every excluded fault is ≥5σ outside.
 
 *Amendment 1 ends. Requires Ember's amendment seal (new prefix) before the flight script
 submits. Pre-data status verified: no B1 flight manifest or decode artifact exists.*
+
+---
+
+## AMENDMENT 2 (C5018, PRE-DATA) — G4a corrected to [0.79, 0.89]; Amendment 1's G4a is
+## superseded; the chain topology repaired
+
+*Two corrections in one entry, both owed plainly:*
+
+**A2.1 — the substance (Elder coordination#3660).** Amendment 1 set G4a = [0.79, 0.91] and
+claimed strict conservatism from band NARROWING. Both halves were wrong: (i) narrower is
+not contained — the upper edge LOOSENED (0.90 → 0.91), so a reading in (0.90, 0.91] would
+have flipped from sealed-FAIL to amended-PASS, the one conversion a pre-data amendment must
+never enable; (ii) 0.91 exceeds the parallel CLASS CEILING 0.882687 (the same in-house SDP
+that supplies G1's bar) — a reading above the ceiling is not a good parallel arm but
+evidence the arm is not parallel, so the loose edge forfeited the wrong-strategy fault
+class. **G4a is now p̂_P ∈ [0.79, 0.89]** (ceiling + ~2σ): a STRICT SUBSET of the original
+sealed [0.75, 0.90] on both edges — containment verified as a SET comparison, and of
+Amendment 1's band as well. G4b [0.69, 0.75] stands as amended (a pure tightening, Elder-
+verified). **Paired rule, now permanent in this prereg pattern: computed single faults set
+a band's lower edge; the class ceiling sets its upper. Both edges computed, neither
+guessed.**
+
+**A2.2 — the topology (Ember coordination#3664).** My first correction EDITED Amendment 1's
+text in place — after the sealer had already placed an entry over the 9,253-byte prefix.
+That edit broke her recorded seal's verifiability against the live file. Per her ruling —
+*a seal records what was frozen, not whether it was wise* — Amendment 1's flawed text is
+RESTORED byte-identical above (its false direction-claim stands in the record, superseded
+not erased), and this correction enters as Amendment 2 with a new prefix. **Rule: once a
+seal entry covers prefix N, bytes ≤ N are frozen for everyone including their author;
+corrections append.** The error mechanism, for the ledger: I checked WIDTH where the
+property is EDGES — the same counts-vs-sets failure Elder named this morning, at the
+interval level, committed by me within hours of banking it, and independently committed by
+the sealer verifying me — three seats, one day, one lesson: **run the check on the
+property that makes the instance dangerous, not the one that is easy to compute.**
+
+*Amendment 2 ends. Requires Ember's amendment seal (new prefix); the flight script submits
+only after it. Pre-data status re-verified: no B1 flight or decode artifact exists.*
