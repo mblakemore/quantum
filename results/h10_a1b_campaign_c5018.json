@@ -1,0 +1,105 @@
+{
+ "go": "Creator general#3865 'Go A1b'",
+ "control_codewords": {
+  "v0": {
+   "b0": {
+    "a": 0,
+    "shares": {
+     "1": 0,
+     "2": 0,
+     "3": 0
+    }
+   },
+   "b1": {
+    "a": 1,
+    "shares": {
+     "1": 0,
+     "2": 3,
+     "3": 2
+    }
+   }
+  },
+  "v1": {
+   "b0": {
+    "a": 3,
+    "shares": {
+     "1": 3,
+     "2": 1,
+     "3": 2
+    }
+   },
+   "b1": {
+    "a": 2,
+    "shares": {
+     "1": 3,
+     "2": 2,
+     "3": 0
+    }
+   }
+  }
+ },
+ "control_pair_dial_ideal": 1,
+ "control_singles_c0_table": {
+  "v0_s1_b0_c0": 0,
+  "v0_s2_b0_c0": 0,
+  "v0_s3_b0_c0": 0,
+  "v0_s1_b1_c0": 0,
+  "v0_s2_b1_c0": 1,
+  "v0_s3_b1_c0": 0,
+  "v1_s1_b0_c0": 1,
+  "v1_s2_b0_c0": 1,
+  "v1_s3_b0_c0": 0,
+  "v1_s1_b1_c0": 1,
+  "v1_s2_b1_c0": 0,
+  "v1_s3_b1_c0": 0
+ },
+ "encode_dag_cx_targets": {
+  "s1_c1": 0,
+  "s1_c0": 0,
+  "s2_c1": 3,
+  "s2_c0": 2,
+  "s3_c1": 2,
+  "s3_c0": 2
+ },
+ "pair_depth_sums": {
+  "s1s2": 5,
+  "s1s3": 4,
+  "s2s3": 9
+ },
+ "ordering_gate_registered_form": "ROBUST CORE ONLY: floor(s2s3) < min(floor(s1s2), floor(s1s3)). The full 3-way ordering is NOT registered: s1s2-vs-s1s3 differ by one CX-target (5 vs 4) and per-qubit readout asymmetry can swamp it; s2s3-vs-others differ by 4-5 targets (9 vs 4-5), the mechanism's unambiguous prediction. Statistic: diff = min(floor_s1s2, floor_s1s3) - floor_s2s3; CONFIRMED diff >= +2se_diff, REFUTED diff <= -2se_diff, else UNDERPOWERED. Ideal (noiseless): diff = 0 -> UNDERPOWERED, correctly reporting zero depth effect at finite resolution.",
+ "shots": {
+  "dial": 3000,
+  "record_control": 3000,
+  "revival": 2000,
+  "scramble": 1500,
+  "story": 4000
+ },
+ "power_table": {
+  "pair_dial_se": 0.00658786763680024,
+  "pair_bar_clearance_expected": {
+   "allowance": 0.03,
+   "expected_floor": 0.86,
+   "expected_read": 0.86,
+   "clearance_at_3se_floor": "0.030 + 3*se_floor",
+   "2se_read": 0.01317573527360048,
+   "verdict": "POWERED (clearance ~0.030+3se_f=~0.045 vs 2se=~0.026)"
+  },
+  "custody_pair": {
+   "se_dial_scramble_pub": 0.01549193338482967,
+   "allowance": 0.04,
+   "verdict": "POWERED (bar sits 0.040+3se_f below floor; 2se=0.015)"
+  },
+  "singles_cap": {
+   "cap": 0.1,
+   "se_dial_null": 0.012909944487358056,
+   "verdict": "POWERED (0.10 margin vs 2se=0.026)"
+  },
+  "ordering_gate": {
+   "se_diff_approx": 0.00931665175908169,
+   "resolvable_effect": 0.01863330351816338,
+   "note": "A1 raw depth deltas were ~0.03-0.09; resolvable at 2se_diff=~0.037. CONFIRMED reachable if the A1-scale effect is real; honest UNDERPOWERED if the true effect is <0.037."
+  }
+ },
+ "total_shots": 36000,
+ "qpu_estimate_s": "10-15"
+}
