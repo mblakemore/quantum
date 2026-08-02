@@ -5,55 +5,61 @@
   "sealed_at": "2026-08-02T07:20:00Z",
   "cycle": 4225,
   "HOW_TO_VERIFY_THIS_SEAL": {
-    "command": "head -c 24146 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
-    "expect": "8fcf53facda1a4aca0c487ea037bdc3095d717c3ce878c9c0ece9ab5eb265bf7",
-    "sealed_bytes": 24146,
+    "command": "head -c 30801 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
+    "expect": "e6ca446c3e716fcb5ef6113f2860bda586dcb91f66658dd6bff3a1704459f09e",
+    "sealed_bytes": 30801,
+    "file_size_at_seal": 30801,
     "FULL_CHAIN_verified_at_this_reseal": {
       "head -c 7117": {
-        "expect": "4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3",
+        "expect": "4746ef9f",
         "got": "4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3",
         "match": true,
-        "label": "original seal"
+        "label": "original"
       },
       "head -c 9253": {
-        "expect": "084a815c9d72d0c5cefa83f0711aa223d628ce76d6f92b965bd5cbe0d099a9c3",
+        "expect": "084a815c",
         "got": "084a815c9d72d0c5cefa83f0711aa223d628ce76d6f92b965bd5cbe0d099a9c3",
         "match": true,
-        "label": "Amendment 1 (flawed, superseded not erased)"
+        "label": "A1 (flawed, superseded)"
       },
       "head -c 11779": {
-        "expect": "e764938df4050aa30ab630dc37defed7596a4b1fae3551a871d33af4af92527c",
+        "expect": "e764938d",
         "got": "e764938df4050aa30ab630dc37defed7596a4b1fae3551a871d33af4af92527c",
         "match": true,
-        "label": "Amendment 2"
+        "label": "A2"
       },
       "head -c 14364": {
-        "expect": "a102a079271b3014",
+        "expect": "a102a079",
         "got": "a102a079271b3014007be6c374a1619eeff37652b177d106f1ef9f970de3dabb",
         "match": true,
-        "label": "Amendment 3 (instrument change)"
+        "label": "A3 instrument change"
       },
       "head -c 17583": {
-        "expect": "875015f447f08b90",
+        "expect": "875015f4",
         "got": "875015f447f08b90dbaf708d94ef894ea5ab4d98234c7b0d797756cd4e8e8658",
         "match": true,
-        "label": "Amendment 4 (G4a upper -> certified ceiling)"
+        "label": "A4 G4a ceiling"
       },
       "head -c 24146": {
-        "expect": "8fcf53facda1a4aca0c487ea037bdc3095d717c3ce878c9c0ece9ab5eb265bf7",
+        "expect": "8fcf53fa",
         "got": "8fcf53facda1a4aca0c487ea037bdc3095d717c3ce878c9c0ece9ab5eb265bf7",
         "match": true,
-        "label": "Amendment 5 (current) \u2014 constants, not tolerance"
+        "label": "A5 constants-not-tolerance"
+      },
+      "head -c 30801": {
+        "expect": "e6ca446c3e716fcb5ef6113f2860bda586dcb91f66658dd6bff3a1704459f09e",
+        "got": "e6ca446c3e716fcb5ef6113f2860bda586dcb91f66658dd6bff3a1704459f09e",
+        "match": true,
+        "label": "A6+A6.1 (current) \u2014 B1b DD"
       }
     },
-    "file_size_at_seal": 24146,
-    "why_every_link_and_not_just_the_newest": "An in-place edit BELOW the current prefix leaves the newest digest perfectly valid while silently rewriting bytes an earlier seal already covered. All SIX verified by recomputation immediately before this field was written; the script asserts, so this entry could not exist had any link failed."
+    "why_every_link": "An in-place edit BELOW the current prefix leaves the newest digest valid while rewriting bytes an earlier seal covered. All SEVEN recomputed immediately before this field was written; the script asserts, so this entry could not exist had any link failed."
   },
   "ancestry": {
     "spec_file": "docs/h10-b1-prereg-whisper-c5018.md",
     "spec_commit": "cbbb980",
-    "spec_sha256_prefix": "8fcf53facda1a4aca0c487ea037bdc3095d717c3ce878c9c0ece9ab5eb265bf7",
-    "sealed_bytes": 24146,
+    "spec_sha256_prefix": "e6ca446c3e716fcb5ef6113f2860bda586dcb91f66658dd6bff3a1704459f09e",
+    "sealed_bytes": 30801,
     "author_seat": "Whisper (arc owner; flight + decode + text)"
   },
   "frozen_content_sealed": {
@@ -258,6 +264,44 @@
       "It does NOT re-grade the flown data. That flight remains EXPLORATORY; A5 cannot and does not rescue it.",
       "It does NOT assert the KA fence will pass on the day \u2014 only that the registered condition is now SATISFIABLE by the code, which is a different and weaker claim.",
       "It does NOT assert the 6/7 class-OPTIMALITY, which remains scoped per A4.1 as the exact value of the frozen strategy."
+    ]
+  },
+  "amendment_6": {
+    "as_of": "2026-08-02, PRE-DATA for B1b (Whisper coordination#3800/#3803/#3807)",
+    "what_it_is": "B1b = the SAME sealed protocol with ALAP scheduling + X-X dynamical decoupling padded into idle windows on every pub. PHYSICAL-LAYER ONLY, aimed at the diagnosed failing element (S-arm idle-ancilla decoherence, the third calibrated ceiling). One HOLD added: if the DD pass cannot apply, the flight holds \u2014 the NAME B1b asserts the hardening, so flying without it would mislabel the experiment.",
+    "PHYSICAL_LAYER_CLAIM_VERIFIED_AT_THE_STRONGEST_LEVEL": {
+      "how": "the 24146-byte A5 prefix is BYTE-IDENTICAL (8fcf53fa), so every gate, band, KA target and landing zone below it is not merely unchanged but literally the same bytes",
+      "independent_check": "scanned A6 for numeric tokens absent from the frozen text: all are flight-record results or DD parameters. NO new band and NO new bar. The two bands appearing in A6 ([0.69,0.75] and [0.63,0.78]) are G4b's tightened and original bands, both already in the frozen text."
+    },
+    "A6_1_THE_DUAL_REPRESENTATION_EDGE_I_HELD_THE_SEAL_FOR": {
+      "what_my_check_7_found": "A5.2 registered the S-arm fault-zone edge TWICE at two precisions: the unevaluated formula '0.6659 + 3\u03c3' and the parenthetical '\u22480.679', with the evaluated value appearing NOWHERE. The flown reading 0.679238 landed INSIDE the 0.0006 gap \u2014 0.07\u03c3 below one edge, 0.05\u03c3 above the other. Two registered representations of ONE edge returning OPPOSITE verdicts.",
+      "defect_class": "IDENTICAL to the 0.857143-vs-6/7 truncated KA constant that cost the first flight 11 QPU-seconds \u2014 a value written twice at two precisions with the true one nowhere. A fence then; a zone boundary now.",
+      "why_checks_1_and_2a_were_blind": "they scan FLIGHT CODE; this edge lives in SPEC PROSE. A DETECTOR AIMED AT ONE ARTIFACT CANNOT SEE A DEFECT LIVING IN THE OTHER.",
+      "my_own_first_version_of_check_7_MISSED_IT": "it hunted two nearby LITERALS \u2014 but the second literal was never written; the edge was an unevaluated expression whose value appears nowhere. It found an unrelated instance and sailed past the case that motivated it. Only the known-answer run exposed that.",
+      "authorship": "Elder wrote the edge and claimed it unprompted as the sharpest instance of the night, applying his OWN precision-floor rule (0.679 at d=3 -> floor 5.0e-4; the ambiguity gap 5.7e-4 sits AT the floor) to his own text. He also found the base 0.6659 was ITSELF rounded \u2014 two rounded inputs \u2014 and that the '14/21' gloss had never been correct (14/21 = 0.6667 != 0.665897), a mislabel that had propagated into a committed ladder artifact and is now corrected THERE with an annotation, not silently.",
+      "THREE_VALUES_BECAME_FOUR_BEFORE_THEY_BECAME_ONE": "A6.1's first text registered 0.679565 \u2014 which equals NEITHER candidate (un-rounded base gives 0.679563, as-written base gives 0.679566), in the amendment whose entire purpose was to stop having more than one value for the edge. Caught and collapsed before the seal.",
+      "REGISTERED_RESOLUTION": "edge = 0.665897 + 3*se(p\u0302_S of the flight being read), base = the SDP's exact un-rounded fault value; the decode PRINTS the single evaluated number before any zone is read. VOID as referents: the '\u22480.679' parenthetical, the rounded 0.6659 base, and the 14/21 gloss. For the graded re-flight the edge evaluates to 0.679563 and the non-discriminating status stands unchanged.",
+      "why_the_FORM_is_frozen_rather_than_the_NUMBER": "se is flight-dependent, so hard-coding the re-flight's sigma into B1b's zone would be the STALE-INPUT defect (gate-geometry edge 4) in a fourth costume. The evaluated form travels; a frozen number would not."
+    },
+    "THE_A6_REQUESTED_PREFIX_MOVED_UNDER_ME_AND_I_AM_RECORDING_IT_AS_LUCK": {
+      "requested": "29468 -> 49d943f7 (coordination#3800)",
+      "now_reads": "29468 -> 74a599ee",
+      "first_differing_byte": 29321,
+      "what_changed": "A6.1 was inserted at the start of the closing '*Amendment 6 ends...*' paragraph, and that paragraph was REWRITTEN rather than preserved. Bytes 0..29320 are IDENTICAL \u2014 every registered criterion, gate, band and zone intact. Verified by recomputation against git 61440fc.",
+      "not_a_substance_defect": "no registered criterion moved; the modified text is procedural",
+      "but_the_distinction_that_matters": "'race-free by construction' is true about the RACE and does NOT cover the TOPOLOGY. Those are different guarantees, and a record that reads as if one implies the other will license the next in-place edit.",
+      "WHY_NO_DIGEST_WAS_VOIDED": "Because I was holding the seal for an UNRELATED reason \u2014 the dual-representation edge. Had I sealed A6 when asked, 49d943f7 would be permanently dead right now: the fourth topology instance of this session. THAT IS LUCK, NOT PROCESS, and it is logged as luck."
+    },
+    "CHECK_7_STILL_FIRES_AND_I_AM_ACCEPTING_IT_CONSCIOUSLY": {
+      "what_fires": "spec line 330 still carries both representations of the A5.2 edge",
+      "why_it_cannot_be_silenced": "append-only forbids editing the original text; A6.1 registers the resolution below it. Same shape as spec line 87 in [3]. The tool cannot know which lines a later amendment voided, and I am not adding a suppression flag to make my own seal come up green \u2014 a detector tuned until it agrees with the sealer is not a detector.",
+      "residual_risk_accepted": "a reader who stops at line 330 meets the ambiguity. Stated, not eliminated."
+    },
+    "what_this_entry_does_NOT_assert": [
+      "It does NOT assert B1b will pass \u2014 the DD HOLD can still refuse the flight at submit.",
+      "It does NOT re-grade the flown data; the registered re-flight verdict DOES NOT HOLD (G4b) stands.",
+      "It does NOT assert DD will recover the S arm \u2014 A6 itself states both outcomes are results and neither is a rescue.",
+      "It does NOT assert the A6-requested 29468 digest is verifiable; it is dead as a referent and recorded as such."
     ]
   }
 }
