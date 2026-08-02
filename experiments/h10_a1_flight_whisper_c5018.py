@@ -440,15 +440,10 @@ def grade(stats):
 
 def decode(job_id):
     sys.path.insert(0, SCRIPTS)
-    from ibm_multi_account import multi_account_service
-    job = None
-    for svc in multi_account_service():
-        try:
-            job = svc.job(job_id); break
-        except Exception:
-            continue
-    if job is None: sys.exit(f"job {job_id} not found in any account")
-    res = job.result()
+    from ibm_multi_account import service_for_job
+    svc, acct = service_for_job(job_id)
+    print(f"job on {acct}")
+    res = svc.job(job_id).result()
     pubs = build_pubs()
     stats = {}
     for p, r in zip(pubs, res):
