@@ -1,0 +1,62 @@
+{
+  "record": "H10 arc \u2014 prereg ancestry chain entry (spec-freeze, no secret held)",
+  "entry": "H10-A1 quorum fact \u2014 (2,3)-threshold coherent custody of a record",
+  "sealed_by": "Ember (DC15E)",
+  "sealed_at_cycle": 4229,
+  "HOW_TO_VERIFY_THIS_SEAL": {
+    "command": "head -c 5494 docs/h10-a1-prereg-whisper-c5018.md | sha256sum",
+    "expect": "a91a577d09b910b5be48df9fb486bc57580fbfbd2cf6e2d3946743dd78e1bf5c",
+    "sealed_bytes": 5494,
+    "file_size_at_seal": 5494,
+    "verified_at_seal": "PASS \u2014 recomputed and matched before this field was written; the script asserts, so this entry could not exist otherwise",
+    "prefix_bound_from_the_start": "flight records get appended to preregs after sealing, so a whole-file sha256 would MISMATCH a seal that was perfectly honoured. Bound to the first N bytes and stated as an executable command."
+  },
+  "ancestry": {
+    "spec_file": "docs/h10-a1-prereg-whisper-c5018.md",
+    "spec_sha256_prefix": "a91a577d09b910b5be48df9fb486bc57580fbfbd2cf6e2d3946743dd78e1bf5c",
+    "sealed_bytes": 5494,
+    "author_seat": "Whisper (arc owner; design + flight + decode)"
+  },
+  "AUTHOR_CLAIMS_VERIFIED_NOT_ACCEPTED": {
+    "checked": {
+      "five_gates_named": true,
+      "three_state_verdicts_registered": true,
+      "fault_coverage_matrix_in_text": true,
+      "co_batched_single_job_edge4": true,
+      "KA_targets_are_integers_not_truncatable": true
+    },
+    "how": "re-derived from the sealed bytes: gate labels by regex over the frozen text, three-state and fault-coverage language by presence, and the no-truncatable-literal claim by searching for ANY constant written to 4+ decimals \u2014 there are none. Every decimal in the prereg (0.10, 0.5, 0.70, 0.75, 0.80, 0.85, 1.0) is a GATE BAR compared against a measured dial, not a golden value compared against a tolerance."
+  },
+  "THE_DESIGN_FORECLOSES_THIS_CAMPAIGNS_OWN_DEFECT_CLASSES": {
+    "truncated_fence_constant": "the \u00a73 ideals are the INTEGERS 0 and 1, so the registered 1e-9 KA tolerance is satisfiable BY CONSTRUCTION \u2014 an integer has no truncation error. This is the defect that cost B1's first flight 11 QPU-seconds, designed out rather than guarded against.",
+    "depth_blowup": "the pair decoder is GF(4)-LINEAR, so every dial pub is Z-basis + classical XOR and no Helstrom rotation exists anywhere in the flight, max pub ~35 CX. B1's depth HOLD fired at 190 on a generic 4-qubit joint rotation; here the instrument is chosen so the hold cannot fire.",
+    "stale_gate_input": "co-batched into a SINGLE job, so gate-geometry edge 4 (validity) degenerates to zero window \u2014 staleness impossible by construction, not unlikely by policy.",
+    "unpowerable_or_trivially_passable_gates": "five THREE-STATE gates with a registered FAULT-COVERAGE MATRIX: each computed fault names the gate that catches it. Mask-stuck breaks blindness and fails G1's singles cap at 1.0 vs 0.10; the dial-INVISIBLE no-b encoding fault leaves every dial ideal and kills G3 revival to exactly 0; a dead apparatus fails the G2 positive control; scramble-leak fails G4."
+  },
+  "SEAL_TIME_CHECKS_RUN": {
+    "tool": "DC15E tools/seal-satisfiability-check.py",
+    "[1] truncated-fraction hazards": "CLEAR",
+    "[2a] decimal-width exposure": "CLEAR",
+    "[2b] tolerance vs hazard": "CLEAR",
+    "[7] dual-representation edges in spec": "CLEAR \u2014 no edge stated both as a value and an approximation",
+    "[3] registered bars in flight code": "SKIPPED, and the skip is the finding",
+    "WHY_3_WAS_SKIPPED_AND_WHY_IT_MATTERS": "There is no A1 flight script yet \u2014 it is built after the seal. Pointed at the $0 SIMULATION scout, the checker first emitted FIVE 'registered bar NOT FOUND in flight code' hits, every one an artifact mismatch, including a '1e-9 vs 1e-14' that was a numerical-noise cutoff inside an exact sim rather than a fence tolerance. I caught it by checking WHAT THE FILE WAS before drawing a conclusion from it. Had I not, I would have posted five defects against a prereg whose author had just correctly told me its fence targets are integers by construction. A CHECKER THAT SILENTLY ACCEPTS THE WRONG ARTIFACT MANUFACTURES FINDINGS, and manufactured findings are worse than none \u2014 they spend the reader's trust and train them to discount the real ones. Guard [0] now classifies on whether the file SUBMITS and skips [3] when it does not."
+  },
+  "what_this_entry_asserts": [
+    "The first 5494 bytes of docs/h10-a1-prereg-whisper-c5018.md hash to a91a577d09b910b5be48df9fb486bc57580fbfbd2cf6e2d3946743dd78e1bf5c, recomputed before this entry was written.",
+    "The five three-state gates, their bars, the fault-coverage matrix, the co-batched single-job structure and the kill conditions are FROZEN as recorded and pre-date submission.",
+    "The author's structural claims about the design were independently re-derived from the sealed bytes, not taken on report."
+  ],
+  "what_this_entry_does_NOT_assert": [
+    "It does NOT assert the flight is approved, funded, or that a flight script exists \u2014 none does at seal time.",
+    "It does NOT assert the registered bars are the RIGHT bars, only that they were fixed before the data existed.",
+    "It does NOT assert [3] passes \u2014 [3] was SKIPPED because there is no submission path to check it against, and a skip is not a pass.",
+    "It does NOT assert anything about outcomes."
+  ],
+  "seats": {
+    "whisper": "design + flight + decode (no grading discretion)",
+    "elder": "grader at landing",
+    "ember": "spec-seal \u2014 this ancestry commit; NO secret held",
+    "creator": "GO / budget authority"
+  }
+}
