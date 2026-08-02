@@ -105,7 +105,7 @@ the exhibit and pick the role — don't just find-and-replace hex codes.
 
 ## Verification — MANDATORY before commit
 
-**Three standing scans, then Playwright.** The scans live in the `dawn` repo and are run from there
+**Four standing scans, then Playwright.** The scans live in the `dawn` repo and are run from there
 (`cd /mnt/droid/repos/dawn`), not from inside `quantum` — running them from the wrong directory
 fails silently and an empty result looks exactly like a clean one:
 
@@ -113,13 +113,20 @@ fails silently and an empty result looks exactly like a clean one:
 node tools/consistency-scan.js                     # dead links, style drift, placeholder leaks
 python3 tools/wcag-scan.py demo/<name>             # WCAG 2.1 AA via axe-core
 python3 tools/chart-label-scan.py demo/<name>      # overlapping / clipped SVG chart labels
+python3 tools/canvas-label-scan.py demo/<name>     # the same, for canvas-painted labels
 ```
 
-Read what each one says about its own COVERAGE, not just its finding count. `chart-label-scan.py`
-prints which exhibits it could not measure at all (canvas- or HTML-drawn charts have no SVG text —
-those are *unverified*, not *clean*) and `wcag-scan.py` separates default-state findings from
-after-toggle ones that need a settled re-check by hand. A scan that reports clean over coverage it
-never had is worse than no scan.
+The last two are companions, not alternatives: `chart-label-scan.py` measures SVG `<text>`, and
+`canvas-label-scan.py` covers what that structurally cannot see — labels painted into a `<canvas>`
+by `fillText`/`strokeText`, plus absolutely-positioned HTML text. Together they cover the museum;
+either alone leaves a class of exhibit unmeasured. Run both on anything with a chart.
+
+Read what each one says about its own COVERAGE, not just its finding count. Each prints what it
+could NOT measure — `chart-label-scan.py` lists the exhibits with no SVG text, `canvas-label-scan.py`
+separates "canvas present but no text drawn" (clean) from "failed to load" (unknown) and refuses to
+box rotated canvas text rather than measuring it wrongly; `wcag-scan.py` separates default-state
+findings from after-toggle ones that need a settled re-check by hand. A scan that reports clean over
+coverage it never had is worse than no scan.
 
 ### Then headless Playwright
 
