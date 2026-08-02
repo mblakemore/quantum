@@ -284,8 +284,13 @@ def ka_gate(verbose=True):
               f"B={g['VERDICT_B_depth_mechanism']} (targets HOLDS / UNDERPOWERED)")
         print(f"       ideal bars: pairs {[round(g['bars'][f'pair_{a1.coal_name(p)}'], 4) for p in PAIRS]} "
               f"custody {g['bars']['custody']:.4f}")
+    # The two 0.02-se triples below DISCRIMINATE the sealed boundary constant 2 from any
+    # neighbor (margin 0.05 = 2.5*se: PASS/FAIL iff the constant is 2; UNDERPOWERED if 3)
+    # — Elder's #3868 residual made executable: the fence pins the code to the seal.
     triples = [(a1.three_state(1.00, 0.85, 0.001, ">="), "PASS"),
                (a1.three_state(0.70, 0.85, 0.001, ">="), "FAIL"),
+               (a1.three_state(0.90, 0.85, 0.020, ">="), "PASS"),
+               (a1.three_state(0.80, 0.85, 0.020, ">="), "FAIL"),
                (a1.three_state(0.86, 0.85, 0.020, ">="), "UNDERPOWERED"),
                (a1.three_state(0.05, 0.10, 0.001, "<="), "PASS"),
                (a1.three_state(0.15, 0.10, 0.001, "<="), "FAIL"),
@@ -297,7 +302,7 @@ def ka_gate(verbose=True):
     gka = all(got == want for got, want in triples)
     ok &= gka
     if verbose:
-        print(f"  KA {'PASS' if gka else 'FAIL'}  grader branch KA: {sum(g_ == w for g_, w in triples)}/10")
+        print(f"  KA {'PASS' if gka else 'FAIL'}  grader branch KA: {sum(g_ == w for g_, w in triples)}/12 (boundary-2 discriminating)")
         n2q = [sum(1 for inst in p['qc'].data
                    if len(inst.qubits) == 2 and inst.operation.name != 'measure') for p in pubs]
         print(f"  logical 2q: min {min(n2q)} max {max(n2q)} (HOLD 100 transpiled)")
