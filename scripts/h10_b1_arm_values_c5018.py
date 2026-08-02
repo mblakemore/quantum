@@ -84,5 +84,50 @@ def main():
         if isinstance(v, float): print(f"{k:26s} {v:.6f}")
     print("->", path)
 
-if __name__ == "__main__":
+if __name__ == "__main__" and "--a3" not in sys.argv:
     main()
+
+# ---------------- Amendment-3 addendum (C5018): the LOCAL product P-arm ----------------
+# The depth HOLD fired at 190 transpiled 2q (the generic 4q joint-Helstrom rotation).
+# Redesign: optimal PRODUCT measurement — per-probe local Helstrom bases (deterministic,
+# analytic: eigenbases of the marginal discriminants) + Bayes decision on the joint outcome.
+# Value = 18/21 = 6/7 EXACTLY (seesaw over 400 perturbations finds nothing better, so the
+# marginal-Helstrom bases are the product-class optimum); depth ~8 CX vs 190.
+def marginal_basis(idx):
+    rp = sum(np.outer(choi_vec(U if idx == 0 else V), choi_vec(U if idx == 0 else V).conj())
+             for _, U, V, _ in PPLUS) / 13
+    rm = sum(np.outer(choi_vec(U if idx == 0 else V), choi_vec(U if idx == 0 else V).conj())
+             for _, U, V, _ in PMIN) / 8
+    w, Vb = np.linalg.eigh(p_plus * rp - p_min * rm)
+    return Vb
+
+def local_product_value(B1, B2, f1=None, f2=None):
+    f1 = f1 or choi_vec; f2 = f2 or choi_vec
+    Pp = np.zeros((4, 4)); Pm = np.zeros((4, 4))
+    for _, U, V, _ in PPLUS:
+        Pp += np.outer(np.abs(B1.conj().T @ f1(U)) ** 2, np.abs(B2.conj().T @ f2(V)) ** 2) / 13
+    for _, U, V, _ in PMIN:
+        Pm += np.outer(np.abs(B1.conj().T @ f1(U)) ** 2, np.abs(B2.conj().T @ f2(V)) ** 2) / 8
+    return float(np.maximum(p_plus * Pp, p_min * Pm).sum()), (p_plus * Pp >= p_min * Pm)
+
+def amendment3_addendum():
+    B1, B2 = marginal_basis(0), marginal_basis(1)
+    e0 = np.array([1, 0], complex)
+    prodp = lambda U: np.kron(U @ e0, e0)
+    v, mask = local_product_value(B1, B2)
+    vf1, _ = local_product_value(B1, B2, f1=prodp)
+    vf2, _ = local_product_value(B1, B2, f2=prodp)
+    vff, _ = local_product_value(B1, B2, f1=prodp, f2=prodp)
+    out = {"local_product_value": v, "exact_fraction": "18/21 = 6/7",
+           "fault_one_probe_product": vf1, "fault_other_probe": vf2,
+           "fault_both_product": vff,
+           "B1_re": B1.real.tolist(), "B1_im": B1.imag.tolist(),
+           "B2_re": B2.real.tolist(), "B2_im": B2.imag.tolist(),
+           "bayes_mask_plus": mask.tolist()}
+    path = os.path.join(HERE, "..", "results", "h10_b1_localP_c5018.json")
+    json.dump(out, open(path, "w"), indent=1, default=float)
+    print(f"local P value {v:.6f} (6/7={6/7:.6f}); faults {vf1:.6f}/{vf2:.6f}/{vff:.6f}")
+    print("->", path)
+
+if __name__ == "__main__" and "--a3" in sys.argv:
+    amendment3_addendum()

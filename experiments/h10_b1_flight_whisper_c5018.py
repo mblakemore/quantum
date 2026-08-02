@@ -10,7 +10,7 @@ class label; the flip's controlled gate collapsing to +/-I is the game's own the
           the matrices; == +/-I exactly by the promise); H(c); measure c.
           win: M+ reads 0, M- reads 1. Ideal 1 per pair.
   P  4q:  Bell(0,1), Bell(2,3); U on 0, V on 2; FIXED 4q Helstrom rotation (eigenbasis of
-          p+rho+ - p-rho-); measure all; outcome in S+ -> guess M+. Ideal 0.865308.
+          p+rho+ - p-rho-); measure all; outcome in S+ -> guess M+. Ideal 0.857143.
   S  3q:  Bell(t=0, anc=1), control=2 in |+>; UV on t; c-[(UV)^dag VU] (controlled 1q);
           FIXED 3q Helstrom rotation; measure all. Ideal 15/21 = 0.714286.
 KA fence: exact walker over AS-BUILT pubs reproduces per-pair F wins = 1 and aggregate
@@ -41,10 +41,15 @@ def helstrom_basis(states_plus, states_min):
     w, V = np.linalg.eigh(p_plus * rp - p_min * rm)
     return V, (w > 0)
 
-# fixed measurement bases (computed once from the committed pairs — public data)
-SP4 = [np.kron(choi(U), choi(V)) for _, U, V, _ in PPLUS]
-SM4 = [np.kron(choi(U), choi(V)) for _, U, V, _ in PMIN]
-VP, MASKP = helstrom_basis(SP4, SM4)
+# fixed measurement bases (committed pairs — public data). Amendment 3: the P arm uses
+# the LOCAL product measurement (marginal-Helstrom bases + Bayes mask) from the committed
+# artifact — 6/7 exact, ~8 2q gates; the joint 4q rotation (190 transpiled 2q) tripped the
+# depth HOLD and is retired.
+LOCP = json.load(open(os.path.join(RESULTS, "h10_b1_localP_c5018.json")))
+B1L = np.array(LOCP["B1_re"]) + 1j * np.array(LOCP["B1_im"])
+B2L = np.array(LOCP["B2_re"]) + 1j * np.array(LOCP["B2_im"])
+MASKP = np.array(LOCP["bayes_mask_plus"], dtype=bool).reshape(-1)   # index a*4+b
+VP = None  # retired (joint rotation)
 def switch_state(U, V):
     a = np.kron(choi(U @ V), np.array([1, 0], complex))
     b = np.kron(choi(V @ U), np.array([0, 1], complex))
@@ -87,10 +92,10 @@ def ideal_win(pub):
         p0, p1 = abs(c[0]) ** 2, abs(c[1]) ** 2
         return p1 if lab == "M-" else p0
     if pub["arm"] == "P":
-        v = np.kron(choi(pub["U"]), choi(pub["V"]))
-        amps = VP.conj().T @ v
-        pwin = float(sum(abs(a) ** 2 for a, m in zip(amps, MASKP) if m == (lab == "M+")))
-        return pwin
+        a = np.abs(B1L.conj().T @ choi(pub["U"])) ** 2
+        b = np.abs(B2L.conj().T @ choi(pub["V"])) ** 2
+        joint = np.outer(a, b).reshape(-1)
+        return float(sum(pr for pr, m in zip(joint, MASKP) if m == (lab == "M+")))
     if pub["arm"] == "S":
         v = np.kron(choi(pub["UV"]), np.array([1, 0], complex)) * 0  # placeholder replaced below
         # build via the CIRCUIT: Bell(t,anc) x |+>_c; UV on t; c-G; then VS^dag; masks
@@ -117,17 +122,17 @@ def circuit_win(pub):
         # creg bit = q1 (control): outcome index bit1
         p1 = float(sum(pr for k, pr in enumerate(probs) if (k >> 1) & 1))
         return p1 if pub["win_outcome"] == "1" else 1 - p1
-    V, MASK = (VP, MASKP) if pub["arm"] == "P" else (VS, MASKS)
+    MASK = MASKP if pub["arm"] == "P" else MASKS
     return float(sum(pr for k, pr in enumerate(probs) if MASK[k] == (lab == "M+")))
 
 def ka_gate():
     pubs = build_pubs()
     def agg(arm, fn): return float(np.mean([fn(p) for p in pubs if p["arm"] == arm]))
     kF_m = max(abs(1 - ideal_win(p)) for p in pubs if p["arm"] == "F")
-    kP_m = abs(agg("P", ideal_win) - 0.865308)
+    kP_m = abs(agg("P", ideal_win) - 0.857143)
     kS_m = abs(agg("S", ideal_win) - 0.714286)
     kF_c = max(abs(1 - circuit_win(p)) for p in pubs if p["arm"] == "F")
-    kP_c = abs(agg("P", circuit_win) - 0.865308)
+    kP_c = abs(agg("P", circuit_win) - 0.857143)
     kS_c = abs(agg("S", circuit_win) - 0.714286)
     ok = all(v < 1e-9 for v in (kF_m, kF_c)) and all(v < 1e-6 for v in (kP_m, kS_m, kP_c, kS_c))
     print(f"KA matrix : F {kF_m:.2e} | P dev {kP_m:.2e} | S dev {kS_m:.2e}")
@@ -154,7 +159,10 @@ def to_qiskit(pub):
         qc = QuantumCircuit(4, 4)
         qc.h(3); qc.cx(3, 2); qc.h(1); qc.cx(1, 0)
         qc.append(UnitaryGate(pub["U"]), [3]); qc.append(UnitaryGate(pub["V"]), [1])
-        qc.append(UnitaryGate(VP.conj().T), [0, 1, 2, 3])
+        # Amendment 3: LOCAL rotations. B1 acts on (sysU=q3 MSB, ancU=q2) -> qiskit [q2,q3];
+        # B2 on (sysV=q1, ancV=q0) -> [q0,q1]. Measured int = (B1 idx)*4 + (B2 idx) = mask idx.
+        qc.append(UnitaryGate(B1L.conj().T), [2, 3])
+        qc.append(UnitaryGate(B2L.conj().T), [0, 1])
         qc.measure(range(4), range(4))
         return qc
     if pub["arm"] == "S":
@@ -197,7 +205,7 @@ def fly():
     job = sampler.run([(t, None, SHOTS) for t in tq])
     man = {"experiment": "h10_b1_time_flip", "cycle": "C5018",
            "prereg": "docs/h10-b1-prereg-whisper-c5018.md chain 7117/4746ef9f + 9253/084a815c + 11779/e764938d",
-           "go": "<record Creator GO ref before submission>",
+           "go": "Creator general#3674 'Go when ready!' (2026-08-02)",
            "account": "ALT2", "pool_remaining_at_submit_s": u["usage_remaining_seconds"],
            "backend": backend.name, "chain_2q_median": med,
            "pubs": [{"arm": p["arm"], "name": p["name"], "label": p["label"], "shots": SHOTS}
@@ -224,7 +232,7 @@ def decode(job_id):
         if p["arm"] == "F":
             w = cnt.get(p["win_outcome"], 0) / n
         else:
-            V, MASK = (VP, MASKP) if p["arm"] == "P" else (VS, MASKS)
+            MASK = MASKP if p["arm"] == "P" else MASKS
             w = 0.0
             for s, c in cnt.items():
                 k = int(s, 2)
@@ -245,7 +253,7 @@ def decode(job_id):
                  "sig": (pF - pP) / float(np.hypot(seF, seP))}
     out["G3"] = {"pass": bool((pP - pS) / np.hypot(seP, seS) >= 5),
                  "sig": (pP - pS) / float(np.hypot(seP, seS))}
-    out["G4a"] = {"pass": bool(0.79 <= pP <= 0.89), "value": pP}
+    out["G4a"] = {"pass": bool(0.78 <= pP <= 0.87), "value": pP}
     out["G4b"] = {"pass": bool(0.69 <= pS <= 0.75), "value": pS}
     allpass = all(out[g]["pass"] for g in ("G1", "G2", "G3", "G4a", "G4b"))
     out["VERDICT"] = "HOLDS" if allpass else "DOES NOT HOLD"
