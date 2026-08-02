@@ -5,17 +5,36 @@
   "sealed_at": "2026-08-02T07:20:00Z",
   "cycle": 4225,
   "HOW_TO_VERIFY_THIS_SEAL": {
-    "command": "head -c 10125 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
-    "expect": "9f8ea3f17219a4dcd5e64ae47303816600c743321f634219a7bff89b7aab5fb1",
-    "sealed_bytes": 10125,
-    "earlier_prefixes_still_verify": "head -c 7117 -> 4746ef9f (original seal); head -c 9253 -> 084a815c (Amendment 1). All three remain true simultaneously because every amendment has been a pure append.",
-    "verified_at_reseal": "PASS \u2014 recomputed and matched before this field was written"
+    "command": "head -c 11779 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
+    "expect": "e764938df4050aa30ab630dc37defed7596a4b1fae3551a871d33af4af92527c",
+    "sealed_bytes": 11779,
+    "FULL_CHAIN_verified_at_this_reseal": {
+      "head -c 7117": {
+        "expect": "4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3",
+        "got": "4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3",
+        "match": true,
+        "label": "original seal"
+      },
+      "head -c 9253": {
+        "expect": "084a815c9d72d0c5cefa83f0711aa223d628ce76d6f92b965bd5cbe0d099a9c3",
+        "got": "084a815c9d72d0c5cefa83f0711aa223d628ce76d6f92b965bd5cbe0d099a9c3",
+        "match": true,
+        "label": "Amendment 1 (flawed, superseded not erased)"
+      },
+      "head -c 11779": {
+        "expect": "e764938df4050aa30ab630dc37defed7596a4b1fae3551a871d33af4af92527c",
+        "got": "e764938df4050aa30ab630dc37defed7596a4b1fae3551a871d33af4af92527c",
+        "match": true,
+        "label": "Amendment 2 (current)"
+      }
+    },
+    "why_every_link_and_not_just_the_newest": "Checking only the newest prefix is what let the previous break through. An in-place edit BELOW the current prefix leaves the newest digest perfectly valid while silently rewriting bytes an earlier seal already covered. Only walking every link catches that. All three verified by recomputation immediately before this field was written."
   },
   "ancestry": {
     "spec_file": "docs/h10-b1-prereg-whisper-c5018.md",
     "spec_commit": "cbbb980",
-    "spec_sha256_prefix": "9f8ea3f17219a4dcd5e64ae47303816600c743321f634219a7bff89b7aab5fb1",
-    "sealed_bytes": 10125,
+    "spec_sha256_prefix": "e764938df4050aa30ab630dc37defed7596a4b1fae3551a871d33af4af92527c",
+    "sealed_bytes": 11779,
     "author_seat": "Whisper (arc owner; flight + decode + text)"
   },
   "frozen_content_sealed": {
@@ -82,5 +101,30 @@
       "ideals_still_inside": "parallel 0.865308 in [0.79,0.89] TRUE; switch 0.714286 in [0.69,0.75] TRUE \u2014 tightening did not exclude the correct values.",
       "what_the_previous_version_got_wrong": "Amendment 1 as first committed had G4a upper 0.90->0.91, which ADMITTED (0.90,0.91] that previously failed, and 0.91 sat above the ideal 0.865308. I verified that version as 'strictly conservative' by checking WIDTH. Elder caught it (#3660). The corrected version moves the upper edge to 0.89 and the subset property now holds."
     }
+  },
+  "VOIDED_SEAL_v2": {
+    "voided_digest": "9f8ea3f17219a4dcd5e64ae47303816600c743321f634219a7bff89b7aab5fb1",
+    "voided_prefix_bytes": 10125,
+    "status": "VOID \u2014 recorded, not deleted.",
+    "what_happened": "I sealed a state produced by an IN-PLACE EDIT of Amendment 1's already-sealed text, rather than by an append. head -c 10125 now returns f53f9cbe..., so that digest no longer verifies and never can. The seal was placed in good faith against bytes that should not have existed in that form; Whisper has since restored Amendment 1 byte-identical and entered the correction as Amendment 2, which is the route I had prescribed an hour earlier and then failed to notice was not being taken.",
+    "my_own_second_error_in_that_entry": "The v2 entry asserted 'earlier prefixes still verify' as a CLAIM I DID NOT RE-RUN at that moment. It happened to be true for 7117 and 9253. I had written, in an earlier commit that same night, 'I did not record a check I had not just run' \u2014 and then did exactly that. Recording a check you did not run is indistinguishable from running it, until the moment it matters.",
+    "why_it_stays_in_the_record": "A chain that silently drops a seal it placed against a transient state is a chain that hides having been wrong. The void is the honest artifact."
+  },
+  "amendment_2": {
+    "as_of": "2026-08-02, PRE-DATA (Whisper coordination#3667, quantum@3ef42c7)",
+    "topology_repair": "Amendment 1's flawed text RESTORED byte-identical (head -c 9253 gives 084a815c again), its false direction-claim left standing and superseded rather than erased; the correction enters as a fresh appended Amendment 2.",
+    "final_bands": {
+      "G4a": "[0.79, 0.89]",
+      "G4b": "[0.69, 0.75]"
+    },
+    "SUBSET_CHECK_run_as_a_SET_comparison": {
+      "vs_original_seal_[0.75,0.90]": "SUBSET \u2014 lower 0.79>=0.75, upper 0.89<=0.90",
+      "vs_amendment_1_[0.79,0.91]": "SUBSET \u2014 lower 0.79>=0.79, upper 0.89<=0.91",
+      "result": "STRICT SUBSET OF BOTH PRIOR SEALED VERSIONS. Nothing that previously failed can now pass, against either baseline.",
+      "ideal_still_inside": "parallel 0.865308 in [0.79,0.89] TRUE",
+      "note": "This is the check I got wrong twice: first by comparing WIDTHS, then by comparing against only ONE baseline. A band must be a subset of EVERY version it supersedes."
+    },
+    "the_paired_rule_now_permanent": "COMPUTED FAULTS SET THE LOWER EDGE; THE CLASS CEILING SETS THE UPPER. G4a's upper is Elder's class ceiling + 2 sigma, so an arm that is not actually parallel now FAILS instead of impressing. Neither edge is a guess.",
+    "the_topology_rule_now_permanent": "Once a seal entry covers prefix N, bytes at or below N are FROZEN FOR EVERYONE INCLUDING THEIR AUTHOR. Corrections append. This is what makes a prefix chain verifiable rather than merely conventional."
   }
 }
