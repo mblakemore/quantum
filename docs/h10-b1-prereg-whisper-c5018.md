@@ -349,3 +349,40 @@ diagnostic value with zero band movement).
 first customer and the seal does not go out if it fires. Per the hardened A4.2 rule this
 text is FROZEN from the moment the seal request posts. The re-fly additionally requires a
 fresh Creator GO (new spend, ~11 QPU-s, post-EXPLORATORY).*
+
+---
+
+## FLIGHT RECORD — RE-FLIGHT (C5018, registered): **DOES NOT HOLD** (G4b), with G1 PASSING
+## at 113σ — the verdict system working exactly as built
+
+- **Job**: d9nn1boqs0bc73e3kkh0 (fresh GO general#3719), ibm_fez via ALT2, ~11 QPU-s.
+  Decode: `results/h10_b1_decode_whisper_c5018.json` (frozen arithmetic; the fence this
+  flight passed is the ORIGINAL registered 1e-9 against exact-fraction targets).
+- **Gates**: G1 **PASS** — flip 0.995280, **113.6σ above the in-house definite-time-
+  direction ceiling 0.919746**. G2 PASS (42.1σ). G3 PASS (28.5σ). G4a PASS (parallel
+  0.843714, in-band). **G4b FAIL** — switch 0.679238 vs [0.69, 0.75].
+  **Registered verdict = conjunction = DOES NOT HOLD.**
+- **The S-arm zone, read mechanically per A5.2, zero discretion**: fault edge = 0.6659 +
+  3σ = 0.67957; measured 0.67924 sits 0.0003 BELOW it → **FAULT zone** (2.9σ above the
+  computed product-target fault, 7.7σ below ideal). The blind zones exist precisely so
+  this boundary case is read from the text, not argued.
+- **What G4b's failure IS (Elder #3726, adopted)**: his A1-tightened band — argued from a
+  computed fault ladder with no data in existence — caught a real degradation the ORIGINAL
+  [0.63, 0.78] band would have silently passed. The ladder locates it: between correct and
+  full-prep-failure = **partial half-Bell degradation**. And it REPRODUCES: 0.6851 (first
+  flight, exploratory) and 0.6792 (re-flight), both ~6σ below ideal. **Two flights agreeing
+  is a measurement, not a mishap: candidate THIRD calibrated ceiling of the campaign —
+  entangled-prep survival for the switch-class gadget at this depth — joining C1's
+  475-gate contrast and C2's ~250-gate state-survival.**
+- **What G1's pass IS and IS NOT**: within a failed conjunctive verdict, G1 is a passed
+  gate, not a held claim. The time flip beating the definite-direction ceiling at 113σ —
+  reproducing the exploratory 200σ — is carried in the record AS a gate outcome awaiting a
+  flight whose every health gate also holds. The physics is not in doubt from these data;
+  the protocol requires the apparatus to certify itself, and the switch arm's did not.
+- **Repair path, recorded only-if-priced**: the switch arm's half-Bell prep is the sole
+  failing element (F, P arms healthy). A B1b with a hardened S-prep (dynamical decoupling
+  on the idle ancilla, or a shallower Bell construction) re-enters by fresh amendment
+  cycle pre-data; alternatively the two-flight S value stands as the third ceiling.
+
+*Outcome entry; nothing sealed touched. The decode-vs-manifest job-id check Elder proposed
+is seconded for the seal checker.*
