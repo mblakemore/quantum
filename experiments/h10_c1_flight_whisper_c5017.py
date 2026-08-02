@@ -228,12 +228,12 @@ def build_stage_pubs(stage):
     return pubs
 
 def alt2_service():
-    tok = None
-    for line in open("/mnt/droid/repos/DC15W/.env"):
-        m = re.match(r"IBMQ_ALT2=(.+)", line.strip())
-        if m: tok = m.group(1)
-    from qiskit_ibm_runtime import QiskitRuntimeService
-    return QiskitRuntimeService(channel="ibm_quantum_platform", token=tok)
+    # c4217_018 class fix (Elder's shared module): EXPLICITLY NAMED account, REFUSES fallback.
+    # The old inline loader returned token=None on a missing env line -> silent default
+    # instance -- a write that defaults GOES SOMEWHERE. Now it raises instead.
+    sys.path.insert(0, SCRIPTS)
+    from ibm_multi_account import service_for_submission
+    return service_for_submission("IBMQ_ALT2")
 
 def choose_backend(svc, need=13):
     cands = []

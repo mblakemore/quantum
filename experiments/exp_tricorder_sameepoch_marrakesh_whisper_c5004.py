@@ -41,7 +41,10 @@ OUT = os.path.join(QROOT, "results", "exp_tricorder_sameepoch_marrakesh_manifest
 
 def main(submit=False):
     from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2
-    svc = QiskitRuntimeService(); backend = svc.backend(BACKEND)
+    import sys as _sys, os as _os; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts"))
+    from ibm_multi_account import service_for_submission
+    svc = service_for_submission("IBMQ_ALT")  # c4217_018: named account, no fallback (was bare default)
+    backend = svc.backend(BACKEND)
     props = backend.properties()
     print(f"marrakesh cal epoch: {props.last_update_date}")
 

@@ -30,7 +30,9 @@ def main():
 
     # --- fetch the 6 C1 covering chunks IN ORDER, per-chunk CACHED (resumable on network hiccup) ---
     from qiskit_ibm_runtime import QiskitRuntimeService
-    svc = QiskitRuntimeService()
+    import sys as _sys, os as _os; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts"))
+    from ibm_multi_account import multi_account_service
+    svc = multi_account_service()  # c4217_018: reader sweeps all accounts (was bare default)
     c1jobs = [j["job_id"] for j in m["jobs"] if j["kind"] == "c1_covering"]
     cache_dir = os.path.join(QROOT, "results", "cache"); os.makedirs(cache_dir, exist_ok=True)
     all_bits = []
