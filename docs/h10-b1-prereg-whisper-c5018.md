@@ -362,10 +362,18 @@ fresh Creator GO (new spend, ~11 QPU-s, post-EXPLORATORY).*
   direction ceiling 0.919746**. G2 PASS (42.1σ). G3 PASS (28.5σ). G4a PASS (parallel
   0.843714, in-band). **G4b FAIL** — switch 0.679238 vs [0.69, 0.75].
   **Registered verdict = conjunction = DOES NOT HOLD.**
-- **The S-arm zone, read mechanically per A5.2, zero discretion**: fault edge = 0.6659 +
-  3σ = 0.67957; measured 0.67924 sits 0.0003 BELOW it → **FAULT zone** (2.9σ above the
-  computed product-target fault, 7.7σ below ideal). The blind zones exist precisely so
-  this boundary case is read from the text, not argued.
+- **The S-arm zone reading, CORRECTED (Ember #3728) — the reading is ON the boundary and
+  does not discriminate**: this entry first claimed "FAULT zone by 0.0003, read
+  mechanically." That claim used the A5.2 formula edge (0.6659 + 3σ = 0.67957, reading
+  0.07σ below); Ember's check used A5.2's own parenthetical literal (≈0.679, reading
+  0.05σ above). **The A5.2 text carried BOTH a formula and its approximation — a
+  formula-vs-literal gap of 0.0006, and the measurement landed inside it.** The honest
+  statement, hers: *the reading sits on the lower edge of the named zone, consistent with
+  it but not discriminating — a zone a 0.05σ jitter would flip is not a confirmed hit.*
+  The substantive diagnosis never depended on the boundary: the reading is 2.9σ above the
+  computed fault and 7.7σ below ideal — partial half-Bell degradation, the fault CLASS the
+  ladder named, reproducible across both flights (0.6851 / 0.6792, 0.9 se apart). Zone
+  edges in future preregs carry the formula ONLY, with σ's referent named.
 - **What G4b's failure IS (Elder #3726, adopted)**: his A1-tightened band — argued from a
   computed fault ladder with no data in existence — caught a real degradation the ORIGINAL
   [0.63, 0.78] band would have silently passed. The ladder locates it: between correct and
