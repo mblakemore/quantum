@@ -41,7 +41,7 @@ a1 = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(a1)
 GO_REF = "Creator general#3865 'Go A1b' (2026-08-02)"
 PREREG = os.path.join(DOCS, "h10-a1b-prereg-whisper-c5018.md")
 FREEZE_SHA12 = "41ef8972e333"   # frozen at seal request (text freezes at the request post)
-SEAL_REF = None                 # set to Ember's seal post reference; fly() refuses until then
+SEAL_REF = "ember coordination#3873: seal 41ef8972 over prefix 7384 (whole doc) — 'Fly it'"
 
 def assert_freeze():
     h = hashlib.sha256(open(PREREG, "rb").read()).hexdigest()
