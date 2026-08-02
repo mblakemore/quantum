@@ -440,3 +440,44 @@ flight, evaluated, printed; nothing survives at two precisions.
 *Amendment 6 ends. Requires Ember's seal (text FROZEN from the seal-request post, per the
 A4.2 rule; this A6.1 addition was made UNDER the sealer's open hold at her direction —
 race-free by construction). Flight on seal; Creator GO already recorded.*
+
+---
+
+## FLIGHT RECORD — B1b (C5018, registered): **DOES NOT HOLD** (G4b, third consistent
+## failure, now DD-resistant and backend-independent) — the third ceiling hardens
+
+- **Job**: d9nqg4ssfqic73arbrf0, **ibm_kingston** (least-pending picker; prior flights flew
+  fez), ~11 QPU-s, DD verified-applied (X pulses 74 → 830). Decode:
+  `results/h10_b1_decode_d9nqg4ssfqic73arbrf0.json` (job-named).
+- **Gates**: G1 **PASS — flip 0.99552, 116.3σ above the dtd ceiling** (third reproduction:
+  200σ / 113.6σ / 116.3σ). G2 PASS 42.2σ. G3 PASS 28.1σ. G4a PASS (0.84305; third healthy
+  parallel read). **G4b FAIL — switch 0.68114** vs [0.69, 0.75].
+  **Registered verdict = DOES NOT HOLD.**
+- **A6.1 zone, single evaluated edge printed**: 0.665897 + 3(0.004548) = **0.67954**;
+  reading 0.68114 sits **+0.35σ above** → **ATTENUATION-CONSISTENT, fault-inconsistent**
+  — this time the zone discriminates (the graded re-flight's was on-boundary), and it
+  reads: decoherence of a healthy arm, not the discrete prep fault.
+- **The third ceiling, hardened per Amendment 6's own pre-registered branch**: the
+  switch-arm deficit (ideal − measured ≈ 0.033, ~7σ) is now (a) reproducible across
+  THREE flights (0.6851 / 0.6792 / 0.6811, max spread 1.3 se), (b) **backend-independent**
+  (fez ×2, kingston ×1), and (c) **DD-resistant** (756 X–X pulses changed it by +0.4σ).
+  **Mechanism narrowed by the DD null**: X–X echoes refocus quasi-static dephasing; a
+  deficit DD cannot touch points at amplitude damping (T1) and/or 2q-gate error inside the
+  controlled-G / 3q-Helstrom block — a property of the GADGET CLASS on current Herons, not
+  of a chip or a calibration day. Ceiling statement: **switch-class gadgets pay ≈0.033 of
+  win probability at this depth, irreducible by scheduling-level mitigation.**
+- **What stands after three flights**: the time flip beats the definite-time-direction
+  ceiling at >110σ every time it is measured; the staircase orders correctly every time;
+  and the registered verdict correctly refuses to hold while one health gate measures a
+  real hardware ceiling instead of a healthy arm. **G1's reproducibility is now itself a
+  finding** (three flights, two backends, one compiled-access fence) — carried as a gate
+  outcome awaiting an apparatus that can pass G4b honestly.
+- **Paths, recorded only-if-priced**: (i) accept the ceiling — re-derive G4b's band for
+  the MEASURED gadget-class attenuation by fresh amendment cycle (pre-data for a B1c;
+  the band would move DOWN to [0.665+margin, ...] — a data-derived band, requiring the
+  full four-edge re-derivation and honest statement that the health bar now encodes the
+  measured ceiling); (ii) redesign the S readout shallower (product-measurement variant,
+  value re-derived — new instrument, new scout per the laundry rule); (iii) rest here:
+  three registered negatives with a 116σ headline inside them is a complete, honest record.
+
+*Outcome entry; nothing sealed touched.*
