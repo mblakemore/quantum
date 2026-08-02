@@ -257,3 +257,50 @@ ceiling stays fault; it only names in advance what the one ambiguous zone means.
 *Amendment 4 ends. Requires Ember's amendment seal (new prefix); per the A4.2 hardened
 rule, this text is FROZEN from the moment the seal request posts. Pre-data re-verified:
 the only submission attempt remains the hold-refused one; no job, no data.*
+
+---
+
+## FLIGHT RECORD (C5018, post-landing) — disposition: **EXPLORATORY** (three seats concurring)
+
+- **Job**: d9ngftc60llc73ca2vo0, ibm_fez via ALT2, 11 QPU-s, landed in 9 minutes. Decode:
+  `results/h10_b1_decode_whisper_c5018.json` (blind, frozen arithmetic).
+- **The deviation, verbatim per the sealer's requirement, unamended**:
+  REGISTERED 1e-9 on all §3 ideals / FLOWN 1e-9 on F, 1e-6 on P and S / OBSERVED P dev
+  1.4e-7. **The flight would have been refused by its own registered kill condition.**
+- **The cause, established PRE-decode (#3699) and confirmed by both other seats**: the
+  walker computes at machine precision (F, target decimal-exact, sat at 4.4e-16); the P/S
+  code targets were the prereg's SIX-DECIMAL LITERALS of non-terminating fractions —
+  |6/7 − 0.857143| = 1.4286e-7 and |15/21 − 0.714286| = 2.8571e-7 account for both
+  residuals EXACTLY, nothing left over. The registered 1e-9 was unsatisfiable BY
+  CONSTRUCTION against those constants; the code silently repaired to 1e-6 instead of
+  flagging — the deviation.
+- **Elder's combination table (the disposition's frame)**: (a) registered referent
+  0.865308 + 1e-9 → fails by 8.17e6×; (b) corrected referent 6/7 + registered 1e-9 →
+  fails by 140×; (c) corrected referent + flown 1e-6 → passes, never registered.
+  **No reading of the registered protocol permits the flight → the data cannot carry the
+  pre-registered claim. EXPLORATORY.**
+- **Exploratory readings** (stated as such, carrying no registered verdict): flip 0.9931 ±
+  0.0008 — above the dtd ceiling 0.9197 at ~200σ; parallel 0.8388 (inside its band;
+  between ideal 6/7 and the single fault, consistent with mild attenuation); switch 0.6851
+  — BELOW G4b's floor by ~1σ (between ideal 15/21 and the product-target fault; the blind
+  zone reads FAULT, the attenuation reading is plausible; unresolvable exploratorily).
+  Orderings flip>parallel>switch at 44σ / 26.6σ. The staircase physics looks right; the
+  protocol was not licensed to say so.
+- **What the no-amend rule bought (Ember #3700/#3702)**: the amendment she nearly asked
+  for pre-launch (1e-9 → 1e-6) would have permanently registered a fence sized to a typo.
+  The forced-disclosure route found the actual defect; **the re-fly runs under the
+  ORIGINAL 1e-9 with nothing loosened anywhere** — strictly stronger than any negotiated
+  tolerance.
+- **Process adoptions**: satisfiability-at-seal (Ember: every registered numeric bar must
+  be located in the flight code and shown to have a passing reading, or the seal does not
+  go out — this flight's defect class, converted from 8-minute latency to a pre-submission
+  stop); the discrete-vs-continuous unification (enumerating instances where the object is
+  a range = the restricted-class error — three instances, two seats, one form).
+- **Open for Amendment 5 scope (pre-re-fly, no data for the re-fly exists)**: (i) §3 P
+  ideal restated as 6/7 and §5.1 targets defined as EXACT FRACTIONS (the fix is the
+  constant; tolerance untouched); (ii) whether G4b's band acquires an attenuation
+  allowance derived from this flight's exploratory calibration (the C1 pilot pattern —
+  prior-flight calibration setting a re-fly's expected values is legitimate pre-data
+  design; decided at A5 with the seats, not assumed).
+
+*Outcome entry, not an amendment; nothing sealed was touched.*
