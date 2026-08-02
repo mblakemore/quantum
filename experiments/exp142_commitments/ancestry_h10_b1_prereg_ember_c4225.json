@@ -1,0 +1,54 @@
+{
+  "record": "H10 arc \u2014 prereg ancestry chain entry (spec-freeze, no secret held)",
+  "entry": "H10-B1 time-flip / indefinite-causal-order pre-registration",
+  "sealed_by": "Ember (DC15E)",
+  "sealed_at": "2026-08-02T07:20:00Z",
+  "cycle": 4225,
+  "HOW_TO_VERIFY_THIS_SEAL": {
+    "command": "head -c 7117 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
+    "expect": "4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3",
+    "sealed_bytes": 7117,
+    "why_prefix_bound": "Prefix-bound FROM THE START on this one. Flight records get appended to these preregs after sealing, which is correct \u2014 it preserves the registered criteria and keeps the history in one artifact \u2014 but it makes a naive whole-file sha256 mismatch a seal that was honoured. Uhura found that on H10-C2 (general#3640); this entry is the first sealed under the fixed convention rather than retrofitted to it.",
+    "verified_at_seal": "PASS \u2014 recomputed and matched before this field was written"
+  },
+  "ancestry": {
+    "spec_file": "docs/h10-b1-prereg-whisper-c5018.md",
+    "spec_commit": "cbbb980",
+    "spec_sha256_prefix": "4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3",
+    "sealed_bytes": 7117,
+    "author_seat": "Whisper (arc owner; flight + decode + text)"
+  },
+  "frozen_content_sealed": {
+    "registered_verdict": "G1 AND G2 AND G3 AND G4a AND G4b \u2014 a five-way conjunction",
+    "G1": "flip beats the definite-direction ceiling: p_F > 0.919746 at >=5 sigma, aggregate over 21 pairs. THRESHOLD test against an in-house bound (C5014 category rule).",
+    "G2": "ordering flip > parallel: p_F - p_P >= 5 sigma",
+    "G3": "ordering parallel > switch: p_P - p_S >= 5 sigma \u2014 the order-vs-direction separation",
+    "G4a": "parallel apparatus-health, POSITIVE and MISSABLE: p_P in [0.75, 0.90] (ideal 0.8653; a dead apparatus reads ~0.62 and FAILS)",
+    "G4b": "switch apparatus-health, POSITIVE and MISSABLE: p_S in [0.63, 0.78] (ideal 0.7143; dead ~0.62 sits at the edge and fails jointly with G3)",
+    "reported_not_registered": "R1 per-pair win tables incl. the Pauli-subset saturation check (Elder's finding); R2 landscape {parallel-SDP 0.8827, causal-SDP 0.9056, dtd 0.9197} overlaid with measured arms; R3 flip per-pair minimum",
+    "budget": "~42k shots ~ 3-6 QPU-s on ALT2 \u2014 the cheapest flight on the board",
+    "kill_conditions": "KA fence: walker over AS-BUILT pubs reproduces every section-3 ideal at 1e-9 (flip=1/pair, parallel=0.865308, switch=0.714286), non-completion = FAIL; depth HOLD any transpiled pub > 150 2q gates (bar stated PRE-transpile against a ~110 estimate); calibration hold median 2q > 0.5%; pool re-read at submission, overdraw = not submitted"
+  },
+  "observations_recorded_at_seal": {
+    "NO_GATE_HERE_CAN_PASS_TRIVIALLY_AND_THAT_IS_DELIBERATE": "The text states it outright: 'every control gates on a POSITIVE prediction it can miss; nothing is satisfiable by a dead apparatus (a fully depolarized flight fails G1, G2, G4a simultaneously).' This is the direct answer to what I recorded on H10-C2 hours earlier \u2014 there G2 PASSED trivially because everything read zero, and I logged that its pass carried NO independent weight. Here the health gates are BANDS with a floor: a dead apparatus reads ~0.62 and FAILS G4a/G4b rather than sailing through. A control that cannot fail is not a control, and this prereg is built so none of them can be satisfied by wash.",
+    "THE_DEPTH_BAR_IS_STATED_PRE_TRANSPILE": "150 2q gates against a ~110 estimate, with the bar written down BEFORE the transpiler runs \u2014 same discipline as C2, where the estimate was stated up front and the transpiler's actual number given the deciding vote. A hold set after seeing the number is not a hold.",
+    "CHEAPEST_FLIGHT_ON_THE_BOARD": "3-6 QPU-s. For scale: C1's pilot cost 12 QPU-s to return NO-FLY and C2 cost ~60 to return DOES NOT HOLD. This one is cheaper than either negative, and its bars are Elder's already-computed ceilings rather than new estimates."
+  },
+  "what_this_entry_asserts": [
+    "The first 7117 bytes of docs/h10-b1-prereg-whisper-c5018.md at cbbb980 hash to 4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3, verified by recomputation before this entry was written.",
+    "The five registered gates with their numeric bars, the reported rows, the budget and the four kill conditions are FROZEN as recorded and pre-date submission.",
+    "The decode is counts -> win rates -> the five gates, with no grading discretion."
+  ],
+  "what_this_entry_does_NOT_assert": [
+    "It does NOT assert the flight is approved \u2014 the Creator's GO was OUTSTANDING at seal time.",
+    "It does NOT assert any kill condition has passed. The KA fence, the depth hold and the calibration hold can each still refuse the flight at submit.",
+    "It does NOT assert the ALT2 pool can fund it \u2014 I cannot verify ALT2 pool state from my own tooling, so any pool figure is the arc owner's reading, not mine.",
+    "It does NOT assert the registered gates are the RIGHT gates, nor anything about outcomes \u2014 only that they were fixed before the data existed."
+  ],
+  "seats": {
+    "whisper": "flight + decode + prereg text (no grading discretion)",
+    "elder": "grader at landing; his computed ceilings ARE the bars",
+    "ember": "spec-seal \u2014 this ancestry commit; NO secret held",
+    "creator": "GO / budget authority \u2014 outstanding at seal time"
+  }
+}
