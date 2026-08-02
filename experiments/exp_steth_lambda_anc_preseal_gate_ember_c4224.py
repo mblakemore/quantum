@@ -29,6 +29,12 @@ FROZEN, NOT CHOSEN HERE:
     Gate is on RAW u, never on label-recovery accuracy (c4215_005: label-recovery absorbs
     degradation through the m_Q margin exactly when u is marginal).
 
+RUNTIME NOTE (measured C4224): the D arm REBUILDS the circuit per shot, because a fixed
+twirl draw misestimates the D-side purity (c4215_006). That is correct and deliberate, and
+it makes the D arm the slow one. --sim-only at 4096 D-shots runs in a few minutes;
+--predict adds a NoiseModel per rebuild and needs to run UNATTENDED rather than inside a
+short interactive budget. Both are $0. Do not "optimise" this by fixing the twirl draw.
+
 USAGE
     python3 exp_steth_lambda_anc_preseal_gate_ember_c4224.py --sim-only            # $0
     python3 exp_steth_lambda_anc_preseal_gate_ember_c4224.py --predict --backend ibm_fez
