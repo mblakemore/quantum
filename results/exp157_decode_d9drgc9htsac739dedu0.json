@@ -1,0 +1,73 @@
+{
+ "job_id": "d9drgc9htsac739dedu0",
+ "backend": "ibm_fez",
+ "arms": [
+  {
+   "arm": "empty-loop",
+   "x_anc": 0.7998046875,
+   "expected": 1,
+   "n_sigma": 51.1875,
+   "ok": true
+  },
+  {
+   "arm": "braid-m-inside",
+   "x_anc": -0.78076171875,
+   "expected": -1,
+   "n_sigma": 49.96875,
+   "ok": true
+  },
+  {
+   "arm": "m-outside",
+   "x_anc": 0.8330078125,
+   "expected": 1,
+   "n_sigma": 53.3125,
+   "ok": true
+  },
+  {
+   "arm": "deformed-loop",
+   "x_anc": -0.79638671875,
+   "expected": -1,
+   "n_sigma": 50.96875,
+   "ok": true
+  },
+  {
+   "arm": "pair-enclosed",
+   "x_anc": 0.77880859375,
+   "expected": 1,
+   "n_sigma": 49.84375,
+   "ok": true
+  },
+  {
+   "arm": "pair-straddle",
+   "x_anc": -0.8232421875,
+   "expected": -1,
+   "n_sigma": 52.6875,
+   "ok": true
+  }
+ ],
+ "plaquettes": [
+  0.8564453125,
+  0.81787109375
+ ],
+ "stars": [
+  0.8662109375,
+  0.8974609375,
+  0.9248046875,
+  0.890625,
+  0.8828125,
+  0.94921875
+ ],
+ "edges": [
+  0.0,
+  0.02880859375,
+  0.0595703125,
+  -0.0078125,
+  0.0390625,
+  0.0078125,
+  0.0048828125
+ ],
+ "receipts_ok": true,
+ "verdict_ok": true,
+ "restored_from_commit": "fad6de575",
+ "restored_note": "restored 2026-08-02 (Ember campaign sweep coordination#3738): this flight's record had been overwritten at a mutable path; a file recording a specific execution must carry that execution's id in its NAME"
+}

@@ -1,0 +1,102 @@
+{
+ "exp": 157,
+ "backend": "ibm_fez",
+ "shots": 4096,
+ "job_id": "d9drgc9htsac739dedu0",
+ "arms": [
+  [
+   "empty-loop",
+   [
+    0,
+    5,
+    2,
+    4
+   ],
+   [],
+   1
+  ],
+  [
+   "braid-m-inside",
+   [
+    0,
+    5,
+    2,
+    4
+   ],
+   [
+    4
+   ],
+   -1
+  ],
+  [
+   "m-outside",
+   [
+    0,
+    5,
+    2,
+    4
+   ],
+   [
+    6
+   ],
+   1
+  ],
+  [
+   "deformed-loop",
+   [
+    0,
+    1,
+    6,
+    3,
+    2,
+    4
+   ],
+   [
+    4
+   ],
+   -1
+  ],
+  [
+   "pair-enclosed",
+   [
+    0,
+    1,
+    6,
+    3,
+    2,
+    4
+   ],
+   [
+    5
+   ],
+   1
+  ],
+  [
+   "pair-straddle",
+   [
+    0,
+    5,
+    2,
+    4
+   ],
+   [
+    5
+   ],
+   -1
+  ]
+ ],
+ "twoq_depths": [
+  22,
+  23,
+  18,
+  27,
+  23,
+  18,
+  15,
+  12
+ ],
+ "prereg": "all six arm signs correct AND |<X_anc>| > 5 sigma each; receipts: B_p, A_v > 0.5, single edges |<Z_i>| < 0.15",
+ "note": "Z2 anyon mutual statistics: Wilson-loop interferometry, 6 arms + 2 receipts",
+ "restored_from_commit": "25ddc144b",
+ "restored_note": "restored 2026-08-02 (Ember campaign sweep coordination#3738): this flight's record had been overwritten at a mutable path; a file recording a specific execution must carry that execution's id in its NAME"
+}

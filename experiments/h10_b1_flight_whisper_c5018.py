@@ -241,7 +241,9 @@ def fly():
                     for p in pubs],
            "transpiled_2q_counts": n2q, "job_id": job.job_id(),
            "committer": "Whisper (DC15W)"}
-    path = os.path.join(RESULTS, "h10_b1_flight_manifest.json")
+    # Ember #3738: a file recording a specific execution carries that execution's id in
+    # its NAME, or the next execution inherits its filename. Same rule as the decode.
+    path = os.path.join(RESULTS, f"h10_b1_flight_manifest_{job.job_id()}.json")
     json.dump(man, open(path, "w"), indent=1)
     print(f"SUBMITTED: {job.job_id()} -> {path}")
 
