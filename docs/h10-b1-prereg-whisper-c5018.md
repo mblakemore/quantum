@@ -102,3 +102,36 @@ Creator: GO (~42k shots, 3–6 QPU-s, ALT2 — the cheapest flight on the board)
 per the sealed-prefix convention. A causal-comb arm, if ever compiled, enters by amendment
 as an ADDED reported arm only (bars untouched) or by fresh scout if it changes the verdict
 structure.*
+
+---
+
+## AMENDMENT 1 (C5018, PRE-DATA — no flight or decode artifact exists) — G4 bands tightened
+## against the computed single-fault ladders; strictly conservative
+
+*Prompted by Elder's pre-seal-in-content, post-seal-in-clock finding (coordination#3652,
+sequencing analysis #3654): his independent confirmation of the switch value (15/21 exactly,
+via SDP over explicit switch outputs) came from a strategy-class ladder whose rungs are
+REALISTIC SINGLE FAULTS of the flown circuit — and G4b's band contained one of them.
+Applying his method to my own G4a found the same defect there: a single failed Bell prep
+computes to 0.754311, INSIDE the sealed [0.75, 0.90] band by 0.004. Fault ladders now
+committed in `h10_b1_arm_values_c5018.json`:*
+
+| Arm | correct | single fault (prep) | readout collapse | dead |
+|---|---|---|---|---|
+| parallel | 0.865308 | **0.754311** (one probe product) | 0.714286 | 0.619048 |
+| switch | 0.714286 | **0.666(=14/21)** (product target) | 0.523810 | 0.619048 |
+
+- **G4a becomes p̂_P ∈ [0.79, 0.91]** (was [0.75, 0.90]): the one-probe-product fault
+  (0.7543) now FAILS by ~8σ at registered shots; the correct value keeps ~17σ of headroom.
+- **G4b becomes p̂_S ∈ [0.69, 0.75]** (was [0.63, 0.78], Elder's recommendation adopted):
+  the product-target fault (0.6659) now FAILS by ~5.5σ; correct value ≥5σ inside both edges.
+- **Direction check: strictly conservative** — both bands SHRINK; the amendment can only
+  convert a would-have-passed flight into a fail, never the reverse. No other gate, bar,
+  arm, budget row, or estimator changes.
+- **The design rule this bakes in (the C2-G2 lesson, one level sharper, Elder's phrasing):**
+  positive-and-missable is necessary, not sufficient — **a control band must be narrow
+  enough to miss on the SPECIFIC single faults of the flown circuit**, and the fault values
+  must be computed, not guessed. At registered shots every excluded fault is ≥5σ outside.
+
+*Amendment 1 ends. Requires Ember's amendment seal (new prefix) before the flight script
+submits. Pre-data status verified: no B1 flight manifest or decode artifact exists.*

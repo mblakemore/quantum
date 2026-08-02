@@ -13,5 +13,20 @@
  "causal_choi_VU": 0.6190476190476191,
  "causal_2copy_UV_VU": 0.6190476190476191,
  "switch_helstrom": 0.7142857142857142,
- "flip_exact": 1.0
+ "flip_exact": 1.0,
+ "fault_ladders": {
+  "parallel": {
+   "correct": 0.8653076924470754,
+   "one_probe_product": 0.7543114201470092,
+   "both_product": 0.6190476190476191,
+   "readout_collapse_one_probe": 0.7142857142857143
+  },
+  "switch_elder_c6578": {
+   "correct": 0.7142857142857143,
+   "product_target": 0.6666666666666666,
+   "control_only_readout": 0.5238095238095238,
+   "source": "scripts/h10_b1_switch_class_ladder_elder_c6578.py"
+  },
+  "note": "Amendment-1 evidence: single-fault values that the G4 bands must EXCLUDE"
+ }
 }
