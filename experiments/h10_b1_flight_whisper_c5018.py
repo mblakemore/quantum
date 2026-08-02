@@ -203,7 +203,28 @@ def to_qiskit(pub):
         qc.measure(range(3), range(3))
         return qc
 
-def fly():
+def apply_dd(tq, backend):
+    """Amendment 6 (B1b): ALAP scheduling + X-X dynamical decoupling in idle windows.
+    Identity at the logical level. HOLD if the pass cannot apply — the NAME B1b asserts
+    the hardening; flying without it would mislabel the experiment."""
+    from qiskit.transpiler import PassManager
+    from qiskit.transpiler.passes import ALAPScheduleAnalysis, PadDynamicalDecoupling
+    from qiskit.circuit.library import XGate
+    try:
+        durations = backend.target.durations()
+        pm = PassManager([ALAPScheduleAnalysis(durations),
+                          PadDynamicalDecoupling(durations, [XGate(), XGate()])])
+        out = pm.run(tq)
+    except Exception as e:
+        sys.exit(f"DD HOLD (Amendment 6): scheduling/DD pass failed — {e}")
+    x_before = sum(sum(1 for i in t.data if i.operation.name == "x") for t in tq)
+    x_after = sum(sum(1 for i in t.data if i.operation.name == "x") for t in out)
+    if x_after <= x_before:
+        sys.exit(f"DD HOLD (Amendment 6): no DD pulses were inserted (x {x_before} -> {x_after})")
+    print(f"DD applied: X pulses {x_before} -> {x_after}")
+    return out
+
+def fly(dd=False):
     if not ka_gate(): sys.exit("KA FENCE FAILED — NO SUBMISSION")
     sys.path.insert(0, SCRIPTS)
     from ibm_multi_account import service_for_submission
@@ -226,12 +247,15 @@ def fly():
     pubs = build_pubs()
     qcs = [to_qiskit(p) for p in pubs]
     tq = transpile(qcs, backend, optimization_level=3, seed_transpiler=1104)
+    if dd:
+        tq = apply_dd(tq, backend)
     n2q = [sum(1 for inst in t.data if len(inst.qubits) == 2) for t in tq]
     print(f"transpiled 2q counts: min {min(n2q)} median {int(np.median(n2q))} max {max(n2q)}")
     if max(n2q) > 150: sys.exit(f"DEPTH HOLD: max transpiled 2q {max(n2q)} > 150")
     sampler = SamplerV2(mode=backend)
     job = sampler.run([(t, None, SHOTS) for t in tq])
-    man = {"experiment": "h10_b1_time_flip", "cycle": "C5018",
+    man = {"experiment": "h10_b1b_time_flip_dd" if dd else "h10_b1_time_flip", "cycle": "C5018",
+           "hardening": "ALAP + X-X dynamical decoupling (Amendment 6)" if dd else None,
            "prereg": "docs/h10-b1-prereg-whisper-c5018.md",
            "prereg_seal_chain_derived": derived_chain(),
            "go": "RE-FLY: Creator general#3719 'Go B1' (2026-08-02, fresh GO post-EXPLORATORY); first flight general#3674",
@@ -301,9 +325,11 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--ka", action="store_true")
     ap.add_argument("--fly", action="store_true")
+    ap.add_argument("--fly-b1b", action="store_true", dest="flyb1b")
     ap.add_argument("--decode")
     a = ap.parse_args()
     if a.ka: sys.exit(0 if ka_gate() else 1)
     if a.fly: fly(); sys.exit(0)
+    if a.flyb1b: fly(dd=True); sys.exit(0)
     if a.decode: decode(a.decode); sys.exit(0)
     ap.print_help()
