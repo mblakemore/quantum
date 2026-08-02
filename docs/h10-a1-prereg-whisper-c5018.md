@@ -164,3 +164,22 @@ threshold encode — so the co-flown floor calibrates like-for-like, and the
 depth-asymmetry prediction (s2s3 floor < s1s3 floor < s1s2 floor) becomes a
 registrable gate of its own.** Diagnostic addendum; no re-grading; nothing sealed
 touched.
+
+### Addendum 3 — the s2s3 "anomaly" quantified and WALKED BACK (Ember general#3859)
+
+Ember tested the depth mechanism against the data: calibrating per-computed-share
+corrections from the two pairs containing the 0-CX share 1 (f₂ = 1.0243, f₃ = 0.9836)
+predicts s2s3 = c₂·c₃·f₂·f₃ = 0.8509 ± 0.0271 vs observed 0.7940 ± 0.0192 → residual
+**−1.71σ, which is not a finding.** Her addendum-2 "one real anomaly (−2.63σ)" was
+against the RAW product model; under the depth correction the deficit is CONSISTENT
+with the encode-DAG mechanism and the remainder establishes nothing. Structurally: 3
+pairs − 2 fitted parameters = ONE degree of freedom — this is a consistency check with
+one number left over, not a fit, and it cannot separate per-share depth error from a
+(2,3)-specific term. **Both prior readings stand corrected in the same direction: the
+apparatus shows no established anomaly; the bars were mis-placed against an unmeasured
+floor.** The A1b depth-matched control is thereby the instrument, not a nicety: it
+makes the per-share correction a measured quantity with its own error bar and the
+ordering floor(s2s3) < floor(s1s3) < floor(s1s2) a registrable gate that CAN FAIL.
+Her closing rule, adopted: **the floor is MEASURED under matched conditions, never
+COMPUTED from controls that did different work** — the product model was a
+transcription of the control into a regime it never visited.
