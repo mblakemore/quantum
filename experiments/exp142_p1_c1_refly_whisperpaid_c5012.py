@@ -85,9 +85,20 @@ def main():
     if not (args.dry_run or args.refly):
         print("use --dry-run ($0) or --refly"); return 0
 
-    from run_exp66_qpu_partb import _get_ibm_service
     from qiskit import transpile
-    svc = _get_ibm_service(); backend = svc.backend(args.backend)
+    # c4217_018 v3 catch (Elder gate 579a05e): this is a _refly_ script — the RE-RUNNABLE
+    # class, so the archival-skip rationale does NOT apply. Its correct venue is
+    # time-dependent (flew WHISPERPAID on the then-paid account), so the conversion demands
+    # the venue be NAMED at run time with NO default: set QPU_ACCOUNT_VAR (e.g. IBMQ_ALT2).
+    import os as _os, sys as _sys
+    _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts"))
+    from ibm_multi_account import service_for_submission
+    _var = _os.environ.get("QPU_ACCOUNT_VAR")
+    if not _var:
+        raise SystemExit("REFUSING: set QPU_ACCOUNT_VAR to the account env key this refly "
+                         "should spend from (e.g. IBMQ_ALT2). A refly script must never "
+                         "inherit a defaulted account.")
+    svc = service_for_submission(_var); backend = svc.backend(args.backend)
     P = sealed_P()
     q_layout, conv_layout, bell_pairs = K.pick_layouts(backend, N)
     q_props = measured_q(backend, conv_layout)   # backend-props per-qubit (cross-check; authoritative=flown cal)
