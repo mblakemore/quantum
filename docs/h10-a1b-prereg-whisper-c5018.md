@@ -162,3 +162,32 @@ under the prefix convention; text freezes at the seal-request post.*
   scramble context ≈ 0.13); QPU total ≈ 30 s across the wing.
 
 *Outcome entry; nothing sealed touched.*
+
+### Addendum — Elder's independent grading (coordination#3883), both verdicts ratified
+
+Method as A1: his `ka_gate()` PASS first, then MY `decode()` on the raw job, his
+artifact before mine published — both verdicts reproduced to 6 decimals. Three points
+of his now part of the record:
+
+1. **The CONFIRMED survives the scrutiny a first positive deserves, and its estimator
+   is conservative in the direction that matters**: the G6 bar uses min() of two noisy
+   floors, and the minimum of noisy quantities is biased DOWNWARD — shrinking diff. The
+   selection rule cannot manufacture the effect, only understate it. Observed 4.07σ
+   clears the registered 2·se bar by 2.07σ.
+2. **A1's G1 failure was a BAR ARTIFACT, not physics — stated explicitly so no reader
+   takes only half the truth.** Every A1b threshold pair sits essentially ON its own
+   measured floor (0.8680/0.8652 · 0.8480/0.8537 · 0.8217/0.8252): the threshold
+   structure was working the whole time. A1 graded s2s3 = 0.794 against a flat 0.85;
+   its true floor is 0.8252 → correct bar 0.7797 → clears by 5.7σ. **"A1 DOES NOT
+   HOLD" and "A1's threshold structure was fine" are BOTH true**: the sealed A1 verdict
+   stands un-regraded (a sealed flight is not re-graded because a later one measured
+   its bars better), and A1b is the flight that says which bar should never have been
+   given. Ember's per-pair floor derivation is vindicated on hardware.
+3. **G2's one UNDERPOWERED sub, named rather than silent (his residual)**: C1 s2s3
+   read 0.8110 ± 0.0076 against the absolute 0.800 — margin 0.011 < 2·se 0.0152. The
+   anti-dead-control gate is the one that must not drift toward unresolved: for any
+   A1c, either the absolute bar drops to a floor the health claim still supports
+   (e.g. 0.78, re-derived pre-data) or the control-pub shots rise until the deepest
+   pair's clearance is powered. Recorded as a registration TODO, not a re-band.
+
+*Outcome addendum; nothing sealed touched.*
