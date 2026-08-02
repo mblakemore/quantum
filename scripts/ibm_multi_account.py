@@ -33,6 +33,19 @@ USAGE
     print(f"[account: {account}]")              # ALWAYS name the scope you read — an answer that
                                                 # cannot say WHOSE it is cannot be audited.
 
+FLIGHT SCRIPTS (anything that can SUBMIT) — put this at the top:
+
+    from ibm_multi_account import assert_explicit_account, service_for_submission
+    acct = assert_explicit_account()        # dies unless QPU_ACCOUNT_VAR names an account
+    svc  = service_for_submission(acct)
+
+    $ QPU_ACCOUNT_VAR=IBMQ_ALT2 python3 my_flight.py
+
+This is the RUNTIME half of the guard; `preflight_account_check.py` is the STATIC half. Keep both:
+the static one catches the defect before you fly but must be REMEMBERED, and a gate you have to
+remember is one you skip on the cycle it mattered. The runtime one cannot be skipped and fails
+closed, and it also covers indirections static analysis cannot see.
+
     python3 scripts/ibm_multi_account.py --selftest
     python3 scripts/ibm_multi_account.py --accounts
     python3 scripts/ibm_multi_account.py --find <job_id>
@@ -172,6 +185,48 @@ def service_for_submission(account_var):
     return QiskitRuntimeService(**kw)
 
 
+def assert_explicit_account(env_var="QPU_ACCOUNT_VAR"):
+    """Runtime guard for a flight script: REFUSE to start unless the account is named.
+
+    Generalised from Whisper's fix to their `_refly_` script (C6578). Call it at the TOP of any
+    script that can submit:
+
+        from ibm_multi_account import assert_explicit_account, service_for_submission
+        acct = assert_explicit_account()            # dies here if nobody named an account
+        svc  = service_for_submission(acct)
+
+    WHY THIS EXISTS ALONGSIDE THE STATIC CHECKER. `preflight_account_check.py` must be REMEMBERED,
+    and a gate you have to remember is one you skip on the cycle it mattered — my documented
+    failure mode, and the reason invisible gates drift for hundreds of cycles. This one cannot be
+    skipped: it is inside the script, it runs on every execution, and it fails CLOSED.
+
+    It also covers what static analysis cannot — an account resolved through an indirection the
+    checker cannot see. The two are complements, not redundancy: the checker catches a defect
+    before you fly, this catches it at the instant of flying.
+
+    THE TIME-DEPENDENCE IS THE REAL POINT (Whisper's observation, and it is the strongest form of
+    the rule): a re-flyable script's CORRECT account changes over time — the one that was paid last
+    month may be depleted today. So it must never inherit a default, INCLUDING a well-intentioned
+    hardcoded one chosen at conversion time. The account has to be named at the moment of flight,
+    by whoever is flying.
+    """
+    name = os.environ.get(env_var)
+    if not name:
+        raise RuntimeError(
+            f"{env_var} is not set — REFUSING to start a script that can submit.\n"
+            f"  A re-flyable script must never inherit a defaulted account: the correct account is\n"
+            f"  TIME-DEPENDENT (the one that was funded last month may be depleted today).\n"
+            f"  Name it explicitly, e.g.  {env_var}=IBMQ_ALT2 python3 {os.path.basename(sys.argv[0])}\n"
+            f"  Accounts currently discoverable: {describe_accounts() or 'NONE'}"
+        )
+    if not os.environ.get(name):
+        raise RuntimeError(
+            f"{env_var}={name} but no token is set for {name} — REFUSING to fall back.\n"
+            f"  Accounts currently discoverable: {describe_accounts() or 'NONE'}"
+        )
+    return name
+
+
 class MultiAccountService:
     """Drop-in stand-in for `QiskitRuntimeService()` on READ paths.
 
@@ -258,6 +313,32 @@ def _selftest():
     except Exception as exc:                                        # noqa: BLE001
         print(f"FAIL  wrong exception type: {type(exc).__name__}")
         ok = False
+
+    # runtime flight guard: must fail CLOSED in both directions
+    os.environ.pop("QPU_ACCOUNT_VAR", None)
+    try:
+        assert_explicit_account()
+        print("FAIL  flight guard started with NO account named")
+        ok = False
+    except RuntimeError:
+        print("PASS  flight guard refuses when no account is named")
+    os.environ["QPU_ACCOUNT_VAR"] = "IBMQ_NOT_SET_ANYWHERE"
+    try:
+        assert_explicit_account()
+        print("FAIL  flight guard accepted a named account with no token")
+        ok = False
+    except RuntimeError:
+        print("PASS  flight guard refuses a named account that has no token")
+    real = describe_accounts()
+    if real:
+        os.environ["QPU_ACCOUNT_VAR"] = real[0]
+        try:
+            got = assert_explicit_account()
+            print(f"PASS  flight guard admits a properly named account ({got})")
+        except RuntimeError as exc:
+            print(f"FAIL  flight guard rejected a valid account: {exc}")
+            ok = False
+    os.environ.pop("QPU_ACCOUNT_VAR", None)
 
     # no token values are ever returned by the describe path
     if all(not v.startswith("ey") for v in describe_accounts()):
