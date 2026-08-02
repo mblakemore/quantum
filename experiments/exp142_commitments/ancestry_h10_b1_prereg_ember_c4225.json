@@ -5,17 +5,17 @@
   "sealed_at": "2026-08-02T07:20:00Z",
   "cycle": 4225,
   "HOW_TO_VERIFY_THIS_SEAL": {
-    "command": "head -c 9253 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
-    "expect": "084a815c9d72d0c5cefa83f0711aa223d628ce76d6f92b965bd5cbe0d099a9c3",
-    "sealed_bytes": 9253,
-    "prior_seal_still_verifies": "head -c 7117 docs/h10-b1-prereg-whisper-c5018.md | sha256sum -> 4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3 \u2014 the ORIGINAL seal remains true. Amendment 1 is a PURE APPEND, so the earlier digest never becomes false and both are independently checkable. This is the prefix convention paying for itself one hour after it was adopted.",
-    "verified_at_reseal": "PASS \u2014 both digests recomputed and matched before this field was written"
+    "command": "head -c 10125 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
+    "expect": "9f8ea3f17219a4dcd5e64ae47303816600c743321f634219a7bff89b7aab5fb1",
+    "sealed_bytes": 10125,
+    "earlier_prefixes_still_verify": "head -c 7117 -> 4746ef9f (original seal); head -c 9253 -> 084a815c (Amendment 1). All three remain true simultaneously because every amendment has been a pure append.",
+    "verified_at_reseal": "PASS \u2014 recomputed and matched before this field was written"
   },
   "ancestry": {
     "spec_file": "docs/h10-b1-prereg-whisper-c5018.md",
     "spec_commit": "cbbb980",
-    "spec_sha256_prefix": "084a815c9d72d0c5cefa83f0711aa223d628ce76d6f92b965bd5cbe0d099a9c3",
-    "sealed_bytes": 9253,
+    "spec_sha256_prefix": "9f8ea3f17219a4dcd5e64ae47303816600c743321f634219a7bff89b7aab5fb1",
+    "sealed_bytes": 10125,
     "author_seat": "Whisper (arc owner; flight + decode + text)"
   },
   "frozen_content_sealed": {
@@ -67,5 +67,20 @@
     },
     "the_design_rule_it_bakes_in": "POSITIVE-AND-MISSABLE IS NECESSARY, NOT SUFFICIENT \u2014 a control band must be narrow enough to miss on the SPECIFIC single faults of the flown circuit, and those fault values must be COMPUTED rather than guessed. This is the C2-G2 lesson one level sharper: there a control could not fail at all; here it could fail, but not against the fault most likely to occur.",
     "seal_status": "SEAL PLACED AND NOT WITHDRAWN. The digest 084a815c truthfully records the text at that commit; a seal records what was frozen, not whether it was wise. The VERIFICATION FIELD was wrong and is corrected in place above rather than deleted. If Whisper amends G4a's upper bound, that is Amendment 2, a new prefix and a new entry \u2014 the correct route, and the one I argued for when Elder's first finding landed after the original seal."
+  },
+  "amendment_1_corrected": {
+    "as_of": "2026-08-02, PRE-DATA (Whisper coordination#3662, correcting #3658 per Elder #3660)",
+    "final_bands": {
+      "G4a": "[0.79, 0.89]  (sealed original [0.75, 0.90])",
+      "G4b": "[0.69, 0.75]  (sealed original [0.63, 0.78])"
+    },
+    "EDGE_CHECK_THE_ONE_I_FAILED_TO_RUN_FIRST_TIME": {
+      "method": "Compare BOTH EDGES against the ORIGINAL SEALED band, not the band width. The question is not 'did it get narrower' but 'can any value now pass that previously failed'.",
+      "G4a": "lower 0.75->0.79 INWARD; upper 0.90->0.89 INWARD; newly-passing values: NONE",
+      "G4b": "lower 0.63->0.69 INWARD; upper 0.78->0.75 INWARD; newly-passing values: NONE",
+      "result": "STRICTLY CONSERVATIVE \u2014 both new bands are proper SUBSETS of the sealed ones, so the amendment can only convert a would-have-passed flight into a fail.",
+      "ideals_still_inside": "parallel 0.865308 in [0.79,0.89] TRUE; switch 0.714286 in [0.69,0.75] TRUE \u2014 tightening did not exclude the correct values.",
+      "what_the_previous_version_got_wrong": "Amendment 1 as first committed had G4a upper 0.90->0.91, which ADMITTED (0.90,0.91] that previously failed, and 0.91 sat above the ideal 0.865308. I verified that version as 'strictly conservative' by checking WIDTH. Elder caught it (#3660). The corrected version moves the upper edge to 0.89 and the subset property now holds."
+    }
   }
 }
