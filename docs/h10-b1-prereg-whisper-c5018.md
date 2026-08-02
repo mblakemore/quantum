@@ -1,0 +1,104 @@
+# H10-B1 PRE-REGISTRATION — The Time Flip: beating the definite-time-direction ceiling
+
+*Whisper C5018, 2026-08-02, substrate claude-fable-5. Status: **FROZEN TEXT, awaiting Ember
+spec-seal + Creator GO** (Elder grader at landing; his ceiling co-check is already closed —
+quantum@95db2c9, all three tiers in-house). Parents: scout `h10-b1-time-flip-scout-whisper-
+c5015.md` (GO), pairs `scripts/h10_b1_pairs_c5018.py` (Box-1 source-transcribed, 21 pairs
+self-verified), ceilings `results/h10_b1_ceiling_cocheck_full_elder_c6578.json` (Elder),
+arm values `results/h10_b1_arm_values_c5018.json`. Every number computed in committed
+artifacts; every frozen input reproducible from committed code.*
+
+## 1. Claim shape (printed first)
+
+The Stromberg/Chiribella time-flip game (PRR 6, 023071 Box 1): 21 qubit-unitary pairs
+promised in M± (UVᵀ = ±UᵀV); strategies with a definite time direction obey ceilings we
+derived IN-HOUSE by SDP (parallel 0.8827, causal 0.9056, **process-with-definite-time-
+direction 0.9197** — Elder's CPTP-normalization construction, KA'd in both directions);
+the time-flip strategy wins with certainty. **The claim is a strategy-class separation on
+a chip: the flip arm's measured win rate beats the definite-direction process ceiling.**
+Statistic categories (C5014 rule): G1 is a THRESHOLD test against an in-house bound;
+G2/G3 are ORDERING tests; G4 are BAND (apparatus-health) tests with positive predictions.
+**Compiled-access fence, in the headline**: the flip and switch arms are COMPILED
+interferometers — the circuits consume the referee's public (U,V) matrices, never the M±
+label; that the flip's controlled gate collapses to ±I is the game's own structure
+(a theorem about the pairs), and no physical time reversal occurs. Chip analogue; no
+cosmology; the separation is between COMPILED ACCESS MODELS (H10 §5 grammar).
+
+## 2. Frozen design (all arms, one device, one session)
+
+- **Pairs**: the committed 21 (15 Pauli + 4 MII⁺ + 2 MII⁻), uniform referee prior 13/21 vs
+  8/21. Shot allocation UNIFORM per pair (Elder's retraction absorbed: joint difficulty is
+  SPREAD; his per-pair table is the power-calc input, not an allocation bias).
+- **Arm F (flip, the headline)**: control |+⟩; target |0⟩; apply W₀ = UᵀV to target (1q);
+  apply c-(W₁W₀†) — which the compile evaluates from (U,V) as ±I, i.e. Z on the control
+  for M− pairs, identity for M+; H on control; measure. Ideal win = 1 exactly, all pairs.
+  Depth ≤ 4 gates, 1 of them 2q at most.
+- **Arm P (parallel-Choi)**: two Bell preps; U on half of pair 1, V on half of pair 2;
+  joint Helstrom POVM = the eigenbasis rotation of (p₊ρ₊ − p₋ρ₋) on 4 qubits (compiled as
+  one UnitaryGate, transpiler-optimal), computational readout. Ideal value **0.865308**
+  (computed; deliberately reported AGAINST the 0.8827 SDP ceiling: the natural strategy is
+  near- but not exactly optimal, stated rather than blurred).
+- **Arm S (switch)**: half-Bell target + control |+⟩; the switch compiled as UV
+  unconditional then c-[(UV)†VU] (one controlled 1q gate); Helstrom readout on 3 qubits.
+  Ideal value **15/21 = 0.714286 exactly** — the switch reads the COMMUTATOR partition
+  and the game is about the TRANSPOSE: structurally blind on 6 pairs. **The exhibit row:
+  indefinite ORDER loses even to definite-order parallel strategies at this task;
+  indefinite DIRECTION wins outright.**
+- **Causal tier**: NOT FLOWN, stated plainly — the natural composition strategies carry
+  zero information (0.6190 = prior-guessing exactly, computed); the 0.9056 comb ceiling
+  stands as an in-house SDP row in the landscape table. A flown causal arm would require
+  the SDP primal comb compiled; recorded as a possible future arm, not smuggled in.
+- **Backend**: any Heron; ALT2 (`service_for_submission`, no fallback); seed 1104.
+
+## 3. Registered gates and reported rows (as-flown ideal values; SEs binomial)
+
+| # | Gate | Registered bar |
+|---|---|---|
+| G1 | **flip beats the definite-direction ceiling** | p̂_F > **0.919746** at ≥5σ (aggregate over 21 pairs) |
+| G2 | ordering flip > parallel | p̂_F − p̂_P ≥ 5σ |
+| G3 | ordering parallel > switch | p̂_P − p̂_S ≥ 5σ — the order-vs-direction separation |
+| G4a | parallel apparatus-health (positive, missable) | p̂_P ∈ [0.75, 0.90] (ideal 0.8653; band covers expected attenuation toward the 0.619 prior; a dead apparatus reads ≈0.62 and FAILS) |
+| G4b | switch apparatus-health (positive, missable) | p̂_S ∈ [0.63, 0.78] (ideal 0.7143; dead ≈0.62 sits at the edge and fails jointly with G3) |
+
+**Registered verdict = G1 ∧ G2 ∧ G3 ∧ G4a ∧ G4b.** The C2 ratification lesson is built in:
+every control gates on a POSITIVE prediction it can miss; nothing is satisfiable by a dead
+apparatus (a fully depolarized flight fails G1, G2, G4a simultaneously).
+
+**Reported rows**: R1 per-pair win tables all arms (the Pauli-subset saturation
+consistency check rides here — every tier reaches 1 on Paulis alone, Elder's finding);
+R2 the landscape table {parallel-SDP 0.8827, causal-SDP 0.9056, dtd 0.9197} overlaid with
+measured arms; R3 flip per-pair minimum (ideal 1.0000 every pair; worst-pair statistic);
+R4 the MII-vs-Pauli split diagnostics.
+
+## 4. Budget and power
+
+Uniform 500 shots/pair/arm: F/P/S = 3 × 10,500 plus F margin arm-repeat 500×21 → **~42k
+shots total ≈ 3–6 QPU-s** — the cheapest H10 flight, as scouted. Power at these shots
+(binomial SEs, ideal values, attenuation-degraded worst cases in brackets): G1 margin
+(0.98[hw] − 0.9197)/σ ≈ 20σ [8σ at p̂_F=0.96]; G2 ≈ 25σ; G3 ≈ 15σ. All gates ≥5σ even
+with 2–4% attenuation on every arm. Depth: F ≤ 4 gates; S ≈ 10–25 2q; P ≈ 60–110 2q
+(4-qubit POVM rotation) — all far under both calibrated ceilings (475 contrast / ~250
+state-survival; P's 4-qubit state at ~110 gates sits inside the survival budget by the
+C2-measured scaling, and G4a's band is the honesty check if not).
+
+## 5. Kill / no-fly conditions
+
+1. **KA fence (mandatory)**: walker over the AS-BUILT pubs reproduces every §3 ideal value
+   at 1e-9 (flip = 1 per pair; parallel = 0.865308; switch = 0.714286) before submission;
+   non-completion = FAIL.
+2. Depth HOLD: any transpiled pub > 150 2q gates → hold (generous vs the ~110 estimate;
+   bar stated pre-transpile).
+3. Calibration hold: median 2q error on used qubits > 0.5% → hold.
+4. Pool re-read at submission; overdraw → not submitted.
+
+## 6. Seats
+
+Whisper: flight + decode + this text (decode = counts → win rates → the five gates;
+no discretion). Ember: spec-seal with her executable prefix recipe (the settled
+convention). Elder: grader at landing (mechanical); his ceilings are already the bars.
+Creator: GO (~42k shots, 3–6 QPU-s, ALT2 — the cheapest flight on the board).
+
+*Frozen text ends. Changes after seal require a numbered amendment; outcome entries append
+per the sealed-prefix convention. A causal-comb arm, if ever compiled, enters by amendment
+as an ADDED reported arm only (bars untouched) or by fresh scout if it changes the verdict
+structure.*
