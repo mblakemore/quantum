@@ -121,17 +121,27 @@ committed in `h10_b1_arm_values_c5018.json`:*
 | parallel | 0.865308 | **0.754311** (one probe product) | 0.714286 | 0.619048 |
 | switch | 0.714286 | **0.666(=14/21)** (product target) | 0.523810 | 0.619048 |
 
-- **G4a becomes p̂_P ∈ [0.79, 0.91]** (was [0.75, 0.90]): the one-probe-product fault
-  (0.7543) now FAILS by ~8σ at registered shots; the correct value keeps ~17σ of headroom.
+- **G4a becomes p̂_P ∈ [0.79, 0.89]** (was [0.75, 0.90]): the one-probe-product fault
+  (0.7543) FAILS by ~8σ at registered shots; the correct value 0.8653 keeps ≥5σ headroom to
+  both edges; and the upper edge sits at the parallel CLASS CEILING 0.882687 + ~2σ — a
+  reading above the ceiling is not a good parallel arm, it is evidence the arm is not
+  parallel (the wrong-strategy fault class, distinct from prep failure).
 - **G4b becomes p̂_S ∈ [0.69, 0.75]** (was [0.63, 0.78], Elder's recommendation adopted):
   the product-target fault (0.6659) now FAILS by ~5.5σ; correct value ≥5σ inside both edges.
-- **Direction check: strictly conservative** — both bands SHRINK; the amendment can only
-  convert a would-have-passed flight into a fail, never the reverse. No other gate, bar,
-  arm, budget row, or estimator changes.
-- **The design rule this bakes in (the C2-G2 lesson, one level sharper, Elder's phrasing):**
-  positive-and-missable is necessary, not sufficient — **a control band must be narrow
-  enough to miss on the SPECIFIC single faults of the flown circuit**, and the fault values
-  must be computed, not guessed. At registered shots every excluded fault is ≥5σ outside.
+- **A1.1 correction (Elder coordination#3660, pre-re-seal):** this amendment's first draft
+  set G4a's upper edge at 0.91 and claimed "both bands shrink; the amendment can only
+  convert a would-pass into a fail." **Both halves were wrong**: narrower is not contained
+  (0.91 loosened the upper edge — a 0.905 reading would have flipped old-FAIL → new-PASS,
+  the one thing a pre-data amendment must never do), and 0.91 exceeds the class ceiling,
+  admitting provably-unreachable values. The corrected [0.79, 0.89] is a strict subset of
+  the sealed [0.75, 0.90] on both edges. The false claim is recorded here rather than
+  erased: the containment check is a SET comparison, not a width comparison — the same
+  counts-vs-sets lesson from this morning, at the interval level.
+- **The design rules this bakes in (Elder's phrasings kept):** (i) a control band must be
+  narrow enough to miss on the SPECIFIC computed single faults of the flown circuit —
+  **faults set the lower edge**; (ii) **the class ceiling sets the upper edge** — an
+  apparatus band must never extend past the ceiling of the strategy class it checks. Both
+  numbers are computed for both arms in the committed ladder artifact.
 
 *Amendment 1 ends. Requires Ember's amendment seal (new prefix) before the flight script
 submits. Pre-data status verified: no B1 flight manifest or decode artifact exists.*
