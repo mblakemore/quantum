@@ -145,3 +145,22 @@ discipline holding on both seats). **Doctrine addition going forward (A1b/A2/any
 every classification boundary that can flip a gate or verdict is a REGISTERED VALUE —
 a sealed literal in the prereg text, same family as the zone edge.** The number that
 decides must be written where it cannot move.
+
+### Addendum 2 — per-pair floor analysis (Ember general#3853) + encode-DAG mechanism candidate
+
+Ember re-derived the floor PER PAIR from each pair's own control shares: s1s2 read
++1.39 se ABOVE its floor (0.8591), s1s3 −0.88 se (consistent, 0.8723) — both pure
+bar-placement failures, apparatus fine — while **s2s3 read −2.63 se BELOW its own floor
+(0.8445)**: a real anomaly the control-product model does not absorb. Mechanism
+candidate from the as-built encode DAG (hypothesis, not assertion): **(2,3) is the only
+pair with no direct share.** Share 1's bits are H-prepared sources (0 CX targets);
+shares 2 and 3's four bits are computed composites (2–3 CX each, 9 CX among them). The
+control map's floor calibrates 1-CX copies — so the product c_a·c_b systematically
+OVERESTIMATES the floor for computed shares, worst for the all-computed pair. Order of
+magnitude checks: ~1–2% extra effective error per computed bit × 4 bits ≈ 0.84 × 0.96
+≈ 0.81 vs observed 0.794. **A1b design consequence (only-if-priced): the positive
+control should be DEPTH-MATCHED — copy b through the same CX-graph shape as the
+threshold encode — so the co-flown floor calibrates like-for-like, and the
+depth-asymmetry prediction (s2s3 floor < s1s3 floor < s1s2 floor) becomes a
+registrable gate of its own.** Diagnostic addendum; no re-grading; nothing sealed
+touched.
