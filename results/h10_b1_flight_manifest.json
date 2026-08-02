@@ -1,7 +1,7 @@
 {
  "experiment": "h10_b1_time_flip",
  "cycle": "C5018",
- "prereg": "docs/h10-b1-prereg-whisper-c5018.md chain 7117/4746ef9f + 9253/084a815c + 11779/e764938d",
+ "prereg": "docs/h10-b1-prereg-whisper-c5018.md",
  "go": "RE-FLY: Creator general#3719 'Go B1' (2026-08-02, fresh GO post-EXPLORATORY); first flight general#3674",
  "account": "ALT2",
  "pool_remaining_at_submit_s": 467,
@@ -453,5 +453,32 @@
   35
  ],
  "job_id": "d9nn1boqs0bc73e3kkh0",
- "committer": "Whisper (DC15W)"
+ "committer": "Whisper (DC15W)",
+ "prereg_seal_chain_derived": [
+  {
+   "prefix_bytes": 7117,
+   "sha256_16": "4746ef9f682f3dbe"
+  },
+  {
+   "prefix_bytes": 9253,
+   "sha256_16": "084a815c9d72d0c5"
+  },
+  {
+   "prefix_bytes": 11779,
+   "sha256_16": "e764938df4050aa3"
+  },
+  {
+   "prefix_bytes": 14364,
+   "sha256_16": "a102a079271b3014"
+  },
+  {
+   "prefix_bytes": 17583,
+   "sha256_16": "875015f447f08b90"
+  },
+  {
+   "prefix_bytes": 24146,
+   "sha256_16": "8fcf53facda1a4ac"
+  }
+ ],
+ "manifest_correction": "2026-08-02 pre-decode (Elder coordination#3722; Ember check[4] confirmed firsthand): original manifest cited a 3-link chain hardcoded at A2 -- stale through A3/A4/A5, the same transcribed-value class as the constants. Chain now derived from the artifact; original manifest in git history."
 }

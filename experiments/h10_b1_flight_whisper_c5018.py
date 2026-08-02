@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """H10-B1 FLIGHT — The Time Flip vs the definite-time-direction ceiling (Whisper C5018).
-Prereg: docs/h10-b1-prereg-whisper-c5018.md — sealed chain 7117/4746ef9f + A1 9253/084a815c
-+ A2 11779/e764938d (G4a [0.79,0.89], G4b [0.69,0.75]). Submission gated on: Ember A2 seal
-+ Creator GO + KA fence + depth HOLD (150) + calibration hold (0.5%) + pool re-read.
+Prereg: docs/h10-b1-prereg-whisper-c5018.md — seal chain DERIVED AT MANIFEST-WRITE TIME
+(Elder #3722: identifiers are derived from the artifact, never transcribed; SEAL_PREFIXES
+is the one unavoidable transcription and an assert refuses submission if the spec outgrows
+it). Governing bands per A4/A5: G4a [0.78,0.89], G4b [0.69,0.75], KA 1e-9 exact-fraction
+targets. Gated on: seal at chain head + Creator GO + KA + depth HOLD 150 + calibration
+0.5% + pool re-read.
 
 Arms (compiled-access fence per SS1: circuits consume the public (U,V) matrices, never the
 class label; the flip's controlled gate collapsing to +/-I is the game's own theorem):
@@ -34,6 +37,19 @@ SCRIPTS = os.path.join(HERE, "..", "scripts")
 spec = importlib.util.spec_from_file_location("bp", os.path.join(SCRIPTS, "h10_b1_pairs_c5018.py"))
 bp = importlib.util.module_from_spec(spec); spec.loader.exec_module(bp)
 PAIRS = bp.PAIRS
+SPEC = os.path.join(HERE, "..", "docs", "h10-b1-prereg-whisper-c5018.md")
+SEAL_PREFIXES = [7117, 9253, 11779, 14364, 17583, 24146]
+
+def derived_chain():
+    """Chain citation DERIVED from the artifact at call time — cannot go stale silently:
+    if the spec grows past SEAL_PREFIXES[-1] the assert fires and nothing submits."""
+    import hashlib
+    raw = open(SPEC, "rb").read()
+    assert len(raw) == SEAL_PREFIXES[-1], (
+        f"spec is {len(raw)} B but SEAL_PREFIXES ends at {SEAL_PREFIXES[-1]} — the seal "
+        f"chain grew; update SEAL_PREFIXES before flying")
+    return [{"prefix_bytes": n, "sha256_16": hashlib.sha256(raw[:n]).hexdigest()[:16]}
+            for n in SEAL_PREFIXES]
 PPLUS = [p for p in PAIRS if p[3] == "M+"]; PMIN = [p for p in PAIRS if p[3] == "M-"]
 p_plus, p_min = 13 / 21, 8 / 21
 PHI = np.zeros(4, complex); PHI[0] = PHI[3] = 1 / np.sqrt(2)
@@ -216,7 +232,8 @@ def fly():
     sampler = SamplerV2(mode=backend)
     job = sampler.run([(t, None, SHOTS) for t in tq])
     man = {"experiment": "h10_b1_time_flip", "cycle": "C5018",
-           "prereg": "docs/h10-b1-prereg-whisper-c5018.md chain 7117/4746ef9f + 9253/084a815c + 11779/e764938d",
+           "prereg": "docs/h10-b1-prereg-whisper-c5018.md",
+           "prereg_seal_chain_derived": derived_chain(),
            "go": "RE-FLY: Creator general#3719 'Go B1' (2026-08-02, fresh GO post-EXPLORATORY); first flight general#3674",
            "account": "ALT2", "pool_remaining_at_submit_s": u["usage_remaining_seconds"],
            "backend": backend.name, "chain_2q_median": med,
