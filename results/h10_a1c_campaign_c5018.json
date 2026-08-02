@@ -1,0 +1,57 @@
+{
+ "go": "Creator direct 2026-08-02 'run A1c'",
+ "sctx_ideal_argument": "pair-(1,2) decode reads qubits 1-4; scramble supports {5,6}; disjoint -> marginal invariant -> dial = 1 exactly for any U. Integer KA target; flight fence proves it with the real seeded unitaries.",
+ "bars_carried_from_a1b": {
+  "G1a": 0.1,
+  "G1b": "max(floor-3se-0.030, 0.700)",
+  "G3": 0.95,
+  "G4a": 0.1,
+  "G5": 0.82,
+  "boundary": 2
+ },
+ "bars_new": {
+  "G2_absolute": {
+   "value": 0.78,
+   "derivation": "A1b deepest control pair 0.8110-3*0.0076=0.788 rounded down; >> dead (~0); clearance 0.031 vs 2se 0.015 -> POWERED"
+  },
+  "G4b": {
+   "formula": "max(floor_ctx(seed) - 3*se_floor(seed) - 0.030, 0.650)",
+   "allowance_note": "0.040 -> 0.030: context now priced in the floor; allowance covers only the D-superposition delta (measured ~0.008 at A1b) + residual"
+  },
+  "B_context_cost": {
+   "statistic": "floor_plain(RC) - mean_seed(floor_ctx)",
+   "expected_from_a1b": [
+    0.1,
+    0.13
+   ],
+   "gate": "CONFIRMED >= +2 se_diff / REFUTED <= -2 se_diff"
+  }
+ },
+ "shots": {
+  "dial": 3000,
+  "rc": 3000,
+  "sctx": 1500,
+  "rev": 2000,
+  "scr": 1500,
+  "story": 4000
+ },
+ "total_shots": 45000,
+ "power_G4b": {
+  "expected_floor_ctx": 0.76,
+  "per_seed_floor_se": 0.01186591757935306,
+  "expected_bar": 0.694,
+  "expected_read": 0.75,
+  "clearance_vs_2se": [
+   0.056,
+   0.034
+  ],
+  "verdict": "POWERED"
+ },
+ "power_B": {
+  "se_diff_approx": 0.0111,
+  "expected_sigma_if_real": ">8",
+  "ideal_verdict": "UNDERPOWERED (cost 0 exactly at finite res)"
+ },
+ "ordering_replication": "G6-class ordering REPORTED (not a verdict): floors re-measured in this job; replication data for the A1b CONFIRMED, honest without verdict inflation",
+ "qpu_estimate_s": "12-16"
+}
