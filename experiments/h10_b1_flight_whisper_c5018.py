@@ -15,6 +15,14 @@ class label; the flip's controlled gate collapsing to +/-I is the game's own the
           FIXED 3q Helstrom rotation; measure all. Ideal 15/21 = 0.714286.
 KA fence: exact walker over AS-BUILT pubs reproduces per-pair F wins = 1 and aggregate
 P/S values at 1e-9 before any submission.
+
+LOAD-BEARING DEPENDENCY (Elder coordination#3692, written down at his ask): since
+Amendment 4 widened G4a's upper edge to the parallel ceiling, G4a NO LONGER independently
+backstops the WRONG-STRATEGY fault (an arm that is not purely product-measurement reading
+into (0.87, 0.89]). That fault is covered by THIS KA FENCE — a compilation that entangles
+the two probe blocks moves the frozen expected value (dev 1.4e-7) and fails pre-flight.
+DO NOT weaken, loosen, or skip this fence without restoring a tight G4a upper edge:
+the fence acquired a second job on 2026-08-02 and this line is how you know.
 """
 import argparse, json, os, sys
 import importlib.util
