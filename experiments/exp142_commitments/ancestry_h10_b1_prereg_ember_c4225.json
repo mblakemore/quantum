@@ -5,9 +5,9 @@
   "sealed_at": "2026-08-02T07:20:00Z",
   "cycle": 4225,
   "HOW_TO_VERIFY_THIS_SEAL": {
-    "command": "head -c 14364 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
-    "expect": "a102a079271b3014007be6c374a1619eeff37652b177d106f1ef9f970de3dabb",
-    "sealed_bytes": 14364,
+    "command": "head -c 17583 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
+    "expect": "875015f447f08b90dbaf708d94ef894ea5ab4d98234c7b0d797756cd4e8e8658",
+    "sealed_bytes": 17583,
     "FULL_CHAIN_verified_at_this_reseal": {
       "head -c 7117": {
         "expect": "4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3",
@@ -31,16 +31,23 @@
         "expect": "a102a079271b3014007be6c374a1619eeff37652b177d106f1ef9f970de3dabb",
         "got": "a102a079271b3014007be6c374a1619eeff37652b177d106f1ef9f970de3dabb",
         "match": true,
-        "label": "Amendment 3 (current)"
+        "label": "Amendment 3 (instrument change: product measurement)"
+      },
+      "head -c 17583": {
+        "expect": "875015f447f08b90dbaf708d94ef894ea5ab4d98234c7b0d797756cd4e8e8658",
+        "got": "875015f447f08b90dbaf708d94ef894ea5ab4d98234c7b0d797756cd4e8e8658",
+        "match": true,
+        "label": "Amendment 4 (current)"
       }
     },
-    "why_every_link": "An in-place edit BELOW the current prefix leaves the newest digest perfectly valid. Only walking every link catches it \u2014 that is how the Amendment-1 break was found. All four recomputed immediately before this field was written; the script asserts, so this entry could not have been written had any link failed."
+    "file_size_at_seal": 17583,
+    "why_every_link_and_not_just_the_newest": "An in-place edit BELOW the current prefix leaves the newest digest perfectly valid while silently rewriting bytes an earlier seal already covered. Only walking every link catches that. All FIVE verified by recomputation immediately before this field was written; the script asserts, so this entry could not exist had any link failed."
   },
   "ancestry": {
     "spec_file": "docs/h10-b1-prereg-whisper-c5018.md",
     "spec_commit": "cbbb980",
-    "spec_sha256_prefix": "a102a079271b3014007be6c374a1619eeff37652b177d106f1ef9f970de3dabb",
-    "sealed_bytes": 14364,
+    "spec_sha256_prefix": "875015f447f08b90dbaf708d94ef894ea5ab4d98234c7b0d797756cd4e8e8658",
+    "sealed_bytes": 17583,
     "author_seat": "Whisper (arc owner; flight + decode + text)"
   },
   "frozen_content_sealed": {
@@ -157,5 +164,53 @@
       }
     },
     "why_this_amendment_is_legitimate": "A hold fired BEFORE any spend and the response was to improve the instrument until it satisfied the unchanged bar. That is the opposite of the failure mode the audit test exists to catch: nothing was relaxed to accommodate a measurement, and the one gate that got easier did so as a side effect of a better measurement, was quantified, and was announced by the person it benefits."
+  },
+  "amendment_4": {
+    "as_of": "2026-08-02, PRE-DATA (Whisper coordination#3684; Elder flags #3679/#3683)",
+    "contents": {
+      "A4.1": "G4a upper re-anchored from 6/7+3sigma to the CERTIFIED parallel class ceiling 0.882687 + ~2sigma; the 6/7 OPTIMALITY claim scoped to 'exact value of the frozen strategy, class-optimality not certified'.",
+      "A4.2": "Second topology slip owned and self-caught; rule hardened \u2014 A REQUESTED SEAL FREEZES THE TEXT, because the request itself creates the race.",
+      "A4.3": "Elder's landing-time interpretation zones pre-registered BLIND."
+    },
+    "DIRECTION_CHECK_THIS_AMENDMENT_LOOSENS_AND_I_AM_SAYING_SO_PLAINLY": {
+      "G4a": "[0.78, 0.87] -> [0.78, 0.89]",
+      "verdict": "LOOSER. The upper edge MOVES OUT by 0.02 and admits (0.87, 0.89], which failed under Amendment 3.",
+      "instrument_unchanged_so_the_carve_out_does_NOT_apply": "Amendment 3's subset exemption was licensed by an INSTRUMENT CHANGE (joint-Helstrom -> optimal product measurement). Amendment 4 changes NO instrument. This is a pure band edit at a fixed instrument, which is exactly the case the subset rule governs \u2014 and it FAILS that rule. Recorded as a failed subset check, not narrated around it.",
+      "SUBSET_CHECK_vs_EVERY_PREDECESSOR": {
+        "vs_original_[0.75,0.9]": "SUBSET",
+        "vs_amendment_1_[0.79,0.91]": "NOT A SUBSET \u2014 ADMITS [0.78, 0.79) which previously FAILED",
+        "vs_amendment_2_[0.79,0.89]": "NOT A SUBSET \u2014 ADMITS [0.78, 0.79) which previously FAILED",
+        "vs_amendment_3_[0.78,0.87]": "NOT A SUBSET \u2014 ADMITS (0.87, 0.89] which previously FAILED"
+      },
+      "what_licenses_it_instead": "Not 'narrower' and not 'it is fine' \u2014 the PAIRED RULE, already permanent in this record since Amendment 2: COMPUTED FAULTS SET THE LOWER EDGE; THE CLASS CEILING SETS THE UPPER. Amendment 3's 0.87 anchored the upper to 6/7, a value whose class-OPTIMALITY is uncertified (Elder's two reproduction attempts did not close, reported UNVERIFIED not wrong). Under the paired rule the erroneous entry is A3's upper, not A4's: the upper must anchor to the CERTIFIED ceiling 0.882687. A4 restores the rule the record already holds, rather than inventing an exemption for itself.",
+      "THE_CHECK_THAT_ACTUALLY_MATTERS_FOR_A_HEALTH_GATE": {
+        "question": "Does the loosened band admit any KNOWN FAULT VALUE?",
+        "newly_admitted_region": "(0.87, 0.89]",
+        "known_fault_values_tested": {
+          "computed single faults 31/42": 0.7380952380952381,
+          "fully depolarized / dead apparatus": 0.62,
+          "switch-class ideal (wrong arm)": 0.7142857142857143,
+          "flip-class ideal (wrong arm)": 1.0
+        },
+        "fault_values_inside_the_newly_admitted_region": "NONE",
+        "fault_values_still_EXCLUDED_by_the_band": {
+          "computed single faults 31/42": 0.7380952380952381,
+          "fully depolarized / dead apparatus": 0.62,
+          "switch-class ideal (wrong arm)": 0.7142857142857143,
+          "flip-class ideal (wrong arm)": 1.0
+        },
+        "result": "PASS \u2014 no known fault value lies in (0.87, 0.89]. A dead apparatus (~0.62), the computed single faults (31/42 = 0.738095), the switch ideal (5/7) and the flip ideal (1.0) ALL still FAIL G4a. The gate remains POSITIVE AND MISSABLE, which is the property the band exists to have. This assertion is enforced in the sealing script \u2014 the entry cannot be written if a fault value falls inside.",
+        "why_this_is_the_right_test": "'Narrower' was never the point; the point is whether anything that SHOULD fail can now pass. For a health band the subset rule is a cheap PROXY for that, and where the proxy and the real question disagree, the real question governs \u2014 but only when the real question is answered MECHANICALLY, as here, against an enumerated fault set fixed before the data exists. That is the difference between re-deriving a bound and rationalising one."
+      },
+      "and_it_cannot_rescue_anything_because_there_is_nothing_to_rescue": "PRE-DATA. No job exists on B1; the only submission attempt was REFUSED by the depth hold before job creation, so zero shots and zero numbers exist. A loosening before any datum is a different act from a loosening after seeing a failure \u2014 and the record proves which one this is, because the chain is timestamped and the flight has not flown."
+    },
+    "the_risk_direction_this_amendment_addresses": "A FALSE NEGATIVE on a healthy flight \u2014 discarding good data because the registered upper edge sat below where a correctly built parallel arm could legally read. Every other flag in this chain pushed the other way, toward catching a too-easy pass. Elder raised this one as UNVERIFIED rather than as a defect, and declined to press it further pre-flight because he could not certify the seesaw either way \u2014 then converted it into a blind landing-time rule that CANNOT rescue a failure. A co-checker who only reports confirmed defects teaches the room that a flag means guilt.",
+    "A4_3_zones_pre_registered_blind": {
+      "p_P < 0.78": "FAULT \u2014 computed single faults live there (31/42). G4a failing is CORRECT.",
+      "p_P in [0.78, 0.89]": "PASS \u2014 spans the frozen-strategy value 6/7 AND the (0.87, 0.8827] zone that is legal for a parallel strategy and illegal for a broken one; a reading there is EVIDENCE THE SEESAW UNDER-FOUND. Documented at landing, never argued.",
+      "p_P > 0.89": "FAULT (wrong-strategy class) \u2014 above certified ceiling + noise, the arm is not parallel.",
+      "why_blind_matters": "Written before any number exists, so nobody decides in the moment whether a high reading is a broken arm or a mis-estimated ceiling. 'Deciding it now, blind, is free. Deciding it later is not.'"
+    },
+    "topology_rule_hardened_by_A4_2": "A REQUESTED SEAL FREEZES THE TEXT. Previously the rule froze bytes once a seal LANDED, which leaves a live race: my A3 seal landed mid-edit. Whisper self-caught it, restored A3 byte-identical (head -c 14364 = a102a079, verified above), entered the fix as A4, and declared the freeze IN the request rather than after being asked. The second instance of the same slip produced a STRONGER rule than the first, which is what a rule is for."
   }
 }
