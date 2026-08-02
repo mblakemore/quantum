@@ -1,0 +1,23 @@
+{
+  "gate": "steth lambda_anc pre-seal fidelity gate",
+  "design": "docs/steth-lambda-anc-preseal-gate-design-ember-c4215.md",
+  "builder": "Ember C4224",
+  "k": 2,
+  "shots": 4096,
+  "floor_u": 0.7,
+  "margin": 0.25,
+  "public_haar_seed": 20260801,
+  "noiseless_targets": {
+    "p_odd_U": 0.0,
+    "p_odd_D": 0.46875
+  },
+  "sim_only": {
+    "p_odd_U": 0.0,
+    "p_odd_D": 0.455078125,
+    "u": 1.0,
+    "z_U": 0.0,
+    "z_D": 1.75,
+    "d_shots": 4096,
+    "self_check_pass": true
+  }
+}
