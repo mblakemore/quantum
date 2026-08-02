@@ -1,0 +1,154 @@
+{
+ "experiment": "h10_a1c_quorum_fact_context_priced",
+ "cycle": "C5018",
+ "prereg": "docs/h10-a1c-prereg-whisper-c5018.md",
+ "prereg_frozen_sha12": "1fe4b5eb9331",
+ "seal": "ember coordination#3915: seal 1fe4b5eb over prefix 6395 (whole doc) \u2014 'Fly it'",
+ "go": "Creator direct 2026-08-02 'run A1c'",
+ "account": "ALT2",
+ "pool_remaining_at_submit_s": 399,
+ "backend": "ibm_fez",
+ "median_2q_err": 0.002806927888841834,
+ "hardening": "ALAP + X-X DD (standard)",
+ "dd_x_pulses": [
+  6,
+  414
+ ],
+ "scramble_seeds": [
+  1101,
+  1102,
+  1103
+ ],
+ "pubs": [
+  {
+   "kind": "dial",
+   "name": "T_b0",
+   "shots": 3000
+  },
+  {
+   "kind": "dial",
+   "name": "T_b1",
+   "shots": 3000
+  },
+  {
+   "kind": "dial",
+   "name": "C0_b0",
+   "shots": 3000
+  },
+  {
+   "kind": "dial",
+   "name": "C0_b1",
+   "shots": 3000
+  },
+  {
+   "kind": "dial",
+   "name": "C1_b0",
+   "shots": 3000
+  },
+  {
+   "kind": "dial",
+   "name": "C1_b1",
+   "shots": 3000
+  },
+  {
+   "kind": "rc",
+   "name": "RC_pair12dial",
+   "shots": 3000
+  },
+  {
+   "kind": "dial",
+   "name": "SCTX1101_b0",
+   "shots": 1500
+  },
+  {
+   "kind": "dial",
+   "name": "SCTX1101_b1",
+   "shots": 1500
+  },
+  {
+   "kind": "dial",
+   "name": "SCTX1102_b0",
+   "shots": 1500
+  },
+  {
+   "kind": "dial",
+   "name": "SCTX1102_b1",
+   "shots": 1500
+  },
+  {
+   "kind": "dial",
+   "name": "SCTX1103_b0",
+   "shots": 1500
+  },
+  {
+   "kind": "dial",
+   "name": "SCTX1103_b1",
+   "shots": 1500
+  },
+  {
+   "kind": "rev",
+   "name": "A3_revival",
+   "shots": 2000
+  },
+  {
+   "kind": "scr_d",
+   "name": "SCR1101_Dcontrast",
+   "shots": 1500
+  },
+  {
+   "kind": "scr_pair",
+   "name": "SCR1101_pair12dial",
+   "shots": 1500
+  },
+  {
+   "kind": "scr_d",
+   "name": "SCR1102_Dcontrast",
+   "shots": 1500
+  },
+  {
+   "kind": "scr_pair",
+   "name": "SCR1102_pair12dial",
+   "shots": 1500
+  },
+  {
+   "kind": "scr_d",
+   "name": "SCR1103_Dcontrast",
+   "shots": 1500
+  },
+  {
+   "kind": "scr_pair",
+   "name": "SCR1103_pair12dial",
+   "shots": 1500
+  },
+  {
+   "kind": "story",
+   "name": "A5_story",
+   "shots": 4000
+  }
+ ],
+ "transpiled_2q_counts": [
+  22,
+  22,
+  22,
+  22,
+  22,
+  22,
+  22,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  0,
+  25,
+  25,
+  25,
+  25,
+  25,
+  25,
+  22
+ ],
+ "job_id": "d9ntia460llc73cagnfg",
+ "committer": "Whisper (DC15W)"
+}
