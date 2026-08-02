@@ -286,7 +286,10 @@ def decode(job_id):
     out["G4b"] = {"pass": bool(0.69 <= pS <= 0.75), "value": pS}
     allpass = all(out[g]["pass"] for g in ("G1", "G2", "G3", "G4a", "G4b"))
     out["VERDICT"] = "HOLDS" if allpass else "DOES NOT HOLD"
-    path = os.path.join(RESULTS, "h10_b1_decode_whisper_c5018.json")
+    # Elder #3731: flights are append-only events; the decode path binds to its job so a
+    # successor can never overwrite its predecessor (the exploratory decode survived only
+    # in git history when this was one mutable path).
+    path = os.path.join(RESULTS, f"h10_b1_decode_{job_id}.json")
     json.dump(out, open(path, "w"), indent=1, default=float)
     print(json.dumps({k: out[k] for k in ("F", "P", "S", "G1", "G2", "G3", "G4a", "G4b",
                                            "VERDICT")}, indent=1, default=float))
