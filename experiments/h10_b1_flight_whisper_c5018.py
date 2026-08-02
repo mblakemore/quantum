@@ -134,15 +134,19 @@ def circuit_win(pub):
     return float(sum(pr for k, pr in enumerate(probs) if MASK[k] == (lab == "M+")))
 
 def ka_gate():
+    # Amendment 5: targets are EXACT FRACTIONS (6/7, 15/21, 1) and the tolerance is the
+    # ORIGINAL registered 1e-9 on every arm — nothing loosened, the A5 constant-fix made
+    # the registered condition satisfiable as written. (The flown-once 1e-6 accommodated
+    # 6-decimal literals; that flight is graded EXPLORATORY in the record.)
     pubs = build_pubs()
     def agg(arm, fn): return float(np.mean([fn(p) for p in pubs if p["arm"] == arm]))
     kF_m = max(abs(1 - ideal_win(p)) for p in pubs if p["arm"] == "F")
-    kP_m = abs(agg("P", ideal_win) - 0.857143)
-    kS_m = abs(agg("S", ideal_win) - 0.714286)
+    kP_m = abs(agg("P", ideal_win) - 6 / 7)
+    kS_m = abs(agg("S", ideal_win) - 15 / 21)
     kF_c = max(abs(1 - circuit_win(p)) for p in pubs if p["arm"] == "F")
-    kP_c = abs(agg("P", circuit_win) - 0.857143)
-    kS_c = abs(agg("S", circuit_win) - 0.714286)
-    ok = all(v < 1e-9 for v in (kF_m, kF_c)) and all(v < 1e-6 for v in (kP_m, kS_m, kP_c, kS_c))
+    kP_c = abs(agg("P", circuit_win) - 6 / 7)
+    kS_c = abs(agg("S", circuit_win) - 15 / 21)
+    ok = all(v < 1e-9 for v in (kF_m, kF_c, kP_m, kS_m, kP_c, kS_c))
     print(f"KA matrix : F {kF_m:.2e} | P dev {kP_m:.2e} | S dev {kS_m:.2e}")
     print(f"KA circuit: F {kF_c:.2e} | P dev {kP_c:.2e} | S dev {kS_c:.2e}  -> "
           f"{'PASS' if ok else 'FAIL'}")

@@ -308,3 +308,44 @@ the only submission attempt remains the hold-refused one; no job, no data.*
   design; decided at A5 with the seats, not assumed).
 
 *Outcome entry, not an amendment; nothing sealed was touched.*
+
+---
+
+## AMENDMENT 5 (C5018, PRE-RE-FLY — no data for the re-flight exists) — the constant fix:
+## exact fractions restore the ORIGINAL registered tolerance; S-arm landing zones pre-named
+
+**A5.1 — the fix is the constant, not the tolerance (Ember #3700/#3702, Elder #3704
+concurring).** The §3 registered P ideal is RESTATED as **6/7 exactly** (the A3 instrument's
+value; the table line "0.865308" was the A3-superseded joint instrument and is void as a
+referent). The §5.1 KA targets are DEFINED as exact fractions — flip = 1, parallel = 6/7,
+switch = 15/21 — and the flight code now carries them as fractions. **The tolerance is the
+ORIGINAL registered 1e-9, on every arm, unchanged** — the constant fix made it satisfiable
+as written: the as-built KA now reads F 6.7e-16 / P 6.7e-16 / S 6.7e-16. Nothing anywhere
+in the chain is looser than originally registered; one flown-once accommodation (1e-6 on
+P/S) is retired and its flight stands graded EXPLORATORY in the record above.
+
+**A5.2 — S-arm landing zones, pre-named blind for the re-fly (the A4.3 pattern applied to
+G4b, prompted by the exploratory reading 0.6851 which the registered zones did not name):**
+
+    p̂_S ≤ 0.6659 + 3σ (≈0.679)   FAULT — the computed product-target fault. G4b failing
+                                   is CORRECT.
+    p̂_S ∈ (0.679, 0.69)           ATTENUATION-CONSISTENT, FAULT-INCONSISTENT: ≥3σ above
+                                   the computed fault, below the band floor. G4b still
+                                   FAILS (the band does not move) — but the failure is
+                                   pre-diagnosed as decoherence of a healthy arm, not the
+                                   discrete fault, and is reported as such. No gate is
+                                   reinterpreted at landing; the interpretation exists
+                                   before the number.
+    p̂_S ∈ [0.69, 0.75]            PASS (unchanged band).
+    p̂_S > 0.75                    FAULT (above ideal + noise; wrong-strategy class).
+
+Direction check: the zones cannot rescue a failure — every G4b outcome is unchanged; only
+the READING of a specific failing range is fixed in advance. The band itself is untouched
+(an attenuation allowance derived from the exploratory flight was considered and NOT
+taken: it would put prior-flight data inside a gate's edge; the zones give the same
+diagnostic value with zero band movement).
+
+*Amendment 5 ends. Requires Ember's amendment seal — her satisfiability check runs as
+first customer and the seal does not go out if it fires. Per the hardened A4.2 rule this
+text is FROZEN from the moment the seal request posts. The re-fly additionally requires a
+fresh Creator GO (new spend, ~11 QPU-s, post-EXPLORATORY).*
