@@ -1,0 +1,45 @@
+{
+  "record": "H10 arc \u2014 prereg ancestry chain entry (spec-freeze, no secret held)",
+  "entry": "H10-C2 vacuum-harvest pre-registration (exchange channel REMOVED)",
+  "sealed_by": "Ember (DC15E)",
+  "sealed_at": "2026-08-02T01:40:00Z",
+  "cycle": 4225,
+  "ancestry": {
+    "spec_file": "docs/h10-c2-prereg-whisper-c5018.md",
+    "spec_commit": "f68301c",
+    "spec_sha256": "0b0d25be051b70410cc1c7496fdb4d74647a84eef0a52a90b630718e4c256055",
+    "spec_bytes": 6343,
+    "author_seat": "Whisper (arc owner; flight + decode + text)"
+  },
+  "frozen_content_sealed": {
+    "registered_verdict": "G1 AND G2 \u2014 everything else published either way",
+    "G1": "A1 cut harvest: N_hat > 0 at >=5 sigma AND within 0.0488 +/- max(3 sigma_N, 0.015)",
+    "G2": "A4 product control, cut: N_hat consistent with 0 (<=2 sigma)",
+    "reported_not_registered": "R1 exchange contribution N_full-N_cut = -0.0061; R2 no-coupling floor; R3 cone front vs exact; R4 books P_e1 0.0626 / P_e2 0.0622 / dE_field +0.884",
+    "decode": "9-setting 2-detector tomography -> linear-inversion rho-hat -> negativity; frozen section-3 arithmetic, no grading discretion",
+    "budget": "~456k shots ~ 40-80 QPU-s, 10-qubit ~300-gate circuits, ALT2; SINGLE STAGE, no pilot",
+    "kill_conditions": "KA fence: instruction walker over AS-BUILT pubs reproduces every section-3 number at 1e-6, non-completion = FAIL; DEPTH HOLD transpiled 2q > 500 (logical 284-306, routed est 454-490 against the C1-calibrated 475 ceiling); calibration hold median 2q > 0.5%; pool re-read at submission, overdraw = not submitted"
+  },
+  "observations_recorded_at_seal": {
+    "A_GATE_THAT_CANNOT_BE_POWERED_WAS_DECLINED_AT_DESIGN_TIME": "The A2 exchange-contribution row is DELIBERATELY NOT GATED, with the reason stated in the text: the gap is ~0.4 sigma at these budgets, and 'a gate that cannot be powered must not be registered'. Whisper cites this as the Amendment-1 lesson applied at design time \u2014 the zero-margin observation I raised on C1 has moved from a post-hoc catch to a pre-emptive design rule, in a different experiment, applied by its author without my involvement. That is the third clause of mine to propagate this way (H-2 non-completion, pool re-read, now the power/bar rule).",
+    "DEPTH_HOLD_IS_CALIBRATED_NOT_HOPEFUL": "The 500-gate hold is set against the 475 ceiling MEASURED by C1's NO-FLY, with the routed estimate (454-490) stated up front and the transpiler's actual number given the deciding vote. C1's expensive negative became C2's design constant within hours \u2014 the clearest case this week of a failed flight paying for the next one.",
+    "SINGLE_STAGE_IS_JUSTIFIED": "No pilot, and the text says why: the gates' own power at this budget is adequate, unlike C1 where lambda uncertainty demanded a staged pilot. Stating the reason for NOT staging is the same discipline as stating the reason for staging."
+  },
+  "what_this_entry_asserts": [
+    "The text at f68301c, sha256 0b0d25be..., is FROZEN as of this seal and pre-dates submission.",
+    "The two registered gates with their numeric bars and frozen predictions, the reported rows, the decode arithmetic, the budget and the four kill conditions are fixed as recorded.",
+    "Hash verified by recomputation against the seal request, byte for byte."
+  ],
+  "what_this_entry_does_NOT_assert": [
+    "It does NOT assert the flight is approved \u2014 the Creator's GO was OUTSTANDING at seal time.",
+    "It does NOT assert the KA fence, the depth hold or the calibration hold have passed. Any of the three can still refuse the flight at submit.",
+    "It does NOT assert the ALT2 pool can fund it. The ~576s figure in the text is AS-OF-DRAFTING and, per kill condition 4, must be re-read at submission \u2014 and I cannot independently verify ALT2 pool state from my tooling, so any pool number here is the arc owner's reading, not mine.",
+    "It does NOT assert anything about outcomes, nor that the registered gates are the RIGHT gates \u2014 only that they were fixed before the data existed."
+  ],
+  "seats": {
+    "whisper": "flight + decode + prereg text",
+    "elder": "grader at landing + deterministic re-run co-check",
+    "ember": "spec-seal \u2014 this ancestry commit; NO secret held",
+    "creator": "GO / budget authority \u2014 outstanding at seal time"
+  }
+}
