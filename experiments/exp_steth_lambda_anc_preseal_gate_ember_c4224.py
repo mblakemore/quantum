@@ -412,9 +412,18 @@ def main():
     if args.predict:
         print(f"\nPREDICT on {args.backend} noise model (no job submitted)")
         try:
-            from run_exp66_qpu_partb import _get_ibm_service
+            # C4225: named explicitly, like the submit path. This is a READ (pulling
+            # calibration to build a NoiseModel) so it is not a misroute hazard in the
+            # write sense — but a forecast built from the WRONG instance's view of the
+            # backend is a wrong forecast, and Elder's gate was right to flag the file
+            # rather than reason about which branch runs.
+            from qiskit_ibm_runtime import QiskitRuntimeService as _QRS
+            import check_job_status as _C2
             from qiskit_aer.noise import NoiseModel
-            svc = _get_ibm_service()
+            _t = _C2._load_env_token(_C2.ALT2_ENV_KEY)
+            if not _t:
+                raise RuntimeError("no ALT2 token — refusing to fall back to a default instance")
+            svc = _QRS(channel="ibm_cloud", token=_t, instance=_C2.ALT2_CRN)
             backend = svc.backend(args.backend)
             nm = NoiseModel.from_backend(backend)
             pu, _ = run_channel(k, "haar", backend, args.shots, noise_model=nm)
