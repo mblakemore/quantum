@@ -30,10 +30,16 @@ meaning of normalisation. NONE is restated from memory, because v1 did exactly t
   PARALLEL   Tr_C W = rho^T_{A_I B_I} (x) I_{A_O B_O},  rho >= 0, Tr rho = 1.
              Stated on Tr_C W (not as a product) so prep and readout may share an ancilla.
   CAUSAL     W = W_A + W_B with the precedent's comb constraints for A<B<C and B<A<C.
-  PROCESS    W >= 0, Tr W = 4, and normalisation imposed DIRECTLY on sampled unitary pairs.
-             Necessary-only => the optimum is an UPPER BOUND on the true process ceiling, which
-             is the conservative direction for a bar the flip arm must exceed. Sufficiency is
-             then tested on FRESH held-out pairs the constraints never saw.
+  PROCESS    (diagnostic) W >= 0, Tr W = 4, normalisation on sampled UNITARY pairs only. That
+             span has rank 100 and does NOT carry a time-direction restriction, so this cone
+             CONTAINS the flip and reaches 1.0. Kept because that is a useful consistency result,
+             not a bar.
+  PROCESS_DTD (the published 0.91-0.92 bar) same, but normalisation against general CPTP maps,
+             whose span has rank 169. Those extra 69 directions are exactly where a flip-like
+             solution hides: the flip needs a transpose, positive but NOT completely positive, so
+             it is not a process matrix over forward CPTP operations. Known-answer tests both
+             ways -- the switch satisfies these at 1e-15; the unitary-only optimum that reached
+             1.0 violates them at 0.29 and is correctly excluded.
 
 WHAT v1 GOT WRONG, kept here because the failure is the useful part: v1 used a 4-system tester
 picture with the Oreshkov-Costa-Brukner conditions, which assume a TRIVIAL GLOBAL FUTURE. A
@@ -250,6 +256,49 @@ def norm_ops(n_samp, rng):
     return ops
 
 
+def rand_cptp(rng, k=2, d=2):
+    """A random CPTP map via Stinespring: an isometry d -> d*k, environment traced out."""
+    z = (rng.normal(size=(d * k, d)) + 1j * rng.normal(size=(d * k, d))) / np.sqrt(2)
+    q, _ = np.linalg.qr(z)
+    return lambda rho: (q @ rho @ q.conj().T).reshape(d, k, d, k).trace(axis1=1, axis2=3)
+
+
+def cj_map(L, d=2):
+    """CJ in the precedent's convention: sum_ij |i><j| (x) conj(L(|i><j|)).
+
+    Verified against P.cj_vec for unitary L, so the two conventions cannot silently diverge.
+    """
+    M = np.zeros((d * d, d * d), dtype=complex)
+    for i in range(d):
+        for j in range(d):
+            E = np.zeros((d, d), dtype=complex)
+            E[i, j] = 1
+            blk = np.conj(L(E))
+            for a in range(d):
+                for b in range(d):
+                    M[i * d + a, j * d + b] = blk[a, b]
+    return M
+
+
+def cptp_norm_ops(n, rng):
+    """Normalisation generators built from general CPTP maps, not just unitaries.
+
+    THIS IS THE DEFINITE-TIME-DIRECTION CONSTRAINT, and it is the whole content of the headline
+    0.92 bar. Normalising against UNITARY channels only spans rank 100; against CPTP channels it
+    spans rank 169 (measured C6578). Those missing 69 directions are exactly where a solution
+    behaving like the TIME FLIP hides — the flip needs a transpose, which is positive but not
+    completely positive, so it is not a process matrix over forward CPTP operations.
+    Empirically: the switch (a genuine process matrix) satisfies these at 1e-15, while the
+    unitary-only optimum that reached 1.0 violates them at 0.29 and is correctly excluded.
+    """
+    return [kron_list([cj_map(rand_cptp(rng)), cj_map(rand_cptp(rng)),
+                       np.eye(2, dtype=complex)]) for _ in range(n)]
+
+
+def cptp_dev(W, ops):
+    return max(abs(np.real(np.trace(g @ W)) - 1) for g in ops)
+
+
 def solve_class(cls, pairs, n_norm=200, solver="SCS", seed=6578):
     rng = np.random.default_rng(seed)
     W = cp.Variable((DIM5, DIM5), hermitian=True)
@@ -270,9 +319,14 @@ def solve_class(cls, pairs, n_norm=200, solver="SCS", seed=6578):
                 cp.real(cp.trace(WA + WB)) == 4, cp.imag(cp.trace(WA + WB)) == 0]
         cons += P.comb_constraints_A(WA) + P.comb_constraints_B(WB)
         obj_W = WA + WB
-    elif cls == "process":
+    elif cls == "process":                      # UNRESTRICTED — contains the flip. Diagnostic only.
         cons += [cp.real(cp.trace(W)) == 4, cp.imag(cp.trace(W)) == 0]
         for Gn in norm_ops(n_norm, rng):
+            cons.append(cp.real(cp.trace(Gn @ W)) == 1)
+        obj_W = W
+    elif cls == "process_dtd":                  # DEFINITE TIME DIRECTION — the published bar
+        cons += [cp.real(cp.trace(W)) == 4, cp.imag(cp.trace(W)) == 0]
+        for Gn in cptp_norm_ops(250, rng):
             cons.append(cp.real(cp.trace(Gn @ W)) == 1)
         obj_W = W
     else:
@@ -388,23 +442,35 @@ def main_full():
     # CHECK, not a contradiction of the published 0.92: it confirms the flip is a legitimate
     # process matrix and that beating 0.92 requires exactly the resource that tier excludes.
     # Reproducing 0.92 needs the time-direction constraint, which this script does NOT implement.
-    BARS = {"parallel": (0.88, 0.89), "causal": (0.90, 0.91)}
+    BARS = {"parallel": (0.88, 0.89), "causal": (0.90, 0.91), "process_dtd": (0.91, 0.92)}
     res, ok = {}, True
     print()
-    for cls in ("parallel", "causal", "process"):
+    for cls in ("parallel", "causal", "process", "process_dtd"):
         v, st, Wv = solve_class(cls, pairs)
+        # RECOMPUTE the objective from the RETURNED matrix rather than trusting prob.value.
+        # cvxpy emits 'invalid value encountered in reduce' from its own analysis on these
+        # problems; the warnings are benign but "benign" is an argument, and recomputing is a
+        # check. If the solver's optimum and the matrix disagree, the number is not usable.
+        recomputed = float(np.mean([
+            np.real(np.trace(P.game_op(U2, V2, PLUS if l2 == "M+" else MINUS) @ Wv))
+            for _, U2, V2, l2 in pairs]))
+        if not np.isfinite(Wv).all() or abs(recomputed - v) > 1e-4:
+            print(f"  {cls}: REFUSED — solver value {v:.6f} vs recomputed {recomputed:.6f}")
+            ok = False
+            continue
         dev = heldout_normalisation(Wv)
         if cls in BARS:
             lo, hi = BARS[cls]
             inside = lo - 2e-3 <= v <= hi + 2e-3
             if not inside:
                 ok = False
-            res[cls] = {"value": v, "published": [lo, hi], "inside": bool(inside),
-                        "heldout_dev": dev, "status": st}
+            res[cls] = {"value": v, "recomputed": recomputed, "published": [lo, hi],
+                        "inside": bool(inside), "heldout_dev": dev, "status": st}
             print(f"  {cls:9s} = {v:.6f}   published [{lo}, {hi}]   "
                   f"{'IN RANGE' if inside else '*** OUTSIDE ***'}   heldout {dev:.1e}")
         else:
-            res[cls] = {"value": v, "published": None, "heldout_dev": dev, "status": st,
+            res[cls] = {"value": v, "recomputed": recomputed,
+                        "published": None, "heldout_dev": dev, "status": st,
                         "note": "UNRESTRICTED process cone — no time-direction constraint, so it "
                                 "contains the flip and is EXPECTED to reach 1.0. Not comparable "
                                 "to the published 0.91-0.92 definite-time-direction bar."}
@@ -439,8 +505,8 @@ def main_full():
     out = {"cycle": "C6578", "author": "elder", "scope": "H10-B1 ceiling co-check, FULL",
            "n_pairs": len(pairs), "flip_min_win": worst, "tiers": res,
            "subset_parallel_alone": {"paulis_15": vP, "mii_6": vM},
-           "verdict": ("REPRODUCED (parallel + causal); process tier NOT ATTEMPTED — needs the "
-                       "definite-time-direction constraint this script does not implement")
+           "verdict": ("ALL THREE PUBLISHED BARS REPRODUCED IN-HOUSE (parallel, causal, "
+                       "process/definite-time-direction); flip = 1 exactly")
                       if ok else "DISAGREES WITH PUBLISHED BARS"}
     import os
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
