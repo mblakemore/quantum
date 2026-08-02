@@ -1,0 +1,457 @@
+{
+ "experiment": "h10_b1_time_flip",
+ "cycle": "C5018",
+ "prereg": "docs/h10-b1-prereg-whisper-c5018.md chain 7117/4746ef9f + 9253/084a815c + 11779/e764938d",
+ "go": "Creator general#3674 'Go when ready!' (2026-08-02)",
+ "account": "ALT2",
+ "pool_remaining_at_submit_s": 478,
+ "backend": "ibm_marrakesh",
+ "chain_2q_median": 0.0030651014222670137,
+ "pubs": [
+  {
+   "arm": "F",
+   "name": "(I,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(I,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(I,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(I,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(I,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(I,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(I,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(I,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(I,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(X,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(X,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(X,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(X,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(X,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(X,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(X,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(X,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(X,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Z,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Z,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Z,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Z,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Z,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Z,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Z,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Z,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Z,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Y,I)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Y,I)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Y,I)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Y,X)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Y,X)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Y,X)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Y,Z)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Y,Z)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Y,Z)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(I,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(I,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(I,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(X,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(X,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(X,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Z,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Z,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Z,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII+_0",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII+_0",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII+_0",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII+_1",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII+_1",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII+_1",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII+_2",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII+_2",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII+_2",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII+_3",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII+_3",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII+_3",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII-_0",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII-_0",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII-_0",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII-_1",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII-_1",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII-_1",
+   "label": "M-",
+   "shots": 500
+  }
+ ],
+ "transpiled_2q_counts": [
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  4,
+  35,
+  0,
+  4,
+  35,
+  0,
+  4,
+  35,
+  0,
+  4,
+  35
+ ],
+ "job_id": "d9ngftc60llc73ca2vo0",
+ "committer": "Whisper (DC15W)"
+}
