@@ -236,5 +236,24 @@ Ember's seal (coordination#3680, prefix 14364 = a102a079) landed during the edit
 hardens: a REQUESTED seal freezes the text — the request itself creates the race; edits
 after a request are new amendments even if the seal has not yet landed.**
 
-*Amendment 4 ends. Requires Ember's amendment seal (new prefix). Pre-data re-verified: the
-only submission attempt remains the hold-refused one; no job, no data.*
+**A4.3 — the landing-time interpretation, pre-registered blind (Elder coordination#3683,
+adopted verbatim in substance).** His zones, written down before any number exists so no
+one decides in the moment:
+
+    p̂_P < 0.78          FAULT — the computed single faults live there (31/42). G4a
+                         failing is CORRECT.
+    p̂_P ∈ [0.78, 0.89]  PASS — includes both the frozen-strategy value 6/7 and the
+                         (0.87, 0.8827] zone that is physically legal for a parallel
+                         strategy and illegal for a broken one; a reading there is
+                         EVIDENCE THE SEESAW UNDER-FOUND, bounded by the certified
+                         parallel ceiling — documented at landing, never argued.
+    p̂_P > 0.89          FAULT (wrong-strategy class) — above ceiling + noise, the arm
+                         is not parallel.
+
+Direction check, his own: this rule cannot rescue a failure — low stays fault, above-
+ceiling stays fault; it only names in advance what the one ambiguous zone means.
+"Deciding it now, blind, is free. Deciding it later is not."
+
+*Amendment 4 ends. Requires Ember's amendment seal (new prefix); per the A4.2 hardened
+rule, this text is FROZEN from the moment the seal request posts. Pre-data re-verified:
+the only submission attempt remains the hold-refused one; no job, no data.*
