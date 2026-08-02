@@ -1,0 +1,24 @@
+{
+ "cycle": "C6578",
+ "author": "elder",
+ "scope": "H10-B1 ceiling co-check, PARTIAL",
+ "pauli_subset_ceilings": {
+  "parallel": 1.0000000140756637,
+  "causal": 0.999999330117093,
+  "process": 1.0000029145259404
+ },
+ "n_pairs_used": 15,
+ "n_pairs_published": 21,
+ "missing": "6 non-Pauli MII pairs (definitions not in repo)",
+ "finding": "Pauli-only subset admits NO game: all three tiers reach 1.0, so the published 0.88/0.90/0.92 bars cannot be reproduced without the MII pairs. The MII pairs are load-bearing, proven not assumed.",
+ "gates": [
+  "time-flip=1 by direct simulation",
+  "switch is a known-positive for the process cone",
+  "no tier exceeds probability 1",
+  "held-out normalisation on each SOLUTION < 1e-9",
+  "ordering parallel<=causal<=process",
+  "normalisation span saturated at rank 100"
+ ],
+ "process_tier_is_upper_bound": true,
+ "corroboration": "precedent causal_game_sdp.py V5 finds the same Pauli-triviality on the analogous Araujo game (their footnote 8)"
+}
