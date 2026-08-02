@@ -1,0 +1,17 @@
+{
+ "priors": [
+  0.6190476190476191,
+  0.38095238095238093
+ ],
+ "sdp_ceilings_inhouse": {
+  "parallel": 0.882687,
+  "causal": 0.905586,
+  "process_dtd": 0.919746
+ },
+ "parallel_choi_helstrom": 0.8653076924470754,
+ "causal_choi_UV": 0.6190476190476191,
+ "causal_choi_VU": 0.6190476190476191,
+ "causal_2copy_UV_VU": 0.6190476190476191,
+ "switch_helstrom": 0.7142857142857142,
+ "flip_exact": 1.0
+}
