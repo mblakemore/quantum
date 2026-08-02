@@ -352,6 +352,75 @@ def decode_v2(job_id=None):
     return 0
 
 
+# =======================================================================================
+# VALIDITY DOCTRINE (Whisper ruling general#3779; Elder banks it as gate-geometry edge 4)
+#
+# Edge 4 is the first TEMPORAL one -- the other three ask WHERE the bar sits, this asks
+# HOW LONG the thing the bar is drawn against stays the thing it was drawn against.
+# Measured answer here: not overnight. lambda_anc moved 0.48 -> 0.06 on FIXED qubits
+# (layout identical, [23,107,22,106], seed change ruled out) across ~18h and at least one
+# recalibration boundary; v1's reading is not a sampling fluke of v2's rate (p = 2e-14).
+#
+# TIER 1, DEFAULT -- CO-BATCH. The gate pubs fly in the SAME JOB as the main-flight pubs.
+# The window degenerates to zero and staleness is impossible BY CONSTRUCTION rather than
+# unlikely by policy. Same preference as Fraction(6,7) over a 6-decimal literal and a
+# derived chain over a transcribed one: REMOVE THE OPPORTUNITY RATHER THAN POLICE IT.
+# The trade, stated in advance because it must be pre-registered: the main shots are spent
+# even if the gate fails, so a failed in-batch gate makes the main data
+# EXPLORATORY-BY-CONSTRUCTION, never graded against registered bars.
+#
+# TIER 2, only if co-batching is structurally impossible -- a 6 HOUR window AND a
+# calibration-boundary check. The boundary check is the load-bearing half: a recalibration
+# between gate and flight expires the gate REGARDLESS OF CLOCK, because the clock is a
+# proxy for the machine changing and the boundary is the thing itself.
+# =======================================================================================
+GATE_WINDOW_HOURS = 6.0
+
+
+def gate_pubs(k=2):
+    """The gate's pubs, shots and index — for a MAIN FLIGHT to splice into its own job.
+
+    This is what makes tier 1 real instead of a note in a document. A main flight calls
+    this, concatenates onto its own pub list, and grades the gate from the same session.
+    Returns (circuits, shots, local_index); the caller must offset local_index by however
+    many pubs precede these.
+    """
+    return build_v2_circuits(k)
+
+
+def gate_is_valid(gate_landed_iso, backend, submit_iso=None):
+    """Tier-2 validity: has the gate's measurement gone stale before this submission?
+
+    TWO independent expiries, and the boundary one can fire while the clock one has not:
+      - AGE: more than GATE_WINDOW_HOURS between the gate landing and the submission.
+      - CALIBRATION BOUNDARY: backend.properties().last_update_date falls between them.
+    A recalibration is the machine BECOMING A DIFFERENT MACHINE; the clock is only a proxy
+    for that. When the proxy and the thing disagree, the thing governs.
+    """
+    from datetime import datetime, timezone
+    g = datetime.fromisoformat(gate_landed_iso)
+    s = (datetime.fromisoformat(submit_iso) if submit_iso
+         else datetime.now(timezone.utc))
+    if g.tzinfo is None:
+        g = g.replace(tzinfo=timezone.utc)
+    if s.tzinfo is None:
+        s = s.replace(tzinfo=timezone.utc)
+    age_h = (s - g).total_seconds() / 3600.0
+    reasons = []
+    if age_h > GATE_WINDOW_HOURS:
+        reasons.append(f"AGE {age_h:.1f}h > {GATE_WINDOW_HOURS}h window")
+    try:
+        cal = backend.properties().last_update_date
+        if g <= cal <= s:
+            reasons.append(f"CALIBRATION BOUNDARY at {cal.isoformat()} lies between "
+                           f"gate landing and submission — the gate measured a "
+                           f"different machine")
+    except Exception as exc:
+        reasons.append(f"CALIBRATION TIMESTAMP UNREADABLE ({type(exc).__name__}) — "
+                       f"treated as EXPIRED, because unknown is not valid")
+    return (not reasons), {"age_hours": round(age_h, 2), "expired_because": reasons or None}
+
+
 if __name__ == "__main__":
     if "--submit" in sys.argv:
         sys.exit(submit_v2())
