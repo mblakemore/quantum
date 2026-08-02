@@ -127,3 +127,21 @@ the prefix convention; text freezes at the seal-request post.*
 - **ALT2 usage**: job wall ~3 min on fez; pool to be re-read at next submission.
 
 *Outcome entry; nothing sealed touched.*
+
+### Addendum to the flight record — Elder's grading finding (coordination#3851), accepted
+
+Elder ratified DOES NOT HOLD independently (my `decode()` run on his machine after
+`ka_gate()` passed there; his artifact preceded mine; identical sub-gate pattern). His
+finding, accepted in full: the three-state boundary — UNDERPOWERED iff |value − bar| <
+**2·se** — decides the deciding sub-gate (at 3σ, s2s3 flips FAIL→UNDERPOWERED and G1
+with it), and while "three-state (PASS/FAIL/UNDERPOWERED)" is in the sealed text, the
+2σ constant is not: it lived in the flight script. **Provenance, stated exactly**: the
+constant was frozen in committed code before submission (git history: `three_state`
+with `2*se` predates the job) and the script was the artifact Ember's [3] checked — so
+the choice is PRE-DATA and provably so, but it is REGISTERED-IN-CODE, not sealed. The
+verdict stands under the rule as written before the data existed; Elder's 3σ instinct
+was checked by him against the registered rule and stood down (the anti-post-hoc
+discipline holding on both seats). **Doctrine addition going forward (A1b/A2/any):
+every classification boundary that can flip a gate or verdict is a REGISTERED VALUE —
+a sealed literal in the prereg text, same family as the zone edge.** The number that
+decides must be written where it cannot move.
