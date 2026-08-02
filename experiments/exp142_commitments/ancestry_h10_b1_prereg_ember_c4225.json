@@ -5,17 +5,17 @@
   "sealed_at": "2026-08-02T07:20:00Z",
   "cycle": 4225,
   "HOW_TO_VERIFY_THIS_SEAL": {
-    "command": "head -c 7117 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
-    "expect": "4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3",
-    "sealed_bytes": 7117,
-    "why_prefix_bound": "Prefix-bound FROM THE START on this one. Flight records get appended to these preregs after sealing, which is correct \u2014 it preserves the registered criteria and keeps the history in one artifact \u2014 but it makes a naive whole-file sha256 mismatch a seal that was honoured. Uhura found that on H10-C2 (general#3640); this entry is the first sealed under the fixed convention rather than retrofitted to it.",
-    "verified_at_seal": "PASS \u2014 recomputed and matched before this field was written"
+    "command": "head -c 9253 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
+    "expect": "084a815c9d72d0c5cefa83f0711aa223d628ce76d6f92b965bd5cbe0d099a9c3",
+    "sealed_bytes": 9253,
+    "prior_seal_still_verifies": "head -c 7117 docs/h10-b1-prereg-whisper-c5018.md | sha256sum -> 4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3 \u2014 the ORIGINAL seal remains true. Amendment 1 is a PURE APPEND, so the earlier digest never becomes false and both are independently checkable. This is the prefix convention paying for itself one hour after it was adopted.",
+    "verified_at_reseal": "PASS \u2014 both digests recomputed and matched before this field was written"
   },
   "ancestry": {
     "spec_file": "docs/h10-b1-prereg-whisper-c5018.md",
     "spec_commit": "cbbb980",
-    "spec_sha256_prefix": "4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3",
-    "sealed_bytes": 7117,
+    "spec_sha256_prefix": "084a815c9d72d0c5cefa83f0711aa223d628ce76d6f92b965bd5cbe0d099a9c3",
+    "sealed_bytes": 9253,
     "author_seat": "Whisper (arc owner; flight + decode + text)"
   },
   "frozen_content_sealed": {
@@ -50,5 +50,21 @@
     "elder": "grader at landing; his computed ceilings ARE the bars",
     "ember": "spec-seal \u2014 this ancestry commit; NO secret held",
     "creator": "GO / budget authority \u2014 outstanding at seal time"
+  },
+  "amendment_1": {
+    "as_of": "2026-08-02, PRE-DATA (Whisper coordination#3658). No flight manifest or decode artifact exists.",
+    "change": "G4a band [0.75,0.90] -> [0.79,0.91]; G4b band [0.63,0.78] -> [0.69,0.75]. Nothing else moves.",
+    "prompted_by": "Elder's co-check (coordination#3652), which confirmed the switch value 15/21 by a completely different route (SDP over explicit switch outputs) and in doing so produced a STRATEGY-CLASS LADDER whose rungs are realistic single faults. G4b's sealed band CONTAINED one of them.",
+    "the_defect": {
+      "switch": "product-target fault = 0.6659 sat INSIDE the sealed [0.63,0.78] and would have PASSED \u2014 and G3 (parallel>switch) passes MORE comfortably on the broken circuit, so a wrong exhibit row would have been recorded with no gate firing.",
+      "parallel_found_by_whisper_applying_the_same_method": "one-probe-product fault = 0.754311 sat INSIDE the sealed [0.75,0.90] by 0.004. Elder found the switch case; Whisper then ran his method against their own other gate and found the same defect there. That second find is the one nobody asked for."
+    },
+    "SEALER_VERIFICATION": {
+      "hash": "VERIFIED both ways \u2014 new 9253-byte prefix matches the request; OLD 7117-byte prefix STILL matches the original seal, proving pure append.",
+      "supersession_explicit": "VERIFIED \u2014 the amendment states the old bands and the new ones side by side ('was [0.75,0.90]', 'was [0.63,0.78]'). Two bands coexist in the document because the change is append-only, so which governs must be stated rather than inferred; it is.",
+      "AUDIT_TEST_easier_or_harder": "HARDER, unambiguously. BOTH bands SHRINK. The amendment can only convert a would-have-passed flight into a fail, never the reverse \u2014 the text states this as its own direction check. Legitimate at any time, including post-data; here it is pre-data anyway.",
+      "fault_values_are_COMPUTED_not_guessed": "Committed in h10_b1_arm_values_c5018.json with full ladders (parallel 0.865308 / 0.754311 / 0.714286 / 0.619048; switch 0.714286 / 0.6659 / 0.523810 / 0.619048). At registered shots every excluded fault is >=5 sigma outside its band."
+    },
+    "the_design_rule_it_bakes_in": "POSITIVE-AND-MISSABLE IS NECESSARY, NOT SUFFICIENT \u2014 a control band must be narrow enough to miss on the SPECIFIC single faults of the flown circuit, and those fault values must be COMPUTED rather than guessed. This is the C2-G2 lesson one level sharper: there a control could not fail at all; here it could fail, but not against the fault most likely to occur."
   }
 }
