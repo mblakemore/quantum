@@ -85,6 +85,12 @@ def scramble_gate(seed):
     from qiskit.quantum_info import random_unitary
     return UnitaryGate(random_unitary(4, seed=seed), label=f"scr{seed}")
 
+def coal_name(coal):
+    """THE canonical coalition label: (1,)->'s1', (1,2)->'s1s2'. One function, every site
+    -- the grading-path fence caught grade() writing 'A1_1s2' while gates read 'A1_s1s2'
+    (two inline conventions). Naming is derived, never re-transcribed."""
+    return "".join(f"s{x}" for x in coal)
+
 def build_pubs():
     from qiskit import QuantumCircuit
     pubs = []
@@ -103,7 +109,7 @@ def build_pubs():
                 if b: qc.x(0)
                 encoder(qc)
                 qc.measure(range(7), range(7))
-                pubs.append({"arm": arm, "name": f"{arm}_dial_{'s'.join(map(str, coal))}_b{b}",
+                pubs.append({"arm": arm, "name": f"{arm}_dial_{coal_name(coal)}_b{b}",
                              "coal": coal, "b": b, "shots": SHOTS["dial"], "qc": qc})
     qc = base(True, encode_threshold)
     inv = base(False, lambda q: None)            # E-dagger appended below
@@ -210,7 +216,7 @@ def ka_gate(verbose=True):
     coals = [(1,), (2,), (3,), (1, 2), (1, 3), (2, 3), (1, 2, 3)]
     for arm, tgt in (("A1", {1: 0.0, 2: 1.0, 3: 1.0}), ("A2", {1: 1.0, 2: 1.0, 3: 1.0})):
         for coal in coals:
-            cs = "s".join(map(str, coal))
+            cs = coal_name(coal)
             d, _ = dial_from_pair(stats[f"{arm}_dial_{cs}_b0"], stats[f"{arm}_dial_{cs}_b1"])
             checks.append((f"{arm} dial {cs}", d, tgt[len(coal)]))
     checks.append(("A3 revival contrast", stats["A3_revival"]["contrast"], 1.0))
@@ -257,7 +263,13 @@ def ka_gate(verbose=True):
     # distribution and assert both iterators yield identical statistics. A bit-convention
     # mismatch here passes the exact fence and decodes every dial to a PLAUSIBLE wrong
     # number — no absurd 13/21 rescues the reader.
+    # EXTERNAL ANCHOR (Elder #3834): iterator agreement alone is circular — format(i,"07b")
+    # and the counts iterator invert each other BY CONSTRUCTION. That format() matches
+    # qiskit's real get_counts convention was verified against hardware reality with an
+    # asymmetric |100> run: statevector index 4 -> "100" == real sampler key. With that
+    # one assumption anchored, this check is load-bearing, not mutual-consistency.
     value_keys = ("p", "contrast", "sorted_absX", "unsorted_X", "n_outcomes")
+    synth_stats = {}
     for p in pubs:
         body = p["qc"].remove_final_measurements(inplace=False)
         probs = Statevector(body).probabilities()
@@ -265,6 +277,7 @@ def ka_gate(verbose=True):
                  for i, pr in enumerate(probs) if pr > 1e-14}
         exact = pub_stats(p, outcome_iter_exact(p["qc"]))
         via = pub_stats(p, outcome_iter_counts(synth))
+        synth_stats[p["name"]] = via
         worst = max(abs(exact[k] - via[k]) for k in value_keys if k in exact)
         ok &= worst < 1e-9
         if worst >= 1e-9 and verbose:
@@ -272,6 +285,34 @@ def ka_gate(verbose=True):
     if verbose:
         print(f"  KA PASS  counts-path self-test: 36/36 pubs, both iterators agree" if ok
               else "  KA counts-path self-test FAILED")
+    # grading-path fence (Ember [8] residual, coordination#3835): run the COMPLETE decode
+    # pipeline — grade(): dials -> three_state -> combine -> verdict — on the synthetic
+    # ideal counts and demand HOLDS with every gate PASS and the receipt flat. Then hit
+    # the verdict branches ideal data can never reach with direct known-answer triples.
+    g = grade(synth_stats)
+    all_pass = all(g["gates"][k]["verdict"] == "PASS" for k in g["gates"])
+    e2e = g["VERDICT"] == "HOLDS" and all_pass and g["A5_receipt_unsorted_flat_within_3sigma"]
+    ok &= e2e
+    if verbose:
+        print(f"  KA {'PASS' if e2e else 'FAIL'}  end-to-end grade() on ideal counts -> "
+              f"{g['VERDICT']}, gates {'all PASS' if all_pass else 'NOT all PASS'}")
+    grader_ka = [
+        (three_state(1.00, 0.85, 0.001, ">="), "PASS"),
+        (three_state(0.70, 0.85, 0.001, ">="), "FAIL"),
+        (three_state(0.86, 0.85, 0.020, ">="), "UNDERPOWERED"),
+        (three_state(0.05, 0.10, 0.001, "<="), "PASS"),
+        (three_state(0.15, 0.10, 0.001, "<="), "FAIL"),
+        (three_state(0.11, 0.10, 0.020, "<="), "UNDERPOWERED"),
+        (combine(["PASS", "PASS"]), "PASS"),
+        (combine(["PASS", "FAIL"]), "FAIL"),
+        (combine(["PASS", "UNDERPOWERED"]), "UNDERPOWERED"),
+        (combine(["FAIL", "UNDERPOWERED"]), "FAIL"),
+    ]
+    gka = all(got == want for got, want in grader_ka)
+    ok &= gka
+    if verbose:
+        print(f"  KA {'PASS' if gka else 'FAIL'}  grader branch KA: "
+              f"{sum(got == want for got, want in grader_ka)}/10 verdict triples")
     n2q = [sum(1 for inst in p["qc"].data if len(inst.qubits) == 2 and inst.operation.name != "measure")
            for p in pubs]
     if verbose:
@@ -354,27 +395,15 @@ def combine(subs):
     if all(s == "PASS" for s in subs): return "PASS"
     return "UNDERPOWERED"
 
-def decode(job_id):
-    sys.path.insert(0, SCRIPTS)
-    from ibm_multi_account import multi_account_service
-    job = None
-    for svc in multi_account_service():
-        try:
-            job = svc.job(job_id); break
-        except Exception:
-            continue
-    if job is None: sys.exit(f"job {job_id} not found in any account")
-    res = job.result()
-    pubs = build_pubs()
-    stats = {}
-    for p, r in zip(pubs, res):
-        counts = r.data.c.get_counts() if hasattr(r.data, "c") else r.data.meas.get_counts()
-        stats[p["name"]] = pub_stats(p, outcome_iter_counts(counts))
-    out = {"job_id": job_id, "experiment": "h10_a1_quorum_fact", "gates": {}, "dials": {}}
+def grade(stats):
+    """The COMPLETE post-counts decode: stats -> dials -> gates -> verdict. One code path,
+    exercised end-to-end by ka_gate() on synthetic ideal counts (Ember [8] residual:
+    grading logic must be fenced too, not just bit extraction)."""
+    out = {"experiment": "h10_a1_quorum_fact", "gates": {}, "dials": {}}
     coals = [(1,), (2,), (3,), (1, 2), (1, 3), (2, 3), (1, 2, 3)]
     for arm in ("A1", "A2"):
         for coal in coals:
-            cs = "s".join(map(str, coal))
+            cs = coal_name(coal)
             d, se = dial_from_pair(stats[f"{arm}_dial_{cs}_b0"], stats[f"{arm}_dial_{cs}_b1"])
             out["dials"][f"{arm}_{cs}"] = {"dial": d, "se": se}
     g1 = [three_state(out["dials"][f"A1_s{i}"]["dial"], 0.10, out["dials"][f"A1_s{i}"]["se"], "<=")
@@ -407,11 +436,31 @@ def decode(job_id):
     out["VERDICT"] = ("HOLDS" if all(v == "PASS" for v in verdicts)
                       else "DOES NOT HOLD" if any(v == "FAIL" for v in verdicts)
                       else "UNDERPOWERED")
+    return out
+
+def decode(job_id):
+    sys.path.insert(0, SCRIPTS)
+    from ibm_multi_account import multi_account_service
+    job = None
+    for svc in multi_account_service():
+        try:
+            job = svc.job(job_id); break
+        except Exception:
+            continue
+    if job is None: sys.exit(f"job {job_id} not found in any account")
+    res = job.result()
+    pubs = build_pubs()
+    stats = {}
+    for p, r in zip(pubs, res):
+        counts = r.data.c.get_counts() if hasattr(r.data, "c") else r.data.meas.get_counts()
+        stats[p["name"]] = pub_stats(p, outcome_iter_counts(counts))
+    out = grade(stats)
+    out["job_id"] = job_id
     path = os.path.join(RESULTS, f"h10_a1_decode_{job_id}.json")
     json.dump(out, open(path, "w"), indent=1, default=float)
     for g in ("G1_threshold", "G2_control", "G3_revival", "G4_custody", "G5_story"):
         print(f"  {g:14s} {out['gates'][g]['verdict']:12s} subs={out['gates'][g]['subs']}")
-    print(f"  receipt (unsorted flat within 3 sigma): {receipt_ok}")
+    print(f"  receipt (unsorted flat within 3 sigma): {out['A5_receipt_unsorted_flat_within_3sigma']}")
     print(f"  VERDICT: {out['VERDICT']}\n-> {path}")
 
 if __name__ == "__main__":
