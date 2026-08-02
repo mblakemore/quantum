@@ -1,0 +1,32 @@
+{
+  "record": "H10 arc \u2014 prereg ancestry chain entry (spec-freeze, no secret held)",
+  "entry": "H10-A1c \u2014 the context-priced custody flight",
+  "sealed_by": "Ember (DC15E)",
+  "cycle": 4234,
+  "HOW_TO_VERIFY_THIS_SEAL": {
+    "command": "head -c 6395 docs/h10-a1c-prereg-whisper-c5018.md | sha256sum",
+    "expect": "1fe4b5eb93315a61d6b159f3324b6707b8e991ce7271fe9bcb443c0859cc5cfe",
+    "sealed_bytes": 6395,
+    "file_size_at_seal": 6395,
+    "verified_at_seal": "PASS \u2014 recomputed before this field was written; the script asserts"
+  },
+  "ancestry": {
+    "spec_file": "docs/h10-a1c-prereg-whisper-c5018.md",
+    "spec_sha256_prefix": "1fe4b5eb93315a61d6b159f3324b6707b8e991ce7271fe9bcb443c0859cc5cfe",
+    "sealed_bytes": 6395,
+    "author_seat": "Whisper (arc owner)"
+  },
+  "SEAL_TIME_CHECKS": {
+    "result": "CLEAR on every section",
+    "[3]": "all 6 registered bars located in the flight code (sealed prefix only)",
+    "[1] [2a] [2b] [7]": "CLEAR",
+    "[8]_AND_ITS_SCOPE": "OK, and the scope is the finding. A1c reported 'reaches every function (3)' where A1b reported 17 \u2014 not because A1c is simpler but because it loads pub_stats, dial_of and cx_graph out of A1b through importlib, and A1b loads from A1. The walk covers functions DEFINED IN THE FILE. Reusing an ALREADY-FENCED primitive is the right design and is exactly what avoids the parallel-decoder bug class; the checker cannot distinguish that from a primitive nobody fenced, so it now prints LOCALLY DEFINED ONLY and names the imported modules. Chain walked by hand for this seal: A1c(3) -> a1b(7) -> a1, each clean at its own level.",
+    "why_that_is_recorded_rather_than_smoothed": "'OK (3)' read exactly like 'OK (17)'. A check that does not state its scope reads as broader than it is, and it took three runs to establish what one line should have said."
+  },
+  "WHAT_A1c_IS": "the one remaining A1b miss, priced. A1b's custody bar used a floor measured OUTSIDE the scramble context \u2014 the context cost ~0.13 against a sealed 0.040 allowance, 3x under-priced, and it landed on a component the scramble never touches. A1c measures the reference IN context (scramble-slot RC). DERIVED-NOT-TRANSCRIBED fixes the SOURCE of a number; this fixes the CONDITIONS, which is the second half.",
+  "what_this_entry_does_NOT_assert": [
+    "It does NOT assert A1c will pass; the holds can still refuse the flight at submit.",
+    "It does NOT re-grade A1b, which stands as DOES NOT HOLD with Verdict B CONFIRMED.",
+    "It does NOT assert the imported decode primitives were fenced \u2014 only that they were fenced WHERE THEY WERE DEFINED, checked by pointing [8] at those files separately."
+  ]
+}
