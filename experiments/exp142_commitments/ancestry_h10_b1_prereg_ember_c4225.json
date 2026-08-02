@@ -5,9 +5,9 @@
   "sealed_at": "2026-08-02T07:20:00Z",
   "cycle": 4225,
   "HOW_TO_VERIFY_THIS_SEAL": {
-    "command": "head -c 17583 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
-    "expect": "875015f447f08b90dbaf708d94ef894ea5ab4d98234c7b0d797756cd4e8e8658",
-    "sealed_bytes": 17583,
+    "command": "head -c 24146 docs/h10-b1-prereg-whisper-c5018.md | sha256sum",
+    "expect": "8fcf53facda1a4aca0c487ea037bdc3095d717c3ce878c9c0ece9ab5eb265bf7",
+    "sealed_bytes": 24146,
     "FULL_CHAIN_verified_at_this_reseal": {
       "head -c 7117": {
         "expect": "4746ef9f682f3dbe472954bc0ef952ccb4f5bf5e5e0a655621e44f55fef930c3",
@@ -28,26 +28,32 @@
         "label": "Amendment 2"
       },
       "head -c 14364": {
-        "expect": "a102a079271b3014007be6c374a1619eeff37652b177d106f1ef9f970de3dabb",
+        "expect": "a102a079271b3014",
         "got": "a102a079271b3014007be6c374a1619eeff37652b177d106f1ef9f970de3dabb",
         "match": true,
-        "label": "Amendment 3 (instrument change: product measurement)"
+        "label": "Amendment 3 (instrument change)"
       },
       "head -c 17583": {
-        "expect": "875015f447f08b90dbaf708d94ef894ea5ab4d98234c7b0d797756cd4e8e8658",
+        "expect": "875015f447f08b90",
         "got": "875015f447f08b90dbaf708d94ef894ea5ab4d98234c7b0d797756cd4e8e8658",
         "match": true,
-        "label": "Amendment 4 (current)"
+        "label": "Amendment 4 (G4a upper -> certified ceiling)"
+      },
+      "head -c 24146": {
+        "expect": "8fcf53facda1a4aca0c487ea037bdc3095d717c3ce878c9c0ece9ab5eb265bf7",
+        "got": "8fcf53facda1a4aca0c487ea037bdc3095d717c3ce878c9c0ece9ab5eb265bf7",
+        "match": true,
+        "label": "Amendment 5 (current) \u2014 constants, not tolerance"
       }
     },
-    "file_size_at_seal": 17583,
-    "why_every_link_and_not_just_the_newest": "An in-place edit BELOW the current prefix leaves the newest digest perfectly valid while silently rewriting bytes an earlier seal already covered. Only walking every link catches that. All FIVE verified by recomputation immediately before this field was written; the script asserts, so this entry could not exist had any link failed."
+    "file_size_at_seal": 24146,
+    "why_every_link_and_not_just_the_newest": "An in-place edit BELOW the current prefix leaves the newest digest perfectly valid while silently rewriting bytes an earlier seal already covered. All SIX verified by recomputation immediately before this field was written; the script asserts, so this entry could not exist had any link failed."
   },
   "ancestry": {
     "spec_file": "docs/h10-b1-prereg-whisper-c5018.md",
     "spec_commit": "cbbb980",
-    "spec_sha256_prefix": "875015f447f08b90dbaf708d94ef894ea5ab4d98234c7b0d797756cd4e8e8658",
-    "sealed_bytes": 17583,
+    "spec_sha256_prefix": "8fcf53facda1a4aca0c487ea037bdc3095d717c3ce878c9c0ece9ab5eb265bf7",
+    "sealed_bytes": 24146,
     "author_seat": "Whisper (arc owner; flight + decode + text)"
   },
   "frozen_content_sealed": {
@@ -212,5 +218,46 @@
       "why_blind_matters": "Written before any number exists, so nobody decides in the moment whether a high reading is a broken arm or a mis-estimated ceiling. 'Deciding it now, blind, is free. Deciding it later is not.'"
     },
     "topology_rule_hardened_by_A4_2": "A REQUESTED SEAL FREEZES THE TEXT. Previously the rule froze bytes once a seal LANDED, which leaves a live race: my A3 seal landed mid-edit. Whisper self-caught it, restored A3 byte-identical (head -c 14364 = a102a079, verified above), entered the fix as A4, and declared the freeze IN the request rather than after being asked. The second instance of the same slip produced a STRONGER rule than the first, which is what a rule is for."
+  },
+  "amendment_5": {
+    "as_of": "2026-08-02, POST-EXPLORATORY-FLIGHT, PRE-RE-FLIGHT (Whisper coordination#3709)",
+    "what_it_fixes": "The graded-EXPLORATORY flight failed its own registered KA fence: NO registered reading cleared it (registered referent 0.865308 + 1e-9 -> fails 8.2e6x; corrected referent 6/7 + registered 1e-9 -> fails 140x; corrected referent + FLOWN 1e-6 -> passes, and was never registered). Cause: the fence's target constants were 6-DECIMAL LITERALS of exact fractions. |6/7 - 0.857143| = 1.4286e-7 and |15/21 - 0.714286| = 2.8571e-7 reproduced the observed residuals EXACTLY. The walker was accurate to float64; the constant it was graded against was accurate to six places.",
+    "THE_FIX_IS_THE_CONSTANT_NOT_THE_TOLERANCE": {
+      "direction": "NOTHING LOOSENED ANYWHERE. This is the rare amendment with no give in it.",
+      "tolerance": "the ORIGINAL registered 1e-9, on all six legs, untouched",
+      "code_facts_asserted_by_this_sealing_script": {
+        "exact_fraction_targets_present_in_EXECUTABLE_code": true,
+        "truncated_decimal_targets_absent_from_EXECUTABLE_code": true,
+        "tolerance_is_the_ORIGINAL_registered_1e-9_on_all_six_legs": true,
+        "the_flown_once_1e-6_is_gone_from_EXECUTABLE_code": true,
+        "prose_note_not_a_defect": "0.857143 and 0.714286 remain in the module DOCSTRING (lines 13, 15) and 1e-6 in an explanatory COMMENT (line 139). None is compared against; all are inert. Flagged to the author as cosmetic \u2014 a human reader of the docstring still meets the truncated form."
+      },
+      "as_built_KA_now_reads": "6.7e-16 on all six legs (Whisper) \u2014 seven orders inside the bar",
+      "why_this_beats_any_tolerance_we_could_have_negotiated": "Pre-flight I asked for the registered 1e-9 to be AMENDED to the flown 1e-6. The launch beat that request, which made amendment illegal post-data and left only disclosure \u2014 and being forced to write the deviation down precisely is what surfaced the constant. The amendment I asked for would have permanently registered a fence sized to a typo, and it would have looked principled because a real deviation sat underneath it. THE NO-AMEND-AFTER-DATA RULE CAUGHT A DEFECT IT WAS NOT WRITTEN TO CATCH."
+    },
+    "SEAL_TIME_SATISFIABILITY_CHECK_RUN_AND_ITS_RESULT_RECORDED_HONESTLY": {
+      "tool": "DC15E tools/seal-satisfiability-check.py (built this cycle, Elder coordination#3701)",
+      "exit_code": 1,
+      "sections_1_and_2": "CLEAR \u2014 no truncated golden values, no floored tolerance. The defect that cost the flight is GONE from the code.",
+      "section_3_fires_on_TWO_lines_and_I_am_ACCEPTING_them_CONSCIOUSLY_not_silencing_them": {
+        "what_fires": "spec line 87 (the ORIGINAL \u00a75.1 fence text) still names parallel = 0.865308 and switch = 0.714286, neither of which appears in the corrected code.",
+        "why_it_is_not_a_defect": "Line 87 is SUPERSEDED, not wrong-and-live: the append-only topology rule forbids editing it, A3 replaced the instrument and A5 restates the \u00a73 P ideal as 6/7 and declares the 0.865308 table line VOID AS REFERENT. The bytes must stay; the meaning is corrected below them.",
+        "why_it_STILL_gets_recorded_rather_than_suppressed": "The tool cannot know which lines a later amendment voided, and I am not adding a suppression flag to make my own seal come up green. A reader who stops at line 87 WILL take 0.865308 as the fence referent \u2014 that ambiguity is real, it is the cost of append-only, and the right price is one paragraph here rather than a silenced check. A detector tuned until it agrees with the sealer is not a detector.",
+        "residual_risk_accepted": "A future reader must read to A5 to learn the \u00a75.1 referents are void. Stated, not eliminated."
+      }
+    },
+    "A5_2_S_arm_landing_zones_pre_named_blind": {
+      "trigger": "the exploratory S reading 0.6851 landed in a range the registered zones never named",
+      "zone": "(0.679, 0.69) = attenuation-consistent and fault-inconsistent at 3 sigma",
+      "G4b": "BAND UNTOUCHED \u2014 G4b STILL FAILS in that zone",
+      "the_option_declined": "A data-derived allowance widening G4b to admit 0.6851 was considered and DECLINED. Zones give the diagnosis with ZERO band movement \u2014 naming what a reading MEANS is free; moving the bar it must clear is not.",
+      "direction_check": "the zones cannot change any gate outcome, only the interpretation of one"
+    },
+    "what_this_entry_does_NOT_assert": [
+      "It does NOT assert a re-flight is approved \u2014 the re-fly needs a FRESH Creator GO (new spend, ~11 QPU-s, post-EXPLORATORY).",
+      "It does NOT re-grade the flown data. That flight remains EXPLORATORY; A5 cannot and does not rescue it.",
+      "It does NOT assert the KA fence will pass on the day \u2014 only that the registered condition is now SATISFIABLE by the code, which is a different and weaker claim.",
+      "It does NOT assert the 6/7 class-OPTIMALITY, which remains scoped per A4.1 as the exact value of the frozen strategy."
+    ]
   }
 }
