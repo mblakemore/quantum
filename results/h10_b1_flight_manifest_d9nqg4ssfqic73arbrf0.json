@@ -1,0 +1,488 @@
+{
+ "experiment": "h10_b1b_time_flip_dd",
+ "cycle": "C5018",
+ "hardening": "ALAP + X-X dynamical decoupling (Amendment 6)",
+ "prereg": "docs/h10-b1-prereg-whisper-c5018.md",
+ "prereg_seal_chain_derived": [
+  {
+   "prefix_bytes": 7117,
+   "sha256_16": "4746ef9f682f3dbe"
+  },
+  {
+   "prefix_bytes": 9253,
+   "sha256_16": "084a815c9d72d0c5"
+  },
+  {
+   "prefix_bytes": 11779,
+   "sha256_16": "e764938df4050aa3"
+  },
+  {
+   "prefix_bytes": 14364,
+   "sha256_16": "a102a079271b3014"
+  },
+  {
+   "prefix_bytes": 17583,
+   "sha256_16": "875015f447f08b90"
+  },
+  {
+   "prefix_bytes": 24146,
+   "sha256_16": "8fcf53facda1a4ac"
+  },
+  {
+   "prefix_bytes": 30801,
+   "sha256_16": "e6ca446c3e716fcb"
+  }
+ ],
+ "go": "RE-FLY: Creator general#3719 'Go B1' (2026-08-02, fresh GO post-EXPLORATORY); first flight general#3674",
+ "account": "ALT2",
+ "pool_remaining_at_submit_s": 431,
+ "backend": "ibm_kingston",
+ "chain_2q_median": 0.001979820882416633,
+ "pubs": [
+  {
+   "arm": "F",
+   "name": "(I,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(I,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(I,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(I,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(I,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(I,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(I,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(I,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(I,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(X,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(X,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(X,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(X,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(X,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(X,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(X,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(X,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(X,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Z,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Z,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Z,I)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Z,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Z,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Z,X)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Z,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Z,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Z,Z)",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Y,I)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Y,I)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Y,I)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Y,X)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Y,X)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Y,X)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Y,Z)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Y,Z)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Y,Z)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(I,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(I,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(I,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(X,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(X,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(X,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "(Z,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "(Z,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "(Z,Y)",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII+_0",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII+_0",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII+_0",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII+_1",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII+_1",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII+_1",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII+_2",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII+_2",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII+_2",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII+_3",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII+_3",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII+_3",
+   "label": "M+",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII-_0",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII-_0",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII-_0",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "F",
+   "name": "MII-_1",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "P",
+   "name": "MII-_1",
+   "label": "M-",
+   "shots": 500
+  },
+  {
+   "arm": "S",
+   "name": "MII-_1",
+   "label": "M-",
+   "shots": 500
+  }
+ ],
+ "transpiled_2q_counts": [
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  2,
+  35,
+  0,
+  4,
+  35,
+  0,
+  4,
+  35,
+  0,
+  4,
+  35,
+  0,
+  4,
+  35
+ ],
+ "job_id": "d9nqg4ssfqic73arbrf0",
+ "committer": "Whisper (DC15W)"
+}
