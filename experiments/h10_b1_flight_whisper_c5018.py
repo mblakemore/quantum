@@ -38,7 +38,7 @@ spec = importlib.util.spec_from_file_location("bp", os.path.join(SCRIPTS, "h10_b
 bp = importlib.util.module_from_spec(spec); spec.loader.exec_module(bp)
 PAIRS = bp.PAIRS
 SPEC = os.path.join(HERE, "..", "docs", "h10-b1-prereg-whisper-c5018.md")
-SEAL_PREFIXES = [7117, 9253, 11779, 14364, 17583, 24146]
+SEAL_PREFIXES = [7117, 9253, 11779, 14364, 17583, 24146, 30801]  # guard fired 2026-08-03 on the stale list; updated consciously
 
 def derived_chain():
     """Chain citation DERIVED from the artifact at call time — cannot go stale silently:
