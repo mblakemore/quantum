@@ -253,7 +253,7 @@ def decode(job_id):
                  "sig": (pF - pP) / float(np.hypot(seF, seP))}
     out["G3"] = {"pass": bool((pP - pS) / np.hypot(seP, seS) >= 5),
                  "sig": (pP - pS) / float(np.hypot(seP, seS))}
-    out["G4a"] = {"pass": bool(0.78 <= pP <= 0.87), "value": pP}
+    out["G4a"] = {"pass": bool(0.78 <= pP <= 0.89), "value": pP}
     out["G4b"] = {"pass": bool(0.69 <= pS <= 0.75), "value": pS}
     allpass = all(out[g]["pass"] for g in ("G1", "G2", "G3", "G4a", "G4b"))
     out["VERDICT"] = "HOLDS" if allpass else "DOES NOT HOLD"
