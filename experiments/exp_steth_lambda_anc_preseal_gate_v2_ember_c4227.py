@@ -326,7 +326,14 @@ def decode_v2(job_id=None):
     pd = float(np.mean(draws))
     se_pd = float(np.std(draws, ddof=1) / np.sqrt(len(draws)))
     lam, raw = lambda_anc_from_counts(counts_of(idx["lambda_anc"][0]), k, man["shots_per_pub"]["lambda_anc"])
-    se_lam = float(np.sqrt(max(lam * (1 - lam), 1e-9) / man["shots_per_pub"]["lambda_anc"]))
+    # se PROPAGATED THROUGH THE RESCALING, not taken on the rescaled value. lambda is
+    # (raw - 4^-k)/(1 - 4^-k), an affine map of a binomial proportion, so its se is
+    # se(raw)/(1 - 4^-k). My first decode used sqrt(lam(1-lam)/N) on the RESCALED number,
+    # which understates it by ~30% (0.0076 vs 0.0109 on the flown job) — the verdict was
+    # unaffected at 68 vs 97 sigma, but an se computed on the wrong scale is wrong
+    # wherever it happens to be harmless.
+    nlam = man["shots_per_pub"]["lambda_anc"]
+    se_lam = float(np.sqrt(max(raw * (1 - raw), 1e-9) / nlam) / (1.0 - 4.0 ** (-k)))
 
     g = grade(u, se_u, lam, se_lam, pd - pu, float(np.hypot(se_pd, se_pu)))
     print(f"\nDECODE {man['job_id']} on {man['backend']} (ALT2), k={k}")
