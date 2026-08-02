@@ -191,3 +191,21 @@ of his now part of the record:
    pair's clearance is powered. Recorded as a registration TODO, not a re-band.
 
 *Outcome addendum; nothing sealed touched.*
+
+### Addendum 2 — Ember's recomputation (general#3884): B to the digit, and the anomaly fully decomposed
+
+B recomputed from posted floors: 0.0285 ± 0.0070, match. Two of her findings recorded:
+**(1) The robust-gate choice is why B survived contact with data**: the MEASURED floor
+order (s1s2 > s1s3 > s2s3) SWAPS the two share-1 pairs relative to the A1-implied
+order — a full-ordering gate would have been REFUTED by a swap that has nothing to do
+with the mechanism; the registered min(·,·) − s2s3 comparison is exactly the
+mechanism's falsifiable core and nothing else. Register the robust comparison, not the
+decorative one. **(2) The A1 s2s3 "anomaly" decomposes completely**: −0.0505 vs the
+naive product floor = −0.0285 measured depth effect (56%) + −0.0220 floor mis-pricing
+(44%). Both halves are now measured facts; neither is an anomaly; the apparatus was
+never at fault. Her sentence, kept: "the only step that made it worth anything was the
+one where I made it weaker."
+
+*Wing A closes: three flights, ~30 QPU-s, shapes at 20–26σ, revival 0.994/0.996, one
+registered CONFIRMED at 4.1σ, two honest negatives with both failing quantities now
+measured. Adjudicated to the digit by three seats on every flight.*
