@@ -186,6 +186,9 @@ def grade(stats):
                        ("G5_story", g5)):
         out["gates"][name] = {"subs": subs, "verdict": a1.combine(subs)}
     out["A3_revival"] = rev
+    out["A4_custody"] = {f"seed{s}": {"Dcontrast": stats[f"SCR{s}_Dcontrast"],
+                                      "pair12dial": stats[f"SCR{s}_pair12dial"]}
+                         for s in a1.SEEDS}   # reporting completeness (A1 had it; no gate logic)
     out["A5_story"] = st
     out["A5_receipt_unsorted_flat_within_3sigma"] = bool(receipt)
     va = [out["gates"][k]["verdict"] for k in out["gates"]]
