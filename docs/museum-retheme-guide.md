@@ -105,7 +105,7 @@ the exhibit and pick the role — don't just find-and-replace hex codes.
 
 ## Verification — MANDATORY before commit
 
-**Four standing scans, then Playwright.** The scans live in the `dawn` repo and are run from there
+**Five standing scans, then Playwright.** The scans live in the `dawn` repo and are run from there
 (`cd /mnt/droid/repos/dawn`), not from inside `quantum` — running them from the wrong directory
 fails silently and an empty result looks exactly like a clean one:
 
@@ -114,12 +114,23 @@ node tools/consistency-scan.js                     # dead links, style drift, pl
 python3 tools/wcag-scan.py demo/<name>             # WCAG 2.1 AA via axe-core
 python3 tools/chart-label-scan.py demo/<name>      # overlapping / clipped SVG chart labels
 python3 tools/canvas-label-scan.py demo/<name>     # the same, for canvas-painted labels
+python3 tools/label-contrast-scan.py demo/<name>   # can the label be READ where it sits?
 ```
 
-The last two are companions, not alternatives: `chart-label-scan.py` measures SVG `<text>`, and
-`canvas-label-scan.py` covers what that structurally cannot see — labels painted into a `<canvas>`
-by `fillText`/`strokeText`, plus absolutely-positioned HTML text. Together they cover the museum;
-either alone leaves a class of exhibit unmeasured. Run both on anything with a chart.
+The last three are companions, not alternatives, and each is blind to what the others see.
+`chart-label-scan.py` measures SVG `<text>` position; `canvas-label-scan.py` covers labels painted
+into a `<canvas>` by `fillText`/`strokeText` plus absolutely-positioned HTML text; and
+`label-contrast-scan.py` covers the colour half — a label can be perfectly placed, perfectly
+worded, and still unreadable because of what it is drawn on. Note that axe-core does NOT evaluate
+SVG `<text>` against the SVG shapes behind it, so `wcag-scan.py` will not catch that either: a
+value label drawn in its own bar's colour passed all four earlier scans until this one measured it.
+Run all three on anything with a chart.
+
+**Do not compute chart contrast from the two `fill` values.** A nominal fill is not a rendered
+colour — element `opacity`, `fill-opacity`, gradients and stacked translucent layers all composite,
+and any of them can appear in a hand-built chart. That approach was tried first and scored 1 real
+finding against 2 false ones, and got the real one's number wrong. Measure the background from
+rendered pixels.
 
 Read what each one says about its own COVERAGE, not just its finding count. Each prints what it
 could NOT measure — `chart-label-scan.py` lists the exhibits with no SVG text, `canvas-label-scan.py`
@@ -154,7 +165,7 @@ with sync_playwright() as p:
     print("shell route loads:", bool(fr))   # must be True
     b.close()
 ```
-**Pass criteria (all required):** all three scans clean (or every finding understood and
+**Pass criteria (all required):** all five scans clean (or every finding understood and
 attributable); no horizontal overflow at 390px AND 1280px; zero console errors;
 every interactive control still drives its output (click each button/toggle, confirm the value or
 DOM changes); the museum shell route `#/<name>` loads the exhibit in-frame; the `<title>` and every
