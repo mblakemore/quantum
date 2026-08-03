@@ -48,9 +48,11 @@ mechanism narrowed to T1/2q-gate error, not dephasing. Third calibrated ceiling.
 layer deeper: A1 failed a bar that didn't know the hardware's read floor (proven later:
 every pair sat ON its own floor); A1b fixed the floors (bars validated +5.6–7.3σ),
 failed only custody (context unpriced), and **CONFIRMED the encode-DAG depth mechanism
-at 4.1σ** (first registered positive); A1c priced the context per-seed and **failed
-nowhere** — UNDERPOWERED with all margins positive (+0.66/+0.20/+2.29σ), context cost
-CONFIRMED (+0.11σ over bar — margin-carried), ordering replicated at 3.1σ ungated.
+— +2.07σ over its bar, 4.07σ from zero** (first registered positive); A1c priced the
+context per-seed and **failed nowhere** — UNDERPOWERED with all margins positive
+(+0.66/+0.20/+2.29σ), context cost **CONFIRMED — +0.11σ over its bar, 2.11σ from
+zero** (a far weaker object than A1b's, printed so), ordering replicated at 3.1σ from
+zero, ungated (no bar exists for it).
 Custody's three exits each demonstrated: revival 0.994/0.996/1.000, story selection
 0.88–0.89 with flat no-signalling receipts, cannot-revive pinned at 0 across 6 seeds ×
 2 flights.
@@ -247,7 +249,11 @@ window is otherwise stated and expires at calibration boundaries).
 **Three-state verdicts with sealed boundaries and margin-carried labels**:
 PASS/FAIL/UNDERPOWERED with the 2·se boundary constant IN the sealed text ("the
 constant is 2; it appears here so it cannot move"), and every verdict label traveling
-with its margin over its own bar — CONFIRMED (+2.07σ) and CONFIRMED (+0.11σ) are not
+with its margin over its own bar AND its distance from zero, labeled — the over-bar
+number is the decision, the from-zero number is the physics, and a ledger must carry
+the same pair for every entry or the mixture reads as a difference (Elder #3948, the
+convention swept backwards same-day). CONFIRMED (+2.07σ over bar) and CONFIRMED
+(+0.11σ over bar) are not
 the same object and never appear without their numbers. Gates are DISCIPLINE DEVICES,
 not evidence-maximizers: registered gates buy the pre-committed decision; ungated
 reported rows carry uncontaminated evidence; the ledger holds both.
