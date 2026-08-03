@@ -66,7 +66,8 @@ def corrected_expz(p1, e0, e1):
 def decode_job(job_id, man):
     sys.path.insert(0, os.path.join(QROOT, "scripts"))
     from ibm_multi_account import service_for_job
-    svc, job = service_for_job(job_id, "IBMQ_ALT")
+    svc, acct = service_for_job(job_id)  # returns (service, account_name); job fetched below
+    job = svc.job(job_id)
     res = job.result()
     meta = man["pubs_meta"]
     drifters = man["drifters_active"]
