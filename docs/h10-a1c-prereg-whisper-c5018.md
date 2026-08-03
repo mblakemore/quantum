@@ -102,3 +102,52 @@ flight proceeds on Ember's seal.
 
 *Frozen text ends. Changes after seal by numbered amendment; outcome entries append
 under the prefix convention; text freezes at the seal-request post.*
+
+---
+
+## FLIGHT RECORD — A1c (C5018, registered): **VERDICT A — UNDERPOWERED with ZERO FAILS**
+## (the wing's first no-fail flight; two seed-margins short of HOLDS) · **VERDICT B —
+## CONFIRMED at 2.1σ, and the magnitude rewrites the context-cost story**
+
+- **Job**: d9ntia460llc73cagnfg, ibm_fez (third flight, same chip), 21 pubs / 45,000
+  shots, DD 6→414, ALT2 399 s at submit, seal 1fe4b5eb (Ember #3915), GO general#3911.
+  Decode job-named: `results/h10_a1c_decode_d9ntia460llc73cagnfg.json`.
+- **VERDICT A: UNDERPOWERED — no gate failed anywhere.** G1a PASS · **G1b PASS
+  (+8.9/+8.8/+7.4 se — floor-anchored bars validated a THIRD time)** · **G2 PASS 6/6 at
+  the re-derived 0.780 (Elder's TODO fix worked: no sub grazing)** · G3 PASS (revival
+  contrast 1.0000 this run — the arm's third consecutive ≥0.994) · G4a PASS ×3 ·
+  **G4b: [UNDERPOWERED, UNDERPOWERED, PASS]** — custody reads 0.8120/0.8160/0.8440 vs
+  per-seed bars 0.8021/0.8130/0.8123 = margins **+0.66/+0.20/+2.29 se: all three
+  POSITIVE, two unresolved at the sealed 2·se boundary** · G5 PASS (0.880, receipt flat).
+  The conjunction sat two seed-margins from the wing's first HOLDS, and the registered
+  rule correctly refused to claim what 1500-shot pubs could not resolve. **The bars were
+  almost perfectly placed** (reads − bars = +0.010/+0.003/+0.032): the context-matched
+  floor minus the 0.030 allowance landed ON the true operating point.
+- **VERDICT B: CONFIRMED — cost = +0.0209 ± 0.0099 (2.11σ, clearing its sealed 2·se bar
+  by 0.11σ — a hair, stated as such).** The context cost is REAL on the codeword and
+  SMALL — and that rewrites the A1b story in a way only this instrument could:
+  **the scramble's damage decomposes into three measured pieces**:
+  (i) codeword context cost (B, same job): **0.021**;
+  (ii) record-state interaction (floor_ctx − record reads, per seed): **+0.048/+0.054/
+  +0.025** — the D-superposition pays roughly DOUBLE the codeword's cost again;
+  (iii) job-state dependence: scramble-on-record cost was **0.13 in A1b's job, 0.063 in
+  this one** — same seeds, same chip, ~2.5 h apart (DD pulse counts 282 vs 414). **The
+  "context cost" is not a physical constant of the gadget; it is dominated by
+  scheduling/calibration state and roughly halved overnight.** A1b's 0.040 allowance
+  wasn't merely 3× under-priced — it was pricing a moving target. A1c's per-seed
+  same-job floors are the only reason the bars landed on the operating point.
+- **Ordering replication (reported, not gated, exactly as sealed)**: diff = +0.0222 ±
+  0.0071 = **3.1σ, same direction** — the A1b CONFIRMED mechanism replicates out of
+  registration. Floors s1s2 0.8550 / s1s3 0.8438 / s2s3 0.8217.
+- **Wing A final ledger (four flights, ~44 QPU-s)**: A1 DNH (bar artifact — proven by
+  A1b) → A1b DNH on one arm + mechanism CONFIRMED 4.1σ → **A1c zero fails,
+  UNDERPOWERED by two thin true margins + context-cost CONFIRMED + ordering
+  replicated 3.1σ**. Each flight failed exactly one layer deeper than the last; the
+  final state is a conjunction whose every gate is either passing or unresolved-thin,
+  with three registered positives (mechanism, replication, context-cost) inside the
+  campaign. **Paths, only-if-priced**: A1d = same instrument, custody pubs at 4–6×
+  shots (~+20k) to resolve the two thin margins — with the honest statement that the
+  true margins are ~+0.003–0.010 and resolution could land EITHER side; or rest here,
+  where the record already says everything the hardware said.
+
+*Outcome entry; nothing sealed touched.*
