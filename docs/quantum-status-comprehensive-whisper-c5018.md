@@ -318,8 +318,14 @@ the same move at two scales, and both times the pricing was the finding).
   λ_anc pre-seal gate is designed and unbuilt (~3–5 s QPU rider).
 - **Hidden matching** — the campaign's only unconditional-separation flight with
   no hardness conjecture anywhere, parked and ready (6–8 qubits, shallow).
-- **The ρ_t(d2q) single-die curve** (magic-tax law: two points, two dies today) —
-  prereg already frozen.
+- ~~The ρ_t(d2q) single-die curve~~ — **CORRECTION (second-pass review, C5018): this
+  FLEW, twice** (c4983 pad-slot + c4985 organic, kingston, full court, ~296 s QPU),
+  and the verdicts rewrote the law: **the magic tax proper is T-LOCALIZED and
+  depth-FLAT (ρ_stochastic ≈ 0.66–0.73); the apparent per-slot decay is coherent
+  circuit drift**, not magic (Elder-corrected lead, against his own λ_x, per his
+  pre-commitment). The pricing rule in the attenuation map (multiply by
+  exp(−0.0013·d2q)) is SUPERSEDED for magic-attribution — the surcharge is real but
+  belongs to the drift column.
 - **The arrow-reversal cell** (cold→hot from correlations, two qubits) — never
   flown anywhere in the program.
 - **The field design-order audit** ($0): do published learning-advantage demos

@@ -149,3 +149,65 @@ margin-carried labels, and the three-seat court. Walls are ideation prompts here
 endpoints: each cell names its wall because the wall is where the next finding lives.
 
 *Proposal only — nothing flies without its own scout → campaign → sealed prereg → GO.*
+
+---
+
+## Second pass (same cycle, Creator directive general#3961) — additions and the front of the queue
+
+**A correction the pass caught first**: the status doc listed the ρ_t magic-tax curve
+as designed-and-unflown. It FLEW — twice (c4983/c4985, kingston, full court): **the
+magic tax proper is T-LOCALIZED and depth-FLAT (ρ ≈ 0.66–0.73); the per-slot decay is
+coherent circuit drift, not magic.** Status doc corrected. Consequence for H11: the
+drift column just got richer — one more reason the Transponder/drift cells matter.
+
+### New cell (a miss from the first pass)
+
+**10. THE HAILING FREQUENCY — hidden matching, the unconditional one-way message.**
+The Trek frame: a hail provably shorter in qubits than ANY classical message can be in
+bits — no assumptions, no conjectures, pure theorem. What's real: scouted GO-able at
+C4971 (the cheapest width/depth profile of any annex path — ⌈log₂n⌉ qubits, shallow,
+F107's QRAC is literally its n=2 rung). **The honest fence, stated up front**: the
+separation is exponential asymptotically (O(log n) vs Ω(√n)) but at hardware-reachable
+n the MEASURED factor is modest (~1.3× at n=64; a 4–8× measured factor needs n of a
+few hundred = 8–9 qubits vs 16–20 bits). It flies as a resource-counting demonstration
+carried by an unconditional theorem — the campaign's only such flight — with G-1
+requiring the exact classical constant pinned from the paper, never from memory.
+Price: cheap. Currency: communication (Scoreboard 2), fenced as such.
+
+### The front of the queue (what "bring forward" should mean)
+
+**Tier 0 — $0, start immediately, each pays double:**
+1. **The design-order field audit** — do published Google/CCHL learning-advantage
+   demos (shallow pseudo-random circuits) inherit the design-order obstruction
+   (order-T Haar-moment bounds need exponential-depth design synthesis)? Either
+   outcome pays: corrected bookkeeping for our own parked claim, or a field-level
+   export — flagged in the annex as possibly the biggest single deliverable
+   available at $0.
+2. **The Heisenberg-compensator boundary derivation** — the classical-concentration
+   bound that cell 6 gates against. Theory-first; the flight is cheap once the bar
+   exists.
+3. **The collective-metrology literature gate** — two questions (is HCRB saturation
+   asymptotic in copies? is the ratio capped at 2?) settle whether the one
+   genuinely-novel combination in the frontier map is real before any claim.
+4. **Transponder rung 0: is drift coherent or decoherent?** — the cheap single-copy
+   census that answers standing unknown #3 AND is the PUF's epoch-stability
+   prerequisite. One design, two payoffs — and the ρ_t correction above just made
+   the drift column the campaign's most active open ledger.
+
+**Tier 1 — sealed or scouted, fly on GO:**
+5. **Steth / Universal Translator** — sealed, G1–G3 frozen, unconditional floor;
+   the λ_anc rider (~3–5 s) rides along. Unchanged as the flagship.
+6. **The Hailing Frequency** — scouted; needs its G-1 constant pin + prereg.
+7. **The Temporal Battery** — cheapest deep-future cell; B4's design exists in the
+   H10 ledger; one prereg from flight.
+
+**Deferred within H11** (walls or prices named in the main table): Warp Core and
+Structural-Integrity Field (mid-price compositions — after the cheap tier proves the
+program), Subspace Relay (price the chain tax first from the attenuation map),
+Holodeck consensus build (after Wing A's floors doctrine gets one more outing),
+Ship's Log (integration — any quiet week).
+
+**Reserve bench** (from the sweep, not yet cells): U9 (entanglement equation of
+state) and U10 (blind-spot spectrum) — Horizons-4's named-but-unflown first flights;
+the Arrow Meter (exp194, ~2σ) as a natural instrument INSIDE the Temporal Battery
+cell rather than its own destination.
