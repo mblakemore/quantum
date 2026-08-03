@@ -1,0 +1,26 @@
+{
+  "u": 0.5625,
+  "se_u": 0.1033,
+  "z_u_vs_floor": -1.33,
+  "floor_u": 0.7,
+  "u_state": "UNDERPOWERED",
+  "lambda_anc": 0.4833,
+  "se_lambda_anc": 0.0625,
+  "z_lambda_vs_0.8": 5.07,
+  "REPORTED_separation": {
+    "value": 0.2585,
+    "se": 0.053,
+    "ci95": [
+      0.1547,
+      0.3624
+    ],
+    "former_bar_NOT_A_GATE": 0.25,
+    "why_not_a_gate": "bar sits ~0.16 sigma-e from the measured value; D is draw-limited so 3 sigma needs >1000 independent draws. A gate that cannot be powered must not be registered (C1 Amendment 1). Re-deriving the bar was rejected: the only available motivation for a new value is its distance from the data."
+  },
+  "VERDICT": "UNDERPOWERED",
+  "attribution": "n/a \u2014 no significant u failure to attribute",
+  "z_required": 3.0,
+  "job_id": "d9n93o4sfqic73aqp26g",
+  "WHAT_THIS_FILE_IS": "The v2 GRADER applied to the v1 FLIGHT's counts. The data is v1 (job d9n93o4sfqic73aqp26g, 64 shots/pub). It is NOT a v2 result.",
+  "WHY_IT_WAS_RENAMED": "The original name was ..._v2_c4227_regrade.json \u2014 'v2' for the grader that produced it, while the CONTENT is v1's flight. It also carried job_id: null, so nothing inside said which flight it described. That is the decode-filename-binds-to-its-job rule (c4230_001, checker [6]) broken by me, in a file I created in the same cycle I built the check for it. It caused a real misattribution: v1's numbers (lambda_anc 0.483, u 0.5625, UNDERPOWERED) were quoted as v2's baseline for the v3 DD-dose comparison. V2's ACTUAL result is lambda_anc 0.0625 +/- 0.0109 and u 0.5195 +/- 0.0267, FAIL at 6.76 sigma."
+}
