@@ -1,0 +1,16 @@
+{
+ "experiment": "steth_gate_v5_destructive",
+ "cycle": "C5018",
+ "k": 2,
+ "floor_u": 0.7,
+ "go": "Creator general#4005",
+ "seed_pub": 4227,
+ "backend": "ibm_fez",
+ "dd": [
+  0,
+  24
+ ],
+ "pool": 379,
+ "job_id": "d9o4ebm44aac73f4q7m0",
+ "note": "no ancilla arm exists; D arm REPORTED; zones frozen by Ember pre-landing"
+}
