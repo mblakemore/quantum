@@ -93,14 +93,25 @@
   .cert .bignum { position:relative; font-family:var(--mono); font-weight:720; letter-spacing:-.03em; line-height:1;
     font-size:clamp(52px,12vw,80px); color:var(--ink); font-variant-numeric:tabular-nums; }
   .cert .bignum small { font-size:15px; color:var(--ink-3); font-weight:500; letter-spacing:0; }
-  .cert .bignum.dissolve { animation:evap 1.1s ease forwards; }
-  @keyframes evap { 0%{opacity:1;filter:blur(0)} 60%{opacity:.25;filter:blur(6px)} 100%{opacity:.12;filter:blur(9px)} }
+  /* Evaporate the FIGURE, not the .bignum container. The overlay message is a child of
+     .bignum, and a parent's opacity composites onto its children — so while .bignum itself
+     animated to opacity .12, the message that was supposed to fade IN could never render
+     above 12% no matter what its own animation said. Measured at 0.12 effective with amber
+     text that never appeared in the pixels: axe flagged it [serious] and I had it filed as a
+     phantom for several cycles. Keeping the figure and the message as siblings is the fix. */
+  .cert .bignum.dissolve .figure { animation:evap 1.1s ease forwards; }
+  /* Ends at opacity 0, not .12. A figure resting at 12% is still text a sighted reader can
+     half-see, and WCAG 1.4.3 has no exemption for "faded on purpose" — axe flagged it
+     [serious] and it was right to. Going fully transparent is also truer to the metaphor: the
+     certificate EVAPORATES. Nothing is lost, because 0.59 is restated in legible text in the
+     .meas row below ("would give 0.59 bit/use — a quarantined counterfactual"). */
+  @keyframes evap { 0%{opacity:1;filter:blur(0)} 60%{opacity:.25;filter:blur(6px)} 100%{opacity:0;filter:blur(9px)} }
   .cert .bignum .overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     font-size:15px; font-weight:600; color:var(--amber); opacity:0; }
   .cert .bignum.dissolve .overlay { animation:showov 1.1s ease forwards; }
   @keyframes showov { 0%,55%{opacity:0} 100%{opacity:1} }
   @media (prefers-reduced-motion: reduce){
-    .cert .bignum.dissolve { animation:none; opacity:.14; filter:blur(7px); }
+    .cert .bignum.dissolve .figure { animation:none; opacity:0; }
     .cert .bignum.dissolve .overlay { animation:none; opacity:1; }
   }
   .cert .row { font-size:13.5px; color:var(--ink-2); }
@@ -232,7 +243,13 @@
       var dissolve = (r.state === "evap");
       cert.innerHTML =
         '<span class="state ' + (dissolve ? "evap" : "solid") + '">' + (dissolve ? "◌ evaporated" : "● " + r.bitsTag) + '</span>' +
-        '<div class="bignum' + (dissolve ? " dissolve" + (animate ? "" : " nomo") : "") + '">' + r.big + ' <small>' + r.small + '</small>' +
+        '<div class="bignum' + (dissolve ? " dissolve" + (animate ? "" : " nomo") : "") + '">' +
+        // When the certificate evaporates the figure is a visual metaphor, not the carrier of
+        // the number: 0.59 is restated in legible text in the .meas row below ("would give
+        // 0.59 bit/use — a quarantined counterfactual"). Hiding the faded duplicate from
+        // assistive tech loses nothing and stops a deliberately-illegible copy of a value
+        // being announced as though it stood.
+        '<span class="figure"' + (dissolve ? ' aria-hidden="true"' : '') + '>' + r.big + ' <small>' + r.small + '</small></span>' +
         (dissolve ? '<span class="overlay">' + r.overlay + '</span>' : '') + '</div>' +
         '<div class="row"><span class="k">You assume</span>' + r.assume + '</div>' +
         '<div class="row"><span class="k">Security</span>' + r.security + '</div>' +
@@ -240,7 +257,8 @@
         '<div class="meas">' + r.meas + '</div>';
       // restart the dissolve animation each selection
       if (dissolve && animate) {
-        var bn = cert.querySelector(".bignum"); bn.style.animation = "none"; void bn.offsetWidth; bn.style.animation = "";
+        var bn = cert.querySelector(".bignum .figure"), ov = cert.querySelector(".bignum .overlay");
+        [bn, ov].forEach(function (e) { if (!e) return; e.style.animation = "none"; void e.offsetWidth; e.style.animation = ""; });
       }
     }
     select(1, false);   // open on the sweet spot (one-sided-DI)
