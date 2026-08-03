@@ -95,6 +95,49 @@ def p_odd_with_se(counts, k):
     return (1.0 - e_p2) / 2.0, se_e / 2.0, e_p2, len(vals)
 
 
+def attribute_from_pair(cur, ref, z_req=Z_REQ):
+    """Attribute a u-failure to ancilla loss ONLY from a PAIR of flights.
+
+    cur/ref are dicts with keys u, se_u, lam, se_lam. The question is not "were both bad
+    at once" but "did the effect follow the cause when the cause moved":
+
+      lambda_anc did NOT move          -> the pair cannot test the link. UNRESOLVED.
+      lambda_anc moved, u did NOT      -> ancilla loss is REFUTED as the dominant cause.
+      both moved, same direction       -> SUPPORTED, with both sigmas reported.
+      both moved, opposite directions  -> ANTI-CORRELATED, a finding in its own right.
+
+    Note the asymmetry that makes this worth having: the REFUTED branch is reachable from
+    two flights, while SUPPORT needs the effect to track the cause. A rule that can only
+    confirm is not an attribution rule.
+    """
+    d_lam = cur["lam"] - ref["lam"]
+    s_lam = (cur["se_lam"] ** 2 + ref["se_lam"] ** 2) ** 0.5
+    d_u = cur["u"] - ref["u"]
+    s_u = (cur["se_u"] ** 2 + ref["se_u"] ** 2) ** 0.5
+    z_lam = d_lam / s_lam if s_lam > 0 else 0.0
+    z_u = d_u / s_u if s_u > 0 else 0.0
+    ev = {"d_lambda_anc": round(d_lam, 4), "z_d_lambda": round(z_lam, 2),
+          "d_u": round(d_u, 4), "z_d_u": round(z_u, 2), "z_required": z_req}
+
+    if abs(z_lam) < z_req:
+        ev["attribution"] = ("UNRESOLVED — lambda_anc did not change materially between "
+                             "these two flights (%.2f sigma), so this pair cannot test "
+                             "whether u follows it." % z_lam)
+    elif abs(z_u) < z_req:
+        ev["attribution"] = ("ANCILLA LOSS REFUTED as the dominant cause of the u deficit: "
+                             "lambda_anc moved %.1f sigma and u did not follow (%.2f sigma). "
+                             "The deficit is elsewhere — system side." % (z_lam, z_u))
+    elif (z_lam > 0) == (z_u > 0):
+        ev["attribution"] = ("ancilla-loss-dominated SUPPORTED: lambda_anc moved %.1f sigma "
+                             "and u followed %.1f sigma in the same direction."
+                             % (z_lam, z_u))
+    else:
+        ev["attribution"] = ("ANTI-CORRELATED: lambda_anc moved %.1f sigma and u moved %.1f "
+                             "sigma the OTHER way — a mechanism in its own right, not a "
+                             "nuisance." % (z_lam, z_u))
+    return ev
+
+
 # =======================================================================================
 # THE ONE GRADING FUNCTION. Simulator rehearsal and hardware flight both call THIS.
 # =======================================================================================
@@ -117,17 +160,34 @@ def grade(u, se_u, lam, se_lam, sep, se_sep, z_req=Z_REQ):
     else:
         u_state = "UNDERPOWERED"
 
-    # attribution is licensed only by a SIGNIFICANT lambda_anc deficit, and only when
-    # the u gate itself actually failed. v1 attributed on a 1.3-sigma shortfall.
+    # ---- ATTRIBUTION, REBUILT (C4236). THE OLD RULE WAS A COINCIDENCE TEST. --------
+    #
+    # It read: u FAILED and lambda_anc is significantly deficient -> "ancilla-loss-
+    # dominated". That is TWO THINGS BEING BAD AT THE SAME TIME, asserted as a cause.
+    # Three flights refuted it on the data:
+    #
+    #   v2 fez  no-DD   u 0.5195 +/- 0.0267   lambda_anc 0.0625
+    #   v3 marra   DD   u 0.3613 +/- 0.0292   lambda_anc 0.8031
+    #   v4 fez     DD   u 0.5059 +/- 0.0270   lambda_anc 0.7396
+    #
+    # On ONE chip lambda_anc improved 11.8x and u moved 0.36 sigma. Across all three u
+    # sits at 0.52 / 0.36 / 0.51 while lambda_anc spans 0.06 to 0.80. No relationship.
+    # The verdict (FAIL) was right three times running; the label attached to it was
+    # never earned, and it named the wrong subsystem — the deficit is system-side.
+    #
+    # THE GRADER HAD A THREE-STATE VERDICT AND A TWO-STATE ATTRIBUTION. Attribution now
+    # gets the same discipline: a cause requires evidence the two quantities MOVE
+    # TOGETHER, which a single flight cannot supply at any shot count. From one flight
+    # the honest answer is UNRESOLVED, always — the coincidence is REPORTED, never
+    # promoted to a cause.
     z_lam = (0.8 - lam) / se_lam if se_lam > 0 else 0.0
     if u_state != "FAIL":
         attribution = "n/a — no significant u failure to attribute"
-    elif z_lam >= z_req:
-        attribution = "ancilla-loss-dominated"
-    elif z_lam <= -z_req:
-        attribution = "channel-gate-noise-dominated"
     else:
-        attribution = "UNRESOLVED — lambda_anc deficit not significant at %.0f sigma" % z_req
+        attribution = ("UNRESOLVED from a single flight — a cause requires a PAIR in which "
+                       "lambda_anc changed and u followed; pass `ref` to attribute. "
+                       "Coincidence only: lambda_anc is %.1f sigma from its 0.8 reference."
+                       % z_lam)
 
     return {
         "u": round(u, 4), "se_u": round(se_u, 4), "z_u_vs_floor": round(z_u, 2),
