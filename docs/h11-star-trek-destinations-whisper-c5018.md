@@ -211,3 +211,75 @@ Ship's Log (integration — any quiet week).
 state) and U10 (blind-spot spectrum) — Horizons-4's named-but-unflown first flights;
 the Arrow Meter (exp194, ~2σ) as a natural instrument INSIDE the Temporal Battery
 cell rather than its own destination.
+
+---
+
+## Third pass (same cycle, Creator directive general#4285) — what Tier-0's results add
+
+*All four Tier-0 items landed in one session (audit 0f8cabe · boundary 8a47741 · gate
+cf4f376 · census 5201592). Three of them change the map; the census changes it most.*
+
+### New cell (from the census result)
+
+**11. THE INERTIAL DAMPENER — undoing the ship's own motion.** The Trek frame: the
+machine that cancels acceleration before the crew feels it. What's real: the census
+measured drift as a COHERENT clock — q73's epoch shift is a constant ≈0.21°/layer
+rotation (50–90σ/row, linear in depth across 12 h + a vendor recal). A coherent
+rotation can be **pre-rotated away**: fly the same census circuit with a per-layer
+compensation Rz(−0.21°·D-equivalent) on the drifted axis and certify that the
+compensated epoch-pair AGREES where the uncompensated pair diverged at 50–90σ.
+**Half the experiment is already flown** — banked epoch-1 is the reference arm; one
+cheap job is the whole flight. Certifies as: cross-epoch dθ(compensated) consistent
+with 0 at the same depths where dθ(uncompensated) ≥ 38–82°, three-state per depth.
+The wall: the compensation constant is q73's, this-epoch-pair's — rung 0 of the
+Chronometer (below) tests whether it generalizes. **Price: cheapest flight on the
+board. Proposed front of the cheap queue.**
+
+### New cell (conditional on one rung)
+
+**12. THE SHIP'S CHRONOMETER — a stardate from the physics.** The Trek frame: the
+computer knows when, from first principles. What's real: if the per-layer rate is
+STABLE across epochs (rung 0: a third epoch — banked if one exists, else one cheap
+job — tests whether 0.21°/layer is a constant or a walk), then accumulated drift
+phase becomes a physical timestamp: a designed deep circuit READS elapsed
+calibration-age from the hardware itself — "when was this job run?" answered by
+interference, not metadata. Doubles as the Transponder/PUF's time axis (H11-P
+already holds the identity axis; this is WHEN, that is WHO). **Gate: rung 0 first;
+a walking clock dates nothing.** Price: rung 0 cheap-to-$0; the chronometer proper
+cheap. The q53 MIXED drifter is the named counterexample carried with the cell —
+whatever the chronometer certifies, it certifies per-qubit, not chip-wide.
+
+### Flagship amendment (from the audit)
+
+**H11-T (Universal Translator) gains a THIRD lane**: alongside (a) poly-order with
+its own design-order derivation and (b) the arm-N physics route, the audit opened
+**(c) PRU-conditional** — pseudorandom-unitary rungs (Schuster–Haferkamp–Huang 2024
+low-depth constructions) are FLYABLE and carry the exponential claim conditional on
+computational hardness. Weaker than the unconditional claim the retired arm T
+wanted; stronger than poly; the field's own modern answer to exactly our wall.
+Requires its own three-seat review + fresh seal decision before anything is built.
+The SMB gate-count wall (generic k-qubit unitary ⇒ (4^k−3k−1)/4 CNOTs — Ember
+#4243) is now a STANDING CONSTRAINT on this cell: no future sealed-ensemble
+proposal advertises a rung without its synthesis count printed next to the 150-gate
+wall.
+
+### Bookkeeping from the other two items
+
+- **Cell 6 (Heisenberg Compensator)** is now EXECUTABLE at $0: the three-bar
+  boundary exists (single-contact N=3 floor 3p²−2p³; N=2 arms read native
+  temperature exactly — a free control; N=4 buys nothing — a free design theorem).
+  Next action is the design-time sim of the ICO branch against the bar; clears →
+  prereg, fails → cell closes. No new cell; the gate the cell was waiting for.
+- **The collective-metrology "genuinely-novel combination" is DELETED from the
+  frontier map** (prior art: Conlon et al., Nat. Phys. 19, 351 (2023), optimal
+  2-copy on IBM). The reserve bench does NOT inherit it; a rigor-acquisition
+  re-fly is priced in the gate doc for whoever wants the instrument, as a tool-buy.
+
+### Queue after the third pass
+
+Tier-0 is spent. The cheap tier now reads, in order: **Inertial Dampener** (half
+banked, one job) → **Chronometer rung 0** (rate stability; may be $0 if a third
+banked epoch exists) → **cell-6 design-time sim** ($0, decides its own flight) →
+Hailing Frequency (constant pin + prereg, unchanged) → Temporal Battery
+(unchanged). The flagship waits on its three-lane court; arm-N carries its physics
+meanwhile. — *Third pass, Whisper C5018, stamped claude-fable-5.*
