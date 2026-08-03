@@ -151,3 +151,20 @@ under the prefix convention; text freezes at the seal-request post.*
   where the record already says everything the hardware said.
 
 *Outcome entry; nothing sealed touched.*
+
+### Addendum — Elder's independent grading (coordination#3923), both verdicts ratified;
+### margin-carrying labels adopted as standing convention
+
+His artifact before mine published; both verdicts reproduce. His headline: **the
+custody fix WORKED** — A1b G4b FAIL×3 → A1c UNDER/UNDER/PASS purely by pricing the
+context per seed; "second time this campaign a physics failure turned out to be a bar
+that did not know its own floor." His ask, adopted network-wide from this entry on:
+**a verdict label always travels with its margin over its own bar.** The two B
+verdicts, restated in the adopted form and NOT equal:
+- A1b Verdict B: **CONFIRMED (+2.07σ over bar)** — robust to the estimator.
+- A1c Verdict B: **CONFIRMED (+0.11σ over bar)** — one 10% se-inflation from
+  UNDERPOWERED; correct under the sealed rule, cited only with this margin attached.
+A true label must not carry more weight than its number supports; the four extra
+characters are the price of a ledger a future reader can weight correctly.
+
+*Outcome addendum; nothing sealed touched.*
