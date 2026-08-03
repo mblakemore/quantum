@@ -152,7 +152,7 @@
     <div class="plotwrap"><figure><svg id="plotMelt" viewBox="0 0 640 250" role="img"
       aria-label="Rigidity heat map over drive error and disorder strength; the melt boundary moves to smaller drive error as disorder increases, showing disorder shrinks the crystal."></svg></figure></div>
     <div class="legend">
-      <span><i class="swatch" style="background:var(--violet)"></i> rigid (rhythm locked)</span>
+      <span><i class="swatch" style="background:color-mix(in srgb,var(--violet) 65%,transparent)"></i> rigid (rhythm locked)</span>
       <span><i class="swatch" style="background:color-mix(in srgb,var(--violet) 20%,transparent)"></i> melted</span>
       <span><i class="swatch" style="background:var(--good);height:0;border-top:2px dashed var(--good)"></i> melt boundary ε_melt</span>
     </div>
@@ -283,7 +283,11 @@
     for(var r=0;r<rows;r++) for(var c=0;c<cols;c++){
       var R=MELT_R[r][c], x=mL+c*cw, y=mT+r*ch;
       svg.appendChild(el("rect",{x:x+1,y:y+1,width:cw-2,height:ch-2,rx:4,
-        fill:"color-mix(in srgb,"+css('--violet')+" "+Math.round(R*85)+"%,transparent)",
+        // Ramp topped out at 85% violet, which is light enough that the white cell value on
+        // it measured 4.18:1 — under WCAG AA. Neither ink extreme fixes that band (dark ink
+        // lands at 4.3:1 on the same mid-violet), so the ramp itself has to stay darker:
+        // at 65% the lightest cell reads 4.7:1 and every cell below it is better.
+        fill:"color-mix(in srgb,"+css('--violet')+" "+Math.round(R*65)+"%,transparent)",
         stroke:css('--edge'),"stroke-width":1}));
       var t=el("text",{x:x+cw/2,y:y+ch/2+4,"text-anchor":"middle","font-size":12,
         "font-family":css('--mono'),fill:R>0.45?css('--ink'):css('--ink-3')}); t.textContent=R.toFixed(2); svg.appendChild(t);
@@ -295,6 +299,12 @@
         "stroke-width":2.4,"stroke-dasharray":"5 3"}));
       var tb=el("text",{x:xb+cw/2,y:yb-4,"text-anchor":"middle","font-size":10,
         "font-family":css('--mono'),fill:css('--good')}); tb.textContent="ε="+MELT_BOUND[c2].toFixed(2); svg.appendChild(tb);
+      // Green on violet cannot reach AA at any alpha this heatmap actually uses, and the
+      // green is load-bearing (it matches the dashed melt-boundary line it labels). Backing
+      // chip instead of a colour change: inserted before the text so it paints underneath.
+      var cb=tb.getBBox();
+      svg.insertBefore(el("rect",{x:cb.x-3,y:cb.y-1,width:cb.width+6,height:cb.height+2,
+        rx:2,fill:css('--bg'),opacity:"0.9"}), tb);
     }
     // axes labels
     for(var r3=0;r3<rows;r3++){var ty=el("text",{x:mL-8,y:mT+r3*ch+ch/2+4,"text-anchor":"end",

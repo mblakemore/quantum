@@ -163,9 +163,14 @@ function draw(key){
       el(viz,"text",{x:L-8,y:y+h/2+5+(li-((r[0].split("\n").length-1)/2))*12,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=ln;
     });
     el(viz,"rect",{x:X(0),y:y,width:Math.max(X(Math.max(r[1],0))-X(0),2),height:h,rx:5,style:`fill:${r[3]};opacity:.88`});
-    const vx = r[1] > 1.55 ? X(r[1]) - 8 : X(r[1]) + 8;
-    const anchor = r[1] > 1.55 ? "end" : "start";
-    el(viz,"text",{x:vx,y:y+h/2+4,"text-anchor":anchor,style:`fill:${r[3]};font-family:var(--mono);font-size:11.5px;font-weight:700`}).textContent=r[1].toFixed(3)+(r[2]?` (${r[2]})`:"");
+    // A long bar puts its own value label INSIDE it. Drawn in the bar's colour that was
+    // the same colour on the same colour — 1.29:1, well under WCAG AA. Outside the bar the
+    // label sits on the dark panel and the bar's colour is correct and carries the meaning,
+    // so the colour switches with the position, not always.
+    const inside = r[1] > 1.55;
+    const vx = inside ? X(r[1]) - 8 : X(r[1]) + 8;
+    const anchor = inside ? "end" : "start";
+    el(viz,"text",{x:vx,y:y+h/2+4,"text-anchor":anchor,style:`fill:${inside?"var(--bg)":r[3]};font-family:var(--mono);font-size:11.5px;font-weight:700`}).textContent=r[1].toFixed(3)+(r[2]?` (${r[2]})`:"");
   });
   if(key==="ii"){
     el(viz,"line",{x1:X(1.937),y1:T-2,x2:X(1.937),y2:B+6,style:"stroke:var(--amber);stroke-width:1.5;stroke-dasharray:4 3"});

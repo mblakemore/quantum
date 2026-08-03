@@ -245,7 +245,11 @@
         // stem from ground to marker
         s+='<line x1="'+x+'" y1="'+gyG+'" x2="'+x+'" y2="'+y+'" stroke="'+col+'" stroke-width="'+(sel?3:1.4)+'" opacity="'+(sel?1:0.5)+'"/>';
         s+='<circle cx="'+x+'" cy="'+y+'" r="'+(sel?8:5)+'" fill="'+(sel?C("--card"):"none")+'" stroke="'+col+'" stroke-width="'+(sel?3:1.6)+'" opacity="'+(sel?1:0.6)+'"/>';
-        s+='<text x="'+x+'" y="'+(y-14)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="'+(sel?11:9.5)+'" font-weight="'+(sel?700:400)+'" fill="'+col+'" opacity="'+(sel?1:0.6)+'">'+d.E.toFixed(3)+'</text>';
+        // The unselected VALUE labels were dimmed to 0.6 like the stems and rings, which put
+        // them at 3.11:1 against the panel — under WCAG AA. Size and weight already carry the
+        // de-emphasis here, so the numbers read at 0.8 (4.7:1) while the stems/rings below
+        // stay at 0.5/0.6: a measured number should not be the thing that fades out.
+        s+='<text x="'+x+'" y="'+(y-14)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="'+(sel?11:9.5)+'" font-weight="'+(sel?700:400)+'" fill="'+col+'" opacity="'+(sel?1:0.8)+'">'+d.E.toFixed(3)+'</text>';
         s+='<text x="'+x+'" y="'+(Y1+16)+'" text-anchor="middle" font-family="'+C("--mono")+'" font-size="9" fill="'+(sel?C("--ink"):C("--ink-3"))+'">'+(k==="qet"?"QET":k)+'</text>';
       });
       // gap bracket between qet and coin
