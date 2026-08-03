@@ -1,0 +1,11 @@
+{
+ "job_id": "d9o4ebm44aac73f4q7m0",
+ "u": 0.702,
+ "se_u": 0.013002512577703332,
+ "z_vs_floor": 0.1538164249446369,
+ "VERDICT": "UNDERPOWERED",
+ "D_reported": {
+  "purity": 0.69,
+  "se": 0.013214890591046653
+ }
+}
