@@ -33,14 +33,20 @@ def submit_v3(k=2):
     svc = service_for_submission("IBMQ_ALT2")
     u = svc.usage()
     print(f"POOL RE-READ (ALT2): {u['usage_remaining_seconds']}s of {u['usage_limit_seconds']}")
-    best = None
-    for b in svc.backends():
-        st = b.status()
-        if st.operational and b.configuration().n_qubits >= 4 * k:
-            if best is None or st.pending_jobs < best[0]: best = (st.pending_jobs, b)
-    backend = best[1]
+    import sys as _s
+    fixed = "ibm_fez" if "--v4" in _s.argv else None
+    if fixed:
+        backend = svc.backend(fixed)      # v4: SAME backend as v2 (single-variable DD test)
+    else:
+        best = None
+        for b in svc.backends():
+            st = b.status()
+            if st.operational and b.configuration().n_qubits >= 4 * k:
+                if best is None or st.pending_jobs < best[0]: best = (st.pending_jobs, b)
+        backend = best[1]
     circs, shots, labels = v2.build_v2_circuits(k)
-    tqc = transpile(circs, backend=backend, optimization_level=3, seed_transpiler=4227)
+    lvl = 1 if "--v4" in _s.argv else 3   # v4: v2's exact opt level
+    tqc = transpile(circs, backend=backend, optimization_level=lvl, seed_transpiler=4227)
     durations = backend.target.durations()
     pm = PassManager([ALAPScheduleAnalysis(durations),
                       PadDynamicalDecoupling(durations, [XGate(), XGate()])])
@@ -51,9 +57,9 @@ def submit_v3(k=2):
     print(f"DD applied: X pulses {xb} -> {xa}")
     tqc = out
     job = SamplerV2(mode=backend).run([(t, None, s) for t, s in zip(tqc, shots)])
-    man = {"experiment": "steth_lambda_anc_preseal_gate_v3_DD", "cycle": "C5018",
+    man = {"experiment": ("steth_lambda_anc_preseal_gate_v4_DD_only" if "--v4" in _s.argv else "steth_lambda_anc_preseal_gate_v3_DD"), "cycle": "C5018",
            "parent_design": "ember c4215 locked / c4227 v2 (imported, unmodified)",
-           "delta": "ALAP + X-X DD (B1b machinery) + opt3; nothing else changed",
+           "delta": ("v2 EXACT (fez, opt1) + DD ONLY -- single-variable" if "--v4" in _s.argv else "DD + opt3 + BACKEND CHANGED (marrakesh via picker) -- 3 variables, confounded (owned)"),
            "go": "Creator general#3967 'Universal Translator, fly it, go'",
            "account": "ALT2", "pool_remaining_at_submit_s": u["usage_remaining_seconds"],
            "backend": backend.name, "dd_x_pulses": [xb, xa], "k": k,
