@@ -55,6 +55,10 @@
   th{color:var(--ink)}
   .foot{margin-top:60px;padding-top:16px;border-top:1px solid var(--edge);color:var(--ink-3);font-size:13.5px}
   a{color:var(--cyan)} p a{text-decoration:underline}
+  /* Charts scroll, they do not shrink — an 800-unit viewBox rendered an 11px label at 5px on a
+     phone. .frame already has overflow-x:auto; min-width is what makes it scroll rather than the
+     chart collapsing. No effect above 655px of available width. */
+  .frame svg{width:100%;min-width:655px;height:auto;display:block}
   svg text{font-family:var(--mono)}
   /* SVG color overrides — CSS beats presentation attributes, restyling the inline SVGs without touching them */
   svg line[stroke="#2a3145"]  { stroke: var(--edge); }

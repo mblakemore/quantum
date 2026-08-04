@@ -113,6 +113,13 @@
   .roundctl { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:14px; }
   .roundctl input[type=range]{ accent-color:var(--heal); width:220px; }
   .roundctl .rv { font-family:var(--mono); font-size:13px; color:var(--ink); font-weight:700; }
+  /* Charts scroll, they do not shrink. A 620-unit viewBox at width:100% scales to ~0.58x at
+     phone width, rendering a 10px label at 5px. WCAG 1.4.10 exempts content needing
+     two-dimensional layout from the no-horizontal-scroll rule, so scrolling a chart is sanctioned
+     where shrinking it below legibility is not. No effect above 620px of available width. */
+  figure { overflow-x:auto; }
+  .plotwrap { overflow-x:auto; }
+  figure svg, .plotwrap svg { min-width:620px; height:auto; display:block; }
   .gapnum { font-family:var(--mono); font-size:13px; }
   .gapnum b { color:var(--heal); }
 
@@ -231,7 +238,7 @@
       <span class="rv" id="rVal">R = 4</span>
       <span class="gapnum" id="gapNum"></span>
     </div>
-    <svg id="roundSvg" viewBox="0 0 620 240" role="img" aria-label="fidelity vs rounds" style="width:100%;height:auto"></svg>
+    <div class="plotwrap"><svg id="roundSvg" viewBox="0 0 620 240" role="img" aria-label="fidelity vs rounds" style="width:100%;height:auto"></svg></div>
   </section>
 
   <!-- PANEL E — Exp237, the phase dual, missed by one thousandth -->

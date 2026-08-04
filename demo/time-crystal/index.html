@@ -57,7 +57,11 @@
     border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
   .primer b { color:var(--ink); }
 
-  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  /* Charts scroll, they do not shrink. A 640-unit viewBox at svg{width:100%} scales to ~0.55x
+     at phone width, rendering a 10px label at 6px. .plotwrap already scrolls; the min-width is
+     what makes it do so instead of the chart collapsing. WCAG 1.4.10 exempts 2D content from the
+     no-horizontal-scroll rule. No effect above 576px of available width. */
+  figure { margin:0; } svg { width:100%; min-width:576px; height:auto; display:block; }
   .plotwrap { overflow-x:auto; }
   .legend { display:flex; flex-wrap:wrap; gap:6px 18px; font-family:var(--mono); font-size:12px; color:var(--ink-2); margin:10px 0 0; }
   .legend span { display:inline-flex; align-items:center; gap:7px; }
