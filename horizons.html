@@ -60,7 +60,12 @@
   .statstrip .s{display:flex;flex-direction:column;gap:1px;}
   .scopenote{font-size:13.5px;line-height:1.55;color:var(--muted);max-width:70ch;
     margin:16px 0 0;padding-top:14px;border-top:1px dashed var(--edge);}
-  .scopenote b{color:var(--ink);}
+  /* --ink on THIS page is the dark background (body{background:var(--ink)}), not the light text
+     token it is in the exhibit template. This rule was written with the exhibit convention in
+     mind, so the bold text computed to rgb(4,6,12) on an rgb(4,6,12) background — 1.0:1, two
+     spans rendered completely invisible, including this note's own lead-in sentence. --text is
+     the light token here, and it is brighter than the note's --muted base, so the emphasis reads. */
+  .scopenote b{color:var(--text);}
 
   /* how to read */
   .primer{background:var(--surface);border:1px solid var(--edge);border-radius:14px;
