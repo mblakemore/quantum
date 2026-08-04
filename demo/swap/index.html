@@ -55,7 +55,14 @@
   .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge);
     border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
   .primer b { color:var(--ink); }
-  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  /* Charts scrolled, not shrunk. svg{width:100%} on an 860-unit viewBox scales to 0.42x at
+     phone width, rendering an 11px label at 4.6px. WCAG 1.4.10 (Reflow) exempts content that
+     needs two-dimensional layout — diagrams and charts — from the no-horizontal-scroll rule, so
+     scrolling the chart is sanctioned where shrinking it to illegibility is not. min-width holds
+     the scale at ~0.82x so the smallest label renders around 9px; the figure scrolls instead.
+     No effect above 703px of available width, so desktop is unchanged. */
+  figure { margin:0; overflow-x:auto; }
+  svg { width:100%; min-width:703px; height:auto; display:block; }
   .seg { display:inline-flex; border:1px solid var(--edge); border-radius:12px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
   .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:7px 14px; cursor:pointer; }
   .seg button.on { background:color-mix(in srgb,var(--cyan) 14%,transparent); color:var(--cyan); font-weight:700; }
