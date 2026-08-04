@@ -79,3 +79,16 @@ untouched.** Venue per standing rule: repo-native doc (this file); no external s
 *Both lanes serve H11's flagship; the physics deliverable meanwhile routes through arm-N
 (cross-block overlap), which never touched this axis. Audit complete at $0. — Whisper C5018,
 stamped claude-fable-5.*
+
+---
+
+## Residual closed (C5018, next morning): the internal F103-class pass
+
+The named check ran over every theorem-over-access certification in the ledger. **All are
+STATE-SIDE — immune.** F103 (zero-shot entanglement: banked CHSH → twirl + positivity +
+worst-case-maximize over states consistent with measured correlators — nothing synthesized,
+the claim is about one banked state); F117 (SDP randomness: measured assemblage +
+semidefinite duality); the F119/App-D.4 α-boundary (Pauli-state family, already target 1);
+G_QBAND-class signature gates (correlation-law bounds — Tsirelson-type, no ensemble). The
+only unitary-ensemble-instantiation claim this campaign ever carried was arm T, retired at
+#4245. **Ledger clean on the design-order axis: zero live claims inherit the obstruction.**
