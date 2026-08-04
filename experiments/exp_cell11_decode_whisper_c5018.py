@@ -99,13 +99,31 @@ def do_fita(jid):
         f = fit_axis_rate(v_ep1, v_now)
         fits[str(q)] = f
         print(f"q{q}: axis {f['axis']} rate {f['rate_deg_per_layer']} deg/layer rms {f['rms_resid']}")
-    out = {"fits": fits, "cal_epoch": man["cal_epoch"], "jobA": jid}
+    # EXECUTION-WINDOW upgrade (C5018, 10h-queue lesson): a job can execute in a different cal
+    # window than it was SUBMITTED in. Record kingston's cal AT LANDING (run this promptly after
+    # A goes terminal) — that is A's true execution window; --jobb gates on it, --grade re-checks.
+    from ibm_multi_account import service_for_submission
+    svc = service_for_submission("IBMQ_ALT")
+    cal_now = str(svc.backend(man["backend"]).properties().last_update_date)
+    if cal_now != man["cal_epoch"]:
+        print(f"[exec-window] kingston recal'd while A queued: submit-cal {man['cal_epoch']} -> landing-cal {cal_now} (using landing)")
+    out = {"fits": fits, "cal_epoch": cal_now, "cal_at_submit": man["cal_epoch"], "jobA": jid}
     json.dump(out, open(os.path.join(RES, "cell11_jobA_fit_c5018.json"), "w"), indent=1)
-    print("-> cell11_jobA_fit_c5018.json (feeds --jobb; same-cal gate armed)")
+    print("-> cell11_jobA_fit_c5018.json (feeds --jobb; execution-window gate armed)")
 
 
 def do_grade(ja, jb):
     manB = json.load(open(os.path.join(RES, f"cell11_jobB_manifest_{jb}.json")))
+    # EXECUTION-WINDOW check: grade runs promptly after B lands, so cal-now ~= B's execution
+    # window. It must equal A's landing cal (the fit's reference) — a recal between the two
+    # EXECUTIONS invalidates the frozen constants; refuse and refly B rather than grade across.
+    fitA = json.load(open(os.path.join(RES, "cell11_jobA_fit_c5018.json")))
+    from ibm_multi_account import service_for_submission
+    svc = service_for_submission("IBMQ_ALT")
+    cal_now = str(svc.backend(manB["backend"]).properties().last_update_date)
+    if cal_now != fitA["cal_epoch"]:
+        sys.exit(f"EXECUTION-WINDOW GATE FAILED: A landed in cal {fitA['cal_epoch']}, grade-time cal is "
+                 f"{cal_now} — a recal fell between executions; constants invalid, re-fly (A then B).")
     B = decode(jb, manB)
     ep1 = epoch1_bloch()
     report = {"card": "cell11_GRADE", "cycle": "C5018", "substrate": "claude-fable-5",
