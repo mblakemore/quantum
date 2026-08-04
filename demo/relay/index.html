@@ -110,7 +110,7 @@
       can beat). The <b>single-hop</b> baseline flew in the same job, so the price of the second hop is measured
       drift-free.</p>
     <div class="seg" role="group" id="segbtns"></div>
-    <figure aria-label="per-state fidelity bars"><svg id="bars" viewBox="0 0 860 240"></svg></figure>
+    <figure aria-label="per-state fidelity bars" tabindex="0"><svg id="bars" viewBox="0 0 860 240"></svg></figure>
     <p class="story" id="story"></p>
     <div class="verdict">
       <div class="box hl"><span class="lbl">end-to-end, two hops</span><span class="val cy">0.784 · +0.117 · 45σ</span><br>
@@ -179,12 +179,25 @@ function draw(key){
   [0,0.5,1].forEach(g=>{el(bars,"line",{x1:L,y1:py(g),x2:R,y2:py(g),style:"stroke:var(--edge);stroke-width:1"});
     el(bars,"text",{x:L-8,y:py(g)+4,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"}).textContent=g.toFixed(1);});
   el(bars,"line",{x1:L,y1:py(2/3),x2:R,y2:py(2/3),style:"stroke:var(--amber);stroke-width:1.6;stroke-dasharray:6 5"});
-  el(bars,"text",{x:L+6,y:py(2/3)-6,style:"fill:var(--amber);font-family:var(--mono);font-size:11.5px"}).textContent="2/3 classical bound";
+  const boundLab=el(bars,"text",{x:L+6,y:py(2/3)-6,style:"fill:var(--amber);font-family:var(--mono);font-size:11.5px"});
+  boundLab.textContent="2/3 classical bound";
   const n=STATES.length,bw=(R-L)/n*0.5;
   A.vals.forEach((v,i)=>{const x=L+(R-L)*(i+0.5)/n;
     el(bars,"rect",{x:x-bw/2,y:py(v),width:bw,height:B-py(v),rx:4,style:`fill:${A.col};opacity:.9`});
     el(bars,"text",{x:x,y:py(v)-7,"text-anchor":"middle",style:`fill:${A.col};font-family:var(--mono);font-size:12px;font-weight:700`}).textContent=v.toFixed(3);
     el(bars,"text",{x:x,y:B+20,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12.5px"}).textContent=STATES[i];});
+  // The bound label crossed the first bar — amber on cyan. It always did; at 390px the chart used
+  // to render it at ~4.8px, too small for the contrast scan to resolve the bar behind it, so
+  // making labels legible is what made this measurable. A LABEL TOO SMALL TO READ IS ALSO TOO
+  // SMALL TO MEASURE. Re-appended above the bars with a backing chip, the same remedy as
+  // teleportation's identical "classical bound" label; the line keeps its full span.
+  bars.appendChild(boundLab);
+  {const bb=boundLab.getBBox();
+   const chip=document.createElementNS("http://www.w3.org/2000/svg","rect");
+   chip.setAttribute("x",bb.x-5); chip.setAttribute("y",bb.y-2);
+   chip.setAttribute("width",bb.width+10); chip.setAttribute("height",bb.height+4);
+   chip.setAttribute("rx",3); chip.setAttribute("fill","var(--bg)"); chip.setAttribute("opacity","0.92");
+   bars.insertBefore(chip,boundLab);}
   document.getElementById("story").innerHTML=A.story;
   document.querySelectorAll("#segbtns button").forEach(b=>b.classList.toggle("on",b.dataset.k===key));
 }

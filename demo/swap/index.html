@@ -115,7 +115,7 @@
       bars show the measured correlations; the gauge below folds them into the Bell-state fidelity
       F = (1 + ZZ + XX − YY)/4. Above the dashed 1/2 line, the pair is provably entangled. Pick an arm.</p>
     <div class="seg" role="group" id="segbtns"></div>
-    <figure aria-label="measured two-qubit correlations and fidelity gauge"><svg id="viz" viewBox="0 0 860 300"></svg></figure>
+    <figure aria-label="measured two-qubit correlations and fidelity gauge" tabindex="0"><svg id="viz" viewBox="0 0 860 300"></svg></figure>
     <p class="story" id="story"></p>
     <div class="verdict">
       <div class="box hl"><span class="lbl">the witness</span><span class="val cy">F = 0.836 · 40σ over 1/2</span><br>
@@ -135,7 +135,7 @@
       entangled; where a curve crosses is its <b>certified hold time</b>. The <b>echo</b> arms fire a single X on both
       qubits mid-storage — |Φ+⟩ is a +1 eigenstate of X⊗X, so the pulse leaves the state untouched while refocusing
       each qubit's slow detuning drift.</p>
-    <figure aria-label="Bell fidelity versus storage time, plain versus echoed"><svg id="mem" viewBox="0 0 860 300"></svg></figure>
+    <figure aria-label="Bell fidelity versus storage time, plain versus echoed" tabindex="0"><svg id="mem" viewBox="0 0 860 300"></svg></figure>
     <p class="story"><b>The echo doubles the memory: 16 → 36 μs certified hold time (2.3×).</b> A second echo (CPMG-2,
       38 μs) adds nothing — one π-pulse captures all the refocusable noise, pinning the dephasing as quasi-static.
       Two notes: the swapped pair ages exactly like a gate-made pair (pedigree ratio 0.76 — decay is local
@@ -160,7 +160,7 @@
       its two bits agree</b>. Half the data is spent — and the surviving pair comes back brighter. The bars show the
       witness fidelity: the faded <b>input</b>, the <b>kept</b> pair after distillation, and the <b>discard pile</b>
       (the rejected shots) — which must come out <em>worse</em> than the input, or the protocol isn't sorting anything.</p>
-    <figure aria-label="purification fidelities: input, kept, discard, fresh overhead"><svg id="pur" viewBox="0 0 860 300"></svg></figure>
+    <figure aria-label="purification fidelities: input, kept, discard, fresh overhead" tabindex="0"><svg id="pur" viewBox="0 0 860 300"></svg></figure>
     <p class="story"><b>Gain +0.292 at 20σ, success probability 0.50 — and the sort is visible in the same shots:</b>
       kept 0.688, discard −0.171. The remarkable part, fenced: this run's input had faded to 0.396,
       <em>below the 1/2 witness</em> — not even certifiably entangled — yet the distilled output <em>is</em> certified.

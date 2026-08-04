@@ -238,7 +238,7 @@
       <span class="rv" id="rVal">R = 4</span>
       <span class="gapnum" id="gapNum"></span>
     </div>
-    <div class="plotwrap"><svg id="roundSvg" viewBox="0 0 620 240" role="img" aria-label="fidelity vs rounds" style="width:100%;height:auto"></svg></div>
+    <div class="plotwrap" tabindex="0"><svg id="roundSvg" viewBox="0 0 620 240" role="img" aria-label="fidelity vs rounds" style="width:100%;height:auto"></svg></div>
   </section>
 
   <!-- PANEL E — Exp237, the phase dual, missed by one thousandth -->
@@ -253,7 +253,7 @@
     specified location, swept across all eight combinations of input state and error position. These
     are not qubits that drifted — they are qubits somebody broke on purpose, in a known way, to see
     whether the code puts them back.</p>
-    <figure><svg id="phaseGrid" viewBox="0 0 620 210" role="img" aria-label="corrected fidelity for each input and error location against the pre-registered floor"></svg></figure>
+    <figure tabindex="0"><svg id="phaseGrid" viewBox="0 0 620 210" role="img" aria-label="corrected fidelity for each input and error location against the pre-registered floor"></svg></figure>
     <p class="sub" style="margin-top:12px"><strong>Seven of eight cells clear the pre-registered floor
     of 0.900. One lands at 0.899.</strong> The registered verdict is therefore <strong>NOT HELD</strong>,
     by one thousandth — and it was kept that way: no re-fly, no adjustment to the floor. Shopping for a
@@ -279,7 +279,7 @@
     <p class="sub">The frontier flight (Exp242): not one protected qubit but <strong>two</strong>, with
     a logical gate acting between them while both are being corrected live. Its registered verdict is
     <strong>NOT HELD</strong> — and the interesting part is <em>which</em> half missed.</p>
-    <figure><svg id="cnotBars" viewBox="0 0 620 230" role="img" aria-label="logical CNOT truth table, corrected versus sham"></svg></figure>
+    <figure tabindex="0"><svg id="cnotBars" viewBox="0 0 620 230" role="img" aria-label="logical CNOT truth table, corrected versus sham"></svg></figure>
     <p class="sub" style="margin-top:12px"><strong>What is certified is that correction HELPS — not
     that the gate is clean.</strong> The registered test is a <em>difference</em>: corrected must beat
     the sham by at least 0.05 on the protected observable. It does, by <strong>+0.075</strong> on

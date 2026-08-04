@@ -131,7 +131,7 @@
       highest scorer — higher looks more right. Watch the true answer's score fall and a wrong competitor's rise. Past the
       crossover the check picks the <b>wrong</b> one, and nothing it can measure tells it so.</div>
 
-    <div class="plotwrap"><figure><svg id="plotA" viewBox="0 0 620 300" role="img"
+    <div class="plotwrap" tabindex="0"><figure tabindex="0"><svg id="plotA" viewBox="0 0 620 300" role="img"
       aria-label="Score of the true secret vs the best wrong competitor across circuit depth; the true score falls below the competitor past 2q=32."></svg></figure></div>
     <div class="legend">
       <span><i class="swatch" style="background:var(--good)"></i> true s = 1010 (what the check scores it)</span>
@@ -167,7 +167,7 @@
         <button type="button" id="segGen" aria-pressed="false">generic only</button>
       </div>
     </div>
-    <div class="plotwrap"><figure><svg id="plotB" viewBox="0 0 620 300" role="img"
+    <div class="plotwrap" tabindex="0"><figure tabindex="0"><svg id="plotB" viewBox="0 0 620 300" role="img"
       aria-label="True-secret recovery score vs depth for copy-channel noise (inverts past the coin-flip line) versus generic noise (stays high, recovers at depth 407)."></svg></figure></div>
     <div class="legend">
       <span><i class="swatch" style="background:var(--bad)"></i> copy = noise on the signal channel (inverts → lies)</span>
@@ -191,7 +191,7 @@
         <button type="button" id="qLog" aria-pressed="false">logical (all qubits)</button>
       </div>
     </div>
-    <div class="plotwrap"><figure><svg id="plotC" viewBox="0 0 620 210" role="img"
+    <div class="plotwrap" tabindex="0"><figure tabindex="0"><svg id="plotC" viewBox="0 0 620 210" role="img"
       aria-label="Repetition code chain of three data qubits and two syndrome checks; a single bit-flip lights a syndrome, the logical error leaves all syndromes dark while flipping the stored value."></svg></figure></div>
     <div class="verdict" id="verdictC">
       <div class="box"><span class="lbl">Syndrome self-check says</span><span class="val" id="synC">— clean —</span></div>
