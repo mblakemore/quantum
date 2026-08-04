@@ -79,7 +79,19 @@
   .cbtn.on { background:var(--cyan); color:var(--bg); border-color:var(--cyan); }
   .cbtn.cls.on { background:var(--amber); border-color:var(--amber); color:var(--bg); }
 
+  /* min-width:0 on the grid children: a grid track is implicitly minmax(auto,1fr) and will not
+     shrink below its content's min-content size, so the chart's min-width floor would otherwise
+     expand the track and push the PAGE wide instead of scrolling inside its own .plotwrap.
+     Documented in state/memory/svg-in-css-grid-needs-min-width-zero.md and caught here by the
+     page-overflow check. */
   .play { display:grid; grid-template-columns:200px 1fr; gap:clamp(16px,4vw,32px); align-items:center; }
+  /* max-width matters as much as min-width here: the narrow-viewport rule below uses
+     justify-items:center, which makes each grid item size to its MAX-CONTENT rather than fill the
+     track — so the chart's 460px floor set the item's width and pushed the page wide, and
+     min-width:0 alone could not stop it. The ceiling is what forces the chart to scroll inside
+     its own .plotwrap instead. Found by measuring which element actually exceeded the viewport,
+     after two wrong guesses. */
+  .play > * { min-width:0; max-width:100%; }
   @media (max-width:620px){ .play { grid-template-columns:1fr; justify-items:center; } }
   .glyph-cap { font-family:var(--mono); font-size:10.5px; color:var(--ink-3); text-align:center; margin-top:4px; }
 
@@ -116,6 +128,13 @@
   .badge-row .sig { color: var(--cyan); font-weight:600; }
   .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--cyan); }
   .badge-row .sp2 { flex:1; }
+  /* Charts scroll, they do not shrink. These charts sit in prose-bearing divs, and a container
+     holding text must never be the scroller — scrolling it drags the caption sideways with the
+     chart — so each chart is wrapped in its own .plotwrap. Precedent: self-healing roundSvg,
+     anyon-braid #bar, hayden-preskill. WCAG 1.4.10 exempts two-dimensional content. */
+  .plotwrap{overflow-x:auto}
+  .plotwrap.pw0 svg{width:100%;min-width:460px;height:auto;display:block}
+  .plotwrap.pw1 svg{width:100%;min-width:474px;height:auto;display:block}
 </style>
 </head>
 <body>
@@ -194,7 +213,7 @@
       </div>
       <div>
         <div class="gauge-cap"><span>retrieval success</span><span id="caseTag"></span></div>
-        <svg viewBox="0 0 460 74" role="img" aria-label="Retrieval success on a scale with the classical wall and the quantum law">
+        <div class="plotwrap pw0"><svg viewBox="0 0 460 74" role="img" aria-label="Retrieval success on a scale with the classical wall and the quantum law">
           <rect class="band" id="bandRect" y="16" height="26"/>
           <line class="wall-line" id="wallLine" y1="10" y2="48"/>
           <line class="law-line" id="lawLine" y1="10" y2="48"/>
@@ -202,7 +221,7 @@
           <rect class="gfill" id="gfill" x="30" y="18" height="22" rx="3" fill="var(--cyan)"/>
           <text class="gmark-lab" id="wallLab" y="62" text-anchor="middle" fill="var(--amber)">classical wall 0.75</text>
           <text class="gmark-lab" id="lawLab" y="62" text-anchor="middle" fill="var(--good)">quantum law 0.854</text>
-        </svg>
+        </svg></div>
         <div class="readout">
           <span class="rnum q" id="rnum" aria-live="polite">0.843</span>
           <span class="rcap" id="rcap" aria-live="polite">P(Bob reads the bit correctly)</span>
@@ -220,7 +239,7 @@
     the quantum law 0.854 (exceeding it would be an apparatus error, not a better result). The pooled quantum value
     sits <strong>inside the band</strong>; the executed classical player sits at its own wall. Only the qubit crosses the line.</p>
     <div style="max-width:560px;margin:0 auto;">
-      <svg viewBox="0 0 500 180" role="img" aria-label="The pooled quantum value and the classical arm against the classical wall, the quantum law, and the advantage band">
+      <div class="plotwrap pw1"><svg viewBox="0 0 500 180" role="img" aria-label="The pooled quantum value and the classical arm against the classical wall, the quantum law, and the advantage band">
         <rect class="board-band" id="boardBand" y="40" height="30"/>
         <line id="wallB" stroke="var(--amber)" stroke-width="2"/>
         <line id="lawB" stroke="var(--good)" stroke-width="1.6" stroke-dasharray="4 3"/>
@@ -229,7 +248,7 @@
         <text class="ptlab" id="wallBlab" y="88" text-anchor="middle" fill="var(--amber)">classical wall 0.75</text>
         <text class="ptlab" id="lawBlab" y="88" text-anchor="middle" fill="var(--good)">quantum law 0.854</text>
         <text class="ptlab" x="240" y="30" text-anchor="middle" fill="var(--good)">◄ the advantage band ►</text>
-      </svg>
+      </svg></div>
     </div>
   </section>
 

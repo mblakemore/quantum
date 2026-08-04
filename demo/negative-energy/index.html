@@ -126,6 +126,13 @@
   .badge-row .sig { color: var(--violet); font-weight:600; }
   .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--violet); }
   .badge-row .sp2 { flex:1; }
+  /* Charts scroll, they do not shrink. These charts sit in prose-bearing divs, and a container
+     holding text must never be the scroller — scrolling it drags the caption sideways with the
+     chart — so each chart is wrapped in its own .plotwrap. Precedent: self-healing roundSvg,
+     anyon-braid #bar, hayden-preskill. WCAG 1.4.10 exempts two-dimensional content. */
+  .plotwrap{overflow-x:auto}
+  .plotwrap.pw0 svg{width:100%;min-width:356px;height:auto;display:block}
+  .plotwrap.pw1 svg{width:100%;min-width:551px;height:auto;display:block}
 </style>
 </head>
 <body>
@@ -185,7 +192,7 @@
     </div>
 
     <div class="therm-grid">
-      <svg viewBox="0 0 336 300" role="img" aria-label="Vertical energy thermometer for Bob's local site, with the vacuum floor at zero and a shaded sub-vacuum region below">
+      <div class="plotwrap pw0"><svg viewBox="0 0 336 300" role="img" aria-label="Vertical energy thermometer for Bob's local site, with the vacuum floor at zero and a shaded sub-vacuum region below">
         <!-- sub-vacuum region -->
         <rect class="subvac" id="subvacRect" x="118" width="64"/>
         <!-- tube -->
@@ -204,7 +211,7 @@
         <!-- value tip -->
         <text class="val-tip" id="valTip" x="150" text-anchor="middle"></text>
         <text class="axlab" x="150" y="292" text-anchor="middle" fill="var(--ink-3)">Bob's local energy</text>
-      </svg>
+      </svg></div>
 
       <div class="readout">
         <div class="enum neg" id="enum" aria-live="polite">−0.0547</div>
@@ -231,14 +238,14 @@
     energy; only the correlated QET dips <strong>below zero</strong> — and the certified 5σ ceiling (−0.032) is still negative.
     The 0.203 gap between QET and the control (21σ) is the correlation doing the work.</p>
     <div style="max-width:560px;margin:0 auto;">
-      <svg viewBox="0 0 520 210" role="img" aria-label="Bob's local energy for the three protocols against the vacuum floor and the certified bound">
+      <div class="plotwrap pw1"><svg viewBox="0 0 520 210" role="img" aria-label="Bob's local energy for the three protocols against the vacuum floor and the certified bound">
         <rect class="board-sub" id="boardSub" x="40" width="400"/>
         <g id="barsB"></g>
         <line id="floorB" stroke="var(--ink)" stroke-width="2"/>
         <text class="ptlab" id="floorBlab" fill="var(--ink)">vacuum E=0</text>
         <line id="boundB" stroke="var(--good)" stroke-width="1.3" stroke-dasharray="4 3" opacity="0.85"/>
         <text class="bound-lab" id="boundBlab">5σ ceiling</text>
-      </svg>
+      </svg></div>
     </div>
   </section>
 

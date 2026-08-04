@@ -130,6 +130,11 @@
   .badge-row .sig { color: var(--violet); font-weight:600; }
   .badge-row a { color: var(--ink-2); } .badge-row a:hover { color: var(--violet); }
   .badge-row .sp { flex:1; }
+  /* Charts scroll, they do not shrink — final two of the rollout. A container holding prose must
+     never be the scroller, so the chart is wrapped itself. WCAG 1.4.10 exempts two-dimensional
+     content from the no-horizontal-scroll rule. */
+  .plotwrap{overflow-x:auto}
+  .plotwrap svg{width:100%;min-width:460px;height:auto;display:block}
 </style>
 </head>
 <body>
@@ -218,7 +223,7 @@
     bites hardest. It peaks at <strong>73µs: 36σ</strong>. By 293µs both have decayed to the noise floor — nothing left to tell
     apart, so no claim there.</p>
     <div class="plotwrap">
-      <svg viewBox="0 0 460 260" role="img" aria-label="Visibility versus proper time for the vacuum and excited twins, with the aging gap shaded">
+      <div class="plotwrap"><svg viewBox="0 0 460 260" role="img" aria-label="Visibility versus proper time for the vacuum and excited twins, with the aging gap shaded">
         <line class="axis" x1="46" y1="16" x2="46" y2="216"/>
         <line class="axis" x1="46" y1="216" x2="440" y2="216"/>
         <polygon class="gapfill" id="gapPoly"/>
@@ -231,7 +236,7 @@
         <text class="axlabel" x="40" y="234">0µs</text>
         <text class="axlabel" x="410" y="234">293µs</text>
         <text class="axlabel" x="150" y="250" fill="var(--ink-3)">proper time (delay) — more time = more aging →</text>
-      </svg>
+      </svg></div>
       <div class="lgd">
         <span><i style="background:var(--cyan)" aria-hidden="true"></i>vacuum twin (stays home)</span>
         <span><i style="background:var(--amber)" aria-hidden="true"></i>excited twin (ages)</span>
