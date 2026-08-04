@@ -59,7 +59,10 @@
   .primer b { color:var(--ink); }
 
   figure { margin:0; }
-  svg { width:100%; height:auto; display:block; }
+  /* Charts scroll, they do not shrink: a 620-unit viewBox at width:100% collapses labels to
+     ~5-8px on a phone. WCAG 1.4.10 exempts content needing two-dimensional layout from the
+     no-horizontal-scroll rule. No effect above the min-width in available space. */
+  svg { width:100%; min-width:532px; height:auto; display:block; }
   .plotwrap { overflow-x:auto; }
 
   .ctl { display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin:14px 0 4px; }

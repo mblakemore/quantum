@@ -57,7 +57,14 @@
     border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
   .primer b { color:var(--ink); }
 
-  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  /* Charts scroll, they do not shrink: a 470-900-unit viewBox at width:100% collapses labels to
+     ~5-8px on a phone. WCAG 1.4.10 exempts content needing two-dimensional layout from the
+     no-horizontal-scroll rule. No effect above the min-width in available space. */
+  figure { margin:0; overflow-x:auto; }
+  .plotwrap { overflow-x:auto; }
+  svg { width:100%; height:auto; display:block; }
+  #eli5 { min-width:737px; } #lat { min-width:353px; }
+  #bar  { min-width:645px; } #rec { min-width:704px; }
   .e5caps { display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; margin-top:8px; }
   .e5caps > span { min-width:0; font-family:var(--mono); font-size:12px; line-height:1.5; color:var(--ink-3); text-align:center; }
   .e5caps b { color:var(--ink-2); font-weight:600; }
@@ -188,7 +195,10 @@
         <span>measured ⟨X⟩ =</span><span class="big" id="mval"></span>
         <span id="msig"></span>
       </div>
-      <svg id="bar" viewBox="0 0 860 60"></svg>
+      <!-- .meter also holds prose, so it must not be the scroller — wrap the chart itself,
+           the same way self-healing's roundSvg is wrapped. Without this the 645px floor
+           propagated outward and the PAGE scrolled horizontally at 390px, not just the chart. -->
+      <div class="plotwrap"><svg id="bar" viewBox="0 0 860 60"></svg></div>
       <p class="story" id="story"></p>
     </div>
   </section>
