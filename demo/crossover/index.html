@@ -53,7 +53,11 @@
   .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
   .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
   .primer b { color:var(--ink); }
-  figure { margin:0; } svg { width:100%; height:auto; display:block; }
+  /* Charts scroll, they do not shrink — see the swap/self-healing precedent. A container that
+     also holds prose must never be the scroller, so charts sitting in caption divs get their own
+     .plotwrap. WCAG 1.4.10 exempts two-dimensional content from no-horizontal-scroll. */
+  figure { margin:0; overflow-x:auto; }
+  svg { width:100%; min-width:460px; height:auto; display:block; }
   .seg { display:inline-flex; border:1px solid var(--edge); border-radius:12px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
   .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
   .seg button.on { background:color-mix(in srgb,var(--amber) 16%,transparent); color:var(--amber); font-weight:700; }

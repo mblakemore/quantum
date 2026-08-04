@@ -74,7 +74,7 @@
   .seg button.on { background:var(--obs); color:var(--bg); }
   .seg button:not(.on):hover { color:var(--obs); }
 
-  .plotwrap { max-width:640px; margin:0 auto; }
+  .plotwrap { max-width:640px; margin:0 auto; ;overflow-x:auto}
   .vlabel { text-align:center; font-family:var(--mono); font-size:13px; margin-top:8px; color:var(--ink-2); min-height:2.6em; }
   .vlabel b { color:var(--ink); } .vlabel .f { color:var(--fringe); font-weight:700; } .vlabel .z { color:var(--flat); font-weight:700; }
 
@@ -93,6 +93,7 @@
   footer .sig { color: var(--obs); font-weight:600; }
   footer a { color: var(--ink-2); } footer a:hover { color: var(--obs); }
   footer .sp2 { flex:1; }
+  .plotwrap svg{width:100%;min-width:640px;height:auto;display:block}
 </style>
 </head>
 <body>
