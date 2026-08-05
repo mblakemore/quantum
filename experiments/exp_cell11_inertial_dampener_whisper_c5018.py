@@ -46,7 +46,9 @@ sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(QROOT, "scripts"))
 
 BANKED = ["d9kq85jhdfks73ck12gg", "d9l4ncrjf64c739j1q8g"]   # census epochs 1,2 (Jul 29)
 CENSUS = os.path.join(RES, f"exp_drift_purity_probe_census_{BANKED[0]}_{BANKED[1]}.json")
-DEPTHS = [160, 280, 400]          # trimmed from census 5 for cost; spans the linear range
+DEPTHS = [160, 280, 400]          # rung 1: trimmed from census 5 for cost
+DEPTHS_R2 = [160, 280, 320, 360, 400]   # rung 2: the five BANKED depths — over-determines
+                                        # the angle model (prereg cell11-rung2, frozen)
 SHOTS = 8000
 DRIFTERS_GATED = [73, 26, 23]     # q53 reported-not-gated
 ACCOUNT = "IBMQ_ALT"              # the probe's account; preflight-checked at submit
@@ -122,6 +124,11 @@ def do_fit_banked():
     return fits
 
 
+def _depths():
+    import sys as _s
+    return DEPTHS_R2 if "--rung2" in _s.argv else DEPTHS
+
+
 def build_rows(backend, compensation=None):
     """Census rows at DEPTHS x 3 bases (+cal0/cal1). compensation: {q: (axis, rate)} applies
     terminal inverse rotation before basis change."""
@@ -137,7 +144,7 @@ def build_rows(backend, compensation=None):
         qc.measure_all()
         pubs.append((transpile(qc, backend, optimization_level=0), None, SHOTS))
         meta.append({"block": tag, "shots": SHOTS})
-    for D in DEPTHS:
+    for D in _depths():
         for B in ("Z", "X", "Y"):
             qc = twins[D].copy()
             arm = "uncomp"
@@ -145,10 +152,12 @@ def build_rows(backend, compensation=None):
                 arm = "comp"
                 for q in drifters_active:
                     if q in compensation:
-                        n, w = compensation[q]
+                        cq = compensation[q]
+                        n, w = cq[0], cq[1]
+                        cc = cq[2] if len(cq) > 2 else 0.0
                         n = np.asarray(n, float)
                         n = n / np.linalg.norm(n)   # stored axis is ROUNDED to 4dp — renormalize
-                        th = -np.radians(w * D)          # inverse rotation
+                        th = -np.radians(w * D + cc * D * D / 1000.0)   # inverse rotation
                         # decompose axis-angle into Rz*Ry*Rz via rotation matrix -> use qiskit
                         from qiskit.circuit.library import UnitaryGate
                         c, s = np.cos(th / 2), np.sin(th / 2)
@@ -188,10 +197,12 @@ def submit(job_tag, with_comp):
         fitA = json.load(open(os.path.join(RES, "cell11_jobA_fit_c5018.json")))
         if fitA["cal_epoch"] != cal:
             sys.exit(f"SAME-CAL GATE FAILED: Job A cal {fitA['cal_epoch']} != now {cal} — re-run Job A")
-        comp = {int(q): (np.array(f["axis"]), f["rate_deg_per_layer"])
+        comp = {int(q): (np.array(f["axis"]), f["rate_deg_per_layer"],
+                         f.get("curv_adopted", 0.0))
                 for q, f in fitA["fits"].items() if f}
         print(f"[comp] frozen constants from Job A: " +
-              " ".join(f"q{q}:{w:.3f}deg/L" for q, (n, w) in comp.items()))
+              " ".join(f"q{q}:{v[1]:.3f}deg/L" + (f"+{v[2]:.3f}c" if len(v) > 2 and v[2] else "")
+                       for q, v in comp.items()))
     pubs, meta, drifters = build_rows(backend, compensation=comp)
     # Job B carries BOTH arms: uncompensated controls + compensated rows
     if with_comp:

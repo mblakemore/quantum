@@ -76,3 +76,59 @@ Two jobs on kingston (queue observed at 1 pending, ALT pool 196 s at design time
 submission). ~5 depths × 3 bases × 2 jobs + cal ≈ a few QPU-seconds.
 
 *— Whisper C5018, stamped claude-fable-5. Bars frozen at this commit.*
+
+---
+
+## RUNG 2 BLOCKED BY ITS OWN GATE — and the constraint is structural (C5018, same cycle)
+
+**The same-cal gate fired and refused Job B2.** Kingston's calibration timeline today:
+
+```
+14:58:10  cal (A2 submitted under this)
+16:07:35  RECAL
+16:15:56–16:16:43  A2 EXECUTED  (verified from job metrics — after the 16:07 recal)
+16:27:37  RECAL AGAIN
+          B2 submission attempted -> GATE REFUSED (A2 cal 16:07 != now 16:27)
+```
+
+**The execution-window machinery worked exactly as built**: submit-time cal (14:58) was
+*wrong*, landing-time cal (16:07) was *right*, and A2's job metrics **proved** which window it
+ran in rather than leaving it assumed.
+
+**The structural obstacle, stated as a measured fact about the backend:** kingston is
+recalibrating on a **~20 minute** cadence today, while its **queue latency is ~75 minutes**
+(A2: submitted ~15:00, executed 16:15, despite a 1-job queue). **When recal cadence is shorter
+than queue latency, no two-job same-calibration-window chain is flyable on that backend.**
+Rung 2 as designed cannot fly today, and waiting is the only thing that fixes *this* design.
+
+## RUNG 2b — the design that survives the constraint (frozen before flight)
+
+**Change:** B2b flies with the constants **already fit from A2** (under cal 16:07), applied
+under whatever calibration is current at execution. Both arms — compensated and uncompensated
+control — are measured **inside B2b itself**, so the arm-to-arm comparison is internally
+consistent; only the *constants* are cross-calibration.
+
+**What staleness does to the result, stated honestly rather than flatteringly:** if the recal
+left the drift unchanged, the constants remain correct. If it changed the drift, the constants
+mismatch and compensation removes less — or overshoots. **This is unbiased-but-noisier, NOT
+conservative.** Chance alignment could in principle produce a DAMPED row that a same-window
+flight would not have produced; that is not systematic, but it is not zero either, and the
+claim language must carry it. (I considered calling this a conservative failure direction. It
+is not, and saying so would have been the flattering error this campaign keeps cataloguing.)
+
+**Frozen rule for 2b:** identical three-state grading, **plus** a mandatory label — any 2b
+result is reported as **cross-calibration** and may not be cited as evidence that the model
+class works *within* a window. Its legitimate claims are: (i) whether compensation still works
+across a recal (a *harder* test than the original), and (ii) the depth-dependence question,
+which is what rung 2 exists for and which the model-selection rule already answered from A2's
+five depths independent of B2b.
+
+**Already banked from A2, independent of any B flight:** the frozen model-selection rule was
+applied to five depths and **rejected the largest fit improvement** (q26: quadratic rms 0.52×
+linear — but jackknife curvature scatter 0.2217 against a curvature of 0.2329, i.e. the
+curvature is not reproducible under leave-one-out). Adopted: **q23 quadratic** (curvature
+0.2497 at 5.6× its jackknife scatter; ratio 0.6987, clearing the 0.7 bar *by a hair* — stated
+because it is marginal), **q26/q53/q73 linear**. That is rung 2's primary deliverable and it
+did not need B2b at all.
+
+*— Whisper C5018, stamped claude-fable-5.*

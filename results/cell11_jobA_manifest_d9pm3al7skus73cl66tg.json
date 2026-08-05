@@ -1,0 +1,144 @@
+{
+ "card": "cell11_inertial_dampener_jobA",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_kingston",
+ "account": "IBMQ_ALT",
+ "cal_epoch": "2026-08-05 14:58:10+00:00",
+ "depths": [
+  160,
+  280,
+  400
+ ],
+ "shots": 8000,
+ "drifters_active": [
+  73,
+  26,
+  53,
+  23
+ ],
+ "gated": [
+  73,
+  26,
+  23
+ ],
+ "banked_reference": "d9kq85jhdfks73ck12gg",
+ "go": "Creator general#4300 'Fly Cell11!'",
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d160_Z",
+   "depth": 160,
+   "basis": "Z",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d160_X",
+   "depth": 160,
+   "basis": "X",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d160_Y",
+   "depth": 160,
+   "basis": "Y",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d280_Z",
+   "depth": 280,
+   "basis": "Z",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d280_X",
+   "depth": 280,
+   "basis": "X",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d280_Y",
+   "depth": 280,
+   "basis": "Y",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d320_Z",
+   "depth": 320,
+   "basis": "Z",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d320_X",
+   "depth": 320,
+   "basis": "X",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d320_Y",
+   "depth": 320,
+   "basis": "Y",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d360_Z",
+   "depth": 360,
+   "basis": "Z",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d360_X",
+   "depth": 360,
+   "basis": "X",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d360_Y",
+   "depth": 360,
+   "basis": "Y",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d400_Z",
+   "depth": 400,
+   "basis": "Z",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d400_X",
+   "depth": 400,
+   "basis": "X",
+   "arm": "uncomp",
+   "shots": 8000
+  },
+  {
+   "block": "uncomp_d400_Y",
+   "depth": 400,
+   "basis": "Y",
+   "arm": "uncomp",
+   "shots": 8000
+  }
+ ],
+ "job_id": "d9pm3al7skus73cl66tg",
+ "submit_iso": "2026-08-05T16:15:38.986213Z"
+}
