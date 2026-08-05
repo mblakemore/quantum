@@ -1,0 +1,300 @@
+{
+ "card": "armn_dd_sweep",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_fez",
+ "account": "IBMQ_ALT2",
+ "cal_epoch_at_build": "2026-08-05 21:36:03+00:00",
+ "basis": "ladder d9pr2ia42q2c73b8blcg: idle-dominated, witness u=0.680 vs 0.700 gate",
+ "arms": [
+  "none",
+  "xx (incumbent)",
+  "xy4",
+  "xy8"
+ ],
+ "pulses_per_circuit": {
+  "none": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "xx": [
+   1546,
+   1546,
+   1546,
+   1546,
+   1546,
+   1546
+  ],
+  "xy4": [
+   3092,
+   3092,
+   3092,
+   3092,
+   3092,
+   3092
+  ],
+  "xy8": [
+   3728,
+   3728,
+   3728,
+   3728,
+   3728,
+   3728
+  ]
+ },
+ "candidates": [
+  23,
+  25,
+  51,
+  3,
+  29,
+  31
+ ],
+ "delay_dt": 1488,
+ "y_duration_note": "Y is non-native on this backend; duration(y) registered = duration(x) per qubit, physically justified (same drive pulse length, 90-degree phase offset). Emitted, not implicit.",
+ "power": {
+  "se_u": 0.0082,
+  "mde_single": 0.0325,
+  "mde_pooled": 0.0133,
+  "gap_to_gate": 0.02,
+  "note": "pooled MDE < gap, so the comparison can resolve a gate-clearing move"
+ },
+ "decision_rule": "arm WINS iff pooled u >= 0.700 AND advantage over xx > pooled MDE; if none reaches 0.700 report best pooled u and the remaining gap as a BOUND and the lever is exhausted; if `none` beats `xx`, DD is COSTING purity and that negative is reported, not buried; no arm chosen by any criterion not written here",
+ "cost": {
+  "pubs": 26,
+  "shots": 208000,
+  "projected_qpu_s": 73
+ },
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "none_q23",
+   "seq": "none",
+   "q": 23,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 0,
+   "scheduled_duration_dt": null
+  },
+  {
+   "block": "none_q25",
+   "seq": "none",
+   "q": 25,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 0,
+   "scheduled_duration_dt": null
+  },
+  {
+   "block": "none_q51",
+   "seq": "none",
+   "q": 51,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 0,
+   "scheduled_duration_dt": null
+  },
+  {
+   "block": "none_q3",
+   "seq": "none",
+   "q": 3,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 0,
+   "scheduled_duration_dt": null
+  },
+  {
+   "block": "none_q29",
+   "seq": "none",
+   "q": 29,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 0,
+   "scheduled_duration_dt": null
+  },
+  {
+   "block": "none_q31",
+   "seq": "none",
+   "q": 31,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 0,
+   "scheduled_duration_dt": null
+  },
+  {
+   "block": "xx_q23",
+   "seq": "xx",
+   "q": 23,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 1546,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xx_q25",
+   "seq": "xx",
+   "q": 25,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 1546,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xx_q51",
+   "seq": "xx",
+   "q": 51,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 1546,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xx_q3",
+   "seq": "xx",
+   "q": 3,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 1546,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xx_q29",
+   "seq": "xx",
+   "q": 29,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 1546,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xx_q31",
+   "seq": "xx",
+   "q": 31,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 1546,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy4_q23",
+   "seq": "xy4",
+   "q": 23,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 3092,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy4_q25",
+   "seq": "xy4",
+   "q": 25,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 3092,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy4_q51",
+   "seq": "xy4",
+   "q": 51,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 3092,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy4_q3",
+   "seq": "xy4",
+   "q": 3,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 3092,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy4_q29",
+   "seq": "xy4",
+   "q": 29,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 3092,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy4_q31",
+   "seq": "xy4",
+   "q": 31,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 3092,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy8_q23",
+   "seq": "xy8",
+   "q": 23,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 3728,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy8_q25",
+   "seq": "xy8",
+   "q": 25,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 3728,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy8_q51",
+   "seq": "xy8",
+   "q": 51,
+   "role": "drifter",
+   "shots": 8000,
+   "pulses": 3728,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy8_q3",
+   "seq": "xy8",
+   "q": 3,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 3728,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy8_q29",
+   "seq": "xy8",
+   "q": 29,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 3728,
+   "scheduled_duration_dt": 3593
+  },
+  {
+   "block": "xy8_q31",
+   "seq": "xy8",
+   "q": 31,
+   "role": "quiet",
+   "shots": 8000,
+   "pulses": 3728,
+   "scheduled_duration_dt": 3593
+  }
+ ],
+ "job_id": "d9prvvfv9q4s73bhe7bg",
+ "submit_iso": "2026-08-05T22:58:06.221568+00:00"
+}
