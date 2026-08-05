@@ -144,5 +144,25 @@
   ]
  },
  "trial_order_seed": 608832468,
+ "scheduled_duration_dt": {
+  "drifter": {
+   "k2": 3622,
+   "k3": 3622
+  },
+  "null": {
+   "k2": 3622,
+   "k3": 3622
+  }
+ },
+ "front_pad_dt": {
+  "drifter": {
+   "k2": 0,
+   "k3": 0
+  },
+  "null": {
+   "k2": 0,
+   "k3": 0
+  }
+ },
  "note": "structural-CLEAR stage; readout lists populate from the FLIGHT job's cal (Ember #4716 independence)"
 }

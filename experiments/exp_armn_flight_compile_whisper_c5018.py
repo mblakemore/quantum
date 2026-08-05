@@ -154,9 +154,19 @@ def pad_duration_dt(backend, twins):
     return t.duration
 
 
-def build_q_circuit(backend, twins, block, plan, delay_dt):
+def build_q_circuit(backend, twins, block, plan, delay_dt, front_pad=0):
     from qiskit import QuantumCircuit
     qc = QuantumCircuit(NPHYS)
+    if front_pad > 0:
+        # GROUND-STATE front pad: equalizes TOTAL scheduled duration across blocks (Ember
+        # #4749 ruling — duration is not mapping-class; it reaches the decoder through
+        # decoherence). Applied before any state exists, so it is physics-free: |0> idle.
+        for q in block:
+            qc.delay(front_pad, q, unit="dt")
+        for q in block:
+            for r in ("anc1", "s1", "anc2"):
+                qc.delay(front_pad, plan[q][r], unit="dt")
+        qc.barrier()
     for q in block:                       # copy 1 prep (native, fixed decomposition)
         a1 = plan[q]["anc1"]
         _h(qc, a1); _cx(qc, a1, q)
@@ -183,18 +193,27 @@ def build_q_circuit(backend, twins, block, plan, delay_dt):
     return qc
 
 
-def build_c1_circuit(backend, twins, block, delay_dt):
+def build_c1_circuit(backend, twins, block, delay_dt, front_pad=0):
     from qiskit import QuantumCircuit
     qc = QuantumCircuit(NPHYS)
+    if front_pad > 0:
+        for q in block:
+            qc.delay(front_pad, q, unit="dt")
+        qc.barrier()
     for q in block:
         qc.delay(delay_dt, q, unit="dt")
     qc.measure_all()
     return qc
 
 
-def build_lanc_circuit(backend, twins, block, plan, delay_dt):
+def build_lanc_circuit(backend, twins, block, plan, delay_dt, front_pad=0):
     from qiskit import QuantumCircuit
     qc = QuantumCircuit(NPHYS)
+    if front_pad > 0:
+        for q in block:
+            qc.delay(front_pad, q, unit="dt")
+            qc.delay(front_pad, plan[q]["anc1"], unit="dt")
+        qc.barrier()
     for q in block:
         a1 = plan[q]["anc1"]
         _h(qc, a1); _cx(qc, a1, q)
@@ -252,30 +271,76 @@ def do_build(submit=False):
         pubs.append((transpile(qc, backend, optimization_level=0), None, CAL_SHOTS))
         meta.append({"block": tag, "shots": CAL_SHOTS})
 
+    GRAN = backend.configuration().timing_constraints.get("granularity", 16) \
+        if hasattr(backend.configuration(), "timing_constraints") else 16
+
+    def sched_dur(tqc):
+        return tqc.duration
+
+    def equalize(kind, builders):
+        """Iteratively front-pad each block's circuit (ground-state idle) until every block's
+        TOTAL SCHEDULED DURATION is identical. Returns {tag: (tqc, front_pad, duration)}."""
+        pads = {t: 0 for t in builders}
+        for it in range(6):
+            built = {t: transpile_with_dd(backend, f(pads[t])) for t, f in builders.items()}
+            durs = {t: sched_dur(c) for t, c in built.items()}
+            if len(set(durs.values())) == 1:
+                return {t: (built[t], pads[t], durs[t]) for t in built}
+            target = max(durs.values())
+            target = ((target + GRAN - 1) // GRAN) * GRAN
+            for t in pads:
+                pads[t] += ((target - durs[t] + GRAN - 1) // GRAN) * GRAN
+        return {t: (built[t], pads[t], durs[t]) for t in built}
+
     structure = {}
     structure_sched = {}
+    durations = {}
     plans = {}
     for k, blocks in RUNGS.items():
         for role in ("alt", "null"):
-            blk = blocks[role]
-            plan = pick_partners(backend, blk, register)
-            plans[f"k{k}_{role}"] = plan
-            tq = transpile_with_dd(backend, build_q_circuit(backend, twins, blk, plan, delay_dt))
-            tc = transpile_with_dd(backend, build_c1_circuit(backend, twins, blk, delay_dt))
-            tl = transpile_with_dd(backend, build_lanc_circuit(backend, twins, blk, plan, delay_dt))
-            for tag, tqc, shots in ((f"Q_k{k}_{role}", tq, Q_SHOTS),
-                                    (f"C1_k{k}_{role}", tc, C1_SHOTS),
-                                    (f"LANC_k{k}_{role}", tl, 2000)):
+            plans[f"k{k}_{role}"] = pick_partners(backend, blocks[role], register)
+
+        # DURATION EQUALIZATION per rung (Ember #4749 ruling): ALT and NULL must match in
+        # TOTAL SCHEDULED DURATION, not only in op counts — duration reaches a canonicalized
+        # decoder through decoherence, and its sign is not one-sided (a drifter block idling
+        # LESS reads purer = FALSE ALT). Ground-state front padding equalizes it by
+        # construction; the verified totals are printed and put in the manifest so the
+        # sealer's ruling is a verification rather than a judgment.
+        for kind, shots in (("Q", Q_SHOTS), ("C1", C1_SHOTS), ("LANC", 2000)):
+            builders = {}
+            for role in ("alt", "null"):
+                blk, plan = blocks[role], plans[f"k{k}_{role}"]
+                if kind == "Q":
+                    builders[role] = (lambda fp, b=blk, pl=plan:
+                                      build_q_circuit(backend, twins, b, pl, delay_dt, fp))
+                elif kind == "C1":
+                    builders[role] = (lambda fp, b=blk:
+                                      build_c1_circuit(backend, twins, b, delay_dt, fp))
+                else:
+                    builders[role] = (lambda fp, b=blk, pl=plan:
+                                      build_lanc_circuit(backend, twins, b, pl, delay_dt, fp))
+            eq = equalize(kind, builders)
+            for role in ("alt", "null"):
+                tqc, pad, dur = eq[role]
                 pubs.append((tqc, None, shots))
-                meta.append({"block": tag, "k": k, "role": role, "shots": shots})
-            # req-3 compares the LOGICAL compiled shape (pre-DD): DD padding is per-qubit-
-            # duration-consequent (mapping-class, excluded by the checker's design); the
-            # scheduled deltas are DISCLOSED separately for the sealer's veto.
-            from qiskit import transpile as _tp
-            pre = _tp(build_q_circuit(backend, twins, blk, plan, delay_dt), backend,
+                meta.append({"block": f"{kind}_k{k}_{role}", "k": k, "role": role,
+                             "shots": shots, "front_pad_dt": pad,
+                             "scheduled_duration_dt": dur})
+                durations[f"{kind}_k{k}_{role}"] = {"duration_dt": dur, "front_pad_dt": pad}
+                if kind == "Q":
+                    structure_sched[f"k{k}_{role}"] = struct_fingerprint(tqc)
+            da, dn = eq["alt"][2], eq["null"][2]
+            print(f"[duration] k={k} {kind}: ALT {da} dt / NULL {dn} dt  "
+                  f"MATCH={da == dn}  (front pads {eq['alt'][1]}/{eq['null'][1]})")
+
+        # req-3 logical shape (pre-DD, native gates, opt0 — no transpiler discretion)
+        from qiskit import transpile as _tp
+        for role in ("alt", "null"):
+            blk, plan = blocks[role], plans[f"k{k}_{role}"]
+            pad = durations[f"Q_k{k}_{role}"]["front_pad_dt"]
+            pre = _tp(build_q_circuit(backend, twins, blk, plan, delay_dt, pad), backend,
                       optimization_level=0, seed_transpiler=SEED)
             structure[f"k{k}_{role}"] = struct_fingerprint(pre)
-            structure_sched[f"k{k}_{role}"] = struct_fingerprint(tq)
 
     # BRACKETING CALS (court ask #4726/#4728): end-of-job cal blocks — cal-vs-cal drift
     # across the co-batch becomes measurable; Elder's NULL discharge condition + Ember's
@@ -318,6 +383,7 @@ def do_build(submit=False):
            "trial_order_seed": TRIAL_ORDER_SEED, "trial_order": trial_order,
            "structure": {kk: v for kk, v in structure.items()},
            "structure_scheduled_deltas": structure_sched,
+           "scheduled_durations": durations,
            "bracketing_cals": "cal0/cal1 at job start AND cal0_end/cal1_end at job end (#4726)", "req3": {k: v["match"] for k, v in req3.items()},
            "go": "G4 Creator #4711; court soundness Elder #4720; blocks #4718",
            "pubs_meta": meta}
@@ -337,6 +403,10 @@ def do_build(submit=False):
                   "structure": {"drifter": {f"k{k}": structure[f"k{k}_alt"] for k in RUNGS},
                                 "null": {f"k{k}": structure[f"k{k}_null"] for k in RUNGS}},
                   "trial_order": trial_order, "trial_order_seed": TRIAL_ORDER_SEED,
+                  "scheduled_duration_dt": {"drifter": {f"k{k}": durations[f"Q_k{k}_alt"]["duration_dt"] for k in RUNGS},
+                                            "null": {f"k{k}": durations[f"Q_k{k}_null"]["duration_dt"] for k in RUNGS}},
+                  "front_pad_dt": {"drifter": {f"k{k}": durations[f"Q_k{k}_alt"]["front_pad_dt"] for k in RUNGS},
+                                   "null": {f"k{k}": durations[f"Q_k{k}_null"]["front_pad_dt"] for k in RUNGS}},
                   "note": "structural-CLEAR stage; readout lists populate from the FLIGHT job's cal (Ember #4716 independence)"}
         bpath = os.path.join(RES, "armn_bundle_structural_c5018.json")
         json.dump(bundle, open(bpath, "w"), indent=1)

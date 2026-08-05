@@ -294,6 +294,56 @@
    }
   }
  },
+ "scheduled_durations": {
+  "Q_k2_alt": {
+   "duration_dt": 3622,
+   "front_pad_dt": 0
+  },
+  "Q_k2_null": {
+   "duration_dt": 3622,
+   "front_pad_dt": 0
+  },
+  "C1_k2_alt": {
+   "duration_dt": 1903,
+   "front_pad_dt": 0
+  },
+  "C1_k2_null": {
+   "duration_dt": 1903,
+   "front_pad_dt": 0
+  },
+  "LANC_k2_alt": {
+   "duration_dt": 1961,
+   "front_pad_dt": 0
+  },
+  "LANC_k2_null": {
+   "duration_dt": 1961,
+   "front_pad_dt": 0
+  },
+  "Q_k3_alt": {
+   "duration_dt": 3622,
+   "front_pad_dt": 0
+  },
+  "Q_k3_null": {
+   "duration_dt": 3622,
+   "front_pad_dt": 0
+  },
+  "C1_k3_alt": {
+   "duration_dt": 1903,
+   "front_pad_dt": 0
+  },
+  "C1_k3_null": {
+   "duration_dt": 1903,
+   "front_pad_dt": 0
+  },
+  "LANC_k3_alt": {
+   "duration_dt": 1961,
+   "front_pad_dt": 0
+  },
+  "LANC_k3_null": {
+   "duration_dt": 1961,
+   "front_pad_dt": 0
+  }
+ },
  "bracketing_cals": "cal0/cal1 at job start AND cal0_end/cal1_end at job end (#4726)",
  "req3": {
   "k2": true,
@@ -313,73 +363,97 @@
    "block": "Q_k2_alt",
    "k": 2,
    "role": "alt",
-   "shots": 960
-  },
-  {
-   "block": "C1_k2_alt",
-   "k": 2,
-   "role": "alt",
-   "shots": 1920
-  },
-  {
-   "block": "LANC_k2_alt",
-   "k": 2,
-   "role": "alt",
-   "shots": 2000
+   "shots": 960,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 3622
   },
   {
    "block": "Q_k2_null",
    "k": 2,
    "role": "null",
-   "shots": 960
+   "shots": 960,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_k2_alt",
+   "k": 2,
+   "role": "alt",
+   "shots": 1920,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1903
   },
   {
    "block": "C1_k2_null",
    "k": 2,
    "role": "null",
-   "shots": 1920
+   "shots": 1920,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_k2_alt",
+   "k": 2,
+   "role": "alt",
+   "shots": 2000,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1961
   },
   {
    "block": "LANC_k2_null",
    "k": 2,
    "role": "null",
-   "shots": 2000
+   "shots": 2000,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1961
   },
   {
    "block": "Q_k3_alt",
    "k": 3,
    "role": "alt",
-   "shots": 960
-  },
-  {
-   "block": "C1_k3_alt",
-   "k": 3,
-   "role": "alt",
-   "shots": 1920
-  },
-  {
-   "block": "LANC_k3_alt",
-   "k": 3,
-   "role": "alt",
-   "shots": 2000
+   "shots": 960,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 3622
   },
   {
    "block": "Q_k3_null",
    "k": 3,
    "role": "null",
-   "shots": 960
+   "shots": 960,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_k3_alt",
+   "k": 3,
+   "role": "alt",
+   "shots": 1920,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1903
   },
   {
    "block": "C1_k3_null",
    "k": 3,
    "role": "null",
-   "shots": 1920
+   "shots": 1920,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_k3_alt",
+   "k": 3,
+   "role": "alt",
+   "shots": 2000,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1961
   },
   {
    "block": "LANC_k3_null",
    "k": 3,
    "role": "null",
-   "shots": 2000
+   "shots": 2000,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1961
   },
   {
    "block": "cal0_end",
