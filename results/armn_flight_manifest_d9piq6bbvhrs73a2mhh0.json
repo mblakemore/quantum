@@ -1,0 +1,469 @@
+{
+ "card": "armn_flight",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_fez",
+ "account": "IBMQ_ALT2",
+ "cal_epoch_at_build": "2026-08-05 11:45:13+00:00",
+ "census_job": "d9pelcrbvhrs73a2he50",
+ "rungs": {
+  "2": {
+   "alt": [
+    48,
+    25
+   ],
+   "null": [
+    142,
+    75
+   ]
+  },
+  "3": {
+   "alt": [
+    48,
+    25,
+    71
+   ],
+   "null": [
+    142,
+    75,
+    46
+   ]
+  }
+ },
+ "partner_plans": {
+  "k2_alt": {
+   "48": {
+    "anc1": 49,
+    "anc2": 38,
+    "s1": 47,
+    "relay_mid": "anc1"
+   },
+   "25": {
+    "anc1": 26,
+    "anc2": 27,
+    "s1": 24,
+    "relay_mid": "anc1"
+   }
+  },
+  "k2_null": {
+   "142": {
+    "anc1": 141,
+    "anc2": 140,
+    "s1": 143,
+    "relay_mid": "anc1"
+   },
+   "75": {
+    "anc1": 74,
+    "anc2": 73,
+    "s1": 59,
+    "relay_mid": "anc1"
+   }
+  },
+  "k3_alt": {
+   "48": {
+    "anc1": 49,
+    "anc2": 38,
+    "s1": 47,
+    "relay_mid": "anc1"
+   },
+   "25": {
+    "anc1": 26,
+    "anc2": 27,
+    "s1": 24,
+    "relay_mid": "anc1"
+   },
+   "71": {
+    "anc1": 70,
+    "anc2": 69,
+    "s1": 58,
+    "relay_mid": "anc1"
+   }
+  },
+  "k3_null": {
+   "142": {
+    "anc1": 141,
+    "anc2": 140,
+    "s1": 143,
+    "relay_mid": "anc1"
+   },
+   "75": {
+    "anc1": 74,
+    "anc2": 73,
+    "s1": 59,
+    "relay_mid": "anc1"
+   },
+   "46": {
+    "anc1": 45,
+    "anc2": 37,
+    "s1": 47,
+    "relay_mid": "anc1"
+   }
+  }
+ },
+ "frozen_rule": "ALT iff zero odd parities; m_Q=24; M=40; R_N=3; u-gate per G3 table",
+ "batching": "deterministic circuits -> iid shots; trial t consumes next m_Q/48 shots of block b_t in trial_order",
+ "channel": "BLOCK-LOCAL DELAY at the scheduled d160 twin-pad duration (census register topologically self-enclosed: zero free partners register-wide -> the prereg's own block-local padded-idle reading; time-accumulated drift per kingston clock census; gate-driven components missed land toward NULL = conservative)",
+ "trial_order_seed": 608832468,
+ "trial_order": {
+  "k2": [
+   5,
+   27,
+   18,
+   4,
+   11,
+   7,
+   23,
+   15,
+   16,
+   30,
+   6,
+   28,
+   33,
+   24,
+   35,
+   21,
+   1,
+   26,
+   32,
+   39,
+   36,
+   10,
+   31,
+   14,
+   9,
+   12,
+   13,
+   20,
+   25,
+   29,
+   17,
+   38,
+   3,
+   34,
+   8,
+   22,
+   0,
+   2,
+   19,
+   37
+  ],
+  "k3": [
+   14,
+   28,
+   20,
+   12,
+   1,
+   22,
+   7,
+   25,
+   15,
+   34,
+   27,
+   21,
+   19,
+   10,
+   13,
+   32,
+   29,
+   33,
+   18,
+   30,
+   2,
+   37,
+   6,
+   24,
+   9,
+   36,
+   31,
+   3,
+   16,
+   4,
+   8,
+   38,
+   39,
+   5,
+   11,
+   26,
+   35,
+   23,
+   0,
+   17
+  ]
+ },
+ "structure": {
+  "k2_alt": {
+   "depth": 51,
+   "d2q": 20,
+   "ops": {
+    "barrier": 6,
+    "cz": 20,
+    "delay": 4,
+    "measure": 156,
+    "rz": 96,
+    "sx": 48
+   }
+  },
+  "k2_null": {
+   "depth": 51,
+   "d2q": 20,
+   "ops": {
+    "barrier": 6,
+    "cz": 20,
+    "delay": 4,
+    "measure": 156,
+    "rz": 96,
+    "sx": 48
+   }
+  },
+  "k3_alt": {
+   "depth": 51,
+   "d2q": 30,
+   "ops": {
+    "barrier": 6,
+    "cz": 30,
+    "delay": 6,
+    "measure": 156,
+    "rz": 144,
+    "sx": 72
+   }
+  },
+  "k3_null": {
+   "depth": 51,
+   "d2q": 30,
+   "ops": {
+    "barrier": 6,
+    "cz": 30,
+    "delay": 6,
+    "measure": 156,
+    "rz": 144,
+    "sx": 72
+   }
+  }
+ },
+ "structure_scheduled_deltas": {
+  "k2_alt": {
+   "depth": 60,
+   "d2q": 20,
+   "ops": {
+    "barrier": 6,
+    "cz": 20,
+    "delay": 2474,
+    "measure": 156,
+    "rz": 88,
+    "sx": 44,
+    "x": 1540
+   }
+  },
+  "k2_null": {
+   "depth": 60,
+   "d2q": 20,
+   "ops": {
+    "barrier": 6,
+    "cz": 20,
+    "delay": 2474,
+    "measure": 156,
+    "rz": 88,
+    "sx": 44,
+    "x": 1540
+   }
+  },
+  "k3_alt": {
+   "depth": 60,
+   "d2q": 30,
+   "ops": {
+    "barrier": 6,
+    "cz": 30,
+    "delay": 2463,
+    "measure": 156,
+    "rz": 132,
+    "sx": 66,
+    "x": 1530
+   }
+  },
+  "k3_null": {
+   "depth": 60,
+   "d2q": 30,
+   "ops": {
+    "barrier": 6,
+    "cz": 30,
+    "delay": 2463,
+    "measure": 156,
+    "rz": 132,
+    "sx": 66,
+    "x": 1530
+   }
+  }
+ },
+ "scheduled_durations": {
+  "Q_k2_alt": {
+   "duration_dt": 3622,
+   "front_pad_dt": 0
+  },
+  "Q_k2_null": {
+   "duration_dt": 3622,
+   "front_pad_dt": 0
+  },
+  "C1_k2_alt": {
+   "duration_dt": 1903,
+   "front_pad_dt": 0
+  },
+  "C1_k2_null": {
+   "duration_dt": 1903,
+   "front_pad_dt": 0
+  },
+  "LANC_k2_alt": {
+   "duration_dt": 1961,
+   "front_pad_dt": 0
+  },
+  "LANC_k2_null": {
+   "duration_dt": 1961,
+   "front_pad_dt": 0
+  },
+  "Q_k3_alt": {
+   "duration_dt": 3622,
+   "front_pad_dt": 0
+  },
+  "Q_k3_null": {
+   "duration_dt": 3622,
+   "front_pad_dt": 0
+  },
+  "C1_k3_alt": {
+   "duration_dt": 1903,
+   "front_pad_dt": 0
+  },
+  "C1_k3_null": {
+   "duration_dt": 1903,
+   "front_pad_dt": 0
+  },
+  "LANC_k3_alt": {
+   "duration_dt": 1961,
+   "front_pad_dt": 0
+  },
+  "LANC_k3_null": {
+   "duration_dt": 1961,
+   "front_pad_dt": 0
+  }
+ },
+ "bracketing_cals": "cal0/cal1 at job start AND cal0_end/cal1_end at job end (#4726)",
+ "req3": {
+  "k2": true,
+  "k3": true
+ },
+ "go": "G4 Creator #4711; court soundness Elder #4720; blocks #4718",
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "Q_k2_alt",
+   "k": 2,
+   "role": "alt",
+   "shots": 960,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "Q_k2_null",
+   "k": 2,
+   "role": "null",
+   "shots": 960,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_k2_alt",
+   "k": 2,
+   "role": "alt",
+   "shots": 1920,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "C1_k2_null",
+   "k": 2,
+   "role": "null",
+   "shots": 1920,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_k2_alt",
+   "k": 2,
+   "role": "alt",
+   "shots": 2000,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "LANC_k2_null",
+   "k": 2,
+   "role": "null",
+   "shots": 2000,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_k3_alt",
+   "k": 3,
+   "role": "alt",
+   "shots": 960,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "Q_k3_null",
+   "k": 3,
+   "role": "null",
+   "shots": 960,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_k3_alt",
+   "k": 3,
+   "role": "alt",
+   "shots": 1920,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "C1_k3_null",
+   "k": 3,
+   "role": "null",
+   "shots": 1920,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_k3_alt",
+   "k": 3,
+   "role": "alt",
+   "shots": 2000,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "LANC_k3_null",
+   "k": 3,
+   "role": "null",
+   "shots": 2000,
+   "front_pad_dt": 0,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "cal0_end",
+   "shots": 8000
+  },
+  {
+   "block": "cal1_end",
+   "shots": 8000
+  }
+ ],
+ "job_id": "d9piq6bbvhrs73a2mhh0",
+ "submit_iso": "2026-08-05T12:31:21.261318+00:00"
+}
