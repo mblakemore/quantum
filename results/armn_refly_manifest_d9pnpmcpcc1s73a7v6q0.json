@@ -1,0 +1,1058 @@
+{
+ "card": "armn_refly",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_fez",
+ "account": "IBMQ_ALT2",
+ "cal_epoch_at_build": "2026-08-05 17:18:47+00:00",
+ "design": "single-job select-on-start / verify-on-end; gap eliminated by construction",
+ "frozen_pairing_rule": {
+  "metric": "(e0+e1)/2 per qubit from cal_start",
+  "select_bar": 0.002,
+  "rule": "for each drifter in ascending index order, pair with the unused null minimizing |profile diff| subject to diff <= select_bar; ties to lower index; no qualifying partner => NOT GRADED (never force-paired)",
+  "reproducible_from": "this rule + cal_start marginals in the delivered bundle"
+ },
+ "candidates": {
+  "drifter": [
+   17,
+   23,
+   25,
+   48,
+   51,
+   55,
+   57,
+   71
+  ],
+  "null": [
+   31,
+   49,
+   141,
+   73,
+   142,
+   75,
+   46,
+   2,
+   3,
+   29,
+   38
+  ]
+ },
+ "partner_plans": {
+  "drifter_q17": {
+   "17": {
+    "anc1": 7,
+    "anc2": 6,
+    "s1": 27,
+    "relay_mid": "anc1"
+   }
+  },
+  "drifter_q23": {
+   "23": {
+    "anc1": 16,
+    "anc2": 3,
+    "s1": 22,
+    "relay_mid": "anc1"
+   }
+  },
+  "drifter_q25": {
+   "25": {
+    "anc1": 26,
+    "anc2": 27,
+    "s1": 24,
+    "relay_mid": "anc1"
+   }
+  },
+  "drifter_q48": {
+   "48": {
+    "anc1": 47,
+    "anc2": 46,
+    "s1": 49,
+    "relay_mid": "anc1"
+   }
+  },
+  "drifter_q51": {
+   "51": {
+    "anc1": 50,
+    "anc2": 49,
+    "s1": 52,
+    "relay_mid": "anc1"
+   }
+  },
+  "drifter_q55": {
+   "55": {
+    "anc1": 59,
+    "anc2": 75,
+    "s1": 54,
+    "relay_mid": "anc1"
+   }
+  },
+  "drifter_q57": {
+   "57": {
+    "anc1": 47,
+    "anc2": 46,
+    "s1": 67,
+    "relay_mid": "anc1"
+   }
+  },
+  "drifter_q71": {
+   "71": {
+    "anc1": 70,
+    "anc2": 69,
+    "s1": 58,
+    "relay_mid": "anc1"
+   }
+  },
+  "null_q31": {
+   "31": {
+    "anc1": 18,
+    "anc2": 11,
+    "s1": 30,
+    "relay_mid": "anc1"
+   }
+  },
+  "null_q49": {
+   "49": {
+    "anc1": 38,
+    "anc2": 29,
+    "s1": 50,
+    "relay_mid": "anc1"
+   }
+  },
+  "null_q141": {
+   "141": {
+    "anc1": 142,
+    "anc2": 143,
+    "s1": 140,
+    "relay_mid": "anc1"
+   }
+  },
+  "null_q73": {
+   "73": {
+    "anc1": 74,
+    "anc2": 75,
+    "s1": 72,
+    "relay_mid": "anc1"
+   }
+  },
+  "null_q142": {
+   "142": {
+    "anc1": 141,
+    "anc2": 140,
+    "s1": 143,
+    "relay_mid": "anc1"
+   }
+  },
+  "null_q75": {
+   "75": {
+    "anc1": 74,
+    "anc2": 73,
+    "s1": 59,
+    "relay_mid": "anc1"
+   }
+  },
+  "null_q46": {
+   "46": {
+    "anc1": 45,
+    "anc2": 37,
+    "s1": 47,
+    "relay_mid": "anc1"
+   }
+  },
+  "null_q2": {
+   "2": {
+    "anc1": 1,
+    "anc2": 0,
+    "s1": 3,
+    "relay_mid": "anc1"
+   }
+  },
+  "null_q3": {
+   "3": {
+    "anc1": 2,
+    "anc2": 1,
+    "s1": 4,
+    "relay_mid": "anc1"
+   }
+  },
+  "null_q29": {
+   "29": {
+    "anc1": 28,
+    "anc2": 27,
+    "s1": 30,
+    "relay_mid": "anc1"
+   }
+  },
+  "null_q38": {
+   "38": {
+    "anc1": 29,
+    "anc2": 28,
+    "s1": 49,
+    "relay_mid": "anc1"
+   }
+  }
+ },
+ "durations": {
+  "q17": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q23": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q25": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q48": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q51": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q55": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q57": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q71": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q31": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q49": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q141": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q73": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q142": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q75": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q46": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q2": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q3": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q29": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q38": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  }
+ },
+ "structures": {
+  "q17": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q23": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q25": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q48": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q51": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q55": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q57": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q71": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q31": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q49": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q141": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q73": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q142": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q75": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q46": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q2": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q3": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q29": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q38": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  }
+ },
+ "census_job": "d9pelcrbvhrs73a2he50",
+ "census_profiles": {
+  "2": 0.0024400000000000003,
+  "3": 0.022065,
+  "7": 0.014369999999999999,
+  "16": 0.01219,
+  "17": 0.009245,
+  "23": 0.0055650000000000005,
+  "24": 0.00813,
+  "25": 0.00662,
+  "26": 0.006255,
+  "27": 0.012560000000000002,
+  "28": 0.00538,
+  "29": 0.01613,
+  "30": 0.009815,
+  "31": 0.02169,
+  "32": 0.03263,
+  "33": 0.01738,
+  "34": 0.010435,
+  "35": 0.01844,
+  "37": 0.008505,
+  "38": 0.009875,
+  "39": 0.01225,
+  "45": 0.02231,
+  "46": 0.00537,
+  "47": 0.021124999999999998,
+  "48": 0.0045000000000000005,
+  "49": 0.01481,
+  "50": 0.004685,
+  "51": 0.031439999999999996,
+  "52": 0.00744,
+  "53": 0.05431,
+  "54": 0.0035,
+  "55": 0.050934999999999994,
+  "57": 0.00981,
+  "58": 0.0033699999999999997,
+  "59": 0.006625,
+  "70": 0.00313,
+  "71": 0.005565,
+  "72": 0.314315,
+  "73": 0.012750000000000001,
+  "75": 0.006125,
+  "141": 0.010249999999999999,
+  "142": 0.005315
+ },
+ "rungs_assembled_at_decode": [
+  2,
+  3
+ ],
+ "M": 40,
+ "m_Q": 24,
+ "trial_order_seed": 608832468,
+ "preconditions": {
+  "1_partner_exclusion": {
+   "drifter_set_used": [
+    17,
+    23,
+    25,
+    33,
+    34,
+    35,
+    39,
+    48,
+    51,
+    53,
+    55,
+    57,
+    71
+   ],
+   "drifter_threshold_margin": 3.0,
+   "source_artifact": "armn_fez_census_decode_d9pelcrbvhrs73a2he50.json",
+   "partner_roles_checked": 57,
+   "violations": [],
+   "recompute": "for every partner role in partner_plans, assert value not in drifter_set_used"
+  },
+  "2_duration": {
+   "q17": 3622,
+   "q23": 3622,
+   "q25": 3622,
+   "q48": 3622,
+   "q51": 3622,
+   "q55": 3622,
+   "q57": 3622,
+   "q71": 3622,
+   "q31": 3622,
+   "q49": 3622,
+   "q141": 3622,
+   "q73": 3622,
+   "q142": 3622,
+   "q75": 3622,
+   "q46": 3622,
+   "q2": 3622,
+   "q3": 3622,
+   "q29": 3622,
+   "q38": 3622
+  },
+  "3_pairing_reproduction": "frozen rule above + cal_start in bundle",
+  "4_interval_check": "Ember, both ends, upstream of decode"
+ },
+ "pubs_meta": [
+  {
+   "block": "cal0_start",
+   "shots": 8000
+  },
+  {
+   "block": "cal1_start",
+   "shots": 8000
+  },
+  {
+   "block": "Q_drifter_q17",
+   "role": "drifter",
+   "q": 17,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_drifter_q17",
+   "role": "drifter",
+   "q": 17,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_drifter_q17",
+   "role": "drifter",
+   "q": 17,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_drifter_q23",
+   "role": "drifter",
+   "q": 23,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_drifter_q23",
+   "role": "drifter",
+   "q": 23,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_drifter_q23",
+   "role": "drifter",
+   "q": 23,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_drifter_q25",
+   "role": "drifter",
+   "q": 25,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_drifter_q25",
+   "role": "drifter",
+   "q": 25,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_drifter_q25",
+   "role": "drifter",
+   "q": 25,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_drifter_q48",
+   "role": "drifter",
+   "q": 48,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_drifter_q48",
+   "role": "drifter",
+   "q": 48,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_drifter_q48",
+   "role": "drifter",
+   "q": 48,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_drifter_q51",
+   "role": "drifter",
+   "q": 51,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_drifter_q51",
+   "role": "drifter",
+   "q": 51,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_drifter_q51",
+   "role": "drifter",
+   "q": 51,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_drifter_q55",
+   "role": "drifter",
+   "q": 55,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_drifter_q55",
+   "role": "drifter",
+   "q": 55,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_drifter_q55",
+   "role": "drifter",
+   "q": 55,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_drifter_q57",
+   "role": "drifter",
+   "q": 57,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_drifter_q57",
+   "role": "drifter",
+   "q": 57,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_drifter_q57",
+   "role": "drifter",
+   "q": 57,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_drifter_q71",
+   "role": "drifter",
+   "q": 71,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_drifter_q71",
+   "role": "drifter",
+   "q": 71,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_drifter_q71",
+   "role": "drifter",
+   "q": 71,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_null_q31",
+   "role": "null",
+   "q": 31,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_null_q31",
+   "role": "null",
+   "q": 31,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_null_q31",
+   "role": "null",
+   "q": 31,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_null_q49",
+   "role": "null",
+   "q": 49,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_null_q49",
+   "role": "null",
+   "q": 49,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_null_q49",
+   "role": "null",
+   "q": 49,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_null_q141",
+   "role": "null",
+   "q": 141,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_null_q141",
+   "role": "null",
+   "q": 141,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_null_q141",
+   "role": "null",
+   "q": 141,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_null_q73",
+   "role": "null",
+   "q": 73,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_null_q73",
+   "role": "null",
+   "q": 73,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_null_q73",
+   "role": "null",
+   "q": 73,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_null_q142",
+   "role": "null",
+   "q": 142,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_null_q142",
+   "role": "null",
+   "q": 142,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_null_q142",
+   "role": "null",
+   "q": 142,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_null_q75",
+   "role": "null",
+   "q": 75,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_null_q75",
+   "role": "null",
+   "q": 75,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_null_q75",
+   "role": "null",
+   "q": 75,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_null_q46",
+   "role": "null",
+   "q": 46,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_null_q46",
+   "role": "null",
+   "q": 46,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_null_q46",
+   "role": "null",
+   "q": 46,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_null_q2",
+   "role": "null",
+   "q": 2,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_null_q2",
+   "role": "null",
+   "q": 2,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_null_q2",
+   "role": "null",
+   "q": 2,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_null_q3",
+   "role": "null",
+   "q": 3,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_null_q3",
+   "role": "null",
+   "q": 3,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_null_q3",
+   "role": "null",
+   "q": 3,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_null_q29",
+   "role": "null",
+   "q": 29,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_null_q29",
+   "role": "null",
+   "q": 29,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_null_q29",
+   "role": "null",
+   "q": 29,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_null_q38",
+   "role": "null",
+   "q": 38,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_null_q38",
+   "role": "null",
+   "q": 38,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_null_q38",
+   "role": "null",
+   "q": 38,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "cal0_end",
+   "shots": 8000
+  },
+  {
+   "block": "cal1_end",
+   "shots": 8000
+  }
+ ],
+ "job_id": "d9pnpmcpcc1s73a7v6q0",
+ "submit_iso": "2026-08-05T18:11:38.251017+00:00"
+}
