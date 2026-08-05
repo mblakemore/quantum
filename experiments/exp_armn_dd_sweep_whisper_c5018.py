@@ -101,15 +101,34 @@ def main(submit=False):
     for seq in ("none", "xx", "xy4", "xy8"):
         pm = dd_pass(backend, seq)
         for q, pl, isd in cands:
+            sched_dur = None
             base = transpile(build_witness(backend, q, pl, delay_dt, 2, deep=False),
                              backend, optimization_level=1, seed_transpiler=SEED)
             t = pm.run(base)
+            # Y is non-ISA on this target. Y = Rz(pi/2)-X-Rz(-pi/2) EXACTLY, and Rz is a
+            # VIRTUAL (zero-duration) frame change on IBM hardware — so this substitution
+            # preserves the DD schedule exactly while making the circuit executable.
+            if any(i.operation.name == "y" for i in t.data):
+                from qiskit.circuit import QuantumCircuit as _QC
+                nt = _QC(*t.qregs, *t.cregs)
+                for inst in t.data:
+                    if inst.operation.name == "y":
+                        qb = inst.qubits[0]
+                        nt.rz(np.pi/2, qb); nt.x(qb); nt.rz(-np.pi/2, qb)
+                    else:
+                        nt.append(inst.operation, inst.qubits, inst.clbits)
+                # do NOT re-run the DD pass: the padding is already in place, and re-running
+                # would re-insert Y. Rz is zero-duration so the baked schedule is unchanged.
+                assert not any(i.operation.name == "y" for i in nt.data), "Y survived"
+                sched_dur = t.duration          # captured from the SCHEDULED circuit
+                t = nt
             npulse = sum(1 for i in t.data if i.operation.name in ("x", "y"))
+            dur = sched_dur if seq in ("xy4", "xy8") else t.duration
             xinfo.setdefault(seq, []).append(npulse)
             pubs.append((t, None, SHOTS))
             meta.append({"block": f"{seq}_q{q}", "seq": seq, "q": q,
                          "role": "drifter" if isd else "quiet", "shots": SHOTS,
-                         "pulses": npulse, "scheduled_duration_dt": t.duration})
+                         "pulses": npulse, "scheduled_duration_dt": dur})
     for s, v in xinfo.items():
         print(f"[pulses] {s:>4}: {sorted(set(v))} per circuit")
     p_ref = 0.16
