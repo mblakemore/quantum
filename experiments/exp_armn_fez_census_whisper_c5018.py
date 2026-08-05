@@ -112,6 +112,7 @@ def decode(jid):
     decays = {q: rows[q][d0][0] - rows[q][d1][0] for q in rows if d0 in rows[q] and d1 in rows[q]}
     med = float(np.median(list(decays.values())))
     out = {"card": "armn_fez_census_DECODE", "job": jid, "cal_epoch": man["cal_epoch"],
+           "drifter_threshold_margin": 3.0,
            "readout": {str(q): {"e0": round(e0[q], 5), "e1": round(e1[q], 5)} for q in reg},
            "zrows": {str(q): {str(D): rows[q][D] for D in rows[q]} for q in rows},
            "median_decay": round(med, 4), "drifter_ranking": []}
@@ -122,6 +123,8 @@ def decode(jid):
         out["drifter_ranking"].append({"q": q, "excess": round(ex, 4),
                                        "sigma": round(sig, 4),
                                        "margin": round(ex / sig, 1) if sig > 0 else None})
+    out["drifter_set"] = sorted(r["q"] for r in out["drifter_ranking"]
+                                if r.get("margin") and r["margin"] >= out["drifter_threshold_margin"])
     path = os.path.join(RES, f"armn_fez_census_decode_{jid}.json")
     json.dump(out, open(path, "w"), indent=1)
     top = [r for r in out["drifter_ranking"] if r["margin"] and r["margin"] >= 3]

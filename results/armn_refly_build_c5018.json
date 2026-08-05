@@ -14,14 +14,14 @@
  },
  "candidates": {
   "drifter": [
-   51,
-   48,
-   25,
-   71,
    17,
-   57,
+   23,
+   25,
+   48,
+   51,
    55,
-   23
+   57,
+   71
   ],
   "null": [
    31,
@@ -38,19 +38,19 @@
   ]
  },
  "partner_plans": {
-  "drifter_q51": {
-   "51": {
-    "anc1": 50,
-    "anc2": 49,
-    "s1": 52,
+  "drifter_q17": {
+   "17": {
+    "anc1": 7,
+    "anc2": 6,
+    "s1": 27,
     "relay_mid": "anc1"
    }
   },
-  "drifter_q48": {
-   "48": {
-    "anc1": 47,
-    "anc2": 46,
-    "s1": 49,
+  "drifter_q23": {
+   "23": {
+    "anc1": 16,
+    "anc2": 3,
+    "s1": 22,
     "relay_mid": "anc1"
    }
   },
@@ -62,27 +62,19 @@
     "relay_mid": "anc1"
    }
   },
-  "drifter_q71": {
-   "71": {
-    "anc1": 70,
-    "anc2": 69,
-    "s1": 58,
-    "relay_mid": "anc1"
-   }
-  },
-  "drifter_q17": {
-   "17": {
-    "anc1": 7,
-    "anc2": 6,
-    "s1": 27,
-    "relay_mid": "anc1"
-   }
-  },
-  "drifter_q57": {
-   "57": {
+  "drifter_q48": {
+   "48": {
     "anc1": 47,
     "anc2": 46,
-    "s1": 67,
+    "s1": 49,
+    "relay_mid": "anc1"
+   }
+  },
+  "drifter_q51": {
+   "51": {
+    "anc1": 50,
+    "anc2": 49,
+    "s1": 52,
     "relay_mid": "anc1"
    }
   },
@@ -94,11 +86,19 @@
     "relay_mid": "anc1"
    }
   },
-  "drifter_q23": {
-   "23": {
-    "anc1": 16,
-    "anc2": 3,
-    "s1": 22,
+  "drifter_q57": {
+   "57": {
+    "anc1": 47,
+    "anc2": 46,
+    "s1": 67,
+    "relay_mid": "anc1"
+   }
+  },
+  "drifter_q71": {
+   "71": {
+    "anc1": 70,
+    "anc2": 69,
+    "s1": 58,
     "relay_mid": "anc1"
    }
   },
@@ -192,12 +192,12 @@
   }
  },
  "durations": {
-  "q51": {
+  "q17": {
    "Q": 3622,
    "C1": 1903,
    "LANC": 1961
   },
-  "q48": {
+  "q23": {
    "Q": 3622,
    "C1": 1903,
    "LANC": 1961
@@ -207,17 +207,12 @@
    "C1": 1903,
    "LANC": 1961
   },
-  "q71": {
+  "q48": {
    "Q": 3622,
    "C1": 1903,
    "LANC": 1961
   },
-  "q17": {
-   "Q": 3622,
-   "C1": 1903,
-   "LANC": 1961
-  },
-  "q57": {
+  "q51": {
    "Q": 3622,
    "C1": 1903,
    "LANC": 1961
@@ -227,7 +222,12 @@
    "C1": 1903,
    "LANC": 1961
   },
-  "q23": {
+  "q57": {
+   "Q": 3622,
+   "C1": 1903,
+   "LANC": 1961
+  },
+  "q71": {
    "Q": 3622,
    "C1": 1903,
    "LANC": 1961
@@ -289,7 +289,7 @@
   }
  },
  "structures": {
-  "q51": {
+  "q17": {
    "depth": 60,
    "d2q": 10,
    "ops": {
@@ -302,7 +302,7 @@
     "x": 1550
    }
   },
-  "q48": {
+  "q23": {
    "depth": 60,
    "d2q": 10,
    "ops": {
@@ -328,7 +328,7 @@
     "x": 1550
    }
   },
-  "q71": {
+  "q48": {
    "depth": 60,
    "d2q": 10,
    "ops": {
@@ -341,20 +341,7 @@
     "x": 1550
    }
   },
-  "q17": {
-   "depth": 60,
-   "d2q": 10,
-   "ops": {
-    "barrier": 6,
-    "cz": 10,
-    "delay": 2485,
-    "measure": 156,
-    "rz": 44,
-    "sx": 22,
-    "x": 1550
-   }
-  },
-  "q57": {
+  "q51": {
    "depth": 60,
    "d2q": 10,
    "ops": {
@@ -380,7 +367,20 @@
     "x": 1550
    }
   },
-  "q23": {
+  "q57": {
+   "depth": 60,
+   "d2q": 10,
+   "ops": {
+    "barrier": 6,
+    "cz": 10,
+    "delay": 2485,
+    "measure": 156,
+    "rz": 44,
+    "sx": 22,
+    "x": 1550
+   }
+  },
+  "q71": {
    "depth": 60,
    "d2q": 10,
    "ops": {
@@ -590,16 +590,37 @@
  "m_Q": 24,
  "trial_order_seed": 608832468,
  "preconditions": {
-  "1_partner_exclusion": "asserted at build (no violations)",
+  "1_partner_exclusion": {
+   "drifter_set_used": [
+    17,
+    23,
+    25,
+    33,
+    34,
+    35,
+    39,
+    48,
+    51,
+    53,
+    55,
+    57,
+    71
+   ],
+   "drifter_threshold_margin": 3.0,
+   "source_artifact": "armn_fez_census_decode_d9pelcrbvhrs73a2he50.json",
+   "partner_roles_checked": 57,
+   "violations": [],
+   "recompute": "for every partner role in partner_plans, assert value not in drifter_set_used"
+  },
   "2_duration": {
-   "q51": 3622,
-   "q48": 3622,
-   "q25": 3622,
-   "q71": 3622,
    "q17": 3622,
-   "q57": 3622,
-   "q55": 3622,
    "q23": 3622,
+   "q25": 3622,
+   "q48": 3622,
+   "q51": 3622,
+   "q55": 3622,
+   "q57": 3622,
+   "q71": 3622,
    "q31": 3622,
    "q49": 3622,
    "q141": 3622,
@@ -625,44 +646,44 @@
    "shots": 8000
   },
   {
-   "block": "Q_drifter_q51",
+   "block": "Q_drifter_q17",
    "role": "drifter",
-   "q": 51,
+   "q": 17,
    "shots": 960,
    "scheduled_duration_dt": 3622
   },
   {
-   "block": "C1_drifter_q51",
+   "block": "C1_drifter_q17",
    "role": "drifter",
-   "q": 51,
+   "q": 17,
    "shots": 1920,
    "scheduled_duration_dt": 1903
   },
   {
-   "block": "LANC_drifter_q51",
+   "block": "LANC_drifter_q17",
    "role": "drifter",
-   "q": 51,
+   "q": 17,
    "shots": 2000,
    "scheduled_duration_dt": 1961
   },
   {
-   "block": "Q_drifter_q48",
+   "block": "Q_drifter_q23",
    "role": "drifter",
-   "q": 48,
+   "q": 23,
    "shots": 960,
    "scheduled_duration_dt": 3622
   },
   {
-   "block": "C1_drifter_q48",
+   "block": "C1_drifter_q23",
    "role": "drifter",
-   "q": 48,
+   "q": 23,
    "shots": 1920,
    "scheduled_duration_dt": 1903
   },
   {
-   "block": "LANC_drifter_q48",
+   "block": "LANC_drifter_q23",
    "role": "drifter",
-   "q": 48,
+   "q": 23,
    "shots": 2000,
    "scheduled_duration_dt": 1961
   },
@@ -688,65 +709,44 @@
    "scheduled_duration_dt": 1961
   },
   {
-   "block": "Q_drifter_q71",
+   "block": "Q_drifter_q48",
    "role": "drifter",
-   "q": 71,
+   "q": 48,
    "shots": 960,
    "scheduled_duration_dt": 3622
   },
   {
-   "block": "C1_drifter_q71",
+   "block": "C1_drifter_q48",
    "role": "drifter",
-   "q": 71,
+   "q": 48,
    "shots": 1920,
    "scheduled_duration_dt": 1903
   },
   {
-   "block": "LANC_drifter_q71",
+   "block": "LANC_drifter_q48",
    "role": "drifter",
-   "q": 71,
+   "q": 48,
    "shots": 2000,
    "scheduled_duration_dt": 1961
   },
   {
-   "block": "Q_drifter_q17",
+   "block": "Q_drifter_q51",
    "role": "drifter",
-   "q": 17,
+   "q": 51,
    "shots": 960,
    "scheduled_duration_dt": 3622
   },
   {
-   "block": "C1_drifter_q17",
+   "block": "C1_drifter_q51",
    "role": "drifter",
-   "q": 17,
+   "q": 51,
    "shots": 1920,
    "scheduled_duration_dt": 1903
   },
   {
-   "block": "LANC_drifter_q17",
+   "block": "LANC_drifter_q51",
    "role": "drifter",
-   "q": 17,
-   "shots": 2000,
-   "scheduled_duration_dt": 1961
-  },
-  {
-   "block": "Q_drifter_q57",
-   "role": "drifter",
-   "q": 57,
-   "shots": 960,
-   "scheduled_duration_dt": 3622
-  },
-  {
-   "block": "C1_drifter_q57",
-   "role": "drifter",
-   "q": 57,
-   "shots": 1920,
-   "scheduled_duration_dt": 1903
-  },
-  {
-   "block": "LANC_drifter_q57",
-   "role": "drifter",
-   "q": 57,
+   "q": 51,
    "shots": 2000,
    "scheduled_duration_dt": 1961
   },
@@ -772,23 +772,44 @@
    "scheduled_duration_dt": 1961
   },
   {
-   "block": "Q_drifter_q23",
+   "block": "Q_drifter_q57",
    "role": "drifter",
-   "q": 23,
+   "q": 57,
    "shots": 960,
    "scheduled_duration_dt": 3622
   },
   {
-   "block": "C1_drifter_q23",
+   "block": "C1_drifter_q57",
    "role": "drifter",
-   "q": 23,
+   "q": 57,
    "shots": 1920,
    "scheduled_duration_dt": 1903
   },
   {
-   "block": "LANC_drifter_q23",
+   "block": "LANC_drifter_q57",
    "role": "drifter",
-   "q": 23,
+   "q": 57,
+   "shots": 2000,
+   "scheduled_duration_dt": 1961
+  },
+  {
+   "block": "Q_drifter_q71",
+   "role": "drifter",
+   "q": 71,
+   "shots": 960,
+   "scheduled_duration_dt": 3622
+  },
+  {
+   "block": "C1_drifter_q71",
+   "role": "drifter",
+   "q": 71,
+   "shots": 1920,
+   "scheduled_duration_dt": 1903
+  },
+  {
+   "block": "LANC_drifter_q71",
+   "role": "drifter",
+   "q": 71,
    "shots": 2000,
    "scheduled_duration_dt": 1961
   },

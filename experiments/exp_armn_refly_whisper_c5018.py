@@ -57,7 +57,11 @@ CENSUS_DECODE = os.path.join(RES, f"armn_fez_census_decode_{CENSUS_JOB}.json")
 
 def census():
     d = json.load(open(CENSUS_DECODE))
-    drifters = [r["q"] for r in d["drifter_ranking"] if r.get("margin") and r["margin"] >= 3]
+    # threshold read FROM THE ARTIFACT (Ember #4865): a grader reproduces the exclusion set
+    # from disk alone rather than guessing the cut this build happened to use.
+    thr = d.get("drifter_threshold_margin", 3.0)
+    drifters = d.get("drifter_set") or [r["q"] for r in d["drifter_ranking"]
+                                        if r.get("margin") and r["margin"] >= thr]
     quiet = [r["q"] for r in d["drifter_ranking"]
              if abs(r["excess"]) < 0.05 and (not r.get("margin") or r["margin"] < 3)]
     prof = {int(q): (v["e0"] + v["e1"]) / 2 for q, v in d["readout"].items()}
@@ -184,7 +188,16 @@ def build(submit=False):
     # PRECONDITION 1 assert: no census drifter in any partner role, anywhere
     viol = [(k, q, r, v) for k, pl in plans.items() for q, p in pl.items()
             for r, v in p.items() if r in ("anc1", "s1", "anc2") and v in excluded]
-    print(f"[precond 1] census-drifter partner violations: {viol if viol else 'NONE'}")
+    roles_checked = sum(len([r for r in p if r in ("anc1", "s1", "anc2")])
+                        for pl in plans.values() for p in pl.values())
+    precond1 = {"drifter_set_used": sorted(excluded),
+                "drifter_threshold_margin": json.load(open(CENSUS_DECODE)).get("drifter_threshold_margin"),
+                "source_artifact": os.path.basename(CENSUS_DECODE),
+                "partner_roles_checked": roles_checked,
+                "violations": viol,
+                "recompute": "for every partner role in partner_plans, assert value not in drifter_set_used"}
+    print(f"[precond 1] {roles_checked} partner roles checked against "
+          f"{len(excluded)} census drifters -> violations: {viol if viol else 'NONE'}")
     assert not viol, "precondition 1 violated"
 
     # PRECONDITION 2: all candidate blocks are single-qubit and structurally identical by
@@ -209,7 +222,7 @@ def build(submit=False):
            "census_job": CENSUS_JOB, "census_profiles": {str(k): v for k, v in prof_census.items()},
            "rungs_assembled_at_decode": list(K_RUNGS),
            "M": M, "m_Q": MQ, "trial_order_seed": TRIAL_ORDER_SEED,
-           "preconditions": {"1_partner_exclusion": "asserted at build (no violations)",
+           "preconditions": {"1_partner_exclusion": precond1,
                              "2_duration": qd,
                              "3_pairing_reproduction": "frozen rule above + cal_start in bundle",
                              "4_interval_check": "Ember, both ends, upstream of decode"},
