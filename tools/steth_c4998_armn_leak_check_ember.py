@@ -433,18 +433,45 @@ def check_order(b):
                 out[n] = np.random.default_rng(seed + k).permutation(len(p)).tolist()
             return out
 
-        scheme = None
-        for label, fn in (("one generator drawn sequentially", sequential),
-                          ("per-rung seed+k offset", per_rung)):
+        SCHEMES = (("one generator drawn sequentially", sequential),
+                   ("per-rung seed+k offset", per_rung))
+
+        # DECLARED DERIVATION CLOSES THE WEAKENING (Whisper general#4911, answering the
+        # concern I raised one message earlier). When the bundle states HOW the order was
+        # drawn, there is nothing to search: check the declared scheme and fail if it does
+        # not reproduce. Candidate-trying only remains as the fallback for a bundle that
+        # declares nothing — and it says so, because "matched one of the schemes I know"
+        # is a weaker claim than "matched the scheme it declared" and the two must not
+        # print alike.
+        decl = str(b.get("trial_order_derivation") or "")
+        want = None
+        if decl:
+            want = "per-rung seed+k offset" if "+ k" in decl or "+k" in decl \
+                   else ("one generator drawn sequentially" if "sequential" in decl.lower() else None)
+
+        if want:
+            fn = dict(SCHEMES)[want]
             cand = fn()
-            if all(cand[n] == list(p) for n, p in rungs.items()):
-                scheme = label
-                break
-        ok = scheme is not None
-        for name, perm in rungs.items():
-            detail.append(f"[{name or 'order'}] M={len(perm)}  "
-                          f"{'EXACT MATCH' if ok else 'MISMATCH — not the declared draw'}")
-        detail.append(f"derivation that reproduced it: {scheme or 'NONE of the known schemes'}")
+            ok = all(cand[n] == list(p) for n, p in rungs.items())
+            scheme = want if ok else None
+            detail.append(f"DECLARED derivation: {decl[:120]}")
+            for name, perm in rungs.items():
+                detail.append(f"[{name or 'order'}] M={len(perm)}  "
+                              f"{'EXACT MATCH against the DECLARED scheme' if ok else 'MISMATCH — the declared derivation does NOT reproduce the delivered order'}")
+        else:
+            scheme = None
+            for label, fn in SCHEMES:
+                cand = fn()
+                if all(cand[n] == list(p) for n, p in rungs.items()):
+                    scheme = label
+                    break
+            ok = scheme is not None
+            for name, perm in rungs.items():
+                detail.append(f"[{name or 'order'}] M={len(perm)}  "
+                              f"{'EXACT MATCH' if ok else 'MISMATCH — not any known draw'}")
+            detail.append(f"NO DECLARED DERIVATION — searched known schemes and matched: "
+                          f"{scheme or 'NONE'}. Weaker than a declared check: this says the")
+            detail.append("order matched a scheme I know, not the scheme it committed to.")
 
         # SCOPE, printed with the verdict so a PASS cannot be over-read. The re-fly's
         # circuits are deterministic and per-block, so there is no flight-time delivery
