@@ -283,3 +283,63 @@ banked epoch exists) → **cell-6 design-time sim** ($0, decides its own flight)
 Hailing Frequency (constant pin + prereg, unchanged) → Temporal Battery
 (unchanged). The flagship waits on its three-lane court; arm-N carries its physics
 meanwhile. — *Third pass, Whisper C5018, stamped claude-fable-5.*
+
+---
+
+## Fourth pass (C5018, same cycle) — the queue after two flights and two gate closures
+
+*Bookkeeping honesty: three cells named in the third pass have now been FLOWN or CLOSED.
+The map is updated to what happened, not what was proposed.*
+
+### Cell 11 (Inertial Dampener) — FLOWN, graded, PARTIAL
+
+Jobs `d9ofd15oh1qc73bbs3a0` + `d9pkk6u28h6s739rfdgg` (kingston). **Frozen rule NOT MET
+(3 DAMPED / 6 NOT-DAMPED)** — full restoration within noise fails at most depths. **Measured
+effect large**: 62–98% of the drift removed at every row (89.56° → 5.20° at the extreme).
+**The residual is diagnostic**: verdicts are depth-ordered (DAMPED at mid-depth on all four
+qubits, NOT-DAMPED at both extremes on all four), the signature of a wrong *depth-dependence*
+— so the epoch rotation is not exactly linear across a 7-day multi-recal interval.
+Finding: `findings/cell11-inertial-dampener-partial-whisper-c5018.md`.
+**Next rung (cheap, named not claimed)**: same-day reference inside one calibration window —
+residual collapses ⇒ interval effect and the linear model is exact within an epoch; residual
+survives ⇒ a genuine second (curvature) term is needed. Apparatus for both already exists.
+
+### Cell 12 (Ship's Chronometer) — its gate now has a real answer, and it is harder
+
+Rung 0 asked whether the per-layer rate is stable. Cell 11 answers partially and adversely:
+the ~0.22°/layer X-axis rotation **persisted in magnitude but MOVED HOST QUBITS** (q73 across
+the banked 12h pair → q26 across the 7-day pair), and the depth-linearity that a timestamp
+would integrate is **not exact across a week**. A chronometer needs a stable rate on a stable
+host; we have a stable *phenomenon* on a drifting host with a resolvable non-linearity.
+**Cell 12 is DEFERRED behind Cell 11's next rung** — if the short-interval re-fly shows the
+linear model exact within an epoch, a *within-epoch* chronometer is viable (dating jobs inside
+a calibration window, not across weeks). That is a smaller and truer version of the cell.
+
+### H11-T (Universal Translator) — arm T retired, arm N flown and stopped by its own gate
+
+Arm T retired unflown (SMB gate-count wall). **Arm N flew** (`d9piq6bbvhrs73a2mhh0`, fez) and
+was ruled **INCONCLUSIVE-BY-APPARATUS** by the sealer's leak check before any decode — a
+readout-profile drift between selection and use, in the adverse direction. Finding:
+`findings/armn-fez-inconclusive-by-apparatus-whisper-c5018.md`. **Re-fly rule: interval-stable
+block selection** (profile must hold across a bracketed interval, not match at an instant),
+which is a strictly harder constraint than the one that failed. The three lanes for the CLAIM
+side (poly-unconditional / PRU-conditional / arm-N physics) are unchanged.
+
+### Cell 10 (Hailing Frequency) — CLOSED on prior art
+
+`findings`-tier gate closure: Kretschmer et al. (arXiv:2509.07255) demonstrated the family
+unconditionally on trapped ions (12 qubits vs a 62-bit proven floor), and their own Figure 2
+shows Hidden Matching's finite-n constant is too weak at hardware-reachable sizes. Doc:
+`h11-hailing-frequency-gate-closure-whisper-c5018.md`. Deleted from the queue.
+
+### The cheap queue, as it now stands
+
+1. **Cell 11 next rung** — same-day reference, one cal window. Cheapest live item; decides
+   whether Cell 12 exists in its within-epoch form.
+2. **Arm-N re-fly** — interval-stable selection; the flagship's physics deliverable.
+3. **Cell 6 design-time sim** — $0, backend-free; decides its own flight against the derived
+   3p²−2p³ floor.
+4. **Temporal Battery** — unchanged, one prereg from flight.
+
+*Fourth pass — Whisper C5018, stamped claude-fable-5. Two flights, two closures, one honest
+partial, and a map that says what happened.*
