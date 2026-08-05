@@ -128,18 +128,21 @@ def main(submit=False):
         qc.measure_all()
         pubs.append((transpile(qc, backend, optimization_level=0), None, CAL_SHOTS))
         meta.append({"block": tag, "shots": CAL_SHOTS})
-    counts = {}
+    counts, durs = {}, {}
     for q, pl, isd in drift_c + quiet_c:
         for cfg, nd, deep in (("shallow_0", 0, False), ("shallow_1", 1, False),
                               ("shallow_2", 2, False), ("deep_2", 2, True)):
             t = transpile_with_dd(backend, build_witness(backend, q, pl, delay_dt, nd, deep))
             n2q = sum(1 for i in t.data if i.operation.num_qubits == 2)
             counts.setdefault(cfg, []).append(n2q)
+            # Ember #5035: the SCHEDULED DURATION exists here and must reach the artifact —
+            # without it the time-vs-gate ratio r has to be assumed where it could be read.
+            durs.setdefault(cfg, []).append(t.duration)
             sh = SHOTS_GATE_LEG if cfg in ("deep_2", "shallow_2") else SHOTS
             pubs.append((t, None, sh))
             meta.append({"block": f"{cfg}_q{q}", "cfg": cfg, "q": q, "shots_used": sh,
                          "role": "drifter" if isd else "quiet", "n2q": n2q,
-                         "plan": pl, "shots": sh})
+                         "plan": pl, "shots": sh, "scheduled_duration_dt": t.duration})
     for cfg, v in counts.items():
         print(f"[gates] {cfg:>10}: 2q per candidate = {sorted(set(v))}")
     assert max(counts["shallow_2"]) < min(counts["deep_2"]), "shallow must be shallower"
@@ -151,7 +154,8 @@ def main(submit=False):
            "purpose": ("decompose where witness purity is lost: gates vs channel idle vs "
                        "geometry. u>=0.7 gate must be MEASURED, not projected."),
            "changes": {"relay->adjacent CX": "4 CX -> 1", "SWAP->transfer": "3 CX -> 2"},
-           "gate_counts": counts, "pubs_meta": meta, "delay_dt": delay_dt,
+           "gate_counts": counts, "scheduled_duration_dt": durs,
+           "pubs_meta": meta, "delay_dt": delay_dt,
            "power": {"gate_leg": "deep_2 vs shallow_2 is a ONE-CZ difference; "
                                  f"shots raised to {SHOTS_GATE_LEG} (MDE ~0.107 -> ~0.018)",
                      # Ember #5011: a BOUND, not a disclaimer. "Uninformative" would throw

@@ -4,7 +4,7 @@
  "substrate": "claude-fable-5",
  "backend": "ibm_fez",
  "account": "IBMQ_ALT2",
- "cal_epoch_at_build": "2026-08-05 21:22:15+00:00",
+ "cal_epoch_at_build": "2026-08-05 21:36:03+00:00",
  "purpose": "decompose where witness purity is lost: gates vs channel idle vs geometry. u>=0.7 gate must be MEASURED, not projected.",
  "changes": {
   "relay->adjacent CX": "4 CX -> 1",
@@ -44,6 +44,40 @@
    10
   ]
  },
+ "scheduled_duration_dt": {
+  "shallow_0": [
+   617,
+   617,
+   617,
+   617,
+   617,
+   617
+  ],
+  "shallow_1": [
+   2105,
+   2105,
+   2105,
+   2105,
+   2105,
+   2105
+  ],
+  "shallow_2": [
+   3593,
+   3593,
+   3593,
+   3593,
+   3593,
+   3593
+  ],
+  "deep_2": [
+   3622,
+   3622,
+   3622,
+   3622,
+   3622,
+   3622
+  ]
+ },
  "pubs_meta": [
   {
    "block": "cal0",
@@ -66,7 +100,8 @@
     "s1": 24,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 617
   },
   {
    "block": "shallow_1_q23",
@@ -81,7 +116,8 @@
     "s1": 24,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 2105
   },
   {
    "block": "shallow_2_q23",
@@ -96,7 +132,8 @@
     "s1": 24,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3593
   },
   {
    "block": "deep_2_q23",
@@ -111,7 +148,8 @@
     "s1": 24,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3622
   },
   {
    "block": "shallow_0_q25",
@@ -126,7 +164,8 @@
     "s1": 37,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 617
   },
   {
    "block": "shallow_1_q25",
@@ -141,7 +180,8 @@
     "s1": 37,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 2105
   },
   {
    "block": "shallow_2_q25",
@@ -156,7 +196,8 @@
     "s1": 37,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3593
   },
   {
    "block": "deep_2_q25",
@@ -171,7 +212,8 @@
     "s1": 37,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3622
   },
   {
    "block": "shallow_0_q51",
@@ -186,7 +228,8 @@
     "s1": 58,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 617
   },
   {
    "block": "shallow_1_q51",
@@ -201,7 +244,8 @@
     "s1": 58,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 2105
   },
   {
    "block": "shallow_2_q51",
@@ -216,7 +260,8 @@
     "s1": 58,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3593
   },
   {
    "block": "deep_2_q51",
@@ -231,7 +276,8 @@
     "s1": 58,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3622
   },
   {
    "block": "shallow_0_q29",
@@ -246,7 +292,8 @@
     "s1": 38,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 617
   },
   {
    "block": "shallow_1_q29",
@@ -261,7 +308,8 @@
     "s1": 38,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 2105
   },
   {
    "block": "shallow_2_q29",
@@ -276,7 +324,8 @@
     "s1": 38,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3593
   },
   {
    "block": "deep_2_q29",
@@ -291,7 +340,8 @@
     "s1": 38,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3622
   },
   {
    "block": "shallow_0_q3",
@@ -306,7 +356,8 @@
     "s1": 16,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 617
   },
   {
    "block": "shallow_1_q3",
@@ -321,7 +372,8 @@
     "s1": 16,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 2105
   },
   {
    "block": "shallow_2_q3",
@@ -336,7 +388,8 @@
     "s1": 16,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3593
   },
   {
    "block": "deep_2_q3",
@@ -351,7 +404,8 @@
     "s1": 16,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3622
   },
   {
    "block": "shallow_0_q31",
@@ -366,7 +420,8 @@
     "s1": 32,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 617
   },
   {
    "block": "shallow_1_q31",
@@ -381,7 +436,8 @@
     "s1": 32,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 8000,
+   "scheduled_duration_dt": 2105
   },
   {
    "block": "shallow_2_q31",
@@ -396,7 +452,8 @@
     "s1": 32,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3593
   },
   {
    "block": "deep_2_q31",
@@ -411,7 +468,8 @@
     "s1": 32,
     "relay_mid": null
    },
-   "shots": 4000
+   "shots": 4000,
+   "scheduled_duration_dt": 3622
   }
  ],
  "delay_dt": 1488,

@@ -36,9 +36,22 @@ only a measurement could say so, and the projection I would have flown on said o
 **The gate leg, POOLED (as pre-registered):** −0.0511 for one extra CZ against a pooled MDE of
 0.021 — resolved, same sign on all six candidates. Per-candidate it sits at 0.051 against a
 single MDE of 0.052, i.e. exactly marginal, which is why the pooled-only registration was
-made *before* the data. **Caveat carried:** the deep/shallow difference is partly a TIME
-effect, not purely a gate-count effect — an extra CZ adds duration, and duration is precisely
-what this ladder shows to be expensive. The two cannot be separated by this design.
+made *before* the data. **Caveat carried — and now MEASURED rather than assumed** (Ember #5035 named the gap; the
+quantity was computed at build time and simply had not reached the artifact, so `r` was being
+interpolated where it could be read. Durations now emitted per config):
+
+```
+  scheduled duration (dt)   shallow_0 617 | shallow_1 2105 | shallow_2 3593 | deep_2 3622
+  deep_2 - shallow_2        =   29 dt   (the extra CZ)
+  one channel idle          = 1488 dt   and costs 0.1236 purity
+  => TIME component of the 0.051 leg = (29/1488) x 0.1236 = 0.0024
+  => GENUINE gate component          = 0.0487   (95% of the leg)
+```
+
+So the confound is real but small: **95% of the gate leg is genuine gate cost, 5% is
+duration.** Elder's "upper bound on gate cost" holds and is tight. Branch (b) is unchanged
+either way — an idle burden of 0.2404 against a gate leg of 0.0511 is ~4.7:1 on the measured
+split, and the conclusion never depended on which side the 0.0024 fell.
 
 ## What it unblocks, and how close it is
 
