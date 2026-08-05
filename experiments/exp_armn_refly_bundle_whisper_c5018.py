@@ -70,6 +70,13 @@ def build_bundle(jid):
                                   np.random.default_rng(man["trial_order_seed"] + k).permutation(man["M"])]
                         for k in man["rungs_assembled_at_decode"]},
         "trial_order_seed": man["trial_order_seed"], "M": man["M"],
+        # DECLARE the derivation (Ember #4909): a consumer that infers the scheme can only say
+        # "it matched something"; one that reads it declared can say "it matched the DECLARED
+        # scheme". Same fix pattern as the drifter cut — the rule goes in the artifact.
+        "trial_order_derivation": ("per rung k: numpy.random.default_rng(trial_order_seed + k)"
+                                   ".permutation(M) — independent generator per rung, NOT a "
+                                   "sequential draw from one generator (which is what the first "
+                                   "arm-N flight used)."),
         "trial_order_scope": ("decode-consumed, not flight-encoded: deterministic circuits mean "
                               "trial assignment happens at decode. Pure function of the public "
                               "seed, which was fixed before labels existed and cannot encode them."),
