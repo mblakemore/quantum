@@ -296,5 +296,66 @@
   }
  ],
  "job_id": "d9prvvfv9q4s73bhe7bg",
- "submit_iso": "2026-08-05T22:58:06.221568+00:00"
+ "submit_iso": "2026-08-05T22:58:06.221568+00:00",
+ "partner_plans_posthoc": {
+  "status": "POST-HOC RECORD \u2014 NOT self-verified from this artifact",
+  "why": "This manifest emitted no partner plans (Ember, bus general#5070): the union of its pub keys is block/pulses/q/role/scheduled_duration_dt/seq/shots, and anc1/anc2/s1/plan/partner appear nowhere in the file. The decode therefore sourced partners from armn_shallow_build_c5018.json. This block records that assumption as a checkable artifact rather than upgrading the number to self-verified \u2014 per @elder general#5072, u=0.7218 is DESIGN-INPUT evidence, not CLEARANCE evidence, and clearance must come from the flying job's own in-job gate.",
+  "source_artifact": "results/armn_shallow_build_c5018.json",
+  "derived_by": "Ember C4254, post-hoc",
+  "plans": {
+   "3": {
+    "anc1": 2,
+    "anc2": 4,
+    "s1": 16
+   },
+   "23": {
+    "anc1": 16,
+    "anc2": 22,
+    "s1": 24
+   },
+   "25": {
+    "anc1": 24,
+    "anc2": 26,
+    "s1": 37
+   },
+   "29": {
+    "anc1": 28,
+    "anc2": 30,
+    "s1": 38
+   },
+   "31": {
+    "anc1": 18,
+    "anc2": 30,
+    "s1": 32
+   },
+   "51": {
+    "anc1": 50,
+    "anc2": 52,
+    "s1": 58
+   }
+  },
+  "independent_checks": {
+   "census_drifters_in_partner_roles": 0,
+   "qubit_serving_as_both_block_and_partner": 0,
+   "partners_shared_between_blocks": {
+    "found": {
+     "16": [
+      3,
+      23
+     ],
+     "24": [
+      23,
+      25
+     ],
+     "30": [
+      29,
+      31
+     ]
+    },
+    "assessment": "NOT a defect for this design: each candidate is its own pub (blocks named none_q23, none_q25, ...), so two blocks sharing a partner never coexist in a circuit. RECORDED because it WOULD be a physical conflict if candidates were ever co-batched into a single circuit \u2014 a constraint that is currently satisfied by accident of packaging rather than by an assert."
+   }
+  },
+  "corroborating_evidence": "sd 0.0061 across six candidates. Wrong partners produce SCATTER \u2014 the sparse sweep's mis-sourced decode read sd 0.2048 over a 0.14-0.63 spread. Six wrong qubit-triples cannot agree to +/-0.006. Strong evidence the partners were right; NOT verification, which is a different word.",
+  "also_missing_from_this_manifest": "scheduled_duration_dt is null on every pub \u2014 the ladder's own field, absent in the flight that followed it."
+ }
 }
