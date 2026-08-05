@@ -143,6 +143,29 @@ are equally underpowered rather than equally strong.
 **The frozen WIN criterion is ≥95% blind accuracy over M=40. Spending the entire remaining
 pool lands below it; even 3 sd (121 QPU-s) reaches only 93.3%.**
 
+### ⚠️ AND THE SIZING NUMBERS ABOVE ARE THEMSELVES WITHDRAWN (Ember #5110)
+
+**The measured gap has t = 0.30 — it is mostly noise.** Sizing a follow-up from it is the
+classic **pilot-sizing trap**: because m_Q scales as 1/gap², the error compounds
+*quadratically*, so the m_Q = 4324 / ~121 QPU-s figure quotes four significant digits of shot
+budget derived from a number that cannot be distinguished from zero.
+
+**What survives:** the *direction* — the data are inconsistent with a gap as large as theory
+assumed, which needs no precise measurement, only an exclusion. The 6.67 sd withdrawal stands.
+
+**What does NOT survive:** any m_Q derived from this pilot as a point estimate, including
+mine.
+
+**The rule for the fresh pre-registration (adopted):** size from the **lower confidence bound**
+on the gap, never the point estimate — that yields an m_Q that is an upper bound on cost and
+cannot undersize. **The bound currently includes zero.** So the honest statement is: *this
+design cannot be powered from what we know; the pilot bounds the effect below the theory value
+but does not measure it.*
+
+**Therefore the next thing to buy is a better estimate of the CONTRAST — not a flight of the
+experiment.** That is a different, much cheaper experiment than the one that has now failed to
+assemble twice.
+
 **So the blocker is now precisely located, and it is none of the things it appeared to be** —
 not the pool, not the pairing, not the verdict function, not the selection bar. **The arm-N
 contrast is intrinsically ~5× weaker than the design assumed.** The question that follows is
