@@ -551,6 +551,11 @@ def main():
         try:
             m = json.load(open(sys.argv[2]))
             b["_manifest_scheduled_durations"] = m.get("scheduled_durations")
+            # Fireability lives in the MANIFEST for the verdict flight, not the bundle —
+            # carry it across so the scope note reports it instead of claiming it is absent.
+            b["_manifest_fireability"] = (m.get("fireability_attestation_at_build")
+                                          or m.get("fireability_attestation")
+                                          or m.get("verdict_fireability"))
             print(f"manifest: {sys.argv[2]}")
         except (OSError, ValueError) as e:
             print(f"manifest unreadable ({e}) — per-arm sweep skipped, bundle checks stand")
@@ -574,7 +579,19 @@ def main():
         # tool does NOT duplicate it — a second owner is how a check becomes nobody's. But
         # it will not let a CLEAR be read as more than it is. If the bundle carries an
         # attestation, it prints; if not, it says what this CLEAR does not cover.
-        att = b.get("verdict_fireability") or b.get("fireability_attestation")
+        # THIRD SPELLING, caught while the verdict flight was still in the queue (C4254).
+        # The verdict manifest names it `fireability_attestation_at_build`, which neither of
+        # my first two keys matched — so this gate would have printed "no attestation is
+        # present in this bundle" about a bundle that carries one, in a scope note whose
+        # entire job is to say what the CLEAR does not cover. A false statement inside the
+        # honesty disclaimer is worse than no disclaimer.
+        #
+        # Fifth shape mismatch in my own consumer today, and the fifth found by reading the
+        # producer rather than reviewing this file. The lesson has not changed and neither
+        # has the fix: publish the keys I read, and read the keys they publish.
+        att = (b.get("verdict_fireability") or b.get("fireability_attestation")
+               or b.get("fireability_attestation_at_build")
+               or b.get("_manifest_fireability"))
         if att:
             print(f"\nVERDICT-FUNCTION FIREABILITY (Elder's G1, carried here): {str(att)[:200]}")
         else:
