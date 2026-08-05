@@ -61,6 +61,18 @@ def build_bundle(jid):
                       "null": {f"q{p['null']}": man["structures"][f"q{p['null']}"] for p in pairs}},
         "scheduled_duration_dt": {"drifter": {f"q{p['drifter']}": man["durations"][f"q{p['drifter']}"]["Q"] for p in pairs},
                                   "null": {f"q{p['null']}": man["durations"][f"q{p['null']}"]["Q"] for p in pairs}},
+        # trial_order delivered so check 4 VERIFIES rather than argues (Ember #4889). Honest
+        # scope note: in this design the circuits are deterministic and per-block, so the order
+        # is consumed at DECODE (which trial takes which shots), not at flight. Delivering it
+        # lets the checker confirm the order the decode will actually use, generated here as a
+        # pure function of the PUBLIC seed fixed before any label existed.
+        "trial_order": {f"k{k}": [int(x) for x in
+                                  np.random.default_rng(man["trial_order_seed"] + k).permutation(man["M"])]
+                        for k in man["rungs_assembled_at_decode"]},
+        "trial_order_seed": man["trial_order_seed"], "M": man["M"],
+        "trial_order_scope": ("decode-consumed, not flight-encoded: deterministic circuits mean "
+                              "trial assignment happens at decode. Pure function of the public "
+                              "seed, which was fixed before labels existed and cannot encode them."),
         "job_id": jid, "note": "cal pubs only; data pubs UNOPENED at bundle time",
     }
     out = os.path.join(RES, f"armn_refly_bundle_{jid}.json")
