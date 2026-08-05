@@ -59,10 +59,28 @@ delay budget rather than subtracting it, so density partly confounds with durati
 ladder-measured ~0.12 per 1488 dt, duration explains **≤0.11 of the 0.60 drop at n=128 and
 ~0.008 of the 0.554 collapse at n=8.** Real, small, conclusion untouched.
 
-**Unexplained and NOT smoothed:** the curve is **non-monotone** — n=8 (0.166) is worse than
-n=32 (0.296), and duration cannot explain it since n=32 has the longer idle. It carries the
-signature of coherent pulse-rotation error accumulating with an n-dependent phase. Flagged as
-unexplained rather than fitted with a story. What *is* established: the incumbent configuration,
+**The non-monotonicity is REAL, and duration is excluded by measurement** (Ember #5083,
+arithmetic independently re-derived here). Correcting each arm by its own excess duration at
+the ladder's measured idle rate:
+
+| n | raw u | extra dt | duration loss | **corrected u** | duration's share of the drop |
+|---|---|---|---|---|---|
+| 0 | 0.7202 | 0 | 0.0000 | **0.7202** | — |
+| 2 | 0.6954 | 24 | 0.0019 | 0.6973 | 7.8% |
+| 8 | 0.1659 | 96 | 0.0077 | **0.1736** | 1.4% |
+| 32 | 0.2963 | 352 | 0.0284 | **0.3247** | 6.7% |
+| 128 | 0.1245 | 1374 | 0.1108 | 0.2353 | 18.6% |
+
+**After correction n=32 still outperforms n=8 by 0.1510 — 9.8× the pooled MDE.** Duration is
+ruled out as the explanation: it accounts for at most **18.6%** of any arm's drop (at n=128),
+and only 1.4% at the n=8 minimum. *(Ember's summary said "under 10% at every density"; the
+n=128 arm is 18.6% — corrected here, and it does not change the conclusion.)*
+
+**So the density response is DUAL-VALLEYED IN PULSE SPACING with duration excluded** — the
+signature of a pulse comb resonant with the bath at some spacings and anti-resonant at others.
+That is a statement about **fez's noise spectrum**, accidentally measured with five points: a
+positive result sitting inside a negative one. The negative (use no DD) is what the campaign
+needs and is unaffected. What *is* established: the incumbent configuration,
 inherited from prior flights and never tested against its own absence, was **net harmful** on
 this witness.
 
