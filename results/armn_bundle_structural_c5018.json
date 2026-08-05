@@ -1,0 +1,148 @@
+{
+ "readout": {
+  "drifter": "PENDING_FLIGHT_CAL",
+  "null": "PENDING_FLIGHT_CAL"
+ },
+ "structure": {
+  "drifter": {
+   "k2": {
+    "depth": 51,
+    "d2q": 20,
+    "ops": {
+     "barrier": 6,
+     "cz": 20,
+     "delay": 4,
+     "measure": 156,
+     "rz": 96,
+     "sx": 48
+    }
+   },
+   "k3": {
+    "depth": 51,
+    "d2q": 30,
+    "ops": {
+     "barrier": 6,
+     "cz": 30,
+     "delay": 6,
+     "measure": 156,
+     "rz": 144,
+     "sx": 72
+    }
+   }
+  },
+  "null": {
+   "k2": {
+    "depth": 51,
+    "d2q": 20,
+    "ops": {
+     "barrier": 6,
+     "cz": 20,
+     "delay": 4,
+     "measure": 156,
+     "rz": 96,
+     "sx": 48
+    }
+   },
+   "k3": {
+    "depth": 51,
+    "d2q": 30,
+    "ops": {
+     "barrier": 6,
+     "cz": 30,
+     "delay": 6,
+     "measure": 156,
+     "rz": 144,
+     "sx": 72
+    }
+   }
+  }
+ },
+ "trial_order": {
+  "k2": [
+   5,
+   27,
+   18,
+   4,
+   11,
+   7,
+   23,
+   15,
+   16,
+   30,
+   6,
+   28,
+   33,
+   24,
+   35,
+   21,
+   1,
+   26,
+   32,
+   39,
+   36,
+   10,
+   31,
+   14,
+   9,
+   12,
+   13,
+   20,
+   25,
+   29,
+   17,
+   38,
+   3,
+   34,
+   8,
+   22,
+   0,
+   2,
+   19,
+   37
+  ],
+  "k3": [
+   14,
+   28,
+   20,
+   12,
+   1,
+   22,
+   7,
+   25,
+   15,
+   34,
+   27,
+   21,
+   19,
+   10,
+   13,
+   32,
+   29,
+   33,
+   18,
+   30,
+   2,
+   37,
+   6,
+   24,
+   9,
+   36,
+   31,
+   3,
+   16,
+   4,
+   8,
+   38,
+   39,
+   5,
+   11,
+   26,
+   35,
+   23,
+   0,
+   17
+  ]
+ },
+ "trial_order_seed": 608832468,
+ "note": "structural-CLEAR stage; readout lists populate from the FLIGHT job's cal (Ember #4716 independence)"
+}

@@ -1,0 +1,81 @@
+{
+ "card": "armn_fez_census",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_fez",
+ "account": "IBMQ_ALT2",
+ "cal_epoch": "2026-08-05 07:16:19+00:00",
+ "depths": [
+  160,
+  280
+ ],
+ "register": [
+  2,
+  3,
+  7,
+  16,
+  17,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  37,
+  38,
+  39,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  57,
+  58,
+  59,
+  70,
+  71,
+  72,
+  73,
+  75,
+  141,
+  142
+ ],
+ "seed": 2026072307,
+ "go": "Creator general#4711 'Go' (G4) -> #4712 chain",
+ "purpose": "arm-N step 1: discover fez's CURRENT drifters + req-2 readout profiles",
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "d160_Z",
+   "depth": 160,
+   "shots": 8000
+  },
+  {
+   "block": "d280_Z",
+   "depth": 280,
+   "shots": 8000
+  }
+ ],
+ "job_id": "d9pelcrbvhrs73a2he50",
+ "submit_iso": "2026-08-05T07:48:03.702674+00:00"
+}
