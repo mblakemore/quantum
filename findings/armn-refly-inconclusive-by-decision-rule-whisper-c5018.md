@@ -89,7 +89,48 @@ a check — the last place anyone looked, because it is the thing the checks exi
   zero violations; identical 3622 dt durations; pairing reproducible as a pure function of
   rule + delivered cal).
 
-## Path forward (Elder's conditions, binding)
+## THE DEEPER BLOCKER, found after the grade: the witness fails its own purity gate
+
+Asked whether to rebuild the verdict function and re-fly, the honest answer is **no — that
+would treat the wrong problem.** Measured from the landed data ($0), readout-corrected via
+full 4-qubit joint inversion against the in-job cal:
+
+```
+  mean Choi purity u = 0.553   (raw 0.539; readout correction buys only +0.014)
+  range 0.451 - 0.667          readout errors 1.1% - 3.5%
+  pass u >= 0.7 (frozen gate): 0 / 10 candidates
+  below u < 0.6 (frozen FOLD line): 5 / 10
+```
+
+**No tolerance can fix this.** The arm-N rule was derived from an assumed gap of coherent
+≈1.0 vs matched-stochastic ≈0.74; the measured gap is drifter ≈0.53 vs null ≈0.55 — they
+**overlap**, with nulls marginally higher. There is no dynamic range for any threshold to sit
+in, and the −2.11σ lean reported above is therefore **not a candidate** but an artifact of an
+instrument failing its own gate, until the witness clears 0.7.
+
+**Class: Ember's fourth constraint recurring on the arm it was not applied to.** At the
+compile court she wrote *"the gate that lifted the hold was measured on a circuit the flight
+will not run."* Arm T got a co-batched depth-matched witness pub in response; **arm N never
+got the equivalent in-job purity check.** v5b certified u = 0.762 on a shallow 2-qubit
+destructive-SWAP witness (~35 2q gates); arm N flies a per-candidate 4-path relay geometry
+(10 CX per block qubit) and the purity collapsed to 0.55.
+
+**A near-miss on the way, recorded because the day earned it.** The first correction returned
+mean u = 0.250 — an apparent catastrophic collapse — computed by correcting the two pair-flags
+*separately* and recombining them *assuming independence*. They are not independent (both
+derive from one Choi state) and the data contradicts it plainly. Caught only because **a 1–3%
+readout error cannot move purity by 0.22**: detection by absurdity again, this time committed
+by the author of the pattern about it. **Countermeasure adopted, mechanical rather than
+lucky: a correction whose effect exceeds the magnitude of the error being corrected is a bug
+until proven otherwise.**
+
+## Path forward (Elder's conditions, binding — now ordered apparatus-first)
+
+0. **APPARATUS BEFORE THRESHOLD.** The witness must clear u ≥ 0.7 *in-job* before any rule is
+   re-derived. Candidate cheapening of the per-candidate circuit (10 CX today): pick partners
+   with three free adjacent neighbours to drop the copy-2 relay (4 CX → 1), and replace the
+   copy-1 SWAP with a 2-CX state transfer (valid because the storage qubit is genuinely |0⟩).
+   That is 10 CX → 6, a ~40% reduction, and it must be **measured**, not projected.
 
 1. **Derive τ from independent calibration** — the C1 baseline arm or theory — **never** from
    tonight's odd-rates.
