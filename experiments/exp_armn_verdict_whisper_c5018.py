@@ -97,7 +97,11 @@ def main(submit=False):
     for q in sorted(int(x) for x in cen["readout"]):
         pl = three_neighbour_plan(backend, q, drifters | {q})
         if pl: cands.append((q, pl, q in drifters))
-    dr = [c for c in cands if c[2]][:3]; nu = [c for c in cands if not c[2]][:3]
+    # DESIGN FIX: the frozen pairing rule needs a POOL to choose from. Supplying only 3 quiet
+    # candidates starved it — every drifter came back NOT GRADED and no rung could be
+    # assembled. The re-fly that found 5 pairs offered 11. The rule was working; its input
+    # was too narrow. Widened to the full qualifying quiet set.
+    dr = [c for c in cands if c[2]][:3]; nu = [c for c in cands if not c[2]]
     print(f"[candidates] drifters {[c[0] for c in dr]} | quiet {[c[0] for c in nu]}")
     pubs, meta = [], []
     for tag, st in (("cal0_start", 0), ("cal1_start", 1)):

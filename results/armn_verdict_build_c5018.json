@@ -47,7 +47,9 @@
   "quiet": [
    3,
    29,
-   31
+   31,
+   45,
+   73
   ]
  },
  "preconditions": {
@@ -76,8 +78,8 @@
   "4_interval": "Ember both-ends check"
  },
  "cost": {
-  "pubs": 16,
-  "shots": 84800
+  "pubs": 20,
+  "shots": 102400
  },
  "pubs_meta": [
   {
@@ -250,6 +252,62 @@
     "anc1": 18,
     "anc2": 30,
     "s1": 32,
+    "relay_mid": null
+   },
+   "role": "quiet",
+   "shots": 4000,
+   "n2q": 9
+  },
+  {
+   "block": "WIT_q45",
+   "kind": "WIT",
+   "q": 45,
+   "plan": {
+    "anc1": 37,
+    "anc2": 44,
+    "s1": 46,
+    "relay_mid": null
+   },
+   "role": "quiet",
+   "shots": 4800,
+   "n2q": 9
+  },
+  {
+   "block": "REF_q45",
+   "kind": "REF",
+   "q": 45,
+   "plan": {
+    "anc1": 37,
+    "anc2": 44,
+    "s1": 46,
+    "relay_mid": null
+   },
+   "role": "quiet",
+   "shots": 4000,
+   "n2q": 9
+  },
+  {
+   "block": "WIT_q73",
+   "kind": "WIT",
+   "q": 73,
+   "plan": {
+    "anc1": 72,
+    "anc2": 74,
+    "s1": 79,
+    "relay_mid": null
+   },
+   "role": "quiet",
+   "shots": 4800,
+   "n2q": 9
+  },
+  {
+   "block": "REF_q73",
+   "kind": "REF",
+   "q": 73,
+   "plan": {
+    "anc1": 72,
+    "anc2": 74,
+    "s1": 79,
     "relay_mid": null
    },
    "role": "quiet",
