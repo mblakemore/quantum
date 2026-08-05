@@ -1,0 +1,422 @@
+{
+ "readout": {
+  "drifter": [
+   0.010312,
+   0.004125,
+   0.0055,
+   0.030812,
+   0.005875
+  ],
+  "null": [
+   0.00875,
+   0.0045,
+   0.005875,
+   0.03175,
+   0.006438
+  ],
+  "drifter_ids": [
+   17,
+   23,
+   25,
+   51,
+   71
+  ],
+  "null_ids": [
+   75,
+   142,
+   38,
+   3,
+   2
+  ]
+ },
+ "readout_bracket": {
+  "start": {
+   "drifter": [
+    0.010312,
+    0.004125,
+    0.0055,
+    0.030812,
+    0.005875
+   ],
+   "null": [
+    0.00875,
+    0.0045,
+    0.005875,
+    0.03175,
+    0.006438
+   ],
+   "drifter_ids": [
+    17,
+    23,
+    25,
+    51,
+    71
+   ],
+   "null_ids": [
+    75,
+    142,
+    38,
+    3,
+    2
+   ]
+  },
+  "end": {
+   "drifter": [
+    0.012875,
+    0.003625,
+    0.006062,
+    0.033563,
+    0.0045
+   ],
+   "null": [
+    0.008437,
+    0.003625,
+    0.007812,
+    0.031,
+    0.005063
+   ],
+   "drifter_ids": [
+    17,
+    23,
+    25,
+    51,
+    71
+   ],
+   "null_ids": [
+    75,
+    142,
+    38,
+    3,
+    2
+   ]
+  }
+ },
+ "hazard_removed_dt": {
+  "17": 0.001067,
+  "23": 0.00144,
+  "25": 0.00112,
+  "48": 6.2e-05,
+  "51": 0.000628,
+  "55": 0.008065,
+  "57": 0.015127,
+  "71": 0.00031,
+  "31": 0.00469,
+  "49": 0.004315,
+  "141": 0.002937,
+  "73": 0.003375,
+  "142": 0.000815,
+  "75": 0.002625,
+  "46": 0.00113,
+  "2": 0.003998,
+  "3": 0.009685,
+  "29": 0.003005,
+  "38": 0.004
+ },
+ "hazard_removed_note": "measured census->cal_start profile drift per candidate; this is the gap the single-job design eliminates by construction rather than detects. Gates nothing; quantifies the design argument.",
+ "pairing_reproduction": {
+  "rule": {
+   "metric": "(e0+e1)/2 per qubit from cal_start",
+   "select_bar": 0.002,
+   "rule": "for each drifter in ascending index order, pair with the unused null minimizing |profile diff| subject to diff <= select_bar; ties to lower index; no qualifying partner => NOT GRADED (never force-paired)",
+   "reproducible_from": "this rule + cal_start marginals in the delivered bundle"
+  },
+  "select_bar": 0.002,
+  "cal_start_profiles": {
+   "17": 0.010312,
+   "23": 0.004125,
+   "25": 0.0055,
+   "48": 0.004438,
+   "51": 0.030812,
+   "55": 0.059,
+   "57": 0.024937,
+   "71": 0.005875,
+   "31": 0.017,
+   "49": 0.019125,
+   "141": 0.007313,
+   "73": 0.016125,
+   "142": 0.0045,
+   "75": 0.00875,
+   "46": 0.0065,
+   "2": 0.006438,
+   "3": 0.03175,
+   "29": 0.013125,
+   "38": 0.005875
+  },
+  "flown_pairs": [
+   {
+    "drifter": 17,
+    "null": 75,
+    "diff": 0.001562
+   },
+   {
+    "drifter": 23,
+    "null": 142,
+    "diff": 0.000375
+   },
+   {
+    "drifter": 25,
+    "null": 38,
+    "diff": 0.000375
+   },
+   {
+    "drifter": 51,
+    "null": 3,
+    "diff": 0.000938
+   },
+   {
+    "drifter": 71,
+    "null": 2,
+    "diff": 0.000563
+   }
+  ],
+  "not_graded": [
+   48,
+   55,
+   57
+  ]
+ },
+ "structure": {
+  "drifter": {
+   "q17": {
+    "depth": 60,
+    "d2q": 10,
+    "ops": {
+     "barrier": 6,
+     "cz": 10,
+     "delay": 2485,
+     "measure": 156,
+     "rz": 44,
+     "sx": 22,
+     "x": 1550
+    }
+   },
+   "q23": {
+    "depth": 60,
+    "d2q": 10,
+    "ops": {
+     "barrier": 6,
+     "cz": 10,
+     "delay": 2485,
+     "measure": 156,
+     "rz": 44,
+     "sx": 22,
+     "x": 1550
+    }
+   },
+   "q25": {
+    "depth": 60,
+    "d2q": 10,
+    "ops": {
+     "barrier": 6,
+     "cz": 10,
+     "delay": 2485,
+     "measure": 156,
+     "rz": 44,
+     "sx": 22,
+     "x": 1550
+    }
+   },
+   "q51": {
+    "depth": 60,
+    "d2q": 10,
+    "ops": {
+     "barrier": 6,
+     "cz": 10,
+     "delay": 2485,
+     "measure": 156,
+     "rz": 44,
+     "sx": 22,
+     "x": 1550
+    }
+   },
+   "q71": {
+    "depth": 60,
+    "d2q": 10,
+    "ops": {
+     "barrier": 6,
+     "cz": 10,
+     "delay": 2485,
+     "measure": 156,
+     "rz": 44,
+     "sx": 22,
+     "x": 1550
+    }
+   }
+  },
+  "null": {
+   "q75": {
+    "depth": 60,
+    "d2q": 10,
+    "ops": {
+     "barrier": 6,
+     "cz": 10,
+     "delay": 2485,
+     "measure": 156,
+     "rz": 44,
+     "sx": 22,
+     "x": 1550
+    }
+   },
+   "q142": {
+    "depth": 60,
+    "d2q": 10,
+    "ops": {
+     "barrier": 6,
+     "cz": 10,
+     "delay": 2485,
+     "measure": 156,
+     "rz": 44,
+     "sx": 22,
+     "x": 1550
+    }
+   },
+   "q38": {
+    "depth": 60,
+    "d2q": 10,
+    "ops": {
+     "barrier": 6,
+     "cz": 10,
+     "delay": 2485,
+     "measure": 156,
+     "rz": 44,
+     "sx": 22,
+     "x": 1550
+    }
+   },
+   "q3": {
+    "depth": 60,
+    "d2q": 10,
+    "ops": {
+     "barrier": 6,
+     "cz": 10,
+     "delay": 2485,
+     "measure": 156,
+     "rz": 44,
+     "sx": 22,
+     "x": 1550
+    }
+   },
+   "q2": {
+    "depth": 60,
+    "d2q": 10,
+    "ops": {
+     "barrier": 6,
+     "cz": 10,
+     "delay": 2485,
+     "measure": 156,
+     "rz": 44,
+     "sx": 22,
+     "x": 1550
+    }
+   }
+  }
+ },
+ "scheduled_duration_dt": {
+  "drifter": {
+   "q17": 3622,
+   "q23": 3622,
+   "q25": 3622,
+   "q51": 3622,
+   "q71": 3622
+  },
+  "null": {
+   "q75": 3622,
+   "q142": 3622,
+   "q38": 3622,
+   "q3": 3622,
+   "q2": 3622
+  }
+ },
+ "trial_order": {
+  "k2": [
+   12,
+   4,
+   21,
+   35,
+   33,
+   37,
+   11,
+   2,
+   22,
+   20,
+   18,
+   14,
+   15,
+   36,
+   26,
+   30,
+   3,
+   28,
+   38,
+   39,
+   1,
+   8,
+   19,
+   10,
+   13,
+   5,
+   16,
+   24,
+   34,
+   31,
+   7,
+   0,
+   29,
+   32,
+   27,
+   25,
+   17,
+   23,
+   9,
+   6
+  ],
+  "k3": [
+   4,
+   30,
+   8,
+   10,
+   25,
+   7,
+   11,
+   0,
+   35,
+   6,
+   36,
+   16,
+   5,
+   26,
+   39,
+   14,
+   12,
+   33,
+   29,
+   28,
+   20,
+   27,
+   15,
+   21,
+   1,
+   3,
+   18,
+   31,
+   32,
+   22,
+   2,
+   38,
+   19,
+   17,
+   34,
+   9,
+   37,
+   24,
+   23,
+   13
+  ]
+ },
+ "trial_order_seed": 608832468,
+ "M": 40,
+ "trial_order_derivation": "per rung k: numpy.random.default_rng(trial_order_seed + k).permutation(M) \u2014 independent generator per rung, NOT a sequential draw from one generator (which is what the first arm-N flight used).",
+ "trial_order_scope": "decode-consumed, not flight-encoded: deterministic circuits mean trial assignment happens at decode. Pure function of the public seed, which was fixed before labels existed and cannot encode them.",
+ "job_id": "d9pnpmcpcc1s73a7v6q0",
+ "note": "cal pubs only; data pubs UNOPENED at bundle time"
+}
