@@ -26,7 +26,43 @@ formula whose only free input is a calibration pub**:
 | separation | 3.75 sd | **6.67 sd** |
 
 **Both outcomes producible; the decision function is no longer constant.** Elder's mandatory
-G1 condition is satisfied with margin.
+G1 condition is satisfied — **that part is structural and stands.**
+
+### ⚠️ THE POWER FIGURES ARE WITHDRAWN — the theory constant they rest on is contradicted
+
+τ's formula takes `NULL_ATTEN = 0.74` (C4998 G3: matched-stochastic Choi purity). **The
+re-fly measured that gap on real blocks and the hardware does not deliver it:**
+
+```
+  k=2  per-pair p_odd  ALT 0.3497  NULL 0.3627  gap +0.0130  -> implied NULL_ATTEN 0.914
+  k=3  per-pair p_odd  ALT 0.3360  NULL 0.3700  gap +0.0340  -> implied NULL_ATTEN 0.793
+```
+
+**Theory 0.74; hardware 0.79–0.91. The assumed ALT/NULL gap is 5–7× larger than reality.**
+Therefore the **6.67 sd separation attested above is overstated by roughly 5×** and is
+**withdrawn**. The verdict function still fires; its *power* was computed on a constant the
+chip contradicts.
+
+**Consequence for the k=1 route** (Elder's proposal to carry the claim on the single
+qualifying pair, which is arithmetically sound and would have worked on the theory value):
+
+| gap used | m_Q for 3 sd | shots | QPU-s |
+|---|---|---|---|
+| THEORY 0.0936 | 154 | 12k | ~4 — assemblable tonight |
+| **MEASURED 0.0162** | **4324** | **346k** | **~121** |
+
+The route dies on the constant, not on the pool.
+
+**Method note on the check itself:** measured odd-rates were used to *validate a theory input*,
+not to set τ — τ remains calibration-derived by the frozen formula. Checking whether a
+constant matches reality is a different act from choosing a threshold from an outcome, but the
+distinction is thin enough to belong in the record explicitly rather than be assumed.
+
+**And the physics behind it is the real finding:** a quiet block and a drifting block have
+nearly the *same* Choi purity, because both are dominated by the same idle decoherence and the
+coherent drift adds little mixing on top. **The arm-N contrast is intrinsically ~5× weaker
+than the design assumed** — that is an experiment-level fact, not an instrument problem, and
+it is the thing the fresh pre-registration has to be built around.
 
 ## ② The in-job purity gate PASSED, and not narrowly
 
