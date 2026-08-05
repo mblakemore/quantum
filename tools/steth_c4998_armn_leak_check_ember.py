@@ -106,11 +106,24 @@ def check_readout(b):
     # numbers existed (bus general#4730).
     rb = b.get("readout_bracket")
     if isinstance(rb, dict) and rb:
+        # TWO BRACKET LAYOUTS, and the second one would have FALSELY BLOCKED THE RE-FLY
+        # (Ember C4253, caught by reading the builder while the job was still in the queue):
+        #   per-rung  readout_bracket.{k2,k3}.{start,end}   — the first flight
+        #   flat      readout_bracket.{start,end}           — the re-fly, one graded set
+        # Given the flat shape, `for rung in sorted(rb)` iterates ['end','start'] and then
+        # asks rb['end'] for a 'start' leg, gets nothing, and returns NOT-EVALUABLE — which
+        # blocks exactly as a FAIL does. That is my own interface error wearing the costume
+        # of an apparatus defect, for the SECOND time in one campaign (the first was
+        # check 4's sealed-label assumption). Found the same way both times: by reading the
+        # producer instead of trusting my memory of the shape.
         rungs_def = b.get("rungs") or {}
+        flat = "start" in rb or "end" in rb
+        legs = [("", rb)] if flat else [(r, rb[r]) for r in sorted(rb)]
         detail, ok, evaluable = [], True, True
-        for rung in sorted(rb):
+        for rung, holder in legs:
             for end in ("start", "end"):
-                leg = (rb[rung] or {}).get(end) or {}
+                leg = (holder or {}).get(end) or {}
+                rung = rung or "bracket"
                 dr, nu = leg.get("drifter"), leg.get("null")
                 if not dr or not nu or len(dr) != len(nu):
                     detail.append(f"[{rung}/{end}] missing or unequal lists — NOT-EVALUABLE")
@@ -161,11 +174,15 @@ def check_readout(b):
         # produced five instances of checks whose apparatus could not supply what they
         # named, and I am not letting my own gate become the sixth by quietly reporting a
         # pass that had almost no chance of being anything else. So the tool prints it.
+        # Iterates the SAME `legs` the checks used, not `rb` directly — reading rb as
+        # {rung: {start,end}} silently yields nothing on the flat layout, and the power
+        # line then just does not appear. A self-reporting guard that quietly reports
+        # nothing is worse than no guard, because its absence looks like its output.
         worst_obs = max(
             (abs(float(x) - float(y))
-             for rung in rb for end in ("start", "end")
-             for x, y in zip((rb[rung].get(end) or {}).get("drifter") or [],
-                             (rb[rung].get(end) or {}).get("null") or [])),
+             for _, holder in legs for end in ("start", "end")
+             for x, y in zip((holder.get(end) or {}).get("drifter") or [],
+                             (holder.get(end) or {}).get("null") or [])),
             default=None)
         if worst_obs is not None:
             detail.append(f"POWER: worst observed pair-diff {worst_obs:.5f} against bar "
@@ -252,14 +269,39 @@ def check_structure(b):
     # Physical qubit identity is EXPECTED to differ — that is the whole point of two
     # blocks. Everything else must match exactly.
     ignore = {"qubits", "physical_qubits", "layout", "initial_layout"}
-    keys = (set(drift) | set(null)) - ignore
-    mismatched = [k for k in sorted(keys) if drift.get(k) != null.get(k)]
-    ok = not mismatched
-    detail = [f"compared {len(keys)} structural fields (physical mapping excluded by design)"]
-    for k in mismatched[:8]:
-        detail.append(f"  MISMATCH {k}: drifter={drift.get(k)!r} null={null.get(k)!r}")
-    if ok:
-        detail.append("every field identical — the decoder cannot separate on circuit shape")
+
+    # KEYED-BY-QUBIT LAYOUT (the re-fly): structure.drifter = {q48: {...}} and
+    # structure.null = {q142: {...}} — the two sides have DIFFERENT keys BY DESIGN, because
+    # the key IS the physical qubit. Comparing by key union would report every entry as a
+    # mismatch and fail a clean flight. The correct comparison walks the PAIRING.
+    ids_d = ((b.get("readout") or {}).get("drifter_ids")
+             or ((b.get("readout_bracket") or {}).get("start") or {}).get("drifter_ids"))
+    ids_n = ((b.get("readout") or {}).get("null_ids")
+             or ((b.get("readout_bracket") or {}).get("start") or {}).get("null_ids"))
+    keyed = bool(ids_d and ids_n) and all(f"q{q}" in drift for q in ids_d)
+    if keyed:
+        mismatched, detail_pairs = [], []
+        for dq, nq in zip(ids_d, ids_n):
+            a, c = drift.get(f"q{dq}") or {}, null.get(f"q{nq}") or {}
+            ks = (set(a) | set(c)) - ignore
+            bad = [k for k in sorted(ks) if a.get(k) != c.get(k)]
+            if bad:
+                mismatched.append(f"q{dq}~q{nq}:{','.join(bad[:3])}")
+            detail_pairs.append(f"  q{dq}~q{nq} {'identical' if not bad else 'MISMATCH ' + ','.join(bad[:3])}")
+        ok = not mismatched
+        detail = [f"compared {len(detail_pairs)} PAIRED blocks by the flown pairing "
+                  f"(keys are physical qubits and differ by design)"] + detail_pairs
+        if ok:
+            detail.append("every paired field identical — no separation on circuit shape")
+    else:
+        keys = (set(drift) | set(null)) - ignore
+        mismatched = [k for k in sorted(keys) if drift.get(k) != null.get(k)]
+        ok = not mismatched
+        detail = [f"compared {len(keys)} structural fields (physical mapping excluded by design)"]
+        for k in mismatched[:8]:
+            detail.append(f"  MISMATCH {k}: drifter={drift.get(k)!r} null={null.get(k)!r}")
+        if ok:
+            detail.append("every field identical — the decoder cannot separate on circuit shape")
 
     # SCHEDULED DURATION — added C4253 after I ruled that DD padding is NOT mapping-class
     # (bus general#4749). Op COUNTS cannot see per-qubit pulse durations, which is exactly
@@ -280,11 +322,24 @@ def check_structure(b):
         detail.append("ALT-ward idle-asymmetry channel is unmeasured, not closed.")
         return three_state(False, False, "3 structural identity", detail)
     dd, dn = dur.get("drifter") or {}, dur.get("null") or {}
-    rungs = sorted(set(dd) | set(dn))
-    bad = [r for r in rungs if dd.get(r) != dn.get(r)]
-    for r in rungs:
-        detail.append(f"  duration[{r}] drifter {dd.get(r)} dt vs null {dn.get(r)} dt"
-                      f"  {'MATCH' if r not in bad else 'MISMATCH — ALT-ward if drifter is lower'}")
+    if keyed:
+        # Same pairing walk as the structure comparison above: durations are keyed by
+        # physical qubit, so the two sides differ by design and a key-union comparison
+        # would report every entry as a mismatch.
+        bad = []
+        for dq, nq in zip(ids_d, ids_n):
+            a, c = dd.get(f"q{dq}"), dn.get(f"q{nq}")
+            hit = a is not None and a == c
+            if not hit:
+                bad.append(f"q{dq}~q{nq}")
+            detail.append(f"  duration q{dq} {a} dt vs q{nq} {c} dt"
+                          f"  {'MATCH' if hit else 'MISMATCH — ALT-ward if drifter is lower'}")
+    else:
+        rungs = sorted(set(dd) | set(dn))
+        bad = [r for r in rungs if dd.get(r) != dn.get(r)]
+        for r in rungs:
+            detail.append(f"  duration[{r}] drifter {dd.get(r)} dt vs null {dn.get(r)} dt"
+                          f"  {'MATCH' if r not in bad else 'MISMATCH — ALT-ward if drifter is lower'}")
     # Front pad is reported when present but is subsumed by the total; a mismatch in the
     # total is what reaches the decoder.
     fp = b.get("front_pad_dt")
@@ -367,6 +422,33 @@ def check_order(b):
         detail.append("reproducible from a seed fixed before the labels existed, so the order")
         detail.append("cannot encode them. Proof, not a statistic — the labels stay sealed.")
         return three_state(ok, True, "4 label-independent trial order", detail)
+
+    # SEED-ONLY BUNDLE (the re-fly build): trial_order_seed and M are declared but NO
+    # order array is delivered. This is a genuinely different epistemic situation and it
+    # must not be collapsed into either of the easy answers.
+    #   NOT-EVALUABLE would BLOCK a flight for carrying less data than before — wrong.
+    #   A silent PASS would claim a verification that did not happen — also wrong.
+    # The order IS a pure function of a public seed fixed before the labels existed, so
+    # the independence argument holds BY CONSTRUCTION. But construction is not
+    # verification: nothing here confirms the job actually consumed that order. Passed,
+    # explicitly labelled as unverified, with the missing field named.
+    M = b.get("M") or b.get("_manifest_M")
+    if order is None and seed is not None and isinstance(M, int) and M > 0:
+        try:
+            import numpy as np
+            derived = np.random.default_rng(seed).permutation(M).tolist()
+        except ImportError:
+            derived = None
+        return three_state(True, True, "4 label-independent trial order",
+                           [f"seed {seed}, M={M} declared; NO order array delivered",
+                            f"derived order (first 8): {derived[:8] if derived else 'numpy absent'}",
+                            "PASS BY CONSTRUCTION, NOT BY VERIFICATION: the order is a pure",
+                            "function of a public seed fixed before the labels existed, so it",
+                            "cannot encode them. But nothing in this bundle confirms the JOB",
+                            "consumed that order — the previous bundle delivered the flown",
+                            "order and this check compared it. That comparison is gone.",
+                            "ASK: carry the flown trial_order so this can be verified rather",
+                            "than argued (same reason drifter_ids were added at general#4767)."])
 
     if not order or not isinstance(order, list):
         return three_state(False, False, "4 label-independent trial order",
