@@ -52,16 +52,22 @@ def idle_with_dd(qc, q, D, n):
 
 
 def build(backend, q, pl, D, n):
+    """SAME circuit as the DD sweep's arm, with n as the ONLY variable.
+
+    Structure copied from build_witness (shallow script) rather than re-written, so the n=0
+    arm is a genuine REPRODUCTION of the DD sweep's `none` arm — which is the built-in
+    consistency check this sweep lacked the first time.
+    """
     from qiskit import QuantumCircuit
     qc = QuantumCircuit(NPHYS)
     a1, a2, s1 = pl["anc1"], pl["anc2"], pl["s1"]
-    _h(qc, a1); _cx(qc, a1, q)                 # copy-1 Bell prep
+    _h(qc, a1); _cx(qc, a1, q)
     qc.barrier(); idle_with_dd(qc, q, D, n); qc.barrier()
-    _cx(qc, q, s1); _cx(qc, s1, q)             # 2-CX transfer to storage
+    _cx(qc, q, s1); _cx(qc, s1, q)
     qc.barrier()
-    _h(qc, a2); _cx(qc, a2, q)                 # copy-2 Bell prep
+    _h(qc, a2); _cx(qc, a2, q)
     qc.barrier(); idle_with_dd(qc, q, D, n); qc.barrier()
-    _cx(qc, a1, a2); _h(qc, a1)                # destructive Bell pairing
+    _cx(qc, a1, a2); _h(qc, a1)
     _cx(qc, s1, q); _h(qc, s1)
     qc.measure_all()
     return qc
@@ -95,13 +101,19 @@ def main(submit=False):
     pulses = {}
     for n in DENSITIES:
         for q, pl, isd in cands:
-            t = transpile(build(backend, q, pl, D, n), backend, optimization_level=0,
-                          seed_transpiler=SEED)
+            from qiskit.transpiler import PassManager
+            from qiskit.transpiler.passes import ALAPScheduleAnalysis
+            base = transpile(build(backend, q, pl, D, n), backend,
+                             optimization_level=1, seed_transpiler=SEED)   # == DD-sweep path
+            t = PassManager([ALAPScheduleAnalysis(backend.target.durations())]).run(base)
             npx = sum(1 for i in t.data if i.operation.name == "x")
             pulses.setdefault(n, []).append(npx)
             pubs.append((t, None, SHOTS))
             meta.append({"block": f"n{n}_q{q}", "n": n, "q": q, "pulses": npx,
-                         "role": "drifter" if isd else "quiet", "shots": SHOTS})
+                         "role": "drifter" if isd else "quiet", "shots": SHOTS,
+                         # INSTANCE-FIVE FIX: the decoder must read partner qubits from THIS
+                         # artifact, never from another build's file.
+                         "plan": pl, "scheduled_duration_dt": t.duration})
     print(f"[pulses] " + " | ".join(f"n={n}: {sorted(set(v))}" for n, v in pulses.items()))
     p_ref = 0.14
     se = 2*np.sqrt(p_ref*(1-p_ref)/SHOTS)
@@ -117,6 +129,13 @@ def main(submit=False):
            "densities": DENSITIES, "pulses_per_circuit": pulses, "spacing": "CPMG D/2n, D/n, D/2n",
            "candidates": [c[0] for c in cands],
            "power": {"se_u": round(se,5), "mde_single": round(mde1,4), "mde_pooled": round(mdep,4)},
+           "reproduction_check": ("PRE-REGISTERED: the n=0 arm is the SAME construction and the "
+                                 "SAME transpile path as the DD sweep's `none` arm, which measured "
+                                 "u=0.7218. If n=0 here does NOT reproduce within the measured "
+                                 "cross-job drift (0.048), this sweep is UNINTERPRETABLE again and "
+                                 "the curve is not reported — the check fires before any density "
+                                 "conclusion is drawn."),
+           "prior_none_u": 0.7218, "cross_job_drift": 0.048,
            "decision_rule": ("baseline n=0; an arm WINS iff pooled u exceeds n=0 by more than the "
                              "pooled MDE. The density CURVE is the deliverable regardless: monotone "
                              "decreasing from 0 => any DD hurts here; interior peak => that n becomes "
