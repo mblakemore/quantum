@@ -1,0 +1,238 @@
+{
+ "card": "armn_sparse_dd_density",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_fez",
+ "account": "IBMQ_ALT2",
+ "cal_epoch_at_build": "2026-08-05 21:36:03+00:00",
+ "idle_dt": 1488,
+ "basis": "DD sweep d9prvvfv9q4s73bhe7bg: bare 0.7218 beat X-X 0.6325 at ~1546 pulses",
+ "motivation": "gate already cleared; this is MARGIN. Job-to-job drift on an identical config measured 0.048 vs a 0.022 margin above the gate.",
+ "densities": [
+  0,
+  2,
+  8,
+  32,
+  128
+ ],
+ "pulses_per_circuit": {
+  "0": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "2": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "8": [
+   16,
+   16,
+   16,
+   16
+  ],
+  "32": [
+   64,
+   64,
+   64,
+   64
+  ],
+  "128": [
+   256,
+   256,
+   256,
+   256
+  ]
+ },
+ "spacing": "CPMG D/2n, D/n, D/2n",
+ "candidates": [
+  23,
+  25,
+  3,
+  29
+ ],
+ "power": {
+  "se_u": 0.00776,
+  "mde_single": 0.0307,
+  "mde_pooled": 0.0154
+ },
+ "decision_rule": "baseline n=0; an arm WINS iff pooled u exceeds n=0 by more than the pooled MDE. The density CURVE is the deliverable regardless: monotone decreasing from 0 => any DD hurts here; interior peak => that n becomes the campaign default. No arm chosen by unwritten criteria.",
+ "cost": {
+  "pubs": 22,
+  "shots": 176000,
+  "projected_qpu_s": 62
+ },
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "n0_q23",
+   "n": 0,
+   "q": 23,
+   "pulses": 0,
+   "role": "drifter",
+   "shots": 8000
+  },
+  {
+   "block": "n0_q25",
+   "n": 0,
+   "q": 25,
+   "pulses": 0,
+   "role": "drifter",
+   "shots": 8000
+  },
+  {
+   "block": "n0_q3",
+   "n": 0,
+   "q": 3,
+   "pulses": 0,
+   "role": "quiet",
+   "shots": 8000
+  },
+  {
+   "block": "n0_q29",
+   "n": 0,
+   "q": 29,
+   "pulses": 0,
+   "role": "quiet",
+   "shots": 8000
+  },
+  {
+   "block": "n2_q23",
+   "n": 2,
+   "q": 23,
+   "pulses": 4,
+   "role": "drifter",
+   "shots": 8000
+  },
+  {
+   "block": "n2_q25",
+   "n": 2,
+   "q": 25,
+   "pulses": 4,
+   "role": "drifter",
+   "shots": 8000
+  },
+  {
+   "block": "n2_q3",
+   "n": 2,
+   "q": 3,
+   "pulses": 4,
+   "role": "quiet",
+   "shots": 8000
+  },
+  {
+   "block": "n2_q29",
+   "n": 2,
+   "q": 29,
+   "pulses": 4,
+   "role": "quiet",
+   "shots": 8000
+  },
+  {
+   "block": "n8_q23",
+   "n": 8,
+   "q": 23,
+   "pulses": 16,
+   "role": "drifter",
+   "shots": 8000
+  },
+  {
+   "block": "n8_q25",
+   "n": 8,
+   "q": 25,
+   "pulses": 16,
+   "role": "drifter",
+   "shots": 8000
+  },
+  {
+   "block": "n8_q3",
+   "n": 8,
+   "q": 3,
+   "pulses": 16,
+   "role": "quiet",
+   "shots": 8000
+  },
+  {
+   "block": "n8_q29",
+   "n": 8,
+   "q": 29,
+   "pulses": 16,
+   "role": "quiet",
+   "shots": 8000
+  },
+  {
+   "block": "n32_q23",
+   "n": 32,
+   "q": 23,
+   "pulses": 64,
+   "role": "drifter",
+   "shots": 8000
+  },
+  {
+   "block": "n32_q25",
+   "n": 32,
+   "q": 25,
+   "pulses": 64,
+   "role": "drifter",
+   "shots": 8000
+  },
+  {
+   "block": "n32_q3",
+   "n": 32,
+   "q": 3,
+   "pulses": 64,
+   "role": "quiet",
+   "shots": 8000
+  },
+  {
+   "block": "n32_q29",
+   "n": 32,
+   "q": 29,
+   "pulses": 64,
+   "role": "quiet",
+   "shots": 8000
+  },
+  {
+   "block": "n128_q23",
+   "n": 128,
+   "q": 23,
+   "pulses": 256,
+   "role": "drifter",
+   "shots": 8000
+  },
+  {
+   "block": "n128_q25",
+   "n": 128,
+   "q": 25,
+   "pulses": 256,
+   "role": "drifter",
+   "shots": 8000
+  },
+  {
+   "block": "n128_q3",
+   "n": 128,
+   "q": 3,
+   "pulses": 256,
+   "role": "quiet",
+   "shots": 8000
+  },
+  {
+   "block": "n128_q29",
+   "n": 128,
+   "q": 29,
+   "pulses": 256,
+   "role": "quiet",
+   "shots": 8000
+  }
+ ]
+}
