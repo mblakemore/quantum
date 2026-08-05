@@ -1,0 +1,270 @@
+{
+ "card": "armn_verdict_flight",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_fez",
+ "account": "IBMQ_ALT2",
+ "cal_epoch_at_build": "2026-08-05 23:10:13+00:00",
+ "delay_dt": 1488,
+ "dd": "OFF \u2014 bare delay (measured best: no density beats it)",
+ "NULL_ATTEN_theory": 0.74,
+ "M": 40,
+ "m_Q": {
+  "2": 120,
+  "3": 90
+ },
+ "u_gate": 0.7,
+ "tau_source": "FROZEN FORMULA in tau_from_calibration(); only free input is u_app from the co-batched channel-free REF pub. NEVER from witness data.",
+ "fireability_attestation_at_build": {
+  "k2": {
+   "tau": 44,
+   "N": 240,
+   "p_ALT": 0.1399,
+   "p_NULL": 0.2335,
+   "P_fire_given_ALT": 0.979,
+   "P_fire_given_NULL": 0.0391,
+   "separation_sd": 3.749,
+   "dynamic_range_counts": 22.5
+  },
+  "k3": {
+   "tau": 49,
+   "N": 270,
+   "p_ALT": 0.1399,
+   "p_NULL": 0.2335,
+   "P_fire_given_ALT": 0.9802,
+   "P_fire_given_NULL": 0.0256,
+   "separation_sd": 3.977,
+   "dynamic_range_counts": 25.3
+  }
+ },
+ "select_bar": 0.002,
+ "candidates": {
+  "drifter": [
+   23,
+   25,
+   51
+  ],
+  "quiet": [
+   3,
+   29,
+   31
+  ]
+ },
+ "preconditions": {
+  "1_partner_exclusion": {
+   "drifter_set": [
+    17,
+    23,
+    25,
+    33,
+    34,
+    35,
+    39,
+    48,
+    51,
+    53,
+    55,
+    57,
+    71
+   ],
+   "violations": []
+  },
+  "2_duration_2q": [
+   9
+  ],
+  "3_pairing": "frozen_pairing() + cal_start marginals in bundle",
+  "4_interval": "Ember both-ends check"
+ },
+ "cost": {
+  "pubs": 16,
+  "shots": 84800
+ },
+ "pubs_meta": [
+  {
+   "block": "cal0_start",
+   "shots": 8000
+  },
+  {
+   "block": "cal1_start",
+   "shots": 8000
+  },
+  {
+   "block": "WIT_q23",
+   "kind": "WIT",
+   "q": 23,
+   "plan": {
+    "anc1": 16,
+    "anc2": 22,
+    "s1": 24,
+    "relay_mid": null
+   },
+   "role": "drifter",
+   "shots": 4800,
+   "n2q": 9
+  },
+  {
+   "block": "REF_q23",
+   "kind": "REF",
+   "q": 23,
+   "plan": {
+    "anc1": 16,
+    "anc2": 22,
+    "s1": 24,
+    "relay_mid": null
+   },
+   "role": "drifter",
+   "shots": 4000,
+   "n2q": 9
+  },
+  {
+   "block": "WIT_q25",
+   "kind": "WIT",
+   "q": 25,
+   "plan": {
+    "anc1": 24,
+    "anc2": 26,
+    "s1": 37,
+    "relay_mid": null
+   },
+   "role": "drifter",
+   "shots": 4800,
+   "n2q": 9
+  },
+  {
+   "block": "REF_q25",
+   "kind": "REF",
+   "q": 25,
+   "plan": {
+    "anc1": 24,
+    "anc2": 26,
+    "s1": 37,
+    "relay_mid": null
+   },
+   "role": "drifter",
+   "shots": 4000,
+   "n2q": 9
+  },
+  {
+   "block": "WIT_q51",
+   "kind": "WIT",
+   "q": 51,
+   "plan": {
+    "anc1": 50,
+    "anc2": 52,
+    "s1": 58,
+    "relay_mid": null
+   },
+   "role": "drifter",
+   "shots": 4800,
+   "n2q": 9
+  },
+  {
+   "block": "REF_q51",
+   "kind": "REF",
+   "q": 51,
+   "plan": {
+    "anc1": 50,
+    "anc2": 52,
+    "s1": 58,
+    "relay_mid": null
+   },
+   "role": "drifter",
+   "shots": 4000,
+   "n2q": 9
+  },
+  {
+   "block": "WIT_q3",
+   "kind": "WIT",
+   "q": 3,
+   "plan": {
+    "anc1": 2,
+    "anc2": 4,
+    "s1": 16,
+    "relay_mid": null
+   },
+   "role": "quiet",
+   "shots": 4800,
+   "n2q": 9
+  },
+  {
+   "block": "REF_q3",
+   "kind": "REF",
+   "q": 3,
+   "plan": {
+    "anc1": 2,
+    "anc2": 4,
+    "s1": 16,
+    "relay_mid": null
+   },
+   "role": "quiet",
+   "shots": 4000,
+   "n2q": 9
+  },
+  {
+   "block": "WIT_q29",
+   "kind": "WIT",
+   "q": 29,
+   "plan": {
+    "anc1": 28,
+    "anc2": 30,
+    "s1": 38,
+    "relay_mid": null
+   },
+   "role": "quiet",
+   "shots": 4800,
+   "n2q": 9
+  },
+  {
+   "block": "REF_q29",
+   "kind": "REF",
+   "q": 29,
+   "plan": {
+    "anc1": 28,
+    "anc2": 30,
+    "s1": 38,
+    "relay_mid": null
+   },
+   "role": "quiet",
+   "shots": 4000,
+   "n2q": 9
+  },
+  {
+   "block": "WIT_q31",
+   "kind": "WIT",
+   "q": 31,
+   "plan": {
+    "anc1": 18,
+    "anc2": 30,
+    "s1": 32,
+    "relay_mid": null
+   },
+   "role": "quiet",
+   "shots": 4800,
+   "n2q": 9
+  },
+  {
+   "block": "REF_q31",
+   "kind": "REF",
+   "q": 31,
+   "plan": {
+    "anc1": 18,
+    "anc2": 30,
+    "s1": 32,
+    "relay_mid": null
+   },
+   "role": "quiet",
+   "shots": 4000,
+   "n2q": 9
+  },
+  {
+   "block": "cal0_end",
+   "shots": 8000
+  },
+  {
+   "block": "cal1_end",
+   "shots": 8000
+  }
+ ],
+ "job_id": "d9psh1h7s9kc73aufo40",
+ "submit_iso": "2026-08-05T23:34:30.985177+00:00"
+}
