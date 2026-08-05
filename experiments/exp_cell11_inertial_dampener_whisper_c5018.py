@@ -146,6 +146,8 @@ def build_rows(backend, compensation=None):
                 for q in drifters_active:
                     if q in compensation:
                         n, w = compensation[q]
+                        n = np.asarray(n, float)
+                        n = n / np.linalg.norm(n)   # stored axis is ROUNDED to 4dp — renormalize
                         th = -np.radians(w * D)          # inverse rotation
                         # decompose axis-angle into Rz*Ry*Rz via rotation matrix -> use qiskit
                         from qiskit.circuit.library import UnitaryGate
