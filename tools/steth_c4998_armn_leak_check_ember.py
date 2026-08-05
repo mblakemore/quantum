@@ -166,6 +166,61 @@ def check_structure(b):
         detail.append(f"  MISMATCH {k}: drifter={drift.get(k)!r} null={null.get(k)!r}")
     if ok:
         detail.append("every field identical — the decoder cannot separate on circuit shape")
+
+    # SCHEDULED DURATION — added C4253 after I ruled that DD padding is NOT mapping-class
+    # (bus general#4749). Op COUNTS cannot see per-qubit pulse durations, which is exactly
+    # the quantity the ruling turns on: a drifter block that idles LESS decoheres less,
+    # reads purer, and is more likely to show zero odd parities — a FALSE ALT.
+    #
+    # This check exists so the ruling is enforced by VERIFICATION rather than by the
+    # builder's assertion that they complied. Without it my gate would pass a bundle
+    # carrying the field and never look at it, which is the same defect I have now named
+    # three times today: a check naming a quantity nothing actually reads.
+    #
+    # ABSENT => NOT-EVALUABLE, deliberately. After the ruling, a bundle with no duration
+    # field cannot pass structural — silence must not be cheaper than compliance.
+    dur = b.get("scheduled_duration_dt")
+    if not isinstance(dur, dict) or "drifter" not in dur or "null" not in dur:
+        detail.append("scheduled_duration_dt ABSENT — required since the #4749 ruling.")
+        detail.append("Op counts cannot see per-qubit pulse duration; without it the")
+        detail.append("ALT-ward idle-asymmetry channel is unmeasured, not closed.")
+        return three_state(False, False, "3 structural identity", detail)
+    dd, dn = dur.get("drifter") or {}, dur.get("null") or {}
+    rungs = sorted(set(dd) | set(dn))
+    bad = [r for r in rungs if dd.get(r) != dn.get(r)]
+    for r in rungs:
+        detail.append(f"  duration[{r}] drifter {dd.get(r)} dt vs null {dn.get(r)} dt"
+                      f"  {'MATCH' if r not in bad else 'MISMATCH — ALT-ward if drifter is lower'}")
+    # Front pad is reported when present but is subsumed by the total; a mismatch in the
+    # total is what reaches the decoder.
+    fp = b.get("front_pad_dt")
+    if isinstance(fp, dict):
+        detail.append(f"  front_pad drifter {fp.get('drifter')} null {fp.get('null')}")
+
+    # FULL PER-ARM SWEEP when the manifest is supplied. The BUNDLE exposes only the Q
+    # (witness) arm's duration, but the flight also carries C1 (the honest |0>-probe
+    # control at matched budget) and LANC (the ancilla rider) — and the same argument
+    # applies to them: C1 is the BASELINE the ALT/NULL contrast is measured against, so a
+    # per-block duration asymmetry in C1 biases the contrast just as surely as one in Q.
+    # I did NOT ask for these to be added to the bundle: the manifest already carries them
+    # (scheduled_durations, arm_rung_side keyed), so reading it costs a flag rather than
+    # another rebuild. Cheapest correct move beats the most thorough-looking one.
+    man = b.get("_manifest_scheduled_durations")
+    if isinstance(man, dict):
+        pairs = {}
+        for k, v in man.items():
+            if k.endswith("_alt") or k.endswith("_null"):
+                arm, side = k.rsplit("_", 1)
+                pairs.setdefault(arm, {})[side] = (v or {}).get("duration_dt")
+        for arm in sorted(pairs):
+            a, n = pairs[arm].get("alt"), pairs[arm].get("null")
+            hit = a is not None and a == n
+            bad += [] if hit else [arm]
+            detail.append(f"  manifest[{arm}] alt {a} dt vs null {n} dt "
+                          f"{'MATCH' if hit else 'MISMATCH'}")
+        detail.append(f"swept {len(pairs)} arms from the manifest (Q witness, C1 baseline, "
+                      f"LANC rider) — not just the one the bundle exposes.")
+    ok = ok and not bad
     return three_state(ok, True, "3 structural identity", detail)
 
 
@@ -250,6 +305,16 @@ def main():
     if len(sys.argv) < 2:
         sys.exit(__doc__)
     b = json.load(open(sys.argv[1]))
+    # Optional flight manifest — supplies the per-arm scheduled durations (Q / C1 / LANC)
+    # that the bundle does not expose. Optional rather than required because the ruling it
+    # enforces is satisfied by the bundle's own Q-arm field; the manifest widens the sweep.
+    if len(sys.argv) > 2:
+        try:
+            m = json.load(open(sys.argv[2]))
+            b["_manifest_scheduled_durations"] = m.get("scheduled_durations")
+            print(f"manifest: {sys.argv[2]}")
+        except (OSError, ValueError) as e:
+            print(f"manifest unreadable ({e}) — per-arm sweep skipped, bundle checks stand")
     print(f"ARM-N LEAK CHECKS 2-4  ·  bundle {sys.argv[1]}")
     print(f"thresholds declared blind before the bundle existed: "
           f"readout {READOUT_TOL}/{READOUT_MEAN_TOL}, order z {ORDER_Z}\n")
