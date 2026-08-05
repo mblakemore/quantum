@@ -409,16 +409,52 @@ def check_order(b):
         except ImportError:
             return three_state(False, False, "4 label-independent trial order",
                                ["numpy unavailable — cannot regenerate the permutation."])
-        # ONE generator drawn sequentially across rungs, in the bundle's own key order.
-        # Verified against the delivered bundle: default_rng(seed) reproduces k2 then k3.
-        rng = np.random.default_rng(seed)
+        # TWO DERIVATION SCHEMES IN ONE CAMPAIGN, and assuming the first would falsely fail
+        # the second (Ember C4253 — the fourth such interface bug I have caught in my own
+        # gate this cycle):
+        #   flight 1  ONE generator drawn sequentially:  rng=default_rng(seed); rng.perm() x2
+        #   re-fly    PER-RUNG seed offset:              default_rng(seed + k) for rung "k<k>"
+        #
+        # Both are tried, and the one that matched is NAMED in the output rather than
+        # silently accepted. Trying candidates until one fits is a real weakening of a
+        # check, so it must not be invisible: with 40! orderings and two candidates a false
+        # match is not a practical risk, but "it matched something" and "it matched the
+        # declared scheme" are different claims and the reader is entitled to know which.
         detail, ok = [f"public seed {seed} (declared, derived from the census job id)"], True
+
+        def sequential():
+            rng = np.random.default_rng(seed)
+            return {n: rng.permutation(len(p)).tolist() for n, p in rungs.items()}
+
+        def per_rung():
+            out = {}
+            for n, p in rungs.items():
+                k = int("".join(ch for ch in str(n) if ch.isdigit()) or 0)
+                out[n] = np.random.default_rng(seed + k).permutation(len(p)).tolist()
+            return out
+
+        scheme = None
+        for label, fn in (("one generator drawn sequentially", sequential),
+                          ("per-rung seed+k offset", per_rung)):
+            cand = fn()
+            if all(cand[n] == list(p) for n, p in rungs.items()):
+                scheme = label
+                break
+        ok = scheme is not None
         for name, perm in rungs.items():
-            exp = rng.permutation(len(perm)).tolist()
-            hit = exp == list(perm)
-            ok &= hit
-            detail.append(f"[{name or 'order'}] M={len(perm)}  regenerated from seed: "
-                          f"{'EXACT MATCH' if hit else 'MISMATCH — order is not the declared draw'}")
+            detail.append(f"[{name or 'order'}] M={len(perm)}  "
+                          f"{'EXACT MATCH' if ok else 'MISMATCH — not the declared draw'}")
+        detail.append(f"derivation that reproduced it: {scheme or 'NONE of the known schemes'}")
+
+        # SCOPE, printed with the verdict so a PASS cannot be over-read. The re-fly's
+        # circuits are deterministic and per-block, so there is no flight-time delivery
+        # order at all — trial assignment happens at DECODE. This check therefore verifies
+        # the order the DECODE consumes, not an order the flight encoded. Stronger than the
+        # pass-by-construction it replaces, weaker than the first flight's, and stated
+        # rather than left for someone to rediscover.
+        scope = b.get("trial_order_scope")
+        if scope:
+            detail.append(f"SCOPE: {str(scope)[:200]}")
         detail.append("reproducible from a seed fixed before the labels existed, so the order")
         detail.append("cannot encode them. Proof, not a statistic — the labels stay sealed.")
         return three_state(ok, True, "4 label-independent trial order", detail)
