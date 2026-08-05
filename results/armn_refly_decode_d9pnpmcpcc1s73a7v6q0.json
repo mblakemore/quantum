@@ -1,0 +1,117 @@
+{
+ "card": "armn_refly_DECODE",
+ "job": "d9pnpmcpcc1s73a7v6q0",
+ "cycle": "C5018",
+ "rule": "ALT iff zero odd parities over m_Q=24 measurements x k pairs",
+ "authorised_by": "Ember CLEAR general#4959",
+ "rungs": {
+  "k2": {
+   "pairs": [
+    [
+     23,
+     142
+    ],
+    [
+     25,
+     38
+    ]
+   ],
+   "blocks": {
+    "drifter": {
+     "trials": 40,
+     "alt_call_rate": 0.0,
+     "odd_shot_rate": 0.57708,
+     "odd_shot_rate_se": 0.01594,
+     "mean_odd_per_shot": 0.98958,
+     "shots_used": 960,
+     "se": 0.075,
+     "se_floored": true,
+     "qubits": [
+      23,
+      25
+     ]
+    },
+    "null": {
+     "trials": 40,
+     "alt_call_rate": 0.0,
+     "odd_shot_rate": 0.59375,
+     "odd_shot_rate_se": 0.01585,
+     "mean_odd_per_shot": 0.97396,
+     "shots_used": 960,
+     "se": 0.075,
+     "se_floored": true,
+     "qubits": [
+      142,
+      38
+     ]
+    }
+   },
+   "separation": 0.0,
+   "separation_sigma": 0.0,
+   "witness_separation": {
+    "drifter_odd_rate": 0.57708,
+    "null_odd_rate": 0.59375,
+    "difference": -0.01667,
+    "sigma": -0.74,
+    "label": "REPORTED-NOT-GATED (the frozen rule is the threshold verdict above; this is the underlying continuous statistic)"
+   }
+  },
+  "k3": {
+   "pairs": [
+    [
+     23,
+     142
+    ],
+    [
+     25,
+     38
+    ],
+    [
+     71,
+     2
+    ]
+   ],
+   "blocks": {
+    "drifter": {
+     "trials": 40,
+     "alt_call_rate": 0.0,
+     "odd_shot_rate": 0.70729,
+     "odd_shot_rate_se": 0.01469,
+     "mean_odd_per_shot": 1.45521,
+     "shots_used": 960,
+     "se": 0.075,
+     "se_floored": true,
+     "qubits": [
+      23,
+      25,
+      71
+     ]
+    },
+    "null": {
+     "trials": 40,
+     "alt_call_rate": 0.0,
+     "odd_shot_rate": 0.75,
+     "odd_shot_rate_se": 0.01398,
+     "mean_odd_per_shot": 1.48854,
+     "shots_used": 960,
+     "se": 0.075,
+     "se_floored": true,
+     "qubits": [
+      142,
+      38,
+      2
+     ]
+    }
+   },
+   "separation": 0.0,
+   "separation_sigma": 0.0,
+   "witness_separation": {
+    "drifter_odd_rate": 0.70729,
+    "null_odd_rate": 0.75,
+    "difference": -0.04271,
+    "sigma": -2.11,
+    "label": "REPORTED-NOT-GATED (the frozen rule is the threshold verdict above; this is the underlying continuous statistic)"
+   }
+  }
+ }
+}
