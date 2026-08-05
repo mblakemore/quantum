@@ -47,7 +47,11 @@ SHOTS = 8000
 # evenly gate-dominated, which is the hypothesis it exists to test. So: (a) raise shots on
 # that pair specifically (se ~ 1/sqrt(N)), and (b) pre-register that a null on that leg is
 # UNINFORMATIVE and may never be cited as evidence against gate-dominance.
-SHOTS_GATE_LEG = 32000     # deep_2 / shallow_2 only; MDE ~0.107 -> ~0.018
+SHOTS_GATE_LEG = 4000      # deep_2 / shallow_2 only; MDE 0.107 -> 0.052 single, 0.021 pooled
+# COST CORRECTION (C5018): 32000 was chosen on the false premise that "shots are nearly free
+# next to pubs". They are not — shots ARE the cost. 32k put the ladder at 496k shots ~ 174
+# QPU-s against a ~2 s quote and a 309 s pool. 4000 is what Ember (#5004) and Elder (#5007)
+# actually proposed; it clears the ~0.045/CZ effect pooled and costs ~56 QPU-s.
 CENSUS_DECODE = os.path.join(RES, f"armn_fez_census_decode_{CENSUS_JOB}.json")
 
 
