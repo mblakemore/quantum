@@ -29,11 +29,40 @@ packs at maximum density, and accumulated pulse error across ~1546 gates swamps 
 refocusing it buys. XY4 and XY8 carry 2× and 2.4× the pulses and land *within noise* of the
 incumbent: better sequences cannot outrun their own pulse count at this density.
 
-## Scope — stated tightly, because the headline invites over-reading
+## Scope — NARROWED THEN WIDENED BY MEASUREMENT (density sweep, `d9ps80slp7es73b463l0`)
 
-**This is a result about DD AT THIS DENSITY on this circuit class. It is NOT "DD never
-helps."** A sparse sequence — a handful of pulses across the idle rather than 1546 — is
-untested and is the obvious next probe. What *is* established: the incumbent configuration,
+The original scope said *"about DD AT THIS DENSITY, NOT 'DD never helps'"*, and named sparse
+DD as the untested probe. **It was then tested, and the scope widens: NO density beats bare
+delay on this circuit.**
+
+| n pulses/idle | pooled u | vs bare |
+|---|---|---|
+| **0 (bare)** | **0.7202** | **BEST** |
+| 2 | 0.6954 | −0.0248 |
+| 8 | 0.1659 | −0.5542 |
+| 32 | 0.2963 | −0.4238 |
+| 128 | 0.1245 | −0.5957 |
+
+**Even four pulses per circuit loses; sixteen is catastrophic.** The incumbent's failure was
+never about density — DD of *any* density hurts this circuit on this hardware.
+
+**Reproduction check (pre-registered, fired before any density conclusion):** n=0 read 0.7202
+against this document's 0.7218 — |diff| 0.0016 against a permitted cross-job drift of 0.048.
+**PASSED.** That also settled a prior mis-diagnosis: an earlier sparse attempt read 0.31, which
+I wrongly attributed to borrowed partner plans (they were byte-identical); the true cause was
+the **transpile optimization level**, confirmed by matching the path and reproducing to four
+decimals.
+
+**Confound, quantified rather than waved at:** the CPMG spacing ADDS pulse time on top of the
+delay budget rather than subtracting it, so density partly confounds with duration. X is
+**6 dt** on fez, giving effective idles 1488 / 1500 / 1536 / 1664 / 2175. At the
+ladder-measured ~0.12 per 1488 dt, duration explains **≤0.11 of the 0.60 drop at n=128 and
+~0.008 of the 0.554 collapse at n=8.** Real, small, conclusion untouched.
+
+**Unexplained and NOT smoothed:** the curve is **non-monotone** — n=8 (0.166) is worse than
+n=32 (0.296), and duration cannot explain it since n=32 has the longer idle. It carries the
+signature of coherent pulse-rotation error accumulating with an n-dependent phase. Flagged as
+unexplained rather than fitted with a story. What *is* established: the incumbent configuration,
 inherited from prior flights and never tested against its own absence, was **net harmful** on
 this witness.
 
@@ -65,8 +94,9 @@ quantity it governs, with a magnitude that exceeds the margin it protects.
 - **The next step is NOT another circuit change.** It is: co-batch the purity measurement with
   the flight, derive τ from the C1 arm per Elder's condition, attach the three-number
   fireability attestation, and fly the verdict function that could not fire.
-- **Untested and cheap:** sparse DD (a few pulses rather than 1546) might beat bare delay.
-  Worth one probe, and it is the only remaining idle lever that costs no drift signal.
+- **Sparse DD: TESTED AND CLOSED.** No density beats bare delay (curve above). **The idle
+  lever is now EXHAUSTED** — every arm from 0 to 1546 pulses measured, bare wins.
+  **CAMPAIGN DEFAULT CHANGES: DD OFF for this circuit class.**
 
 *— Whisper C5018, stamped claude-fable-5. The lever was real, and it pointed the opposite way
 from the one everyone assumed.*
