@@ -1,0 +1,130 @@
+{
+ "card": "cell11_GRADE",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "jobA": "d9ofd15oh1qc73bbs3a0",
+ "jobB": "d9pkk6u28h6s739rfdgg",
+ "rows": {
+  "23": [
+   {
+    "depth": 160,
+    "uncomp_dtheta": 20.26,
+    "sigma_u": 0.77,
+    "comp_dtheta": 6.85,
+    "sigma_c": 0.76,
+    "verdict": "NOT-DAMPED",
+    "gated": true
+   },
+   {
+    "depth": 280,
+    "uncomp_dtheta": 46.6,
+    "sigma_u": 0.93,
+    "comp_dtheta": 2.32,
+    "sigma_c": 0.9,
+    "verdict": "DAMPED",
+    "gated": true
+   },
+   {
+    "depth": 400,
+    "uncomp_dtheta": 75.3,
+    "sigma_u": 1.13,
+    "comp_dtheta": 5.74,
+    "sigma_c": 1.11,
+    "verdict": "NOT-DAMPED",
+    "gated": true
+   }
+  ],
+  "26": [
+   {
+    "depth": 160,
+    "uncomp_dtheta": 26.33,
+    "sigma_u": 0.98,
+    "comp_dtheta": 8.61,
+    "sigma_c": 0.97,
+    "verdict": "NOT-DAMPED",
+    "gated": true
+   },
+   {
+    "depth": 280,
+    "uncomp_dtheta": 59.9,
+    "sigma_u": 1.05,
+    "comp_dtheta": 1.11,
+    "sigma_c": 1.07,
+    "verdict": "DAMPED",
+    "gated": true
+   },
+   {
+    "depth": 400,
+    "uncomp_dtheta": 89.56,
+    "sigma_u": 1.19,
+    "comp_dtheta": 5.2,
+    "sigma_c": 1.18,
+    "verdict": "NOT-DAMPED",
+    "gated": true
+   }
+  ],
+  "53": [
+   {
+    "depth": 160,
+    "uncomp_dtheta": 1.64,
+    "sigma_u": 1.04,
+    "comp_dtheta": 3.02,
+    "sigma_c": 1.04,
+    "verdict": "UNDERPOWERED",
+    "gated": false
+   },
+   {
+    "depth": 280,
+    "uncomp_dtheta": 6.96,
+    "sigma_u": 1.29,
+    "comp_dtheta": 1.49,
+    "sigma_c": 1.29,
+    "verdict": "DAMPED",
+    "gated": false
+   },
+   {
+    "depth": 400,
+    "uncomp_dtheta": 9.91,
+    "sigma_u": 1.67,
+    "comp_dtheta": 6.43,
+    "sigma_c": 1.68,
+    "verdict": "NOT-DAMPED",
+    "gated": false
+   }
+  ],
+  "73": [
+   {
+    "depth": 160,
+    "uncomp_dtheta": 10.5,
+    "sigma_u": 0.93,
+    "comp_dtheta": 3.99,
+    "sigma_c": 0.93,
+    "verdict": "NOT-DAMPED",
+    "gated": true
+   },
+   {
+    "depth": 280,
+    "uncomp_dtheta": 15.75,
+    "sigma_u": 1.01,
+    "comp_dtheta": 2.37,
+    "sigma_c": 1.01,
+    "verdict": "DAMPED",
+    "gated": true
+   },
+   {
+    "depth": 400,
+    "uncomp_dtheta": 27.05,
+    "sigma_u": 1.12,
+    "comp_dtheta": 5.92,
+    "sigma_c": 1.11,
+    "verdict": "NOT-DAMPED",
+    "gated": true
+   }
+  ]
+ },
+ "tally": {
+  "DAMPED": 3,
+  "NOT-DAMPED": 6,
+  "UNDERPOWERED": 0
+ }
+}
