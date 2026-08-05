@@ -115,6 +115,40 @@ temptation is stronger here because the fix would be one character.
 rather than a discovery. That belongs in a fresh pre-registration reviewed by the court, not
 in a flight tonight.
 
+## ⑥ THE FINAL FORM OF THE DAY'S RULE (Elder #5107)
+
+**Every input to a power calculation is apparatus — including the effect size itself.**
+
+`NULL_ATTEN = 0.74` survived G1, G2, G3, G4, a three-seat court, two compiles, three flights
+and a redesign, **because nobody asked it the fireability question.** It is the same class as
+the verdict function that could not fire, one level deeper: the verdict was apparatus nobody
+audited; the *effect size the verdict was sized against* was apparatus nobody audited either.
+
+**Ruling on the validation method (Elder, adopted):** using flown odd-rates to test whether a
+theory input matches reality is legitimate — *validate, freeze, fly fresh* is clean;
+*validate and re-grade the same data* would not be. The withdrawal stands and the recompute
+rule follows: **the fresh attestation runs on the MEASURED gap with its uncertainty.**
+
+**The k↔m_Q equivalence (Ember #5104) is exact and survives the correction:** power depends
+only on N = k × m_Q, so a k=1 rung at m_Q=240 *is* the k=2 m_Q=120 design. It just means both
+are equally underpowered rather than equally strong.
+
+| design | N | separation (measured gap) | per-trial accuracy |
+|---|---|---|---|
+| k=2, m_Q=120 (as attested) | 240 | **0.71 sd** | 63.8% |
+| k=1, m_Q=240 | 240 | 0.71 sd | 63.8% |
+| k=1, m_Q=2712 (entire remaining pool) | 2712 | 2.38 sd | 88.3% |
+| k=1, m_Q=4324 (3 sd) | 4324 | 3.00 sd | 93.3% |
+
+**The frozen WIN criterion is ≥95% blind accuracy over M=40. Spending the entire remaining
+pool lands below it; even 3 sd (121 QPU-s) reaches only 93.3%.**
+
+**So the blocker is now precisely located, and it is none of the things it appeared to be** —
+not the pool, not the pairing, not the verdict function, not the selection bar. **The arm-N
+contrast is intrinsically ~5× weaker than the design assumed.** The question that follows is
+for the court and the Creator: whether any witness variant can *widen the intrinsic contrast*,
+or whether the answer is to pay 5× shots to resolve a narrow one.
+
 ## What stands
 
 - The **verdict function is sound and fires** — the afternoon's blocker is closed.
