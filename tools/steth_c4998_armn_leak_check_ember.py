@@ -145,6 +145,52 @@ def check_readout(b):
             return three_state(False, False, "2 readout/SPAM profile match", detail)
         detail.append("BOTH rungs at BOTH ends must hold — the interval rule, stated at")
         detail.append("general#4730 before any of these numbers existed.")
+
+        # POWER STATED INLINE (Ember C4253, committed on the bus at general#4851).
+        #
+        # Under the single-job select-on-start / verify-on-end design, the hazard this
+        # check was built to catch is REMOVED UPSTREAM rather than detected here — the
+        # census->flight gap goes to zero by construction. That is strictly better than
+        # catching it, and it makes this check NEARLY UNFAILABLE: computed from the ARM-N
+        # bracket, within-job movement must exceed ~0.0030 to fail, where the worst qubit
+        # measured 0.00231 and five of six were under 0.00131.
+        #
+        # So a PASS here means "no large within-job excursion occurred", NOT "the apparatus
+        # was verified sound". I promised to report that margin alongside every PASS, and a
+        # promise I have to REMEMBER to keep is the weak form of the commitment — today
+        # produced five instances of checks whose apparatus could not supply what they
+        # named, and I am not letting my own gate become the sixth by quietly reporting a
+        # pass that had almost no chance of being anything else. So the tool prints it.
+        worst_obs = max(
+            (abs(float(x) - float(y))
+             for rung in rb for end in ("start", "end")
+             for x, y in zip((rb[rung].get(end) or {}).get("drifter") or [],
+                             (rb[rung].get(end) or {}).get("null") or [])),
+            default=None)
+        if worst_obs is not None:
+            detail.append(f"POWER: worst observed pair-diff {worst_obs:.5f} against bar "
+                          f"{READOUT_TOL} — margin {READOUT_TOL - worst_obs:+.5f}")
+            if READOUT_TOL - worst_obs > 0.6 * READOUT_TOL:
+                detail.append("       this PASS had ample margin: it is WEAK evidence of")
+                detail.append("       soundness. Soundness rests on the design argument")
+                detail.append("       (zero census->flight gap by construction), not on this.")
+
+        # THE RECEIPT (Whisper general#4852): the measured magnitude of the hazard the
+        # design removed — census-cal vs flight-start-cal drift on the same qubits, same
+        # session. Gates NOTHING by design; it turns "the gap is zero because I built it
+        # that way" into "the gap I removed would have been Nx the bar, measured".
+        # Multiple key spellings accepted, and the ones I read are published on the bus so
+        # the producer can match a name rather than guess — the verify-the-consumer's-key
+        # lesson applied from the consumer side for once.
+        rec = next((b[k] for k in ("hazard_removed_dt", "hazard_removed",
+                                   "census_to_start_drift", "removed_gap_drift") if k in b), None)
+        if rec is not None:
+            detail.append(f"RECEIPT (not gated): hazard removed by the single-job design "
+                          f"= {json.dumps(rec)[:120]}")
+        else:
+            detail.append("RECEIPT ABSENT: no measured census->start drift in the bundle, so")
+            detail.append("       the design argument is asserted rather than quantified here.")
+
         return three_state(ok, True, "2 readout/SPAM profile match", detail)
 
     d = b.get("readout", {})
