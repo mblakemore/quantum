@@ -1,0 +1,425 @@
+{
+ "card": "armn_shallow_witness_ladder",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_fez",
+ "account": "IBMQ_ALT2",
+ "cal_epoch_at_build": "2026-08-05 21:36:03+00:00",
+ "purpose": "decompose where witness purity is lost: gates vs channel idle vs geometry. u>=0.7 gate must be MEASURED, not projected.",
+ "changes": {
+  "relay->adjacent CX": "4 CX -> 1",
+  "SWAP->transfer": "3 CX -> 2"
+ },
+ "gate_counts": {
+  "shallow_0": [
+   9,
+   9,
+   9,
+   9,
+   9,
+   9
+  ],
+  "shallow_1": [
+   9,
+   9,
+   9,
+   9,
+   9,
+   9
+  ],
+  "shallow_2": [
+   9,
+   9,
+   9,
+   9,
+   9,
+   9
+  ],
+  "deep_2": [
+   10,
+   10,
+   10,
+   10,
+   10,
+   10
+  ]
+ },
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "shallow_0_q23",
+   "cfg": "shallow_0",
+   "q": 23,
+   "shots_used": 8000,
+   "role": "drifter",
+   "n2q": 9,
+   "plan": {
+    "anc1": 16,
+    "anc2": 22,
+    "s1": 24,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_1_q23",
+   "cfg": "shallow_1",
+   "q": 23,
+   "shots_used": 8000,
+   "role": "drifter",
+   "n2q": 9,
+   "plan": {
+    "anc1": 16,
+    "anc2": 22,
+    "s1": 24,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_2_q23",
+   "cfg": "shallow_2",
+   "q": 23,
+   "shots_used": 4000,
+   "role": "drifter",
+   "n2q": 9,
+   "plan": {
+    "anc1": 16,
+    "anc2": 22,
+    "s1": 24,
+    "relay_mid": null
+   },
+   "shots": 4000
+  },
+  {
+   "block": "deep_2_q23",
+   "cfg": "deep_2",
+   "q": 23,
+   "shots_used": 4000,
+   "role": "drifter",
+   "n2q": 10,
+   "plan": {
+    "anc1": 16,
+    "anc2": 22,
+    "s1": 24,
+    "relay_mid": null
+   },
+   "shots": 4000
+  },
+  {
+   "block": "shallow_0_q25",
+   "cfg": "shallow_0",
+   "q": 25,
+   "shots_used": 8000,
+   "role": "drifter",
+   "n2q": 9,
+   "plan": {
+    "anc1": 24,
+    "anc2": 26,
+    "s1": 37,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_1_q25",
+   "cfg": "shallow_1",
+   "q": 25,
+   "shots_used": 8000,
+   "role": "drifter",
+   "n2q": 9,
+   "plan": {
+    "anc1": 24,
+    "anc2": 26,
+    "s1": 37,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_2_q25",
+   "cfg": "shallow_2",
+   "q": 25,
+   "shots_used": 4000,
+   "role": "drifter",
+   "n2q": 9,
+   "plan": {
+    "anc1": 24,
+    "anc2": 26,
+    "s1": 37,
+    "relay_mid": null
+   },
+   "shots": 4000
+  },
+  {
+   "block": "deep_2_q25",
+   "cfg": "deep_2",
+   "q": 25,
+   "shots_used": 4000,
+   "role": "drifter",
+   "n2q": 10,
+   "plan": {
+    "anc1": 24,
+    "anc2": 26,
+    "s1": 37,
+    "relay_mid": null
+   },
+   "shots": 4000
+  },
+  {
+   "block": "shallow_0_q51",
+   "cfg": "shallow_0",
+   "q": 51,
+   "shots_used": 8000,
+   "role": "drifter",
+   "n2q": 9,
+   "plan": {
+    "anc1": 50,
+    "anc2": 52,
+    "s1": 58,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_1_q51",
+   "cfg": "shallow_1",
+   "q": 51,
+   "shots_used": 8000,
+   "role": "drifter",
+   "n2q": 9,
+   "plan": {
+    "anc1": 50,
+    "anc2": 52,
+    "s1": 58,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_2_q51",
+   "cfg": "shallow_2",
+   "q": 51,
+   "shots_used": 4000,
+   "role": "drifter",
+   "n2q": 9,
+   "plan": {
+    "anc1": 50,
+    "anc2": 52,
+    "s1": 58,
+    "relay_mid": null
+   },
+   "shots": 4000
+  },
+  {
+   "block": "deep_2_q51",
+   "cfg": "deep_2",
+   "q": 51,
+   "shots_used": 4000,
+   "role": "drifter",
+   "n2q": 10,
+   "plan": {
+    "anc1": 50,
+    "anc2": 52,
+    "s1": 58,
+    "relay_mid": null
+   },
+   "shots": 4000
+  },
+  {
+   "block": "shallow_0_q29",
+   "cfg": "shallow_0",
+   "q": 29,
+   "shots_used": 8000,
+   "role": "quiet",
+   "n2q": 9,
+   "plan": {
+    "anc1": 28,
+    "anc2": 30,
+    "s1": 38,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_1_q29",
+   "cfg": "shallow_1",
+   "q": 29,
+   "shots_used": 8000,
+   "role": "quiet",
+   "n2q": 9,
+   "plan": {
+    "anc1": 28,
+    "anc2": 30,
+    "s1": 38,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_2_q29",
+   "cfg": "shallow_2",
+   "q": 29,
+   "shots_used": 4000,
+   "role": "quiet",
+   "n2q": 9,
+   "plan": {
+    "anc1": 28,
+    "anc2": 30,
+    "s1": 38,
+    "relay_mid": null
+   },
+   "shots": 4000
+  },
+  {
+   "block": "deep_2_q29",
+   "cfg": "deep_2",
+   "q": 29,
+   "shots_used": 4000,
+   "role": "quiet",
+   "n2q": 10,
+   "plan": {
+    "anc1": 28,
+    "anc2": 30,
+    "s1": 38,
+    "relay_mid": null
+   },
+   "shots": 4000
+  },
+  {
+   "block": "shallow_0_q3",
+   "cfg": "shallow_0",
+   "q": 3,
+   "shots_used": 8000,
+   "role": "quiet",
+   "n2q": 9,
+   "plan": {
+    "anc1": 2,
+    "anc2": 4,
+    "s1": 16,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_1_q3",
+   "cfg": "shallow_1",
+   "q": 3,
+   "shots_used": 8000,
+   "role": "quiet",
+   "n2q": 9,
+   "plan": {
+    "anc1": 2,
+    "anc2": 4,
+    "s1": 16,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_2_q3",
+   "cfg": "shallow_2",
+   "q": 3,
+   "shots_used": 4000,
+   "role": "quiet",
+   "n2q": 9,
+   "plan": {
+    "anc1": 2,
+    "anc2": 4,
+    "s1": 16,
+    "relay_mid": null
+   },
+   "shots": 4000
+  },
+  {
+   "block": "deep_2_q3",
+   "cfg": "deep_2",
+   "q": 3,
+   "shots_used": 4000,
+   "role": "quiet",
+   "n2q": 10,
+   "plan": {
+    "anc1": 2,
+    "anc2": 4,
+    "s1": 16,
+    "relay_mid": null
+   },
+   "shots": 4000
+  },
+  {
+   "block": "shallow_0_q31",
+   "cfg": "shallow_0",
+   "q": 31,
+   "shots_used": 8000,
+   "role": "quiet",
+   "n2q": 9,
+   "plan": {
+    "anc1": 18,
+    "anc2": 30,
+    "s1": 32,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_1_q31",
+   "cfg": "shallow_1",
+   "q": 31,
+   "shots_used": 8000,
+   "role": "quiet",
+   "n2q": 9,
+   "plan": {
+    "anc1": 18,
+    "anc2": 30,
+    "s1": 32,
+    "relay_mid": null
+   },
+   "shots": 8000
+  },
+  {
+   "block": "shallow_2_q31",
+   "cfg": "shallow_2",
+   "q": 31,
+   "shots_used": 4000,
+   "role": "quiet",
+   "n2q": 9,
+   "plan": {
+    "anc1": 18,
+    "anc2": 30,
+    "s1": 32,
+    "relay_mid": null
+   },
+   "shots": 4000
+  },
+  {
+   "block": "deep_2_q31",
+   "cfg": "deep_2",
+   "q": 31,
+   "shots_used": 4000,
+   "role": "quiet",
+   "n2q": 10,
+   "plan": {
+    "anc1": 18,
+    "anc2": 30,
+    "s1": 32,
+    "relay_mid": null
+   },
+   "shots": 4000
+  }
+ ],
+ "delay_dt": 1488,
+ "power": {
+  "gate_leg": "deep_2 vs shallow_2 is a ONE-CZ difference; shots raised to 4000 (MDE ~0.107 -> ~0.018)",
+  "gate_leg_null_disposition": "BOUND, not a disclaimer. At 4000 shots se(u)~0.0131, single-candidate MDE ~0.052, pooled over 6 candidates ~0.0212. A NULL on the one-CZ leg therefore means: per-CZ purity cost is BELOW ~0.052 (single) / ~0.0212 (pooled) \u2014 under HALF the ~0.045 per CZ that even gate-dominance of the observed 0.45 loss would require. That is a citable, falsifiable upper bound on gate cost and it is what tells a future designer that fewer gates is not the fix. It may NOT be restated as 'gates do not matter' (unbounded) nor as 'uninformative'.",
+  "other_legs": "delay series (0/1/2) and shallow_0 are well-powered; the delay lever is far larger than one gate"
+ },
+ "job_id": "d9pr2ia42q2c73b8blcg",
+ "submit_iso": "2026-08-05T21:55:21.680145+00:00"
+}
