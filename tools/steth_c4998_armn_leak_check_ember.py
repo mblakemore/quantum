@@ -100,6 +100,17 @@ def check_readout(b):
     number; he decides what it means.
     """
     d = b.get("readout", {})
+    # DEFERRED-BY-DESIGN SENTINEL. The structural-stage bundle carries the string
+    # "PENDING_FLIGHT_CAL" here, because I am the one who asked that these lists come from
+    # the FLIGHT job's cal rather than the census cal (bus general#4716). The first version
+    # of this function CRASHED on it — two equal-length strings passed the length guard and
+    # float('P') blew up mid-check. A gate that raises is worse than a gate that fails:
+    # it produces no verdict at all, and only the exit code carries the news.
+    if isinstance(d.get("drifter"), str) or isinstance(d.get("null"), str):
+        return three_state(False, False, "2 readout/SPAM profile match",
+                           [f"deferred: {d.get('drifter')!r} — populates from the flight cal",
+                            "DEFERRED, not passed. This is the readout leg the split chain",
+                            "runs post-landing pre-decode; it cannot be evaluated pre-flight."])
     bracketed = isinstance(d.get("start"), dict) and isinstance(d.get("end"), dict)
     legs = [("start", "start"), ("end", "end")] if bracketed else [("cal", None)]
 
@@ -159,11 +170,58 @@ def check_structure(b):
 
 
 def check_order(b):
-    """(4) delivery order independent of the label."""
+    """(4) delivery order independent of the label.
+
+    I LOCKED THIS INTERFACE WRONG, and the real bundle is what showed it (Ember C4253).
+
+    I specified trial_order as the delivered LABEL sequence and wrote a runs test over it.
+    But the labels are the M=40 SEALED bits — I must not see them before the reveal, which
+    is the whole point of sealing them. So the label-sequence version of this check COULD
+    NEVER HAVE RUN pre-flight. The bundle correctly carries a PERMUTATION of trial indices
+    instead, and my test would have read it as 39 zeros and a single one, produced z=+5.9,
+    and FAILED the flight for an interface mismatch that looks exactly like a real leak.
+
+    THE CORRECT PRE-FLIGHT TEST IS STRONGER THAN THE ONE I WROTE. Independence of order
+    from label does not need a statistic if the order is REPRODUCIBLE FROM A PUBLIC SEED
+    fixed before the labels existed: a permutation drawn from the census job id cannot
+    depend on labels it was generated without. Proof beats evidence. So: regenerate the
+    permutation from the declared seed and require an exact match.
+
+    The runs statistic still has a job — POST-REVEAL, as a validity audit once the labels
+    are legitimately visible. It is not a gate then, and it was never usable as one.
+    """
     order = b.get("trial_order")
+    seed = b.get("trial_order_seed")
+
+    # Permutation-shaped (the real bundle): one or more named rungs, or a bare list.
+    rungs = order if isinstance(order, dict) else ({"": order} if isinstance(order, list) else None)
+    if rungs and all(isinstance(v, list) and sorted(v) == list(range(len(v))) for v in rungs.values()):
+        if seed is None:
+            return three_state(False, False, "4 label-independent trial order",
+                               ["trial_order is a permutation but trial_order_seed is absent —",
+                                "without the seed the order cannot be shown to be unchosen."])
+        try:
+            import numpy as np
+        except ImportError:
+            return three_state(False, False, "4 label-independent trial order",
+                               ["numpy unavailable — cannot regenerate the permutation."])
+        # ONE generator drawn sequentially across rungs, in the bundle's own key order.
+        # Verified against the delivered bundle: default_rng(seed) reproduces k2 then k3.
+        rng = np.random.default_rng(seed)
+        detail, ok = [f"public seed {seed} (declared, derived from the census job id)"], True
+        for name, perm in rungs.items():
+            exp = rng.permutation(len(perm)).tolist()
+            hit = exp == list(perm)
+            ok &= hit
+            detail.append(f"[{name or 'order'}] M={len(perm)}  regenerated from seed: "
+                          f"{'EXACT MATCH' if hit else 'MISMATCH — order is not the declared draw'}")
+        detail.append("reproducible from a seed fixed before the labels existed, so the order")
+        detail.append("cannot encode them. Proof, not a statistic — the labels stay sealed.")
+        return three_state(ok, True, "4 label-independent trial order", detail)
+
     if not order or not isinstance(order, list):
         return three_state(False, False, "4 label-independent trial order",
-                           ["trial_order missing — expected the delivered label sequence"])
+                           ["trial_order missing or unrecognised shape"])
     lab = [1 if x in (1, "1", True, "DRIFT", "drifter") else 0 for x in order]
     M = len(lab)
     if M < 8:
