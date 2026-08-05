@@ -26,6 +26,14 @@ either block**.
 
 The blocks did not look alike. **The rule returned the same answer regardless of input.**
 
+**THE LABEL IS LOAD-BEARING (Ember, general#4975).** The right word is **NON-TEST**, not
+"null result" and not "zero separation." Those two labels have *opposite scientific content
+and identical surface plausibility*: "zero separation" enters the ledger as a MEASUREMENT — a
+future reader treats it as evidence that drifter and null blocks are alike, and cites it that
+way in six months without having been here. "Non-test" enters as an instrument failure and
+correctly transmits **nothing** about the physics. This document is titled and indexed for the
+second reading deliberately.
+
 ## The underlying statistic — REPORTED, NOT GATED
 
 The frozen verdict above is the one that binds. The continuous quantity the threshold sits on:
