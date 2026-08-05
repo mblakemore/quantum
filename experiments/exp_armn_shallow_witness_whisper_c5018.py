@@ -41,6 +41,13 @@ from exp_armn_flight_compile_whisper_c5018 import (
     CENSUS_JOB, BACKEND, ACCOUNT, CAL_SHOTS)
 from exp_crossblock_widesweep import build_twins, SEED, NPHYS
 SHOTS = 8000
+# Ember #5004 power fix, BOTH remedies taken (they are not alternatives): the deep_2 vs
+# shallow_2 leg is a ONE-CZ difference (10 vs 9), MDE ~0.107 per candidate at 960 shots
+# against a per-CZ effect of ~0.045 — it can only detect the effect if the loss is ALREADY
+# evenly gate-dominated, which is the hypothesis it exists to test. So: (a) raise shots on
+# that pair specifically (se ~ 1/sqrt(N)), and (b) pre-register that a null on that leg is
+# UNINFORMATIVE and may never be cited as evidence against gate-dominance.
+SHOTS_GATE_LEG = 32000     # deep_2 / shallow_2 only; MDE ~0.107 -> ~0.018
 CENSUS_DECODE = os.path.join(RES, f"armn_fez_census_decode_{CENSUS_JOB}.json")
 
 
@@ -124,10 +131,11 @@ def main(submit=False):
             t = transpile_with_dd(backend, build_witness(backend, q, pl, delay_dt, nd, deep))
             n2q = sum(1 for i in t.data if i.operation.num_qubits == 2)
             counts.setdefault(cfg, []).append(n2q)
-            pubs.append((t, None, SHOTS))
-            meta.append({"block": f"{cfg}_q{q}", "cfg": cfg, "q": q,
+            sh = SHOTS_GATE_LEG if cfg in ("deep_2", "shallow_2") else SHOTS
+            pubs.append((t, None, sh))
+            meta.append({"block": f"{cfg}_q{q}", "cfg": cfg, "q": q, "shots_used": sh,
                          "role": "drifter" if isd else "quiet", "n2q": n2q,
-                         "plan": pl, "shots": SHOTS})
+                         "plan": pl, "shots": sh})
     for cfg, v in counts.items():
         print(f"[gates] {cfg:>10}: 2q per candidate = {sorted(set(v))}")
     assert max(counts["shallow_2"]) < min(counts["deep_2"]), "shallow must be shallower"
@@ -136,7 +144,14 @@ def main(submit=False):
            "purpose": ("decompose where witness purity is lost: gates vs channel idle vs "
                        "geometry. u>=0.7 gate must be MEASURED, not projected."),
            "changes": {"relay->adjacent CX": "4 CX -> 1", "SWAP->transfer": "3 CX -> 2"},
-           "gate_counts": counts, "pubs_meta": meta, "delay_dt": delay_dt}
+           "gate_counts": counts, "pubs_meta": meta, "delay_dt": delay_dt,
+           "power": {"gate_leg": "deep_2 vs shallow_2 is a ONE-CZ difference; "
+                                 f"shots raised to {SHOTS_GATE_LEG} (MDE ~0.107 -> ~0.018)",
+                     "gate_leg_null_disposition": "UNINFORMATIVE — a null on the one-CZ leg is "
+                                 "NOT evidence against gate-dominance and may not be cited as "
+                                 "such (pre-registered, Ember general#5004)",
+                     "other_legs": "delay series (0/1/2) and shallow_0 are well-powered; the "
+                                 "delay lever is far larger than one gate"}}
     if submit:
         job = SamplerV2(mode=backend).run(pubs)
         man["job_id"] = job.job_id()

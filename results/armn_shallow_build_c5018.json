@@ -57,6 +57,7 @@
    "block": "shallow_0_q23",
    "cfg": "shallow_0",
    "q": 23,
+   "shots_used": 8000,
    "role": "drifter",
    "n2q": 9,
    "plan": {
@@ -71,6 +72,7 @@
    "block": "shallow_1_q23",
    "cfg": "shallow_1",
    "q": 23,
+   "shots_used": 8000,
    "role": "drifter",
    "n2q": 9,
    "plan": {
@@ -85,6 +87,7 @@
    "block": "shallow_2_q23",
    "cfg": "shallow_2",
    "q": 23,
+   "shots_used": 32000,
    "role": "drifter",
    "n2q": 9,
    "plan": {
@@ -93,12 +96,13 @@
     "s1": 24,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   },
   {
    "block": "deep_2_q23",
    "cfg": "deep_2",
    "q": 23,
+   "shots_used": 32000,
    "role": "drifter",
    "n2q": 10,
    "plan": {
@@ -107,12 +111,13 @@
     "s1": 24,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   },
   {
    "block": "shallow_0_q25",
    "cfg": "shallow_0",
    "q": 25,
+   "shots_used": 8000,
    "role": "drifter",
    "n2q": 9,
    "plan": {
@@ -127,6 +132,7 @@
    "block": "shallow_1_q25",
    "cfg": "shallow_1",
    "q": 25,
+   "shots_used": 8000,
    "role": "drifter",
    "n2q": 9,
    "plan": {
@@ -141,6 +147,7 @@
    "block": "shallow_2_q25",
    "cfg": "shallow_2",
    "q": 25,
+   "shots_used": 32000,
    "role": "drifter",
    "n2q": 9,
    "plan": {
@@ -149,12 +156,13 @@
     "s1": 37,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   },
   {
    "block": "deep_2_q25",
    "cfg": "deep_2",
    "q": 25,
+   "shots_used": 32000,
    "role": "drifter",
    "n2q": 10,
    "plan": {
@@ -163,12 +171,13 @@
     "s1": 37,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   },
   {
    "block": "shallow_0_q51",
    "cfg": "shallow_0",
    "q": 51,
+   "shots_used": 8000,
    "role": "drifter",
    "n2q": 9,
    "plan": {
@@ -183,6 +192,7 @@
    "block": "shallow_1_q51",
    "cfg": "shallow_1",
    "q": 51,
+   "shots_used": 8000,
    "role": "drifter",
    "n2q": 9,
    "plan": {
@@ -197,6 +207,7 @@
    "block": "shallow_2_q51",
    "cfg": "shallow_2",
    "q": 51,
+   "shots_used": 32000,
    "role": "drifter",
    "n2q": 9,
    "plan": {
@@ -205,12 +216,13 @@
     "s1": 58,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   },
   {
    "block": "deep_2_q51",
    "cfg": "deep_2",
    "q": 51,
+   "shots_used": 32000,
    "role": "drifter",
    "n2q": 10,
    "plan": {
@@ -219,12 +231,13 @@
     "s1": 58,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   },
   {
    "block": "shallow_0_q29",
    "cfg": "shallow_0",
    "q": 29,
+   "shots_used": 8000,
    "role": "quiet",
    "n2q": 9,
    "plan": {
@@ -239,6 +252,7 @@
    "block": "shallow_1_q29",
    "cfg": "shallow_1",
    "q": 29,
+   "shots_used": 8000,
    "role": "quiet",
    "n2q": 9,
    "plan": {
@@ -253,6 +267,7 @@
    "block": "shallow_2_q29",
    "cfg": "shallow_2",
    "q": 29,
+   "shots_used": 32000,
    "role": "quiet",
    "n2q": 9,
    "plan": {
@@ -261,12 +276,13 @@
     "s1": 38,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   },
   {
    "block": "deep_2_q29",
    "cfg": "deep_2",
    "q": 29,
+   "shots_used": 32000,
    "role": "quiet",
    "n2q": 10,
    "plan": {
@@ -275,12 +291,13 @@
     "s1": 38,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   },
   {
    "block": "shallow_0_q3",
    "cfg": "shallow_0",
    "q": 3,
+   "shots_used": 8000,
    "role": "quiet",
    "n2q": 9,
    "plan": {
@@ -295,6 +312,7 @@
    "block": "shallow_1_q3",
    "cfg": "shallow_1",
    "q": 3,
+   "shots_used": 8000,
    "role": "quiet",
    "n2q": 9,
    "plan": {
@@ -309,6 +327,7 @@
    "block": "shallow_2_q3",
    "cfg": "shallow_2",
    "q": 3,
+   "shots_used": 32000,
    "role": "quiet",
    "n2q": 9,
    "plan": {
@@ -317,12 +336,13 @@
     "s1": 16,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   },
   {
    "block": "deep_2_q3",
    "cfg": "deep_2",
    "q": 3,
+   "shots_used": 32000,
    "role": "quiet",
    "n2q": 10,
    "plan": {
@@ -331,12 +351,13 @@
     "s1": 16,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   },
   {
    "block": "shallow_0_q31",
    "cfg": "shallow_0",
    "q": 31,
+   "shots_used": 8000,
    "role": "quiet",
    "n2q": 9,
    "plan": {
@@ -351,6 +372,7 @@
    "block": "shallow_1_q31",
    "cfg": "shallow_1",
    "q": 31,
+   "shots_used": 8000,
    "role": "quiet",
    "n2q": 9,
    "plan": {
@@ -365,6 +387,7 @@
    "block": "shallow_2_q31",
    "cfg": "shallow_2",
    "q": 31,
+   "shots_used": 32000,
    "role": "quiet",
    "n2q": 9,
    "plan": {
@@ -373,12 +396,13 @@
     "s1": 32,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   },
   {
    "block": "deep_2_q31",
    "cfg": "deep_2",
    "q": 31,
+   "shots_used": 32000,
    "role": "quiet",
    "n2q": 10,
    "plan": {
@@ -387,8 +411,13 @@
     "s1": 32,
     "relay_mid": null
    },
-   "shots": 8000
+   "shots": 32000
   }
  ],
- "delay_dt": 1488
+ "delay_dt": 1488,
+ "power": {
+  "gate_leg": "deep_2 vs shallow_2 is a ONE-CZ difference; shots raised to 32000 (MDE ~0.107 -> ~0.018)",
+  "gate_leg_null_disposition": "UNINFORMATIVE \u2014 a null on the one-CZ leg is NOT evidence against gate-dominance and may not be cited as such (pre-registered, Ember general#5004)",
+  "other_legs": "delay series (0/1/2) and shallow_0 are well-powered; the delay lever is far larger than one gate"
+ }
 }
