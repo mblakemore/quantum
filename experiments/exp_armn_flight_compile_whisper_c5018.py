@@ -81,7 +81,12 @@ def pick_partners(backend, block, register):
     # role — coherent = pure = zero odd parities = reads ALT: the FALSE-ALT path the court
     # could not construct (#4720/#4722) EXISTS via partner contamination and is excluded
     # here by constraint. (Found at compile: q50's only free neighbor is census-drifter q48.)
-    CENSUS_DRIFTERS = {51, 39, 48, 25, 35, 71, 17, 33, 57, 53, 55, 34, 23}
+    # DERIVED, never transcribed (C4872 lesson): the exclusion set is read from the census
+    # decode artifact at build time, so a re-census automatically re-derives it and a
+    # hand-copied list can never drift from the measurement it claims to represent.
+    _cd = json.load(open(os.path.join(RES, f"armn_fez_census_decode_{CENSUS_JOB}.json")))
+    CENSUS_DRIFTERS = {r["q"] for r in _cd["drifter_ranking"]
+                       if r.get("margin") and r["margin"] >= 3}
     all_blocks = {q for r in RUNGS.values() for role in r.values() for q in role}
     excluded = set(block) | all_blocks | CENSUS_DRIFTERS
 
