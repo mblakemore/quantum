@@ -139,6 +139,9 @@ def main(submit=False):
     for cfg, v in counts.items():
         print(f"[gates] {cfg:>10}: 2q per candidate = {sorted(set(v))}")
     assert max(counts["shallow_2"]) < min(counts["deep_2"]), "shallow must be shallower"
+    p_ref = 0.22
+    se_u = 2*np.sqrt(p_ref*(1-p_ref)/SHOTS_GATE_LEG)
+    mde1 = 2.8*np.sqrt(2)*se_u; mde6 = mde1/np.sqrt(6)
     man = {"card": "armn_shallow_witness_ladder", "cycle": "C5018", "substrate": "claude-fable-5",
            "backend": BACKEND, "account": ACCOUNT, "cal_epoch_at_build": cal,
            "purpose": ("decompose where witness purity is lost: gates vs channel idle vs "
@@ -147,9 +150,18 @@ def main(submit=False):
            "gate_counts": counts, "pubs_meta": meta, "delay_dt": delay_dt,
            "power": {"gate_leg": "deep_2 vs shallow_2 is a ONE-CZ difference; "
                                  f"shots raised to {SHOTS_GATE_LEG} (MDE ~0.107 -> ~0.018)",
-                     "gate_leg_null_disposition": "UNINFORMATIVE — a null on the one-CZ leg is "
-                                 "NOT evidence against gate-dominance and may not be cited as "
-                                 "such (pre-registered, Ember general#5004)",
+                     # Ember #5011: a BOUND, not a disclaimer. "Uninformative" would throw
+                     # away a real result; the MDE is the legitimate null-interpretation floor,
+                     # exactly as the condition number was the legitimate amplification ceiling.
+                     "gate_leg_null_disposition": (
+                         f"BOUND, not a disclaimer. At {SHOTS_GATE_LEG} shots se(u)~{se_u:.4f}, "
+                         f"single-candidate MDE ~{mde1:.3f}, pooled over 6 candidates ~{mde6:.4f}. "
+                         f"A NULL on the one-CZ leg therefore means: per-CZ purity cost is BELOW "
+                         f"~{mde1:.3f} (single) / ~{mde6:.4f} (pooled) — under HALF the ~0.045 per "
+                         f"CZ that even gate-dominance of the observed 0.45 loss would require. "
+                         f"That is a citable, falsifiable upper bound on gate cost and it is what "
+                         f"tells a future designer that fewer gates is not the fix. It may NOT be "
+                         f"restated as 'gates do not matter' (unbounded) nor as 'uninformative'."),
                      "other_legs": "delay series (0/1/2) and shallow_0 are well-powered; the "
                                  "delay lever is far larger than one gate"}}
     if submit:
