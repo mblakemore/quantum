@@ -60,21 +60,80 @@ def three_state(ok, evaluable, name, detail):
     return state
 
 
-def check_readout(b):
-    """(2) per-qubit readout/SPAM profile match between the two blocks."""
-    d = b.get("readout", {})
-    drift = d.get("drifter"); null = d.get("null")
-    if not drift or not null or len(drift) != len(null):
-        return three_state(False, False, "2 readout/SPAM profile match",
-                           ["readout.drifter / readout.null missing or unequal length",
-                            "A missing profile is NOT a pass — the check cannot run."])
+def _pair_stats(drift, null):
     diffs = [abs(float(a) - float(c)) for a, c in zip(drift, null)]
-    worst = max(diffs); mean = sum(diffs) / len(diffs)
-    ok = worst <= READOUT_TOL and mean <= READOUT_MEAN_TOL
-    return three_state(ok, True, "2 readout/SPAM profile match",
-                       [f"matched pairs: {len(diffs)}",
-                        f"worst per-qubit |diff| {worst:.5f}  (bar {READOUT_TOL})",
-                        f"mean |diff|            {mean:.5f}  (bar {READOUT_MEAN_TOL})"])
+    return max(diffs), sum(diffs) / len(diffs), len(diffs)
+
+
+def _leg(d, key):
+    """One cal read as {drifter:[], null:[]}. Accepts the flat single-cal shape
+    (readout.drifter) and the bracketed shape (readout.start.drifter)."""
+    if key is None:
+        return d.get("drifter"), d.get("null")
+    sub = d.get(key) or {}
+    return sub.get("drifter"), sub.get("null")
+
+
+def check_readout(b):
+    """(2) per-qubit readout/SPAM profile match between the two blocks.
+
+    TWO ACCEPTED SHAPES, and the second is why this function was rewritten (Ember C4253):
+
+      single    readout.drifter[] / readout.null[]              — the originally locked
+                                                                  interface, still valid
+      bracketed readout.start.{drifter,null} + readout.end.{...} — cal at job start AND
+                                                                  end (bus general#4726)
+
+    WHY BRACKETED MATTERS, and why I built the consumer before asking for the producer:
+    with one cal I can only ask whether the block match held from the census to the flight
+    — a snapshot. With cal at both ends I can ask whether it held ACROSS the flight, which
+    is the question this check was always morally about. So the PASS RULE under bracketing
+    is the strict one: the match must hold at BOTH ends. Passing at the start and failing
+    at the end is a match that decayed under the very window the arm ran in.
+
+    SCOPE DISCIPLINE — the cal-vs-cal drift within each block is COMPUTED AND REPORTED
+    HERE BUT NEVER GATED ON. My seat is leak channels: can the decoder separate the blocks
+    on something other than coherence. Within-block drift across the window is a POWER and
+    INTERPRETATION question — it is Elder's NULL-discharge input (general#4720), not mine.
+    Gating on it would be me widening my own veto after pre-committing its bounds, which is
+    the mirror image of the threshold-negotiation I pre-registered against. I hand him the
+    number; he decides what it means.
+    """
+    d = b.get("readout", {})
+    bracketed = isinstance(d.get("start"), dict) and isinstance(d.get("end"), dict)
+    legs = [("start", "start"), ("end", "end")] if bracketed else [("cal", None)]
+
+    states, detail = [], []
+    if not bracketed:
+        detail.append("SINGLE-CAL bundle: this tests whether the match held from census to")
+        detail.append("flight (a snapshot). The bracketed shape tests the interval.")
+    for label, key in legs:
+        drift, null = _leg(d, key)
+        if not drift or not null or len(drift) != len(null):
+            where = f"readout.{key}." if key else "readout."
+            return three_state(False, False, "2 readout/SPAM profile match",
+                               [f"{where}drifter / {where}null missing or unequal length",
+                                "A missing profile is NOT a pass — the check cannot run."])
+        worst, mean, n = _pair_stats(drift, null)
+        ok = worst <= READOUT_TOL and mean <= READOUT_MEAN_TOL
+        states.append(ok)
+        detail.append(f"[{label}] pairs {n}  worst |diff| {worst:.5f} (bar {READOUT_TOL})"
+                      f"  mean {mean:.5f} (bar {READOUT_MEAN_TOL})  "
+                      f"{'ok' if ok else 'OVER BAR'}")
+
+    if bracketed:
+        # DIAGNOSTIC ONLY — see the scope note above. This is the cal-vs-cal number Elder's
+        # pre-registered NULL-discharge clause names, and without a bracketed bundle it does
+        # not exist at all; that absence was the defect the ask closed.
+        for blk in ("drifter", "null"):
+            s = (d["start"] or {}).get(blk); e = (d["end"] or {}).get(blk)
+            if s and e and len(s) == len(e):
+                mv = [abs(float(x) - float(y)) for x, y in zip(s, e)]
+                detail.append(f"[diagnostic, NOT gated] {blk} within-block cal drift "
+                              f"start→end: worst {max(mv):.5f}, mean {sum(mv)/len(mv):.5f}")
+        detail.append("within-block drift is Elder's NULL-discharge input, not my gate.")
+
+    return three_state(all(states), True, "2 readout/SPAM profile match", detail)
 
 
 def check_structure(b):
