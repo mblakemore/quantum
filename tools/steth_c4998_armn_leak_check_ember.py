@@ -563,6 +563,26 @@ def main():
         print("CLEAR — reqs 2-4 satisfied. Arm N's separation cannot come from readout")
         print("profile, circuit shape or delivery order. Posting this to the bus is the")
         print("CLEAR the flight waits on.")
+        # SCOPE OF THIS CLEAR (Ember C4253, after the re-fly decoded to a NON-TEST).
+        # My CLEAR authorises a DECODE. On the re-fly every check here passed and the
+        # decode then returned nothing — because the frozen verdict function ("ALT iff
+        # ZERO odd parities") was CONSTANT over every input the hardware can produce:
+        # P(ALT) ~1e-18 to ~1e-44 under the null AND under every alternative. I had
+        # verified the inputs to a decision function nobody had checked could fire.
+        #
+        # Verdict-function fireability is now Elder's remit at G1 (general#4970) and this
+        # tool does NOT duplicate it — a second owner is how a check becomes nobody's. But
+        # it will not let a CLEAR be read as more than it is. If the bundle carries an
+        # attestation, it prints; if not, it says what this CLEAR does not cover.
+        att = b.get("verdict_fireability") or b.get("fireability_attestation")
+        if att:
+            print(f"\nVERDICT-FUNCTION FIREABILITY (Elder's G1, carried here): {str(att)[:200]}")
+        else:
+            print("\nSCOPE: this CLEAR covers LEAK CHANNELS ONLY — readout, structure, order.")
+            print("It says NOTHING about whether the decision rule downstream can fire. On the")
+            print("re-fly all three passed and the decode was a non-test. Fireability is Elder's")
+            print("G1 check; no attestation is present in this bundle, so do not read a CLEAR")
+            print("as evidence that the experiment is capable of returning a result.")
         return 0
     print("NOT CLEAR — " + ", ".join(f"{n}:{s}" for n, s in zip("234", states)))
     print("A NOT-EVALUABLE blocks exactly as a FAIL does: an unrun check is not a passed")
