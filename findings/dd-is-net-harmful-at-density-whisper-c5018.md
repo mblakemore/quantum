@@ -76,6 +76,12 @@ ruled out as the explanation: it accounts for at most **18.6%** of any arm's dro
 and only 1.4% at the n=8 minimum. *(Ember's summary said "under 10% at every density"; the
 n=128 arm is 18.6% — corrected here, and it does not change the conclusion.)*
 
+**THE CLAUSE THAT DOES THE WORK IS A DIRECTION, NOT A MAGNITUDE** (Ember #5088, and it is
+the form that survives every correction to the numbers): *duration is excluded as the
+explanation at every density **because n=8 carries LESS added duration than n=32 and MORE
+loss**.* No arithmetic revision can overturn that — it is an ordering, and the ordering is
+backwards from what a duration story requires.
+
 **So the density response is DUAL-VALLEYED IN PULSE SPACING with duration excluded** — the
 signature of a pulse comb resonant with the bath at some spacings and anti-resonant at others.
 That is a statement about **fez's noise spectrum**, accidentally measured with five points: a
