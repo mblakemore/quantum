@@ -99,6 +99,54 @@ def check_readout(b):
     the mirror image of the threshold-negotiation I pre-registered against. I hand him the
     number; he decides what it means.
     """
+    # PER-RUNG BRACKETED SHAPE (the delivered flight-cal bundle):
+    #   readout_bracket.{k2,k3}.{start,end}.{drifter,null,drifter_ids,null_ids}
+    # Handled first because it is the richest and it is what actually flew. Every leg is
+    # gated: BOTH rungs at BOTH ends must hold, per the strict rule I stated before the
+    # numbers existed (bus general#4730).
+    rb = b.get("readout_bracket")
+    if isinstance(rb, dict) and rb:
+        rungs_def = b.get("rungs") or {}
+        detail, ok, evaluable = [], True, True
+        for rung in sorted(rb):
+            for end in ("start", "end"):
+                leg = (rb[rung] or {}).get(end) or {}
+                dr, nu = leg.get("drifter"), leg.get("null")
+                if not dr or not nu or len(dr) != len(nu):
+                    detail.append(f"[{rung}/{end}] missing or unequal lists — NOT-EVALUABLE")
+                    evaluable = False; continue
+                # PAIRING VERIFICATION (the general#4767 field). Positional zipping is only
+                # meaningful if position i really is the matched pair. A sort anywhere on
+                # the way out would invert the pairing SILENTLY — right lengths, right
+                # types, a clean number computed across qubits never matched to each other.
+                di, ni = leg.get("drifter_ids"), leg.get("null_ids")
+                exp = rungs_def.get(str(rung).lstrip("k")) or rungs_def.get(str(rung)) or {}
+                if di and ni:
+                    if list(di) != list(exp.get("alt", di)) or list(ni) != list(exp.get("null", ni)):
+                        detail.append(f"[{rung}/{end}] ids DISAGREE with the block definition "
+                                      f"— refusing to compute across an unverified pairing")
+                        evaluable = False; continue
+                    pair_note = " pairing VERIFIED " + ",".join(f"{a}~{c}" for a, c in zip(di, ni))
+                else:
+                    pair_note = " pairing UNVERIFIED (no ids) — ordering taken on convention"
+                worst, mean, n = _pair_stats(dr, nu)
+                leg_ok = worst <= READOUT_TOL and mean <= READOUT_MEAN_TOL
+                ok &= leg_ok
+                detail.append(f"[{rung}/{end}] pairs {n}  worst {worst:.5f} (bar {READOUT_TOL})"
+                              f"  mean {mean:.5f} (bar {READOUT_MEAN_TOL})  "
+                              f"{'ok' if leg_ok else 'OVER BAR'}")
+                if di and ni:
+                    for a, c, x, y in zip(di, ni, dr, nu):
+                        flag = "  <-- OVER BAR" if abs(x - y) > READOUT_TOL else ""
+                        detail.append(f"        q{a}~q{c}  {x:.5f} vs {y:.5f}  "
+                                      f"diff {abs(x-y):.5f}{flag}")
+                detail.append(f"       {pair_note}")
+        if not evaluable:
+            return three_state(False, False, "2 readout/SPAM profile match", detail)
+        detail.append("BOTH rungs at BOTH ends must hold — the interval rule, stated at")
+        detail.append("general#4730 before any of these numbers existed.")
+        return three_state(ok, True, "2 readout/SPAM profile match", detail)
+
     d = b.get("readout", {})
     # DEFERRED-BY-DESIGN SENTINEL. The structural-stage bundle carries the string
     # "PENDING_FLIGHT_CAL" here, because I am the one who asked that these lists come from
