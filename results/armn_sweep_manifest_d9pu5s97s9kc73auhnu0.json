@@ -1,0 +1,735 @@
+{
+ "card": "armn_delay_sweep",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_kingston",
+ "account": "IBMQ_ALT",
+ "job_id": "d9pu5s97s9kc73auhnu0",
+ "cal_epoch_at_build": "2026-08-06 01:05:09+00:00",
+ "gate": 0.7,
+ "readout_bar": 0.05,
+ "D_grid_dt": [
+  0,
+  206,
+  412,
+  824,
+  1647
+ ],
+ "chip_incumbent_D0": 1647,
+ "purpose": "STEP 1 of the forced ordering: fix the witness so it clears the gate",
+ "branch_precondition": "EVERY branch is conditioned on the chip's own witness clearing u>=0.700 in-job at the D in question. A branch that can fire on a failed instrument is a formula, not a pre-registration (C5018 kingston lesson).",
+ "branches": {
+  "a": "some D>=824 clears on kingston -> FIXED with useful drift exposure",
+  "b": "only D<=412 clears -> FIXED at 4x-less exposure; price the signal cost",
+  "c": "no D clears incl. D=0 -> not the idle; shallow_0 is what needs explaining"
+ },
+ "secondary": "kingston:fez absolute loss per idle at EQUAL D. The D grid is ABSOLUTE and identical on both chips (dt=4.0ns on each), which removes the 1647-vs-1488 mismatch the current 3x claim carries. A first version of this script used per-chip fractions and reproduced that mismatch; caught in dry run before submission.",
+ "tertiary": "q21/q47 included deliberately: HIGH at every D = block property; split only at long D = D-dependent; tracking others = original split was noise. Logged as a coincidence IN ADVANCE.",
+ "does_not_size_step2": "N>=30 comes from Ember's f^k arithmetic and is NOT touched by this job's outcome",
+ "cost_est_qpu_s": 60.7,
+ "pool_at_build": 119,
+ "info": {
+  "D0": 1647,
+  "Ds": [
+   0,
+   206,
+   412,
+   824,
+   1647
+  ],
+  "n_qualify": 36,
+  "n_bad_readout": 13,
+  "missing_must": []
+ },
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "D0_q21",
+   "q": 21,
+   "D": 0,
+   "D_frac": 0.0,
+   "D_us": 0.0,
+   "plan": {
+    "anc1": 20,
+    "anc2": 22,
+    "s1": 36,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 0,
+   "worst_readout": 0.0103,
+   "shots": 4000
+  },
+  {
+   "block": "D206_q21",
+   "q": 21,
+   "D": 206,
+   "D_frac": 0.125,
+   "D_us": 0.824,
+   "plan": {
+    "anc1": 20,
+    "anc2": 22,
+    "s1": 36,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 412,
+   "worst_readout": 0.0103,
+   "shots": 4000
+  },
+  {
+   "block": "D412_q21",
+   "q": 21,
+   "D": 412,
+   "D_frac": 0.25,
+   "D_us": 1.648,
+   "plan": {
+    "anc1": 20,
+    "anc2": 22,
+    "s1": 36,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 824,
+   "worst_readout": 0.0103,
+   "shots": 4000
+  },
+  {
+   "block": "D824_q21",
+   "q": 21,
+   "D": 824,
+   "D_frac": 0.5,
+   "D_us": 3.296,
+   "plan": {
+    "anc1": 20,
+    "anc2": 22,
+    "s1": 36,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 1648,
+   "worst_readout": 0.0103,
+   "shots": 4000
+  },
+  {
+   "block": "D1647_q21",
+   "q": 21,
+   "D": 1647,
+   "D_frac": 1.0,
+   "D_us": 6.588,
+   "plan": {
+    "anc1": 20,
+    "anc2": 22,
+    "s1": 36,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 3294,
+   "worst_readout": 0.0103,
+   "shots": 4000
+  },
+  {
+   "block": "D0_q47",
+   "q": 47,
+   "D": 0,
+   "D_frac": 0.0,
+   "D_us": 0.0,
+   "plan": {
+    "anc1": 46,
+    "anc2": 48,
+    "s1": 57,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 0,
+   "worst_readout": 0.0107,
+   "shots": 4000
+  },
+  {
+   "block": "D206_q47",
+   "q": 47,
+   "D": 206,
+   "D_frac": 0.125,
+   "D_us": 0.824,
+   "plan": {
+    "anc1": 46,
+    "anc2": 48,
+    "s1": 57,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 412,
+   "worst_readout": 0.0107,
+   "shots": 4000
+  },
+  {
+   "block": "D412_q47",
+   "q": 47,
+   "D": 412,
+   "D_frac": 0.25,
+   "D_us": 1.648,
+   "plan": {
+    "anc1": 46,
+    "anc2": 48,
+    "s1": 57,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 824,
+   "worst_readout": 0.0107,
+   "shots": 4000
+  },
+  {
+   "block": "D824_q47",
+   "q": 47,
+   "D": 824,
+   "D_frac": 0.5,
+   "D_us": 3.296,
+   "plan": {
+    "anc1": 46,
+    "anc2": 48,
+    "s1": 57,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 1648,
+   "worst_readout": 0.0107,
+   "shots": 4000
+  },
+  {
+   "block": "D1647_q47",
+   "q": 47,
+   "D": 1647,
+   "D_frac": 1.0,
+   "D_us": 6.588,
+   "plan": {
+    "anc1": 46,
+    "anc2": 48,
+    "s1": 57,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 3294,
+   "worst_readout": 0.0107,
+   "shots": 4000
+  },
+  {
+   "block": "D0_q41",
+   "q": 41,
+   "D": 0,
+   "D_frac": 0.0,
+   "D_us": 0.0,
+   "plan": {
+    "anc1": 36,
+    "anc2": 40,
+    "s1": 42,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 0,
+   "worst_readout": 0.0068,
+   "shots": 4000
+  },
+  {
+   "block": "D206_q41",
+   "q": 41,
+   "D": 206,
+   "D_frac": 0.125,
+   "D_us": 0.824,
+   "plan": {
+    "anc1": 36,
+    "anc2": 40,
+    "s1": 42,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 412,
+   "worst_readout": 0.0068,
+   "shots": 4000
+  },
+  {
+   "block": "D412_q41",
+   "q": 41,
+   "D": 412,
+   "D_frac": 0.25,
+   "D_us": 1.648,
+   "plan": {
+    "anc1": 36,
+    "anc2": 40,
+    "s1": 42,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 824,
+   "worst_readout": 0.0068,
+   "shots": 4000
+  },
+  {
+   "block": "D824_q41",
+   "q": 41,
+   "D": 824,
+   "D_frac": 0.5,
+   "D_us": 3.296,
+   "plan": {
+    "anc1": 36,
+    "anc2": 40,
+    "s1": 42,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 1648,
+   "worst_readout": 0.0068,
+   "shots": 4000
+  },
+  {
+   "block": "D1647_q41",
+   "q": 41,
+   "D": 1647,
+   "D_frac": 1.0,
+   "D_us": 6.588,
+   "plan": {
+    "anc1": 36,
+    "anc2": 40,
+    "s1": 42,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 3294,
+   "worst_readout": 0.0068,
+   "shots": 4000
+  },
+  {
+   "block": "D0_q109",
+   "q": 109,
+   "D": 0,
+   "D_frac": 0.0,
+   "D_us": 0.0,
+   "plan": {
+    "anc1": 108,
+    "anc2": 110,
+    "s1": 118,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 0,
+   "worst_readout": 0.0071,
+   "shots": 4000
+  },
+  {
+   "block": "D206_q109",
+   "q": 109,
+   "D": 206,
+   "D_frac": 0.125,
+   "D_us": 0.824,
+   "plan": {
+    "anc1": 108,
+    "anc2": 110,
+    "s1": 118,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 412,
+   "worst_readout": 0.0071,
+   "shots": 4000
+  },
+  {
+   "block": "D412_q109",
+   "q": 109,
+   "D": 412,
+   "D_frac": 0.25,
+   "D_us": 1.648,
+   "plan": {
+    "anc1": 108,
+    "anc2": 110,
+    "s1": 118,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 824,
+   "worst_readout": 0.0071,
+   "shots": 4000
+  },
+  {
+   "block": "D824_q109",
+   "q": 109,
+   "D": 824,
+   "D_frac": 0.5,
+   "D_us": 3.296,
+   "plan": {
+    "anc1": 108,
+    "anc2": 110,
+    "s1": 118,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 1648,
+   "worst_readout": 0.0071,
+   "shots": 4000
+  },
+  {
+   "block": "D1647_q109",
+   "q": 109,
+   "D": 1647,
+   "D_frac": 1.0,
+   "D_us": 6.588,
+   "plan": {
+    "anc1": 108,
+    "anc2": 110,
+    "s1": 118,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 3294,
+   "worst_readout": 0.0071,
+   "shots": 4000
+  },
+  {
+   "block": "D0_q151",
+   "q": 151,
+   "D": 0,
+   "D_frac": 0.0,
+   "D_us": 0.0,
+   "plan": {
+    "anc1": 138,
+    "anc2": 150,
+    "s1": 152,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 0,
+   "worst_readout": 0.0078,
+   "shots": 4000
+  },
+  {
+   "block": "D206_q151",
+   "q": 151,
+   "D": 206,
+   "D_frac": 0.125,
+   "D_us": 0.824,
+   "plan": {
+    "anc1": 138,
+    "anc2": 150,
+    "s1": 152,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 412,
+   "worst_readout": 0.0078,
+   "shots": 4000
+  },
+  {
+   "block": "D412_q151",
+   "q": 151,
+   "D": 412,
+   "D_frac": 0.25,
+   "D_us": 1.648,
+   "plan": {
+    "anc1": 138,
+    "anc2": 150,
+    "s1": 152,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 824,
+   "worst_readout": 0.0078,
+   "shots": 4000
+  },
+  {
+   "block": "D824_q151",
+   "q": 151,
+   "D": 824,
+   "D_frac": 0.5,
+   "D_us": 3.296,
+   "plan": {
+    "anc1": 138,
+    "anc2": 150,
+    "s1": 152,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 1648,
+   "worst_readout": 0.0078,
+   "shots": 4000
+  },
+  {
+   "block": "D1647_q151",
+   "q": 151,
+   "D": 1647,
+   "D_frac": 1.0,
+   "D_us": 6.588,
+   "plan": {
+    "anc1": 138,
+    "anc2": 150,
+    "s1": 152,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 3294,
+   "worst_readout": 0.0078,
+   "shots": 4000
+  },
+  {
+   "block": "D0_q67",
+   "q": 67,
+   "D": 0,
+   "D_frac": 0.0,
+   "D_us": 0.0,
+   "plan": {
+    "anc1": 57,
+    "anc2": 66,
+    "s1": 68,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 0,
+   "worst_readout": 0.0083,
+   "shots": 4000
+  },
+  {
+   "block": "D206_q67",
+   "q": 67,
+   "D": 206,
+   "D_frac": 0.125,
+   "D_us": 0.824,
+   "plan": {
+    "anc1": 57,
+    "anc2": 66,
+    "s1": 68,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 412,
+   "worst_readout": 0.0083,
+   "shots": 4000
+  },
+  {
+   "block": "D412_q67",
+   "q": 67,
+   "D": 412,
+   "D_frac": 0.25,
+   "D_us": 1.648,
+   "plan": {
+    "anc1": 57,
+    "anc2": 66,
+    "s1": 68,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 824,
+   "worst_readout": 0.0083,
+   "shots": 4000
+  },
+  {
+   "block": "D824_q67",
+   "q": 67,
+   "D": 824,
+   "D_frac": 0.5,
+   "D_us": 3.296,
+   "plan": {
+    "anc1": 57,
+    "anc2": 66,
+    "s1": 68,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 1648,
+   "worst_readout": 0.0083,
+   "shots": 4000
+  },
+  {
+   "block": "D1647_q67",
+   "q": 67,
+   "D": 1647,
+   "D_frac": 1.0,
+   "D_us": 6.588,
+   "plan": {
+    "anc1": 57,
+    "anc2": 66,
+    "s1": 68,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 3294,
+   "worst_readout": 0.0083,
+   "shots": 4000
+  },
+  {
+   "block": "D0_q87",
+   "q": 87,
+   "D": 0,
+   "D_frac": 0.0,
+   "D_us": 0.0,
+   "plan": {
+    "anc1": 86,
+    "anc2": 88,
+    "s1": 97,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 0,
+   "worst_readout": 0.0084,
+   "shots": 4000
+  },
+  {
+   "block": "D206_q87",
+   "q": 87,
+   "D": 206,
+   "D_frac": 0.125,
+   "D_us": 0.824,
+   "plan": {
+    "anc1": 86,
+    "anc2": 88,
+    "s1": 97,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 412,
+   "worst_readout": 0.0084,
+   "shots": 4000
+  },
+  {
+   "block": "D412_q87",
+   "q": 87,
+   "D": 412,
+   "D_frac": 0.25,
+   "D_us": 1.648,
+   "plan": {
+    "anc1": 86,
+    "anc2": 88,
+    "s1": 97,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 824,
+   "worst_readout": 0.0084,
+   "shots": 4000
+  },
+  {
+   "block": "D824_q87",
+   "q": 87,
+   "D": 824,
+   "D_frac": 0.5,
+   "D_us": 3.296,
+   "plan": {
+    "anc1": 86,
+    "anc2": 88,
+    "s1": 97,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 1648,
+   "worst_readout": 0.0084,
+   "shots": 4000
+  },
+  {
+   "block": "D1647_q87",
+   "q": 87,
+   "D": 1647,
+   "D_frac": 1.0,
+   "D_us": 6.588,
+   "plan": {
+    "anc1": 86,
+    "anc2": 88,
+    "s1": 97,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 3294,
+   "worst_readout": 0.0084,
+   "shots": 4000
+  },
+  {
+   "block": "D0_q105",
+   "q": 105,
+   "D": 0,
+   "D_frac": 0.0,
+   "D_us": 0.0,
+   "plan": {
+    "anc1": 104,
+    "anc2": 106,
+    "s1": 117,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 0,
+   "worst_readout": 0.0085,
+   "shots": 4000
+  },
+  {
+   "block": "D206_q105",
+   "q": 105,
+   "D": 206,
+   "D_frac": 0.125,
+   "D_us": 0.824,
+   "plan": {
+    "anc1": 104,
+    "anc2": 106,
+    "s1": 117,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 412,
+   "worst_readout": 0.0085,
+   "shots": 4000
+  },
+  {
+   "block": "D412_q105",
+   "q": 105,
+   "D": 412,
+   "D_frac": 0.25,
+   "D_us": 1.648,
+   "plan": {
+    "anc1": 104,
+    "anc2": 106,
+    "s1": 117,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 824,
+   "worst_readout": 0.0085,
+   "shots": 4000
+  },
+  {
+   "block": "D824_q105",
+   "q": 105,
+   "D": 824,
+   "D_frac": 0.5,
+   "D_us": 3.296,
+   "plan": {
+    "anc1": 104,
+    "anc2": 106,
+    "s1": 117,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 1648,
+   "worst_readout": 0.0085,
+   "shots": 4000
+  },
+  {
+   "block": "D1647_q105",
+   "q": 105,
+   "D": 1647,
+   "D_frac": 1.0,
+   "D_us": 6.588,
+   "plan": {
+    "anc1": 104,
+    "anc2": 106,
+    "s1": 117,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "total_delay_dt": 3294,
+   "worst_readout": 0.0085,
+   "shots": 4000
+  }
+ ],
+ "submit_iso": "2026-08-06T01:27:13.557200+00:00"
+}
