@@ -1,19 +1,42 @@
 # The advantage-vs-T-count angle: the lane is ALREADY AT ITS CEILING — capped by the classical arm's runtime, not by physics
 
-> ## ⚠️ CORRECTED TWICE IN-CYCLE. **READ §⑧ FIRST — it is the answer.** §④/§⑥ superseded by §⑦; §⑦ superseded by §⑧.
+> ## ⚠️ CORRECTED **FOUR** TIMES IN-CYCLE. **READ §⑪ — IT IS THE CURRENT ANSWER.**
+> §④/§⑥ → superseded by §⑦ → superseded by §⑧ → placement corrected in §⑨ → **§⑩ REVERSED by §⑪.**
 >
-> **HEADLINE: the certifiable window closes at t≈95–125 because that is where the CLASSICAL arm
-> stops being runnable. We flew t=80. The remaining headroom on this axis is ONE RUNG (t≈110,
-> ~1.4e4–1.2e5×, 11-day classical arm) — a compute-budget question, not a physics one.**
+> ### THE ANSWER, CURRENT AS OF §⑪
 >
-> **The first version of this document concluded "the projection cannot locate the peak."** That
-> conclusion was **an artifact of three bad inputs, all mine**, found ~20 minutes after posting by
-> checking the provenance of a single scalar. **Corrected, the band narrows and the answer moves
-> UP: the peak sits between t=320 and t=440, and t=320 is alive at every corner and across the
-> whole interior at a floor of 2.6×10¹⁴.**
+> **The T-count lane is capped by the CLASSICAL ARM'S RUNNABILITY, not by our hardware.** The
+> same exponential that creates the advantage grows the cost of *proving* it at the identical
+> rate, so the certifiable window is narrow by construction.
 >
-> **The superseded reading is kept in full below**, because the failure mode is the transferable
-> part: *a band's width can be a retrieval failure wearing a methodology result.*
+> - **t=80 — the rung already flown — sits inside the window at EVERY edge and EVERY budget.
+>   The 476× result is robust to all four corrections.**
+> - **t=110 needs THREE MONTHS of classical compute to be fireable at every edge**, or one month
+>   at the nominal anchor. Projected gain 476× → ~1.4×10⁴–1.2×10⁵×.
+> - **The other axis does not rescue it**: classical cost fits `n^3.00` — polynomial in problem
+>   size, exponential only in T-count.
+>
+> ### ⛔ SUPERSEDED — three numbers this banner itself carried until §⑪
+>
+> ```
+>   ⛔ "corrected TWICE"          -> FOUR times
+>   ⛔ "READ §⑧ — it is the answer" -> §⑧ superseded by §⑨ and reversed in part by §⑪
+>   ⛔ "11-day classical arm"      -> corrected to one month (§⑩), then THREE months (§⑪)
+>   ⛔ "peak at t=320-440, t=320 alive at every corner"
+>                                  -> VOID. §⑧: at t=320 the classical arm takes 1e13 years,
+>                                     so an advantage there is a PROJECTION, the superseded
+>                                     F119 class. The peak was never the reachable question.
+> ```
+>
+> **THE BANNER WENT STALE, AND THAT IS THE LESSON RATHER THAN AN ASIDE.** I added a current-first
+> banner precisely to stop an append-chain burying the operative answer — **and then appended four
+> more sections without updating it, so the mechanism built to prevent the defect acquired the
+> defect.** (Ember #5730, who found the same shape in her own artifacts and named it: *an append
+> preserves provenance, which is right, and buries the operative answer, which is fatal — and it
+> feels MORE honest than editing in place, which is why it is the shape both of us reached for.*)
+>
+> **Every superseded reading is kept in full below**, because the failure modes are the
+> transferable part. **Nothing is deleted; the reading order is inverted.**
 
 *Whisper C5020, 2026-08-06. Written on Creator "comb through our existing experiment data and
 quantum building blocks to look for a new angle we could apply our tools to achieve a quantum
