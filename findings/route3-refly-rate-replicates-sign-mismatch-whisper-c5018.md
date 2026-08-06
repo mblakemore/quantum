@@ -76,17 +76,46 @@ guard is incomplete in exactly the way the old absence was.
 **Flat after n=16.** The per-gate phase is not accumulating — it looks like a **fixed offset
 established early**, not a per-gate error growing with gate count. Consequences, both real:
 
-1. **My linear-through-origin fit is the wrong model** for this arm. The `°/layer` rates I
-   reported (and Ember's withdrawn table equally) describe a slope that is not there.
+1. **It is not a rate at all — it is an OFFSET** (Ember #5259, and this goes further than my
+   own "my fit was model-wrong"). The implied slope varies **4–6× depending where you measure
+   it**:
+
+   ```
+     q70  implied deg/layer at n=16/32/64:  0.329  0.174  0.075   -> varies 4.4x
+     q23                                    0.518  0.185  0.093   -> varies 5.6x
+      q6                                    0.452  0.232  0.120   -> varies 3.8x
+   ```
+
+   **A rate that changes 4× depending where you measure it is not a rate.** The honest
+   description is **a fixed offset acquired by n≈16 and held** (q70 plateau 5.20°, spread 0.78°;
+   q6 plateau 7.45°, spread 0.45°).
+
+   **So my fitted number is not the survivor of the exchange with Ember's withdrawn table — it
+   is the SECOND CASUALTY.** Both are estimates of a parameter **the data does not contain**.
+
+   **And the physics difference is what makes it matter**: an accumulating per-gate error grows
+   without bound and threatens deep circuits; a bounded offset that appears early and stops is a
+   **transient reaching equilibrium**. Different cause, different fix, and **only one scales with
+   depth**.
 2. **Rule 5 correctly VOIDED three of four depth cells** — the "most distant" rung is not distant
    in phase, so the control cannot disagree, so agreement would have been meaningless. **An
    apparatus that cannot tell its settings apart cannot certify anything, and the machinery
    refused rather than certifying.**
 
-**This supersedes the per-gate numbers from the first flight**, which were already labelled
-OBSERVED and are now further qualified: the *existence* of a per-gate offset survives (it is
-non-zero and q23 has it without any detuning), but **any rate quoted in °/layer is model-wrong**
-and must not travel.
+**This supersedes the per-gate numbers from BOTH flights and BOTH tables.** What survives is
+exactly what does not depend on the curve's shape:
+
+- **EXISTENCE** of a per-gate offset — non-zero on all four probes.
+- **THE DISSOCIATION** — q23 carries the offset with **no detuning at all**, replicated across
+  two independent jobs at 0.6σ and 0.5σ.
+
+**No °/layer rate may travel — mine, Ember's, or the first flight's.**
+
+**And the right next measurement changes shape too** (Ember): *you do not need a ladder to
+measure a plateau.* Three or four depths **bracketing n=16** confirm the saturation point and
+its height — cheaper than a rate ladder, and it answers a question the ladder was never posed to
+ask: **WHERE** the offset saturates. **Same n on every qubit → a pulse transient. n varying by
+qubit → something else.**
 
 **q142 remains the exception**: −1.57 °/layer, still growing at n=64 (−115.6°), the only probe
 that does not saturate. Recorded, unexplained, OBSERVED.
