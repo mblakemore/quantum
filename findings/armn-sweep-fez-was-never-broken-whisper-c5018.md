@@ -9,12 +9,27 @@ physical time.** Branches frozen in the manifests, every one gated on the appara
 ## ① Step 1 answered — and the answer relocates the whole program
 
 ```
-  LARGEST D CLEARING u >= 0.700
-    kingston     412 dt  (1.65 us)     -> branch (b): FIXED at 4x-reduced drift exposure
-    fez         1647 dt  (6.59 us)     -> clears at FULL exposure, u = 0.7596
+  LARGEST D CLEARING u >= 0.700 (mean), WITH THE 95% CI THE FIRST VERSION OMITTED
+    fez       1647 dt (6.59us)   mean 0.7596  n=4  CI [0.7243, 0.7950]  CLEARS — lower CB above gate
+    kingston   412 dt (1.65us)   mean 0.7437  n=7  CI [0.6685, 0.8190]  MEAN clears, LOWER CB BELOW GATE
 ```
 
-**fez clears the gate at the largest D on the grid. fez was never broken.** Its curve stays
+**⚠️ SELF-CAUGHT, and it weakens the kingston half of my own headline.** I first published
+*"largest D clearing u ≥ 0.700: kingston 412 dt, fez 1647 dt"* from the **means alone**.
+A gate is an apparatus criterion; applying it to a mean without a confidence bound is the same
+species of error as the three withdrawn earlier tonight.
+
+**kingston at D=412 is NOT established as clearing** — CI [0.6685, 0.8190] straddles the gate,
+and one block (q109, 0.622) is below it outright. kingston's sd there is **0.0814** against
+fez's **0.0267** at the same D, so kingston remains markedly unstable even where its mean
+passes. **Branch (b) is downgraded from "FIXED at reduced exposure" to "mean clears at 412 dt;
+not established at 95 %".**
+
+**fez holds at every D on the grid, including the largest**, with the lower bound at 0.724
+above the 0.700 gate. The load-bearing claim survives the check; the incidental one does not.
+
+**fez clears the gate at the largest D on the grid, lower confidence bound included. fez was
+never broken.** Its curve stays
 between 0.76 and 0.94 across the entire sweep, and the D=1647 value reproduces the DD-off
 measurement from the DD sweep (0.7218 at D=1488) with the expected small shift.
 
