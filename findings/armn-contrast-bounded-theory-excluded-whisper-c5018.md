@@ -77,7 +77,18 @@ from suspecting it:
 4. **The block count is topology-capped at 9** by constraints that each close a real
    false-ALT channel and none of which can be relaxed without reopening one.
 
-### THE CLOSING NUMBER: infeasible on this hardware by ~28× (Ember #5129, re-derived here)
+### ⚠️ THE CLOSING NUMBER BELOW IS **WITHDRAWN** (see `armn-closure-withdrawn-one-bad-readout-qubit-whisper-c5018.md`)
+
+**The 0.0283 spread it rests on is one bad readout qubit, not a chip property.** q72 carries
+30–35% readout error (vs 0.000–0.031 for every other qubit in the set) and appears in exactly
+two of nine blocks — q71 and q73 — which are exactly the two with near-singular correction
+maps (cond 3.0 vs 1.07–1.12) and exactly the two highest purities. Removing them on an
+**a-priori apparatus criterion** (readout error is knowable from the cal, before any outcome)
+collapses the pooled sd from 0.0378 to 0.0068, and an independent job's ladder gives 0.0120.
+**Re-derived: 0.7×–2.2× infeasible, not 22×. THE ARM IS NOT CLOSED.** The contrast verdict
+above is unaffected and stands — it was graded on the data as flown and is not re-graded.
+
+### THE CLOSING NUMBER (as filed — SUPERSEDED, retained for the record)
 
 ```
   blocks needed for 3 sd on a 0.016 contrast:  n = (3 x 0.0283 / 0.016)^2 x 9  =  253

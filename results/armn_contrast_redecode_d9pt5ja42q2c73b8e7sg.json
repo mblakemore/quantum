@@ -1,0 +1,200 @@
+{
+ "card": "armn_contrast_redecode",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "job": "d9pt5ja42q2c73b8e7sg",
+ "account": "IBMQ_ALT2",
+ "purpose": "diagnose whether q71 is physical or a readout-correction artifact",
+ "not_a_regrade": "The frozen contrast verdict (CI includes zero -> BOUNDED) stands untouched. This diagnoses the ERROR TERM feeding a FEASIBILITY claim, not the effect estimate.",
+ "rows": [
+  {
+   "q": 23,
+   "role": "drifter",
+   "u_raw": 0.73456,
+   "u_corr": 0.75132,
+   "delta": 0.01676,
+   "readout_err": [
+    0.0088,
+    0.0005,
+    0.0026,
+    0.0009
+   ],
+   "readout_err_1": [
+    0.0187,
+    0.0097,
+    0.0109,
+    0.0071
+   ],
+   "cond": 1.072,
+   "neg_mass": 0.0
+  },
+  {
+   "q": 25,
+   "role": "drifter",
+   "u_raw": 0.73778,
+   "u_corr": 0.75685,
+   "delta": 0.01907,
+   "readout_err": [
+    0.0026,
+    0.0126,
+    0.0039,
+    0.0026
+   ],
+   "readout_err_1": [
+    0.0109,
+    0.0077,
+    0.0132,
+    0.0085
+   ],
+   "cond": 1.072,
+   "neg_mass": 0.0
+  },
+  {
+   "q": 51,
+   "role": "drifter",
+   "u_raw": 0.73156,
+   "u_corr": 0.75469,
+   "delta": 0.02313,
+   "readout_err": [
+    0.0034,
+    0.0026,
+    0.0001,
+    0.0127
+   ],
+   "readout_err_1": [
+    0.0134,
+    0.0112,
+    0.006,
+    0.0311
+   ],
+   "cond": 1.098,
+   "neg_mass": 0.0
+  },
+  {
+   "q": 71,
+   "role": "drifter",
+   "u_raw": 0.73467,
+   "u_corr": 1.36305,
+   "delta": 0.62838,
+   "readout_err": [
+    0.0001,
+    0.0005,
+    0.3079,
+    0.0011
+   ],
+   "readout_err_1": [
+    0.006,
+    0.0054,
+    0.3479,
+    0.0114
+   ],
+   "cond": 3.006,
+   "neg_mass": -0.38786
+  },
+  {
+   "q": 3,
+   "role": "quiet",
+   "u_raw": 0.742,
+   "u_corr": 0.76579,
+   "delta": 0.02379,
+   "readout_err": [
+    0.0011,
+    0.003,
+    0.0088,
+    0.0145
+   ],
+   "readout_err_1": [
+    0.0063,
+    0.0057,
+    0.0187,
+    0.0174
+   ],
+   "cond": 1.084,
+   "neg_mass": 0.0
+  },
+  {
+   "q": 29,
+   "role": "quiet",
+   "u_raw": 0.73578,
+   "u_corr": 0.7573,
+   "delta": 0.02153,
+   "readout_err": [
+    0.0045,
+    0.0029,
+    0.0035,
+    0.0074
+   ],
+   "readout_err_1": [
+    0.0123,
+    0.0175,
+    0.0104,
+    0.0174
+   ],
+   "cond": 1.09,
+   "neg_mass": 0.0
+  },
+  {
+   "q": 31,
+   "role": "quiet",
+   "u_raw": 0.74644,
+   "u_corr": 0.77746,
+   "delta": 0.03102,
+   "readout_err": [
+    0.0021,
+    0.0029,
+    0.0195,
+    0.0043
+   ],
+   "readout_err_1": [
+    0.0076,
+    0.0175,
+    0.028,
+    0.0163
+   ],
+   "cond": 1.116,
+   "neg_mass": 0.0
+  },
+  {
+   "q": 45,
+   "role": "quiet",
+   "u_raw": 0.73933,
+   "u_corr": 0.76361,
+   "delta": 0.02428,
+   "readout_err": [
+    0.0039,
+    0.001,
+    0.002,
+    0.0149
+   ],
+   "readout_err_1": [
+    0.0132,
+    0.0104,
+    0.0075,
+    0.0285
+   ],
+   "cond": 1.096,
+   "neg_mass": 0.0
+  },
+  {
+   "q": 73,
+   "role": "quiet",
+   "u_raw": 0.55322,
+   "u_corr": 0.8817,
+   "delta": 0.32847,
+   "readout_err": [
+    0.3079,
+    0.0044,
+    0.0044,
+    0.0043
+   ],
+   "readout_err_1": [
+    0.3479,
+    0.0097,
+    0.007,
+    0.0185
+   ],
+   "cond": 3.072,
+   "neg_mass": -0.04833
+  }
+ ]
+}
