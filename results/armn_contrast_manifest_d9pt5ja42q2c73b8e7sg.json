@@ -1,0 +1,185 @@
+{
+ "card": "armn_contrast_measurement",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_fez",
+ "account": "IBMQ_ALT2",
+ "cal_epoch_at_build": "2026-08-05 23:45:31+00:00",
+ "delay_dt": 1488,
+ "kind": "MEASUREMENT, not a test \u2014 estimand is mean u(drifter) - mean u(quiet)",
+ "dd": "OFF (measured best)",
+ "witness_2q": [
+  9
+ ],
+ "blocks": {
+  "drifter": [
+   23,
+   25,
+   51,
+   71
+  ],
+  "quiet": [
+   3,
+   29,
+   31,
+   45,
+   73
+  ]
+ },
+ "readout_rule": "report point estimate AND CI always. CI excludes zero -> contrast measured, size future work from its LOWER confidence bound. CI includes zero -> contrast BOUNDED not measured; report the upper bound and state the design cannot be powered from what is known. NO m_Q derived from a point estimate, either way.",
+ "prior_context": {
+  "theory_NULL_ATTEN": 0.74,
+  "pilot_gap_point_est": 0.0162,
+  "pilot_t": 0.3,
+  "note": "pilot too noisy to size on \u2014 this flight replaces it"
+ },
+ "power": {
+  "se_u_per_candidate": 0.00517,
+  "se_contrast": 0.00347,
+  "three_se_bound": 0.0104
+ },
+ "in_job_drift_redetection": "ZDRIFT rows at census depths 160/280",
+ "cost": {
+  "pubs": 13,
+  "shots": 194000
+ },
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "WIT_q23",
+   "q": 23,
+   "plan": {
+    "anc1": 16,
+    "anc2": 22,
+    "s1": 24,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "role": "drifter",
+   "shots": 18000
+  },
+  {
+   "block": "WIT_q25",
+   "q": 25,
+   "plan": {
+    "anc1": 24,
+    "anc2": 26,
+    "s1": 37,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "role": "drifter",
+   "shots": 18000
+  },
+  {
+   "block": "WIT_q51",
+   "q": 51,
+   "plan": {
+    "anc1": 50,
+    "anc2": 52,
+    "s1": 58,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "role": "drifter",
+   "shots": 18000
+  },
+  {
+   "block": "WIT_q71",
+   "q": 71,
+   "plan": {
+    "anc1": 58,
+    "anc2": 70,
+    "s1": 72,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "role": "drifter",
+   "shots": 18000
+  },
+  {
+   "block": "WIT_q3",
+   "q": 3,
+   "plan": {
+    "anc1": 2,
+    "anc2": 4,
+    "s1": 16,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "role": "quiet",
+   "shots": 18000
+  },
+  {
+   "block": "WIT_q29",
+   "q": 29,
+   "plan": {
+    "anc1": 28,
+    "anc2": 30,
+    "s1": 38,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "role": "quiet",
+   "shots": 18000
+  },
+  {
+   "block": "WIT_q31",
+   "q": 31,
+   "plan": {
+    "anc1": 18,
+    "anc2": 30,
+    "s1": 32,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "role": "quiet",
+   "shots": 18000
+  },
+  {
+   "block": "WIT_q45",
+   "q": 45,
+   "plan": {
+    "anc1": 37,
+    "anc2": 44,
+    "s1": 46,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "role": "quiet",
+   "shots": 18000
+  },
+  {
+   "block": "WIT_q73",
+   "q": 73,
+   "plan": {
+    "anc1": 72,
+    "anc2": 74,
+    "s1": 79,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "role": "quiet",
+   "shots": 18000
+  },
+  {
+   "block": "ZDRIFT_d160",
+   "depth": 160,
+   "shots": 8000
+  },
+  {
+   "block": "ZDRIFT_d280",
+   "depth": 280,
+   "shots": 8000
+  }
+ ],
+ "job_id": "d9pt5ja42q2c73b8e7sg",
+ "submit_iso": "2026-08-06T00:18:21.234462+00:00"
+}
