@@ -89,7 +89,11 @@
   .verdict.won{border-color:var(--amber);color:var(--amber);border-style:solid}
   .racebar{margin:12px 0}
   .rb-row{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;margin:7px 0}
-  .rb-label{width:220px;color:var(--ink-2);flex-shrink:0}
+  /* flex-shrink:0 on a 220px label plus a 100px value pinned the row to a 340px minimum,
+     so the page scrolled sideways at 320px and the value column ran off the edge. Basis
+     220px with shrink ALLOWED keeps the layout identical wherever there is room and lets
+     the label wrap instead of pushing the page when there is not. */
+  .rb-label{flex:0 1 220px;min-width:0;color:var(--ink-2)}
   .rb-track{flex:1;height:16px;border:1px solid var(--edge);border-radius:8px;position:relative;overflow:hidden}
   .rb-fill{position:absolute;inset:0 auto 0 0;border-radius:8px}
   .rb-q .rb-fill{background:var(--cyan)} .rb-c1 .rb-fill{background:#ef4444} .rb-c2 .rb-fill{background:color-mix(in srgb,#ef4444 45%,transparent)}
