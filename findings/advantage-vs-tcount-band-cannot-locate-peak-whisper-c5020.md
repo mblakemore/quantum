@@ -183,7 +183,7 @@ by existing data.** Before proposing a new measurement, read the verdict of the 
 classical counterpart. **I had never checked whether the classical arm can be RUN at the T-counts
 I was proposing.** It cannot.*
 
-**MEASURED classical bills** ([exp-hss-scout-verdict-whisper-c4971](../docs/exp-hss-scout-verdict-whisper-c4971.md),
+**Classical bills — ANCHOR-EXTRAPOLATED, not measured (see §⑨)** ([exp-hss-scout-verdict-whisper-c4971](../docs/exp-hss-scout-verdict-whisper-c4971.md),
 RACE_CONFIG all-core Ryzen, optimized implementation):
 
 ```
@@ -245,6 +245,41 @@ not establish; the corners band ρ's *value* and nothing bands its *functional f
 
 **Load-bearing against the t=320 claim; nearly free inside the window — not because the argument
 weakened but because the reachable range collapsed underneath it.**
+
+## ⑨ THE CEILING'S PLACEMENT, WITH THE ANCHOR UNCERTAINTY CARRIED
+
+*§⑧ called the classical bills "MEASURED". **They are anchor-extrapolated** — the source's own
+fence 3: paper's n=40/t=48 ≈ 3 h on a 2016 i5 MATLAB laptop, ×1000 to RACE_CONFIG, extrapolated
+32 T-gates. That was a fifth provenance error. Carried through properly:*
+
+```
+   MATLAB -> optimised C/C++                      10x - 100x   <- 10x spread, DOMINANT TERM
+   2016 i5 -> 2025 Ryzen 9800X3D (1 core)          2x -   3x   <- 1.5x
+   1 core  -> 16 cores                             8x -  16x   <- 2x
+   PRODUCT                                       160x - 4800x   (frozen band uses 1000x)
+
+   residual spread 30x;  classical ~ 2^(0.23*dt)  ->  ceiling moves 21 T-GATES
+
+   budget      t_max @1000x   @160x   @4800x
+   1 day                 95      83      105
+   1 week               107      95      117
+   1 month              116     105      126
+```
+
+**① The structural claim never depended on the anchor** — advantage and the cost of proving it
+grow at the same rate; the window is narrow by construction.
+**② t=80, the rung already flown, sits inside EVERY version of the window.** The 476× result is
+anchor-robust.
+**③ THE ONE-RUNG t=110 TARGET IS ANCHOR-SENSITIVE** — inside the nominal window, **outside the
+pessimistic one** (1-week budget gives t_max = 95 at the slow edge). **Flagged NOT-YET-FIREABLE by
+its own author** until the hardware factor is measured rather than assumed.
+
+**The whole placement uncertainty reduces to one question: how much faster is an optimised C
+stabilizer-rank implementation than the paper's MATLAB?** That factor carries 10× of the 30×
+spread. **It is NOT the C4971 strawman** — that killed timing Aer's extended_stabilizer, which
+measures the Metropolis sampler; a language/implementation factor is a different quantity, and
+partly a literature question. **Named, not proposed** — two proposals today were things I had
+already falsified myself.
 
 ## What this does NOT establish
 
