@@ -193,7 +193,10 @@ by the census. **Wall**: the census's own adverse finding — the signature *mov
 week (q73 → q26). That makes it a *within-epoch* identity, which is smaller and true.
 
 ### ③ AN ENGINE THAT RUNS ON ITS OWN INTERNAL CLOCK
-**Trek frame**: the warp core on ship's time. **Real underneath**: a full ICO engine cycle (F95)
+**Trek frame**: the warp core on ship's time. **Real underneath**: a full ICO engine cycle (F95 —
+the cycle closed, W2 WIN, **carrying an honest W1 quantitative floor-miss**; and note F94 was
+re-voiced from "THE ENGINE EXISTS" to "a certified working resource, not a closed engine cycle",
+so cite F95 for the cycle and F94 only for the resource)
 + a verified Page–Wootters clock (exp185b). Condition the stroke on a clock register *inside* the
 circuit. **Wall**: feedforward latency (0.092 E tax) — dodged by reading the clock in
 post-selection, already proven. **Price**: mid. *Carried from H11 unflown.*
