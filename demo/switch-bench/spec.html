@@ -2,20 +2,46 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%230b1220%22%2F%3E%3Cpath%20d%3D%22M4%204C8%208%208%208%2012%2012%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12%204C8%208%208%208%204%2012%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%221.7%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.7%22%20fill%3D%22%23e5e7eb%22%2F%3E%3C%2Fsvg%3E">
+<meta name="theme-color" content="#04060c">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Full Spec Sheet — The Switch-Bench Readout (F112 / Exp133) | The Quantum Museum</title>
 <meta name="description" content="Complete specification for the Switch-Bench Readout: a three-axis instrument for causal-order physics (CAUSAL, SCHEDULE, HOLD) flown intact on two foreign chips (ibm_kingston, ibm_fez), certifying every axis against the same frozen bounds with no retuning — ranking three Heron dies on axes QV/CLOPS/EPLG don't touch. F112 extended to a third device (fez certifies all axes, not a clean 3/3).">
-<link rel="stylesheet" href="../museum.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
+  /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
+     and carried the retired light/dark toggle; the exhibits were converted long ago and the
+     receipts pages never were, so an exhibit and its own spec sheet were two different-looking
+     sites. Dark-only is the convention. */
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    /* aliases for the legacy museum.css names this page's own CSS reads, so the page body is
+       restyled rather than rewritten (retheme guide step 4) */
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2);
+    --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:
+      radial-gradient(70% 42% at 55% -5%, rgba(98,230,255,.06), transparent 65%),
+      var(--bg);
+    color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   .doc { max-width: 840px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 90px; }
   .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
   .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
   .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
-  .tbtn { font-family:var(--mono); font-size:12px; background:none; border:1px solid var(--edge);
-    color:var(--ink-2); border-radius:999px; padding:4px 11px; cursor:pointer; }
-  .tbtn:hover { border-color: var(--cyan); color: var(--cyan); }
 
   .spec-head { padding: clamp(16px,3vw,30px) 0 6px; border-bottom:1px solid var(--edge); margin-bottom:8px; }
   .kicker { font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
@@ -38,7 +64,12 @@
   .doc li { margin:6px 0; }
   .doc b { color: var(--ink); }
   .doc code { font-family:var(--mono); font-size:.9em; background:var(--surface-2);
-    border:1px solid var(--edge); border-radius:5px; padding:1px 6px; color:var(--ink); }
+    border:1px solid var(--edge); border-radius:5px; padding:1px 6px; color:var(--ink);
+    /* A job ID or a results/ path is one unbreakable token and pushes the page past 390.
+       anywhere breaks inside the token only when it cannot fit; clone keeps the border
+       closed around each fragment of a wrapped inline box. */
+    overflow-wrap:anywhere;
+    -webkit-box-decoration-break:clone; box-decoration-break:clone; }
   .doc a { color: var(--cyan); }
   .home { color: var(--ink-2); font-weight:600; } .foreign { color: var(--cyan); font-weight:600; }
 
@@ -76,7 +107,6 @@
     <a href="./">· Switch-Bench exhibit</a>
     <span class="wingtag">· Wing V · The Instruments</span>
     <span class="sp"></span>
-    <button class="tbtn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">◐<span aria-hidden="true"> theme</span></button>
   </nav>
 
   <main id="main">
@@ -185,16 +215,5 @@
   </footer>
 
 </div>
-<script>
-  (function () {
-    var root = document.documentElement, KEY = "qmuseum-theme";
-    try { var sv = localStorage.getItem(KEY); if (sv) root.setAttribute("data-theme", sv); } catch (e) {}
-    document.getElementById("themeBtn").addEventListener("click", function () {
-      var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nx = cur === "dark" ? "light" : "dark"; root.setAttribute("data-theme", nx); document.getElementById("themeBtn").setAttribute("aria-pressed", nx === "light" ? "true" : "false");
-      try { localStorage.setItem(KEY, nx); } catch (e) {}
-    });
-  })();
-</script>
 </body>
 </html>

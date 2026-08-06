@@ -2,11 +2,41 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#04060c">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
 <title>Spec — The Decoder Race (F120/F121) | The Quantum Museum</title>
-<link rel="stylesheet" href="../museum.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
+  /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
+     and carried the retired light/dark toggle; the exhibits were converted long ago and the
+     receipts pages never were, so an exhibit and its own spec sheet were two different-looking
+     sites. Dark-only is the convention. */
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    /* aliases for the legacy museum.css names this page's own CSS reads, so the page body is
+       restyled rather than rewritten (retheme guide step 4) */
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2);
+    --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:
+      radial-gradient(70% 42% at 55% -5%, rgba(98,230,255,.06), transparent 65%),
+      var(--bg);
+    color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   .doc{max-width:840px;margin:0 auto;padding:0 clamp(16px,4vw,30px) 90px}
   .topbar{display:flex;align-items:center;gap:14px;padding:16px 0;font-family:var(--mono);font-size:12.5px}
   .topbar a{color:var(--ink-2)}.topbar a:hover{color:var(--cyan)}.topbar .sp{flex:1}
@@ -20,7 +50,11 @@
   table{border-collapse:collapse;width:100%;font-size:13.5px;margin:10px 0}
   th,td{border:1px solid var(--edge);padding:7px 10px;text-align:left;color:var(--ink-2)}
   th{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
-  code{font-family:var(--mono);font-size:12.5px;color:var(--cyan)}
+  /* A job ID is one unbreakable token; without this the table forces the page 151px past
+     390. anywhere breaks inside the token only when it cannot fit. */
+  code{font-family:var(--mono);font-size:12.5px;color:var(--cyan);overflow-wrap:anywhere}
+  td,th{overflow-wrap:anywhere}
+  .tbl-wrap{overflow-x:auto;margin:10px 0}
   b{color:var(--ink)}
   a{color:var(--cyan)}
 </style>
@@ -42,6 +76,7 @@
   <p><b>Sealer (Ember)</b>: commits SHA-256(answer‖salt) to the public repo before any circuit exists; holds the reveal until the decoded answer is posted. <b>Flyer/Decoder (Whisper)</b>: builds, flies, decodes with a frozen mechanical decoder consuming only counts; posts ŝ before any reveal. <b>Grader (Elder)</b>: owns the classical band, frozen days earlier, edge-robust (the classical side is granted its fastest plausible tool). Every card frozen before data; no rescue rules; every fold booked.</p>
 
   <h2>3 · The winning race (race-6, C4981)</h2>
+  <div class="tbl-wrap" tabindex="0">
   <table>
     <tr><th>Quantity</th><th>Value</th><th>Source</th></tr>
     <tr><td>Die / job</td><td>ibm_kingston / <code>d9gps850k0jc738h6blg</code></td><td>manifest</td></tr>
@@ -56,6 +91,7 @@
     <tr><td>Classical operating</td><td>23,460 s → ~6,100×</td><td>same</td></tr>
     <tr><td>Robustness</td><td>maximally conservative wall (57.8 s, full budget) clears 3×</td><td>grade #674</td></tr>
   </table>
+  </div>
 
   <h2>4 · The fold ladder</h2>
   <p>C4973: wrong observable → F120. Race-1: endianness convention → round-trip gates. Race-2: fold by ONE bit, gate placed 20% past race depth → gates at race depth, shot-matched. Race-3: two readout-defective qubits → whole-chip calibration in the decoder. Race-4: hygiene validated (exact blind at d2q=217) but exclusion cost +92 depth → fix defects in the estimator, not the routing. Race-5: pre-registered control (dropped the exclusion; it was load-bearing) → the clean-ladder pre-gate with seal preservation. Race-6: WIN.</p>
