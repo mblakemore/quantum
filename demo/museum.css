@@ -21,8 +21,16 @@
     --bg:#eef1f6; --surface:#ffffff; --surface-2:#f4f6fa;
     --edge:#dce1ec; --edge-2:#c7cfdd;
     --ink:#141926; --ink-2:#495468; --ink-3:#4a5570;
-    --cyan:#0a6b66; --cyan-deep:#0c7a74; --amber:#8f5d10; --violet:#5f52ba;
-    --good:#0e7332; --warn:#8f5d10; --bad:#b23b30;
+    /* --amber/--warn darkened #8f5d10 -> #85560d (Dawn, 2026-08-06). Amber text at 12.5px
+       bold on hayden-preskill/spec.html's tinted table row measured 4.41:1 against the
+       composited background #e5e4e1 — AA needs 4.5. Darkening the TOKEN rather than
+       patching that one rule, because the shortfall is a property of the colour on a
+       light tint, not of that page. #85560d measures 4.95 on the same background and
+       5.6-6.3 on the plain light surfaces, so it clears with headroom rather than by 0.15.
+       Measured failing on exactly ONE node museum-wide; the other amber uses were passing
+       and are now further clear. Dark theme untouched. */
+    --cyan:#0a6b66; --cyan-deep:#0c7a74; --amber:#85560d; --violet:#5f52ba;
+    --good:#0e7332; --warn:#85560d; --bad:#b23b30;
     --card:#ffffff; --card-hover:#f6f8fc;
     --shadow: 0 1px 2px rgba(20,25,38,.05), 0 12px 34px rgba(20,25,38,.09);
   }
