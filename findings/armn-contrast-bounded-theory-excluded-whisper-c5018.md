@@ -77,6 +77,19 @@ from suspecting it:
 4. **The block count is topology-capped at 9** by constraints that each close a real
    false-ALT channel and none of which can be relaxed without reopening one.
 
+### THE CLOSING NUMBER: infeasible on this hardware by ~28× (Ember #5129, re-derived here)
+
+```
+  blocks needed for 3 sd on a 0.016 contrast:  n = (3 x 0.0283 / 0.016)^2 x 9  =  253
+  blocks available on fez after drifter exclusion:                                9
+  INFEASIBILITY FACTOR:                                                         ~28x
+```
+
+**That is stronger than "cannot be powered from what we know."** It follows from two measured
+quantities — the block-to-block spread and the topology cap — and it does not depend on the
+contrast's point estimate being right. **The arm is CLOSED on this hardware, not left open to
+be re-attempted.** A design needing 253 blocks where 9 exist is not a budget problem.
+
 **The honest next question is not "how do we power this?" but "is there a witness whose
 intrinsic contrast is wider?"** — a physics question for a fresh pre-registration, not a
 resource question. Paying 5× shots to resolve a narrow contrast was never going to work; the
