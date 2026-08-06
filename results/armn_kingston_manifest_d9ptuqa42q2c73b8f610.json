@@ -1,0 +1,394 @@
+{
+ "card": "armn_kingston_ladder",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_kingston",
+ "account": "IBMQ_ALT",
+ "cal_epoch_at_build": "2026-08-06 00:46:25+00:00",
+ "delay_dt": 1647,
+ "readout_bar": 0.05,
+ "correction_validity": "PRIMARY: a decoded block is INVALID if u falls outside [0,1] or the corrected distribution carries negative mass (Ember #5148 \u2014 rejecting an invalid computation, not selecting on outcome; needs no threshold). SECONDARY: a correction is SUSPECT if its magnitude exceeds cond x readout_error. The secondary alone PASSES fez q71, which is the gap the primary closes.",
+ "cost_asymmetry": "the range check is FREE and excludes nothing at build time; the 5% readout bar COSTS blocks (killed 2 of 9 on fez). Separable, and only one is free \u2014 kept in front, not footnoted.",
+ "precondition_5": "no block may contain a qubit with calibrated readout error > READOUT_BAR; bar frozen before build from the CALIBRATION, which carries no outcome information",
+ "n_qualify": 36,
+ "n_rejected_readout": 0,
+ "n_qualify_caveat": "NOT apples-to-apples with fez's 9. That 9 was AFTER drifter exclusion; this count has no drifter exclusion (no kingston census exists). It is an UPPER bound on the arm-N qualifying count, and a census would reduce it. Reported as such.",
+ "n_rejected_readout_caveat": "0 by construction, not by luck: failing qubits are put in `excluded` BEFORE three_neighbour_plan runs, so they are never chosen as partners. This counter is uninformative and is kept only for transparency.",
+ "branch_a_note": "N_qualify resolved AT BUILD TIME (36 >= 12) \u2014 a build-time quantity, not data. So (a) vs (b) now hinges on sd alone. Stated before submission so it cannot be read as a post-hoc win.",
+ "rejected_readout": [],
+ "readout_err_selected": {
+  "41": 0.0068,
+  "109": 0.0071,
+  "151": 0.0078,
+  "67": 0.0083,
+  "87": 0.0084,
+  "105": 0.0085,
+  "107": 0.0085,
+  "85": 0.0087,
+  "123": 0.009,
+  "65": 0.0096,
+  "61": 0.0098,
+  "21": 0.0103,
+  "45": 0.0107,
+  "47": 0.0107,
+  "27": 0.0139,
+  "143": 0.0148
+ },
+ "branches": {
+  "a": "sd<=0.015 and N_qualify>=12 -> FEASIBLE, re-pre-register arm-N",
+  "b": "sd<=0.015 and N_qualify<12  -> block count binds, design-search problem",
+  "c": "sd>=0.030                   -> heavy tail is real, re-file closure on THIS",
+  "d": "otherwise                    -> report the interval, no story"
+ },
+ "estimand": "pooled candidate-to-candidate purity sd on shallow_2 over blocks passing precondition 5; secondary N_qualify",
+ "cost_est_qpu_s": 49.7,
+ "pool_at_build": 156,
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "shallow_2_q41",
+   "q": 41,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 36,
+    "anc2": 40,
+    "s1": 42,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.0068359375
+  },
+  {
+   "block": "shallow_2_q109",
+   "q": 109,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 108,
+    "anc2": 110,
+    "s1": 118,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.007080078125
+  },
+  {
+   "block": "shallow_2_q151",
+   "q": 151,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 138,
+    "anc2": 150,
+    "s1": 152,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.0078125
+  },
+  {
+   "block": "shallow_2_q67",
+   "q": 67,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 57,
+    "anc2": 66,
+    "s1": 68,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.00830078125
+  },
+  {
+   "block": "shallow_2_q87",
+   "q": 87,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 86,
+    "anc2": 88,
+    "s1": 97,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.0084228515625
+  },
+  {
+   "block": "shallow_2_q105",
+   "q": 105,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 104,
+    "anc2": 106,
+    "s1": 117,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.008544921875
+  },
+  {
+   "block": "shallow_2_q107",
+   "q": 107,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 97,
+    "anc2": 106,
+    "s1": 108,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.008544921875
+  },
+  {
+   "block": "shallow_2_q85",
+   "q": 85,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 77,
+    "anc2": 84,
+    "s1": 86,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.0086669921875
+  },
+  {
+   "block": "shallow_2_q123",
+   "q": 123,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 122,
+    "anc2": 124,
+    "s1": 136,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.009033203125
+  },
+  {
+   "block": "shallow_2_q65",
+   "q": 65,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 64,
+    "anc2": 66,
+    "s1": 77,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.0096435546875
+  },
+  {
+   "block": "shallow_2_q61",
+   "q": 61,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 60,
+    "anc2": 62,
+    "s1": 76,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.009765625
+  },
+  {
+   "block": "shallow_2_q21",
+   "q": 21,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 20,
+    "anc2": 22,
+    "s1": 36,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.01025390625
+  },
+  {
+   "block": "shallow_2_q45",
+   "q": 45,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 37,
+    "anc2": 44,
+    "s1": 46,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.0107421875
+  },
+  {
+   "block": "shallow_2_q47",
+   "q": 47,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 46,
+    "anc2": 48,
+    "s1": 57,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.0107421875
+  },
+  {
+   "block": "shallow_2_q27",
+   "q": 27,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 17,
+    "anc2": 26,
+    "s1": 28,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.013916015625
+  },
+  {
+   "block": "shallow_2_q143",
+   "q": 143,
+   "config": "shallow_2",
+   "plan": {
+    "anc1": 136,
+    "anc2": 142,
+    "s1": 144,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 4000,
+   "worst_readout": 0.0147705078125
+  },
+  {
+   "block": "shallow_0_q41",
+   "q": 41,
+   "config": "shallow_0",
+   "plan": {
+    "anc1": 36,
+    "anc2": 40,
+    "s1": 42,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 6000,
+   "worst_readout": 0.0068359375
+  },
+  {
+   "block": "shallow_1_q41",
+   "q": 41,
+   "config": "shallow_1",
+   "plan": {
+    "anc1": 36,
+    "anc2": 40,
+    "s1": 42,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 6000,
+   "worst_readout": 0.0068359375
+  },
+  {
+   "block": "shallow_0_q109",
+   "q": 109,
+   "config": "shallow_0",
+   "plan": {
+    "anc1": 108,
+    "anc2": 110,
+    "s1": 118,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 6000,
+   "worst_readout": 0.007080078125
+  },
+  {
+   "block": "shallow_1_q109",
+   "q": 109,
+   "config": "shallow_1",
+   "plan": {
+    "anc1": 108,
+    "anc2": 110,
+    "s1": 118,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 6000,
+   "worst_readout": 0.007080078125
+  },
+  {
+   "block": "shallow_0_q151",
+   "q": 151,
+   "config": "shallow_0",
+   "plan": {
+    "anc1": 138,
+    "anc2": 150,
+    "s1": 152,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 6000,
+   "worst_readout": 0.0078125
+  },
+  {
+   "block": "shallow_1_q151",
+   "q": 151,
+   "config": "shallow_1",
+   "plan": {
+    "anc1": 138,
+    "anc2": 150,
+    "s1": 152,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 6000,
+   "worst_readout": 0.0078125
+  },
+  {
+   "block": "shallow_0_q67",
+   "q": 67,
+   "config": "shallow_0",
+   "plan": {
+    "anc1": 57,
+    "anc2": 66,
+    "s1": 68,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 6000,
+   "worst_readout": 0.00830078125
+  },
+  {
+   "block": "shallow_1_q67",
+   "q": 67,
+   "config": "shallow_1",
+   "plan": {
+    "anc1": 57,
+    "anc2": 66,
+    "s1": 68,
+    "relay_mid": null
+   },
+   "n2q": 9,
+   "shots": 6000,
+   "worst_readout": 0.00830078125
+  }
+ ],
+ "job_id": "d9ptuqa42q2c73b8f610",
+ "submit_iso": "2026-08-06T01:12:09.738409+00:00"
+}
