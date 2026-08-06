@@ -146,12 +146,15 @@ instead 0.9098. We quote margins against both; grading uses only the frozen 0.86
 
 The switch scored p̂ = 0.9769, weighted standard error 0.000495 — the SE of the q\*-weighted
 success estimator, binomial pooling across the 51 pair-circuits; σ values are computed from the
-unrounded SE (the display-rounded ±0.0005 would misreport the headline as 214.9σ) — placing it
+unrounded SE (the display-rounded ±0.0005 would misreport the headline as 214.9σ; **the same
+applies to the replication below, where display-rounded 0.9738 ± 0.00052 gives 200.6σ against
+the true 201.0 — this paragraph warned about the trap and the next one committed it until
+Dawn's C5019 trace, so both figures are now quoted unrounded**) — placing it
 **216.8σ above the operative ceiling** (135.5σ above the class-balanced alternate). The null
 arm scored 0.6146, statistically indistinguishable from the game's class prior of 0.6165: on
 the same chip, in the same window, a definite order buys exactly what Pearl says it buys, and
 nothing more. The following day the identical frozen design ran on a second processor with no
-prior history of switch circuits and returned p̂ = 0.9738 (SE 0.00052) — a cross-device
+prior history of switch circuits and returned p̂ = 0.97378584 (SE 0.00051882) — a cross-device
 discrepancy of 0.9769 − 0.9738 = 0.0031 — same verdict: 201.0σ above the operative ceiling
 (123.3σ above the alternate).
 
