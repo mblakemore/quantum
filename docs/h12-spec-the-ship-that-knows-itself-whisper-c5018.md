@@ -72,6 +72,12 @@ Stripped of the narrative:
 
 **Honest summary: H11 built fewer systems than chartered and better instruments than expected.**
 
+**And the ledger deserves one correction of its own tone** (Ember #5206): *"six flights, no
+physics, five claims withdrawn"* is accurate and **incomplete**. Every item in the list above is
+a negative result or a method rather than a positive finding — and **every one of them prevents a
+future spend**. A wing that ends with better instruments than it began with, and **no false claims
+left standing in the ledger**, is not a failed wing.
+
 ---
 
 # PART II — THE INVENTORY
@@ -235,7 +241,7 @@ delivered was about the instrument understanding itself. H12 stops treating that
 | **12.4** | **Temporal Battery** | cheap | none — one prereg from flight | Arrow-reversal succeeds iff the stored correlation survives; dose-response in hold time; decorrelated control dead at 5σ |
 | **12.5** | **Warp Core** — engine on an internal clock | mid | 12.4 first (shares the correlation-hold machinery) | Work extracted only in clock-consistent branches, zero otherwise, exhaust passive at 5σ |
 | **12.6** | **Fleet Maneuver** — cross-device certification | mid | 12.1 on both chips | An advantage certified with independent replication *inside* one pre-registration |
-| **12.7** | **arm-N, re-pre-registered on fez** | mid | sized from the **lower** CB; rung size and selection bar chosen *jointly against the topology* | Carried from H11. Feasible on the contrast estimate (blocks 95 % CI [3, 31] vs 32 available); two other estimates cannot constrain it |
+| **12.7** | **arm-N, re-pre-registered on fez** | mid | **sized at 31 blocks — the UPPER bound of the required-block interval — against 32 available**; rung size and selection bar chosen *jointly against the topology* | Carried from H11. **POWERED AT THE PESSIMISTIC END of its own interval**, not merely at the point estimate (see below) |
 
 ## The methods spine — binding on every cell
 
@@ -268,8 +274,38 @@ These are not aspirations; each was paid for in H11 and each is now a gate:
 
 ## What H12 is NOT
 
-- **Not a bigger arm-N.** It is carried as one cell of seven, sized from a lower bound, and it
+- **Not a bigger arm-N.** It is carried as one cell of seven, sized at the number below, and it
   does not gate anything else.
+
+### ⚠️ THE SIZING PHRASE, DISAMBIGUATED — and it is the best news in the arm-N line (Ember #5206)
+
+The first draft said *"sized from the **lower** bound."* **Lower bound of what?** The two
+readings differ by 10× and point opposite ways:
+
+```
+  reading A   lower bound of the BLOCK COUNT      ->   3 blocks   cheap, UNDERSIZED if truth is high
+  reading B   lower bound of the EFFECT           ->  31 blocks   an upper bound on cost, cannot undersize
+```
+
+**Reading B is the intent** — size from the smallest plausible effect, which yields the largest
+required *n*. After a night in which every level of this analysis was quoted as a point where it
+needed an interval, a spec phrase that resolves either way is the last place to leave one.
+
+**And reading B is FEASIBLE, which is a stronger claim than the spec first made for itself:**
+
+```
+  31 blocks required at the PESSIMISTIC end of the contrast interval
+  32 blocks available on fez under precondition 5
+```
+
+**The cell is powered at the WORST end of its own interval, not at the point estimate.** No
+outcome of the sd uncertainty makes the flight unpowered — **the first sizing claim in this arc
+that needs no caveat.**
+
+**The rule, generalised (Ember, and it is the same lesson as the drifter cut and the trial-order
+derivation): write the NUMBER, not the DIRECTION.** A direction inherits an ambiguity; a value
+does not. The qualifier belongs in the artifact as a quantity, never as a word someone
+re-derives later.
 - **Not a mechanism hunt on the kingston anomaly.** The bimodality does not exist; the D-dependent
   loss is real but is a *property of an operating point*, and chasing it needs a working
   instrument first.
