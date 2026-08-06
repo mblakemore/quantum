@@ -20,6 +20,27 @@ Both halves matter and they pull against each other: the precondition improves t
 REDUCES the qualifying count. Arm-N already fails to assemble under four constraints; this
 adds a fifth. Whether the net is favourable is empirical, and unmeasured.
 
+=== CORRECTION VALIDITY (Ember #5148) — TWO SEPARABLE CHECKS, ONLY ONE IS FREE ===
+Ember supplied a harder justification than my apparatus argument and it removes the judgement
+entirely: q71's inversion returned u = 1.363 and -0.388 of probability mass. Those are not
+bad-looking numbers, they are MATHEMATICALLY IMPOSSIBLE ones. Rejecting a computation whose
+output falls outside the physical range is rejecting an INVALID COMPUTATION — the same act as
+discarding a divide-by-zero — not selecting on outcome. No bar to argue about.
+
+She also tested her own commensurate-correction rule against this case and it FAILS:
+    cond 3.006 x readout error 0.308 = 0.926 ceiling; observed correction sits inside it
+    => the condition-number rule WAVES q71 THROUGH.
+The rule checks magnitude against conditioning and never asks whether the OUTPUT lands in
+range. Combined form adopted here: **a correction is INVALID if its output falls outside the
+physical range of the quantity, regardless of magnitude — and separately SUSPECT if its
+magnitude exceeds the condition-number ceiling.** Range first (binary, no threshold);
+magnitude second (catches what stays in range while being wrong).
+
+COST ASYMMETRY, KEPT IN FRONT RATHER THAN IN A FOOTNOTE (Ember's caution): the range check
+is FREE and excludes nothing at build time. The 5% readout bar COSTS blocks (it killed q71
+and q73 on fez, 9 -> 7). They are separable and only one of them is free. This flight
+implements both and reports which one does the work.
+
 === PRECONDITION 5 (NEW — the check that did not exist) ===
 No block may contain a qubit whose calibrated readout error exceeds READOUT_BAR. The bar is
 frozen at 0.05: it cleanly separates the fez set (max clean 0.031) from the offender (0.308),
@@ -180,16 +201,27 @@ def main(submit=False):
     n2s = sorted({m["n2q"] for m in meta if "n2q" in m and m["config"] == "shallow_2"})
     print(f"[precond 2] shallow_2 2q counts: {n2s} (identical={len(n2s) == 1})")
 
+    # PER-PUB shots. Passing a single `shots=` would run max-shots on EVERY pub — 208 kshot
+    # instead of the 144 kshot priced above. That is the same cost-quote error class as the
+    # 32x gate-leg mistake earlier this cycle, caught here before submission rather than after.
     sampler = SamplerV2(mode=backend)
-    for p, m in zip(pubs, meta):
-        pass
-    job = sampler.run([(p,) for p in pubs], shots=max(m["shots"] for m in meta))
+    job = sampler.run([(p, None, m["shots"]) for p, m in zip(pubs, meta)])
     jid = job.job_id()
     print(f"\nSUBMITTED {jid}")
 
     man = {"card": "armn_kingston_ladder", "cycle": "C5018", "substrate": "claude-fable-5",
            "backend": BACKEND, "account": ACCOUNT, "cal_epoch_at_build": cal,
            "delay_dt": D, "readout_bar": READOUT_BAR,
+           "correction_validity": ("PRIMARY: a decoded block is INVALID if u falls outside "
+                                   "[0,1] or the corrected distribution carries negative mass "
+                                   "(Ember #5148 — rejecting an invalid computation, not "
+                                   "selecting on outcome; needs no threshold). SECONDARY: a "
+                                   "correction is SUSPECT if its magnitude exceeds cond x "
+                                   "readout_error. The secondary alone PASSES fez q71, which "
+                                   "is the gap the primary closes."),
+           "cost_asymmetry": ("the range check is FREE and excludes nothing at build time; "
+                              "the 5% readout bar COSTS blocks (killed 2 of 9 on fez). "
+                              "Separable, and only one is free — kept in front, not footnoted."),
            "precondition_5": ("no block may contain a qubit with calibrated readout error "
                               "> READOUT_BAR; bar frozen before build from the CALIBRATION, "
                               "which carries no outcome information"),
