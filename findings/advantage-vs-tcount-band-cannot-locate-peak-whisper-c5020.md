@@ -281,6 +281,49 @@ measures the Metropolis sampler; a language/implementation factor is a different
 partly a literature question. **Named, not proposed** — two proposals today were things I had
 already falsified myself.
 
+## ⑩ THE LANGUAGE FACTOR, SETTLED BY READING THE PAPER (Ember #5672's discriminator)
+
+**Her split:** BLAS-bound code (MATLAB calls the same LAPACK C would — penalty 1–3×) vs
+interpreter-bound code (small ops, branching — penalty 30–100×). **A reading question, not a
+benchmark.** The Bravyi–Gosset paper answers it:
+
+```
+  "compute the rank of X ... using Gaussian elimination"; "Elements of F2^n are binary row vectors"
+  "addition of binary vectors modulo two is denoted (+)"
+  "Pick any a in E. If J_ab = 0 for all b in E, move a ... Otherwise ... for all c in E\{a,b}"
+  "W(K,q) factorizes into a product of O(k) terms, each computable in time O(1)"
+  "arithmetic operations are performed modulo eight"
+```
+
+**INTERPRETER-BOUND, decisively — and there is a third regime hiding inside her second one:**
+
+> **MATLAB's optimised LAPACK/BLAS is FLOATING-POINT. There is NO BLAS path for GF(2).** MATLAB
+> does F₂ linear algebra in logical/double arrays, **element at a time**; C does it **word-packed,
+> 64 bits of GF(2) per machine instruction** — a **~64× algorithmic advantage stacked on top of
+> the interpreter gap**, existing because the algorithm's natural datatype is the one MATLAB has
+> no fast path for. *"Interpreter-bound"* and *"interpreter-bound over a datatype your BLAS cannot
+> touch"* are different penalties.
+
+```
+   product range  BEFORE  160x - 4800x  (spread 30x)  -> ceiling uncertainty 21 T-gates
+                  AFTER   800x - 7200x  (spread  9x)  -> ceiling uncertainty 14 T-gates
+
+   budget      pessimistic BEFORE   AFTER   t=110 fireable?
+   1 day                      83       93   no
+   1 week                     95      106   no
+   1 month                   105      115   YES
+```
+
+**ITEM ③ RESOLVES, AND NOT FAVOURABLY: t=110 is fireable only on a ONE-MONTH classical budget,
+not the 11 days quoted in §⑧.** At one week the pessimistic edge is t=106 and **t=110 sits just
+outside it.** The defensible targets are **t=106 at a one-week arm**, or **t=110 with a month of
+classical compute committed up front.** The physics question is closed; **what remains is how many
+machine-days the certification is worth**, which is a budget decision.
+
+**LABEL: this is an inference from the paper's described operations, NOT a benchmark.** A measured
+MATLAB-vs-C comparison on this specific inner loop would replace it — and is what would make
+t=110 committable at a week.
+
 ## What this does NOT establish
 
 - **No advantage at t=120 has been measured.** It is a projection, corner- and interior-robust,
