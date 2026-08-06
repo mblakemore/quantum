@@ -1,4 +1,15 @@
-# The advantage-vs-T-count angle: the peak is NOT locatable, one rung IS, and the collapsing measurement is named
+# The advantage-vs-T-count angle: the peak sits at t≈320–440, and the band that could not find it was my own inputs
+
+> ## ⚠️ CORRECTED IN-CYCLE — §④ AND §⑥ SUPERSEDED, SEE §⑦
+>
+> **The first version of this document concluded "the projection cannot locate the peak."** That
+> conclusion was **an artifact of three bad inputs, all mine**, found ~20 minutes after posting by
+> checking the provenance of a single scalar. **Corrected, the band narrows and the answer moves
+> UP: the peak sits between t=320 and t=440, and t=320 is alive at every corner and across the
+> whole interior at a floor of 2.6×10¹⁴.**
+>
+> **The superseded reading is kept in full below**, because the failure mode is the transferable
+> part: *a band's width can be a retrieval failure wearing a methodology result.*
 
 *Whisper C5020, 2026-08-06. Written on Creator "comb through our existing experiment data and
 quantum building blocks to look for a new angle we could apply our tools to achieve a quantum
@@ -110,6 +121,57 @@ assumptions, rebuilt as a band, and **made a fresh unstated assumption in the re
 **And that is the general form worth keeping: when a band is too wide to answer the question,
 sweep each input alone to find which one owns the width. The widest contributor is usually the
 input measured at the fewest conditions, not the one with the largest nominal uncertainty.**
+
+## ⑦ THE CORRECTION — three bad inputs, and the answer they were hiding
+
+*Found by asking where one scalar came from. §④ and §⑥ above are superseded by this section.*
+
+**(1) A WRONG-LANE NUMBER.** I used ρ_t = 0.743. **The measured magic tax is 0.66–0.73**
+([exp-organic-rhot-law-verdict-whisper-c4985](../docs/exp-organic-rhot-law-verdict-whisper-c4985.md)).
+**0.743 is a coincidental numeric match** with two unrelated quantities — Ember's twin-matched
+MATCH 0.743, and the kingston arm-N witness purity 0.7437. **I took a number that looked right
+out of a grep across three lanes.**
+
+**(2) FLATNESS IN THE WRONG VARIABLE — the substantive error.** §② cites *"the magic tax is
+depth-flat"* to motivate advantage growing with T-count. **The measurement establishes flatness
+in DEPTH at FIXED t=80. Its verdict is T-LOCALIZED — "the tax attaches to the 80 T-gates, not
+the slots."** A tax attached to T-gates **compounds with T-count**: ρ(t) = ρ₈₀^(t/80).
+
+> **So the "flat in T-count" mode was not merely unmeasured — it is argued against by the very
+> finding cited to support it. I used a result as evidence for the opposite of what it says.**
+
+**(3) AN INVENTED RANGE OVER A MEASURED CI.** I banded λ_bit as [0.0015, 0.0060]. **C4985
+measures it: 0.0027 [0.0022, 0.0033]** — my range was **2.7× wider than the measured interval**,
+on the parameter that turns out to control the entire answer (ρ₈₀ and the classical exponent
+contribute *nothing* to the peak location; λ_bit alone sets it).
+
+### Rebuilt on the measured numbers and the T-localized form
+
+```
+     t     min advantage (27 corners)   alive everywhere?
+   120                      4.316e+04   YES
+   160                      3.914e+06   YES
+   240                      3.219e+10   YES
+   320                      2.647e+14   YES   <- interior: 150k draws, min 2.859e+14, ZERO dead
+   400                          0.000   no — dead in 18/27
+
+   PEAK spans t=320 to t=440   (range 120, against 240 before)
+   lambda 0.0022 -> peak 420 (signal dies 427) | 0.0027 -> 380 (dies 384) | 0.0033 -> 340 (dies 342)
+```
+
+**THE PEAK SITS ESSENTIALLY AT THE DECODE FLOOR.** Advantage grows monotonically with T-count
+until the signal dies — **there is no interior optimum. The limit is the floor, not a trade-off**,
+which is a cleaner physical statement than the curve I originally set out to project.
+
+### What this failure teaches, which is the part worth keeping
+
+**The band form was right and it is what let the correction land as a narrowing rather than a
+contradiction.** But **the width I reported as a methodological result was largely a retrieval
+failure wearing one.** "The projection cannot locate the peak" was a true statement about my
+inputs and a false one about what we hold.
+
+**And the "collapsing measurement" I named in §⑥ — ρ_t's degradation mode — was already answered
+by existing data.** Before proposing a new measurement, read the verdict of the one already flown.
 
 ## What this does NOT establish
 
