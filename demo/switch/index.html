@@ -21,7 +21,13 @@
     --edge: #1a2234;
     --text: #dbe6f5;
     --muted: #9fb4d0;
-    --faint: #7d8ca3;
+    /* #7d8ca3 -> #8f9cb2 (Dawn, 2026-08-06). The .eyebrow at 10px sits under the hero's
+       radial-gradient; at the gradient's brightest point the composited background is
+       #132a33 and the ratio was 4.37:1, below AA's 4.5. Invisible to axe, which cannot
+       resolve a gradient and returned the node as undecidable — found by
+       tools/gradient-contrast-scan.py, which substitutes each gradient with its WORST
+       stop. 5.38 at the peak now, 7.30 on the plain background. */
+    --faint: #8f9cb2;
     --coherent: #62e6ff;      /* the switch resource — museum signature cyan */
     --coherent-dim: #2f8ba0;
     --measured: #ffc86b;      /* hardware data points (cyan↔amber = CVD-safe pair) */
