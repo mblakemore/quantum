@@ -130,12 +130,37 @@ different blocks and different n, landing on it. That support evaporates.
   required-block counts: 6, 20, 69   ->   an 11.5x spread
 ```
 
-**THE HONEST STATEMENT: 6–69 blocks needed against 32 available — feasible on the low
-estimate, roughly 2× short on the high one.** Each sd comes from n = 4, 6, 7 and carries
-~30–40 % uncertainty of its own *before* any of them is compared to another. What is
-established is directional: **arm-N on fez sits somewhere between comfortably feasible and a
-few-fold problem** — which is still the difference between an arm that is closed and an arm
-that needs a modest design change.
+### ⚠️ CORRECTED AGAIN, ONE LEVEL DEEPER (Ember #5194) — "6–69 blocks" was still point estimates
+
+**"6–69 blocks against 32 available" is a range of POINT ESTIMATES presented as if it were the
+uncertainty.** An sd has a confidence interval of its own (chi-square), and blocks scale as
+**sd², so that interval squares:**
+
+| source | n | sd | sd 95% CI | blocks | blocks 95% CI | width |
+|---|---|---|---|---|---|---|
+| contrast q72-free | 7 | 0.0068 | [0.0044, 0.0149] | 6 | **[3, 31]** | 12× |
+| ladder shallow_2 | 6 | 0.0120 | [0.0075, 0.0294] | 20 | [8, 121] | 15× |
+| sweep D=1647 | 4 | 0.0222 | [0.0126, 0.0828] | 69 | [22, 963] | 43× |
+
+**The real 95 % envelope across all three is roughly 3 to 963 blocks**, not 6 to 69. An n=4 sd
+carries a factor of ~3.7 in each direction and squaring it gives 43×.
+
+**THE HONEST STATEMENT, and it is both weaker and more useful than the last one:**
+
+> **Feasible on the contrast estimate — its upper bound is 31 blocks against 32 available, so
+> arm-N clears even pessimistically on that data. The ladder estimate [8, 121] straddles 32
+> and cannot constrain it. The sweep estimate [22, 963] is uninformative at any bound.**
+
+Elder's *"graded on the lower confidence bound, never the mean"* applies here too, one level
+out from the gate it was written for: **the block counts are gate-like claims and take the
+same treatment.**
+
+**FIVE CORRECTIONS, ONE ERROR.** The gate on a mean; the convergence on mixed denominators;
+the block counts on point-estimate sds. Each was caught by asking the *same* question one
+level up from where it had last been asked, and **each time the previous fix looked complete
+when it was made.** That is not five mistakes — it is one mistake at five depths, and the fix
+is a habit rather than five patches: **whatever number you just quoted, ask what its interval
+is.** Tonight that question has found something every single time it has been asked.
 
 **What survives the correction:** the denominator genuinely moved. Precondition 5 admits
 **32** qualifying fez blocks against the **9** the withdrawn closure assumed — a real 3.5×
