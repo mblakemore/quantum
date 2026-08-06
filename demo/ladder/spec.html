@@ -149,12 +149,14 @@
     the next day (0.9738, 201σ). Two channels that each transmit <strong>exactly zero</strong> information carried
     <span class="num">0.0436 bits</span> through their superposition of orders. The definite-order null arms, run in the
     same jobs, scored exactly what the ladder says they must.</p>
-    <p class="tight"><strong>Both ceilings.</strong> 0.8695 is the pre-registered bound at the optimal
-    input weighting q* the game was flown at (SDP optimum 0.869028, rounded up 5e-4 before data);
-    under a class-balanced prior over the same ten operations the causally-separable bound is instead
-    <strong>0.9098</strong>, and the measurement clears it at <span class="num">135.5σ</span>. Grading
-    used only the frozen 0.8695; margins are quoted against both, because the classical optimum is a
-    function of the input distribution.</p>
+    <p class="tight"><strong>The operative ceiling, and a secondary one.</strong> 0.8695 is the
+    <strong>operative</strong> bound — pre-registered at the optimal input weighting q* the game was
+    flown at (SDP optimum 0.869028, rounded up 5e-4 before data), and the only value the grading rule
+    used. <strong>Secondary disclosure:</strong> under a class-balanced prior over the same ten
+    operations the causally-separable bound is instead 0.9098, which the measurement also clears, at
+    <span class="num">135.5σ</span>. The two are not co-equal and the grade is not ambiguous between
+    them; the alternate is quoted because the classical optimum is a function of the input
+    distribution.</p>
   </div>
   <p>The ladder is not wrong — inside its world it was quantitatively correct on this same hardware. It is <strong>typed</strong>:
   its input is a causal structure, and this object is not one. Fed to standard causal-discovery algorithms (PC, GES),
@@ -185,7 +187,10 @@
     <li><strong>Numbers &amp; corroboration.</strong> The F82/F83 scalars are <strong>re-derived from the primary
     records</strong>, not transcribed from the exhibit (Dawn, 2026-08-06): <code>results/exp105_hw_results.json</code>
     gives p̂ = 0.9769307, se_w = 0.00049548, grade constant 0.8695 → (p̂ − 0.8695)/se_w = 216.82σ; the second chip
-    (ibm_fez <code>d982qssqp3as739sdmmg</code>) gives 0.9738 ± 0.00052 → 201.0σ; 0.0436 bits/use is Exp106 on
+    (ibm_fez <code>d982qssqp3as739sdmmg</code>, <code>results/exp105b_hw_results.json</code>) gives
+    p̂ = 0.9737858, se_w = 0.00051882 → 201.0σ — the <em>unrounded</em> inputs, because the
+    display-rounded 0.9738 ± 0.00052 re-derives to 200.6 and a σ you cannot reproduce from the digits
+    printed beside it is not a citation (Whisper flagged exactly this at general#5299); 0.0436 bits/use is Exp106 on
     <code>d983ek52su3c739ip92g</code>; the class-balanced alternate 0.9098 → 135.5σ. The cross-platform witnesses are
     <code>results/braket_causal_rigetti_CORRECTED.json</code> (W 1.2165, seW 0.0223607 → 54.4σ over a zero bound —
     the <em>corrected</em> value of record, superseding the 1.1138/49.7σ in that experiment's original text) and
