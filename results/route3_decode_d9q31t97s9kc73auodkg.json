@@ -1,0 +1,280 @@
+{
+ "card": "route3_decode",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "job": "d9q31t97s9kc73auodkg",
+ "delta_deg": 5.0,
+ "vis_gate": 0.6,
+ "theta_target": 12.0,
+ "mechanism": "BOTH \u2014 consistent with a per-TIME rotation (gates carry duration too)",
+ "gate": {
+  "70": true,
+  "23": true,
+  "6": true,
+  "142": true
+ },
+ "rows": [
+  {
+   "kind": "time",
+   "probe": 70,
+   "rate": -7.275978721443908,
+   "rate_se": 0.3047326525772389,
+   "sigma": 23.876596944594592,
+   "active": true,
+   "unit": "deg/us",
+   "phases": [
+    0.0,
+    -5.0316303593433815,
+    -9.829464464092062,
+    -22.99561548704428
+   ],
+   "phase_se": [
+    1.0474972076612166,
+    1.1650158727351592,
+    1.1766301175256386,
+    1.0457227477461852
+   ]
+  },
+  {
+   "kind": "time",
+   "probe": 23,
+   "rate": 0.15551226556718892,
+   "rate_se": 0.3124187207253419,
+   "sigma": 0.49776871631167435,
+   "active": false,
+   "unit": "deg/us",
+   "phases": [
+    0.0,
+    0.036901294927321526,
+    0.32785023854939244,
+    0.45514353857011947
+   ],
+   "phase_se": [
+    1.049313545730917,
+    1.0804958513901124,
+    1.1060063323773606,
+    1.0991493327040156
+   ]
+  },
+  {
+   "kind": "time",
+   "probe": 6,
+   "rate": -9.091121228336881,
+   "rate_se": 0.27511050012845506,
+   "sigma": 33.04534441285244,
+   "active": true,
+   "unit": "deg/us",
+   "phases": [
+    0.0,
+    -8.84477297053503,
+    -14.30944790186431,
+    -27.419243207989744
+   ],
+   "phase_se": [
+    1.0482411554288573,
+    1.060527462933847,
+    1.0542247713253656,
+    0.945106974051924
+   ]
+  },
+  {
+   "kind": "time",
+   "probe": 142,
+   "rate": -7.802735957661791,
+   "rate_se": 0.28663632141710105,
+   "sigma": 27.221727934149627,
+   "active": true,
+   "unit": "deg/us",
+   "phases": [
+    0.0,
+    -8.624820158872879,
+    -13.274189077801953,
+    -22.786738504052476
+   ],
+   "phase_se": [
+    1.1060360659704098,
+    1.0434523240757694,
+    1.0495286411526743,
+    0.9973332133402463
+   ]
+  },
+  {
+   "kind": "depth",
+   "probe": 70,
+   "rate": 0.10714280989710558,
+   "rate_se": 0.0148970871110653,
+   "sigma": 7.192198655905137,
+   "active": true,
+   "unit": "deg/layer",
+   "phases": [
+    0.0,
+    5.264195315478241,
+    5.556070125046513,
+    4.777191218008903
+   ],
+   "phase_se": [
+    1.0494138288780046,
+    1.0608444644562176,
+    1.0697008493343227,
+    1.100233840798986
+   ]
+  },
+  {
+   "kind": "depth",
+   "probe": 23,
+   "rate": 0.1325333063612752,
+   "rate_se": 0.0145789629147022,
+   "sigma": 9.090722511381216,
+   "active": true,
+   "unit": "deg/layer",
+   "phases": [
+    0.0,
+    8.288140408997542,
+    5.921896781351643,
+    5.951438846491426
+   ],
+   "phase_se": [
+    1.0528391097658265,
+    1.0305163658045378,
+    1.062044702937783,
+    1.0732535498723301
+   ]
+  },
+  {
+   "kind": "depth",
+   "probe": 6,
+   "rate": 0.15832565935562812,
+   "rate_se": 0.01475813077705069,
+   "sigma": 10.728029297709503,
+   "active": true,
+   "unit": "deg/layer",
+   "phases": [
+    0.0,
+    7.238211992940311,
+    7.407348432257554,
+    7.69157237038761
+   ],
+   "phase_se": [
+    1.0509326107197325,
+    1.0550279461894676,
+    1.0744108840182363,
+    1.085798554451406
+   ]
+  },
+  {
+   "kind": "depth",
+   "probe": 142,
+   "rate": -1.5660243943945285,
+   "rate_se": 0.02478175072553858,
+   "sigma": 63.1926457391357,
+   "active": true,
+   "unit": "deg/layer",
+   "phases": [
+    0.0,
+    2.5945679014814313,
+    -35.464168346597056,
+    -115.60042100941227
+   ],
+   "phase_se": [
+    1.0573166560139573,
+    1.327165518146899,
+    2.60807874155339,
+    1.7533113634073132
+   ]
+  }
+ ],
+ "verdicts": [
+  {
+   "kind": "time",
+   "probe": 70,
+   "sel_n": 16,
+   "diff_deg": -16.29144403977125,
+   "se": 1.5328907894436938,
+   "p_tost": 0.9999999999999122,
+   "equivalent": false,
+   "control_disagrees": true,
+   "gate": true,
+   "in_range": true,
+   "FREE_GATE_CERTIFIED": false
+  },
+  {
+   "kind": "time",
+   "probe": 6,
+   "sel_n": 16,
+   "diff_deg": -20.54471184936338,
+   "se": 1.4417856043453425,
+   "p_tost": 1.0,
+   "equivalent": false,
+   "control_disagrees": true,
+   "gate": true,
+   "in_range": true,
+   "FREE_GATE_CERTIFIED": false
+  },
+  {
+   "kind": "time",
+   "probe": 142,
+   "sel_n": 16,
+   "diff_deg": -15.355546207827103,
+   "se": 1.4892054311311198,
+   "p_tost": 0.9999999999982213,
+   "equivalent": false,
+   "control_disagrees": true,
+   "gate": true,
+   "in_range": true,
+   "FREE_GATE_CERTIFIED": false
+  },
+  {
+   "kind": "depth",
+   "probe": 70,
+   "sel_n": 64,
+   "diff_deg": -7.094083903769757,
+   "se": 1.484252907383285,
+   "p_tost": 0.9208581283168114,
+   "equivalent": false,
+   "control_disagrees": false,
+   "gate": true,
+   "in_range": true,
+   "FREE_GATE_CERTIFIED": false
+  },
+  {
+   "kind": "depth",
+   "probe": 23,
+   "sel_n": 64,
+   "diff_deg": -5.54870175872864,
+   "se": 1.4665498192282918,
+   "p_tost": 0.6458516468803961,
+   "equivalent": false,
+   "control_disagrees": false,
+   "gate": true,
+   "in_range": false,
+   "FREE_GATE_CERTIFIED": false
+  },
+  {
+   "kind": "depth",
+   "probe": 6,
+   "sel_n": 64,
+   "diff_deg": -7.001543792684458,
+   "se": 1.460474488003582,
+   "p_tost": 0.9147306649144495,
+   "equivalent": false,
+   "control_disagrees": false,
+   "gate": true,
+   "in_range": true,
+   "FREE_GATE_CERTIFIED": false
+  },
+  {
+   "kind": "depth",
+   "probe": 142,
+   "sel_n": 16,
+   "diff_deg": -6.944656702052413,
+   "se": 1.700090696418702,
+   "p_tost": 0.8736580459799437,
+   "equivalent": false,
+   "control_disagrees": true,
+   "gate": true,
+   "in_range": true,
+   "FREE_GATE_CERTIFIED": false
+  }
+ ],
+ "n_certified": 0
+}
