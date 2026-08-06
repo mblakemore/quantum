@@ -96,10 +96,29 @@ q142 re-reading are **OBSERVED** — re-read from an arm built for another purpo
 pre-registration**, candidate-tier. They are confirmed by a purpose-built ladder or they are not
 confirmed at all. Nothing here is cited as a result.
 
-**NUMERIC NOTE, flagged rather than quietly reconciled**: Ember's #5239 table lists per-gate
-values (q70 0.049, q23 0.120, q6 0.090, q142 −1.781) that do not reproduce from my fit under
-either per-X or per-pair normalisation. **The mechanism argument is adopted; the numbers stay
-mine**, so nobody quotes a value neither of us can reproduce.
+**NUMERIC DISCREPANCY — FLAGGED, THEN DIAGNOSED AND CLOSED** (Ember #5247, table withdrawn):
+
+```
+  qubit     hers     mine   ratio   endpoint/64
+   q70    0.0490   0.0989    2.02       0.0494
+   q23    0.1200   0.1704    1.42       0.1200
+    q6    0.0900   0.1540    1.71       0.0903
+  q142   -1.7810  -1.4540    0.82      -1.7812
+```
+
+**The last column is the tell**: her values are exactly the endpoint phases divided by 64 — a
+**two-point division**, against my **fitted slope over the whole ladder**. The ratios are not
+constant (2.02 / 1.42 / 1.71 / 0.82), so it was never a units or per-X-vs-per-pair mismatch; a
+fit and an endpoint division diverge whenever the fit carries an intercept or the endpoints sit
+at different effective depths, and both happen here.
+
+**A fit beats a two-point division, and the fitted numbers above are the measurement.** The
+mechanism argument survives entirely on them — **q23 at 0.6σ detuning and 13.7σ per-gate is the
+dissociation, and it is in this artifact's numbers.**
+
+*Kept because the process is the lesson: flagging a discrepancy rather than quietly picking a
+side is what produced the diagnosis. Neither silently citing hers nor silently citing mine would
+have found the two-point division.*
 
 ### The superseded first reading, kept for the record
 
