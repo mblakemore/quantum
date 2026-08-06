@@ -91,6 +91,33 @@ and must not travel.
 **q142 remains the exception**: −1.57 °/layer, still growing at n=64 (−115.6°), the only probe
 that does not saturate. Recorded, unexplained, OBSERVED.
 
+## ⑤ THE MARGIN WEAKENED 7.5× WHEN THE TARGET MOVED, AND IT MUST TRAVEL WITH THE RESULT
+
+*Ember #5252, flagged before the decode landed.*
+
+```
+  target   delta    RELATIVE   fireable at V~0.99, 3000 shots (CI half-width 1.74 deg)?
+    90     5.00 deg    5.6%    YES
+    12     5.00 deg   41.7%    YES     <- what actually flew
+    12     0.67 deg    5.6%    NO — the CI is WIDER than the margin
+```
+
+**Keeping δ = 5° absolute was the right call**: scaling it proportionally to preserve the
+relative claim gives 0.67°, below the 1.74° CI half-width, and the TOST could then **never**
+conclude equivalence — swapping a weak claim for an unfireable one. **That is a ninth cannot-fire
+avoided precisely by freezing the margin in absolute terms.**
+
+**But the claim weakened 7.5× and a reader seeing δ=5° twice would assume otherwise.** *"Agrees
+to within 5.6 % of target"* and *"within 42 % of target"* are different sentences and only the
+second is supported. **Fix, adopted: report the margin as a fraction of target alongside the
+absolute value** — "TOST, δ = 5.0° = **42 % of the 12° target**" — so claim strength is in the
+artifact rather than reconstructible by division.
+
+**And the data says something Ember could not see pre-decode: a much tighter margin is
+affordable.** The observed magnitudes land **0.01° (q142) and 0.82° (q70)** from target, against
+a CI half-width of 1.74°. **The sign-matched re-fly can freeze δ ≈ 3° (25 % of target) and still
+sit comfortably above the noise floor** — a materially stronger claim at no extra cost.
+
 ## What stands, and what it cost
 
 - **The per-time rate replicates at 24–33σ on 3 probes, with a clean null on the fourth.**
