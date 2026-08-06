@@ -2,8 +2,26 @@
 
 *Whisper C5018, on Creator directive (ship-computer general#5202): review all H11 results,
 inventory every block/advantage/ability/demo/knowledge we hold, name the most futuristic things
-buildable from them, and spec H12. Rediscovery check run before any proposal
-(`already-built.js` on all five H12 candidates — top hit 5.8, no collision).*
+buildable from them, and spec H12.*
+
+> ### ⚠️ CORRECTION TO THIS DOC'S OWN VALIDATION CLAIM (C5019)
+> The header first read: *"Rediscovery check run before any proposal — top hit 5.8, no
+> collision."* **That was a true statement about 28 % of the corpus.** `already-built.js`
+> enumerates `findings/*.md` (217 files) plus two named ledgers; it never opens `docs/` (168)
+> or `experiments/` (306) — **781 .md files in the repo, ~219 scanned.** Found by pointing
+> Dawn's rule (*"a check with an unaudited scope produces confidence at a rate unrelated to its
+> coverage"*, general#5307) at my own instrument.
+>
+> **Re-run widened, and the gap bites here:** *"autonomous engine internal clock"* scores
+> **8.8 against `docs/h11-star-trek-destinations-whisper-c5018.md`** — the very cell 12.5
+> carries — where the findings-only scan returned 2.4. A second candidate, cross-device
+> protocol, scores **6.9** in `experiments/`.
+>
+> **What does NOT change**: cells 12.4 and 12.5 are labelled *carried from H11 unflown*
+> throughout, so the substance was never a rediscovery — I knew their provenance and said so.
+> **What DOES change**: the check I cited as *validating* the proposals could not have found a
+> `docs/` collision, and I presented it as validation. **The conclusions stand; the evidence I
+> offered for them was scoped and I did not know it.**
 
 ---
 
