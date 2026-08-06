@@ -88,6 +88,44 @@ for it.
 this whole arc has been about — and I have ~106 QPU-s left, at the end of a night whose
 lesson was repeatedly that rushed apparatus is where the errors come from.
 
+### FOUR EXPLANATIONS ELIMINATED, ALL AT $0 (Whisper + Ember #5158, from data already on disk)
+
+| eliminated | by what |
+|---|---|
+| **coherence** | HIGH blocks have the **worst** min T2 (31.0, 21.2 µs); best-T2 block (122 µs) sits at u 0.143 — backwards |
+| **correction conditioning** | HIGH mean cond **1.127** vs low **1.082**; low-cluster q45 (1.187) exceeds high-cluster q21 (1.065); zero negative mass throughout |
+| **readout quality** | q45 and q47 carry an **identical** worst_readout 0.0889 — the two worst in the set by 3× — and land at u 0.131 vs 0.667 |
+| **block symmetry** (anc1=q−1 ∧ anc2=q+1) | both HIGH are symmetric (2/2), but only **2 of 7** symmetric are HIGH; **p = C(7,2)/C(15,2) = 0.20** |
+
+**And the test of the last one produced the result that outranks all four.** With **n = 2** in
+the HIGH cluster, the significance ceiling is set by how common the property is:
+
+```
+  property held by  4 of 15  ->  P(both HIGH share it) = 0.057
+                    6 of 15  ->                          0.143
+                    7 of 15  ->                          0.200
+                    9 of 15  ->                          0.343
+```
+
+**Any property common enough to be interesting is too common to be significant at n = 2.**
+So the binding constraint is not *which* explanation — **it is the HIGH count.** The next
+flight is therefore **a replication, not a mechanism hunt**: is the split real, and what is
+the HIGH rate? At 2/15 ≈ 13 %, thirty blocks buys ~4 HIGH, which is still thin.
+
+**One coincidence logged as a coincidence,** because it is the most seductive pattern here and
+is the same shape that just produced two refuted hypotheses:
+
+```
+  shallow_1 (ONE idle):   q41 0.671   q67 0.662   q109 0.662
+  shallow_2 HIGH pair:    q21 0.665   q47 0.667
+  shallow_2 same subset:  q41 0.149   q67 0.163   q109 0.184
+```
+
+**q21 and q47 at two idles read exactly like the others at one idle.** The obvious story is
+that their second delay is not doing its work — but scheduled delay was verified **identical
+(3294 dt)** across high and low blocks, so the mechanism that story requires is absent. Named
+a coincidence *in advance*, not after a test kills it.
+
 ## Both validity checks earned their place — and the free one was not redundant
 
 | check | cost | what it did |
