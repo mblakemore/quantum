@@ -54,8 +54,26 @@ detuning cancels over the pair, while pulse error does not), proven by q23's dis
 **Probes**: the same four (q70, q23, q6, q142), because **q23 is the dissociation control and
 q142 is the anomaly**, and dropping either loses the comparison that makes the result readable.
 
-**Readout**: phase from ⟨X⟩,⟨Y⟩, as flown. **Cost**: 8 depths × 2 bases + 2 cal = 18 pubs,
-~19 QPU-s at 3000 shots — the same price as the re-fly.
+**Readout**: phase from ⟨X⟩,⟨Y⟩, as flown.
+
+### ⚠️ COST CORRECTED 4× BY THE DISCRIMINABILITY CHECK (Elder #5519 item 3)
+
+I filed 3000 shots / ~19 QPU-s. **At 3000 shots the (a)-vs-(b) branch pair cannot be
+separated**, so the design's central distinction was unresolvable at the price I quoted:
+
+```
+   3000 shots  SE 1.057 deg  need step > 2.11  have 1.30  -> NOT resolvable
+   8000        SE 0.647      need step > 1.29  have 1.30  -> marginal
+  12000        SE 0.528      need step > 1.06  have 1.30  -> RESOLVABLE     <- adopted
+```
+
+**COST: 18 pubs × 12000 = 216 kshot ≈ 74 QPU-s**, against the ~19 first filed.
+
+*And I got this wrong on the first attempt in the way that matters: I computed the step at
+**1.2× SE** and wrote **"RESOLVABLE"**, against a stated requirement of **2× SE**. The ratio was
+right and I read it against the wrong bar — inside the calculation written to check whether a
+bar was met. Elder's fifteen seconds of arithmetic quadruples the price, which is exactly why
+it belongs in the manifest rather than in anyone's head.*
 
 ## The checks, compiled in rather than remembered
 
@@ -89,6 +107,25 @@ q142 is the anomaly**, and dropping either loses the comparison that makes the r
   measurement is n ∈ {1,2,3}.
 - **(d) q142 STILL DOES NOT SATURATE** while others do → reported alongside whichever of (a)–(c)
   fires; **it is a second finding, not a contaminant of the first.**
+- **(e) NO SATURATION BY n=32 ON THE CONTROL PROBES** → **the plateau finding does not
+  replicate.** The prior result is **downgraded**, and a grid extension is a **NEW design**, not
+  a continuation of this one. *(Added on Elder #5519 item 1 — my branches assumed the plateau
+  premise reproduces. If q70/q6/q23 are still rising at n=32, NO cell fired: (c) covers a knee
+  BELOW the grid and (d) is q142-only. **The phenomenon failing to reproduce needs its own
+  pre-stated cell**, because it is the outcome that downgrades the prior finding, and absorbing
+  it into a shrug after the data is how a dead premise survives — the kingston bimodality
+  lesson, which I had catalogued and then designed without.)*
+
+### n_sat — FROZEN ESTIMATOR (Elder #5519 item 2)
+
+*"Agreeing within one grid step" adjudicates (a) vs (b) and nothing defined how n_sat is
+COMPUTED from eight points. Read by eye, the central branch distinction becomes a judgement made
+after seeing the curves — threshold-after-data wearing a graph.*
+
+> **n_sat := the smallest grid n whose phase lies within 2·SE of the mean of all LARGER n.**
+> Computed per probe, before any cross-probe comparison. **Its uncertainty is the grid step
+> either side**, reported as `n_sat ∈ {n_prev, n, n_next}` — the knee is a derived quantity and
+> inherits the interval habit like everything else.
 
 **Nothing here sizes a follow-up.** No m_Q, no power claim, no effect estimate — the two
 route-3 flights taught that a bare point estimate becomes a cost figure with quadratic error.
