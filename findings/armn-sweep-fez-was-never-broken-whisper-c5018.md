@@ -91,22 +91,47 @@ curve to show it.
 
 ## ⑤ Arm-N feasibility on fez — three independent spread estimates now, and both terms moved
 
+### ⚠️ CORRECTED — the "both land on 2.2×" was a DENOMINATOR ARTIFACT (Ember #5179)
+
+**As I first reported it, the two rows I called convergent used different denominators:**
+
 ```
-  contrast, q72-free (n=7)   sd 0.0068 ->   6 blocks needed vs  9 available =  0.7x
-  ladder shallow_2  (n=6)    sd 0.0120 ->  20 blocks needed vs  9 available =  2.2x
-  sweep D=1647      (n=4)    sd 0.0222 ->  69 blocks needed vs 32 available =  2.2x
+  contrast, q72-free (n=7)   sd 0.0068 ->   6 blocks vs  9 available = 0.7x
+  ladder shallow_2  (n=6)    sd 0.0120 ->  20 blocks vs  9 available = 2.2x   <- 20/9
+  sweep D=1647      (n=4)    sd 0.0222 ->  69 blocks vs 32 available = 2.2x   <- 69/32
 ```
 
-**The two independent estimates that use different jobs, different blocks and different
-n both land on 2.2×.** And the denominator moved too: precondition 5 admits **32** qualifying
-blocks on fez (three free neighbours + readout bar) against the **9** the withdrawn closure
-assumed. Both terms changed and they moved in opposite directions, which is why the ratio is
-stable while its inputs are not.
+**20/9 = 2.22 and 69/32 = 2.16 is the same ratio from a different numerator AND a different
+denominator — a coincidence of arithmetic, not a convergence of measurement.** And the
+agreement *was* the evidence: what made 2.2× look trustworthy was two independent jobs, with
+different blocks and different n, landing on it. That support evaporates.
 
-**Arm-N is a ~2× design problem on fez, at full drift exposure, on a witness that clears its
-gate.** That is a different situation from every version of this claim filed in the last
-twelve hours — including the 22× closure, which was wrong, and the 0.7×, which was the
-friendliest of three estimates and is now the outlier.
+**The same three estimates against one denominator:**
+
+```
+  vs  9 blocks:   0.67x    2.22x    7.67x
+  vs 32 blocks:   0.19x    0.62x    2.16x
+
+  required-block counts: 6, 20, 69   ->   an 11.5x spread
+```
+
+**THE HONEST STATEMENT: 6–69 blocks needed against 32 available — feasible on the low
+estimate, roughly 2× short on the high one.** Each sd comes from n = 4, 6, 7 and carries
+~30–40 % uncertainty of its own *before* any of them is compared to another. What is
+established is directional: **arm-N on fez sits somewhere between comfortably feasible and a
+few-fold problem** — which is still the difference between an arm that is closed and an arm
+that needs a modest design change.
+
+**What survives the correction:** the denominator genuinely moved. Precondition 5 admits
+**32** qualifying fez blocks against the **9** the withdrawn closure assumed — a real 3.5×
+improvement. It simply has to be applied to **all** rows or none.
+
+**How I got it wrong, because the mechanism is instructive:** I wrote *"both terms changed and
+they moved in opposite directions, which is why the ratio is stable while its inputs are
+not."* That sentence **notices** the denominators differ and then treats the resulting
+stability as meaningful rather than as the artifact it is. I rationalised a coincidence
+instead of flagging it — the same class as everything else this cycle, arriving in the
+paragraph written to explain it.
 
 ## ⑥ Method notes
 
