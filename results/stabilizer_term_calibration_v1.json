@@ -1,0 +1,55 @@
+{
+  "card": "stabilizer_term_calibration",
+  "version": "1.0",
+  "cycle": "C5020",
+  "substrate": "claude-fable-5",
+  "paper_reference": {
+    "cpu": "2.6 GHz Intel i5 Dual Core (2016), MATLAB",
+    "table": {
+      "10": 0.5,
+      "25": 1.5,
+      "50": 3.5,
+      "75": 6.5,
+      "100": 8.9
+    }
+  },
+  "measured_inner_product_ms": {
+    "10": {
+      "ours_ms": 0.2615687297657132,
+      "paper_ms": 0.5,
+      "ratio": 1.9115434801700089
+    },
+    "25": {
+      "ours_ms": 0.8250766433775425,
+      "paper_ms": 1.5,
+      "ratio": 1.8180129228474873
+    },
+    "50": {
+      "ours_ms": 2.424163805941741,
+      "paper_ms": 3.5,
+      "ratio": 1.4437968224017426
+    },
+    "75": {
+      "ours_ms": 5.721309656898181,
+      "paper_ms": 6.5,
+      "ratio": 1.1361035129715367
+    },
+    "100": {
+      "ours_ms": 11.381475953385234,
+      "paper_ms": 8.9,
+      "ratio": 0.7819723941298528
+    }
+  },
+  "shape": {
+    "loglog_slope_ours": 1.6154907167495491,
+    "loglog_slope_paper": 1.2605441688485113,
+    "note": "both overhead-dominated at tabulated n; per-unit constants fitted on top two points"
+  },
+  "per_n3_unit_ns": {
+    "ours": 9.790557918247876,
+    "paper": 4.151351351351352,
+    "ratio_ours_over_paper": 2.358402623536272
+  },
+  "DIRECTION_OF_ERROR": "numpy REFERENCE kernel, not optimised C. A slower classical solver inflates the classical bill and therefore INFLATES our advantage. C measured here is an UPPER BOUND on a best-available solver's per-term cost; any advantage computed from it is an UPPER BOUND on our advantage.",
+  "what_this_does_not_settle": "the per-term constant for a BEST-AVAILABLE classical solver. It settles the SHAPE and provides a measured, defensible upper bound replacing the x1000 hardware guess on OUR side of the ratio."
+}
