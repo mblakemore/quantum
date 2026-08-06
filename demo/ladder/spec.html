@@ -38,7 +38,14 @@
   .doc li { margin:6px 0; }
   .doc b { color: var(--ink); }
   .doc code { font-family:var(--mono); font-size:.9em; background:var(--surface-2);
-    border:1px solid var(--edge); border-radius:5px; padding:1px 6px; color:var(--ink); }
+    border:1px solid var(--edge); border-radius:5px; padding:1px 6px; color:var(--ink);
+    /* A 20-char job ID is one unbreakable token and pushed this page 41px past 390 the
+       moment the sources bullet started citing IDs. anywhere breaks inside the token only
+       when it cannot fit, so nothing wraps that did not have to. And a wrapped inline box
+       otherwise draws its border on the OUTER edges only, so the split fragments read as
+       one open-ended box; clone gives each fragment its own. */
+    overflow-wrap:anywhere;
+    -webkit-box-decoration-break:clone; box-decoration-break:clone; }
   .doc a { color: var(--cyan); }
   .num { font-family:var(--mono); color: var(--cyan); }
 
@@ -142,6 +149,12 @@
     the next day (0.9738, 201σ). Two channels that each transmit <strong>exactly zero</strong> information carried
     <span class="num">0.0436 bits</span> through their superposition of orders. The definite-order null arms, run in the
     same jobs, scored exactly what the ladder says they must.</p>
+    <p class="tight"><strong>Both ceilings.</strong> 0.8695 is the pre-registered bound at the optimal
+    input weighting q* the game was flown at (SDP optimum 0.869028, rounded up 5e-4 before data);
+    under a class-balanced prior over the same ten operations the causally-separable bound is instead
+    <strong>0.9098</strong>, and the measurement clears it at <span class="num">135.5σ</span>. Grading
+    used only the frozen 0.8695; margins are quoted against both, because the classical optimum is a
+    function of the input distribution.</p>
   </div>
   <p>The ladder is not wrong — inside its world it was quantitatively correct on this same hardware. It is <strong>typed</strong>:
   its input is a causal structure, and this object is not one. Fed to standard causal-discovery algorithms (PC, GES),
@@ -169,9 +182,15 @@
     measurement.</li>
     <li><strong>Off-ladder scope.</strong> F82/F83 are pre-registered provable-bound beats against the causally-separable class
     including dynamical order — device-characterized, <strong>not</strong> loophole-free device-independent.</li>
-    <li><strong>Numbers &amp; corroboration.</strong> All scalars are transcribed from <code>demo/ladder/index.html</code>. F82/F83
-    (0.9769 · 216.8σ · 0.9738 · 201σ · 0.0436 bits · bound) and the Exp108 depth-decay set (Δ 0.1796, filed 0.2275/0.201,
-    2.3×) are corroborated in <code>docs/campaign-arcs.md</code> (F82, F83, F86). The gate-overhead law is
+    <li><strong>Numbers &amp; corroboration.</strong> The F82/F83 scalars are <strong>re-derived from the primary
+    records</strong>, not transcribed from the exhibit (Dawn, 2026-08-06): <code>results/exp105_hw_results.json</code>
+    gives p̂ = 0.9769307, se_w = 0.00049548, grade constant 0.8695 → (p̂ − 0.8695)/se_w = 216.82σ; the second chip
+    (ibm_fez <code>d982qssqp3as739sdmmg</code>) gives 0.9738 ± 0.00052 → 201.0σ; 0.0436 bits/use is Exp106 on
+    <code>d983ek52su3c739ip92g</code>; the class-balanced alternate 0.9098 → 135.5σ. The cross-platform witnesses are
+    <code>results/braket_causal_rigetti_CORRECTED.json</code> (W 1.2165, seW 0.0223607 → 54.4σ over a zero bound —
+    the <em>corrected</em> value of record, superseding the 1.1138/49.7σ in that experiment's original text) and
+    Exp212 IonQ (W 1.9100 ± 0.1414 → 13.5σ). The Exp108 depth-decay set (Δ 0.1796, filed 0.2275/0.201,
+    2.3×) is corroborated in <code>docs/campaign-arcs.md</code> (F86). The gate-overhead law is
     <code>findings/11-gate-overhead-law.md</code>. The low-numbered rung-1/rung-2 findings (F3, F5, F18) are cited from
     the exhibit; they were not independently re-located as <code>campaign-arcs.md</code> rows.</li>
     <li><strong>Further reading.</strong> <code>docs/beyond-the-ladder.md</code> (the full argument), the switch spec sheet, and
