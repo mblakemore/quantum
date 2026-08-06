@@ -193,3 +193,48 @@ exhibits, and any place the semantic palette mapping required a judgment call (s
 Both are the same shape as the already-done **magic-square** — use that commit as your closest
 template (`git show <magic-square commit>:demo/magic-square/index.html`). Do no-go-triptych first,
 get it verified, then cloning-replicator.
+
+---
+
+## Status of the two assignments above — BOTH DONE (Dawn, 2026-08-06)
+
+`no-go-triptych` and `cloning-replicator` both carry the house theme: no `museum.css` link, no
+`themeBtn`, Michroma/IBM Plex loaded. Recorded here rather than left as a standing work order,
+because **a method doc that still assigns finished work teaches the reader the wrong state of the
+world** — the same failure class as a stale page, one level worse, since everyone who follows the
+doc inherits it.
+
+## The receipts pages (`demo/*/spec.html`) — 23 converted 2026-08-06
+
+**All 23 spec sheets are now on the house theme** (`quantum@f080e40` for the reference page,
+`quantum@bfbd248` for the rest). They had never been converted, and — because every scanner's page
+glob was `demo/*/index.html` — nothing had ever said so. An exhibit and its own spec sheet were two
+different-looking sites for months.
+
+A spec page is simpler than an exhibit: no interactive kernel, so steps 2 and 4 above mostly fall
+away. What it needs:
+
+1. Drop `<link rel="stylesheet" href="../museum.css">` and the `<script>/*qm-theme-restore*/…</script>`
+   line; paste the template `:root` **plus aliases** for the legacy names the page's own CSS reads
+   (`--surface`, `--surface-2`, `--edge`, `--good` are the usual set — `grep -oE '\-\-[a-z0-9-]+'`
+   the file to get its actual list), plus the base `body`/`a`/`.skip`/focus/reduced-motion rules
+   `museum.css` used to supply.
+2. Retire the toggle: the `#themeBtn` button, its `(function(){…qmuseum-theme…})()` script, **and
+   its now-dead `.tbtn` rules**. `grep -c themeBtn` = 0 after.
+3. `overflow-wrap:anywhere` on `.doc code`, with `box-decoration-break:clone`. **Not optional on a
+   receipts page**: a job ID and a `results/…` path are single unbreakable tokens, and they pushed
+   two of these pages 181px and 132px past a 390px viewport. A wrapped inline box otherwise draws
+   its border only on the outer edges, so `clone` is what keeps each fragment looking like a chip.
+4. Any `<table>` gets `<div class="tbl-wrap" tabindex="0">`. The wrapper scrolls it at phone width;
+   **the `tabindex` is a WCAG 2.1.1 requirement, not polish** — a scrollable region that cannot be
+   focused is unreachable by keyboard, and 23 of these tables were exactly that.
+
+### Verify it mechanically, not carefully
+
+`python3 /droid/repos/dawn/tools/content-invariance.py demo/<name>` (Dawn's, cycle 76) diffs the
+multiset of content tokens — every numeric literal and job-ID-shaped string — between `HEAD` and the
+working tree, ignoring `<style>`, `style=`, `class=`/`id=`, structural attributes and `<link>`
+elements, but **not** `<script>` and **not** `<meta>`. It fails loudly if one digit moves in either
+direction. Run it per page as you go: a batch that drifts is a bisect, a page that drifts is a
+finding. Whisper verified the reference page independently with a second extractor and reproduced a
+`<link>`-stripping ordering bug this tool had already fixed — two implementations, same trap.
