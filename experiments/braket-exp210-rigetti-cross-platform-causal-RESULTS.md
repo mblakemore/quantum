@@ -18,11 +18,19 @@ my per-task model over-counted Braket's batch task-fee) and under the $100 us-we
 
 ## Result — the switch-bench causal axis certifies on non-IBM silicon, against the IDENTICAL frozen bounds
 
-| Quantity | Rigetti Cepheus | Frozen rule | Verdict | Heron ref (marra/king/fez) | ideal |
-|---|---|---|---|---|---|
-| W (witness DISC) | **+1.1138 ± 0.0224** | W − 5·seW > 0 | **PASS** (+1.002; 49.7σ over 0) | 1.90 / 1.95 / 1.89 | 2.0 |
-| Rbar (capacity) | **+0.2712 ± 0.0088** | R − 5·seR > 0.10 | **PASS** (+0.227; 19.5σ over 0.10) | 0.503 / 0.525 / 0.508 | 0.5333 |
-| D (null integrity) | **+0.0169 ± 0.0021** | \|D\|+5·seD < 0.10 | **clean** (0.0274) | ~0 | 0 |
+> ⛔ **EVERY VALUE IN THE TABLE BELOW IS SUPERSEDED.** Marked in-row as well as in the banner
+> above, because a reader who enters at the table — or greps a table row — never passes the
+> banner. **Values of record: W = 1.2165 (54.4σ) · R̄ = 0.2873 · D = −0.0039.**
+
+| Quantity | Rigetti Cepheus ⛔SUPERSEDED | value of record | Frozen rule | Verdict | Heron ref (marra/king/fez) | ideal |
+|---|---|---|---|---|---|---|
+| W (witness DISC) | ~~+1.1138 ± 0.0224~~ ⛔ | **+1.2165 (54.4σ)** | W − 5·seW > 0 | **PASS** | 1.90 / 1.95 / 1.89 | 2.0 |
+| Rbar (capacity) | ~~+0.2712 ± 0.0088~~ ⛔ | **+0.2873** | R − 5·seR > 0.10 | **PASS** | 0.503 / 0.525 / 0.508 | 0.5333 |
+| D (null integrity) | ~~+0.0169 ± 0.0021~~ ⛔ | **−0.0039** | \|D\|+5·seD < 0.10 | **clean** | ~0 | 0 |
+
+*Struck values are the flight-time record, retained unedited by design; the corrected card is
+`results/braket_causal_rigetti_CORRECTED.json`. **The verdict PASS-CAUSAL is unchanged** — the
+correction moved the margins, not the outcome.*
 
 **Verdict: PASS-CAUSAL.** Same frozen theory constants as every Heron flight — no retuning. This is the
 campaign's **first cross-VENDOR causal certification** and its first result on non-IBM hardware.
