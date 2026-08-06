@@ -1,6 +1,10 @@
-# The advantage-vs-T-count angle: the peak sits at t≈320–440, and the band that could not find it was my own inputs
+# The advantage-vs-T-count angle: the lane is ALREADY AT ITS CEILING — capped by the classical arm's runtime, not by physics
 
-> ## ⚠️ CORRECTED IN-CYCLE — §④ AND §⑥ SUPERSEDED, SEE §⑦
+> ## ⚠️ CORRECTED TWICE IN-CYCLE. **READ §⑧ FIRST — it is the answer.** §④/§⑥ superseded by §⑦; §⑦ superseded by §⑧.
+>
+> **HEADLINE: the certifiable window closes at t≈95–125 because that is where the CLASSICAL arm
+> stops being runnable. We flew t=80. The remaining headroom on this axis is ONE RUNG (t≈110,
+> ~1.4e4–1.2e5×, 11-day classical arm) — a compute-budget question, not a physics one.**
 >
 > **The first version of this document concluded "the projection cannot locate the peak."** That
 > conclusion was **an artifact of three bad inputs, all mine**, found ~20 minutes after posting by
@@ -172,6 +176,75 @@ inputs and a false one about what we hold.
 
 **And the "collapsing measurement" I named in §⑥ — ρ_t's degradation mode — was already answered
 by existing data.** Before proposing a new measurement, read the verdict of the one already flown.
+
+## ⑧ THE CEILING — and it supersedes §⑦ as well. The lane is already at its top.
+
+*Found by reading the Creator's directive one more time: advantage above a **MEASURABLE**
+classical counterpart. **I had never checked whether the classical arm can be RUN at the T-counts
+I was proposing.** It cannot.*
+
+**MEASURED classical bills** ([exp-hss-scout-verdict-whisper-c4971](../docs/exp-hss-scout-verdict-whisper-c4971.md),
+RACE_CONFIG all-core Ryzen, optimized implementation):
+
+```
+   t=80, n=40  ->      8,214 s = 2.3 h      <- THE RUNG WE ACTUALLY FLEW
+   t=100       ->        2.3 days
+   t=120       ->       55.9 days
+   t=160       ->       90.2 YEARS
+   t=320       ->     1.1e13 years
+
+   LARGEST t WHOSE CLASSICAL ARM CAN ACTUALLY BE RUN (a = 0.18 / 0.23 / 0.28):
+     1-day budget    t = 99 / 95 / 92
+     1-week budget   t = 114 / 107 / 102
+     1-month budget  t = 126 / 116 / 110
+```
+
+> **The quantum side survives to t≈380. The CERTIFIABLE window closes at t≈95–125.** §⑦'s t=320
+> recommendation is void: at t=320 the classical arm takes ten trillion years, so an "advantage"
+> there is a **projection** — exactly the F119 superseded class the red-team audit killed.
+
+### The structural reason the window is narrow, and always will be
+
+> **The same exponential that CREATES the advantage destroys the ability to MEASURE it.** One
+> rung up in T-count multiplies the classical bill by 2^(a·Δt) — **the advantage grows and the
+> cost of PROVING it grows at exactly the same rate.** There is no T-count with both a large
+> advantage and a measured one. You get a big advantage **or** a certified one.
+
+**And the other axis does not rescue it.** Fitting the four measured bills against problem size:
+
+```
+   n=16 -> 526 s | n=24 -> 1,774 s | n=32 -> 4,206 s | n=40 -> 8,214 s
+   fit:  cost ~ n^3.00   ->  POLYNOMIAL in n, exponential only in t
+```
+
+**Growing qubits buys n³. The exponential lever is the one that is capped.**
+
+### What is actually left: one rung, and it is a compute-budget question
+
+```
+   t= 95   advantage   2,580 –   7,698    classical arm  1.0 days
+   t=110   advantage  13,988 – 124,500    classical arm 11.4 days
+   t=120   advantage  43,164 – 796,204    classical arm 55.9 days
+```
+
+**A t=110 flight with an 11-day classical arm would move the certified figure from 476× to
+~1.4×10⁴–1.2×10⁵ with the classical side ACTUALLY RUN.** That is the entire remaining headroom
+on this axis, and it is a **compute-budget decision, not a physics one.**
+
+### The ceiling also retires Ember's open objection (#5648) — by making its region unreachable
+
+She held that ρ(t) = ρ₈₀^(t/80) assumes **independent** per-T-gate tax, which T-localization does
+not establish; the corners band ρ's *value* and nothing bands its *functional form*.
+
+```
+   rho spread across independent / partial / correlated:
+     t=320   2.98x     <- where she sized it, and she was right
+     t=120   1.20x     <- top of the measurable window
+     t= 95   1.07x
+```
+
+**Load-bearing against the t=320 claim; nearly free inside the window — not because the argument
+weakened but because the reachable range collapsed underneath it.**
 
 ## What this does NOT establish
 
