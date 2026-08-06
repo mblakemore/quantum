@@ -11,8 +11,25 @@
 >
 > - **t=80 — the rung already flown — sits inside the window at EVERY edge and EVERY budget.
 >   The 476× result is robust to all four corrections.**
-> - **t=110 needs THREE MONTHS of classical compute to be fireable at every edge**, or one month
->   at the nominal anchor. Projected gain 476× → ~1.4×10⁴–1.2×10⁵×.
+> - **NOTHING NEEDS TO BE SPENT TO KEEP THE 476×.** Extension is optional and it is a LADDER,
+>   not a single price — I first quoted only its most conservative corner (t=110 at the
+>   pessimistic edge = 3 months), which read as an entry fee and is not one:
+>
+> ```
+>     t      projected advantage      classical arm (nominal anchor)
+>    80         476  CERTIFIED               2.3 hours    <- already flown
+>    95       2,580 -     7,698              1.0 day      <- 5-16x, for one day of CPU
+>   106       8,912 -    59,269              6.0 days
+>   110      13,988 -   124,500             11.4 days     <- 1 month nominal, 3 months pessimistic edge
+>   120      43,164 -   796,204             55.9 days
+> ```
+>
+> - **⚠️ AND THE CLASSICAL ARM IS NOT CURRENTLY RUN AT ALL.** The 2.3 h at t=80 is
+>   **anchor-extrapolated**, because C4971 falsified the direct measurement (Aer's
+>   extended_stabilizer wall-time measures its Metropolis sampler config, not Clifford+T
+>   hardness). **So every "classical compute" figure above is a PROJECTED wall-clock for a solve
+>   we do not presently perform** — which makes the blocker a **methods** problem, not a
+>   compute-budget one.
 > - **The other axis does not rescue it**: classical cost fits `n^3.00` — polynomial in problem
 >   size, exponential only in T-count.
 >
