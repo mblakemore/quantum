@@ -281,7 +281,7 @@ measures the Metropolis sampler; a language/implementation factor is a different
 partly a literature question. **Named, not proposed** — two proposals today were things I had
 already falsified myself.
 
-## ⑩ THE LANGUAGE FACTOR, SETTLED BY READING THE PAPER (Ember #5672's discriminator)
+## ⑩ THE LANGUAGE FACTOR — *this section's conclusion is REVERSED by §⑪. Kept for the reasoning.*
 
 **Her split:** BLAS-bound code (MATLAB calls the same LAPACK C would — penalty 1–3×) vs
 interpreter-bound code (small ops, branching — penalty 30–100×). **A reading question, not a
@@ -323,6 +323,51 @@ machine-days the certification is worth**, which is a budget decision.
 **LABEL: this is an inference from the paper's described operations, NOT a benchmark.** A measured
 MATLAB-vs-C comparison on this specific inner loop would replace it — and is what would make
 t=110 committable at a week.
+
+## ⑪ §⑩ REVERSED BY THE PAPER'S OWN TIMING TABLE — the measurement was two pages from the prose I reasoned about
+
+*Seventh correction, and it landed exactly where I said the seventh would: somewhere I did not
+think was a question. I spent twenty minutes inferring the implementation's regime from the
+paper's **described operations**. **The same paper contains Table I, which measures it.***
+
+```
+   PAPER TABLE I — MATLAB runtimes (ms), 2.6 GHz i5 DUAL CORE
+     routine                        ns per O(n^k) unit    clock cycles
+     InnerProduct     O(n^3)                      4.15            10.8
+     ExponentialSum   O(n^3)                      6.23            16.2
+     MeasurePauli     O(n^2)                     22.86            59.4
+```
+
+**~11–16 clock cycles per inner-loop unit is COMPILED speed.** Interpreted per-element work on
+F₂ vectors costs **200–1000+ cycles** — one to two orders of magnitude slower than measured.
+
+> **The MATLAB implementation is VECTORISED; its inner loops already run compiled C over arrays.
+> The interpreter penalty §⑩ placed at the top of the band is largely ABSENT from these timings
+> already.** C's remaining advantage is **bit-packing** (Ember's 8× logical / 64× double) plus
+> cache — **not interpreter removal. §⑩ had the direction backwards.**
+
+**Two more things the table gave for free:** the laptop is **DUAL CORE** and MATLAB runs these
+**single-threaded** (so the core factor is 1→16); and all four routines are **overhead-dominated**
+at the tabulated sizes (InnerProduct grows 17.8× from n=10→100 where O(n³) predicts 1000×), which
+is why the per-unit constants must be fitted on the top two points rather than read off.
+
+```
+   PRODUCT RANGE   128x - 4800x        (§⑩ claimed 800x-7200x — SPURIOUS)
+   uncertainty     23 T-gates          (§⑩ claimed 14 — the narrowing was not real)
+
+   budget      pessimistic   nominal   optimistic   t=110 fireable?
+   1 day                82        95          105   NO
+   1 week               94       107          117   NO
+   1 month             103       116          126   nominal anchor only
+   3 months            110       123          133   YES, at every edge
+```
+
+**REVISED BUDGET ANSWER: t=110 needs THREE MONTHS of classical compute to be fireable at every
+edge** — or one month if the nominal anchor is accepted. Not the 11 days first quoted, nor the
+one month quoted second.
+
+**WHAT HAS NOT MOVED THROUGH SEVEN CORRECTIONS: t=80 — the rung already flown — sits inside the
+window at EVERY edge and EVERY budget. The 476× result is robust to all of it.**
 
 ## What this does NOT establish
 
