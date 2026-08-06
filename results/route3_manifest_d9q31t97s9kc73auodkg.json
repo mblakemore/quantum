@@ -1,0 +1,220 @@
+{
+ "card": "route3_gate_time_performs",
+ "cycle": "C5018",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_fez",
+ "account": "IBMQ_ALT2",
+ "job_id": "d9q31t97s9kc73auodkg",
+ "cal_epoch_at_build": "2026-08-06 03:30:34+00:00",
+ "probes": [
+  70,
+  23,
+  6,
+  142
+ ],
+ "x_dt": 6,
+ "theta_target_deg": 12.0,
+ "delta_deg": 5.0,
+ "vis_gate": 0.6,
+ "readout_bar": 0.05,
+ "ladder_n": [
+  0,
+  16,
+  32,
+  64
+ ],
+ "ambiguity_settled": "census measured deg/LAYER with depth and time proportional; duration-matched TIME (bare delay) vs DEPTH (X-pairs) arms separate per-time detuning from per-gate phase",
+ "fix1_tost": "PRIMARY is an EQUIVALENCE claim: TOST against a FROZEN delta=5.0 deg, p<0.05 each side. Sigma cannot establish agreement, so it is used only for the CONTROL (a difference claim).",
+ "fix2_in_job": "the rate is measured IN-JOB from the ladders; the claimed rung is SELECTED by that fit, never inherited from an earlier job and never chosen by which rung looks closest to the reference",
+ "frozen_decode_rule": [
+  "1 fit rate_TIME and rate_DEPTH per probe, regression through origin on unwrapped phase",
+  "2 arm ACTIVE iff fitted rate != 0 at >=5 sigma",
+  "3 selected rung = ladder setting whose FITTED phase is closest to theta_target",
+  "4 PRIMARY equivalence TOST |phase(sel) - phase(REF)| <= delta, p<0.05 both sides",
+  "5 CONTROL most distant rung must differ from REF by > delta at >=5 sigma, else PRIMARY VOID",
+  "6 APPARATUS GATE visibility at zero point >= vis_gate; every branch is a conjunction with it"
+ ],
+ "range_check": {
+  "max_duration_us": 3.072,
+  "prior_rate_deg_per_us": 7.5,
+  "prior_rate_source": "d9q2tk7v9q4s73bhnc8g, range selection ONLY",
+  "reachable_max_deg": 23.04,
+  "target_deg": 12.0,
+  "margin_frac": 0.479,
+  "decode_assert": "if the IN-JOB fitted rate x max_duration < target, the PRIMARY is VOID \u2014 catches a rate that moved between build and flight"
+ },
+ "echo_arm_kept": "X-X refocuses static detuning but NOT pulse error, so the depth arm is a per-GATE ISOLATOR by construction (Ember #5239). Proven by q23's dissociation: 0.6 sigma detuning, 13.7 sigma per-gate.",
+ "readout_err_probes": {
+  "70": 0.0027,
+  "23": 0.0028,
+  "6": 0.0034,
+  "142": 0.0034
+ },
+ "cost_est_qpu_s": 18.6,
+ "pool_at_build": 26,
+ "pubs_meta": [
+  {
+   "kind": "time",
+   "n": 0,
+   "basis": "X",
+   "dur_dt": 0,
+   "dur_us": 0.0,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "time",
+   "n": 0,
+   "basis": "Y",
+   "dur_dt": 0,
+   "dur_us": 0.0,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "time",
+   "n": 16,
+   "basis": "X",
+   "dur_dt": 192,
+   "dur_us": 0.768,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "time",
+   "n": 16,
+   "basis": "Y",
+   "dur_dt": 192,
+   "dur_us": 0.768,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "time",
+   "n": 32,
+   "basis": "X",
+   "dur_dt": 384,
+   "dur_us": 1.536,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "time",
+   "n": 32,
+   "basis": "Y",
+   "dur_dt": 384,
+   "dur_us": 1.536,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "time",
+   "n": 64,
+   "basis": "X",
+   "dur_dt": 768,
+   "dur_us": 3.072,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "time",
+   "n": 64,
+   "basis": "Y",
+   "dur_dt": 768,
+   "dur_us": 3.072,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "depth",
+   "n": 0,
+   "basis": "X",
+   "dur_dt": 0,
+   "dur_us": 0.0,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "depth",
+   "n": 0,
+   "basis": "Y",
+   "dur_dt": 0,
+   "dur_us": 0.0,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "depth",
+   "n": 16,
+   "basis": "X",
+   "dur_dt": 192,
+   "dur_us": 0.768,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "depth",
+   "n": 16,
+   "basis": "Y",
+   "dur_dt": 192,
+   "dur_us": 0.768,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "depth",
+   "n": 32,
+   "basis": "X",
+   "dur_dt": 384,
+   "dur_us": 1.536,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "depth",
+   "n": 32,
+   "basis": "Y",
+   "dur_dt": 384,
+   "dur_us": 1.536,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "depth",
+   "n": 64,
+   "basis": "X",
+   "dur_dt": 768,
+   "dur_us": 3.072,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "depth",
+   "n": 64,
+   "basis": "Y",
+   "dur_dt": 768,
+   "dur_us": 3.072,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "ref",
+   "n": 0,
+   "basis": "X",
+   "dur_dt": 0,
+   "dur_us": 0.0,
+   "n2q": 0,
+   "shots": 3000
+  },
+  {
+   "kind": "ref",
+   "n": 0,
+   "basis": "Y",
+   "dur_dt": 0,
+   "dur_us": 0.0,
+   "n2q": 0,
+   "shots": 3000
+  }
+ ],
+ "submit_iso": "2026-08-06T07:00:05.856401+00:00"
+}
