@@ -112,15 +112,49 @@ for*.
 
 **The experiment, and it is almost embarrassingly cheap**: build two circuits. One applies an
 explicit `Rz(θ)` and no delay. The other applies **no rotation and a deliberate wait**, its
-duration computed from the census constant to deliver exactly θ. **Certify the two output states
-agree at ≥5σ**, with a third arm — wait, but wrong duration — that disagrees.
+duration set to deliver exactly θ. A third arm — wait, but *wrong* duration — must disagree.
+
+### ⚠️ TWO DESIGN FIXES BEFORE THIS IS FLYABLE (Ember #5222, both adopted)
+
+**FIX 1 — "certify they agree at 5σ" is an EQUIVALENCE claim written in the language of
+DIFFERENCE DETECTION, and as stated it is incoherent.** Sigma measures the power to *detect a
+difference*; it cannot establish agreement. A high-sigma "no difference found" is precisely the
+underpowered null this campaign spent a night refusing — and here it would have been the
+**headline** rather than a footnote.
+
+> **Replaced with a pre-specified equivalence margin and a TOST**: *the two arms deliver effective
+> angles agreeing to within **δ**, by two one-sided tests, p < 0.05 each side* — with **δ frozen
+> before the data**, chosen from what would make the claim interesting. Starting proposal for the
+> prereg: **δ = 5° absolute** (≈5–6 % of a ~90° rotation), to be argued or replaced at freeze time,
+> never after.
+
+**Note the direction of the error**: the wrong-duration *control* arm was correctly specified and
+gives the design real discriminating power. **It was the PRIMARY claim that lacked a bar** — the
+part I was most confident about.
+
+**This is the page's only equivalence claim.** Routes ①, ②, ④, ⑤ are all difference claims
+(capacity > 0, energy below ground, hull violated, entanglement left over) where σ is the right
+instrument. Checked, so the fix is not applied where it does not belong.
+
+**FIX 2 — the wait duration cannot inherit θ from an earlier job.** This cycle established that
+the drift constant is **epoch-volatile**: the kingston drifter set did not transfer from fez,
+job-to-job drift measured **0.048 against a 0.020 margin**, and `NULL_ATTEN = 0.74` was excluded
+at 95 % after surviving four gates. **A route whose entire trick is "the wait delivers exactly θ"
+breaks if the rate moved** — the arms then disagree for a reason with nothing to do with the
+physics.
+
+> **The drift rate is measured IN-JOB and co-batched, exactly as the purity gate now is.** A Z-row
+> at the census depths rides along — **already built for the contrast flight**, so this costs
+> almost nothing. It converts *"we computed the wait from the constant"* into *"we measured the
+> rate in this job and computed the wait from it"*, and only the second survives a referee asking
+> **when** the constant was measured.
 
 **Why this is the sharpest item here**: it converts the campaign's most-complained-about liability
 into a resource, it is falsifiable in one cheap job, and **the honest version makes no
 energy-from-nowhere claim.** Nothing is created; a rotation you needed was performed by something
 you were already paying for. **That is a better trick than free energy, because it is true.**
 
-**Price**: cheapest flight on this page. **Wall**: Cell 11's finding that the depth-*law* is not
+**Price**: cheapest flight on this page, both fixes included. **Wall**: Cell 11's finding that the depth-*law* is not
 exactly linear across a week — so this runs **within one calibration window**, where the model is
 being tested anyway.
 
