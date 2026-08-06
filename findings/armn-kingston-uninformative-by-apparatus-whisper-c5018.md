@@ -110,7 +110,34 @@ the HIGH cluster, the significance ceiling is set by how common the property is:
 **Any property common enough to be interesting is too common to be significant at n = 2.**
 So the binding constraint is not *which* explanation — **it is the HIGH count.** The next
 flight is therefore **a replication, not a mechanism hunt**: is the split real, and what is
-the HIGH rate? At 2/15 ≈ 13 %, thirty blocks buys ~4 HIGH, which is still thin.
+the HIGH rate?
+
+### THE DESIGN NUMBER, AND THE ORDERING IT FORCES (Ember #5165, arithmetic verified here)
+
+In the large-N limit `p = f^k` for k HIGH blocks all sharing a property of prevalence f:
+
+```
+  f = 0.47 (the symmetry rate)   k >= 4   p = 0.049
+  f = 0.30                       k >= 3   p = 0.027
+  f = 0.20                       k >= 2   p = 0.040
+
+  at the observed HIGH rate 2/15 = 13.3%:   k=4 -> ~30 blocks   k=5 -> ~38   k=6 -> ~45
+```
+
+*(Finite-N is slightly more favourable — C(7,4)/C(15,4) = 0.026 against f⁴ = 0.049 — so the
+`f^k` form is the conservative one and is the right one to design against.)*
+
+**30 is not comfortable, it is the EDGE:** p = 0.049 clears by a hair at f = 0.47 and fails
+for any slightly commoner property. **And 15 cannot test anything at all.**
+
+**THE ORDERING IS FORCED, and it is not the one that feels natural at 2 a.m.:**
+
+> **(1) fix the witness so it clears u ≥ 0.7 somewhere → (2) THEN replicate at N ≥ 30
+> qualifying blocks → (3) THEN test mechanisms.**
+
+No step is skippable or reorderable. **Kingston fails (1) by 3× on all fifteen, so the
+replication cannot be flown there at all** — and the bimodality, the most interesting thing
+in the dataset, sits behind all three steps.
 
 **One coincidence logged as a coincidence,** because it is the most seductive pattern here and
 is the same shape that just produced two refuted hypotheses:
