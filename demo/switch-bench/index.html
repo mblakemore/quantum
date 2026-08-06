@@ -107,12 +107,15 @@
 
   /* leaderboard B */
   .lb { display:grid; grid-template-columns:1fr; gap:10px; max-width:600px; margin:0 auto; }
-  .lbrow { display:grid; grid-template-columns:150px 1fr; gap:12px; align-items:center; }
+  /* minmax(0,...) on both tracks: a grid track's implicit minimum is min-content, so the
+     bars column refused to shrink below its own content and pushed the page 47px past 320. */
+  .lbrow { display:grid; grid-template-columns:minmax(0,150px) minmax(0,1fr); gap:12px; align-items:center; }
   @media (max-width:560px){ .lbrow { grid-template-columns:110px 1fr; } }
   .lbrow .lbl { font-family:var(--mono); font-size:12px; color:var(--ink-2); }
   .lbrow .lbl small { display:block; color:var(--ink-3); font-size:10px; }
   .lbbars { position:relative; }
-  .lbnums { font-family:var(--mono); font-size:11.5px; display:flex; gap:14px; }
+  /* wrap: four fixed labels in one non-wrapping flex row held the page 47px past 320. */
+  .lbnums { font-family:var(--mono); font-size:11.5px; display:flex; flex-wrap:wrap; gap:4px 14px; }
   .lbnums .m { color:var(--ink-3); } .lbnums .k { color:var(--cyan); font-weight:600; } .lbnums .win { color:var(--good); }
 
   .receipts { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }

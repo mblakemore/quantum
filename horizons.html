@@ -96,7 +96,8 @@
   .prog-lede b{color:var(--text);font-weight:600;}
 
   /* cards */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
+  /* min(330px,100%): a bare 330px minimum exceeds a 320px viewport and scrolled the page. */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr));gap:16px;}
   .card{background:var(--card);border:1px solid var(--edge);border-radius:14px;padding:17px 18px 15px;
     display:flex;flex-direction:column;gap:11px;transition:border-color .16s ease,transform .16s ease;}
   .card:hover{border-color:var(--edge2);transform:translateY(-2px);}

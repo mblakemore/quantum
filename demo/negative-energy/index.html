@@ -78,7 +78,9 @@
   .cbtn.on { background:var(--violet); color:var(--bg); border-color:var(--violet); }
 
   /* thermometer + readout */
-  .therm-grid { display:grid; grid-template-columns:325px 1fr; gap:clamp(16px,4vw,30px); align-items:center; }
+  /* A bare 325px track exceeds a 320px viewport, and 1fr's implicit minimum is min-content,
+     so neither column could shrink and the page scrolled. Both tracks now collapse. */
+  .therm-grid { display:grid; grid-template-columns:minmax(0,325px) minmax(0,1fr); gap:clamp(16px,4vw,30px); align-items:center; }
   @media (max-width:640px){ .therm-grid { grid-template-columns:1fr; justify-items:center; } }
   .subvac { fill: color-mix(in srgb, var(--violet) 14%, transparent); }
   .tube { fill: var(--surface-2); stroke: var(--edge-2); stroke-width:1.5; }
@@ -130,7 +132,13 @@
      holding text must never be the scroller — scrolling it drags the caption sideways with the
      chart — so each chart is wrapped in its own .plotwrap. Precedent: self-healing roundSvg,
      anyon-braid #bar, hayden-preskill. WCAG 1.4.10 exempts two-dimensional content. */
-  .plotwrap{overflow-x:auto}
+  /* min-width:0 — the wrapper scrolls its own SVG, but without this it was sized by that
+     SVG's min-width and pushed the page instead of scrolling inside itself. */
+  /* max-width:100% is the load-bearing half: overflow-x:auto makes it a scroll container,
+     but without a max-width it was still SIZED by the svg's 356px min-width and pushed
+     the page instead of scrolling inside its own 250px grid cell. Same fix as
+     pocket-dictionary's grid trap. */
+  .plotwrap{overflow-x:auto;min-width:0;max-width:100%}
   .plotwrap.pw0 svg{width:100%;min-width:356px;height:auto;display:block}
   .plotwrap.pw1 svg{width:100%;min-width:551px;height:auto;display:block}
 </style>

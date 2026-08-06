@@ -62,7 +62,8 @@
      also holds prose must never be the scroller, so charts sitting in caption divs get their own
      .plotwrap. WCAG 1.4.10 exempts two-dimensional content from no-horizontal-scroll. */
   figure{margin:0} svg{width:100%;min-width:524px;height:auto;display:block} .plotwrap{overflow-x:auto}
-  .seg{display:inline-flex;border:1px solid var(--hair);border-radius:12px;overflow:hidden;margin:4px 0 2px}
+  /* wrap: three buttons on one line held the page 41px past 320. */
+  .seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--hair);border-radius:12px;overflow:hidden;margin:4px 0 2px}
   .seg button{font-family:var(--mono);font-size:12.5px;background:none;border:none;color:var(--ink-2);padding:6px 14px;cursor:pointer}
   .seg button[aria-pressed="true"]{background:var(--cyan);color:#04121a;font-weight:600}
   .bignum{font-family:var(--mono);font-size:15px;margin-top:14px}
