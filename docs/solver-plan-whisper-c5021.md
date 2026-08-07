@@ -432,3 +432,69 @@ verification is easy and value is zero.
 Pauli `i^k X^α Z^β`, where the `Z^β` part is a linear phase update (`Q += 4(β·h)`, `D_a += 4(β·g_a)`)
 and the `X^α` part is a shift of the affine space — both cheap; the work is the case analysis when
 the projection reduces the dimension.
+
+---
+
+# 9. C5023 — COMPONENT ③, AND THE SOLVER CLOSED
+
+`tools/pauli_project.py` (**4/4**) and `tools/solver.py` (**6/6**).
+
+## 9.1 ③ — general-Pauli projection
+
+`(I + i^κ X^α Z^β)/2` on the standard form. The `Z^β` part is an affine phase update (4·XOR is
+linear mod 8); the `X^α` part is *just* `h ^= α`. Everything else is the case split on whether
+`α ∈ L(K)`:
+
+| case | condition | effect | cost |
+|---|---|---|---|
+| **B** | `α ∉ L(K)` | dimension **grows** by 1, new basis vector `α`, `D_{k+1} = 2κ+4(β·h)`, `J_{a,k+1} = 4(β·g_a)` | O(n) |
+| **A-i** | `α ∈ L(K)`, `r₀ ≡ 0 mod 4` | `r ∈ {0,4}` → an affine hyperplane → **reuses the gated `shrink`** | O(k²) |
+| **A-ii** | `α ∈ L(K)`, `r₀ ≡ 2 mod 4` | `r ∈ {2,6}` → dimension unchanged, **phases only** | O(k²) |
+
+The `r mod 4` argument is what makes the split exhaustive: for the result to be a stabilizer state
+the amplitude *modulus* `|1 + ω^r|` must be constant on the support, which forces every `r_a ∈ {0,4}`
+and leaves exactly these branches. A constant `r ∈ {2,6}` would give `⟨φ|P|φ⟩ = ±i`, impossible for
+Hermitian `P` — asserted, not assumed. A-i deliberately calls the existing `shrink` rather than
+reimplementing it: that code is already inside the 81/81 reference gate.
+
+**Gates: H1** amplitudes vs explicit `(I+P)/2` — 560 cases, max err **1.6e-16**, with **every branch
+exercised** (grow 261, shrink 87, phase 85, same 64, empty 63); **H2** idempotence, exact; **H3**
+group projection vs an explicit product of projectors, 89 commuting groups, 1.3e-16.
+
+## 9.2 The solver, end to end on the standard form
+
+**No `2^t` matrices anywhere on the path.** `L = F₂^t` makes the sparsification *exact* (Eq 35 gives
+fidelity 1 identically, since `Z(F₂^t) = (1+2^{-1/2})^t`), so the **same code** that runs approximately
+at `k < t` runs exactly at `k = t` and is checkable against brute force. The approximation is a
+parameter, not a different program.
+
+| gate | result |
+|---|---|
+| S0 exact mode reproduces `|H^⊗t⟩` | 3.3e-16 |
+| **S1b full solver == brute force, all y** | **60 (circuit, y) cases, max err 8.9e-16** |
+| **S2b approximate mode vs its own bound** | **288 cases, max err 0.3536 vs `√δ` = 0.3827** |
+| S3 estimator ④ vs the exact O(χ²) norm | max rel dev 0.187 |
+
+**By §6.7 the solver is done.** All four components built, gated, and integrated; what remains is
+engineering for scale (the njit path for projections, streaming the χ terms), not missing mathematics.
+
+## 9.3 The vacuity catch — S2's first version could not fail
+
+S2 initially reported **max |err| = 0.0000 over 96 cases** and I nearly banked it. It was testing
+nothing. Random Clifford+T circuits on 2–3 qubits give `P_out ∈ {0, 1/2, 1}` almost always; after
+filtering the degenerate 0 and 1, **every surviving case had `P_out` = exactly 1/2 — and 1/2 is
+protected by symmetry.** `P = num/den` with `num = den/2` exactly: the approximation scales numerator
+and denominator alike, so the *ratio* is exact no matter how bad the state is.
+
+A zero error on a quantity that cannot move is not evidence. Two fixes, both now standing:
+
+1. **Construct the test to be sensitive.** Open and close in the X basis so the T phases reach the
+   measured probability. `P_out` now spans [0.146, 0.854] (0.854 = cos²(π/8)), and the measured
+   approximation error is **0.3536 against a 0.3827 bound** — tight, real, and inside.
+2. **Add an explicit vacuity guard as its own gate.** S1a and S2a *assert that the quantity under
+   test actually varies* across the sample, and fail if it does not. A gate that cannot fail should
+   fail loudly.
+
+This is the same family as the weak-baseline and window-choice errors earlier in the campaign: a
+comparison arranged so the favoured answer wins by construction. The tell was the number being *too
+clean* — 0.0000 exactly, across 96 cases, on a quantity with a 0.38 error budget.
