@@ -46,20 +46,35 @@ import stabilizer_rank_kernel as ref                                       # noq
 # ─────────────────────────────────────────────────────────────────────────────
 # ④a — Lemma 5 and the uniform sampler
 # ─────────────────────────────────────────────────────────────────────────────
-def count_S(n, d):
-    """|S_n^{n-d}| — Lemma 5. d = 0 gives the full-dimensional case."""
-    if d == 0:
-        return 8.0 * 2.0 ** (n + 0.5 * n * (n + 1))
-    v = 8.0 * 2.0 ** (n + 0.5 * (n * (n + 1) - d * (d + 1)))
+def log2_count_S(n, d):
+    """log2 |S_n^{n-d}| — Lemma 5 in LOG SPACE.
+
+    The direct form overflows float64 at n = 44: |S_n^n| = 8 * 2^(n + n(n+1)/2), and
+    n + n(n+1)/2 crosses 1024 at n = 43. Component ④a would have raised OverflowError the
+    instant a t >= 44 run started. Predicted and checked BEFORE launching a long job at
+    t = 56, rather than discovered inside one."""
+    v = 3.0 + n + 0.5 * (n * (n + 1) - d * (d + 1))
     for a in range(1, d + 1):
-        v *= (1 - 2.0 ** (d - n - a)) / (1 - 2.0 ** (-a))
+        v += math.log2(1 - 2.0 ** (d - n - a)) - math.log2(1 - 2.0 ** (-a))
     return v
 
 
+def count_S(n, d):
+    """|S_n^{n-d}| as a float. Overflows for n >= 44 by construction — use log2_count_S
+    on anything that must scale. Retained because the B1 gate checks it against the known
+    closed form at small n."""
+    return 2.0 ** log2_count_S(n, d)
+
+
 def dim_distribution(n):
-    """P(d) over d = 0..n, and the total |S_n|."""
-    c = np.array([count_S(n, d) for d in range(n + 1)], dtype=float)
-    return c / c.sum(), c.sum()
+    """P(d) over d = 0..n, computed in log space so it is exact at any n."""
+    lg = np.array([log2_count_S(n, d) for d in range(n + 1)], dtype=float)
+    top = float(lg.max())                           # CAPTURE BEFORE SUBTRACTING — the first
+    w = np.exp2(lg - top)                           # version shifted in place, so `lg.max()`
+    P = w / w.sum()                                 # read 0 and the total came back as 2
+    log2_total = top + math.log2(float(w.sum()))
+    total = 2.0 ** log2_total if log2_total < 1023 else float("inf")
+    return P, total
 
 
 def _rand_invertible(n, rng):
