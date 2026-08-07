@@ -1,0 +1,38 @@
+PRE-REGISTRATION — bent families beyond Maiorana-McFarland (Whisper C5027)
+
+THE DOOR, named by my own C4996 red-team: "a genuine hidden-shift advantage needs a bent
+family with no such structure". The MM vulnerability is STRUCTURAL, not incidental:
+f(x,y) = x.y XOR g(x) is LINEAR IN y for every fixed x. That is MM's defining property and
+it is what leaks s_x in k queries.
+
+CANDIDATE: Partial Spread (Dillon PS-). Built as the indicator of a union of 2^(k-1)
+pairwise-disjoint k-dim subspaces of F2^2k. There is NO coordinate split into halves with
+one half linear, so the MM attack has nothing to grip.
+
+WHAT I PREDICT, WRITTEN BEFORE ANY CODE RUNS:
+
+ P1  A correctly built PS- function on F2^2k is bent: Walsh spectrum flat at +-2^k.
+     (This is a construction check. If it fails, my implementation is wrong, not the theory.)
+
+ P2  The MM linear-structure attack FAILS on PS-. I expect this and I am pre-stating that
+     IT IS NEAR-TAUTOLOGICAL AND THEREFORE WEAK EVIDENCE: the attack is DEFINED in terms of
+     MM's linear half, so its failure on a family without one shows almost nothing about
+     hardness. I am running it as a SANITY CHECK on the implementation, not as a result.
+
+ P3  THE REAL QUESTION, and I do not know the answer: does PS- have its OWN exploitable
+     structure? A union of subspaces is a highly structured object. Specific worry: the
+     support of a PS- function is a union of subspaces, so membership queries may reveal
+     the subspaces themselves, and a shift that maps the union to a translate might be
+     recoverable from a small number of support samples.
+
+ P4  THE TENSION MAY NOT BE ESCAPABLE. C4996's lesson was that verifiability via a
+     closed-form dual is in DIRECT TENSION with classical hardness. PS- duals are known in
+     closed form for some spreads. If a family is easy to verify it may be easy to attack,
+     and the honest outcome of this line could be "the genre does not admit a sealed
+     self-verifying hard instance" - which would be a real negative result, not a failure.
+
+FALSIFIER for the whole line: if I find ANY o(2^k) attack on PS- hidden shift, PS- is out
+and the door is still shut.
+
+SCOPE: k=4..6 (n=8..12), classical simulation only, no QPU. This is problem design, not a
+flight.
