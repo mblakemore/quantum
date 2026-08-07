@@ -177,8 +177,18 @@ def main():
           f"({el/max(1,n_inner)*1e6:.2f} us each)")
     exact_cost = len(inst['pn']) * (len(inst['pn']) + 1) // 2 + \
         len(inst['pd']) * (len(inst['pd']) + 1) // 2
-    print(f"  the exact O(chi^2) route would need {exact_cost:,} "
-          f"({exact_cost/max(1,n_inner):.1f}x more, ~{exact_cost*el/max(1,n_inner)/3600:.1f} h)")
+    # The exact route's inner products are TERM-vs-TERM and much cheaper than this route's
+    # THETA-vs-term ones: 6.11 us against 43.73 us measured at t=42, a factor of 7.2. Charging
+    # the baseline MY cost per operation inflated the reported win from 5.6x to 35.8x. That is a
+    # weak baseline in the most literal sense — the third cost-comparison error of this kind in
+    # the session — so the two costs are now quoted separately and scaled from their own anchors.
+    us_theta = el / max(1, n_inner) * 1e6
+    us_term = 6.11 * (t / 42.0) ** 3                    # measured at t=42, scaled by t^3
+    exact_h = exact_cost * us_term * 1e-6 / 3600
+    print(f"  cost per inner product: this route {us_theta:.1f} us (theta vs term, MEASURED); "
+          f"exact route ~{us_term:.1f} us (term vs term, scaled from a t=42 measurement)")
+    print(f"  the exact O(chi^2) route would need {exact_cost:,} inner products "
+          f"~= {exact_h:.1f} h  ->  the estimator wins by {exact_h*3600/el:.1f}x here")
 
     out = {"card": "estimator_run", "version": "1.0", "cycle": "C5025",
            "substrate": "claude-fable-5", "n": a.n, "t": t, "k": inst["k"], "chi": chi,
