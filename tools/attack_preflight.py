@@ -44,6 +44,7 @@ import sys
 ATTACKS = [
     {
         "id": "planted-structure-leak",
+        "combinator": "all",   # the attack needs BOTH a public structure AND a simulation-priced baseline. A public instance alone is fine — F113's 2D-HLF instance is public by construction and makes no runtime claim.
         "name": "Attack the problem's algebra, not the circuit",
         "exploits": (
             "A planted/hidden secret compiled INTO the circuit whose defining algebraic property "
@@ -66,6 +67,7 @@ ATTACKS = [
     },
     {
         "id": "idealized-hard-delivered-easy",
+        "combinator": "all",   # needs BOTH repeated shots under fixed randomness AND hardness argued on the ideal. Either alone is a design note, not a leak.
         "name": "Attack what was DELIVERED, not what was designed",
         "exploits": (
             "The idealized protocol is hard, but the flown artifact leaks. F119's honest oracle "
@@ -89,6 +91,7 @@ ATTACKS = [
     },
     {
         "id": "under-priced-baseline",
+        "combinator": "any",   # EITHER an assumed shot count OR a denied speedup under-prices the baseline on its own.
         "name": "Give the baseline every advantage it is legally entitled to",
         "exploits": (
             "A conventional arm priced with assumed shot counts rather than an optimal sequential "
@@ -112,6 +115,7 @@ ATTACKS = [
     },
     {
         "id": "ceiling-quoted-as-advantage",
+        "combinator": "all",   # needs BOTH a simulation-priced ratio AND no problem-specific search. A simulation ratio reported alongside a completed search is a legitimate ceiling.
         "name": "A simulation cost is a ceiling, not an advantage",
         "exploits": (
             "Quoting the cost of imitating the machine as though it were the cost of beating it. "
@@ -154,7 +158,14 @@ def run(claim):
     for a in ATTACKS:
         hits = [(k, q) for k, q in a["precondition"]
                 if str(answers.get(k, "unknown")).lower() in ("yes", "true", "unknown")]
-        (applies if hits else clear).append((a, hits))
+        # PER-CLASS COMBINATOR (C5027). The first version treated preconditions as OR and
+        # false-positived on the FIRST real claim it was run against: F113's 2D-HLF instance is
+        # public by construction, which tripped planted-structure-leak even though F113 prices no
+        # simulation baseline and makes no runtime claim. A tool built to catch over-claiming that
+        # itself over-fires is worse than no tool — it trains its user to dismiss it.
+        need_all = a.get("combinator", "all") == "all"
+        fires = (len(hits) == len(a["precondition"])) if need_all else bool(hits)
+        (applies if fires else clear).append((a, hits))
     return applies, clear
 
 
