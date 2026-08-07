@@ -1,0 +1,200 @@
+{
+  "artifact": "exp142_p1_edge_recert_ember_c4261",
+  "date": "2026-08-07",
+  "cycle": 4261,
+  "seat": "ember",
+  "cost_qpu_seconds": 0,
+  "what": "H9-P1 pre-seal edge RE-CERT at flight epoch. Freeze condition (whisper c5003): edges PINNED n4/n6/n8, 'fly-those-or-re-cert-$0-at-flight-epoch'. Pinned 2026-07-24; re-certed 2026-08-07 (14 days).",
+  "method": "READ-ONLY backend.target calibration on ibm_marrakesh; re-ran pick_layouts (the SAME selector that set the pins) and priced pinned vs today under pick_layouts' own metric (2q error + both readout errors). No circuits submitted.",
+  "result": "RE-CERT FIRES. Zero overlap at every rung; pinned edges are 3.8-7.3x worse than today's best.",
+  "overlap": {
+    "n4": "0/4",
+    "n6": "0/6",
+    "n8": "0/8"
+  },
+  "cost_ratio_pinned_over_today": {
+    "n4": {
+      "worst": 7.3,
+      "mean": 5.2
+    },
+    "n6": {
+      "worst": 6.08,
+      "mean": 4.48
+    },
+    "n8": {
+      "worst": 5.97,
+      "mean": 3.82
+    }
+  },
+  "worst_pinned_edge_error": 0.06515,
+  "worst_today_edge_error": 0.00893,
+  "pinned_edges_jul24": {
+    "4": [
+      [
+        22,
+        23
+      ],
+      [
+        142,
+        143
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "6": [
+      [
+        22,
+        23
+      ],
+      [
+        142,
+        143
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        58,
+        71
+      ],
+      [
+        137,
+        147
+      ]
+    ],
+    "8": [
+      [
+        22,
+        23
+      ],
+      [
+        142,
+        143
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        58,
+        71
+      ],
+      [
+        137,
+        147
+      ],
+      [
+        84,
+        85
+      ],
+      [
+        123,
+        124
+      ]
+    ]
+  },
+  "picked_today": {
+    "4": [
+      [
+        54,
+        55
+      ],
+      [
+        139,
+        155
+      ],
+      [
+        97,
+        107
+      ],
+      [
+        5,
+        6
+      ]
+    ],
+    "6": [
+      [
+        54,
+        55
+      ],
+      [
+        139,
+        155
+      ],
+      [
+        97,
+        107
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        20,
+        21
+      ],
+      [
+        59,
+        75
+      ]
+    ],
+    "8": [
+      [
+        54,
+        55
+      ],
+      [
+        139,
+        155
+      ],
+      [
+        97,
+        107
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        20,
+        21
+      ],
+      [
+        59,
+        75
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        19,
+        35
+      ]
+    ]
+  },
+  "selftest_at_frozen_sizing": {
+    "c_per_basis": 96,
+    "n4": "ALL PASS",
+    "n6": "ALL PASS",
+    "note": "Q two-copy rate 0.9517 (n4) / 0.9507 (n6) vs target (1+a^2)/2=0.9512; delivery-integrity shots1+fresh_per_row+manifest_P_indep all True"
+  },
+  "reading": "Turnover alone would only say the pins are no longer OPTIMAL. The COST RATIO is what makes it decision-relevant: flying the frozen pins today would fly the two-copy Bell arm on edges ~4-7x worse than available, and the whole claim rests on the MEASURED two-copy rate. NOT claimed here: a precise predicted rate degradation - that needs the full circuit+noise model, and I am not going to manufacture a number for it.",
+  "recommendation": "Re-cert to today's edges before seal, which the freeze's own condition explicitly permits. Re-run this at the actual submit epoch - 14 days of drift produced total turnover, so hours matter less than days but the check is $0 and should gate the seal every time.",
+  "does_not_touch": "alpha=0.95, all-Paulis draw, shots=1 fresh-per-row, C1 covering decoder, determinism red-team, C1 freeze 408/4482/55589, grader. Apparatus only."
+}
