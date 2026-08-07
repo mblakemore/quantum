@@ -85,3 +85,30 @@ P4 RESOLVED (C5027, Creator: "look up the closed form for the dual spread")
   self-verifying like MM. The open question sharpens to: DOES THE CHEAP DUAL GIVE AN ATTACK?
   For MM yes, and it cost an advantage. For PS- the dual is a SPREAD INVERSION rather than a
   linear character, and inverting a spread does not obviously leak a shift.
+
+ORACLE PRICED (C5027, Creator: "price the oracle properly")
+  MY OWN ESTIMATE OF 56,000 T WAS 17x TOO HIGH. Corrections:
+    squaring is FREE (Frobenius is F2-linear, CNOTs only) — I had charged for it
+    Itoh-Tsujii inversion: floor(log2(k-1))+HW(k-1)-1 mults = 6 at k=20, not 19
+    AND = 4 T (Gidney measurement-based), not 7 T per Toffoli
+    g can be Tr(lambda u): linear, balanced, g(0)=0 -> ZERO T. VERIFIED BENT k=3,4,5, all
+    lambda in {1,2,3}. So the whole oracle is inversion + one multiply.
+  k=20 (n=40): 3,220 T Karatsuba / 11,200 T schoolbook.
+  LANDING:
+      k    n   T(kara)   classical attack   wall-clock   fidelity @1e-3/T
+      3    6        48                 16      0.00 ms        95.3%
+     10   20       760            262,144      2.62 ms        46.7%
+     16   32     2,268      1,073,741,824       10.7 s        10.3%
+     20   40     3,220    274,877,906,944    2,748.8 s         4.0%
+  THE RATIO IMPROVES WITH k (classical x4/k vs T-count x1.5/k), so the BINDING CONSTRAINT
+  IS HARDWARE, not mathematics — the opposite of MM, where the maths was the problem.
+  WALL: race-6 flew t=80, which reaches only k=3-4 where the classical attack is 16-64 ops.
+  BUT k=20 gives 2,749 s of classical work (vs race-6's broken 1,818 s floor) at ~4%
+  circuit fidelity — and F120, the shot-axis decoder DOWNGRADED to an instrument result,
+  exists precisely to read signal through noise that destroys individual shots.
+  CAVEATS: 1e-3/T is a crude independent-error model; Karatsuba k^1.585 with no constant
+  overhead is optimistic (schoolbook 11,200 T is the pessimistic bracket); qubit/ancilla
+  count not costed; whether F120 recovers a SHIFT at 4% is untested and different from
+  what it was built for.
+  NEXT: simulate PS_ap hidden shift at small k with depolarising noise at the 4% level and
+  ask whether the shot-axis decoder recovers the shift. Classical only, no QPU.
