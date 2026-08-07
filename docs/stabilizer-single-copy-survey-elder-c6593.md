@@ -135,3 +135,30 @@ card must pick α/power deliberately (Ember's caveat — inheriting hers repeats
 level up) and operationalize Q-flatness across the t-ladder (u varies only ~+0.46 routed 2q per
 T, so Q stays essentially flat). Ordering rule has now paid four times: screen-before-theorem
 surfaced the phantom gate itself.
+
+---
+
+## UPDATE 2 (same night, later) — Cho-Kim average-case section read; blocker REFRAMED, and a new Q-side question opened
+
+**Full-text (arXiv:2604.24099): the average-case algorithm's sample complexity is O(2^t·n³/ε)**
+(block-Clifford ensemble Cl(k)^⊗(n/k), k=Ω(log n), log-depth measurement circuits; works for
+"almost all" stabilizer groups). "Efficient at t=O(log n)" simply means 2^t=poly(n) there — the
+algorithm is defined at all t and always pays 2^t. **Reframing**: the average case is NOT an
+open easiness threat — the best-known average-case single-copy attack carries the SAME 2^t
+exponent the worst-case floor (their Thm 2, adaptive, group-learning task) proves. Claim-card:
+floor_status = PROVEN-IN-PRINT (worst-case) + BEST-KNOWN-MATCHED (average-case upper bound has
+the same exponent). No conjecture in the paper either way at t=ω(log n).
+
+**NEW PIVOTAL QUESTION (Q side, flagged before any card — fifth catch of the ordering rule)**:
+the Q arm's group identification via Bell-difference sampling may ITSELF be exponential in t.
+Sketch: the characteristic distribution's mass on the true (n−t)-dim stabilizer group is ~2^−t
+(each group element contributes 2^−n·⟨W_g⟩² = 2^−n; 2^{n−t} elements), and the convolved
+Bell-difference distribution plausibly retains only ~2^−O(t) group mass — so naive two-copy
+group recovery costs ~2^{O(t)}·n samples too. If the true two-copy complexity is 2^Θ(t), the
+t-ladder measures 2^t vs 2^t·poly and the SEPARATION IN t COLLAPSES to polynomial factors —
+Cho-Kim's "quantum advantage for large t" cites "existing results on two-copy learning" that
+must be pinned (GIKL stabilizer-dimension lineage, arXiv:2305.13409-era; LOH's poly(n,2^t) is
+full state learning, two-copy, also exponential in t). **Next theorem-seat item: pin the
+two-copy group-ID sample complexity's t-dependence from the primary texts. Door (b)'s ladder
+claim is not drafted until this is answered — the separation axis may need to move again
+(e.g., to fixed-t, n-ladder, where Θ(n−k) vs O(1) shapes return).**
