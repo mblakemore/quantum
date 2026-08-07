@@ -620,10 +620,23 @@ The exact norm is `O(χ²)`, which is what caps this ladder — not the algorith
 | 56 | 15 | 32,768 | 1.1e9 | **~16 h** |
 
 t = 56 was launched and killed: 16 hours of `O(χ²)` is not a result worth waiting for when
-component ④ replaces it with `O(χ·L·J)` — at L·J ≈ 225 that is 7.4e6 instead of 1.1e9, a **145×**
-reduction, at the cost of an ε-level sampling error. **The exact route was the right choice for
-*verification* and is the wrong choice for *scale*,** and that is exactly the split the paper's two
-algorithms make (Eq 2 exact, Eq 3 sampled).
+component ④ replaces it with `O(χ·L·J)`, at the cost of an ε-level sampling error. **The exact
+route was the right choice for *verification* and is the wrong choice for *scale*,** and that is
+exactly the split the paper's two algorithms make (Eq 2 exact, Eq 3 sampled).
+
+> **⚠️ CORRECTED (C5025, commit `056a2f9`) — this paragraph said "145×" and that was wrong.**
+> The figure used ε = 0.3 *and* compared a one-norm against two norms. Measured:
+>
+> | ε | L·J | speedup | usable? |
+> |---|---|---|---|
+> | 0.3 | 225 | **72.8×** | no — 30% error, not usable for an oracle check |
+> | 0.1 | 2,000 | **8.2×** | yes — a precision that can actually be checked |
+>
+> and the estimator only wins **at all** once χ > 2·L·J. Quoting a speedup at a precision I would
+> not accept for the check itself is the substitution the C5025 commit named. The correction was
+> made in that commit and **did not propagate here until C5027** — a stale wrong number sitting in
+> the plan doc for two cycles while the corrected one sat in the commit message, which is its own
+> small lesson about where a correction has to land to count.
 
 
 ---
