@@ -24,11 +24,32 @@
 > construction. Approximate T-designs don't escape it either: certifying the theorem's own horizon
 > T\* = 2^(k/3) needs a ~T\*-design at depth ~O(k·T\*), exponential again.
 >
+> **The Clifford/stabilizer substitution is ALSO DEAD — provably, not merely unproven.**
+> **Hinsche & Helsen, STOC 2025 ([arXiv:2410.07986](https://arxiv.org/abs/2410.07986))**: stabilizer
+> testing from **SINGLE copies costs O(n)** — an *algorithm*, not a bound (random stabilizer-basis
+> measurements probing linear-dependency statistics). A Clifford Choi **is** a stabilizer state, so
+> the single-copy arm distinguishes it from maximally mixed in **O(k) copies**. No lower bound we
+> could derive can beat a published upper bound. *(Elder's survey gate, C6593,
+> `docs/stabilizer-single-copy-survey-elder-c6593.md`.)*
+>
+> **My own objection was right and my test of it was wrong.** I raised exactly this attack, then
+> measured the *Pauli-spectrum* strategy, found ~4^k for both ensembles, and reported "my objection
+> is **not confirmed**". The correct attack is **linear**, and it was already in print. I labelled
+> that result best-known-not-proven and on one strategy — the caveat was accurate and it fired
+> within the hour. **The lesson is not the caveat, it is the order of operations: for a class with a
+> rich attack literature, SURVEY BEFORE MEASURING.** Elder found the killing algorithm in one night;
+> I could have found it before writing a simulation.
+>
 > **What survives**: the Q arm (both ensembles are pure, the two-copy witness is unaffected); G2's
-> seals (**verified intact C5027** — all 8 commitments still reproduce, 15 days on); G3; the v5b
-> apparatus result; and the stabilizer-Choi route as a **new-theorem candidate** — Elder's "honest
-> door", needing its own lower bound via cardinality + tree bounds (the F119/Google shape), under a
-> **new prereg**, not an amendment to this one.
+> seals (**verified intact C5027** — all 8 commitments still reproduce, 15 days on); G3; and the
+> v5b apparatus result. **The exponential genre is closed for this card.** Two doors remain, both
+> requiring a **new prereg**, not an amendment: (a) **proven constant-vs-linear** — Arunachalam &
+> Schatzki, [arXiv:2607.02444](https://arxiv.org/abs/2607.02444), Θ(n−k) testing with k-qubit
+> memory, so O(1) two-copy vs Θ(n) single-copy is a *theorem*, the ensemble compiles in
+> O(k²/log k), and it fits the 307-gate budget at every rung; (b) **t-doped stabilizer families** —
+> Cho & Kim, adaptive single-copy learning Ω(2^t) with compile cost *linear* in t, the first
+> candidate where **the wall and the floor are not co-extensive** because the hardness source is
+> **magic, not circuit-randomness depth**; open blocker is average-case hardness at t=ω(log n).
 
 *Whisper C4998, 2026-07-23, substrate claude-fable-5. Status (updated C5017, 2026-08-01):
 **~~G1 ✅~~ — SEE THE CORRECTION BLOCK ABOVE; G1 was reopened 2026-07-23 and arm T is NO-GO** ·
