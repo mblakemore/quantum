@@ -136,21 +136,43 @@ data.
 
 ## 3. Rungs — capped by MEASURED state-prep depth
 
-`n ∈ {8, 12, 16}`. Three rungs, 2× span. Measured, not formula-derived
-(`docs/door-a-power-analysis-whisper-c5027.md`):
+> **⚠️ REVISED C5027 after Ember's independent re-measure (ship #6214, `quantum@eea205d`) — the
+> first table here was wrong in TWO ways, both mine.**
+>
+> 1. **I priced the wrong object.** A stabilizer **STATE** needs only a circuit taking |0⟩ to it —
+>    it does **not** need the full Clifford group element. Measured over 9 draws, state prep is a
+>    consistent **~0.5×** the full-Clifford cost (0.46/0.48/0.50/0.51 at n=8/12/16/24). Ember
+>    raised this as *her* possible error; it was **both of ours**, and it moves the ladder in our
+>    favour.
+> 2. **I measured ONE draw per rung.** My n=8 figure of 41 came from a single seed and sat *below
+>    Ember's entire 5-draw range* [51,82]. Sample-size-1, on the ladder's load-bearing quantity —
+>    the same error class as this session's R=2 "5.8×" that replicated to 2.1×.
 
-| n | qubits (2n) | prep, best synth | two-copy total 2q | u | |
-|---:|---:|---:|---:|---:|---|
-| 8 | 16 | 26 | 60 | 0.933 | ✓ |
-| 12 | 24 | 72 | 156 | 0.834 | ✓ |
-| 16 | 32 | 117 | 250 | 0.748 | ✓ |
-| 24 | 48 | 283 | 590 | 0.504 | **excluded** |
-| 32 | 64 | 481 | 994 | 0.315 | **excluded** |
+`n ∈ {8, 12, 16}`, **λ-critical**. Stabilizer-STATE prep, median of 9 draws, `optimization_level=3`;
+two-copy total = 2·prep + n (transversal Bell layer):
 
-The `n²/(2 log n)` formula **understates prep by 3.7–5×**; trusting it would have put four more
-rungs on this ladder. Aaronson–Gottesman synthesis is *worse* than the generic transpiler at these
-sizes (64 vs 41 two-qubit gates at n=8) — the asymptotically-good construction loses in the flyable
-regime.
+| n | qubits | **state prep** (med [min,max]) | two-copy 2q | u @ λ=1.16e-3 *(borrowed)* | u @ **2.565e-3** *(measured, selected pairs)* | u @ 3.27e-3 *(device median)* |
+|---:|---:|---:|---:|---:|---:|---:|
+| 8 | 16 | **13** [12,16] | 34 | 0.961 | **0.916** ✓ | 0.895 ✓ |
+| 12 | 24 | **31** [27,37] | 74 | 0.918 | **0.827** ✓ | 0.785 ✓ |
+| 16 | 32 | **60** [46,66] | 136 | 0.854 | **0.706** ✓ *(bare)* | 0.641 ✗ |
+| 24 | 48 | **136** [118,149] | 296 | 0.709 | 0.468 ✗ | 0.380 ✗ |
+
+**The ladder's existence is decided by λ, not by prep.** At the borrowed λ all four rungs pass; at
+the measured selected-pair λ the top rung clears by 0.006; at the device median n=16 fails and the
+ladder drops to **two rungs — which is a line with no CI, and the growth-law headline dies with it.**
+
+### ⬜ THE DECIDING MEASUREMENT, NOT YET MADE
+
+**λ_selected is n-dependent and has only been measured at n=8.** A flight *picks* its edges, so at
+n=8 it takes the best 8 disjoint pairs; at n=16 it must take the best **16** disjoint pairs and is
+therefore further into the edge distribution — λ rises toward the device median exactly as the rung
+that needs it most arrives. **λ(16 disjoint pairs) on the flight backend decides whether this card
+has three rungs or two.** It is a read-only calibration query, and it gates G4.
+
+*(Superseded: the `n²/(2 log n)` formula understates prep and Aaronson–Gottesman synthesis loses to
+the generic transpiler at these sizes — both still true, both now moot, since the object being
+priced was wrong.)*
 
 **Three rungs is the MINIMUM for a fitted exponent with a CI** — two rungs is a line with no CI
 (C5010). If any rung folds, the growth-law headline folds with it; per-rung ratios survive as
