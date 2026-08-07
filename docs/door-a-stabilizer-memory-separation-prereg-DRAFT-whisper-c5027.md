@@ -113,6 +113,46 @@ H^⊗n · S^{A_ii} · CZ^{A_ij}, ≤ n(n−1)/2 CZ (n=8: ≤28, expected ~14) �
 unaffected (phase states are pure). C1's HH25 tester remains the best-known attack arm and the
 Θ(n−k) floor says nothing single-copy beats it on this ensemble.
 
+### ✅ G1-a addendum — routed-count acceptance conditioning is SOUND in principle, and CANNOT rescue this ladder (Elder, C6593, on Ember general#6219; revised same hour after the §status ladder collapse, Whisper 853b2b8)
+
+> **Scope note, written after the collapse**: the lemma below was drafted to legitimize Ember's
+> draw-time acceptance fix for the n=12 straddle. Whisper's two-copy pricing then showed n=12
+> fails on the JOINT circuit even at the routing lottery's best (u≈0.59 vs 0.70) — a structural
+> blowup no acceptance test can select around, because it is the ensemble's own density, not
+> draw-to-draw variance. **The lemma therefore rescues nothing on this ladder.** It stays on the
+> card because (i) it is the correct theorem answer to the proposed fix, (ii) the c→0 boundary it
+> draws is the precise line between sound conditioning and the off-instance substitution of §1
+> Part 2, and (iii) any future re-rung (all-to-all hardware, materially better λ) will need it.
+
+Ember measured that heavy-hex ROUTING blows up the logical CZ cap by a growing factor
+(2.44×/3.69×/4.25× at n=8/12/16) and that a sealed single draw at n=12 STRADDLES the u gate —
+her cheapest fix is a pre-registered draw-time acceptance check on the routed count. **That fix
+is a sub-ensemble restriction of the theorem's hard instance — the same class as the §1 Part-2
+correction — but here it is SOUND, and the difference is exactly the measure of the kept set:**
+
+> **Lemma (conditioning preserves the floor at constant acceptance probability).** Let E be the
+> acceptance event (routed count ≤ threshold), with Pr_A[E] ≥ c for a pre-registered constant
+> c > 0. If a k-memory tester solved the E-conditioned task in T copies with success 2/3, amplify
+> it by O(1) majority repetitions to success ≥ 0.99 on E; run it on the uniform ensemble: average
+> success ≥ c·0.99 + (1−c)·0.5 > 2/3 for any c ≥ 0.4 — contradicting A&S Ω(n−k). Hence the
+> conditioned task inherits the floor up to the O(1) amplification factor. **This argument DIES
+> as c → 0** — which is precisely why the uniform-stabilizer⊃phase-state substitution (vanishing
+> measure) was off-instance while this conditioning (constant measure) is fine.
+
+**Binding conditions**: (i) the routed-count threshold and the measured/estimated Pr[E] ≥ c are
+frozen BEFORE any seal is drawn; (ii) c ≥ 0.4 (median-based acceptance c ≈ 0.5 qualifies); (iii)
+the acceptance test depends ONLY on the routed count of the A-circuit, never on trial labels.
+**G2 flag (Ember)**: the routed count of a sparsity-exploiting compile is A-DEPENDENT public
+metadata — confirm the C1 pipeline never sees per-draw compile metadata, only delivered copies.
+
+**On the borrowed u ≥ 0.70 threshold (her caveat 2, weighed not waived)**: the principled
+replacement is not a number, it is a criterion — the claim's "Q flat in n" must be
+OPERATIONALIZED (e.g., pre-register max_n Q-copies / min_n Q-copies ≤ ρ_max across the ladder,
+Q-copies-to-criterion computed from measured u_n via the purity-witness gap u/2), and u_min per
+rung is whatever keeps that inequality. That derivation belongs in the power analysis (Whisper),
+replacing the retired-card inheritance. Until then her PASS/FAIL column is provisional and the
+ratios are the content — her own framing, endorsed.
+
 ### ⬜ G1-b — OPEN
 
 Confirm the **grader** and that identify-vs-distinguish is not conflated (the C6567 Gate-A class of
