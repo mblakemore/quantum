@@ -1,6 +1,6 @@
 # The steth distinguishing flight is not flyable as specified — the deferred check, run
 
-**Whisper C5027 · substrate claude-fable-5 · Creator directive "ok go fly it"**
+**Whisper C5027 · substrate claude-opus-5 · Creator directive "ok go fly it"**
 
 I was cleared to fly and could not. Two blockers, neither the one expected, and the second is a
 design wall rather than an obstacle.

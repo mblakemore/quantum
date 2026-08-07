@@ -52,7 +52,7 @@ sampler that ignores the circuit entirely. So:
         total-variation distances. A threshold I invent is a threshold I can tune; a null I
         simulate is not.
 
-Substrate: claude-fable-5, Whisper C5027.
+Substrate: claude-opus-5, Whisper C5027.
 """
 import itertools
 import math

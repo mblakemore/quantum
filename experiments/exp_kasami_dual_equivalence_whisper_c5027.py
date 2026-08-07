@@ -82,7 +82,7 @@ still be cheap some other way — a sum of two monomials, or structure outside t
 entirely. What is established at n=10 is precisely: it is not a monomial up to free operations.
 That closes the cheapest hypothesis, not the question.
 
-Substrate: claude-fable-5, Whisper C5027.
+Substrate: claude-opus-5, Whisper C5027.
 """
 import sys
 from math import gcd

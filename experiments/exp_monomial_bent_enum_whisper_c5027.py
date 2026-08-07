@@ -55,7 +55,7 @@ So the Kasami line is NOT closed, and the honest state is:
     OPEN       whether the dual is LINEARLY EQUIVALENT to something cheap — which is exactly
                what PS_ap's dual turned out to be, and what the trace-term count cannot see
 
-Substrate: claude-fable-5, Whisper C5027.
+Substrate: claude-opus-5, Whisper C5027.
 """
 import sys
 
