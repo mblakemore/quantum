@@ -317,7 +317,7 @@ decomposition, a verified estimator, and a measured arm — not a solver that ta
 | P3 | ③ Clifford propagation costs more per term than the inner product | **VOID — the premise was wrong.** Eq 3's `(n+t)³` is additive, not per-term; the Clifford is propagated once in the Heisenberg picture (Eq 28). GAP 7 does not exist |
 | P4 | measured t=80 arm lands in 10–40 days single-core | **REFUTED at first measurement (324 d), CONFIRMED after the fix (22.3 d)** — see §7.3 |
 | P5 | `random_state_via_extend` fails the Lemma-5 χ² test | **CONFIRMED** — χ² = 12,533 on dof 479, p = 0. The Lemma-5 sampler passes at p = 0.636 |
-| P6 | exact pipeline passes gate D at n,t ≤ 8 | **not reached** (Stage D not built) |
+| P6 | exact pipeline passes gate D at n,t ≤ 8 | **CONFIRMED (C5022)** — 124 (circuit, y) cases at n ≤ 5, t ≤ 4, max err 3.3e-16 |
 
 ## 7.3 The defect the pre-registration caught
 
@@ -373,3 +373,62 @@ cost of the sampling algorithm's dominant term. It excludes the additive `O((n+t
 propagation (amortised, per Eq 3) and it is quoted at **δ = 0.5 — the paper's practical regime, not
 its guaranteed one** (GAP 6: Eq 19 needs fidelity² ≥ 1 − ε²/25, which δ=0.5 does not meet; the
 paper's own published runs did not meet it either).
+
+---
+
+# 8. C5022 — COMPONENT ② GADGETIZATION
+
+`tools/gadgetize.py`, **33/33 gates.**
+
+## 8.1 What it does
+
+```
+T gate                 ->  CNOT(data, magic_j) + S^{y_j} on data,  magic_j postselected onto y_j
+measurement outcome    ->  a uniform postselection bit y_j
+the whole Clifford V_y ->  propagated ONCE in the Heisenberg picture onto the t magic qubits
+                           giving  P^y_out(x) = 2^-u <psi|Pi_G|psi> / 2^-v <psi|Pi_H|psi>   [Eq 28]
+```
+
+Postselection is deferred to the end of the circuit, which is legitimate because nothing touches
+magic qubit `n+j` after its CNOT. The reduction is: `Pi_S' = 2^-r Σ_{P∈S'} P`; `<0^n|P_A|0^n>`
+vanishes unless `P_A` is Z-type and equals **+1** when it is (both `<0|I|0>` and `<0|Z|0>` are 1),
+so the surviving subgroup is the **null space of the generators' X-parts on the data register**,
+and `u = r − dim(null)`.
+
+## 8.2 The gates
+
+| # | check | result |
+|---|---|---|
+| G1 | every conjugation rule vs explicit matrices, **all** Paulis, m ≤ 3 | 25 rules × up to 256 Paulis, 0 mismatches |
+| G2 | the T gadget really implements T, both outcomes, phase included | 100 branches, 0 bad |
+| **G3** | **`P^y_out(x)` == brute-force `P_out(x)` for EVERY y** (Eq 18) | **124 cases, max err 3.3e-16** |
+| G4 | the denominator is the postselection weight, `p_y = 2^-t` | max err 1.1e-16 |
+| G5 | `Σ_x P^y_out(x) = 1` | exact |
+| G6 | **①b swapped in** — sparsified state end-to-end vs its own bound | 68 cases, max err **0.109** vs `√δ = 0.383` |
+
+**G3 is the load-bearing one.** Eq 18 says the final state of the n computational qubits is
+`U|0^n⟩` *regardless of y*, so with the exact magic state every `y` must reproduce `P_out(x)`
+exactly. That single equality exercises the gadget, all 25 conjugation rules, the null-space
+reduction and the exponent `u` at once — a phase error anywhere breaks it.
+
+**G6 removes the last reason to need per-term Cliffords.** Since `|A⟩ = e^{iπ/8} H S† |H⟩`, the
+frame change `(HS†)^⊗t` folds into `V_y`, so the decomposition stays in the H frame where ①b
+produces it. Nothing is applied to the terms.
+
+## 8.3 Where this leaves the solver
+
+**The mathematics of the full pipeline is now verified end to end.** Circuit in → `(G, H, u, v)` →
+sparsified magic state → `P_out(x)`, agreeing with brute force exactly in the exact case and inside
+its own exactly-known error bound in the approximate case.
+
+**What is still missing is the part that makes it worth running.** `<psi|Pi_G|psi>` is evaluated
+here with explicit `2^t` matrices. Doing it on the stabilizer standard form needs a **general-Pauli
+projection of a stabilizer state — component ③**, which does not exist: the kernel's `shrink`
+handles Z-type projections only, and `apply_H` is a stub that raises. Until ③ exists the solver
+runs only at sizes where a statevector would have done, which is exactly the regime where
+verification is easy and value is zero.
+
+**③ is now the single remaining blocker,** and it is a well-posed one: extend `shrink` to a general
+Pauli `i^k X^α Z^β`, where the `Z^β` part is a linear phase update (`Q += 4(β·h)`, `D_a += 4(β·g_a)`)
+and the `X^α` part is a shift of the affine space — both cheap; the work is the case analysis when
+the projection reduces the dimension.
