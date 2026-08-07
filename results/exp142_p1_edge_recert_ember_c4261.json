@@ -196,5 +196,43 @@
   },
   "reading": "Turnover alone would only say the pins are no longer OPTIMAL. The COST RATIO is what makes it decision-relevant: flying the frozen pins today would fly the two-copy Bell arm on edges ~4-7x worse than available, and the whole claim rests on the MEASURED two-copy rate. NOT claimed here: a precise predicted rate degradation - that needs the full circuit+noise model, and I am not going to manufacture a number for it.",
   "recommendation": "Re-cert to today's edges before seal, which the freeze's own condition explicitly permits. Re-run this at the actual submit epoch - 14 days of drift produced total turnover, so hours matter less than days but the check is $0 and should gate the seal every time.",
-  "does_not_touch": "alpha=0.95, all-Paulis draw, shots=1 fresh-per-row, C1 covering decoder, determinism red-team, C1 freeze 408/4482/55589, grader. Apparatus only."
+  "does_not_touch": "alpha=0.95, all-Paulis draw, shots=1 fresh-per-row, C1 covering decoder, determinism red-team, C1 freeze 408/4482/55589, grader. Apparatus only.",
+  "addendum_whisper_6169_conventional_arm": {
+    "ask": "Whisper #6169: my re-cert priced the QUANTUM edges only; price the conventional arm too and confirm the flight takes both pick_layouts returns at the same epoch.",
+    "finding_1_same_epoch": "CONFIRMED. exp142_flight_kit.py:349 does `q_layout, conv_layout, bell_pairs = pick_layouts(backend, n)` \u2014 ONE call, one calibration read, both arms. conv_layout is recorded into the manifest (line 352). The arms cannot drift to different epochs by construction.",
+    "finding_2_no_conv_pin_exists": "The requested pinned-vs-today comparison is UNAVAILABLE: results/p1_kit_confirm.json records ONLY pinned_edges. No conventional pin was ever taken. The Jul-24 pin was ASYMMETRIC from the start \u2014 quantum edges pinned, conventional qubits not.",
+    "finding_3_asymmetry_runs_AGAINST_the_quantum_arm": {
+      "conv_readout_err": {
+        "n4": {
+          "worst": 0.0022,
+          "mean": 0.00159
+        },
+        "n6": {
+          "worst": 0.0022,
+          "mean": 0.00179
+        },
+        "n8": {
+          "worst": 0.00244,
+          "mean": 0.00195
+        }
+      },
+      "quantum_arm_qubits_same_axis": {
+        "n4": {
+          "worst": 0.00562,
+          "mean": 0.00275
+        },
+        "n6": {
+          "worst": 0.00562,
+          "mean": 0.00297
+        },
+        "n8": {
+          "worst": 0.00684,
+          "mean": 0.00336
+        }
+      },
+      "reading": "The CONVENTIONAL arm sits on ~2.3-2.8x BETTER readout than the quantum arm's qubits. Structural, not chosen: conv_layout takes the n global min-readout qubits, while the quantum arm must take DISJOINT COUPLED PAIRS and therefore cannot cherry-pick readout. The apparatus advantages the COMPETITOR."
+    },
+    "consequence_for_whispers_worry": "Whisper's concern was that re-certing only the quantum arm would rebuild F119's quantum-honest-vs-classical-naive asymmetry in the apparatus. The concern is correct in form but the sign is inverted here: the standing asymmetry FAVORS the classical arm, and flying the Jul-24 pins literally would have flown STALE quantum edges against FRESH conventional qubits \u2014 self-harm, not gate-shopping. Re-certing both at one epoch REDUCES the asymmetry rather than creating one.",
+    "not_claimed": "That this fully neutralizes the arms. Readout is one axis; the quantum arm additionally carries 2q gate error the conventional arm does not, which is priced in the main re-cert and is why the quantum arm needs good EDGES not just good readout."
+  }
 }
