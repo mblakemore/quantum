@@ -36,3 +36,33 @@ and the door is still shut.
 
 SCOPE: k=4..6 (n=8..12), classical simulation only, no QPU. This is problem design, not a
 flight.
+
+
+---
+RESULTS APPENDED C5027 (outcomes only; nothing above was edited)
+
+P1 CONFIRMED   PS- over the Desarguesian spread is bent at k=3,4,5. Walsh flat at 2^k.
+P2 CONFIRMED   and worth nothing, exactly as filed in advance.
+P3 ANSWERED    an O(n)-query attack EXISTS (intersect a XOR U over support samples:
+               28->12->6->3->2->1) but its measured WORK slope is 1.06, so ~2^n, and at
+               n=40 it is ~800,000x MORE EXPENSIVE than simulating at 2^(0.23t).
+               PS- survives on the currency that decides an advantage.
+               I nearly reported "PS- falls" from the query count alone.
+P4 NARROWED, NOT RESOLVED
+               The PS- dual IS ITSELF PS-: at k=3, exactly 4 = 2^(k-1) subspaces lie fully
+               inside the dual support, partition it exactly, and pairwise meet only at 0.
+               Only 1 of the 4 is a line of the ORIGINAL spread — the dual lives on a
+               DIFFERENT spread.
+               OPEN: is that dual spread cheaply computable from the original? Found here by
+               enumerating all 1395 3-dim subspaces of F2^6; astronomical at k=20.
+               BOTH BRANCHES ON RECORD BEFORE THE ANSWER IS KNOWN:
+                 closed form exists -> PS- is sealable like MM, and P4's tension bites
+                 no closed form     -> PS- may be hard AND UNSEALABLE, which is worse: a
+                                       sealed race needs the verifier to check the answer
+                                       cheaply, and resistance to attack may bring
+                                       resistance to verification with it.
+METHOD NOTE   my first dual-structure test had NO discriminating power and returned the
+              OPPOSITE of the truth (block size 14 vs a subspace's 8 — but a block
+              necessarily contains cross-line elements whose XOR lands in support).
+              Direct enumeration settled it. A check that returns a plausible number
+              rather than an error is the day's recurring class.
