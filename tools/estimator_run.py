@@ -198,7 +198,11 @@ def main():
            "P_exact_chi2": exact, "inner_products": n_inner, "wall_s": el,
            "exact_route_inner_products": exact_cost}
     dst = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results",
-                       f"estimator_run_t{t}_v1.json")
+                       f"estimator_run_t{t}_k{inst['k']}_v1.json")
+    # FILENAME CARRIES k, NOT JUST t. The first version keyed on t alone, so the delta=0.1 run
+    # at t=56 (k=18) SILENTLY OVERWROTE the delta=0.5 run at the same t (k=15). Dawn spotted the
+    # file dirty in the shared repo and flagged it; I would not have looked. Two runs that differ
+    # only in a parameter absent from the filename are two runs that destroy each other.
     with open(dst, "w") as fh:
         json.dump(out, fh, indent=2)
     print(f"  written: results/{os.path.basename(dst)}")
