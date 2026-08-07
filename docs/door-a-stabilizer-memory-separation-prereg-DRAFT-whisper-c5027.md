@@ -311,10 +311,44 @@ descriptive only.
 The theorem carries **no explicit constant** (asymptotic Θ). So no criterion of the form "Q beats C1
 by N copies at n=16" is admissible.
 
-**Frozen metric:** fit the exponent of **C1's copies-to-criterion vs n** and report it **with a CI**.
+> ### 🔻 REDRAFTED C5027 — THE RAW SLOPE IS NOT THE THEOREM'S SIGNATURE (Elder's binding condition, #6312)
+>
+> The clause below **as first written could have produced a confident headline in either direction
+> from noise alone.** Both arms' copies-to-criterion inflate with n because per-copy fidelity decays
+> with circuit depth, *independently of any theorem*. Measured noise-only curves at the flown-region
+> λ = 2.544e-3 — what each arm costs if its **task** cost were constant and only fidelity varied:
+>
+> | n | Q joint 2q | u_Q | Q noise-only | C1 single 2q | u_C1 | C1 noise-only |
+> |---:|---:|---:|---:|---:|---:|---:|
+> | 8 | 54 | 0.872 | 13.9 | 23 | 0.943 | 11.8 |
+> | 12 | 204 | 0.595 | 29.7 | 96 | 0.783 | 17.1 |
+> | 16 | 494 | 0.285 | 129.6 | 239 | 0.544 | 35.4 |
+> | | | **slope** | **3.128** | | **slope** | **1.542** |
+>
+> **Two failures follow, and the second is worse.** (i) C1's noise-only slope **1.542 already
+> exceeds the theorem's linear law** — a raw fit finding ~2.5 could be headlined "super-linear,
+> consistent with Θ(n)" when 1.54 of it is noise. (ii) **Q's noise-only slope EXCEEDS C1's**,
+> because the Q arm flies the deeper joint circuit — so on raw slopes **the separation reads
+> BACKWARDS**, and the arm this card claims is flat would appear the fastest-growing.
+>
+> **Is the baseline subtractable?** Yes, and only because λ is anchored on the **flown register**:
+> across 2.544e-3 → 2.565e-3 the noise-only slopes move by **0.026 (Q) and 0.013 (C1)** — 2.6% and
+> 1.3% of a signal of 1.0. *(Anchoring instead on the 3.27e-3 device median — which averages edges
+> the flight never touches — moves them 0.90 and 0.44, and would make this ungradeable. I nearly
+> filed exactly that, using a denominator retired hours earlier.)*
 
-- **WIN** = the fitted exponent is consistent with **1** (linear) and **excludes 0** (constant),
-  AND Q's copies-to-criterion is flat across the same rungs.
+**Frozen metric:** for each arm, pre-register its **noise-only prediction curve** at the
+flight-epoch λ, then fit the **EXCESS** of measured copies-to-criterion over that curve, with a CI.
+
+- **WIN** = **Q's excess consistent with 0** (no growth beyond what its own noise predicts)
+  **AND C1's excess consistent with 1, excluding 0.**
+- **The theorem's signature is the EXCESS, not the raw slope.** No raw exponent may be headlined.
+- The noise-only baseline is **NOT a frozen constant.** λ drifts — the F119 re-cert measured *total*
+  edge turnover in 14 days — so the baseline is computed at **submit epoch** by running
+  `experiments/doora_lambda_remeasure_ember_c4262.py` (read-only, ~30 s, emits the flown-region
+  mean) and writing its output into the artifact **before** submission. A baseline frozen tonight
+  and subtracted at flight time is the 2115-second pool error in another costume: a true number
+  that stops being true while keeping its authority.
 - Per-rung ratios are **descriptive only** and may not be headlined.
 - Criterion = **95% blind accuracy** over **M = 40** sealed trials per rung.
 
