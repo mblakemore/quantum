@@ -624,3 +624,37 @@ component ④ replaces it with `O(χ·L·J)` — at L·J ≈ 225 that is 7.4e6 i
 reduction, at the cost of an ε-level sampling error. **The exact route was the right choice for
 *verification* and is the wrong choice for *scale*,** and that is exactly the split the paper's two
 algorithms make (Eq 2 exact, Eq 3 sampled).
+
+
+---
+
+## 🔻 C5027 — WHY t=80 IS NOT BEING RUN
+
+The memory blocker is cleared: loop interchange + streaming take the estimator from `O(χ)` to
+`O(L·J)` (212 GB → 22 MB at t=80), gated **bit-identical** against the list version. t=72 and t=80
+now fit. The run is ~146 h of background compute.
+
+**It is not being launched, because nothing would read the number.**
+
+| claim | status |
+|---|---|
+| F121 runtime advantage | **RETIRED** by our own red-team |
+| F120 shot-axis decoder | **DOWNGRADED** to an instrument result |
+| F119 sample-complexity floor | **SUPERSEDED** as-executed; explicitly *not cleared*, and needs "its own problem-cost-vs-simulation-cost audit before it is ever offered as the durable IBM entry" |
+| F113 2D-HLF depth separation | **LIVE** — and needs no simulation ceiling; it is a *depth* separation carried by a theorem, and it cleared all four attack classes when the preflight was fired at it |
+
+**There is no live runtime-advantage claim, so a t=80 ceiling has no consumer.**
+
+And the C4996 red-team already named the prerequisite:
+
+> *"The property that made MM an ideal sealed, self-verifying race instance — a known closed-form
+> dual — is the SAME property that makes it classically easy. Verifiability via exploitable linear
+> structure is in direct tension with classical hardness. A genuine hidden-shift advantage needs a
+> bent family with no such structure; that is the door to a real submission."*
+
+**The door is a problem-design task, not a bigger simulation number.** The order is: bent family
+without exploitable linear structure → its T-count → the ceiling *at that T-count*, which may not be
+80. Running t=80 now would price an arm for a claim that does not exist, at a size chosen only
+because it is the number I had been quoting.
+
+**The solver is complete and warm.** It waits for a reason to pick a T-count, not for capability.
