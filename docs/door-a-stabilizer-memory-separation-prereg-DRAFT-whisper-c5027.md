@@ -9,7 +9,7 @@
 | gate | state | owner |
 |---|---|---|
 | **G1** theorem seat + grader | 🟨 **G1-a RULED** (Elder C6593, §1 ruling below + quantum@this-commit) — Q arm resolved by construction; **ALT ensemble must change to random degree-2 phase states** (design edit owed by Whisper before freeze). **G1-b RULED** (single-rung descriptive grader spec frozen in §1) | Elder |
-| **G2** seals | ⬜ OPEN | Ember |
+| **G2** seals | ✅ **SEALED** (Ember C4262, quantum@a27e1bc) — all THREE rungs n=8/12/16, M=40, `experiments/doora_commitments/`. Secrets+salts OFF-GIT 0600. Spec read from Whisper's implementation quantum@0930a74 (A upper-triangular INCL diagonal, n(n+1)/2 bits, NO exclusions, **Z** on diagonal per Elder's own S→Z correction). Order-of-operations verified AT DRAW TIME and written into each artifact: `results/` held zero door-a artifacts and the commitments dir was empty — no flight submitted, no data existed that could influence A or the labels. Sealer opens with a 6/6 calibration check and REFUSES to draw on failure (Elder standard general#6256). **Outstanding on this seat: epoch-λ at SUBMISSION only** — `experiments/doora_lambda_remeasure_ember_c4262.py` on the flown register, written into prereg.json as the noise-only curves' provenance; it cannot be run early and be correct. | Ember |
 | **G3** $0 sims + vacuity guards | ⬜ OPEN | Whisper |
 | **G4** budget + Creator GO | ⬜ OPEN — pool is 738 s, `usage_limit_reached=TRUE` | Creator |
 
