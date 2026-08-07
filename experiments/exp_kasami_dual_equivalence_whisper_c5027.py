@@ -40,6 +40,36 @@ RESULT — AND THE TWO SIZES DISAGREE, WHICH IS THE WHOLE POINT.
 SO THE n=8 EQUIVALENCE IS A SMALL-SIZE COINCIDENCE. n=10 is the informative size, because the
 target is n=40 and a property that dies between 8 and 10 is not a family property.
 
+THIRD AND FOURTH SIZES (Creator: "check n=12 or n=14 to see if it's really structural").
+Two points cannot tell which size is the outlier, so both were run. n=14 keeps i=3 and therefore
+the SAME family member (gcd(3,14)=1); n=12 forces a different i (gcd(3,12)=3), which independently
+tests whether n=10 was an i=3 quirk.
+
+     n   i      d  HW  Gamma-rank f  Gamma-rank dual   gap  verdict
+     8   3     57   4            42               42     0  EQUIVALENT (L constructed)
+    10   3     57   4            62               64     2  not equivalent
+    12   5    993   6           302              314    12  not equivalent
+    14   3     57   4            86              448   362  not equivalent
+
+THREE INDEPENDENT SIZES SAY NO, ONE SAYS YES, AND THE GAP WIDENS MONOTONICALLY: 0, 2, 12, 362.
+n=8 is the outlier. The behaviour is STRUCTURAL.
+
+    Counting honestly: n=12 also ran i=7, giving d=3972 and IDENTICAL ranks 302/314. That is not
+    corroboration — 3972 = 993*4, the same cyclotomic coset, so it is the same function up to
+    Frobenius (free). One data point, not two. The identical ranks are the tell.
+
+AND THE ONE OTHER "EQUIVALENT" IN THE WHOLE SWEEP IS THE SHARPEST RESULT HERE. At n=12, i=11
+collapses mod 4095 to d=3072, HW=2 — DEGREE TWO, i.e. Maiorana-McFarland — and there the dual IS
+free (ranks 14 = 14). MM is precisely the family my own C4996 red-team RETIRED for leaking the
+hidden shift in 41 classical queries (F121, ~7,000x, 3/3 court seats). So in this data the dual
+comes free exactly where the function is quadratic, and quadratic is exactly what is classically
+broken. That is C4996's closing paragraph — "verifiability via exploitable linear structure is in
+direct tension with classical hardness" — as a measured instance rather than an argument.
+
+    The rule is not clean, and saying so is the point: n=8 is non-quadratic (HW=4) and its dual is
+    still free. It is an unexplained exception, not evidence for the rule. Four sizes is a trend,
+    not a theorem, and no obstruction is proven here.
+
 CONTROL, because a sweep that finds nothing is indistinguishable from a sweep that is broken:
 f itself is a bent degree-4 monomial with b inside the tested coefficient classes, so it is IN
 the candidate set at both sizes. It matches its dual at n=8 and does not at n=10. An invariant
@@ -60,7 +90,15 @@ from math import gcd
 import numpy as np
 
 sys.path.insert(0, "/droid/repos/quantum/experiments")
-from exp_bent_families_ps_whisper_c5027 import gf_mul, walsh  # noqa: E402
+import exp_bent_families_ps_whisper_c5027 as _B  # noqa: E402
+
+# n=14 is not in the shared RED table and is needed for the same-i third size. x^14+x^5+x^3+x+1.
+# NOT asserted irreducible — VERIFIED as a side effect: tables() only returns when it finds an
+# element of full order 2^14-1, which cannot exist if the modulus factors. A reducible modulus
+# makes tables() return None and the size is skipped rather than silently reported wrong.
+_B.RED.setdefault(14, 0b100000000101011)
+
+from exp_bent_families_ps_whisper_c5027 import gf_mul, walsh  # noqa: E402,E401
 
 sys.setrecursionlimit(100000)
 
@@ -120,6 +158,60 @@ def gamma_rank(f, n):
             r += 1
         return r
     return min(rk(f.astype(np.uint8)), rk((1 - f).astype(np.uint8)))
+
+
+def gamma_rank_fast(f, n):
+    """Same invariant, packed into uint64 words so n=12 and n=14 are reachable — the pure-python
+    bigint version is O(2^3n) in bit-ops and does not get past n=10. Forward elimination only,
+    since rank does not need full reduction. CONTROLLED against gamma_rank() at n=8 and n=10
+    before being trusted at any size where the slow version cannot be run."""
+    N = 2 ** n
+    idx = np.arange(N)
+
+    def rk(g):
+        M = np.empty((N, N // 64), dtype=np.uint64)
+        for x in range(N):
+            M[x] = np.packbits(g[x ^ idx].astype(np.uint8), bitorder="little").view(np.uint64)
+        r = 0
+        for y in range(N):
+            w, b = y >> 6, np.uint64(y & 63)
+            mask = np.uint64(1) << b
+            nz = np.flatnonzero((M[r:, w] & mask) != 0)
+            if nz.size == 0:
+                continue
+            p = r + int(nz[0])
+            if p != r:
+                tmp = M[r].copy()
+                M[r] = M[p]
+                M[p] = tmp
+            hit = np.zeros(N, bool)
+            hit[r + 1:] = (M[r + 1:, w] & mask) != 0
+            if hit.any():
+                M[hit] ^= M[r]
+            r += 1
+            if r == N:
+                break
+        return r
+    return min(rk(f.astype(np.uint8)), rk((1 - f).astype(np.uint8)))
+
+
+def sweep_size(n, i, log=None):
+    """Gamma-ranks of the Kasami function and its dual at one size, for one i."""
+    tb = tables(n)
+    if tb is None:
+        return None
+    log, anti, N, g0 = tb
+    T = trace_tab(n)
+    d = (2 ** (2 * i) - 2 ** i + 1) % N
+    if np.gcd(i, n) != 1:
+        return ("inadmissible", d, None, None)
+    for a in range(1, 2 ** n):
+        f = mono(a, d, log, anti, N, T, n)
+        W = walsh(f, n)
+        if np.all(np.abs(W) == 2 ** (n // 2)):
+            dual = ((1 - np.sign(W)) // 2).astype(np.int8)
+            return (a, d, gamma_rank_fast(f, n), gamma_rank_fast(dual, n))
+    return ("not bent", d, None, None)
 
 
 def find_L(target, g, n):
@@ -225,8 +317,28 @@ def main():
             print(f"       swept {len(reps)} HW=4 cosets x gcd(e,N) coefficient classes: "
                   f"{hits} monomial(s) with the dual's Gamma-rank")
 
-    print("\n  n=8 says YES, n=10 says NO. The target is n=40, so n=10 is the informative one:")
-    print("  the n=8 equivalence is a SMALL-SIZE COINCIDENCE, not a family property.")
+    # ── third and fourth sizes: is it structural? ────────────────────────────
+    print("\n  IS IT STRUCTURAL? third and fourth sizes (n=14 keeps i=3, n=12 must change i):\n")
+    print(f"    {'n':>3} {'i':>3} {'d':>6} {'HW':>3} {'rank f':>7} {'rank dual':>10} "
+          f"{'gap':>5} {'verdict':>16}")
+    for n, i in ((12, 5), (12, 11), (14, 3)):
+        a, d, rf, rd = sweep_size(n, i)
+        if rf is None:
+            print(f"    {n:>3} {i:>3} {d:>6} {'':>3} {str(a):>7}")
+            continue
+        note = "EQUIVALENT" if rf == rd else "not equivalent"
+        if bin(d).count("1") == 2:
+            note += " *"
+        print(f"    {n:>3} {i:>3} {d:>6} {bin(d).count('1'):>3} {rf:>7} {rd:>10} "
+              f"{rd - rf:>5} {note:>16}")
+    print("\n    * d=3072 has HW=2 — DEGREE TWO, i.e. Maiorana-McFarland. The dual is free there,")
+    print("      and MM is exactly the family C4996 RETIRED for leaking the shift in 41 classical")
+    print("      queries. The dual comes free where the function is quadratic, and quadratic is")
+    print("      what is classically broken. n=8 stays an unexplained exception to that.")
+
+    print("\n  n=8 says YES; n=10, n=12 and n=14 all say NO, with the gap widening 0, 2, 12, 362.")
+    print("  n=8 is the OUTLIER and the behaviour is STRUCTURAL — though four sizes are a trend,")
+    print("  not a theorem, and nothing here proves an obstruction.")
     print("\n  SCOPE: 'not affine-equivalent to a monomial' is NOT 'expensive'. It closes the")
     print("  cheapest hypothesis for the dual, not the question.")
 
