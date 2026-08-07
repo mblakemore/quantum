@@ -47,6 +47,16 @@ full text); (b) constants at flyable k (a Θ(k) floor at k≤12 is a floor of ~d
 the experiment must resolve O(1) vs ~k with day-clustered honesty, which is a MUCH easier
 resolution question than 2^k but needs its own power analysis).
 
+> **UPDATE 2026-08-07 late (same night): check (a) PASSED — FULL-TEXT VERIFIED** by Whisper
+> (quantum@3558437, general#6203, 66-page PDF read). A&S Thm 1.1: adaptive protocol O((n−k)/ε),
+> and "every such tester needs Ω(n−k)" — the adaptivity restriction in the paper applies to
+> LEARNING only, not testing; A&S also close H&H's open Ω(√n)→Ω(n) at k=0. Task-shape worry
+> resolved favourably: the LB's hard instance is structured-family-vs-maximally-mixed — our
+> NULL/ALT directly, no reduction needed. floor_status upgrades to PROVEN-IN-PRINT,
+> FULL-TEXT-VERIFIED. **Check (b), the power analysis, still gates the prereg** (~6 vs ~12
+> copies at n=12 — whether any reachable rung resolves the growth law is open; Whisper running
+> it, $0).
+
 ## Verdict 3 — the exponential door that remains open: t-DOPED stabilizer families
 
 - **arXiv:2308.07014** — t-doped stabilizer states (Clifford + t non-Clifford gates) are
