@@ -312,7 +312,18 @@ function r1(k){
     const col = bal ? (v<-0.5?"var(--amber)":"var(--bad)") : "var(--cyan)";
     el(svg,"text",{x:8,y:y+h-8,style:"fill:var(--ink-2);font-family:var(--mono);font-size:11px"}).textContent=o[0];
     el(svg,"rect",{x:Math.min(Z,X(v)),y:y,width:Math.abs(X(v)-Z),height:h,rx:3,style:`fill:${col};opacity:.85`});
-    el(svg,"text",{x:452,y:y+h-8,"text-anchor":"end",style:`fill:${col};font-family:var(--mono);font-size:11.5px;font-weight:700`})
+    // The value was pinned at x=452 in the BAR'S OWN COLOUR. A near-full positive bar reaches
+    // almost that far, so "+0.999" straddled its own bar edge: 8 of its 30px sat on cyan drawn in
+    // cyan — ratio 1.0, the leading "+0" simply gone. Found by rendering the page at 390px and
+    // looking at it; the contrast scan passed it because 75% of the label is on the dark
+    // background and the majority reading is fine.
+    // Same rule the chart in Room 2 below already uses: inside the bar when the bar can hold it,
+    // outside otherwise, and the fill follows the position rather than always being the series
+    // colour. Negative bars run left from zero and their labels were never on the bar at all.
+    const br = Math.max(Z, X(v)), bwid = Math.abs(X(v)-Z);
+    const inBar = v >= 0 && bwid > 90;
+    el(svg,"text",{x: inBar ? br-8 : 452, y:y+h-8, "text-anchor":"end",
+      style:`fill:${inBar?"var(--bg)":col};font-family:var(--mono);font-size:11.5px;font-weight:700`})
       .textContent=(v>=0?"+":"")+v.toFixed(3);
   });
   document.getElementById("story1").innerHTML = k==="weld"
