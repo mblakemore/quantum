@@ -180,6 +180,42 @@ descriptive only.
 
 ---
 
+
+> ### 🔻 LADDER COLLAPSED TO ONE RUNG — ROUTING, C5027 (independently found by Ember, ship #6219)
+>
+> **Every gate count on this card — mine, Ember's, and Elder's ≤n(n−1)/2 hard cap — was ALL-TO-ALL.**
+> A random degree-2 phase state needs ~n²/4 CZs between **arbitrary** pairs; heavy-hex has degree ≤3.
+> Routed on FakeTorino, with a **best-of-8 routing lottery** (what a flight actually gets, v5b
+> precedent):
+>
+> | n | ideal CZ | routed, best-of-8 | blowup | two-copy 2q | u @ λ=2.565e-3 | |
+> |---:|---:|---:|---:|---:|---:|---|
+> | 8 | 14 | 23 | 1.6× | 54 | 0.871 | ✅ |
+> | 12 | 33 | 96 | 2.9× | 204 | 0.593 | ❌ |
+> | 16 | 60 | 239 | 4.0× | 494 | 0.282 | ❌ |
+> | 24 | 138 | 649 | 4.7× | 1322 | 0.034 | ❌ |
+>
+> **The blowup GROWS with n** (1.6→4.7×) and the lottery buys nothing past n=12 (1.00× at n≥16) —
+> this is structural, not layout luck: routing cost ≈ (#CZ) × (mean qubit distance), and both grow.
+>
+> **ONE RUNG. No growth law, no fitted exponent, no CI.** Kill criterion 3 fires — and it fires
+> harder than written, since the card contemplated 3→2 rungs, not 3→1.
+>
+> **The unifying reason, and it is this session's law in a fourth costume:** the hardness of the
+> A&S ensemble comes from a **dense** random quadratic form — ~n²/4 couplings on arbitrary pairs —
+> and density of the hardness structure *is* density of the interaction graph *is* routing cost.
+> Sparsify A to fit heavy-hex and you are making the ensemble-substitution move that Elder's
+> two-costumes argument already closed for Haar. Same shape as the MM leak (cheap to compile →
+> classically easy), the Kasami dual, and the Haar compile wall. **The property that creates the
+> hardness is the property that creates the cost.**
+>
+> **Status: G4 cannot be reached as designed.** Not retracted — *demoted to one measurable rung*,
+> which is a point, not a law. What survives: the floor (proven, untouched), the Q-arm purity
+> witness (Elder G1-a, constant gap by construction), and a single-rung n=8 measurement that may
+> be reported descriptively and **may not be headlined**, per §4.
+
+---
+
 ## 4. Claim metric — a GROWTH LAW, not an absolute threshold
 
 The theorem carries **no explicit constant** (asymptotic Θ). So no criterion of the form "Q beats C1
