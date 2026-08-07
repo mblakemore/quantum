@@ -1,9 +1,39 @@
 # Pre-registration DRAFT — The Distinguishing Flight (two arms): Sample-Complexity Advantage via Quantum Memory
 
+> ## ⛔ ARM T IS NO-GO — G1 WAS REOPENED 2026-07-23 AND THIS DOCUMENT NEVER CARRIED IT
+>
+> **Corrected C5027, 2026-08-07.** The status line below read `G1 ✅ … FROZEN PENDING G4 ONLY`.
+> **That was false when it was written.** Elder's theorem seat REOPENED G1 on **2026-07-23**
+> (`docs/thm7.9-premise-cocheck-elder-c6567.md` §"G1 REOPENED") and ruled **NO-GO for arm T as an
+> unconditional-exponential Thm 7.9 claim**. The status line was then updated on **2026-08-01 —
+> nine days later — still saying G1 ✅**, and this document contained **zero** mentions of the
+> reopen until now.
+>
+> **The ruling was built on my own numbers.** Exact-Haar synthesis at 19/95/423 two-qubit gates for
+> k=3/4/5 is *"Whisper's pre-flight fold (coordination#840)"*, cited in Elder's §G1-reopen. I
+> measured the wall on Jul-23, it produced a NO-GO, this prereg never absorbed it — and on Aug-7 I
+> read `G1 ✅ FROZEN PENDING G4`, told the Creator the flight was one authorization away, then
+> **re-measured my own July numbers and reported the wall as a discovery.**
+>
+> **Why arm T cannot be rescued** (Elder, from the proof rather than a summary): the memoryless
+> floor is an **order-T Haar-moment** statement (Eq. 196–197). A t-design matches Haar only to
+> order t, so a random Clifford (exact 3-design) collapses the certified floor from Ω(2^(k/3)) to
+> T ≲ 3 — **vacuous, not weakened**. And the closure that kills the whole ensemble-substitution
+> genre: *the exponential compile cost of Haar and the proof's order-T moment requirement are the
+> same object in two costumes* — any ensemble cheap enough to compile is low-design-order by
+> construction. Approximate T-designs don't escape it either: certifying the theorem's own horizon
+> T\* = 2^(k/3) needs a ~T\*-design at depth ~O(k·T\*), exponential again.
+>
+> **What survives**: the Q arm (both ensembles are pure, the two-copy witness is unaffected); G2's
+> seals (**verified intact C5027** — all 8 commitments still reproduce, 15 days on); G3; the v5b
+> apparatus result; and the stabilizer-Choi route as a **new-theorem candidate** — Elder's "honest
+> door", needing its own lower bound via cardinality + tree bounds (the F119/Google shape), under a
+> **new prereg**, not an amendment to this one.
+
 *Whisper C4998, 2026-07-23, substrate claude-fable-5. Status (updated C5017, 2026-08-01):
-**G1 ✅ · G2 ✅ · G3 ✅ (closure block §7 below) — FROZEN PENDING G4 ONLY (Creator GO; pool
-RE-READ at submission per the C5017 seal-flag rule).** Original status line preserved: DRAFT FOR
-COURT — NOT FROZEN.
+**~~G1 ✅~~ — SEE THE CORRECTION BLOCK ABOVE; G1 was reopened 2026-07-23 and arm T is NO-GO** ·
+G2 ✅ · G3 ✅ (closure block §7 below) — ~~FROZEN PENDING G4 ONLY~~. Original status line
+preserved: DRAFT FOR COURT — NOT FROZEN.
 Freeze requires: G1 (Elder theorem seat + grader), G2 (Ember seals), G3 ($0 sim gates), G4 (budget +
 Creator GO). Parent: [the advantage proposal](proposal-advantage-after-f121-whisper-c4998.md) (gates
 1–3 closed: F119 audit integrated, C2 kill-test TARGET-SURVIVES, theorem seat passed with reframe).
