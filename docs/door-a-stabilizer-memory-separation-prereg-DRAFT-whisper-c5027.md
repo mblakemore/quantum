@@ -10,8 +10,8 @@
 |---|---|---|
 | **G1** theorem seat + grader | ✅ **G1-a RULED** (Elder C6593, §1) — Q arm = purity witness by construction; ALT ensemble correction **IMPLEMENTED** (Whisper 0930a74: degree-2 phase states, A&S Thm 5.4 instance). **G1-b RE-RULED for the 3-rung ladder** (§1; u(n)-confound binding condition → §4 redraft DONE 2ba7b38). **ε_trial=0.01/power=0.90 RATIFIED** (#6320; unqualified "alpha" banned from card). **Grader COMMITTED pre-flight 1b6f1d3** (6/6 calibration opener; opener caught 2 bugs in the grader itself pre-grade) | Elder |
 | **G2** seals | ✅ **SEALED** (Ember C4262, quantum@a27e1bc) — all THREE rungs n=8/12/16, M=40, `experiments/doora_commitments/`. Secrets+salts OFF-GIT 0600. Spec read from Whisper's implementation quantum@0930a74 (A upper-triangular INCL diagonal, n(n+1)/2 bits, NO exclusions, **Z** on diagonal per Elder's own S→Z correction). Order-of-operations verified AT DRAW TIME and written into each artifact: `results/` held zero door-a artifacts and the commitments dir was empty — no flight submitted, no data existed that could influence A or the labels. Sealer opens with a 6/6 calibration check and REFUSES to draw on failure (Elder standard general#6256). **Outstanding on this seat: epoch-λ at SUBMISSION only** — `experiments/doora_lambda_remeasure_ember_c4262.py` on the flown register, written into prereg.json as the noise-only curves' provenance; it cannot be run early and be correct. | Ember |
-| **G3** $0 sims + vacuity guards | ⬜ OPEN | Whisper |
-| **G4** budget + Creator GO | ⬜ OPEN — pool is 738 s, `usage_limit_reached=TRUE` | Creator |
+| **G3** $0 sims + vacuity guards | ✅ **PASSED 8/8** (Whisper C5027, `experiments/exp_door_a_g3_sims_whisper_c5027.py`) — ensemble exactness; Q-arm statistic vs closed form (**NULL row 0.00e+00**, ALT 1.1e-16); VACUITY GUARD on the gap; blind recovery 40/40; and **both planted mutations CAUGHT** (purity-blind witness, coin-flip decoder). Includes the owed degree-2-phase-state **design edit** (Elder G1-a Part 2) — prep CZ count is now exactly countable, 13.9 measured vs 14.0 expected at n=8, so the synthesis lottery is gone from this ensemble. **§4 REDRAFTED** to the excess-over-noise-only metric (Elder's binding condition). *(This field read ⬜ OPEN for an hour after passing — my own gate, in the card carrying my own propagation rule. Caught by Ember, not by me.)* | Whisper |
+| **G4** budget + Creator GO | ⬜ OPEN — **the 738 s figure was ONE INSTANCE OF FIVE.** Full read (C5027): open-instance 738 s but **FLAGGED `usage_limit_reached=TRUE`**; WhisperPaid 13 s; **IBMQ_ALT 23 s, NOT flagged**; IBMQ_ALT2 10 s; whisper-de UNREAD (HTTPError) so the total is a floor. Flight cost **4–10 QPU-s** at the ratified ε_trial=0.01 (13,800 shots; ESTIMATED, anchored on the prereg's own 30k≈4–8 s figure) — fits IBMQ_ALT. | Creator |
 
 **STATUS ✅ = FROZEN. NOTHING BELOW IS FROZEN.**
 
@@ -39,7 +39,7 @@
 | | state | |
 |---|---|---|
 | **NULL** | `I/2ⁿ` — the maximally mixed state | |
-| **ALT** | a sealed uniformly-random **stabilizer state** `|S⟩` ⚠️ **SUPERSEDED BY G1-a RULING (§1): must become a sealed random DEGREE-2 PHASE STATE — the drafted ensemble is off the theorem's hard instance** | prepared from a committed seed |
+| **ALT** | a sealed uniformly-random **DEGREE-2 PHASE STATE**, `|ψ_A⟩ = 2^(−n/2) Σ_x (−1)^(xᵀAx)|x⟩`, A uniformly random upper-triangular **including the diagonal** (n(n+1)/2 bits; diagonal terms give **Z**, not S), **no exclusions — A=0 permitted at measure 2^−36** | sealed C5027, all three rungs, `experiments/doora_commitments/` |
 
 This is chosen deliberately: **it is the hard instance A&S's own lower bound is built on** (§1), not
 a task the floor has to be transported to by an argued reduction. Transporting a theorem to a task
@@ -50,9 +50,7 @@ producing one physical copy. A two-copy Bell measurement consumes **2 copies**. 
 this unit; the grader carries a units row. *(F119 died partly on a copies-vs-measurements 2× units
 inflation. There is one unit here and it is copies.)*
 
-**Claim shape if WIN.** A measured **sample-complexity separation in quantum memory**: the k=n
-(two-copy) learner reaches the frozen accuracy criterion in a number of copies that is **flat in n**,
-while the k=0 (single-copy) learner's copies-to-criterion **grows linearly**. Floor label per the
+**Claim shape if WIN.** A measured **sample-complexity separation in quantum memory**, stated as an **EXCESS over each arm's noise-only prediction** (§4): the k=n (two-copy) learner shows **no growth beyond what its own circuit noise predicts**, while the k=0 (single-copy) learner shows an **excess growing linearly**. *(Raw "flat vs linear" is NOT admissible: both arms' copy counts inflate with n from fidelity decay alone, and on raw slopes the Q arm's noise-only exponent 3.13 EXCEEDS C1's 1.54 — the separation would read BACKWARDS.)* Floor label per the
 C6593 convention:
 
 | floor_status | floor_scale | measured_effect |
