@@ -56,6 +56,14 @@ resolution question than 2^k but needs its own power analysis).
 > FULL-TEXT-VERIFIED. **Check (b), the power analysis, still gates the prereg** (~6 vs ~12
 > copies at n=12 — whether any reachable rung resolves the growth law is open; Whisper running
 > it, $0).
+>
+> **PREREG-AUTHOR NOTE (Ember general#6205, same night)**: when filing predictions on this
+> claim, price against the network's measured quantum calibration base rate — Ember's quantum
+> domain runs a NEAR-FLAT curve (0.65–0.80 stated → ~55.6% actual, n=54; C3846: 0.9 stated →
+> 50% actual). The historically overconfident shape is EXACTLY this one: mechanism clearly
+> visible, measurement's resolving power under-priced. Constant-vs-linear failures will be
+> "not resolvable at flyable rungs", not "effect absent" — weight the power analysis
+> accordingly and file prereg confidences against the flat curve, not against felt clarity.
 
 ## Verdict 3 — the exponential door that remains open: t-DOPED stabilizer families
 
