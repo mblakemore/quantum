@@ -100,3 +100,38 @@ vs testing vs distinguishing — the bounds above are learning bounds).
 
 **Sources**: arXiv:2410.07986 (STOC'25) · arXiv:2607.02444 · arXiv:2604.24099 · arXiv:2308.07014.
 Abstract-tier reads; full-text verification required before any bound is load-bearing in a prereg.
+
+---
+
+## UPDATE (same night, late) — Verdict 3 sharpened: canonical form VERIFIED, screen re-specified
+
+**Canonical form CONFIRMED from primary text** (Leone-Oliviero-Hamma, arXiv:2305.15398, Quantum 8
+(2024) 1361, **Eq. (4)**): every t-doped stabilizer state = **D†(|0⟩^⊗m ⊗ |φ⟩)** with D a full
+n-qubit Clifford ("diagonalizer") and the magic core |φ⟩ on **≤ t qubits** (nonstabilizer
+dimension bound via d/2^{2t} ≤ |G_ψ| — for states, m ≤ t, tighter than my 2t recall). The
+learning algorithms are BUILT on this form. Three consequences for door (b):
+
+1. **The flight ensemble should be sealed via the canonical form directly** — draw (D, φ) and
+   prep D†(|φ⟩⊗|0^{n−t}⟩). That IS the family carrying the Cho-Kim worst-case floor.
+2. **Appended-T states (T-layer after one Clifford) are a vanishing-measure sub-ensemble** —
+   off-instance for any average-case claim (fourth sub-ensemble catch of 2026-08-07). The
+   knife-edge 132-gate screen was priced on THIS construction and does not price the flight.
+3. **The honest screen** = joint two-copy routed cost of D†(core ⊗ |0⟩), where the flyable
+   representative minimizes over the GAUGE FREEDOM D† → D†·(V_t ⊗ W), W any |0^{n−t}⟩-fixing
+   Clifford (V absorbs into φ). Cost interpolates between stabilizer STATE prep (~30 routed at
+   n=8, t=0, full freedom) and full Clifford UNITARY (~85, t=n, none); joint upper bound ≈ 200+
+   → u ≈ 0.60 at the measured region λ.
+
+**Status after Ember's threshold dissolution (#6240, same hour): the u≥0.70 gate DOES NOT
+EXIST** — shots ~ 1/gap², smooth, no discontinuity; it was inherited from the retired steth card
+and never derived for the purity witness. On the real curve the canonical ensemble's u≈0.60 is
+~103 copies per decision point and the appended-T u≈0.715 is ~68 — a 1.5× shot-cost difference,
+not a verdict. **Door (b) at n=8 is therefore architecturally CLEAR for the canonical ensemble**:
+the witness is not shot-limited anywhere in the plausible u range (u≥0.3 ≈ 464 copies still
+tiny). The ensemble correction above (seal via canonical form; appended-T off-instance for
+average-case claims) is unchanged and binding. Remaining blockers, in order: (i) the
+**average-case hardness question at t=ω(log n)** — now cleanly THE question; (ii) the eventual
+card must pick α/power deliberately (Ember's caveat — inheriting hers repeats the class one
+level up) and operationalize Q-flatness across the t-ladder (u varies only ~+0.46 routed 2q per
+T, so Q stays essentially flat). Ordering rule has now paid four times: screen-before-theorem
+surfaced the phantom gate itself.
