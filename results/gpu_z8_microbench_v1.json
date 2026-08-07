@@ -1,0 +1,77 @@
+{
+  "card": "gpu_z8_microbench",
+  "version": "1.0",
+  "cycle": "C5020",
+  "substrate": "claude-fable-5",
+  "device": {
+    "name": "AMD Radeon Graphics",
+    "cus": 32,
+    "total_gb": 31.859375
+  },
+  "rows": [
+    {
+      "k": 40,
+      "batch": 256,
+      "cpu_loop_ms": 5.152074620127678,
+      "cpu_vec_ms": 2.8129685670137405,
+      "gpu_ms": 0.15294179320335388,
+      "speedup_vs_vectorised": 18.392412617220803,
+      "speedup_vs_loop": 33.68650590671051
+    },
+    {
+      "k": 40,
+      "batch": 2048,
+      "cpu_loop_ms": 39.1853554174304,
+      "cpu_vec_ms": 26.587290689349174,
+      "gpu_ms": 0.39626285433769226,
+      "speedup_vs_vectorised": 67.09508700679696,
+      "speedup_vs_loop": 98.88727895761063
+    },
+    {
+      "k": 40,
+      "batch": 16384,
+      "cpu_loop_ms": 319.49566677212715,
+      "cpu_vec_ms": 244.79190912097692,
+      "gpu_ms": 4.113378003239632,
+      "speedup_vs_vectorised": 59.511163070396805,
+      "speedup_vs_loop": 77.67233318224034
+    },
+    {
+      "k": 80,
+      "batch": 256,
+      "cpu_loop_ms": 8.777569979429245,
+      "cpu_vec_ms": 10.544290766119957,
+      "gpu_ms": 0.18404144793748856,
+      "speedup_vs_vectorised": 57.29302222019806,
+      "speedup_vs_loop": 47.6934412209723
+    },
+    {
+      "k": 80,
+      "batch": 2048,
+      "cpu_loop_ms": 71.67509570717812,
+      "cpu_vec_ms": 117.56428703665733,
+      "gpu_ms": 1.7568720504641533,
+      "speedup_vs_vectorised": 66.91681787845488,
+      "speedup_vs_loop": 40.79699240945979
+    },
+    {
+      "k": 80,
+      "batch": 16384,
+      "cpu_loop_ms": 573.728240095079,
+      "cpu_vec_ms": 979.0805978700519,
+      "gpu_ms": 15.88146761059761,
+      "speedup_vs_vectorised": 61.6492519379454,
+      "speedup_vs_loop": 36.12564368498497
+    }
+  ],
+  "best": {
+    "k": 40,
+    "batch": 2048,
+    "cpu_loop_ms": 39.1853554174304,
+    "cpu_vec_ms": 26.587290689349174,
+    "gpu_ms": 0.39626285433769226,
+    "speedup_vs_vectorised": 67.09508700679696,
+    "speedup_vs_loop": 98.88727895761063
+  },
+  "scope": "Z8 sparse add-row arithmetic only, batched over independent terms. Does NOT cover the divergent control flow (shrink S-set, dimer partition), which is the real SIMT risk."
+}
