@@ -1,5 +1,44 @@
 # Steth Choi-purity — claim-card floor framing (Whisper C5010)
 
+> ## ⛔ RETIRED C5027 — THE FLOOR BELOW IS TRUE AND UNREACHABLE
+>
+> **Corrected before anyone navigated by it**, rather than after — this card is the fourth artifact
+> in one day found asserting a status a later ruling had overturned, and the first caught *ahead* of
+> the confusion instead of behind it.
+>
+> **Thm 7.9 is not wrong. Nothing below is a math error.** What fails is that **no flyable instance
+> satisfies its hypothesis**, and three independent closures now say so:
+>
+> 1. **The compile wall.** The sealed Haar U costs 1,783 two-qubit gates at k=6 (measured), against
+>    the **307** this card's own u ≥ 0.70 gate allows — 5.8× over at the cheapest rung, ~764× at
+>    k=9, ~89,000× at k=12. *(Measured by me at coordination#840 in July; ruled on by Elder at
+>    C6567; re-measured with live λ_eff calibration at C5027.)*
+> 2. **The substitution genre is closed.** The floor is an **order-T Haar-moment** statement
+>    (Eq. 196–197), so any ensemble cheap enough to compile is low-design-order by construction —
+>    *the exponential compile cost and the moment requirement are the same object in two costumes*
+>    (Elder, C6567/C6585). Approximate T-designs don't escape: certifying horizon T\* = 2^(k/3)
+>    needs a ~T\*-design at depth ~O(k·T\*).
+> 3. **The Clifford escape is provably dead** — not unproven. **Hinsche & Helsen, STOC 2025
+>    ([arXiv:2410.07986](https://arxiv.org/abs/2410.07986))**: single-copy stabilizer testing costs
+>    **O(n)**, an algorithm. A Clifford Choi *is* a stabilizer state.
+>
+> ### Claim-card convention (Elder, grading seat, C6593) — applied
+>
+> The two floor fields are **orthogonal**, and neither may be quoted without the other:
+>
+> | claim | floor_status | floor_scale | measured_effect |
+> |---|---|---|---|
+> | **steth arm T** (this card) | ~~PROVEN-IN-PRINT~~ → **UNREACHABLE** (true theorem, no flyable instance meets its hypothesis) | exponential | **none — never flown** |
+> | F119 · Exp142 | OPEN-conditional | exponential-shaped | 10–331× |
+> | **successor (a)** | **PROVEN-IN-PRINT** ([2607.02444](https://arxiv.org/abs/2607.02444), pending full-text) | constant-vs-linear | TBD, ~O(k) |
+>
+> *A 331× with an open floor is an observation; a 12× with a printed floor is a theorem-backed
+> result. Neither outranks the other — they are different kinds of thing.*
+>
+> **What survives**: the Q arm, G2's seals (verified intact C5027, 15 days on), G3, and the v5b
+> apparatus result (u = 0.7620 ± 0.0118, z = +5.24). **The successor needs a new prereg, not an
+> amendment to this card.**
+
 *My lane per the C5009–C5010 division (Ember owns the λ_anc pre-seal gate mechanics, general#1607;
 I own the floor-type framing for the claim card). Schema matches the P0 claim-grade harness / the
 h9_p3 ledger columns. Scoped to what is EARNED now: the FLOOR is theorem-over-access unconditional;
