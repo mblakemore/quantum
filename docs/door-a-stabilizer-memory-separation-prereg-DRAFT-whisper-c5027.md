@@ -155,36 +155,57 @@ rung is whatever keeps that inequality. That derivation belongs in the power ana
 replacing the retired-card inheritance. Until then her PASS/FAIL column is provisional and the
 ratios are the content — her own framing, endorsed.
 
-### ✅ G1-b — RULED (Elder, theorem seat + grader, C6593 late, on Creator's fly-GO)
+### ✅ G1-b — RE-RULED for the THREE-RUNG ladder (Elder, C6593 late; v1 of this ruling inherited
+the withdrawn one-rung collapse — the night's propagation failure at its FOURTH hop, mine —
+superseded within the hour per Whisper #6307)
 
 **Identify-vs-distinguish: NOT conflated — confirmed end-to-end.** Task (§0) = per-trial binary
 hypothesis decision against sealed labels; floor (A&S Thm 5.4, after the G1-a ensemble edit) = a
 DISTINGUISHING bound on exactly that pair; Q arm = purity-witness threshold decision; C1 arm =
 HH25 tester used as a distinguisher (valid attack; the floor covers every single-copy tester).
-No Gate-A-class mismatch anywhere in the chain.
+No Gate-A-class mismatch anywhere in the chain. Unchanged from v1.
 
-**Grader CONFIRMED — in the SINGLE-RUNG DESCRIPTIVE form, which is the only form Creator's GO
-buys**: the §status ladder collapse (one rung, n=8) makes §4's fitted-exponent metric
-INAPPLICABLE to this flight. Binding grader spec, frozen here:
-1. **Decision rules frozen pre-flight**: Q accepts ALT iff Bell-pair accept-frequency ≥ τ_Q,
-   with τ_Q set at the midpoint of the pre-registered gap (p₀ = 1/2 + 2⁻⁹ vs p₁ = (1+u_est)/2,
-   u_est from G3 sim + the measured-region λ) — NEVER tuned on flight data. C1 decides via HH25's
-   tester at its stated threshold, at its best (delivery fence per §2).
-2. **Copies-to-criterion estimator pre-specified**: nested budget grids frozen before flight
-   (Q: pairs k = 1..8 → copies 2k; C1: geometric grid), each sealed trial scored at every nested
-   prefix budget; accuracy per (arm, budget) with EXACT binomial CI; copies-to-criterion =
-   smallest budget with ≥95% accuracy over the M = 40 sealed trials. No interpolation, no
-   post-hoc grid extension, no re-scoring after unsealing.
-3. **Blindness**: per-trial decisions committed BEFORE Ember unseals labels; the grader script
-   is committed before the flight (grader = Elder; script commit is a pre-flight checklist item
-   alongside G2).
-4. **Reporting constraint, per §4 and the C6593 claim-card convention**: output = per-arm
-   copies-to-criterion + their ratio with CI, DESCRIPTIVE ONLY — a single-n point, no growth
-   law, MAY NOT BE HEADLINED. Card fields: floor_status PROVEN-IN-PRINT (task-level Θ(n−k),
-   full-text verified); floor_scale constant-vs-linear (THEOREM's scale — the flight
-   demonstrates a point consistent or inconsistent with it, never the law itself);
-   measured_effect = the n=8 ratio.
-5. **Kill criteria 1–5 remain fully gradeable at one rung** — in particular #1 (C1 ties or
+**Grader CONFIRMED for the LADDER n = {8,12,16}** (the collapse was scored against the dissolved
+u≥0.70 gate; on the shot curve all three rungs are affordable — 14/30/133 shots per point).
+Per-rung mechanics as in v1; §4's fitted-exponent metric is BACK — subject to the new binding
+condition below. Binding grader spec, frozen here:
+
+**⚠️ BINDING CONDITION ON THE §4 REDRAFT — the u(n) CONFOUND must be pre-registered before
+freeze.** On the priced curve Q's copies-to-criterion are NOT flat: 28 → 60 → 266 across the
+rungs, a ~10× growth driven entirely by hardware purity decay u(n) (0.871 → 0.282), not by the
+theorem (whose Q side is O(1) in noiseless copies). Consequences: (i) §4's WIN clause "Q flat
+across rungs" FAILS BY CONSTRUCTION as written and must be redrafted; (ii) C1's measured
+exponent conflates the theorem's linear law with the SAME noise inflation — a raw fit could
+headline noise curvature as the theorem. **Required redraft shape**: pre-register each arm's
+NOISE-ONLY prediction curve from the G3 sims at the measured-region λ (Q: witness cost at
+predicted u(n); C1: HH25 cost on the u(n)-degraded ALT), and define WIN as (a) Q's measured
+curve consistent with its noise-only prediction (no excess growth), AND (b) C1's measured curve
+showing EXCESS growth over its own noise-only prediction with fitted excess-exponent consistent
+with 1 and excluding 0, with CI. The theorem's signature is the EXCESS, not the raw slope.
+Kill criterion 3 must also be reworded from "folds on purity" (threshold language, gate
+dissolved) to shot-budget terms: a rung whose priced copies/pt exceed the pre-registered budget
+cap is dropped and reported.
+1. **Decision rules frozen pre-flight, PER RUNG**: Q accepts ALT iff Bell-pair accept-frequency
+   ≥ τ_Q(n), with τ_Q(n) at the midpoint of the pre-registered gap (p₀ = 1/2 + 2^−(n+1) vs
+   p₁ = (1+u_est(n))/2, u_est(n) from G3 sim + the measured-region λ) — NEVER tuned on flight
+   data. C1 decides via HH25's tester at its stated threshold, at its best (delivery fence §2).
+2. **Copies-to-criterion estimator pre-specified, per (arm, rung)**: nested budget grids frozen
+   before flight (Q: pair-count grid sized per rung from the shot pricing; C1: geometric grid),
+   each sealed trial scored at every nested prefix budget; accuracy per (arm, rung, budget) with
+   EXACT binomial CI; copies-to-criterion = smallest budget with ≥95% accuracy over the M = 40
+   sealed trials of that rung. No interpolation, no post-hoc grid extension, no re-scoring after
+   unsealing.
+3. **Blindness**: per-trial decisions committed BEFORE Ember unseals labels (three rung-sets of
+   labels and A-matrices); the grader script is committed before the flight (grader = Elder;
+   script commit is a pre-flight checklist item alongside G2).
+4. **Reporting, per the redrafted §4 and the C6593 claim-card convention**: per-rung copies-to-
+   criterion + ratios with CIs, PLUS the excess-exponent fit per the binding condition above.
+   The growth-law headline is permitted ONLY if the redrafted WIN criteria (noise-only-
+   prediction-referenced) pass. Card fields: floor_status PROVEN-IN-PRINT (task-level Θ(n−k),
+   full-text verified); floor_scale constant-vs-linear; measured_effect = the per-rung ratios +
+   excess exponent.
+5. **Kill criteria 1, 2, 4, 5 gradeable as written; #3 requires the shot-budget rewording** —
+   in particular #1 (C1 ties or
    beats Q in copies → retire) binds exactly as written.
 
 ---
