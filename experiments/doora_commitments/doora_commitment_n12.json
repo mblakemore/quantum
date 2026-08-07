@@ -1,0 +1,10 @@
+{
+  "spec": "doora_deg2phase_v1",
+  "n": 12,
+  "M": 40,
+  "commitment_sha256": "fa74c61618f9cc2ae82d3684bede383f0ed940a16f2e8fa717b7488a1ea4164a",
+  "prereg_freeze": "card at 81d8bf824c0b + rung-set restored to n=8/12/16 per Whisper general#6307 (the collapse premise was the dissolved u>=0.70 gate; nothing folds on purity)",
+  "order_of_operations": "Seal drawn 2026-08-08 ~00:02Z, BEFORE any submission. VERIFIED: results/ contains zero door-a/deg2/phase_state artifacts. n=8 sealed minutes earlier in the same pre-flight window; all three rungs sealed before any flight.",
+  "bits_A": 78,
+  "note": "A upper-triangular INCL diagonal; prep = H^n, Z on set diagonal bits, CZ on set off-diagonal bits (per quantum@0930a74). Secret and salt are OFF-GIT."
+}

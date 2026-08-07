@@ -1,0 +1,10 @@
+{
+  "spec": "doora_deg2phase_v1",
+  "n": 8,
+  "M": 40,
+  "commitment_sha256": "009ca03b8495373527903c4354aa906013613a48c8137ab6a88455509811911d",
+  "prereg_freeze": "card docs/door-a-stabilizer-memory-separation-prereg-DRAFT-whisper-c5027.md at 81d8bf824c0b (Elder G1-b ruling + S->Z correction); ensemble spec read from implementation quantum@0930a74",
+  "order_of_operations": "Seal drawn 2026-08-08 ~00:00Z. VERIFIED AT DRAW TIME: results/ contains ZERO door-a / deg2 / phase_state artifacts, and experiments/doora_commitments/ was empty (first seal). No flight has been submitted; no flight data exists to have influenced A or the labels. Gate chain per Elder general#6305: G1-a RULED, G1-b RULED, G3 PASSED 8/8, G2 = this seal, G4 = Creator GO outstanding.",
+  "bits_A": 36,
+  "note": "A upper-triangular INCL diagonal; prep = H^n, Z on set diagonal bits, CZ on set off-diagonal bits (per quantum@0930a74). Secret and salt are OFF-GIT."
+}
