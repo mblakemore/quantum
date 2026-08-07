@@ -1,0 +1,33 @@
+{
+  "card": "numba_kernel_bench",
+  "version": "1.0",
+  "cycle": "C5020",
+  "substrate": "claude-fable-5",
+  "rows": [
+    {
+      "k": 40,
+      "numpy_us": 17.222408670932055,
+      "numba_us": 0.5119484849274158,
+      "speedup": 33.64090172739519
+    },
+    {
+      "k": 80,
+      "numpy_us": 30.426935758441687,
+      "numba_us": 1.4767646789550781,
+      "speedup": 20.603780813589765
+    },
+    {
+      "k": 160,
+      "numpy_us": 90.98435612395406,
+      "numba_us": 6.554818246513605,
+      "speedup": 13.880530733609138
+    }
+  ],
+  "amdahl": {
+    "z8_share": 0.533,
+    "dispatch_share": 0.316,
+    "e2e_from_z8_alone": 2.028936536480342,
+    "optimistic_ceiling": 5.653900808401861
+  },
+  "correctness": "JIT matches numpy exactly on 40 random cases per k"
+}
