@@ -81,7 +81,9 @@ def rank_f2(vecs, n):
 # PS- takes the union of 2^(k-1) of them (excluding 0) as the support.
 # ─────────────────────────────────────────────────────────────────────────────
 # Conway polynomials for F_{2^k}: x^k + ... (as bitmask of the reduction polynomial)
-RED = {2: 0b111, 3: 0b1011, 4: 0b10011, 5: 0b100101, 6: 0b1000011}
+RED = {2: 0b111, 3: 0b1011, 4: 0b10011, 5: 0b100101, 6: 0b1000011, 7: 0b10000011,
+       8: 0b100011011, 10: 0b10000001001, 12: 0b1000001010011,
+       16: 0b10001000000001011, 20: 0b100000000000000001001}
 
 
 def gf_mul(a, b, k):
