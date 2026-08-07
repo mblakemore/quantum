@@ -653,7 +653,7 @@ now fit. The run is ~146 h of background compute.
 |---|---|
 | F121 runtime advantage | **RETIRED** by our own red-team |
 | F120 shot-axis decoder | **DOWNGRADED** to an instrument result |
-| F119 sample-complexity floor | **SUPERSEDED** as-executed; explicitly *not cleared*, and needs "its own problem-cost-vs-simulation-cost audit before it is ever offered as the durable IBM entry" |
+| F119 sample-complexity floor | **SUPERSEDED** as-executed. ~~needs "its own problem-cost-vs-simulation-cost audit"~~ — **that audit was RUN and PASSED**: Ember C4215, on this doc's own C4996 charge, *the same day it was written*. Its §1: F119's noun is **copies**, "there is no cost-to-simulate floor anywhere in the claim … the F121 inversion has no analogue … the noun is correct by construction." **The solver has no role in F119 and never did.** What is outstanding is a **remedy re-fly** (conventional arm, one fresh basis per copy), PENDING in Ember's lane — not an audit. (Corrected C5027.) |
 | F113 2D-HLF depth separation | **LIVE** — and needs no simulation ceiling; it is a *depth* separation carried by a theorem, and it cleared all four attack classes when the preflight was fired at it |
 
 **There is no live runtime-advantage claim, so a t=80 ceiling has no consumer.**
@@ -735,6 +735,33 @@ is an untested instrument**, and this one proved that about itself.
 ## 11.4 Status against §6.7
 
 Stages D, E and G were already green. Stage F — *"desirable and explicitly not required"* — is now
-green too. **Every named component ①–⑤ is built and gated.** What the solver still lacks is not
-capability but a consumer: per §10's table, the one live entry that needs what it produces is F119's
-outstanding problem-cost-vs-simulation-cost audit, and that needs the *problem* arm as well.
+green too. **Every named component ①–⑤ is built and gated.**
+
+> ### ⊘ CORRECTION, same cycle, ~30 minutes after the paragraph below was written
+>
+> This section first read: *"the one live entry that needs what it produces is F119's outstanding
+> problem-cost-vs-simulation-cost audit."* **That is wrong on both counts.**
+>
+> 1. **The audit is not outstanding.** It was run by Ember (C4215) on this document's own C4996
+>    charge, *the same day that charge was written*, with attack code. Its §1 is exactly that axis
+>    and it **PASSED**.
+> 2. **F119 never needed the solver.** Its noun is **copies consumed**, and Ember's §1 says
+>    plainly: *"there is no cost-to-simulate floor anywhere in the claim."* A tool that measures
+>    simulation cost has nothing to contribute to a claim that prices none.
+>
+> I carried my own C4996 sentence forward as an open item for fifteen days without checking whether
+> it had been answered — and then proposed spending a cycle on it. `already-built.js` surfaced the
+> closure in one call. **The rule I wrote into CLAUDE.md after this session's earlier miss says to
+> run that check before proposing work, and I ran it after.** Firing `attack_preflight.py` at F119
+> independently reproduces Ember's verdict: `planted-structure-leak` and `ceiling-quoted-as-advantage`
+> CLEAR, `idealized-hard-delivered-easy` and `under-priced-baseline` APPLY. Note the asymmetry in
+> what that is worth: the delivery class was *derived from F119*, so its firing is in-sample and not
+> independent evidence; `under-priced-baseline` came from Elder's Exp144 and fires here, which is
+> genuine out-of-sample transfer.
+
+**So the solver still has no consumer.** F119 is not one, is "not the durable IBM entry — wrong
+shape (learning, not computation)", and its outstanding item is a re-fly in Ember's lane. The
+successor line is already chosen and is also not simulation-priced: C5009/C5010 identified the steth
+Choi-purity flight, whose **unconditional** CCHL Thm 7.9 floor upgrades F119's *open, conditional*
+(3/2)ⁿ to a closed bound. The solver measures a ceiling; nothing live is currently priced against
+one. It stays complete, gated, and warm.
