@@ -145,13 +145,18 @@ def run(n, nt, delta, seed, exact_decomp, verbose=True, probe_only=False):
     nH = norm2_exact(pd, t)
     t_norm = time.perf_counter() - t0
 
-    # SCALE-FREE RATIO. Forming num = 2^-u nG and den = 2^-v nH and dividing loses the answer at
-    # large t: gate G4 proved den IS p_y = 2^-t exactly, which is 3.6e-15 at t=48, so an ABSOLUTE
-    # epsilon guard (the first version used abs(den) > 1e-14) rejects a perfectly correct value
-    # for every t >= 47. It returned nan at t=48 after 63 million inner products. The exponent
-    # belongs on the RATIO, and the guard belongs on nH, which is O(1).
+    # NO MAGNITUDE GUARD. This took two attempts and the second was the same bug as the first.
+    #   v1: num = 2^-u nG, den = 2^-v nH, guard abs(den) > 1e-14. Gate G4 proved den IS
+    #       p_y = 2^-t exactly = 3.6e-15 at t=48, so the guard rejected a CORRECT value for
+    #       every t >= 47. Returned nan after 63 million inner products.
+    #   v2: put the exponent on the ratio and guard nH > 1e-12 instead. STILL WRONG — nH is
+    #       2^(v-t), which at t=51, v=5 is 1.42e-14. I moved the epsilon to a quantity with the
+    #       SAME 2^-t decay, having just written down the rule that says not to.
+    # There is no correct magnitude threshold here because every magnitude in this expression
+    # decays with t. The only legitimate guards are STRUCTURAL: did the projection kill every
+    # term, and is the norm positive.
     num, den = 2.0 ** (-u) * nG, 2.0 ** (-v) * nH
-    got = (2.0 ** (v - u)) * (nG / nH) if nH > 1e-12 else float("nan")
+    got = (2.0 ** (v - u)) * (nG / nH) if (pd and nH > 0.0) else float("nan")
     return {"n": n, "t": t, "k": k, "chi": chi, "fidelity2": fid2,
             "survivors_num": len(pn), "survivors_den": len(pd),
             "gens_G": len(gg), "gens_H": len(hh), "u": u, "v": v,

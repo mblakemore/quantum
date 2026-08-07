@@ -498,3 +498,108 @@ A zero error on a quantity that cannot move is not evidence. Two fixes, both now
 This is the same family as the weak-baseline and window-choice errors earlier in the campaign: a
 comparison arranged so the favoured answer wins by construction. The tell was the number being *too
 clean* — 0.0000 exactly, across 96 cases, on a quantity with a 0.38 error budget.
+
+---
+
+# 10. C5024 — A LARGE INSTANCE, END TO END
+
+`tools/large_run.py`, `tools/delta_sweep.py`.
+
+## 10.1 What makes a large run verifiable at all
+
+**The oracle costs `2^n`. The solver costs `2^{γt}`. Those are independent.** So a large-**t**
+instance at modest **n** is simultaneously a real stress of the machinery and exactly checkable
+against a statevector. There was never a need to choose between "large" and "verified".
+
+| mode | t | χ | inner products | \|err\| | wall |
+|---|---:|---:|---:|---:|---:|
+| **EXACT** (k = t) | 14 | 16,384 | **238,836,800** | **1.04e-10** | 727 s |
+| APPROX (k < t) | 20 | 128 | 14,584 | 1.29e-01 | 0.5 s |
+| APPROX | 30 | 512 | 205,248 | 7.60e-02 | 3.1 s |
+| **APPROX** | **43** | **4,096** | **14,364,352** | **4.84e-02** | 143 s |
+
+239 million inner products on 14-qubit stabilizer states, agreeing with the oracle to 1e-10, is the
+exact-mode headline. The approximate mode is the *real* algorithm and reaches t = 43 in 2½ minutes.
+
+## 10.2 The χ sweep — controlled, not merely bounded
+
+A single run landing inside `√δ` is weak evidence: at δ = 0.5 the bound is 0.38, most of a
+probability's range, so almost any not-catastrophically-broken solver passes. The discriminating
+question is whether the error **falls with χ on the same circuit**. One circuit, one `y`, one oracle;
+**5 independent random subspaces per k**:
+
+| k | χ | mean fid² | **mean \|err\|** | sd | bound |
+|---:|---:|---:|---:|---:|---:|
+| 8 | 256 | 0.6671 | **0.09414** | 0.056 | 0.577 |
+| 9 | 512 | 0.8026 | **0.08418** | 0.060 | 0.444 |
+| 10 | 1,024 | 0.8810 | **0.02801** | 0.013 | 0.345 |
+| 11 | 2,048 | 0.9225 | **0.02061** | 0.012 | 0.278 |
+
+**Monotone in χ, falling 4.6×.** A bug in the projection, the phase bookkeeping or the exponent `u`
+would show a **floor** — the error would stop improving while the bound kept falling. It doesn't.
+
+*The first version of this sweep* varied δ and drew **one** subspace per point, and reported
+"monotone in fidelity: NO". But two δ values collapsed to the same `k`, so that non-monotonicity was
+**L-draw noise, not a failure of δ control**. Averaging over independent draws is what separates the
+two, and it is the difference between a suggestive result and a measured one.
+
+## 10.3 A guard bug that only scale could find
+
+**t = 48 returned `nan` after 63 million inner products.** Not a numerical failure. Gate G4 had
+already proved the denominator *is* `p_y = 2^{-t}` exactly — which at t = 48 is **3.6e-15** — and the
+harness guarded with an **absolute** `abs(den) > 1e-14`. It was rejecting a correct value, and would
+have for **every t ≥ 47**.
+
+```
+t=30   p_y = 9.3e-10     guard passes
+t=43   p_y = 1.1e-13     guard passes  (barely)
+t=48   p_y = 3.6e-15     GUARD REJECTS A CORRECT ANSWER
+```
+
+The fix is to never form two tiny numbers and divide: put the exponent on the **ratio**,
+`P = 2^{v-u}·(‖Π_G ψ‖²/‖Π_H ψ‖²)`, and guard on `‖Π_H ψ‖²`, which is O(1).
+
+**No small test could have surfaced this** — at t ≤ 43 the guard is invisible. It is the specific
+value of running large: the failure mode was an absolute tolerance applied to a quantity that decays
+like `2^{-t}`, which is only wrong once `t` is big enough. Worth generalising: **any fixed epsilon
+compared against a quantity that scales with a problem parameter is a latent scale bug.**
+
+### 10.3.1 …and then I committed the same bug in the fix
+
+The fix above moved the exponent onto the ratio and guarded `nH > 1e-12` instead. **t = 48 returned
+`nan` again.** Instrumenting rather than guessing a second time:
+
+```
+t=51,  v=5   ->   nH = 2^(v-t) = 2^-46 = 1.42e-14      guard was nH > 1e-12   REJECTED AGAIN
+```
+
+`nH` is *also* `2^{-t}`-scaled. I had just written down the rule "any fixed epsilon against a
+quantity that scales with a problem parameter is a latent scale bug", and then relocated the epsilon
+to another quantity with the **same** `2^{-t}` decay. Stating a rule is not applying it.
+
+**There is no correct magnitude threshold in this expression, because every magnitude in it decays
+with t.** The only legitimate guards are *structural*: did the projection kill every term, and is the
+norm positive.
+
+```python
+got = (2.0 ** (v - u)) * (nG / nH) if (pd and nH > 0.0) else float("nan")
+```
+
+With that, **t = 46 completes: χ = 8,192, 59,713,056 inner products, P_solver = 0.703192 against an
+oracle of 0.750000, \|err\| = 4.68e-2, 475 s.** The `nan` was never numerical — it was mine, twice.
+
+## 10.4 Where O(χ²) stops, and what it costs to go further
+
+The exact norm is `O(χ²)`, which is what caps this ladder — not the algorithm:
+
+| t | k | χ | inner products | projected wall |
+|---:|---:|---:|---:|---:|
+| 46 | 13 | 8,192 | 6.0e7 | 8 min ✓ measured |
+| 51 | 14 | 16,384 | 2.7e8 | ~46 min |
+| 56 | 15 | 32,768 | 1.1e9 | **~16 h** |
+
+t = 56 was launched and killed: 16 hours of `O(χ²)` is not a result worth waiting for when
+component ④ replaces it with `O(χ·L·J)` — at L·J ≈ 225 that is 7.4e6 instead of 1.1e9, a **145×**
+reduction, at the cost of an ε-level sampling error. **The exact route was the right choice for
+*verification* and is the wrong choice for *scale*,** and that is exactly the split the paper's two
+algorithms make (Eq 2 exact, Eq 3 sampled).
