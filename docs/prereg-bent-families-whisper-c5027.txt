@@ -132,3 +132,21 @@ LIVE CALIBRATION PULLED (C5027, after the noise sim)
   4,830 is my own optimistic Karatsuba figure; depth/T1/T2 unpriced.
   NEXT GATE IS A TRANSPILE, NOT A THEORY QUESTION: build the k=20 oracle, transpile to
   ibm_boston, read the ACTUAL 2q count, depth and routed edge errors. No QPU time.
+
+CORRECTION (C5027, self-caught after posting the negative)
+  I COUNTED ONLY HALF THE CIRCUIT. Roetteler applies O_f AND O_f~; the dual is IN THE
+  CIRCUIT (line 89 of my own noise sim), not just a verification convenience. The PS_ap
+  dual is PS_ap over sigma(a)=a^-1 = ANOTHER field inversion, the expensive part.
+    k=8:  9,492 2q  F 3.2e-5   62,634 shots   (was 4,746 / 6e-3 / 354)
+    k=10: 9,392 2q  F 3.6e-5   56,163 shots   (was 4,696 / 6e-3 / 335)
+    k=12: 27,516 2q F 9.3e-14  21.6 trillion
+  VERDICT UNCHANGED (k=10's classical attack is 2.6 ms) but every fidelity I posted was 2x
+  optimistic.
+  AND THE RULE WAS WRONG IN ITS SECOND TERM. "verifiability, hardness, circuit cost - pick
+  two" is imprecise: VERIFIABILITY IS NOT THE CONSTRAINT, because the campaign verifies by
+  cryptographic COMMITMENT (salt+hash), which works whether or not the dual is cheap.
+  CORRECTED: THE DUAL MUST BE CIRCUIT-COMPUTABLE BECAUSE THE ALGORITHM CONSUMES IT. A
+  hidden-shift advantage needs f AND f~ both cheap to compile, plus classical hardness. MM
+  has cheap-f, cheap-dual, no hardness. PS_ap has hardness and pays for it TWICE, once for
+  f and once for f~. The property that makes a family hard is the property the algorithm
+  must run twice.
