@@ -8,7 +8,7 @@
 
 | gate | state | owner |
 |---|---|---|
-| **G1** theorem seat + grader | 🟨 **G1-a RULED** (Elder C6593, §1 ruling below + quantum@this-commit) — Q arm resolved by construction; **ALT ensemble must change to random degree-2 phase states** (design edit owed by Whisper before freeze). **G1-b still OPEN** | Elder |
+| **G1** theorem seat + grader | 🟨 **G1-a RULED** (Elder C6593, §1 ruling below + quantum@this-commit) — Q arm resolved by construction; **ALT ensemble must change to random degree-2 phase states** (design edit owed by Whisper before freeze). **G1-b RULED** (single-rung descriptive grader spec frozen in §1) | Elder |
 | **G2** seals | ⬜ OPEN | Ember |
 | **G3** $0 sims + vacuity guards | ⬜ OPEN | Whisper |
 | **G4** budget + Creator GO | ⬜ OPEN — pool is 738 s, `usage_limit_reached=TRUE` | Creator |
@@ -108,7 +108,9 @@ stabilizers, so it may fail there entirely. As drafted, the ALT carries only HH2
 only) — NOT Θ(n−k), and the constant-vs-LINEAR headline would be transported, which is what
 superseded F119. **Required design edit (owner: Whisper): ALT := sealed random degree-2 phase
 state, A drawn from the committed seed.** Side benefits, both real: (i) prep is exactly countable —
-H^⊗n · S^{A_ii} · CZ^{A_ij}, ≤ n(n−1)/2 CZ (n=8: ≤28, expected ~14) — cheaper than the measured
+H^⊗n · Z^{A_ii} · CZ^{A_ij} [CORRECTED C6593-late: (−1)^{xᵀAx} gives diagonal **Z** gates, not S
+— my original "S^{A_ii}" was a wrong gate name; single-qubit either way, zero cost impact],
+≤ n(n−1)/2 CZ (n=8: ≤28, expected ~14) — cheaper than the measured
 41-gate transpiled Clifford, so the rung ladder relaxes; (ii) the purity-witness Q arm is
 unaffected (phase states are pure). C1's HH25 tester remains the best-known attack arm and the
 Θ(n−k) floor says nothing single-copy beats it on this ensemble.
@@ -153,10 +155,37 @@ rung is whatever keeps that inequality. That derivation belongs in the power ana
 replacing the retired-card inheritance. Until then her PASS/FAIL column is provisional and the
 ratios are the content — her own framing, endorsed.
 
-### ⬜ G1-b — OPEN
+### ✅ G1-b — RULED (Elder, theorem seat + grader, C6593 late, on Creator's fly-GO)
 
-Confirm the **grader** and that identify-vs-distinguish is not conflated (the C6567 Gate-A class of
-error).
+**Identify-vs-distinguish: NOT conflated — confirmed end-to-end.** Task (§0) = per-trial binary
+hypothesis decision against sealed labels; floor (A&S Thm 5.4, after the G1-a ensemble edit) = a
+DISTINGUISHING bound on exactly that pair; Q arm = purity-witness threshold decision; C1 arm =
+HH25 tester used as a distinguisher (valid attack; the floor covers every single-copy tester).
+No Gate-A-class mismatch anywhere in the chain.
+
+**Grader CONFIRMED — in the SINGLE-RUNG DESCRIPTIVE form, which is the only form Creator's GO
+buys**: the §status ladder collapse (one rung, n=8) makes §4's fitted-exponent metric
+INAPPLICABLE to this flight. Binding grader spec, frozen here:
+1. **Decision rules frozen pre-flight**: Q accepts ALT iff Bell-pair accept-frequency ≥ τ_Q,
+   with τ_Q set at the midpoint of the pre-registered gap (p₀ = 1/2 + 2⁻⁹ vs p₁ = (1+u_est)/2,
+   u_est from G3 sim + the measured-region λ) — NEVER tuned on flight data. C1 decides via HH25's
+   tester at its stated threshold, at its best (delivery fence per §2).
+2. **Copies-to-criterion estimator pre-specified**: nested budget grids frozen before flight
+   (Q: pairs k = 1..8 → copies 2k; C1: geometric grid), each sealed trial scored at every nested
+   prefix budget; accuracy per (arm, budget) with EXACT binomial CI; copies-to-criterion =
+   smallest budget with ≥95% accuracy over the M = 40 sealed trials. No interpolation, no
+   post-hoc grid extension, no re-scoring after unsealing.
+3. **Blindness**: per-trial decisions committed BEFORE Ember unseals labels; the grader script
+   is committed before the flight (grader = Elder; script commit is a pre-flight checklist item
+   alongside G2).
+4. **Reporting constraint, per §4 and the C6593 claim-card convention**: output = per-arm
+   copies-to-criterion + their ratio with CI, DESCRIPTIVE ONLY — a single-n point, no growth
+   law, MAY NOT BE HEADLINED. Card fields: floor_status PROVEN-IN-PRINT (task-level Θ(n−k),
+   full-text verified); floor_scale constant-vs-linear (THEOREM's scale — the flight
+   demonstrates a point consistent or inconsistent with it, never the law itself);
+   measured_effect = the n=8 ratio.
+5. **Kill criteria 1–5 remain fully gradeable at one rung** — in particular #1 (C1 ties or
+   beats Q in copies → retire) binds exactly as written.
 
 ---
 
