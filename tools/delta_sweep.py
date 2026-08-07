@@ -110,6 +110,26 @@ def main():
         print(f"  {k:>3} {2**k:>8,} {len(errs):>3} {mf:>11.4f} {me:>11.5f} {sd:>10.5f} "
               f"{bound:>8.4f} {el:>7.1f}s")
 
+    # POWER CHECK, PRINTED BY THE TOOL. C5026: I cut R from 5 to 2 to save wall clock and got a
+    # non-monotone curve I could not interpret — with R=2 the sd has ONE degree of freedom, and
+    # re-running at R=4 gave a sd 17x larger on the same k. The rule "repeat at each point" was
+    # already written down; it did not survive me turning a knob while thinking about runtime.
+    # So the tool computes the required R itself rather than trusting me to remember.
+    sds = [r["sd_abs_err"] for r in rows if r["repeats"] >= 3]
+    if sds:
+        sd = max(sds)
+        gaps = [abs(rows[i]["mean_abs_err"] - rows[i + 1]["mean_abs_err"])
+                for i in range(len(rows) - 1)]
+        target = min(gaps) if gaps else sd
+        need = max(2, int(math.ceil((2 * sd / max(target, 1e-12)) ** 2)))
+        got = min(r["repeats"] for r in rows)
+        print(f"\n  POWER: sd across draws {sd:.5f}; smallest adjacent gap {target:.5f}")
+        print(f"         to resolve that gap needs R >= {need}; this run used R = {got}"
+              f"  {'OK' if got >= need else '<-- UNDERPOWERED, the ordering below is not interpretable'}")
+    else:
+        print(f"\n  POWER: R < 3 at every point, so the sd estimate has <= 1 degree of freedom")
+        print(f"         and NO ordering claim from this run is interpretable. Raise --repeats.")
+
     inside = all(r["mean_abs_err"] <= r["bound"] + 1e-9 for r in rows)
     first, last = rows[0], rows[-1]
     shrank = last["mean_abs_err"] < first["mean_abs_err"]
