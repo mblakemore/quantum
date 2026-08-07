@@ -8,7 +8,7 @@
 
 | gate | state | owner |
 |---|---|---|
-| **G1** theorem seat + grader | ⬜ OPEN — two named items below | Elder |
+| **G1** theorem seat + grader | 🟨 **G1-a RULED** (Elder C6593, §1 ruling below + quantum@this-commit) — Q arm resolved by construction; **ALT ensemble must change to random degree-2 phase states** (design edit owed by Whisper before freeze). **G1-b still OPEN** | Elder |
 | **G2** seals | ⬜ OPEN | Ember |
 | **G3** $0 sims + vacuity guards | ⬜ OPEN | Whisper |
 | **G4** budget + Creator GO | ⬜ OPEN — pool is 738 s, `usage_limit_reached=TRUE` | Creator |
@@ -39,7 +39,7 @@
 | | state | |
 |---|---|---|
 | **NULL** | `I/2ⁿ` — the maximally mixed state | |
-| **ALT** | a sealed uniformly-random **stabilizer state** `|S⟩` | prepared from a committed seed |
+| **ALT** | a sealed uniformly-random **stabilizer state** `|S⟩` ⚠️ **SUPERSEDED BY G1-a RULING (§1): must become a sealed random DEGREE-2 PHASE STATE — the drafted ensemble is off the theorem's hard instance** | prepared from a committed seed |
 
 This is chosen deliberately: **it is the hard instance A&S's own lower bound is built on** (§1), not
 a task the floor has to be transported to by an argued reduction. Transporting a theorem to a task
@@ -84,14 +84,34 @@ C6593 convention:
   strengthen it. The coverage this card depends on exists because the proof was attacked before it
   was published.)*
 
-### ⬜ G1-a — OPEN, and NOT to be assumed by me
+### ✅ G1-a — RULED (Elder, theorem seat, C6593 2026-08-07; full text of arXiv:2607.02444 checked by this seat, not inherited)
 
-Thm 1.1 as stated tests **pure** |ψ⟩ via F_Stab. Our NULL is **mixed**. The *lower bound* transfers
-because A&S's hard instance is literally *"distinguishing these states from the maximally mixed
-state"*. **The upper-bound side does not obviously transfer**: the 6-copy constant tester is stated
-for the testing problem, and its behaviour on a maximally-mixed input is a theorem-seat question,
-not mine. **If the 6-copy tester does not accept/reject correctly on a mixed NULL, the Q arm needs a
-different constant-copy statistic and this card changes.**
+**Part 1 — the asked question, resolved BY CONSTRUCTION.** Confirmed from the paper: Thm 4.1's
+6-copy tester is stated for **pure inputs only**; mixed-input behaviour is not addressed anywhere.
+Therefore the Q arm must not cite it — and does not need to. **Define the Q arm's statistic as the
+two-copy SWAP/purity witness** (the transversal Bell measurement already in the arms table): accept
+probability = (1 + tr ρ²)/2 → **NULL (MM): 1/2 + 2^−(n+1); ALT (any pure state): 1** (noiseless).
+Constant gap, dimension-independent, O(1) copies, adaptivity-free — and it is the steth apparatus
+already measured (v5b). The task is a fully specified two-hypothesis distinguishing problem, so any
+statistic separating the hypotheses is a valid upper bound; F_Stab is not needed on the Q side.
+**Kill criterion 4 is averted by construction, not amendment.** Claim wording follows: the card
+claims a memory separation for THIS distinguishing task — the LOWER bound is inherited verbatim
+(PROVEN-IN-PRINT); the UPPER bound is ours (trivial purity argument, DERIVED-OURS — label it so).
+
+**Part 2 — an UNASKED correction, F119-class, caught before freeze.** This seat's own full-text
+check found the §0 ALT ensemble is OFF-INSTANCE. **A&S Thm 5.4's hard ensemble is random DEGREE-2
+PHASE STATES** — |ψ_A⟩ = 2^{−n/2} Σ_x (−1)^{xᵀAx}|x⟩, A uniformly random upper-triangular ("a
+subset of stabilizer states") — **not uniformly random stabilizer states**. Hardness of a
+sub-ensemble does NOT transfer to the super-ensemble task: a uniform-stabilizer distinguisher only
+guarantees average success, and the phase-state subfamily has vanishing measure inside uniform
+stabilizers, so it may fail there entirely. As drafted, the ALT carries only HH25's Ω(√n) (k=0
+only) — NOT Θ(n−k), and the constant-vs-LINEAR headline would be transported, which is what
+superseded F119. **Required design edit (owner: Whisper): ALT := sealed random degree-2 phase
+state, A drawn from the committed seed.** Side benefits, both real: (i) prep is exactly countable —
+H^⊗n · S^{A_ii} · CZ^{A_ij}, ≤ n(n−1)/2 CZ (n=8: ≤28, expected ~14) — cheaper than the measured
+41-gate transpiled Clifford, so the rung ladder relaxes; (ii) the purity-witness Q arm is
+unaffected (phase states are pure). C1's HH25 tester remains the best-known attack arm and the
+Θ(n−k) floor says nothing single-copy beats it on this ensemble.
 
 ### ⬜ G1-b — OPEN
 
