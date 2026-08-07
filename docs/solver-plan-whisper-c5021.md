@@ -671,3 +671,70 @@ without exploitable linear structure → its T-count → the ceiling *at that T-
 because it is the number I had been quoting.
 
 **The solver is complete and warm.** It waits for a reason to pick a T-count, not for capability.
+
+---
+
+# 11. C5027 — COMPONENT ⑤, AND THE SOLVER'S LAST NAMED PIECE
+
+`tools/conditional_sampler.py` — **9/9**. Eq 29, bit by bit.
+
+## 11.1 What it changes
+
+Until now the solver is a **scorer**: hand it x, get `P^y_out(x)`. ⑤ makes it a **simulator**: it
+*draws* x with no outcome supplied. Not a faster capability — a different one, and it is the
+difference between serving a **runtime** claim and serving a **sampling** claim.
+
+That distinction is why it was worth building now rather than never. §6.7 explicitly excluded
+sampling from *done*, and correctly, because the classical-arm number needs P_out estimation. But
+the runtime genre is in poor shape — F121 retired by our own red-team, and the C5027 bent-family
+sweep found the replacement door structurally obstructed (the Kasami dual leaves the monomial class
+at n=10, 12 and 14, Γ-rank gap widening 2 → 12 → 362, and the *only* free dual in the whole sweep is
+the degree-2 Maiorana-McFarland case, which is exactly what leaks classically). **A sampling claim
+does not need a bent family with a cheap dual at all.**
+
+## 11.2 Why it is small
+
+A **marginal over a prefix is the same Eq 28 object with fewer projectors** — project the first j
+output qubits, leave the rest alone:
+
+```
+P(x_j = 0 | x_0..x_{j-1})  =  P(x_0..x_{j-1}, 0) / P(x_0..x_{j-1})
+```
+
+so every conditional is a ratio of two quantities ③ already evaluates on the standard form. The
+`2^-v ||Π_H ψ||²` denominator depends only on y, cancels from every conditional, and is never
+computed. `m+1` marginals per sample, deliberately **not** memoised across draws — a prefix cache is
+exponential in m and would trade an O(m)-per-sample algorithm for exponential memory.
+
+## 11.3 The gate suite, and the fact that it first failed to be one
+
+| | |
+|---|---|
+| T0 | chain rule is exact: `Π_j P(x_j\|prefix) == P_out(x)`, every x, vs brute force — deterministic |
+| T1 | siblings sum to parent — the identity `sample_pout` uses by complement |
+| T2 | normalisation |
+| T3 | vacuity guard **on the conditionals** |
+| T4 | empirical draws vs a **calibrated null** (99th pct of TV from true draws), not a threshold I picked |
+| T5 | **mutation controls** — three deliberate breakages, each of which must be caught |
+
+**The first version passed 5/5 and was partly vacuous.** Firing the mutations exposed it: two of
+three deliberate breakages went *undetected*. The case that the old guard had accepted had a joint
+at `max|p − 1/4| = 0.177` — comfortably non-uniform — while `P(x₁=0 | x₀)` was **exactly 0.500 under
+both prefixes**. With the second bit a fair coin, nothing that damages the second conditional is
+observable, and one mutation telescoped to the right answer.
+
+> **I screened the joint when the object the chain rule is made of is the conditional.** That is
+> component ④'s symmetry-protected vacuity, one level up, committed inside the gate whose own
+> docstring quotes that failure as the thing to avoid.
+
+The guard now requires, at every level: some conditional far from ½ **and** conditionals that vary
+across prefixes. On a case meeting both, all three mutations are caught (TV 0.398 vs null 0.065;
+errors 2.1e-1 and 5.3e-1). T5 is now a permanent gate — **a suite that has never been shown to fail
+is an untested instrument**, and this one proved that about itself.
+
+## 11.4 Status against §6.7
+
+Stages D, E and G were already green. Stage F — *"desirable and explicitly not required"* — is now
+green too. **Every named component ①–⑤ is built and gated.** What the solver still lacks is not
+capability but a consumer: per §10's table, the one live entry that needs what it produces is F119's
+outstanding problem-cost-vs-simulation-cost audit, and that needs the *problem* arm as well.
