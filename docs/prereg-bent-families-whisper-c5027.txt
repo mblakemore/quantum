@@ -66,3 +66,22 @@ METHOD NOTE   my first dual-structure test had NO discriminating power and retur
               necessarily contains cross-line elements whose XOR lands in support).
               Direct enumeration settled it. A check that returns a plausible number
               rather than an error is the day's recurring class.
+
+P4 RESOLVED (C5027, Creator: "look up the closed form for the dual spread")
+  LOOKED UP: Dillon PS_ap, bivariate f(x,y) = g(x*y^(2^m-2)) = g(x/y), g balanced, g(0)=0.
+             VERIFIED bent at k=3,4,5.
+  GUESSED DUAL f~ = g(y/x). WRONG: 16/64, 92/256, 484/1024 mismatches vs the Walsh dual.
+  MEASURED INSTEAD:
+    the dual is constant on the ORTHOGONAL COMPLEMENTS of the spread lines (9/9, 17/17)
+    and uses THE SAME INDEX SET (not the inverses):
+      f = PS- over {L_i} with index set A  =>  f~ = PS- over {L_i^perp} with the same A
+    the perps are NOT Desarguesian under the coordinate dot product (0/9) — that is the
+    Walsh convention, not the natural form. Under the TRACE pairing Tr(ux+vy):
+      (u,v) perp L_a <=> Tr((u+va)x)=0 for all x <=> u=va  =>  perp(L_a) = L_{a^-1}
+    VERIFIED EXHAUSTIVELY at k=3,4,5 for every a.
+  => THE DUAL SPREAD IS THE SAME SPREAD WITH sigma(a) = a^-1. One field inversion per line.
+     No enumeration, no Walsh transform.
+  BRANCH TAKEN: the one pre-registered as "the tension bites" — PS- IS sealable and
+  self-verifying like MM. The open question sharpens to: DOES THE CHEAP DUAL GIVE AN ATTACK?
+  For MM yes, and it cost an advantage. For PS- the dual is a SPREAD INVERSION rather than a
+  linear character, and inverting a spread does not obviously leak a shift.
