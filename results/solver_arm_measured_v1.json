@@ -1,0 +1,57 @@
+{
+  "card": "solver_arm_measured",
+  "version": "1.0",
+  "cycle": "C5021",
+  "substrate": "claude-fable-5",
+  "params": {
+    "eps": 0.1,
+    "p_f": 0.05,
+    "delta": 0.5,
+    "L": 400,
+    "J": 11,
+    "parallel_measured": 6.76
+  },
+  "rows": [
+    {
+      "t": 40,
+      "k": 12,
+      "chi": 4096,
+      "fidelity": 0.9431388063155419,
+      "Z": 8.174033105505018,
+      "t_inner_s": 2.8796613837281864e-05,
+      "t_shrink_s": 4.0896654749910034e-05,
+      "cost_projection_s": 6.70050791422526,
+      "cost_inner_s": 518.9840932210286,
+      "total_1core_s": 525.6846011352538,
+      "total_parallel_s": 77.7639942507772
+    },
+    {
+      "t": 60,
+      "k": 16,
+      "chi": 65536,
+      "fidelity": 0.9087198501856715,
+      "Z": 5.935556061472957,
+      "t_inner_s": 8.539923870315154e-05,
+      "t_shrink_s": 6.051721641172965e-05,
+      "cost_projection_s": 237.96337768554687,
+      "cost_inner_s": 24625.587833658854,
+      "total_1core_s": 24863.551211344402,
+      "total_parallel_s": 3678.0401200213614
+    },
+    {
+      "t": 80,
+      "k": 21,
+      "chi": 2097152,
+      "fidelity": 0.9321174250583115,
+      "Z": 7.605784266361416,
+      "t_inner_s": 0.00020717528617630402,
+      "t_shrink_s": 7.872902601957321e-05,
+      "cost_projection_s": 13208.53875,
+      "cost_inner_s": 1911703.4893229166,
+      "total_1core_s": 1924912.0280729167,
+      "total_parallel_s": 284750.3000107865
+    }
+  ],
+  "scope": "Per-probability cost of the Bravyi-Gosset sampling algorithm's dominant term. Excludes the additive O((n+t)^3) Clifford propagation, which Eq 3 amortises over all chi terms. delta=0.5 is the paper's practical regime, NOT its guaranteed one (solver-plan GAP 6).",
+  "correctness": "njit == reference on 20 random pairs at t=40 and t=80"
+}

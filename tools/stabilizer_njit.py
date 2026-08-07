@@ -283,16 +283,26 @@ def inner_product_njit(n, W_, k1, h1, G1, Gb1, Q1, D1, J1,
                     if Rm[a, c]:
                         acc += J2w[b, c]
         Dn[a] = acc % 8
-    Jn = np.zeros((k, k), dtype=np.int64)
+    # Jn = Rm J2w Rm^T.  Written as ONE matrix product at a time: the direct four-loop form
+    # is O(k^2 k2^2) = O(t^4), which is a factor of t above the O(t^3) the paper specifies and
+    # was measured as t^3.72 scaling at C5021 (3.59 -> 5.92 ns/t^3-unit from t=40 to t=80).
+    # Same defect class as the dense-vs-sparse add-row found at C5020: an ALGORITHMIC error
+    # that compilation, vectorisation and parallelism all faithfully preserve.
+    Tm = np.zeros((k2, k), dtype=np.int64)                 # Tm = J2w Rm^T   (k2 x k)
+    for a in range(k):
+        for v in range(k2):
+            if Rm[a, v]:
+                for u in range(k2):
+                    Tm[u, a] += J2w[u, v]
+    Jn = np.zeros((k, k), dtype=np.int64)                  # Jn = Rm Tm      (k x k)
+    for a in range(k):
+        for u in range(k2):
+            if Rm[a, u]:
+                for b in range(k):
+                    Jn[a, b] += Tm[u, b]
     for a in range(k):
         for b in range(k):
-            acc = 0
-            for u in range(k2):
-                if Rm[a, u]:
-                    for v in range(k2):
-                        if Rm[b, v]:
-                            acc += J2w[u, v]
-            Jn[a, b] = acc % 8
+            Jn[a, b] = Jn[a, b] % 8
 
     Qd = (QQ - Q2w) % 8
     Dd = np.empty(k, dtype=np.int64)
