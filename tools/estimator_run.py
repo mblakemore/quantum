@@ -53,6 +53,7 @@ import magic_sparsify as ms                                                 # no
 import gadgetize as gd                                                      # noqa: E402
 import stabilizer_estimator as se                                           # noqa: E402
 import large_run as lr                                                      # noqa: E402
+import pauli_project as pp                                                  # noqa: E402
 
 
 def _amp(packed_terms, theta_packed, t, W):
@@ -81,6 +82,66 @@ def estimate_ratio(pn, pd, t, u, v, L, J, rng, progress=None):
             n_inner += len(pn) + len(pd)
             sg += abs(ag) ** 2
             sh += abs(ah) ** 2
+        batch.append((2.0 ** (v - u)) * (sg / sh) if sh > 0 else float("nan"))
+        if progress:
+            progress(j + 1, J, batch[-1])
+    good = [b for b in batch if math.isfinite(b)]
+    if not good:
+        return float("nan"), float("nan"), batch, n_inner
+    return float(np.median(good)), float(np.std(good)), batch, n_inner
+
+
+def projected_stream(bitstrings, coeff, generators):
+    """Yield (coeff_a, packed_state) ONE AT A TIME. The list version (large_run.projected_terms)
+    holds every survivor: 212 GB at t=80, chi=2^21. This holds one."""
+    for x in bitstrings:
+        st = ms.term_stabstate(x)
+        res, p = pp.project_group(st, generators)
+        if res is not None:
+            yield (coeff * 2.0 ** (-p / 2), lr._pack(st))
+
+
+def estimate_ratio_streaming(stream_G, stream_H, t, u, v, L, J, rng, progress=None):
+    """Loop-INTERCHANGED estimator: O(L*J) memory instead of O(chi).
+
+    The original holds all chi projected terms and loops theta-outer/term-inner. Since the
+    amplitude <theta|Pi psi> is a LINEAR SUM over terms, the loops commute: draw the L*J thetas
+    up front (tiny — 22 MB at t=80 against 212 GB of terms), then stream the terms once,
+    accumulating each term's contribution into every theta's running amplitude.
+
+    Terms are consumed in the same order and each theta's sum is accumulated in the same order,
+    so this is not merely equivalent-in-expectation — it should be BIT-IDENTICAL to the list
+    version. That is exactly why it is gated on identity rather than on agreement: a reordering
+    that perturbed the accumulation would be a silent wrong answer at the scale where nothing
+    can be checked by hand.
+
+    stream_G / stream_H are zero-argument callables returning a FRESH generator each call.
+    """
+    W = bp.nwords(t)
+    n_theta = L * J
+    thetas = [lr._pack(se.random_stabilizer_state(t, rng)) for _ in range(n_theta)]
+
+    ampG = np.zeros(n_theta, dtype=complex)
+    ampH = np.zeros(n_theta, dtype=complex)
+    n_inner = 0
+    for amps, stream in ((ampG, stream_G), (ampH, stream_H)):
+        for c, sa in stream():
+            for idx, tp in enumerate(thetas):
+                amps[idx] += c * ref.triple_to_complex(
+                    nj.inner_product_njit(t, W, *sa, *tp))
+            n_inner += n_theta
+
+    batch = []
+    for j in range(J):
+        # SEQUENTIAL accumulation, matching the list version exactly. np.sum uses PAIRWISE
+        # summation, which differed by 1 ULP (1.1e-16) and made the identity gate fail for a
+        # reason that had nothing to do with the interchange. Isolating the change under test
+        # is the point of the gate; a 1-ULP discrepancy from a different summation strategy
+        # would have masked a real reordering bug of the same size.
+        sg = sh = 0.0
+        for i in range(j * L, (j + 1) * L):
+            sg += abs(ampG[i]) ** 2
+            sh += abs(ampH[i]) ** 2
         batch.append((2.0 ** (v - u)) * (sg / sh) if sh > 0 else float("nan"))
         if progress:
             progress(j + 1, J, batch[-1])
