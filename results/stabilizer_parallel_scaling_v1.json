@@ -1,0 +1,67 @@
+{
+  "card": "stabilizer_parallel_scaling",
+  "version": "1.0",
+  "cycle": "C5020",
+  "substrate": "claude-fable-5",
+  "n": 100,
+  "total_calls": 96,
+  "host": {
+    "logical_threads": 16,
+    "physical_cores": 8,
+    "cpu": "AMD Ryzen 7 9800X3D",
+    "gpu": "NONE PRESENT"
+  },
+  "rows": [
+    {
+      "procs": 1,
+      "wall_s": 1.7928952109068632,
+      "per_call_ms": 18.675991780279826,
+      "speedup": 1.0,
+      "efficiency": 1.0
+    },
+    {
+      "procs": 2,
+      "wall_s": 1.0119886212050915,
+      "per_call_ms": 10.541548137553036,
+      "speedup": 1.771655504161555,
+      "efficiency": 0.8858277520807775
+    },
+    {
+      "procs": 4,
+      "wall_s": 0.5336232762783766,
+      "per_call_ms": 5.558575794566423,
+      "speedup": 3.359851960377304,
+      "efficiency": 0.839962990094326
+    },
+    {
+      "procs": 8,
+      "wall_s": 0.34058704786002636,
+      "per_call_ms": 3.5477817485419414,
+      "speedup": 5.2641320983048745,
+      "efficiency": 0.6580165122881093
+    },
+    {
+      "procs": 12,
+      "wall_s": 0.28989185485988855,
+      "per_call_ms": 3.0197068214571723,
+      "speedup": 6.184703643272113,
+      "efficiency": 0.515391970272676
+    },
+    {
+      "procs": 16,
+      "wall_s": 0.2653374392539263,
+      "per_call_ms": 2.7639316588950655,
+      "speedup": 6.757038192379152,
+      "efficiency": 0.422314887023697
+    }
+  ],
+  "best": {
+    "procs": 16,
+    "wall_s": 0.2653374392539263,
+    "per_call_ms": 2.7639316588950655,
+    "speedup": 6.757038192379152,
+    "efficiency": 0.422314887023697
+  },
+  "assumed_before_measuring": 14.0,
+  "note": "nproc reports THREADS not CORES; SMT gives compute-bound integer work ~1.1-1.3x, not 2x. Reading a thread count as a core count is the proxy-vs-target error."
+}
