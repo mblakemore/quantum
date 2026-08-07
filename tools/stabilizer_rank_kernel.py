@@ -245,13 +245,17 @@ def exponential_sum(Q, D, J, k):
             b = Ka[0]
             rest = [c for c in E if c not in (a, b)]
             if rest:
-                R = np.eye(k, dtype=np.int64)
-                for c in rest:
-                    if J[a, c] == 4:
-                        R[c, b] ^= 1
-                    if J[b, c] == 4:
-                        R[c, a] ^= 1
-                D, J = _update_basis(D, J, R, k)
+                # SPARSE dimer update (Eq 73). The paper: "the R matrices corresponding to the
+                # basis change Eq.(73) are sparse since any row of R contains at most three
+                # non-zero elements." R = I + E_b + E_a with E_b = SUM_{c in Tb} e_c e_b^T and
+                # E_a = SUM_{c in Ta} e_c e_a^T.  These compose SEQUENTIALLY without error
+                # because E_a E_b = 0: it would need a in Tb, and Tb excludes a by construction.
+                # I fixed this in shrink and left the dense form here — it then became the top
+                # cost once the F2 layer was packed.
+                Tb = [c for c in rest if J[a, c] == 4]
+                Ta = [c for c in rest if J[b, c] == 4]
+                _update_addrow_sparse(D, J, Tb, b, k)
+                _update_addrow_sparse(D, J, Ta, a, k)
             dimers.append((a, b))
             E = [c for c in E if c not in (a, b)]
 
