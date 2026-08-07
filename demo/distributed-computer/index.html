@@ -238,8 +238,19 @@ function drawTopo(){
       : (M.ebits ? "stroke:var(--amber);stroke-width:2;stroke-dasharray:5 4" : "stroke:var(--bad);stroke-width:2;stroke-dasharray:2 5");
     el(t,"line",{x1:72,y1:y,x2:390,y2:95,style:st});
     if(curM!=="local"){
-      const mx=(72+390)/2, my=(y+95)/2;
-      el(t,"text",{x:mx,y:my-8,"text-anchor":"middle",style:`fill:${M.ebits?"var(--amber)":"var(--bad)"};font-family:var(--mono);font-size:10px`})
+      // The label sat at the line's MIDPOINT, inside the narrowing band between the two
+      // connectors, in the LINE'S OWN COLOUR — so the dashes struck through the lettering
+      // (measured 100% horizontal, 4-5px vertical, stroke and fill both --amber). Lifting it
+      // was tried and made it worse: the band between the converging lines is only ~16 units
+      // at the label's right end, so a lift pushes the label into the OTHER line.
+      //
+      // Put each label OUTSIDE its own line instead, on the far side from the other one, at the
+      // line's ORIGIN height. Both connectors run toward the shared ancilla at y=95, so an upper
+      // line only descends away from a label parked above its origin, and a lower line only
+      // rises away from one parked below — the clearance holds across the whole label rather
+      // than at the midpoint alone, which is what the midpoint version got wrong.
+      const mx=(72+390)/2, above = y < 95;
+      el(t,"text",{x:mx,y: above ? y-4 : y+9,"text-anchor":"middle",style:`fill:${M.ebits?"var(--amber)":"var(--bad)"};font-family:var(--mono);font-size:10px`})
         .textContent=M.ebits?"teleported gate (1 e-bit)":"e-bit removed ✂";
     }
   });
