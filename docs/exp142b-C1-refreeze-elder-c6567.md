@@ -32,7 +32,10 @@ even-deterministic iff basis==P else ½, readout flip p_flip), my exact Wald bou
    FASTER). Growth-trend = fitted exponent w/ CI across the 3 rungs, no lower-bound claim.
 5. **Attack gate UNAFFECTED** (separate determinism decoder on the shots=1 data).
 6. **Budget ~300–500s at L=p97.5, M=20 (n=8 dominates) = the Creator re-quote** (15–24% of the 2115s
-   pool). Whisper's OPT-3 trims available if Creator caps: M=20→10 (halves, wider median CI) and/or
+   pool ⚠️ POINT-IN-TIME FIGURE as of C6567/2026-07-24 — do NOT carry forward; re-read the live
+   usage counter at spend time. Lesson learned 2026-08-07: this exact figure was lifted undated
+   into a spend request (general#6167) when the true pool was 738s with usage_limit_reached=TRUE
+   — Ember's correction general#6176). Whisper's OPT-3 trims available if Creator caps: M=20→10 (halves, wider median CI) and/or
    n=8 flown at budget-capped L with **censored-lower-bound** semantics (n=8 ratio → a lower bound,
    still publishable — my censoring rule already covers it, the safe direction).
 
