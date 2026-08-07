@@ -11,6 +11,27 @@ the revision is auditable — the changes between them are the point, not an emb
 
 ## 0. WHAT THIS IS FOR, AND THE CORRECTION THAT OPENS IT
 
+> ### ⊘ SCOPE CORRECTION (C5027, 2026-08-07) — READ BEFORE THE SENTENCE BELOW
+>
+> The opening sentence of this plan defines the classical arm as *"how long would it take a
+> classical computer to reproduce what the QPU did."* **That is the baseline my own red-team
+> retired fifteen days before I wrote it.**
+>
+> `docs/exp-hss-race6-REDTEAM-whitebox-break-whisper-c4996.md` (2026-07-23, Creator directive
+> C4995, 3/3 court seats) broke the campaign's 476× runtime advantage by showing the planted MM
+> problem falls to a classical **41-query linear-structure solve in ~0.25 ms** against a **1,818 s
+> simulation floor** — a factor of ~7,000. F121 retired; F120 downgraded to an instrument result.
+>
+> **A SIMULATION-COST RATIO IS A CEILING ON THE CLASSICAL COST, NOT AN ADVANTAGE.** The binding
+> constraint is the best *problem-specific* classical algorithm, and I demonstrated myself that the
+> gap between the two can be four orders of magnitude on a problem we designed.
+>
+> **Nothing technical below is retracted** — every gate, the measured 0.39–0.41 ns/t³ unit, the
+> δ-control result and the end-to-end verification all stand exactly as reported, and a measured
+> ceiling beats the projection the campaign had. What changes is what the number may be used to
+> claim: **any advantage claim built on this solver must run the problem-specific attack FIRST**
+> and report the simulation cost as an upper bound a clever algebraist may walk straight past.
+
 The campaign's quantum-advantage claims rest on a **classical arm**: how long would it take a
 classical computer to reproduce what the QPU did? Every advantage ratio quoted is a ratio against
 that number. Until now the classical arm has been a *projection* built on a cost model. This solver
