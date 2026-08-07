@@ -112,3 +112,23 @@ ORACLE PRICED (C5027, Creator: "price the oracle properly")
   what it was built for.
   NEXT: simulate PS_ap hidden shift at small k with depolarising noise at the 4% level and
   ask whether the shot-axis decoder recovers the shift. Classical only, no QPU.
+
+LIVE CALIBRATION PULLED (C5027, after the noise sim)
+  6 backends, 2q gate errors, for the k=20 oracle at ~4,830 two-qubit gates:
+    ibm_boston      p25 1.09e-3  med 1.37e-3   64/352 edges <1e-3   F@p25 5.16e-3    388 shots
+    ibm_pittsburgh  p25 1.18e-3  med 1.56e-3   44/352              F@p25 3.34e-3    599
+    ibm_aachen      p25 1.15e-3  med 1.56e-3   36/352              F@p25 3.86e-3    518
+    ibm_kingston    p25 1.61e-3  med 2.03e-3    8/352              F@p25 4.17e-4  4,797
+    ibm_marrakesh   p25 2.42e-3  med 3.30e-3    0/352              F@p25 8.27e-6  241,811
+    ibm_fez         p25 2.37e-3  med 3.02e-3    0/352              F@p25 1.05e-5  189,820
+  BOTH MY ESTIMATES WERE WRONG IN OPPOSITE DIRECTIONS:
+    per-T-gate 1e-3  -> 4.0e-2   5-30x optimistic
+    per-2q 3e-3      -> 5.0e-7   4-5 orders pessimistic; 3e-3 is fez/marrakesh, the WORST
+                                 two of six, which I had called "realistic Heron"
+    measured boston  -> 5.2e-3   ~400 shots (race-6 used 4,096)
+  PLAUSIBLY RUNNABLE ON ibm_boston. Honest bracket p25-to-median: F 5.2e-3 to 1.3e-3,
+  shots 400 to 1,500.
+  NOT ESTABLISHED: p25 is distributional, not a routing result; ancilla count uncosted;
+  4,830 is my own optimistic Karatsuba figure; depth/T1/T2 unpriced.
+  NEXT GATE IS A TRANSPILE, NOT A THEORY QUESTION: build the k=20 oracle, transpile to
+  ibm_boston, read the ACTUAL 2q count, depth and routed edge errors. No QPU time.
