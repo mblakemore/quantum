@@ -192,11 +192,20 @@ function draw(key){
   [[0.25,"0.25"],[0.5,"1/2"],[0.75,"0.75"],[1,"1.0"]].forEach(g=>{
     el(viz,"line",{x1:gx-24,y1:gy(g[0]),x2:gx+24,y2:gy(g[0]),style:`stroke:${g[0]===0.5?"var(--amber)":"var(--edge)"};stroke-width:${g[0]===0.5?2:1};${g[0]===0.5?"stroke-dasharray:5 4":""}`});
     el(viz,"text",{x:gx-30,y:gy(g[0])+4,"text-anchor":"end",style:`fill:${g[0]===0.5?"var(--amber)":"var(--ink-3)"};font-family:var(--mono);font-size:10.5px`}).textContent=g[1];});
+  // These two amber annotations run right, out of this panel and across the NEXT one's bars,
+  // which are drawn later and painted over them: measured amber rgb(255,200,107) on the cyan
+  // bar rgb(98,230,255), 1.18:1 over 26% of the label. Same remedy as swap's reference caption
+  // — a backing plate AND last paint. The plate alone is not enough; document order is the
+  // load-bearing half, and I established that by measuring a plate-only attempt there.
+  const lateLabels = [];
   if(A.pred){ // ghost marker: the multiplicative prediction
     el(viz,"circle",{cx:gx,cy:gy(A.pred),r:9,style:"fill:none;stroke:var(--amber);stroke-width:2;stroke-dasharray:3 3"});
-    el(viz,"text",{x:gx+34,y:gy(A.pred)+4,style:"fill:var(--amber);font-family:var(--mono);font-size:10.5px"}).textContent="if layers multiplied: "+A.pred.toFixed(3);
+    const t1=el(viz,"text",{x:gx+34,y:gy(A.pred)+4,style:"fill:var(--amber);font-family:var(--mono);font-size:10.5px"});
+    t1.textContent="if layers multiplied: "+A.pred.toFixed(3);
     el(viz,"line",{x1:gx+16,y1:gy(A.pred),x2:gx+16,y2:gy(A.F),style:"stroke:var(--amber);stroke-width:2"});
-    el(viz,"text",{x:gx+34,y:(gy(A.pred)+gy(A.F))/2+16,style:"fill:var(--amber);font-family:var(--mono);font-size:10.5px;font-weight:700"}).textContent="the tax: −0.062 (3.4σ)";
+    const t2=el(viz,"text",{x:gx+34,y:(gy(A.pred)+gy(A.F))/2+16,style:"fill:var(--amber);font-family:var(--mono);font-size:10.5px;font-weight:700"});
+    t2.textContent="the tax: −0.062 (3.4σ)";
+    lateLabels.push(t1,t2);
   }
   el(viz,"circle",{cx:gx,cy:gy(A.F),r:11,style:`fill:${A.col};stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 6px ${A.col})`});
   el(viz,"text",{x:gx,y:gy(A.F)-18,"text-anchor":"middle",style:`fill:${A.col};font-family:var(--mono);font-size:15px;font-weight:700`}).textContent=A.F.toFixed(3);
@@ -215,6 +224,14 @@ function draw(key){
 // and this font-size is CSS px so it does NOT shrink with the chart); the "idle-window
 // fingerprint" reading is already stated in the MECHANISM receipt below.
 .textContent=key==="relaygate"?"ZZ survives, XX/YY bleed":"a Bell pair needs all three";
+  // Now that everything else is drawn: plate the annotations and move them to the end so they
+  // paint over the neighbouring panel's bars rather than under them.
+  lateLabels.forEach(t=>{
+    const bb=t.getBBox();
+    const plate=el(viz,"rect",{x:bb.x-3,y:bb.y-1,width:bb.width+6,height:bb.height+2,rx:3,
+                               style:"fill:var(--bg);opacity:.92"});
+    viz.appendChild(plate); viz.appendChild(t);
+  });
   const ttb=document.getElementById("ttbox");
   if(A.tt===null){
     ttb.innerHTML=`<div style="font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">link layer only</div>`+
