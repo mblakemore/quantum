@@ -615,3 +615,90 @@ def _production_path_selftest(verbose=True):
     rec("P3 ALT and NULL bind to the SAME ISA circuit", ga == gn and alt.depth() == nul.depth(),
         f"{ga} vs {gn} gates, depth {alt.depth()} vs {nul.depth()}")
     return npass, nfail
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# C1 PRODUCTION PATH — UNBOUND (Ember #6442: the Q-arm fix went on ONE arm)
+#
+# c1_round_circuits bound at construction exactly as q_circuit did. I fixed one arm and left its
+# twin, on the arm that DECIDES THE CARD. Fourth time tonight I repaired a defect in one location
+# and left the same defect in its sibling.
+#
+# THE C1 SHAPE DIFFERS FROM Q, and the difference is why "transpile once per rung" does not apply:
+# the public Clifford frame C is REDRAWN PER ROUND, so the circuit STRUCTURE changes per round.
+# Blindness does not require one ISA circuit for the whole flight — it requires that WITHIN A
+# ROUND, ALT and NULL share the same ISA circuit. So: transpile ONCE PER ROUND with the prep
+# UNBOUND, then bind per copy. C is public and touches nothing sealed.
+# ─────────────────────────────────────────────────────────────────────────────
+def c1_round_unbound(n, C):
+    """For a GIVEN public Clifford C: UNBOUND prep + frame + measure, plus the binding handle.
+    Transpile this ONCE per round; bind A (ALT) or a fresh A' (NULL) per copy afterwards."""
+    tmpl, diag, pp, po = swap_network_named(n, "C1")
+    qc = QuantumCircuit(n, n)
+    qc.compose(tmpl, range(n), inplace=True)          # UNBOUND — no A anywhere
+    qc.compose(C.to_circuit(), range(n), inplace=True)
+    qc.measure(range(n), range(n))
+    return qc, (tmpl, diag, pp, po)
+
+
+def c1_bindings(label, A, rng, handle):
+    """Per-copy values ONLY. ALT: the sealed A. NULL: a FRESH A' (preparation fence)."""
+    n = len(handle[1])
+    A_use = A if label == 1 else random_A(n, rng)
+    return bindings(A_use, handle[1], handle[2], handle[3])
+
+
+def c1_round_circuits(n, label, A, rng, copies_per_round=2):
+    """⛔ UNREACHABLE — binds at construction, same defect as the retired q_circuit (#6442)."""
+    raise RuntimeError(
+        "c1_round_circuits() LEAKS the sealed branch on the DECIDING arm — it binds parameters "
+        "before transpilation. Use c1_round_unbound(n, C) to get the per-round ISA circuit, "
+        "transpile it ONCE for that round, then apply c1_bindings() per copy."
+    )
+
+
+def _c1_production_selftest(verbose=True):
+    from qiskit.quantum_info import random_clifford
+    npass = nfail = 0
+
+    def rec(name, ok, detail=""):
+        nonlocal npass, nfail
+        npass += ok
+        nfail += (not ok)
+        if verbose:
+            print(f"    {'PASS' if ok else 'FAIL':>4}  {name:<54} {detail}")
+
+    n = 4
+    rng = np.random.default_rng(11)
+    C = random_clifford(n, seed=5)
+    circ, h = c1_round_unbound(n, C)
+    rec("X1 C1 production object is UNBOUND", circ.num_parameters == n + n * (n - 1) // 2,
+        f"{circ.num_parameters} free parameters")
+
+    t = transpile(circ, basis_gates=["cz", "rz", "sx", "x"], optimization_level=3)
+    counts = set()
+    for w in (0, 2, 4, 6):
+        A = [[0] * n for _ in range(n)]
+        placed = 0
+        for i in range(n):
+            for j in range(i, n):
+                if placed < w:
+                    A[i][j] = 1
+                    placed += 1
+        b = t.assign_parameters(c1_bindings(1, A, rng, h))
+        counts.add(sum(v for k, v in b.count_ops().items() if k in ("cz", "cx", "ecr")))
+    rec("X2 ISA count A-INDEPENDENT across weight(A)=0,2,4,6", len(counts) == 1, f"counts={sorted(counts)}")
+
+    alt = t.assign_parameters(c1_bindings(1, [[1] * n for _ in range(n)], rng, h))
+    nul = t.assign_parameters(c1_bindings(0, None, rng, h))
+    ga = sum(v for k, v in alt.count_ops().items() if k in ("cz", "cx", "ecr"))
+    gn = sum(v for k, v in nul.count_ops().items() if k in ("cz", "cx", "ecr"))
+    rec("X3 ALT and NULL share the round's ISA circuit", ga == gn and alt.depth() == nul.depth(),
+        f"{ga} vs {gn}, depth {alt.depth()} vs {nul.depth()}")
+
+    try:
+        c1_round_circuits(n, 1, None, rng)
+        rec("X4 the leaky C1 path is UNREACHABLE", False, "it did not raise")
+    except RuntimeError:
+        rec("X4 the leaky C1 path is UNREACHABLE", True, "raises, per the q_circuit precedent")
+    return npass, nfail
