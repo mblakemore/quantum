@@ -1,0 +1,54 @@
+{
+ "rungs": {
+  "8": {
+   "n": 8,
+   "lambda_provenance": {
+    "lambda": 0.0024356,
+    "epoch_utc": "read 2026-08-08T08:55:56Z; device-calibration 2026-08-07T03:19:40Z (age 29.6h \u2014 dual clocks per Ember's ratified fix)",
+    "register": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15
+    ],
+    "window_id": "ibm_marrakesh_2026-08-08"
+   },
+   "Q": {
+    "copies_to_criterion": null,
+    "rows": [
+     {
+      "budget": 154,
+      "correct": 25,
+      "trials": 40,
+      "accuracy": 0.625,
+      "ci": [
+       0.458,
+       0.7727
+      ]
+     }
+    ],
+    "noise_only_prediction": "RE-DERIVES FROM u_anchor AT GRADE TIME per calibration_rows_and_u_anchor ruling item (3) \u2014 frozen formula on label-free public rows; the single-rung descriptive report consumes no excess fit (N<3 refusal), so this is a reported comparator, not a decision input"
+   },
+   "C1": {
+    "copies_to_criterion": null,
+    "rows": [],
+    "noise_only_prediction": "N/A \u2014 C1 left hardware (c1_leaves_hardware_ruling); the comparator is the ideal simulated adversary, no flown C1 arm exists"
+   }
+  }
+ },
+ "units": "copies (2 per Bell pair; every arm bills in copies)",
+ "verdict": "UNGRADEABLE: some arm never reached criterion inside its pre-registered grid \u2014 report rows descriptively; NO headline; no grid extension permitted",
+ "reporting_constraint": "per claim-card convention: floor_status/floor_scale/measured_effect all present; ratios+excess only; raw-slope headlines FORBIDDEN"
+}
