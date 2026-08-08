@@ -860,3 +860,59 @@ def _layout_selftest(verbose=True):
     rec("L-cost routed count is at the closed form, no search", g <= closed * 1.35,
         f"{g} routed vs {closed} closed-form (<=35% overhead allowed)")
     return npass, nfail
+
+
+def ladder_layout(coupling_map, n, budget=400_000):
+    """TWO RAILS of length n with rail1[i] ADJACENT to rail2[i] — the Q arm's real shape.
+
+    THE DEFECT THIS FIXES (Ember #6539, and it is mine). The Q circuit has two structures:
+      * WITHIN each copy: the swap network, which wants a PATH (nearest-neighbour chain).
+      * ACROSS the copies: the transversal Bell measurement, which pairs wire i with wire n+i
+        and therefore wants a LADDER (i-th qubits of the two copies adjacent).
+    A Hamiltonian path over all 2n wires places wire i and wire n+i **n hops apart**, so every
+    one of the n Bell pairs routes across the whole line. Measured at n=4: 61 two-qubit gates
+    where the swap-network arithmetic predicts 28 — the missing ~33 are Bell routing.
+
+    **MY CLOSED-FORM COST (120/276/496 at n=8/12/16) COUNTED ONLY THE SWAP NETWORKS.** It never
+    included Bell routing, because on a ladder there IS none — each rung is one edge. The number
+    is right for the layout the construction assumes and wrong for the layout I shipped a finder
+    for. A LINE LAYOUT MAKES MY OWN COST TABLE OPTIMISTIC.
+
+    Returns the 2n-element initial_layout [rail1..., rail2...] matching the kit's wire order
+    (copy A on wires 0..n-1, copy B on n..2n-1), or None so the caller fails loudly.
+    """
+    adj = {}
+    for a, b in coupling_map.get_edges():
+        adj.setdefault(a, set()).add(b)
+        adj.setdefault(b, set()).add(a)
+
+    steps = [budget]
+
+    def extend(p, q, used):
+        if len(p) == n:
+            return list(p), list(q)
+        if steps[0] <= 0:
+            return None
+        steps[0] -= 1
+        # next rung: p_next adjacent to p[-1], q_next adjacent to q[-1], and to each other
+        for pn in sorted(adj.get(p[-1], ()) - used):
+            for qn in sorted((adj.get(q[-1], set()) & adj.get(pn, set())) - used - {pn}):
+                p.append(pn); q.append(qn); used |= {pn, qn}
+                got = extend(p, q, used)
+                if got:
+                    return got
+                p.pop(); q.pop(); used -= {pn, qn}
+        return None
+
+    import sys as _s
+    lim = _s.getrecursionlimit()
+    _s.setrecursionlimit(max(lim, n * 40 + 1000))
+    try:
+        for a, b in sorted(frozenset(map(frozenset, coupling_map.get_edges())), key=sorted):
+            a, b = sorted((a, b))
+            got = extend([a], [b], {a, b})
+            if got:
+                return got[0] + got[1]
+    finally:
+        _s.setrecursionlimit(lim)
+    return None
