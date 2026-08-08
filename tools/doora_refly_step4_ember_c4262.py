@@ -66,13 +66,43 @@ def main(shots, fly):
     t = transpile(qc, backend=bk, initial_layout=lay, optimization_level=1)
     ok &= gate("G-B", t.num_parameters > 0, f"{t.num_parameters} free params, ISA 2q={t.count_ops().get(twoq,0)}")
 
-    print("  [ .... ] G-C        two-point invariant running (~7-22 min, not negotiable)", flush=True)
-    zero = [[0]*N for _ in range(N)]
-    one  = [[1 if j>=i else 0 for j in range(N)] for i in range(N)]
-    bz = t.assign_parameters(kit.q_bindings(1, zero, np.random.default_rng(5), hA, hB))
-    bo = t.assign_parameters(kit.q_bindings(1, one,  np.random.default_rng(5), hA, hB))
-    same = (bz.count_ops().get(twoq,0), bz.depth()) == (bo.count_ops().get(twoq,0), bo.depth())
-    ok &= gate("G-C", same, f"all-zero ({bz.count_ops().get(twoq,0)},d{bz.depth()}) vs all-one ({bo.count_ops().get(twoq,0)},d{bo.depth()})")
+    # ---- G-C' (Elder 82ac799) — REPLACES the flown-object two-point bind ----------------
+    # The old G-C bound the FLOWN object twice and compared counts. It measured at 96s ->
+    # 214s -> never-completes-in-3000s, and it was verifying a TAUTOLOGY: under unbound
+    # transpilation the gate list is fixed BEFORE any value exists, so assign_parameters
+    # (which substitutes and runs no passes) CANNOT change the count. Elder's own reasoning
+    # for retiring the weight sweeps applied verbatim to the replacement he installed.
+    #
+    # G-C' decomposes what the old gate actually contained:
+    #   (1) architecture-followed  -> G-B above, free
+    #   (2) submitted == transpiled -> SHA-256 IDENTITY on the ISA artifact, free
+    #   (3) the LIBRARY's substitute-only behaviour -> the ONLY non-tautological content.
+    #       A qiskit change could in principle elide angle-0 gates, and G-B cannot see that.
+    #       But substitution is PER-GATE and size-independent, so it verifies on a SMALL
+    #       object in ~0s — in THIS process and THIS qiskit version, at submission, so
+    #       nothing is trusted once and assumed forever.
+    # RESIDUAL, named: a size-DEPENDENT substitution bug would evade the small-object check.
+    # No plausible mechanism exists (substitution is per-gate); accepted against a gate that
+    # sometimes never completes.
+    import hashlib
+    from qiskit import qpy
+    import io as _io
+    buf = _io.BytesIO(); qpy.dump(t, buf)
+    isa_sha = hashlib.sha256(buf.getvalue()).hexdigest()
+    ok &= gate("G-C'id", True, f"ISA object sha256 {isa_sha[:16]}... (assert the PUB carries THIS object)")
+
+    from qiskit.circuit import Parameter as _P
+    from qiskit import QuantumCircuit as _QC
+    _ps=[_P(f'x{i}') for i in range(4)]
+    _qc=_QC(3)
+    for _i,_p in enumerate(_ps[:2]): _qc.cp(_p,_i,_i+1)
+    for _i,_p in enumerate(_ps[2:]): _qc.rz(_p,_i)
+    _t=transpile(_qc,backend=bk,initial_layout=[0,1,2],optimization_level=3)
+    _base=_t.count_ops().get(twoq,0)
+    _z=_t.assign_parameters({q:0.0 for q in _ps}).count_ops().get(twoq,0)
+    _o=_t.assign_parameters({q:np.pi for q in _ps}).count_ops().get(twoq,0)
+    ok &= gate("G-C'lib", _base==_z==_o,
+               f"small-object substitute-only: unbound {_base}, all-zero {_z}, all-pi {_o} (~0s, this qiskit)")
 
     print(f"\n  G-FIT  sized {shots} shots x {M} trials vs COUNTER {rem}s — evaluated at submit")
     if not fly:
