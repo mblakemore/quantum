@@ -65,11 +65,11 @@
     "register": "TO_FILL_AT_SUBMISSION",
     "window_id": "TO_FILL_AT_SUBMISSION"
    },
-   "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE (epoch-INDEPENDENT: the once-per-rung joint ISA 2q count of the unbound template — Whisper, fillable now)",
+   "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE — MEASURED per rung on the real coupling map with the line layout actually supplied (epoch-independent geometry). No closed form exists for a buildable layout; deriving it was the error (#6541).",
    "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)",
-   "layout_spec": "BINDING (Ember #6539): Q arm uses a TWO-RAIL LADDER layout — copy-1 wire i PHYSICALLY ADJACENT to copy-2 wire i (Bell pairs at zero routing), each rail a Hamiltonian path for its own swap network. A line layout is WRONG-SHAPED (Bell pairs land n hops apart; measured 61 vs closed-form 28 at n=4). template_joint_isa_2q must be produced UNDER this layout and carry it as provenance.",
-   "template_joint_isa_2q_expected": 120,
-   "template_joint_isa_2q_expected_note": "closed form 2n(n-1) + n under the ladder layout — the artifact ISA count must EQUAL this exactly; any excess is routing, meaning the layout was not the pinned one: REFUSE THE FILL, fix the layout, retranspile. The 120/276/496 figures quoted all night were always THIS closed form — the layout assumption is now explicit instead of implicit."
+   "layout_spec": "SUPERSEDED->LINE (Whisper #6541: the two-rail ladder is UNCONSTRUCTIBLE on heavy-hex — ZERO 4-cycles in the coupling graph, by design; ladder_layout kept in-kit as a documented impossibility). Q arm flies the LINE layout supplied explicitly via line_layout(cm, 2n) (backtracking, fails loudly). Bell pairs therefore route; the cost is NOT closed-form and MUST BE MEASURED.",
+   "template_joint_isa_2q_expected_note": "ONE-SIDED sanity check only: the measured count must be >= 120 (the unconstructible-ladder bound = swap networks + n Bell edges with zero routing — any measured count BELOW it is impossible and REFUSES). The former exact-equality requirement (103404e) pinned an impossible layout and is SUPERSEDED — it was fail-safe (refused everything) but unsatisfiable. Direction of the derivation error was FLATTERING (understated cost -> over-predicted u -> optimistic tau_Q); it never froze because the slot was empty — fill discipline 3-for-3.",
+   "template_joint_isa_2q_lower_bound": 120
   },
   {
    "n": 12,
@@ -102,11 +102,11 @@
     "register": "TO_FILL_AT_SUBMISSION",
     "window_id": "TO_FILL_AT_SUBMISSION"
    },
-   "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE (epoch-INDEPENDENT: the once-per-rung joint ISA 2q count of the unbound template — Whisper, fillable now)",
+   "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE — MEASURED per rung on the real coupling map with the line layout actually supplied (epoch-independent geometry). No closed form exists for a buildable layout; deriving it was the error (#6541).",
    "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)",
-   "layout_spec": "BINDING (Ember #6539): Q arm uses a TWO-RAIL LADDER layout — copy-1 wire i PHYSICALLY ADJACENT to copy-2 wire i (Bell pairs at zero routing), each rail a Hamiltonian path for its own swap network. A line layout is WRONG-SHAPED (Bell pairs land n hops apart; measured 61 vs closed-form 28 at n=4). template_joint_isa_2q must be produced UNDER this layout and carry it as provenance.",
-   "template_joint_isa_2q_expected": 276,
-   "template_joint_isa_2q_expected_note": "closed form 2n(n-1) + n under the ladder layout — the artifact ISA count must EQUAL this exactly; any excess is routing, meaning the layout was not the pinned one: REFUSE THE FILL, fix the layout, retranspile. The 120/276/496 figures quoted all night were always THIS closed form — the layout assumption is now explicit instead of implicit."
+   "layout_spec": "SUPERSEDED->LINE (Whisper #6541: the two-rail ladder is UNCONSTRUCTIBLE on heavy-hex — ZERO 4-cycles in the coupling graph, by design; ladder_layout kept in-kit as a documented impossibility). Q arm flies the LINE layout supplied explicitly via line_layout(cm, 2n) (backtracking, fails loudly). Bell pairs therefore route; the cost is NOT closed-form and MUST BE MEASURED.",
+   "template_joint_isa_2q_expected_note": "ONE-SIDED sanity check only: the measured count must be >= 276 (the unconstructible-ladder bound = swap networks + n Bell edges with zero routing — any measured count BELOW it is impossible and REFUSES). The former exact-equality requirement (103404e) pinned an impossible layout and is SUPERSEDED — it was fail-safe (refused everything) but unsatisfiable. Direction of the derivation error was FLATTERING (understated cost -> over-predicted u -> optimistic tau_Q); it never froze because the slot was empty — fill discipline 3-for-3.",
+   "template_joint_isa_2q_lower_bound": 276
   },
   {
    "n": 16,
@@ -138,11 +138,11 @@
     "register": "TO_FILL_AT_SUBMISSION",
     "window_id": "TO_FILL_AT_SUBMISSION"
    },
-   "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE (epoch-INDEPENDENT: the once-per-rung joint ISA 2q count of the unbound template — Whisper, fillable now)",
+   "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE — MEASURED per rung on the real coupling map with the line layout actually supplied (epoch-independent geometry). No closed form exists for a buildable layout; deriving it was the error (#6541).",
    "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)",
-   "layout_spec": "BINDING (Ember #6539): Q arm uses a TWO-RAIL LADDER layout — copy-1 wire i PHYSICALLY ADJACENT to copy-2 wire i (Bell pairs at zero routing), each rail a Hamiltonian path for its own swap network. A line layout is WRONG-SHAPED (Bell pairs land n hops apart; measured 61 vs closed-form 28 at n=4). template_joint_isa_2q must be produced UNDER this layout and carry it as provenance.",
-   "template_joint_isa_2q_expected": 496,
-   "template_joint_isa_2q_expected_note": "closed form 2n(n-1) + n under the ladder layout — the artifact ISA count must EQUAL this exactly; any excess is routing, meaning the layout was not the pinned one: REFUSE THE FILL, fix the layout, retranspile. The 120/276/496 figures quoted all night were always THIS closed form — the layout assumption is now explicit instead of implicit."
+   "layout_spec": "SUPERSEDED->LINE (Whisper #6541: the two-rail ladder is UNCONSTRUCTIBLE on heavy-hex — ZERO 4-cycles in the coupling graph, by design; ladder_layout kept in-kit as a documented impossibility). Q arm flies the LINE layout supplied explicitly via line_layout(cm, 2n) (backtracking, fails loudly). Bell pairs therefore route; the cost is NOT closed-form and MUST BE MEASURED.",
+   "template_joint_isa_2q_expected_note": "ONE-SIDED sanity check only: the measured count must be >= 496 (the unconstructible-ladder bound = swap networks + n Bell edges with zero routing — any measured count BELOW it is impossible and REFUSES). The former exact-equality requirement (103404e) pinned an impossible layout and is SUPERSEDED — it was fail-safe (refused everything) but unsatisfiable. Direction of the derivation error was FLATTERING (understated cost -> over-predicted u -> optimistic tau_Q); it never froze because the slot was empty — fill discipline 3-for-3.",
+   "template_joint_isa_2q_lower_bound": 496
   }
  ],
  "interpretation_bindings": [
