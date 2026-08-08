@@ -362,14 +362,48 @@ def selftest():
     print(f"selftest: {n_ok}/{len(ok)}")
     return 0 if n_ok == len(ok) else 2
 
+def decode_mode(flight_path, prereg_path, out_path):
+    """flight.json + prereg.json → decisions.json (PRE-UNSEAL: consumes outcome records
+    only, never labels; parameters from prereg, never inferred). The output goes through
+    `commit` before Ember unseals — the ordering that makes the test blind."""
+    flight = json.load(open(flight_path))
+    prereg = json.load(open(prereg_path))
+    layout = prereg.get("bit_layout")
+    if layout != "halves":
+        print(f"REFUSING: prereg bit_layout must be the kit-fixture-pinned 'halves', got {layout!r}")
+        return 2
+    decisions = {"contract": "v3", "rungs": {}}
+    for rung in prereg["rungs"]:
+        n = rung["n"]
+        fr = flight.get(str(n))
+        if fr is None:
+            print(f"REFUSING: flight.json has no rung {n}")
+            return 2
+        r_out = {"window_id": fr.get("window_id"), "Q": [], "C1": []}
+        for trial_rows in fr["Q"]:
+            r_out["Q"].append(decode_q_trial(trial_rows, n, layout,
+                                             rung["Q_pair_grid"], rung["tau_Q"]))
+        for trial_rounds in fr["C1"]:
+            r_out["C1"].append(decode_c1_trial(trial_rounds, n,
+                                               rung["C1_round_grid"], rung["tau_C1"]))
+        decisions["rungs"][str(n)] = r_out
+    with open(out_path, "w") as f:
+        json.dump(decisions, f, indent=1)
+    print(f"decisions written: {out_path}")
+    print(f"decisions commitment sha256: {sha256_file(out_path)}  (post this BEFORE unsealing)")
+    return 0
+
 def main():
-    if len(sys.argv) < 2 or sys.argv[1] not in ("selftest", "commit", "grade"):
+    if len(sys.argv) < 2 or sys.argv[1] not in ("selftest", "commit", "grade", "decode"):
         print(__doc__); return 2
     if sys.argv[1] == "selftest":
         return selftest()
     if selftest() != 0:
         print("REFUSING: calibration opener failed — a grader that cannot reproduce known answers may not grade unknowns.")
         return 2
+    if sys.argv[1] == "decode":
+        return decode_mode(sys.argv[2], sys.argv[3], sys.argv[4] if len(sys.argv) > 4
+                           else "doora_decisions.json")
     if sys.argv[1] == "commit":
         path = sys.argv[2]
         print(f"decisions commitment sha256: {sha256_file(path)}  (post this BEFORE unsealing)")
