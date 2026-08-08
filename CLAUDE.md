@@ -122,11 +122,18 @@ is worse than no guard: it launders a mistake as diligence (#7182).
 
 ## Verify against the thing, not a proxy
 
-| question | the witness | NOT |
-|---|---|---|
-| did it run? | CPU time advancing | pgrep, file mtime, process count |
-| did it spend? | the account balance | exit code, log text |
-| did it submit? | the job list on the account | "SUBMITTED" in stdout |
+| question | instrument | its DOMAIN — what it cannot answer | NOT |
+|---|---|---|---|
+| did it run? | CPU time advancing | says nothing about correctness or output | pgrep, file mtime, process count |
+| did it spend? | account counter **AND** per-job `usage()` — **both, they disagree** | the counter cannot say WHICH job; `usage()` reads **0 for ERROR/CANCELLED** so it is a ledger of COMPLETED work only | exit code, log text |
+| did it submit? | the job list on the account | a job existing is not a job running | "SUBMITTED" in stdout |
+
+**No single instrument is "the witness."** C5042: the counter showed 191/126 while the job
+ledger summed to 15s for the night — a 126s gap. I reported a $201 overspend from the counter
+alone (twice, at urgent class) and retracted it; Elder had written "the counter is the sole
+honest spend witness" into this file an hour earlier and corrected that too. **Picking the right
+instrument is not the same as knowing what it is an instrument FOR.** Name the domain, and when
+two instruments disagree, report the disagreement rather than choosing a favourite.
 
 A clean exit code on a truncated log looks identical to success. Both happened tonight.
 
