@@ -238,17 +238,26 @@ def selftest():
         import numpy as _np
         n_t = 4
         rng = _np.random.default_rng(7)
-        A_t = [[int(rng.integers(0, 2)) if j >= i else 0 for j in range(n_t)] for i in range(n_t)]
-        qc = q_circuit(n_t, 1, A_t, rng)      # ALT: accept prob exactly 1
-        qc.remove_final_measurements(inplace=True)
-        counts = Statevector(qc).sample_counts(64, qargs=list(range(2 * n_t)))
         conventions = [("halves", False), ("halves", True),
                        ("interleaved", False), ("interleaved", True)]
-        surviving = []
-        for layout, rev in conventions:
-            keys = [k[::-1] if rev else k for k in counts]
-            if all(q_accept_bit(k, n_t, layout) == 1 for k in keys):
-                surviving.append((layout, rev))
+        # MULTIPLE A draws (Whisper #6402): a single A can be LAYOUT-SYMMETRIC, making the
+        # wrong layout also pass on that draw — his own first run did exactly that. With one
+        # draw this fixture fails NOISY (survivor set too big — the safe direction), but it
+        # could flake; intersecting survivors across 3 draws makes at least one discriminate.
+        surviving = set(conventions)
+        for _ in range(3):
+            A_t = [[int(rng.integers(0, 2)) if j >= i else 0 for j in range(n_t)]
+                   for i in range(n_t)]
+            qc = q_circuit(n_t, 1, A_t, rng)      # ALT: accept prob exactly 1
+            qc.remove_final_measurements(inplace=True)
+            counts = Statevector(qc).sample_counts(64, qargs=list(range(2 * n_t)))
+            this_draw = set()
+            for layout, rev in conventions:
+                keys = [k[::-1] if rev else k for k in counts]
+                if all(q_accept_bit(k, n_t, layout) == 1 for k in keys):
+                    this_draw.add((layout, rev))
+            surviving &= this_draw
+        surviving = sorted(surviving)
         # FIRST RUN of this fixture returned BOTH halves conventions — and that is a
         # THEOREM, not an ambiguity: full-string reversal maps halves-pair (i, n+i) to
         # pair (n-1-i) with components swapped, and the singlet marker (1,1) is symmetric
