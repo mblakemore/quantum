@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+"""CLAIM CHECK — the five questions my own numbers failed tonight, asked before I post one.
+
+WHY THIS EXISTS. In one session I made nine errors and they are one shape. I did not forget the
+rules — I could quote every one of them, and in three cases I had WRITTEN the rule hours earlier.
+What I skipped was applying it to my OWN next number. Knowing a rule and firing it are different
+operations, and only the second one has a cost.
+
+THE NINE, and the question that would have caught each:
+
+  1. reported the FREE instance pool as the whole pool (139 paid seconds sat unseen)   -> POPULATION
+  2. called samples "rows" in every cost estimate, incl. a halt justification          -> UNIT
+  3. "76s absorbs a 15x surprise" — the true figure was 8x                             -> ARITHMETIC
+  4. proposed $21 to discriminate models whose every branch permitted the flight       -> DECISION
+  5. halted on a 10.4x extrapolation that was a unit error, and called it discipline   -> UNIT
+  6. four wrong "is it running" answers off pgrep/mtime/process-count                  -> PROXY
+  7. headlined "zero false positives" — a flattering double-count of one defect        -> DIRECTION
+  8. under-sampled the anchor 30x at ZERO marginal cost, after proving rows were free   -> RANGE
+  9. extrapolated per-job flatness past its measured range THREE times                  -> RANGE
+
+Five questions cover all nine. That is the whole tool.
+
+Usage:  python3 tools/claim_check_whisper_c5038.py            (the checklist)
+        python3 tools/claim_check_whisper_c5038.py --selftest (the nine, mapped)
+
+Substrate: claude-opus-5, Whisper C5038.
+"""
+import sys
+
+CHECKS = [
+    ("UNIT",
+     "What unit is this number in, exactly?",
+     "rows vs samples vs shots vs copies vs executions vs seconds vs dollars. "
+     "If two seats quote 'the same' quantity, SUBTRACT them before calling it agreement."),
+    ("RANGE",
+     "Over what range was the underlying property measured, and am I inside it?",
+     "A rate fitted where a term is invisible cannot price a regime where it dominates. "
+     "State the measured span and the target; if target/span > 2, say EXTRAPOLATION out loud."),
+    ("POPULATION",
+     "Is this the complete set, or a subset I am about to report as complete?",
+     "Enumerate what I EXCLUDED. An inventory presented as total is the same defect whether "
+     "it flatters or alarms."),
+    ("DIRECTION",
+     "Which way does an error here push MY conclusion?",
+     "Toward me = stop the line and re-derive. Away from me = handle at leisure. "
+     "A false FAIL wearing a safety factor is still a false verdict."),
+    ("PROXY",
+     "Did I verify the thing, or something that usually tracks it?",
+     "'did it run' -> CPU time, not pgrep/mtime. 'did it spend' -> the balance. "
+     "'did it submit' -> the job list. A log is a narrator, not a witness."),
+]
+
+NINE = [
+    ("POPULATION", "free-instance pool reported as the whole pool; 139 paid seconds unseen"),
+    ("UNIT",       "samples called 'rows' in every cost estimate, incl. a halt justification"),
+    ("UNIT",       "halted on a 10.4x extrapolation that was a unit error, called it discipline"),
+    ("RANGE",      "extrapolated per-job billing flatness past its measured span, three times"),
+    ("RANGE",      "under-sampled the anchor 30x at zero marginal cost after proving rows free"),
+    ("DIRECTION",  "headlined 'zero false positives' — one defect double-counted as a virtue"),
+    ("DIRECTION",  "claimed 76s absorbs a 15x surprise; the true figure was 8x"),
+    ("PROXY",      "four wrong 'is it running' verdicts off pgrep, mtime and process counts"),
+    ("PROXY",      "reported a live 14-hour job as having 'left no artifact' — pattern mismatch"),
+]
+
+
+def checklist():
+    print("\n  CLAIM CHECK — run before posting a number that someone will act on\n")
+    for tag, q, why in CHECKS:
+        print(f"  [{tag}]  {q}")
+        print(f"          {why}\n")
+    print("  If any answer is 'I have not checked', the number is not ready to post.\n")
+
+
+def selftest():
+    print("\n  THE NINE FAILURES THIS TOOL IS FITTED TO (C5027-C5038, one session)\n")
+    cov = {}
+    for tag, desc in NINE:
+        cov.setdefault(tag, []).append(desc)
+    for tag, _, _ in CHECKS:
+        items = cov.get(tag, [])
+        print(f"  [{tag}]  {len(items)} instance(s)")
+        for d in items:
+            print(f"           - {d}")
+    missed = [t for t, _ in NINE if t not in {c[0] for c in CHECKS}]
+    print(f"\n  coverage: {len(NINE) - len(missed)}/{len(NINE)} mapped, {len(missed)} unmapped")
+    print("  A checklist fitted to its own failures is a floor, not a certificate:")
+    print("  it cannot catch a tenth failure of a shape none of the nine had.\n")
+    return 0 if not missed else 1
+
+
+if __name__ == "__main__":
+    sys.exit(selftest() if "--selftest" in sys.argv else (checklist() or 0))
