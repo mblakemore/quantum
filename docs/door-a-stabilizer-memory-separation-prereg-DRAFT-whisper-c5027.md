@@ -240,6 +240,30 @@ cap is dropped and reported.
 
 ---
 
+## 1b. ❄️ FROZEN INPUTS — τ_C1 (Elder freeze ruling, C6593, on Creator's relayed GO verified
+against the artifact `results/doora_tau_c1_freeze_whisper_c5027.json`, R=1000 per rung,
+stabilizer-sampling instrument per the #6472 option-(d) ruling; two-instrument agreement with
+the statevector path confirmed at n=8, and the n=12 wobble RESOLVED as small-R noise — R=1000
+gives p_ALT(12)=0.441 vs the R=40 statevector's 0.300)
+
+| n | p_ALT (±se) | p_NULL (±se) | gap | **τ_C1 (FROZEN)** | rounds | copies/round | copies/pt |
+|---|---|---|---|---|---|---|---|
+| 8 | 0.415 ±0.016 | **0.996 ±0.002** | 0.581 | **0.7055** | 5 | 32 (=4n) | 160 |
+| 12 | 0.441 ±0.016 | 1.000 (<0.001) | 0.559 | **0.7205** | 5 | 48 | 240 |
+| 16 | 0.420 ±0.016 | 1.000 (<0.001) | 0.580 | **0.7100** | 4 | 64 | 256 |
+
+- **τ_C1 is NOISELESS GEOMETRY and therefore epoch-independent — frozen NOW.** τ_Q is NOT:
+  it depends on delivered purity u_est(λ_epoch), so the prereg freezes the τ_Q **RULE**
+  (gap midpoint at the measured-region epoch λ) and its NUMERIC fills at submission inside
+  the λ-provenance flow, before any flight, never from flight data.
+- **Ceiling caution (per #6447), binding on interpretation**: these are SIM distributions —
+  hardware noise pushes ALT outcomes toward uniform, RAISING p_ALT toward p_NULL at depth.
+  The sim gap is a CEILING on the flown gap. The excess machinery prices the drift; the
+  headline may not quote the sim gap as a flown property.
+- p_NULL at n=8 is 0.996, not 1.000 — the honest denominator the R=1000 run existed to buy.
+
+---
+
 ## 2. Arms — every escape hatch flown as an arm (the F121-axis table)
 
 | arm | access | fence |
