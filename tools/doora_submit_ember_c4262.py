@@ -82,3 +82,31 @@ if __name__ == "__main__":
         sys.exit(0)
     sys.exit("\n  REFUSE: kit not final (n=16 tau_C1 outstanding) and gates 3-5 unrun. "
              "This script will not submit until the court calls the kit complete.")
+
+
+def two_point_invariant(transpiled, binder_zero, binder_one, twoq):
+    """ELDER'S RULING a61ce9e — replaces the per-rung weight sweeps as the blocking gate.
+
+    Runs AT SUBMISSION, on the ACTUAL FLOWN ISA OBJECT, per rung:
+      (i)  the transpiled object must still carry FREE PARAMETERS — proof it was transpiled
+           UNBOUND. A bound-then-transpiled object has none, and that is the ordering whose
+           breakage produced the readout (weight(A) -> 4..44 two-qubit gates at n=4).
+      (ii) bind ALL-ZERO and ALL-ONE and assert EXACT equality of count AND depth. All-zero is
+           the decisive point: it is the binding that DELETED ITSELF under the broken ordering.
+
+    Why two points suffice where a sweep did not: assign_parameters SUBSTITUTES and runs no
+    passes, so the count is fixed at transpile time for EVERY binding. The sweep was confirming
+    a size-independent structural property at rising cost. This asserts the same property where
+    it can actually fail — on the production path, at the epoch, on the object that flies.
+
+    A rung failing this is a fly-blocker exactly as the sweep would have been.
+    """
+    if transpiled.num_parameters == 0:
+        return False, "NO FREE PARAMETERS — object was transpiled AFTER binding (broken ordering)"
+    z = transpiled.assign_parameters(binder_zero)
+    o = transpiled.assign_parameters(binder_one)
+    cz, co = z.count_ops().get(twoq, 0), o.count_ops().get(twoq, 0)
+    dz, do = z.depth(), o.depth()
+    if cz != co or dz != do:
+        return False, f"WEIGHT-DEPENDENT: all-zero ({cz} 2q, depth {dz}) vs all-one ({co} 2q, depth {do})"
+    return True, f"invariant holds: {cz} 2q, depth {dz}, identical at both extremes"
