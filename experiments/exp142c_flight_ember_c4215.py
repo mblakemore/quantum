@@ -142,7 +142,21 @@ def main():
         print(f"  [PASS] G-CRN  ...{_u['instance_id'][-24:]}  remaining "
               f"{_u['usage_remaining_seconds']}s  flagged=False", flush=True)
         backend = svc.backend(args.backend)
-        print(f"  [BACKEND] {backend.name} (explicit: --backend, default ibm_fez)", flush=True)
+        # ── C4262 C2-STYLE BACKEND ASSERT ────────────────────────────────────────────
+        # The rule (assert the device, never accept a script default) is right; my first
+        # objection to this default was WRONG. All twelve exp142 manifests — b_n4/n6/n8,
+        # c_n4/n6/n8, p1_ceiling n12-n15, p1_day_effect — are ibm_fez. That is the campaign's
+        # declared venue, and flying n=8 on ibm_marrakesh is what would have broken
+        # comparability with exp142's own prior arms. "Every number tonight is marrakesh" was
+        # true of DOOR (a); the comparison set for exp142 is exp142.
+        # (The arms are also co-flown in one submission, so the classical baseline and the
+        # quantum arm cannot drift across machines regardless.)
+        EXPECTED_BACKEND = "ibm_fez"
+        if backend.name != EXPECTED_BACKEND:
+            sys.exit(f"REFUSE G-BACKEND: resolved {backend.name}, exp142's campaign venue is "
+                     f"{EXPECTED_BACKEND} (all 12 prior manifests). Pass --backend "
+                     f"{EXPECTED_BACKEND} or amend this constant deliberately.")
+        print(f"  [PASS] G-BACKEND  {backend.name} == campaign venue", flush=True)
         # measured q_n from data-qubit readout on the chosen layout -> C
         # (layout: first 2n-1 low-readout qubits; conv uses data 0..n-1)
         tgt = backend.target
