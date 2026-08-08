@@ -786,20 +786,43 @@ def line_layout(coupling_map, n, avoid=()):
         adj.setdefault(a, set()).add(b)
         adj.setdefault(b, set()).add(a)
 
-    best = None
-    for start in sorted(adj):                      # deterministic: sorted, not arbitrary
-        path, seen = [start], {start}
-        while len(path) < n:
-            # greedy on lowest degree among unvisited — keeps the walk out of dead ends
-            cands = [q for q in adj.get(path[-1], ()) if q not in seen]
-            if not cands:
-                break
-            path.append(min(cands, key=lambda q: len(adj[q] - seen)))
-            seen.add(path[-1])
+    # BACKTRACKING, not greedy (Ember #6532). A greedy walk with a Warnsdorff heuristic
+    # DEAD-ENDS on heavy-hex at 32 qubits — it steps into a region with no unvisited
+    # neighbours and cannot undo the step that trapped it. Both my helper and hers failed at
+    # exactly the n=16 Q arm (2n = 32) while a backtracking search finds 32 and 40 in seconds.
+    # The heuristic is KEPT as the move ORDER (it makes the search fast); what is added is the
+    # ability to take the move back.
+    budget = [400_000]
+
+    def dfs(path, seen):
         if len(path) == n:
-            best = path
-            break
-    return best
+            return list(path)
+        if budget[0] <= 0:
+            return None
+        budget[0] -= 1
+        nxt = sorted((q for q in adj.get(path[-1], ()) if q not in seen),
+                     key=lambda q: (len(adj[q] - seen), q))     # Warnsdorff order, deterministic
+        for q in nxt:
+            path.append(q)
+            seen.add(q)
+            got = dfs(path, seen)
+            if got:
+                return got
+            path.pop()
+            seen.discard(q)
+        return None
+
+    import sys as _s
+    lim = _s.getrecursionlimit()
+    _s.setrecursionlimit(max(lim, n * 40 + 1000))
+    try:
+        for start in sorted(adj):                  # deterministic: sorted, not arbitrary
+            got = dfs([start], {start})
+            if got:
+                return got
+    finally:
+        _s.setrecursionlimit(lim)
+    return None
 
 
 def _layout_selftest(verbose=True):
