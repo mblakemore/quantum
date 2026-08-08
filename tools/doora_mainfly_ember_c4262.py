@@ -152,9 +152,19 @@ def main(fly):
         "contract": "v2_raw_bitstrings; grader reads counts from job_id",
     }
     os.makedirs("results", exist_ok=True)
-    with open("results/doora_mainfly_n8_ember_c4262.json", "w") as f:
+    # ── C4262: RESULTS ARTIFACTS ARE APPEND-ONLY UNTIL SUCCESS (Elder, shared file) ──────
+    # This wrote the CANONICAL manifest here, at submission, before knowing whether the job
+    # completes — the exact defect that let a void exp142 flight destroy the pointer to a
+    # COMPLETED 07-24 arm tonight. My own graded 29/40 manifest sat under the same hazard: one
+    # failed re-fly would have overwritten it.
+    #
+    # Two-stage instead. The RUN-SCOPED file is keyed by job_id so it can never collide or
+    # clobber, and it is written immediately so a process death is still recoverable. The
+    # CANONICAL pointer is written ONLY after the job reports DONE, below.
+    run_path = f"results/doora_mainfly_n8_{jid}.json"
+    with open(run_path, "w") as f:
         json.dump(meta, f, indent=2)
-    print("  manifest -> results/doora_mainfly_n8_ember_c4262.json (no labels, no A)")
+    print(f"  run manifest -> {run_path} (no labels, no A; canonical written only on DONE)")
 
     import time
     for _ in range(60):
@@ -164,6 +174,10 @@ def main(fly):
     st = str(job.status())
     print(f"  status {st}")
     if st == "DONE":
+        # canonical pointer updated ONLY now that the run verifiably succeeded
+        with open("results/doora_mainfly_n8_ember_c4262.json", "w") as f:
+            json.dump(meta, f, indent=2)
+        print("  canonical -> results/doora_mainfly_n8_ember_c4262.json (run DONE)")
         used = job.usage()
         after = svc.usage()
         print(f"  BILLED {used}s   (estimate was {EST_S}s)")
