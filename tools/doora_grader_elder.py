@@ -157,6 +157,55 @@ def decode_q_trial(raw_rows, n, layout, pair_grid, tau):
         out[str(2 * k)] = "ALT" if (sum(bits[:k]) / k) >= tau else "NULL"
     return out
 
+# ── C1-arm DECODER: the HH25 statistic (contract v3, #6410 ruling) ─────────────────────
+# The post-processing lives HERE and ONLY here (the parity-rule precedent): per round
+# (one public random Clifford frame C, same C within the round), outcomes pair up into
+# COMPUTATIONAL DIFFERENCE SAMPLES a⊕b ∈ F₂ⁿ (consecutive disjoint pairs — each difference
+# consumes 2 fresh copies, per the paper's accounting); the round's statistic is whether
+# the differences SPAN F₂ⁿ. Stabilizer states (our ALT) confine differences to a proper
+# subspace more often than MM (our NULL, uniform outcomes → spans whp) — so the per-trial
+# decision is ALT iff the spanning FREQUENCY across rounds ≤ frozen τ_C1(n) from prereg.
+def f2_rank(vectors):
+    """Rank over F₂ of int bitmask vectors, by leading-bit Gaussian elimination."""
+    basis = {}
+    r = 0
+    for v in vectors:
+        x = v
+        while x:
+            h = x.bit_length() - 1
+            if h in basis:
+                x ^= basis[h]
+            else:
+                basis[h] = x
+                r += 1
+                break
+    return r
+
+def c1_round_differences(outcomes, n):
+    """outcomes: list of n-bit strings in QUBIT ORDER (kit emits qubit order, no reversal
+    convention — #6407). Consecutive disjoint pairs → difference bitmasks."""
+    ints = []
+    for o in outcomes:
+        if len(o) != n or any(c not in "01" for c in o):
+            raise ValueError(f"C1 outcome must be an {n}-bit string, got {o!r}")
+        ints.append(int(o, 2))
+    return [ints[2 * i] ^ ints[2 * i + 1] for i in range(len(ints) // 2)]
+
+def c1_round_spans(outcomes, n):
+    """True iff the round's difference samples span F₂ⁿ."""
+    return f2_rank(c1_round_differences(outcomes, n)) == n
+
+def decode_c1_trial(rounds, n, round_grid, tau_c1):
+    """rounds: list of {"outcomes": [n-bit strings]} in flown order. Decisions at nested
+    ROUND-prefix budgets: ALT iff spanning frequency over the first r rounds <= tau_c1."""
+    spans = [1 if c1_round_spans(rd["outcomes"], n) else 0 for rd in rounds]
+    out = {}
+    for r in round_grid:
+        if r > len(spans):
+            break
+        out[str(r)] = "ALT" if (sum(spans[:r]) / r) <= tau_c1 else "NULL"
+    return out
+
 def sha256_file(path):
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -271,6 +320,26 @@ def selftest():
                    sorted(surviving) == [("halves", False), ("halves", True)]))
     except ImportError as e:
         ok.append((f"cross-file fixture SKIPPED (missing dep: {e}) — NOT a pass", False))
+    # [13] F₂ rank known answers (derived: e1=0b01, e2=0b10, e1⊕e2=0b11 → rank 2)
+    ok.append(("f2_rank known answers", f2_rank([]) == 0 and f2_rank([1, 2, 3]) == 2
+               and f2_rank([1, 2, 4, 8]) == 4 and f2_rank([3, 3, 3]) == 1))
+    # [14] planted-CONFINED set must NOT span; planted-SPANNING set must (the HH25 statistic's
+    #      two known answers). Confined: all outcomes in the even-parity subspace of F₂⁴ —
+    #      differences of even-parity strings are even-parity (dim 3 < 4), so spans=False no
+    #      matter how many samples. Spanning: outcomes whose consecutive differences are the
+    #      standard basis e1..e4.
+    confined = ["0000", "0011", "0101", "0110", "1001", "1010", "1100", "1111"]
+    ok.append(("planted confined set does NOT span", c1_round_spans(confined, 4) is False))
+    spanning = ["0000", "0001", "0000", "0010", "0000", "0100", "0000", "1000"]
+    ok.append(("planted spanning set DOES span", c1_round_spans(spanning, 4) is True))
+    # [15] nested-round decode known answers + τ can-fire: rounds spanning [1,0,1,0] →
+    #      freq 0.5 at r=2 and r=4; τ_C1=0.6 → ALT both; τ_C1=0.4 → NULL both (flip fires)
+    rds = [{"outcomes": spanning}, {"outcomes": confined},
+           {"outcomes": spanning}, {"outcomes": confined}]
+    dA = decode_c1_trial(rds, 4, [2, 4], 0.6)
+    dN = decode_c1_trial(rds, 4, [2, 4], 0.4)
+    ok.append(("C1 nested-round decode + tau can-fire",
+               dA == {"2": "ALT", "4": "ALT"} and dN == {"2": "NULL", "4": "NULL"}))
     # [7] the λ-provenance refusal CAN FIRE (test the check, not just the happy path):
     #     missing field → refuses; window mismatch → refuses; correct → passes
     good_lp = {"lambda": 2.544e-3, "epoch_utc": "T", "register": "R", "window_id": "w1"}
