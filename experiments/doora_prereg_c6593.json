@@ -67,18 +67,20 @@
     5
    ],
    "tau_Q_rule": "midpoint of (p0 = 1/2 + 2^-9, p1 = (1 + u_est)/2), u_est from template ISA count x epoch lambda",
-   "tau_Q": "TO_FILL_AT_SUBMISSION",
-   "Q_pair_grid": "TO_FILL_AT_SUBMISSION (exact two-proportion sizing at epsilon_trial=0.01, power 0.90, epoch u_est)",
-   "Q_noise_pred": "TO_FILL_AT_SUBMISSION",
-   "C1_noise_pred": "TO_FILL_AT_SUBMISSION",
+   "tau_Q": 0.602007,
+   "Q_pair_grid": [77],
+   "Q_pair_grid_note": "ASSEMBLED POST-FLIGHT FROM PRE-FLIGHT COMMITS (Elder decode seat; Whisper #6765 and Ember #6767 both declined to author for provenance reasons that apply to their seats and not to the secret-free decode seat): the frozen sizing text produced exactly ONE number — 77 pairs (quantum@c0f11f5, 06:40Z, hours pre-submission). No nested sub-budget grid was ever frozen, so the grid is [77]: decisions at the full flown budget ONLY. Any finer grid chosen after the flight would be a post-hoc researcher degree of freedom and is REFUSED by this fill.",
+   "Q_noise_pred": "RE-DERIVES FROM u_anchor AT GRADE TIME per calibration_rows_and_u_anchor ruling item (3) — frozen formula on label-free public rows; the single-rung descriptive report consumes no excess fit (N<3 refusal), so this is a reported comparator, not a decision input",
+   "C1_noise_pred": "N/A — C1 left hardware (c1_leaves_hardware_ruling); the comparator is the ideal simulated adversary, no flown C1 arm exists",
    "lambda_provenance": {
-    "lambda": "TO_FILL_AT_SUBMISSION",
-    "epoch_utc": "TO_FILL_AT_SUBMISSION",
-    "register": "TO_FILL_AT_SUBMISSION",
-    "window_id": "TO_FILL_AT_SUBMISSION"
+    "lambda": 0.0024356,
+    "epoch_utc": "read 2026-08-08T08:55:56Z; device-calibration 2026-08-07T03:19:40Z (age 29.6h — dual clocks per Ember's ratified fix)",
+    "register": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    "window_id": "ibm_marrakesh_2026-08-08"
    },
-   "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE — MEASURED per rung on the real coupling map with the line layout actually supplied (epoch-independent geometry). No closed form exists for a buildable layout; deriving it was the error (#6541).",
-   "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)",
+   "template_joint_isa_2q": 372,
+   "template_joint_isa_2q_fill_note": "FLOWN count, pinned at submission per quantum@c0f11f5 ('the FLOWN artifact's count governs'): Ember sabre 372, matching flight.json isa_2q and the G-C certificate (372/d222 identical both branches). Passes the one-sided >=120 bound. The superseded FILL_AT_TRANSPILE_FREEZE prose lives in template_joint_isa_2q_expected_note.",
+   "u_est": 0.4041,
    "layout_spec": "SUPERSEDED->LINE (Whisper #6541: the two-rail ladder is UNCONSTRUCTIBLE on heavy-hex — ZERO 4-cycles in the coupling graph, by design; ladder_layout kept in-kit as a documented impossibility). Q arm flies the LINE layout supplied explicitly via line_layout(cm, 2n) (backtracking, fails loudly). Bell pairs therefore route; the cost is NOT closed-form and MUST BE MEASURED.",
    "template_joint_isa_2q_expected_note": "ONE-SIDED sanity check only: the measured count must be >= 120 (the unconstructible-ladder bound = swap networks + n Bell edges with zero routing — any measured count BELOW it is impossible and REFUSES). The former exact-equality requirement (103404e) pinned an impossible layout and is SUPERSEDED — it was fail-safe (refused everything) but unsatisfiable. Direction of the derivation error was FLATTERING (understated cost -> over-predicted u -> optimistic tau_Q); it never froze because the slot was empty — fill discipline 3-for-3.",
    "template_joint_isa_2q_lower_bound": 120
