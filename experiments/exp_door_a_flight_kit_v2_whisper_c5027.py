@@ -201,3 +201,70 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# flight.json EMITTER — CONTRACT v2 (Elder #6352 as amended at #6361 point 2)
+#
+# v2 amendment, which was MY objection and Elder ratified it: the kit emits RAW 2n-BIT STRINGS.
+# The grader derives accept/reject via the frozen parity rule, so that rule lives in EXACTLY ONE
+# FILE. A post-processing convention duplicated across emitter and grader can drift, and drift
+# between two internally-consistent files is undetectable. Raw strings are also strictly more
+# information: the outcome distribution stays auditable instead of collapsing to one bit.
+# ─────────────────────────────────────────────────────────────────────────────
+def emit_flight_json(rung_results, window_id_by_rung):
+    """Assemble contract-v2 flight.json.
+
+    rung_results[n] = {"Q":  [trial][rep] -> raw 2n-bit string,
+                       "C1": [trial][rep] -> {"basis_spec": [...], "outcome_bitstring": "..."}}
+    Trial order IS the sealed order, so unsealing aligns with no mapping table.
+    NOTHING here reads A or a label — the emitter cannot leak what it never receives.
+    """
+    out = {}
+    for n, res in sorted(rung_results.items()):
+        if n not in window_id_by_rung:
+            raise ValueError(f"rung {n}: window_id REQUIRED — the grader refuses on mismatch, so "
+                             f"an absent one must fail here rather than be invented downstream.")
+        q, c1 = res["Q"], res["C1"]
+        for t, trial in enumerate(q):
+            for s in trial:
+                if len(s) != 2 * n or set(s) - {"0", "1"}:
+                    raise ValueError(f"rung {n} trial {t}: Q record must be a raw {2*n}-bit string")
+        out[str(n)] = {"window_id": window_id_by_rung[n], "Q": q, "C1": c1,
+                       "contract": "v2-raw-bitstrings"}
+    return out
+
+
+def _emitter_selftest(verbose=True):
+    npass = nfail = 0
+
+    def rec(name, ok, detail=""):
+        nonlocal npass, nfail
+        npass += ok
+        nfail += (not ok)
+        if verbose:
+            print(f"    {'PASS' if ok else 'FAIL':>4}  {name:<54} {detail}")
+
+    n, M = 4, 3
+    rr = {n: {"Q": [["0" * (2 * n)] * 2 for _ in range(M)],
+              "C1": [[{"basis_spec": [0] * n, "outcome_bitstring": "0" * n}] for _ in range(M)]}}
+    j = emit_flight_json(rr, {n: "W1"})
+    rec("E1 shape: per-rung key, window_id, contract tag",
+        set(j["4"]) == {"window_id", "Q", "C1", "contract"} and j["4"]["contract"] == "v2-raw-bitstrings",
+        f"keys={sorted(j['4'])}")
+    rec("E2 Q rows are RAW 2n-bit strings (not accept/reject)",
+        all(len(s) == 2 * n for tr in j["4"]["Q"] for s in tr), f"width {2*n}")
+
+    try:
+        emit_flight_json(rr, {})
+        rec("E3 missing window_id REFUSES", False, "it did not raise")
+    except ValueError:
+        rec("E3 missing window_id REFUSES", True, "cannot be invented downstream")
+
+    bad = {n: {"Q": [[("0" * n)]], "C1": rr[n]["C1"]}}          # planted: half-width record
+    try:
+        emit_flight_json(bad, {n: "W1"})
+        rec("E4 PLANTED wrong-width record is CAUGHT", False, "it did not raise")
+    except ValueError:
+        rec("E4 PLANTED wrong-width record is CAUGHT", True, "an accept/reject bit would look like this")
+    return npass, nfail
