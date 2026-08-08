@@ -448,7 +448,11 @@
       pctx.fillText(d.toFixed(1), x0-8*dpr, yy); }
     pctx.textAlign='center'; pctx.textBaseline='top';
     var xl=[[0,'0'],[PI/4,'π/4'],[PI/2,'π/2'],[3*PI/4,'3π/4'],[PI,'π']];
-    for (var i=0;i<xl.length;i++){ pctx.fillText(xl[i][1], X(xl[i][0]), y0+8*dpr); }
+    // y0+14, not y0+8: at the slider's maximum the law curve reads 0, so the rider dot lands
+    // exactly on the axis at x=X(π) and its 11dpr halo spilled onto the 'π' tick — measured
+    // rgb(159,180,208) on rgb(145,164,190), 1.2:1, and ONLY in that one slider state, which is
+    // why it survived every default-state check. 14 clears the halo by 3.
+    for (var i=0;i<xl.length;i++){ pctx.fillText(xl[i][1], X(xl[i][0]), y0+14*dpr); }
     // axis titles
     pctx.save(); pctx.fillStyle=A.muted; pctx.font=(11*dpr)+'px ui-monospace,monospace';
     pctx.textAlign='center'; pctx.fillText('φ  (order-basis dephasing)', (x0+x1)/2, y0+22*dpr); pctx.restore();
