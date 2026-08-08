@@ -83,14 +83,28 @@ def main(n, do_submit, backend_name, instance_remaining_s):
 
     from qiskit_ibm_runtime.options import SamplerOptions
     opts = SamplerOptions()
-    sim_unset = getattr(opts, "simulator", None) in (None, {})
+    # C4262 FIX: SamplerOptions().simulator is a SimulatorOptions DATACLASS whose fields are
+    # all `Unset` — it is never None, so my first check (`in (None, {})`) FALSE-BLOCKED on the
+    # dry run. The property that matters is whether any simulator field is CONFIGURED, not
+    # whether the container object exists. Fifth checker error tonight, and like the others it
+    # failed toward BLOCK rather than PASS — which is the only reason it cost minutes not a seal.
+    import dataclasses as _dc
+    _sim = getattr(opts, "simulator", None)
+    if _sim is None:
+        sim_unset = True
+    else:
+        try:
+            sim_unset = all(repr(getattr(_sim, f.name)) == "Unset" or getattr(_sim, f.name) is None
+                            for f in _dc.fields(_sim))
+        except Exception:
+            sim_unset = False
     ok &= gate("G-E OPTIONS", sim_unset, f"simulator unset={sim_unset}; DD/twirling to be pinned off at submit")
 
     import math
     u_pred = math.exp(-2.4356e-03 * isa_2q)
     tau_q  = ((1 + u_pred)/2 + (0.5 + 2**-(n+1)))/2
     print(f"  [ info ] G-G DERIVED    from FLOWN ISA count {isa_2q}: u_pred={u_pred:.4f}, tau_Q={tau_q:.5f}")
-    print(f"           (whisper derived tau_Q=0.60201 from 384; flown count governs)")
+    print(f"           (whisper: 0.60201 from 372, 0.59910 from 384 — my flown count IS 372, so these AGREE)")
 
     print(f"\n  G-F BUDGET requires a built PUB and a live usage_estimation read.")
     print(f"      instance remaining: {instance_remaining_s}s   ratified ceiling: 50% = {instance_remaining_s/2}s")
