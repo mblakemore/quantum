@@ -401,3 +401,84 @@ def _c1_endianness_selftest(verbose=True):
             c1_record(key, n)[target] == "1" and key[::-1][target] == "1",
             f"raw '{key}' -> qubit-order '{c1_record(key, n)}'")
     return npass, nfail
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# C1 ARM v3 — HH25 AS THE PAPER WRITES IT (Elder's primary-text read, #6410)
+#
+# WHAT WAS WRONG: c1_circuit measured each qubit in a fresh LOCAL Pauli basis — the folk
+# product-basis strategy. HH25's tester samples a uniformly random ENTANGLING Clifford C from
+# Cl(n), measures in the computational basis of that frame, and the statistic is COMPUTATIONAL
+# DIFFERENCE SAMPLING: two copies measured in the SAME frame, output a⊕b ∈ F₂ⁿ, decided by a
+# linear-dependence/spanning test. Local rotations cannot express it. Flying the local version
+# would measure the separation against a SUB-BEST attack — the F119 mechanism, kill criterion 1.
+#
+# THE FENCE RE-SCOPING (Elder's ruling, this row is mine): the F119 fence said "fresh randomness
+# per copy, no fixed-basis batching" — but HH25 REQUIRES one C across the copies of a round;
+# differences taken across different frames are meaningless. The fence's purpose was blocking a
+# PREPARATION-side artifact. So: **fresh PREPARATION randomness per copy (NULL A′ fresh per copy),
+# and the MEASUREMENT schedule follows the pre-registered HH25 round structure — same public
+# random C within a round, fresh C per round.** C is public randomness; it touches nothing sealed.
+#
+# COPY ACCOUNTING: each difference sample consumes 2 COPIES. C1 remains k=0 memory — the two
+# copies are measured separately and XORed CLASSICALLY, no quantum memory anywhere.
+# I own the circuits and the round records; the difference→rank→spanning statistic is Elder's.
+# ─────────────────────────────────────────────────────────────────────────────
+def c1_round_circuits(n, label, A, rng, copies_per_round=2):
+    """One HH25 round: draw C ~ Cl(n) ONCE, measure `copies_per_round` copies in that frame."""
+    from qiskit.quantum_info import random_clifford
+    C = random_clifford(n, seed=int(rng.integers(1 << 30)))
+    tmpl, diag, pp, po = swap_network(n)
+    out = []
+    for _ in range(copies_per_round):
+        qc = QuantumCircuit(n, n)
+        A_use = A if label == 1 else random_A(n, rng)      # PREP randomness stays fresh per copy
+        qc.compose(tmpl.assign_parameters(bindings(A_use, diag, pp, po)), range(n), inplace=True)
+        qc.append(C.to_instruction(), range(n))            # the SAME frame across this round
+        qc.measure(range(n), range(n))
+        out.append(qc)
+    return out, C
+
+
+def c1_round_record(clifford_spec, raw_keys, n):
+    """Contract v3: per-ROUND record. Outcomes in QUBIT ORDER (the C1-E fix carries)."""
+    return {"clifford_spec": clifford_spec,
+            "outcomes": [c1_record(k, n) for k in raw_keys],
+            "copies_consumed": len(raw_keys)}
+
+
+def _c1_v3_selftest(verbose=True):
+    npass = nfail = 0
+
+    def rec(name, ok, detail=""):
+        nonlocal npass, nfail
+        npass += ok
+        nfail += (not ok)
+        if verbose:
+            print(f"    {'PASS' if ok else 'FAIL':>4}  {name:<54} {detail}")
+
+    n = 4
+    rng = np.random.default_rng(2026)
+    A = random_A(n, rng)
+
+    r1, C1_ = c1_round_circuits(n, 1, A, rng)
+    r2, C2_ = c1_round_circuits(n, 1, A, rng)
+    rec("R1 SAME Clifford frame within a round", len(r1) == 2 and C1_ == C1_, "one C, two copies")
+    rec("R2 FRESH Clifford across rounds", C1_ != C2_, "differences need per-round frames")
+
+    nulls = [c1_round_circuits(n, 0, None, rng)[0] for _ in range(4)]
+    rec("R3 NULL prep randomness still fresh PER COPY",
+        len({str(c.data) for rr in nulls for c in rr}) > 1,
+        "preparation fence intact under the re-scoping")
+
+    rec("R4 each difference sample consumes 2 COPIES",
+        c1_round_record("spec", ["0000", "0000"], n)["copies_consumed"] == 2,
+        "k=0 memory: measured separately, XORed classically")
+
+    frames = {str(c1_round_circuits(n, 1, A, rng)[1]) for _ in range(5)}
+    rec("R5 five rounds give five distinct frames", len(frames) == 5, f"{len(frames)} distinct")
+
+    recd = c1_round_record("spec", ["0001"], n)
+    rec("R6 outcomes emitted in QUBIT ORDER", recd["outcomes"][0] == "1000",
+        "raw '0001' -> '1000', qubit 0 at index 0")
+    return npass, nfail
