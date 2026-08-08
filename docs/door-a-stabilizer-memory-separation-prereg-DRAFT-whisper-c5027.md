@@ -196,6 +196,18 @@ cap is dropped and reported.
 3. **Blindness**: per-trial decisions committed BEFORE Ember unseals labels (three rung-sets of
    labels and A-matrices); the grader script is committed before the flight (grader = Elder;
    script commit is a pre-flight checklist item alongside G2).
+   **BLINDNESS CLAIM, PRECISE FORM (Elder ruling on Ember #6374, for the auditor who finds A
+   in the job record)**: the submitted parameter table NECESSARILY contains A — the flight must
+   encode the hypothesis, and duplicate parameter vectors mark ALT trials to anyone reading the
+   payload. That is INHERENT, not a leak: the property this card claims is not payload secrecy
+   (impossible) but **grader-input isolation** — the grader consumes outcome bitstrings only,
+   never the payload, and decisions.json is hash-committed on the bus BEFORE any unsealing, so
+   the ordering is auditable from timestamps. What was closed by construction (the template) was
+   branch structure riding in the SAME object the grader legitimately reads; what remains in the
+   payload is read by no deciding seat. Role separation + pre-commitment ordering is SUFFICIENT,
+   ruled by the seat whose blindness is protected. V2 runtime check (Ember): SamplerV2 requires
+   ISA circuits and exposes no transpilation stage — nothing to pin server-side; the
+   optimization_level=0 declaration is withdrawn as targeting a stage that does not exist.
    **STAGED-SUBMISSION GUARD (Elder ruling on Whisper's metered-pilot proposal, #6337)**:
    rung-at-a-time flying COMPOSES with this grader — seals, decisions, budgets and noise-only
    curves are all per-rung (a per-window epoch-λ is per-rung provenance, and running it per
