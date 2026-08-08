@@ -281,8 +281,27 @@ def _emitter_selftest(verbose=True):
 # accepting with probability 1 — which is exactly what Q1 checks.
 # ─────────────────────────────────────────────────────────────────────────────
 def q_circuit(n, label, A, rng):
-    """Q arm: two copies on 2n wires, then a transversal Bell measurement (destructive SWAP).
-    ALT (label=1) binds the sealed A in BOTH copies. NULL (label=0) binds a FRESH A' per copy."""
+    """⛔ UNREACHABLE — THIS PATH LEAKS THE SEALED BRANCH. Use q_circuit_unbound() + q_bindings().
+
+    It bound parameters AT CONSTRUCTION, so transpiling the result deleted the angle-0 slots and
+    the compiled circuit read out weight(A): Ember measured 4/17/36/44 two-qubit gates for
+    weight 0/2/4/6 on ibm_marrakesh (ship#6425). The production object is A-independent at 61.
+
+    RAISES rather than warns, at Ember's request and by the alt_prep(A=None) precedent: the
+    failure mode is a tired submitter at 02:20 tab-completing the SHORTER NAME with the secret
+    loaded. A comment does not stop that; an exception does. Left in the file rather than deleted
+    because deleting live code at this hour is how one rebuild becomes three — but unreachable.
+    """
+    raise RuntimeError(
+        "q_circuit() LEAKS the sealed branch — it binds parameters before transpilation, so the "
+        "compiled circuit encodes weight(A) (measured 4->44 gates, ship#6425). Use "
+        "q_circuit_unbound() to get the ISA circuit, transpile it ONCE, then apply q_bindings() "
+        "per trial."
+    )
+
+
+def _q_circuit_LEAKY_reference(n, label, A, rng):
+    """The superseded construction, kept ONLY so the selftests can demonstrate the leak."""
     tmpl, diag, pp, po = swap_network(n)
     full = QuantumCircuit(2 * n, 2 * n)
     for half in (0, n):
@@ -345,16 +364,18 @@ def _circuit_selftest(verbose=True):
         return tot
 
     A = random_A(n, rng)
-    pa = accept_prob(q_circuit(n, 1, A, rng))
+    circ, hA, hB = q_circuit_unbound(n)
+    pa = accept_prob(circ.assign_parameters(q_bindings(1, A, rng, hA, hB)))
     rec("Q1 ALT accepts with probability 1 (permutation CANCELS)", abs(pa - 1.0) < 1e-9,
         f"P(accept)={pa:.12f}")
 
-    ps = [accept_prob(q_circuit(n, 0, None, rng)) for _ in range(40)]
+    ps = [accept_prob(circ.assign_parameters(q_bindings(0, None, rng, hA, hB)))
+          for _ in range(40)]
     want = 0.5 + 2.0 ** (-(n + 1))
     rec("Q2 NULL averages 1/2 + 2^-(n+1)", abs(float(np.mean(ps)) - want) < 0.05,
         f"mean {float(np.mean(ps)):.4f} vs {want:.4f}")
 
-    qc = q_circuit(n, 1, A, rng)
+    qc = circ.assign_parameters(q_bindings(1, A, rng, hA, hB))
     rec("Q3 Q circuit is 2n wires, all measured",
         qc.num_qubits == 2 * n and qc.num_clbits == 2 * n, f"{qc.num_qubits}q/{qc.num_clbits}c")
 
