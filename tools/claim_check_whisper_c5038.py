@@ -54,7 +54,10 @@ CHECKS = [
      "$21 to discriminate billing models, 3-6s on a shape experiment the afternoon's pilot "
      "had already answered, and I nearly re-proposed my own C4745 design as new. Run "
      "already-built.js and grep the FLOWN artifacts before pricing a run. The cheapest "
-     "measurement is the one already made."),
+     "measurement is the one already made. RIDER (Ember, C4262): when the corpus DOES "
+     "answer, ask whether that measurement CONTROLS the variable you care about or merely "
+     "MENTIONS it — a joint control read as a single-variable control nearly buried a live "
+     "hypothesis tonight."),
 ]
 
 NINE = [
