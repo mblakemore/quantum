@@ -66,7 +66,10 @@
     "window_id": "TO_FILL_AT_SUBMISSION"
    },
    "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE (epoch-INDEPENDENT: the once-per-rung joint ISA 2q count of the unbound template — Whisper, fillable now)",
-   "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)"
+   "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)",
+   "layout_spec": "BINDING (Ember #6539): Q arm uses a TWO-RAIL LADDER layout — copy-1 wire i PHYSICALLY ADJACENT to copy-2 wire i (Bell pairs at zero routing), each rail a Hamiltonian path for its own swap network. A line layout is WRONG-SHAPED (Bell pairs land n hops apart; measured 61 vs closed-form 28 at n=4). template_joint_isa_2q must be produced UNDER this layout and carry it as provenance.",
+   "template_joint_isa_2q_expected": 120,
+   "template_joint_isa_2q_expected_note": "closed form 2n(n-1) + n under the ladder layout — the artifact ISA count must EQUAL this exactly; any excess is routing, meaning the layout was not the pinned one: REFUSE THE FILL, fix the layout, retranspile. The 120/276/496 figures quoted all night were always THIS closed form — the layout assumption is now explicit instead of implicit."
   },
   {
    "n": 12,
@@ -100,7 +103,10 @@
     "window_id": "TO_FILL_AT_SUBMISSION"
    },
    "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE (epoch-INDEPENDENT: the once-per-rung joint ISA 2q count of the unbound template — Whisper, fillable now)",
-   "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)"
+   "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)",
+   "layout_spec": "BINDING (Ember #6539): Q arm uses a TWO-RAIL LADDER layout — copy-1 wire i PHYSICALLY ADJACENT to copy-2 wire i (Bell pairs at zero routing), each rail a Hamiltonian path for its own swap network. A line layout is WRONG-SHAPED (Bell pairs land n hops apart; measured 61 vs closed-form 28 at n=4). template_joint_isa_2q must be produced UNDER this layout and carry it as provenance.",
+   "template_joint_isa_2q_expected": 276,
+   "template_joint_isa_2q_expected_note": "closed form 2n(n-1) + n under the ladder layout — the artifact ISA count must EQUAL this exactly; any excess is routing, meaning the layout was not the pinned one: REFUSE THE FILL, fix the layout, retranspile. The 120/276/496 figures quoted all night were always THIS closed form — the layout assumption is now explicit instead of implicit."
   },
   {
    "n": 16,
@@ -133,7 +139,10 @@
     "window_id": "TO_FILL_AT_SUBMISSION"
    },
    "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE (epoch-INDEPENDENT: the once-per-rung joint ISA 2q count of the unbound template — Whisper, fillable now)",
-   "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)"
+   "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)",
+   "layout_spec": "BINDING (Ember #6539): Q arm uses a TWO-RAIL LADDER layout — copy-1 wire i PHYSICALLY ADJACENT to copy-2 wire i (Bell pairs at zero routing), each rail a Hamiltonian path for its own swap network. A line layout is WRONG-SHAPED (Bell pairs land n hops apart; measured 61 vs closed-form 28 at n=4). template_joint_isa_2q must be produced UNDER this layout and carry it as provenance.",
+   "template_joint_isa_2q_expected": 496,
+   "template_joint_isa_2q_expected_note": "closed form 2n(n-1) + n under the ladder layout — the artifact ISA count must EQUAL this exactly; any excess is routing, meaning the layout was not the pinned one: REFUSE THE FILL, fix the layout, retranspile. The 120/276/496 figures quoted all night were always THIS closed form — the layout assumption is now explicit instead of implicit."
   }
  ],
  "interpretation_bindings": [
