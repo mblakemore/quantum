@@ -25,11 +25,12 @@
    "enable_measure": false
   },
   "simulator": "MUST_BE_UNSET — hard assert at submission (a stray value produces a real-looking flight that never touched hardware)",
-  "doc_check_citation": "TO_FILL_AT_SUBMISSION (Whisper: verify ISA/no-server-retranspile contract against current Qiskit Runtime docs, cite version)"
+  "doc_check_citation": "qiskit-ibm-runtime 0.47.0 / qiskit 2.4.1. ISA requirement CONFIRMED (guides/transpile). No-server-retranspile NOT AFFIRMED by public docs as of 2026-08-08 — searched guides/primitives and guides/transpile; one line implies a service-side default-transpilation path exists. Contract rests on: (a) API-surface enumeration — no client knob exists (Ember #6374/#6375); (b) declaration (Elder #6372); (c) STRUCTURAL: the PUB shape submits ONE parameterized ISA circuit + a binding table — per-branch structural divergence at the server would require PER-ROW recompilation, which contradicts the format's purpose (one compiled schedule, many bindings; rz binding is a frame update). NOT a documented guarantee, and labeled so."
  },
  "staged_submission": {
   "pilot_rung": 8,
-  "continue_rule": "COST-ONLY (measured per-shot QPU rate) — outcome-independent by construction; NO rung unsealed until the flight set is closed (card f1e8042)"
+  "continue_rule": "COST-ONLY (measured per-shot QPU rate) — outcome-independent by construction; NO rung unsealed until the flight set is closed (card f1e8042)",
+  "pilot_u_consistency_probe": "PRE-REGISTERED EMPIRICAL ARM of the no-retranspile declaration: the pilot's measured Q-arm accept statistics imply a delivered u; it must lie WITHIN CI of the epoch-lambda prediction exp(-lambda*N2q). A server-side deletion of angle-0 slots would INFLATE measured u above prediction in a branch-correlated way — anomalously GOOD fidelity is the signature, and it is grounds to HALT before the main submission, not to celebrate."
  },
  "rungs": [
   {
