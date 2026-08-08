@@ -358,6 +358,19 @@ flight-epoch λ, then fit the **EXCESS** of measured copies-to-criterion over th
   mean) and writing its output into the artifact **before** submission. A baseline frozen tonight
   and subtracted at flight time is the 2115-second pool error in another costume: a true number
   that stops being true while keeping its authority.
+
+- **λ IS PER RUNG, WITH ITS OWN EPOCH — and the grader must REFUSE a shared one.**
+  *(Ember, ship#6339; the risk was created by my own metered-pilot proposal.)* A pilot flies n=8
+  first to convert the estimated QPU cost into a measured one; if the pilot and the main submission
+  land in **different calibration windows, the three rungs do not share a λ.** Computing three
+  excesses against a single λ would then admit **cross-epoch calibration drift into the fitted
+  exponent as signal** — Elder's confound one level deeper: he caught noise *curvature* being
+  headlined as the theorem, this would headline *drift between submissions* as the theorem.
+  **Binding:** `prereg.json` carries λ **per rung, with its epoch timestamp and the register
+  actually flown**, and each rung's excess is computed against **its own**. If a rung's epoch-λ is
+  missing, or is inherited from another window, **the grader refuses rather than substitutes.**
+  If both submissions land in one window the two readings simply agree and the second costs nothing
+  — the cheap case is not the one worth designing for.
 - Per-rung ratios are **descriptive only** and may not be headlined.
 - Criterion = **95% blind accuracy** over **M = 40** sealed trials per rung.
 
