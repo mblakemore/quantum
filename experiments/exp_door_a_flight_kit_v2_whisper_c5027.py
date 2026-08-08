@@ -485,3 +485,112 @@ def _c1_v3_selftest(verbose=True):
     rec("R6 outcomes emitted in QUBIT ORDER", recd["outcomes"][0] == "1000",
         "raw '0001' -> '1000', qubit 0 at index 0")
     return npass, nfail
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PRODUCTION PATH v4 — UNBOUND CIRCUITS + BINDING TABLES (Ember's fly-blocker, #6425)
+#
+# WHAT WAS BROKEN: q_circuit/c1_circuit called assign_parameters AT CONSTRUCTION and returned
+# BOUND circuits. Transpiling a bound circuit deletes the angle-0 slots, and Ember measured the
+# result on ibm_marrakesh: weight(A) 0/2/4/6 -> 4/17/36/44 two-qubit gates, MONOTONIC. Not a
+# residue — a readout of the sealed branch.
+#
+# AND THE SUITE PASSED 8/8 THROUGHOUT. V3 plants the bind-early trap on the TEMPLATE IN ISOLATION
+# and catches it; it never touches q_circuit. The fixture is correct, the mechanism is correct,
+# and it guards a path the flight does not take. **A test in the right place is worth more than a
+# test of the right thing** — and this is the third time tonight a green suite sat over an
+# artifact it did not actually exercise.
+#
+# THE SHAPE THAT FIXES IT: return (UNBOUND circuit, binding table). Ember transpiles the unbound
+# object ONCE per rung and binds per trial afterwards — which is exactly the PUB shape SamplerV2
+# wants (one ISA circuit + a parameter table), so the correct thing is also the cheaper thing.
+# ─────────────────────────────────────────────────────────────────────────────
+def swap_network_named(n, prefix):
+    """swap_network with prefixed parameter names, so two copies can coexist unbound."""
+    qc = QuantumCircuit(n)
+    qc.h(range(n))
+    diag = [Parameter(f"{prefix}_d{i}") for i in range(n)]
+    for i in range(n):
+        qc.rz(diag[i], i)
+    pos = list(range(n))
+    pair_params, pair_order = [], []
+    k = 0
+    for layer in range(n):
+        for q in range(layer % 2, n - 1, 2):
+            p = Parameter(f"{prefix}_c{k}")
+            qc.cp(p, q, q + 1)
+            qc.swap(q, q + 1)
+            pair_params.append(p)
+            pair_order.append((pos[q], pos[q + 1]))
+            pos[q], pos[q + 1] = pos[q + 1], pos[q]
+            k += 1
+    return qc, diag, pair_params, pair_order
+
+
+def q_circuit_unbound(n):
+    """THE PRODUCTION OBJECT: a 2n-wire UNBOUND circuit, transpiled ONCE per rung.
+    Returns (circuit, handleA, handleB). No A anywhere — it cannot leak what it never receives."""
+    a = swap_network_named(n, "A")
+    b = swap_network_named(n, "B")
+    full = QuantumCircuit(2 * n, 2 * n)
+    full.compose(a[0], range(n), inplace=True)
+    full.compose(b[0], range(n, 2 * n), inplace=True)
+    for i in range(n):
+        full.cx(i, n + i)
+        full.h(i)
+    full.measure(range(2 * n), range(2 * n))
+    return full, a, b
+
+
+def q_bindings(label, A, rng, handleA, handleB):
+    """Per-trial values ONLY. ALT: the sealed A in both halves. NULL: FRESH A' per copy."""
+    n = len(handleA[1])
+    out = {}
+    for h in (handleA, handleB):
+        A_use = A if label == 1 else random_A(n, rng)
+        out.update(bindings(A_use, h[1], h[2], h[3]))
+    return out
+
+
+def _production_path_selftest(verbose=True):
+    """THE TEST IN THE RIGHT PLACE: transpile what the FLIGHT transpiles."""
+    npass = nfail = 0
+
+    def rec(name, ok, detail=""):
+        nonlocal npass, nfail
+        npass += ok
+        nfail += (not ok)
+        if verbose:
+            print(f"    {'PASS' if ok else 'FAIL':>4}  {name:<54} {detail}")
+
+    n = 4
+    rng = np.random.default_rng(4)
+    circ, hA, hB = q_circuit_unbound(n)
+
+    rec("P1 production object is UNBOUND", circ.num_parameters == 2 * (n + n * (n - 1) // 2),
+        f"{circ.num_parameters} free parameters")
+
+    t = transpile(circ, basis_gates=["cz", "rz", "sx", "x"], optimization_level=3)
+    g_isa = sum(v for k, v in t.count_ops().items() if k in ("cz", "cx", "ecr"))
+
+    counts = set()
+    for w in (0, 2, 4, 6):                      # Ember's weights, the ones that leaked
+        A = [[0] * n for _ in range(n)]
+        placed = 0
+        for i in range(n):
+            for j in range(i, n):
+                if placed < w:
+                    A[i][j] = 1
+                    placed += 1
+        bound = t.assign_parameters(q_bindings(1, A, rng, hA, hB))
+        counts.add(sum(v for k, v in bound.count_ops().items() if k in ("cz", "cx", "ecr")))
+    rec("P2 ISA gate count is A-INDEPENDENT across weight(A)=0,2,4,6", len(counts) == 1,
+        f"counts={sorted(counts)} (Ember measured 4/17/36/44 on the OLD path)")
+
+    alt = t.assign_parameters(q_bindings(1, [[1] * n for _ in range(n)], rng, hA, hB))
+    nul = t.assign_parameters(q_bindings(0, None, rng, hA, hB))
+    ga = sum(v for k, v in alt.count_ops().items() if k in ("cz", "cx", "ecr"))
+    gn = sum(v for k, v in nul.count_ops().items() if k in ("cz", "cx", "ecr"))
+    rec("P3 ALT and NULL bind to the SAME ISA circuit", ga == gn and alt.depth() == nul.depth(),
+        f"{ga} vs {gn} gates, depth {alt.depth()} vs {nul.depth()}")
+    return npass, nfail
