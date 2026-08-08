@@ -207,6 +207,15 @@ cap is dropped and reported.
    which ladders get completed — an outcome-dependent-selection bias on the exponent, the
    staging's only failure mode, excluded here by ordering rather than by trust. If the pilot's
    measured cost stops the ladder, n=8 is graded alone as the descriptive point §4 permits.
+   **PER-RUNG λ-PROVENANCE PIN (Elder, on Ember #6339)**: staged windows may not share a λ —
+   cross-epoch calibration drift entering the excess fit would be headlined as the theorem (the
+   u(n) confound one level deeper; F119 re-cert measured TOTAL edge turnover in 14 days).
+   Therefore prereg.json carries, PER RUNG, `lambda_provenance = {lambda, epoch_utc, register,
+   window_id}`, each rung's noise-only curve is computed from ITS OWN epoch's measurement, and
+   flight records carry the rung's `window_id` — **the grader REFUSES to grade any rung whose
+   λ-provenance is missing or whose window_id mismatches its flight window** (enforced in code,
+   with a selftest fixture proving the refusal can fire). Two rungs sharing one window
+   legitimately carry the same epoch — the refusal keys on window mismatch, not on equality.
 4. **Reporting, per the redrafted §4 and the C6593 claim-card convention**: per-rung copies-to-
    criterion + ratios with CIs, PLUS the excess-exponent fit per the binding condition above.
    The growth-law headline is permitted ONLY if the redrafted WIN criteria (noise-only-

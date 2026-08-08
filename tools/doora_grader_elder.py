@@ -107,6 +107,22 @@ def excess_exponent(ns, measured, noise_pred):
             "ci95": [round(beta - t975 * se, 4), round(beta + t975 * se, 4)],
             "df": df, "note": "df=1 at 3 rungs — wide by design, pre-registered as such"}
 
+def check_lambda_provenance(rung, flight_rung):
+    """PER-RUNG λ-PROVENANCE (Ember #6339 pin, ruled in-card): each rung's noise-only curve
+    must carry its own epoch's λ, and the flight record must name the same window. Returns an
+    error string (refusal) or None. Same-window rungs legitimately share an epoch — the
+    refusal keys on window MISMATCH or MISSING provenance, never on equality."""
+    lp = rung.get("lambda_provenance") or {}
+    missing = [k for k in ("lambda", "epoch_utc", "register", "window_id") if k not in lp]
+    if missing:
+        return (f"lambda_provenance missing fields {missing} — a noise-only curve without "
+                f"its own epoch cannot anchor an excess fit")
+    fw = flight_rung.get("window_id")
+    if fw != lp["window_id"]:
+        return (f"flight window_id {fw!r} != lambda_provenance window_id "
+                f"{lp['window_id']!r} — cross-epoch drift would enter the exponent as signal")
+    return None
+
 def sha256_file(path):
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -142,11 +158,19 @@ def selftest():
         for root, _, files in os.walk(res):
             hits += [f for f in files if "door" in f.lower() and "a" in f.lower() and "phase" in f.lower()]
     ok.append(("no door-a flight artifacts pre-exist (at script commit)", len(hits) == 0))
+    # [7] the λ-provenance refusal CAN FIRE (test the check, not just the happy path):
+    #     missing field → refuses; window mismatch → refuses; correct → passes
+    good_lp = {"lambda": 2.544e-3, "epoch_utc": "T", "register": "R", "window_id": "w1"}
+    r_missing = check_lambda_provenance({"lambda_provenance": {"lambda": 1}}, {"window_id": "w1"})
+    r_mismatch = check_lambda_provenance({"lambda_provenance": good_lp}, {"window_id": "w2"})
+    r_ok = check_lambda_provenance({"lambda_provenance": good_lp}, {"window_id": "w1"})
+    ok.append(("lambda-provenance refusal fires on missing AND mismatch, passes on match",
+               r_missing is not None and r_mismatch is not None and r_ok is None))
     for name, passed in ok:
         print(f"  [{'OK ' if passed else 'FAIL'}] {name}")
     n_ok = sum(1 for _, p in ok if p)
-    print(f"selftest: {n_ok}/6")
-    return 0 if n_ok == 6 else 2
+    print(f"selftest: {n_ok}/{len(ok)}")
+    return 0 if n_ok == len(ok) else 2
 
 def main():
     if len(sys.argv) < 2 or sys.argv[1] not in ("selftest", "commit", "grade"):
@@ -169,7 +193,14 @@ def main():
     out = {"rungs": {}, "units": "copies (2 per Bell pair; every arm bills in copies)"}
     for rung in prereg["rungs"]:
         n = rung["n"]
-        r = {"n": n}
+        # PER-RUNG λ-PROVENANCE REFUSAL (Ember #6339 pin, ruled in-card): staged windows may
+        # not share a λ — each rung's noise-only curve must come from its own epoch, and the
+        # flight record must name the same window. Refuse, never substitute.
+        err = check_lambda_provenance(rung, flight.get(str(n), {}))
+        if err:
+            print(f"REFUSING rung n={n}: {err}")
+            return 2
+        r = {"n": n, "lambda_provenance": rung["lambda_provenance"]}
         for arm in ("Q", "C1"):
             grid = rung[f"{arm}_grid"]
             trials = []
