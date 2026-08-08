@@ -284,7 +284,12 @@ function r2(k){
   const col = k==="link" ? "var(--pink)" : "var(--bad)";
   [1,0,-1].forEach(v=>el(svg,"line",{x1:g.L,y1:g.Y(v),x2:g.R,y2:g.Y(v),style:"stroke:var(--good);stroke-width:2.4;opacity:.5"}));
   el(svg,"line",{x1:g.L,y1:g.Y(val),x2:g.R,y2:g.Y(val),style:`stroke:${col};stroke-width:3`});
-  el(svg,"text",{x:g.R-6,y:g.Y(val)-9,"text-anchor":"end",style:`fill:${col};font-family:var(--mono);font-size:13px;font-weight:700`}).textContent="+"+val.toFixed(3);
+  // The value sat 9 units ABOVE its own line, which put it on the green +1 stabilizer rule:
+  // pink rgb(255,107,214) on the composited green rgb(42,118,76), 2.19:1. Moved BELOW the line
+  // instead of plated, because here there is genuinely empty space — the next rule down is at
+  // v=0, roughly 0.69 of the axis away — and a dark plate laid over a reference line reads as a
+  // gap in the line. Plate where nothing can move; move where something can.
+  el(svg,"text",{x:g.R-6,y:g.Y(val)+16,"text-anchor":"end",style:`fill:${col};font-family:var(--mono);font-size:13px;font-weight:700`}).textContent="+"+val.toFixed(3);
   el(svg,"text",{x:8,y:20,style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="what the data qubit reads at the magic angle";
   document.getElementById("lgd2").innerHTML=
     '<span><i style="border-top-color:var(--good)"></i>values an ordinary state may hold</span>'+
