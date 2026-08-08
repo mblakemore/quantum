@@ -1,0 +1,16 @@
+{
+  "spec": "doora_deg2phase_v1",
+  "n": 8,
+  "M": 40,
+  "shots_per_trial": 316,
+  "samples": 12640,
+  "backend": "ibm_marrakesh",
+  "instance": "WhisperPaid",
+  "commitment_sha256": "ff43996c11405f17dae2b9ba9ad5eee210c27109553abc8b99ec5613f88b5622",
+  "job": "d9rqc5ntfhrs73ds0o20",
+  "row_index_map": "row i (0-based) = sealed trial i+1",
+  "tau_Q_registered": 0.562976,
+  "registered_at": "general#6969 (whisper), BEFORE seal",
+  "emitted_utc": "2026-08-08T21:56:38.668045+00:00",
+  "contract": "v2_raw_bitstrings; grader reads counts from job_id"
+}
