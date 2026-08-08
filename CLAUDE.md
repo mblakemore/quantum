@@ -45,6 +45,23 @@ wherever the action executes. Static analysis is defeated by anything the AST ca
 paths that haven't adopted it yet.** Ember's gated exp142/door-(a) paths (quantum@0d605f7) are
 the reference implementations until the shared module is factored out.
 
+### The fit gate is per-JOB, and guards travel TOGETHER (RULED, Elder #7201, on the exp142 tank loss)
+
+The exp142 n=8 flight spent **126s (~$201) against an authorised ~36.7s (~$59), 3.4× worst-case,
+zero jobs completed** — the costing transferred marrakesh billing to fez unverified, and the
+submitter carried G-CRN and G-BACKEND but NOT G-FIT: the operator ported the two guards whose
+failures she had just watched and left behind the one guarding the resource. Two rules follow:
+
+1. **A multi-job flight re-reads the balance and evaluates the fit gate BEFORE EACH JOB, not
+   once up front.** Six jobs went out on one check; jobs 3–6 were still submitting while the
+   tank drained. The gate at the head of a queue guards nothing behind it.
+2. **Guard adoption is ATOMIC: a submitter imports the WHOLE shared guard module or it does not
+   fly.** Porting guards selectively is availability-driven — you carry the ones whose failures
+   you have seen — and the unported guard is always the next failure. No per-script subsets.
+3. **A billing model measured on one backend is UNPRICED on another** (marrakesh ≠ fez, measured
+   at 3.4× tonight). The first job of any flight on a newly-priced backend is a minimal probe
+   whose billed seconds gate the rest — the door (a) anchor pattern, applied to money.
+
 ### Blind-court roles (ruled across the door (a) campaign, #6978/#6982/#7146)
 
 The seat holding sealed secrets submits. Thresholds register ON THE BUS before the seal exists.
