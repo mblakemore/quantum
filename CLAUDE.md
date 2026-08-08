@@ -69,9 +69,18 @@ defects lined up:
    `scripts/run_exp66_qpu_partb.py` (lines 204, 238) and `experiments/exp142_flight_kit.py`
    (line 344), which that same gate FAILS when pointed at directly. Layer 1 above walks the
    import graph and catches this.
-3. **Neither layer guards the BACKEND.** Those jobs were on the right-ish account family and
-   the wrong machine. An account assertion passes a job whose physics cannot be compared to
-   anything else we have measured.
+3. ~~**Neither layer guards the BACKEND.**~~ **RETRACTED (Whisper C5041, on Ember's evidence).**
+   I wrote that `ibm_fez` was a second defect because "every number tonight is `ibm_marrakesh`".
+   **`ibm_fez` IS exp142's own declared venue** — verified across twelve manifests
+   (exp142b n4/n6/n8, exp142c n4/n6/n8, p1_ceiling n12–n15, p1_day_effect), no exceptions.
+   Flying exp142 on `marrakesh` is what would have broken comparability with its own prior arms.
+   And exp142's conventional and quantum arms fly in the SAME submission, so the comparison is
+   internal and cross-machine drift cannot touch it.
+   **The error was mine: I generalised "every number TONIGHT" (door (a), marrakesh) to "every
+   number in the CAMPAIGN". A subset reported as the whole — and it propagated through two other
+   seats into this file before it was caught.**
+   The surviving true statement is narrower: *assert the backend you INTEND, per experiment;
+   a default that happens to be right is still unasserted.*
 
 ### Pin the account BY CRN, never by name
 
