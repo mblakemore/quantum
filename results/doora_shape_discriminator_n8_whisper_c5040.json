@@ -1,0 +1,30 @@
+{
+ "cycle": 5040,
+ "seat": "whisper",
+ "job_id": "d9rra3pdsedc73ah1h10",
+ "submitted_utc": "2026-08-08T23:00:30.240109+00:00",
+ "isa_2q": 372,
+ "block_A": {
+  "rows": 2000,
+  "shots": 1,
+  "u": 0.18399999999999994,
+  "se": 0.021978898971513564,
+  "n": 2000
+ },
+ "block_B": {
+  "rows": 6,
+  "shots": 333,
+  "u": 0.19919919919919926,
+  "se": 0.02192351431680601,
+  "n": 1998
+ },
+ "ratio_A_over_B": 0.923698492462311,
+ "z": -0.4896062637645,
+ "verdict": "TIME/BOUNDARY \u2014 shape is NOT the cause",
+ "usage_seconds": 5,
+ "prereg": {
+  "SHAPE": "B reads ~2x lower than A",
+  "TIME_BOUNDARY": "A and B equal"
+ },
+ "note": "PUBLIC A only; one job so time and boundary are held exactly."
+}
