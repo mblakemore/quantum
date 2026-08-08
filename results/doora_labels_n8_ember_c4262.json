@@ -1,0 +1,147 @@
+{
+  "_purpose": "Per-trial sealed label vector for the grader. Public \u2014 the decisions.json SHA-256 (0ca59ad2...) was posted and git-pinned at 18:11:25Z, BEFORE this reveal.",
+  "ENCODING": {
+    "convention": "1 = ALT (sealed degree-2 phase state |psi_A>),  0 = NULL (maximally mixed I/2^n)",
+    "type": "list of 40 ints, values in {0,1}",
+    "order": "SEALED ORDER, index i (0-based) == TRIAL i+1 (1-based)",
+    "job_mapping": {
+      "trial_1": "probe job d9riuo9dsedc73agnft0, ROW 0  (rows 1-32 of that job are PUBLIC-A calibration, not trials)",
+      "trials_2_to_40": "main job d9rj3vgpdb6s73e500mg, ROWS 0-38 in order (row j == trial j+2)"
+    }
+  },
+  "n": 8,
+  "M": 40,
+  "labels_vector": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0
+  ],
+  "labels_string": "0010011011110110010010011011100111110110",
+  "sealed_draw": {
+    "NULL": 17,
+    "ALT": 23
+  },
+  "A_bits": "101001000000001010101111011001100110",
+  "A_matrix": [
+    [
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "A_encoding": "upper-triangular INCLUDING diagonal, row-major over j>=i, 36 bits at n=8; prep = H^n, Z on set diagonal bits, CZ on set off-diagonal bits",
+  "commitment_sha256": "009ca03b8495373527903c4354aa906013613a48c8137ab6a88455509811911d",
+  "verified": "this reveal reproduces the published commitment exactly"
+}
