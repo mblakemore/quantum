@@ -282,7 +282,11 @@ def selftest():
     #      both-agree-and-both-wrong. Skipped (not passed) if qiskit is unavailable.
     try:
         sys.path.insert(0, os.path.join(REPO, "experiments"))
-        from exp_door_a_flight_kit_v2_whisper_c5027 import q_circuit
+        # PRODUCTION OBJECT, post-85288d2: q_circuit_unbound + late binding — this fixture
+        # now exercises the same path the flight takes (the old bound q_circuit was the
+        # leaky-path construction; simulating it would test the right physics on the wrong
+        # object, the exact class Ember named at #6425).
+        from exp_door_a_flight_kit_v2_whisper_c5027 import q_circuit_unbound, bindings
         from qiskit.quantum_info import Statevector
         import numpy as _np
         n_t = 4
@@ -297,7 +301,11 @@ def selftest():
         for _ in range(3):
             A_t = [[int(rng.integers(0, 2)) if j >= i else 0 for j in range(n_t)]
                    for i in range(n_t)]
-            qc = q_circuit(n_t, 1, A_t, rng)      # ALT: accept prob exactly 1
+            full, ha, hb = q_circuit_unbound(n_t)
+            # ALT: bind the SAME A into both halves, AFTER construction (late binding)
+            bind = {**bindings(A_t, ha[1], ha[2], ha[3]),
+                    **bindings(A_t, hb[1], hb[2], hb[3])}
+            qc = full.assign_parameters(bind)
             qc.remove_final_measurements(inplace=True)
             counts = Statevector(qc).sample_counts(64, qargs=list(range(2 * n_t)))
             this_draw = set()
