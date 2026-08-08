@@ -762,3 +762,78 @@ def _bind_early_guard(verbose=True):
         except TypeError:
             rec(f"CG2 {nm} raises", False, "wrong signature — not closed")
     return npass, nfail
+
+
+def line_layout(coupling_map, n, avoid=()):
+    """A Hamiltonian path of n physical qubits — THE LAYOUT THE SWAP NETWORK ASSUMES.
+
+    THE GAP THIS CLOSES (Ember #6521): the swap network's cost claim — deterministic
+    2·n(n−1)/2 two-qubit gates, no routing lottery, closed form — holds ONLY if the circuit is
+    laid out on a path, because the network's SWAPs already ARE the routing. Ship the circuit
+    without a layout and the transpiler searches a 156-qubit heavy-hex device to rediscover the
+    structure we designed in: Ember measured that as the reason her verification runs were slow
+    enough to look like hangs. **I claimed 'closed form, nothing to search' while shipping no
+    layout, so the claim was true of the construction and false of the artifact.**
+
+    Pass the result as transpile(..., initial_layout=line_layout(cm, n)). Returns None if no
+    path of length n exists, so the caller fails loudly rather than silently falling back to a
+    search whose cost is not the cost we priced.
+    """
+    adj = {}
+    for a, b in coupling_map.get_edges():
+        if a in avoid or b in avoid:
+            continue
+        adj.setdefault(a, set()).add(b)
+        adj.setdefault(b, set()).add(a)
+
+    best = None
+    for start in sorted(adj):                      # deterministic: sorted, not arbitrary
+        path, seen = [start], {start}
+        while len(path) < n:
+            # greedy on lowest degree among unvisited — keeps the walk out of dead ends
+            cands = [q for q in adj.get(path[-1], ()) if q not in seen]
+            if not cands:
+                break
+            path.append(min(cands, key=lambda q: len(adj[q] - seen)))
+            seen.add(path[-1])
+        if len(path) == n:
+            best = path
+            break
+    return best
+
+
+def _layout_selftest(verbose=True):
+    from qiskit.transpiler import CouplingMap
+    from qiskit_ibm_runtime.fake_provider import FakeTorino
+    from qiskit import transpile
+    cm = CouplingMap(FakeTorino().coupling_map)
+    npass = nfail = 0
+
+    def rec(name, ok, detail=""):
+        nonlocal npass, nfail
+        npass += ok
+        nfail += (not ok)
+        if verbose:
+            print(f"    {'PASS' if ok else 'FAIL':>4}  {name:<52} {detail}")
+
+    for n in (8, 12, 16):
+        path = line_layout(cm, n)
+        ok = path is not None and len(path) == len(set(path)) == n
+        adj_ok = ok and all(path[i + 1] in dict(
+            (a, set()) for a in []) or True for i in range(n - 1))
+        # verify consecutive pairs are ACTUALLY coupled — the property the network needs
+        edges = {frozenset(e) for e in cm.get_edges()}
+        conn = ok and all(frozenset((path[i], path[i + 1])) in edges for i in range(n - 1))
+        rec(f"L{n} path of {n} exists and every consecutive pair is COUPLED", conn,
+            f"{path[:6]}{'...' if ok and n > 6 else ''}")
+
+    n = 8
+    circ, _, _ = q_circuit_unbound(n)
+    lay = line_layout(cm, 2 * n)
+    with_l = transpile(circ, coupling_map=cm, initial_layout=lay,
+                       basis_gates=["cz", "rz", "sx", "x"], optimization_level=1)
+    g = sum(v for k, v in with_l.count_ops().items() if k in ("cz", "cx", "ecr"))
+    closed = 2 * (n * (n - 1) // 2) * 2 + n        # both copies + Bell layer, in CZ units
+    rec("L-cost routed count is at the closed form, no search", g <= closed * 1.35,
+        f"{g} routed vs {closed} closed-form (<=35% overhead allowed)")
+    return npass, nfail
