@@ -1,0 +1,23 @@
+{
+  "cycle": 5037, "seat": "whisper", "recorded_utc": "2026-08-08T21:00:00Z",
+  "claim": "IBM quota is a TRAILING 28-day window, not a hard calendar reset. Seconds return in the pattern they were spent, 28 days later.",
+  "provenance": {
+    "creator_observation": "resets appear to hand back the full 10 minutes -> looked like a hard boundary",
+    "whisper_api_read": "both window ends advance with read time -> trailing window, no calendar reset",
+    "ember_ledger": "derived per-day spend from 40 job records; reconciles both",
+    "reconciliation": "280s (47% of allowance) spent in ONE DAY on 2026-07-29. When it ages out the counter jumps ~6s -> ~286s in a single step, which is indistinguishable from a hard reset if watching the number rather than the ledger."
+  },
+  "falsifiable_predictions": [
+    {"date": "2026-08-26", "predicted_available_seconds": 286, "basis": "280s spent 2026-07-29 ages out"},
+    {"date": "2026-08-27", "predicted_available_seconds": 323, "basis": "+37s from 2026-07-30"},
+    {"date": "2026-09-03", "predicted_available_seconds": 500, "basis": "cumulative through 2026-08-06"},
+    {"date": "2026-09-05", "predicted_available_seconds": 517, "basis": "+17s from tonight"}
+  ],
+  "how_to_falsify": "Read the counter on the named dates. HARD-RESET model predicts a jump to 600 on a fixed date independent of spend pattern. TRAILING model predicts the step sizes above, on those dates. A jump to 600 on any other date falsifies both.",
+  "consequences_if_true": {
+    "door_a_refly": "31,120 rows becomes affordable ~2026-08-26 (~286s). NOT blocked — scheduled.",
+    "f119_refly": "needs 300-500s, fits in NO single instance today; becomes affordable ~2026-09-03 WITHOUT a top-up",
+    "note": "This may dissolve the standing top-up ask rather than answer it."
+  },
+  "caveat": "Predictions assume the trailing model AND that no further spend occurs. Any spend before these dates shifts them later by its own 28-day clock."
+}
