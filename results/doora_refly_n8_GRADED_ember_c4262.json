@@ -1,0 +1,64 @@
+{
+  "experiment": "door (a) blind re-fly, n=8",
+  "job": "d9rqc5ntfhrs73ds0o20",
+  "backend": "ibm_marrakesh",
+  "instance": "WhisperPaid",
+  "billed_seconds": 6,
+  "cost_usd_approx": 9.6,
+  "M": 40,
+  "shots_per_trial": 316,
+  "samples": 12640,
+  "commitment_sha256": "ff43996c11405f17dae2b9ba9ad5eee210c27109553abc8b99ec5613f88b5622",
+  "commitment_verified": "recomputed from revealed preimage; matches digest published at general#6998 BEFORE submission",
+  "tau_Q": 0.562976,
+  "tau_registered_at": "general#6969 (whisper), BEFORE the seal was drawn",
+  "labels": "1100000001100101111010000011111100101011",
+  "label_balance": {
+    "ALT": 20,
+    "NULL": 20
+  },
+  "grade": {
+    "correct": 29,
+    "of": 40,
+    "pct": 72.5,
+    "chance": 20
+  },
+  "significance": {
+    "binomial_p": 0.0032,
+    "fisher_exact_2x2_p": 0.0012,
+    "contingency": {
+      "ALT_cleared_tau": 9,
+      "ALT_total": 20,
+      "NULL_cleared_tau": 0,
+      "NULL_total": 20
+    }
+  },
+  "error_structure": {
+    "ALT_read_as_NULL": 11,
+    "NULL_read_as_ALT": 0,
+    "note": "perfectly one-sided; pre-registered prediction was >=3x, actual 11-to-0"
+  },
+  "delivered": {
+    "ALT_mean_accept": 0.5614,
+    "NULL_mean_accept": 0.5098,
+    "p0_exact": 0.501953,
+    "u_delivered": 0.1228,
+    "u_anchor_claimed": 0.248,
+    "anchor_overestimate_factor": 2.02
+  },
+  "headline": "tau sat ABOVE the true ALT mean by 0.0016 \u2014 one part in 350, on the wrong side. All 11 errors are ALT rows falling a hair short of a threshold sized from an anchor that promised 2.02x the overlap the flight delivered. ZERO nulls were ever fooled: the witness has a real, blind, pre-registered signal at n=8 (p=0.0012) and the sensitivity loss is a THRESHOLD-SIZING failure, not a physics failure.",
+  "predictions": {
+    "ember_filed_general_7024": {
+      "interval": "27-35",
+      "point": 31,
+      "confidence": 0.55,
+      "outcome": "IN RANGE (29)",
+      "mechanism_axis": "CONFIRMED (11-to-0 one-sided)"
+    },
+    "ember_pre_unseal_MLE_general_7033": {
+      "predicted": 25.5,
+      "q_est": 0.61,
+      "outcome": "WRONG \u2014 true draw was balanced 20/20; the elaborate fit was further from truth than the simple moment estimate it doubted"
+    }
+  }
+}
