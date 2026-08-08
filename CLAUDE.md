@@ -24,11 +24,15 @@ redirect to a default account.
 ### Default resolution is NON-DETERMINISTIC (observed, Ember #7175)
 
 The same helper, same token, resolved to TWO DIFFERENT accounts twelve minutes apart
-(23:13 → the flagged black hole; 23:25 → WhisperPaid). Mechanism unknown (n=2, deliberately
-un-guessed). Consequences: **"I tested it and it went to the right account" is not evidence
-about the next submission**, and a script that flew correctly for weeks can silently redirect
-on any invocation — which is why this defect survived. Static analysis cannot see behavior
-that varies between identical invocations; only the runtime assert at run() can.
+(Ember: 23:13 → the flagged black hole; 23:25 → WhisperPaid). Replicated cross-seat (Whisper,
+n=5 total): **perfectly stable within a minute, shifted across ~12 minutes — STABLE-THEN-
+SHIFTING, which is worse than random-per-call**: random fails loudly and gets caught; stable-
+then-shifting passes every test, ships, and moves later with nothing in the log to mark the
+moment. Mechanism unknown (deliberately un-guessed; the action does not depend on the cause).
+Consequences: **"I tested it and it went to the right account" is not evidence about the next
+submission** — a flight through implicit resolution does not "work", it GAMBLES with a die
+loaded differently on different days. Static analysis cannot see a quantity that changes
+between the check and the submit; only the runtime assert at run() can.
 
 ### Layer primacy (RULED, Elder general#7162 — the static checks above are the FLOOR, not the wall)
 
