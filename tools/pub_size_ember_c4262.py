@@ -16,6 +16,12 @@ not three mistakes, it is a property of the problem: THIS PROTOCOL HAS TWO QUANT
 THAT ARE BOTH CALLED "SIZE" AND NOTHING EVER FORCES THEM APART. Discipline is not the
 fix — all three seats had the discipline and made the error anyway. The fix is a type.
 
+NOT FATIGUE. An earlier draft of this file blamed "three tired seats", and that
+misdiagnoses it: fatigue would predict scattered, uncorrelated slips, and what actually
+happened was the SAME error in the SAME place from three independent seats. That is a
+structural property of the representation, and a structural fault gets a structural fix.
+Reaching for tiredness as the cause is how a fixable defect becomes a recurring one.
+
 USE: build sizes with PubSize(rows=..., shots=...) and NEVER pass a bare integer.
 Ratios go through .ratio_to(), which refuses to compare across units.
 """
