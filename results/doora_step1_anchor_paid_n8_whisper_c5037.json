@@ -1,0 +1,24 @@
+{
+ "cycle": 5037,
+ "seat": "whisper",
+ "step": "re-fly v2 step 1 (anchor) \u2014 WhisperPaid, PAID instance",
+ "job_id": "d9rq1qfpemts73csulrg",
+ "submitted_utc": "2026-08-08T21:34:31.800335+00:00",
+ "done_utc": "2026-08-08T21:35:20.327061+00:00",
+ "isa_2q": 372,
+ "rows": 2000,
+ "shots_per_row": 1,
+ "public_seeds": [
+  77000,
+  78999
+ ],
+ "accept_freq": 0.624,
+ "u_anchor": 0.248,
+ "u_anchor_ci95": [
+  0.20554221959640384,
+  0.29045778040359616
+ ],
+ "lambda_eff": 0.00374818960434719,
+ "usage_seconds": 4,
+ "note": "PUBLIC A only; no sealed A or labels exist at this point in the sequence."
+}
