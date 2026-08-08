@@ -1,0 +1,209 @@
+{
+ "8": {
+  "window_id": "ibm_marrakesh_2026-08-08_refly",
+  "Q": [
+   {
+    "decisions": {
+     "632": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "632": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "632": "NULL"
+    }
+   }
+  ],
+  "C1": []
+ },
+ "_provenance": "mechanical reshape of hash-committed re-fly decisions (ac0d2d06...)"
+}
