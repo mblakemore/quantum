@@ -179,7 +179,28 @@ def main():
         tqc = transpile(qc, backend, initial_layout=layout, optimization_level=1, seed_transpiler=142)
         # split into <=MAX_ROWS_PER_JOB param-rows/job
         sampler = SamplerV2(mode=backend); jobs = []
+        # ── C4262 G-FIT, PER JOB ─────────────────────────────────────────────────────────
+        # I ported G-CRN and G-BACKEND into this path and NOT G-FIT — the guard protecting the
+        # RESOURCE — and then overspent: 126 QPU-seconds against a ~36.7s worst-case estimate,
+        # ~3.4x, taking WhisperPaid from 65/126 to 191/126 with zero completed jobs. Two errored,
+        # four were cancelled mid-run.
+        #
+        # A SINGLE UP-FRONT FIT CHECK IS NOT ENOUGH WHEN A FLIGHT SPLITS INTO N JOBS. All six
+        # went out on one check while the tank drained underneath them. The balance is re-read
+        # BEFORE EACH job and submission stops the moment it cannot be afforded — a partial
+        # flight that stops on its own terms is recoverable; one that stops because the account
+        # hit zero is not, and it takes the account down with it (flagged=TRUE).
+        _n_jobs = (len(rows) + MAX_ROWS_PER_JOB - 1) // MAX_ROWS_PER_JOB
+        _reserve = 5  # never spend the last seconds; leaves room to cancel/inspect
         for lo in range(0, len(rows), MAX_ROWS_PER_JOB):
+            _u = svc.usage()
+            _rem = _u["usage_remaining_seconds"]
+            if _u["usage_limit_reached"] or _rem <= _reserve:
+                print(f"  [HALT] G-FIT: {_rem}s remaining (reserve {_reserve}s) after "
+                      f"{len(jobs)}/{_n_jobs} jobs — REFUSING to submit further. "
+                      f"Submitted jobs stand; nothing new goes out.", flush=True)
+                break
+            print(f"  [PASS] G-FIT  job {len(jobs)+1}/{_n_jobs}: {_rem}s remaining", flush=True)
             chunk = rows[lo:lo + MAX_ROWS_PER_JOB]
             named = K.named_rows(params, chunk)
             job = sampler.run([(tqc, named, C)])
