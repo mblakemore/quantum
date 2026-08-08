@@ -108,10 +108,41 @@ def main():
 
     if args.submit:
         M = GRID[n]
-        from run_exp66_qpu_partb import _get_ibm_service
         from qiskit import transpile
-        from qiskit_ibm_runtime import SamplerV2
-        svc = _get_ibm_service(); backend = svc.backend(args.backend)
+        from qiskit_ibm_runtime import SamplerV2, QiskitRuntimeService
+        # ── C4262 G-CRN FOR THIS PATH ────────────────────────────────────────────────
+        # This used _get_ibm_service() from run_exp66_qpu_partb, whose fallback chain ends at
+        # "IBMQ_TOKEN from a .env, NO INSTANCE NEEDED". With instance=None the client resolves
+        # by DEFAULT ORDER across every instance the key can see — and on 2026-08-08 that put
+        # all six n=8 jobs onto the open-instance with usage_limit_reached=TRUE: the account
+        # that ACCEPTS submissions and never runs them. They sat QUEUED on ibm_fez until I
+        # checked the account rather than the log, and were cancelled unrun.
+        #
+        # The door (a) submitter already gated exactly this (G-CRN, full-CRN identity + explicit
+        # instance= + refusal on usage_limit_reached). It protected ONE code path. A guard that
+        # protects one path is not a guard, it is a local habit — so it is pinned here too.
+        PAID_CRN = ("crn:v1:bluemix:public:quantum-computing:us-east:"
+                    "a/65155eedeb8b464eadf55d101fb3c931:27609585-d5b2-43cb-808d-2d47aeb87c05::")
+        import re as _re
+        _tok = None
+        for _line in open("/droid/repos/DC15W/.env"):
+            _m = _re.match(r"^IBMQ_TOKEN=(.+)$", _line.strip())
+            if _m:
+                _tok = _m.group(1).strip().strip('"').strip("'"); break
+        if not _tok:
+            sys.exit("REFUSE: IBMQ_TOKEN not found")
+        svc = QiskitRuntimeService(channel="ibm_quantum_platform", token=_tok,
+                                   instance=PAID_CRN)
+        _u = svc.usage()
+        if _u["instance_id"] != PAID_CRN:
+            sys.exit(f"REFUSE G-CRN: resolved {_u['instance_id'][-24:]}, expected the paid CRN")
+        if _u["usage_limit_reached"]:
+            sys.exit("REFUSE G-CRN: instance is FLAGGED (usage_limit_reached) — it accepts "
+                     "submissions and never runs them")
+        print(f"  [PASS] G-CRN  ...{_u['instance_id'][-24:]}  remaining "
+              f"{_u['usage_remaining_seconds']}s  flagged=False", flush=True)
+        backend = svc.backend(args.backend)
+        print(f"  [BACKEND] {backend.name} (explicit: --backend, default ibm_fez)", flush=True)
         # measured q_n from data-qubit readout on the chosen layout -> C
         # (layout: first 2n-1 low-readout qubits; conv uses data 0..n-1)
         tgt = backend.target
