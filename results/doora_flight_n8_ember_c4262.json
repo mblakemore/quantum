@@ -1,0 +1,103 @@
+{
+  "rung": 8,
+  "M": 40,
+  "contract": "v2_raw_bitstrings",
+  "emitted_utc": "2026-08-08T13:44:00.617697+00:00",
+  "jobs": {
+    "probe_trial_1": "d9riuo9dsedc73agnft0",
+    "trials_2_40": "d9rj3vgpdb6s73e500mg"
+  },
+  "lambda_provenance": {
+    "lambda": 0.0024356,
+    "read_utc": "2026-08-08T08:55:56Z",
+    "calibration_utc": "2026-08-07T03:19:40Z",
+    "calibration_age_hours": 29.6,
+    "register": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "window_id": "ibm_marrakesh_2026-08-08"
+  },
+  "isa_2q": 372,
+  "isa_depth": 222,
+  "shots_per_trial": 77,
+  "usage_seconds": {
+    "probe": 3,
+    "main": 3,
+    "total_flight": 6
+  },
+  "trials": [
+    {
+      "job": "d9riuo9dsedc73agnft0",
+      "tag": "probe",
+      "trial_indices": [
+        1
+      ],
+      "data_field": "c",
+      "n_shape": "(33,)",
+      "note": "raw counts/bitstrings retained in job; grader reads from job_id"
+    },
+    {
+      "job": "d9rj3vgpdb6s73e500mg",
+      "tag": "main",
+      "trial_indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "data_field": "c",
+      "n_shape": "(39,)",
+      "note": "raw counts/bitstrings retained in job; grader reads from job_id"
+    }
+  ]
+}
