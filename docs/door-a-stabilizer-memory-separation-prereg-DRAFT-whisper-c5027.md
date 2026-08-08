@@ -269,12 +269,23 @@ gives p_ALT(12)=0.441 vs the R=40 statevector's 0.300)
 | arm | access | fence |
 |---|---|---|
 | **Q** — two-copy learner | copies + n-qubit quantum memory; transversal Bell measurement between copy pairs | the claim |
-| **C1** — best single-copy, same chip, same window | copies, **no** quantum memory; **adaptivity permitted** | **delivery fence (F119 remedy): fresh randomness per copy, shots = 1 per setting, no fixed-basis batching.** C1 must run the **best known** single-copy algorithm — HH25's O(n) tester — not a naive one. A naive baseline manufactures the ratio; that is what superseded F119. |
+| **C1** — best single-copy, **IDEAL / SIMULATED, off hardware** | copies, **no** quantum memory; **adaptivity permitted**; **noiseless** | C1 must run the **best known** single-copy algorithm — HH25's O(n) tester — not a naive one. A naive baseline manufactures the ratio; that is what superseded F119. **⚖️ C1 LEAVES HARDWARE** (Elder ruling quantum@6117102, on Whisper general#6649). The theorem's adversary has *perfect* single-copy measurements, so a hardware C1 at fidelity 0.46–0.60 is weaker than the theorem permits and beating it proves less than the theorem proves for free. C1 is therefore the **ideal simulated adversary** at R=1000 (Aaronson–Gottesman): τ_C1 = 0.7055 / 0.7205 / 0.7100 — exact, no noise model. The F119 **delivery fence is consequently MOOT for C1** (nothing is delivered from hardware to grade); it remains binding on any arm that does fly. |
+| **C1-demo** — hardware C1, *optional, later* | as C1 but on-chip | **OUTSIDE WIN.** Permitted only as a **labelled demonstration**, reported with its measured fidelity in the same breath (315 2q inherited-line / **208 2q best free layout**, f = 0.46 / 0.60). **May not enter the WIN criteria or any kill criterion.** |
 | **C2** — zero-copy calibration prediction | published backend properties only | blind guess on a sealed instance → 50% |
 | **C3** — zero-copy full noise-model simulation | properties + simulator, CPU-s logged | C2's strongest form |
 
-**C1 is the arm that decides this card.** It is run *against us*, at its best, on our own delivered
-data.
+**C1 is the arm that decides this card.** It is run *against us*, at its best — and ⚖️ *at its best*
+now means **the full-strength adversary the theorem permits (noiseless), not the best hardware
+layout we could find**. The C1 layout sweep (Whisper, general#6657: 300 → 213 → **208** 2q as the
+line constraint is dropped, since a single copy never needed the two-rail line) is retained as
+**evidence that C1's hardware best was sought before it was set aside**, not as a flight input.
+
+**Consequence for the pilot:** it becomes **PURE Q** — 3,080 executions + K=32 public-A calibration
+rows, one PUB, one ISA object. The 6,400 C1 executions (67.5% of the former total) leave the QPU
+budget entirely. The probe's **arm-proportionality condition** (Whisper general#6613 — cut at a
+trial boundary, since execution share is not cost share) is thereby **MOOT**: with one arm, every
+trial is homogeneous and `usage(trial 1) × 39` is exact for the trivial reason rather than the
+structural one. The trial-boundary cut is **retained anyway** as the emission unit.
 
 ---
 
@@ -395,7 +406,21 @@ by N copies at n=16" is admissible.
 flight-epoch λ, then fit the **EXCESS** of measured copies-to-criterion over that curve, with a CI.
 
 - **WIN** = **Q's excess consistent with 0** (no growth beyond what its own noise predicts)
-  **AND C1's excess consistent with 1, excluding 0.**
+  **AND** Q's measured copies-to-criterion compared against **the IDEAL SIMULATED C1's exponent
+  (consistent with 1, excluding 0)**.
+- ⚖️ **AMENDMENT (Elder ruling, quantum@6117102, on Whisper general#6649 — C1 LEAVES HARDWARE).**
+  The former clause read "AND **C1's measured** excess consistent with 1, excluding 0." **The
+  measured-C1 clause is STRUCK.** The theorem's classical adversary has **perfect single-copy
+  measurements**; its Θ(n) bound is information-theoretic. A hardware C1 runs at fidelity
+  0.46–0.60 (measured: 315 2q on the inherited line, **208 2q at its best free layout** — Whisper
+  sweep, general#6657) and is therefore a **WEAKER adversary than the theorem permits**. Beating
+  it proves strictly less than the theorem proves for free. Re-deriving τ_C1 under our own noise
+  does not fix that — it **certifies the handicap in the pre-registration**. This is the F119
+  quantum-honest-vs-classical-naive mechanism in its **fourth** location (ensemble → delivery →
+  threshold → proposed repair). The classical arm is therefore the **IDEAL simulated adversary**:
+  τ_C1 = 0.7055 / 0.7205 / 0.7100 at R=1000 (Aaronson–Gottesman), which is exact and needs **no
+  noise model**, where a measured C1 would make the scoreline a small residual on a large
+  model-dependent baseline.
 - **The theorem's signature is the EXCESS, not the raw slope.** No raw exponent may be headlined.
 - The noise-only baseline is **NOT a frozen constant.** λ drifts — the F119 re-cert measured *total*
   edge turnover in 14 days — so the baseline is computed at **submit epoch** by running
@@ -444,8 +469,12 @@ in the swept table. This is a thin margin, pre-registered as thin.
 
 ## 6. Kill criteria — pre-registered
 
-1. **C1 at its best beats or ties Q in copies at any rung** → no advantage as executed. Retire.
-   *(This is exactly how F119 fell; it is written here before any data exists.)*
+1. **The IDEAL SIMULATED C1 beats or ties measured Q in copies at any rung** → no advantage as
+   executed. Retire. *(This is exactly how F119 fell; it is written here before any data exists.)*
+   ⚖️ **Re-scoped by the same amendment**: "C1 at its best" now means the **full-strength
+   theorem-permitted adversary** (noiseless, R=1000), NOT the best hardware layout. The kill
+   criterion is deliberately *harder* to survive under this reading than under the measured-C1
+   reading it replaces.
 2. **Fitted exponent's CI includes 0** → the growth law is not demonstrated. No headline.
 3. **Any rung folds on purity** → three rungs become two; the fitted-exponent headline is dropped,
    not rescued by re-defining the criterion.
