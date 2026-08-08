@@ -33,6 +33,8 @@ def gate(name, ok, detail):
     print(f"  [{'PASS' if ok else 'BLOCK'}] {name:12} {detail}")
     return ok
 
+SHOTS_PER_DECISION = 77
+
 def main(n, do_submit, backend_name, instance_remaining_s):
     sys.path.insert(0, "scripts")
     import importlib.util, numpy as np
@@ -112,13 +114,31 @@ def main(n, do_submit, backend_name, instance_remaining_s):
     if not do_submit:
         print(f"\n  DRY RUN — nothing submitted. Gates so far: {'ALL PASS' if ok else 'BLOCKED'}")
         return 0 if ok else 1
-    sys.exit("\n  REFUSE: live submit path not armed in this revision.")
 
-if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--n", type=int, default=8)
-    ap.add_argument("--submit", action="store_true")
-    ap.add_argument("--backend", default="ibm_marrakesh")
-    ap.add_argument("--remaining", type=float, default=23.0)
-    a = ap.parse_args()
-    sys.exit(main(a.n, a.submit, a.backend, a.remaining))
+    if not ok:
+        sys.exit("\n  REFUSE: a gate blocked. Nothing submitted.")
+
+    # ---- LIVE PATH: PROBE TRIAL (Elder probe-spec v2, #6617) ------------------------
+    # G-F could NOT be implemented as I specified it: usage_estimation is a property of
+    # RuntimeJobV2, and that job exists only AFTER .run() submits. The gate required the
+    # action it gated. Same shape as the u>=0.70 threshold I dissolved earlier — everyone
+    # argued where to put the line; nobody checked it could be read.
+    #
+    # RULED REPLACEMENT: fly EXACTLY ONE SEALED TRIAL (trial 1, both arms, in emission
+    # order), read its ACTUAL usage from the completed job, project x39 for the remaining
+    # trials, and gate on the court-ratified 50%-of-remaining ceiling.
+    #   - the trial boundary makes the projection ASSUMPTION-FREE: every trial has the same
+    #     arm mix, so no rate decomposition is needed (Whisper #6613 — a row-count cut could
+    #     land arm-disproportionate and measure a rate belonging to neither arm)
+    #   - per-job overhead amortises over fewer circuits, so the probe OVER-estimates the
+    #     full flight: the gate errs toward refusing a flight that would have fit
+    #   - the probe trial's DATA COUNTS (Elder #6617): it is the sealed schedule flying in
+    #     order. Discarding it would silently shrink M. Guard is visibility — per-trial
+    #     job_id in flight.json, grader reports accuracy WITH and WITHOUT probe trials as a
+    #     pre-registered SENSITIVITY row, reported and never gating.
+    print("\n  LIVE PATH — probe trial only. Remaining trials require a SEPARATE armed run.")
+    print(f"     probe = 1 sealed trial, both arms, {SHOTS_PER_DECISION} Q + 160 C1 executions")
+    print(f"     ceiling = 50% of {instance_remaining_s}s = {instance_remaining_s/2}s")
+    print(f"     projection rule: usage(trial 1) x 39 must be <= ceiling")
+    sys.exit("\n  REFUSE: probe submission not armed in this revision. "
+             "Arming is a deliberate separate edit, not a flag.")
