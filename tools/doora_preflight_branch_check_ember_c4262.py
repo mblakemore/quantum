@@ -109,3 +109,47 @@ if __name__ == "__main__":
             if not cok: bad += 1
     print(f"\n  VERDICT: {'PASS — branches indistinguishable' if bad==0 else f'REFUSE — {bad} failure(s)'}")
     sys.exit(0 if bad == 0 else 1)
+
+
+def weight_sweep(kit, bk, twoq, n, arm="Q", weights=(0,2,4,6)):
+    """SECOND ASSERTION, added C4262 after the defect my branch check MISSED.
+
+    Branch-identity guards the wrong axis for bind-early leaks: ALT and NULL at the SAME
+    weight(A) come back EQUAL, so the branch check passes while the compiled circuit reads
+    out weight(A) wide open (measured: Q 4->44 gates, C1 17->34, both at n=4). The leak is
+    against WEIGHT, not against BRANCH. This is the axis that actually found both.
+    """
+    from qiskit import transpile
+    import numpy as np
+    slots = [(i,j) for i in range(n) for j in range(i+1,n)]
+    if arm == "Q":
+        qc, hA, hB = kit.q_circuit_unbound(n)
+        bind = lambda A: kit.q_bindings(1, A, np.random.default_rng(5), hA, hB)
+    else:
+        from qiskit.quantum_info import random_clifford
+        out = kit.c1_round_unbound(n, random_clifford(n, seed=7))
+        qc, handles = (out[0], out[1:]) if isinstance(out, tuple) else (out, ())
+        bind = lambda A: kit.c1_bindings(1, A, np.random.default_rng(5), *handles)
+    t = transpile(qc, backend=bk, optimization_level=2)
+    counts = []
+    for w in weights:
+        A = [[0]*n for _ in range(n)]
+        for k in range(min(w, len(slots))): A[slots[k][0]][slots[k][1]] = 1
+        counts.append(t.assign_parameters(bind(A)).count_ops().get(twoq, 0))
+    return counts, len(set(counts)) == 1
+
+
+def gun_check(kit):
+    """Every bind-early path must be UNREACHABLE, not merely superseded.
+    Three sites existed in one file and each fix closed only the site I NAMED —
+    fixes follow headlines, not measurements. So this enumerates rather than spot-checks."""
+    import numpy as np
+    A = [[1,1,0,1],[0,0,1,0],[0,0,1,1],[0,0,0,0]]
+    out = {}
+    for fn in ("q_circuit", "c1_circuit", "c1_round_circuits"):
+        if not hasattr(kit, fn): out[fn] = "ABSENT"; continue
+        try:
+            getattr(kit, fn)(4, 1, A, np.random.default_rng(1)); out[fn] = "CALLABLE — LOADED"
+        except RuntimeError: out[fn] = "raises"
+        except Exception as e: out[fn] = type(e).__name__
+    return out
