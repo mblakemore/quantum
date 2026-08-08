@@ -189,7 +189,35 @@ def _get_ibm_service():
     if not token:
         raise RuntimeError("No IBM Quantum token found. Set QISKIT_IBM_TOKEN, IBMQ_TOKEN, or ensure .env exists.")
 
-    return QiskitRuntimeService(channel=channel, token=token, instance=instance)
+    svc = QiskitRuntimeService(channel=channel, token=token, instance=instance)
+
+    # ── C4262 FAIL-CLOSED ON THE BLACK-HOLE ACCOUNT (Ember) ──────────────────────────
+    # When `instance` is None this helper resolves by DEFAULT ORDER across every instance the
+    # token can see. On 2026-08-08 that put six exp142 jobs onto an `open-instance` whose
+    # usage_limit_reached was TRUE — an account that ACCEPTS submissions and never runs them.
+    # They sat QUEUED on ibm_fez and were cancelled unrun; an earlier job had already sat there
+    # 8h45m. Two different accounts both NAME an instance "open-instance", so only the CRN
+    # distinguishes the working one from the black hole.
+    #
+    # DELIBERATELY NARROW. This does not force callers to pass an instance and does not change
+    # any path that currently resolves to a healthy account — it refuses ONLY the specific,
+    # measured hazard. A broader "must pass an instance" rule is the right end state, but it is
+    # the shared submit-guard module Elder ruled as PRIMARY (general#7162) and that is his seat;
+    # breaking siblings' working scripts at midnight to get there is not my call.
+    if instance is None:
+        try:
+            u = svc.usage()
+            if u.get("usage_limit_reached"):
+                raise RuntimeError(
+                    "REFUSE: implicit account resolution landed on an instance with "
+                    f"usage_limit_reached=TRUE ({u.get('instance_id','?')[-24:]}). This account "
+                    "accepts submissions and never runs them. Pass instance=<FULL_CRN> "
+                    "explicitly — see quantum/CLAUDE.md.")
+        except RuntimeError:
+            raise
+        except Exception:
+            pass  # usage() unavailable: do not convert a probe failure into a hard stop
+    return svc
 
 
 # ── QPU submission ────────────────────────────────────────────────────────────
