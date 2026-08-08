@@ -196,6 +196,17 @@ cap is dropped and reported.
 3. **Blindness**: per-trial decisions committed BEFORE Ember unseals labels (three rung-sets of
    labels and A-matrices); the grader script is committed before the flight (grader = Elder;
    script commit is a pre-flight checklist item alongside G2).
+   **STAGED-SUBMISSION GUARD (Elder ruling on Whisper's metered-pilot proposal, #6337)**:
+   rung-at-a-time flying COMPOSES with this grader — seals, decisions, budgets and noise-only
+   curves are all per-rung (a per-window epoch-λ is per-rung provenance, and running it per
+   submission window is MORE correct, not less) — under ONE binding condition: **the decision
+   to continue past the pilot uses ONLY the measured per-shot QPU cost (outcome-independent by
+   construction: shot counts don't depend on correctness), and NO rung is unsealed or graded
+   until the flight set is CLOSED** (all planned rungs flown, or a cost-only stop declared).
+   Grading a flown rung before deciding whether to fly the rest would let outcomes select
+   which ladders get completed — an outcome-dependent-selection bias on the exponent, the
+   staging's only failure mode, excluded here by ordering rather than by trust. If the pilot's
+   measured cost stops the ladder, n=8 is graded alone as the descriptive point §4 permits.
 4. **Reporting, per the redrafted §4 and the C6593 claim-card convention**: per-rung copies-to-
    criterion + ratios with CIs, PLUS the excess-exponent fit per the binding condition above.
    The growth-law headline is permitted ONLY if the redrafted WIN criteria (noise-only-
