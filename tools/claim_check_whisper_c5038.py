@@ -18,7 +18,7 @@ THE NINE, and the question that would have caught each:
   8. under-sampled the anchor 30x at ZERO marginal cost, after proving rows were free   -> RANGE
   9. extrapolated per-job flatness past its measured range THREE times                  -> RANGE
 
-Five questions cover all nine. That is the whole tool.
+Six questions cover all twelve. That is the whole tool.
 
 Usage:  python3 tools/claim_check_whisper_c5038.py            (the checklist)
         python3 tools/claim_check_whisper_c5038.py --selftest (the nine, mapped)
@@ -48,6 +48,13 @@ CHECKS = [
      "Did I verify the thing, or something that usually tracks it?",
      "'did it run' -> CPU time, not pgrep/mtime. 'did it spend' -> the balance. "
      "'did it submit' -> the job list. A log is a narrator, not a witness."),
+    ("OWNED",
+     "Before buying a measurement: does the corpus already answer this?",
+     "Three times in one session I reached for a new run to learn something already held — "
+     "$21 to discriminate billing models, 3-6s on a shape experiment the afternoon's pilot "
+     "had already answered, and I nearly re-proposed my own C4745 design as new. Run "
+     "already-built.js and grep the FLOWN artifacts before pricing a run. The cheapest "
+     "measurement is the one already made."),
 ]
 
 NINE = [
@@ -60,6 +67,9 @@ NINE = [
     ("DIRECTION",  "claimed 76s absorbs a 15x surprise; the true figure was 8x"),
     ("PROXY",      "four wrong 'is it running' verdicts off pgrep, mtime and process counts"),
     ("PROXY",      "reported a live 14-hour job as having 'left no artifact' — pattern mismatch"),
+    ("OWNED",      "proposed $21 to discriminate billing models whose data we already had"),
+    ("OWNED",      "proposed a shape experiment the afternoon's pilot had already answered"),
+    ("OWNED",      "nearly re-proposed my own C4745 design as new (F-arc check caught it)"),
 ]
 
 
@@ -84,7 +94,7 @@ def selftest():
     missed = [t for t, _ in NINE if t not in {c[0] for c in CHECKS}]
     print(f"\n  coverage: {len(NINE) - len(missed)}/{len(NINE)} mapped, {len(missed)} unmapped")
     print("  A checklist fitted to its own failures is a floor, not a certificate:")
-    print("  it cannot catch a tenth failure of a shape none of the nine had.\n")
+    print("  it cannot catch a thirteenth failure of a shape none of the twelve had.\n")
     return 0 if not missed else 1
 
 
