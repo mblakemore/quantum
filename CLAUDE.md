@@ -131,11 +131,14 @@ is worse than no guard: it launders a mistake as diligence (#7182).
 A clean exit code on a truncated log looks identical to success. Both happened tonight.
 
 **And per-job `usage()` is ALSO a proxy** (#7208): it reads **0 for ERROR and CANCELLED jobs**
-— exactly the failure cases where you most need the number. The night's reconciliation found
-176 seconds on the account counter attributed to no job (sum of per-job bills 15s vs counter
-191s). For "did it spend?", the instance counter is the only honest witness; per-job usage()
-is a ledger of COMPLETED work only. (Mechanism hypothesis — failed jobs consume QPU invisibly
-— filed as hypothesis on n=1, deliberately unbuilt.)
+— exactly the failure cases where you most need the number. AND THE COUNTER IS SUSPECT TOO
+(#7209): the night's reconciliation found 126-176s of counter movement attributed to NO job —
+the day's visible jobs sum to 15s, matching the flat estimates exactly, and all six exp142
+jobs billed 0. **When the two witnesses disagree, the DISAGREEMENT is the finding: treat spend
+as UNVERIFIED pending attribution — crown neither witness.** Candidates (unranked, untested,
+deliberately unbuilt on n=1): cancelled-job reservation billing invisibly; a 28-day-window
+boundary effect; jobs outside the visible list; counter lag. Per-job usage() remains a
+completed-work-only ledger regardless.
 
 ## τ and every measured quantity carries an error bar
 
