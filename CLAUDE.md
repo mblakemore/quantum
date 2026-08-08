@@ -94,8 +94,12 @@ svc = QiskitRuntimeService(channel="ibm_quantum_platform",
 
 ### Assert the backend too
 
-Every campaign number is on `ibm_marrakesh`. A job on another machine is not a comparison, it
-is a different experiment. Assert `backend.name` at the submission choke point alongside the CRN.
+Assert `backend.name` at the submission choke point alongside the CRN — **against the
+experiment's OWN declared venue, read from its manifests**: door (a) → `ibm_marrakesh`;
+exp142 → `ibm_fez` (all twelve prior arms). A job on another machine than its campaign's venue
+is not a comparison, it is a different experiment — and the venue constant never comes from
+whichever device the current session has been thinking about. A guard with the wrong constant
+is worse than no guard: it launders a mistake as diligence (#7182).
 
 ---
 
