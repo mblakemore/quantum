@@ -226,6 +226,42 @@ def selftest():
     d2 = decode_q_trial(rows3, 3, "interleaved", [2, 4], 0.8)
     ok.append(("nested-prefix decode known answers", d1 == {"4": "ALT", "8": "ALT"}
                and d2 == {"4": "ALT", "8": "NULL"}))
+    # [12] CROSS-FILE CONSISTENCY (the #6398 fixture): import the KIT's q_circuit, simulate
+    #      ALT shots (accept probability EXACTLY 1 per kit gate Q1), and demand that EXACTLY
+    #      ONE (layout, endianness) convention makes every sampled shot decode to ACCEPT.
+    #      This pins the convention from the kit's own physics — no possibility of
+    #      both-agree-and-both-wrong. Skipped (not passed) if qiskit is unavailable.
+    try:
+        sys.path.insert(0, os.path.join(REPO, "experiments"))
+        from exp_door_a_flight_kit_v2_whisper_c5027 import q_circuit
+        from qiskit.quantum_info import Statevector
+        import numpy as _np
+        n_t = 4
+        rng = _np.random.default_rng(7)
+        A_t = [[int(rng.integers(0, 2)) if j >= i else 0 for j in range(n_t)] for i in range(n_t)]
+        qc = q_circuit(n_t, 1, A_t, rng)      # ALT: accept prob exactly 1
+        qc.remove_final_measurements(inplace=True)
+        counts = Statevector(qc).sample_counts(64, qargs=list(range(2 * n_t)))
+        conventions = [("halves", False), ("halves", True),
+                       ("interleaved", False), ("interleaved", True)]
+        surviving = []
+        for layout, rev in conventions:
+            keys = [k[::-1] if rev else k for k in counts]
+            if all(q_accept_bit(k, n_t, layout) == 1 for k in keys):
+                surviving.append((layout, rev))
+        # FIRST RUN of this fixture returned BOTH halves conventions — and that is a
+        # THEOREM, not an ambiguity: full-string reversal maps halves-pair (i, n+i) to
+        # pair (n-1-i) with components swapped, and the singlet marker (1,1) is symmetric
+        # under the swap, so the accept bit is ENDIANNESS-INVARIANT for the halves layout.
+        # The fixture therefore pins layout="halves" (both interleaved conventions were
+        # ELIMINATED) and proves endianness is irrelevant to the Q rule specifically.
+        # ⚠️ C1 DECODING IS NOT REVERSAL-INVARIANT (bit i must map to qubit i's basis) —
+        # the C1 path, when built, carries its OWN endianness fixture. Do not inherit this.
+        ok.append((f"cross-file: layout=halves pinned, interleaved eliminated, "
+                   f"endianness Q-invariant (survivors {surviving})",
+                   sorted(surviving) == [("halves", False), ("halves", True)]))
+    except ImportError as e:
+        ok.append((f"cross-file fixture SKIPPED (missing dep: {e}) — NOT a pass", False))
     # [7] the λ-provenance refusal CAN FIRE (test the check, not just the happy path):
     #     missing field → refuses; window mismatch → refuses; correct → passes
     good_lp = {"lambda": 2.544e-3, "epoch_utc": "T", "register": "R", "window_id": "w1"}
