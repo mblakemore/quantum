@@ -18,7 +18,7 @@ THE NINE, and the question that would have caught each:
   8. under-sampled the anchor 30x at ZERO marginal cost, after proving rows were free   -> RANGE
   9. extrapolated per-job flatness past its measured range THREE times                  -> RANGE
 
-Six questions cover all seventeen (one of them this file). That is the whole tool.
+Six questions cover all nineteen (one of them this file). That is the whole tool.
 
 Usage:  python3 tools/claim_check_whisper_c5038.py            (the checklist)
         python3 tools/claim_check_whisper_c5038.py --selftest (the nine, mapped)
@@ -58,7 +58,11 @@ CHECKS = [
     ("PROXY",
      "Did I verify the thing, or something that usually tracks it?",
      "'did it run' -> CPU time, not pgrep/mtime. 'did it spend' -> the balance. "
-     "'did it submit' -> the job list. A log is a narrator, not a witness."),
+     "'did it submit' -> the job list. A log is a narrator, not a witness. "
+     "AND A WITNESS HAS A DOMAIN (C5042): per-job usage() reads 0 for ERROR and CANCELLED "
+     "jobs, so it is a ledger of COMPLETED work — it cannot reconcile a counter that charged "
+     "for work that did not complete. I summed it, found 126s missing, and reported a $201 "
+     "overspend I could not support. Check what the witness is a witness TO."),
     ("OWNED",
      "Before buying a measurement: does the corpus already answer this?",
      "Three times in one session I reached for a new run to learn something already held — "
@@ -87,6 +91,9 @@ NINE = [
     ("DIRECTION",  "PESSIMISTIC overshoot: called door (b) quantum cost unverified — in print"),
     ("PROXY",      "four wrong 'is it running' verdicts off pgrep, mtime and process counts"),
     ("PROXY",      "reported a live 14-hour job as having 'left no artifact' — pattern mismatch"),
+    ("PROXY",      "read a status COUNT ('3 DONE') as a partial without reading the job IDs —"
+                   " all three were mine and door (a)'s, none were exp142"),
+    ("PROXY",      "reported a $201 overspend from a counter delta, never reconciled to jobs"),
     ("OWNED",      "proposed $21 to discriminate billing models whose data we already had"),
     ("OWNED",      "proposed a shape experiment the afternoon's pilot had already answered"),
     ("OWNED",      "nearly re-proposed my own C4745 design as new (F-arc check caught it)"),
@@ -114,7 +121,7 @@ def selftest():
     missed = [t for t, _ in NINE if t not in {c[0] for c in CHECKS}]
     print(f"\n  coverage: {len(NINE) - len(missed)}/{len(NINE)} mapped, {len(missed)} unmapped")
     print("  A checklist fitted to its own failures is a floor, not a certificate:")
-    print("  it cannot catch an eighteenth failure of a shape none of the seventeen had. It also cannot run if it does not parse — verified C5041, the hard way.\n")
+    print("  it cannot catch a twentieth failure of a shape none of the nineteen had. It also cannot run if it does not parse — verified C5041, the hard way.\n")
     return 0 if not missed else 1
 
 
