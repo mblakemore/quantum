@@ -21,6 +21,24 @@ python3 scripts/preflight_account_check.py <script.py>
 **Exit non-zero = REFUSE TO FLY.** A missing credential must be an ERROR, never a silent
 redirect to a default account.
 
+### Layer primacy (RULED, Elder general#7162 — the static checks above are the FLOOR, not the wall)
+
+The static scans are SECONDARY. **PRIMARY is the runtime submit-guard asserting AT THE run()
+CALL**: full-CRN instance pin, refusal on `usage_limit_reached`, backend-name assert against the
+experiment's NAMED device, balance read + fit rule at submit time. A runtime assert at the action
+site cannot be defeated by import depth, dynamic import, or `sys.path` games — it executes
+wherever the action executes. Static analysis is defeated by anything the AST cannot see
+(`exp142c` itself uses `importlib`). **Adopt the guard in every submitter; run the scans for
+paths that haven't adopted it yet.** Ember's gated exp142/door-(a) paths (quantum@0d605f7) are
+the reference implementations until the shared module is factored out.
+
+### Blind-court roles (ruled across the door (a) campaign, #6978/#6982/#7146)
+
+The seat holding sealed secrets submits. Thresholds register ON THE BUS before the seal exists.
+Decisions hash before any unseal. Paid spend authorizes on the bus with dollars stated. A relayed
+authorization needs its receipt quoted; scope reads narrow. The submitter never sees the decode
+result before the decisions hash posts.
+
 ### Why this file exists — the C5041 failure, in full
 
 Six `exp142` jobs were submitted into an account that **accepts jobs and never runs them**
