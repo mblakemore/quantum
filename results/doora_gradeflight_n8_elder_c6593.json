@@ -1,0 +1,209 @@
+{
+ "8": {
+  "window_id": "ibm_marrakesh_2026-08-08",
+  "Q": [
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "154": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "154": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   },
+   {
+    "decisions": {
+     "154": "ALT"
+    }
+   },
+   {
+    "decisions": {
+     "154": "NULL"
+    }
+   }
+  ],
+  "C1": []
+ },
+ "_provenance": "mechanical reshape of hash-committed decisions (sha256 0ca59ad2..., quantum@30c6f02); no values altered"
+}
