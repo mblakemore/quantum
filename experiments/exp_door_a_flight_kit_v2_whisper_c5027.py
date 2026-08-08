@@ -702,3 +702,63 @@ def _c1_production_selftest(verbose=True):
     except RuntimeError:
         rec("X4 the leaky C1 path is UNREACHABLE", True, "raises, per the q_circuit precedent")
     return npass, nfail
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CLASS-LEVEL CLOSURE (Ember #6449). Her finding is about REPORTING, not testing:
+# "FIXES FOLLOW HEADLINES, NOT MEASUREMENTS." c1_circuit sat in her measurement output BOTH
+# times, on the line reading "DOES NOT RAISE", and was in neither headline — so it survived two
+# rounds of fixing while being visible in both. A defect reported as an instance gets fixed as an
+# instance. This closes the CLASS and then GUARDS it, so the next bind-early function fails the
+# suite instead of waiting for a fourth report.
+# ─────────────────────────────────────────────────────────────────────────────
+def c1_circuit(n, label, A, rng):
+    """⛔ UNREACHABLE — pre-HH25 single-copy version. Superseded twice over: it measures LOCAL
+    Pauli bases (sub-best, cannot express HH25) AND binds at construction (leaks weight(A)).
+    Kept only so this docstring is findable from the name. Use c1_round_unbound + c1_bindings."""
+    raise RuntimeError(
+        "c1_circuit() is SUPERSEDED AND LEAKY — local Pauli bases cannot express HH25 (ship#6410) "
+        "and it binds before transpilation (ship#6449). Use c1_round_unbound(n, C) + c1_bindings()."
+    )
+
+
+def _bind_early_guard(verbose=True):
+    """THE CLASS GUARD: every exported circuit-builder must either return UNBOUND or RAISE.
+    Scans the module rather than checking a list, so a function added tomorrow is covered."""
+    import inspect
+    import sys as _sys
+    mod = _sys.modules[__name__]
+    src = inspect.getsource(mod)
+    npass = nfail = 0
+
+    def rec(name, ok, detail=""):
+        nonlocal npass, nfail
+        npass += ok
+        nfail += (not ok)
+        if verbose:
+            print(f"    {'PASS' if ok else 'FAIL':>4}  {name:<54} {detail}")
+
+    builders = [n for n, o in vars(mod).items()
+                if callable(o) and not n.startswith("_")
+                and ("circuit" in n or "round" in n) and inspect.isfunction(o)]
+    loaded = []
+    for name in sorted(builders):
+        fn = getattr(mod, name)
+        body = inspect.getsource(fn)
+        binds = "assign_parameters" in body
+        raises = "raise RuntimeError" in body
+        if binds and not raises:
+            loaded.append(name)
+    rec("CG1 no exported builder binds at construction without raising",
+        not loaded, f"scanned {len(builders)}: {sorted(builders)}" if not loaded
+        else f"STILL LOADED: {loaded}")
+
+    for nm in ("q_circuit", "c1_circuit", "c1_round_circuits"):
+        try:
+            getattr(mod, nm)(4, 1, None, None)
+            rec(f"CG2 {nm} raises", False, "it did NOT raise")
+        except RuntimeError:
+            rec(f"CG2 {nm} raises", True, "closed")
+        except TypeError:
+            rec(f"CG2 {nm} raises", False, "wrong signature — not closed")
+    return npass, nfail
