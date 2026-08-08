@@ -297,7 +297,6 @@ draw("swap");
     if(g[1]===null) return;
     el(s,"line",{x1:L,y1:py(g[0]),x2:R,y2:py(g[0]),style:`stroke:${g[0]===0.5?"var(--amber)":"var(--edge)"};stroke-width:${g[0]===0.5?2:1};${g[0]===0.5?"stroke-dasharray:6 4":""}`});
     el(s,"text",{x:L-8,y:py(g[0])+4,"text-anchor":"end",style:`fill:${g[0]===0.5?"var(--amber)":"var(--ink-3)"};font-family:var(--mono);font-size:11px`}).textContent=g[1];});
-  el(s,"text",{x:R,y:py(0.5)-6,"text-anchor":"end",style:"fill:var(--amber);font-family:var(--mono);font-size:11px"}).textContent="1/2 — certified entanglement above this line";
   const n=BARS.length,bw=(R-L)/n*0.42;
   BARS.forEach((b,i)=>{
     const x=L+(R-L)*(i+0.5)/n;
@@ -306,6 +305,22 @@ draw("swap");
     el(s,"text",{x:x,y:py(b.v)+(b.v>=0?-8:16),"text-anchor":"middle",
       style:`fill:${b.c};font-family:var(--mono);font-size:13px;font-weight:700`}).textContent=(b.v>0?"":"−")+Math.abs(b.v).toFixed(3);
     el(s,"text",{x:x,y:B3+20,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=b.n;});
+  // Drawn AFTER the bars, because it used to be drawn before them: a bar tall enough to cross
+  // the 1/2 line painted straight over it — amber rgb(255,200,107) on green rgb(68,201,117),
+  // 1.39:1. There is no free horizontal position for it (a ~290-unit caption
+  // spans several bar slots) and no free horizontal BAND (any line across the plot meets a
+  // bar), so moving it cannot work. Paint order plus a backing plate: the caption keeps its
+  // position and its meaning, and reads against --bg wherever a bar happens to be.
+  // A plate alone was NOT enough and I measured that rather than assuming: inserting it
+  // behind the caption still left both behind the bars, which are appended later.
+  {
+    const cap = el(s,"text",{x:R,y:py(0.5)-6,"text-anchor":"end",style:"fill:var(--amber);font-family:var(--mono);font-size:11px"});
+    cap.textContent="1/2 — certified entanglement above this line";
+    const bb = cap.getBBox();
+    const plate = el(s,"rect",{x:bb.x-4,y:bb.y-1,width:bb.width+8,height:bb.height+2,rx:3,
+                               style:"fill:var(--bg);opacity:.92"});
+    s.insertBefore(plate, cap);   // behind the caption, in front of the bars drawn later
+  }
   // gain arrow input -> kept
   const x1=L+(R-L)*0.5/n, x2=L+(R-L)*1.5/n;
   el(s,"path",{d:`M${x1+bw/2+6},${py(0.396)} C ${(x1+x2)/2},${py(0.62)} ${(x1+x2)/2},${py(0.62)} ${x2-bw/2-8},${py(0.688)}`,
