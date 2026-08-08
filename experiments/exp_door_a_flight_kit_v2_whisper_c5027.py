@@ -365,3 +365,39 @@ def _circuit_selftest(verbose=True):
     c, _ = c1_circuit(n, 1, A, rng)
     rec("Q5 C1 is ONE copy", c.num_qubits == n, f"{c.num_qubits} wires")
     return npass, nfail
+
+
+def c1_record(raw_counts_key, n):
+    """Normalise a qiskit outcome string to QUBIT ORDER: result[i] IS qubit i.
+
+    WHY THIS EXISTS (Elder #6403): the Q accept bit is endianness-INVARIANT for the halves layout
+    (full reversal maps pair (i,n+i) to (n-1-i) with components swapped, and the singlet marker
+    (1,1) is symmetric) — so Q needs no convention. **C1 IS NOT INVARIANT**: basis_spec[i] must
+    meet the outcome of QUBIT i, and qiskit returns the string with qubit 0 RIGHTMOST. Rather than
+    document a reversal for the decoder to apply correctly, the kit emits qubit order so there is
+    no convention left to get wrong. A convention that must be remembered is a convention that
+    will eventually be forgotten."""
+    return raw_counts_key[::-1]
+
+
+def _c1_endianness_selftest(verbose=True):
+    from qiskit_aer import AerSimulator
+    npass = nfail = 0
+
+    def rec(name, ok, detail=""):
+        nonlocal npass, nfail
+        npass += ok
+        nfail += (not ok)
+        if verbose:
+            print(f"    {'PASS' if ok else 'FAIL':>4}  {name:<54} {detail}")
+
+    n = 4
+    for target in (0, 2, 3):
+        qc = QuantumCircuit(n, n)
+        qc.x(target)                       # ONLY qubit `target` is |1>
+        qc.measure(range(n), range(n))
+        key = next(iter(AerSimulator().run(qc, shots=1).result().get_counts()))
+        rec(f"C1-E qubit {target} lands at index {target} in qubit order",
+            c1_record(key, n)[target] == "1" and key[::-1][target] == "1",
+            f"raw '{key}' -> qubit-order '{c1_record(key, n)}'")
+    return npass, nfail
