@@ -123,6 +123,40 @@ def check_lambda_provenance(rung, flight_rung):
                 f"{lp['window_id']!r} — cross-epoch drift would enter the exponent as signal")
     return None
 
+# ── Q-arm DECODER (contract v2: kit emits RAW 2n-bit strings; the parity rule lives HERE
+#    and ONLY here) ─────────────────────────────────────────────────────────────────────
+# LAYOUT is a pinned-on-arrival parameter (#6398): kit v2 shipped without measurement
+# circuits, and the classical-bit layout is DEFINED by the measurement circuit. The decoder
+# refuses to decode until prereg.json carries bit_layout matching the kit's committed
+# measurement fixture. Supported layouts:
+#   "interleaved" — [x0 z0 x1 z1 ...]  (pair i's two bits adjacent)
+#   "halves"      — [x0..x_{n-1} z0..z_{n-1}]  (copy-1 bits then copy-2 bits)
+# ACCEPT RULE (frozen): transversal Bell measurement — pair outcome (1,1) marks the singlet;
+# accept iff the COUNT OF SINGLET PAIRS IS EVEN (symmetric-subspace projection parity).
+def q_accept_bit(raw, n, layout):
+    """raw: 2n-char '0'/'1' string. Returns 1 (accept) / 0 (reject). Refuses bad width."""
+    if len(raw) != 2 * n or any(c not in "01" for c in raw):
+        raise ValueError(f"raw Q record must be a {2*n}-bit string, got {len(raw)} chars")
+    if layout == "interleaved":
+        pairs = [(raw[2 * i], raw[2 * i + 1]) for i in range(n)]
+    elif layout == "halves":
+        pairs = [(raw[i], raw[n + i]) for i in range(n)]
+    else:
+        raise ValueError(f"unknown bit_layout {layout!r} — must match the kit's measurement fixture")
+    singlets = sum(1 for a, b in pairs if a == "1" and b == "1")
+    return 1 if singlets % 2 == 0 else 0
+
+def decode_q_trial(raw_rows, n, layout, pair_grid, tau):
+    """raw_rows: list of raw 2n-bit strings (one per Bell pair, trial order). Returns
+    {budget_str: decision} at every nested prefix in pair_grid: ALT iff accept-freq >= tau."""
+    bits = [q_accept_bit(r, n, layout) for r in raw_rows]
+    out = {}
+    for k in pair_grid:
+        if k > len(bits):
+            break                       # grid may exceed flown reps; decode what exists
+        out[str(2 * k)] = "ALT" if (sum(bits[:k]) / k) >= tau else "NULL"
+    return out
+
 def sha256_file(path):
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -158,6 +192,40 @@ def selftest():
         for root, _, files in os.walk(res):
             hits += [f for f in files if "door" in f.lower() and "a" in f.lower() and "phase" in f.lower()]
     ok.append(("no door-a flight artifacts pre-exist (at script commit)", len(hits) == 0))
+    # [8] Q decoder known answers: n=2, interleaved layout.
+    #     "1111" = two singlet pairs (even) → accept; "1100" = one singlet (odd) → reject;
+    #     "0000" = zero singlets (even) → accept.
+    dec_known = (q_accept_bit("1111", 2, "interleaved") == 1 and
+                 q_accept_bit("1100", 2, "interleaved") == 0 and
+                 q_accept_bit("0000", 2, "interleaved") == 1)
+    ok.append(("Q decoder parity known answers (interleaved)", dec_known))
+    # [9] LAYOUT convention CAN-FIRE — a string whose decode DIFFERS between layouts
+    #     (n=2 is layout-symmetric for this rule, so the separator needs n=3):
+    #     "110011" interleaved → pairs (1,1),(0,0),(1,1) → 2 singlets (even) → ACCEPT;
+    #              halves      → pairs (1,0),(1,1),(0,1) → 1 singlet (odd)  → REJECT.
+    sep = (q_accept_bit("110011", 3, "interleaved") == 1 and
+           q_accept_bit("110011", 3, "halves") == 0)
+    ok.append(("layout convention separably wrong-able (can-fire)", sep))
+    # [10] decoder refuses half-width records (the E4 mirror) and unknown layouts
+    try:
+        q_accept_bit("11", 2, "interleaved"); refused_width = False
+    except ValueError:
+        refused_width = True
+    try:
+        q_accept_bit("1111", 2, "no-such-layout"); refused_layout = False
+    except ValueError:
+        refused_layout = True
+    ok.append(("decoder refuses half-width and unknown layout", refused_width and refused_layout))
+    # [11] nested-prefix decode: 4 pairs accepting [1,1,0,1], tau=0.7 → k=2: freq 1.0 ALT;
+    #      k=4: freq 0.75 ALT; tau=0.8 → k=4: 0.75 NULL (known answers)
+    # rows DERIVED, not transcribed (a first draft used "111111" assuming accept — it has
+    # THREE singlets, odd, REJECT; caught by hand-derivation before this fixture ever ran):
+    # "000000"=0 singlets→accept; "110011"=2→accept; "110000"=1→reject → accepts [1,1,0,1]
+    rows3 = ["000000", "110011", "110000", "000000"]
+    d1 = decode_q_trial(rows3, 3, "interleaved", [2, 4], 0.7)
+    d2 = decode_q_trial(rows3, 3, "interleaved", [2, 4], 0.8)
+    ok.append(("nested-prefix decode known answers", d1 == {"4": "ALT", "8": "ALT"}
+               and d2 == {"4": "ALT", "8": "NULL"}))
     # [7] the λ-provenance refusal CAN FIRE (test the check, not just the happy path):
     #     missing field → refuses; window mismatch → refuses; correct → passes
     good_lp = {"lambda": 2.544e-3, "epoch_utc": "T", "register": "R", "window_id": "w1"}
