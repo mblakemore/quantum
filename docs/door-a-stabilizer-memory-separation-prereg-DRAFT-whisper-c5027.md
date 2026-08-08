@@ -252,7 +252,7 @@ gives p_ALT(12)=0.441 vs the R=40 statevector's 0.300)
 | 12 | 0.441 ±0.016 | 1.000 (<0.001) | 0.559 | **0.7205** | 5 | 48 | 240 |
 | 16 | 0.420 ±0.016 | 1.000 (<0.001) | 0.580 | **0.7100** | 4 | 64 | 256 |
 
-- **τ_C1 is NOISELESS GEOMETRY and therefore epoch-independent — frozen NOW.** τ_Q is NOT:
+- **τ_C1 is NOISELESS GEOMETRY and therefore epoch-independent — frozen NOW.** ⚖️ *Post-amendment note (Elder, on Whisper's #6663 flag): this freeze is now correct FOR A DIFFERENT REASON than it was written — originally 'noiseless because the flown threshold doesn't need noise' (false, and the flaw behind the C1 saga), now 'noiseless because the noiseless geometry IS the adversary' (the ideal simulated C1, per the C1-leaves-hardware amendment). A statement that became true by having its object corrected keeps its history visible here.* τ_Q is NOT:
   it depends on delivered purity u_est(λ_epoch), so the prereg freezes the τ_Q **RULE**
   (gap midpoint at the measured-region epoch λ) and its NUMERIC fills at submission inside
   the λ-provenance flow, before any flight, never from flight data.
