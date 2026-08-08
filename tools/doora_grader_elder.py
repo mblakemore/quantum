@@ -123,6 +123,35 @@ def check_lambda_provenance(rung, flight_rung):
                 f"{lp['window_id']!r} — cross-epoch drift would enter the exponent as signal")
     return None
 
+# ── DERIVED-FROM assertion (Ember #6485: presence is not provenance) ───────────────────
+# tau_Q is DERIVED from the same rung's lambda: u_est = exp(-lambda * N2q_joint), then
+# tau_Q = midpoint(p0(n), (1+u_est)/2). A tau_Q computed from a DIFFERENT lambda than the
+# one in the rung's provenance block is internally-consistent JSON and inconsistent physics
+# — "the 2115 failure with a schema around it". So the grader RECOMPUTES the chain from the
+# rung's own fields and refuses on mismatch. Tolerance 5e-4 absolute (4-decimal rounding).
+def check_derived_from(rung):
+    """Returns error string (refusal) or None. Requires per-rung fields:
+    lambda_provenance.lambda, template_joint_isa_2q, u_est, tau_Q, n."""
+    try:
+        lam = float(rung["lambda_provenance"]["lambda"])
+        n2q = float(rung["template_joint_isa_2q"])
+        u = float(rung["u_est"])
+        tau = float(rung["tau_Q"])
+        n = int(rung["n"])
+    except (KeyError, TypeError, ValueError) as e:
+        return f"derived-from chain unfillable ({e}) — u_est/template_joint_isa_2q/tau_Q must all be present and numeric"
+    u_re = math.exp(-lam * n2q)
+    if abs(u_re - u) > 5e-4:
+        return (f"u_est {u} != exp(-lambda*N2q) = {u_re:.6f} — u_est was not derived from "
+                f"THIS rung's lambda_provenance")
+    p0 = 0.5 + 2.0 ** -(n + 1)
+    p1 = (1 + u) / 2
+    tau_re = (p0 + p1) / 2
+    if abs(tau_re - tau) > 5e-4:
+        return (f"tau_Q {tau} != midpoint(p0, (1+u_est)/2) = {tau_re:.6f} — tau_Q was not "
+                f"derived from THIS rung's u_est")
+    return None
+
 # ── Q-arm DECODER (contract v2: kit emits RAW 2n-bit strings; the parity rule lives HERE
 #    and ONLY here) ─────────────────────────────────────────────────────────────────────
 # LAYOUT is a pinned-on-arrival parameter (#6398): kit v2 shipped without measurement
@@ -348,6 +377,14 @@ def selftest():
     dN = decode_c1_trial(rds, 4, [2, 4], 0.4)
     ok.append(("C1 nested-round decode + tau can-fire",
                dA == {"2": "ALT", "4": "ALT"} and dN == {"2": "NULL", "4": "NULL"}))
+    # [17] DERIVED-FROM refusal CAN FIRE (Ember #6485): a tau_Q computed from a DIFFERENT
+    #      lambda than the rung's provenance must refuse; the correctly-derived one passes.
+    _rg = {"n": 8, "template_joint_isa_2q": 120.0, "u_est": 0.736917, "tau_Q": 0.685206,
+           "lambda_provenance": {"lambda": 2.544e-3, "epoch_utc": "T", "register": "R",
+                                  "window_id": "w1"}}
+    _rb = dict(_rg); _rb["u_est"] = 0.675434; _rb["tau_Q"] = 0.669835
+    ok.append(("derived-from: correct chain passes, wrong-lambda chain refuses",
+               check_derived_from(_rg) is None and check_derived_from(_rb) is not None))
     # [7] the λ-provenance refusal CAN FIRE (test the check, not just the happy path):
     #     missing field → refuses; window mismatch → refuses; correct → passes
     good_lp = {"lambda": 2.544e-3, "epoch_utc": "T", "register": "R", "window_id": "w1"}
@@ -421,6 +458,10 @@ def main():
         # not share a λ — each rung's noise-only curve must come from its own epoch, and the
         # flight record must name the same window. Refuse, never substitute.
         err = check_lambda_provenance(rung, flight.get(str(n), {}))
+        if err:
+            print(f"REFUSING rung n={n}: {err}")
+            return 2
+        err = check_derived_from(rung)
         if err:
             print(f"REFUSING rung n={n}: {err}")
             return 2

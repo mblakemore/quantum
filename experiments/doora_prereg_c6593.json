@@ -1,74 +1,143 @@
 {
-  "_meta": {
-    "card": "docs/door-a-stabilizer-memory-separation-prereg-DRAFT-whisper-c5027.md",
-    "assembled_by": "Elder C6593 (grader seat), on Creator's freeze GO verified against results/doora_tau_c1_freeze_whisper_c5027.json",
-    "status": "FROZEN except fields marked TO_FILL_AT_SUBMISSION — the grader REFUSES on any unfilled field at grade time; filling them happens BEFORE flight inside the lambda-provenance flow, never from flight data",
-    "contract": "v3"
+ "_meta": {
+  "card": "docs/door-a-stabilizer-memory-separation-prereg-DRAFT-whisper-c5027.md",
+  "assembled_by": "Elder C6593 (grader seat), on Creator's freeze GO verified against results/doora_tau_c1_freeze_whisper_c5027.json",
+  "status": "FROZEN except fields marked TO_FILL_AT_SUBMISSION — the grader REFUSES on any unfilled field at grade time; filling them happens BEFORE flight inside the lambda-provenance flow, never from flight data",
+  "contract": "v3",
+  "fill_ordering": "BINDING (Ember #6485): (1) epoch-lambda measured on the flown register at the submission window -> lambda_provenance; (2) THEN u_est, tau_Q, Q grids, noise-only curves derived FROM that lambda; (3) THEN submit. Pre-computing derived fields from an earlier lambda is a stale number wearing a frozen field — the grader's derived-from assertion (check_derived_from) recomputes lambda -> u_est -> tau_Q per rung and REFUSES on mismatch, so provenance is checked, not just presence."
+ },
+ "bit_layout": "halves",
+ "epsilon_trial": 0.01,
+ "power": 0.9,
+ "alpha_power_court_ratified": true,
+ "reporting_ci_level": 0.95,
+ "reporting_ci_note": "two-alphas rule (#6320): epsilon_trial sizes shots; reporting CIs (Clopper-Pearson rows, excess-fit) are 95% two-sided. Unqualified 'alpha' is banned from this file.",
+ "criterion": 0.95,
+ "trials_per_rung": 40,
+ "execution_path": {
+  "primitive": "SamplerV2 (ISA circuits; V2 does not transpile — no stage exists to configure, Ember #6374)",
+  "dynamical_decoupling": {
+   "enable": false,
+   "reason": "reproducibility + clean noise-only curves, NOT blindness (idle structure is branch-identical post-template)"
   },
-  "bit_layout": "halves",
-  "epsilon_trial": 0.01,
-  "power": 0.9,
-  "alpha_power_court_ratified": true,
-  "reporting_ci_level": 0.95,
-  "reporting_ci_note": "two-alphas rule (#6320): epsilon_trial sizes shots; reporting CIs (Clopper-Pearson rows, excess-fit) are 95% two-sided. Unqualified 'alpha' is banned from this file.",
-  "criterion": 0.95,
-  "trials_per_rung": 40,
-  "execution_path": {
-    "primitive": "SamplerV2 (ISA circuits; V2 does not transpile — no stage exists to configure, Ember #6374)",
-    "dynamical_decoupling": {"enable": false, "reason": "reproducibility + clean noise-only curves, NOT blindness (idle structure is branch-identical post-template)"},
-    "twirling": {"enable_gates": false, "enable_measure": false},
-    "simulator": "MUST_BE_UNSET — hard assert at submission (a stray value produces a real-looking flight that never touched hardware)",
-    "doc_check_citation": "TO_FILL_AT_SUBMISSION (Whisper: verify ISA/no-server-retranspile contract against current Qiskit Runtime docs, cite version)"
+  "twirling": {
+   "enable_gates": false,
+   "enable_measure": false
   },
-  "staged_submission": {
-    "pilot_rung": 8,
-    "continue_rule": "COST-ONLY (measured per-shot QPU rate) — outcome-independent by construction; NO rung unsealed until the flight set is closed (card f1e8042)"
+  "simulator": "MUST_BE_UNSET — hard assert at submission (a stray value produces a real-looking flight that never touched hardware)",
+  "doc_check_citation": "TO_FILL_AT_SUBMISSION (Whisper: verify ISA/no-server-retranspile contract against current Qiskit Runtime docs, cite version)"
+ },
+ "staged_submission": {
+  "pilot_rung": 8,
+  "continue_rule": "COST-ONLY (measured per-shot QPU rate) — outcome-independent by construction; NO rung unsealed until the flight set is closed (card f1e8042)"
+ },
+ "rungs": [
+  {
+   "n": 8,
+   "tau_C1": 0.7055,
+   "tau_C1_provenance": {
+    "p_ALT": 0.415,
+    "se_ALT": 0.0156,
+    "p_NULL": 0.996,
+    "se_NULL": 0.002,
+    "R": 1000,
+    "instrument": "stabilizer-sampling (#6472 option d)",
+    "artifact": "results/doora_tau_c1_freeze_whisper_c5027.json"
+   },
+   "copies_per_round": 32,
+   "C1_round_grid": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "tau_Q_rule": "midpoint of (p0 = 1/2 + 2^-9, p1 = (1 + u_est)/2), u_est from template ISA count x epoch lambda",
+   "tau_Q": "TO_FILL_AT_SUBMISSION",
+   "Q_pair_grid": "TO_FILL_AT_SUBMISSION (exact two-proportion sizing at epsilon_trial=0.01, power 0.90, epoch u_est)",
+   "Q_noise_pred": "TO_FILL_AT_SUBMISSION",
+   "C1_noise_pred": "TO_FILL_AT_SUBMISSION",
+   "lambda_provenance": {
+    "lambda": "TO_FILL_AT_SUBMISSION",
+    "epoch_utc": "TO_FILL_AT_SUBMISSION",
+    "register": "TO_FILL_AT_SUBMISSION",
+    "window_id": "TO_FILL_AT_SUBMISSION"
+   },
+   "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE (epoch-INDEPENDENT: the once-per-rung joint ISA 2q count of the unbound template — Whisper, fillable now)",
+   "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)"
   },
-  "rungs": [
-    {
-      "n": 8,
-      "tau_C1": 0.7055,
-      "tau_C1_provenance": {"p_ALT": 0.415, "se_ALT": 0.0156, "p_NULL": 0.996, "se_NULL": 0.002, "R": 1000, "instrument": "stabilizer-sampling (#6472 option d)", "artifact": "results/doora_tau_c1_freeze_whisper_c5027.json"},
-      "copies_per_round": 32,
-      "C1_round_grid": [1, 2, 3, 4, 5],
-      "tau_Q_rule": "midpoint of (p0 = 1/2 + 2^-9, p1 = (1 + u_est)/2), u_est from template ISA count x epoch lambda",
-      "tau_Q": "TO_FILL_AT_SUBMISSION",
-      "Q_pair_grid": "TO_FILL_AT_SUBMISSION (exact two-proportion sizing at epsilon_trial=0.01, power 0.90, epoch u_est)",
-      "Q_noise_pred": "TO_FILL_AT_SUBMISSION",
-      "C1_noise_pred": "TO_FILL_AT_SUBMISSION",
-      "lambda_provenance": {"lambda": "TO_FILL_AT_SUBMISSION", "epoch_utc": "TO_FILL_AT_SUBMISSION", "register": "TO_FILL_AT_SUBMISSION", "window_id": "TO_FILL_AT_SUBMISSION"}
-    },
-    {
-      "n": 12,
-      "tau_C1": 0.7205,
-      "tau_C1_provenance": {"p_ALT": 0.441, "se_ALT": 0.0157, "p_NULL": 1.0, "se_NULL_upper": 0.001, "R": 1000, "instrument": "stabilizer-sampling (#6472 option d)", "artifact": "results/doora_tau_c1_freeze_whisper_c5027.json"},
-      "copies_per_round": 48,
-      "C1_round_grid": [1, 2, 3, 4, 5],
-      "tau_Q_rule": "midpoint of (p0 = 1/2 + 2^-13, p1 = (1 + u_est)/2), u_est from template ISA count x epoch lambda",
-      "tau_Q": "TO_FILL_AT_SUBMISSION",
-      "Q_pair_grid": "TO_FILL_AT_SUBMISSION",
-      "Q_noise_pred": "TO_FILL_AT_SUBMISSION",
-      "C1_noise_pred": "TO_FILL_AT_SUBMISSION",
-      "lambda_provenance": {"lambda": "TO_FILL_AT_SUBMISSION", "epoch_utc": "TO_FILL_AT_SUBMISSION", "register": "TO_FILL_AT_SUBMISSION", "window_id": "TO_FILL_AT_SUBMISSION"}
-    },
-    {
-      "n": 16,
-      "tau_C1": 0.71,
-      "tau_C1_provenance": {"p_ALT": 0.42, "se_ALT": 0.0156, "p_NULL": 1.0, "se_NULL_upper": 0.001, "R": 1000, "instrument": "stabilizer-sampling (#6472 option d)", "artifact": "results/doora_tau_c1_freeze_whisper_c5027.json"},
-      "copies_per_round": 64,
-      "C1_round_grid": [1, 2, 3, 4],
-      "tau_Q_rule": "midpoint of (p0 = 1/2 + 2^-17, p1 = (1 + u_est)/2), u_est from template ISA count x epoch lambda",
-      "tau_Q": "TO_FILL_AT_SUBMISSION",
-      "Q_pair_grid": "TO_FILL_AT_SUBMISSION",
-      "Q_noise_pred": "TO_FILL_AT_SUBMISSION",
-      "C1_noise_pred": "TO_FILL_AT_SUBMISSION",
-      "lambda_provenance": {"lambda": "TO_FILL_AT_SUBMISSION", "epoch_utc": "TO_FILL_AT_SUBMISSION", "register": "TO_FILL_AT_SUBMISSION", "window_id": "TO_FILL_AT_SUBMISSION"}
-    }
-  ],
-  "interpretation_bindings": [
-    "sim gap is a CEILING on the flown gap (hardware noise raises p_ALT toward p_NULL) — the headline may not quote sim gaps as flown properties",
-    "WIN per the redrafted §4: Q excess consistent with 0 AND C1 excess consistent with 1 excluding 0, vs per-rung noise-only predictions at each rung's own epoch lambda",
-    "raw slopes inadmissible (Q noise-only exponent exceeds C1's — raw reading inverts the separation)",
-    "kill criteria 1-5 per card; a rung dropped on shot budget is dropped and reported"
-  ]
+  {
+   "n": 12,
+   "tau_C1": 0.7205,
+   "tau_C1_provenance": {
+    "p_ALT": 0.441,
+    "se_ALT": 0.0157,
+    "p_NULL": 1.0,
+    "se_NULL_upper": 0.001,
+    "R": 1000,
+    "instrument": "stabilizer-sampling (#6472 option d)",
+    "artifact": "results/doora_tau_c1_freeze_whisper_c5027.json"
+   },
+   "copies_per_round": 48,
+   "C1_round_grid": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "tau_Q_rule": "midpoint of (p0 = 1/2 + 2^-13, p1 = (1 + u_est)/2), u_est from template ISA count x epoch lambda",
+   "tau_Q": "TO_FILL_AT_SUBMISSION",
+   "Q_pair_grid": "TO_FILL_AT_SUBMISSION",
+   "Q_noise_pred": "TO_FILL_AT_SUBMISSION",
+   "C1_noise_pred": "TO_FILL_AT_SUBMISSION",
+   "lambda_provenance": {
+    "lambda": "TO_FILL_AT_SUBMISSION",
+    "epoch_utc": "TO_FILL_AT_SUBMISSION",
+    "register": "TO_FILL_AT_SUBMISSION",
+    "window_id": "TO_FILL_AT_SUBMISSION"
+   },
+   "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE (epoch-INDEPENDENT: the once-per-rung joint ISA 2q count of the unbound template — Whisper, fillable now)",
+   "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)"
+  },
+  {
+   "n": 16,
+   "tau_C1": 0.71,
+   "tau_C1_provenance": {
+    "p_ALT": 0.42,
+    "se_ALT": 0.0156,
+    "p_NULL": 1.0,
+    "se_NULL_upper": 0.001,
+    "R": 1000,
+    "instrument": "stabilizer-sampling (#6472 option d)",
+    "artifact": "results/doora_tau_c1_freeze_whisper_c5027.json"
+   },
+   "copies_per_round": 64,
+   "C1_round_grid": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "tau_Q_rule": "midpoint of (p0 = 1/2 + 2^-17, p1 = (1 + u_est)/2), u_est from template ISA count x epoch lambda",
+   "tau_Q": "TO_FILL_AT_SUBMISSION",
+   "Q_pair_grid": "TO_FILL_AT_SUBMISSION",
+   "Q_noise_pred": "TO_FILL_AT_SUBMISSION",
+   "C1_noise_pred": "TO_FILL_AT_SUBMISSION",
+   "lambda_provenance": {
+    "lambda": "TO_FILL_AT_SUBMISSION",
+    "epoch_utc": "TO_FILL_AT_SUBMISSION",
+    "register": "TO_FILL_AT_SUBMISSION",
+    "window_id": "TO_FILL_AT_SUBMISSION"
+   },
+   "template_joint_isa_2q": "FILL_AT_TRANSPILE_FREEZE (epoch-INDEPENDENT: the once-per-rung joint ISA 2q count of the unbound template — Whisper, fillable now)",
+   "u_est": "TO_FILL_AT_SUBMISSION (= exp(-lambda * template_joint_isa_2q); grader recomputes and refuses on mismatch)"
+  }
+ ],
+ "interpretation_bindings": [
+  "sim gap is a CEILING on the flown gap (hardware noise raises p_ALT toward p_NULL) — the headline may not quote sim gaps as flown properties",
+  "WIN per the redrafted §4: Q excess consistent with 0 AND C1 excess consistent with 1 excluding 0, vs per-rung noise-only predictions at each rung's own epoch lambda",
+  "raw slopes inadmissible (Q noise-only exponent exceeds C1's — raw reading inverts the separation)",
+  "kill criteria 1-5 per card; a rung dropped on shot budget is dropped and reported"
+ ]
 }
