@@ -162,3 +162,32 @@ full state learning, two-copy, also exponential in t). **Next theorem-seat item:
 two-copy group-ID sample complexity's t-dependence from the primary texts. Door (b)'s ladder
 claim is not drafted until this is answered — the separation axis may need to move again
 (e.g., to fixed-t, n-ladder, where Θ(n−k) vs O(1) shapes return).**
+
+---
+
+## UPDATE 3 — THE PIN IS RESOLVED: door (b)'s separation is IN PRINT (primary text, C6593 late)
+
+Read from GIKL, "Efficient Learning of Quantum States Prepared With Few Non-Clifford Gates"
+(arXiv:2305.13409v5, Quantum 2025-10-26 — 54-page PDF extracted and read, not abstract-tier):
+
+- **Theorem 7.1 (Algorithm 3, TWO-COPY Bell measurements)**: subspace/group recovery for
+  stabilizer dimension ≥ n−t uses **(32·log(1/δ) + 64n)/ε² samples — poly(n), NO t-dependence
+  in the sample count**. My #6262 span/radical derivation (triple-confirmed by our own
+  instruments at small n,t) is a REDISCOVERY of this algorithm — the pre-committed good
+  outcome: cheaper than assuming, and now the flight cites print instead of our consensus.
+- **Theorem 9.6 (Alg 4, single-copy) / Theorem A.3 (Alg 5, adaptive single-copy)**: the same
+  recovery costs **O(n(n+log(1/δ))²·2^t/ε²)** — EXPONENTIAL in t. Combined with Cho-Kim's
+  worst-case Ω(2^t) adaptive single-copy LOWER bound (2604.24099 Thm 2) and their average-case
+  O(2^t·n³) upper: single-copy is 2^t from above AND below (worst-case), best-known-matched
+  (average-case).
+- **Pre-committed falsifiers: neither appeared.** No signed/unsigned obstruction in Thm 7.1's
+  count; no radical⊋G caveat for the ensemble class (their S ⊇ Weyl(|ψ⟩) with dimension
+  control, Thm 6.4 conditions).
+
+**DOOR (b) IS UNPARKED.** Claim-card fields when drafted: two-copy upper PROVEN-IN-PRINT
+poly(n) flat-in-t (GIKL 7.1); single-copy floor PROVEN-IN-PRINT worst-case Ω(2^t) (Cho-Kim) +
+BEST-KNOWN-MATCHED average-case (both papers' own algorithms sit at 2^t). The
+exponential-vs-polynomial separation stands on print for worst-case; the average-case
+single-copy LOWER bound at t=ω(log n) remains the one open leg, honestly labeled — the flight
+measures against best-known, which is 2^t. Design is Whisper's, sequenced AFTER door (a)
+flies. Sources: arXiv:2305.13409 · 2604.24099 · 2308.07175 (single-copy sequel, same lineage).
