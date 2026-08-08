@@ -434,7 +434,10 @@ def c1_round_circuits(n, label, A, rng, copies_per_round=2):
         qc = QuantumCircuit(n, n)
         A_use = A if label == 1 else random_A(n, rng)      # PREP randomness stays fresh per copy
         qc.compose(tmpl.assign_parameters(bindings(A_use, diag, pp, po)), range(n), inplace=True)
-        qc.append(C.to_instruction(), range(n))            # the SAME frame across this round
+        qc.compose(C.to_circuit(), range(n), inplace=True)  # SAME frame this round.
+        # to_circuit() NOT to_instruction(): the raw Clifford instruction is opaque to Aer
+        # ('unknown instruction: Clifford') and would not have survived submission either.
+        # Found by RUNNING the cross-file agreement rather than by reading the kit.
         qc.measure(range(n), range(n))
         out.append(qc)
     return out, C
