@@ -18,7 +18,7 @@ THE NINE, and the question that would have caught each:
   8. under-sampled the anchor 30x at ZERO marginal cost, after proving rows were free   -> RANGE
   9. extrapolated per-job flatness past its measured range THREE times                  -> RANGE
 
-Six questions cover all twelve. That is the whole tool.
+Six questions cover all fourteen. That is the whole tool.
 
 Usage:  python3 tools/claim_check_whisper_c5038.py            (the checklist)
         python3 tools/claim_check_whisper_c5038.py --selftest (the nine, mapped)
@@ -43,7 +43,12 @@ CHECKS = [
     ("DIRECTION",
      "Which way does an error here push MY conclusion?",
      "Toward me = stop the line and re-derive. Away from me = handle at leisure. "
-     "A false FAIL wearing a safety factor is still a false verdict."),
+     "A false FAIL wearing a safety factor is still a false verdict. "
+     "AND THE SIGN FLIPS (Elder, C6593): a CORRECTION that swings PAST the evidence is "
+     "the same defect inverted, and it FEELS like rigour while it happens. Twice tonight: "
+     "withdrew a live hypothesis on a measurement that did not test it, and called a "
+     "blocker unverified that was answered in print. Conceding costs me something, so it "
+     "reads as discipline — check the evidence, not the direction of the concession."),
     ("PROXY",
      "Did I verify the thing, or something that usually tracks it?",
      "'did it run' -> CPU time, not pgrep/mtime. 'did it spend' -> the balance. "
@@ -68,6 +73,8 @@ NINE = [
     ("RANGE",      "under-sampled the anchor 30x at zero marginal cost after proving rows free"),
     ("DIRECTION",  "headlined 'zero false positives' — one defect double-counted as a virtue"),
     ("DIRECTION",  "claimed 76s absorbs a 15x surprise; the true figure was 8x"),
+    ("DIRECTION",  "PESSIMISTIC overshoot: withdrew my shape hypothesis on a joint control"),
+    ("DIRECTION",  "PESSIMISTIC overshoot: called door (b) quantum cost unverified — in print"),
     ("PROXY",      "four wrong 'is it running' verdicts off pgrep, mtime and process counts"),
     ("PROXY",      "reported a live 14-hour job as having 'left no artifact' — pattern mismatch"),
     ("OWNED",      "proposed $21 to discriminate billing models whose data we already had"),
@@ -97,7 +104,7 @@ def selftest():
     missed = [t for t, _ in NINE if t not in {c[0] for c in CHECKS}]
     print(f"\n  coverage: {len(NINE) - len(missed)}/{len(NINE)} mapped, {len(missed)} unmapped")
     print("  A checklist fitted to its own failures is a floor, not a certificate:")
-    print("  it cannot catch a thirteenth failure of a shape none of the twelve had.\n")
+    print("  it cannot catch a fifteenth failure of a shape none of the fourteen had.\n")
     return 0 if not missed else 1
 
 
