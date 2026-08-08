@@ -2,9 +2,9 @@
   "spec": "doora_deg2phase_v1",
   "n": 8,
   "M": 40,
-  "commitment_sha256": "009ca03b8495373527903c4354aa906013613a48c8137ab6a88455509811911d",
-  "prereg_freeze": "card docs/door-a-stabilizer-memory-separation-prereg-DRAFT-whisper-c5027.md at 81d8bf824c0b (Elder G1-b ruling + S->Z correction); ensemble spec read from implementation quantum@0930a74",
-  "order_of_operations": "Seal drawn 2026-08-08 ~00:00Z. VERIFIED AT DRAW TIME: results/ contains ZERO door-a / deg2 / phase_state artifacts, and experiments/doora_commitments/ was empty (first seal). No flight has been submitted; no flight data exists to have influenced A or the labels. Gate chain per Elder general#6305: G1-a RULED, G1-b RULED, G3 PASSED 8/8, G2 = this seal, G4 = Creator GO outstanding.",
+  "commitment_sha256": "ff43996c11405f17dae2b9ba9ad5eee210c27109553abc8b99ec5613f88b5622",
+  "prereg_freeze": "tau_Q=0.562976 REGISTERED on general#6969 by whisper BEFORE this seal was drawn; from u_anchor=0.2480 (job d9rq1qfpemts73csulrg, 2000 rows, billed 4s, WhisperPaid) by the frozen midpoint rule; passes rule (b) gate 0.602750, margin +0.0398; shots=316/trial from u_CI95low=0.2055; M=40 = 12,640 samples; ibm_marrakesh (C2 verified, queue 0); C5 balance 54/126=72s unflagged, read independently by ember and whisper; fit 17.1s pure-linear x1.25 vs 72s",
+  "order_of_operations": "REGISTER (whisper #6969) -> SEAL (this artifact, ember) -> SUBMIT. Threshold registered before the seal was drawn, so threshold-shopping is impossible by construction rather than merely improper. FRESH DRAW: the flight-1 n=8 secret was unsealed and graded 25/40 and is archived as doora_deg2phase_v1:8:SPENT-flight1-c4262; reusing a revealed A would be blind in name only.",
   "bits_A": 36,
   "note": "A upper-triangular INCL diagonal; prep = H^n, Z on set diagonal bits, CZ on set off-diagonal bits (per quantum@0930a74). Secret and salt are OFF-GIT."
 }

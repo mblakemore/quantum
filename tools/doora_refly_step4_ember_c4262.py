@@ -25,12 +25,26 @@ sys.path.insert(0, "scripts")
 EXHAUSTED_CRN_FRAGMENT = "ace903cb"
 ALT_CRN_FRAGMENT = "44cfd6bd"
 
+# ---- PAID RE-FLY (2026-08-08, Creator authorisation general#6987) -----------------------
+# The re-fly flies on WhisperPaid, NOT the free alt account. Three changes, all deliberate,
+# none of them "make the gate pass":
+#  1. The key is IBMQ_TOKEN from Whisper's .env (Creator: "Ember pull IBMQ_TOKEN from
+#     Whisper's .env as needed"). My own IBMQ_TOKEN is BLOCKED at the account level.
+#  2. The identity assertion is the FULL CRN, not a fragment. This key now sees THREE
+#     instances (WhisperPaid 72s, whisper-de 63s, open-instance 738s-but-FLAGGED), so a
+#     substring is no longer a discriminator and default resolution is ambiguous.
+#  3. instance= is passed EXPLICITLY at construction. With three instances visible, letting
+#     the service choose is exactly the "NAME is not an identifier" fault one level up:
+#     I would be trusting resolution order instead of asserting the account.
+PAID_CRN = ("crn:v1:bluemix:public:quantum-computing:us-east:"
+            "a/65155eedeb8b464eadf55d101fb3c931:27609585-d5b2-43cb-808d-2d47aeb87c05::")
+
 def alt_token():
     with open("/droid/repos/DC15W/.env") as f:
         for line in f:
-            m = re.match(r"^IBMQ_ALT=(.+)$", line.strip())
+            m = re.match(r"^IBMQ_TOKEN=(.+)$", line.strip())
             if m: return m.group(1).strip().strip('"').strip("'")
-    sys.exit("REFUSE: IBMQ_ALT not found")
+    sys.exit("REFUSE: IBMQ_TOKEN not found")
 
 def gate(name, ok, detail):
     print(f"  [{'PASS' if ok else 'BLOCK'}] {name:9} {detail}", flush=True)
@@ -49,10 +63,12 @@ def main(shots, fly):
     print(f"DOOR (a) RE-FLY STEP 4 — n={N}, shots={shots}, {'LIVE' if fly else 'DRY'}")
     print(f"  UTC {datetime.datetime.now(datetime.timezone.utc).isoformat()}\n")
 
-    svc = QiskitRuntimeService(channel="ibm_quantum_platform", token=alt_token())
+    svc = QiskitRuntimeService(channel="ibm_quantum_platform", token=alt_token(),
+                               instance=PAID_CRN)
     u = svc.usage(); crn = u["instance_id"]
     rem = u["usage_limit_seconds"] - u["usage_consumed_seconds"]
-    ok = gate("G-CRN", (ALT_CRN_FRAGMENT in crn) and (EXHAUSTED_CRN_FRAGMENT not in crn),
+    ok = gate("G-CRN", (crn == PAID_CRN) and (EXHAUSTED_CRN_FRAGMENT not in crn)
+                       and not u["usage_limit_reached"],
               f"...{crn[-24:]}  remaining {rem}s  flagged={u['usage_limit_reached']}")
     if not ok: sys.exit("\n  REFUSED at G-CRN — wrong account. NAME is not an identifier.")
 
