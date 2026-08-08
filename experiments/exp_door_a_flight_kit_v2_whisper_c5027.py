@@ -268,3 +268,100 @@ def _emitter_selftest(verbose=True):
     except ValueError:
         rec("E4 PLANTED wrong-width record is CAUGHT", True, "an accept/reject bit would look like this")
     return npass, nfail
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MEASUREMENT CIRCUITS — the gap Elder found by reading the v2 source (#6398).
+# v1 carried these; the v2 rewrite ported the template, bindings, plan and emitter and DROPPED
+# them, so v2 could prepare a state and shape results but could not build what gets submitted.
+#
+# THE PERMUTATION POINT, gated below because it is silent if wrong: the swap network permutes
+# wires. Both copies run the SAME network, so wire i holds the SAME logical qubit in both halves
+# and the permutation CANCELS in the transversal Bell pairing. If it did not, ALT would stop
+# accepting with probability 1 — which is exactly what Q1 checks.
+# ─────────────────────────────────────────────────────────────────────────────
+def q_circuit(n, label, A, rng):
+    """Q arm: two copies on 2n wires, then a transversal Bell measurement (destructive SWAP).
+    ALT (label=1) binds the sealed A in BOTH copies. NULL (label=0) binds a FRESH A' per copy."""
+    tmpl, diag, pp, po = swap_network(n)
+    full = QuantumCircuit(2 * n, 2 * n)
+    for half in (0, n):
+        A_use = A if label == 1 else random_A(n, rng)      # FRESH per copy — the V5 pin
+        full.compose(tmpl.assign_parameters(bindings(A_use, diag, pp, po)),
+                     range(half, half + n), inplace=True)
+    for i in range(n):
+        full.cx(i, n + i)
+        full.h(i)
+    full.measure(range(2 * n), range(2 * n))
+    return full
+
+
+def c1_circuit(n, label, A, rng):
+    """C1 arm: ONE copy, measured in a FRESH random Pauli basis. Delivery fence: basis redrawn
+    per circuit, submitted at shots=1, never batched on a fixed basis (the F119 defect)."""
+    tmpl, diag, pp, po = swap_network(n)
+    qc = QuantumCircuit(n, n)
+    A_use = A if label == 1 else random_A(n, rng)
+    qc.compose(tmpl.assign_parameters(bindings(A_use, diag, pp, po)), range(n), inplace=True)
+    basis = rng.integers(0, 3, size=n)
+    for q in range(n):
+        if basis[q] == 1:
+            qc.h(q)
+        elif basis[q] == 2:
+            qc.sdg(q)
+            qc.h(q)
+    qc.measure(range(n), range(n))
+    return qc, [int(b) for b in basis]
+
+
+def _circuit_selftest(verbose=True):
+    """NOTE ON THE PARITY RULE: it appears HERE, in a test, computed independently — it does NOT
+    appear in the emitter, which ships raw strings per contract v2. A second instrument checking
+    the same quantity is the discipline; a second instrument DERIVING the shipped value is drift."""
+    from qiskit.quantum_info import Statevector
+    npass = nfail = 0
+
+    def rec(name, ok, detail=""):
+        nonlocal npass, nfail
+        npass += ok
+        nfail += (not ok)
+        if verbose:
+            print(f"    {'PASS' if ok else 'FAIL':>4}  {name:<54} {detail}")
+
+    n = 3
+    rng = np.random.default_rng(4242)
+
+    def accept_prob(qc):
+        sv = Statevector.from_instruction(qc.remove_final_measurements(inplace=False))
+        p = np.abs(sv.data) ** 2
+        tot = 0.0
+        for k, amp in enumerate(p):
+            if amp < 1e-15:
+                continue
+            b = format(k, f"0{2*n}b")[::-1]
+            singlets = sum(1 for i in range(n) if b[i] == "1" and b[n + i] == "1")
+            if singlets % 2 == 0:
+                tot += amp
+        return tot
+
+    A = random_A(n, rng)
+    pa = accept_prob(q_circuit(n, 1, A, rng))
+    rec("Q1 ALT accepts with probability 1 (permutation CANCELS)", abs(pa - 1.0) < 1e-9,
+        f"P(accept)={pa:.12f}")
+
+    ps = [accept_prob(q_circuit(n, 0, None, rng)) for _ in range(40)]
+    want = 0.5 + 2.0 ** (-(n + 1))
+    rec("Q2 NULL averages 1/2 + 2^-(n+1)", abs(float(np.mean(ps)) - want) < 0.05,
+        f"mean {float(np.mean(ps)):.4f} vs {want:.4f}")
+
+    qc = q_circuit(n, 1, A, rng)
+    rec("Q3 Q circuit is 2n wires, all measured",
+        qc.num_qubits == 2 * n and qc.num_clbits == 2 * n, f"{qc.num_qubits}q/{qc.num_clbits}c")
+
+    bases = [c1_circuit(n, 0, None, rng)[1] for _ in range(6)]
+    rec("Q4 C1 basis redrawn per circuit (delivery fence)", len(set(map(tuple, bases))) > 1,
+        f"{len(set(map(tuple, bases)))} distinct in 6")
+
+    c, _ = c1_circuit(n, 1, A, rng)
+    rec("Q5 C1 is ONE copy", c.num_qubits == n, f"{c.num_qubits} wires")
+    return npass, nfail
