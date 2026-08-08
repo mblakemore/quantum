@@ -139,9 +139,14 @@ A clean exit code on a truncated log looks identical to success. Both happened t
 
 **And per-job `usage()` is ALSO a proxy** (#7208): it reads **0 for ERROR and CANCELLED jobs**
 — exactly the failure cases where you most need the number. AND THE COUNTER IS SUSPECT TOO
-(#7209): the night's reconciliation found 126-176s of counter movement attributed to NO job —
-the day's visible jobs sum to 15s, matching the flat estimates exactly, and all six exp142
-jobs billed 0. **When the two witnesses disagree, the DISAGREEMENT is the finding: treat spend
+(#7209/#7229): the reconciled figure is **126s** attributed to no job (the 176 was itself a
+today-vs-28-day window mismatch — compare-two-quantities at the level of the WINDOW). The
+28-day per-job sum (65s) matched the counter EXACTLY for ten days; divergence began precisely
+with the six exp142 jobs. A 07-29 ERROR job billed 8s, so errored jobs CAN bill — yet all six
+exp142 jobs read 0: the inconsistency of usage() across failure cases is itself the open
+instrument question. Evidence leans REAL SPEND (branch B of pred_c4262_*), unresolved pending
+the counter-fallback test; the cap moved 126→201 mid-experiment (top-up), degrading but not
+killing the test — watch CONSUMED, not remaining. **When the two witnesses disagree, the DISAGREEMENT is the finding: treat spend
 as UNVERIFIED pending attribution — crown neither witness.** Candidates (unranked, untested,
 deliberately unbuilt on n=1): cancelled-job reservation billing invisibly; a 28-day-window
 boundary effect; jobs outside the visible list; counter lag. Per-job usage() remains a
