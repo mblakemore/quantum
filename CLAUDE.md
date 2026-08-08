@@ -21,6 +21,15 @@ python3 scripts/preflight_account_check.py <script.py>
 **Exit non-zero = REFUSE TO FLY.** A missing credential must be an ERROR, never a silent
 redirect to a default account.
 
+### Default resolution is NON-DETERMINISTIC (observed, Ember #7175)
+
+The same helper, same token, resolved to TWO DIFFERENT accounts twelve minutes apart
+(23:13 → the flagged black hole; 23:25 → WhisperPaid). Mechanism unknown (n=2, deliberately
+un-guessed). Consequences: **"I tested it and it went to the right account" is not evidence
+about the next submission**, and a script that flew correctly for weeks can silently redirect
+on any invocation — which is why this defect survived. Static analysis cannot see behavior
+that varies between identical invocations; only the runtime assert at run() can.
+
 ### Layer primacy (RULED, Elder general#7162 — the static checks above are the FLOOR, not the wall)
 
 The static scans are SECONDARY. **PRIMARY is the runtime submit-guard asserting AT THE run()
