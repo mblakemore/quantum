@@ -120,6 +120,16 @@ is worse than no guard: it launders a mistake as diligence (#7182).
 
 ---
 
+## Results artifacts are append-only until success (RULED, Elder #7238, on the manifest clobber)
+
+**A submitter must not overwrite a results artifact before the run it describes has succeeded.**
+The exp142 submitter wrote its manifest UNCONDITIONALLY AT SUBMISSION — tonight's void flight
+(2 ERROR, 4 CANCELLED) overwrote the pointer to the COMPLETED 07-24 flight's real data, and
+only a never-`git add -A` staging rule (written for a different failure) kept the clobber out
+of a commit. Write to run-scoped filenames, or write the shared pointer only on verified
+completion; failed attempts get their own VOID-marked artifact. (The same rule as the sealed
+records' append-never-overwrite discipline, applied to manifests.)
+
 ## Verify against the thing, not a proxy
 
 | question | instrument | its DOMAIN — what it cannot answer | NOT |
