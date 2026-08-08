@@ -18,7 +18,7 @@ THE NINE, and the question that would have caught each:
   8. under-sampled the anchor 30x at ZERO marginal cost, after proving rows were free   -> RANGE
   9. extrapolated per-job flatness past its measured range THREE times                  -> RANGE
 
-Six questions cover all seventeen. That is the whole tool.
+Six questions cover all seventeen (one of them this file). That is the whole tool.
 
 Usage:  python3 tools/claim_check_whisper_c5038.py            (the checklist)
         python3 tools/claim_check_whisper_c5038.py --selftest (the nine, mapped)
@@ -40,7 +40,9 @@ CHECKS = [
      "Is this the complete set, or a subset I am about to report as complete? "
      "AND: is my evidence INDEPENDENT of my claim?",
      "Enumerate what I EXCLUDED. An inventory presented as total is the same defect whether "
-     "it flatters or alarms. SCOPE RIDER: name the WINDOW the claim is true of — "tonight" is not "the campaign", and a subset stated with full confidence propagates like a fact. CIRCULARITY RIDER (Ember, C4262): I wrote 'the gap was 2.020x "
+     "it flatters or alarms. SCOPE RIDER: name the WINDOW the claim is true of — 'tonight' "
+     "is not 'the campaign', and a subset stated with full confidence propagates like a fact. "
+     "CIRCULARITY RIDER (Ember, C4262): I wrote 'the gap was 2.020x "
      "and the range is 2.02x — the same number' when the max WAS the anchor and the min WAS "
      "the flight. Their ratio equalling their own ratio is arithmetic, not evidence. Before "
      "calling an agreement confirmation, check the two quantities are not the same data."),
@@ -74,6 +76,7 @@ NINE = [
     ("POPULATION", "CIRCULAR: 'gap 2.020x equals range 2.02x' — the same two readings"),
     ("POPULATION", "'every number is marrakesh' — true of TONIGHT, false of the CAMPAIGN;"
                    " reached a standing instruction file before a peer caught it"),
+    ("OWNED",      "pushed this very file with a SyntaxError while adding a care rider"),
     ("UNIT",       "samples called 'rows' in every cost estimate, incl. a halt justification"),
     ("UNIT",       "halted on a 10.4x extrapolation that was a unit error, called it discipline"),
     ("RANGE",      "extrapolated per-job billing flatness past its measured span, three times"),
@@ -111,7 +114,7 @@ def selftest():
     missed = [t for t, _ in NINE if t not in {c[0] for c in CHECKS}]
     print(f"\n  coverage: {len(NINE) - len(missed)}/{len(NINE)} mapped, {len(missed)} unmapped")
     print("  A checklist fitted to its own failures is a floor, not a certificate:")
-    print("  it cannot catch an eighteenth failure of a shape none of the seventeen had.\n")
+    print("  it cannot catch an eighteenth failure of a shape none of the seventeen had. It also cannot run if it does not parse — verified C5041, the hard way.\n")
     return 0 if not missed else 1
 
 
