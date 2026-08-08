@@ -338,11 +338,32 @@ def main():
     wave = 2 if args.submit_wave2 else 1
     pubs, manifest = build_job(n, P, rng, alive_bases=alive, wave=wave)
 
-    from run_exp66_qpu_partb import _get_ibm_service
     from qiskit import transpile
-    from qiskit_ibm_runtime import SamplerV2
-    svc = _get_ibm_service()
+    from qiskit_ibm_runtime import SamplerV2, QiskitRuntimeService
+    # ── C4262: explicit account pin (Ember). This module's own __main__ path had a bare
+    # service one import deep — the defect that put six exp142 jobs on a flagged
+    # accepts-but-never-runs account on 2026-08-08. Same guard as the exp142c submit path,
+    # applied here rather than argued to be unreachable: "reachable but not executed" is a
+    # control-flow claim the AST cannot check and I should not be trusted to assert.
+    import re as _re
+    PAID_CRN = ("crn:v1:bluemix:public:quantum-computing:us-east:"
+                "a/65155eedeb8b464eadf55d101fb3c931:27609585-d5b2-43cb-808d-2d47aeb87c05::")
+    _tok = None
+    for _line in open("/droid/repos/DC15W/.env"):
+        _m = _re.match(r"^IBMQ_TOKEN=(.+)$", _line.strip())
+        if _m:
+            _tok = _m.group(1).strip().strip('"').strip("'"); break
+    if not _tok:
+        raise SystemExit("REFUSE: IBMQ_TOKEN not found")
+    svc = QiskitRuntimeService(channel="ibm_quantum_platform", token=_tok,
+                               instance=PAID_CRN)
+    _u = svc.usage()
+    if _u["instance_id"] != PAID_CRN or _u["usage_limit_reached"]:
+        raise SystemExit(f"REFUSE G-CRN: {_u['instance_id'][-24:]} "
+                         f"flagged={_u['usage_limit_reached']}")
     backend = svc.backend(args.backend)
+    if backend.name != "ibm_fez":
+        raise SystemExit(f"REFUSE G-BACKEND: {backend.name}, exp142's venue is ibm_fez")
     st = backend.status()
     print(f"Backend {backend.name}: operational={st.operational} "
           f"pending={st.pending_jobs}")
