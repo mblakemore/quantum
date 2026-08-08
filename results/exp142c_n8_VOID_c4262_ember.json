@@ -1,0 +1,63 @@
+{
+ "experiment": "exp142c_mixedstate_refly",
+ "n": 8,
+ "M": 5,
+ "C": 43,
+ "q_n": 0.0031585693359375,
+ "ensemble": "fullweight_eps1_v2",
+ "backend": "ibm_fez",
+ "layout": [
+  22,
+  75,
+  137,
+  86,
+  132,
+  150,
+  14,
+  147,
+  64,
+  130,
+  146,
+  2,
+  143,
+  84,
+  110
+ ],
+ "jobs": [
+  {
+   "job_id": "d9rrm4opdb6s73e5a9qg",
+   "row_lo": 0,
+   "row_hi": 6000
+  },
+  {
+   "job_id": "d9rrm51dsedc73ah1t80",
+   "row_lo": 6000,
+   "row_hi": 12000
+  },
+  {
+   "job_id": "d9rrm58pdb6s73e5a9rg",
+   "row_lo": 12000,
+   "row_hi": 18000
+  },
+  {
+   "job_id": "d9rrm5npemts73ct0e3g",
+   "row_lo": 18000,
+   "row_hi": 24000
+  },
+  {
+   "job_id": "d9rrm5opdb6s73e5a9t0",
+   "row_lo": 24000,
+   "row_hi": 30000
+  },
+  {
+   "job_id": "d9rrm5pdsedc73ah1ta0",
+   "row_lo": 30000,
+   "row_hi": 32805
+  }
+ ],
+ "rows": 32805,
+ "shots_per_row": 43,
+ "delivery": "mixed-state ancilla-trace",
+ "committer": "Ember (DC15E)",
+ "VOID": "C4262 2026-08-08: this flight produced NOTHING \u2014 2 jobs ERROR, 4 CANCELLED mid-run, zero DONE. Recorded under a distinct filename because the flight script WRITES results/exp142c_n8_manifest.json unconditionally and had overwritten the pointer to the completed 07-24 n=8 flight (jobs d9hf37d0k0jc73... , all DONE). That prior manifest has been restored. DO NOT GRADE AGAINST THIS FILE \u2014 it exists only so the attempt is on the record."
+}
