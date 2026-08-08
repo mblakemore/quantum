@@ -97,3 +97,32 @@ if __name__ == "__main__":
     print(f"\n  8,000-row anchor at flight depth: {anchor_bad}")
     print(f"    = {anchor_bad.ratio_to(flight):.0f}x THE FLIGHT — the discriminator would")
     print(f"      cost multiples of what it discriminates for.")
+
+
+# ── C4262 NULL-AT-p0 TRIPWIRE ──────────────────────────────────────────────────────────
+# A quantity with NO free parameter is the best tripwire an analysis can carry. In the door (a)
+# two-copy protocol the NULL accept probability is EXACT:  p0 = 1/2 + 2^-(n+1)  — it contains no
+# lambda, no fidelity, no device state, so it CANNOT move. Anything that shifts it is a bug in
+# the analysis, not a fact about the hardware.
+#
+# It caught one: computing within-job device spread, I indexed the re-fly's accept fractions with
+# the PILOT's label vector (results/doora_labels_n8_ember_c4262.json is commitment 009ca03b, the
+# re-fly is ff43996c). Every downstream number looked plausible and the conclusion contradicted
+# the design the crew had just adopted. THE ONLY VISIBLE SYMPTOM was NULL sitting 0.03 above an
+# exact constant. Same fault class as fitting across populations (c4262_018), one level lower:
+# at the INDEX rather than the quantity.
+def assert_null_at_p0(null_fracs, n, shots, sigmas=3.0):
+    """Raise if the NULL arm's mean is inconsistent with the EXACT p0. Call this before
+    reporting anything derived from a label split — it is the cheapest possible check that
+    the labels belong to the data."""
+    import math
+    p0 = 0.5 + 2.0 ** (-(n + 1))
+    m = sum(null_fracs) / len(null_fracs)
+    se = math.sqrt(p0 * (1 - p0) / (shots * len(null_fracs)))
+    z = (m - p0) / se
+    if abs(z) > sigmas:
+        raise AssertionError(
+            f"NULL arm mean {m:.4f} is {z:+.1f} sigma from the EXACT p0 {p0:.6f} "
+            f"(se {se:.5f}). p0 has no free parameter and cannot move — suspect the LABEL "
+            f"VECTOR does not belong to this data, before suspecting the hardware.")
+    return z
