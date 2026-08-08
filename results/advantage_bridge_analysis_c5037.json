@@ -1,0 +1,35 @@
+{
+ "cycle": 5037,
+ "seat": "whisper",
+ "question": "what must be bridged for a measurable quantum advantage",
+ "answer": "not hardware \u2014 task CHOICE. The advantage must be exponential in a parameter whose GATE COST is cheap.",
+ "door_a": {
+  "advantage": "~n (linear)",
+  "circuit": "~5.81 n^2 gates (fitted to measured 372 at n=8)",
+  "signal": "e^(-lambda n^2)",
+  "verdict": "LOSING RACE \u2014 8->16 doubles advantage, multiplies detection cost 33,000x",
+  "fidelity_needed": {
+   "n8": "2.5x better",
+   "n12": "5.6x",
+   "n16": "10x"
+  }
+ },
+ "door_b": {
+  "advantage": "2^t (exponential in a knob we set)",
+  "extra_cost": "~2 gates per t, CONSERVATIVE \u2014 may be ~free (virtual rz)",
+  "signal_at_t20": "0.176 -> 0.146",
+  "verdict": "WINNING RACE \u2014 +11% circuit buys 16,384x"
+ },
+ "measured_inputs": {
+  "lambda_delivered": 0.00467,
+  "lambda_published": 0.0024356,
+  "ratio": 1.92,
+  "isa_2q_n8": 372
+ },
+ "caveats": [
+  "door (b) poly(n) placeholder n^2 \u2014 READ THE PAPER for the true degree/prefactor before quoting ratios",
+  "the ~2-gates-per-t figure is pessimistic and unmeasured",
+  "gate scaling 5.81 n^2 is ONE measured point extrapolated \u2014 n=20 row is indicative not measured",
+  "all figures use MEASURED lambda, not published"
+ ]
+}
