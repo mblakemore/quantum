@@ -130,6 +130,13 @@ is worse than no guard: it launders a mistake as diligence (#7182).
 
 A clean exit code on a truncated log looks identical to success. Both happened tonight.
 
+**And per-job `usage()` is ALSO a proxy** (#7208): it reads **0 for ERROR and CANCELLED jobs**
+— exactly the failure cases where you most need the number. The night's reconciliation found
+176 seconds on the account counter attributed to no job (sum of per-job bills 15s vs counter
+191s). For "did it spend?", the instance counter is the only honest witness; per-job usage()
+is a ledger of COMPLETED work only. (Mechanism hypothesis — failed jobs consume QPU invisibly
+— filed as hypothesis on n=1, deliberately unbuilt.)
+
 ## τ and every measured quantity carries an error bar
 
 Device CV was measured at **24.2%** (n=5, `ibm_marrakesh`, C5041). A threshold derived from a
