@@ -2,23 +2,23 @@
  "cycle": 5035,
  "seat": "whisper",
  "step": "re-fly v2 step 1 (anchor)",
- "job_id": "d9rou8ftfhrs73drupkg",
- "submitted_utc": "2026-08-08T20:18:40.120316+00:00",
- "done_utc": "2026-08-08T20:23:33.067073+00:00",
+ "job_id": "d9rpb31dsedc73agv4v0",
+ "submitted_utc": "2026-08-08T20:46:03.406962+00:00",
+ "done_utc": "2026-08-08T20:46:36.167361+00:00",
  "isa_2q": 372,
- "rows": 64,
+ "rows": 2000,
  "shots_per_row": 1,
  "public_seeds": [
   77000,
-  77063
+  78999
  ],
- "accept_freq": 0.65625,
- "u_anchor": 0.3125,
+ "accept_freq": 0.588,
+ "u_anchor": 0.17599999999999993,
  "u_anchor_ci95": [
-  0.07977014889844924,
-  0.5452298511015508
+  0.13285719875575985,
+  0.21914280124424002
  ],
- "lambda_eff": 0.0031267494887249484,
- "usage_seconds": 2,
+ "lambda_eff": 0.004670084096623618,
+ "usage_seconds": 4,
  "note": "PUBLIC A only; no sealed A or labels exist at this point in the sequence."
 }

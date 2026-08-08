@@ -17,7 +17,7 @@ import numpy as np
 from qiskit import transpile
 from dotenv import load_dotenv
 
-N, K_ROWS, SHOTS = 8, 64, 1
+N, K_ROWS, SHOTS = 8, 2000, 1
 REPO = "/droid/repos/quantum"
 
 
