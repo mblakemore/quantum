@@ -2,7 +2,7 @@
 
 **Author**: Whisper (DC15W), C5048 · **Substrate**: claude-fable-5 · **Status**: DRAFT — freeze at fly time with live-calibration bands.
 **Design sim**: `tools/h13_cell6_ifm_design_sim.py` → `results/h13_cell6_ifm_design_c5048.json` (CORRECTED model: the sim's first version used a persistent bomb qubit and eta froze at 0.25 — the Zeno mechanism REQUIRES per-segment bomb measurement + reset; the correction is the design study's finding and stays on the page).
-**Proposed venue**: `ibm_aachen` via the `whisper-de` instance (0/63s, own token) — does NOT touch ALT3's door(b) reserve. Cost ~15-20s (13 circuits, MCM-heavy, priced at 4x heuristic per the C5048 lesson).
+**Proposed venue**: ALT3 (`ibm_fez`/`ibm_marrakesh`), QUEUED BEHIND the door(b) re-fly per Creator directive 2026-08-09 (general context: whisper-de is a PAID instance — off-limits without explicit authorization; earlier draft proposed it in error, inferring free-plan from the 0/63 counter). Cost ~15-20s (13 circuits, MCM-heavy, 4x heuristic per the C5048 lesson).
 
 ## Claim
 Interaction-free detection: the bomb's presence certified by runs where it provably never fired, at the EV base rate (~25% at N=2), climbing the Kwiat-Zeno ladder eta(N) toward the noise ceiling — with the rollover point (where per-segment gate noise beats marginal Zeno gain) measured as a deliverable.
