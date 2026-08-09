@@ -159,6 +159,30 @@ def f_ind_selftest(n=4, seed=22):
     return shared_frac, diff / trials
 
 
+def u_params(pauli_char, s):
+    """Euler angles taking |0> to the (pauli_char, s) eigenstate.
+
+    IMPORTED FROM THE COST PILOT rather than retyped: tools/doorb_cost_pilot_ember_c4262.py
+    is where these angles were VERIFIED (all six (P,s) cases give <P> = s to 1e-9) and where
+    the end-to-end circuit->decoder check ran. Retyping a verified function is how the sign
+    convention got flown wrong tonight; ONE OWNER, imported, is the Row-C lesson applied to
+    code rather than to conventions.
+    """
+    import importlib.util
+    global _PILOT
+    try:
+        _PILOT
+    except NameError:
+        _spec = importlib.util.spec_from_file_location(
+            "_pilot", os.path.join(os.path.dirname(__file__), "doorb_cost_pilot_ember_c4262.py"))
+        _PILOT = importlib.util.module_from_spec(_spec)
+        try:
+            _spec.loader.exec_module(_PILOT)
+        except SystemExit:
+            pass
+    return _PILOT.u_params(pauli_char, s)
+
+
 def paid_token():
     # C4262: IBMQ_ALT3 is in MY OWN .env (Creator, general#7459). Reading my own credential
     # rather than a sibling's is the correct default — the DC15W path was inherited from the
