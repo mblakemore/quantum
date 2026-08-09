@@ -22,10 +22,13 @@ run parameters and outcome records only.
 import argparse, itertools, json, math, os, re, sys, datetime
 import numpy as np
 
+# ALT3 — the live tank (593s at flight time). WhisperPaid is spent (~10s) and cannot carry this.
 PAID_CRN = ("crn:v1:bluemix:public:quantum-computing:us-east:"
-            "a/65155eedeb8b464eadf55d101fb3c931:27609585-d5b2-43cb-808d-2d47aeb87c05::")
+            "a/b290f963c84c4e34a5aa7704b4e39b66:952e28e1-bdbf-4593-aec7-e1520b4218a8::")
+CAL_ROWS = 2000        # public-P calibration rows, SAME JOB, ride FIRST (registered #7414)
 EXPECTED_BACKEND = "ibm_marrakesh"
-RESERVE_S = 5
+RESERVE_S = 20
+CHUNK_ROWS = 5000
 
 I2 = np.eye(2, dtype=complex)
 X = np.array([[0, 1], [1, 0]], dtype=complex)
@@ -159,10 +162,10 @@ def f_ind_selftest(n=4, seed=22):
 def paid_token():
     with open("/droid/repos/DC15W/.env") as f:
         for line in f:
-            m = re.match(r"^IBMQ_TOKEN=(.+)$", line.strip())
+            m = re.match(r"^IBMQ_ALT3=(.+)$", line.strip())
             if m:
                 return m.group(1).strip().strip('"').strip("'")
-    sys.exit("REFUSE: IBMQ_TOKEN not found")
+    sys.exit("REFUSE: IBMQ_ALT3 not found")
 
 
 def budget_copies(n, eps, delta):
@@ -246,11 +249,103 @@ def main():
         sys.exit(f"REFUSE G-FIT: {rem}s remaining <= {RESERVE_S}s reserve")
     print(f"  [PASS] G-FIT     {rem}s remaining, reserve {RESERVE_S}s")
 
-    # ---- circuit: prepare rho (x) rho, Bell-measure pair (i, i+n)
-    #      STATE PREP IS A STUB pending the sealed draw — see prereg 5, register-then-seal.
-    sys.exit("REFUSE: state preparation not wired — the seal must be drawn and registered "
-             "first (prereg section 5). Gates above all PASS; this script is ready for the "
-             "prep to be attached, and deliberately cannot fly without it.")
+    # ---- G-SEAL: fly the committed P, never a fresh draw.
+    sec = json.load(open(os.path.expanduser("~/.ember-doorb-secrets.json")))[f"doorb_hardensemble_v1:{a.n}"]
+    import hashlib
+    pin = json.load(open(f"experiments/doorb_commitments/doorb_commitment_n{a.n}.json"))
+    if sec["sha256"] != pin["commitment_sha256"]:
+        sys.exit("REFUSE G-SEAL: stored secret does not match the git-pinned commitment.")
+    print(f"  [PASS] G-SEAL    {sec['sha256'][:16]}... matches the pinned commitment")
+    P = sec["P"]                                   # used, never printed
+
+    # ---- circuit: uniform template, secret entirely in bound 1q parameters (form (a)).
+    #      Builder and angles are the ones VERIFIED end-to-end in the cost pilot, not a rewrite.
+    from qiskit.circuit import ParameterVector
+    th = ParameterVector("t", 3 * 2 * a.n)
+    qc = QuantumCircuit(2 * a.n, 2 * a.n)
+    for q in range(2 * a.n):
+        qc.u(th[3 * q], th[3 * q + 1], th[3 * q + 2], q)
+    for i in range(a.n):
+        qc.cx(i, a.n + i); qc.h(i)
+    for i in range(a.n):
+        qc.measure(i, i); qc.measure(a.n + i, a.n + i)      # HALVES, registered
+    t = transpile(qc, backend=bk, optimization_level=1)
+    print(f"  template: {t.num_parameters} params, ISA 2q={t.count_ops().get('cz',0)} "
+          f"(structure identical for every P — form (a))")
+
+    alpha = 3 * a.eps
+    rng = np.random.default_rng()          # entropy-seeded: draws are not reproducible from git
+    free = [i for i, c in enumerate(P) if c != "I"]
+    idx = {str(par): k for k, par in enumerate(t.parameters)}
+
+    def draw_row():
+        vals = []
+        for _copy in range(2):                       # F-IND: independent per copy
+            sgn = +1 if rng.random() < (1 + alpha) / 2 else -1
+            si = [1] * a.n
+            for i in free[:-1]:
+                si[i] = int(rng.choice([1, -1]))
+            if free:
+                si[free[-1]] = sgn * int(np.prod([si[i] for i in free[:-1]])) if len(free) > 1 else sgn
+            for i, c in enumerate(P):
+                vals.extend(u_params(c, si[i]))
+        row = [0.0] * len(t.parameters)
+        for k, v in enumerate(vals):
+            row[idx[f"t[{k}]"]] = v
+        return row
+
+    # ---- in-job calibration: PUBLIC P, rides FIRST, same job (registered delivered-eps clause).
+    # The claim EVALUATES at the flight's own delivered eps, not the pilot's — the pilot sized,
+    # these rows evaluate. Public P is declared in the manifest so the grader can find them.
+    P_cal = "XYZ" * (a.n // 3) + "XYZ"[: a.n % 3]
+    free_cal = [i for i, c in enumerate(P_cal) if c != "I"]
+
+    def draw_cal_row():
+        vals = []
+        for _copy in range(2):
+            sgn = +1 if rng.random() < (1 + alpha) / 2 else -1
+            si = [1] * a.n
+            for i in free_cal[:-1]:
+                si[i] = int(rng.choice([1, -1]))
+            si[free_cal[-1]] = sgn * int(np.prod([si[i] for i in free_cal[:-1]]))
+            for i, c in enumerate(P_cal):
+                vals.extend(u_params(c, si[i]))
+        row = [0.0] * len(t.parameters)
+        for k, v in enumerate(vals):
+            row[idx[f"t[{k}]"]] = v
+        return row
+
+    jobs = []
+    remaining = shots
+    cal_done = False
+    while remaining > 0:
+        u2 = svc.usage()                              # G-FIT: re-read BEFORE EACH JOB
+        if u2["usage_limit_reached"] or u2["usage_remaining_seconds"] <= RESERVE_S:
+            print(f"  [HALT] G-FIT: {u2['usage_remaining_seconds']}s left after {len(jobs)} jobs "
+                  f"— refusing further submission. Submitted jobs stand.")
+            break
+        chunk = min(remaining, CHUNK_ROWS)
+        if not cal_done:
+            arr = [draw_cal_row() for _ in range(CAL_ROWS)] + [draw_row() for _ in range(chunk)]
+            cal_done = True
+            print(f"  (job 1 carries {CAL_ROWS:,} public-P calibration rows FIRST, then science)")
+        else:
+            arr = [draw_row() for _ in range(chunk)]
+        job = SamplerV2(mode=bk).run([(t, arr, 1)])
+        jobs.append({"job_id": job.job_id(), "rows": chunk})
+        print(f"  job {len(jobs)}: {job.job_id()}  {chunk:,} rows x 1 shot  "
+              f"({u2['usage_remaining_seconds']}s before)")
+        remaining -= chunk
+    man = {"experiment": "doorb_unsigned_shadow", "n": a.n, "eps_nominal": a.eps,
+           "shots": shots - remaining, "commitment_sha256": sec["sha256"],
+           "backend": bk.name, "layout": "halves", "granularity_R": 1, "jobs": jobs,
+           "cal_rows": CAL_ROWS, "cal_P_public": P_cal, "cal_position": "first rows of job 1",
+           "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    os.makedirs("results", exist_ok=True)
+    out = f"results/doorb_flight_n{a.n}_{jobs[0]['job_id']}.json" if jobs else "results/doorb_flight_EMPTY.json"
+    json.dump(man, open(out, "w"), indent=2)          # run-scoped: never clobbers a prior flight
+    print(f"\n  manifest -> {out}  (no P, no draws)")
+    return 0
 
 
 if __name__ == "__main__":
