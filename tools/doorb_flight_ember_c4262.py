@@ -108,6 +108,54 @@ def verify_decoder(nmax=3, seed=4262):
     return worst
 
 
+def prep_state(n, P_label, alpha, rng_sign, rng_bits):
+    """Sample ONE product eigenstate of P from the hard-ensemble mixture.
+
+    rho_P = (I + alpha P)/2^n = (1+alpha)/2 * [Pi+/2^(n-1)] + (1-alpha)/2 * [Pi-/2^(n-1)].
+    Draw sign s=+1 w.p. (1+alpha)/2, then a uniformly random eigenstate of P with that sign.
+    Returns (s, bits) — bits[i] selects the local eigenstate of P_i.
+    SEPARATE RNGs for sign and bits, and the CALLER must pass independent per-copy streams
+    (F-IND). Sharing a stream between the two copies makes rho (x) rho correlated and inflates
+    every estimate — the door (a) same-seed leak, one protocol over.
+    """
+    s = +1 if rng_sign.random() < (1 + alpha) / 2 else -1
+    bits = rng_bits.integers(0, 2, size=n)
+    return s, bits
+
+
+def f_bias_selftest(n=1, alpha=0.9, trials=200000, seed=11):
+    """F-BIAS: a UNIFORM sign draw yields exactly I/2^n — every |tr(P rho)| = 0, the WASH
+    signature. This selftest must FIRE on the bug and PASS on the correct biased draw."""
+    rng = np.random.default_rng(seed)
+    # correct: biased
+    biased = np.mean([1 if rng.random() < (1 + alpha) / 2 else -1 for _ in range(trials)])
+    # bug: uniform
+    buggy = np.mean([1 if rng.random() < 0.5 else -1 for _ in range(trials)])
+    return biased, buggy
+
+
+def f_ind_selftest(n=4, seed=22):
+    """F-IND: the two copies must use INDEPENDENT streams. Shared stream => identical draws.
+    Returns (frac_identical_shared, frac_identical_independent)."""
+    trials = 2000
+    same = 0
+    for t in range(trials):
+        r = np.random.default_rng(seed + t)
+        a = prep_state(n, None, 0.9, r, r)                       # SHARED stream (the bug)
+        r2 = np.random.default_rng(seed + t)
+        b = prep_state(n, None, 0.9, r2, r2)
+        same += int(a[0] == b[0] and np.array_equal(a[1], b[1]))
+    shared_frac = same / trials
+    diff = 0
+    for t in range(trials):
+        ra1, rb1 = np.random.default_rng(1000 + t), np.random.default_rng(2000 + t)
+        ra2, rb2 = np.random.default_rng(3000 + t), np.random.default_rng(4000 + t)
+        c1 = prep_state(n, None, 0.9, ra1, rb1)
+        c2 = prep_state(n, None, 0.9, ra2, rb2)
+        diff += int(c1[0] == c2[0] and np.array_equal(c1[1], c2[1]))
+    return shared_frac, diff / trials
+
+
 def paid_token():
     with open("/droid/repos/DC15W/.env") as f:
         for line in f:
@@ -142,6 +190,25 @@ def main():
         sys.exit("REFUSE G-DECODE: the decoder does not reproduce tr(P rho)^2. "
                  "Suspect the (-1)^#Y transpose factor or the outcome-bit convention. "
                  "A convention you reasoned your way to is a hypothesis.")
+    # ---- F-BIAS (registered assert, #7414): a uniform sign draw delivers exactly I/2^n.
+    biased, buggy = f_bias_selftest(alpha=3 * a.eps)
+    bias_ok = abs(biased - 3 * a.eps) < 0.01 and abs(buggy) < 0.01
+    print(f"  [{'PASS' if bias_ok else 'FAIL'}] F-BIAS    biased draw <s> = {biased:+.4f} "
+          f"(target {3*a.eps:+.2f});  UNIFORM-BUG draw <s> = {buggy:+.4f} (wash, target 0)")
+    if not bias_ok:
+        sys.exit("REFUSE F-BIAS: the sign draw does not carry the ensemble's bias, or the "
+                 "bug-arm fails to show the wash signature. A uniform draw delivers I/2^n and "
+                 "every estimate reads zero — indistinguishable from a dead device.")
+
+    # ---- F-IND (registered assert, #7414): independent per-copy streams.
+    shared, indep = f_ind_selftest()
+    ind_ok = shared > 0.99 and indep < 0.2
+    print(f"  [{'PASS' if ind_ok else 'FAIL'}] F-IND     shared-stream identical-draw rate "
+          f"{shared:.3f} (bug fires at ~1.0);  independent {indep:.3f}")
+    if not ind_ok:
+        sys.exit("REFUSE F-IND: the shared-stream arm does not reproduce the correlation bug, "
+                 "so the check cannot fire. An assert that cannot fail is decoration.")
+
     if a.selftest:
         print("  selftest only — nothing further.")
         return 0
