@@ -1,0 +1,55 @@
+{
+  "corrected_model": "per-segment bomb measurement+reset (mid-circuit)",
+  "noise": {
+    "p1": 0.0005,
+    "p2": 0.008,
+    "eps_m": 0.02,
+    "eps_ro": 0.015
+  },
+  "ladder": [
+    {
+      "N": 1,
+      "eta": 0.0042,
+      "P_explode": 0.9958,
+      "ideal_eta": 0.0,
+      "cx+mcm_per_run": 1
+    },
+    {
+      "N": 2,
+      "eta": 0.2463,
+      "P_explode": 0.75,
+      "ideal_eta": 0.25,
+      "cx+mcm_per_run": 2
+    },
+    {
+      "N": 4,
+      "eta": 0.5155,
+      "P_explode": 0.4766,
+      "ideal_eta": 0.5308,
+      "cx+mcm_per_run": 4
+    },
+    {
+      "N": 8,
+      "eta": 0.6989,
+      "P_explode": 0.2905,
+      "ideal_eta": 0.7331,
+      "cx+mcm_per_run": 8
+    },
+    {
+      "N": 16,
+      "eta": 0.789,
+      "P_explode": 0.199,
+      "ideal_eta": 0.8569,
+      "cx+mcm_per_run": 16
+    },
+    {
+      "N": 32,
+      "eta": 0.796,
+      "P_explode": 0.1919,
+      "ideal_eta": 0.9258,
+      "cx+mcm_per_run": 32
+    }
+  ],
+  "circuits": "6 N-values x (bomb arm + no-bomb control) + faithfulness = 13",
+  "cost_est": "13 x 4000 = 52k shot-circuits, MCM-heavy -> price at 4x heuristic ~ 15-20s"
+}
