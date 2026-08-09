@@ -1,0 +1,12 @@
+{
+ "n": 16,
+ "rows": 800,
+ "shots_per_row": 1,
+ "billed_s": 4,
+ "s_per_row": 0.005,
+ "extrapolated_6388_rows_s": 31.94,
+ "job": "d9rvgrpdsedc73ah5vi0",
+ "public_P": "XYZXYZXYZXYZXYZX",
+ "seal_untouched": true,
+ "utc": "2026-08-09T03:48:15.633670+00:00"
+}
