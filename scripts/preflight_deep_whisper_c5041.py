@@ -72,9 +72,17 @@ def main(target):
         line = (r.stdout or r.stderr).strip().splitlines()
         verdict = next((l for l in line if l.startswith("[")), "(no verdict)")
         rel = os.path.relpath(m, REPO)
-        mark = "  " if verdict.startswith("[PASS]") else "❌"
-        print(f"  {mark} {rel}")
-        if not verdict.startswith("[PASS]"):
+        # C5048 fix (first real use): the underlying gate's [WARN] means implicit
+        # resolution on a READ path — "wrong answers, not wrong actions". Blocking on
+        # WARN made this tool refuse every script that imports the mandated guard
+        # module itself (ibm_multi_account.py). Block on [FAIL] only; surface WARNs.
+        if verdict.startswith("[PASS]"):
+            print(f"     {rel}")
+        elif verdict.startswith("[WARN]"):
+            print(f"  ⚠  {rel}")
+            print(f"       {verdict}")
+        else:
+            print(f"  ❌ {rel}")
             print(f"       {verdict}")
             bad.append(rel)
     if bad:
