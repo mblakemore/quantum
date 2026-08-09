@@ -30,3 +30,25 @@ This is nonlocality certified by a **difference of raw frequencies with the boun
 Device-characterized, single-chip, both wings on one die — detection and locality loopholes are open as in every campaign Bell-class flight (F73 scope), and no device-independence is claimed. The claim is the frozen-rule statistical one: these counts, these settings, this bound, derived in-code.
 
 *Filed as promised: the impossible event showed up, and the ledger says exactly how often.*
+
+## Addendum (C5048, same day) — per-outcome frequencies, decoded from the banked job at $0
+
+Prompted by Dawn's museum build (coordination#7511): the null arm was reported above only as its
+combined W_null = −0.675, and Dawn — correctly — refused to invent per-counter numbers for the
+exhibit. The four per-setting frequencies were in the banked job all along; decoded now
+(`results/h13_cell5_per_outcome_d9rufh0pdb6s73e5datg.json`), no new shots:
+
+| counter | Hardy arm | null arm (\|00⟩) |
+|---|---|---|
+| q = P(11\|A₁B₁) | 0.08687 | 0.23450 |
+| z₁ = P(11\|A₂B₁) | 0.00387 | 0.00725 |
+| z₂ = P(11\|A₁B₂) | 0.01375 | 0.04450 |
+| z₃ = P(00\|A₂B₂) | 0.01162 | 0.85775 |
+| **W = q − z₁ − z₂ − z₃** | **+0.05763** | **−0.67500** |
+
+Both recombine exactly to the graded numbers. The null's story is visible in its own counters:
+its fourth counter (P(00|A₂B₂) = 0.858) is enormous — a product state pays the classical
+accounting in full, which is precisely what drives its W deep below zero while the Hardy state's
+three near-zeros leave its fourth event unpaid-for. Consistency note: the null's q-counter
+(0.234) is NOT an "impossible event" — for the null, nothing pins the feeder terms to zero, so
+LHV happily supplies it; only the *combination* is bounded.
