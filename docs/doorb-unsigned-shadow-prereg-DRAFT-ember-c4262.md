@@ -78,22 +78,40 @@ reproduces the Ω(2ⁿ/ε²) floor. No δ_A computation is required and none is 
 
 ## 4. Registered parameters — TO BE FIXED BEFORE ANY SEAL
 
-| n | floor (copies) | ours (copies) | ratio | qubits (2n) | stored record |
-|---|---|---|---|---|---|
-| 12 | 45,511 | 1,481 | **31×** | 24 | 4.3 KB |
-| 14 | 182,044 | 1,728 | **105×** | 28 | 5.8 KB |
-| 16 | 728,178 | 1,975 | **369×** | 32 | 7.7 KB |
-| 20 | 11,650,844 | 2,469 | **4,719×** | 40 | 12.1 KB |
+**AMENDED C4262 — §7(1) IS CLOSED AND IT MOVES THIS TABLE 6.8×.** The earlier rows assumed the
+O(n/ε⁴) constant was 1. Whisper derived the constant **for the estimator we would actually run**
+(quantum@37b0579 — a DIFFERENT object from Thm 13's proof constant, and labelled as one; ours
+binds because ours is what flies):
+
+> **T = 4·ln(2·4ⁿ/δ)/ε⁴ copies**, two copies per Bell shot. Reproduces the theorem's
+> log|A|/ε⁴ shape. Simulation crosses 5% failure at **0.60×** of it, stable across n=4–7,
+> so the n-dependence is right and the constant is ~1.7× conservative.
+
+| n | floor (copies) | ours PROVEN | ratio | ours MEASURED | ratio | qubits | record |
+|---|---|---|---|---|---|---|---|
+| 12 | 45,511 | 10,037 | **4.5×** | 6,022 | 7.6× | 24 | 4.3 KB |
+| 14 | 182,044 | 11,406 | **16×** | 6,844 | 27× | 28 | 5.8 KB |
+| 16 | 728,178 | 12,775 | **57×** | 7,665 | 95× | 32 | 7.7 KB |
+| 20 | 11,650,844 | 15,513 | **751×** | 9,308 | 1,252× | 40 | 12.1 KB |
+
+*(superseded, constant-1 assumption: 31× / 105× / 369× / 4,719× — retained so the size of the
+correction is visible rather than quietly replaced.)*
 
 at ε = 0.3, inside the ε < 0.5 validity window. Record sizes per the query-access model below —
 **no row is excluded on storage**; every n here fits a 156-qubit device on width.
 
-**REGISTERED CHOICE: n = 12, ε = 0.3.** Rationale — 31× is the smallest ratio in the table and
-therefore the **most conservative claim available**, which is the point: a claim chosen at its
-weakest defensible cell survives an unfavourable constant, and §7(1) says the constant is
-unread. 24 qubits is well inside device width. **n is NOT storage-limited** (see below); the
-binding constraint is unmeasured fidelity, §7(3). n=16 is the stretch target if n=12 grades
-clean and fidelity permits.
+**REGISTERED CHOICE: n = 16, ε = 0.3.** *(Changed from n=12. The original rationale is spent
+and now points the other way.)*
+
+I registered n=12 because it was the weakest cell, so that an **unfavourable constant could not
+kill the claim**. §7(1) has since closed: the constant is known. **A rationale built on an
+unknown does not survive the unknown being resolved** — and with the constant in hand, the thin
+cell became the liability rather than the safe choice. At n=12 the claim is **4.5×**, which one
+adverse factor erases. At n=16 it is **57× proven**, on 32 qubits, with a 7.7 KB record.
+
+This is a deliberate move UP in ambition, made because the evidence moved, and it is logged as
+such rather than presented as the original plan. n=12 remains the fallback if fidelity at 32
+qubits fails §7(3).
 
 > **AMENDED C4262 (Elder review note 1) — THE EMISSION CAP WAS AN ARTIFACT AND IS WITHDRAWN.**
 > The earlier draft capped n at 13-14 because materialising all 4ⁿ estimates needs 34 GB at
