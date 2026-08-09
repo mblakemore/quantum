@@ -251,6 +251,8 @@ def main():
     ap.add_argument("--backend", default=EXPECTED_BACKEND)
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--fly", action="store_true")
+    ap.add_argument("--weather-only", action="store_true",
+                    help="run the calibration gate alone; needs NO seal, spends no science")
     a = ap.parse_args()
 
     print(f"DOOR (b) FLIGHT — n={a.n}, eps={a.eps}, delta={a.delta}")
@@ -306,7 +308,7 @@ def main():
     print(f"  theorem floor (memoryless) 2^n/eps^2 = {floor:,.0f} copies   ratio {floor/T:.1f}x")
     print(f"  width: 2n = {2*a.n} qubits")
 
-    if not a.fly:
+    if not (a.fly or a.weather_only):
         print("\n  DRY — nothing submitted. Pass --fly to submit.")
         return 0
 
@@ -332,13 +334,19 @@ def main():
     print(f"  [PASS] G-FIT     {rem}s remaining, reserve {RESERVE_S}s")
 
     # ---- G-SEAL: fly the committed P, never a fresh draw.
-    sec = json.load(open(os.path.expanduser("~/.ember-doorb-secrets.json")))[f"doorb_hardensemble_v1:{a.n}"]
-    import hashlib
-    pin = json.load(open(f"experiments/doorb_commitments/doorb_commitment_n{a.n}.json"))
-    if sec["sha256"] != pin["commitment_sha256"]:
-        sys.exit("REFUSE G-SEAL: stored secret does not match the git-pinned commitment.")
-    print(f"  [PASS] G-SEAL    {sec['sha256'][:16]}... matches the pinned commitment")
-    P = sec["P"]                                   # used, never printed
+    # SKIPPED under --weather-only: that mode uses the PUBLIC calibration P exclusively, so it
+    # must not require a seal to exist. A bad-weather day should never consume — or even need —
+    # a commitment. Seal first, then discover the device is unusable, is the wrong order.
+    if a.weather_only:
+        print("  [SKIP] G-SEAL    weather-only: public calibration P, no seal required")
+        P = None
+    else:
+        sec = json.load(open(os.path.expanduser("~/.ember-doorb-secrets.json")))[f"doorb_hardensemble_v1:{a.n}"]
+        pin = json.load(open(f"experiments/doorb_commitments/doorb_commitment_n{a.n}.json"))
+        if sec["sha256"] != pin["commitment_sha256"]:
+            sys.exit("REFUSE G-SEAL: stored secret does not match the git-pinned commitment.")
+        print(f"  [PASS] G-SEAL    {sec['sha256'][:16]}... matches the pinned commitment")
+        P = sec["P"]                               # used, never printed
 
     # ---- circuit: uniform template, secret entirely in bound 1q parameters (form (a)).
     #      Builder and angles are the ones VERIFIED end-to-end in the cost pilot, not a rewrite.
@@ -357,7 +365,7 @@ def main():
 
     alpha = 3 * a.eps
     rng = np.random.default_rng()          # entropy-seeded: draws are not reproducible from git
-    free = [i for i, c in enumerate(P) if c != "I"]
+    free = [i for i, c in enumerate(P) if c != "I"] if P else []
     idx = {str(par): k for k, par in enumerate(t.parameters)}
 
     def draw_row():
@@ -442,7 +450,13 @@ def main():
                    "cal_job": wjob.job_id(), "seal_spent": False},
                   open(f"results/doorb_weather_halt_{wjob.job_id()}.json", "w"), indent=2)
         return 0
-    print(f"  [PASS] G-WEATHER  eps_eff {_eps:.4f} >= {EPS_MIN} — claimable epoch, proceeding")
+    print(f"  [PASS] G-WEATHER  eps_eff {_eps:.4f} >= {EPS_MIN} — claimable epoch")
+    if a.weather_only:
+        json.dump({"mode": "weather-only", "eps_eff": _eps, "eps_min": EPS_MIN,
+                   "cleared": True, "cal_job": wjob.job_id(), "seal_required": False},
+                  open(f"results/doorb_weather_{wjob.job_id()}.json", "w"), indent=2)
+        print("  weather-only: CLEARED. No seal was required and none was spent.")
+        return 0
 
     jobs = [{"job_id": wjob.job_id(), "rows": CAL_ROWS, "role": "calibration"}]
     remaining = shots
