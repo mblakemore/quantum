@@ -111,6 +111,32 @@ def verify_decoder(nmax=3, seed=4262):
     return worst
 
 
+def local_signs(P_label, sgn, rng, n=None):
+    """THE OWNER of the hard-ensemble sign constraint. Every consumer calls this; none re-derives it.
+
+    rho_P's eigenstate needs the product of local signs over NON-IDENTITY positions to equal the
+    drawn global sign `sgn`. Identity positions are unconstrained and MUST still be randomised —
+    omitting that was the FAIL-AS-FROZEN defect (identity qubits flew as pure |0>, delivering
+    |0..0> (x) planted-direction instead of the family the floor is proven over).
+
+    WHY THIS FUNCTION EXISTS (C4266): the rule used to live INLINE at three call sites and
+    nowhere else. The first new consumer — the sim-replication harness — re-derived it and got
+    it wrong immediately, destroying the signal (-0.054 against an analytic truth of 0.81).
+    A rule every caller must re-derive is a rule every caller can get wrong, and this codebase
+    had already paid for that once on hardware. Whisper's note at general#7781: this constraint
+    IS F-BIAS's load-bearing line, so it belongs in one place with one test.
+
+    P_label=None means "no identity positions" (every site constrained) — used by F-IND, which
+    cares only about stream independence.
+    """
+    n = n if n is not None else len(P_label)
+    si = [int(rng.choice([1, -1])) for _ in range(n)]      # ALL positions, identity included
+    free = list(range(n)) if P_label is None else [i for i, c in enumerate(P_label) if c != "I"]
+    if free:
+        si[free[-1]] = (sgn * int(np.prod([si[i] for i in free[:-1]]))) if len(free) > 1 else sgn
+    return si
+
+
 def prep_state(n, P_label, alpha, rng_sign, rng_bits):
     """Sample ONE product eigenstate of P from the hard-ensemble mixture.
 
@@ -122,8 +148,10 @@ def prep_state(n, P_label, alpha, rng_sign, rng_bits):
     every estimate — the door (a) same-seed leak, one protocol over.
     """
     s = +1 if rng_sign.random() < (1 + alpha) / 2 else -1
-    bits = rng_bits.integers(0, 2, size=n)
-    return s, bits
+    # C4266: returns the CONSTRAINED sign vector, not raw bits. Returning raw materials and
+    # documenting the invariant is re-derivation with extra steps.
+    si = local_signs(P_label, s, rng_bits, n=n)
+    return s, si
 
 
 def f_bias_selftest(n=1, alpha=0.9, trials=200000, seed=11):
@@ -208,13 +236,16 @@ def f_mix_selftest(P, alpha, shots=20000, seed=7):
         for _ in range(shots):
             sgn = +1 if rng.random() < (1 + alpha) / 2 else -1
             if fixed:
-                si = [int(rng.choice([1, -1])) for _ in range(n)]
+                # C4266: the FIXED arm now exercises the SHIPPED rule, so this control tests
+                # the real implementation rather than a look-alike of it. The BUGGY arm below
+                # stays inline on purpose — a negative control must be able to fire.
+                si = local_signs(P, sgn, rng, n=n)
             else:
                 si = [1] * n
                 for i in free[:-1]:
                     si[i] = int(rng.choice([1, -1]))
-            if free:
-                si[free[-1]] = sgn * int(np.prod([si[i] for i in free[:-1]])) if len(free) > 1 else sgn
+                if free:
+                    si[free[-1]] = sgn * int(np.prod([si[i] for i in free[:-1]])) if len(free) > 1 else sgn
             for i in ident:
                 z[i] += si[i]
         out.append(max(abs(z[i] / shots) for i in ident))
@@ -378,9 +409,7 @@ def main():
             # the delivered state was |0..0> (x) planted-direction, which is not the family
             # the floor is proven over. FAIL-AS-FROZEN, 106,911 rows, one line.
             # Every position is drawn now; the sign constraint still binds only on `free`.
-            si = [int(rng.choice([1, -1])) for _ in range(a.n)]
-            if free:
-                si[free[-1]] = sgn * int(np.prod([si[i] for i in free[:-1]])) if len(free) > 1 else sgn
+            si = local_signs(P, sgn, rng, n=a.n)     # C4266: one owner, no inline re-derivation
             for i, c in enumerate(P):
                 vals.extend(u_params(c, si[i]))
         row = [0.0] * len(t.parameters)

@@ -43,6 +43,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from doorb_flight_ember_c4262 import (  # noqa: E402  — IMPORTED, never retyped (one owner)
     SYM, bell_sign, budget_copies, n_y, prep_state,
 )
+# C4266: `local_signs` now lives in the flight script as THE owner of the sign constraint
+# (folded there after this harness re-derived it wrong). prep_state returns the CONSTRAINED
+# sign vector, so this file no longer holds a second copy of the rule to drift from.
 
 # Single-qubit eigenvectors |P, s> for P in {X,Y,Z}, s in {+1,-1}
 KET = {
@@ -94,28 +97,6 @@ def pair_probs(ket_a, ket_b):
     return np.array([abs(np.vdot(BELL[(a, b)], psi)) ** 2 for a in (0, 1) for b in (0, 1)])
 
 
-def local_signs(P_label, sgn, rng):
-    """(global sign, per-qubit local signs) -> the SINGLE owner of the sign constraint.
-
-    rho_P's eigenstate needs the product of local signs over the NON-IDENTITY positions to
-    equal the drawn global sign; identity positions are free and must still be randomised
-    (that omission was the FAIL-AS-FROZEN bug — identity qubits flew as pure |0>).
-
-    WRITTEN BECAUSE I REIMPLEMENTED IT WRONG ON FIRST CONTACT. `prep_state` returns (s, bits)
-    and leaves this constraint to its CALLER, where the flight script performs it inline —
-    TWICE. A rule that every consumer must re-derive is a rule that every consumer can get
-    wrong, and the first new consumer (this file) did: I gave qubit 0 the global sign and every
-    other qubit its raw bit, which enforces no product constraint at all. The signal vanished
-    to -0.054 against a truth of 0.81 — not a subtle miss, a destroyed one.
-    """
-    n = len(P_label)
-    si = [int(rng.choice([1, -1])) for _ in range(n)]     # ALL positions, identity included
-    free = [i for i, c in enumerate(P_label) if c != "I"]
-    if free:
-        si[free[-1]] = (sgn * int(np.prod([si[i] for i in free[:-1]]))) if len(free) > 1 else sgn
-    return si
-
-
 def run(n, eps, copies, P_label, seed, verify_labels):
     alpha = 3.0 * eps
     rng = np.random.default_rng(seed)
@@ -127,10 +108,8 @@ def run(n, eps, copies, P_label, seed, verify_labels):
     idx = [(a, b) for a in (0, 1) for b in (0, 1)]
 
     for _ in range(shots):
-        sA, _ = prep_state(n, P_label, alpha, streams[0], streams[1])
-        sB, _ = prep_state(n, P_label, alpha, streams[2], streams[3])
-        siA = local_signs(P_label, sA, streams[1])
-        siB = local_signs(P_label, sB, streams[3])
+        sA, siA = prep_state(n, P_label, alpha, streams[0], streams[1])
+        sB, siB = prep_state(n, P_label, alpha, streams[2], streams[3])
         outcomes = []
         for i, ch in enumerate(P_label):
             ka = KET[(ch, siA[i])]
