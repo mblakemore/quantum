@@ -19,9 +19,14 @@ The currency is stated in the claim because a comparative result stated in one r
 read as total cost otherwise. F121 died on exactly that slip — a 41-query classical solve
 finishing in 0.25 ms against our 1,818-second floor.
 
-**NOT CLAIMED**: a runtime advantage, a total-work advantage, or an advantage at any n
-outside the range in §4. The output is exponentially large, so **no protocol for this task —
-ours or anyone's — is efficient in total work**, and this can never become a runtime claim.
+**NOT CLAIMED**: a runtime advantage or a total-work advantage.
+
+*Precisely* (amended C4262 after §4's query-access correction, because the earlier wording
+contradicted it): under **query access** the stored record is kilobytes and a SINGLE query is
+cheap for both arms. What remains exponential is answering **ALL 4ⁿ** queries — Θ(4ⁿ) work,
+identically on both arms. So the correct statement is: *this can never become a claim about
+producing all 4ⁿ answers in polynomial time*, which is a narrower and true statement than the
+draft's original "never a runtime claim".
 
 ---
 
@@ -73,19 +78,22 @@ reproduces the Ω(2ⁿ/ε²) floor. No δ_A computation is required and none is 
 
 ## 4. Registered parameters — TO BE FIXED BEFORE ANY SEAL
 
-| n | floor (copies) | ours (copies) | ratio | output 4ⁿ | output size |
+| n | floor (copies) | ours (copies) | ratio | qubits (2n) | stored record |
 |---|---|---|---|---|---|
-| 12 | 45,511 | 1,481 | **31×** | 16,777,216 | 134 MB |
-| 13 | 91,022 | 1,605 | **57×** | 67,108,864 | 537 MB |
-| 14 | 182,044 | 1,728 | **105×** | 268,435,456 | 2.1 GB |
-| 16 | 728,178 | 1,975 | 369× | 4,294,967,296 | **34 GB — excluded** |
+| 12 | 45,511 | 1,481 | **31×** | 24 | 4.3 KB |
+| 14 | 182,044 | 1,728 | **105×** | 28 | 5.8 KB |
+| 16 | 728,178 | 1,975 | **369×** | 32 | 7.7 KB |
+| 20 | 11,650,844 | 2,469 | **4,719×** | 40 | 12.1 KB |
 
-at ε = 0.3, inside the ε < 0.5 validity window.
+at ε = 0.3, inside the ε < 0.5 validity window. Record sizes per the query-access model below —
+**no row is excluded on storage**; every n here fits a 156-qubit device on width.
 
 **REGISTERED CHOICE: n = 12, ε = 0.3.** Rationale — 31× is the smallest ratio in the table and
-therefore the most conservative claim; the output is 134 MB, which is handled without special
-machinery; and 24 qubits (two copies of 12) is well inside device width. n=14 is the stretch
-target if n=12 grades clean.
+therefore the **most conservative claim available**, which is the point: a claim chosen at its
+weakest defensible cell survives an unfavourable constant, and §7(1) says the constant is
+unread. 24 qubits is well inside device width. **n is NOT storage-limited** (see below); the
+binding constraint is unmeasured fidelity, §7(3). n=16 is the stretch target if n=12 grades
+clean and fidelity permits.
 
 > **AMENDED C4262 (Elder review note 1) — THE EMISSION CAP WAS AN ARTIFACT AND IS WITHDRAWN.**
 > The earlier draft capped n at 13-14 because materialising all 4ⁿ estimates needs 34 GB at
