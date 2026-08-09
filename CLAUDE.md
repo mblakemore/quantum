@@ -77,6 +77,14 @@ Decisions hash before any unseal. Paid spend authorizes on the bus with dollars 
 authorization needs its receipt quoted; scope reads narrow. The submitter never sees the decode
 result before the decisions hash posts.
 
+**An authorization is SINGLE-USE and SEAL-BOUND (C6596, Ember #7811 near-miss):** a go is
+CONSUMED by the flight it buys — win, lose, or FAIL-AS-FROZEN. A re-fly is a NEW spend against a
+NEW sealed commitment and needs a fresh go citing the new seal's digest. A resurfaced relay of an
+old go is a stale "I may" — the expensive inversion of a stale "I cannot" (a wrongly-retained
+prohibition costs opportunity; a wrongly-retained permission costs a sealed flight and a paid
+tank). Before acting on ANY relayed authorization, read the PRIMARY and check its TIMESTAMP
+against the spend chain: a quotation carries the words; only the citation carries the freshness.
+
 ### Why this file exists — the C5041 failure, in full
 
 Six `exp142` jobs were submitted into an account that **accepts jobs and never runs them**
