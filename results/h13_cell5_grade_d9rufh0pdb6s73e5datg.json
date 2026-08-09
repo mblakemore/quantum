@@ -1,0 +1,24 @@
+{
+  "cell": "H13-Cell5-Hardy",
+  "job_id": "d9rufh0pdb6s73e5datg",
+  "account": "IBMQ_ALT",
+  "W": 0.05762,
+  "se_W": 0.00368,
+  "W_sigmas": 15.7,
+  "q": 0.08687,
+  "zeros": [
+    0.00387,
+    0.01375,
+    0.01162
+  ],
+  "W_null": -0.675,
+  "se_W_null": 0.00937,
+  "W_minus_Wnull_sigmas": 72.8,
+  "gates": {
+    "G1_headline": true,
+    "G2_zeros": true,
+    "G3_fraction": true,
+    "G4_null": true
+  },
+  "verdict": "PASS"
+}

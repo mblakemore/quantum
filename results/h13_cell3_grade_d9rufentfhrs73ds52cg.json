@@ -1,0 +1,43 @@
+{
+  "cell": "H13-Cell3-PDM",
+  "job_id": "d9rufentfhrs73ds52cg",
+  "account": "IBMQ_ALT2",
+  "min_eig_temporal": -0.4782,
+  "se_boot": 0.001633,
+  "sigmas_below_PSD": 292.8,
+  "min_eig_spatial": -0.01046,
+  "se_spatial": 0.007249,
+  "c_diag_temporal": [
+    0.972,
+    0.9785,
+    0.962
+  ],
+  "c_diag_spatial": [
+    0.956,
+    -0.943,
+    0.938
+  ],
+  "offdiag_temporal": {
+    "XY": -0.0165,
+    "XZ": -0.002,
+    "YX": -0.0155,
+    "YZ": 0.018,
+    "ZX": 0.0055,
+    "ZY": 0.0255
+  },
+  "singles_temporal": {
+    "X(t1)": -0.00867,
+    "Y(t1)": 0.0035,
+    "Z(t1)": 0.00567,
+    "X(t2)": 0.01417,
+    "Y(t2)": 0.02,
+    "Z(t2)": 0.02283
+  },
+  "gates": {
+    "G1_headline": true,
+    "G2_control": true,
+    "G3_structure": true,
+    "G4_apparatus": true
+  },
+  "verdict": "PASS"
+}
