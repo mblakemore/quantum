@@ -173,6 +173,26 @@ def main():
                         failed += 1
                         print(f"  [{code}] backend {name}: {resp}", flush=True)
 
+        # HEARTBEAT ITSELF LAST, and only after the real work — so the row reports what this
+        # pass ACTUALLY did rather than that it started. Mirrors watchd's service row (Whisper):
+        # the sensor everything else depends on was the one thing the registry could not see.
+        #
+        # Its blind_spot is the honest one: a DEAD feeder cannot write this row, so ABSENCE OF
+        # FRESHNESS is the signal — which means something that is NOT the feeder has to read
+        # the age. That reader is the derived block's oldest_observation_age_s. A heartbeat
+        # proves liveness while it arrives and says nothing once it stops.
+        if not a.dry_run:
+            post("/resources", {
+                "identity": "service:qpu-feeder", "name": "qpu-feeder", "kind": "service",
+                "blind_spots": ("staleness IS the liveness signal — a dead feeder cannot mark "
+                                "itself down, so read observed_at age from a consumer, never "
+                                "trust this row's own state field. Cadence 15 min."),
+                "state": "up" if not failed else "flagged",
+                "observed_at": stamp, "updated_by": "qpu_registry_feeder",
+                "meta": {"upserted": sent, "failed": failed, "skipped": skipped,
+                         "backends_seen": len(seen_backends), "pid": os.getpid(),
+                         "cadence_s": a.interval if not a.once else 900},
+            })
         print(f"[{stamp}] upserted {sent}, failed {failed}, skipped {skipped} "
               f"({len(seen_backends)} backends)", flush=True)
         if a.once:
