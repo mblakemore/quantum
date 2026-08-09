@@ -1,0 +1,176 @@
+{
+  "cell": "H13-Cell3-PDM",
+  "prereg": "docs/h13-cell3-pdm-prereg-FROZEN-whisper-c5048.md",
+  "prereg_commit": "e7ca10d",
+  "account": "IBMQ_ALT2",
+  "backend": "ibm_fez",
+  "job_id": "d9rufentfhrs73ds52cg",
+  "shots": 2000,
+  "n_circuits": 27,
+  "labels": [
+    {
+      "arm": "temporal",
+      "prep": 0,
+      "i": "X",
+      "j": "X"
+    },
+    {
+      "arm": "temporal",
+      "prep": 0,
+      "i": "X",
+      "j": "Y"
+    },
+    {
+      "arm": "temporal",
+      "prep": 0,
+      "i": "X",
+      "j": "Z"
+    },
+    {
+      "arm": "temporal",
+      "prep": 0,
+      "i": "Y",
+      "j": "X"
+    },
+    {
+      "arm": "temporal",
+      "prep": 0,
+      "i": "Y",
+      "j": "Y"
+    },
+    {
+      "arm": "temporal",
+      "prep": 0,
+      "i": "Y",
+      "j": "Z"
+    },
+    {
+      "arm": "temporal",
+      "prep": 0,
+      "i": "Z",
+      "j": "X"
+    },
+    {
+      "arm": "temporal",
+      "prep": 0,
+      "i": "Z",
+      "j": "Y"
+    },
+    {
+      "arm": "temporal",
+      "prep": 0,
+      "i": "Z",
+      "j": "Z"
+    },
+    {
+      "arm": "temporal",
+      "prep": 1,
+      "i": "X",
+      "j": "X"
+    },
+    {
+      "arm": "temporal",
+      "prep": 1,
+      "i": "X",
+      "j": "Y"
+    },
+    {
+      "arm": "temporal",
+      "prep": 1,
+      "i": "X",
+      "j": "Z"
+    },
+    {
+      "arm": "temporal",
+      "prep": 1,
+      "i": "Y",
+      "j": "X"
+    },
+    {
+      "arm": "temporal",
+      "prep": 1,
+      "i": "Y",
+      "j": "Y"
+    },
+    {
+      "arm": "temporal",
+      "prep": 1,
+      "i": "Y",
+      "j": "Z"
+    },
+    {
+      "arm": "temporal",
+      "prep": 1,
+      "i": "Z",
+      "j": "X"
+    },
+    {
+      "arm": "temporal",
+      "prep": 1,
+      "i": "Z",
+      "j": "Y"
+    },
+    {
+      "arm": "temporal",
+      "prep": 1,
+      "i": "Z",
+      "j": "Z"
+    },
+    {
+      "arm": "spatial",
+      "i": "X",
+      "j": "X"
+    },
+    {
+      "arm": "spatial",
+      "i": "X",
+      "j": "Y"
+    },
+    {
+      "arm": "spatial",
+      "i": "X",
+      "j": "Z"
+    },
+    {
+      "arm": "spatial",
+      "i": "Y",
+      "j": "X"
+    },
+    {
+      "arm": "spatial",
+      "i": "Y",
+      "j": "Y"
+    },
+    {
+      "arm": "spatial",
+      "i": "Y",
+      "j": "Z"
+    },
+    {
+      "arm": "spatial",
+      "i": "Z",
+      "j": "X"
+    },
+    {
+      "arm": "spatial",
+      "i": "Z",
+      "j": "Y"
+    },
+    {
+      "arm": "spatial",
+      "i": "Z",
+      "j": "Z"
+    }
+  ],
+  "layout": {
+    "temporal_qubit": 22,
+    "spatial_pair": [
+      137,
+      147
+    ]
+  },
+  "fit_gate": {
+    "remaining_before": 10.0,
+    "est_cost": 5.0
+  }
+}

@@ -12,7 +12,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # An inherited instance pin from another account would misroute this token's submission.
 os.environ.pop("QISKIT_IBM_INSTANCE", None)
 
-from ibm_multi_account import assert_explicit_account, service_for_submission
+from ibm_multi_account import assert_explicit_account, service_for_submission, _load_env_files
+
+_load_env_files()  # tokens live in .env; the assert checks os.environ before the guard would load them
 
 DECLARED_BACKEND = "ibm_fez"
 SHOTS = 2000

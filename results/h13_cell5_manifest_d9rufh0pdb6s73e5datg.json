@@ -1,0 +1,82 @@
+{
+  "cell": "H13-Cell5-Hardy",
+  "prereg": "docs/h13-cell5-hardy-prereg-FROZEN-whisper-c5048.md",
+  "prereg_commit": "e7ca10d",
+  "account": "IBMQ_ALT",
+  "backend": "ibm_fez",
+  "job_id": "d9rufh0pdb6s73e5datg",
+  "labels": [
+    {
+      "arm": "hardy",
+      "A": "A1",
+      "B": "B1"
+    },
+    {
+      "arm": "hardy",
+      "A": "A2",
+      "B": "B1"
+    },
+    {
+      "arm": "hardy",
+      "A": "A1",
+      "B": "B2"
+    },
+    {
+      "arm": "hardy",
+      "A": "A2",
+      "B": "B2"
+    },
+    {
+      "arm": "null",
+      "A": "A1",
+      "B": "B1"
+    },
+    {
+      "arm": "null",
+      "A": "A2",
+      "B": "B1"
+    },
+    {
+      "arm": "null",
+      "A": "A1",
+      "B": "B2"
+    },
+    {
+      "arm": "null",
+      "A": "A2",
+      "B": "B2"
+    }
+  ],
+  "shots": [
+    8000,
+    8000,
+    8000,
+    8000,
+    4000,
+    4000,
+    4000,
+    4000
+  ],
+  "layout": {
+    "pair": [
+      137,
+      147
+    ]
+  },
+  "state": [
+    -0.204057,
+    -0.615875,
+    0.412407,
+    -0.639515
+  ],
+  "thetas": {
+    "A1": 1.210571,
+    "A2": 6.158402,
+    "B1": 4.198403,
+    "B2": 5.533757
+  },
+  "fit_gate": {
+    "remaining_before": 6.0,
+    "est_cost": 3.0
+  }
+}
