@@ -70,7 +70,14 @@ def main():
             try:
                 svc = QiskitRuntimeService(channel="ibm_quantum_platform", token=tok, instance=crn)
                 u = svc.usage()
-                row = {"token": label, "fp": fp, "name": name, "crn_tail": crn[-14:],
+                # The FULL CRN is the identity (lesson 2 above: NAME IS NOT AN IDENTIFIER — two accounts
+                #                 both call an instance "open-instance" and only the CRN
+                #                 separates them, one of which is the black hole). The tail
+                #                 is for HUMAN display only; a consumer keying on it would
+                #                 reintroduce exactly the ambiguity this tool exists to kill.
+                #                 A CRN is an account identifier, not a credential — tokens
+                #                 are still never emitted, only fingerprints.
+                row = {"token": label, "fp": fp, "name": name, "crn": crn, "crn_tail": crn[-14:],
                        "consumed": u["usage_consumed_seconds"], "limit": u["usage_limit_seconds"],
                        "remaining": u["usage_remaining_seconds"],
                        "flagged": bool(u["usage_limit_reached"])}
@@ -91,7 +98,7 @@ def main():
                     row["backends"] = devs
                 rows.append(row)
             except Exception as e:
-                rows.append({"token": label, "fp": fp, "name": name, "crn_tail": crn[-14:],
+                rows.append({"token": label, "fp": fp, "name": name, "crn": crn, "crn_tail": crn[-14:],
                              "error": f"{type(e).__name__}"})
 
     if a.json:
