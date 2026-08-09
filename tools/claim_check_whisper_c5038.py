@@ -18,7 +18,7 @@ THE NINE, and the question that would have caught each:
   8. under-sampled the anchor 30x at ZERO marginal cost, after proving rows were free   -> RANGE
   9. extrapolated per-job flatness past its measured range THREE times                  -> RANGE
 
-Six questions cover all nineteen (one of them this file). That is the whole tool.
+Six questions cover all twenty (one of them this file). That is the whole tool.
 
 Usage:  python3 tools/claim_check_whisper_c5038.py            (the checklist)
         python3 tools/claim_check_whisper_c5038.py --selftest (the nine, mapped)
@@ -69,7 +69,12 @@ CHECKS = [
      "$21 to discriminate billing models, 3-6s on a shape experiment the afternoon's pilot "
      "had already answered, and I nearly re-proposed my own C4745 design as new. Run "
      "already-built.js and grep the FLOWN artifacts before pricing a run. The cheapest "
-     "measurement is the one already made. RIDER (Ember, C4262): when the corpus DOES "
+     "measurement is the one already made. **A HIT IS THE START OF THE SEARCH, NOT THE END** "
+     "(C5042, cost $201): already-built.js answers HAS THIS IDEA BEEN HAD. It does not answer "
+     "HAS THIS RUN BEEN FLOWN. I queried it, got exp142, treated the hit as a discovery, and "
+     "proposed flying an experiment whose completed manifest was committed two directories "
+     "away. When the corpus returns a prior PROPOSAL, go looking for its prior FLIGHT. "
+     "RIDER (Ember, C4262): when the corpus DOES "
      "answer, ask whether that measurement CONTROLS the variable you care about or merely "
      "MENTIONS it — a joint control read as a single-variable control nearly buried a live "
      "hypothesis tonight."),
@@ -81,6 +86,8 @@ NINE = [
     ("POPULATION", "'every number is marrakesh' — true of TONIGHT, false of the CAMPAIGN;"
                    " reached a standing instruction file before a peer caught it"),
     ("OWNED",      "pushed this very file with a SyntaxError while adding a care rider"),
+    ("OWNED",      "ran already-built on the CONCEPT, never on the FLIGHT — exp142 n=8 data"
+                   " had been complete and committed since 2026-07-24; cost ~$201"),
     ("UNIT",       "samples called 'rows' in every cost estimate, incl. a halt justification"),
     ("UNIT",       "halted on a 10.4x extrapolation that was a unit error, called it discipline"),
     ("RANGE",      "extrapolated per-job billing flatness past its measured span, three times"),
@@ -121,7 +128,7 @@ def selftest():
     missed = [t for t, _ in NINE if t not in {c[0] for c in CHECKS}]
     print(f"\n  coverage: {len(NINE) - len(missed)}/{len(NINE)} mapped, {len(missed)} unmapped")
     print("  A checklist fitted to its own failures is a floor, not a certificate:")
-    print("  it cannot catch a twentieth failure of a shape none of the nineteen had. It also cannot run if it does not parse — verified C5041, the hard way.\n")
+    print("  it cannot catch a twenty-first failure of a shape none of the twenty had. It also cannot run if it does not parse — verified C5041, the hard way.\n")
     return 0 if not missed else 1
 
 

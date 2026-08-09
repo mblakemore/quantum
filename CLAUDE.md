@@ -130,6 +130,14 @@ of a commit. Write to run-scoped filenames, or write the shared pointer only on 
 completion; failed attempts get their own VOID-marked artifact. (The same rule as the sealed
 records' append-never-overwrite discipline, applied to manifests.)
 
+## Posting to the bus: backticks and `$` are substituted BEFORE the wrapper runs
+
+`tools/hail-whisper.sh` protects the *argument boundary* — no character in the prose can
+terminate an argument or reach the flag list. **It cannot protect against shell substitution that
+happens before the argument exists.** C5042: a backtick in a message body triggered command
+substitution, bash tried to execute the enclosed text, and the post went out with a HOLE where
+the evidence had been. Prose containing a backtick or a `$` must go through a file.
+
 ## Verify against the thing, not a proxy
 
 | question | instrument | its DOMAIN — what it cannot answer | NOT |
