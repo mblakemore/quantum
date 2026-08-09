@@ -48,6 +48,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--backends", action="store_true", help="also poll device status (slower)")
+    ap.add_argument("--need", type=float, default=181.0,
+                    help="seconds the job needs; health is reported RELATIVE to this. "
+                         "Default 181 = the door (b) registered flight. Health is not a "
+                         "property of an account, it is a property of an account AND a job.")
     a = ap.parse_args()
 
     from qiskit_ibm_runtime import QiskitRuntimeService
@@ -70,7 +74,14 @@ def main():
                        "consumed": u["usage_consumed_seconds"], "limit": u["usage_limit_seconds"],
                        "remaining": u["usage_remaining_seconds"],
                        "flagged": bool(u["usage_limit_reached"])}
+                # C4262 (Whisper review #7533): "USABLE" as a BOOLEAN reproduced the night's
+                # own near-miss — WhisperPaid read USABLE on 10 seconds. Not flagged is not the
+                # same as able to carry the job. Health is relative to a REQUIREMENT or it is
+                # not health; a binary flag invites exactly the read that put six jobs into an
+                # account showing 738s.
                 row["usable"] = (not row["flagged"]) and row["remaining"] > 0
+                row["fits_need"] = row["usable"] and row["remaining"] >= a.need
+                row["margin"] = (row["remaining"] / a.need) if a.need else float("inf")
                 if a.backends:
                     devs = []
                     for b in svc.backends():
@@ -94,18 +105,28 @@ def main():
             print(f"{r['token']:<22}{r.get('name',''):<16}{r.get('crn_tail',''):<16}"
                   f"{'':<14}{'':>8}  ERROR {r['error']}")
             continue
-        health = "USABLE" if r["usable"] else ("BLACK HOLE — accepts, never runs" if r["flagged"]
-                                              else "EMPTY")
+        if r["flagged"]:
+            health = "BLACK HOLE — accepts, never runs"
+        elif r["remaining"] <= 0:
+            health = "EMPTY"
+        elif r["fits_need"]:
+            health = f"FITS  ({r['margin']:.1f}x the {a.need:.0f}s need)"
+        else:
+            health = f"TOO SMALL — {r['remaining']}s < {a.need:.0f}s needed"
         print(f"{r['token']:<22}{r['name']:<16}{r['crn_tail']:<16}"
               f"{str(r['consumed'])+'/'+str(r['limit']):<14}{r['remaining']:>7}s  {health}")
         for d in r.get("backends", []):
             mark = "" if d["status"] == "active" else f"  <-- {d['status'].upper()}"
             print(f"{'':<22}    {d['name']:<16} queue {d['queue']:<4} {d['status']}{mark}")
 
-    usable = [r for r in rows if r.get("usable")]
-    print(f"\n  {len(usable)} usable account(s), "
-          f"{sum(r['remaining'] for r in usable)}s total; "
+    fits = [r for r in rows if r.get("fits_need")]
+    alive = [r for r in rows if r.get("usable")]
+    print(f"\n  need {a.need:.0f}s: {len(fits)} account(s) FIT "
+          f"({', '.join(r['name'] for r in fits) if fits else 'NONE'}).")
+    print(f"  {len(alive)} unflagged, {sum(r['remaining'] for r in alive)}s total; "
           f"{sum(1 for r in rows if r.get('flagged'))} flagged.")
+    if alive and not fits:
+        print("  ** NO SINGLE ACCOUNT CARRIES THIS JOB. Seconds exist; capacity does not. **")
     print("  READ-ONLY: this tool cannot submit, cancel or spend.")
     return 0
 
