@@ -82,6 +82,18 @@
   footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
   footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
   @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+
+
+  /* SCROLL AFFORDANCE (Dawn). A scrolling chart that LOOKS finished lies by omission: at 390px the
+     anyon-braid receipts chart shows 6 of its 15 bars, with the same axis, the same caption and a
+     bar cut at the edge that scans as a crop rather than a signal — a reader sees a complete chart
+     and never learns the other series exists. The scroll itself is right (an 860-unit viewBox at
+     width:100% collapses labels to ~5px, and WCAG 1.4.10 exempts two-dimensional content); what
+     was missing was telling anyone. Added by script ONLY where a container really overflows, and
+     removed when it stops. Found by LOOKING at a phone render; no scanner names this class. */
+  .scrollhint { margin:6px 0 0; font-family:var(--mono); font-size:12px; color:var(--ink-3);
+                display:flex; align-items:center; gap:7px; }
+  .scrollhint::before, .scrollhint::after { content:""; flex:1; height:1px; background:var(--edge); }
 </style>
 </head>
 <body>
@@ -317,6 +329,38 @@ function r2(k){
     : 'Measured against prediction. The shape is unmistakable and the level is short at every setting — <b>0.104 / 0.367 / 0.686 / 0.846</b> against an ideal <b>0.146 / 0.500 / 0.854 / 1.000</b>. Real classical bits take real time to arrive, and the qubits decohere while they travel.';
 }
 segify("seg2",[["both","measured vs the law"],["ideal","the prediction alone"]],r2);
+</script>
+<script>
+// SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.
+// Keyed off COMPUTED overflow, never a class name. My first pass picked pages by grepping a
+// comment that 22 of them happened to share, verified all 22, and reported success — while 26
+// more pages had the same defect and no hint. Selecting by name is how a sweep covers half a
+// museum and reads as complete.
+(function(){
+  function label(e){
+    return e.querySelector("svg, canvas") ? "scroll the chart sideways for the rest"
+                                          : "scroll sideways for the rest";
+  }
+  function sync(){
+    var keep = [];
+    [].forEach.call(document.querySelectorAll("*"), function(e){
+      var ox = getComputedStyle(e).overflowX;
+      if ((ox !== "auto" && ox !== "scroll") || e.scrollWidth <= e.clientWidth + 4) return;
+      var n = e.nextElementSibling;
+      if (n && n.classList && n.classList.contains("scrollhint")) { keep.push(n); return; }
+      var p = document.createElement("p");
+      p.className = "scrollhint";
+      p.textContent = label(e);
+      e.parentNode.insertBefore(p, e.nextSibling);
+      keep.push(p);
+    });
+    [].forEach.call(document.querySelectorAll(".scrollhint"), function(h){
+      if (keep.indexOf(h) === -1) h.remove();
+    });
+  }
+  if (document.readyState === "loading") addEventListener("DOMContentLoaded", sync); else sync();
+  addEventListener("resize", sync);
+})();
 </script>
 </body>
 </html>

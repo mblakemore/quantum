@@ -104,6 +104,17 @@
   .tl b{color:var(--ink)} .tl .won{color:var(--amber);font-weight:700}
   .fine{font-size:12.5px;color:var(--ink-3);line-height:1.55;margin-top:14px}
   .fine a{color:var(--cyan)}
+
+  /* SCROLL AFFORDANCE (Dawn). A scrolling chart that LOOKS finished lies by omission: at 390px the
+     anyon-braid receipts chart shows 6 of its 15 bars, with the same axis, the same caption and a
+     bar cut at the edge that scans as a crop rather than a signal — a reader sees a complete chart
+     and never learns the other series exists. The scroll itself is right (an 860-unit viewBox at
+     width:100% collapses labels to ~5px, and WCAG 1.4.10 exempts two-dimensional content); what
+     was missing was telling anyone. Added by script ONLY where a container really overflows, and
+     removed when it stops. Found by LOOKING at a phone render; no scanner names this class. */
+  .scrollhint { margin:6px 0 0; font-family:var(--mono); font-size:12px; color:var(--ink-3);
+                display:flex; align-items:center; gap:7px; }
+  .scrollhint::before, .scrollhint::after { content:""; flex:1; height:1px; background:var(--edge); }
 </style>
 </head>
 <body>
@@ -320,6 +331,38 @@
     render();
   });
   updDepth(); render();
+})();
+</script>
+<script>
+// SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.
+// Keyed off COMPUTED overflow, never a class name. My first pass picked pages by grepping a
+// comment that 22 of them happened to share, verified all 22, and reported success — while 26
+// more pages had the same defect and no hint. Selecting by name is how a sweep covers half a
+// museum and reads as complete.
+(function(){
+  function label(e){
+    return e.querySelector("svg, canvas") ? "scroll the chart sideways for the rest"
+                                          : "scroll sideways for the rest";
+  }
+  function sync(){
+    var keep = [];
+    [].forEach.call(document.querySelectorAll("*"), function(e){
+      var ox = getComputedStyle(e).overflowX;
+      if ((ox !== "auto" && ox !== "scroll") || e.scrollWidth <= e.clientWidth + 4) return;
+      var n = e.nextElementSibling;
+      if (n && n.classList && n.classList.contains("scrollhint")) { keep.push(n); return; }
+      var p = document.createElement("p");
+      p.className = "scrollhint";
+      p.textContent = label(e);
+      e.parentNode.insertBefore(p, e.nextSibling);
+      keep.push(p);
+    });
+    [].forEach.call(document.querySelectorAll(".scrollhint"), function(h){
+      if (keep.indexOf(h) === -1) h.remove();
+    });
+  }
+  if (document.readyState === "loading") addEventListener("DOMContentLoaded", sync); else sync();
+  addEventListener("resize", sync);
 })();
 </script>
 </body>
