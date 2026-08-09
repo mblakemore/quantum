@@ -1,0 +1,27 @@
+{
+ "n": 4,
+ "M": 16,
+ "seed": 4262,
+ "delta_A_hat": 0.25,
+ "log_M_over_M": 0.17328679513998632,
+ "closed_form_check": 0.06250000000000004,
+ "status": "DIAGNOSTIC \u2014 not a certificate; bound is in the optimistic direction",
+ "A": [
+  "YYYX",
+  "XIII",
+  "XYXI",
+  "XIZI",
+  "ZYZI",
+  "ZXZY",
+  "YYIZ",
+  "IYYX",
+  "XYZX",
+  "ZZIX",
+  "YYYY",
+  "YIYX",
+  "XYZY",
+  "XIIX",
+  "YZXY",
+  "ZYIZ"
+ ]
+}
