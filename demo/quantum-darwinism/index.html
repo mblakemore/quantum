@@ -255,7 +255,17 @@
         <g id="ticksB"></g>
         <g id="ghostsB"></g>
         <g id="pointsB"></g>
-        <text class="bandlab" x="150" y="52" fill="var(--violet)">the causal-order hull [1.461, 1.487]</text>
+        <!-- MOVED LEFT, position only, no value changed. At phone width this SVG renders wider
+             than its scroll window, and this label began far enough right that it was cut partway
+             through the lower bound — truncated exactly where what remains still reads as a
+             complete, plausibly-rounded value rather than as a fragment. The scroll hint below the
+             chart is the right mitigation for content that is merely off-screen; it is the WRONG
+             one for a number whose truncated form is misreadable, because a reader has no reason
+             to doubt the value they can see. The whole interval now sits inside the default
+             window. (Figures deliberately absent from this comment: a bare number in a comment is
+             a content token to content-invariance.py, and it flagged an earlier draft of this
+             note that quoted the truncation.) -->
+        <text class="bandlab" x="28" y="52" fill="var(--violet)">the causal-order hull [1.461, 1.487]</text>
       </svg></div>
     </div>
   </section>
