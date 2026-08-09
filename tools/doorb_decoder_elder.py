@@ -95,7 +95,12 @@ def outcome_to_bells(raw, n):
     before any real decode — never inferred from flight data."""
     if len(raw) != 2 * n or any(c not in "01" for c in raw):
         raise ValueError(f"raw must be {2*n} bits, got {raw!r}")
-    return [int(raw[2*j]) * 2 + int(raw[2*j+1]) for j in range(n)]
+    # PINNED (Row C of Ember's joint fixture, #7426 — REGISTERED convention, matches
+    # door (a)'s bit_layout: halves): first n bits = a-register, last n = b-register,
+    # pair j index = b*2 + a. The fixture tested every alignment: this row and only its
+    # interleaved twin reach 0/12,800 mismatches; the OBVIOUS single fix (layout only)
+    # left 5,824 — a partial fix that looks like progress and is still a coin flip.
+    return [int(raw[n + j]) * 2 + int(raw[j]) for j in range(n)]
 
 def estimate(pauli, shots_bells):
     vals = [shot_value(pauli, s) for s in shots_bells]
@@ -190,6 +195,10 @@ def selftest():
                 for q in itertools.product("IXYZ", repeat=2)
                 if "".join(q) not in (planted, "II"))
     ok.append((f"hard-family tripwire n=2: E[v_P]=a^2 at planted, 0 at all 14 nulls", hit and nulls))
+    # [3b] CONVENTION PIN (Row C, #7426): halves layout, index=b*2+a. Known vector:
+    #      n=2, raw="0111": a-bits "01", b-bits "11" -> pair0 (a=0,b=1)->2, pair1 (a=1,b=1)->3
+    ok.append(("bit-convention pin: halves, idx=b*2+a (Row C)",
+               outcome_to_bells("0111", 2) == [2, 3]))
     # [4] probe set: deterministic, public, no identity, correct count
     ps = probe_set(4)
     ok.append(("probe set deterministic + I^n excluded",
