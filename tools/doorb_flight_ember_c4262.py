@@ -458,7 +458,30 @@ def main():
         print("  weather-only: CLEARED. No seal was required and none was spent.")
         return 0
 
-    jobs = [{"job_id": wjob.job_id(), "rows": CAL_ROWS, "role": "calibration"}]
+    # ---- G-EPOCH (registered #7501): the probe and the science fly in DIFFERENT jobs, and
+    # the device moved 2x in 13 minutes tonight (0.148 pilot -> 0.078 flight). A probe that
+    # clears at 0.14 can hand its T to a flight launching into 0.08 — undersized budget, F2
+    # fires, and the spend happens on weather that changed during the paperwork.
+    # So the FLIGHT'S OWN leading calibration governs: T is re-derived from eps_flight, and
+    # the science chunks are sized to THAT, never to the probe's number.
+    T_flight = 4.0 * math.log(2 * 4 ** a.n / a.delta) / _eps ** 4
+    shots_flight = math.ceil(T_flight / 2)
+    u3 = svc.usage()
+    fit_s = 2.667 + 0.00167 * shots_flight            # measured two-point cost model
+    print(f"  [G-EPOCH]  eps_flight {_eps:.4f} -> T = {T_flight:,.0f} copies "
+          f"= {shots_flight:,} shots, est {fit_s:.0f}s vs {u3['usage_remaining_seconds']}s live")
+    if fit_s * 1.5 > u3["usage_remaining_seconds"]:
+        print(f"  [ABORT] G-EPOCH: T(eps_flight) does not fit at 1.5x margin. "
+              f"~{wjob.usage() or 0}s spent on the leading job, NOT the flight. Seal unspent.")
+        json.dump({"abort": "G-EPOCH", "eps_flight": _eps, "T": T_flight,
+                   "est_s": fit_s, "live_s": u3["usage_remaining_seconds"],
+                   "cal_job": wjob.job_id(), "seal_spent": False},
+                  open(f"results/doorb_epoch_abort_{wjob.job_id()}.json", "w"), indent=2)
+        return 0
+    print(f"  [PASS] G-EPOCH   sized to the flight's own epoch, not the probe's")
+    shots = shots_flight
+
+    jobs = [{"job_id": wjob.job_id(), "rows": CAL_ROWS, "role": "calibration+gates"}]
     remaining = shots
     cal_done = True                      # calibration already flown as the weather gate
     while remaining > 0:
