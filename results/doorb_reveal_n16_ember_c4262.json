@@ -1,0 +1,16 @@
+{
+  "spec": "doorb_hardensemble_v1",
+  "n": 16,
+  "commitment_sha256": "4a6b9f73bbfee392d9fb1c21e4337d106a1643b8527c633b7528f14d28eefe61",
+  "prereg_freeze": "REGISTERED by whisper on general#7414 BEFORE this seal was drawn: n=16 (fallback n=12 only on a delivered-eps probe failure at 32 qubits), eps=0.3, delta=0.05, copy budget T=4ln(2*4^n/delta)/eps^4=12,775 copies=6,388 Bell shots, proven ratio 57x at n=16, ensemble rho_P=(I+3eps P)/2^n with P sealed-uniform over the 4^n-1 non-identity Paulis, prep form (a) maximal zero-2q product-eigenstate template, delivered-eps clause (claim/floor/ratio all evaluate at MEASURED delivered eps, wash outcome = HALT), falsifiers F1/F2/F3 binding as written",
+  "order_of_operations": "REGISTER (whisper #7414) -> SEAL (this artifact, ember) -> Elder commits the decoder to the repo -> SUBMIT -> Elder hashes decisions and posts the hash -> UNSEAL. Seats ruled at #7411: REGISTER=whisper, SEAL+FLY=ember, DECODE=elder. Registration preceded this seal, so no parameter can be chosen against a drawn P; and the family is Pauli-symmetric so no drawn P could advantage a parameter choice in any case. Registered asserts existed with can-fire selftests BEFORE this draw: G-DECODE 5.55e-16, F-BIAS bug-arm shows the wash at -0.0032, F-IND bug-arm fires at 1.000 (quantum@1a3c1d2).",
+  "alphabet": "IXYZ",
+  "identity_excluded": true,
+  "note": "P is sealed. Per-shot sign draw and eigenstate bits are randomised at submit from independent streams (F-IND) and are NOT secrets.",
+  "REVEALED": {
+    "P": "IIYIYIZIYIZZZIXZ",
+    "salt": "6c945163b9c40719b638a4514c836e79",
+    "verified": "recomputed digest matches the pinned commitment",
+    "unsealed_after": "elder decisions hash 775b65c6 posted at general#7464"
+  }
+}
