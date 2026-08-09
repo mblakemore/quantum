@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:title" content="The Temporal Negativity Meter — a density matrix with a negative eigenvalue">
+<meta property="og:description" content="a density matrix with a measured NEGATIVE eigenvalue — the certificate that a correlation lived in time, not space. min-eig -0.4782 +/- 0.0016, 292.8 sigma below the positivity floor, on ibm_fez job d9rufentfhrs73ds52cg. The spatial Bell-pair control run through the identical pipeline reads -0.0105 (within 2 SE of zero), exactly as a real state must.">
+<meta name="theme-color" content="#04060c">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Temporal Negativity Meter — the correlation space cannot hold | The Quantum Museum</title>
+<meta name="description" content="a density matrix with a measured NEGATIVE eigenvalue — the certificate that a correlation lived in time, not space. min-eig -0.4782 +/- 0.0016, 292.8 sigma below the positivity floor, on ibm_fez job d9rufentfhrs73ds52cg. The spatial Bell-pair control run through the identical pipeline reads -0.0105 (within 2 SE of zero), exactly as a real state must.">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M4 20 H28" stroke="%232a3550" stroke-width="2"/><path d="M8 20 L16 8 L24 26" fill="none" stroke="%23a78bfa" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a,.audit a,.caveat a,.receipt a{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--violet);font-weight:400}
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 14%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(27px,5.2vw,46px); margin:12px 0 14px; }
+  h1 .hl { color: var(--violet); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:68ch; margin:0 0 14px; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; font-family:var(--mono); font-size:11.5px; }
+  .badge { border:1px solid var(--edge); border-radius:999px; padding:4px 11px; color:var(--ink-2); }
+  .badge b { color:var(--violet); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:14px; padding:5px 12px; }
+  .scope b { color: var(--violet); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  /* Charts scroll, they do not shrink. WCAG 1.4.10 exempts content needing two-dimensional
+     layout from the no-horizontal-scroll rule, so scrolling a chart is sanctioned where
+     shrinking it below legibility is not. No effect above the floor in available width. */
+  figure { margin:0; overflow-x:auto; }
+  svg { width:100%; min-width:460px; height:auto; display:block; }
+  /* The meter is drawn narrow ON PURPOSE so it needs no scroll at 390px — see the
+     comment in meter(). Its own min-width must follow, or the figure scrolls anyway. */
+  #meter { min-width:290px; }
+  .lgd { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:8px; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .lgd span { display:inline-flex; align-items:center; gap:7px; }
+  .lgd i { width:20px; height:0; border-top-width:3px; border-top-style:solid; display:inline-block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:12px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--violet) 16%,transparent); color:var(--violet); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .audit { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px dashed var(--edge); margin-top:14px; padding-top:9px; line-height:1.55; }
+  .audit b { color:var(--good); }
+  .caveat { border-left:3px solid var(--violet); background:var(--surface-2); border-radius:0 11px 11px 0; padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.55; }
+  .caveat .ct { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--violet); display:block; margin-bottom:5px; }
+  .caveat b { color:var(--ink); }
+  .quote { border-left:3px solid var(--amber); background:var(--surface-2); border-radius:0 11px 11px 0; padding:14px 17px; margin:14px 0 0; font-size:13.5px; line-height:1.6; }
+  .quote .qt { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); display:block; margin-bottom:7px; }
+  .quote p { margin:0 0 9px; } .quote p:last-child { margin-bottom:0; }
+  .quote b { color:var(--ink); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--violet); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  /* The gate table. Wrapped and focusable for the same reason every table in the museum is:
+     it has a min-width so it scrolls at phone width, and a scrollable region that cannot be
+     focused is unreachable by keyboard (WCAG 2.1.1). */
+  .tbl-wrap { overflow-x:auto; margin:6px 0 0; border:1px solid var(--edge); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; min-width:520px; }
+  caption { caption-side:top; text-align:left; padding:10px 13px 6px; color:var(--ink-3); font-size:11.5px; }
+  th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--edge); vertical-align:top; color:var(--ink-2); }
+  thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface-2); }
+  tbody tr:last-child td { border-bottom:none; }
+  td b { color:var(--ink); }
+  td.held { color:var(--good); font-weight:700; white-space:nowrap; }
+  footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="sp"></span>
+    <span class="wing">WING <b>VI</b> · Time &amp; the Observer</span>
+  </nav>
+  <main id="main">
+  <header class="hero">
+    <div class="eyebrow">H13 Cell 3 · Temporal Investigations · the Heron 2026 campaign</div>
+    <h1>A density matrix that goes <span class="hl">below zero</span>.</h1>
+    <p class="lede">The numbers along a density matrix's diagonal are probabilities, and its
+      eigenvalues are too. They cannot be negative — that is not a rule of thumb, it is what it means
+      for a description to describe something. Point the same estimator at <em>one</em> qubit measured
+      at <em>two moments</em> and it assembles a matrix whose smallest eigenvalue is
+      <b>−0.478</b>. Half a probability below zero. Nothing in space can produce those statistics;
+      only something that visited two times can.</p>
+    <div class="badges">
+      <span class="badge">min-eig <b>−0.4782 ± 0.0016</b></span>
+      <span class="badge"><b>292.8σ</b> below the positivity floor</span>
+      <span class="badge">spatial control <b>−0.0105</b> (within 2·SE)</span>
+      <span class="badge">ibm_fez · <b>d9rufentfhrs73ds52cg</b></span>
+    </div>
+    <p><span class="scope">Scope: certified <b>under the frozen sequential projective measurement
+      model</b> (rotate–measure–unrotate, identity evolution). A temporal-correlation witness, not an
+      advantage claim.</span></p>
+  </header>
+
+  <section class="panel">
+    <h2>The meter</h2>
+    <p class="sub">Two runs of one estimator · 27 circuits · 2000 shots each · zero postselection</p>
+    <div class="primer"><b>How to read it.</b> The bar is the smallest eigenvalue of the matrix the
+      estimator builds. Everything a real state can be lives at or above <b>zero</b>. Switch the
+      source between one qubit at two times and two qubits side by side, and watch which side of the
+      line the reading falls on. Both arms were measured; nothing here is interpolated.</p>
+    <div class="seg" role="group" aria-label="which correlation the meter is reading">
+      <button id="b-t" class="on" type="button">one qubit, two moments</button>
+      <button id="b-s" type="button">two qubits, side by side</button>
+    </div>
+    <figure aria-label="smallest eigenvalue against the positivity floor at zero" tabindex="0">
+      <svg id="meter" viewBox="0 0 300 252" role="img" aria-label="Smallest eigenvalue of the assembled matrix, plotted against the positivity floor at zero. The temporal arm reads minus 0.4782; the spatial control reads minus 0.0105."></svg>
+    </figure>
+    <div class="lgd">
+      <span><i style="border-top-color:var(--violet)"></i>temporal arm — one qubit, two times</span>
+      <span><i style="border-top-color:var(--good)"></i>spatial arm — a Φ⁺ pair, the control</span>
+      <span><i style="border-top-color:var(--bad);border-top-style:dashed"></i>positivity floor (zero)</span>
+    </div>
+    <p class="story" id="story"></p>
+    <p class="audit" id="audit"></p>
+  </section>
+
+  <section class="panel">
+    <h2>Why the reading is impossible for space</h2>
+    <p class="sub">Three correlators, measured in both arms by the same pipeline</p>
+    <div class="primer">A two-qubit state has to make a trade. Push the X-correlation to +1 and the
+      Y-correlation is forced negative — the maximally entangled states cap at a
+      <b>(+, −, +)</b> sign pattern up to a local change of frame. <b>All three positive at once</b>
+      is not a strong state; it is <em>no</em> state.</div>
+    <figure aria-label="the three diagonal correlators in the temporal and spatial arms" tabindex="0">
+      <svg id="corr" viewBox="0 0 460 210" role="img" aria-label="The three diagonal correlators in both arms. Temporal: plus 0.972, plus 0.979, plus 0.962. Spatial: plus 0.956, minus 0.943, plus 0.938."></svg>
+    </figure>
+    <p class="story">The temporal arm reads <b>+0.972</b>, <b>+0.979</b>, <b>+0.962</b> — three
+      positives, the pattern no bipartite state carries. The same estimator pointed at an actual
+      Φ⁺ pair reads <b>+0.956</b>, <b>−0.943</b>, <b>+0.938</b> and assembles into a matrix that
+      stays at or above zero, exactly as a state must.</p>
+  </section>
+
+  <section class="panel">
+    <h2>The four gates, frozen before the flight</h2>
+    <p class="sub">Preregistered at e7ca10d, committed before submission · verdict PASS</p>
+    <div class="tbl-wrap" tabindex="0" role="group" aria-label="the four preregistered gates and their measured values">
+      <table>
+        <caption>H13 Cell 3 — measured against the criteria frozen before the flight</caption>
+        <thead><tr><th scope="col">quantity</th><th scope="col">measured</th><th scope="col">frozen criterion</th><th scope="col">verdict</th></tr></thead>
+        <tbody>
+          <tr><td>min-eig(R_temporal)</td><td><b>−0.4782 ± 0.0016</b> (292.8σ below PSD)</td><td>&lt; 0 at ≥5σ, band [−0.50, −0.30]</td><td class="held">G1 HELD</td></tr>
+          <tr><td>min-eig(R_spatial) — Φ⁺ control</td><td>−0.0105, SE 0.0072 (within −2·SE = −0.0145)</td><td>≥ −2·SE</td><td class="held">G2 HELD</td></tr>
+          <tr><td>off-diagonal |c_ij| (temporal)</td><td>max 0.026</td><td>≤ 0.10</td><td class="held">G3 HELD</td></tr>
+          <tr><td>singles (temporal, I/2 input)</td><td>max |c| 0.023</td><td>≤ 0.06</td><td class="held">G4 HELD</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="caveat">
+      <span class="ct">the falsifier, and what it did</span>
+      The spatial arm is not decoration. <b>Had the pipeline been manufacturing negativity, it would
+      have shown up there</b> — a Φ⁺ pair is a genuine state and must read at or above zero. It
+      landed at −0.0105 with SE 0.0072: negative, and inside 2·SE of zero, which is what "a real
+      state, measured with real noise" looks like. The instrument was given a chance to fail on
+      something known, and did not take it.
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Receipts</h2>
+    <div class="court">
+      <div class="receipt"><div class="rt">the flight</div>
+        <p>ibm_fez, job <code>d9rufentfhrs73ds52cg</code> — 27 circuits (18 temporal + 9 spatial
+        control), 2000 shots each, temporal qubit 22, spatial pair (137,147). Zero two-qubit gates in
+        the temporal arm; <b>zero postselection anywhere</b> — every shot kept.</p></div>
+      <div class="receipt"><div class="rt">the paperwork</div>
+        <p>Preregistration <a href="../../docs/h13-cell3-pdm-prereg-FROZEN-whisper-c5048.md">frozen at
+        e7ca10d</a> before the flight; finding
+        <a href="../../findings/h13-cell3-temporal-negativity-whisper-c5048.md">h13-cell3-temporal-negativity</a>.
+        Cycle C5048.</p></div>
+    </div>
+    <div class="quote">
+      <span class="qt">carried verbatim from the finding's fence</span>
+      <p>Negativity is certified <b>under the frozen sequential projective measurement model</b>
+      (rotate–measure–unrotate, identity evolution). Symmetric readout error only shrinks correlators
+      and pulls toward PSD — the conservative direction for the headline. This is a
+      temporal-correlation witness, not an advantage claim; nothing here needed a claim card.</p>
+    </div>
+    <p class="story">One number the exhibit does <b>not</b> show: a sweep. The finding reports two
+      arms, not a curve between them, so the control here is a switch rather than a dial — there is
+      no measured path from one reading to the other and this page will not draw one.</p>
+  </section>
+
+  <footer>
+    <a href="../index.html">← The Quantum Museum</a>
+    <span>Wing VI · Time &amp; the Observer</span>
+    <span>H13 Cell 3 · C5048</span>
+    <a href="../arrow-dial/index.html">One Dial for the Arrow of Time →</a>
+  </footer>
+  </main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  function el(p,t,a){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);p.appendChild(n);return n;}
+
+  // EVERY NUMBER BELOW IS TRANSCRIBED FROM findings/h13-cell3-temporal-negativity-whisper-c5048.md
+  // and nothing is interpolated between the two arms: the finding reports two measured runs, not a
+  // sweep, so this page offers a switch and not a dial.
+  var ARM = {
+    temporal: { key:"temporal", eig:-0.4782, se:0.0016, sig:292.8, col:"var(--violet)",
+                label:"one qubit, two moments",
+                corr:[["⟨XX⟩",0.972],["⟨YY⟩",0.979],["⟨ZZ⟩",0.962]] },
+    spatial:  { key:"spatial",  eig:-0.0105, se:0.0072, sig:null,  col:"var(--good)",
+                label:"two qubits, side by side (Φ⁺ control)",
+                corr:[["⟨XX⟩",0.956],["⟨YY⟩",-0.943],["⟨ZZ⟩",0.938]] }
+  };
+  var cur="temporal";
+
+  function meter(){
+    var s=document.getElementById("meter"); s.innerHTML="";
+    // VERTICAL, and that is the whole reason for the shape. Horizontally the chart needed the
+    // museum's 460-unit min-width, so at 390px the figure scrolled and the reader's FIRST view
+    // contained the bar but not the zero line — the one thing the exhibit is about was off-screen
+    // until you dragged it. No scanner flags that (nothing is clipped and nothing overflows the
+    // page); rendering it at 390 and looking at it does. A column against a horizontal floor is
+    // narrow by construction and fits a phone whole.
+    var CX=158, T=44, B=222, lo=-0.55, hi=0.15;
+    var Y=function(v){return B-(B-T)*(v-lo)/(hi-lo);};
+    el(s,"text",{x:8,y:13,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"})
+      .textContent="smallest eigenvalue of the matrix";
+    // the band a real state may occupy
+    el(s,"rect",{x:40,y:Y(hi),width:250,height:Math.max(1,Y(0)-Y(hi)),rx:3,style:"fill:var(--good);opacity:.07"});
+    el(s,"text",{x:288,y:Y(hi)+13,"text-anchor":"end",style:"fill:var(--good);font-family:var(--mono);font-size:9.5px"})
+      .textContent="a real state lives here";
+    [[-0.5,"−0.5"],[-0.25,"−0.25"],[0,"0"]].forEach(function(g){
+      el(s,"line",{x1:40,y1:Y(g[0]),x2:290,y2:Y(g[0]),
+        style:"stroke:"+(g[0]===0?"var(--bad)":"var(--edge)")+";stroke-width:"+(g[0]===0?2:1)+(g[0]===0?";stroke-dasharray:5 4":"")});
+      el(s,"text",{x:34,y:Y(g[0])+4,"text-anchor":"end",
+        style:"fill:"+(g[0]===0?"var(--bad)":"var(--ink-4)")+";font-family:var(--mono);font-size:10px"}).textContent=g[1];});
+    el(s,"text",{x:40,y:Y(0)-7,style:"fill:var(--bad);font-family:var(--mono);font-size:9.5px"})
+      .textContent="positivity floor";
+
+    var A=ARM[cur], w=104;
+    el(s,"text",{x:CX,y:T-14,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:11px"}).textContent=A.label;
+    var y0=Math.min(Y(0),Y(A.eig)), h=Math.max(2,Math.abs(Y(A.eig)-Y(0)));
+    el(s,"rect",{x:CX-w/2,y:y0,width:w,height:h,rx:4,style:"fill:"+A.col+";opacity:.85"});
+    el(s,"line",{x1:CX-16,y1:Y(A.eig-A.se),x2:CX+16,y2:Y(A.eig+A.se),style:"stroke:var(--ink);stroke-width:2"});
+    // Inside the column when the column is tall enough to hold the text, in --bg; below it in the
+    // arm colour when it is not. Fill follows POSITION, never always the series colour.
+    var inBar = h > 26;
+    el(s,"text",{x:CX, y: inBar ? y0+h-9 : y0+h+15, "text-anchor":"middle",
+      style:"fill:"+(inBar?"var(--bg)":A.col)+";font-family:var(--mono);font-size:14px;font-weight:700"})
+      .textContent=(A.eig<0?"−":"")+Math.abs(A.eig).toFixed(4);
+  }
+
+  function corr(){
+    var s=document.getElementById("corr"); s.innerHTML="";
+    // Values sit INSIDE their bars. Outside-right they ran past the viewBox and five of the six
+    // were clipped; the bars here are long (|c| ~ 0.94-0.98) so there is always room inside.
+    var L=132,R=418,T=34;
+    var X=function(v){return L+(R-L)*(v+1)/2;};
+    el(s,"text",{x:8,y:18,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"})
+      .textContent="the three diagonal correlators, both arms";
+    var rows=[];
+    ["temporal","spatial"].forEach(function(k,ai){
+      ARM[k].corr.forEach(function(c,i){ rows.push({k:k,c:c,ai:ai,i:i}); }); });
+    var bottom=T+10+rows.length*20+14;
+    [[-1,"−1"],[0,"0"],[1,"+1"]].forEach(function(g){
+      el(s,"line",{x1:X(g[0]),y1:T-6,x2:X(g[0]),y2:bottom-8,style:"stroke:var(--edge);stroke-width:"+(g[0]===0?2:1)});
+      el(s,"text",{x:X(g[0]),y:bottom+6,"text-anchor":"middle",style:"fill:var(--ink-4);font-family:var(--mono);font-size:10px"}).textContent=g[1];});
+    rows.forEach(function(r,n){
+      var A=ARM[r.k], y=T+10+n*20;
+      // arm name on its own row-group label, well left of the axis so it cannot meet a bracket
+      if(r.i===0) el(s,"text",{x:8,y:y+4,
+        style:"fill:"+A.col+";font-family:var(--mono);font-size:10.5px"})
+        .textContent = r.k==="temporal" ? "temporal" : "spatial (Φ⁺)";
+      el(s,"text",{x:L-10,y:y+4,"text-anchor":"end",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent=r.c[0];
+      var xa=Math.min(X(0),X(r.c[1])), w=Math.max(2,Math.abs(X(r.c[1])-X(0)));
+      el(s,"rect",{x:xa,y:y-7,width:w,height:14,rx:3,style:"fill:"+A.col+";opacity:.85"});
+      var pos=r.c[1]>=0;
+      el(s,"text",{x: pos ? xa+w-6 : xa+6, y:y+4, "text-anchor": pos?"end":"start",
+        style:"fill:var(--bg);font-family:var(--mono);font-size:10.5px;font-weight:700"})
+        .textContent=(r.c[1]>0?"+":"−")+Math.abs(r.c[1]).toFixed(3);
+    });
+  }
+
+  function say(){
+    var A=ARM[cur];
+    document.getElementById("story").innerHTML = cur==="temporal"
+      ? 'One qubit, measured at two moments. The assembled matrix has a smallest eigenvalue of '
+        + '<b>−0.4782 ± 0.0016</b> — <b>292.8σ</b> below the floor every real state must '
+        + 'sit on, and 96% of the deepest value the model allows (−0.5). No pair of objects in space '
+        + 'can produce this reading.'
+      : 'Two qubits side by side, a genuine Φ⁺ pair, run through the <em>same</em> estimator. '
+        + 'It reads <b>−0.0105</b> with SE <b>0.0072</b> — inside 2·SE of zero, which is a real '
+        + 'state measured with real noise. This arm is the falsifier: if the pipeline were '
+        + 'manufacturing negativity, it would appear here.';
+    document.getElementById("audit").innerHTML = cur==="temporal"
+      ? 'Gate G1 <b>HELD</b> · criterion: &lt; 0 at ≥5σ, band [−0.50, −0.30] · measured −0.4782, inside the band'
+      : 'Gate G2 <b>HELD</b> · criterion: ≥ −2·SE · measured −0.0105 against a bound of −0.0145';
+    document.getElementById("b-t").className = cur==="temporal"?"on":"";
+    document.getElementById("b-s").className = cur==="spatial"?"on":"";
+    document.getElementById("b-t").setAttribute("aria-pressed", cur==="temporal");
+    document.getElementById("b-s").setAttribute("aria-pressed", cur==="spatial");
+  }
+
+  function draw(){ meter(); say(); }
+  document.getElementById("b-t").addEventListener("click",function(){cur="temporal";draw();});
+  document.getElementById("b-s").addEventListener("click",function(){cur="spatial";draw();});
+  draw(); corr();
+})();
+</script>
+</body>
+</html>
