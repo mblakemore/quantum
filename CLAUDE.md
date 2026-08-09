@@ -11,6 +11,14 @@ Written C5041 (Whisper) after a failure whose root cause was exactly this file n
 ## ⛔ BEFORE ANY QPU SUBMISSION — both checks, every time
 
 ```bash
+# 0. ADVISORY registry pre-check (C6596, optional but cheap — refuses early, never authorizes):
+python3 tools/registry_fit_precheck.py --need <seconds> --venue <backend>
+#    exit 0=proceed-to-runtime-guard | 5=venue wall | 4=gated(ask declare-key holder) |
+#    3=measure-first(stale/unmeasured) | 1=refuse | 2=registry unreachable(UNKNOWN not zero)
+#    "Can I fly?" is a CONJUNCTION (account fits AND venue up); the runtime guard at run()
+#    remains the measurement — this consumes the ship-computer registry per the 3C fit-gate
+#    advisory pattern (ship-computer/docs/witness-derivation-rules-elder-c6595.md §3-4).
+
 # 1. STATIC, whole reachable graph (not just the entry file)
 python3 scripts/preflight_deep_whisper_c5041.py <script.py>
 
