@@ -1,0 +1,67 @@
+{
+  "noise_model": {
+    "eps_ro_final": 0.015,
+    "eps_ro_mid": 0.02,
+    "p_cz": 0.008,
+    "p_idle_ce": 0.01
+  },
+  "ce_correlators_raw": {
+    "XX": 0.92189,
+    "XY": 0.0,
+    "XZ": 0.0,
+    "YX": 0.0,
+    "YY": 0.92189,
+    "YZ": 0.0,
+    "ZX": 0.0,
+    "ZY": 0.0,
+    "ZZ": 0.92189
+  },
+  "cc_correlators_raw": {
+    "XX": 0.93337,
+    "XY": 0.0,
+    "XZ": 0.0,
+    "YX": 0.0,
+    "YY": -0.93337,
+    "YZ": 0.0,
+    "ZX": 0.0,
+    "ZY": 0.0,
+    "ZZ": 0.93337
+  },
+  "ce_sign_product_raw": 0.7835,
+  "cc_sign_product_raw": -0.81313,
+  "z_tvd_raw": 0.00574,
+  "matching_dial": {
+    "p_extra_on_CE": 0.0,
+    "ce_zz_after": 0.92189,
+    "cc_zz": 0.93337,
+    "z_tvd_after": 0.00574
+  },
+  "ce_correlators_matched": {
+    "XX": 0.92189,
+    "XY": 0.0,
+    "XZ": 0.0,
+    "YX": 0.0,
+    "YY": 0.92189,
+    "YZ": 0.0,
+    "ZX": 0.0,
+    "ZY": 0.0,
+    "ZZ": 0.92189
+  },
+  "ce_sign_product_matched": 0.7835,
+  "classical_analyst_ceiling": 0.50287,
+  "sign_product_sigmas_vs_shots_per_basis": {
+    "2000": {
+      "ce_sigma": 61.4,
+      "cc_sigma": 67.1
+    },
+    "4000": {
+      "ce_sigma": 86.9,
+      "cc_sigma": 95.0
+    },
+    "8000": {
+      "ce_sigma": 122.9,
+      "cc_sigma": 134.3
+    }
+  },
+  "circuits": "9 per arm (3x3 bases) x 2 arms + matching-calibration pre-run"
+}

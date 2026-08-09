@@ -1,0 +1,128 @@
+{
+  "helstrom_ceiling": 0.85355,
+  "bhw_sweep": [
+    {
+      "p_noise": 0.0,
+      "success": 0.985,
+      "iters_to_1e-3": 10,
+      "second_eig_mod": 0.5
+    },
+    {
+      "p_noise": 0.005,
+      "success": 0.97777,
+      "iters_to_1e-3": 10,
+      "second_eig_mod": 0.5024
+    },
+    {
+      "p_noise": 0.01,
+      "success": 0.97064,
+      "iters_to_1e-3": 10,
+      "second_eig_mod": 0.5046
+    },
+    {
+      "p_noise": 0.02,
+      "success": 0.95666,
+      "iters_to_1e-3": 10,
+      "second_eig_mod": 0.5085
+    },
+    {
+      "p_noise": 0.03,
+      "success": 0.94305,
+      "iters_to_1e-3": 10,
+      "second_eig_mod": 0.5117
+    },
+    {
+      "p_noise": 0.05,
+      "success": 0.91687,
+      "iters_to_1e-3": 9,
+      "second_eig_mod": 0.5162
+    },
+    {
+      "p_noise": 0.08,
+      "success": 0.8801,
+      "iters_to_1e-3": 9,
+      "second_eig_mod": 0.5191
+    },
+    {
+      "p_noise": 0.12,
+      "success": 0.83534,
+      "iters_to_1e-3": 8,
+      "second_eig_mod": 0.5168
+    },
+    {
+      "p_noise": 0.16,
+      "success": 0.79501,
+      "iters_to_1e-3": 8,
+      "second_eig_mod": 0.509
+    },
+    {
+      "p_noise": 0.2,
+      "success": 0.75867,
+      "iters_to_1e-3": 8,
+      "second_eig_mod": 0.497
+    },
+    {
+      "p_noise": 0.3,
+      "success": 0.68281,
+      "iters_to_1e-3": 7,
+      "second_eig_mod": 0.4541
+    }
+  ],
+  "noise_threshold_p_star": 0.12,
+  "pctc_same_gadget": {
+    "state0": {
+      "keep_weight": 1.5,
+      "p_z1": 0.338333
+    },
+    "state+": {
+      "keep_weight": 1.5,
+      "p_z1": 0.661667
+    }
+  },
+  "grandfather_dctc_pflip_p0.0": [
+    0.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "grandfather_dctc_pflip_p0.02": [
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "grandfather_dctc_pflip_p0.05": [
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "grandfather_thetas": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    1.0,
+    1.5708,
+    2.0,
+    3.1416
+  ],
+  "grandfather_pctc_law": "cos^2(theta/2)/2 (smooth; F101 measured on silicon)",
+  "hw_cost_estimate": {
+    "iterations_worst": 10,
+    "circuits_total_approx": 66,
+    "note": "mixed-state re-prep per iteration via eigendecomposition + classical shot mixing"
+  }
+}

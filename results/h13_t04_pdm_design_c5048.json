@@ -1,0 +1,96 @@
+{
+  "noise_model": {
+    "eps_mid": 0.02,
+    "eps_final": 0.015,
+    "p_cx": 0.008,
+    "eps_anc": 0.015
+  },
+  "temporal_direct": {
+    "c_diag": [
+      0.9312,
+      0.9312,
+      0.9312
+    ],
+    "min_eig": -0.4484,
+    "se_at_8000_shots": 0.001765,
+    "sigmas_below_PSD_at_8000": 254.1
+  },
+  "spatial_control_direct": {
+    "min_eig": 0.01906,
+    "note": "must be >= -2se to pass the PSD control gate"
+  },
+  "temporal_ancilla": {
+    "c_diag": [
+      0.93337,
+      0.93337,
+      0.93337
+    ],
+    "min_eig": -0.45003,
+    "se_at_8000_shots": 0.001738,
+    "sigmas_below_PSD_at_8000": 259.0
+  },
+  "spatial_control_ancilla": {
+    "min_eig": 0.01666,
+    "note": "must be >= -2se to pass the PSD control gate"
+  },
+  "negativity_dial_direct": [
+    {
+      "lambda": 0.0,
+      "c": 0.9312,
+      "min_eig": -0.4484
+    },
+    {
+      "lambda": 0.1,
+      "c": 0.8381,
+      "min_eig": -0.37856
+    },
+    {
+      "lambda": 0.2,
+      "c": 0.745,
+      "min_eig": -0.30872
+    },
+    {
+      "lambda": 0.3,
+      "c": 0.6518,
+      "min_eig": -0.23888
+    },
+    {
+      "lambda": 0.4,
+      "c": 0.5587,
+      "min_eig": -0.16904
+    },
+    {
+      "lambda": 0.5,
+      "c": 0.4656,
+      "min_eig": -0.0992
+    },
+    {
+      "lambda": 0.6,
+      "c": 0.3725,
+      "min_eig": -0.02936
+    },
+    {
+      "lambda": 0.7,
+      "c": 0.2794,
+      "min_eig": 0.04048
+    },
+    {
+      "lambda": 0.8,
+      "c": 0.1862,
+      "min_eig": 0.11032
+    },
+    {
+      "lambda": 0.9,
+      "c": 0.0931,
+      "min_eig": 0.18016
+    },
+    {
+      "lambda": 1.0,
+      "c": 0.0,
+      "min_eig": 0.25
+    }
+  ],
+  "psd_crossing_lambda": 0.7,
+  "theory_note": "negativity requires c > 1/3; ideal min-eig = (1-3c)/4",
+  "circuits": "9 temporal (3x3 diag bases needed: actually 3 circuits XX/YY/ZZ + 6 cross for full R) x dial points + 9 spatial control"
+}
