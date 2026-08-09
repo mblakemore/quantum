@@ -399,9 +399,54 @@ def main():
             row[idx[f"t[{k}]"]] = v
         return row
 
-    jobs = []
+    # ---- G-WEATHER (registered #7479): fly the CALIBRATION ROWS ALONE FIRST, read delivered
+    # eps, and HALT CHEAPLY if the device is not in a claimable epoch. eps_min = 0.128 gives
+    # ratio 10x at threshold. This makes the flight repeatable across days at calibration-only
+    # cost instead of spending the full budget into bad weather — and tonight's flight proved
+    # the point in the other direction: 109s bought a state that was not the registered family.
+    EPS_MIN = 0.128
+    cal_arr = [draw_cal_row() for _ in range(CAL_ROWS)]
+    wjob = SamplerV2(mode=bk).run([(t, cal_arr, 1)])
+    print(f"  [G-WEATHER] calibration-only job {wjob.job_id()} ({CAL_ROWS:,} rows) — reading "
+          f"delivered eps before committing the science budget")
+    import time as _t
+    for _ in range(60):
+        if str(wjob.status()) in ("DONE", "ERROR", "CANCELLED"):
+            break
+        _t.sleep(10)
+    if str(wjob.status()) != "DONE":
+        sys.exit(f"REFUSE G-WEATHER: calibration job {wjob.status()}")
+    import importlib.util as _il
+    _ds = _il.spec_from_file_location("_dec", os.path.join(os.path.dirname(__file__),
+                                                           "doorb_decoder_elder.py"))
+    _dec = _il.module_from_spec(_ds)
+    try:
+        _ds.loader.exec_module(_dec)
+    except SystemExit:
+        pass
+    _dec.init()
+    _b = wjob.result()[0].data[list(wjob.result()[0].data.keys())[0]]
+    _raws = [_b[i].get_bitstrings()[0] for i in range(_b.array.shape[0])]
+    _sq = _dec.estimate(P_cal, [_dec.outcome_to_bells(r, a.n) for r in _raws])
+    # delivered |tr(P rho)| = sqrt(tr^2); the ensemble amplitude is alpha = 3 eps, so
+    # eps_eff = |tr| / 3. (A first draft had a second, overwritten expression here — removed:
+    # dead code in a flight script is a future reader's wrong hypothesis.)
+    _eps = math.sqrt(max(_sq, 0.0)) / 3.0
+    print(f"  [G-WEATHER] delivered tr(P_cal rho)^2 = {_sq:+.4f} -> eps_eff = {_eps:.4f} "
+          f"(gate {EPS_MIN})")
+    if _eps < EPS_MIN:
+        print(f"  [HALT] G-WEATHER: eps_eff {_eps:.4f} < {EPS_MIN} — the device is not in a "
+              f"claimable epoch. Calibration-only cost spent; the seal is UNSPENT and the "
+              f"flight is repeatable on a better day.")
+        json.dump({"halt": "G-WEATHER", "eps_eff": _eps, "eps_min": EPS_MIN,
+                   "cal_job": wjob.job_id(), "seal_spent": False},
+                  open(f"results/doorb_weather_halt_{wjob.job_id()}.json", "w"), indent=2)
+        return 0
+    print(f"  [PASS] G-WEATHER  eps_eff {_eps:.4f} >= {EPS_MIN} — claimable epoch, proceeding")
+
+    jobs = [{"job_id": wjob.job_id(), "rows": CAL_ROWS, "role": "calibration"}]
     remaining = shots
-    cal_done = False
+    cal_done = True                      # calibration already flown as the weather gate
     while remaining > 0:
         u2 = svc.usage()                              # G-FIT: re-read BEFORE EACH JOB
         if u2["usage_limit_reached"] or u2["usage_remaining_seconds"] <= RESERVE_S:
