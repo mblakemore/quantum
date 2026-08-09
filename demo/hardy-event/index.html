@@ -160,9 +160,9 @@
       cleared anyway.</div>
     <figure aria-label="the fourth event against the ceiling its own three zeros set" tabindex="0">
       <svg id="wbar" viewBox="0 0 300 176" role="img"
-           aria-label="The fourth event at 8.69 percent against the ceiling of 2.93 percent set by the three measured zeros; the gap W is plus 0.0576."></svg>
+           aria-label="The fourth event at 8.69 percent against the ceiling of 2.92 percent set by the three measured zeros; the gap W is plus 0.0576."></svg>
     </figure>
-    <p class="story">The three zeros sum to <b>2.93%</b>. That is the whole allowance every
+    <p class="story">The three zeros sum to <b>2.92%</b>. That is the whole allowance every
       local-realist description has for the fourth event. It arrived at <b>8.69%</b>. The difference
       — <b>W = +0.0576 ± 0.0037</b> — is <b>15.7σ</b> of daylight, and the measured Hardy fraction
       landed at 96% of the ideal maximum the effect allows.</p>
@@ -238,70 +238,54 @@
   // W and W_null are the finding's own. The ceiling is their SUM, which is how the finding derives
   // the bound ("the bound derived from the measured zeros themselves") — computed here in code
   // rather than typed in, so it cannot drift from the three numbers above it.
-  var Z=[0.0039,0.0138,0.0116], Q=0.0869, W=0.0576, WSE=0.0037, WSIG=15.7;
+  var Z=[0.00387,0.01375,0.01162], Q=0.08687, W=0.0576, WSE=0.0037, WSIG=15.7;
   var NULLW=-0.675, NULLSIG=72.8;
   var CEIL=Z[0]+Z[1]+Z[2];
+  // Row identities come from the finding's addendum table (quantum@HEAD), NOT from my reading of
+  // which settings "ought" to pair with which value. An earlier draft guessed that mapping and had
+  // z₁ and z₂ the wrong way round — the numbers were right and the LABELS were invented, which is
+  // the same defect as inventing a number and harder to see. z₃ is a P(00) outcome, not P(11);
+  // the generic "A₂ with B₂" I had first written hid that.
   var ROWS=[
-    {n:"A₁ with B₂", p:Z[0], role:"pinned to zero"},
-    {n:"A₂ with B₁", p:Z[1], role:"pinned to zero"},
-    {n:"A₂ with B₂", p:Z[2], role:"pinned to zero"},
-    {n:"A₁ with B₁", p:Q,    role:"the forbidden one"}
+    {n:"z₁ = P(11|A₂B₁)", role:"pinned to zero",    h:Z[0], nul:0.00725},
+    {n:"z₂ = P(11|A₁B₂)", role:"pinned to zero",    h:Z[1], nul:0.04450},
+    {n:"z₃ = P(00|A₂B₂)", role:"pinned to zero",    h:Z[2], nul:0.85775},
+    {n:"q  = P(11|A₁B₁)", role:"the forbidden one", h:Q,    nul:0.23450}
   ];
   var cur="hardy";
 
   function counters(){
     var s=document.getElementById("counters"); s.innerHTML="";
-    // THE NULL ARM HAS NO PER-OUTCOME NUMBERS IN THE FINDING. It reports W_null = −0.675 and the
-    // 72.8σ separation, and nothing about the four individual frequencies. An earlier draft of
-    // this page invented a value for the null's fourth counter so the toggle would animate; that
-    // is a fabricated number on a public page and it is the single worst thing this museum can
-    // ship. So the null state draws no counters and says why.
-    if(cur!=="hardy"){
-      el(s,"text",{x:8,y:26,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"})
-        .textContent="the null arm, as reported";
-      var msg=[
-        "The finding reports this arm as a single",
-        "combination — W_null = −0.675 — and not",
-        "as four separate frequencies.",
-        "",
-        "So there are no counters to show here.",
-        "That is what was measured, and this page",
-        "will not fill the gap with a guess."
-      ];
-      msg.forEach(function(line,i){
-        el(s,"text",{x:8,y:52+i*17,style:"fill:var(--ink-"+(i<3?"2":"3")+");font-family:var(--mono);font-size:10.5px"})
-          .textContent=line; });
-      el(s,"rect",{x:8,y:176,width:274,height:26,rx:6,style:"fill:var(--surface-2);stroke:var(--edge)"});
-      el(s,"text",{x:16,y:193,style:"fill:var(--good);font-family:var(--mono);font-size:11px;font-weight:700"})
-        .textContent="W_null = −0.675   ·   72.8σ from the other arm";
-      return;
-    }
-    // Narrow by construction: the load-bearing element is the fourth row standing up while three
-    // sit flat, so the rows are stacked and the scale is fixed at 10% — both survive 320px.
-    var L=104,R=286,T=34,rowH=40, MAX=0.10;
+    var hardy = (cur==="hardy");
+    // The null arm's four frequencies exist (finding addendum, decoded from the banked job at $0
+    // after this exhibit refused to invent them). They need their own scale: the null's z₃ counter
+    // is 0.858, eighty-six times the Hardy arm's largest.
+    var MAX = hardy ? 0.10 : 1.0;
+    var L=104,R=286,T=34,rowH=40;
     var X=function(v){return L+(R-L)*Math.min(v,MAX)/MAX;};
     el(s,"text",{x:8,y:16,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"})
       .textContent="how often each outcome happened";
-    [[0,"0"],[0.05,"5%"],[0.10,"10%"]].forEach(function(g){
+    var ticks = hardy ? [[0,"0"],[0.05,"5%"],[0.10,"10%"]] : [[0,"0"],[0.5,"50%"],[1.0,"100%"]];
+    ticks.forEach(function(g){
       el(s,"line",{x1:X(g[0]),y1:T-8,x2:X(g[0]),y2:T+4*rowH-12,style:"stroke:var(--edge);stroke-width:1"});
       el(s,"text",{x:X(g[0]),y:T+4*rowH+2,"text-anchor":"middle",style:"fill:var(--ink-4);font-family:var(--mono);font-size:9.5px"}).textContent=g[1];});
-    // the ceiling the three zeros set — only meaningful on the entangled arm
-    if(cur==="hardy"){
+    if(hardy){
       el(s,"line",{x1:X(CEIL),y1:T-8,x2:X(CEIL),y2:T+4*rowH-12,style:"stroke:var(--bad);stroke-width:2;stroke-dasharray:5 4"});
-      // Under the line, not above it: above, it met the chart's own title at 29% overlap
-      // (chart-label-scan, first render). The band below the top gridline is empty.
       el(s,"text",{x:X(CEIL)+5,y:T+2,style:"fill:var(--bad);font-family:var(--mono);font-size:9.5px"})
         .textContent="ceiling "+(CEIL*100).toFixed(2)+"%";
     }
     ROWS.forEach(function(r,i){
-      var y=T+i*rowH+10, forbidden=(i===3);
-      var p = r.p;
-      var col = forbidden ? "var(--violet)" : "var(--ink-4)";
-      el(s,"text",{x:8,y:y+4,style:"fill:"+(forbidden?"var(--violet)":"var(--ink-3)")+";font-family:var(--mono);font-size:10.5px"}).textContent=r.n;
-      el(s,"text",{x:8,y:y+16,style:"fill:var(--ink-4);font-family:var(--mono);font-size:9px"}).textContent=r.role;
+      var y=T+i*rowH+10, isQ=(i===3);
+      var p = hardy ? r.h : r.nul;
+      // NOTHING pins the null's feeders to zero, so its counters carry no "impossible" framing —
+      // only the COMBINATION is bounded there. Whisper's caution, coordination#7513, and it is the
+      // difference between showing the null and mis-describing it.
+      var col = (hardy && isQ) ? "var(--violet)" : (hardy ? "var(--ink-4)" : "var(--good)");
+      el(s,"text",{x:8,y:y+4,style:"fill:"+((hardy&&isQ)?"var(--violet)":"var(--ink-3)")+";font-family:var(--mono);font-size:9.5px"}).textContent=r.n;
+      el(s,"text",{x:8,y:y+16,style:"fill:var(--ink-4);font-family:var(--mono);font-size:9px"})
+        .textContent = hardy ? r.role : "as measured";
       el(s,"rect",{x:L,y:y-8,width:R-L,height:17,rx:4,style:"fill:var(--surface-2)"});
       el(s,"rect",{x:L,y:y-8,width:Math.max(2,X(p)-L),height:17,rx:4,style:"fill:"+col+";opacity:.9"});
-      // the reading sits OUTSIDE its own bar when the bar is short, inside when it is long enough
       var w=X(p)-L, inBar=w>58;
       el(s,"text",{x: inBar ? X(p)-7 : X(p)+7, y:y+4, "text-anchor": inBar?"end":"start",
         style:"fill:"+(inBar?"var(--bg)":col)+";font-family:var(--mono);font-size:11px;font-weight:700"})
@@ -344,12 +328,13 @@
   function say(){
     document.getElementById("story").innerHTML = cur==="hardy"
       ? 'Three outcomes on the floor — <b>0.39%</b>, <b>1.38%</b>, <b>1.16%</b>. Every '
-        + 'local-realist story then allows the fourth at most their sum, <b>2.93%</b>. '
+        + 'local-realist story then allows the fourth at most their sum, <b>2.92%</b>. '
         + 'It arrived at <b>8.69%</b>.'
-      : 'The same four settings, pointed at a product state. The fourth outcome does not arrive: '
-        + 'the combination reads <b>W = −0.675</b>, obeying the classical bound by a wide margin '
-        + 'and sitting <b>72.8σ</b> from the entangled arm. The apparatus does not manufacture the '
-        + 'effect.';
+      : 'The same four settings, pointed at a product state. Nothing pins these three to zero — '
+        + 'only the <em>combination</em> is bounded here — and the third counter comes in at '
+        + '<b>85.78%</b>. A product state pays the classical bill in full, which is what drives '
+        + 'the combination to <b>W = −0.675</b>, <b>72.8σ</b> from the entangled arm. The '
+        + 'apparatus does not manufacture the effect.';
     document.getElementById("audit").innerHTML = cur==="hardy"
       ? 'Gates G1–G3 <b>HELD</b> · W &gt; 0 at ≥5σ (measured 15.7σ) · each zero ≤ 0.03 · q ∈ [0.05, 0.12]'
       : 'Gate G4 <b>HELD</b> · criterion: W_null &lt; 0 and the two arms ≥5σ apart · measured −0.675, separated by 72.8σ';
