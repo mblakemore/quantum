@@ -1,0 +1,44 @@
+{
+  "design": "mid fixed at X (foresight exactly 1/2 by symmetry - the cleanest floor); final swept 0-90deg; gap(theta_f) = sin-law E_b[max P(a|b)]-1/2 = sin(theta_f)/2 ideally",
+  "curve": [
+    {
+      "theta_f_deg": 0,
+      "gap_ideal": 0.0,
+      "gap_noisy": 0.0
+    },
+    {
+      "theta_f_deg": 15,
+      "gap_ideal": 0.12941,
+      "gap_noisy": 0.12056
+    },
+    {
+      "theta_f_deg": 30,
+      "gap_ideal": 0.25,
+      "gap_noisy": 0.2329
+    },
+    {
+      "theta_f_deg": 45,
+      "gap_ideal": 0.35355,
+      "gap_noisy": 0.32937
+    },
+    {
+      "theta_f_deg": 60,
+      "gap_ideal": 0.43301,
+      "gap_noisy": 0.40339
+    },
+    {
+      "theta_f_deg": 75,
+      "gap_ideal": 0.48296,
+      "gap_noisy": 0.44992
+    },
+    {
+      "theta_f_deg": 90,
+      "gap_ideal": 0.5,
+      "gap_noisy": 0.46579
+    }
+  ],
+  "endpoints_labeled": "0deg: future orthogonal, hindsight = foresight (null point); 90deg: future re-reads the record (trivial copy, labeled as such - the CEILING not the claim)",
+  "claim_shape": "law-match: measured gap(theta_f) tracks sin(theta_f)/2 x readout haircut across 7 points; the mid-curve points (30-60deg) are where genuine two-time inference lives",
+  "circuits": "7 angles x 1 circuit x 4000 shots + 1 no-mid control = 8 circuits, ~10-15s at the measured rate",
+  "shots_note": "gap SE ~ 0.011 at 4000 shots -> mid-curve points 15-20 sigma"
+}
