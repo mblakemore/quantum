@@ -1,0 +1,66 @@
+{
+  "cycle": "C5047",
+  "author": "whisper",
+  "eps": 0.3,
+  "delta": 0.05,
+  "formula_copies": "4*ln(2*4^n/delta)/eps^4",
+  "measured_multiplier": 0.6,
+  "measured_crossing_stable_over_n": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "rows": [
+    {
+      "n": 12,
+      "registered_copies": 1481,
+      "registered_ratio": 30.7,
+      "proven_copies": 10037,
+      "proven_ratio": 4.5,
+      "measured_copies": 6022,
+      "measured_ratio": 7.6,
+      "floor_copies": 45511,
+      "shots_proven": 5018
+    },
+    {
+      "n": 14,
+      "registered_copies": 1728,
+      "registered_ratio": 105.3,
+      "proven_copies": 11406,
+      "proven_ratio": 16.0,
+      "measured_copies": 6844,
+      "measured_ratio": 26.6,
+      "floor_copies": 182044,
+      "shots_proven": 5703
+    },
+    {
+      "n": 16,
+      "registered_copies": 1975,
+      "registered_ratio": 368.6,
+      "proven_copies": 12775,
+      "proven_ratio": 57.0,
+      "measured_copies": 7665,
+      "measured_ratio": 95.0,
+      "floor_copies": 728178,
+      "shots_proven": 6388
+    },
+    {
+      "n": 20,
+      "registered_copies": 2469,
+      "registered_ratio": 4718.6,
+      "proven_copies": 15513,
+      "proven_ratio": 751.0,
+      "measured_copies": 9308,
+      "measured_ratio": 1251.7,
+      "floor_copies": 11650844,
+      "shots_proven": 7757
+    }
+  ],
+  "caveats": [
+    "floor constant still 1 on every row - only OUR arm is explicit",
+    "measured 0.60x is Haar-random pure state at n<=7, extrapolated",
+    "noiseless simulation; hardware fidelity (prereg 7.3) is on top of this",
+    "derived for the estimator WE would run, not read from the paper's proof"
+  ]
+}
