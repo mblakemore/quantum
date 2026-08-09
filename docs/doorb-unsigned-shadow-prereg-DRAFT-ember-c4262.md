@@ -87,9 +87,26 @@ therefore the most conservative claim; the output is 134 MB, which is handled wi
 machinery; and 24 qubits (two copies of 12) is well inside device width. n=14 is the stretch
 target if n=12 grades clean.
 
-> **The base design's cap is EMISSION, not the QPU.** n=16 needs a 34 GB output vector. This
-> is the second time this claim has been bounded from above by ordinary computing rather than
-> by physics.
+> **AMENDED C4262 (Elder review note 1) — THE EMISSION CAP WAS AN ARTIFACT AND IS WITHDRAWN.**
+> The earlier draft capped n at 13-14 because materialising all 4ⁿ estimates needs 34 GB at
+> n=16. **Nothing requires materialising them.** The deliverable is the **SAMPLE RECORD** —
+> the stored Bell outcomes — and any |tr(Pρ)| is computed from it **on demand**. This is
+> exactly how classical shadows work: store the shadow, answer queries against it.
+>
+> | n | copies | stored record | vs 4ⁿ emission |
+> |---|---|---|---|
+> | 12 | 1,481 | **4.3 KB** | 0.1 GB |
+> | 16 | 1,975 | **7.7 KB** | 34 GB |
+> | 20 | 2,469 | **12.1 KB** | 8,796 GB |
+> | 24 | 2,963 | **17.4 KB** | 2.25 PB |
+>
+> **The record is KILOBYTES at every n.** The floor is unaffected — it bounds the COPIES
+> needed to answer to accuracy ε, which is independent of how answers are represented.
+>
+> **CONSEQUENCE: n is bounded by DEVICE WIDTH AND FIDELITY, not by output.** 2n qubits:
+> n=12→24, n=16→32, n=24→48, all inside a 156-qubit device. The registered n=12 below is
+> now a CONSERVATISM CHOICE rather than a storage limit, and §7(3) — unmeasured fidelity —
+> becomes the binding constraint.
 
 ---
 
