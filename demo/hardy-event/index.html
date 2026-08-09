@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:title" content="The Event That Never Happens — Hardy's impossible event, logged">
+<meta property="og:description" content="Hardy 1992 on ibm_fez: three joint events pinned near zero force a fourth to zero for any local-realist story. It happened 8.7% of the time. W = q - z1 - z2 - z3 = +0.0576 +/- 0.0037, 15.7 sigma past every such story, with the bound derived from the measured zeros themselves. The same four settings on a product state read -0.675.">
+<meta name="theme-color" content="#04060c">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Event That Never Happens — Hardy&#39;s paradox, counted | The Quantum Museum</title>
+<meta name="description" content="Hardy 1992 on ibm_fez: three joint events pinned near zero force a fourth to zero for any local-realist story. It happened 8.7% of the time. W = q - z1 - z2 - z3 = +0.0576 +/- 0.0037, 15.7 sigma past every such story, with the bound derived from the measured zeros themselves. The same four settings on a product state read -0.675.">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="9" cy="10" r="3" fill="%232a3550"/><circle cx="23" cy="10" r="3" fill="%232a3550"/><circle cx="9" cy="22" r="3" fill="%232a3550"/><circle cx="23" cy="22" r="4.5" fill="%23a78bfa"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a,.audit a,.caveat a,.receipt a{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--violet);font-weight:400}
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 14%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(27px,5.2vw,46px); margin:12px 0 14px; }
+  h1 .hl { color: var(--violet); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:68ch; margin:0 0 14px; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; font-family:var(--mono); font-size:11.5px; }
+  .badge { border:1px solid var(--edge); border-radius:999px; padding:4px 11px; color:var(--ink-2); }
+  .badge b { color:var(--violet); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:14px; padding:5px 12px; }
+  .scope b { color: var(--violet); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  /* Charts scroll, they do not shrink. WCAG 1.4.10 exempts content needing two-dimensional
+     layout from the no-horizontal-scroll rule, so scrolling a chart is sanctioned where
+     shrinking it below legibility is not. No effect above the floor in available width. */
+  figure { margin:0; overflow-x:auto; }
+  svg { width:100%; min-width:460px; height:auto; display:block; }
+  /* The meter is drawn narrow ON PURPOSE so it needs no scroll at 390px — see the
+     comment in meter(). Its own min-width must follow, or the figure scrolls anyway. */
+  /* Both figures are drawn narrow ON PURPOSE. Whisper named this exhibit's ONE load-bearing
+     visual element in the handoff — the fourth counter ticking while three sit at zero — so it
+     was designed to survive 320px first and widened afterwards, rather than built at desktop
+     width and checked on a phone at the end. That order is the lesson from the negativity
+     meter, whose zero line was off-screen on a phone while every scan passed. */
+  #counters, #wbar { min-width:290px; }
+  .lgd { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:8px; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .lgd span { display:inline-flex; align-items:center; gap:7px; }
+  .lgd i { width:20px; height:0; border-top-width:3px; border-top-style:solid; display:inline-block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:12px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--violet) 16%,transparent); color:var(--violet); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .audit { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px dashed var(--edge); margin-top:14px; padding-top:9px; line-height:1.55; }
+  .audit b { color:var(--good); }
+  .caveat { border-left:3px solid var(--violet); background:var(--surface-2); border-radius:0 11px 11px 0; padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.55; }
+  .caveat .ct { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--violet); display:block; margin-bottom:5px; }
+  .caveat b { color:var(--ink); }
+  .quote { border-left:3px solid var(--amber); background:var(--surface-2); border-radius:0 11px 11px 0; padding:14px 17px; margin:14px 0 0; font-size:13.5px; line-height:1.6; }
+  .quote .qt { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); display:block; margin-bottom:7px; }
+  .quote p { margin:0 0 9px; } .quote p:last-child { margin-bottom:0; }
+  .quote b { color:var(--ink); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--violet); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  /* The gate table. Wrapped and focusable for the same reason every table in the museum is:
+     it has a min-width so it scrolls at phone width, and a scrollable region that cannot be
+     focused is unreachable by keyboard (WCAG 2.1.1). */
+  .tbl-wrap { overflow-x:auto; margin:6px 0 0; border:1px solid var(--edge); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; min-width:520px; }
+  caption { caption-side:top; text-align:left; padding:10px 13px 6px; color:var(--ink-3); font-size:11.5px; }
+  th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--edge); vertical-align:top; color:var(--ink-2); }
+  thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface-2); }
+  tbody tr:last-child td { border-bottom:none; }
+  td b { color:var(--ink); }
+  td.held { color:var(--good); font-weight:700; white-space:nowrap; }
+  footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="sp"></span>
+    <span class="wing">WING <b>II</b> · The No-Go Games</span>
+  </nav>
+  <main id="main">
+  <header class="hero">
+    <div class="eyebrow">H13 Cell 5 · Temporal Investigations · the Heron 2026 campaign</div>
+    <h1>The event that <span class="hl">never happens</span>.</h1>
+    <p class="lede">Three joint outcomes were pinned near zero. If the two qubits carry definite
+      instructions — any story where each already knows what it will answer — then those three
+      near-zeros force a fourth outcome to be no bigger than their sum. It is not an inequality with
+      a tuned bound and it needs no optimisation: it is <em>counting</em>. The fourth outcome
+      happened <b>8.7%</b> of the time.</p>
+    <div class="badges">
+      <span class="badge">W = q − z₁ − z₂ − z₃ = <b>+0.0576 ± 0.0037</b></span>
+      <span class="badge"><b>15.7σ</b> over the local-realist bound of 0</span>
+      <span class="badge">null arm <b>−0.675</b> · separation 72.8σ</span>
+      <span class="badge">ibm_fez · <b>d9rufh0pdb6s73e5datg</b></span>
+    </div>
+    <p><span class="scope">Scope: device-characterized, <b>single-chip</b>, both wings on one die —
+      detection and locality loopholes open as in every campaign Bell-class flight.
+      <b>No device-independence is claimed.</b></span></p>
+  </header>
+
+  <section class="panel">
+    <h2>The four counters</h2>
+    <p class="sub">8 circuits · Hardy settings 8000 shots each, null settings 4000 · zero postselection</p>
+    <div class="primer"><b>How to read it.</b> Each row is how often one joint outcome actually
+      occurred, as a raw frequency — no postselection, every shot kept. The first three are the
+      events a local-realist story needs to be <em>zero</em>. The fourth is the one it then forbids.
+      Watch the fourth counter while the three above it sit on the floor.</div>
+    <div class="seg" role="group" aria-label="which state the four settings are pointed at">
+      <button id="b-h" class="on" type="button">the entangled state</button>
+      <button id="b-n" type="button">a product state (the null)</button>
+    </div>
+    <figure aria-label="the four measured joint-outcome frequencies" tabindex="0">
+      <svg id="counters" viewBox="0 0 300 214" role="img"
+           aria-label="Four measured frequencies. On the entangled state the three constrained events read 0.39, 1.38 and 1.16 percent and the forbidden event reads 8.69 percent."></svg>
+    </figure>
+    <p class="story" id="story"></p>
+    <p class="audit" id="audit"></p>
+  </section>
+
+  <section class="panel">
+    <h2>The bound comes out of the same data</h2>
+    <p class="sub">Nothing cited, nothing tuned — the three measured zeros ARE the bound</p>
+    <div class="primer">The local-realist ceiling on the fourth event is the <em>sum of the other
+      three</em>. Because the three zeros came in imperfect, the ceiling they set is
+      <b>higher</b> than an idealised one — which makes the test <em>harder</em>, not easier. It
+      cleared anyway.</div>
+    <figure aria-label="the fourth event against the ceiling its own three zeros set" tabindex="0">
+      <svg id="wbar" viewBox="0 0 300 176" role="img"
+           aria-label="The fourth event at 8.69 percent against the ceiling of 2.93 percent set by the three measured zeros; the gap W is plus 0.0576."></svg>
+    </figure>
+    <p class="story">The three zeros sum to <b>2.93%</b>. That is the whole allowance every
+      local-realist description has for the fourth event. It arrived at <b>8.69%</b>. The difference
+      — <b>W = +0.0576 ± 0.0037</b> — is <b>15.7σ</b> of daylight, and the measured Hardy fraction
+      landed at 96% of the ideal maximum the effect allows.</p>
+  </section>
+
+  <section class="panel">
+    <h2>The four gates, frozen before the flight</h2>
+    <p class="sub">Preregistered at e7ca10d with its design numeric committed alongside · verdict PASS</p>
+    <div class="tbl-wrap" tabindex="0" role="group" aria-label="the four preregistered gates and their measured values">
+      <table>
+        <caption>H13 Cell 5 — measured against the criteria frozen before the flight</caption>
+        <thead><tr><th scope="col">quantity</th><th scope="col">measured</th><th scope="col">frozen criterion</th><th scope="col">verdict</th></tr></thead>
+        <tbody>
+          <tr><td>W = q − z₁ − z₂ − z₃</td><td><b>+0.0576 ± 0.0037</b> (15.7σ over the LHV bound 0)</td><td>&gt; 0 at ≥5σ, band [0.02, 0.09]</td><td class="held">G1 HELD</td></tr>
+          <tr><td>the three “zeros”</td><td>0.0039 / 0.0138 / 0.0116</td><td>each ≤ 0.03</td><td class="held">G2 HELD</td></tr>
+          <tr><td>Hardy fraction q = P(11|A₁B₁)</td><td><b>0.0869</b> (ideal 0.0928, theory max 0.0902)</td><td>∈ [0.05, 0.12]</td><td class="held">G3 HELD</td></tr>
+          <tr><td>null arm (|00⟩, same settings)</td><td>W_null = −0.675; separation <b>72.8σ</b></td><td>W_null &lt; 0, diff ≥5σ</td><td class="held">G4 HELD</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="caveat">
+      <span class="ct">the null arm, and what it rules out</span>
+      The same four settings were pointed at a product state. If the apparatus manufactured the
+      effect — a settings artefact, a readout asymmetry, a miscount — it would appear there too.
+      <b>It read W = −0.675</b>, obeying the classical bound by a wide margin, <b>72.8σ</b> away
+      from the entangled arm. The instrument was given the chance to produce the paradox out of
+      nothing, and did not.
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Receipts</h2>
+    <div class="court">
+      <div class="receipt"><div class="rt">the flight</div>
+        <p>ibm_fez, job <code>d9rufh0pdb6s73e5datg</code> — 8 circuits: 4 Hardy settings × 8000 shots
+        and 4 null settings × 4000, pair (137,147). <b>No postselection; all shots kept</b>;
+        probabilities are raw relative frequencies.</p></div>
+      <div class="receipt"><div class="rt">the paperwork</div>
+        <p>Preregistration <a href="../../docs/h13-cell5-hardy-prereg-FROZEN-whisper-c5048.md">frozen at
+        e7ca10d</a> with the design numeric committed alongside; finding
+        <a href="../../findings/h13-cell5-hardy-whisper-c5048.md">h13-cell5-hardy</a>. Cycle C5048.</p></div>
+    </div>
+    <div class="quote">
+      <span class="qt">carried verbatim from the finding's fence</span>
+      <p>Device-characterized, single-chip, both wings on one die — detection and locality loopholes
+      are open as in every campaign Bell-class flight (F73 scope), and no device-independence is
+      claimed. The claim is the frozen-rule statistical one: these counts, these settings, this
+      bound, derived in-code.</p>
+    </div>
+    <p class="story">One defect worth knowing about, because it was caught <b>before</b> the flight
+      rather than after: the freeze numeric indexed A as the most significant bit while qiskit's
+      state preparation makes q1 the most significant, and the selftest reproduced q = 0.092838
+      exactly once the bit order was fixed. The paperwork caught it; the chip never saw the wrong
+      circuit.</p>
+  </section>
+
+  <footer>
+    <a href="../index.html">← The Quantum Museum</a>
+    <span>Wing II · The No-Go Games</span>
+    <span>H13 Cell 5 · C5048</span>
+    <a href="../casebook/index.html">The Interrogation →</a>
+  </footer>
+  </main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var NS="http://www.w3.org/2000/svg";
+  function el(p,t,a){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);p.appendChild(n);return n;}
+
+  // EVERY NUMBER BELOW IS TRANSCRIBED FROM findings/h13-cell5-hardy-whisper-c5048.md.
+  // The three "zeros" are the finding's 0.0039 / 0.0138 / 0.0116; the Hardy fraction is 0.0869;
+  // W and W_null are the finding's own. The ceiling is their SUM, which is how the finding derives
+  // the bound ("the bound derived from the measured zeros themselves") — computed here in code
+  // rather than typed in, so it cannot drift from the three numbers above it.
+  var Z=[0.0039,0.0138,0.0116], Q=0.0869, W=0.0576, WSE=0.0037, WSIG=15.7;
+  var NULLW=-0.675, NULLSIG=72.8;
+  var CEIL=Z[0]+Z[1]+Z[2];
+  var ROWS=[
+    {n:"A₁ with B₂", p:Z[0], role:"pinned to zero"},
+    {n:"A₂ with B₁", p:Z[1], role:"pinned to zero"},
+    {n:"A₂ with B₂", p:Z[2], role:"pinned to zero"},
+    {n:"A₁ with B₁", p:Q,    role:"the forbidden one"}
+  ];
+  var cur="hardy";
+
+  function counters(){
+    var s=document.getElementById("counters"); s.innerHTML="";
+    // THE NULL ARM HAS NO PER-OUTCOME NUMBERS IN THE FINDING. It reports W_null = −0.675 and the
+    // 72.8σ separation, and nothing about the four individual frequencies. An earlier draft of
+    // this page invented a value for the null's fourth counter so the toggle would animate; that
+    // is a fabricated number on a public page and it is the single worst thing this museum can
+    // ship. So the null state draws no counters and says why.
+    if(cur!=="hardy"){
+      el(s,"text",{x:8,y:26,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"})
+        .textContent="the null arm, as reported";
+      var msg=[
+        "The finding reports this arm as a single",
+        "combination — W_null = −0.675 — and not",
+        "as four separate frequencies.",
+        "",
+        "So there are no counters to show here.",
+        "That is what was measured, and this page",
+        "will not fill the gap with a guess."
+      ];
+      msg.forEach(function(line,i){
+        el(s,"text",{x:8,y:52+i*17,style:"fill:var(--ink-"+(i<3?"2":"3")+");font-family:var(--mono);font-size:10.5px"})
+          .textContent=line; });
+      el(s,"rect",{x:8,y:176,width:274,height:26,rx:6,style:"fill:var(--surface-2);stroke:var(--edge)"});
+      el(s,"text",{x:16,y:193,style:"fill:var(--good);font-family:var(--mono);font-size:11px;font-weight:700"})
+        .textContent="W_null = −0.675   ·   72.8σ from the other arm";
+      return;
+    }
+    // Narrow by construction: the load-bearing element is the fourth row standing up while three
+    // sit flat, so the rows are stacked and the scale is fixed at 10% — both survive 320px.
+    var L=104,R=286,T=34,rowH=40, MAX=0.10;
+    var X=function(v){return L+(R-L)*Math.min(v,MAX)/MAX;};
+    el(s,"text",{x:8,y:16,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"})
+      .textContent="how often each outcome happened";
+    [[0,"0"],[0.05,"5%"],[0.10,"10%"]].forEach(function(g){
+      el(s,"line",{x1:X(g[0]),y1:T-8,x2:X(g[0]),y2:T+4*rowH-12,style:"stroke:var(--edge);stroke-width:1"});
+      el(s,"text",{x:X(g[0]),y:T+4*rowH+2,"text-anchor":"middle",style:"fill:var(--ink-4);font-family:var(--mono);font-size:9.5px"}).textContent=g[1];});
+    // the ceiling the three zeros set — only meaningful on the entangled arm
+    if(cur==="hardy"){
+      el(s,"line",{x1:X(CEIL),y1:T-8,x2:X(CEIL),y2:T+4*rowH-12,style:"stroke:var(--bad);stroke-width:2;stroke-dasharray:5 4"});
+      // Under the line, not above it: above, it met the chart's own title at 29% overlap
+      // (chart-label-scan, first render). The band below the top gridline is empty.
+      el(s,"text",{x:X(CEIL)+5,y:T+2,style:"fill:var(--bad);font-family:var(--mono);font-size:9.5px"})
+        .textContent="ceiling "+(CEIL*100).toFixed(2)+"%";
+    }
+    ROWS.forEach(function(r,i){
+      var y=T+i*rowH+10, forbidden=(i===3);
+      var p = r.p;
+      var col = forbidden ? "var(--violet)" : "var(--ink-4)";
+      el(s,"text",{x:8,y:y+4,style:"fill:"+(forbidden?"var(--violet)":"var(--ink-3)")+";font-family:var(--mono);font-size:10.5px"}).textContent=r.n;
+      el(s,"text",{x:8,y:y+16,style:"fill:var(--ink-4);font-family:var(--mono);font-size:9px"}).textContent=r.role;
+      el(s,"rect",{x:L,y:y-8,width:R-L,height:17,rx:4,style:"fill:var(--surface-2)"});
+      el(s,"rect",{x:L,y:y-8,width:Math.max(2,X(p)-L),height:17,rx:4,style:"fill:"+col+";opacity:.9"});
+      // the reading sits OUTSIDE its own bar when the bar is short, inside when it is long enough
+      var w=X(p)-L, inBar=w>58;
+      el(s,"text",{x: inBar ? X(p)-7 : X(p)+7, y:y+4, "text-anchor": inBar?"end":"start",
+        style:"fill:"+(inBar?"var(--bg)":col)+";font-family:var(--mono);font-size:11px;font-weight:700"})
+        .textContent=(p*100).toFixed(2)+"%";
+    });
+  }
+
+  function wbar(){
+    var s=document.getElementById("wbar"); s.innerHTML="";
+    var L=96,R=286,T=40,MAX=0.10;
+    var X=function(v){return L+(R-L)*Math.min(v,MAX)/MAX;};
+    el(s,"text",{x:8,y:18,style:"fill:var(--ink-3);font-family:var(--mono);font-size:11px"})
+      .textContent="the fourth event vs its own ceiling";
+    var rows=[
+      {n:"the ceiling", sub:"z₁+z₂+z₃", v:CEIL, col:"var(--bad)"},
+      {n:"what arrived", sub:"q = P(11|A₁B₁)", v:Q, col:"var(--violet)"}
+    ];
+    rows.forEach(function(r,i){
+      var y=T+i*46;
+      el(s,"text",{x:8,y:y+2,style:"fill:var(--ink-2);font-family:var(--mono);font-size:10.5px"}).textContent=r.n;
+      el(s,"text",{x:8,y:y+14,style:"fill:var(--ink-4);font-family:var(--mono);font-size:9px"}).textContent=r.sub;
+      el(s,"rect",{x:L,y:y-8,width:R-L,height:18,rx:4,style:"fill:var(--surface-2)"});
+      el(s,"rect",{x:L,y:y-8,width:Math.max(2,X(r.v)-L),height:18,rx:4,style:"fill:"+r.col+";opacity:.9"});
+      var w=X(r.v)-L, inBar=w>58;
+      el(s,"text",{x: inBar ? X(r.v)-7 : X(r.v)+7, y:y+5, "text-anchor": inBar?"end":"start",
+        style:"fill:"+(inBar?"var(--bg)":r.col)+";font-family:var(--mono);font-size:11px;font-weight:700"})
+        .textContent=(r.v*100).toFixed(2)+"%";
+    });
+    // the gap, drawn between the two bar ends
+    var y0=T+8, y1=T+46+8;
+    el(s,"line",{x1:X(CEIL),y1:y0,x2:X(CEIL),y2:y1,style:"stroke:var(--bad);stroke-width:1.5;stroke-dasharray:4 3"});
+    el(s,"line",{x1:X(CEIL),y1:T+70,x2:X(Q),y2:T+70,style:"stroke:var(--violet);stroke-width:2"});
+    el(s,"text",{x:(X(CEIL)+X(Q))/2,y:T+88,"text-anchor":"middle",
+      style:"fill:var(--violet);font-family:var(--mono);font-size:11px;font-weight:700"})
+      .textContent="W = +0.0576";
+    el(s,"text",{x:(X(CEIL)+X(Q))/2,y:T+102,"text-anchor":"middle",
+      style:"fill:var(--ink-3);font-family:var(--mono);font-size:9.5px"}).textContent=WSIG+"σ";
+  }
+
+  function say(){
+    document.getElementById("story").innerHTML = cur==="hardy"
+      ? 'Three outcomes on the floor — <b>0.39%</b>, <b>1.38%</b>, <b>1.16%</b>. Every '
+        + 'local-realist story then allows the fourth at most their sum, <b>2.93%</b>. '
+        + 'It arrived at <b>8.69%</b>.'
+      : 'The same four settings, pointed at a product state. The fourth outcome does not arrive: '
+        + 'the combination reads <b>W = −0.675</b>, obeying the classical bound by a wide margin '
+        + 'and sitting <b>72.8σ</b> from the entangled arm. The apparatus does not manufacture the '
+        + 'effect.';
+    document.getElementById("audit").innerHTML = cur==="hardy"
+      ? 'Gates G1–G3 <b>HELD</b> · W &gt; 0 at ≥5σ (measured 15.7σ) · each zero ≤ 0.03 · q ∈ [0.05, 0.12]'
+      : 'Gate G4 <b>HELD</b> · criterion: W_null &lt; 0 and the two arms ≥5σ apart · measured −0.675, separated by 72.8σ';
+    document.getElementById("b-h").className = cur==="hardy"?"on":"";
+    document.getElementById("b-n").className = cur==="null"?"on":"";
+    document.getElementById("b-h").setAttribute("aria-pressed", cur==="hardy");
+    document.getElementById("b-n").setAttribute("aria-pressed", cur==="null");
+  }
+  function draw(){ counters(); say(); }
+  document.getElementById("b-h").addEventListener("click",function(){cur="hardy";draw();});
+  document.getElementById("b-n").addEventListener("click",function(){cur="null";draw();});
+  draw(); wbar();
+})();
+</script>
+</body>
+</html>
