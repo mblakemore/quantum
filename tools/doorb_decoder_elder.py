@@ -95,6 +95,13 @@ def outcome_to_bells(raw, n):
     before any real decode — never inferred from flight data."""
     if len(raw) != 2 * n or any(c not in "01" for c in raw):
         raise ValueError(f"raw must be {2*n} bits, got {raw!r}")
+    # QISKIT ENDIANNESS PINNED HERE, ONCE (#7451): get_bitstrings() returns clbit 0 as the
+    # RIGHTMOST character; this decoder indexes position i = clbit i, so the reversal is
+    # applied INTERNALLY — callers pass raw qiskit strings, never pre-reversed ones. It
+    # lived as a caller-side preprocessing step and was forgotten exactly once, producing
+    # a -0.038 "wash" one post away from a registered campaign halt. Accepted BY
+    # CONSTRUCTION (API contract + pre-existing verified sim), not by signal size.
+    raw = raw[::-1]
     # PINNED (Row C of Ember's joint fixture, #7426 — REGISTERED convention, matches
     # door (a)'s bit_layout: halves): first n bits = a-register, last n = b-register,
     # pair j index = b*2 + a. The fixture tested every alignment: this row and only its
@@ -197,8 +204,10 @@ def selftest():
     ok.append((f"hard-family tripwire n=2: E[v_P]=a^2 at planted, 0 at all 14 nulls", hit and nulls))
     # [3b] CONVENTION PIN (Row C, #7426): halves layout, index=b*2+a. Known vector:
     #      n=2, raw="0111": a-bits "01", b-bits "11" -> pair0 (a=0,b=1)->2, pair1 (a=1,b=1)->3
-    ok.append(("bit-convention pin: halves, idx=b*2+a (Row C)",
-               outcome_to_bells("0111", 2) == [2, 3]))
+    #      QISKIT ORDER: the same logical record arrives reversed ("1110"); the decoder
+    #      reverses internally, so the QISKIT string must decode to the same [2, 3].
+    ok.append(("bit-convention pin: halves, idx=b*2+a (Row C), qiskit-reversed input",
+               outcome_to_bells("1110", 2) == [2, 3]))
     # [4] probe set: deterministic, public, no identity, correct count
     ps = probe_set(4)
     ok.append(("probe set deterministic + I^n excluded",
