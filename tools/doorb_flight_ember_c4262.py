@@ -183,6 +183,44 @@ def u_params(pauli_char, s):
     return _PILOT.u_params(pauli_char, s)
 
 
+def f_mix_selftest(P, alpha, shots=20000, seed=7):
+    """F-MIX (C4262, after the door (b) FAIL-AS-FROZEN): every single-qubit marginal must be
+    MAXIMALLY MIXED.
+
+    For rho_P = (I + alpha P)/2^n with weight(P) >= 2, tracing out all but one qubit kills the
+    P term, so EVERY marginal is exactly I/2. The flown prep randomised only the non-identity
+    positions, so identity qubits flew as pure |0> with <Z> = +1 — the delivered state was
+    |0..0> (x) planted-direction, NOT the family the floor is proven over.
+
+    Returns (max|<Z>| under the BUGGY draw, max|<Z>| under the FIXED draw). The check refuses
+    unless the bug arm FIRES, because an assert that cannot fail is decoration — and because
+    the assert this replaces (F-IND) was real, can-fire, and aimed one axis away.
+    """
+    n = len(P)
+    free = [i for i, c in enumerate(P) if c != "I"]
+    ident = [i for i, c in enumerate(P) if c == "I"]
+    if not ident:
+        return 0.0, 0.0                     # nothing to check on a full-weight P
+    out = []
+    for fixed in (False, True):
+        rng = np.random.default_rng(seed)
+        z = np.zeros(n)
+        for _ in range(shots):
+            sgn = +1 if rng.random() < (1 + alpha) / 2 else -1
+            if fixed:
+                si = [int(rng.choice([1, -1])) for _ in range(n)]
+            else:
+                si = [1] * n
+                for i in free[:-1]:
+                    si[i] = int(rng.choice([1, -1]))
+            if free:
+                si[free[-1]] = sgn * int(np.prod([si[i] for i in free[:-1]])) if len(free) > 1 else sgn
+            for i in ident:
+                z[i] += si[i]
+        out.append(max(abs(z[i] / shots) for i in ident))
+    return out[0], out[1]
+
+
 def paid_token():
     # C4262: IBMQ_ALT3 is in MY OWN .env (Creator, general#7459). Reading my own credential
     # rather than a sibling's is the correct default — the DC15W path was inherited from the
@@ -244,6 +282,17 @@ def main():
     if not ind_ok:
         sys.exit("REFUSE F-IND: the shared-stream arm does not reproduce the correlation bug, "
                  "so the check cannot fire. An assert that cannot fail is decoration.")
+
+    # ---- F-MIX (C4262, the assert the FAIL-AS-FROZEN bought)
+    P_probe = "IIYIYIZIYIZZZIXZ"          # the flown P: the exact case that failed
+    buggy, fixed_ = f_mix_selftest(P_probe, 3 * a.eps)
+    mix_ok = buggy > 0.05 and fixed_ < 0.05
+    print(f"  [{'PASS' if mix_ok else 'FAIL'}] F-MIX     identity-qubit |<Z>|: "
+          f"BUGGY-arm {buggy:.3f} (must fire >0.05), FIXED-arm {fixed_:.3f} (must pass <0.05)")
+    if not mix_ok:
+        sys.exit("REFUSE F-MIX: every single-qubit marginal must be maximally mixed, and the "
+                 "bug arm must reproduce the failure. This is the assert the door (b) "
+                 "FAIL-AS-FROZEN paid for — F-IND was real, can-fire, and aimed one axis away.")
 
     if a.selftest:
         print("  selftest only — nothing further.")
@@ -315,9 +364,13 @@ def main():
         vals = []
         for _copy in range(2):                       # F-IND: independent per copy
             sgn = +1 if rng.random() < (1 + alpha) / 2 else -1
-            si = [1] * a.n
-            for i in free[:-1]:
-                si[i] = int(rng.choice([1, -1]))
+            # ---- C4262 FIX (grade #7472). The previous version initialised si=[1]*n and then
+            # randomised ONLY `free` (non-identity) positions, so every IDENTITY qubit kept
+            # si=+1 forever and flew as pure |0>. rho_P needs those qubits MAXIMALLY MIXED;
+            # the delivered state was |0..0> (x) planted-direction, which is not the family
+            # the floor is proven over. FAIL-AS-FROZEN, 106,911 rows, one line.
+            # Every position is drawn now; the sign constraint still binds only on `free`.
+            si = [int(rng.choice([1, -1])) for _ in range(a.n)]
             if free:
                 si[free[-1]] = sgn * int(np.prod([si[i] for i in free[:-1]])) if len(free) > 1 else sgn
             for i, c in enumerate(P):
@@ -337,9 +390,7 @@ def main():
         vals = []
         for _copy in range(2):
             sgn = +1 if rng.random() < (1 + alpha) / 2 else -1
-            si = [1] * a.n
-            for i in free_cal[:-1]:
-                si[i] = int(rng.choice([1, -1]))
+            si = [int(rng.choice([1, -1])) for _ in range(a.n)]   # same fix: ALL positions
             si[free_cal[-1]] = sgn * int(np.prod([si[i] for i in free_cal[:-1]]))
             for i, c in enumerate(P_cal):
                 vals.extend(u_params(c, si[i]))
