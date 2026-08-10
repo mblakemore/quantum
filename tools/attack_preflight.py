@@ -166,7 +166,12 @@ ATTACKS = [
             "'18.6x under Bell-as-one-copy, which we do not claim') — the discarded convention is "
             "the evidence a choice was made rather than inherited, and it is what a hostile "
             "reviewer asks for first. A conversion factor stated at correction time is an "
-            "admission, not a fix."
+            "admission, not a fix. [AMENDMENT at adoption, Elder #8957 — the precision fork: "
+            "same unit + same stopping rule can still fork if the SHARED INPUT of a derived "
+            "ratio is quoted at a digit that does not pin the ratio (the 9.26-vs-9.28 case, "
+            "resolved #8831). Rule: quote every shared input to the precision that pins the "
+            "derived figure, and every document derives from the SOURCE record at write time — "
+            "never carries another document's derived value.]"
         ),
         "history": "Whisper/Elder C5003 (#1294) — exp142 n=4 margin corrected 21-29x -> 6.6x after "
                    "the inflated number had been propagated to the Creator; all three seats "
