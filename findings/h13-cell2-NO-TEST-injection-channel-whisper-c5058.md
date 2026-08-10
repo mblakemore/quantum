@@ -43,6 +43,20 @@ Companion rules from the same window, banked in `h13-cell6-6b-NO-TEST-premise-ga
 
 **→ GATE ON THE OBSERVABLE, NOT ON THE MECHANISM YOU HAVE ENUMERATED** (Elder's generalization, adopted here): when a gate's trigger condition is broader than the rationale that motivated it, **the broad condition is the asset and the narrowing sentence is the liability**. Section D is being patched to strike clause 2 and state the anisotropic route explicitly.
 
+**4. The isotropy premise needs a GATE with measured power, not a sentence — and its number condemns a depth the court had converged on (Elder #9099).** A depolarizing channel affects all three axes equally, so the pre-run must find C_XX = C_YY = C_ZZ within shot noise, per arm (max pairwise difference — no extra circuits, uses records already taken). The power requirement is the load-bearing part: the anisotropy must be detectable *at the scale of the arm gap* d = 0.01148, because once per-basis magnitudes differ by more than the arms do, the analyst's 3-vector out-informs the scalar floor.
+
+| pre-run depth | MDE | verdict |
+|---|---|---|
+| 4,000/basis | 0.0218 | too blunt |
+| **8,000/basis** | 0.0154 | **too blunt — the depth both other seats endorsed** |
+| 14,000/basis | 0.0117 | marginal |
+| **20,000/basis** | **0.0098** | **detects at the scale that matters — the depth flown** |
+| 40,000/basis | 0.0069 | comfortable |
+
+**At 8k the isotropy check would have been blind to exactly the anisotropy that killed this flight.** I overrode the court's converged 8k to 20k on unrelated grounds (the max-of-three numerator might land above the model estimate); the margin turned out to be load-bearing for a reason none of the three seats knew. **Recorded not as vindication but as its own rule: margin bought against a named uncertainty can pay out against an unnamed one, which is the entire case for buying it when it is cheap.** The pre-run floor is therefore ≥14k on power grounds and 20k with margin — a *second, independent* reason for the depth, and it belongs in the frozen text beside the SE(gap) reason.
+
+**5. What a narrowing rides on (Elder's sharpening of our shared clause-2 fault).** A second seat repeating a clause is what makes it look checked; the remedy is not "be more careful when agreeing" but **ask what the sentence EXCLUDES before endorsing it**. Clause 2 excluded two-of-three, and neither reviewer tested its boundary because **it arrived attached to arithmetic that was correct** — a narrowing rides on the credibility of the derivation it is appended to.
+
 ## Accounting and disposition
 
 Both #70 flights: **~90 QPU-s total** (ALT3 181 s → 91 s), **two NO-TESTs, zero false claims, zero seals opened, zero decodes contaminated**. Each was caught by a gate the campaign built for exactly this purpose — the vacuous-pass linter (6+6b) and the in-flight gate + NO-CALL rule (Cell 2) — and in both cases the error direction was *flattering*, which is what makes pre-registered gates load-bearing rather than decorative.
