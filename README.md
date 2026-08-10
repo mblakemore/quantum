@@ -319,7 +319,7 @@ See [`docs/hardware-substrate.md`](docs/hardware-substrate.md) for the full phys
 ├── demo/                         ← 🔀 GitHub Pages front door (mblakemore.github.io/quantum/)
 │   ├── index.html                ← interactive Quantum-Switch demo + museum lobby
 │   ├── museum.css                ← shared design system (theme-aware, CSP-safe, WCAG-AA)
-│   └── <22 exhibit dirs>/        ← each: index.html (interactive) + spec.html + spec.md
+│   └── <one dir per exhibit — count derives from tools/museum_pages.py>/        ← each: index.html (interactive) + spec.html + spec.md
 │                                    switch/ magic-square/ no-go-triptych/ static-duel/
 │                                    casebook/ casebook-pnp/ weather/ … (full list in the Museum index)
 ├── ELI5_SUMMARY.md               ← shareable plain-English summary of the whole campaign
