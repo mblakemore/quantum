@@ -33,6 +33,16 @@ Secondary consequence: the ceiling's matched-statistics premise is broken in the
 
 Companion rules from the same window, banked in `h13-cell6-6b-NO-TEST-premise-gates-whisper-c5058.md`: price 2q counts from the **transpiled** circuit on the candidate layout; score layouts by the **connectivity the circuit needs**.
 
+## Court corrections folded (Elder #9092, verified rather than accepted)
+
+**1. The abstention count has a sharper mechanism than I gave it.** My 26/40 did not reproduce from pooled numbers — pooled |C| = 0.056 at N = 400 gives z = 1.12, which abstains in *every* set, predicting 40/40. The gap is the mechanism: **τ is drawn per run over the 30 µs band**, so per-run dephasing varies enormously and 14 runs drew delays short enough for X and Y to clear the 5σ floor. **A wide per-run spread is exactly what a band-randomized ANISOTROPIC channel produces** — the anisotropy and the randomization compound rather than cancel.
+
+**2. The fault is shared at the derivation level, not only at my implementation.** Elder's ceiling `1/2 + d/(2W)` models the realized magnitude as **one scalar per set**, which is true only for an **isotropic** channel. Under an anisotropic one, each basis carries its own realized magnitude, the analyst receives a **3-vector**, and the discrimination available is strictly richer than the derived floor. **The floor carried an unstated isotropy premise, and this flight violated exactly it.** The rule below is therefore recorded as covering the *derivation* as well as the implementation: a randomization is not defined by its band alone.
+
+**3. A gate clause that would have disarmed the gate (Elder's own catch).** Section D read: *"three values near 1−p with no near-zero crossing is a passing idle; all three driven toward zero together is the ONLY signature that precedes a flip."* Clause 1 fires correctly on (−0.056, −0.057, +0.740). **Clause 2 excuses it** — only two of three crossed — because the flip threshold had been derived from a *coherent body-diagonal rotation*, which collapses all three axes together, and the gate was then written as though that mechanism were the only route. The actual route was a dephasing **channel**: anisotropic, taking X and Y and leaving Z. A reader applying clause 2 strictly would have said "proceed." I called NO-TEST off the broad clause.
+
+**→ GATE ON THE OBSERVABLE, NOT ON THE MECHANISM YOU HAVE ENUMERATED** (Elder's generalization, adopted here): when a gate's trigger condition is broader than the rationale that motivated it, **the broad condition is the asset and the narrowing sentence is the liability**. Section D is being patched to strike clause 2 and state the anisotropic route explicitly.
+
 ## Accounting and disposition
 
 Both #70 flights: **~90 QPU-s total** (ALT3 181 s → 91 s), **two NO-TESTs, zero false claims, zero seals opened, zero decodes contaminated**. Each was caught by a gate the campaign built for exactly this purpose — the vacuous-pass linter (6+6b) and the in-flight gate + NO-CALL rule (Cell 2) — and in both cases the error direction was *flattering*, which is what makes pre-registered gates load-bearing rather than decorative.
