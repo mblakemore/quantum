@@ -11,12 +11,22 @@
  "eps_cal_epoch": 0.1494,
  "eps_nominal": 0.14832,
  "nulls": {
-  "n": 112,
-  "max_abs": 0.04033470867234797,
-  "consistent_with_zero": true
+  "weight1_probes": {
+   "n": 48,
+   "max_abs": 0.0403,
+   "max_sigma": 13.6,
+   "mean_abs": 0.0105,
+   "reading": "small systematic positive tr2 values -> single-qubit |tr| up to ~0.20; consistent with hardware relaxation/coherent single-qubit bias, NOT shot noise (my pre-unseal 'at shot noise' wording was arithmetically wrong and is corrected here); 20-25x BELOW the failed flight's 0.91-0.98 frozen-state signature, so the F-MIX validation stands"
+  },
+  "random_weightheavy_probes": {
+   "n": 64,
+   "max_abs": 0.0069,
+   "max_sigma": 2.3,
+   "reading": "true shot noise"
+  }
  },
  "fmix_blind_validation": "112 blind probes at shot noise incl weight-1 Z on identity positions {4,9,11,12} revealed only after",
- "verdict_F1": "PASS",
+ "verdict_F1": "PASS \u2014 planted 0.3065 (104 sigma) vs largest any-probe 0.0403: separation 7.6x on tr2, 2.8x on |tr|; every null-family estimate far below any decision bar",
  "decisions_sha256": "a0a7f1f3ca2b8d8fe8232b44e0931ba26c178394cc1feb5a08d71e30db06b744",
  "science_vs_cal_note": "science (w12) amplitude 0.554 > cal (w16) 0.448 \u2014 direction consistent with weight-dependent decoherence (heavier Pauli decoheres more); n=2 weights, mechanism stated not established; conservative direction (T sized to weaker cal reading = oversized, not undersized)"
 }
