@@ -16,7 +16,7 @@
    "max_abs": 0.0403,
    "max_sigma": 13.6,
    "mean_abs": 0.0105,
-   "reading": "small systematic positive tr2 values -> single-qubit |tr| up to ~0.20; consistent with hardware relaxation/coherent single-qubit bias, NOT shot noise (my pre-unseal 'at shot noise' wording was arithmetically wrong and is corrected here); 20-25x BELOW the failed flight's 0.91-0.98 frozen-state signature, so the F-MIX validation stands"
+   "reading": "SIGNED deviations up to +/-0.04 at 9-13.6 sigma (top: X_3 -0.0403, X_8 -0.0374, X_10 -0.0315, X_9 +0.0298, Z_11 +0.0298, Z_12 +0.0292). A NEGATIVE tr^2 estimate is an IMPOSSIBLE OUTPUT for any single-copy state property (E[v_Q]=tr(Q rho)^2 >= 0) \u2014 the sign is therefore direct evidence of small CROSS-COPY CORRELATION / measurement crosstalk between paired qubits in the transversal Bell block, magnitude ~0.03-0.04. My first correction called it 'polarization' \u2014 wrong, killed by the sign one commit later; the impossible output was the detector. Notable: the +Z deviations sit on qubits 11,12 (P-identity positions) and several deviations cluster near P's identity/X sites \u2014 recorded as observation, not mechanism (n=6 probes). 20-25x below the failed flight's 0.91-0.98 frozen signature; F-MIX validation stands."
   },
   "random_weightheavy_probes": {
    "n": 64,
@@ -28,5 +28,6 @@
  "fmix_blind_validation": "112 blind probes at shot noise incl weight-1 Z on identity positions {4,9,11,12} revealed only after",
  "verdict_F1": "PASS \u2014 planted 0.3065 (104 sigma) vs largest any-probe 0.0403: separation 7.6x on tr2, 2.8x on |tr|; every null-family estimate far below any decision bar",
  "decisions_sha256": "a0a7f1f3ca2b8d8fe8232b44e0931ba26c178394cc1feb5a08d71e30db06b744",
- "science_vs_cal_note": "science (w12) amplitude 0.554 > cal (w16) 0.448 \u2014 direction consistent with weight-dependent decoherence (heavier Pauli decoheres more); n=2 weights, mechanism stated not established; conservative direction (T sized to weaker cal reading = oversized, not undersized)"
+ "science_vs_cal_note": "science (w12) amplitude 0.554 > cal (w16) 0.448 \u2014 direction consistent with weight-dependent decoherence (heavier Pauli decoheres more); n=2 weights, mechanism stated not established; conservative direction (T sized to weaker cal reading = oversized, not undersized)",
+ "instrument_note": "Cross-copy independence is F-IND's axis: the flight's F-IND gate checked the PREP streams; these probes measure the DELIVERED pair through hardware, where ~0.04 correlation appears. Does not touch F1 (planted +0.3065 at 104 sigma, positive as required, 7.6x any artifact). Flagged for the registered-limitations ledger rather than patched on sight."
 }
