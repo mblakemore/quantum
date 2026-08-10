@@ -6,7 +6,7 @@ Most of what you can buy from a quantum computer today is characterization: *how
 
 The centerpiece is a **quantum switch**: a circuit where the *order* of two operations is itself in superposition. The switch was theorists' idea; photonics labs demonstrated it first, and early versions ran on chips like ours. **What this campaign built was the scoreboard** — pre-registered games and channels whose limits are provable theorems for any definite-order process — and then beat those limits on silicon. A discrimination game was won at 0.9769 against its theorem ceiling 0.869 and **replicated the next day at 0.9738 on a chip the design had never touched** — the two-chip agreement, not the 216.8σ of within-run precision, is what carries the claim; information crossed channels of exactly zero capacity; a thermodynamic splitting forbidden to every ordered process was measured at 21.1σ. **And the centerpiece has now left IBM entirely**: the switch's causal witness certifies on **Rigetti's superconducting silicon** — a different vendor, fab, and native gate set, reached via Amazon Braket — against the *identical* frozen bounds, so indefinite causal order is not an IBM artifact. Around that centerpiece sits a systematic map of what this hardware generation can and cannot do.
 
-> 🔀 **[Play with it → mblakemore.github.io/quantum](https://mblakemore.github.io/quantum/)** — **The Quantum Museum**: 50 interactive exhibits across 8 wings, one per result — from the causal switch to the self-healing logical qubit to the new Temporal Investigations pieces (a measured negative eigenvalue; Hardy's impossible event). Drag the switch's order-coherence and watch the measured cosine law appear; play the contextuality game against a classical bot that provably cannot win; walk the certified-randomness trust ladder; print & play the tabletop casebook. Every number in every exhibit is measured hardware data, and each exhibit carries a full [specification sheet](#the-quantum-museum--50-interactive-exhibits-in-8-wings) tracing it to its job ID.
+> 🔀 **[Play with it → mblakemore.github.io/quantum](https://mblakemore.github.io/quantum/)** — **The Quantum Museum**: 53 interactive exhibits across 8 wings, one per result — from the causal switch to the self-healing logical qubit to the new Temporal Investigations pieces (a measured negative eigenvalue; Hardy's impossible event). Drag the switch's order-coherence and watch the measured cosine law appear; play the contextuality game against a classical bot that provably cannot win; walk the certified-randomness trust ladder; print & play the tabletop casebook. Every number in every exhibit is measured hardware data, and each exhibit carries a full [specification sheet](#the-quantum-museum--53-interactive-exhibits-in-8-wings) tracing it to its job ID.
 
 ---
 
@@ -201,7 +201,9 @@ The Shields arc (above) reached error *detection* — [[4,2,2]] postselects on t
 
 ---
 
-## The Quantum Museum — 50 interactive exhibits in 8 wings
+## The Quantum Museum — 53 interactive exhibits in 8 wings
+
+<!-- Exhibit count derives from dawn's tools/museum_pages.py (property-based: demo/*/index.html minus redirect stubs) - the curator's tool is the single definition; update this number from its output, never by hand-count. Stale-count incident: README said 50 while the tool counted 53 (C5048/#8244). -->
 
 The results above, made playable. Each exhibit is a self-contained, theme-aware page that renders **measured hardware data** — no simulations, no idealized curves — and each carries a **full specification sheet**: the finding in plain language, what is measured, the pre-registered gates (frozen before flight), the measured-data table, the scope and limits, and the IBM job ID. The interactive versions live at **[mblakemore.github.io/quantum](https://mblakemore.github.io/quantum/)**; the spec sheets render inline as Markdown below.
 
