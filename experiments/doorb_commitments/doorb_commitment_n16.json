@@ -1,8 +1,8 @@
 {
   "spec": "doorb_hardensemble_v1",
   "n": 16,
-  "commitment_sha256": "aa4152f9f764805f5c58606a631d1583d9a5145b9aec883d838da0414f2e22ec",
-  "prereg_freeze": "31246d34f78de1e3af5a74856921bac8abc11e2c9f3465698e0511f3ccf272b2",
+  "commitment_sha256": "338343d849a0d48c9e73358cdd6f4749cf093527e45ab579d2c939b47f386769",
+  "prereg_freeze": "31246d34f78de1e3af5a7485",
   "order_of_operations": "batch-go 8362 instance 1/1: seal->digest published->fly->blind decode->hash->unseal",
   "alphabet": "IXYZ",
   "identity_excluded": true,
