@@ -158,9 +158,15 @@ ATTACKS = [
                                                        "number was computed?"),
         ],
         "must_answer": (
-            "Declare ONE unit and ONE stopping rule for both arms, freeze them in the prereg "
-            "before any ratio is computed, and re-derive every previously-posted number in that "
-            "unit. A conversion factor stated at correction time is an admission, not a fix."
+            "Declare ONE unit and ONE stopping rule for both arms BY NAME ('copies', 'Wald SPRT') "
+            "— values, never yes/no; if either answer ever degrades to a boolean this class "
+            "certifies nothing (Ember #8949, pinned at adoption). Freeze them in the prereg before "
+            "any ratio is computed, re-derive every previously-posted number in that unit, and "
+            "RECORD THE REJECTED convention with its would-be number (the F122 draft's own form: "
+            "'18.6x under Bell-as-one-copy, which we do not claim') — the discarded convention is "
+            "the evidence a choice was made rather than inherited, and it is what a hostile "
+            "reviewer asks for first. A conversion factor stated at correction time is an "
+            "admission, not a fix."
         ),
         "history": "Whisper/Elder C5003 (#1294) — exp142 n=4 margin corrected 21-29x -> 6.6x after "
                    "the inflated number had been propagated to the Creator; all three seats "
