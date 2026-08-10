@@ -63,6 +63,32 @@ argument (classical CE/CC observational equivalence without intervention — the
 content), not by the correlator pattern. **The frozen text must say so**, because "the sign flip
 is the quantum signature" is the reading a referee reaches for, and it is false.
 
+**CORRECTION (general#9041→#9043): the foreclosure is narrower than it first reads, and what
+survives it is the actual claim.** The counterexample kills the *witness* reading — the pattern
+is not evidence of quantumness — but the statistic still separates the two physical arms
+exactly, by a mechanism that is quantum:
+
+> **QM repeatability constrains the cause-effect arm.** Measuring Pauli *i*, idling, then
+> measuring Pauli *i* again returns the same outcome with certainty (the first measurement
+> projects onto an eigenstate). A genuine quantum cause-effect chain is therefore **forced** to
+> C_ii = +1 for every *i*, degraded only by noise — the design shows exactly that: CE
+> (+0.922, +0.922, +0.922), off-diagonals 0. **It cannot produce a negative diagonal.** The
+> entangled source can: CC (+0.933, −0.933, +0.933).
+
+That a classical shared-λ model produces *either* pattern at will is the **classical baseline,
+not a defect**: it is the statement that classical causal structure is unrecoverable from
+observational data without intervention (Ried 2015) — the thing the quantum result is
+interesting against.
+
+**Both sentences must be in the frozen text; they are easy to confuse:**
+- ✗ "the sign flip is the quantum signature" — **FALSE**
+- ✓ "within QM a cause-effect chain is forced to all-positive diagonals by repeatability while a
+  common cause is not; classically neither is forced" — **TRUE, and it is the claim**
+
+*Process note: I posted the foreclosure without naming what survived it, and the next reader
+extended it one step too far. A negative result stated without its surviving positive invites
+that overshoot.*
+
 **The run count is an information limit, not a budget choice.** A binary call yields ≤1 bit per
 run; no within-run precision buys it down. Runs for 5σ-equivalent (p = 2.87e−7):
 
