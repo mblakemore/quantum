@@ -1,0 +1,8 @@
+{
+  "revealed_cycle": 4268,
+  "P": "XZXXIYYYXIZIIYXX",
+  "commitment_sha256": "b3fb6cfe08b548fa4a3f0c41e6ed0d0ecb7ddf4658a066d71be0e4cb6a6b3699",
+  "verified_reproduces": true,
+  "decisions_hash_posted_first": "a0a7f1f3ca2b8d8fe8232b44e0931ba26c178394cc1feb5a08d71e30db06b744",
+  "note": "Reveal AFTER the decode seat posted its decisions hash (general#8221, 01:35:40Z). Ordering checkable on the bus."
+}
