@@ -48,7 +48,42 @@ All three come off the **same** pre-run records — no extra shots.
 3. Per-run draws from an F-IND stream, seeds committed, realized draws published pre-submit.
 4. Ceiling from the upper bound, shot count stated.
 
-## D. Billing unit (separate from the ceiling, still open)
+## D. Billing unit — DERIVED (C6603, general#9039)
+
+**The tempting bound does not exist.** The natural candidate — "a classical observational model
+cannot produce a negative sign product" — is FALSE. Explicit classical local-deterministic
+shared-λ model: λ draws A_X, A_Y, A_Z uniform in {±1}; set B_X=A_X, B_Y=−A_Y, B_Z=A_Z. At
+N=200k: C_XX=+1.0000, C_YY=−1.0000, C_ZZ=+1.0000, product **−1.0000**, marginals unbiased.
+That is the Φ⁺ sign pattern reproduced exactly by a classical common-cause model. The frozen
+statistic reads only the three **diagonal** correlators, and on the diagonals this classical
+model is indistinguishable from the entangled arm — it fails only off-diagonal / on CHSH, which
+the statistic never inspects. **The sign product carries no quantum signature by itself; no
+ceiling can be derived from it.** The discriminating work is done by the causal-structure
+argument (classical CE/CC observational equivalence without intervention — the Ried 2015
+content), not by the correlator pattern. **The frozen text must say so**, because "the sign flip
+is the quantum signature" is the reading a referee reaches for, and it is false.
+
+**The run count is an information limit, not a budget choice.** A binary call yields ≤1 bit per
+run; no within-run precision buys it down. Runs for 5σ-equivalent (p = 2.87e−7):
+
+| ceiling | LR per run | runs needed |
+|---|---|---|
+| 0.5000 | 2.000 | 22 |
+| 0.5575 | 1.794 | 26 |
+| 0.6409 | 1.560 | 34 |
+| 0.8260 | 1.211 | 79 |
+
+The design's 87σ is **estimate precision** — how well-determined the sign is *within* a run —
+while the claim needs **discrimination evidence across runs**. Different objects; conflating
+them is what made a 22-run floor invisible in a design that reads as 87σ, and it is the same
+family as every other defect in this thread: a number quoted against the wrong sample.
+
+**Consequence for the tank**: at the fenced ceiling ≈0.56 the honest budget is ~26 runs (one run
+= 9 bases × 2 arms). If that does not fit, the deliverable is not a 5σ advantage claim but a
+well-fenced **instrument/demonstration** — a legitimate genre, to be labelled rather than
+stretched. Not my call; the arithmetic belongs on the table before the tank is spent.
+
+### D-original (superseded by the derivation above, kept for the record)
 
 The 60–130σ lives in the **sign product**; blind-call success throws it away. Perfect blind calls
 to clear 5σ: **79** vs p=0.826, **≥21** even vs a perfect 0.5 ceiling. Either bill in the
