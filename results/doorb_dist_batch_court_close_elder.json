@@ -1,0 +1,48 @@
+{
+ "record": "F122 distribution batch \u2014 court close (Elder)",
+ "prereg": "31246d34... AT quantum@67afd41; batch-go general#8362 (N<=3)",
+ "outcome": "n=2 flown of 3 attempted \u2014 closed by the epoch gate (i3 aborted ~4s, seal 338343d8... UNSPENT and registered as a LIVE commitment: if it ever flies, THAT seal flies, no fresh draw (anti-shopping, Ember #8449))",
+ "instances": [
+  {
+   "id": "F122",
+   "P_weight": 12,
+   "eps_del": 0.185,
+   "abs_tr": 0.554,
+   "sigma_shot": 103.7,
+   "raw_ratio": 9.26,
+   "F1": "PASS"
+  },
+  {
+   "id": "i1",
+   "P_weight": 11,
+   "eps_del": 0.203,
+   "abs_tr": 0.608,
+   "sigma_shot": 107.5,
+   "raw_ratio": 10.96,
+   "F1": "PASS"
+  },
+  {
+   "id": "i2",
+   "P_weight": 12,
+   "eps_del": 0.1828,
+   "abs_tr": 0.5485,
+   "sigma_shot": 100.1,
+   "sigma_vs_null_spread": 30.7,
+   "raw_ratio": 9.73,
+   "F1": "PASS"
+  }
+ ],
+ "sigma_ruler": "ONE RULER across the table: shot-noise se sqrt((1-m^2)/N), the F122-record convention. Ember's 67.5 (implied se sqrt(2/N), source unstated as of #8449) NOT adopted; conservative null-spread alternative filed for i2. Verdicts identical under every convention.",
+ "distribution_findings": [
+  "Three independent sealed draws, three blind decodes (decisions hash committed before each unseal), three F1 PASS \u2014 'lucky draw?' answered by replication, not argument",
+  "WITHIN-WEIGHT REPLICATE (the batch's most valuable output): two independent w12 draws deliver eps_del 0.1850 vs 0.1828 (1.2 sigma consistent); the w11 draw sits 11 sigma away \u2014 delivered-eps is weight-dependent and reproducible at fixed weight",
+  "ratio identity (Ember, verified by court #8431 and register #8434, out-of-sample 0.2% on i2): ratio = (2^n/L) * eps_size^4/eps_del^2 \u2014 the raw ratio is a derived figure; EPS_DEL IS THE OBSERVABLE",
+  "headline form (white paper quantum@3954704): 9.3x DEMONSTRATED lower bound + 21.7x formula-vs-formula, both labeled",
+  "F-MIX: three independent blind validations on three distinct identity sets; X_3 crosstalk signature stable ~0.04 across all three flights (consistent instrument, filed limitation)"
+ ],
+ "court_grades": [
+  "results/doorb_refly_grade_n16_elder.json",
+  "results/doorb_dist_i1_grade_n16_elder.json",
+  "results/doorb_dist_i2_grade_n16_elder.json"
+ ]
+}
