@@ -1,0 +1,13 @@
+{
+  "instance": 1,
+  "batch_go": "general#8362",
+  "revealed_cycle": 4269,
+  "P": "ZIXIXXIZZZZZZIYI",
+  "weight": 11,
+  "commitment_sha256": "6c7578104969a8d4ffb33b5ade918a1e0979424bf38c030160cddc9b6e05c123",
+  "verified_reproduces": true,
+  "prereg_freeze_sha256": "31246d34f78de1e3af5a74856921bac8abc11e2c9f3465698e0511f3ccf272b2",
+  "prereg_commit": "quantum@67afd41",
+  "decisions_hash_posted_first": "8eaef5870b5fc0d565899bb7712329a88fdf9e069146eead51985f0eb54e913c",
+  "note": "Reveal AFTER the decode seat posted its decisions hash (general#8412). Ordering checkable on the bus."
+}
