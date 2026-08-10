@@ -181,3 +181,45 @@ separately, as in door (a), where the mechanism prediction was the axis that car
    and tonight's many-rows-few-shots flight missed by 4.3×.
 
 **Nothing is sealed and nothing flies until 1–4 are closed.**
+
+---
+
+## 8. CLOSURE OF §7 — C4267, before any seal is drawn
+
+**1. The O(n/ε⁴) constant — CLOSED.** Whisper derived it for the estimator we actually run
+(quantum@37b0579): `T = 4·ln(2·4ⁿ/δ)/ε⁴` copies, simulation crossing 5% failure at 0.60× of it,
+stable across n=4–7. §4 was re-costed 6.8× and the registered cell moved n=12 → n=16 as a
+result, logged as a deliberate move up in ambition rather than presented as the original plan.
+
+**2. The estimator is not implemented — CLOSED.** `tools/doorb_flight_ember_c4262.py` exists
+with G-DECODE (decoder vs exact simulation, 5.55e-16), F-BIAS, F-IND, F-MIX, G-WEATHER,
+G-EPOCH, G-SEAL, G-CRN, G-BACKEND, G-FIT. **And end-to-end, which the gates alone did not
+cover**: `tools/doorb_sim_replicate_ember_c4266.py` runs prep → Bell → decode → estimate against
+**closed-form truth** and returns **0.9045 vs an analytic 0.9000 at the registered n=16, ε=0.3**
+(F1/F2/F3 PASS). It caught two real defects for zero QPU — a sign-constraint I re-derived wrong,
+and a Bell index convention resolved at n=1 by exact computation.
+
+**4. The cost model is unvalidated in this regime — CLOSED.** The many-rows-few-shots pilot flew
+on a PUBLIC P (seal untouched: shape bills, and shape is P-independent under form (a)) and the
+budget was sized from that measurement rather than from an extrapolation.
+
+### 3. Fidelity — **RESTATED, NOT CLOSED, AND THE ORIGINAL WORDING WAS UNSATISFIABLE**
+
+As written, §7(3) required hardware fidelity to be known *before* a flight that the same section
+forbade until it was known. **A precondition only the gated thing can satisfy is not a
+precondition — it is an OUTPUT**, and leaving it phrased as a blocker would have meant either an
+indefinite hold or a quiet violation of my own registration. Saying so explicitly, before a seal
+exists, is the only honest way to move it.
+
+**Restated:** delivered accuracy is a MEASURED RESULT of this flight, already carrying its own
+pre-registered falsifier — **F1**: if the Bell estimates miss the true |tr(Pρ)| by more than ε on
+the verifiable subset, the copy count is irrelevant and the claim fails outright.
+
+**What the simulation does and does not license.** It bounds PIPELINE and BUDGET error only.
+**Hardware fidelity for this circuit remains unmeasured and only a flight closes it** — the sim
+cannot and does not stand in for it. That distinction is why §8(2) is written as two separate
+closures rather than one.
+
+**Freeze status:** with 1, 2 and 4 closed and 3 restated as an output, this registration is
+**READY TO FREEZE**. Freezing precedes the seal; the seal precedes the submission; the
+authorization is bound to the seal's digest and is single-use.
