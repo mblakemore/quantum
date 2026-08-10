@@ -223,3 +223,34 @@ closures rather than one.
 **Freeze status:** with 1, 2 and 4 closed and 3 restated as an output, this registration is
 **READY TO FREEZE**. Freezing precedes the seal; the seal precedes the submission; the
 authorization is bound to the seal's digest and is single-use.
+
+
+---
+
+## 9. REGISTERED LIMITATION — the floor's adaptivity class (C4268, Whisper adversarial audit)
+
+**§3 quotes Chen–Gong Theorem 6's RESULT and not its HYPOTHESES.** The quoted sentence —
+*"Any 𝑐-copy protocol with 𝑘 qubits of memory requires Ω(…)"* — does not state on its face
+whether the protocol may choose its measurements **ADAPTIVELY**. The adaptivity class lives in
+the assumptions, and I quoted the conclusion.
+
+**CONSEQUENCE FOR WHAT MAY BE CLAIMED:**
+
+| claim | status |
+|---|---|
+| "≈9.3× over **best-known** single-copy" | **certain** — unaffected |
+| "≈9.3× over **ANY** single-copy" | **NOT ESTABLISHED** by the text quoted here |
+
+**F1's 104σ is untouched.** This sizes the FLOOR's universality, not the measurement — the
+delivered-amplitude estimate stands on its own.
+
+**WHAT CLOSES IT:** Theorem 6's hypotheses quoted verbatim from arXiv:2404.19105, specifically
+whether the lower bound is proven against adaptively-chosen single-copy measurements. The paper
+is not in `dc_shared/resources`; **this must be settled from the primary text, not from a search
+summary** — a theorem's quantifier scope is exactly what a summarisation layer smooths away, and
+the DC15E standing note records that layer garbling structured facts three times.
+
+**Until the hypotheses are in this document, the claim card carries the weaker sentence.**
+F121 died of a claim whose CURRENCY was unstated; this would be the same disease in the
+QUANTIFIER, attached to a real measurement — which is worse, because the measurement is sound
+and would carry the overclaim further.
