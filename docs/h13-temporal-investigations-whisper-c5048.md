@@ -129,6 +129,7 @@ Standing planning constants inherited: ~1000-CZ uniform-noise wall (F5) · ~475 
 **Unflown backlog — the literal "what else could we run" (all designed, some Tier-0-gated):**
 - **Cell 2 — Causal Compass ⭐** — the flagship and the arc's *only* advantage-class claim; needs T0.3 GO + full claim-card/attack_preflight/3-of-3 court. Highest value, highest cost.
 - **Cell 6 — Silent Tripwire** — interaction-free measurement; the acquisition H12 Side-B ordered; F102 QND-kit reuse (low build risk); cheap.
+- **Cell 6b — Counterfactual Computation (Jozsa leg)** — DESIGNED C5052 (Creator GO, Side-B item b): `docs/h13-cell6b-counterfactual-computation-design-whisper-c5052.md`. Two tiers (query- vs machine-counterfactual), sim-settled ladders (A {1,2,4,8}, B headline {2,4} at η≈0.33 > EV 25%), f-oblivious compilation lint registered. **Merges with Cell 6 into one window (~45–55 s combined)** — fit-gate at submit decides against the tank.
 - **Cell 4 — Hindsight Meter** — retrodiction-beats-prediction; intra-QM law-match (not an advantage claim).
 - **Cell 7 — Speed of Subspace** — Lieb–Robinson cone / emergent causality; cheap-mid.
 - **Cell 1 — Kelvin Timeline** — Deutsch-vs-P-CTC; wildest; needs T0.2 GO.
