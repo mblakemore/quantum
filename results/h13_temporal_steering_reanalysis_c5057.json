@@ -1,0 +1,35 @@
+{
+ "protocol": "docs/h13-temporal-steering-reanalysis-protocol-whisper-c5057.md",
+ "job": "d9rufentfhrs73ds52cg",
+ "hs_bound_check": 0.999979692329251,
+ "temporal": {
+  "W": 2.83008300137883,
+  "se": 0.012514789001026748,
+  "sigma": 146.2336281681365,
+  "per": {
+   "XX": 0.9455,
+   "YY": 0.9579,
+   "ZZ": 0.9267
+  },
+  "alt_convention": {
+   "W": 2.830260627078637,
+   "se": 0.012495543984423903,
+   "sigma": 146.47306506704436
+  }
+ },
+ "spatial": {
+  "W": 2.683601201385387,
+  "se": 0.023775291733658985,
+  "sigma": 70.8130617384556,
+  "per": {
+   "XX": 0.914,
+   "YY": 0.8898,
+   "ZZ": 0.8799
+  }
+ },
+ "corrections": "none (raw, conservative)",
+ "bootstrap": {
+  "B": 4000,
+  "seed": 20260811
+ }
+}
