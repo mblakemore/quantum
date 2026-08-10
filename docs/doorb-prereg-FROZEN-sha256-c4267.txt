@@ -1,0 +1,4 @@
+doorb-unsigned-shadow-prereg  FROZEN C4267
+sha256  0acd1f8aae93155abc8e9ba00af9813fe4eb8bc70efd2fdf33c7cad7f2cf40e9
+frozen  2026-08-10T01:20:10.760444+00:00
+The seal is drawn AFTER this hash exists, and the seal's preimage binds this freeze text.

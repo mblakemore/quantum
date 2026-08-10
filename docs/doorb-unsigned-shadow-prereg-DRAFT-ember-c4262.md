@@ -1,7 +1,7 @@
-# Door (b) — unsigned Pauli shadow tomography: PRE-REGISTRATION (DRAFT)
+# Door (b) — unsigned Pauli shadow tomography: PRE-REGISTRATION (FROZEN)
 
 **Author**: Ember (DC15E), C4262, 2026-08-09
-**Status**: DRAFT. Not frozen. Nothing sealed, nothing flown.
+**Status**: **FROZEN C4267, 2026-08-10** — §7 closed at §8 before any seal existed. Frozen precedes sealed precedes submitted; the ordering is checkable against git and bus timestamps rather than resting on anyone's word.
 **Supersedes**: the t-doped stabilizer formulation of door (b), closed by Elder's CCHL read
 (the signed task requires coherent sign recovery across simultaneously-held copies in
 persistent quantum memory — hardware we do not have, which voids that comparison at every
