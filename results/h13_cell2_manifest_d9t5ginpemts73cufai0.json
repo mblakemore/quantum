@@ -1,0 +1,2193 @@
+{
+ "cell": "H13-Cell2-CausalCompass",
+ "prereg": "docs/h13-cell2-compass-prereg-FROZEN-whisper-c5058.md",
+ "account": "IBMQ_ALT3",
+ "backend": "ibm_marrakesh",
+ "jobs": {
+  "prerun": "d9t5gi7pemts73cufag0",
+  "science": "d9t5ginpemts73cufai0"
+ },
+ "seed": 20260811,
+ "tau_max_ns": 30000,
+ "n_draws": 20,
+ "n_runs": 40,
+ "prerun_shots": 1000,
+ "science_shots": 400,
+ "layout": {
+  "CE": 107,
+  "CC": [
+   54,
+   55
+  ]
+ },
+ "realized_draws_sha256_16": "6d8f6bebbdedbc65",
+ "labels_prerun": [
+  {
+   "unit": 0,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 15482
+  },
+  {
+   "unit": 0,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 8345
+  },
+  {
+   "unit": 0,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 15482
+  },
+  {
+   "unit": 0,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 8345
+  },
+  {
+   "unit": 0,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 15482
+  },
+  {
+   "unit": 0,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 8345
+  },
+  {
+   "unit": 1,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 22883
+  },
+  {
+   "unit": 1,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 8773
+  },
+  {
+   "unit": 1,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 22883
+  },
+  {
+   "unit": 1,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 8773
+  },
+  {
+   "unit": 1,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 22883
+  },
+  {
+   "unit": 1,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 8773
+  },
+  {
+   "unit": 2,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 28239
+  },
+  {
+   "unit": 2,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 23901
+  },
+  {
+   "unit": 2,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 28239
+  },
+  {
+   "unit": 2,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 23901
+  },
+  {
+   "unit": 2,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 28239
+  },
+  {
+   "unit": 2,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 23901
+  },
+  {
+   "unit": 3,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 8766
+  },
+  {
+   "unit": 3,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 10807
+  },
+  {
+   "unit": 3,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 8766
+  },
+  {
+   "unit": 3,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 10807
+  },
+  {
+   "unit": 3,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 8766
+  },
+  {
+   "unit": 3,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 10807
+  },
+  {
+   "unit": 4,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 16917
+  },
+  {
+   "unit": 4,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 15115
+  },
+  {
+   "unit": 4,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 16917
+  },
+  {
+   "unit": 4,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 15115
+  },
+  {
+   "unit": 4,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 16917
+  },
+  {
+   "unit": 4,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 15115
+  },
+  {
+   "unit": 5,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 19976
+  },
+  {
+   "unit": 5,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 17283
+  },
+  {
+   "unit": 5,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 19976
+  },
+  {
+   "unit": 5,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 17283
+  },
+  {
+   "unit": 5,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 19976
+  },
+  {
+   "unit": 5,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 17283
+  },
+  {
+   "unit": 6,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 12362
+  },
+  {
+   "unit": 6,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 22237
+  },
+  {
+   "unit": 6,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 12362
+  },
+  {
+   "unit": 6,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 22237
+  },
+  {
+   "unit": 6,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 12362
+  },
+  {
+   "unit": 6,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 22237
+  },
+  {
+   "unit": 7,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 13277
+  },
+  {
+   "unit": 7,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 19373
+  },
+  {
+   "unit": 7,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 13277
+  },
+  {
+   "unit": 7,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 19373
+  },
+  {
+   "unit": 7,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 13277
+  },
+  {
+   "unit": 7,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 19373
+  },
+  {
+   "unit": 8,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 19088
+  },
+  {
+   "unit": 8,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 1261
+  },
+  {
+   "unit": 8,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 19088
+  },
+  {
+   "unit": 8,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 1261
+  },
+  {
+   "unit": 8,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 19088
+  },
+  {
+   "unit": 8,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 1261
+  },
+  {
+   "unit": 9,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 12603
+  },
+  {
+   "unit": 9,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 29723
+  },
+  {
+   "unit": 9,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 12603
+  },
+  {
+   "unit": 9,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 29723
+  },
+  {
+   "unit": 9,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 12603
+  },
+  {
+   "unit": 9,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 29723
+  },
+  {
+   "unit": 10,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 4474
+  },
+  {
+   "unit": 10,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 26205
+  },
+  {
+   "unit": 10,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 4474
+  },
+  {
+   "unit": 10,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 26205
+  },
+  {
+   "unit": 10,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 4474
+  },
+  {
+   "unit": 10,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 26205
+  },
+  {
+   "unit": 11,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 2045
+  },
+  {
+   "unit": 11,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 20079
+  },
+  {
+   "unit": 11,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 2045
+  },
+  {
+   "unit": 11,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 20079
+  },
+  {
+   "unit": 11,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 2045
+  },
+  {
+   "unit": 11,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 20079
+  },
+  {
+   "unit": 12,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 822
+  },
+  {
+   "unit": 12,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 4244
+  },
+  {
+   "unit": 12,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 822
+  },
+  {
+   "unit": 12,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 4244
+  },
+  {
+   "unit": 12,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 822
+  },
+  {
+   "unit": 12,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 4244
+  },
+  {
+   "unit": 13,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 23017
+  },
+  {
+   "unit": 13,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 9914
+  },
+  {
+   "unit": 13,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 23017
+  },
+  {
+   "unit": 13,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 9914
+  },
+  {
+   "unit": 13,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 23017
+  },
+  {
+   "unit": 13,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 9914
+  },
+  {
+   "unit": 14,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 13233
+  },
+  {
+   "unit": 14,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 4684
+  },
+  {
+   "unit": 14,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 13233
+  },
+  {
+   "unit": 14,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 4684
+  },
+  {
+   "unit": 14,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 13233
+  },
+  {
+   "unit": 14,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 4684
+  },
+  {
+   "unit": 15,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 24809
+  },
+  {
+   "unit": 15,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 29554
+  },
+  {
+   "unit": 15,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 24809
+  },
+  {
+   "unit": 15,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 29554
+  },
+  {
+   "unit": 15,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 24809
+  },
+  {
+   "unit": 15,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 29554
+  },
+  {
+   "unit": 16,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 18271
+  },
+  {
+   "unit": 16,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 3386
+  },
+  {
+   "unit": 16,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 18271
+  },
+  {
+   "unit": 16,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 3386
+  },
+  {
+   "unit": 16,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 18271
+  },
+  {
+   "unit": 16,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 3386
+  },
+  {
+   "unit": 17,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 13261
+  },
+  {
+   "unit": 17,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 8255
+  },
+  {
+   "unit": 17,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 13261
+  },
+  {
+   "unit": 17,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 8255
+  },
+  {
+   "unit": 17,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 13261
+  },
+  {
+   "unit": 17,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 8255
+  },
+  {
+   "unit": 18,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 10564
+  },
+  {
+   "unit": 18,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 8706
+  },
+  {
+   "unit": 18,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 10564
+  },
+  {
+   "unit": 18,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 8706
+  },
+  {
+   "unit": 18,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 10564
+  },
+  {
+   "unit": 18,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 8706
+  },
+  {
+   "unit": 19,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 6008
+  },
+  {
+   "unit": 19,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 1975
+  },
+  {
+   "unit": 19,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 6008
+  },
+  {
+   "unit": 19,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 1975
+  },
+  {
+   "unit": 19,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 6008
+  },
+  {
+   "unit": 19,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 1975
+  }
+ ],
+ "labels_science": [
+  {
+   "unit": 0,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 28495
+  },
+  {
+   "unit": 0,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 2295
+  },
+  {
+   "unit": 0,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 28495
+  },
+  {
+   "unit": 0,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 2295
+  },
+  {
+   "unit": 0,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 28495
+  },
+  {
+   "unit": 0,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 2295
+  },
+  {
+   "unit": 1,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 975
+  },
+  {
+   "unit": 1,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 23218
+  },
+  {
+   "unit": 1,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 975
+  },
+  {
+   "unit": 1,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 23218
+  },
+  {
+   "unit": 1,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 975
+  },
+  {
+   "unit": 1,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 23218
+  },
+  {
+   "unit": 2,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 24562
+  },
+  {
+   "unit": 2,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 27143
+  },
+  {
+   "unit": 2,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 24562
+  },
+  {
+   "unit": 2,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 27143
+  },
+  {
+   "unit": 2,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 24562
+  },
+  {
+   "unit": 2,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 27143
+  },
+  {
+   "unit": 3,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 12463
+  },
+  {
+   "unit": 3,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 1737
+  },
+  {
+   "unit": 3,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 12463
+  },
+  {
+   "unit": 3,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 1737
+  },
+  {
+   "unit": 3,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 12463
+  },
+  {
+   "unit": 3,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 1737
+  },
+  {
+   "unit": 4,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 29405
+  },
+  {
+   "unit": 4,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 15823
+  },
+  {
+   "unit": 4,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 29405
+  },
+  {
+   "unit": 4,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 15823
+  },
+  {
+   "unit": 4,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 29405
+  },
+  {
+   "unit": 4,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 15823
+  },
+  {
+   "unit": 5,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 9297
+  },
+  {
+   "unit": 5,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 26386
+  },
+  {
+   "unit": 5,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 9297
+  },
+  {
+   "unit": 5,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 26386
+  },
+  {
+   "unit": 5,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 9297
+  },
+  {
+   "unit": 5,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 26386
+  },
+  {
+   "unit": 6,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 11985
+  },
+  {
+   "unit": 6,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 18723
+  },
+  {
+   "unit": 6,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 11985
+  },
+  {
+   "unit": 6,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 18723
+  },
+  {
+   "unit": 6,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 11985
+  },
+  {
+   "unit": 6,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 18723
+  },
+  {
+   "unit": 7,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 29122
+  },
+  {
+   "unit": 7,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 27695
+  },
+  {
+   "unit": 7,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 29122
+  },
+  {
+   "unit": 7,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 27695
+  },
+  {
+   "unit": 7,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 29122
+  },
+  {
+   "unit": 7,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 27695
+  },
+  {
+   "unit": 8,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 19048
+  },
+  {
+   "unit": 8,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 14611
+  },
+  {
+   "unit": 8,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 19048
+  },
+  {
+   "unit": 8,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 14611
+  },
+  {
+   "unit": 8,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 19048
+  },
+  {
+   "unit": 8,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 14611
+  },
+  {
+   "unit": 9,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 8571
+  },
+  {
+   "unit": 9,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 288
+  },
+  {
+   "unit": 9,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 8571
+  },
+  {
+   "unit": 9,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 288
+  },
+  {
+   "unit": 9,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 8571
+  },
+  {
+   "unit": 9,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 288
+  },
+  {
+   "unit": 10,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 4017
+  },
+  {
+   "unit": 10,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 4900
+  },
+  {
+   "unit": 10,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 4017
+  },
+  {
+   "unit": 10,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 4900
+  },
+  {
+   "unit": 10,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 4017
+  },
+  {
+   "unit": 10,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 4900
+  },
+  {
+   "unit": 11,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 29342
+  },
+  {
+   "unit": 11,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 16524
+  },
+  {
+   "unit": 11,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 29342
+  },
+  {
+   "unit": 11,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 16524
+  },
+  {
+   "unit": 11,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 29342
+  },
+  {
+   "unit": 11,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 16524
+  },
+  {
+   "unit": 12,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 28860
+  },
+  {
+   "unit": 12,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 29148
+  },
+  {
+   "unit": 12,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 28860
+  },
+  {
+   "unit": 12,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 29148
+  },
+  {
+   "unit": 12,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 28860
+  },
+  {
+   "unit": 12,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 29148
+  },
+  {
+   "unit": 13,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 1203
+  },
+  {
+   "unit": 13,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 7067
+  },
+  {
+   "unit": 13,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 1203
+  },
+  {
+   "unit": 13,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 7067
+  },
+  {
+   "unit": 13,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 1203
+  },
+  {
+   "unit": 13,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 7067
+  },
+  {
+   "unit": 14,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 28237
+  },
+  {
+   "unit": 14,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 21917
+  },
+  {
+   "unit": 14,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 28237
+  },
+  {
+   "unit": 14,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 21917
+  },
+  {
+   "unit": 14,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 28237
+  },
+  {
+   "unit": 14,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 21917
+  },
+  {
+   "unit": 15,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 1106
+  },
+  {
+   "unit": 15,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 19986
+  },
+  {
+   "unit": 15,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 1106
+  },
+  {
+   "unit": 15,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 19986
+  },
+  {
+   "unit": 15,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 1106
+  },
+  {
+   "unit": 15,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 19986
+  },
+  {
+   "unit": 16,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 4182
+  },
+  {
+   "unit": 16,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 10194
+  },
+  {
+   "unit": 16,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 4182
+  },
+  {
+   "unit": 16,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 10194
+  },
+  {
+   "unit": 16,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 4182
+  },
+  {
+   "unit": 16,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 10194
+  },
+  {
+   "unit": 17,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 25982
+  },
+  {
+   "unit": 17,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 13174
+  },
+  {
+   "unit": 17,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 25982
+  },
+  {
+   "unit": 17,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 13174
+  },
+  {
+   "unit": 17,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 25982
+  },
+  {
+   "unit": 17,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 13174
+  },
+  {
+   "unit": 18,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 21779
+  },
+  {
+   "unit": 18,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 26109
+  },
+  {
+   "unit": 18,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 21779
+  },
+  {
+   "unit": 18,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 26109
+  },
+  {
+   "unit": 18,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 21779
+  },
+  {
+   "unit": 18,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 26109
+  },
+  {
+   "unit": 19,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 20414
+  },
+  {
+   "unit": 19,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 3684
+  },
+  {
+   "unit": 19,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 20414
+  },
+  {
+   "unit": 19,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 3684
+  },
+  {
+   "unit": 19,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 20414
+  },
+  {
+   "unit": 19,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 3684
+  },
+  {
+   "unit": 20,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 12323
+  },
+  {
+   "unit": 20,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 11437
+  },
+  {
+   "unit": 20,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 12323
+  },
+  {
+   "unit": 20,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 11437
+  },
+  {
+   "unit": 20,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 12323
+  },
+  {
+   "unit": 20,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 11437
+  },
+  {
+   "unit": 21,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 26412
+  },
+  {
+   "unit": 21,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 17077
+  },
+  {
+   "unit": 21,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 26412
+  },
+  {
+   "unit": 21,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 17077
+  },
+  {
+   "unit": 21,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 26412
+  },
+  {
+   "unit": 21,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 17077
+  },
+  {
+   "unit": 22,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 27725
+  },
+  {
+   "unit": 22,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 4743
+  },
+  {
+   "unit": 22,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 27725
+  },
+  {
+   "unit": 22,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 4743
+  },
+  {
+   "unit": 22,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 27725
+  },
+  {
+   "unit": 22,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 4743
+  },
+  {
+   "unit": 23,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 13691
+  },
+  {
+   "unit": 23,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 18237
+  },
+  {
+   "unit": 23,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 13691
+  },
+  {
+   "unit": 23,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 18237
+  },
+  {
+   "unit": 23,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 13691
+  },
+  {
+   "unit": 23,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 18237
+  },
+  {
+   "unit": 24,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 223
+  },
+  {
+   "unit": 24,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 3214
+  },
+  {
+   "unit": 24,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 223
+  },
+  {
+   "unit": 24,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 3214
+  },
+  {
+   "unit": 24,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 223
+  },
+  {
+   "unit": 24,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 3214
+  },
+  {
+   "unit": 25,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 28093
+  },
+  {
+   "unit": 25,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 10949
+  },
+  {
+   "unit": 25,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 28093
+  },
+  {
+   "unit": 25,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 10949
+  },
+  {
+   "unit": 25,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 28093
+  },
+  {
+   "unit": 25,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 10949
+  },
+  {
+   "unit": 26,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 27954
+  },
+  {
+   "unit": 26,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 6967
+  },
+  {
+   "unit": 26,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 27954
+  },
+  {
+   "unit": 26,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 6967
+  },
+  {
+   "unit": 26,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 27954
+  },
+  {
+   "unit": 26,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 6967
+  },
+  {
+   "unit": 27,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 26418
+  },
+  {
+   "unit": 27,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 6203
+  },
+  {
+   "unit": 27,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 26418
+  },
+  {
+   "unit": 27,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 6203
+  },
+  {
+   "unit": 27,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 26418
+  },
+  {
+   "unit": 27,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 6203
+  },
+  {
+   "unit": 28,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 16495
+  },
+  {
+   "unit": 28,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 26338
+  },
+  {
+   "unit": 28,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 16495
+  },
+  {
+   "unit": 28,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 26338
+  },
+  {
+   "unit": 28,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 16495
+  },
+  {
+   "unit": 28,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 26338
+  },
+  {
+   "unit": 29,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 2290
+  },
+  {
+   "unit": 29,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 25664
+  },
+  {
+   "unit": 29,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 2290
+  },
+  {
+   "unit": 29,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 25664
+  },
+  {
+   "unit": 29,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 2290
+  },
+  {
+   "unit": 29,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 25664
+  },
+  {
+   "unit": 30,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 10896
+  },
+  {
+   "unit": 30,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 8418
+  },
+  {
+   "unit": 30,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 10896
+  },
+  {
+   "unit": 30,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 8418
+  },
+  {
+   "unit": 30,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 10896
+  },
+  {
+   "unit": 30,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 8418
+  },
+  {
+   "unit": 31,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 22450
+  },
+  {
+   "unit": 31,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 26043
+  },
+  {
+   "unit": 31,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 22450
+  },
+  {
+   "unit": 31,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 26043
+  },
+  {
+   "unit": 31,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 22450
+  },
+  {
+   "unit": 31,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 26043
+  },
+  {
+   "unit": 32,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 4468
+  },
+  {
+   "unit": 32,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 20273
+  },
+  {
+   "unit": 32,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 4468
+  },
+  {
+   "unit": 32,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 20273
+  },
+  {
+   "unit": 32,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 4468
+  },
+  {
+   "unit": 32,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 20273
+  },
+  {
+   "unit": 33,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 5011
+  },
+  {
+   "unit": 33,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 12482
+  },
+  {
+   "unit": 33,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 5011
+  },
+  {
+   "unit": 33,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 12482
+  },
+  {
+   "unit": 33,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 5011
+  },
+  {
+   "unit": 33,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 12482
+  },
+  {
+   "unit": 34,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 19062
+  },
+  {
+   "unit": 34,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 12344
+  },
+  {
+   "unit": 34,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 19062
+  },
+  {
+   "unit": 34,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 12344
+  },
+  {
+   "unit": 34,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 19062
+  },
+  {
+   "unit": 34,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 12344
+  },
+  {
+   "unit": 35,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 5691
+  },
+  {
+   "unit": 35,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 20284
+  },
+  {
+   "unit": 35,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 5691
+  },
+  {
+   "unit": 35,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 20284
+  },
+  {
+   "unit": 35,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 5691
+  },
+  {
+   "unit": 35,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 20284
+  },
+  {
+   "unit": 36,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 10957
+  },
+  {
+   "unit": 36,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 14386
+  },
+  {
+   "unit": 36,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 10957
+  },
+  {
+   "unit": 36,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 14386
+  },
+  {
+   "unit": 36,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 10957
+  },
+  {
+   "unit": 36,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 14386
+  },
+  {
+   "unit": 37,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 28934
+  },
+  {
+   "unit": 37,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 19763
+  },
+  {
+   "unit": 37,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 28934
+  },
+  {
+   "unit": 37,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 19763
+  },
+  {
+   "unit": 37,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 28934
+  },
+  {
+   "unit": 37,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 19763
+  },
+  {
+   "unit": 38,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 7576
+  },
+  {
+   "unit": 38,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 10523
+  },
+  {
+   "unit": 38,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 7576
+  },
+  {
+   "unit": 38,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 10523
+  },
+  {
+   "unit": 38,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 7576
+  },
+  {
+   "unit": 38,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 10523
+  },
+  {
+   "unit": 39,
+   "arm": "CE",
+   "basis": "X",
+   "tau_ns": 13926
+  },
+  {
+   "unit": 39,
+   "arm": "CC",
+   "basis": "X",
+   "tau_ns": 1880
+  },
+  {
+   "unit": 39,
+   "arm": "CE",
+   "basis": "Y",
+   "tau_ns": 13926
+  },
+  {
+   "unit": 39,
+   "arm": "CC",
+   "basis": "Y",
+   "tau_ns": 1880
+  },
+  {
+   "unit": 39,
+   "arm": "CE",
+   "basis": "Z",
+   "tau_ns": 13926
+  },
+  {
+   "unit": 39,
+   "arm": "CC",
+   "basis": "Z",
+   "tau_ns": 1880
+  }
+ ],
+ "fit_gate": {
+  "remaining_at_submit": 181.0,
+  "est": 70.0
+ },
+ "decoder": "tools/h13_cell2_decoder_elder.py (frozen pre-flight)"
+}

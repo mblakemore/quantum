@@ -1,0 +1,161 @@
+{
+ "cell": "H13-Cell6+6b",
+ "prereg": "docs/h13-cell6-6b-merged-prereg-DRAFT-v2-whisper-c5056.md",
+ "account": "IBMQ_ALT3",
+ "backend": "ibm_marrakesh",
+ "job_id": "d9t5esntfhrs73dtgtc0",
+ "shots": 4000,
+ "layout": [
+  54,
+  55,
+  59,
+  75,
+  53
+ ],
+ "layout_score": 0.03148140079573283,
+ "ladder_A": [
+  1,
+  2,
+  4,
+  8
+ ],
+ "ladder_B": [
+  2,
+  4,
+  8
+ ],
+ "labels": [
+  {
+   "tier": "A",
+   "N": 1,
+   "variant": "marked"
+  },
+  {
+   "tier": "A",
+   "N": 1,
+   "variant": "unmarked"
+  },
+  {
+   "tier": "A",
+   "N": 2,
+   "variant": "marked"
+  },
+  {
+   "tier": "A",
+   "N": 2,
+   "variant": "unmarked"
+  },
+  {
+   "tier": "A",
+   "N": 4,
+   "variant": "marked"
+  },
+  {
+   "tier": "A",
+   "N": 4,
+   "variant": "unmarked"
+  },
+  {
+   "tier": "A",
+   "N": 8,
+   "variant": "marked"
+  },
+  {
+   "tier": "A",
+   "N": 8,
+   "variant": "unmarked"
+  },
+  {
+   "tier": "B",
+   "N": 2,
+   "variant": "marked"
+  },
+  {
+   "tier": "B",
+   "N": 2,
+   "variant": "unmarked"
+  },
+  {
+   "tier": "B",
+   "N": 4,
+   "variant": "marked"
+  },
+  {
+   "tier": "B",
+   "N": 4,
+   "variant": "unmarked"
+  },
+  {
+   "tier": "B",
+   "N": 8,
+   "variant": "marked"
+  },
+  {
+   "tier": "B",
+   "N": 8,
+   "variant": "unmarked"
+  },
+  {
+   "tier": "A",
+   "N": 0,
+   "variant": "P1_faithful"
+  },
+  {
+   "tier": "A",
+   "N": 0,
+   "variant": "P2_transparent"
+  },
+  {
+   "tier": "B",
+   "N": 0,
+   "variant": "P1_faithful"
+  },
+  {
+   "tier": "B",
+   "N": 0,
+   "variant": "P2_transparent"
+  },
+  {
+   "tier": "A",
+   "N": 0,
+   "variant": "P3_integrity"
+  }
+ ],
+ "lint": {
+  "f_oblivious_isomorphism": "PASS",
+  "group_sigs": {
+   "A_N1": {
+    "marked": "f0e85816d518ad6b",
+    "unmarked": "f0e85816d518ad6b"
+   },
+   "A_N2": {
+    "marked": "0e0adc4be9759b1f",
+    "unmarked": "0e0adc4be9759b1f"
+   },
+   "A_N4": {
+    "marked": "46b9ca1194242401",
+    "unmarked": "46b9ca1194242401"
+   },
+   "A_N8": {
+    "marked": "075109b6efa343ab",
+    "unmarked": "075109b6efa343ab"
+   },
+   "B_N2": {
+    "marked": "0cc1aeaee8aa4198",
+    "unmarked": "0cc1aeaee8aa4198"
+   },
+   "B_N4": {
+    "marked": "d6346a82472c22b7",
+    "unmarked": "d6346a82472c22b7"
+   },
+   "B_N8": {
+    "marked": "0cd3f822da83c385",
+    "unmarked": "0cd3f822da83c385"
+   }
+  }
+ },
+ "fit_gate": {
+  "remaining_at_submit": 181.0,
+  "est": 55.0
+ }
+}
