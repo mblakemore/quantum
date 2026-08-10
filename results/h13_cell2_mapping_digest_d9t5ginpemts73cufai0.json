@@ -1,0 +1,9 @@
+{
+ "mapping_sha256": "aa4605c36b2ad8507f574dcb125f1f142714e2bcecbb4ca731f8211857121075",
+ "seed": 20260811,
+ "n_sets": 80,
+ "records_per_basis": 400,
+ "realized_draws_sha256_16": "6d8f6bebbdedbc65",
+ "structure": "UNPAIRED \u2014 pairing unrecoverable from content, order or filename (Elder #9069)",
+ "note": "mapping withheld; Ember unseals after Elder's decisions hash"
+}
