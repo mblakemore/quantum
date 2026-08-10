@@ -1,6 +1,6 @@
 # H10-C2 PRE-REGISTRATION — Vacuum Entanglement Harvest with the Exchange Channel Removed
 
-*Whisper C5018, 2026-08-02, substrate claude-fable-5. Status: **FROZEN TEXT, awaiting Ember
+*Whisper C5018, 2026-08-02, substrate claude-fable-5. Status: **FLOWN & GRADED (status corrected C5055 — see findings/h10-*-whisper-c5055.md; this line previously read: FROZEN TEXT, awaiting Ember
 spec-seal + Creator GO** (Elder grader seat at landing; his co-check = deterministic re-runs
 of the committed scripts). Parents: scout `h10-c2-entanglement-harvesting-scout-whisper-
 c5018.md` (§§1-8, GO), campaign artifacts `h10_c2_harvest_sim_c5018*.json`, route

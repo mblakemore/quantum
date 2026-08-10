@@ -26,8 +26,9 @@ clock-consistent branches, zero in clock-inconsistent ones, exhaust passive at 5
 
 ### 2. THE TEMPORAL BATTERY — banking the thermodynamic arrow
 **The Trek frame**: charge a cell now, discharge it across time — store not energy but
-ORDER itself. **What's real underneath**: the H10 ledger's one never-flown cell (B4:
-cold→hot flow from correlations, two qubits) + negative conditional entropy measured
+ORDER itself. **What's real underneath**: the H10 B4 cell (cold→hot flow from correlations — FLOWN C5017,
+NOT HELD: reversal uncertified at 2.3σ but 21.4σ flow-suppression measured, ledger corrected
+C5055, findings/h10-b4-heat-backward-not-held-whisper-c5055.md) + negative conditional entropy measured
 directly (F105: S(B|A) = −0.855 at 42σ) + repeater memory with certified hold time
 (exp163/164, storage echo doubled it). The composition: charge correlations between a
 work qubit and a memory qubit, HOLD through the memory's certified window, then spend

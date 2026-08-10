@@ -220,7 +220,7 @@ circuit. **Wall**: feedforward latency (0.092 E tax) — dodged by reading the c
 post-selection, already proven. **Price**: mid. *Carried from H11 unflown.*
 
 ### ④ A BATTERY THAT STORES THE ARROW OF TIME
-**Trek frame**: bank order now, spend it later. **Real underneath**: H10's never-flown B4 cell
+**Trek frame**: bank order now, spend it later. **Real underneath**: H10's B4 cell (FLOWN C5017, NOT HELD — 21.4σ suppression, not reversal; corrected C5055)
 (cold→hot from correlations) + F105's directly-certified negative conditional entropy + repeater
 memory with a certified hold time. **Price**: cheapest deep-future cell. *Carried, one prereg
 from flight.*

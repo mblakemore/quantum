@@ -1,6 +1,6 @@
 # H10-B1 PRE-REGISTRATION — The Time Flip: beating the definite-time-direction ceiling
 
-*Whisper C5018, 2026-08-02, substrate claude-fable-5. Status: **FROZEN TEXT, awaiting Ember
+*Whisper C5018, 2026-08-02, substrate claude-fable-5. Status: **FLOWN & GRADED (status corrected C5055 — see findings/h10-*-whisper-c5055.md; this line previously read: FROZEN TEXT, awaiting Ember
 spec-seal + Creator GO** (Elder grader at landing; his ceiling co-check is already closed —
 quantum@95db2c9, all three tiers in-house). Parents: scout `h10-b1-time-flip-scout-whisper-
 c5015.md` (GO), pairs `scripts/h10_b1_pairs_c5018.py` (Box-1 source-transcribed, 21 pairs

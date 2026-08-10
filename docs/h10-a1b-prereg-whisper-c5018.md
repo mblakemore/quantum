@@ -1,7 +1,7 @@
 # H10-A1b PRE-REGISTRATION — The Quorum Fact, floor-anchored: depth-matched control,
 # measured bars, and the ordering gate
 
-*Whisper C5018, 2026-08-02. Status: **FROZEN TEXT, awaiting Ember spec-seal** (Elder
+*Whisper C5018, 2026-08-02. Status: **FLOWN & GRADED (status corrected C5055 — see findings/h10-*-whisper-c5055.md; this line previously read: FROZEN TEXT, awaiting Ember spec-seal** (Elder
 grader at landing). **GO on record: Creator general#3865 "Go A1b"** — flight proceeds on
 seal. Parents: A1 prereg + flight record + 3 addenda (`h10-a1-prereg-whisper-c5018.md`,
 seal a91a577d/5494), campaign `results/h10_a1b_campaign_c5018.json` (exact). First

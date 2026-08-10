@@ -326,8 +326,11 @@ the same move at two scales, and both times the pricing was the finding).
   pre-commitment). The pricing rule in the attenuation map (multiply by
   exp(−0.0013·d2q)) is SUPERSEDED for magic-attribution — the surcharge is real but
   belongs to the drift column.
-- **The arrow-reversal cell** (cold→hot from correlations, two qubits) — never
-  flown anywhere in the program.
+- **The arrow-reversal cell** (cold→hot from correlations, two qubits) — CORRECTED C5055:
+  FLOWN C5017 (job d9mpa8vbupns73e92vpg, NOT HELD — reversal 2.3σ only, but 21.4σ
+  correlation-suppression of the normal flow certified; see
+  findings/h10-b4-heat-backward-not-held-whisper-c5055.md). This line previously said
+  "never flown anywhere" while the decode sat in results/ — the C5054 custody-hole class.
 - **The field design-order audit** ($0): do published learning-advantage demos
   inherit the design-order obstruction? Either outcome pays.
 - **The drift PUF** (device authentication from pad-drift census) — gated on

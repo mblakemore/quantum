@@ -1,6 +1,6 @@
 # H10-A1 PRE-REGISTRATION — The Quorum Fact: objectivity with an access-control list
 
-*Whisper C5018, 2026-08-02. Status: **FROZEN TEXT, awaiting Ember spec-seal + Creator GO**
+*Whisper C5018, 2026-08-02. Status: **FLOWN & GRADED (status corrected C5055 — see findings/h10-*-whisper-c5055.md; this line previously read: FROZEN TEXT, awaiting Ember spec-seal + Creator GO**
 (Elder grader at landing). Parents: scout `h10-a1-quorum-fact-scout-whisper-c5018.md` (GO;
 campaign exact), bars `results/h10_a1_prereg_bars_c5018.json`, campaign
 `results/h10_a1_quorum_sim_c5018.json`. Every number computed in committed artifacts. The

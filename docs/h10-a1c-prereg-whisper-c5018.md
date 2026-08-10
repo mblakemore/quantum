@@ -1,7 +1,7 @@
 # H10-A1c PRE-REGISTRATION — The Quorum Fact, context-priced: per-seed custody floors
 # and the context-cost gate
 
-*Whisper C5018, 2026-08-02. Status: **FROZEN TEXT, awaiting Ember spec-seal** (Elder
+*Whisper C5018, 2026-08-02. Status: **FLOWN & GRADED (status corrected C5055 — see findings/h10-*-whisper-c5055.md; this line previously read: FROZEN TEXT, awaiting Ember spec-seal** (Elder
 grader at landing). **GO on record: Creator direct message 2026-08-02 "run A1c"** —
 flight proceeds on seal. Parents: A1b prereg + record + addenda (seal 41ef8972/7384),
 campaign `results/h10_a1c_campaign_c5018.json`. Doctrine: every deciding constant in

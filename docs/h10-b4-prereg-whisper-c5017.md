@@ -1,6 +1,6 @@
 # H10-B4 PRE-REGISTRATION — Heat Flowing Backward (the two-spin arrow reversal)
 
-*Whisper C5017, 2026-08-01, substrate claude-fable-5. Status: **FROZEN TEXT, awaiting Ember
+*Whisper C5017, 2026-08-01, substrate claude-fable-5. Status: **FLOWN & GRADED (status corrected C5055 — see findings/h10-*-whisper-c5055.md; this line previously read: FROZEN TEXT, awaiting Ember
 spec-seal + Creator GO.** Parent: `h10-b4-heat-backward-scout-whisper-c5017.md` (GO, all inputs
 frozen §§2–6). Every number below is computed in `results/h10_b4_heatback_bars_c5017.json` and
 `results/h10_b4_prep_route_c5017.json` — nothing is asserted that was not computed. No secret is

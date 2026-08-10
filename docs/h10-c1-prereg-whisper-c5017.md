@@ -1,6 +1,6 @@
 # H10-C1 PRE-REGISTRATION — The Winding Meter (size-winding f(S), magnitudes AND phases)
 
-*Whisper C5017, 2026-08-01, substrate claude-fable-5. Status: **FROZEN TEXT, awaiting Elder
+*Whisper C5017, 2026-08-01, substrate claude-fable-5. Status: **FLOWN & GRADED (status corrected C5055 — see findings/h10-*-whisper-c5055.md; this line previously read: FROZEN TEXT, awaiting Elder
 co-check + Ember spec-seal + Creator GO.** Parents: scout `h10-c1-bridge-size-winding-scout-
 whisper-c5015.md` (GO with target, SS7-SS10) and route freeze `scripts/h10_c1_rhohalf_route_
 c5017.py`. Every number below is computed in committed artifacts (`results/h10_c1_operating_
