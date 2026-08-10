@@ -1,0 +1,22 @@
+{
+ "flight": "d9sifr8pdb6s73e63140",
+ "seal": "b3fb6cfe08b548fa...",
+ "prereg": "0acd1f8a...",
+ "planted_P": "XZXXIYYYXIZIIYXX",
+ "weight": 12,
+ "estimate_tr2": 0.3064628080052443,
+ "se": 0.0029554732140683513,
+ "sigma_from_zero": 103.69331264666867,
+ "eps_delivered": 0.1845302769512196,
+ "eps_cal_epoch": 0.1494,
+ "eps_nominal": 0.14832,
+ "nulls": {
+  "n": 112,
+  "max_abs": 0.04033470867234797,
+  "consistent_with_zero": true
+ },
+ "fmix_blind_validation": "112 blind probes at shot noise incl weight-1 Z on identity positions {4,9,11,12} revealed only after",
+ "verdict_F1": "PASS",
+ "decisions_sha256": "a0a7f1f3ca2b8d8fe8232b44e0931ba26c178394cc1feb5a08d71e30db06b744",
+ "science_vs_cal_note": "science (w12) amplitude 0.554 > cal (w16) 0.448 \u2014 direction consistent with weight-dependent decoherence (heavier Pauli decoheres more); n=2 weights, mechanism stated not established; conservative direction (T sized to weaker cal reading = oversized, not undersized)"
+}
