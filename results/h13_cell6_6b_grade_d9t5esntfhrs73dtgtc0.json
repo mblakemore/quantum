@@ -1,0 +1,157 @@
+{
+ "job": "d9t5esntfhrs73dtgtc0",
+ "backend": "ibm_marrakesh",
+ "bands": {
+  "A_N1": [
+   0.005,
+   0.93
+  ],
+  "A_N2": [
+   0.235,
+   0.88
+  ],
+  "A_N4": [
+   0.45,
+   0.79
+  ],
+  "A_N8": [
+   0.524,
+   0.71
+  ],
+  "B_N2": [
+   0.227,
+   0.85
+  ],
+  "B_N4": [
+   0.425,
+   0.74
+  ],
+  "B_N8": [
+   0.461,
+   0.63
+  ]
+ },
+ "ladders": {
+  "A_N1_marked": {
+   "eta": 0.0375,
+   "f0call": 0.17375,
+   "fired": 0.78875,
+   "n": 4000
+  },
+  "A_N1_unmarked": {
+   "eta": 0.12425,
+   "f0call": 0.74275,
+   "fired": 0.133,
+   "n": 4000
+  },
+  "A_N2_marked": {
+   "eta": 0.231,
+   "f0call": 0.293,
+   "fired": 0.476,
+   "n": 4000
+  },
+  "A_N2_unmarked": {
+   "eta": 0.2115,
+   "f0call": 0.67375,
+   "fired": 0.11475,
+   "n": 4000
+  },
+  "A_N4_marked": {
+   "eta": 0.45425,
+   "f0call": 0.244,
+   "fired": 0.30175,
+   "n": 4000
+  },
+  "A_N4_unmarked": {
+   "eta": 0.43325,
+   "f0call": 0.481,
+   "fired": 0.08575,
+   "n": 4000
+  },
+  "A_N8_marked": {
+   "eta": 0.64275,
+   "f0call": 0.12575,
+   "fired": 0.2315,
+   "n": 4000
+  },
+  "A_N8_unmarked": {
+   "eta": 0.714,
+   "f0call": 0.1765,
+   "fired": 0.1095,
+   "n": 4000
+  },
+  "B_N2_marked": {
+   "eta": 0.18275,
+   "f0call": 0.12625,
+   "fired": 0.691,
+   "n": 4000
+  },
+  "B_N2_unmarked": {
+   "eta": 0.10625,
+   "f0call": 0.5865,
+   "fired": 0.30725,
+   "n": 4000
+  },
+  "B_N4_marked": {
+   "eta": 0.20675,
+   "f0call": 0.09025,
+   "fired": 0.703,
+   "n": 4000
+  },
+  "B_N4_unmarked": {
+   "eta": 0.2145,
+   "f0call": 0.28125,
+   "fired": 0.50425,
+   "n": 4000
+  },
+  "B_N8_marked": {
+   "eta": 0.2025,
+   "f0call": 0.06925,
+   "fired": 0.72825,
+   "n": 4000
+  },
+  "B_N8_unmarked": {
+   "eta": 0.19675,
+   "f0call": 0.103,
+   "fired": 0.70025,
+   "n": 4000
+  }
+ },
+ "premise": {
+  "A_P1_faithful": {
+   "fire_rate": 0.7665,
+   "r_mean": 0.803,
+   "n": 4000
+  },
+  "A_P2_transparent": {
+   "fire_rate": 0.1435,
+   "r_mean": 0.148,
+   "n": 4000
+  },
+  "B_P1_faithful": {
+   "fire_rate": 0.6895,
+   "r_mean": 0.006,
+   "n": 4000
+  },
+  "B_P2_transparent": {
+   "fire_rate": 0.18725,
+   "r_mean": 0.004,
+   "n": 4000
+  },
+  "A_P3_integrity": {
+   "fire_rate": 0.0135,
+   "r_mean": 0.8225,
+   "n": 4000
+  }
+ },
+ "gates": {
+  "P1_A armed-faithfulness": false,
+  "P1_B armed-faithfulness": false,
+  "P2_A transparency": false,
+  "P2_B transparency": false,
+  "P3_A subroutine integ.": false,
+  "G1_f0_bands": false,
+  "G2_monotone": true,
+  "G4_N1_degenerate": true
+ }
+}
