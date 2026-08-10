@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:title" content="The Sealed Shadow — two copies read a secret one copy cannot">
+<meta property="og:description" content="A sealed weight-12 Pauli hidden among 4^16 possibilities, recovered blind at 104 sigma using 9.3x fewer copies than any single-copy strategy can achieve by theorem. ibm_marrakesh job d9sifr8pdb6s73e63140.">
+<meta name="theme-color" content="#04060c">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sealed Shadow — two copies read what one cannot | The Quantum Museum</title>
+<meta name="description" content="A sealed weight-12 Pauli hidden among 4^16 possibilities, recovered blind at 104 sigma using 9.3x fewer copies than any single-copy strategy can achieve by theorem. ibm_marrakesh job d9sifr8pdb6s73e63140.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a,.audit a,.caveat a,.receipt a{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--violet);font-weight:400}
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 14%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(27px,5.2vw,46px); margin:12px 0 14px; }
+  h1 .hl { color: var(--violet); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:68ch; margin:0 0 14px; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; font-family:var(--mono); font-size:11.5px; }
+  .badge { border:1px solid var(--edge); border-radius:999px; padding:4px 11px; color:var(--ink-2); }
+  .badge b { color:var(--violet); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:14px; padding:5px 12px; }
+  .scope b { color: var(--violet); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  /* Charts scroll, they do not shrink. WCAG 1.4.10 exempts content needing two-dimensional
+     layout from the no-horizontal-scroll rule, so scrolling a chart is sanctioned where
+     shrinking it below legibility is not. No effect above the floor in available width. */
+  figure { margin:0; overflow-x:auto; }
+  svg { width:100%; min-width:460px; height:auto; display:block; }
+  /* The meter is drawn narrow ON PURPOSE so it needs no scroll at 390px — see the
+     comment in meter(). Its own min-width must follow, or the figure scrolls anyway. */
+  #meter { min-width:290px; }
+  .lgd { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:8px; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .lgd span { display:inline-flex; align-items:center; gap:7px; }
+  .lgd i { width:20px; height:0; border-top-width:3px; border-top-style:solid; display:inline-block; }
+  .seg { display:inline-flex; border:1px solid var(--edge); border-radius:12px; overflow:hidden; margin:2px 0 12px; flex-wrap:wrap; }
+  .seg button { font-family:var(--mono); font-size:12.5px; background:none; border:none; color:var(--ink-2); padding:8px 13px; cursor:pointer; }
+  .seg button.on { background:color-mix(in srgb,var(--violet) 16%,transparent); color:var(--violet); font-weight:700; }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .audit { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px dashed var(--edge); margin-top:14px; padding-top:9px; line-height:1.55; }
+  .audit b { color:var(--good); }
+  .caveat { border-left:3px solid var(--violet); background:var(--surface-2); border-radius:0 11px 11px 0; padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.55; }
+  .caveat .ct { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--violet); display:block; margin-bottom:5px; }
+  .caveat b { color:var(--ink); }
+  .quote { border-left:3px solid var(--amber); background:var(--surface-2); border-radius:0 11px 11px 0; padding:14px 17px; margin:14px 0 0; font-size:13.5px; line-height:1.6; }
+  .quote .qt { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); display:block; margin-bottom:7px; }
+  .quote p { margin:0 0 9px; } .quote p:last-child { margin-bottom:0; }
+  .quote b { color:var(--ink); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--violet); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  /* The gate table. Wrapped and focusable for the same reason every table in the museum is:
+     it has a min-width so it scrolls at phone width, and a scrollable region that cannot be
+     focused is unreachable by keyboard (WCAG 2.1.1). */
+  .tbl-wrap { overflow-x:auto; margin:6px 0 0; border:1px solid var(--edge); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; min-width:520px; }
+  caption { caption-side:top; text-align:left; padding:10px 13px 6px; color:var(--ink-3); font-size:11.5px; }
+  th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--edge); vertical-align:top; color:var(--ink-2); }
+  thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface-2); }
+  tbody tr:last-child td { border-bottom:none; }
+  td b { color:var(--ink); }
+  td.held { color:var(--good); font-weight:700; white-space:nowrap; }
+  footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+
+
+  /* SCROLL AFFORDANCE (Dawn). A scrolling chart that LOOKS finished lies by omission: at 390px the
+     anyon-braid receipts chart shows 6 of its 15 bars, with the same axis, the same caption and a
+     bar cut at the edge that scans as a crop rather than a signal — a reader sees a complete chart
+     and never learns the other series exists. The scroll itself is right (an 860-unit viewBox at
+     width:100% collapses labels to ~5px, and WCAG 1.4.10 exempts two-dimensional content); what
+     was missing was telling anyone. Added by script ONLY where a container really overflows, and
+     removed when it stops. Found by LOOKING at a phone render; no scanner names this class. */
+  .scrollhint { margin:6px 0 0; font-family:var(--mono); font-size:12px; color:var(--ink-3);
+                display:flex; align-items:center; gap:7px; }
+  .scrollhint::before, .scrollhint::after { content:""; flex:1; height:1px; background:var(--edge); }
+</style>
+<style>
+  /* min-width:0 OVERRIDES THE INHERITED svg{min-width:460px}. That 460 was the right number for
+     the exhibit whose style block I copied — a decision made for a DIFFERENT chart, imported with
+     the stylesheet. Here it forced the load-bearing element behind a horizontal scroll at 320px,
+     which is DoD 1+ violated on the one element the exhibit exists to show. This chart was
+     designed to fit: 113 bars in a 340-unit viewBox stay legible scaled down, verified by looking
+     at a 320px render rather than by reasoning about it. */
+  #sep{min-width:0}
+  .fam1{fill:var(--amber)} .famh{fill:var(--ink-3)} .planted{fill:var(--pink)}
+  .keyrow{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+  .keyrow i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+  .race{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin-top:10px}
+  .lane{border:1px solid var(--edge);border-radius:10px;padding:10px}
+  .lanebar{height:12px;border-radius:6px;background:var(--panel-2);overflow:hidden;margin-top:6px}
+  .lanefill{height:100%;width:0;transition:width .6s linear}
+  .seal{font-family:var(--mono);font-size:12px;word-break:break-all;color:var(--ink-3)}
+  /* A FILE PATH IS ONE UNBREAKABLE TOKEN. The provenance line pushed the whole page 24px past
+     320px — every horizontal-overflow instance I have found in this museum was a single token
+     that could not wrap, and this exhibit produced one on its first render. overflow-wrap alone
+     is not enough for a path with no spaces; anywhere is what breaks mid-token. */
+  .prov code, .seal code{overflow-wrap:anywhere;word-break:break-word}
+  .arc{border-left:2px solid var(--edge);padding-left:12px;margin-top:10px}
+  .arc h4{margin:10px 0 2px;font-size:13px;color:var(--ink-2)}
+</style>
+</head>
+<body class="w-3">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="back" href="../../index.html">&#8592; The Quantum Museum</a>
+  <span class="wingtag">WING IV &#183; THE ADVANTAGE LADDER</span>
+</header>
+
+<main id="main">
+<h1>The Sealed Shadow</h1>
+<p class="stand">Two copies of a quantum state, measured <em>together</em>, read a sealed secret that
+one copy at a time provably cannot &mdash; using <b>9.3&times; fewer copies</b> than any single-copy
+strategy can achieve, proven blind, on real hardware.</p>
+
+<section class="panel">
+  <h2>The separation</h2>
+  <p>A weight-12 Pauli was sealed before the flight, hidden among 4<sup>16</sup> &#8776; 4.3&nbsp;billion
+  possibilities. Two-copy Bell sampling recovered it. The tall bar is the sealed operator; every other
+  bar is a <em>wrong</em> Pauli, measured through the same pipeline.</p>
+  <figure class="plotwrap" tabindex="0" aria-label="The sealed Pauli recovered at 0.3065, against 112 blind probes: 48 weight-one probes carrying deviations up to 0.0403, and 64 weight-heavy probes at shot noise below 0.0069">
+    <svg id="sep" viewBox="0 0 340 216"></svg>
+  </figure>
+  <div class="keyrow">
+    <span><i class="planted" style="background:var(--pink)"></i>sealed Pauli &#183; 0.3065</span>
+    <span><i style="background:var(--amber)"></i>48 weight-1 probes</span>
+    <span><i style="background:var(--ink-3)"></i>64 weight-heavy probes</span>
+  </div>
+  <div class="verdict"><div class="box">
+    <div class="k">RECOVERED</div><div class="v">0.3065 &#183; 104&#963;</div>
+    <div class="s">tr(P&#961;)&#178;, standard error 0.0030</div></div>
+    <div class="box"><div class="k">SEPARATION</div><div class="v">7.6&times;</div>
+    <div class="s">over the largest artifact in 112 blind probes</div></div>
+  </div>
+  <p class="note"><b>The two probe families are not the same thing, and the chart does not pretend they
+  are.</b> The 64 weight-heavy probes are true shot noise &mdash; largest 0.0069, 2.3&#963;. The 48
+  weight-1 probes carry <em>signed</em> deviations up to 0.0403 at 13.6&#963;, which the grader
+  attributes to cross-copy correlation in the transversal Bell block and records as a registered
+  limitation rather than noise. A negative tr&#178; estimate is an impossible output for any
+  single-copy state property, so the sign itself is the detector. It is 20&ndash;25&times; below the
+  failed flight&rsquo;s signature and does not touch the planted result.</p>
+  <p class="fence"><b>Scope.</b> Single instance, one die, one epoch. The advantage is in <em>copies of
+  &#961; consumed</em> only &mdash; classical post-processing is &#920;(4<sup>n</sup>) on both arms and
+  is excluded from the claim. Not a runtime or total-work advantage. Not sign-learning. Not a
+  below-threshold fault-tolerance result.</p>
+</section>
+
+<section class="panel">
+  <h2>The advantage, as copies spent</h2>
+  <p>Both learners chase the same hidden Pauli. The two-copy learner finishes; the single-copy learner
+  <em>cannot</em> finish at this budget &mdash; not because it is slow, but because a theorem says so.</p>
+  <div class="race">
+    <div class="lane"><div class="k">TWO-COPY &#183; Bell sampling</div>
+      <div class="lanebar"><div class="lanefill" id="f2" style="background:var(--pink)"></div></div>
+      <div class="s" id="l2">207,464 copies &#183; recovered</div></div>
+    <div class="lane"><div class="k">SINGLE-COPY &#183; proven floor</div>
+      <div class="lanebar"><div class="lanefill" id="f1" style="background:var(--ink-4)"></div></div>
+      <div class="s" id="l1">~1,900,000 copies needed &#183; still nowhere</div></div>
+  </div>
+  <button class="btn" id="run" type="button">Run the race</button>
+  <div class="verdict"><div class="box">
+    <div class="k">AS EXECUTED</div><div class="v">9.3&times;</div>
+    <div class="s">fewer copies, at the amplitude the hardware delivered</div></div>
+  </div>
+  <p class="note"><b>We report the smallest number in the chain, not the largest.</b> Nominal
+  14.4&times; &rarr; sizing 14.1&times; &rarr; <b>delivered 9.3&times;</b>. The claim evaluates at
+  <em>delivered</em> amplitude over copies <em>actually spent</em>. The single-copy lane never
+  completes here because completing it would misstate the theorem.</p>
+</section>
+
+<section class="panel">
+  <h2>The seal, and the flight that failed first</h2>
+  <p>The secret was committed before the flight and revealed after, so the result is checkable against
+  timestamps rather than against anyone&rsquo;s word.</p>
+  <p class="seal">commitment &#183; <b>b3fb6cfe08b548fa&hellip;</b><br>revealed &#183;
+  <b>P = XZXXIYYYXIZIIYXX</b> (weight 12)<br>flight &#183; <code>d9sifr8pdb6s73e63140</code></p>
+  <div class="arc">
+    <h4>Flight 1 &mdash; FAILED AS FROZEN</h4>
+    <p>A one-line prep bug left seven qubits un-randomized. The blind weight-1 tripwires localized it to
+    the exact qubits, from sealed data, before anyone could see the answer.</p>
+    <h4>The fix, validated from the blind side</h4>
+    <p>The decode seat &mdash; unable to see the answer &mdash; reported the failure signature absent on
+    identity positions it could not know. The unseal proved it right.</p>
+    <h4>Flight 2 &mdash; the re-fly</h4>
+    <p>A fresh seal bound to a single-use authorization, sized mid-air to the epoch it actually occupied,
+    landing in 109 seconds under budget.</p>
+  </div>
+  <p class="note">A museum that shows only wins teaches that wins are easy. This exhibit&rsquo;s wing
+  also holds a decoder race that this campaign won and then <a href="../decoder-race/">retired by its own
+  red team</a>.</p>
+</section>
+
+<p class="prov">Every number on this page comes from
+<code>results/doorb_refly_grade_n16_elder.json</code> and
+<code>results/doorb_refly_decisions_n16_elder.json</code> &#183; flight
+<code>d9sifr8pdb6s73e63140</code> on <code>ibm_marrakesh</code>. The 112 probe bars are the measured
+per-probe estimates, not an illustration.</p>
+</main>
+
+<script>
+var W1 = [["IIIXIIIIIIIIIIII", -0.0403], ["IIIIIIIIXIIIIIII", -0.0374], ["IIIIIIIIIIXIIIII", -0.0315], ["IIIIIIIIIXIIIIII", 0.0298], ["IIIIIIIIIIIZIIII", 0.0298], ["IIIIIIIIIIIIZIII", 0.0292], ["IXIIIIIIIIIIIIII", -0.0279], ["IIIIIIXIIIIIIIII", -0.0245], ["IIIIIIIIIIIIXIII", 0.019], ["IIIIIIIIZIIIIIII", 0.0158], ["IIIIIXIIIIIIIIII", 0.0155], ["IIIIIIIZIIIIIIII", 0.0144], ["IIIZIIIIIIIIIIII", 0.0131], ["IIIIZIIIIIIIIIII", -0.0121], ["IIIIIIIIIIYIIIII", -0.0117], ["IIIIIIIIYIIIIIII", -0.0097], ["IIIIIIIIIIIIIXII", 0.0097], ["IIZIIIIIIIIIIIII", -0.0094], ["IIIIIIIIIIZIIIII", -0.0092], ["IIIIXIIIIIIIIIII", 0.0088], ["IIIIIIIXIIIIIIII", 0.0088], ["IIIIIIIIIIIXIIII", 0.0079], ["IIIIIZIIIIIIIIII", -0.0073], ["ZIIIIIIIIIIIIIII", 0.0062], ["IIIIIYIIIIIIIIII", 0.0062], ["IIXIIIIIIIIIIIII", 0.006], ["IIIIIIIIIIIIIIIZ", -0.005], ["IIIIIIIIIIIIIIXI", 0.0047], ["IIIIIIIIIIIIIIYI", -0.0044], ["IIIIIIIIIZIIIIII", 0.0043], ["IIIIIIIIIIIIIIIX", 0.0043], ["IIIIIIIYIIIIIIII", -0.0042], ["IIIIIIIIIIIIIYII", -0.0041], ["IIIIIIIIIIIIIIIY", -0.0038], ["IIIIIIZIIIIIIIII", -0.0035], ["IIIIIIIIIYIIIIII", -0.0033], ["IIIIIIIIIIIIYIII", -0.0033], ["YIIIIIIIIIIIIIII", 0.0032], ["IYIIIIIIIIIIIIII", 0.0032], ["IIIIIIYIIIIIIIII", -0.0031], ["IIIIIIIIIIIIIZII", 0.0028], ["IIYIIIIIIIIIIIII", -0.0024], ["XIIIIIIIIIIIIIII", -0.0019], ["IIIIIIIIIIIIIIZI", 0.0018], ["IIIIIIIIIIIYIIII", -0.001], ["IIIIYIIIIIIIIIII", 0.0004], ["IZIIIIIIIIIIIIII", -0.0001], ["IIIYIIIIIIIIIIII", 0.0]];
+var WH = [["ZXIXZIZXZZZZIYIX", -0.0069], ["YZYXYXZZIYZYZXZX", -0.0062], ["IYXIZXIIXIZIZIZX", -0.0059], ["YIZYYXIZZZYYIXYZ", 0.0046], ["ZZXXZYYYZYYYYZXZ", 0.0045], ["ZYIZXZIIYYZZIIYZ", 0.0044], ["ZXIZXIYXZXZXZZYX", 0.0042], ["ZXIZIXXIYZXZYZXZ", 0.0041], ["YZIZZIZZXYYYIIYY", -0.0041], ["YIYZZZIZZIYYXZXY", -0.0039], ["IXXIYZYXYIXYYXZZ", -0.0038], ["IYYXYXYYIXIXXZII", 0.0036], ["IXIXZZZIZIXZYZYI", -0.0035], ["ZXIYYZYYXZXIIIIX", 0.0034], ["YYXZIIZXIYXYZZYZ", 0.0034], ["XYIIXIXIXZZIYZIX", 0.0034], ["IXYYZXIXXYXZYYXX", -0.0032], ["IYXIYXIXXIYYXIZY", 0.0032], ["ZXXYZXYYZYXIXXIY", -0.0031], ["IIIIXIZXXXYIZXXI", 0.0027], ["XYIYZYIYIXYXIZIY", -0.0027], ["IIXYYZIXXIIXIZZZ", 0.0026], ["IXIZIXYYIYXXIXYZ", -0.0026], ["ZXIXIZYXYIYZZZZZ", 0.0025], ["XYIIZZZYXZIIZIZZ", -0.0024], ["YZYIXZIYIXIZZZYX", -0.0024], ["ZYXZYXIIZXYIYXZY", -0.0023], ["XIZXIYZIYZIXIXZI", 0.0022], ["XZZXXYYIYXXXIZZZ", 0.0022], ["IYZZYIZZZIXZZIIZ", -0.0021], ["XYXZIXZYYIXXIXXZ", 0.0021], ["ZXIIIXXYXXXXIIYX", 0.0021], ["YYXIIZZXZYXIYYZZ", 0.0021], ["ZIZIIZXYYYYYYZYZ", 0.002], ["XXZZZZYIIIXIZYZY", -0.002], ["YXZIXXXXIYYZIIYZ", 0.0019], ["ZYIXYXIYIIIZZZXY", 0.0018], ["XXYIYYIIXZXZXYYY", -0.0018], ["IIXYIIYXXYXYIIZZ", 0.0018], ["XXXXIXIYIXZZXYXY", -0.0017], ["XIIIIIIIIYXIIYYI", -0.0017], ["IYXXYYYZIZZYZXZZ", -0.0015], ["YIYIYXXZYYXZXZIX", -0.0014], ["IXXZZZIXXXYIZZII", -0.0013], ["IYYIIXXYIIYZXYYX", 0.0012], ["XYXXYYIZXIXYXIZZ", 0.0011], ["XZXYXIYXIYIXIYYY", -0.001], ["YZZIZIXXYXIIXIXI", -0.0009], ["XIXZIZYXXZXYXZIX", 0.0008], ["ZZXZXZXXYYIXYIIZ", 0.0007], ["ZIXXZYZXIIYIZZZZ", -0.0007], ["IZIIZZIXYYXZIYXY", 0.0006], ["ZYIXIZIYIXZZYZZI", 0.0006], ["YYXXIZXZIYZYIZIX", 0.0005], ["YYZIIZZYYXYIYYYZ", -0.0004], ["YXYXIIZYYZZXZYXI", 0.0004], ["IYIYZYYZZZZYIIYY", -0.0004], ["ZXXIIZXXXXXYIYYX", 0.0004], ["ZZYYXZXYYZIZXIZY", 0.0003], ["IZIXIIXZIXXZZYIZ", 0.0003], ["ZZXIXZXYZYYXIYYI", 0.0002], ["ZYZIXZYYIZIIXYII", 0.0002], ["XIXZXYIZZZYXYXIX", 0.0001], ["IYXZXYYZXIZYXIZY", -0.0001]];
+var PLANTED = 0.3065;
+(function(){
+  var svg=document.getElementById("sep"), NS="http://www.w3.org/2000/svg";
+  var B=176, TOP=24, L=40, R=336, H=B-TOP;
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+  function y(v){ return B - (Math.abs(v)/PLANTED)*H; }
+  el("line",{x1:L-6,y1:B,x2:R,y2:B,stroke:"var(--edge)","stroke-width":1});
+  var t1=el("text",{x:L-9,y:TOP+4,"text-anchor":"end",fill:"var(--ink-3)","font-size":9,"font-family":"var(--mono)"}); t1.textContent="0.31";
+  var t0=el("text",{x:L-9,y:B+4,"text-anchor":"end",fill:"var(--ink-3)","font-size":9,"font-family":"var(--mono)"}); t0.textContent="0";
+  el("rect",{x:L,y:y(PLANTED),width:15,height:B-y(PLANTED),rx:2,class:"planted"});
+  var x=L+21, bw=2.1, gap=0.5;
+  function draw(list,cls){ list.forEach(function(p){
+      var h=Math.max(0.7,B-y(p[1]));
+      var r=el("rect",{x:x,y:B-h,width:bw,height:h,rx:0.8,class:cls});
+      r.appendChild(document.createElementNS(NS,"title")).textContent=p[0]+" = "+p[1];
+      x+=bw+gap; }); }
+  draw(W1,"fam1"); draw(WH,"famh");
+})();
+(function(){
+  var run=document.getElementById("run"), f2=document.getElementById("f2"), f1=document.getElementById("f1");
+  var l2=document.getElementById("l2"), l1=document.getElementById("l1"), on=false;
+  run.addEventListener("click",function(){
+    if(on) return; on=true; f2.style.width="0"; f1.style.width="0";
+    setTimeout(function(){
+      f2.style.width="100%";
+      // 207,464 of ~1,900,000 is ~10.9% of the floor. The single-copy lane stops there and stays:
+      // it has spent every copy the two-copy arm spent and is nowhere, which is the point.
+      f1.style.width="10.9%";
+      l2.textContent="207,464 copies \u00b7 recovered at 104\u03c3";
+      l1.textContent="207,464 copies spent of ~1,900,000 needed \u00b7 cannot finish (theorem)";
+      on=false;
+    },40);
+  });
+})();
+</script>
+</body></html>
