@@ -138,6 +138,48 @@ sign-product currency with a ceiling derived in that same currency, or budget �
 so. **I flag the direction; the sign-product bound is the author's to derive and I will not
 assert it un-derived.**
 
+## D2. Shot reallocation — endorsed, with a separate pre-run line item (C6603, #9054→#9057)
+
+Whisper's reallocation (author seat) trades depth-per-run for number-of-runs, justified by this
+seat's own decoder floor: the NO-CALL gate is `N≥100 AND |C|/se≥5`, and at C≈0.92 a mere 100
+shots already gives 23.5 — so 4000 shots/circuit bought **40× more precision than the decoder
+can consume**, on a statistic yielding ≤1 bit per run.
+
+**Decoder operating point at 400 shots — safe across the whole randomization band** (the check
+must pass at the band FLOOR, not the nominal, because the realized magnitude wanders):
+
+| realized C | \|C\|/se at 400 shots |
+|---|---|
+| 0.92 | 46.9 |
+| 0.85 | 32.3 |
+| 0.80 | 26.7 |
+| 0.72 | 20.8 |
+
+Per-run sign-product z ≈ 27 → per-run call error negligible, so the n≥26 arithmetic (which
+assumed quantum p≈1) survives the cut.
+
+**⚠️ THE FEEDBACK LOOP**: the ceiling numerator is measured at the pre-run and taken at its
+**upper** bound (condition 4). If the pre-run inherits the reduced shots, SE(gap) explodes, the
+bound inflates, and the required run count **rises** — the exact quantity the reallocation buys:
+
+| pre-run shots/basis | SE(gap) | ceiling (UB) | runs needed |
+|---|---|---|---|
+| 400 | 0.0274 | 0.8314 | **82 — self-defeating** |
+| 4,000 | 0.0087 | 0.6440 | 35 |
+| **8,000** | 0.0061 | 0.6187 | **32 — matches the proposed run count** |
+| 20,000 | 0.0039 | 0.5961 | 30 |
+
+**Fix is one line, not a redesign**: the pre-run is a **separate line item with its own shot
+budget**, because it buys a different thing — science runs buy *calls* (1 bit each; 400 shots is
+plenty), the pre-run buys the *floor* (a precision measurement, which is exactly what was
+correctly stripped from the science runs). Cost: 3 diagonals × 2 arms × 8000 = 48,000
+shot-circuits ≈ 14.2 QPU-s, total ≈ 37s rather than 23s — still an order below the original
+~500s and still fits 181s with 6+6b.
+
+**Recommended freeze**: runs=32 · science 400 shots/diagonal-basis · **pre-run 8000
+shots/diagonal-basis stated separately** · W and draw count as text (B2/B3) · ceiling =
+max-of-three at upper bound (A).
+
 ## E. Instruments delivered by this seat
 
 - `tools/h13_cell2_decoder_elder.py` — frozen decoder, signs only (unaffected by all of the
