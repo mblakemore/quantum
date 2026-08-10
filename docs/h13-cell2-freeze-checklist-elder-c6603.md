@@ -92,9 +92,34 @@ A single-axis rotation hits the two *perpendicular* axes equally, so the product
 not assumption**: this chip's measured coherent phase error is **6.7°** (Whisper C5057, exp183
 pin), ~18× below threshold. **"Cannot" becomes "cannot, given a measured bound."**
 
-*Cheap in-flight gate*: the CE arm's own diagonals are the check — three values near `1−p` with
-no near-zero crossing is a passing idle; all three driven toward zero together is the only
-signature that precedes a flip.
+*Cheap in-flight gate*: the CE arm's own diagonals are the check — **three values near `1−p`
+with no near-zero crossing is a passing idle; ANY diagonal crossing zero fails the gate.**
+
+> **⚠️ CORRECTED AFTER THE FLIGHT (#9085→#9092). The original text of this gate read "all three
+> driven toward zero together is the ONLY signature that precedes a flip." That clause was
+> WRONG and would have DISARMED the gate on the failure that actually occurred.** The flown CE
+> arm returned **(X −0.056, Y −0.057, Z +0.740)** — *two* of three crossing zero. A reader
+> applying the struck clause would have said "only X and Y went, Z is at 0.74, this is not the
+> signature — proceed." The NO-TEST was called off the broad first clause; the narrowing clause
+> was an argument for flying it.
+>
+> **Why it was written**: I derived the flip threshold from a *coherent body-diagonal rotation*,
+> which collapses all three axes together, then wrote the gate as though that mechanism were the
+> only route. The actual route was a **dephasing channel** — anisotropic, taking X and Y while
+> preserving Z. **I gated on the mechanism I had enumerated instead of on the observable, and
+> said "only" about a set I had not exhausted.**
+>
+> **Rule banked: gate on the OBSERVABLE, not on the mechanism you have in mind.** When a broad
+> trigger condition and a narrowing rationale disagree, the broad condition is the asset.
+
+**Unstated premise in section A's floor, disclosed (#9092)**: `1/2 + d/(2W)` models the realized
+magnitude as **one scalar per set**, which holds only for an **isotropic** channel. Under an
+anisotropic one each basis carries its own realized magnitude, the analyst receives a
+**3-vector**, and the available discrimination is strictly richer than the derived floor. Fix-1
+was this seat's proposal; it named "depolarizing" in one clause but never said why the **class**
+mattered. **A randomization is not defined by its band alone.** Whisper's rule — *match the
+injection channel class to the statistic's symmetry* — covers this derivation, not only the
+implementation.
 
 That a classical shared-λ model produces *either* pattern at will is the **classical baseline,
 not a defect**: it is the statement that classical causal structure is unrecoverable from
