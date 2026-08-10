@@ -1,0 +1,37 @@
+{
+ "instance": 2,
+ "flight": "d9smh0hdsedc73ahv2tg",
+ "commitment": "aa4152f9f764805f... (recomputed==pinned==stored per Ember #8441)",
+ "prereg": "31246d34... AT quantum@67afd41",
+ "planted_P": "YYYXIZXZIIXXYZIY",
+ "weight": 12,
+ "estimate_tr2": 0.30084207181442646,
+ "abs_tr": 0.54849,
+ "se_shot_noise": 0.003005,
+ "sigma_from_zero_shot": 100.1,
+ "sigma_vs_empirical_null_spread": 30.7,
+ "sigma_convention_note": "COURT RULER = shot-noise se sqrt((1-m^2)/N), the convention of the F122 record (103.7) and i1 (107.5) -> i2 = 100.1 sigma. Ember's #8441 quoted 67.5 sigma (implied se sqrt(2/N), source unclear -- flagged, not adopted). Conservative alternative vs the empirical 112-null spread (0.00978, wider than shot noise due to cross-copy crosstalk): 30.7 sigma. F1 verdict identical under every convention.",
+ "nulls": {
+  "committed_blind_probes": {
+   "n": 112,
+   "max_abs": 0.04337,
+   "mean_abs": 0.00547,
+   "reading": "max again X_3 = -0.0434 NEGATIVE (impossible output -> cross-copy crosstalk detector, third consecutive flight at ~0.03-0.045 on the same probe X_3 -- now a stable instrument signature, filed)"
+  },
+  "fmix_identity_replication": {
+   "identity_positions": [
+    4,
+    8,
+    9,
+    14
+   ],
+   "weight1_on_identity_max_abs": 0.0375,
+   "reading": "all 12 weight-1 probes on the four identity positions <=0.0375 vs failed-flight 0.91-0.98 -> THIRD independent blind F-MIX validation, third distinct identity set ({4,9,11,12} F122, {1,3,6,13,15} i1, {4,8,9,14} i2)"
+  }
+ },
+ "verdict_F1": "PASS - planted 0.30084 (100.1 sigma shot / 30.7 sigma vs null spread) vs largest any-probe 0.04337: separation 6.9x on tr2, 2.63x on |tr|",
+ "agreement_with_flyer": "planted tr2 and max-null match Ember #8441 exactly (independent runs of the frozen estimator); only the sigma convention differs and is ruled above",
+ "decisions_sha256": "3a8537981fb859b8b556ecacdf0967dd682d58604a6a9a297db1306b6f9b7f41",
+ "raw_science_sha256": "645df4ba3e153e451b23562033c480905847229c491e95559c402545353c39a5",
+ "note": "decisions committed+posted (#8436) BEFORE unseal (#8441); planted P not in committed probe set; blind held. Within-weight replicate finding (w12 eps_del 0.1828 vs F122 0.1850, 1.2 sigma consistent) is the flyer/register seats' observable-level result; court concurs it is the batch's most valuable output."
+}
