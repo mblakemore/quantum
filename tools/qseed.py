@@ -19,12 +19,13 @@ localized entirely to the entangled pubs).  Output capped at 0.5 x measured join
 NOT SECRECY: the pool is public in-repo.  The product is PROVENANCE — a seed that provably
 was not shopped: pre-declared purpose, monotone offset, re-draws recorded not blocked.
 """
-import argparse, hashlib, json, math, os, sys
+import argparse, hashlib, json, math, os, subprocess, sys
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 QDIR = os.path.join(ROOT, "qseed")
 LEDGER = os.path.join(QDIR, "ledger.jsonl")
+HAIL = os.environ.get("QSEED_HAIL", "/droid/repos/ship-computer/hail")  # env-overridable so the FAIL-CLOSED path is testable
 SAFETY = 0.5              # frozen in spec sec5; not a tuning surface
 SENTINEL_HMIN = 0.10      # per-shot joint H_min below this => sentinel pub, excluded by rule A2
 SEED_BITS = 256
@@ -142,12 +143,38 @@ def draw(consumer, purpose, dry_run=False):
         print(f"⚠️  RE-DRAW against an existing purpose (prior draws: {[p['i'] for p in prior]}).")
         print("   Not blocked — RECORDED. The ledger is the deterrent.")
     off = idx * seg
+    # ═══ PUBLISH BEFORE REVEAL (Ember re-audit #9165) ═══════════════════════════════════
+    # The previous design PRINTED an instruction to publish the HEAD *after* the seed was
+    # revealed. An anchor written after the outcome is known cannot bind the person who saw
+    # it: draw, skip the post, dislike the seed, truncate, re-draw, publish the SECOND head —
+    # both published heads present in ascending order, audit passes. The deterrent asked the
+    # drawer to voluntarily anchor a draw they intended to discard.
+    # Her fix is the door(b) ordering: RESERVE THE OFFSET PUBLICLY FIRST, THEN COMPUTE.
+    # Fails CLOSED — no publication, no seed. A drawer who publishes and abandons leaves a
+    # VISIBLE GAP at index i, which is the honest artifact rather than a hidden one.
+    # Residual, stated not hidden: killed between the post and the ledger write leaves a
+    # reservation with no entry — LOUD (a gap), not silent (a deletion). Correct direction.
+    prev = _head(led, b["batch_id"])
+    if not dry_run:
+        msg = (f"QSEED RESERVING ledger[{idx}] batch={b['batch_id']} offset={off} "
+               f"prev={prev} consumer={consumer} purpose={purpose!r}")
+        try:
+            r = subprocess.run([HAIL, "post", "general", msg,
+                                "--sender", "whisper", "--class", "fyi"],
+                               capture_output=True, timeout=30)
+            if r.returncode != 0:
+                sys.exit(f"🔴 RESERVATION POST FAILED (rc={r.returncode}) — REFUSING TO DRAW.\n"
+                         f"   A seed with no external anchor is a shoppable seed. Fix the bus, then draw.")
+        except Exception as e:
+            sys.exit(f"🔴 RESERVATION POST FAILED ({type(e).__name__}) — REFUSING TO DRAW.\n"
+                     f"   A seed with no external anchor is a shoppable seed.")
+        print(f"[reserved publicly] ledger[{idx}] prev={prev[:24]}… — anchor exists BEFORE the seed")
     segment = pool[off:off + seg]
     ctx = f"{consumer}|{purpose}|{idx}"
     seed = hashlib.sha256((segment + "|" + ctx).encode()).hexdigest()
     entry = {"i": idx, "consumer": consumer, "purpose": purpose, "batch": b["batch_id"],
              "offset": off, "len": seg, "seed_sha256": hashlib.sha256(seed.encode()).hexdigest(),
-             "prev_sha256": _head(led, b["batch_id"]), "ts": _now()}
+             "prev_sha256": prev, "ts": _now()}
     if dry_run:
         # DRY RUN (Ember #9149): exercises derivation + chain link, CONSUMES NOTHING, WRITES NOTHING.
         # Author's ruling: audit probes MUST use this. A real draw that happens, stays.
@@ -161,10 +188,7 @@ def draw(consumer, purpose, dry_run=False):
     print(f"ledger[{idx}] consumer={consumer} purpose={purpose!r} offset={off} len={seg}")
     print(f"python:  numpy.random.SeedSequence(int('{seed[:16]}…', 16))")
     print(f"js:      uint32 = int(sha256('{seed[:8]}…:<label>').hexdigest()[:8], 16)")
-    nh = _head(_ledger(), b["batch_id"])
-    print(f"HEAD     {nh}")
-    print(f"PUBLISH THIS NOW — the truncation detector only works at a per-draw cadence:")
-    print(f"  hail post general 'QSEED HEAD after ledger[{idx}]: {nh}' --sender whisper --class fyi")
+    print(f"HEAD     {_head(_ledger(), b['batch_id'])}  (reservation for this draw was published BEFORE reveal)")
 
 def audit(expect_head=None):
     b, pool = _load_batch(); led = _ledger(); seg = _segment_bits(b)
