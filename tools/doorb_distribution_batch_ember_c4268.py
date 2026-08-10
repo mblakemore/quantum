@@ -48,18 +48,51 @@ RESERVE_S = 20
 
 
 def tank_seconds():
-    """LIVE read. Never a remembered number — that is the error this batch was nearly sized on."""
-    out = subprocess.run(
-        ["curl", "-s", "-H", f"Authorization: Bearer {open(os.path.expanduser('~/.uhura-key')).read().strip()}",
-         "http://127.0.0.1:8790/resources?kind=qpu_account"],
-        capture_output=True, text=True, timeout=20).stdout
-    d = json.loads(out)
-    for r in d.get("resources", []):
-        if r.get("authorization") == "open" and r.get("state") == "up":
-            b = (r.get("meta") or {}).get("balance_s")
-            if isinstance(b, (int, float)):
-                return float(b)
-    return 0.0
+    """AUTHORITATIVE read, straight from IBM — NOT the registry.
+
+    C4269 DEFECT, found by using this: the first version read `/resources`, which the qpu-feeder
+    samples every 15 minutes. Mid-flight that cache is stale BY CONSTRUCTION — it showed 362s
+    while the live counter said 293s, a 69-SECOND OVERSTATEMENT in the exact direction that
+    green-lights a flight that will not fit.
+
+    This function's whole purpose was to stop sizing from a stale number, and it sized from a
+    stale number. Whisper quoted 480s from memory; I quoted a cache and called it live. A cache
+    is memory with better manners.
+
+    RULE: a SPEND decision reads the authoritative source. The registry is for AWARENESS —
+    dashboards, watches, the age fields that made this visible — never for the gate that
+    authorises irreversible spend. Three API calls across a batch is the correct price.
+    """
+    import re as _re
+    from qiskit_ibm_runtime import QiskitRuntimeService
+    tok = None
+    for line in open("/droid/repos/DC15W/.env"):
+        m = _re.match(r"^IBMQ_ALT3=(.+)$", line.strip())
+        if m:
+            tok = m.group(1).strip().strip('"').strip("'")
+    crn = ("crn:v1:bluemix:public:quantum-computing:us-east:"
+           "a/b290f963c84c4e34a5aa7704b4e39b66:952e28e1-bdbf-4593-aec7-e1520b4218a8::")
+    u = QiskitRuntimeService(channel="ibm_quantum_platform", token=tok, instance=crn).usage()
+    if u.get("usage_limit_reached"):
+        return 0.0            # a flagged account accepts submissions and never runs them
+    return float(u["usage_remaining_seconds"])
+
+
+def registry_seconds():
+    """The CACHED view, kept only to report the gap. Never used for the gate."""
+    try:
+        out = subprocess.run(
+            ["curl", "-s", "-H", f"Authorization: Bearer {open(os.path.expanduser('~/.uhura-key')).read().strip()}",
+             "http://127.0.0.1:8790/resources?kind=qpu_account"],
+            capture_output=True, text=True, timeout=20).stdout
+        for r in json.loads(out).get("resources", []):
+            if r.get("authorization") == "open" and r.get("state") == "up":
+                b = (r.get("meta") or {}).get("balance_s")
+                if isinstance(b, (int, float)):
+                    return float(b)
+    except Exception:
+        pass
+    return None
 
 
 def archive_spent(reason):
@@ -113,6 +146,12 @@ def main():
         # or not three fit — a projection that agrees with itself. Subtracting the estimate makes
         # the dry run answer the actual question: does the LAST instance still have room?
         tank = tank_seconds() - sim_spent
+        cached = registry_seconds()
+        if cached is not None and abs(cached - (tank + sim_spent)) > 5:
+            # Surface the gap rather than silently preferring the right one: a cache that
+            # disagrees with the source is a fact the operator should see, not one to hide.
+            print(f"  [cache-gap] registry {cached:.0f}s vs authoritative {tank + sim_spent:.0f}s "
+                  f"— sizing on the authoritative value")
         need = a.per_instance_estimate + RESERVE_S
         print(f"\n── instance {i}/{a.instances} ──  tank {tank:.0f}s  need ~{need:.0f}s")
         if tank < need:
