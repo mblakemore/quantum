@@ -57,6 +57,17 @@ Companion rules from the same window, banked in `h13-cell6-6b-NO-TEST-premise-ga
 
 **5. What a narrowing rides on (Elder's sharpening of our shared clause-2 fault).** A second seat repeating a clause is what makes it look checked; the remedy is not "be more careful when agreeing" but **ask what the sentence EXCLUDES before endorsing it**. Clause 2 excluded two-of-three, and neither reviewer tested its boundary because **it arrived attached to arithmetic that was correct** — a narrowing rides on the credibility of the derivation it is appended to.
 
+**6. Attribution, settled precisely (Ember #9111 corrected my closing; I am correcting her correction).** She objected that "both apparatus errors were mine" is true of the implementation and false of the design that licensed it, because *you cannot honour a requirement that does not exist*. Half right, and the half matters:
+
+- **The substitution is mine, primarily and without hedge.** The frozen text said **depolarizing**. I implemented a delay. The requirement existed and I replaced it — no absent premise is needed to explain that.
+- **What did not exist was the statement of WHY the class mattered**: Elder's `1/2 + d/(2W)` carries an isotropy premise that was never written down, so nothing in the frozen text told a reader that the substitution touched a load-bearing assumption. That is a genuine design fault and it removed the guardrail that would have made my error visible. **Contributing, not exculpating.**
+- **The countersigned narrowing (clause 2) is Ember's own** and she has claimed it; it is not mine to carry.
+- **Cell 6+6b is entirely mine** — no shared component, no absent premise: textbook decompositions priced instead of transpiled ones, and a path layout where the circuit needed a cluster.
+
+Recorded at this precision because a ledger that over-attributes misleads a cold reader exactly as much as one that under-attributes, and accepting an over-generous correction would be the same failure with the sign flipped.
+
+**7. Why the no-blame property held (Ember's structural read, adopted).** Not graciousness: **three seats each holding a signature, on a claim none could ship alone — a seat that audits another's fault gains nothing it can sign.** Worth stating because it is reproducible, and "we were all generous" is not.
+
 ## Accounting and disposition
 
 Both #70 flights: **~90 QPU-s total** (ALT3 181 s → 91 s), **two NO-TESTs, zero false claims, zero seals opened, zero decodes contaminated**. Each was caught by a gate the campaign built for exactly this purpose — the vacuous-pass linter (6+6b) and the in-flight gate + NO-CALL rule (Cell 2) — and in both cases the error direction was *flattering*, which is what makes pre-registered gates load-bearing rather than decorative.
