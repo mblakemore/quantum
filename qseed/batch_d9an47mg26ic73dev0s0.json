@@ -1,0 +1,126 @@
+{
+ "batch_id": "d9an47mg26ic73dev0s0",
+ "harvested": "2026-08-10T23:35:02.643637+00:00",
+ "backend": "ibm_marrakesh",
+ "admission": {
+  "A1_bell_health": "graded finding required \u2014 F115 (Exp135) W1/W2/W3/G_SENT all PASS",
+  "A2_sentinels_excluded": [
+   0,
+   9
+  ],
+  "A3_provenance": {
+   "job_id": "d9an47mg26ic73dev0s0",
+   "fetched": "2026-08-10T23:35:02.643649+00:00"
+  },
+  "A4_pool_sha256": "fab9626b68330c506984ceae26e6baeef97f769ec6cb8e5ea65e3d4150e96367"
+ },
+ "pubs": [
+  {
+   "pub": 0,
+   "type": "sentinel",
+   "shots": 4000,
+   "bits_per_shot": 2,
+   "joint_hmin_per_shot": 0.006869,
+   "joint_hmin_total": 27.5,
+   "lag1_autocorr": 0.06868,
+   "raw_bits_sha256": "e796f971a75dae368cbe0d0e212b3d767a65a6eb355d9ac29c185f4407e8969b"
+  },
+  {
+   "pub": 1,
+   "type": "data",
+   "shots": 20000,
+   "bits_per_shot": 2,
+   "joint_hmin_per_shot": 1.206229,
+   "joint_hmin_total": 24124.6,
+   "lag1_autocorr": -0.00681,
+   "raw_bits_sha256": "827654e22e0b084c0045b4158ba385480e2cbe81e0316bf4f69cece2f398c61e"
+  },
+  {
+   "pub": 2,
+   "type": "data",
+   "shots": 20000,
+   "bits_per_shot": 2,
+   "joint_hmin_per_shot": 0.233278,
+   "joint_hmin_total": 4665.6,
+   "lag1_autocorr": -0.01029,
+   "raw_bits_sha256": "44afd9e98b4bd9218b0c63426b258944d02593456b62dcf98b49a79e3c2929f3"
+  },
+  {
+   "pub": 3,
+   "type": "data",
+   "shots": 20000,
+   "bits_per_shot": 2,
+   "joint_hmin_per_shot": 1.209562,
+   "joint_hmin_total": 24191.2,
+   "lag1_autocorr": -0.003,
+   "raw_bits_sha256": "050ff52cc31b26a05aab054889e7b32a67f30ed39fc84112bc60dbceba233726"
+  },
+  {
+   "pub": 4,
+   "type": "data",
+   "shots": 20000,
+   "bits_per_shot": 2,
+   "joint_hmin_per_shot": 0.233617,
+   "joint_hmin_total": 4672.3,
+   "lag1_autocorr": 0.01014,
+   "raw_bits_sha256": "48a2e5bfbb0491528004c2f342ca6bf18ce141e091c889dfaf653430b7d79310"
+  },
+  {
+   "pub": 5,
+   "type": "data",
+   "shots": 20000,
+   "bits_per_shot": 2,
+   "joint_hmin_per_shot": 1.235484,
+   "joint_hmin_total": 24709.7,
+   "lag1_autocorr": 0.0009,
+   "raw_bits_sha256": "6da611f59ca1a522fa396c49b8bdedb1844b92b3f08ba458ccf7f3d20ffcfd7e"
+  },
+  {
+   "pub": 6,
+   "type": "data",
+   "shots": 20000,
+   "bits_per_shot": 2,
+   "joint_hmin_per_shot": 1.183277,
+   "joint_hmin_total": 23665.5,
+   "lag1_autocorr": -0.00374,
+   "raw_bits_sha256": "0e42b8edc1cbb474d17c06d4c0aa530236755ddeb9e5d36564c1611771d49d2b"
+  },
+  {
+   "pub": 7,
+   "type": "data",
+   "shots": 20000,
+   "bits_per_shot": 2,
+   "joint_hmin_per_shot": 1.205563,
+   "joint_hmin_total": 24111.3,
+   "lag1_autocorr": 0.00057,
+   "raw_bits_sha256": "e32e4edbe8da2eeca8264099b4ba3b83854a871c9277601e05bdfb8e5bd33e32"
+  },
+  {
+   "pub": 8,
+   "type": "data",
+   "shots": 20000,
+   "bits_per_shot": 2,
+   "joint_hmin_per_shot": 1.206063,
+   "joint_hmin_total": 24121.3,
+   "lag1_autocorr": 0.00377,
+   "raw_bits_sha256": "83870cb0cce7a5a5686501f84f92d6e56e500036c066dccf374b82f8aa1b35a6"
+  },
+  {
+   "pub": 9,
+   "type": "sentinel",
+   "shots": 4000,
+   "bits_per_shot": 2,
+   "joint_hmin_per_shot": 0.018147,
+   "joint_hmin_total": 72.6,
+   "lag1_autocorr": -0.00203,
+   "raw_bits_sha256": "60f680565b2c6f6a6d7c013ed2b36fad230c29abd2fd64a4f1d452eeddf43872"
+  }
+ ],
+ "totals": {
+  "data_bits": 320000,
+  "measured_joint_hmin": 154261.4,
+  "safety_factor": 0.5,
+  "issuable_bits": 77130,
+  "max_seeds": 301
+ }
+}
