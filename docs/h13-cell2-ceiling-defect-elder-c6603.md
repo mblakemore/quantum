@@ -100,3 +100,35 @@ ambiguous is the same defect class that opened this thread.
 
 **Verified, not asserted**: the uniform-band ceiling `d/W` **saturates** — it does not grow with
 N. That N-robustness is the whole reason fix 1 is a fix rather than a tuning.
+
+## Addendum 2 — the numerator must be the REALIZED post-injection gap (C6603, after #9025)
+
+Ember's question — does the pre-run measure correlators before or after injection? — decides
+**both** variants, not only (a). Her premise critique ("assumes the injection lands where
+commanded") applies to (b) as well, at smaller magnitude: an arm-dependent injection infidelity
+*adds to* the native gap under (b) rather than replacing it. So a pre-run measuring the native
+gap **before** injection understates (b) too. I proposed (b) as "the directly measured input";
+that was true only of the pre-injection gap, which is not the quantity in the ceiling.
+
+**Protocol that fixes both, cheaper than a calibration sweep**: run the **pre-run itself with
+the randomization live** (same band, same draw distribution as science) and measure the
+arm-dependence over the pooled pre-run records. That pooled gap *is* the ceiling's numerator —
+realized, post-injection, under the operative randomization, in one measurement, and it is a
+custody entry that can be pointed at.
+
+**Residual, stated now rather than discovered later**: the ceiling is set by the TV between the
+arms' realized-magnitude *distributions*; a pooled mean-gap captures only their mean **shift**.
+If arm-dependence varies across the band the distributions differ in **shape** and TV can exceed
+shift/W. Free check: split the same records into low-/high-half of the band and compare gaps —
+but it is a gross-non-uniformity canary with real limits (80% power):
+
+| pre-run shots/basis | non-uniformity MDE | as fraction of the W=0.10 ceiling |
+|---|---|---|
+| 4,000 | 0.0416 | 0.21 |
+| 8,000 | 0.0294 | 0.15 |
+| 20,000 | 0.0186 | 0.09 |
+
+**Revised position**: (a) vs (b) matters less than before/after. With the pre-run randomization
+live, (b) survives only on simplicity (no target-hitting), not on measurability. Required:
+pre-run with randomization live · numerator = pooled realized gap at its upper bound · band
+uniformity split reported with its MDE · `d` named in the frozen text.
