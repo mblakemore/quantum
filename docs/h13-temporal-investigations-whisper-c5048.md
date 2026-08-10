@@ -51,7 +51,7 @@ Standing planning constants inherited: ~1000-CZ uniform-noise wall (F5) · ~475 
 **Certifies as**: blind structure-call success above the enumerated 50% floor at ≥5σ **with the matched-statistics premise gate passing first**; claim card with floor fields; attack_preflight run pre-claim (this is the arc's only advantage-class claim).
 **Why it's ours**: this is the Pearl seat's signature experiment — Rung-2 knowledge from Rung-1 data, impossible classically, and the constructive counterpart to C4587's demonstrated blindness.
 
-### Cell 3 — THE TEMPORAL NEGATIVITY METER *(the correlation space cannot hold)*
+### Cell 3 — THE TEMPORAL NEGATIVITY METER *(the correlation space cannot hold)* — ✅ CERTIFIED C5048 (min-eig −0.478, 293σ; `findings/h13-cell3-temporal-negativity-whisper-c5048.md`)
 
 **Trek frame**: DTI forensics on a correlation record: certify it lived in **time** (one system, two moments) rather than **space** (two systems) — because no physical state could carry it.
 **What's real underneath**: the pseudo-density matrix (Fitzsimons–Jones–Vedral): R = ¼ Σ ⟨σᵢσⱼ⟩ σᵢ⊗σⱼ from sequential measurements of one qubit at two times. Under identity evolution ⟨XX⟩=⟨YY⟩=⟨ZZ⟩=+1 and R has eigenvalue −½ — **a density matrix no state can have**. Negativity is a quantitative temporal-correlation witness; zero corpus hits (full-corpus grep).
@@ -70,7 +70,7 @@ Standing planning constants inherited: ~1000-CZ uniform-noise wall (F5) · ~475 
 **Price class**: cheap.
 **Certifies as**: hit-rate(past+future) − hit-rate(past) inside a pre-registered band at ≥5σ, tracking the two-time formula; postselection keep-fractions printed.
 
-### Cell 5 — THE IMPOSSIBLE CENSUS *(pigeonhole + Hardy: events the bookkeeping forbids)*
+### Cell 5 — THE IMPOSSIBLE CENSUS *(pigeonhole + Hardy: events the bookkeeping forbids)* — ◑ HARDY LEG CERTIFIED C5048 (8.7%, 15.7σ; `findings/h13-cell5-hardy-whisper-c5048.md`); pigeonhole leg STILL OPEN
 
 **Trek frame**: two short case files. (a) A crew manifest that doesn't add up: three officers, two cabins, and every pair inspected bunks separately. (b) An event with probability zero on every classical accounting, logged at 9%.
 **What's real underneath**: the quantum pigeonhole effect (Aharonov et al., PNAS 2016) — pre-selected |+++⟩, post-selected in the conjugate basis, every *pair* found in different boxes; and Hardy's paradox (1992) — nonlocality **without inequalities**: three joint probabilities pinned at ~0 force a fourth to 0 classically, yet QM delivers it at ≈9%. Zero corpus hits for both; Hardy fills the gap between CHSH (inequality) and magic square (all-or-nothing) in the no-go wing.
@@ -114,13 +114,37 @@ Standing planning constants inherited: ~1000-CZ uniform-noise wall (F5) · ~475 
 | Order | Cell | Price | Genre | Why here |
 |---|---|---|---|---|
 | 0 | Tier 0 (T0.1–T0.4) | $0 | design | H11's front-of-queue rule; three cells gated on it |
-| 1 | 3 — Temporal Negativity Meter | cheap | instrument | cheapest flight, new formalism, shared instrument with Cell 2 |
+| 1 | 3 — Temporal Negativity Meter ✅ FLOWN | cheap | instrument | cheapest flight, new formalism, shared instrument with Cell 2 |
 | 2 | 6 — Silent Tripwire | cheap | acquisition | executes H12 Side-B's standing order; F102 kit reuse |
 | 3 | 2 — Causal Compass ⭐ | cheap | **advantage** | the flagship; flies only after T0.3 + claim card + attack_preflight |
-| 4 | 5 — Impossible Census | cheap | foundations | fills the Hardy/pigeonhole gap in the no-go wing |
+| 4 | 5 — Impossible Census ◑ HARDY FLOWN | cheap | foundations | fills the Hardy/pigeonhole gap; pigeonhole leg still open |
 | 5 | 4 — Hindsight Meter | cheap | law-match | quantifies what the quartet demonstrated |
 | 6 | 7 — Speed of Subspace | cheap-mid | instrument | new standing constant + first purpose-built constants-vs-weather datapoint |
 | 7 | 1 — Kelvin Timeline | mid | foundations | wildest; flies only after T0.2 GO |
+
+## C5048 update — progress, the what-else menu, and new directions *(Creator ask, 2026-08-10)*
+
+**Flown so far (2 of 7):** Cell 3 ✅ CERTIFIED (−0.478, 293σ); Cell 5 ◑ Hardy leg CERTIFIED (8.7%, 15.7σ), **pigeonhole leg still open**.
+
+**Unflown backlog — the literal "what else could we run" (all designed, some Tier-0-gated):**
+- **Cell 2 — Causal Compass ⭐** — the flagship and the arc's *only* advantage-class claim; needs T0.3 GO + full claim-card/attack_preflight/3-of-3 court. Highest value, highest cost.
+- **Cell 6 — Silent Tripwire** — interaction-free measurement; the acquisition H12 Side-B ordered; F102 QND-kit reuse (low build risk); cheap.
+- **Cell 4 — Hindsight Meter** — retrodiction-beats-prediction; intra-QM law-match (not an advantage claim).
+- **Cell 7 — Speed of Subspace** — Lieb–Robinson cone / emergent causality; cheap-mid.
+- **Cell 1 — Kelvin Timeline** — Deutsch-vs-P-CTC; wildest; needs T0.2 GO.
+- Plus **Cell 5's pigeonhole leg** and the **anti-Zeno crossover** reserve.
+
+**Candidate NEW directions (F-arc `already-built.js` checked C5048 — the C5011 discipline, run before calling anything new):**
+- **Leggett–Garg / macrorealism** — ✗ NOT new. Already **Exp186** (macrorealism violated 24σ), and already carried as "CLAIMED — excluded" in the T0.1 ledger below; the F-arc check re-confirmed it. Do not re-propose.
+- **Quantum switch / indefinite causal order** — ~ partly ours: **F73** (causal-order witness survives a classical mixture of definite orders) exists but is a **SIM** result. The open delta is a **hardware causal-non-separability witness** — distinct from Cell 2 (causal non-separability ≠ cause-vs-common-cause). Promotable to a **candidate Cell 8**, F73's sim as launch pad. The arc's missing "causality" centerpiece.
+- **Temporal steering** (temporal analog of EPR-steering) — ? top rediscovery hit was Cell 3 (adjacent, not a match); plausibly a *distinct* certificate but needs the full rediscovery pass before promotion.
+- **Quantum Cheshire cat / anomalous weak values** — ? weak-value machinery was used in F101 (P-CTC backaction), but the Cheshire separation itself may be open; needs a closer check before promotion.
+
+**Budget reality (live read C5048hm, 2026-08-10):** only usable free tank is **ALT3 = 181 QPU-seconds**; ALT/ALT2 = 0 (self-heal ~28d on the rolling window); paid accounts (whisper-de 63, WhisperPaid 10) off-limits without Creator authorization.
+- **Fits ~181s now:** one *cheap* cell (Cell 6 or Cell 7) **OR** the door(b) i3 seal (`338343d8`) — they compete for the same tank; the i3 fit is the flight's fit-gate call at delivered-ε, not assertable from the balance.
+- **Needs a refill/top-up:** flagship Cell 2 (full court is not cheap), Cell 1 (gated), and any of the new hardware ideas incl. the quantum switch.
+
+**Recommendation:** if the 181s go to H13 over door(b), **Cell 6 (Silent Tripwire)** is best value — pre-ordered acquisition, F102-kit reuse, cheap, genuinely weird. Tee up the **hardware quantum switch (candidate Cell 8)** for the next refill as the causality centerpiece. $0-now next steps offered: a Tier-0 design study + budget estimate for Cell 6 (does it truly fit 181s?), and the full rediscovery pass on the quantum-switch idea to confirm the open delta.
 
 ## Honesty fences (before any flight)
 
@@ -158,6 +182,10 @@ Depth ceilings inherited (~475 interferometric / ~250 many-body / ~1000 CZ / ~15
 | Lieb–Robinson cone | one incidental citation | fresh → Cell 7 |
 | Anti-Zeno crossover | zero | fresh — held in reserve (natural F102 extension if Cell 6 under-runs its window) |
 | MIPT | phrase-level false positives only | fresh but **excluded** (see boundaries) |
+| Quantum switch / indefinite causal order *(C5048 F-arc)* | **F73** (causal-order witness survives classical mixture — **SIM**) | hardware leg OPEN → candidate **Cell 8** |
+| Temporal steering *(C5048 F-arc)* | Cell 3 adjacent (no exact hit) | needs full rediscovery pass before promotion |
+| Quantum Cheshire cat / anomalous weak values *(C5048 F-arc)* | F101 (weak-value machinery, P-CTC backaction) | separation may be open; needs closer check |
+| Leggett–Garg *(C5048 F-arc re-confirm)* | Exp186 (24σ) | already CLAIMED (row 1 above) — **not new** |
 
 ## Museum seeds (for Dawn, when findings land)
 
