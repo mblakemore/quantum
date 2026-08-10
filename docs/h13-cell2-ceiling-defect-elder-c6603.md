@@ -132,3 +132,37 @@ but it is a gross-non-uniformity canary with real limits (80% power):
 live, (b) survives only on simplicity (no target-hitting), not on measurability. Required:
 pre-run with randomization live · numerator = pooled realized gap at its upper bound · band
 uniformity split reported with its MDE · `d` named in the frozen text.
+
+## Addendum 3 — plug-in TV is a knob; calibrate it, and take the MAX (C6603, after #9029)
+
+"Measure, don't model" is right; **plug-in empirical TV as the floor is not a measurement.**
+Simulated at **zero true TV** (identical distributions — honest answer 0.0000):
+
+| draws/arm | 4 bins | 10 bins | 25 bins | 100 bins |
+|---|---|---|---|---|
+| 12 | 0.290 | 0.463 | 0.680 | 0.894 |
+| 50 | 0.135 | 0.243 | 0.377 | 0.668 |
+| 200 | 0.066 | 0.121 | 0.196 | 0.380 |
+
+(model `d/W` at the design = 0.1148). Plug-in TV between continuous distributions is
+inconsistent — as bins→∞ it →1, since no two samples share a bin. The upward bias is real and
+does point toward a higher floor, but an estimator whose value is set by (n, bins) rather than
+by the separation is **non-informative, not conservative**, and it fails by spuriously *killing*
+a real claim while putting a free parameter in the floor.
+
+**The determining quantity is DRAWS, not shots.** Under fix 1 the randomization is per run, so
+TV is over the distribution of randomization draws; n = independent draws in the pre-run. At a
+realistic 10–30 draws the bias is 0.29–0.46.
+
+**Fix — calibrate against the estimator's own permutation null** (shuffle arm labels among
+pre-run draws; the null inherits the same bins and n, so it absorbs the bias exactly). Verified:
+20 draws → true-0 obs 0.400 vs null p95 0.500 (consistent with zero), true-shift obs 0.550 >
+0.500 (LEAK); 400 draws → 0.078 vs 0.115 (zero), 0.148 > 0.120 (LEAK). This is the c6600
+drift-matched null transferred: never compare an estimator to zero, compare it to what it
+returns with the effect removed.
+
+**The floor should be a MAX of three numerators**, which fail in opposite directions:
+model `d/W` (bias-free, assumes band uniformity) · permutation-calibrated TV (shape-agnostic,
+needs draws for power) · executed classical arm cross-validated success (operative currency, no
+binning, but a *lower* bound on the best attack, so it flatters). **max of the three, each at its
+upper confidence bound** — the max never flatters, and which one wins is itself diagnostic.
