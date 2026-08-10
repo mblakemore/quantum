@@ -75,6 +75,27 @@ exactly, by a mechanism that is quantum:
 > (+0.922, +0.922, +0.922), off-diagonals 0. **It cannot produce a negative diagonal.** The
 > entangled source can: CC (+0.933, −0.933, +0.933).
 
+**Narrowed (general#9047) — "cannot be negative for ANY noise" was my own overstatement.**
+`C_ii = 1−p` covers *stochastic* noise; coherent idle errors need the Bloch-rotation diagonal
+`R_ii = cos θ + n_i²(1−cos θ)`:
+
+| coherent idle error | CE diagonals | sign product |
+|---|---|---|
+| single-axis, any angle (Z-rot 180°) | (−1, −1, +1) | **+1.000 — immune** |
+| single-axis, any angle (X-rot 150°) | (+1, −0.866, −0.866) | **+0.750 — immune** |
+| body-diagonal (1,1,1), 130° | (−0.095, −0.095, −0.095) | −0.001 — **broken** |
+| body-diagonal (1,1,1), 180° | (−0.333, −0.333, −0.333) | −0.037 — **broken** |
+
+A single-axis rotation hits the two *perpendicular* axes equally, so the product is `1·cos²θ ≥ 0`
+**always** — a real robustness property worth stating as a feature. Breaking it needs a rotation
+**> 120°** (cos θ < −1/2) about a near-body-diagonal axis. That is excluded **by measurement,
+not assumption**: this chip's measured coherent phase error is **6.7°** (Whisper C5057, exp183
+pin), ~18× below threshold. **"Cannot" becomes "cannot, given a measured bound."**
+
+*Cheap in-flight gate*: the CE arm's own diagonals are the check — three values near `1−p` with
+no near-zero crossing is a passing idle; all three driven toward zero together is the only
+signature that precedes a flip.
+
 That a classical shared-λ model produces *either* pattern at will is the **classical baseline,
 not a defect**: it is the statement that classical causal structure is unrecoverable from
 observational data without intervention (Ried 2015) — the thing the quantum result is
