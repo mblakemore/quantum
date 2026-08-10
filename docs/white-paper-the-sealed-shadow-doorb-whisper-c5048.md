@@ -4,7 +4,7 @@
 
 **Author**: Whisper (DC15W), C5048 (2026-08-10) · **Substrate**: claude-fable-5
 **Campaign**: Autonomous Characterization of IBM Heron-generation hardware (May 2026–)
-**Result codename**: door (b) · **F-number**: pending (Ember, numbering seat)
+**Result codename**: door (b) · **F-number**: **F122** (Ember, numbering seat — adjacent to F119/F120/F121: the third attempt at a learning advantage, and the first that survived)
 **Status**: WIN — F1 PASS, 104σ. Survived its own [adversarial audit](adversarial-audit-doorb-refly-whisper-c5048.md); cleared to travel.
 
 > **On the name.** "Door (b)" is an internal codename from the design phase. For anything public this document proposes **"The Sealed Shadow"** — the task is *Pauli shadow tomography*, and the methodological heart is that the secret is *sealed* and the grading is *blind*. Alternatives offered for the Creator's choice: *"Two Copies, One Secret"* (accessible), *"The Memory Advantage, Sealed"* (literal), or the journal-register descriptive title above. The rest of this paper uses "the Sealed Shadow / door (b)" interchangeably.
@@ -48,7 +48,7 @@ The zero-2q prep had a second dividend that closed a leak channel (§4): because
 
 ## 4. The protocol — designed so we cannot fool ourselves
 
-Five disciplines carry the honesty, each with an incident behind it. All are checkable against git and bus timestamps rather than anyone's word.
+Five disciplines make every step checkable against an external record — git and the ship's-computer bus — rather than against anyone's word. Each has an incident behind it.
 
 1. **Sealed commitment.** P is drawn and its SHA-256 commitment `b3fb6cfe08b548fa…` is git-pinned *before* submission, binding the frozen-prereg hash `0acd1f8a`. The identity string `XZXXIYYYXIZIIYXX` (weight 12) is not revealed until after grading; the flight manifest carries **no P and no draws**.
 
@@ -68,7 +68,7 @@ The Sealed Shadow's most distinctive feature is that it **failed first, on the r
 
 **Flight 1 (seal `4a6b9f73`, P=`IIYIYIZIYIZZZIXZ`) — FAILED AS FROZEN.** The prep drew the biased sign only over *non-identity* qubit positions; the identity-position qubits flew *constant* (|0⟩ every shot) instead of maximally mixed. The delivered state was therefore |0…0⟩ ⊗ (planted direction), which is **not the hard family the floor is proven over** — a state with pure disclosed qubits violates the theorem's premise. The court's seeded weight-1 tripwire probes read **0.91–0.98 on exactly the seven identity positions**, localizing the defect to the qubit set from the sealed record alone, before the unseal named which qubits it would incriminate. Graded FAIL-AS-FROZEN, posted in the same words a pass would have used.
 
-**The fix, and its blind validation.** The bug was one line (randomize *all* positions, not just non-identity). Rather than trust an inspection of the author's own prep code, the fix got a can-fire gate — **F-MIX**: every qubit's reduced state must be maximally mixed except the planted directions, with a *buggy control arm that must fire* (it reads 1.000) and a fixed arm that must pass (0.015). Then — the move an author cannot make for themselves — the fix was **validated from the blind side**: on Flight 2, before any unseal, the decode seat reported the failure signature *absent* on the identity positions {4, 9, 11, 12}, positions it could not know. The unseal proved it right. F-MIX's guarantee became a *measurement* taken while the answer was still sealed.
+**The fix, and its blind validation.** The bug was one line (randomize *all* positions, not just non-identity). Rather than trust an inspection of the author's own prep code, the fix got a can-fire gate — **F-MIX**: every qubit's reduced state must be maximally mixed except the planted directions, with a *buggy control arm that must fire* (it reads 1.000) and a fixed arm that must pass (0.015). Then — the move an author cannot make for themselves — the fix was **validated from the blind side**: on Flight 2, before any unseal, the decode seat reported the **0.91–0.98 failure signature absent** — the residual ~0.03 deviations appear on identity and non-identity positions *alike* (the largest, −0.0403, sits on a non-identity position and is negative; see R2, §7), i.e. the identity qubits are **no longer distinguishable from the rest**, which is exactly what the fix guarantees. This reading was committed against positions {4, 9, 11, 12} the decode seat could not know; the unseal proved it right. F-MIX's guarantee became a *measurement* taken while the answer was still sealed. (An earlier phrasing of this reading said "absent *on* the identity positions," which invites "nothing is there" — ~0.03 is there; it is simply no longer concentrated. Corrected against the decode record.)
 
 **Flight 2 (seal `b3fb6cfe`, P=`XZXXIYYYXIZIIYXX`, weight 12) — WIN.** 22 chunked jobs on `ibm_marrakesh`, 103,732 Bell shots + 2,000 calibration rows, all gates green (G-DECODE 5.55e-16, F-BIAS/F-IND/F-MIX fire correctly, G-CRN/G-BACKEND/G-FIT, G-SEAL matches the pinned commitment). Billed **109 seconds** against a 176-second estimate — *under*, where the predecessor's many-rows-few-shots load once overran its model 4.3× and exhausted a paid tank with zero completed jobs.
 
@@ -107,7 +107,7 @@ Full detail: [adversarial-audit-doorb-refly-whisper-c5048.md](adversarial-audit-
 
 ## 8. What this is NOT, and how it sits beside the two claims we retired
 
-The Sealed Shadow's credibility rests on the campaign having executed *its own* biggest claims. It is the honest counterpart to two funerals:
+The Sealed Shadow's standing rests on the campaign having executed *its own* biggest claims. It is what the campaign's advantage standard produces when a claim survives it — the same standard that buried the two below:
 
 - **NOT a runtime or total-work advantage.** Classical post-processing is Θ(4ⁿ) on **both** arms and is excluded from the claim; the advantage is in *copies of ρ consumed* only. This is stated in the prereg's one-sentence claim precisely because **F121** died on that slip — its "476× runtime win" priced *simulating the circuit*, and the problem itself fell to a 41-query classical solve in 0.25 ms. F121 as a runtime advantage: RETIRED, by our own red team, pre-submission.
 - **NOT F119, and structurally its inverse.** **F119** (the first learning-advantage attempt) was SUPERSEDED-as-executed: its delivered flight leaked the secret through a fixed-basis-per-row artifact, and its (3/2)ⁿ floor was an *open conjecture*, not a theorem. The Sealed Shadow fixes both: the delivery is fenced (F-IND/F-MIX, blind-validated), and the floor is **proven in print** (Chen–Gong–Ye). Where F119's first flight leaked, the Sealed Shadow's first flight *failed loudly and was caught*; where F119's floor was open, this one is closed.
