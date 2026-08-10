@@ -75,6 +75,32 @@
     border:1.5px solid var(--hair-2);color:var(--ink-2);background:var(--panel-2);cursor:pointer;
     transition:transform .14s ease, box-shadow .14s ease, border-color .12s;margin-top:14px}
   .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--violet);color:var(--violet)}
+  /* ---- the presentation layer this page shipped WITHOUT (cycle 87, board task#74) ----------
+     Ten classes were used in the body with no rule anywhere in this file, so the verdict card
+     rendered as three lines of plain text and the scope fence as an ordinary paragraph. Every
+     scan passed: axe sees legible text on a background, which it is. Unstyled is not broken, and
+     unstyled is what no instrument I own can name. Rules below are taken from sibling exhibits
+     where one exists and built from house tokens where none does; no number, job ID or script
+     was touched. `.back` deliberately has NO rule -- it inherits `.topbar a`, which is why the
+     check that found this must report and not assert. */
+  .wingtag{color:var(--ink-3)}                    /* byte-identical to the house rule elsewhere */
+  .stand{font-size:clamp(15px,2.4vw,17px);color:var(--ink-2);max-width:62ch;line-height:1.6;margin:14px 0 0}
+  /* The SCOPE FENCE — what the result does NOT claim. It leads rather than hides (style guide),
+     so it is a card a reader cannot skim past, not small print. */
+  .fence{background:var(--panel-2);border:1px solid var(--hair-2);border-left:3px solid var(--amber);
+    border-radius:10px;padding:12px 14px;margin:16px 0;color:var(--ink-2);font-size:14px;line-height:1.6;max-width:64ch}
+  .note{color:var(--ink-3);font-size:12.5px;line-height:1.6;margin-top:8px;max-width:60ch}
+  .note b{color:var(--ink-2)}
+  /* overflow-x only. NO min-width on the svg: an inherited `svg{min-width:460px}` once put this
+     page's load-bearing chart behind a horizontal scroll at 320px. */
+  .plotwrap{overflow-x:auto;margin:14px 0}
+  .plotwrap svg{width:100%;height:auto;display:block}
+  .verdict{margin-top:14px}
+  .verdict .box{background:var(--panel-2);border:1px solid var(--hair-2);border-radius:12px;
+    padding:14px 16px;max-width:64ch}
+  .verdict .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--ink-3)}
+  .verdict .v{font-family:var(--mono);font-size:clamp(24px,5vw,32px);font-weight:700;color:var(--pink);margin:2px 0 4px}
+  .verdict .s{font-size:13.5px;color:var(--ink-2);line-height:1.55}
   .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
   .story b { color:var(--ink); }
   .audit { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px dashed var(--edge); margin-top:14px; padding-top:9px; line-height:1.55; }
