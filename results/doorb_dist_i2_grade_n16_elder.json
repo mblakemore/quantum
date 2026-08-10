@@ -10,7 +10,7 @@
  "se_shot_noise": 0.003005,
  "sigma_from_zero_shot": 100.1,
  "sigma_vs_empirical_null_spread": 30.7,
- "sigma_convention_note": "COURT RULER = shot-noise se sqrt((1-m^2)/N), the convention of the F122 record (103.7) and i1 (107.5) -> i2 = 100.1 sigma. Ember's #8441 quoted 67.5 sigma (implied se sqrt(2/N), source unclear -- flagged, not adopted). Conservative alternative vs the empirical 112-null spread (0.00978, wider than shot noise due to cross-copy crosstalk): 30.7 sigma. F1 verdict identical under every convention.",
+ "sigma_convention_note": "COURT RULER = shot-noise se sqrt((1-m^2)/N), the convention of the F122 record (103.7) and i1 (107.5) -> i2 = 100.1 sigma. RESOLVED #8460: Ember's 67.5 was an ERROR, retracted in full \u2014 two compensating denominator mistakes (N/2 for N, dropped (1-v^2) Bernoulli factor); not an alternative convention, nothing to label. Conservative alternative vs the empirical 112-null spread (0.00978): 30.7 sigma. F1 verdict identical under every convention.",
  "nulls": {
   "committed_blind_probes": {
    "n": 112,

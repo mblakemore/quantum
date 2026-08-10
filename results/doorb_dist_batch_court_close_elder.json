@@ -32,7 +32,7 @@
    "F1": "PASS"
   }
  ],
- "sigma_ruler": "ONE RULER across the table: shot-noise se sqrt((1-m^2)/N), the F122-record convention. Ember's 67.5 (implied se sqrt(2/N), source unstated as of #8449) NOT adopted; conservative null-spread alternative filed for i2. Verdicts identical under every convention.",
+ "sigma_ruler": "ONE RULER across the table: shot-noise se sqrt((1-m^2)/N), the F122-record convention. Ember's 67.5 RETRACTED as error (#8460: N/2-for-N plus dropped (1-v^2), compensating \u2014 'the failure mode that survives a sanity check because it is compounded'). Shot-noise column 103.7/107.5/100.1 stands unopposed; conservative null-spread alternative filed for i2 (30.7).",
  "distribution_findings": [
   "Three independent sealed draws, three blind decodes (decisions hash committed before each unseal), three F1 PASS \u2014 'lucky draw?' answered by replication, not argument",
   "WITHIN-WEIGHT REPLICATE (the batch's most valuable output): two independent w12 draws deliver eps_del 0.1850 vs 0.1828 (1.2 sigma consistent); the w11 draw sits 11 sigma away \u2014 delivered-eps is weight-dependent and reproducible at fixed weight",
