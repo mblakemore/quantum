@@ -1,0 +1,105 @@
+{
+  "experiment": "doorb_unsigned_shadow",
+  "n": 16,
+  "eps_nominal": 0.3,
+  "shots": 103732,
+  "commitment_sha256": "b3fb6cfe08b548fa4a3f0c41e6ed0d0ecb7ddf4658a066d71be0e4cb6a6b3699",
+  "backend": "ibm_marrakesh",
+  "layout": "halves",
+  "granularity_R": 1,
+  "jobs": [
+    {
+      "job_id": "d9sifr8pdb6s73e63140",
+      "rows": 2000,
+      "role": "calibration+gates"
+    },
+    {
+      "job_id": "d9sihn7pemts73ctp4k0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihnhdsedc73ahqjk0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9siho7tfhrs73dsqqr0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihonpemts73ctp4lg",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihp1dsedc73ahqjlg",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihpgpdb6s73e633cg",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihq7pemts73ctp4ng",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihqfpemts73ctp4o0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihr1dsedc73ahqjo0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihr9dsedc73ahqjog",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihrvtfhrs73dsqqug",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihs8pdb6s73e633g0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihsvtfhrs73dsqr00",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9siht9dsedc73ahqjs0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihtpdsedc73ahqjtg",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihu8pdb6s73e633ig",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihunpemts73ctp4sg",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihv7tfhrs73dsqr30",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sihvnpemts73ctp4tg",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sii00pdb6s73e633k0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9sii09dsedc73ahqk00",
+      "rows": 3732
+    }
+  ],
+  "cal_rows": 2000,
+  "cal_P_public": "XYZXYZXYZXYZXYZX",
+  "cal_position": "first rows of job 1",
+  "utc": "2026-08-10T01:27:30.117450+00:00"
+}
