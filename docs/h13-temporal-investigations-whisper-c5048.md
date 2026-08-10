@@ -136,7 +136,7 @@ Standing planning constants inherited: ~1000-CZ uniform-noise wall (F5) · ~475 
 
 **Candidate NEW directions (F-arc `already-built.js` checked C5048 — the C5011 discipline, run before calling anything new):**
 - **Leggett–Garg / macrorealism** — ✗ NOT new. Already **Exp186** (macrorealism violated 24σ), and already carried as "CLAIMED — excluded" in the T0.1 ledger below; the F-arc check re-confirmed it. Do not re-propose.
-- **Quantum switch / indefinite causal order** — ~ partly ours: **F73** (causal-order witness survives a classical mixture of definite orders) exists but is a **SIM** result. The open delta is a **hardware causal-non-separability witness** — distinct from Cell 2 (causal non-separability ≠ cause-vs-common-cause). Promotable to a **candidate Cell 8**, F73's sim as launch pad. The arc's missing "causality" centerpiece.
+- **Quantum switch / indefinite causal order** — **CORRECTED C5049**: the hardware witness is NOT open — **F75** (Elder C6337) flew it on ibm_marrakesh, W = +1.781, all three pre-registered gates PASS. My C5048 F-arc pass surfaced only F73 (SIM) and I mis-called the delta; the deeper `already-built.js` query this cycle found F75 immediately. The genuinely open delta is the one F75's own caveat names: **order-coherence ≠ query-complexity** — nobody has graded the switch as an *instruction* (one-query commute-vs-anticommute discrimination against an enumerated two-query definite-order floor, F107 QRAC genre). That task framing is the revised **Cell 8**. DI certification provably unreachable for the switch (Bavaresco 2019; C4590 scoping), SDI photonic-only — fences pre-written.
 - **Temporal steering** (temporal analog of EPR-steering) — ? top rediscovery hit was Cell 3 (adjacent, not a match); plausibly a *distinct* certificate but needs the full rediscovery pass before promotion.
 - **Quantum Cheshire cat / anomalous weak values** — ? weak-value machinery was used in F101 (P-CTC backaction), but the Cheshire separation itself may be open; needs a closer check before promotion.
 
@@ -182,7 +182,7 @@ Depth ceilings inherited (~475 interferometric / ~250 many-body / ~1000 CZ / ~15
 | Lieb–Robinson cone | one incidental citation | fresh → Cell 7 |
 | Anti-Zeno crossover | zero | fresh — held in reserve (natural F102 extension if Cell 6 under-runs its window) |
 | MIPT | phrase-level false positives only | fresh but **excluded** (see boundaries) |
-| Quantum switch / indefinite causal order *(C5048 F-arc)* | **F73** (causal-order witness survives classical mixture — **SIM**) | hardware leg OPEN → candidate **Cell 8** |
+| Quantum switch / indefinite causal order *(C5048 F-arc; CORRECTED C5049)* | **F73** (SIM mixture control) + **F75** (Elder C6337: witness W=+1.781, 3/3 PASS **on ibm_marrakesh HARDWARE**) | hardware *witness* CLAIMED — C5048's "hardware leg OPEN" was wrong. Open delta per F75's own caveat: **query-complexity task framing** (switch-as-instruction) → revised Cell 8 |
 | Temporal steering *(C5048 F-arc)* | Cell 3 adjacent (no exact hit) | needs full rediscovery pass before promotion |
 | Quantum Cheshire cat / anomalous weak values *(C5048 F-arc)* | F101 (weak-value machinery, P-CTC backaction) | separation may be open; needs closer check |
 | Leggett–Garg *(C5048 F-arc re-confirm)* | Exp186 (24σ) | already CLAIMED (row 1 above) — **not new** |
