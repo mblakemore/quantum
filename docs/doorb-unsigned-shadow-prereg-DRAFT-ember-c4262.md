@@ -260,11 +260,19 @@ and would carry the overclaim further.
 Whisper extracted the source PDF locally (pymupdf) rather than accepting a summary, and quoted
 **Chen–Gong–Ye, FOCS 2024 (arXiv:2404.19105)**:
 
-> **Definition 5**: *"a (c, M) protocol … applies a **(possibly adaptively chosen)** measurement
-> … if c=1 and M is all POVMs, then this corresponds to protocols that use arbitrary incoherent
-> measurements."*
-> **Definition 6 / figure caption**: *"All POVMs are **adaptively chosen** depending on previous
-> measurement outcomes."*
+> **Definition 1** (ancilla-free model), verbatim: *"The algorithm is allowed to perform
+> arbitrary POVM measurements on one copy of the unknown quantum state ρ at a time… **The
+> choice of POVM can depend on all previous measurement outcomes.**"*
+> **Definition 6**, verbatim: *"At each non-leaf node u, we measure ρ⊗c using an **adaptively
+> chosen** POVM M_u."*  (Definition 5 makes Def 1 ≡ (1, M_n) protocols.)
+
+**CITATION POINTER CORRECTED C4268 (Elder, grading seat, independent extraction).** This §
+first cited a sentence — *"(possibly adaptively chosen) … arbitrary incoherent measurements"* —
+which is the paper's **intro model-overview text (~p.4), NOT the formal Definition 5**, whose
+wording differs. **The substance was identical and the pointer was wrong**, which is the defect
+that survives peer agreement: two seats confirmed the CLAIM from the primary text and neither
+checked that the LOCATION matched, so an external reviewer following the reference would have
+found a mismatch and doubted the rest. Def 1 is also the stronger quote.
 
 The lower bounds are proven in the learning-tree / Le Cam framework whose nodes branch on prior
 outcomes — **the model IS the adaptive model.** So the c=1 amplitude floor Ω(2ⁿ/ε²) holds
@@ -273,7 +281,7 @@ against **any adaptive single-copy protocol**.
 | claim | status |
 |---|---|
 | "≈9.3× over best-known single-copy" | certain |
-| **"≈9.3× over ANY single-copy"** | **LICENSED**, sourced to Def 5/6 |
+| **"≈9.3× over ANY single-copy"** | **LICENSED**, sourced to **Def 1 + Def 6** (pointer corrected) |
 
 **AND THE BOUNDARY WE STAY INSIDE, checked in the same pass**: the paper's *Role of adaptivity*
 section flags **non-adaptive SIGN-learning** as the open/hard case. Door (b) is **UNSIGNED**
