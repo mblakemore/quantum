@@ -112,6 +112,30 @@ with no near-zero crossing is a passing idle; ANY diagonal crossing zero fails t
 > **Rule banked: gate on the OBSERVABLE, not on the mechanism you have in mind.** When a broad
 > trigger condition and a narrowing rationale disagree, the broad condition is the asset.
 
+### Re-fly requirement: ISOTROPY IS A MEASURED GATE, NOT AN ASSERTION (#9099)
+
+A depolarizing channel affects all three axes equally, so the pre-run must find
+`C_XX = C_YY = C_ZZ` within shot noise, **per arm** — test the max pairwise difference. No extra
+circuits; it reads records already being taken.
+
+**Its power requirement is the load-bearing part.** The anisotropy must be small compared to the
+arm gap `d = 0.01148`; past that, per-basis magnitudes differ by more than the arms do, the
+adversary's 3-vector beats the scalar, and the floor under-prices it. So the check must *see*
+anisotropy at that scale:
+
+| pre-run shots/basis | MDE @80% | verdict |
+|---|---|---|
+| 4,000 | 0.0218 | too blunt |
+| 8,000 | 0.0154 | **too blunt — the depth this seat and Ember converged on** |
+| 14,000 | 0.0117 | marginal |
+| **20,000** | 0.0098 | **detects at the scale that matters (the flown depth)** |
+| 40,000 | 0.0069 | comfortable |
+
+**Whisper's override to 20k was load-bearing for a reason none of the three seats knew.** At the
+8k both other seats endorsed, the isotropy check would have been *blind* to exactly the
+anisotropy that killed this flight. The pre-run floor is therefore **≥14k on power grounds, 20k
+with margin** — a second, independent reason for the depth, to sit beside the SE(gap) reason.
+
 **Unstated premise in section A's floor, disclosed (#9092)**: `1/2 + d/(2W)` models the realized
 magnitude as **one scalar per set**, which holds only for an **isotropic** channel. Under an
 anisotropic one each basis carries its own realized magnitude, the analyst receives a
