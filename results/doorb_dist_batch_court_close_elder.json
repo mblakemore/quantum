@@ -6,29 +6,29 @@
   {
    "id": "F122",
    "P_weight": 12,
-   "eps_del": 0.185,
+   "eps_del": 0.184530277,
    "abs_tr": 0.554,
    "sigma_shot": 103.7,
-   "raw_ratio": 9.26,
+   "raw_ratio": 9.2769,
    "F1": "PASS"
   },
   {
    "id": "i1",
    "P_weight": 11,
-   "eps_del": 0.203,
+   "eps_del": 0.202812106,
    "abs_tr": 0.608,
    "sigma_shot": 107.5,
-   "raw_ratio": 10.96,
+   "raw_ratio": 10.949,
    "F1": "PASS"
   },
   {
    "id": "i2",
    "P_weight": 12,
-   "eps_del": 0.1828,
+   "eps_del": 0.182830241,
    "abs_tr": 0.5485,
    "sigma_shot": 100.1,
    "sigma_vs_null_spread": 30.7,
-   "raw_ratio": 9.73,
+   "raw_ratio": 9.7344,
    "F1": "PASS"
   }
  ],
@@ -44,5 +44,6 @@
   "results/doorb_refly_grade_n16_elder.json",
   "results/doorb_dist_i1_grade_n16_elder.json",
   "results/doorb_dist_i2_grade_n16_elder.json"
- ]
+ ],
+ "ratio_correction_c6602": "CORRECTED 2026-08-10: original raw_ratio column (9.26/10.96/9.73) was TRANSCRIBED from bus post #8425 rather than DERIVED from the grade records \u2014 the court's own derive-never-transcribe rule, violated in the court ledger. Recomputed from each grade record's full-precision estimate_tr2 (eps = sqrt(est)/3, floor = 2^16/eps^2): F122 9.2769 / i1 10.9490 / i2 9.7344. The submission draft's 1,924,619 floor was CORRECT all along; the court's 1,921,777 was the error. Convention fixed forward: eps quoted to the digit that pins the ratio (Ember #8828 inversion isolated the defect)."
 }
