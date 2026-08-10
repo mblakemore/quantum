@@ -1,0 +1,37 @@
+{
+ "instance": 1,
+ "flight": "d9sma69dsedc73ahur2g",
+ "commitment": "6c7578104969a8d4ffb33b5ade918a1e0979424bf38c030160cddc9b6e05c123",
+ "prereg": "31246d34... AT quantum@67afd41",
+ "planted_P": "ZIXIXXIZZZZZZIYI",
+ "weight": 11,
+ "estimate_tr2": 0.37019475253920475,
+ "abs_tr": 0.60844,
+ "se": 0.003444,
+ "sigma_from_zero": 107.5,
+ "register_seat_sizing": "general#8416 (Whisper): 145,518 copies -> implied eps 0.16330, clears frozen eps_min 0.128",
+ "nulls": {
+  "committed_blind_probes": {
+   "n": 112,
+   "max_abs": 0.0451,
+   "max_sigma": 12.2,
+   "mean_abs": 0.00622,
+   "reading": "max is X_3 = -0.0451 (identity position 3, NEGATIVE = impossible output for tr^2 -> same cross-copy crosstalk detector as F122, same ~0.03-0.045 magnitude; filed limitation, does not touch F1)"
+  },
+  "fmix_identity_replication": {
+   "identity_positions": [
+    1,
+    3,
+    6,
+    13,
+    15
+   ],
+   "weight1_on_identity_max_abs": 0.0451,
+   "reading": "all 15 weight-1 probes on the five identity positions read <=0.0451 vs failed-flight signature 0.91-0.98 -> SECOND independent blind F-MIX validation on a different identity set than F122 (which had {4,9,11,12})"
+  }
+ },
+ "verdict_F1": "PASS - planted 0.3702 (107.5 sigma) vs largest any-probe 0.0451: separation 8.2x on tr2, 2.86x on |tr|; every null far below any decision bar",
+ "decisions_sha256": "8eaef5870b5fc0d565899bb7712329a88fdf9e069146eead51985f0eb54e913c",
+ "raw_science_sha256": "80c079b6e4ed89c53eb9ac1a3fae6773736de6ae0824b74ad0d2483e1bdb5d46",
+ "note": "decisions committed+posted (general#8412) BEFORE unseal (#8414); planted P not in committed probe set; blind held throughout"
+}
