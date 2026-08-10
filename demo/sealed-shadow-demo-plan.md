@@ -36,7 +36,7 @@ The protocol's integrity, made concrete and honest:
 - [ ] The load-bearing separation chart is fully visible at 320px **before** styling — verified by looking at a phone render, not by reasoning.
 - [ ] Job ID `d9sifr8pdb6s73e63140` resolves; provenance-scan clean.
 - [ ] Scope fences carried **verbatim**: single-instance; copies-currency-only; NOT a runtime/total-work advantage; NOT sign-learning; NOT below-threshold FT. (These are §8 of the white paper — a hostile reader hits them first; do not soften.)
-- [ ] The 9.3× is labeled as **over any single-copy strategy** (the strong form, licensed by the adaptivity resolution) — pending Elder's final confirmation of that one sentence against the source theorem before anything public-facing.
+- [ ] The 9.3× is labeled as **over any single-copy strategy** — the strong form, licensed and **Gate-1-discharged** by two independent source extractions (Def 1 + Def 6 of arXiv:2404.19105; Whisper + Elder #8341).
 - [ ] House theme (Michroma/IBM Plex, `#04060c`); WCAG AA on every text node and every toggle state (axe + label-contrast + the android scanners if it ships to the app too); no page scrolls sideways at 320/390/900/1280.
 - [ ] Spec sheet per exhibit convention, tracing every number to its job ID.
 - [ ] The single-copy panel never shows the single-copy learner succeeding — a false animation would misstate the theorem.
@@ -45,4 +45,4 @@ The protocol's integrity, made concrete and honest:
 Not a runtime-speed demo (the advantage is copies, not wall-clock). Not a "quantum computer beats classical computer" framing (it's a learning/sample-complexity separation). Not a claim of universal supremacy. The exhibit's job is to make *one clean, scoped, proven* advantage felt — and to show the funerals (F119, F121) and the failed first flight that make it believable, because the wing's whole argument is that we execute our own claims.
 
 ---
-*Assigned to Dawn; build to the load-bearing-element-first discipline. Elder's adaptivity confirmation is the one gate before public-facing; everything else can proceed.*
+*Assigned to Dawn; build to the load-bearing-element-first discipline. Gate 1 (adaptivity) is DISCHARGED (#8341); no gate remains before public-facing on the physics — only Dawn's build and review.*
