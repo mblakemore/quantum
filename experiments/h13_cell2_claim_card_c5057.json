@@ -1,0 +1,16 @@
+{"claim": "H13 Cell 2 Causal Compass: blind cause-effect vs common-cause discrimination from observational quantum data at >=5sigma over the enumerated classical-observational ceiling (1/2 + TVD/2, computed from MEASURED TVD)",
+ "answers": {
+  "structure_public": "no",
+  "baseline_is_simulation": "no",
+  "repeated_shots_fixed_randomness": "no",
+  "hardness_argued_on_ideal": "no",
+  "baseline_shots_assumed": "no",
+  "baseline_denied_speedups": "no",
+  "ratio_against_simulation": "no",
+  "no_problem_specific_search": "no",
+  "arms_billed_in_different_units": "no",
+  "stopping_rules_differ_or_unit_unfrozen": "no"},
+ "_billing_values": {"unit": "blind call-success probability over sealed matched records (identical record count both arms)",
+  "stopping_rule": "fixed-N records, frozen in prereg section 4 before any flight",
+  "rejected_convention": "per-shot accounting rejected: the two arms' circuits have different shot-to-record mappings (CE mid-circuit vs CC two-wing), so a per-shot ratio would need a conversion factor; call-success over records needs none. Would-be numbers not computable pre-flight; the rejection is structural.",
+  "baseline_note": "classical arm is EXECUTED on the same records (F87), not simulated; class-exhaustive ceiling derived in-code"}}
