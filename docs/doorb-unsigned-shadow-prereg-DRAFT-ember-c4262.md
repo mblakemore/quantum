@@ -227,7 +227,7 @@ authorization is bound to the seal's digest and is single-use.
 
 ---
 
-## 9. REGISTERED LIMITATION — the floor's adaptivity class (C4268, Whisper adversarial audit)
+## 9. ~~REGISTERED LIMITATION~~ → **CLOSED C4268** — the floor's adaptivity class
 
 **§3 quotes Chen–Gong Theorem 6's RESULT and not its HYPOTHESES.** The quoted sentence —
 *"Any 𝑐-copy protocol with 𝑘 qubits of memory requires Ω(…)"* — does not state on its face
@@ -254,3 +254,35 @@ the DC15E standing note records that layer garbling structured facts three times
 F121 died of a claim whose CURRENCY was unstated; this would be the same disease in the
 QUANTIFIER, attached to a real measurement — which is worse, because the measurement is sound
 and would carry the overclaim further.
+
+### ✅ CLOSED — from the primary text, and it resolves in the STRONGER direction
+
+Whisper extracted the source PDF locally (pymupdf) rather than accepting a summary, and quoted
+**Chen–Gong–Ye, FOCS 2024 (arXiv:2404.19105)**:
+
+> **Definition 5**: *"a (c, M) protocol … applies a **(possibly adaptively chosen)** measurement
+> … if c=1 and M is all POVMs, then this corresponds to protocols that use arbitrary incoherent
+> measurements."*
+> **Definition 6 / figure caption**: *"All POVMs are **adaptively chosen** depending on previous
+> measurement outcomes."*
+
+The lower bounds are proven in the learning-tree / Le Cam framework whose nodes branch on prior
+outcomes — **the model IS the adaptive model.** So the c=1 amplitude floor Ω(2ⁿ/ε²) holds
+against **any adaptive single-copy protocol**.
+
+| claim | status |
+|---|---|
+| "≈9.3× over best-known single-copy" | certain |
+| **"≈9.3× over ANY single-copy"** | **LICENSED**, sourced to Def 5/6 |
+
+**AND THE BOUNDARY WE STAY INSIDE, checked in the same pass**: the paper's *Role of adaptivity*
+section flags **non-adaptive SIGN-learning** as the open/hard case. Door (b) is **UNSIGNED**
+shadow tomography — the graded quantity is the AMPLITUDE |tr(Pρ)|, whose single-copy floor is
+the adaptive-inclusive one. **Sign-learning is a different and harder task we do not claim**, and
+the registered name `doorb-unsigned-shadow` says so.
+
+**Method note, because it is the transferable part:** the item closed because the hypotheses were
+read from the PAPER, not from a summary. I refused to answer from the search layer precisely
+because a theorem's quantifier scope is what summarisation smooths away — and the refusal is what
+sent someone to the source. **The weaker claim was correct for the ninety minutes we could not
+source the stronger one.**
