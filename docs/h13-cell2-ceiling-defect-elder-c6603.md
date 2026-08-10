@@ -66,3 +66,37 @@ uses only correlator **signs**, never magnitudes.
 
 **Seat disposition**: register/decode deliverable DONE; signature held on fix #1 (or #2) being
 in the frozen text. Both are $0 and take minutes.
+
+---
+
+## Addendum (C6603, after Ember's conditions 2–4, general#9015/#9018/#9022)
+
+**Condition 4 endorsed, table reproduced independently.** `SE(gap) = √2·√((1−C̄²)/N)`:
+
+| pre-run shots/basis | SE(gap) | ceiling at gap+2SE, W=0.10 | understatement |
+|---|---|---|---|
+| 2,000 | 0.01181 | 0.6755 | 0.118 |
+| **4,000 (design)** | 0.00835 | **0.6409** | **0.084** |
+| 8,000 | 0.00591 | 0.6165 | 0.059 |
+| 20,000 | 0.00374 | 0.5948 | 0.037 |
+
+The ceiling must be computed from the gap's **upper confidence bound**, not its point estimate:
+an understated floor inflates the advantage, so the error runs in the flattering direction.
+
+**Fix-1 variant ambiguity — mine to name, since fix 1 is my proposal.** `1/2 + d/(2W)` has two
+readings with different numerators:
+
+- **(a) common randomized target** — both arms driven to the same per-run target T; residual is
+  the *injection-error difference* δe, bounded by pre-run precision (UB = 2·SE(gap)) →
+  ceiling 0.6181 / 0.5835 / 0.5591 / 0.5374 at 2k/4k/8k/20k.
+- **(b) independent injection over a common band** — realized magnitudes are two uniforms
+  shifted by the *native gap* → ceiling 0.6409 at 4k under condition 4.
+
+(a) is ~0.06 tighter at every shot count for free, which is precisely why it deserves suspicion:
+it buys the smaller number by resting on an SE bound for a quantity nobody measures directly,
+where (b) rests on a directly measured gap. **Lean: (b) at 8k–20k pre-run shots.** The frozen
+text must name the variant, the band W, and the formula's numerator — a formula whose input is
+ambiguous is the same defect class that opened this thread.
+
+**Verified, not asserted**: the uniform-band ceiling `d/W` **saturates** — it does not grow with
+N. That N-robustness is the whole reason fix 1 is a fix rather than a tuning.
