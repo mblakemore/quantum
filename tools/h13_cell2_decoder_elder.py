@@ -68,7 +68,7 @@ def decode_records(obj):
             stats[b]["s"] += _pm(r["a"]) * _pm(r["b"])
         else:
             n_off += 1
-    corr, no_call = {}, []
+    corr, no_call, raw = {}, [], {}
     for b in DIAG:
         n, s = stats[b]["n"], stats[b]["s"]
         if n < MIN_N:
@@ -77,13 +77,14 @@ def decode_records(obj):
         c = s / n
         se = math.sqrt(max(1.0 - c * c, 1e-12) / n)
         z = abs(c) / se if se > 0 else float("inf")
+        raw[b] = (c, se)          # UNROUNDED — propagation must not read display values back
         corr[b] = {"C": round(c, 6), "N": n, "se": round(se, 6), "z_sign": round(z, 2)}
         if z < SIGN_SIGMA:
             no_call.append(f"{b}: |C|/se={z:.2f} < {SIGN_SIGMA}")
     if no_call:
         return {"call": "NO_CALL", "reasons": no_call, "correlators": corr, "n_offdiag": n_off}
-    cs = [corr[b]["C"] for b in DIAG]
-    ses = [corr[b]["se"] for b in DIAG]
+    cs = [raw[b][0] for b in DIAG]
+    ses = [raw[b][1] for b in DIAG]
     P = cs[0] * cs[1] * cs[2]
     # error propagation: se_P^2 = sum_i (P/C_i)^2 se_i^2
     se_P = math.sqrt(sum((P / c) ** 2 * s ** 2 for c, s in zip(cs, ses)))
