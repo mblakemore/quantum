@@ -136,6 +136,39 @@ ATTACKS = [
                    "carries the correction above its own opening sentence.",
         "artifact": "docs/solver-plan-whisper-c5021.md",
     },
+    {
+        "id": "billing-currency",
+        "combinator": "any",   # EITHER a unit mismatch OR a stopping-rule mismatch corrupts the ratio on its own — each is sufficient to inflate a margin. (Adopted from retro C5050 R1; drafted C5056 under board #68.)
+        "name": "Both arms in one currency, one stopping rule, frozen before any number",
+        "exploits": (
+            "A headline ratio whose arms are billed in different units (samples vs copies, jobs vs "
+            "shots, queries vs gate-calls) or stopped under different criteria (a lenient threshold "
+            "on one arm vs a rigorous sequential test on the other). Either mismatch manufactures "
+            "the margin: the exp142 n=4 margin was posted at 21-29x and was actually 6.6x — the "
+            "quantum arm was billed in Bell SAMPLES (1 sample = 2 copies) against a classical arm "
+            "billed in COPIES, and its stopping criterion was lenient where C1's was a full Wald "
+            "SPRT. The ratio was ~4x inflated by accounting alone; the win itself was real."
+        ),
+        "precondition": [
+            ("arms_billed_in_different_units", "Are the arms' costs expressed in DIFFERENT units, "
+                                               "or units needing any conversion factor to compare?"),
+            ("stopping_rules_differ_or_unit_unfrozen", "Do the arms stop under DIFFERENT criteria, "
+                                                       "OR was the billing unit / stopping rule "
+                                                       "chosen or changed AFTER any headline "
+                                                       "number was computed?"),
+        ],
+        "must_answer": (
+            "Declare ONE unit and ONE stopping rule for both arms, freeze them in the prereg "
+            "before any ratio is computed, and re-derive every previously-posted number in that "
+            "unit. A conversion factor stated at correction time is an admission, not a fix."
+        ),
+        "history": "Whisper/Elder C5003 (#1294) — exp142 n=4 margin corrected 21-29x -> 6.6x after "
+                   "the inflated number had been propagated to the Creator; all three seats "
+                   "re-stated. Same class: C5047 door(b) registered budget 6.8x low (arms scale "
+                   "differently -> weakest-cell costing inverts). Retro C5050 graded the prose "
+                   "rule FAILED TWICE and ordered this instrument form.",
+        "artifact": "logs/retrospective-c5050-50cy.md (DC15W) + exp142 margin-correction thread",
+    },
 ]
 
 
