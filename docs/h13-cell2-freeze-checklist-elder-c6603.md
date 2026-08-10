@@ -113,12 +113,25 @@ that overshoot.*
 **The run count is an information limit, not a budget choice.** A binary call yields ≤1 bit per
 run; no within-run precision buys it down. Runs for 5σ-equivalent (p = 2.87e−7):
 
-| ceiling | LR per run | runs needed |
-|---|---|---|
-| 0.5000 | 2.000 | 22 |
-| 0.5575 | 1.794 | 26 |
-| 0.6409 | 1.560 | 34 |
-| 0.8260 | 1.211 | 79 |
+| ceiling | LR per run | runs needed | reachable? |
+|---|---|---|---|
+| 0.5000 | 2.000 | 22 | no — zero-leak limit |
+| 0.5575 | 1.794 | 26 | **NO — zero-measurement-error limit** |
+| 0.6187 | 1.617 | 32 | **yes, at 8k pre-run shots/basis** |
+| 0.6409 | 1.560 | 34 | yes |
+| 0.8260 | 1.211 | 79 | yes (unfenced) |
+
+**Correction (#9055→#9060): 0.5575 is not an operating point.** It is `1/2 + gap/(2W)` at *zero*
+measurement error. Reaching it requires `SE(gap) ≤ 1.0e-5`, i.e. **~3.0 billion shots/basis** —
+unreachable at any budget. Ember raised this and it corrects *my* table, not just the run count:
+the run count must be set against the **achievable** ceiling. Achievable ladder (SE(gap) =
+√2·√((1−C²)/N)): 8k → 0.619 → **32 runs** · 20k → 0.596 → 30 · 50k → 0.582 → 28.
+
+*Estimator-disagreement note*: the two seats' SE(gap) differed by exactly 2.02× at every N,
+which located a real error rather than a matter of taste (Ember carried a spurious factor of 2
+on SE(C); the correlator is a mean of ±1 products, so there is no difference-of-two to double).
+Resolved by posting derivations rather than numbers. Her table printed a ceiling of **1.11** — a
+discrimination probability above 1 — which was its own refutation.
 
 The design's 87σ is **estimate precision** — how well-determined the sign is *within* a run —
 while the claim needs **discrimination evidence across runs**. Different objects; conflating
