@@ -97,6 +97,17 @@ def _ledger():
     if not os.path.exists(LEDGER): return []
     return [json.loads(l) for l in open(LEDGER) if l.strip()]
 
+def _line_sha(entry):
+    """Hash of an entry's CANONICAL serialization — the chain link (Ember audit #9149)."""
+    return hashlib.sha256(json.dumps(entry, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+def _head(led, batch_id):
+    """HEAD digest = hash of the last entry's line, or the batch_id at genesis.
+    PUBLISH THIS EXTERNALLY (bus, on a cadence): chain integrity alone cannot detect
+    TRUNCATION — a chain with its tail removed is still internally consistent. Only an
+    external record of a HEAD that no longer appears in the file exposes a truncation."""
+    return _line_sha(led[-1]) if led else hashlib.sha256(batch_id.encode()).hexdigest()
+
 def _segment_bits(batch):
     """Segment sized so BOTH constraints hold: segment H_min >= 512 and total <= 0.5 x H_min."""
     n = batch["totals"]["max_seeds"]
@@ -122,7 +133,7 @@ def status():
         red = {p: c for p, c in purposes.items() if c > 1}
         print(f"  purposes       {len(purposes)} distinct" + (f"  ⚠ RE-DRAWS RECORDED: {red}" if red else ""))
 
-def draw(consumer, purpose):
+def draw(consumer, purpose, dry_run=False):
     b, pool = _load_batch(); led = _ledger(); seg = _segment_bits(b)
     idx = len(led)
     if idx >= b["totals"]["max_seeds"]: sys.exit("🔴 pool exhausted at the safety factor — harvest a new batch")
@@ -136,15 +147,26 @@ def draw(consumer, purpose):
     seed = hashlib.sha256((segment + "|" + ctx).encode()).hexdigest()
     entry = {"i": idx, "consumer": consumer, "purpose": purpose, "batch": b["batch_id"],
              "offset": off, "len": seg, "seed_sha256": hashlib.sha256(seed.encode()).hexdigest(),
-             "ts": _now()}
+             "prev_sha256": _head(led, b["batch_id"]), "ts": _now()}
+    if dry_run:
+        # DRY RUN (Ember #9149): exercises derivation + chain link, CONSUMES NOTHING, WRITES NOTHING.
+        # Author's ruling: audit probes MUST use this. A real draw that happens, stays.
+        print("DRY RUN — nothing written, no pool offset consumed")
+        print(f"would-be seed  {seed}")
+        print(f"would-be link  prev_sha256={entry['prev_sha256'][:32]}…")
+        return
     os.makedirs(QDIR, exist_ok=True)
     with open(LEDGER, "a") as fh: fh.write(json.dumps(entry) + "\n")
     print(f"seed  {seed}")
     print(f"ledger[{idx}] consumer={consumer} purpose={purpose!r} offset={off} len={seg}")
     print(f"python:  numpy.random.SeedSequence(int('{seed[:16]}…', 16))")
     print(f"js:      uint32 = int(sha256('{seed[:8]}…:<label>').hexdigest()[:8], 16)")
+    nh = _head(_ledger(), b["batch_id"])
+    print(f"HEAD     {nh}")
+    print(f"PUBLISH THIS NOW — the truncation detector only works at a per-draw cadence:")
+    print(f"  hail post general 'QSEED HEAD after ledger[{idx}]: {nh}' --sender whisper --class fyi")
 
-def audit():
+def audit(expect_head=None):
     b, pool = _load_batch(); led = _ledger(); seg = _segment_bits(b)
     ok = True
     spans = []
@@ -156,6 +178,54 @@ def audit():
         ok &= good
         spans.append((e["offset"], e["offset"] + e["len"], e["i"]))
         print(f"  [{e['i']:>3}] {e['purpose'][:44]:<44} {'✅ re-derives' if good else '🔴 MISMATCH'}")
+    # CHAIN WALK (Ember #9149): per-entry integrity is not SEQUENCE integrity. Without this,
+    # truncating the last line and re-drawing gives a different seed at the same offset and the
+    # audit still says CONSISTENT — seed-shopping with the receipt deleted.
+    expect = hashlib.sha256(b["batch_id"].encode()).hexdigest()
+    for e in led:
+        if "prev_sha256" not in e:
+            print(f"  🔴 entry {e['i']} PRE-CHAIN (no prev_sha256) — sequence unverifiable"); ok = False; break
+        if e["prev_sha256"] != expect:
+            print(f"  🔴 CHAIN BREAK at entry {e['i']}: prev={e['prev_sha256'][:16]}… expected {expect[:16]}…"); ok = False; break
+        expect = _line_sha(e)
+    else:
+        print(f"  ✅ chain intact across {len(led)} entries")
+    head = _head(led, b["batch_id"])
+    print(f"  HEAD {head}")
+    # TRUNCATION DETECTOR (Ember #9149 point 3, and the FIRST fix was not enough):
+    # chain-alone still passed her attack — truncate the tail, re-draw at the same offset, and
+    # the chain rebuilds consistently from the truncated state. Only an EXTERNAL record of a
+    # HEAD that no longer appears in this file exposes it. Verified: with --expect-head set to
+    # the pre-attack HEAD, the attack is caught; without it, it is not.
+    if expect_head:
+        # MULTI-HEAD, IN-ORDER verification. The single-head version FAILED her attack and the
+        # failure is the lesson: truncating draw A leaves the PRE-A published head still present
+        # in the chain, so "published head found => legitimate growth" waves the attack through.
+        # A published head is only a truncation detector if the cadence is tight enough that the
+        # DELETED entry's own head was published. Discipline: publish HEAD after EVERY draw;
+        # audit then requires every published head to appear, IN ASCENDING ORDER, in this chain.
+        chain = [hashlib.sha256(b["batch_id"].encode()).hexdigest()]
+        for e in led: chain.append(_line_sha(e))
+        heads = [h.strip() for h in expect_head.split(",") if h.strip()]
+        last_pos = -1
+        for h in heads:
+            if h not in chain:
+                print(f"  🔴 PUBLISHED HEAD {h[:16]}… APPEARS NOWHERE IN THIS CHAIN")
+                print(f"     -> the entry it attested was TRUNCATED or REWRITTEN after publication.")
+                print(f"     This is seed-shopping with the receipt deleted.")
+                ok = False; break
+            pos = chain.index(h)
+            if pos <= last_pos:
+                print(f"  🔴 PUBLISHED HEADS OUT OF ORDER at {h[:16]}… (pos {pos} after {last_pos})"); ok = False; break
+            last_pos = pos
+        else:
+            grown = len(led) - last_pos
+            print(f"  ✅ all {len(heads)} published head(s) present in order; latest at {last_pos}/{len(led)}"
+                  + (f", ledger has grown by {grown} since" if grown else ""))
+    else:
+        print("       ⚠️  NO --expect-head SUPPLIED: truncation is UNDETECTABLE from this file alone.")
+        print("       Chain integrity proves no MID-FILE deletion or reordering; it cannot prove")
+        print("       the tail was not cut. Supply the externally published HEAD to close that.")
     spans.sort()
     for (s1, e1, i1), (s2, e2, i2) in zip(spans, spans[1:]):
         if s2 < e1:
@@ -182,14 +252,32 @@ def selftest():
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["harvest", "status", "draw", "audit", "selftest"])
+    ap.add_argument("cmd", choices=["harvest", "status", "draw", "audit", "selftest", "head", "migrate-chain"])
     ap.add_argument("job_id", nargs="?")
-    ap.add_argument("--consumer"); ap.add_argument("--purpose")
+    ap.add_argument("--consumer"); ap.add_argument("--purpose"); ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--expect-head", help="comma-separated externally published HEAD digests, oldest first (the truncation detector — publish after EVERY draw)")
     a = ap.parse_args()
     if a.cmd == "harvest": harvest(a.job_id)
     elif a.cmd == "status": status()
     elif a.cmd == "draw":
         if not (a.consumer and a.purpose): sys.exit("draw requires --consumer and --purpose (purpose is pre-declared)")
-        draw(a.consumer, a.purpose)
-    elif a.cmd == "audit": audit()
+        draw(a.consumer, a.purpose, a.dry_run)
+    elif a.cmd == "audit": audit(a.expect_head)
+    elif a.cmd == "head":
+        b, _ = _load_batch(); led = _ledger()
+        print(_head(led, b["batch_id"]))
+    elif a.cmd == "migrate-chain":
+        # One-time: retrofit prev_sha256 onto pre-chain entries. The PRE-MIGRATION file is in
+        # git history, so the retrofit is itself auditable — that is what licenses it.
+        b, _ = _load_batch(); led = _ledger()
+        expect = hashlib.sha256(b["batch_id"].encode()).hexdigest()
+        out = []
+        for e in led:
+            e2 = {k: v for k, v in e.items() if k != "prev_sha256"}
+            e2["prev_sha256"] = expect
+            e2 = {k: e2[k] for k in ["i","consumer","purpose","batch","offset","len","seed_sha256","prev_sha256","ts"] if k in e2}
+            out.append(e2); expect = _line_sha(e2)
+        with open(LEDGER, "w") as fh:
+            for e in out: fh.write(json.dumps(e) + "\n")
+        print(f"migrated {len(out)} entries onto the chain; HEAD {expect}")
     else: selftest()
