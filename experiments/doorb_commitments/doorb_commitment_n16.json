@@ -1,9 +1,9 @@
 {
   "spec": "doorb_hardensemble_v1",
   "n": 16,
-  "commitment_sha256": "b3fb6cfe08b548fa4a3f0c41e6ed0d0ecb7ddf4658a066d71be0e4cb6a6b3699",
-  "prereg_freeze": "0acd1f8aae93155abc8e9ba00af9813fe4eb8bc70efd2fdf33c7cad7f2cf40e9",
-  "order_of_operations": "register(frozen)->seal->digest published->go #8174 bound->submit chunked->leading-job gate->blind decode->decisions hash->unseal",
+  "commitment_sha256": "6c7578104969a8d4ffb33b5ade918a1e0979424bf38c030160cddc9b6e05c123",
+  "prereg_freeze": "31246d34f78de1e3af5a74856921bac8abc11e2c9f3465698e0511f3ccf272b2",
+  "order_of_operations": "batch-go 8362 instance 1/1: seal->digest published->fly->blind decode->hash->unseal",
   "alphabet": "IXYZ",
   "identity_excluded": true,
   "note": "P is sealed. Per-shot sign draw and eigenstate bits are randomised at submit from independent streams (F-IND) and are NOT secrets."
