@@ -45,6 +45,7 @@ SECRETS = os.path.expanduser("~/.ember-doorb-secrets.json")
 ARCHIVE = os.path.expanduser("~/.ember-doorb-secrets-archive.json")
 KEY = "doorb_hardensemble_v1:16"
 RESERVE_S = 20
+EPOCH_MARGIN = 1.5   # MUST mirror doorb_flight G-EPOCH. Do not tune independently.
 
 
 def tank_seconds():
@@ -152,7 +153,23 @@ def main():
             # disagrees with the source is a fact the operator should see, not one to hide.
             print(f"  [cache-gap] registry {cached:.0f}s vs authoritative {tank + sim_spent:.0f}s "
                   f"— sizing on the authoritative value")
-        need = a.per_instance_estimate + RESERVE_S
+        # C4269 DEFECT, found by the flight script REFUSING an instance this harness had
+        # green-lit: two gates carried two different definitions of "affordable". This one
+        # used ADDITIVE headroom (estimate + 20s); the flight script's G-EPOCH uses a
+        # MULTIPLICATIVE 1.5x margin and is the BINDING gate — it is the one holding the
+        # trigger. At i3: additive said 111s against 185s live ("fits with 74s spare"),
+        # multiplicative said 193.5s ("refuse"). The seal was drawn, published and pinned
+        # for a flight that could never launch.
+        #
+        # A non-binding gate that is LOOSER than the binding one is not a harmless
+        # duplicate — it manufactures confident go-aheads that the real gate then has to
+        # veto, and each false go-ahead spends something irreversible (here: a drawn seal,
+        # which archives its predecessor and cannot be un-drawn).
+        #
+        # RULE: when two gates guard the same action, the harness mirrors the BINDING one
+        # exactly. Duplicated thresholds drift; the strictest must be the one that is copied.
+        need = max(a.per_instance_estimate * EPOCH_MARGIN,
+                   a.per_instance_estimate + RESERVE_S)
         print(f"\n── instance {i}/{a.instances} ──  tank {tank:.0f}s  need ~{need:.0f}s")
         if tank < need:
             # PRE-DECLARED legitimate outcome, not a truncation.
