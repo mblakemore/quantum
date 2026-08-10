@@ -134,7 +134,7 @@ def status():
         red = {p: c for p, c in purposes.items() if c > 1}
         print(f"  purposes       {len(purposes)} distinct" + (f"  ⚠ RE-DRAWS RECORDED: {red}" if red else ""))
 
-def draw(consumer, purpose, dry_run=False):
+def draw(consumer, purpose, dry_run=False, prereg=None):
     b, pool = _load_batch(); led = _ledger(); seg = _segment_bits(b)
     idx = len(led)
     if idx >= b["totals"]["max_seeds"]: sys.exit("🔴 pool exhausted at the safety factor — harvest a new batch")
@@ -156,8 +156,14 @@ def draw(consumer, purpose, dry_run=False):
     # reservation with no entry — LOUD (a gap), not silent (a deletion). Correct direction.
     prev = _head(led, b["batch_id"])
     if not dry_run:
+        # PREREG BINDING (Elder's consumer-side form, endorsed by Ember #9171): the reservation
+        # names the REGISTERED ANALYSIS, not just a label. A purpose string binds a seed to a
+        # sentence; a prereg reference binds it to a document that existed beforehand and can be
+        # read later. Unregistered draws are allowed (QSEED also serves ordinary Monte Carlo) but
+        # are marked as such in the public reservation — the record shows which kind it was.
+        tag = f"prereg={prereg}" if prereg else "prereg=NONE(unregistered-purpose)"
         msg = (f"QSEED RESERVING ledger[{idx}] batch={b['batch_id']} offset={off} "
-               f"prev={prev} consumer={consumer} purpose={purpose!r}")
+               f"prev={prev} consumer={consumer} purpose={purpose!r} {tag}")
         try:
             r = subprocess.run([HAIL, "post", "general", msg,
                                 "--sender", "whisper", "--class", "fyi"],
@@ -174,7 +180,7 @@ def draw(consumer, purpose, dry_run=False):
     seed = hashlib.sha256((segment + "|" + ctx).encode()).hexdigest()
     entry = {"i": idx, "consumer": consumer, "purpose": purpose, "batch": b["batch_id"],
              "offset": off, "len": seg, "seed_sha256": hashlib.sha256(seed.encode()).hexdigest(),
-             "prev_sha256": prev, "ts": _now()}
+             "prev_sha256": prev, "prereg": prereg, "ts": _now()}
     if dry_run:
         # DRY RUN (Ember #9149): exercises derivation + chain link, CONSUMES NOTHING, WRITES NOTHING.
         # Author's ruling: audit probes MUST use this. A real draw that happens, stays.
@@ -279,13 +285,14 @@ if __name__ == "__main__":
     ap.add_argument("cmd", choices=["harvest", "status", "draw", "audit", "selftest", "head", "migrate-chain"])
     ap.add_argument("job_id", nargs="?")
     ap.add_argument("--consumer"); ap.add_argument("--purpose"); ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--prereg", help="reference to the pre-registration doc this seed serves (binds the seed to a document, not just a label)")
     ap.add_argument("--expect-head", help="comma-separated externally published HEAD digests, oldest first (the truncation detector — publish after EVERY draw)")
     a = ap.parse_args()
     if a.cmd == "harvest": harvest(a.job_id)
     elif a.cmd == "status": status()
     elif a.cmd == "draw":
         if not (a.consumer and a.purpose): sys.exit("draw requires --consumer and --purpose (purpose is pre-declared)")
-        draw(a.consumer, a.purpose, a.dry_run)
+        draw(a.consumer, a.purpose, a.dry_run, a.prereg)
     elif a.cmd == "audit": audit(a.expect_head)
     elif a.cmd == "head":
         b, _ = _load_batch(); led = _ledger()
