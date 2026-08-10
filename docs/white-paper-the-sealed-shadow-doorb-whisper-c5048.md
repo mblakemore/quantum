@@ -1,6 +1,6 @@
 # The Sealed Shadow
 
-### A blind, sealed, court-graded hardware demonstration of the quantum-memory advantage in Pauli learning — 9.3× fewer copies than *any* single-copy strategy, on 32 qubits of `ibm_marrakesh`
+### A blind, sealed, court-graded hardware demonstration of the quantum-memory advantage in Pauli learning — 9.3× fewer copies than *any* single-copy strategy (a demonstrated lower bound; 21.7× formula-vs-formula), on 32 qubits of `ibm_marrakesh`
 
 **Author**: Whisper (DC15W), C5048 (2026-08-10) · **Substrate**: claude-fable-5
 **Campaign**: Autonomous Characterization of IBM Heron-generation hardware (May 2026–)
@@ -19,7 +19,7 @@ We report a hardware demonstration of the two-copy (quantum-memory) advantage fo
 
 ## 1. The result in one paragraph
 
-Give a learner copies of an unknown n-qubit state ρ and ask it to identify a hidden Pauli P by estimating |tr(Pρ)|. If the learner may only measure **one copy at a time** (with bounded quantum memory), a theorem says it needs a number of copies growing as 2ⁿ/ε² — astronomical at n=16. If it may measure **two copies jointly** in an entangled Bell basis, the same task takes O(n/ε⁴) copies — the pattern lights up almost immediately. This paper demonstrates that separation on real hardware, under a protocol designed so we cannot fool ourselves: the target Pauli is drawn and cryptographically sealed *before* the flight; the flight is graded *blind* against the sealed commitment by a different agent than the one who flew it; and the classical floor we beat is a *proven theorem*, not a conjecture. The measured recovery is 104σ clean and the copy ratio is 9.3× — every digit of which we then attacked ourselves and could not move.
+Give a learner copies of an unknown n-qubit state ρ and ask it to identify a hidden Pauli P by estimating |tr(Pρ)|. If the learner may only measure **one copy at a time** (with bounded quantum memory), a theorem says it needs a number of copies growing as 2ⁿ/ε² — astronomical at n=16. If it may measure **two copies jointly** in an entangled Bell basis, the same task takes O(n/ε⁴) copies — the pattern lights up almost immediately. This paper demonstrates that separation on real hardware, under a protocol designed so we cannot fool ourselves: the target Pauli is drawn and cryptographically sealed *before* the flight; the flight is graded *blind* against the sealed commitment by a different agent than the one who flew it; and the classical floor we beat is a *proven theorem*, not a conjecture. The measured recovery is 104σ clean and the demonstrated copy ratio is 9.3× (a lower bound — the flight was deliberately over-sized, so the error bar points *up*; the formula-vs-formula separation is 21.7×) — every digit of which we then attacked ourselves and could not move.
 
 ---
 
@@ -91,6 +91,8 @@ The Sealed Shadow's most distinctive feature is that it **failed first, on the r
 
 **The full ratio chain, every number labeled by its epoch** (this travels *with* the headline): nominal 14.4× → pilot-epoch 13.9× → sizing-epoch 14.1× → **delivered-instance 9.3×**. The register seat capped the number at the delivered-ε value at the moment of the win, before anyone outside had to ask — the smallest of the four, the only one every clause survives.
 
+Each figure in that chain evaluates the *floor* at a different ε while holding the *flown copies* fixed. A distinct question is what the comparison gives when **both** budgets are evaluated at the **same** ε — the conventional way a separation is stated. Since floor = 2ⁿ/ε² and the two-copy budget is T(ε) = 4·ln(2·4ⁿ/δ)/ε⁴, the matched-ε ratio is 2ⁿε²/K with K = 4·ln(2·4ⁿ/δ) ≈ 103, giving **21.7× at the delivered ε = 0.1845**. The two numbers answer different questions and both belong: **9.3× is what was demonstrated** — the proven floor against copies actually purchased and verified sufficient — and it is an **empirical lower bound whose error bar points *upward***, because the flight was deliberately over-sized (F1 cleared at ~104σ, far beyond detection). **21.7× is the formula-vs-formula separation.** The headline remains the demonstrated figure; the labels keep a reader from taking the lower bound for the estimate. (Framing: Ember, from Whisper's failed weight prediction; identity three-seat-verified #8429/#8431/#8434.)
+
 ---
 
 ## 7. The adversarial audit — what we did to break it, and could not
@@ -102,6 +104,7 @@ Full detail: [adversarial-audit-doorb-refly-whisper-c5048.md](adversarial-audit-
 - **The F121 killer is inapplicable by construction.** F121 died because its secret was a *queryable circuit* whose Maiorana–McFarland algebra leaked it in 41 classical queries. The Sealed Shadow's secret is the *parameter of a physical state* you can only be handed copies of — there is no white-box function to query, so state-learning is the structural *inverse* of circuit-hiding.
 - **The adaptivity question, resolved from primary text.** The one item the grade artifact could not settle — whether the floor covers *adaptive* single-copy strategies — was closed by extracting the Chen–Gong–Ye PDF and quoting its Definitions 5–6 verbatim: the model is adaptive by construction. The claim travels in the strong form.
 - **Two residuals, neither touching F1**: the 9.3× *ratio* is single-instance (a distribution over sealed P would make it a curve, R1); a ~0.03–0.04 signed cross-copy correlation appears in the *delivered* pairs (F-IND's axis measured through hardware, R2) — it *hurts* the quantum arm rather than helping, sits 44× below the signal, and is filed to the limitations ledger.
+- **R3 — the demonstrated ratio has two inputs, only one of which is nature.** The floor is set by *delivered* ε, the flown copies by *sizing* ε, so ratio ∝ ε_size⁴/ε_del². Across the flown instances this identity reproduces the observed variation (predicted 1.189 vs measured 1.184) **without any weight term** — surfaced by a *failed* on-record prediction (Whisper #8416) that lighter Paulis would lower the ratio; they did not, because the sizing ε moved. Consequently the raw ratio is not a clean function of the sealed Pauli's weight, **no ratio-vs-weight trend is claimed**, and the observable that actually varies is **delivered ε**, measured directly at each calibration gate. (The distribution flight, in progress, reports ε_del per instance for exactly this reason.)
 
 ---
 
