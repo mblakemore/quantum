@@ -65,6 +65,9 @@ def build():
             circs.append(cc(b, t)); labels.append({"arm": "CC", "basis": b, "twirl": t})
     return circs, labels
 
+IDEAL_SIGNS = {"CE": (+1, +1, +1),      # QM repeatability forces all-positive diagonals
+               "CC": (+1, -1, +1)}      # Phi+ carries an intrinsic <YY> = -1
+
 def grade(corrs):
     """corrs[arm][basis] = twirl-averaged correlator. Isotropy = the three agree."""
     out = {}
@@ -77,7 +80,17 @@ def grade(corrs):
         out[arm] = {"C": {b: round(corrs[arm][b], 5) for b in BASES},
                     "abs_C": {b: round(abs(corrs[arm][b]), 5) for b in BASES},
                     "max_pairwise_spread_abs": round(spread, 5),
-                    "gate_pass": bool(spread <= ARM_GAP + 0.0098)}
+                    "gate_pass_isotropy": bool(spread <= ARM_GAP + 0.0098)}
+        # SIGN CHECK (Ember #9200, free — the flight already bought this data). The discriminator
+        # is sign(C_XX*C_YY*C_ZZ), a SIGN object, and a magnitude-only gate is blind to a sign
+        # event: a channel attenuating all three axes EQUALLY while flipping one sign passes
+        # isotropy and INVERTS the statistic. A correct depolarizing twirl cannot do that — but
+        # this gate exists to detect an INCORRECT channel, and incorrect is not only anisotropic.
+        signs = tuple(1 if corrs[arm][b] >= 0 else -1 for b in BASES)
+        out[arm]["signs"] = signs
+        out[arm]["signs_expected"] = IDEAL_SIGNS[arm]
+        out[arm]["gate_pass_signs"] = bool(signs == IDEAL_SIGNS[arm])
+        out[arm]["gate_pass"] = bool(out[arm]["gate_pass_isotropy"] and out[arm]["gate_pass_signs"])
     return out
 
 def main():
@@ -98,7 +111,9 @@ def main():
         corrs = {a: {b: sum(e * w for e, w in v) / sum(w for _, w in v) for b, v in d.items()} for a, d in acc.items()}
         g = grade(corrs)
         for arm in ("CE", "CC"):
-            print(f"  {arm}: C={g[arm]['C']}  |C| spread={g[arm]['max_pairwise_spread_abs']}  gate={'PASS' if g[arm]['gate_pass'] else 'FAIL'}")
+            print(f"  {arm}: C={g[arm]['C']}  |C| spread={g[arm]['max_pairwise_spread_abs']}  "
+                  f"signs={g[arm]['signs']} (want {g[arm]['signs_expected']})  "
+                  f"iso={'PASS' if g[arm]['gate_pass_isotropy'] else 'FAIL'} sign={'PASS' if g[arm]['gate_pass_signs'] else 'FAIL'}")
         print("  (ideal twirl: the four Paulis average to a depolarizing channel -> the three diagonals agree)")
         return
     from ibm_multi_account import assert_explicit_account, service_for_submission, _load_env_files
