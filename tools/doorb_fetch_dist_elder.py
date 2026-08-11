@@ -14,21 +14,46 @@ Blind discipline: touches ONLY raw bitstrings + the public manifest. No P, no dr
 material exists anywhere it can reach. Outputs verified against the manifest EXACTLY (per-job
 row counts, total shots) — a mismatch REFUSES rather than proceeds.
 """
-import hashlib, json, re, sys
+import hashlib, json, os, re, sys
 
 REPO = "/droid/repos/quantum"
 
-def alt3_token():
-    with open("/droid/repos/DC15W/.env") as f:
-        for line in f:
-            m = re.match(r"^IBMQ_ALT3=(.+)$", line.strip())
-            if m:
-                return m.group(1).strip().strip('"').strip("'")
-    sys.exit("REFUSE: IBMQ_ALT3 not found")
+# C6605: THIS FUNCTION WAS `alt3_token()` AND HARD-CODED IBMQ_ALT3 FROM ONE .env PATH.
+# i3 flew on **ALT4**, so the decode path would have opened the WRONG ACCOUNT — and an account
+# that does not hold the jobs returns "not found", which reads as a failed flight rather than as a
+# wrong-tank lookup. That is the PAID_CRN defect exactly (a constant naming an account the code no
+# longer uses), landing on the retrieval side within an hour of us fixing it on the submit side.
+# THE ACCOUNT IS NOW NAMED BY THE CALLER and searched across the known env files. No default:
+# refusing beats guessing, because a silent wrong-account read is indistinguishable from an empty
+# result. Resolve the right name with:
+#     python3 tools/registry_fit_precheck.py --need <s> --venue <backend> --resolve
+ENV_FILES = ("/droid/repos/DC15W/.env", "/mnt/droid/repos/digital-creature-1.5/.env",
+             "/droid/repos/quantum/.env", "/droid/repos/market-bot/.env")
+
+def account_token(env_var):
+    """Read a NAMED credential. Never printed, never persisted, never defaulted."""
+    for path in ENV_FILES:
+        try:
+            with open(path) as f:
+                for line in f:
+                    m = re.match(rf"^{re.escape(env_var)}=(.+)$", line.strip())
+                    if m:
+                        return m.group(1).strip().strip('"').strip("'")
+        except OSError:
+            continue
+    sys.exit(f"REFUSE: {env_var} not found in any known env file — NOT falling back to another "
+             f"account. A wrong-account fetch returns 'no jobs', which reads as a failed flight.")
 
 def main():
-    if len(sys.argv) != 3:
-        sys.exit("usage: doorb_fetch_dist_elder.py <flight-manifest.json> <instance-number>")
+    if len(sys.argv) not in (3, 4):
+        sys.exit("usage: doorb_fetch_dist_elder.py <flight-manifest.json> <instance-number> "
+                 "[ACCOUNT_ENV_VAR]   (e.g. IBMQ_ALT4 — the account the flight ACTUALLY used; "
+                 "resolve it with registry_fit_precheck --resolve)")
+    acct_var = sys.argv[3] if len(sys.argv) == 4 else os.environ.get("QPU_ACCOUNT_VAR")
+    if not acct_var:
+        sys.exit("REFUSE: no account named. Pass ACCOUNT_ENV_VAR or set QPU_ACCOUNT_VAR. "
+                 "This tool used to hard-code IBMQ_ALT3; i3 flew on ALT4 and that silent default "
+                 "would have looked like a failed flight.")
     manifest_path, inst = sys.argv[1], int(sys.argv[2])
     man = json.load(open(manifest_path))
     n = man["n"]; jobs = man["jobs"]; cal_rows_declared = man["cal_rows"]
@@ -36,7 +61,7 @@ def main():
     assert jobs[0]["role"].startswith("calibration"), "lead job is not the calibration block"
 
     from qiskit_ibm_runtime import QiskitRuntimeService
-    svc = QiskitRuntimeService(channel="ibm_quantum_platform", token=alt3_token())
+    svc = QiskitRuntimeService(channel="ibm_quantum_platform", token=account_token(acct_var))
 
     cal, science = [], []
     for i, j in enumerate(jobs):
