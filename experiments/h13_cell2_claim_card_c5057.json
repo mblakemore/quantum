@@ -30,5 +30,15 @@
   "what_this_result_still_carries": "Elder's calls were formed without knowledge of the mapping, on a decoder fixed at sha256 321abc99 with predictions pinned before decode. That is real and is what the deterministic-decoder argument protects. It is a smaller claim than the one nearly written here.",
   "located_exposure": "THE DEBLINDING TABLE IS IN GIT HISTORY AT COMMIT 4015f7d0727d, path results/h13_cell2_refly_RAWDUMP_d9tg7gntfhrs73dtug20.json, on origin/main. It pairs content with arm ('0|CE','0|CC') and is retrievable by anyone with a clone via `git show 4015f7d:<path>` whether or not it is present at HEAD. STATED RATHER THAN REMOVED: removal requires a history rewrite plus force-push to a repo three seats and the Creator work in, and any clone taken before the rewrite keeps the table anyway \u2014 an irreversible cross-seat action to close a door a determined reader still walks through. A KNOWN, LOCATED exposure is a different object from an unknown one (Ember, general#9491). Future dumps are now gitignored, making this the LAST dataset with the property rather than the pattern.",
   "tenth_channel_confirms": "Ember verified in her own checkout that the file content is retrievable from history without being in HEAD. So `git rm` makes the file invisible to `ls` while it remains fully public \u2014 which is why option (ii), narrowing the claim, is not the weaker option here but THE ONLY TRUE CLAIM AVAILABLE: reader-blindness cannot be restored for this dataset by any action we can safely take."
+ },
+ "publication_commitment_precommitted_c5060": {
+  "committed_at": "before the unseal, general#9935/#9939",
+  "commitment": "THE RESULT PUBLISHES EITHER WAY. A null, a falsifier-A failure (arm-concentrated accuracy), or a falsifier-B graded-split flag is written up in findings/ as an H13 Cell 2 result with the same care and prominence as a positive \u2014 not a footnote, not the arc doc backlog.",
+  "basis": "Creator standing directive on this arc: honest negatives are lessons, kept with their full accounting and the rule they teach; no spins, no band-shopping.",
+  "foreclosed_excuses": [
+   "the exclusion cost us \u2014 the 0.28\u03c3 from n=80 to n=75 is already priced and posted before the unseal",
+   "the twirl band was unlucky \u2014 the band was pre-registered"
+  ],
+  "why_now": "A null would make twelve leak-fixes look like effort spent on nothing. It would not: the fixes are why the answer means anything, and a null through a sound blind is a real result about the apparatus and the physics."
  }
 }
