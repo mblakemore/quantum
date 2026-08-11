@@ -46,7 +46,7 @@ no_test = any(g[a].get("gate_no_test") for a in ("CE", "CC"))
 # THREE-STATE, not two. FAIL would mean "the design does not work"; NO-TEST means "the design
 # was never flown". Conflating them would blame the physics for a harness bug.
 if overall: v = "PASS — the twirl produces an isotropic channel on silicon; the re-fly design is ALIVE"
-elif no_test: v = ("NO-TEST — signal floor not met (<2 of 3 axes resolved). The correlators are dead, so "
+elif no_test: v = ("NO-TEST — signal floor not met (fewer than 3 of 3 axes resolved). The correlators are dead, so "
                    "isotropy passes trivially and signs pass vacuously. This says NOTHING about the twirl design.")
 else: v = "FAIL — resolved correlators, but anisotropic or sign-flipped; the re-fly design needs rework"
 print(f"  VERDICT: {v}")

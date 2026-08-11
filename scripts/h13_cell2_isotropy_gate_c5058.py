@@ -110,14 +110,22 @@ def grade(corrs, ns=None):
         out[arm]["unresolved_axes"] = unresolved
         out[arm]["sign_mismatch_axes"] = mismatch
         out[arm]["gate_pass_signs"] = bool(not mismatch)      # UNRESOLVED is not a mismatch
-        # SIGNAL FLOOR (added C5058 AFTER this gate returned a VACUOUS PASS on dead data).
+        # SIGNAL FLOOR — 3 of 3, NOT 2 of 3 (Elder #9215 closed the hole in my first version).
+        # 2-of-3 passes a channel that destroys EXACTLY ONE axis, which is manifestly anisotropic,
+        # by certifying it on the surviving pair. Deeper: you cannot certify UNIFORM attenuation
+        # while one of the three attenuations is unmeasured. The deciding argument is not
+        # conservatism but CONSUMER CONSISTENCY — the frozen decoder's NO-CALL rule already
+        # abstains if ANY diagonal is unresolved, so a pre-flight certifying a channel the decoder
+        # would then refuse to decode has certified the wrong thing. Same |C|/se>=5 in three
+        # places: this gate, the sign precondition, and the decoder floor.
+        # (added C5058 AFTER this gate returned a VACUOUS PASS on dead data)
         # All-zero correlators pass isotropy TRIVIALLY (equally dead on every axis) and pass the
         # sign check VACUOUSLY (nothing resolved, so nothing can mismatch). A gate that cannot
         # fail on a channel that destroyed all signal is not a gate. REQUIRE resolved signal:
-        # at least 2 of 3 axes with |C|/se >= 5, else NO-TEST — never PASS.
+        # ALL THREE axes with |C|/se >= 5, else NO-TEST — never PASS.
         n_res = 3 - len(unresolved)
         out[arm]["resolved_axes"] = n_res
-        out[arm]["gate_no_test"] = bool(n_res < 2)
+        out[arm]["gate_no_test"] = bool(n_res < 3)
         out[arm]["gate_pass"] = bool(out[arm]["gate_pass_isotropy"] and out[arm]["gate_pass_signs"]
                                      and not out[arm]["gate_no_test"])
     return out
