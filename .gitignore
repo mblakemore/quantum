@@ -36,3 +36,18 @@ results/*rawdump*.json
 # Committing one publishes the mapping to every reader of the repo, and `git rm` does not undo it
 # (the blob stays reachable at its commit). Never commit these; they are the sealer working input.
 results/*RAWDUMP*.json
+
+# ── C5060: THE C5058 RULE WAS WRITTEN AGAINST THE FILE THAT LEAKED, NOT THE CLASS ──────────────
+# `results/*RAWDUMP*.json` matches ONLY a top-level .json, because a gitignore `*` does not cross
+# a `/`. Tested, not assumed — three realistic variants slipped straight through:
+#     results/somejob/…RAWDUMP….json    -> WOULD BE COMMITTED   (and Cell 2 data ALREADY lands
+#     results/nested/deep/RAWDUMP_x.json -> WOULD BE COMMITTED    in per-job SUBDIRECTORIES)
+#     results/…RAWDUMP….jsonl            -> WOULD BE COMMITTED   (extension change defeats it)
+# A deblinding table pairs CONTENT with ARM; whoever holds it can deblind any export by
+# content-matching, and `git rm` does not undo a push. The rule must bind the CLASS at any depth
+# and any extension. Found by checking my own repo after Ember reported a file that was true on
+# disk and false in the repo — a narrow rule LOOKS like protection, which is why it survived.
+**/*RAWDUMP*
+**/*rawdump*
+**/*DEBLIND*
+**/*deblind*
