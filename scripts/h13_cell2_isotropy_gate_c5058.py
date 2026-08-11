@@ -158,7 +158,7 @@ def main():
     from ibm_multi_account import assert_explicit_account, service_for_submission, _load_env_files
     _load_env_files()
     acct = assert_explicit_account()
-    if acct != "IBMQ_ALT3": raise SystemExit(f"declares IBMQ_ALT3; got {acct} — REFUSING.")
+    if acct != "IBMQ_ALT4": raise SystemExit(f"declares IBMQ_ALT4 (ALT3 exhausted; ALT4 issued by the Creator general#9238); got {acct} — REFUSING.")
     svc = service_for_submission(acct)
     u = svc.usage(); remaining = float(u["usage_limit_seconds"]) - float(u["usage_consumed_seconds"])
     if u.get("usage_limit_reached") or remaining < EST_COST_S:
