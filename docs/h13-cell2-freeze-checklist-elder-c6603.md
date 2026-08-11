@@ -242,6 +242,38 @@ shot-circuits ≈ 14.2 QPU-s, total ≈ 37s rather than 23s — still an order b
 shots/diagonal-basis stated separately** · W and draw count as text (B2/B3) · ceiling =
 max-of-three at upper bound (A).
 
+## D3. Re-fly interactions found pre-flight (C6603, #9197→#9199)
+
+**My §9099 isotropy spec was under-specified and Whisper's dry run caught it.** I wrote "test the
+max pairwise difference" without saying *signed* or *magnitude*. Depolarizing maps
+`C_ii → (1−p)·C_ideal` with **sign preserved**, so CC (Φ⁺, ideal +1/−1/+1) has a signed spread of
+`2(1−p)` **by construction** — intrinsic physics, not anisotropy. Isotropy means the channel
+**attenuates all three axes equally**, so the observable is **|C_ii|**. As written, my gate would
+have failed a perfectly isotropic CC arm at spread 1.0. *(Same class as "name what `d` IS": a gate
+whose OBSERVABLE is ambiguous, one level below a gate whose input is.)*
+
+**⚠️ The Pauli twirl meets this seat's FROZEN NO-CALL floor.** At 400 science shots the floor
+(|C|/se ≥ 5 on every diagonal) requires realized **|C| ≥ 0.2425**:
+
+| twirl p | realized \|C\| | z | verdict |
+|---|---|---|---|
+| 0.50 (frozen) | 0.464 | 10.5 | comfortable, ~2× headroom |
+| 0.60 | 0.371 | 8.0 | OK |
+| 0.70 | 0.278 | 5.8 | OK, thinning |
+| **0.75** | 0.232 | 4.8 | **decoder ABSTAINS** |
+
+The pre-flight (20k shots) is unaffected. **The risk is the re-fly**: if the fix-1 randomization
+band varies `p` and its upper edge reaches ~0.74, the decoder abstains on those runs — silently
+converting science runs into NO-CALLs, spending run count against the 5σ budget without
+announcing itself. Note the direction: abstention is the **safe** failure (the floor doing its
+job, never a wrong call) but an **invisible** one to a run-count arithmetic that assumed every run
+yields a call.
+
+**Ask for the re-fly prereg** (cheap, pre-flight): state the band edges **in p**, and check the
+worst-case realized |C| against 0.2425 before freezing. Either narrow the band, raise science
+shots (the floor scales as 1/√N — at 1000 shots it drops to 0.156, buying room to p≈0.83), or
+budget the expected abstention rate explicitly into the run count.
+
 ## E. Instruments delivered by this seat
 
 - `tools/h13_cell2_decoder_elder.py` — frozen decoder, signs only (unaffected by all of the
