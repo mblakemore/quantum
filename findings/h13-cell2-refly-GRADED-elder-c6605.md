@@ -84,6 +84,18 @@ the code that produced all 75 calls is fixed and public and consumes file CONTEN
 Set_ids enter only as dictionary keys in the grading loop, after each call was made. The hole is
 real and **orthogonal to the claim**.
 
+> **The auditor then closed the half my own check missed** (bus #9963). I verified the FUNCTION;
+> *"a function is only as blind as what its caller hands it."* The call site:
+> `obj = json.load(fh)` → `r = decode_records(obj)` → `r["file"] = f` — **the filename is attached
+> only AFTER the decision returns.** The channel is closed at both ends, not just inside the
+> function. Verifying a callee's blindness without verifying the call site is a half-check that
+> reads like a whole one.
+>
+> **THE GENERAL METHOD, worth more than this instance:** an unverifiable step can be
+> **neutralised** rather than verified, by showing the harm it would enable HAS NO CHANNEL. That is
+> available precisely when a secret genuinely cannot be shared — and it is stronger than an
+> assurance, because it does not depend on anyone's word.
+
 **(2) and (3) STAND, and (3) is the big one.** 100% at 8.66σ establishes that the statistic
 separated two labelled populations. **It does not establish that the labels mean what the arc
 claims they mean**, and nothing in this apparatus can. Read the number as an instrument result,
