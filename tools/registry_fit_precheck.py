@@ -50,6 +50,10 @@ def main():
     ap.add_argument("--stale-min", type=float, default=45.0,
                     help="reading older than this = unmeasured for this gate (F3; feeder cadence 15m)")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--resolve", nargs="?", const="*", metavar="NAME",
+                    help="ALSO return WHICH ACCOUNT to open (env var + identity). Bare --resolve "
+                         "picks the fitting account; --resolve NAME pins one and has the registry "
+                         "CONFIRM it fits, rather than a script asserting which account it is.")
     a = ap.parse_args()
 
     try:
@@ -76,8 +80,56 @@ def main():
            "venue_state": vrow["state"] if vrow else None,
            "venue_blind_spots": vrow.get("blind_spots") if vrow else None,
            "stale": stale_notes, "advisory": "exit 0 does NOT authorize; run()-site guard governs"}
+    # ── C6605 / board#101 (@whisper's proposal, my tool): RESOLVE AN IDENTITY. ───────────────
+    # THE GAP THIS CLOSES: this gate answered "does anything fit?" and never "here is the identity
+    # to open." So every flight script carried a HARD-CODED CRN, because nothing handed it one —
+    # and that is the STRUCTURAL cause of a constant named PAID_CRN holding a FREE ALT3 instance
+    # for months, with the truth sitting in a comment one line above it. A name is the only handle
+    # a script has when the registry will not give it an identity. It cost two decisions today.
+    #
+    # F1 IS UNCHANGED AND THAT IS THE POINT: RESOLVING AN IDENTITY IS NOT AUTHORIZING A SPEND.
+    # This adds a field to the advisory; it does not move the measurement, which stays at the
+    # run()-site guard (assert_explicit_account + the flight's own weather gate). An identity you
+    # were handed is still an identity you must name explicitly at invocation.
+    if a.resolve:
+        cands = [r for r in acct.get("resources", []) if r.get("kind") == "qpu_account"] or acct.get("resources", [])
+        if a.resolve != "*":
+            cands = [r for r in cands if a.resolve in (r.get("name"), r.get("identity"),
+                                                       (r.get("meta") or {}).get("env_var"))]
+            if not cands:
+                out["resolved"] = None
+                out["resolve_error"] = (f"account {a.resolve!r} not in the registry — REFUSING to guess. "
+                                        "An unknown account is not a default account.")
+        # C6605: BALANCE AND env_var LIVE UNDER meta, NOT AT THE ROW TOP LEVEL. My first pass read
+        # r["balance_s"] (always None there) and resolved NOTHING while the gate one line below
+        # said "1 account fits" — a self-contradicting output, produced by asserting the payload
+        # shape instead of reading it. Caught because the two halves disagreed; a resolve that had
+        # merely been WRONG rather than CONTRADICTORY would have shipped.
+        meta = lambda r, k: (r.get("meta") or {}).get(k)
+        # Only ever resolve something the registry says FITS and is authorized; never the first row.
+        fit = [r for r in cands if (meta(r, "balance_s") or 0) >= a.need
+               and r.get("authorization") == "open" and r.get("state") == "up"]
+        if fit:
+            r = sorted(fit, key=lambda x: -(meta(x, "balance_s") or 0))[0]
+            out["resolved"] = {"env_var": meta(r, "env_var"), "identity": r.get("identity"),
+                               "name": r.get("name"), "balance_s": meta(r, "balance_s"),
+                               "authorization": r.get("authorization"),
+                               "observed_at": r.get("observed_at"),
+                               "advisory": True,
+                               "note": "IDENTITY ONLY — not authorization. Name it explicitly at "
+                                       "invocation (QPU_ACCOUNT_VAR); assert_explicit_account() "
+                                       "still refuses an unnamed account."}
+        elif "resolved" not in out:
+            out["resolved"] = None
+            out["resolve_error"] = ("no account both FITS and is authorized — nothing to resolve. "
+                                    "This is not a default; it is an absence.")
+
     if a.json:
         print(json.dumps(out, indent=1))
+    elif a.resolve:
+        r = out.get("resolved")
+        print(f"🔑 RESOLVED: env_var={r['env_var']} balance={r['balance_s']}s auth={r['authorization']}"
+              if r else f"🔑 UNRESOLVED: {out.get('resolve_error')}")
 
     if stale_notes:
         print("⚠️ MEASURE FIRST (stale/absent readings): " + "; ".join(stale_notes))
