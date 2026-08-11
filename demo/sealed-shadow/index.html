@@ -98,6 +98,16 @@
   .verdict{margin-top:14px}
   .verdict .box{background:var(--panel-2);border:1px solid var(--hair-2);border-radius:12px;
     padding:14px 16px;max-width:64ch}
+  /* .k/.s are the label/value idiom used in THREE places on this page — the verdict cards, the
+     RECOVERED/SEPARATION cards, and the lane cards. I scoped these to `.verdict` when I wrote the
+     presentation layer, so two of the three rendered as plain body text: "RECOVERED", "SEPARATION"
+     and "TWO-COPY · Bell sampling" were labels that did not look like labels. All twelve scans
+     passed it — the text was legible, contrasty, uncut and correctly coloured by inheritance.
+     Found by tools/inert-class-scan.py on its first run: the elements computed IDENTICALLY to a
+     bare <div> inserted beside them, which is what "unstyled" actually means. */
+  .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--ink-3)}
+  .s{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+  .prov{color:var(--ink-3);font-size:12.5px;line-height:1.6;max-width:64ch}
   .verdict .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--ink-3)}
   .verdict .v{font-family:var(--mono);font-size:clamp(24px,5vw,32px);font-weight:700;color:var(--pink);margin:2px 0 4px}
   .verdict .s{font-size:13.5px;color:var(--ink-2);line-height:1.55}
