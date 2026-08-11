@@ -56,9 +56,15 @@ def main():
         recs = []
         for b in ("X", "Y", "Z"):
             arr = np.vstack(sets[key][b])[:nmin]
-            recs += [{"basis": b + b, "a": int(x), "b": int(y)} for x, y in arr]
+            # ENCODING DECLARED AT THE PRODUCER (Ember's Option C, Elder #9459). The producer
+            # knows what its bits mean; the consumer cannot infer it. v1's contract said "0/1
+            # accepted, mapped 0->+1, 1->-1" and put that burden on the READER — that ambiguity
+            # is what produced the decoder bug. Direction confirmed from the CIRCUIT, not the
+            # data: measurement in the computational basis, bit 0 = |0> = the +1 eigenstate of Z.
+            recs += [{"basis": b + b, "a": 1 if int(x) == 0 else -1, "b": 1 if int(y) == 0 else -1}
+                     for x, y in arr]
         pth = os.path.join(outdir, f"{a['set_id']}.json")
-        json.dump({"records": recs}, open(pth, "w"))
+        json.dump({"encoding": "pm1", "records": recs}, open(pth, "w"))
         os.utime(pth, (FIXED_MTIME, FIXED_MTIME))          # write order carries nothing
     del assign                                              # the mapping does not outlive this call
     print(f"[export v2] {len(sets)} sets x {nmin*3} records ({nmin}/basis, exact parity) -> {outdir}")
