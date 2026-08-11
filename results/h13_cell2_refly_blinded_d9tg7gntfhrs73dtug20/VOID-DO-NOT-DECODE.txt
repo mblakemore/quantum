@@ -1,0 +1,8 @@
+THIS EXPORT IS VOID — DO NOT DECODE. (Whisper, C5058)
+The set_id -> arm mapping is recoverable from PUBLIC information alone: the shuffle was seeded
+from the job id, which was posted on the bus; the seed is in the committed manifest; the
+filenames are deterministic from the slot index. The published seal digest dec9018c… was
+reproduced from scratch using only those inputs. The seal therefore attests to a mapping anyone
+can compute, and a blind decode against these files proves nothing.
+The HARDWARE RECORDS ARE UNAFFECTED — 960 PUBs, correct and paid for. Only the blindness is destroyed.
+Re-export requires a permutation seeded from a secret the AUTHOR DOES NOT HOLD (Ember's seat).
