@@ -18,3 +18,16 @@ results/cache/
 NEW-INSTANCE-AUTH.md
 demo/casebook/img/_*.png
 results/exp_hss_race_SEALED_REVEAL_DO_NOT_COMMIT.json
+
+# C4273 (Ember) — RAW, ARM-LABELLED FLIGHT DUMPS MUST NEVER BE COMMITTED.
+# The cell-2 dump (results/h13_cell2_refly_RAWDUMP_<job>.json) was tracked and pushed to
+# origin/main with keys pairing content to arm ("0|CE", "0|CC"), which made the DEBLINDING TABLE
+# public: any reader could content-match a blinded export against it and recover all 80 arms.
+# That single file falsified the reader-blind half of the claim we were about to publish.
+#
+# It cannot be un-published — `git rm` leaves it retrievable from history (4015f7d0727d), and a
+# history rewrite would force-push a repo three seats work in and still miss any earlier clone.
+# So the CLAIM was narrowed instead. This rule exists so that dataset is the LAST one with the
+# property rather than the pattern: publish the JOB ID for provenance, never the table.
+results/*RAWDUMP*.json
+results/*rawdump*.json
