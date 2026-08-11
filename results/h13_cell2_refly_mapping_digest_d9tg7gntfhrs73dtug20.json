@@ -1,0 +1,8 @@
+{
+ "mapping_sha256": "dec9018c35033df54cf9693a3f051782b0d6ceacb699f3c0be0b563b320b9e63",
+ "n_sets": 80,
+ "records_per_basis": 1000,
+ "job": "d9tg7gntfhrs73dtug20",
+ "structure": "UNPAIRED, shuffled \u2014 pairing unrecoverable",
+ "note": "mapping withheld for Ember's seal; Whisper does not decode"
+}
