@@ -82,7 +82,33 @@ def main():
             C=sum(e*w for e,w in v)/sum(w for _,w in v); print(f"   {k[0]} {k[1]}: {C:+.4f}")
         print("   expect |C| ~ (1-p)*0.98 on all three axes, CC's YY negative")
         return
-    print("\n[HOLD] submission is gated on BOTH court signatures. Elder: SIGNED (#9361). Ember: PENDING.")
+    # ═══ SIGNATURE VALIDITY GATE (Elder #9369) ═══════════════════════════════════════════
+    # "My signature is on the prereg AS AMENDED, AND IT DOES NOT CARRY FORWARD. If anything in
+    #  §2, §4, §4b or §5(c) moves between now and submit, my seat's signature is VOID until I
+    #  re-read and re-sign." A signature is a durable-looking artifact that keeps its authority
+    #  after the object beneath it changes — the same silent failure as his fossil pre-reg, one
+    #  level up. So the signature is BOUND TO A TEXT DIGEST and this checks it, rather than
+    #  trusting anyone's memory of what was signed.
+    import hashlib as _h
+    _pre = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                        "docs/h13-cell2-refly-prereg-DRAFT-whisper-c5058.md")
+    _s = open(_pre).read(); _secs = {}
+    for _tag in ["## 2.", "## 4.", "## 4b.", "## 5."]:
+        _i = _s.find(_tag)
+        if _i < 0: continue
+        _j = len(_s)
+        for _o in ["## 1.", "## 2.", "## 3.", "## 4.", "## 4b.", "## 5."]:
+            _k = _s.find(_o, _i + len(_tag))
+            if _k > 0: _j = min(_j, _k)
+        _secs[_tag] = _s[_i:_j]
+    _now = _h.sha256("".join(_secs[k] for k in sorted(_secs)).encode()).hexdigest()
+    ELDER_SIGNED_DIGEST = "929cb1c4ba4adcbfb07900f5dbeab60b1909604c71f51edac4bc094c9bec5682"
+    if _now != ELDER_SIGNED_DIGEST:
+        raise SystemExit(f"🔴 SIGNATURE VOID: the prereg sections Elder signed have CHANGED.\n"
+                         f"   signed {ELDER_SIGNED_DIGEST[:24]}…  now {_now[:24]}…\n"
+                         f"   His seat must re-read and re-sign before this can fly (his #9369).")
+    print(f"[signature gate] prereg §2/§4/§4b/§5 unchanged since Elder signed ({_now[:16]}…) — his seat VALID")
+    print("\n[HOLD] submission is gated on BOTH court signatures. Elder: SIGNED + digest-verified. Ember: PENDING.")
     print("[HOLD] no PUB will be sent until the seal/fly seat signs the amended prereg.")
 
 if __name__ == "__main__":
