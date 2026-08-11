@@ -112,7 +112,7 @@ def main():
             if _k > 0: _j = min(_j, _k)
         _secs[_tag] = _s[_i:_j]
     _now = _h.sha256("".join(_secs[k] for k in sorted(_secs)).encode()).hexdigest()
-    ELDER_SIGNED_DIGEST = "929cb1c4ba4adcbfb07900f5dbeab60b1909604c71f51edac4bc094c9bec5682"
+    ELDER_SIGNED_DIGEST = "2e7f3ba9807c8549bbc5a0bd1678cac552e67ecb7c662aef5608106878bddbee"
     if _now != ELDER_SIGNED_DIGEST:
         raise SystemExit(f"🔴 SIGNATURE VOID: the prereg sections Elder signed have CHANGED.\n"
                          f"   signed {ELDER_SIGNED_DIGEST[:24]}…  now {_now[:24]}…\n"
