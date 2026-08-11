@@ -111,8 +111,10 @@ def main():
     _pre = "docs/h13-cell2-refly-prereg-DRAFT-whisper-c5058.md"
     _now = _sp.run(["sha256sum", _pre], capture_output=True, text=True, cwd=_root).stdout.split()[0]
     SIGNATURES = {   # signer -> the whole-file digest THEY computed and published on the bus
-        "elder": "377e4b31546fe7b9d7e659c2dfbe7f23150d711b673d269b89cd7c1ca0f0afbb",  # #9396 register/decode
-        "ember": "377e4b31546fe7b9d7e659c2dfbe7f23150d711b673d269b89cd7c1ca0f0afbb",  # #9398 seal/fly
+        # BOTH VOID after the §4c-ter amendment (Elder ruling #9427). Awaiting re-signature
+        # against whole-file 80c6ca97a336603f1363c82ce096c49967a6a64be365e3038d8d42ed1bf7e7b8.
+        "elder": "377e4b31546fe7b9d7e659c2dfbe7f23150d711b673d269b89cd7c1ca0f0afbb",  # #9396 — STALE
+        "ember": "377e4b31546fe7b9d7e659c2dfbe7f23150d711b673d269b89cd7c1ca0f0afbb",  # #9398 — STALE
     }
     # NOTE: Ember suggested recording the operative binding in the prereg. That edit would change
     # the file and VOID BOTH SIGNATURES — the over-binding property working exactly as intended.
@@ -125,6 +127,49 @@ def main():
                          f"   Each seat must re-read and re-sign; I cannot re-bind these for them.")
     print(f"[signature gate] whole-file {_now[:16]}… matches every published signer digest — {len(SIGNATURES)} seat(s) VALID")
     print(f"[court] BOTH SEATS SIGNED at the operative whole-file digest — clear to submit.")
+
+    # ═══ TWO-PHASE SUBMISSION, G-ISO ADJUDICATING BETWEEN THEM ═══════════════════════════
+    phase = "science" if "--submit-science" in sys.argv else "prerun"
+    circs, labels = (sci_c, sci_l) if phase == "science" else (pre_c, pre_l)
+    est = EST_SCI if phase == "science" else EST_PRE
+    from ibm_multi_account import assert_explicit_account, service_for_submission, _load_env_files
+    _load_env_files()
+    acct = assert_explicit_account()
+    if acct != "IBMQ_ALT4": raise SystemExit(f"declares IBMQ_ALT4; got {acct} — REFUSING.")
+    svc = service_for_submission(acct)
+    u = svc.usage(); remaining = float(u["usage_limit_seconds"]) - float(u["usage_consumed_seconds"])
+    if u.get("usage_limit_reached") or remaining < need(est):
+        raise SystemExit(f"FIT GATE REFUSES: remaining={remaining}s < NEED {need(est):.0f}s (G-EPOCH)")
+    print(f"[fit gate] {acct}: {remaining:.1f}s >= NEED {need(est):.0f}s for the {phase} block — OK")
+    backend = svc.backend("ibm_marrakesh")
+    props = backend.properties(); ro = {}
+    for qq in range(backend.num_qubits):
+        try: ro[qq] = props.readout_error(qq)
+        except Exception: pass
+    q_ce = min(ro, key=ro.get)
+    best, bs = None, 9e9
+    for a, b_ in backend.coupling_map:
+        if a in ro and b_ in ro and a != q_ce and b_ != q_ce:
+            try: sc = ro[a] + ro[b_] + props.gate_error("cz", (a, b_))
+            except Exception: continue
+            if sc < bs: best, bs = (a, b_), sc
+    print(f"[layout] CE q{q_ce} | CC {best} — live, never cached")
+    tc = [transpile(c, backend, initial_layout=([q_ce] if c.num_qubits == 1 else list(best)),
+                    optimization_level=1, seed_transpiler=SEED) for c in circs]
+    from qiskit_ibm_runtime import SamplerV2
+    pubs = [(c, None, l["shots"]) for c, l in zip(tc, labels)]     # per-PUB shots = the weighted mixture
+    job = SamplerV2(mode=backend).run(pubs)
+    print(f"[SUBMITTED {phase.upper()}] job_id={job.job_id()}  ({len(pubs)} PUBs)")
+    man = {"cell": "H13-Cell2-REFLY", "phase": phase, "board": 77, "account": acct,
+           "backend": backend.name, "job_id": job.job_id(), "band": BAND, "shots_cell": SHOTS_CELL,
+           "seed": SEED, "draws_sha256_16": dhash, "prereg_sha256": _now,
+           "signatures": SIGNATURES, "layout": {"CE": q_ce, "CC": list(best)},
+           "labels": labels, "fit_gate": {"remaining": remaining, "need": need(est)}}
+    pth = os.path.join(_root, f"results/h13_cell2_refly_{phase}_manifest_{job.job_id()}.json")
+    json.dump(man, open(pth, "w"), indent=1); print(f"[manifest] {pth}")
+    if phase == "prerun":
+        print("\n⚠️  G-ISO MUST ADJUDICATE THIS BLOCK BEFORE THE SCIENCE BLOCK IS SUBMITTED.")
+        print("    Science submission requires --submit-science and is a SEPARATE deliberate act.")
 
 if __name__ == "__main__":
     main()
