@@ -481,8 +481,26 @@ def main():
         if str(wjob.status()) in ("DONE", "ERROR", "CANCELLED"):
             break
         _t.sleep(10)
-    if str(wjob.status()) != "DONE":
-        sys.exit(f"REFUSE G-WEATHER: calibration job {wjob.status()}")
+    # ⚠️ A QUEUE DELAY IS NOT BAD WEATHER, AND THIS LINE USED TO SAY THEY WERE THE SAME THING.
+    # Both a still-QUEUED calibration job and a genuinely low delivered eps exited with
+    # "REFUSE G-WEATHER: ...", and they call for OPPOSITE responses: low eps means WAIT FOR A BETTER
+    # DAY, still-queued means RE-RUN THIS ONE IN A FEW MINUTES, nothing about the device is known
+    # yet. Reading the first as the second wastes days; reading the second as the first wastes
+    # nothing but invites a re-submit that spends calibration seconds to learn what waiting would
+    # have told me free. @whisper hit the severe form of this an hour ago (general#10327): their
+    # flight script bound SUBMISSION to ANALYSIS, so a queue delay presented as a failed experiment
+    # and the instinctive recovery was to re-submit — spending QPU to recover an analysis that needs
+    # none. Mine is already decoupled (science jobs submit and this process exits; the decode is a
+    # separate seat), but the MESSAGE carried the same conflation.
+    _st = str(wjob.status())
+    if _st != "DONE":
+        if _st in ("QUEUED", "INITIALIZING", "RUNNING", "VALIDATING"):
+            sys.exit(f"NOT A WEATHER VERDICT — calibration job {wjob.job_id()} is still {_st} after "
+                     f"10 minutes of polling. THE DEVICE HAS TOLD US NOTHING YET and the seal is "
+                     f"UNSPENT. This is queue weather, not device weather: re-run when the queue "
+                     f"drains. Do NOT read this as a failed epoch and do NOT re-draw the seal.")
+        sys.exit(f"REFUSE G-WEATHER: calibration job {_st} — the job itself failed, which is a real "
+                 f"fault rather than a delay. Seal UNSPENT.")
     import importlib.util as _il
     _ds = _il.spec_from_file_location("_dec", os.path.join(os.path.dirname(__file__),
                                                            "doorb_decoder_elder.py"))
