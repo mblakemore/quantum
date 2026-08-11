@@ -45,18 +45,38 @@ SIGN_SIGMA = 5.0
 FORBIDDEN_KEYS = {"arm", "scenario", "label", "circuit"}
 
 
+# C6604 BUG FIX + CONTRACT HARDENING. The original _pm() checked `v in (1,-1)` BEFORE the 0/1
+# branch, so a RAW 1 returned +1: in 0/1 data BOTH values mapped to +1 and every correlator came
+# out +1.0000 — 80 confident CE calls, no abstentions, no error. It did not crash; it produced a
+# perfect-looking decode of a constant. Root cause: I put an encoding decision on the VALUE, and
+# a value cannot tell you its own encoding.
+#
+# Ember's Option C (adopted over my Option B): the encoding is DECLARED BY THE PRODUCER, not
+# inferred from the data. Inferring per-FILE from the value domain is better than per-value but
+# still fails silently on a legitimate +-1 file that happens to contain no -1. Declaration reads a
+# property of the producer; inference reads an accident of the data.
+#   contract:  {"encoding": "pm1", "records": [...]}   outcomes MUST be in {+1,-1}
+#   refuse:    missing field · unrecognised value · any outcome outside {+1,-1} (0 refuses LOUDLY)
+# A constant top-level key identical across all files carries no arm information (Ember, seal seat);
+# if it ever VARIES per file that is itself a leak and is refused.
+VALID_ENCODINGS = ("pm1",)
+
+
 def _pm(v):
     if v in (1, -1):
         return v
-    if v == 0:
-        return 1
-    raise ValueError(f"outcome {v!r} not in {{+1,-1,0,1}}")
+    raise ValueError(f"outcome {v!r} not in {{+1,-1}} — 0/1 encoding is REFUSED, declare pm1 and send signed values")
 
 
 def decode_records(obj):
     bad = FORBIDDEN_KEYS & set(obj.keys())
     if bad:
         return {"call": "REFUSED", "reason": f"blindness violation: keys {sorted(bad)} present"}
+    enc = obj.get("encoding")
+    if enc is None:
+        return {"call": "REFUSED", "reason": "no 'encoding' field — the producer must DECLARE it; a value cannot tell you its own encoding"}
+    if enc not in VALID_ENCODINGS:
+        return {"call": "REFUSED", "reason": f"unrecognised encoding {enc!r}; expected one of {VALID_ENCODINGS}"}
     stats = {b: {"n": 0, "s": 0} for b in DIAG}
     n_off = 0
     for r in obj["records"]:
@@ -64,8 +84,12 @@ def decode_records(obj):
         if b not in BASES:
             return {"call": "REFUSED", "reason": f"unknown basis {b!r}"}
         if b in stats:
+            try:
+                prod = _pm(r["a"]) * _pm(r["b"])
+            except ValueError as e:
+                return {"call": "REFUSED", "reason": str(e)}
             stats[b]["n"] += 1
-            stats[b]["s"] += _pm(r["a"]) * _pm(r["b"])
+            stats[b]["s"] += prod
         else:
             n_off += 1
     corr, no_call, raw = {}, [], {}
@@ -117,7 +141,7 @@ def _fixture(cxx, cyy, czz, n=4000, seed=1):
             a = 1 if (state >> 8) & 1 else -1
             same = (state % 100000) / 100000.0 < p_same
             recs.append({"basis": b, "a": a, "b": a if same else -a})
-    return {"records": recs}
+    return {"encoding": "pm1", "records": recs}
 
 
 def selftest():
@@ -126,8 +150,12 @@ def selftest():
         ("CE-design", _fixture(0.92189, 0.92189, 0.92189), "CE"),
         ("CC-design", _fixture(0.93337, -0.93337, 0.93337, seed=2), "CC"),
         ("null-noise", _fixture(0.0, 0.01, -0.01, seed=3), "NO_CALL"),   # genuinely-false sibling
-        ("tiny-N", {"records": [{"basis": "XX", "a": 1, "b": 1}] * 50}, "NO_CALL"),
-        ("blindness", {"records": [], "arm": "CE"}, "REFUSED"),
+        ("tiny-N", {"encoding": "pm1", "records": [{"basis": "XX", "a": 1, "b": 1}] * 50}, "NO_CALL"),
+        ("blindness", {"encoding": "pm1", "records": [], "arm": "CE"}, "REFUSED"),
+        # C6604 both-direction contract fixtures (Ember): the REFUSAL is the assertion that matters
+        ("raw-0/1 must REFUSE", {"encoding": "pm1", "records": [{"basis": "XX", "a": 0, "b": 1}] * 200}, "REFUSED"),
+        ("no encoding field", {"records": [{"basis": "XX", "a": 1, "b": 1}] * 200}, "REFUSED"),
+        ("bad encoding value", {"encoding": "zero_one", "records": [{"basis": "XX", "a": 1, "b": 1}] * 200}, "REFUSED"),
     ]
     for name, obj, want in cases:
         got = decode_records(obj)["call"]
