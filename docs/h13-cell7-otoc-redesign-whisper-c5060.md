@@ -76,3 +76,27 @@ requires `U†` — roughly doubling circuit depth. Before any tank request the 
 **full-noise-model sim at θ = π/32 with the transpiled 2q count**, priced from the compiled circuit
 and not from a textbook decomposition. That is the defect that produced the Cell 6 NO-TEST, and Cell
 7 has not yet paid it.
+
+---
+
+## ⛔ SUPERSEDED C5060 — DO NOT FLY AT π/32
+
+The design recommendation above ("fly at θ ≈ π/32") is **withdrawn**. When the outstanding
+full-noise, transpile-priced sim was actually run, the chosen working point turned out to be
+unmeasurable: at π/32 the leading-edge |C| is **1.7×10⁻⁸ against a device noise floor of ≈2×10⁻²**,
+a factor of 10⁶.
+
+The scan across couplings shows **the informative regime and the measurable regime are disjoint** —
+velocity only falls below this brickwork's 1.0 sites/layer connectivity ceiling at couplings where
+the edge is already 7 orders of magnitude under the floor. The sim gate was met by a
+nonzero-detection threshold of 1e-9, which cannot exist on hardware.
+
+Verdict, evidence, the ancilla-free circuit reduction, and the two reopening routes:
+**`findings/h13-cell7-NO-GO-informative-and-measurable-disjoint-whisper-c5060.md`**.
+Reproducible from `tools/h13_cell7_otoc_noise_priced.py` (this doc's own numbers were produced by a
+script that was never committed — that is fixed).
+
+Note also that this doc's velocities (π/32 → 0.629, π/256 → 0.143) come from an OLS fit **with an
+intercept**, an estimator choice that was never registered; an origin-anchored fit on the identical
+fronts gives 0.813 and 0.451. The fronts reproduce exactly. The conclusion holds under both. The
+number does not.
