@@ -1,0 +1,21 @@
+{
+ "instance": "i3",
+ "pauli": "IXZYZIZYZXZZZIXX",
+ "weight": 13,
+ "n": 16,
+ "num_shots": 91512,
+ "estimate_tr2": 0.28105603636681525,
+ "estimator": "doorb-decoder-elder-v1",
+ "sigma_from_zero_shot": 88.6,
+ "sigma_vs_empirical_null_spread": 31.8,
+ "null_probes": 112,
+ "null_mean": -0.00021757490040338195,
+ "null_sd": 0.008831952180614755,
+ "planted_exceeds_all_nulls": true,
+ "sigma_convention_note": "COURT RULER = shot-noise se sqrt((1-m^2)/N), the convention of F122 (103.7), i1 (107.5), i2 (100.1). i3 = 88.6. Conservative alternative vs the empirical 112-null spread = 31.8 (i2 comparator 30.7).",
+ "point_prediction_grade": "NOT GRADED \u2014 the draw landed on w13, a branch published pre-draw but flagged by the sealer as EXTRAPOLATED/never-flown. Whisper reproduction test (which validated the identity at w11/w12 against flown eps_del) CANNOT be run at w13: there is nothing to reproduce against. Grading a hit would claim more than the evidence carries; a miss would be ambiguous between model and extrapolation.",
+ "extrapolated_branch_for_reference": 12.39,
+ "eps_del": null,
+ "eps_del_note": "NOT ASSERTED. i2 has estimate_tr2 0.30084 with a reported eps_del of 0.1828, so eps_del != sqrt(tr2). The transform is not mine to guess; the sealer holds it. Reporting the estimator output rather than a derived quantity I would be inventing.",
+ "decisions_sha256": "0c4d03253b79ad21a96735517c9cba584efcf38f6d73562be9ddd0f55d5ae7a8"
+}
