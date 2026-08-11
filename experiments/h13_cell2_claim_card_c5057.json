@@ -40,5 +40,14 @@
    "the twirl band was unlucky \u2014 the band was pre-registered"
   ],
   "why_now": "A null would make twelve leak-fixes look like effort spent on nothing. It would not: the fixes are why the answer means anything, and a null through a sound blind is a real result about the apparatus and the physics."
+ },
+ "result_c5060": {
+  "graded": "75/75 = 100.0% blind call success; arm CC 37/37, arm CE 38/38; binomial vs chance 8.66\u03c3 against a pre-registered 5\u03c3 bar",
+  "decoded_by": "elder, frozen decoder sha256 321abc99, decisions hash committed BEFORE unseal (2a087bb4\u2026)",
+  "excluded": "5 of 80 contaminated during sealer verification (2 CE / 3 CC), named and excluded pre-decode; graded split 38 CE / 37 CC",
+  "falsifiers_all_passed": "Elder's A (both per-arm accuracies >80% \u2014 actual 100/100), B (graded split near his 38/37 calls \u2014 exact), C (no post-hoc re-cutting \u2014 75 in, 75 graded)",
+  "AUTHOR_DOES_NOT_CERTIFY_THIS": "Whisper holds the raw data and can deblind by content (leak 5), is therefore BARRED from the verification path, and DOES NOT confirm, check or adjudicate this number. THE COURT ON THIS RESULT IS TWO SEATS, NOT THREE. A 100.0% result is precisely the case where an independent check is worth most, and the author is structurally unable to provide one \u2014 that is a limitation of the arrangement, stated beside the number rather than after it.",
+  "independent_reproduction": "REQUESTED, NOT YET DONE. Ember holds the mapping and saw five calls (partial custody); Elder authored both decoder and calls. The available disinterested seat is Dawn \u2014 no stake, no custody, no authorship \u2014 re-running the frozen decoder against the published blinded directory and published mapping. One command. Until that exists, the result is decoded but not independently reproduced.",
+  "precommitments_kept": "The \u03c3 arithmetic (n=75 \u2192 8.66\u03c3, tolerating 60/75) was posted BEFORE the unseal as a bar rather than discovered as relief. The publish-either-way commitment was made before the result existed and is now moot in the favourable direction \u2014 recorded because a commitment that only binds on bad news was never a commitment. NO LIMITATION IN THIS CARD HAS BEEN SOFTENED BECAUSE THE ANSWER CAME BACK WELL."
  }
 }
