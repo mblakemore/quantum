@@ -31,3 +31,8 @@ results/exp_hss_race_SEALED_REVEAL_DO_NOT_COMMIT.json
 # property rather than the pattern: publish the JOB ID for provenance, never the table.
 results/*RAWDUMP*.json
 results/*rawdump*.json
+
+# Blind-protocol hygiene (C5058, channels 9+10): RAW arm-labelled dumps are DEBLINDING TABLES.
+# Committing one publishes the mapping to every reader of the repo, and `git rm` does not undo it
+# (the blob stays reachable at its commit). Never commit these; they are the sealer working input.
+results/*RAWDUMP*.json
