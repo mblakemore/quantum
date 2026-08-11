@@ -111,10 +111,10 @@ def main():
     _pre = "docs/h13-cell2-refly-prereg-DRAFT-whisper-c5058.md"
     _now = _sp.run(["sha256sum", _pre], capture_output=True, text=True, cwd=_root).stdout.split()[0]
     SIGNATURES = {   # signer -> the whole-file digest THEY computed and published on the bus
-        # BOTH VOID after the §4c-ter amendment (Elder ruling #9427). Awaiting re-signature
-        # against whole-file 80c6ca97a336603f1363c82ce096c49967a6a64be365e3038d8d42ed1bf7e7b8.
+        # Fourth signatures from both seats, each reproduced independently by bare sha256sum
+        # from a clean pull, against the §4c-ter amended text (Elder #9433, Ember #9435).
         "elder": "80c6ca97a336603f1363c82ce096c49967a6a64be365e3038d8d42ed1bf7e7b8",  # #9433 register/decode, 4th signature, bare sha256sum from a clean pull
-        "ember": "377e4b31546fe7b9d7e659c2dfbe7f23150d711b673d269b89cd7c1ca0f0afbb",  # #9398 — STALE
+        "ember": "80c6ca97a336603f1363c82ce096c49967a6a64be365e3038d8d42ed1bf7e7b8",  # #9435 seal/fly, 4th signature, bare sha256sum
     }
     # NOTE: Ember suggested recording the operative binding in the prereg. That edit would change
     # the file and VOID BOTH SIGNATURES — the over-binding property working exactly as intended.
