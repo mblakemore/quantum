@@ -101,6 +101,24 @@
   .verdict .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--ink-3)}
   .verdict .v{font-family:var(--mono);font-size:clamp(24px,5vw,32px);font-weight:700;color:var(--pink);margin:2px 0 4px}
   .verdict .s{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+  /* the distribution beat (board #52) — three sealed draws. Built from the page's own card idiom
+     rather than a table: every spec-page table in the museum carried a min-width floor that put
+     the window edge mid-number at 320px, and importing that pattern to fix a curation gap would
+     trade one defect for another. Rows wrap; nothing has a width floor. */
+  .draws{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+  .draw{background:var(--panel-2);border:1px solid var(--hair-2);border-radius:10px;padding:10px 12px}
+  .draw.ref{border-left:3px solid var(--pink)}
+  .draw.ctl{border-left:3px solid var(--ink-4)}
+  .draw .id{font-family:var(--mono);font-size:12.5px;color:var(--ink);font-weight:700}
+  .draw .id em{font-style:normal;color:var(--ink-3);font-weight:400}
+  /* GRID, not flex-wrap. Flex ran the pairs together into a paragraph — "F1" ended one line and
+     "103.7σ" began the next, so a reader at 320px could not reliably tell which value belonged to
+     which label. A label whose value is ambiguous is the same defect class as a label that is
+     cut: both read as something, and the something is not what the record says. */
+  .draw dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:baseline;margin:8px 0 0}
+  .draw dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink-3);white-space:nowrap}
+  .draw dd{font-family:var(--mono);font-size:13px;color:var(--ink-2);margin:0;text-align:right}
+  .draw dd b{color:var(--ink);font-weight:700}
   .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
   .story b { color:var(--ink); }
   .audit { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px dashed var(--edge); margin-top:14px; padding-top:9px; line-height:1.55; }
@@ -164,7 +182,7 @@
      320px — every horizontal-overflow instance I have found in this museum was a single token
      that could not wrap, and this exhibit produced one on its first render. overflow-wrap alone
      is not enough for a path with no spaces; anywhere is what breaks mid-token. */
-  .prov code, .seal code{overflow-wrap:anywhere;word-break:break-word}
+  .prov code, .seal code, .note code{overflow-wrap:anywhere;word-break:break-word}
   .arc{border-left:2px solid var(--edge);padding-left:12px;margin-top:10px}
   .arc h4{margin:10px 0 2px;font-size:13px;color:var(--ink-2)}
 </style>
@@ -241,6 +259,44 @@ strategy can achieve, proven blind, on real hardware.</p>
   14.4&times; &rarr; sizing 14.1&times; &rarr; <b>delivered 9.3&times;</b>. The claim evaluates at
   <em>delivered</em> amplitude over copies <em>actually spent</em>. The single-copy lane never
   completes here because completing it would misstate the theorem.</p>
+</section>
+
+<section class="panel">
+  <h2>Three sealed draws, not one</h2>
+  <p>One sealed win cannot tell you it was not a lucky draw. Two more instances flew under the
+  identical frozen protocol, each sealed, flown and decoded before the next was drawn &mdash; three
+  blind decodes, three F1 passes, all three clearing the proven floor.</p>
+  <div class="draws">
+    <div class="draw ref">
+      <div class="id">F122 &mdash; the reference <em>&middot; weight 12</em></div>
+      <dl><dt>DELIVERED &epsilon;</dt><dd><b>0.1845</b></dd>
+          <dt>F1</dt><dd>103.7&sigma; &middot; PASS</dd>
+          <dt>RAW RATIO</dt><dd>9.3&times;</dd></dl>
+    </div>
+    <div class="draw ref">
+      <div class="id">i2 &mdash; the within-weight replicate <em>&middot; weight 12</em></div>
+      <dl><dt>DELIVERED &epsilon;</dt><dd><b>0.1828</b></dd>
+          <dt>F1</dt><dd>100.1&sigma; &middot; PASS</dd>
+          <dt>RAW RATIO</dt><dd>9.7&times;</dd></dl>
+    </div>
+    <div class="draw ctl">
+      <div class="id">i1 &mdash; the control, a different weight <em>&middot; weight 11</em></div>
+      <dl><dt>DELIVERED &epsilon;</dt><dd><b>0.2028</b></dd>
+          <dt>F1</dt><dd>107.5&sigma; &middot; PASS</dd>
+          <dt>RAW RATIO</dt><dd>10.9&times;</dd></dl>
+    </div>
+  </div>
+  <p class="note"><b>Read the delivered &epsilon;, not the ratio.</b> The raw ratio has two inputs
+  &mdash; the floor set by <em>delivered</em> &epsilon; and the copies flown, set by <em>sizing</em>
+  &epsilon; &mdash; so it is not a clean function of the sealed operator&rsquo;s weight. Delivered
+  &epsilon; is measured directly at each calibration gate. The two independent <b>weight-12</b>
+  draws agree to <b>1.2&sigma;</b>; the <b>weight-11</b> draw sits <b>11&sigma;</b> away. That is a
+  replicate with its own control, not three draws agreeing with each other.</p>
+  <p class="note">Per-instance figures are read from the batch court-close record
+  (<code>results/doorb_dist_batch_court_close_elder.json</code>); the 1.2&sigma; and 11&sigma;
+  agreements are computed in &sect;6b of the white paper, which is where their method is stated.
+  A short batch is the authorization gate working &mdash; the run was bounded at three &mdash;
+  never a truncated result.</p>
 </section>
 
 <section class="panel">
