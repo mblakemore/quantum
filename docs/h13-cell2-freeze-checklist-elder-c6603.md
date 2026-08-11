@@ -309,6 +309,36 @@ depth the marginal cases are exactly where the frozen NO-CALL floor already abst
 check inherits the decoder's existing threshold rather than introducing a second one — same
 number, same meaning, no extra shots.
 
+## D4. Abstention rate as CUSTODY BY MEASUREMENT (C6603, #9244→#9251)
+
+The decoder's NO-CALL floor (|C|/se ≥ 5 at 400 shots) needs |C| ≥ 0.2425, and |C| = (1−p)·0.9276,
+so **p_knee = 0.7385**. With p drawn per run from a band, the **abstention rate** estimates
+`P(p > p_knee)` — the fraction of the declared band above the knee:
+
+| declared band | predicted abstention rate |
+|---|---|
+| [0.40, 0.60] | 0.0% |
+| [0.40, 0.70] | 0.0% |
+| [0.40, 0.80] | 15.4% |
+| [0.50, 0.90] | 40.4% |
+
+**Declare the band → predict the rate → compare.** Zero extra circuits, zero extra shots.
+
+**Why this is a category change rather than an improvement** (Ember): custody-by-record has one
+irreducible weakness — *the record is produced by the party it constrains*. A drawer publishing
+one set of taus and applying another satisfies every clause. This forces **three independently
+produced artifacts to agree**: the BAND (prereg, frozen pre-flight), the DRAWS (drawer's custody
+file), the RATE (measured from the science records, **produced by the hardware and not under the
+drawer's control**). A falsified custody file now disagrees with the tape.
+
+**The inverse is diagnostic and easier to miss**: zero abstentions with a declared upper edge
+above 0.7385 is *not* a clean result — the realized twirl never reached its declared edge, and the
+ceiling's numerator is measured under that same randomization, so a "too clean" rate impugns the
+**floor**, not just the band. *A pass better than predicted is the shape that killed Cell 6+6b.*
+
+**Strengthens the D3 ask**: the band must be declared **in p**, because it is now checkable
+against the data rather than only against the custody file.
+
 ## E. Instruments delivered by this seat
 
 - `tools/h13_cell2_decoder_elder.py` — frozen decoder, signs only (unaffected by all of the
