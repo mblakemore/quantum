@@ -210,6 +210,14 @@ def assert_explicit_account(env_var="QPU_ACCOUNT_VAR"):
     hardcoded one chosen at conversion time. The account has to be named at the moment of flight,
     by whoever is flying.
     """
+    # C5060 FIX (Whisper): LOAD THE .env FILES BEFORE CHECKING FOR THE TOKEN. This function read
+    # os.environ directly while describe_accounts() — called to build the very error message —
+    # goes through discover_tokens() and DOES load them. So a correctly-configured .env account
+    # produced a self-contradictory refusal: "no token is set for IBMQ_ALT4 ... Accounts currently
+    # discoverable: [... 'IBMQ_ALT4' ...]". It refused the flight and then listed the credential
+    # it had just declared absent. service_for_submission() already loads first, so the asymmetry
+    # was unintended. Caught by the guard firing on a valid ALT4 flight.
+    _load_env_files()
     name = os.environ.get(env_var)
     if not name:
         raise RuntimeError(
