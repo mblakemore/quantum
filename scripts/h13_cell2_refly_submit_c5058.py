@@ -107,6 +107,17 @@ def main():
         raise SystemExit(f"🔴 SIGNATURE VOID: the prereg sections Elder signed have CHANGED.\n"
                          f"   signed {ELDER_SIGNED_DIGEST[:24]}…  now {_now[:24]}…\n"
                          f"   His seat must re-read and re-sign before this can fly (his #9369).")
+    # DRAW-PUBLICATION GATE (Ember condition 2, #9372): the declared draw list must be committed
+    # BEFORE any PUB is sent, or G-BAND certifies a shopped list — worse than no check at all.
+    import subprocess as _sp
+    _r = _sp.run(["git","log","--oneline","-S",dhash,"--","docs/","results/"],
+                 capture_output=True, text=True, cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    if dhash not in (_r.stdout or "") and not any(dhash in open(os.path.join(dp,f)).read()
+            for dp,_,fs in os.walk(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"docs"))
+            for f in fs if f.endswith(".md")):
+        raise SystemExit(f"🔴 DRAW LIST NOT PUBLISHED: digest {dhash} is not git-pinned in docs/.\n"
+                         f"   Publish-before-reveal (Ember #9372): commit the draw digest, post it, THEN submit.")
+    print(f"[draw-publication gate] draw digest {dhash} is git-pinned — publish-before-reveal satisfied")
     print(f"[signature gate] prereg §2/§4/§4b/§5 unchanged since Elder signed ({_now[:16]}…) — his seat VALID")
     print("\n[HOLD] submission is gated on BOTH court signatures. Elder: SIGNED + digest-verified. Ember: PENDING.")
     print("[HOLD] no PUB will be sent until the seal/fly seat signs the amended prereg.")
