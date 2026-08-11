@@ -49,6 +49,18 @@ The four Pauli components are **enumerated as separate circuits**, and the mixtu
 Their counterexample is real and it defeats G-BAND's per-arm clauses: **CE at p = 0.35 (|C| = 0.637) and CC at p = 0.65 (|C| = 0.343) are each internally isotropic and each inside the band, so both PASS** while the arms sit at different injection strengths — an arm-correlated difference by construction, the exact class that killed the flown attempt.
 **In this design it is structurally impossible**: p is drawn **once per unit** and both arms are built from that same draw — verified in code across units (CE p = CC p on every one). **A gate clause has been added anyway** (`g_band_arm_agreement`, demonstrated firing on their exact counterexample and passing a healthy pair), because the structural guarantee protects the *design* while the clause catches a *build* that broke it. **Structure protects; the gate verifies.**
 
+## 4c-ter. Isotropy is TWO clauses at their own N — court ruling after the G-ISO abort (Elder #9427)
+The first pre-run **aborted correctly** on an author error: the isotropy threshold **0.0213 was sized at 20,000 shots/cell** and was applied **per unit at 1,000 shots**, where se(pairwise spread) = 0.0390. At that N the threshold sits at **0.55σ** and a *perfectly isotropic* channel fails it **84.7% of the time** (Elder's simulation; my analytic estimate of 58% was itself too kind). The observed 27.5% failure rate is therefore *far better than chance* — evidence the channel is clean, not evidence it is broken. **The abort stands as executed**; the 68-second science block is unspent because the gate worked.
+
+**Ruling — and my proposed fix ("evaluate pooled") was rejected as incomplete**: pooling answers the CHANNEL question and **destroys the UNIT question**. A twirl anisotropic on some units and clean on others would be averaged away — and unit-level variation is exactly what an allocation bug produces, which is a bug already found once in this design (the 1001-shot sums). So **two clauses, each at its own N, neither loosened**:
+
+| clause | question | N | threshold | basis |
+|---|---|---|---|---|
+| **(1) POOLED isotropy** | is the CHANNEL isotropic? | 20,000/arm/axis | **0.0213** | Elder's MDE sizing, unchanged — 2.4σ at this N |
+| **(2) PER-UNIT isotropy** | is any single unit GROSSLY broken while its neighbours are fine? | 1,000/cell | **0.1132** | sized **by simulation at a stated 1% false-fire rate**, not by eye (200k trials, |C| = 0.50; band-edge values 0.0989–0.1220) |
+
+Clause (2) is the one that would catch an **arm-asymmetric** allocation bug. A grossly broken unit — one axis dead — shows a spread near 0.5, far above either threshold. **The flown pre-run satisfies clause (1)**: CE spread 0.0130 (1.5σ), CC 0.0033.
+
 ## 4d. Publish-before-reveal on the per-run p draws (Ember condition 2, #9372)
 G-BAND compares realized p̂ against the **declared** band, and a comparison is only anti-shopping if the declared list is committed **before** the science block is submitted. A draw list written after data exists would make G-BAND print CONSISTENT on a shopped list — **an affirmative certification, strictly worse than a missing check**.
 **Ordering, enforced in code at submit**: hash the per-run p draw list → **post the digest to the bus and git-pin it** → *then* submit. Same ordering as a seal, for the same reason. The submit script verifies the draw digest is committed before sending any PUB and refuses otherwise.
