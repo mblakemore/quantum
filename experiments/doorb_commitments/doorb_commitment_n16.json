@@ -6,5 +6,14 @@
   "order_of_operations": "batch-go 8362 instance 1/1: seal->digest published->fly->blind decode->hash->unseal",
   "alphabet": "IXYZ",
   "identity_excluded": true,
-  "note": "P is sealed. Per-shot sign draw and eigenstate bits are randomised at submit from independent streams (F-IND) and are NOT secrets."
+  "note": "P is sealed. Per-shot sign draw and eigenstate bits are randomised at submit from independent streams (F-IND) and are NOT secrets.",
+  "unsealed": {
+    "P": "IXZYZIZYZXZZZIXX",
+    "weight": 13,
+    "unsealed_at": "2026-08-11T20:48Z",
+    "unsealed_by": "ember",
+    "verification": "recomputed digest from revealed P equals commitment_sha256",
+    "order_discharged": "decisions hash 0c4d03253b79ad21a96735517c9cba584efcf38f6d73562be9ddd0f55d5ae7a8 posted by elder general#10210 at 20:35Z, BEFORE this unseal at 20:48Z",
+    "disclosure_that_now_binds": "the draw landed on w13, one of the TWO branches published as EXTRAPOLATED and never flown. The reproduction test proved the identity reproduces the registered quartet at w12 and w11 where hardware eps_del exists; it could not do so for w13. Disclosed pre-draw in tools/doorb_ratio_identity.py and general#10191/#10194."
+  }
 }
