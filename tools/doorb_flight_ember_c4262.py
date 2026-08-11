@@ -23,8 +23,38 @@ import argparse, itertools, json, math, os, re, sys, datetime
 import numpy as np
 
 # ALT3 — the live tank (593s at flight time). WhisperPaid is spent (~10s) and cannot carry this.
-PAID_CRN = ("crn:v1:bluemix:public:quantum-computing:us-east:"
-            "a/b290f963c84c4e34a5aa7704b4e39b66:952e28e1-bdbf-4593-aec7-e1520b4218a8::")
+# ── ACCOUNTS ────────────────────────────────────────────────────────────────────────────────
+# C4273: RENAMED FROM PAID_CRN, WHICH WAS A LIE THAT COST A DECISION. The old constant was called
+# PAID_CRN and held ALT3, a FREE Open-plan instance — the comment above it said so and I still read
+# the NAME as the fact, then told the Creator to "top up the paid CRN" for an account that cannot
+# be topped up. A name is documentation written in a hurry; it is the cheapest thing in a file to
+# get wrong and it was load-bearing for a spend decision.
+#
+# Both entries are listed so the next reader compares VALUES, not identifiers, and so a switch is
+# an argument rather than a silent edit to a constant.
+ACCOUNTS = {
+    # ALT3 — free Open-plan. EXHAUSTED 602/600 at C4273; recovers as usage ages off a rolling 28d
+    # window. Not toppable-up. Carried i1 and i2.
+    "ALT3": ("crn:v1:bluemix:public:quantum-computing:us-east:"
+             "a/b290f963c84c4e34a5aa7704b4e39b66:952e28e1-bdbf-4593-aec7-e1520b4218a8::",
+             "IBMQ_ALT3"),
+    # ALT4 — free Open-plan, DIFFERENT IBM Cloud account. Declared a valid venue by the Creator
+    # (general#10173, 2026-08-11) and authorization=open billing=free in the registry.
+    "ALT4": ("crn:v1:bluemix:public:quantum-computing:us-east:"
+             "a/34b568eab22f4ae6ad9cf2beba26d4d6:50b9c2d8-a84b-4d27-974f-ecc9384f50e8::",
+             "IBMQ_ALT4"),
+}
+DEFAULT_ACCOUNT = "ALT4"
+
+# ⚠️ WHY MOVING ACCOUNT DOES NOT BREAK THE SEAL'S PRE-REGISTRATION, verified rather than assumed.
+# The standing prereg (general#8449) fixed eps_size 0.1616 AT THE GATE, on this venue. What that
+# binds is the DEVICE, not the billing account. Measured C4273 before repointing: ALT4 reaches
+# ibm_fez, ibm_kingston and ibm_marrakesh — EXPECTED_BACKEND is ibm_marrakesh and it is reachable,
+# so the flight lands on the same physical device the gate was fixed against. The account change
+# moves quota, not physics. Had marrakesh been absent from ALT4 this repoint would have been a
+# venue change and the prereg would have needed redrawing, not repointing.
+ACCOUNT_CRN, ACCOUNT_ENV = ACCOUNTS[DEFAULT_ACCOUNT]
+PAID_CRN = ACCOUNT_CRN          # legacy alias; call sites below still read PAID_CRN
 CAL_ROWS = 2000        # public-P calibration rows, SAME JOB, ride FIRST (registered #7414)
 EXPECTED_BACKEND = "ibm_marrakesh"
 RESERVE_S = 20
@@ -264,10 +294,10 @@ def paid_token():
             continue
         with fh as f:
             for line in f:
-                m = re.match(r"^IBMQ_ALT3=(.+)$", line.strip())
+                m = re.match(rf"^{ACCOUNT_ENV}=(.+)$", line.strip())
                 if m:
                     return m.group(1).strip().strip('"').strip("'")
-    sys.exit("REFUSE: IBMQ_ALT3 not found in DC15E or DC15W .env")
+    sys.exit(f"REFUSE: {ACCOUNT_ENV} not found in DC15E or DC15W .env")
 
 
 def budget_copies(n, eps, delta):
