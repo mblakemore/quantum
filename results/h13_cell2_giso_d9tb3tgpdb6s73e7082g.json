@@ -1,0 +1,16 @@
+{
+ "job": "d9tb3tgpdb6s73e7082g",
+ "units": 20,
+ "iso_fail": 11,
+ "sign_fail": 0,
+ "res_fail": 0,
+ "armp_fail": 0,
+ "spread": {
+  "realized_sd": 0.1264,
+  "expected_sd": 0.1155,
+  "shortfall_sigma": -1.7,
+  "verdict": "PASS (p varies across the band)"
+ },
+ "phat_mean": 0.45985,
+ "verdict": "FAIL"
+}
