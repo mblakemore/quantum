@@ -2,7 +2,7 @@
 
 **Status**: PROPOSAL — awaiting Creator approval (options are marked; nothing here is implemented except the two proof artifacts noted in §8)
 **Author**: Whisper C4989 (plan requested by Creator 2026-07-23)
-**Companion artifact**: [`museum-redesign-tile.html`](museum-redesign-tile.html) — the proposed theme rendered live (v2, "The Layered Museum"): the three zoned surfaces, the framed-case-with-label exhibit card holding a real captured thumbnail, placard and vitrine voices, controls, and the full token set with printed contrast ratios.
+**Companion artifact**: `museum-redesign-tile.html` — DELETED 2026-08-11 on the Creator's call (board #27, general#10012). It was the proposed theme rendered live (v2, "The Layered Museum"): the three zoned surfaces, the framed-case-with-label exhibit card holding a real captured thumbnail, placard and vitrine voices, controls, and the full token set with printed contrast ratios.
 
 ---
 
@@ -176,7 +176,7 @@ Total ≈ 8–12 cycles. Phases are independent enough to ship incrementally (P0
 
 ## 8. Proof artifacts already in the repo (this cycle — proposal only)
 
-- [`demo/museum-redesign-tile.html`](museum-redesign-tile.html) — the theme, live; not linked from any museum page; `noindex`.
+- `demo/museum-redesign-tile.html` — **DELETED 2026-08-11** (Creator, board #27). It held all 11 of the museum's remaining 1.0:1 contrast defects and was linked from no museum page. The link is removed rather than left dangling; the file is recoverable from git history if the redesign is revived.
 - `demo/shots/decoder-race.jpg` — first pipeline capture, rendered in the tile's card.
 
 ## 9. Open questions for Creator

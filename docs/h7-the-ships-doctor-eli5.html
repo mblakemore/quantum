@@ -4,47 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Ship's Doctor — Horizons 7 (ELI5)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 </head>
 <body>
 <style>
   :root {
-    --bg: #0a0e1a;
-    --panel: #121a2e;
-    --panel-2: #18203a;
-    --line: #263151;
-    --ink: #d6ddf0;
-    --ink-dim: #8b97b8;
-    --ink-faint: #848fb3;
-    --amber: #ffb454;
-    --amber-soft: #ffcd8a;
-    --teal: #35e0c8;
-    --teal-soft: #7defd8;
-    --coral: #ff6b7a;
-    --glow: rgba(255, 180, 84, 0.14);
-    --teal-glow: rgba(53, 224, 200, 0.12);
-    --shadow: rgba(0, 0, 0, 0.45);
-    --sans: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    /* RETHEMED to the house palette on the Creator's call (board #27, general#10012). Token NAMES
+       are unchanged so every rule below is untouched — this is a remap, not a rewrite, and the
+       page's prose, structure and figures are byte-identical. */
+      --bg: #04060c;
+      --panel: #0a0e18;
+      --panel-2: #0d1220;
+      --line: #1a2234;
+      --ink: #e8f2ff;
+      --ink-dim: #c4d2e6;
+      --ink-faint: #9fb4d0;
+      --amber: #ffc86b;
+      --amber-soft: #ffd89b;
+      --teal: #62e6ff;
+      --teal-soft: #a5f1ff;
+      --coral: #ff6b5e;
+      --glow: rgba(255, 200, 107, 0.14);
+      --teal-glow: rgba(98, 230, 255, 0.12);
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+      --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+      --mich: 'Michroma', sans-serif;
   }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #eef1f8;
-      --panel: #ffffff;
-      --panel-2: #f5f7fc;
-      --line: #d9e0f0;
-      --ink: #1a2138;
-      --ink-dim: #566187;
-      --ink-faint: #5c6683;
-      --amber: #8f5500;
-      --amber-soft: #7d4b00;
-      --teal: #097064;
-      --teal-soft: #08665b;
-      --coral: #bb2b3c;
-      --glow: rgba(178, 107, 0, 0.10);
-      --teal-glow: rgba(12, 148, 131, 0.08);
-      --shadow: rgba(30, 41, 79, 0.10);
-    }
-  }
+  /* The light-scheme override is REMOVED, not neutered: the house style is dark-only (#04060c),
+     and a page that repaints itself white on a light device is off-brand exactly where nobody on
+     the ship would see it. The retheme guide's dark-only rule, applied. */
   :root[data-theme="dark"] {
     --bg: #0a0e1a; --panel: #121a2e; --panel-2: #18203a; --line: #263151;
     --ink: #d6ddf0; --ink-dim: #8b97b8; --ink-faint: #848fb3;
