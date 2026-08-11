@@ -78,6 +78,22 @@
 
   .tbl-wrap { overflow-x:auto; margin:14px 0; border:1px solid var(--edge); border-radius:12px; }
   table { border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; min-width:600px; }
+  /* task#24: 71 labels across the spec pages were cut INSIDE a number at 320/360/390 — a
+     fragment like '0' where the value is '0.478', which reads as a complete number and so does
+     not announce its own truncation. ROOT CAUSE is the min-width above: it forces the table
+     140-280px wider than a 320px window, so the window's right edge lands mid-value. Three
+     earlier fixes tried to MARK the cut and all three failed on measurement — a right-edge fade
+     pushed 5 labels below AA because a masked glyph renders at reduced opacity, a solid edge rule
+     became the label's own background at 1.44:1, and scroll-snap governs where scrolling RESTS
+     while this cut happens at scroll 0, before anything has scrolled.
+     So stop marking the cut and stop causing it. Below the phone widths the table drops its floor
+     and fits the window; prose columns wrap to absorb the width, and a NUMBER IS A SINGLE TOKEN,
+     so normal wrapping already refuses to break inside one. No colour, no opacity, no mask —
+     nothing that can cost contrast, which is what disqualified every previous attempt. */
+  @media (max-width: 430px){
+    .tbl-wrap table { min-width:0 }
+    .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
+  }
   th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
