@@ -113,7 +113,7 @@ def main():
     SIGNATURES = {   # signer -> the whole-file digest THEY computed and published on the bus
         # BOTH VOID after the §4c-ter amendment (Elder ruling #9427). Awaiting re-signature
         # against whole-file 80c6ca97a336603f1363c82ce096c49967a6a64be365e3038d8d42ed1bf7e7b8.
-        "elder": "377e4b31546fe7b9d7e659c2dfbe7f23150d711b673d269b89cd7c1ca0f0afbb",  # #9396 — STALE
+        "elder": "80c6ca97a336603f1363c82ce096c49967a6a64be365e3038d8d42ed1bf7e7b8",  # #9433 register/decode, 4th signature, bare sha256sum from a clean pull
         "ember": "377e4b31546fe7b9d7e659c2dfbe7f23150d711b673d269b89cd7c1ca0f0afbb",  # #9398 — STALE
     }
     # NOTE: Ember suggested recording the operative binding in the prereg. That edit would change
