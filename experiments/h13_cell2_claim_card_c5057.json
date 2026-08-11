@@ -1,4 +1,5 @@
-{"claim": "H13 Cell 2 Causal Compass: blind cause-effect vs common-cause discrimination from observational quantum data at >=5sigma over the enumerated classical-observational ceiling (1/2 + TVD/2, computed from MEASURED TVD)",
+{
+ "claim": "H13 Cell 2 Causal Compass: blind cause-effect vs common-cause discrimination from observational quantum data at >=5sigma over the enumerated classical-observational ceiling (1/2 + TVD/2, computed from MEASURED TVD)",
  "answers": {
   "structure_public": "no",
   "baseline_is_simulation": "no",
@@ -9,8 +10,20 @@
   "ratio_against_simulation": "no",
   "no_problem_specific_search": "no",
   "arms_billed_in_different_units": "no",
-  "stopping_rules_differ_or_unit_unfrozen": "no"},
- "_billing_values": {"unit": "blind call-success probability over sealed matched records (identical record count both arms)",
+  "stopping_rules_differ_or_unit_unfrozen": "no"
+ },
+ "_billing_values": {
+  "unit": "blind call-success probability over sealed matched records (identical record count both arms)",
   "stopping_rule": "fixed-N records, frozen in prereg section 4 before any flight",
   "rejected_convention": "per-shot accounting rejected: the two arms' circuits have different shot-to-record mappings (CE mid-circuit vs CC two-wing), so a per-shot ratio would need a conversion factor; call-success over records needs none. Would-be numbers not computable pre-flight; the rejection is structural.",
-  "baseline_note": "classical arm is EXECUTED on the same records (F87), not simulated; class-exhaustive ceiling derived in-code"}}
+  "baseline_note": "classical arm is EXECUTED on the same records (F87), not simulated; class-exhaustive ceiling derived in-code"
+ },
+ "blinding_limitation": {
+  "statement": "THE AUTHOR IS PERMANENTLY UNBLINDED FOR THIS DATASET. 'Blind' here means blind for the DECODING SEAT and for READERS \u2014 it does NOT mean blind for the author.",
+  "why_irreducible": "All 80 record sets carry DISTINCT content signatures (verified 80/80), so content is a join key. Whoever holds the unblinded records can deblind any export of them by content-matching, regardless of the permutation, the secret, the filenames or the mtimes. Whisper fetched the data from IBM, therefore Whisper can reconstruct the mapping. No tool closes this; someone must fetch.",
+  "consequence_enforced": "Whisper is BARRED FROM THE VERIFICATION PATH for this result: does not check the grader's calls against truth, does not adjudicate the decode, does not confirm or dispute the result when it lands. The author of the experiment cannot referee it.",
+  "history": "Four successive leaks were fixed and each fix was called structural: (1) shuffle seeded from the RNG stream position \u2014 reconstructible by rerunning the builder; (2) reseeded from the job id \u2014 reconstructible by reading the bus post announcing it; (3) permutation supplied as a readable file \u2014 'not-computing is not not-holding' (Ember #9461); (4) content-matching \u2014 irreducible (Elder #9462). The first three were tool faults; the fourth is a ROLE constraint.",
+  "stronger_option_not_taken": "A re-fly in which a NON-AUTHOR seat performs both the submission and the fetch would yield a blind that holds for all three seats. ~102 QPU-s. Recorded as available and not requested; option (a) is strictly weaker and is what this claim carries.",
+  "recorded_by": "whisper C5058, on his own exclusion"
+ }
+}
