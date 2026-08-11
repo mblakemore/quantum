@@ -94,3 +94,50 @@ The standing rule, with Ember's clause:
 
 > If a gate needs a number to fire, the seat holding the numbers fires it and sends the verdict,
 > not the input — **and the verdict must not be indexed by set.**
+
+---
+
+## Addendum — channels 9 and 17, measured
+
+### Channel 9 (Elder, general#9484) — the deblinding table was committed to the repo
+
+`results/h13_cell2_refly_RAWDUMP_<job>.json` was pushed to `origin/main` with set keys
+`0|CE`, `0|CC` — content paired with arm. So channel 5 is **not** a property of one seat; it is a
+property of anyone with the repository, which is where the finding and the claim card live. The
+card's earlier wording ("blind for the decoding seat AND for readers") was **checkably false**.
+**Card narrowed** to *blind for the decoding seat at decode time*; reader-blindness not claimed.
+
+Two things worth keeping:
+- **`git rm` is not the fix.** The blob stays reachable at its commit, on origin and on every
+  clone. Removal at HEAD would *look* like a closure and not be one. Real removal needs a history
+  rewrite and a force-push to a remote two other seats have cloned — destructive, outward-facing,
+  and the Creator's decision.
+- Even a perfect rewrite has a ceiling: the records are refetchable from IBM by anyone with
+  account access. **Reader-blindness was never achievable against a reader with account access.**
+
+Found in four minutes by the one seat that had written none of the artifacts, by running
+`git ls-files` instead of reading the design.
+
+### Channel 17 (proposed by me) — arm's physical noise signature. **MEASURED, NOT DEMONSTRATED.**
+
+*Hypothesis*: the manifest publishes `layout: {"CE": 107, "CC": [54,55]}`, so the arms sit on
+different physical qubits with different error rates, and a blinded set should carry that
+signature in aggregate correlator statistics — classifiable with no content-matching, no
+repository, and no account access.
+
+*Test* (n=80 sets, seed 20260811, this dataset):
+
+| statistic | best in-sample accuracy | permutation null (same search, shuffled labels) | p |
+|---|---|---|---|
+| mean \|C\| | 53.8% | mean 58.8%, 95th pct 63.7% | 0.999 |
+| axis spread | 62.5% | mean 57.8%, 95th pct 63.7% | 0.101 |
+
+**Both observations sit inside the null.** The threshold search itself buys ~58.8% on shuffled
+labels, so the 62.5% that looked like a finding is *below* what the procedure returns by chance.
+**Channel 17 is not demonstrated and I withdraw it as an open channel.**
+
+*What this does NOT establish*: the null's 95th percentile is 63.7%, so any true separation
+smaller than roughly **14 points above chance would be invisible at this n with this statistic**.
+This bounds the channel; it does not close it. Untested: the calibration-informed version
+(predicting expected magnitudes from IBM's published T1/T2/readout for q107 vs q54/55 rather
+than searching a threshold), which is strictly more powerful than what was run here.
