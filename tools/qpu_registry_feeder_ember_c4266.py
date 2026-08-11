@@ -104,7 +104,8 @@ def account_row(r, observed_at):
                      "consumed_s": r.get("consumed"),
                      "flagged": bool(r.get("flagged")),
                      "token_fingerprint": r.get("fp"),      # fingerprint only, never the token
-                     "instance_name": r.get("name")}}
+                     "instance_name": r.get("name"), "env_var": r.get("token"),
+                     "crn_tail": r.get("crn_tail")}}
 
 
 def main():
@@ -134,7 +135,24 @@ def main():
                 skipped += 1
                 continue
             body = {"identity": crn, "observed_at": stamp, "updated_by": "qpu_health_feeder",
-                    "name": r.get("name") or "unnamed-instance", "kind": "qpu_account",
+                    # C4272 DEFECT, found by @whisper registering ALT4: EVERY free IBM account
+                    # reports instance_name "open-instance", so ALT/ALT2/ALT3 all landed in the
+                    # registry under ONE name. Rows were keyed correctly by CRN (identity) and were
+                    # therefore distinct — but INDISTINGUISHABLE TO A READER, and allocation is done
+                    # by readers. A name identical across distinct resources is not a name.
+                    #
+                    # The env-var label (IBMQ_ALT3 etc.) was available in the health row as `token`
+                    # the whole time and I never used it. It is unique per account, it is what every
+                    # human and script already calls these, and it is what a spend decision needs.
+                    # Provider name retained in meta so nothing is lost.
+                    # PARTIAL FIX CAUGHT BY ITS OWN DRY RUN: env-var alone still collides,
+                    # because ONE KEY CAN HOLD MULTIPLE INSTANCES — IBMQ_TOKEN carries three CRNs,
+                    # so three rows came back named "IBMQ_TOKEN@DC15E". The env var is unique per
+                    # KEY, not per ACCOUNT, and the row IS an account. Disambiguate with the CRN
+                    # tail, which is what makes the row unique in the first place.
+                    "name": ((r.get("token") or r.get("name") or "acct")
+                             + "/" + (r.get("crn_tail") or "?")[-8:]),
+                    "kind": "qpu_account",
                     "blind_spots": ACCOUNT_BLIND_SPOTS}
             body.update(account_row(r, stamp))
             if a.dry_run:
