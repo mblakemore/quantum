@@ -68,8 +68,15 @@ def build():
 IDEAL_SIGNS = {"CE": (+1, +1, +1),      # QM repeatability forces all-positive diagonals
                "CC": (+1, -1, +1)}      # Phi+ carries an intrinsic <YY> = -1
 
-def grade(corrs):
-    """corrs[arm][basis] = twirl-averaged correlator. Isotropy = the three agree."""
+def grade(corrs, ns=None):
+    """corrs[arm][basis] = twirl-averaged correlator. Isotropy = the three |C| agree.
+    RESOLUTION PRECONDITION (Elder #9204): a measured sign is only meaningful where |C| is
+    resolved away from zero — under a strong twirl the correlators shrink and the sign becomes
+    noise. Assert sign only where |C|/se >= 5; below that report UNRESOLVED, NEVER a mismatch.
+    Calling an unresolved sign a flip is a gate firing on noise — the inverse of tonight's
+    fail-opens and just as wrong. At 20k pre-flight depth signs resolve past 30 sigma even at
+    p=0.9; at 400 science shots the marginal cases are exactly where the frozen NO-CALL floor
+    already abstains, so this check INHERITS that threshold rather than adding a second one."""
     out = {}
     for arm in ("CE", "CC"):
         # MAGNITUDES, not signed values: Phi+ carries an intrinsic <YY> = -1, so the CC arm's
@@ -86,10 +93,23 @@ def grade(corrs):
         # event: a channel attenuating all three axes EQUALLY while flipping one sign passes
         # isotropy and INVERTS the statistic. A correct depolarizing twirl cannot do that — but
         # this gate exists to detect an INCORRECT channel, and incorrect is not only anisotropic.
-        signs = tuple(1 if corrs[arm][b] >= 0 else -1 for b in BASES)
-        out[arm]["signs"] = signs
+        N = (ns or {}).get(arm, SHOTS_PER_CELL)
+        signs, zs, unresolved, mismatch = [], [], [], []
+        for i, b in enumerate(BASES):
+            C = corrs[arm][b]
+            se = math.sqrt(max(1 - C * C, 1e-12) / N)
+            z = abs(C) / se
+            zs.append(round(z, 1))
+            sg = 1 if C >= 0 else -1
+            signs.append(sg)
+            if z < 5: unresolved.append(b)
+            elif sg != IDEAL_SIGNS[arm][i]: mismatch.append(b)
+        out[arm]["signs"] = tuple(signs)
         out[arm]["signs_expected"] = IDEAL_SIGNS[arm]
-        out[arm]["gate_pass_signs"] = bool(signs == IDEAL_SIGNS[arm])
+        out[arm]["sign_z"] = zs
+        out[arm]["unresolved_axes"] = unresolved
+        out[arm]["sign_mismatch_axes"] = mismatch
+        out[arm]["gate_pass_signs"] = bool(not mismatch)      # UNRESOLVED is not a mismatch
         out[arm]["gate_pass"] = bool(out[arm]["gate_pass_isotropy"] and out[arm]["gate_pass_signs"])
     return out
 
@@ -113,7 +133,9 @@ def main():
         for arm in ("CE", "CC"):
             print(f"  {arm}: C={g[arm]['C']}  |C| spread={g[arm]['max_pairwise_spread_abs']}  "
                   f"signs={g[arm]['signs']} (want {g[arm]['signs_expected']})  "
-                  f"iso={'PASS' if g[arm]['gate_pass_isotropy'] else 'FAIL'} sign={'PASS' if g[arm]['gate_pass_signs'] else 'FAIL'}")
+                  f"z={g[arm]['sign_z']} iso={'PASS' if g[arm]['gate_pass_isotropy'] else 'FAIL'} "
+                  f"sign={'PASS' if g[arm]['gate_pass_signs'] else 'FAIL'}"
+                  + (f" UNRESOLVED={g[arm]['unresolved_axes']}" if g[arm]['unresolved_axes'] else ""))
         print("  (ideal twirl: the four Paulis average to a depolarizing channel -> the three diagonals agree)")
         return
     from ibm_multi_account import assert_explicit_account, service_for_submission, _load_env_files
