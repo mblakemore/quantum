@@ -110,7 +110,16 @@ def grade(corrs, ns=None):
         out[arm]["unresolved_axes"] = unresolved
         out[arm]["sign_mismatch_axes"] = mismatch
         out[arm]["gate_pass_signs"] = bool(not mismatch)      # UNRESOLVED is not a mismatch
-        out[arm]["gate_pass"] = bool(out[arm]["gate_pass_isotropy"] and out[arm]["gate_pass_signs"])
+        # SIGNAL FLOOR (added C5058 AFTER this gate returned a VACUOUS PASS on dead data).
+        # All-zero correlators pass isotropy TRIVIALLY (equally dead on every axis) and pass the
+        # sign check VACUOUSLY (nothing resolved, so nothing can mismatch). A gate that cannot
+        # fail on a channel that destroyed all signal is not a gate. REQUIRE resolved signal:
+        # at least 2 of 3 axes with |C|/se >= 5, else NO-TEST — never PASS.
+        n_res = 3 - len(unresolved)
+        out[arm]["resolved_axes"] = n_res
+        out[arm]["gate_no_test"] = bool(n_res < 2)
+        out[arm]["gate_pass"] = bool(out[arm]["gate_pass_isotropy"] and out[arm]["gate_pass_signs"]
+                                     and not out[arm]["gate_no_test"])
     return out
 
 def main():
@@ -168,9 +177,14 @@ def main():
     print(f"[transpiled-count gate] max 2q = {mx} (premise-free gate; well under the ~7-gate 0.95 ceiling for CE)")
     from qiskit_ibm_runtime import SamplerV2
     sampler = SamplerV2(mode=backend)
-    # per-circuit shot allocation implements the weighted mixture (SamplerV2 honours per-PUB shots)
-    pubs = [(c,) for c in tc]
-    job = sampler.run(pubs, shots=SHOTS["I"])
+    # PER-PUB SHOT ALLOCATION — this IS the weighted mixture. The first flight passed a single
+    # uniform shots= to sampler.run(), so every twirl got 12500 shots: a UNIFORM twirl, i.e.
+    # COMPLETE depolarization, and every correlator landed at ~0.002 instead of ~0.46. The dry
+    # run had ALREADY caught uniform-twirl-zeroes-everything and I fixed only the SIMULATION
+    # path; the submission path kept the bug. A fix applied to one code path is not applied to
+    # the system.
+    pubs = [(c, None, SHOTS[l["twirl"]]) for c, l in zip(tc, labels)]
+    job = sampler.run(pubs)
     
     print(f"[submitted] job_id={job.job_id()}")
     man = {"cell": "H13-Cell2-REFLY-isotropy-gate", "board": 77, "account": acct, "backend": backend.name,

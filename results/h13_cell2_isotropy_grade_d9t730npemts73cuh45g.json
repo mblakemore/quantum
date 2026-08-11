@@ -1,0 +1,101 @@
+{
+ "job": "d9t730npemts73cuh45g",
+ "p_depol": 0.5,
+ "shots_per_cell": {
+  "CE": 50000,
+  "CC": 50000
+ },
+ "corrs": {
+  "CE": {
+   "X": 0.00168,
+   "Y": 0.00316,
+   "Z": -0.00296
+  },
+  "CC": {
+   "X": 0.00064,
+   "Y": 0.00028,
+   "Z": 0.00168
+  }
+ },
+ "grade": {
+  "CE": {
+   "C": {
+    "X": 0.00168,
+    "Y": 0.00316,
+    "Z": -0.00296
+   },
+   "abs_C": {
+    "X": 0.00168,
+    "Y": 0.00316,
+    "Z": 0.00296
+   },
+   "max_pairwise_spread_abs": 0.00148,
+   "gate_pass_isotropy": true,
+   "signs": [
+    1,
+    1,
+    -1
+   ],
+   "signs_expected": [
+    1,
+    1,
+    1
+   ],
+   "sign_z": [
+    0.4,
+    0.7,
+    0.7
+   ],
+   "unresolved_axes": [
+    "X",
+    "Y",
+    "Z"
+   ],
+   "sign_mismatch_axes": [],
+   "gate_pass_signs": true,
+   "resolved_axes": 0,
+   "gate_no_test": true,
+   "gate_pass": false
+  },
+  "CC": {
+   "C": {
+    "X": 0.00064,
+    "Y": 0.00028,
+    "Z": 0.00168
+   },
+   "abs_C": {
+    "X": 0.00064,
+    "Y": 0.00028,
+    "Z": 0.00168
+   },
+   "max_pairwise_spread_abs": 0.0014,
+   "gate_pass_isotropy": true,
+   "signs": [
+    1,
+    1,
+    1
+   ],
+   "signs_expected": [
+    1,
+    -1,
+    1
+   ],
+   "sign_z": [
+    0.1,
+    0.1,
+    0.4
+   ],
+   "unresolved_axes": [
+    "X",
+    "Y",
+    "Z"
+   ],
+   "sign_mismatch_axes": [],
+   "gate_pass_signs": true,
+   "resolved_axes": 0,
+   "gate_no_test": true,
+   "gate_pass": false
+  }
+ },
+ "verdict": "FAIL"
+}
