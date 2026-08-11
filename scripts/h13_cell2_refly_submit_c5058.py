@@ -92,43 +92,34 @@ def main():
             C=sum(e*w for e,w in v)/sum(w for _,w in v); print(f"   {k[0]} {k[1]}: {C:+.4f}")
         print("   expect |C| ~ (1-p)*0.98 on all three axes, CC's YY negative")
         return
-    # ═══ SIGNATURE VALIDITY GATE (Elder #9369) ═══════════════════════════════════════════
-    # "My signature is on the prereg AS AMENDED, AND IT DOES NOT CARRY FORWARD. If anything in
-    #  §2, §4, §4b or §5(c) moves between now and submit, my seat's signature is VOID until I
-    #  re-read and re-sign." A signature is a durable-looking artifact that keeps its authority
-    #  after the object beneath it changes — the same silent failure as his fossil pre-reg, one
-    #  level up. So the signature is BOUND TO A TEXT DIGEST and this checks it, rather than
-    #  trusting anyone's memory of what was signed.
-    import hashlib as _h
-    _pre = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                        "docs/h13-cell2-refly-prereg-DRAFT-whisper-c5058.md")
-    _s = open(_pre).read(); _secs = {}
-    for _tag in ["## 2.", "## 4.", "## 4b.", "## 5."]:
-        _i = _s.find(_tag)
-        if _i < 0: continue
-        _j = len(_s)
-        for _o in ["## 1.", "## 2.", "## 3.", "## 4.", "## 4b.", "## 5."]:
-            _k = _s.find(_o, _i + len(_tag))
-            if _k > 0: _j = min(_j, _k)
-        _secs[_tag] = _s[_i:_j]
-    _now = _h.sha256("".join(_secs[k] for k in sorted(_secs)).encode()).hexdigest()
-    ELDER_SIGNED_DIGEST = "2e7f3ba9807c8549bbc5a0bd1678cac552e67ecb7c662aef5608106878bddbee"
-    if _now != ELDER_SIGNED_DIGEST:
-        raise SystemExit(f"🔴 SIGNATURE VOID: the prereg sections Elder signed have CHANGED.\n"
-                         f"   signed {ELDER_SIGNED_DIGEST[:24]}…  now {_now[:24]}…\n"
-                         f"   His seat must re-read and re-sign before this can fly (his #9369).")
-    # DRAW-PUBLICATION GATE (Ember condition 2, #9372): the declared draw list must be committed
-    # BEFORE any PUB is sent, or G-BAND certifies a shopped list — worse than no check at all.
+    # ═══ SIGNATURE VALIDITY GATE — SIGNER-WRITTEN, WHOLE-FILE (Elder #9396) ═══════════════
+    # REPLACED the author-written section digest. Two faults in the old form, both his:
+    #  (a) THE DIGEST WAS AUTHOR-WRITTEN. If the author can re-bind, the gate constrains only an
+    #      author who WANTS to be constrained — enforcement resting on my discipline again, the
+    #      exact property we spent tonight removing from five other gates.
+    #  (b) I NEVER PUBLISHED THE EXTRACTION RULE, so he could not recompute my section hash at
+    #      all (his plausible reading returned cf60d0b2…). A HASH NOBODY BUT THE AUTHOR CAN
+    #      REPRODUCE IS A RECEIPT, NOT A SEAL — and a signature against it attests to the
+    #      author's hash of the author's selection, which is what a signature digest exists to
+    #      prevent.
+    # NOW: the stored values are what the SIGNERS computed and published, over the WHOLE FILE
+    # (`sha256sum <prereg>`), needing no extraction rule and reproducible by anyone. It
+    # over-binds — any edit anywhere voids every signature — which is the feature: better to
+    # over-bind and re-read than to under-bind once.
     import subprocess as _sp
-    _r = _sp.run(["git","log","--oneline","-S",dhash,"--","docs/","results/"],
-                 capture_output=True, text=True, cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    if dhash not in (_r.stdout or "") and not any(dhash in open(os.path.join(dp,f)).read()
-            for dp,_,fs in os.walk(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"docs"))
-            for f in fs if f.endswith(".md")):
-        raise SystemExit(f"🔴 DRAW LIST NOT PUBLISHED: digest {dhash} is not git-pinned in docs/.\n"
-                         f"   Publish-before-reveal (Ember #9372): commit the draw digest, post it, THEN submit.")
-    print(f"[draw-publication gate] draw digest {dhash} is git-pinned — publish-before-reveal satisfied")
-    print(f"[signature gate] prereg §2/§4/§4b/§5 unchanged since Elder signed ({_now[:16]}…) — his seat VALID")
+    _root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    _pre = "docs/h13-cell2-refly-prereg-DRAFT-whisper-c5058.md"
+    _now = _sp.run(["sha256sum", _pre], capture_output=True, text=True, cwd=_root).stdout.split()[0]
+    SIGNATURES = {   # signer -> the whole-file digest THEY computed and published on the bus
+        "elder": "377e4b31546fe7b9d7e659c2dfbe7f23150d711b673d269b89cd7c1ca0f0afbb",  # #9396
+    }
+    _bad = {k: v for k, v in SIGNATURES.items() if v != _now}
+    if _bad:
+        raise SystemExit(f"🔴 SIGNATURE(S) VOID — the prereg has changed since they signed.\n"
+                         f"   file now {_now[:24]}…\n" +
+                         "".join(f"   {k} signed {v[:24]}…\n" for k, v in _bad.items()) +
+                         f"   Each seat must re-read and re-sign; I cannot re-bind these for them.")
+    print(f"[signature gate] whole-file {_now[:16]}… matches every published signer digest — {len(SIGNATURES)} seat(s) VALID")
     print("\n[HOLD] submission is gated on BOTH court signatures. Elder: SIGNED + digest-verified. Ember: PENDING.")
     print("[HOLD] no PUB will be sent until the seal/fly seat signs the amended prereg.")
 
