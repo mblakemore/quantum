@@ -1,0 +1,48 @@
+{
+ "job_id": "d9tpeq535hes73fj0qe0",
+ "account": "IBMQ_ALT4",
+ "prereg": "quantum@499cc2b",
+ "eps": 0.25,
+ "shots": 20000,
+ "classical_floor": 1.0,
+ "arms": {
+  "control": {
+   "kept": 19196,
+   "keep_frac": 0.9598,
+   "shift": 0.3211085642842259,
+   "se": 0.006835401798778632
+  },
+  "pair01": {
+   "kept": 2514,
+   "keep_frac": 0.1257,
+   "shift": 0.09466984884645982,
+   "se": 0.019854659049360276
+  },
+  "pair02": {
+   "kept": 2482,
+   "keep_frac": 0.1241,
+   "shift": 0.09508460918614021,
+   "se": 0.019981447046348848
+  },
+  "pair12": {
+   "kept": 2506,
+   "keep_frac": 0.1253,
+   "shift": -0.19872306464485234,
+   "se": 0.019577634595833584
+  }
+ },
+ "G1_control_moves": true,
+ "G2_pairs_null": false,
+ "G3_sum": 0.604900594201523,
+ "G3_se": 0.05341461772851797,
+ "G3_sigma": 7.396840464282386,
+ "G3_pass": false,
+ "G4_keep": false,
+ "pair_probabilities": [
+  0.14741096840173934,
+  0.14805679412209177,
+  0.30943283167769187
+ ],
+ "calibration_from_control": 0.6422171285684518,
+ "verdict": "FAIL"
+}
