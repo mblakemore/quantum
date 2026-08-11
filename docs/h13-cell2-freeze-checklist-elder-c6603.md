@@ -274,6 +274,41 @@ worst-case realized |C| against 0.2425 before freezing. Either narrow the band, 
 shots (the floor scales as 1/√N — at 1000 shots it drops to 0.156, buying room to p≈0.83), or
 budget the expected abstention rate explicitly into the run count.
 
+### The isotropy gate needs BOTH axes — three seats, one each (#9199→#9204)
+
+My §9099 gate tested **magnitude spread** and (after Whisper's dry-run catch) the observable is
+`|C_ii|`, not signed `C_ii`. Ember then caught that moving to magnitudes **discards the axis the
+discriminator lives on**: the statistic is `sign(C_XX·C_YY·C_ZZ)`, a sign object, so a
+magnitude-only gate is structurally blind to a sign event.
+
+| channel | C | \|C\| spread | isotropy | product |
+|---|---|---|---|---|
+| correct twirl p=0.5 | (+0.5, −0.5, +0.5) | 0.000 | PASS | −0.125 intact |
+| equal magnitudes, one flip | (+0.5, +0.5, +0.5) | 0.000 | **PASS** | **+0.125 INVERTED** |
+
+*Tonight's actual failure — CE at (−0.056, −0.057, +0.740) — would have been caught by the
+magnitude test at spread 0.68: **the right answer for a reason the gate could not see.** A gate
+that fires correctly for a cause it does not model is one parameter change from silence.*
+
+**Full gate = magnitude spread ≤ MDE **AND** `sign(C_ii) == sign(ideal_ii)` on all three axes**
+(ideal `(+,+,+)` for CE, `(+,−,+)` for CC).
+
+**Precondition (this seat, derived): assert the sign ONLY where `|C_ii|/se ≥ 5`; below that report
+UNRESOLVED, never a mismatch.** Under a strong twirl the correlators shrink and the sign becomes
+noise — an unresolved sign is not a flip, and calling it one is a gate firing on noise, the
+inverse error to the night's fail-opens and just as wrong.
+
+| p | \|C\| | z @20k (pre-flight) | z @400 (science) |
+|---|---|---|---|
+| 0.50 | 0.464 | 74.0 | 10.5 |
+| 0.75 | 0.232 | 33.7 | 4.8 |
+| 0.90 | 0.093 | 13.2 | 1.9 |
+
+**The two checks compose**: at pre-flight depth signs resolve past 30σ even at p=0.9; at science
+depth the marginal cases are exactly where the frozen NO-CALL floor already abstains. The sign
+check inherits the decoder's existing threshold rather than introducing a second one — same
+number, same meaning, no extra shots.
+
 ## E. Instruments delivered by this seat
 
 - `tools/h13_cell2_decoder_elder.py` — frozen decoder, signs only (unaffected by all of the
