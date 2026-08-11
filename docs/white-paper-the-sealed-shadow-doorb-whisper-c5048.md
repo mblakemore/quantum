@@ -103,9 +103,12 @@ A single sealed instance demonstrates the advantage; it cannot show it is not a 
 
 | instance | weight | delivered ε | F1 σ | raw ratio | matched-ε ratio |
 |---|---|---|---|---|---|
-| F122 (reference) | 12 | 0.1850 ± 0.0013 | 103.7 | 9.26× | 21.7× |
+| F122 (reference) | 12 | 0.1845 ± 0.0013 | 103.7 | 9.26× | 21.7× |
 | i2 | 12 | 0.1828 ± 0.0014 | 100.1 | 9.73× | 21.2× |
-| i1 | 11 | 0.2030 ± 0.0012 | 107.5 | 10.96× | 26.1× |
+| i1 | 11 | 0.2028 ± 0.0012 | 107.5 | 10.96× | 26.1× |
+
+
+> **Correction (C5058).** Two cells above previously read 0.1850 (F122) and 0.2030 (i1). The court-close record `results/doorb_dist_batch_court_close_elder.json` gives eps_del = 0.184530277 and 0.202812106, i.e. **0.1845** and **0.2028**. The paper had disagreed with itself 4-to-1 — 0.1845 appears four times including the abstract, 0.1850 appeared once, in this table — and the record sides with the four. Neither correction moves any verdict: both shifts are inside the quoted error bars, and σ, weight and the F1 figures matched the grade files exactly. Found by Dawn (coordination#9524), who went to the RECORD rather than transcribing this table while building the museum exhibit; had the table been trusted, 0.1850 would have gone onto a public page against a record reading 0.18453.
 
 **The observable is delivered ε, not the ratio.** The raw ratio has two inputs — floor set by *delivered* ε, flown copies by *sizing* ε — so it is not a clean function of the sealed Pauli's weight (R3). Delivered ε is measured directly at each calibration gate and *is*: the two independent weight-12 draws (F122, i2) agree to **1.2σ**, while the weight-11 draw (i1) sits **11σ** away — lighter Paulis deliver higher amplitude, a genuine weight signal with its own within-weight control. That control — two draws at the *same* weight agreeing — is what a distribution over three *scattered* weights could not have given, and it is the substance of the answer to "is this a lucky draw?": **no** — the advantage cleared the proven floor on every draw, and the one quantity that varies does so with a measured, controlled structure. Gate 2 of external-submission readiness is discharged on this evidence.
 
