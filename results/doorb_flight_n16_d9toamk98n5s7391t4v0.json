@@ -1,0 +1,97 @@
+{
+  "experiment": "doorb_unsigned_shadow",
+  "n": 16,
+  "eps_nominal": 0.3,
+  "shots": 91512,
+  "commitment_sha256": "338343d849a0d48c9e73358cdd6f4749cf093527e45ab579d2c939b47f386769",
+  "backend": "ibm_marrakesh",
+  "layout": "halves",
+  "granularity_R": 1,
+  "jobs": [
+    {
+      "job_id": "d9toamk98n5s7391t4v0",
+      "rows": 2000,
+      "role": "calibration+gates"
+    },
+    {
+      "job_id": "d9toaq498n5s7391t520",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toaqgu5hac73ag8pk0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toaqr43mgs73es0v60",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toar8u5hac73ag8plg",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toars98n5s7391t550",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toasb43mgs73es0v8g",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toasou5hac73ag8po0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toatd35hes73fivg8g",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toatl35hes73fivg90",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toau498n5s7391t58g",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toauj43mgs73es0vag",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toav343mgs73es0vbg",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9toavl35hes73fivgcg",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9tob0535hes73fivgd0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9tob08u5hac73ag8ps0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9tob0r43mgs73es0ve0",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9tob18u5hac73ag8ptg",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9tob1t35hes73fivgfg",
+      "rows": 5000
+    },
+    {
+      "job_id": "d9tob2535hes73fivggg",
+      "rows": 1512
+    }
+  ],
+  "cal_rows": 2000,
+  "cal_P_public": "XYZXYZXYZXYZXYZX",
+  "cal_position": "first rows of job 1",
+  "utc": "2026-08-11T20:26:48.719857+00:00"
+}
