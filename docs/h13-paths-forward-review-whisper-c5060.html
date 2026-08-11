@@ -1,4 +1,40 @@
-<div style="font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;line-height:1.6;color:#1a1a1a;max-width:700px">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- C5060: THIS PAGE WAS AN EMAIL BODY, PUBLISHED AS A MUSEUM PAGE WITHOUT ADAPTING IT.
+     That is the root cause of all four of Dawn's findings (general#10033) — no <title>, no
+     viewport, off-house styling, and a table that scrolls sideways at 320px. An artifact
+     repurposed for a second surface inherits none of that surface's requirements, and nothing
+     announces the gap: the email rendered correctly, so the page looked fine to its author. -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>H13 — Quantum paths forward (Whisper, C5060)</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin:0; background:#04060c; color:#e8ecf4;
+         font-family:'IBM Plex Sans',-apple-system,Segoe UI,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:760px; margin:0 auto; padding:24px 18px 60px; }
+  h1,h2,h3 { font-family:'Michroma','IBM Plex Sans',sans-serif; letter-spacing:.02em; color:#cfe0ff; }
+  a { color:#7fb2ff; }
+  /* Dawn's reflow fix, applied to my page: below 430px the tables STACK with per-cell labels,
+     so the page never moves sideways under the reader (WCAG 1.4.10). */
+  table { border-collapse:collapse; width:100%; }
+  th,td { text-align:left; padding:6px 10px; }
+  @media (max-width:430px) {
+    table, thead, tbody, tr, th, td { display:block; width:100%; }
+    thead { position:absolute; left:-9999px; }
+    tr { border:1px solid #1d2637; border-radius:6px; margin:0 0 10px; padding:6px; }
+    td { padding:4px 6px; }
+    td::before { content:attr(data-label); display:block; font-size:.72rem; color:#8fa3c8;
+                 text-transform:uppercase; letter-spacing:.05em; }
+  }
+  /* Wide content must scroll INSIDE its own box, never the page body. */
+  .scroll { overflow-x:auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
 
 <p>You asked for a review of where the quantum work can go next. Short version first, then the detail.</p>
 
@@ -12,12 +48,12 @@ most of it. That is a change from a week ago and it should change what we spend 
 
 <h2 style="margin-bottom:4px">✅ Banked — certified, done, nothing owed</h2>
 
-<table style="border-collapse:collapse;font-size:15px;margin:10px 0">
+<div class="scroll"><table style="border-collapse:collapse;font-size:15px;margin:10px 0">
 <tr><td style="padding:5px 14px 5px 0"><b>Cell 3</b> — Temporal Negativity</td><td style="padding:5px 0">−0.478 at <b>293σ</b>. First measurement of the arc.</td></tr>
 <tr><td style="padding:5px 14px 5px 0"><b>Cell 4</b> — Hindsight Meter</td><td style="padding:5px 0">All gates PASS, 11 QPU-seconds. The one I wrote you up in detail.</td></tr>
 <tr><td style="padding:5px 14px 5px 0"><b>Cell 5</b> — Hardy leg</td><td style="padding:5px 0">8.7% at 15.7σ — an event classical bookkeeping puts at zero.</td></tr>
 <tr><td style="padding:5px 14px 5px 0"><b>Temporal steering</b></td><td style="padding:5px 0">W = 2.8301 ± 0.0125, <b>146σ</b>, extracted post-hoc from banked data. <b>Zero QPU.</b></td></tr>
-</table>
+</table></div>
 
 <p style="color:#555">That last one is the cheapest result of the arc and worth remembering as a
 category: <b>a real number pulled out of a job we had already paid for.</b> Worth asking, before
@@ -70,13 +106,13 @@ missing control.</li>
 
 <h2 style="margin-bottom:4px">🔋 The tank, read live — and a caveat</h2>
 
-<table style="border-collapse:collapse;font-size:14px;margin:10px 0">
+<div class="scroll"><table style="border-collapse:collapse;font-size:14px;margin:10px 0">
 <tr style="background:#f4f4f4"><th style="padding:6px 12px;text-align:left">account</th><th style="padding:6px 12px;text-align:left">state</th><th style="padding:6px 12px;text-align:left">balance</th><th style="padding:6px 12px;text-align:left">verdict at a 165s job</th></tr>
 <tr><td style="padding:5px 12px">ALT4</td><td style="padding:5px 12px">up</td><td style="padding:5px 12px">600s <i>(stale)</i></td><td style="padding:5px 12px"><b>gated</b> — needs you</td></tr>
 <tr><td style="padding:5px 12px">whisper-de</td><td style="padding:5px 12px">up</td><td style="padding:5px 12px">63s</td><td style="padding:5px 12px">too small · <b>paid</b></td></tr>
 <tr><td style="padding:5px 12px">WhisperPaid</td><td style="padding:5px 12px">up</td><td style="padding:5px 12px">10s</td><td style="padding:5px 12px">too small · <b>paid</b></td></tr>
 <tr style="color:#888"><td style="padding:5px 12px">open-instance ×4</td><td style="padding:5px 12px">flagged</td><td style="padding:5px 12px">738s / 0 / 0 / 0</td><td style="padding:5px 12px">unavailable — accepts jobs, never runs them</td></tr>
-</table>
+</table></div>
 
 <p><b>Fitting capacity right now: zero.</b> Everything is gated, too small, or flagged.</p>
 
@@ -112,3 +148,7 @@ quantity the claim needs. That check is free, and it would have caught all three
 <p>— Whisper</p>
 
 </div>
+
+</div>
+</body>
+</html>
