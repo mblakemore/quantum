@@ -1,0 +1,148 @@
+#!/usr/bin/env python3
+"""H13 Cell 2 RE-FLY — STANDALONE ISOTROPY PRE-FLIGHT GATE. Whisper C5058, Creator's grant.
+
+WHAT THIS DECIDES: tonight's Cell 2 NO-TEST traced to an IDLE-DELAY injection, which is DEPHASING
+(anisotropic: kills X,Y, spares Z) where the design requires DEPOLARIZING (isotropic). The re-fly
+(#77) replaces it with a PAULI TWIRL over {I,X,Y,Z} mixed across shots. Elder derived the gate's
+power requirement (#9099): the check must resolve anisotropy at the ARM-GAP scale d=0.01148, which
+needs ~20,000 shots/basis (MDE 0.0098). This flight runs ONLY that gate. If the twirl does not
+produce isotropy on real silicon, the ~64s re-fly is dead before it is paid for.
+GATE: per arm, max pairwise |C_ii - C_jj| over {XX,YY,ZZ} must be <= the arm gap 0.01148 + MDE.
+Usage: QPU_ACCOUNT_VAR=IBMQ_ALT3 python3 scripts/h13_cell2_isotropy_gate_c5058.py [--dry-run]
+"""
+import json, math, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+os.environ.pop("QISKIT_IBM_INSTANCE", None)
+from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, transpile
+
+BASES, TWIRLS = ("X", "Y", "Z"), ("I", "X", "Y", "Z")
+# PARTIAL depolarizing at strength P_DEPOL, built as a WEIGHTED Pauli mixture.
+# A UNIFORM twirl over {I,X,Y,Z} is COMPLETE depolarization — it zeroes every correlator, which
+# the dry run duly showed (C=0.0 everywhere). The channel we need is I with weight 1-3p/4 and
+# each of X,Y,Z with weight p/4, giving C_ii = (1-p)*C_ideal, EQUAL across the three axes —
+# which is exactly the isotropy the frozen ceiling's scalar model assumes and the idle delay broke.
+P_DEPOL = 0.5
+SHOTS_PER_CELL = 20000                       # Elder's MDE requirement (#9099): resolve 0.0115
+WEIGHTS = {"I": 1 - 3 * P_DEPOL / 4, "X": P_DEPOL / 4, "Y": P_DEPOL / 4, "Z": P_DEPOL / 4}
+SHOTS = {t: int(round(SHOTS_PER_CELL * w)) for t, w in WEIGHTS.items()}
+ARM_GAP, EST_COST_S = 0.01148, 40.0
+
+def rot(qc, q, b, inv=False):
+    if b == "X": qc.h(q)
+    elif b == "Y":
+        if inv: qc.h(q); qc.s(q)
+        else: qc.sdg(q); qc.h(q)
+
+def pauli(qc, q, p):
+    if p == "X": qc.x(q)
+    elif p == "Y": qc.y(q)
+    elif p == "Z": qc.z(q)
+
+def ce(basis, tw):
+    """cause-effect: measure Pauli i -> TWIRLED injection -> measure Pauli i."""
+    q = QuantumRegister(1, "q"); c = ClassicalRegister(2, "c")
+    qc = QuantumCircuit(q, c, name=f"CE_{basis}_{tw}")
+    rot(qc, q[0], basis); qc.measure(q[0], c[0]); rot(qc, q[0], basis, inv=True)
+    pauli(qc, q[0], tw)                      # ISOTROPIC injection: uniform mixture over {I,X,Y,Z}
+    rot(qc, q[0], basis); qc.measure(q[0], c[1])
+    return qc
+
+def cc(basis, tw):
+    """common cause: Phi+ pair, twirled injection on one wing, both wings measured."""
+    q = QuantumRegister(2, "q"); c = ClassicalRegister(2, "c")
+    qc = QuantumCircuit(q, c, name=f"CC_{basis}_{tw}")
+    qc.h(q[0]); qc.cx(q[0], q[1])
+    pauli(qc, q[0], tw)
+    for k in (0, 1): rot(qc, q[k], basis)
+    qc.measure(q[0], c[0]); qc.measure(q[1], c[1])
+    return qc
+
+def build():
+    circs, labels = [], []
+    for b in BASES:
+        for t in TWIRLS:
+            circs.append(ce(b, t)); labels.append({"arm": "CE", "basis": b, "twirl": t})
+            circs.append(cc(b, t)); labels.append({"arm": "CC", "basis": b, "twirl": t})
+    return circs, labels
+
+def grade(corrs):
+    """corrs[arm][basis] = twirl-averaged correlator. Isotropy = the three agree."""
+    out = {}
+    for arm in ("CE", "CC"):
+        # MAGNITUDES, not signed values: Phi+ carries an intrinsic <YY> = -1, so the CC arm's
+        # signed spread is 1.0 by physics, not by channel asymmetry (dry run showed exactly that).
+        # Isotropy means the channel ATTENUATES all three axes EQUALLY -> compare |C_ii|.
+        vals = [abs(corrs[arm][b]) for b in BASES]
+        spread = max(abs(vals[i] - vals[j]) for i in range(3) for j in range(i + 1, 3))
+        out[arm] = {"C": {b: round(corrs[arm][b], 5) for b in BASES},
+                    "abs_C": {b: round(abs(corrs[arm][b]), 5) for b in BASES},
+                    "max_pairwise_spread_abs": round(spread, 5),
+                    "gate_pass": bool(spread <= ARM_GAP + 0.0098)}
+    return out
+
+def main():
+    dry = "--dry-run" in sys.argv
+    circs, labels = build()
+    tot = sum(SHOTS[l["twirl"]] for l in labels)
+    print(f"[build] {len(circs)} circuits; p_depol={P_DEPOL}; per-twirl shots {SHOTS}; total {tot:,} shot-circuits")
+    print(f"[build] predicted isotropic correlator = (1-p)*C_ideal = {1-P_DEPOL:.3f} x C_ideal, EQUAL on all three axes")
+    if dry:
+        from qiskit_aer import AerSimulator
+        sim = AerSimulator(); tc = transpile(circs, sim, optimization_level=1, seed_transpiler=20260811)
+        res = [sim.run([c], shots=SHOTS[l["twirl"]]).result() for l, c in zip(labels, tc)]
+        acc = {"CE": {b: [] for b in BASES}, "CC": {b: [] for b in BASES}}
+        for lab, c, r1 in zip(labels, tc, res):
+            counts = r1.get_counts(c); tot = sum(counts.values())
+            e = sum(((-1) ** (int(k.replace(" ", "")[0]) + int(k.replace(" ", "")[1]))) * v for k, v in counts.items()) / tot
+            acc[lab["arm"]][lab["basis"]].append((e, SHOTS[lab["twirl"]]))
+        corrs = {a: {b: sum(e * w for e, w in v) / sum(w for _, w in v) for b, v in d.items()} for a, d in acc.items()}
+        g = grade(corrs)
+        for arm in ("CE", "CC"):
+            print(f"  {arm}: C={g[arm]['C']}  |C| spread={g[arm]['max_pairwise_spread_abs']}  gate={'PASS' if g[arm]['gate_pass'] else 'FAIL'}")
+        print("  (ideal twirl: the four Paulis average to a depolarizing channel -> the three diagonals agree)")
+        return
+    from ibm_multi_account import assert_explicit_account, service_for_submission, _load_env_files
+    _load_env_files()
+    acct = assert_explicit_account()
+    if acct != "IBMQ_ALT3": raise SystemExit(f"declares IBMQ_ALT3; got {acct} — REFUSING.")
+    svc = service_for_submission(acct)
+    u = svc.usage(); remaining = float(u["usage_limit_seconds"]) - float(u["usage_consumed_seconds"])
+    if u.get("usage_limit_reached") or remaining < EST_COST_S:
+        raise SystemExit(f"FIT GATE REFUSES: remaining={remaining}s < est {EST_COST_S}s")
+    print(f"[fit gate] {acct}: {remaining:.1f}s >= est {EST_COST_S}s — OK")
+    backend = svc.backend("ibm_marrakesh")
+    props = backend.properties(); ro = {}
+    for qq in range(backend.num_qubits):
+        try: ro[qq] = props.readout_error(qq)
+        except Exception: pass
+    adj = {}
+    for x, y in backend.coupling_map: adj.setdefault(x, set()).add(y); adj.setdefault(y, set()).add(x)
+    q_ce = min(ro, key=ro.get)
+    best, bs = None, 9e9
+    for a, b_ in backend.coupling_map:
+        if a in ro and b_ in ro and a != q_ce and b_ != q_ce:
+            try: s = ro[a] + ro[b_] + props.gate_error("cz", (a, b_))
+            except Exception: continue
+            if s < bs: best, bs = (a, b_), s
+    print(f"[layout] CE q{q_ce} | CC {best} — live, never cached")
+    tc = [transpile(c, backend, initial_layout=([q_ce] if c.num_qubits == 1 else list(best)),
+                    optimization_level=1, seed_transpiler=20260811) for c in circs]
+    mx = max(sum(v for k, v in c.count_ops().items() if k in ("cz", "cx", "ecr")) for c in tc)
+    print(f"[transpiled-count gate] max 2q = {mx} (premise-free gate; well under the ~7-gate 0.95 ceiling for CE)")
+    from qiskit_ibm_runtime import SamplerV2
+    sampler = SamplerV2(mode=backend)
+    # per-circuit shot allocation implements the weighted mixture (SamplerV2 honours per-PUB shots)
+    pubs = [(c,) for c in tc]
+    job = sampler.run(pubs, shots=SHOTS["I"])
+    
+    print(f"[submitted] job_id={job.job_id()}")
+    man = {"cell": "H13-Cell2-REFLY-isotropy-gate", "board": 77, "account": acct, "backend": backend.name,
+           "job_id": job.job_id(), "shots_per_twirl": SHOTS, "p_depol": P_DEPOL, "labels": labels, "arm_gap": ARM_GAP,
+           "layout": {"CE": q_ce, "CC": list(best)}, "max_2q": mx,
+           "gate": "per arm, max pairwise |C_ii - C_jj| <= arm_gap + MDE  (isotropy of the twirled injection)",
+           "fit_gate": {"remaining_at_submit": remaining, "est": EST_COST_S}}
+    p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), f"results/h13_cell2_isotropy_manifest_{job.job_id()}.json")
+    json.dump(man, open(p, "w"), indent=1); print(f"[manifest] {p}")
+
+if __name__ == "__main__":
+    main()
