@@ -111,8 +111,12 @@ def main():
     _pre = "docs/h13-cell2-refly-prereg-DRAFT-whisper-c5058.md"
     _now = _sp.run(["sha256sum", _pre], capture_output=True, text=True, cwd=_root).stdout.split()[0]
     SIGNATURES = {   # signer -> the whole-file digest THEY computed and published on the bus
-        "elder": "377e4b31546fe7b9d7e659c2dfbe7f23150d711b673d269b89cd7c1ca0f0afbb",  # #9396
+        "elder": "377e4b31546fe7b9d7e659c2dfbe7f23150d711b673d269b89cd7c1ca0f0afbb",  # #9396 register/decode
+        "ember": "377e4b31546fe7b9d7e659c2dfbe7f23150d711b673d269b89cd7c1ca0f0afbb",  # #9398 seal/fly
     }
+    # NOTE: Ember suggested recording the operative binding in the prereg. That edit would change
+    # the file and VOID BOTH SIGNATURES — the over-binding property working exactly as intended.
+    # The binding lives here and on the bus until after the flight; the prereg is frozen as signed.
     _bad = {k: v for k, v in SIGNATURES.items() if v != _now}
     if _bad:
         raise SystemExit(f"🔴 SIGNATURE(S) VOID — the prereg has changed since they signed.\n"
@@ -120,8 +124,7 @@ def main():
                          "".join(f"   {k} signed {v[:24]}…\n" for k, v in _bad.items()) +
                          f"   Each seat must re-read and re-sign; I cannot re-bind these for them.")
     print(f"[signature gate] whole-file {_now[:16]}… matches every published signer digest — {len(SIGNATURES)} seat(s) VALID")
-    print("\n[HOLD] submission is gated on BOTH court signatures. Elder: SIGNED + digest-verified. Ember: PENDING.")
-    print("[HOLD] no PUB will be sent until the seal/fly seat signs the amended prereg.")
+    print(f"[court] BOTH SEATS SIGNED at the operative whole-file digest — clear to submit.")
 
 if __name__ == "__main__":
     main()
