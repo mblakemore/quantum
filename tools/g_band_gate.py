@@ -32,6 +32,20 @@ def g_band(diagonals, declared=(0.30, 0.70), n_runs=40, se_run=0.030):
                        ("REFUSE (anisotropic — axes disagree on p)" if not consistent else
                         "REFUSE (realized p outside declared band)")}
 
+def g_band_arm_agreement(ce_diagonals, cc_diagonals, tol=0.05):
+    """ARM-p AGREEMENT (Ember/Elder seam, #9372/#9377): the two arms must have drawn the SAME p.
+    G-BAND's per-arm clauses are blind to this: CE at p=0.35 (|C|=0.637) and CC at p=0.65
+    (|C|=0.343) are each internally isotropic and each inside the band, so both PASS while the
+    arms sit at different injection strengths — an arm-correlated difference by construction.
+    In the frozen design this is STRUCTURALLY IMPOSSIBLE (p is drawn once per unit and both arms
+    are built from that draw, verified in code), so this clause exists to catch a BUILD that
+    broke the guarantee, not a design that allows it. Structure protects; the gate verifies."""
+    pce = sum(p_hat(c) for c in ce_diagonals)/len(ce_diagonals)
+    pcc = sum(p_hat(c) for c in cc_diagonals)/len(cc_diagonals)
+    d = abs(pce-pcc)
+    return {"p_CE": round(pce,3), "p_CC": round(pcc,3), "gap": round(d,3),
+            "verdict": "PASS (arms share p)" if d <= tol else "REFUSE (arms at different injection strengths)"}
+
 if __name__ == "__main__":
     print("G-BAND can-it-fire proof — BOTH directions, zero shots, real data:\n")
     cases = [
@@ -46,5 +60,12 @@ if __name__ == "__main__":
         got = "REFUSE" if r["verdict"].startswith("REFUSE") else "PASS"
         print(f"  {'✅' if got==want else '🔴'} {label:<44} p̂={r['p_hat_per_axis']} spread={r['axis_spread']:.3f} "
               f"mean={r['mean_p_hat']:.3f} -> {got:<7} (want {want})")
+    print("\n  ARM-p AGREEMENT clause (Ember/Elder seam) — can-it-fire, both directions:")
+    for lab, ce_d, cc_d, want in [
+        ("the seam: CE at p=0.35, CC at p=0.65", [0.637,0.637,0.637], [0.343,-0.343,0.343], "REFUSE"),
+        ("healthy: both arms at p=0.50",         [0.464,0.464,0.464], [0.464,-0.464,0.464], "PASS")]:
+        r = g_band_arm_agreement(ce_d, cc_d)
+        got = "REFUSE" if r["verdict"].startswith("REFUSE") else "PASS"
+        print(f"    {'✅' if got==want else '🔴'} {lab:<38} p_CE={r['p_CE']} p_CC={r['p_CC']} gap={r['gap']} -> {got} (want {want})")
     print(f"\n  paired se on the band mean over 40 runs = {SD_RUN/math.sqrt(40):.4f}"
           f"  -> a 0.05 band shift shows at {0.05/(SD_RUN/math.sqrt(40)):.1f} sigma")
