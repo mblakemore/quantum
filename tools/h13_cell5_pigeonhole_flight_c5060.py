@@ -152,58 +152,32 @@ def main():
     from qiskit_ibm_runtime import SamplerV2
     sampler = SamplerV2(mode=backend)
     job = sampler.run(tqc, shots=SHOTS)
-    print(f"\n  SUBMITTED job {job.job_id()}")
-    res = job.result()
+    jid = job.job_id()
+    print(f"\n  SUBMITTED job {jid}")
 
-    out = {"job_id": job.job_id(), "backend": BACKEND, "account": acct, "eps": EPS,
-           "shots": SHOTS, "prereg": "quantum@499cc2b", "classical_floor": floor, "arms": {}}
-    for (name, _), r in zip(circuits, res):
-        counts = r.data.c.get_counts() if hasattr(r.data, "c") else list(r.data.values())[0].get_counts()
-        out["arms"][name] = analyse(counts, SHOTS)
-
-    # ── GATES, IN THE FROZEN ORDER ──
-    print("\n" + "═" * 78)
-    ctrl = out["arms"]["control"]
-    g1 = abs(ctrl["shift"]) >= G1_CONTROL_MIN
-    print(f"  G1 CONTROL MUST MOVE : |{ctrl['shift']:+.5f}| >= {G1_CONTROL_MIN}  -> "
-          f"{'PASS' if g1 else '🔴 NO-TEST'}   (keep {ctrl['keep_frac']:.4f})")
-    out["G1_control_moves"] = bool(g1)
-    if not g1:
-        print("\n  🔴 NO-TEST. The apparatus is not demonstrated live, so the three pair readings")
-        print("     are UNINTERPRETABLE and are NOT reported as a pigeonhole result. As registered.")
-        json.dump(out, open(f"results/h13_cell5_pigeonhole_{job.job_id()}.json", "w"), indent=1)
-        return 1
-
-    keeps = [out["arms"][f"pair{p[0]}{p[1]}"]["keep_frac"] for p in PAIRS] + [ctrl["keep_frac"]]
-    g4 = all(G4_KEEP[0] <= k <= G4_KEEP[1] for k in keeps)
-    print(f"  G4 KEEP FRACTIONS    : {[f'{k:.4f}' for k in keeps]} in {G4_KEEP} -> "
-          f"{'PASS' if g4 else '🔴 FAIL'}")
-
-    shifts = [out["arms"][f"pair{p[0]}{p[1]}"]["shift"] for p in PAIRS]
-    g2 = all(abs(s) <= G2_PAIR_MAX for s in shifts)
-    print(f"  G2 EACH PAIR NULL    : {[f'{s:+.5f}' for s in shifts]} all |.|<={G2_PAIR_MAX} -> "
-          f"{'PASS' if g2 else '🔴 FAIL'}")
-
-    # "same box" probability per pair = (1 + <Pi_same weak>)/... measured as the pointer shift
-    # divided by the control's calibration, i.e. shift / (control shift / 0.5).
-    cal = abs(ctrl["shift"]) / 0.5
-    probs = [abs(s) / cal for s in shifts]
-    total = sum(probs)
-    se_tot = math.sqrt(sum((out["arms"][f"pair{p[0]}{p[1]}"]["se"] / cal) ** 2 for p in PAIRS))
-    sigma = (floor - total) / se_tot if se_tot else float("inf")
-    g3 = total < G3_SUM_MAX and sigma >= 5
-    print(f"  G3 HEADLINE (SUM)    : {total:.5f} +- {se_tot:.5f} vs floor {floor} -> "
-          f"{sigma:.1f} sigma, {'PASS' if g3 else '🔴 FAIL'}")
-
-    out.update({"G2_pairs_null": bool(g2), "G3_sum": total, "G3_se": se_tot,
-                "G3_sigma": sigma, "G3_pass": bool(g3), "G4_keep": bool(g4)})
-    verdict = "PASS" if (g1 and g2 and g3 and g4) else "FAIL"
-    out["verdict"] = verdict
-    print(f"\n  VERDICT: {verdict}")
+    # ══ SUBMIT, RECORD, EXIT. THIS SCRIPT DOES NOT WAIT. (C5060) ═══════════════════════════════
+    # It used to call job.result() here and analyse inline. The job then sat in a 149-deep queue
+    # past the wrapper's 30-minute timeout, the process took SIGTERM, and the analysis died with
+    # it — a QUEUE DELAY presenting as a FAILED EXPERIMENT, whose instinctive remedy is to
+    # re-submit and spend QPU recovering an analysis that needs none.
+    #
+    # I SPLIT THE GRADER OUT AND LEFT THIS PATH UNCHANGED FOR AN HOUR, which is half a fix: the
+    # right tool existed and the broken road still led away from it. Ember hit the same class
+    # inside the verification of her own fix for it (general#10346), and named the layer under
+    # both: AN OUTER TIMEOUT SHORTER THAN AN INNER WAIT TURNS A HANDLED CONDITION INTO AN
+    # UNHANDLED ONE — the graceful code exists and is never reached, and it looks like working
+    # code in review. The robust answer is not a longer wrapper timeout; it is TO HAVE NO INNER
+    # WAIT AT ALL. A submitter that never waits cannot be killed mid-wait.
+    manifest = {"job_id": jid, "backend": BACKEND, "account": acct, "eps": EPS, "shots": SHOTS,
+                "arms": [n for n, _ in circuits], "prereg": "quantum@499cc2b",
+                "classical_floor": floor, "est_qpu_s": round(est, 1)}
     os.makedirs("results", exist_ok=True)
-    json.dump(out, open(f"results/h13_cell5_pigeonhole_{job.job_id()}.json", "w"), indent=1)
-    print(f"  wrote results/h13_cell5_pigeonhole_{job.job_id()}.json")
-    return 0 if verdict == "PASS" else 1
+    mpath = f"results/h13_cell5_pigeonhole_manifest_{jid}.json"
+    json.dump(manifest, open(mpath, "w"), indent=1)
+    print(f"  wrote {mpath}")
+    print(f"\n  NOT WAITING — grade it when it lands, any time, from any session:")
+    print(f"    QPU_ACCOUNT_VAR={acct} python3 tools/h13_cell5_pigeonhole_grade_c5060.py {jid}")
+    return 0
 
 
 if __name__ == "__main__":
