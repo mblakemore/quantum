@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — The Interrogation / Causal Game (F82) | The Quantum Museum</title>
-<meta name="description" content="Complete specification for the Interrogation game: the Araujo et al. causal discrimination game, its causally-separable ceiling re-derived from scratch, and the quantum switch beating it on real hardware — p̂ = 0.9769 (216.8σ) on ibm_marrakesh, replicated at 0.9738 on ibm_fez. Job d9826lkqp3as739sd2lg.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Complete specification for the Interrogation game: the Araujo et al. causal discrimination game, its causally-separable ceiling re-derived from scratch, and the quantum switch beating it on real hardware — p̂ = 0.9769 (216.8σ) on ibm_marrakesh, replicated at 0.9738 on ibm_fez. Job d9826lkqp3as739sd2lg." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -94,6 +95,41 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this page's table cannot fit a 320px window at any padding — measured —
+     so dropping the min-width still left it scrolling and still cutting values mid-number. Below
+     430px it STACKS: one card per row, each value carrying its column label, no scroll, nothing to
+     cut. The explicit ARIA roles are the point: display:block strips a table's implicit roles, so a
+     CSS-only stack trades a screen-reader regression for a sighted-reader fix. thead is CLIPPED,
+     not display:none, so it is still announced; ::before labels are not announced, so nothing is
+     read twice. The caption rule is here because a caption keeps display:table-caption inside a
+     block table and shrink-to-fits to ~104px, wrapping its sentence to 14 characters a line. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 14px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -127,126 +163,114 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· The Interrogation exhibit</a>
-    <span class="wingtag">· Wing II · Games with a Proven Ceiling</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet</p>
-    <h1>A game whose ceiling is a <span class="hl">theorem</span> — and the switch beats it</h1>
-    <div class="idline">
-      <span><strong>Finding</strong> F82</span>
-      <span><strong>Experiment</strong> Araújo et al. causal discrimination game</span>
-      <span><strong>Backend</strong> ibm_marrakesh + ibm_fez (Heron r2)</span>
-      <span><strong>Job</strong> d9826lkqp3as739sd2lg</span>
-    </div>
-    <span class="verdict-chip"><span aria-hidden="true">✓</span> BOUND BEATEN ON TWO CHIPS — p̂ = 0.9769 (216.8σ) · replicated 0.9738 on ibm_fez</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This sheet is the source-of-truth specification behind the interactive exhibit. The game the exhibit lets you play
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· The Interrogation exhibit</a>
+<span class="wingtag">· Wing II · Games with a Proven Ceiling</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet</p>
+<h1>A game whose ceiling is a <span class="hl">theorem</span> — and the switch beats it</h1>
+<div class="idline">
+<span><strong>Finding</strong> F82</span>
+<span><strong>Experiment</strong> Araújo et al. causal discrimination game</span>
+<span><strong>Backend</strong> ibm_marrakesh + ibm_fez (Heron r2)</span>
+<span><strong>Job</strong> d9826lkqp3as739sd2lg</span>
+</div>
+<span class="verdict-chip"><span aria-hidden="true">✓</span> BOUND BEATEN ON TWO CHIPS — p̂ = 0.9769 (216.8σ) · replicated 0.9738 on ibm_fez</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This sheet is the source-of-truth specification behind the interactive exhibit. The game the exhibit lets you play
   is a real discrimination game with a <strong>mathematically proven difficulty ceiling</strong>; the "switch kit" you earn
   after ten rounds plays with odds <strong>measured on real quantum hardware</strong>. Every threshold traces to a public job ID
   and a frozen pre-registration.</p>
-
-  <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p>Two machine-suspects are secretly either <strong>PARTNERS</strong> (their stories agree no matter who is questioned first)
+<h2><span class="n">1</span>The idea, in plain language</h2>
+<p>Two machine-suspects are secretly either <strong>PARTNERS</strong> (their stories agree no matter who is questioned first)
   or <strong>RIVALS</strong> (their stories come out opposite depending on order). You question each exactly once and must say
   which. Mathematics proves that <strong>no strategy under ordinary cause-and-effect</strong> — no gadget, no entangled trick,
   no scheme that picks the order adaptively — can average above the ceiling, as long as the two questions happen in
   <strong>some</strong> order.</p>
-  <div class="callout">
-    <p class="clabel">What the suspects really are</p>
-    <p class="tight">The suspects are <strong>quantum operations</strong>: PARTNERS = commuting, RIVALS = anticommuting, dealt
+<div class="callout">
+<p class="clabel">What the suspects really are</p>
+<p class="tight">The suspects are <strong>quantum operations</strong>: PARTNERS = commuting, RIVALS = anticommuting, dealt
     50/50 from a 20-case deck. The quantum switch questions both suspects <strong>in a superposition of both orders at
     once</strong> — a physically different kind of question, one no definite order can imitate. Measured, it scores
     <code>≈ 97.8%</code> (0.9769) on ibm_marrakesh.</p>
-  </div>
-
-  <h2><span class="n">2</span>What we measure — and the ceiling</h2>
-  <p>The task is the finite 10-unitary commute/anticommute discrimination game of <strong>Araújo et al. (2015)</strong>. Its
+</div>
+<h2><span class="n">2</span>What we measure — and the ceiling</h2>
+<p>The task is the finite 10-unitary commute/anticommute discrimination game of <strong>Araújo et al. (2015)</strong>. Its
   causally-separable ceiling was <strong>re-derived from scratch and machine-verified</strong> in the repository — including the
   optimal input distribution the original paper omitted.</p>
-  <ul>
-    <li><strong>The balanced-game ceiling:</strong> <code>0.9098</code> (the 91% the exhibit's meter draws as THE CEILING) — the
+<ul>
+<li><strong>The balanced-game ceiling:</strong> <code>0.9098</code> (the 91% the exhibit's meter draws as THE CEILING) — the
     best any causally-separable strategy can do on the uniform deck.</li>
-    <li><strong>The SDP-optimal bound:</strong> <code>0.8690</code> — under the input distribution re-solved to maximize the
+<li><strong>The SDP-optimal bound:</strong> <code>0.8690</code> — under the input distribution re-solved to maximize the
     quantum-vs-classical gap, the causally-separable bound (covering fixed, mixed, and dynamical order). The measured
     result's significance is quoted against this bound.</li>
-  </ul>
-  <p>The <strong>load-bearing blind spot</strong>: the "do-nothing" (Nobody) suspect. Remove those cases and the theorem's
+</ul>
+<p>The <strong>load-bearing blind spot</strong>: the "do-nothing" (Nobody) suspect. Remove those cases and the theorem's
   ceiling silently rises to 100% — which is why they are kept in the deck. The best classical kit is deterministically,
   perfectly wrong whenever a do-nothing suspect is involved; that structural fact is real physics, not a gimmick.</p>
-
-  <h2><span class="n">3</span>Pre-registered gates</h2>
-  <p>The game, the bound, and the optimal input distribution were <strong>frozen pre-submission</strong>. Four pre-data catches
+<h2><span class="n">3</span>Pre-registered gates</h2>
+<p>The game, the bound, and the optimal input distribution were <strong>frozen pre-submission</strong>. Four pre-data catches
   are documented in the finding:</p>
-  <div class="gate">
-    <span class="g">BEAT</span><span class="r">Measured game value strictly above the causally-separable bound. <span class="pass">PASS</span> — p̂ 0.9769 vs bound 0.8690, <strong>216.8σ</strong> on ibm_marrakesh.</span>
-    <span class="g">NULL</span><span class="r">Fixed-order null arm buys exactly the commuting prior. <span class="pass">PASS</span> — null = commuting prior <strong>+0.2pp</strong> on both devices (fixed order buys the prior, measured).</span>
-    <span class="g">PAIRS</span><span class="r">Every individual case pair above the bound (no single lucky pair carries it). <span class="pass">PASS</span> — <strong>all 51 pairs</strong> individually above the bound.</span>
-  </div>
-  <p>Four pre-data catches on the record: the Pauli pitfall; identity pairs load-bearing; skeleton uniformity;
+<div class="gate">
+<span class="g">BEAT</span><span class="r">Measured game value strictly above the causally-separable bound. <span class="pass">PASS</span> — p̂ 0.9769 vs bound 0.8690, <strong>216.8σ</strong> on ibm_marrakesh.</span>
+<span class="g">NULL</span><span class="r">Fixed-order null arm buys exactly the commuting prior. <span class="pass">PASS</span> — null = commuting prior <strong>+0.2pp</strong> on both devices (fixed order buys the prior, measured).</span>
+<span class="g">PAIRS</span><span class="r">Every individual case pair above the bound (no single lucky pair carries it). <span class="pass">PASS</span> — <strong>all 51 pairs</strong> individually above the bound.</span>
+</div>
+<p>Four pre-data catches on the record: the Pauli pitfall; identity pairs load-bearing; skeleton uniformity;
   transpiler pad-cancellation.</p>
-
-  <h2><span class="n">4</span>The measured data</h2>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+<h2><span class="n">4</span>The measured data</h2>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>Causal game scores on two chips vs the causally-separable SDP bound</caption>
-    <thead><tr><th scope="col">quantity</th><th scope="col">ibm_marrakesh</th><th scope="col">ibm_fez</th><th scope="col">ceiling / bound</th></tr></thead>
-    <tbody>
-      <tr class="hi"><td>switch game value p̂</td><td class="hw">0.9769 ± 0.0005</td><td class="hw">0.9738</td><td class="bound">0.8690 (SDP-optimal)</td></tr>
-      <tr><td>significance above bound</td><td class="hw">216.8σ</td><td class="hw">201.0σ</td><td>—</td></tr>
-      <tr><td>balanced-game ceiling</td><td colspan="2" style="text-align:center">— proven maximum for any causal strategy —</td><td class="bound">0.9098</td></tr>
-      <tr><td>null arm (fixed order)</td><td class="bound">commuting prior +0.2pp</td><td class="bound">commuting prior +0.2pp</td><td>= prior</td></tr>
-      <tr><td>per-pair check</td><td colspan="2" style="text-align:center">all 51 pairs individually above the bound</td><td>&gt; 0.8690</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p>The two chips agree to <strong>0.3 percentage points</strong> (0.9769 vs 0.9738) — cross-device concordance on a chip
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">quantity</th><th role="columnheader" scope="col">ibm_marrakesh</th><th role="columnheader" scope="col">ibm_fez</th><th role="columnheader" scope="col">ceiling / bound</th></tr></thead>
+<tbody role="rowgroup">
+<tr class="hi" role="row"><td data-label="quantity" role="cell">switch game value p̂</td><td class="hw" data-label="ibm_marrakesh" role="cell">0.9769 ± 0.0005</td><td class="hw" data-label="ibm_fez" role="cell">0.9738</td><td class="bound" data-label="ceiling / bound" role="cell">0.8690 (SDP-optimal)</td></tr>
+<tr role="row"><td data-label="quantity" role="cell">significance above bound</td><td class="hw" data-label="ibm_marrakesh" role="cell">216.8σ</td><td class="hw" data-label="ibm_fez" role="cell">201.0σ</td><td data-label="ceiling / bound" role="cell">—</td></tr>
+<tr role="row"><td data-label="quantity" role="cell">balanced-game ceiling</td><td colspan="2" data-label="ibm_marrakesh" role="cell" style="text-align:center">— proven maximum for any causal strategy —</td><td class="bound" data-label="ibm_fez" role="cell">0.9098</td></tr>
+<tr role="row"><td data-label="quantity" role="cell">null arm (fixed order)</td><td class="bound" data-label="ibm_marrakesh" role="cell">commuting prior +0.2pp</td><td class="bound" data-label="ibm_fez" role="cell">commuting prior +0.2pp</td><td data-label="ceiling / bound" role="cell">= prior</td></tr>
+<tr role="row"><td data-label="quantity" role="cell">per-pair check</td><td colspan="2" data-label="ibm_marrakesh" role="cell" style="text-align:center">all 51 pairs individually above the bound</td><td data-label="ibm_fez" role="cell">&gt; 0.8690</td></tr>
+</tbody>
+</table>
+</div>
+<p>The two chips agree to <strong>0.3 percentage points</strong> (0.9769 vs 0.9738) — cross-device concordance on a chip
   (ibm_fez) the experiment had never touched, replicated the next day. Even the single worst case in the deck beats
   the ceiling on its own.</p>
-
-  <h2><span class="n">5</span>Scope &amp; caveats</h2>
-  <ul>
-    <li><strong>A game-value / correlation advantage — not a loophole-free certification.</strong> The result is that the
+<h2><span class="n">5</span>Scope &amp; caveats</h2>
+<ul>
+<li><strong>A game-value / correlation advantage — not a loophole-free certification.</strong> The result is that the
     measured game value beats the causally-separable bound; it is a <strong>device-characterized</strong> demonstration (the
     devices are trusted and characterized), <strong>not</strong> a device-independent, loophole-free test. Photonic
     device-independent prior art is acknowledged.</li>
-    <li><strong>The bound is the theorem; the switch column is a measurement.</strong> A web page can replay any numbers, so the
+<li><strong>The bound is the theorem; the switch column is a measurement.</strong> A web page can replay any numbers, so the
     demo itself proves nothing — the theorem does (no definite/mixed/adaptive order beats the bound), and a real
     quantum computer produced the winning column.</li>
-    <li><strong>Prior credited.</strong> The game and its causally-separable bound are due to <strong>Araújo et al. (2015)</strong>; this
+<li><strong>Prior credited.</strong> The game and its causally-separable bound are due to <strong>Araújo et al. (2015)</strong>; this
     work re-derived the bound and the optimal input distribution from scratch and machine-verified them.</li>
-    <li><strong>Load-bearing deck.</strong> The do-nothing suspects are structurally required — excluding them lifts the ceiling
+<li><strong>Load-bearing deck.</strong> The do-nothing suspects are structurally required — excluding them lifts the ceiling
     to 100% and voids the game. They are kept in by design.</li>
-  </ul>
-
-  <h2><span class="n">6</span>Provenance</h2>
-  <ul>
-    <li><strong>Job:</strong> <code>d9826lkqp3as739sd2lg</code> · <strong>Backend:</strong> ibm_marrakesh (Heron r2) · frozen pre-registration</li>
-    <li><strong>Cross-device replication:</strong> ibm_fez (Heron r2), p̂ = 0.9738 (201.0σ), the next day, never-touched chip</li>
-    <li><strong>Bound:</strong> Araújo et al. (2015) causal discrimination game; causally-separable bound re-derived + machine-verified in the <a href="https://github.com/mblakemore/quantum">repository</a> (balanced 0.9098; SDP-optimal 0.8690)</li>
-    <li><strong>Pre-data catches:</strong> Pauli pitfall · identity pairs load-bearing · skeleton uniformity · transpiler pad-cancellation</li>
-    <li><strong>Family:</strong> Indefinite causal order — the causal game; sibling of the Quantum Switch (F73–F77) and the zero-capacity channel activation (F83)</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
-
-  </main>
-  <footer class="foot">
-    <span>MEASURED · <b style="color:var(--cyan)">F82</b> · job d9826lkqp3as739sd2lg · ibm_marrakesh + ibm_fez</span>
-    <span class="sp"></span>
-    <a href="./spec.md">Markdown</a>
-    <a href="../scoreboard/">Scoreboard</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+</ul>
+<h2><span class="n">6</span>Provenance</h2>
+<ul>
+<li><strong>Job:</strong> <code>d9826lkqp3as739sd2lg</code> · <strong>Backend:</strong> ibm_marrakesh (Heron r2) · frozen pre-registration</li>
+<li><strong>Cross-device replication:</strong> ibm_fez (Heron r2), p̂ = 0.9738 (201.0σ), the next day, never-touched chip</li>
+<li><strong>Bound:</strong> Araújo et al. (2015) causal discrimination game; causally-separable bound re-derived + machine-verified in the <a href="https://github.com/mblakemore/quantum">repository</a> (balanced 0.9098; SDP-optimal 0.8690)</li>
+<li><strong>Pre-data catches:</strong> Pauli pitfall · identity pairs load-bearing · skeleton uniformity · transpiler pad-cancellation</li>
+<li><strong>Family:</strong> Indefinite causal order — the causal game; sibling of the Quantum Switch (F73–F77) and the zero-capacity channel activation (F83)</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
+</main>
+<footer class="foot">
+<span>MEASURED · <b style="color:var(--cyan)">F82</b> · job d9826lkqp3as739sd2lg · ibm_marrakesh + ibm_fez</span>
+<span class="sp"></span>
+<a href="./spec.md">Markdown</a>
+<a href="../scoreboard/">Scoreboard</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.

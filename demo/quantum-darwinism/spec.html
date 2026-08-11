@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — Quantum Darwinism × ICO (F98 / Exp120) | The Quantum Museum</title>
-<meta name="description" content="Complete specification for the Quantum Darwinism exhibit: objectivity as redundant environmental copies, the complementarity hull on two incompatible recorders, and how a superposed causal order breaks the hull on both branches — +0.109 above the cap (22σ) and −0.432 below the floor (52σ). Job d9aa5m8tcv6s73do7li0, ibm_marrakesh, 63 two-qubit gates.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Complete specification for the Quantum Darwinism exhibit: objectivity as redundant environmental copies, the complementarity hull on two incompatible recorders, and how a superposed causal order breaks the hull on both branches — +0.109 above the cap (22σ) and −0.432 below the floor (52σ). Job d9aa5m8tcv6s73do7li0, ibm_marrakesh, 63 two-qubit gates." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -96,6 +97,41 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this page's table cannot fit a 320px window at any padding — measured —
+     so dropping the min-width still left it scrolling and still cutting values mid-number. Below
+     430px it STACKS: one card per row, each value carrying its column label, no scroll, nothing to
+     cut. The explicit ARIA roles are the point: display:block strips a table's implicit roles, so a
+     CSS-only stack trades a screen-reader regression for a sighted-reader fix. thead is CLIPPED,
+     not display:none, so it is still announced; ::before labels are not announced, so nothing is
+     read twice. The caption rule is here because a caption keeps display:table-caption inside a
+     block table and shrink-to-fits to ~104px, wrapping its sentence to 14 characters a line. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -130,141 +166,128 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· Quantum Darwinism exhibit</a>
-    <span class="wingtag">· Wing III · Foundations on Silicon</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet</p>
-    <h1>Two objective facts that <span class="hl">no causal order</span> can hold at once</h1>
-    <div class="idline">
-      <span><strong>Finding</strong> F98</span>
-      <span><strong>Experiment</strong> Exp120 (Darwinism × ICO)</span>
-      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
-      <span><strong>Job</strong> d9aa5m8tcv6s73do7li0</span>
-      <span><strong>Cycle</strong> C4645 · Whisper</span>
-    </div>
-    <span class="verdict-chip"><span aria-hidden="true">✓</span> VERDICT — DARWINISM-HULL-VIOLATED (both branches) · 22σ &amp; 52σ</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit is
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· Quantum Darwinism exhibit</a>
+<span class="wingtag">· Wing III · Foundations on Silicon</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet</p>
+<h1>Two objective facts that <span class="hl">no causal order</span> can hold at once</h1>
+<div class="idline">
+<span><strong>Finding</strong> F98</span>
+<span><strong>Experiment</strong> Exp120 (Darwinism × ICO)</span>
+<span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+<span><strong>Job</strong> d9aa5m8tcv6s73do7li0</span>
+<span><strong>Cycle</strong> C4645 · Whisper</span>
+</div>
+<span class="verdict-chip"><span aria-hidden="true">✓</span> VERDICT — DARWINISM-HULL-VIOLATED (both branches) · 22σ &amp; 52σ</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit is
   drawn from here; every number here is drawn from the frozen grade file <code>results/exp120_grade.json</code> and
   its job record <code>results/exp120_jobids.json</code>. It is the crown jewel of Horizons-2 and the campaign's
   deepest certified apparatus — <strong>63 two-qubit gates</strong>.</p>
-
-  <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p><strong>Why is anything a "fact"?</strong> Quantum Darwinism (Zurek) says a property becomes <strong>objective</strong> when the
+<h2><span class="n">1</span>The idea, in plain language</h2>
+<p><strong>Why is anything a "fact"?</strong> Quantum Darwinism (Zurek) says a property becomes <strong>objective</strong> when the
   environment makes <strong>many redundant copies</strong> of it. You and I agree the moon is there because countless photons
   each carry the same record of it — we can each read a different fragment of the environment and get the same answer.
   Objectivity is redundancy.</p>
-  <p><strong>The catch: complementarity.</strong> A quantum system has properties that cannot both be sharply defined — here,
+<p><strong>The catch: complementarity.</strong> A quantum system has properties that cannot both be sharply defined — here,
   a <span class="zc">Z-fact</span> and an incompatible <span class="xc">X-fact</span>. The environment cannot hold
   faithful copies of <strong>both</strong> at once. So if two recorders each try to copy one property, there is a hard ceiling
   on how objective the two facts can jointly be.</p>
-  <div class="callout">
-    <p class="clabel">The measured quantity</p>
-    <p class="tight">Each recorder's <strong>faithfulness</strong> <code>A</code> is how good its copy is: <code>A = 1</code> a
+<div class="callout">
+<p class="clabel">The measured quantity</p>
+<p class="tight">Each recorder's <strong>faithfulness</strong> <code>A</code> is how good its copy is: <code>A = 1</code> a
     perfect objective record, <code>A = 0.5</code> a coin-flip (no information). The <strong>joint objectivity</strong> is their
     sum <code>w = A_Z + A_X</code>. Under <strong>any definite order</strong> of the two recorders, w is boxed into a narrow
     <strong>hull</strong> — that box is what a causal history permits.</p>
-  </div>
-  <p><strong>The twist (indefinite causal order).</strong> A quantum switch puts the <strong>order</strong> of the two recorders into
+</div>
+<p><strong>The twist (indefinite causal order).</strong> A quantum switch puts the <strong>order</strong> of the two recorders into
   superposition — recorder-Z-then-X <strong>and</strong> X-then-Z at the same time. Now measure w. If it leaves the hull, we
   have joint objectivity that <strong>no ordering of events could have produced</strong>: facts without a causal history.</p>
-
-  <h2><span class="n">2</span>The objectivity hull — winner-take-all</h2>
-  <p>Under a definite order, the <strong>last</strong> recorder wins: it copies its property faithfully (<code>A ≈ 0.95–0.99</code>)
+<h2><span class="n">2</span>The objectivity hull — winner-take-all</h2>
+<p>Under a definite order, the <strong>last</strong> recorder wins: it copies its property faithfully (<code>A ≈ 0.95–0.99</code>)
   while the earlier recorder's copy is scrambled by the later measurement to a coin-flip (<code>A ≈ 0.50</code>). The
   two orders trace the edges of the hull:</p>
-  <div class="callout">
-    <p class="clabel">Measured hull (same window, these two recorders)</p>
-    <p class="tight"><span class="zc">Z-then-X</span>: <code>A_Z=0.506</code> (lost), <code>A_X=0.955</code> (won) →
-    <code>w=1.4614</code>. &nbsp; <span class="xc">X-then-Z</span>: <code>A_Z=0.986</code> (won),
-    <code>A_X=0.501</code> (lost) → <code>w=1.4871</code>. &nbsp; <strong>Hull = [1.4614, 1.4871]</strong> — everything a
+<div class="callout">
+<p class="clabel">Measured hull (same window, these two recorders)</p>
+<p class="tight"><span class="zc">Z-then-X</span>: <code>A_Z=0.506</code> (lost), <code>A_X=0.955</code> (won) →
+    <code>w=1.4614</code>.   <span class="xc">X-then-Z</span>: <code>A_Z=0.986</code> (won),
+    <code>A_X=0.501</code> (lost) → <code>w=1.4871</code>.   <strong>Hull = [1.4614, 1.4871]</strong> — everything a
     definite order can reach. The winner-take-all pattern is exactly what theory demands.</p>
-  </div>
-
-  <h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
-  <div class="gate">
-    <span class="g">N1</span><span class="r">Herald sanity: the switch-control witness must register indefinite order. <span class="pass">PASS</span> (0.333).</span>
-    <span class="g">H1</span><span class="r">Minus-branch rate in the expected window (theory 0.25). <span class="pass">PASS</span> (0.284).</span>
-    <span class="g">W_PLUS</span><span class="r"><code>w_plus &gt; hull_max</code> by &gt;5·SE — joint objectivity <strong>above</strong> the ceiling. <span class="pass">PASS</span> (+0.109, 22σ).</span>
-    <span class="g">W_MINUS</span><span class="r"><code>w_minus &lt; hull_min</code> by &gt;5·SE — both records <strong>erased</strong> below the floor. <span class="pass">PASS</span> (−0.432, 52σ).</span>
-  </div>
-
-  <h2><span class="n">4</span>The measured data</h2>
-  <p>Faithfulness of each recorder, and the joint objectivity <code>w</code>, for every arm. 30,000 shots per definite
+</div>
+<h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
+<div class="gate">
+<span class="g">N1</span><span class="r">Herald sanity: the switch-control witness must register indefinite order. <span class="pass">PASS</span> (0.333).</span>
+<span class="g">H1</span><span class="r">Minus-branch rate in the expected window (theory 0.25). <span class="pass">PASS</span> (0.284).</span>
+<span class="g">W_PLUS</span><span class="r"><code>w_plus &gt; hull_max</code> by &gt;5·SE — joint objectivity <strong>above</strong> the ceiling. <span class="pass">PASS</span> (+0.109, 22σ).</span>
+<span class="g">W_MINUS</span><span class="r"><code>w_minus &lt; hull_min</code> by &gt;5·SE — both records <strong>erased</strong> below the floor. <span class="pass">PASS</span> (−0.432, 52σ).</span>
+</div>
+<h2><span class="n">4</span>The measured data</h2>
+<p>Faithfulness of each recorder, and the joint objectivity <code>w</code>, for every arm. 30,000 shots per definite
   arm; the switch branches are split by the heralded control outcome (+ = 71.6%, − = 28.4%).</p>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>Recorder faithfulness and joint objectivity w for definite and switch arms</caption>
-    <thead><tr><th scope="col">arm</th><th scope="col">Z-fact A_Z</th><th scope="col">X-fact A_X</th><th scope="col">w = A_Z+A_X</th><th scope="col">vs hull</th></tr></thead>
-    <tbody>
-      <tr><td>Z-then-X (definite)</td><td class="zc2">0.506</td><td class="xc2">0.955</td><td>1.4614</td><td>hull floor</td></tr>
-      <tr><td>X-then-Z (definite)</td><td class="zc2">0.986</td><td class="xc2">0.501</td><td>1.4871</td><td>hull ceiling</td></tr>
-      <tr class="plus"><td>switch → + branch (72%)</td><td class="zc2">0.817</td><td class="xc2">0.778</td><td><strong>1.5957 ± 0.0039</strong></td><td><strong>+0.109 · 22σ</strong></td></tr>
-      <tr class="minus"><td>switch → − branch (28%)</td><td class="zc2">0.553</td><td class="xc2">0.477</td><td><strong>1.0296 ± 0.0076</strong></td><td><strong>−0.432 · 52σ</strong></td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p>Theory targets (reported, not gated): <code>w_plus = 1.667</code>, <code>w_minus = 1.0</code>,
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">arm</th><th role="columnheader" scope="col">Z-fact A_Z</th><th role="columnheader" scope="col">X-fact A_X</th><th role="columnheader" scope="col">w = A_Z+A_X</th><th role="columnheader" scope="col">vs hull</th></tr></thead>
+<tbody role="rowgroup">
+<tr role="row"><td data-label="arm" role="cell">Z-then-X (definite)</td><td class="zc2" data-label="Z-fact A_Z" role="cell">0.506</td><td class="xc2" data-label="X-fact A_X" role="cell">0.955</td><td data-label="w = A_Z+A_X" role="cell">1.4614</td><td data-label="vs hull" role="cell">hull floor</td></tr>
+<tr role="row"><td data-label="arm" role="cell">X-then-Z (definite)</td><td class="zc2" data-label="Z-fact A_Z" role="cell">0.986</td><td class="xc2" data-label="X-fact A_X" role="cell">0.501</td><td data-label="w = A_Z+A_X" role="cell">1.4871</td><td data-label="vs hull" role="cell">hull ceiling</td></tr>
+<tr class="plus" role="row"><td data-label="arm" role="cell">switch → + branch (72%)</td><td class="zc2" data-label="Z-fact A_Z" role="cell">0.817</td><td class="xc2" data-label="X-fact A_X" role="cell">0.778</td><td data-label="w = A_Z+A_X" role="cell"><strong>1.5957 ± 0.0039</strong></td><td data-label="vs hull" role="cell"><strong>+0.109 · 22σ</strong></td></tr>
+<tr class="minus" role="row"><td data-label="arm" role="cell">switch → − branch (28%)</td><td class="zc2" data-label="Z-fact A_Z" role="cell">0.553</td><td class="xc2" data-label="X-fact A_X" role="cell">0.477</td><td data-label="w = A_Z+A_X" role="cell"><strong>1.0296 ± 0.0076</strong></td><td data-label="vs hull" role="cell"><strong>−0.432 · 52σ</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p>Theory targets (reported, not gated): <code>w_plus = 1.667</code>, <code>w_minus = 1.0</code>,
   <code>hull point = 1.5</code>, <code>minus rate = 0.25</code>. The hardware matched the noise-model preview to the
   third decimal.</p>
-
-  <h2><span class="n">5</span>The two violations</h2>
-  <div class="callout good">
-    <p class="clabel">+ branch (72%) — facts without a causal history</p>
-    <p class="tight">Both incompatible records land at <strong>~0.80 faithful at once</strong> (<code>w=1.596</code>), a joint
+<h2><span class="n">5</span>The two violations</h2>
+<div class="callout good">
+<p class="clabel">+ branch (72%) — facts without a causal history</p>
+<p class="tight">Both incompatible records land at <strong>~0.80 faithful at once</strong> (<code>w=1.596</code>), a joint
     objectivity <strong>0.109 above the ceiling</strong> that any definite order can reach — <strong>22σ</strong>. Two complementary facts
     share the environment's redundancy at the same time, a configuration <strong>no sequence of events can produce</strong>.</p>
-  </div>
-  <div class="callout bad">
-    <p class="clabel">− branch (28%, heralded) — record erasure</p>
-    <p class="tight">Both records collapse to <strong>coin-flip</strong> (<code>A_Z=0.553</code>, <code>A_X=0.477</code>,
+</div>
+<div class="callout bad">
+<p class="clabel">− branch (28%, heralded) — record erasure</p>
+<p class="tight">Both records collapse to <strong>coin-flip</strong> (<code>A_Z=0.553</code>, <code>A_X=0.477</code>,
     <code>w=1.030</code>) — <strong>0.432 below the floor</strong>, <strong>52σ</strong>. The environment holds <strong>no</strong> faithful copy of
     either fact. Erasure is <strong>flagged by the herald before anyone reads the records</strong>.</p>
-  </div>
-
-  <h2><span class="n">6</span>Scope &amp; caveats</h2>
-  <ul>
-    <li><strong>Resource-scoped.</strong> The hull is the reachable set of <strong>these two recorders</strong> in this window, not a
+</div>
+<h2><span class="n">6</span>Scope &amp; caveats</h2>
+<ul>
+<li><strong>Resource-scoped.</strong> The hull is the reachable set of <strong>these two recorders</strong> in this window, not a
     universal bound over all possible apparatus. The claim is: <strong>within this fixed resource</strong>, superposed order
     exits a box that every definite order is confined to.</li>
-    <li><strong>The intermediate-basis cheat is excluded by construction.</strong> A recorder reading in a cleverly-tilted
+<li><strong>The intermediate-basis cheat is excluded by construction.</strong> A recorder reading in a cleverly-tilted
     intermediate basis could fake shared objectivity; that loophole is disclosed and structurally removed (F82
     lineage). The recorders read the pure Z and X bases.</li>
-    <li><strong>Separations are the figures of merit.</strong> The +/− <strong>excursions past the hull</strong> (22σ, 52σ) are the
+<li><strong>Separations are the figures of merit.</strong> The +/− <strong>excursions past the hull</strong> (22σ, 52σ) are the
     certified results. The exact erasure values and theory-matching are <strong>reported</strong>, not gated.</li>
-    <li><strong>Deepest apparatus.</strong> 63 two-qubit gates — the campaign's deepest certified circuit (the
+<li><strong>Deepest apparatus.</strong> 63 two-qubit gates — the campaign's deepest certified circuit (the
     deliberate opposite of the grandfather audit's 3-gate shallowest). Hardware matched the noise model to the third
     decimal, which is why a circuit this deep still certifies.</li>
-  </ul>
-
-  <h2><span class="n">7</span>Provenance</h2>
-  <ul>
-    <li><strong>Grade file:</strong> <code>results/exp120_grade.json</code> · <strong>Job record:</strong> <code>results/exp120_jobids.json</code> · <strong>Job:</strong> d9aa5m8tcv6s73do7li0</li>
-    <li><strong>Backend:</strong> ibm_marrakesh (Heron r2) · <strong>Shots:</strong> 30,000/definite arm · <strong>Depth:</strong> 63 two-qubit gates</li>
-    <li><strong>Sibling telescope:</strong> F99 (the heralded Hayden–Preskill mirror) shares this exact certified skeleton, site, and window</li>
-    <li><strong>Family:</strong> Horizons-2 Q2 · lineage F82 (loophole discipline)</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
-
-  </main>
-  <footer class="foot">
-    <span>MEASURED · <b style="color:var(--violet)">F98</b> · job d9aa5m8tcv6s73do7li0 · ibm_marrakesh</span>
-    <span class="sp"></span>
-    <a href="./spec.md">Markdown</a>
-    <a href="../scoreboard/">Scoreboard</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+</ul>
+<h2><span class="n">7</span>Provenance</h2>
+<ul>
+<li><strong>Grade file:</strong> <code>results/exp120_grade.json</code> · <strong>Job record:</strong> <code>results/exp120_jobids.json</code> · <strong>Job:</strong> d9aa5m8tcv6s73do7li0</li>
+<li><strong>Backend:</strong> ibm_marrakesh (Heron r2) · <strong>Shots:</strong> 30,000/definite arm · <strong>Depth:</strong> 63 two-qubit gates</li>
+<li><strong>Sibling telescope:</strong> F99 (the heralded Hayden–Preskill mirror) shares this exact certified skeleton, site, and window</li>
+<li><strong>Family:</strong> Horizons-2 Q2 · lineage F82 (loophole discipline)</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
+</main>
+<footer class="foot">
+<span>MEASURED · <b style="color:var(--violet)">F98</b> · job d9aa5m8tcv6s73do7li0 · ibm_marrakesh</span>
+<span class="sp"></span>
+<a href="./spec.md">Markdown</a>
+<a href="../scoreboard/">Scoreboard</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.

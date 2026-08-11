@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — The Switch-Bench Readout (F112 / Exp133) | The Quantum Museum</title>
-<meta name="description" content="Complete specification for the Switch-Bench Readout: a three-axis instrument for causal-order physics (CAUSAL, SCHEDULE, HOLD) flown intact on two foreign chips (ibm_kingston, ibm_fez), certifying every axis against the same frozen bounds with no retuning — ranking three Heron dies on axes QV/CLOPS/EPLG don't touch. F112 extended to a third device (fez certifies all axes, not a clean 3/3).">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Complete specification for the Switch-Bench Readout: a three-axis instrument for causal-order physics (CAUSAL, SCHEDULE, HOLD) flown intact on two foreign chips (ibm_kingston, ibm_fez), certifying every axis against the same frozen bounds with no retuning — ranking three Heron dies on axes QV/CLOPS/EPLG don't touch. F112 extended to a third device (fez certifies all axes, not a clean 3/3)." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -96,6 +97,41 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this page's table cannot fit a 320px window at any padding — measured —
+     so dropping the min-width still left it scrolling and still cutting values mid-number. Below
+     430px it STACKS: one card per row, each value carrying its column label, no scroll, nothing to
+     cut. The explicit ARIA roles are the point: display:block strips a table's implicit roles, so a
+     CSS-only stack trades a screen-reader regression for a sighted-reader fix. thead is CLIPPED,
+     not display:none, so it is still announced; ::before labels are not announced, so nothing is
+     read twice. The caption rule is here because a caption keeps display:table-caption inside a
+     block table and shrink-to-fits to ~104px, wrapping its sentence to 14 characters a line. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -128,119 +164,106 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· Switch-Bench exhibit</a>
-    <span class="wingtag">· Wing V · The Instruments</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet</p>
-    <h1>An instrument for causal-order physics — that <span class="hl">travels</span></h1>
-    <div class="idline">
-      <span><strong>Finding</strong> F112</span>
-      <span><strong>Experiment</strong> Exp133 (the transporter exam)</span>
-      <span><strong>Foreign chips</strong> ibm_kingston · ibm_fez</span>
-      <span><strong>Jobs</strong> d9amd73… · d9b9fvvu…</span>
-    </div>
-    <span class="verdict-chip"><span aria-hidden="true">✓</span> DEVICE-INDEPENDENCE — full 3-axis bench across THREE Heron dies (fez extends F112; not a clean 3/3)</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This sheet is the source-of-truth specification behind the interactive exhibit. Numbers are drawn from the frozen
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· Switch-Bench exhibit</a>
+<span class="wingtag">· Wing V · The Instruments</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet</p>
+<h1>An instrument for causal-order physics — that <span class="hl">travels</span></h1>
+<div class="idline">
+<span><strong>Finding</strong> F112</span>
+<span><strong>Experiment</strong> Exp133 (the transporter exam)</span>
+<span><strong>Foreign chips</strong> ibm_kingston · ibm_fez</span>
+<span><strong>Jobs</strong> d9amd73… · d9b9fvvu…</span>
+</div>
+<span class="verdict-chip"><span aria-hidden="true">✓</span> DEVICE-INDEPENDENCE — full 3-axis bench across THREE Heron dies (fez extends F112; not a clean 3/3)</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This sheet is the source-of-truth specification behind the interactive exhibit. Numbers are drawn from the frozen
   switch-bench cards for <code>kingston</code> and <code>fez</code> (<code>…d9b9fvvu…_card.json</code>), plus <code>marrakesh</code> (causal axis) and the Zeno run for the home HOLD axis. It
   is the campaign's <strong>first two-device card</strong>, and it completes Horizons-3.</p>
-
-  <h2><span class="n">1</span>What is the switch-bench?</h2>
-  <p>Chip vendors publish generic quality metrics — Quantum Volume, CLOPS, EPLG. None of them tell you whether a chip
+<h2><span class="n">1</span>What is the switch-bench?</h2>
+<p>Chip vendors publish generic quality metrics — Quantum Volume, CLOPS, EPLG. None of them tell you whether a chip
   can actually do the <strong>physics of causal-order superposition</strong>. The <strong>switch-bench</strong> is an instrument that does:
   it reads <strong>three axes</strong> of the campaign's causal-order phenomena, each against a <strong>frozen, pre-registered
   bound</strong>. Each axis is a finding you can visit elsewhere in the museum:</p>
-  <ul>
-    <li><b class="cs" style="color:var(--cyan)">CAUSAL</b> — is the order genuinely indefinite? The switch witness and its channel capacity. <i>(→ the Causal Switch)</i></li>
-    <li><b style="color:var(--violet)">SCHEDULE</b> — is the chip <strong>order-symmetric</strong>, with no hidden preferred order sneaking in? <i>(→ F96 hidden-order)</i></li>
-    <li><b style="color:var(--amber)">HOLD</b> — can measurement pin a qubit against a rotation (the quantum Zeno effect)? <i>(→ the Zeno Tractor Beam)</i></li>
-  </ul>
-
-  <h2><span class="n">2</span>The transporter exam — the bench travels</h2>
-  <p>The bench had only ever run on <strong>ibm_marrakesh</strong> (home). The test: fly the <strong>entire three-axis bench</strong> on a
+<ul>
+<li><b class="cs" style="color:var(--cyan)">CAUSAL</b> — is the order genuinely indefinite? The switch witness and its channel capacity. <i>(→ the Causal Switch)</i></li>
+<li><b style="color:var(--violet)">SCHEDULE</b> — is the chip <strong>order-symmetric</strong>, with no hidden preferred order sneaking in? <i>(→ F96 hidden-order)</i></li>
+<li><b style="color:var(--amber)">HOLD</b> — can measurement pin a qubit against a rotation (the quantum Zeno effect)? <i>(→ the Zeno Tractor Beam)</i></li>
+</ul>
+<h2><span class="n">2</span>The transporter exam — the bench travels</h2>
+<p>The bench had only ever run on <strong>ibm_marrakesh</strong> (home). The test: fly the <strong>entire three-axis bench</strong> on a
   chip it had <strong>never seen</strong> — first <strong>ibm_kingston</strong>, then <strong>ibm_fez</strong> — and grade every axis against the <strong>same frozen bounds, with no
   retuning</strong>. If causal-order physics is a property of the <strong>hardware generation</strong> (both are IBM Heron), not one
   lucky die, the bench should certify on the foreign chip too.</p>
-  <div class="callout good">
-    <p class="clabel">Result</p>
-    <p class="tight">On kingston (one job, <strong>77 pubs, 208,000 shots</strong>), <strong>all three axes certified</strong> against the
+<div class="callout good">
+<p class="clabel">Result</p>
+<p class="tight">On kingston (one job, <strong>77 pubs, 208,000 shots</strong>), <strong>all three axes certified</strong> against the
     identical bounds — and the bench then <strong>repeated on a third die, ibm_fez</strong>, which also certifies all three axes (though <strong>not as cleanly</strong> — see §6). The frozen site-selection rules were <strong>re-derived live</strong> on each chip's unfamiliar qubit map —
     deterministic, untouched. The court is <strong>device-independent</strong>: the causal-order phenomena travel.</p>
-  </div>
-
-  <h2><span class="n">3</span>Pre-registered gates (frozen; graded identically on both chips)</h2>
-  <div class="gate">
-    <span class="g">CAUSAL</span><span class="r">Witness certifies indefinite order + capacity above the dead null. <span class="pass">PASS-CAUSAL</span> (kingston W 1.9533 / fez 1.8948; R̄ 0.5245 / 0.5080).</span>
-    <span class="g">SCHEDULE</span><span class="r"><code>D_order ≤ 0.0223</code> — no hidden preferred order. <span class="pass">ORDER-SYMMETRIC</span> (kingston 0.0130; fez 0.0185, but its split-half floor-transfer guard flagged — §6).</span>
-    <span class="g">HOLD</span><span class="r">Zeno tractor separation over the 0.30 bar + QND fidelity. <span class="pass">HOLD-CERTIFIED</span> (kingston sep 0.6487 / fez 0.5247; q 0.9847 / 0.9708).</span>
-  </div>
-
-  <h2><span class="n">4</span>The measured data — two devices, one standard</h2>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+</div>
+<h2><span class="n">3</span>Pre-registered gates (frozen; graded identically on both chips)</h2>
+<div class="gate">
+<span class="g">CAUSAL</span><span class="r">Witness certifies indefinite order + capacity above the dead null. <span class="pass">PASS-CAUSAL</span> (kingston W 1.9533 / fez 1.8948; R̄ 0.5245 / 0.5080).</span>
+<span class="g">SCHEDULE</span><span class="r"><code>D_order ≤ 0.0223</code> — no hidden preferred order. <span class="pass">ORDER-SYMMETRIC</span> (kingston 0.0130; fez 0.0185, but its split-half floor-transfer guard flagged — §6).</span>
+<span class="g">HOLD</span><span class="r">Zeno tractor separation over the 0.30 bar + QND fidelity. <span class="pass">HOLD-CERTIFIED</span> (kingston sep 0.6487 / fez 0.5247; q 0.9847 / 0.9708).</span>
+</div>
+<h2><span class="n">4</span>The measured data — two devices, one standard</h2>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>Switch-bench three-axis scores across three IBM Heron dies vs frozen bounds</caption>
-    <thead><tr><th scope="col">axis · metric</th><th scope="col">ideal</th><th scope="col">marrakesh</th><th scope="col">kingston</th><th scope="col">fez</th><th scope="col">bound</th></tr></thead>
-    <tbody>
-      <tr><td>CAUSAL · witness W</td><td>2.000</td><td>1.9265</td><td class="king">1.9533 <span class="edge">▲</span></td><td>1.8948</td><td>≫ 0</td></tr>
-      <tr><td>CAUSAL · capacity R̄</td><td>0.5333</td><td>0.4978</td><td class="king">0.5245 <span class="edge">▲</span></td><td>0.5080</td><td>≫ 0 null</td></tr>
-      <tr><td>SCHEDULE · D_order</td><td>0</td><td>symmetric</td><td class="king">0.0130</td><td>0.0185 ⚠</td><td>≤ 0.0223</td></tr>
-      <tr><td>HOLD · tractor sep</td><td>~0.73</td><td>0.624</td><td class="king">0.6487 <span class="edge">▲</span></td><td>0.5247</td><td>&gt; 0.30</td></tr>
-      <tr><td>HOLD · QND q</td><td>1.000</td><td>0.987</td><td class="king">0.9847</td><td>0.9708</td><td>≈ 1</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p><span class="edge">▲</span> = leads. The three dies rank <strong>kingston ≥ marrakesh ≥ fez</strong> on the causal and Zeno-hold numbers — kingston leads W, R̄ and hold-separation; marrakesh edges QND. <strong>fez, the newest die, certifies every axis but sits last</strong>, and its SCHEDULE reading (⚠) tripped the split-half guard (§6). Device-independence holds across three dies; the bench ranks them.</p>
-
-  <h2><span class="n">5</span>What it means</h2>
-  <ul>
-    <li><strong>Device-independence.</strong> The causal-order phenomena certify on a chip the bench had never seen, against the
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">axis · metric</th><th role="columnheader" scope="col">ideal</th><th role="columnheader" scope="col">marrakesh</th><th role="columnheader" scope="col">kingston</th><th role="columnheader" scope="col">fez</th><th role="columnheader" scope="col">bound</th></tr></thead>
+<tbody role="rowgroup">
+<tr role="row"><td data-label="axis · metric" role="cell">CAUSAL · witness W</td><td data-label="ideal" role="cell">2.000</td><td data-label="marrakesh" role="cell">1.9265</td><td class="king" data-label="kingston" role="cell">1.9533 <span class="edge">▲</span></td><td data-label="fez" role="cell">1.8948</td><td data-label="bound" role="cell">≫ 0</td></tr>
+<tr role="row"><td data-label="axis · metric" role="cell">CAUSAL · capacity R̄</td><td data-label="ideal" role="cell">0.5333</td><td data-label="marrakesh" role="cell">0.4978</td><td class="king" data-label="kingston" role="cell">0.5245 <span class="edge">▲</span></td><td data-label="fez" role="cell">0.5080</td><td data-label="bound" role="cell">≫ 0 null</td></tr>
+<tr role="row"><td data-label="axis · metric" role="cell">SCHEDULE · D_order</td><td data-label="ideal" role="cell">0</td><td data-label="marrakesh" role="cell">symmetric</td><td class="king" data-label="kingston" role="cell">0.0130</td><td data-label="fez" role="cell">0.0185 ⚠</td><td data-label="bound" role="cell">≤ 0.0223</td></tr>
+<tr role="row"><td data-label="axis · metric" role="cell">HOLD · tractor sep</td><td data-label="ideal" role="cell">~0.73</td><td data-label="marrakesh" role="cell">0.624</td><td class="king" data-label="kingston" role="cell">0.6487 <span class="edge">▲</span></td><td data-label="fez" role="cell">0.5247</td><td data-label="bound" role="cell">&gt; 0.30</td></tr>
+<tr role="row"><td data-label="axis · metric" role="cell">HOLD · QND q</td><td data-label="ideal" role="cell">1.000</td><td data-label="marrakesh" role="cell">0.987</td><td class="king" data-label="kingston" role="cell">0.9847</td><td data-label="fez" role="cell">0.9708</td><td data-label="bound" role="cell">≈ 1</td></tr>
+</tbody>
+</table>
+</div>
+<p><span class="edge">▲</span> = leads. The three dies rank <strong>kingston ≥ marrakesh ≥ fez</strong> on the causal and Zeno-hold numbers — kingston leads W, R̄ and hold-separation; marrakesh edges QND. <strong>fez, the newest die, certifies every axis but sits last</strong>, and its SCHEDULE reading (⚠) tripped the split-half guard (§6). Device-independence holds across three dies; the bench ranks them.</p>
+<h2><span class="n">5</span>What it means</h2>
+<ul>
+<li><strong>Device-independence.</strong> The causal-order phenomena certify on a chip the bench had never seen, against the
     same bounds — so they are properties of the <strong>Heron generation</strong>, not one die's quirks.</li>
-    <li><strong>A new kind of benchmark.</strong> The bench <strong>ranks devices on axes QV / CLOPS / EPLG do not touch</strong> — it
+<li><strong>A new kind of benchmark.</strong> The bench <strong>ranks devices on axes QV / CLOPS / EPLG do not touch</strong> — it
     tells you which chip does causal-order physics <strong>better</strong> — here kingston leads, marrakesh second, fez last, all certifying.</li>
-    <li><strong>Extends the cross-device story.</strong> F82 replicated one axis (the causal game) on a second device; F112
+<li><strong>Extends the cross-device story.</strong> F82 replicated one axis (the causal game) on a second device; F112
     replicates the <strong>full three-axis bench across three dies</strong> (marrakesh, kingston, fez).</li>
-  </ul>
-
-  <h2><span class="n">6</span>Scope &amp; caveats</h2>
-  <ul>
-    <li><strong>Same generation only.</strong> Both chips are IBM Heron. Cross-<strong>generation</strong> travel (e.g. to Eagle) is
+</ul>
+<h2><span class="n">6</span>Scope &amp; caveats</h2>
+<ul>
+<li><strong>Same generation only.</strong> Both chips are IBM Heron. Cross-<strong>generation</strong> travel (e.g. to Eagle) is
     <strong>not</strong> claimed here.</li>
-    <li><strong>Same-instrument, not same-instant.</strong> One calibration window per device; this is a device comparison across
+<li><strong>Same-instrument, not same-instant.</strong> One calibration window per device; this is a device comparison across
     windows, not a simultaneous measurement.</li>
-    <li><strong>Composite home reference.</strong> The marrakesh numbers are drawn from the home-chip bench runs across the
+<li><strong>Composite home reference.</strong> The marrakesh numbers are drawn from the home-chip bench runs across the
     campaign (causal from the bench card, HOLD from the Zeno run); kingston and fez each ran all three axes in a single job.</li>
-    <li><strong>fez is not a clean 3/3.</strong> ibm_fez clears every frozen bound, but its SCHEDULE axis tripped the <strong>split-half floor-transfer guard</strong> (split-half median 0.0582 &gt; the per-run bound 0.0464): the pooled hotspot D_order (0.0185) still reads order-symmetric, but the two halves disagree more than on the other dies — fez's schedule data is noisier. Reported as an extension of F112 with this caveat kept in the record, not a fourth clean certification.</li>
-  </ul>
-
-  <h2><span class="n">7</span>Provenance</h2>
-  <ul>
-    <li><strong>Kingston card:</strong> <code>results/switch_bench_d9amd73v6alc73cs0lp0_card.json</code> · <strong>Job:</strong> d9amd73v6alc73cs0lp0 (77 pubs, 208k shots)</li>
-    <li><strong>Fez card:</strong> <code>results/switch_bench_d9b9fvvu62qs738ov860_card.json</code> · <strong>Job:</strong> d9b9fvvu62qs738ov860 (77 pubs, 208k shots)</li>
-    <li><strong>Marrakesh card:</strong> <code>results/switch_bench_d9a7mn2f47jc73a9tcpg_card.json</code> (causal) · HOLD from the Zeno run (Exp124)</li>
-    <li><strong>Backends:</strong> ibm_marrakesh, ibm_kingston, ibm_fez (all Heron r2) · <strong>Bounds frozen</strong> pre-flight, identical on all three</li>
-    <li><strong>Family:</strong> Horizons-3 H6 (completes Horizons-3) · the three axes → the Causal Switch, F96 hidden-order, the Zeno Tractor Beam</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
-
-  </main>
-  <footer class="foot">
-    <span>MEASURED · <b style="color:var(--cyan)">F112</b> · ibm_marrakesh + ibm_kingston + ibm_fez (3 dies)</span>
-    <span class="sp"></span>
-    <a href="./spec.md">Markdown</a>
-    <a href="../scoreboard/">Scoreboard</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+<li><strong>fez is not a clean 3/3.</strong> ibm_fez clears every frozen bound, but its SCHEDULE axis tripped the <strong>split-half floor-transfer guard</strong> (split-half median 0.0582 &gt; the per-run bound 0.0464): the pooled hotspot D_order (0.0185) still reads order-symmetric, but the two halves disagree more than on the other dies — fez's schedule data is noisier. Reported as an extension of F112 with this caveat kept in the record, not a fourth clean certification.</li>
+</ul>
+<h2><span class="n">7</span>Provenance</h2>
+<ul>
+<li><strong>Kingston card:</strong> <code>results/switch_bench_d9amd73v6alc73cs0lp0_card.json</code> · <strong>Job:</strong> d9amd73v6alc73cs0lp0 (77 pubs, 208k shots)</li>
+<li><strong>Fez card:</strong> <code>results/switch_bench_d9b9fvvu62qs738ov860_card.json</code> · <strong>Job:</strong> d9b9fvvu62qs738ov860 (77 pubs, 208k shots)</li>
+<li><strong>Marrakesh card:</strong> <code>results/switch_bench_d9a7mn2f47jc73a9tcpg_card.json</code> (causal) · HOLD from the Zeno run (Exp124)</li>
+<li><strong>Backends:</strong> ibm_marrakesh, ibm_kingston, ibm_fez (all Heron r2) · <strong>Bounds frozen</strong> pre-flight, identical on all three</li>
+<li><strong>Family:</strong> Horizons-3 H6 (completes Horizons-3) · the three axes → the Causal Switch, F96 hidden-order, the Zeno Tractor Beam</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
+</main>
+<footer class="foot">
+<span>MEASURED · <b style="color:var(--cyan)">F112</b> · ibm_marrakesh + ibm_kingston + ibm_fez (3 dies)</span>
+<span class="sp"></span>
+<a href="./spec.md">Markdown</a>
+<a href="../scoreboard/">Scoreboard</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.

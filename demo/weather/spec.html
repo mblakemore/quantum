@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — The QPU Weather Report (F81 lineage) | The Quantum Museum</title>
-<meta name="description" content="Methodology sheet for the QPU Weather Report: a live drift nowcast (quiet-qubit map, live-readout drift, shallow/deep mirror ladder, sentinel-vs-vendor forecast, GO/NO-GO) that beat the vendor's deep-circuit forecast by 27% on its validation window. Instrument, not a quantum speedup. Tool tools/qpu_weather.py, job d9ao2hug26ic73df0iag, ibm_marrakesh.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Methodology sheet for the QPU Weather Report: a live drift nowcast (quiet-qubit map, live-readout drift, shallow/deep mirror ladder, sentinel-vs-vendor forecast, GO/NO-GO) that beat the vendor's deep-circuit forecast by 27% on its validation window. Instrument, not a quantum speedup. Tool tools/qpu_weather.py, job d9ao2hug26ic73df0iag, ibm_marrakesh." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -95,6 +96,41 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this page's table cannot fit a 320px window at any padding — measured —
+     so dropping the min-width still left it scrolling and still cutting values mid-number. Below
+     430px it STACKS: one card per row, each value carrying its column label, no scroll, nothing to
+     cut. The explicit ARIA roles are the point: display:block strips a table's implicit roles, so a
+     CSS-only stack trades a screen-reader regression for a sighted-reader fix. thead is CLIPPED,
+     not display:none, so it is still announced; ::before labels are not announced, so nothing is
+     read twice. The caption rule is here because a caption keeps display:table-caption inside a
+     block table and shrink-to-fits to ~104px, wrapping its sentence to 14 characters a line. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -127,129 +163,118 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· QPU Weather Report exhibit</a>
-    <span class="wingtag">· Wing V · The Instruments</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet · Methodology &amp; Sources</p>
-    <h1>A weather service for a chip whose <span class="hl">quality has weather</span></h1>
-    <div class="idline">
-      <span><strong>Nature</strong> Instrument (F81 lineage)</span>
-      <span><strong>Tool</strong> tools/qpu_weather.py</span>
-      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
-      <span><strong>Validation job</strong> d9ao2hug26ic73df0iag</span>
-      <span><strong>Cycle</strong> C4681 · Whisper</span>
-    </div>
-    <span class="verdict-chip">◇ SINGLE-WINDOW VALIDATED · scheduling edge, not a quantum speedup</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This is the methodology sheet behind the interactive exhibit. It describes <strong>how the weather service works</strong>
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· QPU Weather Report exhibit</a>
+<span class="wingtag">· Wing V · The Instruments</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet · Methodology &amp; Sources</p>
+<h1>A weather service for a chip whose <span class="hl">quality has weather</span></h1>
+<div class="idline">
+<span><strong>Nature</strong> Instrument (F81 lineage)</span>
+<span><strong>Tool</strong> tools/qpu_weather.py</span>
+<span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+<span><strong>Validation job</strong> d9ao2hug26ic73df0iag</span>
+<span><strong>Cycle</strong> C4681 · Whisper</span>
+</div>
+<span class="verdict-chip">◇ SINGLE-WINDOW VALIDATED · scheduling edge, not a quantum speedup</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This is the methodology sheet behind the interactive exhibit. It describes <strong>how the weather service works</strong>
   and what it measured on its one validation window. The exhibit's headline evidence base (the window lottery, the
   calibration-age null, the published-T1 error band) is drawn from the campaign's F81/F84 findings; the live nowcast
   numbers below are from the service's validation job <code>d9ao2hug26ic73df0iag</code> and are attributed to their
   source files in §5. Nothing here is invented for display.</p>
-
-  <h2><span class="n">1</span>What this is</h2>
-  <p>Quantum computers have <strong>weather</strong>: the same circuits, on the same qubits, can perform very differently hours
+<h2><span class="n">1</span>What this is</h2>
+<p>Quantum computers have <strong>weather</strong>: the same circuits, on the same qubits, can perform very differently hours
   apart, and the vendor's published calibration data does not forecast the swing. The exhibit's evidence base:</p>
-  <ul>
-    <li><strong>The window lottery (F81).</strong> Identical deep circuits on identical qubits, 11 hours apart, swung the
+<ul>
+<li><strong>The window lottery (F81).</strong> Identical deep circuits on identical qubits, 11 hours apart, swung the
     estimator error <strong>500×</strong> — <code>0.154 → 0.0003</code>. QAE on today's hardware is a calibration-window lottery.</li>
-    <li><strong>Calibration age does not predict it (F84).</strong> A pre-registered, frozen-Spearman test came back <strong>NULL</strong>;
+<li><strong>Calibration age does not predict it (F84).</strong> A pre-registered, frozen-Spearman test came back <strong>NULL</strong>;
     quality clusters by queue-drain episode, not by how stale the calibration is.</li>
-    <li><strong>The published T1 is a stale snapshot.</strong> Live T1 vs published across ten back-computed values over four days
+<li><strong>The published T1 is a stale snapshot.</strong> Live T1 vs published across ten back-computed values over four days
     ran <strong>0–115%</strong> off — right one day, ~2× off the next.</li>
-  </ul>
-  <p>Forecasting fails; <strong>detection works</strong>. The QPU Weather Report is the instrument that operationalizes that
+</ul>
+<p>Forecasting fails; <strong>detection works</strong>. The QPU Weather Report is the instrument that operationalizes that
   lesson: a cheap live <strong>nowcast</strong> of a chip's current quality that predicts how well a deep circuit will run
   <strong>right now</strong>, benchmarked against the vendor's published forecast. It is a <strong>scheduling oracle</strong> — a
   different axis from any advantage result in the campaign.</p>
-
-  <h2><span class="n">2</span>How the weather service works</h2>
-  <p>The tool runs in three modes: <code>--scan</code> (a free vendor-only report), <code>--nowcast</code> (fly a
+<h2><span class="n">2</span>How the weather service works</h2>
+<p>The tool runs in three modes: <code>--scan</code> (a free vendor-only report), <code>--nowcast</code> (fly a
   cheap sentinel and grade the window), and <code>--report &lt;job&gt;</code> (grade a completed job). A nowcast has
   four instruments:</p>
-  <ul>
-    <li><strong>Quiet-qubit map.</strong> Best-placement line chosen from calibration — the validation window selected the line
+<ul>
+<li><strong>Quiet-qubit map.</strong> Best-placement line chosen from calibration — the validation window selected the line
     <code>[0, 1, 2, 3]</code>.</li>
-    <li><strong>Live-readout drift.</strong> Measure the actual SPAM error now: <code>|0..0⟩ = 0.9125</code>,
+<li><strong>Live-readout drift.</strong> Measure the actual SPAM error now: <code>|0..0⟩ = 0.9125</code>,
     <code>|1..1⟩ = 0.9305</code>, against the published mean readout error <code>0.0067</code>.</li>
-    <li><strong>Mirror ladder (shallow / deep).</strong> A mirror circuit at two depths reads live fidelity:
+<li><strong>Mirror ladder (shallow / deep).</strong> A mirror circuit at two depths reads live fidelity:
     <code>shallow (6 CZ) P0 = 0.9070</code> and <code>deep (24 CZ) P0 = 0.7983</code>.</li>
-    <li><strong>Nowcast vs vendor forecast, then GO/NO-GO.</strong> The SPAM-corrected sentinel nowcasts the deep fidelity and is
+<li><strong>Nowcast vs vendor forecast, then GO/NO-GO.</strong> The SPAM-corrected sentinel nowcasts the deep fidelity and is
     compared to the vendor's per-gate-product forecast; the verdict gates on a separation <strong>threshold 0.30</strong>.</li>
-  </ul>
-  <div class="callout">
-    <p class="clabel">The report it produced (validation window, ibm_marrakesh)</p>
-    <p class="tight">Quiet-qubit line <code>[0,1,2,3]</code> · nowcast deep P0 → <strong>0.8907</strong> (|err| 0.0924) ·
+</ul>
+<div class="callout">
+<p class="clabel">The report it produced (validation window, ibm_marrakesh)</p>
+<p class="tight">Quiet-qubit line <code>[0,1,2,3]</code> · nowcast deep P0 → <strong>0.8907</strong> (|err| 0.0924) ·
     vendor forecast deep P0 → <strong>0.9245</strong> (|err| 0.1262) · measured deep P0 <strong>0.7983</strong> · forecast winner
     <strong>SENTINEL</strong> (closer to measured) · verdict <b class="pass">GO for deep work</b> (threshold 0.30).</p>
-  </div>
-
-  <h2><span class="n">3</span>What it shows — two live wins</h2>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+</div>
+<h2><span class="n">3</span>What it shows — two live wins</h2>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>QPU nowcast vs vendor forecast: readout error and deep-circuit fidelity predictions</caption>
-    <thead><tr><th scope="col">quantity</th><th scope="col">vendor / published</th><th scope="col">sentinel nowcast</th><th scope="col">measured truth</th></tr></thead>
-    <tbody>
-      <tr><td>per-qubit readout error</td><td>0.67%</td><td class="win">~2.3% <span class="edge">▲</span></td><td>drift live</td></tr>
-      <tr><td>deep (24 CZ) mirror fidelity</td><td>0.9245 <small>(|err| 0.126)</small></td><td class="win">0.8907 <small>(|err| 0.092)</small> <span class="edge">▲</span></td><td>0.7983</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <ul>
-    <li><strong>Readout drift, caught clean.</strong> Live <code>P(|0000⟩ read as 0000) = 0.9125</code> implies ~<strong>2.3%</strong>
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">quantity</th><th role="columnheader" scope="col">vendor / published</th><th role="columnheader" scope="col">sentinel nowcast</th><th role="columnheader" scope="col">measured truth</th></tr></thead>
+<tbody role="rowgroup">
+<tr role="row"><td data-label="quantity" role="cell">per-qubit readout error</td><td data-label="vendor / published" role="cell">0.67%</td><td class="win" data-label="sentinel nowcast" role="cell">~2.3% <span class="edge">▲</span></td><td data-label="measured truth" role="cell">drift live</td></tr>
+<tr role="row"><td data-label="quantity" role="cell">deep (24 CZ) mirror fidelity</td><td data-label="vendor / published" role="cell">0.9245 <small>(|err| 0.126)</small></td><td class="win" data-label="sentinel nowcast" role="cell">0.8907 <small>(|err| 0.092)</small> <span class="edge">▲</span></td><td data-label="measured truth" role="cell">0.7983</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>Readout drift, caught clean.</strong> Live <code>P(|0000⟩ read as 0000) = 0.9125</code> implies ~<strong>2.3%</strong>
     per-qubit readout error versus the vendor's published <strong>0.67%</strong> — a <strong>3.4× understatement</strong> of this window,
     measured in ~2 q-sec.</li>
-    <li><strong>Deep-circuit nowcast beats the vendor by 27%.</strong> The vendor's per-gate-product forecast (0.9245)
+<li><strong>Deep-circuit nowcast beats the vendor by 27%.</strong> The vendor's per-gate-product forecast (0.9245)
     over-predicts the actual 24-CZ fidelity (0.7983) — the F81 optimism pattern. The SPAM-corrected sentinel nowcast
     (0.8907) lands closer: error <strong>0.092 vs 0.126</strong>, a <strong>27%</strong> reduction.</li>
-  </ul>
-
-  <h2><span class="n">4</span>Scope &amp; limits</h2>
-  <ul>
-    <li><strong>Single window.</strong> This flight validates the <strong>mechanism</strong> on one window (live drift detection + a nowcast
+</ul>
+<h2><span class="n">4</span>Scope &amp; limits</h2>
+<ul>
+<li><strong>Single window.</strong> This flight validates the <strong>mechanism</strong> on one window (live drift detection + a nowcast
     that beats the published forecast). The full "out-predicts the vendor <strong>across drift</strong>" claim is F81's (banked,
     multi-window). A standing multi-window deployment would rebuild that drift-statistics result directly — <strong>not
     claimed here</strong>.</li>
-    <li><strong>Both forecasts still over-predict the deep fidelity.</strong> Nowcast 0.891 and vendor 0.924 both sit above the
+<li><strong>Both forecasts still over-predict the deep fidelity.</strong> Nowcast 0.891 and vendor 0.924 both sit above the
     measured 0.798 — a single shallow probe can't fully capture the non-linear/correlated-error decay at 24 CZ. A
     multi-point depth fit (mirror at K=1,2,3) would sharpen it; flagged, not yet done.</li>
-    <li><strong>Scheduling edge, not a quantum speedup.</strong> The value is better placement, live GO/NO-GO, and drift-aware
+<li><strong>Scheduling edge, not a quantum speedup.</strong> The value is better placement, live GO/NO-GO, and drift-aware
     timing — a different axis than any of the campaign's advantage results. No speedup is claimed.</li>
-  </ul>
-
-  <h2><span class="n">5</span>Sources &amp; provenance</h2>
-  <ul>
-    <li><strong>Exhibit evidence base (§1):</strong> the 500× window lottery, the F84 calibration-age NULL, and the 0–115% T1
+</ul>
+<h2><span class="n">5</span>Sources &amp; provenance</h2>
+<ul>
+<li><strong>Exhibit evidence base (§1):</strong> the 500× window lottery, the F84 calibration-age NULL, and the 0–115% T1
     band are the exhibit page's own numbers — see <code>demo/weather/index.html</code>, friction reports 01–02, and the
     F81/F84 rows of <code>docs/campaign-arcs.md</code>.</li>
-    <li><strong>Service mechanism &amp; live nowcast numbers (§2–§3):</strong> quiet-qubit line, live readout, mirror ladder,
+<li><strong>Service mechanism &amp; live nowcast numbers (§2–§3):</strong> quiet-qubit line, live readout, mirror ladder,
     nowcast/vendor forecasts, the 27% win, and the 3.4× readout understatement are the validation-job results, reported
     in <code>docs/qpu-weather-service-whisper-c4681.md</code> and <code>results/qpu_weather_report.json</code>. They are
     <strong>not</strong> printed on the exhibit page; they are the service doc's, cited here.</li>
-    <li><strong>Tool:</strong> <code>tools/qpu_weather.py</code> · <strong>Validation job:</strong> d9ao2hug26ic73df0iag (ibm_marrakesh, Heron r2)</li>
-    <li><strong>Tier:</strong> tool/docs-tier — a standing multi-window deployment producing a drift-statistics result would earn the F-number (per the numbering discipline). This sheet documents the instrument, not a new finding.</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
-
-  </main>
-  <footer class="foot">
-    <span>INSTRUMENT · <b style="color:var(--cyan)">F81 lineage</b> · job d9ao2hug26ic73df0iag · ibm_marrakesh</span>
-    <span class="sp"></span>
-    <a href="./spec.md">Markdown</a>
-    <a href="../scoreboard/">Scoreboard</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+<li><strong>Tool:</strong> <code>tools/qpu_weather.py</code> · <strong>Validation job:</strong> d9ao2hug26ic73df0iag (ibm_marrakesh, Heron r2)</li>
+<li><strong>Tier:</strong> tool/docs-tier — a standing multi-window deployment producing a drift-statistics result would earn the F-number (per the numbering discipline). This sheet documents the instrument, not a new finding.</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
+</main>
+<footer class="foot">
+<span>INSTRUMENT · <b style="color:var(--cyan)">F81 lineage</b> · job d9ao2hug26ic73df0iag · ibm_marrakesh</span>
+<span class="sp"></span>
+<a href="./spec.md">Markdown</a>
+<a href="../scoreboard/">Scoreboard</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.

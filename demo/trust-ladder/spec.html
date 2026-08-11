@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — The Trust Ladder (F115 / F116 / F117) | The Quantum Museum</title>
-<meta name="description" content="Complete specification for the Trust Ladder: how much randomness a single chip can certify at each rung of assumption. Full trust gives 1 Born bit; one-sided device-independence certifies a rigorous 0.65 bit/use at 5σ from measured assemblage tomography; full device-independence evaporates because no-signaling is unmet on one chip. Job d9ansru6hjac73fenigg, ibm_marrakesh.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Complete specification for the Trust Ladder: how much randomness a single chip can certify at each rung of assumption. Full trust gives 1 Born bit; one-sided device-independence certifies a rigorous 0.65 bit/use at 5σ from measured assemblage tomography; full device-independence evaporates because no-signaling is unmet on one chip. Job d9ansru6hjac73fenigg, ibm_marrakesh." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -95,6 +96,41 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this page's table cannot fit a 320px window at any padding — measured —
+     so dropping the min-width still left it scrolling and still cutting values mid-number. Below
+     430px it STACKS: one card per row, each value carrying its column label, no scroll, nothing to
+     cut. The explicit ARIA roles are the point: display:block strips a table's implicit roles, so a
+     CSS-only stack trades a screen-reader regression for a sighted-reader fix. thead is CLIPPED,
+     not display:none, so it is still announced; ::before labels are not announced, so nothing is
+     read twice. The caption rule is here because a caption keeps display:table-caption inside a
+     block table and shrink-to-fits to ~104px, wrapping its sentence to 14 characters a line. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -127,120 +163,108 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· Trust Ladder exhibit</a>
-    <span class="wingtag">· Wing IV · The Advantage Ladder</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet</p>
-    <h1>How much randomness a chip can <span class="hl">certify</span> — and where it evaporates</h1>
-    <div class="idline">
-      <span><strong>Findings</strong> F115 / F116 / F117</span>
-      <span><strong>Experiment</strong> Exp137 (assemblage tomography → SDP randomness)</span>
-      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
-      <span><strong>Job</strong> d9ansru6hjac73fenigg</span>
-    </div>
-    <span class="verdict-chip"><span aria-hidden="true">✓</span> ONE-SIDED-DI RANDOMNESS CERTIFIED — 0.65 private bit/use at 5σ · full-DI quarantined</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· Trust Ladder exhibit</a>
+<span class="wingtag">· Wing IV · The Advantage Ladder</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet</p>
+<h1>How much randomness a chip can <span class="hl">certify</span> — and where it evaporates</h1>
+<div class="idline">
+<span><strong>Findings</strong> F115 / F116 / F117</span>
+<span><strong>Experiment</strong> Exp137 (assemblage tomography → SDP randomness)</span>
+<span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+<span><strong>Job</strong> d9ansru6hjac73fenigg</span>
+</div>
+<span class="verdict-chip"><span aria-hidden="true">✓</span> ONE-SIDED-DI RANDOMNESS CERTIFIED — 0.65 private bit/use at 5σ · full-DI quarantined</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page
   is drawn from here; every number here is drawn from the hardware records
   <code>results/exp137_hw_results.json</code> and <code>results/exp137_jobids.json</code>, and the campaign finding
   rows for F115 / F116 / F117. The top rung is a labelled null: we did <strong>not</strong> perform full device-independence.</p>
-
-  <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p>Random numbers are only as trustworthy as the <strong>assumption</strong> behind them. Climb a ladder: the higher you go,
+<h2><span class="n">1</span>The idea, in plain language</h2>
+<p>Random numbers are only as trustworthy as the <strong>assumption</strong> behind them. Climb a ladder: the higher you go,
   the <strong>less</strong> you trust your devices — and the <strong>more</strong> you demand of the hardware. At the bottom you trust the
   box completely and get a full random bit. At the top you trust <strong>nothing</strong> — but that demands the two measurement
   sites cannot signal to each other, and on <strong>one chip</strong> they can. Somewhere in the middle is the rung where the
   number is both <strong>strong</strong> and <strong>real</strong>. This exhibit finds it.</p>
-  <div class="callout">
-    <p class="clabel">The three rungs</p>
-    <p class="tight"><strong>Full trust</strong> → 1 Born bit/qubit, but a compromised device could hand you anything.
+<div class="callout">
+<p class="clabel">The three rungs</p>
+<p class="tight"><strong>Full trust</strong> → 1 Born bit/qubit, but a compromised device could hand you anything.
     <strong>One-sided device-independence</strong> → you trust only your <strong>own</strong> measurement; the partner is a black box.
     <strong>Full device-independence</strong> → you trust nothing at all — the strongest security, and the one this chip cannot deliver.</p>
-  </div>
-
-  <h2><span class="n">2</span>What we measure — and the method</h2>
-  <p>Three witnesses, one per rung, each graded against the bound its assumption sets:</p>
-  <ul>
-    <li><strong>CHSH</strong> <code>S</code> (F115) — the quantum-behavior witness. Over the local-hidden-variable bound
+</div>
+<h2><span class="n">2</span>What we measure — and the method</h2>
+<p>Three witnesses, one per rung, each graded against the bound its assumption sets:</p>
+<ul>
+<li><strong>CHSH</strong> <code>S</code> (F115) — the quantum-behavior witness. Over the local-hidden-variable bound
     <code>S = 2</code> it proves the device is behaving quantumly. Under <strong>full trust</strong> this only <strong>health-checks</strong>
     the box; the random bit comes from the trust, not from <code>S</code>.</li>
-    <li><strong>CJWR steering functional</strong> <code>S₃</code> (F116) — over the local-hidden-state (unsteerable) bound
+<li><strong>CJWR steering functional</strong> <code>S₃</code> (F116) — over the local-hidden-state (unsteerable) bound
     <code>1.0</code>, it certifies the state is steerable ⇒ entangled while trusting <strong>only Bob's</strong> measurements.</li>
-    <li><strong>Assemblage tomography → SDP</strong> (F117) — Alice's 3 untrusted settings × Bob's 3 trusted tomography axes
+<li><strong>Assemblage tomography → SDP</strong> (F117) — Alice's 3 untrusted settings × Bob's 3 trusted tomography axes
     reconstruct the assemblage; a semidefinite program projects it to the nearest valid (no-signaling) form and solves
     the guessing-probability SDP for a rigorous <strong>min-entropy</strong> <code>H_min</code>. That is the certified randomness.</li>
-  </ul>
-
-  <h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
-  <div class="gate">
-    <span class="g">WITNESS</span><span class="r">CHSH over the LHV bound: <code>S &gt; 2</code>. <span class="pass">PASS</span> — <code>S = 2.7522 ± 0.0141</code>, <strong>53σ</strong> (97.3% of Tsirelson 2.8284); no-entanglement null <code>S = 0.036</code> (dead).</span>
-    <span class="g">W1_STEERING</span><span class="r">One-sided-DI steering over the unsteerable bound: <code>S₃ &gt; 1.0</code>. <span class="pass">PASS</span> — <code>S₃ = 1.6813 ± 0.0071</code>, <strong>96σ</strong> (97% of √3); separable-faking null <code>S₃ = 0.025</code> (dead).</span>
-    <span class="g">CERTIFIED</span><span class="r">Randomness certified: <code>H_min − 5·SE &gt; 0</code>, pre-filed band [0.45, 0.70]. <span class="pass">PASS</span> — <code>H_min = 0.6823 ± 0.0063</code> ⇒ certified <strong>0.6509 &gt; 0</strong>, HIT at top of band.</span>
-    <span class="g">FULL-DI</span><span class="r">No certified-bits gate frozen — the DI quantity is <span class="quar">QUARANTINED</span>: no-signaling is unmet on one shared-control chip.</span>
-  </div>
-
-  <h2><span class="n">4</span>The measured data — the three rungs</h2>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+</ul>
+<h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
+<div class="gate">
+<span class="g">WITNESS</span><span class="r">CHSH over the LHV bound: <code>S &gt; 2</code>. <span class="pass">PASS</span> — <code>S = 2.7522 ± 0.0141</code>, <strong>53σ</strong> (97.3% of Tsirelson 2.8284); no-entanglement null <code>S = 0.036</code> (dead).</span>
+<span class="g">W1_STEERING</span><span class="r">One-sided-DI steering over the unsteerable bound: <code>S₃ &gt; 1.0</code>. <span class="pass">PASS</span> — <code>S₃ = 1.6813 ± 0.0071</code>, <strong>96σ</strong> (97% of √3); separable-faking null <code>S₃ = 0.025</code> (dead).</span>
+<span class="g">CERTIFIED</span><span class="r">Randomness certified: <code>H_min − 5·SE &gt; 0</code>, pre-filed band [0.45, 0.70]. <span class="pass">PASS</span> — <code>H_min = 0.6823 ± 0.0063</code> ⇒ certified <strong>0.6509 &gt; 0</strong>, HIT at top of band.</span>
+<span class="g">FULL-DI</span><span class="r">No certified-bits gate frozen — the DI quantity is <span class="quar">QUARANTINED</span>: no-signaling is unmet on one shared-control chip.</span>
+</div>
+<h2><span class="n">4</span>The measured data — the three rungs</h2>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>Certified randomness per trust rung: full trust, one-sided-DI, and evaporating full-DI</caption>
-    <thead><tr><th scope="col">rung · trust assumption</th><th scope="col">randomness</th><th scope="col">measured witness</th><th scope="col">significance</th><th scope="col">status</th></tr></thead>
-    <tbody>
-      <tr><td>Full device trust</td><td>1.00 bit/qubit (Born)</td><td>CHSH S = 2.7522 ± 0.0141</td><td>53σ</td><td>health-check only</td></tr>
-      <tr><td>One-sided-DI</td><td class="king">0.65 bit/use (certified) <span class="edge">▲</span></td><td>S₃ = 1.6813 ± 0.0071 · H_min = 0.6823 ± 0.0063</td><td>96σ / 5σ</td><td class="edge">RIGOROUS</td></tr>
-      <tr><td>Full device-independence</td><td class="evap">0.5928 bit/use (counterfactual)</td><td>DI bound — no-signaling unmet</td><td>—</td><td class="evap">EVAPORATES ✕</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p><span class="edge">▲</span> = the rung a single chip genuinely holds. The certified <strong>0.65</strong> is
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">rung · trust assumption</th><th role="columnheader" scope="col">randomness</th><th role="columnheader" scope="col">measured witness</th><th role="columnheader" scope="col">significance</th><th role="columnheader" scope="col">status</th></tr></thead>
+<tbody role="rowgroup">
+<tr role="row"><td data-label="rung · trust assumption" role="cell">Full device trust</td><td data-label="randomness" role="cell">1.00 bit/qubit (Born)</td><td data-label="measured witness" role="cell">CHSH S = 2.7522 ± 0.0141</td><td data-label="significance" role="cell">53σ</td><td data-label="status" role="cell">health-check only</td></tr>
+<tr role="row"><td data-label="rung · trust assumption" role="cell">One-sided-DI</td><td class="king" data-label="randomness" role="cell">0.65 bit/use (certified) <span class="edge">▲</span></td><td data-label="measured witness" role="cell">S₃ = 1.6813 ± 0.0071 · H_min = 0.6823 ± 0.0063</td><td data-label="significance" role="cell">96σ / 5σ</td><td class="edge" data-label="status" role="cell">RIGOROUS</td></tr>
+<tr role="row"><td data-label="rung · trust assumption" role="cell">Full device-independence</td><td class="evap" data-label="randomness" role="cell">0.5928 bit/use (counterfactual)</td><td data-label="measured witness" role="cell">DI bound — no-signaling unmet</td><td data-label="significance" role="cell">—</td><td class="evap" data-label="status" role="cell">EVAPORATES ✕</td></tr>
+</tbody>
+</table>
+</div>
+<p><span class="edge">▲</span> = the rung a single chip genuinely holds. The certified <strong>0.65</strong> is
   <code>H_min − 5·SE = 0.6509</code>. Near-ideal steering correlations (X 0.969 / Y −0.969 / Z 0.974); reconstructed
   <code>S₃ = 1.6876</code>; separable null <code>H_min = 0</code> (adversary certain); residual no-signaling violation
   <code>0.0032</code>; sentinels 0.994 / 0.987. The rigorous value <strong>beat the Werner model</strong> (0.682 &gt; the 0.656
   isotropic-noise estimate) — the real state is closer to ideal in the certifying directions than noise assumes.</p>
-
-  <h2><span class="n">5</span>Scope &amp; caveats <span style="font-family:var(--sans);font-weight:400;font-size:14px;color:var(--ink-3)">— the rung that evaporates is the point</span></h2>
-  <ul>
-    <li><strong>Full-DI is unsupportable on one chip — stated, not hidden.</strong> Device-independence requires <strong>no-signaling</strong>
+<h2><span class="n">5</span>Scope &amp; caveats <span style="font-family:var(--sans);font-weight:400;font-size:14px;color:var(--ink-3)">— the rung that evaporates is the point</span></h2>
+<ul>
+<li><strong>Full-DI is unsupportable on one chip — stated, not hidden.</strong> Device-independence requires <strong>no-signaling</strong>
     between the two measurement sites. On a single chip the two qubits share control lines, so a <strong>deterministic</strong>
     device could output <code>S = 2√2</code> at <strong>zero</strong> entropy. The <code>0.5928</code> bit/use is therefore a
     <strong>labelled counterfactual</strong> — a what-if, never a certificate. A real full-DI number needs space-like separation,
     off-chip. <strong>We did not perform it.</strong> This is categorically stronger than qualifying an interpretation:
     here the DI <strong>quantity itself</strong> evaporates.</li>
-    <li><strong>One-sided-DI is the rigorous rung.</strong> Its assumption (trust only Bob) is <strong>exact at the logical level</strong>
+<li><strong>One-sided-DI is the rigorous rung.</strong> Its assumption (trust only Bob) is <strong>exact at the logical level</strong>
     — <code>Tr_A(U_A ρ U_A†) = Tr_A(ρ)</code> — failing only via physical crosstalk. Faking <code>S₃</code> needs a
     ~0.68 correlation excess, but the only on-chip mechanism (Alice-setting crosstalk back-acting on Bob) is measured
     at <strong>~1%</strong> across the campaign's own F55 / F56 records. 1% cannot fake 0.68 (the null at 0.025 confirms).</li>
-    <li><strong>Not loophole-free.</strong> Locality is open and crosstalk is <strong>bounded, not closed</strong>. The one-sided-DI gate is
+<li><strong>Not loophole-free.</strong> Locality is open and crosstalk is <strong>bounded, not closed</strong>. The one-sided-DI gate is
     named <code>W1_STEERING_ONE_SIDED_DI</code> precisely so it is never misread as full device-independence.</li>
-  </ul>
-
-  <h2><span class="n">6</span>Provenance</h2>
-  <ul>
-    <li><strong>Job:</strong> d9ansru6hjac73fenigg (Exp137, assemblage tomography) · <strong>Backend:</strong> ibm_marrakesh (Heron r2)</li>
-    <li><strong>Records:</strong> <code>results/exp137_hw_results.json</code> · <code>results/exp137_jobids.json</code></li>
-    <li><strong>Finding rows:</strong> <code>docs/campaign-arcs.md</code> — F115 (CHSH + three-tier scope correction), F116 (one-sided-DI steering, 96σ), F117 (rigorous one-sided-DI randomness, 0.65 bit/use)</li>
-    <li><strong>Family:</strong> Wing IV, The Advantage Ladder · F115 quarantined the DI number, F116 delivered the steering rung, F117 the certified bits from the measured assemblage</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
-
-  </main>
-  <footer class="foot">
-    <span>MEASURED · <b style="color:var(--cyan)">F115 / F116 / F117</b> · job d9ansru6hjac73fenigg · ibm_marrakesh</span>
-    <span class="sp"></span>
-    <a href="./spec.md">Markdown</a>
-    <a href="../scoreboard/">Scoreboard</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+</ul>
+<h2><span class="n">6</span>Provenance</h2>
+<ul>
+<li><strong>Job:</strong> d9ansru6hjac73fenigg (Exp137, assemblage tomography) · <strong>Backend:</strong> ibm_marrakesh (Heron r2)</li>
+<li><strong>Records:</strong> <code>results/exp137_hw_results.json</code> · <code>results/exp137_jobids.json</code></li>
+<li><strong>Finding rows:</strong> <code>docs/campaign-arcs.md</code> — F115 (CHSH + three-tier scope correction), F116 (one-sided-DI steering, 96σ), F117 (rigorous one-sided-DI randomness, 0.65 bit/use)</li>
+<li><strong>Family:</strong> Wing IV, The Advantage Ladder · F115 quarantined the DI number, F116 delivered the steering rung, F117 the certified bits from the measured assemblage</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
+</main>
+<footer class="foot">
+<span>MEASURED · <b style="color:var(--cyan)">F115 / F116 / F117</b> · job d9ansru6hjac73fenigg · ibm_marrakesh</span>
+<span class="sp"></span>
+<a href="./spec.md">Markdown</a>
+<a href="../scoreboard/">Scoreboard</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.

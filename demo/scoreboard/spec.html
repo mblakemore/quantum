@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — The Scoreboard | The Quantum Museum</title>
-<meta name="description" content="Methodology sheet for The Scoreboard: how a ~110-experiment IBM Heron campaign (F01–F118) answers 'have we found quantum advantage?' across five scoreboards — the theorem ceilings cleared 21σ to 341σ, the 'what is NOT claimed' (no brute-force speedup, no on-chip QNC0≠NC0, one-sided-DI not loophole-free, same generation), and the sources.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Methodology sheet for The Scoreboard: how a ~110-experiment IBM Heron campaign (F01–F118) answers 'have we found quantum advantage?' across five scoreboards — the theorem ceilings cleared 21σ to 341σ, the 'what is NOT claimed' (no brute-force speedup, no on-chip QNC0≠NC0, one-sided-DI not loophole-free, same generation), and the sources." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -95,6 +96,41 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this page's table cannot fit a 320px window at any padding — measured —
+     so dropping the min-width still left it scrolling and still cutting values mid-number. Below
+     430px it STACKS: one card per row, each value carrying its column label, no scroll, nothing to
+     cut. The explicit ARIA roles are the point: display:block strips a table's implicit roles, so a
+     CSS-only stack trades a screen-reader regression for a sighted-reader fix. thead is CLIPPED,
+     not display:none, so it is still announced; ::before labels are not announced, so nothing is
+     read twice. The caption rule is here because a caption keeps display:table-caption inside a
+     block table and shrink-to-fits to ~104px, wrapping its sentence to 14 characters a line. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -126,111 +162,100 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· The Scoreboard exhibit</a>
-    <span class="wingtag">· Wing IV · The Advantage Ladder</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet · Methodology &amp; Sources</p>
-    <h1>Have we found quantum advantage? <span class="hl">The five-scoreboard answer</span></h1>
-    <div class="idline">
-      <span><strong>Nature</strong> Campaign summary (5 scoreboards)</span>
-      <span><strong>Hardware</strong> IBM Heron · 2026 campaign</span>
-      <span><strong>Experiments</strong> ~110 · F01–F118</span>
-      <span><strong>Every number a job ID</strong></span>
-    </div>
-    <span class="verdict-chip">◇ FOUND ON FOUR OF FIVE · theorem ceilings cleared 21σ to 341σ</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This is the methodology sheet behind the visual scoreboard. The exhibit answers one question —
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· The Scoreboard exhibit</a>
+<span class="wingtag">· Wing IV · The Advantage Ladder</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet · Methodology &amp; Sources</p>
+<h1>Have we found quantum advantage? <span class="hl">The five-scoreboard answer</span></h1>
+<div class="idline">
+<span><strong>Nature</strong> Campaign summary (5 scoreboards)</span>
+<span><strong>Hardware</strong> IBM Heron · 2026 campaign</span>
+<span><strong>Experiments</strong> ~110 · F01–F118</span>
+<span><strong>Every number a job ID</strong></span>
+</div>
+<span class="verdict-chip">◇ FOUND ON FOUR OF FIVE · theorem ceilings cleared 21σ to 341σ</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This is the methodology sheet behind the visual scoreboard. The exhibit answers one question —
   <strong>have we found quantum advantage?</strong> — across <strong>five scoreboards</strong>, each cleared against an <strong>exact theorem
   ceiling</strong>, and it states plainly what is <strong>not</strong> claimed. Every σ below is transcribed verbatim from the exhibit
   (the tiles and the enumerated <code>rows</code> array); nothing is invented. Sources in §5.</p>
-
-  <h2><span class="n">1</span>The verdict, in one line</h2>
-  <p><strong>Yes — measurably, on four of five scoreboards</strong>, against exact theorem ceilings cleared by <strong>21σ to 341σ</strong>.
+<h2><span class="n">1</span>The verdict, in one line</h2>
+<p><strong>Yes — measurably, on four of five scoreboards</strong>, against exact theorem ceilings cleared by <strong>21σ to 341σ</strong>.
   On the fifth — computational — the wall against a brute-force speedup is <strong>measured</strong> (F54), and the constant-depth
   solver that the only depth-separation theorem is built on now <strong>runs on silicon at 90%</strong>. No shortcut is claimed
   that the hardware does not hold.</p>
-
-  <h2><span class="n">2</span>The five scoreboards</h2>
-  <ul>
-    <li><strong>Games &amp; correlations — FOUND.</strong> <span style="color:var(--cyan)">216.8σ</span> causal-order game; the three
+<h2><span class="n">2</span>The five scoreboards</h2>
+<ul>
+<li><strong>Games &amp; correlations — FOUND.</strong> <span style="color:var(--cyan)">216.8σ</span> causal-order game; the three
     great no-go theorems in one court — Bell, indefinite causal order, contextuality (8/9 at 196σ). <code>F82 · F106</code></li>
-    <li><strong>Communication &amp; sensing — FOUND.</strong> <span style="color:var(--cyan)">341σ</span> superdense coding; a
+<li><strong>Communication &amp; sensing — FOUND.</strong> <span style="color:var(--cyan)">341σ</span> superdense coding; a
     ladder including 2→1 QRAC (110σ) and GHZ metrology beating the standard quantum limit (168σ). <code>F87 · F107 · F108/9</code></li>
-    <li><strong>Thermodynamics — FOUND.</strong> <span style="color:var(--cyan)">21.1σ</span> ICO refrigeration: population
+<li><strong>Thermodynamics — FOUND.</strong> <span style="color:var(--cyan)">21.1σ</span> ICO refrigeration: population
     inversion from passive baths, a full cycle, negative local energy. <code>F86 · F94/5 · F97</code></li>
-    <li><strong>Information — FOUND.</strong> <span style="color:var(--cyan)">42σ</span> negative conditional entropy S(B|A)&lt;0
+<li><strong>Information — FOUND.</strong> <span style="color:var(--cyan)">42σ</span> negative conditional entropy S(B|A)&lt;0
     — a sign classical physics forbids — plus zero-capacity transmission. <code>F103 · F105</code></li>
-    <li><strong>Computational — WALL + BRIDGE.</strong> No brute-force speedup (F54's wall), but the constant-depth 2D-HLF solver
+<li><strong>Computational — WALL + BRIDGE.</strong> No brute-force speedup (F54's wall), but the constant-depth 2D-HLF solver
     runs at <strong>0.90</strong> (438σ over chance) and persists to n=9. <code>F113 · F114</code></li>
-  </ul>
-
-  <h2><span class="n">3</span>The theorem ceilings — clearance over the classical / theorem bound</h2>
-  <p>Each headline clears an exact, pre-registered bound. The flagship σ values, transcribed from the exhibit's
+</ul>
+<h2><span class="n">3</span>The theorem ceilings — clearance over the classical / theorem bound</h2>
+<p>Each headline clears an exact, pre-registered bound. The flagship σ values, transcribed from the exhibit's
   enumerated table with the null each is measured against:</p>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>Campaign headline clearances over classical theorem bounds across five scoreboards</caption>
-    <thead><tr><th scope="col">scoreboard headline</th><th scope="col">clearance</th><th scope="col">over the bound</th></tr></thead>
-    <tbody>
-      <tr><td>Superdense coding</td><td class="sig">341σ</td><td>over 0.5 (unassisted)</td></tr>
-      <tr><td>Causal-order game</td><td class="sig">216.8σ</td><td>over 0.8695 (SDP)</td></tr>
-      <tr><td>Magic-square contextuality</td><td class="sig">196σ</td><td>over 8/9 (enumerated)</td></tr>
-      <tr><td>GHZ metrology</td><td class="sig">168σ</td><td>over executed SQL</td></tr>
-      <tr><td>One-sided-DI steering</td><td class="sig">96σ</td><td>over LHS bound 1</td></tr>
-      <tr><td>Capacity activation</td><td class="sig">55.6σ</td><td>over 0</td></tr>
-      <tr><td>Negative conditional entropy</td><td class="sig">42σ</td><td>S(B|A) &lt; 0</td></tr>
-      <tr><td>ICO refrigeration</td><td class="sig">21.1σ</td><td>over 0</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <div class="callout">
-    <p class="clabel">The through-line</p>
-    <p class="tight">The classical hardness of the <strong>computational</strong> problem (<code>F113</code>) <strong>is</strong> the
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">scoreboard headline</th><th role="columnheader" scope="col">clearance</th><th role="columnheader" scope="col">over the bound</th></tr></thead>
+<tbody role="rowgroup">
+<tr role="row"><td data-label="scoreboard headline" role="cell">Superdense coding</td><td class="sig" data-label="clearance" role="cell">341σ</td><td data-label="over the bound" role="cell">over 0.5 (unassisted)</td></tr>
+<tr role="row"><td data-label="scoreboard headline" role="cell">Causal-order game</td><td class="sig" data-label="clearance" role="cell">216.8σ</td><td data-label="over the bound" role="cell">over 0.8695 (SDP)</td></tr>
+<tr role="row"><td data-label="scoreboard headline" role="cell">Magic-square contextuality</td><td class="sig" data-label="clearance" role="cell">196σ</td><td data-label="over the bound" role="cell">over 8/9 (enumerated)</td></tr>
+<tr role="row"><td data-label="scoreboard headline" role="cell">GHZ metrology</td><td class="sig" data-label="clearance" role="cell">168σ</td><td data-label="over the bound" role="cell">over executed SQL</td></tr>
+<tr role="row"><td data-label="scoreboard headline" role="cell">One-sided-DI steering</td><td class="sig" data-label="clearance" role="cell">96σ</td><td data-label="over the bound" role="cell">over LHS bound 1</td></tr>
+<tr role="row"><td data-label="scoreboard headline" role="cell">Capacity activation</td><td class="sig" data-label="clearance" role="cell">55.6σ</td><td data-label="over the bound" role="cell">over 0</td></tr>
+<tr role="row"><td data-label="scoreboard headline" role="cell">Negative conditional entropy</td><td class="sig" data-label="clearance" role="cell">42σ</td><td data-label="over the bound" role="cell">S(B|A) &lt; 0</td></tr>
+<tr role="row"><td data-label="scoreboard headline" role="cell">ICO refrigeration</td><td class="sig" data-label="clearance" role="cell">21.1σ</td><td data-label="over the bound" role="cell">over 0</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout">
+<p class="clabel">The through-line</p>
+<p class="tight">The classical hardness of the <strong>computational</strong> problem (<code>F113</code>) <strong>is</strong> the
     magic-square <strong>contextuality</strong> (<code>F106</code>), certified at 196σ — the correlation advantage and the
     computational <em>instrument</em> are the <strong>same resource</strong>. <em>(The Race-6 runtime claim that briefly sat on this scoreboard was superseded by our own red-team pre-submission, C4996 — see the exhibit.)</em></p>
-  </div>
-
-  <h2><span class="n">4</span>What is NOT claimed</h2>
-  <p>The boundary column — each an explicit limit printed on the exhibit:</p>
-  <div class="notclaim">
-    <span class="x">✕</span><span class="r"><strong>No brute-force speedup</strong> — F54's 10× depth wall, measured.</span>
-    <span class="x">✕</span><span class="r"><strong>No on-chip QNC⁰≠NC⁰ proof</strong> — the separation is asymptotic; the apparatus is real.</span>
-    <span class="x">✕</span><span class="r"><strong>No loophole-free device-independence</strong> — the randomness certificate (F117, 0.65 bit/use) is one-sided-DI; locality open.</span>
-    <span class="x">✕</span><span class="r"><strong>Same Heron generation only</strong> — a cross-generation exam is the harder unclaimed test.</span>
-  </div>
-
-  <h2><span class="n">5</span>Sources &amp; provenance</h2>
-  <ul>
-    <li><strong>Exhibit:</strong> <code>demo/scoreboard/index.html</code> — the five tiles, the log-scale σ bars, the through-line,
+</div>
+<h2><span class="n">4</span>What is NOT claimed</h2>
+<p>The boundary column — each an explicit limit printed on the exhibit:</p>
+<div class="notclaim">
+<span class="x">✕</span><span class="r"><strong>No brute-force speedup</strong> — F54's 10× depth wall, measured.</span>
+<span class="x">✕</span><span class="r"><strong>No on-chip QNC⁰≠NC⁰ proof</strong> — the separation is asymptotic; the apparatus is real.</span>
+<span class="x">✕</span><span class="r"><strong>No loophole-free device-independence</strong> — the randomness certificate (F117, 0.65 bit/use) is one-sided-DI; locality open.</span>
+<span class="x">✕</span><span class="r"><strong>Same Heron generation only</strong> — a cross-generation exam is the harder unclaimed test.</span>
+</div>
+<h2><span class="n">5</span>Sources &amp; provenance</h2>
+<ul>
+<li><strong>Exhibit:</strong> <code>demo/scoreboard/index.html</code> — the five tiles, the log-scale σ bars, the through-line,
     and the "what is not claimed" list. All σ values on this sheet are transcribed from it (tiles + <code>rows</code>
     array).</li>
-    <li><strong>Campaign ledger:</strong> <code>docs/campaign-arcs.md</code> (F01–F118) — per-finding rows corroborate each
+<li><strong>Campaign ledger:</strong> <code>docs/campaign-arcs.md</code> (F01–F118) — per-finding rows corroborate each
     headline: F82 (216.8σ), F106 (196σ), F87 (341σ), F108 (168σ), F83 (55.6σ), F86 (21.1σ), F113/F114 (438σ / n=9),
     F117 (0.65 bit/use, one-sided-DI).</li>
-    <li><strong>Scope of the whole board:</strong> ~110 experiments · 3 Heron dies (marrakesh · kingston · fez), certified across all three (F112) · 2 standing tools
+<li><strong>Scope of the whole board:</strong> ~110 experiments · 3 Heron dies (marrakesh · kingston · fez), certified across all three (F112) · 2 standing tools
     (SDP-randomness, QPU-weather). Every number traces to a pre-registered job with a public ID.</li>
-    <li><strong>Full argument:</strong> <code>docs/quantum-advantage-the-complete-answer-whisper-c4682.md</code>.</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive scoreboard</a>
-
-  </main>
-  <footer class="foot">
-    <span>CAMPAIGN SUMMARY · <b style="color:var(--cyan)">F01–F118</b> · ~110 experiments · IBM Heron</span>
-    <span class="sp"></span>
-    <a href="../">The Museum</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+<li><strong>Full argument:</strong> <code>docs/quantum-advantage-the-complete-answer-whisper-c4682.md</code>.</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive scoreboard</a>
+</main>
+<footer class="foot">
+<span>CAMPAIGN SUMMARY · <b style="color:var(--cyan)">F01–F118</b> · ~110 experiments · IBM Heron</span>
+<span class="sp"></span>
+<a href="../">The Museum</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.

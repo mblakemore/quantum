@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — The Teleported Witness (F92 / Exp113) | The Quantum Museum</title>
-<meta name="description" content="Complete specification for the Teleported Witness exhibit: indefinite causal order teleported one hop survives over a quantum channel (DISC 1.825, 90σ, 97% of the direct anchor) and dies over a classical channel (0.0175 ≈ 0). Survives quantum, dies classical — one job, one window. Job d9a36352su3c739l3kf0, ibm_marrakesh.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Complete specification for the Teleported Witness exhibit: indefinite causal order teleported one hop survives over a quantum channel (DISC 1.825, 90σ, 97% of the direct anchor) and dies over a classical channel (0.0175 ≈ 0). Survives quantum, dies classical — one job, one window. Job d9a36352su3c739l3kf0, ibm_marrakesh." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -96,6 +97,41 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this page's table cannot fit a 320px window at any padding — measured —
+     so dropping the min-width still left it scrolling and still cutting values mid-number. Below
+     430px it STACKS: one card per row, each value carrying its column label, no scroll, nothing to
+     cut. The explicit ARIA roles are the point: display:block strips a table's implicit roles, so a
+     CSS-only stack trades a screen-reader regression for a sighted-reader fix. thead is CLIPPED,
+     not display:none, so it is still announced; ::before labels are not announced, so nothing is
+     read twice. The caption rule is here because a caption keeps display:table-caption inside a
+     block table and shrink-to-fits to ~104px, wrapping its sentence to 14 characters a line. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -129,137 +165,124 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· Teleported Witness exhibit</a>
-    <span class="wingtag">· Wing I · The Causal Switch</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet</p>
-    <h1>Indefinite causal order, <span class="hl">teleported one hop</span></h1>
-    <div class="idline">
-      <span><strong>Finding</strong> F92</span>
-      <span><strong>Experiment</strong> Exp113 (teleported-control witness)</span>
-      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
-      <span><strong>Job</strong> d9a36352su3c739l3kf0</span>
-      <span><strong>Graded</strong> C4604 · Whisper</span>
-    </div>
-    <span class="verdict-chip"><span aria-hidden="true">✓</span> DOUBLE WIN — survives quantum (90σ) · dies classical (33σ separation)</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number is drawn from the
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· Teleported Witness exhibit</a>
+<span class="wingtag">· Wing I · The Causal Switch</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet</p>
+<h1>Indefinite causal order, <span class="hl">teleported one hop</span></h1>
+<div class="idline">
+<span><strong>Finding</strong> F92</span>
+<span><strong>Experiment</strong> Exp113 (teleported-control witness)</span>
+<span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+<span><strong>Job</strong> d9a36352su3c739l3kf0</span>
+<span><strong>Graded</strong> C4604 · Whisper</span>
+</div>
+<span class="verdict-chip"><span aria-hidden="true">✓</span> DOUBLE WIN — survives quantum (90σ) · dies classical (33σ separation)</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number is drawn from the
   frozen grade file <code>results/exp113_grade.json</code> and its job record. This was the <strong>first experiment born
   under the R5 grader-selftest rule</strong> — the grader passed its synthetic self-test before it was allowed to touch
   hardware counts.</p>
-
-  <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p>A <strong>quantum switch</strong> puts the <strong>order</strong> of two operations into superposition — A-then-B <strong>and</strong> B-then-A
+<h2><span class="n">1</span>The idea, in plain language</h2>
+<p>A <strong>quantum switch</strong> puts the <strong>order</strong> of two operations into superposition — A-then-B <strong>and</strong> B-then-A
   at once. A <strong>causal witness</strong> is a single number, <code>DISC</code>, that measures this indefiniteness:
   <code>DISC = 0</code> for any definite order (or any classical coin-flip between orders), and <code>DISC → 2</code>
   for perfect indefiniteness. The switch's indefiniteness is physically carried by one <strong>control qubit</strong>.</p>
-  <div class="callout">
-    <p class="clabel">The question</p>
-    <p class="tight"><strong>Can you teleport the indefiniteness?</strong> Quantum teleportation moves a qubit's state from one
+<div class="callout">
+<p class="clabel">The question</p>
+<p class="tight"><strong>Can you teleport the indefiniteness?</strong> Quantum teleportation moves a qubit's state from one
     place to another using a shared entangled pair and two classical bits — no wire carries the qubit itself. So: move
     the switch's control qubit one hop <strong>before</strong> reading its witness. Does the indefinite causal order arrive
     intact — or does teleportation destroy it? And crucially, does it ride on the <strong>entanglement</strong>, or would any
     channel do?</p>
-  </div>
-
-  <h2><span class="n">2</span>Four channels, one job, one window</h2>
-  <p>The control qubit's witness is read under four conditions, all in the same calibration window so they are
+</div>
+<h2><span class="n">2</span>Four channels, one job, one window</h2>
+<p>The control qubit's witness is read under four conditions, all in the same calibration window so they are
   directly comparable:</p>
-  <ul>
-    <li><strong>direct</strong> — no teleportation; the same-window baseline (<code>DISC = 1.8805</code>).</li>
-    <li><strong>tele · quantum</strong> — teleported over a genuine entangled Bell resource, frame-tracked.</li>
-    <li><strong>tele · quantum + feedforward</strong> — same, but with active if-test correction (a third observable family, the F90/F91 cost comparison).</li>
-    <li><strong>tele · classical</strong> — the <strong>identical</strong> teleport, but over a <strong>dephased</strong> (decohered) Bell resource. The protocol still runs; the resource is no longer quantum.</li>
-  </ul>
-
-  <h2><span class="n">3</span>Pre-registered gates (frozen; R5 self-test passed first)</h2>
-  <div class="gate">
-    <span class="g">G1</span><span class="r">Readout sentinels ≥ 0.95, else NO-TEST. <span class="pass">PASS</span> (0.9995 / 0.99 / 0.9985 / 0.9935).</span>
-    <span class="g">G2</span><span class="r">Anchor: <code>DISC_direct − 5·SE &gt; 1.60</code> (a live F75-class witness this window). <span class="pass">PASS</span> (1.8805).</span>
-    <span class="g">W1</span><span class="r"><strong>survival:</strong> <code>DISC_tele_quantum − 5·SE &gt; 1.0</code>. <span class="pass">PASS</span> (1.825, 90σ over the bar).</span>
-    <span class="g">W2</span><span class="r"><strong>channel discrimination:</strong> <code>(DISC_quantum − DISC_classical) − 5·SE &gt; 1.0</code>. <span class="pass">PASS</span> (separation 1.8075, 33σ).</span>
-    <span class="g">G3</span><span class="r"><strong>null integrity:</strong> <code>|DISC_classical| + 5·SE &lt; 0.15</code> — the classical channel must be genuinely dead, not merely leaky. <span class="pass">PASS</span> (0.0175, band 0.13).</span>
-  </div>
-
-  <h2><span class="n">4</span>The measured data</h2>
-  <p>Witness <code>DISC = ⟨X⟩_comm − ⟨X⟩_anti</code>. <code>0</code> = classical / definite-order value; <code>2</code>
+<ul>
+<li><strong>direct</strong> — no teleportation; the same-window baseline (<code>DISC = 1.8805</code>).</li>
+<li><strong>tele · quantum</strong> — teleported over a genuine entangled Bell resource, frame-tracked.</li>
+<li><strong>tele · quantum + feedforward</strong> — same, but with active if-test correction (a third observable family, the F90/F91 cost comparison).</li>
+<li><strong>tele · classical</strong> — the <strong>identical</strong> teleport, but over a <strong>dephased</strong> (decohered) Bell resource. The protocol still runs; the resource is no longer quantum.</li>
+</ul>
+<h2><span class="n">3</span>Pre-registered gates (frozen; R5 self-test passed first)</h2>
+<div class="gate">
+<span class="g">G1</span><span class="r">Readout sentinels ≥ 0.95, else NO-TEST. <span class="pass">PASS</span> (0.9995 / 0.99 / 0.9985 / 0.9935).</span>
+<span class="g">G2</span><span class="r">Anchor: <code>DISC_direct − 5·SE &gt; 1.60</code> (a live F75-class witness this window). <span class="pass">PASS</span> (1.8805).</span>
+<span class="g">W1</span><span class="r"><strong>survival:</strong> <code>DISC_tele_quantum − 5·SE &gt; 1.0</code>. <span class="pass">PASS</span> (1.825, 90σ over the bar).</span>
+<span class="g">W2</span><span class="r"><strong>channel discrimination:</strong> <code>(DISC_quantum − DISC_classical) − 5·SE &gt; 1.0</code>. <span class="pass">PASS</span> (separation 1.8075, 33σ).</span>
+<span class="g">G3</span><span class="r"><strong>null integrity:</strong> <code>|DISC_classical| + 5·SE &lt; 0.15</code> — the classical channel must be genuinely dead, not merely leaky. <span class="pass">PASS</span> (0.0175, band 0.13).</span>
+</div>
+<h2><span class="n">4</span>The measured data</h2>
+<p>Witness <code>DISC = ⟨X⟩_comm − ⟨X⟩_anti</code>. <code>0</code> = classical / definite-order value; <code>2</code>
   = noiseless indefinite maximum; <code>1.0</code> = the pre-registered WIN bar.</p>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>Causal witness DISC across four teleportation channels: quantum survives, classical dies</caption>
-    <thead><tr><th scope="col">channel</th><th scope="col">DISC</th><th scope="col">vs WIN bar (1.0)</th><th scope="col">% of direct</th><th scope="col">survives?</th></tr></thead>
-    <tbody>
-      <tr><td>direct (no teleport)</td><td>1.8805 ± 0.008</td><td>+116σ</td><td>100%</td><td>anchor</td></tr>
-      <tr class="survive"><td>tele · quantum</td><td><strong>1.8250 ± 0.009</strong></td><td><strong>+90σ</strong></td><td><strong>97.0%</strong></td><td class="q">✓ survives</td></tr>
-      <tr class="survive"><td>tele · quantum + feedforward</td><td>1.7660 ± 0.010</td><td>+73σ</td><td>93.9%</td><td class="q">✓ survives</td></tr>
-      <tr class="dead"><td>tele · classical (dephased)</td><td><strong>0.0175 ± 0.022</strong></td><td>below — dead</td><td>0.9%</td><td class="cl">✗ dies</td></tr>
-    </tbody>
-  </table>
-  </div>
-
-  <h2><span class="n">5</span>Survives quantum, dies classical — why the null matters</h2>
-  <div class="callout good">
-    <p class="clabel">The double win</p>
-    <p class="tight">The control qubit — the carrier of indefinite causal order — was moved across the chip and
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">channel</th><th role="columnheader" scope="col">DISC</th><th role="columnheader" scope="col">vs WIN bar (1.0)</th><th role="columnheader" scope="col">% of direct</th><th role="columnheader" scope="col">survives?</th></tr></thead>
+<tbody role="rowgroup">
+<tr role="row"><td data-label="channel" role="cell">direct (no teleport)</td><td data-label="DISC" role="cell">1.8805 ± 0.008</td><td data-label="vs WIN bar (1.0)" role="cell">+116σ</td><td data-label="% of direct" role="cell">100%</td><td data-label="survives?" role="cell">anchor</td></tr>
+<tr class="survive" role="row"><td data-label="channel" role="cell">tele · quantum</td><td data-label="DISC" role="cell"><strong>1.8250 ± 0.009</strong></td><td data-label="vs WIN bar (1.0)" role="cell"><strong>+90σ</strong></td><td data-label="% of direct" role="cell"><strong>97.0%</strong></td><td class="q" data-label="survives?" role="cell">✓ survives</td></tr>
+<tr class="survive" role="row"><td data-label="channel" role="cell">tele · quantum + feedforward</td><td data-label="DISC" role="cell">1.7660 ± 0.010</td><td data-label="vs WIN bar (1.0)" role="cell">+73σ</td><td data-label="% of direct" role="cell">93.9%</td><td class="q" data-label="survives?" role="cell">✓ survives</td></tr>
+<tr class="dead" role="row"><td data-label="channel" role="cell">tele · classical (dephased)</td><td data-label="DISC" role="cell"><strong>0.0175 ± 0.022</strong></td><td data-label="vs WIN bar (1.0)" role="cell">below — dead</td><td data-label="% of direct" role="cell">0.9%</td><td class="cl" data-label="survives?" role="cell">✗ dies</td></tr>
+</tbody>
+</table>
+</div>
+<h2><span class="n">5</span>Survives quantum, dies classical — why the null matters</h2>
+<div class="callout good">
+<p class="clabel">The double win</p>
+<p class="tight">The control qubit — the carrier of indefinite causal order — was moved across the chip and
     arrived <strong>still causally indefinite</strong>: <code>DISC = 1.825</code>, 97% of the un-teleported anchor, 90σ over the
     WIN bar. Indefinite causal order is a <strong>transmissible resource</strong>.</p>
-  </div>
-  <div class="callout bad">
-    <p class="clabel">The executed classical null — this is what makes it a claim</p>
-    <p class="tight">The <strong>identical</strong> teleport over a <span class="cl">dephased</span> Bell resource kills the
+</div>
+<div class="callout bad">
+<p class="clabel">The executed classical null — this is what makes it a claim</p>
+<p class="tight">The <strong>identical</strong> teleport over a <span class="cl">dephased</span> Bell resource kills the
     witness dead: <code>0.0175 ≈ 0</code>. That executed null is the whole point. Without it, "the witness survived
     teleportation" could just mean "the witness survived some noise." With it, the meaning is exact: the
     indefiniteness <strong>rides on the entanglement</strong> — kill the quantum resource and the indefiniteness does not
     arrive. <strong>Transmission by entanglement, not decoherence survival.</strong></p>
-  </div>
-  <p><strong>A sub-result kept on the record.</strong> Active feedforward correction costs a little: <code>tele_active = 1.766 &lt;
+</div>
+<p><strong>A sub-result kept on the record.</strong> Active feedforward correction costs a little: <code>tele_active = 1.766 &lt;
   tele_frame = 1.825</code> — the F90 feedforward penalty appearing in a <strong>fourth</strong> observable family. The
   noise-model preview had guessed the <strong>opposite</strong> ordering; the hardware corrected it, and the miss is reported,
   not hidden. All four pre-filed predictions hit, including this one.</p>
-
-  <h2><span class="n">6</span>Scope &amp; caveats</h2>
-  <ul>
-    <li><strong>A causal witness, not spacetime.</strong> "Indefinite causal order" here is the switch-control coherence that no
+<h2><span class="n">6</span>Scope &amp; caveats</h2>
+<ul>
+<li><strong>A causal witness, not spacetime.</strong> "Indefinite causal order" here is the switch-control coherence that no
     definite ordering (or classical mixture) can fake — a laboratory resource, not a claim about the order of events
     in spacetime.</li>
-    <li><strong>Standard teleportation.</strong> The transport is ordinary quantum teleportation (Bell pair + classical bits).
+<li><strong>Standard teleportation.</strong> The transport is ordinary quantum teleportation (Bell pair + classical bits).
     The novelty is <strong>what</strong> is teleported — the carrier of causal indefiniteness — and the executed classical
     control that isolates the entanglement as the cause.</li>
-    <li><strong>Survival is near-complete but not exact.</strong> 97% of the anchor, not 100%; the noiseless expectation is exact
+<li><strong>Survival is near-complete but not exact.</strong> 97% of the anchor, not 100%; the noiseless expectation is exact
     survival (DISC 2.0). The 3% and the feedforward cost are reported.</li>
-    <li><strong>Same F75/F82 witness apparatus.</strong> The teleported witness is the same certified causal-witness machinery
+<li><strong>Same F75/F82 witness apparatus.</strong> The teleported witness is the same certified causal-witness machinery
     that fires on this chip un-teleported.</li>
-  </ul>
-
-  <h2><span class="n">7</span>Provenance</h2>
-  <ul>
-    <li><strong>Grade file:</strong> <code>results/exp113_grade.json</code> · <strong>Job:</strong> d9a36352su3c739l3kf0</li>
-    <li><strong>Pre-registration:</strong> <code>experiments/exp113-teleported-witness-preregistration.md</code> · <strong>WIN bar:</strong> 1.0 · <strong>survival band:</strong> [0.90, 1.00]</li>
-    <li><strong>Backend:</strong> ibm_marrakesh (Heron r2) · <strong>Sentinels:</strong> 0.9935–0.9995 (start/end)</li>
-    <li><strong>First flight under R5:</strong> grader synthetic self-test passed before hardware grading (frozen rule C4603)</li>
-    <li><strong>Family:</strong> the Causal Switch arc (F73–F95) · same witness as F75 (first hardware fire) and F82 (the causal game)</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
-
-  </main>
-  <footer class="foot">
-    <span>MEASURED · <b style="color:var(--cyan)">F92</b> · job d9a36352su3c739l3kf0 · ibm_marrakesh</span>
-    <span class="sp"></span>
-    <a href="./spec.md">Markdown</a>
-    <a href="../scoreboard/">Scoreboard</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+</ul>
+<h2><span class="n">7</span>Provenance</h2>
+<ul>
+<li><strong>Grade file:</strong> <code>results/exp113_grade.json</code> · <strong>Job:</strong> d9a36352su3c739l3kf0</li>
+<li><strong>Pre-registration:</strong> <code>experiments/exp113-teleported-witness-preregistration.md</code> · <strong>WIN bar:</strong> 1.0 · <strong>survival band:</strong> [0.90, 1.00]</li>
+<li><strong>Backend:</strong> ibm_marrakesh (Heron r2) · <strong>Sentinels:</strong> 0.9935–0.9995 (start/end)</li>
+<li><strong>First flight under R5:</strong> grader synthetic self-test passed before hardware grading (frozen rule C4603)</li>
+<li><strong>Family:</strong> the Causal Switch arc (F73–F95) · same witness as F75 (first hardware fire) and F82 (the causal game)</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
+</main>
+<footer class="foot">
+<span>MEASURED · <b style="color:var(--cyan)">F92</b> · job d9a36352su3c739l3kf0 · ibm_marrakesh</span>
+<span class="sp"></span>
+<a href="./spec.md">Markdown</a>
+<a href="../scoreboard/">Scoreboard</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — The No-Go Triptych (Bell · Causal Order · Contextuality) | The Quantum Museum</title>
-<meta name="description" content="Three foundational no-go theorems, each with a classical ceiling that is a proven wall, all breached on one chip: Bell/CHSH (S=2.7522, 53σ over 2), indefinite causal order (F82 game 0.9769 vs bound 0.869, 216.8σ), and Peres–Mermin contextuality (F106, 0.969 vs 8/9, 196σ). Each with an executed classical null. ibm_marrakesh.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Three foundational no-go theorems, each with a classical ceiling that is a proven wall, all breached on one chip: Bell/CHSH (S=2.7522, 53σ over 2), indefinite causal order (F82 game 0.9769 vs bound 0.869, 216.8σ), and Peres–Mermin contextuality (F106, 0.969 vs 8/9, 196σ). Each with an executed classical null. ibm_marrakesh." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -94,6 +95,45 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this table is SIX columns needing 613px and cannot fit a 286px window at
+     any padding — measured, not assumed — so dropping the min-width was not enough and it still
+     scrolled, still cutting values mid-number. Below 430px it STACKS instead: one card per row,
+     each value carrying its own column label, so there is no scroll and therefore nothing to cut.
+     THE ROLES ARE THE POINT. display:block strips a table's implicit ARIA roles, so a CSS-only
+     stack silently trades a screen-reader regression for a sighted-reader fix. Explicit
+     role=table/rowgroup/row/columnheader/cell restores them, and the thead is CLIPPED rather than
+     display:none so it is still announced. The ::before labels are decoration for sighted readers
+     and are not announced, so nothing is read twice. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    /* a caption keeps display:table-caption inside a display:block table and shrink-to-fits to an
+       anonymous table box — 104px inside a 286px card, wrapping the sentence to ~14 characters a
+       line. Every scan passed it: the text is legible, contrasty and uncut. Found by looking. */
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -123,122 +163,110 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· No-Go Triptych exhibit</a>
-    <span class="wingtag">· Wing II · The No-Go Games</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet</p>
-    <h1>Three walls — <span class="b">Bell</span>, <span class="c">causal order</span>, <span class="x">contextuality</span> — one court</h1>
-    <div class="idline">
-      <span><strong>Findings</strong> CHSH · F82 · F106</span>
-      <span><strong>Experiments</strong> Exp135 · Exp105 · magic-square</span>
-      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
-      <span><strong>Cross-device</strong> +ibm_fez (game)</span>
-    </div>
-    <span class="verdict-chip"><span aria-hidden="true">✓</span> THREE THEOREM-WALLS BREACHED — 53σ · 217σ · 196σ, each with an executed null</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This sheet is the source-of-truth specification behind the interactive exhibit. It gathers three <strong>independent
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· No-Go Triptych exhibit</a>
+<span class="wingtag">· Wing II · The No-Go Games</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet</p>
+<h1>Three walls — <span class="b">Bell</span>, <span class="c">causal order</span>, <span class="x">contextuality</span> — one court</h1>
+<div class="idline">
+<span><strong>Findings</strong> CHSH · F82 · F106</span>
+<span><strong>Experiments</strong> Exp135 · Exp105 · magic-square</span>
+<span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+<span><strong>Cross-device</strong> +ibm_fez (game)</span>
+</div>
+<span class="verdict-chip"><span aria-hidden="true">✓</span> THREE THEOREM-WALLS BREACHED — 53σ · 217σ · 196σ, each with an executed null</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This sheet is the source-of-truth specification behind the interactive exhibit. It gathers three <strong>independent
   no-go theorems</strong> — each a mathematical proof that <strong>no classical strategy</strong> can exceed a certain ceiling — and
   shows all three ceilings <strong>breached on the same silicon</strong>, each with an <strong>executed classical control</strong> that
   lands at the wall. Every number is drawn from the frozen grade files of the three experiments.</p>
-
-  <h2><span class="n">1</span>What is a no-go theorem?</h2>
-  <p>A <strong>no-go theorem</strong> proves that some intuitive picture of the world <strong>cannot</strong> reproduce quantum
+<h2><span class="n">1</span>What is a no-go theorem?</h2>
+<p>A <strong>no-go theorem</strong> proves that some intuitive picture of the world <strong>cannot</strong> reproduce quantum
   predictions. Each comes with a hard number — a ceiling a classical strategy cannot pass. Beat the ceiling on
   hardware and you have <strong>falsified the classical picture</strong>, not merely "done well." The three here forbid three
   different classical intuitions:</p>
-  <ul>
-    <li><b class="b" style="color:var(--cyan)">Bell — locality.</b> No theory where distant outcomes are fixed by
+<ul>
+<li><b class="b" style="color:var(--cyan)">Bell — locality.</b> No theory where distant outcomes are fixed by
     local hidden variables can correlate them beyond <code>|S| ≤ 2</code>.</li>
-    <li><b style="color:var(--violet)">Causal order — a definite sequence of events.</b> No fixed order of two
+<li><b style="color:var(--violet)">Causal order — a definite sequence of events.</b> No fixed order of two
     operations — nor any random mixture of orders — can win a certain discrimination game beyond <code>0.869</code>.</li>
-    <li><b style="color:var(--amber)">Contextuality — pre-set values.</b> No theory where each observable has a value
+<li><b style="color:var(--amber)">Contextuality — pre-set values.</b> No theory where each observable has a value
     independent of what is measured alongside it can win the magic-square game beyond <code>8/9</code>.</li>
-  </ul>
-
-  <h2><span class="n">2</span>The three walls, measured</h2>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+</ul>
+<h2><span class="n">2</span>The three walls, measured</h2>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>Three no-go theorem walls breached: Bell, causal order, and contextuality on one chip</caption>
-    <thead><tr><th scope="col">theorem</th><th scope="col">forbids</th><th scope="col">classical wall</th><th scope="col">quantum measured</th><th scope="col">clearance</th><th scope="col">executed null</th></tr></thead>
-    <tbody>
-      <tr><td class="bc">Bell (CHSH)</td><td>local hidden variables</td><td>|S| ≤ 2</td><td class="bc"><strong>S = 2.7522 ± 0.014</strong></td><td class="clear">53σ</td><td>0.036 ≈ 0</td></tr>
-      <tr><td class="cc">Causal order (F82)</td><td>a definite order of events</td><td>≤ 0.8690</td><td class="cc"><strong>0.9769 ± 0.0005</strong></td><td class="clear">217σ</td><td>0.615 (fixed order)</td></tr>
-      <tr><td class="xc">Contextuality (F106)</td><td>pre-set (non-contextual) values</td><td>≤ 8/9 = 0.8889</td><td class="xc"><strong>0.96901 ± 0.0004</strong></td><td class="clear">196σ</td><td>0.657 (no entanglement)</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p>Quantum reference ceilings: Bell's Tsirelson limit is <code>2√2 = 2.8284</code>; the two games top out at
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">theorem</th><th role="columnheader" scope="col">forbids</th><th role="columnheader" scope="col">classical wall</th><th role="columnheader" scope="col">quantum measured</th><th role="columnheader" scope="col">clearance</th><th role="columnheader" scope="col">executed null</th></tr></thead>
+<tbody role="rowgroup">
+<tr role="row"><td class="bc" data-label="theorem" role="cell">Bell (CHSH)</td><td data-label="forbids" role="cell">local hidden variables</td><td data-label="classical wall" role="cell">|S| ≤ 2</td><td class="bc" data-label="quantum measured" role="cell"><strong>S = 2.7522 ± 0.014</strong></td><td class="clear" data-label="clearance" role="cell">53σ</td><td data-label="executed null" role="cell">0.036 ≈ 0</td></tr>
+<tr role="row"><td class="cc" data-label="theorem" role="cell">Causal order (F82)</td><td data-label="forbids" role="cell">a definite order of events</td><td data-label="classical wall" role="cell">≤ 0.8690</td><td class="cc" data-label="quantum measured" role="cell"><strong>0.9769 ± 0.0005</strong></td><td class="clear" data-label="clearance" role="cell">217σ</td><td data-label="executed null" role="cell">0.615 (fixed order)</td></tr>
+<tr role="row"><td class="xc" data-label="theorem" role="cell">Contextuality (F106)</td><td data-label="forbids" role="cell">pre-set (non-contextual) values</td><td data-label="classical wall" role="cell">≤ 8/9 = 0.8889</td><td class="xc" data-label="quantum measured" role="cell"><strong>0.96901 ± 0.0004</strong></td><td class="clear" data-label="clearance" role="cell">196σ</td><td data-label="executed null" role="cell">0.657 (no entanglement)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Quantum reference ceilings: Bell's Tsirelson limit is <code>2√2 = 2.8284</code>; the two games top out at
   <code>1.0</code>. The measured values sit between each classical wall and the quantum ceiling.</p>
-
-  <h2><span class="n">3</span>Why it counts as "one court"</h2>
-  <div class="callout">
-    <p class="clabel">Three disciplines held to one standard</p>
-    <p class="tight">(1) <strong>The bounds are proven, not cited.</strong> The causal wall 0.8690 is re-solved by SDP; the
+<h2><span class="n">3</span>Why it counts as "one court"</h2>
+<div class="callout">
+<p class="clabel">Three disciplines held to one standard</p>
+<p class="tight">(1) <strong>The bounds are proven, not cited.</strong> The causal wall 0.8690 is re-solved by SDP; the
     contextuality wall 8/9 is <strong>enumerated in-code over all 4,096 parity-respecting strategies</strong>; Bell's 2 is the
     textbook CHSH bound. (2) <strong>Every wall has an executed null</strong> — a real classical control run on the same chip
     that lands <strong>at</strong> the wall (Bell 0.036, fixed-order 0.615, no-entanglement 0.657), so the breach is a contrast,
     not an absolute reading. (3) <strong>Same silicon</strong> — all three on <code>ibm_marrakesh</code>, and the causal game
     <strong>reproduced across a second device</strong> (<code>ibm_fez</code>, 0.9738, 201σ, 0.3pp concordance).</p>
-  </div>
-
-  <h2><span class="n">4</span>Each wall in detail</h2>
-  <h3 class="b">Bell / nonlocality (CHSH) — Exp135</h3>
-  <p>The CHSH correlator <code>S = 2.7522 ± 0.0141</code> exceeds the local-realistic bound of 2 by <strong>53.2σ</strong>,
+</div>
+<h2><span class="n">4</span>Each wall in detail</h2>
+<h3 class="b">Bell / nonlocality (CHSH) — Exp135</h3>
+<p>The CHSH correlator <code>S = 2.7522 ± 0.0141</code> exceeds the local-realistic bound of 2 by <strong>53.2σ</strong>,
   approaching the Tsirelson ceiling 2.8284. The classical control (a separable state) reads <code>S = 0.036 ≈ 0</code>.
   Job <code>d9an47mg26ic73dev0s0</code>.</p>
-  <h3 class="c">Indefinite causal order (the causal game) — F82 / Exp105</h3>
-  <p>The Araújo et al. commute/anticommute discrimination game, with the SDP-optimal input distribution frozen
+<h3 class="c">Indefinite causal order (the causal game) — F82 / Exp105</h3>
+<p>The Araújo et al. commute/anticommute discrimination game, with the SDP-optimal input distribution frozen
   pre-submission. Measured <code>p̂ = 0.9769 ± 0.0005</code> vs the causally-separable bound <strong>0.8690</strong> — <strong>216.8σ</strong>
   — with every one of 51 unitary pairs individually above the bound. The fixed-order null reads 0.615 (buying exactly
   the commuting prior). Cross-device: <code>ibm_fez</code> 0.9738 (201σ). Jobs <code>d9826lkqp3as739sd2lg</code> (mrk),
   <code>d982qssqp3as739sdmmg</code> (fez).</p>
-  <h3 class="x">Contextuality (Peres–Mermin magic square) — F106</h3>
-  <p>The magic-square pseudo-telepathy game, value <code>0.96901 ± 0.00041</code> vs the non-contextual ceiling
+<h3 class="x">Contextuality (Peres–Mermin magic square) — F106</h3>
+<p>The magic-square pseudo-telepathy game, value <code>0.96901 ± 0.00041</code> vs the non-contextual ceiling
   <code>8/9</code> — <strong>196σ</strong> — with the ceiling enumerated over all 4,096 parity-respecting strategy pairs. Even
   the worst single context (r3c3) clears 8/9 at 37.8σ. The no-entanglement null reads 0.657 (92.7σ below). Job
   <code>d9akl8fu62qs738o68pg</code>.</p>
-
-  <h2><span class="n">5</span>Scope &amp; caveats</h2>
-  <ul>
-    <li><strong>Game-value advantages, not computational speedup.</strong> Each result is a certified <strong>correlation/game</strong>
+<h2><span class="n">5</span>Scope &amp; caveats</h2>
+<ul>
+<li><strong>Game-value advantages, not computational speedup.</strong> Each result is a certified <strong>correlation/game</strong>
     advantage over a classical ceiling — foundational, not a runtime speedup. (The one un-won scoreboard of the
     campaign is computational advantage.)</li>
-    <li><strong>Device-characterized, not loophole-free.</strong> These are hardware certifications on characterized devices,
+<li><strong>Device-characterized, not loophole-free.</strong> These are hardware certifications on characterized devices,
     not loophole-free Bell/contextuality tests. The nulls and enumerated bounds are what make the breach meaningful
     on this apparatus.</li>
-    <li><strong>Textbook priors credited.</strong> Bell (1964), Kochen–Specker / Peres–Mermin, and Oreshkov–Costa–Brukner /
+<li><strong>Textbook priors credited.</strong> Bell (1964), Kochen–Specker / Peres–Mermin, and Oreshkov–Costa–Brukner /
     Araújo et al. are the sources; the contribution is the frozen, null-controlled hardware certification of all three
     in one campaign.</li>
-  </ul>
-
-  <h2><span class="n">6</span>Provenance</h2>
-  <ul>
-    <li><strong>Bell/CHSH:</strong> <code>results/exp135_hw_results.json</code> · job d9an47mg26ic73dev0s0</li>
-    <li><strong>Causal game (F82):</strong> <code>results/exp105_hw_results.json</code> (+ exp105b fez) · jobs d9826lkqp3as739sd2lg, d982qssqp3as739sdmmg · bound <code>results/causal_game_sdp_qij.json</code> = 0.8690</li>
-    <li><strong>Contextuality (F106):</strong> magic-square grade · job d9akl8fu62qs738o68pg</li>
-    <li><strong>Backend:</strong> ibm_marrakesh (Heron r2), cross-device ibm_fez · <strong>Deeper exhibits:</strong> the Interrogation (game ceiling) · the Magic Square (F106)</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
-
-  </main>
-  <footer class="foot">
-    <span>MEASURED · <b style="color:var(--cyan)">CHSH</b> · <b style="color:var(--violet)">F82</b> · <b style="color:var(--amber)">F106</b> · ibm_marrakesh</span>
-    <span class="sp"></span>
-    <a href="./spec.md">Markdown</a>
-    <a href="../scoreboard/">Scoreboard</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+</ul>
+<h2><span class="n">6</span>Provenance</h2>
+<ul>
+<li><strong>Bell/CHSH:</strong> <code>results/exp135_hw_results.json</code> · job d9an47mg26ic73dev0s0</li>
+<li><strong>Causal game (F82):</strong> <code>results/exp105_hw_results.json</code> (+ exp105b fez) · jobs d9826lkqp3as739sd2lg, d982qssqp3as739sdmmg · bound <code>results/causal_game_sdp_qij.json</code> = 0.8690</li>
+<li><strong>Contextuality (F106):</strong> magic-square grade · job d9akl8fu62qs738o68pg</li>
+<li><strong>Backend:</strong> ibm_marrakesh (Heron r2), cross-device ibm_fez · <strong>Deeper exhibits:</strong> the Interrogation (game ceiling) · the Magic Square (F106)</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
+</main>
+<footer class="foot">
+<span>MEASURED · <b style="color:var(--cyan)">CHSH</b> · <b style="color:var(--violet)">F82</b> · <b style="color:var(--amber)">F106</b> · ibm_marrakesh</span>
+<span class="sp"></span>
+<a href="./spec.md">Markdown</a>
+<a href="../scoreboard/">Scoreboard</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.

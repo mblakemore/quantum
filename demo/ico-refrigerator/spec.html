@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — The ICO Refrigerator (F86 / F88 / F95 / F118) | The Quantum Museum</title>
-<meta name="description" content="Complete specification for the ICO Refrigerator: a superposition of the order of two thermalizing channels splits a target colder/hotter by control outcome — forbidden to any definite-order process (causal value 0). Split Δ=0.1796 at 21.1σ (F86), confirmed with a native T1 working fluid (F88), a full engine cycle extracting 0.0340 E/run with a reported W1-loss (F95), and the cold branch spent to reset an external qubit sub-bath at 5σ (F118). Jobs d98vqfsqp3as739tfg0g, d9bdgrug26ic73dfr010, ibm_marrakesh.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Complete specification for the ICO Refrigerator: a superposition of the order of two thermalizing channels splits a target colder/hotter by control outcome — forbidden to any definite-order process (causal value 0). Split Δ=0.1796 at 21.1σ (F86), confirmed with a native T1 working fluid (F88), a full engine cycle extracting 0.0340 E/run with a reported W1-loss (F95), and the cold branch spent to reset an external qubit sub-bath at 5σ (F118). Jobs d98vqfsqp3as739tfg0g, d9bdgrug26ic73dfr010, ibm_marrakesh." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -95,6 +96,41 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this page's table cannot fit a 320px window at any padding — measured —
+     so dropping the min-width still left it scrolling and still cutting values mid-number. Below
+     430px it STACKS: one card per row, each value carrying its column label, no scroll, nothing to
+     cut. The explicit ARIA roles are the point: display:block strips a table's implicit roles, so a
+     CSS-only stack trades a screen-reader regression for a sighted-reader fix. thead is CLIPPED,
+     not display:none, so it is still announced; ::before labels are not announced, so nothing is
+     read twice. The caption rule is here because a caption keeps display:table-caption inside a
+     block table and shrink-to-fits to ~104px, wrapping its sentence to 14 characters a line. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -127,85 +163,78 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· ICO Refrigerator exhibit</a>
-    <span class="wingtag">· Wing I · The Causal Switch</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet</p>
-    <h1>Cooling from the <span class="hl">order</span> of operations — a full engine cycle, and the cold branch spent</h1>
-    <div class="idline">
-      <span><strong>Findings</strong> F86 / F88 / F95 / F118</span>
-      <span><strong>Experiment</strong> Exp108 series + Exp138b (split · native fluid · engine loop · sub-bath reset)</span>
-      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
-      <span><strong>Jobs</strong> d98vqfsqp3as739tfg0g · d9bdgrug26ic73dfr010</span>
-    </div>
-    <span class="verdict-chip"><span aria-hidden="true">✓</span> ICO REFRIGERATION CERTIFIED — split 21.1σ over causal 0 · full engine cycle runs (W1-loss kept) · cold branch spent to reset an external qubit sub-bath (F118)</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· ICO Refrigerator exhibit</a>
+<span class="wingtag">· Wing I · The Causal Switch</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet</p>
+<h1>Cooling from the <span class="hl">order</span> of operations — a full engine cycle, and the cold branch spent</h1>
+<div class="idline">
+<span><strong>Findings</strong> F86 / F88 / F95 / F118</span>
+<span><strong>Experiment</strong> Exp108 series + Exp138b (split · native fluid · engine loop · sub-bath reset)</span>
+<span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+<span><strong>Jobs</strong> d98vqfsqp3as739tfg0g · d9bdgrug26ic73dfr010</span>
+</div>
+<span class="verdict-chip"><span aria-hidden="true">✓</span> ICO REFRIGERATION CERTIFIED — split 21.1σ over causal 0 · full engine cycle runs (W1-loss kept) · cold branch spent to reset an external qubit sub-bath (F118)</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number on the exhibit page
   is drawn from here; every number here is drawn from the frozen grade files <code>results/exp108_grade.json</code> and
   siblings, and the campaign finding rows for F86 / F88 / F95. Nothing is hand-tuned for display.</p>
-
-  <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p>Send a qubit through two channels that each drag it toward a fixed bath temperature. Normally the <strong>order</strong> in
+<h2><span class="n">1</span>The idea, in plain language</h2>
+<p>Send a qubit through two channels that each drag it toward a fixed bath temperature. Normally the <strong>order</strong> in
   which the two channels act is fixed. Here it is put into a <strong>quantum superposition of both orders</strong> at once — an
   indefinite causal order (ICO), realised as a <strong>quantum switch</strong> controlled by an ancilla. Read the control qubit,
   and the target comes out <strong>colder</strong> or <strong>hotter</strong> than either bath it touched, depending on the outcome.</p>
-  <div class="callout">
-    <p class="clabel">Why this is forbidden to ordered physics</p>
-    <p class="tight">Every <strong>definite-order</strong> composition of two constant-to-<code>τ</code> channels outputs
+<div class="callout">
+<p class="clabel">Why this is forbidden to ordered physics</p>
+<p class="tight">Every <strong>definite-order</strong> composition of two constant-to-<code>τ</code> channels outputs
     <code>τ</code>, uncorrelated with the control — so a definite/mixed/dynamical process gives a split of
     <strong>exactly Δ = 0</strong>. Any split at all is the signature of indefinite causal order. This is the Felce–Vedral
     refrigeration resource (PRL 125, 070603); the contribution here is the frozen-court <strong>measurement on silicon</strong>.</p>
-  </div>
-
-  <h2><span class="n">2</span>What we measure — and the method</h2>
-  <p>The target's excited-state population <code>p₁</code> is the thermometer (higher <code>p₁</code> = hotter). We
+</div>
+<h2><span class="n">2</span>What we measure — and the method</h2>
+<p>The target's excited-state population <code>p₁</code> is the thermometer (higher <code>p₁</code> = hotter). We
   read it in each control branch and take the <strong>split</strong> <code>Δ = p₁|₋ − p₁|₊</code> against the causal value 0. The
   baths are two thermalizing channels with <code>τ = diag(0.75, 0.25)</code>. Three progressively harder tests:</p>
-  <ul>
-    <li><strong>F86 — the split.</strong> Basis-prepared reservoirs; certify <code>Δ &gt; 0</code> against the exact causal 0, with thermalization null arms confirming the baths reach <code>τ</code>.</li>
-    <li><strong>F88 — native working fluid.</strong> Re-fly with the reservoirs mixed by the chip's <strong>own T1 decay</strong> (X + live-calibrated delays) instead of classical basis-prep pooling — the working fluid is free.</li>
-    <li><strong>F95 — the engine.</strong> A complete loop: certify passive baths in, charge the target above the halfway line, extract work, and re-certify the output passive so the cycle can repeat. Demon books audited on-chip.</li>
-    <li><strong>F118 — spending the cold branch.</strong> The cold + branch, only ever <em>measured</em> before, is <strong>used</strong>: after the switch, a SWAP delivers it onto an <strong>external</strong> data qubit (never part of the fridge), resetting it below the bath — colder than any definite-order reset on the same warm baths.</li>
-  </ul>
-
-  <h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
-  <div class="gate">
-    <span class="g">SPLIT (F86)</span><span class="r"><code>Δ &gt; 0</code> vs the exact causal value, null arms thermalize. <span class="pass">PASS</span> — <code>Δ = 0.1796 ± 0.0085</code>, <strong>21.1σ</strong>; nulls 0.2496 / 0.2492.</span>
-    <span class="g">NATIVE (F88)</span><span class="r">+ branch colder than the <strong>coldest</strong> reservoir under the native T1 fluid. <span class="pass">PASS</span> — <code>Δ = 0.1645 ± 0.0127</code>, <strong>5σ</strong>.</span>
-    <span class="g">W2 (F95)</span><span class="r">Output re-certified passive: <code>p₁ &lt; 0.5</code> at 5σ. <span class="pass">PASS</span> — 0.4913 &lt; 0.5 (W2 WIN).</span>
-    <span class="g">W1 (F95)</span><span class="r">Quantitative drop-floor <code>&gt; 0.05</code> at 5σ. <span class="fail">LOSS</span> — missed clearance by <strong>0.7σ</strong> (drop is 9.4σ from zero); kept in the record as a REFUTED magnitude subclaim.</span>
-    <span class="g">RESET (F118)</span><span class="r">External data qubit sub-bath (<code>p₁ + 5SE &lt; 0.25</code>) AND colder than the definite-order null. <span class="pass">PASS</span> both — <code>p₁ = 0.2100 ± 0.0038</code> (5σ sub-bath), null 0.2602/0.2700 (12.2σ beat, common-mode-conservative). Integrity gates (null band, retention ≥ 0.80, deco) PASS.</span>
-  </div>
-
-  <h2><span class="n">4</span>The measured data — four findings, one resource</h2>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+<ul>
+<li><strong>F86 — the split.</strong> Basis-prepared reservoirs; certify <code>Δ &gt; 0</code> against the exact causal 0, with thermalization null arms confirming the baths reach <code>τ</code>.</li>
+<li><strong>F88 — native working fluid.</strong> Re-fly with the reservoirs mixed by the chip's <strong>own T1 decay</strong> (X + live-calibrated delays) instead of classical basis-prep pooling — the working fluid is free.</li>
+<li><strong>F95 — the engine.</strong> A complete loop: certify passive baths in, charge the target above the halfway line, extract work, and re-certify the output passive so the cycle can repeat. Demon books audited on-chip.</li>
+<li><strong>F118 — spending the cold branch.</strong> The cold + branch, only ever <em>measured</em> before, is <strong>used</strong>: after the switch, a SWAP delivers it onto an <strong>external</strong> data qubit (never part of the fridge), resetting it below the bath — colder than any definite-order reset on the same warm baths.</li>
+</ul>
+<h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
+<div class="gate">
+<span class="g">SPLIT (F86)</span><span class="r"><code>Δ &gt; 0</code> vs the exact causal value, null arms thermalize. <span class="pass">PASS</span> — <code>Δ = 0.1796 ± 0.0085</code>, <strong>21.1σ</strong>; nulls 0.2496 / 0.2492.</span>
+<span class="g">NATIVE (F88)</span><span class="r">+ branch colder than the <strong>coldest</strong> reservoir under the native T1 fluid. <span class="pass">PASS</span> — <code>Δ = 0.1645 ± 0.0127</code>, <strong>5σ</strong>.</span>
+<span class="g">W2 (F95)</span><span class="r">Output re-certified passive: <code>p₁ &lt; 0.5</code> at 5σ. <span class="pass">PASS</span> — 0.4913 &lt; 0.5 (W2 WIN).</span>
+<span class="g">W1 (F95)</span><span class="r">Quantitative drop-floor <code>&gt; 0.05</code> at 5σ. <span class="fail">LOSS</span> — missed clearance by <strong>0.7σ</strong> (drop is 9.4σ from zero); kept in the record as a REFUTED magnitude subclaim.</span>
+<span class="g">RESET (F118)</span><span class="r">External data qubit sub-bath (<code>p₁ + 5SE &lt; 0.25</code>) AND colder than the definite-order null. <span class="pass">PASS</span> both — <code>p₁ = 0.2100 ± 0.0038</code> (5σ sub-bath), null 0.2602/0.2700 (12.2σ beat, common-mode-conservative). Integrity gates (null band, retention ≥ 0.80, deco) PASS.</span>
+</div>
+<h2><span class="n">4</span>The measured data — four findings, one resource</h2>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>ICO refrigeration findings: thermal split, native fluid, engine cycle, and sub-bath reset</caption>
-    <thead><tr><th scope="col">finding · what</th><th scope="col">key measured value</th><th scope="col">vs threshold</th><th scope="col">significance</th><th scope="col">verdict</th></tr></thead>
-    <tbody>
-      <tr><td>F86 · refrigeration split</td><td class="king">Δ = 0.1796 ± 0.0085<br>(p₁|₊ 0.2098 · p₁|₋ 0.3894)</td><td>causal value = 0 exactly</td><td>21.1σ</td><td class="edge">WIN</td></tr>
-      <tr><td>F88 · native-fluid retest</td><td class="king">Δ = 0.1645 ± 0.0127</td><td>+ colder than coldest reservoir</td><td>5σ</td><td class="edge">CONFIRMED</td></tr>
-      <tr><td>F95 · full engine cycle</td><td class="king">net work 0.0340 E/run<br>(charge p₁|₋ = 0.5485)</td><td>passive → charged → passive</td><td>7σ charge · W2 5σ</td><td class="edge">W2 WIN</td></tr>
-      <tr><td>F118 · sub-bath reset (cold spent)</td><td class="king">p₁ = 0.2100 ± 0.0038<br>(null 0.2602 / 0.2700)</td><td>sub-bath 5σ · beats definite-order reset</td><td>12.2σ beat</td><td class="edge">WIN</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p>The F86 branches straddle the baths: the <strong>+</strong> branch at <code>p₁ = 0.2098</code> is <strong>colder</strong> than the
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">finding · what</th><th role="columnheader" scope="col">key measured value</th><th role="columnheader" scope="col">vs threshold</th><th role="columnheader" scope="col">significance</th><th role="columnheader" scope="col">verdict</th></tr></thead>
+<tbody role="rowgroup">
+<tr role="row"><td data-label="finding · what" role="cell">F86 · refrigeration split</td><td class="king" data-label="key measured value" role="cell">Δ = 0.1796 ± 0.0085<br/>(p₁|₊ 0.2098 · p₁|₋ 0.3894)</td><td data-label="vs threshold" role="cell">causal value = 0 exactly</td><td data-label="significance" role="cell">21.1σ</td><td class="edge" data-label="verdict" role="cell">WIN</td></tr>
+<tr role="row"><td data-label="finding · what" role="cell">F88 · native-fluid retest</td><td class="king" data-label="key measured value" role="cell">Δ = 0.1645 ± 0.0127</td><td data-label="vs threshold" role="cell">+ colder than coldest reservoir</td><td data-label="significance" role="cell">5σ</td><td class="edge" data-label="verdict" role="cell">CONFIRMED</td></tr>
+<tr role="row"><td data-label="finding · what" role="cell">F95 · full engine cycle</td><td class="king" data-label="key measured value" role="cell">net work 0.0340 E/run<br/>(charge p₁|₋ = 0.5485)</td><td data-label="vs threshold" role="cell">passive → charged → passive</td><td data-label="significance" role="cell">7σ charge · W2 5σ</td><td class="edge" data-label="verdict" role="cell">W2 WIN</td></tr>
+<tr role="row"><td data-label="finding · what" role="cell">F118 · sub-bath reset (cold spent)</td><td class="king" data-label="key measured value" role="cell">p₁ = 0.2100 ± 0.0038<br/>(null 0.2602 / 0.2700)</td><td data-label="vs threshold" role="cell">sub-bath 5σ · beats definite-order reset</td><td data-label="significance" role="cell">12.2σ beat</td><td class="edge" data-label="verdict" role="cell">WIN</td></tr>
+</tbody>
+</table>
+</div>
+<p>The F86 branches straddle the baths: the <strong>+</strong> branch at <code>p₁ = 0.2098</code> is <strong>colder</strong> than the
   reservoir, the <strong>−</strong> branch at <code>0.3894</code> hotter — a definite-order engine cannot separate them at all.
   The F95 loop runs end-to-end: passive baths in (0.426 / 0.444, each 5σ below 0.5) → the switch charges the target to
   <code>p₁ = 0.5485</code> (7σ above 0.5) → the power stroke drops <code>p₁</code> by 0.0920 for a net
   <strong>0.0340 E/run</strong> → the output re-certifies passive (0.4913 &lt; 0.5 at 5σ). Demon ledger audited at
   +0.0051 E/action.</p>
-  <p><strong>F118 spends the cold branch.</strong> Exhibits A–B measured the split and spent the <em>hot</em> branch (the engine
+<p><strong>F118 spends the cold branch.</strong> Exhibits A–B measured the split and spent the <em>hot</em> branch (the engine
   charges a battery). F118 spends the <strong>cold</strong> branch: after the switch, <code>SWAP(target, D)</code> delivers the cold
   outcome onto an external data qubit <code>D</code>, which lands at <code>p₁ = 0.2100 ± 0.0038</code> — below the bath at
   <strong>5σ</strong>, and colder than the same-chip definite-order reset (0.2602 / 0.2700) by a <strong>12.2σ</strong> beat. Both arms take the
@@ -213,28 +242,27 @@
   null arms <code>P(c=+) = 0.998</code> — the control is a spectator, so under definite order there is no cold subset to
   post-select; the cold outcome exists to be heralded <em>only</em> when the order is superposed, which is exactly the
   causal-value-0 signature.</p>
-
-  <h2><span class="n">5</span>Scope &amp; caveats <span style="font-family:var(--sans);font-weight:400;font-size:14px;color:var(--ink-3)">— including the loss we kept</span></h2>
-  <ul>
-    <li><strong>Definite order gives split = 0, exactly.</strong> The null is not an approximation — it is a theorem for
+<h2><span class="n">5</span>Scope &amp; caveats <span style="font-family:var(--sans);font-weight:400;font-size:14px;color:var(--ink-3)">— including the loss we kept</span></h2>
+<ul>
+<li><strong>Definite order gives split = 0, exactly.</strong> The null is not an approximation — it is a theorem for
     constant-to-<code>τ</code> channels. That is what makes any measured <code>Δ &gt; 0</code> a clean signature of
     indefinite causal order rather than a noise artifact.</li>
-    <li><strong>The engine's W1 gate is a LOSS.</strong> The quantitative drop-floor (<code>&gt; 0.05</code> at 5σ) missed
+<li><strong>The engine's W1 gate is a LOSS.</strong> The quantitative drop-floor (<code>&gt; 0.05</code> at 5σ) missed
     clearance by <strong>0.7σ</strong> and is frozen as <span class="loss">LOSS</span> — a REFUTED magnitude subclaim, kept in
     the record, not swept under. The <strong>direction</strong> is unambiguous (the drop is 9.4σ from zero and W2 passes); only
     the pre-filed <strong>magnitude</strong> at 5σ did not clear. The finding is the full cycle plus the leg that did not clear, together.</li>
-    <li><strong>Modest harvest, free fluid.</strong> Under the native working fluid (F88) the + branch reaches ≈ 0.462×T_res
+<li><strong>Modest harvest, free fluid.</strong> Under the native working fluid (F88) the + branch reaches ≈ 0.462×T_res
     (~54% colder), harvesting ~1.9% of the Landauer bound — the working fluid is free, the record is not. Published-T1
     ran +38–69% high vs calibration (bias, not drift), absorbed by drift-tolerant gates; the certificate rests on
     in-job measured values.</li>
-    <li><strong>F118 is resource-theory, not a reset upgrade.</strong> The sub-bath reset beats the <strong>definite-order</strong> reset
+<li><strong>F118 is resource-theory, not a reset upgrade.</strong> The sub-bath reset beats the <strong>definite-order</strong> reset
     (0.25), <strong>not</strong> the chip's native measurement-reset (~0.01–0.02). It is a proof-of-principle that the cold is a
     <em>transferable</em> resource (delivered to an external qubit), a modest increment over F88 — not a drop-in
     initialization primitive. Heralded (P(+) ≈ 0.69); the herald cost books to the F104 demon ledger. Honest arc: the
     first flight (Exp138, job <code>d9bd80rv6alc73cst7g0</code>) graded <span class="loss">NO-TEST</span> on a retention
     floor set too optimistically; the re-fly (Exp138b) changed exactly one frozen constant, re-derived from the measured
     haircut, and won on a fresh window that clears the older 0.85 precedent independently.</li>
-    <li><strong>How cold can it go — the boundary (not a finding).</strong> The ICO resource <strong>saturates</strong>:
+<li><strong>How cold can it go — the boundary (not a finding).</strong> The ICO resource <strong>saturates</strong>:
     cascading the cooled qubit back through the switch converges to <code>p₁ ≈ 0.177</code> (its
     causal-order floor for these baths, computed from the exact map), not toward zero. Combining
     several cold qubits with a <strong>classical majority vote</strong> reaches ~<code>0.13</code> on-chip
@@ -242,27 +270,23 @@
     that works on any biased qubit, <strong>not</strong> the ICO resource; it takes no F-number and no ledger
     row (the F94 fuel-mislocation guard). Full decomposition:
     <code>docs/ico-cooling-floor-and-concentration-boundary-whisper-c4720.md</code>.</li>
-  </ul>
-
-  <h2><span class="n">6</span>Provenance</h2>
-  <ul>
-    <li><strong>Jobs:</strong> d98vqfsqp3as739tfg0g (Exp108, the F86 split) · d9bdgrug26ic73dfr010 (Exp138b, the F118 sub-bath reset; parent NO-TEST d9bd80rv6alc73cst7g0) · <strong>Backend:</strong> ibm_marrakesh (Heron r2)</li>
-    <li><strong>Grade files:</strong> <code>results/exp108_grade.json</code> (F86) · <code>results/exp108b_grade.json</code> &amp; <code>results/exp108c_grade.json</code> (F88 native-fluid retest) · <code>results/exp138_grade.json</code> (F118 NO-TEST) &amp; <code>results/exp138b_grade.json</code> (F118 WIN)</li>
-    <li><strong>Finding rows:</strong> <code>docs/campaign-arcs.md</code> — F86 (thermal splitting WIN), F88 (native-fluid CONFIRMED), F95 (the full engine cycle) · <code>findings/F118-…</code> (cold branch spent)</li>
-    <li><strong>Resource:</strong> Felce–Vedral (PRL 125, 070603) · <strong>Family:</strong> Wing I, The Causal Switch · Horizons P4 (engine, end-to-end) · first <em>use</em> of the cold branch</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
-
-  </main>
-  <footer class="foot">
-    <span>MEASURED · <b style="color:var(--cyan)">F86 / F88 / F95 / F118</b> · jobs d98vqfsqp3as739tfg0g · d9bdgrug26ic73dfr010 · ibm_marrakesh</span>
-    <span class="sp"></span>
-    <a href="./spec.md">Markdown</a>
-    <a href="../scoreboard/">Scoreboard</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+</ul>
+<h2><span class="n">6</span>Provenance</h2>
+<ul>
+<li><strong>Jobs:</strong> d98vqfsqp3as739tfg0g (Exp108, the F86 split) · d9bdgrug26ic73dfr010 (Exp138b, the F118 sub-bath reset; parent NO-TEST d9bd80rv6alc73cst7g0) · <strong>Backend:</strong> ibm_marrakesh (Heron r2)</li>
+<li><strong>Grade files:</strong> <code>results/exp108_grade.json</code> (F86) · <code>results/exp108b_grade.json</code> &amp; <code>results/exp108c_grade.json</code> (F88 native-fluid retest) · <code>results/exp138_grade.json</code> (F118 NO-TEST) &amp; <code>results/exp138b_grade.json</code> (F118 WIN)</li>
+<li><strong>Finding rows:</strong> <code>docs/campaign-arcs.md</code> — F86 (thermal splitting WIN), F88 (native-fluid CONFIRMED), F95 (the full engine cycle) · <code>findings/F118-…</code> (cold branch spent)</li>
+<li><strong>Resource:</strong> Felce–Vedral (PRL 125, 070603) · <strong>Family:</strong> Wing I, The Causal Switch · Horizons P4 (engine, end-to-end) · first <em>use</em> of the cold branch</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
+</main>
+<footer class="foot">
+<span>MEASURED · <b style="color:var(--cyan)">F86 / F88 / F95 / F118</b> · jobs d98vqfsqp3as739tfg0g · d9bdgrug26ic73dfr010 · ibm_marrakesh</span>
+<span class="sp"></span>
+<a href="./spec.md">Markdown</a>
+<a href="../scoreboard/">Scoreboard</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.

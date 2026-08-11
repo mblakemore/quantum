@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — The Hayden–Preskill Mirror (F99 / Exp121) | The Quantum Museum</title>
-<meta name="description" content="Complete specification for the Hayden–Preskill Mirror exhibit: a one-bit diary thrown at two incompatible horizon-queries is dead in every definite order, yet the heralded switch minus-branch returns it phase-flipped (S_P = -0.238, 56σ past the sign-fixed band) — flip the bits and recover 74%. Plus branch +0.182 (59σ). Job d9aabnt2su3c739lcam0, ibm_marrakesh.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Complete specification for the Hayden–Preskill Mirror exhibit: a one-bit diary thrown at two incompatible horizon-queries is dead in every definite order, yet the heralded switch minus-branch returns it phase-flipped (S_P = -0.238, 56σ past the sign-fixed band) — flip the bits and recover 74%. Plus branch +0.182 (59σ). Job d9aabnt2su3c739lcam0, ibm_marrakesh." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -95,6 +96,41 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this page's table cannot fit a 320px window at any padding — measured —
+     so dropping the min-width still left it scrolling and still cutting values mid-number. Below
+     430px it STACKS: one card per row, each value carrying its column label, no scroll, nothing to
+     cut. The explicit ARIA roles are the point: display:block strips a table's implicit roles, so a
+     CSS-only stack trades a screen-reader regression for a sighted-reader fix. thead is CLIPPED,
+     not display:none, so it is still announced; ::before labels are not announced, so nothing is
+     read twice. The caption rule is here because a caption keeps display:table-caption inside a
+     block table and shrink-to-fits to ~104px, wrapping its sentence to 14 characters a line. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 13px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -129,135 +165,122 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· Hayden–Preskill exhibit</a>
-    <span class="wingtag">· Wing III · Foundations on Silicon</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet</p>
-    <h1>A message the mirror returns <span class="hl">phase-flipped</span></h1>
-    <div class="idline">
-      <span><strong>Finding</strong> F99</span>
-      <span><strong>Experiment</strong> Exp121 (Hayden–Preskill × ICO)</span>
-      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
-      <span><strong>Job</strong> d9aabnt2su3c739lcam0</span>
-      <span><strong>Telescope</strong> byte-identical to F98</span>
-    </div>
-    <span class="verdict-chip"><span aria-hidden="true">✓</span> VERDICT — HERALDED-MIRROR-CERTIFIED (+ plus branch) · 56σ &amp; 59σ</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number is drawn from the
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· Hayden–Preskill exhibit</a>
+<span class="wingtag">· Wing III · Foundations on Silicon</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet</p>
+<h1>A message the mirror returns <span class="hl">phase-flipped</span></h1>
+<div class="idline">
+<span><strong>Finding</strong> F99</span>
+<span><strong>Experiment</strong> Exp121 (Hayden–Preskill × ICO)</span>
+<span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+<span><strong>Job</strong> d9aabnt2su3c739lcam0</span>
+<span><strong>Telescope</strong> byte-identical to F98</span>
+</div>
+<span class="verdict-chip"><span aria-hidden="true">✓</span> VERDICT — HERALDED-MIRROR-CERTIFIED (+ plus branch) · 56σ &amp; 59σ</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This sheet is the source-of-truth specification behind the interactive exhibit. Every number is drawn from the
   frozen grade file <code>results/exp121_grade.json</code> and its job record <code>results/exp121_jobids.json</code>.
   It runs on the <strong>same certified telescope as F98</strong> (Quantum Darwinism) — byte-identical skeleton, site, and
   window — so the two findings share one calibrated apparatus.</p>
-
-  <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p><strong>Hayden–Preskill (2007).</strong> Throw a message into a scrambler — the theorists' toy model of a black hole — and
+<h2><span class="n">1</span>The idea, in plain language</h2>
+<p><strong>Hayden–Preskill (2007).</strong> Throw a message into a scrambler — the theorists' toy model of a black hole — and
   it looks instantly lost. But if you hold the right <strong>entangled reference</strong> to the scrambler, the message comes
   <strong>back out</strong> in the radiation almost immediately. Information isn't destroyed; it's smeared across correlations
   you can un-smear with the reference.</p>
-  <p>Here the message is a <strong>one-bit diary</strong>. We interrogate the scrambled state with two <strong>incompatible
+<p>Here the message is a <strong>one-bit diary</strong>. We interrogate the scrambled state with two <strong>incompatible
   horizon-queries</strong> — a Z-question and an X-question — and try to read the diary back from a small <strong>probe</strong>
   alone. Under any <strong>definite order</strong> of the two queries, the diary is <strong>provably dead</strong> in the probe: the probe
   is a coin-flip. The twist is to put the <strong>order of the two queries in superposition</strong> (a quantum switch) and ask
   what the probe knows then.</p>
-  <div class="callout">
-    <p class="clabel">The measured quantity</p>
-    <p class="tight"><code>S_P = P(probe reads the diary correctly) − ½</code>. So <code>S_P = 0</code> is a coin-flip
+<div class="callout">
+<p class="clabel">The measured quantity</p>
+<p class="tight"><code>S_P = P(probe reads the diary correctly) − ½</code>. So <code>S_P = 0</code> is a coin-flip
     (<strong>dead</strong>, no recovery); <code>S_P = +½</code> is a <span class="direct">perfect direct read</span>;
     <code>S_P = −½</code> is a <span class="flip">perfect mirror</span> — the probe is <strong>anti-correlated</strong>, reading
     the diary exactly <strong>flipped</strong>. Recovery is <code>½ + |S_P|</code>; the <strong>sign</strong> tells you whether to read the
     probe straight or invert it.</p>
-  </div>
-
-  <h2><span class="n">2</span>Dead in every definite order (the premise)</h2>
-  <p>Before claiming recovery we prove there is nothing to recover under ordinary causality. Both definite query orders
+</div>
+<h2><span class="n">2</span>Dead in every definite order (the premise)</h2>
+<p>Before claiming recovery we prove there is nothing to recover under ordinary causality. Both definite query orders
   leave the probe blank:</p>
-  <div class="callout">
-    <p class="clabel">Premise — the diary is dead (F83 NO-TEST discipline)</p>
-    <p class="tight"><code>S_P(X-then-Z) = 0.0026</code>, <code>S_P(Z-then-X) = 0.0065</code> — both a coin-flip, ~40×
+<div class="callout">
+<p class="clabel">Premise — the diary is dead (F83 NO-TEST discipline)</p>
+<p class="tight"><code>S_P(X-then-Z) = 0.0026</code>, <code>S_P(Z-then-X) = 0.0065</code> — both a coin-flip, ~40×
     below the effect and well inside the frozen <strong>±0.05 premise band</strong>. If a definite order could read the diary,
     there would be no claim to make. It can't.</p>
-  </div>
-
-  <h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
-  <div class="gate">
-    <span class="g">PREMISE</span><span class="r"><code>|S_P(definite)| &lt; 0.05</code> both orders — diary dead. <span class="pass">PASS</span> (0.0026, 0.0065).</span>
-    <span class="g">N1 / H1</span><span class="r">Herald registers indefinite order; minus-branch rate near theory 0.25. <span class="pass">PASS</span> (0.284).</span>
-    <span class="g">W_MIRROR</span><span class="r"><strong>headline, sign theory-fixed:</strong> <code>S_P(minus) + 5·SE &lt; −0.05</code> — recovery must appear as a <strong>negative</strong> (phase-flipped) excursion. <span class="pass">PASS</span> (−0.238, 56σ).</span>
-    <span class="g">W_PLUS</span><span class="r"><code>S_P(plus) − 5·SE &gt; +0.05</code> — a positive (direct) recovery on the plus branch. <span class="pass">PASS</span> (+0.182, 59σ).</span>
-  </div>
-  <p><strong>Why the sign matters.</strong> W_MIRROR is <strong>sign-fixed</strong>: theory predicts the minus branch returns the diary
+</div>
+<h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
+<div class="gate">
+<span class="g">PREMISE</span><span class="r"><code>|S_P(definite)| &lt; 0.05</code> both orders — diary dead. <span class="pass">PASS</span> (0.0026, 0.0065).</span>
+<span class="g">N1 / H1</span><span class="r">Herald registers indefinite order; minus-branch rate near theory 0.25. <span class="pass">PASS</span> (0.284).</span>
+<span class="g">W_MIRROR</span><span class="r"><strong>headline, sign theory-fixed:</strong> <code>S_P(minus) + 5·SE &lt; −0.05</code> — recovery must appear as a <strong>negative</strong> (phase-flipped) excursion. <span class="pass">PASS</span> (−0.238, 56σ).</span>
+<span class="g">W_PLUS</span><span class="r"><code>S_P(plus) − 5·SE &gt; +0.05</code> — a positive (direct) recovery on the plus branch. <span class="pass">PASS</span> (+0.182, 59σ).</span>
+</div>
+<p><strong>Why the sign matters.</strong> W_MIRROR is <strong>sign-fixed</strong>: theory predicts the minus branch returns the diary
   <strong>anti-correlated</strong> (S_P = −½). A positive excursion of the same size would <strong>fail</strong> the gate. The phase flip
   isn't a nuisance sign — it <strong>is</strong> the predicted signature, and the hardware produced exactly it.</p>
-
-  <h2><span class="n">4</span>The measured data</h2>
-  <p>60,000 shots per definite arm; switch branches split by the heralded control (+ = 71.6%, − = 28.4%). "Recovery" =
+<h2><span class="n">4</span>The measured data</h2>
+<p>60,000 shots per definite arm; switch branches split by the heralded control (+ = 71.6%, − = 28.4%). "Recovery" =
   <code>½ + |S_P|</code>, with the arrow showing read-direct vs read-flipped.</p>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>Diary recovery score S_P per arm: definite orders dead, switch branches recover</caption>
-    <thead><tr><th scope="col">arm</th><th scope="col">S_P</th><th scope="col">vs ±0.05 band</th><th scope="col">recovery</th><th scope="col">theory S_P</th></tr></thead>
-    <tbody>
-      <tr class="dead"><td>X-then-Z (definite)</td><td>0.0026</td><td>inside — dead</td><td>~50% (coin-flip)</td><td>0</td></tr>
-      <tr class="dead"><td>Z-then-X (definite)</td><td>0.0065</td><td>inside — dead</td><td>~50% (coin-flip)</td><td>0</td></tr>
-      <tr class="plus"><td>switch → + branch (72%)</td><td><strong>+0.182 ± 0.002</strong></td><td><strong>+59σ</strong></td><td class="direct"><strong>68% · read direct →</strong></td><td>+1/6</td></tr>
-      <tr class="minus"><td>switch → − branch (28%)</td><td><strong>−0.238 ± 0.003</strong></td><td><strong>−56σ</strong></td><td class="flip"><strong>74% · flip the bits ⇄</strong></td><td>−1/2</td></tr>
-    </tbody>
-  </table>
-  </div>
-
-  <h2><span class="n">5</span>The bonus that rides free — who gets to know?</h2>
-  <p>The same run measures a second quantity for nothing: <code>S_E2</code>, whether the <strong>environment</strong> (a second
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">arm</th><th role="columnheader" scope="col">S_P</th><th role="columnheader" scope="col">vs ±0.05 band</th><th role="columnheader" scope="col">recovery</th><th role="columnheader" scope="col">theory S_P</th></tr></thead>
+<tbody role="rowgroup">
+<tr class="dead" role="row"><td data-label="arm" role="cell">X-then-Z (definite)</td><td data-label="S_P" role="cell">0.0026</td><td data-label="vs ±0.05 band" role="cell">inside — dead</td><td data-label="recovery" role="cell">~50% (coin-flip)</td><td data-label="theory S_P" role="cell">0</td></tr>
+<tr class="dead" role="row"><td data-label="arm" role="cell">Z-then-X (definite)</td><td data-label="S_P" role="cell">0.0065</td><td data-label="vs ±0.05 band" role="cell">inside — dead</td><td data-label="recovery" role="cell">~50% (coin-flip)</td><td data-label="theory S_P" role="cell">0</td></tr>
+<tr class="plus" role="row"><td data-label="arm" role="cell">switch → + branch (72%)</td><td data-label="S_P" role="cell"><strong>+0.182 ± 0.002</strong></td><td data-label="vs ±0.05 band" role="cell"><strong>+59σ</strong></td><td class="direct" data-label="recovery" role="cell"><strong>68% · read direct →</strong></td><td data-label="theory S_P" role="cell">+1/6</td></tr>
+<tr class="minus" role="row"><td data-label="arm" role="cell">switch → − branch (28%)</td><td data-label="S_P" role="cell"><strong>−0.238 ± 0.003</strong></td><td data-label="vs ±0.05 band" role="cell"><strong>−56σ</strong></td><td class="flip" data-label="recovery" role="cell"><strong>74% · flip the bits ⇄</strong></td><td data-label="theory S_P" role="cell">−1/2</td></tr>
+</tbody>
+</table>
+</div>
+<h2><span class="n">5</span>The bonus that rides free — who gets to know?</h2>
+<p>The same run measures a second quantity for nothing: <code>S_E2</code>, whether the <strong>environment</strong> (a second
   recorder at the horizon) learns the diary. It depends entirely on <strong>which query is asked first</strong>:</p>
-  <div class="callout">
-    <p class="clabel">S_E2 — the environment's knowledge is order-dependent</p>
-    <p class="tight"><strong>X-first:</strong> <code>S_E2 = 0.453</code> (theory 0.5) — the environment learns it. &nbsp;
+<div class="callout">
+<p class="clabel">S_E2 — the environment's knowledge is order-dependent</p>
+<p class="tight"><strong>X-first:</strong> <code>S_E2 = 0.453</code> (theory 0.5) — the environment learns it.  
     <strong>Z-first:</strong> <code>S_E2 = 0.007</code> (theory 0.0) — the environment learns <strong>nothing</strong>. Ask the wrong
     question first and <strong>nobody</strong> — not the probe, not the environment — gets to know. Causal order decides who
     holds the fact.</p>
-  </div>
-
-  <h2><span class="n">6</span>Scope &amp; caveats</h2>
-  <ul>
-    <li><strong>Analog, not a black hole.</strong> This is the Hayden–Preskill <strong>scrambler model</strong> on a chip, not a literal
+</div>
+<h2><span class="n">6</span>Scope &amp; caveats</h2>
+<ul>
+<li><strong>Analog, not a black hole.</strong> This is the Hayden–Preskill <strong>scrambler model</strong> on a chip, not a literal
     event horizon. The claim is about information recovery in the model's information structure.</li>
-    <li><strong>Heralded / post-selected.</strong> The mirror lives on the <strong>minus branch</strong> (28% of runs), selected by the
+<li><strong>Heralded / post-selected.</strong> The mirror lives on the <strong>minus branch</strong> (28% of runs), selected by the
     switch-control herald. The herald is measured independently of the diary read, so it is a genuine selection, not a
     fit.</li>
-    <li><strong>Recovery is partial, and reported as such.</strong> <code>S_P(minus) = −0.238</code> is 48% of the ideal −½ —
+<li><strong>Recovery is partial, and reported as such.</strong> <code>S_P(minus) = −0.238</code> is 48% of the ideal −½ —
     the probe disagrees with the diary <strong>74%</strong> of the time, so flipping recovers 74%, not 100%. The certified
     result is the sign-fixed excursion past the band (56σ); the depth-vs-theory is reported.</li>
-    <li><strong>Resource-scoped &amp; same telescope as F98.</strong> This is the same certified apparatus that carried the
+<li><strong>Resource-scoped &amp; same telescope as F98.</strong> This is the same certified apparatus that carried the
     Darwinism hull; the loophole discipline (F82/F83 lineage) is inherited.</li>
-  </ul>
-
-  <h2><span class="n">7</span>Provenance</h2>
-  <ul>
-    <li><strong>Grade file:</strong> <code>results/exp121_grade.json</code> · <strong>Job record:</strong> <code>results/exp121_jobids.json</code> · <strong>Job:</strong> d9aabnt2su3c739lcam0</li>
-    <li><strong>Pre-registration:</strong> <code>experiments/exp121-hp-switch-preregistration.md</code> · <strong>Band:</strong> ±0.05 (frozen) · <strong>Ideals:</strong> S_P = +1/6 (plus), −1/2 (minus)</li>
-    <li><strong>Backend:</strong> ibm_marrakesh (Heron r2) · <strong>Shots:</strong> 60,000/definite arm</li>
-    <li><strong>Sibling telescope:</strong> F98 (the objectivity hull) — byte-identical skeleton, site, window</li>
-    <li><strong>Family:</strong> Horizons-2 Q3 · lineage F82/F83 (loophole &amp; NO-TEST discipline)</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
-
-  </main>
-  <footer class="foot">
-    <span>MEASURED · <b style="color:var(--violet)">F99</b> · job d9aabnt2su3c739lcam0 · ibm_marrakesh</span>
-    <span class="sp"></span>
-    <a href="./spec.md">Markdown</a>
-    <a href="../scoreboard/">Scoreboard</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+</ul>
+<h2><span class="n">7</span>Provenance</h2>
+<ul>
+<li><strong>Grade file:</strong> <code>results/exp121_grade.json</code> · <strong>Job record:</strong> <code>results/exp121_jobids.json</code> · <strong>Job:</strong> d9aabnt2su3c739lcam0</li>
+<li><strong>Pre-registration:</strong> <code>experiments/exp121-hp-switch-preregistration.md</code> · <strong>Band:</strong> ±0.05 (frozen) · <strong>Ideals:</strong> S_P = +1/6 (plus), −1/2 (minus)</li>
+<li><strong>Backend:</strong> ibm_marrakesh (Heron r2) · <strong>Shots:</strong> 60,000/definite arm</li>
+<li><strong>Sibling telescope:</strong> F98 (the objectivity hull) — byte-identical skeleton, site, window</li>
+<li><strong>Family:</strong> Horizons-2 Q3 · lineage F82/F83 (loophole &amp; NO-TEST discipline)</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
+</main>
+<footer class="foot">
+<span>MEASURED · <b style="color:var(--violet)">F99</b> · job d9aabnt2su3c739lcam0 · ibm_marrakesh</span>
+<span class="sp"></span>
+<a href="./spec.md">Markdown</a>
+<a href="../scoreboard/">Scoreboard</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.

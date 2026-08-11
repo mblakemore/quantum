@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — STATIC / Zero-Capacity Channel Activation (F83) | The Quantum Museum</title>
-<meta name="description" content="Complete specification for the STATIC bot duel: information transmitted through two channels that each provably destroy everything. 0.0436 bits/use through two completely depolarizing (zero-capacity) channels, R̄ = +0.5034 ± 0.0091 = 55.6σ above the causal value of 0, on ibm_marrakesh. Finding F83, Exp106, job d983ek52su3c739ip92g.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Complete specification for the STATIC bot duel: information transmitted through two channels that each provably destroy everything. 0.0436 bits/use through two completely depolarizing (zero-capacity) channels, R̄ = +0.5034 ± 0.0091 = 55.6σ above the causal value of 0, on ibm_marrakesh. Finding F83, Exp106, job d983ek52su3c739ip92g." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -94,6 +95,41 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this page's table cannot fit a 320px window at any padding — measured —
+     so dropping the min-width still left it scrolling and still cutting values mid-number. Below
+     430px it STACKS: one card per row, each value carrying its column label, no scroll, nothing to
+     cut. The explicit ARIA roles are the point: display:block strips a table's implicit roles, so a
+     CSS-only stack trades a screen-reader regression for a sighted-reader fix. thead is CLIPPED,
+     not display:none, so it is still announced; ::before labels are not announced, so nothing is
+     read twice. The caption rule is here because a caption keeps display:table-caption inside a
+     block table and shrink-to-fits to ~104px, wrapping its sentence to 14 characters a line. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 14px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -127,129 +163,117 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· STATIC bot duel exhibit</a>
-    <span class="wingtag">· Wing II · Indefinite Causal Order</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet</p>
-    <h1>A message through <span class="hl">two perfect erasers</span> — capacity from zero</h1>
-    <div class="idline">
-      <span><strong>Finding</strong> F83</span>
-      <span><strong>Experiment</strong> Exp106 (zero-capacity channel activation, N=2)</span>
-      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
-      <span><strong>Job</strong> d983ek52su3c739ip92g</span>
-    </div>
-    <span class="verdict-chip"><span aria-hidden="true">✓</span> CAPACITY ACTIVATED — 0.0436 bits/use, R̄ = +0.5034 ± 0.0091 = 55.6σ above zero</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This sheet is the source-of-truth specification behind the interactive exhibit. The classic bot in the game is not
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· STATIC bot duel exhibit</a>
+<span class="wingtag">· Wing II · Indefinite Causal Order</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet</p>
+<h1>A message through <span class="hl">two perfect erasers</span> — capacity from zero</h1>
+<div class="idline">
+<span><strong>Finding</strong> F83</span>
+<span><strong>Experiment</strong> Exp106 (zero-capacity channel activation, N=2)</span>
+<span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+<span><strong>Job</strong> d983ek52su3c739ip92g</span>
+</div>
+<span class="verdict-chip"><span aria-hidden="true">✓</span> CAPACITY ACTIVATED — 0.0436 bits/use, R̄ = +0.5034 ± 0.0091 = 55.6σ above zero</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This sheet is the source-of-truth specification behind the interactive exhibit. The classic bot in the game is not
   weak — it is <strong>as good as any machine, strategy, or intelligence can ever be</strong> under ordinary cause-and-effect,
   and that best-possible score is a coin flip. The quantum bot's edge traces to a single public job ID and a frozen
   pre-registration. <strong>Note on numbering:</strong> this exhibit and its cited job <code>d983ek52su3c739ip92g</code> are the
   <strong>N=2 finding, F83 (Exp106)</strong> — the two-channel version of zero-capacity channel activation.</p>
-
-  <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p>A secret — RED or BLUE — is sent through <strong>two censor machines</strong>. Each censor turns whatever enters it into
+<h2><span class="n">1</span>The idea, in plain language</h2>
+<p>A secret — RED or BLUE — is sent through <strong>two censor machines</strong>. Each censor turns whatever enters it into
   pure random static; each is a <strong>completely depolarizing channel</strong>, individually of <strong>exactly zero capacity</strong>.
   Run them in either order, alternate them, flip coins between orders — a theorem says <strong>exactly zero</strong> information
   survives. Not "very little": zero. The control experiment measured it: <code>0.00012 bits</code>.</p>
-  <div class="callout">
-    <p class="clabel">The loophole</p>
-    <p class="tight">A quantum computer runs the two censors in a <strong>superposition of both orders at once</strong> —
+<div class="callout">
+<p class="clabel">The loophole</p>
+<p class="tight">A quantum computer runs the two censors in a <strong>superposition of both orders at once</strong> —
     genuinely neither-first-and-both. Then a whisper of the secret survives: <strong>0.0436 bits per use, measured</strong>,
     <code>55.6σ</code> away from "impossible." The edge does not come from cleverness; it comes from the <strong>order of
     events itself</strong> being quantum.</p>
-  </div>
-
-  <h2><span class="n">2</span>What we measure — where the bit lives</h2>
-  <p>The quantum bot reads two things per round: a <strong>stamp</strong> (the order-control qubit, UP or DOWN) and a <strong>die</strong>
+</div>
+<h2><span class="n">2</span>What we measure — where the bit lives</h2>
+<p>The quantum bot reads two things per round: a <strong>stamp</strong> (the order-control qubit, UP or DOWN) and a <strong>die</strong>
   (the message qubit, RED or BLUE). Its rule — measured, not invented — is <strong>stamp UP → trust the die; stamp DOWN →
   flip it</strong>. The measured per-round parameters:</p>
-  <ul>
-    <li>P(stamp UP) = <code>0.6214</code></li>
-    <li>given UP, the die matches the secret with probability <code>≈ 0.5944</code></li>
-    <li>given DOWN, the die <strong>mis</strong>matches with probability <code>≈ 0.6573</code></li>
-  </ul>
-  <p>That's a ~62% correct vote per round; 15 votes at ~62% compound to an ~83% decoded answer.</p>
-  <div class="callout">
-    <p class="clabel">The pre-registered signature</p>
-    <p class="tight">The message qubit <strong>by itself</strong> is still perfect static — no trace of the secret. So is the
+<ul>
+<li>P(stamp UP) = <code>0.6214</code></li>
+<li>given UP, the die matches the secret with probability <code>≈ 0.5944</code></li>
+<li>given DOWN, the die <strong>mis</strong>matches with probability <code>≈ 0.6573</code></li>
+</ul>
+<p>That's a ~62% correct vote per round; 15 votes at ~62% compound to an ~83% decoded answer.</p>
+<div class="callout">
+<p class="clabel">The pre-registered signature</p>
+<p class="tight">The message qubit <strong>by itself</strong> is still perfect static — no trace of the secret. So is the
     stamp by itself. The unconditioned target is <strong>fully depolarized even in the switch arm</strong>: the bit lives only in
     <strong>how the control and target move together</strong> — the control–target correlation. That is why the quantum bot must
     read both, and it is the signature the pre-registration required and confirmed.</p>
-  </div>
-
-  <h2><span class="n">3</span>Pre-registered gates</h2>
-  <div class="gate">
-    <span class="g">ACTIVATE</span><span class="r">Coherent-mutual-information rate strictly above the causal value of 0. <span class="pass">PASS</span> — R̄ = +0.5034 ± 0.0091, <strong>55.6σ</strong> above 0; 0.0436 bits/use.</span>
-    <span class="g">NULL</span><span class="r">Definite-order null arm measured DEAD on-chip. <span class="pass">PASS</span> — MI <strong>0.00012 bits</strong> (the theorem's exact zero, measured).</span>
-    <span class="g">SIGNATURE</span><span class="r">Unconditioned target fully depolarized even in the switch arm (bit only in the correlation). <span class="pass">PASS</span> — confirmed as pre-registered.</span>
-  </div>
-
-  <h2><span class="n">4</span>The measured data</h2>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+</div>
+<h2><span class="n">3</span>Pre-registered gates</h2>
+<div class="gate">
+<span class="g">ACTIVATE</span><span class="r">Coherent-mutual-information rate strictly above the causal value of 0. <span class="pass">PASS</span> — R̄ = +0.5034 ± 0.0091, <strong>55.6σ</strong> above 0; 0.0436 bits/use.</span>
+<span class="g">NULL</span><span class="r">Definite-order null arm measured DEAD on-chip. <span class="pass">PASS</span> — MI <strong>0.00012 bits</strong> (the theorem's exact zero, measured).</span>
+<span class="g">SIGNATURE</span><span class="r">Unconditioned target fully depolarized even in the switch arm (bit only in the correlation). <span class="pass">PASS</span> — confirmed as pre-registered.</span>
+</div>
+<h2><span class="n">4</span>The measured data</h2>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>Zero-capacity channel activation: switch-arm rate, bits transmitted, and definite-order null</caption>
-    <thead><tr><th scope="col">quantity (ibm_marrakesh · Exp106)</th><th scope="col">measured</th><th scope="col">causal value</th></tr></thead>
-    <tbody>
-      <tr class="hi"><td>switch-arm rate R̄</td><td class="hw">+0.5034 ± 0.0091</td><td>0 (exactly)</td></tr>
-      <tr class="hi"><td>information transmitted</td><td class="hw">0.0436 bits/use</td><td>0 bits</td></tr>
-      <tr><td>significance above zero</td><td class="hw">55.6σ</td><td>—</td></tr>
-      <tr><td>definite-order null arm (MI)</td><td class="dead">0.00012 bits</td><td>0 (dead)</td></tr>
-      <tr><td>P(stamp UP)</td><td class="hw">0.6214</td><td>—</td></tr>
-      <tr><td>P(die matches | UP)</td><td class="hw">0.5944</td><td>0.5 (static)</td></tr>
-      <tr><td>P(die mismatches | DOWN)</td><td class="hw">0.6573</td><td>0.5 (static)</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p>Each censor is individually zero-capacity, and <strong>every causally-separable composition of the two is provably
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">quantity (ibm_marrakesh · Exp106)</th><th role="columnheader" scope="col">measured</th><th role="columnheader" scope="col">causal value</th></tr></thead>
+<tbody role="rowgroup">
+<tr class="hi" role="row"><td data-label="quantity (ibm_marrakesh · Exp106)" role="cell">switch-arm rate R̄</td><td class="hw" data-label="measured" role="cell">+0.5034 ± 0.0091</td><td data-label="causal value" role="cell">0 (exactly)</td></tr>
+<tr class="hi" role="row"><td data-label="quantity (ibm_marrakesh · Exp106)" role="cell">information transmitted</td><td class="hw" data-label="measured" role="cell">0.0436 bits/use</td><td data-label="causal value" role="cell">0 bits</td></tr>
+<tr role="row"><td data-label="quantity (ibm_marrakesh · Exp106)" role="cell">significance above zero</td><td class="hw" data-label="measured" role="cell">55.6σ</td><td data-label="causal value" role="cell">—</td></tr>
+<tr role="row"><td data-label="quantity (ibm_marrakesh · Exp106)" role="cell">definite-order null arm (MI)</td><td class="dead" data-label="measured" role="cell">0.00012 bits</td><td data-label="causal value" role="cell">0 (dead)</td></tr>
+<tr role="row"><td data-label="quantity (ibm_marrakesh · Exp106)" role="cell">P(stamp UP)</td><td class="hw" data-label="measured" role="cell">0.6214</td><td data-label="causal value" role="cell">—</td></tr>
+<tr role="row"><td data-label="quantity (ibm_marrakesh · Exp106)" role="cell">P(die matches | UP)</td><td class="hw" data-label="measured" role="cell">0.5944</td><td data-label="causal value" role="cell">0.5 (static)</td></tr>
+<tr role="row"><td data-label="quantity (ibm_marrakesh · Exp106)" role="cell">P(die mismatches | DOWN)</td><td class="hw" data-label="measured" role="cell">0.6573</td><td data-label="causal value" role="cell">0.5 (static)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Each censor is individually zero-capacity, and <strong>every causally-separable composition of the two is provably
   zero by channel algebra</strong> — so the definite-order null arm reading 0.00012 bits is the theorem's exact zero,
   measured. The switch arm's 0.0436 bits is a resource ordinary cause-and-effect cannot produce.</p>
-
-  <h2><span class="n">5</span>Scope &amp; caveats</h2>
-  <ul>
-    <li><strong>Zero-capacity channel activation — the specific channel and resource.</strong> The channels here are <strong>two
+<h2><span class="n">5</span>Scope &amp; caveats</h2>
+<ul>
+<li><strong>Zero-capacity channel activation — the specific channel and resource.</strong> The channels here are <strong>two
     completely depolarizing channels</strong>, each individually of exactly zero capacity. The claim is that the quantum
     switch's coherent superposition of their two orders <strong>activates</strong> a nonzero transmission rate (0.0436 bits/use,
     N=2). It is a statement about <strong>these zero-capacity channels under indefinite order</strong>, not a general channel or
     a speed-up.</li>
-    <li><strong>Device-characterized, not device-independent.</strong> The devices are trusted and characterized; every threshold
+<li><strong>Device-characterized, not device-independent.</strong> The devices are trusted and characterized; every threshold
     traces to a public job ID and a frozen pre-registration. A web page can replay any numbers — the demo itself proves
     nothing; the <strong>theorem</strong> does (no definite/mixed/adaptive order transmits anything), and a real quantum computer
     produced the switch column.</li>
-    <li><strong>The bit is in the correlation.</strong> Neither the message qubit nor the stamp alone carries the secret — only
+<li><strong>The bit is in the correlation.</strong> Neither the message qubit nor the stamp alone carries the secret — only
     the control–target correlation does. The unconditioned target is fully depolarized even in the switch arm.</li>
-    <li><strong>N=2 is this exhibit's finding.</strong> This is the two-channel instance (F83). Its cited job is the F83/Exp106
+<li><strong>N=2 is this exhibit's finding.</strong> This is the two-channel instance (F83). Its cited job is the F83/Exp106
     run; the N=3 three-channel extension is a separate later finding and is not the resource shown here.</li>
-  </ul>
-
-  <h2><span class="n">6</span>Provenance</h2>
-  <ul>
-    <li><strong>Finding:</strong> F83 · <strong>Experiment:</strong> Exp106 (N=2 capacity activation) · <strong>Backend:</strong> ibm_marrakesh (Heron r2)</li>
-    <li><strong>Job:</strong> <code>d983ek52su3c739ip92g</code> · frozen pre-registration · results <code>results/exp106_hw_results.json</code>, <code>results/exp106_jobids.json</code></li>
-    <li><strong>Headline:</strong> R̄ = +0.5034 ± 0.0091 = 55.6σ above the causal value of 0; 0.0436 bits/use; null arm MI 0.00012 bits</li>
-    <li><strong>LIVE mode:</strong> the exhibit can consume fresh measured shots from your own free IBM Quantum job (see the exhibit's setup link) — the same job family, live</li>
-    <li><strong>Family:</strong> Indefinite causal order — capacity form; sibling of the Quantum Switch (F73–F77) and the causal game (F82)</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
-
-  </main>
-  <footer class="foot">
-    <span>MEASURED · <b style="color:var(--cyan)">F83</b> · job d983ek52su3c739ip92g · ibm_marrakesh</span>
-    <span class="sp"></span>
-    <a href="./spec.md">Markdown</a>
-    <a href="../scoreboard/">Scoreboard</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+</ul>
+<h2><span class="n">6</span>Provenance</h2>
+<ul>
+<li><strong>Finding:</strong> F83 · <strong>Experiment:</strong> Exp106 (N=2 capacity activation) · <strong>Backend:</strong> ibm_marrakesh (Heron r2)</li>
+<li><strong>Job:</strong> <code>d983ek52su3c739ip92g</code> · frozen pre-registration · results <code>results/exp106_hw_results.json</code>, <code>results/exp106_jobids.json</code></li>
+<li><strong>Headline:</strong> R̄ = +0.5034 ± 0.0091 = 55.6σ above the causal value of 0; 0.0436 bits/use; null arm MI 0.00012 bits</li>
+<li><strong>LIVE mode:</strong> the exhibit can consume fresh measured shots from your own free IBM Quantum job (see the exhibit's setup link) — the same job family, live</li>
+<li><strong>Family:</strong> Indefinite causal order — capacity form; sibling of the Quantum Switch (F73–F77) and the causal game (F82)</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
+</main>
+<footer class="foot">
+<span>MEASURED · <b style="color:var(--cyan)">F83</b> · job d983ek52su3c739ip92g · ibm_marrakesh</span>
+<span class="sp"></span>
+<a href="./spec.md">Markdown</a>
+<a href="../scoreboard/">Scoreboard</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.

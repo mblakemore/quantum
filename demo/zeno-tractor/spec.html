@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="theme-color" content="#04060c">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/><circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/></svg>'>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="#04060c" name="theme-color"/>
+<link href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"&gt;&lt;circle cx="16" cy="16" r="12" fill="none" stroke="%2362e6ff" stroke-width="2.5"/&gt;&lt;circle cx="16" cy="16" r="4.5" fill="%23e8f2ff"/&gt;&lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Full Spec Sheet — The Zeno Tractor Beam (F102 / Exp124) | The Quantum Museum</title>
-<meta name="description" content="Complete specification sheet for the Zeno Tractor Beam exhibit: the quantum Zeno effect pinning a qubit against a full π-rotation on IBM Heron, the QND-corrected cadence law [cos²(π/2N)]^N, the measured watch-cost frontier, pre-registered gates, the full measured data table, and the scope. Job d9ai9ku6hjac73fefdeg, ibm_marrakesh.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta content="Complete specification sheet for the Zeno Tractor Beam exhibit: the quantum Zeno effect pinning a qubit against a full π-rotation on IBM Heron, the QND-corrected cadence law [cos²(π/2N)]^N, the measured watch-cost frontier, pre-registered gates, the full measured data table, and the scope. Job d9ai9ku6hjac73fefdeg, ibm_marrakesh." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   /* House theme, per docs/museum-retheme-guide.md. This page previously loaded ../museum.css
      and carried the retired light/dark toggle; the exhibits were converted long ago and the
@@ -94,6 +95,41 @@
     .tbl-wrap table { min-width:0 }
     .tbl-wrap th, .tbl-wrap td { padding:9px 8px }
   }
+  /* task#24, second step: this page's table cannot fit a 320px window at any padding — measured —
+     so dropping the min-width still left it scrolling and still cutting values mid-number. Below
+     430px it STACKS: one card per row, each value carrying its column label, no scroll, nothing to
+     cut. The explicit ARIA roles are the point: display:block strips a table's implicit roles, so a
+     CSS-only stack trades a screen-reader regression for a sighted-reader fix. thead is CLIPPED,
+     not display:none, so it is still announced; ::before labels are not announced, so nothing is
+     read twice. The caption rule is here because a caption keeps display:table-caption inside a
+     block table and shrink-to-fits to ~104px, wrapping its sentence to 14 characters a line. */
+  @media (max-width: 430px){
+    .tbl-wrap{overflow-x:visible}
+    .tbl-wrap table{display:block}
+    .tbl-wrap caption{display:block;width:auto;text-align:left;padding:2px 12px 8px}
+    /* The standard visually-hidden recipe, so the header row stays in the accessibility tree as
+       columnheaders rather than being display:none'd out of it. NOT the fix for any overflow — I
+       first blamed this thead for ladder/spec's 15px and I was wrong: setting it display:none
+       changed the page width by zero. The real cause is named at the white-space rule below. */
+    .tbl-wrap thead{display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);border:0}
+    /* nowrap is omitted from the recipe and the cells are constrained instead — belt and braces
+       for a clipped row, not an overflow fix (see above). */
+    .tbl-wrap thead th{display:block;width:1px;max-width:1px;overflow:hidden;white-space:normal}
+    .tbl-wrap tbody{display:block}
+    .tbl-wrap tr{display:block;padding:8px 0}
+    .tbl-wrap tr+tr{border-top:1px solid var(--edge)}
+    /* white-space:normal is LOAD-BEARING. ladder/spec has `td.f{white-space:nowrap}` — a
+       finding-list cell deliberately kept on one line for the WIDE table — and stacked, that cell
+       could not wrap, ran to 318px inside a 286px card and pushed the PAGE 15px sideways at 320.
+       That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
+       anything that used to scroll harmlessly inside the wrapper now moves the page under the
+       reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
+      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
+      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+  }
   th, td { text-align:right; padding:9px 14px; border-bottom:1px solid var(--edge); font-variant-numeric:tabular-nums; }
   th:first-child, td:first-child { text-align:left; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
@@ -127,134 +163,122 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="doc">
-
-  <nav class="topbar" aria-label="Museum">
-    <a href="../">← The Quantum Museum</a>
-    <a href="./">· Zeno Tractor Beam exhibit</a>
-    <span class="wingtag">· Wing III · Foundations on Silicon</span>
-    <span class="sp"></span>
-  </nav>
-
-  <main id="main">
-  <header class="spec-head">
-    <p class="kicker">Full Specification Sheet</p>
-    <h1>The Zeno Tractor Beam, <span class="hl">measurement as a grip</span></h1>
-    <div class="idline">
-      <span><strong>Finding</strong> F102</span>
-      <span><strong>Experiment</strong> Exp124 (Zeno cadence law + frontier)</span>
-      <span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
-      <span><strong>Job</strong> d9ai9ku6hjac73fefdeg</span>
-      <span><strong>Wing</strong> III · Horizons-2 Q6</span>
-    </div>
-    <span class="verdict-chip"><span aria-hidden="true">✓</span> VERDICT — TRACTOR BEAM 92σ · LAW MATCH TO 0.5%</span>
-  </header>
-  <p style="margin:8px 0 0;"><a href="./spec.md" class="md-link" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
-
-  <p>This sheet is the complete, source-of-truth specification behind the interactive exhibit. Every number on the
+<nav aria-label="Museum" class="topbar">
+<a href="../">← The Quantum Museum</a>
+<a href="./">· Zeno Tractor Beam exhibit</a>
+<span class="wingtag">· Wing III · Foundations on Silicon</span>
+<span class="sp"></span>
+</nav>
+<main id="main">
+<header class="spec-head">
+<p class="kicker">Full Specification Sheet</p>
+<h1>The Zeno Tractor Beam, <span class="hl">measurement as a grip</span></h1>
+<div class="idline">
+<span><strong>Finding</strong> F102</span>
+<span><strong>Experiment</strong> Exp124 (Zeno cadence law + frontier)</span>
+<span><strong>Backend</strong> ibm_marrakesh (Heron r2)</span>
+<span><strong>Job</strong> d9ai9ku6hjac73fefdeg</span>
+<span><strong>Wing</strong> III · Horizons-2 Q6</span>
+</div>
+<span class="verdict-chip"><span aria-hidden="true">✓</span> VERDICT — TRACTOR BEAM 92σ · LAW MATCH TO 0.5%</span>
+</header>
+<p style="margin:8px 0 0;"><a class="md-link" href="./spec.md" style="font-family:var(--mono);font-size:12.5px;text-decoration:underline;">↓ Read this sheet as plain-text Markdown</a></p>
+<p>This sheet is the complete, source-of-truth specification behind the interactive exhibit. Every number on the
   exhibit page is drawn from here; every number here is drawn from the frozen grade file
   <code>results/exp124_grade.json</code> and its job record <code>results/exp124_jobids.json</code>. Nothing is
   hand-tuned for display.</p>
-
-  <h2><span class="n">1</span>The idea, in plain language</h2>
-  <p>"A watched pot never boils" is literally true in quantum mechanics. Measure a system often enough and you
+<h2><span class="n">1</span>The idea, in plain language</h2>
+<p>"A watched pot never boils" is literally true in quantum mechanics. Measure a system often enough and you
   <strong>freeze</strong> its evolution — this is the <strong>quantum Zeno effect</strong>. Here we point a full <code>π</code>-rotation
   at a qubit — a drive that, left alone, flips it all the way from ON to OFF — and then we <strong>watch it</strong> as it
   turns. Each measurement catches the qubit before it can rotate far and pulls it back toward ON. The act of looking
   is a <strong>tractor beam</strong>: the more often you watch, the more tightly the state is pinned.</p>
-  <p>But watching is not free. Every measurement is a slightly imperfect (QND) interaction that costs the qubit a
+<p>But watching is not free. Every measurement is a slightly imperfect (QND) interaction that costs the qubit a
   little coherence. So there is a <strong>frontier</strong>: watch faster and you hold tighter, until the per-glance cost
   cancels the extra grip and the survival stops climbing. We measure the pinning law and locate that optimal
   cadence.</p>
-  <div class="callout">
-    <p class="clabel">Scope, stated first</p>
-    <p class="tight">The quantum Zeno effect is <strong>textbook</strong> (Misra–Sudarshan 1977) and is credited as such. This
+<div class="callout">
+<p class="clabel">Scope, stated first</p>
+<p class="tight">The quantum Zeno effect is <strong>textbook</strong> (Misra–Sudarshan 1977) and is credited as such. This
     apparatus pins against <strong>coherent rotation</strong> — a driven π-flip — <strong>not</strong> against T1 relaxation (Markovian
     decay is cadence-invariant, so it could not be frozen by watching). The contribution here is the frozen,
     <strong>QND-corrected</strong> cadence-law match and the <strong>measured watch-cost frontier</strong>.</p>
-  </div>
-
-  <h2><span class="n">2</span>What we measure — the pinning law</h2>
-  <p>The qubit starts ON. A full <code>π</code>-drive is trying to flip it OFF. We insert <code>N</code> equally
+</div>
+<h2><span class="n">2</span>What we measure — the pinning law</h2>
+<p>The qubit starts ON. A full <code>π</code>-drive is trying to flip it OFF. We insert <code>N</code> equally
   spaced measurements ("looks") during that drive and record the <strong>survival</strong> — the fraction that stays ON. The
   ideal Zeno prediction is <code>[cos²(π/2N)]^N</code>: watch infinitely fast and the qubit never flips.</p>
-  <div class="callout">
-    <p class="clabel">The QND correction</p>
-    <p class="tight">Raw survival sits below the ideal law because each measurement itself costs a little. We measure
+<div class="callout">
+<p class="clabel">The QND correction</p>
+<p class="tight">Raw survival sits below the ideal law because each measurement itself costs a little. We measure
     the per-projection QND cost independently, <code>q = 0.987</code>, and divide it out. The corrected curve then
     matches the ideal Zeno law <code>[cos²(π/2N)]^N</code> to <strong>0.5%</strong> through <code>N = 8</code> — the law
     confirmed once the apparatus's own cost is removed explicitly, rather than absorbed into a fit.</p>
-  </div>
-  <p>The whole experiment uses <strong>zero two-qubit gates</strong> — the cheapest, shallowest flight of the campaign — and it
+</div>
+<p>The whole experiment uses <strong>zero two-qubit gates</strong> — the cheapest, shallowest flight of the campaign — and it
   produced its cleanest law match.</p>
-
-  <h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
-  <p>The decision rules were written and committed in <code>experiments/exp124-zeno-preregistration.md</code> before
+<h2><span class="n">3</span>Pre-registered gates (frozen before flight)</h2>
+<p>The decision rules were written and committed in <code>experiments/exp124-zeno-preregistration.md</code> before
   any data was taken. The grade script self-tested against synthetic outcomes and passed <strong>4/4</strong> before touching
   the real counts.</p>
-  <div class="gate">
-    <span class="g">G0</span><span class="r">Integrity guard: the no-drive control at cadence 8 must survive, <code>nodrive_8 &gt; 0.7</code>, else NO-TEST. <span class="pass">PASS</span>.</span>
-    <span class="g">W_TRACTOR</span><span class="r">Headline: <code>P(pinned_8) − P(unwatched_8) &gt; 0.3</code> at 5σ. <span class="pass">PASS</span> (realized <strong>0.644 − 0.020 = 0.624</strong>, <strong>92σ</strong>).</span>
-    <span class="g">W_CADENCE</span><span class="r">Support: watch faster ⇒ hold tighter, <code>P(pinned_8) − P(pinned_2) &gt; 0</code> at 5σ. <span class="pass">PASS</span> (realized <strong>0.644 − 0.246 = 0.398</strong>, <strong>87σ</strong>).</span>
-  </div>
-  <p>Both fire: the tractor beam holds the qubit far above the unwatched flip, and holding tightens monotonically with
+<div class="gate">
+<span class="g">G0</span><span class="r">Integrity guard: the no-drive control at cadence 8 must survive, <code>nodrive_8 &gt; 0.7</code>, else NO-TEST. <span class="pass">PASS</span>.</span>
+<span class="g">W_TRACTOR</span><span class="r">Headline: <code>P(pinned_8) − P(unwatched_8) &gt; 0.3</code> at 5σ. <span class="pass">PASS</span> (realized <strong>0.644 − 0.020 = 0.624</strong>, <strong>92σ</strong>).</span>
+<span class="g">W_CADENCE</span><span class="r">Support: watch faster ⇒ hold tighter, <code>P(pinned_8) − P(pinned_2) &gt; 0</code> at 5σ. <span class="pass">PASS</span> (realized <strong>0.644 − 0.246 = 0.398</strong>, <strong>87σ</strong>).</span>
+</div>
+<p>Both fire: the tractor beam holds the qubit far above the unwatched flip, and holding tightens monotonically with
   watch cadence. Registered priors were <strong>0.92</strong> (W_TRACTOR) and <strong>0.90</strong> (W_CADENCE); both hit.</p>
-
-  <h2><span class="n">4</span>The measured data</h2>
-  <p>Survival (fraction that stays ON) versus watch cadence <code>N</code>. Unwatched, the π-drive flips the qubit
+<h2><span class="n">4</span>The measured data</h2>
+<p>Survival (fraction that stays ON) versus watch cadence <code>N</code>. Unwatched, the π-drive flips the qubit
   almost completely; each added look pulls it back toward ON.</p>
-  <div class="tbl-wrap" tabindex="0">
-  <table>
+<div class="tbl-wrap" tabindex="0">
+<table role="table">
 <caption>Qubit survival vs watch cadence: Zeno tractor beam pinning against a π-drive</caption>
-    <thead><tr><th scope="col">watch cadence</th><th scope="col">survival (stays ON)</th><th scope="col">gap over unwatched</th><th scope="col">note</th></tr></thead>
-    <tbody>
-      <tr><td>unwatched</td><td class="off">0.020</td><td>—</td><td>π-drive flips it</td></tr>
-      <tr><td>N = 2</td><td class="meas">0.246</td><td>0.226</td><td>—</td></tr>
-      <tr><td>N = 4</td><td class="meas">0.498</td><td>0.478</td><td>fought to a draw</td></tr>
-      <tr class="hi"><td>N = 8</td><td class="meas"><strong>0.644</strong></td><td><strong>0.624</strong></td><td><strong>92σ · law match 0.5%</strong></td></tr>
-      <tr><td>N = 16</td><td class="meas">0.664</td><td>0.644</td><td>frontier · residual −0.012</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p>Survival climbs from <strong>2%</strong> unwatched to <strong>64%</strong> at cadence 8 — the tractor beam, <strong>92σ</strong> over the
+<thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">watch cadence</th><th role="columnheader" scope="col">survival (stays ON)</th><th role="columnheader" scope="col">gap over unwatched</th><th role="columnheader" scope="col">note</th></tr></thead>
+<tbody role="rowgroup">
+<tr role="row"><td data-label="watch cadence" role="cell">unwatched</td><td class="off" data-label="survival (stays ON)" role="cell">0.020</td><td data-label="gap over unwatched" role="cell">—</td><td data-label="note" role="cell">π-drive flips it</td></tr>
+<tr role="row"><td data-label="watch cadence" role="cell">N = 2</td><td class="meas" data-label="survival (stays ON)" role="cell">0.246</td><td data-label="gap over unwatched" role="cell">0.226</td><td data-label="note" role="cell">—</td></tr>
+<tr role="row"><td data-label="watch cadence" role="cell">N = 4</td><td class="meas" data-label="survival (stays ON)" role="cell">0.498</td><td data-label="gap over unwatched" role="cell">0.478</td><td data-label="note" role="cell">fought to a draw</td></tr>
+<tr class="hi" role="row"><td data-label="watch cadence" role="cell">N = 8</td><td class="meas" data-label="survival (stays ON)" role="cell"><strong>0.644</strong></td><td data-label="gap over unwatched" role="cell"><strong>0.624</strong></td><td data-label="note" role="cell"><strong>92σ · law match 0.5%</strong></td></tr>
+<tr role="row"><td data-label="watch cadence" role="cell">N = 16</td><td class="meas" data-label="survival (stays ON)" role="cell">0.664</td><td data-label="gap over unwatched" role="cell">0.644</td><td data-label="note" role="cell">frontier · residual −0.012</td></tr>
+</tbody>
+</table>
+</div>
+<p>Survival climbs from <strong>2%</strong> unwatched to <strong>64%</strong> at cadence 8 — the tractor beam, <strong>92σ</strong> over the
   unwatched flip. From <code>N = 8</code> to <code>N = 16</code> it barely tightens (64% → 66%): the
   <strong>watch-cost frontier</strong>. The <code>N = 16</code> residual of <strong>−0.012</strong> locates the optimal grip cadence —
   watch faster than this and each glance's cost starts eating the extra grip.</p>
-
-  <h2><span class="n">5</span>Scope &amp; caveats</h2>
-  <ul>
-    <li><strong>Coherent rotation, not relaxation.</strong> This pins the qubit against a driven <strong>π-rotation</strong>. It does
+<h2><span class="n">5</span>Scope &amp; caveats</h2>
+<ul>
+<li><strong>Coherent rotation, not relaxation.</strong> This pins the qubit against a driven <strong>π-rotation</strong>. It does
     <strong>not</strong> freeze T1 decay — Markovian relaxation is cadence-invariant and cannot be slowed by watching. The
     design correction was owned at freeze so the claim is not confused with a decay result.</li>
-    <li><strong>The effect is textbook; the measurement is the contribution.</strong> Misra–Sudarshan (1977) is credited for the
+<li><strong>The effect is textbook; the measurement is the contribution.</strong> Misra–Sudarshan (1977) is credited for the
     Zeno effect itself. What is new here is the <strong>QND-corrected law match</strong> (per-projection cost <code>q = 0.987</code>
     divided out, agreement to 0.5% through N=8) and the <strong>measured frontier</strong> at N=16.</li>
-    <li><strong>The frontier is a real, measured limit.</strong> The N=16 plateau (survival 0.664, residual −0.012 below N=8's
+<li><strong>The frontier is a real, measured limit.</strong> The N=16 plateau (survival 0.664, residual −0.012 below N=8's
     trend) is reported as the optimal cadence, not smoothed away — watching is beneficial only up to the point where
     its own cost cancels the gain.</li>
-    <li><strong>Cheapest apparatus of the campaign.</strong> Zero two-qubit gates, single-qubit circuit — a first for the
+<li><strong>Cheapest apparatus of the campaign.</strong> Zero two-qubit gates, single-qubit circuit — a first for the
     program — and it delivered the cleanest law match. The result does not depend on any delicate entangling gate.</li>
-  </ul>
-
-  <h2><span class="n">6</span>Provenance</h2>
-  <ul>
-    <li><strong>Grade file:</strong> <code>results/exp124_grade.json</code> · <strong>Job record:</strong> <code>results/exp124_jobids.json</code></li>
-    <li><strong>Pre-registration:</strong> <code>experiments/exp124-zeno-preregistration.md</code> · <strong>Builder:</strong> <code>experiments/exp124_zeno_sim.py::build</code></li>
-    <li><strong>Backend:</strong> ibm_marrakesh (Heron r2) · <strong>Apparatus:</strong> zero two-qubit gates (single-qubit, cheapest of the campaign)</li>
-    <li><strong>Self-test:</strong> grade script 4/4 PASS on synthetic outcomes before scoring real data · gate lint <code>experiments/exp124_gate_lint_spec.json</code></li>
-    <li><strong>Family:</strong> Horizons-2 Q6 (the completion) · sibling of the Twin Paradox (F100) and the Grandfather audit (F101)</li>
-  </ul>
-
-  <a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
-
-  </main>
-  <footer class="foot">
-    <span>MEASURED · <b style="color:var(--violet)">F102</b> · job d9ai9ku6hjac73fefdeg · ibm_marrakesh</span>
-    <span class="sp"></span>
-    <a href="./spec.md">Markdown</a>
-    <a href="../scoreboard/">Scoreboard</a>
-    <a href="https://github.com/mblakemore/quantum">Repository</a>
-  </footer>
-
+</ul>
+<h2><span class="n">6</span>Provenance</h2>
+<ul>
+<li><strong>Grade file:</strong> <code>results/exp124_grade.json</code> · <strong>Job record:</strong> <code>results/exp124_jobids.json</code></li>
+<li><strong>Pre-registration:</strong> <code>experiments/exp124-zeno-preregistration.md</code> · <strong>Builder:</strong> <code>experiments/exp124_zeno_sim.py::build</code></li>
+<li><strong>Backend:</strong> ibm_marrakesh (Heron r2) · <strong>Apparatus:</strong> zero two-qubit gates (single-qubit, cheapest of the campaign)</li>
+<li><strong>Self-test:</strong> grade script 4/4 PASS on synthetic outcomes before scoring real data · gate lint <code>experiments/exp124_gate_lint_spec.json</code></li>
+<li><strong>Family:</strong> Horizons-2 Q6 (the completion) · sibling of the Twin Paradox (F100) and the Grandfather audit (F101)</li>
+</ul>
+<a class="backlink" href="./"><span aria-hidden="true">←</span> Back to the interactive exhibit</a>
+</main>
+<footer class="foot">
+<span>MEASURED · <b style="color:var(--violet)">F102</b> · job d9ai9ku6hjac73fefdeg · ibm_marrakesh</span>
+<span class="sp"></span>
+<a href="./spec.md">Markdown</a>
+<a href="../scoreboard/">Scoreboard</a>
+<a href="https://github.com/mblakemore/quantum">Repository</a>
+</footer>
 </div>
 <script>
 // SCROLL AFFORDANCE (Dawn) — see .scrollhint in the stylesheet.
