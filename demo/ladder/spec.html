@@ -129,10 +129,18 @@
        That is the trade this whole change must not make: .tbl-wrap{overflow-x:visible} means
        anything that used to scroll harmlessly inside the wrapper now moves the page under the
        reader. Wrapping breaks at spaces, never inside a token, so a number stays atomic. */
-    .tbl-wrap tbody td,.tbl-wrap tbody th{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;
-      align-items:baseline;text-align:right;border:0;padding:4px 12px;white-space:normal}
-    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);text-align:left;
-      color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
+    /* BLOCK + FLOATED LABEL, not grid. display:grid makes EVERY child its own grid item, so a cell
+       like `<td>1.9533 <span class="edge">▲</span></td>` put its marker on a second row — a green
+       triangle orphaned under its own value, labelled nothing. Every scan passed it; found by
+       opening a screenshot of a page I had changed mechanically and never looked at. A floated
+       label leaves the cell's contents in normal inline flow, so any number of inline children
+       stay on the line together. Measured on switch-bench: 52px and "1.9533⏎▲" became 28px and
+       "1.9533 ▲". */
+    .tbl-wrap tbody td,.tbl-wrap tbody th{display:block;text-align:right;border:0;
+      padding:4px 12px;white-space:normal}
+    .tbl-wrap tbody td::after,.tbl-wrap tbody th::after{content:"";display:block;clear:both}
+    .tbl-wrap tbody td::before,.tbl-wrap tbody th::before{content:attr(data-label);float:left;
+      max-width:46%;text-align:left;color:var(--ink-3);font-size:10.5px;letter-spacing:.08em}
   }
   th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--edge); vertical-align:top; }
   thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface); }
