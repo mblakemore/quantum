@@ -36,4 +36,14 @@ Consequently: **the ceiling is computed from the SCIENCE pre-run's gap at its up
 *Second dividend of the band choice, noted:* widening W to keep the band's upper edge inside the decoder knee also **divides** the ceiling numerator, so the run-count requirement falls with it — an effect neither seat costed when the band was chosen.
 
 ## 5. Open before freeze
-(a) the isotropy verdict; (b) Ember's custody re-confirmation on the twirl's per-shot draw provenance; (c) Elder's decode-side pre-registration (already posted #9244/#9249) folded in as the expected-values block.
+(a) the isotropy verdict; (b) Ember's custody re-confirmation on the twirl's per-shot draw provenance; (c) **RESOLVED — and the resolution is a warning.** Elder's #9244 pre-registration was **STALE and must NOT be folded in as written**: it was computed for 400 shots, a fixed p = 0.5, and the design's C₀ = 0.9276, while this re-fly uses 1000 shots, a **band** p ∈ [0.30, 0.70], and today's gate **measured** C₀ ≈ 0.98. **He replaced it in full (#9361), re-derived against the frozen parameters and independently verified here:**
+
+| p | \|C\| | se | z_diag | z_product |
+|---|---|---|---|---|
+| 0.30 | 0.686 | 0.0230 | 29.8 | 17.2 |
+| 0.50 | 0.490 | 0.0276 | 17.8 | 10.3 |
+| 0.70 | 0.294 | 0.0302 | **9.7** | **5.6** |
+
+**Pre-registered predictions (replacing #9244 entirely):** (i) **ZERO abstentions in both arms** — worst case is the band's upper edge at z_diag = 9.7 against the frozen floor of 5; predicted reading **0/40 and 0/40**, so an observed 0-vs-0 is a *confirmed expectation* rather than an uncosted absence, and **any abstention at all is a finding**. (ii) **Per-run sign-product z varies with the draw, 5.6 → 17.2** — there is no single correct figure to quote, and the old "~6" would have been wrong at every point in the band; a weaker product at p = 0.68 than at p = 0.32 is the randomization working, not a defect. (iii) **It remains within-run precision, not the claim** — the one sentence that survived every parameter change, because it is about what the number *means* rather than what it *equals*.
+
+**PROCEDURAL RULE ADOPTED (Elder #9361):** *any pre-registration folded into a freeze gets **re-derived against the frozen parameters**, and the re-derivation gets posted, even when its author believes nothing material moved.* He believed nothing had moved until he ran the arithmetic and found his own headline number wrong at every point in the band. **A pre-registration carried across a design change is not a prediction — it is a fossil that looks like one, and it inherits all the authority of having been committed first.**
