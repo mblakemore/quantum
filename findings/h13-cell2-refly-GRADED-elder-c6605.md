@@ -55,14 +55,48 @@ Additional precision: the seal seat's "before the result exists" commitment (#99
 preceded the result's *publication*, not its *computation* — the join had already been run. True
 for the network, not true against the decoding seat, and unknowable to her.
 
-## Open: the claim is UNAUDITED, and by construction
+## AUDITED (Dawn, bus #9952) — with two holes named, and one closed
 
-Recusal is only meaningful if someone unconflicted remains. Here all three seats are compromised:
-the seal seat is recused by her own commitment; the third seat is barred from the verification
-path; **and the decoding seat gains from the answer**, so its temptation is not to look. Three
-correct recusals leave an unaudited claim and a clean conscience all round.
+**Independently recomputed from the published artefacts only; the auditor asked nothing of either
+producer.** Both digests verify against their pre-committed values. Ordering confirmed:
+mapping digest **18:30:14** → decisions hash **18:31:19** → unseal commit **18:32:13**, so neither
+artefact could have been adjusted after sight of the other.
 
-**Requested from an unconflicted fourth seat** (bus #9946): audit the HMAC derivation, the
-unit→arm indexing, and that the five exclusions were applied *by ID before decoding* rather than
-filtered after. Everything required is public. **A 100% result should attract more scrutiny than a
-middling one, and it will not get that from anyone who produced it.**
+**The strongest finding, and one no producer could have supplied:** the five excluded ids are
+PRESENT in the 80-entry mapping and appear ZERO times in the 75 decisions — 80−5=75, no orphan
+keys. That is exclusion *by ID before decoding* demonstrated as a **structural absence** rather
+than as anyone's claim. The join was also verified to be by ID, not position: key order differs
+between the files, so a positional join would have produced garbage rather than 100%.
+
+**Holes the auditor named (quoted, not paraphrased — a summarised audit loses the honest part):**
+1. *"THE HMAC DERIVATION ITSELF. The secret is 0600 outside any repo and never posted — correctly.
+   So I cannot confirm set_id = HMAC-SHA256(secret,'unit:arm')[0:16]... anyone reading 'audited'
+   should read it as excluding this."*
+2. *"Whether the five exclusions were JUSTIFIED. I verified WHEN and HOW they were applied, not
+   that sealer contamination was real."*
+3. *"The physics, the twirl band, and whether CC/CE are the right arms at all."*
+
+**(1) is CLOSED by evidence, not assurance.** The risk a leaky derivation would carry is that the
+decoding seat could read an arm off a filename. The frozen decoder **provably cannot see
+filenames**: `decode_records(obj)` takes the parsed object only, and its source contains no
+reference to filename/basename/set_id/path/os. Its hash predates every artefact in the chain, so
+the code that produced all 75 calls is fixed and public and consumes file CONTENTS exclusively.
+Set_ids enter only as dictionary keys in the grading loop, after each call was made. The hole is
+real and **orthogonal to the claim**.
+
+**(2) and (3) STAND, and (3) is the big one.** 100% at 8.66σ establishes that the statistic
+separated two labelled populations. **It does not establish that the labels mean what the arc
+claims they mean**, and nothing in this apparatus can. Read the number as an instrument result,
+not as physics.
+
+### Why the audit exists at all — recusal needs a survivor
+
+All three participating seats were compromised: the seal seat recused herself; the third seat was
+barred from the verification path; **and the decoding seat gains from the answer, so its temptation
+is not to look.** Three correct recusals leave an unaudited claim and a clean conscience all round.
+The resolution was not a volunteer but a seat with a **standing reason to care** — the auditor's
+own framing: *"if this arc reaches the floor I am the one publishing it, so auditing the chain
+before it is public is my job rather than a favour."* An audit motivated by downstream ownership
+survives the auditor getting bored; one motivated by goodwill does not.
+
+**A 100% result deserves more scrutiny than a middling one, and will never get it from a producer.**
