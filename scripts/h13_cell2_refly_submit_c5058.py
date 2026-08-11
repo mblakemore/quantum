@@ -48,7 +48,17 @@ def block(n_units, tag, rng):
     for u in range(n_units):
         p = float(rng.uniform(*BAND))
         w = {"I":1-3*p/4, "X":p/4, "Y":p/4, "Z":p/4}
-        sh = {t: max(1,int(round(SHOTS_CELL*w[t]))) for t in TWIRLS}
+        # LARGEST-REMAINDER allocation so the components sum to EXACTLY SHOTS_CELL.
+        # Naive per-component round() gave 692+103*3 = 1001 against a declared 1000 (Ember #9381,
+        # Elder #9382). The physics does not care; THE RECORD DOES — a pre-registered integer
+        # differing from a shipped one is how "the flown design was the frozen design" stops
+        # being checkable, and tonight has been one long argument that only the checkable
+        # version is worth having.
+        raw = {t: SHOTS_CELL*w[t] for t in TWIRLS}
+        sh = {t: int(raw[t]) for t in TWIRLS}
+        rem = SHOTS_CELL - sum(sh.values())
+        for t in sorted(TWIRLS, key=lambda t: raw[t]-int(raw[t]), reverse=True)[:rem]: sh[t]+=1
+        assert sum(sh.values()) == SHOTS_CELL, f"shot allocation {sh} sums to {sum(sh.values())}, not {SHOTS_CELL}"
         for b in BASES:
             for arm,mk in (("CE",ce),("CC",cc)):
                 for t in TWIRLS:

@@ -46,6 +46,23 @@ def g_band_arm_agreement(ce_diagonals, cc_diagonals, tol=0.05):
     return {"p_CE": round(pce,3), "p_CC": round(pcc,3), "gap": round(d,3),
             "verdict": "PASS (arms share p)" if d <= tol else "REFUSE (arms at different injection strengths)"}
 
+def g_band_spread(p_hats, declared=(0.30,0.70), se_run=0.0281):
+    """SPREAD clause (Elder #9382) — NON-OPTIONAL. G-BAND as first specified tested MEMBERSHIP,
+    and a CONSTANT p is a member of any band containing it. A fixed p means band width W = 0, and
+    the ceiling 1/2 + d/(2W) does not degrade — IT DIVIDES BY ZERO. Physically: with no
+    randomization the realized magnitudes are deterministic, an analyst holding the reference
+    distributions separates the arms WITH CERTAINTY, the ceiling is 1.0, and NO RUN COUNT CLEARS
+    IT. So the gate must verify the realized p_hat is actually a DISTRIBUTION over the band.
+    Uniform[0.30,0.70] has sd 0.1155; a constant p returns ~se_run (0.028)."""
+    import statistics as st
+    sd = st.pstdev(p_hats) if len(p_hats)>1 else 0.0
+    lo, hi = declared
+    expect = (hi-lo)/(12**0.5)
+    z = (expect - sd)/max(se_run/len(p_hats)**0.5, 1e-9)
+    return {"realized_sd": round(sd,4), "expected_sd": round(expect,4), "shortfall_sigma": round(z,1),
+            "verdict": "PASS (p varies across the band)" if sd >= 0.6*expect else
+                       "REFUSE (p_hat has no spread — W~0, the ceiling divides by zero)"}
+
 if __name__ == "__main__":
     print("G-BAND can-it-fire proof — BOTH directions, zero shots, real data:\n")
     cases = [
@@ -60,6 +77,14 @@ if __name__ == "__main__":
         got = "REFUSE" if r["verdict"].startswith("REFUSE") else "PASS"
         print(f"  {'✅' if got==want else '🔴'} {label:<44} p̂={r['p_hat_per_axis']} spread={r['axis_spread']:.3f} "
               f"mean={r['mean_p_hat']:.3f} -> {got:<7} (want {want})")
+    print("\n  SPREAD clause (Elder #9382) — can-it-fire, both directions:")
+    import numpy as _np
+    _rng=_np.random.default_rng(1)
+    for lab, ph, want in [
+        ("FIXED p = 0.4116 across 40 runs", [0.4116]*40, "REFUSE"),
+        ("uniform draws over [0.30,0.70]",  list(_rng.uniform(0.30,0.70,40)), "PASS")]:
+        r=g_band_spread(ph); got="REFUSE" if r["verdict"].startswith("REFUSE") else "PASS"
+        print(f"    {'✅' if got==want else '🔴'} {lab:<34} sd={r['realized_sd']:.4f} (expect {r['expected_sd']:.4f}) -> {got} (want {want})")
     print("\n  ARM-p AGREEMENT clause (Ember/Elder seam) — can-it-fire, both directions:")
     for lab, ce_d, cc_d, want in [
         ("the seam: CE at p=0.35, CC at p=0.65", [0.637,0.637,0.637], [0.343,-0.343,0.343], "REFUSE"),
