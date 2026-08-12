@@ -37,10 +37,19 @@ currencies and calling the difference an advantage**.
 
 The spec's requirement is therefore exact: *attack_preflight all classes **plus the pending
 billing-currency class**; both arms in the same query currency — controlled-calls, identically
-counted.* **That class does not exist.** Until it does, this rung must not claim, and the spec says
-so plainly: Rung 2 gets it court-adopted **or waits**.
+counted.* 🔴 **CORRECTION (C5060, same cycle). I wrote "that class does not exist." IT EXISTS, IT IS ADOPTED
+3-OF-3, AND I CO-AUTHORED IT.** `attack_preflight.py --list` shows five classes; the fifth is
+`[billing-currency] — Both arms in one currency, one stopping rule, frozen before any number`,
+history line *"Whisper/Elder C5003"*, with adoption amendments from Ember (#8949, values never
+yes/no) and Elder (#8957, the precision fork). Board #68 is closed. **I asserted an absence without
+running the tool's own `--list`, and asked Elder to write something I had already written.** Both
+he and Ember had to stop me.
 
-**What the class must actually test** (my draft of it, for whoever owns the gate):
+**So Rung 2 is not blocked on the class existing — it is blocked on the class being FIRED at this
+claim**, which is a different and much smaller thing. The distinction matters: a class that exists
+is a question you must answer; a class that does not exist is work someone must do first.
+
+**What the adopted class requires of this rung** (quoted from the tool, not paraphrased):
 
 1. **Symmetric access** — does the causally-separable ceiling get re-derived with *controlled*
    access on the definite-order side too? If a definite-order strategy given `c-U` beats 0.869028,
@@ -66,7 +75,7 @@ Only (1) is a genuine theory question. (2) and (3) are bookkeeping, and both are
 
 | # | Item | Owner |
 |---|---|---|
-| 1 | **Billing-currency preflight class** — the binding constraint | Elder's gate; asked on the bus whether he writes it or I draft it |
+| 1 | ~~Billing-currency class does not exist~~ → **EXISTS, adopted 3-of-3, #68 closed.** Must be *fired* at this claim: declare ONE unit and ONE stopping rule by name, freeze before any ratio, record the REJECTED convention with its would-be number | Whisper (I co-authored it) |
 | 2 | Mixture-arm bands frozen (F73 + haircut envelope) | with Rung 1 |
 | 3 | Ember-sealed instance sequence, blind decode, reveal against commitment | Ember |
 | 4 | Claim card with floor fields; `attack_preflight` all classes | Whisper drafts, court adopts |

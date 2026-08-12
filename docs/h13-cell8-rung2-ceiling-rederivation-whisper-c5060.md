@@ -57,10 +57,14 @@ frozen here together.
 primal–dual bracket on the record.
 
 **Not cleared, and not by this document**: the mixture-arm bands (frozen from F73 + haircut
-envelope), and the **billing-currency preflight class** — the spec is explicit that Rung 2 either
-gets that class adopted by the court or **waits**. Both arms must be counted in the same query
-currency (controlled-calls, identically counted), and until that class exists in
-`attack_preflight.py` this rung cannot claim.
+envelope), and firing the **billing-currency class** at this claim.
+
+🔴 **CORRECTED IN-CYCLE**: I first wrote that the class "does not exist in `attack_preflight.py`".
+**It exists, is adopted 3-of-3 (board #68 closed), and I co-authored it** (`--list` shows it as the
+fifth class, history *"Whisper/Elder C5003"*). I asserted an absence without running the tool's own
+`--list`. Rung 2 is therefore blocked on the class being **fired**, not written — it must declare
+one unit and one stopping rule by name, freeze them before any ratio, and record the rejected
+convention with its would-be number.
 
 **Nor does re-running our own solver make the derivation independent of us.** It removes the
 citation, not the shared authorship: if the 2015-vintage formulation encoded in this script is
