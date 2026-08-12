@@ -1,0 +1,150 @@
+{
+ "cell": "H13-Cell2-REFLY-isotropy-gate",
+ "board": 77,
+ "account": "IBMQ_ALT3",
+ "backend": "ibm_marrakesh",
+ "job_id": "d9t730npemts73cuh45g",
+ "shots_per_twirl": {
+  "I": 12500,
+  "X": 2500,
+  "Y": 2500,
+  "Z": 2500
+ },
+ "p_depol": 0.5,
+ "labels": [
+  {
+   "arm": "CE",
+   "basis": "X",
+   "twirl": "I"
+  },
+  {
+   "arm": "CC",
+   "basis": "X",
+   "twirl": "I"
+  },
+  {
+   "arm": "CE",
+   "basis": "X",
+   "twirl": "X"
+  },
+  {
+   "arm": "CC",
+   "basis": "X",
+   "twirl": "X"
+  },
+  {
+   "arm": "CE",
+   "basis": "X",
+   "twirl": "Y"
+  },
+  {
+   "arm": "CC",
+   "basis": "X",
+   "twirl": "Y"
+  },
+  {
+   "arm": "CE",
+   "basis": "X",
+   "twirl": "Z"
+  },
+  {
+   "arm": "CC",
+   "basis": "X",
+   "twirl": "Z"
+  },
+  {
+   "arm": "CE",
+   "basis": "Y",
+   "twirl": "I"
+  },
+  {
+   "arm": "CC",
+   "basis": "Y",
+   "twirl": "I"
+  },
+  {
+   "arm": "CE",
+   "basis": "Y",
+   "twirl": "X"
+  },
+  {
+   "arm": "CC",
+   "basis": "Y",
+   "twirl": "X"
+  },
+  {
+   "arm": "CE",
+   "basis": "Y",
+   "twirl": "Y"
+  },
+  {
+   "arm": "CC",
+   "basis": "Y",
+   "twirl": "Y"
+  },
+  {
+   "arm": "CE",
+   "basis": "Y",
+   "twirl": "Z"
+  },
+  {
+   "arm": "CC",
+   "basis": "Y",
+   "twirl": "Z"
+  },
+  {
+   "arm": "CE",
+   "basis": "Z",
+   "twirl": "I"
+  },
+  {
+   "arm": "CC",
+   "basis": "Z",
+   "twirl": "I"
+  },
+  {
+   "arm": "CE",
+   "basis": "Z",
+   "twirl": "X"
+  },
+  {
+   "arm": "CC",
+   "basis": "Z",
+   "twirl": "X"
+  },
+  {
+   "arm": "CE",
+   "basis": "Z",
+   "twirl": "Y"
+  },
+  {
+   "arm": "CC",
+   "basis": "Z",
+   "twirl": "Y"
+  },
+  {
+   "arm": "CE",
+   "basis": "Z",
+   "twirl": "Z"
+  },
+  {
+   "arm": "CC",
+   "basis": "Z",
+   "twirl": "Z"
+  }
+ ],
+ "arm_gap": 0.01148,
+ "layout": {
+  "CE": 107,
+  "CC": [
+   54,
+   55
+  ]
+ },
+ "max_2q": 1,
+ "gate": "per arm, max pairwise |C_ii - C_jj| <= arm_gap + MDE  (isotropy of the twirled injection)",
+ "fit_gate": {
+  "remaining_at_submit": 80.0,
+  "est": 40.0
+ }
+}

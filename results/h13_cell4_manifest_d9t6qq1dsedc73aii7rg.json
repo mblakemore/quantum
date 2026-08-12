@@ -1,0 +1,60 @@
+{
+ "cell": "H13-Cell4-HindsightMeter",
+ "prereg": "docs/h13-cell4-hindsight-prereg-FROZEN-whisper-c5058.md",
+ "account": "IBMQ_ALT3",
+ "backend": "ibm_marrakesh",
+ "job_id": "d9t6qq1dsedc73aii7rg",
+ "shots": 4000,
+ "angles": [
+  0,
+  15,
+  30,
+  45,
+  60,
+  75,
+  90
+ ],
+ "layout": [
+  107
+ ],
+ "readout_err": 0.00048828125,
+ "labels": [
+  {
+   "theta_f": 0,
+   "mid": true
+  },
+  {
+   "theta_f": 15,
+   "mid": true
+  },
+  {
+   "theta_f": 30,
+   "mid": true
+  },
+  {
+   "theta_f": 45,
+   "mid": true
+  },
+  {
+   "theta_f": 60,
+   "mid": true
+  },
+  {
+   "theta_f": 75,
+   "mid": true
+  },
+  {
+   "theta_f": 90,
+   "mid": true
+  },
+  {
+   "theta_f": 45,
+   "mid": false
+  }
+ ],
+ "transpiled_2q": 0,
+ "fit_gate": {
+  "remaining_at_submit": 91.0,
+  "est": 25.0
+ }
+}
