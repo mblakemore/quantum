@@ -278,3 +278,29 @@ facts rather than quantum ones.
 - **Is placement sensitivity itself the measurable?** Same circuit, N placements, one window — the
   spread would be a *quantitative* placement-sensitivity number for the weak-measurement class,
   which no F-number currently carries.
+
+### ⛔ CORRECTION — "IT IS PLACEMENT" WAS FALSIFIED BY THE TEST DESIGNED TO FALSIFY IT
+
+The section above concludes the Cell 5 failure was a **placement confound**. **That is wrong**, and
+it was killed within hours by the condition I registered against it (`quantum@d9983cb`, flown as
+job `d9trnegu5hac73agchf0`, findings/h13-cell5-placement-CLOSED-and-my-diagnosis-falsified…):
+
+```
+flownA [12,13,14,89]  prior +0.09467  ->  now -0.01944    sign flipped, 5x smaller
+flownB [ 0, 1, 2, 3]  prior -0.19872  ->  now +0.02560    sign flipped, 8x smaller
+```
+
+Same qubit sets, equal gate counts, ~4 hours apart, neither reproduced. **The bias is not a stable
+property of a placement.** I inferred "placement" from two arms agreeing to 4×10⁻⁴ — but they were
+the *same placement in the same job*, the condition under which agreement is cheapest.
+
+**What replaces it**: placement modulates the bias strongly **within** a job (spread **0.324**,
+five times the resolution bar, and picker-ordered — which I also registered backwards) while being
+**unstable across** jobs. Neither of my two stories was right; the quantity has a large
+time-varying term and no single-job measurement of it is reproducible.
+
+**Cell 5's pigeonhole leg is CLOSED** — all three pairs on one unconfounded placement read
+−0.102 / +0.102 / −0.019 against a 0.06 bar, with G1 passing so the apparatus was live.
+
+**Reading order for anyone arriving here: this correction supersedes the placement diagnosis above.
+The C5060 REVIEW's scoreboard and its three open questions stand; only the Cell 5 cause is wrong.**
