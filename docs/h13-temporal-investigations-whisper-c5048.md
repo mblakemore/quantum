@@ -195,3 +195,86 @@ A prospective ninth wing, *Temporal Investigations*: the negativity dial (Cell 3
 ---
 
 *The DTI does not ask whether something strange happened to time. It asks for the reading on the meter, the verdict of the court, and the serial number of the instrument — and it files the case either way.*
+
+---
+
+## C5060 REVIEW — three cells dead, five results certified, and the binding constraint moved
+
+**Creator ask (2026-08-12)**: note the diagnostic, review the arc, ask what it reshapes.
+
+### The scoreboard
+
+| | Cell | Verdict | Cost |
+|---|---|---|---|
+| ✅ | **2 — Causal Compass** ⭐ | 75/75 = 100.0%, 8.66σ, three non-author seats | flown |
+| ✅ | **3 — Temporal Negativity** | min-eig −0.478, **293σ** | flown |
+| ✅ | **4 — Hindsight Meter** | all gates PASS, 28–75σ, law-matched | flown |
+| ✅ | **5 — Hardy leg** | impossible event at 8.7%, 15.7σ | flown |
+| ✅ | **Temporal Steering** | W_TS 2.8301 vs ceiling 1, **146σ** | **ZERO QPU** — post-hoc on Cell 3's data |
+| 🔴 | **5 — pigeonhole leg** | FLOWN, FAILED (see below — the diagnosis has changed) | 27 QPU-s |
+| 🔴 | **6 + 6b — Silent Tripwire** | RETIRED: premise gate flips on a transpiler seed | 0 |
+| 🔴 | **7 — Speed of Subspace** | NO-GO: informative and measurable regimes disjoint | 0 |
+| ⏸ | **1 — Kelvin Timeline** | never flown, gated on T0.2 | — |
+| ⏸ | **8 — Switch Under Oath** | Rung 1 tank-blocked, Rung 2 open (#72) | — |
+
+### 🔴 THE CELL 5 DIAGNOSIS HAS CHANGED — IT IS PLACEMENT, NOT THE NOISE MODEL
+
+The failure write-up blamed a full-noise sim that under-predicted hardware by 15–35×. **Reviewing
+the arc surfaced the actual dominant term.** The three pair-arms flew in one job with no pinned
+`initial_layout`, so the transpiler chose placements per circuit:
+
+```
+pair (0,1)  qubits [12,13,14,89]   bias +0.09467
+pair (0,2)  qubits [12,13,14,89]   bias +0.09508     <- SAME placement, agree to 0.0004
+pair (1,2)  qubits [ 0, 1, 2, 3]   bias -0.19872     <- DIFFERENT placement, opposite sign
+```
+
+**Two arms sharing a placement agree to 4×10⁻⁴; the arm on a different placement differs by 0.29
+and flips sign.** Drift cannot explain it — all four arms were in one job, and drift is common-mode
+within a calibration window (Finding 07: ±7pp across 24h). The pair-to-pair comparison **is** the
+pigeonhole claim, and it was confounded with physical qubit choice.
+
+This is the campaign's oldest known effect (F58/F65–70: **placement ≈ 73% of witness decline**) and
+Finding 07's prescription verbatim — *"the path forward is hardware-aware compilation, not
+algorithmic correction layers."* I flew a placement-sensitive comparison without pinning placement.
+
+**AND FINDING 07 KILLS ONE OF MY TWO STATED REOPENING ROUTES.** I proposed "error mitigation on the
+post-selected ensemble". All four standard techniques (DD, PT, TREM, ZNE) were measured as **net
+detractors** on this chip class. That route is closed and was closed before I wrote it.
+
+### The ε-sweep diagnostic, and why ε = 0 is the wrong control
+
+Proposed after the failure: an identity-coupling arm to measure the apparatus's own zero. **Checked
+before flying it — ε = 0 transpiles to ZERO two-qubit gates** while ε ∈ {0.01, 0.05, 0.25} all give
+4. So an ε=0 arm measures SPAM only, would come back clean, and would under-report the very bias it
+was built to find. The same zero-angle-cancellation the Cell 7 cone detector taught.
+
+**The correct diagnostic, now second in line behind placement**: sweep ε ∈ {0.01, 0.05, 0.25} at
+fixed gate count and **pinned identical layout**. Bias constant across ε ⇒ SPAM/readout; bias
+scaling with ε ⇒ the weak-measurement coupling leaks on this device, which would reach Cell 4's
+machinery too.
+
+### What this reshapes
+
+**1. The marginal return has moved from flying to re-analysing.** The arc's cheapest result is also
+its second-largest: temporal steering at **146σ for zero QPU**, from a frozen protocol applied to
+Cell 3's existing data. Every cell flown since has failed or been retired. Ten+ H13 jobs are banked.
+*What else will the vault answer?* — this is now the highest expected-value question in the arc.
+
+**2. Gate design is worth more than flights.** Cells 6 and 7 cost nothing and correctly prevented
+two bad flights. Cell 5 cost 27 s and its most valuable output is a placement confound, not physics.
+
+**3. The binding constraint is not the physics, the ideas, or the tank — it is the
+simulator-to-hardware gap, and it now has a name: placement.** Three cells died at three layers
+(seed-dependent gate, unhardware-able estimator, unpinned placement), and all three are compilation
+facts rather than quantum ones.
+
+### Open questions worth figuring out
+
+- **Does Cell 5 survive a pinned quiet placement?** Same circuits, `initial_layout` pinned via the
+  F58/F70 picker, all arms on one placement. Cheap, and the two same-placement arms already agreed
+  to 4×10⁻⁴ — the reproducibility is there. **This reopens a cell I had closed.**
+- **What else does the banked data answer?** The 146σ route, repeated: new frozen protocol, old data.
+- **Is placement sensitivity itself the measurable?** Same circuit, N placements, one window — the
+  spread would be a *quantitative* placement-sensitivity number for the weak-measurement class,
+  which no F-number currently carries.
