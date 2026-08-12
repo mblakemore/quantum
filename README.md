@@ -90,6 +90,27 @@ The natural opposite of the no-go games: those certify a classical/causal limit 
 |---|---|---|
 | **The replicator's legal limit — the optimal universal cloning ceiling (5/6) certified**: the best possible copier makes two copies each at fidelity **exactly 5/6 ≈ 83.3% for every input state** (no-cloning's quantitative teeth). On silicon the optimal cloner sits **flat across all three bases** (Z 0.8265 / Y 0.8121 / X 0.8047, spread **0.0218**) a hair below the ceiling and never exceeding it. A pre-registered **cheat** beats 5/6 on one basis (Z 0.9911) but **pays on the conjugate** (X 0.4995): the only way to beat the ceiling somewhere is the way to get caught elsewhere — the cheat's basis-spread 0.49 vs the optimal's 0.02 is a **24× detector tell**. No-cloning made a measurement | **F110** | [finding](findings/F110-exp131-optimal-cloning-ceiling-no-cloning-cheat-detector-whisper-c4670-ember-numbered-c4152.md) · [pre-reg](experiments/exp131-cloning-preregistration.md) |
 
+### Certified limits — what *this hardware* cannot do (the H10 negatives)
+
+The section above certifies limits the universe places on quantum. These certify limits the *chip*
+places on us — and they are the most-used numbers in the repository, because every arc since has
+been priced against them. All three flights below returned **negative** verdicts; all three were
+flown in August 2026 and written up in the same pass, and the write-up changed what two of them were
+believed to say.
+
+| Result | Verdict | Where |
+|---|---|---|
+| **The Time Flip** — a compiled superposed-time-direction arm wins at **0.99533 against an in-house SDP definite-direction ceiling of 0.919746 — 113.6σ over the bound**, ceiling independently co-checked. **And the registered verdict is DOES NOT HOLD**: the switch apparatus-health control failed, sitting 7.7σ below its correct value and only 2.9σ above a *computed* single-fault value. Under the control band as originally sealed this flight would have passed all five gates and shipped that 113.6σ headline; a **pre-data** amendment that tightened both bands against computed faults is the only reason it did not | **DOES NOT HOLD** | [finding](findings/h10-b1-time-flip-DOES-NOT-HOLD-whisper-c5060.md) · [pre-reg](docs/h10-b1-prereg-whisper-c5018.md) |
+| **Heat Backward** — can heat flow cold→hot when two bodies start correlated? The **uncorrelated control landed on its prediction** (+0.13695 measured vs +0.1308 predicted, 22σ), so the apparatus is verified working; against that calibration the correlated arm is **five times smaller than theory** (−0.00522 vs −0.0262) at only 2.27σ — a direction, not a reversal. The mutual-information ledger shows the correlations **were** consumed, at more than twice the predicted rate, while delivering a fifth of the predicted energy | **NOT HELD** | [finding](findings/h10-b4-heat-backward-NOT-HELD-whisper-c5060.md) · [pre-reg](docs/h10-b4-prereg-whisper-c5017.md) |
+| **Entanglement Harvesting from the vacuum** — negativity **dead on every arm** (−0.0 where 0.0488 was registered), with three independent legs agreeing the circuit had depolarized: detector excitation at 0.63 where theory says 0.063, field energy of the wrong sign, and a light cone running **backwards**. Its product control *passed* — predicting zero and measuring zero on a chip returning zero for everything. **A control whose correct answer is zero cannot distinguish a working apparatus from a dead one**; this is the counter-example behind the campaign's positive-and-missable control rule | **DOES NOT HOLD** | [finding](findings/h10-c2-vacuum-harvest-DOES-NOT-HOLD-whisper-c5060.md) · [pre-reg](docs/h10-c2-prereg-whisper-c5018.md) |
+
+**What the negatives bought — the standing depth budgets.** Vacuum Harvest and the C1 Winding Meter
+are the two measurements that fixed the campaign's planning ceilings: **~250 two-qubit gates for
+many-body survival** and **~475 for interferometric contrast** (alongside the ~1000-CZ uniform-noise
+wall and the ~150-gate synthesis wall). Every pre-registration since is priced against them,
+including three H13 cells this month. *A measurement that establishes where the hardware stops is
+not a failed experiment — it is the reason later experiments were priced honestly.*
+
 ### The computational scoreboard — the shallow-circuit separation, on silicon (a *different kind* of result)
 
 The one scoreboard the campaign had **not** touched, opened — but it is not the same currency as the bound-beats above. There is exactly one proven quantum-advantage separation that needs **no** hardness conjecture and lives at shallow depth: **Bravyi–Gosset–König (2018)** — a *constant-depth* quantum circuit solves the 2D Hidden Linear Function problem while any bounded-fan-in classical circuit needs depth Ω(log n). That separation is **asymptotic**; at a single n=4 instance there is *no* beaten classical bound (a laptop solves n=4 trivially). So this certifies the theorem's **apparatus running on silicon**, not an advantage margin — the complement to F54's measured deep-circuit wall, and distinct from a raw speedup (still depth-walled). The solver's **NISQ reach** was then laddered: it holds strong-majority-valid **through n=9** (F114, no boundary in range, O(1) logical depth throughout) — graceful erosion, not the F85 inversion.
