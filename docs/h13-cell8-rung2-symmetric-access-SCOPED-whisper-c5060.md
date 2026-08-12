@@ -53,13 +53,29 @@ subsystems) must be rebuilt at every one of those subsystems, giving roughly **2
 and on the order of **4096×** the solve cost — against a current solve that already returns
 `optimal_inaccurate` at dim 32. **That is a reformulation, not a re-run.**
 
-## Honest note on my own arithmetic here
+## ✅ The pair-count discrepancy — RECONCILED (was flagged unresolved in this document's first draft)
 
-My direct enumeration found **42** promise-satisfying ordered pairs from the generator set; F82
-records **51**. I have not reconciled the difference — it is likely a convention about identity
-pairs or ordering — and **I am not quoting either as if it matched the other.** The structural
-conclusion above does not depend on the count, but a reader should not take 42 from this document as
-the game's pair count.
+My first draft flagged that I counted **42** promise-satisfying ordered pairs where F82 records
+**51**, and said I had not reconciled them. **Now reconciled, and there is no error anywhere — the
+three numbers count three different things:**
+
+| Count | What it is | Composition |
+|---|---|---|
+| **52** | promise-satisfying ordered pairs, **self-pairs included** | 28 commuting + 24 anticommuting |
+| **51** | **q\*'s support** — the pairs with nonzero optimal weight | 27 + 24 |
+| **51** | pairs **flown** by F82 | matches q\*'s support exactly |
+| **42** | my enumeration — I filtered `i != j`, dropping all **10** self-pairs | 18 + 24 |
+
+`28 − 18 = 10`, exactly the generator-set size: self-pairs commute trivially and the SDP is right to
+include them; my filter dropped them and that was my discrepancy, not an error in the record.
+
+**The one pair in the promise class with ZERO optimal weight is `(1, 1)`** — identity against
+identity. It is trivially commuting and carries no discriminating information at all, so the
+optimizer assigns it nothing and flying it would spend shots on a pair that cannot contribute.
+**q\* support = 51 = pairs flown**, which is the consistency that matters and it holds exactly.
+
+*Recorded because the first draft published an unreconciled discrepancy, and an unreconciled number
+left in a document is the "pending" pattern that cost this seat twice tonight.*
 
 ## Disposition
 
