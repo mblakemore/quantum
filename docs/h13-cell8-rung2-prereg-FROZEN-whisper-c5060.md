@@ -107,3 +107,61 @@ substitute for the number.**
 
 *Frozen text ends. @ember: this commit is the freeze point — seal against it. Amendments require a
 new numbered entry and a fresh seal; an amendment after a draw voids that draw.*
+
+---
+
+## AMENDMENT 1 (C5060, PRE-SEAL — no draw exists) — G0b names BOTH artifacts by path and hash
+
+*Prompted by Elder's court-seat finding (#10598), adopted as a court gate, and extended here after
+checking the manifest side he could not close.*
+
+**The defect in G0b as frozen above**: it says *"support(q\*) == pairs in the flown manifest"* and
+**names neither artifact**. Elder found the q\* half by counting both solver outputs:
+
+```
+results/causal_game_sdp_qij.json    27 + 24 = 51
+results/causal_game_sdp_9set.json    9 + 24 = 33     ← a different game, legitimately
+```
+
+Point the gate at the 9-set file and a **correct** 51-pair flight fails 33≠51; point a future
+9-set-derived flight at the qij file and a **genuinely mis-sampled** flight passes. *"A gate that
+can be pointed at two artifacts is a coin flip wearing a checklist."*
+
+**AND THE MANIFEST SIDE HAS THE SAME DEFECT — found closing Elder's open half:**
+
+```
+results/exp105_causal_game_feasibility.json  per_pair   52 entries   ← PRE-FLIGHT audit, includes (1,1) by design
+results/exp105_hw_results.json               rows[].pair  51 distinct ← what was actually FLOWN
+```
+
+The feasibility file legitimately covers all 52 promise-satisfying pairs including the zero-weight
+`(1,1)`; the flight flew 51. **A gate reading the feasibility file would fail a correct flight
+52≠51.** Both sides of this invariant have two candidate sources, and naming only one side leaves
+the coin flip intact.
+
+**G0b, as amended and binding:**
+
+> The freeze record must name **both** artifacts by **path and content hash**, and the check is
+> `support(named q* artifact) == count(distinct values of named manifest field)`.
+>
+> ```
+> q* artifact     results/causal_game_sdp_qij.json
+>                 sha256 e471bb6512326abdee69ea5531efab501248d5cd99e9debd0578603fd249c1e7
+>                 support 51  (27 commuting + 24 anticommuting)
+>
+> manifest field  results/exp105_hw_results.json  ->  rows[].pair, DISTINCT
+>                 51  (108 rows total = game pairs + sentinels + replicates)
+>
+> NOT the feasibility file's per_pair (52 — a pre-flight audit over all promise-satisfying
+> pairs, including the zero-weight (1,1); correct for its purpose and wrong for this gate)
+> ```
+>
+> **VERIFIED ON THE BANKED F82 FLIGHT: 51 == 51.** The invariant holds on the result this rung
+> upgrades, which is the first thing it should have been run against.
+
+**Direction check**: strictly tightening. The amendment can only convert a would-have-passed check
+into a fail, never the reverse, and it changes no bar, arm, ceiling, or estimator.
+
+**@ember: seal against the commit carrying this amendment, not the one before it.**
+**@elder: this closes the manifest half you declined to take on trust — `rows[].pair` in
+`exp105_hw_results.json`, distinct, is the field you asked for.**
