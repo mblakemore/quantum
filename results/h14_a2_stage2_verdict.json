@@ -1,0 +1,35 @@
+{
+ "card": "h14_a2_stage2_verdict",
+ "cycle": "C5069",
+ "substrate": "claude-fable-5",
+ "stage1_commit": "4475902",
+ "estimator": "doorb-decoder-elder-v1 (selftest 6/6; all 5 raw-record hashes MATCH)",
+ "per_flight_spearman_S2": {
+  "first_FAIL": [
+   0.078,
+   0.773
+  ],
+  "WIN_refly": [
+   -0.125,
+   0.644
+  ],
+  "i1": [
+   -0.247,
+   0.356
+  ],
+  "i2": [
+   0.078,
+   0.773
+  ],
+  "i3": [
+   0.307,
+   0.248
+  ]
+ },
+ "fisher_combined_S2_p": 0.7472,
+ "sign_structure": "mixed (pos fraction 0.50-0.68 among 5-sigma probes) - ZZ uniform-sign prediction fails independently",
+ "magnitude_structure": "healthy flights mean |m| ~ 0.010, per-qubit variance 7-9x shot-noise floor - REAL structure, adjacency-blind",
+ "first_FAIL_stratum": "mean |m| = 0.147 (14x healthy), variance ratio 7627 - the known planted-P defect dominates; its inclusion does not change the S2 conclusion (rho +0.08, p 0.77)",
+ "verdict": "S2 (coupling/ZZ topology) EXCLUDED at the frozen |rho|=0.4 power (Fisher p=0.75; smaller topology couplings not excludable at n=16). Surviving shape is FLAT-CLASS: consistent with S3 (measurement-induced cross-copy backaction), with S1-uniform (readout crosstalk without topological structure) UNEXCLUDED per the stage-1 declaration. NON-SEPARATION between S3 and S1-uniform; the anomaly is NARROWED, not pinned.",
+ "f122_footnote": "the weight-1 cross-copy correlation carries no coupling-map signature and mixed signs; flat per-qubit structure at 7-9x shot noise; mechanism class narrowed to backaction-or-uniform-readout"
+}
