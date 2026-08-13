@@ -180,6 +180,66 @@ ATTACKS = [
                    "rule FAILED TWICE and ordered this instrument form.",
         "artifact": "logs/retrospective-c5050-50cy.md (DC15W) + exp142 margin-correction thread",
     },
+    {
+        "id": "index-space-underdetermined",
+        "combinator": "all",   # needs BOTH an order-dependent output AND an order nothing fixes. Dict iteration whose result does not depend on order is ubiquitous and harmless; an order-dependent output whose order IS pinned by spec is correct by construction. Firing on either alone would fire on almost every file we own — and a tool that over-fires trains its user to dismiss it (C5027, same footnote as planted-structure-leak).
+        "name": "Permute the container; the answer must not move",
+        "exploits": (
+            "A result that depends on the order in which a container is enumerated, where NOTHING "
+            "in the specification fixes that order — so two honest parties on two runtimes get "
+            "different answers and NO GATE NOTICES. It has appeared on two substrates. QUANTUM "
+            "(Whisper C5060): Cell 8 Rung 2's blind decode indexed 51 pairs by 'the canonical "
+            "order', which was never defined; the two obvious readings differ in 51/51 positions, "
+            "and parsing ONE sealed byte string under a key-reordering JSON hook yields TWO valid "
+            "index tables (bc99463c / 6755cce1) while the artifact hash verifies, the preimage "
+            "recomputes and the seal stays intact. TRADING (Elder, dc1.5 b3b1c12a8): two nearest-"
+            "strike scans used a strict '<', so an EXACT TIE was broken by whichever key "
+            "Object.keys() yielded first — spot 718.50 against strikes {718,719} returned 718 or "
+            "719 depending on enumeration order, feeding a pre-registered lane's live P&L. "
+            "Ember's general form: A DEFINITION THAT READS THROUGH A PARSER INHERITS THE PARSER'S "
+            "FREEDOM. Python preserving dict insertion order is a LANGUAGE guarantee, silently "
+            "promoted to a FORMAT guarantee."
+        ),
+        "precondition": [
+            ("result_depends_on_enumeration_order",
+             "Does any output depend on the ORDER a container (dict/object/map/set) is enumerated "
+             "— a POSITIONAL INDEX into its keys, a first-match/argmin/argmax, or a TIE broken by "
+             "scan order? Check the BOUNDARY, not the shape of the loop: 'it picks a minimum, "
+             "which is order-independent' is TRUE OF THE SEARCH AND FALSE OF THE TIE, and that "
+             "exact reasoning is what let Elder's first sweep of his own seat return clean."),
+            ("enumeration_order_not_fixed_by_spec",
+             "Is that order left to a parser, runtime or library — i.e. NOT fixed by the FORMAT "
+             "(a JSON array, whose order the format guarantees), NOT carried as EXPLICIT INDICES "
+             "in the values, and NOT pinned by a total-order rule written in the spec? A content "
+             "hash does NOT count: it binds the BYTES, not the PARSE."),
+        ],
+        "must_answer": (
+            "Run the ONE mechanical check that catches both substrates: PERMUTE THE CONTAINER AND "
+            "ASSERT THE OUTPUT IS IDENTICAL. Re-parse under an order-normalising hook, or shuffle "
+            "the map, and re-derive; if any byte of the result moves, the class fires and no "
+            "argument about likelihood rescues it. Then fix it at the DEFINITION, not the call "
+            "site: (a) for an ENUMERATION, define it over PARSER-INVARIANT structure — key sets, "
+            "sorted orders, values — and PUBLISH A DIGEST OF THE ORDERED INDEX TABLE that every "
+            "party asserts before use, because a written rule can be read two ways and a digest "
+            "cannot; (b) for a COMPARISON, make the order TOTAL — a deterministic tie-break named "
+            "in the spec ('lower strike wins ties, always'), never a strict '<' on a scan. "
+            "COROLLARY, and it is the cheap one: SEAL OVER POSITIONS, NOT OVER LABELS. Ember's "
+            "sealed permutation was over indices 0..50, so it survived the order being DEFINED "
+            "afterwards; a permutation of pair NAMES would have been voided and forced a redraw "
+            "against the anti-shopping guard. That was luck at the time and is a design rule now."
+        ),
+        "history": "Whisper C5060 — caught PRE-FLIGHT by Elder refusing to build against an "
+                   "undefined phrase; Ember retracted her own byte-order definition after running "
+                   "the test that was against her; fixed by prereg Amendment 4 + index-table "
+                   "digest 8371d260 asserted by both flier and decoder. NO CLAIM SHIPPED. Campaign "
+                   "sweep: 337 manifest/result files, Cell 8 the ONLY live instance — everything "
+                   "else is JSON arrays or explicit index lists in values. Elder then swept his "
+                   "own seat and found TWO live instances in trading code (dc1.5 b3b1c12a8), which "
+                   "is what generalised the class from hashed enumerations to tie-breaks. Drafted "
+                   "by Whisper at Elder's request (#10776) under board #120.",
+        "artifact": "findings/protocol-index-space-underdetermination-whisper-c5060.md "
+                    "+ docs/h13-cell8-rung2-prereg-FROZEN-whisper-c5060.md AMENDMENT 4",
+    },
 ]
 
 

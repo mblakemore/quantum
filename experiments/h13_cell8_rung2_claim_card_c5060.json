@@ -10,14 +10,18 @@
   "ratio_against_simulation": "no",
   "no_problem_specific_search": "no",
   "arms_billed_in_different_units": "no",
-  "stopping_rules_differ_or_unit_unfrozen": "no"
+  "stopping_rules_differ_or_unit_unfrozen": "no",
+  "result_depends_on_enumeration_order": "yes",
+  "enumeration_order_not_fixed_by_spec": "no"
  },
  "_answer_notes": {
   "structure_public": "YES and deliberately so: the generator set and the optimal distribution q* are both published. This is a DISCRIMINATION task with no planted secret to leak \u2014 the ceiling IS the best strategy available given everything public, computed over the whole separable class rather than assumed.",
   "repeated_shots_fixed_randomness": "YES \u2014 1,000 shots per FIXED ordered pair. Answered yes because it is true, not because it is harmless. Whether it is harmless is exactly what the class exists to make me argue, and that argument is in the finding rather than in this field.",
   "baseline_denied_speedups": "NO \u2014 the SDP cone covers fixed order, classical mixtures of orders, AND dynamical (outcome-dependent) order. The baseline is given every causally-separable strategy that exists.",
   "no_problem_specific_search": "NO \u2014 the SDP IS the exhaustive optimisation over the separable class; it is a search, and it returned 0.869028 with a primal-dual gap of 2.12e-08.",
-  "arms_billed_in_different_units": "NO \u2014 one use of each unitary per shot, and the unit is FORCED by the process-matrix scenario (both arms are process matrices over [A_I,A_O,B_I,B_O,C_I]) rather than chosen. Declaration: docs/h13-cell8-rung2-billing-currency-declaration-whisper-c5060.md"
+  "arms_billed_in_different_units": "NO \u2014 one use of each unitary per shot, and the unit is FORCED by the process-matrix scenario (both arms are process matrices over [A_I,A_O,B_I,B_O,C_I]) rather than chosen. Declaration: docs/h13-cell8-rung2-billing-currency-declaration-whisper-c5060.md",
+  "result_depends_on_enumeration_order": "YES. Under Amendment 2 reading (B) the blind decode applies the sealed permutation as a relabelling of the flown order, so index i -> a specific ordered pair is load-bearing for the entire result. Answered yes deliberately: this is the precondition, not the defect.",
+  "enumeration_order_not_fixed_by_spec": "NO \u2014 fixed by AMENDMENT 4 (quantum@bb46926). Canonical order = lexicographic sort over the UNION of the key sets of q_star_commuting (27) and q_star_anticommuting (24) from results/causal_game_sdp_qij.json (sha256 e471bb65...), 0-based. This depends only on the KEY STRINGS, i.e. parser-invariant structure: verified stable (8371d260) under both a conformant and an order-normalising JSON parse, where the rejected byte-order rule forked (bc99463c vs 6755cce1) from the same verifying hash. The ordered index table is published as digest 8371d260... and BOTH flier and decoder must assert it before use."
  },
  "_billing_values": {
   "unit": "one use of each unitary per shot, at the process-abstraction level \u2014 FORCED by the scenario, not chosen: both arms are process matrices over [A_I,A_O,B_I,B_O,C_I] (scripts/causal_game_sdp.py:46), each party has one input and one output, and the control degree of freedom lives in C_I as part of the PROCESS rather than as an extra query billed to a party",
