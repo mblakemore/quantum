@@ -19,3 +19,11 @@ Per set: c_k = mean over its 400 records of (1−2a)(1−2b), k ∈ {XX, YY, ZZ}
 - **INDETERMINATE**: between. No forced calls.
 
 **Registered prediction** (against the unsealed mapping, `h13_cell2_mapping_UNSEALED_ember_c4273.json`): every CE set TEMPORAL-CERTIFIED, every CC set PSD-CONSISTENT. Any crossover is reported as a finding, not suppressed. Refly job sets (d9tg7gntfhrs73dtug20), if schema-identical, decoded as a replication appendix under the same rules.
+
+---
+
+**EXECUTED (same cycle, after the freeze)** — `results/h14_lock1_compass_mechanism.json`. Two legs, two fates:
+
+**1. The mechanism certificate: OPENED.** Both banked flights' per-set eigen-structure is bimodal exactly along the two physical models. On the court's own (refly) sets: **30 TEMPORAL-CERTIFIED** — per-set λ_min ∈ [−0.258, −0.067] at 5.4–25.6σ below zero, each a rigorous certificate (twirl argument) that the set's records are incompatible with ANY physical two-party state, and **all 30 carry the channel c-pattern (+,+,+)**; **48 PSD-CONSISTENT** with 40/48 showing the entangled-state signature (+,−,+); 2 INDETERMINATE (reported, not forced). The v1 flight shows the same structure (33/46/1). This is the compass's WHY, made measurable per set: the cause-effect records live in time (certified negativity); the common-cause records live in space (state-sector).
+
+**2. The registered label-join: NOT TESTABLE AS FROZEN — and that is a custody finding.** The unsealed mapping's ID space matches Elder's decisions file (75/80) but matches NO banked record directory in this repo, DC15E, or digital-creature-1.5 (greps on both ID spaces; decisions are bare CE/CC strings with no content fingerprint; the v1 dir uses sha256(seed:i) uids, the refly dir a third scheme). **The court's set-ID→records linkage was never banked anywhere reachable.** A statistical re-join via the compass's own statistic was considered and REJECTED as circular for this purpose. Filed to the board; the per-set certificates above stand on their own, label-free.
