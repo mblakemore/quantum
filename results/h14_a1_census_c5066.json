@@ -1,0 +1,235 @@
+{
+ "card": "h14_a1_census",
+ "cycle": "C5066",
+ "substrate": "claude-fable-5",
+ "protocol": "docs/h14-a1-constants-weather-census-protocol-FROZEN-whisper-c5066.md",
+ "rows": [
+  {
+   "row": 1,
+   "quantity": "live-vs-published T1 bias",
+   "verdict": "UNDERPOWERED",
+   "reason": "published side PROSE-ONLY (friction report); measured side banks no live-T1 value-with-SE \u2014 no mechanically comparable epochs"
+  },
+  {
+   "row": 2,
+   "quantity": "readout 0/1 asymmetry (fez, pair-dial C0-C1)",
+   "verdict": "UNDERPOWERED",
+   "reason": "3sigma-detectable change 0.0239 > 50% of magnitude 0.0338",
+   "epochs": [
+    [
+     "a1b",
+     0.0364,
+     0.0056
+    ],
+    [
+     "a1c",
+     0.0312,
+     0.0057
+    ]
+   ],
+   "note": "pair-dial instrument stratum; armn e0/e1 census is a 2nd instrument at n=1 epoch (UNDERPOWERED separately)"
+  },
+  {
+   "row": 3,
+   "quantity": "drift rate (deg/layer, kingston)",
+   "verdict": "CLOCK(n=2 epochs)",
+   "z_max": 93.5,
+   "structure_fit_pooled": 0.997,
+   "structure_fit_mean_of_R2s_alt_reading": 0.643,
+   "per_layer_rates_deg": [
+    0.008,
+    0.016,
+    0.008,
+    0.21
+   ],
+   "drifters": [
+    "23",
+    "26",
+    "53",
+    "73"
+   ],
+   "banked_tally_crosscheck": {
+    "CLOCK": 3,
+    "COIN": 0,
+    "UNDERPOWERED": 0,
+    "MIXED": 1
+   },
+   "heterogeneity": "rates are PER-DRIFTER (three at ~0.01 deg/layer, one at 0.21) \u2014 the clock is not a universal rate; pooled R^2 is dominated by the strong drifter",
+   "note": "2 strictly-comparable kingston epochs; verdict labeled accordingly"
+  },
+  {
+   "row": 4,
+   "quantity": "DD harm contrast (fez)",
+   "verdict": "UNDERPOWERED",
+   "reason": "all DD jobs within ~20 min on one backend = ONE epoch",
+   "within_job_contrast_none_minus_xx": 0.0893,
+   "pooled_mde": 0.0133
+  },
+  {
+   "row": 5,
+   "quantity": "lambda_eff attenuation",
+   "verdict": "UNDERPOWERED",
+   "reason": "one snapshot per device (5 devices); between-epoch variance undefined by construction",
+   "devices": 5
+  },
+  {
+   "row": 6,
+   "quantity": "switch-arm S.win (3 backends)",
+   "verdict": "CONSTANT",
+   "z_max": 0.919,
+   "worst_pair": [
+    "marrakesh",
+    "fez"
+   ],
+   "n_epochs": 3,
+   "epochs": [
+    [
+     "marrakesh",
+     0.68514,
+     0.00453
+    ],
+    [
+     "fez",
+     0.67924,
+     0.00456
+    ],
+    [
+     "kingston",
+     0.68114,
+     0.00455
+    ]
+   ],
+   "note": "CROSS-BACKEND row by frozen protocol (within-backend n=1 each); duplicate decode file excluded"
+  },
+  {
+   "row": 7,
+   "quantity": "ICO cooling floor 0.177",
+   "verdict": "NOT-A-DIAL",
+   "reason": "analytic cascade fixed point (c4720 doc), not a measured device quantity \u2014 pre-ruled in the frozen protocol"
+  },
+  {
+   "row": 7.5,
+   "quantity": "ICO single-stage Delta (marrakesh)",
+   "verdict": "CONSTANT",
+   "z_max": 0.99,
+   "worst_pair": [
+    "exp108",
+    "exp108c"
+   ],
+   "n_epochs": 3,
+   "epochs": [
+    [
+     "exp108",
+     0.17963,
+     0.00851
+    ],
+    [
+     "exp108b",
+     0.17754,
+     0.01288
+    ],
+    [
+     "exp108c",
+     0.16449,
+     0.0127
+    ]
+   ],
+   "note": "exp108b's grade verdict is NO-TEST (calib gate) \u2014 that is a claim-gate ruling, not a data-exclusion flag; verdict identical with or without it (checked)",
+   "robustness_without_108b": "CONSTANT(n=1 pair)"
+  },
+  {
+   "row": 8,
+   "quantity": "placement bias of absolute nulls",
+   "verdict": "UNDERPOWERED",
+   "reason": "between-epoch same-stratum comparable epochs < 2 (the cross-job sign-flip evidence is fez-vs-marrakesh = cross-stratum, blocked by the frozen no-cross-stratum-pooling rule)",
+   "within_job_placement_spread": 0.5557,
+   "within_job_sigma": 5.1,
+   "census_finding": "the 'placement is weather' claim currently rests on CROSS-stratum evidence only \u2014 a same-backend two-epoch replication is the missing datapoint"
+  },
+  {
+   "row": 9,
+   "quantity": "window retention R (marrakesh, 11h pair)",
+   "verdict": "UNDERPOWERED",
+   "reason": "3sigma-detectable change 1.1825 > 50% of magnitude 1.0157",
+   "epochs": [
+    [
+     "bad",
+     0.7462,
+     0.1793
+    ],
+    [
+     "good",
+     1.2853,
+     0.351
+    ]
+   ],
+   "se_convention": "sd/sqrt(k) over the 6 per-k retention points (declared in results doc)",
+   "note": "same circuits, same qubits, 11.2 h apart; no pre-named coherent structure"
+  },
+  {
+   "row": 10,
+   "quantity": "magic tax rho_stochastic (marrakesh)",
+   "verdict": "INDETERMINATE",
+   "z_max": 3.859,
+   "worst_pair": [
+    "organic_pooled",
+    "reconc_m217"
+   ],
+   "n_epochs": 2,
+   "epochs": [
+    [
+     "organic_pooled",
+     0.7027,
+     0.0087
+    ],
+    [
+     "reconc_m217",
+     0.745,
+     0.0067
+    ]
+   ],
+   "organic_points": [
+    [
+     "organic_d_lo",
+     0.7325,
+     0.0164
+    ],
+    [
+     "organic_d_mid",
+     0.6607,
+     0.0151
+    ],
+    [
+     "organic_d_hi",
+     0.7148,
+     0.0133
+    ]
+   ],
+   "note": "organic 3 depth points are ONE flight window (depth-flatness is their own claim) \u2014 the only true between-epoch pair here is organic-vs-reconciliation; kingston is a separate stratum at n=1 (UNDERPOWERED); 3 of 5 attenuation-map rho_t_rows are CONFOUNDED and stay excluded"
+  },
+  {
+   "row": 11,
+   "quantity": "X-basis Z-bias anisotropy (kingston)",
+   "verdict": "UNDERPOWERED",
+   "reason": "exp31 self-rules INCONCLUSIVE/CONFOUNDED (flag honored) -> 1 clean epoch (exp34)",
+   "exp34_ZZ_over_XX": 1.189,
+   "exp31_excluded": true
+  },
+  {
+   "row": 12,
+   "quantity": "anchor drift (door-a banked pair)",
+   "verdict": "CONSTANT(n=1 pair)",
+   "z_max": 2.316,
+   "worst_pair": [
+    "anchor_free",
+    "anchor_paid"
+   ],
+   "n_epochs": 2,
+   "recomputed_cross_job_ratio": 1.409,
+   "same_job_ratio_banked": 0.923698492462311,
+   "se_convention": "SE proxy from the same-structure shape-discriminator block (2000x1 rows); anchors bank no SE",
+   "custody_finding": "the prose 2.02x is NOT reproducible from any banked artifact (banked pair gives 1.41x at z=2.316); the 2.02x pair's artifacts are either unbanked or under other names \u2014 custody bug CONFIRMED and sharpened",
+   "doorb_series": "5 marrakesh epochs with raw cal shots exist but bank no per-epoch aggregate; decoding them is new analysis outside this sweep's frozen scope \u2014 DEFERRED, named"
+  }
+ ]
+}

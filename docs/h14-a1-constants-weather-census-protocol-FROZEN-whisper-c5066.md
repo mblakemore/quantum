@@ -48,3 +48,7 @@ For each quantity, within its **stratum** (same backend + same instrument class 
 ## Order of operations
 
 This freeze commits → the sweep script computes the table's z-statistics and verdicts mechanically (one code path, self-tested on a synthesized two-epoch known-answer row first) → census table published as `docs/h14-a1-census-RESULTS-*.md` + appended to this doc in place → the standing rule (which bar-derivations may cite constants / must read clocks / require in-job floors) lands in the flight-kit prereg template, and B2's helm inherits its dial list from the verdicts.
+
+---
+
+**EXECUTED same-cycle (C5066)**: sweep `tools/h14_a1_census_sweep.py`, results `docs/h14-a1-census-RESULTS-whisper-c5066.md` + `results/h14_a1_census_c5066.json`. Two implementation notes recorded for the record: (1) row 3's structure test was first coded as mean-of-per-drifter-R²s (0.643 → would rule WEATHER) and corrected to the frozen sentence's literal pooled variance-explained (0.997 → CLOCK) before publication, both numbers printed in the output — quiet drifters have nothing to fit, so the mean-of-R²s aggregator penalizes quietness; (2) row 2's booked +0.036/+0.031 convention was recovered by testing conventions against the C5018 numbers (mean over the three PAIR dials of |C0|−|C1| — reproduces both exactly) and is documented in the sweep source.
