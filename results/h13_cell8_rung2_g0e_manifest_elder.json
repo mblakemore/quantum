@@ -1,0 +1,313 @@
+{
+ "freeze": "bb46926",
+ "index_table_digest": "8371d2604275c02a7c0b2d4606805971d244f206c779cc3f8e810e417f8e33c0",
+ "opt_level": 1,
+ "per_pair": [
+  {
+   "pair": "((X+Y)/r2,(X+Y)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 4,
+   "depth": 14
+  },
+  {
+   "pair": "((X+Y)/r2,(X-Y)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 19
+  },
+  {
+   "pair": "((X+Y)/r2,1)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 10
+  },
+  {
+   "pair": "((X+Y)/r2,Z)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 18
+  },
+  {
+   "pair": "((X+Z)/r2,(X+Z)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 4,
+   "depth": 15
+  },
+  {
+   "pair": "((X+Z)/r2,(X-Z)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 19
+  },
+  {
+   "pair": "((X+Z)/r2,1)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 11
+  },
+  {
+   "pair": "((X+Z)/r2,Y)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 20
+  },
+  {
+   "pair": "((X-Y)/r2,(X+Y)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 18
+  },
+  {
+   "pair": "((X-Y)/r2,(X-Y)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 4,
+   "depth": 17
+  },
+  {
+   "pair": "((X-Y)/r2,1)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 11
+  },
+  {
+   "pair": "((X-Y)/r2,Z)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 18
+  },
+  {
+   "pair": "((X-Z)/r2,(X+Z)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 19
+  },
+  {
+   "pair": "((X-Z)/r2,(X-Z)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 4,
+   "depth": 15
+  },
+  {
+   "pair": "((X-Z)/r2,1)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 11
+  },
+  {
+   "pair": "((X-Z)/r2,Y)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 20
+  },
+  {
+   "pair": "((Y+Z)/r2,(Y+Z)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 4,
+   "depth": 20
+  },
+  {
+   "pair": "((Y+Z)/r2,(Y-Z)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 22
+  },
+  {
+   "pair": "((Y+Z)/r2,1)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 14
+  },
+  {
+   "pair": "((Y+Z)/r2,X)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 21
+  },
+  {
+   "pair": "((Y-Z)/r2,(Y+Z)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 22
+  },
+  {
+   "pair": "((Y-Z)/r2,(Y-Z)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 4,
+   "depth": 20
+  },
+  {
+   "pair": "((Y-Z)/r2,1)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 14
+  },
+  {
+   "pair": "((Y-Z)/r2,X)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 21
+  },
+  {
+   "pair": "(1,(X+Y)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 10
+  },
+  {
+   "pair": "(1,(X+Z)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 11
+  },
+  {
+   "pair": "(1,(X-Y)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 11
+  },
+  {
+   "pair": "(1,(X-Z)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 11
+  },
+  {
+   "pair": "(1,(Y+Z)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 14
+  },
+  {
+   "pair": "(1,(Y-Z)/r2)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 14
+  },
+  {
+   "pair": "(1,X)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 10
+  },
+  {
+   "pair": "(1,Y)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 11
+  },
+  {
+   "pair": "(1,Z)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 10
+  },
+  {
+   "pair": "(X,(Y+Z)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 19
+  },
+  {
+   "pair": "(X,(Y-Z)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 19
+  },
+  {
+   "pair": "(X,1)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 10
+  },
+  {
+   "pair": "(X,X)",
+   "cls": "C",
+   "two_qubit_gates": 4,
+   "depth": 14
+  },
+  {
+   "pair": "(X,Y)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 18
+  },
+  {
+   "pair": "(X,Z)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 18
+  },
+  {
+   "pair": "(Y,(X+Z)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 18
+  },
+  {
+   "pair": "(Y,(X-Z)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 18
+  },
+  {
+   "pair": "(Y,1)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 11
+  },
+  {
+   "pair": "(Y,X)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 17
+  },
+  {
+   "pair": "(Y,Y)",
+   "cls": "C",
+   "two_qubit_gates": 4,
+   "depth": 17
+  },
+  {
+   "pair": "(Y,Z)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 18
+  },
+  {
+   "pair": "(Z,(X+Y)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 18
+  },
+  {
+   "pair": "(Z,(X-Y)/r2)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 19
+  },
+  {
+   "pair": "(Z,1)",
+   "cls": "C",
+   "two_qubit_gates": 2,
+   "depth": 10
+  },
+  {
+   "pair": "(Z,X)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 18
+  },
+  {
+   "pair": "(Z,Y)",
+   "cls": "A",
+   "two_qubit_gates": 4,
+   "depth": 19
+  },
+  {
+   "pair": "(Z,Z)",
+   "cls": "C",
+   "two_qubit_gates": 4,
+   "depth": 14
+  }
+ ]
+}
