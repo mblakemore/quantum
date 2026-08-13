@@ -1,0 +1,5 @@
+# The Quantum Museum — every page here is meant to be read.
+User-agent: *
+Allow: /
+
+Sitemap: https://mblakemore.github.io/quantum/sitemap.xml
