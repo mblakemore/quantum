@@ -163,10 +163,156 @@ def validate():
     return 0 if gate else 2
 
 
+
+# ====================== STAGE 512 (appended C5069, after stage V PASS) ======================
+D512 = [4, 4, 4, 4, 2]   # [A_I(ctl,sys), A_O(ctl,sys), B_I, B_O, C_I]
+I4 = np.eye(4, dtype=complex)
+
+
+def cU(U):
+    """controlled-U on ctl (x) sys, control ordering [ctl, sys] (matches rep512's 1(x)V)."""
+    P0 = np.diag([1, 0]).astype(complex); P1 = np.diag([0, 1]).astype(complex)
+    return np.kron(P0, I2) + np.kron(P1, U)
+
+
+def cj_vec4(U4):
+    Iv = np.eye(4).reshape(-1)
+    return np.kron(I4, U4.conj()) @ Iv
+
+
+def G512_qstar():
+    G = np.zeros((512, 512), complex)
+    for (i, j), (cl, w) in load_qstar().items():
+        if w == 0:
+            continue
+        a = cj_vec4(cU(GENS[i])); b = cj_vec4(cU(GENS[j]))
+        ck = PLUS if cl == 'c' else MINUS
+        G += w * np.kron(np.kron(np.outer(a, a.conj()), np.outer(b, b.conj())),
+                         np.outer(ck, ck.conj()))
+    return G
+
+
+def rep512(V):
+    f_in = np.kron(I2, V); f_out = np.kron(I2, V.conj())
+    return np.kron(np.kron(np.kron(np.kron(f_in, f_out), f_in), f_out), I2)
+
+
+def exchange512():
+    P16 = np.zeros((256, 256))
+    for a in range(16):
+        for b in range(16):
+            P16[b*16 + a, a*16 + b] = 1
+    return np.kron(P16, I2)
+
+
+def perm_matrix_mixed(dims, order):
+    """Permutation matrix sending axis layout `dims` to layout dims[order]."""
+    n = int(np.prod(dims))
+    P = np.zeros((n, n))
+    strides = np.cumprod([1] + [dims[k] for k in range(len(dims)-1, 0, -1)])[::-1]
+    def idx(multi, ds):
+        v = 0
+        for x, dd in zip(multi, ds):
+            v = v * dd + x
+        return v
+    import itertools as it
+    for multi in it.product(*[range(dd) for dd in dims]):
+        src = idx(multi, dims)
+        dst = idx([multi[k] for k in order], [dims[k] for k in order])
+        P[dst, src] = 1
+    return P
+
+
+def ptrace_seq(expr, dims, axes):
+    """Sequential cvxpy partial trace over `axes` (indices into `dims`)."""
+    cur_dims = list(dims)
+    cur = expr
+    for ax in sorted(axes, reverse=True):
+        cur = cp.partial_trace(cur, cur_dims, axis=ax)
+        cur_dims.pop(ax)
+    return cur, cur_dims
+
+
+def embed_last(expr_small, small_dims, insert_dim, position):
+    """(expr (x) 1_insert) then permute the appended axis into `position`."""
+    big = cp.kron(expr_small, cp.Constant(np.eye(insert_dim)))
+    dims_now = small_dims + [insert_dim]
+    order = list(range(len(small_dims)))
+    order.insert(position, len(small_dims))
+    P = cp.Constant(perm_matrix_mixed(dims_now, order))
+    return P @ big @ P.T
+
+
+def comb512_A(W):
+    """A<B<C comb at mixed dims: (1) Tr_C W = Tr_{C,B_O}W/4 (x) 1_{B_O};
+    (2) Tr_{C,B_O,B_I} W = Tr_{C,B_O,B_I,A_O}W/4 (x) 1_{A_O}."""
+    lhs1, d1 = ptrace_seq(W, D512, [4])                    # dims [4,4,4,4]
+    red1, dr1 = ptrace_seq(W, D512, [4, 3])                # dims [4,4,4]
+    rhs1 = embed_last(red1 / 4, dr1, 4, 3)
+    lhs2, d2 = ptrace_seq(W, D512, [4, 3, 2])              # dims [4,4]
+    red2, dr2 = ptrace_seq(W, D512, [4, 3, 2, 1])          # dims [4]
+    rhs2 = embed_last(red2 / 4, dr2, 4, 1)
+    return [lhs1 == rhs1, lhs2 == rhs2]
+
+
+def comb512_B(W):
+    """B<A<C comb: mirror with (A_I,A_O)<->(B_I,B_O)."""
+    lhs1, d1 = ptrace_seq(W, D512, [4])
+    red1, dr1 = ptrace_seq(W, D512, [4, 1])                # trace C, A_O -> dims [4,4,4] = [A_I,B_I,B_O]
+    rhs1 = embed_last(red1 / 4, dr1, 4, 1)                 # reinsert A_O at position 1
+    lhs2, d2 = ptrace_seq(W, D512, [4, 1, 0])              # dims [4,4] = [B_I,B_O]
+    red2, dr2 = ptrace_seq(W, D512, [4, 1, 0, 3])          # trace also B_O -> [B_I]
+    rhs2 = embed_last(red2 / 4, dr2, 4, 1)
+    return [lhs1 == rhs1, lhs2 == rhs2]
+
+
+def solve512():
+    t0 = time.time()
+    gate = json.load(open(os.path.join(HERE, "..", "results", "h14_b1_stageV.json")))
+    assert gate["gate"] == "PASS", "stage V gate not passed — 512 not unlocked"
+    G = G512_qstar()
+    print(f"[{time.time()-t0:6.1f}s] G512 built (trace {np.trace(G).real:.4f})")
+    Hm, Sm = (X + Z) / R2, np.diag([1, 1j]).astype(complex)
+    for nm, V in (("H", Hm), ("S", Sm)):
+        R = rep512(V)
+        err = np.linalg.norm(R @ G @ R.conj().T - G)
+        print(f"[{time.time()-t0:6.1f}s] invariance check rep512({nm}): err {err:.2e}")
+        assert err < 1e-8, f"rep512({nm}) does not commute with G512 — convention break"
+    PI = exchange512()
+    err = np.linalg.norm(PI @ G @ PI.T - G)
+    print(f"[{time.time()-t0:6.1f}s] exchange invariance: err {err:.2e}")
+    assert err < 1e-8
+    import scipy.sparse as sp
+    WA = cp.Variable((512, 512), hermitian=True)
+    cons = [WA >> 0]
+    for V in (Hm, Sm):
+        R = sp.csr_matrix(rep512(V))
+        cons.append(WA == cp.Constant(R) @ WA @ cp.Constant(R.conj().T))
+    WB = cp.Constant(sp.csr_matrix(PI)) @ WA @ cp.Constant(sp.csr_matrix(PI))
+    cons += [cp.real(cp.trace(WA + WB)) == 16, cp.imag(cp.trace(WA + WB)) == 0]
+    cons += comb512_A(WA)
+    cons += comb512_B(WB)
+    prob = cp.Problem(cp.Maximize(cp.real(cp.trace(cp.Constant(sp.csr_matrix(G)) @ (WA + WB)))), cons)
+    print(f"[{time.time()-t0:6.1f}s] problem assembled; solving (SCS)...")
+    prob.solve(solver="SCS", eps=1e-7, max_iters=100000, verbose=False)
+    print(f"[{time.time()-t0:6.1f}s] SOLVED: value = {prob.value:.8f}  status = {prob.status}")
+    out = {"card": "h14_b1_symmetric_access_ceiling", "cycle": "C5069", "substrate": "claude-fable-5",
+           "value": float(prob.value), "status": prob.status,
+           "stageV_gate": "PASS (cited)", "solver": "SCS eps 1e-7",
+           "readings": "charter pre-committed: >0.988 fence stands; <0.988 promotion is its own gated process",
+           "comparison": {"dim32_ceiling": QSTAR_PRIMAL, "F82_hardware": 0.9769, "charter_fork": 0.988}}
+    json.dump(out, open(os.path.join(HERE, "..", "results", "h14_b1_symmetric_access.json"), "w"), indent=1)
+    print("-> results/h14_b1_symmetric_access.json")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--validate", action="store_true")
+    ap.add_argument("--solve512", action="store_true")
     a = ap.parse_args()
     if a.validate:
         sys.exit(validate())
-    print(__doc__)
+    elif a.solve512:
+        solve512()
+    else:
+        print(__doc__)
