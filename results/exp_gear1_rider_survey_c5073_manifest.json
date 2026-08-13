@@ -1,0 +1,219 @@
+{
+ "card": "exp_gear1_rider_survey",
+ "cycle": "C5073",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_marrakesh",
+ "cal_epoch": "2026-08-13 23:05:23+00:00",
+ "edges": [
+  [
+   148,
+   152
+  ],
+  [
+   53,
+   12
+  ],
+  [
+   15,
+   5
+  ],
+  [
+   139,
+   109
+  ],
+  [
+   33,
+   100
+  ],
+  [
+   91,
+   146
+  ],
+  [
+   131,
+   7
+  ],
+  [
+   2,
+   29
+  ],
+  [
+   149,
+   153
+  ],
+  [
+   54,
+   13
+  ],
+  [
+   19,
+   6
+  ],
+  [
+   155,
+   110
+  ],
+  [
+   34,
+   101
+  ],
+  [
+   98,
+   147
+  ],
+  [
+   132,
+   8
+  ],
+  [
+   3,
+   38
+  ]
+ ],
+ "depths_2k": [
+  0,
+  4,
+  16,
+  64
+ ],
+ "account": "IBMQ_ALT4",
+ "ramsey_role_rule": "edge index even -> Ramsey on first qubit; odd -> on second",
+ "purpose": "GEAR 1 step A (Creator GO general#11463): per-edge coherent conditional-phase rider on native CZ, in-window, with within-job stability repeats",
+ "prereg": "predictions P-A/P-B + NO-TEST branches in docstring, committed pre-flight",
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k0_c0_X",
+   "twok": 0,
+   "ctrl_one": false,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k0_c0_Y",
+   "twok": 0,
+   "ctrl_one": false,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k0_c1_X",
+   "twok": 0,
+   "ctrl_one": true,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k0_c1_Y",
+   "twok": 0,
+   "ctrl_one": true,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k4_c0_X",
+   "twok": 4,
+   "ctrl_one": false,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k4_c0_Y",
+   "twok": 4,
+   "ctrl_one": false,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k4_c1_X",
+   "twok": 4,
+   "ctrl_one": true,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k4_c1_Y",
+   "twok": 4,
+   "ctrl_one": true,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c0_X",
+   "twok": 16,
+   "ctrl_one": false,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c0_Y",
+   "twok": 16,
+   "ctrl_one": false,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c1_X",
+   "twok": 16,
+   "ctrl_one": true,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c1_Y",
+   "twok": 16,
+   "ctrl_one": true,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k64_c0_X",
+   "twok": 64,
+   "ctrl_one": false,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k64_c0_Y",
+   "twok": 64,
+   "ctrl_one": false,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k64_c1_X",
+   "twok": 64,
+   "ctrl_one": true,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k64_c1_Y",
+   "twok": 64,
+   "ctrl_one": true,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c1_X_repeat",
+   "twok": 16,
+   "ctrl_one": true,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c1_Y_repeat",
+   "twok": 16,
+   "ctrl_one": true,
+   "basis": "Y",
+   "shots": 8000
+  }
+ ]
+}
