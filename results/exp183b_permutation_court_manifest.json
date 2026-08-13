@@ -71,5 +71,10 @@
  "seed_transpiler": 1837,
  "phi_hat_rad": 0.11596350641876077,
  "prereg": "docs/exp183b-permutation-court-preregistration-whisper-c5065.md",
- "authorization": "Creator 'fly on alt4 if you can' (single-use, consumed here)"
+ "authorization": "Creator 'fly on alt4 if you can' (single-use, consumed here)",
+ "pending_jobs_observed_posthoc": {
+  "utc": "2026-08-13T18:15Z",
+  "ibm_fez_pending_jobs": 96926,
+  "note": "queue depth NOT captured at submit (the gap this field now closes); this is a post-hoc reading ~12h after submission"
+ }
 }

@@ -213,7 +213,12 @@ def submit(backend_name):
              for arm, c in ORDER]
     sampler = SamplerV2(mode=backend)
     job = sampler.run(circs, shots=SHOTS)
+    try:
+        pending = svc.backend(backend_name).status().pending_jobs
+    except Exception:
+        pending = None
     manifest = {"exp": "183b", "slug": "permutation_court", "backend": backend_name, "shots": SHOTS,
+                "pending_jobs_at_submit": pending,
                 "account": acct, "job_id": job.job_id(), "order": ORDER, "initial_layout": layout,
                 "seed_transpiler": SEED_TRANSPILER, "phi_hat_rad": PHI_HAT,
                 "prereg": "docs/exp183b-permutation-court-preregistration-whisper-c5065.md",
