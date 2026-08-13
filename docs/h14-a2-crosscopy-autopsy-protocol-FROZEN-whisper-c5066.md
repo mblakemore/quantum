@@ -35,3 +35,7 @@ All five flights are ibm_marrakesh, one era (Aug 2026) — any verdict is a **ma
 ## Order of operations (the freeze is the law)
 
 Stage 0 banking → stage 1 vectors + power check → **this doc's hash cited in the analysis commit** → stage 2 decode + verdict, appended to the F122 audit trail and this doc in place. No per-probe value is looked at before stage 2. Optional deferred leg (cheap, not part of this freeze): a probe-order-permuted re-fly if attribution lands on S1 (readout) and a downstream claim ever needs it killed dead.
+
+---
+
+**STAGE 0 EXECUTED (C5068): custody VERIFIED, zero repair needed.** All five flights bank shot-level raw science with counts matching their manifests exactly: `doorb_raw_science` 106,911 ↔ d9rvmuvtfhrs73ds6c1g · `refly` 103,732 ↔ d9sifr8pdb6s73e63140 · `i1` 72,759 ↔ d9sma69dsedc73ahur2g · `i2` 100,704 ↔ d9smh0hdsedc73ahv2tg · `i3` 91,512 ↔ d9toamk98n5s7391t4v0. The freeze's "first-FAIL and original-WIN are candidates for repair" expectation was pessimistic — Elder's banking covered the whole family. No IBM re-pull; stage 1 (structure vectors + power check) is next. No probe value was decoded in this verification (shot-list lengths and manifest fields only).
