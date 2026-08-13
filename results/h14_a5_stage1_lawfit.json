@@ -1,0 +1,25 @@
+{
+ "card": "h14_a5_stage1_lawfit",
+ "cycle": "C5069",
+ "substrate": "claude-fable-5",
+ "summary": {
+  "L0_linear": {
+   "aic": 218.54827758380435,
+   "damped": 8,
+   "rows": 12
+  },
+  "L1_quad": {
+   "aic": 41.50869289364641,
+   "damped": 12,
+   "rows": 12
+  },
+  "L2_power": {
+   "aic": 33.43210897596876,
+   "damped": 12,
+   "rows": 12
+  }
+ },
+ "winner": "L2_power",
+ "dAIC_vs_L0": 185.1161686078356,
+ "bar_deg": 3.5
+}
