@@ -1,0 +1,111 @@
+{
+ "card": "exp_turbine_mechsplit_decode",
+ "cycle": "C5072",
+ "job": "d9v4v5l0vrcc73boput0",
+ "cal_epoch": "2026-08-13 22:42:53+00:00",
+ "account": "IBMQ_ALT4",
+ "delays_us": [
+  0,
+  6,
+  12,
+  18,
+  24,
+  30
+ ],
+ "frozen_rule": "turning point > max(0.04, 3se) per reviver; committed 18cb0532 pre-flight",
+ "verdicts": {
+  "7": {
+   "curve": [
+    0.6132,
+    0.6419,
+    0.644,
+    0.6698,
+    0.6898,
+    0.7013
+   ],
+   "turning_amp": 0.0,
+   "noise_3se": 0.0562,
+   "clock": "GATE/FLAT"
+  },
+  "24": {
+   "curve": [
+    0.369,
+    0.2664,
+    0.2053,
+    0.1289,
+    0.0608,
+    0.0178
+   ],
+   "turning_amp": 0.0,
+   "noise_3se": 0.0568,
+   "clock": "GATE/FLAT"
+  },
+  "27": {
+   "curve": [
+    0.3766,
+    0.4301,
+    0.4365,
+    0.4656,
+    0.4844,
+    0.4995
+   ],
+   "turning_amp": 0.0,
+   "noise_3se": 0.0558,
+   "clock": "GATE/FLAT"
+  },
+  "31": {
+   "curve": [
+    0.4714,
+    0.4122,
+    0.3392,
+    0.2802,
+    0.2441,
+    0.1975
+   ],
+   "turning_amp": 0.0,
+   "noise_3se": 0.0563,
+   "clock": "GATE/FLAT"
+  },
+  "34": {
+   "curve": [
+    0.2509,
+    0.2259,
+    0.2003,
+    0.1615,
+    0.1115,
+    0.0817
+   ],
+   "turning_amp": 0.0,
+   "noise_3se": 0.0553,
+   "clock": "GATE/FLAT"
+  },
+  "45": {
+   "curve": [
+    0.2,
+    0.0738,
+    0.0344,
+    0.1129,
+    0.1846,
+    0.2478
+   ],
+   "turning_amp": 0.2133,
+   "noise_3se": 0.0568,
+   "clock": "TIME"
+  },
+  "53": {
+   "curve": [
+    0.3295,
+    0.3419,
+    0.3607,
+    0.374,
+    0.3854,
+    0.3976
+   ],
+   "turning_amp": 0.0,
+   "noise_3se": 0.0552,
+   "clock": "GATE/FLAT"
+  }
+ },
+ "n_time": 1,
+ "overall": "SINGLE-QUBIT-TIME"
+}
