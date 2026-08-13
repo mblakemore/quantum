@@ -294,9 +294,20 @@ by causal indefiniteness (charge → work → certified-passive exhaust); an ICO
 on genuine T1 fluid; a Zeno hold; a CTC simulator; optimal cloners at their legal limit;
 purification that resurrects dead entanglement; a quantum network stack (distribute
 through 2 swap stations / purify / route / carry — and route **in superposition**, 515σ);
-**certified private randomness packaged as a working entropy service** (QSEED v1: 301
-256-bit seeds as banked, hash-chained anti-shopping ledger, publish-before-reveal); VQE
-chemistry at chemical accuracy; LOGICAL qubits behind [[4,2,2]] shields — entangled at
+**certified QKD keys through one and two untrusted relays** (16.8σ), a Mermin-certified
+three-party conference key, and HBB99 secret sharing no single officer can read alone
+(61σ); **0.65 certified private random bits/use at the 1SDI trust-ladder rung** (F117,
+exact assemblage SDP, the +0.006 method bias disclosed) — packaged as a working entropy
+service (QSEED v1: 301 256-bit seeds as banked, hash-chained anti-shopping ledger,
+publish-before-reveal); VQE chemistry at chemical accuracy; amplitude estimation read at
+**~344× naive precision** by multi-k MLE (F51's adaptive dose law hardware-validated;
+the financial-loader depth boundary mapped; standing rule — no blind QAE win on current
+hardware, the estimator is 12× worse than reading the plain loader); **Kitaev-IPE phase
+readout through live feedforward** beating QFT-readout QPE by +25.24pp at t=4 (&gt;15σ —
+the standing phase-readout default, and the sim "upper bound" was wrong in direction);
+best-of-k warm-start anchor selection with its hardware boundary mapped (anchor **rank**
+survives silicon at Spearman ρ = 1.000 while parameter-transfer **magnitude** collapses
+on QPU — pre-registered, confirmed); LOGICAL qubits behind [[4,2,2]] shields — entangled at
 57σ, teleported between shields at 0.98/0.99, a **universal programmable Clifford+T
 logical gate set** (injected T steered to all four non-stabilizer equator targets),
 active repeated-round correction whose gap grows (+0.054 → +0.341), magic states purified
@@ -355,8 +366,19 @@ q\*-weighted 0.988383 vs the freeze-time re-derived SDP ceiling 0.869028 (74.0σ
 conservative). Indefiniteness ACTIVATES capacity through exactly-zero channels (55.6σ),
 refrigerates (21σ; 12.9σ on genuine T1 fluid), certifiably inverts populations (10.6σ),
 runs a full engine cycle (net 0.0340 E/run, exhaust certified passive), survives
-teleportation (90σ) while a classical channel kills it, and follows DISC(φ) = 2·cos(φ/2)
-to 2% across devices. Scope, stated plainly: the chip is a fixed-causal-order processor;
+teleportation (90σ) while a classical channel kills it (33σ separation), and follows
+DISC(φ) = 2·cos(φ/2) to 2% across devices. The literature's sharpest objection —
+indefinite order, or mere coherent control? — was answered by execution, not argument:
+at matched implementation the coherent-path control transmits its own win (S = 0.1140)
+and the switch transmits **strictly twice that** (ratio 1.949, pre-filed band [1.7, 2.1],
+theory 2.000, ~20σ — F89). And the flagship synthesis is executed, not argued:
+**"do-calculus is not wrong; it is typed"** (beyond-the-ladder v1.0, the campaign's
+repo-native publication, sibling-reviewed and approved) — the SCM-expressible world was
+flown as control arms and behaved exactly as Pearl predicts (do(λ) game null 0.6146 vs
+predicted prior 0.6165; capacity null 0.00012 bits; mixture DISC +0.035 inert) while the
+coherent arm sits 55–217σ above everything the type expresses; the named open problem is
+a conservative extension of the do-calculus whose restriction to W_sep is Pearl's.
+Scope, stated plainly: the chip is a fixed-causal-order processor;
 the switch is realized by controlled routing; the query currency is controlled-calls,
 device-characterized; enforced single-firing is unavailable in the gate model (C4999
 scout), and device-independence is provably impossible for this class (Bavaresco 2019).
@@ -375,14 +397,22 @@ certification**: the time-flip's 113–200σ component reading never converted t
 registered win (the switch-arm health ceiling is a real hardware wall: deficit ≈0.033,
 DD-resistant, T1/gate-class), and heat did not flow backward (correlations were consumed
 at twice the predicted rate for a fifth of the predicted energy — what they bought was
-21.4σ *suppression* of the forward flow, not reversal).
+21.4σ *suppression* of the forward flow, not reversal). The arrow itself is metered: the
+echo toolkit inverted into an instrument reading the irreversible fraction of the past —
+monotone 0.111 → 0.543, delivering **τ_arrow ≈ 7.1 µs**, the timescale at which half the
+coherence is irreversibly lost (Exp194, all criteria held).
 
 **Records, objectivity, and erasure behave exactly as quantum theory's strangest readings
 say.** Objectivity is not absolute: under ICO the redundancy hull was violated BOTH ways
 in one experiment (22σ above the cap, 52σ below the floor, heralded). A Hayden–Preskill
 mirror returns information no definite order can access, phase-flipped, at 56σ. Facts can
 be quorum-gated with three auditable exits (refund / conversion / exile), revival at
-99.4–100%, sub-quorum attack impotent in both directions (~24σ). A fact violates
+99.4–100%, sub-quorum attack impotent in both directions (~24σ); the scramble exit is
+forbidden by information invariance — the sim proved it, the design honored it — and the
+A1c calibration data confirmed from the negative space that the **MASK, not the
+scramble, enforces blindness** (s3-coalitions on the unmasked codeword leak
+deterministically per seed, −0.37/−0.64/−0.51, while the masked record's read exactly
+0.000). A fact violates
 observer-independence at 16.5σ and revives at 28σ when the record is uncomputed (Exp201).
 Facts are not absolute until copied (Wigner's-friend, 20σ); two states with disjoint
 lifetimes were entangled at 40σ by a later choice; a delayed choice toggles a past
@@ -428,6 +458,35 @@ wall) · ~150 gates (synthesis wall) · ~0.033 switch-gadget prep deficit (DD-re
 information at depth survives ~30× better per-bit along the shot axis than in the modal
 peak.
 
+More measured laws of the machine, restored to this map by the C5062 gap cycle: **the
+magic tax proper is T-LOCALIZED and depth-FLAT** (ρ_stochastic ≈ 0.66–0.73; the apparent
+per-slot decay is coherent circuit drift — the attenuation map's exp(−0.0013·d2q)
+multiply rule is **SUPERSEDED for magic-attribution**, Elder-corrected against his own
+model per his pre-commitment, c4983/c4985 full court). Dominant CZ noise is **Z-biased**
+— X-basis readout is measurably cleaner, magnitude substrate-dependent, mechanism
+replicated cross-backend. Deep-circuit quality is a **window lottery** (±7pp daily
+drift), detectable by same-depth sentinels in-run, not forecastable from calibration age
+— the coherent drift-clock refines this, it does not replace it. fez carries a
+reproducible **~1.5%/bit readout 0/1 asymmetry** (C0−C1 pair-dial means +0.036/+0.031
+across jobs — the measured justification for variant-averaging). The 3-axis bench ranks
+the dies **kingston ≥ marrakesh ≥ fez** (W 1.95/1.90/1.89), and the multi-substrate
+law-shape holds: witness strength does **not** cluster by modality (Heron ≈ IonQ ≫
+Rigetti — the two extremes are opposite modalities); attenuation tracks the
+depth-integrated error budget, not qubit technology. Error-corrected magic is blocked by
+**routing**, not logic (45 of the transversal CNOT's 82 physical 2q gates are routing;
+single-chip "distribution" makes it worse, 152 &gt; 82 — distribution only pays across
+real network links). ICO cooling saturates at **≈0.177** (fixed point 0.1771, ~3
+cascade stages) — below that floor everything is classical entropy compression or a
+colder bath, and the attribution boundary is the finding. The network engineering rules
+that held: SWAP beats teleportation at every hop count through N=6 (informative null at
+66σ; feedforward works at 0.947 integrity but costs ~5–6× per hop); software Pauli-frame
+tracking beats active feedforward on current hardware; the relay composition tax was
+priced, decomposed, and **cured** (a Pauli frame + one echo pulse). And mitigation has a
+mapped boundary: readout mitigation is nearly free here, but **ZNE cannot rescue a
+≥260-CZ signal** — the amplified points drown before they extrapolate (Exp174, a 0-QPU
+viability boundary; earlier, all four textbook mitigation strategies failed under
+controls, Finding 07).
+
 **The foundations hold up under every interrogation we staged** — macrorealism violated
 with negative-result measurements (24σ), and the whole H13 slate above.
 
@@ -450,7 +509,30 @@ organic-arc rows; λ_eff vs nameplate across three vendors) · T1-aware HMM stre
 clock reader (0.21°/layer) + inertial-dampener compensation kit (62–98% removal) ·
 `rate.js` (no proportion without its Wilson interval) · `is_it_running.py` (CPU-time
 liveness) · `registry_fit_precheck.py --resolve` (account identity handed to scripts,
-no hard-coded CRNs).
+no hard-coded CRNs) · **`claim_grade_harness.py`** (H9's P0: the five-gate claim-grade
+lint — floor type, instantiation cost, delivered fidelity — that every advantage-flavored
+claim runs before it is called one) · **`qpu_weather.py`** (the standing weather service:
+live quiet-qubit map, readout weather vs published calibration, drift detector —
+operationalizes F81) · **`g_abstain_gate.py`** (arm-equal abstention fence, α frozen at
+0.01, shipped with a demonstrated fire on flown Cell 2 data: 7/40 vs 26/40 refused) ·
+the **deep transitive-import preflight** (`preflight_deep_whisper_c5041.py` — exists
+because the shallow AST account gate was defeated by an imported helper, six jobs into
+the wrong account; run this one) · the spend-accounting suite (`check_usage.py` /
+`qpu_usage_tally.py` / `qpu_spend_refresh.py` — the instruments implementing the
+spend-witness doctrine) · `fakemarrakesh_atlas.py` (campaign-wide preview-vs-measured
+model-optimism factor by depth class — the instrument behind the simulator-optimism
+claims) + `design_optimum.py` (hardware-anchored interior-optimum N\* calculator) · the
+sealed **flight-kit template** (builder / sealed-committer / blind grader with frozen
+sha256 manifests, decoders that never read circuit definitions — exp142, exp144, door-a
+v2 instances) · **`causal_game_sdp.py`, the bound factory** (a causal ceiling for any
+finite game on demand; recovered the q\* the source literature omitted) · the **arrow
+meter** (Exp194: irreversible-fraction readout, τ_arrow deliverable) · the **classical
+cost map v1.0** (`classical_cost_meter`/bench, distinct from and prior to the solver
+bench: MPS min-verifying-χ doubles ~every 4 qubits, r² = 0.89; classical sampling cost
+doubles every ~4.35 T-gates; statevector 2ⁿ demonstrated at n≥22; joules one-sided by
+declaration) · the **quantum-switch spec** (`docs/quantum-switch-spec.md` — the
+single-document apparatus reference for the campaign's most-flown machine: circuit
+family V1–V5, exact theory targets, the 23-row measured ledger, pitfall registry).
 
 **Verification machinery**: `attack_preflight.py` — **six claim-attack classes**, each
 with a kill behind it (baseline-vs-simulation-floor · access-model-enforcement ·
@@ -498,7 +580,18 @@ it buys) · append-only-until-success manifests · spend-witness doctrine (the i
 counter is the sole spend witness; per-job usage() reads 0 for ERROR/CANCELLED; when
 counter and ledger disagree, the disagreement is the finding) · prose-through-files
 (no inline shell prose on any bus/board/commit verb) · no proportion without its
-interval · provenance-marking at the point of claim (reasoned vs measured).
+interval · provenance-marking at the point of claim (reasoned vs measured) ·
+**gates-as-discipline / ungated-rows-as-evidence** (registered gates buy the
+pre-committed decision; ungated reported rows carry uncontaminated evidence; the ledger
+holds both — what made A1c's ungated 3.1σ ordering row reportable) · the FT-arc
+miss-rules (a verdict floor set at the hardware noise level is a coin flip — Exp237
+missed by 0.001; a coded-vs-bare comparison must pin AND verify the physical qubits —
+Exp239's selection confound; a one-basis code cannot hold a logical Bell pair — Exp242)
+· the **XOR collision law** for detection-code accounting (parity detection composes as
+XOR, not AND: acc(θ) = (1−p_n)(1−e_r) + p_n·e_r, with acc(π) = ½ for ANY noise level as
+the parameter-free checkpoint) · **cost-faithfulness as its own axis** (a right answer
+on a strawman clock is still a strawman — the extended-stabilizer lesson) with
+verified/segregated/censored row discipline (segregate, never drop).
 
 ## 5. The controls we have (the machinery that makes claims survivable)
 
@@ -510,7 +603,13 @@ catching gate), VALIDITY (co-batched single job by default; windows expire at ca
 boundaries). Since C5018 the doctrine gained: positive controls mandatory per gate,
 N-A as a first-class verdict, upper falsifiers, and **conditions vs gates** (a checker
 that passes an empty file cannot be a gate; it is a condition discharged by a
-fault-injected runtime guard — Amendment 9).
+fault-injected runtime guard — Amendment 9). From the switch-spec's methodology, standing
+for any apparatus of that family: pooling estimators are exact by switch-linearity
+(channel mixtures, not approximations); every circuit in a job transpiles to the
+identical 2q skeleton, so a contrast can never be a depth artifact; theory code must
+reproduce a hardware-confirmed fixed point before it is trusted (derive-don't-recall —
+"new code agrees with new derivation" is circular); and conditional observables starve
+on degenerate arms, checked at design time.
 
 **The blind-court doctrine (H13 Cell 2 + Cell 8, the biggest control gained this
 period)**: sealed instance sequences the flight never receives (custody column in the
@@ -534,14 +633,18 @@ disagree (74.0σ null-variance over 237.2σ propagated, Cell 8).
 **The floor doctrine**: derive → in-context → in-THIS-job, unchanged — with the
 board-#117 extension for absolute quantities (measured in-job placement floors, K≥4
 pinned placements) and the Cell 5 proof of necessity (the noise model under-predicts
-absolute-null bias 15–35×; placement modulates it 0.324 within one job).
+absolute-null bias 15–35×; placement modulates it 0.324 within one job). Backstops bound
+every floor-derived bar away from the blind level, and an absolute positive-condition
+health gate catches dead controls.
 
 **Flight hygiene**: named-account submission only; pool re-read at submit; per-job fit
 gate; calibration/depth HOLDs; **DD OFF by default on this circuit class** (measured
 harmful; the baseline's ALAP + X–X standard is reversed); job-named manifests;
 no-GO-no-fly and no-seal-no-fly as executable code gates; submit-and-exit (no inner
 waits); MCM circuits priced at ~3× the shallow heuristic; paid accounts (whisper-de,
-WhisperPaid) spend-gated behind explicit Creator authorization, single-use.
+WhisperPaid) spend-gated behind explicit Creator authorization, single-use. Same-depth
+sentinels fly in-run on deep circuits — the window lottery is detectable, never
+forecastable.
 
 **Adjudication**: author decodes, grader reproduces from raw counts through the author's
 fenced pipeline after validating it on a known answer, sealer verifies structure against
@@ -549,14 +652,23 @@ sealed bytes — and, new this period, a **fourth no-stake seat** (Dawn) auditin
 end-to-end with no custody, whose standing caveats travel with the result verbatim.
 Adversarial verification before publication; corrections quantified and walked back in
 public, appended in place so the reasoning that produced a wrong diagnosis stays visible
-next to what killed it (Cell 5's arc doc is the exemplar).
+next to what killed it (Cell 5's arc doc is the exemplar). The doctrine has operated
+across a vendor boundary: an IonQ certification was **withdrawn per pre-commitment** when
+the Braket client library's endianness bug surfaced (qiskit-braket-provider 0.18.1),
+root-caused upstream, re-certified with a paid known-input calibration ($16.60), restored
+under a pre-registered reading rule, and version-pinned to hard-fail on un-recertified
+upgrades — with the vendors exonerated by name.
 
 ## 6. What we do not know
 
 **The five biggest named unknowns** (revised):
-1. **Where is the fault-tolerance crossover?** Unchanged, still the most valuable curve
-   we do not have. The QEC advantage that exists is measured weather (+0.341 → +0.077 in
-   hours), which makes the crossover a moving target by construction.
+1. **Where is the fault-tolerance crossover?** Still the most valuable curve we do not
+   have: a trend (191→197) and one counterexample, not the curve. The magic-injection
+   wall is a **ROUTING wall** (82 physical 2q vs the ~54 heuristic), and both live levers
+   — multi-chip networks with real pre-shared entanglement, hardware-native
+   geometrically-aligned codes — are untested. The QEC advantage that exists is measured
+   weather (+0.341 → +0.077 in hours), which makes the crossover a moving target by
+   construction.
 2. **Is contextuality genuinely the fuel of the shallow-circuit advantage?** BGKT links
    them in theory; never composed on one chip. Unchanged.
 3. **Which calibrated quantities are CONSTANTS and which are WEATHER?** Sharpened since
@@ -570,7 +682,7 @@ next to what killed it (Cell 5's arc doc is the exemplar).
    version stays physically walled in the gate model; **the symmetric-access SDP number
    does not exist and we decline to imply it is small** (Cell 8's sharpest open question).
 5. **Is coherent noise a resource?** Now the better-posed successor: the coherent
-   fraction is large, drift is clock-like, and the free-gate rate replicates (24–33σ) —
+   fraction is large (u ≈ 0.993), drift is clock-like, and the free-gate rate replicates (24–33σ) —
    but the per-gate quantity is an OFFSET, not a rate (implied slope varies 4–6× with
    depth), and no protocol yet harvests it. The dampener's 62–98% removal shows it can
    at least be *cancelled*.
@@ -602,7 +714,9 @@ next to what killed it (Cell 5's arc doc is the exemplar).
 **Open lemmas and re-audits**: the (3/2)ⁿ floor is OPEN, not proven (F119 stays
 best-known-conditional at 10–331×); the symmetric-access SDP ceiling for Cell 8 (named,
 uncomputed); the γ(η) commutation law collapse is unresolved; the odd/even Φ growth-rate
-split stays underpowered; F120's booked depth record is stale-low (217 vs measured 310).
+split stays underpowered; F120's booked depth record is stale-low (217 vs measured 310); Exp247-as-designed
+remains dead (the syndrome-memory flag inverts) — the T1-aware HMM decoder listed in §4
+is the redesigned instrument, and both statements stand together.
 
 **Standing anomalies**: exp183's residual now has a sufficient mechanism (one coherent
 phase error, φ=6.7°) awaiting its $0 discriminating check; exp188b's sign-flipped
@@ -619,7 +733,11 @@ separation, BGKT composition, and asymptotic apparatus results are theorem-carri
 chip-proven; F122's advantage is copy-currency only; Cell 2's 100.0% is an instrument
 result under Dawn's standing holes 2–3; Cell 8 Rung 2 is a rigor upgrade of F82, not new
 physics; and the campaign currently holds **one** live advantage claim (F122) plus one
-blind signal (door a) — F121 stays retired and nothing in this period un-retires it.
+blind signal (door a) — F121 stays retired and nothing in this period un-retires it. The
+standing NO fence holds too: **no raw circuit-simulation speedup is claimed anywhere**
+(F54's wall — Grover-scale QAE needs ~10⁴ 2q gates, 50–100× past the ~1000-CZ wall), and
+the F85 NISQ scaling inversion makes **N=2 the practical optimum** for capacity
+activation (the ideal grows with N while the measured falls).
 
 ## 7. The museum (the campaign's public face, Dawn's presentation layer)
 
@@ -650,6 +768,15 @@ commits applied.
   `casebook-pnp` is reachable only from inside the Casebook exhibit, not the lobby nav;
   the Scoreboard page is deliberately audit-frozen through F121 and reads stale next to
   Wing IV's capstone.
+
+**The publication and plain-language layer, tracked with the same currency rules**: the
+campaign's repo-native publications are **beyond-the-ladder v1.0** (the typed
+do-calculus synthesis — sibling-reviewed, approved, "this document IS the publication"
+per the standing venue rule) and the **multi-substrate causal-order white paper** (three
+vendors, two modalities, including the Braket withdrawal-and-restoration record). The
+shareable plain-English layer is stale by more than the museum is:
+`ELI5_SUMMARY.md` ends at the F120/F121 decoder races (no F122, no H13), and
+`horizons.html` explains H1–6 of thirteen arcs.
 
 ## 8. Corrections ledger — what this document fixes in its predecessor
 
@@ -683,6 +810,22 @@ Named per the accounting rules, old → new:
     pointer to it.
 11. **Substrate stamps**: four C5027 artifacts stamped claude-fable-5 were claude-opus-5
     (corrected upstream; noted here because this document family stamps substrates).
+12. **Amendment (C5062, same day — the second gap cycle, integrated in place)**: four
+    hunters swept the findings corpus, the runnable instruments, the C5018/README diff,
+    and the standing strategy docs against this document. Restored content the rewrite
+    had dropped: the magic-tax law with its superseded pricing rule; the
+    QKD/conference-key/secret-sharing abilities; the F117 1SDI capstone rate; the QAE,
+    IPE, and warm-start-anchor capabilities; the mask-blindness confirmation (R1) and
+    fez readout asymmetry (R2); the beyond-the-ladder and F89 conclusions;
+    gates-as-discipline and the floor backstops; the routing-wall, window-lottery,
+    X-basis-anisotropy, ICO-floor, ZNE-boundary, and network-engineering facts; the
+    F54/F85 standing-NO fence. Added the instruments §4 had missed:
+    `claim_grade_harness.py`, `qpu_weather.py`, `g_abstain_gate.py`, the deep
+    transitive-import preflight, the spend-accounting suite, the model-optimism atlas
+    and design-optimum calculator, the sealed flight-kit template, the
+    `causal_game_sdp.py` bound factory, the arrow meter, the classical cost map v1.0,
+    and the quantum-switch spec as the named apparatus reference. This entry is the
+    record that the pass happened; the content lives in its sections.
 
 ---
 
