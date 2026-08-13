@@ -1,0 +1,515 @@
+{
+ "G1": "PASS (kits byte-identical, verified from source)",
+ "per_device": {
+  "ibm_kingston": {
+   "N_jobs": 49,
+   "primary": true,
+   "mean_deps_weighted": 0.0013294416168024713,
+   "se": 0.0019387761302501795,
+   "z_mean": 0.6857117725247217,
+   "overdispersion_T": 52.760241664632694,
+   "dof": 48,
+   "z_WH": 0.5386512912751026,
+   "eps_range": [
+    0.01,
+    0.0725
+   ],
+   "eps_median": 0.0425
+  }
+ },
+ "jobs": [
+  {
+   "job_id": "d9c8cvvngvls73a94u0g",
+   "backend": "ibm_kingston",
+   "manifest": "exp142_wave1_n10_manifest.json",
+   "eps_start": 0.015,
+   "beta_start": 0.03,
+   "eps_end": 0.01,
+   "beta_end": 0.015,
+   "n": 400
+  },
+  {
+   "job_id": "d9c8crfngvls73a94tpg",
+   "backend": "ibm_kingston",
+   "manifest": "exp142_wave1_n4_manifest_d9c8crfngvls73a94tpg.json",
+   "eps_start": 0.02,
+   "beta_start": 0.02,
+   "eps_end": 0.01,
+   "beta_end": 0.07,
+   "n": 400
+  },
+  {
+   "job_id": "d9c8csvngvls73a94trg",
+   "backend": "ibm_kingston",
+   "manifest": "exp142_wave1_n6_manifest_d9c8csvngvls73a94trg.json",
+   "eps_start": 0.02,
+   "beta_start": -0.035,
+   "eps_end": 0.02,
+   "beta_end": -0.01,
+   "n": 400
+  },
+  {
+   "job_id": "d9c8cu7ngvls73a94tu0",
+   "backend": "ibm_kingston",
+   "manifest": "exp142_wave1_n8_manifest_d9c8cu7ngvls73a94tu0.json",
+   "eps_start": 0.0125,
+   "beta_start": 0.0325,
+   "eps_end": 0.0175,
+   "beta_end": 0.0375,
+   "n": 400
+  },
+  {
+   "job_id": "d9cqavkjeosc73fgkjs0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k1_w1_a2_manifest.json",
+   "eps_start": 0.065,
+   "beta_start": 0.02,
+   "eps_end": 0.045,
+   "beta_end": -0.015,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpbkqneu4c739m9910",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k1_w1_manifest.json",
+   "eps_start": 0.0525,
+   "beta_start": -0.1175,
+   "eps_end": 0.06,
+   "beta_end": -0.02,
+   "n": 400
+  },
+  {
+   "job_id": "d9cracaneu4c739mc2p0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k1_w2_manifest.json",
+   "eps_start": 0.0525,
+   "beta_start": 0.0175,
+   "eps_end": 0.065,
+   "beta_end": 0.04,
+   "n": 400
+  },
+  {
+   "job_id": "d9cqb0kinv1c73ao4qn0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k2_w1_a2_manifest.json",
+   "eps_start": 0.035,
+   "beta_start": 0.0,
+   "eps_end": 0.0675,
+   "beta_end": 0.0375,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpbncinv1c73ao3ee0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k2_w1_manifest.json",
+   "eps_start": 0.0425,
+   "beta_start": 0.0175,
+   "eps_end": 0.03,
+   "beta_end": 0.01,
+   "n": 400
+  },
+  {
+   "job_id": "d9crachhtsac739c5b0g",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k2_w2_manifest.json",
+   "eps_start": 0.055,
+   "beta_start": -0.01,
+   "eps_end": 0.0475,
+   "beta_end": 0.0225,
+   "n": 400
+  },
+  {
+   "job_id": "d9cqb1ineu4c739mamvg",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k3_w1_a2_manifest.json",
+   "eps_start": 0.035,
+   "beta_start": 0.035,
+   "eps_end": 0.07,
+   "beta_end": 0.03,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpbpsjeosc73fgj6v0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k3_w1_manifest.json",
+   "eps_start": 0.0275,
+   "beta_start": 0.0275,
+   "eps_end": 0.0375,
+   "beta_end": -0.0225,
+   "n": 400
+  },
+  {
+   "job_id": "d9cracsjeosc73fglvpg",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k3_w2_manifest.json",
+   "eps_start": 0.05,
+   "beta_start": 0.02,
+   "eps_end": 0.035,
+   "beta_end": 0.075,
+   "n": 400
+  },
+  {
+   "job_id": "d9cqb2hhtsac739c3v00",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k4_w1_a2_manifest.json",
+   "eps_start": 0.0525,
+   "beta_start": -0.0375,
+   "eps_end": 0.04,
+   "beta_end": 0.005,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpbs4inv1c73ao3eig",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k4_w1_manifest.json",
+   "eps_start": 0.0725,
+   "beta_start": -0.0225,
+   "eps_end": 0.04,
+   "beta_end": 0.02,
+   "n": 400
+  },
+  {
+   "job_id": "d9crad2neu4c739mc2q0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k4_w2_manifest.json",
+   "eps_start": 0.03,
+   "beta_start": 0.035,
+   "eps_end": 0.0325,
+   "beta_end": 0.0975,
+   "n": 400
+  },
+  {
+   "job_id": "d9cqb3kinv1c73ao4qrg",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k5_w1_a2_manifest.json",
+   "eps_start": 0.05,
+   "beta_start": -0.085,
+   "eps_end": 0.0575,
+   "beta_end": 0.0825,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpbu4jeosc73fgj73g",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k5_w1_manifest.json",
+   "eps_start": 0.055,
+   "beta_start": -0.02,
+   "eps_end": 0.0625,
+   "beta_end": -0.0075,
+   "n": 400
+  },
+  {
+   "job_id": "d9cradaneu4c739mc2qg",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n4_k5_w2_manifest.json",
+   "eps_start": 0.05,
+   "beta_start": -0.02,
+   "eps_end": 0.04,
+   "beta_end": 0.07,
+   "n": 400
+  },
+  {
+   "job_id": "d9cqb74jeosc73fgkk50",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n6_k1_w1_a2_manifest.json",
+   "eps_start": 0.045,
+   "beta_start": 0.02,
+   "eps_end": 0.055,
+   "beta_end": -0.04,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpc0cinv1c73ao3eng",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n6_k1_w1_manifest.json",
+   "eps_start": 0.0275,
+   "beta_start": 0.0375,
+   "eps_end": 0.04,
+   "beta_end": -0.055,
+   "n": 400
+  },
+  {
+   "job_id": "d9cqb84jeosc73fgkk70",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n6_k2_w1_a2_manifest.json",
+   "eps_start": 0.0425,
+   "beta_start": -0.0425,
+   "eps_end": 0.0625,
+   "beta_end": -0.0125,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpc2kinv1c73ao3eq0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n6_k2_w1_manifest.json",
+   "eps_start": 0.06,
+   "beta_start": -0.02,
+   "eps_end": 0.0425,
+   "beta_end": 0.0325,
+   "n": 400
+  },
+  {
+   "job_id": "d9cqb94inv1c73ao4r1g",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n6_k3_w1_a2_manifest.json",
+   "eps_start": 0.04,
+   "beta_start": 0.105,
+   "eps_end": 0.05,
+   "beta_end": 0.01,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpc4qneu4c739m99ig",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n6_k3_w1_manifest.json",
+   "eps_start": 0.035,
+   "beta_start": 0.085,
+   "eps_end": 0.06,
+   "beta_end": 0.02,
+   "n": 400
+  },
+  {
+   "job_id": "d9cqba2neu4c739man9g",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n6_k4_w1_a2_manifest.json",
+   "eps_start": 0.0625,
+   "beta_start": -0.0075,
+   "eps_end": 0.03,
+   "beta_end": 0.01,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpc71htsac739c2ib0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n6_k4_w1_manifest.json",
+   "eps_start": 0.0375,
+   "beta_start": -0.0825,
+   "eps_end": 0.045,
+   "beta_end": -0.065,
+   "n": 400
+  },
+  {
+   "job_id": "d9cqbb1htsac739c3v9g",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n6_k5_w1_a2_manifest.json",
+   "eps_start": 0.03,
+   "beta_start": 0.01,
+   "eps_end": 0.045,
+   "beta_end": 0.01,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpc9aneu4c739m99n0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n6_k5_w1_manifest.json",
+   "eps_start": 0.045,
+   "beta_start": -0.03,
+   "eps_end": 0.04,
+   "beta_end": -0.075,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpcbhhtsac739c2ifg",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n8_k1_w1_manifest.json",
+   "eps_start": 0.0425,
+   "beta_start": -0.0075,
+   "eps_end": 0.06,
+   "beta_end": -0.015,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpcdhhtsac739c2iig",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n8_k2_w1_manifest.json",
+   "eps_start": 0.04,
+   "beta_start": -0.015,
+   "eps_end": 0.0625,
+   "beta_end": -0.0525,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpcfsinv1c73ao3f90",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n8_k3_w1_manifest.json",
+   "eps_start": 0.0475,
+   "beta_start": -0.0325,
+   "eps_end": 0.0425,
+   "beta_end": -0.1075,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpci4jeosc73fgj7q0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n8_k4_w1_manifest.json",
+   "eps_start": 0.06,
+   "beta_start": 0.025,
+   "eps_end": 0.0375,
+   "beta_end": -0.0525,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpckcinv1c73ao3fdg",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_conv_n8_k5_w1_manifest.json",
+   "eps_start": 0.025,
+   "beta_start": 0.045,
+   "eps_end": 0.0425,
+   "beta_end": 0.0125,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpbjphtsac739c2ho0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n4_k1_w1_manifest.json",
+   "eps_start": 0.0525,
+   "beta_start": -0.0125,
+   "eps_end": 0.0625,
+   "beta_end": 0.0425,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpbm4jeosc73fgj6qg",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n4_k2_w1_manifest.json",
+   "eps_start": 0.0375,
+   "beta_start": -0.0025,
+   "eps_end": 0.05,
+   "beta_end": 0.075,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpbokjeosc73fgj6t0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n4_k3_w1_manifest.json",
+   "eps_start": 0.045,
+   "beta_start": -0.04,
+   "eps_end": 0.0375,
+   "beta_end": 0.0525,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpbqphtsac739c2hug",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n4_k4_w1_manifest.json",
+   "eps_start": 0.0475,
+   "beta_start": -0.0275,
+   "eps_end": 0.045,
+   "beta_end": -0.06,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpbt2neu4c739m99a0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n4_k5_w1_manifest.json",
+   "eps_start": 0.0375,
+   "beta_start": -0.0175,
+   "eps_end": 0.06,
+   "beta_end": 0.05,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpbv4jeosc73fgj74g",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n6_k1_w1_manifest.json",
+   "eps_start": 0.035,
+   "beta_start": 0.095,
+   "eps_end": 0.045,
+   "beta_end": -0.05,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpc1hhtsac739c2i5g",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n6_k2_w1_manifest.json",
+   "eps_start": 0.0375,
+   "beta_start": 0.0175,
+   "eps_end": 0.0575,
+   "beta_end": 0.0475,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpc3hhtsac739c2i80",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n6_k3_w1_manifest.json",
+   "eps_start": 0.035,
+   "beta_start": -0.02,
+   "eps_end": 0.0425,
+   "beta_end": 0.0725,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpc64jeosc73fgj7c0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n6_k4_w1_manifest.json",
+   "eps_start": 0.055,
+   "beta_start": 0.015,
+   "eps_end": 0.0375,
+   "beta_end": -0.0675,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpc84jeosc73fgj7eg",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n6_k5_w1_manifest.json",
+   "eps_start": 0.05,
+   "beta_start": -0.085,
+   "eps_end": 0.0375,
+   "beta_end": -0.0925,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpcacjeosc73fgj7hg",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n8_k1_w1_manifest.json",
+   "eps_start": 0.04,
+   "beta_start": -0.025,
+   "eps_end": 0.0425,
+   "beta_end": 0.0375,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpcchhtsac739c2ih0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n8_k2_w1_manifest.json",
+   "eps_start": 0.0425,
+   "beta_start": -0.0675,
+   "eps_end": 0.0425,
+   "beta_end": -0.0625,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpcehhtsac739c2ik0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n8_k3_w1_manifest.json",
+   "eps_start": 0.03,
+   "beta_start": 0.075,
+   "eps_end": 0.0325,
+   "beta_end": -0.0475,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpcgsjeosc73fgj7p0",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n8_k4_w1_manifest.json",
+   "eps_start": 0.0425,
+   "beta_start": 0.0925,
+   "eps_end": 0.0325,
+   "beta_end": 0.0525,
+   "n": 400
+  },
+  {
+   "job_id": "d9cpcj9htsac739c2iog",
+   "backend": "ibm_kingston",
+   "manifest": "exp144_quantum_n8_k5_w1_manifest.json",
+   "eps_start": 0.0475,
+   "beta_start": 0.0225,
+   "eps_end": 0.0375,
+   "beta_end": 0.0525,
+   "n": 400
+  }
+ ],
+ "verdicts": {
+  "ibm_kingston": "STABILITY-CERTIFIED-AT-RESOLUTION"
+ }
+}
