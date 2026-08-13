@@ -1,0 +1,62 @@
+{
+ "card": "exp_turbine_stroke_decode",
+ "cycle": "C5072",
+ "job": "d9v511gb1g9c73a86cug",
+ "account": "IBMQ_ALT4",
+ "cal_epoch": "2026-08-13 22:42:53+00:00",
+ "delays_us": [
+  0,
+  6,
+  12,
+  18,
+  24,
+  27,
+  30,
+  36,
+  42
+ ],
+ "q45_curve": [
+  1.0,
+  0.9026,
+  0.8081,
+  0.7387,
+  0.6722,
+  0.6396,
+  0.6109,
+  0.5471,
+  0.5023
+ ],
+ "q45_turning": 0.0,
+ "node_us": 42,
+ "peak_us": 42,
+ "roundtrip_eff": 0.5023,
+ "t1_only_expectation": 0.7299,
+ "noise_3se": 0.0548,
+ "P_CONTROL": {
+  "median_monotone": true,
+  "median_curve": [
+   0.9999,
+   0.9503,
+   0.906,
+   0.8686,
+   0.8264,
+   0.8061,
+   0.7937,
+   0.7531,
+   0.7298
+  ],
+  "q34_monotone": true,
+  "q34_curve": [
+   0.9998,
+   0.9661,
+   0.9371,
+   0.9072,
+   0.8765,
+   0.8638,
+   0.8493,
+   0.8238,
+   0.7932
+  ]
+ },
+ "verdict": "NO-TEST (q45 monotone on clean prep - mechanism narrows to twin coherence)"
+}
