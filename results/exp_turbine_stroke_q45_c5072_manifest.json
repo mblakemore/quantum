@@ -74,5 +74,7 @@
    "delay_us": 42,
    "shots": 12000
   }
- ]
+ ],
+ "pending_jobs_at_submit": 0,
+ "job_id": "d9v511gb1g9c73a86cug"
 }
