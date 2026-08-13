@@ -1,0 +1,19 @@
+{
+ "card": "h14_lock4_wiring_map",
+ "cycle": "C5070",
+ "substrate": "claude-fable-5",
+ "protocol": "be37288",
+ "flight": "i1",
+ "partner_median_absR": 0.016,
+ "nonpartner_median_absR": 0.015,
+ "nonpartner_max_absR": 0.063,
+ "prep_floor": 0.022360679774997897,
+ "adjacency_rho": -0.02815957815635334,
+ "adjacency_p": 0.5382516725385413,
+ "adj_mean_absR": 0.015571428571428573,
+ "nonadj_mean_absR": 0.017755364806866954,
+ "n_above_3floor": 0,
+ "verdict": "NO-TEST (control failed, self-caught): the partner control FAILED - Bell-partners show |R|~0.016 in the raw Z basis, same as non-partners - because cross-copy entanglement lives in the Bell-ROTATED frame (post CX+H), not raw computational Z. So the flat non-partner matrix is NOT clean wiring; the instrument is BLIND to cross-copy structure by construction. The auto CLEAN-WIRING verdict is RETRACTED (it read instrument-blindness as quiet hardware - the vacuous-pass trap in a new dress). What DOES survive at /bin/bash: no raw-Z single-basis crosstalk above the 0.022 prep floor anywhere (a weak, correctly-scoped negative). The reason A2 needed the decoder is now demonstrated from the other side: reading cross-copy wiring REQUIRES the Bell-rotated frame, which is exactly what the decoder + A2 provide. Lock 4 closes NO-TEST with its own instrument limitation as the deliverable.",
+ "retracted_auto_verdict": "CLEAN WIRING (retracted - control failure means instrument-blind, not quiet)",
+ "survives": "no raw-Z crosstalk above prep floor (weak negative, correctly scoped); demonstrates WHY cross-copy reads need the Bell-rotated frame"
+}
