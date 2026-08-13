@@ -191,6 +191,30 @@ def main():
         if n2 < 1:
             sys.exit(f"G0e-FAIL {key}: transpiled switch arm has {n2} two-qubit gates — "
                      f"the circuit does not entangle and does not test the switch")
+    # ROUTED-INTENT CHECK. G0e proves the entangling gates SURVIVE; it does not prove the routed
+    # circuit still SEPARATES. Those are different claims: a transpile can preserve 2q count and
+    # still permute/relabel qubits or mis-handle the ctrl_state and produce a circuit that
+    # entangles the wrong way. Tonight's whole lesson is that two correct artifacts can compose
+    # into a wrong one, so the thing that flies is simulated, not the thing that was written.
+    from qiskit_aer import AerSimulator
+    # matrix_product_state, and the TRANSPILED circuit is run AS-IS. Re-transpiling it onto a
+    # simulator would (a) fail — it is full device width, 156 qubits — and (b) defeat the point:
+    # the object under test is the circuit that would FLY, not a re-compilation of it.
+    sim = AerSimulator(method="matrix_product_state")
+    routed = {"C": [], "A": []}
+    for key, cls in table:
+        x, y = parse_pair(key)
+        t = transpile(build_switch(GENERATORS[x], GENERATORS[y]), be,
+                      optimization_level=a.opt, seed_transpiler=11)
+        r = sim.run(t, shots=4000, seed_simulator=7).result().get_counts()
+        p0, p1 = r.get("0", 0), r.get("1", 0)
+        routed[cls].append((p0 - p1) / max(p0 + p1, 1))     # <Z> on the control after the H
+    sep_r = min(routed["C"]) - max(routed["A"])
+    print(f"  routed-intent sep      {sep_r:+.4f}  (C {min(routed['C']):+.3f}..{max(routed['C']):+.3f} · "
+          f"A {min(routed['A']):+.3f}..{max(routed['A']):+.3f})  — NOISELESS sim of the TRANSPILED circuit")
+    if sep_r < 1.9:
+        sys.exit(f"G-FAIL routed-intent separation {sep_r:.4f} < 1.9 — the circuit that would FLY "
+                 f"does not reproduce the logical construction")
     mn = min(r["two_qubit_gates"] for r in g0e)
     print(f"  G0e entanglement       ALL {len(g0e)} switch-arm circuits carry >=1 two-qubit gate "
           f"(min {mn})  ✅ per-pair, recorded")
@@ -201,6 +225,7 @@ def main():
                "prereg_contains": ["G0e", "A4 index-table digest"],
                "artifact_commit": ARTIFACT_COMMIT, "qstar_sha256": QSTAR_SHA,
                "index_table_digest": dig, "opt_level": a.opt,
+               "ideal_separation": round(sep, 6), "routed_intent_separation": round(sep_r, 6),
                "per_pair": g0e}, open(out, "w"), indent=1)
     print(f"  spec provenance        prereg {head[:7]} — ASSERTED to contain G0e + A4 digest ✅")
     print(f"  manifest -> {os.path.relpath(out, REPO)}")

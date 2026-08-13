@@ -8,6 +8,8 @@
  "qstar_sha256": "e471bb6512326abdee69ea5531efab501248d5cd99e9debd0578603fd249c1e7",
  "index_table_digest": "8371d2604275c02a7c0b2d4606805971d244f206c779cc3f8e810e417f8e33c0",
  "opt_level": 1,
+ "ideal_separation": 2.0,
+ "routed_intent_separation": 2.0,
  "per_pair": [
   {
    "pair": "((X+Y)/r2,(X+Y)/r2)",
