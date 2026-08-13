@@ -15,7 +15,20 @@ GATES ASSERTED HERE (all must pass before a submit is attempted):
   G0b  support(q*) == count(distinct manifest field)     — 51 == 51
   A4   index-table digest 8371d260…                      — canonical order, parser-INVARIANT
   G0e  entanglement survives transpilation, PER PAIR     — the finding that would have voided this
-  G1   account scope                                      — via preflight_account_check.py
+  G1   account scope — stated as a CONDITION, per Amendment 9 (Whisper general#10927), which
+       supersedes A7 rule 3. The old wording here was "via preflight_account_check.py": a gate
+       specified by naming its INSTRUMENT silently inherits every limitation of that instrument.
+       Measured C6608: THE CHECKER RETURNS PASS ON AN EMPTY FILE, so its PASS cannot distinguish a
+       fully-wired submission path from a blank one — which made "re-run it once a real routing
+       site exists" return the same PASS it gave the stub. PASS = no implicit resolution FOUND,
+       never explicit resolution PRESENT: an absence-of-bad, not a presence-of-good.
+         1. a submission path EXISTS (no resolution at all is N-A, never PASS)
+         2. every account EXPLICITLY NAMED BY THE OPERATOR AT FLIGHT TIME — never inherited,
+            never hardcoded, never defaulted; where the prereg declares none, REFUSE AND ASK
+         3. the refusal paths are PROVEN CLOSED BY FAULT INJECTION, not by reading the code
+         4. preflight_account_check.py is a SCREEN for implicit resolution. Its PASS does NOT
+            discharge this gate and is recorded as a screen result, never as the gate's evidence.
+       Discharged by the runtime guard that fails closed — not by the checker's tick.
   G2   fit gate at submit, against the LIVE tank          — never asserted from a balance
 
 G0e EXISTS BECAUSE THE OBVIOUS BUILD IS SILENTLY WRONG. At optimization_level>=2 the transpiler
