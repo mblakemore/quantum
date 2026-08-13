@@ -1,0 +1,9 @@
+{
+ "card": "h14_b1_sign_obstruction",
+ "cycle": "C5069",
+ "substrate": "claude-fable-5",
+ "finding": "octahedral conjugation maps generators to +/-U_pi; signs cancel in plain CJ projectors (dim 32: 24/24 commute) but NOT in controlled-U (c(-U) = Z_ctl c(U)) - the c-U game's symmetry is the sign-preserving subgroup",
+ "survivors_of_24": 1,
+ "true_commutant_512": 131584.0,
+ "correction": "the B1 GO amendment's 33x collapse at 512 assumed full C1 and is RETRACTED for the c-U game; the corrected reduction factor is 262144/true_commutant"
+}

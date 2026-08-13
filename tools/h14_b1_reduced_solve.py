@@ -272,12 +272,11 @@ def solve512():
     assert gate["gate"] == "PASS", "stage V gate not passed — 512 not unlocked"
     G = G512_qstar()
     print(f"[{time.time()-t0:6.1f}s] G512 built (trace {np.trace(G).real:.4f})")
-    Hm, Sm = (X + Z) / R2, np.diag([1, 1j]).astype(complex)
-    for nm, V in (("H", Hm), ("S", Sm)):
-        R = rep512(V)
-        err = np.linalg.norm(R @ G @ R.conj().T - G)
-        print(f"[{time.time()-t0:6.1f}s] invariance check rep512({nm}): err {err:.2e}")
-        assert err < 1e-8, f"rep512({nm}) does not commute with G512 — convention break"
+    # SIGN OBSTRUCTION (measured, results/h14_b1_sign_obstruction.json): octahedral conjugation
+    # maps generators to +/-U_pi; c(-U) = Z_ctl c(U) is a DIFFERENT instrument, so only the
+    # sign-preserving subgroup survives at 512 — measured: the identity alone. The C1 reduction
+    # is therefore unavailable here (it remains valid at dim 32); only exchange (verified below)
+    # folds the variable. This is the honest wall, characterized: structural, not just size.
     PI = exchange512()
     err = np.linalg.norm(PI @ G @ PI.T - G)
     print(f"[{time.time()-t0:6.1f}s] exchange invariance: err {err:.2e}")
