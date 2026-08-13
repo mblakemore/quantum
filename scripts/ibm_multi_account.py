@@ -139,14 +139,22 @@ def _construct_errors():
     return getattr(all_services, "_errors", [])
 
 
-def service_for_job(job_id, channel="ibm_quantum_platform"):
+def service_for_job(job_id, channel="ibm_quantum_platform", account_hint=None):
     """(service, account_name) for the FIRST account that can see `job_id`.
 
     Raises JobNotFoundAnywhere naming every account tried — so a genuine absence is reportable as
     an absence, and a routing mistake is never reportable as a dead job.
+
+    `account_hint` (C5069, Ember general#11216 handoff — the watchd spec.account consumer): an
+    env-var name (e.g. "IBMQ_ALT4") to try FIRST. A hint is an ordering optimization, never a
+    trapdoor back to naming: on a miss (or an unknown hint) enumeration proceeds over every
+    account exactly as before, so a wrong hint costs one extra probe and changes no answer.
     """
+    ordered = list(all_services(channel=channel))
+    if account_hint:
+        ordered.sort(key=lambda pair: pair[0] != account_hint)
     tried = []
-    for name, svc in all_services(channel=channel):
+    for name, svc in ordered:
         tried.append(name)
         try:
             svc.job(job_id)
