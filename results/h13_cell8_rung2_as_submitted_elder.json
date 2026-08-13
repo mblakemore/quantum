@@ -1,0 +1,420 @@
+{
+ "as_submitted": [
+  {
+   "pair": {
+    "pair": "((X+Y)/r2,(X+Y)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((X+Y)/r2,(X-Y)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((X+Y)/r2,1)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "((X+Y)/r2,Z)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((X+Z)/r2,(X+Z)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((X+Z)/r2,(X-Z)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((X+Z)/r2,1)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "((X+Z)/r2,Y)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((X-Y)/r2,(X+Y)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((X-Y)/r2,(X-Y)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((X-Y)/r2,1)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "((X-Y)/r2,Z)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((X-Z)/r2,(X+Z)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((X-Z)/r2,(X-Z)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((X-Z)/r2,1)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "((X-Z)/r2,Y)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((Y+Z)/r2,(Y+Z)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((Y+Z)/r2,(Y-Z)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((Y+Z)/r2,1)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "((Y+Z)/r2,X)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((Y-Z)/r2,(Y+Z)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((Y-Z)/r2,(Y-Z)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "((Y-Z)/r2,1)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "((Y-Z)/r2,X)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(1,(X+Y)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(1,(X+Z)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(1,(X-Y)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(1,(X-Z)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(1,(Y+Z)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(1,(Y-Z)/r2)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(1,X)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(1,Y)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(1,Z)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(X,(Y+Z)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(X,(Y-Z)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(X,1)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(X,X)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(X,Y)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(X,Z)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(Y,(X+Z)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(Y,(X-Z)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(Y,1)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(Y,X)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(Y,Y)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(Y,Z)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(Z,(X+Y)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(Z,(X-Y)/r2)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(Z,1)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 2
+  },
+  {
+   "pair": {
+    "pair": "(Z,X)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(Z,Y)",
+    "cls": "A",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  },
+  {
+   "pair": {
+    "pair": "(Z,Z)",
+    "cls": "C",
+    "arm": "switch"
+   },
+   "two_qubit_gates_as_submitted": 4
+  }
+ ],
+ "account": "IBMQ_ALT4",
+ "backend": "ibm_marrakesh",
+ "shots_per_pair": 1000,
+ "n_pairs": 51,
+ "fit_gate": {
+  "remaining_before": 289.0,
+  "est_cost_s": 120.0
+ }
+}

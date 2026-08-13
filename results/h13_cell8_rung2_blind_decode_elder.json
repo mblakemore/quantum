@@ -1,0 +1,365 @@
+{
+ "job": "d9uj7vs98n5s7392uan0",
+ "qpu_seconds": 16,
+ "rows": [
+  {
+   "i": 0,
+   "pair": "((X+Y)/r2,(X+Y)/r2)",
+   "sealed_cls": "C",
+   "z": 0.982,
+   "blind_call": "C"
+  },
+  {
+   "i": 1,
+   "pair": "((X+Y)/r2,(X-Y)/r2)",
+   "sealed_cls": "A",
+   "z": -0.944,
+   "blind_call": "A"
+  },
+  {
+   "i": 2,
+   "pair": "((X+Y)/r2,1)",
+   "sealed_cls": "C",
+   "z": 0.98,
+   "blind_call": "C"
+  },
+  {
+   "i": 3,
+   "pair": "((X+Y)/r2,Z)",
+   "sealed_cls": "A",
+   "z": -0.96,
+   "blind_call": "A"
+  },
+  {
+   "i": 4,
+   "pair": "((X+Z)/r2,(X+Z)/r2)",
+   "sealed_cls": "C",
+   "z": 0.994,
+   "blind_call": "C"
+  },
+  {
+   "i": 5,
+   "pair": "((X+Z)/r2,(X-Z)/r2)",
+   "sealed_cls": "A",
+   "z": -0.956,
+   "blind_call": "A"
+  },
+  {
+   "i": 6,
+   "pair": "((X+Z)/r2,1)",
+   "sealed_cls": "C",
+   "z": 0.994,
+   "blind_call": "C"
+  },
+  {
+   "i": 7,
+   "pair": "((X+Z)/r2,Y)",
+   "sealed_cls": "A",
+   "z": -0.966,
+   "blind_call": "A"
+  },
+  {
+   "i": 8,
+   "pair": "((X-Y)/r2,(X+Y)/r2)",
+   "sealed_cls": "A",
+   "z": -0.966,
+   "blind_call": "A"
+  },
+  {
+   "i": 9,
+   "pair": "((X-Y)/r2,(X-Y)/r2)",
+   "sealed_cls": "C",
+   "z": 0.968,
+   "blind_call": "C"
+  },
+  {
+   "i": 10,
+   "pair": "((X-Y)/r2,1)",
+   "sealed_cls": "C",
+   "z": 0.996,
+   "blind_call": "C"
+  },
+  {
+   "i": 11,
+   "pair": "((X-Y)/r2,Z)",
+   "sealed_cls": "A",
+   "z": -0.958,
+   "blind_call": "A"
+  },
+  {
+   "i": 12,
+   "pair": "((X-Z)/r2,(X+Z)/r2)",
+   "sealed_cls": "A",
+   "z": -0.958,
+   "blind_call": "A"
+  },
+  {
+   "i": 13,
+   "pair": "((X-Z)/r2,(X-Z)/r2)",
+   "sealed_cls": "C",
+   "z": 0.964,
+   "blind_call": "C"
+  },
+  {
+   "i": 14,
+   "pair": "((X-Z)/r2,1)",
+   "sealed_cls": "C",
+   "z": 0.98,
+   "blind_call": "C"
+  },
+  {
+   "i": 15,
+   "pair": "((X-Z)/r2,Y)",
+   "sealed_cls": "A",
+   "z": -0.964,
+   "blind_call": "A"
+  },
+  {
+   "i": 16,
+   "pair": "((Y+Z)/r2,(Y+Z)/r2)",
+   "sealed_cls": "C",
+   "z": 0.972,
+   "blind_call": "C"
+  },
+  {
+   "i": 17,
+   "pair": "((Y+Z)/r2,(Y-Z)/r2)",
+   "sealed_cls": "A",
+   "z": -0.97,
+   "blind_call": "A"
+  },
+  {
+   "i": 18,
+   "pair": "((Y+Z)/r2,1)",
+   "sealed_cls": "C",
+   "z": 0.992,
+   "blind_call": "C"
+  },
+  {
+   "i": 19,
+   "pair": "((Y+Z)/r2,X)",
+   "sealed_cls": "A",
+   "z": -0.962,
+   "blind_call": "A"
+  },
+  {
+   "i": 20,
+   "pair": "((Y-Z)/r2,(Y+Z)/r2)",
+   "sealed_cls": "A",
+   "z": -0.974,
+   "blind_call": "A"
+  },
+  {
+   "i": 21,
+   "pair": "((Y-Z)/r2,(Y-Z)/r2)",
+   "sealed_cls": "C",
+   "z": 0.998,
+   "blind_call": "C"
+  },
+  {
+   "i": 22,
+   "pair": "((Y-Z)/r2,1)",
+   "sealed_cls": "C",
+   "z": 0.992,
+   "blind_call": "C"
+  },
+  {
+   "i": 23,
+   "pair": "((Y-Z)/r2,X)",
+   "sealed_cls": "A",
+   "z": -0.956,
+   "blind_call": "A"
+  },
+  {
+   "i": 24,
+   "pair": "(1,(X+Y)/r2)",
+   "sealed_cls": "C",
+   "z": 0.988,
+   "blind_call": "C"
+  },
+  {
+   "i": 25,
+   "pair": "(1,(X+Z)/r2)",
+   "sealed_cls": "C",
+   "z": 0.998,
+   "blind_call": "C"
+  },
+  {
+   "i": 26,
+   "pair": "(1,(X-Y)/r2)",
+   "sealed_cls": "C",
+   "z": 0.986,
+   "blind_call": "C"
+  },
+  {
+   "i": 27,
+   "pair": "(1,(X-Z)/r2)",
+   "sealed_cls": "C",
+   "z": 0.98,
+   "blind_call": "C"
+  },
+  {
+   "i": 28,
+   "pair": "(1,(Y+Z)/r2)",
+   "sealed_cls": "C",
+   "z": 0.988,
+   "blind_call": "C"
+  },
+  {
+   "i": 29,
+   "pair": "(1,(Y-Z)/r2)",
+   "sealed_cls": "C",
+   "z": 0.998,
+   "blind_call": "C"
+  },
+  {
+   "i": 30,
+   "pair": "(1,X)",
+   "sealed_cls": "C",
+   "z": 0.992,
+   "blind_call": "C"
+  },
+  {
+   "i": 31,
+   "pair": "(1,Y)",
+   "sealed_cls": "C",
+   "z": 0.988,
+   "blind_call": "C"
+  },
+  {
+   "i": 32,
+   "pair": "(1,Z)",
+   "sealed_cls": "C",
+   "z": 0.994,
+   "blind_call": "C"
+  },
+  {
+   "i": 33,
+   "pair": "(X,(Y+Z)/r2)",
+   "sealed_cls": "A",
+   "z": -0.954,
+   "blind_call": "A"
+  },
+  {
+   "i": 34,
+   "pair": "(X,(Y-Z)/r2)",
+   "sealed_cls": "A",
+   "z": -0.966,
+   "blind_call": "A"
+  },
+  {
+   "i": 35,
+   "pair": "(X,1)",
+   "sealed_cls": "C",
+   "z": 0.992,
+   "blind_call": "C"
+  },
+  {
+   "i": 36,
+   "pair": "(X,X)",
+   "sealed_cls": "C",
+   "z": 0.992,
+   "blind_call": "C"
+  },
+  {
+   "i": 37,
+   "pair": "(X,Y)",
+   "sealed_cls": "A",
+   "z": -0.946,
+   "blind_call": "A"
+  },
+  {
+   "i": 38,
+   "pair": "(X,Z)",
+   "sealed_cls": "A",
+   "z": -0.97,
+   "blind_call": "A"
+  },
+  {
+   "i": 39,
+   "pair": "(Y,(X+Z)/r2)",
+   "sealed_cls": "A",
+   "z": -0.964,
+   "blind_call": "A"
+  },
+  {
+   "i": 40,
+   "pair": "(Y,(X-Z)/r2)",
+   "sealed_cls": "A",
+   "z": -0.972,
+   "blind_call": "A"
+  },
+  {
+   "i": 41,
+   "pair": "(Y,1)",
+   "sealed_cls": "C",
+   "z": 0.992,
+   "blind_call": "C"
+  },
+  {
+   "i": 42,
+   "pair": "(Y,X)",
+   "sealed_cls": "A",
+   "z": -0.962,
+   "blind_call": "A"
+  },
+  {
+   "i": 43,
+   "pair": "(Y,Y)",
+   "sealed_cls": "C",
+   "z": 0.984,
+   "blind_call": "C"
+  },
+  {
+   "i": 44,
+   "pair": "(Y,Z)",
+   "sealed_cls": "A",
+   "z": -0.964,
+   "blind_call": "A"
+  },
+  {
+   "i": 45,
+   "pair": "(Z,(X+Y)/r2)",
+   "sealed_cls": "A",
+   "z": -0.976,
+   "blind_call": "A"
+  },
+  {
+   "i": 46,
+   "pair": "(Z,(X-Y)/r2)",
+   "sealed_cls": "A",
+   "z": -0.964,
+   "blind_call": "A"
+  },
+  {
+   "i": 47,
+   "pair": "(Z,1)",
+   "sealed_cls": "C",
+   "z": 0.992,
+   "blind_call": "C"
+  },
+  {
+   "i": 48,
+   "pair": "(Z,X)",
+   "sealed_cls": "A",
+   "z": -0.954,
+   "blind_call": "A"
+  },
+  {
+   "i": 49,
+   "pair": "(Z,Y)",
+   "sealed_cls": "A",
+   "z": -0.96,
+   "blind_call": "A"
+  },
+  {
+   "i": 50,
+   "pair": "(Z,Z)",
+   "sealed_cls": "C",
+   "z": 0.992,
+   "blind_call": "C"
+  }
+ ],
+ "decision_vector": "CACACACAACCAACCACACAACCACCCCCCCCCAACCAAAACACAAACAAC",
+ "decisions_sha256": "a0984134f583ec633309d82999309aae2dbc7a6f5763d6bbc5e94341f04866c9"
+}
