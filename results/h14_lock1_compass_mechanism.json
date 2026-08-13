@@ -1938,5 +1938,135 @@
   "TEMPORAL-CERTIFIED": 30,
   "INDETERMINATE": 2
  },
- "label_join": "NOT TESTABLE AS FROZEN: the unsealed mapping's ID space matches Elder's decisions (75/80) but NO banked record directory in any reachable repo - the court's label linkage was never banked (custody finding)"
+ "label_join": {
+  "status": "EXECUTED as frozen (crosswalk banked by ember C4321, board #140, same-sitting)",
+  "tally": {
+   "CC|PSD-CONSISTENT": 40,
+   "CE|TEMPORAL-CERTIFIED": 30,
+   "CE|PSD-CONSISTENT": 8,
+   "CE|INDETERMINATE": 2
+  },
+  "crossovers": [
+   {
+    "set": "140146895493a8f8",
+    "c": {
+     "XX": 0.328,
+     "YY": 0.338,
+     "ZZ": 0.354
+    },
+    "lambda_min": -0.005,
+    "sigma": 0.4,
+    "verdict": "PSD-CONSISTENT",
+    "arm": "CE"
+   },
+   {
+    "set": "3933d58fc9aac3dc",
+    "c": {
+     "XX": 0.338,
+     "YY": 0.35,
+     "ZZ": 0.35
+    },
+    "lambda_min": -0.0095,
+    "sigma": 0.7,
+    "verdict": "PSD-CONSISTENT",
+    "arm": "CE"
+   },
+   {
+    "set": "4be7699436763948",
+    "c": {
+     "XX": 0.338,
+     "YY": 0.342,
+     "ZZ": 0.348
+    },
+    "lambda_min": -0.007,
+    "sigma": 0.5,
+    "verdict": "PSD-CONSISTENT",
+    "arm": "CE"
+   },
+   {
+    "set": "4e86356653a6726c",
+    "c": {
+     "XX": 0.392,
+     "YY": 0.382,
+     "ZZ": 0.388
+    },
+    "lambda_min": -0.0405,
+    "sigma": 3.2,
+    "verdict": "INDETERMINATE",
+    "arm": "CE"
+   },
+   {
+    "set": "507dc8b7ea861056",
+    "c": {
+     "XX": 0.342,
+     "YY": 0.34,
+     "ZZ": 0.362
+    },
+    "lambda_min": -0.011,
+    "sigma": 0.9,
+    "verdict": "PSD-CONSISTENT",
+    "arm": "CE"
+   },
+   {
+    "set": "5b0ea6c22739d816",
+    "c": {
+     "XX": 0.298,
+     "YY": 0.314,
+     "ZZ": 0.312
+    },
+    "lambda_min": 0.019,
+    "sigma": -1.5,
+    "verdict": "PSD-CONSISTENT",
+    "arm": "CE"
+   },
+   {
+    "set": "6004f458e3962b6e",
+    "c": {
+     "XX": 0.356,
+     "YY": 0.354,
+     "ZZ": 0.34
+    },
+    "lambda_min": -0.0125,
+    "sigma": 1.0,
+    "verdict": "PSD-CONSISTENT",
+    "arm": "CE"
+   },
+   {
+    "set": "9c4b745e846a3f12",
+    "c": {
+     "XX": 0.4,
+     "YY": 0.388,
+     "ZZ": 0.406
+    },
+    "lambda_min": -0.0485,
+    "sigma": 3.9,
+    "verdict": "INDETERMINATE",
+    "arm": "CE"
+   },
+   {
+    "set": "bce1a2b395b05722",
+    "c": {
+     "XX": 0.336,
+     "YY": 0.336,
+     "ZZ": 0.35
+    },
+    "lambda_min": -0.0055,
+    "sigma": 0.4,
+    "verdict": "PSD-CONSISTENT",
+    "arm": "CE"
+   },
+   {
+    "set": "d05cf9f9e895a942",
+    "c": {
+     "XX": 0.326,
+     "YY": 0.32,
+     "ZZ": 0.334
+    },
+    "lambda_min": 0.005,
+    "sigma": -0.4,
+    "verdict": "PSD-CONSISTENT",
+    "arm": "CE"
+   }
+  ]
+ }
 }
