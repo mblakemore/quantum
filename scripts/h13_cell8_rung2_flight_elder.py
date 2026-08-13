@@ -35,7 +35,17 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
-FREEZE_COMMIT = "bb46926"
+PREREG_DOC = "docs/h13-cell8-rung2-prereg-FROZEN-whisper-c5060.md"
+# TWO SEPARATE PROVENANCES, deliberately not one field:
+#   · the ARTIFACT is pinned by its SEALED sha256 (commit-independent — the bytes are the identity)
+#   · the SPEC is pinned by the prereg commit CURRENT AT BUILD TIME, resolved live below
+# C6607 (Whisper general#10812): this was a single hardcoded FREEZE_COMMIT="bb46926", which was the
+# true prereg head when the script was written. Amendment 5 (G0e) landed at d36ae4f UNDERNEATH the
+# build, so the manifest recorded a flight "built against" a spec version that does not contain the
+# gate the manifest exists to record. Nothing decayed and nobody erred — THE SPEC MOVED AND THE
+# STAMP DID NOT. A grader checking the manifest against bb46926 would find no G0e there at all and
+# read a compliant flight as non-compliant.
+ARTIFACT_COMMIT = "bb46926"        # any commit whose bytes hash to QSTAR_SHA; the SHA is the pin
 QSTAR = "results/causal_game_sdp_qij.json"
 QSTAR_SHA = "e471bb6512326abdee69ea5531efab501248d5cd99e9debd0578603fd249c1e7"
 INDEX_TABLE_DIGEST = "8371d2604275c02a7c0b2d4606805971d244f206c779cc3f8e810e417f8e33c0"
@@ -55,7 +65,21 @@ GENERATORS = {
 
 
 def _frozen_bytes(path):
-    return subprocess.check_output(["git", "-C", REPO, "show", f"{FREEZE_COMMIT}:{path}"])
+    return subprocess.check_output(["git", "-C", REPO, "show", f"{ARTIFACT_COMMIT}:{path}"])
+
+
+def prereg_head():
+    """The prereg commit CURRENT AT BUILD TIME, plus an assertion that it actually contains the
+    gates this script implements. Without the assertion the stamp drifts again the next time an
+    amendment lands mid-build — which on the current rate is about forty minutes."""
+    sha = subprocess.check_output(
+        ["git", "-C", REPO, "log", "-1", "--format=%H", "--", PREREG_DOC]).decode().strip()
+    doc = subprocess.check_output(["git", "-C", REPO, "show", f"{sha}:{PREREG_DOC}"]).decode()
+    for token in ("G0e", INDEX_TABLE_DIGEST[:16]):
+        if token not in doc:
+            sys.exit(f"G-FAIL prereg {sha[:7]} does not contain {token!r} — this script implements "
+                     f"it, so the stamp would claim a spec version that lacks the gate")
+    return sha
 
 
 def canonical_table():
@@ -172,8 +196,13 @@ def main():
           f"(min {mn})  ✅ per-pair, recorded")
 
     out = os.path.join(REPO, "results", "h13_cell8_rung2_g0e_manifest_elder.json")
-    json.dump({"freeze": FREEZE_COMMIT, "index_table_digest": dig, "opt_level": a.opt,
+    head = prereg_head()
+    json.dump({"prereg_commit_at_build": head,
+               "prereg_contains": ["G0e", "A4 index-table digest"],
+               "artifact_commit": ARTIFACT_COMMIT, "qstar_sha256": QSTAR_SHA,
+               "index_table_digest": dig, "opt_level": a.opt,
                "per_pair": g0e}, open(out, "w"), indent=1)
+    print(f"  spec provenance        prereg {head[:7]} — ASSERTED to contain G0e + A4 digest ✅")
     print(f"  manifest -> {os.path.relpath(out, REPO)}")
 
     if a.scan:

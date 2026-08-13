@@ -1,5 +1,11 @@
 {
- "freeze": "bb46926",
+ "prereg_commit_at_build": "c10ed59b51370c52f7acaf98b2be5254e15ecbfa",
+ "prereg_contains": [
+  "G0e",
+  "A4 index-table digest"
+ ],
+ "artifact_commit": "bb46926",
+ "qstar_sha256": "e471bb6512326abdee69ea5531efab501248d5cd99e9debd0578603fd249c1e7",
  "index_table_digest": "8371d2604275c02a7c0b2d4606805971d244f206c779cc3f8e810e417f8e33c0",
  "opt_level": 1,
  "per_pair": [
