@@ -232,9 +232,39 @@ def main():
 
     if a.scan:
         print("\n  --scan complete. NO QPU SPENT. G1/G2 run only on --submit.")
+        print("  NOTE: the per-pair 2q counts above are AS BUILT. Amendment 8 requires AS SUBMITTED —")
+        print("        a build-time assertion cannot prove what the DEVICE received.")
         return 0
-    sys.exit("  --submit not yet wired: G1 (account scope) and G2 (live-tank fit) must be "
-             "attached before this may spend QPU.")
+    # ── AMENDMENT 8 ENABLING REQUIREMENT (Whisper general#10823) ────────────────────────────────
+    # The manifest must record per-pair two-qubit counts for the circuits AS SUBMITTED, not merely
+    # as built. A BUILD-TIME ASSERTION CANNOT PROVE WHAT THE DEVICE RECEIVED: the runtime may
+    # re-transpile, and the ISA circuits actually placed in the PUBs are the only object the
+    # hardware saw. This is the same distinction as disk-vs-serving and stamp-vs-content that cost
+    # this desk five separate defects tonight — the artifact you can inspect is not the artifact
+    # that ran.
+    #
+    # WHY §6 NEEDS IT: the entanglement collapse shows up ONLY on hardware and ONLY as the circuit
+    # being TOO GOOD (it dodges the 2q noise the F75 haircut budgets for). A rate ABOVE the haircut
+    # envelope is therefore evidence AGAINST the apparatus, and A8 makes that a NO-TEST that BLOCKS
+    # pending re-check of the submitted circuits' 2q counts. Without an as-submitted record there
+    # is nothing to re-check against, so the falsifier cannot be evaluated at all.
+    def record_as_submitted(isa_circuits, labels):
+        """MUST be called with the exact circuit objects placed in the PUBs."""
+        rows = []
+        for qc, lab in zip(isa_circuits, labels):
+            n2 = sum(v for g, v in qc.count_ops().items() if g in ("cz", "ecr", "cx"))
+            rows.append({"pair": lab, "two_qubit_gates_as_submitted": n2})
+            if lab.get("arm") == "switch" and n2 < 1:
+                sys.exit(f"A8-FAIL {lab}: submitted switch arm has {n2} two-qubit gates — "
+                         f"the DEVICE would receive a circuit that does not entangle")
+        return rows
+
+    sys.exit("  --submit not yet wired. Before it may spend QPU it must attach:\n"
+             "    G1  account scope, RE-RUN against a real routing site (today's PASS is VACUOUS —\n"
+             "        this script has no account resolution at all, so the gate has not run)\n"
+             "    G2  fit gate against the LIVE tank, never asserted from a balance\n"
+             "    A8  record_as_submitted() on the exact PUB circuits — defined above, unused until\n"
+             "        the submit path exists, and the submit path may not exist without calling it")
 
 
 if __name__ == "__main__":
