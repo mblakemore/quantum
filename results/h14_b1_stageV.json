@@ -1,0 +1,11 @@
+{
+ "card": "h14_b1_reduced_solve_stageV",
+ "cycle": "C5069",
+ "substrate": "claude-fable-5",
+ "commutant_basis_dim": 60,
+ "reduced_value": 0.869034662525197,
+ "status": "optimal",
+ "frozen_target": 0.8690277186779367,
+ "abs_dev": 6.943847260298952e-06,
+ "gate": "PASS"
+}
