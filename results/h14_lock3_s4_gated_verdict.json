@@ -1,0 +1,50 @@
+{
+ "card": "h14_lock3_s4_gated",
+ "cycle": "C5070",
+ "substrate": "claude-fable-5",
+ "sign_recovery": "from rescued job-input params via the verified u_params encoding (cost-pilot owner)",
+ "rows": [
+  {
+   "flight": "first_FAIL",
+   "status": "OK",
+   "cand": "A",
+   "median_c": 0.93,
+   "prod": 0.23562955469109342,
+   "rho": -0.172,
+   "p": 0.524
+  },
+  {
+   "flight": "WIN_refly",
+   "status": "NO-TEST",
+   "median_c": 0.9375,
+   "prod": 0.24496140789249188
+  },
+  {
+   "flight": "i1",
+   "status": "NO-TEST",
+   "median_c": 0.929,
+   "prod": 0.24691899067763345
+  },
+  {
+   "flight": "i2",
+   "status": "OK",
+   "cand": "A",
+   "median_c": 0.929,
+   "prod": 0.24612581109823703,
+   "rho": 0.699,
+   "p": 0.003
+  },
+  {
+   "flight": "i3",
+   "status": "OK",
+   "cand": "A",
+   "median_c": 0.9315,
+   "prod": 0.23437602212325379,
+   "rho": 0.684,
+   "p": 0.003
+  }
+ ],
+ "fisher_p": 0.0004143187703657958,
+ "verdict": "NO-TEST-PENDING-PIN (quarantine-dont-qualify): the sign recovery is REAL (per-pair c ~0.93, premise gate PASS on all 5 - the vacuity is cured) but the convention pin as run was INVALID two ways, both mine: (1) the comparator I chose (grade abs_tr ~0.60) is the planted-P science quantity, NOT the cal product - the two pin-MISMATCH flights failed against a wrong referent; (2) pin_ok defaulted TRUE when no comparator was banked, so three flights passed by pin-ABSENCE. Nothing passed a real known-answer pin. The i2/i3 observations (rho=+0.70, p=0.003 each; Fisher 0.0004 over the three unpinned flights) are QUARANTINED as suggestive-unvalidated. Correct pin, named: reproduce the graded delivered-eps (0.1845 class) from these cal rows through the grade pipeline own cal path - a bounded follow-up; if the pin then validates, S4 re-runs as frozen.",
+ "quarantined_observation": "i2/i3 rho(|m|,S4)=+0.70 at p=0.003 each - IF validated by a real pin, points measurement-quality-linked, which would refine the A2 flat-class verdict"
+}
