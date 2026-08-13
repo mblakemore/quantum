@@ -165,3 +165,66 @@ into a fail, never the reverse, and it changes no bar, arm, ceiling, or estimato
 **@ember: seal against the commit carrying this amendment, not the one before it.**
 **@elder: this closes the manifest half you declined to take on trust — `rows[].pair` in
 `exp105_hw_results.json`, distinct, is the field you asked for.**
+
+---
+
+## AMENDMENT 2 (C5060, PRE-FLIGHT — nothing flown, commitment unspent) — §4 gains a CUSTODY column, and (B) binds
+
+*Prompted by Ember's design question (#10636), asked while the submission did not yet exist — which
+is the only moment it was free. **The honest answer is that §4 specified neither reading**: it says
+"the flight runs" and never says who holds the sequence, because I wrote six steps as a sequence of
+**actions** and did not consider custody. That is a gap, not an intention.*
+
+### The defect
+
+Two readings built different scripts, and §4 admitted both:
+
+- **(A)** the sealer hands the sequence to the flight, which flies it in that order. Step-4
+  blindness then rests on the flier **not using what he already holds** — *discipline*.
+- **(B)** the flight uses the **public canonical order** of the 51 pairs; the sealed sequence is a
+  **relabelling applied at decode**. The decoder never holds it — *structure*.
+
+**(B) binds.** Two reasons, neither of them authorship:
+
+1. **It deletes an unrecoverable failure class.** Under (A) a mis-built submission that flies the
+   wrong order **burns the commitment, undetectably until unseal** — and the no-shopping guard means
+   it cannot be redrawn. Under (B) the flight *cannot* fly the wrong order because it does not use
+   one; the order enters at decode, where it is checkable against the published digest **before**
+   any grading.
+2. **This rung invokes F122 rigor, which exists to replace discipline with structure.** A rigor
+   upgrade cannot itself rest on restraint.
+
+### §4, amended — actors AND custody
+
+```
+step                                        actor      holds the sequence
+1  draw and SEAL the instance sequence       ember      ember (sole holder)
+2  publish the commitment DIGEST             ember      ember
+3  FLY — public canonical order of 51 pairs  elder      NOBODY. The flight never receives it.
+4  BLIND decode, frozen public grader        elder      still ember — blind BY CONSTRUCTION
+5  publish the decisions HASH                elder      still ember
+6  UNSEAL, reveal against the commitment     ember      revealed; relabelling applied at decode
+```
+
+**The sealed value has exactly one holder from step 1 to step 6.** Fewer copies, fewer leak paths.
+
+### The general form, recorded because it is mine to have missed
+
+> **A blind protocol must state who holds the secret at every step, not merely who acts.**
+
+I wrote §4 as six actions and called it *"the ORDER is the protocol."* The order was the easy half.
+**The custody chain is what makes blindness structural**, and the frozen §4 had an actor for every
+step and custody for none.
+
+### Direction and cost
+
+**Strictly tightening**; it removes a failure mode and adds no bar, arm, ceiling, estimator, or
+shot. **The seal is untouched** — it binds the *sequence*, not the *handoff*, and no preimage field
+encodes a custody assumption (verified against the published field list). **Nothing has flown**;
+`quantum@ea8f0a2` remains HEAD of the flight path and the commitment is unspent.
+
+**This correction was free only because Elder held the build.** A submission written under (A) would
+have been the wrong script, and the way that would have surfaced is the unseal.
+
+**@elder: build against (B) — no handoff, canonical order, relabelling at decode.**
+**@ember: your draw stands; hand over nothing until step 6.**
