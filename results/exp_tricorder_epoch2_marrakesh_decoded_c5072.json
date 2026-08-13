@@ -1,0 +1,117 @@
+{
+ "card": "exp_tricorder_epoch2_decode",
+ "cycle": "C5072",
+ "job": "d9v4s3gb1g9c73a867bg",
+ "backend": "ibm_marrakesh",
+ "cal_epoch": "2026-08-13 22:42:53+00:00",
+ "account": "IBMQ_ALT4",
+ "thresholds": {
+  "FLAG_SIGMA": 3.0,
+  "REVIVAL_MIN": 0.04,
+  "rule_provenance": "C5004/widesweep frozen rules, unchanged"
+ },
+ "population": {
+  "n_scored": 41,
+  "decay_ratio_median": 0.9055,
+  "robust_sigma": 0.1691
+ },
+ "revivers": {
+  "7": {
+   "node_depth": 280,
+   "revival_amplitude": 0.083,
+   "absZ_curve": [
+    0.5332,
+    0.6444,
+    0.6798,
+    0.6881,
+    0.7271
+   ]
+  },
+  "24": {
+   "node_depth": 360,
+   "revival_amplitude": 0.181,
+   "absZ_curve": [
+    0.3528,
+    0.268,
+    0.1637,
+    0.0504,
+    0.2313
+   ]
+  },
+  "27": {
+   "node_depth": 280,
+   "revival_amplitude": 0.059,
+   "absZ_curve": [
+    0.4109,
+    0.5057,
+    0.5093,
+    0.5479,
+    0.5651
+   ]
+  },
+  "31": {
+   "node_depth": 280,
+   "revival_amplitude": 0.133,
+   "absZ_curve": [
+    0.2254,
+    0.0571,
+    0.1039,
+    0.1247,
+    0.1903
+   ]
+  },
+  "34": {
+   "node_depth": 320,
+   "revival_amplitude": 0.382,
+   "absZ_curve": [
+    0.2713,
+    0.5325,
+    0.1557,
+    0.2474,
+    0.5382
+   ]
+  },
+  "45": {
+   "node_depth": 320,
+   "revival_amplitude": 0.064,
+   "absZ_curve": [
+    0.1762,
+    0.03,
+    0.0218,
+    0.0317,
+    0.0854
+   ]
+  },
+  "53": {
+   "node_depth": 360,
+   "revival_amplitude": 0.062,
+   "absZ_curve": [
+    0.2928,
+    0.0079,
+    0.0231,
+    0.004,
+    0.066
+   ]
+  }
+ },
+ "drifters_3sigma": {
+  "31": {
+   "decay_excess_sigma": 3.86,
+   "revived": true
+  },
+  "45": {
+   "decay_excess_sigma": 4.35,
+   "revived": true
+  },
+  "51": {
+   "decay_excess_sigma": 3.68,
+   "revived": false
+  },
+  "53": {
+   "decay_excess_sigma": 5.19,
+   "revived": true
+  }
+ },
+ "verdict_144": "LIVE-REVIVAL",
+ "decision_rule": "live revival + resolvable period -> turbine design row; quiet -> null posted, stream-3 fallback decided separately"
+}
