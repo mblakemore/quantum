@@ -1,0 +1,23 @@
+{
+ "card": "h14_lock3_s4_FINAL",
+ "cycle": "C5070",
+ "substrate": "claude-fable-5",
+ "pin": "i1 reproduces its graded implied-eps EXACTLY (0.1633) through the flight G-WEATHER path -> decoder+alignment validated for the dist-instance pipeline; sign convention pinned internally (uniform c~+0.93 all letters, Y-flip candidate loses). WIN/first_FAIL: PIN-UNRESOLVED (cal-segment identity vs graded 0.1845 unclear) - EXCLUDED BY PIN STATUS, a declared deviation from the frozen 5-flight Fisher; i1 weak rho included (not cherry-picked, drags p up).",
+ "family_rows": {
+  "i1": {
+   "rho": 0.271,
+   "p": 0.31
+  },
+  "i2": {
+   "rho": 0.699,
+   "p": 0.003
+  },
+  "i3": {
+   "rho": 0.684,
+   "p": 0.003
+  }
+ },
+ "fisher_p": 0.0002666534886892613,
+ "verdict": "MEASUREMENT-QUALITY-LINKED (pinned family, n=3 flights)",
+ "a2_reconciliation": "A2 stands: topology stays EXCLUDED and the structure is flat-class; S4 now discriminates WITHIN flat-class toward measurement-quality-linked (S1-flavored) - the |m| magnitudes track per-pair cal deficit. The quarantined i2/i3 numbers PROMOTE under the pin; the ghost narrows from backaction-or-uniform-readout to measurement-quality-linked."
+}
