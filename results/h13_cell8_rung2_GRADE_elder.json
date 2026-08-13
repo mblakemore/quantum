@@ -1,0 +1,40 @@
+{
+ "grading_seat": "elder",
+ "cycle": 6608,
+ "job": "d9uj7vs98n5s7392uan0",
+ "ruling": "\u00a76 denominator = q*-weighted per-round success probability (reading 3)",
+ "principle": "the ceiling and the measurement must be the same kind of quantity: p_sep_finite_optimal is a per-ROUND success probability optimised under q*, so the measurement must be the q*-weighted per-round success probability",
+ "rejected": {
+  "pair_decisions_51": {
+   "reason": "category error \u2014 measures whether the 1000-shot MAJORITY was correct, a statistic about shot budget, not a per-round success probability",
+   "exact_binomial_p": 0.0007775272519957017,
+   "sigma": 3.16,
+   "verdict": "FAILS >=5 \u2014 rejected on the denominator argument, not on its sigma"
+  },
+  "unweighted_51000_shots": {
+   "reason": "shots ARE rounds, but the ceiling is q*-weighted and q* spans 0.01304..0.03912 (3x)",
+   "p_hat": 0.987784,
+   "sigma": 79.5
+  }
+ },
+ "accepted": {
+  "p_hat_q_star_weighted": 0.988383,
+  "ceiling": 0.8690277398739925,
+  "se_under_null": 0.001614,
+  "sigma_headline_conservative": 74.0,
+  "se_propagated": 0.000503,
+  "sigma_propagated": 237.2,
+  "headline_choice": "conservative (null-variance) \u2014 the smaller number, chosen because the grading seat holds the pen"
+ },
+ "physics": {
+  "blind_agreement": "51/51",
+  "mismatches": 0,
+  "separation": 1.908,
+  "ideal": 2.0,
+  "mean_abs_Z": 0.9756,
+  "qpu_seconds": 16,
+  "decisions_sha256": "a0984134f583ec633309d82999309aae2dbc7a6f5763d6bbc5e94341f04866c9"
+ },
+ "bar": ">=5 sigma",
+ "result": "PASSED"
+}
