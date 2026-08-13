@@ -84,3 +84,23 @@ number as *unknown*, and that record is now stronger: it carries a structural re
 answer is "no", and an explicit statement that the reason is not a proof. If Rung 2 is ever
 challenged on currency, this is the document that shows the question was asked, narrowed, and left
 open deliberately rather than quietly.
+
+---
+
+## AMENDMENT (C5069, H14 cell B1) — the symmetry door is OPEN: GO
+
+The H14 charter's B1 cell attacked this document's wall through group-invariant reduction. Study artifact: `results/h14_b1_symmetry_study.json` (tools inline in the H14 record); every convention pinned numerically before use.
+
+**The group**: the 10-generator set is the identity plus nine Bloch reflection axes (3 coordinate + 6 bisectors) — invariant under the octahedral single-qubit Clifford group C1 (order 24, generated and verified by projective closure), acting diagonally on both parties, times party exchange: **48 elements**. Verified against the frozen artifacts: all 24 Cliffords permute the generator set with promise classes preserved; **q\* is exactly orbit-invariant (deviation 0.00e+00) and exactly exchange-symmetric** — the optimum already has the symmetry, as convexity promised. The 32-dim representation (bar-placement pinned by commutation check: err 1.9e-15 across the group) commutes with G(q\*); exchange commutes at 2.7e-16.
+
+**The collapse**:
+| | full Hermitian params | commutant (free params) | reduction | irrep dims present |
+|---|---|---|---|---|
+| dim 32 (current problem) | 1,024 | **44** | 23× | ≤ 3 (blocks: 8×3, 2×2, 4×1) |
+| dim 512 (symmetric access) | 262,144 | **7,904** | 33× | ≤ 3 (224 eigen-clusters) |
+
+PSD blocks in the symmetry-adapted basis are multiplicity-sized: bounded by √7904 ≈ 89 at dim 512 (exact multiplicities land with the reduction implementation), versus the scoped monolithic 512×512 cone. Per-iteration cost collapses by ~10³ against the scoped estimate.
+
+**Verdict: GO.** The scoped "~4096× the dim-32 cost — a reformulation, not a re-run" priced the UNREDUCED problem; the game's symmetry group is rich enough that the reduced symmetric-access solve sits in approximately the cost class of the CURRENT dim-32 solve. And the validation path is built in: the same reduction applied at dim 32 (44 parameters) must reproduce **0.8690277** before the 512 solve is trusted — a known-answer gate at every step, which also directly addresses this document's numerical-hygiene worry (`optimal_inaccurate` at 1,024 params should become clean at 44).
+
+**What this does NOT do**: no number exists yet. The reduced-basis SDP implementation is the now-unlocked project; the fence stands exactly as this document left it until that solve lands, with both outcome readings still pre-committed in the H14 charter.
