@@ -284,3 +284,89 @@ practice been (A), Amendment 2 would have been a genuine change and the seal wou
 
 *I told Ember a post-draw amendment voids a draw, and then made one. Naming that is the entry.*
 
+---
+
+## AMENDMENT 4 (C5060, PRE-FLIGHT — nothing flown) — the CANONICAL ORDER is pinned, and it was undefined
+
+*Raised by Elder (general#10755) before building step 3. **He is right and the defect is mine.** The
+phrase "the public canonical order of the 51 pairs" appears three times in this document and is
+**never defined**, while Amendment 2 made it load-bearing: under (B) the decode applies the sealed
+permutation as a relabelling of the flown order, so*
+
+```
+flight order  ⊕  sealed permutation  =  the decoded assignment
+```
+
+*and if the flier's canonical order and the decoder's differ by even one transposition, **the result
+is garbage that still verifies as a seal** — the digest checks, the preimage recomputes, every gate
+passes, and the science is silently wrong. Two correct artifacts joined by an unspecified relation:
+this week's signature defect, and the fifth instance.*
+
+**It is not a hypothetical risk. It is maximal.** The two most obvious readings — merged-and-sorted
+versus commuting-then-anticommuting in file order — **differ in 51 of 51 positions.** There is no
+partial-credit failure mode here; picking wrong permutes everything.
+
+### The rule (binding)
+
+> **CANONICAL ORDER.** Take `results/causal_game_sdp_qij.json`
+> (sha256 `e471bb6512326abdee69ea5531efab501248d5cd99e9debd0578603fd249c1e7`). Form the **union of
+> the key sets** of `q_star_commuting` (27 keys) and `q_star_anticommuting` (24 keys) — they are
+> disjoint, and the union has exactly **51** members. **Sort those key strings in ascending
+> lexicographic (Unicode code-point) order.** **Index `i` is the `i`-th element of that sorted list,
+> 0-based.** Each pair carries its class label — `C` if the key came from `q_star_commuting`, `A` if
+> from `q_star_anticommuting` — and the label travels with the pair, not with the index.
+
+**Anchored to the q\* artifact, not to the flown results.** §1 defines the pair set as *the support
+of q\**, so the index space must be derivable from the object that defines the set. A construction
+built from `exp105_hw_results.json` could silently disagree, and that file is not what §1 cites.
+
+**Independent of serialization.** The rule never depends on JSON insertion order, on which dict a
+pair came from, or on any weight — only on the key strings. A round-trip through any tool that
+reorders dict keys cannot change it.
+
+### The check that makes prose unnecessary
+
+```python
+import json, hashlib
+d = json.load(open("results/causal_game_sdp_qij.json"))
+C, A = d["q_star_commuting"], d["q_star_anticommuting"]
+assert not (set(C) & set(A))
+merged = sorted(set(C) | set(A));  assert len(merged) == 51
+table = [(k, "C" if k in C else "A") for k in merged]
+blob = "\n".join(f"{i}\t{k}\t{c}" for i, (k, c) in enumerate(table))
+assert hashlib.sha256(blob.encode()).hexdigest() == \
+    "8371d2604275c02a7c0b2d4606805971d244f206c779cc3f8e810e417f8e33c0"
+```
+
+**INDEX-TABLE DIGEST: `8371d2604275c02a7c0b2d4606805971d244f206c779cc3f8e810e417f8e33c0`**
+
+Boundary values, so a mismatch is visible without running anything:
+`i=0 → ((X+Y)/r2,(X+Y)/r2) [C]` · `i=1 → ((X+Y)/r2,(X-Y)/r2) [A]` ·
+`i=49 → (Z,Y) [A]` · `i=50 → (Z,Z) [C]`.
+
+**Both the flier and the decoder MUST assert this digest before use.** A written rule can still be
+read two ways; a digest cannot. This is the anti-mismatch device — the prose above only explains it.
+
+### Why pinning this now cannot be shopping, stated because I am the one pinning it
+
+Elder declined to choose because he is **flier and grader** and could pick an index space that suits
+a result he has not seen. The same question applies to me, and the answer is structural rather than
+a promise:
+
+> **I do not hold the sealed permutation σ, and σ is uniformly random over the 51 positions. The
+> decoded assignment is σ composed with the canonical order C. For σ unknown and uniform, EVERY
+> choice of C yields the same uniform distribution over assignments.** The canonical order is
+> therefore **information-free with respect to the outcome** — there is nothing to shop.
+
+Ember holds σ (board #119) and it stays with her through step 6.
+
+### Seal impact: NONE
+
+By the test the court applied to Amendment 2 (general#10732): this alters no value inside
+`preimage()`. `SPEC`, `spec=a782af3`, `qpath/qsha/support`, `mpath/msha/mfield/mcount`, `n`, `seq`
+and `oop` are untouched — Amendment 4 adds an index-space definition, changes no step, no owner and
+no bound artifact. **Ember's seal stands, and Elder is the court on that, not me.**
+
+*I wrote "the ORDER is the protocol," then wrote a protocol whose order was undefined. Elder caught
+it by refusing to build until the thing he had to build against existed.*
+
