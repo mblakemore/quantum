@@ -48,6 +48,21 @@ PREREG_DOC = "docs/h13-cell8-rung2-prereg-FROZEN-whisper-c5060.md"
 ARTIFACT_COMMIT = "bb46926"        # any commit whose bytes hash to QSTAR_SHA; the SHA is the pin
 QSTAR = "results/causal_game_sdp_qij.json"
 QSTAR_SHA = "e471bb6512326abdee69ea5531efab501248d5cd99e9debd0578603fd249c1e7"
+
+# ── §3 BILLING CURRENCY — FROZEN BY THE PREREG, NOT SELECTABLE HERE ────────────────────────────
+# Prereg §45: "fixed 1,000 shots per ordered pair, 51 pairs, no sequential test, no early stop."
+# Deliberately a module constant with NO CLI flag: a stopping rule that anything can choose at
+# flight time is not a stopping rule, and the whole point of freezing it before the draw is that
+# the flight cannot negotiate with it. (Whisper general#10917 — it existed only in the prereg, so
+# the flight could neither honour nor violate it. Absent rather than wrong, which is why it read
+# as fine.) The only other `shots=` in this file is 4000 in the routed-intent SIM: free, not billed.
+SHOTS_PER_PAIR = 1000
+
+# CONSERVATIVE (deliberately HIGH) estimate for the G2 fit gate. A fit gate's error is asymmetric:
+# estimating LOW spends a tank we cannot refill, estimating HIGH only refuses a flight we can rerun
+# once more seconds exist. So this is an upper bound to refuse against, NOT a prediction — and it
+# is never used as a claim about what the run will cost.
+EST_COST_S = 120.0
 INDEX_TABLE_DIGEST = "8371d2604275c02a7c0b2d4606805971d244f206c779cc3f8e810e417f8e33c0"
 MANIFEST = "results/exp105_hw_results.json"
 
@@ -159,6 +174,9 @@ def main():
     ap.add_argument("--scan", action="store_true", help="FREE: build + gate + sim. No QPU.")
     ap.add_argument("--submit", action="store_true", help="spends QPU; all gates run first")
     ap.add_argument("--opt", type=int, default=1, help="transpile level; G0e requires <= 1")
+    # NO DEFAULT, on purpose: the frozen prereg declares no backend, so there is nothing to default
+    # to. A default here would be me authoring a spec value at flight time.
+    ap.add_argument("--backend", help="REQUIRED for --submit; explicitly named, never defaulted")
     a = ap.parse_args()
     if not (a.scan or a.submit):
         ap.error("choose --scan (free) or --submit")
@@ -259,12 +277,94 @@ def main():
                          f"the DEVICE would receive a circuit that does not entangle")
         return rows
 
-    sys.exit("  --submit not yet wired. Before it may spend QPU it must attach:\n"
-             "    G1  account scope, RE-RUN against a real routing site (today's PASS is VACUOUS —\n"
-             "        this script has no account resolution at all, so the gate has not run)\n"
-             "    G2  fit gate against the LIVE tank, never asserted from a balance\n"
-             "    A8  record_as_submitted() on the exact PUB circuits — defined above, unused until\n"
-             "        the submit path exists, and the submit path may not exist without calling it")
+    # ── SUBMIT PATH ─────────────────────────────────────────────────────────────────────────────
+    # Wired C6608 after Creator asked for the three conditions to be cleared (general#10912/10915)
+    # and Whisper's fresh §1/§3 review made it FOUR (general#10917): §3's stopping rule existed only
+    # in the prereg, so the flight could neither honour nor violate it.
+    sys.path.insert(0, os.path.join(REPO, "scripts"))
+    from ibm_multi_account import assert_explicit_account, service_for_submission
+
+    # ── G1 · ACCOUNT SCOPE, at the instant of flight ───────────────────────────────────────────
+    # The previous PASS was VACUOUS (Whisper general#10908, prereg §500): the static checker
+    # returned exit 0 because there was NO account resolution here at all — "nothing found HERE"
+    # read as "nothing wrong". A checker that cannot find the thing it checks must not sound like
+    # one that checked it. This is the runtime half, and it fails CLOSED.
+    #
+    # NOTHING IS DEFAULTED, and that is deliberate rather than cautious: the frozen prereg declares
+    # the stopping rule but declares NO account and NO backend (grepped — unlike Cell 5, which
+    # pinned IBMQ_ALT and could therefore assert against it). So there is no declared value to
+    # assert against, and inventing one here would be me writing a spec at flight time. Per
+    # assert_explicit_account's own doctrine, a re-flyable script's CORRECT account changes over
+    # time — the one paid last month may be depleted today — so it is named at flight by whoever
+    # flies, never inherited and never hardcoded at conversion time.
+    # ORDERED CHEAPEST-REFUSAL-FIRST: a missing --backend is knowable with no network and no
+    # credentials, so it must not cost a service construction to discover.
+    if not a.backend:
+        sys.exit("G1-FAIL: --backend is required for --submit. The frozen prereg declares no "
+                 "backend, so there is nothing to default to and defaulting would invent a spec.")
+    acct = assert_explicit_account()                 # dies here if nobody named an account
+    svc = service_for_submission(acct)               # REFUSES to fall back, ever
+    backend = svc.backend(a.backend)
+    if backend.name != a.backend:
+        sys.exit(f"G1-FAIL: asked for {a.backend}, service returned {backend.name}")
+    print(f"  G1 account scope       {acct} -> {backend.name}  ✅ explicitly named, no fallback")
+
+    # ── G2 · FIT GATE against the LIVE tank ────────────────────────────────────────────────────
+    # Amendment 7 rule 4 (prereg §539) and Whisper's watch note (§522): an ABSENT or None
+    # remaining-seconds field must REFUSE, never default to a permissive number. Read from the live
+    # account, never from a cached balance — a balance is a claim about the past.
+    u = svc.usage() or {}
+    lim, used = u.get("usage_limit_seconds"), u.get("usage_consumed_seconds")
+    if lim is None or used is None:
+        sys.exit(f"G2-FAIL: remaining-seconds is UNDERIVABLE from the live usage query "
+                 f"(usage_limit_seconds={lim!r}, usage_consumed_seconds={used!r}). "
+                 f"REFUSING — an absent field is not a permissive one.")
+    remaining = float(lim) - float(used)
+    if u.get("usage_limit_reached"):
+        sys.exit(f"G2-FAIL: account reports usage_limit_reached — remaining={remaining:.1f}s")
+    if remaining < EST_COST_S:
+        sys.exit(f"G2-FAIL: live tank {remaining:.1f}s < estimated {EST_COST_S}s for "
+                 f"{len(table)} pairs x {SHOTS_PER_PAIR} shots. REFUSING.")
+    print(f"  G2 fit gate            {remaining:.1f} QPU-s live >= est {EST_COST_S}s  ✅ live, "
+          f"refuses on absence")
+
+    # ── BUILD THE CIRCUITS THAT WILL ACTUALLY FLY ──────────────────────────────────────────────
+    # Transpiled against the REAL backend, not FakeMarrakesh. The fake is correct for the free
+    # gates above; it is NOT the object the device receives, and that difference is the whole
+    # reason A8 exists.
+    isa, labels, = [], []
+    for key, cls in table:
+        x, y = parse_pair(key)
+        t = transpile(build_switch(GENERATORS[x], GENERATORS[y]), backend,
+                      optimization_level=a.opt, seed_transpiler=11)
+        isa.append(t)
+        labels.append({"pair": key, "cls": cls, "arm": "switch"})
+
+    # ── A8 · AS-SUBMITTED RECORDING, on the exact objects going into the PUBs ───────────────────
+    as_sub = record_as_submitted(isa, labels)        # hard-fails if any switch arm has 0 2q gates
+    print(f"  A8 as-submitted        {len(as_sub)} circuits recorded, min 2q "
+          f"{min(r['two_qubit_gates_as_submitted'] for r in as_sub)}  ✅ on the PUB objects")
+
+    # ── §3 · STOPPING RULE, frozen — 1,000 shots per ordered pair, no sequential test ───────────
+    # Whisper general#10917: this existed ONLY in the prereg, so the flight could neither honour
+    # nor violate it. SHOTS_PER_PAIR is a module constant with no CLI flag and nothing may choose
+    # it at runtime — a stopping rule selectable at flight time is not a stopping rule.
+    pubs = [(qc,) for qc in isa]
+    from qiskit_ibm_runtime import SamplerV2 as Sampler
+    sampler = Sampler(mode=backend)
+    sampler.options.default_shots = SHOTS_PER_PAIR
+    print(f"  §3 stopping rule       {len(pubs)} pairs x {SHOTS_PER_PAIR} shots, fixed, "
+          f"no early stop  ✅")
+
+    json.dump({"as_submitted": as_sub, "account": acct, "backend": backend.name,
+               "shots_per_pair": SHOTS_PER_PAIR, "n_pairs": len(pubs),
+               "fit_gate": {"remaining_before": remaining, "est_cost_s": EST_COST_S}},
+              open(os.path.join(REPO, "results",
+                                "h13_cell8_rung2_as_submitted_elder.json"), "w"), indent=1)
+
+    job = sampler.run(pubs)
+    print(f"\n  SUBMITTED  job {job.job_id()}  ({acct} / {backend.name})")
+    return 0
 
 
 if __name__ == "__main__":
