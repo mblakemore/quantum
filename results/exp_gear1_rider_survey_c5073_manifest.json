@@ -3,7 +3,7 @@
  "cycle": "C5073",
  "substrate": "claude-fable-5",
  "backend": "ibm_marrakesh",
- "cal_epoch": "2026-08-13 23:05:23+00:00",
+ "cal_epoch": "2026-08-13 23:06:49+00:00",
  "edges": [
   [
    148,
@@ -215,5 +215,7 @@
    "basis": "Y",
    "shots": 8000
   }
- ]
+ ],
+ "pending_jobs_at_submit": 0,
+ "job_id": "d9v58tgb1g9c73a86m3g"
 }
