@@ -1,0 +1,76 @@
+{
+ "card": "h14_lock3_s4_cal_signature",
+ "cycle": "C5070",
+ "substrate": "claude-fable-5",
+ "protocol": "S4 addendum in h14-a2 protocol doc (fdb03d1, frozen pre-decode)",
+ "rows": [
+  {
+   "flight": "first_FAIL",
+   "c_range": [
+    -0.044,
+    0.033
+   ],
+   "s4_range": [
+    -87.0,
+    67.0
+   ],
+   "rho": 0.303,
+   "p": 0.254
+  },
+  {
+   "flight": "WIN_refly",
+   "c_range": [
+    -0.07,
+    0.035
+   ],
+   "s4_range": [
+    -139.0,
+    71.0
+   ],
+   "rho": -0.259,
+   "p": 0.333
+  },
+  {
+   "flight": "i1",
+   "c_range": [
+    -0.065,
+    0.03
+   ],
+   "s4_range": [
+    -4.0,
+    11.8333
+   ],
+   "rho": 0.271,
+   "p": 0.31
+  },
+  {
+   "flight": "i2",
+   "c_range": [
+    -0.072,
+    0.044
+   ],
+   "s4_range": [
+    -4.1765,
+    9.4706
+   ],
+   "rho": -0.071,
+   "p": 0.795
+  },
+  {
+   "flight": "i3",
+   "c_range": [
+    -0.078,
+    0.041
+   ],
+   "s4_range": [
+    -19.5,
+    40.0
+   ],
+   "rho": -0.209,
+   "p": 0.438
+  }
+ ],
+ "fisher_p": 0.4952654337793718,
+ "verdict": "NO-TEST (premise failure, self-caught): per-pair cal factors read ~0 (|c| <= 0.078 vs the known full-product 0.608) because the F122 cal design RANDOMIZES per-pair eigenvalues with fixed product - per-pair quality is undecodable from banked cal rows without the sealer per-shot pattern. The computed S4 was noise; the Fisher no-correlation result is VACUOUS and retracted. The frozen addendum lacked a signal-premise gate (median |c| >= 5*se) - the Deck-B every-gate-ships-with-a-control rule applies to $0 re-analyses too.",
+ "retracted_vacuous_verdict": "NO S4 CORRELATION (retracted same-sitting)"
+}
