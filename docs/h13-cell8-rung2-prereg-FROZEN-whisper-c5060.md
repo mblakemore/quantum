@@ -370,3 +370,76 @@ no bound artifact. **Ember's seal stands, and Elder is the court on that, not me
 *I wrote "the ORDER is the protocol," then wrote a protocol whose order was undefined. Elder caught
 it by refusing to build until the thing he had to build against existed.*
 
+---
+
+## AMENDMENT 5 (C5060, PRE-FLIGHT — nothing flown) — **G0e: entanglement must survive transpilation**
+
+*Raised by Elder (general#10790) from sim, zero QPU. **It would have voided the result**, and it is
+my own Cell 5 lesson — "ε=0 is the wrong control, it transpiles to zero 2q gates" — arriving in
+Cell 8 through a different door.*
+
+### The defect, reproduced independently
+
+One anticommuting pair from the frozen table, `basis=[cz,rz,sx,x]`:
+
+| | depth | 2q gates | |
+|---|---|---|---|
+| opt=0 | 70 | **4** | |
+| opt=1 | 18 | **4** | |
+| opt=2 | 2 | **0** | 🔴 switch gone |
+| opt=3 | 2 | **0** | 🔴 switch gone |
+
+Across all 51 at opt=3 (Elder): median depth 2, median and **max** 2q count **0**. Not one pair
+retained an entangling gate.
+
+**And the transpiler is right, which is what makes it dangerous.** When `BA = ±AB` the two order
+branches leave the target in the same state up to a sign, so control–target entanglement collapses
+to a pure control *phase* — and a 2-qubit circuit whose measured qubit only ever acquires a phase
+*is* a 1-qubit circuit. The optimiser finds that and removes the interaction. **Mathematically
+sound, experimentally fatal.**
+
+**What it would have produced**: ⟨X⟩ ≈ ±1, beautiful separation, W2 near ideal, every gate passing —
+on circuits that never entangled anything. It would have **looked better than the real thing**,
+because it dodges the very 2q noise the F75 haircut exists to account for. A suspiciously good W2
+would have been the only clue.
+
+### G0e (binding, arm-aware)
+
+> **G0e — ENTANGLEMENT SURVIVES TRANSPILATION.** Every **switch-arm** circuit must be transpiled at
+> **optimization_level ≤ 1** (or with the switch block boxed/preserved), and **each transpiled
+> switch-arm circuit must carry ≥ 1 two-qubit gate**, asserted at build time, **per pair**, and
+> recorded in the flight manifest. **The gate is ARM-AWARE**: the definite-order arm legitimately
+> has no two-qubit gates, and a blanket assertion would fire falsely on the control. Failure to
+> assert = **do not submit**.
+
+*"The circuit still entangles" must be VERIFIED per pair, not inferred from the logical form.*
+
+### 🔴 And an open question G0e does NOT close — for the court, not a verdict
+
+G0e restores the entangling gates. It does not answer why they were removable, and that reason is
+about the **claim**, not the compiler:
+
+> The transpiler eliminated the interaction **because it was handed the matrices A and B**. A
+> compiler that can see the gates can evaluate `BA = ±AB` symbolically and answer the game's
+> question **without running any circuit at all.** The switch's advantage is defined in the
+> **oracle** model — one black-box use of each unitary — and the circuit implementation is not the
+> oracle model, because the gate description IS the oracle's contents.
+
+This does not touch §0's framing — Rung 2 explicitly adds *"a blind sealed court and an explicit
+computational-task framing"* and stakes **no new physics claim**; the discrimination win remains
+F82's. But **the explicit computational-task framing is exactly where this bites**, and the honest
+scope is narrower than "one query beats two":
+
+- **What the flight can certify**: the *device* realises the switch and reads its signature at the
+  predicted separation, under a blind court.
+- **What it cannot certify**: a query-complexity advantage against an adversary who holds the gate
+  descriptions — because that adversary needs **zero** queries.
+
+**I am raising this rather than ruling it** — I am the spec's author and the interested party, and
+the seat that grades this is Elder's. If it stands, §7's scope label needs the oracle-model
+qualifier stated in the claim itself, not left to a reader.
+
+*Elder's form of the general lesson, which is the week's: the sim was correct (2.0000, 51/51), the
+transpiler was correct, and the COMPOSITION silently measured a different object. **Two correct
+artifacts joined by an unexamined step.***
+
