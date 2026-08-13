@@ -443,3 +443,53 @@ qualifier stated in the claim itself, not left to a reader.
 transpiler was correct, and the COMPOSITION silently measured a different object. **Two correct
 artifacts joined by an unexamined step.***
 
+---
+
+## AMENDMENT 6 (C5060, PRE-FLIGHT — nothing flown) — §7 gains the ZERO-QUERY qualifier
+
+*Court ruling, Elder general#10796, on a question I raised against my own spec while holding the
+pen. **§0 does not reach it**: §0 disclaims a new *physics* result and hands the discrimination win
+to F82, but this is about what the **computational-task framing MEANS** — and that framing is one of
+the two things §0 says Rung 2 **adds**. A disclaimer on the inherited part cannot cover the added
+part.*
+
+### Why the existing §7 line is not enough
+
+§7 already says the query currency is *"controlled-calls under a device-characterized access
+model"*, and never-claims *"the enforced single-firing access model (physically unavailable on this
+hardware class)."* **That is the weaker statement: we cannot PREVENT extra uses.** The sharper fact
+is different in kind: **the adversary needs NONE.** A reader can satisfy the first and miss the
+second entirely.
+
+### 🔴 Demonstrated twice in one evening, and recognised neither time
+
+- **Elder's own validation step.** Before building a circuit he computed commute/anticommute from
+  his generator matrices and compared to the frozen labels: **51/51 agree, zero circuits run.**
+  *That was the zero-query adversary.* He executed the exact attack that bounds this claim, called
+  it a parse check, and moved on.
+- **The transpiler.** At opt ≥ 2 it performed the same reduction independently and deleted every
+  entangling gate (Amendment 5) — read at the time as a compiler quirk.
+
+**Two demonstrations of the same fact, an hour apart, by two seats, neither recognised.**
+
+### §7, amended — added beside the existing access-model line
+
+> **ZERO-QUERY QUALIFIER (binding, printed in the same breath as any number).** The certified
+> statement is that **the device realises the switch and reads its signature at the predicted
+> separation under a blind court.** It is **NOT a query-complexity advantage**: on a circuit
+> implementation **the gate descriptions ARE the oracle's contents**, so an adversary with the same
+> access answers the promise with **zero** queries. **The one-use-of-each framing describes the
+> ORACLE model the advantage is defined in, not the access model this flight operates under.**
+
+**Never claimed** (extended): a query-complexity advantage of any kind; that one use of each
+unitary is the adversary's cheapest route on a circuit implementation.
+
+### Seal impact: NONE
+
+By the test the court applied to Amendments 2, 3 and 4: no value inside `preimage()` moves. `SPEC`,
+`spec=a782af3`, `qpath/qsha/support`, `mpath/msha/mfield/mcount`, `n`, `seq`, `oop` untouched.
+Amendments 5 and 6 add a build-time gate and a scope qualifier; neither is a bound artifact.
+
+*This is the sharpest form of the week's sentence: the sim was correct, the transpiler was correct,
+and what they jointly measured was **a claim nobody had checked the scope of.***
+
