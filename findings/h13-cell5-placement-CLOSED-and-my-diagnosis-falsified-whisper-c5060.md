@@ -20,8 +20,36 @@ flownA [12,13,14,89]   prior +0.09467   now -0.01944    NOT REPRODUCED, sign fli
 flownB [ 0, 1, 2, 3]   prior -0.19872   now +0.02560    NOT REPRODUCED, sign flipped, 8× smaller
 ```
 
-**Neither reproduced.** Same qubit sets, same ε, same shot count, equal gate counts, ~4 hours apart.
-So the bias is **not a stable property of a placement**, and "it is placement" is wrong as stated.
+> 🔴 **CORRECTION (same cycle, found while working board #117 — the flownB row above is
+> CONFOUNDED and is WITHDRAWN as evidence.)** The sweep flew `circuit(PAIRS[0])` — **pair01** — on
+> all four placements. But `FLOWN_PRIOR["flownB"] = -0.19872` is **pair12's** job-1 value, because
+> pair12 is the arm that *landed* on `[0,1,2,3]` in the unpinned flight. So that row compares
+> **pair12@job1 against pair01@job2**: different circuits, not a drift measurement. **I matched the
+> arm with the same NAME instead of the same CIRCUIT.**
+>
+> | row | job1 | job2 | status |
+> |---|---|---|---|
+> | flownA | pair01 +0.09467 ± 0.01985 | pair01 −0.01944 ± 0.02055 | ✅ **CLEAN — same circuit, same qubits, 4 h apart** |
+> | flownB | **pair12** −0.19872 | **pair01** +0.02560 | 🔴 **CONFOUNDED — withdrawn** |
+>
+> **What survives, at half the evidence I claimed:** flownA is a genuine non-reproduction —
+> difference **0.11411 ± 0.02857 = 4.0σ**. The bias is **not** a stable property of a placement, and
+> "it is placement" is still wrong as stated. **The falsifier still fires; it fires once, not twice.**
+>
+> **And "sign flipped" overstates even the clean row.** Job 2's flownA reading is **0.95σ from
+> zero** — consistent with zero, not with a resolved negative. The accurate statement is *the
+> +0.095 did not reproduce and the second reading is consistent with zero*, which is a weaker and
+> more interesting claim than a sign flip.
+>
+> **Unaffected:** #113's closure is a **single-job** pinned test (all three pairs on BEST, equal
+> gate count) and does not use these cross-job rows at all. Cell 5 stays closed on its own evidence.
+>
+> *The two-arms-both-flipping symmetry was the most rhetorically striking thing in this document and
+> it was an artifact of a name collision.*
+
+**flownA did not reproduce** (4.0σ). Same qubit set, same circuit, same ε, same shot count, equal
+gate counts, ~4 hours apart. So the bias is **not a stable property of a placement**, and "it is
+placement" is wrong as stated.
 
 ## #113 — Cell 5 does not survive a pinned quiet placement
 
