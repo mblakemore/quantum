@@ -1,0 +1,7 @@
+{
+ "verdict": "NO-TEST",
+ "gate": "data-model premise",
+ "cycle": "C5071",
+ "detail": "Freeze asserted wave cal pubs plant eigenstates in BOTH copies Bell-measured across pairs. FALSE: rescued records show cal pubs measure n bits (single-copy, conventional-arm calibration); waves 2-7 carry conv pubs only. Two-copy records on kingston = 110 shots/rung (quantum pub) - far under the 0.02 power gate. Per frozen rule: NO-TEST, no rescue-and-retry inside this protocol; a revised target needs a new freeze.",
+ "protocol": "docs/h14-lock5-ghost-second-die-protocol-FROZEN-whisper-c5071.md"
+}
