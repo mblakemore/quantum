@@ -1,6 +1,8 @@
 # The Campaign Since June 2026 — Findings 28+ and the F-Series, Arc by Arc
 
 > **⊘ SUPERSEDED (C4996, 2026-07-23 — same day, own red-team, pre-submission).** The F121 runtime-advantage claim recorded below is RETIRED: the planted MM problem's algebra falls to a classical 41-query linear-structure solve (~0.25 ms vs the 1,818 s simulation floor), run on our own sealed instance and confirmed independently by all three court seats. **F120 (shot-axis decoder) stands as an instrument result — not an advantage. F119 under re-audit.** This record is kept as-was, dated — see [the red-team finding](exp-hss-race6-REDTEAM-whitebox-break-whisper-c4996.md). Read every "advantage/WIN" statement below through that lens.
+>
+> **Update (C5062, 2026-08-13, board #131)**: F119's re-audit completed — **SUPERSEDED-as-executed / QUALIFIED-in-principle** (Ember C4215; remedy re-fly pending, Ember lane; details in its row below). The campaign's **live advantage claim is now F122** ("The Sealed Shadow" arc at the bottom of this file) — rebuilt on a *proven* single-copy floor, exactly per the design rule this retirement wrote.
 
 *Moved out of the root README (Whisper C4534) to keep the front door consumable — content unchanged, links adjusted.*
 
@@ -369,6 +371,37 @@ Two independent "noise actually helps" claims from earlier arcs were killed unde
 | F121 · Exp-HSS race-6 | **🏆 WIN — certified runtime advantage, fully fenced, 3-of-3 graded**: sealed t=80 (80-T, 10-CCZ) Roetteler hidden-shift string recovered blind and EXACTLY (ŝ==s, HD-0) at d2q=167 on kingston, behind: clean-ladder pre-gate (both free t=0 rungs exact, register certified BEFORE the seal opened), depth-matched twin exact at race depth (register unification 37/40), cap 200, frozen calibrated-majority decoder (atomic 2⁻⁴⁰ null, no rescue). Exact from the smallest pre-registered subsample (12,500 shots). Wall (anti-flattering attribution) **3.82 s vs the frozen edge-robust classical band: 476× at the harshest edge (48× over the 10× WIN bar), ~6,100× operating; WIN at EVERY edge**; even the maximally conservative full-budget wall (57.8 s) clears 3×. **Fences printed**: one instance family, one die/calibration window, best-known-solver engineering race (NOT a complexity theorem — and F119, the former sample-complexity seat, is itself SUPERSEDED-as-executed per C4215), joules one-sided, **supersedable-by-design** (a classical solver beating 1,818 s retires the number). Elder grade quantum@52c689c | **HW** kingston |
 
 > *ELI5: A year of trying said the quantum computer could never beat a laptop at this puzzle — but the referee had been reading only the single loudest answer the machine shouted. It turns out every repeat of the experiment whispers the SAME hidden answer with a few random typos, and averaging the whispers letter-by-letter reads the answer through noise that kills the shout. Six carefully-refereed rematches later — each loss teaching one specific fix, with the answer sealed in an envelope by one teammate and the stopwatch held by another — the machine read a sealed 40-letter answer perfectly in under 4 seconds, where the best classical program needs half an hour at minimum. The scoreboard prints its own expiry rule: if anyone's classical program ever does it faster, this entry retires.*
+
+### 🏆 The sealed-shadow arc — the advantage rebuilt on a theorem floor (door (b), F122 + distribution; door (a) signal) — *booked C5062 per board #131; F-numbering: F122 (Ember, numbering seat — adjacent to F119/F120/F121: the third attempt at a learning advantage, and the first that survived)*
+
+**Plain English**: F121's retirement wrote the rule — *a floor must be a theorem over a
+physically-enforced access model, not conjectured hardness of a published structure* — and this
+arc is that rule executed. A learner allowed to measure **two copies at once** (entangled Bell
+sampling) recovered the amplitude of a **cryptographically sealed** Pauli operator among 4¹⁶,
+blind, using **9.3× fewer copies than a proven information-theoretic floor** that covers *every*
+single-copy strategy, adaptive included (Chen–Gong–Ye FOCS 2024, verified against the paper's own
+Definitions 1+6). The first sealed flight **failed as frozen** and was diagnosed from the blind
+side before the unseal (weight-1 tripwires localized the defect to exactly the planted operator's
+identity positions); the one-line fix flew behind a fresh seal. The claim then survived its own
+adversarial audit and was **replicated across a distribution of sealed draws** rather than
+repeated. Advantage in **copy currency only** — classical post-processing is Θ(4ⁿ) on both arms
+and explicitly not part of the claim.
+
+| Finding | Result | Tier |
+|---|---|---|
+| F122 · door (b) re-fly | **🏆 WIN — sample-complexity advantage over a proven floor, sealed, blind, court-graded**: sealed weight-12 Pauli (n=16) recovered at **tr2 = 0.3065 ± 0.0030 (104σ; 103.7 on the court's common ruler)** from **207,464 copies** — **9.3× fewer than the proven single-copy floor** (~1.9M copies) at the delivered ε = 0.1845, floor holding vs **any adaptive single-copy strategy**; 112 blind nulls; 9.3× labeled a **DEMONSTRATED LOWER BOUND** (the flight was over-sized, the error bar points up; formula-vs-formula 21.6×). Residual physics from the grade: the 48 weight-1 probes carry a signed ~0.04 **cross-copy correlation** (13.6σ max — not shot noise, not "polarization"); the 64 weight-heavy probes sit at true shot noise (0.0069). First flight FAIL-AS-FROZEN kept in the record (28.6σ detection; I-sector per-shot randomization flew constant). Survived the full adversarial audit ([audit](adversarial-audit-doorb-refly-whisper-c5048.md) · [white paper](white-paper-the-sealed-shadow-doorb-whisper-c5048.md)). Museum: Wing IV capstone. IBM-tracker draft awaits Creator — NOT submitted | **HW** marrakesh |
+| F122-dist · i1/i2/i3 | **The distribution close (batch court, n=2/3 by gate + a third draw)**: uniform-random sealed draws, incremental-atomic prereg, all on one σ ruler — i1 w11 tr2 **0.3702 (107.5σ)** PASS, 10.95× · i2 w12 tr2 **0.30084 (100.1σ)** PASS, 9.73× · reference w12 (above) 103.7σ, 9.28×. **The within-weight replicate is the headline**: two independent weight-12 draws agree on delivered ε to **1.2σ** while the weight-11 draw sits 11σ away — "lucky draw?" answered by replication with its own control. **i3 drew weight 13**, the branch flagged unverifiable at freeze: tr2 0.28106 at **88.6σ (court shot-noise) / 31.8σ (empirical null), NO point-prediction grade, ε_del not asserted** — and the author's endorsement of that branch was retracted as unfalsifiable (a branch that cannot fail cannot pass). Ember's i2 67.5σ figure RETRACTED (compounded denominator); the shot-noise ruler stands unopposed | **HW** marrakesh |
+| door (a) (no F) | **The stabilizer-memory separation — a blind signal, not yet a WIN** (A&S arXiv:2607.02444 Thm 1.1, full-text verified: 6 copies with memory vs Θ(n) without): pilot 25/40 descriptive; re-fly **29/40 (CP-CI 0.561–0.854, excludes 0.5), 9TP/11FN/0FP, p=0.0012 — the campaign's first real blind signal — criterion not reached**. Named failure surface: threshold sizing from an anchor that drifted 2.02× between jobs (same-job ratio 1.039). R1–R6 frozen for flight 3 (same-job frozen-formula τ, K≥500, pessimistic-u sizing, grade-time validity gate); blocked on tank until ~Aug 26. The hardware C1 arm was retired as "the 4th F119 costume" — the criterion rests on the ideal simulated adversary; hardware C1 is a labeled demonstration | **HW** marrakesh |
+
+> *ELI5: Last time we claimed "faster than any classical program," we broke our own claim the same
+> day — the puzzle had a secret shortcut. So this time the finish line is a mathematical theorem:
+> ANY machine reading one copy at a time — however cleverly it adapts — provably needs about 1.9
+> million copies to find the hidden pattern. Ours, reading two entangled copies at once, needed
+> 207 thousand: nine times fewer, with the answer sealed in an envelope by a teammate before the
+> machine ever ran and the grading done blind by another. The first try failed and the failure is
+> kept on the page — the fix was found without peeking at the answer. Then we did it twice more
+> with fresh sealed secrets to prove it wasn't luck. The claim is only about how many LOOKS it
+> takes, not about computing time — we say that out loud so nobody has to catch us at it.*
 
 ---
 

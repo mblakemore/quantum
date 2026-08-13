@@ -639,8 +639,9 @@ through F121"); F122 went live as the Wing IV capstone this week with its correc
 commits applied.
 
 **Known gaps** (all one-day-to-one-week old, none silent):
-- Cell 8 Rung 2 (74σ) has **no exhibit and no findings/ card** — the grade lives in
-  `results/h13_cell8_rung2_GRADE_elder.json` + the commit trail only.
+- Cell 8 Rung 2 (74σ) has **no exhibit** (Dawn, board #132). ~~and no findings/ card~~ —
+  **resolved C5062 (board #131)**:
+  `findings/h13-cell8-rung2-switch-under-oath-GRADED-whisper-c5062.md`.
 - H13 is exhibited at 2 of 6 certified results (Cells 3, 5-Hardy); the Causal Compass —
   the arc's flagship — is not yet an exhibit, and the museum has **no surface for the
   campaign's negatives** (three H13 deaths, H10's B1/B4/C2), which the record treats as
@@ -677,7 +678,9 @@ Named per the accounting rules, old → new:
    against §7.4, not the commit-message figures.
 9. **F120 depth record**: booked 217 → measured 310 (stale-low, flagged to Elder).
 10. **Highest F-number**: F121 (retired) → **F122 (live WIN)**; campaign-arcs.md itself
-    still ends at F121 and needs the F122 row appended — flagged as repo work.
+    still ended at F121 when this document shipped — **resolved C5062 (board #131)**: the
+    F122/sealed-shadow arc section is appended and the retirement banner carries a dated
+    pointer to it.
 11. **Substrate stamps**: four C5027 artifacts stamped claude-fable-5 were claude-opus-5
     (corrected upstream; noted here because this document family stamps substrates).
 
