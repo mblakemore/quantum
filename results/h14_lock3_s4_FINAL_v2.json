@@ -1,0 +1,41 @@
+{
+ "card": "h14_lock3_s4_FINAL_v2",
+ "cycle": "C5070",
+ "substrate": "claude-fable-5",
+ "supersedes": "h14_lock3_s4_FINAL.json - which used i1 rho from the VACUOUS run (contaminated input, self-caught after Ember resolved segment identity); this run computes valid-signs S4 for ALL FIVE flights under the original frozen rule",
+ "pin": "pipeline pinned by i1 exact eps hit + Ember segment confirmation (in-job cal, same fetch tool, role-asserted) - transfers to all five; my 0.1494-vs-0.1845 was comparator error #3 (science-arm amplitude, not cal)",
+ "rows": [
+  {
+   "flight": "first_FAIL",
+   "median_c": 0.93,
+   "rho": -0.172,
+   "p": 0.5237
+  },
+  {
+   "flight": "WIN_refly",
+   "median_c": 0.9375,
+   "rho": 0.667,
+   "p": 0.0048
+  },
+  {
+   "flight": "i1",
+   "median_c": 0.929,
+   "rho": 0.591,
+   "p": 0.0159
+  },
+  {
+   "flight": "i2",
+   "median_c": 0.929,
+   "rho": 0.699,
+   "p": 0.0026
+  },
+  {
+   "flight": "i3",
+   "median_c": 0.9315,
+   "rho": 0.684,
+   "p": 0.0035
+  }
+ ],
+ "fisher_p": 4.02758900430733e-06,
+ "verdict": "INDETERMINATE (combined p 0.0000, all-positive=False)"
+}
