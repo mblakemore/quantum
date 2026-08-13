@@ -1,0 +1,493 @@
+{
+ "what": "Cell 2 court crosswalk: sealer set_id -> (unit, arm) -> refly blinded record file",
+ "board": 140,
+ "made_by": "ember C4321",
+ "job_id": "d9tg7gntfhrs73dtug20",
+ "derivation": {
+  "set_id": "HMAC-SHA256(sealer off-git secret, 'unit:arm')[0:16] (DC15E tools/h13-cell2-sealer-permutation.js)",
+  "refly_file": "sha256(f'{manifest.seed}:refly:{slot}')[0:16]+'.json' where slot satisfies perm[slot]==index of (unit,arm) in sorted pairs; perm = np.default_rng(int(sha256(job_id)[:8],16)).permutation(80) (tools/h13_cell2_refly_blinded_export.py) \u2014 deterministic, no fetch",
+  "verified": "80/80 refly files exist on disk; 80/80 set_ids present in h13_cell2_mapping_UNSEALED_ember_c4273.json; 80/80 arms agree"
+ },
+ "rows": [
+  {
+   "set_id": "016c80083b3552b9",
+   "unit": 10,
+   "arm": "CC",
+   "refly_file": "ef9c41cf33b4b8d6.json"
+  },
+  {
+   "set_id": "01eca2daf654ccc8",
+   "unit": 39,
+   "arm": "CE",
+   "refly_file": "773f8f005eadb362.json"
+  },
+  {
+   "set_id": "0a5a04ef83f20722",
+   "unit": 34,
+   "arm": "CC",
+   "refly_file": "7fe91938df63d7ba.json"
+  },
+  {
+   "set_id": "0d8e67775be5d7f4",
+   "unit": 16,
+   "arm": "CC",
+   "refly_file": "a8e7078405ee2ee7.json"
+  },
+  {
+   "set_id": "157e49372e339836",
+   "unit": 33,
+   "arm": "CE",
+   "refly_file": "b1de72228acef64b.json"
+  },
+  {
+   "set_id": "19c0d9b394d21686",
+   "unit": 2,
+   "arm": "CC",
+   "refly_file": "0e3b45d04cd6ab08.json"
+  },
+  {
+   "set_id": "1ffe545c91e3f76b",
+   "unit": 22,
+   "arm": "CE",
+   "refly_file": "88896167351b0621.json"
+  },
+  {
+   "set_id": "25796a5cccc69cfd",
+   "unit": 33,
+   "arm": "CC",
+   "refly_file": "b2bffe9f942f066f.json"
+  },
+  {
+   "set_id": "259eb68a121e3228",
+   "unit": 32,
+   "arm": "CE",
+   "refly_file": "a88928305c459e0b.json"
+  },
+  {
+   "set_id": "26634b6aa725509c",
+   "unit": 26,
+   "arm": "CE",
+   "refly_file": "326767197b9802d0.json"
+  },
+  {
+   "set_id": "285f21d2c123f394",
+   "unit": 20,
+   "arm": "CC",
+   "refly_file": "264881f4e29f0207.json"
+  },
+  {
+   "set_id": "2b1c297c497f50b9",
+   "unit": 8,
+   "arm": "CE",
+   "refly_file": "e332278b28af560d.json"
+  },
+  {
+   "set_id": "2e74b17ca8e570e5",
+   "unit": 24,
+   "arm": "CC",
+   "refly_file": "d3d5c3a99b4ee702.json"
+  },
+  {
+   "set_id": "2f21684c88cd3705",
+   "unit": 36,
+   "arm": "CC",
+   "refly_file": "99b038ed36741ca8.json"
+  },
+  {
+   "set_id": "3005edaa883de86f",
+   "unit": 29,
+   "arm": "CE",
+   "refly_file": "507dc8b7ea861056.json"
+  },
+  {
+   "set_id": "3485ca56eac9a99a",
+   "unit": 19,
+   "arm": "CC",
+   "refly_file": "a16425fe6a052c42.json"
+  },
+  {
+   "set_id": "360f20ecffaefd0c",
+   "unit": 35,
+   "arm": "CC",
+   "refly_file": "29c9dfa816af7a62.json"
+  },
+  {
+   "set_id": "3cab4ae7c238de15",
+   "unit": 7,
+   "arm": "CE",
+   "refly_file": "d05cf9f9e895a942.json"
+  },
+  {
+   "set_id": "4883f3698d209adb",
+   "unit": 14,
+   "arm": "CE",
+   "refly_file": "9c4b745e846a3f12.json"
+  },
+  {
+   "set_id": "4d7365c9e7198879",
+   "unit": 17,
+   "arm": "CC",
+   "refly_file": "db179bb3c6254018.json"
+  },
+  {
+   "set_id": "5759b5d9c1e87db3",
+   "unit": 5,
+   "arm": "CC",
+   "refly_file": "785f3fd42e9dc041.json"
+  },
+  {
+   "set_id": "5e45ac7a549b5bab",
+   "unit": 18,
+   "arm": "CC",
+   "refly_file": "eb0dedde4608215b.json"
+  },
+  {
+   "set_id": "608d017306264656",
+   "unit": 31,
+   "arm": "CC",
+   "refly_file": "d4360c2d706b5bba.json"
+  },
+  {
+   "set_id": "61670c0eef873dc9",
+   "unit": 0,
+   "arm": "CC",
+   "refly_file": "b74c8c3a89deb8a3.json"
+  },
+  {
+   "set_id": "619914fb6ee22f5b",
+   "unit": 23,
+   "arm": "CE",
+   "refly_file": "407157cc06525414.json"
+  },
+  {
+   "set_id": "655e908766baa666",
+   "unit": 9,
+   "arm": "CC",
+   "refly_file": "ec8ff930f9cf8475.json"
+  },
+  {
+   "set_id": "66535637f2f18f09",
+   "unit": 21,
+   "arm": "CE",
+   "refly_file": "f1cf67129f646f02.json"
+  },
+  {
+   "set_id": "66d14cec9eed91b1",
+   "unit": 25,
+   "arm": "CE",
+   "refly_file": "d39521610b079560.json"
+  },
+  {
+   "set_id": "6a771ec0fa2ba9d6",
+   "unit": 4,
+   "arm": "CE",
+   "refly_file": "cba9c19cdabc849b.json"
+  },
+  {
+   "set_id": "6a7ad170e7f0c694",
+   "unit": 37,
+   "arm": "CE",
+   "refly_file": "d8157eac56dc45d1.json"
+  },
+  {
+   "set_id": "6ca94ce3116b00fd",
+   "unit": 6,
+   "arm": "CC",
+   "refly_file": "df5750bee758d409.json"
+  },
+  {
+   "set_id": "6fb20389551f4a46",
+   "unit": 10,
+   "arm": "CE",
+   "refly_file": "dbc589df68c01b88.json"
+  },
+  {
+   "set_id": "7052f7ab064e0f5a",
+   "unit": 26,
+   "arm": "CC",
+   "refly_file": "4c707d19ea209012.json"
+  },
+  {
+   "set_id": "771a468fedc8e8ff",
+   "unit": 36,
+   "arm": "CE",
+   "refly_file": "41edcb611221c9aa.json"
+  },
+  {
+   "set_id": "77fea12ab1ec004e",
+   "unit": 8,
+   "arm": "CC",
+   "refly_file": "4655aa8b84727930.json"
+  },
+  {
+   "set_id": "7f4d6776229c5b31",
+   "unit": 1,
+   "arm": "CC",
+   "refly_file": "7f371ef7780081c9.json"
+  },
+  {
+   "set_id": "8351a8024a93084c",
+   "unit": 22,
+   "arm": "CC",
+   "refly_file": "3271c922d91a7e92.json"
+  },
+  {
+   "set_id": "83c2ba72bdcd30a6",
+   "unit": 25,
+   "arm": "CC",
+   "refly_file": "32952b1b905b5acf.json"
+  },
+  {
+   "set_id": "85e2d53734f134c9",
+   "unit": 28,
+   "arm": "CE",
+   "refly_file": "3933d58fc9aac3dc.json"
+  },
+  {
+   "set_id": "87cfe3a562e33e80",
+   "unit": 27,
+   "arm": "CC",
+   "refly_file": "bdda207246cdd37c.json"
+  },
+  {
+   "set_id": "8c7a25cb0dc13c73",
+   "unit": 11,
+   "arm": "CC",
+   "refly_file": "c60f8b0ffa5c5bd3.json"
+  },
+  {
+   "set_id": "8e2a892f9ca75130",
+   "unit": 3,
+   "arm": "CE",
+   "refly_file": "dcd2ba813d3291a4.json"
+  },
+  {
+   "set_id": "92df54676bc04965",
+   "unit": 5,
+   "arm": "CE",
+   "refly_file": "bce1a2b395b05722.json"
+  },
+  {
+   "set_id": "a02301fa421b54d8",
+   "unit": 15,
+   "arm": "CE",
+   "refly_file": "6c8850a1c2f52688.json"
+  },
+  {
+   "set_id": "a0cfc4d3cd6a77e6",
+   "unit": 14,
+   "arm": "CC",
+   "refly_file": "0035fb6b49333c2d.json"
+  },
+  {
+   "set_id": "a1d31de207602681",
+   "unit": 24,
+   "arm": "CE",
+   "refly_file": "b94caa639afd29e6.json"
+  },
+  {
+   "set_id": "a3ff7bf673a78e87",
+   "unit": 17,
+   "arm": "CE",
+   "refly_file": "29056fbbee2ba767.json"
+  },
+  {
+   "set_id": "a61fb62022f0a398",
+   "unit": 28,
+   "arm": "CC",
+   "refly_file": "ce657b93ab3b2a77.json"
+  },
+  {
+   "set_id": "a88cfea810c27c27",
+   "unit": 1,
+   "arm": "CE",
+   "refly_file": "4e86356653a6726c.json"
+  },
+  {
+   "set_id": "aa3ac06cda899b77",
+   "unit": 30,
+   "arm": "CC",
+   "refly_file": "859c9fa2b335e04e.json"
+  },
+  {
+   "set_id": "b2ac9303ff2ccad2",
+   "unit": 34,
+   "arm": "CE",
+   "refly_file": "0ac9ce7f3e57ef66.json"
+  },
+  {
+   "set_id": "b3637120e56cf115",
+   "unit": 12,
+   "arm": "CE",
+   "refly_file": "5b0ea6c22739d816.json"
+  },
+  {
+   "set_id": "b4fe46b077b6e6ca",
+   "unit": 29,
+   "arm": "CC",
+   "refly_file": "24261dc1d59e8e93.json"
+  },
+  {
+   "set_id": "bb7835af83a1c645",
+   "unit": 35,
+   "arm": "CE",
+   "refly_file": "ee039cc2603eaa78.json"
+  },
+  {
+   "set_id": "beb4f466516d364c",
+   "unit": 19,
+   "arm": "CE",
+   "refly_file": "054ad1668609a04b.json"
+  },
+  {
+   "set_id": "c55c3bb77cc59f4b",
+   "unit": 38,
+   "arm": "CE",
+   "refly_file": "2c256c8553a35148.json"
+  },
+  {
+   "set_id": "c6d2cc91b906d93a",
+   "unit": 0,
+   "arm": "CE",
+   "refly_file": "a94ea327bc0f121a.json"
+  },
+  {
+   "set_id": "c6f451d601d92633",
+   "unit": 9,
+   "arm": "CE",
+   "refly_file": "e0b4b96570d0a9a0.json"
+  },
+  {
+   "set_id": "c7c025a6155aeacd",
+   "unit": 18,
+   "arm": "CE",
+   "refly_file": "140146895493a8f8.json"
+  },
+  {
+   "set_id": "ca38febcc03249ea",
+   "unit": 39,
+   "arm": "CC",
+   "refly_file": "6533b5625d3500af.json"
+  },
+  {
+   "set_id": "cd8736c18d39028e",
+   "unit": 27,
+   "arm": "CE",
+   "refly_file": "ca53d16375f9009b.json"
+  },
+  {
+   "set_id": "cde9b3b6f5a1effb",
+   "unit": 13,
+   "arm": "CE",
+   "refly_file": "a133a8488d734e57.json"
+  },
+  {
+   "set_id": "d01f5b4cc17944e3",
+   "unit": 23,
+   "arm": "CC",
+   "refly_file": "ffe2017df8e864ae.json"
+  },
+  {
+   "set_id": "d09be096b04f7160",
+   "unit": 2,
+   "arm": "CE",
+   "refly_file": "6004f458e3962b6e.json"
+  },
+  {
+   "set_id": "d31f085b8abe6129",
+   "unit": 37,
+   "arm": "CC",
+   "refly_file": "0567c0b338a19fd0.json"
+  },
+  {
+   "set_id": "d4d33661e1745c92",
+   "unit": 11,
+   "arm": "CE",
+   "refly_file": "673c95c6cdbfa6e3.json"
+  },
+  {
+   "set_id": "de4da3d8ba0be72a",
+   "unit": 20,
+   "arm": "CE",
+   "refly_file": "df604d79dcbfc81f.json"
+  },
+  {
+   "set_id": "ded52cfe24e76bed",
+   "unit": 4,
+   "arm": "CC",
+   "refly_file": "f947cbf90908b822.json"
+  },
+  {
+   "set_id": "e6a63b77b9295333",
+   "unit": 30,
+   "arm": "CE",
+   "refly_file": "3d07669ac044a6b8.json"
+  },
+  {
+   "set_id": "e90e5466da6b5f8e",
+   "unit": 12,
+   "arm": "CC",
+   "refly_file": "8dd20308fd380251.json"
+  },
+  {
+   "set_id": "ec4d9aedc1af9f10",
+   "unit": 13,
+   "arm": "CC",
+   "refly_file": "6be1b1bac3bd2ac0.json"
+  },
+  {
+   "set_id": "ece5432318d49dc4",
+   "unit": 15,
+   "arm": "CC",
+   "refly_file": "62e71fd5f9c6590a.json"
+  },
+  {
+   "set_id": "ed26d741b64058fb",
+   "unit": 32,
+   "arm": "CC",
+   "refly_file": "310e22fc619bf44e.json"
+  },
+  {
+   "set_id": "ed7a9c1af05c0ff0",
+   "unit": 38,
+   "arm": "CC",
+   "refly_file": "3ff7ac9309d31060.json"
+  },
+  {
+   "set_id": "eff2c846457056a4",
+   "unit": 7,
+   "arm": "CC",
+   "refly_file": "b90263a6b7f544e4.json"
+  },
+  {
+   "set_id": "f17fdcb6c279ec4f",
+   "unit": 31,
+   "arm": "CE",
+   "refly_file": "4be7699436763948.json"
+  },
+  {
+   "set_id": "f6baf619f7d22b63",
+   "unit": 6,
+   "arm": "CE",
+   "refly_file": "d47f7f28f995c706.json"
+  },
+  {
+   "set_id": "fb7a792b0fcd260b",
+   "unit": 21,
+   "arm": "CC",
+   "refly_file": "9872feea6cc6e75c.json"
+  },
+  {
+   "set_id": "fb87c8a233969002",
+   "unit": 3,
+   "arm": "CC",
+   "refly_file": "8b76016c4d75562f.json"
+  },
+  {
+   "set_id": "fdbe0efbb48164eb",
+   "unit": 16,
+   "arm": "CE",
+   "refly_file": "0a6c0095315d9212.json"
+  }
+ ]
+}
