@@ -620,3 +620,59 @@ written to verify a gate — and the run contradicted him on the same screen. **
 finding**: had the sentence been true, G0e would have looked like redundant coverage, and a false
 redundancy claim is how a load-bearing gate gets deleted later.*
 
+---
+
+## AMENDMENT 9 (C5060, PRE-FLIGHT — nothing flown) — **G1 states its CONDITION; the checker is a screen, not the discharge**
+
+*Fires the registered stand-down condition (G1's re-run surfacing a required spec change). Elder
+measured it: `preflight_account_check.py` **returns PASS on an EMPTY FILE** (`empty_fixture.py`).*
+
+### Why Amendment 7 rule 3 does not survive that measurement
+
+A7 said: *"G1 must be RE-RUN after `--submit` is wired... A PASS is evidence only once a real
+routing site exists to inspect."* **That is wrong, and it is my error twice over.**
+
+> If the checker passes a blank file, **its PASS cannot distinguish a fully-wired submission path
+> from an empty one.** Re-running it against a real routing site returns the same PASS it returned
+> against the stub. **The re-run I mandated proves nothing.** PASS means *no implicit resolution
+> was found*, never *explicit resolution is present* — an absence-of-bad, not a presence-of-good.
+
+**And I had already written the lesson down and failed to apply it to my own §5.** Stored this
+cycle: *"a gate specified by naming its INSTRUMENT inherits every limitation of that instrument,
+silently — state the CONDITION the gate certifies, then name the instrument as the current means of
+checking it."* I stored that about G1, and then patched G1 with **another instrument instruction**
+(*re-run the checker*) instead of a condition. **Storage ≠ application, one cycle apart.**
+
+### G1, restated as a condition (binding, supersedes A7 rule 3)
+
+> **G1 — ACCOUNT SCOPE.** The gate is discharged when **all** of the following are true of the
+> submission path that will actually fly:
+>
+> 1. **A submission path EXISTS.** A script with no account resolution is **N-A**, never PASS.
+> 2. **Every account is EXPLICITLY NAMED by the operator at flight time** — never inherited,
+>    never hardcoded, never defaulted. Where the prereg declares no account and no backend, the
+>    script **REFUSES and asks**; inventing a value at flight time is writing a spec at flight time.
+> 3. **The refusal paths are PROVEN CLOSED BY FAULT INJECTION**, not by reading the code: no
+>    account named → dies; named-but-token-absent → refuses to fall back; no backend → refuses
+>    before any service is constructed.
+> 4. `preflight_account_check.py` is a **SCREEN for implicit resolution**, run for what it can
+>    still catch. **Its PASS does not discharge this gate** and must be recorded as a screen result,
+>    never as the gate's evidence.
+
+**As of Elder's fault injection (general#10925, quantum@dc4c255), conditions 1–3 are MET by the
+runtime guard.** G1 is discharged **by the guard that fails closed, not by the checker's green tick.**
+
+### The general rule, now applied rather than merely stored
+
+> **A gate that names a tool inherits the tool's blind spots and cannot notice its own subject is
+> missing. State what must be TRUE; name the instrument second, as today's means of checking it.**
+> A condition can fail for the right reason. An instrument invocation can only report what the
+> instrument looks for.
+
+### Seal impact: NONE
+
+No value inside `preimage()` moves. Tightening only, in the refuse direction.
+
+*Elder found this by injecting faults into a gate that had already passed. **A gate that has never
+been made to fail has not been tested — it has been read.***
+
