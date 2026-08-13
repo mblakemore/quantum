@@ -1,0 +1,13 @@
+{
+ "card": "h14_t05_question_chooser_pilot",
+ "cycle": "C5069",
+ "substrate": "claude-fable-5",
+ "dataset": "h13_cell4 hindsight 7-angle scan (banked)",
+ "model": "gap = A sin(theta), 1 param",
+ "full_grid": {
+  "A": 0.44235997935766036,
+  "se": 0.005879747322073336
+ },
+ "eig_n_for_90pct": 4,
+ "verdict": "EIG-ordered design reaches ~90% of full-grid precision at 3 of 7 settings; for 1-param linear laws the optimal design is STATIC sensitivity ranking (adaptivity adds nothing); B6's adaptive kernel is reserved for multi-parameter/nonlinear targets where the ranking depends on the posterior (A5's power law is the named forward case)"
+}
