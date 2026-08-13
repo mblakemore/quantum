@@ -22,7 +22,8 @@ import json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 QROOT = os.path.join(HERE, "..")
 from exp_crossblock_widesweep import build_twins, SEED, DEPTHS
-from qiskit import transpile
+from exp_hss_race_flight import d2q_of
+from qiskit import QuantumCircuit, transpile
 import numpy as np
 
 BACKEND = "ibm_marrakesh"
@@ -43,11 +44,27 @@ def main(submit=False):
     print(f"[$0-validate] twin register (active 2q qubits): {len(active)} on marrakesh")
 
     pubs, meta = [], []
-    for D, mc in twins:
+    # whole-chip readout cal (0/1) in the SAME job window — per-qubit marginal correction (C5004 loop verbatim)
+    for state, tag in ((0, "cal0"), (1, "cal1")):
+        qc = QuantumCircuit(NPHYS)
+        if state:
+            qc.x(range(NPHYS))
+        qc.measure_all()
+        pubs.append((transpile(qc, backend, optimization_level=0), None, 8000))
+        meta.append({"block": tag, "shots": 8000})
+    ok = True
+    for D, tw in twins.items():
+        mc = tw.copy(); mc.measure_all()
         tqc = transpile(mc, backend, optimization_level=0, initial_layout=list(range(NPHYS)),
                         seed_transpiler=SEED)
+        real_d = d2q_of(tqc)
+        good = real_d >= D
+        ok &= good
         pubs.append((tqc, None, 12000))
         meta.append({"block": f"twin_d{D}", "d2q": D, "shots": 12000})
+        print(f"  [$0-validate] twin_d{D}: routed d2q={real_d} (>= {D}? {'OK' if good else 'PAD-CANCEL FAIL'})")
+    assert ok, "pad cancelled at some depth on marrakesh — design needs a fresh probe, do NOT submit"
+    print("[$0-validate] all depths clean on marrakesh; register valid. Safe to fly.")
 
     man = {"card": "exp_tricorder_epoch2_marrakesh", "cycle": "C5072", "substrate": "claude-fable-5",
            "backend": BACKEND, "cal_epoch": str(props.last_update_date), "depths": DEPTHS,

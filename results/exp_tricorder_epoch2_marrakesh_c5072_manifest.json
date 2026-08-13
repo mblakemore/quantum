@@ -1,0 +1,107 @@
+{
+ "card": "exp_tricorder_epoch2_marrakesh",
+ "cycle": "C5072",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_marrakesh",
+ "cal_epoch": "2026-08-13 22:42:53+00:00",
+ "depths": [
+  160,
+  280,
+  320,
+  360,
+  400
+ ],
+ "register": [
+  2,
+  3,
+  7,
+  16,
+  17,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  37,
+  38,
+  39,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  57,
+  58,
+  59,
+  70,
+  71,
+  72,
+  73,
+  75,
+  141,
+  142
+ ],
+ "seed": 2026072307,
+ "account": "IBMQ_ALT4",
+ "purpose": "Current-epoch revival scout (board #144, Creator GO general#11436): gate for the TLS-turbine",
+ "prereg_scope": {
+  "inherits": "C5004 same-epoch scope verbatim (exp_tricorder_sameepoch_marrakesh_manifest.json)",
+  "decision_rule": "live revival + resolvable period -> turbine design row; quiet -> null posted, stream-3 fallback decided separately",
+  "no_expectation_carried": "kingston/C5005 {26,53,73} set is epoch-stale by C5002; discovery vs CURRENT marrakesh population",
+  "valid_outcomes": [
+   "revival found (depth-period + amplitude)",
+   "stable/monotone (null gates fallback)"
+  ]
+ },
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "twin_d160",
+   "d2q": 160,
+   "shots": 12000
+  },
+  {
+   "block": "twin_d280",
+   "d2q": 280,
+   "shots": 12000
+  },
+  {
+   "block": "twin_d320",
+   "d2q": 320,
+   "shots": 12000
+  },
+  {
+   "block": "twin_d360",
+   "d2q": 360,
+   "shots": 12000
+  },
+  {
+   "block": "twin_d400",
+   "d2q": 400,
+   "shots": 12000
+  }
+ ],
+ "pending_jobs_at_submit": 0,
+ "job_id": "d9v4s3gb1g9c73a867bg"
+}
