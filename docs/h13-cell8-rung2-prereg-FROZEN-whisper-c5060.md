@@ -493,3 +493,63 @@ Amendments 5 and 6 add a build-time gate and a scope qualifier; neither is a bou
 *This is the sharpest form of the week's sentence: the sim was correct, the transpiler was correct,
 and what they jointly measured was **a claim nobody had checked the scope of.***
 
+---
+
+## AMENDMENT 7 (C5060, PRE-FLIGHT — nothing flown) — **every gate must distinguish PASS from N/A, and must be PROVEN to fire**
+
+*Prompted by Elder's G1 result (general#10810). `preflight_account_check.py` returned **PASS, exit
+0** on the Rung 2 flight script — and the script contains **no account resolution at all**: no
+service, no `instance=`, no token, only a local `FakeMarrakesh`, with `--submit` still a stub.
+**G1 is green because there is nothing yet to get wrong.** He recorded it as **VACUOUS-TRUE** and
+did not let it discharge the gate. That is correct, and it exposes a defect in **§5, which is
+mine.***
+
+> **A gate that passes because its subject does not exist has not run.** The honest answer to *"is
+> this correct?"* when the subject is absent is **N/A**, never **yes** — the same rule as
+> `is-it-serving.sh` returning UNKNOWN when nothing is listening, and the same rule as board #89's
+> *absent ≠ zero*.
+
+### Audit of §5's own gates against this rule
+
+| Gate | Proven to fire? | Vacuous-pass risk |
+|---|---|---|
+| **G0a** ceiling re-derived | produced a **value** + primal–dual gap | none — a number was computed |
+| **G0b** q\*-support invariant | 🔴 **no control** | **REAL**: a mismatch scan over an **absent or empty** flown manifest finds no mismatch and passes. Nothing in §5 requires the manifest to be non-empty first |
+| **G0c** billing currency | a **declaration exists** | none |
+| **G0d** claim card | ✅ all-yes positive control **BLOCKED at exit 1** | none — proven to fire |
+| **G0e** entanglement | ✅ `--opt 3` → **refuse, exit 1** | none — proven to fire |
+| **G1** account scope | 🔴 **demonstrated vacuous** | **CONFIRMED** — Elder, general#10810 |
+| **G2** fit gate | not yet reached | **watch**: an absent/None remaining-seconds field must refuse, never default to a permissive number |
+
+**Two gates were immune and both for the same reason: someone made them fail on purpose.** G0d has
+an all-yes card that blocks; G0e refuses at `--opt 3`. The two with risk are the two nobody ever
+watched fail.
+
+### Amendment (binding, applies to every gate in §5)
+
+1. **Trichotomy, not boolean.** Every gate reports **PASS / FAIL / N-A**. `N-A` means *the subject
+   of this check does not exist yet*, is **never** counted as a pass, and **blocks submit** exactly
+   as FAIL does until the subject exists and the gate is re-run.
+2. **G0b gains a non-emptiness precondition.** The flown manifest must contain **exactly 51** pairs
+   *before* the mismatch scan runs; an absent or short manifest is **N-A**, not a pass.
+3. **G1 must be RE-RUN after `--submit` is wired.** Tonight's PASS is recorded as **VACUOUS-TRUE**
+   and **does not discharge the gate**. A PASS is evidence only once a real routing site exists to
+   inspect — the checker's own header says a PASS means *"nothing found HERE"*, and v2 returned PASS
+   on 28 genuinely exposed files.
+4. **G2 must read the LIVE tank and refuse on absence.** If remaining-seconds is missing or None and
+   cannot be derived, the gate is **N-A → refuse**. Never a permissive default.
+5. **Every gate carries a POSITIVE CONTROL demonstrating it fires**, recorded in the manifest beside
+   the pass. *A control that cannot fail is decoration* (Ember). *And a control that never reaches
+   the instrument is indistinguishable from a passing test* — verify the control arrived, not just
+   that the report is clean.
+
+### Seal impact: NONE
+
+No value inside `preimage()` moves: `SPEC`, `spec=a782af3`, `qpath/qsha/support`,
+`mpath/msha/mfield/mcount`, `n`, `seq`, `oop` untouched. This tightens gates only — strictly, and
+in the refuse direction.
+
+*Elder read the header instead of the verdict, and that was the whole difference between "G1 ✅
+done" and what is actually true. **The citation is not the evidence** — his own rule from earlier
+this week, applied to a gate I wrote.*
+
