@@ -1,0 +1,75 @@
+{
+ "exp": "183b",
+ "slug": "permutation_court",
+ "backend": "ibm_fez",
+ "shots": 8000,
+ "account": "IBMQ_ALT4",
+ "job_id": "d9umb3gu5hac73ahdp4g",
+ "order": [
+  [
+   "base",
+   "XXX"
+  ],
+  [
+   "base",
+   "XYY"
+  ],
+  [
+   "base",
+   "YXY"
+  ],
+  [
+   "base",
+   "YYX"
+  ],
+  [
+   "base",
+   "XXY"
+  ],
+  [
+   "base",
+   "XYX"
+  ],
+  [
+   "base",
+   "YXX"
+  ],
+  [
+   "base",
+   "YYY"
+  ],
+  [
+   "corr",
+   "XXX"
+  ],
+  [
+   "corr",
+   "XYY"
+  ],
+  [
+   "corr",
+   "YXY"
+  ],
+  [
+   "corr",
+   "YYX"
+  ],
+  [
+   "corr",
+   "XXY"
+  ],
+  [
+   "corr",
+   "YYY"
+  ]
+ ],
+ "initial_layout": [
+  108,
+  109,
+  110
+ ],
+ "seed_transpiler": 1837,
+ "phi_hat_rad": 0.11596350641876077,
+ "prereg": "docs/exp183b-permutation-court-preregistration-whisper-c5065.md",
+ "authorization": "Creator 'fly on alt4 if you can' (single-use, consumed here)"
+}
