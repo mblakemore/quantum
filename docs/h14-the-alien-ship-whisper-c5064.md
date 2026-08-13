@@ -3,6 +3,7 @@
 **Author**: Whisper (DC15W), C5064 (2026-08-13) · **Substrate**: claude-fable-5
 **Creator directive (verbatim)**: "Examine all of our quantum work … We've found ourselves on an alien ship we are trying to understand. Do an analysis on the quantum realm — What more could we do with the tools we have to build controls? What else could be found by sifting the experiment data we already have? Create an H14 plan!"
 **Baseline**: `docs/quantum-status-comprehensive-whisper-c5061.md` (C5061, amended C5062/C5063) — every number cited below traces there or to the primary artifact it names.
+**Amendment (C5065, 2026-08-13, Creator-approved — "amend the charter and get started")**: Deck B gains **B6 (the Protocol of Dialogue)** and **B7 (the Listening Layer)**; Tier 0 gains **T0.5 (Bayesian question-chooser pilot on banked data)**. Origin: the Creator's question "can we talk to the ship in a more intelligent way?" — the answer being yes, by sealing the *policy* instead of the question list (precedents already in the record: Kitaev-IPE live feedforward +25pp over static readout; the H7 closed-loop cell at 154σ; the isotropy gate's in-flight adjudication). Fly order regenerated below; cells integrated in place per the accounting rules.
 **Lineage**: H1 composed the crown jewels · H2 pointed the court at energy/reality/time · H3 read the universe its rights · H4 built the decks · H5 put the jewels behind the shield · H6 corrected while running · H7 knew itself · H8 commanded itself · H9 survived first contact · H10 took custody of the record · H11 built the ship · H12 spec'd the ship that knows itself · H13 opened the Department of Temporal Investigations. **H14 accepts the situation as it actually is: we are aboard an alien vessel, and it is time to stop interrogating the universe through it and start reading the ship itself.**
 
 ## Thesis (the delta on H13)
@@ -152,6 +153,24 @@ Standing planning constants inherited: DD OFF default · ~475 2q interferometric
 **Price class**: **$0**.
 **Certifies as**: checker + both banked positive controls demonstrated; fragment adopted into the flight-kit template.
 
+### B6 THE PROTOCOL OF DIALOGUE *(conversation under oath — seal the policy, not the question list)*
+
+**Trek frame**: the away team stops reading prepared statements at the ship and starts a conversation — with the universal translator's ruleset notarized before the first word.
+**What's real underneath**: our conversations with the vessel are questionnaires — sealed circuit batches, answers read afterward. The record already shows dialogue wins: Kitaev-IPE through live feedforward beats static QFT readout by +25.24pp (the standing phase-readout default); the H7 closed-loop diagnose→prescribe→verify cell held a three-turn exchange inside one job at 154σ; F122's advantage is an access-model statement — a better *kind* of question, not more questions. The obstacle is that adaptivity is where the garden of forking paths grows, and the court exists to kill post-hoc choice.
+**The composition**: move the seal one level up. A prereg template where the sealed object is a **questioning policy** — priors, information-gain rule, stopping criterion — hash-pinned before flight, with mandatory verbatim transcript logging (every question asked, every answer received, in order). The four-edge gate doctrine applied to the policy itself: its fault ladder must price what it does under a lying answer, under weather, under an abstention (`g_abstain_gate` composes). **Positive control**: a synthetic adversarial transcript (answers crafted to lure the policy off its stopping rule) that the policy must survive or flag — demonstrated before the template guards anything real.
+**The wall**: a policy is code, and code has seeds — B3's linter applies to any compiled object the policy emits; and transcript logging is load-bearing (an adaptive result without its transcript is unverifiable by construction — the grader seat replays the policy against the transcript, one code path).
+**Price class**: **$0** (template + positive control; first live use rides whatever adaptive flight comes first).
+**Certifies as**: the template adopted into the flight kit + the adversarial-transcript control demonstrated + a replay-grader validated on a synthetic known-answer transcript.
+
+### B7 THE LISTENING LAYER *(the ship's side of the conversation, standardized)*
+
+**Trek frame**: the ship has been talking the whole time — hull resonance, deck weather, the drift of its own clock. Stop treating it as noise on our questions; log it as its own channel.
+**What's real underneath**: drift is a coherent clock (0.21°/layer, 50–90σ/row); same-depth sentinels detect the ±7pp window lottery in-run; readout weather diverges from published calibration (`qpu_weather.py` operationalizes F81). These run as separate habits attached to particular flights. Every job we fly is *also* a measurement of the ship — currently discarded unless a cell happens to need it.
+**The composition**: a standard telemetry rider — a small fixed block (same-depth sentinel rows + a drift-phase probe) packaged so any future job can carry it — plus a per-job "ship state" record appended to a telemetry ledger. The producer to B2's helm consumer, and over time the longitudinal dataset A1's census currently has to scavenge for. **Positive control**: the rider's decoder validated at $0 against banked jobs that already carried sentinel blocks (known answers).
+**The wall**: the rider must not perturb the primary flight — placement and scheduling isolation stated in the rider spec, its qubit/shot budget printed at freeze time so every prereg sees the bill. Rider data is telemetry, never claim-bearing (genre fence in the spec).
+**Price class**: **$0** to build and validate; near-zero marginal to carry.
+**Certifies as**: rider spec + decoder reproducing banked sentinel reads + ledger format adopted; first ride-along report.
+
 ---
 
 ## Tier 0 (immediate, $0 — this document's own gates)
@@ -162,6 +181,7 @@ Standing planning constants inherited: DD OFF default · ~475 2q interferometric
 | T0.2 | **A-deck protocol freeze** — one protocol doc per A-cell (quantity lists, signatures, thresholds, splits, abstention rules), committed BEFORE any banked decode. No A-cell decodes until its protocol is in git | gates A1–A5 |
 | T0.3 | **B1 symmetry study** — group + block sizes; GO/NO-GO before any solver runs | gates B1 |
 | T0.4 | **B3 seed linter** — pure code + self-test, no dependencies on anything above | none (start any time) |
+| T0.5 | **Bayesian question-chooser pilot on banked data** — replay a banked working-point/witness scan through an expected-information-gain policy; measure shots-to-target vs the flown grid. $0, informs whether B6's first live use carries the kernel or just the template | informs B6 |
 
 ## Fly order (all $0 unless marked)
 
@@ -173,14 +193,17 @@ Standing planning constants inherited: DD OFF default · ~475 2q interferometric
 | 3 | B3 — Seed-Storm Fence | B | independent, pure code, closes an open doctrine gap |
 | 4 | A2 — Ghost in the Cargo Bay | A | five flights banked, constraint structure strong |
 | 5 | B4 + B5 — Deck Plates + Anchor Covenant | B | kit packaging with banked positive controls |
-| 6 | A5 — Refocusing the Archives | A | two-stage; stage 2 depends on stage 1's law |
-| 7 | B1 — Missing Ceiling | B | bounded by its own gate; thought-heavy, spend-free |
-| 8 | A4 — Hull Fingerprint | A | power depends on epoch inventory (checked in its protocol freeze) |
-| 9 | B2 — The Helm | B | last because its thresholds come from A1 |
-| 10 | A6 — Designers' Intent | A | anytime filler; WebSearch-dependent |
+| 6 | B6 — Protocol of Dialogue | B | the grammar the dialogue upgrades need first; $0 template + controls |
+| 7 | T0.5 — question-chooser pilot | B | banked-data replay; decides B6's first live payload |
+| 8 | A5 — Refocusing the Archives | A | two-stage; stage 2 depends on stage 1's law |
+| 9 | B1 — Missing Ceiling | B | bounded by its own gate; thought-heavy, spend-free |
+| 10 | A4 — Hull Fingerprint | A | power depends on epoch inventory (checked in its protocol freeze) |
+| 11 | B7 — Listening Layer | B | rider spec + banked validation; producer to B2 |
+| 12 | B2 — The Helm | B | last of the controls: its thresholds come from A1, its feed from B7 |
+| 13 | A6 — Designers' Intent | A | anytime filler; WebSearch-dependent |
 
 **Deferred/optional flights** (none load-bearing, none before ~Aug 26): A3(b) legs (exp183 −6.7° virtual-Z re-fly; exp188b idle-delay arm) · A5 dampener-v2 confirmation row · B2 live ride-along (zero marginal — attaches to whatever flies next).
 
 ## What H14 deliberately is not
 
-Not an advantage arc (F122 remains the campaign's one live claim; door (a) remains the one blind signal, and its flight 3 is untouched by anything here). Not a new-physics arc (Deck A certifies mechanisms and taxonomies, not violations). Not an infrastructure spree (every B-cell is an existing doctrine or reading made executable — nothing is built that a death or a ruling didn't already order). The arc succeeds if, when the tank refills, the next flight is designed against a constants/weather taxonomy, guarded by a helm, fenced against seed storms, floored on measured plates, and anchored under covenant — **and the archive has yielded whatever it still held**.
+Not an advantage arc (F122 remains the campaign's one live claim; door (a) remains the one blind signal, and its flight 3 is untouched by anything here). Not a new-physics arc (Deck A certifies mechanisms and taxonomies, not violations). Not an infrastructure spree (every B-cell is an existing doctrine or reading made executable — nothing is built that a death or a ruling didn't already order). The arc succeeds if, when the tank refills, the next flight is designed against a constants/weather taxonomy, guarded by a helm, fenced against seed storms, floored on measured plates, anchored under covenant — and, where it asks questions, asking them under a sealed policy with the ship's own telemetry logged as its side of the conversation — **and the archive has yielded whatever it still held**.
