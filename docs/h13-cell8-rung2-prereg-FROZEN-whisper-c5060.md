@@ -553,3 +553,70 @@ in the refuse direction.
 done" and what is actually true. **The citation is not the evidence** — his own rule from earlier
 this week, applied to a gate I wrote.*
 
+---
+
+## AMENDMENT 8 (C5060, PRE-FLIGHT — nothing flown) — **§6 gains an UPPER falsifier: too good is a red flag, not a pass**
+
+*I registered a stand-down from amending after Amendment 7, with one resume condition: **if G1's
+re-run, G2, or the routed-intent check surfaces something that REQUIRES a spec change.** The
+routed-intent check has surfaced exactly that, so this amendment fires the condition rather than
+breaking the commitment. Recording that explicitly, because a stand-down overridden without saying
+so is the failure mode the registry exists to prevent.*
+
+### What the routed-intent check surfaced
+
+Elder built a routed-intent separation gate and wrote into its print line that at `opt=3` the
+collapsed circuit would give the **wrong** answer, and that both gates would catch it. **The test
+falsified his own sentence:**
+
+```
+opt=1   2q=4   ⟨Z⟩ = −1.000   ✅ correct
+opt=3   2q=0   ⟨Z⟩ = −1.000   ✅ ALSO correct
+```
+
+The transpiler's reduction is **mathematically exact**, so the collapsed circuit reproduces the
+exact result. Therefore:
+
+> **The entanglement collapse is invisible to EVERY noiseless check, by construction.** Not "harder
+> to see" — *invisible*, because there is nothing wrong with the collapsed circuit's ideal output.
+> **G0e is the only gate that catches it, and the routed-intent gate cannot substitute.**
+
+### 🔴 The hole this opens in §6, which is mine
+
+The collapse shows up **only on hardware**, and it shows up as the circuit being **TOO GOOD** —
+dodging exactly the two-qubit noise the F75 haircut exists to account for.
+
+**Every falsifier in §6 points DOWNWARD.** *"Below 0.869028 → the beat does not reproduce."* There
+is **no upper falsifier at all**. So a flight whose switch had collapsed would return an
+anomalously **high** success rate and **§6 would record it as an unusually strong pass.** The one
+direction nobody instinctively distrusts is the only direction this failure moves.
+
+### §6, amended — added to "Falsifiers, named in advance"
+
+> - **ABOVE the F75 haircut envelope's upper bound for this apparatus → NO-TEST, pending
+>   verification.** A blind success rate better than the noise budget permits is **evidence against
+>   the apparatus, not for the claim.** It does not pass and it does not fail: it **blocks** until
+>   the per-pair two-qubit counts of the **SUBMITTED** circuits are re-checked against G0e. If any
+>   switch-arm circuit reached the device with zero entangling gates, the flight is **NO-TEST** —
+>   it measured a single-qubit phase wearing the switch's name.
+> - **Enabling requirement**: the flight manifest must record per-pair two-qubit counts for the
+>   circuits **AS SUBMITTED**, not only as built, so this check is possible after the fact. A build-
+>   time assertion cannot prove what the device received.
+
+### Why an upper bound and not just "look at it"
+
+Because the number would look like success, and *"we would have noticed"* is the claim every one of
+tonight's ten near-artifacts falsified. **A falsifier that only points one way is half a falsifier**
+— and which half is missing is decided by which direction the author expects to be disappointed in.
+
+### Seal impact: NONE
+
+No value inside `preimage()` moves: `SPEC`, `spec=a782af3`, `qpath/qsha/support`,
+`mpath/msha/mfield/mcount`, `n`, `seq`, `oop` untouched. Strictly tightening, in the refuse
+direction.
+
+*Elder asserted a mechanism in a print statement instead of reading it off the run — inside a test
+written to verify a gate — and the run contradicted him on the same screen. **The slip produced the
+finding**: had the sentence been true, G0e would have looked like redundant coverage, and a false
+redundancy claim is how a load-bearing gate gets deleted later.*
+
