@@ -1,0 +1,298 @@
+{
+ "card": "exp_gear1_rider_decode",
+ "cycle": "C5073",
+ "job": "d9v58tgb1g9c73a86m3g",
+ "account": "IBMQ_ALT4",
+ "cal_epoch": "2026-08-13 23:06:49+00:00",
+ "P_A": {
+  "edges_pass": 2,
+  "edges_scored": 14
+ },
+ "P_B": {
+  "worst_z": 79.23,
+  "pass": false
+ },
+ "edges": [
+  {
+   "edge": [
+    148,
+    152
+   ],
+   "usable_2k": [
+    4,
+    16,
+    64
+   ],
+   "rider_single_mrad_perCZ": -9.631,
+   "rider_cond_mrad_perCZ": 56.379,
+   "se_cond_mrad": 0.328,
+   "r2": [
+    0.134,
+    0.956
+   ],
+   "coherent_resolved": false
+  },
+  {
+   "edge": [
+    53,
+    12
+   ],
+   "usable_2k": [
+    4,
+    16,
+    64
+   ],
+   "rider_single_mrad_perCZ": 10.734,
+   "rider_cond_mrad_perCZ": -31.895,
+   "se_cond_mrad": 0.423,
+   "r2": [
+    0.531,
+    0.527
+   ],
+   "coherent_resolved": false
+  },
+  {
+   "edge": [
+    15,
+    5
+   ],
+   "usable_2k": [
+    4,
+    16,
+    64
+   ],
+   "rider_single_mrad_perCZ": 41.314,
+   "rider_cond_mrad_perCZ": -36.107,
+   "se_cond_mrad": 0.379,
+   "r2": [
+    0.803,
+    0.113
+   ],
+   "coherent_resolved": false
+  },
+  {
+   "edge": [
+    139,
+    109
+   ],
+   "usable_2k": [
+    4,
+    16
+   ],
+   "rider_single_mrad_perCZ": -30.848,
+   "rider_cond_mrad_perCZ": -276.717,
+   "se_cond_mrad": 1.94,
+   "r2": [
+    0.754,
+    0.997
+   ],
+   "coherent_resolved": false
+  },
+  {
+   "edge": [
+    33,
+    100
+   ],
+   "usable_2k": [
+    4,
+    64
+   ],
+   "rider_single_mrad_perCZ": -17.038,
+   "rider_cond_mrad_perCZ": 15.208,
+   "se_cond_mrad": 0.544,
+   "r2": [
+    0.683,
+    0.003
+   ],
+   "coherent_resolved": false
+  },
+  {
+   "edge": [
+    91,
+    146
+   ],
+   "usable_2k": [
+    4,
+    16,
+    64
+   ],
+   "rider_single_mrad_perCZ": -9.647,
+   "rider_cond_mrad_perCZ": 43.908,
+   "se_cond_mrad": 0.355,
+   "r2": [
+    0.849,
+    0.911
+   ],
+   "coherent_resolved": false
+  },
+  {
+   "edge": [
+    131,
+    7
+   ],
+   "usable_2k": [
+    4,
+    16
+   ],
+   "rider_single_mrad_perCZ": 94.901,
+   "rider_cond_mrad_perCZ": 93.348,
+   "se_cond_mrad": 1.453,
+   "r2": [
+    0.939,
+    0.928
+   ],
+   "coherent_resolved": true
+  },
+  {
+   "edge": [
+    2,
+    29
+   ],
+   "usable_2k": [
+    4,
+    16,
+    64
+   ],
+   "rider_single_mrad_perCZ": 2.241,
+   "rider_cond_mrad_perCZ": -9.607,
+   "se_cond_mrad": 0.443,
+   "r2": [
+    0.264,
+    0.997
+   ],
+   "coherent_resolved": false
+  },
+  {
+   "edge": [
+    149,
+    153
+   ],
+   "usable_2k": [
+    4,
+    16,
+    64
+   ],
+   "rider_single_mrad_perCZ": -1.588,
+   "rider_cond_mrad_perCZ": 2.127,
+   "se_cond_mrad": 0.763,
+   "r2": [
+    0.245,
+    0.0
+   ],
+   "coherent_resolved": false
+  },
+  {
+   "edge": [
+    54,
+    13
+   ],
+   "usable_2k": [
+    4,
+    16,
+    64
+   ],
+   "rider_single_mrad_perCZ": -25.947,
+   "rider_cond_mrad_perCZ": 56.837,
+   "se_cond_mrad": 0.496,
+   "r2": [
+    0.505,
+    0.951
+   ],
+   "coherent_resolved": false
+  },
+  {
+   "edge": [
+    19,
+    6
+   ],
+   "usable_2k": [
+    4,
+    16,
+    64
+   ],
+   "rider_single_mrad_perCZ": 38.257,
+   "rider_cond_mrad_perCZ": -49.784,
+   "se_cond_mrad": 0.312,
+   "r2": [
+    0.999,
+    0.893
+   ],
+   "coherent_resolved": false
+  },
+  {
+   "edge": [
+    155,
+    110
+   ],
+   "status": "VIS-DEAD",
+   "usable": [
+    4
+   ]
+  },
+  {
+   "edge": [
+    34,
+    101
+   ],
+   "usable_2k": [
+    4,
+    16
+   ],
+   "rider_single_mrad_perCZ": 50.348,
+   "rider_cond_mrad_perCZ": -32.424,
+   "se_cond_mrad": 1.345,
+   "r2": [
+    0.998,
+    0.943
+   ],
+   "coherent_resolved": true
+  },
+  {
+   "edge": [
+    98,
+    147
+   ],
+   "usable_2k": [
+    4,
+    16,
+    64
+   ],
+   "rider_single_mrad_perCZ": 34.644,
+   "rider_cond_mrad_perCZ": -8.322,
+   "se_cond_mrad": 0.358,
+   "r2": [
+    0.957,
+    0.846
+   ],
+   "coherent_resolved": false
+  },
+  {
+   "edge": [
+    132,
+    8
+   ],
+   "status": "VIS-DEAD",
+   "usable": []
+  },
+  {
+   "edge": [
+    3,
+    38
+   ],
+   "usable_2k": [
+    4,
+    16,
+    64
+   ],
+   "rider_single_mrad_perCZ": -8.653,
+   "rider_cond_mrad_perCZ": 21.355,
+   "se_cond_mrad": 0.512,
+   "r2": [
+    0.136,
+    0.472
+   ],
+   "coherent_resolved": false
+  }
+ ],
+ "verdict": "RIDERS-BELOW-RESOLUTION"
+}
