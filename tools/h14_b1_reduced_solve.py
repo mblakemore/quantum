@@ -283,10 +283,7 @@ def solve512():
     assert err < 1e-8
     import scipy.sparse as sp
     WA = cp.Variable((512, 512), hermitian=True)
-    cons = [WA >> 0]
-    for V in (Hm, Sm):
-        R = sp.csr_matrix(rep512(V))
-        cons.append(WA == cp.Constant(R) @ WA @ cp.Constant(R.conj().T))
+    cons = [WA >> 0]   # C1 constraints removed: sign obstruction leaves exchange only (see above)
     WB = cp.Constant(sp.csr_matrix(PI)) @ WA @ cp.Constant(sp.csr_matrix(PI))
     cons += [cp.real(cp.trace(WA + WB)) == 16, cp.imag(cp.trace(WA + WB)) == 0]
     cons += comb512_A(WA)
