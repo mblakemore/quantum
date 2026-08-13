@@ -1,0 +1,113 @@
+{
+ "card": "exp_turbine_mechsplit",
+ "cycle": "C5072",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_marrakesh",
+ "cal_epoch": "2026-08-13 22:42:53+00:00",
+ "delays_us": [
+  0,
+  6,
+  12,
+  18,
+  24,
+  30
+ ],
+ "register": [
+  2,
+  3,
+  7,
+  16,
+  17,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  37,
+  38,
+  39,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  57,
+  58,
+  59,
+  70,
+  71,
+  72,
+  73,
+  75,
+  141,
+  142
+ ],
+ "seed": 2026072307,
+ "account": "IBMQ_ALT4",
+ "purpose": "Turbine element 1 (board #147): split TIME-clock (TLS swap, harvestable) from GATE-clock (interference) on the #144 reviver set",
+ "reviver_targets": [
+  7,
+  24,
+  27,
+  31,
+  34,
+  45,
+  53
+ ],
+ "scout_reference": "d9v4s3gb1g9c73a867bg (same window intended)",
+ "prereg": "predictions + frozen decode rule in this script's docstring, committed pre-flight",
+ "pubs_meta": [
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "d160_delay0us",
+   "delay_us": 0,
+   "shots": 12000
+  },
+  {
+   "block": "d160_delay6us",
+   "delay_us": 6,
+   "shots": 12000
+  },
+  {
+   "block": "d160_delay12us",
+   "delay_us": 12,
+   "shots": 12000
+  },
+  {
+   "block": "d160_delay18us",
+   "delay_us": 18,
+   "shots": 12000
+  },
+  {
+   "block": "d160_delay24us",
+   "delay_us": 24,
+   "shots": 12000
+  },
+  {
+   "block": "d160_delay30us",
+   "delay_us": 30,
+   "shots": 12000
+  }
+ ]
+}
