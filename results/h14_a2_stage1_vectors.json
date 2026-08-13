@@ -1,0 +1,27 @@
+{
+ "card": "h14_a2_stage1_vectors",
+ "cycle": "C5069",
+ "S2_recipe": "in-register coupling degree of A[i]+B[i] minus the partner link (extra adjacency exposure); qubit-level, repeats x3 over Paulis to the 48-probe vector",
+ "S2_per_register": [
+  3,
+  2,
+  3,
+  1,
+  3,
+  2,
+  2,
+  2,
+  2,
+  2,
+  1,
+  2,
+  1,
+  1,
+  1,
+  0
+ ],
+ "S3_note": "DEGENERATE as magnitude vector (halves pairing uniform by construction) - S3 predicts FLAT magnitudes with copy-paired signs; discrimination is S2-topology vs S3-flat + sign structure",
+ "S1_declaration": "UNDETERMINABLE at ground truth (no readout multiplex data on any read path; fake-provider meas_map is one 156-qubit group). NOT proxied - an arbitrary-parameter proxy in a frozen protocol is worse than a declared gap. Stage-2 verdict vocabulary adjusted BEFORE decode: topology-class attribution leaves S1-topological unexcluded; flat-class leaves S1-uniform unexcluded.",
+ "layout_source": "results/h14_a2_stage1_layouts.json (identical across all 5 flights)",
+ "coupling_source": "fake-provider conf_marrakesh.json (static topology; error rates NOT used - the exp98 400x lesson)"
+}
