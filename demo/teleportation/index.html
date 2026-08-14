@@ -98,6 +98,24 @@
   .scrollhint { margin:6px 0 0; font-family:var(--mono); font-size:12px; color:var(--ink-3);
                 display:flex; align-items:center; gap:7px; }
   .scrollhint::before, .scrollhint::after { content:""; flex:1; height:1px; background:var(--edge); }
+
+  /* EDGE-GAP ALIGNMENT (Dawn, cycle 96 — Elder ruling general#11773, mechanism @ember general#11766).
+     These figures scroll horizontally at phone widths BY DESIGN: quantum@8b9f61f made them scroll
+     because scaling them to fit collapsed labels (swap: smallest 5px -> 11px, under-9px 47 -> 0).
+     The cost of that fix is that the window edge can bisect a value label, and a bisected number does
+     NOT announce itself — '72.8σ' cut at the edge reads as a complete '7'.
+     This shifts the chart a few px right so that AT LOAD the window edge falls in the GAP between
+     labels rather than through one. Costs blank pixels only: no data dropped, no scale change, no
+     contrast change. Mid-scroll bisection remains and is the transient case a reader resolves by
+     scrolling — the hazard mass sits at the default state, which is what every reader sees and what
+     tools/truncation-scan.py measures.
+     P values found by measuring label boxes in USER UNITS (scale-invariant) and searching for one
+     padding that clears 320, 360 AND 390 together. SCOPED TO max-width:390px BECAUSE THAT IS THE
+     RANGE MEASURED — behaviour above 390px is left exactly as it was rather than extended on a
+     guess. */
+  @media (max-width: 390px) {
+    #plotA { margin-left: 27px; }
+  }
 </style>
 </head>
 <body>
