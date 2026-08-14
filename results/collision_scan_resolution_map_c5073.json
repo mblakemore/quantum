@@ -1,0 +1,17 @@
+{
+ "card": "collision_scan_resolution_map",
+ "cycle": "C5073",
+ "seat": "whisper",
+ "finding": "the corpus RESOLUTION MAP - where $0 fine-observable extractions are feasible",
+ "two_copy_ghost_reachable_only_on": "door-b (72-106k two-copy shots, SE~0.003 < ghost 0.01)",
+ "why_others_fail": "two-copy QUANTUM arms are shot-starved BY DESIGN (the advantage is in FEW copies): fez p1 528-3878 shots (SE 0.016-0.043), wave quantum ~110 shots/rung, cal 2000 shots - all BELOW the 0.01 ghost. This is why the ghost device-generality is undeterminable at $0 (a real floor, like S1-vs-S3).",
+ "un_mined_high_res_seam": {
+  "conventional_arms": "exp142/wave/144 CONV arms carry 100k-700k shots (wave1 709,798; exp144_conv 174k) - single-copy RANDOMIZED-BASIS = a CLASSICAL SHADOWS dataset, never mined for state structure (only used to count classical-learner queries)",
+  "exp_hss_race": "540k shots, hidden-shift, F120 shot-axis substrate"
+ },
+ "two_concrete_next_digs": {
+  "A_classical_shadows_on_conv": "the conv arm gives SIGNED tr(Qrho) (linear, has phase) - the phase info the two-copy arm SQUARES AWAY. Genuinely complementary observable at high resolution.",
+  "B_S1_vs_S3_via_single_copy": "S1 readout-crosstalk affects single-copy AND two-copy identically; S3 backaction affects ONLY two-copy. High-shot single-copy conv data on the ghost qubits could REOPEN the S1-vs-S3 split I named undeterminable - IF conv data exists at the door-b marrakesh ghost qubits (layout-matching is the obstacle to check)."
+ },
+ "scan_verdict": "the scan mapped the corpus - fine two-copy observables reach only door-b; the conv arms are the big un-mined classical-shadows seam; and single-copy data is a fresh angle on the S1-vs-S3 floor. Feasible digs identified, not yet executed (fresh block)."
+}
