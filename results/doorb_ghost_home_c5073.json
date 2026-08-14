@@ -1,0 +1,26 @@
+{
+ "card": "doorb_ghost_home_and_s1s3",
+ "cycle": "C5073",
+ "ghost_home": {
+  "spectral": "weight-1-EXCLUSIVE (weight-spectrum: structure only at w=1, w2-16 flat at floor)",
+  "mechanism": "measurement-quality, P-INDEPENDENT (sign test r=0.809 across 4 different-P draws, P-tracking 0.003)",
+  "spatial_hot_pairs": {
+   "pair8": "phys 17/27, g -0.044",
+   "pair6": "phys 24/25, g -0.042",
+   "pair10": "phys 37/45, g -0.042",
+   "pair12": "phys 28/29, g +0.041"
+  },
+  "spatial_cold_pairs": [
+   "pair2",
+   "pair4",
+   "pair15"
+  ],
+  "note": "hot pattern consistent across all 4 healthy draws = apparatus property, mixed signs (A2 pos-frac 0.5-0.68)"
+ },
+ "s1_vs_s3": {
+  "verdict": "UNDETERMINABLE at $0 on the banked corpus",
+  "why": "A2 stage-1 S1_declaration (pre-existing): no readout-multiplex data on any read path; fake-provider meas_map is one 156-qubit group; proxying disallowed in a frozen protocol. Cal blocks too shot-starved (2000 shots, SE 0.022 > ghost 0.01) for a state-independence test.",
+  "existing_lean": "A2 verdict leans S3 (measurement backaction = the consistent flat-class shape) with S1 UNEXCLUDED",
+  "to_split_cleanly": "a TARGETED readout-crosstalk characterization flight (new QPU) - NOT extractable from banked data"
+ }
+}
