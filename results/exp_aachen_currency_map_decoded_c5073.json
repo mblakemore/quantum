@@ -1,0 +1,174 @@
+{
+ "card": "exp_aachen_currency_map_decode",
+ "cycle": "C5073",
+ "job": "d9v8ginijjus73f8jdvg",
+ "account": "IBMQ_TOKEN",
+ "cal_epoch": "2026-08-13 06:18:32+00:00",
+ "A_PHASE_FIELD": {
+  "verdict": "FIELD-PRESENT",
+  "resolved_edges": 15,
+  "edges": [
+   {
+    "edge": [
+     100,
+     38
+    ],
+    "cond_mrad": 17.728,
+    "se_mrad": 0.235,
+    "resolved": true
+   },
+   {
+    "edge": [
+     85,
+     113
+    ],
+    "cond_mrad": -36.31,
+    "se_mrad": 0.681,
+    "resolved": true
+   },
+   {
+    "edge": [
+     69,
+     94
+    ],
+    "cond_mrad": -4.499,
+    "se_mrad": 1.233,
+    "resolved": true
+   },
+   {
+    "edge": [
+     83,
+     13
+    ],
+    "cond_mrad": 43.798,
+    "se_mrad": 0.664,
+    "resolved": true
+   },
+   {
+    "edge": [
+     23,
+     151
+    ],
+    "cond_mrad": -41.983,
+    "se_mrad": 0.286,
+    "resolved": true
+   },
+   {
+    "edge": [
+     17,
+     102
+    ],
+    "cond_mrad": -35.987,
+    "se_mrad": 0.439,
+    "resolved": true
+   },
+   {
+    "edge": [
+     134,
+     53
+    ],
+    "cond_mrad": -20.65,
+    "se_mrad": 0.385,
+    "resolved": true
+   },
+   {
+    "edge": [
+     73,
+     47
+    ],
+    "cond_mrad": -6.883,
+    "se_mrad": 0.459,
+    "resolved": true
+   },
+   {
+    "edge": [
+     101,
+     49
+    ],
+    "cond_mrad": 4.689,
+    "se_mrad": 0.255,
+    "resolved": true
+   },
+   {
+    "edge": [
+     86,
+     119
+    ],
+    "cond_mrad": 11.648,
+    "se_mrad": 0.336,
+    "resolved": true
+   },
+   {
+    "edge": [
+     70,
+     95
+    ],
+    "cond_mrad": 46.077,
+    "se_mrad": 0.374,
+    "resolved": true
+   },
+   {
+    "edge": [
+     84,
+     14
+    ],
+    "cond_mrad": -8.152,
+    "se_mrad": 0.54,
+    "resolved": true
+   },
+   {
+    "edge": [
+     24,
+     152
+    ],
+    "cond_mrad": 82.846,
+    "se_mrad": 0.405,
+    "resolved": true
+   },
+   {
+    "edge": [
+     27,
+     103
+    ],
+    "cond_mrad": -70.062,
+    "se_mrad": 0.682,
+    "resolved": true
+   },
+   {
+    "edge": [
+     135,
+     54
+    ],
+    "cond_mrad": 30.541,
+    "se_mrad": 0.295,
+    "resolved": true
+   },
+   {
+    "edge": [
+     74,
+     48
+    ],
+    "status": "VIS-DEAD"
+   }
+  ]
+ },
+ "A_PHASE_STAB": {
+  "verdict": "TURBULENT-REPLICATES",
+  "worst_z": 92.33962269737363
+ },
+ "A_NONDIAG": {
+  "verdict": "NO-TEST(gate)",
+  "V_floor": 0.00325,
+  "V_science": 0.8615,
+  "V_polarity": -0.96075,
+  "V_floor_norm": null,
+  "deficit": null,
+  "z": null
+ },
+ "A_POP": {
+  "verdict": "QUIET",
+  "eps_early": 0.0075,
+  "eps_late": 0.0175,
+  "z": 1.274182620179991
+ }
+}
