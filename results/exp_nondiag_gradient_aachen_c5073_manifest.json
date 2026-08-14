@@ -127,6 +127,9 @@
    "cz_count": 4
   }
  ],
- "pending_jobs_at_submit": 0,
- "job_id": "d9v8vnif2ibc73f0nnag"
+ "pending_jobs_at_submit": 2,
+ "job_ids_by_rung": {
+  "f0.33": "d9v9c07ijjus73f8k6d0",
+  "f0.67": "d9v9c02f2ibc73f0o2cg"
+ }
 }
