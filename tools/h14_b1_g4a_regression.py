@@ -62,11 +62,13 @@ def main():
     cons += comb_mixed_B(WB, D32, 2)
     prob = cp.Problem(cp.Maximize(cp.real(cp.trace(cp.Constant(G) @ (WA + WB)))), cons)
     print(f"[{time.time()-t0:5.1f}s] assembled (comb via the MIXED-DIM machinery); solving...")
+    solver_used = "CLARABEL"; solver_opts = {}
     try:
         prob.solve(solver="CLARABEL")
     except cp.error.SolverError:
         print("CLARABEL failed — SCS fallback")
-        prob.solve(solver="SCS", eps=1e-9, max_iters=200000)
+        solver_used = "SCS"; solver_opts = {"eps": 1e-9, "max_iters": 200000}
+        prob.solve(solver="SCS", **solver_opts)
     val = float(prob.value); dev = abs(val - QSTAR_PRIMAL)
     gate = dev <= 1e-5 and prob.status in ("optimal", "optimal_inaccurate")
     print(f"[{time.time()-t0:5.1f}s] value {val:.10f} vs certified {QSTAR_PRIMAL:.10f} |dev| {dev:.2e} status {prob.status}")
@@ -75,6 +77,7 @@ def main():
                "P1_exchange_max_dev": float(dev_pi),
                "value": val, "certified": QSTAR_PRIMAL, "abs_dev": float(dev),
                "status": prob.status, "gate": "PASS" if gate else "FAIL",
+               "solver": solver_used, "solver_opts": solver_opts,
                "note": "mixed-dim embed machinery (ptrace_seq/embed_last/perm_matrix_mixed + comb at dims [2,2,2,2,2], odim 2) regressed against the certified dim-32 ceiling per Elder G4a"},
               open(os.path.join(HERE, "..", "results", "h14_b1_g4a_regression.json"), "w"), indent=1)
     print("-> results/h14_b1_g4a_regression.json")
