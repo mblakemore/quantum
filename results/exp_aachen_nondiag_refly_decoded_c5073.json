@@ -1,0 +1,20 @@
+{
+ "card": "exp_aachen_nondiag_refly_decode",
+ "cycle": "C5073",
+ "job": "d9v8j0qf2ibc73f0nbu0",
+ "account": "IBMQ_TOKEN",
+ "cal_epoch": "2026-08-13 06:18:32+00:00",
+ "layout": [
+  84,
+  83,
+  85,
+  86
+ ],
+ "V_floor": 0.83425,
+ "V_science": 0.818,
+ "V_polarity": -0.953,
+ "V_floor_norm": 0.8155643662050219,
+ "deficit": -0.0024356337949780205,
+ "z": -0.15404300676420252,
+ "verdict": "NONDIAG-ABSENT-AT-RESOLUTION"
+}
