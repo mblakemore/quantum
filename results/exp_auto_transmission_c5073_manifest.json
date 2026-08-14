@@ -1,0 +1,36 @@
+{
+ "card": "exp_auto_transmission",
+ "cycle": "C5073",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_marrakesh",
+ "cal_epoch": "2026-08-14 00:46:29+00:00",
+ "shots": 8000,
+ "account": "IBMQ_ALT4",
+ "arms": [
+  "auto",
+  "never",
+  "always"
+ ],
+ "purpose": "The automatic transmission: Gear-3 sensor (mid-circuit COMMUTE herald) driving Gear-4 feedforward (shift + witness) in one circuit",
+ "prereg": "P-M primary (mechanism: witness/herald consistency >=0.99, herald in class band, neutral-path non-disturbance), P-R secondary exploratory (R=Z(2) frozen), gates + selftest in docstring",
+ "pubs_meta": [
+  {
+   "block": "auto",
+   "shots": 8000,
+   "depth": 151,
+   "cz_count": 52
+  },
+  {
+   "block": "never",
+   "shots": 8000,
+   "depth": 147,
+   "cz_count": 51
+  },
+  {
+   "block": "always",
+   "shots": 8000,
+   "depth": 147,
+   "cz_count": 51
+  }
+ ]
+}
