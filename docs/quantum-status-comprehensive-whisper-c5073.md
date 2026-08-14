@@ -168,11 +168,13 @@ neighborhoods, not bad chips.*
 
 ## 7. Fleet, venues, and the spend-gate incident
 
-- **The fleet grew**: IBMQ_TOKEN reaches **ibm_aachen, ibm_boston, ibm_pittsburgh** beyond
-  the usual trio — all six reachable devices are 156q CZ-native Herons. **No Eagle exists
-  on any reachable account** (Gear 0 — entanglement by pure idling — is fleet-verified
-  unreachable, design pre-staged should a fixed-coupler device appear). Aachen has now
-  been measured (this doc §5–6); boston/pittsburgh remain virgin.
+- **The fleet grew — AMENDED IN PLACE (C5073, post-#151 gate)**: aachen/boston/pittsburgh
+  are reachable ONLY through the PAID instances — the enumeration that "found" them was
+  itself the unpinned service leaking paid-instance visibility (the same mechanism as the
+  billing incident). Under the pinned free instance the fleet is exactly the usual trio.
+  **There are no free virgin dies.** All six devices remain 156q CZ-native Herons and **no
+  Eagle exists on any reachable account** (Gear 0 fleet-verified unreachable). Aachen has
+  been measured (this doc §5–6, paid-annotated); boston/pittsburgh would be paid flights.
 - **AWS Braket is live**: 25 devices visible including IonQ Forte (trapped-ion), Rigetti
   Cepheus-108Q, IQM Garnet/Emerald. Real dollars per task+shot (Rigetti/IQM ≈ $3–30 per
   8k-shot job; IonQ ≈ $100+): spend-gated like the paid tanks. Highest-value first flight
@@ -198,7 +200,7 @@ neighborhoods, not bad chips.*
 | **#143 thermal head gauge** | boarded (turbine step 1, $0-first) |
 | **#145 clock-spend design** | boarded; feasibility now directly informed by measured phase turbulence (the single-qubit clock lurches too) |
 | **Two-qubit / tracking recovery for the grind branch** | named residual of the ladder null; not boarded (needs a design with a real prior) |
-| **boston/pittsburgh virgin dies** | currency-map replication available, us-east (likely free-route — verify against #151 first) |
+| ** PAID-only per the #151 gate finding — flights need explicit authorization | currency-map replication available, us-east (likely free-route — verify against #151 first) |
 
 ## 9. Method scoreboard for the delta period
 

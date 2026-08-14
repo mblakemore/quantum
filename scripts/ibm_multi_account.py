@@ -190,7 +190,54 @@ def service_for_submission(account_var):
     inst = os.environ.get("QISKIT_IBM_INSTANCE") or None
     if inst:
         kw["instance"] = inst
-    return QiskitRuntimeService(**kw)
+        return QiskitRuntimeService(**kw)
+    # ---- INSTANCE GATE (Whisper C5073, board #151; incident general#11539) ----
+    # A named ACCOUNT is not a pinned INSTANCE: one credential can carry a free us-east
+    # instance AND a paid eu-de instance, and the runtime resolves by DEVICE REGION — a
+    # submission to a eu-de-region device silently bills the paid instance (whisper-de,
+    # 61s consumed unauthorized before the 1218 wall exposed it). This gate refuses-loudly:
+    # auto-pin to the single free (plan=='open') instance when one exists; otherwise raise
+    # with the full list. QPU_ALLOW_PAID=1 bypasses ONLY for an explicitly Creator-
+    # authorized paid flight, and prints what it is doing.
+    PAID_CRNS = {
+        # whisper-de (eu-de, PAID) and WhisperPaid (us-east, PAID) — registry-known
+        "crn:v1:bluemix:public:quantum-computing:eu-de:a/65155eedeb8b464eadf55d101fb3c931:dcd016cb-5ab6-4e2d-86e4-befec4c5fe82::",
+        "crn:v1:bluemix:public:quantum-computing:us-east:a/65155eedeb8b464eadf55d101fb3c931:27609585-d5b2-43cb-808d-2d47aeb87c05::",
+    }
+    svc = QiskitRuntimeService(**kw)
+    try:
+        raw = svc.instances()
+    except Exception as e:  # API shape drift must fail CLOSED on multi-instance risk
+        raise RuntimeError(
+            f"instance gate could not enumerate instances for {account_var} ({e}) — "
+            f"REFUSING submission service. Pin QISKIT_IBM_INSTANCE explicitly."
+        )
+    insts = []
+    for it in raw:
+        if isinstance(it, dict):
+            insts.append({"crn": it.get("crn", ""), "plan": (it.get("plan") or "").lower(),
+                          "name": it.get("name", "?")})
+        else:
+            insts.append({"crn": str(it), "plan": "", "name": str(it)})
+    free = [i for i in insts if i["plan"] == "open" and i["crn"] not in PAID_CRNS]
+    paid = [i for i in insts if i not in free]
+    if os.environ.get("QPU_ALLOW_PAID") == "1":
+        print(f"[instance-gate] QPU_ALLOW_PAID=1: NOT pinning; account {account_var} instances: "
+              f"{[(i['name'], i['plan']) for i in insts]} — PAID BILLING POSSIBLE (authorized flight)")
+        return svc
+    if len(free) == 1:
+        if paid:
+            print(f"[instance-gate] {account_var} carries paid instance(s) "
+                  f"{[(i['name'], i['plan']) for i in paid]} — PINNING to free '{free[0]['name']}' "
+                  f"({free[0]['crn'][-16:]})")
+        kw["instance"] = free[0]["crn"]
+        return QiskitRuntimeService(**kw)
+    raise RuntimeError(
+        f"instance gate: {account_var} resolves to {len(free)} free / {len(paid)} paid instances "
+        f"({[(i['name'], i['plan']) for i in insts]}) — REFUSING submission service without an "
+        f"explicit pin. Set QISKIT_IBM_INSTANCE to the intended CRN (or QPU_ALLOW_PAID=1 for a "
+        f"Creator-authorized paid flight)."
+    )
 
 
 def assert_explicit_account(env_var="QPU_ACCOUNT_VAR"):
