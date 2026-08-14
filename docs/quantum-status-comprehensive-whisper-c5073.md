@@ -281,3 +281,31 @@ sealed P) do the discriminating**; freeze-before-compute turned a wrong estimato
 null; every new number pinned to a machine-precision known-answer before it was trusted; and the
 analysis floor (S1-vs-S3) was named rather than papered with a proxy. Total new QPU this section:
 zero (the perturbation arc) + one MICRO n=4 remedy flight (~10s free ALT4).
+
+### 10.6 Collision-scan resolution map + digs A/B — the $0 re-analysis at its TRUE floor
+Creator prompt: "do another collision scan" → "both/and A and B".
+- **The scan produced a RESOLUTION MAP of our own corpus** (`results/collision_scan_resolution_map_c5073.json`):
+  the two-copy ghost (~0.01, needs SE~0.003 ≈ 100k shots) is resolvable **only on the door-b data**.
+  Every *other* two-copy arm is shot-starved **by design** — the few-copy advantage means few shots
+  (fez p1 528-3878, wave ~110/rung, cal 2000), all below the ghost scale. So "does the ghost appear
+  on other devices" is a **$0 floor**, same class as S1-vs-S3. The scan's real find: the
+  **conventional (classical-baseline) arms carry 100k-700k shots each** (wave1 conv = 707k) =
+  single-copy randomized-basis data = a **classical-shadows dataset never mined for state structure**,
+  only ever used to count classical-learner queries.
+- **Dig A (recover the signed phase the two-copy squares away, via conv-arm classical shadows):
+  FUNDAMENTALLY INFEASIBLE — and the wall IS the two-copy advantage.** Signed tr(P·ρ) of a
+  **high-weight** sealed Pauli from single-copy data has classical-shadow variance **~3^weight**.
+  The sealed P's are weight 11-13 → 3^11–3^13 = 177k–1.6M → ~2e8–2e9 single-copy shots for SE 0.03;
+  we have 707k (**90×–2500× short**). Not a data limit — **precisely why F122 measures two copies**.
+  The phase the two-copy squares away is classically un-recoverable at high weight, and *that
+  un-recoverability is the separation itself*. The re-analysis re-derived the advantage's foundation
+  from the opposite side. (`results/collision_scan_digs_AB_c5073.json`)
+- **Dig B (single-copy readout to split S1 readout-crosstalk vs S3 backaction): NOT feasible on
+  banked data.** The door-b cal is **two-copy** (32-bit Bell), not single-copy readout; the only
+  high-shot single-copy we hold (wave conv) is on **kingston with zero qubit overlap** with the
+  marrakesh ghost qubits {17,24,25,27,28,29,37,45}. The single-copy angle re-confirms the A2 S1/S3
+  floor from a new direction; splitting them still needs a targeted new flight.
+- **Weight matters — the one twinkling dig A does NOT wall:** the *ghost* is **weight-1**, where
+  shadow variance is 3^1 = 3 (trivially resolvable). So the ghost's **signed per-qubit direction**
+  (the phase/readout-asymmetry sign) *is* recoverable from low-weight measurement even where the
+  high-weight sealed-P phase is not — a real dig-A-immune next step (needs Elder's signed reading).
