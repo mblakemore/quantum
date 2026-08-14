@@ -1,0 +1,23 @@
+{
+ "S_min_eig": -3.3760563674764347e-09,
+ "U_dual_obj": 0.906674083348452,
+ "U_prime_certified": 0.9066741103569029,
+ "card": "h14_b1_g3_certified_bound",
+ "convention": {
+  "comb_sign": 1,
+  "identity_residual": 1.7866819135292644e-12,
+  "trace_term": "2*y1*I"
+ },
+ "cycle": "C5073",
+ "gap_Uprime_minus_primal": -1.636121688131098e-07,
+ "gates": {
+  "comb_adj": 7.334805185073884e-13,
+  "comb_maps_vs_solver": 0.0,
+  "identity": 1.7866819135292644e-12,
+  "ptrace_adj": 5.758903943715305e-13
+ },
+ "note": "independent numpy-reshape adjoints, comb maps match solver exactly (0), convention pinned empirically; U' = 16*dual_1 + 8*max(0,-lmin(S))",
+ "primal": 0.9066742739690717,
+ "repair_delta": 3.3760563674764347e-09,
+ "seat": "whisper"
+}
