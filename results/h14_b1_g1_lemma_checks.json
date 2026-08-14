@@ -1,0 +1,17 @@
+{
+ "card": "h14_b1_g1_lemma_checks",
+ "cycle": "C5073",
+ "P1": {
+  "max_dev_PI2_minus_I": 0.0,
+  "max_dev_PI_minus_PIT": 0.0,
+  "is_0_1_permutation": true
+ },
+ "P2": {
+  "norm_PIGPI_minus_G": 6.771401485479422e-16
+ },
+ "P3": {
+  "n_random": 8,
+  "worst_relative_residual_mismatch": 3.252824138025668e-16
+ },
+ "verdict": "ALL PREMISES PASS"
+}
