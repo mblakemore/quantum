@@ -1,0 +1,53 @@
+{
+ "card": "doorb_purity_extraction",
+ "cycle": "C5073",
+ "n": 16,
+ "observable": "tr(rho^2) via two-copy SWAP, singlet=Psi-=Weyl(1,1)",
+ "convention": "imported g2=exp142_robust_decoder_sim (flown-matched, F122/A2-validated)",
+ "bound": [
+  1.52587890625e-05,
+  1.0
+ ],
+ "draws": {
+  "original(WIN)": {
+   "purity": -0.0008698824255689312,
+   "n_shots": 106911,
+   "in_bound": false,
+   "flipped_control": -0.0008698824255689312,
+   "control_fails_bound": true
+  },
+  "refly": {
+   "purity": -0.0034704816257278373,
+   "n_shots": 103732,
+   "in_bound": false,
+   "flipped_control": -0.0034704816257278373,
+   "control_fails_bound": true
+  },
+  "i1": {
+   "purity": 0.0035322090737915585,
+   "n_shots": 72759,
+   "in_bound": true,
+   "flipped_control": 0.0035322090737915585,
+   "control_fails_bound": false
+  },
+  "i2": {
+   "purity": 0.0007944073721004131,
+   "n_shots": 100704,
+   "in_bound": true,
+   "flipped_control": 0.0007944073721004131,
+   "control_fails_bound": false
+  },
+  "i3(w13)": {
+   "purity": -0.0006556517178075007,
+   "n_shots": 91512,
+   "in_bound": false,
+   "flipped_control": -0.0006556517178075007,
+   "control_fails_bound": true
+  }
+ },
+ "P1_all_in_bound": false,
+ "P1_control_discriminates": false,
+ "P2_spread": 0.007002690699519396,
+ "P2_mean": -0.00013387986464245946,
+ "verdict": "NO-TEST (pin: a draw left the physical bound)"
+}
