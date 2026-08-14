@@ -1,0 +1,51 @@
+{
+ "card": "exp_qet_wheel",
+ "cycle": "C5073",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_marrakesh",
+ "cal_epoch": "2026-08-13 23:40:33+00:00",
+ "n_rounds": 6,
+ "shots": 12000,
+ "account": "IBMQ_ALT4",
+ "arms": [
+  "qet",
+  "coinfrozen"
+ ],
+ "bases": [
+  "ZB",
+  "XX"
+ ],
+ "purpose": "QET wheel (board #146): N back-to-back information-driven extraction rounds with per-round books",
+ "lineage": "exp195c certified differential (C4887, 10 sigma); derive() imported one-code-path",
+ "prereg": "P-1/P-2/falsifiers/selftest/NO-TEST branches in docstring, committed pre-flight",
+ "pubs_meta": [
+  {
+   "block": "qet_ZB",
+   "arm": "qet",
+   "basis": "ZB",
+   "shots": 12000,
+   "n_rounds": 6
+  },
+  {
+   "block": "qet_XX",
+   "arm": "qet",
+   "basis": "XX",
+   "shots": 12000,
+   "n_rounds": 6
+  },
+  {
+   "block": "coinfrozen_ZB",
+   "arm": "coinfrozen",
+   "basis": "ZB",
+   "shots": 12000,
+   "n_rounds": 6
+  },
+  {
+   "block": "coinfrozen_XX",
+   "arm": "coinfrozen",
+   "basis": "XX",
+   "shots": 12000,
+   "n_rounds": 6
+  }
+ ]
+}
