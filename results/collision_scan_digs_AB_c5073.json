@@ -1,0 +1,16 @@
+{
+ "card": "collision_scan_digs_AB",
+ "cycle": "C5073",
+ "seat": "whisper",
+ "creator_directive": "both/and A and B",
+ "dig_A_phase_recovery": {
+  "verdict": "FUNDAMENTALLY INFEASIBLE - and the wall IS the two-copy advantage",
+  "why": "signed tr(Prho) of a high-weight sealed Pauli from SINGLE-COPY data has classical-shadow variance ~3^weight. weight-10 -> 3^10=59049x -> ~7e7 shots for SE 0.03 (we have 707k, ~90x short); weight 11-13 hopeless. This is not a data limit - it is EXACTLY why F122 uses two copies: the phase the two-copy squares away is classically UN-recoverable at high weight. The re-analysis re-derives the advantages foundation.",
+  "data_present": "wave1-n10 kingston conv arm, 707k single-copy shots, sealed P YYXZXXXYZZ - present but the observable is exponentially out of reach"
+ },
+ "dig_B_S1_S3_reopener": {
+  "verdict": "NOT FEASIBLE on banked data - floor confirmed from the single-copy angle",
+  "why": "door-b cal is TWO-COPY (32-bit Bell), not single-copy readout; the only high-shot single-copy (wave conv) is on KINGSTON with ZERO qubit overlap with the marrakesh ghost qubits {17,24,25,27,28,29,37,45}. No matching single-copy readout on the ghost qubits exists -> re-confirms A2 S1_declaration from a new direction."
+ },
+ "scan_close": "both proposed digs rigorously determined and walled. Dig A hit a FUNDAMENTAL wall (single-copy exponential-in-weight variance = the two-copy advantages own foundation, re-derived from the re-analysis side); dig B hit a DATA wall (no single-copy on the ghost qubits). The $0 re-analysis program reaches its true floor - and naming WHY (the advantage is precisely the classical un-recoverability) is the deepest result of the collision-scan arc."
+}
