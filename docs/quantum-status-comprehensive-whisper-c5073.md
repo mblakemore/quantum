@@ -213,3 +213,71 @@ with exact books. Seal-bound GO discipline held on every flight (digest → GO c
 verify unchanged → fly). The cwd-trap compound-command failure mode fired four times and
 is now a stored rule (validated_times=4). Every number in this document traces to a
 committed artifact or job ID in this repo.
+
+---
+
+## 10. Since §1–9 (same C5073 session, later): B1 to the floor, F119 relaunched, and the perturbation-mining arc
+
+This volume was written mid-session; the run continued. Appended here so the inventory stays whole.
+
+### 10.1 B1 512 promotion — court-certified and PUBLIC
+The producer packet completed all four edges (G1 exchange-WLOG lemma with machine-checked
+premises; G4a mixed-dim regression, byte-identical grader re-run; **G3 dual certificate — two
+independent blind computations agreeing to 15 digits, U′ = 0.9066741104, tighter-than-primal**;
+G4b billing row). Court-certified **3-of-3** (Elder compile, Whisper + Ember independent
+re-derivations), G6 attack-preflight clear. Posted as an **F82 card update** and **published to
+the public museum floor** (Dawn, verified live), with the sigma-pairing rule adopted binding
+(216.8σ↔0.8690 dim-32, 134σ↔0.9067 512) and the q*-table 1.000008 caveat named. The honest
+fence: the separable class, given 16× the ancilla, closes barely a third of the gap to hardware;
+dims>512 stays OPEN.
+
+### 10.2 F119 remedy re-fly — relaunched (delivery-fix, honest-delivery)
+G3 (Whisper) verified the patched kit independently (delivery fix confirmed: conv+quantum
+shots==1, fresh-basis-per-row, P-independent manifest); court G1/G2/G3 green. Creator GO trimmed
+→ preflight caught the registry tank stale (my C5060 probe 361s vs live 56s) → re-authorized
+**MICRO n=4**, flown blind by Ember (EMBER-ONLY, secret P) on kingston/ALT4, bill 40% under via
+measured-q_n resize. The grade-time determinism-attack gate must score chance or it grades
+DELIVERY-FAIL. n=6 waits free on 28-day window aging. Device pin: kingston primary (holds the die
+constant to isolate the v1→v2 delivery delta — Ember's refinement of the cross-die recommendation).
+
+### 10.3 The perturbation-mining arc — five $0 extractions off banked collision data (F103-lineage)
+Creator prompt: "throw perturbations at existing data to extract info from our own collisions."
+Proof-of-concept was F103 (entanglement from negative conditional entropy, zero shots). Five
+extractions on the F122 door-b two-copy corpus, **each frozen before compute**, each importing the
+validated F122/A2 decoder:
+- **Purity (naive) → NO-TEST**: the symmetric two-copy SWAP purity came out ~0 (maximally-mixed),
+  failed the physical bound — the freeze caught a wrong physics assumption (the signal lives in the
+  P-selected cross-pair correlation, not a symmetric observable). No fabricated number.
+- **Calibrated spectrum → SHARP SEAL**: the calibrated estimator reproduced all graded tr2 to
+  **machine precision (1e-16)**, then the leakage ring (planted-weight ±1) sat at the shot-noise
+  floor → the F122 amplitude loss is **incoherent decoherence, not coherent leakage**.
+- **Weight-spectrum → WEIGHT-1-EXCLUSIVE ghost**: a broad blind search found off-planted structure
+  at **weight 1 only** (weights 2–16 flat at floor) — independently rediscovering the A2 ghost and
+  **bounding** it (weight-1-exclusive, a ceiling A2's targeted probes couldn't give).
+- **Ghost-power jackknife → blind rediscovery of the first_FAIL stratum**: the all-5 jackknife came
+  back 100% systematic — entirely from the one a-priori-defective flight (W1 6.49 vs healthy ~0.05),
+  which the blind statistic flagged without knowing the stratum ruling; healthy-4 (inherited
+  exclusion) show a small cal-linked systematic. (Label correction on record: "original" =
+  first_FAIL, not WIN.)
+- **Sign test → MEASUREMENT-QUALITY (the decider)**: four healthy draws with four DIFFERENT sealed
+  P; the per-qubit ghost pattern is **P-independent** (cross-draw r = +0.809, P-tracking +0.003) →
+  same qubits regardless of the secret → apparatus, not state. **A2/S4's measurement-quality ruling
+  DEMONSTRATED, not just supported.** (Ember: this design beat her readout-asymmetry sketch — the
+  four-different-seals corpus discriminates for free.)
+
+### 10.4 The ghost's home — found in three senses
+- **Spectral**: weight-1-exclusive.
+- **Mechanism**: P-independent measurement-quality (leaning S3 backaction per A2's flat-class shape).
+- **Spatial**: hot pairs 8/6/10/12 = physical qubits 17-27, 24-25, 37-45, 28-29; cold at 2/4/15;
+  consistent across draws (the consistency IS the apparatus signature).
+- **S1-vs-S3 fine split: UNDETERMINABLE at $0** — inherited from A2's S1_declaration (no
+  readout-multiplex data on any read path; proxying disallowed) and confirmed (cal blocks 2000-shot
+  SE 0.022 > the 0.01 ghost). Needs a targeted readout-crosstalk flight; **named, not proxied**.
+
+### 10.5 Method note for the delta-delta
+The perturbation arc is the re-analysis discipline at its cleanest: measure-once-ask-many is real
+**when you ask with the calibrated question and let existing experimental design (4 different
+sealed P) do the discriminating**; freeze-before-compute turned a wrong estimator into an honest
+null; every new number pinned to a machine-precision known-answer before it was trusted; and the
+analysis floor (S1-vs-S3) was named rather than papered with a proxy. Total new QPU this section:
+zero (the perturbation arc) + one MICRO n=4 remedy flight (~10s free ALT4).
