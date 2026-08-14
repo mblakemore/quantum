@@ -1,0 +1,51 @@
+{
+ "card": "doorb_calibrated_spectrum",
+ "cycle": "C5073",
+ "n": 16,
+ "estimator": "2*rate-1, calibrated F122 (g2 flown-matched)",
+ "draws": {
+  "i1": {
+   "planted_P": "ZIXIXXIZZZZZZIYI",
+   "graded_tr2": 0.37019475253920475,
+   "my_tr2": 0.37019475253920486,
+   "pin_dev": 1.1102230246251565e-16,
+   "pin_ok": true,
+   "neighbor_mean_abs": 0.00398919721271597,
+   "neighbor_max_abs": 0.022911254965021555,
+   "background_mean_abs": {
+    "4": 0.0026491568053436595,
+    "10": 0.0031783009662034872,
+    "16": 0.0033226130100743323
+   }
+  },
+  "i2": {
+   "planted_P": "YYYXIZXZIIXXYZIY",
+   "graded_tr2": 0.30084207181442646,
+   "my_tr2": 0.30084207181442646,
+   "pin_dev": 0.0,
+   "pin_ok": true,
+   "neighbor_mean_abs": 0.002951719891960608,
+   "neighbor_max_abs": 0.005521131236097876,
+   "background_mean_abs": {
+    "4": 0.0030348844137273803,
+    "10": 0.002755600571973306,
+    "16": 0.002509830791229739
+   }
+  },
+  "i3": {
+   "planted_P": "IXZYZIZYZXZZZIXX",
+   "graded_tr2": 0.28105603636681525,
+   "my_tr2": 0.2810560363668153,
+   "pin_dev": 5.551115123125783e-17,
+   "pin_ok": true,
+   "neighbor_mean_abs": 0.0035336895707666557,
+   "neighbor_max_abs": 0.0069717632660197815,
+   "background_mean_abs": {
+    "4": 0.003043316723489828,
+    "10": 0.0024163497683363927,
+    "16": 0.001893194335169185
+   }
+  }
+ },
+ "verdict": "SPECTRUM-EXTRACTED: sharp seal (clean prep, no leakage ring)"
+}
