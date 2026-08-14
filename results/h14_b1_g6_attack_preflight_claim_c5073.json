@@ -1,0 +1,24 @@
+{
+  "claim": "F82 hardware causal-order game score (0.9769 kingston / 0.9738 fez) EXCEEDS the causally-separable symmetric-access ceiling up to dim 512 (0.9066741104, two-seat-certified SDP maximum) by 0.067 in the identical billing currency (succ.prob/shot, one use of each unitary, q* frozen 0.6165/0.3835) — certifying the F82 advantage against the separable class, not merely dim-32.",
+  "answers": {
+    "arms_billed_in_different_units": "no",
+    "baseline_denied_speedups": "no",
+    "baseline_is_simulation": "no",
+    "baseline_shots_assumed": "no",
+    "enumeration_order_not_fixed_by_spec": "no",
+    "hardness_argued_on_ideal": "no",
+    "no_problem_specific_search": "no",
+    "ratio_against_simulation": "no",
+    "repeated_shots_fixed_randomness": "no",
+    "result_depends_on_enumeration_order": "no",
+    "stopping_rules_differ_or_unit_unfrozen": "no",
+    "structure_public": "no"
+  },
+  "_rationale": {
+    "baseline_is_simulation": "The separable ceiling is the EXACT SDP MAXIMUM over all causally-separable combs up to dim 512 (two-seat certified U'=0.9066741104), not a cost-to-simulate. It is the strongest possible separable arm by construction.",
+    "baseline_denied_speedups": "The SDP maximizes over the ENTIRE separable class - it gives the separable arm every strategy, the opposite of denial.",
+    "no_problem_specific_search": "The SDP solve IS the exhaustive problem-specific optimization over the separable class.",
+    "arms_billed_in_different_units": "G4b verified same q* (frozen 0.6165/0.3835 from shared source), same scoring trace, same unit. CAVEAT NAMED: the shared q* table sums to 1.000008 (rounded per-pair weights), an 8e-6 relative factor common to ceiling+dim32+F82 that CANCELS in the margin; promotion-safe direction (ceiling overstated). Any absolute-probability reading carries the 8e-6 caveat - stated, not absorbed.",
+    "ceiling_used_as_ceiling": "0.9067 is used AS a ceiling that hardware EXCEEDS (correct direction), never quoted as the advantage itself; it is an exact SDP max, not a simulation cost."
+  }
+}
