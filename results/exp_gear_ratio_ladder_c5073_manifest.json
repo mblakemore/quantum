@@ -1,0 +1,101 @@
+{
+ "card": "exp_gear_ratio_ladder",
+ "cycle": "C5073",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_marrakesh",
+ "cal_epoch": "2026-08-14 02:42:34+00:00",
+ "shots": 8000,
+ "account": "IBMQ_ALT4",
+ "thetas": [
+  0.7853981633974483,
+  1.5707963267948966,
+  2.356194490192345,
+  3.141592653589793,
+  3.9269908169872414,
+  4.71238898038469,
+  5.497787143782138
+ ],
+ "purpose": "Gear-ratio ladder: sweep the transmission's shift stroke (Rz angle on shared qubit + Rx cross-probe) vs same-job NEVER anchor on the grind stratum",
+ "lineage": "transmission d9v7f7v2sl0c73blhb0g (R=Z(2) trend +2.81 sigma)",
+ "prereg": "P-L1 (Bonferroni-8 z>=3.2), P-L2 (sinusoidal tuning curve r^2>=0.8), gates + selftest in docstring",
+ "pubs_meta": [
+  {
+   "block": "never",
+   "recovery": null,
+   "shots": 8000,
+   "depth": 147
+  },
+  {
+   "block": "rz_0",
+   "recovery": [
+    "rz",
+    0.7853981633974483
+   ],
+   "shots": 8000,
+   "depth": 151
+  },
+  {
+   "block": "rz_1",
+   "recovery": [
+    "rz",
+    1.5707963267948966
+   ],
+   "shots": 8000,
+   "depth": 151
+  },
+  {
+   "block": "rz_2",
+   "recovery": [
+    "rz",
+    2.356194490192345
+   ],
+   "shots": 8000,
+   "depth": 151
+  },
+  {
+   "block": "rz_3",
+   "recovery": [
+    "rz",
+    3.141592653589793
+   ],
+   "shots": 8000,
+   "depth": 151
+  },
+  {
+   "block": "rz_4",
+   "recovery": [
+    "rz",
+    3.9269908169872414
+   ],
+   "shots": 8000,
+   "depth": 151
+  },
+  {
+   "block": "rz_5",
+   "recovery": [
+    "rz",
+    4.71238898038469
+   ],
+   "shots": 8000,
+   "depth": 151
+  },
+  {
+   "block": "rz_6",
+   "recovery": [
+    "rz",
+    5.497787143782138
+   ],
+   "shots": 8000,
+   "depth": 151
+  },
+  {
+   "block": "rx_pi",
+   "recovery": [
+    "rx",
+    3.141592653589793
+   ],
+   "shots": 8000,
+   "depth": 151
+  }
+ ]
+}
