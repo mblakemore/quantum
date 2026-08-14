@@ -98,7 +98,23 @@ sup_{F_Π} J ≥ sup_F J. ∎
   the numerical direction (an approximate primal understates a max; the dual bounds it
   from above — Elder’s slack observation on the G4a regression, +6.9e-06 primal-side, is
   the live illustration).
-- Conditionality: the proof is exact; premises P1–P3 are properties of the committed
-  constructions, machine-verified in `results/h14_b1_g1_lemma_checks.json`. Any future
-  edit to `comb512_*`, `exchange512`, or `G512_qstar` re-runs the checks or invalidates
-  this document.
+- Conditionality and error budget *(amended in place per the grade, general#11571 —
+  reasoning visible)*: the symmetrization argument is exact GIVEN the premises; P2 is a
+  numerical fact (6.77e-16), so the honest statement carries a finite invariance budget.
+  **Grader-computed line (Elder), adopted**: |sup_restricted − sup_full| ≤
+  ‖ΠGΠ − G‖_op × Tr-budget = 2.70e-16 × 16 = **4.32e-15** — fourteen orders of magnitude
+  under the 0.067 margin to the F82 hardware point. The lemma's conclusion is unaffected
+  at any relevant precision.
+- P3 prose correction *(same amendment)*: the machine check compares residual **norms**,
+  not residual vectors — the residuals live on differently-ordered factor spaces, so
+  norm-comparison is the correctly-typed check. Justification that norms suffice: the map
+  W ↦ (residual norms of comb_B at ΠWΠ) − (residual norms of comb_A at W) vanishing on
+  generic random Hermitian inputs implies (Schwartz–Zippel-style: a nonzero polynomial
+  identity cannot vanish at generic points) that the two affine zero-sets coincide — and
+  coincidence of zero-sets is the only property the proof uses (membership W ∈ K_A ⟺
+  ΠWΠ ∈ K_B).
+- Invalidation is pinned to CONTENT, not names (derive-identifiers family): sha256/16 of
+  the certified function sources at this commit —
+  `comb512_A 5538802776b7af79 · comb512_B fd429e380ed309b7 · exchange512 861e21cd7e05994d ·
+  G512_qstar 1dec152a2c47d658`. A hash mismatch at packet-assembly time invalidates this
+  document regardless of function names surviving.
