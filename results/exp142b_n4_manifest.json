@@ -3,67 +3,73 @@
  "n": 4,
  "M": 20,
  "C": 27,
- "q_n": 0.003082275390625,
+ "q_n": 0.00238037109375,
  "ensemble": "fullweight_eps1_v2",
- "backend": "ibm_fez",
+ "backend": "ibm_kingston",
  "bell_pairs": [
   [
-   21,
-   22
+   148,
+   149
   ],
   [
-   4,
-   5
+   141,
+   142
   ],
   [
-   9,
-   10
+   47,
+   48
   ],
   [
-   58,
-   71
+   90,
+   91
   ]
  ],
  "conv_layout": [
-  22,
-  36,
-  14,
-  18
+  23,
+  141,
+  149,
+  133
  ],
  "q_layout": [
-  21,
-  4,
-  9,
-  58,
-  22,
-  5,
-  10,
-  71
+  148,
+  141,
+  47,
+  90,
+  149,
+  142,
+  48,
+  91
  ],
  "jobs": [
   {
-   "job_id": "d9heha3sbqfc73epuikg",
+   "job_id": "d9vmd70b1g9c73a8s3sg",
    "pub_lo": 0,
-   "pub_hi": 16,
-   "rows": 13486
+   "pub_hi": 12,
+   "rows": 8992
   },
   {
-   "job_id": "d9heha8gk0ls73f2s8vg",
-   "pub_lo": 16,
+   "job_id": "d9vmd7d0vrcc73bpfqq0",
+   "pub_lo": 12,
+   "pub_hi": 20,
+   "rows": 8988
+  },
+  {
+   "job_id": "d9vmd7n2sl0c73bm48e0",
+   "pub_lo": 20,
    "pub_hi": 28,
-   "rows": 13482
+   "rows": 8988
   },
   {
-   "job_id": "d9hehaogk0ls73f2s910",
+   "job_id": "d9vmd7vo3ppc73akh0sg",
    "pub_lo": 28,
-   "pub_hi": 40,
-   "rows": 13482
+   "pub_hi": 36,
+   "rows": 8988
   },
   {
-   "job_id": "d9hehb3sbqfc73epuiog",
-   "pub_lo": 40,
+   "job_id": "d9vmd87o3ppc73akh0tg",
+   "pub_lo": 36,
    "pub_hi": 45,
-   "rows": 4495
+   "rows": 8989
   }
  ],
  "shots_est": 46040,
@@ -74,20 +80,20 @@
   },
   {
    "kind": "cal",
-   "pauli": "ZZXY",
+   "pauli": "ZZZY",
+   "b": "0101",
+   "shots": 100
+  },
+  {
+   "kind": "cal",
+   "pauli": "XZXZ",
+   "b": "1100",
+   "shots": 100
+  },
+  {
+   "kind": "cal",
+   "pauli": "ZYZZ",
    "b": "0110",
-   "shots": 100
-  },
-  {
-   "kind": "cal",
-   "pauli": "ZZXY",
-   "b": "1001",
-   "shots": 100
-  },
-  {
-   "kind": "cal",
-   "pauli": "ZXYX",
-   "b": "1010",
    "shots": 100
   },
   {
