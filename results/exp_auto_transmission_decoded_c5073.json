@@ -1,0 +1,18 @@
+{
+ "card": "exp_auto_transmission_decode",
+ "cycle": "C5073",
+ "job": "d9v7f7v2sl0c73blhb0g",
+ "account": "IBMQ_ALT4",
+ "cal_epoch": "2026-08-14 00:46:29+00:00",
+ "witness_consistency": 0.996625,
+ "herald_rates": {
+  "auto": 0.351375,
+  "never": 0.355,
+  "always": 0.3415
+ },
+ "neutral_gate_z": -2.3251150371965497,
+ "PR_c1_auto": 0.03379580220562078,
+ "PR_c1_never": -0.04084507042253521,
+ "PR_z": 2.807428548295701,
+ "verdict": "TRANSMISSION-MECHANISM-DEMONSTRATED+R-NEUTRAL"
+}
