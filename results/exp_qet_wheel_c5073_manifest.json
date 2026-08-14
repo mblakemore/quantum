@@ -3,7 +3,7 @@
  "cycle": "C5073",
  "substrate": "claude-fable-5",
  "backend": "ibm_marrakesh",
- "cal_epoch": "2026-08-13 23:40:33+00:00",
+ "cal_epoch": "2026-08-14 00:34:46+00:00",
  "n_rounds": 6,
  "shots": 12000,
  "account": "IBMQ_ALT4",
@@ -47,5 +47,7 @@
    "shots": 12000,
    "n_rounds": 6
   }
- ]
+ ],
+ "pending_jobs_at_submit": 0,
+ "job_id": "d9v6gq72sl0c73blg5u0"
 }
