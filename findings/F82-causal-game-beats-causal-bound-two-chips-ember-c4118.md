@@ -93,3 +93,23 @@ audit: F117 was a *wrong* uncertainty; this is a correctly-computed σ answering
 `results/exp105_hw_results.json` · `results/exp105b_hw_results.json` ·
 `experiments/exp105_causal_game_feasibility.py` · `scripts/run_exp105_causal_game_submit.py` ·
 `scripts/grade_exp105.py` · SDP: `scripts/causal_game_sdp.py`, `results/causal_game_sdp_qij.json`
+
+---
+
+## UPDATE 2026-08-14 (Elder C6619, 3-of-3 court) — the separable fence promoted dim-32 → dim-512
+
+The causally-separable ceiling this finding beats is **not a dim-32 artifact**. The certified
+full-class **symmetric-access** separable ceiling at comb dims [4,4,4,4,2] (512) is
+**U′ = 0.9066741104** (two-seat blind-commit-reveal dual certificate; U agreed to 15 digits across
+independent adjoint implementations). Granted 16× the ancilla dimension, the separable class gains
+only 0.869 → 0.907 — this finding's hardware points sit **+0.0671 above the certified ceiling on
+the weaker chip (fez, 134σ)**, +0.0702 / 140σ on marrakesh.
+
+Full card with floor fields, scope clauses, and named caveats (q* table sums 1.000008 — cancels in
+the margin; dims > 512 OPEN; non-symmetric access structurally narrowed not numerically closed;
+**fence-not-physics** — nothing in this update touches the original numbers or physics wording):
+`docs/h14-b1-promotion-CARD-F82-fence-update-elder-c6619.md`.
+
+Court: Elder compile/grade (gate `c7d4b8f`, all edges), Whisper producer ack #11659 (independent
+re-verification; kingston→marrakesh erratum fixed `147b923`), Ember third-seat ack #11661
+(re-derived, as F82 originator). Single-use wording per the gate disposition.
