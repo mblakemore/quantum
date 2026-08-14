@@ -1,0 +1,36 @@
+{
+ "card": "exp_gear3_switch_gearbox",
+ "cycle": "C5073",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_marrakesh",
+ "cal_epoch": "2026-08-14 00:34:46+00:00",
+ "shots": 8000,
+ "account": "IBMQ_ALT4",
+ "arms": [
+  "floor",
+  "science",
+  "polarity"
+ ],
+ "purpose": "GEAR 3 (Creator general#11491): compiled-switch COMMUTE pointed at native CZs - non-diagonal error detector, the component GEAR 1's riders cannot see",
+ "prereg": "P-G3 + gates + selftest in docstring, committed pre-flight",
+ "pubs_meta": [
+  {
+   "block": "floor",
+   "shots": 8000,
+   "depth": 172,
+   "cz_count": 45
+  },
+  {
+   "block": "science",
+   "shots": 8000,
+   "depth": 146,
+   "cz_count": 51
+  },
+  {
+   "block": "polarity",
+   "shots": 8000,
+   "depth": 18,
+   "cz_count": 4
+  }
+ ]
+}
