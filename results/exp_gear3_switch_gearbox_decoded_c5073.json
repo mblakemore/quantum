@@ -1,0 +1,16 @@
+{
+ "card": "exp_gear3_decode",
+ "cycle": "C5073",
+ "job": "d9v6m7n2sl0c73blgbfg",
+ "account": "IBMQ_ALT4",
+ "cal_epoch": "2026-08-14 00:46:29+00:00",
+ "V_floor": 0.8515,
+ "V_science": 0.307,
+ "V_polarity": -0.95125,
+ "gate_pass": true,
+ "verdict": "NON-DIAGONAL-COMPONENT-DETECTED",
+ "V_floor_norm": 0.8334430689444873,
+ "deficit": 0.5264430689444872,
+ "z": 33.295183125472676,
+ "se_diff": 0.0158113883008419
+}
