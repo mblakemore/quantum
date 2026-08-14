@@ -97,5 +97,7 @@
    "shots": 8000,
    "depth": 151
   }
- ]
+ ],
+ "pending_jobs_at_submit": 1,
+ "job_id": "d9v8esf2sl0c73blif00"
 }
