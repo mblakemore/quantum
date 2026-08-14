@@ -1,0 +1,11 @@
+{
+ "card": "h14_b1_g4a_regression",
+ "cycle": "C5073",
+ "P1_exchange_max_dev": 0.0,
+ "value": 0.869034662525197,
+ "certified": 0.8690277186779367,
+ "abs_dev": 6.943847260298952e-06,
+ "status": "optimal",
+ "gate": "PASS",
+ "note": "mixed-dim embed machinery (ptrace_seq/embed_last/perm_matrix_mixed + comb at dims [2,2,2,2,2], odim 2) regressed against the certified dim-32 ceiling per Elder G4a"
+}
