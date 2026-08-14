@@ -1,0 +1,52 @@
+{
+ "card": "exp_nondiag_gradient_decode",
+ "cycle": "C5073",
+ "backend": "ibm_marrakesh",
+ "job": "d9v8vjn2sl0c73blj390",
+ "account": "IBMQ_ALT4",
+ "cal_epoch": "2026-08-14 02:42:34+00:00",
+ "curve": [
+  {
+   "score": 0.0246,
+   "deficit": -0.3213363171374197,
+   "z": -20.32309314168888,
+   "verdict": "NONDIAG-ABSENT-AT-RESOLUTION",
+   "rung": "best(banked)"
+  },
+  {
+   "score": 0.031825434588259205,
+   "path": [
+    53,
+    54,
+    55,
+    59
+   ],
+   "vpred": 0.4371576913112071,
+   "V_floor": 0.83125,
+   "V_science": 0.8265,
+   "V_polarity": -0.9655,
+   "deficit": -0.01423429780133234,
+   "z": -0.9002560389067429,
+   "verdict": "NONDIAG-ABSENT",
+   "rung": "f0.33"
+  },
+  {
+   "score": 0.039358548804677956,
+   "path": [
+    13,
+    12,
+    11,
+    18
+   ],
+   "vpred": 0.359398934636131,
+   "V_floor": 0.86375,
+   "V_science": 0.808,
+   "V_polarity": -0.95025,
+   "deficit": 0.04007950483125533,
+   "z": 2.5348504551697872,
+   "verdict": "NONDIAG-ABSENT",
+   "rung": "f0.67"
+  }
+ ],
+ "reading": "ALL-CLEAN (threshold > 0.0394 on live rungs)"
+}

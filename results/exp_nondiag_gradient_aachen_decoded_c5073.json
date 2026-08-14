@@ -1,0 +1,7 @@
+{
+ "card": "exp_nondiag_gradient_aachen_decode",
+ "cycle": "C5073",
+ "job": "d9v8vnif2ibc73f0nnag",
+ "verdict": "JOB-TIMEOUT (IBM error 1305 - exceeded max execution time; no results exist)",
+ "note": "not a physics verdict; remedy = split into two 3-pub jobs if the aachen band curve is wanted"
+}
