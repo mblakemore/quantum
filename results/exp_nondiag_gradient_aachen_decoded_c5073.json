@@ -1,7 +1,55 @@
 {
- "card": "exp_nondiag_gradient_aachen_decode",
+ "card": "exp_nondiag_gradient_decode",
  "cycle": "C5073",
- "job": "d9v8vnif2ibc73f0nnag",
- "verdict": "JOB-TIMEOUT (IBM error 1305 - exceeded max execution time; no results exist)",
- "note": "not a physics verdict; remedy = split into two 3-pub jobs if the aachen band curve is wanted"
+ "backend": "ibm_aachen",
+ "jobs": {
+  "f0.33": "d9v9c07ijjus73f8k6d0",
+  "f0.67": "d9v9c02f2ibc73f0o2cg"
+ },
+ "cal_epoch": "2026-08-13 06:18:32+00:00",
+ "curve": [
+  {
+   "score": 0.0162,
+   "deficit": -0.0024356337949780205,
+   "z": -0.15404300676420252,
+   "verdict": "NONDIAG-ABSENT-AT-RESOLUTION",
+   "rung": "best(banked)"
+  },
+  {
+   "score": 0.026149395739173215,
+   "path": [
+    48,
+    47,
+    57,
+    67
+   ],
+   "V_floor": 0.78875,
+   "V_science": 0.84125,
+   "V_polarity": -0.9595,
+   "deficit": -0.0755532675446493,
+   "z": -4.778408202183384,
+   "verdict": "NONDIAG-ABSENT",
+   "rung": "f0.33",
+   "job": "d9v9c07ijjus73f8k6d0"
+  },
+  {
+   "score": 0.03626036966244542,
+   "path": [
+    61,
+    76,
+    81,
+    82
+   ],
+   "V_floor": 0.6995,
+   "V_science": 0.624,
+   "V_polarity": -0.9395,
+   "deficit": 0.044938487186158005,
+   "z": 2.842159482211009,
+   "verdict": "NONDIAG-ABSENT",
+   "rung": "f0.67",
+   "job": "d9v9c02f2ibc73f0o2cg"
+  }
+ ],
+ "reading": "ALL-CLEAN (threshold > 0.0363 on live rungs)",
+ "authorization": "Creator post-disclosure GO, paid path, 9s+9s usage"
 }
