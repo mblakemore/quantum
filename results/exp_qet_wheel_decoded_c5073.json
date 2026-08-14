@@ -1,0 +1,75 @@
+{
+ "card": "exp_qet_wheel_decode",
+ "cycle": "C5073",
+ "job": "d9v6gq72sl0c73blg5u0",
+ "account": "IBMQ_ALT4",
+ "cal_epoch": "2026-08-14 00:34:46+00:00",
+ "baseline_EB": -1.6999999999999997,
+ "rounds": [
+  {
+   "round": 0,
+   "gap": -0.1964,
+   "se": 0.0233,
+   "in_band": true,
+   "strict_3se_below_-0.10": true,
+   "falsifier_coinfrozen_pays": true,
+   "E_B_qet": -1.6322,
+   "E_B_coinfrozen": -1.4358
+  },
+  {
+   "round": 1,
+   "gap": -0.1844,
+   "se": 0.0233,
+   "in_band": true,
+   "strict_3se_below_-0.10": true,
+   "falsifier_coinfrozen_pays": true,
+   "E_B_qet": -1.5893,
+   "E_B_coinfrozen": -1.4049
+  },
+  {
+   "round": 2,
+   "gap": -0.1819,
+   "se": 0.0233,
+   "in_band": true,
+   "strict_3se_below_-0.10": true,
+   "falsifier_coinfrozen_pays": true,
+   "E_B_qet": -1.5952,
+   "E_B_coinfrozen": -1.4133
+  },
+  {
+   "round": 3,
+   "gap": -0.1654,
+   "se": 0.0233,
+   "in_band": true,
+   "strict_3se_below_-0.10": false,
+   "falsifier_coinfrozen_pays": true,
+   "E_B_qet": -1.5653,
+   "E_B_coinfrozen": -1.3999
+  },
+  {
+   "round": 4,
+   "gap": -0.2018,
+   "se": 0.0233,
+   "in_band": true,
+   "strict_3se_below_-0.10": true,
+   "falsifier_coinfrozen_pays": true,
+   "E_B_qet": -1.5796,
+   "E_B_coinfrozen": -1.3778
+  },
+  {
+   "round": 5,
+   "gap": -0.1876,
+   "se": 0.0233,
+   "in_band": true,
+   "strict_3se_below_-0.10": true,
+   "falsifier_coinfrozen_pays": true,
+   "E_B_qet": -1.5907,
+   "E_B_coinfrozen": -1.4031
+  }
+ ],
+ "P_2_wear": {
+  "slope_per_round": 0.00023714285714285957,
+  "se": 0.005563486402641868
+ },
+ "verdict": "WHEEL-PARTIAL"
+}
