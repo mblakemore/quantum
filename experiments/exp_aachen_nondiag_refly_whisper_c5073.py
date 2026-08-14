@@ -18,9 +18,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
 from exp_gear3_switch_gearbox_whisper_c5073 import switch_circuit
 
-BACKEND = "ibm_aachen"
+BACKEND = os.environ.get("NONDIAG_BACKEND", "ibm_aachen")
+ACCOUNT = os.environ.get("NONDIAG_ACCOUNT", "IBMQ_TOKEN")
 SHOTS = 8000
-OUT = os.path.join(HERE, "..", "results", "exp_aachen_nondiag_refly_c5073_manifest.json")
+OUT = os.path.join(HERE, "..", "results",
+                   f"exp_nondiag_bestpath_{BACKEND.replace('ibm_','')}_c5073_manifest.json"
+                   if os.environ.get("NONDIAG_BACKEND") else
+                   "exp_aachen_nondiag_refly_c5073_manifest.json")
 
 
 def best_path(backend, length=4):
@@ -59,7 +63,7 @@ def main():
     a = ap.parse_args()
     from qiskit_ibm_runtime import SamplerV2
     from ibm_multi_account import service_for_submission
-    svc = service_for_submission("IBMQ_TOKEN")
+    svc = service_for_submission(ACCOUNT)
     backend = svc.backend(BACKEND)
     props = backend.properties()
     print(f"aachen cal epoch: {props.last_update_date}")
@@ -80,7 +84,7 @@ def main():
 
     man = {"card": "exp_aachen_nondiag_refly", "cycle": "C5073", "substrate": "claude-fable-5",
            "backend": BACKEND, "cal_epoch": str(props.last_update_date), "shots": SHOTS,
-           "account": "IBMQ_TOKEN", "layout": layout, "path_score": score,
+           "account": ACCOUNT, "layout": layout, "path_score": score,
            "purpose": "Third currency axis on aachen, layout-gated (remedy for the auto-routing NO-TEST)",
            "prereg": "P-G3 + gates verbatim from ec8dace; floor-collapse-on-best-path = NO-TEST-WITH-MECHANISM (die statement), stated pre-flight",
            "pubs_meta": meta}
