@@ -86,7 +86,10 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--submit", action="store_true")
     ap.add_argument("--n", type=int)
-    ap.add_argument("--backend", default="ibm_fez")
+    # Device pin (prereg §4b, Ember C4330): kingston primary — home die isolates the v1→v2
+    # delivery-protocol delta; marrakesh is the pre-authorized flight-day fallback; fez is OUT.
+    ap.add_argument("--backend", default="ibm_kingston",
+                    choices=["ibm_kingston", "ibm_marrakesh"])
     ap.add_argument("--q_n", type=float, default=0.02, help="dry-run readout (submit uses measured)")
     args = ap.parse_args()
 
@@ -100,11 +103,23 @@ def main():
             Pdummy = "".join(rng.choice(list("XYZ"), size=n))
             pubs, man = build_rung(n, Pdummy, C, M, rng)
             nconv, nq = integrity_check(man, n)
-            shots = sum(p[2] * (1 if p[1] is None else len(p[1])) for p in pubs)
-            njobs = -(-len(pubs) // MAX_PUBS_PER_JOB)
+            # Rows live in the param dict's VALUE arrays; len(dict) counts parameter KEYS
+            # (G2 verify catch #2: the old formula printed 1,240 "shots" for a ~1M-row rung).
+            # Same formula as the submit path's real_shots, so the estimate IS the bill.
+            shots = sum(p[2] * (1 if p[1] is None else len(list(p[1].values())[0])) for p in pubs)
+            # Mirror the submit path's ROW-capped grouping (catch #9) so the dry-run job
+            # estimate uses the SAME split rule the flight will — the old PUB-count estimate
+            # referenced a constant that no longer exists (G2 verify catch: dry-run had never
+            # been executed after catch #9 moved splitting from PUBs to rows).
+            njobs, grp_rows = 1, 0
+            for mm in man:
+                r = mm.get("rows", 1)
+                if grp_rows and grp_rows + r > MAX_ROWS_PER_JOB:
+                    njobs += 1; grp_rows = 0
+                grp_rows += r
             grand_pubs += len(pubs); grand_shots += shots
             print(f"  n={n} M={M} C={C}: {len(pubs)} PUBs ({nconv} conv + {nq} quantum + cals/sent), "
-                  f"{shots:,} shots -> {njobs} job(s) @ <={MAX_PUBS_PER_JOB} PUBs")
+                  f"{shots:,} shots -> {njobs} job(s) @ <={MAX_ROWS_PER_JOB:,} rows/job")
         print(f"  TOTAL ~{grand_pubs} PUBs, ~{grand_shots:,} shots. integrity PASS (no P/angle leak, "
               f"conv+quantum shots==1). NO QPU spent by dry-run.")
         return 0
