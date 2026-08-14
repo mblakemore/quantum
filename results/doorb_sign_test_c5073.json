@@ -1,0 +1,29 @@
+{
+ "card": "doorb_sign_test",
+ "cycle": "C5073",
+ "pin_selftest": true,
+ "pin_mean_w1": 0.0009455527732182658,
+ "planted": {
+  "refly": "XZXXIYYYXIZIIYXX",
+  "i1": "ZIXIXXIZZZZZZIYI",
+  "i2": "YYYXIZXZIIXXYZIY",
+  "i3": "IXZYZIZYZXZZZIXX"
+ },
+ "cross_draw_r": 0.8093899702089652,
+ "pairwise_r": [
+  0.8534286198409986,
+  0.8810749809803909,
+  0.7184519076032444,
+  0.924637298323334,
+  0.8470096257352085,
+  0.6317373887706147
+ ],
+ "P_tracking": {
+  "refly": -0.10797444609303632,
+  "i1": -0.06265791226715951,
+  "i2": 0.3897586601782441,
+  "i3": -0.20782602678384082
+ },
+ "mean_P_tracking": 0.002825068758551867,
+ "verdict": "MEASUREMENT-QUALITY: per-qubit pattern consistent across draws (P-independent), no P-tracking -> apparatus artifact, supports A2 S1/S3"
+}
