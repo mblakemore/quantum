@@ -1,0 +1,38 @@
+{
+ "card": "exp_aachen_nondiag_refly",
+ "cycle": "C5073",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_aachen",
+ "cal_epoch": "2026-08-13 06:18:32+00:00",
+ "shots": 8000,
+ "account": "IBMQ_TOKEN",
+ "layout": [
+  84,
+  83,
+  85,
+  86
+ ],
+ "path_score": 0.016243479335838362,
+ "purpose": "Third currency axis on aachen, layout-gated (remedy for the auto-routing NO-TEST)",
+ "prereg": "P-G3 + gates verbatim from ec8dace; floor-collapse-on-best-path = NO-TEST-WITH-MECHANISM (die statement), stated pre-flight",
+ "pubs_meta": [
+  {
+   "block": "floor",
+   "shots": 8000,
+   "depth": 177,
+   "cz_count": 48
+  },
+  {
+   "block": "science",
+   "shots": 8000,
+   "depth": 151,
+   "cz_count": 54
+  },
+  {
+   "block": "polarity",
+   "shots": 8000,
+   "depth": 18,
+   "cz_count": 4
+  }
+ ]
+}
