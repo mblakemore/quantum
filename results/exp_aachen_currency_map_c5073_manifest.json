@@ -1,0 +1,241 @@
+{
+ "card": "exp_aachen_currency_map",
+ "cycle": "C5073",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_aachen",
+ "cal_epoch": "2026-08-13 06:18:32+00:00",
+ "edges": [
+  [
+   100,
+   38
+  ],
+  [
+   85,
+   113
+  ],
+  [
+   69,
+   94
+  ],
+  [
+   83,
+   13
+  ],
+  [
+   23,
+   151
+  ],
+  [
+   17,
+   102
+  ],
+  [
+   134,
+   53
+  ],
+  [
+   73,
+   47
+  ],
+  [
+   101,
+   49
+  ],
+  [
+   86,
+   119
+  ],
+  [
+   70,
+   95
+  ],
+  [
+   84,
+   14
+  ],
+  [
+   24,
+   152
+  ],
+  [
+   27,
+   103
+  ],
+  [
+   135,
+   54
+  ],
+  [
+   74,
+   48
+  ]
+ ],
+ "depths_2k": [
+  0,
+  4,
+  16,
+  64
+ ],
+ "account": "IBMQ_TOKEN",
+ "purpose": "Currency-map replication on a virgin die: phase field + phase stability + non-diagonal + population, one job",
+ "prereg": "A-PHASE-FIELD / A-PHASE-STAB / A-NONDIAG / A-POP with bands + fences in docstring",
+ "pubs_meta": [
+  {
+   "block": "sentinel_early",
+   "shots": 400
+  },
+  {
+   "block": "cal0",
+   "shots": 8000
+  },
+  {
+   "block": "cal1",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k0_c0_X",
+   "twok": 0,
+   "ctrl_one": false,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k0_c0_Y",
+   "twok": 0,
+   "ctrl_one": false,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k0_c1_X",
+   "twok": 0,
+   "ctrl_one": true,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k0_c1_Y",
+   "twok": 0,
+   "ctrl_one": true,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k4_c0_X",
+   "twok": 4,
+   "ctrl_one": false,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k4_c0_Y",
+   "twok": 4,
+   "ctrl_one": false,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k4_c1_X",
+   "twok": 4,
+   "ctrl_one": true,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k4_c1_Y",
+   "twok": 4,
+   "ctrl_one": true,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c0_X",
+   "twok": 16,
+   "ctrl_one": false,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c0_Y",
+   "twok": 16,
+   "ctrl_one": false,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c1_X",
+   "twok": 16,
+   "ctrl_one": true,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c1_Y",
+   "twok": 16,
+   "ctrl_one": true,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k64_c0_X",
+   "twok": 64,
+   "ctrl_one": false,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k64_c0_Y",
+   "twok": 64,
+   "ctrl_one": false,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k64_c1_X",
+   "twok": 64,
+   "ctrl_one": true,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k64_c1_Y",
+   "twok": 64,
+   "ctrl_one": true,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c1_X_repeat",
+   "twok": 16,
+   "ctrl_one": true,
+   "basis": "X",
+   "shots": 8000
+  },
+  {
+   "block": "rider_2k16_c1_Y_repeat",
+   "twok": 16,
+   "ctrl_one": true,
+   "basis": "Y",
+   "shots": 8000
+  },
+  {
+   "block": "switch_floor",
+   "shots": 8000,
+   "cz_count": 45
+  },
+  {
+   "block": "switch_science",
+   "shots": 8000,
+   "cz_count": 51
+  },
+  {
+   "block": "switch_polarity",
+   "shots": 8000,
+   "cz_count": 4
+  },
+  {
+   "block": "sentinel_late",
+   "shots": 400
+  }
+ ]
+}
