@@ -83,6 +83,9 @@
   .callout { background:var(--surface); border:1px solid var(--edge); border-left:3px solid var(--cyan);
     border-radius:10px; padding:16px 18px; margin:16px 0; }
   .callout.good { border-left-color: var(--good); }
+    .callout blockquote { margin:12px 0 12px 2px; padding:2px 0 2px 14px;
+      border-left:2px solid var(--edge); color:var(--ink-2); }
+    .callout blockquote p { margin:0; }
   .callout .clabel { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin:0 0 4px; }
 
   .tbl-wrap { overflow-x:auto; margin:14px 0; border:1px solid var(--edge); border-radius:12px; }
@@ -222,10 +225,28 @@
 <ul>
 <li><strong>The balanced-game ceiling:</strong> <code>0.9098</code> (the 91% the exhibit's meter draws as THE CEILING) — the
     best any causally-separable strategy can do on the uniform deck.</li>
-<li><strong>The SDP-optimal bound:</strong> <code>0.8690</code> — under the input distribution re-solved to maximize the
+<li><strong>The SDP-optimal bound at native dims (pre-registered):</strong> <code>0.8690</code> — under the input distribution re-solved to maximize the
     quantum-vs-classical gap, the causally-separable bound (covering fixed, mixed, and dynamical order). The measured
-    result's significance is quoted against this bound.</li>
+    result's significance is quoted against this bound, and against this bound only — each fence travels with
+    its own margin.</li>
 </ul>
+<div class="callout">
+  <p class="clabel">Fence strengthened — quoted verbatim from the claim card</p>
+  <p>That 0.8690 bound is the one this result was pre-registered against, and it is not the strongest fence
+    the ship has certified. The exact wording of the promotion, which carries its own scope:</p>
+  <blockquote>
+    <p>F82's measured causal-game scores — <strong>0.9769 ± 0.0005 (ibm_marrakesh)</strong> and
+      <strong>0.9738 ± 0.0005 (ibm_fez)</strong>, in the declared unit (success probability per shot, one use
+      of each unitary, q* frozen 0.6165/0.3835) — exceed the <strong>certified full-class causally-separable
+      symmetric-access ceiling at comb dims [4,4,4,4,2] (512): U′ = 0.9066741104</strong>. The fence is not a
+      dim-32 artifact: granted 16× the ancilla dimension, the separable class gains only 0.869 → 0.907,
+      and hardware sits <strong>+0.0671 above the certified ceiling on the weaker chip (134σ)</strong>
+      (+0.0702 / 140σ on marrakesh — stated second per anti-flattering convention).</p>
+  </blockquote>
+  <p class="fine">A fence result, not a physics upgrade. Beyond dim 512 is <strong>open</strong>, and the class is the
+    symmetric-access one. Source: <code>quantum@954cc0d</code>, card
+    <code>docs/h14-b1-promotion-CARD-F82-fence-update-elder-c6619.md</code>, three-of-three court.</p>
+</div>
 <p>The <strong>load-bearing blind spot</strong>: the "do-nothing" (Nobody) suspect. Remove those cases and the theorem's
   ceiling silently rises to 100% — which is why they are kept in the deck. The best classical kit is deterministically,
   perfectly wrong whenever a do-nothing suspect is involved; that structural fact is real physics, not a gimmick.</p>

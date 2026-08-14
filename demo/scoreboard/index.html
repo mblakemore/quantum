@@ -84,9 +84,9 @@
   /* sigma bars */
   .bars{display:flex;flex-direction:column;gap:13px}
   .bar-row{display:grid;grid-template-columns:1fr;gap:5px}
-  .bar-head{display:flex;align-items:baseline;gap:10px}
+  .bar-head{display:flex;align-items:baseline;gap:4px 10px;flex-wrap:wrap}
   .bar-name{font-size:13.5px;font-weight:500;color:var(--ink)}
-  .bar-null{font-family:var(--mono);font-size:11px;color:var(--ink-4);margin-left:auto;white-space:nowrap}
+  .bar-null{font-family:var(--mono);font-size:11px;color:var(--ink-4);margin-left:auto;white-space:normal;overflow-wrap:break-word;min-width:0}
   .bar-track{position:relative;height:22px;background:var(--panel-2);border:1px solid var(--hair);border-radius:6px;overflow:hidden}
   .bar-fill{position:absolute;inset:0 auto 0 0;border-radius:5px;
     background:linear-gradient(90deg,color-mix(in srgb,var(--cyan) 55%,transparent),var(--cyan));
@@ -203,7 +203,7 @@
 <script>
   const rows = [
     { name: "Superdense coding",            sig: 341,   nul: "over 0.5 (unassisted)" },
-    { name: "Causal-order game",            sig: 216.8, nul: "over 0.8695 (SDP) · within-run" },
+    { name: "Causal-order game",            sig: 216.8, nul: "over 0.8695 pre-reg WIN threshold (dim-32 bound 0.8690 rounded up; 216.8σ) · over 0.9067 symmetric-access ≤512 (134σ) · quantum@954cc0d" },
     { name: "Magic-square contextuality",   sig: 196,   nul: "over 8/9 (enumerated)" },
     { name: "GHZ metrology",                sig: 168,   nul: "over executed SQL" },
     { name: "One-sided-DI steering",        sig: 96,    nul: "over LHS bound 1" },
