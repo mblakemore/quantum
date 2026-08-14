@@ -1,0 +1,15 @@
+{
+ "card": "h14_b1_symmetric_access_ceiling",
+ "cycle": "C5069",
+ "substrate": "claude-fable-5",
+ "value": 0.9066742739690719,
+ "status": "optimal",
+ "stageV_gate": "PASS (cited)",
+ "solver": "SCS eps 1e-7",
+ "readings": "charter pre-committed: >0.988 fence stands; <0.988 promotion is its own gated process",
+ "comparison": {
+  "dim32_ceiling": 0.8690277186779367,
+  "F82_hardware": 0.9769,
+  "charter_fork": 0.988
+ }
+}
