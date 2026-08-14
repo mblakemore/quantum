@@ -1,0 +1,82 @@
+{
+ "card": "exp_gear_ratio_ladder_decode",
+ "cycle": "C5073",
+ "job": "d9v8esf2sl0c73blif00",
+ "never_c1_parity": 0.0,
+ "results": [
+  {
+   "block": "rz_0",
+   "c1_parity": 0.011510791366906475,
+   "z": 0.4338239775560643,
+   "herald": 0.3475,
+   "consistency": 0.996875,
+   "gates": true
+  },
+  {
+   "block": "rz_1",
+   "c1_parity": 0.03770321687997233,
+   "z": 1.435584564965828,
+   "herald": 0.361375,
+   "consistency": 0.994875,
+   "gates": true
+  },
+  {
+   "block": "rz_2",
+   "c1_parity": -0.0003522367030644593,
+   "z": -0.013345849260092397,
+   "herald": 0.354875,
+   "consistency": 0.99675,
+   "gates": true
+  },
+  {
+   "block": "rz_3",
+   "c1_parity": 0.029098651525904896,
+   "z": 1.1006799913792547,
+   "herald": 0.35225,
+   "consistency": 0.99675,
+   "gates": true
+  },
+  {
+   "block": "rz_4",
+   "c1_parity": 0.027138440398488492,
+   "z": 1.0349260470202708,
+   "herald": 0.363875,
+   "consistency": 0.996375,
+   "gates": true
+  },
+  {
+   "block": "rz_5",
+   "c1_parity": -0.001040582726326743,
+   "z": -0.03957952850714916,
+   "herald": 0.360375,
+   "consistency": 0.99725,
+   "gates": true
+  },
+  {
+   "block": "rz_6",
+   "c1_parity": 0.02578397212543554,
+   "z": 0.9797681241060825,
+   "herald": 0.35875,
+   "consistency": 0.995125,
+   "gates": true
+  },
+  {
+   "block": "rx_pi",
+   "c1_parity": -0.013082858101308286,
+   "z": -0.5017958123309341,
+   "herald": 0.372625,
+   "consistency": 0.994375,
+   "gates": true
+  }
+ ],
+ "sinusoid": {
+  "amp": 0.0025487075189247854,
+  "peak_theta_rad": 2.013436543924933,
+  "r2": 0.017651841014213354
+ },
+ "best": {
+  "block": "rz_1",
+  "z": 1.435584564965828
+ },
+ "verdict": "NO-SINGLE-RATIO-CLEARS + CURVE-WEAK"
+}
