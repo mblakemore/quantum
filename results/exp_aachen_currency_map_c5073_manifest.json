@@ -237,5 +237,7 @@
    "block": "sentinel_late",
    "shots": 400
   }
- ]
+ ],
+ "pending_jobs_at_submit": 0,
+ "job_id": "d9v8ginijjus73f8jdvg"
 }
