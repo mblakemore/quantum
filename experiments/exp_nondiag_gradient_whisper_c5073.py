@@ -68,6 +68,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--backend", required=True)
     ap.add_argument("--submit", action="store_true")
+    ap.add_argument("--split", action="store_true")
     a = ap.parse_args()
     from qiskit_ibm_runtime import SamplerV2
     from ibm_multi_account import service_for_submission
@@ -121,9 +122,18 @@ def main():
            "pubs_meta": meta}
     if a.submit:
         man["pending_jobs_at_submit"] = backend.status().pending_jobs
-        job = SamplerV2(mode=backend).run(pubs)
-        man["job_id"] = job.job_id()
-        print(f"SUBMITTED {man['job_id']} to {a.backend} (pending: {man['pending_jobs_at_submit']})")
+        if a.split:
+            # one job per rung (3 pubs each) — the aachen 1305-timeout remedy
+            man["job_ids_by_rung"] = {}
+            for k, (mult, score, path, vpred) in enumerate(rungs):
+                rp = pubs[3*k:3*k+3]
+                job = SamplerV2(mode=backend).run(rp)
+                man["job_ids_by_rung"][f"f{mult:.2f}"] = job.job_id()
+                print(f"SUBMITTED rung f{mult:.2f}: {job.job_id()}")
+        else:
+            job = SamplerV2(mode=backend).run(pubs)
+            man["job_id"] = job.job_id()
+            print(f"SUBMITTED {man['job_id']} to {a.backend} (pending: {man['pending_jobs_at_submit']})")
     else:
         print("[dry] not submitted")
     json.dump(man, open(out, "w"), indent=1)
