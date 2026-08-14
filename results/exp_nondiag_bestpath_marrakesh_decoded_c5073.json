@@ -1,0 +1,20 @@
+{
+ "card": "exp_nondiag_bestpath_marrakesh_decode",
+ "cycle": "C5073",
+ "job": "d9v8rqob1g9c73a8aoug",
+ "account": "IBMQ_ALT4",
+ "cal_epoch": "2026-08-14 02:42:34+00:00",
+ "layout": [
+  13,
+  12,
+  14,
+  15
+ ],
+ "V_floor": 0.5325,
+ "V_science": 0.8135,
+ "V_polarity": -0.95175,
+ "V_floor_norm": 0.4921636828625803,
+ "deficit": -0.3213363171374197,
+ "z": -20.32309314168888,
+ "verdict": "NONDIAG-ABSENT-AT-RESOLUTION"
+}
