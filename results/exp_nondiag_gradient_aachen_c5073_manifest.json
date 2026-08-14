@@ -1,0 +1,132 @@
+{
+ "card": "exp_nondiag_gradient",
+ "cycle": "C5073",
+ "substrate": "claude-fable-5",
+ "backend": "ibm_aachen",
+ "cal_epoch": "2026-08-13 06:18:32+00:00",
+ "shots": 8000,
+ "account": "IBMQ_TOKEN",
+ "rungs": [
+  {
+   "frac": 0.3333333333333333,
+   "score": 0.026149395739173215,
+   "path": [
+    48,
+    47,
+    57,
+    67
+   ],
+   "vpred": 0.5066756168053701
+  },
+  {
+   "frac": 0.6666666666666666,
+   "score": 0.03626036966244542,
+   "path": [
+    61,
+    76,
+    81,
+    82
+   ],
+   "vpred": 0.3895474449427963
+  }
+ ],
+ "best_cell_banked": {
+  "score": 0.0162,
+  "decoded": "exp_aachen_nondiag_refly_decoded_c5073.json"
+ },
+ "prereg": "registered readings MONOTONE-GRADED / NON-GRADED / ALL-CLEAN + alive-band guard in docstring",
+ "pubs_meta": [
+  {
+   "block": "f0.33_floor",
+   "frac": 0.3333333333333333,
+   "score": 0.026149395739173215,
+   "path": [
+    48,
+    47,
+    57,
+    67
+   ],
+   "vpred": 0.5066756168053701,
+   "arm": "floor",
+   "shots": 8000,
+   "cz_count": 48
+  },
+  {
+   "block": "f0.33_science",
+   "frac": 0.3333333333333333,
+   "score": 0.026149395739173215,
+   "path": [
+    48,
+    47,
+    57,
+    67
+   ],
+   "vpred": 0.5066756168053701,
+   "arm": "science",
+   "shots": 8000,
+   "cz_count": 54
+  },
+  {
+   "block": "f0.33_polarity",
+   "frac": 0.3333333333333333,
+   "score": 0.026149395739173215,
+   "path": [
+    48,
+    47,
+    57,
+    67
+   ],
+   "vpred": 0.5066756168053701,
+   "arm": "polarity",
+   "shots": 8000,
+   "cz_count": 4
+  },
+  {
+   "block": "f0.67_floor",
+   "frac": 0.6666666666666666,
+   "score": 0.03626036966244542,
+   "path": [
+    61,
+    76,
+    81,
+    82
+   ],
+   "vpred": 0.3895474449427963,
+   "arm": "floor",
+   "shots": 8000,
+   "cz_count": 48
+  },
+  {
+   "block": "f0.67_science",
+   "frac": 0.6666666666666666,
+   "score": 0.03626036966244542,
+   "path": [
+    61,
+    76,
+    81,
+    82
+   ],
+   "vpred": 0.3895474449427963,
+   "arm": "science",
+   "shots": 8000,
+   "cz_count": 54
+  },
+  {
+   "block": "f0.67_polarity",
+   "frac": 0.6666666666666666,
+   "score": 0.03626036966244542,
+   "path": [
+    61,
+    76,
+    81,
+    82
+   ],
+   "vpred": 0.3895474449427963,
+   "arm": "polarity",
+   "shots": 8000,
+   "cz_count": 4
+  }
+ ],
+ "pending_jobs_at_submit": 0,
+ "job_id": "d9v8vnif2ibc73f0nnag"
+}
