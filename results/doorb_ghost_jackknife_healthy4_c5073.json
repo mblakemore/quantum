@@ -1,0 +1,13 @@
+{
+ "healthy4_W1": {
+  "refly(WIN)": -0.0163,
+  "i1": 0.1202,
+  "i2": 0.0666,
+  "i3": 0.011
+ },
+ "jk_se": 0.030324258028845492,
+ "cross_var": 0.0036782425,
+ "shot_var": 0.0005,
+ "sys_frac": 0.8640655149843981,
+ "note": "first_FAIL excluded per A2 a-priori stratum (inherited not invented)"
+}
