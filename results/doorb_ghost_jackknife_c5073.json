@@ -1,0 +1,32 @@
+{
+ "card": "doorb_ghost_jackknife",
+ "cycle": "C5073",
+ "n": 16,
+ "pin": {
+  "draw": "i1",
+  "tr2": 0.37019475253920486,
+  "graded": 0.37019475253920475,
+  "ok": true
+ },
+ "W1_per_draw": {
+  "original": 6.492577938659258,
+  "refly": -0.016272702733967748,
+  "i1": 0.12023254855069532,
+  "i2": 0.06657133778201507,
+  "i3": 0.011014948859165763
+ },
+ "W1_shot_var": {
+  "original": 0.0004489715744871903,
+  "refly": 0.0004627308834303783,
+  "i1": 0.000659712200552509,
+  "i2": 0.0004766444232602479,
+  "i3": 0.0005245213742460005
+ },
+ "jackknife_mean": 1.3348248142234334,
+ "jackknife_SE": 1.289652193518266,
+ "cross_draw_var": 8.316013901232377,
+ "mean_shot_var": 0.0005145160911952652,
+ "excess_systematic_var": 8.315499385141182,
+ "systematic_fraction": 0.9999381294815874,
+ "verdict": "SYSTEMATIC-DOMINATED: cross-draw spread exceeds shot noise -> W1 is a draw-dependent apparatus number (A2 measurement-quality reading supported)"
+}
