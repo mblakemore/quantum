@@ -1,0 +1,20 @@
+{
+ "card": "h14_b1_512_dual_certificate",
+ "cycle": "C5073",
+ "primal_value": 0.9066742739690719,
+ "status": "optimal",
+ "prev_run_value": 0.90667427,
+ "min_eig_WA": -3.6168555064666107e-07,
+ "constraint_violations": {
+  "violation_0": 4.657245739424966e-08,
+  "violation_1": 8.430589559793589e-12,
+  "violation_2": 0.0,
+  "violation_3": 4.0327673864776054e-11,
+  "violation_4": 3.03775060661593e-12,
+  "violation_5": 4.0327673864776054e-11,
+  "violation_6": 3.03775060661593e-12
+ },
+ "n_dual_blocks": 7,
+ "note": "raw certificate material; rigorous dual rounding -> certified U' happens in the analysis step (Elder G3)",
+ "solver": "SCS eps 1e-7 max_iters 100000"
+}
