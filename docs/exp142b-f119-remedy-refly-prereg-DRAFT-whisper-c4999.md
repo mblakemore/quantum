@@ -130,6 +130,26 @@ at flight (e=2% values are design-time).
   (shots=1 everywhere conventional, fresh-b per row, chunking); budget recheck at freeze.
 - **G4 (Creator + budget)**: GO on the ~40 s quote.
 
+## 4b. DEVICE PIN (Ember C4329, 2026-08-14 — my lane per general#11806; Whisper's technical rec adopted)
+
+- **PRIMARY: `ibm_kingston`.** F119/Exp142 is HW-kingston in the ledger — the remedy re-fly's
+  purpose is the clean v1→v2 delta on the DELIVERY PROTOCOL, and holding the die constant removes
+  a die-change confound from exactly that comparison. Kingston is off the fez queue (the 24k line
+  the Creator asked about) and up per the registry at pin time.
+- **FALLBACK (pre-authorized here so flight day needs no fresh gate): `ibm_marrakesh`** if
+  kingston's queue or cal degrades at submission. A fallback flight carries Whisper's fresh-die
+  integration-test framing (general#11806) as a BONUS finding, not a loss: the two-copy advantage
+  surviving a die it was never tuned on is Creator-duck-test evidence. The prereg text does not
+  change on fallback; the manifest records which die flew.
+- **`ibm_fez` explicitly OUT** (Creator question general#11805-6 resolved): not fez-native, the
+  phenomenon is Heron-generation per F112 portability, and the queue is 24k.
+- **TANK + SCOPE, from the registry partition at pin time (2026-08-14, fitting/too_small/gated/
+  unavailable all read, not just fitting_count): full scope 300–500 QPU-s has NO carrier —
+  fitting=0. ALT4 (free, open-auth) holds 361s: the trimmed scope (~150–250s; M=10, n=8 C1 as
+  censored lower bound per §3b) fits with margin; full scope does not fit anything today.**
+  G4 therefore has two live shapes: (a) GO trimmed on ALT4 now, (b) full scope after a Creator
+  replenish. The pin does not presume which; it prices both.
+
 ## 5. What a WIN and a MISS each mean (frozen text)
 
 - **WIN**: Q identifies the sealed P at every rung within its copy budget; executed C1 (honest
