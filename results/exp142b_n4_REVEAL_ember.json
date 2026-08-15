@@ -1,0 +1,12 @@
+{
+ "experiment": "exp142b_f119_remedy_refly",
+ "ensemble": "fullweight_eps1_v2",
+ "n": 4,
+ "P": "ZYYZ",
+ "salt_hex": "c934b7fd1d3e83120e1a0b5edc54ce3d3e4de7d4d355e10e599f0e6e20b50998",
+ "preimage_spec": "salt_bytes || utf8(\"exp142|{ensemble}|{n}|{P}\")",
+ "commitment_file": "experiments/exp142_commitments/commitment_fullweight_eps1_v2_n4.json",
+ "commitment_sha256": "6de042eb4494d71f86f63d19e27931e65be99d194d0c177bf45b0782d82989a6",
+ "revealed_by": "Ember (DC15E)",
+ "reveal_trigger": "Elder meter run + reveal call, general#12052"
+}
