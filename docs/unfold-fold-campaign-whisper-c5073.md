@@ -298,13 +298,13 @@ The build-upon runs are the ones the Creator's integration criterion actually re
 |----|------|------|-----------|---------|-----|---------|---------|----------|
 | **U0** ⭐ | unfold | $0 | D=tr² | ✅ | ✅ | **YES — noise-model + a null on ghost-mitigation, both to F122 lane** | ✅ **DONE C5073**: uniform f=0.9528±0.0018 model reproduces all 4 secrets' tr² to 0.2% (duck); ghost-specific refinement does NOT beat weight (P4 honest branch) → ghost is a side channel, not the advantage limiter | unfold_U0_ghost_mitigation_c5073.json |
 | U1 | unfold | $0 | D=tr² | ✅ | ✅ | feeds U0 | ✅ **DONE C5073**: PREMISE-CORRECTED — two-copy tr² is sign-free at all weights; delivered P-independent ghost map (cross-draw r +0.809) | unfold_U1_ghost_phase_c5073.json |
-| U2a | unfold | $0 | g2 tr² | ☐ | ☐ | **YES — a device unfold-depth benchmark (F112 kin)** | — | unfold_U2a_boundary_purity_c5073.json |
-| U3 | unfold | $0* | shadow | ☐ | ☐ | **YES — measures the 3^w cost curve on real silicon** | — | unfold_U3_conv_boundary_c5073.json |
-| U4 | unfold | $0 | SDP | ☐ | ☐ | feeds F2 (a general prover) | — | unfold_U4_dual_orbits_c5073.json |
-| U5 | unfold | $0 | g2 tr² | ☐ | ☐ | feeds boards #143/#145 | — | unfold_U5_epoch_drift_c5073.json |
-| U6 | unfold | $0 | Bell | ☐ | ☐ | **YES — a device-health timeline instrument** | — | unfold_U6_sentinel_timeline_c5073.json |
-| F1 | fold | $0 | — | ☐ | ☐ | **YES — the envelope-capability manifest** | — | fold_F1_degree2_manifest_c5073.json |
-| F2 | fold | $0 | SDP | ☐ | ☐ | **YES — a general symmetric-opt prover** | — | fold_F2_symmetric_opt_c5073.json |
+| U2a | unfold | $0 | D=tr² | ✅ | ✅ | purity-in-weight profile | ✅ **DONE C5073**: BOUNDARY carries only the w=1 ghost (3–4.6σ, decreasing i1 0.120>i2 0.067>i3 0.011), w=2 at floor, mass at planted weight — weight-1-exclusive ghost confirmed from the purity angle | unfold_U2a_boundary_purity_c5073.json |
+| U3 | unfold | $0* | shadow | ☐ | ☐ | **YES — measures the 3^w cost curve on real silicon** | Wave 2 (after U1, encoding-gated) | unfold_U3_conv_boundary_c5073.json |
+| U4 | unfold | $0 | SDP | ✅ | ✅ | null on F2's premise | ✅ **DONE C5073**: pin=min_eig(WA) exact (obj factor-2 convention, reported). NEAR-FULL-RANK 456/512, 403 dirs hold 99% → 512 wall is GENERIC, not compressible (symmetry present but high-dim face). Weakens F2 | unfold_U4_dual_orbits_c5073.json |
+| U5 | unfold | $0 | tr² | ✅ | ✅ | feeds #143/#145 | ✅ **DONE C5073**: LOW-POWER (n≤4, ordinal time, W1 not monotone). Obs: refly W1~0 vs draws 0.01–0.12; needs absolute timestamps — named | unfold_U5_epoch_drift_c5073.json |
+| U6 | unfold | $0 | Bell | ✅ | ✅ | **YES — device-health gauge (F112 kin)** | ✅ **DONE C5073**: SERIES BUILT — 61 flights, sentinel fidelity 0.960±0.015; exp142 (0.974) cleaner than exp144 (0.956). Abs-time ordering needs timestamps | unfold_U6_sentinel_timeline_c5073.json |
+| F1 | fold | $0 | — | ✅ | ✅ | **YES — the envelope-capability manifest** | ✅ **DONE C5073**: routing table emitted; 4 functionals fold on banked data (2 BUILT: U2a, U0 noise-model), 2 need U2b flight, 1 phase-walled | fold_F1_degree2_manifest_c5073.json |
+| F2 | fold | $0 | SDP | ☐ | ☐ | premise weakened by U4 | Wave 3 (U4 shows near-full-rank → low priority) | fold_F2_symmetric_opt_c5073.json |
 | U2b | unfold | **FLIGHT** | two-copy | ☐ | ☐ | **YES — a prep-reproducibility instrument** | — | (gated on GO) |
 
 `*` U3 is $0 but encoding-gated (NO-TEST if the conv encoding won't pin).
