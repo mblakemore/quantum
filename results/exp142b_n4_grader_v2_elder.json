@@ -1,0 +1,279 @@
+{
+ "card": "exp142b_n4_grader_v2_elder",
+ "cycle": "C6620",
+ "p0_measured": 0.97,
+ "bit_reverse": true,
+ "A": 8.99961934066053,
+ "B": -5.298317366548036,
+ "conv": [
+  {
+   "rep": 0,
+   "P_hat": null,
+   "bill_rows": null,
+   "censored": true,
+   "alive_at_end": 2
+  },
+  {
+   "rep": 1,
+   "P_hat": "ZYYZ",
+   "bill_rows": 554,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 2,
+   "P_hat": "ZYYZ",
+   "bill_rows": 2174,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 3,
+   "P_hat": "ZYYZ",
+   "bill_rows": 2039,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 4,
+   "P_hat": "ZYYZ",
+   "bill_rows": 41,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 5,
+   "P_hat": "ZYYZ",
+   "bill_rows": 1337,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 6,
+   "P_hat": "ZYYZ",
+   "bill_rows": 1531,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 7,
+   "P_hat": "ZYYZ",
+   "bill_rows": 149,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 8,
+   "P_hat": "ZYYZ",
+   "bill_rows": 2093,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 9,
+   "P_hat": "ZYYZ",
+   "bill_rows": 1310,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 10,
+   "P_hat": "ZYYZ",
+   "bill_rows": 257,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 11,
+   "P_hat": "ZYYZ",
+   "bill_rows": 1834,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 12,
+   "P_hat": "ZYYZ",
+   "bill_rows": 554,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 13,
+   "P_hat": "ZYYZ",
+   "bill_rows": 1634,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 14,
+   "P_hat": "ZYYZ",
+   "bill_rows": 446,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 15,
+   "P_hat": "ZYYZ",
+   "bill_rows": 1499,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 16,
+   "P_hat": "ZYYZ",
+   "bill_rows": 986,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 17,
+   "P_hat": "ZYYZ",
+   "bill_rows": 473,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 18,
+   "P_hat": "ZYYZ",
+   "bill_rows": 446,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 19,
+   "P_hat": "ZYYZ",
+   "bill_rows": 1558,
+   "censored": false,
+   "alive_at_end": null
+  }
+ ],
+ "q": [
+  {
+   "rep": 0,
+   "P_hat": "ZYYZ",
+   "bill_samples": 14,
+   "shots_flown": 60
+  },
+  {
+   "rep": 1,
+   "P_hat": "ZYYZ",
+   "bill_samples": 13,
+   "shots_flown": 60
+  },
+  {
+   "rep": 2,
+   "P_hat": "ZYYZ",
+   "bill_samples": 11,
+   "shots_flown": 60
+  },
+  {
+   "rep": 3,
+   "P_hat": "ZYYZ",
+   "bill_samples": 35,
+   "shots_flown": 60
+  },
+  {
+   "rep": 4,
+   "P_hat": "ZYYZ",
+   "bill_samples": 7,
+   "shots_flown": 60
+  },
+  {
+   "rep": 5,
+   "P_hat": "ZYYZ",
+   "bill_samples": 6,
+   "shots_flown": 60
+  },
+  {
+   "rep": 6,
+   "P_hat": "ZYYZ",
+   "bill_samples": 12,
+   "shots_flown": 60
+  },
+  {
+   "rep": 7,
+   "P_hat": "ZYYZ",
+   "bill_samples": 14,
+   "shots_flown": 60
+  },
+  {
+   "rep": 8,
+   "P_hat": "ZYYZ",
+   "bill_samples": 6,
+   "shots_flown": 60
+  },
+  {
+   "rep": 9,
+   "P_hat": "ZYYZ",
+   "bill_samples": 9,
+   "shots_flown": 60
+  },
+  {
+   "rep": 10,
+   "P_hat": "ZYYZ",
+   "bill_samples": 21,
+   "shots_flown": 60
+  },
+  {
+   "rep": 11,
+   "P_hat": "ZYYZ",
+   "bill_samples": 15,
+   "shots_flown": 60
+  },
+  {
+   "rep": 12,
+   "P_hat": "ZYYZ",
+   "bill_samples": 7,
+   "shots_flown": 60
+  },
+  {
+   "rep": 13,
+   "P_hat": "ZYYZ",
+   "bill_samples": 30,
+   "shots_flown": 60
+  },
+  {
+   "rep": 14,
+   "P_hat": "ZYYZ",
+   "bill_samples": 7,
+   "shots_flown": 60
+  },
+  {
+   "rep": 15,
+   "P_hat": "ZYYZ",
+   "bill_samples": 19,
+   "shots_flown": 60
+  },
+  {
+   "rep": 16,
+   "P_hat": "ZYYZ",
+   "bill_samples": 18,
+   "shots_flown": 60
+  },
+  {
+   "rep": 17,
+   "P_hat": "ZYYZ",
+   "bill_samples": 10,
+   "shots_flown": 60
+  },
+  {
+   "rep": 18,
+   "P_hat": "ZYYZ",
+   "bill_samples": 18,
+   "shots_flown": 60
+  },
+  {
+   "rep": 19,
+   "P_hat": "ZYYZ",
+   "bill_samples": 12,
+   "shots_flown": 60
+  }
+ ],
+ "conv_median": 1310.0,
+ "q_median": 12.5,
+ "censored": 1,
+ "ratio_realized": 104.8,
+ "consensus_P": [
+  "ZYYZ"
+ ]
+}
