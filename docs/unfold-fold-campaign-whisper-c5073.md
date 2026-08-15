@@ -38,6 +38,32 @@ The coordinate that governs whether a structure can be *unfolded for free* is **
 
 Everything below is an instance of one of these two rules.
 
+### 0.1 Weight is not the only unfold axis (review addition, C5073)
+The parts-bin review found that **the campaign already unfolds along other coordinates** — the
+"unfold the hidden structure" move is more general than Pauli weight:
+- **Shot-depth axis — F120** (the shot-axis code): per-bit s-information survives the width×depth
+  wall ~30× better than the modal-peak observable (λ_bit ≈ 0.0030/slot vs λ_modal ≈ 0.091/slot),
+  recovering sealed 40-bit strings exactly at d2q = 217. That is an *unfold along circuit depth*,
+  cost governed by λ_bit·depth instead of 3^weight.
+- **Causal-order axis — F96** (schedule-symmetry): unfolds whether "parallel" gates hide an
+  execution order (the duration-vs-order discriminator).
+- **This campaign — Pauli-weight axis**: unfold the state's structure, cost 3^weight.
+
+**Generalized thesis**: *unfold along the axis on which the structure lives; the cost is that axis's
+own exponential.* This connects the new work to the crown instruments (F120/F96) rather than
+standing apart — and it means a run can pick its axis: if a structure is depth-localized, use the
+F120 shot-axis code; if weight-localized, use this campaign's estimators.
+
+### 0.2 Lineage — what this builds ON (review addition, C5073)
+- **F103** (entanglement from already-flown data, $0) is this campaign's **progenitor** — the proof
+  that re-analysis of banked shots yields certified new physics at zero cost.
+- **F122** (sealed-shadow, "the third attempt at a learning advantage and the first that survived")
+  is the **foundation we build on** — the door-b two-copy corpus is F122's, the ghost was found
+  grading it, and U0 below feeds a candidate mitigation back to that lane.
+- Fence: F119/F121/F122 numbering seats are Ember/Elder's; door-a is tank-blocked to ~Aug 26. This
+  campaign is **Whisper's $0 re-analysis lane** — it *offers* ingredients to those lanes (U0), it
+  does not re-grade owned advantage claims.
+
 ---
 
 ## 1. UNFOLD lane — extract hidden structure from banked data
@@ -46,7 +72,45 @@ Each run: `results/unfold_<id>_c5073.json`. Estimators: **D** = `tools/doorb_dec
 (signed, built-in selftest) · **g2** = `experiments/exp142_robust_decoder_sim` (tr² = 2·rate−1,
 flown-matched). Both refuse/should be pinned before use.
 
-### U1 — Ghost phase (weight-1 signed direction) — **$0, RECOMMENDED FIRST**
+### U0 — Ghost-subtraction mitigation — **$0, THE BUILD-UPON RUN, RUN FIRST** ⭐
+*The only run in the campaign that BUILDS rather than characterizes, and it is judged by the
+Creator's own criterion: "build upon it — if it holds when integrated, the function is correct or it
+walks like a duck." Brought to the top by the C5073 review.*
+- **The idea**: the ghost is a **validated, P-independent, weight-1 apparatus signature** (measured
+  this session: same hot qubits regardless of the sealed secret, cross-draw r = +0.809). A validated
+  error signature is not a terminal fact — it is a **mitigation ingredient**. If the ghost is
+  genuine measurement-quality error, then *subtracting its estimated per-qubit contribution from the
+  graded tr² of the sealed P should move the estimate toward the noiseless ideal* (a pure sealed-P
+  eigenstate has ideal tr(Pρ)² = 1; F122 measured 0.37019 / 0.30084 / 0.28106 for i1/i2/i3 — the
+  deficit is the noise the mitigation targets).
+- **The integration test (this is the whole point)**: derive ONE per-qubit apparatus correction from
+  the ghost map, apply it to **all four** healthy draws, and ask whether the *same* correction moves
+  *every* draw's tr² toward ideal **consistently and without overshoot**. Consistency across four
+  different sealed P is the "walks like a duck" signal — a P-independent correction that improves
+  P-dependent measurements can only be modelling the apparatus, not the secret.
+- **Data**: door-b healthy draws {refly, i1, i2, i3}; the ghost per-qubit map + graded tr² already
+  banked (`doorb_sign_test_c5073.json`, the grade files). **Estimator**: g2 (tr²) + the U1 signed
+  per-qubit factors.
+- **PIN (mandatory)**: reproduce each draw's *uncorrected* graded tr² < 2e-3 before applying any
+  correction (NO-TEST otherwise).
+- **FROZEN PREDICTIONS**:
+  - P1 pin reproduces all four uncorrected tr².
+  - P2 the ghost-derived correction is a **per-qubit multiplicative factor consistent across draws**
+    (P-independent, as established) — the correction vector's cross-draw r > 0.5.
+  - P3 corrected tr² **increases toward 1 without overshooting** (physical bound: a correction that
+    pushes tr² > 1 falsifies the model) — and the *mean* improvement across draws is resolvable
+    above shot noise.
+  - **P4 (the falsifier / the honest branch)**: if the correction helps some draws and hurts others,
+    or overshoots > 1, or is draw-inconsistent → the weight-1 ghost is an **incomplete** error model
+    (there is higher-weight or coherent structure it misses) — a real, publishable bound on the
+    model, not a failure to hide.
+- **Why it's the top**: it is the campaign's only **compounding** result — a validated mitigation
+  improves *every future two-copy grade*, and success is the Creator's integration criterion met on
+  the crown corpus. **Fence**: this produces a *candidate* mitigation **offered to the F122 lane**
+  (Ember's numbering seat); it does not re-grade F122's advantage claim.
+- **Depends on**: U1 (needs the signed per-qubit factors). Run U1 → U0 as the opening pair.
+
+### U1 — Ghost phase (weight-1 signed direction) — **$0, feeds U0**
 - **Claim to test**: the ghost is weight-1-exclusive and P-independent (established C5073). Its
   *magnitude* per hot qubit is known; its **signed per-qubit direction** (the sign of the readout
   asymmetry on qubits 17-27, 24-25, 37-45, 28-29) is not. Weight-1 ⇒ 3^1 = 3 ⇒ the sign is
@@ -227,23 +291,34 @@ sys.path.insert(0, os.path.join(HERE,"..","tools"))
 ```
 
 ### 4.3 Results ledger (fill as runs complete)
-| id | lane | cost | estimator | F-ledger checked | PIN | verdict | artifact |
-|----|------|------|-----------|------------------|-----|---------|----------|
-| U1 | unfold | $0 | D signed | ☐ | ☐ | — | unfold_U1_ghost_phase_c5073.json |
-| U2a | unfold | $0 | g2 tr² | ☐ | ☐ | — | unfold_U2a_boundary_purity_c5073.json |
-| U3 | unfold | $0* | shadow | ☐ | ☐ | — | unfold_U3_conv_boundary_c5073.json |
-| U4 | unfold | $0 | SDP | ☐ | ☐ | — | unfold_U4_dual_orbits_c5073.json |
-| U5 | unfold | $0 | g2 tr² | ☐ | ☐ | — | unfold_U5_epoch_drift_c5073.json |
-| U6 | unfold | $0 | Bell | ☐ | ☐ | — | unfold_U6_sentinel_timeline_c5073.json |
-| F1 | fold | $0 | — | ☐ | ☐ | — | fold_F1_degree2_manifest_c5073.json |
-| F2 | fold | $0 | SDP | ☐ | ☐ | — | fold_F2_symmetric_opt_c5073.json |
-| U2b | unfold | **FLIGHT** | two-copy | ☐ | ☐ | — | (gated on GO) |
+The **`builds?`** column is the review addition: does the run *produce a reusable
+instrument/mitigation/benchmark* (the F111/F112/F115 "reusable move" pattern), or only characterize?
+The build-upon runs are the ones the Creator's integration criterion actually rewards.
+| id | lane | cost | estimator | F-check | PIN | builds? | verdict | artifact |
+|----|------|------|-----------|---------|-----|---------|---------|----------|
+| **U0** ⭐ | unfold | $0 | g2+U1 | ☐ | ☐ | **YES — a mitigation offered to the F122 lane** | — | unfold_U0_ghost_mitigation_c5073.json |
+| U1 | unfold | $0 | D signed | ☐ | ☐ | feeds U0 | — | unfold_U1_ghost_phase_c5073.json |
+| U2a | unfold | $0 | g2 tr² | ☐ | ☐ | **YES — a device unfold-depth benchmark (F112 kin)** | — | unfold_U2a_boundary_purity_c5073.json |
+| U3 | unfold | $0* | shadow | ☐ | ☐ | **YES — measures the 3^w cost curve on real silicon** | — | unfold_U3_conv_boundary_c5073.json |
+| U4 | unfold | $0 | SDP | ☐ | ☐ | feeds F2 (a general prover) | — | unfold_U4_dual_orbits_c5073.json |
+| U5 | unfold | $0 | g2 tr² | ☐ | ☐ | feeds boards #143/#145 | — | unfold_U5_epoch_drift_c5073.json |
+| U6 | unfold | $0 | Bell | ☐ | ☐ | **YES — a device-health timeline instrument** | — | unfold_U6_sentinel_timeline_c5073.json |
+| F1 | fold | $0 | — | ☐ | ☐ | **YES — the envelope-capability manifest** | — | fold_F1_degree2_manifest_c5073.json |
+| F2 | fold | $0 | SDP | ☐ | ☐ | **YES — a general symmetric-opt prover** | — | fold_F2_symmetric_opt_c5073.json |
+| U2b | unfold | **FLIGHT** | two-copy | ☐ | ☐ | **YES — a prep-reproducibility instrument** | — | (gated on GO) |
 
 `*` U3 is $0 but encoding-gated (NO-TEST if the conv encoding won't pin).
 
+**The build-upon shape (review headline)**: U0 is the run to fire first — it is the only one whose
+success *is* the Creator's "walks like a duck" integration test, and a validated ghost-subtraction
+compounds into every future two-copy grade. U2a/U3 build the second compounding artifact — a
+**device unfold-depth axis** that ranks chips on "how deep can you unfold for free," kin to F112's
+benchmark beyond QV/CLOPS/EPLG. The rest characterize (still worth it) but do not compound.
+
 ### 4.4 Execution order (dependency-respecting)
 ```
-Wave 1 ($0, independent):     U1, U2a, U4, U5, U6, F1  ── run in parallel (U1 unblocked per GAP-1 resolution)
+Opening pair ($0):            U1 → U0   ── the build-upon spine: signed factors, then the mitigation test
+Wave 1 ($0, independent):     U2a, U4, U5, U6, F1  ── run in parallel alongside the opening pair
 Wave 2 ($0, gated):           U3 (after U1 validates the signed reading on clean two-copy data)
 Wave 3 (needs U4):            F2 (uses U4's active-orbit read)
 Wave 4 (FLIGHT, explicit GO): U2b
