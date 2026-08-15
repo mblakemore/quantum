@@ -1,0 +1,37 @@
+{
+ "card": "unfold_U0_ghost_mitigation",
+ "cycle": "C5073",
+ "pin_all_ok": true,
+ "f_hat": 0.9528231278644762,
+ "f_spread": 0.0017890768786126387,
+ "f_per_draw": {
+  "refly": 0.9519169807083181,
+  "i1": 0.9558355820042864,
+  "i2": 0.9511830599229296,
+  "i3": 0.9523568888223708
+ },
+ "loo_rmse_M0_weight": 0.018859724042292293,
+ "loo_rmse_M1_ghost": 0.0457707335811083,
+ "ghost_overlap": {
+  "refly": 11.042608342081671,
+  "i1": 11.976744913490597,
+  "i2": 11.973823410047812,
+  "i3": 13.768222687855015
+ },
+ "wp": {
+  "refly": 12,
+  "i1": 11,
+  "i2": 12,
+  "i3": 13
+ },
+ "corrected_tr2_best": {
+  "refly": 0.9792484567051307,
+  "i1": 1.0737482054877898,
+  "i2": 0.9612883744483929,
+  "i3": 0.9893522894341115
+ },
+ "overshoot": true,
+ "n_draws": 4,
+ "power_note": "n=4 with weight confound = low power by construction",
+ "verdict": "HONEST BRANCH (P4): at n=4 the ghost map does NOT beat the weight-only baseline (M0 0.0189 vs M1 0.0458); the base per-qubit fidelity model DOES hold across 4 secrets (f_hat 0.953 +/- 0.002) \u2014 the apparatus model walks like a duck at the mean-fidelity level, but resolving the ghost's per-qubit refinement needs more sealed draws (a multi-draw mitigation flight). Bound, not fail."
+}
