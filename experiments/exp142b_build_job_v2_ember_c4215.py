@@ -40,7 +40,7 @@ def measured_q_n(backend, conv_layout):
     return float(np.mean(errs)) if errs else 0.02
 
 
-def build_rung(n, P, C, M, rng):
+def build_rung(n, P, C, M, rng, schedule_out=None):
     """All pubs for one rung: M disjoint decode blocks (conv-v2 shots=1 + quantum shots=1) +
     cals + sentinels. Returns (pubs, manifest_pubs). Manifest is P-INDEPENDENT."""
     pubs, man = [], []
@@ -57,7 +57,17 @@ def build_rung(n, P, C, M, rng):
     qqc, qparams = K.quantum_template(n)
     for m in range(M):
         # conv-v2 (blind uniform-C shots=1)
-        cpubs, cman, order, _ = V2.build_conv_rep(n, P, C, rng)
+        cpubs, cman, order, bstrs = V2.build_conv_rep(n, P, C, rng)
+        if schedule_out is not None:
+            # Persist the committed schedule's P-INDEPENDENT parts (basis
+            # order + fresh-b per row) — the n=4 flight discarded them and
+            # the P-independence strip took the decoder-public inputs with
+            # it: the blind decode needed a sealer-side recovery from IBM
+            # job inputs (2026-08-15). A and b leak nothing about P.
+            sched = [A for A in order for _ in range(C)]
+            schedule_out.append({"rep": m,
+                                 "rows": [{"A": A, "b": b}
+                                          for A, b in zip(sched, bstrs)]})
         for (qc, rows, shots), mm in zip(cpubs, cman):
             pubs.append((qc, rows, shots)); mm2 = dict(mm); mm2["rep"] = m; man.append(mm2)
         # quantum arm (transversal Bell sampling, shots=1)
@@ -140,8 +150,15 @@ def main():
         C = V2.confirm_C(n, q_n)
         print(f"measured q_n={q_n:.4f} -> C=p99={C}  (conv_layout={conv_layout})")
         rng = np.random.default_rng()   # OS entropy for flight
-        pubs, man = build_rung(n, P, C, M, rng)
+        schedule = []
+        pubs, man = build_rung(n, P, C, M, rng, schedule_out=schedule)
         integrity_check(man, n)
+        sched_path = os.path.join(HERE, "..", "results",
+                                  f"exp142b_n{n}_schedule.json")
+        json.dump({"experiment": "exp142b_f119_remedy_refly",
+                   "n": n, "M": M, "C": C, "reps": schedule},
+                  open(sched_path, "w"))
+        print(f"committed schedule -> {sched_path} (P-independent: A+b only)")
         real_shots = sum(p[2] * (1 if p[1] is None else len(list(p[1].values())[0])) for p in pubs)
         print(f"n={n} M={M} C={C}: {len(pubs)} PUBs, ~{real_shots:,} shots (integrity PASS, blind)")
         # transpile each pub on its arm's layout
