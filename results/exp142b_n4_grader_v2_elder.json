@@ -275,5 +275,11 @@
  "ratio_realized": 104.8,
  "consensus_P": [
   "ZYYZ"
- ]
+ ],
+ "reveal": {
+  "commitment_ok": true,
+  "P": "ZYYZ",
+  "conv_correct": true,
+  "q_correct": true
+ }
 }

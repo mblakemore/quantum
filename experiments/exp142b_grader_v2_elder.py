@@ -106,10 +106,11 @@ def q_meter(man, pubs):
     return out
 
 def verify_commitment():
-    c = json.load(open(os.path.join(RES, "exp142b_commitment_n4.json")))
-    r = json.load(open(os.path.join(RES, "exp142b_reveal_n4.json")))
-    pre = bytes.fromhex(r["salt_hex"]) + f"exp142b|{r['ensemble']}|{r['n']}|{r['P']}".encode()
-    ok = hashlib.sha256(pre).hexdigest() == c["sha256"]
+    r = json.load(open(os.path.join(RES, "exp142b_n4_REVEAL_ember.json")))
+    c = json.load(open(os.path.join(HERE, "..", r["commitment_file"])))
+    pre = bytes.fromhex(r["salt_hex"]) + f"exp142|{r['ensemble']}|{r['n']}|{r['P']}".encode()
+    digest = hashlib.sha256(pre).hexdigest()
+    ok = (digest == c["hash_sha256"]) and (c.get("ensemble") == r["ensemble"]) and (int(c["n"]) == int(r["n"]))
     return ok, r["P"]
 
 def main():
