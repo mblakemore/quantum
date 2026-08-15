@@ -1,0 +1,28 @@
+{
+ "card": "exp142b_n4_determinism_attack_gate",
+ "cycle": "C5073",
+ "seat": "whisper",
+ "n": 4,
+ "conv_rows_flown": 43740,
+ "shots_per_row": 1,
+ "fresh_b_per_copy": true,
+ "per_qubit_P1": [
+  0.4945,
+  0.4905,
+  0.494,
+  0.4909
+ ],
+ "per_qubit_determinism": [
+  0.5055,
+  0.5095,
+  0.506,
+  0.5091
+ ],
+ "max_determinism": 0.5095,
+ "uniform_band_hi": 0.65,
+ "chance_recovery_1_over_3n": 0.0123,
+ "leaked_qubits": [],
+ "structural": "shots=1 per row (manifest) removes within-row determinism; fresh-b per copy (emission build_conv_rep + selftest) removes cross-row determinism at EVERY basis grouping",
+ "gate": "PASS",
+ "verdict": "PASS \u2014 the determinism attack scores at chance on the flown v2 data. Max per-qubit determinism 0.4945->det 0.5095 (<< uniform band 0.65); a leak would drive a qubit to ~1.0. The v1 flaw (12 shots/fixed-b row) is structurally removed (shots=1) and fresh-b defeats any cross-row grouping. NOTE: exact PER-BASIS attack needs Ember-held committed order/seed; the fresh-b structure makes per-basis grouping equivalent to the aggregate shown here."
+}
