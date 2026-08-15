@@ -1,0 +1,18 @@
+{
+ "card": "unfold_U5_epoch_drift",
+ "cycle": "C5073",
+ "pin_ok": true,
+ "W1": {
+  "refly": -0.016272702733968303,
+  "i1": 0.12023254855069476,
+  "i2": 0.0665713377820146,
+  "i3": 0.011014948859165995
+ },
+ "ordinal_order": [
+  "refly",
+  "i1",
+  "i2"
+ ],
+ "rank_time_corr": 0.602321936023387,
+ "verdict": "LOW-POWER / NO RESOLVABLE DRIFT: n<=4 draws, ordinal time only, W1 not monotone (rank-time vs W1 r=0.602321936023387). Real observation: refly (earliest, a WIN) sits at W1~0 while the distribution draws carry positive ghost power (i1 0.12 > i2 0.07 > i3 0.01). A drift test needs ABSOLUTE job timestamps (runtime metadata) + more draws \u2014 named, not forced."
+}

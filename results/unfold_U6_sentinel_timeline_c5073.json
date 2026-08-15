@@ -1,0 +1,377 @@
+{
+ "card": "unfold_U6_sentinel_timeline",
+ "cycle": "C5073",
+ "pin_ok": true,
+ "n_flights": 61,
+ "mean_corr": 0.9599180327868853,
+ "std_corr": 0.015135773585506364,
+ "sentinels": [
+  {
+   "file": "ue_exp142_p1_day_effect_pairs_",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.9575
+  },
+  {
+   "file": "ue_exp142_p1_day_effect_pairs_",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.94
+  },
+  {
+   "file": "ue_exp142_p1_day_effect_pairs_",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.9475
+  },
+  {
+   "file": "ue_exp142_p1_day_effect_pairs_",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.935
+  },
+  {
+   "file": "ue_exp142_p1_n4_d9hr6n0gk0ls73",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.9925
+  },
+  {
+   "file": "ue_exp142_p1_n4_d9hr6nogk0ls73",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.9925
+  },
+  {
+   "file": "ue_exp142_p1_n6_d9hrarggk0ls73",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.99
+  },
+  {
+   "file": "ue_exp142_p1_n6_d9hratrsbqfc73",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.9825
+  },
+  {
+   "file": "ue_exp142_p1_n8_d9hrobggk0ls73",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.985
+  },
+  {
+   "file": "ue_exp142_wave1_n10_d9c8cvvngv",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.985
+  },
+  {
+   "file": "ue_exp142_wave1_n4_d9c8crfngvl",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.98
+  },
+  {
+   "file": "ue_exp142_wave1_n6_d9c8csvngvl",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.98
+  },
+  {
+   "file": "ue_exp142_wave1_n8_d9c8cu7ngvl",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.9875
+  },
+  {
+   "file": "ue_exp142b_n6_d9hehl3sbqfc73ep",
+   "family": "exp142",
+   "n": 400,
+   "bell_corr": 0.98
+  },
+  {
+   "file": "ue_exp144_conv_n4_k1_w1_a2_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.935
+  },
+  {
+   "file": "ue_exp144_conv_n4_k1_w1_d9cpbk",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9475
+  },
+  {
+   "file": "ue_exp144_conv_n4_k1_w2_d9crac",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9475
+  },
+  {
+   "file": "ue_exp144_conv_n4_k2_w1_a2_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.965
+  },
+  {
+   "file": "ue_exp144_conv_n4_k2_w1_d9cpbn",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9575
+  },
+  {
+   "file": "ue_exp144_conv_n4_k2_w2_d9crac",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.945
+  },
+  {
+   "file": "ue_exp144_conv_n4_k3_w1_a2_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.965
+  },
+  {
+   "file": "ue_exp144_conv_n4_k3_w1_d9cpbp",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9725
+  },
+  {
+   "file": "ue_exp144_conv_n4_k3_w2_d9crac",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.95
+  },
+  {
+   "file": "ue_exp144_conv_n4_k4_w1_a2_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9475
+  },
+  {
+   "file": "ue_exp144_conv_n4_k4_w1_d9cpbs",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9275
+  },
+  {
+   "file": "ue_exp144_conv_n4_k4_w2_d9crad",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.97
+  },
+  {
+   "file": "ue_exp144_conv_n4_k5_w1_a2_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.95
+  },
+  {
+   "file": "ue_exp144_conv_n4_k5_w1_d9cpbu",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.945
+  },
+  {
+   "file": "ue_exp144_conv_n4_k5_w2_d9crad",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.95
+  },
+  {
+   "file": "ue_exp144_conv_n4_w3_cobatch_d",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9675
+  },
+  {
+   "file": "ue_exp144_conv_n4_w4_cobatch_d",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9525
+  },
+  {
+   "file": "ue_exp144_conv_n6_k1_w1_a2_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.955
+  },
+  {
+   "file": "ue_exp144_conv_n6_k1_w1_d9cpc0",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9725
+  },
+  {
+   "file": "ue_exp144_conv_n6_k2_w1_a2_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9575
+  },
+  {
+   "file": "ue_exp144_conv_n6_k2_w1_d9cpc2",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.94
+  },
+  {
+   "file": "ue_exp144_conv_n6_k3_w1_a2_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.96
+  },
+  {
+   "file": "ue_exp144_conv_n6_k3_w1_d9cpc4",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.965
+  },
+  {
+   "file": "ue_exp144_conv_n6_k4_w1_a2_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9375
+  },
+  {
+   "file": "ue_exp144_conv_n6_k4_w1_d9cpc7",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9625
+  },
+  {
+   "file": "ue_exp144_conv_n6_k5_w1_a2_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.97
+  },
+  {
+   "file": "ue_exp144_conv_n6_k5_w1_d9cpc9",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.955
+  },
+  {
+   "file": "ue_exp144_conv_n8_k1_w1_d9cpcb",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9575
+  },
+  {
+   "file": "ue_exp144_conv_n8_k2_w1_d9cpcd",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.96
+  },
+  {
+   "file": "ue_exp144_conv_n8_k3_w1_d9cpcf",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9525
+  },
+  {
+   "file": "ue_exp144_conv_n8_k4_w1_d9cpci",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.94
+  },
+  {
+   "file": "ue_exp144_conv_n8_k5_w1_d9cpck",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.975
+  },
+  {
+   "file": "ue_exp144_quantum_n4_k1_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9475
+  },
+  {
+   "file": "ue_exp144_quantum_n4_k2_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9625
+  },
+  {
+   "file": "ue_exp144_quantum_n4_k3_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.955
+  },
+  {
+   "file": "ue_exp144_quantum_n4_k4_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9525
+  },
+  {
+   "file": "ue_exp144_quantum_n4_k5_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9625
+  },
+  {
+   "file": "ue_exp144_quantum_n6_k1_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.965
+  },
+  {
+   "file": "ue_exp144_quantum_n6_k2_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9625
+  },
+  {
+   "file": "ue_exp144_quantum_n6_k3_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.965
+  },
+  {
+   "file": "ue_exp144_quantum_n6_k4_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.945
+  },
+  {
+   "file": "ue_exp144_quantum_n6_k5_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.95
+  },
+  {
+   "file": "ue_exp144_quantum_n8_k1_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.96
+  },
+  {
+   "file": "ue_exp144_quantum_n8_k2_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9575
+  },
+  {
+   "file": "ue_exp144_quantum_n8_k3_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.97
+  },
+  {
+   "file": "ue_exp144_quantum_n8_k4_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9575
+  },
+  {
+   "file": "ue_exp144_quantum_n8_k5_w1_d9c",
+   "family": "exp144",
+   "n": 400,
+   "bell_corr": 0.9525
+  }
+ ],
+ "verdict": "DEVICE-HEALTH SERIES BUILT: 61 flights (structural exp142/exp144 set), sentinel Bell fidelity 0.960 +/- 0.015 \u2014 a tight healthy band, the raw material for a per-flight/per-device timeline (F112-kin device gauge). Absolute-time ordering still needs job timestamps (as U5) to become a true time-series."
+}

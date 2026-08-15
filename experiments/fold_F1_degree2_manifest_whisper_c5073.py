@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+"""FOLD F1 — degree-2-in-rho envelope-capability manifest (Whisper C5073). $0. FROZEN.
+A machine-readable declaration of which classical estimation problems FOLD through the two-copy Bell
+envelope (native operation: quadratics in rho), grounded in this session's verified runs. Not a
+computation — a routing table so future degree-2 questions go to the right lane. Each entry carries
+its status + the evidence that fixed it.
+"""
+import json, os
+RES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results")
+manifest = {
+ "card": "fold_F1_degree2_manifest", "cycle": "C5073",
+ "envelope": "two-copy Bell sampling of rho(x)rho; native operation E[v_Q]=tr(Q rho)^2 (SIGN-FREE)",
+ "fold_rule": "a classical estimand folds iff it is expressible as a degree-2 (quadratic) functional "
+              "of rho AND matches the envelope's copy structure (same-state rho(x)rho vs cross rho_i(x)rho_j)",
+ "functionals": [
+   {"name": "tr(Q rho)^2 per Pauli", "needs": "rho(x)rho same-state", "status": "FLOWN (F122)",
+    "evidence": "U0/U1 pin: D.estimate reproduces graded tr2 exactly (0.37019=0.37019)"},
+   {"name": "signed tr(Q rho) (the phase)", "needs": "single-copy shadow, cost 3^weight",
+    "status": "WALLED for high weight (dig A); boundary-only (w<=3) via conv shadows (U3)",
+    "evidence": "U1 premise-correction: two-copy is sign-free at ALL weights, the square is the point"},
+   {"name": "purity tr(rho^2) FULL", "needs": "rho(x)rho", "status": "WALLED (4^n-term variance)",
+    "evidence": "naive symmetric SWAP purity -> NO-TEST earlier this session"},
+   {"name": "purity-in-weight shell power S_w", "needs": "rho(x)rho", "status": "BUILT (U2a)",
+    "evidence": "boundary shells w<=2 at floor except the w=1 ghost; mass at planted weight"},
+   {"name": "Renyi-2 entropy -log tr(rho^2)", "needs": "rho(x)rho", "status": "rides U2a boundary bound"},
+   {"name": "cross-state fidelity tr(rho_i rho_j)", "needs": "rho_i(x)rho_j (DIFFERENT states/copies)",
+    "status": "NEEDS FLIGHT (U2b, gated on GO) — GAP-2: same-state flights CANNOT see it",
+    "evidence": "the corrected ponder; a cheap ALT4 flight = a prep-reproducibility instrument"},
+   {"name": "state overlap / SWAP test", "needs": "rho_i(x)rho_j", "status": "same lane as U2b (flight)"}
+ ],
+ "apparatus_noise_model (built this session, U0)":
+   {"form": "tr2_measured = tr2_ideal * f^(2*weight), uniform per-qubit fidelity",
+    "f": 0.9528, "f_spread": 0.0018, "validated": "reproduces all 4 sealed-P tr2 to 0.2% (walks like a duck)",
+    "use": "predicts tr2 at any weight for the F122 lane; the ghost is NOT the limiter (U0 null)"},
+ "verdict": "MANIFEST EMITTED: 4 functionals fold on banked same-state data (2 built this session: "
+            "purity-in-weight U2a, noise-model U0), 2 need a cross-state flight (U2b), 1 is phase-walled "
+            "(dig A, boundary-only via U3). The routing table is the reusable artifact."
+}
+json.dump(manifest, open(os.path.join(RES, "fold_F1_degree2_manifest_c5073.json"), "w"), indent=1)
+print("F1 manifest emitted:", manifest["verdict"])
+for fdef in manifest["functionals"]:
+    print(f"  - {fdef['name']:32s} [{fdef['status'][:38]}]")

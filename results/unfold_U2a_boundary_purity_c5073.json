@@ -1,0 +1,172 @@
+{
+ "card": "unfold_U2a_boundary_purity",
+ "cycle": "C5073",
+ "draws": {
+  "i1": {
+   "planted_P": "ZIXIXXIZZZZZZIYI",
+   "planted_weight": 11,
+   "graded_tr2": 0.37019475253920475,
+   "pin_ok": true,
+   "sigma0": 0.003707290678942949,
+   "shells": {
+    "0": {
+     "power": 1.0,
+     "K": 1,
+     "exact": true,
+     "floor_SE": 0.003707290678942949
+    },
+    "1": {
+     "power": 0.12023254855069475,
+     "K": 48,
+     "exact": true,
+     "floor_SE": 0.025684863257422825
+    },
+    "2": {
+     "power": 0.2994543630341264,
+     "K": 1080,
+     "exact": true,
+     "floor_SE": 0.12183400392514174
+    },
+    "4": {
+     "power_est": 133.72531233249495,
+     "mean_abs": 0.0031399322878727493,
+     "K_full": 147420,
+     "exact": false,
+     "sampled": 48
+    },
+    "8": {
+     "power_est": -66247.75852471859,
+     "mean_abs": 0.003430274376136744,
+     "K_full": 84440070,
+     "exact": false,
+     "sampled": 48
+    },
+    "11": {
+     "power_est": 13736.628788191128,
+     "mean_abs": 0.003557979081625641,
+     "K_full": 773778096,
+     "exact": false,
+     "sampled": 48
+    },
+    "16": {
+     "power_est": 26352.378370717026,
+     "mean_abs": 0.0038500391704119077,
+     "K_full": 43046721,
+     "exact": false,
+     "sampled": 48
+    }
+   }
+  },
+  "i2": {
+   "planted_P": "YYYXIZXZIIXXYZIY",
+   "planted_weight": 12,
+   "graded_tr2": 0.30084207181442646,
+   "pin_ok": true,
+   "sigma0": 0.003151204872942279,
+   "shells": {
+    "0": {
+     "power": 1.0,
+     "K": 1,
+     "exact": true,
+     "floor_SE": 0.003151204872942279
+    },
+    "1": {
+     "power": 0.06657133778201461,
+     "K": 48,
+     "exact": true,
+     "floor_SE": 0.021832187779978623
+    },
+    "2": {
+     "power": 0.028757546870034945,
+     "K": 1080,
+     "exact": true,
+     "floor_SE": 0.10355915953384122
+    },
+    "4": {
+     "power_est": 9.515312202097233,
+     "mean_abs": 0.002437010115453871,
+     "K_full": 147420,
+     "exact": false,
+     "sampled": 48
+    },
+    "8": {
+     "power_est": 41086.386141563395,
+     "mean_abs": 0.002062149136743989,
+     "K_full": 84440070,
+     "exact": false,
+     "sampled": 48
+    },
+    "12": {
+     "power_est": 250520.23757745465,
+     "mean_abs": 0.002902069431204321,
+     "K_full": 967222620,
+     "exact": false,
+     "sampled": 48
+    },
+    "16": {
+     "power_est": 8371.050665812678,
+     "mean_abs": 0.0020522190445927337,
+     "K_full": 43046721,
+     "exact": false,
+     "sampled": 48
+    }
+   }
+  },
+  "i3": {
+   "planted_P": "IXZYZIZYZXZZZIXX",
+   "planted_weight": 13,
+   "graded_tr2": 0.28105603636681525,
+   "pin_ok": true,
+   "sigma0": 0.0033056812656584132,
+   "shells": {
+    "0": {
+     "power": 1.0,
+     "K": 1,
+     "exact": true,
+     "floor_SE": 0.0033056812656584132
+    },
+    "1": {
+     "power": 0.011014948859165995,
+     "K": 48,
+     "exact": true,
+     "floor_SE": 0.02290243162299585
+    },
+    "2": {
+     "power": -0.06643937407116006,
+     "K": 1080,
+     "exact": true,
+     "floor_SE": 0.10863577182740043
+    },
+    "4": {
+     "power_est": 99.07258064516128,
+     "mean_abs": 0.002373094967508815,
+     "K_full": 147420,
+     "exact": false,
+     "sampled": 48
+    },
+    "8": {
+     "power_est": 32064.56456530291,
+     "mean_abs": 0.0026899932977824405,
+     "K_full": 84440070,
+     "exact": false,
+     "sampled": 48
+    },
+    "13": {
+     "power_est": 126019.20731707328,
+     "mean_abs": 0.002319367951744034,
+     "K_full": 892820880,
+     "exact": false,
+     "sampled": 48
+    },
+    "16": {
+     "power_est": -3292.759933123527,
+     "mean_abs": 0.002883956930967159,
+     "K_full": 43046721,
+     "exact": false,
+     "sampled": 48
+    }
+   }
+  }
+ },
+ "verdict": "BOUNDARY-STRUCTURE: a low-weight shell carries resolvable mass above floor"
+}

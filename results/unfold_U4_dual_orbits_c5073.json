@@ -1,0 +1,23 @@
+{
+ "card": "unfold_U4_dual_orbits",
+ "cycle": "C5073",
+ "pin_min_eig_match": true,
+ "obj_ratio_to_banked": 0.5,
+ "pin_min_eig": -3.6168555064666107e-07,
+ "lam_max": 0.23708748558270576,
+ "rank_1e3": 440,
+ "rank_1e4": 456,
+ "rank_1e6": 467,
+ "k99_directions": 403,
+ "top8_eigenvalues": [
+  0.23709,
+  0.21531,
+  0.21075,
+  0.16749,
+  0.15164,
+  0.14869,
+  0.14869,
+  0.14869
+ ],
+ "verdict": "NEAR-FULL-RANK (rank 456/512): the wall is generic, no compressible structure"
+}
