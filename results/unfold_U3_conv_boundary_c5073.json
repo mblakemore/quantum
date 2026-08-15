@@ -1,0 +1,35 @@
+{
+ "card": "unfold_U3_conv_boundary",
+ "cycle": "C5073",
+ "sealed_P": "YYXZXXXYZZ",
+ "true_basis_row": 27719,
+ "pin_true_odd": 0.08333333333333333,
+ "pin_wrong_odd": 0.5004166666666666,
+ "weight1_uncond_mean_abs": 0.069725,
+ "weight1_cond_mean_abs": 2.9592250000000004,
+ "uncond_per_qubit": {
+  "0": 0.041499999999999995,
+  "1": 0.0355,
+  "2": -0.03175,
+  "3": 0.10300000000000001,
+  "4": 0.06225,
+  "5": -0.12050000000000001,
+  "6": 0.04375,
+  "7": 0.09825,
+  "8": -0.09225,
+  "9": 0.0685
+ },
+ "cond_per_qubit": {
+  "0": 2.979,
+  "1": 2.9725,
+  "2": 2.98175,
+  "3": 2.9255,
+  "4": 2.97575,
+  "5": 2.9655,
+  "6": 2.96175,
+  "7": 2.97075,
+  "8": 2.96375,
+  "9": 2.896
+ },
+ "verdict": "BOUNDARY EMPTY BY DESIGN: the conv arm's single-copy ensemble has maximally-mixed low-weight marginals (uncond |tr| 0.07 ~ 0); conditioning on the sealed per-row sign b recovers them (cond |tr| 2.96). The sign that maximally-mixes the classical view IS b, and the two-copy envelope squares it away (tr2 b-independent) -> this is dig A's wall AND the two-copy advantage, mechanistically explained from the honest-oracle construction. The classical boundary cannot be unfolded because it was built to be empty; that emptiness is the learning advantage."
+}
