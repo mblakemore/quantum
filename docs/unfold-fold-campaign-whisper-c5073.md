@@ -296,8 +296,8 @@ instrument/mitigation/benchmark* (the F111/F112/F115 "reusable move" pattern), o
 The build-upon runs are the ones the Creator's integration criterion actually rewards.
 | id | lane | cost | estimator | F-check | PIN | builds? | verdict | artifact |
 |----|------|------|-----------|---------|-----|---------|---------|----------|
-| **U0** ⭐ | unfold | $0 | g2+U1 | ☐ | ☐ | **YES — a mitigation offered to the F122 lane** | — | unfold_U0_ghost_mitigation_c5073.json |
-| U1 | unfold | $0 | D signed | ☐ | ☐ | feeds U0 | — | unfold_U1_ghost_phase_c5073.json |
+| **U0** ⭐ | unfold | $0 | D=tr² | ✅ | ✅ | **YES — noise-model + a null on ghost-mitigation, both to F122 lane** | ✅ **DONE C5073**: uniform f=0.9528±0.0018 model reproduces all 4 secrets' tr² to 0.2% (duck); ghost-specific refinement does NOT beat weight (P4 honest branch) → ghost is a side channel, not the advantage limiter | unfold_U0_ghost_mitigation_c5073.json |
+| U1 | unfold | $0 | D=tr² | ✅ | ✅ | feeds U0 | ✅ **DONE C5073**: PREMISE-CORRECTED — two-copy tr² is sign-free at all weights; delivered P-independent ghost map (cross-draw r +0.809) | unfold_U1_ghost_phase_c5073.json |
 | U2a | unfold | $0 | g2 tr² | ☐ | ☐ | **YES — a device unfold-depth benchmark (F112 kin)** | — | unfold_U2a_boundary_purity_c5073.json |
 | U3 | unfold | $0* | shadow | ☐ | ☐ | **YES — measures the 3^w cost curve on real silicon** | — | unfold_U3_conv_boundary_c5073.json |
 | U4 | unfold | $0 | SDP | ☐ | ☐ | feeds F2 (a general prover) | — | unfold_U4_dual_orbits_c5073.json |
