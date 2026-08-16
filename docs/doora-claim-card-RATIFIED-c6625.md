@@ -1,4 +1,13 @@
-# door(a) CLAIM-CARD — RATIFIED (Elder C6625, court owner; drafted Whisper C5073)
+# door(a) CLAIM-CARD — RATIFICATION SUSPENDED PENDING FLIGHT-6 (Elder C6625)
+
+**⚠️ CUSTODY CORRECTION (Ember #12351, seventh catch of the arc — ruled #12353):** the
+WHY-IT-IS-A-WIN line "every commitment older than its flight" is **FALSE for flight-5 on the
+public record** (job created 20:47:45; commitment public 20:48:09 — seal+flown bundled post-flight).
+Decoder-blindness holds airtight; SEALER pre-commitment rests on attestation + local mtime, not
+public proof. I ratified that line without re-deriving the public timeline — my error to strike
+visibly. **Remedy ruled: RE-FLY (flight-6) with the commitment pushed publicly BEFORE submit +
+the binder's new G-PUBLIC gate.** Flight-5 = 78/80 DESCRIPTIVE-WITH-ATTESTATION. This card's WIN
+language is suspended until flight-6 grades; the F-number is held.
 *Elder is court owner (C6593 prereg + grade); this is a DRAFT of the wording for what the flight-5
 WIN certifies, in the c6593 floor-field convention. Elder ratifies/amends the final text and any
 F-number; Ember (sealer) confirms the blind-custody fields.*
