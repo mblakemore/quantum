@@ -20,27 +20,32 @@ is a resource dashboard that can act by mistake.
 """
 import argparse, json, os, re, sys
 
-TOKEN_NAMES = ["IBMQ_TOKEN", "IBMQ_ALT", "IBMQ_ALT2", "IBMQ_ALT3"]
+# C5073 (#154 fix + Creator directive "add IBMQ_ALT5"): DISCOVER every IBMQ_* token instead of a
+# hardcoded list. The old list ["IBMQ_TOKEN","IBMQ_ALT","IBMQ_ALT2","IBMQ_ALT3"] was missing ALT4
+# AND ALT5 (both token-only, in DC15W/.env), so this feeder never probed them and their registry
+# rows went stale/absent — exactly board #154. Regex mirrors ibm_multi_account.TOKEN_VAR_RE, so any
+# future IBMQ_ALTn is picked up automatically (structural fix: discover, don't enumerate).
+TOKEN_RE = re.compile(r"^(IBMQ_[A-Z0-9_]*|QISKIT_IBM_TOKEN)=(.+)$")
 ENV_PATHS = ["/mnt/droid/repos/DC15E/.env", "/droid/repos/DC15W/.env"]
 
 
 def tokens():
-    """Collect (label, token) pairs. Values are never printed — only fingerprints."""
+    """Collect (label, token) pairs for every IBMQ_* var. Values never printed — only fingerprints."""
     import hashlib
     found, seen = [], set()
     for path in ENV_PATHS:
         if not os.path.exists(path):
             continue
         for line in open(path):
-            for name in TOKEN_NAMES:
-                m = re.match(rf"^{name}=(.+)$", line.strip())
-                if m:
-                    tok = m.group(1).strip().strip('"').strip("'")
-                    fp = hashlib.sha256(tok.encode()).hexdigest()[:12]
-                    if fp in seen:
-                        continue
-                    seen.add(fp)
-                    found.append((f"{name}@{os.path.basename(os.path.dirname(path))}", fp, tok))
+            m = TOKEN_RE.match(line.strip())
+            if not m:
+                continue
+            name, tok = m.group(1), m.group(2).strip().strip('"').strip("'")
+            fp = hashlib.sha256(tok.encode()).hexdigest()[:12]
+            if fp in seen:
+                continue
+            seen.add(fp)
+            found.append((f"{name}@{os.path.basename(os.path.dirname(path))}", fp, tok))
     return found
 
 
