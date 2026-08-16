@@ -79,15 +79,31 @@ def selftest():
     print(f"  selftest: {'PASS' if ok else 'FAIL'}")
     return ok
 
-def seal(n, M, prereg_freeze, oop, dry):
+def seal(n, M, prereg_freeze, oop, dry, balanced=False):
     if not selftest():
         sys.exit("REFUSING TO SEAL — selftest failed; the tool cannot reproduce a known digest.")
     a_bits = "".join(str(secrets.randbelow(2)) for _ in range(bits_len(n)))
-    labels = "".join(str(secrets.randbelow(2)) for _ in range(M))
+    # balanced=True: exactly M/2 zeros + M/2 ones, cryptographically shuffled.
+    # Whisper's WIN path asks for a BALANCED draw; the fair-coin default can
+    # come out e.g. 17/23, handing the decoder a marginal-prior edge
+    # (sealer catch 2026-08-16, general#12157). Refuses odd M under balanced.
+    if balanced:
+        if M % 2 != 0:
+            sys.exit(f"REFUSING — balanced draw needs even M, got {M}.")
+        arr = [0] * (M // 2) + [1] * (M // 2)
+        # Fisher-Yates with secrets (no Math.random-class bias)
+        for i in range(len(arr) - 1, 0, -1):
+            j = secrets.randbelow(i + 1)
+            arr[i], arr[j] = arr[j], arr[i]
+        labels = "".join(map(str, arr))
+        assert labels.count("1") == M // 2, "balance invariant broken"
+    else:
+        labels = "".join(str(secrets.randbelow(2)) for _ in range(M))
     salt = secrets.token_hex(16)
     h = digest(n, a_bits, labels, salt)
     A = bits_to_A(a_bits, n)
     public = {"spec": SPEC, "n": n, "M": M, "commitment_sha256": h,
+              "label_draw": "balanced-50/50-shuffled" if balanced else "fair-coin-iid",
               "prereg_freeze": prereg_freeze, "order_of_operations": oop,
               "bits_A": bits_len(n), "note": "A upper-triangular INCL diagonal; prep = H^n, Z on set diagonal bits, CZ on set off-diagonal bits (per quantum@0930a74). Secret and salt are OFF-GIT."}
     if dry:
@@ -119,7 +135,9 @@ if __name__ == "__main__":
     ap.add_argument("--prereg-freeze", default="")
     ap.add_argument("--oop", default="")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--balanced", action="store_true",
+                    help="exactly M/2 each label, shuffled (WIN-path requirement)")
     a = ap.parse_args()
     if a.cmd == "selftest":
         sys.exit(0 if selftest() else 1)
-    seal(a.n, a.M, a.prereg_freeze, a.oop, a.dry_run)
+    seal(a.n, a.M, a.prereg_freeze, a.oop, a.dry_run, balanced=a.balanced)
