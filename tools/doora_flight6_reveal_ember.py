@@ -62,9 +62,9 @@ def main():
         "label_convention": "1=ALT, 0=NULL",
         "sealed_draw": {"ALT": n_alt, "NULL": n_null},
         "decoders_committed_pre_unseal": {
-            "elder_decisions_sha256": "ELDER_DECISIONS_SHA256_PENDING",
-            "elder_blind_split": "PENDING",
-            "whisper_blind_split": "PENDING"},
+            "elder_decisions_sha256": "8b8a7530f636b6a335963926112382e009cf9ba817585731333c1d85deeb2ff7",
+            "elder_blind_split": "40 ALT / 40 NULL",
+            "whisper_blind_split": "40 ALT / 40 NULL"},
         "criterion": "76/80 (frozen, Elder gen#12276)"}
 
     os.makedirs("results", exist_ok=True)

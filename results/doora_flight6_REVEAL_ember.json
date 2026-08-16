@@ -1,0 +1,104 @@
+{
+ "spec": "doora_deg2phase_v1",
+ "n": 8,
+ "M": 80,
+ "flight": "flight-6",
+ "A_bits": "101110101101110100010101000010000100",
+ "A": [
+  [
+   1,
+   0,
+   1,
+   1,
+   1,
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1,
+   0,
+   1,
+   1,
+   1,
+   0
+  ],
+  [
+   0,
+   0,
+   1,
+   0,
+   0,
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   1,
+   0,
+   1,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ ],
+ "labels": "10110101101110101001111011001000001000010000001111101110100011110110011010011000",
+ "salt": "c16b628d85924aabc3b2857c9e71d069",
+ "commitment_sha256": "72b8f60e07d868ed2df9ffa640f8aff32d0aa8a3e62b727b3439ee05a56ea490",
+ "verified_against": "72b8f60e07d868ed2df9ffa640f8aff32d0aa8a3e62b727b3439ee05a56ea490",
+ "label_convention": "1=ALT, 0=NULL",
+ "sealed_draw": {
+  "ALT": 40,
+  "NULL": 40
+ },
+ "decoders_committed_pre_unseal": {
+  "elder_decisions_sha256": "8b8a7530f636b6a335963926112382e009cf9ba817585731333c1d85deeb2ff7",
+  "elder_blind_split": "40 ALT / 40 NULL",
+  "whisper_blind_split": "40 ALT / 40 NULL"
+ },
+ "criterion": "76/80 (frozen, Elder gen#12276)"
+}
