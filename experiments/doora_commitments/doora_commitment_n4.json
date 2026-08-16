@@ -1,0 +1,11 @@
+{
+  "spec": "doora_deg2phase_v1",
+  "n": 4,
+  "M": 632,
+  "commitment_sha256": "98b799c9912a3853c5cb2bd5ea3de9a9607bec5cd6aee1e63927168cb9d6cd8d",
+  "label_draw": "balanced-50/50-shuffled",
+  "prereg_freeze": "H15 N1 positronic-neuron G2 seal. Binding triple RATIFIED two-seat (Elder #12427 + Whisper #12426): n=4, M=632 sealed graded SINGLE-SHOT trials (316 ALT / 316 NULL balanced), S=1. S=1 forced by currency (per-trial at 2 copies; shot-averaging = F119 units-inflation). Units catch (TRIALS-vs-SHOTS) caught three-seat before the cut. ALT = sealed |psi_A> deg-2 phase (door(a) convention, n=4, 10-bit A); NULL = maximally mixed I/2^n. 64 ungraded known-A cal rows outside the seal. Ceiling FROZEN 143/256, threshold 0.6040. G-PUBLIC: commitment pushed to origin BEFORE any flight",
+  "order_of_operations": "seal(balanced 316/316) -> commit+PUSH commitment public (G-PUBLIC pre-flight) -> G3 done -> G4 Creator GO -> N1 reflex flight S=1 -> Elder grades vs 0.6040 on reveal",
+  "bits_A": 10,
+  "note": "A upper-triangular INCL diagonal; prep = H^n, Z on set diagonal bits, CZ on set off-diagonal bits (per quantum@0930a74). Secret and salt are OFF-GIT."
+}
