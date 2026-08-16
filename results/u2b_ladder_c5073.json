@@ -1,0 +1,16 @@
+{
+ "card": "u2b_ladder",
+ "cycle": "C5073",
+ "job_id": "da0gol0b1g9c73a9qnqg",
+ "backend": "ibm_marrakesh",
+ "account": "IBMQ_ALT5",
+ "paulis": [
+  "XIII",
+  "XYII",
+  "XYZI",
+  "XYZX"
+ ],
+ "b": "0000",
+ "shots": 8192,
+ "status": "SUBMITTED"
+}
