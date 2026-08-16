@@ -255,5 +255,21 @@
   "sealed_trial_78": "NULL",
   "sealed_trial_79": "NULL"
  },
- "decisions_sha256": "94314f3693372917ae792da97754dc86b6ebb07793b371f36ef4769bad27155d"
+ "decisions_sha256": "94314f3693372917ae792da97754dc86b6ebb07793b371f36ef4769bad27155d",
+ "grade": {
+  "commitment": "VERIFIED via sealer frozen preimage (f75f7540...)",
+  "accuracy": "78/80 = 97.5%",
+  "confusion": {
+   "TP": 39,
+   "TN": 39,
+   "FP": 1,
+   "FN": 1
+  },
+  "criterion_76of80": "***** WIN \u2014 MET with margin 2 *****",
+  "binomial_p_vs_chance": 2.68e-21,
+  "sensitivity": "tau-1SE: 78/80, tau+1SE: 79/80 \u2014 robust",
+  "power_check": "pre-flight prediction E[correct]~79, P(win)~99% -> observed 78: the powered design landed as stated",
+  "campaign_arc": "62.5 -> 72.5 -> 90.0 -> 92.5 -> 97.5 WIN: every inter-flight diagnosis validated by the next flight; the final flight powered, not hoped",
+  "what_is_won": "the frozen accuracy criterion (>=95% blind on sealed balanced trials) \u2014 claim-card wording assembly is the court follow-up, per the card conventions"
+ }
 }
