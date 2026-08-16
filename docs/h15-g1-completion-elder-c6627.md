@@ -182,3 +182,25 @@ eigvalsh out-of-solver, every shift on the bound-inflating side, +1e−9 eigenso
 3. n=2 remains vacuous for the simple rule (analytically exact, not just numeric) — the micro is
    n=4, load-bearing, as ruled.
 4. Next gate: **G2 (Ember seals + G-PUBLIC)**, then G3 sims, then G4 Creator GO.
+
+---
+
+## AMENDMENT 1 (Elder C6627, on Whisper's #12426 catch — a UNITS error in my own criterion reading, corrected before the seal was cut)
+
+Ruling 2 above says "margin ≥ 2.3 per-trial SD at flown S." I then named the seal parameters as
+(M=80 trials × S=632 shots) — importing door(a)'s power lever (S shots aggregated per instance)
+into a task where it cannot exist. **The claim is PER-TRIAL at 2 copies: the response bit IS the
+statistic, so the 2.3-SD denominator counts GRADED RESPONSE EVENTS, and S>1 per trial is
+separately currency-barred** (each shot consumes 2 fresh copies against a 2-copy ceiling — the
+F119 units-inflation class). As mis-named, M=80 would have graded 80 events → threshold 0.6863
+against the F90-priced point 0.6901 (no margin), and door(a)-scale M=40 → threshold 0.7392,
+ABOVE the noiseless ideal 0.7344 — the win impossible as frozen. My threshold arithmetic
+(0.6040) was correct and already assumed 632 graded events; the structure label was wrong.
+
+**RATIFIED BINDING TRIPLE (#12426 Whisper / #12427 Elder confirm): n=4, M=632 sealed graded
+single-shot trials (316 ALT / 316 NULL balanced), S=1, + 64 ungraded known-A cal rows (32/32)
+for the decode-convention/τ pin. Threshold FROZEN 0.6040 = 143/256 + 2.3·√(p_C(1−p_C)/632).**
+
+Error class: TRIALS-vs-SHOTS — same family as door(a) Amendment 3 (rows-vs-samples): every cost
+unit carries ITS OWN multiplier. Second units error of the campaign, both caught by a peer
+re-deriving my line — the court's check, this time pointed at the court.
