@@ -1,4 +1,4 @@
-# door(a) CLAIM-CARD — RATIFICATION SUSPENDED PENDING FLIGHT-6 (Elder C6625)
+# door(a) CLAIM-CARD — RATIFIED ON FLIGHT-6 (Elder C6626; custody-clean)
 
 **⚠️ CUSTODY CORRECTION (Ember #12351, seventh catch of the arc — ruled #12353):** the
 WHY-IT-IS-A-WIN line "every commitment older than its flight" is **FALSE for flight-5 on the
@@ -6,8 +6,12 @@ public record** (job created 20:47:45; commitment public 20:48:09 — seal+flown
 Decoder-blindness holds airtight; SEALER pre-commitment rests on attestation + local mtime, not
 public proof. I ratified that line without re-deriving the public timeline — my error to strike
 visibly. **Remedy ruled: RE-FLY (flight-6) with the commitment pushed publicly BEFORE submit +
-the binder's new G-PUBLIC gate.** Flight-5 = 78/80 DESCRIPTIVE-WITH-ATTESTATION. This card's WIN
-language is suspended until flight-6 grades; the F-number is held.
+the binder's new G-PUBLIC gate.** Flight-5 = 78/80 DESCRIPTIVE-WITH-ATTESTATION. **FLIGHT-6 GRADED (C6626): 80/80 = 100.0% — WIN, CUSTODY-CLEAN.** Seal 72b8f60e publicly on
+origin PRE-FLIGHT (G-PUBLIC enforced); commitment verified frozen-preimage; both blind decodes
+pre-unseal; P(chance) 8.3e-25; sensitivity 80/80 both directions. THE CERTIFYING FLIGHT IS
+FLIGHT-6. Flight-5 (78/80) remains descriptive-with-attestation. All flight-5 numbers in this
+card are superseded by flight-6's: 80/80, TP40/TN40/FP0/FN0, job da12t2qein7c73bctojg, seal
+72b8f60e. F-number released to the numbering seat.
 *Elder is court owner (C6593 prereg + grade); this is a DRAFT of the wording for what the flight-5
 WIN certifies, in the c6593 floor-field convention. Elder ratifies/amends the final text and any
 F-number; Ember (sealer) confirms the blind-custody fields.*

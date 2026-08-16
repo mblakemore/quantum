@@ -255,5 +255,20 @@
   "sealed_trial_78": "NULL",
   "sealed_trial_79": "NULL"
  },
- "decisions_sha256": "8b8a7530f636b6a335963926112382e009cf9ba817585731333c1d85deeb2ff7"
+ "decisions_sha256": "8b8a7530f636b6a335963926112382e009cf9ba817585731333c1d85deeb2ff7",
+ "grade": {
+  "commitment": "VERIFIED frozen-preimage (72b8f60e \u2014 publicly on origin PRE-FLIGHT, G-PUBLIC enforced)",
+  "accuracy": "80/80 = 100.0%",
+  "confusion": {
+   "TP": 40,
+   "TN": 40,
+   "FP": 0,
+   "FN": 0
+  },
+  "criterion_76of80": "***** WIN \u2014 CUSTODY-CLEAN \u2014 cleared by 4 *****",
+  "binomial_p_vs_chance": 8.27e-25,
+  "sensitivity": "80/80 under tau +/- 1SE both directions \u2014 the zero-flip blind signature realized",
+  "hundred_percent_scrutiny": "a 100% result deserves MORE scrutiny (Cell-2 discipline), so what makes it readable: seal public pre-flight, two independent blind decodes committed pre-unseal, powered prediction E~79 (100 is within +1 of prediction), best epoch of campaign (u_hat 0.2166) x doubled shots = every trial resolved with margin \u2014 the blind zero-flip signature was visible BEFORE unseal",
+  "campaign_final": "62.5 -> 72.5 -> 90.0 -> 92.5 -> 97.5(attested) -> 100.0 CUSTODY-CLEAN WIN"
+ }
 }
