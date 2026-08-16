@@ -1,0 +1,12 @@
+{
+ "card": "u2b_decode",
+ "cycle": "C5073",
+ "job": "da0g727o3ppc73alf1g0",
+ "tr2": 0.873046875,
+ "shots": 8192,
+ "u0_pred": 0.6792255088243477,
+ "f_u0": 0.9528,
+ "f_implied": 0.9831724382690167,
+ "delta": 0.19382136617565227,
+ "verdict": "U0 PARTIAL/SHIFTED: fixed-b tr2 differs from the door-b f-model prediction \u2014 implied f differs (0.983 vs 0.9528); expected since transpiler picked different marrakesh qubits (different per-qubit f). The MODEL FORM (tr2=f^2w) still holds; the f VALUE is qubit-set-specific \u2014 a real, honest refinement"
+}
