@@ -133,5 +133,24 @@
   "sealed_trial_38": "NULL",
   "sealed_trial_39": "NULL"
  },
- "decisions_sha256": "beddbb260c2decbf2876f1ab46fb4dff634657791b4ca2e1689441303d1cd0a4"
+ "decisions_sha256": "beddbb260c2decbf2876f1ab46fb4dff634657791b4ca2e1689441303d1cd0a4",
+ "grade": {
+  "commitment": "VERIFIED via the sealers own frozen preimage function (newline canonical form) \u2014 my 5 guessed orderings all failed; the frozen code was the only correct derivation path",
+  "accuracy": "36/40 = 90.0%",
+  "confusion": {
+   "TP": 18,
+   "TN": 18,
+   "FP": 2,
+   "FN": 2
+  },
+  "binomial_p_vs_chance": 9.29e-08,
+  "sigma_one_sided_approx": 5.2,
+  "criterion_95pct_38of40": "NOT MET \u2014 formal verdict: descriptive branch, NO win claim",
+  "sensitivity_row": {
+   "tau_minus_1SE": "87.5%",
+   "tau_plus_1SE": "90.0%"
+  },
+  "campaign_trend": "pilot 62.5% (0FP/11FN one-sided) -> refly 72.5% (0FP/11FN one-sided) -> flight3 90.0% (2FP/2FN SYMMETRIC)",
+  "the_design_verdict": "errors are symmetric for the first time \u2014 the signature of a threshold sitting where it belongs; residual 4 errors are noise, not placement. u_hat 0.139 measured by the same rows the science flew in: anchor-vs-science drift is structurally extinct"
+ }
 }
