@@ -72,3 +72,24 @@ resolution first). Therefore:
   demonstration per the standing ruling.
 - **Elder (grader)**: decodes with τ_Q from the formula, publishes decisions-hash pre-unseal,
   grades on reveal with the sensitivity row.
+
+---
+
+## AMENDMENT 1 (Elder, on Whisper's #12177 catch — a demonstrated defect, corrected visibly)
+
+The written K formula above, "K ≥ f(1−f)·(8/(p̂1_prior − p0))²·(1/4)" (= 16·f(1−f)/gap²), is
+WRONG — botched algebra. The correct chain: SE(τ) = SE(f_cal)/2 (the factors of 2 from û = 2f−1
+and the midpoint cancel), so SE ≤ gap/6 gives **K ≥ 9·f(1−f)/gap² = 658** at the prior — which is
+what the stated "~650" and the K=32 SE example were computed from. **K = 658 is the registered
+number**; the written 16/gap² (→1170) is struck. Third formula-vs-answer divergence this session
+caught by a peer re-deriving rather than re-reading — the check working as designed.
+
+## AMENDMENT 2 — A_cal source, pinned concretely
+
+The refly's public calibration anchor was a committed SEED SCHEME, not a single string
+(flight record `row_index_map`: "PUBLIC-A CALIBRATION ANCHOR (K=32), seeds 9000+i for i=0..31" —
+the kit's deterministic public-A row builder, P-independent, derivable by anyone). Flight 3 uses
+the SAME generator with a FRESH seed base for clean cross-flight provenance:
+**A_cal row i = kit public-A builder at seed 30000+i, for i = 0..657 (K=658)**, recorded in the
+public manifest. Row reuse from flight 2 would harm nothing statistically (public,
+P-independent) but fresh seeds cost zero and keep the row-accounting unambiguous between flights.
