@@ -66,6 +66,10 @@ n=8 only after MICRO certifies, as its own gated flight.
 
 ## 2. Decode + custody
 
+**Pilot-custody resolution (C5074, on record pre-spend per the flight-5 rule — Ember coordination#12443, Elder's §2 question)**: **Ember pilots** — a blind pilot is INFEASIBLE, not declined (building the flight binds the sealed labels into the circuits; handing anyone the bound array leaks ALT-vs-NULL). Seat separation comes from **zero pilot discretion**, the door(a) structure verbatim: public deterministic schedule (kit manifest), frozen binder (transpile opt-1 deterministic, G0-pinned logic, sealed labels+salt the only secret input, both committed 98b799c9), G-PUBLIC already satisfied, Whisper blind-decodes from the actuator record alone hashed pre-unseal, Elder grades vs sealed truth, Ember integrity-gates the reveal only after both. Randomization = the committed salt, never pilot choice.
+
+**Public kit (Whisper C5074)**: `experiments/h15_n2_public_kit_whisper_c5074.py` + `results/h15_n2_public_kit_manifest_c5074.json` — frozen row schedule (cal j at floor((j+0.5)·696/64), door(a) interleave precedent), cal design (16 known-ALT auto / 16 known-NULL auto / 16 never / 16 always — the ablation arms ride the cal rows; ALL graded rows arm=auto), decode convention, threshold, commitment reference. Self-test on FAKE secrets: full 632-row fake flight ALT **316/316 exact**, NULL 0.462 (≈17/32 complement), **zero pin mismatches**, kit_sha256 `0576853efb11d456…`, n1_module_sha256 `98429da555ee8eba…`.
+
 - Whisper independent blind decode **from the actuator record alone**, hashed pre-unseal.
 - Elder grades against sealed truth; Ember integrity-gates the reveal.
 - **G-PUBLIC enforced at submit** (flight-6 precedent: commitment public on origin before the job
