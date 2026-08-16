@@ -364,27 +364,39 @@ noise of the statistic it judges — a flat band false-fires in both directions 
 0.65 band on 27-row determinism; R² on a 4-point small-range ladder). Null-calibrate; the per-qubit
 decomposition, not the R², was the honest read of the ladder.
 
-### 10.8 door(a) CERTIFIED WIN — the stabilizer-memory separation, flights 4→5 (C5073)
-Creator directive: "fly door-a flight-4" → "fly flight-5". The campaign's **first certified
-stabilizer-memory separation WIN** (A&S arXiv:2607.02444 class; single-copy hardness via the
-HH25 tester as the simulated C1 comparator).
+### 10.8 door(a) CERTIFIED WIN — the stabilizer-memory separation, flights 4→6 (C5073)
+Creator directive: "fly door-a flight-4" → "fly flight-5" → "fly flight-6". The campaign's **first
+certified stabilizer-memory separation WIN** (A&S arXiv:2607.02444 class; single-copy hardness via
+the HH25 tester as the simulated C1 comparator). **Certifying flight = flight-6, custody-clean.**
 
-**The result (Elder graded, Whisper cross-check 80/80, Ember integrity-gated reveal):**
-- **flight-5: 78/80 = 97.5%**, frozen criterion **76/80 CLEARED by two**, P(chance) = **2.7e-21**.
-  Confusion **TP 39 / TN 39 / FP 1 / FN 1** (symmetric); sensitivity 78–79/80 under τ±1SE (robust,
-  not a boundary graze). Commitment verified from the sealer's frozen preimage (sealed weeks ahead).
+**The result (Elder graded, Whisper cross-check 80/80 vs sealed truth, Ember integrity-gated reveal):**
+- **flight-6 (certifying): 80/80 = 100.0%**, frozen criterion **76/80 CLEARED by four**, P(chance)
+  = **8.3e-25**. Zero errors; sensitivity **80/80 under τ±1SE in BOTH directions** (the zero-flip
+  signature seen blind, realized as perfection). Ran on the best epoch of the campaign (u_hat
+  **0.2166**), which the in-flight τ_Q rode automatically. Powered prediction E[correct]~79 landed
+  within one trial. **The pre-commitment is on the PUBLIC CLOCK, not attestation:** commitment
+  72b8f60e was public on origin (commit 9358235) BEFORE the flight existed — **G-PUBLIC's first live
+  enforcement**. Both blind decodes (Whisper + Elder) hashed pre-unseal, both 40 ALT/40 NULL.
+- **flight-5: 78/80 = 97.5%** (P=2.7e-21, TP39/TN39/FP1/FN1) — a real result but rebadged **honestly
+  descriptive-with-attestation**: its commitment published ~24s AFTER the job (seal+flight bundled in
+  one post-flight commit), so "commitment older than its flight" was FALSE for the win flight. Ember
+  caught the custody gap (general#12351); Elder ruled a **re-fly for integrity, not for results** —
+  and the flight that flew on the public clock flew perfect.
 - **The arc, every rung diagnosed then fixed:** pilot 62.5% → refly 72.5% → flight-3 90.0% →
-  flight-4 92.5% → **flight-5 97.5% WIN**. Diagnosis chain, each validated by the next flight's
-  gain: anchor-vs-science drift → **in-job τ_Q** (flight-3, fixed the drift, symmetric errors
-  appeared) → **shot noise** (flights 3+4 both ~2 short at S=316; 6/6 errored trials NOISE-CLASS,
-  ≤1.4 SD from τ) → **S-doubling** (flight-5 S=316→632 halved per-trial variance → ~1%/side error,
-  delivered exactly 1FP/1FN, the engineered outcome with arithmetic posted pre-flight).
+  flight-4 92.5% → flight-5 97.5% (attested) → **flight-6 100.0% custody-clean**. Diagnosis chain,
+  each validated by the next flight's gain: anchor-vs-science drift → **in-job τ_Q** (flight-3, fixed
+  the drift, symmetric errors appeared) → **shot noise** (flights 3+4 both ~2 short at S=316; 6/6
+  errored trials NOISE-CLASS, ≤1.4 SD from τ) → **S-doubling** (flight-5 S=316→632 halved per-trial
+  variance → ~1%/side error) → **custody re-fly** (flight-6, same powered S=632 design, public
+  pre-commit → zero errors).
 
-**Why it is a real WIN, not a lucky draw:** blind (decoder never sees labels), pre-committed (every
-commitment older than its flight), commitment-verified from the frozen preimage, threshold traveling
-IN-JOB (the in-flight cal rows give the true u_anchor, killing the drift that lost flights 1&2), two
-independent decodes (Whisper + Elder) agreeing 80/80 with independently re-derived accept-parity, and
-the winning power stated in advance (E[correct]~79, P(win)~99%; observed 78).
+**Why it is a real WIN, not a lucky draw:** blind (decoder never sees labels), **pre-committed on the
+public clock** (72b8f60e on origin before the flight, G-PUBLIC-verified — the property flight-5 could
+only attest to), commitment-verified from the frozen preimage, threshold traveling IN-JOB (the
+in-flight cal rows give the true u_anchor, killing the drift that lost flights 1&2), two independent
+decodes (Whisper + Elder) agreeing 80/80 with independently re-derived accept-parity, and the winning
+power stated in advance (E[correct]~79, P(win)~99%; observed 80). **The 100% earns the scrutiny a
+100% demands** (the Cell-2 rule): every safeguard fired BEFORE the number existed.
 
 **Whisper's role across the arc:**
 - Built the **HH25 single-copy tester** from Elder's spec — sim-verify caught two court-critical
@@ -396,15 +408,26 @@ the winning power stated in advance (E[correct]~79, P(win)~99%; observed 78).
   30000/30032/30064; interleave maps), with **byte-identical two-seat cross-hashes** every flight.
 - Ran the **independent blind decode** each flight, matching the grader **80/80** via a from-scratch
   accept-parity re-derivation, **cal-PINNED** (the calibration data selects the decode convention:
-  halves 0.59 vs interleaved 0.51 — "cal-pins-the-convention", Elder's method-note-of-the-night).
+  halves 0.61 vs interleaved 0.51 — "cal-pins-the-convention", Elder's method-note-of-the-night);
+  on flight-6 self-verified 80/80 against the opened seal by his own hand, not on the announcement.
 - **Honestly reversed his own wrong call:** after flight-4 recommended STOPPING (misread shot noise
   as a true-rate ceiling); Elder's noise-class fit corrected it; the powered S flew and won. The
   reversal is on the record next to the win.
+- **Owned the propagated custody error:** the flight-5 claim-card (Whisper-drafted, Elder-ratified)
+  asserted "every commitment older than its flight" — false for flight-5. When Ember surfaced it,
+  Whisper corrected his own state and the card rather than defending the number, and flew the re-fly.
 
-**Six pre-spend catches across three seats, every one by re-deriving not re-reading** (HH25
-direction, HH25 rank, K-formula, binder-premise, cal-row doc-vs-code, row-vs-sample units), plus the
-shot-noise diagnosis itself — ~zero wasted QPU-s across five flights, ~50 QPU-s total.
+**Seven pre-spend catches across three seats, every one by re-deriving not re-reading** (HH25
+direction, HH25 rank, K-formula, binder-premise, cal-row doc-vs-code, row-vs-sample units, custody
+timeline), plus the shot-noise diagnosis itself — ~zero wasted QPU-s across six flights.
 
-**Fences / open:** the CLAIM-CARD wording (what 97.5%-blind-at-criterion certifies, with the c6593
-floor fields) is a **fresh court sitting**, deferred. door(a) is WON; F119 n=8 remains the last
-tank-gated frontier (~5,850 QPU-s).
+**Standing lesson banked:** a pre-commitment that can only be *attested* (seal + flight in one
+post-flight commit) is not the same integrity object as one on the *public clock* (seal pushed to
+origin before the flight exists). The re-fly cost was small; the distinction is the whole point of a
+commitment. G-PUBLIC now enforces it at submit — its first live catch was this arc.
+
+**Fences / open:** door(a) is **WON and CLOSED, custody-clean**; the claim-card ratification is
+RESTORED with flight-6 as the certifying flight (`docs/doora-claim-card-RATIFIED-c6625.md`), and
+**F123** is assigned (Ember's numbering seat — sibling of F122 door(b)). F119 n=8 remains the last
+tank-gated frontier
+(~5,850 QPU-s, ~30× the free tank — a paid-allocation call for the Creator).
