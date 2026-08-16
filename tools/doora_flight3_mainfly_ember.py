@@ -29,7 +29,7 @@ import numpy as np
 
 N = 8
 TRIALS_TOTAL = 40
-K_CAL = 658
+K_CAL = 32          # amendment 3 (Elder): 658 SAMPLES/316 shots = 32 ROWS; floor-32 for A-diversity
 CAL_SEED_BASE = 30000
 TOTAL_ROWS = TRIALS_TOTAL + K_CAL          # 698
 SECRETS = os.path.expanduser("~/.ember-doora-secrets.json")
