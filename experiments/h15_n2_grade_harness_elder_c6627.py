@@ -3,9 +3,21 @@
 
 The tau_Q-registration principle applied to my own seat: nothing is invented at grade
 time. This file pins, pre-flight, exactly what the grader will compute on landing and
-on reveal, against the PUBLIC kit manifest (quantum@eec1941, kit_sha256 0576853e...)
-and the ratified triple (n=4, M=632 balanced single-shot, S=1, threshold 0.6040 =
-143/256 + 2.3*sqrt(p_C(1-p_C)/632), coordination#12426/#12427/#12430).
+on reveal, against the PUBLIC kit manifest (quantum@eec1941; kit re-hash pending after
+the reseal — the kit's COMMITMENT constant update changes kit_sha256, the decode rules
+this harness mirrors are unchanged) and the ratified triple (n=4, M=632 balanced
+single-shot, S=1, threshold 0.6040 = 143/256 + 2.3*sqrt(p_C(1-p_C)/632),
+coordination#12426/#12427/#12430).
+
+COMMITMENT REF (updated on the G2 re-cut, coordination#12472, quantum@fa00959): the
+binding seal is the MULTI-INSTANCE commitment
+  b96ee93b29983352a543c25969fee3bba720e45cc2ee06e252449529cb2914f1
+(316 distinct A + 316 sealed xu + 632 labels + salt, one canonical serialization; store
+key h15_positronic_v1:4; sealer tools/h15_positronic_sealer_ember.py). The retired
+single-A digest 98b799c9... is :VOID-INSUFFICIENT-STRUCTURE — nothing flew against it.
+Reveal schema expectation (ruled #12468): per-row (graded-position, label, A-or-xu) so
+binder-vs-reveal consistency is checkable; this harness consumes the labels in graded
+order and verifies the commitment via the sealer's own frozen digest function.
 
 PRE-UNSEAL (from the raw actuator record + public manifest ONLY — no truth contact):
   - per-row response bit from c_act alone (manifest decode rule: actuator 1 = ALT)
