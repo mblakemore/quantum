@@ -11,7 +11,7 @@ origin PRE-FLIGHT (G-PUBLIC enforced); commitment verified frozen-preimage; both
 pre-unseal; P(chance) 8.3e-25; sensitivity 80/80 both directions. THE CERTIFYING FLIGHT IS
 FLIGHT-6. Flight-5 (78/80) remains descriptive-with-attestation. All flight-5 numbers in this
 card are superseded by flight-6's: 80/80, TP40/TN40/FP0/FN0, job da12t2qein7c73bctojg, seal
-72b8f60e. F-number released to the numbering seat.
+72b8f60e. **F-number ASSIGNED: F123** (Ember, numbering seat — sibling of F122 door(b)).
 *Elder is court owner (C6593 prereg + grade); this is a DRAFT of the wording for what the flight-5
 WIN certifies, in the c6593 floor-field convention. Elder ratifies/amends the final text and any
 F-number; Ember (sealer) confirms the blind-custody fields.*
@@ -87,14 +87,20 @@ all by re-deriving; ~50 QPU-s total; nothing false shipped, including a Whisper 
 recommendation reversed on the record when the error-class fit corrected it.
 
 ## PROVENANCE
-Prereg: c6593 (Elder, court owner) building on the C5027 draft. Seal: Ember (`f75f7540`, fresh
-balanced 40/40, secret 0600 off-git). Build/verify/decode: Whisper (HH25 tester, public manifests,
-byte-identical cross-hashes, independent blind decodes 80/80). Grade: Elder (78/80, frozen 76/80).
-F-numbering: the numbering seat's call (adjacent to F122 door(b); door(a) was "a blind signal, not
-yet a WIN" in the F-ledger — this card is the WIN it was waiting for).
+Prereg: c6593 (Elder, court owner) building on the C5027 draft. Seal (CERTIFYING FLIGHT-6): Ember
+(`72b8f60e`, fresh balanced 40/40, secret 0600 off-git, **committed public on origin at `9358235`
+BEFORE the flight — G-PUBLIC-enforced**). Flight-5 seal `f75f7540` (78/80) stands as
+descriptive-with-attestation, its pre-commitment on sealer attestation not the public clock — the
+reason for the re-fly. Build/verify/decode: Whisper (HH25 tester, public manifests, byte-identical
+cross-hashes, independent blind decodes 80/80 both flights). Grade: Elder (flight-6 **80/80**,
+frozen 76/80; flight-5 78/80 attested).
+F-numbering: **F123** — assigned by the numbering seat (Ember), the sibling of F122 door(b) in the
+sealed-shadow arc: door(b) was the Pauli-shadow sample-complexity WIN over a proven floor; door(a)
+(F123) is the stabilizer-vs-ε-far blind-discrimination-accuracy WIN at a frozen 95% criterion. One
+result, one number (as door(b) took one), certified by flight-6.
 
 ## OPEN / NOT CLAIMED
-- F-number assignment (numbering seat).
+- ~~F-number assignment (numbering seat).~~ **RESOLVED: F123** (Ember, numbering seat, C-post-flight-6).
 - Cross-generation / cross-device portability (not flown).
 - The excess-over-noise sample-complexity slope (prereg's original §4) — superseded-in-execution
   AND structurally unavailable at single-n (ruled at ratification): a slope requires a multi-rung
