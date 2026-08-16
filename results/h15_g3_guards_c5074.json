@@ -1,0 +1,59 @@
+{
+ "card": "h15_g3_guards",
+ "cycle": "C5074",
+ "ceiling_frozen": 0.55859375,
+ "M1_parity_blind": {
+  "pin_mismatches": 912,
+  "p_accept_alt": 1.0,
+  "p_accept_null": 1.0,
+  "success": 0.5,
+  "flags": [
+   "PIN-FAIL (0+912 mismatches)",
+   "NULL-accept 1.0000 off 17/32 (Wilson [0.9981,1.0000])"
+  ],
+  "caught": true
+ },
+ "M2_coin_flip": {
+  "pin_mismatches": 1523,
+  "p_accept_alt": 0.5205078125,
+  "p_accept_null": 0.5029296875,
+  "success": 0.5087890625,
+  "flags": [
+   "PIN-FAIL (491+1032 mismatches)",
+   "ALT-accept 0.5205 != 1.0 exact",
+   "NULL-accept 0.5029 off 17/32 (Wilson [0.4813,0.5246])"
+  ],
+  "caught": true
+ },
+ "S1_severed_xz": {
+  "pin_mismatches": 0,
+  "p_accept_alt": 0.55078125,
+  "p_accept_null": 0.5224609375,
+  "success": 0.51416015625,
+  "flags": [
+   "ALT-accept 0.5508 != 1.0 exact"
+  ],
+  "caught": true,
+  "beats_ceiling": false
+ },
+ "S1_severed_xx": {
+  "pin_mismatches": 0,
+  "p_accept_alt": 0.546875,
+  "p_accept_null": 0.53564453125,
+  "success": 0.505615234375,
+  "flags": [
+   "ALT-accept 0.5469 != 1.0 exact"
+  ],
+  "caught": true,
+  "beats_ceiling": false
+ },
+ "F1_f90_price": {
+  "f90_feedforward_integrity": 0.947,
+  "note": "fake backends carry NO feedforward noise model (F90 friction lineage) - price applied on top of the N1 estimate; 0.947 is a whole teleport correction chain, conservative for one conditional X",
+  "success_noisy_no_ff": 0.712646484375,
+  "success_noisy_with_ff_price": 0.6901059570312499,
+  "margin_over_frozen_ceiling": 0.13151220703124988,
+  "clears_2p3sd_threshold_S632": true
+ },
+ "verdict": "G3-PASS"
+}
