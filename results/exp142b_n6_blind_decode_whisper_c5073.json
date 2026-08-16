@@ -1,0 +1,15 @@
+{
+ "card": "exp142b_n6_blind_decode_whisper",
+ "cycle": "C5073",
+ "N": 6,
+ "p0": 0.95,
+ "guessed_P": "YYZZXZ",
+ "consensus": 20,
+ "median_copies": 18170,
+ "censored": 0,
+ "attack_max_det": 0.8571428571428572,
+ "attack_null_mean": 0.8616428571428573,
+ "attack_null_95": 0.8857142857142857,
+ "attack_pass": true,
+ "weight_guessed": 6
+}
