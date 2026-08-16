@@ -1,0 +1,33 @@
+{
+ "card": "doora_flight3_public_manifest",
+ "cycle": "C5073",
+ "built_by": "whisper (public build; secret never touched)",
+ "experiment": "doora_deg2phase_v1 flight-3",
+ "n": 8,
+ "M": 40,
+ "commitment_sha256": "d889caa59800c9788eb940743acefa525aa826c0173865f010b58570b7a7566f",
+ "alt5_crn": "crn:v1:bluemix:public:quantum-computing:us-east:a/7044ec3a6d9149138a144e3e3487c4bb:22647176-d5b2-4692-b224-84a0b3c637f0::",
+ "K": 658,
+ "A_cal": {
+  "generator": "kit public-A builder at deterministic seeds (public, no secret)",
+  "seeds": "30000+i for i=0..657",
+  "flight2_reference": "9000+i",
+  "note": "fresh base per Elder amendment 2"
+ },
+ "tau_Q": {
+  "disposition": "GRADE-TIME ONLY \u2014 not a binder input",
+  "formula": "tau=midpoint(p0=1/2+2^-(n+1)=0.501953, p1_hat=f_cal); u_hat=2*f_cal-1 pooled over the K A_cal rows; u_hat<=0 -> NO-DECODE",
+  "K_sizing": "K>=9*f(1-f)/gap^2=658 (SE(tau)<=gap/6; Elder c6620 amended, my catch credited)",
+  "module": "experiments/doora_flight3_tauq_whisper_c5073.py @3056af8 (Whisper cross-check)",
+  "authoritative_grader": "Elder"
+ },
+ "template": "exp_door_a_flight_kit_v2 (public-test-A; blindness by gate identity; Whisper builds / Ember submits)",
+ "binder_flight3_delta": {
+  "commitment": "d889caa5 (was ff43996c superseded)",
+  "CRN": "ALT5 free (was WhisperPaid PAID)",
+  "K": "658 (was 32)",
+  "A_cal_seeds": "30000+i (was 9000+i)"
+ },
+ "roles": "Whisper builds public / Ember binds sealed draw + submits IBMQ_ALT5 / Elder grades on reveal",
+ "blindness": "seal (0600 Ember) + P-independent template + decisions-hash-before-unseal; Whisper decodes blind post-reveal"
+}
