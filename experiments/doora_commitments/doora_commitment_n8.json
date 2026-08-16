@@ -2,10 +2,10 @@
   "spec": "doora_deg2phase_v1",
   "n": 8,
   "M": 80,
-  "commitment_sha256": "c31a1c861a840318c1baaa07bbb802d4f18876f3dd56b5c8c0a9016b73a6cdaa",
+  "commitment_sha256": "f75f7540109472a09c409943f0253ced63149790b19ef13a576cdf53838e6622",
   "label_draw": "balanced-50/50-shuffled",
-  "prereg_freeze": "flight-4 M=80 WIN attempt at flight-3-proven architecture; criterion 76/80 (frozen 95% bar, Elder general#12276 UNCHANGED); n=8 S=316 K=32 all unchanged; in-job interleaved tau_Q; A_cal fresh base 30032+i i=0..31; interleave sealed j at floor((j+0.5)*112/80)",
-  "order_of_operations": "seal(balanced 40/40) -> Whisper wires tau_Q verbatim + A_cal/K manifest + M=80 interleave -> fly pure-Q ALT5 -> Elder hashes decisions pre-unseal, grades on reveal",
+  "prereg_freeze": "flight-5 M=80 S=632 POWERED WIN attempt; S 316->632 is the sole change (binding lever per Elder 6/6-noise-class analysis gen#12307); criterion 76/80 frozen; n=8 K=32 unchanged; in-job interleaved tau_Q; A_cal fresh base 30064+i i=0..31 (Elder gen#12316); interleave sealed j at floor((j+0.5)*112/80), S-independent",
+  "order_of_operations": "seal(balanced 40/40) -> Whisper wires manifest S=632 + cal/K + interleave -> fly pure-Q ALT5 632 shots -> Elder hashes decisions pre-unseal, grades 76/80 on reveal",
   "bits_A": 36,
   "note": "A upper-triangular INCL diagonal; prep = H^n, Z on set diagonal bits, CZ on set off-diagonal bits (per quantum@0930a74). Secret and salt are OFF-GIT."
 }

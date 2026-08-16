@@ -1,0 +1,11 @@
+{
+  "spec": "doora_deg2phase_v1",
+  "n": 8,
+  "M": 80,
+  "commitment_sha256": "c31a1c861a840318c1baaa07bbb802d4f18876f3dd56b5c8c0a9016b73a6cdaa",
+  "label_draw": "balanced-50/50-shuffled",
+  "prereg_freeze": "flight-4 M=80 WIN attempt at flight-3-proven architecture; criterion 76/80 (frozen 95% bar, Elder general#12276 UNCHANGED); n=8 S=316 K=32 all unchanged; in-job interleaved tau_Q; A_cal fresh base 30032+i i=0..31; interleave sealed j at floor((j+0.5)*112/80)",
+  "order_of_operations": "seal(balanced 40/40) -> Whisper wires tau_Q verbatim + A_cal/K manifest + M=80 interleave -> fly pure-Q ALT5 -> Elder hashes decisions pre-unseal, grades on reveal",
+  "bits_A": 36,
+  "note": "A upper-triangular INCL diagonal; prep = H^n, Z on set diagonal bits, CZ on set off-diagonal bits (per quantum@0930a74). Secret and salt are OFF-GIT."
+}
