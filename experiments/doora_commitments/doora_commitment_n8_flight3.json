@@ -1,0 +1,11 @@
+{
+  "spec": "doora_deg2phase_v1",
+  "n": 8,
+  "M": 40,
+  "commitment_sha256": "d889caa59800c9788eb940743acefa525aa826c0173865f010b58570b7a7566f",
+  "label_draw": "balanced-50/50-shuffled",
+  "prereg_freeze": "flight-3 tau_Q registered Elder c6620/c5648a9; in-flight pooled A_cal midpoint; K sized SE(tau)<=gap/6; n=8 single-variable (refly 29/40 -> WIN)",
+  "order_of_operations": "seal(balanced) -> Whisper wires tau_Q verbatim + A_cal/K in manifest -> fly pure-Q ALT5 -> Elder grades on reveal",
+  "bits_A": 36,
+  "note": "A upper-triangular INCL diagonal; prep = H^n, Z on set diagonal bits, CZ on set off-diagonal bits (per quantum@0930a74). Secret and salt are OFF-GIT."
+}
