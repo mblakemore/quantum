@@ -9,7 +9,7 @@
  "cal_design": "16 known-ALT auto + 16 known-NULL auto + 16 known-ALT never + 16 known-ALT always",
  "decode": "Bell map (a,b)->(b,a); accept=XOR_i(a_i AND b_i)==0; actuator 1=ALT; read c_act only",
  "threshold_frozen": 0.604,
- "commitment": "98b799c9912a3853",
+ "commitment": "b96ee93b29983352a543c25969fee3bba720e45cc2ee06e252449529cb2914f1",
  "binder_rules": "transpile opt1 seed 5074, single job, S=1/row, layout-gated register",
  "selftest": {
   "n_tested": 119,
@@ -17,6 +17,6 @@
   "fails": [],
   "ok": true
  },
- "kit_sha256": "0576853efb11d4569f45208bf83b368d616b1f4f573f537f1dae2fc6f4c11aad",
+ "kit_sha256": "9cbd70471fc4a4f259e0f6c30c65e560f3231998821a62b658f0f9d2be22ffad",
  "n1_module_sha256": "98429da555ee8eba5f78717b975b7c4ddc47fc99945b90947ae88f0ef43ec7c6"
 }

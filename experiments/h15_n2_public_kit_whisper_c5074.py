@@ -18,7 +18,7 @@ FROZEN CONSTANTS (any change = a new kit hash = a new GO):
     1 = "respond ALT". Response read from c_act ONLY.
   CRITERION: accuracy over the 632 graded rows > 0.6040
     (= 143/256 + 2.3*sqrt(p_C(1-p_C)/632), FROZEN, Elder #12427).
-  COMMITMENT: 98b799c9912a3853 (public on origin, quantum@90e640f).
+  COMMITMENT: b96ee93b2998... (multi-instance re-seal: 316 distinct A + 316 sealed xu + 632 labels + salt, public on origin quantum@fa00959; predecessor 98b799c9 VOID-INSUFFICIENT-STRUCTURE).
   BINDER RULES (Ember): transpile optimization_level=1 deterministic seed 5074,
     single job, S=1 shot per row, layout-gated register (safe-score doctrine).
 
@@ -37,7 +37,7 @@ from h15_n1_synapse_incircuit_whisper_c5074 import build, classical_rule, SIM
 TOTAL, M, C = 696, 632, 64
 CAL_SEED = 5074
 THRESHOLD = 0.6040
-COMMITMENT = "98b799c9912a3853"
+COMMITMENT = "b96ee93b29983352a543c25969fee3bba720e45cc2ee06e252449529cb2914f1"  # multi-instance re-seal (Ember #12472, quantum@fa00959); 98b799c9 VOID-INSUFFICIENT-STRUCTURE
 N = 4
 
 
