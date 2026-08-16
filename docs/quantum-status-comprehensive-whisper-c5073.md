@@ -363,3 +363,48 @@ on the memory-write tools (script-relative paths). All U2b-family flights cleare
 noise of the statistic it judges — a flat band false-fires in both directions (σ-test on 43k rows;
 0.65 band on 27-row determinism; R² on a 4-point small-range ladder). Null-calibrate; the per-qubit
 decomposition, not the R², was the honest read of the ladder.
+
+### 10.8 door(a) CERTIFIED WIN — the stabilizer-memory separation, flights 4→5 (C5073)
+Creator directive: "fly door-a flight-4" → "fly flight-5". The campaign's **first certified
+stabilizer-memory separation WIN** (A&S arXiv:2607.02444 class; single-copy hardness via the
+HH25 tester as the simulated C1 comparator).
+
+**The result (Elder graded, Whisper cross-check 80/80, Ember integrity-gated reveal):**
+- **flight-5: 78/80 = 97.5%**, frozen criterion **76/80 CLEARED by two**, P(chance) = **2.7e-21**.
+  Confusion **TP 39 / TN 39 / FP 1 / FN 1** (symmetric); sensitivity 78–79/80 under τ±1SE (robust,
+  not a boundary graze). Commitment verified from the sealer's frozen preimage (sealed weeks ahead).
+- **The arc, every rung diagnosed then fixed:** pilot 62.5% → refly 72.5% → flight-3 90.0% →
+  flight-4 92.5% → **flight-5 97.5% WIN**. Diagnosis chain, each validated by the next flight's
+  gain: anchor-vs-science drift → **in-job τ_Q** (flight-3, fixed the drift, symmetric errors
+  appeared) → **shot noise** (flights 3+4 both ~2 short at S=316; 6/6 errored trials NOISE-CLASS,
+  ≤1.4 SD from τ) → **S-doubling** (flight-5 S=316→632 halved per-trial variance → ~1%/side error,
+  delivered exactly 1FP/1FN, the engineered outcome with arithmetic posted pre-flight).
+
+**Why it is a real WIN, not a lucky draw:** blind (decoder never sees labels), pre-committed (every
+commitment older than its flight), commitment-verified from the frozen preimage, threshold traveling
+IN-JOB (the in-flight cal rows give the true u_anchor, killing the drift that lost flights 1&2), two
+independent decodes (Whisper + Elder) agreeing 80/80 with independently re-derived accept-parity, and
+the winning power stated in advance (E[correct]~79, P(win)~99%; observed 78).
+
+**Whisper's role across the arc:**
+- Built the **HH25 single-copy tester** from Elder's spec — sim-verify caught two court-critical
+  errors before any tank: a **gf2_rank bug** (pivot reuse) and the **extremal-MIN direction** the
+  spec paraphrased as "max" (confirmed against the primary text; the grader fixture was already
+  right, the spec's paraphrase was not).
+- Built + verified the public manifest for all five flights (τ_Q wired verbatim, K-sizing —
+  **caught Elder's 8-vs-6 formula typo** and his **row-vs-sample units error**; A_cal seed lineage
+  30000/30032/30064; interleave maps), with **byte-identical two-seat cross-hashes** every flight.
+- Ran the **independent blind decode** each flight, matching the grader **80/80** via a from-scratch
+  accept-parity re-derivation, **cal-PINNED** (the calibration data selects the decode convention:
+  halves 0.59 vs interleaved 0.51 — "cal-pins-the-convention", Elder's method-note-of-the-night).
+- **Honestly reversed his own wrong call:** after flight-4 recommended STOPPING (misread shot noise
+  as a true-rate ceiling); Elder's noise-class fit corrected it; the powered S flew and won. The
+  reversal is on the record next to the win.
+
+**Six pre-spend catches across three seats, every one by re-deriving not re-reading** (HH25
+direction, HH25 rank, K-formula, binder-premise, cal-row doc-vs-code, row-vs-sample units), plus the
+shot-noise diagnosis itself — ~zero wasted QPU-s across five flights, ~50 QPU-s total.
+
+**Fences / open:** the CLAIM-CARD wording (what 97.5%-blind-at-criterion certifies, with the c6593
+floor fields) is a **fresh court sitting**, deferred. door(a) is WON; F119 n=8 remains the last
+tank-gated frontier (~5,850 QPU-s).
