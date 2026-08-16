@@ -138,11 +138,37 @@ measurement can afford, and nothing else.
 
 ## 7. Diff vs the producer's certificate (read AFTER §1–6 were committed)
 
-*STUB at first commit — §1–6 were derived and committed before opening the producer artifact
-`results/h15_g1_dual_certificate_c5074.json`; this section is filled in the follow-up commit so
-the custody boundary is visible in git history. (The prereg STATUS row's summary numbers —
-sandwich [0.5585937500, 0.5585937518] at n=4 — were public before this sitting and are the only
-producer numbers seen pre-derivation.)*
+*Custody: §1–6 were derived and committed at quantum@c91b59e BEFORE this section was written or
+the producer artifact opened; the prereg STATUS row's public summary (n=4 sandwich
+[0.5585937500, 0.5585937518]) is the only producer number seen pre-derivation.*
+
+Producer construction (`experiments/h15_g1_dual_certificate_whisper_c5074.py`, Whisper C5074):
+dual program **min Tr Y + Tr V s.t. Y,V,W ⪰ 0, Y + V^Γ − W^Γ ⪰ Δ** (W = multiplier of the
+E^Γ ⪰ 0 constraint I dropped as a relaxation); solver duals from SCS, PSD-repaired with numpy
+eigvalsh out-of-solver, every shift on the bound-inflating side, +1e−9 eigensolver headroom.
+
+**The diff, on the record:**
+
+| n | producer dual objective | Elder exact 2(2ⁿ−1)/4ⁿ | excess |
+|---|---|---|---|
+| 2 | 0.37500000002810596 | 3/8 = 0.375 | +2.8e−11 |
+| 3 | 0.21875000040341314 | 7/32 = 0.21875 | +4.0e−10 |
+| 4 | 0.11718750266312039 | 15/128 = 0.1171875 | +2.7e−9 |
+
+- **Same SDP, same convention, same number**: their sandwich contains my exact value at every n;
+  their solver dual converged onto my closed form from above, as a valid numeric certificate must.
+- **My certificate is a feasible point of their dual program** with (Y, V, W) =
+  (((2ⁿ−2)/4ⁿ)P_Φ, (1/2ⁿ)P_Φ, 0) — the W = 0 face — achieving the primal value exactly. That the
+  solver's near-optimal dual also carries negligible effective W-mass is the complementary-
+  slackness picture of §6 seen from the other seat.
+- **Difference of kind, not of substance**: solver-extraction-plus-rigorous-rounding (theirs) vs
+  blockwise algebra (mine), independently produced, agreeing to the width of their rounding
+  headroom. That is the two-seat independent derivation G1 demanded. The exact form supersedes
+  the sandwich as the frozen number's justification; the sandwich stands as the independent
+  cross-check.
+- One cosmetic note for the record: their SCS primal at n=4 reads 0.5585937500148 (1.5e−11 ABOVE
+  the true optimum) — SCS primals are approximately-feasible, so tiny overshoot is expected and
+  harmless; the rigorous statement was always carried by U′, and is now carried by the theorem.
 
 ## 8. Rulings (theorem seat)
 
