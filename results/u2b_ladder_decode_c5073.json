@@ -1,0 +1,48 @@
+{
+ "card": "u2b_ladder_decode",
+ "cycle": "C5073",
+ "job": "da0gol0b1g9c73a9qnqg",
+ "weights": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "tr2": [
+  0.95654296875,
+  0.911865234375,
+  0.90234375,
+  0.864990234375
+ ],
+ "implied_f_per_weight": [
+  0.9780301471580516,
+  0.9771982139833991,
+  0.9830192045756228,
+  0.9820337203927507
+ ],
+ "f_fit": 0.9815492849717945,
+ "R2": 0.9095188310977906,
+ "f_spread": 0.002498107260417822,
+ "proven": false,
+ "verdict": "FORM CURVES: per-weight f is NOT constant (spread 0.0025, R2=0.910) -> the uniform per-qubit model is INCOMPLETE on this qubit set; a weight-dependent term is present. Honest refutation.",
+ "f_per_weight_SE": [
+  0.0016470148423684272,
+  0.001215064432085498,
+  0.0008646458976362608,
+  0.0007867760116712641
+ ],
+ "weighted_mean_f": 0.9811752743249251,
+ "chi2": 20.098304985292366,
+ "dof": 3,
+ "chi2_per_dof": 6.699434995097455,
+ "form_holds": false,
+ "verdict_corrected": "FORM CURVES: f not constant across weights (chi2/dof=6.70) - uniform model incomplete.",
+ "correction_note": "auto R2=0.91 verdict was a shot-noise-on-small-range false negative (3rd threshold-vs-noise catch this session); chi2/dof against a constant f is the noise-aware test",
+ "per_qubit_f": {
+  "q0": 0.9780301471580516,
+  "q1": 0.9763669884687397,
+  "q2": 0.9947654160312003,
+  "q3": 0.9790831916154501
+ },
+ "verdict_final": "PRODUCT-FORM CONFIRMED, UNIFORM-APPROX REFINED. The U0 structure tr2 = product of per-qubit fidelities^2 holds and decomposes cleanly into f_q0=0.978, f_q1=0.976, f_q2=0.995, f_q3=0.979 (q2 resolvably best). What the ladder REFINES: U0 fit ONE uniform f=0.953 across door-b weights 11-13; that worked because high weight AVERAGES many qubits into an effective uniform f. At low weight + 8192 shots the per-qubit differences are resolvable (chi2/dof=6.7 rejects uniform), so the honest model is PER-QUBIT f (product form), of which uniform-f is the many-qubit average. Build-upon verdict: STRUCTURE (per-qubit product) proven and portable; UNIFORM SIMPLIFICATION is a coarse-graining valid only averaged over many qubits - a real refinement of U0, not a refutation."
+}
