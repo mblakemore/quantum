@@ -1,0 +1,36 @@
+{
+ "card": "u2b_spectrometer_decode",
+ "cycle": "C5073",
+ "job": "da0gvsno3ppc73alfptg",
+ "N": 10,
+ "tr2_ladder": [
+  0.9482421875,
+  0.882080078125,
+  0.647216796875,
+  0.6025390625,
+  0.562744140625,
+  0.51806640625,
+  0.479248046875,
+  0.472900390625,
+  0.439208984375,
+  0.41259765625
+ ],
+ "per_qubit_f": [
+  0.9737772781801802,
+  0.9644825403011861,
+  0.8565858245621698,
+  0.9648675792523382,
+  0.9664132755321594,
+  0.9594828686699672,
+  0.9618059513385017,
+  0.9933554081432372,
+  0.9637197766728868,
+  0.9692320587809508
+ ],
+ "mean_f": 0.9573722561433579,
+ "spread_f": 0.034807112895847425,
+ "best_qubit": 7,
+ "worst_qubit": 2,
+ "verdict": "10-QUBIT FIDELITY SPECTRUM read out in one flight: per-qubit two-copy f ranges [0.857,0.993], mean 0.957, spread 0.035. The product-form spectrometer scales: N measurements -> N per-qubit fidelities, and the per-qubit spread (0.035) confirms the uniform-f approximation is a coarse-graining (real qubit-to-qubit variation). Best q7 (0.993), worst q2 (0.857).",
+ "doorb_convergence": "mean per-qubit f=0.9574 ~ door-b UNIFORM f=0.953 -> the ladder refinement demonstrated cross-scale: uniform-f IS the many-qubit average of the per-qubit spectrum"
+}
