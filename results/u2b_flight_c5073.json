@@ -1,0 +1,13 @@
+{
+ "card": "u2b_flight",
+ "cycle": "C5073",
+ "job_id": "da0g727o3ppc73alf1g0",
+ "backend": "ibm_marrakesh",
+ "account": "IBMQ_ALT5",
+ "P": "XYZX",
+ "b": "0000",
+ "n": 4,
+ "shots": 8192,
+ "u0_prediction_tr2": 0.6792255088243477,
+ "status": "SUBMITTED"
+}
