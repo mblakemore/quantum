@@ -254,5 +254,22 @@
   "sealed_trial_78": "NULL",
   "sealed_trial_79": "ALT"
  },
- "decisions_sha256": "ea5356611d4d703b0b184f1c1d60b777e1678d872d59f6013b6f030f5c175bdf"
+ "decisions_sha256": "ea5356611d4d703b0b184f1c1d60b777e1678d872d59f6013b6f030f5c175bdf",
+ "grade": {
+  "commitment": "VERIFIED via sealer frozen preimage (c31a1c86...)",
+  "accuracy": "74/80 = 92.5%",
+  "confusion": {
+   "TP": 36,
+   "TN": 38,
+   "FP": 2,
+   "FN": 4
+  },
+  "binomial_p_vs_chance": 2.7e-16,
+  "sigma_approx": 8,
+  "criterion_76of80": "NOT MET \u2014 missed by 2 (second consecutive miss-by-2). Verdict: DESCRIPTIVE, no win claim",
+  "sensitivity": "tau +/- 1SE both give 74/80 \u2014 zero threshold fragility",
+  "pooled_cross_flight": "flights 3+4: 110/120 = 91.7% blind, CP-CI ~[0.853, 0.960]",
+  "the_diagnosis": "threshold placement is SOLVED (proven twice); the binding constraint is now PER-TRIAL SHOT NOISE: at u~0.14-0.19, ALT/NULL means sit ~1.6-1.7 per-trial-SD from tau at S=316 -> ~5% error each side -> expected ~95% per-trial accuracy, delivered 91.7-92.5%. The model FITS the observed confusion (E[FP]~2.1 obs 2; E[FN]~1.9-4 obs 2-4)",
+  "flight5_shape_if_court_wants_the_win": "SAME M=80, S 316->632 (double shots \u2014 amendment-3 tank note already allowed ~700): per-trial z doubles by sqrt(2) -> ~1% error/side -> E[correct] ~79/80, P(>=76) ~99%. Tank ~28s, fits ALT5 easily. More shots, not more trials \u2014 M was never the binding constraint, S is"
+ }
 }
