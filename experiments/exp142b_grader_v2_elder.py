@@ -28,22 +28,42 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(HERE, "..", "results")
-N = 4
-CANDS = ["".join(p) for p in __import__("itertools").product("XYZ", repeat=N)]  # 81, index order fixed
+N = int(sys.argv[sys.argv.index("--n") + 1]) if "--n" in sys.argv else 4
+CANDS = ["".join(p) for p in __import__("itertools").product("XYZ", repeat=N)]  # 3^N, index order fixed
 A_ACC = N * math.log(3) + math.log(100)
 B_ELIM = math.log(0.005)
 BELL_MAP = {(0, 0): "I", (1, 0): "X", (1, 1): "Y", (0, 1): "Z"}
 
 def load():
-    man = json.load(open(os.path.join(RES, "exp142b_n4_manifest.json")))
-    sch = json.load(open(os.path.join(RES, "exp142b_n4_schedule.json")))
+    man = json.load(open(os.path.join(RES, f"exp142b_n{N}_manifest.json")))
+    sch = json.load(open(os.path.join(RES, f"exp142b_n{N}_schedule.json")))
     pubs = [None] * len(man["pubs"])
     for j in man["jobs"]:
-        raw = json.load(open(os.path.join(RES, f"exp142b_n4_raw_{j['job_id']}.json")))
+        raw = json.load(open(os.path.join(RES, f"exp142b_n{N}_raw_{j['job_id']}.json")))
         for k, p in enumerate(raw["pubs"]):
             pubs[j["pub_lo"] + k] = p["c"]
     assert all(p is not None for p in pubs), "pub coverage gap"
     return man, sch, pubs
+
+def conv_reps(man, sch, pubs):
+    """Per-rep (bits, plan) pairs. n4: one pub per rep, plan aligned per manifest-pub index.
+    n6+: chunked conv pubs reassembled by row_lo; plan from schedule reps[rep].rows."""
+    byrep = {}
+    for gi, p in enumerate(man["pubs"]):
+        if p["kind"] != "conv_v2": continue
+        byrep.setdefault(p["rep"], []).append((p.get("row_lo", 0), gi))
+    out = []
+    for rep in sorted(byrep):
+        chunks = sorted(byrep[rep])
+        bits = []
+        for _, gi in chunks: bits.extend(pubs[gi])
+        if "reps" in sch:
+            plan = next(r["rows"] for r in sch["reps"] if int(r["rep"]) == rep)
+        else:
+            plan = sch["pubs"][chunks[0][1]]
+        assert len(bits) == len(plan), f"rep {rep}: {len(bits)} bits vs {len(plan)} plan"
+        out.append((rep, bits, plan))
+    return out
 
 def parity_pass(bits_str, b_str, reverse):
     z = [int(c) for c in (bits_str[::-1] if reverse else bits_str)]
@@ -71,10 +91,7 @@ def conv_meter(man, sch, pubs, p0, reverse):
     """Pinned SPRT replay per rep. Returns per-rep dicts."""
     lw, lf = math.log(p0 / 0.5), math.log((1 - p0) / 0.5)
     reps = []
-    for gi, p in enumerate(man["pubs"]):
-        if p["kind"] != "conv_v2": continue
-        rows = pubs[gi]; plan = sch["pubs"][gi]
-        assert len(rows) == len(plan) == 2187
+    for rep, rows, plan in conv_reps(man, sch, pubs):
         llr = {c: 0.0 for c in CANDS}; alive = set(CANDS)
         accepted = None; bill = None
         for r, (out_bits, meta) in enumerate(zip(rows, plan), start=1):
@@ -84,7 +101,7 @@ def conv_meter(man, sch, pubs, p0, reverse):
             llr[Abasis] += lw if ok else lf
             if llr[Abasis] >= A_ACC: accepted, bill = Abasis, r; break
             if llr[Abasis] <= B_ELIM: alive.discard(Abasis)
-        reps.append({"rep": p["rep"], "P_hat": accepted, "bill_rows": bill,
+        reps.append({"rep": rep, "P_hat": accepted, "bill_rows": bill,
                      "censored": accepted is None,
                      "alive_at_end": len(alive) if accepted is None else None})
     return reps
@@ -106,7 +123,7 @@ def q_meter(man, pubs):
     return out
 
 def verify_commitment():
-    r = json.load(open(os.path.join(RES, "exp142b_n4_REVEAL_ember.json")))
+    r = json.load(open(os.path.join(RES, f"exp142b_n{N}_REVEAL_ember.json")))
     c = json.load(open(os.path.join(HERE, "..", r["commitment_file"])))
     pre = bytes.fromhex(r["salt_hex"]) + f"exp142|{r['ensemble']}|{r['n']}|{r['P']}".encode()
     digest = hashlib.sha256(pre).hexdigest()
@@ -131,7 +148,7 @@ def main():
           f"P_hat set: { {r['P_hat'] for r in q if r['P_hat']} }")
     print(f"REALIZED RATIO (pinned, both executed arms): {conv_med:.0f}/{q_med:.0f} = {ratio:.0f}x "
           f"(copies-currency variant {ratio/2:.0f}x — note, never headline)")
-    art = {"card": "exp142b_n4_grader_v2_elder", "cycle": "C6620", "p0_measured": p0,
+    art = {"card": f"exp142b_n{N}_grader_v2_elder", "cycle": "C6620", "p0_measured": p0,
            "bit_reverse": reverse, "A": A_ACC, "B": B_ELIM,
            "conv": conv, "q": q, "conv_median": conv_med, "q_median": q_med,
            "censored": int(cens), "ratio_realized": ratio,
@@ -143,7 +160,7 @@ def main():
                          "q_correct": all(r["P_hat"] == P for r in q if r["P_hat"])}
         print(f"REVEAL: commitment {'VERIFIED' if ok else 'FAILED'}; true P = {P}; "
               f"conv all-correct={art['reveal']['conv_correct']}, q all-correct={art['reveal']['q_correct']}")
-    out = os.path.join(RES, "exp142b_n4_grader_v2_elder.json")
+    out = os.path.join(RES, f"exp142b_n{N}_grader_v2_elder.json")
     json.dump(art, open(out, "w"), indent=1)
     print(f"-> {out}")
 

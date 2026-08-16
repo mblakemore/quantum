@@ -1,0 +1,279 @@
+{
+ "card": "exp142b_n6_grader_v2_elder",
+ "cycle": "C6620",
+ "p0_measured": 0.95,
+ "bit_reverse": true,
+ "A": 11.19684391799675,
+ "B": -5.298317366548036,
+ "conv": [
+  {
+   "rep": 0,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 6808,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 1,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 19658,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 2,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 15427,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 3,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 17313,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 4,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 21088,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 5,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 25078,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 6,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 19028,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 7,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 22668,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 8,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 4708,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 9,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 368,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 10,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 1978,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 11,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 22143,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 12,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 19898,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 13,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 6078,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 14,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 21688,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 15,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 25218,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 16,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 19837,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 17,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 11358,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 18,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 7517,
+   "censored": false,
+   "alive_at_end": null
+  },
+  {
+   "rep": 19,
+   "P_hat": "YYZZXZ",
+   "bill_rows": 14473,
+   "censored": false,
+   "alive_at_end": null
+  }
+ ],
+ "q": [
+  {
+   "rep": 0,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 25,
+   "shots_flown": 80
+  },
+  {
+   "rep": 1,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 34,
+   "shots_flown": 80
+  },
+  {
+   "rep": 2,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 35,
+   "shots_flown": 80
+  },
+  {
+   "rep": 3,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 35,
+   "shots_flown": 80
+  },
+  {
+   "rep": 4,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 18,
+   "shots_flown": 80
+  },
+  {
+   "rep": 5,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 16,
+   "shots_flown": 80
+  },
+  {
+   "rep": 6,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 23,
+   "shots_flown": 80
+  },
+  {
+   "rep": 7,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 31,
+   "shots_flown": 80
+  },
+  {
+   "rep": 8,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 39,
+   "shots_flown": 80
+  },
+  {
+   "rep": 9,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 27,
+   "shots_flown": 80
+  },
+  {
+   "rep": 10,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 10,
+   "shots_flown": 80
+  },
+  {
+   "rep": 11,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 30,
+   "shots_flown": 80
+  },
+  {
+   "rep": 12,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 11,
+   "shots_flown": 80
+  },
+  {
+   "rep": 13,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 39,
+   "shots_flown": 80
+  },
+  {
+   "rep": 14,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 29,
+   "shots_flown": 80
+  },
+  {
+   "rep": 15,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 14,
+   "shots_flown": 80
+  },
+  {
+   "rep": 16,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 27,
+   "shots_flown": 80
+  },
+  {
+   "rep": 17,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 18,
+   "shots_flown": 80
+  },
+  {
+   "rep": 18,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 59,
+   "shots_flown": 80
+  },
+  {
+   "rep": 19,
+   "P_hat": "YYZZXZ",
+   "bill_samples": 23,
+   "shots_flown": 80
+  }
+ ],
+ "conv_median": 18170.5,
+ "q_median": 27.0,
+ "censored": 0,
+ "ratio_realized": 672.9814814814815,
+ "consensus_P": [
+  "YYZZXZ"
+ ]
+}
