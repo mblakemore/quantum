@@ -1,0 +1,62 @@
+{
+ "n2": {
+  "n": 2,
+  "m2_brute_equals_gauss_exact": true,
+  "n_A": 8,
+  "single_copy_mixture_exact": true,
+  "bell_2copy_success_exact": 0.78125,
+  "bell_alt_support_size": 7,
+  "bell_alt_p00": 0.25,
+  "helstrom_global_2copy": 0.78125,
+  "ppt_ceiling_2copy_primal": 0.6874999999987255,
+  "ppt_status": "optimal",
+  "ppt_note": "PRIMAL NUMERICAL ONLY - dual certificate owed at freeze (understating a max ceiling is the dangerous direction)",
+  "symplectic_parity_4copy": {
+   "p_parity0_null_closed": 0.53125,
+   "p_parity0_null_enum": 0.53125,
+   "alt_parity_always0_all_A": true,
+   "success_1_parity_bit_noiseless": 0.734375
+  }
+ },
+ "n3": {
+  "n": 3,
+  "m2_brute_equals_gauss_exact": true,
+  "n_A": 64,
+  "single_copy_mixture_exact": true,
+  "bell_2copy_success_exact": 0.7734375,
+  "bell_alt_support_size": 29,
+  "bell_alt_p00": 0.12499999999999997,
+  "helstrom_global_2copy": 0.7734375000000001,
+  "ppt_ceiling_2copy_primal": 0.6093749999182616,
+  "ppt_status": "optimal",
+  "ppt_note": "PRIMAL NUMERICAL ONLY - dual certificate owed at freeze (understating a max ceiling is the dangerous direction)",
+  "symplectic_parity_4copy": {
+   "p_parity0_null_closed": 0.5078125,
+   "p_parity0_null_enum": 0.5078125,
+   "alt_parity_always0_all_A": true,
+   "success_1_parity_bit_noiseless": 0.74609375
+  }
+ },
+ "n4": {
+  "n": 4,
+  "m2_brute_equals_gauss_exact": true,
+  "n_A": 1024,
+  "single_copy_mixture_exact": true,
+  "bell_2copy_success_exact": 0.763671875,
+  "bell_alt_support_size": 121,
+  "bell_alt_p00": 0.0625,
+  "helstrom_global_2copy": 0.763671875,
+  "ppt_ceiling_2copy_primal": 0.5585937496292034,
+  "ppt_status": "optimal",
+  "ppt_note": "PRIMAL NUMERICAL ONLY - dual certificate owed at freeze (understating a max ceiling is the dangerous direction)",
+  "symplectic_parity_4copy": {
+   "p_parity0_null_closed": 0.501953125,
+   "p_parity0_null_enum": null,
+   "alt_parity_always0_all_A": null,
+   "success_1_parity_bit_noiseless": 0.7490234375
+  }
+ },
+ "card": "h15_g1_ceiling_atoms",
+ "cycle": "C5074",
+ "route": "Elder ruling coordination#12393"
+}

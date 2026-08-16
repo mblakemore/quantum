@@ -1,0 +1,67 @@
+{
+ "card": "h15_g1_accept_structure",
+ "cycle": "C5074",
+ "n2": {
+  "support_size": 7,
+  "distinct_values": [
+   "0",
+   "1/8",
+   "1/4"
+  ],
+  "p00": "1/4",
+  "all_support_ab_even": true,
+  "ab_even_total": 10,
+  "success_optimal_exact": "25/32",
+  "helstrom_conjecture": "25/32",
+  "optimal_equals_helstrom_conj": true,
+  "p_accept_alt_simple_rule": "1",
+  "success_simple_rule_exact": "11/16",
+  "simple_rule_conjecture_3/4-2^-(n+2)": true,
+  "ppt_ceiling_conjecture": "11/16",
+  "ppt_ceiling_conjecture_float": 0.6875,
+  "gap_simple_minus_ceiling": 0.0,
+  "gap_optimal_minus_ceiling": 0.09375
+ },
+ "n3": {
+  "support_size": 29,
+  "distinct_values": [
+   "0",
+   "1/32",
+   "1/8"
+  ],
+  "p00": "1/8",
+  "all_support_ab_even": true,
+  "ab_even_total": 36,
+  "success_optimal_exact": "99/128",
+  "helstrom_conjecture": "99/128",
+  "optimal_equals_helstrom_conj": true,
+  "p_accept_alt_simple_rule": "1",
+  "success_simple_rule_exact": "23/32",
+  "simple_rule_conjecture_3/4-2^-(n+2)": true,
+  "ppt_ceiling_conjecture": "39/64",
+  "ppt_ceiling_conjecture_float": 0.609375,
+  "gap_simple_minus_ceiling": 0.109375,
+  "gap_optimal_minus_ceiling": 0.1640625
+ },
+ "n4": {
+  "support_size": 121,
+  "distinct_values": [
+   "0",
+   "1/128",
+   "1/16"
+  ],
+  "p00": "1/16",
+  "all_support_ab_even": true,
+  "ab_even_total": 136,
+  "success_optimal_exact": "391/512",
+  "helstrom_conjecture": "391/512",
+  "optimal_equals_helstrom_conj": true,
+  "p_accept_alt_simple_rule": "1",
+  "success_simple_rule_exact": "47/64",
+  "simple_rule_conjecture_3/4-2^-(n+2)": true,
+  "ppt_ceiling_conjecture": "143/256",
+  "ppt_ceiling_conjecture_float": 0.55859375,
+  "gap_simple_minus_ceiling": 0.17578125,
+  "gap_optimal_minus_ceiling": 0.205078125
+ }
+}
