@@ -275,5 +275,11 @@
  "ratio_realized": 672.9814814814815,
  "consensus_P": [
   "YYZZXZ"
- ]
+ ],
+ "reveal": {
+  "commitment_ok": true,
+  "P": "YYZZXZ",
+  "conv_correct": true,
+  "q_correct": true
+ }
 }
