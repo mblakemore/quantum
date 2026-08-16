@@ -309,3 +309,57 @@ Creator prompt: "do another collision scan" → "both/and A and B".
   shadow variance is 3^1 = 3 (trivially resolvable). So the ghost's **signed per-qubit direction**
   (the phase/readout-asymmetry sign) *is* recoverable from low-weight measurement even where the
   high-weight sealed-P phase is not — a real dig-A-immune next step (needs Elder's signed reading).
+
+### 10.7 The unfold/fold campaign + F119 n=4 remedy + ALT5 (C5073 continued)
+**Unfold/fold campaign** (`docs/unfold-fold-campaign-whisper-c5073.md`): thesis = Pauli weight is the
+radial/holographic coordinate (single-copy shadow cost ~3^weight); unfold at the boundary, fold when
+algebras match. Runs (all $0 except the U2b-family flights):
+- **U0 ghost-mitigation (the build-upon run)**: a uniform per-qubit fidelity model f=0.9528±0.0018
+  reproduces all 4 door-b sealed-P tr² to 0.2% (tr²=f^(2w)) — the duck. The ghost's hot-qubit pattern
+  does NOT predict the tr² deficit (LOO 143% worse than weight) → the ghost is a localized side
+  channel, NOT the advantage limiter; the loss is uniform. Both offered to the F122 lane.
+- **U1 ghost-phase**: PREMISE-CORRECTED at pin — two-copy tr² is sign-free at all weights (D.estimate
+  reproduces the grade exactly); the signed direction is single-copy-only (dig B wall). Delivered the
+  P-independent per-qubit ghost map (cross-draw r +0.809).
+- **U2a boundary-purity**: the boundary carries only the w=1 ghost, w≥2 at floor — weight-1-exclusive
+  ghost confirmed from the purity angle.
+- **U3 conv-arm boundary (the deepest result)**: the conv arm is a structured honest-oracle (fresh
+  random even-parity b per row). Single-copy ensemble low-weight marginals are maximally mixed BY
+  DESIGN (uncond w1 |tr|~0.07); conditioning on b recovers the eigenvalue (~0.99). **The sign the
+  two-copy squares away IS the oracle's per-row b** — dig A's wall AND the two-copy advantage,
+  mechanistically explained from the construction. PIN confirmed on flown kingston (true-basis odd
+  0.083 vs wrong 0.500).
+- **U4 dual-orbit**: 512-wall optimum near-full-rank (456/512) → generic, not compressible (weakens
+  F2). **U5 epoch-drift**: low-power (needs abs timestamps). **U6 sentinel timeline**: device-health
+  series across 61 flights, sentinel fidelity 0.960±0.015 (exp142 0.974 > exp144 0.956).
+- **F1 degree-2 manifest** emitted (which functionals fold through the two-copy envelope).
+
+**U2b flight family (ALT5/marrakesh, Creator GO)** — testing the U0 build-upon result on-device:
+- **U2b (single w=4, job da0g727)**: tr²=0.873, implied f=0.983 — the U0 FORM transfers but the f
+  VALUE is qubit/prep-local (0.983 vs door-b 0.953: different marrakesh qubits + fixed-b vs fresh-b
+  ensemble). Honest partial.
+- **U2b weight-ladder (w=1–4, job da0gol0)**: **the per-qubit fidelity spectrometer**. tr²
+  0.957/0.912/0.902/0.865 → per-qubit f q0=0.978, q1=0.976, q2=0.995, q3=0.979. The U0 PRODUCT
+  structure (tr²=∏ f_qi²) is proven and portable; the UNIFORM-f simplification is resolvably rejected
+  at low-weight/8192-shot precision (χ²/dof=6.7) — it is the many-qubit AVERAGE of per-qubit f, valid
+  only at high weight. **Structure universal, uniform is a scale-dependent coarse-graining.**
+- **Spectrometer N=10 (job da0gvsno, in flight)**: extends the ladder to 10 qubits — reads 10
+  per-qubit two-copy fidelities from the tr² ratios. A reusable on-device calibration instrument the
+  vendor numbers do not give at the two-copy level.
+
+**F119 n=4 remedy (EXP142B, Whisper's prereg deliverables — GRADED CLEAN)**: (1) determinism-attack
+gate PASS (flown v2 per-qubit determinism 0.49 aggregate / 0.85 per-basis at the 73rd null percentile
+= chance; the v1 delivery flaw gone via shots=1 + fresh-b); (2) independent blind SPRT decode
+recovered **ZYYZ 20/20** = the TRUE sealed Pauli (committed 3 weeks pre-flight, hash-verified).
+Elder's meter concurred (both arms ZYYZ, ratio 105× best-known-conditional). Rung STANDS.
+
+**Infrastructure**: added **IBMQ_ALT5** to the ship computer (fresh 600s open-instance) by fixing the
+registry feeder's hardcoded token list to discover all IBMQ_* (board #154 closed). Fixed board #128
+(quality gate scored evidence by vocabulary, not by whether a measurement happened) and the cwd-trap
+on the memory-write tools (script-relative paths). All U2b-family flights cleared every spend-gate
+(sim-verify, preflight, #151 instance-gate blocking the us-east paid-misroute) before submission.
+
+**Recurring method lesson (3× this session)**: a threshold must be calibrated to the sample size /
+noise of the statistic it judges — a flat band false-fires in both directions (σ-test on 43k rows;
+0.65 band on 27-row determinism; R² on a 4-point small-range ladder). Null-calibrate; the per-qubit
+decomposition, not the R², was the honest read of the ladder.
