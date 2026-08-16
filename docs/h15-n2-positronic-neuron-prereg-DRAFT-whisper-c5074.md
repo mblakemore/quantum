@@ -57,6 +57,8 @@ p_C1(n) at 2 copies/trial, with criterion and any excess-over-noise-only structu
 
 ## 1. Rungs
 
+**Powered design (Whisper C5074, G3 seat — reconciles Elder #12418 with the frozen per-trial claim; awaiting Elder confirm, then Ember cuts G2 on it):** **M = 632 sealed graded trials (316 ALT / 316 NULL balanced), S = 1 shot per trial**, + **64 UNGRADED known-A calibration rows** (32/32; decode-convention + τ pin per G1 item 4; known-A by design, need no seal). **S=1 is FORCED by currency**: the claim is per-trial at 2 copies — a shot-averaged trial consumes extra copies against a 2-copy ceiling (F119 units-inflation class, refused at design). **Units catch on record**: the 2.3-SD denominator counts GRADED RESPONSE EVENTS; Elder's threshold arithmetic (0.604) already assumes 632 graded events, but a door(a)-style (M=40 × S=632-aggregate) structure would grade 40 events → threshold 0.7392 > noiseless ideal 0.7344 = win IMPOSSIBLE as frozen. "S=632" (Elder) and "M=632" (this row) are the same number: 632 single-shot reflexes. **Threshold 0.6040; P(win): 100% at N1-noise 0.7126, 100% at F90-priced 0.6901, 99.2% at pessimistic 0.65.** Copies 1264 graded + 128 cal = 1392; 696 single-shot executions, one job, door(a)-flight scale; MCM 3× priced at G4.
+
 **MICRO n=4 first** (F119-remedy precedent): 2n=8 stimulus qubits + 1 decision ancilla + 1 actuator
 = 10 qubits. Register chosen by U2b-spectrometer per-qubit f + layout-gate safe scores (marrakesh
 ≤ 0.039 / aachen ≤ 0.036 — paid, so effectively marrakesh/kingston/fez per #151). Escalation to
