@@ -1,0 +1,22 @@
+{
+ "card": "u2b_spectrometer",
+ "cycle": "C5073",
+ "job_id": "da0gvsno3ppc73alfptg",
+ "backend": "ibm_marrakesh",
+ "account": "IBMQ_ALT5",
+ "N": 10,
+ "paulis": [
+  "XIIIIIIIII",
+  "XYIIIIIIII",
+  "XYZIIIIIII",
+  "XYZXIIIIII",
+  "XYZXYIIIII",
+  "XYZXYZIIII",
+  "XYZXYZXIII",
+  "XYZXYZXYII",
+  "XYZXYZXYZI",
+  "XYZXYZXYZX"
+ ],
+ "shots": 8192,
+ "status": "SUBMITTED"
+}
