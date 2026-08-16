@@ -1,0 +1,63 @@
+{
+ "card": "h15_n1_synapse_incircuit",
+ "cycle": "C5074",
+ "n": 4,
+ "provisional_ceiling": 0.55859375,
+ "bell_convention_map": {
+  "00": [
+   0,
+   0
+  ],
+  "01": [
+   1,
+   0
+  ],
+  "10": [
+   0,
+   1
+  ],
+  "11": [
+   1,
+   1
+  ]
+ },
+ "bell_map_pair_ok_for_toffoli": true,
+ "alt_shots": 8192,
+ "alt_pin_mismatches": 0,
+ "alt_dec_bit_mismatches": 0,
+ "alt_accept_rate": 1.0,
+ "null_shots": 8192,
+ "null_pin_mismatches": 0,
+ "null_accept_rate": 0.5321044921875,
+ "null_accept_wilson95": [
+  0.5212867365418631,
+  0.5428921514444544
+ ],
+ "null_accept_exact_target": 0.53125,
+ "null_target_in_interval": true,
+ "ablation_response_sets": {
+  "never": [
+   0
+  ],
+  "always": [
+   1
+  ]
+ },
+ "success_estimate": 0.73394775390625,
+ "success_exact_target_47_64": 0.734375,
+ "margin_over_provisional_ceiling": 0.17535400390625,
+ "transpiled_ops": {
+  "rz": 74,
+  "sx": 68,
+  "cz": 28,
+  "measure": 10,
+  "barrier": 1,
+  "if_else": 1
+ },
+ "transpiled_2q": 28,
+ "transpiled_depth": 87,
+ "mcm_count": 1,
+ "mcm_billing_note": "MCM ~3x billing multiplier applies at G4 pricing",
+ "interferometric_wall_2q": 475,
+ "verdict": "G0-PIN-PASS"
+}

@@ -1,0 +1,13 @@
+{
+ "card": "h15_n1_noise_survival_estimate",
+ "cycle": "C5074",
+ "noise_model": "REPRESENTATIVE Heron-class (2q depol 0.003, 1q 2e-4, RO 0.01) - ESTIMATE, not a calibration snapshot",
+ "p_accept_alt_noisy": 0.96728515625,
+ "p_accept_null_noisy": 0.5419921875,
+ "success_noisy_estimate": 0.712646484375,
+ "provisional_ceiling": 0.55859375,
+ "margin_noisy_over_ceiling": 0.154052734375,
+ "threshold_2p3sd_at_S632_approx": 0.6500828376802089,
+ "alt_shots": 2048,
+ "null_shots": 2048
+}
