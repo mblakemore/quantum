@@ -1,0 +1,15 @@
+{
+  "spec": "h15_positronic_v1",
+  "n": 4,
+  "M": 632,
+  "commitment_sha256": "b96ee93b29983352a543c25969fee3bba720e45cc2ee06e252449529cb2914f1",
+  "label_draw": "balanced-316/316-shuffled",
+  "alt_instances": 316,
+  "null_instances": 316,
+  "bits_A": 10,
+  "xu_range": 16,
+  "draw_rule": "A_list WITH REPLACEMENT (birthday collisions expected+kept); xu_list KEEPS x=u; both uniform iid; dedup would rig the seal",
+  "prereg_freeze": "H15 N1 positronic-neuron G2 RESEAL (multi-instance). Q1=316 DISTINCT A / Q2=SEALED (x,u) ratified two-seat (Elder #12463/#12465 + Whisper #12462), forced by the theorem: repeated-A lets a memory agent learn A + beat the 143/256 ceiling; NULL (x,u) is a rigging channel (b=x XOR u deterministic). Supersedes VOID door(a) single-A 98b799c9. Binding triple n=4/M=632 balanced 316-316/S=1; threshold 0.6040. Pins held: A_list with-replacement (collisions kept), xu_list keeps x=u. G-PUBLIC before any flight",
+  "order_of_operations": "reseal(multi-instance) -> commit+PUSH public (G-PUBLIC) -> Whisper kit COMMITMENT+rehash -> Elder harness ref -> FRESH Creator GO on new digest -> fly S=1",
+  "note": "per-trial secret: 316 distinct degree-2 A (door(a) convention) + 316 sealed (x,u) NULL params + 632-label assignment + salt, ONE canonical commitment. Secret and salt OFF-GIT. Supersedes door(a) single-A commitment 98b799c9 (structurally insufficient, VOID-BY-RESEAL)."
+}
