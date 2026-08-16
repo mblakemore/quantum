@@ -3,414 +3,414 @@
  "n": 6,
  "M": 20,
  "C": 35,
- "q_n": 0.0032145182291666665,
+ "q_n": 0.0030110677083333335,
  "ensemble": "fullweight_eps1_v2",
- "backend": "ibm_fez",
+ "backend": "ibm_marrakesh",
  "bell_pairs": [
   [
-   21,
-   22
+   154,
+   155
   ],
   [
-   4,
-   5
+   147,
+   148
   ],
   [
-   9,
-   10
+   109,
+   118
   ],
   [
-   58,
-   71
+   53,
+   54
   ],
   [
-   25,
-   26
+   152,
+   153
   ],
   [
-   13,
-   14
+   10,
+   11
   ]
  ],
  "conv_layout": [
-  22,
-  36,
-  14,
-  18,
-  110,
-  142
+  10,
+  6,
+  152,
+  109,
+  154,
+  0
  ],
  "q_layout": [
-  21,
-  4,
-  9,
-  58,
-  25,
-  13,
-  22,
-  5,
+  154,
+  147,
+  109,
+  53,
+  152,
   10,
-  71,
-  26,
-  14
+  155,
+  148,
+  118,
+  54,
+  153,
+  11
  ],
  "jobs": [
   {
-   "job_id": "d9hehl3sbqfc73epuja0",
+   "job_id": "da0ipl0b1g9c73a9sohg",
    "pub_lo": 0,
    "pub_hi": 5,
    "rows": 8196
   },
   {
-   "job_id": "d9hehlbsbqfc73epujag",
+   "job_id": "da0ipl8b1g9c73a9soig",
    "pub_lo": 5,
    "pub_hi": 6,
    "rows": 8192
   },
   {
-   "job_id": "d9hehljsbqfc73epujbg",
+   "job_id": "da0ipln2sl0c73bn4qrg",
    "pub_lo": 6,
    "pub_hi": 9,
    "rows": 9211
   },
   {
-   "job_id": "d9hehlogk0ls73f2s9o0",
+   "job_id": "da0iplt0vrcc73bqgf3g",
    "pub_lo": 9,
    "pub_hi": 10,
    "rows": 8192
   },
   {
-   "job_id": "d9hehm3sbqfc73epujcg",
+   "job_id": "da0ipm50vrcc73bqgf40",
    "pub_lo": 10,
    "pub_hi": 11,
    "rows": 8192
   },
   {
-   "job_id": "d9hehm8gk0ls73f2s9og",
+   "job_id": "da0ipm8b1g9c73a9sok0",
    "pub_lo": 11,
    "pub_hi": 14,
    "rows": 9211
   },
   {
-   "job_id": "d9hehmggk0ls73f2s9pg",
+   "job_id": "da0ipmgb1g9c73a9sokg",
    "pub_lo": 14,
    "pub_hi": 15,
    "rows": 8192
   },
   {
-   "job_id": "d9hehmrsbqfc73epuje0",
+   "job_id": "da0ipmob1g9c73a9sol0",
    "pub_lo": 15,
    "pub_hi": 16,
    "rows": 8192
   },
   {
-   "job_id": "d9hehn50k0jc738i2pn0",
+   "job_id": "da0ipn0b1g9c73a9somg",
    "pub_lo": 16,
    "pub_hi": 19,
    "rows": 9211
   },
   {
-   "job_id": "d9hehnd0k0jc738i2po0",
+   "job_id": "da0ipnfo3ppc73alhl4g",
    "pub_lo": 19,
    "pub_hi": 20,
    "rows": 8192
   },
   {
-   "job_id": "d9hehnggk0ls73f2s9r0",
+   "job_id": "da0ipnfo3ppc73alhl50",
    "pub_lo": 20,
    "pub_hi": 21,
    "rows": 8192
   },
   {
-   "job_id": "d9hehnshonhs73acuc3g",
+   "job_id": "da0ipnno3ppc73alhl6g",
    "pub_lo": 21,
    "pub_hi": 24,
    "rows": 9211
   },
   {
-   "job_id": "d9heho3sbqfc73epuji0",
+   "job_id": "da0ipnv2sl0c73bn4qv0",
    "pub_lo": 24,
    "pub_hi": 25,
    "rows": 8192
   },
   {
-   "job_id": "d9hehod0k0jc738i2pqg",
+   "job_id": "da0ipo0b1g9c73a9sop0",
    "pub_lo": 25,
    "pub_hi": 26,
    "rows": 8192
   },
   {
-   "job_id": "d9hehoggk0ls73f2s9t0",
+   "job_id": "da0ipof2sl0c73bn4r0g",
    "pub_lo": 26,
    "pub_hi": 29,
    "rows": 9211
   },
   {
-   "job_id": "d9hehoogk0ls73f2s9tg",
+   "job_id": "da0ipon2sl0c73bn4r10",
    "pub_lo": 29,
    "pub_hi": 30,
    "rows": 8192
   },
   {
-   "job_id": "d9hehp4honhs73acuc60",
+   "job_id": "da0ipovo3ppc73alhl8g",
    "pub_lo": 30,
    "pub_hi": 31,
    "rows": 8192
   },
   {
-   "job_id": "d9hehpd0k0jc738i2ptg",
+   "job_id": "da0ipov2sl0c73bn4r20",
    "pub_lo": 31,
    "pub_hi": 34,
    "rows": 9211
   },
   {
-   "job_id": "d9hehpggk0ls73f2sa0g",
+   "job_id": "da0ipp0b1g9c73a9sos0",
    "pub_lo": 34,
    "pub_hi": 35,
    "rows": 8192
   },
   {
-   "job_id": "d9hehprsbqfc73epujk0",
+   "job_id": "da0ippf2sl0c73bn4r2g",
    "pub_lo": 35,
    "pub_hi": 36,
    "rows": 8192
   },
   {
-   "job_id": "d9hehq4honhs73acuc7g",
+   "job_id": "da0ippno3ppc73alhla0",
    "pub_lo": 36,
    "pub_hi": 39,
    "rows": 9211
   },
   {
-   "job_id": "d9hehqd0k0jc738i2pvg",
+   "job_id": "da0ippt0vrcc73bqgf90",
    "pub_lo": 39,
    "pub_hi": 40,
    "rows": 8192
   },
   {
-   "job_id": "d9hehqggk0ls73f2sa30",
+   "job_id": "da0ipq72sl0c73bn4r4g",
    "pub_lo": 40,
    "pub_hi": 41,
    "rows": 8192
   },
   {
-   "job_id": "d9hehqrsbqfc73epujm0",
+   "job_id": "da0ipq8b1g9c73a9sotg",
    "pub_lo": 41,
    "pub_hi": 44,
    "rows": 9211
   },
   {
-   "job_id": "d9hehr4honhs73acucag",
+   "job_id": "da0ipqgb1g9c73a9soug",
    "pub_lo": 44,
    "pub_hi": 45,
    "rows": 8192
   },
   {
-   "job_id": "d9hehr8gk0ls73f2sa4g",
+   "job_id": "da0ipql0vrcc73bqgfcg",
    "pub_lo": 45,
    "pub_hi": 46,
    "rows": 8192
   },
   {
-   "job_id": "d9hehrjsbqfc73epujo0",
+   "job_id": "da0ipqt0vrcc73bqgfd0",
    "pub_lo": 46,
    "pub_hi": 49,
    "rows": 9211
   },
   {
-   "job_id": "d9hehrogk0ls73f2sa5g",
+   "job_id": "da0ipr50vrcc73bqgfdg",
    "pub_lo": 49,
    "pub_hi": 50,
    "rows": 8192
   },
   {
-   "job_id": "d9hehs3sbqfc73epujog",
+   "job_id": "da0iprd0vrcc73bqgfe0",
    "pub_lo": 50,
    "pub_hi": 51,
    "rows": 8192
   },
   {
-   "job_id": "d9hehs8gk0ls73f2sa6g",
+   "job_id": "da0iprgb1g9c73a9sp0g",
    "pub_lo": 51,
    "pub_hi": 54,
    "rows": 9211
   },
   {
-   "job_id": "d9hehsjsbqfc73epujr0",
+   "job_id": "da0iprob1g9c73a9sp10",
    "pub_lo": 54,
    "pub_hi": 55,
    "rows": 8192
   },
   {
-   "job_id": "d9hehsshonhs73acuccg",
+   "job_id": "da0ips50vrcc73bqgff0",
    "pub_lo": 55,
    "pub_hi": 56,
    "rows": 8192
   },
   {
-   "job_id": "d9heht3sbqfc73epujsg",
+   "job_id": "da0ips50vrcc73bqgfg0",
    "pub_lo": 56,
    "pub_hi": 59,
    "rows": 9211
   },
   {
-   "job_id": "d9hehtd0k0jc738i2q4g",
+   "job_id": "da0ipsfo3ppc73alhleg",
    "pub_lo": 59,
    "pub_hi": 60,
    "rows": 8192
   },
   {
-   "job_id": "d9hehtl0k0jc738i2q60",
+   "job_id": "da0ipsno3ppc73alhlfg",
    "pub_lo": 60,
    "pub_hi": 61,
    "rows": 8192
   },
   {
-   "job_id": "d9hehtshonhs73acucf0",
+   "job_id": "da0ipsv2sl0c73bn4ra0",
    "pub_lo": 61,
    "pub_hi": 64,
    "rows": 9211
   },
   {
-   "job_id": "d9hehu50k0jc738i2q7g",
+   "job_id": "da0ipt72sl0c73bn4rag",
    "pub_lo": 64,
    "pub_hi": 65,
    "rows": 8192
   },
   {
-   "job_id": "d9hehubsbqfc73epujtg",
+   "job_id": "da0iptfo3ppc73alhlhg",
    "pub_lo": 65,
    "pub_hi": 66,
    "rows": 8192
   },
   {
-   "job_id": "d9hehuggk0ls73f2saa0",
+   "job_id": "da0iptn2sl0c73bn4rbg",
    "pub_lo": 66,
    "pub_hi": 69,
    "rows": 9211
   },
   {
-   "job_id": "d9hehursbqfc73epujug",
+   "job_id": "da0iptvo3ppc73alhlig",
    "pub_lo": 69,
    "pub_hi": 70,
    "rows": 8192
   },
   {
-   "job_id": "d9hehv3sbqfc73epujvg",
+   "job_id": "da0iptob1g9c73a9sp5g",
    "pub_lo": 70,
    "pub_hi": 71,
    "rows": 8192
   },
   {
-   "job_id": "d9hehv8gk0ls73f2sab0",
+   "job_id": "da0ipu50vrcc73bqgfjg",
    "pub_lo": 71,
    "pub_hi": 74,
    "rows": 9211
   },
   {
-   "job_id": "d9hehvjsbqfc73epuk0g",
+   "job_id": "da0ipufo3ppc73alhlk0",
    "pub_lo": 74,
    "pub_hi": 75,
    "rows": 8192
   },
   {
-   "job_id": "d9hehvkhonhs73acuci0",
+   "job_id": "da0ipuno3ppc73alhlkg",
    "pub_lo": 75,
    "pub_hi": 76,
    "rows": 8192
   },
   {
-   "job_id": "d9hehvt0k0jc738i2qcg",
+   "job_id": "da0ipuvo3ppc73alhll0",
    "pub_lo": 76,
    "pub_hi": 79,
    "rows": 9211
   },
   {
-   "job_id": "d9hei050k0jc738i2qd0",
+   "job_id": "da0ipuvo3ppc73alhlm0",
    "pub_lo": 79,
    "pub_hi": 80,
    "rows": 8192
   },
   {
-   "job_id": "d9hei08gk0ls73f2sae0",
+   "job_id": "da0ipv7o3ppc73alhlo0",
    "pub_lo": 80,
    "pub_hi": 81,
    "rows": 8192
   },
   {
-   "job_id": "d9hei0khonhs73acuck0",
+   "job_id": "da0ipvfo3ppc73alhlp0",
    "pub_lo": 81,
    "pub_hi": 84,
    "rows": 9211
   },
   {
-   "job_id": "d9hei0t0k0jc738i2qeg",
+   "job_id": "da0ipvgb1g9c73a9sp7g",
    "pub_lo": 84,
    "pub_hi": 85,
    "rows": 8192
   },
   {
-   "job_id": "d9hei13sbqfc73epuk20",
+   "job_id": "da0ipvob1g9c73a9sp8g",
    "pub_lo": 85,
    "pub_hi": 86,
    "rows": 8192
   },
   {
-   "job_id": "d9hei1d0k0jc738i2qfg",
+   "job_id": "da0iq07o3ppc73alhlq0",
    "pub_lo": 86,
    "pub_hi": 89,
    "rows": 9211
   },
   {
-   "job_id": "d9hei1jsbqfc73epuk3g",
+   "job_id": "da0iq0fo3ppc73alhlqg",
    "pub_lo": 89,
    "pub_hi": 90,
    "rows": 8192
   },
   {
-   "job_id": "d9hei1rsbqfc73epuk40",
+   "job_id": "da0iq0no3ppc73alhls0",
    "pub_lo": 90,
    "pub_hi": 91,
    "rows": 8192
   },
   {
-   "job_id": "d9hei2d0k0jc738i2qhg",
+   "job_id": "da0iq0no3ppc73alhlt0",
    "pub_lo": 91,
    "pub_hi": 94,
    "rows": 9211
   },
   {
-   "job_id": "d9hei2l0k0jc738i2qi0",
+   "job_id": "da0iq0ob1g9c73a9spa0",
    "pub_lo": 94,
    "pub_hi": 95,
    "rows": 8192
   },
   {
-   "job_id": "d9hei2t0k0jc738i2qjg",
+   "job_id": "da0iq10b1g9c73a9spb0",
    "pub_lo": 95,
    "pub_hi": 96,
    "rows": 8192
   },
   {
-   "job_id": "d9hei350k0jc738i2qk0",
+   "job_id": "da0iq1f2sl0c73bn4rh0",
    "pub_lo": 96,
    "pub_hi": 99,
    "rows": 9211
   },
   {
-   "job_id": "d9hei3bsbqfc73epuk6g",
+   "job_id": "da0iq1n2sl0c73bn4ri0",
    "pub_lo": 99,
    "pub_hi": 100,
    "rows": 8192
   },
   {
-   "job_id": "d9hei3khonhs73acuco0",
+   "job_id": "da0iq1vo3ppc73alhm00",
    "pub_lo": 100,
    "pub_hi": 101,
    "rows": 8192
   },
   {
-   "job_id": "d9hei3rsbqfc73epuk8g",
+   "job_id": "da0iq1vo3ppc73alhm0g",
    "pub_lo": 101,
    "pub_hi": 105,
    "rows": 9212
@@ -424,20 +424,20 @@
   },
   {
    "kind": "cal",
-   "pauli": "ZXYYYZ",
-   "b": "111100",
+   "pauli": "ZZXYYX",
+   "b": "010010",
    "shots": 100
   },
   {
    "kind": "cal",
-   "pauli": "XXYZYZ",
-   "b": "011110",
+   "pauli": "ZYXYYZ",
+   "b": "000101",
    "shots": 100
   },
   {
    "kind": "cal",
-   "pauli": "XYXXYY",
-   "b": "011101",
+   "pauli": "YZYYYZ",
+   "b": "111001",
    "shots": 100
   },
   {
