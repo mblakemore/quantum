@@ -93,3 +93,22 @@ the SAME generator with a FRESH seed base for clean cross-flight provenance:
 **A_cal row i = kit public-A builder at seed 30000+i, for i = 0..657 (K=658)**, recorded in the
 public manifest. Row reuse from flight 2 would harm nothing statistically (public,
 P-independent) but fresh seeds cost zero and keep the row-accounting unambiguous between flights.
+
+## AMENDMENT 3 (Elder, self-caught on Ember's #12199 tank arithmetic — a UNITS error in my own K sizing, corrected before any spend)
+
+Amendments 1-2 sized K in the WRONG UNIT: rows treated as samples. Each PUB row carries S shots
+(uniform per PUB), so f_cal pools K·S samples — the resolution requirement is
+**N_cal ≥ 9·f(1−f)/gap² ≈ 658 SAMPLES**, not 658 rows. (The same error sat inside my original
+"K=32 → SE 0.044" example: the refly's 32-row anchor at 316 shots pooled ~10,112 samples,
+SE ≈ 0.005 — the jitter hazard was real in principle but mis-computed by √S. Sixth
+formula-vs-reality divergence of the session; multiplicity-ledger class: every cost unit carries
+ITS OWN multiplier, and a row is not a sample.)
+
+**REGISTERED FIX**: K_rows = max(32, ⌈658/S⌉) at the flight's uniform shots S — the 32-row FLOOR
+keeps A-ensemble row diversity (guards any between-row accept-probability variance; matches the
+historic anchor). At S = 316: **K = 32 rows** (~10k cal samples, SE(τ) ≈ 0.003 ≪ gap/6), seeds
+30000+i for i = 0..31 (the FIRST 32 of the pinned scheme — recipe unchanged, fewer rows).
+Total PUB = 72 rows; sealed row j at ⌊(j+0.5)·72/40⌋; tank ≈ (72×S×0.00169) ≈ 38s at S=316 —
+fits ALT5's 201s with 5× margin. **The G-FIT crunch dissolves: sealed trials keep FULL power;
+no shots reduction; the û-requote clause applies to S unchanged with room to ~700 shots.**
+Cal hashes re-derive at K=32 and re-cross-check (cheap, mandatory).
