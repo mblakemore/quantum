@@ -172,7 +172,7 @@ def main(shots, fly, hash_only):
                "sealed_positions": {str(sealed_pos[j]): f"sealed_trial_{j}"
                                     for j in range(TRIALS_TOTAL)},
                "cal_block_sha256": cal_hash,
-               "pattern": "sealed j at floor((j+0.5)*698/40); cal fill rest seed-order",
+               "pattern": f"sealed j at floor((j+0.5)*{TOTAL_ROWS}/40); cal fill rest seed-order",
                "commitment_sha256": sec["sha256"], "n": N}
 
     # ---- G-FIT against the live tank (û-re-quoted shots)
