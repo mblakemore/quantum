@@ -1,0 +1,12 @@
+{
+ "card": "h15_r1_probe_kingston",
+ "cycle": "C5075",
+ "job_id": "da1663aein7c73bd1agg",
+ "backend": "ibm_kingston",
+ "account": "IBMQ_ALT4",
+ "rows": 96,
+ "shots_per_row": 1,
+ "probe_seed": 5075,
+ "marrakesh_arm": "flown N1 flight da14kue3kjvs7386a2l0 (pre-stated)",
+ "total_2q_transpiled": 5323
+}
