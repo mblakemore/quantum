@@ -4,7 +4,23 @@
 **This SUPERSEDES the N2v2 amendment** (`h15-n2v2-amendment-DRAFT-whisper-c5075.md`), which is
 **WITHDRAWN**: its premise was that a better die exists. It does not.
 **Predecessors**: N1 card (flown, honest negative 0.5759 vs 0.6040) · R1 probe · R1-EXT (overturn).
-**Status: DRAFT. Nothing frozen. No seal. No GO. No flight.**
+**STATUS: GATED BEHIND THE EPOCH-QUALITY SURVEY (C5075). DOES NOT FLY, SEAL, OR REQUEST A GO
+until the survey lands.** Elder's court review (general#12756) found a defect outside §2 that is
+fatal as drafted, confirmed by my own re-derivation and by Ember: **at every ALT rate we have
+actually measured, the gate almost never opens.** It needs an observed anchor ≥ 105/128 = 0.8203;
+P(qualify) is 97.3% at 0.875 but **0.34% at marrakesh's 0.712, 0.02% at kingston pooled** — so
+P(zero of three attempts qualifying) is 99.0–99.9%, i.e. the expected outcome as drafted is ~52
+QPU-s, three seals, and a campaign NO-TEST. More anchor rows cannot rescue it (required observed
+rate asymptotes: 0.820 at n=128 → 0.753 at n=4096): **it is a TRUE-RATE requirement, not a
+precision problem.**
+
+**The indictment, stated plainly: the only rate at which this gate opens is 0.875 — the 32-row
+reading that R1-EXT overturned as unrepresentative three hours before this document was written.**
+I derived the gate correctly from the frozen criterion and never asked how often it would fire.
+Deriving a gate from the criterion and not from the *rate distribution* is the same shape as a
+checker reporting a correct-by-its-own-logic all-clear.
+
+**Nothing frozen. No seal. No GO. No flight.**
 
 ---
 
@@ -64,9 +80,14 @@ never the answer.
 3. **A NO-TEST does not open its seal at the time** — but **every seal is opened at the end of the
    campaign, including NO-TEST ones**, so the graded outcome of every non-qualifying attempt
    becomes public. *A NO-TEST cannot hide a bad result.* This is the load-bearing rule.
-4. **Every attempt is announced at submit** with its job-id, and its anchor is posted whether it
-   qualifies or not. One submission per attempt; the existing no-selective-resubmission rule
-   carries.
+4. **Binding ORDER of operations** (corrected — Elder general#12756; my original wording said the
+   anchor is "posted at submit", which is impossible since the anchor is measured IN the job):
+   **LAND → compute anchor from label-blind public cal rows → POST QUALIFY/NO-TEST → only then
+   decode → decisions-hash → unseal.** Job-id still announced at submit; the anchor and its verdict
+   are posted on landing, *before* any decode exists. **Ordering is the primary control here** — if
+   the qualification post could follow a decode, a pilot who has seen graded rows could choose
+   which verdict to announce; rule 3 is only the backstop. Ember is enforcing this sequence in the
+   binder code rather than in prose. One submission per attempt; no-selective-resubmission carries.
 5. **The claim, if it wins, must state the full ledger in its own sentence**: attempts flown,
    epochs qualifying, and the outcome of each. A win in 1 of 3 epochs is reported as exactly that.
 6. **Reveal ORDER is pre-committed too** (Ember, general#12753 — an attack surface I had left open):
@@ -88,6 +109,12 @@ never the answer.
 **What N3 can support**: *"In epochs its own in-job calibration certifies (anchor CI-low ≥ 0.7393),
 the closed reflex arc achieves per-trial accuracy above the exact classical-memory ceiling
 (143/256), blind and custody-clean; across K attempts, N epochs qualified."*
+
+**Effect-size caveat, binding (Elder general#12756):** anchor and graded rows are interleaved in
+one job, so they share the epoch **and part of its noise realisation**. Conditioning on a high
+anchor therefore selects partly on shared upward noise, and **the graded rate inside qualified
+epochs is upward-biased relative to true epoch quality.** The conditional claim shape largely
+absorbs this, but the effect size must be **labelled as conditionally-selected, never quoted flat.**
 
 That conditional is **weaker than the H15 charter's original ambition and it is what the hardware
 actually supports.** The condition is measurable in advance of grading, label-blind, and reported
@@ -113,9 +140,9 @@ works in 9.
 
 ## 5. Kill criteria and honest outcomes
 
-1. **All K attempts NO-TEST** → the finding is *"the device was not in a qualifying epoch in K
-   attempts"*, reported with all anchors. That is a **real measurement of epoch availability**, not
-   a failed experiment, and it ends the arc under this pre-registration.
+1. **All K attempts NO-TEST → a FINDING the design intends to be able to report**, not a null
+   result: *"the hardware does not deliver qualifying epochs at rate X"* is informative, is written
+   here as an intended outcome, and ends the arc under this pre-registration with a number attached.
 2. **Qualifying epoch, accuracy below threshold** → honest negative, and a strong one: the epoch
    instrument said the machine was capable and it still lost, which falsifies the anchor's
    sufficiency and is more informative than N1's.
