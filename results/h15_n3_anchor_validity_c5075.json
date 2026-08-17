@@ -1,0 +1,20 @@
+{
+ "card": "h15_n3_anchor_validity_check",
+ "cycle": "C5075",
+ "label": "POST-HOC re-analysis of banked N1 flight (job da14kue3kjvs7386a2l0), $0, run BEFORE the N3 anchor design is frozen",
+ "question": "Are known-A public-seed anchor rows an unbiased estimator of the sealed-A graded ALT rate? A-weight drives circuit depth, so a weight-dependent accept rate could in principle break the anchor.",
+ "accept_by_A_weight": {
+  "w2": "13/15=0.867",
+  "w3": "27/36=0.750",
+  "w4": "51/70=0.729",
+  "w5": "56/78=0.718",
+  "w6": "45/67=0.672",
+  "w7": "21/33=0.636",
+  "tails_w1_w8_w9": "n<10, noise"
+ },
+ "trend_all_rows": "point-biserial r=-0.073, z=-1.29, p=0.196 \u2014 not significant",
+ "trend_w2_to_w7": "r=-0.102, z=-1.76, p=0.078, slope -3.44pp per unit weight \u2014 SUGGESTIVE, not significant; physically expected direction (more planted terms = deeper circuit = lower accept)",
+ "VERDICT_bias": "NO BIAS, and it does not depend on resolving the trend: anchor A's and graded A's are BOTH uniform draws from the SAME 10-bit ensemble, so E[anchor]=E[graded] whatever the weight dependence. A-weight affects the anchor's VARIANCE, not its validity.",
+ "variance_inflation": "between-weight component 0.00245 vs binomial 0.2049 -> inflation factor 1.012, anchor SE +0.6% (128 rows: 0.0400 -> 0.0402). NEGLIGIBLE; no stratification needed.",
+ "design_consequence": "N3's uniform public-seed anchor stands as drafted. Recorded so the anchor's core premise is a TESTED assumption rather than an assumed one - the c5018-class defect this campaign keeps finding."
+}
