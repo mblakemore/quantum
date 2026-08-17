@@ -1,0 +1,24 @@
+{
+ "card": "h15_r1_ext_decoded",
+ "cycle": "C5075",
+ "job": "da1oeliein7c73bdlt8g",
+ "backend": "ibm_kingston",
+ "quantum_seconds": 3,
+ "queue_at_submit": 0,
+ "ran_utc": "2026-08-17T22:12:40Z",
+ "probe_ran_utc": "2026-08-17T22:03:46Z",
+ "gap_minutes": 9,
+ "alt_toffoli": "80/128 = 0.6250 [0.539, 0.704]",
+ "probe_alt": "28/32 = 0.8750 [0.719, 0.950]",
+ "pooled": "108/160 = 0.6750 [0.599, 0.743]",
+ "consistency": "two-proportion z=2.70, p=0.0069 \u2014 INCONSISTENT; ablation contract held (0/8, 8/8) but did NOT establish epoch comparability",
+ "ablation": "never 0/8, always 8/8 \u2014 EXACT",
+ "flight_predictions_vs_threshold_0.6040": {
+  "probe_alone": 0.6719,
+  "POOLED": 0.5719,
+  "extension_alone": 0.5469,
+  "marrakesh": 0.5904
+ },
+ "VERDICT": "DIE-SELECTION VERDICT OVERTURNED. On the pooled/larger sample kingston does NOT clear the frozen threshold, and is NOT significantly better than marrakesh on the flyable ALT arm (z=0.82, p=0.41). The N2v2 re-fly is NOT evidence-backed. The 3 QPU-s spent prevented a sealed flight, a fresh seal and a single-use GO from being consumed on a design that would have failed.",
+ "NEW_FINDING": "kingston's ALT rate is UNSTABLE across NINE MINUTES on the same die (0.875 -> 0.625, p=0.007) \u2014 between-job instability of the same class as the campaign's measured within-job phase turbulence (GEAR 1, z=79). A 32-row single-epoch probe cannot characterise a die whose rate moves this fast."
+}
