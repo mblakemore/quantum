@@ -1,0 +1,30 @@
+{
+ "card": "h15_r1_deficit_split_diagnostic",
+ "cycle": "C5075",
+ "label": "POST-HOC ($0 re-analysis of banked+revealed flight da14kue3kjvs7386a2l0; protocol frozen before compute: Q-A network error, Q-B upstream leakage)",
+ "QA_decision_network_mismatch": {
+  "all": "166/696 = 0.2385",
+  "cal": "13/64 = 0.2031",
+  "ALT": "81/316 = 0.2563",
+  "NULL": "72/316 = 0.2278",
+  "note": "dec bit vs XOR(AND) recomputed from measured bells; nonzero even on basis-state NULL controls -> Toffoli-chain + readout-difference noise ~23%"
+ },
+ "QB_alt_parity_bells": {
+  "rate": 0.3418,
+  "ideal": 0.0,
+  "confound_owned": "bells measured AFTER Toffolis touch them - backaction contaminates; 0.3418 = upstream leakage (+) backaction (+) 8-readout parity noise, not pure upstream"
+ },
+ "NULL_parity_bells": {
+  "rate": 0.4652,
+  "ideal": 0.46875,
+  "note": "at theory - NULL arm healthy"
+ },
+ "surprise": "coherent-ancilla ALT-accept 0.712 BEAT classical parity-of-bells 0.658: one ancilla readout beats eight bell readouts; the classical-decision variant does NOT dominate on this data",
+ "rough_decomposition_estimate": {
+  "upstream_phase_leakage": "~0.24 (deconfounded estimate, crude)",
+  "toffoli_chain": "~0.10-0.15",
+  "eight_readout_parity": "~0.12",
+  "caveat": "estimates from one flight, one die; the probe measures these per-die directly"
+ },
+ "design_conclusion": "no single change decisive on marrakesh; next rung = per-die measured probe (Toffoli-path vs sensor-only rows) on kingston + marrakesh re-probe, powering the N2v2 re-fly from MEASUREMENTS (banked pattern: phase-aware power models)"
+}
