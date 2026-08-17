@@ -1,0 +1,13294 @@
+{
+ "spec": "h15_positronic_v1",
+ "n": 4,
+ "M": 632,
+ "flight": "N1",
+ "commitment_sha256": "b96ee93b29983352a543c25969fee3bba720e45cc2ee06e252449529cb2914f1",
+ "verified_against": "b96ee93b29983352a543c25969fee3bba720e45cc2ee06e252449529cb2914f1",
+ "label_convention": "1=ALT(correct act 1), 0=NULL(correct act 0)",
+ "sealed_draw": {
+  "ALT": 316,
+  "NULL": 316
+ },
+ "salt": "64b46921def808abc5029308003890bd",
+ "per_row": [
+  {
+   "graded_index": 0,
+   "flight_position": 0,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    15
+   ]
+  },
+  {
+   "graded_index": 1,
+   "flight_position": 1,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    9
+   ]
+  },
+  {
+   "graded_index": 2,
+   "flight_position": 2,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 3,
+   "flight_position": 3,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    13
+   ]
+  },
+  {
+   "graded_index": 4,
+   "flight_position": 4,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 5,
+   "flight_position": 6,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 6,
+   "flight_position": 7,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    9
+   ]
+  },
+  {
+   "graded_index": 7,
+   "flight_position": 8,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    1
+   ]
+  },
+  {
+   "graded_index": 8,
+   "flight_position": 9,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    7
+   ]
+  },
+  {
+   "graded_index": 9,
+   "flight_position": 10,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    3
+   ]
+  },
+  {
+   "graded_index": 10,
+   "flight_position": 11,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 11,
+   "flight_position": 12,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    0
+   ]
+  },
+  {
+   "graded_index": 12,
+   "flight_position": 13,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 13,
+   "flight_position": 14,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    7
+   ]
+  },
+  {
+   "graded_index": 14,
+   "flight_position": 15,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 15,
+   "flight_position": 17,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    4
+   ]
+  },
+  {
+   "graded_index": 16,
+   "flight_position": 18,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 17,
+   "flight_position": 19,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 18,
+   "flight_position": 20,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 19,
+   "flight_position": 21,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    2
+   ]
+  },
+  {
+   "graded_index": 20,
+   "flight_position": 22,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 21,
+   "flight_position": 23,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 22,
+   "flight_position": 24,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    10
+   ]
+  },
+  {
+   "graded_index": 23,
+   "flight_position": 25,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    15
+   ]
+  },
+  {
+   "graded_index": 24,
+   "flight_position": 26,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 25,
+   "flight_position": 28,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 26,
+   "flight_position": 29,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    2
+   ]
+  },
+  {
+   "graded_index": 27,
+   "flight_position": 30,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 28,
+   "flight_position": 31,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    9
+   ]
+  },
+  {
+   "graded_index": 29,
+   "flight_position": 32,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    7
+   ]
+  },
+  {
+   "graded_index": 30,
+   "flight_position": 33,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    9
+   ]
+  },
+  {
+   "graded_index": 31,
+   "flight_position": 34,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    14
+   ]
+  },
+  {
+   "graded_index": 32,
+   "flight_position": 35,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    13
+   ]
+  },
+  {
+   "graded_index": 33,
+   "flight_position": 36,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 34,
+   "flight_position": 37,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    1
+   ]
+  },
+  {
+   "graded_index": 35,
+   "flight_position": 39,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    11
+   ]
+  },
+  {
+   "graded_index": 36,
+   "flight_position": 40,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    3
+   ]
+  },
+  {
+   "graded_index": 37,
+   "flight_position": 41,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 38,
+   "flight_position": 42,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    7
+   ]
+  },
+  {
+   "graded_index": 39,
+   "flight_position": 43,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    5
+   ]
+  },
+  {
+   "graded_index": 40,
+   "flight_position": 44,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 41,
+   "flight_position": 45,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    1
+   ]
+  },
+  {
+   "graded_index": 42,
+   "flight_position": 46,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    10
+   ]
+  },
+  {
+   "graded_index": 43,
+   "flight_position": 47,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 44,
+   "flight_position": 49,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    5
+   ]
+  },
+  {
+   "graded_index": 45,
+   "flight_position": 50,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    15
+   ]
+  },
+  {
+   "graded_index": 46,
+   "flight_position": 51,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 47,
+   "flight_position": 52,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 48,
+   "flight_position": 53,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    1
+   ]
+  },
+  {
+   "graded_index": 49,
+   "flight_position": 54,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    11
+   ]
+  },
+  {
+   "graded_index": 50,
+   "flight_position": 55,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 51,
+   "flight_position": 56,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    0
+   ]
+  },
+  {
+   "graded_index": 52,
+   "flight_position": 57,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    4
+   ]
+  },
+  {
+   "graded_index": 53,
+   "flight_position": 58,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 54,
+   "flight_position": 60,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    8
+   ]
+  },
+  {
+   "graded_index": 55,
+   "flight_position": 61,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 56,
+   "flight_position": 62,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    11
+   ]
+  },
+  {
+   "graded_index": 57,
+   "flight_position": 63,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    12
+   ]
+  },
+  {
+   "graded_index": 58,
+   "flight_position": 64,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    15
+   ]
+  },
+  {
+   "graded_index": 59,
+   "flight_position": 65,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 60,
+   "flight_position": 66,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 61,
+   "flight_position": 67,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 62,
+   "flight_position": 68,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    9
+   ]
+  },
+  {
+   "graded_index": 63,
+   "flight_position": 69,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 64,
+   "flight_position": 71,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    1
+   ]
+  },
+  {
+   "graded_index": 65,
+   "flight_position": 72,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    13
+   ]
+  },
+  {
+   "graded_index": 66,
+   "flight_position": 73,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    10
+   ]
+  },
+  {
+   "graded_index": 67,
+   "flight_position": 74,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 68,
+   "flight_position": 75,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 69,
+   "flight_position": 76,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 70,
+   "flight_position": 77,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    15
+   ]
+  },
+  {
+   "graded_index": 71,
+   "flight_position": 78,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 72,
+   "flight_position": 79,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    14
+   ]
+  },
+  {
+   "graded_index": 73,
+   "flight_position": 80,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 74,
+   "flight_position": 82,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 75,
+   "flight_position": 83,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    9
+   ]
+  },
+  {
+   "graded_index": 76,
+   "flight_position": 84,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 77,
+   "flight_position": 85,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    9
+   ]
+  },
+  {
+   "graded_index": 78,
+   "flight_position": 86,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    1
+   ]
+  },
+  {
+   "graded_index": 79,
+   "flight_position": 87,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 80,
+   "flight_position": 88,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    5
+   ]
+  },
+  {
+   "graded_index": 81,
+   "flight_position": 89,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 82,
+   "flight_position": 90,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 83,
+   "flight_position": 91,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    8
+   ]
+  },
+  {
+   "graded_index": 84,
+   "flight_position": 93,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    15
+   ]
+  },
+  {
+   "graded_index": 85,
+   "flight_position": 94,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    12
+   ]
+  },
+  {
+   "graded_index": 86,
+   "flight_position": 95,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 87,
+   "flight_position": 96,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 88,
+   "flight_position": 97,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 89,
+   "flight_position": 98,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 90,
+   "flight_position": 99,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    0
+   ]
+  },
+  {
+   "graded_index": 91,
+   "flight_position": 100,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 92,
+   "flight_position": 101,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 93,
+   "flight_position": 102,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 94,
+   "flight_position": 104,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 95,
+   "flight_position": 105,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 96,
+   "flight_position": 106,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 97,
+   "flight_position": 107,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    15
+   ]
+  },
+  {
+   "graded_index": 98,
+   "flight_position": 108,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    6
+   ]
+  },
+  {
+   "graded_index": 99,
+   "flight_position": 109,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    7
+   ]
+  },
+  {
+   "graded_index": 100,
+   "flight_position": 110,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 101,
+   "flight_position": 111,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 102,
+   "flight_position": 112,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    2
+   ]
+  },
+  {
+   "graded_index": 103,
+   "flight_position": 113,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 104,
+   "flight_position": 115,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    7
+   ]
+  },
+  {
+   "graded_index": 105,
+   "flight_position": 116,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 106,
+   "flight_position": 117,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    0
+   ]
+  },
+  {
+   "graded_index": 107,
+   "flight_position": 118,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    6
+   ]
+  },
+  {
+   "graded_index": 108,
+   "flight_position": 119,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 109,
+   "flight_position": 120,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 110,
+   "flight_position": 121,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 111,
+   "flight_position": 122,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 112,
+   "flight_position": 123,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 113,
+   "flight_position": 124,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 114,
+   "flight_position": 126,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 115,
+   "flight_position": 127,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 116,
+   "flight_position": 128,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    0
+   ]
+  },
+  {
+   "graded_index": 117,
+   "flight_position": 129,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 118,
+   "flight_position": 130,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 119,
+   "flight_position": 131,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 120,
+   "flight_position": 132,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    15
+   ]
+  },
+  {
+   "graded_index": 121,
+   "flight_position": 133,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 122,
+   "flight_position": 134,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 123,
+   "flight_position": 136,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 124,
+   "flight_position": 137,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    15
+   ]
+  },
+  {
+   "graded_index": 125,
+   "flight_position": 138,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    8
+   ]
+  },
+  {
+   "graded_index": 126,
+   "flight_position": 139,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 127,
+   "flight_position": 140,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    11
+   ]
+  },
+  {
+   "graded_index": 128,
+   "flight_position": 141,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 129,
+   "flight_position": 142,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 130,
+   "flight_position": 143,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    13
+   ]
+  },
+  {
+   "graded_index": 131,
+   "flight_position": 144,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 132,
+   "flight_position": 145,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 133,
+   "flight_position": 147,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    10
+   ]
+  },
+  {
+   "graded_index": 134,
+   "flight_position": 148,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 135,
+   "flight_position": 149,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    5
+   ]
+  },
+  {
+   "graded_index": 136,
+   "flight_position": 150,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    7
+   ]
+  },
+  {
+   "graded_index": 137,
+   "flight_position": 151,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 138,
+   "flight_position": 152,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 139,
+   "flight_position": 153,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 140,
+   "flight_position": 154,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    15
+   ]
+  },
+  {
+   "graded_index": 141,
+   "flight_position": 155,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    12
+   ]
+  },
+  {
+   "graded_index": 142,
+   "flight_position": 156,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 143,
+   "flight_position": 158,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 144,
+   "flight_position": 159,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 145,
+   "flight_position": 160,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    9
+   ]
+  },
+  {
+   "graded_index": 146,
+   "flight_position": 161,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 147,
+   "flight_position": 162,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    15
+   ]
+  },
+  {
+   "graded_index": 148,
+   "flight_position": 163,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    11
+   ]
+  },
+  {
+   "graded_index": 149,
+   "flight_position": 164,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    10
+   ]
+  },
+  {
+   "graded_index": 150,
+   "flight_position": 165,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    0
+   ]
+  },
+  {
+   "graded_index": 151,
+   "flight_position": 166,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 152,
+   "flight_position": 167,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    8
+   ]
+  },
+  {
+   "graded_index": 153,
+   "flight_position": 169,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 154,
+   "flight_position": 170,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 155,
+   "flight_position": 171,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 156,
+   "flight_position": 172,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    8
+   ]
+  },
+  {
+   "graded_index": 157,
+   "flight_position": 173,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 158,
+   "flight_position": 174,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 159,
+   "flight_position": 175,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    7
+   ]
+  },
+  {
+   "graded_index": 160,
+   "flight_position": 176,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 161,
+   "flight_position": 177,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    14
+   ]
+  },
+  {
+   "graded_index": 162,
+   "flight_position": 178,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    0
+   ]
+  },
+  {
+   "graded_index": 163,
+   "flight_position": 180,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 164,
+   "flight_position": 181,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 165,
+   "flight_position": 182,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 166,
+   "flight_position": 183,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 167,
+   "flight_position": 184,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 168,
+   "flight_position": 185,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    6
+   ]
+  },
+  {
+   "graded_index": 169,
+   "flight_position": 186,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    10
+   ]
+  },
+  {
+   "graded_index": 170,
+   "flight_position": 187,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 171,
+   "flight_position": 188,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 172,
+   "flight_position": 189,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    8
+   ]
+  },
+  {
+   "graded_index": 173,
+   "flight_position": 191,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    2
+   ]
+  },
+  {
+   "graded_index": 174,
+   "flight_position": 192,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    5
+   ]
+  },
+  {
+   "graded_index": 175,
+   "flight_position": 193,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    15
+   ]
+  },
+  {
+   "graded_index": 176,
+   "flight_position": 194,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    8
+   ]
+  },
+  {
+   "graded_index": 177,
+   "flight_position": 195,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    1
+   ]
+  },
+  {
+   "graded_index": 178,
+   "flight_position": 196,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 179,
+   "flight_position": 197,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 180,
+   "flight_position": 198,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 181,
+   "flight_position": 199,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 182,
+   "flight_position": 200,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    9
+   ]
+  },
+  {
+   "graded_index": 183,
+   "flight_position": 202,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 184,
+   "flight_position": 203,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 185,
+   "flight_position": 204,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 186,
+   "flight_position": 205,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    7
+   ]
+  },
+  {
+   "graded_index": 187,
+   "flight_position": 206,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 188,
+   "flight_position": 207,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    1
+   ]
+  },
+  {
+   "graded_index": 189,
+   "flight_position": 208,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 190,
+   "flight_position": 209,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 191,
+   "flight_position": 210,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 192,
+   "flight_position": 211,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    13
+   ]
+  },
+  {
+   "graded_index": 193,
+   "flight_position": 213,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 194,
+   "flight_position": 214,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    7
+   ]
+  },
+  {
+   "graded_index": 195,
+   "flight_position": 215,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 196,
+   "flight_position": 216,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    6
+   ]
+  },
+  {
+   "graded_index": 197,
+   "flight_position": 217,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 198,
+   "flight_position": 218,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    2
+   ]
+  },
+  {
+   "graded_index": 199,
+   "flight_position": 219,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    11
+   ]
+  },
+  {
+   "graded_index": 200,
+   "flight_position": 220,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 201,
+   "flight_position": 221,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 202,
+   "flight_position": 223,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    3
+   ]
+  },
+  {
+   "graded_index": 203,
+   "flight_position": 224,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    0
+   ]
+  },
+  {
+   "graded_index": 204,
+   "flight_position": 225,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    2
+   ]
+  },
+  {
+   "graded_index": 205,
+   "flight_position": 226,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    1
+   ]
+  },
+  {
+   "graded_index": 206,
+   "flight_position": 227,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 207,
+   "flight_position": 228,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 208,
+   "flight_position": 229,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 209,
+   "flight_position": 230,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 210,
+   "flight_position": 231,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 211,
+   "flight_position": 232,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    1
+   ]
+  },
+  {
+   "graded_index": 212,
+   "flight_position": 234,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    4
+   ]
+  },
+  {
+   "graded_index": 213,
+   "flight_position": 235,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    14
+   ]
+  },
+  {
+   "graded_index": 214,
+   "flight_position": 236,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    9
+   ]
+  },
+  {
+   "graded_index": 215,
+   "flight_position": 237,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 216,
+   "flight_position": 238,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    8
+   ]
+  },
+  {
+   "graded_index": 217,
+   "flight_position": 239,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 218,
+   "flight_position": 240,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 219,
+   "flight_position": 241,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    12
+   ]
+  },
+  {
+   "graded_index": 220,
+   "flight_position": 242,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 221,
+   "flight_position": 243,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 222,
+   "flight_position": 245,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    6
+   ]
+  },
+  {
+   "graded_index": 223,
+   "flight_position": 246,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    4
+   ]
+  },
+  {
+   "graded_index": 224,
+   "flight_position": 247,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    15
+   ]
+  },
+  {
+   "graded_index": 225,
+   "flight_position": 248,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 226,
+   "flight_position": 249,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 227,
+   "flight_position": 250,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    0
+   ]
+  },
+  {
+   "graded_index": 228,
+   "flight_position": 251,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 229,
+   "flight_position": 252,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    14
+   ]
+  },
+  {
+   "graded_index": 230,
+   "flight_position": 253,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 231,
+   "flight_position": 254,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    8
+   ]
+  },
+  {
+   "graded_index": 232,
+   "flight_position": 256,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 233,
+   "flight_position": 257,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 234,
+   "flight_position": 258,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 235,
+   "flight_position": 259,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    5
+   ]
+  },
+  {
+   "graded_index": 236,
+   "flight_position": 260,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    12
+   ]
+  },
+  {
+   "graded_index": 237,
+   "flight_position": 261,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    2
+   ]
+  },
+  {
+   "graded_index": 238,
+   "flight_position": 262,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 239,
+   "flight_position": 263,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 240,
+   "flight_position": 264,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    6
+   ]
+  },
+  {
+   "graded_index": 241,
+   "flight_position": 265,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    15
+   ]
+  },
+  {
+   "graded_index": 242,
+   "flight_position": 267,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    14
+   ]
+  },
+  {
+   "graded_index": 243,
+   "flight_position": 268,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 244,
+   "flight_position": 269,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 245,
+   "flight_position": 270,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 246,
+   "flight_position": 271,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 247,
+   "flight_position": 272,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 248,
+   "flight_position": 273,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 249,
+   "flight_position": 274,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 250,
+   "flight_position": 275,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 251,
+   "flight_position": 276,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    10
+   ]
+  },
+  {
+   "graded_index": 252,
+   "flight_position": 278,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 253,
+   "flight_position": 279,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    12
+   ]
+  },
+  {
+   "graded_index": 254,
+   "flight_position": 280,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    10
+   ]
+  },
+  {
+   "graded_index": 255,
+   "flight_position": 281,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    1
+   ]
+  },
+  {
+   "graded_index": 256,
+   "flight_position": 282,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    7
+   ]
+  },
+  {
+   "graded_index": 257,
+   "flight_position": 283,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 258,
+   "flight_position": 284,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    8
+   ]
+  },
+  {
+   "graded_index": 259,
+   "flight_position": 285,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 260,
+   "flight_position": 286,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    11
+   ]
+  },
+  {
+   "graded_index": 261,
+   "flight_position": 287,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    13
+   ]
+  },
+  {
+   "graded_index": 262,
+   "flight_position": 289,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 263,
+   "flight_position": 290,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 264,
+   "flight_position": 291,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    10
+   ]
+  },
+  {
+   "graded_index": 265,
+   "flight_position": 292,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 266,
+   "flight_position": 293,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    2
+   ]
+  },
+  {
+   "graded_index": 267,
+   "flight_position": 294,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 268,
+   "flight_position": 295,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    4
+   ]
+  },
+  {
+   "graded_index": 269,
+   "flight_position": 296,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 270,
+   "flight_position": 297,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 271,
+   "flight_position": 298,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    11
+   ]
+  },
+  {
+   "graded_index": 272,
+   "flight_position": 300,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 273,
+   "flight_position": 301,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    6
+   ]
+  },
+  {
+   "graded_index": 274,
+   "flight_position": 302,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    1
+   ]
+  },
+  {
+   "graded_index": 275,
+   "flight_position": 303,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    13
+   ]
+  },
+  {
+   "graded_index": 276,
+   "flight_position": 304,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    4
+   ]
+  },
+  {
+   "graded_index": 277,
+   "flight_position": 305,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 278,
+   "flight_position": 306,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    6
+   ]
+  },
+  {
+   "graded_index": 279,
+   "flight_position": 307,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    0
+   ]
+  },
+  {
+   "graded_index": 280,
+   "flight_position": 308,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    1
+   ]
+  },
+  {
+   "graded_index": 281,
+   "flight_position": 310,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 282,
+   "flight_position": 311,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 283,
+   "flight_position": 312,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 284,
+   "flight_position": 313,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 285,
+   "flight_position": 314,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 286,
+   "flight_position": 315,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    2
+   ]
+  },
+  {
+   "graded_index": 287,
+   "flight_position": 316,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 288,
+   "flight_position": 317,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 289,
+   "flight_position": 318,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    0
+   ]
+  },
+  {
+   "graded_index": 290,
+   "flight_position": 319,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    13
+   ]
+  },
+  {
+   "graded_index": 291,
+   "flight_position": 321,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    9
+   ]
+  },
+  {
+   "graded_index": 292,
+   "flight_position": 322,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 293,
+   "flight_position": 323,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 294,
+   "flight_position": 324,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    12
+   ]
+  },
+  {
+   "graded_index": 295,
+   "flight_position": 325,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 296,
+   "flight_position": 326,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    3
+   ]
+  },
+  {
+   "graded_index": 297,
+   "flight_position": 327,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 298,
+   "flight_position": 328,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 299,
+   "flight_position": 329,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 300,
+   "flight_position": 330,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    7
+   ]
+  },
+  {
+   "graded_index": 301,
+   "flight_position": 332,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 302,
+   "flight_position": 333,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    9
+   ]
+  },
+  {
+   "graded_index": 303,
+   "flight_position": 334,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 304,
+   "flight_position": 335,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    7
+   ]
+  },
+  {
+   "graded_index": 305,
+   "flight_position": 336,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 306,
+   "flight_position": 337,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 307,
+   "flight_position": 338,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 308,
+   "flight_position": 339,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 309,
+   "flight_position": 340,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 310,
+   "flight_position": 341,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    1
+   ]
+  },
+  {
+   "graded_index": 311,
+   "flight_position": 343,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    15
+   ]
+  },
+  {
+   "graded_index": 312,
+   "flight_position": 344,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 313,
+   "flight_position": 345,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 314,
+   "flight_position": 346,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 315,
+   "flight_position": 347,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    15
+   ]
+  },
+  {
+   "graded_index": 316,
+   "flight_position": 348,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    2
+   ]
+  },
+  {
+   "graded_index": 317,
+   "flight_position": 349,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 318,
+   "flight_position": 350,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    5
+   ]
+  },
+  {
+   "graded_index": 319,
+   "flight_position": 351,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 320,
+   "flight_position": 352,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    9
+   ]
+  },
+  {
+   "graded_index": 321,
+   "flight_position": 354,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    7
+   ]
+  },
+  {
+   "graded_index": 322,
+   "flight_position": 355,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    10
+   ]
+  },
+  {
+   "graded_index": 323,
+   "flight_position": 356,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 324,
+   "flight_position": 357,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    7
+   ]
+  },
+  {
+   "graded_index": 325,
+   "flight_position": 358,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    0
+   ]
+  },
+  {
+   "graded_index": 326,
+   "flight_position": 359,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    4
+   ]
+  },
+  {
+   "graded_index": 327,
+   "flight_position": 360,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 328,
+   "flight_position": 361,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 329,
+   "flight_position": 362,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    3
+   ]
+  },
+  {
+   "graded_index": 330,
+   "flight_position": 363,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    14
+   ]
+  },
+  {
+   "graded_index": 331,
+   "flight_position": 365,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 332,
+   "flight_position": 366,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 333,
+   "flight_position": 367,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    11
+   ]
+  },
+  {
+   "graded_index": 334,
+   "flight_position": 368,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 335,
+   "flight_position": 369,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    6
+   ]
+  },
+  {
+   "graded_index": 336,
+   "flight_position": 370,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 337,
+   "flight_position": 371,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    4
+   ]
+  },
+  {
+   "graded_index": 338,
+   "flight_position": 372,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    14
+   ]
+  },
+  {
+   "graded_index": 339,
+   "flight_position": 373,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 340,
+   "flight_position": 374,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 341,
+   "flight_position": 376,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    14
+   ]
+  },
+  {
+   "graded_index": 342,
+   "flight_position": 377,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    7
+   ]
+  },
+  {
+   "graded_index": 343,
+   "flight_position": 378,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    13
+   ]
+  },
+  {
+   "graded_index": 344,
+   "flight_position": 379,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 345,
+   "flight_position": 380,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    3
+   ]
+  },
+  {
+   "graded_index": 346,
+   "flight_position": 381,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    14
+   ]
+  },
+  {
+   "graded_index": 347,
+   "flight_position": 382,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    11
+   ]
+  },
+  {
+   "graded_index": 348,
+   "flight_position": 383,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    1
+   ]
+  },
+  {
+   "graded_index": 349,
+   "flight_position": 384,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 350,
+   "flight_position": 385,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 351,
+   "flight_position": 387,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    13
+   ]
+  },
+  {
+   "graded_index": 352,
+   "flight_position": 388,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    6
+   ]
+  },
+  {
+   "graded_index": 353,
+   "flight_position": 389,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 354,
+   "flight_position": 390,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    1
+   ]
+  },
+  {
+   "graded_index": 355,
+   "flight_position": 391,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 356,
+   "flight_position": 392,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    1
+   ]
+  },
+  {
+   "graded_index": 357,
+   "flight_position": 393,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    7
+   ]
+  },
+  {
+   "graded_index": 358,
+   "flight_position": 394,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    5
+   ]
+  },
+  {
+   "graded_index": 359,
+   "flight_position": 395,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    11
+   ]
+  },
+  {
+   "graded_index": 360,
+   "flight_position": 397,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    10
+   ]
+  },
+  {
+   "graded_index": 361,
+   "flight_position": 398,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    3
+   ]
+  },
+  {
+   "graded_index": 362,
+   "flight_position": 399,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 363,
+   "flight_position": 400,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    7
+   ]
+  },
+  {
+   "graded_index": 364,
+   "flight_position": 401,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    6
+   ]
+  },
+  {
+   "graded_index": 365,
+   "flight_position": 402,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 366,
+   "flight_position": 403,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 367,
+   "flight_position": 404,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 368,
+   "flight_position": 405,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 369,
+   "flight_position": 406,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 370,
+   "flight_position": 408,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 371,
+   "flight_position": 409,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 372,
+   "flight_position": 410,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    15
+   ]
+  },
+  {
+   "graded_index": 373,
+   "flight_position": 411,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 374,
+   "flight_position": 412,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    3
+   ]
+  },
+  {
+   "graded_index": 375,
+   "flight_position": 413,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    9
+   ]
+  },
+  {
+   "graded_index": 376,
+   "flight_position": 414,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 377,
+   "flight_position": 415,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 378,
+   "flight_position": 416,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 379,
+   "flight_position": 417,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 380,
+   "flight_position": 419,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    3
+   ]
+  },
+  {
+   "graded_index": 381,
+   "flight_position": 420,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 382,
+   "flight_position": 421,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 383,
+   "flight_position": 422,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    11
+   ]
+  },
+  {
+   "graded_index": 384,
+   "flight_position": 423,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 385,
+   "flight_position": 424,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 386,
+   "flight_position": 425,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 387,
+   "flight_position": 426,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    10
+   ]
+  },
+  {
+   "graded_index": 388,
+   "flight_position": 427,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    1
+   ]
+  },
+  {
+   "graded_index": 389,
+   "flight_position": 428,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 390,
+   "flight_position": 430,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 391,
+   "flight_position": 431,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    11
+   ]
+  },
+  {
+   "graded_index": 392,
+   "flight_position": 432,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    5
+   ]
+  },
+  {
+   "graded_index": 393,
+   "flight_position": 433,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    1
+   ]
+  },
+  {
+   "graded_index": 394,
+   "flight_position": 434,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    4
+   ]
+  },
+  {
+   "graded_index": 395,
+   "flight_position": 435,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 396,
+   "flight_position": 436,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    8
+   ]
+  },
+  {
+   "graded_index": 397,
+   "flight_position": 437,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    1
+   ]
+  },
+  {
+   "graded_index": 398,
+   "flight_position": 438,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    13
+   ]
+  },
+  {
+   "graded_index": 399,
+   "flight_position": 439,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 400,
+   "flight_position": 441,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 401,
+   "flight_position": 442,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 402,
+   "flight_position": 443,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 403,
+   "flight_position": 444,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    8
+   ]
+  },
+  {
+   "graded_index": 404,
+   "flight_position": 445,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 405,
+   "flight_position": 446,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 406,
+   "flight_position": 447,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 407,
+   "flight_position": 448,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    11
+   ]
+  },
+  {
+   "graded_index": 408,
+   "flight_position": 449,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    6
+   ]
+  },
+  {
+   "graded_index": 409,
+   "flight_position": 450,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    14
+   ]
+  },
+  {
+   "graded_index": 410,
+   "flight_position": 452,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 411,
+   "flight_position": 453,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 412,
+   "flight_position": 454,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 413,
+   "flight_position": 455,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 414,
+   "flight_position": 456,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    4
+   ]
+  },
+  {
+   "graded_index": 415,
+   "flight_position": 457,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 416,
+   "flight_position": 458,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    14
+   ]
+  },
+  {
+   "graded_index": 417,
+   "flight_position": 459,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 418,
+   "flight_position": 460,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    3
+   ]
+  },
+  {
+   "graded_index": 419,
+   "flight_position": 461,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    3
+   ]
+  },
+  {
+   "graded_index": 420,
+   "flight_position": 463,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 421,
+   "flight_position": 464,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 422,
+   "flight_position": 465,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    3
+   ]
+  },
+  {
+   "graded_index": 423,
+   "flight_position": 466,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    15
+   ]
+  },
+  {
+   "graded_index": 424,
+   "flight_position": 467,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 425,
+   "flight_position": 468,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 426,
+   "flight_position": 469,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    0
+   ]
+  },
+  {
+   "graded_index": 427,
+   "flight_position": 470,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 428,
+   "flight_position": 471,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    7
+   ]
+  },
+  {
+   "graded_index": 429,
+   "flight_position": 472,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    4
+   ]
+  },
+  {
+   "graded_index": 430,
+   "flight_position": 474,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    0
+   ]
+  },
+  {
+   "graded_index": 431,
+   "flight_position": 475,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    9
+   ]
+  },
+  {
+   "graded_index": 432,
+   "flight_position": 476,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    2
+   ]
+  },
+  {
+   "graded_index": 433,
+   "flight_position": 477,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    2
+   ]
+  },
+  {
+   "graded_index": 434,
+   "flight_position": 478,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 435,
+   "flight_position": 479,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    12
+   ]
+  },
+  {
+   "graded_index": 436,
+   "flight_position": 480,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 437,
+   "flight_position": 481,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 438,
+   "flight_position": 482,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    6
+   ]
+  },
+  {
+   "graded_index": 439,
+   "flight_position": 484,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 440,
+   "flight_position": 485,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 441,
+   "flight_position": 486,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    0
+   ]
+  },
+  {
+   "graded_index": 442,
+   "flight_position": 487,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 443,
+   "flight_position": 488,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 444,
+   "flight_position": 489,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    7
+   ]
+  },
+  {
+   "graded_index": 445,
+   "flight_position": 490,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 446,
+   "flight_position": 491,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 447,
+   "flight_position": 492,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    6
+   ]
+  },
+  {
+   "graded_index": 448,
+   "flight_position": 493,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    6
+   ]
+  },
+  {
+   "graded_index": 449,
+   "flight_position": 495,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 450,
+   "flight_position": 496,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    0
+   ]
+  },
+  {
+   "graded_index": 451,
+   "flight_position": 497,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 452,
+   "flight_position": 498,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 453,
+   "flight_position": 499,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 454,
+   "flight_position": 500,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    5
+   ]
+  },
+  {
+   "graded_index": 455,
+   "flight_position": 501,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 456,
+   "flight_position": 502,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    5
+   ]
+  },
+  {
+   "graded_index": 457,
+   "flight_position": 503,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    0
+   ]
+  },
+  {
+   "graded_index": 458,
+   "flight_position": 504,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 459,
+   "flight_position": 506,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 460,
+   "flight_position": 507,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 461,
+   "flight_position": 508,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    5
+   ]
+  },
+  {
+   "graded_index": 462,
+   "flight_position": 509,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 463,
+   "flight_position": 510,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    12
+   ]
+  },
+  {
+   "graded_index": 464,
+   "flight_position": 511,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    9
+   ]
+  },
+  {
+   "graded_index": 465,
+   "flight_position": 512,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 466,
+   "flight_position": 513,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    8
+   ]
+  },
+  {
+   "graded_index": 467,
+   "flight_position": 514,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    10
+   ]
+  },
+  {
+   "graded_index": 468,
+   "flight_position": 515,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    15
+   ]
+  },
+  {
+   "graded_index": 469,
+   "flight_position": 517,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    9
+   ]
+  },
+  {
+   "graded_index": 470,
+   "flight_position": 518,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 471,
+   "flight_position": 519,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 472,
+   "flight_position": 520,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 473,
+   "flight_position": 521,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    2
+   ]
+  },
+  {
+   "graded_index": 474,
+   "flight_position": 522,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    10
+   ]
+  },
+  {
+   "graded_index": 475,
+   "flight_position": 523,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 476,
+   "flight_position": 524,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    11
+   ]
+  },
+  {
+   "graded_index": 477,
+   "flight_position": 525,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    13
+   ]
+  },
+  {
+   "graded_index": 478,
+   "flight_position": 526,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    12
+   ]
+  },
+  {
+   "graded_index": 479,
+   "flight_position": 528,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    8
+   ]
+  },
+  {
+   "graded_index": 480,
+   "flight_position": 529,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    12
+   ]
+  },
+  {
+   "graded_index": 481,
+   "flight_position": 530,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    4
+   ]
+  },
+  {
+   "graded_index": 482,
+   "flight_position": 531,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    6
+   ]
+  },
+  {
+   "graded_index": 483,
+   "flight_position": 532,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    8
+   ]
+  },
+  {
+   "graded_index": 484,
+   "flight_position": 533,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 485,
+   "flight_position": 534,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 486,
+   "flight_position": 535,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    10
+   ]
+  },
+  {
+   "graded_index": 487,
+   "flight_position": 536,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 488,
+   "flight_position": 537,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 489,
+   "flight_position": 539,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 490,
+   "flight_position": 540,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    8
+   ]
+  },
+  {
+   "graded_index": 491,
+   "flight_position": 541,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    1
+   ]
+  },
+  {
+   "graded_index": 492,
+   "flight_position": 542,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    2
+   ]
+  },
+  {
+   "graded_index": 493,
+   "flight_position": 543,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    7
+   ]
+  },
+  {
+   "graded_index": 494,
+   "flight_position": 544,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 495,
+   "flight_position": 545,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 496,
+   "flight_position": 546,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 497,
+   "flight_position": 547,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 498,
+   "flight_position": 548,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    5
+   ]
+  },
+  {
+   "graded_index": 499,
+   "flight_position": 550,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    14
+   ]
+  },
+  {
+   "graded_index": 500,
+   "flight_position": 551,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    6
+   ]
+  },
+  {
+   "graded_index": 501,
+   "flight_position": 552,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    5
+   ]
+  },
+  {
+   "graded_index": 502,
+   "flight_position": 553,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 503,
+   "flight_position": 554,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    9
+   ]
+  },
+  {
+   "graded_index": 504,
+   "flight_position": 555,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    10
+   ]
+  },
+  {
+   "graded_index": 505,
+   "flight_position": 556,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    2
+   ]
+  },
+  {
+   "graded_index": 506,
+   "flight_position": 557,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 507,
+   "flight_position": 558,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 508,
+   "flight_position": 559,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 509,
+   "flight_position": 561,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    1
+   ]
+  },
+  {
+   "graded_index": 510,
+   "flight_position": 562,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    1
+   ]
+  },
+  {
+   "graded_index": 511,
+   "flight_position": 563,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    5
+   ]
+  },
+  {
+   "graded_index": 512,
+   "flight_position": 564,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 513,
+   "flight_position": 565,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 514,
+   "flight_position": 566,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    1
+   ]
+  },
+  {
+   "graded_index": 515,
+   "flight_position": 567,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    14
+   ]
+  },
+  {
+   "graded_index": 516,
+   "flight_position": 568,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    2
+   ]
+  },
+  {
+   "graded_index": 517,
+   "flight_position": 569,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    15
+   ]
+  },
+  {
+   "graded_index": 518,
+   "flight_position": 571,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    7
+   ]
+  },
+  {
+   "graded_index": 519,
+   "flight_position": 572,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 520,
+   "flight_position": 573,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    9
+   ]
+  },
+  {
+   "graded_index": 521,
+   "flight_position": 574,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 522,
+   "flight_position": 575,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 523,
+   "flight_position": 576,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 524,
+   "flight_position": 577,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 525,
+   "flight_position": 578,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    10
+   ]
+  },
+  {
+   "graded_index": 526,
+   "flight_position": 579,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    4
+   ]
+  },
+  {
+   "graded_index": 527,
+   "flight_position": 580,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 528,
+   "flight_position": 582,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 529,
+   "flight_position": 583,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 530,
+   "flight_position": 584,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    6
+   ]
+  },
+  {
+   "graded_index": 531,
+   "flight_position": 585,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    9
+   ]
+  },
+  {
+   "graded_index": 532,
+   "flight_position": 586,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 533,
+   "flight_position": 587,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    2
+   ]
+  },
+  {
+   "graded_index": 534,
+   "flight_position": 588,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    4
+   ]
+  },
+  {
+   "graded_index": 535,
+   "flight_position": 589,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 536,
+   "flight_position": 590,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    5
+   ]
+  },
+  {
+   "graded_index": 537,
+   "flight_position": 591,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    6
+   ]
+  },
+  {
+   "graded_index": 538,
+   "flight_position": 593,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 539,
+   "flight_position": 594,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 540,
+   "flight_position": 595,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    11
+   ]
+  },
+  {
+   "graded_index": 541,
+   "flight_position": 596,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    0
+   ]
+  },
+  {
+   "graded_index": 542,
+   "flight_position": 597,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 543,
+   "flight_position": 598,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 544,
+   "flight_position": 599,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    8
+   ]
+  },
+  {
+   "graded_index": 545,
+   "flight_position": 600,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    2
+   ]
+  },
+  {
+   "graded_index": 546,
+   "flight_position": 601,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    13,
+    10
+   ]
+  },
+  {
+   "graded_index": 547,
+   "flight_position": 602,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 548,
+   "flight_position": 604,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 549,
+   "flight_position": 605,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 550,
+   "flight_position": 606,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    14
+   ]
+  },
+  {
+   "graded_index": 551,
+   "flight_position": 607,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 552,
+   "flight_position": 608,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 553,
+   "flight_position": 609,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    11
+   ]
+  },
+  {
+   "graded_index": 554,
+   "flight_position": 610,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 555,
+   "flight_position": 611,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    8
+   ]
+  },
+  {
+   "graded_index": 556,
+   "flight_position": 612,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    11,
+    14
+   ]
+  },
+  {
+   "graded_index": 557,
+   "flight_position": 613,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 558,
+   "flight_position": 615,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 559,
+   "flight_position": 616,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 560,
+   "flight_position": 617,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    5,
+    3
+   ]
+  },
+  {
+   "graded_index": 561,
+   "flight_position": 618,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    10
+   ]
+  },
+  {
+   "graded_index": 562,
+   "flight_position": 619,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    9
+   ]
+  },
+  {
+   "graded_index": 563,
+   "flight_position": 620,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 564,
+   "flight_position": 621,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 565,
+   "flight_position": 622,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 566,
+   "flight_position": 623,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 567,
+   "flight_position": 624,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    6
+   ]
+  },
+  {
+   "graded_index": 568,
+   "flight_position": 626,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 569,
+   "flight_position": 627,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    10
+   ]
+  },
+  {
+   "graded_index": 570,
+   "flight_position": 628,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    5
+   ]
+  },
+  {
+   "graded_index": 571,
+   "flight_position": 629,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    5
+   ]
+  },
+  {
+   "graded_index": 572,
+   "flight_position": 630,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    14
+   ]
+  },
+  {
+   "graded_index": 573,
+   "flight_position": 631,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    6
+   ]
+  },
+  {
+   "graded_index": 574,
+   "flight_position": 632,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    2
+   ]
+  },
+  {
+   "graded_index": 575,
+   "flight_position": 633,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    11
+   ]
+  },
+  {
+   "graded_index": 576,
+   "flight_position": 634,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 577,
+   "flight_position": 635,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 578,
+   "flight_position": 637,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 579,
+   "flight_position": 638,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    10
+   ]
+  },
+  {
+   "graded_index": 580,
+   "flight_position": 639,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    12,
+    13
+   ]
+  },
+  {
+   "graded_index": 581,
+   "flight_position": 640,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    9,
+    1
+   ]
+  },
+  {
+   "graded_index": 582,
+   "flight_position": 641,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    15
+   ]
+  },
+  {
+   "graded_index": 583,
+   "flight_position": 642,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    3
+   ]
+  },
+  {
+   "graded_index": 584,
+   "flight_position": 643,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    13
+   ]
+  },
+  {
+   "graded_index": 585,
+   "flight_position": 644,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 586,
+   "flight_position": 645,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    14
+   ]
+  },
+  {
+   "graded_index": 587,
+   "flight_position": 646,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 588,
+   "flight_position": 648,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    15
+   ]
+  },
+  {
+   "graded_index": 589,
+   "flight_position": 649,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    3
+   ]
+  },
+  {
+   "graded_index": 590,
+   "flight_position": 650,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    0
+   ]
+  },
+  {
+   "graded_index": 591,
+   "flight_position": 651,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    7
+   ]
+  },
+  {
+   "graded_index": 592,
+   "flight_position": 652,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    6
+   ]
+  },
+  {
+   "graded_index": 593,
+   "flight_position": 653,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    4,
+    10
+   ]
+  },
+  {
+   "graded_index": 594,
+   "flight_position": 654,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 595,
+   "flight_position": 655,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    9
+   ]
+  },
+  {
+   "graded_index": 596,
+   "flight_position": 656,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 597,
+   "flight_position": 658,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    9
+   ]
+  },
+  {
+   "graded_index": 598,
+   "flight_position": 659,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    2
+   ]
+  },
+  {
+   "graded_index": 599,
+   "flight_position": 660,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 600,
+   "flight_position": 661,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 601,
+   "flight_position": 662,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    8
+   ]
+  },
+  {
+   "graded_index": 602,
+   "flight_position": 663,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 603,
+   "flight_position": 664,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 604,
+   "flight_position": 665,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    2,
+    4
+   ]
+  },
+  {
+   "graded_index": 605,
+   "flight_position": 666,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 606,
+   "flight_position": 667,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    7,
+    3
+   ]
+  },
+  {
+   "graded_index": 607,
+   "flight_position": 669,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 608,
+   "flight_position": 670,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 609,
+   "flight_position": 671,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 610,
+   "flight_position": 672,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 611,
+   "flight_position": 673,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 612,
+   "flight_position": 674,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    6,
+    13
+   ]
+  },
+  {
+   "graded_index": 613,
+   "flight_position": 675,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 614,
+   "flight_position": 676,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    12
+   ]
+  },
+  {
+   "graded_index": 615,
+   "flight_position": 677,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    9
+   ]
+  },
+  {
+   "graded_index": 616,
+   "flight_position": 678,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    10,
+    9
+   ]
+  },
+  {
+   "graded_index": 617,
+   "flight_position": 680,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    14,
+    2
+   ]
+  },
+  {
+   "graded_index": 618,
+   "flight_position": 681,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    11
+   ]
+  },
+  {
+   "graded_index": 619,
+   "flight_position": 682,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 620,
+   "flight_position": 683,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 621,
+   "flight_position": 684,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 622,
+   "flight_position": 685,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    0,
+    3
+   ]
+  },
+  {
+   "graded_index": 623,
+   "flight_position": 686,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "graded_index": 624,
+   "flight_position": 687,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    1,
+    6
+   ]
+  },
+  {
+   "graded_index": 625,
+   "flight_position": 688,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    8,
+    6
+   ]
+  },
+  {
+   "graded_index": 626,
+   "flight_position": 689,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 627,
+   "flight_position": 691,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 628,
+   "flight_position": 692,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    15,
+    2
+   ]
+  },
+  {
+   "graded_index": 629,
+   "flight_position": 693,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     1
+    ]
+   ]
+  },
+  {
+   "graded_index": 630,
+   "flight_position": 694,
+   "label": "NULL",
+   "correct_act": 0,
+   "xu": [
+    3,
+    1
+   ]
+  },
+  {
+   "graded_index": 631,
+   "flight_position": 695,
+   "label": "ALT",
+   "correct_act": 1,
+   "A": [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ ],
+ "decoders_committed_pre_unseal": {
+  "elder_response_record_sha256": "386b7cc0f859a9d137d8bd3b5b3fe8d1e25d667b5425db64914fe8f4f78c8022",
+  "whisper_decisions_sha256": "02944c97b7d7358e4ad1a76b4005d4f3dee0304c629418200247bf354951f3ff",
+  "accuracy": "graded post-reveal at frozen 0.6040 (Elder)"
+ },
+ "criterion": "0.6040 = 143/256 + 2.3*sqrt(p_C(1-p_C)/632) (frozen)"
+}

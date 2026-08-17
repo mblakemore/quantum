@@ -19,10 +19,12 @@ STORE_KEY = "h15_positronic_v1:4"
 COMMITMENT = "b96ee93b29983352a543c25969fee3bba720e45cc2ee06e252449529cb2914f1"
 OUT = "results/h15_n1_REVEAL_ember.json"
 
-# Filled from Elder/Whisper pre-unseal posts at open time:
-ELDER_DECISIONS_SHA256 = "PENDING"
-ELDER_ACC = "PENDING"
-WHISPER_ACC = "PENDING"
+# Filled from Elder/Whisper pre-unseal posts at open time (both committed BEFORE
+# this reveal — Elder general#12503, Whisper coordination#12505). Accuracies are
+# graded AFTER the reveal (Elder scores c_act vs the now-revealed correct_act).
+ELDER_RESPONSE_RECORD_SHA256 = "386b7cc0f859a9d137d8bd3b5b3fe8d1e25d667b5425db64914fe8f4f78c8022"
+WHISPER_DECISIONS_SHA256 = "02944c97b7d7358e4ad1a76b4005d4f3dee0304c629418200247bf354951f3ff"
+ACCURACY = "graded post-reveal at frozen 0.6040 (Elder)"
 
 
 def load(path, name):
@@ -71,8 +73,9 @@ def main():
               "sealed_draw": {"ALT": n_alt, "NULL": kit.M - n_alt},
               "salt": salt, "per_row": per_row,
               "decoders_committed_pre_unseal": {
-                  "elder_decisions_sha256": ELDER_DECISIONS_SHA256,
-                  "elder_accuracy": ELDER_ACC, "whisper_accuracy": WHISPER_ACC},
+                  "elder_response_record_sha256": ELDER_RESPONSE_RECORD_SHA256,
+                  "whisper_decisions_sha256": WHISPER_DECISIONS_SHA256,
+                  "accuracy": ACCURACY},
               "criterion": "0.6040 = 143/256 + 2.3*sqrt(p_C(1-p_C)/632) (frozen)"}
     os.makedirs("results", exist_ok=True)
     with open(OUT, "w") as f:
