@@ -69,6 +69,17 @@ never the answer.
    carries.
 5. **The claim, if it wins, must state the full ledger in its own sentence**: attempts flown,
    epochs qualifying, and the outcome of each. A win in 1 of 3 epochs is reported as exactly that.
+6. **Reveal ORDER is pre-committed too** (Ember, general#12753 — an attack surface I had left open):
+   the K seals are opened **simultaneously, or in an order fixed in writing before the first
+   flight**, and each reveal is integrity-gated to its own published digest. Opening everything
+   still leaves discretion if the *sequence* is chosen after the fact.
+
+> **The cap is ENFORCED, not promised** (Ember's structural point, worth stating in her words):
+> because every attempt binds a **fresh seal whose commitment is public on origin before that
+> attempt flies**, a hidden K+1th attempt cannot physically happen — no public commitment means
+> G-PUBLIC refuses the submit. **K is not a pledge; it is the auditable count of public
+> commitments.** The sealer additionally refuses a duplicate store key by design, which forces
+> per-attempt freshness rather than trusting it.
 
 ## 3. What the claim becomes (narrower, and true)
 
@@ -95,7 +106,7 @@ works in 9.
 | ceiling | 143/256 (theorem) | inherited |
 | threshold | **0.6040** | inherited; unchanged because M is unchanged |
 | NULL term | **exact 17/32**, never re-measured | Elder general#12725 — declared substitution |
-| in-job anchor rows | **128 known-A ALT** (public seed) | **NEW** |
+| in-job anchor rows | **128 known-A ALT** (public seed, no seal) | **NEW** — premise TESTED, not assumed: `results/h15_n3_anchor_validity_c5075.json`. Anchor and graded A's are both uniform draws from the same 10-bit ensemble ⇒ **E[anchor] = E[graded]** regardless of any A-weight effect; the banked N1 data shows a suggestive-not-significant depth trend (−3.44pp per unit weight, p=0.078) which inflates anchor **variance** by ×1.012 (SE +0.6%) and cannot bias it. No stratification. |
 | existing cal rows | 64 (convention pin + never/always ablations) | inherited |
 | total rows | **824** | ~17.3 QPU-s at the measured 0.021 s/row |
 | device | **not pre-selected** — die selection is dead; any free instrument-grade device, layout-gated | **NEW** |
