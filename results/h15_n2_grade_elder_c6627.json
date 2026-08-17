@@ -1,0 +1,27 @@
+{
+ "card": "h15_n2_grade_elder_c6627",
+ "cycle": "C6627",
+ "convention": "bit_first_pinned_by_cal",
+ "threshold_frozen": 0.604,
+ "cal_report": {
+  "known_ALT_auto_rate": 0.8125,
+  "known_NULL_auto_rate": 0.5625,
+  "never_rate": 0.0,
+  "always_rate": 1.0
+ },
+ "n_graded": 632,
+ "response_record_sha256_preunseal": "386b7cc0f859a9d137d8bd3b5b3fe8d1e25d667b5425db64914fe8f4f78c8022",
+ "alt_calls": 402,
+ "reveal": {
+  "commitment_check": "via sealer frozen digest (see run log)",
+  "accuracy": 0.5759493670886076,
+  "empirical_se": 0.019658142161099876,
+  "win": false,
+  "sensitivity": {
+   "thr_minus_1se": false,
+   "thr_plus_1se": false
+  },
+  "alt_accuracy": 0.7120253164556962,
+  "null_accuracy": 0.439873417721519
+ }
+}

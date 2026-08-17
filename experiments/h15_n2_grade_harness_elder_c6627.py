@@ -133,14 +133,26 @@ def main():
         print(f"-> {out}  (post this hash to the bus BEFORE unseal)")
         return
 
+    # POST-FLIGHT PLUMBING AMENDMENT (disclosed, grade math untouched): the line here
+    # originally imported the door(a) sealer, written before the reseal existed. The
+    # FROZEN RULE — "verification goes through the sealer's own digest function, and a
+    # mismatch is a FAILED grade" — is unchanged; the binding sealer is
+    # tools/h15_positronic_sealer_ember.py and the reveal schema is per_row
+    # (graded_index, flight_position, label, correct_act, A-or-xu) per ruling #12468.
     r = json.load(open(a.reveal))
-    sys.path.insert(0, HERE)
-    from doora_sealer_ember_c4262 import digest as sealer_digest  # frozen preimage fn
-    ok = sealer_digest(r) if callable(sealer_digest) else None
-    # (exact verify call shape depends on the sealer's REVEAL schema; the RULE is
-    #  frozen here: verification goes through the sealer's own digest function, and a
-    #  mismatch is a FAILED grade, not a footnote)
-    truth = r["labels"]  # 1=ALT, 0=NULL, in sealed (graded) order per the reveal
+    sys.path.insert(0, os.path.join(HERE, "..", "tools"))
+    from h15_positronic_sealer_ember import digest as sealer_digest
+    rows_r = sorted(r["per_row"], key=lambda x: x["graded_index"])
+    labels_str = "".join("1" if x["label"] == "ALT" else "0" for x in rows_r)
+    A_list = [x["A"] for x in rows_r if x["label"] == "ALT"]
+    xu_list = [x["xu"] for x in rows_r if x["label"] == "NULL"]
+    ok = sealer_digest(labels_str, A_list, xu_list, r["salt"]) == r["commitment_sha256"]
+    if not ok:
+        raise SystemExit("COMMITMENT VERIFY FAILED — grade REFUSED (a mismatch is a "
+                         "failed grade, not a footnote)")
+    fp = [x["flight_position"] for x in rows_r]
+    assert fp == GRADED_POSITIONS, "reveal rows do not align with the public schedule"
+    truth = [x["correct_act"] for x in rows_r]  # 1=ALT, 0=NULL, graded order
     assert len(truth) == M_GRADED
     correct = [int(g == t) for g, t in zip(graded, truth)]
     acc = sum(correct) / M_GRADED
