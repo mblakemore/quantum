@@ -1,0 +1,53 @@
+{
+ "card": "h15_r1_probe_kingston_decoded",
+ "cycle": "C5075",
+ "job": "da1663aein7c73bd1agg",
+ "backend": "ibm_kingston",
+ "quantum_seconds": 2,
+ "alt_toffoli_accept": 0.875,
+ "alt_sensor_parity0": 0.9375,
+ "null_accept": 0.4375,
+ "never_act1": 0,
+ "always_act1": 8,
+ "counts": {
+  "ALT_TOFFOLI": {
+   "n": 32,
+   "accept": 28
+  },
+  "ALT_SENSOR": {
+   "n": 32,
+   "parity0": 30
+  },
+  "NULL_TOFFOLI": {
+   "n": 16,
+   "accept": 7
+  },
+  "NEVER": {
+   "n": 8,
+   "act1": 0
+  },
+  "ALWAYS": {
+   "n": 8,
+   "act1": 8
+  }
+ },
+ "predicted_n2v2_accuracy": 0.75,
+ "marrakesh_predicted": 0.57595,
+ "bar": 0.66,
+ "verdict": "PROPOSE",
+ "intervals_95_wilson": {
+  "alt_toffoli": "28/32 = 88% [72%, 95%]",
+  "alt_sensor": "30/32 = 94% [80%, 98%]",
+  "null_accept": "7/16 = 44% [23%, 67%] \u2014 TOO WIDE TO QUOTE AS A POINT ESTIMATE (tool warned)"
+ },
+ "decision_statistic_bootstrap": {
+  "point": 0.75,
+  "ci95": [
+   0.625,
+   0.875
+  ],
+  "P_clears_0.66_bar": 0.915,
+  "P_clears_frozen_criterion_0.6040": 0.99
+ },
+ "honest_scope": "A DIE-SELECTION verdict, not a claim. n=32/32/16 single-shot rows; the NULL arm's interval is 44pp wide and cannot carry a point estimate. What survives the intervals: kingston's ALT arms are both clearly above marrakesh's flown 0.712, and the decision statistic clears the pre-registered bar in 91.5% of bootstrap draws and the FROZEN CRITERION in 99.0%."
+}
