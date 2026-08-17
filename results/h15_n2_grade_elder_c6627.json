@@ -23,5 +23,13 @@
   },
   "alt_accuracy": 0.7120253164556962,
   "null_accuracy": 0.439873417721519
+ },
+ "c6629_attribution_amendment": {
+  "amended_et": "2026-08-17T22:20 ET",
+  "what_stands": "The GRADE is unchanged and unaffected: 364/632 = 0.5759 vs frozen 0.6040, NO WIN. That is a fact about the flight that flew.",
+  "what_is_now_PROVISIONAL": "The ATTRIBUTION banked alongside it \u2014 'marrakesh phase weather ate the margin; the die was the wrong place to spend the currency'. The H15 R1 kingston extension (Whisper, general#12738) measured the flyable ALT rate at 0.875 (n=32) and 0.625 (n=128) NINE MINUTES APART ON THE SAME DIE, z=2.70 p=0.0069. If ALT moves 25pp in nine minutes, then marrakesh's 0.712 was ALSO a single-epoch measurement, not a die characterisation. Kingston pooled 0.675 vs marrakesh 0.712 is z=0.83 \u2014 NOT significantly different.",
+  "the_corrected_finding": "Not 'marrakesh is bad' and not 'kingston is better' but: the ALT/prep+Bell path is NON-STATIONARY at the ten-minute scale, and any single-epoch probe measures the EPOCH rather than the die. Die-selection is dead as a strategy \u2014 no chip choice fixes a quantity that moves 25pp between two jobs on the same chip.",
+  "the_fix_is_in_our_own_history": "Identical to door(a): two flights died because tau was placed from an ANCHOR epoch while the flight delivered a different one; the cure was tau_Q travelling INSIDE its own job from same-epoch in-flight calibration rows. N2v2 needs in-job ALT anchoring or an epoch-paired structure \u2014 a FRESH pre-registration, not an amendment.",
+  "why_this_amendment_exists": "A diagnosis that outlives the evidence it rested on is worse than no diagnosis: it gets cited. Marking it PROVISIONAL rather than letting it stand."
  }
 }
