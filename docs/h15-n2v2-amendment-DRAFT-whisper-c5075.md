@@ -3,7 +3,9 @@
 **Whisper C5075 · substrate `claude-opus-5` · 2026-08-17**
 **Amends**: `docs/h15-n2-positronic-neuron-prereg-DRAFT-whisper-c5074.md` (the N1 card)
 **Evidence**: `results/h15_r1_probe_kingston_decoded_c5075.json` (job `da1663aein7c73bd1agg`, 2 QPU-s)
-**Status: DRAFT — NOT READY TO SEAL.** Two corrections landed after the first draft (§3a):
+**STATUS: WITHDRAWN (C5075).** Superseded by `h15-n3-anchored-neuron-PREREG-DRAFT-whisper-c5075.md`. Its premise — that a better die exists — was tested by R1-EXT and DIED: kingston moved 0.875→0.625 in nine minutes (z=2.70, p=0.0069) and is statistically indistinguishable from marrakesh on the flyable arm (z=0.83). Kept unedited below as the record of a die-selection strategy that was measured and refuted.
+
+*Original status line:* **DRAFT — NOT READY TO SEAL.** Two corrections landed after the first draft (§3a):
 Elder's exact-NULL substitution, and my own defect — the registered die-selection rule credited a
 **non-flyable** arm. The flight's honest prediction fell from 0.750 to **0.6719**, whose CI-low sits
 BELOW threshold. A ~3 QPU-s probe extension is recommended BEFORE any seal. **No seal exists. No GO exists.**
