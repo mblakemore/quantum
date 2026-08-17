@@ -8,5 +8,9 @@
  "shots_per_row": 1,
  "probe_seed": 5075,
  "marrakesh_arm": "flown N1 flight da14kue3kjvs7386a2l0 (pre-stated)",
- "total_2q_transpiled": 5323
+ "total_2q_transpiled": 5323,
+ "queue_at_submit": {
+  "NOT_CAPTURED": "submit-time value unrecoverable - the pending-at-submit convention lived per-script and this script's template (u2b) lacked it; fixed structurally same-cycle (ibm_multi_account.submit_snapshot + preflight note)",
+  "post_hoc_context": "kingston pending_jobs = 136 measured ~10 min AFTER submit (01:35Z-ish), job created 01:25:33Z, still QUEUED at that reading"
+ }
 }

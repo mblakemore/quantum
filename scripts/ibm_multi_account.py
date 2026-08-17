@@ -430,3 +430,26 @@ if __name__ == "__main__":
             print(exc)
             sys.exit(1)
     print(__doc__)
+
+
+def submit_snapshot(backend):
+    """Queue/provenance snapshot to store in every flight manifest AT submit.
+
+    Exists because "pending-at-submit" was a per-script COPIED convention — present in the
+    scripts/ and exp144 lineages, absent from the u2b template — so C5075's kingston probe
+    (da1663aein7c73bd1agg) flew without it and the submit-time queue depth is unrecoverable.
+    A convention that lives by template inheritance dies by template inheritance; this helper
+    lives in the module every submitting script is already REQUIRED to import (c4217_018), and
+    preflight_account_check notes its absence on submission paths. Call immediately before
+    .run() and put the returned dict in the manifest. Never blocks a flight.
+    """
+    from datetime import datetime, timezone
+    try:
+        st = backend.status()
+        return {"backend": backend.name,
+                "pending_jobs_at_submit": int(st.pending_jobs),
+                "operational": bool(st.operational),
+                "snapshot_utc": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+    except Exception as e:
+        return {"backend": getattr(backend, "name", "?"),
+                "snapshot_error": f"{type(e).__name__}: {e}"}

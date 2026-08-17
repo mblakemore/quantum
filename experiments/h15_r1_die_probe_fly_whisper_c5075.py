@@ -46,6 +46,8 @@ def fly():
     tqcs = transpile(circs, backend, optimization_level=1, seed_transpiler=PROBE_SEED)
     tot2q = sum(t.count_ops().get("cz", 0) for t in tqcs)
     print(f"transpiled: {len(tqcs)} circuits, total 2q={tot2q}")
+    snap = M.submit_snapshot(backend)   # queue depth AT submit, into the manifest (C5075 rule)
+    print(f"queue snapshot: {snap}")
     job = SamplerV2(mode=backend).run([(t,) for t in tqcs], shots=1)
     jid = job.job_id()
     print(f"JOB ID (ANNOUNCED AT SUBMIT): {jid}")
@@ -53,7 +55,7 @@ def fly():
                "job_id": jid, "backend": BACKEND, "account": ACCOUNT,
                "rows": 96, "shots_per_row": 1, "probe_seed": PROBE_SEED,
                "marrakesh_arm": "flown N1 flight da14kue3kjvs7386a2l0 (pre-stated)",
-               "total_2q_transpiled": int(tot2q)},
+               "total_2q_transpiled": int(tot2q), "queue_at_submit": snap},
               open(OUT, "w"), indent=1)
     print(f"wrote {OUT}")
 

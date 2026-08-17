@@ -44,6 +44,7 @@ SUBMIT = re.compile(r"SamplerV2|EstimatorV2|sampler\.run|estimator\.run|\.run\s*
 # A simulator sampler is not a submission — StatevectorSampler.run() goes nowhere near an account.
 SIM = re.compile(r"StatevectorSampler|AerSimulator|FakeMarrakesh|FakeBrisbane|BasicSimulator")
 SAFE_HELPER = re.compile(r"multi_account_service|service_for_submission|service_for_job")
+QSNAP = re.compile(r"pending_jobs|submit_snapshot")
 
 
 # Helpers that resolve an account IMPLICITLY. `_get_ibm_service()` walks a fallback chain and
@@ -110,6 +111,7 @@ def scan(path):
         "submits": bool(SUBMIT.search(src)),
         "has_sim": bool(SIM.search(src)),
         "uses_helper": bool(SAFE_HELPER.search(src)),
+        "queue_snapshot": bool(QSNAP.search(src)),
         "regex_fallback": fell_back,
         "error": None,
     }
@@ -126,6 +128,10 @@ def verdict(r):
         return "ERROR", r["error"]
     note = "  [regex fallback: file did not parse]" if r.get("regex_fallback") else ""
     if not r["bare_lines"]:
+        if r["submits"] and not r.get("queue_snapshot"):
+            note += ("  [note: submission path with NO queue snapshot — call "
+                     "ibm_multi_account.submit_snapshot(backend) into the manifest "
+                     "(C5075 provenance gap: pending-at-submit unrecoverable)]")
         return "PASS", "no implicit account resolution" + note
     where = ",".join(str(x) for x in r["bare_lines"])
     if r["submits"]:
