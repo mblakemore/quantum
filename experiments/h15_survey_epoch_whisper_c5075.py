@@ -13,6 +13,17 @@ Instead each epoch yields a POINT ESTIMATE; the between-epoch mean and SD are fi
 variance components (observed cross-epoch variance = sigma_b^2 + sigma_w^2, sigma_w^2 = p(1-p)/rows),
 and P(epoch qualifies) is computed ANALYTICALLY from the fitted distribution, with an interval.
 
+REPORT A CURVE, NOT A SINGLE THRESHOLD (C5075, from Elder general#12807 — declared before any fit).
+The qualifying bar is NOT a fixed number: the paired bake-off moved the required ALT rate from
+0.8203 to ~0.6807 (lever 1 lowered the requirement 5.9pp, lever 2 raised achievement 6.3pp), and
+the bar will move again when the gate arithmetic is legitimately recomputed. Elder's point is that
+this CHANGES THE QUESTION'S SHAPE — from "are 0.82+ epochs RARE" to "are 0.68+ epochs COMMON" —
+and those can have very different answers on the SAME fitted dispersion. So Output 1 reports
+**P(epoch true-rate >= x) as a FUNCTION of x** across the plausible bar range (0.60 to 0.90, with
+intervals), rather than evaluating one hard-coded threshold. That way the survey answers whichever
+bar the recomputed gate lands on WITHOUT needing the gate settled first, and nobody has to re-run
+or re-interpret it downstream. The underlying fit is unchanged; only the readout is broadened.
+
 DESIGN, chosen by simulation (h15_survey_design_c5075.json): 48 rows x 13 epochs originally, and
 **EXTENDED TO 48 x 20 (C5075) BEFORE ANY DISPERSION FIT WAS PERFORMED** — declared here, not found
 in the data. Reason: a registry defect had mislabelled a free account as paid, hiding ~130 QPU-s;
