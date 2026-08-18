@@ -15,5 +15,18 @@
   }
  ],
  "decision_rule_frozen_2026_08_18": "re-open D1 only when >=3 dated points show the residual OSCILLATING AND a current reading exceeds 0.0494 (the MEASURED MDE, not the round 0.05 first stated). A single reading above 0.05 is NOT sufficient \u2014 that is the n=2 error again.",
- "cost": "$0 \u2014 the residual is computable from any flight that touches this sector"
+ "cost": "$0 \u2014 the residual is computable from any flight that touches this sector",
+ "SELF_STARVING_AUDIT_C5075": {
+  "diagnostic": "Elder general#13225 \u2014 does this experiment DECISION change the behaviour that GENERATES its data?",
+  "verdict": "YES \u2014 SELF-STARVING, caught within minutes of the diagnostic being published",
+  "mechanism": "I wrote that the residual accrues at $0 from ANY flight touching this sector. Checked what actually flies it: exp183 (July) and exp183b (August). Two flights, five weeks apart, and the second happened only because I deliberately flew it. NOTHING ELSE ROUTINELY TOUCHES THIS SECTOR \u2014 so the accrual mechanism I asserted does not exist, and my own decision (do not re-fly D1 until the residual returns above 0.0494) blocks the only activity that would generate a residual measurement.",
+  "same_shape_as": "Elder c6467 needing 40 vote14 trades after the gate change froze accrual at 28, and his measurement_continuity field asserting continuity that had stopped. MY $0-accrues-for-free claim was an ASSERTION OF ACCRUAL WITH NO MECHANISM BEHIND IT \u2014 the same defect one domain over.",
+  "honest_status": "STALLED, not deferred. At the current rule this census cannot reach 3 points by waiting.",
+  "routes_out": [
+   "budget a standalone residual read (~1.4 QPU-s, free tank) on a fixed cadence \u2014 turns waiting into accrual",
+   "or mark D1 CLOSED-pending-deliberate-spend and stop reporting it as deferred"
+  ],
+  "not_doing_today": "choosing between them is fresh reasoning on a spend question; it goes to the Creator/court with the cost stated, not decided by me mid-session"
+ },
+ "status": "STALLED (was: awaiting accrual \u2014 that framing was wrong)"
 }
