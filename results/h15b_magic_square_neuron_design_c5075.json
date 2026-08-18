@@ -1,0 +1,28 @@
+{
+ "card": "h15b_magic_square_neuron_design",
+ "cycle": "C5075",
+ "directive": "Creator: design the type B magic square neuron",
+ "design": {
+  "qubits": "5 (q0=B1,q1=A1,q2=A2,q3=B2 line + q4 actuator)",
+  "reads": "4 measured + 1 actuator = 5 (Type-A: 9)",
+  "transpiled_worst_context": "cz=4, depth=17",
+  "loop": "STIMULUS context (r,c) -> RESOURCE two Bell pairs -> SENSE contextual bases, 4 mid-circuit reads -> DECIDE real-time classical XOR with a context flip -> ACT feedforward conditional X -> RESPONSE actuator bit",
+  "decision_expression": "agreement <=> XOR(selected measured bits) == flip(r,c) \u2014 ONE xor, the same validated real-time pattern as N4"
+ },
+ "validation": {
+  "noiseless_response": "1.0000 in ALL NINE contexts (2304/2304)",
+  "ablation_always": "64/64",
+  "classical_ceiling_re_enumerated": "0.8889 = 8/9 over all 4,096 strategy pairs"
+ },
+ "ceiling_self_correction": "my FIRST enumeration imposed row AND column parities on one global assignment and returned 6/9 \u2014 impossible by construction, which is the entire point of the magic square. The mismatch against the known 8/9 exposed it immediately. The right object is a PAIR of strategies (Alice row->triple product +1, Bob column->triple product +1 except the last -1) = 4^3 x 4^3 = 4,096, matching exp126s enumeration. A known-answer pin beat a plausible derivation.",
+ "NOISE_VERDICT_INVERTS_THE_PROPOSAL": {
+  "readout_0.85pct_published": "0.9614, margin +0.0725, CLEARS",
+  "readout_2.0pct": "0.9234, margin +0.0345",
+  "readout_2.9pct_TRUE_drift_inflated": "0.8930, margin +0.0041 \u2014 RAZOR THIN, and its WORST CONTEXT 0.8672 is BELOW the ceiling",
+  "type_A_comparison": "measured 0.6953 vs floor 0.5586 = margin +0.1367 \u2014 roughly 33x more headroom"
+ },
+ "THE_PRINCIPLE": "A HIGHER CLASSICAL FLOOR IS NOT FREE. Type B looked better on every structural metric \u2014 half the qubits, half the reads, a PERFECT ideal, an ENUMERATED floor needing no dual certificate \u2014 and is WORSE on the one that decides, because its floor of 8/9 leaves only 0.111 of headroom and 5 reads at the true 2.9% readout eat ~13%. Type A's LOW floor (0.5586) is an ASSET: the gap is the noise budget. The value of a floor is not only its strength as a claim but how much room the gap leaves.",
+ "testable_side_prediction": "exp126 itself flew at 0.969, consistent with my ~0.85-1% readout row. If readout drifts to 2.9%, F106 would drop toward 0.89 and lose its 196 sigma \u2014 the flown contextuality result is more epoch-fragile than its headline suggests.",
+ "model_caveat": "this projection uses the same depolarizing model class that got the SIGN wrong on the Toffoli question. It is better anchored here because readout dominates and the 3.4x inflation is MEASURED, not modelled \u2014 but it is a projection, not a measurement, and Type B has never been flown as a NEURON.",
+ "verdict": "DESIGNED, VALIDATED IN SIM, NOT RECOMMENDED FOR FLIGHT at current readout. It becomes attractive if readout is tamed or measured low in-window \u2014 i.e. it is MORE epoch-sensitive than Type A, the opposite of what I expected when proposing it."
+}

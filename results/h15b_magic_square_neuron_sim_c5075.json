@@ -1,0 +1,31 @@
+{
+ "card": "h15b_magic_square_neuron",
+ "cycle": "C5075",
+ "classical_ceiling": 0.8888888888888888,
+ "contexts": 9,
+ "noiseless_per_context": {
+  "r0c0": 1.0,
+  "r0c1": 1.0,
+  "r0c2": 1.0,
+  "r1c0": 1.0,
+  "r1c1": 1.0,
+  "r1c2": 1.0,
+  "r2c0": 1.0,
+  "r2c1": 1.0,
+  "r2c2": 1.0
+ },
+ "noiseless_overall": 1.0,
+ "ablation_always": 1.0,
+ "transpiled_worst_context": {
+  "ops": {
+   "rz": 22,
+   "sx": 11,
+   "measure": 5,
+   "cz": 4,
+   "barrier": 2,
+   "if_else": 1
+  },
+  "cz": 4,
+  "depth": 17
+ }
+}
