@@ -359,6 +359,22 @@ def main(argv):
                 gate_fail.append((name, f"n={n}>1 must NAME its {n} windows (windows=<id,id,...>) — found "
                                   f"{len(wins)}; a count with its members listed cannot be wrong about what it "
                                   f"counted, and 'two job IDs are not two windows' (F118)")); continue
+        # (F) a dispersion is an EPOCH dispersion only when the basis holds the layout
+        #     fixed (Whisper gen#13309). basis and dispersion can be individually true
+        #     and JOINTLY INCOHERENT: under distinct-device the spread runs over
+        #     device+layout+time and is a BETWEEN-DEVICE robustness number, not epoch —
+        #     F125 cleared ratification partly by that misread. Tag it so nobody cites a
+        #     between-device spread as temporal comparability. Witness, not gate: the
+        #     number is real and required; only its MEANING is being corrected.
+        if n > 1 and ep["dispersion"] and ep["basis"] != "distinct-day":
+            if ep["basis"] == "distinct-device":
+                witness_warn.append((name, f"dispersion {ep['dispersion']} under basis=distinct-device is a "
+                                     f"BETWEEN-DEVICE spread (device+layout+time all vary), NOT an epoch dispersion — "
+                                     f"a robustness statement; do NOT cite it as temporal/epoch comparability"))
+            else:
+                witness_warn.append((name, f"dispersion {ep['dispersion']} under basis={ep['basis']} — same LAYOUT not "
+                                     f"guaranteed (the transpiler may re-pick qubits per submit); verify the named "
+                                     f"windows share a qubit set before reading it as an epoch dispersion (board #174)"))
         wr = ep["window_retrievable"]                             # (B) witness only
         if wr == "unknown":
             witness_warn.append((name, f"retrievable=unknown — MEASURE while cheap: {_RETENTION_CAUSE} "
