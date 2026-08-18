@@ -60,11 +60,20 @@ FINDINGS = "findings"
 _SIG = re.compile(r"(\d[\d.–\-]*)\s*(?:sigma|σ)\b|\bsigma\b", re.I)
 _EPOCH_LINE = re.compile(r"\*\*Epoch\*\*:\s*(.+)")
 _BASES = {"distinct-day", "distinct-submission", "distinct-device"}
-# Empirical retrieval bound — the OLDEST window we have successfully pulled.
-# A growing fact, NOT a retention horizon: raise it when a check succeeds older.
-_OBSERVED_RETRIEVAL_BOUND_DAYS = 36     # oldest SUCCESSFUL retrieval (F106, 2026-08-18). NOT a no-loss bound:
-                                        # losses observed at greater ages, cause (retention vs account) unseparated,
-                                        # sweep pending (results/window_rescue_c5075.json, Whisper gen#12951).
+# TWO-SIDED retrieval bound (Elder gen#12958 schema addendum). We do NOT have a
+# retention horizon; we have two empirical facts and an UNKNOWN GAP between them:
+_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS = 36  # F106, 2026-08-18 — retrievals succeed AT LEAST this old.
+_YOUNGEST_OBSERVED_LOSS_DAYS = None     # UNMEASURED ON PURPOSE. Losses exist (Whisper gen#12951:
+                                        # 12+ JobNotFoundAnywhere at the old end) but the CAUSE is not
+                                        # yet separated — past-retention vs a job on an account we no
+                                        # longer hold are different failure modes (a clock vs a
+                                        # credential). Do NOT populate this with a raw JobNotFound age
+                                        # until the prefix probes separate cause; a horizon quoted from
+                                        # an account loss would be a fabricated retention number, the
+                                        # exact class this whole thread has been about.
+# The witness derives its warning from the GAP [oldest_success .. youngest_loss]:
+# a window older than the oldest success sits in UNKNOWN territory until checked;
+# once youngest_loss is cause-separated, older-than-that is likely-lost.
 _STALE_CHECK_DAYS = 30
 
 
@@ -132,7 +141,9 @@ def main(argv):
             gate_fail.append((name, f"n={ep['n']}>1 but dispersion lacks interval+n, e.g. '0.13±0.03 (n=20)'")); continue
         wr = ep["window_retrievable"]                             # (B) witness only
         if wr == "unknown":
-            witness_warn.append((name, f"retrievable=unknown — MEASURE it while cheap (retrievals succeed to {_OBSERVED_RETRIEVAL_BOUND_DAYS}d; losses seen older, cause unseparated)"))
+            witness_warn.append((name, f"retrievable=unknown — MEASURE while cheap: succeeds to "
+                                 f"{_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS}d, losses at the old end (cause "
+                                 f"unseparated), so older windows sit in the UNKNOWN gap"))
         chk = days_since(ep["checked"], today) if ep["checked"] else None
         if chk is None:
             witness_warn.append((name, "no `checked` date — retrievability answer is undated (staleness invisible)"))
@@ -143,7 +154,8 @@ def main(argv):
     print("=" * 70)
     print("G-RECORD EPOCH CHECK — sigma-headline findings")
     print(f"  today {today} | scanned {FINDINGS}/*.md | non-sigma skipped {non_sigma} | "
-          f"oldest successful retrieval {_OBSERVED_RETRIEVAL_BOUND_DAYS}d; losses observed older (cause unseparated, sweep pending)")
+          f"retrieval: succeeds to {_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS}d, losses at old end "
+          f"(youngest-loss UNMEASURED pending cause-separation) -> gap = unknown")
     print("=" * 70)
     if gate_fail:
         print(f"\n\U0001f6d1 GATE FAIL ({len(gate_fail)}) — a sigma-headline claim without a stated epoch is not DONE:")
