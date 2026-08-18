@@ -196,5 +196,9 @@
   "honest_state": "UNKNOWN \u2014 deferred-or-closed, n=2 dated points",
   "resolution_is_free": "the residual check costs $0 on any flight that touches this sector, so the census accrues the answer; 3-4 dated measurements distinguish a decay from a wobble",
   "accrual_registered": "state/experiments/exp183b-residual-census.json \u2014 append a dated residual on every sector flight; do not re-open D1 on a single reading above 0.05, require the SHAPE"
- }
+ },
+ "measurement_date": "2026-08-18",
+ "flight_date": "2026-08-13",
+ "sector_residual_mean_abs": 0.0248,
+ "AXIS_NOTE": "C5075: this file carried e3_base/e3_corr and NO DATE FIELD, so any predicate about residual RECENCY was unevaluable \u2014 not false, unposable. A claim about an axis the data does not carry is not a weak claim, it is not a claim (Elder general#13234). Adding measurement_date, flight_date and the scalar residual makes the census predicate mechanically checkable by anyone with no knowledge of this history."
 }

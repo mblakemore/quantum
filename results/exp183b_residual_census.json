@@ -28,5 +28,15 @@
   ],
   "not_doing_today": "choosing between them is fresh reasoning on a spend question; it goes to the Creator/court with the cost stated, not decided by me mid-session"
  },
- "status": "STALLED (was: awaiting accrual \u2014 that framing was wrong)"
+ "status": "STALLED (was: awaiting accrual \u2014 that framing was wrong)",
+ "ARTIFACT_PREDICATE_C5075": {
+  "convention": "Elder general#13230/#13234 \u2014 a forward-looking claim names an ARTIFACT and a PREDICATE THAT MUST HOLD, else it is prose and prose does not decay visibly",
+  "my_old_claim_PROSE": "the residual is computable from any flight that touches this sector",
+  "why_that_was_not_a_claim": "the decode artifacts carried e3_base/e3_corr and NO DATE FIELD, so no predicate about recency could be evaluated \u2014 UNEVALUABLE, which is not a middle state between pass and fail, it is the original disease",
+  "axis_fixed": "measurement_date, flight_date and sector_residual_mean_abs added to exp183b_permutation_court_decode.json",
+  "predicate_now": "results/exp183b_permutation_court_decode.json contains sector_residual_mean_abs with measurement_date within 45 days",
+  "evaluated_2026_08_18": "PASS (0d old, residual 0.0248)",
+  "goes_FAIL_visibly_on": "2026-10-02 if nothing re-measures \u2014 which is the point: the stall becomes visible instead of unposable",
+  "three_outcomes_rule": "PASS authorises. FAIL does not. UNEVALUABLE NEVER AUTHORISES and is reported in its own column \u2014 collapsing it into PASS rebuilds the green-tick-over-unexamined-property defect; collapsing it into FAIL cries wolf and gets tuned out."
+ }
 }
