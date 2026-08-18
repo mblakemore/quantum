@@ -1,0 +1,24 @@
+{
+ "card": "h15d_learning_neuron_scoping",
+ "cycle": "C5075",
+ "the_uncomfortable_question": "what does CLOSING the loop buy? Measured: rule computed OFFLINE from the bells 0.7057 vs ACTUATED in-circuit 0.6953 - closure COSTS 1.04pp. For a SINGLE-SHOT arc the honest answer is that it buys nothing informational: the advantage lives in the two-copy MEASUREMENT and the actuation is classical post-processing rendered in hardware. It demonstrates AUTONOMY, not ADVANTAGE.",
+ "where_closure_becomes_load_bearing": "when the ACTION CHANGES WHAT IS SENSED NEXT. Only an in-circuit loop can feed round k decision into round k+1 PHYSICS inside one coherence window; offline post-processing can relabel the past but cannot alter the future.",
+ "certified_multi_round_parts": {
+  "QET_wheel": "6 back-to-back information-driven rounds, all in band (gaps -0.165 to -0.202), falsifier pays EVERY round, wear slope +0.00024 +/- 0.00556 = ZERO degradation",
+  "syndrome_memory_241b": "the corrected QEC syndrome stream is NOT memoryless - round 1->2 enhancement 1.42, round 2->3 1.65"
+ },
+ "BUT_THE_NAIVE_DESIGN_IS_ALREADY_DEAD": {
+  "source": "finding-exp241c (P7.0), killed OFFLINE at $0 before any flight",
+  "result": "both planned in-circuit memory rules LOSE: memoryless 0.614/0.532/0.525 (R2/R3/R4) vs debounce 0.419/0.264/0.202. Title states it: Exp247 as designed is dead.",
+  "also_measured": "the physical fix machinery costs ~0.08 fidelity by round 4 relative to idealised instant corrections - a cost offline replay never pays"
+ },
+ "what_won_instead": {
+  "exp247_redesigned": "STATIC T1-aware history-using ML decoder, both logical inputs, held-out shots",
+  "verdict": "MEMORY-DECODER-CERTIFIED (job d9fglbsjeosc73fju9r0, fez)",
+  "gain": "+0.13 balanced accuracy at z~30",
+  "crucial_caveat": "it is STATIC - post-processing, NOT a closed loop. The campaign already tried putting adaptivity IN the loop and found it lost to putting it OUTSIDE."
+ },
+ "THE_REMAINING_OPEN_QUESTION": "can the CERTIFIED static decoder be compiled into REAL-TIME CLASSICAL LOGIC and moved back into the loop? That is exactly the N4 move (decision -> real-time expression). 241c killed NAIVE rules (debounce), not the ML decoder. If its decision function compiles to a boolean/lookup expression, closure becomes load-bearing because the correction would then alter subsequent physics rather than relabel history.",
+ "the_margin_is_not_obviously_positive": "gain +0.13 balanced accuracy vs fix-machinery cost ~0.08 fidelity by R4 - DIFFERENT METRICS, not subtractable, and that comparison is the first thing any Type-D pre-registration must settle.",
+ "verdict": "Type D (LEARNING organ) is SCOPED, not designed. Its naive form is refuted, its winning form is not a loop, and the open move is a compilation question with a measured cost on both sides. No flight proposed."
+}
