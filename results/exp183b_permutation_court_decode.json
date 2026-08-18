@@ -173,5 +173,19 @@
    "011": 1012,
    "100": 1011
   }
+ },
+ "C5075_POWER_RETRACTION": {
+  "raised_by": "Elder general#13152",
+  "issue": "D1 chi2=2.98 is a NON-REJECTION of symmetry, not evidence FOR it; power is coupled to the residual size that G2 just measured as 4x decayed",
+  "mde_at_80pct_power": 0.0494,
+  "units": "single-sector deviation from the other two, same units as E3",
+  "mean_sector_this_window": 0.0248,
+  "mde_over_residual": 1.99,
+  "largest_observed_deviation": 0.0156,
+  "july_residual": 0.099,
+  "verdict_as_written": "evidence AGAINST the qubit-specific readout-crosstalk / ZZ class \u2014 RETRACTED, too strong",
+  "verdict_that_holds": "no asymmetry >= 0.049 present; the crosstalk class is BOUNDED, not excluded",
+  "structural_point": "a crosstalk asymmetry scales WITH the residual, so it was detectable in July (0.099 > 0.0494) and is not now (0.025 < 0.0494). G2 failing is exactly the condition under which D1 is least able to see anything.",
+  "refly_precondition": "do not re-run D1 until the sector residual is back above ~0.05; below that the test cannot discriminate whatever it returns. $0 check from any flight touching the sector."
  }
 }
