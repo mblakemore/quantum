@@ -1,0 +1,22 @@
+{
+ "card": "h15_weight_slope_discriminator",
+ "cycle": "C5075",
+ "question": "Elder general#12825: is the budget 2q term (0.0137) understated ~12x, per the -3.44pp/weight slope? Reading (a) slope overstated -> n flat; reading (b) depolarizing model understates depth -> n reopens.",
+ "method": "fit accept-vs-A-weight per arm on the PAIRED bake-off (same A-set in all three arms, one epoch, n=96 each)",
+ "per_arm": {
+  "A_toffoli_simple": "-0.45 +/- 2.72, CI [-5.78,+4.88]",
+  "B_realtime_simple": "+0.83 +/- 2.32",
+  "C_realtime_optimal": "-0.50 +/- 2.39"
+ },
+ "pooled": "-0.04 +/- 1.43, CI [-2.84,+2.76] (n=288) \u2014 EXCLUDES -3.44, does NOT exclude 0",
+ "banked_N1": "-3.44 +/- 1.95, CI [-7.27,+0.39] (n=316, p=0.078, never claimed)",
+ "paired_structural_result": "Toffoli arm -0.45 vs redesign arm -0.50, difference 0.05 pp/weight \u2014 the redesign did NOT change the weight sensitivity, exactly as Elder predicted structurally (A-planting is STATE PREP, untouched). His structural reasoning is CONFIRMED; the magnitude is what turns out to be small.",
+ "verdict": "READING (a) FAVOURED: the pooled bake-off excludes the -3.44 point estimate, and the N1 slope was never significant. So the budget 2q term is not badly understated and n stays flat \u2014 PROVISIONALLY.",
+ "caveats": [
+  "individual arms are underpowered (n=96) and exclude neither value",
+  "the two datasets OVERLAP (both admit ~-2), so they are not formally inconsistent \u2014 the bake-off merely excludes the N1 POINT",
+  "the bake-off is ONE epoch; if the slope is epoch-dependent neither dataset can see it",
+  "survey Output 2 remains the definitive test: 500-800 rows ACROSS EPOCHS, which is the only design here that controls epoch-dependence of the slope itself"
+ ],
+ "position": "readout-limited is ESTABLISHED (budget closes on a MEASURED 3.4x inflation); n-is-flat is FAVOURED but PROVISIONAL, and I am not writing it into the design brief as settled \u2014 Elder is right that a conclusion inheriting a known-suspect model deserves the softer label."
+}
