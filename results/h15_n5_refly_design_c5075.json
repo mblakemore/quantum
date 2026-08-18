@@ -1,0 +1,44 @@
+{
+ "card": "h15_n5_refly_design",
+ "cycle": "C5075",
+ "inputs": {
+  "source": "paired bake-off arm C, job da1r7reg52gs73cm0rgg (flown)"
+ },
+ "non_test_guard": {
+  "p_alt_accept": 0.84375,
+  "p_null_accept": 0.453125,
+  "separation": 0.390625,
+  "se": 0.07242381335054358,
+  "z": 5.393598899705936,
+  "verdict": "PASS"
+ },
+ "forecast_error_check": {
+  "n1_predicted": 0.712646484375,
+  "n1_flown": 0.5759493670886076,
+  "forecast_error": -0.13669711728639244,
+  "n5_pred_with_repeat": 0.5586153827136076,
+  "ratio_to_estimation_se": 3.7749218375109614,
+  "lands": "between ceiling and threshold"
+ },
+ "prediction": {
+  "balanced_accuracy": 0.6953125,
+  "ci95": [
+   0.6243371629164673,
+   0.7662878370835327
+  ],
+  "se_flight_sampling": 0.017330523665891315,
+  "se_estimation": 0.03621190667527179,
+  "threshold": 0.604,
+  "threshold_inside_interval": false
+ },
+ "transfer_check": {
+  "n1_flown": 0.5759493670886076,
+  "n1_ci": [
+   0.5370743709287448,
+   0.6139066281125257
+  ],
+  "bakeoff_armA": 0.5859375,
+  "armA_inside_n1_ci": true
+ },
+ "cost_qpu_s": 13.272
+}

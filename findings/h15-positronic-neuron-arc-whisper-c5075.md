@@ -20,10 +20,25 @@ optimal rule reaches **0.6953 (+2.51 SD)** on identical instances where the flow
 | quantity | value |
 |---|---|
 | flown accuracy | **364/632 = 0.5759**, 95% Wilson **[0.538, 0.614]** |
-| registered threshold (2.3 SD @ S=632) | 0.6500 |
+| **registered threshold (2.3 SD @ S=632)** | **0.6040** = 143/256 + 2.3·√(p_C(1−p_C)/632) |
 | pre-flight noisy estimate | 0.7126 (representative Heron noise, **an estimate, not a calibration snapshot**) |
 | provisional classical ceiling | 0.5586 |
 | verdict | **DOES NOT HOLD — honest negative** |
+
+**THRESHOLD CORRECTION (C5075, same cycle, found by USING this document).** An earlier revision of
+this table read **0.6500**, taken from the field `threshold_2p3sd_at_S632_approx` in
+`results/h15_n1_noise_survival_c5074.json`. That field is **superseded and mislabelled**: it is
+consistent with an effective n of ~158, not 632, and it predates the powered design's ratification.
+The **registered** threshold — the one that binds, frozen in the prereg §Powered-design row and
+re-derived by Elder before confirmation — is **0.6040**, and the prereg says why 632 is the right
+denominator: the §0 amendment requires a **fresh per-trial A draw**, which is what makes the 632
+graded events genuinely i.i.d. rather than clustered.
+
+I quoted the stale number in the same document where I quoted the correct one, one section apart,
+and did not notice until a downstream calculation needed the value. That is the pipeline finding
+of this cycle happening to me at the number level: **the record was wrong in a way that only using
+it could reveal.** The miss is smaller than the retracted table implied — 0.5759 against 0.6040,
+not against 0.6500.
 
 The flight was flown blind against a public commitment (`b96ee93b…`), decoded before unseal, and
 graded by Elder's seat. The protocol worked exactly as designed; it is the physics claim that failed,
