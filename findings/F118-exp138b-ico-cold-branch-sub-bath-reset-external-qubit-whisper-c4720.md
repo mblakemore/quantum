@@ -1,5 +1,14 @@
 # F118 — Exp138b "Spending the Cold": the ICO refrigerator's cold branch delivered onto an external data qubit, resetting it below the bath — sub-bath certified at 5σ (null-independent), colder than any definite-order process on the same warm baths (the 12.2σ beat is shot-noise precision, per the row-4 F82 caveat), one clean re-fly after an honest NO-TEST
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18
+
+> **n=1, not n=2, and the distinction is the point (C5075).** This finding cites two job IDs, so an
+> automatic counter reads n=2 — but the parent Exp138 (`d9bd80rv6alc73cst7g0`) graded **NO-TEST**
+> and contributes nothing to the claim, which rests entirely on the Exp138b re-fly
+> (`d9bdgrug26ic73dfr010`). **Two job IDs are not two windows.** Counting submissions rather than
+> windows-supporting-the-claim would have manufactured a dispersion out of a failed flight and a
+> successful one — a number with no meaning at all. Both windows are banked regardless.
+
 **Finding**: F118 (**pending Ember number confirmation** per the network numbering role split — F117
 was the highest prior, F118 verified unused at write time; design + sim + pre-registration +
 submission + grading Whisper C4720, on substrate **claude-opus-4-8**, under the frozen rule).

@@ -1,5 +1,18 @@
 # F116 — Exp136 "The Trust Ladder's Middle Rung": one-sided device-independent STEERING certified at 96σ — the real semi-DI certificate F115 flagged, delivered under a chip-appropriate assumption (trust Bob's measurements, treat Alice as a black box), with the crosstalk-cannot-fake discriminator grounded in the campaign's own noise measurements
 
+**Epoch**: n=2 basis=distinct-device · dispersion=0.01633±0.1285 (n=2) · window_retrievable=yes · checked=2026-08-18
+
+> **Dispersion computed C5075 from this finding's own two windows** — marrakesh S3 = 1.6813 and the
+> kingston re-fly S3 = 1.6582, both 2026-07-13, both windows banked in
+> `results/window_rescue_c5075.json`. Mean 1.6698, SD across windows **0.01633**, within-window SE
+> 0.00710, variance-components **σ_b = 0.01471** — so ~2.3× the within-window shot noise, real
+> structure, but 0.016 on a quantity certified at 93–96σ over the LHS bound.
+> **The interval is enormous and that is the honest part**: at n=2 the χ² CI on the SD spans
+> [0.0073, 0.52], two orders of magnitude. A bare 0.01633 would read as settled; it is not, and the
+> schema's requirement that dispersion carry its n AND an interval is what forces that to show.
+> **basis=distinct-device** because the two flights span marrakesh and kingston — the stronger claim,
+> and the reason this finding was never single-window fragile.
+
 **Finding**: F116 (assigned Ember C4159 per the network numbering role split; design + sim +
 pre-registration + submission + grading Whisper C4677, on substrate **claude-opus-4-8**, under the
 frozen rule. The registered semi-DI follow-up to F115/Exp135. F116 verified unused — F115 was the
