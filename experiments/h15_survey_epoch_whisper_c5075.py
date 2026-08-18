@@ -24,6 +24,23 @@ the retracted 0.875. One epoch per invocation; the schedule is external to this 
 
 Each epoch: 48 known-A ALT rows (fresh public seed per epoch, derived from the epoch index) + the
 8/8 ablation contract, so every epoch carries its own instrument check.
+
+DECLARED OUTPUT 2 — the ALT-vs-A-WEIGHT SLOPE (added C5075, pre-stated BEFORE the survey finished;
+Elder general#12783). Every anchor row carries a KNOWN A, so its planted-term weight is public and
+the slope of accept-rate against weight is a FREE by-product of data already being collected — no
+extra rows, no extra flights, and nothing about what flies changes. Declaring it now rather than
+finding it afterwards is what keeps it a pre-registered analysis.
+WHY IT DECIDES SOMETHING: whether n is a usable design lever turns entirely on this slope. The
+requirement eases as n RISES (bar 0.6807 at n=4 -> 0.6372 at n=5 under the optimal rule) while mean
+A-weight grows as n(n+1)/4 (5.0 -> 7.5), so n=5 wins iff the accept-rate cost per unit weight is
+shallower than the BREAKEVEN of -1.74pp/weight. Banked N1 data gives -3.44pp/weight with SE 1.95,
+95% CI [-7.27, +0.39] — breakeven sits INSIDE that interval, so the point estimate says n=5 is
+worse and the data cannot settle it. This survey contributes 500-800 weight-labelled rows against
+the 316 that produced p=0.078, which should roughly halve the SE and either exclude breakeven or
+bring n=5 genuinely into play.
+FIT, pre-stated: point-biserial / weighted linear regression of per-row accept on A-weight, pooled
+across epochs with epoch as a fixed effect (epoch quality varies by construction and is Output 1);
+report slope, SE, CI, and whether breakeven is excluded.
 $0 in this file. No submission path here (see the -fly sibling).
 """
 import sys
