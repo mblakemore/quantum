@@ -1,0 +1,18 @@
+{
+ "card": "the_unmonitored_layer",
+ "cycle": "C5075",
+ "directive": "Creator: review all quantum/docs from August, find a pattern or a place in the ship we have not realised, then go over it again and look deeper",
+ "method": "surveyed 114 August docs; the FIRST hit was fresh-review-missed-connections-leverage-c5054 - a prior run of this same exercise - so I checked whether ITS findings were acted on rather than repeating it",
+ "stage_census": {
+  "FLOWN_to_finding": "was stalled (6 flights, 0 findings); C5054 found it, board #56, FIXED",
+  "finding_to_FNUMBER": "STALLED - 6 items pending Ember assignment, 18-20 cycles, incl. H10-B1 time flip at 113-200 sigma, 2 of them absent from the F-ledger entirely",
+  "FNUMBER_to_EXHIBIT": "STALLED - horizons.html shows H6 while the arcs are at H15 (NINE behind); ELI5 ends F121; index F122"
+ },
+ "THE_PATTERN": "EVERY CROSS-SEAT HANDOFF IN THE RECORD PIPELINE IS QUEUED. Fixing one stage did not drain the pipeline, it relocated the queue one stage downstream - the same REMOVING-A-BOTTLENECK-MOVES-IT principle the H15 loss budget taught on the physics side, now observed in the workflow.",
+ "STRUCTURAL_REASON": "the PRODUCER of a stage cares about the handoff; the RECEIVER has their own queue and no forcing function. Interface work is structurally nobody priority - permanently the least urgent item on the receiving seat list.",
+ "THE_DEEPER_CUT": "notice what does NOT stall: flights, tanks, seals, submissions, monitors, board rows. Because each is GATED - G-PUBLIC refuses a submit without a public commitment, the tank guard refuses a flight without fuel, preflight refuses an implicit account, the board nags unassigned rows, submit_snapshot banks calibration whether anyone remembers or not. THE STAGES THAT ARE GATED DO NOT STALL; THE STAGES THAT ARE HANDOFFS DO.",
+ "THE_UNREALISED_PLACE": "we built a rigorous instrument layer around SPENDING - every QPU-second metered, gated, logged - and NONE around RECORDING. Physical resources watched to the second; the epistemic pipeline watched by nobody.",
+ "IT_EXPLAINS_THE_SESSION": "all four errors this session were RECORD failures, not physics failures: a stale index recommending a killed route; a retracted number surviving as a design operating point; calibration never banked so a certified result window is unrecoverable; a charter describing a design we no longer fly. Four errors, one layer - the layer with no instruments. Not bad luck: the predictable output of an unmonitored subsystem.",
+ "built": "tools/pipeline_audit.py - surfaces per-stage stalls with ages, fixes nothing (numbering is Ember seat, ledger the court), prints a census even when clean because silence is the failure mode it prevents",
+ "own_bug_caught": "first run reported 1550 cycles stalled - it took max() over cycle numbers across ALL findings, but each DC keeps its own counter (Whisper ~5075, Elder ~6600). CROSS-SEAT CYCLE NUMBERS ARE NOT COMPARABLE - different units in the same notation. Fixed; real ages 18-20 cycles."
+}
