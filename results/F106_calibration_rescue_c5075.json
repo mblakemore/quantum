@@ -12,5 +12,27 @@
  "t1_median_s": 0.00016569064826198093,
  "t2_median_s": 8.101568924741501e-05,
  "n_qubits": 156,
- "finding": "F106 was believed PAST IBM RETENTION and its epoch-dependence permanently unknown (Elder general#12935, used as the justifying case for a pre-expiry warning in the epoch schema). IT IS NOT LOST: retrieved at 36 days, status DONE, properties returned AT CREATION DATE. The epoch question on F106 is ANSWERABLE."
+ "finding": "F106 was believed PAST IBM RETENTION and its epoch-dependence permanently unknown (Elder general#12935, used as the justifying case for a pre-expiry warning in the epoch schema). IT IS NOT LOST: retrieved at 36 days, status DONE, properties returned AT CREATION DATE. The epoch question on F106 is ANSWERABLE.",
+ "used_qubits": [
+  0,
+  1,
+  2,
+  3
+ ],
+ "readout_error_used_qubits": {
+  "values": [
+   0.004,
+   0.0033,
+   0.0044,
+   0.0046
+  ],
+  "median": 0.00421,
+  "max": 0.00464
+ },
+ "device_wide_that_day": {
+  "median": 0.01166,
+  "mean": 0.02683,
+  "max": 0.49402
+ },
+ "bearing_on_the_sigma_recomputation": "The cited 196-sigma -> ~2.7-sigma collapse rests on a DRIFT-INFLATED READOUT. F106 actually flew on qubits [0,1,2,3] at readout 0.0042 median \u2014 2.8x BETTER than the device median that day and 6.4x better than the device mean (which one 0.494 qubit dominates). Any recomputation using a device-level or generically inflated readout overstates F106 noise by several-fold. THIS DOES NOT RESTORE 196 SIGMA: readout is one input among several and I do not have the recomputation method. It does mean the ~2.7 sigma figure must be RE-DERIVED against the real per-qubit window, which was impossible an hour ago and is possible now. NB no banked artifact for the 2026-08-17 recomputation could be found."
 }
