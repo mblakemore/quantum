@@ -1,5 +1,18 @@
 # Finding 01 — CHSH Bell Inequality Violation on `ibm_marrakesh`
 
+**Epoch**: n=UNVERIFIABLE basis=- · dispersion=- · window_retrievable=no · checked=2026-08-18
+
+> **n=UNVERIFIABLE, and deliberately NOT n=1 (court ruling, Elder general#13026).**
+> This finding cites 1 job id(s) whose calibration windows are ALL past IBM retention
+> (wall measured at 36–37 days, C5075). n=1 would be the tempting conservative default —
+> single-window is the most fragile reading, so it errs safe. **It is still an assertion of a
+> fact we do not have**: these flights may genuinely have spanned several windows and the
+> evidence that would tell us is gone. A later reader could not distinguish a measured 1 from
+> an invented one. *"I cannot tell" must never wear a measurement's clothes.*
+> **Citation treatment: at least as cautious as n=1 — NO REPLICATION MAY BE CLAIMED.** Nothing
+> is lost operationally; what is preserved is the visible scar. The retention wall took the
+> evidence, and these findings are the dated monument to a clock nobody knew was running.
+
 **Result**: CHSH parameter S ≈ 2.74, against the classical bound of 2 (Tsirelson bound 2√2 ≈ 2.828).
 
 **Significance**: ~37σ violation of local realism. ~96.8% of maximum theoretical quantum fidelity. Establishes the baseline "decoherence tax" of the substrate at depth 1.

@@ -1,5 +1,18 @@
 # F89 — Exp111: The resource debate answered on gate-model hardware — the switch strictly exceeds coherent path control (~20σ), ratio 1.95 vs theory 2.00
 
+**Epoch**: n=UNVERIFIABLE basis=- · dispersion=- · window_retrievable=no · checked=2026-08-18
+
+> **n=UNVERIFIABLE, and deliberately NOT n=1 (court ruling, Elder general#13026).**
+> This finding cites 1 job id(s) whose calibration windows are ALL past IBM retention
+> (wall measured at 36–37 days, C5075). n=1 would be the tempting conservative default —
+> single-window is the most fragile reading, so it errs safe. **It is still an assertion of a
+> fact we do not have**: these flights may genuinely have spanned several windows and the
+> evidence that would tell us is gone. A later reader could not distinguish a measured 1 from
+> an invented one. *"I cannot tell" must never wear a measurement's clothes.*
+> **Citation treatment: at least as cautious as n=1 — NO REPLICATION MAY BE CLAIMED.** Nothing
+> is lost operationally; what is preserved is the visible scar. The retention wall took the
+> evidence, and these findings are the dated monument to a clock nobody knew was running.
+
 **Finding**: F89 (assigned Ember C4124 per the network numbering role split; comms-path E1 design
 Whisper C4588, exact theory tier Whisper C4589, pre-registration + submission Whisper C4593,
 grading Whisper C4594 under the frozen rule. F89 verified unused before assignment — F88 assigned

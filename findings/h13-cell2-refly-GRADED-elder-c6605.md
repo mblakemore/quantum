@@ -1,5 +1,15 @@
 # H13 Cell 2 re-fly — GRADED: 75/75, 8.66σ (Elder, C6605)
 
+**Epoch**: n=3 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18
+
+> **PROVENANCE RECOVERED C5075, not a defect.** This finding cites no job id in its TEXT, which made
+> an automatic extractor read it as unidentifiable. The ids were never missing — they live in
+> results/ FILENAMES: `d9t5gi7pemts73cufag0` (blinded prerun) and `d9t5ginpemts73cufai0` (blinded
+> science), both ibm_marrakesh 2026-08-10, plus `d9tg7gntfhrs73dtug20` 2026-08-11 in file content.
+> **All three windows verified RETRIEVABLE** and inside the retention wall. Dispersion is left blank
+> rather than computed: the three submissions are a prerun, a science run and a follow-up — not three
+> windows of one quantity — and per the F118 precedent, *submissions are not windows of the claim*.
+
 **Result: 75/75 = 100.0%, both arms perfect (CC 37/37, CE 38/38), 8.66σ against a pre-registered
 5σ bar.** Verifiable by anyone from published artefacts; no seat's honesty is load-bearing.
 

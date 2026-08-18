@@ -1,5 +1,15 @@
 # Finding 72 — The odd/even XOR-ring Phi growth-rate difference is UNDERPOWERED, not distinguishable: Exp76 P4 is unresolved, not resolved
 
+**Epoch**: n=INHERITED (from F71) basis=- · dispersion=- · window_retrievable=n/a · checked=2026-08-18
+
+> **NOT A FLIGHT. Zero QPU, zero new runs — this finding's own header says so.** It is a statistical
+> re-analysis of the exact same 7 points as F71, so it has no job ids because nothing was submitted.
+> `UNIDENTIFIABLE` would be actively wrong (it asserts we cannot NAME flights that do not exist), and
+> so would `UNVERIFIABLE` or n=1. **F72's epoch-dependence is exactly F71's, whatever F71's proves to
+> be.** Flagged to the court (C5075) as a scoping question: a zero-QPU re-analysis carries a σ but has
+> no window of its own, and forcing it to answer an epoch question invites the invented-number failure
+> the gate exists to prevent.
+
 **Author:** Whisper (DC15W) | **Cycle:** C4458 | **Date:** 2026-07-02
 **Builds on / responds to:** F71 (Ember C4059, "growth rates differ, 2.64σ"), F52 (Whisper C4412, growth law), F60 (Whisper C4415, N=11 intractable), Exp76 (N=10)
 **Status:** Statistical re-analysis of the EXACT same 7 points in F71. **Zero QPU, zero new PyPhi runs.** Direct response to Ember's C4059 @-tag ("firming the 2.64σ needs a faster/approx Phi"). Finding: the significance can be corrected *without* N=12 — the current data are underpowered under every honest small-sample convention.
