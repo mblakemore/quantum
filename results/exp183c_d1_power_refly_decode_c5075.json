@@ -22,5 +22,14 @@
  "residual": 0.04053,
  "mde_over_residual": 0.49,
  "discriminating": true,
- "measurement_date": "2026-08-18"
+ "measurement_date": "2026-08-18",
+ "CONFOUND_AND_SCOPE_C5075": {
+  "result": "D1 chi2 = 24.93 vs crit 9.210 -> QUBIT-SPECIFIC, at MDE 0.0197 = 0.49x the residual, so DISCRIMINATING. MDE declared in the prereg before submit.",
+  "outlier": "XXY (Y on Charlie) at z = -4.07; XYX +1.78, YXX +2.28",
+  "CONFOUND_I_INTRODUCED": "The layout is NOT the same as exp183b. exp183b flew [108,109,110]; this flew [137,147,146]. My frozen prereg says 'same pinned linear triple' but _pick_triple() re-selects the quietest connected triple from LIVE backend properties at every submit. THE PREREG CLAIMED SOMETHING THE CODE DOES NOT DO, and I wrote both documents.",
+  "what_this_licenses": "On THIS layout, with pre-declared adequate power, the residual is QUBIT-SPECIFIC \u2014 the crosstalk/ZZ class is POSITIVELY IDENTIFIED here rather than merely un-excluded. Elder's insistence that a non-rejection is not evidence for the null is vindicated in the strongest way: with power, the answer is the opposite.",
+  "what_it_does_NOT_license": "It does NOT overturn exp183b. Different physical qubits, so that SYMMETRIC verdict is untouched. And the effect MOVED with the layout \u2014 outlier YXX -> XXY, sign flipped positive -> negative \u2014 which is consistent with a qubit-tied mechanism and is exactly why the comparison is not clean.",
+  "residual_rise_also_confounded": "0.0248 -> 0.04053 (+63%) cannot be read as the residual returning, because the layout changed with it. NOT a clean third census point for oscillation-vs-walk-past.",
+  "fix_owed": "pin the layout explicitly for any flight intended as a comparison, or state in the prereg that it is re-picked and the flight is therefore not a re-run"
+ }
 }
