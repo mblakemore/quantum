@@ -1,0 +1,41 @@
+{
+ "card": "h15c_cloak_neuron_pattern",
+ "cycle": "C5075",
+ "directive": "Creator: find another pattern - look through the museum exhibits, all the H arcs",
+ "method": "searched the H arcs and the H9 B-side imagineering deck; selection criterion was the one the last two designs taught - GAP (ideal minus floor) is the noise budget, so hunt the largest gap rather than the strongest floor",
+ "found": "H7 P2, THE CLOAKING DEVICE (exp248, ibm_fez, FLOWN) - a logical bit in [[4,2,2]] is invisible to any single-qubit probe while remaining readable logically",
+ "measured_flown": {
+  "chi_max_single_qubit_bits": 0.00038,
+  "F_logical": [
+   0.9913,
+   0.9714,
+   1.0,
+   0.9997
+  ],
+  "F_min": 0.9714,
+  "acceptance_min": 0.904,
+  "pair_probe_leak_bits": {
+   "Z02": 0.8703,
+   "X01": 0.9984
+  }
+ },
+ "neuron_numbers": {
+  "floor_1qubit_access": 0.51148,
+  "with_post_selection": 0.9714,
+  "NO_post_selection_honest": 0.9261,
+  "gap_no_PS": 0.4147
+ },
+ "gap_comparison": {
+  "TypeA_two_copy_memory": 0.2051,
+  "TypeB_magic_square": 0.1111,
+  "TypeC_cloak": 0.4147
+ },
+ "COMPARATOR_INTERROGATION_the_decisive_caveat": "the 0.41 gap is REAL and MEASURED but it is a gap over a WEAKER COMPARATOR CLASS. The floor bounds an agent with ONE of four qubits; the same flight measured that a TWO-qubit probe recovers 0.87-1.0 bits, so a CLASSICAL agent holding two qubits reads the stimulus by local measurement and parity. Type A bounds ANY classical-memory agent at a copy budget (resource bound, access unrestricted); Type B bounds ANY non-contextual assignment (structural, access-free); Type C bounds a 1-of-4 ACCESS level and collapses if the comparator gets a second qubit.",
+ "WHAT_IT_ACTUALLY_IS": "NOT a bigger advantage - a DIFFERENT PROPERTY. A reflex arc whose STIMULUS IS PRIVATE: the neuron responds to something a bounded observer cannot read, certified as an eavesdropper-vs-owner asymmetry Holevo-bounded over ALL measurements at 1-qubit access. No Type A or B neuron has that capability. Worth having on its own terms, not dressed as a larger separation.",
+ "engineering_notes": {
+  "qubits": "4 code + 1 actuator = 5",
+  "post_selection": "[[4,2,2]] is error-DETECTING and the flown fidelities are post-selected at 0.904-0.966 acceptance. A NEURON CANNOT POST-SELECT - it must answer every trial - so the honest number guesses on rejected shots: 0.9261. A three-outcome neuron (0/1/ABSTAIN) is the alternative and needs the comparator to be allowed to abstain too, which is a court question.",
+  "readout": "logical read is a 2-qubit parity, so the read burden is LOW - relevant since we are measured readout-limited"
+ },
+ "verdict": "a genuine THIRD neuron type with a measured, large gap and a narrower comparator. Recommended as a PRIVACY organ rather than as a replacement claim. Not proposed for flight tonight."
+}
