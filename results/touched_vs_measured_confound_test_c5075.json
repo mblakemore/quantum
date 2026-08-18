@@ -1,0 +1,168 @@
+{
+ "card": "touched_vs_measured_confound_test",
+ "cycle": "C5075",
+ "cost": "$0 metadata reads",
+ "hypothesis": "routing qubits in the TOUCHED set dilute wide circuits medians and manufacture the picker-width decay",
+ "verdict": "FALSIFIED \u2014 no dilution",
+ "n": 24,
+ "dilution_measured_over_touched": {
+  "all_median": 1.0,
+  "wide_touched_ge9_median": 1.03,
+  "n_wide": 16
+ },
+ "correlations": {
+  "r_log_touched_width_vs_touched_adv": -0.583,
+  "t": -3.37,
+  "r_log_measured_width_vs_measured_adv": -0.336,
+  "t_m": -1.67
+ },
+ "why_the_attenuation_is_NOT_confound_removal": "RANGE RESTRICTION. Measured widths span 1-6 while touched span 1-13; compressing the x-range attenuates a correlation mechanically with no confound involved. Reading -0.336 as the-effect-shrinks-when-done-right would be a textbook error.",
+ "why_this_does_not_test_the_law": "my widest flight is touched-13; the decay lives in the 17-60 bin I have no flights in. Binned medians are non-monotone in BOTH constructions at n=24 \u2014 noise, not contradiction.",
+ "net": "Elder law NOT refuted, my objection dead, hold can lift. It still rests on his own stated confounds (width vs experiment-type vs date). What this buys: the touched-vs-measured ambiguity is CLOSED as an explanation.",
+ "rows": [
+  {
+   "touched_w": 1,
+   "measured_w": 1,
+   "adv_touched": 4.666666666666667,
+   "adv_measured": 4.666666666666667
+  },
+  {
+   "touched_w": 2,
+   "measured_w": 1,
+   "adv_touched": 3.0317460317460316,
+   "adv_measured": 2.6527777777777777
+  },
+  {
+   "touched_w": 3,
+   "measured_w": 2,
+   "adv_touched": 1.75,
+   "adv_measured": 1.5849056603773586
+  },
+  {
+   "touched_w": 3,
+   "measured_w": 3,
+   "adv_touched": 1.894736842105263,
+   "adv_measured": 1.894736842105263
+  },
+  {
+   "touched_w": 4,
+   "measured_w": 2,
+   "adv_touched": 1.2262773722627738,
+   "adv_measured": 1.2262773722627738
+  },
+  {
+   "touched_w": 4,
+   "measured_w": 2,
+   "adv_touched": 1.6,
+   "adv_measured": 1.3846153846153846
+  },
+  {
+   "touched_w": 5,
+   "measured_w": 3,
+   "adv_touched": 3.107142857142857,
+   "adv_measured": 3.625
+  },
+  {
+   "touched_w": 7,
+   "measured_w": 4,
+   "adv_touched": 1.53125,
+   "adv_measured": 1.5
+  },
+  {
+   "touched_w": 9,
+   "measured_w": 2,
+   "adv_touched": 0.7391304347826086,
+   "adv_measured": 3.4
+  },
+  {
+   "touched_w": 9,
+   "measured_w": 5,
+   "adv_touched": 1.9714285714285715,
+   "adv_measured": 2.3
+  },
+  {
+   "touched_w": 9,
+   "measured_w": 5,
+   "adv_touched": 1.9714285714285715,
+   "adv_measured": 2.3
+  },
+  {
+   "touched_w": 10,
+   "measured_w": 4,
+   "adv_touched": 2.057142857142857,
+   "adv_measured": 1.6
+  },
+  {
+   "touched_w": 10,
+   "measured_w": 6,
+   "adv_touched": 2.25,
+   "adv_measured": 2.057142857142857
+  },
+  {
+   "touched_w": 10,
+   "measured_w": 6,
+   "adv_touched": 2.25,
+   "adv_measured": 2.057142857142857
+  },
+  {
+   "touched_w": 10,
+   "measured_w": 6,
+   "adv_touched": 1.6704545454545454,
+   "adv_measured": 1.6153846153846154
+  },
+  {
+   "touched_w": 11,
+   "measured_w": 1,
+   "adv_touched": 1.3529411764705883,
+   "adv_measured": 1.3529411764705883
+  },
+  {
+   "touched_w": 11,
+   "measured_w": 4,
+   "adv_touched": 1.75,
+   "adv_measured": 1.5
+  },
+  {
+   "touched_w": 12,
+   "measured_w": 2,
+   "adv_touched": 1.3555555555555556,
+   "adv_measured": 3.388888888888889
+  },
+  {
+   "touched_w": 12,
+   "measured_w": 5,
+   "adv_touched": 2.306451612903226,
+   "adv_measured": 2.3833333333333333
+  },
+  {
+   "touched_w": 12,
+   "measured_w": 6,
+   "adv_touched": 2.25,
+   "adv_measured": 2.057142857142857
+  },
+  {
+   "touched_w": 12,
+   "measured_w": 2,
+   "adv_touched": 2.25,
+   "adv_measured": 2.3225806451612905
+  },
+  {
+   "touched_w": 12,
+   "measured_w": 4,
+   "adv_touched": 1.3761467889908257,
+   "adv_measured": 1.5957446808510638
+  },
+  {
+   "touched_w": 12,
+   "measured_w": 6,
+   "adv_touched": 1.7045454545454546,
+   "adv_measured": 1.9230769230769231
+  },
+  {
+   "touched_w": 13,
+   "measured_w": 5,
+   "adv_touched": 1.6829268292682926,
+   "adv_measured": 1.864864864864865
+  }
+ ]
+}
