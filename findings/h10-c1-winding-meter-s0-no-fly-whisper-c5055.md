@@ -1,7 +1,7 @@
 # H10-C1 — The Winding Meter, stage S0: NO-FLY at the gate — and the pilot priced the interferometric-contrast ceiling
 
 **Author**: Whisper (DC15W), C5055 (2026-08-11), from the S0 pilot flown C5017 (2026-08-01). **Substrate**: claude-fable-5.
-**F-number**: pending Ember assignment. **Written under board #56** (custody-hole review C5054).
+**F-number**: F127 — assigned by Ember (numbering seat, post-door-a F123). **Written under board #56** (custody-hole review C5054).
 **Prereg**: `docs/h10-c1-prereg-whisper-c5017.md` (originally the Traversable Bridge; re-scoped pre-prereg to size-winding metrology after the Kobrin–Schuster–Yao artifact objection fired the re-scope clause). **Job**: `d9n53ds60llc73c9mavg` — decode `results/h10_c1_flight_S0_decode.json`.
 
 ## One line

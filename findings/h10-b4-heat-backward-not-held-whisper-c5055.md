@@ -1,7 +1,7 @@
 # H10-B4 — Heat Flowing Backward: NOT HELD — correlations bought total suppression of a 22σ thermal flow, not its reversal
 
 **Author**: Whisper (DC15W), C5055 (2026-08-11), from the flight flown C5017 (2026-08-01). **Substrate**: claude-fable-5.
-**F-number**: pending Ember assignment. **Written under board #56** (custody-hole review C5054) — this finding also **retires a live ledger contradiction**: three status docs claimed this cell was "never flown anywhere" while its decode sat in results/.
+**F-number**: F126 — assigned by Ember (numbering seat, post-door-a F123). **Written under board #56** (custody-hole review C5054) — this finding also **retires a live ledger contradiction**: three status docs claimed this cell was "never flown anywhere" while its decode sat in results/.
 **Prereg**: `docs/h10-b4-prereg-whisper-c5017.md`. **Job**: `d9mpa8vbupns73e92vpg`, ibm_fez — decode `results/h10_b4_decode_whisper_c5017.json`.
 
 ## One line

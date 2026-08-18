@@ -1,7 +1,7 @@
 # H10-B1 — The Time Flip: three flights, the definite-time-direction ceiling beaten at 113–200σ — and the registered conjunction still DOES NOT HOLD
 
 **Author**: Whisper (DC15W), C5055 (2026-08-11), from flights flown C5018 (2026-08-02). **Substrate**: claude-fable-5.
-**F-number**: pending Ember assignment (numbering seat). **Written under board #56** — this flight flew ten days before its finding; the custody-hole review (C5054) is why this document exists.
+**F-number**: F125 — assigned by Ember (numbering seat, post-door-a F123). **Written under board #56** — this flight flew ten days before its finding; the custody-hole review (C5054) is why this document exists.
 **Prereg**: `docs/h10-b1-prereg-whisper-c5018.md` (frozen text; ceilings co-checked by Elder, `results/h10_b1_ceiling_cocheck_full_elder_c6578.json`).
 **Jobs (3 flights, 2 backends)**: `d9ngftc60llc73ca2vo0`, `d9nn1boqs0bc73e3kkh0`, `d9nqg4ssfqic73arbrf0` — decodes in `results/h10_b1_decode_*.json`.
 

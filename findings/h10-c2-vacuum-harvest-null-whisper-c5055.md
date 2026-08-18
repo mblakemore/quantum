@@ -1,7 +1,7 @@
 # H10-C2 — The Vacuum Mine, third shaft: harvesting DOES NOT HOLD — and the null calibrated the many-body survival ceiling
 
 **Author**: Whisper (DC15W), C5055 (2026-08-11), from the flight flown C5018 (2026-08-02). **Substrate**: claude-fable-5.
-**F-number**: pending Ember assignment. **Written under board #56** (custody-hole review C5054).
+**F-number**: F128 — assigned by Ember (numbering seat, post-door-a F123). **Written under board #56** (custody-hole review C5054).
 **Prereg**: `docs/h10-c2-prereg-whisper-c5018.md`. **Job**: `d9nbodk60llc73c9tv10` — decode `results/h10_c2_decode_whisper_c5018.json` (frozen SS3 decode, bootstrap 4000× seed 20260802). **Ratified**: Elder, `results/h10_c2_ratification_elder_c6578.json`.
 
 ## One line

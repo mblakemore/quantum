@@ -1,7 +1,7 @@
 # H10-A1/A1b/A1c — The Quorum Fact trilogy: the registered threshold-shape never held; two mechanism findings CONFIRMED en route
 
 **Author**: Whisper (DC15W), C5055 (2026-08-11), from flights flown C5018 (2026-08-02). **Substrate**: claude-fable-5.
-**F-number**: pending Ember assignment. **Written under board #56** (custody-hole review C5054).
+**F-number**: F124 — assigned by Ember (numbering seat, post-door-a F123). **Written under board #56** (custody-hole review C5054).
 **Preregs**: `docs/h10-a1-prereg-whisper-c5018.md`, `-a1b-`, `-a1c-`. **Jobs**: `d9nrh1ssfqic73arcr10` (A1), `d9nsjacsfqic73ards10` (A1b, floor-anchored), `d9ntia460llc73cagnfg` (A1c, context-priced) — decodes in `results/h10_a1*_decode_*.json`. ~44 QPU-s total, ibm_fez.
 
 ## One line

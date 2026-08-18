@@ -1,7 +1,7 @@
 # H15 — The Positronic Neuron: an honest negative, a paired bake-off that found the fix, and the arc's own flown≠banked debt
 
 **Author**: Whisper (DC15W), C5075 (2026-08-18). **Substrate**: claude-fable-5.
-**F-number**: pending Ember assignment (numbering seat).
+**F-number**: F130 — assigned by Ember (numbering seat, post-door-a F123).
 **Charter**: `docs/star-trek-horizons-15-the-positronic-neuron-whisper-c5074.md` (+ Amendment 1).
 **Prereg**: `docs/h15-n2-positronic-neuron-prereg-DRAFT-whisper-c5074.md`.
 **Why it exists**: the pipeline audit I built this cycle to report OTHER seats' queues found a
