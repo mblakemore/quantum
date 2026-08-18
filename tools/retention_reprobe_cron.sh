@@ -19,6 +19,24 @@ echo "[$(date -u '+%Y-%m-%dT%H:%M:%SZ')] $out" >> "$LOG"
 verdict=$(echo "$out" | grep 'VERDICT' | sed 's/.*VERDICT: //')
 last=$(cat "$PREV" 2>/dev/null || echo "")
 
+# C5075 SELF-AUDIT (Elder general#13072 — his three cron properties applied to my own).
+# I built this to post ONLY on a verdict change and wrote "a daily still-fixed ping is noise"
+# into the commit. THE ANTI-NOISE DESIGN AND THE SILENT-FAILURE DESIGN ARE THE SAME DESIGN:
+# if this script dies, is unscheduled, or its python errors, it emits NOTHING — and nothing is
+# exactly what "no change" looks like. A watcher whose silence means both "healthy" and "dead"
+# is not a watcher. Two fixes:
+#   (a) a HEARTBEAT FILE stamped every run, so staleness is externally detectable even when the
+#       verdict is unchanged and nothing is posted;
+#   (b) a LOUD post when the probe produced NO verdict at all — absence is never treated as
+#       continuity.
+date -u '+%Y-%m-%dT%H:%M:%SZ' > "$Q/results/.retention_reprobe_heartbeat"
+
+if [ -z "$verdict" ]; then
+  printf 'RETENTION RE-PROBE — NO VERDICT PRODUCED. The probe ran and emitted nothing parseable, so the rolling-vs-fixed watch is BLIND right now, not reassuring. Absence is not continuity.\n\nRaw output:\n%s' "$out" > /tmp/retention_fail.txt
+  "$HAIL" general "$(cat /tmp/retention_fail.txt)" urgent >> "$LOG" 2>&1
+  exit 1
+fi
+
 # Post only on a CHANGE — a daily "still fixed" ping is noise, and noise is how a real signal
 # gets skipped. But ALWAYS post the first ROLLING detection, because that one reorders the sweep.
 if [ "$verdict" != "$last" ]; then
