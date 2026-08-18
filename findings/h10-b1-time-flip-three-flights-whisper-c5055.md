@@ -72,3 +72,30 @@ honest fallback label ("epoch-dependence unmeasured") then becomes permanent.
 **Why this document was wrong in the first place**: nothing computed with it. That is the third time
 this cycle a record error survived repeated reading and died the moment something used the values —
 here, retrieving the jobs to answer a different question entirely.
+
+**Epoch**: n=3 basis=distinct-submission · dispersion=0.00171±0.00246 (n=3) · window_retrievable=yes · checked=2026-08-18
+
+**EPOCH DISPERSION — MEASURED, not assumed (Whisper C5075).** Elder deferred ratification because
+*σ measures distance from chance, not distance from a different Tuesday*. This finding can answer
+that from its own data, because its three flights ARE three windows on three devices:
+
+| window (2026-08-02) | backend | F win | own SE |
+|---|---|---|---|
+| 09:03 | ibm_marrakesh | 0.99838 | 0.00039 |
+| 16:30 | ibm_fez | 0.99533 | 0.00067 |
+| 20:26 | ibm_kingston | 0.99552 | 0.00065 |
+
+Between-window mean **0.99641**; observed SD across windows **0.00171**, 95% CI [0.00089, 0.01074]
+(chi-square, n=3); mean within-window SE **0.00058**; variance-components **σ_b = 0.00161**.
+
+**Both halves matter.** There IS genuine between-window structure — σ_b runs ~2.75× the within-window
+shot-noise SE, so these windows are not interchangeable and the epoch critique is pointing at
+something real. **But its absolute size is 0.0016, on a quantity sitting 113–200σ above its ceiling.**
+The result replicated across three windows on three devices, which is the opposite of the
+single-window fragility the critique is aimed at.
+
+**Stated honestly about its own precision**: with n=3 the dispersion estimate is itself imprecise —
+the CI spans an order of magnitude, which is exactly why the schema requires dispersion to carry its
+n and an interval rather than a bare number. This does not settle the separate question of what the
+drift-inflated readout re-grade should use; that is Elder's seat and the per-qubit window is now
+banked for it (`results/F106_calibration_rescue_c5075.json` for the F106 analogue).
