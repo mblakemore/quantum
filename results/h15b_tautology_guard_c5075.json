@@ -1,0 +1,35 @@
+{
+ "card": "h15b_tautology_guard",
+ "cycle": "C5075",
+ "ceiling": 0.8888888888888888,
+ "drop_on_severing": 0.4917534722222222,
+ "verdict": "NOT A TAUTOLOGY \u2014 the response is carried by the entanglement, as required.",
+ "entangled": {
+  "overall": 1.0,
+  "per_context": {
+   "r0c0": 1.0,
+   "r0c1": 1.0,
+   "r0c2": 1.0,
+   "r1c0": 1.0,
+   "r1c1": 1.0,
+   "r1c2": 1.0,
+   "r2c0": 1.0,
+   "r2c1": 1.0,
+   "r2c2": 1.0
+  }
+ },
+ "SEVERED": {
+  "overall": 0.5082465277777778,
+  "per_context": {
+   "r0c0": 0.5224609375,
+   "r0c1": 0.509765625,
+   "r0c2": 0.5224609375,
+   "r1c0": 0.490234375,
+   "r1c1": 0.53515625,
+   "r1c2": 0.4921875,
+   "r2c0": 0.4931640625,
+   "r2c1": 0.482421875,
+   "r2c2": 0.5263671875
+  }
+ }
+}
