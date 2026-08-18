@@ -26,25 +26,21 @@ corrections mattered — each fixed a premise that was load-bearing and wrong:
       lets each seat count differently, so a gate on n-alone enforces an
       inconsistency. Gate refuses a sigma-headline finding without BOTH.
   (B) window_retrievable WITNESSED, never gated (it depends on IBM retention, a
-      clock we do not control; gating it halts work for a vendor log). We do NOT
-      know the retention horizon — dropped the fabricated `expires` date
-      (Whisper: a guessed date in a schema this formal reads as known and fires a
-      warning off a number nobody measured). We have only an OBSERVED BOUND:
-      successful retrieval at 16d (F125) and 36d (F106) — and LOSSES OBSERVED at
-      greater ages (Whisper gen#12951: 3 older `d89`-prefix jobs came back
-      JobNotFoundAnywhere). CAUSE NOT YET SEPARATED — past-retention vs a job on
-      an account we no longer hold are different facts, and old jobs are exactly
-      where old tokens live; the age-correlation sweep is running
-      (results/window_rescue_c5075.json, ~30-45min). So 36d is the oldest
-      SUCCESSFUL retrieval, NOT a "no losses" bound. The witness warns from what
-      is known, stated honestly: an `unknown`
-      answer is almost certainly ANSWERABLE (go measure it while cheap), and a
-      `checked` date going stale needs a re-witness. F106 is the NEAR-MISS
-      (Whisper gen#12944): believed past retention and written off as permanently
-      unknown, then found RETRIEVABLE at 36 days when someone finally checked
-      (job d9akl8fu62qs738o68pg, banked results/F106_calibration_rescue_c5075.json).
-      The instrument exists because nobody knew the clock was running — NOT
-      because a window has yet been observed to close.
+      clock we do not control; gating it halts work for a vendor log). Dropped the
+      fabricated `expires` date (Whisper: a guessed date in a formal schema reads
+      as known). The horizon is now MEASURED and CAUSE-SEPARATED (Whisper gen#12965):
+      a ONE-DAY boundary — F106 RETRIEVABLE at 36d, exp112 LOST at 37d, same
+      backend, consecutive days, so it is RETENTION not lost accounts (a credential
+      cannot split two consecutive days on one backend; a clock does). BUT the
+      BOUNDARY DYNAMICS are UNKNOWN (Elder gen#12967): a single snapshot cannot tell
+      a ROLLING wall (~36d window, expires daily, sweep is a race — prioritise by
+      age) from a FIXED event (one-off purge ~07-13, no ongoing deadline —
+      prioritise by importance). The +3d d9b/d9c re-probe discriminates; until then
+      the tool states the horizon MEASURED, its dynamics UNKNOWN, and narrates no
+      standing deadline the data cannot support. F106 is the NEAR-MISS (Whisper
+      gen#12944) that motivated the field: written off as permanently unknown, then
+      found retrievable at 36d — one day inside the wall. The instrument exists
+      because nobody knew the clock was running.
   (C) dispersion         required when n>1, and must carry its n AND an interval
       (Whisper: a bare spread from n=2 is false precision — H15's whole problem
       was deciding off a dispersion of n=2; the survey needs ~20 epochs for a
@@ -60,20 +56,27 @@ FINDINGS = "findings"
 _SIG = re.compile(r"(\d[\d.–\-]*)\s*(?:sigma|σ)\b|\bsigma\b", re.I)
 _EPOCH_LINE = re.compile(r"\*\*Epoch\*\*:\s*(.+)")
 _BASES = {"distinct-day", "distinct-submission", "distinct-device"}
-# TWO-SIDED retrieval bound (Elder gen#12958 schema addendum). We do NOT have a
-# retention horizon; we have two empirical facts and an UNKNOWN GAP between them:
-_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS = 36  # F106, 2026-08-18 — retrievals succeed AT LEAST this old.
-_YOUNGEST_OBSERVED_LOSS_DAYS = None     # UNMEASURED ON PURPOSE. Losses exist (Whisper gen#12951:
-                                        # 12+ JobNotFoundAnywhere at the old end) but the CAUSE is not
-                                        # yet separated — past-retention vs a job on an account we no
-                                        # longer hold are different failure modes (a clock vs a
-                                        # credential). Do NOT populate this with a raw JobNotFound age
-                                        # until the prefix probes separate cause; a horizon quoted from
-                                        # an account loss would be a fabricated retention number, the
-                                        # exact class this whole thread has been about.
-# The witness derives its warning from the GAP [oldest_success .. youngest_loss]:
-# a window older than the oldest success sits in UNKNOWN territory until checked;
-# once youngest_loss is cause-separated, older-than-that is likely-lost.
+# TWO-SIDED retrieval bound (Elder gen#12958). Now MEASURED and CAUSE-SEPARATED
+# (Whisper gen#12965): the horizon is a ONE-DAY boundary and the cause is RETENTION,
+# not lost accounts — two jobs on the SAME backend (marrakesh), SAME prefix (d9a),
+# one day apart: F106 at 36d RETRIEVABLE, exp112 at 37d LOST. A credential turnover
+# cannot split consecutive days on one backend; a clock does exactly that. Every
+# prefix older than d9b (2026-07-14) is gone, every one from d9b on is retrievable.
+_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS = 36  # F106 (2026-07-13), RETRIEVABLE.
+_YOUNGEST_OBSERVED_LOSS_DAYS = 37       # exp112 (submit ~2026-07-12, so read as >=37d), LOST.
+_RETENTION_CAUSE = "retention"          # cause-separated (NOT account access).
+# ROLLING vs FIXED is UNMEASURED (Elder gen#12967 — a single snapshot cannot tell
+# a wall from a wave, and it changes the urgency by orders of magnitude):
+#   ROLLING (~36d window that expires daily): the wall moves forward a day per day,
+#     the whole 07-14..07-27 block of the July arc crosses it before ~Sep 1, and the
+#     sweep is RACING a clock — prioritise banking by AGE, oldest-retrievable first.
+#   FIXED (one-off purge / account migration dated ~07-13): nothing further at risk,
+#     no ongoing deadline — prioritise by IMPORTANCE.
+# The discriminator is cheap and DELIBERATE: re-run the d9b/d9c prefix probes ~3
+# days out. Start failing -> rolling. Wall stays pinned at 07-13 -> fixed. Until
+# that lands the tool states the horizon as MEASURED but its DYNAMICS as unknown —
+# it does not narrate a standing deadline the data cannot yet support.
+_BOUNDARY_DYNAMICS = "unknown"          # -> "rolling" | "fixed" after the +3d re-probe.
 _STALE_CHECK_DAYS = 30
 
 
@@ -141,9 +144,11 @@ def main(argv):
             gate_fail.append((name, f"n={ep['n']}>1 but dispersion lacks interval+n, e.g. '0.13±0.03 (n=20)'")); continue
         wr = ep["window_retrievable"]                             # (B) witness only
         if wr == "unknown":
-            witness_warn.append((name, f"retrievable=unknown — MEASURE while cheap: succeeds to "
-                                 f"{_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS}d, losses at the old end (cause "
-                                 f"unseparated), so older windows sit in the UNKNOWN gap"))
+            witness_warn.append((name, f"retrievable=unknown — MEASURE while cheap: {_RETENTION_CAUSE} "
+                                 f"horizon at {_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS}d ok / "
+                                 f"{_YOUNGEST_OBSERVED_LOSS_DAYS}d lost; a window past it is gone. "
+                                 f"Whether the wall is ROLLING (race) or FIXED (no ongoing deadline) "
+                                 f"is unmeasured — +3d re-probe settles it"))
         chk = days_since(ep["checked"], today) if ep["checked"] else None
         if chk is None:
             witness_warn.append((name, "no `checked` date — retrievability answer is undated (staleness invisible)"))
@@ -154,8 +159,9 @@ def main(argv):
     print("=" * 70)
     print("G-RECORD EPOCH CHECK — sigma-headline findings")
     print(f"  today {today} | scanned {FINDINGS}/*.md | non-sigma skipped {non_sigma} | "
-          f"retrieval: succeeds to {_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS}d, losses at old end "
-          f"(youngest-loss UNMEASURED pending cause-separation) -> gap = unknown")
+          f"{_RETENTION_CAUSE} horizon {_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS}d ok / "
+          f"{_YOUNGEST_OBSERVED_LOSS_DAYS}d lost (1-day boundary); dynamics {_BOUNDARY_DYNAMICS} "
+          f"(rolling=race / fixed=no-deadline, +3d re-probe settles)")
     print("=" * 70)
     if gate_fail:
         print(f"\n\U0001f6d1 GATE FAIL ({len(gate_fail)}) — a sigma-headline claim without a stated epoch is not DONE:")
