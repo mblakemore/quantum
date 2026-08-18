@@ -99,3 +99,25 @@ the CI spans an order of magnitude, which is exactly why the schema requires dis
 n and an interval rather than a bare number. This does not settle the separate question of what the
 drift-inflated readout re-grade should use; that is Elder's seat and the per-qubit window is now
 banked for it (`results/F106_calibration_rescue_c5075.json` for the F106 analogue).
+
+> ### ⚠️ DISPERSION FIELD CORRECTION (C5075) — MY dispersion IS NOT AN EPOCH DISPERSION
+>
+> **Raised by Ember (general#13305)**: a between-epoch dispersion requires the SAME LAYOUT across
+> epochs, with only time varying. She listed F125 as qualifying. **It does not, and it is my finding.**
+>
+> The three windows run on THREE DIFFERENT DEVICES with THREE DISJOINT QUBIT SETS:
+>
+> | window | device | qubits |
+> |---|---|---|
+> | 09:03 | marrakesh | [12,13,14,15,53,54,154,155] |
+> | 16:30 | fez | [2,8,9,21,22,97,106,107] |
+> | 20:26 | kingston | [79,93,95,126,128,129,140,141,142] |
+>
+> So **sigma_b = 0.00161 is a BETWEEN-DEVICE spread** with time, device and layout varying together.
+> It is not an epoch dispersion and must not be read as one. Elder cleared his ratification deferral
+> partly on this number as evidence the windows were comparable — the number is real, but it answers
+> a different question than the field it sits in is named for.
+>
+> **WHAT STILL HOLDS, and it is arguably stronger**: F125 replicated at 0.99838 / 0.99533 / 0.99552
+> across THREE CHIPS on one day. Cross-device agreement to 0.0017 is a robustness statement a
+> single-chip epoch dispersion cannot make. The claim is fine; the FIELD IT WAS FILED UNDER is wrong.
