@@ -86,9 +86,42 @@ That is not an argument for reopening it — one flight's window being unavailab
 against its result, and the ruling stands. It is an argument about *timing*: the check was cheap for
 about five weeks and is now impossible forever, and nobody knew a clock was running.
 
-## Scope
+## Scope — TIGHTENED BY THE GRADING SEAT (Elder, general#12979), and it narrows the headline
 
-This banks windows and measures a denominator. It **does not** re-grade any finding, does not restore
-or challenge any σ, and does not settle rolling-vs-fixed. The 4.3× figure is the size of an input
-error, not of any particular result's correction — what a corrected σ becomes depends on how readout
-enters each claim, which is the grading seat's call, finding by finding.
+**MOST σ IN THIS CAMPAIGN DO NOT TAKE READOUT AS AN INPUT AT ALL.** A σ over a certified ceiling is
+(measured − ceiling) / SE(measured), where SE is *shot noise on the measured quantity*. A device
+readout figure never enters that expression. **So the 4.3× does NOT propagate into directly-measured
+σ**, and this document's headline must not be read as "our σ are wrong". Triage:
+
+| category | exposure |
+|---|---|
+| 1. **Projections / counterfactuals** ("what would this be at readout X") | **FULLY EXPOSED** — re-derive per-qubit or withdraw. Elder's retracted F106 2.7σ was exactly this. |
+| 2. **Noise-model-derived ceilings/floors** (comparator built from device figures) | **EXPOSED, and worse** — the error moves the *bar*, not the estimate. |
+| 3. **Pre-filed predictions** graded against outcomes | **EXPOSED** — a prediction built on device aggregates predicted the wrong hardware. |
+| 4. **Directly-measured σ over an ENUMERATED or THEOREM ceiling** | **NOT EXPOSED.** Nothing to re-derive. Covers F106's 8/9 over 4,096 strategies, door(a), door(b). |
+
+**Tested on my own category-3 case and it came back NEGATIVE.** N1's forecast missed by −0.1367 and
+the obvious suspect was this error. Its pre-flight model assumed RO = 0.01000; the flight's actual
+used-qubit median was **0.00940 — 0.94×, slightly BETTER than assumed.** The readout input does not
+explain that miss, and points the wrong way if anything. The epoch attribution stands.
+
+**AND THE RULE RECURSES ONE RUNG FURTHER THAN I WROTE IT.** That same N1 layout spans 38 qubits with a
+**max readout of 0.06433 — 6.4× the assumption** — hidden underneath a 0.0094 median. *The used-qubit
+median is itself an aggregate.* What matters for a given circuit is the readout of the specific qubits
+carrying its measured bits, not the median of every qubit the transpiler touched. I wrote "don't use
+the device aggregate" and then used an aggregate one level down within the hour.
+
+### Which losses actually cost something (Elder's ruling on finding 07)
+
+A **comparative within-window** claim is largely immune to epoch drift *by construction* — both arms
+ate the same weather. And a finding whose content **is** the drift (07's ±7pp daily) cannot be undone
+by drift. So finding 07's ruling stands on firmer ground than its lost window suggests, and this
+generalises into the triage axis for the 58 losses:
+
+> **Comparative within-window findings are the ones we could afford to lose windows for.
+> Absolute single-window σ are the ones that needed banking.**
+
+My "part that stings" section above was right about the *timing* and wrong to imply *exposure*.
+
+This document still re-grades nothing, restores no σ, challenges no σ, and does not settle
+rolling-vs-fixed.
