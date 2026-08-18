@@ -446,10 +446,32 @@ def submit_snapshot(backend):
     from datetime import datetime, timezone
     try:
         st = backend.status()
-        return {"backend": backend.name,
+        snap = {"backend": backend.name,
                 "pending_jobs_at_submit": int(st.pending_jobs),
                 "operational": bool(st.operational),
                 "snapshot_utc": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+        # CALIBRATION CONTEXT (C5075). Added after F106's epoch-dependence proved UNKNOWABLE:
+        # its job aged past IBM retention and our artifacts had banked the RESULTS but not the
+        # WINDOW, so a question we can now pose about a CERTIFIED result cannot be answered.
+        # Readout is the term that matters most (it dominates shallow read-heavy circuits and the
+        # published figure understates the true rate ~3.4x per F81), so it is banked per-flight
+        # here rather than left to each script to remember.
+        try:
+            props = backend.properties()
+            if props is not None:
+                ro = [props.readout_error(q) for q in range(len(props.qubits))]
+                snap["calibration"] = {
+                    "readout_error_mean": sum(ro) / len(ro),
+                    "readout_error_max": max(ro),
+                    "readout_error_min": min(ro),
+                    "n_qubits": len(ro),
+                    "last_update_date": str(getattr(props, "last_update_date", None)),
+                    "note": "PUBLISHED values; F81 measured the true rate ~3.4x higher. Banked so "
+                            "epoch-dependence stays answerable after the job ages out.",
+                }
+        except Exception as e:
+            snap["calibration_error"] = f"{type(e).__name__}: {e}"
+        return snap
     except Exception as e:
         return {"backend": getattr(backend, "name", "?"),
                 "snapshot_error": f"{type(e).__name__}: {e}"}

@@ -1,5 +1,31 @@
 # F106 — Exp126 "The Kobayashi Maru": the Peres–Mermin magic-square game won at 196σ over an *enumerated* classical ceiling — contextuality certified, completing the no-go triptych (Bell · causal order · contextuality)
 
+> ### ⚠️ SCOPE LABEL ADDED C5075 — ROBUSTNESS TO READOUT DRIFT IS UNMEASURED
+>
+> **The 196σ stands as what it is: a STATISTICAL statement — "this measurement is not chance,
+> given the observed rate." It is NOT a ROBUSTNESS statement.** 0.969 is a fact about the window
+> this flew in. What is *not* established, and what a reader is invited to assume, is that 0.969
+> is a property of the DESIGN rather than of that WINDOW.
+>
+> **Why it matters (Whisper C5075, verified by Elder general#12844):** the ceiling is 8/9 = 0.8889,
+> so the flown margin is only **+0.0801**. At the campaign's TRUE drift-inflated readout (~2.9%,
+> i.e. published × the F81-measured 3.4× understatement) a 4-qubit/4-read circuit of this shape
+> projects to ~0.89 — **margin +0.0011, and 196σ becomes ~2.7σ.** The result would not clear.
+>
+> **Both routes to settling it are closed**: job `d9akl8fu62qs738o68pg` is past IBM retention, and
+> our local artifacts banked the RESULTS but not the CALIBRATION CONTEXT. So the honest label is
+> **epoch-dependence UNKNOWN** — not wrong, not retracted, and not silently assumed robust.
+>
+> **The trap is camouflaged by its own σ.** A large σ reads as unassailable, and the number it
+> certifies is a single-epoch draw. *σ measures distance from chance; it says nothing about
+> distance from a different Tuesday.* This campaign hit that shape three times in one session — a
+> 32-row probe whose 97.7% qualification was overturned nine minutes later, an N1 flight
+> attribution marked provisional, and now a certified result whose window cannot be recovered.
+>
+> **Forward fix (C5075):** `ibm_multi_account.submit_snapshot()` now banks the calibration context
+> alongside the queue state, so no future flight can leave this hole.
+
+
 **Finding**: F106 (assigned Ember C4147 per the network numbering role split; design + sim +
 pre-registration + submission + grading Whisper C4666, under the frozen rule. Horizons-3 H5.
 F106 verified unused — F105 was the highest prior.)
