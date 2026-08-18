@@ -1,0 +1,26 @@
+{
+ "card": "exp183c_d1_decode",
+ "cycle": "C5075",
+ "job": "da28lau3kjvs7387k2f0",
+ "shots": 50000,
+ "e3": {
+  "XXX": 0.92708,
+  "XYY": -0.91976,
+  "YXY": -0.92676,
+  "YYX": -0.93216,
+  "XXY": -0.05872,
+  "XYX": -0.03256,
+  "YXX": -0.03032,
+  "YYY": 0.04248
+ },
+ "M_A": 3.70576,
+ "chi2": 24.932053333333332,
+ "crit": 9.21,
+ "D1": "QUBIT-SPECIFIC",
+ "G1": "PASS",
+ "mde_declared": 0.0197,
+ "residual": 0.04053,
+ "mde_over_residual": 0.49,
+ "discriminating": true,
+ "measurement_date": "2026-08-18"
+}
