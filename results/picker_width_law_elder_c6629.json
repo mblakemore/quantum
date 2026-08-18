@@ -1,0 +1,24 @@
+{
+ "card": "picker_advantage_vs_layout_width",
+ "cycle": "C6629", "seat": "elder", "cost": "$0 — banked data only, no QPU",
+ "question": "Does the quiet-qubit picker's advantage DECAY as a circuit gets WIDER? (picking 4 quiet qubits from 156 is easy; picking 40 forces you into the tail)",
+ "source": "results/window_rescue_c5075.json — Whisper's 173-flight window census; 111 rows carry layout + per-qubit readout + device readout",
+ "n_used": 97,
+ "exclusion": "Full-device layouts (>=100 of 156 qubits, n=14) EXCLUDED as DEFINITIONAL: when a circuit uses essentially every qubit, used-median == device-median by construction and the 1.00x is arithmetic, not a measurement. Including them inflates the apparent decay.",
+ "result_binned_medians": {
+   "width_1_4":   {"n": 43, "median_advantage": 2.39, "iqr": [1.86, 3.03]},
+   "width_5_8":   {"n": 22, "median_advantage": 1.78, "iqr": [1.57, 2.14]},
+   "width_9_16":  {"n": 22, "median_advantage": 1.86, "iqr": [1.38, 2.25]},
+   "width_17_60": {"n": 10, "median_advantage": 1.53, "iqr": [1.39, 1.75]},
+   "width_100_plus": "1.00x BY CONSTRUCTION — excluded"
+ },
+ "correlation": {"pearson_r_log_width": -0.402, "t": -4.28, "n": 97, "verdict": "significant"},
+ "functional_form_WARNING": "A linear-in-log fit (advantage ~= 4.22 - 1.063*ln(width)) fits IN RANGE but is the WRONG FORM: it predicts -0.20x at width 64, and advantage is a ratio floored near 1.0. DO NOT EXTRAPOLATE THE LINE. The binned medians are the usable result.",
+ "what_it_means": "The quiet-qubit picker (F57/F58/F70) is a NARROW-LAYOUT instrument. Its ~2.4x benefit at 1-4 qubits is roughly halved by 17-60 qubits and is arithmetically absent when a circuit takes the whole device. A wide circuit gets DEVICE-median readout and should be budgeted at that, not at the quiet-qubit figures the campaign has been quoting.",
+ "why_it_matters_now": "Design budgets. The H15 neuron is readout-limited; its budget assumed quiet-qubit quality. This says that assumption holds only while the layout stays narrow — and any composition (chaining organs, wider n) walks the advantage down toward 1.0 at the same time as it adds reads. The readout penalty of going wide is therefore LARGER than a per-qubit count suggests: you add reads AND lose picker quality simultaneously.",
+ "honest_limits": [
+   "WIDTH AND EXPERIMENT TYPE ARE CONFOUNDED — wide circuits are different experiments, possibly on different devices and dates. This is an association across the campaign's history, not a controlled intervention. A do()-style test would fix width and vary nothing else.",
+   "The 17-60 bin is n=10; the trend rests mostly on the 1-4 vs 5-16 contrast.",
+   "Device-median is itself an aggregate; per the same night's ruling the correct denominator depends on the OBSERVABLE's participating set and how the statistic combines them. This law is stated in median-vs-median terms and inherits that coarseness."
+ ]
+}
