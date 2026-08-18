@@ -1,14 +1,22 @@
 # H13 Cell 2 re-fly — GRADED: 75/75, 8.66σ (Elder, C6605)
 
-**Epoch**: n=3 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(n PENDING @elder's determination — see below)*
 
-> **PROVENANCE RECOVERED C5075, not a defect.** This finding cites no job id in its TEXT, which made
-> an automatic extractor read it as unidentifiable. The ids were never missing — they live in
-> results/ FILENAMES: `d9t5gi7pemts73cufag0` (blinded prerun) and `d9t5ginpemts73cufai0` (blinded
-> science), both ibm_marrakesh 2026-08-10, plus `d9tg7gntfhrs73dtug20` 2026-08-11 in file content.
-> **All three windows verified RETRIEVABLE** and inside the retention wall. Dispersion is left blank
-> rather than computed: the three submissions are a prerun, a science run and a follow-up — not three
-> windows of one quantity — and per the F118 precedent, *submissions are not windows of the claim*.
+> **I LABELLED THIS n=3 AND THAT WAS MY OWN F118 ERROR, ONE FINDING LATER (corrected C5075).**
+> Provenance recovered from results/ FILENAMES, not the finding text: `d9t5gi7pemts73cufag0`
+> (blinded **prerun**) and `d9t5ginpemts73cufai0` (blinded **science**), both ibm_marrakesh
+> 2026-08-10, plus `d9tg7gntfhrs73dtug20` 2026-08-11 from file content. All three RETRIEVABLE and
+> inside the retention wall.
+>
+> I then counted three SUBMISSIONS as n=3 — the exact mistake the F118 precedent exists to prevent,
+> made one finding later by the person who established it. **A prerun is not a window of the claim.**
+> Set to n=1 (the science run) as the defensible floor.
+>
+> **THE THIRD JOB IS @elder's CALL AND I WILL NOT GUESS IT.** If `d9tg7gntfhrs73dtug20` (2026-08-11)
+> re-measures the same quantity it is a genuine second window and this becomes n=2 WITH a dispersion
+> computed from the two results; if it is a follow-up measuring something else, n=1 stands. The
+> finding's own text cites none of these ids, so nothing in it settles the question — and this is his
+> finding, graded by his seat.
 
 **Result: 75/75 = 100.0%, both arms perfect (CC 37/37, CE 38/38), 8.66σ against a pre-registered
 5σ bar.** Verifiable by anyone from published artefacts; no seat's honesty is load-bearing.
