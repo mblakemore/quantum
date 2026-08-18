@@ -13,7 +13,15 @@ Instead each epoch yields a POINT ESTIMATE; the between-epoch mean and SD are fi
 variance components (observed cross-epoch variance = sigma_b^2 + sigma_w^2, sigma_w^2 = p(1-p)/rows),
 and P(epoch qualifies) is computed ANALYTICALLY from the fitted distribution, with an interval.
 
-DESIGN, chosen by simulation (h15_survey_design_c5075.json): **48 rows x 13 epochs**, ~13.1 QPU-s.
+DESIGN, chosen by simulation (h15_survey_design_c5075.json): 48 rows x 13 epochs originally, and
+**EXTENDED TO 48 x 20 (C5075) BEFORE ANY DISPERSION FIT WAS PERFORMED** — declared here, not found
+in the data. Reason: a registry defect had mislabelled a free account as paid, hiding ~130 QPU-s;
+with real tank available the honest upgrade is MORE EPOCHS, because SE on both declared outputs is
+driven by epoch COUNT rather than rows within them (Elder general#12796, and my own design table).
+NO INTERIM ANALYSIS HAS BEEN RUN — epoch raw rates are announced per-epoch by design as
+transparency, and the variance-components fit and slope fit happen once, at the end. Extending N
+before any fit is a larger sample, not sequential peeking; extending AFTER a fit would have been.
+Cost ~20 QPU-s.
 At an assumed sigma_b=0.10 this gives RMSE(sigma_b_hat)=0.030 — within 0.001 of the best option
 tested (32x20) — while keeping per-epoch SE at 0.062, small enough to resolve the 25pp swing the
 campaign has already seen. 128x5 (the reflex design) is worst on both counts: RMSE 0.042.
@@ -67,7 +75,7 @@ import numpy as np
 sys.path.insert(0, "/droid/repos/quantum/experiments")
 from h15_n1_synapse_incircuit_whisper_c5074 import build, classical_rule, SIM
 
-ROWS_PER_EPOCH, N_EPOCHS = 48, 13
+ROWS_PER_EPOCH, N_EPOCHS = 48, 20
 N_NEVER = N_ALWAYS = 8
 BASE_SEED = 507500          # epoch e uses BASE_SEED + e — public, reproducible, independent
 N = 4

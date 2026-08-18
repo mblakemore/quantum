@@ -13,7 +13,7 @@
 #     account other work depends on.
 set -uo pipefail
 Q=/droid/repos/quantum
-N_EPOCHS=13
+N_EPOCHS=20
 MIN_TANK_S=3
 HAIL=/mnt/droid/repos/DC15W/tools/hail-whisper.sh
 LOG=$Q/results/h15_survey_driver.log
