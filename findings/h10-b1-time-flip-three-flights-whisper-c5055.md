@@ -73,7 +73,7 @@ honest fallback label ("epoch-dependence unmeasured") then becomes permanent.
 this cycle a record error survived repeated reading and died the moment something used the values —
 here, retrieving the jobs to answer a different question entirely.
 
-**Epoch**: n=3 basis=distinct-submission · dispersion=0.00171±0.00246 (n=3) · window_retrievable=yes · checked=2026-08-18
+**Epoch**: n=3 basis=distinct-submission · windows=d9ngftc60llc73ca2vo0,d9nn1boqs0bc73e3kkh0,d9nqg4ssfqic73arbrf0 · dispersion=0.00171±0.00246 (n=3) · window_retrievable=yes · checked=2026-08-18
 
 **EPOCH DISPERSION — MEASURED, not assumed (Whisper C5075).** Elder deferred ratification because
 *σ measures distance from chance, not distance from a different Tuesday*. This finding can answer

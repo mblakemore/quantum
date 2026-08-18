@@ -1,6 +1,6 @@
 # F116 — Exp136 "The Trust Ladder's Middle Rung": one-sided device-independent STEERING certified at 96σ — the real semi-DI certificate F115 flagged, delivered under a chip-appropriate assumption (trust Bob's measurements, treat Alice as a black box), with the crosstalk-cannot-fake discriminator grounded in the campaign's own noise measurements
 
-**Epoch**: n=2 basis=distinct-device · dispersion=0.01633±0.1285 (n=2) · window_retrievable=yes · checked=2026-08-18
+**Epoch**: n=2 basis=distinct-device · windows=d9anamjv6alc73cs246g,d9aneirv6alc73cs2cn0 · dispersion=0.01633±0.1285 (n=2) · window_retrievable=yes · checked=2026-08-18
 
 > **Dispersion computed C5075 from this finding's own two windows** — marrakesh S3 = 1.6813 and the
 > kingston re-fly S3 = 1.6582, both 2026-07-13, both windows banked in
