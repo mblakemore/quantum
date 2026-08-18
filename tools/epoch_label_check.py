@@ -46,27 +46,41 @@ corrections mattered — each fixed a premise that was load-bearing and wrong:
       was deciding off a dispersion of n=2; the survey needs ~20 epochs for a
       usable one). A rate is never stored without its interval; a spread is a
       rate's cousin.
-  (D) n is an ENUM, not just an integer (Elder court ruling gen#13026/#13031,
-      three-seat, after Whisper resolved the 11-finding backlog gen#13024/#13030).
-      Four genuinely different failures, each a DISTINCT value so a blank field or a
-      false 1 can never stand in for "we do not know" — the reassuring-wrong-answer
-      this instrument exists to prevent:
+  (D) n is an ENUM, not just an integer (Elder court rulings gen#13026/#13031/#13043,
+      three-seat, after Whisper resolved the 11-finding backlog gen#13024/#13030/#13046).
+      FIVE genuinely different states, each a DISTINCT value so a blank field or a
+      false 1 can never stand in for "we do not know" / "never flew" — the
+      reassuring-wrong-answer this instrument exists to prevent. "Zero QPU" is NOT the
+      discriminator; the question is whether a hardware WINDOW EXISTS and can be named:
         · <int>          measured windows THAT SUPPORT THE CLAIM (F118: never job
                          IDs — a NO-TEST parent flight is not an epoch of the claim).
-        · UNVERIFIABLE   evidence existed and the retention clock took it (the 9).
+                         For n>1 the field must NAME the windows (windows=<id,id,...>,
+                         count must match) — a listed set cannot be wrong about what
+                         it counted. F129 (zero-new-QPU but re-analysing a NAMED banked
+                         window) is n=1, not DETERMINISTIC.
+        · UNVERIFIABLE   a LOSS: evidence existed and the retention clock took it (9).
                          Legal + honest; no replication claimable; NOT a measured 1.
-        · UNIDENTIFIABLE a record we never kept — no job IDs anywhere. A PROVENANCE
-                         defect on a different axis, filed separately. Currently 0
-                         members: a value with no instances is a hypothesis, kept
-                         but flagged, not a category.
-        · INHERITED (from F<n>)  no window of its own; never touched hardware (F72,
-                         a zero-QPU re-analysis). RESOLVED TRANSITIVELY — its status
-                         IS the parent's, by following the pointer, propagating the
-                         parent's uncertainty (parent UNVERIFIABLE -> child too). A
-                         bare INHERITED with no pointer is a dead end and gate-fails.
+        · UNIDENTIFIABLE a LOSS: a record we never kept — no job IDs anywhere. A
+                         PROVENANCE defect on a different axis, filed separately.
+                         Currently 0 members: a value with no instances is a
+                         hypothesis, kept but flagged, not a category.
+        · INHERITED (from F<n>)  cannot name its own window; the epoch is a PARENT's
+                         that HAS one. RESOLVED TRANSITIVELY — status IS the parent's,
+                         by following the pointer, propagating the parent's value
+                         (parent UNVERIFIABLE -> child too; parent DETERMINISTIC ->
+                         child DETERMINISTIC, which TERMINATES the chain). Bare/dangling/
+                         cyclic pointers gate-fail.
+        · DETERMINISTIC  a VIRTUE, not a gap: never touched hardware, so no epoch to
+                         have, exactly reproducible (F71, and F72-by-inheritance). Must
+                         carry a repro= condition (code ref / seed / inputs) — the same
+                         shape as naming windows: a reproducibility claim that does not
+                         say under WHAT asserts more than it knows.
       A finding is GRADED if it is sigma-headline OR already carries an **Epoch**
       field (a declared label is an opt-in the first-6-lines σ scan cannot see, and
-      is how an INHERITED re-analysis stays inside the gate rather than vanishing).
+      is how a DETERMINISTIC/INHERITED re-analysis stays inside the gate rather than
+      vanishing). KNOWN GAP (not built): the σ-word selector conscripts classical
+      re-analyses into a hardware gate by title, and classical findings have their own
+      fragility axis (code/environment drift), which this gate does not measure.
 
 EXIT: non-zero if any GATE violation. Prints a census even when clean — silence
 is exactly the failure mode this exists to prevent.
@@ -86,10 +100,21 @@ _BASES = {"distinct-day", "distinct-submission", "distinct-device"}
 # Whisper gen#13030 on F72's zero-QPU re-analysis) is PROPOSED and deliberately NOT
 # wired here: it awaits the court seat plus a scoping ruling on whether a zero-QPU
 # re-analysis belongs inside a sigma-headline HARDWARE gate at all.
-_UNVERIFIABLE = "unverifiable"      # evidence existed; the retention wall took it (the 9).
-_UNIDENTIFIABLE = "unidentifiable"  # no job IDs anywhere; the flights cannot even be named (0 members).
-_INHERITED = "inherited"            # never touched hardware; epoch borrowed from a parent finding (F72).
+_UNVERIFIABLE = "unverifiable"      # evidence existed; the retention wall took it (the 9). A LOSS.
+_UNIDENTIFIABLE = "unidentifiable"  # no job IDs anywhere; the flights cannot even be named (0 members). A LOSS.
+_INHERITED = "inherited"            # can't name its own window; epoch borrowed from a parent that HAS one.
+_DETERMINISTIC = "deterministic"    # never touched hardware; no epoch to have, exactly reproducible. A VIRTUE.
 _NONINT_N = {_UNVERIFIABLE, _UNIDENTIFIABLE}
+# DETERMINISTIC is NOT in _NONINT_N and is NOT a failure (Elder ruling gen#13043):
+# UNVERIFIABLE/UNIDENTIFIABLE are LOSSES (evidence gone / never recorded); DETERMINISTIC
+# is the opposite of a gap — there was never a hardware quantity here to have an epoch,
+# and the result reproduces exactly. It must carry a REPRODUCIBILITY CONDITION (code ref /
+# seed / inputs): "reproducible forever" is a stronger claim than true without one (a PyPhi
+# run is not reproducible across library versions), the same shape as "an integer n must
+# name the windows it counts". "Zero QPU" is NOT the discriminator (Whisper gen#13046):
+# F129 is zero-new-QPU but re-analyses a NAMED BANKED window, so it is n=1, not DETERMINISTIC.
+# The question is whether a hardware window EXISTS and can be named — integer if this finding
+# names it, INHERITED if a parent has one it cannot, DETERMINISTIC if none exists in the chain.
 # INHERITED is written inline with its pointer, e.g. "n=INHERITED (from F71)". The gate
 # must RESOLVE it TRANSITIVELY (Elder gen#13031): F72's epoch status IS F71's, found by
 # following the pointer, propagating the parent's uncertainty (parent UNVERIFIABLE ->
@@ -125,8 +150,8 @@ _STALE_CHECK_DAYS = 30
 
 
 def parse_epoch(block):
-    out = {"n": None, "basis": None, "dispersion": None,
-           "window_retrievable": None, "checked": None, "inherited_from": None}
+    out = {"n": None, "basis": None, "dispersion": None, "window_retrievable": None,
+           "checked": None, "inherited_from": None, "repro": None, "windows": None}
     # Extract each key=value pair; a value runs until the next " key=" token or a
     # ·/| separator or end — so a value may itself contain spaces (the dispersion
     # interval "0.13±0.03 (n=20)" or "INHERITED (from F71)") and pairs may be space-
@@ -147,11 +172,17 @@ def parse_epoch(block):
                 mp = _INHERIT_PTR.search(v)          # "INHERITED (from F71)" -> F71
                 if mp:
                     out["inherited_from"] = mp.group(1).upper()
+            elif vl.startswith(_DETERMINISTIC):
+                out["n"] = _DETERMINISTIC
             elif vl in _NONINT_N:
                 out["n"] = vl
             # else: unrecognised n -> left None, gate-fails as "n missing/invalid"
         elif k in ("inherited_from", "inherits_from"):
             out["inherited_from"] = v.upper()
+        elif k == "repro":
+            out["repro"] = v
+        elif k in ("windows", "window_ids"):
+            out["windows"] = v
         elif k == "basis":
             out["basis"] = v.lower()
         elif k.startswith("disp"):
@@ -166,6 +197,13 @@ def parse_epoch(block):
 def _dispersion_has_interval(v):
     # must carry an uncertainty AND its n, e.g. "0.13±0.03 (n=20)"
     return v is not None and re.search(r"[±+]", v) and re.search(r"n\s*=\s*\d", v)
+
+
+def _parse_windows(v):
+    # window ids listed in windows=<id,id,...>; split on comma/space, drop dashes/empties.
+    if not v or v in ("-", "—"):
+        return []
+    return [w for w in re.split(r"[,\s]+", v.strip()) if w and w not in ("-", "—")]
 
 
 def days_since(iso, today):
@@ -243,7 +281,7 @@ def main(argv):
                        "ep": parse_epoch(em.group(1)) if em else {"n": None}}
 
     gate_fail, witness_warn, ok = [], [], []
-    unestablished, inherited_res, provenance, non_sigma = [], [], [], 0
+    unestablished, inherited_res, provenance, deterministic, non_sigma = [], [], [], [], 0
     for f in all_md:
         txt = open(f, encoding="utf-8", errors="replace").read()
         is_sig = bool(_SIG.search("\n".join(txt.splitlines()[:6])))
@@ -271,9 +309,16 @@ def main(argv):
                                "axis (epoch, calibration, that it flew). PROVENANCE defect: recover IDs from a "
                                "filename/commit/notebook or record the foundation hole. (Value currently has 0 "
                                "members — a schema value with no instances is a hypothesis, not a category.)")); continue
-        if n == _UNVERIFIABLE:                                    # honest 'set not knowable'
+        if n == _UNVERIFIABLE:                                    # honest 'set not knowable' — a LOSS
             unestablished.append((name, "n=UNVERIFIABLE — evidence existed and the retention wall took it; NO "
                                   "replication claimable, and this is NOT a measured n=1. A dated scar, kept visible.")); continue
+        if n == _DETERMINISTIC:                                   # a VIRTUE, not a loss
+            if not ep.get("repro"):
+                gate_fail.append((name, "n=DETERMINISTIC but no repro= condition (code ref / seed / inputs) — "
+                                  "'exactly reproducible' is a claim that must say under WHAT (a PyPhi run is not "
+                                  "reproducible across library versions)")); continue
+            deterministic.append((name, f"n=DETERMINISTIC repro={ep['repro']} — never touched hardware, no epoch "
+                                  f"to have, exactly reproducible. A virtue, not a gap")); continue
         if n == _INHERITED:                                       # resolve transitively
             status, rep, chain = resolve_inherited(ep, by_fnum, [])
             ptr = " -> ".join(chain) if chain else "(no pointer)"
@@ -290,8 +335,12 @@ def main(argv):
                                       f"yet, so this cannot resolve. LABEL {chain[-1]} FIRST (it carries the σ "
                                       f"this claim re-analyses); F72-class did its part, the gap is upstream")); continue
             rn = rep["n"]                                        # terminal: adopt parent verdict
-            verdict = ("n=UNVERIFIABLE" if rn == _UNVERIFIABLE else
-                       f"n={rn} basis={rep.get('basis')} disp={rep.get('dispersion')}")
+            if rn == _DETERMINISTIC:
+                verdict = "n=DETERMINISTIC (classical root — the chain never touched hardware; a virtue, not a loss)"
+            elif rn == _UNVERIFIABLE:
+                verdict = "n=UNVERIFIABLE"
+            else:
+                verdict = f"n={rn} basis={rep.get('basis')} disp={rep.get('dispersion')}"
             inherited_res.append((name, f"n=INHERITED via {ptr} — resolves to {verdict}; epoch-dependence is "
                                   f"EXACTLY {chain[-1]}'s (same points), by reference not local")); continue
         # --- integer n from here. F118 binding (Whisper gen#13024): it counts WINDOWS
@@ -304,6 +353,12 @@ def main(argv):
             gate_fail.append((name, f"n={n} but basis missing/invalid (need one of {sorted(_BASES)})")); continue
         if n > 1 and not _dispersion_has_interval(ep["dispersion"]):  # (C)
             gate_fail.append((name, f"n={n}>1 but dispersion lacks interval+n, e.g. '0.13±0.03 (n=20)'")); continue
+        if n > 1:                                                # (E) F118 promoted from comment to shape
+            wins = _parse_windows(ep.get("windows"))             # (Elder gen#13039)
+            if len(wins) != n:
+                gate_fail.append((name, f"n={n}>1 must NAME its {n} windows (windows=<id,id,...>) — found "
+                                  f"{len(wins)}; a count with its members listed cannot be wrong about what it "
+                                  f"counted, and 'two job IDs are not two windows' (F118)")); continue
         wr = ep["window_retrievable"]                             # (B) witness only
         if wr == "unknown":
             witness_warn.append((name, f"retrievable=unknown — MEASURE while cheap: {_RETENTION_CAUSE} "
@@ -346,6 +401,11 @@ def main(argv):
         print(f"\n✅ EPOCH-LABELLED ({len(ok)}):")
         for n, dsc in ok:
             print(f"  - PASS {n}: {dsc}")
+    if deterministic:
+        print(f"\n♾️  DETERMINISTIC ({len(deterministic)}) — a VIRTUE, not a gap: never touched hardware, "
+              f"so there is no epoch to have; exactly reproducible under the stated condition:")
+        for n, dsc in deterministic:
+            print(f"  - DETERM {n}: {dsc}")
     if unestablished:
         print(f"\n\U0001f9ff UNVERIFIABLE ({len(unestablished)}) — legal, honest: the set is not knowable "
               f"because the retention clock took the evidence (distinct from a measured 1):")
@@ -361,7 +421,7 @@ def main(argv):
               f"filed separately so the small question is not answered while the large one is open:")
         for n, why in provenance:
             print(f"  - PROV {n}: {why}")
-    if not (gate_fail or witness_warn or ok or unestablished or inherited_res or provenance):
+    if not (gate_fail or witness_warn or ok or unestablished or inherited_res or provenance or deterministic):
         print("\n(no sigma-headline findings — census printed so silence is not read as clean)")
     print()
     return 1 if gate_fail else 0

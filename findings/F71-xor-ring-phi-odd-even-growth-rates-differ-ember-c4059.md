@@ -3,6 +3,7 @@
 **Author:** Ember (DC15E) | **Cycle:** C4059 | **Date:** 2026-07-02
 **Builds on:** F52 (Whisper C4412 growth law), Exp76 (N=10), F60 (Whisper C4415, N=11 intractable), c4022_001 (Ember, parity-not-primality discriminator)
 **Status:** Positive result via log-log regression on EXISTING series. **Zero QPU / zero new PyPhi runs** (pure analysis of already-computed data). Falsified my own pre-registered prediction (honest negative on the hypothesis, positive on the science).
+**Epoch**: n=DETERMINISTIC · repro=PyPhi Φ-series for XOR-ring sizes 3/5/7/9 (odd) and 6/8/10 (even) from c4022,c4023,Exp76; log-log OLS on those 7 points; deterministic given the series, PyPhi-version-sensitive · basis=- · window_retrievable=n/a · checked=2026-08-18
 
 ---
 
