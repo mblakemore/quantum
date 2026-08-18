@@ -87,7 +87,37 @@ def audit():
          "numbered": len(numbered), "pending": pending, "unfielded": len(unfielded)}
     r["exhibit"] = exhibit_lag(ledger)
     r["arcs"] = arc_lag()
+    r["ledger"] = ledger_lag(ledger)
     return r
+
+
+def ledger_lag(ledger):
+    """STAGE 2: F-NUMBER -> LEDGER ROW. Added C5075, hours after the rest, BECAUSE IT WAS MISSING
+    AND THAT ABSENCE HID A LIVE STALL.
+
+    I built stages 0, 1 and 3 and never noticed there was no stage 2. Within hours Ember cleared the
+    numbering queue — and this tool printed "Nothing stalled at numbering", which was TRUE and
+    MISLEADING, because F123 through F130 (eight consecutive numbers, including the certified
+    door(a) win) had no ledger row. The queue relocated exactly one stage downstream, into the only
+    stage the gauge could not see.
+
+    That is REMOVING-A-BOTTLENECK-MOVES-IT confirmed live, and it is also this file's own lesson
+    used against it: A GAUGE REPORTS CLEAN FOR TWO REASONS THAT LOOK IDENTICAL — nothing is wrong,
+    or nothing is being measured. Ember said she would watch for the relocation; the instrument
+    should have watched with her."""
+    numbered = []
+    for pth in glob.glob(f"{Q}/findings/*.md"):
+        try:
+            head = open(pth, errors="replace").read(3000)
+        except OSError:
+            continue
+        m = re.search(r"\*\*F-number\*\*:\s*(F\d+)", head)
+        if m:
+            numbered.append((m.group(1), os.path.basename(pth)))
+    missing = [(f, b) for f, b in numbered if not re.search(rf"\b{f}\b", ledger)]
+    missing.sort(key=lambda e: int(e[0][1:]))
+    return {"numbered_findings": len(numbered), "missing_from_ledger": missing,
+            "ledger_front": _max_f(ledger)}
 
 
 def arc_lag():
@@ -206,6 +236,17 @@ if __name__ == "__main__":
         print("      fixes: one needs writing, the other needs an F-number field and a move.")
     else:
         print("      clean — every arc with flown results has at least one finding.")
+
+    lg = r["ledger"]
+    print(f"\n  ── STAGE 2: F-NUMBER -> LEDGER ROW ── (ledger front: F{lg['ledger_front']})")
+    if lg["missing_from_ledger"]:
+        print(f"   ⏳ {len(lg['missing_from_ledger'])} numbered finding(s) have NO ledger row:")
+        for f, b in lg["missing_from_ledger"][:12]:
+            print(f"       {f:6s} {b[:60]}")
+        print("      An F-number without a ledger row is invisible to already-built.js, which")
+        print("      greps the ledger — so the campaign's own rediscovery check cannot see it.")
+    else:
+        print(f"      clean — all {lg['numbered_findings']} numbered findings have ledger rows.")
 
     ex = r["exhibit"]
     print(f"\n  ── STAGE 3: F-number -> MUSEUM EXHIBIT ── (ledger front: F{ex['ledger_front_F']})")
