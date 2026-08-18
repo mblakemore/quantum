@@ -1,0 +1,55 @@
+{
+ "card": "h15_alternative_neuron_patterns",
+ "cycle": "C5075",
+ "directive": "Creator: find a different pattern to build a positronic neuron - look through our existing work",
+ "method": "read the advantage-frontier-map (C5009) rather than brainstorm; it enumerates every certified floor we hold, ranked by floor STRENGTH",
+ "STRUCTURAL_INSIGHT": "the campaigns certified advantages split into two neuron TYPES by WHERE the quantum resource sits in the loop. TYPE A puts it in the REMEMBERING (two-copy memory beats any single-copy memory) - that is the current H15 design. TYPE B puts it in the DECIDING (a contextual response cannot be produced by ANY pre-assigned classical value) - that is the magic square. These are different organs, not competing designs.",
+ "TYPE_A_current": {
+  "floor": "143/256 separable-SDP + dual certificate",
+  "ideal": 0.7637,
+  "qubits": 10,
+  "reads": 8,
+  "flown": "0.6953 this epoch, epoch-dependent (0.625-0.875 swing)",
+  "advantage_lives_in": "MEMORY"
+ },
+ "TYPE_B_magic_square": {
+  "floor": "8/9 ENUMERATED over all 4096 classical strategies, in-code",
+  "ideal": 1.0,
+  "qubits": 4,
+  "reads": "~4",
+  "flown": "0.96901 +/- 0.00041 = 196 sigma, worst context 0.9482 = 37.8 sigma",
+  "advantage_lives_in": "DECISION",
+  "kit_exists": [
+   "exp126_magic_square_sim.py",
+   "exp126-magic-square-preregistration.md",
+   "exp126-magic-square-hardware-results.md",
+   "exp126_gate_lint_spec.json",
+   "exp228_shielded_magic_square.py"
+  ]
+ },
+ "TYPE_C_unflown": {
+  "name": "steth Choi-purity two-copy",
+  "floor": "UNCONDITIONAL (CCHL Thm 7.9, Omega(2^(n/3)) single-copy)",
+  "status": "DESIGNED, UNFLOWN",
+  "frontier_map_verdict": "HIGHEST VALUE - this is the move"
+ },
+ "honest_comparison": {
+  "measured_actuation_cost": "0.0104 (1.04pp), measured directly from the paired bake-off (arm B offline 0.7057 vs arm C actuated 0.6953) - NOT F90s 0.947, which is a whole teleport chain and which I wrongly applied before correcting myself",
+  "magic_square_neuron_projected": "0.9586 vs floor 0.8889 -> margin +0.0697",
+  "current_design": "0.6953 vs floor 0.5586 -> margin +0.1367",
+  "reading": "current has 2x the ABSOLUTE margin but only because its floor is far lower; relative to floor they are 1.24x vs 1.08x. Margin is NOT the deciding factor."
+ },
+ "why_type_B_is_attractive_anyway": [
+  "4 qubits vs 10 and ~4 reads vs 8, and we are MEASURED readout-limited (readout 0.0527 vs 2q 0.0137)",
+  "floor ENUMERATED over all 4096 strategies - the strongest floor form we hold, no dual certificate needed",
+  "quantum ideal is 1.0 (deterministic win) so a correct neuron ALWAYS fires - a cleaner reflex-arc story than statistical discrimination",
+  "already flown at 196 sigma with the WORST context still 37.8 sigma clear",
+  "the kit exists - this is ASSEMBLY, not construction"
+ ],
+ "honest_caveats": [
+  "smaller ideal margin (0.111 vs 0.205) means less absolute noise headroom",
+  "its EPOCH dispersion is UNMEASURED - one flight, and I must not repeat the single-epoch attribution error I spent this session learning",
+  "the 196 sigma stability is ACROSS CONTEXTS within one flight, which is not the same as across epochs",
+  "a magic-square NEURON is not the flown magic-square GAME - it adds in-circuit context delivery and an actuated response, and that delta is unmeasured"
+ ]
+}
