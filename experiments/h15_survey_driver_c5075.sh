@@ -43,6 +43,19 @@ if [ "${tank:--1}" -lt "$MIN_TANK_S" ] 2>/dev/null; then
   exit 0
 fi
 
+# FREE WEATHER SCAN, recorded per epoch (C5075, Creator prompt "are you utilizing all our quantum
+# weather work?" — the honest answer was no). tools/qpu_weather.py --scan is VENDOR-ONLY: zero
+# qubits, zero QPU-seconds, no submission. Logging it beside every epoch turns a question we would
+# otherwise have to assume into one the survey ANSWERS for free: does the campaign's existing
+# population-based weather instrument forecast a PHASE-sensitive success rate?
+# The prior says probably not — the U6 sentinel timeline spans 61 flights at 0.960 +/- 0.015 (~1.6%
+# relative spread) while H15's ALT accept has swung 0.625-0.875 (~11.7%), i.e. SEVEN TIMES more.
+# That is the currency map (population QUIET, phase TURBULENT) predicting its own limit. Either
+# answer is worth having: a correlation would give a $0 pre-submit forecast and make the anchor arm
+# redundant; no correlation bounds the weather service's reach and validates the map on a new axis.
+wx=$(cd "$Q" && timeout 300 python3 tools/qpu_weather.py --scan --backend ibm_kingston 2>&1 | grep -viE "^qiskit_runtime|warning" | tr '\n' ' ')
+echo "[$(ts)] epoch $next_epoch WEATHER(free): $wx" >> "$LOG"
+
 out=$(cd "$Q" && timeout 600 python3 experiments/h15_survey_fly_whisper_c5075.py --epoch "$next_epoch" --fly 2>&1)
 jid=$(echo "$out" | grep -oE 'JOB ID \(ANNOUNCED AT SUBMIT\): [a-z0-9]+' | awk '{print $NF}')
 pend=$(echo "$out" | grep -oE "'pending_jobs_at_submit': [0-9]+" | awk '{print $NF}')
