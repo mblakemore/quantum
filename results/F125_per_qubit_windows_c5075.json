@@ -82,7 +82,34 @@
     "mean": 0.030753111227964744,
     "max": 0.49755859375
    },
-   "used_qubits": null
+   "used_qubits": [
+    79,
+    93,
+    95,
+    126,
+    128,
+    129,
+    140,
+    141,
+    142
+   ],
+   "used_readout": {
+    "median": 0.0040283203125,
+    "max": 0.0081787109375,
+    "values": [
+     0.00415,
+     0.00415,
+     0.00317,
+     0.00269,
+     0.00403,
+     0.00366,
+     0.00818,
+     0.00427,
+     0.00403
+    ]
+   },
+   "device_median_over_used_median": 2.3484848484848486,
+   "RESCUE_NOTE": "C5075: this window originally banked device aggregates and NO per-qubit data \u2014 the UNEVALUABLE case (artifact lacks the field the predicate needs), flagged by Elder at 15 days on a retention clock. My first extraction read final_index_layout on pub[0] and returned None. It is None because these circuits are FULL-WIDTH PRE-TRANSPILED (156 qubits, layout=identity, so the indices ARE physical) and because the measured set is spread across 63 PUBS, not pub[0]. NOT UNRECOVERABLE \u2014 MY EXTRACTOR WAS LOOKING IN ONE PLACE."
   }
  }
 }
