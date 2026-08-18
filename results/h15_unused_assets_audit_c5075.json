@@ -1,0 +1,35 @@
+{
+ "card": "h15_unused_assets_audit",
+ "cycle": "C5075",
+ "prompt": "Creator: 'what else are we not utilizing?' \u2014 systematic prior-art audit of the live H15 questions",
+ "found": {
+  "qpu_weather_service_C4681": "validated scheduling oracle, FREE --scan (zero qubits); now logged per survey epoch",
+  "U6_sentinel_timeline_C5073": "61-flight device-health series I built myself and had not consulted; gave the 1.6% vs 11.7% dispersion contrast",
+  "dd_is_net_harmful_C5018": "SETTLED: bare delay beats xx DD by +0.0893 purity, 73 QPU-s spent. I had listed a DD-on variant as a candidate rung \u2014 DROPPED, that would have re-tested a dead line",
+  "cell11_inertial_dampener_C5018": "ACTIVE drift compensation: removed the great majority of drift at every depth of every drifter, failed only the strict full-restoration bar (3sigma, 6 of 9 rows). Suggests COMPENSATE rather than GATE \u2014 a strategy H15 never considered",
+  "design_optimum_C4564": "calibrated interior-optimum calculator (a=0.962, d0=208 CZ, hardware-anchored, out-of-sample validated on Exp108) \u2014 precisely the n-sweep I hand-rolled from a one-point fit",
+  "attenuation_map": "per-device effective per-2q-slot error, the honest quantity nameplate 2q error does NOT capture"
+ },
+ "n_sweep_three_models": {
+  "whisper_crude_one_point_exp": {
+   "3": 0.08,
+   "4": 0.069,
+   "5": 0.012,
+   "6": -0.068,
+   "verdict": "n=3/n=4"
+  },
+  "elder_weight_slope": {
+   "verdict": "n=4 optimal, n=5 worse by 7.9pp"
+  },
+  "calibrated_law_design_optimum": {
+   "3": 0.099,
+   "4": 0.1631,
+   "5": 0.1865,
+   "6": 0.1857,
+   "verdict": "n=5 BEST, n=6 close \u2014 REVERSES both"
+  }
+ },
+ "why_they_disagree": "all three extrapolate the DEPTH PENALTY differently: my one-point exp fit and Elder's weight-slope are STEEP; the calibrated law is GENTLE (d0=208 CZ). Only the law is hardware-anchored and out-of-sample validated - but it was fit on capacity-family AMPLITUDE observables, and its own docstring warns the under-prediction factor is OBSERVABLE-FAMILY-DEPENDENT. H15's ALT accept is a discrimination success rate, a different family. So this is a THIRD HYPOTHESIS, not an answer.",
+ "self_indictment": "the tool's docstring says 'the noise model UNDER-predicts the haircut by a depth-growing, observable-family-dependent factor - use THIS law, not FakeMarrakesh'. I ran my N1-vs-N4 comparison on exactly such a depolarizing model, it predicted the WRONG SIGN on the Toffoli question, and hardware corrected it. The warning I needed was written in a tool I did not open.",
+ "consequence": "survey Output 2 (the A-weight slope) now adjudicates between three depth-penalty models rather than one - a shallow slope supports the calibrated law and puts n=5 genuinely in play; a steep slope supports the extrapolations and keeps n=4. Already pre-registered, no change needed."
+}
