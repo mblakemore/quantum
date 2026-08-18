@@ -79,6 +79,44 @@ The theorem floor is per-**total-copy-budget**; the neuron is per-**trial** (2 c
 - Phase turbulence law violated by any cross-job dependence in the design → design error, back to N1.
 - We do **not** claim: consciousness, cognition, learning-by-training, a new separation class, or anything about brains. We claim, if the court certifies: **the first autonomous in-coherence agent whose stimulus→response advantage over every classical-memory agent is theorem-backed, blind-flown, and custody-clean.**
 
+
+---
+
+# ⬛ AMENDMENT 1 (C5075) — H15 BECAME AN ORGAN TAXONOMY, NOT ONE NEURON
+
+*Written because this charter had gone stale relative to its own arc, and a stale record cited in
+good faith caused three separate errors on the night it was written (a retracted rate surviving as a
+design's operating point; a frontier map recommending a route the theorem seat had already killed;
+a certified result read as robust when only its statistical significance was established). A charter
+that describes one neuron while the arc holds four is the same failure waiting to happen.*
+
+## What actually got built, with honest verdicts
+
+| organ | the advantage lives in | floor | gap (ideal − floor) | status |
+|---|---|---|---|---|
+| **A — two-copy memory** | the **REMEMBERING** — beats any classical-memory agent at a copy budget | 143/256 = 0.5586, separable SDP + zero-gap dual | **0.2051** | **FLOWN.** N1 honest negative (0.5759 vs 0.6040); redesign (real-time decision + optimal rule) measured **0.6953, +2.51 SD** in-epoch while the flown design failed on identical instances. Readout-limited. **The flight candidate.** |
+| **B — magic-square contextuality** | the **DECIDING** — beats any non-contextual value assignment | 8/9 = 0.8889, **enumerated** over all 4,096 strategy pairs | 0.1111 | **DESIGNED, SIM-VALIDATED, NOT RECOMMENDED.** Noiseless 1.0000 in all nine contexts on 5 qubits / 5 reads — but at true readout its margin is +0.0041 with the worst context *below* the ceiling. |
+| **C — [[4,2,2]] cloak** | **PRIVACY** — responds to what no bounded observer can read | 0.5115, Holevo-bounded at 1-qubit access | **0.4599** (largest) | **PATTERN SCOPED.** Measured, not projected (F_min 0.9714). But the comparator is an **ACCESS** bound that collapses if it gets a second qubit — re-described as a different *property*, not a bigger advantage. |
+| **D — history/learning** | the **LOOP ITSELF** | n/a — comparator is a memoryless version of itself | n/a | **SCOPED; NAIVE FORM ALREADY DEAD.** exp241c killed in-circuit memory rules offline at $0; exp247's winning redesign is **static**. Open question is a *compilation* one, not a physics one. |
+
+## The six design principles this arc actually yielded
+
+These generalise past H15 and are the arc's real product. Every one was paid for with a wrong turn.
+
+1. **The GAP is the noise budget — not the floor's strength.** A higher classical floor is *not* free: Type B wins on every structural metric and loses because 8/9 leaves only 0.111 to spend. Type A's *low* floor is an asset.
+2. **A big gap can come from a weak comparator — interrogate what the gap is OVER.** Type C's 0.46 is real and measured, and it is over a 1-of-4 *access* bound rather than a classicality bound.
+3. **Abstention admissibility turns on what the COMPARATOR can IDENTIFY, not the budget it gets.** Concentrated identifiable failure (contextuality) → abstention *voids* the claim; a provably blind comparator → admissible.
+4. **Removing a bottleneck MOVES it — re-derive the loss budget after every design win.** Deleting the Toffoli chain made the neuron readout-limited, and three candidate levers were still aimed at gates.
+5. **Price the CLOSURE separately from the advantage.** If the same number is obtainable offline, the loop is presentation. Measured here: closure costs ~1pp and returns nothing informational in a single-shot arc.
+6. **Ask where the payload is during the measurement window, and whether it is CLASSICAL.** That single property explains why our actuation costs 1.04pp against the composition arc's 0.330 window cost — and why organ *chaining* forfeits the immunity.
+
+## Standing corrections to this document's original text
+
+- **§Thesis** still describes a single Type-A neuron. It is not wrong, it is *partial* — read it as the Type-A charter.
+- **The comparator question (§ open)** is CLOSED: Elder's G1 ruling + zero-gap analytic dual (ceiling 143/256), plus the full abstention theory in `results/h15_abstention_three_case_table_c5075.json`.
+- **Cell N2 / N3 numbering** predates the redesign. The live design is **real-time classical decision + optimal support rule**, not the Toffoli loop the cells describe.
+- **Gating**: nothing flies as a sealed claim until the epoch survey returns its dispersion, weight slope, and per-epoch weather (20 epochs, cron, ~3 days).
+
 ## Accounting rules (carried unchanged)
 
 Negatives kept with their lessons · margins with their labels · retractions named · rates with intervals (`tools/rate.js`) · every claim traced to a committed artifact or job ID · seal-bound GO discipline (digest → GO citing it → verify unchanged → fly) · prose to verbs via file + `"$(cat f)"`, never inline.
