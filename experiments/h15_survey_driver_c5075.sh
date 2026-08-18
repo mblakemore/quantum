@@ -56,3 +56,8 @@ else
   echo "[$(ts)] epoch $next_epoch SUBMIT FAILED — no job id. Output tail:" >> "$LOG"
   echo "$out" | tail -5 >> "$LOG"
 fi
+
+# BANK RAW ROWS for any flown-but-unbanked epoch. Retrieval is not custody: C5071 rescued 238 jobs
+# whose shot records lived only at IBM, days from the retention edge. Idempotent; banks the PREVIOUS
+# epoch on each tick (this one is still queued), and carries per-row A-weight for Declared Output 2.
+(cd "$Q" && timeout 600 python3 experiments/h15_survey_collect_c5075.py 2>&1 | grep -v WARNING) >> "$LOG" 2>&1
