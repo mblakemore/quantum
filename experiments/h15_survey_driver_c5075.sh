@@ -31,15 +31,32 @@ if [ -z "$next_epoch" ]; then
 fi
 
 # Tank guard: never let a diagnostic drain the account other work needs.
+# TANK GUARD FIXED C5075 — IT WAS ONE-SIDED AND HELD THE SURVEY WITH TANK AVAILABLE.
+# The guard read ALT4's balance ONLY and halted when it hit 0s. But the fly script's
+# ACCOUNTS tuple is ("IBMQ_ALT4","IBMQ_ALT5") and its pick_account() falls through to ALT5,
+# halting only if NEITHER has tank. So the driver was blocking flights the flight path would
+# happily make: ALT4 0s, ALT5 126s, survey HELD at epoch 5 of 20 for no reason.
+# Same one-sided shape as the day's other guards — check the max over EVERY account the
+# flight can actually use, derived from the same list rather than a second hardcoded name,
+# so adding a third account later cannot silently reintroduce this.
+ELIGIBLE="ALT4 ALT5"
 tank=$(curl -s -H "Authorization: Bearer $(cat ~/.uhura-key)" \
   "http://127.0.0.1:8790/resources?kind=qpu_account" 2>/dev/null \
-  | python3 -c "import json,sys
+  | ELIGIBLE="$ELIGIBLE" python3 -c "import json,os,sys,re
+want=set(os.environ['ELIGIBLE'].split())
 try:
-    print(next(r['meta']['balance_s'] for r in json.load(sys.stdin)['resources'] if r['name']=='ALT4'))
+    rs=json.load(sys.stdin)['resources']
+    best=-1
+    for r in rs:
+        nm=re.split(r'[@/]', r.get('name',''))[0].replace('IBMQ_','')  # registry names are INCONSISTENT: 'ALT4' bare vs 'IBMQ_ALT5@DC15E/c637f0'.replace('IBMQ_','')
+        if nm in want:
+            b=r.get('meta',{}).get('balance_s')
+            if isinstance(b,(int,float)) and b>best: best=b
+    print(best)
 except Exception: print(-1)" 2>/dev/null)
 
 if [ "${tank:--1}" -lt "$MIN_TANK_S" ] 2>/dev/null; then
-  echo "[$(ts)] epoch $next_epoch HELD — ALT4 tank reads ${tank}s < ${MIN_TANK_S}s (or unreadable). Not flying." >> "$LOG"
+  echo "[$(ts)] epoch $next_epoch HELD — best of [$ELIGIBLE] reads ${tank}s < ${MIN_TANK_S}s (or unreadable). Not flying." >> "$LOG"
   exit 0
 fi
 
