@@ -2,143 +2,9 @@
  "card": "window_rescue",
  "cycle": "C5075",
  "why": "bank epoch windows before a vendor retention clock we have not measured can close them",
- "n_targets": 173,
+ "n_cited": 174,
+ "n_fetched_this_run": 1,
  "jobs": {
-  "d89n5uqs46sc73farg80": {
-   "cited_by": "01-chsh-bell-violation.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89n5uqs46sc73farg80 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d894cbop0eas73do4p9g": {
-   "cited_by": "03-x-basis-noise-immunity.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d894cbop0eas73do4p9g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d894lf5g7okc73eo7erg": {
-   "cited_by": "03-x-basis-noise-immunity.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d894lf5g7okc73eo7erg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d895ai2s46sc73fa64ag": {
-   "cited_by": "03-x-basis-noise-immunity.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d895ai2s46sc73fa64ag not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89ftt1789is73938rpg": {
-   "cited_by": "05-depth-phase-transitions.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89ftt1789is73938rpg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89l7cis46sc73fapa10": {
-   "cited_by": "06-ancilla-tax-qec-impracticability.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89l7cis46sc73fapa10 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89lft5g7okc73eor90g": {
-   "cited_by": "06-ancilla-tax-qec-impracticability.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89lft5g7okc73eor90g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89lp90p0eas73doq4j0": {
-   "cited_by": "06-ancilla-tax-qec-impracticability.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89lp90p0eas73doq4j0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89m1d0p0eas73doqcpg": {
-   "cited_by": "06-ancilla-tax-qec-impracticability.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89m1d0p0eas73doqcpg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89mb9is46sc73faqje0": {
-   "cited_by": "07-error-mitigation-failures.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89mb9is46sc73faqje0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89mhc9789is7393gn4g": {
-   "cited_by": "07-error-mitigation-failures.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89mhc9789is7393gn4g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8cievj8ch0s738uujsg": {
-   "cited_by": "07-error-mitigation-failures.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8cievj8ch0s738uujsg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8cj4k2jki0s73arbrg0": {
-   "cited_by": "07-error-mitigation-failures.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8cj4k2jki0s73arbrg0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89mb9op0eas73doqnt0": {
-   "cited_by": "07-error-mitigation-failures.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89mb9op0eas73doqnt0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89mba2s46sc73faqjf0": {
-   "cited_by": "07-error-mitigation-failures.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89mba2s46sc73faqjf0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89mhc2s46sc73faqpng": {
-   "cited_by": "07-error-mitigation-failures.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89mhc2s46sc73faqpng not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89nd7p789is7393hkr0": {
-   "cited_by": "09-qae-iae-mle-precision.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89nd7p789is7393hkr0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d89ndk0p0eas73dorso0": {
-   "cited_by": "09-qae-iae-mle-precision.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d89ndk0p0eas73dorso0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8cbmn47avuc73dqp4vg": {
-   "cited_by": "10-financial-iqae.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8cbmn47avuc73dqp4vg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8ccg0j8amns73bjbls0": {
-   "cited_by": "10-financial-iqae.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8ccg0j8amns73bjbls0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8cu0s5mdsks73d326jg": {
-   "cited_by": "11-gate-overhead-law.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8cu0s5mdsks73d326jg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8culgdmdsks73d337gg": {
-   "cited_by": "12-x-basis-cross-backend.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8culgdmdsks73d337gg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8d00ta4gq0s73apha60": {
-   "cited_by": "12-x-basis-cross-backend.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8d00ta4gq0s73apha60 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8cujgvd0j8c73f3eit0": {
-   "cited_by": "13-qaoa-cz-wall.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8cujgvd0j8c73f3eit0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8d0bcdmdsks73d36850": {
-   "cited_by": "13-qaoa-cz-wall.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8d0bcdmdsks73d36850 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8d6tdgv14cs73dhvahg": {
-   "cited_by": "14-commutation-aligned-compilation.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8d6tdgv14cs73dhvahg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8d8u8i4gq0s73apu6h0": {
-   "cited_by": "14-commutation-aligned-compilation.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8d8u8i4gq0s73apu6h0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
   "d9ah35eg26ic73demgag": {
    "account": "IBMQ_TOKEN",
    "backend": "ibm_marrakesh",
@@ -669,136 +535,6 @@
    },
    "quietness_vs_device_median": 2.1447368421052633,
    "cited_by": "F118-exp138b-ico-cold-branch-sub-bath-reset-external-qubit-whisper-c4720.md"
-  },
-  "d90v76357qjs73b5cu10": {
-   "cited_by": "F51-exp31-iqae-hardware-validation-ember-c4023.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d90v76357qjs73b5cu10 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d91km2357qjs73b6ies0": {
-   "cited_by": "F53-exp77-anchor-rank-survives-qpu-elder-c6268.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d91km2357qjs73b6ies0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d91km2eu9n7c73amu5ng": {
-   "cited_by": "F53-exp77-anchor-rank-survives-qpu-elder-c6268.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d91km2eu9n7c73amu5ng not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d91l366u9n7c73amv2ig": {
-   "cited_by": "F54-exp78-qqq-tail-qae-vs-mc-elder-c6269.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d91l366u9n7c73amv2ig not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d91l36b57qjs73b6jc5g": {
-   "cited_by": "F54-exp78-qqq-tail-qae-vs-mc-elder-c6269.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d91l36b57qjs73b6jc5g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d92ckp7ccmks73d6ipp0": {
-   "cited_by": "F64-gatecount-isolation-true-codeword-floor-whisper-c4426.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d92ckp7ccmks73d6ipp0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d92rkt247v0s73816mhg": {
-   "cited_by": "F67-fixed-placement-folding-partitions-exp86-decline-whisper-c4439.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d92rkt247v0s73816mhg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d92u0k5958jc73bsa6qg": {
-   "cited_by": "F68-same-window-placement-gatecount-partition-whisper-c4445.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d92u0k5958jc73bsa6qg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d9342knd07jc73e01jpg": {
-   "cited_by": "F69-placement-dominance-draw-robust-distribution-whisper-c4449.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d9342knd07jc73e01jpg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d939bmooamcc73dbv9b0": {
-   "cited_by": "F73-causal-witness-survives-classical-mixture-of-definite-orders-elder-c6328.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d939bmooamcc73dbv9b0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d93khvl958jc73bt5c2g": {
-   "cited_by": "F76-continuous-resource-law-confirmed-on-hardware-ember-c4072.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d93khvl958jc73bt5c2g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d93p3cnu62ks73953cvg": {
-   "cited_by": "F77-classical-mixture-loophole-closed-on-hardware-same-device-elder-c6342.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d93p3cnu62ks73953cvg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d93s1fkql68s73c8oong": {
-   "cited_by": "F78-qqq-tail-grover-survives-on-hardware-but-no-blind-estimation-win-elder-c6349.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d93s1fkql68s73c8oong not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d93vso6vtlqs73ftmqhg": {
-   "cited_by": "F81-loader-depth-boundary-not-stable-same-circuits-same-qubits-11h-apart-elder-c6378.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d93vso6vtlqs73ftmqhg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d9826lkqp3as739sd2lg": {
-   "cited_by": "F82-causal-game-beats-causal-bound-two-chips-ember-c4118.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d9826lkqp3as739sd2lg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d982qssqp3as739sdmmg": {
-   "cited_by": "F82-causal-game-beats-causal-bound-two-chips-ember-c4118.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d982qssqp3as739sdmmg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d983ek52su3c739ip92g": {
-   "cited_by": "F83-capacity-activation-two-zero-capacity-channels-whisper-c4530-ember-numbered-c4118.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d983ek52su3c739ip92g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d9845dif47jc73a7ehe0": {
-   "cited_by": "F85-n3-capacity-activation-scaling-inversion-whisper-c4539-ember-numbered-c4119.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d9845dif47jc73a7ehe0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d98vqfsqp3as739tfg0g": {
-   "cited_by": "F86-exp108-ico-refrigeration-resource-whisper-c4561-ember-numbered-c4121.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d98vqfsqp3as739tfg0g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d99fidd2su3c739kcv80": {
-   "cited_by": "F87-exp109-superdense-coding-first-comms-primitive-whisper-c4590-c4591-ember-numbered-c4123.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d99fidd2su3c739kcv80 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d99qjmt2su3c739kq9n0": {
-   "cited_by": "F88-exp108c-native-fluid-ico-refrigeration-whisper-c4592-c4593-ember-numbered-c4124.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d99qjmt2su3c739kq9n0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d99tkdgtcv6s73dnpaeg": {
-   "cited_by": "F89-exp111-ico-vs-coherent-control-resource-comparison-whisper-c4593-c4594-ember-numbered-c4124.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d99tkdgtcv6s73dnpaeg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d99vk2l2su3c739kvqt0": {
-   "cited_by": "F90-exp110-swap-beats-teleport-no-crossover-feedforward-cost-whisper-c4596-c4597-ember-numbered-c4125.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d99vk2l2su3c739kvqt0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d9a19kcqp3as739un8e0": {
-   "cited_by": "F91-exp112-bell-violation-survives-two-swap-stations-repeater-primitive-whisper-c4598-c4599-ember-numbered-c4126.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d9a19kcqp3as739un8e0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d9a36352su3c739l3kf0": {
-   "cited_by": "F92-exp113-causal-indefiniteness-survives-teleportation-whisper-c4603-c4604-ember-numbered-c4127.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d9a36352su3c739l3kf0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d9a4l44qp3as739uqs80": {
-   "cited_by": "F93-exp114-purification-resurrects-dead-bell-violation-gain-leg-honest-loss-whisper-c4606-c4607-ember-numbered-c4128.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d9a4l44qp3as739uqs80 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
   },
   "d9a8sa2f47jc73a9uk2g": {
    "account": "IBMQ_TOKEN",
@@ -3025,31 +2761,6 @@
    },
    "quietness_vs_device_median": 1.0,
    "cited_by": "dd-is-net-harmful-at-density-whisper-c5018.md"
-  },
-  "d8un4ttposuc738qemqg": {
-   "cited_by": "finding-50-exp66-partb-warmstart-transfer-fails-on-qpu.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8un4ttposuc738qemqg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8un4uctqbtc73d22qh0": {
-   "cited_by": "finding-50-exp66-partb-warmstart-transfer-fails-on-qpu.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8un4uctqbtc73d22qh0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8un4ukbp3hs73869rlg": {
-   "cited_by": "finding-50-exp66-partb-warmstart-transfer-fails-on-qpu.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8un4ukbp3hs73869rlg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d8un4utbh0os73eraj2g": {
-   "cited_by": "finding-50-exp66-partb-warmstart-transfer-fails-on-qpu.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d8un4utbh0os73eraj2g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d94t6ncql68s73c9ut5g": {
-   "cited_by": "finding-51-exp103-ipe-survives-hardware-feedforward-ember-c4111.md",
-   "retrievable": false,
-   "error": "JobNotFoundAnywhere: job d94t6ncql68s73c9ut5g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
   },
   "d9di3maneu4c739nadqg": {
    "account": "IBMQ_TOKEN",
@@ -5655,8 +5366,332 @@
    },
    "quietness_vs_device_median": 1.0,
    "cited_by": "route3-refly-rate-replicates-sign-mismatch-whisper-c5018.md"
+  },
+  "d89n5uqs46sc73farg80": {
+   "cited_by": "01-chsh-bell-violation.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89n5uqs46sc73farg80 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d894cbop0eas73do4p9g": {
+   "cited_by": "03-x-basis-noise-immunity.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d894cbop0eas73do4p9g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d894lf5g7okc73eo7erg": {
+   "cited_by": "03-x-basis-noise-immunity.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d894lf5g7okc73eo7erg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d895ai2s46sc73fa64ag": {
+   "cited_by": "03-x-basis-noise-immunity.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d895ai2s46sc73fa64ag not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89ftt1789is73938rpg": {
+   "cited_by": "05-depth-phase-transitions.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89ftt1789is73938rpg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89l7cis46sc73fapa10": {
+   "cited_by": "06-ancilla-tax-qec-impracticability.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89l7cis46sc73fapa10 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89lft5g7okc73eor90g": {
+   "cited_by": "06-ancilla-tax-qec-impracticability.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89lft5g7okc73eor90g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89lp90p0eas73doq4j0": {
+   "cited_by": "06-ancilla-tax-qec-impracticability.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89lp90p0eas73doq4j0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89m1d0p0eas73doqcpg": {
+   "cited_by": "06-ancilla-tax-qec-impracticability.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89m1d0p0eas73doqcpg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89mb9is46sc73faqje0": {
+   "cited_by": "07-error-mitigation-failures.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89mb9is46sc73faqje0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89mhc9789is7393gn4g": {
+   "cited_by": "07-error-mitigation-failures.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89mhc9789is7393gn4g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8cievj8ch0s738uujsg": {
+   "cited_by": "07-error-mitigation-failures.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8cievj8ch0s738uujsg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8cj4k2jki0s73arbrg0": {
+   "cited_by": "07-error-mitigation-failures.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8cj4k2jki0s73arbrg0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89mb9op0eas73doqnt0": {
+   "cited_by": "07-error-mitigation-failures.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89mb9op0eas73doqnt0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89mba2s46sc73faqjf0": {
+   "cited_by": "07-error-mitigation-failures.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89mba2s46sc73faqjf0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89mhc2s46sc73faqpng": {
+   "cited_by": "07-error-mitigation-failures.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89mhc2s46sc73faqpng not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89nd7p789is7393hkr0": {
+   "cited_by": "09-qae-iae-mle-precision.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89nd7p789is7393hkr0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d89ndk0p0eas73dorso0": {
+   "cited_by": "09-qae-iae-mle-precision.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d89ndk0p0eas73dorso0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8cbmn47avuc73dqp4vg": {
+   "cited_by": "10-financial-iqae.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8cbmn47avuc73dqp4vg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8ccg0j8amns73bjbls0": {
+   "cited_by": "10-financial-iqae.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8ccg0j8amns73bjbls0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8cu0s5mdsks73d326jg": {
+   "cited_by": "11-gate-overhead-law.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8cu0s5mdsks73d326jg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8culgdmdsks73d337gg": {
+   "cited_by": "12-x-basis-cross-backend.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8culgdmdsks73d337gg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8d00ta4gq0s73apha60": {
+   "cited_by": "12-x-basis-cross-backend.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8d00ta4gq0s73apha60 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8cujgvd0j8c73f3eit0": {
+   "cited_by": "13-qaoa-cz-wall.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8cujgvd0j8c73f3eit0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8d0bcdmdsks73d36850": {
+   "cited_by": "13-qaoa-cz-wall.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8d0bcdmdsks73d36850 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8d6tdgv14cs73dhvahg": {
+   "cited_by": "14-commutation-aligned-compilation.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8d6tdgv14cs73dhvahg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8d8u8i4gq0s73apu6h0": {
+   "cited_by": "14-commutation-aligned-compilation.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8d8u8i4gq0s73apu6h0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d90v76357qjs73b5cu10": {
+   "cited_by": "F51-exp31-iqae-hardware-validation-ember-c4023.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d90v76357qjs73b5cu10 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d91km2357qjs73b6ies0": {
+   "cited_by": "F53-exp77-anchor-rank-survives-qpu-elder-c6268.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d91km2357qjs73b6ies0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d91km2eu9n7c73amu5ng": {
+   "cited_by": "F53-exp77-anchor-rank-survives-qpu-elder-c6268.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d91km2eu9n7c73amu5ng not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d91l366u9n7c73amv2ig": {
+   "cited_by": "F54-exp78-qqq-tail-qae-vs-mc-elder-c6269.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d91l366u9n7c73amv2ig not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d91l36b57qjs73b6jc5g": {
+   "cited_by": "F54-exp78-qqq-tail-qae-vs-mc-elder-c6269.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d91l36b57qjs73b6jc5g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d92ckp7ccmks73d6ipp0": {
+   "cited_by": "F64-gatecount-isolation-true-codeword-floor-whisper-c4426.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d92ckp7ccmks73d6ipp0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d92rkt247v0s73816mhg": {
+   "cited_by": "F67-fixed-placement-folding-partitions-exp86-decline-whisper-c4439.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d92rkt247v0s73816mhg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d92u0k5958jc73bsa6qg": {
+   "cited_by": "F68-same-window-placement-gatecount-partition-whisper-c4445.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d92u0k5958jc73bsa6qg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d9342knd07jc73e01jpg": {
+   "cited_by": "F69-placement-dominance-draw-robust-distribution-whisper-c4449.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d9342knd07jc73e01jpg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d939bmooamcc73dbv9b0": {
+   "cited_by": "F73-causal-witness-survives-classical-mixture-of-definite-orders-elder-c6328.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d939bmooamcc73dbv9b0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d93khvl958jc73bt5c2g": {
+   "cited_by": "F76-continuous-resource-law-confirmed-on-hardware-ember-c4072.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d93khvl958jc73bt5c2g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d93p3cnu62ks73953cvg": {
+   "cited_by": "F77-classical-mixture-loophole-closed-on-hardware-same-device-elder-c6342.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d93p3cnu62ks73953cvg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d93s1fkql68s73c8oong": {
+   "cited_by": "F78-qqq-tail-grover-survives-on-hardware-but-no-blind-estimation-win-elder-c6349.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d93s1fkql68s73c8oong not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d93vso6vtlqs73ftmqhg": {
+   "cited_by": "F81-loader-depth-boundary-not-stable-same-circuits-same-qubits-11h-apart-elder-c6378.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d93vso6vtlqs73ftmqhg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d9826lkqp3as739sd2lg": {
+   "cited_by": "F82-causal-game-beats-causal-bound-two-chips-ember-c4118.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d9826lkqp3as739sd2lg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d982qssqp3as739sdmmg": {
+   "cited_by": "F82-causal-game-beats-causal-bound-two-chips-ember-c4118.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d982qssqp3as739sdmmg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d983ek52su3c739ip92g": {
+   "cited_by": "F83-capacity-activation-two-zero-capacity-channels-whisper-c4530-ember-numbered-c4118.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d983ek52su3c739ip92g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d9845dif47jc73a7ehe0": {
+   "cited_by": "F85-n3-capacity-activation-scaling-inversion-whisper-c4539-ember-numbered-c4119.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d9845dif47jc73a7ehe0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d98vqfsqp3as739tfg0g": {
+   "cited_by": "F86-exp108-ico-refrigeration-resource-whisper-c4561-ember-numbered-c4121.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d98vqfsqp3as739tfg0g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d99fidd2su3c739kcv80": {
+   "cited_by": "F87-exp109-superdense-coding-first-comms-primitive-whisper-c4590-c4591-ember-numbered-c4123.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d99fidd2su3c739kcv80 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d99qjmt2su3c739kq9n0": {
+   "cited_by": "F88-exp108c-native-fluid-ico-refrigeration-whisper-c4592-c4593-ember-numbered-c4124.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d99qjmt2su3c739kq9n0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d99tkdgtcv6s73dnpaeg": {
+   "cited_by": "F89-exp111-ico-vs-coherent-control-resource-comparison-whisper-c4593-c4594-ember-numbered-c4124.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d99tkdgtcv6s73dnpaeg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d99vk2l2su3c739kvqt0": {
+   "cited_by": "F90-exp110-swap-beats-teleport-no-crossover-feedforward-cost-whisper-c4596-c4597-ember-numbered-c4125.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d99vk2l2su3c739kvqt0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d9a19kcqp3as739un8e0": {
+   "cited_by": "F91-exp112-bell-violation-survives-two-swap-stations-repeater-primitive-whisper-c4598-c4599-ember-numbered-c4126.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d9a19kcqp3as739un8e0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d9a36352su3c739l3kf0": {
+   "cited_by": "F92-exp113-causal-indefiniteness-survives-teleportation-whisper-c4603-c4604-ember-numbered-c4127.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d9a36352su3c739l3kf0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d9a4l44qp3as739uqs80": {
+   "cited_by": "F93-exp114-purification-resurrects-dead-bell-violation-gain-leg-honest-loss-whisper-c4606-c4607-ember-numbered-c4128.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d9a4l44qp3as739uqs80 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8un4ttposuc738qemqg": {
+   "cited_by": "finding-50-exp66-partb-warmstart-transfer-fails-on-qpu.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8un4ttposuc738qemqg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8un4uctqbtc73d22qh0": {
+   "cited_by": "finding-50-exp66-partb-warmstart-transfer-fails-on-qpu.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8un4uctqbtc73d22qh0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8un4ukbp3hs73869rlg": {
+   "cited_by": "finding-50-exp66-partb-warmstart-transfer-fails-on-qpu.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8un4ukbp3hs73869rlg not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d8un4utbh0os73eraj2g": {
+   "cited_by": "finding-50-exp66-partb-warmstart-transfer-fails-on-qpu.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d8un4utbh0os73eraj2g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d94t6ncql68s73c9ut5g": {
+   "cited_by": "finding-51-exp103-ipe-survives-hardware-feedforward-ember-c4111.md",
+   "retrievable": false,
+   "error": "JobNotFoundAnywhere: job d94t6ncql68s73c9ut5g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
+  },
+  "d9tg7gntfhrs73dtug20": {
+   "account": "IBMQ_ALT4",
+   "backend": "ibm_marrakesh",
+   "created": "2026-08-11 11:13:06.300370+00:00",
+   "status": "DONE",
+   "properties_source": "AT CREATION DATE",
+   "properties_last_update": "2026-08-07 03:19:40+00:00",
+   "device_readout": {
+    "median": 0.0106201171875,
+    "mean": 0.031703851161858976,
+    "max": 0.506591796875
+   },
+   "touched_qubits": [
+    54,
+    55,
+    107
+   ],
+   "touched_readout": {
+    "median": 0.001953125,
+    "max": 0.0029296875
+   },
+   "used_qubits": [
+    54,
+    55,
+    107
+   ],
+   "used_readout": {
+    "median": 0.001953125,
+    "max": 0.0029296875
+   },
+   "SET_WARNING": "touched != measured; for any statistic combining specific bits, recover the measured set from the circuit's measure instructions",
+   "quietness_vs_device_median": 5.4375,
+   "cited_by": "h13-cell2-refly-GRADED-elder-c6605.md"
   }
  },
- "retrievable": 115,
- "not_retrievable": 58
+ "retrievable": 1,
+ "not_retrievable": 0
 }

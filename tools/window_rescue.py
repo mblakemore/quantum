@@ -37,6 +37,7 @@ import os
 import re
 import statistics as st
 import sys
+import time
 
 sys.path.insert(0, "/droid/repos/quantum/scripts")
 Q = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -124,18 +125,71 @@ def rescue_one(svc, acct, jid):
     return rec
 
 
+def load_banked(path):
+    """Already-banked jobs, so a re-run costs only what is NEW.
+
+    INCREMENTAL BY DEFAULT, added C5075 after close. The queued fix for this tool was "add a rate
+    limiter", and that treats the symptom: the sweep re-fetched all 173 cited jobs on every run,
+    including the 58 that are permanently gone and the 115 whose windows are already on disk and
+    CANNOT CHANGE — a calibration snapshot at a past creation date is immutable. So the load was
+    not a pacing problem, it was work that never needed doing twice.
+
+    Two consequences beyond politeness to the vendor. A cheap re-run is a re-run that actually
+    happens, which matters because new findings keep adding job IDs and the retention clock keeps
+    running on them. And the 58 lost jobs stop being re-probed forever, which is the difference
+    between a sweep that gets slower every month and one whose cost tracks only new work.
+
+    A LOST job is re-probed exactly once more when --retry-lost is passed, because "lost" is a
+    claim about a vendor's retention and I have measured the wall but not proven it irreversible.
+    Default is not to: 58 known-failing calls per run is the exact waste this change removes.
+    """
+    try:
+        with open(path) as fh:
+            prev = json.load(fh)
+    except (OSError, ValueError):
+        return {}, {}
+    jobs = prev.get("jobs", {})
+    banked = {k: v for k, v in jobs.items() if v.get("retrievable") is not False}
+    lost = {k: v for k, v in jobs.items() if v.get("retrievable") is False}
+    return banked, lost
+
+
 def main():
     from ibm_multi_account import service_for_job
     tg = targets()
     limit = int(sys.argv[sys.argv.index("--limit") + 1]) if "--limit" in sys.argv else None
     out_path = (sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv
                 else f"{Q}/results/window_rescue_c5075.json")
-    items = list(tg.items())[:limit] if limit else list(tg.items())
+    full = "--full" in sys.argv
+    retry_lost = "--retry-lost" in sys.argv
+    banked, lost = ({}, {}) if full else load_banked(out_path)
+
+    all_items = list(tg.items())
+    skip = set(banked) | (set() if retry_lost else set(lost))
+    items = [(j, s) for j, s in all_items if j not in skip]
+    # STATE WHAT WAS SKIPPED AND WHY. A sweep that silently processes 4 of 173 jobs and reports
+    # success looks identical to one that swept everything, and "115 windows banked" would then be
+    # a claim about a file rather than about this run.
+    print(f"@@ cited={len(all_items)} banked={len(banked)} lost={len(lost)}"
+          f"{'' if retry_lost else ' (skipped; --retry-lost to re-probe)'} -> fetching {len(items)}",
+          flush=True)
+    if not items:
+        print("@@ nothing new to fetch. windows already banked are immutable; re-run adds nothing.",
+              flush=True)
+    items = items[:limit] if limit else items
     out = {"card": "window_rescue", "cycle": "C5075",
            "why": "bank epoch windows before a vendor retention clock we have not measured can close them",
-           "n_targets": len(items), "jobs": {}}
+           "n_cited": len(all_items), "n_fetched_this_run": len(items), "jobs": {}}
+    # Carry prior records forward FIRST, so an incremental run never shrinks the census. Writing
+    # only this run's results would silently discard 115 banked windows the moment someone ran the
+    # tool with nothing new to fetch - a data-loss bug wearing the shape of an optimisation.
+    out["jobs"].update(banked)
+    if not retry_lost:
+        out["jobs"].update(lost)
     lost = kept = 0
     for i, (jid, src) in enumerate(items, 1):
+        if i > 1:
+            time.sleep(0.4)   # modest pacing on what remains; the real fix was not fetching it twice
         try:
             svc, acct = service_for_job(jid)
             rec = rescue_one(svc, acct, jid)
@@ -153,7 +207,16 @@ def main():
     out["retrievable"] = kept
     out["not_retrievable"] = lost
     json.dump(out, open(out_path, "w"), indent=1)
-    print(f"@@ DONE retrievable={kept} lost={lost} -> {out_path}", flush=True)
+    # SAY WHICH NUMBER IS WHICH. This line used to read "DONE retrievable=K lost=L", which was a
+    # count of THIS RUN while looking exactly like a count of the census - and after the change to
+    # incremental fetching an ordinary run prints retrievable=1, which would read as a catastrophic
+    # loss of 114 banked windows to anyone scanning the log. Same defect class as the summary line
+    # elsewhere today that said "all gates reproduced" one line under a gate that had not.
+    n_ok = sum(1 for v in out["jobs"].values() if v.get("retrievable") is not False)
+    n_lost = sum(1 for v in out["jobs"].values() if v.get("retrievable") is False)
+    print(f"@@ THIS RUN: fetched={len(items)} ok={kept} failed={lost}", flush=True)
+    print(f"@@ CENSUS:   {len(out['jobs'])} jobs, {n_ok} with windows, {n_lost} lost -> {out_path}",
+          flush=True)
 
 
 if __name__ == "__main__":
