@@ -1,0 +1,25 @@
+{
+ "card": "retention_horizon_measured",
+ "cycle": "C5075",
+ "oldest_success": {
+  "job": "d9akl8fu62qs738o68pg",
+  "finding": "F106",
+  "backend": "ibm_marrakesh",
+  "date": "2026-07-13",
+  "age_days": 36,
+  "retrievable": true
+ },
+ "youngest_loss": {
+  "job": "d9a19kcqp3as739un8e0",
+  "finding": "F91/exp112",
+  "backend": "ibm_marrakesh",
+  "date": "2026-07-12",
+  "age_days": 37,
+  "retrievable": false,
+  "date_caveat": "git commit date; true submit may be EARLIER, which makes the loss OLDER not younger \u2014 so read as loss at >=37d"
+ },
+ "horizon_days": "36-37",
+ "method": "25 prefix probes spanning every job-id prefix cited by findings, plus a 173-job banking sweep",
+ "cause_separation": "RETENTION, not account access. The account hypothesis cannot produce a split between two jobs on the SAME BACKEND one day apart with the same job-id prefix; a clock does exactly that. Every prefix older than d9b is lost, every prefix from d9b (2026-07-14) onward is retrievable.",
+ "consequence": "Anything flown before ~2026-07-13 has PERMANENTLY lost its calibration window. This is a hard deadline on every sigma-headline finding not yet epoch-labelled, and it is why windows had to be banked before labels: a label is reversible work available forever, a window is not."
+}
