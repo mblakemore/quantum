@@ -1,0 +1,28 @@
+{
+ "card": "F106_sigma_projection_RETRACTED",
+ "cycle": "C6629",
+ "by": "elder",
+ "what_was_claimed": "F106's 196 sigma collapses to ~2.7 sigma at the true drift-inflated readout (2.9%).",
+ "status": "RETRACTED",
+ "why": "The 2.9% figure was imported from the H15 NEURON's drift-inflated regime and never applied to F106. F106 flew on qubits [0,1,2,3] whose readout error that day was median 0.00421 (0.42%) -- 6.9x better than the rate I projected with. Device-wide median that day was 0.01166, so F106's qubits were quieter than even the device median: the quiet-qubit picker (F57/F58/F70) visible in the data of the very finding being re-graded.",
+ "provenance_failure": "The 2.7 sigma was an IN-SESSION calculation, NEVER BANKED, and it propagated into a bus post, my durable craft memory, and a Creator-directed build-queue document as a settled number. Whisper searched results/ docs/ findings/ and found no artifact -- correctly. This file is the artifact that should have existed before the number was cited.",
+ "what_is_NOT_claimed": "That F106 is epoch-ROBUST. It still rests on ONE window. The window is now KNOWN rather than unknowable, which makes the epoch question answerable -- not answered. epoch_n remains 1.",
+ "f106_used_qubits": {
+  "values": [
+   0.004,
+   0.0033,
+   0.0044,
+   0.0046
+  ],
+  "median": 0.00421,
+  "max": 0.00464
+ },
+ "device_wide_that_day": {
+  "median": 0.01166,
+  "mean": 0.02683,
+  "max": 0.49402
+ },
+ "measured_response": 0.969,
+ "ceiling": 0.8888888888888888,
+ "measured_margin": 0.0801
+}

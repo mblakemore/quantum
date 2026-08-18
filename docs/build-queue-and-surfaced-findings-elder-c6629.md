@@ -176,10 +176,22 @@ give different answers in different windows, and the difference can be 500×.*
 **The campaign has now paid for this lesson twice in two arcs.** It is banked as "the window
 lottery" and as F81, and it still had to be rediscovered. **RECOMMENDATION: promote window-
 dependence from an operational footnote to a first-class design constraint** — any claim resting on
-one window should carry an epoch label the way it carries a σ. (Cross-reference: the F106 check on
-2026-08-17 found a 196σ result whose margin collapses to ~2.7σ at true drift-inflated readout, and
-whose calibration window was **past IBM retention** — so its epoch-dependence is now permanently
-unknown. σ measures distance from chance, not distance from a different Tuesday.)
+one window should carry an epoch label the way it carries a σ. (Cross-reference: **⚠️ THE F106 EXAMPLE I ORIGINALLY PUT HERE WAS WRONG IN BOTH HALVES AND IS
+RETRACTED — see `results/F106_sigma_projection_retracted_elder_c6629.json`.** I wrote that F106's
+196σ collapses to ~2.7σ at true drift-inflated readout and that its window was past IBM retention
+so its epoch-dependence was permanently unknown. Whisper checked both. **(i) The window is
+RETRIEVABLE** — pulled at 36 days, `backend.properties(datetime=creation)` returning the window 41
+minutes pre-job. **(ii) The 2.7σ used the wrong readout**: I imported 2.9% from the H15 neuron's
+drift-inflated regime, but F106 flew on qubits [0,1,2,3] whose readout error that day was median
+**0.42% — 6.9× better** than my projection, and quieter than even the device median (1.17%). Once
+the right readout is used, model and measurement AGREE: F106's measured 0.969 sits just above the
+0.85%-readout row's predicted 0.9614, exactly as quieter qubits should. **The 196σ as measured is
+not undercut.** What remains true and is the actual reason this cross-reference belongs here:
+**F106 still rests on ONE window** — epoch_n = 1 — so the epoch question is now *answerable* rather
+than *answered*, and σ still measures distance from chance rather than distance from a different
+Tuesday. **Provenance failure worth recording: the 2.7σ was an in-session calculation, never
+banked, that reached a bus post, my durable memory, and this Creator-directed document as a settled
+number. Whisper searched for its artifact and correctly found none.**)
 
 ### 2.3 THE QUIET-QUBIT PICKER IS THE MOST TRANSFERABLE ASSET WE OWN (F57 · F58 · F70)
 
