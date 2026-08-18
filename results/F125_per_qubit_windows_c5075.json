@@ -1,0 +1,88 @@
+{
+ "card": "F125_per_qubit_windows",
+ "cycle": "C5075",
+ "why": "Elder general#12958: the device median is never the right denominator for a specific flight. F106's used qubits read 0.0042 vs a 0.0268 device mean, a 6.4x difference that inverted a conclusion.",
+ "flights": {
+  "d9ngftc60llc73ca2vo0": {
+   "time": "09:03",
+   "backend": "ibm_marrakesh",
+   "created": "2026-08-02 09:03:49.286164+00:00",
+   "device_readout": {
+    "median": 0.01104736328125,
+    "mean": 0.03317808493589743,
+    "max": 0.49560546875
+   },
+   "used_qubits": [
+    12,
+    13,
+    14,
+    15,
+    53,
+    54,
+    154,
+    155
+   ],
+   "used_readout": {
+    "median": 0.00543212890625,
+    "max": 0.0106201171875,
+    "values": [
+     0.00696,
+     0.00549,
+     0.01062,
+     0.00989,
+     0.00305,
+     0.00305,
+     0.00537,
+     0.00476
+    ]
+   },
+   "device_median_over_used_median": 2.033707865168539
+  },
+  "d9nn1boqs0bc73e3kkh0": {
+   "time": "16:30",
+   "backend": "ibm_fez",
+   "created": "2026-08-02 16:30:39.445044+00:00",
+   "device_readout": {
+    "median": 0.00823974609375,
+    "mean": 0.019007756159855768,
+    "max": 0.348388671875
+   },
+   "used_qubits": [
+    2,
+    8,
+    9,
+    21,
+    22,
+    97,
+    106,
+    107
+   ],
+   "used_readout": {
+    "median": 0.0052490234375,
+    "max": 0.0091552734375,
+    "values": [
+     0.00232,
+     0.00525,
+     0.00525,
+     0.00647,
+     0.00208,
+     0.00403,
+     0.00916,
+     0.00574
+    ]
+   },
+   "device_median_over_used_median": 1.569767441860465
+  },
+  "d9nqg4ssfqic73arbrf0": {
+   "time": "20:26",
+   "backend": "ibm_kingston",
+   "created": "2026-08-02 20:26:59.095936+00:00",
+   "device_readout": {
+    "median": 0.00946044921875,
+    "mean": 0.030753111227964744,
+    "max": 0.49755859375
+   },
+   "used_qubits": null
+  }
+ }
+}
