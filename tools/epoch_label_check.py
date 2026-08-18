@@ -163,18 +163,27 @@ def main(argv):
           f"{_YOUNGEST_OBSERVED_LOSS_DAYS}d lost (1-day boundary); dynamics {_BOUNDARY_DYNAMICS} "
           f"(rolling=race / fixed=no-deadline, +3d re-probe settles)")
     print("=" * 70)
+    # Each row carries a distinct leading verdict token (FAIL/WARN/PASS) so a
+    # consumer can classify a row WITHOUT tracking which section header it fell
+    # under. The section headers alone are not enough: the rows used to share an
+    # identical "  - {name}: ..." shape, so a regex keyed on the row (not the
+    # header) matched FAIL and PASS rows alike — Whisper's classifier miscounted
+    # 46-vs-45 exactly this way (gen#13018), the same set-boundary error class as
+    # the qubit-set confounds tonight, one level down on report sections. An
+    # ambiguous row shape is a consumer bug waiting for a consumer; the token
+    # closes it. Grep '^  - FAIL ' now yields gate failures and nothing else.
     if gate_fail:
         print(f"\n\U0001f6d1 GATE FAIL ({len(gate_fail)}) — a sigma-headline claim without a stated epoch is not DONE:")
         for n, why in gate_fail:
-            print(f"  - {n}: {why}")
+            print(f"  - FAIL {n}: {why}")
     if witness_warn:
         print(f"\n⚠️  WITNESS ({len(witness_warn)}) — never a gate, act while the check is cheap:")
         for n, why in witness_warn:
-            print(f"  - {n}: {why}")
+            print(f"  - WARN {n}: {why}")
     if ok:
         print(f"\n✅ EPOCH-LABELLED ({len(ok)}):")
         for n, dsc in ok:
-            print(f"  - {n}: {dsc}")
+            print(f"  - PASS {n}: {dsc}")
     if not (gate_fail or witness_warn or ok):
         print("\n(no sigma-headline findings — census printed so silence is not read as clean)")
     print()
