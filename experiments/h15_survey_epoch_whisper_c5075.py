@@ -39,8 +39,26 @@ worse and the data cannot settle it. This survey contributes 500-800 weight-labe
 the 316 that produced p=0.078, which should roughly halve the SE and either exclude breakeven or
 bring n=5 genuinely into play.
 FIT, pre-stated: point-biserial / weighted linear regression of per-row accept on A-weight, pooled
-across epochs with epoch as a fixed effect (epoch quality varies by construction and is Output 1);
-report slope, SE, CI, and whether breakeven is excluded.
+across epochs with EPOCH AS A FIXED EFFECT (epoch quality varies by construction and is Output 1;
+not absorbing it would leak dispersion into the slope).
+
+THE TEST IS AGAINST BREAKEVEN, NOT AGAINST ZERO (Elder general#12787, adopted before any data
+lands). The decision-relevant question is not "is the slope nonzero" but "is it STEEPER THAN
+BREAKEVEN" — different hypotheses with different power, and reporting only the slope's CI would
+answer the wrong one. So the pre-stated readout is:
+    (a) slope, SE, and 95% CI;
+    (b) an explicit verdict on whether the BREAKEVEN BAND [-1.74, -1.51] pp/weight is EXCLUDED,
+        i.e. a one-sided test of H0: slope <= breakeven against the alternative that n=5 helps.
+The band has two ends because the breakeven depends on the baseline, and both are legitimate
+answers to DIFFERENT questions (Elder's framing, pinned here so a reader seeing both does not
+assume one of us slipped):
+    -1.74 pp/weight — baseline = the REQUIRED ALT at n=4 (0.6807). The DESIGN question: choosing n
+                      before the achieved rate is known. This is the one that governs the n choice.
+    -1.51 pp/weight — baseline = the MEASURED kingston-pooled ALT (0.675). The EMPIRICAL FORECAST
+                      question: given what the hardware achieves today, would n=5 help?
+If the CI excludes the whole band on the steep side, n=5 is out. If it spans the band, the survey
+has not settled it and n stays at 4 by default rather than by evidence — which must be said in
+exactly those words.
 $0 in this file. No submission path here (see the -fly sibling).
 """
 import sys
