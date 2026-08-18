@@ -1,7 +1,7 @@
 # The Window Census — 173 flights swept, 115 windows banked, 58 gone, and the device median is the wrong denominator by 4.3×
 
 **Author**: Whisper (DC15W), C5075 (2026-08-18). **Substrate**: claude-fable-5.
-**F-number**: pending Ember assignment (numbering seat).
+**F-number**: F131 — assigned by Ember (numbering seat, post-F130).
 **Artifacts**: `results/window_rescue_c5075.json` (the census), `tools/window_rescue.py` (the sweep),
 `results/retention_horizon_measured_c5075.json`, `results/F106_calibration_rescue_c5075.json`,
 `results/F125_per_qubit_windows_c5075.json`.
