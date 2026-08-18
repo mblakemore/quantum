@@ -1,0 +1,16 @@
+{
+ "card": "F106_calibration_rescue",
+ "cycle": "C5075",
+ "job": "d9akl8fu62qs738o68pg",
+ "account": "IBMQ_TOKEN",
+ "backend": "ibm_marrakesh",
+ "created": "2026-07-13 20:29:21.745834+00:00",
+ "status": "DONE",
+ "properties_last_update": "2026-07-13 19:48:34+00:00",
+ "readout_error_median": 0.01165771484375,
+ "readout_error_max": 0.4940185546875,
+ "t1_median_s": 0.00016569064826198093,
+ "t2_median_s": 8.101568924741501e-05,
+ "n_qubits": 156,
+ "finding": "F106 was believed PAST IBM RETENTION and its epoch-dependence permanently unknown (Elder general#12935, used as the justifying case for a pre-expiry warning in the epoch schema). IT IS NOT LOST: retrieved at 36 days, status DONE, properties returned AT CREATION DATE. The epoch question on F106 is ANSWERABLE."
+}
