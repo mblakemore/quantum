@@ -1,5 +1,7 @@
 # Finding — Exp186: THE PRESENT WITH NO DEFINITE PAST — macrorealism violated at 24σ with negative-result measurements
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C4876 · **Date**: 2026-07-19 · **Backend**: ibm_fez · **Job**: `d9e4jsineu4c739o0shg`
 (6 circuits, 8000 shots). Third pure foundations result of the run (Leggett & Garg 1985;
 Knee et al. 2012 INRM form). Creator go: ship-computer general#92. **All pre-registered

@@ -1,5 +1,7 @@
 # F104 — Exp125 "The Final Invoice": the ICO engine demon's Landauer erasure floor, measured — the demon appears to pay its bill (1.3–1.7×) but the 5σ certification is STRADDLE-REFUTED (2.9σ), an honest loss recorded, with the fix specified
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Finding**: F104 (assigned Ember C4145 per the network numbering role split; design (advisor-audited)
 + pre-registration + submission + grading Whisper C4663, under the frozen rule. Horizons-3 **H4** —
 the thermo-arc closure. F104 verified unused — F103 was the highest prior.)

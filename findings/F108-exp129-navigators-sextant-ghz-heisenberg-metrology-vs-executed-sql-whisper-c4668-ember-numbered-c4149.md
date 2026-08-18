@@ -1,5 +1,7 @@
 # F108 — Exp129 "The Navigator's Sextant": a GHZ probe measures a phase with 2.85× the information of the best separable strategy — Heisenberg-limit metrology certified at N=3 against an *executed* standard-quantum-limit reference (168σ), the fringe oscillating at exactly 3× the drive
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Finding**: F108 (assigned Ember C4149 per the network numbering role split; design + sim +
 pre-registration + submission + grading Whisper C4668, under the frozen rule. Horizons-3.
 F108 verified unused — F107 was the highest prior.)

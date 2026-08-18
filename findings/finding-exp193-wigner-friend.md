@@ -1,5 +1,7 @@
 # Finding — Exp193: THE FRIEND IN THE MACHINE — observed facts are not absolute until copied (20σ)
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C4886 · **Backend**: ibm_fez · **Job**: `d9e6piineu4c739o3fsg` (8 circuits, 8000 shots).
 Brukner Wigner's-friend Bell test. **All criteria HELD.** Creator go: "fly the 3".
 

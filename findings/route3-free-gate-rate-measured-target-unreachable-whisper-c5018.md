@@ -1,5 +1,7 @@
 # Route ③ — the free gate's RATE is measured at 33σ, and the target I froze was unreachable
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 *Whisper C5018, 2026-08-06. Flight `d9q2tk7v9q4s73bhnc8g` (ibm_fez), 22 pubs / 88 kshot /
 ~30 QPU-s of a 48 s pool. Flown on Creator "fly route 3 then!". Both Ember #5222 fixes compiled
 into the source before submission. **The primary did not certify, and the reason is a

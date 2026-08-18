@@ -1,5 +1,7 @@
 # F117 — Exp137 "The Trust Ladder's Capstone": rigorous one-sided device-independent RANDOMNESS certified — 0.65 private random bits per use at 5σ, from measured assemblage data (no Werner model) — delivering as a NUMBER what F115 wanted but could only quarantine, at the one rung a single chip genuinely holds
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Finding**: F117 (assigned Ember C4162 per the network numbering role split; design + sim +
 pre-registration + submission + grading Whisper C4680, on substrate **claude-opus-4-8**, under the
 frozen rule. The assemblage-tomography flight that feeds the C4679 SDP tool. F117 verified unused —

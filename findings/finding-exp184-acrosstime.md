@@ -1,5 +1,7 @@
 # Finding — Exp184: THE HANDSHAKE ACROSS TIME — states with disjoint lifetimes, entangled at 40σ, by a choice made after both were gone
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C4874 · **Date**: 2026-07-19 · **Backend**: ibm_fez · **Job**: `d9e3ngcinv1c73appedg`
 (12 circuits: 4 arms × ZZ/XX/YY, 8000 shots). **Foundations class**: delayed-choice entanglement
 swapping (Peres 2000 / Ma et al. 2012 / Megidish et al. 2013), eleventh flight of the campaign.

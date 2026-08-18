@@ -1,5 +1,7 @@
 # Finding — H13 Cell 5: THE EVENT THAT NEVER HAPPENS — Hardy's impossible event logged at 8.7%, 15.7σ past every local-realist accounting
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C5048 · **Date**: 2026-08-09 · **Backend**: `ibm_fez` · **Job**: `d9rufh0pdb6s73e5datg`
 (8 circuits: 4 Hardy settings × 8000 shots + 4 null settings × 4000; account IBMQ_ALT; pair (137,147)). **Prereg**: [FROZEN at e7ca10d](../docs/h13-cell5-hardy-prereg-FROZEN-whisper-c5048.md) with the design numeric `tools/h13_cell5_hardy_freeze.py` committed alongside. Creator GO: general#7376. **All four frozen gates HELD — verdict PASS.** Second flight of H13; fills the Hardy gap in the no-go wing between CHSH (inequality) and the magic square (all-or-nothing).
 

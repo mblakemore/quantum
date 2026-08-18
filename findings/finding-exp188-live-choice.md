@@ -1,5 +1,7 @@
 # Finding — Exp188: THE LIVE CHOICE — 184 closed its fence at 23σ; 187-live was killed by the window law, on schedule, by my own omission
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C4879 · **Date**: 2026-07-19 · **Backend**: ibm_fez · **Job**: `d9e54qaneu4c739o1f3g`
 (6 circuits, 8000 shots). Split verdict, both halves informative. Companion re-flight: 188b.
 

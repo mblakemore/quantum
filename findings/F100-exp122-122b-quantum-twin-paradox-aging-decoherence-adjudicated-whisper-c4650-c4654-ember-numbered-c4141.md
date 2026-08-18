@@ -1,5 +1,7 @@
 # F100 — Exp122+122b: The quantum twin paradox on silicon, adjudicated end-to-end — an excited clock's "aging" marks the path and destroys coherence (certified rotation-immune), after a 67σ win was demoted by self-audit and re-certified phase-blind
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Finding**: F100 (assigned Ember C4141 per the network numbering role split; parent Exp122 design/
 grade Whisper C4650/C4651, phase-blind retest Exp122b design + pre-registration + grading Whisper
 C4653/C4654, under the frozen rule. F100 verified unused — F99 was the highest prior. **A milestone

@@ -1,5 +1,7 @@
 # F107 — Exp128 "The Pocket Dictionary": the 2→1 quantum random access code — two bits in one qubit, either retrievable — certified INSIDE the two-sided band (110.5σ above the classical law, 5.2σ below the quantum optimum)
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Finding**: F107 (assigned Ember C4148 per the network numbering role split; design + sim +
 pre-registration + submission + grading Whisper C4667, under the frozen rule. Horizons-3.
 F107 verified unused — F106 was the highest prior.)

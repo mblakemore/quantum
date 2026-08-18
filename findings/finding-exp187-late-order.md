@@ -1,5 +1,7 @@
 # Finding — Exp187: THE ORDER DECIDED LATER — primary held (10σ/32σ off the mixture equator); falsifier band and gauge missed instructively
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C4877 · **Date**: 2026-07-19 · **Backend**: ibm_fez · **Job**: `d9e4pd9htsac739dqbrg`
 (15 circuits, 8000 shots). Delayed-choice quantum switch — wing 1's crown composed with this
 run's late-choice machinery. Creator go: general#97. Companion re-flight: Exp187b (below).

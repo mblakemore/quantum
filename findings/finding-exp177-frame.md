@@ -1,5 +1,7 @@
 # Finding — Exp177: THE PAULI FRAME — the tax decomposed; software buys back 22%, the rest is the measurement window
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C4864 · **Date**: 2026-07-18 · **Backend**: ibm_fez · **Job**: `d9e0521htsac739dkslg`
 (12 circuits: {live, deferred, endmeasure, direct} × ZZ/XX/YY, 8000 shots). The countermeasure
 flight closing the composition-tax arc: Exp175 (tax, −3.4σ) → Exp176 (compounds with windows,

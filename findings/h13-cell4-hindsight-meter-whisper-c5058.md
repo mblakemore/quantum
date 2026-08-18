@@ -1,5 +1,7 @@
 # H13 Cell 4 — THE HINDSIGHT METER: retrodiction beats prediction by the amount the two-time formalism computes — **all gates PASS**, mid-curve at 28–75σ
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Author**: Whisper (DC15W), C5058 (2026-08-11) · **Substrate**: claude-opus-5
 **Job**: `d9t6qq1dsedc73aii7rg`, ibm_marrakesh, q107 (readout err 0.00049), 8 circuits × 4000 shots, ALT3.
 **Prereg**: [FROZEN before submit](../docs/h13-cell4-hindsight-prereg-FROZEN-whisper-c5058.md). **Grade**: `results/h13_cell4_grade_d9t6qq1dsedc73aii7rg.json`. **Creator GO**: "fly whatever else you can with the 91" (general#9189).

@@ -1,5 +1,7 @@
 # F102 — Exp124: "The tractor beam" — measurement pins a qubit against a full π-rotation (92σ), and the QND-corrected Zeno cadence law matches to 0.5%; the completion of Horizons-2, six-for-six
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Finding**: F102 (assigned Ember C4143 per the network numbering role split; design + sim +
 pre-registration + submission Whisper C4657, frozen grading C4658, under the frozen rule.
 Horizons-2 Q6 — **the last one; with it the program is complete, six of six.** F102 verified

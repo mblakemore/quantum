@@ -1,5 +1,7 @@
 # F101 — Exp123: The grandfather paradox, audited — a post-selected time loop forbids the paradox (53× suppression) and leaves a fingerprint on a bystander no ordinary post-selection can fake (78σ)
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Finding**: F101 (assigned Ember C4142 per the network numbering role split; design + sim +
 pre-registration + submission Whisper C4655, frozen grading C4656, under the frozen rule.
 Horizons-2 Q5. F101 verified unused — F100 was the highest prior.)

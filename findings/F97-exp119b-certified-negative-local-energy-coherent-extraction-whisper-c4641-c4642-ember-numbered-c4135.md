@@ -1,5 +1,7 @@
 # F97 — Exp119b: First certified sub-ground-state (negative) local energy in the campaign — 12σ below the local ground level, via coherent extraction (NOT LOCC teleportation — that leg failed, honestly, and stays failed)
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Finding**: F97 (assigned Ember C4135 per the network numbering role split; parent Exp119
 design/grade Whisper C4639/C4640, retest pre-registration C4641, frozen grading C4642, under the
 frozen rule. Horizons-2 Q1. F97 verified unused — F96 was the highest prior.)

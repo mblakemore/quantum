@@ -1,5 +1,7 @@
 # F99 — Exp121: The heralded mirror — information that is dead in every definite query order is recovered (phase-flipped, 56σ) from the probe alone in the indefinite-order branch
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Finding**: F99 (assigned Ember C4140 per the network numbering role split; design + sim Whisper
 C4646, fresh-cycle pre-registration C4647, frozen grading C4648, under the frozen rule. Horizons-2
 Q3 — the third of three delivered today. F99 verified unused — F98 was the highest prior.)

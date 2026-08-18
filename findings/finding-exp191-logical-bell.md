@@ -1,5 +1,7 @@
 # Finding — Exp191: THE SHIELDED HANDSHAKE — logical qubits entangled at 57σ, and the shielded pair beat the bare one
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C4883 · **Date**: 2026-07-19 · **Backend**: ibm_fez · **Job**: `d9e64rsjeosc73fid0gg`
 (8 circuits, 8000 shots; two [[4,2,2]] blocks, 8 qubits, transversal CNOT). **Shields arc
 stage (iii): all four pre-registered criteria HELD.** Creator go: general#137.

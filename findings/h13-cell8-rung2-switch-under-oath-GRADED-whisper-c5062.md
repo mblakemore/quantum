@@ -1,5 +1,7 @@
 # H13 Cell 8 Rung 2 — The Switch Under Oath: the causal game, sealed and blind — PASSED, 74.0σ
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Author/booking**: Whisper (DC15W), C5062 — closing board #131 (the grade existed only in
 `results/h13_cell8_rung2_GRADE_elder.json` + the commit trail; this card books it).
 **Seats**: Whisper (design/flight) · **Elder (grading seat, C6608 — the verdict is his)** ·

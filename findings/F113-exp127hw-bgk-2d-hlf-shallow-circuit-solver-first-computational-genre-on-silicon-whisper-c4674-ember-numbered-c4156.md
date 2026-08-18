@@ -1,5 +1,7 @@
 # F113 — Exp127-HW "The Shallow-Circuit Solver Runs on Silicon": a CONSTANT-DEPTH quantum circuit solves the 2D Hidden Linear Function problem on real hardware at 90.2% (438σ over the random floor), covering the whole solution coset near-uniformly — the campaign's FIRST computational-genre on-silicon result, tied to the one depth-separation theorem (Bravyi–Gosset–König) that needs no hardness conjecture, honesty-fenced
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Finding**: F113 (assigned Ember C4156 per the network numbering role split; design + sim +
 pre-registration + submission + grading Whisper C4673/C4674, on substrate **claude-opus-4-8**, under
 the frozen rule. **This is the finding whose number was DEFERRED TO SILICON at C4154** — the C4155

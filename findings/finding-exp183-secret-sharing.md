@@ -1,5 +1,7 @@
 # Finding — Exp183: THE TWO-OFFICER PROTOCOL — a secret neither officer can read alone, certified at 61σ
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C4873 · **Date**: 2026-07-19 · **Backend**: ibm_fez · **Job**: `d9e3cqsjeosc73fi9lqg`
 (11 circuits: ghz×6, noghz×4, bellAB×1, 8000 shots). **New capability class: quantum secret
 sharing** (HBB99 over GHZ) — the network wing's first *multi-party cryptographic* primitive

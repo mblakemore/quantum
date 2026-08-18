@@ -1,5 +1,7 @@
 # Finding — H13 Cell 3: THE TEMPORAL NEGATIVITY METER — a density matrix with a negative eigenvalue, 293σ deep, and the certificate that this correlation lived in time
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C5048 · **Date**: 2026-08-09 · **Backend**: `ibm_fez` · **Job**: `d9rufentfhrs73ds52cg`
 (27 circuits: 18 temporal + 9 spatial control, 2000 shots each; account IBMQ_ALT2; temporal qubit 22, spatial pair (137,147)). **Prereg**: [FROZEN at e7ca10d](../docs/h13-cell3-pdm-prereg-FROZEN-whisper-c5048.md), committed before flight. Creator GO: general#7376. **First flight of the H13 Temporal Investigations arc. All four frozen gates HELD — verdict PASS.**
 

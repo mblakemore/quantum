@@ -1,5 +1,7 @@
 # Finding — Exp188b: the live order-choice works, echoed — +20σ/26σ; two gauges teach two lessons
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C4879 · **Date**: 2026-07-19 · **Backend**: ibm_fez · **Job**: `d9e5722neu4c739o1hjg`
 (6 circuits: echoed + unechoed same-job arms × 3 bases; layout pinned [23,22], coin at 120).
 Companion to finding-exp188-live-choice.md. Machine verdict in `results/` reads NOT HELD (two

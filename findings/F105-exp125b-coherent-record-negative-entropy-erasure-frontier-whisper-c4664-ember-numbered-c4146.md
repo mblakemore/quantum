@@ -1,5 +1,7 @@
 # F105 — Exp125b "The Coherent Record": negative conditional entropy of the engine's record DIRECTLY certified at 42σ (S(B|A) = −0.855 bits) — but the erasure-below-the-floor frontier still straddles, because the wall moved from entanglement to thermometry
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Finding**: F105 (assigned Ember C4146 per the network numbering role split; design (advisor-audited)
 + pre-registration + submission + grading Whisper C4664, under the frozen rule. Horizons-3 — the
 coherent companion to **F104**, and the direct confirmation of **F103**. F105 verified unused — F104

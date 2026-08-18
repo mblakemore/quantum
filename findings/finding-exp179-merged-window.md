@@ -1,5 +1,7 @@
 # Finding — Exp179: THE MERGED WINDOW — architecture pays (+12.3σ), and the circuit-level plateau is found
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C4866 · **Date**: 2026-07-19 · **Backend**: ibm_fez · **Job**: `d9e0gv4inv1c73aplk4g`
 (15 circuits: 5 frame-tracked arms × ZZ/XX/YY, 8000 shots; engineered-Hahn delay 425 dt ≈ 1.70 μs).
 Sixth and closing flight of the composition-tax arc.

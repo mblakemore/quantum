@@ -1,5 +1,7 @@
 # Finding — Exp176: THE REPEATER CHAIN — the composition tax compounds (dose-response at −9.4σ)
 
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(single submission; window banked in `results/window_rescue_c5075.json`. n=1 is legal — the gate requires that it be STATED, not that it exceed 1.)*
+
 **Cycle**: C4863 · **Date**: 2026-07-18 · **Backend**: ibm_fez · **Job**: `d9e008kinv1c73apkuug`
 (9 circuits: {direct, swap1, swap2} × ZZ/XX/YY, 8000 shots). The dose-response follow-on to
 Exp175's composition tax, designed as a discriminator: does the tax scale with feedforward-window
