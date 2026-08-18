@@ -1,0 +1,53 @@
+{
+ "card": "h15_n4_realtime_neuron",
+ "cycle": "C5075",
+ "pin_simple": {
+  "mismatches": 0,
+  "n": 2048,
+  "alt_accept": 1.0
+ },
+ "pin_optimal": {
+  "mismatches": 0,
+  "n": 2048,
+  "alt_accept": 1.0
+ },
+ "ablation_never": [
+  0
+ ],
+ "ablation_always": [
+  1
+ ],
+ "null_simple": {
+  "accept": 0.53515625,
+  "wilson": [
+   0.5045325083232928,
+   0.5655171958334567
+  ],
+  "theory": 0.53125
+ },
+ "null_optimal": {
+  "accept": 0.466796875,
+  "wilson": [
+   0.4364204783176363,
+   0.4974214677565448
+  ],
+  "theory": 0.47265625
+ },
+ "transpiled": {
+  "ops": {
+   "rz": 40,
+   "sx": 20,
+   "measure": 9,
+   "cz": 4,
+   "barrier": 1,
+   "if_else": 1
+  },
+  "cz": 4,
+  "depth": 13,
+  "n1_reference": {
+   "cz": 28,
+   "depth": 87,
+   "mcm": 1
+  }
+ }
+}
