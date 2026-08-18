@@ -105,8 +105,19 @@ def rescue_one(svc, acct, jid):
             except Exception:
                 pass
         if vals:
-            rec["used_qubits"] = sorted(used)
+            # FIELD NAMING FIXED C5075. This set is every qubit the transpiler TOUCHED
+            # (final_index_layout) — routing and idling qubits included, most of which carry no
+            # classical bit. I originally called it `used_qubits`, and that ambiguity propagated:
+            # another seat built a picker-width law on it, where wide circuits' medians are diluted
+            # by routing qubits the picker never optimised. Same set-selection error I made three
+            # times on my own analyses in one night. `touched_*` says what it is; the MEASURED set
+            # is a different object and must be recovered from the measure instructions.
+            rec["touched_qubits"] = sorted(used)
+            rec["touched_readout"] = {"median": st.median(vals), "max": max(vals)}
+            rec["used_qubits"] = sorted(used)        # deprecated alias, kept so the banked census reads
             rec["used_readout"] = {"median": st.median(vals), "max": max(vals)}
+            rec["SET_WARNING"] = ("touched != measured; for any statistic combining specific bits, "
+                                  "recover the measured set from the circuit's measure instructions")
             if rec.get("device_readout"):
                 rec["quietness_vs_device_median"] = (
                     rec["device_readout"]["median"] / st.median(vals) if st.median(vals) else None)
