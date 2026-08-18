@@ -1,0 +1,38 @@
+{
+ "card": "h15_compensation_design_pass",
+ "cycle": "C5075",
+ "directive": "Creator: 'run the compensation design pass, keep iterating'",
+ "pivot_rediscovery_check": "RUN FIRST this time (the lesson from the previous audit). Found F57 noise-dodge-placement-works and F58 quiet_qubits.py picker - both Elder's, both proven - before designing anything.",
+ "candidate_1_drift_compensation": {
+  "source": "Cell 11 inertial dampener C5018",
+  "verdict": "NOT APPLICABLE",
+  "why": "the dampener compensates DEPTH-accumulated Bloch drift. The redesign is 4 CZ / depth 13 - we removed 85% of the depth, so there is almost nothing for depth-drift to accumulate over. The two levers already captured what compensation would have bought, by deleting the depth rather than correcting it."
+ },
+ "candidate_2_noise_aware_placement": {
+  "source": "F57/F58",
+  "verdict": "ALREADY CAPTURED - honest negative",
+  "measured": "default transpiler placement mean readout 0.0085 / max 0.0153 vs quiet_qubits pick(10,best) mean 0.0102 / max 0.0138. The picker is WORSE on the mean for this circuit because its objective weights internal 2q error and a single objective qubit, while ours is readout-dominated with 8 equally-weighted reads and only 4 CZ. The transpiler was already doing well."
+ },
+ "loss_budget_CLOSES": {
+  "2q_only_0.3pct": 0.0137,
+  "1q_only": 0.0,
+  "readout_only_1pct": 0.0527,
+  "readout_only_2pct": 0.0938,
+  "all_combined_1pct": 0.0664,
+  "measured_hardware": 0.1562,
+  "resolution": "published readout on the FLOWN qubits is 0.85%; F81/weather service measured published readout UNDERSTATES by 3.4x; 0.85 x 3.4 = 2.9% effective -> modelled loss ~0.13 + 2q 0.014 = ~0.145 vs measured 0.156. The budget closes. THE REDESIGNED NEURON IS READOUT-LIMITED at the TRUE drift-inflated rate."
+ },
+ "n_lever_fourth_model": {
+  "note": "the redesign removed the QUADRATIC gate term, so the n-penalty is now set by READS, which scale LINEARLY as 2n",
+  "margins_at_2.9pct": {
+   "3": 0.077,
+   "4": 0.1095,
+   "5": 0.1078,
+   "6": 0.0878,
+   "7": 0.0592
+  },
+  "verdict": "n=4 optimal, n=5 nearly tied, and the curve is FLAT - n is a WEAK lever once readout-limited. The answer is to stop optimising n and attack the reads."
+ },
+ "SELF_CORRECTION": "My audit an hour ago concluded the QPU Weather Service measures 'the wrong currency' (population, not phase) and so could not forecast H15 epoch quality. THAT WAS PREMATURE. It was argued from the sentinel BELL FIDELITY. But the loss budget now shows our dominant term is READOUT, and the weather service's --nowcast measures TRUE LIVE READOUT directly - that is its headline win (caught 2.3% actual vs 0.67% published). So the weather service is matched to our dominant loss after all, via a different one of its outputs than the one I compared.",
+ "conclusion": "There is no cheap DRIFT compensation available for this circuit and no placement gain left. The redesign already captured the compensable loss by deleting depth. What remains is readout, which is a hardware property no in-circuit compensation fixes (post-correction is disallowed - the actuator response IS the claim). The live path forward is epoch selection on a READOUT-matched signal, which the weather nowcast provides for ~2 QPU-s against a ~17 QPU-s flight."
+}
