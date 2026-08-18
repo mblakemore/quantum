@@ -1,0 +1,27 @@
+{
+ "card": "h15_composition_cost_analysis",
+ "cycle": "C5075",
+ "question": "a brain is organs CONNECTED, not enumerated - what does composing them cost? Consulted the composition arc (C4872) rather than assuming.",
+ "arc_findings": {
+  "excess_beyond_product": "0.06 Bell fidelity, -3.4 sigma, COMPOUNDS with feedforward windows (-9.4 sigma dose-response)",
+  "decomposition": {
+   "measurement_window": 0.33,
+   "latency": 0.093,
+   "depth": 0.094
+  },
+  "countermeasures": {
+   "echo_X_per_end_qubit": "+0.293 at 24.8 sigma",
+   "pauli_frame_window_merge": "+0.146 at 12.3 sigma, ZERO added gates"
+  },
+  "warning": "countermeasures OVERLAP - frame-deferral gain shrinks 0.093 -> 0.015 on an echoed chain, so stacks must be priced JOINTLY"
+ },
+ "FINDING_single_neuron_is_immune": {
+  "our_measured_actuation_cost": 0.0104,
+  "arc_window_cost": 0.33,
+  "ratio": "32x smaller",
+  "mechanism": "in a teleport chain the payload held DURING the window is a SUPERPOSITION so window dephasing destroys it (hence 0.330 and hence the echo fix). In our neuron the only qubit alive during the window is the ACTUATOR, sitting in a COMPUTATIONAL BASIS STATE |0> awaiting a conditional X - dephasing does nothing to |0> and T1 decays it toward where it already is.",
+  "consequence": "the 1.04pp we measured is the PREDICTED RESIDUAL, not an unexplained small number. The neuron is ARCHITECTURALLY immune to the dominant composition cost."
+ },
+ "FINDING_immunity_ends_at_composition": "chain TWO organs and the intermediate state IS a superposition during a window -> the 0.330 cost bites and COMPOUNDS per window. A two-organ brain needs the arc countermeasures from the FIRST design draft, priced jointly not summed.",
+ "design_rule": "the single-organ neuron gets its cheap actuation because its in-window payload is CLASSICAL. Any design that makes the in-window payload QUANTUM (organ chaining, quantum-output neurons) forfeits that immunity and must budget the window cost explicitly."
+}
