@@ -1,0 +1,117 @@
+{
+ "card": "window_rescue_multipath_c5075",
+ "cycle": "C5075",
+ "why": "Elder general#13262 \u2014 a class of four windows banked device aggregates and no per-qubit data (the UNEVALUABLE case). The kingston member turned out to be recoverable: the failure was my EXTRACTOR reading final_index_layout on pub[0], not missing data. These circuits are full-width pre-transpiled (layout=identity, indices already physical) and the measured set is spread across many pubs. Multi-path extraction: layout if present, else measure instructions across ALL pubs.",
+ "jobs": {
+  "d9nrh1ssfqic73arcr10": {
+   "account": "IBMQ_ALT2",
+   "backend": "ibm_fez",
+   "created": "2026-08-02 21:37",
+   "n_pubs": 36,
+   "device_readout": {
+    "median": 0.008056640625,
+    "mean": 0.01849991235977564,
+    "max": 0.3082275390625
+   },
+   "used_qubits": [
+    2,
+    22,
+    48,
+    58,
+    84,
+    97,
+    106,
+    107,
+    108,
+    109,
+    110,
+    118,
+    123,
+    124,
+    136,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146
+   ],
+   "used_readout": {
+    "median": 0.0047607421875,
+    "max": 0.015625
+   },
+   "device_mean_over_used_median": 3.885930309007232
+  },
+  "d9nsjacsfqic73ards10": {
+   "account": "IBMQ_ALT2",
+   "backend": "ibm_fez",
+   "created": "2026-08-02 22:50",
+   "n_pubs": 15,
+   "device_readout": {
+    "median": 0.008056640625,
+    "mean": 0.01849991235977564,
+    "max": 0.3082275390625
+   },
+   "used_qubits": [
+    2,
+    22,
+    48,
+    58,
+    84,
+    97,
+    106,
+    107,
+    108,
+    109,
+    110,
+    118,
+    123,
+    136,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146
+   ],
+   "used_readout": {
+    "median": 0.00494384765625,
+    "max": 0.015625
+   },
+   "device_mean_over_used_median": 3.742006964229186
+  },
+  "d9ntia460llc73cagnfg": {
+   "account": "IBMQ_ALT2",
+   "backend": "ibm_fez",
+   "created": "2026-08-02 23:56",
+   "n_pubs": 21,
+   "device_readout": {
+    "median": 0.00830078125,
+    "mean": 0.018539819961939104,
+    "max": 0.294921875
+   },
+   "used_qubits": [
+    50,
+    75,
+    84,
+    114,
+    122,
+    123,
+    124,
+    132,
+    136,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146
+   ],
+   "used_readout": {
+    "median": 0.0045166015625,
+    "max": 0.0126953125
+   },
+   "device_mean_over_used_median": 4.104816354816355
+  }
+ }
+}
