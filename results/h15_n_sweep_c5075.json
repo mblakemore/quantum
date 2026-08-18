@@ -1,0 +1,73 @@
+{
+ "card": "h15_n_sweep",
+ "cycle": "C5075",
+ "note": "n is a FREE DESIGN PARAMETER never examined. Required ALT FALLS with n because the ceiling falls; achievable ALT falls with n because the circuit grows. Closed forms verified at n=2,3,4.",
+ "per_n": {
+  "2": {
+   "ceiling": 0.6875,
+   "support": 7,
+   "null_optimal": 0.4375,
+   "threshold": 0.729906327102483,
+   "required_ALT": 0.8973126542049661,
+   "expected_CZ": 3.0,
+   "helstrom": 0.78125
+  },
+  "3": {
+   "ceiling": 0.609375,
+   "support": 29,
+   "null_optimal": 0.453125,
+   "threshold": 0.6540116538623594,
+   "required_ALT": 0.7611483077247188,
+   "expected_CZ": 6.0,
+   "helstrom": 0.7734375
+  },
+  "4": {
+   "ceiling": 0.55859375,
+   "support": 121,
+   "null_optimal": 0.47265625,
+   "threshold": 0.6040231051293188,
+   "required_ALT": 0.6807024602586376,
+   "expected_CZ": 10.0,
+   "helstrom": 0.763671875
+  },
+  "5": {
+   "ceiling": 0.5302734375,
+   "support": 497,
+   "null_optimal": 0.4853515625,
+   "threshold": 0.575934056341596,
+   "required_ALT": 0.637219675183192,
+   "expected_CZ": 15.0,
+   "helstrom": 0.75732421875
+  },
+  "6": {
+   "ceiling": 0.515380859375,
+   "support": 2017,
+   "null_optimal": 0.492431640625,
+   "threshold": 0.5611037544425478,
+   "required_ALT": 0.6146391495100956,
+   "expected_CZ": 21.0,
+   "helstrom": 0.7537841796875
+  },
+  "7": {
+   "ceiling": 0.50775146484375,
+   "support": 8129,
+   "null_optimal": 0.49615478515625,
+   "threshold": 0.553490511212726,
+   "required_ALT": 0.6031358075817019,
+   "expected_CZ": 28.0,
+   "helstrom": 0.751922607421875
+  },
+  "8": {
+   "ceiling": 0.5038909912109375,
+   "support": 32641,
+   "null_optimal": 0.4980621337890625,
+   "threshold": 0.549634149902428,
+   "required_ALT": 0.5973304335939185,
+   "expected_CZ": 36.0,
+   "helstrom": 0.7509689331054688
+  }
+ },
+ "crude_fit": "survival^CZ calibrated to a single point (n=4, ALT=0.75) -> base 0.9716/CZ. Margins: n=3 +0.080, n=4 +0.069, n=5 +0.012, n=6 -0.068. CRUDE: one point, no phase-turbulence term, ignores that readout count also scales with n.",
+ "epoch_sensitivity": "at a 0.875 epoch n=4/5/6 all clear comfortably; at 0.75 only n=3/4 clear; at 0.625 none clear at any n - epoch quality dominates the n choice",
+ "court_question": "a win at n=3 is a SMALLER separation (Helstrom-minus-ceiling 0.164 vs n=4's 0.205). Whether that weakens the claim is a scientific judgement for the theorem seat, not a numerical optimisation."
+}
