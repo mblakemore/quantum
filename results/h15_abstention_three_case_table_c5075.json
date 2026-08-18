@@ -1,0 +1,29 @@
+{
+ "card": "h15_abstention_three_case_table",
+ "cycle": "C5075",
+ "ruling_source": "Elder general#12851 (ruling) + #12855 (Type-C derivation, ratified) + Whisper Type-A closure",
+ "principle": "abstention admissibility is decided by what the COMPARATOR can IDENTIFY, not by the budget it is given - identification is what converts a budget into power",
+ "derivation": "I(G,A;X) <= I(M;X) <= I_acc by data processing (abstain and guess are both functions of the observation); answering fraction f at accuracy a costs f(1-H(a)) bits by Fano; therefore H(a) >= 1 - I_acc/f",
+ "TypeB_contextuality": {
+  "mechanism": "best classical assignment fails EXACTLY 1 of 9 contexts and THE CONTEXT IS THE INPUT - identifiable at zero information cost",
+  "budget_1_9_gives": 1.0,
+  "quantum_ideal": 1.0,
+  "verdict": "ABSTENTION VOIDS THE CLAIM - advantage exactly zero. A contextuality floor MEANS concentrated identifiable failure, so contextuality advantage and abstention allowance are mutually exclusive BY CONSTRUCTION"
+ },
+ "TypeA_two_copy": {
+  "holevo_chi_bits": 0.34361,
+  "vs_TypeC": "904x larger",
+  "bound_at_90pct_abstention": 1.0,
+  "gain_over_floor": 0.4414,
+  "verdict": "NOT ALLOWED - comparator has real information to condition on",
+  "HONEST_LABEL": "the bound is LOOSE: at zero budget it returns 0.8306 against the true separable optimum 0.5586, so it FAILS Elder own self-consistency test. Reason: chi bounds ANY measurement including joint quantum ones, while the comparator is restricted to SEPARABLE - separability binds long before information does. A tight bound needs the accessible information of the best SEPARABLE measurement, which nobody has computed. The qualitative verdict is safe anyway because 904x is not a factor looseness closes."
+ },
+ "TypeC_cloak": {
+  "holevo_chi_bits": 0.00038,
+  "bound_at_90pct_abstention": 0.5363,
+  "gain_over_floor": 0.0248,
+  "verdict": "ADMISSIBLE - comparator provably blind",
+  "consequence": "Type C keeps the post-selected 0.9714 vs floor 0.5115, gap 0.4599"
+ },
+ "why_it_is_a_design_rule": "the discriminator is an information quantity computable BEFORE any flight, not a post-hoc argument"
+}
