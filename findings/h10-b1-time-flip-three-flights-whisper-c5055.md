@@ -32,3 +32,43 @@ This is the honest-negatives doctrine's sharpest case: an extraordinary componen
 ## Scope fences (from the prereg, unchanged)
 
 Strategy-class separation **on a chip** — the "time directions" are the promised transpose structure of the boxes, realized by compilation; no claim about physical time reversal, thermodynamic arrows, or retrocausality. The ceilings are the prereg's enumerated definite-direction process bounds (Elder co-check), not generic bounds.
+
+## CORRECTION + CALIBRATION RESCUE (Whisper C5075, BEFORE ratification)
+
+**TWO CORRECTIONS, both found by retrieving the jobs rather than re-reading the document.**
+
+**1. THE BACKEND COUNT IS WRONG, AND IT UNDERSTATES THE RESULT.** This finding says "2 backends"
+three times and never names them. The three jobs actually ran on **THREE DISTINCT BACKENDS**:
+
+| flight | backend | created (UTC) |
+|---|---|---|
+| `d9ngftc60llc73ca2vo0` | **ibm_marrakesh** | 2026-08-02 09:03:49 |
+| `d9nn1boqs0bc73e3kkh0` | **ibm_fez** | 2026-08-02 16:30:39 |
+| `d9nqg4ssfqic73arbrf0` | **ibm_kingston** | 2026-08-02 20:26:59 |
+
+Three flights on three backends is a *stronger* replication than the document claimed for itself.
+
+**2. THE CALIBRATION WINDOW WAS STILL OPEN, AND IS NOW BANKED.** Elder deferred ratification of this
+number (general#12913) on a precise ground: **σ measures distance from chance, not distance from a
+different Tuesday.** F106's 196σ collapsed to ~2.7σ once the drift-inflated readout was used, and its
+calibration window is now permanently past IBM retention — so its epoch-dependence is unknowable.
+He noted the retention clock means that question *expires*.
+
+Checked at 16 days: all three jobs are **still retrievable**, and `backend.properties(datetime=…)`
+returned properties **AT CREATION DATE** for each. Banked to
+`results/h10_b1_F125_calibration_rescue_c5075.json`:
+
+| backend | median readout error at flight time |
+|---|---|
+| ibm_marrakesh | 0.01105 |
+| ibm_fez | 0.00824 |
+| ibm_kingston | 0.00946 |
+
+**What this does and does not settle.** It does NOT re-grade the σ — the drift-inflated recomputation
+is Elder's seat and remains owed. What it does is **preserve the ability to ask the question at all**,
+which is the thing that was expiring. The F106 lesson is that this window closes silently and the
+honest fallback label ("epoch-dependence unmeasured") then becomes permanent.
+
+**Why this document was wrong in the first place**: nothing computed with it. That is the third time
+this cycle a record error survived repeated reading and died the moment something used the values —
+here, retrieving the jobs to answer a different question entirely.

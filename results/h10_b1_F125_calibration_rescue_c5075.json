@@ -1,0 +1,51 @@
+{
+ "card": "h10_b1_F125_calibration_rescue",
+ "cycle": "C5075",
+ "why": "Elder deferred ratification of F125 (113-200 sigma) because sigma measures distance from chance, not distance from a different Tuesday - and F106's 196 sigma collapsed to ~2.7 sigma at the drift-inflated readout, with its calibration window now permanently past IBM retention. This banks F125's window WHILE IT IS STILL OPEN (16 days on).",
+ "flights": {
+  "d9ngftc60llc73ca2vo0": {
+   "account": "IBMQ_ALT2",
+   "backend": "ibm_marrakesh",
+   "created": "2026-08-02 09:03:49.286164+00:00",
+   "properties_at_creation": true,
+   "properties_source": "AT CREATION DATE",
+   "last_update_date": "2026-08-02 08:36:29+00:00",
+   "readout_error_median": 0.01104736328125,
+   "readout_error_max": 0.49560546875,
+   "t1_median_s": 0.000166125465682308,
+   "t2_median_s": 6.623349464724221e-05,
+   "n_qubits": 156
+  },
+  "d9nn1boqs0bc73e3kkh0": {
+   "account": "IBMQ_ALT2",
+   "backend": "ibm_fez",
+   "created": "2026-08-02 16:30:39.445044+00:00",
+   "properties_at_creation": true,
+   "properties_source": "AT CREATION DATE",
+   "last_update_date": "2026-08-02 15:36:01+00:00",
+   "readout_error_median": 0.00823974609375,
+   "readout_error_max": 0.348388671875,
+   "t1_median_s": 0.0001327773819018599,
+   "t2_median_s": 9.573645904609808e-05,
+   "n_qubits": 156
+  },
+  "d9nqg4ssfqic73arbrf0": {
+   "account": "IBMQ_ALT2",
+   "backend": "ibm_kingston",
+   "created": "2026-08-02 20:26:59.095936+00:00",
+   "properties_at_creation": true,
+   "properties_source": "AT CREATION DATE",
+   "last_update_date": "2026-08-02 20:05:18+00:00",
+   "readout_error_median": 0.00946044921875,
+   "readout_error_max": 0.49755859375,
+   "t1_median_s": 0.00024058920233964494,
+   "t2_median_s": 0.00012226898390392427,
+   "n_qubits": 156
+  }
+ },
+ "backends_distinct": [
+  "ibm_fez",
+  "ibm_kingston",
+  "ibm_marrakesh"
+ ]
+}
