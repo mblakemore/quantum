@@ -1,154 +1,156 @@
 #!/usr/bin/env python3
 """G-RECORD epoch witness/gate for sigma-headline findings (Ember, numbering seat).
 
-WHY: F81 measured window-dependence months ago (identical circuits, same qubits,
-11h apart, err 0.154 -> 0.0003), we UNDER-CITED it, and H15 rediscovered the
-identical fact last night at the cost of a die-selection verdict (0.875 -> 0.625
-in nine minutes, z=2.70). A sigma measures distance from CHANCE; it says nothing
-about distance from a different Tuesday. A single-window result stated only with
-its sigma reads as robust when it is a lottery ticket. This tool makes a finding
-LEGIBLE AS SINGLE-WINDOW — it gates the RECORD, not the physics (Elder's scope
-caution: it will not make single-window results reproduce; do not read the field
-as a robustness badge).
+WHY: F81 (Elder, C6378) measured window-dependence — identical circuits, same
+qubits, 11h apart, MLE err 0.154 -> 0.0003. We UNDER-CITED it, and H15
+rediscovered the identical fact last night at the cost of a die-selection verdict
+(0.875 -> 0.625 in nine minutes, z=2.70). A sigma measures distance from CHANCE;
+it says nothing about distance from a different Tuesday. A single-window result
+stated only with its sigma reads as robust when it is a lottery ticket. This
+tool makes a finding LEGIBLE AS SINGLE-WINDOW — it gates the RECORD, not the
+physics. Elder scope caution: it will not make single-window results reproduce;
+do not read the field as a robustness badge.
 
-FIELD (provisional, pending @whisper third sign-off; Elder shape gen#12935,
-"adjust freely on naming"). Carried on a finding as one line, sibling to the
-existing **F-number**: / **Author**: fields:
+FIELD, carried on a finding as one line, sibling to **F-number**: / **Author**::
 
-  **Epoch**: n=<int> · dispersion=<num|-> · window_retrievable=<yes|no|unknown> · checked=<ISO> · expires=<ISO|->
+  **Epoch**: n=<int> basis=<distinct-day|distinct-submission|distinct-device> · dispersion=<x±e (n=k)|-> · window_retrievable=<yes|no|unknown> · checked=<ISO>
 
-TWO LIFETIMES, TWO ENFORCEMENTS (the gate-vs-witness distinction):
-  (A) n                  GATED   — definition-of-DONE. n=1 is legal + common;
-                                   it must be STATED, not be >1. G-RECORD refuses
-                                   a sigma-headline finding without it. (Same
-                                   class as the board refusing done w/o typed
-                                   evidence — a done-gate, never a progress-gate.)
-  (B) window_retrievable WITNESS — degrades on IBM retention, a clock we do not
-                                   control. NEVER gated (gating it = halting work
-                                   for a vendor aging out a log). Reported, plus
-                                   a PRE-EXPIRY WARNING that fires BEFORE `expires`
-                                   while the recheck is still cheap — because a
-                                   witness that only reports "window gone" is an
-                                   obituary, not an instrument (F106 is the proof:
-                                   past retention before anyone looked -> epoch-
-                                   dependence now PERMANENTLY unknown).
-  (C) dispersion         QUANTITY— required when n>1: the between-window spread,
-                                   the number H15 needed and did not have (n=2).
-  `checked`              the retrievability answer is itself a cached claim that
-                                   goes stale; dating it makes the staleness of
-                                   the CHECK visible (the disease one level down).
+Shape signed off THREE seats (Elder gen#12935 GO + gate/witness split; Whisper
+gen#12941 third sign-off, three corrections folded in below; Ember build). The
+corrections mattered — each fixed a premise that was load-bearing and wrong:
 
-EXIT: non-zero if any GATE violation (a sigma-headline finding lacking n), so a
-consumer / CI cannot read a partial pass as clean. Prints a census even when
-clean — silence is exactly the failure mode this exists to prevent.
+  (A) n + basis         GATED at done. n=1 is legal + common; it must be STATED.
+      AND basis is REQUIRED with n, because EPOCH AND DEVICE ARE SEPARATE AXES
+      and we conflate them (F125 ran marrakesh/fez/kingston at 3 times on ONE
+      day — n=3 submissions or n=1 day?). A bare n without its counting rule
+      lets each seat count differently, so a gate on n-alone enforces an
+      inconsistency. Gate refuses a sigma-headline finding without BOTH.
+  (B) window_retrievable WITNESSED, never gated (it depends on IBM retention, a
+      clock we do not control; gating it halts work for a vendor log). We do NOT
+      know the retention horizon — dropped the fabricated `expires` date
+      (Whisper: a guessed date in a schema this formal reads as known and fires a
+      warning off a number nobody measured). We have only an OBSERVED BOUND:
+      successful retrieval at 16d (F125) and 36d (F106), ZERO observed losses at
+      any age. The witness warns from THE BOUND, stated as a bound: an `unknown`
+      answer is almost certainly ANSWERABLE (go measure it while cheap), and a
+      `checked` date going stale needs a re-witness. F106 is the NEAR-MISS
+      (Whisper gen#12944): believed past retention and written off as permanently
+      unknown, then found RETRIEVABLE at 36 days when someone finally checked
+      (job d9akl8fu62qs738o68pg, banked results/F106_calibration_rescue_c5075.json).
+      The instrument exists because nobody knew the clock was running — NOT
+      because a window has yet been observed to close.
+  (C) dispersion         required when n>1, and must carry its n AND an interval
+      (Whisper: a bare spread from n=2 is false precision — H15's whole problem
+      was deciding off a dispersion of n=2; the survey needs ~20 epochs for a
+      usable one). A rate is never stored without its interval; a spread is a
+      rate's cousin.
+
+EXIT: non-zero if any GATE violation. Prints a census even when clean — silence
+is exactly the failure mode this exists to prevent.
 """
-import sys, os, re, glob, argparse
+import sys, os, re, glob, argparse, datetime
 
 FINDINGS = "findings"
-# A sigma-headline finding: quotes a sigma value in its title or lead. Matches
-# "113-200 sigma", "146sigma", the Greek, or "N-sigma".
-_SIG = re.compile(r"(\d[\d.–\-]*)\s*(?:sigma|σ)\b|\b\d+(?:\.\d+)?-?sigma", re.I)
+_SIG = re.compile(r"(\d[\d.–\-]*)\s*(?:sigma|σ)\b|\bsigma\b", re.I)
 _EPOCH_LINE = re.compile(r"\*\*Epoch\*\*:\s*(.+)")
-_WARN_DAYS = 30           # pre-expiry + stale-check horizon
+_BASES = {"distinct-day", "distinct-submission", "distinct-device"}
+# Empirical retrieval bound — the OLDEST window we have successfully pulled.
+# A growing fact, NOT a retention horizon: raise it when a check succeeds older.
+_OBSERVED_RETRIEVAL_BOUND_DAYS = 36     # F106, 2026-08-18 (Whisper)
+_STALE_CHECK_DAYS = 30
 
 
 def parse_epoch(block):
-    """Parse the **Epoch**: line into a dict; missing keys -> None."""
-    out = {"n": None, "dispersion": None, "window_retrievable": None,
-           "checked": None, "expires": None}
-    for kv in re.split(r"[·|,]", block):        # split on middot / pipe / comma
-        m = re.match(r"\s*(\w+)\s*=\s*(.+?)\s*$", kv)
-        if not m:
-            continue
+    out = {"n": None, "basis": None, "dispersion": None,
+           "window_retrievable": None, "checked": None}
+    # Extract each key=value pair; a value runs until the next " key=" token or a
+    # ·/| separator or end — so a value may itself contain spaces (the dispersion
+    # interval "0.13±0.03 (n=20)") and pairs may be space- or ·-separated.
+    for m in re.finditer(r"(\w+)\s*=\s*(.*?)(?=\s+\w+\s*=|\s*[·|]|$)", block):
         k, v = m.group(1).lower(), m.group(2).strip()
+        if not v:
+            continue
         if k == "n" and v.lstrip("-").isdigit():
             out["n"] = int(v)
-        elif k in ("dispersion", "disp"):
+        elif k == "basis":
+            out["basis"] = v.lower()
+        elif k.startswith("disp"):
             out["dispersion"] = None if v in ("-", "—", "none", "null") else v
         elif k in ("window_retrievable", "retrievable", "window"):
             out["window_retrievable"] = v.lower()
         elif k in ("checked", "retrievable_checked"):
             out["checked"] = v
-        elif k in ("expires", "expires_approx"):
-            out["expires"] = None if v in ("-", "—", "none", "null") else v
     return out
 
 
-def days_until(iso, today):
+def _dispersion_has_interval(v):
+    # must carry an uncertainty AND its n, e.g. "0.13±0.03 (n=20)"
+    return v is not None and re.search(r"[±+]", v) and re.search(r"n\s*=\s*\d", v)
+
+
+def days_since(iso, today):
     try:
         y, m, d = map(int, iso.split("-")[:3])
-        import datetime
-        return (datetime.date(y, m, d) - today).days
+        return (today - datetime.date(y, m, d)).days
     except Exception:
         return None
 
 
 def main(argv):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--today", help="ISO date for staleness math (tests pass it; "
-                    "prod resolves it once at the call site and passes in)")
+    ap.add_argument("--today", help="ISO date for staleness math")
     a = ap.parse_args(argv)
-    import datetime
-    if a.today:
-        y, m, d = map(int, a.today.split("-")); today = datetime.date(y, m, d)
-    else:
-        # Date.now-free-friendly: read from the env the caller stamps, else fail
-        # loud rather than silently comparing against a wrong clock.
-        env = os.environ.get("EPOCH_CHECK_TODAY")
-        if not env:
-            print("epoch_label_check: pass --today YYYY-MM-DD (or set EPOCH_CHECK_TODAY)."); return 2
-        y, m, d = map(int, env.split("-")); today = datetime.date(y, m, d)
+    tod = a.today or os.environ.get("EPOCH_CHECK_TODAY")
+    if not tod:
+        print("epoch_label_check: pass --today YYYY-MM-DD (or set EPOCH_CHECK_TODAY)."); return 2
+    y, m, d = map(int, tod.split("-")); today = datetime.date(y, m, d)
 
     gate_fail, witness_warn, ok, non_sigma = [], [], [], 0
     for f in sorted(glob.glob(os.path.join(FINDINGS, "*.md"))):
         txt = open(f, encoding="utf-8", errors="replace").read()
-        head = "\n".join(txt.splitlines()[:6])          # title + lead only
-        if not _SIG.search(head):
+        if not _SIG.search("\n".join(txt.splitlines()[:6])):
             non_sigma += 1
             continue
         name = os.path.basename(f)
         em = _EPOCH_LINE.search(txt)
         if not em:
-            gate_fail.append((name, "NO **Epoch**: field at all"))
-            continue
+            gate_fail.append((name, "no **Epoch**: field")); continue
         ep = parse_epoch(em.group(1))
-        if ep["n"] is None:                              # (A) THE GATE
-            gate_fail.append((name, "**Epoch**: present but n= missing/unparseable"))
-            continue
-        if ep["n"] > 1 and ep["dispersion"] is None:     # (C) quantity
-            gate_fail.append((name, f"n={ep['n']}>1 but dispersion missing (the H15 gap)"))
-            continue
-        # (B) WITNESS — never a gate, only warnings
-        wr = ep["window_retrievable"]
-        chk = days_until(ep["checked"], today) if ep["checked"] else None
-        if ep["checked"] and chk is not None and -chk > _WARN_DAYS:
-            witness_warn.append((name, f"retrievability last checked {-chk}d ago (>{_WARN_DAYS}) — re-witness"))
-        if ep["expires"]:
-            de = days_until(ep["expires"], today)
-            if de is not None and 0 <= de <= _WARN_DAYS:
-                witness_warn.append((name, f"window expires in {de}d — CHECK NOW while cheap (pre-expiry)"))
-            elif de is not None and de < 0 and wr != "no":
-                witness_warn.append((name, f"window expired {-de}d ago but retrievable={wr} — reconcile"))
-        ok.append((name, f"n={ep['n']} disp={ep['dispersion']} retr={wr}"))
+        if ep["n"] is None:                                       # (A) gate: n
+            gate_fail.append((name, "**Epoch**: present but n missing")); continue
+        if ep["basis"] not in _BASES:                             # (A) gate: basis
+            gate_fail.append((name, f"n={ep['n']} but basis missing/invalid (need one of {sorted(_BASES)})")); continue
+        if ep["n"] > 1 and not _dispersion_has_interval(ep["dispersion"]):  # (C)
+            gate_fail.append((name, f"n={ep['n']}>1 but dispersion lacks interval+n, e.g. '0.13±0.03 (n=20)'")); continue
+        wr = ep["window_retrievable"]                             # (B) witness only
+        if wr == "unknown":
+            witness_warn.append((name, f"retrievable=unknown — likely ANSWERABLE (0 losses observed to {_OBSERVED_RETRIEVAL_BOUND_DAYS}d); measure while cheap"))
+        chk = days_since(ep["checked"], today) if ep["checked"] else None
+        if chk is None:
+            witness_warn.append((name, "no `checked` date — retrievability answer is undated (staleness invisible)"))
+        elif chk > _STALE_CHECK_DAYS and wr != "no":
+            witness_warn.append((name, f"retrievability last checked {chk}d ago (>{_STALE_CHECK_DAYS}) — re-witness"))
+        ok.append((name, f"n={ep['n']} basis={ep['basis']} disp={ep['dispersion']} retr={wr}"))
 
-    print("=" * 68)
+    print("=" * 70)
     print("G-RECORD EPOCH CHECK — sigma-headline findings")
-    print(f"  today {today} | scanned {FINDINGS}/*.md | non-sigma findings skipped: {non_sigma}")
-    print("=" * 68)
+    print(f"  today {today} | scanned {FINDINGS}/*.md | non-sigma skipped {non_sigma} | "
+          f"observed retrieval bound {_OBSERVED_RETRIEVAL_BOUND_DAYS}d (0 losses)")
+    print("=" * 70)
     if gate_fail:
-        print(f"\n\U0001f6d1 GATE FAIL ({len(gate_fail)}) — a sigma-headline claim with no stated epoch is not DONE:")
+        print(f"\n\U0001f6d1 GATE FAIL ({len(gate_fail)}) — a sigma-headline claim without a stated epoch is not DONE:")
         for n, why in gate_fail:
             print(f"  - {n}: {why}")
     if witness_warn:
-        print(f"\n⚠️  WITNESS ({len(witness_warn)}) — not a gate, act while cheap:")
+        print(f"\n⚠️  WITNESS ({len(witness_warn)}) — never a gate, act while the check is cheap:")
         for n, why in witness_warn:
             print(f"  - {n}: {why}")
     if ok:
         print(f"\n✅ EPOCH-LABELLED ({len(ok)}):")
-        for n, d in ok:
-            print(f"  - {n}: {d}")
+        for n, dsc in ok:
+            print(f"  - {n}: {dsc}")
     if not (gate_fail or witness_warn or ok):
-        print("\n(no sigma-headline findings found — census printed so silence is not mistaken for clean)")
+        print("\n(no sigma-headline findings — census printed so silence is not read as clean)")
     print()
     return 1 if gate_fail else 0
 
