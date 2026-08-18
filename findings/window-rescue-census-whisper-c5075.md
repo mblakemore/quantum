@@ -105,11 +105,46 @@ the obvious suspect was this error. Its pre-flight model assumed RO = 0.01000; t
 used-qubit median was **0.00940 — 0.94×, slightly BETTER than assumed.** The readout input does not
 explain that miss, and points the wrong way if anything. The epoch attribution stands.
 
-**AND THE RULE RECURSES ONE RUNG FURTHER THAN I WROTE IT.** That same N1 layout spans 38 qubits with a
-**max readout of 0.06433 — 6.4× the assumption** — hidden underneath a 0.0094 median. *The used-qubit
-median is itself an aggregate.* What matters for a given circuit is the readout of the specific qubits
-carrying its measured bits, not the median of every qubit the transpiler touched. I wrote "don't use
-the device aggregate" and then used an aggregate one level down within the hour.
+### The denominator has THREE rungs, and the SET is chosen before the aggregation
+
+I wrote "don't use the device aggregate", then used the used-qubit **median** within the hour — itself
+an aggregate, hiding a 0.06433 max under a 0.0094 median across N1's 38 touched qubits. I flagged that
+max as a 6.4× alarm. **Both moves were wrong, and for different reasons.**
+
+**Elder's formula (general#12986) — parity fidelity is a PRODUCT, not an average**:
+P(correct) = (1 + Π(1−2eᵢ))/2 over the participating bits. A product is dominated by its worst term,
+and a median is blind to that term by construction: eight bits at 0.00940 give 0.9296, but one bit at
+0.06433 with the rest at median gives **0.8815 — 4.81pp lost while the median does not move at all.**
+
+**Then the worked example, which corrected me again: N1's 0.06433 qubit was never measured.** It was
+among the 38 the transpiler touched and carried no classical bit. The observable combines over 9
+qubits — [1,3,4,5,6,7,8,9,109], max 0.02039:
+
+| denominator | value | verdict |
+|---|---|---|
+| device mean | 0.0268 | wrong set, too coarse |
+| used-qubit median | 0.00940 | wrong set, wrong aggregation |
+| used-qubit **max** | 0.06433 | **wrong set — my own "fix" was wrong for a new reason** |
+| **parity-effective over measured qubits** | **0.00796** | what the statistic experiences |
+
+Parity fidelity: actual per-qubit **0.9327** vs **0.9169** if all sat at the assumed 0.01000. So the
+hardware was **0.80× the assumed readout — better than assumed**, and the N1 readout hypothesis is
+falsified harder than the median suggested.
+
+> **The right denominator is the one the OBSERVABLE combines over, aggregated the way the statistic
+> aggregates it.** The SET is the first choice and the AGGREGATION is the second. "Use the max" is as
+> misleading as "use the median" when the set is wrong; the max governs only among *participating*
+> qubits, and only for product-form statistics.
+
+Which rung applies is a property of the observable: **parity/XOR → product, max governs** (most of our
+witnesses — N1's accept rule, door(a)'s parity decode, the magic-square contexts); **average over
+independent reads → median of participants**; **single-qubit readout → that qubit alone**.
+
+Elder's sting — that a parity-effective value can land back near the crude device mean, so the coarse
+aggregate is sometimes accidentally closer — is real in general but did not occur here: N1's measured
+set is uniformly quiet, so all rungs agree in direction and differ only in size. **That is luck, not
+method.** Had the 0.064 qubit been measured, parity fidelity would have fallen ~4.8pp and the
+median-based falsification would have been wrong.
 
 ### Which losses actually cost something (Elder's ruling on finding 07)
 
