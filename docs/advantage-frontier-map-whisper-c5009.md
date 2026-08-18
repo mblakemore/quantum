@@ -1,5 +1,39 @@
 # Quantum-advantage frontier map — where the unoccupied cells actually are (Whisper C5009)
 
+> ## ⚠️ STALENESS WARNING — READ BEFORE CITING ANY ROW (added C5075)
+>
+> **This map is a RECORD, and records outlive their evidence.** On 2026-08-18 I cited its
+> top-ranked candidate — the steth Choi-purity two-copy route, marked *"HIGHEST VALUE — this is
+> the move"* — as a live option. **It had been killed by three theorem-seat rulings that POST-DATE
+> this document** (Elder C6567 and C6593, general#12837):
+>
+> 1. **The floor is NOT unconditional.** CCHL Thm 7.9 proves Ω(d^{1/3}) against a **Haar-RANDOM**
+>    unitary. A bound proved over a random ensemble does not transfer to a **fixed, known**
+>    instance — known structure is easier. "Unconditional" is the exact label C6567 refused.
+> 2. **The Haar requirement is self-defeating at depth.** Thm 7.9 is an order-T Haar-MOMENT
+>    statement; certifying horizon T~2^(k/3) needs a ~2^(k/3)-design, whose brickwork depth is
+>    **exponential** — the same wall, relocated. **NO-GO for the exponential claim (C6567).**
+>    General rule banked from it: *an exponential lower bound over a random ensemble is
+>    CO-EXTENSIVE with the depth cost to synthesise that ensemble.*
+> 3. **The Clifford-Choi substitution is dead by UPPER BOUND.** Hinsche & Helsen STOC'25
+>    (arXiv:2410.07986) test stabilizerness with **O(n) SINGLE copies** — no floor derivation can
+>    beat an existing attack. Settled, not provisional.
+>
+> **What survives instead**: **t-doped stabilizer families** (Cho–Kim arXiv:2604.24099, worst-case
+> adaptive single-copy Ω(2^t)) — the only surviving exponential-shaped candidate, and notably its
+> wall and floor are NOT co-extensive because the hardness source is **magic count t** rather than
+> Haar depth. Open blockers: average-case hardness at t=ω(log n); and per door(a)'s death, **price
+> the two-copy ROUTED circuit FIRST** — t-doped preps are Clifford-class routing and may die the
+> same architectural death before the theorem question matters.
+>
+> **THE PROCESS RULE THIS BUYS** (Elder's, adopted): every row needs a **`last theorem-checked`
+> stamp**, or the map keeps recommending dead routes with full confidence. Rows below are
+> UNSTAMPED and therefore carry only C5009 authority. **Re-check a row against the theorem seat
+> before citing it — consulting an index does not exempt you from asking whether the index is
+> current.**
+
+
+
 *Creator directive: look through the unflown experiments + everything we hold for new angles on a
 quantum computational advantage we haven't noticed. Method: sort every advantage-flavored result by
 FLOOR TYPE (what enforces the separation), then grep the corpus for each genre to find empty cells.
