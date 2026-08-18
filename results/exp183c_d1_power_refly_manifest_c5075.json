@@ -1,0 +1,54 @@
+{
+ "exp": "183c",
+ "slug": "d1_power_refly",
+ "backend": "ibm_fez",
+ "shots": 50000,
+ "account": "IBMQ_ALT5",
+ "job_id": "da28lau3kjvs7387k2f0",
+ "initial_layout": [
+  137,
+  147,
+  146
+ ],
+ "seed_transpiler": 1837,
+ "order": [
+  [
+   "base",
+   "XXX"
+  ],
+  [
+   "base",
+   "XYY"
+  ],
+  [
+   "base",
+   "YXY"
+  ],
+  [
+   "base",
+   "YYX"
+  ],
+  [
+   "base",
+   "XXY"
+  ],
+  [
+   "base",
+   "XYX"
+  ],
+  [
+   "base",
+   "YXX"
+  ],
+  [
+   "base",
+   "YYY"
+  ]
+ ],
+ "prereg": "docs/exp183c-d1-power-refly-PREREG-whisper-c5075.md",
+ "authorization": "Creator this session on the bus: exp183b D1 on ALT5 \u2014 single-use, consumed here",
+ "mde_declared_in_advance": 0.0197,
+ "residual_at_design_time": 0.0248,
+ "arm_b_deliberately_not_flown": "G2 requires the anomaly present at >=0.05; it measured 0.0248, so an intervention on an absent phase is untestable at ANY shot count",
+ "CUSTODY_NOTE": "the submit inherited exp183b output paths from the copied script and OVERWROTE exp183b_permutation_court_manifest.json. Restored from git (job d9umb3gu5hac73ahdp4g, 8000 shots, 14 circuits) and the script redirected. This manifest was reconstructed from the submit log; the job id and layout are the flown values."
+}
