@@ -1,0 +1,19 @@
+{
+ "card": "exp183b_residual_census",
+ "opened": "2026-08-18",
+ "why": "distinguish OSCILLATION from WALK-PAST in the exp183 sector residual. Until 3-4 dated points exist, D1 is deferred-or-closed and neither can be asserted \u2014 reporting deferred holds a consumed GO open for a window that may not be coming.",
+ "measurements": [
+  {
+   "date": "2026-07",
+   "residual": 0.099,
+   "source": "exp183 July, mean |E3| single-Y sectors"
+  },
+  {
+   "date": "2026-08-18",
+   "residual": 0.0248,
+   "source": "exp183b decode, job d9umb3gu5hac73ahdp4g"
+  }
+ ],
+ "decision_rule_frozen_2026_08_18": "re-open D1 only when >=3 dated points show the residual OSCILLATING AND a current reading exceeds 0.0494 (the MEASURED MDE, not the round 0.05 first stated). A single reading above 0.05 is NOT sufficient \u2014 that is the n=2 error again.",
+ "cost": "$0 \u2014 the residual is computable from any flight that touches this sector"
+}

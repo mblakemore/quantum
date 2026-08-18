@@ -1,0 +1,31 @@
+{
+ "card": "retention_reprobe",
+ "baseline_all_retrievable_on": "2026-08-18",
+ "results": {
+  "d9b": {
+   "job": "d9b9fvvu62qs738ov860",
+   "flown": "2026-07-14",
+   "retrievable": true,
+   "account": "IBMQ_TOKEN"
+  },
+  "d9c": {
+   "job": "d9c8047550hc73dl1ap0",
+   "flown": "2026-07-16",
+   "retrievable": true,
+   "account": "IBMQ_TOKEN"
+  },
+  "d9d": {
+   "job": "d9dctekinv1c73aot06g",
+   "flown": "2026-07-18",
+   "retrievable": true,
+   "account": "IBMQ_TOKEN"
+  },
+  "CONTROL_recent": {
+   "job": "da1r7reg52gs73cm0rgg",
+   "flown": "2026-08-18",
+   "retrievable": true,
+   "account": "IBMQ_ALT5"
+  }
+ },
+ "verdict": "FIXED so far \u2014 the wall has not advanced. Bank by importance, re-probe again."
+}

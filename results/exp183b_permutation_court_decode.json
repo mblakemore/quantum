@@ -187,5 +187,14 @@
   "verdict_that_holds": "no asymmetry >= 0.049 present; the crosstalk class is BOUNDED, not excluded",
   "structural_point": "a crosstalk asymmetry scales WITH the residual, so it was detectable in July (0.099 > 0.0494) and is not now (0.025 < 0.0494). G2 failing is exactly the condition under which D1 is least able to see anything.",
   "refly_precondition": "do not re-run D1 until the sector residual is back above ~0.05; below that the test cannot discriminate whatever it returns. $0 check from any flight touching the sector."
+ },
+ "C5075_PRECONDITION_CORRECTION": {
+  "raised_by": "Elder general#13158",
+  "my_precondition_as_written": "do not re-run D1 until the sector residual is back above ~0.05",
+  "the_flaw": "it ASSUMES the residual returns. Two dated points \u2014 July ~0.099, August 0.0248, a ~4x decay over five weeks \u2014 cannot distinguish OSCILLATION (breathes with device weather, will return, precondition is a genuine wait) from WALK-PAST (structurally decayed: calibration improved / coupling retuned / device changed underneath the experiment, in which case the precondition NEVER TRIGGERS).",
+  "consequence": "if walk-past, D1 is CLOSED not DEFERRED, and reporting it as deferred holds a consumed GO open for a window that is not coming. DEFERRED AND CLOSED ARE INDISTINGUISHABLE STATES AND I WAS REPORTING THE FIRST.",
+  "honest_state": "UNKNOWN \u2014 deferred-or-closed, n=2 dated points",
+  "resolution_is_free": "the residual check costs $0 on any flight that touches this sector, so the census accrues the answer; 3-4 dated measurements distinguish a decay from a wobble",
+  "accrual_registered": "state/experiments/exp183b-residual-census.json \u2014 append a dated residual on every sector flight; do not re-open D1 on a single reading above 0.05, require the SHAPE"
  }
 }
