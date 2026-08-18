@@ -75,6 +75,46 @@ VOCAB = {
     "steering": r"steering",
 }
 
+# RETIRED TECHNIQUES — capability-level, not file-level. Added C5075 after a MEASURED failure of
+# this tool: --gaps offered "twirl x feedforward" as a candidate novel composition, Elder pitched it
+# to the Creator on that basis, and the pre-design survey killed it — findings/07 measured DD, Pauli
+# Twirling, TREM and ZNE as ALL FOUR NET DETRACTORS on this chip class, with an explicit "stop
+# spending engineering effort" ruling. The route was closed before the map suggested it.
+#
+# THE DEFECT WAS PRECISE: the map carried per-FILE status (13 of the 23 twirl files are even flagged
+# NOT-CERTIFIED individually) but had NO NOTION THAT A WHOLE TECHNIQUE CAN BE RETIRED. A composition
+# gap is only a LEAD IF ITS COMPONENTS ARE STILL LIVE; an untried pairing of a dead technique is not
+# an opportunity, it is a closed route wearing an opportunity's shape.
+#
+# Each entry is VERIFIED AGAINST ITS SOURCE FINDING AT RUN TIME (see retired_techniques), so this
+# list cannot quietly outlive the ruling it cites — the failure mode of every hand-kept list.
+RETIRED = {
+    "twirl": ("findings/07-error-mitigation-failures.md",
+              "DD/PT/TREM/ZNE all net detractors on this chip class; standing 'stop spending' ruling",
+              r"net detractor|made things worse|stop spending"),
+    "zne": ("findings/07-error-mitigation-failures.md",
+            "same ruling — ZNE measured a net detractor",
+            r"net detractor|made things worse|stop spending"),
+    "dyn-decoupling": ("findings/07-error-mitigation-failures.md",
+                       "same ruling — DD measured a net detractor",
+                       r"net detractor|made things worse|stop spending"),
+}
+
+
+def retired_techniques():
+    """Confirm each retirement still says what we claim. Unverifiable => reported, never assumed."""
+    out = {}
+    for tag, (src, why, rx) in RETIRED.items():
+        pth = f"{Q}/{src}"
+        try:
+            ok = bool(re.search(rx, open(pth, errors="replace").read(), re.I))
+        except OSError:
+            ok = None
+        out[tag] = {"source": src, "why": why,
+                    "verified": ok}
+    return out
+
+
 # Status is what stops this becoming a list of things to build on top of retracted results.
 STATUS_RE = [
     ("NOT-CERTIFIED", r"not.?certified|tautolog"),
@@ -231,12 +271,20 @@ def main():
         print("\n═══ COMPOSITION GAPS — common capabilities that have NEVER co-occurred ═══")
         print("  Not a to-do list. A gap is sometimes a physical impossibility and sometimes")
         print("  nobody's idea yet; this tool cannot tell those apart and does not try.\n")
+        ret = retired_techniques()
         common = [t for t in VOCAB if freq[t] >= 15]
         gaps = [(a, b) for i, a in enumerate(sorted(common)) for b in sorted(common)[i + 1:]
                 if co[tuple(sorted((a, b)))] == 0]
         gaps.sort(key=lambda p: -(freq[p[0]] * freq[p[1]]))
         for a, b in gaps[:16]:
-            print(f"   {a:18s} x {b:18s}   ({freq[a]:3d} x {freq[b]:3d} files, 0 together)")
+            dead = [t for t in (a, b) if t in ret]
+            if dead:
+                r = ret[dead[0]]
+                v = {True: "verified", False: "SOURCE NO LONGER SAYS THIS", None: "source unreadable"}[r["verified"]]
+                print(f"   ☠️ {a:18s} x {b:18s}   NOT A LEAD — '{dead[0]}' is a RETIRED technique")
+                print(f"      {r['why']}  [{r['source']}, {v}]")
+            else:
+                print(f"   {a:18s} x {b:18s}   ({freq[a]:3d} x {freq[b]:3d} files, 0 together)")
         if not gaps:
             print("   none — every common pair has been combined at least once.")
         print()
