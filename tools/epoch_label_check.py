@@ -13,7 +13,7 @@ do not read the field as a robustness badge.
 
 FIELD, carried on a finding as one line, sibling to **F-number**: / **Author**::
 
-  **Epoch**: n=<int> basis=<distinct-day|distinct-submission|distinct-device> · dispersion=<x±e (n=k)|-> · window_retrievable=<yes|no|unknown> · checked=<ISO>
+  **Epoch**: n=<int|UNVERIFIABLE|UNIDENTIFIABLE> basis=<distinct-day|distinct-submission|distinct-device> · dispersion=<x±e (n=k)|-> · window_retrievable=<yes|no|unknown> · reason=<why-not-knowable> · checked=<ISO>
 
 Shape signed off THREE seats (Elder gen#12935 GO + gate/witness split; Whisper
 gen#12941 third sign-off, three corrections folded in below; Ember build). The
@@ -46,6 +46,27 @@ corrections mattered — each fixed a premise that was load-bearing and wrong:
       was deciding off a dispersion of n=2; the survey needs ~20 epochs for a
       usable one). A rate is never stored without its interval; a spread is a
       rate's cousin.
+  (D) n is an ENUM, not just an integer (Elder court ruling gen#13026/#13031,
+      three-seat, after Whisper resolved the 11-finding backlog gen#13024/#13030).
+      Four genuinely different failures, each a DISTINCT value so a blank field or a
+      false 1 can never stand in for "we do not know" — the reassuring-wrong-answer
+      this instrument exists to prevent:
+        · <int>          measured windows THAT SUPPORT THE CLAIM (F118: never job
+                         IDs — a NO-TEST parent flight is not an epoch of the claim).
+        · UNVERIFIABLE   evidence existed and the retention clock took it (the 9).
+                         Legal + honest; no replication claimable; NOT a measured 1.
+        · UNIDENTIFIABLE a record we never kept — no job IDs anywhere. A PROVENANCE
+                         defect on a different axis, filed separately. Currently 0
+                         members: a value with no instances is a hypothesis, kept
+                         but flagged, not a category.
+        · INHERITED (from F<n>)  no window of its own; never touched hardware (F72,
+                         a zero-QPU re-analysis). RESOLVED TRANSITIVELY — its status
+                         IS the parent's, by following the pointer, propagating the
+                         parent's uncertainty (parent UNVERIFIABLE -> child too). A
+                         bare INHERITED with no pointer is a dead end and gate-fails.
+      A finding is GRADED if it is sigma-headline OR already carries an **Epoch**
+      field (a declared label is an opt-in the first-6-lines σ scan cannot see, and
+      is how an INHERITED re-analysis stays inside the gate rather than vanishing).
 
 EXIT: non-zero if any GATE violation. Prints a census even when clean — silence
 is exactly the failure mode this exists to prevent.
@@ -56,6 +77,29 @@ FINDINGS = "findings"
 _SIG = re.compile(r"(\d[\d.–\-]*)\s*(?:sigma|σ)\b|\bsigma\b", re.I)
 _EPOCH_LINE = re.compile(r"\*\*Epoch\*\*:\s*(.+)")
 _BASES = {"distinct-day", "distinct-submission", "distinct-device"}
+# epoch_n is an integer OR a first-class "not-knowable" value (Elder court ruling
+# gen#13026, three-seat). Each is a DIFFERENT failure with a different remedy;
+# collapsing them into a blank field or a false 1 is exactly what this gate exists
+# to prevent — "I cannot tell" must never wear a measured 1's clothes, and a reader
+# must be able to tell an invented 1 from a measured one. A FOURTH value INHERITED
+# (a claim that never touched hardware, epoch borrowed from a parent finding —
+# Whisper gen#13030 on F72's zero-QPU re-analysis) is PROPOSED and deliberately NOT
+# wired here: it awaits the court seat plus a scoping ruling on whether a zero-QPU
+# re-analysis belongs inside a sigma-headline HARDWARE gate at all.
+_UNVERIFIABLE = "unverifiable"      # evidence existed; the retention wall took it (the 9).
+_UNIDENTIFIABLE = "unidentifiable"  # no job IDs anywhere; the flights cannot even be named (0 members).
+_INHERITED = "inherited"            # never touched hardware; epoch borrowed from a parent finding (F72).
+_NONINT_N = {_UNVERIFIABLE, _UNIDENTIFIABLE}
+# INHERITED is written inline with its pointer, e.g. "n=INHERITED (from F71)". The gate
+# must RESOLVE it TRANSITIVELY (Elder gen#13031): F72's epoch status IS F71's, found by
+# following the pointer, propagating the parent's uncertainty (parent UNVERIFIABLE ->
+# child UNVERIFIABLE). A bare INHERITED with no pointer is a dead end and gate-fails.
+_INHERIT_PTR = re.compile(r"from\s+(F\d+)", re.I)
+# A parent finding's F-number may be recorded three ways; the resolver checks all:
+#   filename prefix "F71-...", an H1 "# Finding 71", or a "**F-number**: F71" field.
+_FNUM_FIELD = re.compile(r"\*\*F-?number\*\*:?\s*(F\d+)", re.I)
+_FNUM_H1 = re.compile(r"^#\s*Finding\s+(\d+)\b", re.I | re.M)
+_FNUM_FILE = re.compile(r"^(F\d+)[-_]", re.I)
 # TWO-SIDED retrieval bound (Elder gen#12958). Now MEASURED and CAUSE-SEPARATED
 # (Whisper gen#12965): the horizon is a ONE-DAY boundary and the cause is RETENTION,
 # not lost accounts — two jobs on the SAME backend (marrakesh), SAME prefix (d9a),
@@ -82,16 +126,32 @@ _STALE_CHECK_DAYS = 30
 
 def parse_epoch(block):
     out = {"n": None, "basis": None, "dispersion": None,
-           "window_retrievable": None, "checked": None}
+           "window_retrievable": None, "checked": None, "inherited_from": None}
     # Extract each key=value pair; a value runs until the next " key=" token or a
     # ·/| separator or end — so a value may itself contain spaces (the dispersion
-    # interval "0.13±0.03 (n=20)") and pairs may be space- or ·-separated.
+    # interval "0.13±0.03 (n=20)" or "INHERITED (from F71)") and pairs may be space-
+    # or ·-separated.
     for m in re.finditer(r"(\w+)\s*=\s*(.*?)(?=\s+\w+\s*=|\s*[·|]|$)", block):
         k, v = m.group(1).lower(), m.group(2).strip()
         if not v:
             continue
-        if k == "n" and v.lstrip("-").isdigit():
-            out["n"] = int(v)
+        if k == "n":
+            # An INTEGER, or one of the first-class not-knowable / inherited values.
+            # "I cannot tell" and "never flew" must each be a DISTINCT value, never a
+            # blank field and never a false 1 (Elder court ruling gen#13026/#13031).
+            vl = v.lower()
+            if v.lstrip("-").isdigit():
+                out["n"] = int(v)
+            elif vl.startswith(_INHERITED):
+                out["n"] = _INHERITED
+                mp = _INHERIT_PTR.search(v)          # "INHERITED (from F71)" -> F71
+                if mp:
+                    out["inherited_from"] = mp.group(1).upper()
+            elif vl in _NONINT_N:
+                out["n"] = vl
+            # else: unrecognised n -> left None, gate-fails as "n missing/invalid"
+        elif k in ("inherited_from", "inherits_from"):
+            out["inherited_from"] = v.upper()
         elif k == "basis":
             out["basis"] = v.lower()
         elif k.startswith("disp"):
@@ -116,32 +176,134 @@ def days_since(iso, today):
         return None
 
 
+def extract_fnum(name, txt):
+    # A finding's F-number may live in the filename ("F71-..."), an H1
+    # ("# Finding 71"), or a "**F-number**: F71" field. Checked in that order so a
+    # parent can be located however it was recorded — the ambiguity that hid F71
+    # from a field-only search.
+    m = _FNUM_FILE.match(name)
+    if m:
+        return m.group(1).upper()
+    m = _FNUM_FIELD.search(txt)
+    if m:
+        return m.group(1).upper()
+    m = _FNUM_H1.search(txt)
+    if m:
+        return "F" + m.group(1)
+    return None
+
+
+def resolve_inherited(ep, by_fnum, chain):
+    # Follow n=INHERITED pointers transitively to a terminal (non-inherited) epoch,
+    # propagating the parent's uncertainty. Returns (status, resolved_ep, chain):
+    #   terminal          -> resolved_ep is the concrete parent epoch to adopt
+    #   no_pointer        -> INHERITED with no "(from F<n>)"
+    #   cycle             -> pointer chain loops
+    #   missing           -> chain[-1] not in the index
+    #   parent_unlabelled -> parent exists but has no epoch to inherit yet
+    if ep.get("n") != _INHERITED:
+        return ("terminal", ep, chain)
+    parent = ep.get("inherited_from")
+    if not parent:
+        return ("no_pointer", ep, chain)
+    if parent in chain:
+        return ("cycle", ep, chain + [parent])
+    if parent not in by_fnum:
+        return ("missing", ep, chain + [parent])
+    pep = by_fnum[parent]["ep"]
+    if pep.get("n") is None:
+        return ("parent_unlabelled", pep, chain + [parent])
+    return resolve_inherited(pep, by_fnum, chain + [parent])
+
+
 def main(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument("--today", help="ISO date for staleness math")
+    ap.add_argument("--findings-dir", default=FINDINGS, help="dir of *.md findings (default: findings)")
     a = ap.parse_args(argv)
     tod = a.today or os.environ.get("EPOCH_CHECK_TODAY")
     if not tod:
         print("epoch_label_check: pass --today YYYY-MM-DD (or set EPOCH_CHECK_TODAY)."); return 2
     y, m, d = map(int, tod.split("-")); today = datetime.date(y, m, d)
+    findings_dir = a.findings_dir
 
-    gate_fail, witness_warn, ok, non_sigma = [], [], [], 0
-    for f in sorted(glob.glob(os.path.join(FINDINGS, "*.md"))):
+    # First pass: index EVERY finding by its F-number so an INHERITED epoch can be
+    # resolved transitively to the parent it points at. Parents need not be
+    # sigma-headline themselves (F71 is not — its σ sits below the headline window),
+    # so this pass is over ALL findings, not just the graded set.
+    all_md = sorted(glob.glob(os.path.join(findings_dir, "*.md")))
+    by_fnum = {}
+    for f in all_md:
         txt = open(f, encoding="utf-8", errors="replace").read()
-        if not _SIG.search("\n".join(txt.splitlines()[:6])):
+        fn = extract_fnum(os.path.basename(f), txt)
+        if not fn:
+            continue
+        em = _EPOCH_LINE.search(txt)
+        by_fnum[fn] = {"name": os.path.basename(f),
+                       "ep": parse_epoch(em.group(1)) if em else {"n": None}}
+
+    gate_fail, witness_warn, ok = [], [], []
+    unestablished, inherited_res, provenance, non_sigma = [], [], [], 0
+    for f in all_md:
+        txt = open(f, encoding="utf-8", errors="replace").read()
+        is_sig = bool(_SIG.search("\n".join(txt.splitlines()[:6])))
+        em = _EPOCH_LINE.search(txt)
+        # Grade a finding if it is sigma-headline (REQUIRED to carry a label) OR if it
+        # already HAS an **Epoch** field (it opted in; its label must be validated).
+        # An INHERITED re-analysis like F72 carries no σ in its OWN headline — its σ
+        # lives in the parent it points at — so a first-6-lines σ scan misses it. But
+        # Elder ruled it must stay INSIDE the gate (gen#13031: excluding it leaves it
+        # with no epoch information at all, the invisible-gap failure the gate exists
+        # to close). Its declared label is the opt-in the σ scan cannot see.
+        if not is_sig and not em:
             non_sigma += 1
             continue
         name = os.path.basename(f)
-        em = _EPOCH_LINE.search(txt)
         if not em:
             gate_fail.append((name, "no **Epoch**: field")); continue
         ep = parse_epoch(em.group(1))
-        if ep["n"] is None:                                       # (A) gate: n
-            gate_fail.append((name, "**Epoch**: present but n missing")); continue
-        if ep["basis"] not in _BASES:                             # (A) gate: basis
-            gate_fail.append((name, f"n={ep['n']} but basis missing/invalid (need one of {sorted(_BASES)})")); continue
-        if ep["n"] > 1 and not _dispersion_has_interval(ep["dispersion"]):  # (C)
-            gate_fail.append((name, f"n={ep['n']}>1 but dispersion lacks interval+n, e.g. '0.13±0.03 (n=20)'")); continue
+        n = ep["n"]
+        if n is None:                                             # (A) gate: n present
+            gate_fail.append((name, "**Epoch**: present but n missing/invalid (integer, "
+                              "UNVERIFIABLE, UNIDENTIFIABLE, or INHERITED (from F<n>))")); continue
+        if n == _UNIDENTIFIABLE:                                  # provenance defect, not epoch
+            provenance.append((name, "epoch_n=UNIDENTIFIABLE — no job IDs anywhere; cannot be checked on ANY "
+                               "axis (epoch, calibration, that it flew). PROVENANCE defect: recover IDs from a "
+                               "filename/commit/notebook or record the foundation hole. (Value currently has 0 "
+                               "members — a schema value with no instances is a hypothesis, not a category.)")); continue
+        if n == _UNVERIFIABLE:                                    # honest 'set not knowable'
+            unestablished.append((name, "n=UNVERIFIABLE — evidence existed and the retention wall took it; NO "
+                                  "replication claimable, and this is NOT a measured n=1. A dated scar, kept visible.")); continue
+        if n == _INHERITED:                                       # resolve transitively
+            status, rep, chain = resolve_inherited(ep, by_fnum, [])
+            ptr = " -> ".join(chain) if chain else "(no pointer)"
+            if status == "no_pointer":
+                gate_fail.append((name, "n=INHERITED but no pointer — needs 'INHERITED (from F<n>)'; a bare "
+                                  "INHERITED is a dead end that tells a reader nothing")); continue
+            if status == "cycle":
+                gate_fail.append((name, f"n=INHERITED forms an inheritance CYCLE: {ptr}")); continue
+            if status == "missing":
+                gate_fail.append((name, f"n=INHERITED (from {chain[-1]}) but {chain[-1]} is not among "
+                                  f"{findings_dir}/*.md — cannot resolve the pointer")); continue
+            if status == "parent_unlabelled":
+                inherited_res.append((name, f"n=INHERITED via {ptr} — PENDING: {chain[-1]} has no **Epoch** field "
+                                      f"yet, so this cannot resolve. LABEL {chain[-1]} FIRST (it carries the σ "
+                                      f"this claim re-analyses); F72-class did its part, the gap is upstream")); continue
+            rn = rep["n"]                                        # terminal: adopt parent verdict
+            verdict = ("n=UNVERIFIABLE" if rn == _UNVERIFIABLE else
+                       f"n={rn} basis={rep.get('basis')} disp={rep.get('dispersion')}")
+            inherited_res.append((name, f"n=INHERITED via {ptr} — resolves to {verdict}; epoch-dependence is "
+                                  f"EXACTLY {chain[-1]}'s (same points), by reference not local")); continue
+        # --- integer n from here. F118 binding (Whisper gen#13024): it counts WINDOWS
+        #     THAT SUPPORT THE CLAIM, never submissions and never cited job IDs — a
+        #     NO-TEST parent flight is not an epoch of the claim, and counting two job
+        #     IDs there manufactures a gate-passing, entirely fictitious dispersion.
+        #     The gate trusts the AUTHOR's n precisely so the count stays a human
+        #     judgement; do not automate it.
+        if ep["basis"] not in _BASES:                            # (A) gate: basis
+            gate_fail.append((name, f"n={n} but basis missing/invalid (need one of {sorted(_BASES)})")); continue
+        if n > 1 and not _dispersion_has_interval(ep["dispersion"]):  # (C)
+            gate_fail.append((name, f"n={n}>1 but dispersion lacks interval+n, e.g. '0.13±0.03 (n=20)'")); continue
         wr = ep["window_retrievable"]                             # (B) witness only
         if wr == "unknown":
             witness_warn.append((name, f"retrievable=unknown — MEASURE while cheap: {_RETENTION_CAUSE} "
@@ -158,7 +320,7 @@ def main(argv):
 
     print("=" * 70)
     print("G-RECORD EPOCH CHECK — sigma-headline findings")
-    print(f"  today {today} | scanned {FINDINGS}/*.md | non-sigma skipped {non_sigma} | "
+    print(f"  today {today} | scanned {findings_dir}/*.md | non-sigma skipped {non_sigma} | "
           f"{_RETENTION_CAUSE} horizon {_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS}d ok / "
           f"{_YOUNGEST_OBSERVED_LOSS_DAYS}d lost (1-day boundary); dynamics {_BOUNDARY_DYNAMICS} "
           f"(rolling=race / fixed=no-deadline, +3d re-probe settles)")
@@ -184,7 +346,22 @@ def main(argv):
         print(f"\n✅ EPOCH-LABELLED ({len(ok)}):")
         for n, dsc in ok:
             print(f"  - PASS {n}: {dsc}")
-    if not (gate_fail or witness_warn or ok):
+    if unestablished:
+        print(f"\n\U0001f9ff UNVERIFIABLE ({len(unestablished)}) — legal, honest: the set is not knowable "
+              f"because the retention clock took the evidence (distinct from a measured 1):")
+        for n, why in unestablished:
+            print(f"  - LOST {n}: {why}")
+    if inherited_res:
+        print(f"\n\U0001f517 INHERITED ({len(inherited_res)}) — no window of its own; epoch resolved by "
+              f"following the pointer to the finding it re-analyses:")
+        for n, why in inherited_res:
+            print(f"  - INHERIT {n}: {why}")
+    if provenance:
+        print(f"\n\U0001f9fe PROVENANCE ({len(provenance)}) — a defect on a DIFFERENT axis than epoch; "
+              f"filed separately so the small question is not answered while the large one is open:")
+        for n, why in provenance:
+            print(f"  - PROV {n}: {why}")
+    if not (gate_fail or witness_warn or ok or unestablished or inherited_res or provenance):
         print("\n(no sigma-headline findings — census printed so silence is not read as clean)")
     print()
     return 1 if gate_fail else 0
