@@ -1,0 +1,34 @@
+{
+ "card": "picker_persistence_at_scale",
+ "cycle": "C5075",
+ "cost": "$0 \u2014 banked windows only",
+ "question": "do we keep choosing the same qubits? never asked before tonight",
+ "n_pairs": 2238,
+ "n_layouts": 94,
+ "result": {
+  "same_day": {
+   "n": 899,
+   "median_jaccard": 0.188,
+   "frac_disjoint": 0.3
+  },
+  "1_3_days": {
+   "n": 746,
+   "median_jaccard": 0.062,
+   "frac_disjoint": 0.4
+  },
+  "4_14_days": {
+   "n": 215,
+   "median_jaccard": 0.033,
+   "frac_disjoint": 0.46
+  },
+  "15_plus_days": {
+   "n": 378,
+   "median_jaccard": 0.0,
+   "frac_disjoint": 0.62
+  }
+ },
+ "reading": "monotone decay to zero. CONFIRMS and EXTENDS F65/F66 at n=2238: the decay is SMOOTH not a cliff, and by two weeks median overlap is exactly zero. The standing rule run-live-never-cache is if anything understated.",
+ "confound_stated": "different experiments need different qubit counts and connectivity, so the same-day LEVEL (0.188) mixes task variation with drift. The DECAY is the clean evidence, because task mix does not depend on the gap between flights.",
+ "artifact_caught_before_publication": "a first version reported 19% of flights losing >5pp of parity fidelity, max 44pp. ARTIFACT: those cases had nq=156 (whole device \u2014 layout recovery uninformative) and dead qubits at readout ~0.50 never measured. On 94 REAL layouts: worst-qubit parity cost p50 0.24pp, p90 1.70pp, max 8.05pp, 7% losing >2pp. The picker is working well. Third instance tonight of the same set-selection error.",
+ "picker_note": "scripts/quiet_qubits.py minimizes an objective-weighted SUM and reports the QUIETEST participating qubit; for a parity observable the WORST participating qubit governs. Headroom for a minimax variant is real but modest (p90 1.70pp)."
+}
