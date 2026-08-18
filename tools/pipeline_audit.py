@@ -145,7 +145,7 @@ def exhibit_lag(ledger):
     whole point of REMOVING-A-BOTTLENECK-MOVES-IT: a one-stage gauge inherits the same defect
     as a one-stage fix."""
     front = _max_f(ledger)
-    rows = []
+    rows, unreadable = [], []
     # repo ROOT, not docs/ — verified by find, after the first version silently printed an
     # EMPTY stage-3 table. An instrument whose probe misses its target reports "nothing here"
     # in the same shape it reports "nothing wrong": exactly the silence this file was written
@@ -153,6 +153,12 @@ def exhibit_lag(ledger):
     for rel in ("ELI5_SUMMARY.md", "index.html", "horizons.html"):
         p = f"{Q}/{rel}"
         if not os.path.exists(p):
+            # ELDER'S ACCEPTANCE TEST (general#12883), applied to this file's LAST surviving
+            # instance of the defect it names: a missing page used to be silently skipped, so a
+            # probe that found NOTHING rendered exactly like a stage that was CLEAN. "An
+            # instrument whose null output is indistinguishable from its healthy output is not an
+            # instrument." Unreadable targets are now reported as their own loud category.
+            unreadable.append(rel)
             continue
         txt = open(p, errors="replace").read()
         e = {"page": rel, "highest_F": _max_f(txt)}
@@ -161,7 +167,7 @@ def exhibit_lag(ledger):
             hs = [int(m) for m in re.findall(r"\bH(\d{1,2})\b", txt)]
             e["highest_H"] = max(hs) if hs else None
         rows.append(e)
-    return {"ledger_front_F": front, "pages": rows}
+    return {"ledger_front_F": front, "pages": rows, "unreadable": unreadable}
 
 
 if __name__ == "__main__":
@@ -208,6 +214,8 @@ if __name__ == "__main__":
         hh = f"   highest H{e['highest_H']}" if e.get("highest_H") else ""
         flag = "⏳" if (e["F_behind"] or 0) > 0 else "  "
         print(f"   {flag} {e['page']:22s} highest F{e['highest_F']}  ({beh}){hh}")
+    for miss in ex.get("unreadable", []):
+        print(f"   🔴 {miss:22s} TARGET NOT FOUND — this stage is UNMEASURED, not clean.")
     print("\n  THE PATTERN THIS GAUGE EXISTS TO NAME: every cross-seat handoff in the record")
     print("  pipeline queues, and fixing one stage RELOCATES the queue rather than draining it.")
     print("  What never stalls is flights, tanks, seals, submissions, boards — because each is")
