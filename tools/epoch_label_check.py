@@ -30,8 +30,14 @@ corrections mattered — each fixed a premise that was load-bearing and wrong:
       know the retention horizon — dropped the fabricated `expires` date
       (Whisper: a guessed date in a schema this formal reads as known and fires a
       warning off a number nobody measured). We have only an OBSERVED BOUND:
-      successful retrieval at 16d (F125) and 36d (F106), ZERO observed losses at
-      any age. The witness warns from THE BOUND, stated as a bound: an `unknown`
+      successful retrieval at 16d (F125) and 36d (F106) — and LOSSES OBSERVED at
+      greater ages (Whisper gen#12951: 3 older `d89`-prefix jobs came back
+      JobNotFoundAnywhere). CAUSE NOT YET SEPARATED — past-retention vs a job on
+      an account we no longer hold are different facts, and old jobs are exactly
+      where old tokens live; the age-correlation sweep is running
+      (results/window_rescue_c5075.json, ~30-45min). So 36d is the oldest
+      SUCCESSFUL retrieval, NOT a "no losses" bound. The witness warns from what
+      is known, stated honestly: an `unknown`
       answer is almost certainly ANSWERABLE (go measure it while cheap), and a
       `checked` date going stale needs a re-witness. F106 is the NEAR-MISS
       (Whisper gen#12944): believed past retention and written off as permanently
@@ -56,7 +62,9 @@ _EPOCH_LINE = re.compile(r"\*\*Epoch\*\*:\s*(.+)")
 _BASES = {"distinct-day", "distinct-submission", "distinct-device"}
 # Empirical retrieval bound — the OLDEST window we have successfully pulled.
 # A growing fact, NOT a retention horizon: raise it when a check succeeds older.
-_OBSERVED_RETRIEVAL_BOUND_DAYS = 36     # F106, 2026-08-18 (Whisper)
+_OBSERVED_RETRIEVAL_BOUND_DAYS = 36     # oldest SUCCESSFUL retrieval (F106, 2026-08-18). NOT a no-loss bound:
+                                        # losses observed at greater ages, cause (retention vs account) unseparated,
+                                        # sweep pending (results/window_rescue_c5075.json, Whisper gen#12951).
 _STALE_CHECK_DAYS = 30
 
 
@@ -124,7 +132,7 @@ def main(argv):
             gate_fail.append((name, f"n={ep['n']}>1 but dispersion lacks interval+n, e.g. '0.13±0.03 (n=20)'")); continue
         wr = ep["window_retrievable"]                             # (B) witness only
         if wr == "unknown":
-            witness_warn.append((name, f"retrievable=unknown — likely ANSWERABLE (0 losses observed to {_OBSERVED_RETRIEVAL_BOUND_DAYS}d); measure while cheap"))
+            witness_warn.append((name, f"retrievable=unknown — MEASURE it while cheap (retrievals succeed to {_OBSERVED_RETRIEVAL_BOUND_DAYS}d; losses seen older, cause unseparated)"))
         chk = days_since(ep["checked"], today) if ep["checked"] else None
         if chk is None:
             witness_warn.append((name, "no `checked` date — retrievability answer is undated (staleness invisible)"))
@@ -135,7 +143,7 @@ def main(argv):
     print("=" * 70)
     print("G-RECORD EPOCH CHECK — sigma-headline findings")
     print(f"  today {today} | scanned {FINDINGS}/*.md | non-sigma skipped {non_sigma} | "
-          f"observed retrieval bound {_OBSERVED_RETRIEVAL_BOUND_DAYS}d (0 losses)")
+          f"oldest successful retrieval {_OBSERVED_RETRIEVAL_BOUND_DAYS}d; losses observed older (cause unseparated, sweep pending)")
     print("=" * 70)
     if gate_fail:
         print(f"\n\U0001f6d1 GATE FAIL ({len(gate_fail)}) — a sigma-headline claim without a stated epoch is not DONE:")
