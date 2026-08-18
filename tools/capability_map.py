@@ -135,6 +135,34 @@ def harvest():
     return rows
 
 
+def coverage():
+    """THE STALENESS WITNESS — Elder's objection (general#12899), answered where it actually bites.
+
+    His concern: "a second index is a second thing to go stale", with a per-row last-verified stamp
+    from day one rather than after it burns someone. Correct concern, wrong surface for THIS tool:
+    every row here is derived from the tree at run time, so no row can describe a file that has
+    changed underneath it — that is why it is derived rather than hand-curated.
+
+    WHAT CAN GO STALE IS THE VOCABULARY. VOCAB is hand-written, so a capability built with new
+    terminology gets ZERO tags and becomes invisible to this tool — silently, and in exactly the way
+    a buried capability is invisible today. That is the failure mode, so that is what gets measured:
+    the share of files this instrument CANNOT SEE, printed on every run.
+
+    A RISING BLIND FRACTION IS THE SIGNAL TO EXTEND VOCAB. It beats a timestamp because it measures
+    the harm (things I cannot surface) rather than a proxy for it (when someone last looked)."""
+    seen = blind = 0
+    for d in ("experiments", "tools"):
+        for p_ in glob.glob(f"{Q}/{d}/*.py"):
+            try:
+                body = strip_doc(open(p_, errors="replace").read(20000))
+            except OSError:
+                continue
+            seen += 1
+            if not any(re.search(rx, body, re.I) for rx in VOCAB.values()):
+                blind += 1
+    return seen, blind
+
+
 def co_matrix(rows):
     co = collections.Counter()
     freq = collections.Counter()
@@ -222,6 +250,14 @@ def main():
                       ("NOT-CERTIFIED", "RETIRED"))
         warn = f"   ⚠ {flagged} not-certified/retired" if flagged else ""
         print(f"   {t:20s} {n:3d} file(s){warn}")
+    seen, blind = coverage()
+    pct = 100 * blind / max(1, seen)
+    flag = "🔴" if pct > 55 else ("⏳" if pct > 45 else "  ")
+    print(f"\n{flag} VOCABULARY COVERAGE: {seen-blind}/{seen} files carry >=1 tag; "
+          f"{blind} ({pct:.0f}%) are INVISIBLE to this tool.")
+    print("   That fraction is the staleness witness (Elder general#12899). Rows cannot rot — they")
+    print("   are derived at run time — but VOCAB is hand-written, so a capability named in new")
+    print("   terminology goes silently untagged. A RISING BLIND FRACTION MEANS EXTEND VOCAB.")
     print("\n  --for \"<concept>\" | --with <tag> | --gaps")
     print("  Companion, not replacement: already-built.js answers 'has this been settled?'\n")
 
