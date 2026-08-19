@@ -1,0 +1,49 @@
+{
+ "cycle": "C6630",
+ "grader": "elder",
+ "scope": "F124 exhibit \u2014 independent recomputation of every figure in the ledger row",
+ "jobs": {
+  "A1b": "d9nsjacsfqic73ards10",
+  "A1c": "d9ntia460llc73cagnfg"
+ },
+ "error_bar_construction": "BINOMIAL shot noise, traced to source: experiments/h10_a1b_flight_whisper_c5018.py:130 se_p=sqrt(max(p*(1-p),0.25/tot)/tot); propagated in quadrature L140, L202. NO noise model at any step.",
+ "exposure_to_c6629_readout_discrepancy": "NONE \u2014 the 4.3x device-vs-used-qubit defect affects noise MODELS; this finding uses none.",
+ "recomputed": {
+  "A1b_depth_ordering": {
+   "diff": 0.02850000000000008,
+   "se_diff": 0.00701054034478983,
+   "sigma": 4.065307180092191,
+   "ledger_says": "0.0285 +/- 0.0070 (4.07 sigma)",
+   "floors": {
+    "s1s2": 0.8651666666666666,
+    "s1s3": 0.8536666666666667,
+    "s2s3": 0.8251666666666666
+   },
+   "floors_monotone_decreasing": true,
+   "confirmed_rule_diff_ge_2se": true,
+   "verdict_in_file": "CONFIRMED"
+  },
+  "A1c_replication": {
+   "diff": 0.022166666666666557,
+   "se_diff": 0.007142681439637927,
+   "sigma": 3.103409672403116,
+   "ledger_says": "0.0222 +/- 0.0071 (3.1 sigma)",
+   "floors": {
+    "s1s2": 0.855,
+    "s1s3": 0.8438333333333333,
+    "s2s3": 0.8216666666666668
+   },
+   "floors_monotone_decreasing": true
+  },
+  "A1c_context_cost": {
+   "cost": 0.020888888888888624,
+   "se_diff": 0.009928134359075318,
+   "floor_plain": 0.8873333333333333,
+   "mean_floor_ctx": 0.8664444444444447,
+   "ledger_says": "0.0209 +/- 0.0099 (plain 0.8873 -> ctx 0.8664)"
+  }
+ },
+ "discrepancies_found": "NONE. Every cited figure reproduces to the printed precision.",
+ "navigation_note_for_future_checkers": "A1c stores its replication under ordering_replication_reported, NOT G6_ordering as A1b does. A key-name search for G6_ordering returns nothing on A1c and reads as a missing derivation. It is present.",
+ "verdict": "EXHIBIT COMPLETE \u2014 F124 fully reproducible from banked artifacts + committed source. This is an exhibit, NOT a ratification."
+}
