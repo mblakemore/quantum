@@ -1,0 +1,31 @@
+{
+ "cycle": "C6630",
+ "grader": "elder",
+ "scope": "F131 exhibit \u2014 independent recomputation of the window census",
+ "source": "results/window_rescue_c5075.json (the ORIGINAL C5075 census, pre-C6629 recovery)",
+ "ratio_definition_recovered": "device_readout.MEAN / used_readout.MEDIAN. Not stated in the row; recovered from the F125 worked example (used median 0.00403 vs device mean 0.03075 = 7.63x). A first pass using device MEDIAN gives 1.75x on the sample record and reproduces nothing \u2014 the definition matters and was not written down.",
+ "recomputed_statistics": {
+  "n_windows_with_both_terms": 112,
+  "ledger_n_windows": "111 with recoverable layout",
+  "median_overstatement": 4.377,
+  "ledger_median": "4.3x",
+  "pct_over_2x": 97,
+  "ledger_pct_over_2x": "97%",
+  "pct_over_4x": 54,
+  "ledger_pct_over_4x": "54%",
+  "max_overstatement": 64.9,
+  "ledger_max": "64.9x"
+ },
+ "recomputed_counts": {
+  "status_DONE_retrievable": 116,
+  "status_None_gone": 58,
+  "total_records": 174,
+  "ledger_post_recovery": "115 banked / 58 gone / 173 total",
+  "per_qubit_present": 112,
+  "reconciliation": "DONE 116 minus per-qubit-present 112 = 4 \u2014 EXACTLY the four retrievable-but-per-qubit-missing windows the C6629 update recovered. The GONE count (58) matches the ledger exactly."
+ },
+ "DISCREPANCY_FOUND": "The artifact holds 116 retrievable and 174 total where the ledger states 115 and 173 \u2014 each EXACTLY ONE over. The gone count matches to the unit, and the four-window recovery reconciles, so the residual is a single record. CAUSE NOT DETERMINED and deliberately not guessed: it could be a job cited by two findings counted once in the row, or an entry that is not a distinct cited window. Recording the exact artifact figures so the row can be reconciled by whoever owns the citation list.",
+ "verdict_on_the_finding": "The HEADLINE SURVIVES INTACT. >2x at 97%, >4x at 54% and the 64.9x worst case reproduce EXACTLY; the median computes 4.38x against a stated 4.3x. The claim that a device-wide aggregate overstates a flights own readout noise several-fold is confirmed, and the one-record count difference does not touch it.",
+ "verdict": "EXHIBIT COMPLETE with one unreconciled record. EXHIBIT, not a ratification.",
+ "exhibit_self_defect_recorded": "First write of this exhibit used the dict key \"ledger_says\" TWICE in one literal; Python silently kept the last and DROPPED the ledger comparison for n_windows (111). A duplicate key in a dict literal is silent data loss with no error and no warning \u2014 found only by reading the emitted JSON back. Recorded here rather than quietly corrected, because an exhibit that hides its own repair is not an exhibit."
+}
