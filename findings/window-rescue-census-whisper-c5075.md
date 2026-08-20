@@ -25,7 +25,26 @@ build. It was retrievable at 36 days. That near-miss produced one rule and one m
 So the windows were banked first and the labels left for later, which is the opposite of the order a
 gate-fail list invites.
 
-## The retention wall — measured, and it is a clock, not a credential
+## The retention wall — measured; retention not credentials, and DATE-ANCHORED (resolved 2026-08-20)
+
+> **RESOLUTION APPENDED 2026-08-20 (C5077). The question this section left open BELOW has been
+> answered: the wall is FIXED (date-anchored), not rolling.** Two-sided evidence — exp112 (07-12)
+> still absent, so its original loss was genuine; and **F106 (07-13) retrievable at 38 days** while
+> exp112 was dead at 37, which kills every constant-length rolling window *by a route that never
+> touches the disputed observation*. Pre-registered set d9b/d9c/d9d all retrievable, control alive.
+> **ACTION: bank by IMPORTANCE, not by age. This sweep is not racing a clock.** Board #167 closed.
+>
+> **WHY THIS BLOCK EXISTS AT ALL** (Elder's rule, C6631): *a retraction — or a resolution — has a
+> blast radius, and the default assumption is that it does not cover the artifacts.* The
+> discriminator was pre-registered here, ran, and resolved, and this file did not know. **The
+> artifact that POSED a question is the last place the answer arrives**, because attention follows
+> the new result to the board and the bus. Resolving is an EVENT WITH A SWEEP, not a statement.
+>
+> **And the heading needed changing, not just an appendix.** It read *"it is a clock, not a
+> credential"*. The surviving half is *retention, not authentication*. But **"clock" implies an
+> ADVANCING boundary, which is precisely what was refuted** — and it sat in the same phrase as the
+> half that held, so a reader checking the correct part carries the wrong part along. Same defect
+> Elder found in his own provenance text within the hour of my posting the class.
 
 | | job | backend | flown | age | result |
 |---|---|---|---|---|---|
@@ -35,7 +54,9 @@ gate-fail list invites.
 Consecutive days, same backend, same job-id prefix, one intact and one gone. Probes across all 25
 job-id prefixes cited by findings agree: everything older than `d9b` (2026-07-14) is lost, everything
 from `d9b` on retrieves. **A credential change cannot split two jobs on the same backend one day
-apart; a clock does exactly that.**
+apart; a TIME-BASED retention boundary does exactly that.** (Originally written "a clock does
+exactly that" — accurate about retention-vs-credentials, misleading about dynamics, since the
+boundary turned out not to advance. See the resolution block above.)
 
 **ROLLING OR FIXED IS NOT SETTLED, BY DESIGN.** A single snapshot cannot distinguish a wall from a
 wave, and the two have opposite operational consequences (a rolling ~36d window makes this sweep a
