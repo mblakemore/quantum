@@ -134,18 +134,26 @@ _FNUM_FILE = re.compile(r"^(F\d+)[-_]", re.I)
 _OLDEST_SUCCESSFUL_RETRIEVAL_DAYS = 36  # F106 (2026-07-13), RETRIEVABLE.
 _YOUNGEST_OBSERVED_LOSS_DAYS = 37       # exp112 (submit ~2026-07-12, so read as >=37d), LOST.
 _RETENTION_CAUSE = "retention"          # cause-separated (NOT account access).
-# ROLLING vs FIXED is UNMEASURED (Elder gen#12967 — a single snapshot cannot tell
-# a wall from a wave, and it changes the urgency by orders of magnitude):
-#   ROLLING (~36d window that expires daily): the wall moves forward a day per day,
-#     the whole 07-14..07-27 block of the July arc crosses it before ~Sep 1, and the
-#     sweep is RACING a clock — prioritise banking by AGE, oldest-retrievable first.
-#   FIXED (one-off purge / account migration dated ~07-13): nothing further at risk,
-#     no ongoing deadline — prioritise by IMPORTANCE.
-# The discriminator is cheap and DELIBERATE: re-run the d9b/d9c prefix probes ~3
-# days out. Start failing -> rolling. Wall stays pinned at 07-13 -> fixed. Until
-# that lands the tool states the horizon as MEASURED but its DYNAMICS as unknown —
-# it does not narrate a standing deadline the data cannot yet support.
-_BOUNDARY_DYNAMICS = "unknown"          # -> "rolling" | "fixed" after the +3d re-probe.
+# ROLLING vs FIXED is now RESOLVED to FIXED / date-anchored (task#167 CLOSED two-sided,
+# Whisper gen#14142/#14143 — the discriminator this field was coded to await). The wall
+# sits BETWEEN 2026-07-12 and 2026-07-13 AS A DATE and has not moved in two days while
+# jobs aged past it. The clean kill needs NEITHER disputed observation: exp112 dead at
+# 37d forces any rolling window L<37, which forces F106 DEAD at 38d today — F106 is ALIVE,
+# so no constant-length rolling window fits, by a route that never touches exp112 (the
+# conclusion survives even if the disputed read were wrong). Confirming side: d9b/d9c/d9d
+# (07-14/16/18) all retrievable, control alive.
+#   NOT a general law about retention — the MARKET-DATA history boundary measured the same
+#   afternoon is ROLLING (1.00 bar/trading-day, first bar pinned across a 93->1254 end-date
+#   sweep). TWO systems, same question shape, OPPOSITE mechanisms. Each needs its OWN
+#   discriminator; the analogy from the vivid fresh case would reorder the sweep by a clock
+#   that does not exist. Per-system tests: same-age-opposite-outcome for THIS age-vs-date
+#   wall; an end-date sweep for a served window.
+# CONSEQUENCE (pre-registered 2026-08-18, both branches written before the probe): no
+# standing deadline. Prioritise banking by IMPORTANCE, not by age — the sweep is not racing
+# a clock.
+_BOUNDARY_DYNAMICS = "fixed"            # date-anchored wall ~07-12/07-13. Resolved from
+                                        # "unknown" on task#167 close (flipped on the close,
+                                        # not its lead — refused the strong-but-open version).
 _STALE_CHECK_DAYS = 30
 
 
@@ -380,8 +388,8 @@ def main(argv):
             witness_warn.append((name, f"retrievable=unknown — MEASURE while cheap: {_RETENTION_CAUSE} "
                                  f"horizon at {_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS}d ok / "
                                  f"{_YOUNGEST_OBSERVED_LOSS_DAYS}d lost; a window past it is gone. "
-                                 f"Whether the wall is ROLLING (race) or FIXED (no ongoing deadline) "
-                                 f"is unmeasured — +3d re-probe settles it"))
+                                 f"the wall is FIXED / date-anchored (task#167 closed, two-sided) — "
+                                 f"no standing deadline, so bank by IMPORTANCE not by age"))
         chk = days_since(ep["checked"], today) if ep["checked"] else None
         if chk is None:
             witness_warn.append((name, "no `checked` date — retrievability answer is undated (staleness invisible)"))
@@ -394,7 +402,7 @@ def main(argv):
     print(f"  today {today} | scanned {findings_dir}/*.md | non-sigma skipped {non_sigma} | "
           f"{_RETENTION_CAUSE} horizon {_OLDEST_SUCCESSFUL_RETRIEVAL_DAYS}d ok / "
           f"{_YOUNGEST_OBSERVED_LOSS_DAYS}d lost (1-day boundary); dynamics {_BOUNDARY_DYNAMICS} "
-          f"(rolling=race / fixed=no-deadline, +3d re-probe settles)")
+          f"(date-anchored: no deadline, bank by importance — task#167 closed two-sided)")
     print("=" * 70)
     # Each row carries a distinct leading verdict token (FAIL/WARN/PASS) so a
     # consumer can classify a row WITHOUT tracking which section header it fell
