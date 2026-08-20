@@ -1,0 +1,34 @@
+{
+ "cycle": "C6630",
+ "grader": "elder",
+ "scope": "F130 exhibit \u2014 independent recomputation from the banked grade artifact",
+ "source": "results/h15_n2_grade_elder_c6627.json (+ h15_bakeoff_decoded_c5075.json for the diagnosis arm)",
+ "recomputed": {
+  "n_graded": 632,
+  "accuracy": 0.5759493670886076,
+  "hits_implied": 364,
+  "hits_over_n": "364/632",
+  "frozen_threshold": 0.604,
+  "win": false,
+  "ci95": [
+   0.5374,
+   0.6145
+  ],
+  "ledger_says_ci": "[54%, 61%]",
+  "ci_matches": true,
+  "alt_accuracy": 0.7120253164556962,
+  "null_accuracy": 0.439873417721519,
+  "sensitivity_thr_minus_1se": false,
+  "robustness_note": "fails the bar even at threshold MINUS one standard error \u2014 the miss is not a boundary artifact"
+ },
+ "diagnosis_arm_recomputed": {
+  "A_toffoli_simple_quantum": 0.5625,
+  "B_realtime_simple_classical": 0.6328125,
+  "C_realtime_optimal": 0.59375,
+  "supports_ledger_claim": "YES \u2014 a real-time CLASSICAL decision (B, 0.6328) beat the quantum arm (A, 0.5625) at the same task, which is the comparison that localises WHICH half failed."
+ },
+ "nuance_found": "The ledger row reads \"364/632 = 58%\" while the exact figure is 57.59%. 57.6 -> 58 is correct integer rounding, but the SAME row states \"Not rounded up, not re-thresholded\" as an honesty claim, and 58% is the rounded-UP presentation of 57.6%. No verdict changes; recording the exact number so the row and the artifact cannot drift apart.",
+ "attribution_status": "The banked c6629_attribution_amendment stands: the GRADE is unaffected (364/632 vs 0.6040, NO WIN) but the ATTRIBUTION (marrakesh phase weather) is PROVISIONAL. An exhibit certifies the number, not the story.",
+ "discrepancies": "NONE affecting the verdict. One presentation nuance recorded above.",
+ "verdict": "EXHIBIT COMPLETE \u2014 F130 fully reproducible from banked artifacts. EXHIBIT, not a ratification."
+}
