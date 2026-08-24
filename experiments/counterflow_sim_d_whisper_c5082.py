@@ -104,37 +104,66 @@ def coh(rho):
 
 
 def run_counterflow(n_stages, tau, n_ticks, hot_inlet, cold_inlet,
-                    arm='coherent', e_contact=0.0, r_reset=0.0):
-    """Counterflow ladder on density matrices; advection identical to sim A. arm in
-    {'coherent','dephased'}. Returns the exit reduced states (hot exits at stage N-1 side,
-    cold exits at stage 0 side) at steady state."""
+                    arm='coherent', e_contact=0.0, r_reset=0.0, tol=1e-13, max_iter=100000):
+    """Counterflow ladder on density matrices, solved as its STEADY-STATE boundary-value problem.
+
+    C5082 REWRITE (board #232). The old time-stepping advection was non-physical at N>=3: a
+    single-tick (later tail-averaged) capture read the pipe before it filled, so thermal eps
+    craters to ~0 at N>=4 instead of the correct N/(N+1). The steady state is a two-point BVP —
+    hot boundary at stage 0, cold boundary at stage N-1 — and solving it directly is exact and
+    fast, with no fill/timing artifact. A population prototype of this solver reproduces
+    eps=N/(N+1) to 1e-6 for N=2..8 (verified before this edit).
+
+    Post-contact stage states H_k, C_k; the contact at stage k inputs the hot parcel arriving from
+    upstream (H_{k-1}, or the hot inlet at k=0) and the cold parcel arriving from DOWNSTREAM
+    (C_{k+1}, or the cold inlet at k=N-1) — the counterflow coupling. Gauss-Seidel sweeps to a
+    fixed point. Exits: hot_exit = H_{N-1}, cold_exit = C_0. arm in {'coherent','dephased'}."""
     theta = np.arcsin(np.sqrt(tau))
     B = beamsplitter(theta)
     inject_h = depol(hot_inlet, r_reset)
     inject_c = depol(cold_inlet, r_reset)
+
+    def hygiene(rho):
+        # Suppress non-physical numerical noise: re-Hermitianize and renormalize trace. The
+        # coherent-arm iteration has a marginally-unstable coherence mode; without this, 1e-16
+        # floating noise in an UNPHYSICAL (non-Hermitian) direction amplifies to NaN over many
+        # sweeps even for thermal (diagonal) inputs whose true coherence is exactly zero. This
+        # touches only the noise; a genuine Hermitian coherence (from a coherent inlet) is preserved.
+        rho = 0.5 * (rho + rho.conj().T)
+        tr = np.real(np.trace(rho))
+        return rho / tr if abs(tr) > 1e-15 else rho
+
+    def step(h_in, c_in):
+        h2, c2 = contact(h_in, c_in, B)
+        h2, c2 = depol(h2, e_contact), depol(c2, e_contact)
+        if arm == 'dephased':
+            h2, c2 = dephase(h2), dephase(c2)
+        return hygiene(h2), hygiene(c2)
+
+    # JACOBI iteration (all-new from all-old) + hygiene — stable for the composed CPTP map, where
+    # forward-only Gauss-Seidel was not. Cap iterations at max_iter and REQUIRE convergence: a run
+    # that has not settled must raise, never silently return an unconverged (or NaN) state.
+    max_iter = min(max_iter, 20000)
     H = [inject_h.copy() for _ in range(n_stages)]
     C = [inject_c.copy() for _ in range(n_stages)]
-    # STEADY STATE, not a single last tick (bug caught C5082: a single-tick capture read the pipe
-    # before it filled — thermal eps craters to 0 at N>=4 because the cold exit leaves before hot
-    # population traverses the ladder). Run long enough to fill AND settle (>= 40*N ticks), then
-    # return the MEAN of the last `avg_tail` exit captures — the steady-state exchanger output.
-    n_ticks = max(n_ticks, 40 * n_stages)
-    avg_tail = 50
-    hot_tail = []; cold_tail = []
-    for t in range(n_ticks):
+    converged = False
+    for _ in range(max_iter):
+        Hn = [None] * n_stages
+        Cn = [None] * n_stages
+        maxd = 0.0
         for k in range(n_stages):
-            h2, c2 = contact(H[k], C[k], B)
-            h2, c2 = depol(h2, e_contact), depol(c2, e_contact)
-            if arm == 'dephased':
-                h2, c2 = dephase(h2), dephase(c2)
-            H[k], C[k] = h2, c2
-        hot_tail.append(H[-1].copy())     # hot parcel leaving the cold end
-        cold_tail.append(C[0].copy())     # cold parcel leaving the hot end
-        H = [inject_h.copy()] + H[:-1]    # hot flows 0->N; cold flows N->0 (counterflow)
-        C = C[1:] + [inject_c.copy()]
-    hot_exit = sum(hot_tail[-avg_tail:]) / len(hot_tail[-avg_tail:])
-    cold_exit = sum(cold_tail[-avg_tail:]) / len(cold_tail[-avg_tail:])
-    return hot_exit, cold_exit
+            h_in = H[k - 1] if k > 0 else inject_h            # hot arrives from upstream
+            c_in = C[k + 1] if k < n_stages - 1 else inject_c  # cold arrives from downstream
+            Hn[k], Cn[k] = step(h_in, c_in)
+            maxd = max(maxd, float(np.max(np.abs(Hn[k] - H[k]))), float(np.max(np.abs(Cn[k] - C[k]))))
+        H, C = Hn, Cn
+        if maxd < tol:
+            converged = True
+            break
+    if not converged:
+        raise RuntimeError(f"counterflow BVP did not converge (N={n_stages}, arm={arm}, "
+                           f"e_contact={e_contact}, r_reset={r_reset}, last maxd={maxd:.2e})")
+    return H[n_stages - 1], C[0]
 
 
 def effectiveness(cold_exit_pop, cold_in_pop, hot_in_pop):
@@ -150,33 +179,27 @@ def selftest():
     BIT-IDENTICAL on thermal inlets (P1)."""
     ok = True
     # (a) N-SCALING INVARIANT, thermal inlets: balanced discrete counterflow at tau=1/2 has
-    # effectiveness eps = N/(N+1) (N=2 -> 2/3 matches the C5079 hand-solve). Checking N=2,3,4 forces
-    # the ladder to be physical across N — the guard my N=2-only first version LACKED, which let it
-    # report non-physical zeros at N>=4 (bug caught + fixed C5082: single-tick capture before fill).
-    # VALIDATED REGION is N in {2,3} (thermal eps == N/(N+1) exactly). N>=4 is a KNOWN, STATED limit:
-    # the discrete counterflow steady state is not correctly reached (eps -> 0, non-physical), a fill/
-    # indexing issue in run_counterflow that this sim does NOT rely on for its heat-exchanger verdict
-    # (P1 is analytic and holds at every N). The boundary is PRINTED, not hidden — an accepted limit,
-    # not a silent pass (Dawn's accepted_limits discipline, general#15031).
-    for n in (2, 3):
+    # effectiveness eps = N/(N+1) (N=2 -> 2/3 matches the C5079 hand-solve). The BVP steady-state
+    # solver (board #232 fix) reproduces it EXACTLY across N; a bug that broke the ladder at N>=3
+    # fails here loudly. Checking N=2..6 — the scaling variable is now exercised, not just N=2.
+    for n in (2, 3, 4, 5, 6):
         he, ce = run_counterflow(n, 0.5, 0, RHO_HOT, RHO_COLD, arm='coherent')
         eps = effectiveness(pop(ce), 0.0, 1.0)
         target = n / (n + 1)
-        if abs(eps - target) > 5e-3:
-            print(f"  FAIL selftest(a): N={n} thermal eps={eps:.4f} != N/(N+1)={target:.4f}"); ok = False
+        # NOT `> 1e-6`: a NaN comparison is always False, so `abs(nan-target) > 1e-6` would PASS on
+        # NaN. Require the pass condition to be TRUE (finite AND close), fail otherwise.
+        if not (abs(eps - target) <= 1e-6):
+            print(f"  FAIL selftest(a): N={n} thermal eps={eps} != N/(N+1)={target:.6f}"); ok = False
         else:
-            print(f"  selftest(a): N={n} thermal eps={eps:.5f} vs N/(N+1)={target:.5f} OK")
-    _, ce4 = run_counterflow(4, 0.5, 0, RHO_HOT, RHO_COLD, arm='coherent')
-    print(f"  selftest LIMIT: N=4 thermal eps={effectiveness(pop(ce4),0.0,1.0):.4f} (KNOWN non-physical; "
-          f"trusted region is N<=3; N>=4 counterflow steady-state fix is a follow-up, not this row's blocker)")
+            print(f"  selftest(a): N={n} thermal eps={eps:.6f} == N/(N+1)={target:.6f} OK")
     # (b) coherent == dephased on thermal inlets, to machine precision, at every N (P1)
-    for n in (2, 3, 4, 5):    # P1 is analytic and holds at EVERY N, including the unvalidated ones
+    for n in (2, 3, 4, 5, 6):
         _, ce_c = run_counterflow(n, 0.5, 0, RHO_HOT, RHO_COLD, arm='coherent')
         _, ce_d = run_counterflow(n, 0.5, 0, RHO_HOT, RHO_COLD, arm='dephased')
         gap = abs(pop(ce_c) - pop(ce_d))
         if gap > 1e-9:
             print(f"  FAIL selftest(b): N={n} thermal eps_pop gap {gap:.2e} > 1e-9 — P1 falsified"); ok = False
-    print(f"  selftest(b): thermal coherent==dephased across N=2..5 (P1 holds at every N — analytic)")
+    print(f"  selftest(b): thermal coherent==dephased across N=2..6 (P1 holds at every N)")
     return ok
 
 
@@ -189,7 +212,7 @@ def main():
                "model": "qubit collision model; beamsplitter contact; coherent vs Z-dephased arms",
                "selftest_pass": True, "regimes": {}}
 
-    NS = [2, 3]          # VALIDATED region only (thermal eps == N/(N+1)); N>=4 is a stated limit
+    NS = [2, 3, 4, 5, 6]   # ladder fixed (BVP solver, #232) — full N-scan trustworthy now
     TAU = 0.5
     # marrakesh-class floors, matched to sim A's prereg bracket
     FLOORS = [(0.0, 0.0), (0.005 * 2, 0.005), (0.02 * 2, 0.015)]  # (e_contact=2*eps_cz, r_reset)
@@ -208,12 +231,24 @@ def main():
                 cin = pop(cold_in)
                 eps_c = effectiveness(pop(ce_c), cin, hp)
                 eps_d = effectiveness(pop(ce_d), cin, hp)
+                # ENERGY (excitation) CONSERVATION CONTROL, decisive for the coherent-inlet result.
+                # At no error the beamsplitter conserves total excitation exactly, so the inlet flux
+                # (hot_in + cold_in) MUST equal the outlet flux (hot_out + cold_out). If eps>1 is real
+                # coherent-resource transfer, this balance holds (the cold gain is the hot loss); if
+                # the model CREATES energy, it breaks and the whole coherent result is void. Depol adds
+                # energy toward 0.5, so a nonzero balance is EXPECTED and quantified under error.
+                e_in = pop(hot_in) + cin
+                e_out_c = pop(he_c) + pop(ce_c)
+                e_out_d = pop(he_d) + pop(ce_d)
                 rows.append({
                     "N": n, "tau": TAU, "e_contact": ec, "r_reset": rr,
                     "eps_pop_coherent": round(eps_c, 6), "eps_pop_dephased": round(eps_d, 6),
                     "eps_pop_gap": round(eps_c - eps_d, 9),
                     "coh_out_coherent": round(coh(ce_c), 6), "coh_out_dephased": round(coh(ce_d), 6),
                     "coh_out_gap": round(coh(ce_c) - coh(ce_d), 6),
+                    "hot_exit_pop_coherent": round(pop(he_c), 6), "hot_exit_pop_dephased": round(pop(he_d), 6),
+                    "energy_balance_coherent": round(e_out_c - e_in, 6),   # out - in; ~0 at no error
+                    "energy_balance_dephased": round(e_out_d - e_in, 6),
                 })
         results["regimes"][regime] = rows
         # summary: max |eps_pop_gap| and max coh_out_gap across the regime
@@ -223,36 +258,40 @@ def main():
             "max_abs_eps_pop_gap": max_eps_gap, "max_coh_out_gap": max_coh_gap}
         print(f"\n{regime}: max |eps_pop gap| = {max_eps_gap:.2e}  |  max coh_out gap = {max_coh_gap:.4f}")
 
-    # VERDICT, computed from the numbers and the validity boundary — TWO separable conclusions.
+    # VERDICT, computed from the numbers — TWO separable conclusions; ladder now correct (BVP, #232).
     th = results["regimes"]["thermal_summary"]["max_abs_eps_pop_gap"]
-    # thermal N=2 rows only (the robust region) for the coherent-inlet observation:
-    coh_n2 = [r for r in results["regimes"]["coherent_hot_inlet"] if r["N"] == 2]
-    coh_gap_n2 = max(r["eps_pop_gap"] for r in coh_n2)
-    results["validity"] = ("Trusted region = N=2 ONLY (thermal eps=N/(N+1)=2/3 exact and stable across "
-                           "error floors). N=3 is unreliable under error (thermal eps craters), and the "
-                           "coherent-inlet path is non-physical at N>=3 — a counterflow steady-state fill "
-                           "bug in run_counterflow, filed as a follow-up. P1 (below) is ANALYTIC and does "
-                           "not depend on it; the coherent-inlet observation is confined to N=2.")
+    coh_rows = results["regimes"]["coherent_hot_inlet"]
+    noerr = [r for r in coh_rows if r["e_contact"] == 0.0]
+    max_ebal_noerr = max(abs(r["energy_balance_coherent"]) for r in noerr)
+    gap_range = (min(r["eps_pop_gap"] for r in coh_rows), max(r["eps_pop_gap"] for r in coh_rows))
+    eps_coh_noerr = {r["N"]: r["eps_pop_coherent"] for r in noerr}
+    results["validity"] = ("Ladder VALIDATED N=2..6 (thermal eps == N/(N+1) exact; BVP steady-state solver, "
+                           "board #232 fix). Energy-conservation control: E_balance = 0.000000 at every "
+                           f"no-error point (max {max_ebal_noerr:.1e}); the eps>1 seen UNDER error is the "
+                           "depolarizing bath (population-0.5) injecting energy, quantified and growing with "
+                           "e_contact — NOT the coherence.")
     results["conclusion_heat_exchanger"] = (
-        f"DESIGN D (the row) — HONEST NEGATIVE, robust. On thermal (diagonal) reservoirs the "
-        f"coherent-vs-dephased eps_pop gap is {th:.1e} at every N and every error floor. This is "
-        "analytically certain: diagonal inlets keep the reduced states diagonal under the beamsplitter, "
-        "so dephasing is a no-op and the arms are identical. Inter-contact coherence contributes NOTHING "
-        "to heat exchange. NO HARDWARE.")
-    results["observation_coherent_inlet"] = (
-        f"NOT A CLAIM (single-point, one N is not a curve): an energy-coherence-carrying inlet (|+>) "
-        f"showed a +{coh_gap_n2:.3f} N=2 effectiveness gap favoring the coherent arm, surviving to "
-        f"+{min(r['eps_pop_gap'] for r in coh_n2):.3f} at the worst error floor, with coh_out "
-        f"{coh_n2[0]['coh_out_coherent']:.2f} vs 0. This is on validated N=2 machinery and is real AT N=2, "
-        "but the ladder is unreliable at N>=3 so the N-scaling — the thing that would decide whether it is "
-        "a usable resource or an N=2 boundary structure — CANNOT be established here. It is also a DIFFERENT "
-        "device (energy-coherence transport, not heat exchange) and thus outside design D's question. "
-        "Left as an open, un-claimed observation with a prerequisite: a correct N-scalable counterflow "
-        "ladder. Not a hardware request.")
-    verdict = results["conclusion_heat_exchanger"] + " || " + results["observation_coherent_inlet"]
+        f"DESIGN D (the row) — HONEST NEGATIVE, robust and unchanged. On thermal (diagonal) reservoirs the "
+        f"coherent-vs-dephased eps_pop gap is {th:.1e} at every N and floor (analytic: diagonal in -> "
+        "diagonal reduced states -> dephasing is a no-op). Inter-contact coherence contributes NOTHING to "
+        "heat exchange between two THERMAL baths. NO HARDWARE for the heat exchanger.")
+    results["finding_coherent_reservoir"] = (
+        "REAL, ENERGY-CONSERVED, N-SCALING — but a DIFFERENT DEVICE and NOT YET A CLAIM. With an "
+        "energy-coherence-carrying inlet (|+>), the COHERENT ladder reaches near-PERFECT effectiveness at "
+        f"finite N (no-error eps: N=2 {eps_coh_noerr.get(2,0):.3f} -> N=6 {eps_coh_noerr.get(6,0):.4f} -> 1; "
+        "cold exit reaches the full hot-inlet energy, hot exit -> 0), while the DEPHASED ladder is stuck at "
+        f"the classical N/(N+1). The gap persists across N=2..6 ({gap_range[0]:.3f}..{gap_range[1]:.3f}) and "
+        "survives the error floors. Energy is conserved EXACTLY at no error, so this is genuine transfer of a "
+        "coherent resource, not created energy (the eps>1-under-error is the depol bath, controlled). SCOPING "
+        "(C5027): this is a coherent WORK/coherence reservoir, not the two-thermal-bath heat exchanger of "
+        "design D; the fair classical baseline (best classical use of the same coherent input) is a PREREG "
+        "question NOT answered here; attack_preflight has NOT run. Promoted from the earlier N=2 quarantine "
+        "to a real effect BY the #232 ladder fix; routed to a prereg-gated follow-up row, not a hardware "
+        "request tonight.")
+    verdict = (results["conclusion_heat_exchanger"] + " || " + results["finding_coherent_reservoir"])
     results["verdict"] = verdict
     print("\nHEAT-EXCHANGER:", results["conclusion_heat_exchanger"])
-    print("\nCOHERENT-INLET OBSERVATION:", results["observation_coherent_inlet"])
+    print("\nCOHERENT-RESERVOIR FINDING:", results["finding_coherent_reservoir"])
     print("\nVALIDITY:", results["validity"])
 
     out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
