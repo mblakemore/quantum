@@ -1,0 +1,170 @@
+{
+  "card": "counterflow_sim_d",
+  "cycle": "C5082",
+  "board": 198,
+  "question": "does inter-contact coherence improve exchange effectiveness?",
+  "model": "qubit collision model; beamsplitter contact; coherent vs Z-dephased arms",
+  "selftest_pass": true,
+  "regimes": {
+    "thermal": [
+      {
+        "N": 2,
+        "tau": 0.5,
+        "e_contact": 0.0,
+        "r_reset": 0.0,
+        "eps_pop_coherent": 0.666667,
+        "eps_pop_dephased": 0.666667,
+        "eps_pop_gap": 0.0,
+        "coh_out_coherent": 0.0,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 0.0
+      },
+      {
+        "N": 2,
+        "tau": 0.5,
+        "e_contact": 0.01,
+        "r_reset": 0.005,
+        "eps_pop_coherent": 0.664724,
+        "eps_pop_dephased": 0.664724,
+        "eps_pop_gap": 0.0,
+        "coh_out_coherent": 0.0,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 0.0
+      },
+      {
+        "N": 2,
+        "tau": 0.5,
+        "e_contact": 0.04,
+        "r_reset": 0.015,
+        "eps_pop_coherent": 0.65973,
+        "eps_pop_dephased": 0.65973,
+        "eps_pop_gap": 0.0,
+        "coh_out_coherent": 0.0,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 0.0
+      },
+      {
+        "N": 3,
+        "tau": 0.5,
+        "e_contact": 0.0,
+        "r_reset": 0.0,
+        "eps_pop_coherent": 0.75,
+        "eps_pop_dephased": 0.75,
+        "eps_pop_gap": 0.0,
+        "coh_out_coherent": 0.0,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 0.0
+      },
+      {
+        "N": 3,
+        "tau": 0.5,
+        "e_contact": 0.01,
+        "r_reset": 0.005,
+        "eps_pop_coherent": 0.012715,
+        "eps_pop_dephased": 0.012715,
+        "eps_pop_gap": 0.0,
+        "coh_out_coherent": 0.0,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 0.0
+      },
+      {
+        "N": 3,
+        "tau": 0.5,
+        "e_contact": 0.04,
+        "r_reset": 0.015,
+        "eps_pop_coherent": 0.053633,
+        "eps_pop_dephased": 0.053633,
+        "eps_pop_gap": 0.0,
+        "coh_out_coherent": 0.0,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 0.0
+      }
+    ],
+    "thermal_summary": {
+      "max_abs_eps_pop_gap": 0.0,
+      "max_coh_out_gap": 0.0
+    },
+    "coherent_hot_inlet": [
+      {
+        "N": 2,
+        "tau": 0.5,
+        "e_contact": 0.0,
+        "r_reset": 0.0,
+        "eps_pop_coherent": 0.833333,
+        "eps_pop_dephased": 0.666667,
+        "eps_pop_gap": 0.166666667,
+        "coh_out_coherent": 0.471405,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 0.471405
+      },
+      {
+        "N": 2,
+        "tau": 0.5,
+        "e_contact": 0.01,
+        "r_reset": 0.005,
+        "eps_pop_coherent": 0.838478,
+        "eps_pop_dephased": 0.677076,
+        "eps_pop_gap": 0.161402352,
+        "coh_out_coherent": 0.451579,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 0.451579
+      },
+      {
+        "N": 2,
+        "tau": 0.5,
+        "e_contact": 0.04,
+        "r_reset": 0.015,
+        "eps_pop_coherent": 0.853212,
+        "eps_pop_dephased": 0.705114,
+        "eps_pop_gap": 0.148097328,
+        "coh_out_coherent": 0.401208,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 0.401208
+      },
+      {
+        "N": 3,
+        "tau": 0.5,
+        "e_contact": 0.0,
+        "r_reset": 0.0,
+        "eps_pop_coherent": 0.0,
+        "eps_pop_dephased": 0.0,
+        "eps_pop_gap": 0.0,
+        "coh_out_coherent": 0.0,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 0.0
+      },
+      {
+        "N": 3,
+        "tau": 0.5,
+        "e_contact": 0.01,
+        "r_reset": 0.005,
+        "eps_pop_coherent": 0.020292,
+        "eps_pop_dephased": 0.020278,
+        "eps_pop_gap": 1.3441e-05,
+        "coh_out_coherent": 2.8e-05,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 2.8e-05
+      },
+      {
+        "N": 3,
+        "tau": 0.5,
+        "e_contact": 0.04,
+        "r_reset": 0.015,
+        "eps_pop_coherent": 0.084881,
+        "eps_pop_dephased": 0.084617,
+        "eps_pop_gap": 0.000264844,
+        "coh_out_coherent": 0.000501,
+        "coh_out_dephased": 0.0,
+        "coh_out_gap": 0.000501
+      }
+    ],
+    "coherent_hot_inlet_summary": {
+      "max_abs_eps_pop_gap": 0.166666667,
+      "max_coh_out_gap": 0.471405
+    }
+  },
+  "validity": "Trusted region = N=2 ONLY (thermal eps=N/(N+1)=2/3 exact and stable across error floors). N=3 is unreliable under error (thermal eps craters), and the coherent-inlet path is non-physical at N>=3 \u2014 a counterflow steady-state fill bug in run_counterflow, filed as a follow-up. P1 (below) is ANALYTIC and does not depend on it; the coherent-inlet observation is confined to N=2.",
+  "conclusion_heat_exchanger": "DESIGN D (the row) \u2014 HONEST NEGATIVE, robust. On thermal (diagonal) reservoirs the coherent-vs-dephased eps_pop gap is 0.0e+00 at every N and every error floor. This is analytically certain: diagonal inlets keep the reduced states diagonal under the beamsplitter, so dephasing is a no-op and the arms are identical. Inter-contact coherence contributes NOTHING to heat exchange. NO HARDWARE.",
+  "observation_coherent_inlet": "NOT A CLAIM (single-point, one N is not a curve): an energy-coherence-carrying inlet (|+>) showed a +0.167 N=2 effectiveness gap favoring the coherent arm, surviving to +0.148 at the worst error floor, with coh_out 0.47 vs 0. This is on validated N=2 machinery and is real AT N=2, but the ladder is unreliable at N>=3 so the N-scaling \u2014 the thing that would decide whether it is a usable resource or an N=2 boundary structure \u2014 CANNOT be established here. It is also a DIFFERENT device (energy-coherence transport, not heat exchange) and thus outside design D's question. Left as an open, un-claimed observation with a prerequisite: a correct N-scalable counterflow ladder. Not a hardware request.",
+  "verdict": "DESIGN D (the row) \u2014 HONEST NEGATIVE, robust. On thermal (diagonal) reservoirs the coherent-vs-dephased eps_pop gap is 0.0e+00 at every N and every error floor. This is analytically certain: diagonal inlets keep the reduced states diagonal under the beamsplitter, so dephasing is a no-op and the arms are identical. Inter-contact coherence contributes NOTHING to heat exchange. NO HARDWARE. || NOT A CLAIM (single-point, one N is not a curve): an energy-coherence-carrying inlet (|+>) showed a +0.167 N=2 effectiveness gap favoring the coherent arm, surviving to +0.148 at the worst error floor, with coh_out 0.47 vs 0. This is on validated N=2 machinery and is real AT N=2, but the ladder is unreliable at N>=3 so the N-scaling \u2014 the thing that would decide whether it is a usable resource or an N=2 boundary structure \u2014 CANNOT be established here. It is also a DIFFERENT device (energy-coherence transport, not heat exchange) and thus outside design D's question. Left as an open, un-claimed observation with a prerequisite: a correct N-scalable counterflow ladder. Not a hardware request."
+}
