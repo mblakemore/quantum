@@ -188,29 +188,58 @@ def service_for_submission(account_var):
     from qiskit_ibm_runtime import QiskitRuntimeService
     kw = {"channel": "ibm_quantum_platform", "token": tok}
     inst = os.environ.get("QISKIT_IBM_INSTANCE") or None
-    if inst:
-        kw["instance"] = inst
-        return QiskitRuntimeService(**kw)
+    allow_paid = os.environ.get("QPU_ALLOW_PAID") == "1"
     # ---- INSTANCE GATE (Whisper C5073, board #151; incident general#11539) ----
     # A named ACCOUNT is not a pinned INSTANCE: one credential can carry a free us-east
     # instance AND a paid eu-de instance, and the runtime resolves by DEVICE REGION — a
     # submission to a eu-de-region device silently bills the paid instance (whisper-de,
     # 61s consumed unauthorized before the 1218 wall exposed it). This gate refuses-loudly:
     # auto-pin to the single free (plan=='open') instance when one exists; otherwise raise
-    # with the full list. QPU_ALLOW_PAID=1 bypasses ONLY for an explicitly Creator-
-    # authorized paid flight, and prints what it is doing.
+    # with the full list.
+    #
+    # C5082 REWRITE after Elder's second-seat review (C6650, quantum@602a3d3, findings I + J):
+    #   J: the explicit-pin branch used to `return` BEFORE this gate — a paid CRN in
+    #      QISKIT_IBM_INSTANCE with QPU_ALLOW_PAID unset returned a paid service, enumerated
+    #      nothing, printed nothing. Latent (0 setters in the fleet), and the sentence
+    #      "ALLOW_PAID only for authorized flights" was false for that route.
+    #   I: QPU_ALLOW_PAID=1 returned the UNPINNED service — region resolution, the incident's
+    #      own mechanism. It authorized "some paid instance", not THE one the Creator named;
+    #      correct today by geography (eu-de has one instance), not by construction.
+    # THE RULE THAT CLOSES BOTH: AUTHORIZE AN INSTANCE, NEVER A MODE.
+    #   * QPU_ALLOW_PAID=1 without QISKIT_IBM_INSTANCE          -> REFUSE (a mode names nothing)
+    #   * QISKIT_IBM_INSTANCE to a PAID/unknown CRN, no ALLOW    -> REFUSE, naming the instance
+    #   * QISKIT_IBM_INSTANCE to a PAID CRN + QPU_ALLOW_PAID=1   -> pin to THAT CRN, print it
+    #   * QISKIT_IBM_INSTANCE to a FREE CRN                      -> pin to it (validated free)
+    #   * no pin, no ALLOW                                       -> auto-pin single free, else REFUSE
+    # A pin is VALIDATED against the enumeration; enumeration failure fails CLOSED unless the
+    # human has named the paid instance AND set ALLOW_PAID (both — that is an authorization).
     PAID_CRNS = {
         # whisper-de (eu-de, PAID) and WhisperPaid (us-east, PAID) — registry-known
         "crn:v1:bluemix:public:quantum-computing:eu-de:a/65155eedeb8b464eadf55d101fb3c931:dcd016cb-5ab6-4e2d-86e4-befec4c5fe82::",
         "crn:v1:bluemix:public:quantum-computing:us-east:a/65155eedeb8b464eadf55d101fb3c931:27609585-d5b2-43cb-808d-2d47aeb87c05::",
     }
+    if allow_paid and not inst:
+        raise RuntimeError(
+            f"instance gate: QPU_ALLOW_PAID=1 without QISKIT_IBM_INSTANCE — a MODE authorizes "
+            f"nothing (finding I: the unpinned service resolves by device region, the incident "
+            f"mechanism). Name the authorized paid instance's CRN in QISKIT_IBM_INSTANCE as well."
+        )
+    if allow_paid and inst:
+        # Authorization = instance named + mode set. Pin to exactly that CRN; enumeration is
+        # informational here (the human named it), so an API failure does not block.
+        print(f"[instance-gate] AUTHORIZED PAID FLIGHT: QPU_ALLOW_PAID=1 and QISKIT_IBM_INSTANCE "
+              f"pinned to ...{inst[-16:]} ({'registry-known paid' if inst in PAID_CRNS else 'not on the paid denylist'}) "
+              f"— PAID BILLING POSSIBLE on THIS instance only")
+        kw["instance"] = inst
+        return QiskitRuntimeService(**kw)
     svc = QiskitRuntimeService(**kw)
     try:
         raw = svc.instances()
     except Exception as e:  # API shape drift must fail CLOSED on multi-instance risk
         raise RuntimeError(
             f"instance gate could not enumerate instances for {account_var} ({e}) — "
-            f"REFUSING submission service. Pin QISKIT_IBM_INSTANCE explicitly."
+            f"REFUSING submission service (a pin cannot be validated as free without the list). "
+            f"For an authorized paid flight set BOTH QISKIT_IBM_INSTANCE and QPU_ALLOW_PAID=1."
         )
     insts = []
     for it in raw:
@@ -221,10 +250,20 @@ def service_for_submission(account_var):
             insts.append({"crn": str(it), "plan": "", "name": str(it)})
     free = [i for i in insts if i["plan"] == "open" and i["crn"] not in PAID_CRNS]
     paid = [i for i in insts if i not in free]
-    if os.environ.get("QPU_ALLOW_PAID") == "1":
-        print(f"[instance-gate] QPU_ALLOW_PAID=1: NOT pinning; account {account_var} instances: "
-              f"{[(i['name'], i['plan']) for i in insts]} — PAID BILLING POSSIBLE (authorized flight)")
-        return svc
+    if inst:
+        # Explicit pin, no ALLOW_PAID: honoured ONLY if it validates as a free instance.
+        match = [i for i in insts if i["crn"] == inst]
+        if match and match[0] in free:
+            print(f"[instance-gate] QISKIT_IBM_INSTANCE pin validated FREE: '{match[0]['name']}' "
+                  f"(...{inst[-16:]})")
+            kw["instance"] = inst
+            return QiskitRuntimeService(**kw)
+        what = (f"'{match[0]['name']}' plan={match[0]['plan']!r}" if match else "NOT in this account's instance list")
+        raise RuntimeError(
+            f"instance gate: QISKIT_IBM_INSTANCE ...{inst[-16:]} is {what} — a PAID or unknown pin "
+            f"needs an authorization: set QPU_ALLOW_PAID=1 together with the pin (finding J: this "
+            f"branch used to return before the gate). REFUSING."
+        )
     if len(free) == 1:
         if paid:
             print(f"[instance-gate] {account_var} carries paid instance(s) "
@@ -235,8 +274,8 @@ def service_for_submission(account_var):
     raise RuntimeError(
         f"instance gate: {account_var} resolves to {len(free)} free / {len(paid)} paid instances "
         f"({[(i['name'], i['plan']) for i in insts]}) — REFUSING submission service without an "
-        f"explicit pin. Set QISKIT_IBM_INSTANCE to the intended CRN (or QPU_ALLOW_PAID=1 for a "
-        f"Creator-authorized paid flight)."
+        f"explicit pin. Set QISKIT_IBM_INSTANCE to the intended CRN (plus QPU_ALLOW_PAID=1 if it "
+        f"is a Creator-authorized paid instance)."
     )
 
 
@@ -408,6 +447,24 @@ def _selftest():
         print("PASS  describe_accounts() returns names, never token material")
     else:
         print("FAIL  token material leaked into describe output")
+        ok = False
+
+    # INSTANCE GATE cases (C5082, after Elder's C6650 review found this selftest had ZERO gate
+    # cases — 7/7 passed, none touched service_for_submission's pinning). The hermetic branch proof
+    # (fake runtime, no token, no network) runs in a SUBPROCESS so its sys.modules monkeypatch
+    # cannot leak into this process; --assert makes it exit non-zero on any EXPECT mismatch.
+    import subprocess
+    proof = os.path.join(os.path.dirname(os.path.abspath(__file__)), "instance_gate_branch_proof.py")
+    if os.path.exists(proof):
+        r = subprocess.run([sys.executable, proof, "--assert"], capture_output=True, text=True, timeout=60)
+        tail = [ln for ln in r.stdout.splitlines() if ln.startswith("BRANCH PROOF")]
+        if r.returncode == 0 and tail:
+            print(f"PASS  instance gate branch proof: {tail[-1]}")
+        else:
+            print(f"FAIL  instance gate branch proof (rc={r.returncode}): {tail[-1] if tail else r.stderr[-200:]}")
+            ok = False
+    else:
+        print("FAIL  instance gate branch proof script MISSING — the gate is uncovered")
         ok = False
 
     print("SELFTEST", "PASS" if ok else "FAIL")

@@ -54,14 +54,52 @@ cases = [
     [], {}, True),
  ("H non-dict instance rows                           EXPECT REFUSED (plan='' -> 0 free)",
     ["crn-string-only"], {}),
- ("I QPU_ALLOW_PAID=1, 1 free + 2 paid                EXPECT RETURNED pin=None (UNPINNED = region-resolution)",
+ # I and J were FINDINGS at 602a3d3 (Elder C6650); the gate was rewritten C5082 (Whisper) so that an
+ # INSTANCE is authorized, never a MODE. Their EXPECT lines now state the fixed behaviour; the
+ # pre-fix behaviour is preserved in the commit message of 602a3d3 and in the review on board #151.
+ ("I QPU_ALLOW_PAID=1, NO pin, 1 free + 2 paid        EXPECT REFUSED (a mode names nothing; was: RETURNED unpinned)",
     [I(FREE_CRN,"open","free"), I(PAID_DE,"premium","whisper-de"), I(PAID_US,"premium","WhisperPaid")], {"QPU_ALLOW_PAID":"1"}),
- ("J QISKIT_IBM_INSTANCE=PAID_DE, no ALLOW_PAID       EXPECT RETURNED pin=PAID, silently (FINDING: pin branch precedes gate)",
+ ("J QISKIT_IBM_INSTANCE=PAID_DE, no ALLOW_PAID       EXPECT REFUSED naming whisper-de (was: RETURNED pin=PAID silently)",
     [I(FREE_CRN,"open","free"), I(PAID_DE,"premium","whisper-de")], {"QISKIT_IBM_INSTANCE": PAID_DE}),
+ ("K pin=PAID_DE + QPU_ALLOW_PAID=1 (an authorization) EXPECT RETURNED pin=PAID_DE (that instance, printed)",
+    [I(FREE_CRN,"open","free"), I(PAID_DE,"premium","whisper-de")], {"QISKIT_IBM_INSTANCE": PAID_DE, "QPU_ALLOW_PAID":"1"}),
+ ("L pin=FREE_CRN, no ALLOW_PAID                      EXPECT RETURNED pin=FREE (pin validated free)",
+    [I(FREE_CRN,"open","free"), I(PAID_DE,"premium","whisper-de")], {"QISKIT_IBM_INSTANCE": FREE_CRN}),
+ ("M pin=FREE_CRN but instances() raises              EXPECT REFUSED (a pin cannot be validated without the list)",
+    [], {"QISKIT_IBM_INSTANCE": FREE_CRN}, True),
+ ("N pin=PAID_DE + ALLOW_PAID, instances() raises     EXPECT RETURNED pin=PAID_DE (the human named it; enumeration informational)",
+    [], {"QISKIT_IBM_INSTANCE": PAID_DE, "QPU_ALLOW_PAID":"1"}, True),
+ ("O pin=UNKNOWN CRN not in the account, no ALLOW     EXPECT REFUSED ('NOT in this account's instance list')",
+    [I(FREE_CRN,"open","free")], {"QISKIT_IBM_INSTANCE": UNKNOWN_PAID}),
 ]
+# --assert (C5082): make the proof a GUARD. Each case's EXPECT token is parsed from its own label —
+# "EXPECT REFUSED" must refuse, "EXPECT pin=FREE"/"RETURNED pin=X" must return pinned to that CRN
+# (FREE_CRN / PAID_DE by tag) — and any mismatch exits 1. ibm_multi_account._selftest runs this
+# in a subprocess so the gate is covered by the module's own guard (Elder's review: 7/7 selftest
+# cases, none touched the gate).
+ASSERT = "--assert" in sys.argv
+def expect_of(label):
+    if "EXPECT REFUSED" in label: return ("REFUSED", None)
+    if "pin=FREE" in label: return ("RETURNED", FREE_CRN)
+    if "pin=PAID_DE" in label: return ("RETURNED", PAID_DE)
+    return (None, None)
+def matches(label, got):
+    kind, crn = expect_of(label)
+    if kind is None: return True
+    if kind == "REFUSED": return got.startswith("REFUSED")
+    return got.startswith("RETURNED") and got.endswith(crn[-14:])
+failures = 0
 for c in cases:
     name, insts, env = c[0], c[1], c[2]; raise_api = c[3] if len(c) > 3 else False
-    print(f"{name}\n    -> {run(name, insts, env, raise_api)}")
-    if name.startswith("J"):
-        print(f"    -> instances() was called: {any(True for _ in [])} (see below)")
-        print(f"    -> services constructed: {len(FakeSvc.made)}  (1 = returned before enumerating; gate never ran)")
+    got = run(name, insts, env, raise_api)
+    ok = matches(name, got)
+    if not ok: failures += 1
+    print(f"{name}\n    -> {got}" + ("" if ok else "\n    !! MISMATCH vs EXPECT"))
+    if name[0] in "JKLN":
+        # Post-fix: the gate ENUMERATES before honouring a bare pin (J/L: 1 service made for the
+        # listing, then refuse or a second pinned service); an AUTHORIZED pin (K/N) constructs exactly
+        # one pinned service and never enumerates — the human named the instance.
+        print(f"    -> services constructed: {len(FakeSvc.made)}; pinned kwargs present: {[bool(k.get('instance')) for k in FakeSvc.made]}")
+print(f"BRANCH PROOF {'PASS' if not failures else 'FAIL'} ({len(cases) - failures}/{len(cases)} cases match their EXPECT)")
+if ASSERT:
+    sys.exit(1 if failures else 0)
