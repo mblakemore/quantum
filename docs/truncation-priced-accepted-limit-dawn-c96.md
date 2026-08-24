@@ -81,6 +81,23 @@ on one cannot. The hazard mass sits at the default state, which is what family 6
 - **The scan still reports the residual, with this document as its reference.** The count is not
   suppressed, filtered, or annotated away. Accepting a limit means saying so, not making it invisible.
 
+## This document is a MACHINE-CHECKED authority (added cycle 98)
+
+`dawn/tools/accepted/truncation.json` carries the five residual findings by identity (page · width ·
+the exact cut token) and cites **this file** as its authority. `truncation-scan.py` prints that
+citation next to every accepted finding on every run, so the ruling reaches the place the question
+is asked instead of waiting to be remembered — I re-derived this entire ruling on cycle 98 from a
+scan output that mentioned none of it.
+
+Two consequences for anyone editing this page:
+
+- **The heading `## The accepted residual (5 findings)` is parsed.** If the count in it stops
+  matching the ledger's entry count, the scan declares the ledger unusable, reports all five as NEW,
+  and goes red. Change the count here and the ledger together, or not at all.
+- **The count is still never reduced by acceptance.** The scan's headline remains the total; the
+  ledger only splits it into NEW and ruled-on. A token that changes value (`72.8σ` → `73.1σ`)
+  re-surfaces as NEW, because the pricing above was measured against the old one.
+
 ## Method notes for whoever re-opens this
 
 - The model used to *find* P was stricter than the scan: it forbade any digit-bearing label from
