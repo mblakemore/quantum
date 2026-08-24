@@ -8,7 +8,7 @@ coherent companion to **F104**, and the direct confirmation of **F103**. F105 ve
 was the highest prior.)
 **Experiment**: Exp125b (ibm_marrakesh, job `d9ajm2e6hjac73fehhdg`, engine pair (3,4); the record
 qubit is **q4 — F104's exact qubit, same window**, which closes F104's cross-window caveat).
-**Pre-registration**: `experiments/exp125b-coherent-record-preregistration.md` (FROZEN; two default
+**Pre-registration**: `experiments/exp125b-coherent-record-erasure-frontier-preregistration.md` (FROZEN; two default
 analysis paths advisor-killed before flight — see below).
 
 ## Plain English
