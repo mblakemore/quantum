@@ -1,0 +1,29 @@
+{
+  "cycle": "C6651",
+  "grader": "elder",
+  "finding": "F129 · H13 temporal steering — POST-HOC re-analysis of the Cell 3 flight: W_TS = 2.8301 ± 0.0125 against the hidden-state ceiling of 1, on raw counts with no corrections",
+  "job": "d9rufentfhrs73ds52cg",
+  "backend": "ibm_fez",
+  "scope_fence_carried": "POST-HOC — not pre-registered as a steering test; the Cell 3 prereg graded something else on the same data. This ratification certifies the NUMBER under the re-analysis protocol; it does not convert the certificate into a pre-registration's credit, exactly as the row states",
+  "per_number_checks": {
+    "a_ledger_row": "docs/campaign-arcs.md F129 row (commit 181262f) — present",
+    "b_exhibit": "results/f129_exhibit_elder_c6651.json — W_TS recomputed from the RAW COUNTS (fetched and BANKED this cycle: results/h13_cell3_counts_d9rufentfhrs73ds52cg_elder_c6651.json, 27 pubs, 54,000 shots) under the protocol's own formula W_TS = Σ_i Σ_a P(a|i,i)·⟨B_i⟩²_a over the three diagonal settings: 2.830083 vs recorded 2.830083 (Δ 0.0), per-setting XX 0.9455 / YY 0.9579 / ZZ 0.9267 identical to four decimals; bit-order convention pinned (t1 outcome = creg bit 1, preps pooled) and the alternate order reproduces the recorded alt_convention (2.83026); spatial-arm control 2.6836 vs recorded 2.6836. Bootstrap SE 0.012298 vs recorded 0.012515 — same B=4000 and seed 20260811 but a different random generator, a 1.7% difference of the size resampling noise predicts at B=4000 (SE-of-SE ≈ SE/√(2B) ≈ 1.1%); σ 148.8 vs 146.2, both two orders past the 5σ bar",
+    "c_calibration_window": "results/window_rescue_c5075.json jobs[d9rufentfhrs73ds52cg]: DONE, properties AT CREATION DATE (2026-08-07), used_qubits [22, 137, 147], used_readout median 0.0030518 max 0.0035400 vs device median 0.0083618 — the flown qubits 2.74x QUIETER than the device. Exposure nil regardless: the witness is a DIRECT measurement over a THEOREM bound (Jensen, hidden-state ≤ 1) with a bootstrap SE on raw counts — no noise model, and the protocol applies no corrections ('all known biases shrink W_TS toward the bound')",
+    "triage_class": "(4) DIRECTLY-MEASURED over a THEOREM ceiling — not exposed"
+  },
+  "ratified_numbers": {
+    "W_TS_temporal": {"value": 2.830083, "se_recorded": 0.012515, "se_recomputed": 0.012298, "sigma_over_1": "146.2 recorded / 148.8 recomputed", "per_setting": {"XX": 0.9455, "YY": 0.9579, "ZZ": 0.9267}},
+    "W_spatial_control": {"value": 2.6836, "se_recorded": 0.023775, "sigma_recorded": 70.8},
+    "corrections": "none (raw)",
+    "hs_bound_check_recorded": 0.999979692329251
+  },
+  "not_recomputed": [
+    "the numerical hidden-state bound check (0.99998) — the bound is analytic (Jensen); the recorded numerical check is carried as recorded, not re-run",
+    "the spatial arm's bootstrap SE — control only"
+  ],
+  "does_not_certify": [
+    "any pre-registered claim — the certificate is post-hoc by the row's own title and stays so",
+    "readout/QND-corrected values — none were applied; the raw statistic is what is certified"
+  ],
+  "verdict": "RATIFIED: W_TS = 2.8301 reproduces exactly from banked raw counts under the protocol's formula, SE reproduces to resampling noise, the violation of the hidden-state bound stands at >140σ; scope fence POST-HOC carried unchanged"
+}

@@ -1,0 +1,220 @@
+{
+ "cycle": "C6651",
+ "grader": "elder",
+ "finding": "F129 \u00b7 H13 temporal steering (post-hoc re-analysis of Cell 3)",
+ "job": "d9rufentfhrs73ds52cg",
+ "source": {
+  "counts": "results/h13_cell3_counts_d9rufentfhrs73ds52cg_elder_c6651.json (banked C6651 from the job)",
+  "manifest": "results/h13_cell3_manifest_d9rufentfhrs73ds52cg.json",
+  "protocol": "docs/h13-temporal-steering-reanalysis-protocol-whisper-c5057.md",
+  "compared_to": "results/h13_temporal_steering_reanalysis_c5057.json"
+ },
+ "conventions_enumerated": [
+  {
+   "arm": "temporal",
+   "bits": "a=bit0,b=bit1",
+   "prep": "pooled",
+   "W": 2.830260627078637,
+   "per": {
+    "XX": 0.9454891892324435,
+    "YY": 0.957942886282509,
+    "ZZ": 0.9268285515636847
+   },
+   "n_shots_per_setting": {
+    "X": 4000,
+    "Y": 4000,
+    "Z": 4000
+   }
+  },
+  {
+   "arm": "temporal",
+   "bits": "a=bit0,b=bit1",
+   "prep": 0,
+   "W": 2.916361501331663,
+   "per": {
+    "XX": 0.958875,
+    "YY": 0.960818833162743,
+    "ZZ": 0.9966676681689202
+   },
+   "n_shots_per_setting": {
+    "X": 2000,
+    "Y": 2000,
+    "Z": 2000
+   }
+  },
+  {
+   "arm": "temporal",
+   "bits": "a=bit0,b=bit1",
+   "prep": 1,
+   "W": 2.7467016308940924,
+   "per": {
+    "XX": 0.9322598616803279,
+    "YY": 0.9550752032520324,
+    "ZZ": 0.8593665659617322
+   },
+   "n_shots_per_setting": {
+    "X": 2000,
+    "Y": 2000,
+    "Z": 2000
+   }
+  },
+  {
+   "arm": "temporal",
+   "bits": "a=bit1,b=bit0",
+   "prep": "pooled",
+   "W": 2.83008300137883,
+   "per": {
+    "XX": 0.945496549082439,
+    "YY": 0.957888088376561,
+    "ZZ": 0.9266983639198302
+   },
+   "n_shots_per_setting": {
+    "X": 4000,
+    "Y": 4000,
+    "Z": 4000
+   }
+  },
+  {
+   "arm": "temporal",
+   "bits": "a=bit1,b=bit0",
+   "prep": 0,
+   "W": 2.9146417033658,
+   "per": {
+    "XX": 0.9588706811451134,
+    "YY": 0.9607670182166825,
+    "ZZ": 0.995004004004004
+   },
+   "n_shots_per_setting": {
+    "X": 2000,
+    "Y": 2000,
+    "Z": 2000
+   }
+  },
+  {
+   "arm": "temporal",
+   "bits": "a=bit1,b=bit0",
+   "prep": 1,
+   "W": 2.863817429705738,
+   "per": {
+    "XX": 0.932293395765057,
+    "YY": 0.9550182868142445,
+    "ZZ": 0.9765057471264368
+   },
+   "n_shots_per_setting": {
+    "X": 2000,
+    "Y": 2000,
+    "Z": 2000
+   }
+  },
+  {
+   "arm": "spatial",
+   "bits": "a=bit0,b=bit1",
+   "prep": "pooled",
+   "W": 2.6834509023582918,
+   "per": {
+    "XX": 0.9140271232259518,
+    "YY": 0.8895792481203006,
+    "ZZ": 0.8798445310120393
+   },
+   "n_shots_per_setting": {
+    "X": 2000,
+    "Y": 2000,
+    "Z": 2000
+   }
+  },
+  {
+   "arm": "spatial",
+   "bits": "a=bit1,b=bit0",
+   "prep": "pooled",
+   "W": 2.6836012013853874,
+   "per": {
+    "XX": 0.9139733767736545,
+    "YY": 0.8897625903384747,
+    "ZZ": 0.879865234273258
+   },
+   "n_shots_per_setting": {
+    "X": 2000,
+    "Y": 2000,
+    "Z": 2000
+   }
+  }
+ ],
+ "primary_convention": {
+  "bits": "a=bit1,b=bit0",
+  "prep": "pooled",
+  "how_pinned": "the enumeration whose per-setting terms are closest to the recorded XX/YY/ZZ; the protocol fixes the formula, this pins only bit order and prep pooling"
+ },
+ "recomputed": {
+  "W_TS": 2.83008300137883,
+  "per": {
+   "XX": 0.945496549082439,
+   "YY": 0.957888088376561,
+   "ZZ": 0.9266983639198302
+  },
+  "se_bootstrap": 0.01229767114593392,
+  "sigma_over_bound_1": 148.81541225664708,
+  "B": 4000,
+  "seed": 20260811
+ },
+ "recorded": {
+  "W_TS": 2.83008300137883,
+  "per": {
+   "XX": 0.9455,
+   "YY": 0.9579,
+   "ZZ": 0.9267
+  },
+  "se": 0.012514789001026748,
+  "sigma": 146.2336281681365,
+  "alt_convention": {
+   "W": 2.830260627078637,
+   "se": 0.012495543984423903,
+   "sigma": 146.47306506704436
+  }
+ },
+ "deltas": {
+  "W": 0.0,
+  "se": -0.00021711785509282745,
+  "sigma": 2.581784088510574,
+  "per": {
+   "XX": -3.4509175610430987e-06,
+   "YY": -1.1911623438942698e-05,
+   "ZZ": -1.63608016978678e-06
+  }
+ },
+ "spatial_control": [
+  {
+   "arm": "spatial",
+   "bits": "a=bit0,b=bit1",
+   "prep": "pooled",
+   "W": 2.6834509023582918,
+   "per": {
+    "XX": 0.9140271232259518,
+    "YY": 0.8895792481203006,
+    "ZZ": 0.8798445310120393
+   },
+   "n_shots_per_setting": {
+    "X": 2000,
+    "Y": 2000,
+    "Z": 2000
+   }
+  },
+  {
+   "arm": "spatial",
+   "bits": "a=bit1,b=bit0",
+   "prep": "pooled",
+   "W": 2.6836012013853874,
+   "per": {
+    "XX": 0.9139733767736545,
+    "YY": 0.8897625903384747,
+    "ZZ": 0.879865234273258
+   },
+   "n_shots_per_setting": {
+    "X": 2000,
+    "Y": 2000,
+    "Z": 2000
+   }
+  }
+ ],
+ "hs_bound_check_recorded": 0.999979692329251,
+ "verdict": "EXHIBIT COMPLETE \u2014 W_TS reproduces from raw counts. EXHIBIT, not a ratification."
+}
