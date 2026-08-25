@@ -190,3 +190,29 @@ WHAT THE GO AUTHORIZES: one submission of counterflow_flight_a_symexit_whisper_c
 at submit) to the free open-instance, ibm_fez, once. Result filename carries the job_id (PROVENANCE
 CONVENTION above). Claim, parameters, and falsifiers UNCHANGED — null-cleanliness remains the hardware
 question, now with an instrument $0-shown to answer it.
+
+---
+## AMENDMENT 6 (C5082, POPULATION-SWAP — the transpile-proof clean-null instrument; $0-validated, awaiting fresh GO)
+v5 (Amendment 5, terminal exit-swap) VOIDed on hardware (null +0.067): the transpiler VIRTUALIZED the
+pre-measurement SWAP into a classical bit-relabel, so both versions read the SAME physical qubits
+(clbit0<-q142, clbit1<-q144) and NO exchange/cancellation happened. Its M1/M2/M3 dry-runs passed only
+because they ran the LOGICAL circuit where the swap is a real gate. Lesson: a physical-gate-structure fix
+must be validated on the TRANSPILED circuit; a pre-measure SWAP is exactly what a transpiler removes.
+
+FIX — population-swap. Two versions per arm force the exit exchange through the STATE PREPARATION (ry
+angles) + classical BIT WIRING, neither virtualizable:
+  A: hot-pop on H-chain (exit H2), cold-pop on C-chain (exit C0) -> bit0<-C0(cold), bit1<-H2(hot)
+  B: cold-pop on H-chain (exit H2), hot-pop on C-chain (exit C0) -> bit0<-H2(cold), bit1<-C0(hot)
+  average -> cold - hot; per-exit-qubit bias cancels. Readout mitigation per-version.
+
+$0 VALIDATION ON THE TRANSPILED CIRCUIT (counterflow_flight_a_popswap_validate, quantum@7bc91b8) — the
+check v5 skipped:
+- PRECONDITION VERIFIED transpile-proof: ver A reads bit0<-phys q142, ver B reads bit0<-phys q144
+  (DIFFERENT physical qubits into the cold bit — the exchange v5 failed to achieve).
+- A/B average cleans localized PHYSICAL confounds on the transpiled circuit: q142 A-only null +0.051 ->
+  avg -0.006; q144 A-only -0.054 -> avg +0.001. Robust to WHICH exit qubit is bad = weather-robustness.
+- from_backend (real ibm_fez noise + routing): null +0.004, crossing +0.169, co-flow eps 0.542, CONFIRMED.
+Flight script counterflow_flight_a_popswap_whisper_c5082.py --dry-run (from_backend): CONFIRMED, null
++0.0006, crossing +0.167. Claim/params/falsifiers UNCHANGED. Residual risk: under EXTREME single-qubit
+damping the co-flow eps can exceed the 0.55 cap (a FALSIFIED honest-negative, not a VOID; realistic noise
+keeps it at 0.53). A fresh Creator GO is required — the v5 GO was consumed by the VOIDed v5 flight.
