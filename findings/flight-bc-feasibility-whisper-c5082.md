@@ -37,3 +37,23 @@ shallow chain and still reach sub-floor. Result: **NEGATIVE, and it clarifies th
 - CONSOLATION (flyable if wanted): the shallow MCM chain independently reproduces BOTH exp108's single-stage
   refrigeration AND the C4720 closed-cascade floor (0.177) at ~66 2q — a clean small hardware result, but it
   is the CLOSED cascade, not the sub-floor manufactured-bath claim.
+
+---
+## C — full circuit built & validated on ideal sim; sign-flip FRAGILE on hardware (Creator: "pivot to C")
+Built the full recuperator as a circuit, each piece validated against sim_c:
+- CORE QET (prep + X-measure + conditional rotation + Z_B+2μX_B observable): reproduces gamma=0 extract
+  −0.114 vs sim −0.1147.
+- GAD gradient (partial-SWAP φ=arcsin√γ with a mixed bath ancilla): matches sim.gad_kraus EXACTLY across
+  γ∈{0.2,0.5,0.8}, p∈{0.05,0.40} (population to 4 decimals).
+- FULL two-regime sign-flip on IDEAL sim: γ=0.2 direction −0.063 (sim −0.056), γ=0.5 +0.195 (sim +0.197).
+  The effect is real and the circuit is faithful.
+- HARDWARE (from_backend, transpiled, 7 2q-gates depth 19): sign-flip DOES NOT SURVIVE. γ=0.2 direction
+  −0.020 (sign right, shrunk); γ=0.5 −0.107 (sign WRONG, ideal +0.20). The high-γ co-flow extraction
+  (−0.218 ideal → +0.094 noisy) is corrupted — noise changes the physics, not a θ-scan miss.
+- DIAGNOSIS: depth is NOT the problem (depth 19); the DIRECTION signal is delicate, and the high-γ regime
+  depends on a fragile deep co-flow extraction that raw hardware noise destroys. This raw check used 30k
+  shots, a coarse 4-pt θ scan, and NO readout mitigation / A-B safeguard.
+- RECOVERY paths before calling C infeasible: (a) readout mitigation + finer θ scan + higher shots (the
+  Flight A instrument lifts), (b) echo/DD on the GAD contacts, (c) a cleaner mixed-bath prep (dephasing vs
+  env-qubit). Whether the delicate high-γ flip is recoverable is the open question. The LOW-γ regime and the
+  effect's reality are not in doubt; the hardware realization of the flip is.
