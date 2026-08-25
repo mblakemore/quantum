@@ -1,0 +1,26 @@
+{
+  "claim": "Counterflow Flight A (labeled engineering artifact): an N=3 counterflow ladder (partial-SWAP contacts, MCM-reset advection) on IBM hardware produces a temperature crossing (cold-exit p1 > hot-exit p1, eps_cf > 1/2) that a co-flow control (identical gates, co-current pairing) does not, with an equal-stream null arm bounding readout bias. Engineering demonstration, NOT a quantum-vs-classical advantage claim.",
+  "answers": {
+    "structure_public": "no",
+    "baseline_is_simulation": "no",
+    "repeated_shots_fixed_randomness": "no",
+    "hardness_argued_on_ideal": "no",
+    "baseline_shots_assumed": "no",
+    "baseline_denied_speedups": "no",
+    "ratio_against_simulation": "no",
+    "no_problem_specific_search": "no",
+    "arms_billed_in_different_units": "no",
+    "stopping_rules_differ_or_unit_unfrozen": "no",
+    "result_depends_on_enumeration_order": "no",
+    "enumeration_order_not_fixed_by_spec": "no"
+  },
+  "_billing_values": {
+    "unit": "excited-state population p1 = P(measure 1) on the exit qubit, ONE readout-mitigated estimator applied identically to all three arms (counterflow, co-flow, equal-stream null)",
+    "stopping_rule": "fixed 10,000 shots per arm, frozen in the prereg before submit",
+    "rejected_convention": "no cross-unit conversion arises: all arms are population measurements on the same layout with the same shot count; a per-shot vs per-parcel distinction does not change the unit",
+    "baseline_note": "the 'baseline' is the CO-FLOW control, EXECUTED on the same hardware in the same job (not simulated); it is not a classical-vs-quantum baseline because no quantum advantage is claimed. The effect is classically expected; the artifact is labeled engineering (Exp139b precedent)."
+  },
+  "advantage_claimed": "none \u2014 engineering artifact; the crossing is a classically-expected heat-exchanger effect realized on quantum carriers, graded by survival against the co-flow and null controls",
+  "prereg": "experiments/counterflow-flight-a-preregistration-whisper-c5082.md (FROZEN)",
+  "_index_space_check": "Mechanical check run: the three arms are NAMED keys (counterflow/co-flow/null), not positionally enumerated; the graded observable crossing=p1(cold_exit)-p1(hot_exit) is fixed arithmetic on two NAMED exit qubits with NO argmin/argmax/first-match/scan-order tie-break. Permuting the arm dict or the result keys does not move any graded number. The only scan-order construct is 'least-busy backend' at SUBMIT, which is (a) not part of the graded result and (b) removed: the flight script PINS the backend by name (frozen in the prereg), so there is no enumeration-order dependence anywhere in the pipeline. Both keys 'no'."
+}
