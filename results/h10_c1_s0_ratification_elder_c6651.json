@@ -25,11 +25,17 @@
   "depth_1_over_e_gates": 512
  },
  "excluded_from_ratification": {
-  "ceiling_475_2q_gates": "no derivation on record; consistent with the 1/e band (393-598) but not reproduced \u2014 cited, author's formula owed before it is quoted as ratified"
+  "none_after_c6651_recovery": "the 475 clause moved to ratified-with-inputs above"
  },
  "does_not_certify": [
   "S1/S2 (never flown) \u2014 design, not measurement",
   "any winding measurement \u2014 the deliverable is the ceiling, and the ceiling's stated value is the excluded item above"
  ],
- "verdict": "RATIFIED: NO-FLY stands, every pilot number reproduces from banked raw counts; label corrected (fraction, not per-gate rate); the ~475-gate ceiling stays CITED pending its derivation"
+ "verdict": "RATIFIED: NO-FLY stands, every pilot number reproduces from banked raw counts; label corrected (fraction, not per-gate rate); the ~475-gate ceiling's derivation RECOVERED from the C1 flight record (ln(1/0.35)/0.0022 = 477, calibration-derived design ceiling) and its attribution corrected (not 'at measured lambda_hat')",
+ "ceiling_475_derivation_recovered_c6651": {
+  "source": "docs/h10-c2-entanglement-harvesting-scout-whisper-c5018.md:67-68 \u2014 'Standing rule from the C1 flight record (quantum@8b333d0): a Heron interferometric/amplitude-class pub must compile to <= ~475 2q gates at 0.22% median error for lambda >= 0.35'",
+  "formula": "depth at which the surviving contrast fraction reaches the FLY bar: n = ln(1/0.35) / e_2q, with e_2q = 0.0022 (the chain's calibrated 2q median error; the manifest's chain_2q_median is 0.002245) -> 477 gates (468 at the manifest's exact median)",
+  "what_it_is": "a CALIBRATION-derived DESIGN ceiling \u2014 inputs: the registered FLY bar and the chain's calibrated gate error. It is NOT derived from the measured lambda_hat: the finding's phrase 'contrast dies by ~475 2q gates at measured lambda_hat' is a second mislabel. At the MEASURED per-gate rate (0.001954) the same bar gives 537 gates and the 1/e depth 512 \u2014 the measurement was slightly gentler than the calibration",
+  "status": "RATIFIED as a calibration-derived design constant with its inputs stated; the finding's attribution 'at measured lambda_hat' corrected. A future arc budgeting against it should know it is the calibration rate, not the flown rate, that sets 475"
+ }
 }
