@@ -1,0 +1,69 @@
+{
+  "card": "counterflow_flight_c",
+  "cycle": "C5082",
+  "board": 196,
+  "source": "ibm hardware ibm_fez job da72er46l22c73dn0nh0",
+  "job_id": "da72er46l22c73dn0nh0",
+  "gammas": [
+    0.2,
+    0.5
+  ],
+  "theta_star": {
+    "0.2|cf": 0.144,
+    "0.2|co": 0.0654,
+    "0.5|cf": 0.0785,
+    "0.5|co": -0.3665
+  },
+  "results": {
+    "0.2": {
+      "arms": {
+        "cf": {
+          "e_pre": -1.5308,
+          "e_post": -1.4349,
+          "extract": 0.0959
+        },
+        "co": {
+          "e_pre": -1.4059,
+          "e_post": -1.2062,
+          "extract": 0.1997
+        },
+        "severed": {
+          "e_pre": -1.5308,
+          "e_post": -1.4519,
+          "extract": 0.0788
+        }
+      },
+      "direction": -0.1038,
+      "info_value": 0.0171
+    },
+    "0.5": {
+      "arms": {
+        "cf": {
+          "e_pre": -0.9169,
+          "e_post": -0.7999,
+          "extract": 0.117
+        },
+        "co": {
+          "e_pre": -0.5794,
+          "e_post": -0.6334,
+          "extract": -0.054
+        },
+        "severed": {
+          "e_pre": -0.9169,
+          "e_post": -0.8583,
+          "extract": 0.0586
+        }
+      },
+      "direction": 0.171,
+      "info_value": 0.0584
+    }
+  },
+  "checks": {
+    "P1_direction_low_gamma_negative": true,
+    "P2_direction_high_gamma_positive": true,
+    "P3_sign_flip": true,
+    "P4_info_value_negative_low_gamma": false
+  },
+  "verdict": "PARTIAL",
+  "prereg": "counterflow-flight-c-preregistration-whisper-c5082.md"
+}
