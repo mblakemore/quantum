@@ -1,0 +1,148 @@
+{
+  "card": "counterflow_flight_a_popswap_VALIDATE",
+  "cycle": "C5082",
+  "board": 195,
+  "tests": {
+    "PHYS_confound_q142": {
+      "verdict": "CONFIRMED",
+      "arms": {
+        "counterflow": {
+          "cold_exit": 0.365,
+          "hot_exit": 0.246,
+          "crossing": 0.1191,
+          "eps": 0.9001,
+          "verA_crossing": 0.1896,
+          "verB_crossing": 0.0486
+        },
+        "coflow": {
+          "cold_exit": 0.2368,
+          "hot_exit": 0.2387,
+          "crossing": -0.0018,
+          "eps": 0.5338,
+          "verA_crossing": -0.1578,
+          "verB_crossing": 0.1541
+        },
+        "null": {
+          "cold_exit": 0.3009,
+          "hot_exit": 0.3072,
+          "crossing": -0.0063,
+          "eps": 0.7168,
+          "verA_crossing": 0.051,
+          "verB_crossing": -0.0637
+        }
+      },
+      "single_A_only": {
+        "counterflow": {
+          "A_only_crossing": 0.1896
+        },
+        "coflow": {
+          "A_only_crossing": -0.1578
+        },
+        "null": {
+          "A_only_crossing": 0.051
+        }
+      },
+      "checks": {
+        "P1_crossing_positive": true,
+        "P2_cf_beats_coflow": true,
+        "P2_eps_cf_above_half": true,
+        "P2_eps_coflow_at_or_below_half": true,
+        "P3_null_clean": true
+      }
+    },
+    "PHYS_confound_q144": {
+      "verdict": "FALSIFIED",
+      "arms": {
+        "counterflow": {
+          "cold_exit": 0.3269,
+          "hot_exit": 0.1814,
+          "crossing": 0.1455,
+          "eps": 0.7911,
+          "verA_crossing": 0.0894,
+          "verB_crossing": 0.2016
+        },
+        "coflow": {
+          "cold_exit": 0.2547,
+          "hot_exit": 0.2819,
+          "crossing": -0.0272,
+          "eps": 0.5848,
+          "verA_crossing": 0.0565,
+          "verB_crossing": -0.1109
+        },
+        "null": {
+          "cold_exit": 0.2576,
+          "hot_exit": 0.2562,
+          "crossing": 0.0014,
+          "eps": 0.5932,
+          "verA_crossing": -0.0541,
+          "verB_crossing": 0.0569
+        }
+      },
+      "single_A_only": {
+        "counterflow": {
+          "A_only_crossing": 0.0894
+        },
+        "coflow": {
+          "A_only_crossing": 0.0565
+        },
+        "null": {
+          "A_only_crossing": -0.0541
+        }
+      },
+      "checks": {
+        "P1_crossing_positive": true,
+        "P2_cf_beats_coflow": true,
+        "P2_eps_cf_above_half": true,
+        "P2_eps_coflow_at_or_below_half": false,
+        "P3_null_clean": true
+      }
+    },
+    "from_backend": {
+      "verdict": "CONFIRMED",
+      "arms": {
+        "counterflow": {
+          "cold_exit": 0.3173,
+          "hot_exit": 0.1479,
+          "crossing": 0.1694,
+          "eps": 0.7636,
+          "verA_crossing": 0.1742,
+          "verB_crossing": 0.1645
+        },
+        "coflow": {
+          "cold_exit": 0.2398,
+          "hot_exit": 0.2287,
+          "crossing": 0.0111,
+          "eps": 0.5422,
+          "verA_crossing": 0.0096,
+          "verB_crossing": 0.0125
+        },
+        "null": {
+          "cold_exit": 0.2397,
+          "hot_exit": 0.2355,
+          "crossing": 0.0042,
+          "eps": 0.542,
+          "verA_crossing": -0.0009,
+          "verB_crossing": 0.0094
+        }
+      },
+      "single_A_only": {
+        "counterflow": {
+          "A_only_crossing": 0.1742
+        },
+        "coflow": {
+          "A_only_crossing": 0.0096
+        },
+        "null": {
+          "A_only_crossing": -0.0009
+        }
+      },
+      "checks": {
+        "P1_crossing_positive": true,
+        "P2_cf_beats_coflow": true,
+        "P2_eps_cf_above_half": true,
+        "P2_eps_coflow_at_or_below_half": true,
+        "P3_null_clean": true
+      }
+    }
+  }
+}
