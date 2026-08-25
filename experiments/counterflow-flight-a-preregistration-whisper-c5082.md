@@ -154,3 +154,39 @@ THE CONVENTION (next script onward): the result filename INCLUDES the job_id for
 carry no provenance). A job_id is unique per flight, so no rerun can silently replace a prior flight's
 record, and the per-flight file exists without a manual copy. The generic name, if kept at all, is
 written as an ADDITIONAL "latest" pointer, never as the sole record.
+
+---
+## AMENDMENT 5 (C5082, SYMMETRIC-EXIT redesign — the clean-null instrument, Creator GO "go ahead with the symmetric-exit redesign and fly it")
+Flights 1-4 VOIDed on the null arm; the bias survived readout mitigation (v2) AND noise-aware matched-qubit
+placement (v4). It FLIPPED SIGN with layout (−0.074 → +0.077) = a QUBIT-FIXED bias tied to which physical
+qubit reads which exit. This amendment fixes the INSTRUMENT, not the claim/params/falsifiers (all UNCHANGED).
+
+WHY THE FULL-RELAYOUT A/B DOES NOT FIX IT ($0-proven): counterflow_flight_a_sym mirrors the WHOLE chain in
+layout B, landing the cold-stream ry re-prep on a gate-noisy qubit — null_A=+0.001 (clean), null_B=+0.151
+(biased), average VOID. Averaging a clean arm with a biased one is not symmetrization.
+
+THE FIX — terminal exit-swap averaging on ONE layout (counterflow_flight_a_symexit_whisper_c5082.py).
+Two versions per arm, IDENTICAL physics/qubits/error-profile, differing ONLY by a single terminal
+SWAP(C0,H2) before the exit measurement. DIRECT measures cold on its home qubit, hot on the other;
+SWAPPED measures cold on the OTHER qubit, hot on the home one. Average cancels the per-read-qubit bias
+d{C0,H2} exactly; in the NULL arm both parcels are identical, so any qubit-fixed confound is ANTISYMMETRIC
+under the swap and cancels. Readout mitigation retained, corrected to the per-version qubit→bit mapping
+(a mapping bug caught and fixed in the $0 dry-run — the swapped bits come from the opposite physical qubits).
+
+$0 VALIDATION (before any hardware):
+- Three injected QUBIT-FIXED confound models, all give a CLEAN null via the direct/swapped antisymmetry:
+  M1 readout asym → null −0.0035 CONFIRMED; M2 amp-damping (path-accumulated) → null +0.0056 CONFIRMED
+  (direct −0.017 / swapped +0.028, the cancellation visible); M3 combined-adversarial (both exits
+  mismatched on every axis, 2-3× harsher than real fez) → null −0.0005 (P3 clean; its only failing check
+  is co-flow eps 0.557 vs 0.55 cap under the deliberately extreme noise — not a null failure).
+- GOLD-STANDARD from_backend (REAL ibm_fez noise snapshot + REAL routing, since 2 of 3 contacts are
+  non-adjacent on heavy-hex and MUST route): VERDICT CONFIRMED, null +0.0039, crossing +0.163 (eps 0.783),
+  co-flow −0.0015 (eps 0.513). vs v4 single-measurement null +0.077 — a ~20× reduction into the clean band.
+Exit pair C0=q142/H2=q143 confirmed ADJACENT, so the terminal swap is native; direct and swapped
+transpile to identical depth (82) and 2q-gate count (27), so the bulk routing is shared and the
+cancellation survives transpilation.
+
+WHAT THE GO AUTHORIZES: one submission of counterflow_flight_a_symexit_whisper_c5082.py (digest recorded
+at submit) to the free open-instance, ibm_fez, once. Result filename carries the job_id (PROVENANCE
+CONVENTION above). Claim, parameters, and falsifiers UNCHANGED — null-cleanliness remains the hardware
+question, now with an instrument $0-shown to answer it.
