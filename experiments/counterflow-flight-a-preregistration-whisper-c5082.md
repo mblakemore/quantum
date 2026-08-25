@@ -106,3 +106,15 @@ an asymmetric readout-error model (0.03/0.06) that reproduces the first fly's co
 counterflow +0.175, co-flow +0.001 (eps 0.49), null -0.005 (CLEAN), verdict CONFIRMED, all 5 checks pass.
 The claim, parameters, and falsifiers are UNCHANGED; only the readout mitigation (already specified) is now
 implemented. A re-fly requires a FRESH Creator GO citing this amended prereg's digest.
+
+---
+## AMENDMENT 3 (C5082, THIRD fly — matched qubits via noise-aware layout, on the Creator's directive)
+Fly 2 VOIDed on a STRUCTURAL null-arm bias (-0.074): the two exit qubits landed on mismatched-error
+hardware because flights 1-2 transpiled at optimization_level=1 (NOT noise-aware). The A/B role-swap
+symmetrization was built and a $0 dry-run PROVED it does not cancel a role-dependent bias (recorded).
+The fix that attacks the CAUSE: transpile at optimization_level=3 (noise-aware SabreLayout), placing all
+six qubits — both exits included — on low-error matched hardware (ibm_fez best qubits: readout ~0.004-0.005,
+matched pairs available e.g. q142/q143 diff 0.0004). Readout mitigation retained. Script:
+counterflow_flight_a_v3_whisper_c5082.py; reports the exit physical qubits at submit. Claim/params/
+falsifiers UNCHANGED. Null-cleanliness is a HARDWARE question this fly answers. Fresh GO: Creator
+"pick matched qubits and fly the third".

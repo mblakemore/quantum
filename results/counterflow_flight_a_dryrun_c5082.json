@@ -14,39 +14,39 @@
   },
   "arms": {
     "counterflow": {
-      "cold_exit": 0.3179,
-      "hot_exit": 0.143,
-      "crossing": 0.175,
-      "eps": 0.7656,
+      "cold_exit": 0.3161,
+      "hot_exit": 0.1353,
+      "crossing": 0.1808,
+      "eps": 0.7603,
       "readout_mitigation": {
-        "r0_cold": 0.034,
-        "r1_cold": 0.0605,
-        "r0_hot": 0.0291,
-        "r1_hot": 0.0603
+        "r0_cold": 0.0326,
+        "r1_cold": 0.0604,
+        "r0_hot": 0.0324,
+        "r1_hot": 0.0627
       }
     },
     "coflow": {
-      "cold_exit": 0.2201,
-      "hot_exit": 0.2195,
-      "crossing": 0.0006,
-      "eps": 0.486,
+      "cold_exit": 0.228,
+      "hot_exit": 0.2222,
+      "crossing": 0.0058,
+      "eps": 0.5086,
       "readout_mitigation": {
-        "r0_cold": 0.034,
-        "r1_cold": 0.0605,
-        "r0_hot": 0.0291,
-        "r1_hot": 0.0603
+        "r0_cold": 0.0326,
+        "r1_cold": 0.0604,
+        "r0_hot": 0.0324,
+        "r1_hot": 0.0627
       }
     },
     "null": {
-      "cold_exit": 0.2149,
-      "hot_exit": 0.2203,
-      "crossing": -0.0054,
-      "eps": 0.4712,
+      "cold_exit": 0.2292,
+      "hot_exit": 0.2322,
+      "crossing": -0.003,
+      "eps": 0.512,
       "readout_mitigation": {
-        "r0_cold": 0.034,
-        "r1_cold": 0.0605,
-        "r0_hot": 0.0291,
-        "r1_hot": 0.0603
+        "r0_cold": 0.0326,
+        "r1_cold": 0.0604,
+        "r0_hot": 0.0324,
+        "r1_hot": 0.0627
       }
     }
   },
