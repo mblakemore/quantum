@@ -1,0 +1,31 @@
+{
+  "cycle": "C6651",
+  "grader": "elder",
+  "finding": "F130 · H15 positronic neuron — Type-A closed reflex arc N1 flight MISSED: 364/632 = 0.5759 against the frozen 0.6040; an honest negative that located its own fix",
+  "job": "da14kue3kjvs7386a2l0",
+  "backend": "ibm_marrakesh",
+  "per_number_checks": {
+    "a_ledger_row": "docs/campaign-arcs.md F130 row (commit 181262f) — present; TWO CORRECTIONS applied at ratification: (i) the backend column read 'fez' — the graded N1 flight flew on ibm_marrakesh (results/h15_n1_raw_da14kue3kjvs7386a2l0.json: backend ibm_marrakesh) and both bake-off diagnosis arms flew on ibm_kingston (h15_bakeoff_manifest / h15_bakeoff2_manifest); (ii) '58%' is the rounded-up presentation of 57.59% beside an honesty claim of 'not rounded up' (exhibit nuance, C6630) — the exact figure now travels with the row",
+    "b_exhibit": "results/f130_exhibit_elder_c6630.json (recomputation from the banked grade artifact) PLUS this record's independent RECOUNT FROM THE RAW MEASUREMENT: the harness's own response_bits/pin_convention/GRADED_POSITIONS applied to the raw file rebuild the sealed response record — sha256 EQUALS the pre-unseal pin 386b7cc0f859a9d137d8bd3b5b3fe8d1e25d667b5425db64914fe8f4f78c8022, alt_calls 402 — the sealer's frozen digest verifies the reveal commitment (b96ee93b…), reveal rows align with the public schedule, and the join gives 364/632 = 0.575949 (SE 0.019658), alt_accuracy 0.712025, null_accuracy 0.439873 — identical to the card to six places",
+    "c_calibration_window": "NOT BANKED: job da14kue3kjvs7386a2l0 is absent from results/window_rescue_c5075.json (the census entries cited to the H15 arc are the two KINGSTON bake-off jobs). Survivable for THIS number and stated rather than assumed: the headline is a directly-measured ACCURACY against a THEOREM-DERIVED frozen threshold (0.6040 = 143/256 + 2.3·sqrt(p_C(1−p_C)/632)) — triage class 4, not a noise-model ceiling, so the device-vs-used readout discrepancy cannot move the bar or the estimate. What DOES need that window is the ATTRIBUTION (marrakesh phase weather), which the C6629 amendment already marks PROVISIONAL; it stays provisional here and is not ratified",
+    "triage_class": "(4) DIRECTLY-MEASURED accuracy over a THEOREM ceiling — not exposed"
+  },
+  "ratified_numbers": {
+    "accuracy": {"hits": 364, "n": 632, "value": 0.5759493670886076, "se": 0.019658142161099876, "ci95": [0.5374, 0.6145], "frozen_threshold": 0.604, "win": false, "sensitivity_thr_minus_1se": false, "reading": "MISS by 0.028 = 1.43 SE below the bar; fails even at threshold minus one SE"},
+    "alt_accuracy": 0.7120253164556962,
+    "null_accuracy": 0.439873417721519,
+    "alt_calls": 402,
+    "cal_contract": {"never_rate": 0.0, "always_rate": 1.0, "known_ALT_auto_rate": 0.8125, "known_NULL_auto_rate": 0.5625, "reading": "actuator position pinned by the never/always calibration rows (bit_first_pinned_by_cal)"}
+  },
+  "diagnosis_arm_ratified_at_decode_level": {
+    "A_toffoli_simple_quantum": 0.5625,
+    "B_realtime_simple_classical": 0.6328125,
+    "C_realtime_optimal": 0.59375,
+    "level": "recomputed by the C6630 exhibit from the banked DECODE (h15_bakeoff_decoded_c5075.json), not from raw counts — ratified as the diagnosis the ledger row states (a real-time classical decision beat the quantum arm at the same task), at decode level, kingston bake-off jobs da1r4eeg52gs73cm0ndg / da1r7reg52gs73cm0rgg (both windows banked per-qubit in the census)"
+  },
+  "does_not_certify": [
+    "the marrakesh phase-weather ATTRIBUTION (PROVISIONAL per the C6629 amendment; its window is unbanked)",
+    "any WIN — the registered claim MISSED and the miss stands at every sensitivity checked"
+  ],
+  "verdict": "RATIFIED: MISS — 364/632 = 0.5759 vs frozen 0.6040 stands, recounted from the raw measurement through the sealed record and the verified commitment; diagnosis ratified at decode level; ledger backend corrected fez -> marrakesh (flight) / kingston (bake-off)"
+}
