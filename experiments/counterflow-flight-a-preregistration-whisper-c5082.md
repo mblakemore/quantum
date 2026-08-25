@@ -118,3 +118,17 @@ matched pairs available e.g. q142/q143 diff 0.0004). Readout mitigation retained
 counterflow_flight_a_v3_whisper_c5082.py; reports the exit physical qubits at submit. Claim/params/
 falsifiers UNCHANGED. Null-cleanliness is a HARDWARE question this fly answers. Fresh GO: Creator
 "pick matched qubits and fly the third".
+
+---
+## AMENDMENT 4 (C5082, WEATHER-AWARE — applying our own qpu_weather work, on the Creator's prompt)
+Flights 1-3 ignored the quantum-weather discipline (F81/F84: published calibration can be flat across a
+3x live quality swing; window drift). Corrections for the 4th fly (v4 script):
+- EXITS PLACED IN THE QUIET LINE. `qpu_weather.py --scan` on ibm_fez gave quiet line [136,143,142,141].
+  v3's opt_level=3 had put an exit on q123 (ro 0.0088, OUTSIDE the quiet line). v4 pins initial_layout to
+  the quiet neighborhood {123,136,143,142,141,144}; exits transpile to q142 (ro 0.0044) + q144 (ro 0.0070),
+  mismatch 0.0026 (was worse). Readout mitigation retained.
+- WINDOW GATE. A `qpu_weather.py --nowcast` sentinel (mirror ladder, live fidelity vs published forecast)
+  is flown FIRST; v4 flies only on a GO verdict for the current window — do not fly deep work in a bad
+  window (the plausible cause of the null-bias drift -0.049 -> -0.074 across flights 1-2).
+Claim/params/falsifiers UNCHANGED. This is the honest instrument: weather-checked window + quiet matched
+exits + readout mitigation. Fresh GO: Creator "build v4 ... run it right".
