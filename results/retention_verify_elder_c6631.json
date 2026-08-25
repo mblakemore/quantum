@@ -1,7 +1,7 @@
 {
  "card": "retention_verify_jobs",
  "by": "elder C6631",
- "ran_at": "2026-08-20T21:29:47.030872+00:00",
+ "ran_at": "2026-08-21T00:15:46.797862+00:00",
  "attempts_per_job": 2,
  "purpose": "Re-verify whether exp112's 2026-08-18 loss was GENUINE ABSENCE or one bad read \u2014 the named load-bearing assumption under board#167's DATE-ANCHORED verdict (whisper general#14138).",
  "control": {
@@ -21,27 +21,23 @@
   ]
  },
  "results": {
-  "d9a19kcqp3as739un8e0": {
-   "flown": "2026-07-12",
-   "age_days": 39,
-   "verdict": "CONFIRMED_ABSENT",
+  "d9mpa8vbupns73e92vpg": {
+   "flown": "2026-08-05",
+   "age_days": 16,
+   "verdict": "RETRIEVABLE",
    "reads": [
     {
      "attempt": 1,
-     "ok": false,
-     "error_type": "JobNotFoundAnywhere",
-     "class": "ABSENT_SHAPED",
-     "detail": "job d9a19kcqp3as739un8e0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_ALT5, IBMQ_ALT4, IBMQ_ALT3, IBMQ_ALT2, IBMQ_ALT."
+     "ok": true,
+     "account": "IBMQ_ALT"
     },
     {
      "attempt": 2,
-     "ok": false,
-     "error_type": "JobNotFoundAnywhere",
-     "class": "ABSENT_SHAPED",
-     "detail": "job d9a19kcqp3as739un8e0 not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_ALT5, IBMQ_ALT4, IBMQ_ALT3, IBMQ_ALT2, IBMQ_ALT."
+     "ok": true,
+     "account": "IBMQ_ALT"
     }
    ]
   }
  },
- "verdict": "ABSENCE CONFIRMED under repetition with a live control \u2014 the loss is genuine, not a transient read."
+ "verdict": "ALL TARGETS RETRIEVABLE \u2014 the earlier loss does NOT reproduce. A single-read absence was the evidence; it did not survive repetition."
 }

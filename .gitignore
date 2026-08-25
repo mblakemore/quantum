@@ -59,3 +59,4 @@ results/*RAWDUMP*.json
 # false positive (a worker convicted for a file no worker touched) and made `git status` misleading
 # for every seat all of 2026-08-25 (Dawn #15974). Untracked; the feeder keeps writing it locally.
 results/qpu_weather_job.json
+results/retention_reprobe.log
