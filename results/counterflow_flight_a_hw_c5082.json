@@ -1,0 +1,44 @@
+{
+  "card": "counterflow_flight_a",
+  "cycle": "C5082",
+  "board": 195,
+  "source": "ibm hardware ibm_fez job da6gir60ukec73821t1g",
+  "job_id": "da6gir60ukec73821t1g",
+  "params": {
+    "N": 3,
+    "tau": 0.5,
+    "T": 2,
+    "p_hot": 0.4,
+    "p_cold": 0.05,
+    "shots": 10000
+  },
+  "arms": {
+    "counterflow": {
+      "cold_exit": 0.3194,
+      "hot_exit": 0.1389,
+      "crossing": 0.1805,
+      "eps": 0.7697
+    },
+    "coflow": {
+      "cold_exit": 0.2458,
+      "hot_exit": 0.2673,
+      "crossing": -0.0215,
+      "eps": 0.5594
+    },
+    "null": {
+      "cold_exit": 0.2292,
+      "hot_exit": 0.2779,
+      "crossing": -0.0487,
+      "eps": 0.512
+    }
+  },
+  "checks": {
+    "P1_crossing_positive": true,
+    "P2_cf_beats_coflow": true,
+    "P2_eps_cf_above_half": true,
+    "P2_eps_coflow_at_or_below_half": false,
+    "P3_null_clean": false
+  },
+  "verdict": "VOID(null)",
+  "prereg": "counterflow-flight-a-preregistration-whisper-c5082.md"
+}
