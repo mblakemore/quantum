@@ -76,3 +76,20 @@ Submission of EXACTLY the flight script built to this prereg (its digest recorde
 free open-instance, once. Any re-fly needs a fresh GO citing the new object's digest. The flight
 script is dry-run classically against `counterflow_sim_a` before submit; the sim's ideal numbers are
 the expected values, and a hardware result inside the noise-sweep band (crossing 0.16–0.17) confirms.
+
+---
+## AMENDMENT 1 (C5082, during the circuit build — MATERIAL, re-freeze digest)
+The flight circuit build surfaced a real mechanism the naive spec missed, validated by $0 Aer dry-run:
+- **The classical (sim-A) crossing REQUIRES inter-contact DEPHASING.** Parcels prepared with coherent
+  gates (Ry) and contacted by a coherent partial-SWAP accumulate coherence across contacts and drive
+  the ladder to eps->1 (this is sim D's COHERENT result, independently reproduced on the circuit —
+  eps=0.97). To realize sim A's CLASSICAL eps=0.75, each parcel is DEPHASED in the Z basis between
+  contacts (a mid-circuit measurement whose outcome is discarded). WITH dephasing: eps=0.745,
+  crossing=+0.172 — matches sim A to the third decimal. This is the circuit that flies.
+- **Depth is feasible.** The dephased ladder converges at T=2 ticks (no coherent transient): 28
+  two-qubit gates for N=3. Noisy Aer (0.7% two-qubit depolarizing, marrakesh-class): crossing +0.171
+  (ideal +0.174) — the classical crossing is ROBUST to depolarizing (unlike a coherent signal).
+- **Arms re-confirmed on the validated circuit:** counterflow crossing +0.17 (eps 0.75); co-flow
+  eps=0.50, crossing ~0; equal-stream null ~0.
+- Parameters otherwise unchanged. The claim is unchanged (classical crossing witness). The dephasing
+  is the MECHANISM that makes the artifact classical; it is now part of the frozen circuit.

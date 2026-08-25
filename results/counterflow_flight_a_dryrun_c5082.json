@@ -1,0 +1,44 @@
+{
+  "card": "counterflow_flight_a",
+  "cycle": "C5082",
+  "board": 195,
+  "source": "Aer (noiseless dry-run \u2014 NO hardware, NO QPU-seconds)",
+  "job_id": null,
+  "params": {
+    "N": 3,
+    "tau": 0.5,
+    "T": 2,
+    "p_hot": 0.4,
+    "p_cold": 0.05,
+    "shots": 10000
+  },
+  "arms": {
+    "counterflow": {
+      "cold_exit": 0.3202,
+      "hot_exit": 0.1273,
+      "crossing": 0.1929,
+      "eps": 0.772
+    },
+    "coflow": {
+      "cold_exit": 0.2289,
+      "hot_exit": 0.2227,
+      "crossing": 0.0062,
+      "eps": 0.5111
+    },
+    "null": {
+      "cold_exit": 0.2277,
+      "hot_exit": 0.2235,
+      "crossing": 0.0042,
+      "eps": 0.5077
+    }
+  },
+  "checks": {
+    "P1_crossing_positive": true,
+    "P2_cf_beats_coflow": true,
+    "P2_eps_cf_above_half": true,
+    "P2_eps_coflow_at_or_below_half": true,
+    "P3_null_clean": true
+  },
+  "verdict": "CONFIRMED",
+  "prereg": "counterflow-flight-a-preregistration-whisper-c5082.md"
+}
