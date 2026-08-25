@@ -3,7 +3,7 @@
  "cycle": "C5075",
  "why": "bank epoch windows before a vendor retention clock we have not measured can close them",
  "n_cited": 174,
- "n_fetched_this_run": 1,
+ "n_fetched_this_run": 0,
  "jobs": {
   "d9ah35eg26ic73demgag": {
    "account": "IBMQ_TOKEN",
@@ -5367,6 +5367,40 @@
    "quietness_vs_device_median": 1.0,
    "cited_by": "route3-refly-rate-replicates-sign-mismatch-whisper-c5018.md"
   },
+  "d9tg7gntfhrs73dtug20": {
+   "account": "IBMQ_ALT4",
+   "backend": "ibm_marrakesh",
+   "created": "2026-08-11 11:13:06.300370+00:00",
+   "status": "DONE",
+   "properties_source": "AT CREATION DATE",
+   "properties_last_update": "2026-08-07 03:19:40+00:00",
+   "device_readout": {
+    "median": 0.0106201171875,
+    "mean": 0.031703851161858976,
+    "max": 0.506591796875
+   },
+   "touched_qubits": [
+    54,
+    55,
+    107
+   ],
+   "touched_readout": {
+    "median": 0.001953125,
+    "max": 0.0029296875
+   },
+   "used_qubits": [
+    54,
+    55,
+    107
+   ],
+   "used_readout": {
+    "median": 0.001953125,
+    "max": 0.0029296875
+   },
+   "SET_WARNING": "touched != measured; for any statistic combining specific bits, recover the measured set from the circuit's measure instructions",
+   "quietness_vs_device_median": 5.4375,
+   "cited_by": "h13-cell2-refly-GRADED-elder-c6605.md"
+  },
   "d89n5uqs46sc73farg80": {
    "cited_by": "01-chsh-bell-violation.md",
    "retrievable": false,
@@ -5656,42 +5690,8 @@
    "cited_by": "finding-51-exp103-ipe-survives-hardware-feedforward-ember-c4111.md",
    "retrievable": false,
    "error": "JobNotFoundAnywhere: job d94t6ncql68s73c9ut5g not visible to ANY of 6 account(s): IBMQ_TOKEN, IBMQ_AL"
-  },
-  "d9tg7gntfhrs73dtug20": {
-   "account": "IBMQ_ALT4",
-   "backend": "ibm_marrakesh",
-   "created": "2026-08-11 11:13:06.300370+00:00",
-   "status": "DONE",
-   "properties_source": "AT CREATION DATE",
-   "properties_last_update": "2026-08-07 03:19:40+00:00",
-   "device_readout": {
-    "median": 0.0106201171875,
-    "mean": 0.031703851161858976,
-    "max": 0.506591796875
-   },
-   "touched_qubits": [
-    54,
-    55,
-    107
-   ],
-   "touched_readout": {
-    "median": 0.001953125,
-    "max": 0.0029296875
-   },
-   "used_qubits": [
-    54,
-    55,
-    107
-   ],
-   "used_readout": {
-    "median": 0.001953125,
-    "max": 0.0029296875
-   },
-   "SET_WARNING": "touched != measured; for any statistic combining specific bits, recover the measured set from the circuit's measure instructions",
-   "quietness_vs_device_median": 5.4375,
-   "cited_by": "h13-cell2-refly-GRADED-elder-c6605.md"
   }
  },
- "retrievable": 1,
+ "retrievable": 0,
  "not_retrievable": 0
 }
