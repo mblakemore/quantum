@@ -15,8 +15,8 @@
     "enumeration_order_not_fixed_by_spec": "no"
   },
   "_billing_values": {
-    "unit": "excited-state population p1 = P(measure 1) on the exit qubit, ONE readout-mitigated estimator applied identically to all three arms (counterflow, co-flow, equal-stream null)",
-    "stopping_rule": "fixed 10,000 shots per arm, frozen in the prereg before submit",
+    "unit": "excited-state population p1 = P(measure 1) on the exit qubit, ONE readout-mitigated estimator applied identically to all three arms; in the symmetric-exit instrument (Amendment 5) the estimator is the mean of two versions (direct + terminal-exit-swapped) of that SAME population measurement — a symmetric (order-independent) average, still one currency for every arm",
+    "stopping_rule": "fixed 10,000 shots per circuit; each arm = 2 circuits (direct + swapped) so 20,000 shots per arm, all frozen in the prereg before submit; identical for all three arms",
     "rejected_convention": "no cross-unit conversion arises: all arms are population measurements on the same layout with the same shot count; a per-shot vs per-parcel distinction does not change the unit",
     "baseline_note": "the 'baseline' is the CO-FLOW control, EXECUTED on the same hardware in the same job (not simulated); it is not a classical-vs-quantum baseline because no quantum advantage is claimed. The effect is classically expected; the artifact is labeled engineering (Exp139b precedent)."
   },

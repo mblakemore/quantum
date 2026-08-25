@@ -1,0 +1,10 @@
+{
+  "backend": "ibm_fez",
+  "pending_jobs_at_submit": 6,
+  "operational": true,
+  "snapshot_utc": "2026-08-25T18:14:10.888318+00:00",
+  "for": "counterflow_flight_a_symexit",
+  "script_digest": "e1531b7cd2c70dbf",
+  "job_id": "da6tn1c6l22c73dmquug",
+  "background_task": "bjbtgkdjo"
+}

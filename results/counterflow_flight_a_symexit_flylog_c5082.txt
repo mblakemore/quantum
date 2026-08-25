@@ -1,0 +1,55 @@
+qiskit_runtime_service._discover_account:WARNING:2026-08-25 18:14:19,920: Loading account with the given token. A saved account will not be used.
+qiskit_runtime_service.__init__:WARNING:2026-08-25 18:14:24,293: Instance was not set at service instantiation. Free and trial plan instances will be prioritized. Based on the following filters: (tags: None, region: us-east, eu-de), and available plans: (open, pay-as-you-go), the available account instances are: open-instance, whisper-de, WhisperPaid. If you need a specific instance set it explicitly either by using a saved account with a saved default instance or passing it in directly to QiskitRuntimeService().
+qiskit_runtime_service._discover_account:WARNING:2026-08-25 18:14:24,293: Loading account with the given token. A saved account will not be used.
+[instance-gate] IBMQ_TOKEN carries paid instance(s) [('whisper-de', 'pay-as-you-go'), ('WhisperPaid', 'pay-as-you-go')] — PINNING to free 'open-instance' (c-259f9dd1525f::)
+SUBMITTED job_id=da6tn1c6l22c73dmquug backend=ibm_fez circuits=8 shots=10000
+{
+  "card": "counterflow_flight_a_symexit",
+  "cycle": "C5082",
+  "board": 195,
+  "source": "ibm hardware ibm_fez job da6tn1c6l22c73dmquug",
+  "job_id": "da6tn1c6l22c73dmquug",
+  "params": {
+    "N": 3,
+    "tau": 0.5,
+    "T": 2,
+    "p_hot": 0.4,
+    "p_cold": 0.05,
+    "shots": 10000
+  },
+  "arms": {
+    "counterflow": {
+      "cold_exit": 0.3664,
+      "hot_exit": 0.2049,
+      "crossing": 0.1615,
+      "eps": 0.9041,
+      "direct_crossing": 0.1674,
+      "swapped_crossing": 0.1556
+    },
+    "coflow": {
+      "cold_exit": 0.2141,
+      "hot_exit": 0.1823,
+      "crossing": 0.0318,
+      "eps": 0.4688,
+      "direct_crossing": 0.0353,
+      "swapped_crossing": 0.0283
+    },
+    "null": {
+      "cold_exit": 0.3039,
+      "hot_exit": 0.2368,
+      "crossing": 0.0671,
+      "eps": 0.7254,
+      "direct_crossing": 0.0729,
+      "swapped_crossing": 0.0613
+    }
+  },
+  "checks": {
+    "P1_crossing_positive": true,
+    "P2_cf_beats_coflow": true,
+    "P2_eps_cf_above_half": true,
+    "P2_eps_coflow_at_or_below_half": true,
+    "P3_null_clean": false
+  },
+  "verdict": "VOID(null)",
+  "prereg": "counterflow-flight-a-preregistration-whisper-c5082.md"
+}
