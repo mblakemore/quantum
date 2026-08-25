@@ -1,0 +1,34 @@
+{
+ "cycle": "C6651",
+ "grader": "elder",
+ "scope": "F127 exhibit \u2014 H10-C1 winding meter S0 pilot recomputed from RAW COUNTS (job d9n53ds60llc73c9mavg, ibm_fez)",
+ "source": {
+  "counts": "results/h10_c1_s0_counts_d9n53ds60llc73c9mavg_elder_c6651.json (banked C6651, 2 pubs, 30,000 shots)",
+  "manifest": "results/h10_c1_flight_S0_manifest.json",
+  "bars": "results/h10_c1_prereg_bars_v2_c5017.json",
+  "decode_compared": "results/h10_c1_flight_S0_decode.json",
+  "module": "experiments/h10_c1_flight_whisper_c5017.py decode_stage() \u2014 ancilla Z expectation per quadrature from bit 0, se = sqrt((1-m^2)/N), C0 = re + i\u00b7im, lambda_hat = |C0| / BARS.registered.C0, gate FLY>=0.35 / RESCALE>=0.15 / else NO-FLY"
+ },
+ "recomputed": {
+  "re": -0.013466666666666667,
+  "im": -0.0108,
+  "abs_C0": 0.017262419039958194,
+  "se_quadrature": 0.011546145125506576,
+  "lambda_hat": 0.025854559137062003,
+  "se_lambda": 0.01729308570609423,
+  "gate": "NO-FLY"
+ },
+ "banked_decode": {
+  "re": -0.013466666666666667,
+  "im": -0.0108,
+  "abs_C0": 0.017262419039958194,
+  "lambda_hat": 0.025854559137062003,
+  "se_lambda": 0.01729308570609423,
+  "gate": "NO-FLY"
+ },
+ "fields_matched": "6/6 to the decode's printed precision",
+ "definition_pinned": "lambda_hat is |C0_measured| / C0_registered \u2014 the SURVIVING CONTRAST FRACTION at the pilot's depth (1,871 transpiled 2q gates), not a per-gate rate. The ledger row and finding label it 'attenuation rate per 2q gate'; a per-gate rate of 0.0259 would extinguish contrast in ~40 gates, contradicting the row's own ~475-gate ceiling. The per-gate rate the fraction implies is -ln(lambda_hat)/1871 = 0.001954, 1/e depth 512 gates; with lambda_hat +/- 1 se the 1/e depth spans 393-598 gates.",
+ "ceiling_475_status": "CITED, NOT REPRODUCED \u2014 no derivation of '~475 2q gates' is on record (finding, prereg bars, decode); it lies inside the 1/e band above (512 central, 393-598 at +/-1 se) so it is CONSISTENT with the measurement, but a planning constant inherited by three later arcs deserves a stated formula. Author's derivation owed.",
+ "noise_floor_reading": "|C0| = 0.0173 is 1.50 sigma from zero (quadrature se 0.0115; re 1.65 sigma, im 1.32 sigma) \u2014 the finding's '~2 sigma' is the per-quadrature reading; lambda_hat sits 18.7 se below the FLY bar, so NO-FLY is not a boundary call",
+ "verdict": "EXHIBIT COMPLETE \u2014 every decode field reproduces from raw counts; one label corrected, one constant flagged as underived. EXHIBIT, not a ratification."
+}

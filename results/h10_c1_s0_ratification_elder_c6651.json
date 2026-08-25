@@ -1,0 +1,35 @@
+{
+ "cycle": "C6651",
+ "grader": "elder",
+ "finding": "F127 \u00b7 H10-C1 winding meter, S0 pilot \u2014 NO-FLY at the gate; the pilot priced the interferometric-contrast ceiling",
+ "job": "d9n53ds60llc73c9mavg",
+ "backend": "ibm_fez",
+ "per_number_checks": {
+  "a_ledger_row": "docs/campaign-arcs.md F127 row (F124-F128 group, commit 254d671) \u2014 present; ONE LABEL CORRECTION applied at ratification: 'lambda_hat = 0.0259 +/- 0.0173 per 2q gate' -> the surviving contrast FRACTION at 1,871 2q gates; implied per-gate rate 0.00195, 1/e depth 512 (393-598 at +/-1 se)",
+  "b_exhibit": "results/f127_exhibit_elder_c6651.json \u2014 recomputed from raw counts banked C6651; 6/6 fields reproduce (re -0.013467, im -0.010800, |C0| 0.017262, lambda_hat 0.025855, se 0.017293, gate NO-FLY)",
+  "c_calibration_window": "results/window_rescue_c5075.json jobs[d9n53ds60llc73c9mavg]: DONE, used_qubits [109,110,111,112,113,118], used_readout median 0.00708 max 0.0789. Exposure direction stated: the claim is a NEGATIVE (contrast dead at depth); worse readout can only LOWER measured contrast, so a readout re-grade cannot move NO-FLY toward FLY \u2014 the finding is safe in the only direction that matters. The 2q-gate error the ceiling depends on is the chain's own (median 0.00224 per the manifest), not a device aggregate",
+  "triage_class": "(4) DIRECTLY-MEASURED contrast against a REGISTERED bar (0.35 FLY / 0.15 RESCALE), shot-noise se \u2014 not exposed"
+ },
+ "ratified_numbers": {
+  "C0_measured": [
+   -0.013467,
+   -0.0108
+  ],
+  "abs_C0": 0.017262,
+  "se_quadrature": 0.0115,
+  "sigma_from_zero": 1.5,
+  "lambda_hat_fraction": 0.025855,
+  "se_lambda": 0.017293,
+  "gate": "NO-FLY (18.7 se below the FLY bar)",
+  "implied_per_gate_rate": 0.0019536442141316426,
+  "depth_1_over_e_gates": 512
+ },
+ "excluded_from_ratification": {
+  "ceiling_475_2q_gates": "no derivation on record; consistent with the 1/e band (393-598) but not reproduced \u2014 cited, author's formula owed before it is quoted as ratified"
+ },
+ "does_not_certify": [
+  "S1/S2 (never flown) \u2014 design, not measurement",
+  "any winding measurement \u2014 the deliverable is the ceiling, and the ceiling's stated value is the excluded item above"
+ ],
+ "verdict": "RATIFIED: NO-FLY stands, every pilot number reproduces from banked raw counts; label corrected (fraction, not per-gate rate); the ~475-gate ceiling stays CITED pending its derivation"
+}

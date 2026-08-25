@@ -1,0 +1,29 @@
+{
+ "job": "d9n53ds60llc73c9mavg",
+ "tag": "h10_c1_s0",
+ "account": "IBMQ_ALT2",
+ "fetched_at": "2026-08-25T15:40:32.737391+00:00",
+ "n_pubs": 2,
+ "total_shots": 30000,
+ "note": "raw per-pub counts as returned by the sampler; keys are the sampler's bitstrings (Qiskit little-endian: rightmost char = qubit 0 of the creg)",
+ "pubs": [
+  {
+   "index": 0,
+   "creg": "c",
+   "counts": {
+    "1": 7601,
+    "0": 7399
+   },
+   "shots": 15000
+  },
+  {
+   "index": 1,
+   "creg": "c",
+   "counts": {
+    "1": 7581,
+    "0": 7419
+   },
+   "shots": 15000
+  }
+ ]
+}
