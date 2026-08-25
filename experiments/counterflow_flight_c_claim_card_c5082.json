@@ -1,0 +1,19 @@
+{
+  "claim": "Counterflow Flight C (labeled physics result): in a GAD thermal gradient, the direction of the QET information stream (measure-cold-rotate-hot=counterflow vs mirror=co-flow) changes which flow extracts more local energy, and that preference FLIPS SIGN with gradient strength gamma (direction<0 at gamma 0.2, >0 at gamma 0.5). NOT a quantum-vs-classical advantage claim.",
+  "answers": {
+    "structure_public": "no", "baseline_is_simulation": "no", "repeated_shots_fixed_randomness": "no",
+    "hardness_argued_on_ideal": "no", "baseline_shots_assumed": "no", "baseline_denied_speedups": "no",
+    "ratio_against_simulation": "no", "no_problem_specific_search": "no",
+    "arms_billed_in_different_units": "no", "stopping_rules_differ_or_unit_unfrozen": "no",
+    "result_depends_on_enumeration_order": "no", "enumeration_order_not_fixed_by_spec": "no"
+  },
+  "_billing_values": {
+    "unit": "local energy <obs_rot> = <Z_rot> + 2 mu <X_rot> on the rotated site, ONE readout-mitigated estimator applied identically to every arm (cf, co, severed)",
+    "stopping_rule": "fixed 20,000 shots per circuit, theta* FROZEN per (gamma,arm) from the exact sim before submit; identical budget all arms",
+    "rejected_convention": "no cross-unit conversion: all arms measure the same local-energy estimator; the direction is a difference of two extracts in the same unit",
+    "baseline_note": "the controls (co-flow, severed) are EXECUTED on the same hardware in the same job; there is no classical-vs-quantum baseline because no advantage is claimed. The effect is a directional QET result, labeled physics."
+  },
+  "advantage_claimed": "none - labeled physics; a directional QET sign-flip graded by survival against its co-flow and severed controls, not by beating a classical baseline",
+  "prereg": "experiments/counterflow-flight-c-preregistration-whisper-c5082.md (FROZEN)",
+  "_index_space_check": "The three arms are NAMED keys (cf/co/severed), not positionally enumerated; direction = extract_cf - extract_co is fixed arithmetic on two named extracts with no argmin/first-match over an unspecified order. theta* is frozen per named (gamma,arm). Backend pinned by name. Permuting any dict does not move a graded number. Both keys 'no'."
+}
