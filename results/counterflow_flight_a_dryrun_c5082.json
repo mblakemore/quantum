@@ -2,7 +2,7 @@
   "card": "counterflow_flight_a",
   "cycle": "C5082",
   "board": 195,
-  "source": "Aer (noiseless dry-run \u2014 NO hardware, NO QPU-seconds)",
+  "source": "Aer (dry-run WITH asymmetric readout noise \u2014 NO hardware, NO QPU-seconds)",
   "job_id": null,
   "params": {
     "N": 3,
@@ -14,22 +14,40 @@
   },
   "arms": {
     "counterflow": {
-      "cold_exit": 0.3202,
-      "hot_exit": 0.1273,
-      "crossing": 0.1929,
-      "eps": 0.772
+      "cold_exit": 0.3179,
+      "hot_exit": 0.143,
+      "crossing": 0.175,
+      "eps": 0.7656,
+      "readout_mitigation": {
+        "r0_cold": 0.034,
+        "r1_cold": 0.0605,
+        "r0_hot": 0.0291,
+        "r1_hot": 0.0603
+      }
     },
     "coflow": {
-      "cold_exit": 0.2289,
-      "hot_exit": 0.2227,
-      "crossing": 0.0062,
-      "eps": 0.5111
+      "cold_exit": 0.2201,
+      "hot_exit": 0.2195,
+      "crossing": 0.0006,
+      "eps": 0.486,
+      "readout_mitigation": {
+        "r0_cold": 0.034,
+        "r1_cold": 0.0605,
+        "r0_hot": 0.0291,
+        "r1_hot": 0.0603
+      }
     },
     "null": {
-      "cold_exit": 0.2277,
-      "hot_exit": 0.2235,
-      "crossing": 0.0042,
-      "eps": 0.5077
+      "cold_exit": 0.2149,
+      "hot_exit": 0.2203,
+      "crossing": -0.0054,
+      "eps": 0.4712,
+      "readout_mitigation": {
+        "r0_cold": 0.034,
+        "r1_cold": 0.0605,
+        "r0_hot": 0.0291,
+        "r1_hot": 0.0603
+      }
     }
   },
   "checks": {

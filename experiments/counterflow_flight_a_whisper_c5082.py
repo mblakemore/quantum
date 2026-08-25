@@ -61,15 +61,42 @@ def build(arm):
 
 ARMS = ["counterflow", "coflow", "null"]
 
-def decode(counts):
+def build_cal(state):
+    """Readout calibration (prereg Amendment 2): prepare the two exit qubits in |state> and measure.
+    Gives per-exit-qubit r0 = P(read 1 | prep 0) and r1 = P(read 0 | prep 1). Added because Flight A's
+    first fly VOIDed on the null arm (-0.049) from an uncorrected readout asymmetry on the hot-exit
+    qubit — the mitigation the prereg specified but the first script omitted."""
+    qc = QuantumCircuit(6, 2)
+    C0, H2 = 3, 2
+    if state == 1:
+        qc.x(C0); qc.x(H2)
+    qc.measure(C0, 0)   # cold-exit qubit
+    qc.measure(H2, 1)   # hot-exit qubit
+    return qc
+
+def _raw(counts):
     tot = sum(counts.values())
-    # classical bit 0 = cold exit (last measure), bit 1 = hot exit (second-last). In the count key,
-    # bit 0 is the rightmost char, bit 1 the next.
-    pc = sum(v for k, v in counts.items() if k.replace(" ", "")[-1] == "1") / tot
-    ph = sum(v for k, v in counts.items() if k.replace(" ", "")[-2] == "1") / tot
+    pc = sum(v for k, v in counts.items() if k.replace(" ", "")[-1] == "1") / tot   # bit0 cold
+    ph = sum(v for k, v in counts.items() if k.replace(" ", "")[-2] == "1") / tot   # bit1 hot
+    return pc, ph
+
+def _correct(p, r0, r1):
+    d = 1.0 - r0 - r1
+    return (p - r0) / d if abs(d) > 1e-6 else p
+
+def decode(counts, cal0=None, cal1=None):
+    pc, ph = _raw(counts)
+    mit = None
+    if cal0 is not None and cal1 is not None:
+        r0c, r0h = _raw(cal0)              # P(read1|prep0) per exit qubit
+        pc1, ph1 = _raw(cal1); r1c, r1h = 1 - pc1, 1 - ph1   # P(read0|prep1)
+        pc, ph = _correct(pc, r0c, r1c), _correct(ph, r0h, r1h)
+        mit = {"r0_cold": round(r0c, 4), "r1_cold": round(r1c, 4), "r0_hot": round(r0h, 4), "r1_hot": round(r1h, 4)}
     eps = (pc - P_COLD) / (P_HOT - P_COLD)
-    return {"cold_exit": round(pc, 4), "hot_exit": round(ph, 4),
-            "crossing": round(pc - ph, 4), "eps": round(eps, 4)}
+    d = {"cold_exit": round(pc, 4), "hot_exit": round(ph, 4),
+         "crossing": round(pc - ph, 4), "eps": round(eps, 4)}
+    if mit: d["readout_mitigation"] = mit
+    return d
 
 def grade(res):
     cf, co, nu = res["counterflow"], res["coflow"], res["null"]
@@ -83,15 +110,24 @@ def grade(res):
     verdict = "CONFIRMED" if all(checks.values()) else ("VOID(null)" if not checks["P3_null_clean"] else "FALSIFIED")
     return checks, verdict
 
+def _counts_of(pub):
+    c = pub.data
+    return getattr(c, list(c.__dict__.keys())[0]).get_counts() if hasattr(c, "__dict__") else c.meas.get_counts()
+
 def main():
     mode = "--submit" if "--submit" in sys.argv else "--dry-run"
-    circuits = {a: build(a) for a in ARMS}
+    # order: 3 arms, then cal0, cal1 (readout mitigation in the SAME job/calibration window)
+    circ = [build(a) for a in ARMS] + [build_cal(0), build_cal(1)]
 
     if mode == "--dry-run":
+        # dry-run with a realistic readout error so the mitigation is exercised, not a no-op
         from qiskit_aer import AerSimulator
-        sim = AerSimulator()
-        res = {a: decode(sim.run(circuits[a], shots=SHOTS).result().get_counts()) for a in ARMS}
-        src = "Aer (noiseless dry-run — NO hardware, NO QPU-seconds)"
+        from qiskit_aer.noise import NoiseModel, ReadoutError
+        nm = NoiseModel()
+        nm.add_all_qubit_readout_error(ReadoutError([[0.97, 0.03], [0.06, 0.94]]))  # asymmetric, ~hw-like
+        sim = AerSimulator(noise_model=nm)
+        cts = [sim.run(c, shots=SHOTS).result().get_counts() for c in circ]
+        src = "Aer (dry-run WITH asymmetric readout noise — NO hardware, NO QPU-seconds)"
         job_id = None
     else:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)) + "/../scripts")
@@ -99,18 +135,17 @@ def main():
         from qiskit_ibm_runtime import SamplerV2
         svc = m.service_for_submission("IBMQ_TOKEN")     # #151 gate: free instance, refuses paid
         backend = svc.backend(BACKEND_NAME)
-        isa = {a: transpile(circuits[a], backend, optimization_level=1) for a in ARMS}
+        isa = [transpile(c, backend, optimization_level=1) for c in circ]
         sampler = SamplerV2(mode=backend)
-        job = sampler.run([isa[a] for a in ARMS], shots=SHOTS)
+        job = sampler.run(isa, shots=SHOTS)
         job_id = job.job_id()
-        print(f"SUBMITTED job_id={job_id} backend={backend.name} arms={ARMS} shots={SHOTS}", flush=True)
+        print(f"SUBMITTED job_id={job_id} backend={backend.name} arms={ARMS}+cal0,cal1 shots={SHOTS}", flush=True)
         r = job.result()
-        res = {}
-        for i, a in enumerate(ARMS):
-            c = r[i].data
-            counts = getattr(c, list(c.__dict__.keys())[0]).get_counts() if hasattr(c, "__dict__") else c.meas.get_counts()
-            res[a] = decode(counts)
+        cts = [_counts_of(r[i]) for i in range(len(circ))]
         src = f"ibm hardware {backend.name} job {job_id}"
+
+    cal0, cal1 = cts[3], cts[4]
+    res = {a: decode(cts[i], cal0, cal1) for i, a in enumerate(ARMS)}
 
     checks, verdict = grade(res)
     out = {"card": "counterflow_flight_a", "cycle": "C5082", "board": 195, "source": src,

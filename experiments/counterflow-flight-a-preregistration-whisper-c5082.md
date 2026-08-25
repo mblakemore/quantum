@@ -93,3 +93,16 @@ The flight circuit build surfaced a real mechanism the naive spec missed, valida
   eps=0.50, crossing ~0; equal-stream null ~0.
 - Parameters otherwise unchanged. The claim is unchanged (classical crossing witness). The dephasing
   is the MECHANISM that makes the artifact classical; it is now part of the frozen circuit.
+
+---
+## AMENDMENT 2 (C5082, after the first fly VOIDed — re-freeze, re-fly on a FRESH GO)
+First fly (job da6gir60ukec73821t1g, ibm_fez): counterflow crossing +0.1805 (eps 0.770) — the crossing
+APPEARED — but VOID by falsifier P3: the equal-stream null arm read -0.049 (> |0.02|), an uncorrected
+READOUT asymmetry on the hot-exit qubit. Root cause: this prereg specified per-qubit readout mitigation
+and the FIRST flight script omitted it (measured raw counts).
+FIX: the flight script now runs two calibration circuits (all-|0>, all-|1>) on the exit qubits IN THE
+SAME JOB and corrects each arm's populations by the measured per-qubit r0/r1. Re-validated on Aer WITH
+an asymmetric readout-error model (0.03/0.06) that reproduces the first fly's confound: mitigated result
+counterflow +0.175, co-flow +0.001 (eps 0.49), null -0.005 (CLEAN), verdict CONFIRMED, all 5 checks pass.
+The claim, parameters, and falsifiers are UNCHANGED; only the readout mitigation (already specified) is now
+implemented. A re-fly requires a FRESH Creator GO citing this amended prereg's digest.
