@@ -17,3 +17,23 @@ Measured on real ibm_fez (transpile + from_backend), no hardware submit. Creator
 
 ## Bottom line — the depth reality inverts the naive read
 B is the bigger effect but its faithful circuit is too deep for the free device; C ("the prize") is the subtler claim but a shallow, hardware-proven protocol. **C is ready to build toward a flight; B needs a depth breakthrough (cheaper switch / mitigation / MCM redesign) before a faithful fly is possible.**
+
+---
+## B — MCM-redesign depth investigation (Creator: "start the MCM-redesign depth investigation for B")
+Tested whether mid-circuit measurement + feed-forward can collapse the coherent 13-switch tree into a
+shallow chain and still reach sub-floor. Result: **NEGATIVE, and it clarifies the wall is physics, not routing.**
+- Correct ICO primitive (control |+>, two order-superposed cswaps sharing the target, herald control in X)
+  with **dephased (mixed) baths** reproduces exp108 exactly: k=1 cold branch 0.184 (sim 0.185), hot 0.414
+  (sim 0.417). (Pure Ry baths do NOT cool — ICO needs MIXED thermal baths; that was the first bug.)
+- MCM chain against **fresh warm 0.25 baths** SATURATES at the C4720 fixed-bath floor: k=1 0.184, k=2 0.181,
+  **k=3 0.177** — an independent reproduction of the 0.177 floor, and it does NOT go sub-floor. Depth ~66 2q
+  gates (flyable) — but it only reaches the floor, so it does not demonstrate B's sub-bath claim.
+- WHY MCM cannot break the wall: sub-floor cooling requires feeding COLD branches back as baths; the ICO
+  switch consumes 2 cold baths per stage; manufacturing cold baths is the recursive tree (13 switches, ~312
+  2q). MCM carries a parcel forward cheaply but does NOT manufacture cold baths cheaper, so the tree stands.
+- REMAINING paths for faithful sub-floor B: (a) the deep coherent tree + heavy ZNE on ~312 2q (a stretch on
+  the free device); (b) a fundamentally different, linearly-chainable cooling primitive (NOT ICO — a different
+  experiment/claim); (c) accept B is depth-blocked on free hardware and record it as such.
+- CONSOLATION (flyable if wanted): the shallow MCM chain independently reproduces BOTH exp108's single-stage
+  refrigeration AND the C4720 closed-cascade floor (0.177) at ~66 2q — a clean small hardware result, but it
+  is the CLOSED cascade, not the sub-floor manufactured-bath claim.
