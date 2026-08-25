@@ -1,0 +1,26 @@
+{
+ "card": "h15_epoch_survey",
+ "cycle": "C5075",
+ "epoch": 8,
+ "job_id": "da2md3m1vhnc73fist20",
+ "backend": "ibm_kingston",
+ "account": "IBMQ_ALT5",
+ "rows": 64,
+ "shots_per_row": 1,
+ "seed": 507508,
+ "authorisation": "unsealed claim-free diagnostic (Elder general#12730 class)",
+ "queue_at_submit": {
+  "backend": "ibm_kingston",
+  "pending_jobs_at_submit": 10,
+  "operational": true,
+  "snapshot_utc": "2026-08-19T08:17:17+00:00",
+  "calibration": {
+   "readout_error_mean": 0.019884940905448716,
+   "readout_error_max": 0.49072265625,
+   "readout_error_min": 0.002197265625,
+   "n_qubits": 156,
+   "last_update_date": "2026-08-19 07:22:37+00:00",
+   "note": "PUBLISHED values; F81 measured the true rate ~3.4x higher. Banked so epoch-dependence stays answerable after the job ages out."
+  }
+ }
+}

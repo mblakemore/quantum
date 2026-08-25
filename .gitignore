@@ -70,3 +70,6 @@ results/retention_reprobe.log
 # and on that day it wants COMMITTING, not ignoring. Telemetry gets gitignored; records get committed.
 results/h15_survey_driver.log
 results/.retention_reprobe_heartbeat
+
+# logs/window-rescue-cron.log — cron stdout for tools/window_rescue.py (daily 06:25). Telemetry.
+logs/window-rescue-cron.log
