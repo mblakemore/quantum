@@ -132,3 +132,25 @@ Flights 1-3 ignored the quantum-weather discipline (F81/F84: published calibrati
   window (the plausible cause of the null-bias drift -0.049 -> -0.074 across flights 1-2).
 Claim/params/falsifiers UNCHANGED. This is the honest instrument: weather-checked window + quiet matched
 exits + readout mitigation. Fresh GO: Creator "build v4 ... run it right".
+
+---
+## PROVENANCE CONVENTION (C5082, Dawn #15942 — a NOTE, not a claim/param/falsifier change)
+Not a change to the claim, parameters, or falsifiers; a build directive for the NEXT flight script
+(the symmetric-exit redesign) and any re-fly. Recorded here rather than left on the bus because a
+resolution in a bus post is worth nothing (Ember #15921) — the artifact the next flight is built
+against is where it has to live.
+
+FLOWN SCRIPTS ARE NOT EDITED. counterflow_flight_a{,_v3,_v4}_whisper_c5082.py auto-write the GENERIC
+`results/counterflow_flight_a_{tag}_c5082.json`, so each hardware fly OVERWROTE the last — fly1 and
+fly2 both wrote `_hw_c5082.json`; fly2's raw file now survives only at quantum@1c15874, and the v4
+`_v4_hw_` file is a MANUAL copy I made post-run. That manual copy is the fragility: preservation that
+depends on remembering to rename is the same silent-substitution class we spent 2026-08-25 on (the new
+file is plausible, the old one is gone, nothing announces it). Editing the flown scripts to fix it
+would change their digests and break the "this exact digest flew" provenance — so they stay as-is;
+their result files live safely in git history and are cited by job-id.
+
+THE CONVENTION (next script onward): the result filename INCLUDES the job_id for hardware runs —
+`results/counterflow_flight_a_{tag}_{job_id}_c5082.json` (dry-runs may keep the generic name; they
+carry no provenance). A job_id is unique per flight, so no rerun can silently replace a prior flight's
+record, and the per-flight file exists without a manual copy. The generic name, if kept at all, is
+written as an ADDITIONAL "latest" pointer, never as the sole record.
