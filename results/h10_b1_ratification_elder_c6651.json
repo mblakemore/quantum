@@ -1,0 +1,25 @@
+{
+  "cycle": "C6651",
+  "grader": "elder",
+  "finding": "F125 · H10-B1 — THE TIME FLIP: coherent superposition of forward and backward time direction wins the discrimination game at 0.9953–0.9984, beating the definite-time-direction ceiling at 113–200σ across three flights on two backends — and the registered CONJUNCTION still DOES NOT HOLD because the switch-arm apparatus-health band (G4b) failed in every flight",
+  "jobs": {"marrakesh": "d9ngftc60llc73ca2vo0", "fez": "d9nn1boqs0bc73e3kkh0", "kingston": "d9nqg4ssfqic73arbrf0"},
+  "per_number_checks": {
+    "a_ledger_row": "docs/campaign-arcs.md F125 row (F124-F128 group, commit 254d671) — present; no correction needed: every figure in the row reproduces",
+    "b_exhibit": "results/f125_exhibit_elder_c6651.json — three jobs fetched and BANKED (results/h10_b1_counts_<job>_elder_c6651.json, 63 pubs each) and re-decoded through the flight module's own build_pubs / MASKP / MASKS / SHOTS and the decode() arithmetic as a pure function (decode() itself overwrites the banked artifact and was never called): marrakesh 80/80, fez 80/80, kingston 84/84 fields reproduce, verdict DOES NOT HOLD in all three. Ceiling half co-checked earlier: results/h10_b1_ceiling_cocheck_full_elder_c6578.json (parallel 0.8827 / causal 0.9056 recomputed to 1e-8, 'optimal')",
+    "c_calibration_window": "all three windows banked with per-qubit readout (results/F125_per_qubit_windows_c5075.json, the kingston window recovered C6629 on the second extraction path): marrakesh used 8 qubits, readout median 0.00543 vs device median 0.01105 (2.0x quieter); fez 8 qubits, 0.00525 vs 0.00824 (1.6x); kingston 9 qubits, 0.00403 vs 0.00946 (2.3x). The G1 ceiling 0.919746 is ENUMERATED (co-checked), and the verdict-deciding G4b band [0.69, 0.75] is DESIGN-derived — centred on the exact ideal 0.714286 with the analytically enumerated fault ladder (readout-collapse 0.714286, dead 0.619) excluded, tightened at amendment on Elder's own recommendation — so neither bar comes from a device noise model. Nothing for the 4.3x readout discrepancy to act on",
+    "triage_class": "(4) DIRECTLY-MEASURED accuracies over an ENUMERATED ceiling and a DESIGN band, shot-noise se — not exposed"
+  },
+  "ratified_numbers": {
+    "F_win": {"marrakesh": 0.9984, "fez": 0.9953, "kingston": 0.9955, "G1_sigma_over_0.919746": {"marrakesh": 200.4, "fez": 113.6, "kingston": 116.3}},
+    "P_win": {"marrakesh": 0.8388, "fez": 0.8437, "kingston": 0.8430, "G4a_band": "[0.78, 0.89] — PASS all three"},
+    "S_win": {"marrakesh": 0.6851, "fez": 0.6792, "kingston": 0.6811, "G4b_band": "[0.69, 0.75] — FAIL all three", "A5_2_zone": {"marrakesh": "ATTENUATION-CONSISTENT", "fez": "FAULT (0.6792 <= evaluated fault edge 0.665897 + 3 se)", "kingston": "ATTENUATION-CONSISTENT"}},
+    "G2_G3_ordering": "PASS in all three (fez/kingston/marrakesh G2 ≥ 42σ, G3 ≥ 28σ)",
+    "verdict_per_flight": "DOES NOT HOLD ×3 — the conjunction fails on G4b alone"
+  },
+  "does_not_certify": [
+    "the registered claim (the conjunction) — DOES NOT HOLD stands",
+    "any reading of the 113-200σ ceiling beat as discharging the registered claim — the row's own framing, carried unchanged",
+    "the switch-arm apparatus as healthy — it attenuated below the band in every flight; whether that is the apparatus or the band is the re-fly question the row already names"
+  ],
+  "verdict": "RATIFIED: every figure in the row reproduces from banked raw counts through the frozen decode — the F-arm beats the enumerated ceiling at 113–200σ in three flights on two backends, and the registered conjunction DOES NOT HOLD because G4b fails in all three. Both halves of the row are the finding"
+}

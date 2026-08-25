@@ -1,0 +1,58 @@
+{
+ "cycle": "C6651",
+ "grader": "elder",
+ "scope": "F125 exhibit \u2014 three H10-B1 flights re-decoded from banked raw counts",
+ "flights": {
+  "marrakesh": {
+   "job": "d9ngftc60llc73ca2vo0",
+   "n_pubs": 63,
+   "total_shots": 31500,
+   "fields_compared": 80,
+   "fields_matched": 80,
+   "mismatches": [],
+   "F_win": 0.9983809523809525,
+   "G1_sigma_over_ceiling_0.919746": 200.41596913809923,
+   "G4b": {
+    "pass": false,
+    "value": 0.6851428571428572
+   },
+   "zone": "ATTENUATION-CONSISTENT",
+   "verdict": "DOES NOT HOLD",
+   "verdict_banked": "DOES NOT HOLD"
+  },
+  "fez": {
+   "job": "d9nn1boqs0bc73e3kkh0",
+   "n_pubs": 63,
+   "total_shots": 31500,
+   "fields_compared": 80,
+   "fields_matched": 80,
+   "mismatches": [],
+   "F_win": 0.9953333333333332,
+   "G1_sigma_over_ceiling_0.919746": 113.64648522716026,
+   "G4b": {
+    "pass": false,
+    "value": 0.6792380952380953
+   },
+   "zone": "FAULT",
+   "verdict": "DOES NOT HOLD",
+   "verdict_banked": "DOES NOT HOLD"
+  },
+  "kingston": {
+   "job": "d9nqg4ssfqic73arbrf0",
+   "n_pubs": 63,
+   "total_shots": 31500,
+   "fields_compared": 84,
+   "fields_matched": 84,
+   "mismatches": [],
+   "F_win": 0.9955238095238095,
+   "G1_sigma_over_ceiling_0.919746": 116.32058872873563,
+   "G4b": {
+    "pass": false,
+    "value": 0.6811428571428572
+   },
+   "zone": "ATTENUATION-CONSISTENT",
+   "verdict": "DOES NOT HOLD",
+   "verdict_banked": "DOES NOT HOLD"
+  }
+ }
+}
