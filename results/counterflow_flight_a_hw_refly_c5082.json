@@ -1,0 +1,62 @@
+{
+  "card": "counterflow_flight_a",
+  "refly": true,
+  "source": "ibm hardware ibm_fez job da6h30usidac73ae5d90",
+  "job_id": "da6h30usidac73ae5d90",
+  "params": {
+    "N": 3,
+    "tau": 0.5,
+    "T": 2,
+    "p_hot": 0.4,
+    "p_cold": 0.05,
+    "shots": 10000
+  },
+  "arms": {
+    "counterflow": {
+      "cold_exit": 0.312,
+      "hot_exit": 0.1828,
+      "crossing": 0.1293,
+      "eps": 0.7486,
+      "readout_mitigation": {
+        "r0_cold": 0.0061,
+        "r1_cold": 0.0244,
+        "r0_hot": 0.0024,
+        "r1_hot": 0.0067
+      }
+    },
+    "coflow": {
+      "cold_exit": 0.2386,
+      "hot_exit": 0.2525,
+      "crossing": -0.0139,
+      "eps": 0.5388,
+      "readout_mitigation": {
+        "r0_cold": 0.0061,
+        "r1_cold": 0.0244,
+        "r0_hot": 0.0024,
+        "r1_hot": 0.0067
+      }
+    },
+    "null": {
+      "cold_exit": 0.2225,
+      "hot_exit": 0.2966,
+      "crossing": -0.0741,
+      "eps": 0.4928,
+      "readout_mitigation": {
+        "r0_cold": 0.0061,
+        "r1_cold": 0.0244,
+        "r0_hot": 0.0024,
+        "r1_hot": 0.0067
+      }
+    }
+  },
+  "checks": {
+    "P1_crossing_positive": true,
+    "P2_cf_beats_coflow": true,
+    "P2_eps_cf_above_half": true,
+    "P2_eps_coflow_at_or_below_half": true,
+    "P3_null_clean": false
+  },
+  "verdict": "VOID(null)",
+  "prereg_digest": "e8e4be57",
+  "GO": "creator general#15380"
+}
