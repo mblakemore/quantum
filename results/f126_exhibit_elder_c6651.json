@@ -1,0 +1,156 @@
+{
+ "cycle": "C6651",
+ "grader": "elder",
+ "scope": "F126 exhibit \u2014 independent recomputation of H10-B4 from RAW COUNTS (job d9mpa8vbupns73e92vpg, ibm_fez)",
+ "source": {
+  "counts": "results/h10_b4_counts_d9mpa8vbupns73e92vpg_elder_c6651.json",
+  "how_obtained": "banked file (no fetch)",
+  "manifest": "results/h10_b4_flight_manifest.json",
+  "flight_module": "experiments/h10_b4_flight_whisper_c5017.py (build_pubs/reconstruct/z_from_probs reused verbatim; baselines = shot-rounded realized mixture)",
+  "decode_compared": "results/h10_b4_decode_whisper_c5017.json",
+  "prereg_se_rule": "docs/h10-b4-prereg-whisper-c5017.md \u00a73 \u2014 per-shot binomial on <Z>, mixture analysed POOLED"
+ },
+ "construction_recovered": {
+  "dE_cold_corr": "(W/2)(<Z_B>_after \u2212 <Z_B>_realized-prep) over arm1 (12,000 shots pooled), W=1",
+  "se": "the construction that REPRODUCES the banked decode (see se_candidates): conditional-on-allocation binomial, Var(zbar) = sum_i (n_i/N)^2 (1 - z_i^2)/n_i, times (W/2) \u2014 the shot allocation to mixture components is deterministic, so only within-pub variance is random. The pooled-sample form sqrt((1-zbar^2)/N) is ~26% LARGER and does NOT reproduce; both are recorded.",
+  "sigma": "|dE| / se (the decode reports sigma as a magnitude: banked 2.27 is positive while dE_cold_corr is negative)",
+  "separation": "dE_cold_unc \u2212 dE_cold_corr",
+  "sigma_sep": "separation / sqrt(se^2 + se_unc^2)",
+  "books": "dE_hot_corr + dE_cold_corr (total energy change of the pair)",
+  "se_books": "sqrt(se_hot^2 + se_cold^2)",
+  "sweep_dEc_theta": "same as dE_cold_corr on arm3 at each theta against that group's own realized baseline",
+  "note": "NONE of these formulas were written in the finding or the decode file; each was recovered and then TESTED against the banked numbers. A formula that reproduces 15/15 fields to 1e-3 relative is the construction; one that did not would have been reported as not recovered, never as 'close'."
+ },
+ "se_candidates": {
+  "P_pooled_sample": {
+   "se_cold": 0.002901206645518378,
+   "se_hot": 0.0044913264533081075,
+   "se_unc": 0.007969136613015963,
+   "reproduces_banked": false
+  },
+  "C_conditional_on_allocation": {
+   "se_cold": 0.0022979075271186123,
+   "se_hot": 0.002057953099289669,
+   "se_unc": 0.006235570921763539,
+   "reproduces_banked": true
+  }
+ },
+ "se_construction_used": "C_conditional_on_allocation",
+ "checks": {
+  "pub_order_matches_manifest": true,
+  "shot_rounding_matches_manifest": true,
+  "n_pubs": 74,
+  "total_shots_measured": 41001
+ },
+ "comparison": [
+  {
+   "field": "dE_cold_corr",
+   "recomputed": -0.005215652246585434,
+   "banked_decode": -0.005215652246585434,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "se",
+   "recomputed": 0.0022979075271186123,
+   "banked_decode": 0.0022979075271186123,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "sigma",
+   "recomputed": 2.269739832884152,
+   "banked_decode": 2.269739832884152,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "dE_cold_unc",
+   "recomputed": 0.1369543485504832,
+   "banked_decode": 0.1369543485504832,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "se_unc",
+   "recomputed": 0.006235570921763539,
+   "banked_decode": 0.006235570921763538,
+   "delta": 8.673617379884035e-19,
+   "match": true
+  },
+  {
+   "field": "sigma_unc",
+   "recomputed": 21.96340163055188,
+   "banked_decode": 21.963401630551882,
+   "delta": -3.552713678800501e-15,
+   "match": true
+  },
+  {
+   "field": "separation",
+   "recomputed": 0.14217000079706862,
+   "banked_decode": 0.14217000079706862,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "sigma_sep",
+   "recomputed": 21.393411289627984,
+   "banked_decode": 21.393411289627984,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "dE_hot_corr",
+   "recomputed": 0.033382318913252065,
+   "banked_decode": 0.033382318913252065,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "books",
+   "recomputed": 0.02816666666666663,
+   "banked_decode": 0.02816666666666663,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "se_books",
+   "recomputed": 0.003084728507026887,
+   "banked_decode": 0.003084728507026887,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "sweep_dEc_0.5",
+   "recomputed": 0.18688287524926345,
+   "banked_decode": 0.18688287524926345,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "sweep_dEc_1.2",
+   "recomputed": 0.33838287524926347,
+   "banked_decode": 0.33838287524926347,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "sweep_dEc_2.35",
+   "recomputed": -0.02011712475073657,
+   "banked_decode": -0.02011712475073657,
+   "delta": 0.0,
+   "match": true
+  },
+  {
+   "field": "sweep_dEc_2.9",
+   "recomputed": -0.03961712475073653,
+   "banked_decode": -0.03961712475073653,
+   "delta": 0.0,
+   "match": true
+  }
+ ],
+ "fields_matched": "15/15",
+ "verdict_on_the_finding": "The finding's three sigmas REPRODUCE from raw counts through the flight module's own observables and the prereg's SE rule: cold-qubit energy change in the correlated arm -0.00522 \u00b1 0.00230 (2.27\u03c3 from zero \u2014 NOT a reversal), uncorrelated control +0.13695 \u00b1 0.00624 (21.96\u03c3), separation 0.14217 (21.39\u03c3). Correlations bought SUPPRESSION of the thermal flow (cold-qubit change consistent with zero at 2.27\u03c3), not its reversal (which would need a significantly NEGATIVE value). NOT HELD stands.",
+ "verdict": "EXHIBIT COMPLETE \u2014 every decode field reproduces from raw counts. EXHIBIT, not a ratification.",
+ "producing_script": "tools/f126_exhibit_elder_c6651.py (this file) \u2014 committed, so the comparison is reproducible by someone other than the grader; the C6630 verdict 'no producing script exists' is retired by this commit."
+}
