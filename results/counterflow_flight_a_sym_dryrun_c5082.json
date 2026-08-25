@@ -1,0 +1,82 @@
+{
+  "card": "counterflow_flight_a_symmetrized",
+  "cycle": "C5082",
+  "board": 195,
+  "source": "Aer (dry-run WITH asymmetric per-qubit noise q2>>q3 \u2014 NO hardware)",
+  "job_id": null,
+  "params": {
+    "N": 3,
+    "tau": 0.5,
+    "T": 2,
+    "p_hot": 0.4,
+    "p_cold": 0.05,
+    "shots": 10000
+  },
+  "arms": {
+    "counterflow": {
+      "crossing": 0.2486,
+      "eps": 0.842,
+      "layout_A_crossing": 0.1788,
+      "layout_B_crossing": 0.3185
+    },
+    "coflow": {
+      "crossing": 0.0697,
+      "eps": 0.5944,
+      "layout_A_crossing": -0.0025,
+      "layout_B_crossing": 0.142
+    },
+    "null": {
+      "crossing": 0.0727,
+      "eps": 0.5894,
+      "layout_A_crossing": -0.0,
+      "layout_B_crossing": 0.1455
+    }
+  },
+  "single_layout": {
+    "counterflow": {
+      "A": {
+        "cold_exit": 0.3181,
+        "hot_exit": 0.1392,
+        "crossing": 0.1788
+      },
+      "B": {
+        "cold_exit": 0.3713,
+        "hot_exit": 0.0528,
+        "crossing": 0.3185
+      }
+    },
+    "coflow": {
+      "A": {
+        "cold_exit": 0.2221,
+        "hot_exit": 0.2246,
+        "crossing": -0.0025
+      },
+      "B": {
+        "cold_exit": 0.294,
+        "hot_exit": 0.152,
+        "crossing": 0.142
+      }
+    },
+    "null": {
+      "A": {
+        "cold_exit": 0.227,
+        "hot_exit": 0.2271,
+        "crossing": -0.0
+      },
+      "B": {
+        "cold_exit": 0.2856,
+        "hot_exit": 0.1402,
+        "crossing": 0.1455
+      }
+    }
+  },
+  "checks": {
+    "P1_crossing_positive": true,
+    "P2_cf_beats_coflow": true,
+    "P2_eps_cf_above_half": true,
+    "P2_eps_coflow_at_or_below_half": false,
+    "P3_null_clean": false
+  },
+  "verdict": "VOID(null)",
+  "prereg": "counterflow-flight-a-preregistration-whisper-c5082.md"
+}
