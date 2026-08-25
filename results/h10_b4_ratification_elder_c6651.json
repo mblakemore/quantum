@@ -1,0 +1,35 @@
+{
+  "cycle": "C6651",
+  "grader": "elder",
+  "finding": "F126 · H10-B4 — heat flowing backward NOT HELD; correlations bought total SUPPRESSION of a 22σ thermal flow, not its reversal",
+  "job": "d9mpa8vbupns73e92vpg",
+  "backend": "ibm_fez",
+  "per_number_checks": {
+    "a_ledger_row": "docs/campaign-arcs.md F124-F128 group row (commit 254d671) — present",
+    "b_exhibit": "results/f126_exhibit_elder_c6651.json — 15/15 decode fields recomputed from RAW COUNTS (results/h10_b4_counts_d9mpa8vbupns73e92vpg_elder_c6651.json) through the flight module's own observables; producing script tools/f126_exhibit_elder_c6651.py committed",
+    "c_calibration_window": "results/window_rescue_c5075.json jobs[d9mpa8vbupns73e92vpg]: DONE, properties AT CREATION DATE (2026-08-01 06:22Z), used_qubits [4,5], used_readout median 0.00390625 max 0.0045166, device median 0.00933838 — the flown pair was 2.39x QUIETER than the device median, so a per-qubit re-grade is possible and cannot move the sigma against the finding",
+    "triage_class": "(4) DIRECTLY-MEASURED comparative WITHIN-WINDOW — correlated and uncorrelated arms flew in the same job; the separation and the suppression are immune by construction to the 4.3x device-vs-used readout discrepancy, and the used-qubit readout is banked anyway"
+  },
+  "ratified_numbers": {
+    "dE_cold_corr": {"value": -0.005215652246585434, "se": 0.0022979075271186123, "sigma": 2.269739832884152, "reading": "right sign, far below the registered 5σ — G1 reversal FAIL"},
+    "dE_cold_unc": {"value": 0.1369543485504832, "se": 0.006235570921763539, "sigma": 21.96340163055188, "reading": "normal arrow in the control — G2 PASS"},
+    "separation": {"value": 0.14217000079706862, "sigma": 21.393411289627984},
+    "dE_hot_corr": 0.033382318913252065,
+    "books": {"value": 0.02816666666666663, "se": 0.003084728507026887, "reading": "energy bookkeeping consistent"},
+    "sweep_dEc": {"0.5": 0.18688287524926345, "1.2": 0.33838287524926347, "2.35": "reproduced (exhibit)", "2.9": "reproduced (exhibit)", "reading": "UNREGISTERED sweep, recorded not certified — re-fly recipe only"},
+    "se_construction": "conditional-on-allocation binomial, Var(zbar) = sum_i (n_i/N)^2 (1 - z_i^2)/n_i, times W/2 — the construction that reproduces the banked decode; the pooled-sample form is ~26% larger and was rejected"
+  },
+  "excluded_from_ratification": {
+    "dMI": {
+      "cited_value": -0.14458012985666757,
+      "cited_in": "ledger row ('priced by a measured mutual-information spend of ΔMI = −0.145') and results/h10_b4_decode_whisper_c5017.json (MI_pre 0.2355045667773239, MI_post 0.09092443692065633)",
+      "why_excluded": "NO PRODUCING SCRIPT: no .py in the repo carries MI_pre/MI_post/dMI. The one natural construction — Shannon mutual information of the joint Z-outcome distribution — was tested C6651 and does NOT reproduce: pooled arm1_corr joint-Z MI = 0.002714 bits / 0.001881 nats (arm2_unc 0.003650 / 0.002530), and the designed-mixture MI over the shot allocation (1/540/4880/6579) gives {0.0237, 0.0342, 0.0365, 0.0527, 0.5284, 0.7623} across all component orderings and bases — none near 0.2355 or 0.0909. A number whose construction cannot be recovered is CITED, not ratified. The author's construction is owed; a ratification blesses only what was recomputed."
+    }
+  },
+  "does_not_certify": [
+    "the reversal (registered claim) — DOES NOT HOLD stands",
+    "the ΔMI pricing clause (above)",
+    "the unregistered θ-sweep sign flips at 2.35/2.9 as anything but a re-fly recipe"
+  ],
+  "verdict": "RATIFIED: DOES NOT HOLD (reversal); SUPPRESSION CERTIFIED at the recomputed numbers (cold-qubit change zero-consistent at 2.27σ against a 21.96σ control, separation 21.39σ); ΔMI clause EXCLUDED pending a producing construction"
+}
