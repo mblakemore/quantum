@@ -60,3 +60,13 @@ results/*RAWDUMP*.json
 # for every seat all of 2026-08-25 (Dawn #15974). Untracked; the feeder keeps writing it locally.
 results/qpu_weather_job.json
 results/retention_reprobe.log
+
+# results/h15_survey_driver.log — operational driver log for the h15 epoch survey, rewritten every 4h
+# by experiments/h15_survey_driver_c5075.sh (cron 17 */4 * * *). Telemetry, not a record; tracking it
+# left the tree dirty on a 4h cadence (part of Dawn #15984's four-file map). Untracked; cron writes it
+# locally. NOTE: results/window_rescue_c5075.json is deliberately NOT ignored — it is an ACCUMULATING
+# census of banked epoch windows (immutable snapshots carried forward), a RECORD that must stay
+# tracked; its daily re-dump is idempotent so it only goes dirty when it genuinely banks a new window,
+# and on that day it wants COMMITTING, not ignoring. Telemetry gets gitignored; records get committed.
+results/h15_survey_driver.log
+results/.retention_reprobe_heartbeat

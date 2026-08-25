@@ -83,6 +83,15 @@ def verdict_for(reads):
     return "UNKNOWN"          # any access/unclassified error contaminates the absence claim
 
 
+def _append_history(out, path):
+    """C6651: the --out file is OVERWRITTEN by every run — the 08-20 record was replaced by the 08-21 run and sat
+    uncommitted 4.7 days (Dawn general#15984). A verification is an observation with a date; it must not replace its
+    predecessor. Every run also appends ONE line here; the --out file stays the 'latest' for existing readers."""
+    import json as _j, os as _o, datetime as _d
+    h = _o.path.join(_o.path.dirname(path), "retention_verify_history_elder.jsonl")
+    rec = dict(out); rec["_history_appended_at"] = _d.datetime.now(_d.timezone.utc).isoformat()
+    with open(h, "a") as f: f.write(_j.dumps(rec) + "\n")
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--job", action="append", default=[])
@@ -112,6 +121,7 @@ def main():
                           "not retention. No absence claim can be made from it.")
         print(f"@@ VERDICT: {out['verdict']}")
         json.dump(out, open(a.out, "w"), indent=1)
+        _append_history(out, a.out)
         return 2
 
     flown = a.flown + [None] * (len(a.job) - len(a.flown))
@@ -140,6 +150,7 @@ def main():
                           "not a transient read.")
     print(f"@@ VERDICT: {out['verdict']}")
     json.dump(out, open(a.out, "w"), indent=1)
+    _append_history(out, a.out)
     return exit_code
 
 
