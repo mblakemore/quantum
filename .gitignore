@@ -51,3 +51,11 @@ results/*RAWDUMP*.json
 **/*rawdump*
 **/*DEBLIND*
 **/*deblind*
+
+# results/qpu_weather_job.json — LIVE nowcast job state, rewritten by tools/qpu_weather.py on the
+# qpu-feeder timer every ~16 min. It is transient telemetry, NOT a provenance record (a record that
+# a scheduled writer overwrites every 16 min cannot be one). Tracking it (my C4681 mistake) left the
+# quantum working tree PERMANENTLY dirty on a cadence — which produced Elder's scheduled fs_escape
+# false positive (a worker convicted for a file no worker touched) and made `git status` misleading
+# for every seat all of 2026-08-25 (Dawn #15974). Untracked; the feeder keeps writing it locally.
+results/qpu_weather_job.json
