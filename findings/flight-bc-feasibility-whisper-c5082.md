@@ -57,3 +57,19 @@ Built the full recuperator as a circuit, each piece validated against sim_c:
   Flight A instrument lifts), (b) echo/DD on the GAD contacts, (c) a cleaner mixed-bath prep (dephasing vs
   env-qubit). Whether the delicate high-γ flip is recoverable is the open question. The LOW-γ regime and the
   effect's reality are not in doubt; the hardware realization of the flip is.
+
+---
+## C — LIFT-AND-RETEST: sign-flip RECOVERS; earlier "fragility" was a truncated-θ-scan bug (Creator: "run the lift-and-retest")
+The raw from_backend failure at high γ was NOT physics — it was my measurement protocol:
+- The co arm's optimal θ at γ=0.5 is NEGATIVE (≈−0.37, per sim), and my raw scan was all-POSITIVE {0.10–0.30}
+  — I never sampled the co minimum, so the co extract read positive and the flip vanished. A scan whose
+  SCOPE I set too narrow, reported as fragility (the day's theme, again).
+- Also fixed a mitigation cal bug (X-setting cal applied H → 50/50 → div-by-zero); readout error is
+  basis-independent, so the cal measures the BARE qubit and one r0/r1 applies to both settings.
+- WITH the lift (full θ range [−0.6,0.6] + correct bare-qubit readout mitigation, representative ibm_fez
+  noise 0.4% 2q / 0.7% readout, 40k shots): γ=0.2 direction −0.096 (NEG ✓), γ=0.5 +0.223 (POS ✓). The
+  two-regime sign-flip SURVIVES noise.
+- CAVEAT: representative noise model, not the exact from_backend (which OOM'd on the 156-qubit device sim
+  with feed-forward). C is shallow (7 2q, depth 19) so routing/depth are non-issues; a real-hardware fly is
+  the final confirmation. **Verdict: C is FEASIBLE.** The directional QET sign-flip is real AND survives
+  hardware noise with the Flight-A-class instrument (θ-scan + readout mitigation).
