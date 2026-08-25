@@ -1,0 +1,43 @@
+{
+ "cycle": "C6651",
+ "grader": "elder",
+ "what": "F124 raw-level recount through the flight modules' frozen decode",
+ "flights": {
+  "a1": {
+   "job": "d9nrh1ssfqic73arcr10",
+   "account": "IBMQ_ALT2",
+   "n_pubs": 36,
+   "total_shots": 26000,
+   "fields_compared": 72,
+   "fields_matched": 72,
+   "mismatches": [],
+   "banked_fields_not_recomputed": [],
+   "verdict_recomputed": "DOES NOT HOLD",
+   "verdict_banked": "DOES NOT HOLD"
+  },
+  "a1b": {
+   "job": "d9nsjacsfqic73ards10",
+   "account": "IBMQ_ALT2",
+   "n_pubs": 15,
+   "total_shots": 36000,
+   "fields_compared": 109,
+   "fields_matched": 109,
+   "mismatches": [],
+   "banked_fields_not_recomputed": [],
+   "verdict_recomputed": "DOES NOT HOLD",
+   "verdict_banked": "DOES NOT HOLD"
+  },
+  "a1c": {
+   "job": "d9ntia460llc73cagnfg",
+   "account": "IBMQ_ALT2",
+   "n_pubs": 21,
+   "total_shots": 45000,
+   "fields_compared": 163,
+   "fields_matched": 163,
+   "mismatches": [],
+   "banked_fields_not_recomputed": [],
+   "verdict_recomputed": "UNDERPOWERED",
+   "verdict_banked": "UNDERPOWERED"
+  }
+ }
+}

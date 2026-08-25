@@ -1,0 +1,27 @@
+{
+  "cycle": "C6651",
+  "grader": "elder",
+  "finding": "F124 · H10-A1/A1b/A1c — THE QUORUM FACT: registered threshold-shape NOT ESTABLISHED (FAIL → DOES NOT HOLD → UNDERPOWERED across three progressively refined flights); depth ordering and context cost CONFIRMED en route",
+  "jobs": {"A1": "d9nrh1ssfqic73arcr10", "A1b": "d9nsjacsfqic73ards10", "A1c": "d9ntia460llc73cagnfg"},
+  "backend": "ibm_fez",
+  "per_number_checks": {
+    "a_ledger_row": "docs/campaign-arcs.md F124-F128 group row (commit 254d671) — present; ONE CORRECTION applied at ratification: the revival-arm range '0.996–1.000' excludes the first flight — per-flight A3_revival contrast is A1 0.994 ± 0.0024, A1b 0.996 ± 0.0020, A1c 1.000 ± 0.0005; the row now carries the three values",
+    "b_exhibit": "results/f124_exhibit_elder_c6630.json (recomputation from the banked DECODE files + committed source) PLUS results/f124_raw_recount_elder_c6651.json: the three jobs' results fetched and re-decoded through each flight module's OWN build_pubs / pub_stats / grade — A1 72/72, A1b 109/109, A1c 163/163 decode fields reproduce, verdicts identical (DOES NOT HOLD / DOES NOT HOLD / UNDERPOWERED). Raw per-pub counts now BANKED (results/h10_a1{,b,c}_counts_<job>_elder_c6651.json, 36+15+21 pubs, 107,000 shots) so no future ratification needs a fetch. Producing script tools/f124_raw_recount_elder_c6651.py",
+    "c_calibration_window": "all three windows RECOVERED with per-qubit readout (results/window_rescue_multipath_c5075.json, the C6629 second extraction path): used_readout median A1 0.00476 / A1b 0.00494 / A1c 0.00452, max 0.0156 / 0.0156 / 0.0127. Exposure is nil in any case: every error bar is BINOMIAL shot noise from the flight module (se_p = sqrt(max(p(1-p), 0.25/tot)/tot), quadrature-propagated) — no noise model anywhere, so the 4.3x device-vs-used readout discrepancy has nothing to act on",
+    "triage_class": "(4) DIRECTLY-MEASURED comparative within-window (pair floors ordered inside one flight) with shot-noise error bars — not exposed",
+    "census_note": "window_rescue_c5075.json lists these jobs under account IBMQ_ALT; service_for_job resolved all three under IBMQ_ALT2 — the census's account field is approximate, the job ids are what the recount keyed on"
+  },
+  "ratified_numbers": {
+    "A1b_depth_ordering_G6": {"diff": 0.0285, "se": 0.00701, "sigma": 4.065, "floors": {"s1s2": 0.86517, "s1s3": 0.85367, "s2s3": 0.82517}, "monotone_decreasing_with_encode_depth": true, "reading": "CONFIRMED"},
+    "A1c_replication": {"diff": 0.02217, "se": 0.00714, "sigma": 3.103, "floors": {"s1s2": 0.855, "s1s3": 0.84383, "s2s3": 0.82167}, "reading": "REPLICATED"},
+    "A1c_context_cost": {"cost": 0.02089, "se": 0.00993, "floor_plain": 0.88733, "mean_floor_ctx": 0.86644, "reading": "CONFIRMED at ~2.1 SE"},
+    "singles_blindness": {"max_abs_dial_across_flights": 0.040, "bar": 0.05, "per_flight_dials": {"A1": [0.032, -0.008, 0.040], "A1b": [-0.0183, -0.0017, -0.0023], "A1c": [0.004, 0.0147, 0.0003]}, "reading": "holds in all three flights"},
+    "revival_arm_A3": {"A1": 0.994, "A1b": 0.996, "A1c": 1.000},
+    "verdicts": {"A1": "DOES NOT HOLD", "A1b": "DOES NOT HOLD", "A1c": "UNDERPOWERED"}
+  },
+  "does_not_certify": [
+    "the registered threshold-shape (quorum fact) — NOT ESTABLISHED stands; the custody half (G4b) fails or underpowers in every flight",
+    "any re-fly bar — the row's own reading (bars set from the confirmed floor model, not round numbers) is a design note, not a certified number"
+  ],
+  "verdict": "RATIFIED: NOT ESTABLISHED stands (FAIL → DOES NOT HOLD → UNDERPOWERED), and the two en-route mechanisms — depth ordering 4.07σ replicated at 3.10σ, context cost 0.0209 ± 0.0099 — are certified at the recounted numbers; every figure reproduces from the flown counts through the frozen decode; revival-arm range corrected to per-flight values"
+}
