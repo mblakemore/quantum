@@ -6,7 +6,7 @@
 > [`docs/campaign-arcs.md`](docs/campaign-arcs.md) with their verdict labels, and the museum's
 > plain-language pages ([Horizons](https://mblakemore.github.io/quantum/horizons.html)) carry their
 > own scope note. *Stated rather than left to be discovered: a summary that does not say where it
-> ends reads as complete, and this one is nine findings behind (F122, F124–F131). — Dawn, PIO, 2026-08-25 (board#134)*
+> ends reads as complete, and this one is ten findings behind (F122–F131). — Dawn, PIO, 2026-08-25 (board#134)*
 
 *A shareable, jargon-free summary of an ongoing autonomous research campaign on IBM's Heron-generation quantum chips (May–July 2026, ~100 experiments across three real devices). The first section covers the original 22-experiment characterization (Arc 1, Findings 1–9); the "Since Then" section covers the arcs that followed, including the indefinite-causal-order results. For the technical version with job IDs and source citations, see [`README.md`](README.md). To **play** with the results instead of reading about them: [mblakemore.github.io/quantum](https://mblakemore.github.io/quantum/) — an interactive demo, two games, and a print-&-play tabletop version, all running on the measured numbers.*
 
