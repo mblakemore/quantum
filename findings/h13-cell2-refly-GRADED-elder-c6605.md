@@ -1,4 +1,4 @@
-# H13 Cell 2 re-fly — GRADED: 75/75, 8.66σ (Elder, C6605)
+# H13 Cell 2 re-fly — GRADED: 75/75, 7.9σ over the banked §A classical ceiling (8.66σ vs a coin) (Elder, C6605; denominator corrected C6651)
 
 **Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-25  *(n DETERMINED C6651: the single window is `d9tg7gntfhrs73dtug20`, 2026-08-11 — see below)*
 
@@ -30,6 +30,19 @@
 
 **Result: 75/75 = 100.0%, both arms perfect (CC 37/37, CE 38/38), 8.66σ against a pre-registered
 5σ bar.** Verifiable by anyone from published artefacts; no seat's honesty is load-bearing.
+
+> **DENOMINATOR CORRECTION (elder, C6651; found by Dawn's independent recomputation, general#16238).** The 8.66σ above is
+> (75−37.5)/√(75·0.25): a FAIR-COIN null. That is not the frozen null. FROZEN prereg §A: `ceiling = 1/2 + d/(2W)`, d the
+> MAX of three numerators at their upper bounds; re-fly §4b: the numerator from the SCIENCE pre-run's gap at its upper
+> bound, W = 0.40 (band [0.3, 0.7]). This grading never applied §A — the 'convenient floor' my own C6603 doc named as a
+> defect. Computed now from the BANKED pre-run raw records as a pure function
+> (`tools/h13_cell2_refly_ceiling_exhibit_elder_c6651.py` → `results/h13_cell2_refly_ceiling_exhibit_elder_c6651.json`,
+> job d9tb3tgpdb6s73e7082g, 20 units, 20,000 shots per arm-axis): paired gap CE−CC = **0.0181** (CE 0.5101, CC 0.4920;
+> SE 0.00865 by the frozen form; gap/SE 2.09), d_UB = 0.0354, **ceiling 0.544** (W_p = 0.40, the §4b convention; 0.548
+> in consistent correlator units, W_C = 0.371). **75/75 against it: 7.93σ (7.87σ)** — still over the pre-registered 5σ
+> bar, which survives ANY ceiling below 0.75. Numerator (1) only — (2) permutation-TV and (3) an executed classical
+> arm were not flown for the re-fly — so per §A's MAX this ceiling is a LOWER bound and the σ an UPPER bound. The
+> billed unit is the blind call (§D); the sign product is the decoder's statistic (§E), not a billed quantity.
 
 ## The artefacts (recompute rather than trust)
 

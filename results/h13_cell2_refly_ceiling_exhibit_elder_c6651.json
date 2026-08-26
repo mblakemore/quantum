@@ -1,0 +1,30 @@
+{
+ "job": "d9tb3tgpdb6s73e7082g",
+ "units": 20,
+ "bases": [
+  "X",
+  "Y",
+  "Z"
+ ],
+ "shots_per_arm_axis_pooled": 20000.0,
+ "Cbar_abs": 0.50105,
+ "per_arm_mean_absC": {
+  "CE": 0.5101,
+  "CC": 0.492
+ },
+ "gap_CE_minus_CC_paired_mean": 0.0181,
+ "SE_gap_frozen_form": 0.00865,
+ "gap_over_SE": 2.09,
+ "d_UB": 0.03541,
+ "ceilings": {
+  "W_p=0.40 (\u00a74b convention)": 0.54426,
+  "W_C=0.371 (correlator span, consistent units)": 0.54772
+ },
+ "sigma_75of75": {
+  "W_p=0.40 (\u00a74b convention)": 7.925,
+  "W_C=0.371 (correlator span, consistent units)": 7.87
+ },
+ "sigma_vs_coin": 8.66,
+ "max_of_three_note": "numerator (1) only: (2) permutation-calibrated TV and (3) executed classical arm were not flown for the re-fly; \u00a7A takes the MAX, so this ceiling is a LOWER bound and the sigma an UPPER bound",
+ "bar_survives_any_ceiling_below": 0.75
+}
