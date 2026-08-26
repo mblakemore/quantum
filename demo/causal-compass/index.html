@@ -277,7 +277,7 @@
         <thead><tr><th scope="col">quantity</th><th scope="col">value</th><th scope="col">what it is</th></tr></thead>
         <tbody>
           <tr><td>inter-arm gap</td><td><b>0.0181</b></td><td>paired CE − CC, mean over units</td></tr>
-          <tr><td>gap / SE</td><td><b>2.09</b></td><td>a real gap, not a rounding artefact</td></tr>
+          <tr><td>gap / SE</td><td><b>2.09</b></td><td>the inter-arm gap is itself a 2.09-sigma effect — <b>not</b> the headline figure, see below</td></tr>
           <tr><td>d (upper bound)</td><td><b>0.0354</b></td><td>|gap| + 2 SE — the numerator, taken at its upper bound</td></tr>
           <tr><td>classical ceiling</td><td><b>0.544</b></td><td>1/2 + d/(2W) at W = 0.40</td></tr>
           <tr><td>significance</td><td class="held">at most 7.9 sigma</td><td>the blind calls against that ceiling</td></tr>
@@ -297,6 +297,20 @@
     below <b>0.75</b> — and the enumerated one is 0.544, nowhere near it. <b>The digit moved;
     the verdict did not.</b> That invariant is worth more than a larger number would be, because it
     is the part that cannot be taken away by a better-derived floor.</p>
+    <div class="caveat"><span class="ct">Two different sigmas, said before anyone asks</span>
+    The ceiling is built from an inter-arm gap that is itself only a <b>2.09-sigma</b> effect,
+    and that gap is the input to <code>d</code>. The headline is a <em>different quantity</em> —
+    75 correct blind calls out of 75, scored against the ceiling that gap produces. <b>Both
+    are true at once</b>, and neither is evidence for the other. A reader who takes "at most
+    7.9 sigma" to mean the underlying separation is comparably strong has read it wrong,
+    so the page says it here rather than waiting to be asked.
+    <br><br><b>What the ceiling's second derivation does and does not cover.</b> A second seat
+    re-derived it from the raw records with independently written code and reproduced the banked
+    value and the shapes. That checks the <em>execution</em>. It does not check the <em>forms</em>
+    — the standard-error expression, <code>d = |gap| + 2 SE</code>, and
+    <code>c = 1/2 + d/(2W)</code> were read from the same recipe, so a wrong form would be
+    reproduced faithfully by both. Deriving those expressions independently from the
+    pre-registration is the check nobody has run.</div>
     <p class="audit">Reference only, and not the frozen null: against a fair coin, 75/75 is
     <b>8.66 sigma</b>. Kept visible because it is what the finding first carried.</p>
   </section>
@@ -321,7 +335,15 @@
     That was <b>disclosed unprompted, when silence would have been cheap and undetectable</b>, and
     it was ruled on before the answer was visible rather than discovered afterwards as a relief.
     Cost: 0.28 sigma of headroom. It changed no verdict.
-    <br><br><b>And the exclusion rule is checkable on its face.</b> The 5 withdrawn ids are
+    <br><br><b>The 5 are named in the public record, before the decode.</b> They were posted
+    by id at <b>18:30:14</b> — in the same minute as the answer key's digest and
+    <b>65 seconds before</b> the blind calls were committed as a hash. The ids absent from the
+    75 decisions are <em>exactly</em> that named set, matched one for one rather than counted:
+    a count check would pass on any five, this pins the identity. <b>Independently confirmed by a
+    third recomputation</b> that reproduced both the seal and the 75/75 from the raw
+    artefacts, and which stated its own limits — it was neither blind nor from a seat outside the
+    court.
+    <br><br><b>And the rule is checkable on its face as well.</b> The 5 withdrawn ids are
     exactly the 5 <em>lexicographically smallest</em> of the 80 — the batch a format check
     picks up first. Their units are scattered (10, 16, 33, 34, 39) and their arms are mixed
     (3 CC / 2 CE), so the rule is independent of both the data and the answer.
@@ -352,6 +374,18 @@
       <div class="receipt"><div class="rt">Artefacts</div>
         <p>Grading is a join between:<br><code>results/h13_cell2_elder_decisions_c6605.json</code><br><code>results/h13_cell2_court_crosswalk_ember_c4321.json</code></p></div>
     </div>
+    <div class="caveat"><span class="ct">Four recomputations, and what they are worth</span>
+    The finding says it is <em>verifiable by anyone from published artefacts</em>. Four seats have
+    now executed the published recipe against the raw files and reproduced both halves — the
+    pre-decode digest and 75/75 with CC 37/37 and CE 38/38 — including one
+    seat that <b>owns none of these files</b> and was in no part of the court. The 5
+    exclusions were matched <b>by identity</b> against the set named publicly before the decode,
+    not merely counted.
+    <br><br><b>The stated limit, because a verification whose limits are unstated is worth less
+    than one whose limits are known:</b> none of the four was <em>blind</em>. Each read the
+    published result before computing, so what these passes rule out is a gross error — the wrong
+    artefact, the wrong recipe, a positional join — and not a subtle one that a foreknown answer
+    would mask. Every seat said so of its own pass without being asked.</div>
     <p class="audit">Recompute it yourself, without this page:
     <code>python3 -c "import json,hashlib;d=json.load(open('results/h13_cell2_court_crosswalk_ember_c4321.json'));print(hashlib.sha256(json.dumps({r['set_id']:r['arm'] for r in d['rows']},sort_keys=True).encode()).hexdigest())"</code>
     <br><b>This page is generated from those artefacts</b>, so a number here cannot drift from the
