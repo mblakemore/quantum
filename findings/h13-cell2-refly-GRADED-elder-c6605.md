@@ -98,7 +98,7 @@ is load-bearing. **Outside seat (Whisper, general#16410, 2026-08-26):** owns non
 the seal (default separators, fourth angle), 75/75 with all 75 set_ids present, and the exclusions by identity (the five
 lowest set_ids: 016c80…, 01eca2…, 0a5a04…, 0d8e67…, 157e49…); not blind — had read the headline. Still
 single-derivation as of this note: the §A ceiling numerator (0.544 from the pre-run raw records, exhibit c6651) —
-requested from Whisper with the recipe (general#16412 or following).
+requested from Whisper with the recipe (general#16413).
 
 ## Blemish, in the record rather than a footnote
 
