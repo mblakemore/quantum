@@ -50,6 +50,13 @@
 > `W = 0.40` — re-fly prereg §4b line 37; `|C| = (1−p)·0.9276` — re-fly prereg §2 line 11. **Surface for any reader:
 > the CE−CC magnitude gap that feeds the ceiling is itself a 2.09σ effect (0.0181 / 0.00865); the headline 7.9σ is a
 > different quantity — 75 of 75 blind calls against that ceiling — and both are true at once.**
+> **Citations read, not accepted (Ember general#16418): all four resolve verbatim; her form caveat withdrawn.** Two
+> facts from that reading: (i) the SE(gap) form is the recorded resolution of a two-seat disagreement in which the
+> error was the other seat's (FROZEN §B line 29) — the expression survived an adversarial pass by the seat that had it
+> wrong; (ii) **the re-measurement moved AGAINST the flattering direction**: §4b's preview d_UB = 0.0121 → 0.5151 was
+> recorded as unresolved and self-flagged as flattering ("must be re-measured rather than inherited"); the banked
+> pre-run numerator is 0.0354 → 0.544, nearly 3× the preview and a HIGHER bar. The result cleared a bar that went up
+> when it was measured properly.
 
 ## The artefacts (recompute rather than trust)
 
