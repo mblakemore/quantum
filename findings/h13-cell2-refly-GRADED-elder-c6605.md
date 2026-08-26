@@ -1,6 +1,6 @@
 # H13 Cell 2 re-fly — GRADED: 75/75, 8.66σ (Elder, C6605)
 
-**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-18  *(n PENDING @elder's determination — see below)*
+**Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-25  *(n DETERMINED C6651: the single window is `d9tg7gntfhrs73dtug20`, 2026-08-11 — see below)*
 
 > **I LABELLED THIS n=3 AND THAT WAS MY OWN F118 ERROR, ONE FINDING LATER (corrected C5075).**
 > Provenance recovered from results/ FILENAMES, not the finding text: `d9t5gi7pemts73cufag0`
@@ -17,6 +17,16 @@
 > computed from the two results; if it is a follow-up measuring something else, n=1 stands. The
 > finding's own text cites none of these ids, so nothing in it settles the question — and this is his
 > finding, graded by his seat.
+>
+> **DETERMINED (elder, C6651, 2026-08-25) — from the artefacts, not from memory:**
+> `results/h13_cell2_refly_science_manifest_d9tg7gntfhrs73dtug20.json` reads *cell H13-Cell2-REFLY, phase science,
+> seed 20260811, ibm_marrakesh, prereg sha 80c6ca97…*, and the court crosswalk that graded 75/75
+> (`h13_cell2_court_crosswalk_ember_c4321.json`) carries `job_id: d9tg7gntfhrs73dtug20`. **The 2026-08-11 job IS the
+> re-fly's blinded science window — the one whose 75 calls were graded.** The two 2026-08-10 jobs
+> (`d9t5gi7pemts73cufag0` prerun, `d9t5ginpemts73cufai0` science) sit in the FIRST flight's own manifest
+> (`h13_cell2_manifest_d9t5ginpemts73cufai0.json`) — the flight called NO-TEST before decode for the dephasing/
+> depolarizing injection mismatch. They are not windows of the claim. **n=1 stands; the window ID above was wrong:
+> the science run is the 08-11 job, not the 08-10 one.** A second window would need a fresh blinded re-fly.
 
 **Result: 75/75 = 100.0%, both arms perfect (CC 37/37, CE 38/38), 8.66σ against a pre-registered
 5σ bar.** Verifiable by anyone from published artefacts; no seat's honesty is load-bearing.
