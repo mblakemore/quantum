@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/*qm-theme-restore*/try{var t=localStorage.getItem("qmuseum-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<meta property="og:title" content="The Causal Compass — cause vs common cause, called blind">
+<meta property="og:description" content="H13 Cell 2 on ibm_marrakesh: 75 sealed sets of observational quantum data, each from a cause-effect or a common-cause arm, called blind by a decoder frozen before any data existed. 75/75 correct (CC 37/37, CE 38/38) — 8.66 sigma against a fair coin. Recompute the pre-decode seal and the grading yourself, in the browser.">
+<meta name="theme-color" content="#04060c">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Causal Compass — telling cause from common cause, blind | The Quantum Museum</title>
+<link rel="canonical" href="https://mblakemore.github.io/quantum/demo/causal-compass/">
+<meta property="og:url" content="https://mblakemore.github.io/quantum/demo/causal-compass/">
+<meta property="og:image" content="https://mblakemore.github.io/quantum/images/social-card.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "The Causal Compass \u2014 telling cause from common cause, blind", "url": "https://mblakemore.github.io/quantum/demo/causal-compass/", "isPartOf": {"@type": "WebSite", "name": "The Quantum Museum", "url": "https://mblakemore.github.io/quantum/"}, "description": "H13 Cell 2 on ibm_marrakesh: 75 sealed sets of observational quantum data, each from a cause-effect or a common-cause arm, called blind by a decoder frozen before any data existed. 75/75 correct (CC 37/37, CE 38/38) \u2014 8.66 sigma against a fair coin. Recompute the pre-decode seal and the grading yourself, in the browser."}</script>
+<meta name="description" content="H13 Cell 2 on ibm_marrakesh: 75 sealed sets of observational quantum data, each from a cause-effect or a common-cause arm, called blind by a decoder frozen before any data existed. 75/75 correct (CC 37/37, CE 38/38) — 8.66 sigma against a fair coin. Recompute the pre-decode seal and the grading yourself, in the browser.">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="7" r="3" fill="%232a3550"/><circle cx="8" cy="24" r="3" fill="%2362e6ff"/><circle cx="24" cy="24" r="3" fill="%23ffc86b"/><path d="M16 10 L9 21 M16 10 L23 21" stroke="%232a3550" stroke-width="2" fill="none"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#04060c; --panel:#0a0e18; --panel-2:#0d1220; --hair:#1a2234; --hair-2:#2a3550;
+    --ink:#e8f2ff; --ink-2:#c4d2e6; --ink-3:#9fb4d0; --ink-4:#7d8ca3;
+    --cyan:#62e6ff; --cyan-soft:#a5f1ff; --violet:#a78bfa; --amber:#ffc86b; --pink:#ff6bd6;
+    --good:#4ade80; --bad:#ff6b5e;
+    --surface:var(--panel); --surface-2:var(--panel-2); --card:var(--panel-2); --edge:var(--hair); --edge-2:var(--hair-2);
+    --mich:'Michroma',sans-serif; --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink-2);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .skip{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--cyan);color:#04121a;padding:8px 14px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:600;transition:top .12s;text-decoration:none}
+  .skip:focus{top:8px;outline:2px solid var(--ink)}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  p a,.audit a,.caveat a,.receipt a,.story a{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
+  .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
+  .topbar .sp{flex:1}
+  .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
+  .topbar .wing b{color:var(--cyan);font-weight:400}
+  .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
+  .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--cyan) 12%,transparent), transparent 70%); }
+  .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
+  h1 { font-family:var(--mono); font-weight:720; letter-spacing:-.02em; line-height:1.06; font-size:clamp(27px,5.2vw,46px); margin:12px 0 14px; }
+  h1 .hl { color: var(--cyan); }
+  .lede { font-size:clamp(15px,2.1vw,18px); color:var(--ink-2); max-width:68ch; margin:0 0 14px; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; font-family:var(--mono); font-size:11.5px; }
+  .badge { border:1px solid var(--edge); border-radius:999px; padding:4px 11px; color:var(--ink-2); }
+  .badge b { color:var(--cyan); }
+  .scope { display:inline-block; line-height:1.5; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border:1px solid var(--edge); border-radius:14px; padding:5px 12px; }
+  .scope b { color: var(--cyan); font-weight:600; }
+  .panel { background:var(--surface); border:1px solid var(--edge); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:22px; box-shadow:var(--shadow); }
+  .panel h2 { font-family:var(--mono); font-size:clamp(17px,2.6vw,21px); margin:0 0 4px; }
+  .panel .sub { color:var(--ink-3); font-size:13.5px; margin:0 0 16px; font-family:var(--mono); }
+  .primer { font-size:13.5px; color:var(--ink-2); background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; margin:0 0 16px; line-height:1.55; }
+  .primer b { color:var(--ink); }
+  .story { font-size:14px; color:var(--ink-2); margin-top:12px; line-height:1.55; max-width:74ch; }
+  .story b { color:var(--ink); }
+  .audit { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); border-top:1px dashed var(--edge); margin-top:14px; padding-top:9px; line-height:1.55; }
+  .audit b { color:var(--good); }
+  .caveat { border-left:3px solid var(--cyan); background:var(--surface-2); border-radius:0 11px 11px 0; padding:12px 15px; margin-top:16px; font-size:13.5px; line-height:1.55; }
+  .caveat .ct { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--cyan); display:block; margin-bottom:5px; }
+  .caveat b { color:var(--ink); }
+  .quote { border-left:3px solid var(--amber); background:var(--surface-2); border-radius:0 11px 11px 0; padding:14px 17px; margin:14px 0 0; font-size:13.5px; line-height:1.6; }
+  .quote .qt { font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); display:block; margin-bottom:7px; }
+  .quote p { margin:0 0 9px; } .quote p:last-child { margin-bottom:0; }
+  .quote b { color:var(--ink); }
+  .court { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .receipt { background:var(--surface-2); border:1px solid var(--edge); border-radius:12px; padding:13px 15px; }
+  .receipt .rt { font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em; margin-bottom:5px; }
+  .receipt p { margin:0; font-size:13px; color:var(--ink-2); line-height:1.5; }
+  .receipt code { font-family:var(--mono); font-size:11.5px; color:var(--ink-3); overflow-wrap:anywhere; }
+  .tbl-wrap { overflow-x:auto; margin:6px 0 0; border:1px solid var(--edge); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px; min-width:460px; }
+  caption { caption-side:top; text-align:left; padding:10px 13px 6px; color:var(--ink-3); font-size:11.5px; }
+  th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--edge); vertical-align:top; color:var(--ink-2); }
+  thead th { color:var(--ink-3); font-weight:600; letter-spacing:.04em; background:var(--surface-2); }
+  tbody tr:last-child td { border-bottom:none; }
+  td b { color:var(--ink); }
+  td.held { color:var(--good); font-weight:700; white-space:nowrap; }
+  footer { margin-top:26px; font-family:var(--mono); font-size:12px; color:var(--ink-3); display:flex; flex-wrap:wrap; gap:8px 16px; }
+  footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
+  @media (max-width:680px){ .court { grid-template-columns:1fr; } }
+
+  /* ── the sealed-set grid ─────────────────────────────────────────────────
+     Deliberately NOT an SVG chart: no <text> node means no label to collide,
+     clip, or fail contrast against its own fill. The state of each set is
+     carried by SHAPE and TEXT as well as colour, so it survives a reader who
+     cannot distinguish the two arm hues. */
+  .gridwrap { margin:14px 0 0; }
+  .setgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(30px,1fr)); gap:6px; margin:0; padding:0; list-style:none; }
+  .setgrid li { aspect-ratio:1; border-radius:7px; border:1px solid var(--edge-2); background:var(--surface-2);
+                display:flex; align-items:center; justify-content:center;
+                font-family:var(--mono); font-size:10.5px; font-weight:600; color:var(--ink-4);
+                transition:background .18s, border-color .18s, color .18s; }
+  .setgrid li.sealed { color:var(--ink-4); }
+  .setgrid li.cc { border-color:var(--cyan); color:var(--cyan); background:color-mix(in srgb,var(--cyan) 13%,transparent); }
+  .setgrid li.ce { border-color:var(--amber); color:var(--amber); background:color-mix(in srgb,var(--amber) 13%,transparent); }
+  .setgrid li.excl { border-style:dashed; border-color:var(--hair-2); color:var(--ink-4); background:transparent; }
+  .lgd { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:11px; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); }
+  .lgd span { display:inline-flex; align-items:center; gap:7px; }
+  .lgd i { width:15px; height:15px; border-radius:5px; border:1px solid var(--edge-2); display:inline-block; flex:none; }
+  .lgd i.cc { border-color:var(--cyan); background:color-mix(in srgb,var(--cyan) 13%,transparent); }
+  .lgd i.ce { border-color:var(--amber); background:color-mix(in srgb,var(--amber) 13%,transparent); }
+  .lgd i.excl { border-style:dashed; }
+  .btnrow { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 0; }
+  button.act { font-family:var(--mono); font-size:13px; font-weight:600; background:color-mix(in srgb,var(--cyan) 14%,transparent);
+               border:1px solid var(--cyan); color:var(--cyan-soft); padding:9px 16px; border-radius:11px; cursor:pointer; }
+  button.act:hover { background:color-mix(in srgb,var(--cyan) 24%,transparent); }
+  button.act[disabled] { opacity:.45; cursor:default; border-color:var(--edge-2); color:var(--ink-4); background:transparent; }
+  .out { margin-top:14px; font-family:var(--mono); font-size:12.5px; line-height:1.7; color:var(--ink-2);
+         background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:13px 15px; }
+  .out .k { color:var(--ink-4); }
+  .out .ok { color:var(--good); font-weight:700; }
+  .out .no { color:var(--bad); font-weight:700; }
+  .out code { overflow-wrap:anywhere; color:var(--cyan-soft); }
+  .hashline { font-family:var(--mono); font-size:11.5px; overflow-wrap:anywhere; color:var(--ink-3); }
+  .hashline b { color:var(--cyan-soft); font-weight:600; }
+  /* Long recipes and hashes WRAP rather than scroll. A scroll container would trade a page
+     overflow for a keyboard trap (WCAG 2.1.1: a scrollable region must be focusable), and
+     wrapping costs nothing here because none of these strings needs to be read as one line.
+     Found by the 320px pass: one python one-liner was 955px wide and moved the whole page. */
+  code { overflow-wrap:anywhere; word-break:break-word; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <nav class="topbar" aria-label="museum">
+    <a href="../index.html">← The Quantum Museum</a>
+    <span class="sp"></span>
+    <span class="wing">WING <b>I</b> · The Causal Switch</span>
+  </nav>
+  <main id="main">
+  <header class="hero">
+    <div class="eyebrow">H13 Cell 2 · The Causal Compass · the Heron 2026 campaign</div>
+    <h1>Telling a cause from a common cause, <span class="hl">without intervening</span></h1>
+    <p class="lede">Two things move together. Did the first cause the second, or did something
+    else cause both? Given only observations — no ability to reach in and change anything — those
+    two stories predict the <em>same</em> data. That is not a gap in the statistics; for two
+    variables it is a theorem. This exhibit is a blind test of an instrument that was asked to
+    tell them apart anyway, and a place to grade its answers yourself.</p>
+    <div class="badges">
+      <span class="badge"><b>75/75</b> blind calls correct</span>
+      <span class="badge">CC <b>37/37</b></span>
+      <span class="badge">CE <b>38/38</b></span>
+      <span class="badge">clears its <b>pre-registered 5 sigma</b> bar</span>
+      <span class="badge">n=<b>1</b> window</span>
+      <span class="badge">a <b>re-fly</b></span>
+    </div>
+    <p class="scope">Scope: <b>an instrument result, not a physics claim.</b> It establishes that a
+    frozen statistic separated two labelled populations — not that the labels mean what the arc
+    calls them.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="h-problem">
+    <h2 id="h-problem">The thing that is supposed to be impossible</h2>
+    <p class="sub">Rung one of the ladder, doing rung two's job</p>
+    <div class="primer">In Pearl's ladder of causation, <b>rung one is seeing</b> and <b>rung two is
+    doing</b>. The classic result is that seeing is not enough: with two correlated variables and
+    purely observational data, "A causes B" and "a hidden C causes both" are
+    <b>observationally equivalent</b> — no amount of watching separates them. You have to
+    intervene.</p>
+    <p class="story">Quantum mechanics offers a seam. A genuine <b>cause-effect</b> chain — measure,
+    wait, measure the same system again — is <b>forced</b> by measurement repeatability toward
+    all-positive correlations on the diagonal, because the first measurement projects the system
+    onto an eigenstate. A <b>common cause</b> — two systems prepared together and measured
+    separately — is under no such constraint. Classically neither arrangement is forced, which is
+    exactly why the classical problem is stuck. The discriminating work here is done by that
+    causal-structure argument, not by the size of any correlation.</p>
+    <div class="caveat"><span class="ct">The sentence this exhibit is not allowed to say</span>
+    <b>"The sign flip is the quantum signature" — that is FALSE</b>, and the frozen protocol
+    requires it be written down as false: a classical shared-variable model reproduces the same
+    sign pattern exactly. <b>The true statement is narrower</b>: within quantum mechanics a
+    cause-effect chain is <em>forced</em> to all-positive diagonals by measurement repeatability,
+    while a common cause is not — and classically <em>neither</em> is forced. The discrimination
+    rests on that asymmetry, not on a dramatic-looking sign.</div>
+    <div class="caveat"><span class="ct">Prior art, stated plainly</span>
+    The concept is <b>not ours</b>: quantum causal discovery of this kind is
+    <b>Ried et al., <em>Nature Physics</em> 11, 414 (2015)</b>. What this cell contributes is a
+    protocol and a certification on hardware — a blind, sealed, pre-registered run of the idea,
+    not the idea.</div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-seal">
+    <h2 id="h-seal">First, the seal — recompute it in your browser</h2>
+    <p class="sub">The answer key was hashed and published before anyone decoded anything</p>
+    <p class="story">Eighty sets of blinded records were flown. Which arm each set came from was
+    known only to a sealing seat, who published a <b>digest of the whole mapping</b> before any
+    decoding began. That digest is the reason the result cannot be a story told afterwards: if the
+    answer key had been adjusted to fit the calls, this hash would not match.</p>
+    <p class="hashline">Published before decode, 18:30:14 —<br><b>a9f464fef33438f38f54e4a89c684abb042b8e5508c0f808d0bc1fb87ce707da</b></p>
+    <p class="story">This page carries the crosswalk exactly as committed to the repository.
+    Pressing the button rebuilds the mapping object from it, serialises it by the published recipe,
+    and hashes it in your browser. A match shows that the mapping shipped here <em>is</em> the one
+    that was sealed.</p>
+    <div class="primer">Recipe, as published: <code>sha256(json.dumps(obj, sort_keys=True))</code>
+    — keys sorted, and Python's default separators (<code>", "</code> and <code>": "</code>).
+    <b>The exact form is load-bearing</b>: serialise the same object with compact separators and
+    the digest does not match, which is why the recipe is published rather than described.</div>
+    <div class="btnrow">
+      <button class="act" id="btn-seal" type="button">Recompute the seal</button>
+    </div>
+    <div class="out" id="out-seal" role="status" aria-live="polite">
+      <span class="k">Not yet computed.</span>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-grade">
+    <h2 id="h-grade">Then, the grading — it is a join and a count</h2>
+    <p class="sub">80 flown · 5 withdrawn before decode · 75 graded</p>
+    <p class="story">The decoder was frozen — hash published — <b>before any data existed</b>, and
+    it reads only the contents of a records file. It never sees a filename, a set id, or a label.
+    It emitted one call per set: <b>CC</b> for common cause, <b>CE</b> for cause-effect. Those
+    calls were hashed and published at <b>18:31:19</b>. The mapping was unsealed at
+    <b>18:32:13</b> — <em>after</em>. Neither artefact could be adjusted in the light of the other.</p>
+    <div class="gridwrap">
+      <ul class="setgrid" id="grid" aria-label="the 80 flown sets, sealed"></ul>
+      <div class="lgd">
+        <span><i class="cc"></i> CC — common cause</span>
+        <span><i class="ce"></i> CE — cause-effect</span>
+        <span><i class="excl"></i> withdrawn before decode (5)</span>
+        <span>each tile shows the decoder's call once graded</span>
+      </div>
+    </div>
+    <div class="btnrow">
+      <button class="act" id="btn-grade" type="button">Grade the 75 calls</button>
+      <button class="act" id="btn-reset" type="button">Re-seal</button>
+    </div>
+    <div class="out" id="out-grade" role="status" aria-live="polite">
+      <span class="k">Sealed. 80 sets flown, 5 withdrawn before decode, 75 awaiting grading.</span>
+    </div>
+    <div class="tbl-wrap" tabindex="0" role="group" aria-label="the graded result, per arm and overall">
+      <table>
+        <caption>The graded result, recomputed on this page from the two committed artefacts</caption>
+        <thead><tr><th scope="col">arm</th><th scope="col">what it means</th><th scope="col">called correctly</th></tr></thead>
+        <tbody>
+          <tr><td><b>CC</b></td><td>common cause — two systems prepared together</td><td class="held">37 / 37</td></tr>
+          <tr><td><b>CE</b></td><td>cause-effect — one system measured, then measured again</td><td class="held">38 / 38</td></tr>
+          <tr><td><b>both</b></td><td>every graded set</td><td class="held">75 / 75</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="audit"><b>Why both arms matter separately.</b> A pooled significance can be
+    manufactured by a decoder that is simply biased toward one answer and happens to meet a lopsided
+    truth. It cannot be manufactured by 37/37 <em>and</em> 38/38. That both-arms
+    criterion was written down while the seats were still blind, and scored afterwards — which is
+    what makes the number mean anything.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h-sig">
+    <h2 id="h-sig">How significant, and significant <em>against what</em></h2>
+    <p class="sub">The denominator is the whole question, and this page had it wrong first</p>
+    <p class="story">A hit rate means nothing until you say what it is being compared to.
+    <b>The billed unit here is blind call-success</b> over sealed, matched records — fixed count,
+    identical in both arms — as the frozen protocol specifies. The comparison is <em>not</em> a
+    coin. It is the <b>enumerated classical ceiling</b>: the best any classical observational model
+    can do on these records, which the protocol fixes as
+    <code>c = 1/2 + d/(2W)</code> for a randomisation band of width <code>W</code>.</p>
+    <div class="caveat"><span class="ct">Corrected in the record, in the open</span>
+    The finding first reported <b>8.66 sigma</b> — and that figure is against a <b>fair coin</b>,
+    which was never the frozen null. It was published, audited, and the wrong denominator survived
+    both reads. The grading seat named the defect as his within minutes of it being raised, derived
+    the enumerated ceiling from the pre-run's raw records, and banked it as its own artefact. The
+    corrected figure is below; the coin number stays on the page because striking it out silently
+    would be its own kind of edit.</div>
+    <div class="tbl-wrap" tabindex="0" role="group" aria-label="the enumerated classical ceiling and its inputs">
+      <table>
+        <caption>The enumerated ceiling, banked from pre-run job d9tb3tgpdb6s73e7082g — every value recomputed by this page from that artefact</caption>
+        <thead><tr><th scope="col">quantity</th><th scope="col">value</th><th scope="col">what it is</th></tr></thead>
+        <tbody>
+          <tr><td>inter-arm gap</td><td><b>0.0181</b></td><td>paired CE − CC, mean over units</td></tr>
+          <tr><td>gap / SE</td><td><b>2.09</b></td><td>a real gap, not a rounding artefact</td></tr>
+          <tr><td>d (upper bound)</td><td><b>0.0354</b></td><td>|gap| + 2 SE — the numerator, taken at its upper bound</td></tr>
+          <tr><td>classical ceiling</td><td><b>0.544</b></td><td>1/2 + d/(2W) at W = 0.40</td></tr>
+          <tr><td>significance</td><td class="held">at most 7.9 sigma</td><td>75/75 against that ceiling</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="caveat"><span class="ct">Why "at most", and not a number on its own</span>
+    The frozen protocol takes the <b>maximum of three</b> candidate numerators, and only the first
+    was flown for the re-fly — a permutation-calibrated bound and an executed classical arm were
+    not. A maximum computed over one of three candidates can only be <em>too small</em>, so the
+    ceiling is a <b>lower bound</b> and the significance an <b>upper bound</b>. The correct sentence
+    is therefore "<b>at most 7.9 sigma</b> over the enumerated classical ceiling", and this
+    page will not print it without the qualifier.</div>
+    <p class="story"><b>What does not depend on any of those digits.</b> The bar was pre-registered
+    at 5 sigma. Solve for the ceiling at which 75-out-of-75 would fall to exactly 5 sigma:
+    <code>c = n/(n + 25) = 0.75</code>. So the verdict survives <em>any</em> classical ceiling
+    below <b>0.75</b> — and the enumerated one is 0.544, nowhere near it. <b>The digit moved;
+    the verdict did not.</b> That invariant is worth more than a larger number would be, because it
+    is the part that cannot be taken away by a better-derived floor.</p>
+    <p class="audit">Reference only, and not the frozen null: against a fair coin, 75/75 is
+    <b>8.66 sigma</b>. Kept visible because it is what the finding first carried.</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h-fences">
+    <h2 id="h-fences">What this is, and four things it is not</h2>
+    <p class="sub">Every one of these is in the finding's own record, not softened for the wall</p>
+    <div class="caveat"><span class="ct">1 · An instrument result, not physics</span>
+    75 correct calls out of 75 establishes that <b>the statistic separated two labelled
+    populations</b>. It does not establish that the labels mean what the arc claims they mean, and
+    nothing in this apparatus can. The decoder classifies the prepared arms; read it that way.</div>
+    <div class="caveat"><span class="ct">2 · This is a re-fly. The first flight was killed by its own author</span>
+    The first attempt was called <b>NO-TEST before decode</b> by the seat that designed it: the
+    randomisation had been implemented as an idle delay, which is <b>dephasing</b> — it kills two
+    axes and spares the third — where the frozen design called for <b>depolarizing</b>, which
+    attenuates all three equally. It would have made the arms separable for a reason that has
+    nothing to do with causal structure. The fix was a weighted Pauli twirl; this page reports the
+    re-fly.</div>
+    <div class="caveat"><span class="ct">3 · 75 of 80, and the 5 were withdrawn by the seat who caused it</span>
+    5 sets (3 CC / 2 CE) were excluded because the sealing seat had run the
+    frozen decoder against real blinded files while checking the format — contaminating them.
+    That was <b>disclosed unprompted, when silence would have been cheap and undetectable</b>, and
+    it was ruled on before the answer was visible rather than discovered afterwards as a relief.
+    Cost: 0.28 sigma of headroom. It changed no verdict.
+    <br><br><b>And the exclusion rule is checkable on its face.</b> The 5 withdrawn ids are
+    exactly the 5 <em>lexicographically smallest</em> of the 80 — the batch a format check
+    picks up first. Their units are scattered (10, 16, 33, 34, 39) and their arms are mixed
+    (3 CC / 2 CE), so the rule is independent of both the data and the answer.
+    Choosing that particular set at random is a 1-in-24-million shot; choosing it to flatter a
+    result is not something anyone would do, because it is the one selection an outsider can
+    reconstruct without asking.</div>
+    <div class="caveat"><span class="ct">4 · One window, not three — and the blemish</span>
+    This is <b>n=1</b>: a single blinded science window,
+    <code>d9tg7gntfhrs73dtug20</code> (2026-08-11). Two earlier jobs belong to the first flight —
+    the one called NO-TEST — and are not windows of this claim. Separately, in the record rather
+    than a footnote: the unseal landed between the decisions hash and a pre-unseal question, so
+    <b>that question received a post-unseal answer</b>. The core ordering held — the calls were
+    already committed as a hash — but the weaker courtesy, that every question be answered blind,
+    did not.</div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-receipts">
+    <h2 id="h-receipts">Receipts</h2>
+    <p class="sub">Everything above recomputes from these; nothing rests on a seat's word</p>
+    <div class="court">
+      <div class="receipt"><div class="rt">Frozen decoder</div>
+        <p>Hashed <b>before any data existed</b>. Reads file contents only — no filename, no path,
+        no set id.<br><code>321abc99013187050f027d3b9814e12ecf7c3cb928da8c5269d5bb8cb40e83d3</code></p></div>
+      <div class="receipt"><div class="rt">Mapping digest</div>
+        <p>The answer key, hashed and published <b>before decode</b>.<br><code>a9f464fef33438f38f54e4a89c684abb042b8e5508c0f808d0bc1fb87ce707da</code></p></div>
+      <div class="receipt"><div class="rt">Decisions</div>
+        <p>The 75 blind calls, hashed and published <b>before the unseal</b>.<br><code>2a087bb45de159a23d155ac0b3deec92cb5cf93378c6d9232b68c0b80ef3dfba</code></p></div>
+      <div class="receipt"><div class="rt">Artefacts</div>
+        <p>Grading is a join between:<br><code>results/h13_cell2_elder_decisions_c6605.json</code><br><code>results/h13_cell2_court_crosswalk_ember_c4321.json</code></p></div>
+    </div>
+    <p class="audit">Recompute it yourself, without this page:
+    <code>python3 -c "import json,hashlib;d=json.load(open('results/h13_cell2_court_crosswalk_ember_c4321.json'));print(hashlib.sha256(json.dumps({r['set_id']:r['arm'] for r in d['rows']},sort_keys=True).encode()).hexdigest())"</code>
+    <br><b>This page is generated from those artefacts</b>, so a number here cannot drift from the
+    record without the build failing.</p>
+  </section>
+
+  <footer>
+    <a href="../index.html">← Museum</a>
+    <a href="../../horizons.html">Horizons — plain words</a>
+    <a href="../../negatives.html">The Negatives</a>
+    <span>H13 Cell 2 · ibm_marrakesh · re-fly 2026-08-11</span>
+  </footer>
+  </main>
+</div>
+<script>
+(function(){
+  "use strict";
+  var ROWS  = [["016c80083b3552b9",10,"CC"],["01eca2daf654ccc8",39,"CE"],["0a5a04ef83f20722",34,"CC"],["0d8e67775be5d7f4",16,"CC"],["157e49372e339836",33,"CE"],["19c0d9b394d21686",2,"CC"],["1ffe545c91e3f76b",22,"CE"],["25796a5cccc69cfd",33,"CC"],["259eb68a121e3228",32,"CE"],["26634b6aa725509c",26,"CE"],["285f21d2c123f394",20,"CC"],["2b1c297c497f50b9",8,"CE"],["2e74b17ca8e570e5",24,"CC"],["2f21684c88cd3705",36,"CC"],["3005edaa883de86f",29,"CE"],["3485ca56eac9a99a",19,"CC"],["360f20ecffaefd0c",35,"CC"],["3cab4ae7c238de15",7,"CE"],["4883f3698d209adb",14,"CE"],["4d7365c9e7198879",17,"CC"],["5759b5d9c1e87db3",5,"CC"],["5e45ac7a549b5bab",18,"CC"],["608d017306264656",31,"CC"],["61670c0eef873dc9",0,"CC"],["619914fb6ee22f5b",23,"CE"],["655e908766baa666",9,"CC"],["66535637f2f18f09",21,"CE"],["66d14cec9eed91b1",25,"CE"],["6a771ec0fa2ba9d6",4,"CE"],["6a7ad170e7f0c694",37,"CE"],["6ca94ce3116b00fd",6,"CC"],["6fb20389551f4a46",10,"CE"],["7052f7ab064e0f5a",26,"CC"],["771a468fedc8e8ff",36,"CE"],["77fea12ab1ec004e",8,"CC"],["7f4d6776229c5b31",1,"CC"],["8351a8024a93084c",22,"CC"],["83c2ba72bdcd30a6",25,"CC"],["85e2d53734f134c9",28,"CE"],["87cfe3a562e33e80",27,"CC"],["8c7a25cb0dc13c73",11,"CC"],["8e2a892f9ca75130",3,"CE"],["92df54676bc04965",5,"CE"],["a02301fa421b54d8",15,"CE"],["a0cfc4d3cd6a77e6",14,"CC"],["a1d31de207602681",24,"CE"],["a3ff7bf673a78e87",17,"CE"],["a61fb62022f0a398",28,"CC"],["a88cfea810c27c27",1,"CE"],["aa3ac06cda899b77",30,"CC"],["b2ac9303ff2ccad2",34,"CE"],["b3637120e56cf115",12,"CE"],["b4fe46b077b6e6ca",29,"CC"],["bb7835af83a1c645",35,"CE"],["beb4f466516d364c",19,"CE"],["c55c3bb77cc59f4b",38,"CE"],["c6d2cc91b906d93a",0,"CE"],["c6f451d601d92633",9,"CE"],["c7c025a6155aeacd",18,"CE"],["ca38febcc03249ea",39,"CC"],["cd8736c18d39028e",27,"CE"],["cde9b3b6f5a1effb",13,"CE"],["d01f5b4cc17944e3",23,"CC"],["d09be096b04f7160",2,"CE"],["d31f085b8abe6129",37,"CC"],["d4d33661e1745c92",11,"CE"],["de4da3d8ba0be72a",20,"CE"],["ded52cfe24e76bed",4,"CC"],["e6a63b77b9295333",30,"CE"],["e90e5466da6b5f8e",12,"CC"],["ec4d9aedc1af9f10",13,"CC"],["ece5432318d49dc4",15,"CC"],["ed26d741b64058fb",32,"CC"],["ed7a9c1af05c0ff0",38,"CC"],["eff2c846457056a4",7,"CC"],["f17fdcb6c279ec4f",31,"CE"],["f6baf619f7d22b63",6,"CE"],["fb7a792b0fcd260b",21,"CC"],["fb87c8a233969002",3,"CC"],["fdbe0efbb48164eb",16,"CE"]];
+  var CALLS = {"19c0d9b394d21686":"CC","1ffe545c91e3f76b":"CE","25796a5cccc69cfd":"CC","259eb68a121e3228":"CE","26634b6aa725509c":"CE","285f21d2c123f394":"CC","2b1c297c497f50b9":"CE","2e74b17ca8e570e5":"CC","2f21684c88cd3705":"CC","3005edaa883de86f":"CE","3485ca56eac9a99a":"CC","360f20ecffaefd0c":"CC","3cab4ae7c238de15":"CE","4883f3698d209adb":"CE","4d7365c9e7198879":"CC","5759b5d9c1e87db3":"CC","5e45ac7a549b5bab":"CC","608d017306264656":"CC","61670c0eef873dc9":"CC","619914fb6ee22f5b":"CE","655e908766baa666":"CC","66535637f2f18f09":"CE","66d14cec9eed91b1":"CE","6a771ec0fa2ba9d6":"CE","6a7ad170e7f0c694":"CE","6ca94ce3116b00fd":"CC","6fb20389551f4a46":"CE","7052f7ab064e0f5a":"CC","771a468fedc8e8ff":"CE","77fea12ab1ec004e":"CC","7f4d6776229c5b31":"CC","8351a8024a93084c":"CC","83c2ba72bdcd30a6":"CC","85e2d53734f134c9":"CE","87cfe3a562e33e80":"CC","8c7a25cb0dc13c73":"CC","8e2a892f9ca75130":"CE","92df54676bc04965":"CE","a02301fa421b54d8":"CE","a0cfc4d3cd6a77e6":"CC","a1d31de207602681":"CE","a3ff7bf673a78e87":"CE","a61fb62022f0a398":"CC","a88cfea810c27c27":"CE","aa3ac06cda899b77":"CC","b2ac9303ff2ccad2":"CE","b3637120e56cf115":"CE","b4fe46b077b6e6ca":"CC","bb7835af83a1c645":"CE","beb4f466516d364c":"CE","c55c3bb77cc59f4b":"CE","c6d2cc91b906d93a":"CE","c6f451d601d92633":"CE","c7c025a6155aeacd":"CE","ca38febcc03249ea":"CC","cd8736c18d39028e":"CE","cde9b3b6f5a1effb":"CE","d01f5b4cc17944e3":"CC","d09be096b04f7160":"CE","d31f085b8abe6129":"CC","d4d33661e1745c92":"CE","de4da3d8ba0be72a":"CE","ded52cfe24e76bed":"CC","e6a63b77b9295333":"CE","e90e5466da6b5f8e":"CC","ec4d9aedc1af9f10":"CC","ece5432318d49dc4":"CC","ed26d741b64058fb":"CC","ed7a9c1af05c0ff0":"CC","eff2c846457056a4":"CC","f17fdcb6c279ec4f":"CE","f6baf619f7d22b63":"CE","fb7a792b0fcd260b":"CC","fb87c8a233969002":"CC","fdbe0efbb48164eb":"CE"};
+  var PUB   = "a9f464fef33438f38f54e4a89c684abb042b8e5508c0f808d0bc1fb87ce707da";
+  var ENUM_SIGMA = "7.9";
+  var grid = document.getElementById("grid");
+  var outS = document.getElementById("out-seal");
+  var outG = document.getElementById("out-grade");
+  var bS = document.getElementById("btn-seal"),
+      bG = document.getElementById("btn-grade"),
+      bR = document.getElementById("btn-reset");
+
+  // ── the grid: one tile per flown set ────────────────────────────────────
+  var tiles = [];
+  ROWS.forEach(function(r){
+    var li = document.createElement("li");
+    li.className = "sealed";
+    li.textContent = "?";
+    var graded = Object.prototype.hasOwnProperty.call(CALLS, r[0]);
+    li.setAttribute("aria-label", graded
+      ? "set " + r[0].slice(0,6) + ", sealed"
+      : "set " + r[0].slice(0,6) + ", withdrawn before decode");
+    if(!graded){ li.className = "excl"; li.textContent = "—"; }
+    grid.appendChild(li);
+    tiles.push([li, r, graded]);
+  });
+
+  function reseal(){
+    tiles.forEach(function(t){
+      var li = t[0], r = t[1], graded = t[2];
+      if(graded){ li.className = "sealed"; li.textContent = "?";
+                  li.setAttribute("aria-label","set "+r[0].slice(0,6)+", sealed"); }
+    });
+    outG.innerHTML = '<span class="k">Sealed. ' + ROWS.length + ' sets flown, ' +
+      (ROWS.length - Object.keys(CALLS).length) + ' withdrawn before decode, ' +
+      Object.keys(CALLS).length + ' awaiting grading.</span>';
+    bG.disabled = false;
+  }
+
+  // ── the grading: a join and a count, done in front of you ───────────────
+  function grade(){
+    bG.disabled = true;
+    var ok=0, n=0, cc=0, ccok=0, ce=0, ceok=0, wrong=[];
+    tiles.forEach(function(t){
+      var li=t[0], r=t[1], graded=t[2];
+      if(!graded) return;
+      var truth=r[2], call=CALLS[r[0]];
+      n++;
+      if(truth==="CC"){ cc++; if(call==="CC") ccok++; } else { ce++; if(call==="CE") ceok++; }
+      var right = (call===truth);
+      if(right) ok++; else wrong.push(r[0]);
+      li.className = (call==="CC") ? "cc" : "ce";
+      li.textContent = call;
+      li.setAttribute("aria-label","set "+r[0].slice(0,6)+", truth "+truth+", called "+call+
+                      ", "+(right?"correct":"WRONG"));
+    });
+    var sig = (ok - n/2) / Math.sqrt(n*0.25);
+    outG.innerHTML =
+      '<span class="k">joined by id · </span>' +
+      '<span class="' + (ok===n?"ok":"no") + '">' + ok + " / " + n + " correct</span>" +
+      '<span class="k"> · CC </span>' + ccok + "/" + cc +
+      '<span class="k"> · CE </span>' + ceok + "/" + ce +
+      '<span class="k"> · </span>' + sig.toFixed(2) +
+      '<span class="k"> sigma vs a fair coin — which is NOT the frozen null; against the ' +
+      'enumerated classical ceiling it is at most ' + ENUM_SIGMA + ' sigma (see below)</span>' +
+      (wrong.length ? '<br><span class="no">wrong: ' + wrong.join(", ") + "</span>"
+                    : '<br><span class="k">no set was called wrongly, and none of the ' +
+                      (ROWS.length - n) + ' withdrawn ids appears among the calls.</span>');
+  }
+
+  // ── the seal: Python's json.dumps(sort_keys=True), reproduced exactly ───
+  function pyDumpsSorted(obj){
+    var keys = Object.keys(obj).sort();
+    return "{" + keys.map(function(k){
+      return JSON.stringify(k) + ": " + JSON.stringify(obj[k]);
+    }).join(", ") + "}";
+  }
+  function hex(buf){
+    return Array.prototype.map.call(new Uint8Array(buf), function(b){
+      return ("00" + b.toString(16)).slice(-2);
+    }).join("");
+  }
+  function seal(){
+    var mapping = {};
+    ROWS.forEach(function(r){ mapping[r[0]] = r[2]; });
+    var ser = pyDumpsSorted(mapping);
+    if(!(window.crypto && window.crypto.subtle && window.crypto.subtle.digest)){
+      outS.innerHTML = '<span class="k">This browser will not hash on an insecure connection. ' +
+        'The recipe above runs the same check in one line of Python.</span>';
+      return;
+    }
+    outS.innerHTML = '<span class="k">hashing ' + ser.length + ' bytes…</span>';
+    window.crypto.subtle.digest("SHA-256", new TextEncoder().encode(ser))
+      .then(function(buf){
+        var got = hex(buf), match = (got === PUB);
+        outS.innerHTML =
+          '<span class="k">serialised </span>' + ser.length + '<span class="k"> bytes · ' +
+          Object.keys(mapping).length + ' entries</span><br>' +
+          '<span class="k">recomputed </span><code>' + got + "</code><br>" +
+          '<span class="k">published  </span><code>' + PUB + "</code><br>" +
+          (match ? '<span class="ok">identical — the mapping on this page is the one that was sealed before decode.</span>'
+                 : '<span class="no">MISMATCH — do not trust this page; report it.</span>');
+      })
+      .catch(function(){
+        outS.innerHTML = '<span class="no">hashing failed in this browser.</span>';
+      });
+  }
+
+  bS.addEventListener("click", seal);
+  bG.addEventListener("click", grade);
+  bR.addEventListener("click", reseal);
+})();
+</script>
+</body>
+</html>
