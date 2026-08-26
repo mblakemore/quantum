@@ -183,7 +183,14 @@ def _covered_f(text):
     m = re.search(r"(?:carr(?:ies|y)|covers?)[^.\n]{0,80}?through[^.\n]{0,25}?F(\d{1,3})(?:\s*/\s*F(\d{1,3}))?", text, re.I)
     if m:
         return max(int(g) for g in m.groups() if g)
-    kept = [s for s in re.split(r"(?<=[.\n])\s*", text) if not _SCOPE_NEG.search(s)]
+    # A 'F01-Fn' RANGE is a SCALE/COUNT claim (how many findings EXIST in the ledger), NOT this page's
+    # coverage — Dawn general#16398: her lobby stat-strip 'F01-F131' made a stale page read 0-behind, the
+    # MIRROR of the scope-note bug (a PRESENT number misread as coverage vs an ABSENT one). The tool cannot
+    # guess coverage from a scale claim, but it must not report a confident false 0-behind from one either:
+    # strip full-range scale claims so their high end cannot count, leaving the page UNMEASURED (None ->
+    # rendered '?') when a scale strip is the only signal — which matches the honest state Dawn named.
+    t = re.sub(r"\bF0?1\s*[-–—]\s*F\d{1,3}\b", " ", text)
+    kept = [s for s in re.split(r"(?<=[.\n])\s*", t) if not _SCOPE_NEG.search(s)]
     ns = [int(x) for s in kept for x in re.findall(r"\bF(\d{1,3})\b", s)]
     return max(ns) if ns else None
 
@@ -274,8 +281,13 @@ if __name__ == "__main__":
     ex = r["exhibit"]
     print(f"\n  ── STAGE 3: F-number -> MUSEUM EXHIBIT ── (ledger front: F{ex['ledger_front_F']})")
     for e in ex["pages"]:
-        beh = f"{e['F_behind']} behind" if e["F_behind"] is not None else "?"
         hh = f"   highest H{e['highest_H']}" if e.get("highest_H") else ""
+        if e["highest_F"] is None:
+            # coverage UNMEASURED (no declared stop, only a scale/count claim like 'F01-F131') — a
+            # distinct loud category, NOT '0 behind' (Dawn #16398). Unmeasured ≠ current.
+            print(f"   ❓ {e['page']:22s} coverage UNMEASURED — no declared stop, only a scale claim{hh}")
+            continue
+        beh = f"{e['F_behind']} behind" if e["F_behind"] is not None else "?"
         flag = "⏳" if (e["F_behind"] or 0) > 0 else "  "
         print(f"   {flag} {e['page']:22s} highest F{e['highest_F']}  ({beh}){hh}")
     for miss in ex.get("unreadable", []):
