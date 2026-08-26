@@ -87,6 +87,26 @@
   footer a { color:var(--ink-2); text-decoration:none; } footer a:hover{ color:var(--cyan); }
   @media (max-width:680px){ .court { grid-template-columns:1fr; } }
 
+  /* ── shared interactive components (buttons, live output panel, legends) ──
+     Both exhibit generators need these; a second copy is a second thing to drift. */
+  .btnrow { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 0; }
+  button.act { font-family:var(--mono); font-size:13px; font-weight:600; background:color-mix(in srgb,var(--cyan) 14%,transparent);
+               border:1px solid var(--cyan); color:var(--cyan-soft); padding:9px 16px; border-radius:11px; cursor:pointer; }
+  button.act:hover { background:color-mix(in srgb,var(--cyan) 24%,transparent); }
+  button.act[disabled] { opacity:.45; cursor:default; border-color:var(--edge-2); color:var(--ink-4); background:transparent; }
+  .out { margin-top:14px; font-family:var(--mono); font-size:12.5px; line-height:1.7; color:var(--ink-2);
+         background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:13px 15px; }
+  .out .k { color:var(--ink-4); }
+  .out .ok { color:var(--good); font-weight:700; }
+  .out .no { color:var(--bad); font-weight:700; }
+  .out code { overflow-wrap:anywhere; color:var(--cyan-soft); }
+  .hashline { font-family:var(--mono); font-size:11.5px; overflow-wrap:anywhere; color:var(--ink-3); }
+  .hashline b { color:var(--cyan-soft); font-weight:600; }
+  /* Long recipes and hashes WRAP rather than scroll. A scroll container would trade a page
+     overflow for a keyboard trap (WCAG 2.1.1: a scrollable region must be focusable), and
+     wrapping costs nothing here because none of these strings needs to be read as one line.
+     Found by the 320px pass: one python one-liner was 955px wide and moved the whole page. */
+  code { overflow-wrap:anywhere; word-break:break-word; }
   /* ── the sealed-set grid ─────────────────────────────────────────────────
      Deliberately NOT an SVG chart: no <text> node means no label to collide,
      clip, or fail contrast against its own fill. The state of each set is
@@ -108,24 +128,6 @@
   .lgd i.cc { border-color:var(--cyan); background:color-mix(in srgb,var(--cyan) 13%,transparent); }
   .lgd i.ce { border-color:var(--amber); background:color-mix(in srgb,var(--amber) 13%,transparent); }
   .lgd i.excl { border-style:dashed; }
-  .btnrow { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 0; }
-  button.act { font-family:var(--mono); font-size:13px; font-weight:600; background:color-mix(in srgb,var(--cyan) 14%,transparent);
-               border:1px solid var(--cyan); color:var(--cyan-soft); padding:9px 16px; border-radius:11px; cursor:pointer; }
-  button.act:hover { background:color-mix(in srgb,var(--cyan) 24%,transparent); }
-  button.act[disabled] { opacity:.45; cursor:default; border-color:var(--edge-2); color:var(--ink-4); background:transparent; }
-  .out { margin-top:14px; font-family:var(--mono); font-size:12.5px; line-height:1.7; color:var(--ink-2);
-         background:var(--surface-2); border:1px solid var(--edge); border-radius:11px; padding:13px 15px; }
-  .out .k { color:var(--ink-4); }
-  .out .ok { color:var(--good); font-weight:700; }
-  .out .no { color:var(--bad); font-weight:700; }
-  .out code { overflow-wrap:anywhere; color:var(--cyan-soft); }
-  .hashline { font-family:var(--mono); font-size:11.5px; overflow-wrap:anywhere; color:var(--ink-3); }
-  .hashline b { color:var(--cyan-soft); font-weight:600; }
-  /* Long recipes and hashes WRAP rather than scroll. A scroll container would trade a page
-     overflow for a keyboard trap (WCAG 2.1.1: a scrollable region must be focusable), and
-     wrapping costs nothing here because none of these strings needs to be read as one line.
-     Found by the 320px pass: one python one-liner was 955px wide and moved the whole page. */
-  code { overflow-wrap:anywhere; word-break:break-word; }
 </style>
 </head>
 <body>
