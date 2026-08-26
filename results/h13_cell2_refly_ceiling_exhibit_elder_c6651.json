@@ -25,6 +25,20 @@
   "W_C=0.371 (correlator span, consistent units)": 7.87
  },
  "sigma_vs_coin": 8.66,
+ "exact_per_cell_propagation": {
+  "SE_gap": 0.00495,
+  "ratio_frozen_over_exact": 1.748,
+  "d_UB": 0.028,
+  "ceilings": {
+   "W_p=0.40 (\u00a74b convention)": 0.535,
+   "W_C=0.371 (correlator span, consistent units)": 0.53773
+  },
+  "sigma_75of75": {
+   "W_p=0.40 (\u00a74b convention)": 8.074,
+   "W_C=0.371 (correlator span, consistent units)": 8.03
+  },
+  "note": "frozen form assumes one arm-axis pooled at N=20,000; the estimator averages 3 axes x 20 units \u2014 frozen SE is conservative by ~sqrt(3); the REGISTERED figure stays the frozen one"
+ },
  "max_of_three_note": "numerator (1) only: (2) permutation-calibrated TV and (3) executed classical arm were not flown for the re-fly; \u00a7A takes the MAX, so this ceiling is a LOWER bound and the sigma an UPPER bound",
  "bar_survives_any_ceiling_below": 0.75
 }

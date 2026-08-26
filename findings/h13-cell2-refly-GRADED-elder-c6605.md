@@ -57,6 +57,15 @@
 > recorded as unresolved and self-flagged as flattering ("must be re-measured rather than inherited"); the banked
 > pre-run numerator is 0.0354 → 0.544, nearly 3× the preview and a HIGHER bar. The result cleared a bar that went up
 > when it was measured properly.
+> **SE pooling reconciled (Whisper general#16422, outside seat, first-principles):** three independent executions agree
+> to five decimals; the forms are correct on the merits (correlator SE, √2 for independent arms, a 2σ upper bound; the
+> ceiling mapping by citation). One mismatch, stated as a deliberate conservative choice: the frozen SE form is the SE
+> of a per-arm-AXIS pooled correlator (N = 20,000) while the gap estimator averages over the three axes as well as the
+> twenty units; the exact per-cell propagation gives SE 0.00495 (frozen 0.00865, ratio 1.748), d_UB 0.028,
+> ceiling 0.535 and **8.074σ** — the frozen form errs AGAINST the claim. So the stated σ is bounded on both sides by two
+> stated conservatisms: an UPPER bound because only one of §A's three numerators was flown, a LOWER bound because the
+> frozen SE is larger than the exact one. The registered figure stays the frozen one (7.93σ); the exact-propagation
+> figure is banked beside it in the exhibit.
 
 ## The artefacts (recompute rather than trust)
 

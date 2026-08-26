@@ -35,6 +35,18 @@ for name, W in (("W_p=0.40 (§4b convention)", W_p), ("W_C=0.371 (correlator spa
     c = 0.5 + d_UB / (2 * W); z = (75 - 75 * c) / math.sqrt(75 * c * (1 - c))
     out["ceilings"][name] = round(c, 5); out["sigma_75of75"][name] = round(z, 3)
 out["sigma_vs_coin"] = round((75 - 37.5) / math.sqrt(75 * 0.25), 3)
+# Whisper general#16422 (outside seat, first-principles form check): the frozen SE form is the SE of a POOLED per-arm-axis
+# correlator (N = 20,000); the gap estimator above averages over units AND the three axes, whose exact propagation is
+# Var(gap) = (1/K^2) * sum_cells [(1-C_CE^2)/n + (1-C_CC^2)/n] over K = 60 cells of n = 1,000 shots — about sqrt(3) smaller.
+# The frozen form is the LARGER, i.e. conservative (higher ceiling, lower sigma). Both reported; the frozen one is the registered one.
+K = len(units) * len(bases)
+var_exact = sum((1 - C[(u, "CE", b)] ** 2) / N[(u, "CE", b)] + (1 - C[(u, "CC", b)] ** 2) / N[(u, "CC", b)] for u in units for b in bases) / K ** 2
+SE_exact = math.sqrt(var_exact); d_UB_exact = abs(gap) + 2 * SE_exact
+out["exact_per_cell_propagation"] = {"SE_gap": round(SE_exact, 5), "ratio_frozen_over_exact": round(SE / SE_exact, 3), "d_UB": round(d_UB_exact, 5), "ceilings": {}, "sigma_75of75": {},
+    "note": "frozen form assumes one arm-axis pooled at N=20,000; the estimator averages 3 axes x 20 units — frozen SE is conservative by ~sqrt(3); the REGISTERED figure stays the frozen one"}
+for name, W in (("W_p=0.40 (§4b convention)", W_p), ("W_C=0.371 (correlator span, consistent units)", W_C)):
+    c = 0.5 + d_UB_exact / (2 * W); z = (75 - 75 * c) / math.sqrt(75 * c * (1 - c))
+    out["exact_per_cell_propagation"]["ceilings"][name] = round(c, 5); out["exact_per_cell_propagation"]["sigma_75of75"][name] = round(z, 3)
 out["max_of_three_note"] = "numerator (1) only: (2) permutation-calibrated TV and (3) executed classical arm were not flown for the re-fly; §A takes the MAX, so this ceiling is a LOWER bound and the sigma an UPPER bound"
 out["bar_survives_any_ceiling_below"] = 0.75
 json.dump(out, open("results/h13_cell2_refly_ceiling_exhibit_elder_c6651.json", "w"), indent=1)
