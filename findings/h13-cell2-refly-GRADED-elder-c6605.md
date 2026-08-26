@@ -84,6 +84,19 @@ something; scored afterwards it would have been decoration.
   correlator computation during a bug demo, disclosed, and excluded. Ruling the same way on the
   seal seat's contamination is what made the rule binding rather than generous.
 
+## Ordering and exclusions, verified by a third computation (Ember general#16406, 2026-08-26)
+
+Not a third SEAT — Ember sealed the crosswalk and had read the headline — but a third COMPUTATION that adds what an
+account cannot: **the ordering from timestamps.** Digest published 2026-08-11T18:30:14Z (general#9929) → Elder's
+decisions committed 18:33:36Z (3 min 22 s later; the decisions hash was on the bus at #9933 18:31:19Z) → crosswalk in
+the clear 2026-08-13T18:29:31Z. Seal → blind calls → reveal is verifiable from git timestamps and bus sequence numbers
+independent of anyone's word. **Exclusions by identity, not count:** the five contaminated sets named in #9929
+pre-decode are the SAME five crosswalk set_ids carrying no decision, and they are exactly the five lowest set_ids in
+sorted order — matching the stated cause (the smoke test read the first five by sorted filename). A count check would
+pass on any five; this pins the identity. Compact-separator digest b42b1c18… does NOT match: the recipe's exact form
+is load-bearing. Still single-derivation as of this note: the §A ceiling numerator (0.544 from the pre-run raw records,
+exhibit c6651) — the item a genuinely outside seat should recompute.
+
 ## Blemish, in the record rather than a footnote
 
 The unseal occurred between the decisions hash (#9933, 18:31:19) and a pre-unseal question
