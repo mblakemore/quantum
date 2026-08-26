@@ -1,0 +1,74 @@
+qiskit_runtime_service._discover_account:WARNING:2026-08-26 00:42:01,042: Loading account with the given token. A saved account will not be used.
+qiskit_runtime_service.__init__:WARNING:2026-08-26 00:42:06,055: Instance was not set at service instantiation. Free and trial plan instances will be prioritized. Based on the following filters: (tags: None, region: us-east, eu-de), and available plans: (open, pay-as-you-go), the available account instances are: open-instance, whisper-de, WhisperPaid. If you need a specific instance set it explicitly either by using a saved account with a saved default instance or passing it in directly to QiskitRuntimeService().
+qiskit_runtime_service._discover_account:WARNING:2026-08-26 00:42:06,055: Loading account with the given token. A saved account will not be used.
+[instance-gate] IBMQ_TOKEN carries paid instance(s) [('whisper-de', 'pay-as-you-go'), ('WhisperPaid', 'pay-as-you-go')] — PINNING to free 'open-instance' (c-259f9dd1525f::)
+SUBMITTED job_id=da73cos6l22c73dn1pi0 backend=ibm_fez circuits=24 shots=20000
+{
+  "card": "counterflow_flight_c",
+  "cycle": "C5082",
+  "board": 196,
+  "source": "ibm hardware ibm_fez job da73cos6l22c73dn1pi0",
+  "job_id": "da73cos6l22c73dn1pi0",
+  "gammas": [
+    0.2,
+    0.5
+  ],
+  "theta_star": {
+    "0.2|cf": 0.144,
+    "0.2|co": 0.0654,
+    "0.5|cf": 0.0785,
+    "0.5|co": -0.3665
+  },
+  "results": {
+    "0.2": {
+      "arms": {
+        "cf": {
+          "e_pre": -1.5241,
+          "e_post": -1.4266,
+          "extract": 0.0975
+        },
+        "co": {
+          "e_pre": -1.3984,
+          "e_post": -1.2023,
+          "extract": 0.1961
+        },
+        "severed": {
+          "e_pre": -1.5241,
+          "e_post": -1.4696,
+          "extract": 0.0546
+        }
+      },
+      "direction": -0.0986,
+      "info_value": 0.0429
+    },
+    "0.5": {
+      "arms": {
+        "cf": {
+          "e_pre": -0.9038,
+          "e_post": -0.8194,
+          "extract": 0.0843
+        },
+        "co": {
+          "e_pre": -0.5574,
+          "e_post": -0.5551,
+          "extract": 0.0023
+        },
+        "severed": {
+          "e_pre": -0.9038,
+          "e_post": -0.8506,
+          "extract": 0.0532
+        }
+      },
+      "direction": 0.082,
+      "info_value": 0.0311
+    }
+  },
+  "checks": {
+    "P1_direction_low_gamma_negative": true,
+    "P2_direction_high_gamma_positive": true,
+    "P3_sign_flip": true,
+    "P4_info_value_negative_low_gamma": false
+  },
+  "verdict": "PARTIAL",
+  "prereg": "counterflow-flight-c-preregistration-whisper-c5082.md"
+}
