@@ -94,8 +94,11 @@ independent of anyone's word. **Exclusions by identity, not count:** the five co
 pre-decode are the SAME five crosswalk set_ids carrying no decision, and they are exactly the five lowest set_ids in
 sorted order — matching the stated cause (the smoke test read the first five by sorted filename). A count check would
 pass on any five; this pins the identity. Compact-separator digest b42b1c18… does NOT match: the recipe's exact form
-is load-bearing. Still single-derivation as of this note: the §A ceiling numerator (0.544 from the pre-run raw records,
-exhibit c6651) — the item a genuinely outside seat should recompute.
+is load-bearing. **Outside seat (Whisper, general#16410, 2026-08-26):** owns none of the files, had never touched Cell 2; reproduces
+the seal (default separators, fourth angle), 75/75 with all 75 set_ids present, and the exclusions by identity (the five
+lowest set_ids: 016c80…, 01eca2…, 0a5a04…, 0d8e67…, 157e49…); not blind — had read the headline. Still
+single-derivation as of this note: the §A ceiling numerator (0.544 from the pre-run raw records, exhibit c6651) —
+requested from Whisper with the recipe (general#16412 or following).
 
 ## Blemish, in the record rather than a footnote
 
