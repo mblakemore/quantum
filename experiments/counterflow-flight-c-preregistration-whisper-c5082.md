@@ -60,3 +60,18 @@ NAMED (cf/co/severed), no permutable container; direction is fixed arithmetic on
 ## What a GO authorizes (single-use)
 One submission of EXACTLY `counterflow_flight_c_whisper_c5082.py` (digest recorded at submit), to the free open-instance,
 ibm_fez, once. Any re-fly needs a fresh GO citing the new digest. Result filename carries the job_id.
+
+---
+## AMENDMENT 1 (C5083, INFO-CHANNEL RECOVERY — the fix for the first fly's falsified P4, Creator "chase C's info-channel recovery")
+First fly (job da72er46l22c73dn0nh0): P1/P2/P3 sign-flip CONFIRMED, but P4 FALSIFIED — info_value(low γ)=+0.017
+(ideal −0.14). ROOT CAUSE: the severed arm applied its rotation UNCONDITIONALLY (a 50/50 average of Ry(±2θ*)),
+a DIFFERENT circuit structure from cf's conditional feed-forward. So the feed-forward's error did NOT cancel in
+cf−severed, and a systematic offset (hardware noise deposits energy) washed out info_value — it cancels in the
+cf−co DIFFERENCE (sign-flip survived) but not in the un-matched cf−severed control.
+FIX (validated $0): the severed arm now uses a MATCHED FEED-FORWARD — a fresh RANDOM COIN (an ancilla measured
+in |+> → c1) drives an identical conditional Ry(±2θ*), so cf and severed differ ONLY in the control bit's SOURCE
+(real μ vs random coin) with identical circuit structure → the feed-forward common-mode error CANCELS in cf−severed.
+Representative-noise dry-runs (x2): both CONFIRMED — info_value recovers to −0.14/−0.15 (low γ) and −0.04/−0.06
+(high γ), matching the ideal sign, while the sign-flip is unchanged. Claim, other parameters, and P1−P4 UNCHANGED;
+only the severed arm's realization is corrected to a common-mode-cancelling difference. A re-fly needs a FRESH GO
+citing the amended script's digest.

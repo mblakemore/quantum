@@ -51,25 +51,32 @@ def _gradient(qc, gamma):
     qc.ry(ry_pop(P_COLD), 2); qc.cx(2, 3); qc.rxx(phi, 0, 2); qc.ryy(phi, 0, 2)   # site0 cold
     qc.ry(ry_pop(P_HOT), 4); qc.cx(4, 5); qc.rxx(phi, 1, 4); qc.ryy(phi, 1, 4)    # site1 hot
 
-def build(gamma, setting, mode, theta, meas, rot, coin=None):
-    """mode: 'pre' (measure, no rotation) | 'post' (measure + conditional Ry) | 'sev' (measure + UNCOND Ry(2*coin*theta))."""
-    qc = QuantumCircuit(6, 2)
+def build(gamma, setting, mode, theta, meas, rot):
+    """mode: 'pre' (measure, no rotation) | 'post' (measure + conditional Ry on mu) |
+    'sevM' (MATCHED severed: measure + conditional Ry on a FRESH RANDOM COIN — identical feed-forward
+    structure to 'post', differing only in the control bit's source, so the feed-forward common-mode
+    error cancels in cf - severed; the C5082-first-fly info_value falsification came from the OLD
+    unconditional severed whose different structure did NOT cancel).
+    clbits: c0=mu (X-measure of meas site), c1=coin (severed only), c2=rot observable."""
+    qc = QuantumCircuit(6, 3)
     qc.ry(-2 * ALPHA, 0); qc.cx(0, 1)
     _gradient(qc, gamma)
     qc.h(meas); qc.measure(meas, 0)
     if mode == 'post':
         with qc.if_test((qc.clbits[0], 1)): qc.ry(-2 * theta, rot)
         with qc.if_test((qc.clbits[0], 0)): qc.ry(+2 * theta, rot)
-    elif mode == 'sev':
-        qc.ry(2 * coin * theta, rot)          # rotation DECOUPLED from mu (fresh coin)
+    elif mode == 'sevM':
+        qc.reset(3); qc.h(3); qc.measure(3, 1)          # fresh random coin -> c1
+        with qc.if_test((qc.clbits[1], 1)): qc.ry(-2 * theta, rot)
+        with qc.if_test((qc.clbits[1], 0)): qc.ry(+2 * theta, rot)
     if setting == 'X': qc.h(rot)
-    qc.measure(rot, 1)
+    qc.measure(rot, 2)
     return qc
 
 def build_cal(state, rot):
-    qc = QuantumCircuit(6, 2)
+    qc = QuantumCircuit(6, 3)
     if state: qc.x(rot)
-    qc.measure(rot, 1)
+    qc.measure(rot, 2)
     return qc
 
 def _corr(p, r0, r1):
@@ -82,7 +89,7 @@ def _obs(counts_by_setting, cal):
     for st in ('Z', 'X'):
         num = {0: [0, 0], 1: [0, 0]}
         for k, v in counts_by_setting[st].items():
-            b = k.replace(' ', ''); num[int(b[-1])][int(b[-2])] += v
+            b = k.replace(' ', ''); num[int(b[-1])][int(b[-3])] += v   # c0=mu (b[-1]), c2=rot obs (b[-3])
         vals[st] = {c: (1 - 2 * _corr(num[c][1] / max(sum(num[c]), 1), r0, r1), sum(num[c])) for c in (0, 1)}
     Z, X = vals['Z'], vals['X']; Nt = sum(Z[c][1] for c in (0, 1)); e = 0.0
     for c in (0, 1):
@@ -102,11 +109,10 @@ def make_jobs():
             for st in ('Z', 'X'):
                 jobs.append((f"{g}|{arm}|pre|{st}", build(g, st, 'pre', th, meas, rot)))
                 jobs.append((f"{g}|{arm}|post|{st}", build(g, st, 'post', th, meas, rot)))
-        # severed uses cf schedule (meas0 rot1, theta*_cf), rotation decoupled (two coins avg)
+        # severed: cf schedule (meas0 rot1, theta*_cf), MATCHED feed-forward on a fresh random coin
         th = THETA_STAR[(g, 'cf')]
         for st in ('Z', 'X'):
-            for coin in (+1, -1):
-                jobs.append((f"{g}|sev|post|{st}|{coin}", build(g, st, 'sev', th, 0, 1, coin=coin)))
+            jobs.append((f"{g}|sev|post|{st}", build(g, st, 'sevM', th, 0, 1)))
     # readout cal for both rot qubits (bare)
     for rot in (0, 1):
         for state in (0, 1):
@@ -127,13 +133,11 @@ def decode(counts_by_tag):
             post = {st: counts_by_tag[f"{g}|{arm}|post|{st}"] for st in ('Z', 'X')}
             e_pre = _obs(pre, cals[rotq]); e_post = _obs(post, cals[rotq])
             arms[arm] = {"e_pre": round(e_pre, 4), "e_post": round(e_post, 4), "extract": round(e_post - e_pre, 4)}
-        # severed: e_pre = cf e_pre; e_post = avg over coins
+        # severed: e_pre = cf e_pre; e_post from the MATCHED-feed-forward random-coin circuits
         pre = {st: counts_by_tag[f"{g}|cf|pre|{st}"] for st in ('Z', 'X')}
         e_pre_sev = _obs(pre, cals[1])
-        e_post_sev = 0.0
-        for coin in (+1, -1):
-            postc = {st: counts_by_tag[f"{g}|sev|post|{st}|{coin}"] for st in ('Z', 'X')}
-            e_post_sev += 0.5 * _obs(postc, cals[1])
+        posts = {st: counts_by_tag[f"{g}|sev|post|{st}"] for st in ('Z', 'X')}
+        e_post_sev = _obs(posts, cals[1])
         arms['severed'] = {"e_pre": round(e_pre_sev, 4), "e_post": round(e_post_sev, 4), "extract": round(e_post_sev - e_pre_sev, 4)}
         direction = arms['cf']['extract'] - arms['co']['extract']
         info_value = arms['cf']['extract'] - arms['severed']['extract']
@@ -141,7 +145,7 @@ def decode(counts_by_tag):
     return res
 
 def _p1(counts):
-    tot = sum(counts.values()); return sum(v for k, v in counts.items() if k.replace(' ', '')[-2] == '1') / tot
+    tot = sum(counts.values()); return sum(v for k, v in counts.items() if k.replace(' ', '')[-3] == '1') / tot  # c2=rot
 
 def grade(res):
     d_lo = res[str(GAMMAS[0])]["direction"]; d_hi = res[str(GAMMAS[1])]["direction"]
