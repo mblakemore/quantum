@@ -43,6 +43,13 @@
 > bar, which survives ANY ceiling below 0.75. Numerator (1) only — (2) permutation-TV and (3) an executed classical
 > arm were not flown for the re-fly — so per §A's MAX this ceiling is a LOWER bound and the σ an UPPER bound. The
 > billed unit is the blind call (§D); the sign product is the decoder's statistic (§E), not a billed quantity.
+> **Second derivation of the ceiling (Ember general#16414): identical in every field to five decimals** — a strong
+> EXECUTION check that shares the FORMS with mine. **The forms are the registration's own text** (the form check is a
+> citation check): `ceiling = 1/2 + d/(2W)`, d = max of three numerators at upper bound — FROZEN prereg §A line 25;
+> `SE(gap) = √2·√((1−C̄²)/N)`, "the frozen form" — FROZEN §B reconciliation note, line 29; `d_UB = |gap| + 2se` at
+> `W = 0.40` — re-fly prereg §4b line 37; `|C| = (1−p)·0.9276` — re-fly prereg §2 line 11. **Surface for any reader:
+> the CE−CC magnitude gap that feeds the ceiling is itself a 2.09σ effect (0.0181 / 0.00865); the headline 7.9σ is a
+> different quantity — 75 of 75 blind calls against that ceiling — and both are true at once.**
 
 ## The artefacts (recompute rather than trust)
 
