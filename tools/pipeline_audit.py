@@ -165,6 +165,29 @@ def _max_f(text):
     return max(ns) if ns else None
 
 
+_SCOPE_NEG = re.compile(
+    r"not (?:yet )?covered|are not covered|not covered here|has since run|run on to|"
+    r"where this summary stops|is missing|are missing|does not (?:yet )?cover|coverage stops",
+    re.I)
+
+
+def _covered_f(text):
+    """COVERAGE F-number for a PAGE (not the ledger). A page can NAME later F-numbers precisely to
+    declare them NOT covered (a scope note); counting those as covered inverts the incentive so that
+    DISCLOSURE reads as completeness — Dawn general#16391 caught the original _max_f reporting a
+    9-behind ELI5_SUMMARY as 0-behind because its scope note names F122..F131 as missing. That
+    PUNISHES disclosure and REWARDS silence, the exact inverse of every other check here. Fix (C5084):
+    (1) prefer an explicit DECLARED STOP ('carries the campaign through F120/F121'); (2) else take the
+    max over the text with scope-limiting sentences EXCLUDED, so a number named as ABSENT cannot count
+    as PRESENT. _max_f stays for the LEDGER FRONT, where max-mentioned genuinely IS the front."""
+    m = re.search(r"(?:carr(?:ies|y)|covers?)[^.\n]{0,80}?through[^.\n]{0,25}?F(\d{1,3})(?:\s*/\s*F(\d{1,3}))?", text, re.I)
+    if m:
+        return max(int(g) for g in m.groups() if g)
+    kept = [s for s in re.split(r"(?<=[.\n])\s*", text) if not _SCOPE_NEG.search(s)]
+    ns = [int(x) for s in kept for x in re.findall(r"\bF(\d{1,3})\b", s)]
+    return max(ns) if ns else None
+
+
 def exhibit_lag(ledger):
     """STAGE 3: F-number -> MUSEUM EXHIBIT. Added C5075 in the same breath as the finding.
 
@@ -191,7 +214,7 @@ def exhibit_lag(ledger):
             unreadable.append(rel)
             continue
         txt = open(p, errors="replace").read()
-        e = {"page": rel, "highest_F": _max_f(txt)}
+        e = {"page": rel, "highest_F": _covered_f(txt)}   # COVERAGE, not max-mentioned (Dawn #16391 fix)
         e["F_behind"] = (front - e["highest_F"]) if (front and e["highest_F"]) else None
         if rel.endswith("horizons.html"):
             hs = [int(m) for m in re.findall(r"\bH(\d{1,2})\b", txt)]
