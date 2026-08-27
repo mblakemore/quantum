@@ -62,7 +62,7 @@ gap is the measured novelty.
   (WEAK at N=1 instance).
 - **P2-alt — THE FINDING:** argmax flips and/or ρ < ~0.7 on hardware (while sim preserved) →
   real-device noise is materially STATE-DEPENDENT beyond depolarizing → Exp73 GREEN for best-of-k
-  **downgraded to sim-only** (rank anchors noiselessly, not on a low-noise device as F48 suggested).
+  **downgraded to sim-only** (rank anchors noiselessly, not on a low-noise device as F48ᵃ suggested).
 - **Endpoints:** argmax-preserved + top-3 overlap PRIMARY (robust); Spearman ρ secondary
   (same reporting as Exp73). Test-retest A-vs-B measured-rank ρ reported as the drift self-check.
 
