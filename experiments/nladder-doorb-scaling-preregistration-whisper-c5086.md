@@ -1,6 +1,6 @@
 # The n-ladder — does the sealed-shadow advantage GROW with n? PRE-REGISTRATION (FROZEN pending Creator GO)
 
-**Whisper · C5086 · board #175 · Status: DRAFT — corrected after Ember's pre-freeze catch (general#17706). FROZEN pending her sign-off + a Creator GO citing this file's + the runner's digest.**
+**Whisper · C5086 · board #175 · Status: DRAFT — corrected twice pre-freeze: Ember's falsifier-inversion catch (general#17706), then the Creator's device-fork correction (2026-08-27: no paid-vs-free fork — marrakesh runs on the free open-instance, same device as F122). Now gated on ONE measured number (per-rung QPU seconds vs the open-plan budget), Ember's sign-off, seals for the new rungs, and a Creator GO citing this file's + the runner's digest.**
 **Frame:** LABELED ADVANTAGE-SCALING test on the campaign's flagship (F122). Not a new advantage claim — a
 measurement of whether the two-copy protocol still DELIVERS at larger n, and thus whether F122's advantage scales.
 Extends Ember's door-(b)/F122 machinery and ratio identity.
@@ -35,10 +35,12 @@ Per rung, measure DIRECTLY: **ε_size(n)** (calibration gate) and **ε_del(n)** 
 - **P1 (the real claim):** the two-copy protocol DELIVERS at width — **r(n) = ε_del(n)/ε_size(n) ≈ 1** across the
   ladder. When it holds, the derived advantage grows ~2^n/K(n) as a CONSEQUENCE (0.15 at n=8, crosses 1 near n=12,
   21.7 at n=16, ~3884 at n=24) — but that curve is reported, not graded.
-- **P2 (ruler check):** the n=16 rung's (ε_size, ε_del) reproduces F122's on this protocol. **If the free-ibm_fez
-  path is chosen, this n=16 rung is a CROSS-DEVICE ruler** (free-ibm_fez n=16 vs F122's paid-marrakesh) — REQUIRED by
-  Ember (general#17723): without it a free-device ladder and the paid F122 result are not on the same scale, and every
-  rung compares against a number from another machine. On the paid-marrakesh path this rung is same-device to F122.
+- **P2 (ruler check):** the n=16 rung's (ε_size, ε_del) reproduces F122's on this protocol, **SAME-DEVICE**. The whole
+  ladder flies **ibm_marrakesh on the free open-instance** — the same physical device as F122, at $0. (CORRECTION,
+  Creator 2026-08-27: my earlier "paid-marrakesh vs free-ibm_fez" fork was FALSE — I inferred that marrakesh required
+  the paid account from the fact that Ember's flight is *configured* to pair marrakesh with PAID_CRN. fez/marrakesh/
+  kingston are all default open-plan backends; our corpus has 441 marrakesh runs, many on open-instance CRNs. There is
+  no cross-device compromise and no paid spend: free and same-device were always the same option.)
 
 ## Frozen FALSIFIERS (any → honest negative)
 - **r(n) = ε_del(n)/ε_size(n) drops below ~0.8 at large n** → the flight fails to deliver the calibration contrast on
@@ -61,15 +63,19 @@ sealed P — CONSTANT depth at all n (verified: transpiled depth 9 at n=20 AND n
 which is exactly what the r(n) falsifier probes.
 
 ## Ladder, budget, device (frozen)
-- **n-values:** {8, 12, 16, 20}; **24 conditional** — feasibility PASSED $0 (48 qubits, depth 9, fits ibm_fez).
+- **n-values:** {8, 12, 16, 20}; **24 conditional** — feasibility PASSED $0 (48 qubits, depth 9, fits ibm_marrakesh 156q).
 - **Per-rung:** over-flown to a common 50,000 copies/rung (25,000 Bell shots) so ε_del is measured cleanly at every n.
-- **Device/account — UNRESOLVED, a Creator + Ember decision (caught pre-freeze by reading the flight):** the draft
-  claimed "free ibm_fez" — WRONG. Ember's doorb_flight, used unchanged, flies on the PAID account (PAID_CRN) and
-  PINS ibm_marrakesh (EXPECTED_BACKEND, paid). So as-written this is a PAID multi-rung spend needing explicit Creator
-  paid-authorization ("GO when ready" does NOT cover a paid submission I had not flagged). ALTERNATIVE: adapt the
-  flight's account to the free open-instance (ibm_fez) — $0, but it MODIFIES Ember's flight and puts the n=16 rung on
-  a different device than F122's marrakesh (the ladder stays device-internal; the P2 ruler check to F122 becomes
-  cross-device). The device/account is FROZEN only once the Creator rules paid-auth vs free-adapt.
+- **Device: ibm_marrakesh on the free open-instance — RESOLVED (no fork).** Same physical device as F122, $0. fez/
+  marrakesh/kingston are all default open-plan backends (Creator 2026-08-27; 441 marrakesh runs in our corpus, many on
+  open-instance CRNs). The account change to Ember's flight is minimal — point `instance=` from PAID_CRN to the open
+  CRN, keep `EXPECTED_BACKEND="ibm_marrakesh"`; the main open account (id 9) shares the paid instances' token
+  (fingerprint 125a47dcf3fc), so it may be a one-line instance swap, not a token change. This is a reviewed patch to a
+  money-path flight → coordinate with Ember, do not solo.
+- **Budget — the REAL constraint (was masked by the false device fork):** the trailing-28-day open-plan windows are
+  tight. Main open (id 9): 10,800 s limit, ~166 s balance now. id 10: 600 s limit, ~295 s. **Per-rung QPU-second cost
+  is UNMEASURED** — must be measured before freeze so a 4-rung (×50k-copy) batch is known to fit an available window,
+  or the ladder is spread across refills / accounts (same-device only — all three of these are marrakesh, so spreading
+  across open accounts does not confound the width-scaling signal). Fit gate at submit remains the wall.
 - **Seal — needs Ember's mechanism for the NEW n's:** each rung needs a pre-committed sealed P (G-SEAL reads
   ~/.ember-doorb-secrets.json + experiments/doorb_commitments/doorb_commitment_n{n}.json). Only n=16 exists; n∈{8,12,
   20,24} have NO commitment. Committing sealed P's for the new rungs is Ember's secrets machinery — coordinated, not
@@ -79,7 +85,8 @@ which is exactly what the r(n) falsifier probes.
 attack_preflight --claim · preflight_account_check on the runner · (feasibility DONE).
 
 ## What a GO authorizes (single-use, seal-bound)
-One batch submission of the frozen runner (digest at freeze) to ibm_fez, once, BACKGROUND. Each rung's job_id recorded.
+One batch submission of the frozen runner (digest at freeze) to ibm_marrakesh on the free open-instance, once,
+BACKGROUND. Each rung's job_id recorded.
 
 ## Coordination (cross-seat — the check already worked once)
 Extends Ember's flagship identity + machinery. She caught the normalized-vs-general inversion before freeze
