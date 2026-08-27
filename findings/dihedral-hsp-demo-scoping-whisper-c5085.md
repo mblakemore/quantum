@@ -43,3 +43,39 @@ Feasible, cheap, clean. Worth a $0-first build (full N=8 + N=16 + from_backend) 
 demo on our existing rails (coset prep, MCM/herald, sealed-blind adjudication, attack-preflight). Fly only
 if the sim survives noise, and fence it from the first line: engineering demonstration, no advantage, no
 scaling/crypto implication. The value is a clean non-abelian-HSP instrument in the portfolio — not a claim.
+
+---
+## BUILD RESULTS ($0, C5085 — Creator "go ahead with the $0-first build") — GO for a small fly
+
+Script: `experiments/dihedral_hsp_demo_whisper_c5085.py`. Full recovery (all bits, using the
+RECOVERED lower bits for each phase correction = error-propagating, the honest metric).
+
+- **IDEAL SIM**: N=8 full-string **8/8 exact**, N=16 **16/16 exact** (per-bit 100%).
+- **NOISY — EXACT `ibm_fez` noise model** (`NoiseModel.from_backend`, verified non-empty:
+  cz/sx/measure/reset errors): N=8 **8/8 exact**, N=16 **16/16 exact** (per-bit 100%).
+- **Cost**: per-bit circuit = **1 two-qubit gate, depth 6** for BOTH N=8 and N=16 (small-N sieve
+  is ONE combination round regardless of N). A full shift = n such circuits (n=3 for N=8, 4 for N=16).
+- **The noise IS biting, verified**: fine-phase worst cases (N=16, high bits) the majority vote
+  drops 1.0000 (ideal) → **0.959–0.974** (noisy) — real degradation, but ~0.46 clear of the 0.5
+  threshold, so recovery is exact. Herald-keep ~50%/round as the combination predicts.
+
+### Why it survives — stated honestly (this is the fence, not a boast)
+Robustness comes from TWO things, neither of which is "beating deep noise":
+1. **Shallow circuit** — small N needs 1 sieve round (1 CX). No feed-forward even needed: read the
+   herald + the bit both terminally, post-select the herald in classical post-processing.
+2. **Majority-vote observable** — each bit is a vote over 20k shots (the F120 shot-axis redundancy).
+This is EXACTLY why small N is flyable and large N is not: larger N needs more sieve rounds (deeper +
+multiplicative ~50%/round herald loss + finer phases), which is where it would break. The demo does
+not claim otherwise.
+
+### GO / NO-GO on a small fly: **GO (small, fenced)**
+- FOR: machinery recovers s exactly on N=8 AND N=16 under the EXACT device noise model; circuits are
+  tiny (1 CX, depth 6/bit); free open-instance `ibm_fez` (#151 gate), ~10-20 QPU-s. Hardware is the
+  campaign's truth standard — a noise MODEL missed the localized q142 high-population error in the
+  coflow caveat, so a real fly is the honest confirmation a model can't give.
+- SCOPE (unchanged): labeled ENGINEERING demonstration — the non-abelian coset counterpart to F113's
+  abelian 2D-HLF solver. NO advantage (small-N brute force is trivial → all attack_preflight advantage
+  classes N/A, like Flight A). NO scaling / NO crypto claim. Graded solely by hardware recovery of s.
+- NEXT STEP if you say fly: freeze a pre-registration + run attack_preflight + submit ONE job to
+  `ibm_fez` under a Creator GO citing the frozen digest (single-use). Recommend N=8 all-3-bits as the
+  primary (cheapest, cleanest), N=16 low-bit as a scaling datapoint in the same job.
