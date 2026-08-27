@@ -1,0 +1,27 @@
+{
+  "claim": "Dihedral-HSP hardware demonstration (labeled engineering artifact): the dihedral-HSP procedure — coset-state preparation + one Kuperberg sieve combination (CNOT + herald) — realized on IBM ibm_fez recovers the hidden shift s. Payload: N=8 all 8 shifts x 3 bits + N=16 all 16 shifts x low bit, each bit read by majority vote on herald-kept shots. Engineering demonstration (the non-abelian coset counterpart to F113's abelian 2D-HLF solver), NOT a quantum-vs-classical advantage claim.",
+  "answers": {
+    "structure_public": "no",
+    "baseline_is_simulation": "no",
+    "repeated_shots_fixed_randomness": "no",
+    "hardness_argued_on_ideal": "no",
+    "baseline_shots_assumed": "no",
+    "baseline_denied_speedups": "no",
+    "ratio_against_simulation": "no",
+    "no_problem_specific_search": "no",
+    "arms_billed_in_different_units": "no",
+    "stopping_rules_differ_or_unit_unfrozen": "no",
+    "result_depends_on_enumeration_order": "no",
+    "enumeration_order_not_fixed_by_spec": "no"
+  },
+  "_billing_values": {
+    "unit": "one estimator: the majority-vote bit = 1[ P(measure 1 on the sieved control, X-basis, herald-kept) > 0.5 ], applied identically to every (N,s,bit) circuit",
+    "stopping_rule": "fixed 20,000 shots per circuit, frozen in the prereg before submit, identical for all 40 circuits; herald post-selection keeps ~50% (one sieve round), applied identically",
+    "rejected_convention": "no cross-unit conversion arises: there is no classical arm and no ratio. All circuits are one population-vote estimator on the same pinned layout with the same shot count.",
+    "baseline_note": "there is NO baseline arm and NO ratio. Small-N brute force over N shifts is classically trivial (N=8: instant) — which is precisely why no advantage is or can be claimed. The demonstration is graded solely by whether the quantum machinery recovers s on hardware."
+  },
+  "advantage_claimed": "none — engineering artifact; recovering a small-N hidden shift is classically trivial. Graded only by hardware recovery of s against the pre-registered falsifiers; the value is a non-abelian-HSP capability datapoint, not a speedup.",
+  "prereg": "experiments/dihedral-hsp-flight-preregistration-whisper-c5085.md (FROZEN)",
+  "_planted_structure_leak_check": "N/A to an advantage — but stated because F121 is why this frame exists: the hidden shift IS compiled into the coset states and DOES leak to a trivial classical query. That would kill an ADVANTAGE claim; it does not touch a DEMONSTRATION claim, which asserts only that the quantum procedure runs and recovers s. No advantage is claimed, so the leak is not a defect here — it is the reason the ceiling is honestly stated as 'no advantage'.",
+  "_index_space_check": "Mechanical check: the 40 circuits are keyed by NAMED tuples (N,s,bit); each graded bit is a fixed majority vote on ONE named control qubit's herald-kept counts with NO argmin/argmax/first-match/scan-order tie-break. find_pair is deterministic (first (a,b) in fixed nested-range order satisfying a+b=k or a-b=k) and its output is FROZEN into the circuits before submit, not re-derived at grade time. Permuting the payload list or the counts dict moves no graded number. Backend and layout are PINNED by name (no least-busy scan). Both keys 'no'."
+}
