@@ -19,8 +19,11 @@ Ember's ratio identity (doorb_ratio_identity.py, court-verified #8431), with n u
   Ember's registered w12 branch exactly. K(16,0.05)=103.478 also reproduces her L. Both halves now checked.
 
 ## ⚠️ THE RATIO IS NOT THE FALSIFIABLE OBSERVABLE — it INVERTS on hardware failure (Ember general#17706)
-ε_del sits in the DENOMINATOR. A NISQ collapse of the delivered contrast (ε_del 0.185→0.09) makes the single-copy
-FLOOR (2^n/ε_del²) grow faster than the two-copy budget, so the ratio **GROWS** (at n=16: 21.68 → **91.59**). A raw
+ε_del sits in the DENOMINATOR. A NISQ collapse of the delivered contrast makes the single-copy FLOOR (2^n/ε_del²)
+grow faster than the two-copy budget, so the ratio **GROWS**. At n=16, holding the registered ε_size=0.1616 and
+starting from F122's delivered ε_del=0.1839 (which returns the reproduction value 12.77): a collapse to ε_del=0.09
+takes the ratio **12.77 → 53.32 (4.2×)** while the truth r=ε_del/ε_size **DROPS 1.14 → 0.56**. The ratio and the
+delivered contrast move in OPPOSITE directions — both numbers recomputed from the general form above, δ=0.05. A raw
 ratio that goes UP when the flight degrades would CONFIRM the scaling advantage on exactly the failure that should
 kill it. **The ratio is a hardware-failure amplifier, not a scaling witness.**
 
