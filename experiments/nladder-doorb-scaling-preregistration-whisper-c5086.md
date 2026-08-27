@@ -1,74 +1,73 @@
 # The n-ladder — does the sealed-shadow advantage GROW with n? PRE-REGISTRATION (FROZEN pending Creator GO)
 
-**Whisper · C5086 · board #175 · Status: FROZEN pending a Creator GO citing this file's + the flight-runner's digest (single-use).**
-**Frame:** LABELED ADVANTAGE-SCALING test on the campaign's flagship result (F122). Not a new advantage claim — a
-measurement of whether F122's sample-complexity advantage (2-copy Bell vs the proven single-copy floor) GROWS with n,
-graded by whether the delivered contrast ε_del survives width-scaling on hardware. Extends Ember's door-(b)/F122
-machinery and ratio identity; NOT a solo re-derivation — see the reproduction test below.
+**Whisper · C5086 · board #175 · Status: DRAFT — corrected after Ember's pre-freeze catch (general#17706). FROZEN pending her sign-off + a Creator GO citing this file's + the runner's digest.**
+**Frame:** LABELED ADVANTAGE-SCALING test on the campaign's flagship (F122). Not a new advantage claim — a
+measurement of whether the two-copy protocol still DELIVERS at larger n, and thus whether F122's advantage scales.
+Extends Ember's door-(b)/F122 machinery and ratio identity.
 
 ## The question, one sentence
-F122 is ONE point (n=16, 9.3× DEMONSTRATED / 21.7× formula-vs-formula). One point is not a curve. This flies the
-same protocol across a ladder of n and asks: does the copy advantage grow with n as the identity predicts, or does
-the delivered contrast ε_del collapse at large n (the NISQ width wall), killing the growth?
+F122 is one point (n=16). This flies the same protocol across a ladder of n and asks: does the two-copy protocol
+keep delivering its contrast as the state widens, or does the delivered contrast collapse at the NISQ width wall?
 
-## The identity, extended to general n — WITH a reproduction test (the discipline, not my arithmetic to trust)
-Ember's ratio identity (general#8429, court-verified #8431): normalized advantage `ratio = 2^n · ε_del² / K`, with
-`K = 4·ln(2·4^n/δ)` the two-copy copies-normalization. K is n-DEPENDENT (linear in n via ln 4^n). Her registered
-value K = 103.478 was n=16, δ=0.05.
-**REPRODUCTION TEST (run, PASS): K(16, δ=0.05) = 4·ln(2·4^16/0.05) = 103.478 — reproduces Ember's constant to 3 dp.**
-So the general-n form `ratio(n) = 2^n·ε_del² / [4·ln(2·4^n/δ)]` is her identity with n unfrozen, not a new formula.
+## Ember's identity — general form, K(n) unfrozen (CORRECTED per general#17706)
+Ember's ratio identity (doorb_ratio_identity.py, court-verified #8431), with n unfrozen:
+**`ratio(n) = (2^n / K(n)) · ε_size⁴ / ε_del²`,  `K(n) = 4·ln(2·4^n/δ)`, δ=0.05.**
+- ε_size = the contrast at the CALIBRATION gate (weather, blind to the sealed P). ε_del = the contrast the FLIGHT
+  delivers. They are MEASURED INDEPENDENTLY per rung — NOT equal. (My first draft wrongly used the normalized form
+  2^n·ε_del²/K, which is valid only at ε_size=ε_del; Ember caught it before freeze — the correction is in the fences.)
+- **REPRODUCTION TEST (correct form, PASS):** ratio(16, ε_size=0.1616, ε_del=0.1839) = **12.77** — reproduces
+  Ember's registered w12 branch exactly. K(16,0.05)=103.478 also reproduces her L. Both halves now checked.
 
-## The observable (Ember's own correction, general#8429: "the ratio was never the observable")
-The graded quantity per rung is **ε_del(n)** — the contrast the flight delivers, measured DIRECTLY at each rung's
-calibration gate (weather, blind to the sealed P). The ratio is DERIVED from ε_del via the identity above. Reporting
-ε_del(n) is honest; the ratio-trend is its consequence.
+## ⚠️ THE RATIO IS NOT THE FALSIFIABLE OBSERVABLE — it INVERTS on hardware failure (Ember general#17706)
+ε_del sits in the DENOMINATOR. A NISQ collapse of the delivered contrast (ε_del 0.185→0.09) makes the single-copy
+FLOOR (2^n/ε_del²) grow faster than the two-copy budget, so the ratio **GROWS** (at n=16: 21.68 → **91.59**). A raw
+ratio that goes UP when the flight degrades would CONFIRM the scaling advantage on exactly the failure that should
+kill it. **The ratio is a hardware-failure amplifier, not a scaling witness.**
 
-## Frozen PREDICTION (before any hardware bar), at a HELD ε_del ≈ 0.185 (F122's delivered contrast)
-| n | 2^n | K(n) | ratio(ε_del=0.185) | × vs n=16 |
-|---|---|---|---|---|
-| 8  | 256      | 59.1  | 0.15    | 0.01× |
-| 12 | 4096     | 81.3  | 1.72    | 0.08× |
-| 16 | 65536    | 103.5 | 21.68   | 1.00× (reproduces F122's 21.7× formula-vs-formula — built-in ruler check) |
-| 20 | 1048576  | 125.7 | 285.6   | 13.2× |
-| 24 | 16777216 | 147.8 | 3884    | 179×  |
-- **P1 (the scaling claim):** IF ε_del(n) holds ≈ its n=16 value, the derived ratio grows ~2^n/K(n) — EXPONENTIAL.
-  Sharpest testable feature: the advantage CROSSES 1 near n=12 (two-copy is WORSE than single-copy below it).
-- **P2 (ruler check):** the n=16 rung reproduces F122's contrast/ratio on this same protocol — proves the ladder is
-  on F122's ruler, not a re-scaled one.
+## The graded OBSERVABLE (Ember's own point: "report ε_del, the ratio was never the observable")
+Per rung, measure DIRECTLY: **ε_size(n)** (calibration gate) and **ε_del(n)** (flight), and their ratio
+**r(n) = ε_del(n) / ε_size(n)** — does the flight DELIVER the contrast the calibration promised, at width n?
+
+## Frozen PREDICTION (before any bar)
+- **P1 (the real claim):** the two-copy protocol DELIVERS at width — **r(n) = ε_del(n)/ε_size(n) ≈ 1** across the
+  ladder. When it holds, the derived advantage grows ~2^n/K(n) as a CONSEQUENCE (0.15 at n=8, crosses 1 near n=12,
+  21.7 at n=16, ~3884 at n=24) — but that curve is reported, not graded.
+- **P2 (ruler check):** the n=16 rung's (ε_size, ε_del) reproduces F122's on this protocol.
 
 ## Frozen FALSIFIERS (any → honest negative)
-- **ε_del(n) COLLAPSES toward 0 as n grows** (the NISQ width wall — the wider 2n-qubit state/Bell measurement
-  decoheres): the exponential 2^n growth does NOT materialize on hardware → the advantage is width-limited, not
-  scaling. This is the F85/F108 metrology scaling-inversion pattern, now tested in the LEARNING domain, and it is a
-  REAL result either way.
-- The n=16 rung's ε_del disagrees with F122's by >3σ → the ladder is not on F122's ruler; the comparison is void.
-- Any rung's two-copy decoder selftest (G-DECODE/F-BIAS/F-IND/F-MIX) fails → REFUSE that rung, do not fly it.
+- **r(n) = ε_del(n)/ε_size(n) drops below ~0.8 at large n** → the flight fails to deliver the calibration contrast on
+  the wider state → the NISQ WIDTH WALL → the advantage is illusory at that n (the raw ratio would INFLATE here — that
+  inflation is the tell, not a win). This is the F85/F108 metrology scaling-inversion pattern in the LEARNING domain.
+- **The raw ratio is NOT graded as the witness** — it is reported alongside, precisely because it inverts. Any read
+  that treats the ratio growing as confirmation is rejected by construction (this fence exists because I made that
+  exact error in the first draft).
+- n=16 rung's ε_del disagrees with F122 by >3σ → not on F122's ruler → comparison void.
+- Any rung's decoder selftest (G-DECODE/F-BIAS/F-IND/F-MIX) fails → REFUSE that rung.
+
+## The lesson this prereg carries (from the first-draft error)
+A reproduction test that fixes ONE component (K) while the rest of the form varies will PASS on a different formula —
+my K-half was perfect, which is exactly what let the ε_del inversion hide. A reproduction test proves a function is
+the same function only if it exercises the WHOLE form, not one true sub-term. The correct-form test (→12.77) does.
 
 ## The flight (Ember's n-parametrized machinery, unchanged)
-`tools/doorb_flight_ember_c4262.py --n <n> --fly` at each rung. Selftests G-DECODE/F-BIAS/F-IND/F-MIX PASS at n=8
-and n=20 (verified $0). The flight prep is a PRODUCT eigenstate of the sealed P (constant depth at all n — no
-depth-wall; only WIDTH 2n and readout scale with n, which is exactly what the NISQ-wall falsifier probes).
+`tools/doorb_flight_ember_c4262.py --n <n> --fly`. Selftests PASS at n=8,20 ($0). Prep is a PRODUCT eigenstate of the
+sealed P — CONSTANT depth at all n (verified: transpiled depth 9 at n=20 AND n=24); only WIDTH (2n) and readout scale,
+which is exactly what the r(n) falsifier probes.
 
 ## Ladder, budget, device (frozen)
-- **n-values:** {8, 12, 16, 20} primary; **24 conditional** on the $0 transpile feasibility check (48 qubits) passing.
-- **Per-rung copies:** the registered T(n) = 4·ln(2·4^n/δ)/ε^4 as the certification floor, over-flown to a common
-  50,000 copies/rung (25,000 Bell shots) so ε_del is measured cleanly at every rung on one shot budget.
-- **Device PINNED: ibm_fez (FREE open-instance, #151 spend gate).** ALL rungs on ONE device for a self-consistent
-  trend (the n=16 rung need not equal F122's marrakesh point in absolute terms; the ladder is device-internal and
-  P2 checks the ruler). No paid account, no paid device.
-- **Seal discipline:** each rung draws its OWN sealed P (blind, committed before flight), its own calibration gate
-  (ε_size), its own flight (ε_del) — Ember's incremental-atomic batch pattern (F122-dist across weight; this across n).
+- **n-values:** {8, 12, 16, 20}; **24 conditional** — feasibility PASSED $0 (48 qubits, depth 9, fits ibm_fez).
+- **Per-rung:** over-flown to a common 50,000 copies/rung (25,000 Bell shots) so ε_del is measured cleanly at every n.
+- **Device PINNED: ibm_fez (FREE open-instance, #151).** All rungs on ONE device (device-internal trend; P2 checks the
+  ruler). No paid account/device.
+- **Seal:** each rung its own sealed P (blind, committed pre-flight), its own calibration gate, its own flight —
+  Ember's incremental-atomic batch pattern (F122-dist across weight; this across n).
 
-## Gates (to run before freeze)
-- attack_preflight --claim (engineering/scaling measurement, no new advantage claim → classes N/A expected).
-- preflight_account_check on the flight-runner (ibm_multi_account, free-instance pin).
-- $0 transpile feasibility at n=20 and n=24 (does the 40/48-qubit two-copy circuit fit + route on ibm_fez).
+## Gates (before freeze)
+attack_preflight --claim · preflight_account_check on the runner · (feasibility DONE).
 
 ## What a GO authorizes (single-use, seal-bound)
-One batch submission of the frozen ladder-runner (digest recorded at freeze), to ibm_fez, once, run in the
-BACKGROUND. Any re-fly needs a fresh GO citing the new digest. Each rung's job_id recorded.
+One batch submission of the frozen runner (digest at freeze) to ibm_fez, once, BACKGROUND. Each rung's job_id recorded.
 
-## Coordination note (cross-seat, non-blocking)
-This extends Ember's flagship F122 identity + machinery. The general-n K(n) is HER identity with n unfrozen, and the
-reproduction test (K(16)=103.478) is the evidence it is the same function — but her eyes on her own identity are the
-disciplined check. @ember invited to verify the general-n K(n) before the fly; the reproduction test stands meanwhile.
+## Coordination (cross-seat — the check already worked once)
+Extends Ember's flagship identity + machinery. She caught the normalized-vs-general inversion before freeze
+(general#17706); this draft is the correction. @ember sign-off on this corrected form is the gate before freezing.
