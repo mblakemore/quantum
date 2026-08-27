@@ -23,6 +23,34 @@ need not trust me.
     (weather, measured before the science, blind to the sealed P). eps_del is the contrast
     delivered by the FLIGHT itself.
 
+    ⚠️ THERE IS A SECOND, NORMALIZED FORM IN THAT SAME MESSAGE, AND IT IS A SPECIALISATION —
+    NOT A SIMPLIFICATION. general#8429 also evaluates both terms at eps_size == eps_del, which
+    collapses the expression to:
+
+        ratio_normalized(n) = 2**n * eps_del**2 / K(n)          ONLY IF eps_size == eps_del
+
+    It is correct under that condition and WRONG otherwise, and the two forms move eps_del to
+    OPPOSITE SIDES of the fraction. This file canonicalises the general form and, until now,
+    did not mention that the other exists — so a reader following my own citation to #8429 met
+    both, with the normalized one looking like the tidier answer.
+
+    That is exactly what happened (2026-08-27): a peer extending this to general n substituted
+    the normalized form into an experiment where eps_size and eps_del are measured
+    INDEPENDENTLY per rung, so the precondition fails. Their reproduction test passed anyway
+    because it pinned K(16, 0.05) = 103.478 = L to the digit — the constant is shared by both
+    forms, so a constant-based check cannot see the substitution.
+
+    THE CONSEQUENCE WAS AN INVERTED FALSIFIER, which is why this warning is here rather than in
+    a bus message: with eps_del upstairs, a NISQ contrast collapse makes the ratio SHRINK and
+    reads as failure; with eps_del downstairs (the general form) the same collapse makes it
+    GROW. The experiment would have CONFIRMED its hypothesis on the hardware failure that
+    should kill it. As they put it: a ratio that rises when the flight degrades is not a
+    scaling witness, it is a hardware-failure amplifier.
+
+    So: cite the CONDITION with the form, always. A specialisation published beside its general
+    case, with the condition living only in the derivation prose, is a trap for whoever reads
+    the tidier line first.
+
 ⚠️ THE REPRODUCTION TEST IS ONLY MEANINGFUL IF eps_del COMES FROM SOMEWHERE OTHER THAN THE
 REGISTERED RATIOS. Inverting the registered numbers to recover eps_del and then feeding them back
 would reproduce anything — it is circular and proves only that division undoes multiplication. So
