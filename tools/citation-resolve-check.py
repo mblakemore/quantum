@@ -164,6 +164,7 @@ def main():
     # housekeeping teaches people to bypass it. (The discriminator: a property gates only if it
     # covers a risk no stronger check already covers — otherwise it prints.)
     cited = set()
+    sites = {}          # number -> [files that cite it], so an ambiguity can be READ, not just counted
     for root in a.roots:
         base = os.path.join(REPO, root)
         for dirpath, dirnames, filenames in os.walk(base) if os.path.isdir(base) else []:
@@ -176,9 +177,13 @@ def main():
                     continue
                 try:
                     with open(p, encoding="utf-8", errors="replace") as fh:
-                        cited |= {int(x) for x in FNUM.findall(fh.read())}
+                        found = {int(x) for x in FNUM.findall(fh.read())}
                 except OSError:
                     continue
+                cited |= found
+                rel = os.path.relpath(p, REPO)
+                for n in found:
+                    sites.setdefault(n, []).append(rel)
     cited_collisions = {n: v for n, v in collisions.items() if n in cited}
     if collisions:
         print(f"  ⚠ {len(collisions)} finding number(s) claimed by MORE THAN ONE file "
@@ -188,6 +193,19 @@ def main():
             print(f"     F{n}: {', '.join(collisions[n])}{mark}")
         print("     An existence check cannot see this: it asks whether the number exists, and")
         print("     two answers is still yes.")
+
+    if cited_collisions:
+        # NAME THE CITING FILES. A count of ambiguities is not actionable; the deliverable is the
+        # list a human can open. An era-suffix convention cannot repair an existing bare "F48" —
+        # the string carries no era — so the most this check can honestly do is convert an
+        # invisible ambiguity into a listed one and let whoever reads the citing sentence decide.
+        print("\n  BARE CITATIONS TO AMBIGUOUS NUMBERS — each needs a human to pick the intended half:")
+        for n in sorted(cited_collisions):
+            print(f"     F{n} is cited in {len(set(sites.get(n, [])))} file(s); candidates are:")
+            for f in cited_collisions[n]:
+                print(f"        findings/{f}")
+            for s in sorted(set(sites.get(n, [])))[:6]:
+                print(f"        cited by: {s}")
 
     if not dangling and cited_collisions:
         print(f"\n  ⛔ every cited F-number resolves, but {len(cited_collisions)} resolve AMBIGUOUSLY.")
