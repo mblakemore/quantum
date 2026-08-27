@@ -32,7 +32,11 @@ import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LEDGER = os.path.join(REPO, "docs", "campaign-arcs.md")
-FNUM = re.compile(r"\bF(\d{1,3})\b")
+# F0 is excluded: findings are numbered from 01, and a red-team audit doc legitimately uses
+# F0/F1 as its OWN internal section labels ("F0 (the blocker) — the executed witness is
+# defective"). Counting those as dangling citations accuses a document of mis-citing a corpus
+# it was never referring to. The F-prefix is not owned by the findings ledger.
+FNUM = re.compile(r"\bF([1-9]\d{0,2})\b")
 TEXT_EXT = {".md", ".html", ".htm", ".txt", ".json", ".py", ".js", ".sh"}
 SKIP_DIRS = {".git", "node_modules", "__pycache__", ".venv", "venv"}
 
@@ -60,6 +64,12 @@ def ledger_numbers():
         raise
     fdir = os.path.join(REPO, "findings")
     filed = set()
+    # WHICH FILE(S) CLAIM EACH NUMBER. A set cannot answer that, and the question matters:
+    # two distinct findings both numbered 16 make every "F16" citation resolve to an ambiguous
+    # target, which an existence check reports as a clean pass. Collisions are the failure mode
+    # a resolver is structurally blind to — it asks "does this number exist", and two answers
+    # is still yes.
+    by_num = {}
     if os.path.isdir(fdir):
         for fn in os.listdir(fdir):
             # THREE NAMING ERAS, and I widened this authority FOUR times before it
@@ -90,8 +100,11 @@ def ledger_numbers():
                  or re.match(r"^finding-(\d{1,3})[-_.]", fn)
                  or re.match(r"^(\d{1,3})-", fn))       # <- THIRD era, added after it accused a page
             if m:
-                filed.add(int(m.group(1)))
-    return nums | filed, nums, filed
+                n = int(m.group(1))
+                filed.add(n)
+                by_num.setdefault(n, []).append(fn)
+    collisions = {n: sorted(v) for n, v in by_num.items() if len(v) > 1}
+    return nums | filed, nums, filed, collisions
 
 
 def scan(roots, known):
@@ -126,7 +139,7 @@ def main():
     a = ap.parse_args()
 
     try:
-        known, in_ledger, filed = ledger_numbers()
+        known, in_ledger, filed, collisions = ledger_numbers()
     except OSError as e:
         print(f"UNKNOWN: cannot read the ledger ({e}). This is NOT a pass — nothing was checked.")
         sys.exit(2)
@@ -144,6 +157,43 @@ def main():
               f"{' ...' if len(only_filed) > 8 else ''}) — a ledger-coverage gap, reported here")
         print("        because it is real, but NOT counted as a broken citation.")
     dangling = scan(a.roots, known)
+
+    # COLLISIONS: two files claiming one number. Reported always; GATES only when the colliding
+    # number is actually cited, because that is when a reader following the citation lands on an
+    # ambiguous target. An uncited collision is housekeeping, and a check that refuses for
+    # housekeeping teaches people to bypass it. (The discriminator: a property gates only if it
+    # covers a risk no stronger check already covers — otherwise it prints.)
+    cited = set()
+    for root in a.roots:
+        base = os.path.join(REPO, root)
+        for dirpath, dirnames, filenames in os.walk(base) if os.path.isdir(base) else []:
+            dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
+            for fn in filenames:
+                if os.path.splitext(fn)[1].lower() not in TEXT_EXT:
+                    continue
+                p = os.path.join(dirpath, fn)
+                if os.path.abspath(p) == os.path.abspath(LEDGER):
+                    continue
+                try:
+                    with open(p, encoding="utf-8", errors="replace") as fh:
+                        cited |= {int(x) for x in FNUM.findall(fh.read())}
+                except OSError:
+                    continue
+    cited_collisions = {n: v for n, v in collisions.items() if n in cited}
+    if collisions:
+        print(f"  ⚠ {len(collisions)} finding number(s) claimed by MORE THAN ONE file "
+              f"({len(cited_collisions)} of them cited):")
+        for n in sorted(collisions):
+            mark = "  <- CITED, so a reader following F%d lands on two documents" % n if n in cited_collisions else ""
+            print(f"     F{n}: {', '.join(collisions[n])}{mark}")
+        print("     An existence check cannot see this: it asks whether the number exists, and")
+        print("     two answers is still yes.")
+
+    if not dangling and cited_collisions:
+        print(f"\n  ⛔ every cited F-number resolves, but {len(cited_collisions)} resolve AMBIGUOUSLY.")
+        print("     A citation that resolves to two different findings does not identify a source.")
+        sys.exit(1)
+
     if not dangling:
         print(f"  every cited F-number under {a.roots} resolves to a ledger row.")
         print("  SCOPE: existence only — this does NOT verify that a row says what its citer claims.")
