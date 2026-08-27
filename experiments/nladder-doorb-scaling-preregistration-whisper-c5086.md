@@ -65,17 +65,21 @@ which is exactly what the r(n) falsifier probes.
 ## Ladder, budget, device (frozen)
 - **n-values:** {8, 12, 16, 20}; **24 conditional** — feasibility PASSED $0 (48 qubits, depth 9, fits ibm_marrakesh 156q).
 - **Per-rung:** over-flown to a common 50,000 copies/rung (25,000 Bell shots) so ε_del is measured cleanly at every n.
-- **Device: ibm_marrakesh on the free open-instance — RESOLVED (no fork).** Same physical device as F122, $0. fez/
-  marrakesh/kingston are all default open-plan backends (Creator 2026-08-27; 441 marrakesh runs in our corpus, many on
-  open-instance CRNs). The account change to Ember's flight is minimal — point `instance=` from PAID_CRN to the open
-  CRN, keep `EXPECTED_BACKEND="ibm_marrakesh"`; the main open account (id 9) shares the paid instances' token
-  (fingerprint 125a47dcf3fc), so it may be a one-line instance swap, not a token change. This is a reviewed patch to a
-  money-path flight → coordinate with Ember, do not solo.
-- **Budget — the REAL constraint (was masked by the false device fork):** the trailing-28-day open-plan windows are
-  tight. Main open (id 9): 10,800 s limit, ~166 s balance now. id 10: 600 s limit, ~295 s. **Per-rung QPU-second cost
-  is UNMEASURED** — must be measured before freeze so a 4-rung (×50k-copy) batch is known to fit an available window,
-  or the ladder is spread across refills / accounts (same-device only — all three of these are marrakesh, so spreading
-  across open accounts does not confound the width-scaling signal). Fit gate at submit remains the wall.
+- **Device + account: ibm_marrakesh on the free open-instance, flight UNCHANGED — RESOLVED, NO patch.** Ember already
+  fixed my exact error at C4273: the flight constant *named* `PAID_CRN` is a legacy alias for `ACCOUNT_CRN` = ALT4, a
+  FREE open-plan instance (Creator-declared venue, general#10173); `DEFAULT_ACCOUNT="ALT4"`, `EXPECTED_BACKEND=
+  "ibm_marrakesh"`, and she verified marrakesh is reachable on ALT4 (the account binds quota, not the device). So the
+  flight flies free marrakesh out of the box — no account line to change. I read the lying name as the fact, same as
+  she did, and brought the Creator a paid-vs-free fork that never existed.
+- **Budget — the REAL and currently BINDING gate (the false fork masked it):** the flight's two wired free accounts are
+  BOTH exhausted right now — ALT3 (id12) 0/600 s, ALT4 (id16, the default) 0/600 s — recovering only as usage ages off
+  a rolling 28-day window. The accounts that DO hold balance (id9 ~166 s, id10 ~295 s) are registry-tagged
+  billing=paid/spend_gated AND are not in the flight's ACCOUNTS dict, so using them is both a spend decision (Creator
+  auth) and a code change (Ember's machinery) — NOT a free default. **Per-rung QPU-second cost is UNMEASURED and cannot
+  be measured on a real flight until a wired free account (ALT3/ALT4) refills, or the Creator provisions/authorizes a
+  funded venue.** Fit gate at submit remains the wall. NB the registry tag on id9/id10 (named "open-instance" but
+  billing=paid) CONFLICTS with the Creator's "open-instances are free by default" — do NOT resolve by assumption
+  (today's whole error class); the Creator adjudicates.
 - **Seal — needs Ember's mechanism for the NEW n's:** each rung needs a pre-committed sealed P (G-SEAL reads
   ~/.ember-doorb-secrets.json + experiments/doorb_commitments/doorb_commitment_n{n}.json). Only n=16 exists; n∈{8,12,
   20,24} have NO commitment. Committing sealed P's for the new rungs is Ember's secrets machinery — coordinated, not
