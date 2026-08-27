@@ -20,6 +20,7 @@ never a pass — the check not running and the check passing must not render the
 import os, re, sys
 
 LEDGER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "docs", "campaign-arcs.md")
+POSITIVE = {"WIN", "CERTIFIED", "STANDS", "QUALIFIED", "HOLDS", "CONFIRMED"}
 NEGATIVE = {"RETIRED", "SUPERSEDED", "SUPERSEDED-AS-EXECUTED", "LOSS", "REFUTED", "NOT-WIN", "NULL"}
 ROW_TOK = re.compile(r"\[scope:row:\s*([^\]]+)\]")
 # GREEDY label, because a label can CONTAIN "=" — "active feedforward k=1 arm = LOSS".
@@ -36,15 +37,33 @@ SUB_ANY = re.compile(r"\[scope:sub:")
 FID = re.compile(r"(F\d+|Exp\d+[a-z]*)")
 
 
-def verdict_is_negative(text):
-    head = re.split(r"[ (]", text.strip().upper())[0]
-    return head in NEGATIVE or any(w in text.upper() for w in ("RETIRED", "SUPERSEDED", "NOT-WIN"))
+def classify(text):
+    """'neg' | 'pos' | 'unknown'. UNKNOWN IS NOT POSITIVE, and that was a real hole.
+
+    The first version had a fixed negative set and filed EVERYTHING ELSE as positive, so a
+    verdict the author phrased in the ledger's own vocabulary — "DOES NOT HOLD", "NO-FLY" —
+    would have been indexed as a WIN. Elder hit exactly that tokening F124-F130 (general#16944);
+    five of his negatives would have filed positive had he led with the ledger's phrasing
+    instead of a class word. A default branch that resolves to the FAVOURABLE reading is the
+    same defect this row exists to fix, one level up: an unrecognised verdict is unmeasured,
+    and unmeasured must never render as fine.
+
+    So both classes are now enumerated and anything outside them is an ERROR that fails the
+    check by name, rather than a silent win.
+    """
+    head = re.split(r"[ (,]", text.strip().upper(), 1)[0].strip("*: ")
+    if head in NEGATIVE or any(w in text.upper() for w in ("RETIRED", "SUPERSEDED", "NOT-WIN",
+                                                          "DOES NOT HOLD", "NO-FLY")):
+        return "neg"
+    if head in POSITIVE:
+        return "pos"
+    return "unknown"
 
 
 def build():
     with open(LEDGER, encoding="utf-8") as fh:
         lines = fh.read().split("\n")
-    negatives, positives, sub_negatives = [], [], []
+    negatives, positives, sub_negatives, unknown = [], [], [], []
     for l in lines:
         if not l.startswith("|") or re.match(r"^\|[\s:-]+\|", l):
             continue
@@ -58,11 +77,17 @@ def build():
         m = FID.search(cells[1]) if len(cells) > 1 else None
         m = m or FID.search(l)
         fid = m.group(1) if m else "?"
-        (negatives if verdict_is_negative(rt.group(1)) else positives).append(fid)
+        k = classify(rt.group(1))
+        if k == "neg":
+            negatives.append(fid)
+        elif k == "pos":
+            positives.append(fid)
+        else:
+            unknown.append(f"{fid}: {rt.group(1).strip()}")
         for label, verd in SUB_TOK.findall(l):
             if verd.upper() in NEGATIVE:
                 sub_negatives.append(f"{fid}/{label.strip()}")
-    return negatives, positives, sub_negatives
+    return negatives, positives, sub_negatives, unknown
 
 
 def _count_parsed():
@@ -73,7 +98,7 @@ def _count_parsed():
 
 def main():
     try:
-        neg, pos, sub = build()
+        neg, pos, sub, unk = build()
     except OSError as e:
         print(f"UNKNOWN: cannot read the ledger ({e}). This is NOT a pass.")
         sys.exit(2)
@@ -81,6 +106,10 @@ def main():
     print(f"  row-level positives ({len(pos)}): {pos}")
     print(f"  subclaim negatives  ({len(sub)}): {sub}")
     fails = []
+    if unk:
+        print(f"  UNRECOGNISED verdicts ({len(unk)}): {unk}")
+        fails.append(f"{len(unk)} row verdict(s) match neither the positive nor the negative "
+                     "class — unrecognised is UNMEASURED, and must not file as a win")
     # COMPLETENESS: every [scope:sub: token in the file must have PARSED. A token the parser
     # cannot read is invisible to the index, and invisible reads exactly like absent.
     with open(LEDGER, encoding="utf-8") as fh:
