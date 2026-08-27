@@ -10,7 +10,7 @@
 ## 0. The gap this closes
 
 Two prior results measured **different** quantities and left anchor RANK on hardware untested:
-- **Exp73/F48 (Elder C6204, exact-density-matrix sim):** depolarizing PRESERVES anchor rank →
+- **Exp73/F48ᵃ (Elder C6204, exact-density-matrix sim):** depolarizing PRESERVES anchor rank →
   best-of-k SELECTION marked GREEN, but explicitly flagged "wants a pre-registered HW confirmation."
 - **Exp66B/F50 (Whisper C4410, real QPU):** warm-start LIFT (MAGNITUDE) collapses on hardware;
   "FakeMarrakesh is too optimistic."
@@ -40,7 +40,7 @@ survives — the quantity best-of-k depends on. Exp77 is that missing hardware r
 - **P1 (sim gate):** PASS — FakeMarrakesh preserved rank (ρ=1.0), min adjacent gap 1.515 cut-units
   (2.16× the ~0.70 drift). Hardware submit justified.
 - **P2 (primary):** **PASS** — argmax preserved + top-3 ≥ 2/3 on BOTH replicates → **anchor SELECTION
-  is hardware-robust.** Exp73 sim-only rank claim CONFIRMED on real QPU. F48 GREEN holds on hardware.
+  is hardware-robust.** Exp73 sim-only rank claim CONFIRMED on real QPU. F48ᵃ GREEN holds on hardware.
 - **P2-alt (the would-be finding, rank-break):** NOT triggered.
 - **Novel quantity (HW − SIM rank-distortion gap):** 0.0000 − 0.0000 = **0** → at this anchor
   separation and depth, real-device noise is **rank-equivalently affine** for selection; no
@@ -60,8 +60,8 @@ of the noise is too small to reorder anchors whose quality gap is ≫ the noise.
 ## 4. Honest scope (pre-committed bounds)
 
 - **"Rank preserved" is the WEAK arm** (a rank-BREAK would have been the strong, surprising finding).
-  This is a confirmatory result; its value is (a) closing the F48 open hardware confirmation and
-  (b) reconciling F48 with F50.
+  This is a confirmatory result; its value is (a) closing the F48ᵃ open hardware confirmation and
+  (b) reconciling F48ᵃ with F50.
 - **N=1 instance (EDGES_8), single backend, WELL-SEPARATED anchors by design (gap 2.16× drift).**
   The claim is bounded: *for anchors whose quality gap ≫ device noise, best-of-k selection survives
   hardware.* It does NOT extend to **closely-spaced / near-tied** anchors — exactly where best-of-k

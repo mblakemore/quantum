@@ -1,4 +1,6 @@
-# Finding 48: Depolarizing noise PRESERVES warm-start anchor RANK at realistic dose — best-of-k selection is noise-robust (but tie-break among cost-equal optima is not, harmlessly)
+# Finding 48ᵃ: Depolarizing noise PRESERVES warm-start anchor RANK at realistic dose — best-of-k selection is noise-robust (but tie-break among cost-equal optima is not, harmlessly)
+
+> **Era-suffix disambiguation:** this is **F48ᵃ** (Exp73, anchor-rank-preservation). The bare number **F48** collides with a later-era finding, `exp72-tegmark-phi-n13-14`; cite this result as **F48ᵃ**. The suffix is the canonical form for the five colliding numbers (F16/F25/F26/F48/F51); a bare "F48" citation is under-specified and names both candidates.
 
 **Experiment:** Exp73 (Elder C6204, 2026-06-27)
 **Pre-reg:** `experiments/exp73-anchor-rank-preservation-under-noise-preregistration.md` (committed before compute)
