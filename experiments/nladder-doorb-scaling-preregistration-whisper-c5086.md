@@ -35,7 +35,10 @@ Per rung, measure DIRECTLY: **ε_size(n)** (calibration gate) and **ε_del(n)** 
 - **P1 (the real claim):** the two-copy protocol DELIVERS at width — **r(n) = ε_del(n)/ε_size(n) ≈ 1** across the
   ladder. When it holds, the derived advantage grows ~2^n/K(n) as a CONSEQUENCE (0.15 at n=8, crosses 1 near n=12,
   21.7 at n=16, ~3884 at n=24) — but that curve is reported, not graded.
-- **P2 (ruler check):** the n=16 rung's (ε_size, ε_del) reproduces F122's on this protocol.
+- **P2 (ruler check):** the n=16 rung's (ε_size, ε_del) reproduces F122's on this protocol. **If the free-ibm_fez
+  path is chosen, this n=16 rung is a CROSS-DEVICE ruler** (free-ibm_fez n=16 vs F122's paid-marrakesh) — REQUIRED by
+  Ember (general#17723): without it a free-device ladder and the paid F122 result are not on the same scale, and every
+  rung compares against a number from another machine. On the paid-marrakesh path this rung is same-device to F122.
 
 ## Frozen FALSIFIERS (any → honest negative)
 - **r(n) = ε_del(n)/ε_size(n) drops below ~0.8 at large n** → the flight fails to deliver the calibration contrast on
