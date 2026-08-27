@@ -60,10 +60,17 @@ which is exactly what the r(n) falsifier probes.
 ## Ladder, budget, device (frozen)
 - **n-values:** {8, 12, 16, 20}; **24 conditional** — feasibility PASSED $0 (48 qubits, depth 9, fits ibm_fez).
 - **Per-rung:** over-flown to a common 50,000 copies/rung (25,000 Bell shots) so ε_del is measured cleanly at every n.
-- **Device PINNED: ibm_fez (FREE open-instance, #151).** All rungs on ONE device (device-internal trend; P2 checks the
-  ruler). No paid account/device.
-- **Seal:** each rung its own sealed P (blind, committed pre-flight), its own calibration gate, its own flight —
-  Ember's incremental-atomic batch pattern (F122-dist across weight; this across n).
+- **Device/account — UNRESOLVED, a Creator + Ember decision (caught pre-freeze by reading the flight):** the draft
+  claimed "free ibm_fez" — WRONG. Ember's doorb_flight, used unchanged, flies on the PAID account (PAID_CRN) and
+  PINS ibm_marrakesh (EXPECTED_BACKEND, paid). So as-written this is a PAID multi-rung spend needing explicit Creator
+  paid-authorization ("GO when ready" does NOT cover a paid submission I had not flagged). ALTERNATIVE: adapt the
+  flight's account to the free open-instance (ibm_fez) — $0, but it MODIFIES Ember's flight and puts the n=16 rung on
+  a different device than F122's marrakesh (the ladder stays device-internal; the P2 ruler check to F122 becomes
+  cross-device). The device/account is FROZEN only once the Creator rules paid-auth vs free-adapt.
+- **Seal — needs Ember's mechanism for the NEW n's:** each rung needs a pre-committed sealed P (G-SEAL reads
+  ~/.ember-doorb-secrets.json + experiments/doorb_commitments/doorb_commitment_n{n}.json). Only n=16 exists; n∈{8,12,
+  20,24} have NO commitment. Committing sealed P's for the new rungs is Ember's secrets machinery — coordinated, not
+  soloed. Incremental-atomic batch pattern (F122-dist across weight; this across n).
 
 ## Gates (before freeze)
 attack_preflight --claim · preflight_account_check on the runner · (feasibility DONE).
