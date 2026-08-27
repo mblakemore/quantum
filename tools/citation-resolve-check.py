@@ -184,7 +184,30 @@ def main():
                 rel = os.path.relpath(p, REPO)
                 for n in found:
                     sites.setdefault(n, []).append(rel)
-    cited_collisions = {n: v for n, v in collisions.items() if n in cited}
+    # USE vs MENTION, and it decides whether this gate can ever clear.
+    #
+    # A finding's OWN file naming its own number is self-reference, not an ambiguous citation.
+    # Worse, the fix itself creates permanent hits: a disambiguation note reads "this is F48a;
+    # the bare number F48 collides with ...", so the note MENTIONS the bare token in order to
+    # explain it. A regex counts occurrences of a string and cannot tell citing from talking-
+    # about. Left alone, this gate would flag the disambiguation as an outstanding defect
+    # forever — a gate that can never be satisfied is one people learn to bypass, which is
+    # worse than no gate.
+    #
+    # So a collision counts as CITED only from a file that is neither candidate. The defining
+    # surfaces (the two findings themselves, and the ledger, already skipped above) describe the
+    # number; every other file uses it. That is a principled boundary rather than a keyword
+    # heuristic — no list of words like "collides" or "disambiguation" to keep in sync.
+    #
+    # ⚠️ Elder predicted this class from the other end (the ᵃ suffix defeating \b) and was right
+    # about the consequence and wrong about the mechanism: in a byte-locale grep \bF48\b does
+    # match "F48ᵃ", but Python's \b is Unicode-aware and U+1D43 is category Lm, so it does NOT.
+    # Verified rather than adopted — his finding about his surface was a hypothesis about mine.
+    def _external(n):
+        cand = set(collisions.get(n, []))
+        return sorted({s for s in set(sites.get(n, []))
+                       if os.path.basename(s) not in cand})
+    cited_collisions = {n: v for n, v in collisions.items() if n in cited and _external(n)}
     if collisions:
         print(f"  ⚠ {len(collisions)} finding number(s) claimed by MORE THAN ONE file "
               f"({len(cited_collisions)} of them cited):")
@@ -201,11 +224,14 @@ def main():
         # invisible ambiguity into a listed one and let whoever reads the citing sentence decide.
         print("\n  BARE CITATIONS TO AMBIGUOUS NUMBERS — each needs a human to pick the intended half:")
         for n in sorted(cited_collisions):
-            print(f"     F{n} is cited in {len(set(sites.get(n, [])))} file(s); candidates are:")
+            ext = _external(n)
+            print(f"     F{n} — {len(ext)} EXTERNAL citing file(s); the two candidates are:")
             for f in cited_collisions[n]:
-                print(f"        findings/{f}")
-            for s in sorted(set(sites.get(n, [])))[:6]:
-                print(f"        cited by: {s}")
+                print(f"        candidate: findings/{f}")
+            for s in ext[:6]:
+                print(f"        cited by:  {s}")
+            if len(ext) > 6:
+                print(f"        ... and {len(ext) - 6} more")
 
     if not dangling and cited_collisions:
         print(f"\n  ⛔ every cited F-number resolves, but {len(cited_collisions)} resolve AMBIGUOUSLY.")
