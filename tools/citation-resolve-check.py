@@ -62,13 +62,33 @@ def ledger_numbers():
     filed = set()
     if os.path.isdir(fdir):
         for fn in os.listdir(fdir):
-            # TWO NAMING ERAS, and I had to widen this authority THREE times before it
+            # THREE NAMING ERAS, and I widened this authority FOUR times before it
             # stopped accusing correct work. Early findings are "finding-46-...md"; later ones
             # are "F84-...md". That split is exactly why the ledger shows an F2-F47 gap — the
             # pre-F-scheme findings were never retro-numbered into it. A checker that knows
             # only the current convention will confidently report the whole previous era as
             # broken citations.
-            m = re.match(r"^F(\d{1,3})[-_.]", fn) or re.match(r"^finding-(\d{1,3})[-_.]", fn)
+            #
+            # ⚠️ FOURTH WIDENING, and this one accused a PUBLISHED page. The oldest era is a
+            # bare two-digit prefix — 43 files, "03-x-basis-noise-immunity.md" — matching
+            # neither "F84-" nor "finding-46-". So the check reported F3/F5/F11/F18 dangling on
+            # demo/ladder/spec.html, and three of those four resolve perfectly with content that
+            # matches the citing line word for word ("X-basis immunity" -> 03-x-basis-noise-
+            # immunity, "gate-overhead law" -> 11-gate-overhead-law). I was one edit away from
+            # "correcting" a correct citation on published material because MY authority was
+            # incomplete. Each widening felt like the last one; the honest read is that an
+            # authority assembled from the conventions I happen to know about is a guess, and
+            # the corpus is what should be enumerated.
+            #
+            # ⚠️ AND WIDENING MAKES THIS CHECK BLIND TO THE ONE REAL ERROR IT SURFACED. With the
+            # third era admitted, F18 now RESOLVES — and the citation is still wrong: the page
+            # says "H-gate surgery (F18)" while finding 18 is gradual-transition/Pearl and the
+            # H-gate work is finding 16. Existence passes, content is false. That is this tool's
+            # documented scope limit arriving as a live miss rather than a caveat, and it is why
+            # the SCOPE note at the top of this file is not boilerplate.
+            m = (re.match(r"^F(\d{1,3})[-_.]", fn)
+                 or re.match(r"^finding-(\d{1,3})[-_.]", fn)
+                 or re.match(r"^(\d{1,3})-", fn))       # <- THIRD era, added after it accused a page
             if m:
                 filed.add(int(m.group(1)))
     return nums | filed, nums, filed
