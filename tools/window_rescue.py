@@ -90,14 +90,46 @@ def rescue_one(svc, acct, jid):
         rec["device_readout"] = {"median": st.median(ro), "mean": st.mean(ro), "max": max(ro)}
     # THE FIELD F106 PROVED LOAD-BEARING: the qubits the job actually ran on.
     used = set()
+    measured = set()
     try:
         for pub in (j.inputs.get("pubs") or []):
             qc = pub[0] if isinstance(pub, (list, tuple)) else pub
+            # PATH 1 — final_index_layout: the TOUCHED set (routing + idling included).
             lay = getattr(getattr(qc, "layout", None), "final_index_layout", None)
             if callable(lay):
                 used.update(lay())
+            # PATH 2 — MEASURE INSTRUCTIONS: the MEASURED set, the qubits carrying classical
+            # bits. Built for board#174; spec READ from the artifacts by Whisper (general#17332)
+            # rather than recalled: "layout if present, ELSE measure instructions across ALL pubs".
+            #
+            # Until now this existed only as the SET_WARNING string below, which has been telling
+            # readers to recover the measured set from measure instructions while nothing did it.
+            # A warning that names the work is not the work, and in a census the two look alike.
+            #
+            # WHY IT MATTERS FOR UNEVALUABLE: an absent layout made a window look unrecoverable
+            # while the measured set sat on disk. Declaring a window unrecoverable is only honest
+            # once BOTH paths return empty across ALL pubs — one path returning nothing is a fact
+            # about the path, not about the data.
+            try:
+                for inst in (getattr(qc, "data", None) or []):
+                    op = getattr(inst, "operation", None) or getattr(inst, "op", None)
+                    if getattr(op, "name", None) != "measure":
+                        continue
+                    for q in (getattr(inst, "qubits", None) or []):
+                        if hasattr(qc, "find_bit"):
+                            measured.add(qc.find_bit(q).index)
+            except Exception:
+                pass    # a circuit shape we cannot walk is UNKNOWN, never "no measures"
     except Exception:
         pass
+    rec["measured_qubits"] = sorted(measured)
+    # A vs B (board#174): only BOTH-empty is unrecoverable.
+    if not used and not measured:
+        rec["window_recoverability"] = "UNEVALUABLE — both paths empty across all pubs"
+    elif not used:
+        rec["window_recoverability"] = "RECOVERED via measure instructions (layout absent)"
+    else:
+        rec["window_recoverability"] = "layout present"
     if used:
         vals = []
         for q in sorted(used):
