@@ -23,7 +23,7 @@ gains are multiplicative, not redundant:
 | Calibration-window gating via sentinel | F81, Exp100/101 | err 0.154 → 0.0003 (~500×) | WHEN you run (temporal lottery; good window = zero contrast decay through 124 2q gates, Exp101 R=1.002) |
 | IPE / semiclassical readout (feedforward) | Exp102/103, Finding 51 | removes 66–75% of 2q gates in QPE readout; +25.24pp exact-success on HW, gap grows with t | HOW MANY 2q gates exist at all — converts quantum depth into classical feedforward |
 | Commutation-aligned measurement basis | F03, F12 | 1.2–3× (substrate-dependent magnitude, direction generalizes) | WHICH basis you read (free compile-time choice) |
-| Shot/anchor economics | Findings 27, 30, 36–38, F48/F53 | 1024-shot ceiling (2048 wastes 4×); best-of-k rescue +0.070; k-adaptive ≈ full lift at −30% compute; anchor RANK survives noise ρ=1.000 | CLASSICAL budget allocation around the QPU |
+| Shot/anchor economics | Findings 27, 30, 36–38, F48ᵃ/F53 | 1024-shot ceiling (2048 wastes 4×); best-of-k rescue +0.070; k-adaptive ≈ full lift at −30% compute; anchor RANK survives noise ρ=1.000 | CLASSICAL budget allocation around the QPU |
 
 **The existence proof already happened**: F81's good window **saturated the quantum Cramér–Rao bound**
 (err 0.0003, σ≈0.0009) on a real financial distribution — the statistical signature of the quantum estimator
