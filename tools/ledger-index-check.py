@@ -28,7 +28,7 @@ ROW_TOK = re.compile(r"\[scope:row:\s*([^\]]+)\]")
 # named and nothing counted the ones he did not. That is the same defect this whole row
 # exists to fix — a signal that cannot distinguish "absent" from "fine" — reintroduced in
 # the acceptance test for it. Hence ALSO the completeness check in main().
-SUB_TOK = re.compile(r"\[scope:sub:\s*(.+)\s*=\s*([A-Z][A-Z-]*)\s*\]")
+SUB_TOK = re.compile(r"\[scope:sub:\s*([^\]]+?)\s*=\s*([A-Z][A-Z-]*)\s*\]")
 SUB_ANY = re.compile(r"\[scope:sub:")
 # Find the F-number ANYWHERE in the first cell: one row reads "door (a) · **F123**", which an
 # anchored-at-the-start pattern files as "?" — present in the index under no name, which is
