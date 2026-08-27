@@ -149,11 +149,28 @@ def rescue_one(svc, acct, jid):
             rec["touched_readout"] = {"median": st.median(vals), "max": max(vals)}
             rec["used_qubits"] = sorted(used)        # deprecated alias, kept so the banked census reads
             rec["used_readout"] = {"median": st.median(vals), "max": max(vals)}
-            rec["SET_WARNING"] = ("touched != measured; for any statistic combining specific bits, "
-                                  "recover the measured set from the circuit's measure instructions")
+            rec["SET_WARNING"] = ("touched != measured; touched_readout OVERCOUNTS (routing+idling). "
+                                  "Use measured_readout for any per-bit statistic — now COMPUTED (path-2), "
+                                  "no longer merely recommended")
             if rec.get("device_readout"):
                 rec["quietness_vs_device_median"] = (
                     rec["device_readout"]["median"] / st.median(vals) if st.median(vals) else None)
+    # PATH-2 READOUT (board#174 completion, C5086): the MEASURED set is the correct denominator for
+    # any per-bit statistic; touched_readout above overcounts with routing/idling qubits. This runs
+    # independent of `used`, so a layout-absent-but-measure-RECOVERED window still gets readout stats
+    # — closing the gap where the measured set was computed but never used for the numbers.
+    if measured:
+        mvals = []
+        for q in sorted(measured):
+            try:
+                mvals.append(props.readout_error(q))
+            except Exception:
+                pass
+        if mvals:
+            rec["measured_readout"] = {"median": st.median(mvals), "max": max(mvals)}
+            if rec.get("device_readout"):
+                rec["quietness_vs_device_median_MEASURED"] = (
+                    rec["device_readout"]["median"] / st.median(mvals) if st.median(mvals) else None)
     return rec
 
 
