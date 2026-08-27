@@ -90,6 +90,13 @@ import sys, os, re, glob, argparse, datetime
 FINDINGS = "findings"
 _SIG = re.compile(r"(\d[\d.–\-]*)\s*(?:sigma|σ)\b|\bsigma\b", re.I)
 _EPOCH_LINE = re.compile(r"\*\*Epoch\*\*:\s*(.+)")
+# STRICT hardware evidence: a NAMED backend, or a job id in an explicit job context. Not the
+# bare words "backend"/"submission" and not any 20-char token — a loose version of this test
+# reported hardware evidence in all 43 σ-selected findings for the wrong reason, and the
+# strict one happened to agree, which is why both were run before trusting either.
+_HW_EVIDENCE = re.compile(
+    r"\bibm_[a-z]+\b|\b(?:marrakesh|kingston|fez|torino|brisbane|sherbrooke|nazca|cusco)\b"
+    r"|\bjob[ _-]?(?:id)?[: ]+\s*[`\"']?[a-z0-9]{18,26}\b", re.I)
 _BASES = {"distinct-day", "distinct-submission", "distinct-device"}
 # epoch_n is an integer OR a first-class "not-knowable" value (Elder court ruling
 # gen#13026, three-seat). Each is a DIFFERENT failure with a different remedy;
@@ -290,9 +297,13 @@ def main(argv):
 
     gate_fail, witness_warn, ok = [], [], []
     unestablished, inherited_res, provenance, deterministic, non_sigma = [], [], [], [], 0
+    _sig_no_hw = []
     for f in all_md:
         txt = open(f, encoding="utf-8", errors="replace").read()
         is_sig = bool(_SIG.search("\n".join(txt.splitlines()[:6])))
+        # board#168 selector-drift data, gathered in the loop that already has the text
+        if is_sig and not _HW_EVIDENCE.search(txt):
+            _sig_no_hw.append(os.path.basename(f))
         em = _EPOCH_LINE.search(txt)
         # Grade a finding if it is sigma-headline (REQUIRED to carry a label) OR if it
         # already HAS an **Epoch** field (it opted in; its label must be validated).
@@ -445,6 +456,32 @@ def main(argv):
               f"filed separately so the small question is not answered while the large one is open:")
         for n, why in provenance:
             print(f"  - PROV {n}: {why}")
+    # ── SELECTOR DRIFT DETECTOR (board#168, C4350) ───────────────────────────────────────
+    # The scope predicate selects on the WORD sigma/σ in a finding's first 6 lines, so a
+    # classical regression σ is indistinguishable from a hardware measurement σ. #168 calls
+    # that a population defined by what a document SAYS rather than by what it IS, and
+    # proposes selecting on the existence of a hardware claim instead.
+    #
+    # MEASURED FIRST (2026-08-27), because the proposed fix carries its own misclassification
+    # risk and the row's premise deserved a number: of 249 findings, 43 are σ-selected, and
+    # ALL 43 carry a named IBM backend or a job id in context — under a STRICT test, after a
+    # loose one gave the same answer for the wrong reason. Exactly ONE finding is labelled
+    # n=DETERMINISTIC (F71), and the selector would not select it anyway (no σ in its head).
+    # So the live footprint is ZERO: nothing is currently conscripted, and the hand-label is
+    # not even doing escape work.
+    #
+    # Hence a DETECTOR rather than a new selector. Rewriting the predicate now would trade a
+    # defect that misclassifies nothing for a heuristic that might. This fires the first time
+    # a σ-selected finding arrives with no hardware evidence — which is the case #168 predicts
+    # and the corpus has not yet produced. It REPORTS and does not gate: a selector-scope
+    # question is not an epoch violation, and forcing it into the exit code would make an
+    # honest census look like a failure.
+    if _sig_no_hw:
+        print(f"\n\U0001f50d SELECTOR SCOPE ({len(_sig_no_hw)}) — σ-selected with NO hardware evidence. "
+              f"board#168's predicted case has arrived: the population is being defined by the word.")
+        for _n in _sig_no_hw:
+            print(f"  - SCOPE {_n}: no named backend and no job id — is this a hardware claim at all?")
+
     if not (gate_fail or witness_warn or ok or unestablished or inherited_res or provenance or deterministic):
         print("\n(no sigma-headline findings — census printed so silence is not read as clean)")
     print()
