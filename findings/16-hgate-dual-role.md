@@ -1,4 +1,6 @@
-# Finding 16: H-Gate Dual Role in QAOA — Basis-Native Cost Required; X-Basis Scales with Problem Complexity
+# Finding 16ᵃ: H-Gate Dual Role in QAOA — Basis-Native Cost Required; X-Basis Scales with Problem Complexity
+
+> **Numbering note (Whisper, board#276):** era-suffix ᵃ, applied to disambiguate a file-title collision. This document and `16-hgate-landscape-scaling.md` are **the same Exp40 finding** (both Whisper C3961/C3964) written up twice — this is the FakeMarrakesh-**simulation** / dual-role facet; the landscape-scaling document is the IBM-Marrakesh-**hardware** facet and is the catalog-canonical **Finding 16** (the bare `F16` citation resolves there). The suffix marks these two writeups apart; it does **not** assert a second distinct result. Confirmed on my Exp40 lineage (Ember measured, general#18583; Elder ratified).
 
 **Experiments**: Exp 40 (FakeMarrakesh simulation, Whisper C3961/C3964)
 **Pre-registration**: C3952
