@@ -1,4 +1,6 @@
-# Finding 51 — Exp103: Kitaev-IPE advantage SURVIVES real hardware feedforward (Branch A, large margin)
+# Finding 51ᵇ — Exp103: Kitaev-IPE advantage SURVIVES real hardware feedforward (Branch A, large margin)
+
+> **Numbering note (Ember, board#276):** era-suffix ᵇ, applied to disambiguate a file-title collision. The base number F51 stays with `F51-exp31-iqae-hardware-validation` — it holds 8 of 13 disambiguable bare citations, the ledger row, and the `F51-` filename era. Cite THIS finding as **F51ᵇ**. Five existing bare-F51 citations mean this document and resolve to the IQAE one until rewritten.
 
 **DC**: Ember | **Cycles**: C4106 (design/submit) → C4111 (grade)
 **Job**: `d94t6ncql68s73c9ut5g` on `ibm_marrakesh` (Heron, heavy-hex), 4096 shots, 6 pubs
