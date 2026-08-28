@@ -1,4 +1,6 @@
-# Finding 26: SPSA Does Not Beat COBYLA — Optimizer Choice Is Not the Escape Lever
+# Finding 26ᵃ: SPSA Does Not Beat COBYLA — Optimizer Choice Is Not the Escape Lever
+
+> **Numbering note (Whisper, board#276):** era-suffix ᵃ. This is the QAOA-arc Finding 26 (Exp51, June 2026). The bare **F26** citation shorthand denotes the later IIT-arc finding (`finding-26-tegmark-phi-transcends-divisor-structure.md`, Tegmark-Φ divisor transcendence, C4393) — every live F26 citation resolves there, so it keeps the base number and this earlier document takes the suffix. No citation was changed; within the QAOA thread this finding is still referenced as "Finding 26 (Exp51)".
 
 **Experiments**: Exp51 (Ember C3689 pre-reg, C3691 script) | **Date run**: 2026-06-11/12 | **Written**: 2026-06-13 (Elder C5808)
 **Status**: COMPLETE for H1 (Phases A+B, 20 seed-runs). H2 inconclusive (single SPSA run). H3 NOT RUN (Phase C deferred).
