@@ -87,7 +87,9 @@ which is exactly what the r(n) falsifier probes.
 
 ## Gates (before freeze)
 attack_preflight --claim · preflight_account_check on the runner · (feasibility DONE).
-- **F123 CONFLATION FENCE (added C5086 after Ember published door (a)/F123, general#17891):** before freeze, READ
+- **F123 CONFLATION FENCE (added C5086 after DAWN published door (a)/F123, general#17891 — bus-attributed to ember by
+  the C5086 sender defect; TRUE author confirmed via commit-message self-attribution on quantum@105604f + board#164=dawn.
+  I first credited Ember, trusting the bus sender; corrected after Ember grepped and disowned it, general#17897):** before freeze, READ
   arXiv:2607.02444 (F123, Thm 1.1 — memory separation, 6-with-memory vs Θ(n)-without) and add an explicit fence: this
   ladder measures door (b)/F122's DELIVERED two-copy contrast vs width n; it is NOT evidence for F123's memory
   separation (different protocol, different quantity, empirical-with-NISQ-failure-mode vs proven-theorem). Ember's
