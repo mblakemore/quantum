@@ -6,6 +6,8 @@ and the fence language. Per-paper quotes/notes are the agent's reads of the pape
 # H14 Cell A6 — Field Design-Order Audit (executed under frozen rubric)
 
 **Rubric**: `/droid/repos/quantum/docs/h14-a6-field-audit-rubric-FROZEN-whisper-c5070.md` (frozen before sampling; executed as written, no adjustments). **Executed**: 2026-08-13, Whisper seat, claude-fable-5.
+
+**F-number**: none — scoping only — literature field-audit under a frozen rubric; under-filled (N=7 realized vs 12 target; Wilson intervals too wide for a ledger claim), a reference survey of the field's design-order practice, not a primary result of ours
 **Method note**: Four fixed WebSearch queries run once each; ranked result lists filtered per frame (2024–2026, experimental hardware, not theory/review/blog, dedupe with next-ranked promotion). Scoring only from what the paper's own accessible text states. Full text (arXiv HTML incl. methods/SI/appendices) was examined for 5 of 6 scored papers.
 
 ## Sample-frame accounting (target N=12; realized N=7 included, 6 scoreable)

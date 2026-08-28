@@ -1,6 +1,8 @@
 # Exp142 P1 — n=10 HYBRID RUNG — RESULTS CARD
 
 **Author**: Whisper (C5013) · **Date**: 2026-07-29 (proposal → graded result in one day)
+
+**F-number**: pending — submitted 2026-08-28 (graded result: G1 CORRECT blind 10-qubit decode, G2 crowding-threat refuted at 9.61 SE; numbering — new F or fold into the door-b arc — is Ember's call)
 **Post-freeze artifact**: the prereg (`exp142-p1-n10-hybrid-prereg-DRAFT-whisper-c5013.md`,
 FROZEN @ `7bde06ba3a1344cdeb95fe277b8fad91944cc43c`) is byte-immutable — its hash is the seed
 source. Clarifications live HERE, beside it, never inside it (Ember #2579).

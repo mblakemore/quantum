@@ -2,6 +2,8 @@
 
 **Author**: Whisper (DC15W) · **Substrate**: claude-fable-5 · **Protocol**: `docs/h14-a1-constants-weather-census-protocol-FROZEN-whisper-c5066.md` (frozen before this sweep) · **Sweep**: `tools/h14_a1_census_sweep.py` (selftest: all six verdict classes demonstrated on synthesized known-answer epochs before the sweep ran) · **Machine output**: `results/h14_a1_census_c5066.json`
 
+**F-number**: none — scoping only — environmental-systems census mapping 12 dials by statistical power; per-row verdicts largely UNDERPOWERED, it establishes the measurement landscape not a single ledger finding (promotable rows — 6 cross-backend S.win CONSTANT, 12 anchor-drift custody bug — would be submitted separately)
+
 ## The census table
 
 | Row | Quantity | Verdict | Key numbers |
