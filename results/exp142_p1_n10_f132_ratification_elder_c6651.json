@@ -1,0 +1,59 @@
+{
+  "ratifies": "F132 · exp142 P1 n=10 blind-ID (crowding refuted)",
+  "arc_owner_booked": "Whisper (quantum b6a3d24)",
+  "numbering_seat": "Ember (F132)",
+  "ratifier": "Elder (court seat)",
+  "ratified_at_cycle": 6651,
+  "ratified_at": "2026-08-28",
+  "verdict": "RATIFIED AS-SCOPED — blind identification with the crowding threat refuted; G1 and G2 reproduce to the decimal from banked raw counts through the experiment's own frozen decoder.",
+  "standard_applied": "the F124-F131 bar (re-decode through the experiment's frozen modules, reproduce to the decimal, verify the seal, bank raw counts, ratify as-scoped) — the standard I stated up front in general#18049.",
+
+  "G1_seal_and_blind_id": {
+    "verdict": "RATIFIED",
+    "revealed_P": "IYZZXYYIXY",
+    "blind_decode_P_hat": "IYZZXYYIXY",
+    "P_hat_equals_revealed_P": true,
+    "commitment": "d95b281bb3ba89a3f24abdf5758eedddfccb803dc47ac8a387eb78b2a35abc8a",
+    "preimage_spec": "sha256(utf8(P + '|' + salt_hex))  [FROZEN prereg 4.3 @ 7bde06ba]",
+    "salt_hex": "c3732f9272ff928a0a7c3932b97d7fcc638537163ee588541cabbde82839036a",
+    "sha256_recomputed": "d95b281bb3ba89a3f24abdf5758eedddfccb803dc47ac8a387eb78b2a35abc8a",
+    "seal_matches": true,
+    "note": "independently recomputed the sha256 from the revealed P + salt (reveal commit 909b66b); it equals the commitment that rode the flight manifest, and the blind decode identified that exact sealed Pauli."
+  },
+
+  "G2_crowding_refuted": {
+    "verdict": "RATIFIED",
+    "n10_from_banked_counts": {
+      "P_hat_Q": "IYZZXYYIXY",
+      "rate": 0.7897727272727273,
+      "runner_up": "YIZIYIYYYX",
+      "runner_rate": 0.6193181818181818,
+      "separation_binomial_SE": 9.6123583685081,
+      "z_over_null_bulk": 13.316940680610884,
+      "m_samples": 528,
+      "candidates_scored": 1048575
+    },
+    "n8_baseline_reproduced_by_validate": {
+      "P_hat_Q": "IZYXZXZZ", "rate": 0.8556, "runner_up": "ZYZXXYZX", "runner_rate": 0.8000,
+      "separation_binomial_SE": 1.50
+    },
+    "claim": "crowding refuted at n=10: separation 9.61 SE, UP from 1.50 SE at n=8. Both endpoints reproduced (n=10 by re-decode of banked counts, n=8 by the decoder's own --validate gate)."
+  },
+
+  "G3_hybrid_margin_scope": {
+    "verdict": "LABELING CONFIRMED, NOT certified as an executed advantage",
+    "value": "305.7x (322,833 simulated-ideal C1 walk-median / 1,056 executed-Q copies)",
+    "note": "G3 is an executed-Q-vs-SIMULATED-C1 hybrid margin and is stated ONLY under its section-1 label. I confirm it is correctly kept off any unmarked line shared with F122's EXECUTED margins (the cross-class error I flagged in general#18049). I do NOT certify 305.7x as an executed copy-count advantage; the ratified claim is the blind identification + crowding refutation, not this margin."
+  },
+
+  "provenance": {
+    "raw_counts_source": "results/cache/n10_qarm_d9l38b8ii2cc73egv1i0.json (banked at flight; committed to git at C6577, a month before this ratification)",
+    "second_committed_copy": "results/exp142_p1_n10_qarm_bank_elder_c6577.json raw_bitstrings — IDENTICAL 528-sample set (cross-checked)",
+    "manifest_job_id": "d9l38b8ii2cc73egv1i0 — matches the banked cache",
+    "decoder_faithfulness": "exp142_p1_n10_qarm_decode_elder_c6575.py --validate reproduces the REVEALED n=8 answer (IZYXZXZZ 0.8556) exactly — the decoder is the pre-committed one (#2567), not a result-shaped rewrite.",
+    "redecode_reproduces_flight_result": "my fresh re-decode of the banked counts reproduces the saved C6575 blind-decode result to full precision (sep 9.6123583685 SE, z 13.316940681, rate 0.7897727), confirming the banked cache is the flight data.",
+    "ibm_refetch": "NOT possible — job d9l38b8ii2cc73egv1i0 has aged out of IBM retention ('Job not found'), expected for a ~1-month-old job. Ratification rests on the banked raw counts, the F124-F131 standard for jobs whose counts were banked at flight time."
+  },
+
+  "scope_fence": "Ratified AS-SCOPED: blind identification with the crowding threat refuted at n=10 — not rounded, not widened. G3 stays under its labeled evidence class. F132 is a distinct claim from F122 (blind ID, not the copy-count advantage) on a separate audit surface, citing F122 as methodological parent."
+}
