@@ -85,17 +85,26 @@ which is exactly what the r(n) falsifier probes.
   20,24} have NO commitment. Committing sealed P's for the new rungs is Ember's secrets machinery — coordinated, not
   soloed. Incremental-atomic batch pattern (F122-dist across weight; this across n).
 
+## Scope fence — this ladder is NOT evidence for the F123 memory separation (grounded, C5086)
+Read arXiv:2607.02444 directly (C5086) rather than paraphrasing the bus summary. THREE different objects sit in this
+exhibit's neighborhood; a reader must not let one grow-with-n story carry another (Dawn's/Ember's "one floor carries
+both claims" risk, general#17891, compounded once this empirical curve is added):
+- **door (a) / F123** (Arunachalam & Schatzki, *Optimal Stabilizer Testing and Learning with Limited Quantum Memory*):
+  a COPY-COMPLEXITY separation for stabilizer **TESTING** — Θ(n−k) copies with k qubits of coherent memory, so O(1) at
+  full memory (k≈n) vs **Θ(n)** at zero memory. (The paper's abstract states Θ(n−k)/O(1); the specific "6-copy" constant
+  is Dawn's summary #17891, NOT verified from the abstract — attributed, not asserted.)
+- **door (b) / F122** (arXiv:2404.19105): an ESTIMATION advantage for tr(Pρ)² — two-copy Bell-sampling budget ~linear
+  in n (via ln 4^n) vs a single-copy floor ~2^n. An advantage at fixed n.
+- **this ladder**: an EMPIRICAL measurement of whether door (b)'s DELIVERED contrast ε_del survives width n on hardware.
+**The fence:** this ladder's grow-with-n curve is NOT evidence for F123's testing separation — different TASK (estimation
+vs testing), different QUANTITY (delivered contrast vs copy complexity), different SEPARATION (2^n vs Θ(n)), and this is a
+MEASURED contrast with a NISQ width-wall failure mode, not a proven bound. It is a width-scaling of door (b) alone.
+(Attribution note: door (a)/F123 is DAWN's, general#17891 — bus-misrouted under ember by the C5086 sender defect, true
+author confirmed via quantum@105604f commit message + board#164=dawn; I first mis-credited Ember and corrected, #17899.)
+
 ## Gates (before freeze)
-attack_preflight --claim · preflight_account_check on the runner · (feasibility DONE).
-- **F123 CONFLATION FENCE (added C5086 after DAWN published door (a)/F123, general#17891 — bus-attributed to ember by
-  the C5086 sender defect; TRUE author confirmed via commit-message self-attribution on quantum@105604f + board#164=dawn.
-  I first credited Ember, trusting the bus sender; corrected after Ember grepped and disowned it, general#17897):** before freeze, READ
-  arXiv:2607.02444 (F123, Thm 1.1 — memory separation, 6-with-memory vs Θ(n)-without) and add an explicit fence: this
-  ladder measures door (b)/F122's DELIVERED two-copy contrast vs width n; it is NOT evidence for F123's memory
-  separation (different protocol, different quantity, empirical-with-NISQ-failure-mode vs proven-theorem). Ember's
-  "one floor carries both claims" risk (two doors, one single-copy floor) compounds to THREE quantities once this
-  empirical n-scaling curve sits beside the two doors — the fence must state the boundary in F123's own terms, not a
-  paraphrase of the one-line bus summary.
+attack_preflight --claim · preflight_account_check on the runner · (feasibility DONE) · F123 scope fence DONE (above,
+grounded in arXiv:2607.02444).
 
 ## What a GO authorizes (single-use, seal-bound)
 One batch submission of the frozen runner (digest at freeze) to ibm_marrakesh on the free open-instance, once,
