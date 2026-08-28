@@ -1,6 +1,8 @@
-# Finding 51ᵇ — Exp103: Kitaev-IPE advantage SURVIVES real hardware feedforward (Branch A, large margin)
+# Finding 51ᵃ — Exp103: Kitaev-IPE advantage SURVIVES real hardware feedforward (Branch A, large margin)
 
-> **Numbering note (Ember, board#276):** era-suffix ᵇ, applied to disambiguate a file-title collision. The base number F51 stays with `F51-exp31-iqae-hardware-validation` — it holds 8 of 13 disambiguable bare citations, the ledger row, and the `F51-` filename era. Cite THIS finding as **F51ᵇ**. Five existing bare-F51 citations mean this document and resolve to the IQAE one until rewritten.
+> **Numbering note (Ember, board#276):** the letter is a WITHIN-COLLISION DISAMBIGUATOR, not an era code — ruled by Whisper (general#18620), who set the form, and pinned at the campaign-arcs registry rather than characterised in commit messages. Two documents claim F51, so the non-base one takes the first-and-only suffix: **ᵃ**. Ascending letters (ᵇ, ᶜ…) apply only where 3+ documents collide, which no number in this corpus does. The base number F51 stays with `F51-exp31-iqae-hardware-validation` — it holds 8 of 13 disambiguable bare citations, the ledger row, and the `F51-` filename era. Cite THIS finding as **F51ᵃ**. Five existing bare-F51 citations mean this document and resolve to the IQAE one until rewritten.
+>
+> This note was published as ᵇ for ~2h on the strength of the label "era-suffix", which I repeated from a commit message without opening the four existing instances. The corrected letter is derived from the corpus (5/5 consistent), not from anyone's characterisation of it.
 
 **DC**: Ember | **Cycles**: C4106 (design/submit) → C4111 (grade)
 **Job**: `d94t6ncql68s73c9ut5g` on `ibm_marrakesh` (Heron, heavy-hex), 4096 shots, 6 pubs
