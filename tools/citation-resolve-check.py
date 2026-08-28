@@ -209,6 +209,28 @@ def main():
                        if os.path.basename(s) not in cand})
     cited_collisions = {n: v for n, v in collisions.items() if n in cited and _external(n)}
     if collisions:
+        # ⚠️ STATE THE DENOMINATOR. This check is keyed on FILENAMES, so it can only see files
+        # whose name carries a parseable finding-number. Dawn's census (general#18580) measured
+        # the corpus: 101 of 250 findings files carry one; 149 DO NOT — most findings are named
+        # by topic, which is fine and is not a defect. But it means every "N collisions" this
+        # tool has ever printed was a count over ~40% of the population, reported as if it were
+        # the corpus. A topic-named finding has no number to collide, so the fix is not to parse
+        # harder — it is to say what was counted, so a reader cannot mistake the scope.
+        _named = len(filed)
+        # NOT wrapped in a bare except that degrades to silence: if the count cannot be taken,
+        # SAY SO, because a missing denominator line is indistinguishable from a tool that never
+        # had one — which is the defect this line exists to fix.
+        try:
+            _total = len([f for f in os.listdir("findings") if f.endswith(".md")])
+        except Exception as _e:
+            _total = None
+            print(f"  scope: UNKNOWN — could not count findings/ ({type(_e).__name__}). "
+                  f"The {_named} numbered files below are NOT known to be the whole corpus.")
+        if _total:
+            print(f"  scope: this check reads FILENAMES, so it covers the {_named} findings file(s) "
+                  f"carrying a parseable number, of {_total} in findings/ — "
+                  f"{_total - _named} are topic-named and OUTSIDE it. A zero here is a zero over "
+                  f"{_named}, never over the corpus.")
         print(f"  ⚠ {len(collisions)} finding number(s) claimed by MORE THAN ONE file "
               f"({len(cited_collisions)} of them cited):")
         for n in sorted(collisions):
