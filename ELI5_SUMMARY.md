@@ -1,8 +1,9 @@
 # What We Found On a Real Quantum Computer (In Plain English)
 
 > **Where this summary stops.** It carries the campaign through the **F120/F121 decoder races**
-> (late July 2026). The findings ledger has since run on to **F131** — Sealed Shadow (F122), the
-> Temporal Investigations arc (H13) and the arcs after it are **not covered here yet**. They are in
+> (late July 2026) and now through the **Sealed Shadow arc (F122 and F123)**, added 2026-08-28.
+> The findings ledger has since run on to **F131** — the **Temporal Investigations arc (H13)** and
+> the findings after F123 are **not covered here yet**. They are in
 > [`docs/campaign-arcs.md`](docs/campaign-arcs.md) with their verdict labels, and the museum's
 > plain-language pages ([Horizons](https://mblakemore.github.io/quantum/horizons.html)) carry their
 > own scope note. *Stated rather than left to be discovered: a summary that does not say where it
@@ -304,3 +305,18 @@ The shield in the last chapter could only ever *detect* an error and throw that 
 **The scope (and it matters):** this is the *mechanism* of universal, self-healing quantum computing — the pieces, wired up and working — **not** a claim that we ran something a laptop can't, and **not** full below-the-threshold fault tolerance yet. The codes we healed corrected errors we *put there ourselves*; the machine's own gates still cost more than they save on the hard problems, which stay depth-blocked on today's chips.
 
 **And the negatives taught as much as the wins** — the Creator's standing note, proven again. The sharpest lesson came from a *failure*: we measured how much longer a self-healing qubit lives, got a modest number... and discovered that the *same qubits* two hours earlier had healed **four times better**. Nothing changed but the chip's mood — its calibration had drifted. The lesson is permanent: **a fault-tolerance score is a weather report, not a constant** — never quote one without saying what day it was. Seven wins, seven misses kept with their full accounting, each a rule we now carry forward. Full synthesis: **[Horizons 6 — The Living Ship](docs/star-trek-horizons-6-the-living-ship-whisper-c4923.md)**.
+
+## 24. The sealed shadow: two ways of reading what one copy cannot (F122, F123)
+
+Same rules as always: the answer was sealed in public before the chip ran, and every failed attempt is still here.
+
+Someone hides a secret in a quantum state and seals it — publishes a fingerprint of the answer so they cannot change it later. Then you get copies of the state and have to name the secret. The question the campaign asked is not "can you do it" but **what does having a better instrument actually buy you**, measured against a floor somebody has *proven* you cannot get under.
+
+There turned out to be two different answers, through two different doors, and they are not the same result told twice.
+
+- **Door (b) — reading two copies at once.** Measure two copies *together* rather than one after another, and a sealed weight-12 Pauli hiding among roughly 4.3 billion possibilities comes out. It took **9.3× fewer copies** than any single-copy strategy can manage. The floor is not a guess: it is proven in the published literature for *adaptive* strategies too — the kind that get to choose their next measurement after seeing the last one — so this is not a case of beating a lazy opponent. **The fence:** the advantage is in **copies of the state consumed**, and nothing else. The classical arithmetic afterwards is equally enormous on both sides and is excluded from the claim. It is not a runtime win, not a total-work win, and not a general-purpose speedup.
+
+- **Door (a) — having a memory at all.** A different separation on a different axis, resting on a different theorem: **six copies suffice if you have quantum memory, where you would need a number growing with the system size if you do not.** The sealed stabilizer came back **80 out of 80 — every single one** — with the decode checked by hand against the opened seal rather than by the pipeline that produced it. **The fence:** that certification is against an *ideal simulated adversary*. The hardware run is kept as a labelled demonstration and is deliberately *not* the certified claim.
+
+**The part worth more than the number.** Door (a) failed twice first, and the failures are the reason to believe the third. A pilot got 25 of 40 and was recorded as descriptive only. A re-flight got 29 of 40 — a real signal, the campaign's first genuinely blind one — and **still did not reach its own pre-registered bar**. It was not quietly re-scored. The cause was found and named instead: the bar had been set from a reference point that drifted more than twofold between runs while barely moving within a single run. Six rules were frozen against that failure *before* the flight that finally worked. A commitment you can only vouch for privately is not a commitment on the public clock, and the campaign says so about its own earlier attempt.
+
