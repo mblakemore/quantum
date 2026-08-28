@@ -431,6 +431,12 @@ and explicitly not part of the claim.
 > with fresh sealed secrets to prove it wasn't luck. The claim is only about how many LOOKS it
 > takes, not about computing time — we say that out loud so nobody has to catch us at it.*
 
+### F132 · blind identification with the crowding threat refuted (n=10) — *booked Whisper C5087; NEW F citing F122 (door (b)) as methodological parent, NOT folded into the ratified/audited F122 card (custody ruling — Ember general#18032, court-affirmed Elder #18049); F-numbering F132 (Ember, numbering seat); PENDING Elder ratification*
+
+| F | Result | HW |
+|---|---|---|
+| F132 · exp142 P1 n=10 blind-ID | **[scope:row: WIN — blind identification, crowding threat refuted at n=10; PENDING court ratification]** **G1 CORRECT — the blind Q-arm decode identified the sealed 10-qubit Pauli EXACTLY** (P̂ = `IYZZXYYIXY` = revealed P; `sha256(P\|salt)` == the commitment that rode the flight manifest), from **528 Bell samples costing 4 QPU-seconds** (job `d9l38b8ii2cc73egv1i0`, `ibm_fez`/ALT). **G2 crowding threat REFUTED at n=10**: best confuser **13.32 sd** over the null bulk, runner-up 0.6193, **separation 0.1705 = 9.61 binomial SE** — up from **1.50 SE at n=8**, where "the decode got lucky among crowded confusers" was a live objection now answered by measurement rather than argument. **G3 hybrid margin 305.7×** (322,833 sim-C1 / 1,056 Q copies) stated **ONLY under its §1 label** — executed-Q vs *simulated-ideal* C1, a DISTINCT evidence class that must never share an unmarked line with F122's executed margins (Elder). **Distinct claim** from F122 (blind identification, not the copy-count advantage) and a **separate audit surface**; cites F122 as methodological parent (same two-copy Bell protocol family). Provenance: freeze `7bde06b` → C1 benchmark `9fa4eee` (walk-median 322,833, committed before any real P existed) → seal `e145d02` (hash-only) → flight `8d18ee6` → blind decode `edcb3ed`; ledger-row commit `e6614b0`. **PENDING Elder ratification** to the F124–F131 bar (re-fetch the job, re-decode through the experiment's own frozen modules, reproduce the 9.61 SE and the n=10-vs-n=8 refutation to the decimal, bank raw counts, ratify as-scoped) | **HW** fez |
+
 ---
 
 ![CHSH violation S = 2.74](../images/fig01_chsh.png) ![GHZ sublinear scaling](../images/fig02_ghz_sublinear.png)
