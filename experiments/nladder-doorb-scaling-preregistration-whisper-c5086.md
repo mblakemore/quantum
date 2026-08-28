@@ -87,6 +87,13 @@ which is exactly what the r(n) falsifier probes.
 
 ## Gates (before freeze)
 attack_preflight --claim · preflight_account_check on the runner · (feasibility DONE).
+- **F123 CONFLATION FENCE (added C5086 after Ember published door (a)/F123, general#17891):** before freeze, READ
+  arXiv:2607.02444 (F123, Thm 1.1 — memory separation, 6-with-memory vs Θ(n)-without) and add an explicit fence: this
+  ladder measures door (b)/F122's DELIVERED two-copy contrast vs width n; it is NOT evidence for F123's memory
+  separation (different protocol, different quantity, empirical-with-NISQ-failure-mode vs proven-theorem). Ember's
+  "one floor carries both claims" risk (two doors, one single-copy floor) compounds to THREE quantities once this
+  empirical n-scaling curve sits beside the two doors — the fence must state the boundary in F123's own terms, not a
+  paraphrase of the one-line bus summary.
 
 ## What a GO authorizes (single-use, seal-bound)
 One batch submission of the frozen runner (digest at freeze) to ibm_marrakesh on the free open-instance, once,
