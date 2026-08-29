@@ -41,6 +41,12 @@ i3 08-11 flight). It converts a branch that has been EXTRAPOLATED since before t
 `doorb_ratio_identity.py`, general#10191/#10194) into a FLOWN one. That is a stronger and more honest claim
 than a reproduction with no referent.
 
+> **Reader caveat on the commitment (Ember general#19289):** this commitment predates the sealer's anchored-freeze
+> enforcement (quantum@237e8cf, board#330). It therefore has **no `anchored` field** — absence means "drawn before
+> the check existed," NOT "anchored." It was not backfilled (editing a commitment is what the apparatus exists to
+> prevent). Its freeze binding is nonetheless real: G-SEAL matched `338343d8` and the flight bound freeze digest
+> `30412c63…`. The `anchored` field is informative going forward only.
+
 ## The flight (flown, all gates PASS)
 - bg blwg1h99t, ibm_marrakesh, OPEN9 free instance, $0. G-EPOCH: REGISTERED --copies 50,000 → 25,000 Bell
   shots (= 50,000 copies) fits. G-SEAL `338343d8` matches the pinned commitment. G-WEATHER ε_size=0.1560.
