@@ -9,27 +9,54 @@ Blind discipline: this script touches ONLY raw bitstrings + the public manifest.
 draws, no sealed material exists anywhere it can reach. Outputs verified against the manifest
 EXACTLY (per-job row counts, total shots) — a mismatch REFUSES rather than proceeds.
 """
-import hashlib, json, re, sys
+import argparse, hashlib, json, os, re, sys
 
-REPO = "/droid/repos/quantum"
-MANIFEST = f"{REPO}/results/doorb_flight_n16_d9sifr8pdb6s73e63140.json"
+# PARAMETERISED 2026-08-29 so a SECOND flight can be fetched without a copy of this file.
+# It was pinned to one manifest, one token env and one output name; the n-ladder P2 flight
+# needed all three different. A reimplementation is exactly where the REFUSE checks below
+# get dropped by whoever is in a hurry, so the one definition grew arguments instead.
+#
+# NO IMPLICIT FLIGHT SELECTION — --manifest is REQUIRED and has no default. A default
+# pointing at the previous flight is the same defect as a runner that silently bound an
+# exhausted account: it does something plausible with no argument and the operator reads
+# success as agreement. Wrong flight is worse than no flight.
+#
+# REPO is DERIVED, never hardcoded — the old absolute path made this work only for a
+# checkout at that exact location, and hid because here they are the same directory.
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-def alt3_token():
-    with open("/droid/repos/DC15W/.env") as f:
-        for line in f:
-            m = re.match(r"^IBMQ_ALT3=(.+)$", line.strip())
-            if m:
-                return m.group(1).strip().strip('"').strip("'")
-    sys.exit("REFUSE: IBMQ_ALT3 not found")
+def read_token(env_file, var):
+    """One-line read of a token env var. Never printed, never persisted."""
+    try:
+        with open(env_file) as f:
+            for line in f:
+                m = re.match(rf"^{re.escape(var)}=(.+)$", line.strip())
+                if m:
+                    return m.group(1).strip().strip('"').strip("'")
+    except OSError as e:
+        sys.exit(f"REFUSE: cannot read {env_file} ({e.__class__.__name__})")
+    sys.exit(f"REFUSE: {var} not found in {env_file}")
 
 def main():
-    man = json.load(open(MANIFEST))
+    ap = argparse.ArgumentParser(description="decode-seat fetch of a door(b) flight")
+    ap.add_argument("--manifest", required=True,
+                    help="flight manifest JSON (REQUIRED — no default; see note above)")
+    ap.add_argument("--env-file", default="/droid/repos/DC15W/.env")
+    ap.add_argument("--token-env", default="IBMQ_ALT3")
+    ap.add_argument("--tag", required=True,
+                    help="output name tag, e.g. 'p2_n16' -> results/doorb_raw_{science,cal}_<tag>.json")
+    a = ap.parse_args()
+
+    man = json.load(open(a.manifest))
     n = man["n"]; jobs = man["jobs"]; cal_rows_declared = man["cal_rows"]
     total_shots_declared = man["shots"]
     assert jobs[0]["role"].startswith("calibration"), "lead job is not the calibration block"
+    print(f"  manifest {a.manifest}\n  n={n} cal_rows={cal_rows_declared} "
+          f"science_shots={total_shots_declared} jobs={len(jobs)} token_env={a.token_env}")
 
     from qiskit_ibm_runtime import QiskitRuntimeService
-    svc = QiskitRuntimeService(channel="ibm_quantum_platform", token=alt3_token())
+    svc = QiskitRuntimeService(channel="ibm_quantum_platform",
+                               token=read_token(a.env_file, a.token_env))
 
     cal, science = [], []
     for i, j in enumerate(jobs):
@@ -56,8 +83,8 @@ def main():
     if len(science) != total_shots_declared:
         sys.exit(f"REFUSE: science rows {len(science)} != declared shots {total_shots_declared}")
 
-    sci_path = f"{REPO}/results/doorb_refly_raw_science_n16_elder.json"
-    cal_path = f"{REPO}/results/doorb_refly_raw_cal_n16_elder.json"
+    sci_path = f"{REPO}/results/doorb_raw_science_{a.tag}.json"
+    cal_path = f"{REPO}/results/doorb_raw_cal_{a.tag}.json"
     json.dump({"n": n, "shots": science}, open(sci_path, "w"))
     json.dump({"n": n, "shots": cal}, open(cal_path, "w"))
     h = hashlib.sha256(json.dumps({"n": n, "shots": science}, sort_keys=True).encode()).hexdigest()
