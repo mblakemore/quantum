@@ -337,7 +337,25 @@ def main():
     ap.add_argument("--fly", action="store_true")
     ap.add_argument("--weather-only", action="store_true",
                     help="run the calibration gate alone; needs NO seal, spends no science")
+    # --account: THE SELECTION MECHANISM THE ACCOUNTS COMMENT PROMISED AND I DID NOT BUILD (C4353).
+    # I added the OPEN9 entry and wrote "requires an EXPLICIT --account OPEN9" describing a flag
+    # that did not exist. Whisper caught it PRE-SUBMIT by running the account-safety gate I told him
+    # to run: `--account OPEN9` was a parse error, and a bare run silently bound ALT4 — the
+    # EXHAUSTED tank — because ACCOUNT_CRN/PAID_CRN bind at IMPORT from DEFAULT_ACCOUNT.
+    # A dict entry reachable by nothing, with a comment asserting it was reachable.
+    ap.add_argument("--account", choices=sorted(ACCOUNTS), default=DEFAULT_ACCOUNT,
+                    help="which ACCOUNTS entry to fly on; compare its CRN against the registry, "
+                         "not against its name (see the C4273 note above ACCOUNTS)")
     a = ap.parse_args()
+
+    # REBIND BOTH, not one. ACCOUNT_ENV selects which token is read out of .env (line ~320) and
+    # PAID_CRN selects which INSTANCE the sampler targets (line ~403). Rebinding only the instance
+    # would authenticate with one account's token while addressing another's instance — a failure
+    # that is harder to reason about than either half alone.
+    global ACCOUNT_CRN, ACCOUNT_ENV, PAID_CRN
+    ACCOUNT_CRN, ACCOUNT_ENV = ACCOUNTS[a.account]
+    PAID_CRN = ACCOUNT_CRN
+    print(f"ACCOUNT: {a.account}  env={ACCOUNT_ENV}  instance=…{ACCOUNT_CRN[-40:]}")
 
     print(f"DOOR (b) FLIGHT — n={a.n}, eps={a.eps}, delta={a.delta}")
 
