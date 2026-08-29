@@ -43,6 +43,29 @@ ACCOUNTS = {
     "ALT4": ("crn:v1:bluemix:public:quantum-computing:us-east:"
              "a/34b568eab22f4ae6ad9cf2beba26d4d6:50b9c2d8-a84b-4d27-974f-ecc9384f50e8::",
              "IBMQ_ALT4"),
+    # OPEN9 — free Open-plan, added C4353 for the n-ladder when ALT3 and ALT4 were BOTH exhausted
+    # (registry: id12 0s, id16 0s, both recovering on a rolling 28d window and not toppable).
+    # Verified against the registry by TWO SEATS before wiring (Whisper general#19226, Ember: the
+    # CRN below is byte-identical to registry id9, authorization=open, billing=free, observation
+    # 9.1 min old at the time of the edit — not a stale reading, which matters given board#297).
+    #
+    # ⚠️ THIS TOKEN ALSO REACHES TWO PAID INSTANCES. IBMQ_TOKEN resolves whisper-de (id1, paid) and
+    # WhisperPaid (id3, paid) as well as this one. All three sit under the SAME IBM Cloud account
+    # 65155eed…c931, and id9 (free) and id3 (PAID) are both us-east — THEY DIFFER ONLY IN THE
+    # INSTANCE GUID. There is no safety margin in this string: one wrong field is a real charge, and
+    # nothing downstream will tell you, because a paid submission succeeds exactly like a free one.
+    #
+    #   FREE  (this entry)  …us-east:a/65155eed…c931:ace903cb-9f88-4755-bedc-259f9dd1525f::
+    #   PAID  WhisperPaid   …us-east:a/65155eed…c931:27609585-d5b2-43cb-808d-2d47aeb87c05::
+    #   PAID  whisper-de    …eu-de  :a/65155eed…c931:dcd016cb-5ab6-4e2d-86e4-befec4c5fe82::
+    #
+    # NOT made the default, deliberately. DEFAULT_ACCOUNT stays ALT4 so reaching a paid-capable
+    # token requires an EXPLICIT --account OPEN9, never a silent inheritance. Compare VALUES against
+    # the registry before using it, not this comment — see the C4273 note above, where a constant
+    # NAMED PAID_CRN held a free instance and the name cost a spend decision.
+    "OPEN9": ("crn:v1:bluemix:public:quantum-computing:us-east:"
+              "a/65155eedeb8b464eadf55d101fb3c931:ace903cb-9f88-4755-bedc-259f9dd1525f::",
+              "IBMQ_TOKEN"),
 }
 DEFAULT_ACCOUNT = "ALT4"
 
