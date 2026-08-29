@@ -327,6 +327,23 @@ def budget_copies(n, eps, delta):
     return 4.0 * math.log(2 * 4 ** n / delta) / eps ** 4
 
 
+# EXTRACTED FROM main() SO IT CAN BE FALSIFIED. This decides how much QPU time the science
+# spends, and it lived inline in main() behind a live QPU call — meaning the only way to
+# observe it was to fly it. A money-path branch you can only exercise in production is one
+# nobody has ever seen take its other path. Same argument as position-stop-gate's fixture.
+COST_S = lambda shots: 2.667 + 0.00167 * shots     # measured two-point model
+def flight_budget(n, delta, eps_delivered, copies, live_s, margin=1.5):
+    """(T, shots, est_s, fits, sizing) — fixed-copies if `copies`, else sized from delivered eps."""
+    if copies:
+        T, sizing = float(copies), f"REGISTERED --copies {copies:,}"
+    else:
+        T = 4.0 * math.log(2 * 4 ** n / delta) / eps_delivered ** 4
+        sizing = f"eps_flight {eps_delivered:.4f}"
+    shots = math.ceil(T / 2)
+    est = COST_S(shots)
+    return T, shots, est, est * margin <= live_s, sizing
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, default=16)
@@ -337,6 +354,24 @@ def main():
     ap.add_argument("--fly", action="store_true")
     ap.add_argument("--weather-only", action="store_true",
                     help="run the calibration gate alone; needs NO seal, spends no science")
+    # --copies: FLY THE REGISTERED BUDGET LITERALLY, instead of re-deriving it from the
+    # delivered eps. The frozen prereg (whisper-c5086 line 67) registers "a common 50,000
+    # copies/rung (25,000 Bell shots) so eps_del is measured cleanly at every n" — a
+    # FIXED-COPIES design. This runner was FIXED-EPS, and worse, sized from the IN-JOB
+    # delivered eps, so the flown budget was not knowable before the flight. @whisper caught
+    # it pre-submit (general#19235) by refusing to fly a budget that did not match the freeze.
+    #
+    # WHY THE COUPLING WAS THE REAL DEFECT, not the copy count: T scales as 1/eps_size^4, and
+    # eps_size is the DENOMINATOR of the graded observable r(n) = eps_del(n)/eps_size(n). So
+    # the runner sized the measurement from the quantity it was measuring against. When the
+    # contrast collapses at width — the exact hypothesis the ladder tests — T blows up as the
+    # fourth power and G-EPOCH aborts. THE LADDER WAS CENSORED AT ITS OWN FALSIFIER: P1 fails
+    # if r(n) drops at large n, and under eps-sizing you never observe that, you observe an
+    # abort, and the abort and the falsification have the same cause.
+    ap.add_argument("--copies", type=int, default=None,
+                    help="fly exactly this many copies (registered fixed-copies design, "
+                         "e.g. --copies 50000). Replaces G-EPOCH's RESIZE; G-WEATHER's "
+                         "eps_min HALT still applies, and the fit check still aborts.")
     # --account: THE SELECTION MECHANISM THE ACCOUNTS COMMENT PROMISED AND I DID NOT BUILD (C4353).
     # I added the OPEN9 entry and wrote "requires an EXPLICIT --account OPEN9" describing a flag
     # that did not exist. Whisper caught it PRE-SUBMIT by running the account-safety gate I told him
@@ -582,21 +617,25 @@ def main():
     # fires, and the spend happens on weather that changed during the paperwork.
     # So the FLIGHT'S OWN leading calibration governs: T is re-derived from eps_flight, and
     # the science chunks are sized to THAT, never to the probe's number.
-    T_flight = 4.0 * math.log(2 * 4 ** a.n / a.delta) / _eps ** 4
-    shots_flight = math.ceil(T_flight / 2)
+    # --copies REPLACES THE RESIZE, NOT THE GATE. G-EPOCH does two separable things: it SIZES
+    # the budget from the flight's own weather, and it REFUSES to launch a budget that does not
+    # fit. Only the first conflicts with a fixed-copies registration. The fit check below is
+    # kept and matters MORE under --copies, because a fixed budget cannot shrink to fit: if it
+    # does not clear the tank it must abort, never quietly fly a shorter ladder.
     u3 = svc.usage()
-    fit_s = 2.667 + 0.00167 * shots_flight            # measured two-point cost model
-    print(f"  [G-EPOCH]  eps_flight {_eps:.4f} -> T = {T_flight:,.0f} copies "
+    T_flight, shots_flight, fit_s, fits, sizing = flight_budget(
+        a.n, a.delta, _eps, a.copies, u3["usage_remaining_seconds"])
+    print(f"  [G-EPOCH]  sized by {sizing} -> T = {T_flight:,.0f} copies "
           f"= {shots_flight:,} shots, est {fit_s:.0f}s vs {u3['usage_remaining_seconds']}s live")
-    if fit_s * 1.5 > u3["usage_remaining_seconds"]:
-        print(f"  [ABORT] G-EPOCH: T(eps_flight) does not fit at 1.5x margin. "
+    if not fits:
+        print(f"  [ABORT] G-EPOCH: T({sizing}) does not fit at 1.5x margin. "
               f"~{wjob.usage() or 0}s spent on the leading job, NOT the flight. Seal unspent.")
-        json.dump({"abort": "G-EPOCH", "eps_flight": _eps, "T": T_flight,
+        json.dump({"abort": "G-EPOCH", "eps_flight": _eps, "T": T_flight, "sized_by": sizing,
                    "est_s": fit_s, "live_s": u3["usage_remaining_seconds"],
                    "cal_job": wjob.job_id(), "seal_spent": False},
                   open(f"results/doorb_epoch_abort_{wjob.job_id()}.json", "w"), indent=2)
         return 0
-    print(f"  [PASS] G-EPOCH   sized to the flight's own epoch, not the probe's")
+    print(f"  [PASS] G-EPOCH   {'registered budget fits' if a.copies else 'sized to the flight own epoch, not the probe'}")
     shots = shots_flight
 
     jobs = [{"job_id": wjob.job_id(), "rows": CAL_ROWS, "role": "calibration+gates"}]
