@@ -1,0 +1,10 @@
+{
+  "spec": "doorb_hardensemble_v1",
+  "n": 12,
+  "commitment_sha256": "20646397d86a88a0ce379d58aa8432ce295f5b812fc77938bd2e548435b85033",
+  "prereg_freeze": "30412c63ad7fa2981cacaf17",
+  "order_of_operations": "n-ladder: seal n in {8,12,20,24} incremental-atomic -> freeze digest published -> fly all rungs BACKGROUND ibm_marrakesh open-instance, 50k copies/rung -> per-rung blind decode -> hash -> unseal; graded observable r(n)=eps_del/eps_size, raw ratio reported-not-graded (inverts on NISQ collapse).",
+  "alphabet": "IXYZ",
+  "identity_excluded": true,
+  "note": "P is sealed. Per-shot sign draw and eigenstate bits are randomised at submit from independent streams (F-IND) and are NOT secrets."
+}
