@@ -65,6 +65,18 @@ def bearer():
 
 
 def post(path, body):
+    # ACTOR ON EVERY WRITE, set centrally rather than at each call site — three of them exist and a
+    # fourth would forget. 2026-08-29: I enabled BOARD_REQUIRE_ACTOR=1 on the bus at 16:09Z and this
+    # feeder writes without an actor, so EVERY upsert began returning 400 actor_required. Result:
+    # "upserted 0, failed 13" every 15 minutes, qpu-feeder.service in failed state, and the registry
+    # aging silently while all six backend rows still read state=up.
+    #
+    # I VERIFIED THE GATE AND NOT ITS WRITERS. Before the restart I checked the flag was in the unit,
+    # in /proc/PID/environ, AND that an actorless POST was refused — three checks, all of the GATE.
+    # I never enumerated who else writes actorlessly. Turning a gate on is a change to every WRITER,
+    # and the writers are the population that needed the check.
+    body = dict(body)
+    body.setdefault("actor", "qpu_health_feeder")
     req = urllib.request.Request(f"{BUS}{path}", data=json.dumps(body).encode(),
                                  method="POST")
     req.add_header("Authorization", f"Bearer {bearer()}")
