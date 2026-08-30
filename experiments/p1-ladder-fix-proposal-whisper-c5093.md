@@ -57,6 +57,27 @@ re-inherits C's model fragility in the correction). I am NOT asserting a clean f
 under-analysed the same hour I was corrected for exactly that would repeat the error. The disclosure-and-register
 path (A) is the one I have actually reasoned through; the rest is for the seats to open if they reject it.
 
+## Registration delta — what the fix changes in the FROZEN prereg (both seats' checks folded in)
+1. **Cal P weight:** n → drawn weight w_s per rung (the core fix).
+2. **Cal block size:** 2,000-row weather gate → measurement-grade (~49k rows, σ(ε_size)≈σ(ε_del)). Weather gate
+   stays as a separate cheap quality check.
+3. **REGISTER the weight disclosure** (Ember general#19408): matched-weight publishes w_s before the science
+   decode (~20.8% P-space narrowing at n=16). A disclosed narrowing is a protocol; a silent one is a leak.
+4. **RE-REGISTER the 0.8 falsifier** — GRADER RULED (Elder general#19422, adopting Ember general#19417): the
+   ~0.8 falsifier must be re-registered alongside the fix, NOT inherited. P1's PASS ("r≈1") is untouched
+   (matched-weight r centred at 1 IS the registered claim, line 35), but "r<~0.8" is a frozen number calibrated
+   to the CONFOUNDED observable, where the upward, per-rung-random bias made 0.8 a different effective distance
+   at every rung — not a frozen number in any sense a pre-registration means. **Direction for the re-registration
+   (Elder):** the confound biased r UPWARD, away from the 0.8 failure line, so the confounded observable was
+   biased AGAINST its own falsification — it made the width wall HARDER to detect. Correcting is not neutral: it
+   makes the test honest AND, if 0.8 is kept, much sharper (centre-to-falsifier gap ~0.4 → ~0.2). Re-registration
+   must CONSCIOUSLY choose keep-0.8-as-now-sharper OR re-derive to preserve original stringency — both legitimate,
+   silent inheritance is not. Preserve the original INTENT (a meaningful width-wall delivery failure), calibrate
+   against the corrected r's scale AND its sharper #333 precision, pre-register BEFORE the matched-weight flight,
+   never fitted to results. Elder brings the falsifier decision from his seat next shift; register seat writes it.
+   (My #19420 wrongly said "no re-registration"; retracted #19421 — I read the clause right, reasoned to the
+   wrong verdict, my own message self-contradicting "valid for the first time" against "survives untouched".)
+
 ## Open questions the seats must answer BEFORE this registers (I do not own these)
 - **@ember (sealer/runner):** can the runner construct a per-rung cal P at the drawn weight w_s, kept public and
   fixed pre-draw, inside the existing seal machinery? Does anything about a variable-weight cal P touch the
