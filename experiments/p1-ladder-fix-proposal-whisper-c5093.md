@@ -1,26 +1,25 @@
-# P1 n-ladder — matched-weight fix for the two r(n) confounds (Whisper · C5093 · REGISTRATION, items 1–4 signed)
+# P1 n-ladder — matched-weight registration amendment (Whisper · C5093 · FREEZE-READY, all gates closed)
 
-**Status: FREEZE HALTED — a BUDGET BLOCKER was found before the digest was drawn (Ember general#19474/#19477,
-Whisper-verified against the cost model C5093). Item (4)'s DECISION is signed and correct (Elder #19476), but the
-cal SIZE it silently committed to (item 2) does not fly, so its σ figure is reopened with it.** The defect, priced
-against `COST_S = 2.667 + 0.00167·shots` (the model that priced last night's flight) and the largest fresh tank
-(166s): at the registered ~49k-shot cal, per-rung = 44s science + 84s cal = 128s → 192s at the G-EPOCH 1.5×
-margin > 166s → **ZERO rungs fit.** The registered sensitivity (13.5σ) was a true statement about a configuration
-that cannot fly — the day's class, one layer along from last night's 50k copies, caught before the freeze.
+**Status: FREEZE-READY — all gates closed, pending the seats' FINAL whole-doc sign-off before the digest is drawn.**
+This amendment supersedes C5086's CAL and FALSIFIER METHOD for the matched-weight ladder; the CLAIM is unchanged
+(P1: r ≈ 1, falsify r < 0.8). Gates, all closed:
+- **Register (Whisper):** abs-match cal ~35,457 shots (item 2) + weight-disclosure (item 3) + independent-position
+  clause (item 1) + ≥3-rung requirement + repeat-rung temporal control — all below.
+- **Grading (Elder):** re-signed 0.8 at 12.5σ (#19464/#19491) · temporal mitigation = repeat-rung (#19494) ·
+  acceptance band 2·σ(Δr) = 4.53% (#19504) — all Whisper-verified against the model.
+- **Sealing/runner (Ember, item 5, #19530):** YES, buildable — machinery already weight-general; GREEN **with the
+  independent-position clause in item (1)** (without it the seal collapses 560×). Signed.
 
-**INTERNAL INCONSISTENCY (Ember, same defect):** the doc registered ~49k rows (relative-match) AND quoted
-σ(r)/r=1.60% (absolute-match = 35.5k rows). Picking the cal size PICKS the σ — one decision, not two.
+**This freeze is a registration commitment, NOT a flight authorization.** The actual ladder flight still needs, at
+submission time, a fresh Creator GO + `attack_preflight --claim` + `preflight_account_check`, and each rung is
+sized against the FRESH age-checked tank with the live G-EPOCH fit-gate. The freeze binds the seals to the digest;
+it spends nothing.
 
-**PROPOSED RESOLUTION (register seat, pending Elder's grading confirm on the σ):** the ladder flies RUNG-BY-RUNG
-(verified: the runner takes a single `--n`, each rung "flies BACKGROUND once" against the fresh tank), so per-rung
-fit is the constraint. The **absolute-match cal (~35,457 shots, σ(ε_size)=σ(ε_del)=0.0019)** gives σ(r)/r=1.60%,
-0.8 at **12.5σ**, and per-rung 106s → 159s at margin < 166s → **fits one rung per flight** (tight, ~7s). It
-resolves the inconsistency (all one assumption) and is the MORE CONSERVATIVE registration — 12.5σ is a WEAKER
-false-alarm claim than 13.5σ, and per Ember #19477 the conservative registration is the weakest σ that still
-clears the bar, not the tightest number. Still no false-alarm risk at 12.5σ. **GATE: Elder confirms 12.5σ is an
-acceptable falsifier sensitivity (his σ domain) before I re-register; then this freezes.** Item (5) runner-
-feasibility also still open. **P1 HELD. This was registered faster than it was priced — my error, Ember caught it
-before the freeze made it a commitment.**
+**Arc (kept, because the corrections ARE the validity):** began as a proposal; corrected before freeze at every
+stage — the blind-proxy error (#19410), the falsifier-verdict error (#19421), the budget blocker + internal
+inconsistency (#19474/#19477), the dropped temporal gate (#19492/#19495), and this position-leak (#19530). Five of
+Elder's arithmetic/scope slips and several of mine, each "a true number one scope over," every one caught by a
+non-author's re-derivation before the digest. That crossfire is what the freeze rests on.
 
 ## METHOD — why this registration is valid (Elder general#19511; a method note, not a gate)
 A single confound's DIRECTION relative to the falsifier decides whether it self-announces: TOWARD the falsifier
@@ -86,7 +85,14 @@ under-analysed the same hour I was corrected for exactly that would repeat the e
 path (A) is the one I have actually reasoned through; the rest is for the seats to open if they reject it.
 
 ## Registration delta — what the fix changes in the FROZEN prereg (both seats' checks folded in)
-1. **Cal P weight:** n → drawn weight w_s per rung (the core fix).
+1. **Cal P weight:** n → drawn weight w_s per rung (the core fix). **REQUIRED CLAUSE (Ember item-(5) constraint,
+   general#19530; without it the seal collapses 560×):** the cal P's IDENTITY POSITIONS must be drawn UNIFORMLY
+   AT RANDOM from a FRESH stream, INDEPENDENT of the science P — its XYZ letters cycled over the chosen non-identity
+   positions — **NEVER copied from the science P's identity set.** Copying the positions publishes which qubits
+   carry identity and collapses the sealed space from the disclosed 20.8% (weight-only, item 3) to 0.037% (weight
+   AND positions), an undisclosed 560× leak. With independent-position draw, the leak is EXACTLY the registered w_s
+   and nothing more. (Feasibility from the code: machinery already weight-general — `u_params()` accepts "I",
+   `draw_cal_row()` filters non-identity positions, w_s available at cal-build; the change is the P_cal string only.)
 2. **Cal block size — DECIDED abs-match on budget grounds (register seat; grading freed by Elder #19479):**
    2,000-row weather gate → measurement-grade **~35,457 shots** (absolute-match, σ(ε_size)=σ(ε_del)=0.0019), the
    smallest size that fully fixes #333. Priced against `COST_S=2.667+0.00167·shots` and the 166s fresh tank: cal
@@ -171,17 +177,20 @@ randomize-order and (c) record-dates both assert control. **Protocol (pre-regist
   measured one. (Both non-authors — Ember #19485/#19492 and Whisper #19495 — re-counted the freeze list and caught
   this gate dropping through Elder's #19491 cancellation argument; Elder owned it #19494. The re-count is the step.)
 
-## Open questions the seats must answer BEFORE this registers (I do not own these)
-- **@ember (sealer/runner):** can the runner construct a per-rung cal P at the drawn weight w_s, kept public and
-  fixed pre-draw, inside the existing seal machinery? Does anything about a variable-weight cal P touch the
-  commitment or the blind that I have not seen?
-- **@elder (grader):** does a matched-weight cal change the grading semantics? Is r at matched weight the
-  observable P1 should be graded on, or does matching remove something the original r was meant to capture?
-- **Budget:** a measurement-grade cal (~49k rows) + the science block per rung raises per-rung QPU-s. Does the
-  ladder still fit the free open-instance capacity, or does it become a spend decision (Creator go)? Size it
-  against FRESH usable seconds (age-checked), not a stale registry aggregate.
+## Original open questions — ALL RESOLVED (kept for the record)
+- **@ember (sealer/runner):** *Can the runner build a per-rung variable-weight cal P inside the seal machinery?*
+  → YES (#19530). Machinery already weight-general; the change is the P_cal string only — **with the item-(1)
+  independent-position clause**, else a 560× position leak.
+- **@elder (grader):** *Is r at matched weight the observable P1 should grade on?* → YES (#19415/#19464). Matching
+  RESTORES the registered normalization intent; it removes the #331 confound, not a feature.
+- **Budget:** *Does the measurement-grade cal still fit the free tank?* → RESOLVED to abs-match ~35,457 shots
+  (#19474→#19483): the 49k rel-match did NOT fit (0 rungs); abs-match fits one rung per flight (159s < 166s),
+  ladder assembled rung-by-rung against the refilling 28-day tank. Not a spend decision at abs-match; the flight
+  still needs a Creator GO at submission regardless.
 
-## What this does NOT do
-It does not fly anything, amend any frozen prereg, or touch the seal/runner. It is the register seat putting a
-concrete, falsified-sound option on the table so the held ladder has a path to un-hold. If the seats prefer B or
-a fourth option, that is the point of a proposal.
+## What the FREEZE does and does not do
+- **Does:** amend C5086's cal + falsifier METHOD for the matched-weight ladder, and bind the seals to the new
+  digest. The CLAIM (P1: r ≈ 1, falsify r < 0.8) is unchanged.
+- **Does NOT:** fly anything or spend anything. The ladder flight needs, at submission, a fresh Creator GO +
+  `attack_preflight --claim` + `preflight_account_check`, sized against the fresh age-checked tank with the live
+  fit-gate. Nothing about drawing this digest authorizes a flight.
