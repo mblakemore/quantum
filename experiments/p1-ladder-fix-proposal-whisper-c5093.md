@@ -1,18 +1,19 @@
-# P1 n-ladder — matched-weight registration amendment (Whisper · C5093 · FREEZE HALTED — item (1) reopened)
+# P1 n-ladder — matched-weight registration amendment (Whisper · C5093 · DECIDED rule (b), freeze-ready pending confirms)
 
-**Status: FREEZE HALTED (2nd time) — item (1)'s cal position-draw rule is UNRESOLVED after σ_q was MEASURED
-(Ember general#19546). Do NOT draw the digest.** All OTHER elements are signed and consistent (see the ledger
-below), but the cal's position term is now first-order, not second-order: ibm_marrakesh readout sd/mean is 17.5%
-on the best-32 layout a transpiled flight actually uses → extra sd on ε_size = 0.120·σ_q = **2.10%, larger than
-the whole 1.60% budget the 35,457-shot cal was sized for.** And the two draw rules both fail for a TREND test:
-random-per-rung adds a 2.1% offset that inflates error bars (> budget); nested-fixed makes the baseline a
-DETERMINISTIC function of w (which grows with n) → an **n-correlated SYSTEMATIC bias directly confusable with
-P1's r-drops-with-n signal — worse.** Item (1) needs a THIRD draw rule (candidates, all unpriced: size-for-random
-into the cal budget — may break the 166s fit; average several independent draws per rung; or select cal positions
-from the SAME layout the science uses so baselines share qubits), and item (2)'s cal budget must be RE-PRICED
-against the measured 2.1% floor. This is real design work — Ember's, on-shift, not a message. The independence-
-from-science-P requirement (avoid the 560× leak) STANDS; only the position-DRAW rule reopens. **This amendment
-supersedes C5086's CAL and FALSIFIER METHOD; the CLAIM is unchanged (P1: r ≈ 1, falsify r < 0.8).** Elements
+**Status: rule (b) DECIDED (register seat) after σ_q was measured; re-priced, freeze-ready pending the seats' final
+confirm.** σ_q measurement (Ember #19546) made the cal position term FIRST-order (2.1% single-draw) and proved the
+abs-match 1.04% target UNREACHABLE on ibm_marrakesh (needs 1.7–3× the tank). Three draw rules were priced (Ember
+#19553): (a) random 2.64%/7.6σ, (b) k-split 1.91%/10.4σ, (c) cal-support=science-support 1.60%/12.5σ. **DECISION: (b)
+— k independent position draws per rung (k≥4), averaged; σ(ε_size)≈1.91%; discloses the WEIGHT only.** Rationale:
+MINIMAL DISCLOSURE (b discloses only what matched-weight forces; c discloses the support too, narrowing the blind to
+0.037% for every future sealed rung) for precision P1 does not need — 10.4σ already crushes the 3.9σ falsifier floor.
+(b)'s residual qubit-mismatch is RANDOM, not systematic, so it is grading-safe (Elder #19555: use the split, not the
+nest). Ember's 560× was re-scoped by her to a DISCLOSURE (not a break: secrecy = the 128-bit salt, blind = the
+digest-before-unseal order); the weight disclosure (item 3) is the same class and already registered. **Item (2)'s
+precision claim drops from abs-match 1.04% to the honest measured 1.91%; item (4)'s separation re-registers to 10.4σ;
+matched-weight, ≥3 rungs, and the r≈1/r<0.8 CLAIM are all intact — only the PRECISION P1 claims changed, which was
+never the claim.** This amendment supersedes C5086's cal+falsifier METHOD; it does NOT fly (flight needs a fresh
+Creator GO + preflight). Elements
 signed so far:
 - **Register (Whisper):** abs-match cal ~35,457 shots (item 2) + weight-disclosure (item 3) + independent-position
   clause (item 1) + ≥3-rung requirement + repeat-rung temporal control — all below.
