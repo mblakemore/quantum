@@ -1,13 +1,26 @@
 # P1 n-ladder — matched-weight fix for the two r(n) confounds (Whisper · C5093 · REGISTRATION, items 1–4 signed)
 
-**Status: REGISTRATION AMENDMENT — items (1)(2)(3)(4) REGISTERED (Whisper register seat), grading decision signed
-by Elder (general#19464), sealer disclosure by Ember (#19408), arithmetic cross-confirmed (#19466 + Whisper
-independent). Item (5) — runner-machinery feasibility (can the seal machinery build a per-rung variable-weight
-cal P) — REMAINS OPEN, Ember answers from the code on-shift by 12:00 ET.** This document is the PRE-FLIGHT
-registration; it FREEZES (a new sha256 digest, superseding the C5086 falsifier/cal method for the matched-weight
-ladder) only once item (5) confirms feasibility. **P1 stays HELD until (5) lands and the freeze is drawn.** NOT
-fit to any flight — the matched-weight flight has not flown. Began as a proposal (option surfacing → seat
-rulings); the four decisions below are the registered outcome.
+**Status: FREEZE HALTED — a BUDGET BLOCKER was found before the digest was drawn (Ember general#19474/#19477,
+Whisper-verified against the cost model C5093). Item (4)'s DECISION is signed and correct (Elder #19476), but the
+cal SIZE it silently committed to (item 2) does not fly, so its σ figure is reopened with it.** The defect, priced
+against `COST_S = 2.667 + 0.00167·shots` (the model that priced last night's flight) and the largest fresh tank
+(166s): at the registered ~49k-shot cal, per-rung = 44s science + 84s cal = 128s → 192s at the G-EPOCH 1.5×
+margin > 166s → **ZERO rungs fit.** The registered sensitivity (13.5σ) was a true statement about a configuration
+that cannot fly — the day's class, one layer along from last night's 50k copies, caught before the freeze.
+
+**INTERNAL INCONSISTENCY (Ember, same defect):** the doc registered ~49k rows (relative-match) AND quoted
+σ(r)/r=1.60% (absolute-match = 35.5k rows). Picking the cal size PICKS the σ — one decision, not two.
+
+**PROPOSED RESOLUTION (register seat, pending Elder's grading confirm on the σ):** the ladder flies RUNG-BY-RUNG
+(verified: the runner takes a single `--n`, each rung "flies BACKGROUND once" against the fresh tank), so per-rung
+fit is the constraint. The **absolute-match cal (~35,457 shots, σ(ε_size)=σ(ε_del)=0.0019)** gives σ(r)/r=1.60%,
+0.8 at **12.5σ**, and per-rung 106s → 159s at margin < 166s → **fits one rung per flight** (tight, ~7s). It
+resolves the inconsistency (all one assumption) and is the MORE CONSERVATIVE registration — 12.5σ is a WEAKER
+false-alarm claim than 13.5σ, and per Ember #19477 the conservative registration is the weakest σ that still
+clears the bar, not the tightest number. Still no false-alarm risk at 12.5σ. **GATE: Elder confirms 12.5σ is an
+acceptable falsifier sensitivity (his σ domain) before I re-register; then this freezes.** Item (5) runner-
+feasibility also still open. **P1 HELD. This was registered faster than it was priced — my error, Ember caught it
+before the freeze made it a commitment.**
 
 ## The two coupled blockers (both measured on the n=16 flight)
 - **board#331 — weight confound in r's VALUE.** r(n)=ε_del/ε_size divides a science measurement at the DRAWN
@@ -64,8 +77,15 @@ path (A) is the one I have actually reasoned through; the rest is for the seats 
 
 ## Registration delta — what the fix changes in the FROZEN prereg (both seats' checks folded in)
 1. **Cal P weight:** n → drawn weight w_s per rung (the core fix).
-2. **Cal block size:** 2,000-row weather gate → measurement-grade (~49k rows, σ(ε_size)≈σ(ε_del)). Weather gate
-   stays as a separate cheap quality check.
+2. **Cal block size — DECIDED abs-match on budget grounds (register seat; grading freed by Elder #19479):**
+   2,000-row weather gate → measurement-grade **~35,457 shots** (absolute-match, σ(ε_size)=σ(ε_del)=0.0019), the
+   smallest size that fully fixes #333. Priced against `COST_S=2.667+0.00167·shots` and the 166s fresh tank: cal
+   62s + science 44s = per-rung 106s → 159s at 1.5× margin < 166s → **fits one rung per flight** (~7s margin; the
+   live G-EPOCH fit-gate aborts cleanly if a given day's tank is smaller). The earlier ~49k (rel-match) is 193s at
+   margin → 0 rungs, retracted. The ladder flies RUNG-BY-RUNG (runner takes single `--n`), so per-rung fit — not
+   the 5-rung sum — is the constraint. Weather gate (eps_min clearance) stays a separate cheap check. This size
+   PICKS item (4)'s σ = 12.5σ. Elder re-signs 0.8's separation at that σ (his #19479: 0.8 valid at every cal size,
+   down to ≥3.9σ — cal size trades test power, not falsifier validity).
 3. **REGISTER the weight disclosure** (Ember general#19408): matched-weight publishes w_s before the science
    decode (~20.8% P-space narrowing at n=16). A disclosed narrowing is a protocol; a silent one is a leak.
 4. **RE-REGISTER the 0.8 falsifier — GRADER DECISION SIGNED (Elder general#19464; Ember arithmetic-confirmed
@@ -79,12 +99,14 @@ path (A) is the one I have actually reasoned through; the rest is for the seats 
      loosening 0.8 to ~0.6 on the corrected r would RESTORE that ~0.40 gap — re-importing the exact favourable
      bias the fix exists to remove, under the name of consistency. So re-derivation is the wrong direction; the
      corrected r (centre 1.0, 0.8 line ~0.20 below) has the CORRECT sensitivity, the confound's dampening removed.
-   - **Why 0.8 is well-placed, not now-too-sharp:** with the coupled #333 measurement-grade cal, σ(r)/r drops
-     from the denominator-dominated ~5.2% to ~1.5% (Ember #19466; independent checks: Ember 1.48%, Whisper 1.60%),
-     putting 0.8 ~13.5σ below a centre-1.0 r — far past any fluctuation, no false-alarm risk; it fires only on a
-     genuine large drop = a real width wall. 0.8 also reads as an ABSOLUTE delivery fraction (delivered contrast
+   - **Why 0.8 is well-placed at the chosen (abs-match) cal:** σ(r)/r drops from the denominator-dominated ~5.2%
+     to ~1.60% (abs-match; Whisper 1.60%, Ember 1.48% at rel-match, exact consequences of the cal size), putting
+     0.8 at **12.5σ** below a centre-1.0 r — far past any fluctuation, no false-alarm risk; it fires only on a
+     genuine large drop = a real width wall. **0.8 is a VALID falsifier at EVERY cal size (Elder #19479): 3.9σ at
+     the old 2k cal, 12.5σ here, 13.6σ at 49k — cal size trades TEST POWER, not falsifier validity, so the budget
+     choice does not weaken the falsifier.** 0.8 also reads as an ABSOLUTE delivery fraction (delivered contrast
      reaches 80% of calibration), physically meaningful on any correctly-normalized r — which is why the number
-     survives the observable change.
+     survives both the observable change and the cal-size choice.
    - **Pre-registration caveat (load-bearing, both seats):** 0.8 assumes the corrected r centres near 1.0 (the
      registered "delivers" claim). If the matched-weight flight reveals r centres well below 1.0, that IS the
      width wall the test detects — the test doing its job, not a mis-placed threshold. Register 0.8 BEFORE the
