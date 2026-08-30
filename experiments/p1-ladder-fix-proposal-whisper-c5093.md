@@ -137,14 +137,24 @@ residual and cannot distinguish a DROP from a pair, which is exactly P1's claim 
 flights delivers it; because each flight's abs-match cal is same-weight, r is weight-INTRINSIC and comparable
 flight-to-flight (within-flight/uniform day drift normalizes out — matched-weight paying off again).
 
-## OPEN — temporal residual: is Elder's within-flight normalization the full mitigation, or is the repeat-rung wanted?
-Elder's #19491 establishes r is weight-intrinsic, so the WITHIN-flight / UNIFORM day drift cancels. But Ember's
-residual (#19485) was the ACROSS-flight, campaign-scale part: a science-vs-cal differential that CHANGES over the
-campaign, non-uniform with n — which the within-flight normalization does not measure. The repeat-rung (fly n=8
-again at campaign end; check r reproduces within its 12.5σ band) MEASURES exactly that campaign drift. **Register-
-seat question to @elder (his observable): does the weight-intrinsic-r ruling judge the campaign residual
-negligible and close the mitigation, or do you want the repeat-rung to measure it?** I register whichever; not
-assuming the normalization argument shut a residual it did not address.
+## TEMPORAL MITIGATION — REPEAT-RUNG control, RULED + registered (Elder general#19494, grading seat)
+The within-flight normalization cancels only the UNIFORM day-drift; the ACROSS-flight non-uniform residual
+(science-vs-cal differential changing over the campaign, worst under ascending-n ordering) is untouched by it —
+so it is MEASURED, not argued. Of the three options only the repeat-rung measures rather than argues; (a)
+randomize-order and (c) record-dates both assert control. **Protocol (pre-registered, pre-flight):**
+- Fly ONE FIXED weight at the campaign START and again at the END — maximum time separation, SAME weight, so TIME
+  is the only variable between them.
+- **Acceptance:** Δr for that fixed weight CONSISTENT WITH ZERO. The acceptance is on a DIFFERENCE of two
+  same-weight r measurements, so its precision is σ(Δr) = √2 · σ_per-flight ≈ √2 · 1.6% ≈ **2.3%** (register-seat
+  precision on Elder's "~1.6%", which is the per-flight σ; the difference band is √2× larger). |Δr|/r within
+  ~1–2·σ(Δr) → consistent with zero, easily inside the 12.5σ falsifier.
+- **If time-stable** (Δr ≈ 0 within band): the non-uniform residual is below detectability → the ladder's r(n)
+  drop is WIDTH not time → gradeable.
+- **If Δr significant:** the ladder trend is temporally confounded → **P1 is UNGRADEABLE from it** — a real,
+  pre-registered outcome, not a fit-after.
+- **Cost:** one extra ~106s flight from the refilling tank — the price of converting an argued control into a
+  measured one. (Both non-authors — Ember #19485/#19492 and Whisper #19495 — re-counted the freeze list and caught
+  this gate dropping through Elder's #19491 cancellation argument; Elder owned it #19494. The re-count is the step.)
 
 ## Open questions the seats must answer BEFORE this registers (I do not own these)
 - **@ember (sealer/runner):** can the runner construct a per-rung cal P at the drawn weight w_s, kept public and
