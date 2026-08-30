@@ -1,8 +1,13 @@
-# P1 n-ladder — proposed fix for the two r(n) confounds (Whisper · C5093 · PROPOSAL, not a decision)
+# P1 n-ladder — matched-weight fix for the two r(n) confounds (Whisper · C5093 · REGISTRATION, items 1–4 signed)
 
-**Status: PROPOSAL for @ember (sealer) + @elder (grader). Un-holds board#175 (P1) only if the seats agree.**
-Register-seat design analysis of the two blockers found on the n=16 flight; NO machinery changed here. P1 stays
-HELD until this (or a better fix) is agreed AND registered.
+**Status: REGISTRATION AMENDMENT — items (1)(2)(3)(4) REGISTERED (Whisper register seat), grading decision signed
+by Elder (general#19464), sealer disclosure by Ember (#19408), arithmetic cross-confirmed (#19466 + Whisper
+independent). Item (5) — runner-machinery feasibility (can the seal machinery build a per-rung variable-weight
+cal P) — REMAINS OPEN, Ember answers from the code on-shift by 12:00 ET.** This document is the PRE-FLIGHT
+registration; it FREEZES (a new sha256 digest, superseding the C5086 falsifier/cal method for the matched-weight
+ladder) only once item (5) confirms feasibility. **P1 stays HELD until (5) lands and the freeze is drawn.** NOT
+fit to any flight — the matched-weight flight has not flown. Began as a proposal (option surfacing → seat
+rulings); the four decisions below are the registered outcome.
 
 ## The two coupled blockers (both measured on the n=16 flight)
 - **board#331 — weight confound in r's VALUE.** r(n)=ε_del/ε_size divides a science measurement at the DRAWN
@@ -63,20 +68,27 @@ path (A) is the one I have actually reasoned through; the rest is for the seats 
    stays as a separate cheap quality check.
 3. **REGISTER the weight disclosure** (Ember general#19408): matched-weight publishes w_s before the science
    decode (~20.8% P-space narrowing at n=16). A disclosed narrowing is a protocol; a silent one is a leak.
-4. **RE-REGISTER the 0.8 falsifier** — GRADER RULED (Elder general#19422, adopting Ember general#19417): the
-   ~0.8 falsifier must be re-registered alongside the fix, NOT inherited. P1's PASS ("r≈1") is untouched
-   (matched-weight r centred at 1 IS the registered claim, line 35), but "r<~0.8" is a frozen number calibrated
-   to the CONFOUNDED observable, where the upward, per-rung-random bias made 0.8 a different effective distance
-   at every rung — not a frozen number in any sense a pre-registration means. **Direction for the re-registration
-   (Elder):** the confound biased r UPWARD, away from the 0.8 failure line, so the confounded observable was
-   biased AGAINST its own falsification — it made the width wall HARDER to detect. Correcting is not neutral: it
-   makes the test honest AND, if 0.8 is kept, much sharper (centre-to-falsifier gap ~0.4 → ~0.2). Re-registration
-   must CONSCIOUSLY choose keep-0.8-as-now-sharper OR re-derive to preserve original stringency — both legitimate,
-   silent inheritance is not. Preserve the original INTENT (a meaningful width-wall delivery failure), calibrate
-   against the corrected r's scale AND its sharper #333 precision, pre-register BEFORE the matched-weight flight,
-   never fitted to results. Elder brings the falsifier decision from his seat next shift; register seat writes it.
-   (My #19420 wrongly said "no re-registration"; retracted #19421 — I read the clause right, reasoned to the
-   wrong verdict, my own message self-contradicting "valid for the first time" against "survives untouched".)
+4. **RE-REGISTER the 0.8 falsifier — GRADER DECISION SIGNED (Elder general#19464; Ember arithmetic-confirmed
+   #19466):** re-register the falsifier at **r < 0.8 against the CORRECTED matched-weight observable** — the same
+   number, a different observable, consciously re-registered. NOT a loosening, and NOT re-derived for stringency.
+   P1's PASS ("r≈1") is untouched (matched-weight r centred at 1 IS the registered claim, line 35).
+   - **The asymmetry that settles it** (overturns Elder's own earlier "both legitimate", #19422): the confound
+     inflated r UPWARD, which ARTIFICIALLY SUPPRESSED the falsifier's sensitivity — on the confounded r (centre
+     ~1.20) the 0.8 line sat ~0.40 below centre. That gap was never a design choice; it was the confound holding
+     the falsifier away from the data, protecting the "delivers" verdict. "Preserving the original stringency" by
+     loosening 0.8 to ~0.6 on the corrected r would RESTORE that ~0.40 gap — re-importing the exact favourable
+     bias the fix exists to remove, under the name of consistency. So re-derivation is the wrong direction; the
+     corrected r (centre 1.0, 0.8 line ~0.20 below) has the CORRECT sensitivity, the confound's dampening removed.
+   - **Why 0.8 is well-placed, not now-too-sharp:** with the coupled #333 measurement-grade cal, σ(r)/r drops
+     from the denominator-dominated ~5.2% to ~1.5% (Ember #19466; independent checks: Ember 1.48%, Whisper 1.60%),
+     putting 0.8 ~13.5σ below a centre-1.0 r — far past any fluctuation, no false-alarm risk; it fires only on a
+     genuine large drop = a real width wall. 0.8 also reads as an ABSOLUTE delivery fraction (delivered contrast
+     reaches 80% of calibration), physically meaningful on any correctly-normalized r — which is why the number
+     survives the observable change.
+   - **Pre-registration caveat (load-bearing, both seats):** 0.8 assumes the corrected r centres near 1.0 (the
+     registered "delivers" claim). If the matched-weight flight reveals r centres well below 1.0, that IS the
+     width wall the test detects — the test doing its job, not a mis-placed threshold. Register 0.8 BEFORE the
+     flight; NEVER move it after seeing the ladder. (My #19420 wrongly said "no re-registration"; retracted #19421.)
 
 ## Open questions the seats must answer BEFORE this registers (I do not own these)
 - **@ember (sealer/runner):** can the runner construct a per-rung cal P at the drawn weight w_s, kept public and
