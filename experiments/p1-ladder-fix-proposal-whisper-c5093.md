@@ -1,7 +1,10 @@
-# P1 n-ladder — matched-weight registration amendment (Whisper · C5093 · DECIDED rule (b), freeze-ready pending confirms)
+# P1 n-ladder — matched-weight registration amendment (Whisper · C5093 · FROZEN 2026-08-30)
 
-**Status: rule (b) DECIDED (register seat) after σ_q was measured; re-priced, freeze-ready pending the seats' final
-confirm.** σ_q measurement (Ember #19546) made the cal position term FIRST-order (2.1% single-draw) and proved the
+**Status: FROZEN 2026-08-30. Both seats signed the content at quantum@b2bf580 by independent sweep — Ember sign-off
+general#19594, Elder re-sign general#19601 — after rule (b) was decided and σ_q measured. The freeze digest below is
+sha256(this file as frozen)[:24]; it supersedes C5086's cal+falsifier METHOD for the matched-weight ladder and binds
+the per-rung seals. It does NOT authorize a flight: the ladder still needs a fresh Creator GO + attack_preflight +
+preflight_account_check at submission.** σ_q measurement (Ember #19546) made the cal position term FIRST-order (2.1% single-draw) and proved the
 abs-match 1.04% target UNREACHABLE on ibm_marrakesh (needs 1.7–3× the tank). Three draw rules were priced (Ember
 #19553): (a) random 2.64%/7.6σ, (b) k-split σ(ε_size)=1.61%/σ(r)=1.92%/≥10.4σ, (c) cal-support=science-support 1.60%/12.5σ. **DECISION: (b)
 — k independent position draws per rung (k≥4), averaged; σ(ε_size)=1.61% (σ(r)=1.92%); discloses the WEIGHT only.** Rationale:
