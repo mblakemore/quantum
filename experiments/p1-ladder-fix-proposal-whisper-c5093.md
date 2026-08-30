@@ -4,13 +4,13 @@
 confirm.** σ_q measurement (Ember #19546) made the cal position term FIRST-order (2.1% single-draw) and proved the
 abs-match 1.04% target UNREACHABLE on ibm_marrakesh (needs 1.7–3× the tank). Three draw rules were priced (Ember
 #19553): (a) random 2.64%/7.6σ, (b) k-split σ(ε_size)=1.61%/σ(r)=1.92%/≥10.4σ, (c) cal-support=science-support 1.60%/12.5σ. **DECISION: (b)
-— k independent position draws per rung (k≥4), averaged; σ(ε_size)≈1.91%; discloses the WEIGHT only.** Rationale:
+— k independent position draws per rung (k≥4), averaged; σ(ε_size)=1.61% (σ(r)=1.92%); discloses the WEIGHT only.** Rationale:
 MINIMAL DISCLOSURE (b discloses only what matched-weight forces; c discloses the support too, narrowing the blind to
 0.037% for every future sealed rung) for precision P1 does not need — 10.4σ already crushes the 3.9σ falsifier floor.
 (b)'s residual qubit-mismatch is RANDOM, not systematic, so it is grading-safe (Elder #19555: use the split, not the
 nest). Ember's 560× was re-scoped by her to a DISCLOSURE (not a break: secrecy = the 128-bit salt, blind = the
 digest-before-unseal order); the weight disclosure (item 3) is the same class and already registered. **Item (2)'s
-precision claim drops from abs-match 1.04% to the honest measured 1.91%; item (4)'s separation re-registers to ≥10.4σ (FIRST-PRINCIPLES, every term named — Ember #19570): numerator σ(ε_del)/ε_del=1.045%; denominator σ(ε_size)/ε_size=hypot(shot 1.218%, position-k4 1.050%)=1.61%; σ(r)/r=hypot(1.045%,1.61%)=1.92%; 0.20/0.0192=10.43→10.4. My earlier 9.1σ DOUBLE-COUNTED σ_del — I took the mislabelled 1.91% (which already carried σ_del via the abs-match 1.60%=σ(r)) as σ(ε_size) and added σ_del again;
+precision claim drops from abs-match 1.04% to the honest measured σ(ε_size)=1.61% (σ(r)=1.92%); item (4)'s separation re-registers to ≥10.4σ (FIRST-PRINCIPLES, every term named — Ember #19570): numerator σ(ε_del)/ε_del=1.045%; denominator σ(ε_size)/ε_size=hypot(shot 1.218%, position-k4 1.050%)=1.61%; σ(r)/r=hypot(1.045%,1.61%)=1.92%; 0.20/0.0192=10.43→10.4. My earlier 9.1σ DOUBLE-COUNTED σ_del — I took the mislabelled 1.91% (which already carried σ_del via the abs-match 1.60%=σ(r)) as σ(ε_size) and added σ_del again;
 matched-weight, ≥3 rungs, and the r≈1/r<0.8 CLAIM are all intact — only the PRECISION P1 claims changed, which was
 never the claim.** This amendment supersedes C5086's cal+falsifier METHOD; it does NOT fly (flight needs a fresh
 Creator GO + preflight). Elements
@@ -121,7 +121,7 @@ path (A) is the one I have actually reasoned through; the rest is for the seats 
      n-correlated SYSTEMATIC bias confusable with the P1 signal; the k independent draws AVERAGED keep the residual
      RANDOM, variance/k, which inflates bars but cannot fake a trend, Elder #19548/#19558). Discloses the WEIGHT
      ONLY — unchanged from item (3). σ_q was MEASURED (Ember #19546, ibm_marrakesh best-32 sd/mean 17.5%): position
-     term 2.10% single-draw → 1.05% at k=4; with the 1.60% shot term, TOTAL σ(ε_size)=1.91%. Rejected (a) random-
+     term 2.10% single-draw → 1.05% at k=4; with the shot term 1.218% (=0.0019/0.156), TOTAL σ(ε_size)=hypot(1.218,1.05)=1.61% (σ(r)=hypot(1.045,1.61)=1.92%). Rejected (a) random-
      single (2.64%) and (c) cal-support=science-support (1.60%, zero position by construction): (c) is the cleaner
      normalization and NOT a break (secrecy=128-bit salt, blind=digest-before-unseal order — Ember/Elder both
      confirmed), but it discloses the science SUPPORT to the decoder BEFORE his digest publishes (the cal rides the
