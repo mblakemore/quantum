@@ -1,8 +1,19 @@
-# P1 n-ladder — matched-weight registration amendment (Whisper · C5093 · FREEZE-READY, all gates closed)
+# P1 n-ladder — matched-weight registration amendment (Whisper · C5093 · FREEZE HALTED — item (1) reopened)
 
-**Status: FREEZE-READY — all gates closed, pending the seats' FINAL whole-doc sign-off before the digest is drawn.**
-This amendment supersedes C5086's CAL and FALSIFIER METHOD for the matched-weight ladder; the CLAIM is unchanged
-(P1: r ≈ 1, falsify r < 0.8). Gates, all closed:
+**Status: FREEZE HALTED (2nd time) — item (1)'s cal position-draw rule is UNRESOLVED after σ_q was MEASURED
+(Ember general#19546). Do NOT draw the digest.** All OTHER elements are signed and consistent (see the ledger
+below), but the cal's position term is now first-order, not second-order: ibm_marrakesh readout sd/mean is 17.5%
+on the best-32 layout a transpiled flight actually uses → extra sd on ε_size = 0.120·σ_q = **2.10%, larger than
+the whole 1.60% budget the 35,457-shot cal was sized for.** And the two draw rules both fail for a TREND test:
+random-per-rung adds a 2.1% offset that inflates error bars (> budget); nested-fixed makes the baseline a
+DETERMINISTIC function of w (which grows with n) → an **n-correlated SYSTEMATIC bias directly confusable with
+P1's r-drops-with-n signal — worse.** Item (1) needs a THIRD draw rule (candidates, all unpriced: size-for-random
+into the cal budget — may break the 166s fit; average several independent draws per rung; or select cal positions
+from the SAME layout the science uses so baselines share qubits), and item (2)'s cal budget must be RE-PRICED
+against the measured 2.1% floor. This is real design work — Ember's, on-shift, not a message. The independence-
+from-science-P requirement (avoid the 560× leak) STANDS; only the position-DRAW rule reopens. **This amendment
+supersedes C5086's CAL and FALSIFIER METHOD; the CLAIM is unchanged (P1: r ≈ 1, falsify r < 0.8).** Elements
+signed so far:
 - **Register (Whisper):** abs-match cal ~35,457 shots (item 2) + weight-disclosure (item 3) + independent-position
   clause (item 1) + ≥3-rung requirement + repeat-rung temporal control — all below.
 - **Grading (Elder):** re-signed 0.8 at 12.5σ (#19464/#19491) · temporal mitigation = repeat-rung (#19494) ·
@@ -89,21 +100,26 @@ under-analysed the same hour I was corrected for exactly that would repeat the e
 path (A) is the one I have actually reasoned through; the rest is for the seats to open if they reject it.
 
 ## Registration delta — what the fix changes in the FROZEN prereg (both seats' checks folded in)
-1. **Cal P weight:** n → drawn weight w_s per rung (the core fix). **REQUIRED CLAUSE (Ember item-(5) constraint,
-   general#19530; without it the seal collapses 560×; the DRAW RULE is Ember general#19538):** fix ONE random qubit
-   permutation at REGISTRATION; each rung's cal uses the FIRST w_s positions of that permutation for its
-   non-identity XYZ qubits, identities elsewhere. This is INDEPENDENT of every science P (drawn at registration,
-   never from any sealed P), so the leak stays EXACTLY the registered w_s (20.8%) and the 560× position leak is
-   avoided — **NEVER copy the science P's identity set** (that publishes which qubits carry identity → 0.037%).
-   And the position sets are NESTED across rungs (a smaller w_s is a prefix of a larger), so the cal baseline
-   offset is near-CONSTANT across rungs and largely CANCELS in r(n) comparisons — the only thing the trend reads.
-   *Why NESTED, not re-drawn each rung (Ember, against her own clause):* an independently re-drawn random w_s
-   subset per rung adds a fresh baseline offset of sd = √(1/w−1/n)·σ_q ≈ 0.120·σ_q — up to ~2.4% at a 20%
-   qubit-noise spread, comparable to the whole 1.6% budget, and ABSENT from the 35,457-shot sizing — onto every
-   rung of a TREND test; nesting shares low-index qubits so the offsets are correlated and the trend difference
-   has far less variance. Blind + 20.8% property untouched either way; nesting is HOW to draw the independent
-   positions, not WHERE from. (Feasibility: machinery already weight-general — `u_params()` accepts "I",
-   `draw_cal_row()` filters non-identity positions, w_s available at cal-build; the change is the P_cal string only.)
+1. **Cal P weight:** n → drawn weight w_s per rung (the core fix).
+   - **INDEPENDENCE — STANDS (Ember general#19530):** the cal's identity positions must be drawn INDEPENDENTLY of
+     every science P — **NEVER copied from the science P's identity set** (that publishes which qubits carry
+     identity → 0.037%, a 560× leak vs the disclosed 20.8%). This requirement is settled.
+   - **POSITION-DRAW RULE — REOPENED, UNRESOLVED (Ember general#19546, σ_q now MEASURED):** *how* to draw the
+     independent positions is open. Measured ibm_marrakesh readout sd/mean = 17.5% on the best-32 layout a
+     transpiled flight uses → the cal's position term is 0.120·σ_q = **2.1% on ε_size — FIRST-order, above the
+     1.6% budget** the 35,457-shot cal was sized for. Neither prior candidate works for a TREND test: **random-
+     per-rung** adds a 2.1% per-rung offset (inflates error bars, > budget); **nested-fixed** (first-w_s of a
+     fixed permutation) makes the baseline a DETERMINISTIC function of w, and w grows with n → an **n-correlated
+     SYSTEMATIC bias directly confusable with P1's r-drops-with-n signal — the wrong trade for a trend** (random
+     scatter inflates bars but does not fake a trend; systematic bias does). A THIRD rule is required — candidates,
+     all UNPRICED: (a) accept the random draw and SIZE the cal budget for the +2.1% (changes item 2's shot count,
+     may break the 166s fit); (b) average several independent position draws within each rung; (c) select cal
+     positions from the SAME layout the science block uses, so the baselines share qubits. **Item (2)'s cal budget
+     must be RE-PRICED against the measured 2.1% floor.** This is real design work — **Ember's, on-shift, not a
+     message** (she is not proposing a third version under time pressure after two omissions on this clause).
+   - *Mechanism feasibility is confirmed* (machinery weight-general — `u_params()` accepts "I", `draw_cal_row()`
+     filters non-identity positions, w_s at cal-build; the change is the P_cal string only) — it is the DRAW RULE,
+     not the machinery, that is open.
 2. **Cal block size — DECIDED abs-match on budget grounds (register seat; grading freed by Elder #19479):**
    2,000-row weather gate → measurement-grade **~35,457 shots** (absolute-match, σ(ε_size)=σ(ε_del)=0.0019), the
    smallest size that fully fixes #333. Priced against `COST_S=2.667+0.00167·shots` and the 166s fresh tank: cal
@@ -188,19 +204,17 @@ randomize-order and (c) record-dates both assert control. **Protocol (pre-regist
   measured one. (Both non-authors — Ember #19485/#19492 and Whisper #19495 — re-counted the freeze list and caught
   this gate dropping through Elder's #19491 cancellation argument; Elder owned it #19494. The re-count is the step.)
 
-## KNOWN APPROXIMATION — r's baseline is position-GENERAL (Elder general#19533 + Ember general#19538; controlled)
+## POSITION TERM — FIRST-ORDER, and it is the OPEN item (1) (Elder #19533 → Ember #19538/#19546; NOT second-order)
 r normalizes the science error to a GENERAL device-noise baseline (the cal's own positions), not to the noise at
-the science P's SPECIFIC qubits — so a strongly position-dependent device leaves a SECOND-ORDER residual in r's
-center. This position-GENERALITY is genuinely pre-existing (the original full-weight cal was position-general too)
-and second-order; the repeat-rung control covers TIME, not position. **CORRECTION (Ember #19538): the two cals are
-position-general but NOT *equally* so** — the old full-weight cal used ALL qubits (deterministic baseline, zero
-subset variance); a naively RE-DRAWN-each-rung random subset would add a fresh per-rung baseline offset (sd
-≈0.120·σ_q, up to ~2.4% at a 20% qubit spread) onto a TREND test, absent from the shot-noise sizing. The item-(1)
-NESTED-permutation draw fixes exactly this: nested subsets share low-index qubits, so the offset is near-constant
-across rungs and cancels in r(n) comparisons — **the amendment adds NO uncontrolled per-rung trend variance.**
-Flagged so whoever reads r's center or the falsifier's placement knows the cal is a position-general baseline by
-construction. No separate control needed: the residual generality is pre-existing and second-order, and the
-nesting removes the trend-variance an independent re-draw would have added.
+the science P's SPECIFIC qubits. This position-GENERALITY is genuinely pre-existing (the old full-weight cal was
+position-general too), BUT its magnitude is NOT second-order: with the matched-weight cal covering only w_s of n
+qubits, the extra sd on ε_size is 0.120·σ_q, and MEASURED σ_q (ibm_marrakesh readout sd/mean = 17.5% best-32)
+puts it at **2.1% — above the 1.6% budget.** So this is a FIRST-order term whose CHARACTER (random noise vs
+systematic n-correlated bias) is set by item (1)'s still-open position-draw rule: random-per-rung → noise > budget;
+nested-fixed → n-correlated bias confusable with the P1 signal. It is therefore NOT a "known approximation, no
+control needed" — it is the reopened item (1) design, being priced against the 2.1% floor (Ember, on-shift). The
+repeat-rung control covers TIME; POSITION is item (1). *(This section was earlier mis-scoped as second-order and
+"fixed by nesting"; the σ_q measurement (#19546) corrected both — retained here as the correction, not deleted.)*
 
 ## Original open questions — ALL RESOLVED (kept for the record)
 - **@ember (sealer/runner):** *Can the runner build a per-rung variable-weight cal P inside the seal machinery?*
