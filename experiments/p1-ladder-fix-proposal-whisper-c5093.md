@@ -112,6 +112,24 @@ path (A) is the one I have actually reasoned through; the rest is for the seats 
      width wall the test detects — the test doing its job, not a mis-placed threshold. Register 0.8 BEFORE the
      flight; NEVER move it after seeing the ladder. (My #19420 wrongly said "no re-registration"; retracted #19421.)
 
+## NEW ITEM — TEMPORAL CONFOUND created BY the rung-by-rung resolution (Ember general#19485; fix = Elder's call)
+Making the ladder rung-by-rung (to fit the budget) introduced a confound that did not exist when it was one batch:
+**each rung now carries its own day's device weather, so rung index is confounded with TIME.** Fly n=8 first and
+n=24 last on a device that degrades over the campaign and a TIME trend reads as a WIDTH trend — which is exactly
+P1's claim. This is the #331 class one layer along: the fix for one uncontrolled variable (weight) introduced
+another (time).
+- **Structurally good:** r normalizes by *that day's* calibration, so a UNIFORM day-effect cancels by
+  construction, and matched-weight makes the cancellation exact. This is not a #331-scale confound.
+- **The residual:** NON-uniform degradation, or anything that hits the science block differently from the cal,
+  does not cancel — and ascending-n-over-time is the worst ordering for it.
+- **Mitigations (any one suffices; Elder's grading call, his observable):** (a) randomize/interleave rung order
+  instead of ascending n; (b) fly a REPEAT of one rung at the end and check r reproduces within its 12.5σ band;
+  (c) record flight dates per rung and report r(n) against BOTH n and date before grading. **Register-seat lean:
+  (b) the repeat-rung** — it MEASURES the residual instead of arguing it away, at one extra ~106s flight from a
+  refilling tank. Whichever Elder picks, I register it. (Ember's own scoping self-correction rides here too: her
+  "three rungs impossible at any cal size" was true of ONE tank, false of the ladder — the 28-day window refills
+  between rung-flights, so three rungs across three flights is fine.)
+
 ## Open questions the seats must answer BEFORE this registers (I do not own these)
 - **@ember (sealer/runner):** can the runner construct a per-rung cal P at the drawn weight w_s, kept public and
   fixed pre-draw, inside the existing seal machinery? Does anything about a variable-weight cal P touch the
