@@ -3,14 +3,14 @@
 **Status: rule (b) DECIDED (register seat) after σ_q was measured; re-priced, freeze-ready pending the seats' final
 confirm.** σ_q measurement (Ember #19546) made the cal position term FIRST-order (2.1% single-draw) and proved the
 abs-match 1.04% target UNREACHABLE on ibm_marrakesh (needs 1.7–3× the tank). Three draw rules were priced (Ember
-#19553): (a) random 2.64%/7.6σ, (b) k-split 1.91%/10.4σ, (c) cal-support=science-support 1.60%/12.5σ. **DECISION: (b)
+#19553): (a) random 2.64%/7.6σ, (b) k-split 1.91%/9.1σ, (c) cal-support=science-support 1.60%/12.5σ. **DECISION: (b)
 — k independent position draws per rung (k≥4), averaged; σ(ε_size)≈1.91%; discloses the WEIGHT only.** Rationale:
 MINIMAL DISCLOSURE (b discloses only what matched-weight forces; c discloses the support too, narrowing the blind to
-0.037% for every future sealed rung) for precision P1 does not need — 10.4σ already crushes the 3.9σ falsifier floor.
+0.037% for every future sealed rung) for precision P1 does not need — 9.1σ already crushes the 3.9σ falsifier floor.
 (b)'s residual qubit-mismatch is RANDOM, not systematic, so it is grading-safe (Elder #19555: use the split, not the
 nest). Ember's 560× was re-scoped by her to a DISCLOSURE (not a break: secrecy = the 128-bit salt, blind = the
 digest-before-unseal order); the weight disclosure (item 3) is the same class and already registered. **Item (2)'s
-precision claim drops from abs-match 1.04% to the honest measured 1.91%; item (4)'s separation re-registers to 10.4σ;
+precision claim drops from abs-match 1.04% to the honest measured 1.91%; item (4)'s separation re-registers to 9.1σ (σ(r)/r=2.18% combining σ_del, exact 9.18, conservative round-down — NOT the σ(ε_size)-only 10.4σ both seats quoted, which omits σ_del);
 matched-weight, ≥3 rungs, and the r≈1/r<0.8 CLAIM are all intact — only the PRECISION P1 claims changed, which was
 never the claim.** This amendment supersedes C5086's cal+falsifier METHOD; it does NOT fly (flight needs a fresh
 Creator GO + preflight). Elements
@@ -105,22 +105,21 @@ path (A) is the one I have actually reasoned through; the rest is for the seats 
    - **INDEPENDENCE — STANDS (Ember general#19530):** the cal's identity positions must be drawn INDEPENDENTLY of
      every science P — **NEVER copied from the science P's identity set** (that publishes which qubits carry
      identity → 0.037%, a 560× leak vs the disclosed 20.8%). This requirement is settled.
-   - **POSITION-DRAW RULE — REOPENED, UNRESOLVED (Ember general#19546, σ_q now MEASURED):** *how* to draw the
-     independent positions is open. Measured ibm_marrakesh readout sd/mean = 17.5% on the best-32 layout a
-     transpiled flight uses → the cal's position term is 0.120·σ_q = **2.1% on ε_size — FIRST-order, above the
-     1.6% budget** the 35,457-shot cal was sized for. Neither prior candidate works for a TREND test: **random-
-     per-rung** adds a 2.1% per-rung offset (inflates error bars, > budget); **nested-fixed** (first-w_s of a
-     fixed permutation) makes the baseline a DETERMINISTIC function of w, and w grows with n → an **n-correlated
-     SYSTEMATIC bias directly confusable with P1's r-drops-with-n signal — the wrong trade for a trend** (random
-     scatter inflates bars but does not fake a trend; systematic bias does). A THIRD rule is required — candidates,
-     all UNPRICED: (a) accept the random draw and SIZE the cal budget for the +2.1% (changes item 2's shot count,
-     may break the 166s fit); (b) average several independent position draws within each rung; (c) select cal
-     positions from the SAME layout the science block uses, so the baselines share qubits. **Item (2)'s cal budget
-     must be RE-PRICED against the measured 2.1% floor.** This is real design work — **Ember's, on-shift, not a
-     message** (she is not proposing a third version under time pressure after two omissions on this clause).
-   - *Mechanism feasibility is confirmed* (machinery weight-general — `u_params()` accepts "I", `draw_cal_row()`
-     filters non-identity positions, w_s at cal-build; the change is the P_cal string only) — it is the DRAW RULE,
-     not the machinery, that is open.
+   - **POSITION-DRAW RULE — DECIDED: rule (b), k=4 (register+sealer, general#19556; grading-safe Elder #19558).**
+     Draw k=4 INDEPENDENT position sets per rung, each uniformly at random from a FRESH stream, INDEPENDENT of the
+     science P, RE-DRAWN each rung (NOT nested — nesting makes the offset a deterministic function of w and thus an
+     n-correlated SYSTEMATIC bias confusable with the P1 signal; the k independent draws AVERAGED keep the residual
+     RANDOM, variance/k, which inflates bars but cannot fake a trend, Elder #19548/#19558). Discloses the WEIGHT
+     ONLY — unchanged from item (3). σ_q was MEASURED (Ember #19546, ibm_marrakesh best-32 sd/mean 17.5%): position
+     term 2.10% single-draw → 1.05% at k=4; with the 1.60% shot term, TOTAL σ(ε_size)=1.91%. Rejected (a) random-
+     single (2.64%) and (c) cal-support=science-support (1.60%, zero position by construction): (c) is the cleaner
+     normalization and NOT a break (secrecy=128-bit salt, blind=digest-before-unseal order — Ember/Elder both
+     confirmed), but it discloses the science SUPPORT to the decoder BEFORE his digest publishes (the cal rides the
+     manifest at flight time) — a change in KIND not degree the order-of-ops does not cover — to buy precision the
+     9.1σ falsifier does not need. (c) stays AVAILABLE for a future rung that needs 12.5σ. **MANIFEST CONSEQUENCE (Ember #19559): k=4 changes the
+     manifest `cal_P_public` from a STRING to a per-block cal LIST with row ranges (~30 lines in the runner; the
+     decoder tool is untouched). Registered so a grader reading the manifest for the cal rows finds a list, not a
+     string.**
 2. **Cal block size — DECIDED abs-match on budget grounds (register seat; grading freed by Elder #19479):**
    2,000-row weather gate → measurement-grade **~35,457 shots** (absolute-match, σ(ε_size)=σ(ε_del)=0.0019), the
    smallest size that fully fixes #333. Priced against `COST_S=2.667+0.00167·shots` and the 166s fresh tank: cal
