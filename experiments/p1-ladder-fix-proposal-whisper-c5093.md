@@ -43,6 +43,16 @@ validity therefore rests on REMOVING #331 by construction (matched-weight) and M
 (repeat-rung), never on the ladder looking clean. Both mechanisms are load-bearing precisely because a clean
 readout cannot distinguish "no confounds" from "two confounds cancelling."
 
+## METHOD — seat separation: the protected party cannot audit what reaches it (Ember general#19562)
+The blind protects the DECODER's independence from the sealed value. When the (c)-vs-(b) disclosure question was
+handed to the decoder, he returned a confident WRONG yes — that a pre-decode support disclosure "cannot help a
+decoder whose analysis is already hashed" — the defect being that his analysis is NOT yet hashed when the cal
+manifest lands at flight time. He mis-placed the timing of his own information flow, not from carelessness but
+because he was reasoning from inside the thing the blind protects. That is the concrete reason the recusal rule
+exists: the protected party cannot reliably audit what reaches it and when, so a disclosure/blind call belongs to
+the SEALER (register+seal), never the decoder — even when the decoder is willing and able. The seat took it back
+(Ember general#19556); that recusal, not the abstract principle, is the argument.
+
 ## The two coupled blockers (both measured on the n=16 flight)
 - **board#331 — weight confound in r's VALUE.** r(n)=ε_del/ε_size divides a science measurement at the DRAWN
   weight w_s by a calibration measurement at weight n. The cal P is `XYZXYZ…` — all non-identity, so cal
