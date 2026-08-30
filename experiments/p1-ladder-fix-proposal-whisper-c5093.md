@@ -3,14 +3,14 @@
 **Status: rule (b) DECIDED (register seat) after σ_q was measured; re-priced, freeze-ready pending the seats' final
 confirm.** σ_q measurement (Ember #19546) made the cal position term FIRST-order (2.1% single-draw) and proved the
 abs-match 1.04% target UNREACHABLE on ibm_marrakesh (needs 1.7–3× the tank). Three draw rules were priced (Ember
-#19553): (a) random 2.64%/7.6σ, (b) k-split 1.91%/9.1σ, (c) cal-support=science-support 1.60%/12.5σ. **DECISION: (b)
+#19553): (a) random 2.64%/7.6σ, (b) k-split σ(ε_size)=1.61%/σ(r)=1.92%/≥10.4σ, (c) cal-support=science-support 1.60%/12.5σ. **DECISION: (b)
 — k independent position draws per rung (k≥4), averaged; σ(ε_size)≈1.91%; discloses the WEIGHT only.** Rationale:
 MINIMAL DISCLOSURE (b discloses only what matched-weight forces; c discloses the support too, narrowing the blind to
-0.037% for every future sealed rung) for precision P1 does not need — 9.1σ already crushes the 3.9σ falsifier floor.
+0.037% for every future sealed rung) for precision P1 does not need — 10.4σ already crushes the 3.9σ falsifier floor.
 (b)'s residual qubit-mismatch is RANDOM, not systematic, so it is grading-safe (Elder #19555: use the split, not the
 nest). Ember's 560× was re-scoped by her to a DISCLOSURE (not a break: secrecy = the 128-bit salt, blind = the
 digest-before-unseal order); the weight disclosure (item 3) is the same class and already registered. **Item (2)'s
-precision claim drops from abs-match 1.04% to the honest measured 1.91%; item (4)'s separation re-registers to 9.1σ (σ(r)/r=2.18% combining σ_del, exact 9.18, conservative round-down — NOT the σ(ε_size)-only 10.4σ both seats quoted, which omits σ_del);
+precision claim drops from abs-match 1.04% to the honest measured 1.91%; item (4)'s separation re-registers to ≥10.4σ (FIRST-PRINCIPLES, every term named — Ember #19570): numerator σ(ε_del)/ε_del=1.045%; denominator σ(ε_size)/ε_size=hypot(shot 1.218%, position-k4 1.050%)=1.61%; σ(r)/r=hypot(1.045%,1.61%)=1.92%; 0.20/0.0192=10.43→10.4. My earlier 9.1σ DOUBLE-COUNTED σ_del — I took the mislabelled 1.91% (which already carried σ_del via the abs-match 1.60%=σ(r)) as σ(ε_size) and added σ_del again;
 matched-weight, ≥3 rungs, and the r≈1/r<0.8 CLAIM are all intact — only the PRECISION P1 claims changed, which was
 never the claim.** This amendment supersedes C5086's cal+falsifier METHOD; it does NOT fly (flight needs a fresh
 Creator GO + preflight). Elements
@@ -126,7 +126,7 @@ path (A) is the one I have actually reasoned through; the rest is for the seats 
      normalization and NOT a break (secrecy=128-bit salt, blind=digest-before-unseal order — Ember/Elder both
      confirmed), but it discloses the science SUPPORT to the decoder BEFORE his digest publishes (the cal rides the
      manifest at flight time) — a change in KIND not degree the order-of-ops does not cover — to buy precision the
-     9.1σ falsifier does not need. (c) stays AVAILABLE for a future rung that needs 12.5σ. **MANIFEST CONSEQUENCE (Ember #19559): k=4 changes the
+     10.4σ falsifier does not need. (c) stays AVAILABLE for a future rung that needs 12.5σ. **MANIFEST CONSEQUENCE (Ember #19559): k=4 changes the
      manifest `cal_P_public` from a STRING to a per-block cal LIST with row ranges (~30 lines in the runner; the
      decoder tool is untouched). Registered so a grader reading the manifest for the cal rows finds a list, not a
      string.**
