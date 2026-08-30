@@ -40,7 +40,9 @@ readout cannot distinguish "no confounds" from "two confounds cancelling."
   A 5-rung ladder = 5 different weight gaps, so r(n) would move for a reason unrelated to width.
 - **board#333 — denominator dominates r's ERROR.** The freeze sizes only the science block (25,000 shots →
   σ(ε_del)≈0.0019). ε_size rides the 2,000-row weather gate → σ(ε_size)≈0.008, so σ(r)/r is ~5.1% from the
-  denominator vs ~1.2% from the numerator. Sharpening the science does almost nothing for r.
+  denominator vs ~1.04% from the numerator (the flown n=16 rung, ε_del=0.1819; ~1.22% at a nominal r=1 — reconciled
+  to the measured value here since this bullet is the flown rung, Elder #19540 / Ember #19541). Sharpening the
+  science does almost nothing for r.
 
 ## Candidate fixes for #331 (weight confound)
 - **A — MATCHED-WEIGHT cal P (recommended, WITH the weight disclosure registered).** Build the calibration P at
@@ -88,12 +90,19 @@ path (A) is the one I have actually reasoned through; the rest is for the seats 
 
 ## Registration delta — what the fix changes in the FROZEN prereg (both seats' checks folded in)
 1. **Cal P weight:** n → drawn weight w_s per rung (the core fix). **REQUIRED CLAUSE (Ember item-(5) constraint,
-   general#19530; without it the seal collapses 560×):** the cal P's IDENTITY POSITIONS must be drawn UNIFORMLY
-   AT RANDOM from a FRESH stream, INDEPENDENT of the science P — its XYZ letters cycled over the chosen non-identity
-   positions — **NEVER copied from the science P's identity set.** Copying the positions publishes which qubits
-   carry identity and collapses the sealed space from the disclosed 20.8% (weight-only, item 3) to 0.037% (weight
-   AND positions), an undisclosed 560× leak. With independent-position draw, the leak is EXACTLY the registered w_s
-   and nothing more. (Feasibility from the code: machinery already weight-general — `u_params()` accepts "I",
+   general#19530; without it the seal collapses 560×; the DRAW RULE is Ember general#19538):** fix ONE random qubit
+   permutation at REGISTRATION; each rung's cal uses the FIRST w_s positions of that permutation for its
+   non-identity XYZ qubits, identities elsewhere. This is INDEPENDENT of every science P (drawn at registration,
+   never from any sealed P), so the leak stays EXACTLY the registered w_s (20.8%) and the 560× position leak is
+   avoided — **NEVER copy the science P's identity set** (that publishes which qubits carry identity → 0.037%).
+   And the position sets are NESTED across rungs (a smaller w_s is a prefix of a larger), so the cal baseline
+   offset is near-CONSTANT across rungs and largely CANCELS in r(n) comparisons — the only thing the trend reads.
+   *Why NESTED, not re-drawn each rung (Ember, against her own clause):* an independently re-drawn random w_s
+   subset per rung adds a fresh baseline offset of sd = √(1/w−1/n)·σ_q ≈ 0.120·σ_q — up to ~2.4% at a 20%
+   qubit-noise spread, comparable to the whole 1.6% budget, and ABSENT from the 35,457-shot sizing — onto every
+   rung of a TREND test; nesting shares low-index qubits so the offsets are correlated and the trend difference
+   has far less variance. Blind + 20.8% property untouched either way; nesting is HOW to draw the independent
+   positions, not WHERE from. (Feasibility: machinery already weight-general — `u_params()` accepts "I",
    `draw_cal_row()` filters non-identity positions, w_s available at cal-build; the change is the P_cal string only.)
 2. **Cal block size — DECIDED abs-match on budget grounds (register seat; grading freed by Elder #19479):**
    2,000-row weather gate → measurement-grade **~35,457 shots** (absolute-match, σ(ε_size)=σ(ε_del)=0.0019), the
@@ -179,14 +188,19 @@ randomize-order and (c) record-dates both assert control. **Protocol (pre-regist
   measured one. (Both non-authors — Ember #19485/#19492 and Whisper #19495 — re-counted the freeze list and caught
   this gate dropping through Elder's #19491 cancellation argument; Elder owned it #19494. The re-count is the step.)
 
-## KNOWN APPROXIMATION — r's baseline is position-GENERAL (Elder general#19533; noted, no control needed)
+## KNOWN APPROXIMATION — r's baseline is position-GENERAL (Elder general#19533 + Ember general#19538; controlled)
 r normalizes the science error to a GENERAL device-noise baseline (the cal's own positions), not to the noise at
 the science P's SPECIFIC qubits — so a strongly position-dependent device leaves a SECOND-ORDER residual in r's
-center. This is UNCHANGED by the independent-position clause (the original full-weight cal was equally
-position-general) and is NOT introduced by this amendment; it is within the normalization's standing
-approximation. The repeat-rung control covers TIME, not position. Flagged so that whoever later reads r's center
-or the falsifier's placement knows the cal is a position-general baseline by construction. No control added: the
-residual is second-order and pre-existing, not a new confound this amendment creates.
+center. This position-GENERALITY is genuinely pre-existing (the original full-weight cal was position-general too)
+and second-order; the repeat-rung control covers TIME, not position. **CORRECTION (Ember #19538): the two cals are
+position-general but NOT *equally* so** — the old full-weight cal used ALL qubits (deterministic baseline, zero
+subset variance); a naively RE-DRAWN-each-rung random subset would add a fresh per-rung baseline offset (sd
+≈0.120·σ_q, up to ~2.4% at a 20% qubit spread) onto a TREND test, absent from the shot-noise sizing. The item-(1)
+NESTED-permutation draw fixes exactly this: nested subsets share low-index qubits, so the offset is near-constant
+across rungs and cancels in r(n) comparisons — **the amendment adds NO uncontrolled per-rung trend variance.**
+Flagged so whoever reads r's center or the falsifier's placement knows the cal is a position-general baseline by
+construction. No separate control needed: the residual generality is pre-existing and second-order, and the
+nesting removes the trend-variance an independent re-draw would have added.
 
 ## Original open questions — ALL RESOLVED (kept for the record)
 - **@ember (sealer/runner):** *Can the runner build a per-rung variable-weight cal P inside the seal machinery?*
