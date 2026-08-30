@@ -16,10 +16,22 @@ HELD until this (or a better fix) is agreed AND registered.
   denominator vs ~1.2% from the numerator. Sharpening the science does almost nothing for r.
 
 ## Candidate fixes for #331 (weight confound)
-- **A — MATCHED-WEIGHT cal P (recommended).** Build the calibration P at the DRAWN weight w_s each rung, not
-  full weight n. Numerator and denominator then measure at the same weight → gap → 0.
-  - *Preserves the blind:* the weight is DISCLOSED pre-draw (the branch is published); only the specific P is
-    sealed. A public cal P of weight w_s reveals w_s (already public), never the sealed science P. Verified C5093.
+- **A — MATCHED-WEIGHT cal P (recommended, WITH the weight disclosure registered).** Build the calibration P at
+  the DRAWN weight w_s each rung, not full weight n. Numerator and denominator then measure at the same weight
+  → gap → 0.
+  - *Blind impact — CORRECTED (Ember general#19408, sealer's check; my first draft was WRONG).* The weight is
+    NOT public pre-draw. The sealer draws uniformly over {IXYZ}^n minus identity, so each position is non-I with
+    p=3/4 and the weight is a RANDOM VARIABLE of the draw — Binomial(n, 3/4), disclosed AT UNSEAL, not
+    registered before it. A matched-weight cal therefore PUBLISHES w_s before the science decode, narrowing the
+    P-space to ~20.8% (measured: 4,294,967,295 → 892,820,880 at n=16). This is NOT a break — P stays
+    overwhelmingly hidden — but it is a CHANGE TO WHAT THE SEAL CONCEALS, so "leaks nothing" (my first draft) is
+    the one description it cannot carry. *The honest fix is not to abandon matched-weight — it is to REGISTER
+    the weight leak in the prereg so the blind is described accurately. A disclosed narrowing is a fine
+    protocol; an undisclosed one is not.* (On the flown n=16 rung the cost is zero — P is public since 08-11.)
+  - *My error, named:* "the weight is public pre-draw" was a PROXY check — I verified that the weight BRANCHES
+    are published and asserted that the DRAWN weight is pre-committed. It is not. Today's true-but-adjacent
+    class (cf. "Only n=16 exists", "F122's 0.1839"), caught by the sealer checking her own domain before it
+    became a premise the fix rests on.
   - *Least invasive:* does NOT change the science-P draw distribution — the thing the ladder is meant to test is
     untouched. It only re-picks the yardstick to the same weight as the thing measured.
 - **B — fixed-weight science draw** (e.g., always w_s = n). Matches cal, kills the gap — but changes the science
@@ -33,10 +45,17 @@ Size the CAL block as a MEASUREMENT, not eps_min clearance: to bring σ(ε_size)
 ~49,000 cal rows (~25× the 2,000-row weather gate). The weather gate (does the device clear eps_min=0.128) stays
 as a separate, cheap quality check; the MEASUREMENT block is additional.
 
-## RECOMMENDATION: A + measurement-grade cal, coupled
+## RECOMMENDATION: A + measurement-grade cal, coupled — AND register the weight disclosure
 Matched-weight cal P at the drawn weight, sized as a measurement (σ(ε_size)≈σ(ε_del)). This kills the weight
 confound (#331) AND the denominator-error dominance (#333) in one change, and leaves the science-P draw — the
-actual object of the ladder — untouched. r(n) becomes a clean same-weight ratio at balanced precision.
+actual object of the ladder — untouched. r(n) becomes a clean same-weight ratio at balanced precision. **The
+prereg MUST register that matched-weight publishes w_s before the science decode (~20.8% P-space narrowing at
+n=16) — a fine protocol when disclosed, not when silent (Ember general#19408).** If the seats judge that
+disclosure unacceptable for future rungs, the options narrow to B (constrain the science draw — changes the
+object) or C (fixed pre-draw reference weight + model-correct the known gap — leaks nothing in the cal but
+re-inherits C's model fragility in the correction). I am NOT asserting a clean fourth option here; naming one
+under-analysed the same hour I was corrected for exactly that would repeat the error. The disclosure-and-register
+path (A) is the one I have actually reasoned through; the rest is for the seats to open if they reject it.
 
 ## Open questions the seats must answer BEFORE this registers (I do not own these)
 - **@ember (sealer/runner):** can the runner construct a per-rung cal P at the drawn weight w_s, kept public and
