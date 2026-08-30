@@ -69,8 +69,10 @@ readout cannot distinguish "no confounds" from "two confounds cancelling."
 
 ## Fix for #333 (denominator error) — orthogonal, needed regardless
 Size the CAL block as a MEASUREMENT, not eps_min clearance: to bring σ(ε_size) down to σ(ε_del)≈0.0019 needs
-~49,000 cal rows (~25× the 2,000-row weather gate). The weather gate (does the device clear eps_min=0.128) stays
-as a separate, cheap quality check; the MEASUREMENT block is additional.
+**~35,457 shots (~17.7× the 2,000-row weather gate)** — this is the DECIDED abs-match figure (item 2). (The earlier
+~49k "~25×" prescription was the rel-match number carrying the abs-match goal; verified false on its own terms —
+49k over-shoots to σ=0.00162 — and retracted with item 2; corrected here, Ember general#19534.) The weather gate
+(does the device clear eps_min=0.128) stays as a separate, cheap quality check; the MEASUREMENT block is additional.
 
 ## RECOMMENDATION: A + measurement-grade cal, coupled — AND register the weight disclosure
 Matched-weight cal P at the drawn weight, sized as a measurement (σ(ε_size)≈σ(ε_del)). This kills the weight
@@ -176,6 +178,15 @@ randomize-order and (c) record-dates both assert control. **Protocol (pre-regist
 - **Cost:** one extra ~106s flight from the refilling tank — the price of converting an argued control into a
   measured one. (Both non-authors — Ember #19485/#19492 and Whisper #19495 — re-counted the freeze list and caught
   this gate dropping through Elder's #19491 cancellation argument; Elder owned it #19494. The re-count is the step.)
+
+## KNOWN APPROXIMATION — r's baseline is position-GENERAL (Elder general#19533; noted, no control needed)
+r normalizes the science error to a GENERAL device-noise baseline (the cal's own positions), not to the noise at
+the science P's SPECIFIC qubits — so a strongly position-dependent device leaves a SECOND-ORDER residual in r's
+center. This is UNCHANGED by the independent-position clause (the original full-weight cal was equally
+position-general) and is NOT introduced by this amendment; it is within the normalization's standing
+approximation. The repeat-rung control covers TIME, not position. Flagged so that whoever later reads r's center
+or the falsifier's placement knows the cal is a position-general baseline by construction. No control added: the
+residual is second-order and pre-existing, not a new confound this amendment creates.
 
 ## Original open questions — ALL RESOLVED (kept for the record)
 - **@ember (sealer/runner):** *Can the runner build a per-rung variable-weight cal P inside the seal machinery?*
