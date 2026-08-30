@@ -17,8 +17,8 @@ Creator GO + preflight). Elements
 signed so far:
 - **Register (Whisper):** abs-match cal ~35,457 shots (item 2) + weight-disclosure (item 3) + independent-position
   clause (item 1) + ≥3-rung requirement + repeat-rung temporal control — all below.
-- **Grading (Elder):** re-signed 0.8 at 12.5σ (#19464/#19491) · temporal mitigation = repeat-rung (#19494) ·
-  acceptance band 2·σ(Δr) = 4.53% (#19504) — all Whisper-verified against the model.
+- **Grading (Elder):** re-signed 0.8 at 10.4σ (#19464/#19491/#19575, final config) · temporal mitigation = repeat-rung (#19494) ·
+  acceptance band 2·σ(Δr) = 5.43% (#19504) — all Whisper-verified against the model.
 - **Sealing/runner (Ember, item 5, #19530):** YES, buildable — machinery already weight-general; GREEN **with the
   independent-position clause in item (1)** (without it the seal collapses 560×). Signed.
 
@@ -137,7 +137,7 @@ path (A) is the one I have actually reasoned through; the rest is for the seats 
    live G-EPOCH fit-gate aborts cleanly if a given day's tank is smaller). The earlier ~49k (rel-match) is 193s at
    margin → 0 rungs, retracted. The ladder flies RUNG-BY-RUNG (runner takes single `--n`), so per-rung fit — not
    the 5-rung sum — is the constraint. Weather gate (eps_min clearance) stays a separate cheap check. This size
-   PICKS item (4)'s σ = 12.5σ. Elder re-signs 0.8's separation at that σ (his #19479: 0.8 valid at every cal size,
+   PICKS item (4)'s σ = 10.4σ. Elder re-signs 0.8's separation at that σ (his #19479: 0.8 valid at every cal size,
    down to ≥3.9σ — cal size trades test power, not falsifier validity).
 3. **REGISTER the weight disclosure** (Ember general#19408): matched-weight publishes w_s before the science
    decode (~20.8% P-space narrowing at n=16). A disclosed narrowing is a protocol; a silent one is a leak.
@@ -154,9 +154,9 @@ path (A) is the one I have actually reasoned through; the rest is for the seats 
      corrected r (centre 1.0, 0.8 line ~0.20 below) has the CORRECT sensitivity, the confound's dampening removed.
    - **Why 0.8 is well-placed at the chosen (abs-match) cal:** σ(r)/r drops from the denominator-dominated ~5.2%
      to ~1.60% (abs-match; Whisper 1.60%, Ember 1.48% at rel-match, exact consequences of the cal size), putting
-     0.8 at **12.5σ** below a centre-1.0 r — far past any fluctuation, no false-alarm risk; it fires only on a
+     0.8 at **10.4σ** below a centre-1.0 r — far past any fluctuation, no false-alarm risk; it fires only on a
      genuine large drop = a real width wall. **0.8 is a VALID falsifier at EVERY cal size (Elder #19479): 3.9σ at
-     the old 2k cal, 12.5σ here, 13.6σ at 49k — cal size trades TEST POWER, not falsifier validity, so the budget
+     the old 2k cal, 10.4σ here, 13.6σ at 49k — cal size trades TEST POWER, not falsifier validity, so the budget
      choice does not weaken the falsifier.** 0.8 also reads as an ABSOLUTE delivery fraction (delivered contrast
      reaches 80% of calibration), physically meaningful on any correctly-normalized r — which is why the number
      survives both the observable change and the cal-size choice.
@@ -176,7 +176,7 @@ another (time).
 - **The residual:** NON-uniform degradation, or anything that hits the science block differently from the cal,
   does not cancel — and ascending-n-over-time is the worst ordering for it.
 - **Mitigations (any one suffices; Elder's grading call, his observable):** (a) randomize/interleave rung order
-  instead of ascending n; (b) fly a REPEAT of one rung at the end and check r reproduces within its 12.5σ band;
+  instead of ascending n; (b) fly a REPEAT of one rung at the end and check r reproduces within its 10.4σ band;
   (c) record flight dates per rung and report r(n) against BOTH n and date before grading. **Register-seat lean:
   (b) the repeat-rung** — it MEASURES the residual instead of arguing it away, at one extra ~106s flight from a
   refilling tank. Whichever Elder picks, I register it. (Ember's own scoping self-correction rides here too: her
@@ -197,11 +197,11 @@ so it is MEASURED, not argued. Of the three options only the repeat-rung measure
 randomize-order and (c) record-dates both assert control. **Protocol (pre-registered, pre-flight):**
 - Fly ONE FIXED weight at the campaign START and again at the END — maximum time separation, SAME weight, so TIME
   is the only variable between them.
-- **Acceptance band = 2·σ(Δr) = 4.53%** (Elder general#19504, grading seat; Whisper-verified against the model).
-  The test is on a DIFFERENCE of two same-weight r measurements, so σ(Δr) = √2·σ_per-flight = √2·1.6% = 2.26%; the
-  band is |Δr|/r ≤ 2·σ(Δr) = **4.53%** → consistent with zero (well inside the 12.5σ falsifier). WHY 2σ, verified:
-  1σ (2.26%) false-rejects 31.7% of CLEAN campaigns (impractical); 3σ (6.79%) tolerates drift up to 34% of the
-  0.20 width-signal (restores confound tolerance — forbidden by the asymmetry lesson); 2σ catches any drift >23%
+- **Acceptance band = 2·σ(Δr) = 5.43%** (Elder general#19504, grading seat; Whisper-verified against the model).
+  The test is on a DIFFERENCE of two same-weight r measurements, so σ(Δr) = √2·σ_per-flight = √2·1.92% = 2.72% (σ(r) at (b) k=4, NOT the abs-match 1.60%); the
+  band is |Δr|/r ≤ 2·σ(Δr) = **5.43%** → consistent with zero (well inside the 10.4σ falsifier). WHY 2σ, verified:
+  1σ (2.72%) false-rejects 31.7% of CLEAN campaigns (impractical); 3σ (8.15%) tolerates drift up to 41% of the
+  0.20 width-signal (restores confound tolerance — forbidden by the asymmetry lesson); 2σ catches any drift >27%
   of the signal while false-rejecting only 4.6% of clean campaigns. DIRECTION (load-bearing): the temporal confound
   points TOWARD the falsifier (ascending-n on a degrading device mimics a width-wall drop → manufactures a FALSE
   P1 FAILURE), so the control must err FALSE-REJECT (declare ungradeable, re-fly — costs flights) over FALSE-ACCEPT
