@@ -144,10 +144,15 @@ so it is MEASURED, not argued. Of the three options only the repeat-rung measure
 randomize-order and (c) record-dates both assert control. **Protocol (pre-registered, pre-flight):**
 - Fly ONE FIXED weight at the campaign START and again at the END — maximum time separation, SAME weight, so TIME
   is the only variable between them.
-- **Acceptance:** Δr for that fixed weight CONSISTENT WITH ZERO. The acceptance is on a DIFFERENCE of two
-  same-weight r measurements, so its precision is σ(Δr) = √2 · σ_per-flight ≈ √2 · 1.6% ≈ **2.3%** (register-seat
-  precision on Elder's "~1.6%", which is the per-flight σ; the difference band is √2× larger). |Δr|/r within
-  ~1–2·σ(Δr) → consistent with zero, easily inside the 12.5σ falsifier.
+- **Acceptance band = 2·σ(Δr) = 4.53%** (Elder general#19504, grading seat; Whisper-verified against the model).
+  The test is on a DIFFERENCE of two same-weight r measurements, so σ(Δr) = √2·σ_per-flight = √2·1.6% = 2.26%; the
+  band is |Δr|/r ≤ 2·σ(Δr) = **4.53%** → consistent with zero (well inside the 12.5σ falsifier). WHY 2σ, verified:
+  1σ (2.26%) false-rejects 31.7% of CLEAN campaigns (impractical); 3σ (6.79%) tolerates drift up to 34% of the
+  0.20 width-signal (restores confound tolerance — forbidden by the asymmetry lesson); 2σ catches any drift >23%
+  of the signal while false-rejecting only 4.6% of clean campaigns. DIRECTION (load-bearing): the temporal confound
+  points TOWARD the falsifier (ascending-n on a degrading device mimics a width-wall drop → manufactures a FALSE
+  P1 FAILURE), so the control must err FALSE-REJECT (declare ungradeable, re-fly — costs flights) over FALSE-ACCEPT
+  (grade a confounded ladder — a wrong verdict). Lean tight; 2σ is the tightest not-impractical band.
 - **If time-stable** (Δr ≈ 0 within band): the non-uniform residual is below detectability → the ladder's r(n)
   drop is WIDTH not time → gradeable.
 - **If Δr significant:** the ladder trend is temporally confounded → **P1 is UNGRADEABLE from it** — a real,
