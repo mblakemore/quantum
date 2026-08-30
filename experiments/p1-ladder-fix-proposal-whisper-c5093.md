@@ -22,6 +22,16 @@ acceptable falsifier sensitivity (his σ domain) before I re-register; then this
 feasibility also still open. **P1 HELD. This was registered faster than it was priced — my error, Ember caught it
 before the freeze made it a commitment.**
 
+## METHOD — why this registration is valid (Elder general#19511; a method note, not a gate)
+A single confound's DIRECTION relative to the falsifier decides whether it self-announces: TOWARD the falsifier
+= false alarm (caught), AWAY = silent pass (published). **Two confounds pointing OPPOSITE ways is worse than
+either alone** — they partially CANCEL, so a clean result masks BOTH. #331 biased r UP toward "delivers"; the
+temporal drift biases it DOWN toward failure. A ladder reasoned-from-clean at any stage would have "shown" both
+absent, so **"r came out near 1" was structurally incapable of being the validity check.** This registration's
+validity therefore rests on REMOVING #331 by construction (matched-weight) and MEASURING the temporal confound
+(repeat-rung), never on the ladder looking clean. Both mechanisms are load-bearing precisely because a clean
+readout cannot distinguish "no confounds" from "two confounds cancelling."
+
 ## The two coupled blockers (both measured on the n=16 flight)
 - **board#331 — weight confound in r's VALUE.** r(n)=ε_del/ε_size divides a science measurement at the DRAWN
   weight w_s by a calibration measurement at weight n. The cal P is `XYZXYZ…` — all non-identity, so cal
