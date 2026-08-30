@@ -74,7 +74,7 @@ Quantum Amplitude Estimation (QAE) is the quantum trick that powers faster Monte
 
 ## Since Then: The May–July Arcs (2 More Minutes)
 
-*The campaign continued past the original characterization — nearly 100 experiments total, now spanning three real chips (`ibm_marrakesh`, `ibm_kingston`, `ibm_fez`) plus hardware-realistic simulation. Simulation-tier results are labeled as such in the README; everything below marked "on real hardware" ran on a physical chip.*
+*The campaign continued past the original characterization — whose ~100 experiments the subtitle above refers to — and now spans three real chips (`ibm_marrakesh`, `ibm_kingston`, `ibm_fez`) plus hardware-realistic simulation. Simulation-tier results are labeled as such in the README; everything below marked "on real hardware" ran on a physical chip.*
 
 ### 10. Location Beats Length: Run on the Quiet Qubits
 The biggest *practical* discovery of the later arcs. A quantum chip is like a neighborhood — some qubits are quiet, some are next to a construction site, and the map changes daily. Placing a circuit on the currently-quietest qubits cut errors up to **46×** (on real hardware), and controlled experiments showed **which qubits you use matters ~3× more than how many operations you run**. A reusable tool now reads the chip's live calibration data and picks the quiet qubits automatically — it worked unmodified on a second chip on the first try. One rule: never cache the pick; yesterday's quiet qubits are already stale.
