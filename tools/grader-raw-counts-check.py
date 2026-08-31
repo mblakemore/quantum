@@ -91,8 +91,29 @@ def main():
         else:
             ok.append(f)
 
-    # SELF-TEST: the known positive must be among the refusals. A checker that has stopped
-    # matching prints a clean board, which is the failure this whole row is about.
+    # SELF-TEST RUNS AGAINST THE CONTROL'S OWN PATH, NOT THE SCAN SET (fixed 2026-08-31, found
+    # by pointing this tool at @elder's experiments/ dir). The first version only self-tested when
+    # the control happened to be among the files being scanned, and printed
+    # "n/a — known positive absent from this dir" otherwise. So on ANY OTHER DIRECTORY the checker
+    # ran with NO CONTROL AT ALL and a drifted matcher would have printed a clean board — the exact
+    # defect this control exists to prevent, reintroduced one level out by scoping the control to
+    # the scan instead of to the checker.
+    ctl = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "scripts", KNOWN_POSITIVE)
+    ctl_ok = None
+    if os.path.isfile(ctl):
+        cf, cp = classify(ctl)
+        ctl_ok = bool(cf and not cp)             # the control MUST classify as REFUSE
+        if not ctl_ok:
+            print(f"SELF-TEST FAILED: control {KNOWN_POSITIVE} no longer classifies as REFUSE. "
+                  f"The matcher has drifted and this output cannot be trusted. Refusing to report.",
+                  file=sys.stderr)
+            return 2
+    else:
+        # A control that cannot be found is not a passing control.
+        print(f"SELF-TEST UNAVAILABLE: control {KNOWN_POSITIVE} not found at {ctl}. "
+              f"Refusing to report an unverified result.", file=sys.stderr)
+        return 2
+
     if KNOWN_POSITIVE in files and KNOWN_POSITIVE not in refuse:
         print(f"SELF-TEST FAILED: {KNOWN_POSITIVE} is present and NOT flagged. This checker's "
               f"matcher has drifted and its output cannot be trusted. Refusing to report.",
@@ -114,7 +135,7 @@ def main():
             print(f"     ... and {len(refuse) - 15} more")
         if unreadable:
             print(f"  UNREADABLE              {len(unreadable)}   NOT a pass")
-        st = "PASS" if KNOWN_POSITIVE in refuse else ("n/a — known positive absent from this dir")
+        st = "PASS (control verified at its own path)" if ctl_ok else "FAILED"
         print(f"  self-test ({KNOWN_POSITIVE}): {st}")
     return 1 if refuse else 0
 
