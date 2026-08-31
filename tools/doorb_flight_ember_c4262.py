@@ -577,6 +577,13 @@ def main():
         ("weight mismatch HI -> REFUSE", _ver("XYZX", 3) == "REFUSE"),
         ("v1 seal            -> weight gate returns None, i.e. DID NOT RUN",
          _ver("XYZ", None) is None),
+        # REFUSE, NOT DEDUP (@elder, general#20255). The tempting "fix" for v1+v2 is to delete the
+        # stale v1 key and fly the v2. That is ITSELF choosing among commitments — the exact
+        # shopping the seal exists to forbid — and it would re-open the hole the two-v2 rule
+        # closes. Guarded rather than merely commented, because a comment is documentation and a
+        # future editor in a hurry deletes the key anyway: selection must never MUTATE the store.
+        ("selection does NOT mutate the store (refuse, never dedup the stale key)",
+         (lambda s: (_sel(s), s == {_V1K: {}, _V2K: {}})[1])({_V1K: {}, _V2K: {}})),
         # THE BUG ARM. Without this the matrix proves the fix runs, never that it CATCHES.
         ("BUG ARM: pre-fix selection DOES take v1 on the v1+v2 store (defect reproduces)",
          _select_seal_PREFIX_BUG({_V1K: {}, _V2K: {}}, _SP, _SP2, _N) == (_V1K, None)),
