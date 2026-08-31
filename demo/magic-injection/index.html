@@ -279,7 +279,7 @@ function r1(k){
     // with the axis title at the top of the range and with the tick row at the bottom.
     const far = p[1] > 0.75;
     el(svg,"text",{x:g.X(p[1])+(far?-9:9),y:g.Y(p[2])+4,"text-anchor":far?"end":"start",
-      style:`fill:${col};font-family:var(--mono);font-size:11px;font-weight:700`}).textContent=(p[2]>=0?"+":"")+p[2].toFixed(3);
+      style:`fill:${col};font-family:var(--mono);font-size:11px;font-weight:700;paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round`}).textContent=(p[2]>=0?"+":"")+p[2].toFixed(3);
     el(svg,"text",{x:g.X(p[1]),y:g.B+18,"text-anchor":"middle",style:"fill:var(--ink-4);font-family:var(--mono);font-size:10px"}).textContent=p[0];
   });
   el(svg,"text",{x:(g.L+g.R)/2,y:g.B+38,"text-anchor":"middle",style:"fill:var(--ink-3);font-family:var(--mono);font-size:10px"}).textContent="which gate was injected";
