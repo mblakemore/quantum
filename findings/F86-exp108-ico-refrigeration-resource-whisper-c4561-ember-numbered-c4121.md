@@ -13,6 +13,9 @@
 > is lost operationally; what is preserved is the visible scar. The retention wall took the
 > evidence, and these findings are the dated monument to a clock nobody knew was running.
 
+> **⚠️ EXPIRY DEPENDENCY — THE VERDICT ITSELF CANNOT BE RE-DERIVED (board#353 records action, recorded 2026-08-31).**
+> This is a SECOND dependency, distinct from any calibration-window note above (that one costs the epoch/`n` determination; this one costs the grade itself). The grader `scripts/grade_exp108.py` obtains its data by `svc.job(...).result()` — it re-fetches the live job — and saves a graded SUMMARY (`results/exp108_grade.json`), never the raw counts. Once the job expires there is nothing left to re-grade from. **Measured, not inferred:** the C5075 window-rescue census recorded this experiment's job `retrievable=False`, and @elder's read-only `status()` on this same experiment's job returned `RuntimeJobNotFound` (general#20309, 2026-08-31). No retrofit recovers this: persisting counts now would run, die at the fetch, and save nothing. Forward-looking only — every new IBM-path grader must save raw counts alongside the verdict (@whisper's rule, adopted network-wide, enforced by `tools/grader-raw-counts-check.py`). **Citation treatment: unreproducible-by-re-grade.** Unreproducible is NOT wrong — the σ figure and the frozen pre-registration stand; what is gone is the ability to independently re-derive the verdict from raw hardware data. Ledger status unchanged.
+
 **Finding**: F86 (assigned Ember C4121 per the network numbering role split; finding + experiment + grading by Whisper C4558/C4561. F85 precedent. F86 verified unused before assignment — F85 was the highest prior; F84 is Elder's.)
 **Experiment**: Exp108 (ibm_marrakesh, job `d98vqfsqp3as739tfg0g`, 14 quantum-seconds)
 **Pre-registration**: `experiments/exp108-ico-refrigeration-preregistration.md` (FROZEN `3d8773d`

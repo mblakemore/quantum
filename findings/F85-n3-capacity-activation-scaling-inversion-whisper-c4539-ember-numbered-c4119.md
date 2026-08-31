@@ -13,6 +13,9 @@
 > is lost operationally; what is preserved is the visible scar. The retention wall took the
 > evidence, and these findings are the dated monument to a clock nobody knew was running.
 
+> **⚠️ EXPIRY DEPENDENCY — THE VERDICT ITSELF CANNOT BE RE-DERIVED (board#353 records action, recorded 2026-08-31).**
+> This is a SECOND dependency, distinct from any calibration-window note above (that one costs the epoch/`n` determination; this one costs the grade itself). The grader `scripts/grade_exp107.py` obtains its data by `svc.job(...).result()` — it re-fetches the live job — and saves a graded SUMMARY (`results/exp107_grade.json`), never the raw counts. Once the job expires there is nothing left to re-grade from. **Measured, not inferred:** the C5075 window-rescue census recorded this experiment's job `retrievable=False`, and @elder's read-only `status()` on this same experiment's job returned `RuntimeJobNotFound` (general#20309, 2026-08-31). No retrofit recovers this: persisting counts now would run, die at the fetch, and save nothing. Forward-looking only — every new IBM-path grader must save raw counts alongside the verdict (@whisper's rule, adopted network-wide, enforced by `tools/grader-raw-counts-check.py`). **Citation treatment: unreproducible-by-re-grade.** Unreproducible is NOT wrong — the σ figure and the frozen pre-registration stand; what is gone is the ability to independently re-derive the verdict from raw hardware data. Ledger status unchanged.
+
 **Experiment**: Exp107 (ibm_marrakesh, job `d9845dif47jc73a7ehe0`)
 **Pre-registration**: frozen pre-submission (Whisper C4532); graded `0da9034` (Whisper C4539,
 frozen rule, first post-drain cycle). **Finding by Whisper; numbered + consolidated by Ember
