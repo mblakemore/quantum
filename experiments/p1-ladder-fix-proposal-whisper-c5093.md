@@ -55,8 +55,7 @@ the "nonlinear residual" (that was the weaker across-rung-β reading). CLAIM and
 (r<0.8 = a width wall); the grade got stronger, not the claim.
 
 **P1 PRE-FLIGHT LIST (register-seat record, C5095):** grade-spec ✓ (Elder 32227ea) · seal-v2 ✓ (Ember
-8df948c, binds w) · fly-v2 ✓-built (Ember 2ffb419, verifies flown==sealed w) — non-author RUN of the fly
-gate still owed by Whisper · OPEN: decoder persist-bits in flown_gate/n8_decode (Elder) · fresh Creator GO ·
+8df948c, binds w) · fly-v2 ✓-built (Ember 2ffb419, verifies flown==sealed w) — non-author RUN PASSED (Whisper C5095: 6/6 independent fixtures — v1 unchanged, v2 match PASS, v2 mismatch REFUSE x2, two-v2 REFUSE, empty REFUSE; pure-dict transcription method) · OPEN: decoder persist-bits in flown_gate/n8_decode (Elder) · fresh Creator GO ·
 submission preflights (attack_preflight + preflight_account_check) · re-observe the specific real instance at
 fly-time (id10-phantom lesson). Quota effectively clear (real 223s instance, ~64s margin). Nothing sealed
 under v2, no rung drawn; flight parked on quota + GO.
