@@ -227,7 +227,7 @@
       var above=v>BOUND;
       plotA.appendChild(el("rect",{x:x,y:y,width:bw,height:h,rx:4,
         fill:above?css('--good'):css('--bad'),opacity:arm==="tele"?0.9:0.8}));
-      var vt=el("text",{x:x+bw/2,y:y-6,"text-anchor":"middle","font-size":11,fill:css('--ink-2'),"font-family":css('--mono')});vt.textContent=v.toFixed(2);plotA.appendChild(vt);
+      var vt=el("text",{x:x+bw/2,y:y-6,"text-anchor":"middle","font-size":11,fill:css('--ink-2'),"font-family":css('--mono'),style:"paint-order:stroke;stroke:"+css('--surface')+";stroke-width:3px;stroke-linejoin:round"});vt.textContent=v.toFixed(2);plotA.appendChild(vt);
       var st=el("text",{x:x+bw/2,y:H-mB+18,"text-anchor":"middle","font-size":12,fill:css('--ink-3'),"font-family":css('--mono')});st.textContent=STATES[i];plotA.appendChild(st);
     });
     // The 2/3 bound line and its label are drawn AFTER the bars, on purpose.
