@@ -32,6 +32,101 @@ def _load_sealer():
     _m = importlib.util.module_from_spec(_spec)
     _spec.loader.exec_module(_m)
     return _m
+
+
+class SealRefusal(Exception):
+    """A refusal to fly, raised as a VALUE so it can be asserted against.
+
+    The G-SEAL checks used to be inline with sys.exit, which is why they were the only gates in
+    this file with no selftest and no bug arm — sys.exit cannot be caught by a test without
+    catching SystemExit and hoping the message matches. F-BIAS, F-IND and F-MIX each carry a bug
+    arm that MUST fire; the gate that stops a WRONG FLIGHT carried none. That asymmetry is
+    backwards, and it is what let the defect below survive both my build and a non-author run.
+    """
+
+
+def select_seal(store, spec, spec_v2, n):
+    """Choose which sealed commitment this flight is bound to. Pure: dict in, (key, w) out.
+
+    Returns (key, sealed_w) where sealed_w is None for a v1 seal (no weight bound) and an int
+    for v2. Raises SealRefusal rather than exiting, so every branch is testable.
+
+    THE v1+v2 CASE IS WHY THIS FUNCTION EXISTS (found 2026-08-31, after @whisper's non-author run
+    passed all six of his cases — this is the seventh, and it lives in the SELECTION, one level
+    above the decision logic his harness transcribed).
+
+    The old code tested `if _k_v1 in _store:` FIRST. A store holding both keys therefore took v1,
+    left _sealed_w as None, and the weight gate below was guarded by `is not None` — so it never
+    ran. The flight printed [PASS] G-SEAL and no G-SEAL-W line, WHICH IS EXACTLY WHAT A LEGITIMATE
+    v1 FLIGHT PRINTS. A weight-bound commitment lost silently to a stale weaker one, and the
+    output could not tell you it had happened.
+
+    It is producible by ORDINARY OPERATION, not corruption: the sealer writes `store[key] = {...}`
+    with no del and no pop, and SPEC and SPEC_V2 are different key prefixes. Any store that
+    predates today's v1->v2 change and has been sealed since holds both.
+
+    THE REFUSAL IS THE FILE'S OWN EXISTING DOCTRINE, not a new rule: two v2 seals already refuse
+    because "a flight cannot choose among commitments" and choosing after seeing the options is
+    the shopping the seal exists to prevent. v1-plus-v2 is that same situation. The only
+    difference was that one refused loudly and this one chose silently.
+    """
+    k_v1 = f"{spec}:{n}"
+    v2 = sorted(k for k in store if k.startswith(f"{spec_v2}:{n}:"))
+    if k_v1 in store and v2:
+        raise SealRefusal(
+            f"REFUSE G-SEAL: BOTH a v1 seal ({k_v1}) and {len(v2)} v2 seal(s) exist for n={n}: "
+            f"{', '.join(v2)}. A flight cannot choose among commitments. Silently preferring "
+            f"either one is the operator picking a commitment after seeing the options; archive "
+            f"whichever is not being flown.")
+    if k_v1 in store:
+        return k_v1, None
+    if len(v2) == 1:
+        return v2[0], int(v2[0].rsplit(":w", 1)[1])
+    if v2:
+        raise SealRefusal(
+            f"REFUSE G-SEAL: {len(v2)} v2 seals exist for n={n}: {', '.join(v2)}. "
+            f"A flight cannot choose among commitments; archive all but one.")
+    raise SealRefusal(
+        f"REFUSE G-SEAL: no seal for {k_v1} for n={n}. "
+        f"Seal first; a flight without a commitment is not blind.")
+
+
+def verify_weight(P, sealed_w):
+    """Check the flown P against the weight bound into the seal. Returns the flown weight, or
+    None for a v1 seal. Raises SealRefusal on disagreement.
+
+    Split out of the flight path for the same reason as select_seal: so a bug arm can prove this
+    check is capable of failing. It is the entire reason v2 exists (board#348 condition 1).
+    """
+    if sealed_w is None:
+        return None
+    flown = sum(1 for c in P if c != "I")
+    if flown != sealed_w:
+        raise SealRefusal(
+            f"REFUSE G-SEAL: sealed weight w={sealed_w} but the sealed P has weight {flown}. "
+            f"The commitment and its own P disagree — this is a corrupted or hand-edited "
+            f"secrets store, not a flyable seal.")
+    return flown
+
+
+def _select_seal_PREFIX_BUG(store, spec, spec_v2, n):
+    """THE PRE-FIX SELECTION, KEPT AS A BUG ARM. Not called by the flight.
+
+    A selftest that only exercises the fixed path proves the fix runs, never that it CATCHES
+    anything — the vacuous-control trap. This reproduces the exact v1-first precedence so the
+    selftest can assert the old code returns (v1, None) on the v1+v2 store while the new code
+    refuses. If this arm ever stops reproducing the bug, the case under test has drifted and the
+    green result means nothing.
+    """
+    k_v1 = f"{spec}:{n}"
+    v2 = sorted(k for k in store if k.startswith(f"{spec_v2}:{n}:"))
+    if k_v1 in store:
+        return k_v1, None
+    if len(v2) == 1:
+        return v2[0], int(v2[0].rsplit(":w", 1)[1])
+    raise SealRefusal("refused")
+
+
 import numpy as np
 
 # ALT3 — the live tank (593s at flight time). WhisperPaid is spent (~10s) and cannot carry this.
@@ -445,6 +540,57 @@ def main():
                  "bug arm must reproduce the failure. This is the assert the door (b) "
                  "FAIL-AS-FROZEN paid for — F-IND was real, can-fire, and aimed one axis away.")
 
+    # ---- G-SEAL SELECTION MATRIX (2026-08-31). The gate that stops a WRONG FLIGHT had no
+    # selftest and no bug arm while all three physics asserts above had both. Seven cases: the
+    # six @whisper ran as a non-author (general#20250) plus the v1+v2 case his harness could not
+    # reach, because it transcribed the DECISION logic and this defect lives in the SELECTION.
+    # Pure dicts — no seal-store contact, no sealer import, safe to run anywhere.
+    _SP, _SP2, _N = "spec_v1", "spec_v2", 3
+    _V1K, _V2K = f"{_SP}:{_N}", f"{_SP2}:{_N}:w3"
+
+    def _sel(store):
+        try:
+            return select_seal(store, _SP, _SP2, _N)
+        except SealRefusal:
+            return "REFUSE"
+
+    def _ver(P, w):
+        try:
+            return verify_weight(P, w)
+        except SealRefusal:
+            return "REFUSE"
+
+    _seal_cases = [
+        ("v1 only            -> v1, weight NOT bound",
+         _sel({_V1K: {}}) == (_V1K, None)),
+        ("v2 only            -> v2, w parsed from the key",
+         _sel({_V2K: {}}) == (_V2K, 3)),
+        ("two v2 seals       -> REFUSE (cannot choose among commitments)",
+         _sel({f"{_SP2}:{_N}:w2": {}, f"{_SP2}:{_N}:w3": {}}) == "REFUSE"),
+        ("empty store        -> REFUSE (no seal)",
+         _sel({}) == "REFUSE"),
+        ("v1 AND v2 PRESENT  -> REFUSE (the 7th case; old code took v1 SILENTLY)",
+         _sel({_V1K: {}, _V2K: {}}) == "REFUSE"),
+        ("weight match       -> PASS, returns flown weight",
+         _ver("XYZ", 3) == 3),
+        ("weight mismatch LO -> REFUSE", _ver("XYI", 3) == "REFUSE"),
+        ("weight mismatch HI -> REFUSE", _ver("XYZX", 3) == "REFUSE"),
+        ("v1 seal            -> weight gate returns None, i.e. DID NOT RUN",
+         _ver("XYZ", None) is None),
+        # THE BUG ARM. Without this the matrix proves the fix runs, never that it CATCHES.
+        ("BUG ARM: pre-fix selection DOES take v1 on the v1+v2 store (defect reproduces)",
+         _select_seal_PREFIX_BUG({_V1K: {}, _V2K: {}}, _SP, _SP2, _N) == (_V1K, None)),
+    ]
+    _seal_bad = 0
+    for _lbl, _ok in _seal_cases:
+        print(f"  [{'PASS' if _ok else 'FAIL'}] G-SEAL-SEL {_lbl}")
+        _seal_bad += (not _ok)
+    if _seal_bad:
+        sys.exit(f"REFUSE G-SEAL-SEL: {_seal_bad} selection case(s) failed. If the BUG ARM is the "
+                 f"failing one, the defect no longer reproduces and this matrix is testing "
+                 f"nothing — a green board from a control that cannot fire is the exact trap "
+                 f"this matrix exists to avoid.")
+
     if a.selftest:
         print("  selftest only — nothing further.")
         return 0
@@ -501,24 +647,14 @@ def main():
         # submit. I built the v2 path and left its only consumer unable to read it.
         _sealer = _load_sealer()
         _store = json.load(open(_sealer.SECRETS))
-        _k_v1 = f"{_sealer.SPEC}:{a.n}"
-        _sealed_w = None          # None = v1 seal, no weight bound; int = v2, must be verified
-        _v2 = sorted(k for k in _store if k.startswith(f"{_sealer.SPEC_V2}:{a.n}:"))
-        if _k_v1 in _store:
-            sec = _store[_k_v1]
-        elif len(_v2) == 1:
-            # v2 (board#354): the commitment binds a WEIGHT as well as a P. Read it, then VERIFY.
-            sec = _store[_v2[0]]
-            _sealed_w = int(_v2[0].rsplit(":w", 1)[1])
-        elif _v2:
-            # MORE THAN ONE v2 seal for this n and the flight cannot choose. Selecting by weight
-            # would be the operator picking a commitment AFTER seeing the options, which is the
-            # shopping the seal exists to prevent — the choice must be made when sealing, not here.
-            sys.exit(f"REFUSE G-SEAL: {len(_v2)} v2 seals exist for n={a.n}: {', '.join(_v2)}. "
-                     f"A flight cannot choose among commitments; archive all but one.")
-        else:
-            sys.exit(f"REFUSE G-SEAL: no seal for {_k_v1} in {_sealer.SECRETS}. "
-                     f"Seal first; a flight without a commitment is not blind.")
+        # SELECTION IS NOW A PURE, TESTABLE FUNCTION (see select_seal). It was inline here, and
+        # inline+sys.exit is precisely why the v1+v2 precedence defect was unreachable by any
+        # test — mine or a non-author's.
+        try:
+            _key, _sealed_w = select_seal(_store, _sealer.SPEC, _sealer.SPEC_V2, a.n)
+        except SealRefusal as _e:
+            sys.exit(f"{_e} [store: {_sealer.SECRETS}]")
+        sec = _store[_key]
         pin = json.load(open(f"experiments/doorb_commitments/doorb_commitment_n{a.n}.json"))
         if sec["sha256"] != pin["commitment_sha256"]:
             sys.exit("REFUSE G-SEAL: stored secret does not match the git-pinned commitment.")
@@ -530,12 +666,16 @@ def main():
         # would still verify against its digest while describing a draw law the flight did not
         # follow — a G-SEAL that PASSES and means nothing. The digest binds w to P; this is where
         # that binding is finally CHECKED against the thing actually being flown.
-        if _sealed_w is not None:
-            _flown_w = sum(1 for c in P if c != "I")
-            if _flown_w != _sealed_w:
-                sys.exit(f"REFUSE G-SEAL: sealed weight w={_sealed_w} but the sealed P has "
-                         f"weight {_flown_w}. The commitment and its own P disagree — this is a "
-                         f"corrupted or hand-edited secrets store, not a flyable seal.")
+        try:
+            _flown_w = verify_weight(P, _sealed_w)
+        except SealRefusal as _e:
+            sys.exit(str(_e))
+        if _flown_w is None:
+            # SAY SO. The old code printed NOTHING on the v1 path, so "gate passed" and "gate did
+            # not run" looked identical in the log — which is how a silently-skipped weight check
+            # would have reached a flight unnoticed. An unrun gate must announce that it did not run.
+            print(f"  [ .. ] G-SEAL-W  NOT RUN — v1 seal, no weight bound in the commitment")
+        else:
             print(f"  [PASS] G-SEAL-W  flown weight {_flown_w} == sealed w={_sealed_w}")
 
     # ---- circuit: uniform template, secret entirely in bound 1q parameters (form (a)).
