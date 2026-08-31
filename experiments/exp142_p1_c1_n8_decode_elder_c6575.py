@@ -31,6 +31,7 @@ USE:
       --manifest ../results/exp142_p1_n8_c1_refly_manifest_ALT.json --n 8
 """
 import argparse, json, os, sys, time
+import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
 from exp142_p1_c1_decoder_elder_c5003 import (      # FROZEN — imported, never reimplemented
@@ -151,6 +152,15 @@ def main():
 
     out = args.out or os.path.join(HERE, "..", "results",
                                    f"exp142_p1_c1_n{args.n}_decode_elder_c6575.json")
+    # PERSIST RAW BITS before the verdict is written (board#353 / grade-spec open item #1). IBM jobs
+    # expire; saving only the derived verdict leaves it un-re-checkable once the job is gone. Save the
+    # row-major bits + basis map so covering_decode can be re-run offline and this verdict re-derived.
+    # Pure side-effect, mirrors exp142_p1_c1_parallel_baseline; does not touch rows/fw_shots/res.
+    _bits_path = out.replace(".json", "_rawbits.npz")
+    np.savez_compressed(_bits_path, bits=np.array(rows, dtype=np.int8),
+                        basis_of_row=np.array(bor), n=args.n, q_used=q,
+                        manifest_hash=str(man.get("commit_hash", "")))
+    print(f"SAVED RAW BITS {_bits_path}", flush=True)
     json.dump({"n": args.n, "manifest": os.path.basename(args.manifest),
                "manifest_hash": man.get("commit_hash"), "backend": man.get("backend"),
                "basis_of_row_source": src, "q_used": q, "q_per_qubit": qper,

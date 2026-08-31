@@ -14,6 +14,7 @@ end-to-end BEFORE the blind n8 decode, the same n6-gate that caught the Q-arm de
 Blind n8 (no --expect) reuses the identical pipeline once the fez C1 chunks clear.
 """
 import argparse, json, os, sys
+import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, "..", "scripts"))
 import exp142_decode_meter as M                          # fetch_pub_bits only
@@ -64,6 +65,18 @@ def main():
         print(f"  n6 GATE: expect {args.expect} -> {'PASS — flown-extraction convention validated' if ok else '*** MISMATCH — seam bug, do NOT trust n8 C1 ***'}")
     out = args.out or os.path.join(HERE, "..", "results",
                                    f"exp142_p1_c1_gate_n{args.n}_elder_c6568.json")
+    # PERSIST RAW BITS before the verdict is written (board#353 / grade-spec open item #1). IBM jobs
+    # expire; saving only the derived verdict leaves it un-re-checkable once the job is gone. Flatten
+    # fw_shots back to row-major bits + basis map so covering_decode can be re-run offline and this
+    # verdict re-derived. Pure side-effect, mirrors exp142_p1_c1_parallel_baseline; fw_shots untouched.
+    _fb, _fbas = [], []
+    for _A, _rws in fw_shots.items():
+        _fb.extend(_rws); _fbas.extend([_A] * len(_rws))
+    _bits_path = out.replace(".json", "_rawbits.npz")
+    np.savez_compressed(_bits_path, bits=np.array(_fb, dtype=np.int8),
+                        basis_of_row=np.array(_fbas), n=args.n, q_used=args.q,
+                        manifest_hash=str(man.get("commit_hash", "")))
+    print(f"SAVED RAW BITS {_bits_path}", flush=True)
     json.dump({"n": args.n, "manifest_hash": man.get("commit_hash"), "q_used": args.q,
                "P_hat_C1": phat, "result": res, "expect": args.expect}, open(out, "w"), indent=1)
     print(f"SAVED {out}", flush=True)
