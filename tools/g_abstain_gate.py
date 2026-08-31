@@ -3,7 +3,16 @@
 
 An abstention rate that CORRELATES WITH THE ARM is a free discriminator requiring no physics:
 a grader could classify sets by whether they abstain. That is a NO-TEST regardless of what the
-science block says. Two-proportion test across arms; alpha frozen at 0.01.
+science block says. Two-proportion test across arms; alpha frozen at 0.05 two-sided (ALPHA_Z=1.96).
+
+⚠️ THIS LINE SAID 0.01 UNTIL 2026-08-31 AND THE CODE SAID 0.05, since C5058 moved it and left the
+docstring behind. The divergence was exactly ONE CASE WIDE and it was the case that matters: the
+subtle 2/40-vs-9/40 free discriminator (z=-2.27) REFUSES at 0.05 and PASSES at 0.01. So a reader
+trusting the docstring believed in a gate that lets through the asymmetry this one stops — and the
+live hazard was never a bad flight, it was a future editor HARMONISING THE CODE TO THE STALE DOC
+and reopening the hole C5058 closed. Falsified before fixing: setting ALPHA_Z=2.576 flips that case
+to PASS. A stale doc next to correct code is not a cosmetic defect; it is a standing instruction to
+reintroduce the bug.
 
 SHIPS WITH A DEMONSTRATED FIRE (Ember #9288): replayed against the FLOWN Cell 2 data that
 motivated it (CE 7/40 abstain vs CC 26/40). A gate whose pass has never been contrasted with a
@@ -44,10 +53,12 @@ if __name__ == "__main__":
         ("healthy: equal abstention, both arms 5/40",       5, 40,  5, 40, "PASS"),
         ("subtle: 2/40 vs 9/40",                            2, 40,  9, 40, "REFUSE"),
     ]
+    _failed = 0
     for label, aa, an, ba, bn, want in cases:
         r = g_abstain(aa, an, ba, bn)
         got = "REFUSE" if r["verdict"].startswith("REFUSE") else "PASS"
         mark = "✅" if got == want else "🔴"
+        _failed += (got != want)
         print(f"  {mark} {label:<46} A={aa}/{an} B={ba}/{bn}  z={r['z']:+6.2f}  -> {got:<7} (want {want})")
     print(f"\n  ⚖️  LABEL THAT TRAVELS WITH EVERY PASS: canary for arm-correlation above ~{MDE_80:.2f}")
     print( "      (80% power, n=40/arm, base 5%). A pass EXCLUDES GROSS arm-correlation and says")
@@ -55,3 +66,16 @@ if __name__ == "__main__":
     print("\n  NOTE: at the selected band [0.30,0.70] the PREDICTED abstention is 0/40 in both arms.")
     print("  That prediction is now stated in the prereg, so an observed 0-vs-0 is a CONFIRMED")
     print("  prediction rather than an absence nobody expected either way (Ember #9288).")
+
+    # EXIT NONZERO WHEN THE CAN-IT-FIRE PROOF FAILS (2026-08-31, board#355 sweep).
+    # This block printed 🔴 and exited 0. A human reading the output saw the failure; ANY caller
+    # reading the exit code — CI, a wrapper, a pre-flight batch — saw a pass. That is the
+    # authorize-by-silence shape in the gate's OWN PROOF, which is worse than in the gate: a
+    # broken fire-proof is exactly what makes a broken gate look sound. Falsified by setting
+    # ALPHA_Z to 2.576: the subtle case flips to PASS, prints 🔴, and USED TO EXIT 0.
+    if _failed:
+        print(f"\n  🔴 CAN-IT-FIRE PROOF FAILED: {_failed} case(s) disagree with their expected "
+              f"verdict. This gate's pass no longer carries the information it implies — do not "
+              f"rely on a PASS from it until the proof is green.")
+        sys.exit(1)
+    print("\n  ✅ can-it-fire proof GREEN — every case matches its expected verdict (exit 0).")
