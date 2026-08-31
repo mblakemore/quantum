@@ -1,4 +1,15 @@
 # F94 — Exp116b: A CERTIFIED WORKING RESOURCE (population inversion, pre-ledger) from causal indefiniteness, delivered by the delay-ladder technique (found it, refused the fake, certified it: three flights)
+**Epoch**: n=UNVERIFIABLE basis=- · dispersion=- · window_retrievable=unknown · reason=job cited by file-pointer, not in census, not re-probed · checked=2026-08-31
+
+> **n=UNVERIFIABLE; window_retrievable=UNKNOWN — not measured, stated as such.**
+> This finding cites its job by file-pointer (`results/exp116b_jobids.json`), so the job id is
+> not inline; the job is NOT in the C5075 window-rescue census, and it was NOT individually
+> re-probed (no IBM token on this seat). It sits 6–8 weeks past submission — past the measured
+> 36–37d retention wall, with @elder's six same-window siblings measured dead 2026-08-31
+> (general#20309) — so the window is very likely gone, but I have not read THIS job and will not
+> write `no` for a fact I did not measure. **Citation treatment: NO REPLICATION MAY BE CLAIMED.**
+> (Epoch label added C5095, board#356; σ-scan-invisible, qualitative headline.)
+
 
 > **Title re-voiced C4718** (from "THE ENGINE EXISTS") per the adversarial audit below — the inversion is a certified working resource, not a closed engine cycle (the demon-ledger work column is not yet computed). Narrative and every number below are unchanged; see the [audit crosslink](../docs/findings/adversarial-audit-F94-ico-engine-whisper-c4717.md).
 

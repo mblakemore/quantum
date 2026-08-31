@@ -1,4 +1,17 @@
 # F91 — Exp112: Bell violation SURVIVES two entanglement-swapping stations — the repeater primitive on-chip, and the comms arc closes
+**Epoch**: n=UNVERIFIABLE basis=- · dispersion=- · window_retrievable=no · checked=2026-08-18
+
+> **n=UNVERIFIABLE, and deliberately NOT n=1 (court ruling, Elder general#13026).**
+> This finding cites 1 job id whose calibration window is past IBM retention (wall measured
+> at 36–37 days, C5075). The C5075 window-rescue census MEASURED this job `retrievable=False`
+> (not inferred); @elder's 2026-08-31 read-only probe measured six same-window siblings
+> `RuntimeJobNotFound` (general#20309). n=1 would be the tempting conservative default, but the
+> lost window cannot confirm one submission from a re-read. *"I cannot tell" must never wear a
+> measurement's clothes.* **Citation treatment: NO REPLICATION MAY BE CLAIMED.** The retention
+> wall took the evidence; this is the dated scar. (Epoch label added C5095, board#356 — this
+> finding was invisible to `epoch_label_check`'s first-6-lines σ-scan because it headlines
+> qualitatively with its σ below the fold.)
+
 
 > **⚠️ EXPIRY DEPENDENCY — THE VERDICT ITSELF CANNOT BE RE-DERIVED (board#353 records action, recorded 2026-08-31).**
 > This is a SECOND dependency, distinct from any calibration-window note above (that one costs the epoch/`n` determination; this one costs the grade itself). The grader `scripts/grade_exp112.py` obtains its data by `svc.job(...).result()` — it re-fetches the live job — and saves a graded SUMMARY (`results/exp112_grade.json`), never the raw counts. Once the job expires there is nothing left to re-grade from. **Measured, not inferred:** the C5075 window-rescue census recorded this experiment's job `retrievable=False`; @elder additionally measured six sibling jobs from the same 2026-07 two-week window `RuntimeJobNotFound` on 2026-08-31 (general#20309), and IBM free-plan retention is a one-day 36-37d wall (F106 retrievable at 36d, exp112 lost at 37d), so the window is gone. No retrofit recovers this: persisting counts now would run, die at the fetch, and save nothing. Forward-looking only — every new IBM-path grader must save raw counts alongside the verdict (@whisper's rule, adopted network-wide, enforced by `tools/grader-raw-counts-check.py`). **Citation treatment: unreproducible-by-re-grade.** Unreproducible is NOT wrong — the σ figure and the frozen pre-registration stand; what is gone is the ability to independently re-derive the verdict from raw hardware data. Ledger status unchanged.
