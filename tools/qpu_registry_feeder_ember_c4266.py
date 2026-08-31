@@ -90,6 +90,42 @@ def post(path, body):
         return 0, {"error": type(e).__name__, "detail": str(e)[:80]}
 
 
+def get_registry_ids(kind):
+    """Identities the registry currently holds for `kind`. ({} on any failure — see below.)
+
+    COVERAGE EXISTS BECAUSE THIS FEEDER CANNOT SEE WHAT IT DOES NOT SEE (2026-08-31, board#352).
+    A row whose account is absent from the health sensor is never upserted, so observed_at
+    freezes while every other field keeps reading current — state:up, a plausible balance, a
+    name. Measured: qpu_account id 10 sat 83 HOURS stale while its seven siblings refreshed
+    every 284s, and its frozen balance (295s) was LARGER than any real open instance (223s), so
+    the registry total was inflated by a value nothing corroborated.
+    The feeder was not broken and could not have reported this: "upserted 7, failed 0" is true
+    and complete about its OWN pass. The question it never asked is which rows it did NOT touch.
+    UNREACHABLE RETURNS EMPTY, and the caller treats empty as UNKNOWN rather than as "nothing
+    unmaintained" — an unreachable bus must never render as a clean coverage report.
+    """
+    code, resp = api_get(f"/resources?kind={kind}")
+    if code != 200 or not isinstance(resp, dict):
+        return {}
+    out = {}
+    for r in (resp.get("resources") or []):
+        ident = r.get("identity")
+        if ident:
+            out[ident] = r
+    return out
+
+
+def api_get(path):
+    req = urllib.request.Request(f"{BUS}{path}", headers={"Authorization": f"Bearer {bearer()}"})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            return r.status, json.loads(r.read() or b"{}")
+    except urllib.error.HTTPError as e:
+        return e.code, json.loads(e.read() or b"{}")
+    except Exception as e:                      # noqa: BLE001 — a feeder must not die on the bus
+        return 0, {"error": type(e).__name__, "detail": str(e)[:80]}
+
+
 def read_health(with_backends):
     cmd = [sys.executable, HEALTH, "--json"]
     if with_backends:
@@ -141,6 +177,7 @@ def main():
 
         sent = skipped = failed = 0
         seen_backends = {}
+        upserted_ids = set()          # coverage: which registry rows THIS pass touched
         for r in rows:
             crn = r.get("crn")
             if not crn:
@@ -174,6 +211,8 @@ def main():
                 code, resp = post("/resources", body)
                 if code == 200:
                     sent += 1
+                    if body.get("identity"):
+                        upserted_ids.add(body["identity"])
                 else:
                     failed += 1
                     print(f"  [{code}] {body['name']}: {resp}", flush=True)
@@ -223,6 +262,33 @@ def main():
                          "backends_seen": len(seen_backends), "pid": os.getpid(),
                          "cadence_s": a.interval if not a.once else 900},
             })
+        # COVERAGE — WHICH REGISTRY ROWS DID THIS PASS *NOT* TOUCH (board#352, 2026-08-31).
+        # "upserted 7, failed 0" is true and complete about this pass and says NOTHING about the
+        # rows the sensor never offered. id 10 froze for 83 hours under a clean summary line.
+        # A feeder that reports only its own throughput cannot report its own blind spot.
+        # DRY-RUN HAS NO COVERAGE ANSWER, and must not invent one: nothing was upserted, so
+        # upserted_ids is empty and EVERY row would report unmaintained — a 100% false alarm in
+        # the mode a person reaches for first. Say so rather than print a number that is wrong.
+        held = {} if a.dry_run else get_registry_ids("qpu_account")
+        if a.dry_run:
+            print(f"[{stamp}] coverage NOT EVALUATED (dry-run upserts nothing — "
+                  f"an unmaintained count here would be meaningless, not zero)", flush=True)
+        if not held:
+            unmaintained = None          # UNKNOWN, not zero — the bus was unreachable or empty
+        else:
+            unmaintained = sorted(i for i in held if i not in upserted_ids)
+        if a.dry_run:
+            pass
+        elif unmaintained is None:
+            print(f"[{stamp}] coverage UNKNOWN — could not read the registry back. "
+                  f"This is NOT 'nothing unmaintained'.", flush=True)
+        elif unmaintained:
+            print(f"[{stamp}] ⚠ {len(unmaintained)} qpu_account row(s) NOT MAINTAINED by this "
+                  f"pass — present in the registry, absent from the sensor:", flush=True)
+            for i in unmaintained[:6]:
+                r = held.get(i) or {}
+                print(f"    {str(r.get('name'))[:22]:24s} age={r.get('age_s')}s "
+                      f"observed_at={str(r.get('observed_at'))[:19]}", flush=True)
         print(f"[{stamp}] upserted {sent}, failed {failed}, skipped {skipped} "
               f"({len(seen_backends)} backends)", flush=True)
         if a.once:
