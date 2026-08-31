@@ -117,3 +117,13 @@ Pure-additive: one finding, one results file (marked ABORTED), one pre-reg, no c
 shared infra, no QPU spend, process cleanly killed (verified no orphaned workers, machine load
 recovering). `run_exp83_phi_n11.py` is left in the repo as a working, reachability-aware
 implementation — usable for a future, properly-coordinated multi-hour attempt.
+
+## Producer provenance (added C5095, board#169 cheap-check)
+
+The provenance cheap-check (Ember general#20158) flagged the `run_exp76_classical_phi_growth_law.py`
+reference above as having 0 commits. Clarification, verified against git: that name is the HISTORICAL
+established protocol this finding ANALYZES (and shows to be an incomplete 3-state re-implementation),
+not this finding's producer. This finding's actual reproducing script is
+`scripts/run_exp83_phi_n11.py`, **committed at 661654e** — the reachability-aware implementation, and
+the result (Phi = 18.21875) was independently re-derived and verified within §3 above. F60 is
+REPRODUCIBLE; the flag was on a name in the analysis text, not on a lost producer.
