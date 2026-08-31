@@ -72,9 +72,11 @@ if __name__ == "__main__":
       ("healthy twirl at p=0.35",                    [0.6029, -0.6029, 0.6029], "PASS"),
       ("isotropic but OUTSIDE the declared band (p=0.85)", [0.1391, -0.1391, 0.1391], "REFUSE"),
     ]
+    _failed = 0        # see the exit block at the foot of this file
     for label, diag, want in cases:
         r = g_band(diag)
         got = "REFUSE" if r["verdict"].startswith("REFUSE") else "PASS"
+        _failed += (got != want)
         print(f"  {'✅' if got==want else '🔴'} {label:<44} p̂={r['p_hat_per_axis']} spread={r['axis_spread']:.3f} "
               f"mean={r['mean_p_hat']:.3f} -> {got:<7} (want {want})")
     print("\n  SPREAD clause (Elder #9382) — can-it-fire, both directions:")
@@ -84,6 +86,7 @@ if __name__ == "__main__":
         ("FIXED p = 0.4116 across 40 runs", [0.4116]*40, "REFUSE"),
         ("uniform draws over [0.30,0.70]",  list(_rng.uniform(0.30,0.70,40)), "PASS")]:
         r=g_band_spread(ph); got="REFUSE" if r["verdict"].startswith("REFUSE") else "PASS"
+        _failed += (got != want)
         print(f"    {'✅' if got==want else '🔴'} {lab:<34} sd={r['realized_sd']:.4f} (expect {r['expected_sd']:.4f}) -> {got} (want {want})")
     print("\n  ARM-p AGREEMENT clause (Ember/Elder seam) — can-it-fire, both directions:")
     for lab, ce_d, cc_d, want in [
@@ -91,6 +94,26 @@ if __name__ == "__main__":
         ("healthy: both arms at p=0.50",         [0.464,0.464,0.464], [0.464,-0.464,0.464], "PASS")]:
         r = g_band_arm_agreement(ce_d, cc_d)
         got = "REFUSE" if r["verdict"].startswith("REFUSE") else "PASS"
+        _failed += (got != want)
         print(f"    {'✅' if got==want else '🔴'} {lab:<38} p_CE={r['p_CE']} p_CC={r['p_CC']} gap={r['gap']} -> {got} (want {want})")
     print(f"\n  paired se on the band mean over 40 runs = {SD_RUN/math.sqrt(40):.4f}"
           f"  -> a 0.05 band shift shows at {0.05/(SD_RUN/math.sqrt(40)):.1f} sigma")
+
+    # EXIT NONZERO WHEN THE CAN-IT-FIRE PROOF FAILS (2026-08-31, board#355 sweep).
+    # SECOND INSTANCE OF THIS DEFECT IN THIS FAMILY — g_abstain_gate.py had it identically
+    # (quantum@40f5809) and this file was found by grepping the CLASS rather than waiting to trip
+    # over it again. All THREE proof loops above (band, spread, arm-agreement) printed 🔴 on a
+    # mismatch and the script exited 0. A human reading the output saw the failure; any caller
+    # reading the exit code — CI, a wrapper, a pre-flight batch — saw a pass.
+    #
+    # This is the authorize-by-silence shape in a gate's OWN PROOF, and it is worse there than in
+    # the gate: this file exists to demonstrate the gate CAN fire, on the principle that a pass
+    # never contrasted with a fire carries no information. A proof that cannot report its own
+    # failure is exactly what makes a broken gate look sound.
+    import sys
+    if _failed:
+        print(f"\n  🔴 CAN-IT-FIRE PROOF FAILED: {_failed} case(s) across the band, spread and "
+              f"arm-agreement clauses disagree with their expected verdict. A PASS from this gate "
+              f"no longer carries the information it implies — do not rely on one until green.")
+        sys.exit(1)
+    print("\n  ✅ can-it-fire proof GREEN — all three clauses match their expected verdicts (exit 0).")
