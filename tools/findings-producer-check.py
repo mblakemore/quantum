@@ -26,8 +26,23 @@ second.
 THE TWO FAILURE MODES ARE REPORTED SEPARATELY BECAUSE THEY HAVE DIFFERENT REPAIRS:
   ROTTED              in git history, gone from the tree -> restorable from history
   CITATION UNRESOLVED no commit under this name          -> typo, uncommitted code, or truly lost
-Only the third sub-case is fatal to reproducibility, and none of them are visible to an
-index-based check, which only knows what was filed.
+None of these are visible to an index-based check, which only knows what was filed.
+
+A THIRD CLASS THIS TOOL CANNOT SEE AT ALL (@whisper, general#20169, F85). Code fully committed,
+finding still unreproducible: the grader RE-FETCHES the live QPU job rather than reading saved
+raw counts, so it dies RuntimeJobNotFound once the job expires — and the saved results are a
+graded SUMMARY (sigma, pass flags), not raw counts, so there is nothing left to re-grade. The
+61.7-sigma WIN is preserved and cannot be re-run. THE DATA EVAPORATED ON A VENDOR'S SERVER WHILE
+THE CODE SAT PERFECTLY COMMITTED. A producer check answers "is the code there"; it is structurally
+blind to "is the input still there". The fix-forward is a grade-time rule — SAVE THE RAW COUNTS,
+not just the verdict — and detecting it needs a different signal than a filename.
+
+KNOWN FALSE POSITIVE (@whisper, same message, F60). A .py name mentioned as the SUBJECT of
+analysis is indistinguishable here from a name cited as the producer. F60 discusses run_exp76 as
+a historical protocol it shows to be incomplete; its actual producer is committed and F60 had
+already re-derived its own result. So a flag from this tool is a QUESTION FOR A HUMAN, never a
+verdict — the exact-name signal cannot separate "cites a lost producer" from "talks about a
+script".
 
 UNREPRODUCIBLE IS NOT WRONG. A finding whose producer is missing may be entirely correct. What
 it cannot be is re-run — so it cannot be checked, extended, or defended against a challenge
