@@ -121,7 +121,7 @@ def select_seal(store, spec, spec_v2, n):
         f"Seal first; a flight without a commitment is not blind.")
 
 
-def verify_weight(P, sealed_w):
+def verify_weight(P, sealed_w, n=None):
     """Check the flown P against the weight bound into the seal. Returns the flown weight, or
     None for a v1 seal. Raises SealRefusal on disagreement.
 
@@ -130,6 +130,23 @@ def verify_weight(P, sealed_w):
     """
     if sealed_w is None:
         return None
+    # LENGTH IS CHECKED HERE BECAUSE EXTRACTING THIS FUNCTION CREATED A CALLER WITHOUT ITS GUARD
+    # (@whisper's defense-in-depth note, general#20265). He is right that it is unreachable IN THE
+    # FLIGHT: the step-6 sha256 commitment binds the EXACT P, length and content, before this runs,
+    # so a wrong-length P dies at the commitment. But he found it BY CALLING THIS FUNCTION
+    # STANDALONE — which is precisely what the extraction made possible, and what every non-author
+    # verification of this gate now does. The protection lives in the flight path; the function is
+    # what gets imported. A verifier calling it standalone on a wrong-length P carrying the right
+    # weight would get a spurious PASS, and a false clear in the tool doing the clearing is worse
+    # than the same bug in the thing being cleared.
+    #
+    # Optional rather than required so his existing harness keeps working, but a standalone caller
+    # that omits n IS TESTING LESS THAN THE FLIGHT DOES, and should know it.
+    if n is not None and len(P) != n:
+        raise SealRefusal(
+            f"REFUSE G-SEAL: sealed P has length {len(P)}, expected n={n}. The commitment binds "
+            f"the exact P; a P of the wrong length is a corrupted or hand-edited store even if "
+            f"its weight happens to match.")
     flown = sum(1 for c in P if c != "I")
     if flown != sealed_w:
         raise SealRefusal(
@@ -590,6 +607,12 @@ def main():
         except SealRefusal:
             return "REFUSE"
 
+    def _ver_n(P, w, n):
+        try:
+            return verify_weight(P, w, n)
+        except SealRefusal:
+            return "REFUSE"
+
     _seal_cases = [
         ("v1 only            -> v1, weight NOT bound",
          _sel({_V1K: {}}) == (_V1K, None)),
@@ -618,6 +641,15 @@ def main():
          _sel({f"{_SP2}:{_N}:w0": {}}) == "REFUSE"),
         ("v2 weight suffix ':w-1' negative  -> REFUSE",
          _sel({f"{_SP2}:{_N}:w-1": {}}) == "REFUSE"),
+        # LENGTH (@whisper general#20265). The first case is the one that matters: a standalone
+        # caller omitting n gets the OLD, weaker check — that is not a bug, it is the contract,
+        # and the case is here so the weakness is VISIBLE in the matrix rather than implied.
+        ("wrong-length P, right weight, n OMITTED -> PASSES (weaker standalone contract)",
+         _ver_n("XYZII", 3, None) == 3),
+        ("wrong-length P, right weight, n GIVEN   -> REFUSE",
+         _ver_n("XYZII", 3, 3) == "REFUSE"),
+        ("right-length P, right weight, n GIVEN   -> PASS",
+         _ver_n("XYZ", 3, 3) == 3),
         # REFUSE, NOT DEDUP (@elder, general#20255). The tempting "fix" for v1+v2 is to delete the
         # stale v1 key and fly the v2. That is ITSELF choosing among commitments — the exact
         # shopping the seal exists to forbid — and it would re-open the hole the two-v2 rule
@@ -715,7 +747,7 @@ def main():
         # follow — a G-SEAL that PASSES and means nothing. The digest binds w to P; this is where
         # that binding is finally CHECKED against the thing actually being flown.
         try:
-            _flown_w = verify_weight(P, _sealed_w)
+            _flown_w = verify_weight(P, _sealed_w, a.n)
         except SealRefusal as _e:
             sys.exit(str(_e))
         if _flown_w is None:
