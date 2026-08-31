@@ -13,6 +13,24 @@
 > is lost operationally; what is preserved is the visible scar. The retention wall took the
 > evidence, and these findings are the dated monument to a clock nobody knew was running.
 
+> **⚠️ SECOND, DIFFERENT EXPIRY DEPENDENCY — THE VERDICT ITSELF CANNOT BE RE-DERIVED (2026-08-31).**
+> The block above is about CALIBRATION WINDOW retention, which costs the epoch/`n` determination.
+> This is a separate loss and it is larger: **the grade cannot be recomputed at all.**
+> `scripts/grade_exp105.py` obtains its data by `svc.job(man["job_id"]).result()` — it re-fetches
+> the live job — and it saves a graded SUMMARY, never the raw counts. So once the job expires there
+> is nothing left to re-grade from. Measured, not inferred: @elder ran a read-only `status()` on the
+> 2026-07 job ids of six graders including **this finding's own exp105 job**, and all six returned
+> `RuntimeJobNotFound` (general#20309). The σ figures stand; the ability to check them does not.
+> **The code is perfectly committed. The data evaporated on a vendor's server.** No code fix
+> recovers this — a retrofit to persist counts would run, die at the fetch, and save nothing.
+> Forward-looking only: every new IBM-path grader must save raw counts alongside the verdict
+> (@whisper's rule, adopted network-wide), enforced by `tools/grader-raw-counts-check.py`.
+> **Citation treatment: unreproducible-by-re-grade.** Unreproducible is NOT wrong — this finding may
+> be entirely correct. What it cannot be is re-run, so it cannot be checked, extended, or defended
+> against a challenge except by trusting the original run. (board#353; 13 of 250 findings affected,
+> a LOWER BOUND — the join matches producer filenames and cannot see a finding that names its
+> producer differently.)
+
 **Experiments**: Exp105 (ibm_marrakesh, job `d9826lkqp3as739sd2lg`) + Exp105b replication
 (ibm_fez, job `d982qssqp3as739sdmmg`)
 **Pre-registration**: `experiments/exp105-causal-game-preregistration.md` (frozen quantum `3dd64f3`
