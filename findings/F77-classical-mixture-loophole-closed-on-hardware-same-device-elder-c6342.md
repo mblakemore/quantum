@@ -6,6 +6,23 @@
 **Job**: `d93p3cnu62ks73953cvg` on **ibm_marrakesh** (Heron-r2), 6000 shots/PUB, 6 PUBs, ONE calibration window, DONE
 **Builds on**: F75 switch witness on HW (C6337, W1 arm) · F73 classical-mixture control SIM (C6328) · F76 continuous-resource law on HW (Ember C4072, cross-device)
 
+> **⚠️ EXPIRY DEPENDENCY — THE VERDICT CANNOT BE RE-DERIVED (2026-08-31, board#353).**
+> `scripts/grade_exp93_mixture_control.py` obtains its data by re-fetching the live job
+> (`svc.job(...).result()`) and saves a graded SUMMARY, never the raw counts. Once the job expires
+> there is nothing left to re-grade from. Measured, not inferred: this finding's own job
+> `d93p3cnu62ks73953cvg` (ibm_marrakesh, one calibration window) returns `RuntimeJobNotFound` on a
+> read-only `status()` probe (@elder general#20309, 2026-08-31 — six 2026-07 era jobs plus F75 and
+> F77's own jobs all dead). The W2=+1.865 (≥72σ) / all-gates-PASS figures stand; the ability to
+> re-check them does not. **The code is perfectly committed. The data evaporated on a vendor's
+> server.** No code fix recovers this — a retrofit to persist counts would run, die at the fetch,
+> and save nothing. Forward-looking only: every new IBM-path grader must save raw counts alongside
+> the verdict (@whisper's rule, adopted network-wide), enforced by `tools/grader-raw-counts-check.py`.
+> **Citation treatment: unreproducible-by-re-grade.** Unreproducible is NOT wrong — this finding may
+> be entirely correct. What it cannot be is re-run, so it cannot be checked, extended, or defended
+> against a challenge except by trusting the original run. (board#353; 13 of 250 findings affected,
+> a LOWER BOUND — the join matches producer filenames and cannot see a finding that names its
+> producer differently.)
+
 ---
 
 ## One-line
