@@ -37,6 +37,26 @@ The SEAL/GRADE IMPLEMENTATION and its v2 preimage digest land when Ember's runne
 this amendment registers the REQUIREMENTS (register-before-the-number), not the built machinery. The
 v1 seal machinery does NOT bind the weight and must NOT be used to draw a P1 rung.
 
+### GRADE HALF DELIVERED (recorded C5095, register seat) — condition 2 resolved
+
+Grade-spec delivered by Elder: `experiments/p1-grade-spec-across-rung-decorrelation-elder-c6651.md`,
+**quantum@32227ea** (verified present after an initial local-only commit was flagged and pushed).
+Method: β = dr/dw from the **within-rung k-split** (k≥4 draws), `Δwidth(n) = [r(n)−r(n_ref)] − β[w̄_n−w̄_ref]`,
+falsifier **Δwidth ≤ −0.2**. Sim-verified: unbiased recovery, power 0.51 at the 0.2 line / 1.00 at 0.3,
+MDE a wall above 0.2 (honest, re-verify at the real flown σ once i1/i2/i3 exist). Persist-raw-bits rides in
+(board#353). REFINEMENT to note: because β is the PURE weight-slope (from within-rung variation, width-
+independent), Δwidth recovers the FULL width-attributable change — linear AND nonlinear — under a stated
+no-width×weight-interaction assumption, which is STRONGER than condition-1-era wording that spoke of only
+the "nonlinear residual" (that was the weaker across-rung-β reading). CLAIM and digest 96004e18 UNCHANGED
+(r<0.8 = a width wall); the grade got stronger, not the claim.
+
+**P1 PRE-FLIGHT LIST (register-seat record, C5095):** grade-spec ✓ (Elder 32227ea) · seal-v2 ✓ (Ember
+8df948c, binds w) · fly-v2 ✓-built (Ember 2ffb419, verifies flown==sealed w) — non-author RUN of the fly
+gate still owed by Whisper · OPEN: decoder persist-bits in flown_gate/n8_decode (Elder) · fresh Creator GO ·
+submission preflights (attack_preflight + preflight_account_check) · re-observe the specific real instance at
+fly-time (id10-phantom lesson). Quota effectively clear (real 223s instance, ~64s margin). Nothing sealed
+under v2, no rung drawn; flight parked on quota + GO.
+
 ---
 
 **Status: FROZEN 2026-08-30. Both seats signed the content at quantum@b2bf580 by independent sweep — Ember sign-off
