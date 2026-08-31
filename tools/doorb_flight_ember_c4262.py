@@ -20,6 +20,18 @@ BLINDNESS: rho is drawn from the off-git seal and never written to disk. The man
 run parameters and outcome records only.
 """
 import argparse, itertools, json, math, os, re, sys, datetime
+
+
+def _load_sealer():
+    """Import the sealer module for its CONSTANTS (board#287). Safe: the sealer guards its CLI
+    behind `if __name__ == "__main__"`, verified before wiring this — importing a module that
+    runs on import would have made every flight execute a seal."""
+    import importlib.util
+    _p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "doorb_sealer_ember_c4262.py")
+    _spec = importlib.util.spec_from_file_location("_doorb_sealer", _p)
+    _m = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(_m)
+    return _m
 import numpy as np
 
 # ALT3 — the live tank (593s at flight time). WhisperPaid is spent (~10s) and cannot carry this.
@@ -478,7 +490,30 @@ def main():
         print("  [SKIP] G-SEAL    weather-only: public calibration P, no seal required")
         P = None
     else:
-        sec = json.load(open(os.path.expanduser("~/.ember-doorb-secrets.json")))[f"doorb_hardensemble_v1:{a.n}"]
+        # ONE DEFINITION (board#287). This line re-expanded the secrets PATH inline and hardcoded
+        # the SPEC string, both of which the sealer already owns. Two copies of a money-path
+        # constant in two files is a divergence waiting for one of them to be edited.
+        #
+        # AND IT HAD ALREADY DIVERGED, BY MY OWN HAND, TODAY. I added SPEC_V2 to the sealer this
+        # morning (per-rung weight bound into the preimage). The sealer writes v2 keys as
+        # "<spec>:<n>:w<weight>"; this line looks for "doorb_hardensemble_v1:<n>" and would have
+        # raised a bare KeyError mid-flight on any v2 seal — after the weather gate, before the
+        # submit. I built the v2 path and left its only consumer unable to read it.
+        _sealer = _load_sealer()
+        _store = json.load(open(_sealer.SECRETS))
+        _k_v1 = f"{_sealer.SPEC}:{a.n}"
+        _v2 = sorted(k for k in _store if k.startswith(f"{_sealer.SPEC_V2}:{a.n}:"))
+        if _k_v1 in _store:
+            sec = _store[_k_v1]
+        elif _v2:
+            # REFUSE rather than guess. A v2 seal binds a WEIGHT this flight does not know how to
+            # honour; picking one silently would fly a rung against a commitment for a different
+            # draw law. Name what exists so the operator can see the mismatch.
+            sys.exit(f"REFUSE G-SEAL: no {_k_v1} seal, but v2 seal(s) exist: {', '.join(_v2)}. "
+                     f"This flight reads v1 only — it cannot honour a weight-bound commitment.")
+        else:
+            sys.exit(f"REFUSE G-SEAL: no seal for {_k_v1} in {_sealer.SECRETS}. "
+                     f"Seal first; a flight without a commitment is not blind.")
         pin = json.load(open(f"experiments/doorb_commitments/doorb_commitment_n{a.n}.json"))
         if sec["sha256"] != pin["commitment_sha256"]:
             sys.exit("REFUSE G-SEAL: stored secret does not match the git-pinned commitment.")
