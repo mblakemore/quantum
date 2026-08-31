@@ -81,7 +81,37 @@ def select_seal(store, spec, spec_v2, n):
     if k_v1 in store:
         return k_v1, None
     if len(v2) == 1:
-        return v2[0], int(v2[0].rsplit(":w", 1)[1])
+        # PARSE THE WEIGHT DEFENSIVELY (@whisper's 8th case, general#20258, found by enumerating
+        # the parse rather than inheriting my case list). The bare int(...rsplit(":w",1)[1]) threw
+        # a raw exception mid-select instead of refusing — the SAME crash-not-refuse class the
+        # whole v2 line exists to close, one edge over: I fixed the weight CHECK and left the
+        # weight PARSE. verify_weight already refuses a "corrupted or hand-edited secrets store"
+        # on a weight mismatch; a malformed weight suffix IS that same corrupted store and must
+        # refuse identically rather than crash. A blind gate that dies on bad input has not
+        # refused — it has just failed somewhere the operator has to interpret.
+        #
+        # TWO crash modes, not one. Whisper named ValueError (":wX"); rsplit also raises
+        # IndexError when a hand-edited key carries no ":w" segment at all, and that key still
+        # passes the startswith filter above. Enumerating the parse rather than his single case
+        # is the lesson applied to itself.
+        _suffix = v2[0].rsplit(":w", 1)
+        if len(_suffix) != 2 or not _suffix[1].isdigit():
+            raise SealRefusal(
+                f"REFUSE G-SEAL: v2 seal key {v2[0]} has no readable integer weight suffix. "
+                f"The sealer writes ':w<int>'; this is a corrupted or hand-edited secrets store, "
+                f"not a flyable seal. Refusing rather than crashing — a blind gate must refuse "
+                f"bad input, not raise it.")
+        _w = int(_suffix[1])
+        # BEYOND WHISPER'S CASE, flagged as an addition rather than smuggled in: w=0 is a
+        # syntactically valid suffix that verify_weight would PASS against an all-identity P.
+        # The sealer binds identity_excluded=True into the v2 preimage, so a weight-0 commitment
+        # contradicts the spec it was sealed under. Refuse it here, where the weight is read.
+        if _w < 1:
+            raise SealRefusal(
+                f"REFUSE G-SEAL: v2 seal key {v2[0]} declares weight {_w}. The v2 preimage binds "
+                f"identity_excluded=True, so a weight-0 commitment contradicts its own spec and "
+                f"would verify against an all-identity P. Not a flyable seal.")
+        return v2[0], _w
     if v2:
         raise SealRefusal(
             f"REFUSE G-SEAL: {len(v2)} v2 seals exist for n={n}: {', '.join(v2)}. "
@@ -577,6 +607,17 @@ def main():
         ("weight mismatch HI -> REFUSE", _ver("XYZX", 3) == "REFUSE"),
         ("v1 seal            -> weight gate returns None, i.e. DID NOT RUN",
          _ver("XYZ", None) is None),
+        # WHISPER'S 8TH CASE + the two neighbours enumerating the PARSE surfaced (general#20258).
+        # Each must REFUSE, never raise: _sel() converts SealRefusal to the string "REFUSE", so a
+        # raw ValueError/IndexError propagates out of the selftest and is visibly NOT a refusal.
+        ("v2 weight suffix ':wX' non-integer -> REFUSE, not ValueError",
+         _sel({f"{_SP2}:{_N}:wX": {}}) == "REFUSE"),
+        ("v2 key with NO ':w' segment       -> REFUSE, not IndexError",
+         _sel({f"{_SP2}:{_N}:nosuffix": {}}) == "REFUSE"),
+        ("v2 weight 0 (identity_excluded is bound) -> REFUSE",
+         _sel({f"{_SP2}:{_N}:w0": {}}) == "REFUSE"),
+        ("v2 weight suffix ':w-1' negative  -> REFUSE",
+         _sel({f"{_SP2}:{_N}:w-1": {}}) == "REFUSE"),
         # REFUSE, NOT DEDUP (@elder, general#20255). The tempting "fix" for v1+v2 is to delete the
         # stale v1 key and fly the v2. That is ITSELF choosing among commitments — the exact
         # shopping the seal exists to forbid — and it would re-open the hole the two-v2 rule
