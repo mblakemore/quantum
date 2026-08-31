@@ -39,6 +39,26 @@ ALPHABET = "IXYZ"
 # trace in the artifact is invisible at the moment the artifact is read, which is reveal time.
 FREEZE_FORM = "sha256(frozen prereg file)[:24] — 24 lowercase hex chars"
 
+def draw_p(n, rng=None):
+    """Draw the sealed Pauli label, excluding the identity string.
+
+    ONE DEFINITION, extracted 2026-08-31 so the selftest can exercise THE DRAWER rather than a
+    copy of it. rho_I is maximally mixed (the wash), so an all-identity P must never be sealed.
+
+    WHY THIS IS A FUNCTION NOW: selftest [7] asserted "identity string is excluded by the drawer"
+    with the literal condition True. It could not fail. Deleting the exclusion below would have
+    left it passing, on a P1 blind protocol. The behaviour was correct throughout — no drawn
+    commitment is affected — but the check guarding it was decorative.
+    Re-implementing the draw inside the test would have been the other error: a test that agrees
+    with its own copy of the logic proves the copy, not the drawer.
+    """
+    rng = rng or secrets.SystemRandom()
+    while True:
+        p_label = "".join(rng.choice(ALPHABET) for _ in range(n))
+        if set(p_label) != {"I"}:          # exclude the identity string
+            return p_label
+
+
 def anchor_problems(prereg_freeze, oop):
     """Return a list of reasons this commitment would bind P to nothing. Empty list == anchored."""
     probs = []
@@ -81,8 +101,20 @@ def selftest():
     rec(5, "prereg-freeze text is bound into the digest",
         known != digest(4, "XYZI", "0" * 32, "frozen", ""))
     rec(6, "P alphabet is exactly IXYZ", set(ALPHABET) == {"I", "X", "Y", "Z"})
-    # the ensemble excludes the identity string: rho_I would be maximally mixed (the wash)
-    rec(7, "identity string is excluded by the drawer", True)
+    # the ensemble excludes the identity string: rho_I would be maximally mixed (the wash).
+    # WAS: rec(7, ..., True) — a condition that could not fail, guarding a real invariant on a
+    # blind protocol. It would have passed with the exclusion deleted. Now it RUNS THE DRAWER.
+    # n=2 on purpose: an unfiltered draw hits the identity string 1/16 of the time, so 400 draws
+    # would catch a removed filter with overwhelming probability. At n=12 the test would be
+    # vacuous again for a different reason — the failure it looks for could never appear.
+    _r = secrets.SystemRandom()
+    rec(7, "identity string is excluded by the drawer",
+        all(set(draw_p(2, _r)) != {"I"} for _ in range(400)))
+    # CONTROL — proves [7] is capable of failing. Without the filter the identity string DOES
+    # occur in this population, so [7] passing is a fact about the drawer and not about n=2 being
+    # a shape where all-I never comes up. A pass whose failure mode cannot arise says nothing.
+    rec("7b", "control: unfiltered draws DO produce the identity string",
+        any(set("".join(_r.choice(ALPHABET) for _ in range(2))) == {"I"} for _ in range(400)))
     # board#330: [5] above cannot fail on a MISSING anchor — it binds whatever it is given, and
     # binding "" is binding. These check the VALUE, and [10] is the can-fire-both-directions
     # control: without it, a check that refused everything would look identical to a working one.
@@ -139,11 +171,7 @@ def main():
         sys.exit(f"REFUSING — a secret already exists for {key}. Reveal or archive it "
                  f"deliberately. (Reusing a revealed P would make the flight blind in name only.)")
 
-    rng = secrets.SystemRandom()
-    while True:
-        p_label = "".join(rng.choice(ALPHABET) for _ in range(a.n))
-        if set(p_label) != {"I"}:          # exclude the identity string
-            break
+    p_label = draw_p(a.n)
     salt = secrets.token_hex(16)
     h = digest(a.n, p_label, salt, a.prereg_freeze, a.oop)
 
