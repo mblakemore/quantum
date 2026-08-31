@@ -17,6 +17,19 @@ from independent streams (F-IND) and are not secrets — they are the ensemble's
 import argparse, hashlib, json, os, secrets, sys
 
 SPEC = "doorb_hardensemble_v1"
+# v2 EXISTS BECAUSE A PER-RUNG WEIGHT MUST BE SEALED, NOT PUBLISHED (board#348, 2026-08-31).
+# v1's preimage is SPEC|n|P|salt|prereg|oop. `alphabet` and `identity_excluded` were published in
+# the commitment and bound by NOTHING, so they were claims a sealer could revise after the fact.
+# Harmless-ish for a fixed alphabet, because the digest still binds the actual P. NOT harmless for
+# a weight: @whisper's registration discloses the drawn weight at unseal as a 20.8% narrowing, and
+# a disclosure is only sound if the disclosed quantity was BOUND BEFORE unseal. Otherwise
+# "disclosed weight" is a weight-law story chosen after you already hold the number.
+# v2 therefore binds w, alphabet and identity_excluded into the preimage.
+# v1 IS LEFT BYTE-IDENTICAL ON PURPOSE: existing commitments must stay verifiable under the scheme
+# they were drawn with. A digest scheme edited in place makes old commitments unverifiable while
+# looking unchanged — the failure being that nothing errors, the numbers just stop meaning what
+# they meant.
+SPEC_V2 = "doorb_hardensemble_v2"
 SECRETS = os.path.expanduser("~/.ember-doorb-secrets.json")
 ALPHABET = "IXYZ"
 
@@ -84,6 +97,46 @@ def digest(n, p_label, salt, prereg_freeze="", oop=""):
     return hashlib.sha256(preimage(n, p_label, salt, prereg_freeze, oop).encode()).hexdigest()
 
 
+def preimage_v2(n, w, p_label, salt, prereg_freeze, oop, alphabet=ALPHABET, identity_excluded=True):
+    """v2 preimage — binds the DRAW LAW, not merely the drawn value.
+
+    w, alphabet and identity_excluded are in here rather than only in the published JSON because
+    a field the digest does not cover is a claim, not a seal.
+    """
+    return (f"{SPEC_V2}|n={n}|w={w}|P={p_label}|salt={salt}"
+            f"|alphabet={alphabet}|identity_excluded={int(bool(identity_excluded))}"
+            f"|prereg={prereg_freeze}|oop={oop}")
+
+
+def digest_v2(n, w, p_label, salt, prereg_freeze="", oop="", alphabet=ALPHABET, identity_excluded=True):
+    return hashlib.sha256(preimage_v2(n, w, p_label, salt, prereg_freeze, oop,
+                                      alphabet, identity_excluded).encode()).hexdigest()
+
+
+def draw_p_weight(n, w, rng=None):
+    """Draw a Pauli label of EXACTLY weight w, by DIRECT CONSTRUCTION.
+
+    Choose the support (which qubits are non-identity), then choose X/Y/Z on each. Uniform over
+    the weight-w set: uniform support x uniform letter.
+
+    NOT "draw until weight == w". Rejection sampling is SOUND if w was committed before the loop
+    — but then it is correct only because of WHEN someone ran it, which is procedural. Direct
+    construction makes the ordering STRUCTURAL: there is no draw to discard, so there is no
+    discarded draw to have shopped. board#330 settled the same point as refuse-before-drawing:
+    a drawn-then-rejected P is a P that existed.
+
+    w >= 1 is required, which excludes the identity string by construction rather than by filter.
+    """
+    if not isinstance(w, int) or not (1 <= w <= n):
+        raise ValueError(f"weight must be an int in [1, {n}]; got {w!r}. "
+                         f"w=0 would seal the identity string (rho_I, maximally mixed — the wash).")
+    rng = rng or secrets.SystemRandom()
+    label = ["I"] * n
+    for pos in rng.sample(range(n), w):
+        label[pos] = rng.choice("XYZ")
+    return "".join(label)
+
+
 def selftest():
     ok = True
 
@@ -92,9 +145,29 @@ def selftest():
         ok &= bool(cond)
         print(f"  [{i}] {name:<52} {'OK' if cond else 'FAIL'}")
 
+    def _raises(fn):
+        """True iff fn() raises ValueError. A refusal test that swallowed EVERY exception would
+        pass on a typo as readily as on the guard firing, so this catches only the intended type."""
+        try:
+            fn()
+            return False
+        except ValueError:
+            return True
+
     known = digest(4, "XYZI", "0" * 32, "", "")
-    rec(1, "digest reproduces from a known preimage", len(known) == 64)
-    rec(2, "same inputs give the same digest", known == digest(4, "XYZI", "0" * 32, "", ""))
+    # WAS: rec(1) checked len(known)==64 — true of ANY sha256 — and rec(2) compared digest(x) to
+    # digest(x), i.e. the function to itself. NEITHER PINNED THE v1 VALUE. Editing preimage()
+    # would have left both passing while every previously drawn v1 commitment silently became
+    # unverifiable. That is precisely the failure board#348 condition 2 forbids, and the check
+    # meant to protect it could not see it. Found while adding v2, in the same file as [7].
+    # A GOLDEN LITERAL is the only form that pins a hash: it cannot be re-derived from the code
+    # it is checking, so a change to that code has something to disagree with.
+    V1_GOLDEN = "154f679ab07c2d28316eb7e901b8573f44d890b62dec0952071b4ab15a72bc6b"
+    rec(1, "v1 digest matches the GOLDEN literal (old commitments stay verifiable)",
+        known == V1_GOLDEN)
+    rec(2, "v1 preimage FORMAT is unchanged",
+        preimage(4, "XYZI", "0" * 32, "", "")
+        == "doorb_hardensemble_v1|n=4|P=XYZI|salt=" + "0" * 32 + "|prereg=|oop=")
     rec(3, "single-character P change moves the digest",
         known != digest(4, "XYZZ", "0" * 32, "", ""))
     rec(4, "salt change moves the digest", known != digest(4, "XYZI", "1" * 32, "", ""))
@@ -115,6 +188,29 @@ def selftest():
     # a shape where all-I never comes up. A pass whose failure mode cannot arise says nothing.
     rec("7b", "control: unfiltered draws DO produce the identity string",
         any(set("".join(_r.choice(ALPHABET) for _ in range(2))) == {"I"} for _ in range(400)))
+
+    # ── v2: the weight and the draw law are SEALED, not published (board#348) ──────────────
+    rec("v2a", "w is BOUND — changing only w moves the digest",
+        digest_v2(4, 2, "XYZI", "0" * 32, "", "") != digest_v2(4, 3, "XYZI", "0" * 32, "", ""))
+    rec("v2b", "alphabet is BOUND — changing only it moves the digest",
+        digest_v2(4, 2, "XYZI", "0" * 32, "", "", alphabet="IXY")
+        != digest_v2(4, 2, "XYZI", "0" * 32, "", "", alphabet="IXYZ"))
+    rec("v2c", "identity_excluded is BOUND — changing only it moves the digest",
+        digest_v2(4, 2, "XYZI", "0" * 32, "", "", identity_excluded=False)
+        != digest_v2(4, 2, "XYZI", "0" * 32, "", "", identity_excluded=True))
+    rec("v2d", "v1 and v2 digests differ for identical P (spec separation)",
+        digest(4, "XYZI", "0" * 32, "", "") != digest_v2(4, 2, "XYZI", "0" * 32, "", ""))
+    # the drawer builds EXACTLY w, by construction rather than by filtering
+    rec("v2e", "draw_p_weight yields exactly weight w, every draw",
+        all(sum(1 for c in draw_p_weight(8, w, _r) if c != "I") == w
+            for w in (1, 3, 8) for _ in range(120)))
+    rec("v2f", "draw_p_weight REFUSES w=0 (would seal rho_I) and w>n",
+        _raises(lambda: draw_p_weight(4, 0)) and _raises(lambda: draw_p_weight(4, 5)))
+    # CONTROL — v2e could pass on a degenerate drawer that always returns the SAME weight-w
+    # string. This shows the support actually varies, so "exactly w" is a fact about the weight
+    # and not about the drawer being constant.
+    rec("v2g", "control: the support VARIES across draws (drawer is not constant)",
+        len({draw_p_weight(8, 3, _r) for _ in range(120)}) > 1)
     # board#330: [5] above cannot fail on a MISSING anchor — it binds whatever it is given, and
     # binding "" is binding. These check the VALUE, and [10] is the can-fire-both-directions
     # control: without it, a check that refused everything would look identical to a working one.
@@ -137,6 +233,11 @@ def main():
     ap.add_argument("--n", type=int, default=16)
     ap.add_argument("--prereg-freeze", default="")
     ap.add_argument("--oop", default="")
+    ap.add_argument("--weight", type=int, default=None,
+                    help="seal a per-rung Pauli of EXACTLY this weight, under SPEC v2 (binds w, "
+                         "alphabet and identity_excluded into the digest preimage). Omit for the "
+                         "v1 uniform draw. v1 does NOT bind w and must not be used for a weighted "
+                         "rung — a published-but-unsealed weight is a claim, not a commitment.")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--allow-unanchored", action="store_true",
                     help="draw a commitment that binds P to no resolvable protocol document. "
@@ -165,17 +266,31 @@ def main():
             print(f"  · {p}")
         print("  Recorded as anchored:false in the commitment.\n")
 
-    key = f"{SPEC}:{a.n}"
+    # --weight selects v2. A per-rung weight MUST be sealed under v2, never under v1: v1's
+    # preimage does not bind w, so a v1 seal of a weighted draw would publish a weight it does
+    # not commit to — the exact gap board#348 opened.
+    use_v2 = a.weight is not None
+    spec = SPEC_V2 if use_v2 else SPEC
+    key = f"{spec}:{a.n}" + (f":w{a.weight}" if use_v2 else "")
     store = json.load(open(SECRETS)) if os.path.exists(SECRETS) else {}
     if key in store and not a.dry_run:
         sys.exit(f"REFUSING — a secret already exists for {key}. Reveal or archive it "
                  f"deliberately. (Reusing a revealed P would make the flight blind in name only.)")
 
-    p_label = draw_p(a.n)
-    salt = secrets.token_hex(16)
-    h = digest(a.n, p_label, salt, a.prereg_freeze, a.oop)
+    if use_v2:
+        try:
+            p_label = draw_p_weight(a.n, a.weight)
+        except ValueError as e:
+            sys.exit(f"REFUSE: {e}")
+        salt = secrets.token_hex(16)
+        h = digest_v2(a.n, a.weight, p_label, salt, a.prereg_freeze, a.oop, ALPHABET, True)
+    else:
+        p_label = draw_p(a.n)
+        salt = secrets.token_hex(16)
+        h = digest(a.n, p_label, salt, a.prereg_freeze, a.oop)
 
-    public = {"spec": SPEC, "n": a.n, "commitment_sha256": h,
+    public = {"spec": spec, "n": a.n, "commitment_sha256": h,
+              **({"weight": a.weight, "weight_is_sealed": True} if use_v2 else {}),
               "prereg_freeze": a.prereg_freeze, "order_of_operations": a.oop,
               "alphabet": ALPHABET, "identity_excluded": True,
               # board#330: stated on EVERY commitment, not only the bad ones. A field that
