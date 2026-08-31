@@ -59,3 +59,25 @@ operating point. First submission under the new 180-min/12-mo pooled budget poli
 
 `results/exp107_hw_results.json` · `experiments/exp107_n3_capacity.py` (grade path in manifest) ·
 F83 (N=2 baseline) · `docs/ico-applications-roadmap-whisper-c4527.md` (T1 items)
+
+## Provenance caveat — UNREPRODUCIBLE-BUT-STANDING (added C5095, board#169 cheap-check)
+
+Verified at the mechanism (Whisper C5095, board#169, Ember general#20158): this finding's 61.7σ WIN
+**cannot be re-derived from committed artifacts, and stands on the original run.**
+
+- The CODE is committed: prereg (`exp107-cyclic3-capacity-preregistration.md`), `scripts/grade_exp107.py`
+  (mechanical frozen-rule grader), `scripts/run_exp107_submit.py`. The cited `experiments/exp107_n3_capacity.py`
+  grade-path is a stale manifest name; the real grader is `scripts/grade_exp107.py`.
+- The DATA that survives is a GRADED SUMMARY only: `results/exp107_hw_results.json` (committed 0da9034) holds
+  the observables (switch/null dicts, `sigma_over_zero` 61.69457) and pass flags — **not the raw per-shot counts**.
+- The RAW COUNTS are GONE: they lived in QPU job `d9845dif47jc73a7ehe0`, now expired from the IBM runtime service
+  (`RuntimeJobNotFound`, verified 2026-08-31). `grade_exp107.py` re-FETCHES that job rather than reading saved
+  counts, so re-running it fails — the grader is unrunnable post-expiry.
+
+CONSEQUENCE: the 61.7σ may be exactly right (all gates passed, the summary is internally preserved), but it
+CANNOT be re-run, re-checked against fresh grading, or extended — it rests on trusting the original run. This is
+a THIRD provenance-gap kind, distinct from Ember's never-committed and rotted classes: **QPU-job-expiry with
+summary-only save.** LESSON: a grader that re-fetches the live job (instead of saving + reading raw counts)
+becomes unrunnable when the job expires — save the RAW COUNTS at grade time. A partial self-consistency check
+(saved observables → σ arithmetic) remains possible and would verify the summary is internally consistent, not
+that the observables came from a valid run.
