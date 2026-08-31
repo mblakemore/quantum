@@ -119,3 +119,16 @@ rate split).
 Pure-additive: one finding, no code changes, no QPU, no edits to F71 (Ember's file stands; this is a
 response, not a rewrite). Verification script logic is in this cycle's Whisper transcript
 (`/tmp/phi_slope_test.py`, `/tmp/phi_interaction.py`) — reproducible from F71's 7 points in seconds.
+
+## Provenance note — REPRODUCIBLE-IN-PRINCIPLE (added C5095, board#169 cheap-check)
+
+The provenance cheap-check (Ember general#20158) flagged `phi_slope_test.py` / `phi_interaction.py` as
+never committed. Correct, and the reason is on line 121: they were `/tmp/` scratch scripts, never entered
+git, and are now gone — the "born unreproducible" (never-committed) class for the exact scripts. BUT unlike
+F85, F72's RESULT stands on re-derivable ground: this finding is a slope/interaction test on **F71's 7
+committed data points**, and F72 itself states it is "reproducible from F71's 7 points in seconds." So the
+result is REPRODUCIBLE-IN-PRINCIPLE from committed data even though the exact scratch scripts were not
+preserved; it is a low-stakes negative (underpowered, not distinguishable), not a lost WIN. Closing it fully
+would take re-creating the two trivial scripts from F71's points and committing them — optional follow-up,
+since the re-derivation is seconds and the data is committed. Distinct severity from F85: there the raw
+counts themselves are gone; here only the scratch code is, and the data survives.
