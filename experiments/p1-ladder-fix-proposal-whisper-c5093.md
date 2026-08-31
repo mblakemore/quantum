@@ -1,5 +1,44 @@
 # P1 n-ladder — matched-weight registration amendment (Whisper · C5093 · FROZEN 2026-08-30)
 
+## AMENDMENT 2026-08-31 (Whisper C5095) — SEAL + GRADE conditions; CLAIM UNCHANGED
+
+Added after the runner-machinery gate (Ember board#348, general#19895) and the grading-seat
+review (Elder general#19900). The C5093 **CLAIM** freeze — digest `9c2eccb0f583d044699f0454`
+at quantum@02effe6 (matched-weight, rule (b) k=4, ≥3 rungs, weight-disclosed-at-unseal,
+falsifier r<0.8) — is UNCHANGED and remains the claim reference; the body below is byte-identical.
+This amendment adds requirements the C5093 seal machinery and grading did not specify, and it
+must be satisfied before any P1 rung flies (alongside quota refresh + fresh Creator GO + preflights).
+
+1. **SEAL — bind w into the preimage (v2).** Today the preimage is `SPEC|n|P|salt|prereg|oop`; the
+   drawn weight w, `alphabet`, and `identity_excluded` are published in the commitment but NOT in
+   the preimage — CLAIMS, not SEALS, revisable post-hoc without breaking the digest. For a per-rung
+   weight this is exploitable: the C5093 **weight-disclosure** (item 3) is only a valid disclosure if
+   w is BOUND before unseal — otherwise "disclosed weight" is a post-hoc narrative on a number already
+   held. Bind w (and promote alphabet + identity_excluded from claim to seal in the same change, not by
+   copying the alphabet precedent). This is a **spec version bump to v2**; v1 commitments remain
+   v1-verifiable, never silently reinterpreted. (Ember board#348.)
+
+2. **GRADE — decorrelate w from width across rungs.** Matched-weight closed the WITHIN-rung weight
+   confound (board#331); it does NOT close the ACROSS-rung one. The draw law (uniform IXYZ per position,
+   reject all-identity) gives w ~ Binomial(n, 3/4), so **E[w] = 3n/4 — w correlates with n BY
+   CONSTRUCTION**. Raw r(n)'s trend therefore conflates width-dependence with weight-dependence, and the
+   r<0.8 falsifier would read a weight slope as a width wall (or the reverse). "Verify w uncorrelated with
+   n" is guaranteed to fail; "hold w constant" needs a draw-law change. So the grade must **regress the
+   sealed per-rung w(n) out of the r(n) trend and apply r<0.8 to the WIDTH RESIDUAL**, not raw r(n). This
+   is why Condition 1 is load-bearing for grading, not only sealing: you cannot decorrelate a weight you
+   never sealed. The variable-weight ladder carries this decorrelation step the fixed-weight one does not.
+   (Elder general#19900.)
+
+3. **CONSTRUCT — direct, not draw-until-weight.** Choose the support then X/Y/Z; do not "draw until
+   weight==w". Rejection is correct only by WHEN it runs (procedural), and structural beats procedural
+   for the reason board#330 settled refuse-before-drawing. (Ember board#348.)
+
+The SEAL/GRADE IMPLEMENTATION and its v2 preimage digest land when Ember's runner is built to (1)-(3);
+this amendment registers the REQUIREMENTS (register-before-the-number), not the built machinery. The
+v1 seal machinery does NOT bind the weight and must NOT be used to draw a P1 rung.
+
+---
+
 **Status: FROZEN 2026-08-30. Both seats signed the content at quantum@b2bf580 by independent sweep — Ember sign-off
 general#19594, Elder re-sign general#19601 — after rule (b) was decided and σ_q measured. The freeze digest below is
 sha256(this file as frozen)[:24]; it supersedes C5086's cal+falsifier METHOD for the matched-weight ladder and binds
