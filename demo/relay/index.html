@@ -220,7 +220,7 @@ function draw(key){
   const n=STATES.length,bw=(R-L)/n*0.5;
   A.vals.forEach((v,i)=>{const x=L+(R-L)*(i+0.5)/n;
     el(bars,"rect",{x:x-bw/2,y:py(v),width:bw,height:B-py(v),rx:4,style:`fill:${A.col};opacity:.9`});
-    el(bars,"text",{x:x,y:py(v)-7,"text-anchor":"middle",style:`fill:${A.col};font-family:var(--mono);font-size:12px;font-weight:700`}).textContent=v.toFixed(3);
+    el(bars,"text",{x:x,y:py(v)-7,"text-anchor":"middle",style:`fill:${A.col};font-family:var(--mono);font-size:12px;font-weight:700;paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round`}).textContent=v.toFixed(3);
     el(bars,"text",{x:x,y:B+20,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12.5px"}).textContent=STATES[i];});
   // The bound label crossed the first bar — amber on cyan. It always did; at 390px the chart used
   // to render it at ~4.8px, too small for the contrast scan to resolve the bar behind it, so

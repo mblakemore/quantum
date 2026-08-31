@@ -274,7 +274,7 @@ function draw(key){
     el(viz,"rect",{x:x-bw/2,y:Math.min(py(b[1]),py(0)),width:bw,height:Math.max(2,Math.abs(py(b[1])-py(0))),rx:4,
       style:`fill:${A.col};opacity:.9`});
     el(viz,"text",{x:x,y:py(b[1])+(b[1]>=0?-8:16),"text-anchor":"middle",
-      style:`fill:${A.col};font-family:var(--mono);font-size:12.5px;font-weight:700`}).textContent=(b[1]>0?"+":"")+b[1].toFixed(3);
+      style:`fill:${A.col};font-family:var(--mono);font-size:12.5px;font-weight:700;paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round`}).textContent=(b[1]>0?"+":"")+b[1].toFixed(3);
     el(viz,"text",{x:x,y:B+38,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:13px"}).textContent=b[0];});
   // fidelity gauge: 0.2..1.0 with witness at 0.5
   const GL=640,GR=830; const gy=v=>B-(B-T)*(v-0.2)/0.8;
@@ -339,7 +339,7 @@ draw("swap");
     el(s,"rect",{x:x-bw/2,y:Math.min(py(b.v),py(0)),width:bw,height:Math.max(2,Math.abs(py(b.v)-py(0))),rx:4,
       style:`fill:${b.c};opacity:.9`});
     el(s,"text",{x:x,y:py(b.v)+(b.v>=0?-8:16),"text-anchor":"middle",
-      style:`fill:${b.c};font-family:var(--mono);font-size:13px;font-weight:700`}).textContent=(b.v>0?"":"−")+Math.abs(b.v).toFixed(3);
+      style:`fill:${b.c};font-family:var(--mono);font-size:13px;font-weight:700;paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round`}).textContent=(b.v>0?"":"−")+Math.abs(b.v).toFixed(3);
     el(s,"text",{x:x,y:B3+20,"text-anchor":"middle",style:"fill:var(--ink-2);font-family:var(--mono);font-size:12px"}).textContent=b.n;});
   // Drawn AFTER the bars, because it used to be drawn before them: a bar tall enough to cross
   // the 1/2 line painted straight over it — amber rgb(255,200,107) on green rgb(68,201,117),
