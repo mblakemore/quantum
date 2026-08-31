@@ -502,15 +502,20 @@ def main():
         _sealer = _load_sealer()
         _store = json.load(open(_sealer.SECRETS))
         _k_v1 = f"{_sealer.SPEC}:{a.n}"
+        _sealed_w = None          # None = v1 seal, no weight bound; int = v2, must be verified
         _v2 = sorted(k for k in _store if k.startswith(f"{_sealer.SPEC_V2}:{a.n}:"))
         if _k_v1 in _store:
             sec = _store[_k_v1]
+        elif len(_v2) == 1:
+            # v2 (board#354): the commitment binds a WEIGHT as well as a P. Read it, then VERIFY.
+            sec = _store[_v2[0]]
+            _sealed_w = int(_v2[0].rsplit(":w", 1)[1])
         elif _v2:
-            # REFUSE rather than guess. A v2 seal binds a WEIGHT this flight does not know how to
-            # honour; picking one silently would fly a rung against a commitment for a different
-            # draw law. Name what exists so the operator can see the mismatch.
-            sys.exit(f"REFUSE G-SEAL: no {_k_v1} seal, but v2 seal(s) exist: {', '.join(_v2)}. "
-                     f"This flight reads v1 only — it cannot honour a weight-bound commitment.")
+            # MORE THAN ONE v2 seal for this n and the flight cannot choose. Selecting by weight
+            # would be the operator picking a commitment AFTER seeing the options, which is the
+            # shopping the seal exists to prevent — the choice must be made when sealing, not here.
+            sys.exit(f"REFUSE G-SEAL: {len(_v2)} v2 seals exist for n={a.n}: {', '.join(_v2)}. "
+                     f"A flight cannot choose among commitments; archive all but one.")
         else:
             sys.exit(f"REFUSE G-SEAL: no seal for {_k_v1} in {_sealer.SECRETS}. "
                      f"Seal first; a flight without a commitment is not blind.")
@@ -519,6 +524,19 @@ def main():
             sys.exit("REFUSE G-SEAL: stored secret does not match the git-pinned commitment.")
         print(f"  [PASS] G-SEAL    {sec['sha256'][:16]}... matches the pinned commitment")
         P = sec["P"]                               # used, never printed
+        # WEIGHT VERIFICATION IS THE ENTIRE REASON v2 EXISTS (board#348 condition 1, board#354).
+        # w was bound into the digest preimage so it could NOT be chosen after the draw. If the
+        # flight read a weight-bound seal and then flew a P of some other weight, the commitment
+        # would still verify against its digest while describing a draw law the flight did not
+        # follow — a G-SEAL that PASSES and means nothing. The digest binds w to P; this is where
+        # that binding is finally CHECKED against the thing actually being flown.
+        if _sealed_w is not None:
+            _flown_w = sum(1 for c in P if c != "I")
+            if _flown_w != _sealed_w:
+                sys.exit(f"REFUSE G-SEAL: sealed weight w={_sealed_w} but the sealed P has "
+                         f"weight {_flown_w}. The commitment and its own P disagree — this is a "
+                         f"corrupted or hand-edited secrets store, not a flyable seal.")
+            print(f"  [PASS] G-SEAL-W  flown weight {_flown_w} == sealed w={_sealed_w}")
 
     # ---- circuit: uniform template, secret entirely in bound 1q parameters (form (a)).
     #      Builder and angles are the ones VERIFIED end-to-end in the cost pilot, not a rewrite.
