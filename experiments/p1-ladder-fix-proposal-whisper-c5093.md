@@ -43,7 +43,11 @@ Grade-spec delivered by Elder: `experiments/p1-grade-spec-across-rung-decorrelat
 **quantum@32227ea** (verified present after an initial local-only commit was flagged and pushed).
 Method: β = dr/dw from the **within-rung k-split** (k≥4 draws), `Δwidth(n) = [r(n)−r(n_ref)] − β[w̄_n−w̄_ref]`,
 falsifier **Δwidth ≤ −0.2**. Sim-verified: unbiased recovery, power 0.51 at the 0.2 line / 1.00 at 0.3,
-MDE a wall above 0.2 (honest, re-verify at the real flown σ once i1/i2/i3 exist). Persist-raw-bits rides in
+MDE a wall above 0.2 (honest, re-verify at the real flown σ once i1/i2/i3 exist). VERIFICATION SCOPE (Elder
+general#20223, honest-scoping): the sim exercised a NONLINEAR (step) wall — that half is empirically sim-
+verified; the LINEAR-width recovery follows from the DERIVATION (within-rung β = pure weight-slope, so
+β·Δw̄ removes the weight's n-linear part and leaves the width's, not a separate sim run). So re-verify at real
+σ should INCLUDE a linear-width sim to close the linear half empirically too. Persist-raw-bits rides in
 (board#353). REFINEMENT to note: because β is the PURE weight-slope (from within-rung variation, width-
 independent), Δwidth recovers the FULL width-attributable change — linear AND nonlinear — under a stated
 no-width×weight-interaction assumption, which is STRONGER than condition-1-era wording that spoke of only
