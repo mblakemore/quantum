@@ -317,7 +317,7 @@ function drawScal(){
     sr.pts.forEach((p,w)=>el(s,"circle",{cx:X(w),cy:Y(p),r:5,style:`fill:${sr.col};stroke:var(--bg);stroke-width:1.5`}));
   });
   // series labels
-  el(s,"text",{x:R+2,y:Y(0.945)-8,"text-anchor":"end",style:"fill:var(--good);font-family:var(--mono);font-size:10.5px"}).textContent="one machine";
+  el(s,"text",{x:R+2,y:Y(0.945)-8,"text-anchor":"end",style:"fill:var(--good);font-family:var(--mono);font-size:10.5px;paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round"}).textContent="one machine";
   el(s,"text",{x:R+2,y:Y(0.868)+16,"text-anchor":"end",style:"fill:var(--cyan);font-family:var(--mono);font-size:10.5px"}).textContent="two machines (r=0.954)";
   el(s,"text",{x:R+2,y:Y(0.123)-8,"text-anchor":"end",style:"fill:var(--bad);font-family:var(--mono);font-size:10.5px"}).textContent="no e-bits: 1/2ʷ exactly";
 }
