@@ -72,18 +72,26 @@ def main(target):
         line = (r.stdout or r.stderr).strip().splitlines()
         verdict = next((l for l in line if l.startswith("[")), "(no verdict)")
         rel = os.path.relpath(m, REPO)
-        # C5048 fix (first real use): the underlying gate's [WARN] means implicit
-        # resolution on a READ path — "wrong answers, not wrong actions". Blocking on
-        # WARN made this tool refuse every script that imports the mandated guard
-        # module itself (ibm_multi_account.py). Block on [FAIL] only; surface WARNs.
-        if verdict.startswith("[PASS]"):
+        # BOTH-ENDS (Elder general#20622, task#355 Whisper C5095): read the underlying gate's
+        # EXIT CODE, not only its stdout verdict. preflight_account_check exits 1 on FAIL and 2 on
+        # ERROR (C5095 fix — ERROR was failing OPEN at exit 0); a consumer that trusts stdout alone
+        # would miss a producer whose stdout and exit ever diverge, or a future gate that signals
+        # only via exit. This tool already fails SAFE (the else-branch below refuses on a missing/
+        # non-PASS verdict), but "fails safe by accident of the else" is not "reads the contract" —
+        # so gate_refused is now a first-class signal. WARN is exit 0 BY DESIGN ("wrong answers,
+        # not wrong actions"), so a WARN must not be turned into a refusal by this.
+        gate_refused = r.returncode != 0
+        # C5048 fix (first real use): the underlying gate's [WARN] means implicit resolution on a
+        # READ path. Blocking on WARN made this tool refuse every script that imports the mandated
+        # guard module itself (ibm_multi_account.py). Block on [FAIL]/refusal only; surface WARNs.
+        if verdict.startswith("[PASS]") and not gate_refused:
             print(f"     {rel}")
-        elif verdict.startswith("[WARN]"):
+        elif verdict.startswith("[WARN]") and not gate_refused:
             print(f"  ⚠  {rel}")
             print(f"       {verdict}")
         else:
             print(f"  ❌ {rel}")
-            print(f"       {verdict}")
+            print(f"       {verdict}" + (f"  (gate exit {r.returncode})" if gate_refused else ""))
             bad.append(rel)
     if bad:
         print(f"\n  ❌ REFUSE TO FLY — {len(bad)} reachable module(s) resolve an account implicitly:")
