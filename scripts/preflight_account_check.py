@@ -219,14 +219,29 @@ def main(argv):
         print(__doc__)
         return 2
     worst = 0
+    had_fail = had_error = False
     for t in targets:
         v, why = verdict(scan(t))
         print(f"[{v}] {t}: {why}")
         if v == "FAIL":
-            worst = 1
-    if worst:
+            had_fail = True
+            worst = max(worst, 1)
+        elif v == "ERROR":
+            # UNKNOWN, not clean. The check COULD NOT ANALYZE this target (unreadable/missing/
+            # typo'd path). An ERROR that exits 0 is the exact silent redirect this gate exists to
+            # refuse — the check never saw the real script, yet a caller reading the exit code flies.
+            # Found by forced-failure sweep (task#355, Whisper C5095): ERROR returned exit 0. The
+            # selftest tests verdict() (which returns "ERROR" correctly), not main()'s exit mapping —
+            # the exit contract is a different frame than the cases (Elder, general#20282). ERROR
+            # must fail closed; exit 2 distinguishes "could not analyze" from a FAIL violation (1).
+            had_error = True
+            worst = max(worst, 2)
+    if had_fail:
         print("\nREFUSE TO FLY. Fix with:  svc = service_for_submission('IBMQ_ALT2')")
         print("A missing credential must be an ERROR, never a silent redirect to a default account.")
+    if had_error:
+        print("\nREFUSE TO FLY: a target COULD NOT BE ANALYZED (UNKNOWN, not a PASS). Check the "
+              "path — an unreadable target must never read as clear-to-fly.")
     return worst
 
 
