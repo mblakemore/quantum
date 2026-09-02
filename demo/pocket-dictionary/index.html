@@ -404,16 +404,21 @@
       document.getElementById("wallBlab").setAttribute("x", bx(WALL));
       document.getElementById("lawBlab").setAttribute("x", bx(LAW));
       var g=document.getElementById("ptsB");
-      function pt(v, col, lab, sub, up){
+      // dx/anchor: a label centred on its own x is BISECTED when that x coincides with a
+      // REFERENCE LINE -- and it does so exactly when the measurement is CLOSE to the
+      // reference, which is the interesting case. 0.748 against the 0.75 classical wall is
+      // that case: the nearer the result, the worse the collision. Offsetting the label
+      // clear of the line keeps both readable without moving the point or the number.
+      function pt(v, col, lab, sub, up, dx, anchor){
         var x=bx(v), y=70;
         var c=document.createElementNS(ns,"circle"); c.setAttribute("cx",x); c.setAttribute("cy",y); c.setAttribute("r",6);
         c.setAttribute("fill",C("--card")); c.setAttribute("stroke",C(col)); c.setAttribute("stroke-width",2.6); g.appendChild(c);
-        var t=document.createElementNS(ns,"text"); t.setAttribute("class","siglab"); t.setAttribute("x",x); t.setAttribute("y", up?y-12:y+20);
-        t.setAttribute("text-anchor","middle"); t.setAttribute("fill",C(col)); t.textContent=lab; g.appendChild(t);
-        if(sub){ var s=document.createElementNS(ns,"text"); s.setAttribute("class","ptlab"); s.setAttribute("x",x); s.setAttribute("y", up?y-28:y+33);
-          s.setAttribute("text-anchor","middle"); s.setAttribute("fill",C("--ink-3")); s.textContent=sub; g.appendChild(s); }
+        var t=document.createElementNS(ns,"text"); t.setAttribute("class","siglab"); t.setAttribute("x", x+(dx||0)); t.setAttribute("y", up?y-12:y+20);
+        t.setAttribute("text-anchor", anchor||"middle"); t.setAttribute("fill",C(col)); t.textContent=lab; g.appendChild(t);
+        if(sub){ var s=document.createElementNS(ns,"text"); s.setAttribute("class","ptlab"); s.setAttribute("x", x+(dx||0)); s.setAttribute("y", up?y-28:y+33);
+          s.setAttribute("text-anchor", anchor||"middle"); s.setAttribute("fill",C("--ink-3")); s.textContent=sub; g.appendChild(s); }
       }
-      pt(CLASS_ARM, "--amber", "0.748", "classical arm", true);
+      pt(CLASS_ARM, "--amber", "0.748", "classical arm", true, -9, "end");
       pt(POOLED, "--cyan", "0.849", "quantum pooled", true);
     })();
 
