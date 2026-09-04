@@ -109,7 +109,7 @@ def stem_of(body, fname):
     return m.group(1).lower() if m else None
 
 
-def evidence_files(repo, body, stem, ledger_row):
+def evidence_files(repo, body, stem, ledger_row, finding_id=None, fname_hint=None):
     files = set(CITED.findall(body))
     if ledger_row and ledger_row.get("retest_ref"):
         files.add(ledger_row["retest_ref"])
@@ -118,6 +118,33 @@ def evidence_files(repo, body, stem, ledger_row):
         for f in glob.glob(os.path.join(repo, "results", "*.json")):
             if pat.match(os.path.basename(f)):
                 files.add(os.path.relpath(f, repo))
+    # NAMED AFTER THE FINDING (Elder, general#22085): a ratification banks counts under the finding's
+    # ID (f124_raw_recount_...) or its experiment TAG (h10_b4_counts_<job>_...), in files the finding
+    # document never cites. Every token the document uses as an experiment tag, plus its own id, is
+    # matched against results/ file names.
+    tags = {t.lower() for t in re.findall(r"\b(h\d+_[a-z0-9]+(?:_[a-z0-9]+)?)\b", body, re.I)}
+    m = re.match(r"(h\d+)-([a-z0-9]+)(?:-([a-z0-9]+))?", fname_hint or "", re.I)   # h10-a1-… -> h10_a1
+    if m:
+        tags.add(f"{m.group(1)}_{m.group(2)}".lower())
+    if finding_id:
+        tags.add(finding_id.lower())
+    if tags:
+        for f in glob.glob(os.path.join(repo, "results", "*.json")):
+            base = os.path.basename(f).lower()
+            if any(re.match(rf"^{re.escape(t)}(?:[_\-.]|$)", base) for t in tags):
+                files.add(os.path.relpath(f, repo))
+    # SECOND HOP (Elder, general#22085): a ratification record can NAME the banked counts file
+    # without the finding document naming it. Every cited file that exists is read as text and
+    # any results/ path inside it joins the evidence set — one hop, so a chain of pointers does
+    # not launder a summary into RAW; the file at the end still has to hold bitstring counts.
+    for f in list(files):
+        fp = os.path.join(repo, f)
+        if os.path.exists(fp) and os.path.getsize(fp) < 5_000_000:
+            try:
+                with open(fp, encoding="utf-8", errors="ignore") as fh:
+                    files.update(CITED.findall(fh.read()))
+            except OSError:
+                pass
     return sorted(files)
 
 
@@ -133,7 +160,9 @@ def assess(repo, fname, ledger):
     else:
         hardware = bool(HARDWARE.search(body))
         basis = "body"
-    files = evidence_files(repo, body, stem, row)
+    fid = fname.split("-")[0] if re.match(r"F\d+-", fname) else fname[:-3]
+    files = evidence_files(repo, body, stem, row, fid, fname)
+    files = [f for f in files if f.lower().endswith(".json")]   # only structured data can hold counts; a cited .md is narrative
     kinds = {f: classify_file(os.path.join(repo, f)) for f in files}
     present = [k for k in kinds.values() if k not in ("MISSING", "UNREADABLE")]
     if not files:
@@ -146,9 +175,9 @@ def assess(repo, fname, ledger):
         disp = "POINTER_ONLY"
     else:
         disp = "SUMMARY_ONLY"
-    fid = fname.split("-")[0] if fname[0] == "F" and fname[1].isdigit() else fname[:-3]
+    raw_via = [f for f, k in kinds.items() if k == "RAW"]
     return {"id": fid, "file": fname, "stem": stem, "hardware": hardware, "hardware_basis": basis,
-            "disposition": disp, "files": kinds}
+            "disposition": disp, "files": kinds, "raw_files": raw_via}
 
 
 def main():
@@ -158,7 +187,11 @@ def main():
     ap.add_argument("--finding", help="report one finding id or file stem")
     a = ap.parse_args()
     fdir = os.path.join(a.repo, "findings")
-    names = sorted(f for f in os.listdir(fdir) if f.endswith(".md") and (re.match(r"F\d+-", f) or f.startswith("finding-")))
+    # POPULATION: every finding document. Three naming eras live here — F<n>-…, finding-…, and the
+    # hypothesis-campaign form h<n>-<cell>-… (F119+ were never renumbered) — so the filter is
+    # "a markdown file that is not an index", not a name pattern that stopped at one era.
+    skip = {"README.md", "INDEX.md", "TEMPLATE.md"}
+    names = sorted(f for f in os.listdir(fdir) if f.endswith(".md") and f not in skip and not f.lower().startswith(("readme", "index", "template")))
     if not names:
         print("could not run: no finding documents under", fdir)
         return 2
