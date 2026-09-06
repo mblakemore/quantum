@@ -628,6 +628,9 @@ def main():
     # to run: `--account OPEN9` was a parse error, and a bare run silently bound ALT4 — the
     # EXHAUSTED tank — because ACCOUNT_CRN/PAID_CRN bind at IMPORT from DEFAULT_ACCOUNT.
     # A dict entry reachable by nothing, with a comment asserting it was reachable.
+    ap.add_argument("--seal-tag", default="",
+                    help="repeat-rung tag: pin the seal against doorb_commitment_v2_n{n}_w{w}_{tag}.json "
+                         "(the sealer's --tag) instead of the original rung's file; recorded in the manifest")
     ap.add_argument("--freeze", default="",
                     help="registration freeze digest recorded in the manifest (P1: 9c2eccb0f583d044699f0454)")
     ap.add_argument("--plan", action="store_true",
@@ -863,7 +866,7 @@ def main():
         # P1 rung (2026-09-06, seal unspent, no device contact): this line still read the v1
         # path and compared a v2 secret against the wrong file. Same class as the KeyError note
         # above — I moved the producer and left the consumer on the old path, one file over.
-        _pin_path = (f"experiments/doorb_commitments/doorb_commitment_v2_n{a.n}_w{_sealed_w}.json"
+        _pin_path = (f"experiments/doorb_commitments/doorb_commitment_v2_n{a.n}_w{_sealed_w}{('_' + a.seal_tag) if a.seal_tag else ''}.json"
                      if _sealed_w is not None else
                      f"experiments/doorb_commitments/doorb_commitment_n{a.n}.json")
         if not os.path.exists(_pin_path):
@@ -873,6 +876,8 @@ def main():
         pin = json.load(open(_pin_path))
         if sec["sha256"] != pin["commitment_sha256"]:
             sys.exit(f"REFUSE G-SEAL: stored secret does not match the git-pinned commitment at {_pin_path}.")
+        if _sealed_w is not None and (pin.get("tag") or "") != (a.seal_tag or ""):
+            sys.exit(f"REFUSE G-SEAL: published commitment tag {pin.get('tag')!r} != --seal-tag {a.seal_tag!r}.")
         if _sealed_w is not None and pin.get("weight") != _sealed_w:
             sys.exit(f"REFUSE G-SEAL: published commitment weight {pin.get('weight')} != sealed key weight {_sealed_w}.")
         print(f"  [PASS] G-SEAL    {sec['sha256'][:16]}... matches the pinned commitment {os.path.basename(_pin_path)}")
@@ -1113,7 +1118,7 @@ def main():
     remaining = shots - flown_science
     man = {"experiment": "doorb_unsigned_shadow", "n": a.n, "eps_nominal": a.eps,
            "shots": shots - remaining, "commitment_sha256": sec["sha256"],
-           "sealed_weight": _sealed_w, "registration_freeze": a.freeze or None,
+           "sealed_weight": _sealed_w, "seal_tag": a.seal_tag or None, "registration_freeze": a.freeze or None,
            "account": a.account, "instance_tail": ACCOUNT_CRN[-40:],
            "backend": bk.name, "layout": "halves", "granularity_R": 1, "jobs": jobs,
            "weather_rows": CAL_ROWS, "weather_P_public": P_cal, "weather_job": wjob.job_id(),

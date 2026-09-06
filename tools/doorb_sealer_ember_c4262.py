@@ -257,6 +257,11 @@ def main():
                          "alphabet and identity_excluded into the digest preimage). Omit for the "
                          "v1 uniform draw. v1 does NOT bind w and must not be used for a weighted "
                          "rung — a published-but-unsealed weight is a claim, not a commitment.")
+    ap.add_argument("--tag", default="",
+                    help="repeat-rung tag (e.g. repeat1): the public commitment is written as "
+                         "doorb_commitment_v2_n{n}_w{w}_{tag}.json so a same-weight REPEAT of a rung never "
+                         "collides with the original rung's published file; recorded in the commitment. "
+                         "The runner pins the tagged file with --seal-tag.")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--allow-unanchored", action="store_true",
                     help="draw a commitment that binds P to no resolvable protocol document. "
@@ -290,6 +295,15 @@ def main():
     # not commit to — the exact gap board#348 opened.
     use_v2 = a.weight is not None
     weight_law = None
+    if a.tag and not use_v2:
+        sys.exit("REFUSE: --tag is for v2 (weighted) seals only.")
+    if use_v2 and a.weight != "draw":
+        # REFUSE BEFORE DRAWING: the published-file collision below used to be checked after the P
+        # existed (2026-09-06, same-weight repeat of n=20: a P was drawn and discarded by my own
+        # path check). The path is knowable before any draw when w is explicit; check it here.
+        _pp = f"experiments/doorb_commitments/doorb_commitment_v2_n{a.n}_w{a.weight}{('_' + a.tag) if a.tag else ''}.json"
+        if os.path.exists(_pp) and not a.dry_run:
+            sys.exit(f"REFUSING — public commitment {_pp} already exists; use --tag for a repeat rung or archive it deliberately. No draw was made.")
     if a.weight == "draw":
         # board#330 order kept: the store is checked for an existing v2 seal at this n BEFORE the
         # weight is drawn, so a refused seal never leaves a drawn weight behind.
@@ -321,7 +335,7 @@ def main():
         h = digest(a.n, p_label, salt, a.prereg_freeze, a.oop)
 
     public = {"spec": spec, "n": a.n, "commitment_sha256": h,
-              **({"weight": a.weight, "weight_is_sealed": True, "weight_draw_law": weight_law} if use_v2 else {}),
+              **({"weight": a.weight, "weight_is_sealed": True, "weight_draw_law": weight_law, "tag": a.tag or None} if use_v2 else {}),
               "prereg_freeze": a.prereg_freeze, "order_of_operations": a.oop,
               "alphabet": ALPHABET, "identity_excluded": True,
               # board#330: stated on EVERY commitment, not only the bad ones. A field that
@@ -341,7 +355,7 @@ def main():
     os.makedirs("experiments/doorb_commitments", exist_ok=True)
     # v2 commitments get their own file: the v1 public commitment for the same n is a published
     # artifact and must not be overwritten by a later seal (history keeps it, the tree should too).
-    path = (f"experiments/doorb_commitments/doorb_commitment_v2_n{a.n}_w{a.weight}.json" if use_v2
+    path = (f"experiments/doorb_commitments/doorb_commitment_v2_n{a.n}_w{a.weight}{('_' + a.tag) if a.tag else ''}.json" if use_v2
             else f"experiments/doorb_commitments/doorb_commitment_n{a.n}.json")
     if os.path.exists(path) and not a.dry_run:
         sys.exit(f"REFUSING — public commitment {path} already exists; archive it deliberately.")
