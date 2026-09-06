@@ -258,7 +258,7 @@ These are **catalogs/frameworks** (what rides which envelope) with one concrete 
   **after** U1 so the signed-reading approach is already validated on clean two-copy data; hard
   sentinel/cal PIN or NO-TEST; never force the encoding.
 - **GAP-4 (rediscovery)**: before running each, run the F-ledger check
-  `node /droid/repos/dc_shared/tools/already-built.js "<run concept>"` — U2a/U4 especially may
+  `node /droid/repos/ship-computer/tools/lib/already-built.js "<run concept>"` — U2a/U4 especially may
   overlap prior purity/certificate work. Log the check in the ledger row.
 - **GAP-5 (estimator provenance)**: two estimators (D signed, g2 tr²) — a run must not silently mix
   them. *Fix*: each ledger row records which estimator + that its selftest/pin passed.

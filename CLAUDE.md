@@ -196,7 +196,7 @@ unfavourable edge.
 ## Before proposing a "new" result
 
 ```bash
-node /droid/repos/dc_shared/tools/already-built.js "<the concept in a few words>"
+node /droid/repos/ship-computer/tools/lib/already-built.js "<the concept in a few words>"
 ```
 
 `query-patterns`/`recall.js` index patterns only. Quantum RESULTS live in `campaign-arcs.md`
