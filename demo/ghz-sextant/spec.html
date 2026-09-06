@@ -52,7 +52,16 @@
   .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--cyan); }
     /* board#393: house wing-tag TYPOGRAPHY. Breadcrumb layout preserved — leading separator
      and left alignment stay; only the type and the accented numeral change. */
-  .topbar .wing { font-family:var(--mich); font-size:9.5px; letter-spacing:.2em;
+  /* .12em, NOT the house .2em, and it is a MEASURED exception rather than drift. A breadcrumb
+     carries THREE items and a long wing name; the exhibit masthead carries two and a short one.
+     At .2em this line went from ONE row to TWO at 1280px on the longest breadcrumbs, stranding
+     "CEILING" alone on a second line — the exact defect my phrase-wrap memory names, shipped by me
+     in dd1cc3e and caught by inert-class flagging a collapsed .sp spacer. Measured: .2em -> 72px,
+     .12em -> 52px at 1280, matching the pre-restyle height, while KEEPING the narrow-width gain
+     (320px: 132px before, 108px now). nowrap was tried first and rejected — it removes the wrap
+     and causes horizontal PAGE overflow at 320/390, trading a stranded fragment for a WCAG 1.4.10
+     reflow failure. */
+  .topbar .wing { font-family:var(--mich); font-size:9.5px; letter-spacing:.12em;
                   text-transform:uppercase; color:var(--ink-4); }
   .topbar .wing b { color:var(--pink); font-weight:400; }  /* Wing IV = WINGS index, mod 4 */ .topbar .sp { flex:1; }
 
