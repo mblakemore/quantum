@@ -50,7 +50,11 @@
   .doc { max-width: 820px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 90px; }
   .topbar { display:flex; align-items:center; gap:14px; padding:16px 0; font-family:var(--mono); font-size:12.5px; }
   .topbar a { color: var(--ink-2); } .topbar a:hover { color: var(--violet); }
-  .topbar .wingtag { color: var(--ink-3); } .topbar .sp { flex:1; }
+    /* board#393: house wing-tag TYPOGRAPHY. Breadcrumb layout preserved — leading separator
+     and left alignment stay; only the type and the accented numeral change. */
+  .topbar .wing { font-family:var(--mich); font-size:9.5px; letter-spacing:.2em;
+                  text-transform:uppercase; color:var(--ink-4); }
+  .topbar .wing b { color:var(--amber); font-weight:400; }  /* Wing III = WINGS index, mod 4 */ .topbar .sp { flex:1; }
 
   .spec-head { padding: clamp(16px,3vw,30px) 0 6px; border-bottom:1px solid var(--edge); margin-bottom:8px; }
   .kicker { font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
@@ -182,7 +186,7 @@
 <nav aria-label="Museum" class="topbar">
 <a href="../">← The Quantum Museum</a>
 <a href="./">· Zeno Tractor Beam exhibit</a>
-<span class="wingtag">· Wing III · Foundations on Silicon</span>
+<span class="wing">· Wing <b>III</b> · Foundations on Silicon</span>
 <span class="sp"></span>
 </nav>
 <main id="main">
