@@ -1,0 +1,3 @@
+ACCOUNT: OPEN10  env=IBMQ_ALT  instance=…3:44cfd6bd-c143-4ed4-8bc0-9d560992006f::
+qiskit_runtime_service._discover_account:WARNING:2026-09-06 19:13:56,630: Loading account with the given token. A saved account will not be used.
+COLLECTED 16 artifact(s): 25,000 science shots, 4 cal blocks; sha256s recorded in results/doorb_flight_n20_daequ2d1ierc738mgntg.json
