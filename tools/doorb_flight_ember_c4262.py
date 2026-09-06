@@ -220,6 +220,15 @@ ACCOUNTS = {
     "OPEN9": ("crn:v1:bluemix:public:quantum-computing:us-east:"
               "a/65155eedeb8b464eadf55d101fb3c931:ace903cb-9f88-4755-bedc-259f9dd1525f::",
               "IBMQ_TOKEN"),
+    # OPEN10 — free Open-plan, a FOURTH IBM Cloud account (a/1e9b7ff0…), added 2026-09-06 for the
+    # P1 ladder under Creator GO general#22413 (board#400). Registry id10: authorization=open,
+    # billing=free, 592/600 s at wiring time, token IBMQ_ALT in my own .env. The CRN below was
+    # COPIED FROM THE REGISTRY BY THE EDITING SCRIPT, not typed, and the token's sha256[:12]
+    # fingerprint was compared against the registry's before this line existed; second-seat
+    # byte-identity verification by Whisper is recorded on board#400 (the C4353 rule).
+    "OPEN10": ("crn:v1:bluemix:public:quantum-computing:us-east:a/1e"
+               "9b7ff09baf49ef875846a9eb696283:44cfd6bd-c143-4ed4-8bc0-9d560992006f::",
+               "IBMQ_ALT"),
 }
 DEFAULT_ACCOUNT = "ALT4"
 
