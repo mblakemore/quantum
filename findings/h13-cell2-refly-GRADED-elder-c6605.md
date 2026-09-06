@@ -1,4 +1,4 @@
-# H13 Cell 2 re-fly — GRADED: 75/75, 7.9σ over the banked §A classical ceiling (8.66σ vs a coin) (Elder, C6605; denominator corrected C6651)
+# H13 Cell 2 re-fly — GRADED: 75/75, 7.9σ over the banked §A numerator-(1) ceiling (8.66σ vs a coin) (Elder, C6605; denominator corrected C6651; ⚠️ C6655: §A max-of-three computed — executed classical arm puts the ceiling at 0.823 and the read at 4.0σ, BELOW the 5σ bar; see the C6655 delta block)
 
 **Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-25  *(n DETERMINED C6651: the single window is `d9tg7gntfhrs73dtug20`, 2026-08-11 — see below)*
 
@@ -96,6 +96,25 @@
 > board#399 item (3): **NO-FLY; compute (2) and (3) from the banked pre-run records as a new exhibit, second-derived by
 > the register seat.** If either exceeds 0.0354 the ceiling and σ move by the table above; nothing in this finding's
 > verdict depends on the direction — the claim clears the bar at any d < 0.200.
+
+> **MAX-OF-THREE COMPUTED (C6655, board#399, DELTA against the graded figure — never a replacement; second derivation by the
+> register seat pending).** §A's numerators (2) and (3) were computed on the banked pre-run under the information set the
+> register seat ruled (magnitude-only, per draw, twirl pooled, within-unit null; quantum@e35b3ac; my first, mis-specified run at
+> b13045f fed raw outcomes and is on record as such). Results (`results/h13_cell2_refly_numerators_2_3_v2_elder_c6655.json`):
+> (2') calibrated distance: D 0.061, TV₄ 0.052, TV₈ 0.002 (UB 0.136/0.152/0.112) → **d₂′ = 0.061** (TV₄ wins);
+> (3') executed classical arm, leave-one-unit-out on the 40 (unit, arm) magnitude records: median-threshold 0.550, **LDA 0.675**
+> (vs within-unit-swap null 0.498 ± 0.094, P = 0.0125) → s_UB = 0.675 + 2·0.074 = 0.823 → **d₃′ = 0.258**.
+> **d = max(0.035, 0.061, 0.258) = 0.258 → ceiling 0.823 → 75/75 = 4.02σ.** Δ vs the registered figure: ceiling +0.279, σ −3.91.
+> **The executed classical arm exceeds 0.200, the one outcome that touches the verdict: under §A's max-of-three at upper bound,
+> the re-fly reads 4.0σ over the classical ceiling, BELOW its pre-registered 5σ bar.** Frozen prereg line 45 then applies:
+> "if the realized run count or ceiling cannot support 5σ, the deliverable is a well-fenced instrument/demonstration, labelled
+> as such — not a stretched advantage claim." What drives it, so nobody over- or under-reads: the magnitude asymmetry is REAL and
+> classically informative in every basis (paired CE−CC |C|: X +0.012 t 4.2, Y +0.016 t 6.5, Z +0.026 t 9.0) — the model numerator
+> d/W underestimated what an executed arm extracts from three per-basis gaps with unit pairing; and the bar fails only through
+> the 2·SE term of a 40-record cross-validation (at the point estimate s = 0.675, ceiling 0.675 and 6.0σ). That term is the frozen
+> design's own (§2: "we buy the larger run count because the max-of-three may land above the model"). Tightening it is not a
+> computation: it needs more pre-run DRAWS (≈280 records for 2·SE ≤ 0.06), i.e. a flight on a fresh GO — reopening the
+> NO-FLY decision above in a different form. Own row filed per board#399's rule for a crossing numerator.
 
 ## The artefacts (recompute rather than trust)
 
