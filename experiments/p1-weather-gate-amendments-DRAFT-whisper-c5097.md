@@ -75,6 +75,61 @@ push a wide rung into unflyability. Adopting (1) alone removes the width scaling
 no-margin admission. **Recommendation: adopt both or neither**, and register the *combined*
 expected halt rate rather than each amendment's separately.
 
+---
+
+## §3b GRADER'S HALF — folded in from Elder (general#23147), and it changes (1) from an adoption to a **measurement first**
+
+**Rule (c) is not merely affected by these amendments; it is the readout of what they trade off.**
+Its trigger is a halt-count *spread across rungs*, and the differential halt count IS the
+selection differential. So my "register the combined expected halt rate" was in the wrong units:
+**pre-register the expected halt-count SPREAD ACROSS RUNGS, not the aggregate.** Two designs with
+identical total halts — one uniform, one concentrated at n=20 — are opposite outcomes for rule
+(c), and an aggregate cannot tell them apart. Corrected here; the §3 recommendation stands.
+
+### ⚠️ THE PRECONDITION ON (1): a halt-count drop has two causes with identical signatures
+
+If (1) is adopted and halts at the wide rungs fall, rule (c) goes quiet **either way**:
+
+- **Correction** — the probe now measures the right quantity, the gate was mis-scaled at large n,
+  and the old halts were an artifact of probing at n while gating something at w; or
+- **Loosening wearing a correction's clothes** — the bar simply fell, more marginal epochs are
+  admitted, rule (c) goes quiet, and the confound it guards is replaced by a worse one: rungs
+  flying in epochs that are genuinely inadequate.
+
+Rule (c) counts halts. Both stories predict fewer. **It cannot discriminate, and neither can the
+gradient in §1** — a monotone accepted-ε_eff curve is equally consistent with both.
+
+**DISCRIMINATING MEASUREMENT (Elder's, adopted here as a PRECONDITION for adopting (1), not a
+follow-up):** fly **both probes on the same epoch** — one at the declared fixed weight (3n/4, the
+draw-law mean) and one at the full weight n — and compare ε_eff.
+
+- fixed-weight probe reads **materially higher** on the same device state → width scaling is real
+  → (1) is a correction;
+- the two **agree** → (1) is a loosening, and should not be adopted on the §1 gradient.
+
+Neither probe is at the sealed weight, so **the pre-seal disclosure problem does not arise** —
+this also answers §6's blocker for the *measurement*, though not for the amendment's final
+wording. Cost ~8 s of tank for the pair. **It is cheap now and unbuyable once the gate has
+changed**, because after adoption there is no un-amended epoch to compare against.
+
+*This inverts §1's status: the gradient is no longer even corroboration for adoption, it is the
+observation that motivates a measurement. (1) is NOT ready to sign; the dual-probe run is.*
+
+### The width residual stays unquotable either way — two independent problems, one amendment
+
+Rule (c) clearing must not be read as making the width residual quotable. It has **two**
+problems and the amendments touch only one:
+
+| problem | what it is | fixed by an amendment? |
+|---|---|---|
+| epoch confounding | halt spread across rungs (rule (c)) | yes — that is what (1)/(2) move |
+| **collinearity** | corr(n,w) = **0.898 realized** across these four rungs (distinct from the draw-law Monte-Carlo median 0.96 quoted in the registration — one is realized, one is the law); SE inflated **2.1×** vs the n-only fit; slope **−0.154 ± 0.070**, 2.2σ, on four points where a single rung carries the weight slope | **no** — a property of the DRAW LAW, not the gate |
+
+**Correct post-amendment statement, written down now so it is not misread later:** rule (c) may
+stop firing, and the width residual **stays unquotable on collinearity grounds** until the rungs
+are decorrelated — more rungs, or a draw that breaks the n–w tie. That is a different experiment,
+not a gate amendment.
+
 ## §4 COST, PRICED BEFORE REGISTERING (not after)
 
 A weather probe is 2,000 rows in its own leading job; measured cost of a halt is **~4 s** of tank
@@ -104,7 +159,8 @@ belongs *before* the freeze, not after.
       must instead use a **fixed weight declared in the registration** (e.g. 3n/4, the draw-law
       mean), which removes the width scaling without touching the seal. **Flagged as the likely
       blocker on (1) as literally worded.**
-- [ ] **Elder** (grader) — how (1) and (2) change grade rule (c) and the width residual.
+- [x] **Elder** (grader) — ANSWERED, general#23147, folded into §3b: rule (c) needs no edit as worded; the quantity to pre-register is the halt-count SPREAD; (1) requires the dual-probe measurement FIRST; the width residual stays unquotable on collinearity regardless.
+- [ ] **Whisper** (register seat) — re-open (1) for signature only after the dual-probe result exists; (2) is signable as worded once δ is set.
 - [ ] **Creator** — a fresh GO, bound to a new digest, before any flight under an amended gate.
 
 ---
