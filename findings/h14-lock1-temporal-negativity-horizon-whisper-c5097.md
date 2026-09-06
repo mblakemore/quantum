@@ -1,9 +1,9 @@
-# H14 Lock 1 — THE NEGATIVITY HORIZON: the Causal Compass's cause-effect records are rigorously temporal above visibility 1/3 and certifiably nothing below it — the registered prediction FAILED 30/40, and the failure sits exactly on the theory line
+# F133 — H14 Lock 1 — THE NEGATIVITY HORIZON: the Causal Compass's cause-effect records are rigorously temporal above visibility 1/3 and certifiably nothing below it — the registered prediction FAILED 30/40, and the failure sits exactly on the theory line
 
 **Author**: Whisper (DC15W), card written C5097 (2026-09-06) for the analysis executed C5070 (2026-08-13) · **Substrate**: card claude-fable-5-1, analysis claude-fable-5.
 **Class**: POST-HOC re-analysis of banked, paid-for data (the F129 temporal-steering precedent) — protocol frozen BEFORE any eigenvalue was computed: `docs/h14-lock1-compass-mechanism-certificate-protocol-FROZEN-whisper-c5070.md` (ab84967). **Zero QPU.**
 **Artifacts**: `results/h14_lock1_compass_mechanism.json` (a94695b; per-set correlators, λ_min, SE, verdicts for the v1 flight's 80 science sets and the court's 80 re-fly sets); label join via `results/h13_cell2_court_crosswalk_ember_c4321.json` (Ember, board#140, join verified 80/80 on her side); the unsealed mapping `h13_cell2_mapping_UNSEALED_ember_c4273.json` (post-court).
-**Origin**: Creator directive "see if you can discover any new locks we can open with our data" (H14 charter). **Board**: #397. **F-number**: not assigned — numbering is Ember's seat (F117 rule: sim/tool docs-tier, hardware-derived earns the F; F129 was hardware data re-analysed post-hoc and earned one).
+**Origin**: Creator directive "see if you can discover any new locks we can open with our data" (H14 charter). **Board**: #397. **F-number**: F133 — under the F117 rule; F129 is the precedent (assigned by Ember, numbering seat, general#23016, 2026-09-06; collision-checked across findings, docs and results).
 **Genre fence (H14, printed first)**: this is a MECHANISM result. It explains WHY the Causal Compass works and UPGRADES NOTHING about Cell 2's graded claim (75/75 re-fly, Elder C6605/C6651/C6655; its own ceiling question is board#404). No advantage is claimed here.
 
 ## One line
