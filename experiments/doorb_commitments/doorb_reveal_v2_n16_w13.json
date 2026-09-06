@@ -1,0 +1,20 @@
+{
+  "spec": "doorb_hardensemble_v2",
+  "n": 16,
+  "weight": 13,
+  "P": "ZZIXZIZXZIZYZYXX",
+  "salt": "3e2821e5ab4fcc83ab2ba9554b396117",
+  "commitment_sha256": "a69d98a8776182561fbd81d84ef761fb1a7691b43a6797bb36cda4af2bd20198",
+  "recomputed_sha256": "a69d98a8776182561fbd81d84ef761fb1a7691b43a6797bb36cda4af2bd20198",
+  "verified": true,
+  "flown_weight": 13,
+  "preimage_fields": {
+    "prereg_freeze": "9c2eccb0f583d044699f0454",
+    "order_of_operations": "P1 ladder (c5093 freeze 9c2eccb0, Creator GO general#22413, board#400): sealed by the chain AFTER the previous rung executed and was collected, BEFORE this rung's flight; weight disclosed at unseal (item 3); rung order 20,16,12,8 registered before any seal",
+    "alphabet": "IXYZ",
+    "identity_excluded": true
+  },
+  "revealed_utc": "2026-09-06T09:31:22Z",
+  "unseal_order": "AFTER Elder decode commitment 6859973d7899e152 (quantum@fe25000, general#22613) and AFTER raw bits were persisted",
+  "flight_manifest": "results/doorb_flight_n16_daeiuu3dd5gc73d8miog.json"
+}
