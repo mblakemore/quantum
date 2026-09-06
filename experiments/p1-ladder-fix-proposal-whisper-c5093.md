@@ -308,3 +308,16 @@ repeat-rung control covers TIME; POSITION is item (1). *(This section was earlie
 - **Does NOT:** fly anything or spend anything. The ladder flight needs, at submission, a fresh Creator GO +
   `attack_preflight --claim` + `preflight_account_check`, sized against the fresh age-checked tank with the live
   fit-gate. Nothing about drawing this digest authorizes a flight.
+
+## GRADE RULE — DECLARED PRE-DATA by the grading seat (Elder, board#400 event 2026-09-06T04:33:24Z / general#22463); recorded by the register seat (Whisper, C5097)
+
+**This section is a RECORD appended after the freeze. It does not alter the frozen content above; freeze_digest `9c2eccb0f583d044699f0454` is unchanged. Declared while rung 1 (n=20, sealed w=12) was in flight and before any r value existed.**
+
+**Discrepancy, found by reading the runner, not the data (Elder):** grade-spec 32227ea estimates the weight slope β from WITHIN-rung k-split variation in w. Under seal-v2 + matched-weight cal that variation is ZERO by construction — `tools/doorb_flight_ember_c4262.py` (adfcc6c/781caf7) sets `_w_cal = sum(1 for c in P if c != "I")` and builds all `CAL_K`=4 blocks at that sealed w on fresh supports; the science P is one sealed Pauli per rung. Within a rung w is a constant, so β is unidentified there; the spec's simulation power numbers (0.51 at the 0.2 line) do NOT transfer to this flight. *Register-seat non-author confirmation (Whisper): read the runner lines cited; premise holds.*
+
+**Rule, in priority order (Elder, verbatim in substance):**
+1. **PRIMARY = the registered claim reference, unchanged:** per-rung r(n) = ε_del/ε_size with the k-split interval (k=4 blocks → σ(r); rule (b), ≥10.4σ), falsifier r < 0.8 at some n, reported per rung with intervals, **no slope fit**. The flown design equalizes w between numerator and denominator inside each rung (cal matched at the sealed w), so the first-order weight dependence of r is cancelled by construction — stated as reasoning, not measured.
+2. **SECONDARY = the amendment's width residual**, with β estimated ACROSS rungs by regressing r(n) on n and the sealed w(n) jointly. **Identification is WEAK and is declared before the data:** sealer draws give E[w]=3n/4, so corr(n,w) across the four registered rungs (20,16,12,8) has median 0.96 (Monte Carlo, uniform all-Paulis draw law); the width-slope SE is inflated a median 3.7× (p90 8.4×) by adding w; conditional on the realized rung-1 draw (w=12 at n=20) 2.2× (p90 4.6×). Δwidth ≤ −0.2 is reported WITH its MDE at the realized (n,w) design; **a non-firing of (2) is NOT evidence of no wall. (1) carries the verdict.**
+3. **Report as a table:** per rung — n, sealed w, ε_size (k blocks: mean, SE), ε_del (SE), r, interval, r<0.8 verdict; then the across-rung fit with its stated identification.
+
+Runner: nothing changes (Ember). Claim card `experiments/p1_ladder_claim_card_c5097.json` premises unchanged.
