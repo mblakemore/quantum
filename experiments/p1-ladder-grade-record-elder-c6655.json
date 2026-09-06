@@ -102,6 +102,90 @@
     "graded_utc": "2026-09-06T09:19:36.687706+00:00",
     "rule": "board#400 pre-data declaration; PRIMARY per-rung r<0.8; epoch reported beside, never corrected"
    }
+  },
+  {
+   "n": 16,
+   "sealed_w": 13,
+   "commitment": "a69d98a877618256\u2026",
+   "order_index": 2,
+   "epoch": {
+    "submit_utc": "2026-09-06T09:17:19.004843+00:00",
+    "weather_job": "daeiuu3dd5gc73d8miog",
+    "weather_eps_eff_accepted": 0.139,
+    "weather_floor": 0.128,
+    "halts_before_accept": 0,
+    "tank_live_s_at_submit": null,
+    "account": "OPEN10",
+    "first_science_job": "daeiv3tnj4cs73af8200",
+    "science_shots": 25000,
+    "cal_blocks_k": "matched-weight rule (b) k=4 at the sealed w, independent supports, fresh stream (c5093 item 1); abs-match ~35,457 shots (item 2); each block rides FIRST in its own job",
+    "priced_rung_cost_s": 131.0,
+    "manifest_commit": "quantum@4c2a3af (ladder persisted)",
+    "source": "ember general#22608 (eps_eff, first-attempt weather); manifest fields"
+   },
+   "decode_commitment_sha256": "6859973d7899e15223a4ef1de4d881e55d5253d7cd1a5b604b718c788330e2c9",
+   "decode_commitment_commit": "quantum@fe25000",
+   "r": null,
+   "eps_size": null,
+   "eps_del": null,
+   "interval": null,
+   "verdict": "NOT YET \u2014 awaiting unseal"
+  },
+  {
+   "n": 12,
+   "sealed_w": 9,
+   "commitment": "767b1a9b6330a2e4\u2026",
+   "order_index": 3,
+   "epoch": {
+    "submit_utc": "2026-09-06T09:22:40.773442+00:00",
+    "weather_job": "daej1ejdd5gc73d8mllg",
+    "weather_eps_eff_accepted": 0.1783,
+    "weather_floor": 0.128,
+    "halts_before_accept": 0,
+    "tank_live_s_at_submit": null,
+    "account": "OPEN10",
+    "first_science_job": "daej1kl1ierc738m7q3g",
+    "science_shots": 25000,
+    "cal_blocks_k": "matched-weight rule (b) k=4 at the sealed w, independent supports, fresh stream (c5093 item 1); abs-match ~35,457 shots (item 2); each block rides FIRST in its own job",
+    "priced_rung_cost_s": 131.0,
+    "manifest_commit": "quantum@4c2a3af (ladder persisted)",
+    "source": "ember general#22608 (eps_eff, first-attempt weather); manifest fields"
+   },
+   "decode_commitment_sha256": "228b8c637ab31b8389e00392272703aa9dde83a8c2b1ab66d02b2239e81ff9c1",
+   "decode_commitment_commit": "quantum@fe25000",
+   "r": null,
+   "eps_size": null,
+   "eps_del": null,
+   "interval": null,
+   "verdict": "NOT YET \u2014 awaiting unseal"
+  },
+  {
+   "n": 8,
+   "sealed_w": 6,
+   "commitment": "533ff8cf3c780ba5\u2026",
+   "order_index": 4,
+   "epoch": {
+    "submit_utc": "2026-09-06T09:25:54.417564+00:00",
+    "weather_job": "daej2vl1ierc738m7reg",
+    "weather_eps_eff_accepted": 0.2317,
+    "weather_floor": 0.128,
+    "halts_before_accept": 0,
+    "tank_live_s_at_submit": null,
+    "account": "OPEN10",
+    "first_science_job": "daej35d1ierc738m7rm0",
+    "science_shots": 25000,
+    "cal_blocks_k": "matched-weight rule (b) k=4 at the sealed w, independent supports, fresh stream (c5093 item 1); abs-match ~35,457 shots (item 2); each block rides FIRST in its own job",
+    "priced_rung_cost_s": 131.0,
+    "manifest_commit": "quantum@4c2a3af (ladder persisted)",
+    "source": "ember general#22608 (eps_eff, first-attempt weather); manifest fields"
+   },
+   "decode_commitment_sha256": "f2b34577a87949783ac5c14e8ec15eca277ce8da88e5fb4f48fe4092804b71c4",
+   "decode_commitment_commit": "quantum@fe25000",
+   "r": null,
+   "eps_size": null,
+   "eps_del": null,
+   "interval": null,
+   "verdict": "NOT YET \u2014 awaiting unseal"
   }
  ],
  "registered_order": [
@@ -111,5 +195,11 @@
   8
  ],
  "created_at": "2026-09-06T09:15:03.598227+00:00",
- "note": "epoch facts captured AS FLOWN from the bus at grade-record time so the grade cannot later recall them; r fields filled only from persisted raw bits via the permutation-tested decoder"
+ "note": "epoch facts captured AS FLOWN from the bus at grade-record time so the grade cannot later recall them; r fields filled only from persisted raw bits via the permutation-tested decoder",
+ "repeat_rung_pick": {
+  "n": 20,
+  "reason": "width rung; marginal weather (2 halts, accepted 0.1287 vs 0.128); registered repeat-rung band 5.43% most informative where the epoch was worst",
+  "picked_at": "2026-09-06T09:30:23.719100+00:00",
+  "source": "board#400 / general#22613"
+ }
 }
