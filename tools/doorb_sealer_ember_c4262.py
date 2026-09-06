@@ -227,13 +227,32 @@ def selftest():
     return ok
 
 
+def draw_weight(n, rng=None):
+    """The v1 draw law's WEIGHT MARGINAL, drawn on its own: each position is non-identity with
+    probability 3/4 (uniform over IXYZ), the all-identity string excluded, so w ~ Binomial(n, 3/4)
+    conditioned on w >= 1 (c5093 item 2 names this law). Drawing w here and constructing P at that
+    weight directly (draw_p_weight) is the registered v2 order: the weight is a number the sealer
+    drew, not one the operator typed after looking at anything."""
+    rng = rng or secrets.SystemRandom()
+    while True:
+        w = sum(1 for _ in range(n) if rng.random() < 0.75)
+        if w >= 1:
+            return w
+
+
+def _weight_arg(v):
+    if v == "draw":
+        return "draw"
+    return int(v)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["selftest", "seal"])
     ap.add_argument("--n", type=int, default=16)
     ap.add_argument("--prereg-freeze", default="")
     ap.add_argument("--oop", default="")
-    ap.add_argument("--weight", type=int, default=None,
+    ap.add_argument("--weight", type=_weight_arg, default=None,
                     help="seal a per-rung Pauli of EXACTLY this weight, under SPEC v2 (binds w, "
                          "alphabet and identity_excluded into the digest preimage). Omit for the "
                          "v1 uniform draw. v1 does NOT bind w and must not be used for a weighted "
@@ -270,6 +289,18 @@ def main():
     # preimage does not bind w, so a v1 seal of a weighted draw would publish a weight it does
     # not commit to — the exact gap board#348 opened.
     use_v2 = a.weight is not None
+    weight_law = None
+    if a.weight == "draw":
+        # board#330 order kept: the store is checked for an existing v2 seal at this n BEFORE the
+        # weight is drawn, so a refused seal never leaves a drawn weight behind.
+        _store0 = json.load(open(SECRETS)) if os.path.exists(SECRETS) else {}
+        _dups = [k for k in _store0 if k.startswith(f"{SPEC_V2}:{a.n}:")]
+        if _dups and not a.dry_run:
+            sys.exit(f"REFUSING — v2 seal(s) already exist for n={a.n}: {_dups}. Reveal or archive "
+                     f"deliberately before drawing another; no weight was drawn.")
+        a.weight = draw_weight(a.n)
+        weight_law = "Binomial(n,3/4) conditioned w>=1 (the IXYZ-uniform draw law's weight marginal), drawn by the sealer"
+        print(f"  weight drawn by the sealer: w={a.weight} (law: {weight_law})")
     spec = SPEC_V2 if use_v2 else SPEC
     key = f"{spec}:{a.n}" + (f":w{a.weight}" if use_v2 else "")
     store = json.load(open(SECRETS)) if os.path.exists(SECRETS) else {}
@@ -290,7 +321,7 @@ def main():
         h = digest(a.n, p_label, salt, a.prereg_freeze, a.oop)
 
     public = {"spec": spec, "n": a.n, "commitment_sha256": h,
-              **({"weight": a.weight, "weight_is_sealed": True} if use_v2 else {}),
+              **({"weight": a.weight, "weight_is_sealed": True, "weight_draw_law": weight_law} if use_v2 else {}),
               "prereg_freeze": a.prereg_freeze, "order_of_operations": a.oop,
               "alphabet": ALPHABET, "identity_excluded": True,
               # board#330: stated on EVERY commitment, not only the bad ones. A field that
@@ -308,7 +339,12 @@ def main():
         return 0
 
     os.makedirs("experiments/doorb_commitments", exist_ok=True)
-    path = f"experiments/doorb_commitments/doorb_commitment_n{a.n}.json"
+    # v2 commitments get their own file: the v1 public commitment for the same n is a published
+    # artifact and must not be overwritten by a later seal (history keeps it, the tree should too).
+    path = (f"experiments/doorb_commitments/doorb_commitment_v2_n{a.n}_w{a.weight}.json" if use_v2
+            else f"experiments/doorb_commitments/doorb_commitment_n{a.n}.json")
+    if os.path.exists(path) and not a.dry_run:
+        sys.exit(f"REFUSING — public commitment {path} already exists; archive it deliberately.")
     json.dump(public, open(path, "w"), indent=2)
     store[key] = {"P": p_label, "salt": salt, "sha256": h}
     with open(SECRETS, "w") as f:

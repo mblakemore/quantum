@@ -241,7 +241,14 @@ DEFAULT_ACCOUNT = "ALT4"
 # venue change and the prereg would have needed redrawing, not repointing.
 ACCOUNT_CRN, ACCOUNT_ENV = ACCOUNTS[DEFAULT_ACCOUNT]
 PAID_CRN = ACCOUNT_CRN          # legacy alias; call sites below still read PAID_CRN
-CAL_ROWS = 2000        # public-P calibration rows, SAME JOB, ride FIRST (registered #7414)
+CAL_ROWS = 2000        # WEATHER-GATE rows (public full-weight P), its own leading job (registered #7479)
+# c5093 item 1 (rule (b), k=4) + item 2 (abs-match ~35,457 shots): the MEASUREMENT calibration is
+# k independent matched-weight blocks at the SEALED w, each on a fresh random support, riding
+# FIRST in its own job ahead of a science chunk (the same-job clause, per block). 35,460 = 4 x 8,865.
+# The 2,000-row weather gate stays as the separate cheap epoch check the registration keeps.
+CAL_K = 4
+CAL_MEAS_ROWS = 35460
+CAL_SCIENCE_TAIL = 1135  # science rows riding behind each cal block, so a cal job stays ~10k rows
 EXPECTED_BACKEND = "ibm_marrakesh"
 RESERVE_S = 20
 CHUNK_ROWS = 5000
@@ -503,8 +510,83 @@ def flight_budget(n, delta, eps_delivered, copies, live_s, margin=1.5):
         T = 4.0 * math.log(2 * 4 ** n / delta) / eps_delivered ** 4
         sizing = f"eps_flight {eps_delivered:.4f}"
     shots = math.ceil(T / 2)
-    est = COST_S(shots)
+    est = rung_cost_s(shots)
     return T, shots, est, est * margin <= live_s, sizing
+
+
+def rung_jobs(shots, k=CAL_K, cal_rows=CAL_MEAS_ROWS, tail=CAL_SCIENCE_TAIL, chunk=CHUNK_ROWS):
+    """The job plan for one rung, science `shots` rows: k cal jobs (block + tail) then plain
+    science chunks. Pure, so the priced figure the manifest carries can be recomputed by anyone."""
+    block = cal_rows // k
+    plan, remaining = [], shots
+    for b in range(k):
+        t = min(tail, remaining)
+        plan.append({"cal_block": b, "cal_rows": block, "science_rows": t})
+        remaining -= t
+    while remaining > 0:
+        c = min(chunk, remaining)
+        plan.append({"cal_block": None, "cal_rows": 0, "science_rows": c})
+        remaining -= c
+    return plan
+
+
+def rung_cost_s(shots):
+    """Priced per-rung cost (c5093 pricing model COST_S, per job): weather gate + every planned
+    job. This is the REGISTERED figure the fit check tests, not the science alone."""
+    plan = rung_jobs(shots)
+    return COST_S(CAL_ROWS) + sum(COST_S(j["cal_rows"] + j["science_rows"]) for j in plan)
+
+
+def collect(manifest_path):
+    """board#353: 48 of 49 IBM-path graders re-fetch an EXPIRING job and none persist raw
+    counts. This writes the raw 2n-bit strings for every job of a flight next to its manifest,
+    in exactly the shape doorb_decoder_elder.py `decode` consumes ({n, shots}), plus one file per
+    cal block and one science-only file, each with its sha256 recorded back in the manifest.
+    A job id is a pointer to someone else's retention policy; the artifact is what we keep."""
+    import hashlib
+    man = json.load(open(manifest_path))
+    n = man["n"]
+    from qiskit_ibm_runtime import QiskitRuntimeService
+    svc = QiskitRuntimeService(channel="ibm_quantum_platform", token=paid_token(), instance=PAID_CRN)
+    base = manifest_path[:-5] if manifest_path.endswith(".json") else manifest_path
+    files, science, pending = {}, [], []
+    cal_out = {}
+    for j in man["jobs"]:
+        job = svc.job(j["job_id"])
+        st = str(job.status())
+        if st != "DONE":
+            pending.append((j["job_id"], st)); continue
+        b = job.result()[0].data[list(job.result()[0].data.keys())[0]]
+        raws = [b[i].get_bitstrings()[0] for i in range(b.array.shape[0])]
+        if len(raws) != j["rows"]:
+            sys.exit(f"REFUSE collect: job {j['job_id']} returned {len(raws)} rows, manifest says {j['rows']}")
+        rec = {"n": n, "job_id": j["job_id"], "role": j.get("role", "science"), "shots": raws,
+               "cal_rows": j.get("cal_rows_range"), "science_rows": j.get("science_rows_range")}
+        path = f"{base}_raw_{j['job_id']}.json"
+        json.dump(rec, open(path, "w"))
+        files[path] = hashlib.sha256(open(path, "rb").read()).hexdigest()
+        cr, sr = j.get("cal_rows_range"), j.get("science_rows_range")
+        if cr:
+            cal_out[j["cal_block"]] = {"n": n, "P": j["cal_P_public"], "block": j["cal_block"],
+                                       "shots": raws[cr[0]:cr[1] + 1]}
+        if sr:
+            science.extend(raws[sr[0]:sr[1] + 1])
+    if pending:
+        print(f"NOT COLLECTED — {len(pending)} job(s) not DONE: {pending}. Nothing written for them; re-run later.")
+        return 3
+    for bidx, rec in sorted(cal_out.items()):
+        path = f"{base}_cal_block{bidx}.json"
+        json.dump(rec, open(path, "w")); files[path] = hashlib.sha256(open(path, "rb").read()).hexdigest()
+    path = f"{base}_science_outcomes.json"
+    json.dump({"n": n, "shots": science}, open(path, "w"))
+    files[path] = hashlib.sha256(open(path, "rb").read()).hexdigest()
+    man["raw_artifacts"] = files
+    man["raw_collected_utc"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    man["science_shots_collected"] = len(science)
+    json.dump(man, open(manifest_path, "w"), indent=2)
+    print(f"COLLECTED {len(files)} artifact(s): {len(science):,} science shots, {len(cal_out)} cal blocks; "
+          f"sha256s recorded in {manifest_path}")
+    return 0
 
 
 def main():
@@ -541,6 +623,14 @@ def main():
     # to run: `--account OPEN9` was a parse error, and a bare run silently bound ALT4 — the
     # EXHAUSTED tank — because ACCOUNT_CRN/PAID_CRN bind at IMPORT from DEFAULT_ACCOUNT.
     # A dict entry reachable by nothing, with a comment asserting it was reachable.
+    ap.add_argument("--freeze", default="",
+                    help="registration freeze digest recorded in the manifest (P1: 9c2eccb0f583d044699f0454)")
+    ap.add_argument("--plan", action="store_true",
+                    help="print the priced per-rung job plan (weather + k cal blocks + science) and exit; no service call")
+    ap.add_argument("--collect", default=None, metavar="MANIFEST",
+                    help="board#353: fetch every job in MANIFEST and PERSIST its raw bitstrings as "
+                         "decoder-shaped {n, shots} files beside it (per job, per cal block, science-only); "
+                         "spends nothing. Exit 3 if any job is not finished yet.")
     ap.add_argument("--account", choices=sorted(ACCOUNTS), default=DEFAULT_ACCOUNT,
                     help="which ACCOUNTS entry to fly on; compare its CRN against the registry, "
                          "not against its name (see the C4273 note above ACCOUNTS)")
@@ -554,6 +644,19 @@ def main():
     ACCOUNT_CRN, ACCOUNT_ENV = ACCOUNTS[a.account]
     PAID_CRN = ACCOUNT_CRN
     print(f"ACCOUNT: {a.account}  env={ACCOUNT_ENV}  instance=…{ACCOUNT_CRN[-40:]}")
+
+    if a.collect:
+        return collect(a.collect)
+    if a.plan:
+        # No service call, no seal read: the priced figure and the job shape, for a non-author
+        # to check against the registration before anything is drawn.
+        shots = math.ceil((a.copies or 0) / 2)
+        plan = rung_jobs(shots)
+        print(json.dumps({"n": a.n, "copies": a.copies, "science_rows": shots, "weather_rows": CAL_ROWS,
+                          "cal_k": CAL_K, "cal_meas_rows": CAL_MEAS_ROWS, "jobs": plan,
+                          "priced_rung_cost_s": round(rung_cost_s(shots), 1),
+                          "fit_at_1.5x_needs_live_s": round(rung_cost_s(shots) * 1.5, 1)}, indent=1))
+        return 0
 
     print(f"DOOR (b) FLIGHT — n={a.n}, eps={a.eps}, delta={a.delta}")
 
@@ -809,15 +912,32 @@ def main():
     # The claim EVALUATES at the flight's own delivered eps, not the pilot's — the pilot sized,
     # these rows evaluate. Public P is declared in the manifest so the grader can find them.
     P_cal = "XYZ" * (a.n // 3) + "XYZ"[: a.n % 3]
-    free_cal = [i for i, c in enumerate(P_cal) if c != "I"]
 
-    def draw_cal_row():
+    # ---- MEASUREMENT calibration, c5093 item 1 rule (b) k=4: matched weight at the SEALED w,
+    # each block on an INDEPENDENT uniformly random support from a FRESH stream that never
+    # touches the science P (cal_rng, not rng), X/Y/Z uniform on the support, re-drawn every rung.
+    # NEVER derived from the science P's identity set (the 560x leak, general#19530).
+    cal_blocks = []
+    if P is not None:
+        _w_cal = sum(1 for c in P if c != "I")
+        cal_rng = np.random.default_rng()      # fresh, independent of `rng` and of P
+        for _b in range(CAL_K):
+            _lab = ["I"] * a.n
+            for _pos in cal_rng.choice(a.n, size=_w_cal, replace=False).tolist():
+                _lab[_pos] = "XYZ"[int(cal_rng.integers(3))]
+            cal_blocks.append("".join(_lab))
+        print(f"  [G-CAL]    k={CAL_K} matched-weight cal blocks at sealed w={_w_cal}, "
+              f"{CAL_MEAS_ROWS // CAL_K:,} rows each (c5093 items 1-2)")
+
+    def draw_cal_row(P_label=P_cal, r=None):
+        r = r or rng
+        free_cal = [i for i, c in enumerate(P_label) if c != "I"]
         vals = []
         for _copy in range(2):
-            sgn = +1 if rng.random() < (1 + alpha) / 2 else -1
-            si = [int(rng.choice([1, -1])) for _ in range(a.n)]   # same fix: ALL positions
+            sgn = +1 if r.random() < (1 + alpha) / 2 else -1
+            si = [int(r.choice([1, -1])) for _ in range(a.n)]   # same fix: ALL positions
             si[free_cal[-1]] = sgn * int(np.prod([si[i] for i in free_cal[:-1]]))
-            for i, c in enumerate(P_cal):
+            for i, c in enumerate(P_label):
                 vals.extend(u_params(c, si[i]))
         row = [0.0] * len(t.parameters)
         for k, v in enumerate(vals):
@@ -920,31 +1040,49 @@ def main():
     print(f"  [PASS] G-EPOCH   {'registered budget fits' if a.copies else 'sized to the flight own epoch, not the probe'}")
     shots = shots_flight
 
-    jobs = [{"job_id": wjob.job_id(), "rows": CAL_ROWS, "role": "calibration+gates"}]
-    remaining = shots
-    cal_done = True                      # calibration already flown as the weather gate
-    while remaining > 0:
+    jobs = [{"job_id": wjob.job_id(), "rows": CAL_ROWS, "role": "weather-gate",
+             "cal_P_public": P_cal, "cal_rows_range": [0, CAL_ROWS - 1], "science_rows_range": None}]
+    plan = rung_jobs(shots)
+    flown_science, cal_manifest = 0, []
+    for step in plan:
         u2 = svc.usage()                              # G-FIT: re-read BEFORE EACH JOB
         if u2["usage_limit_reached"] or u2["usage_remaining_seconds"] <= RESERVE_S:
             print(f"  [HALT] G-FIT: {u2['usage_remaining_seconds']}s left after {len(jobs)} jobs "
                   f"— refusing further submission. Submitted jobs stand.")
             break
-        chunk = min(remaining, CHUNK_ROWS)
-        if not cal_done:
-            arr = [draw_cal_row() for _ in range(CAL_ROWS)] + [draw_row() for _ in range(chunk)]
-            cal_done = True
-            print(f"  (job 1 carries {CAL_ROWS:,} public-P calibration rows FIRST, then science)")
-        else:
-            arr = [draw_row() for _ in range(chunk)]
+        arr, entry = [], {"role": "science", "cal_block": None, "cal_P_public": None,
+                          "cal_rows_range": None, "science_rows_range": None}
+        if step["cal_block"] is not None:
+            Pb = cal_blocks[step["cal_block"]]
+            arr += [draw_cal_row(Pb, cal_rng) for _ in range(step["cal_rows"])]
+            entry.update(role="calibration+science", cal_block=step["cal_block"], cal_P_public=Pb,
+                         cal_rows_range=[0, step["cal_rows"] - 1])
+        if step["science_rows"]:
+            s0 = len(arr)
+            arr += [draw_row() for _ in range(step["science_rows"])]
+            entry["science_rows_range"] = [s0, len(arr) - 1]
         job = SamplerV2(mode=bk).run([(t, arr, 1)])
-        jobs.append({"job_id": job.job_id(), "rows": chunk})
-        print(f"  job {len(jobs)}: {job.job_id()}  {chunk:,} rows x 1 shot  "
-              f"({u2['usage_remaining_seconds']}s before)")
-        remaining -= chunk
+        entry.update(job_id=job.job_id(), rows=len(arr))
+        jobs.append(entry)
+        if entry["cal_block"] is not None:
+            cal_manifest.append({"block": entry["cal_block"], "P": entry["cal_P_public"], "weight": _w_cal,
+                                 "job_index": len(jobs) - 1, "job_id": job.job_id(),
+                                 "rows": entry["cal_rows_range"]})
+        flown_science += step["science_rows"]
+        print(f"  job {len(jobs)}: {job.job_id()}  {len(arr):,} rows x 1 shot"
+              f"{'  (cal block %d FIRST, %s rows)' % (entry['cal_block'], step['cal_rows']) if entry['cal_block'] is not None else ''}"
+              f"  ({u2['usage_remaining_seconds']}s before)")
+    remaining = shots - flown_science
     man = {"experiment": "doorb_unsigned_shadow", "n": a.n, "eps_nominal": a.eps,
            "shots": shots - remaining, "commitment_sha256": sec["sha256"],
+           "sealed_weight": _sealed_w, "registration_freeze": a.freeze or None,
+           "account": a.account, "instance_tail": ACCOUNT_CRN[-40:],
            "backend": bk.name, "layout": "halves", "granularity_R": 1, "jobs": jobs,
-           "cal_rows": CAL_ROWS, "cal_P_public": P_cal, "cal_position": "first rows of job 1",
+           "weather_rows": CAL_ROWS, "weather_P_public": P_cal, "weather_job": wjob.job_id(),
+           "cal_scheme": "matched-weight rule (b) k=4 at the sealed w, independent supports, fresh stream "
+                         "(c5093 item 1); abs-match ~35,457 shots (item 2); each block rides FIRST in its own job",
+           "cal_meas_rows": CAL_MEAS_ROWS, "cal_P_public": cal_manifest,
+           "priced_rung_cost_s": round(rung_cost_s(shots), 1), "cost_model": "2.667 + 0.00167*rows per job",
            "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
     os.makedirs("results", exist_ok=True)
     out = f"results/doorb_flight_n{a.n}_{jobs[0]['job_id']}.json" if jobs else "results/doorb_flight_EMPTY.json"
