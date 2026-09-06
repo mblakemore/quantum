@@ -1,0 +1,61 @@
+{
+ "job": "d9tb3tgpdb6s73e7082g",
+ "W": 0.4,
+ "seed": 6655,
+ "declared_on": "board#399 (Elder C6655, before computing)",
+ "variants": {
+  "pooled_over_twirl (declared per-cell)": {
+   "n2": {
+    "TV_obs": 0.3354,
+    "null_mean": 0.02886470833333333,
+    "null_sd": 0.0016676255948848743,
+    "TV_calibrated": 0.30653529166666665,
+    "TV_UB": 0.3098705428564364,
+    "d2": 0.12394821714257456,
+    "z_obs_vs_null": 183.81541552666596,
+    "cells": 60,
+    "B": 2000
+   },
+   "n3": {
+    "s_cv": 0.6602166666666667,
+    "N_test": 120000,
+    "se": 0.0013672680172586932,
+    "s_UB": 0.662951202701184,
+    "d3": 0.13036096216094722,
+    "cells": 60,
+    "folds": 5
+   }
+  },
+  "twirl_conditioned (declared addendum, stronger attack)": {
+   "n2": {
+    "TV_obs": 0.5067706521498573,
+    "null_mean": 0.05883794270870958,
+    "null_sd": 0.002145459786396249,
+    "TV_calibrated": 0.4479327094411477,
+    "TV_UB": 0.4522236290139402,
+    "d2": 0.1808894516055761,
+    "z_obs_vs_null": 208.78168506413485,
+    "cells": 240,
+    "B": 2000
+   },
+   "n3": {
+    "s_cv": 0.7393,
+    "N_test": 120000,
+    "se": 0.001267331546991552,
+    "s_UB": 0.741834663093983,
+    "d3": 0.19346773047518645,
+    "cells": 240,
+    "folds": 5
+   }
+  }
+ },
+ "d1_from_exhibit_c6651": 0.03541,
+ "d2_max_over_variants": 0.1808894516055761,
+ "d3_max_over_variants": 0.19346773047518645,
+ "d_max": 0.19346773047518645,
+ "max_is": "3 executed classical arm",
+ "bar_5sigma_fails_at_d": 0.2,
+ "STATUS": "MIS-SPECIFIED \u2014 NOT \u00a7A NUMERATORS. Computed exactly as pre-declared on board#399, but the declared information set (raw 2-bit outcomes per cell) includes the correlator SIGN and the marginals, which \u00a7D forecloses and \u00a7E assigns to the frozen decoder as the quantum witness (statistic sign(C_XX\u00b7C_YY\u00b7C_ZZ); G-ISO sign patterns (+,+,+) CE vs (+,\u2212,+) CC). Diagnosis: X-basis TV 0.009 (arms indistinguishable), Y-basis TV 0.498 driven by E[YY] = \u22120.490 (CC) vs +0.507 (CE), Z-basis TV 0.484 driven by CE marginals P(b=1)=0.0014. These numbers measure the strength of the quantum signature, not the classical ceiling; they do NOT move the ceiling. Kept on the record per the retraction-with-sweep rule; superseded by a corrected magnitude-only declaration (board#399).",
+ "ceiling_W_p_NOT_APPLICABLE": 0.741834663093983,
+ "sigma_75of75_NOT_APPLICABLE": 5.108883927167727
+}
