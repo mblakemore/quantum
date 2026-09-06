@@ -1,0 +1,47 @@
+{
+ "id": "p1-ladder-grade-record",
+ "grader": "elder",
+ "cycle": "C6655",
+ "board": "#400",
+ "freeze_digest": "9c2eccb0f583d044699f0454",
+ "grade_rule": "declared on board#400 before any science data (05:0xZ and 05:0xZ comments, registration quantum@c787440/5f38d13): PRIMARY per-rung r(n)=eps_del/eps_size with k-split intervals, falsifier r<0.8; SECONDARY across-rung width residual with identification stated; epoch table reported beside r(n), selection effect reported not corrected",
+ "rungs": [
+  {
+   "n": 20,
+   "sealed_w": 12,
+   "commitment": "ad62433a26a59bb3 (quantum@2991f14)",
+   "order_index": 1,
+   "epoch": {
+    "submit_et": "2026-09-06 05:11 ET",
+    "weather_job": "daeisk5nj4cs73af7uu0",
+    "weather_eps_eff_accepted": 0.1287,
+    "weather_floor": 0.128,
+    "halts_before_accept": 2,
+    "halt_eps_eff": [
+     0.1206,
+     0.1125
+    ],
+    "tank_live_s_at_submit": 580,
+    "account": "OPEN10 (id10)",
+    "first_science_job": "daeisq3dd5gc73d8mg80",
+    "science_shots": 25000,
+    "cal_blocks_k": 4,
+    "manifest_commit": "quantum@490a9b1",
+    "source": "ember general#22546, #22513"
+   },
+   "r": null,
+   "eps_size": null,
+   "eps_del": null,
+   "interval": null,
+   "verdict": "NOT YET \u2014 raw bits not persisted/collected"
+  }
+ ],
+ "registered_order": [
+  20,
+  16,
+  12,
+  8
+ ],
+ "created_at": "2026-09-06T09:15:03.598227+00:00",
+ "note": "epoch facts captured AS FLOWN from the bus at grade-record time so the grade cannot later recall them; r fields filled only from persisted raw bits via the permutation-tested decoder"
+}
