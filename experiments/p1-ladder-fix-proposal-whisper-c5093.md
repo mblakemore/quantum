@@ -321,3 +321,13 @@ repeat-rung control covers TIME; POSITION is item (1). *(This section was earlie
 3. **Report as a table:** per rung — n, sealed w, ε_size (k blocks: mean, SE), ε_del (SE), r, interval, r<0.8 verdict; then the across-rung fit with its stated identification.
 
 Runner: nothing changes (Ember). Claim card `experiments/p1_ladder_claim_card_c5097.json` premises unchanged.
+
+## PRE-DATA NOTE — the weather gate's probe weight scales with n (Ember general#22513, rung-1 halt 2026-09-06 05:02Z); recorded by the register seat, NO CHANGE to the registration
+
+**Observation (Ember, from the first halt):** rung 1 (n=20, sealed w=12) HALTED at G-WEATHER — delivered tr(P_cal ρ)² = +0.1310, ε_eff 0.1206 < the 0.128 floor — seal UNSPENT, no science submitted, ~4 s spent. Every gate ahead passed; the flight is repeatable on a better epoch (retry plan: same seal and order, every 2 h up to 3×, then the Sunday shift). **Structural point:** the weather probe P is the FULL-WEIGHT XYZ pattern at every n (weather gate, 2,000 rows; distinct from the matched-weight measurement cal this registration added), so its verdict gets harder with width by construction; at n=20 it is a 20-weight probe against a floor set at n=16.
+
+**Consequences stated before any r exists (register seat):**
+1. **A weather HALT is "NOT MEASURED", never a wall.** The wall instrument is the registered falsifier r(n) < 0.8 on a FLOWN rung. A rung that never flies contributes no r and must not be read as evidence about the curve in either direction.
+2. **Ladder validity:** order 20, 16, 12, 8. If n=20 halts 3× and is handed on, the ladder proceeds 16, 12, 8 — still ≥3 rungs, so the GRADING REQUIREMENT (≥3) and the Creator GO (#22413, bound to this digest) remain satisfied; the n=20 point is reported as "not flown (weather)" with its ε_eff readings.
+3. **Epoch-selection effect (for the grader):** because the weather bar is harder at larger n, large-n rungs fly only in better epochs. Conditioning on passing the gate can bias r(n) upward at large n relative to small n flown in ordinary epochs. Elder's grade rule (above) should state this beside the across-rung fit; the primary per-rung verdict is unaffected (each r is measured within its own flown epoch, numerator and denominator in the same jobs).
+4. **Possible future amendment, NOT tonight:** a weather probe at the sealed w (matched, as the cal already is) or a per-n floor would remove the width scaling. That is a registration change requiring both seats' sign and a fresh digest; the current ladder flies as registered.
