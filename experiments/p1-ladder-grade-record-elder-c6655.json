@@ -433,6 +433,31 @@
   "min_z_vs_0.8": 5.468768848957064,
   "all_deliver": true,
   "verdict": "NO WIDTH WALL at any rung n in {8,12,16,20}: every r(n) >= 0.8 by >= 5.5 sigma; r(n) does not decline with n (0.956, 0.990, 1.116, 1.022)",
-  "repeat_rung_pending": "n=20 (temporal control, registered band 5.43%)"
+  "repeat_rung_pending": "DONE: repeat n=20 w=14 r 0.9258\u00b10.0424; band FAIL (|\u0394r|/r 9.37% vs 5.43%) -> temporal control UNGRADEABLE AS FLOWN (weight not fixed); per-rung verdicts stand"
+ },
+ "repeat_rung_n20_w14": {
+  "grade": null,
+  "band": {
+   "registered": "|\u0394r|/r \u2264 2\u00b7\u03c3(\u0394r) = 5.43% (\u03c3(\u0394r)=\u221a2\u00b71.92%), same weight at campaign start and end (registration \u00a7TEMPORAL MITIGATION, #19494/#19504)",
+   "as_flown": "first n=20 sealed w=12 (start); repeat n=20 FRESH seal w=14 (end) \u2014 weight NOT held fixed; declared pre-unseal on #400",
+   "r_first": 1.0215132646686909,
+   "se_first": 0.0244,
+   "r_repeat": 0.9258,
+   "se_repeat": 0.0424,
+   "delta_r": -0.0957132646686909,
+   "abs_delta_over_r": 0.09369752501425789,
+   "registered_band": 0.0543,
+   "band_result": "FAIL",
+   "measured_sigma_delta": 0.048919525754038136,
+   "delta_over_measured_sigma": -1.9565452279714732,
+   "note_on_sigma": "registered \u03c3(\u0394r) 2.72% assumed \u03c3(r)=1.92% per flight; realized \u03c3(r) 2.39% (first) and 4.58% (repeat: cal-block spread 0.00685 on eps_size 0.159), so measured \u03c3(\u0394r) = 4.8% of r; \u0394r = \u22121.96 measured \u03c3",
+   "reading": "FAIL as registered (9.4% > 5.43%) -> per the pre-unseal declaration: AMBIGUOUS between temporal drift and the weight-draw difference (12 -> 14); the temporal control is UNGRADEABLE AS FLOWN (registered false-reject direction). Direction of \u0394r is NEGATIVE (later flight lower), the direction the temporal confound points; the repeat still clears the falsifier by 3.0\u03c3 so every per-rung verdict stands; what is NOT established is that the ladder is temporally clean. Remedy per the protocol: a SAME-WEIGHT repeat (re-seal at w=12, or a second w=14 rung) if the tank allows \u2014 Creator/Ember; no adjustment of \u0394r for weight.",
+   "weather_repeat": {
+    "job": "daej6351ierc738m7vn0",
+    "eps_eff": 0.135,
+    "halts": 0
+   },
+   "graded_at": "2026-09-06T12:12:01.818754+00:00"
+  }
  }
 }
