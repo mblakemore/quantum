@@ -390,6 +390,171 @@
     "graded_utc": "2026-09-06T09:32:30.810293+00:00",
     "rule": "board#400 pre-data declaration; PRIMARY per-rung r<0.8; epoch reported beside, never corrected"
    }
+  },
+  {
+   "n": 20,
+   "sealed_w": 12,
+   "commitment": "ad62433a26a59bb3 (quantum@2991f14)",
+   "order_index": 1,
+   "epoch": {
+    "submit_et": "2026-09-06 05:11 ET",
+    "weather_job": "daequ2d1ierc738mgntg (weather gate inside the job)",
+    "weather_eps_eff_accepted": 0.1287,
+    "weather_floor": 0.128,
+    "halts_before_accept": 2,
+    "halt_eps_eff": [
+     0.1206,
+     0.1125
+    ],
+    "tank_live_s_at_submit": 580,
+    "account": "OPEN10 (id10)",
+    "first_science_job": "daeisq3dd5gc73d8mg80",
+    "science_shots": 25000,
+    "cal_blocks_k": 4,
+    "manifest_commit": "quantum@490a9b1",
+    "source": "ember general#22546, #22513",
+    "eps_eff_accepted": 0.1282,
+    "gate": 0.128,
+    "halts_before_accept_post_recalibration": 3,
+    "probe_sequence_post_recalibration": [
+     0.0183,
+     0.0699,
+     0.096,
+     0.1282
+    ],
+    "ember_note": "fifth probe on this rung per general#23011; the earlier probe(s) pre-date the 13:21Z recalibration",
+    "calibration": {
+     "repeat": {
+      "last_update_date": "post 2026-09-06T13:21Z recalibration of ibm_marrakesh (calibration id not recorded in the manifest \u2014 written as such, not guessed)",
+      "excluded_edges": [
+       [
+        81,
+        82
+       ],
+       [
+        82,
+        83
+       ],
+       [
+        113,
+        114
+       ],
+       [
+        113,
+        119
+       ],
+       [
+        129,
+        130
+       ],
+       [
+        130,
+        131
+       ]
+      ],
+      "max_2q_error": 0.5,
+      "g_edges_status": "6 couplers pruned from routing (G-EDGES), recorded in the manifest"
+     },
+     "rung1": {
+      "last_update_date": "pre-13:21Z calibration epoch (rungs flew 09:11\u201309:31Z); id not recorded",
+      "excluded_edges": "none recorded"
+     }
+    }
+   },
+   "r": 0.6748578176423822,
+   "eps_size": 0.17081737825604904,
+   "eps_del": 0.11527744310527055,
+   "interval": [
+    0.5762683386602309,
+    0.7734472966245335
+   ],
+   "verdict": "WALL (r<0.8)",
+   "se_r": 0.05030075458273024,
+   "grade": {
+    "n": 20,
+    "sealed_w": 12,
+    "revealed_P": "YIYIXXIIZIIIYYYYZIYX",
+    "science_N": 25000,
+    "tr2_science": 0.1196,
+    "se_tr2": 0.006279158669758235,
+    "eps_del": 0.11527744310527055,
+    "se_del": 0.0030261093490887175,
+    "cal_blocks": [
+     {
+      "file": "doorb_flight_n20_daequ2d1ierc738mgntg_cal_block0.json",
+      "P_cal": "ZIIXZIIYXIYZIZIIZYZX",
+      "N": 8865,
+      "tr2": 0.3046813310772702,
+      "se_tr2": 0.010115906326183081,
+      "eps": 0.1839931553911933,
+      "se_eps_shot": 0.003054433164669557
+     },
+     {
+      "file": "doorb_flight_n20_daequ2d1ierc738mgntg_cal_block1.json",
+      "P_cal": "ZXIIIZIYIIYYXYXIXIZZ",
+      "N": 8865,
+      "tr2": 0.3216018048505358,
+      "se_tr2": 0.010056648790604202,
+      "eps": 0.1890331554841154,
+      "se_eps_shot": 0.0029555805126263712
+     },
+     {
+      "file": "doorb_flight_n20_daequ2d1ierc738mgntg_cal_block2.json",
+      "P_cal": "YIYIIYYIIZIXYZYXZXII",
+      "N": 8865,
+      "tr2": 0.27219402143260013,
+      "se_tr2": 0.01021986395482285,
+      "eps": 0.17390738960486352,
+      "se_eps_shot": 0.0032647849007590543
+     },
+     {
+      "file": "doorb_flight_n20_daequ2d1ierc738mgntg_cal_block3.json",
+      "P_cal": "IYIIXIXIZYYXYIIYYYIX",
+      "N": 8865,
+      "tr2": 0.16728708403835307,
+      "se_tr2": 0.010471216054165403,
+      "eps": 0.1363358125440239,
+      "se_eps_shot": 0.004266921613450352
+     }
+    ],
+    "k_live": 4,
+    "eps_size": 0.17081737825604904,
+    "se_size_ksplit": 0.01191617313858928,
+    "r": 0.6748578176423822,
+    "se_r": 0.05030075458273024,
+    "interval_95": [
+     0.5762683386602309,
+     0.7734472966245335
+    ],
+    "z_vs_0.8": -2.4878788279765276,
+    "z_vs_1.0": -6.463962321337599,
+    "verdict": "WALL (r<0.8)",
+    "decisions_sha256": "0cd168e37e09b6321e7910630c6503950e3a57b29cc0846b82ca3bf0968f77aa",
+    "science_sha256": "961dc78793417209c53910248d38e9b975ef25fee3cfc2f75fa86eeec416348a",
+    "graded_utc": "2026-09-06T19:17:27.908361+00:00",
+    "rule": "board#400 pre-data declaration; PRIMARY per-rung r<0.8; epoch reported beside, never corrected"
+   },
+   "tag": "repeat1",
+   "role": "same-weight temporal control of rung 1 (n=20, w=12) \u2014 GO #2 general#22795",
+   "job": "daequ2d1ierc738mgntg",
+   "sealed_digest": "0e5c0dea4e49aab3",
+   "reveal_verified_independently": {
+    "method": "sealer digest_v2 recomputed from the revealed P + salt + commitment preimage fields",
+    "equal": true,
+    "weight": 12
+   },
+   "same_weight_control": {
+    "reference_r20": 1.0215132646686909,
+    "reference_se": 0.024406771051653686,
+    "band_pct": 5.43,
+    "deviation_pct": 33.94,
+    "pass": false,
+    "z_repeat_minus_ref": -6.2,
+    "delta_r": -0.3467,
+    "verdict_wording": "REGISTERED FAIL (register-seat ruling general#22816): the same-weight temporal control FAILED: the device was not stable over the campaign's full span (the four rungs flew inside one calibration epoch 09:11\u201309:31Z); per-rung verdicts stand, trend not read. Nothing adjusted for the recalibration; it is reported.",
+    "both_directions": "toward-falsifier: the repeat reads WALL (r<0.8) where rung 1 read DELIVER (r 1.02) \u2014 a ~34% drop, 6.2\u03c3 on the combined SE, across the 13:21Z recalibration with the weight HELD at 12. Against: the accepted weather probe cleared the gate by 0.0002 (0.1282 vs 0.128) after three halts, so the repeat flew on the weakest device state the gate admits; eps_size 0.171 vs rung 1 (see rung entry). Neither direction re-grades rung 1."
+   },
+   "record_note": "C6656: the grader overwrote the rung-1 n=20 entry on first write (same n key); restored from the pre-grade backup and the repeat appended as its own entry \u2014 an observation must not overwrite its predecessor."
   }
  ],
  "registered_order": [
@@ -459,5 +624,10 @@
    },
    "graded_at": "2026-09-06T12:12:01.818754+00:00"
   }
+ },
+ "same_weight_repeat_c6656": {
+  "graded_utc": "2026-09-06T19:17:27.908361+00:00",
+  "entry_index": 4,
+  "summary": "r 0.6749\u00b10.0503 vs 1.0215\u00b10.0244: deviation 33.9% > 5.43% band -> REGISTERED FAIL of the same-weight temporal control; per-rung verdicts stand."
  }
 }
