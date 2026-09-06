@@ -646,6 +646,10 @@ def main():
                          "calibration job) instead of submitting another: the free queue can hold "
                          "a job past the 10-minute poll, and every re-submit is a new queue wait plus "
                          "tank spend. The job must be on EXPECTED_BACKEND and carry exactly CAL_ROWS rows.")
+    ap.add_argument("--weather-job-max-age-min", type=float, default=60.0,
+                    help="a --weather-job older than this (by its creation date on the service) is REFUSED: "
+                         "G-WEATHER reads the epoch NOW, and a stale DONE job at the same n would otherwise pass "
+                         "(Whisper general#22485). The reused job id and its age ride the manifest.")
     ap.add_argument("--collect", default=None, metavar="MANIFEST",
                     help="board#353: fetch every job in MANIFEST and PERSIST its raw bitstrings as "
                          "decoder-shaped {n, shots} files beside it (per job, per cal block, science-only); "
@@ -1016,9 +1020,21 @@ def main():
         _wbn = getattr(_wb, "name", _wb)
         if _wbn != EXPECTED_BACKEND:
             sys.exit(f"REFUSE G-WEATHER: --weather-job {a.weather_job} ran on {_wbn!r}, not {EXPECTED_BACKEND}")
-        print(f"  [G-WEATHER] REUSING calibration-only job {wjob.job_id()} ({CAL_ROWS:,} rows expected) — "
-              f"submitted by an earlier attempt of this rung; no new weather job")
+        # AGE BOUND (Whisper general#22485): the weather verdict is about the epoch NOW. A DONE job from
+        # hours ago at the same n has the right backend, rows and bit width and says nothing about now.
+        _created = getattr(wjob, "creation_date", None)
+        if _created is None:
+            sys.exit(f"REFUSE G-WEATHER: --weather-job {a.weather_job} has no readable creation date; cannot bound its age")
+        _age_min = (datetime.datetime.now(datetime.timezone.utc) - _created).total_seconds() / 60.0
+        if _age_min > a.weather_job_max_age_min:
+            sys.exit(f"REFUSE G-WEATHER: --weather-job {a.weather_job} was created {_age_min:.0f} min ago, over the "
+                     f"{a.weather_job_max_age_min:g} min bound; the epoch it measured is not this one. Submit a fresh probe.")
+        weather_reuse = {"job_id": wjob.job_id(), "created": _created.isoformat(), "age_min_at_reuse": round(_age_min, 1),
+                         "max_age_min": a.weather_job_max_age_min}
+        print(f"  [G-WEATHER] REUSING calibration-only job {wjob.job_id()} ({CAL_ROWS:,} rows expected), created "
+              f"{_age_min:.0f} min ago (bound {a.weather_job_max_age_min:g}) — submitted by an earlier attempt of this rung; no new weather job")
     else:
+        weather_reuse = None
         cal_arr = [draw_cal_row() for _ in range(CAL_ROWS)]
         wjob = SamplerV2(mode=bk).run([(t, cal_arr, 1)])
         print(f"  [G-WEATHER] calibration-only job {wjob.job_id()} ({CAL_ROWS:,} rows) — reading "
@@ -1150,6 +1166,7 @@ def main():
            "shots": shots - remaining, "commitment_sha256": sec["sha256"],
            "sealed_weight": _sealed_w, "seal_tag": a.seal_tag or None, "registration_freeze": a.freeze or None,
            "excluded_edges": excluded_edges, "max_2q_error": a.max_2q_error,
+           "weather_job_reused": weather_reuse,
            "account": a.account, "instance_tail": ACCOUNT_CRN[-40:],
            "backend": bk.name, "layout": "halves", "granularity_R": 1, "jobs": jobs,
            "weather_rows": CAL_ROWS, "weather_P_public": P_cal, "weather_job": wjob.job_id(),
