@@ -1,0 +1,67 @@
+{
+ "job": "d9tb3tgpdb6s73e7082g",
+ "W": 0.4,
+ "seed": 6655,
+ "B": 2000,
+ "units": 20,
+ "information_set": "magnitude-only per draw, twirl pooled per (unit, arm); null = within-unit arm swap (board#399 ruling e35b3ac)",
+ "per_draw_pooled_magnitude": {
+  "CE_mean": 0.5101,
+  "CC_mean": 0.492,
+  "gap_CE_minus_CC": 0.018100000000000005
+ },
+ "n2_prime": {
+  "stats": {
+   "D": {
+    "obs": 0.19999999999999996,
+    "null_mean": 0.1388,
+    "null_sd": 0.037353147508803135,
+    "calibrated": 0.06119999999999995,
+    "UB": 0.1359062950176062,
+    "z": 1.6384161464727103
+   },
+   "TV4": {
+    "obs": 0.09999999999999998,
+    "null_mean": 0.04839999999999999,
+    "null_sd": 0.049986891728455524,
+    "calibrated": 0.051599999999999986,
+    "UB": 0.15157378345691103,
+    "z": 1.032270625673374
+   },
+   "TV8": {
+    "obs": 0.24999999999999997,
+    "null_mean": 0.247625,
+    "null_sd": 0.05479151786741365,
+    "calibrated": 0.0023749999999999605,
+    "UB": 0.11195803573482727,
+    "z": 0.043346125320840076
+   }
+  },
+  "winner": "TV4",
+  "d2": 0.06062951338276441
+ },
+ "n3_prime": {
+  "s_threshold_LOUO": 0.55,
+  "s_LDA_LOUO": 0.675,
+  "s": 0.675,
+  "winner": "LDA(3 magnitudes)",
+  "N_records": 40,
+  "se": 0.07405656621799311,
+  "s_UB": 0.8231131324359863,
+  "d3": 0.25849050594878903
+ },
+ "d1": 0.03541,
+ "d_max": 0.25849050594878903,
+ "max_is": "3' classical arm (LDA(3 magnitudes))",
+ "ceiling_W_p": 0.8231131324359863,
+ "sigma_75of75": 4.014658992334487,
+ "graded_finding_registered": {
+  "ceiling": 0.54426,
+  "sigma": 7.925
+ },
+ "delta_vs_registered": {
+  "ceiling": 0.2788531324359863,
+  "sigma": -3.9103410076655125
+ },
+ "bar_5sigma_fails_at_d": 0.2
+}
