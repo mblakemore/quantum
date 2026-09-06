@@ -125,11 +125,79 @@
    },
    "decode_commitment_sha256": "6859973d7899e15223a4ef1de4d881e55d5253d7cd1a5b604b718c788330e2c9",
    "decode_commitment_commit": "quantum@fe25000",
-   "r": null,
-   "eps_size": null,
-   "eps_del": null,
-   "interval": null,
-   "verdict": "NOT YET \u2014 awaiting unseal"
+   "r": 1.1158493279624608,
+   "eps_size": 0.16316025457073,
+   "eps_del": 0.18206226041293308,
+   "interval": [
+    1.0754484666107227,
+    1.156250189314199
+   ],
+   "verdict": "DELIVERS at this rung (r>=0.8)",
+   "se_r": 0.020612684363131736,
+   "grade": {
+    "n": 16,
+    "sealed_w": 13,
+    "revealed_P": "ZZIXZIZXZIZYZYXX",
+    "science_N": 25000,
+    "tr2_science": 0.29832,
+    "se_tr2": 0.006036572463244354,
+    "eps_del": 0.18206226041293308,
+    "se_del": 0.0018420354448322853,
+    "cal_blocks": [
+     {
+      "file": "doorb_flight_n16_daeiuu3dd5gc73d8miog_cal_block0.json",
+      "P_cal": "ZXZYXYIZZZXIXYZI",
+      "N": 8865,
+      "tr2": 0.25188945290468134,
+      "se_tr2": 0.010278423529134306,
+      "eps": 0.1672952987666092,
+      "se_eps_shot": 0.0034132670410121652
+     },
+     {
+      "file": "doorb_flight_n16_daeiuu3dd5gc73d8miog_cal_block1.json",
+      "P_cal": "XXXZXYYIYIYYYIYY",
+      "N": 8865,
+      "tr2": 0.24376762549351383,
+      "se_tr2": 0.010300490051047941,
+      "eps": 0.16457609705392073,
+      "se_eps_shot": 0.003477111546113241
+     },
+     {
+      "file": "doorb_flight_n16_daeiuu3dd5gc73d8miog_cal_block2.json",
+      "P_cal": "XYZYXXYYYIIXZIYZ",
+      "N": 8865,
+      "tr2": 0.2448956570783982,
+      "se_tr2": 0.010297471295200636,
+      "eps": 0.16495644444600055,
+      "se_eps_shot": 0.003468077531275426
+     },
+     {
+      "file": "doorb_flight_n16_daeiuu3dd5gc73d8miog_cal_block3.json",
+      "P_cal": "XIYZZZZIYXXYZYZI",
+      "N": 8865,
+      "tr2": 0.21849971799210377,
+      "se_tr2": 0.010364250855544639,
+      "eps": 0.1558131780163895,
+      "se_eps_shot": 0.003695398049941313
+     }
+    ],
+    "k_live": 4,
+    "eps_size": 0.16316025457073,
+    "se_size_ksplit": 0.002521722830435017,
+    "r": 1.1158493279624608,
+    "se_r": 0.020612684363131736,
+    "interval_95": [
+     1.0754484666107227,
+     1.156250189314199
+    ],
+    "z_vs_0.8": 15.323056541213782,
+    "z_vs_1.0": 5.620293112801518,
+    "verdict": "DELIVERS at this rung (r>=0.8)",
+    "decisions_sha256": "6859973d7899e15223a4ef1de4d881e55d5253d7cd1a5b604b718c788330e2c9",
+    "science_sha256": "7cf74e28082912459f892fc5729bfcd37add024e3add857c58f2e646724835e7",
+    "graded_utc": "2026-09-06T09:32:29.817726+00:00",
+    "rule": "board#400 pre-data declaration; PRIMARY per-rung r<0.8; epoch reported beside, never corrected"
+   }
   },
   {
    "n": 12,
@@ -153,11 +221,79 @@
    },
    "decode_commitment_sha256": "228b8c637ab31b8389e00392272703aa9dde83a8c2b1ab66d02b2239e81ff9c1",
    "decode_commitment_commit": "quantum@fe25000",
-   "r": null,
-   "eps_size": null,
-   "eps_del": null,
-   "interval": null,
-   "verdict": "NOT YET \u2014 awaiting unseal"
+   "r": 0.9902474190893662,
+   "eps_size": 0.20702307428265718,
+   "eps_del": 0.2050040650003474,
+   "interval": [
+    0.9590832924430333,
+    1.0214115457356991
+   ],
+   "verdict": "DELIVERS at this rung (r>=0.8)",
+   "se_r": 0.01590006461547599,
+   "grade": {
+    "n": 12,
+    "sealed_w": 9,
+    "revealed_P": "YZXYIYYXIYIZ",
+    "science_N": 25000,
+    "tr2_science": 0.37824,
+    "se_tr2": 0.005854688727507211,
+    "eps_del": 0.2050040650003474,
+    "se_del": 0.0015866050502996636,
+    "cal_blocks": [
+     {
+      "file": "doorb_flight_n12_daej1ejdd5gc73d8mllg_cal_block0.json",
+      "P_cal": "XIYYYIIXYZZZ",
+      "N": 8865,
+      "tr2": 0.3922165820642978,
+      "se_tr2": 0.009769862569997515,
+      "eps": 0.20875732377420061,
+      "se_eps_shot": 0.002600005273897453
+     },
+     {
+      "file": "doorb_flight_n12_daej1ejdd5gc73d8mllg_cal_block1.json",
+      "P_cal": "ZIXXZXXZIIXX",
+      "N": 8865,
+      "tr2": 0.40282007896221095,
+      "se_tr2": 0.009721073241824356,
+      "eps": 0.21156036148427418,
+      "se_eps_shot": 0.002552744856157478
+     },
+     {
+      "file": "doorb_flight_n12_daej1ejdd5gc73d8mllg_cal_block2.json",
+      "P_cal": "ZIIXZYYZZZXI",
+      "N": 8865,
+      "tr2": 0.3545403271291596,
+      "se_tr2": 0.009930958257712577,
+      "eps": 0.1984776301778559,
+      "se_eps_shot": 0.0027797586192048838
+     },
+     {
+      "file": "doorb_flight_n12_daej1ejdd5gc73d8mllg_cal_block3.json",
+      "P_cal": "IZIIYXYZZXXZ",
+      "N": 8865,
+      "tr2": 0.3942470389170897,
+      "se_tr2": 0.009760639399050527,
+      "eps": 0.20929698169429797,
+      "se_eps_shot": 0.002590853150399106
+     }
+    ],
+    "k_live": 4,
+    "eps_size": 0.20702307428265718,
+    "se_size_ksplit": 0.0029124712632899023,
+    "r": 0.9902474190893662,
+    "se_r": 0.01590006461547599,
+    "interval_95": [
+     0.9590832924430333,
+     1.0214115457356991
+    ],
+    "z_vs_0.8": 11.965197858642213,
+    "z_vs_1.0": -0.6133673759502419,
+    "verdict": "DELIVERS at this rung (r>=0.8)",
+    "decisions_sha256": "228b8c637ab31b8389e00392272703aa9dde83a8c2b1ab66d02b2239e81ff9c1",
+    "science_sha256": "10f61697c59df8077f3932c202d812e1ba42bb5cd625d98e5edcf8e20466e02e",
+    "graded_utc": "2026-09-06T09:32:30.374431+00:00",
+    "rule": "board#400 pre-data declaration; PRIMARY per-rung r<0.8; epoch reported beside, never corrected"
+   }
   },
   {
    "n": 8,
@@ -181,11 +317,79 @@
    },
    "decode_commitment_sha256": "f2b34577a87949783ac5c14e8ec15eca277ce8da88e5fb4f48fe4092804b71c4",
    "decode_commitment_commit": "quantum@fe25000",
-   "r": null,
-   "eps_size": null,
-   "eps_del": null,
-   "interval": null,
-   "verdict": "NOT YET \u2014 awaiting unseal"
+   "r": 0.9562808646457994,
+   "eps_size": 0.24336261440389784,
+   "eps_del": 0.2327230113246217,
+   "interval": [
+    0.9002699958075265,
+    1.0122917334840724
+   ],
+   "verdict": "DELIVERS at this rung (r>=0.8)",
+   "se_r": 0.02857697389707801,
+   "grade": {
+    "n": 8,
+    "sealed_w": 6,
+    "revealed_P": "YZYIYXXI",
+    "science_N": 25000,
+    "tr2_science": 0.48744,
+    "se_tr2": 0.0055223264894426515,
+    "eps_del": 0.2327230113246217,
+    "se_del": 0.0013182878406991841,
+    "cal_blocks": [
+     {
+      "file": "doorb_flight_n8_daej2vl1ierc738m7reg_cal_block0.json",
+      "P_cal": "XIZYXIYX",
+      "N": 8865,
+      "tr2": 0.5469825155104343,
+      "se_tr2": 0.008891208911512788,
+      "eps": 0.24652755435592777,
+      "se_eps_shot": 0.002003654528314685
+     },
+     {
+      "file": "doorb_flight_n8_daej2vl1ierc738m7reg_cal_block1.json",
+      "P_cal": "IYYXZYIY",
+      "N": 8865,
+      "tr2": 0.453355893965031,
+      "se_tr2": 0.009466707379426573,
+      "eps": 0.22443902759374465,
+      "se_eps_shot": 0.002343300955205969
+     },
+     {
+      "file": "doorb_flight_n8_daej2vl1ierc738m7reg_cal_block2.json",
+      "P_cal": "IXIYZXYX",
+      "N": 8865,
+      "tr2": 0.5336717428087987,
+      "se_tr2": 0.008981992833112261,
+      "eps": 0.2435094665759193,
+      "se_eps_shot": 0.002049200012041406
+     },
+     {
+      "file": "doorb_flight_n8_daej2vl1ierc738m7reg_cal_block3.json",
+      "P_cal": "YIXZXIXY",
+      "N": 8865,
+      "tr2": 0.60360970107163,
+      "se_tr2": 0.008467817239142115,
+      "eps": 0.2589744090899996,
+      "se_eps_shot": 0.001816528099114087
+     }
+    ],
+    "k_live": 4,
+    "eps_size": 0.24336261440389784,
+    "se_size_ksplit": 0.007140662209853631,
+    "r": 0.9562808646457994,
+    "se_r": 0.02857697389707801,
+    "interval_95": [
+     0.9002699958075265,
+     1.0122917334840724
+    ],
+    "z_vs_0.8": 5.468768848957064,
+    "z_vs_1.0": -1.5298728098943621,
+    "verdict": "DELIVERS at this rung (r>=0.8)",
+    "decisions_sha256": "f2b34577a87949783ac5c14e8ec15eca277ce8da88e5fb4f48fe4092804b71c4",
+    "science_sha256": "2bfa14ce8376ccb6cba5f860e6c45f94cf4e3bc2968fc4d7a7dba45b886fc890",
+    "graded_utc": "2026-09-06T09:32:30.810293+00:00",
+    "rule": "board#400 pre-data declaration; PRIMARY per-rung r<0.8; epoch reported beside, never corrected"
+   }
   }
  ],
  "registered_order": [
@@ -201,5 +405,33 @@
   "reason": "width rung; marginal weather (2 halts, accepted 0.1287 vs 0.128); registered repeat-rung band 5.43% most informative where the epoch was worst",
   "picked_at": "2026-09-06T09:30:23.719100+00:00",
   "source": "board#400 / general#22613"
+ },
+ "secondary_width_residual": {
+  "model": "WLS r ~ 1 + n + w (weights 1/se_r^2), 4 rungs",
+  "width_slope_per_n": -0.012806390816256128,
+  "width_slope_se": 0.005829333141343816,
+  "weight_slope_per_w": 0.039540833171351056,
+  "weight_slope_se": 0.009280877286739648,
+  "n_only_slope": 0.00903142921105484,
+  "n_only_slope_se": 0.0027764019032771397,
+  "se_inflation_from_adding_w": 2.0995998938277394,
+  "corr_n_w": 0.8981462390204985,
+  "delta_width_vs_ref_n8_over_ladder": -0.15367668979507354,
+  "falsifier_delta_width_le_minus_0.2": "NOT FIRED (point estimate positive)",
+  "STATUS": "COMPUTED FOR THE RECORD, NOT QUOTED \u2014 pre-declared rule (c) on board#400: halt counts 2,0,0,0 differ materially across rungs, so the across-rung fit is epoch-confounded; the PRIMARY per-rung verdicts carry the ladder.",
+  "computed_utc": "2026-09-06T09:33:08.311846+00:00"
+ },
+ "ladder_summary": {
+  "rungs_graded": 4,
+  "r_by_n": {
+   "8": 0.9562808646457994,
+   "12": 0.9902474190893662,
+   "16": 1.1158493279624608,
+   "20": 1.0215132646686909
+  },
+  "min_z_vs_0.8": 5.468768848957064,
+  "all_deliver": true,
+  "verdict": "NO WIDTH WALL at any rung n in {8,12,16,20}: every r(n) >= 0.8 by >= 5.5 sigma; r(n) does not decline with n (0.956, 0.990, 1.116, 1.022)",
+  "repeat_rung_pending": "n=20 (temporal control, registered band 5.43%)"
  }
 }
