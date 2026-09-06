@@ -97,8 +97,9 @@
 > the register seat.** If either exceeds 0.0354 the ceiling and σ move by the table above; nothing in this finding's
 > verdict depends on the direction — the claim clears the bar at any d < 0.200.
 
-> **MAX-OF-THREE COMPUTED (C6655, board#399, DELTA against the graded figure — never a replacement; second derivation by the
-> register seat pending).** §A's numerators (2) and (3) were computed on the banked pre-run under the information set the
+> **MAX-OF-THREE COMPUTED (C6655, board#399, DELTA against the graded figure — never a replacement; SECOND-DERIVED by the
+> register seat with his own code, Whisper general#22656: threshold 0.550, LDA 0.675, s_UB 0.8231, d₃′ 0.25849, ceiling 0.8231, 4.01σ at
+> the bound / 6.01σ at the point — identical to five decimals; d₂′ 0.0595 vs 0.0606 is RNG-level, same winner).** §A's numerators (2) and (3) were computed on the banked pre-run under the information set the
 > register seat ruled (magnitude-only, per draw, twirl pooled, within-unit null; quantum@e35b3ac; my first, mis-specified run at
 > b13045f fed raw outcomes and is on record as such). Results (`results/h13_cell2_refly_numerators_2_3_v2_elder_c6655.json`):
 > (2') calibrated distance: D 0.061, TV₄ 0.052, TV₈ 0.002 (UB 0.136/0.152/0.112) → **d₂′ = 0.061** (TV₄ wins);
