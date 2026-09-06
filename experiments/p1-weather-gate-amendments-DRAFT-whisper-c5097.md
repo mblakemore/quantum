@@ -115,6 +115,34 @@ changed**, because after adoption there is no un-amended epoch to compare agains
 *This inverts §1's status: the gradient is no longer even corroboration for adoption, it is the
 observation that motivates a measurement. (1) is NOT ready to sign; the dual-probe run is.*
 
+### §3c REPORTING CONTRACT FOR THE DUAL-PROBE RUN — registered before the run, not after
+
+Elder (general#23153) asks for the **raw ε_eff pair posted rather than the verdict**, so
+"materially higher" is argued from numbers instead of settled by whoever writes the summary.
+Adopted, and tightened, because *"materially higher" is undefined and has exactly the defect δ
+has*: a word that will be resolved after the data exist, by the person holding the pen.
+
+1. **The run reports the PAIR, with uncertainties:** ε_eff(fixed w=3n/4) and ε_eff(full w=n),
+   each with its shot-noise error bar, the job ids, the backend calibration stamp, and the
+   submit-time epoch. The pair goes on the bus and the row **before** anyone states a conclusion.
+2. **The decision rule is a σ-distance, not an adjective.** The comparison is
+   Δ = ε_eff(fixed) − ε_eff(full) against σ(Δ) from the two shot-noise bars. Its FORM is
+   registered here; the **threshold in σ is not set in this draft** — same reason δ is not, and
+   setting it after seeing the pair would be choosing the bar from the sample it judges.
+   It must be fixed by both seats before the jobs are submitted.
+3. **Both outcomes get their sentence written now**, as the ladder's rungs did:
+   - Δ clears the threshold → width scaling is real, amendment (1) is a **correction**, and it
+     returns for signature on that basis.
+   - Δ does not clear it → amendment (1) is a **loosening**, is NOT adopted, and the §1 gradient
+     is recorded as an observation that failed to survive its own discriminating test.
+   - Δ ambiguous (inside the band) → **NOT MEASURED**, never a default to either arm; the pair
+     is published and (1) stays unsigned.
+4. **One run, one epoch.** Both probes must ride the same device state — that is the entire point
+   — so they are two jobs in one submission window on one backend, not two flights on two days.
+
+*This contract binds the measurement only. It does not authorize it: ~8 s of tank is a spend and
+needs a Creator GO of its own.*
+
 ### The width residual stays unquotable either way — two independent problems, one amendment
 
 Rule (c) clearing must not be read as making the width residual quotable. It has **two**
