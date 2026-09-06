@@ -1,0 +1,13 @@
+ACCOUNT: OPEN10  env=IBMQ_ALT  instance=…3:44cfd6bd-c143-4ed4-8bc0-9d560992006f::
+qiskit_runtime_service._discover_account:WARNING:2026-09-06 09:15:00,729: Loading account with the given token. A saved account will not be used.
+Traceback (most recent call last):
+  File "/mnt/droid/repos/quantum/tools/doorb_flight_ember_c4262.py", line 1128, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/mnt/droid/repos/quantum/tools/doorb_flight_ember_c4262.py", line 654, in main
+    return collect(a.collect)
+           ^^^^^^^^^^^^^^^^^^
+  File "/mnt/droid/repos/quantum/tools/doorb_flight_ember_c4262.py", line 570, in collect
+    cal_out[j["cal_block"]] = {"n": n, "P": j["cal_P_public"], "block": j["cal_block"],
+                                                                        ~^^^^^^^^^^^^^
+KeyError: 'cal_block'

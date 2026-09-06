@@ -566,7 +566,12 @@ def collect(manifest_path):
         json.dump(rec, open(path, "w"))
         files[path] = hashlib.sha256(open(path, "rb").read()).hexdigest()
         cr, sr = j.get("cal_rows_range"), j.get("science_rows_range")
-        if cr:
+        if j.get("role") == "weather-gate":
+            # the weather job is a full-weight public probe, not a matched-weight cal block: its own file
+            wpath = f"{base}_weather_outcomes.json"
+            json.dump({"n": n, "P": j.get("cal_P_public"), "role": "weather-gate", "shots": raws}, open(wpath, "w"))
+            files[wpath] = hashlib.sha256(open(wpath, "rb").read()).hexdigest()
+        elif cr and j.get("cal_block") is not None:
             cal_out[j["cal_block"]] = {"n": n, "P": j["cal_P_public"], "block": j["cal_block"],
                                        "shots": raws[cr[0]:cr[1] + 1]}
         if sr:
