@@ -87,10 +87,19 @@ def cmd_grade(a):
     print(f"RUNG n={n} w={w}: eps_del {eps_del:.5f}±{se_del:.5f} | eps_size {eps_size:.5f}±{se_size:.5f} (k={k}) | "
           f"r = {r:.4f} ± {se_r:.4f}  95% [{row['interval_95'][0]:.4f}, {row['interval_95'][1]:.4f}]  z(0.8)={z08:+.1f}  z(1.0)={z1:+.1f}  -> {verdict}")
     if a.record:
+        # C6656 FIX: the record is keyed on the DECODE COMMITMENT, never on n alone. Keyed on n, grading the same-weight
+        # REPEAT (n=20, repeat1) silently REPLACED the rung-1 n=20 entry — the very reference the control is graded against
+        # (caught by diffing a pre-grade copy; restored by hand). An observation must not overwrite its predecessor:
+        # same n + different commitment -> APPEND a new entry; same commitment -> update in place (a re-grade of the same decode).
         R = json.load(open(a.record)); tgt = None
+        c16 = row["decisions_sha256"][:16]
         for rg in R["rungs"]:
-            if int(rg["n"]) == n: tgt = rg
-        if tgt is None: R["rungs"].append({"n": n}); tgt = R["rungs"][-1]
+            if int(rg["n"]) == n and str(rg.get("commitment", ""))[:16] == c16: tgt = rg
+        if tgt is None:
+            same_n = [rg for rg in R["rungs"] if int(rg["n"]) == n]
+            entry = {"n": n, "commitment": c16, "job": str(a.manifest).split("doorb_flight_n%d_" % n)[-1].replace(".json", "")}
+            if same_n: entry["tag"] = "repeat%d" % len(same_n); entry["note"] = "same n as %d earlier entr%s, different commitment — appended, predecessor untouched" % (len(same_n), "y" if len(same_n) == 1 else "ies")
+            R["rungs"].append(entry); tgt = R["rungs"][-1]
         tgt.update({"r": r, "se_r": se_r, "eps_size": eps_size, "eps_del": eps_del, "interval": row["interval_95"], "verdict": verdict, "grade": row})
         json.dump(R, open(a.record, "w"), indent=1); print(f"record updated: {a.record}")
     if a.json: print(json.dumps(row, indent=1))

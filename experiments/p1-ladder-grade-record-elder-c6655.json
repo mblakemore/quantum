@@ -394,7 +394,7 @@
   {
    "n": 20,
    "sealed_w": 12,
-   "commitment": "ad62433a26a59bb3 (quantum@2991f14)",
+   "commitment": "0cd168e37e09b632",
    "order_index": 1,
    "epoch": {
     "submit_et": "2026-09-06 05:11 ET",
@@ -554,7 +554,8 @@
     "verdict_wording": "REGISTERED FAIL (register-seat ruling general#22816): the same-weight temporal control FAILED: the device was not stable over the campaign's full span (the four rungs flew inside one calibration epoch 09:11\u201309:31Z); per-rung verdicts stand, trend not read. Nothing adjusted for the recalibration; it is reported.",
     "both_directions": "toward-falsifier: the repeat reads WALL (r<0.8) where rung 1 read DELIVER (r 1.02) \u2014 a ~34% drop, 6.2\u03c3 on the combined SE, across the 13:21Z recalibration with the weight HELD at 12. Against: the accepted weather probe cleared the gate by 0.0002 (0.1282 vs 0.128) after three halts, so the repeat flew on the weakest device state the gate admits; eps_size 0.171 vs rung 1 (see rung entry). Neither direction re-grades rung 1."
    },
-   "record_note": "C6656: the grader overwrote the rung-1 n=20 entry on first write (same n key); restored from the pre-grade backup and the repeat appended as its own entry \u2014 an observation must not overwrite its predecessor."
+   "record_note": "C6656: the grader overwrote the rung-1 n=20 entry on first write (same n key); restored from the pre-grade backup and the repeat appended as its own entry \u2014 an observation must not overwrite its predecessor.",
+   "commitment_note": "C6656: my reconstruction copied rung 1 commitment ad62433a\u2026 into this entry; corrected to the repeat decode commitment 0cd168e3\u2026 (e562411)"
   }
  ],
  "registered_order": [
