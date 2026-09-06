@@ -847,10 +847,25 @@ def main():
         except SealRefusal as _e:
             sys.exit(f"{_e} [store: {_sealer.SECRETS}]")
         sec = _store[_key]
-        pin = json.load(open(f"experiments/doorb_commitments/doorb_commitment_n{a.n}.json"))
+        # THE PIN FOLLOWS THE SEAL'S SPEC. A v2 seal publishes doorb_commitment_v2_n{n}_w{w}.json
+        # (sealer adfcc6c: the v1 file for the same n is a published artifact and is never
+        # overwritten); a v1 seal publishes doorb_commitment_n{n}.json. Caught live on the first
+        # P1 rung (2026-09-06, seal unspent, no device contact): this line still read the v1
+        # path and compared a v2 secret against the wrong file. Same class as the KeyError note
+        # above — I moved the producer and left the consumer on the old path, one file over.
+        _pin_path = (f"experiments/doorb_commitments/doorb_commitment_v2_n{a.n}_w{_sealed_w}.json"
+                     if _sealed_w is not None else
+                     f"experiments/doorb_commitments/doorb_commitment_n{a.n}.json")
+        if not os.path.exists(_pin_path):
+            sys.exit(f"REFUSE G-SEAL: no published commitment at {_pin_path} for the selected seal "
+                     f"{_key}. Publish (commit) the commitment before flying; the digest must be on "
+                     f"record before device contact.")
+        pin = json.load(open(_pin_path))
         if sec["sha256"] != pin["commitment_sha256"]:
-            sys.exit("REFUSE G-SEAL: stored secret does not match the git-pinned commitment.")
-        print(f"  [PASS] G-SEAL    {sec['sha256'][:16]}... matches the pinned commitment")
+            sys.exit(f"REFUSE G-SEAL: stored secret does not match the git-pinned commitment at {_pin_path}.")
+        if _sealed_w is not None and pin.get("weight") != _sealed_w:
+            sys.exit(f"REFUSE G-SEAL: published commitment weight {pin.get('weight')} != sealed key weight {_sealed_w}.")
+        print(f"  [PASS] G-SEAL    {sec['sha256'][:16]}... matches the pinned commitment {os.path.basename(_pin_path)}")
         P = sec["P"]                               # used, never printed
         # WEIGHT VERIFICATION IS THE ENTIRE REASON v2 EXISTS (board#348 condition 1, board#354).
         # w was bound into the digest preimage so it could NOT be chosen after the draw. If the
