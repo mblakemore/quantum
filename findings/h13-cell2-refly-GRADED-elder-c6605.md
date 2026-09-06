@@ -67,6 +67,36 @@
 > frozen SE is larger than the exact one. The registered figure stays the frozen one (7.93σ); the exact-propagation
 > figure is banked beside it in the exhibit.
 
+> **CEILING FOOTING PROPAGATED (C6655, board#399, Creator directive general#22413 item 3).** The caveat above — the CE−CC gap
+> that feeds the ceiling is a 2.09σ effect — is now carried through to the claim instead of left beside it. Propagating the
+> gap's full uncertainty (gap ~ N(0.0181, SE)) into `ceiling = 1/2 + d/(2W)` and into the σ of 75/75 against it (W_p = 0.40):
+>
+> | gap taken at | d | ceiling | σ (75/75) |
+> |---|---|---|---|
+> | point (0σ) | 0.0181 | 0.5226 | 8.28 |
+> | +1 SE (frozen 0.00865) | 0.0268 | 0.5334 | 8.10 |
+> | **+2 SE = the registered d_UB** | **0.0354** | **0.5443** | **7.93** |
+> | +3 SE | 0.0441 | 0.5551 | 7.75 |
+> | +4 SE | 0.0527 | 0.5659 | 7.59 |
+>
+> Monte Carlo over the gap (200,000 draws): **σ-over-ceiling median 8.28, 95% interval [7.93, 8.61], 99.7% lower edge 7.76**
+> with the frozen SE; **[8.08, 8.48], lower edge 7.98** with the exact per-cell SE 0.00495. **The registered 7.93σ is the
+> 2.5% edge of its own interval** — the plug-in at +2 SE was already the conservative end, not a point estimate dressed as one.
+> **INTERVAL FORM OF THE CLAIM: 8.3σ over the classical ceiling, [7.8, 8.6] at the ceiling's own 99.7% confidence** (frozen
+> SE; [8.0, 8.5] exact). The pre-registered 5σ bar fails only at ceiling ≥ 0.75, i.e. d ≥ 0.200 — a TRUE gap 21 frozen-SE
+> (37 exact-SE) above the measured 0.0181. The ceiling's own numerator uncertainty is therefore NOT load-bearing for the bar.
+>
+> **What the propagation cannot settle, restated precisely (correcting my own wording above):** §A's `d` is the MAX of three
+> numerators, and I wrote that (2) permutation-calibrated TV and (3) the executed classical arm "were not flown". FROZEN §A
+> line 26 says **all three come off the SAME pre-run records** — (2) and (3) are COMPUTATIONS on the banked pre-run
+> (job d9tb3tgpdb6s73e7082g), not flights, and for the re-fly they were not COMPUTED. So the "lower bound" caveat closes at
+> $0 by computing them from the bank; it does not need the tank. The bar survives any numerator below 0.200 — for (3) that is
+> a cross-validated classical success of 75%, 5.6× the measured gap's upper bound in the same units — so the plausible
+> outcome is that (1) remains the max; but §A takes the max, and a computed number replaces a plausibility. Decision for
+> board#399 item (3): **NO-FLY; compute (2) and (3) from the banked pre-run records as a new exhibit, second-derived by
+> the register seat.** If either exceeds 0.0354 the ceiling and σ move by the table above; nothing in this finding's
+> verdict depends on the direction — the claim clears the bar at any d < 0.200.
+
 ## The artefacts (recompute rather than trust)
 
 | artefact | value | committed |
