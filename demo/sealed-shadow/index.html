@@ -52,7 +52,7 @@
   .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
   .topbar .sp{flex:1}
   .topbar .wing{font-family:var(--mich);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-4)}
-  .topbar .wing b{color:var(--violet);font-weight:400}
+  .topbar .wing b{color:var(--pink);font-weight:400}  /* Wing IV = WINGS index 3, 3%4 -> pink (board#393) */
   .hero { padding: clamp(20px,4vw,38px) 0 6px; position:relative; }
   .hero::before { content:""; position:absolute; inset:-30% 0 auto -20%; height:340px; z-index:-1; background: radial-gradient(50% 60% at 25% 0%, color-mix(in srgb,var(--violet) 14%,transparent), transparent 70%); }
   .eyebrow { font-family:var(--mono); font-size:11.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3); }
@@ -216,10 +216,11 @@
 </head>
 <body class="w-3">
 <a class="skip" href="#main">Skip to content</a>
-<header class="topbar">
+<nav class="topbar" aria-label="museum">
   <a class="back" href="../../index.html">&#8592; The Quantum Museum</a>
-  <span class="wingtag">WING IV &#183; THE ADVANTAGE LADDER</span>
-</header>
+  <span class="sp"></span>
+  <span class="wing">WING <b>IV</b> &#183; The Advantage Ladder</span>
+</nav>
 
 <main id="main">
 <h1>The Sealed Shadow</h1>
