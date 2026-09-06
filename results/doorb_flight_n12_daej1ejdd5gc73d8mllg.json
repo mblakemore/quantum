@@ -1,0 +1,201 @@
+{
+  "experiment": "doorb_unsigned_shadow",
+  "n": 12,
+  "eps_nominal": 0.3,
+  "shots": 25000,
+  "commitment_sha256": "767b1a9b6330a2e43c4a5a102fb4bc507f650bcb55a474a5b41ab982b6c6cdd9",
+  "sealed_weight": 9,
+  "registration_freeze": "9c2eccb0f583d044699f0454",
+  "account": "OPEN10",
+  "instance_tail": "3:44cfd6bd-c143-4ed4-8bc0-9d560992006f::",
+  "backend": "ibm_marrakesh",
+  "layout": "halves",
+  "granularity_R": 1,
+  "jobs": [
+    {
+      "job_id": "daej1ejdd5gc73d8mllg",
+      "rows": 2000,
+      "role": "weather-gate",
+      "cal_P_public": "XYZXYZXYZXYZ",
+      "cal_rows_range": [
+        0,
+        1999
+      ],
+      "science_rows_range": null
+    },
+    {
+      "role": "calibration+science",
+      "cal_block": 0,
+      "cal_P_public": "XIYYYIIXYZZZ",
+      "cal_rows_range": [
+        0,
+        8864
+      ],
+      "science_rows_range": [
+        8865,
+        9999
+      ],
+      "job_id": "daej1kl1ierc738m7q3g",
+      "rows": 10000
+    },
+    {
+      "role": "calibration+science",
+      "cal_block": 1,
+      "cal_P_public": "ZIXXZXXZIIXX",
+      "cal_rows_range": [
+        0,
+        8864
+      ],
+      "science_rows_range": [
+        8865,
+        9999
+      ],
+      "job_id": "daej1l3dd5gc73d8mlsg",
+      "rows": 10000
+    },
+    {
+      "role": "calibration+science",
+      "cal_block": 2,
+      "cal_P_public": "ZIIXZYYZZZXI",
+      "cal_rows_range": [
+        0,
+        8864
+      ],
+      "science_rows_range": [
+        8865,
+        9999
+      ],
+      "job_id": "daej1ljdd5gc73d8mltg",
+      "rows": 10000
+    },
+    {
+      "role": "calibration+science",
+      "cal_block": 3,
+      "cal_P_public": "IZIIYXYZZXXZ",
+      "cal_rows_range": [
+        0,
+        8864
+      ],
+      "science_rows_range": [
+        8865,
+        9999
+      ],
+      "job_id": "daej1me42tqs73auq440",
+      "rows": 10000
+    },
+    {
+      "role": "science",
+      "cal_block": null,
+      "cal_P_public": null,
+      "cal_rows_range": null,
+      "science_rows_range": [
+        0,
+        4999
+      ],
+      "job_id": "daej1mm42tqs73auq460",
+      "rows": 5000
+    },
+    {
+      "role": "science",
+      "cal_block": null,
+      "cal_P_public": null,
+      "cal_rows_range": null,
+      "science_rows_range": [
+        0,
+        4999
+      ],
+      "job_id": "daej1n3dd5gc73d8mm00",
+      "rows": 5000
+    },
+    {
+      "role": "science",
+      "cal_block": null,
+      "cal_P_public": null,
+      "cal_rows_range": null,
+      "science_rows_range": [
+        0,
+        4999
+      ],
+      "job_id": "daej1ndnj4cs73af84u0",
+      "rows": 5000
+    },
+    {
+      "role": "science",
+      "cal_block": null,
+      "cal_P_public": null,
+      "cal_rows_range": null,
+      "science_rows_range": [
+        0,
+        4999
+      ],
+      "job_id": "daej1ntnj4cs73af84v0",
+      "rows": 5000
+    },
+    {
+      "role": "science",
+      "cal_block": null,
+      "cal_P_public": null,
+      "cal_rows_range": null,
+      "science_rows_range": [
+        0,
+        459
+      ],
+      "job_id": "daej1o51ierc738m7q7g",
+      "rows": 460
+    }
+  ],
+  "weather_rows": 2000,
+  "weather_P_public": "XYZXYZXYZXYZ",
+  "weather_job": "daej1ejdd5gc73d8mllg",
+  "cal_scheme": "matched-weight rule (b) k=4 at the sealed w, independent supports, fresh stream (c5093 item 1); abs-match ~35,457 shots (item 2); each block rides FIRST in its own job",
+  "cal_meas_rows": 35460,
+  "cal_P_public": [
+    {
+      "block": 0,
+      "P": "XIYYYIIXYZZZ",
+      "weight": 9,
+      "job_index": 1,
+      "job_id": "daej1kl1ierc738m7q3g",
+      "rows": [
+        0,
+        8864
+      ]
+    },
+    {
+      "block": 1,
+      "P": "ZIXXZXXZIIXX",
+      "weight": 9,
+      "job_index": 2,
+      "job_id": "daej1l3dd5gc73d8mlsg",
+      "rows": [
+        0,
+        8864
+      ]
+    },
+    {
+      "block": 2,
+      "P": "ZIIXZYYZZZXI",
+      "weight": 9,
+      "job_index": 3,
+      "job_id": "daej1ljdd5gc73d8mltg",
+      "rows": [
+        0,
+        8864
+      ]
+    },
+    {
+      "block": 3,
+      "P": "IZIIYXYZZXXZ",
+      "weight": 9,
+      "job_index": 4,
+      "job_id": "daej1me42tqs73auq440",
+      "rows": [
+        0,
+        8864
+      ]
+    }
+  ],
+  "priced_rung_cost_s": 131.0,
+  "cost_model": "2.667 + 0.00167*rows per job",
+  "utc": "2026-09-06T09:22:40.773442+00:00"
+}

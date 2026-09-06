@@ -1,0 +1,52 @@
+ACCOUNT: OPEN10  env=IBMQ_ALT  instance=…3:44cfd6bd-c143-4ed4-8bc0-9d560992006f::
+DOOR (b) FLIGHT — n=12, eps=0.3, delta=0.05
+  [PASS] G-DECODE  decoder vs exact simulation, n=1..3: worst |E[sign] - tr(P rho)^2| = 5.55e-16
+  [PASS] F-BIAS    biased draw <s> = +0.8996 (target +0.90);  UNIFORM-BUG draw <s> = -0.0032 (wash, target 0)
+  [PASS] F-IND     shared-stream identical-draw rate 1.000 (bug fires at ~1.0);  independent 0.127
+  [PASS] F-MIX     identity-qubit |<Z>|: BUGGY-arm 1.000 (must fire >0.05), FIXED-arm 0.015 (must pass <0.05)
+  [PASS] G-SEAL-SEL v1 only            -> v1, weight NOT bound
+  [PASS] G-SEAL-SEL v2 only            -> v2, w parsed from the key
+  [PASS] G-SEAL-SEL two v2 seals       -> REFUSE (cannot choose among commitments)
+  [PASS] G-SEAL-SEL empty store        -> REFUSE (no seal)
+  [PASS] G-SEAL-SEL v1 AND v2 PRESENT  -> REFUSE (the 7th case; old code took v1 SILENTLY)
+  [PASS] G-SEAL-SEL weight match       -> PASS, returns flown weight
+  [PASS] G-SEAL-SEL weight mismatch LO -> REFUSE
+  [PASS] G-SEAL-SEL weight mismatch HI -> REFUSE
+  [PASS] G-SEAL-SEL v1 seal            -> weight gate returns None, i.e. DID NOT RUN
+  [PASS] G-SEAL-SEL v2 weight suffix ':wX' non-integer -> REFUSE, not ValueError
+  [PASS] G-SEAL-SEL v2 key with NO ':w' segment       -> REFUSE, not IndexError
+  [PASS] G-SEAL-SEL v2 weight 0 (identity_excluded is bound) -> REFUSE
+  [PASS] G-SEAL-SEL v2 weight suffix ':w-1' negative  -> REFUSE
+  [PASS] G-SEAL-SEL wrong-length P, right weight, n OMITTED -> PASSES (weaker standalone contract)
+  [PASS] G-SEAL-SEL wrong-length P, right weight, n GIVEN   -> REFUSE
+  [PASS] G-SEAL-SEL right-length P, right weight, n GIVEN   -> PASS
+  [PASS] G-SEAL-SEL selection does NOT mutate the store (refuse, never dedup the stale key)
+  [PASS] G-SEAL-SEL BUG ARM: pre-fix selection DOES take v1 on the v1+v2 store (defect reproduces)
+
+  registered budget T = 4 ln(2*4^n/delta)/eps^4 = 10,037 copies -> 5,019 Bell shots
+  theorem floor (memoryless) 2^n/eps^2 = 45,511 copies   ratio 4.5x
+  width: 2n = 24 qubits
+qiskit_runtime_service._discover_account:WARNING:2026-09-06 09:21:58,231: Loading account with the given token. A saved account will not be used.
+  [PASS] G-CRN     ...4ed4-8bc0-9d560992006f::  remaining 482s  flagged=False
+  [PASS] G-BACKEND ibm_marrakesh
+  [PASS] G-FIT     482s remaining, reserve 20s
+  [PASS] G-SEAL    767b1a9b6330a2e4... matches the pinned commitment doorb_commitment_v2_n12_w9.json
+  [PASS] G-SEAL-W  flown weight 9 == sealed w=9
+  template: 72 params, ISA 2q=12 (structure identical for every P — form (a))
+  [G-CAL]    k=4 matched-weight cal blocks at sealed w=9, 8,865 rows each (c5093 items 1-2)
+  [G-WEATHER] calibration-only job daej1ejdd5gc73d8mllg (2,000 rows) — reading delivered eps before committing the science budget
+  [G-WEATHER] delivered tr(P_cal rho)^2 = +0.2860 -> eps_eff = 0.1783 (gate 0.128)
+  [PASS] G-WEATHER  eps_eff 0.1783 >= 0.128 — claimable epoch
+  [G-EPOCH]  sized by REGISTERED --copies 50,000 -> T = 50,000 copies = 25,000 shots, est 131s vs 478s live
+  [PASS] G-EPOCH   registered budget fits
+  job 2: daej1kl1ierc738m7q3g  10,000 rows x 1 shot  (cal block 0 FIRST, 8865 rows)  (478s before)
+  job 3: daej1l3dd5gc73d8mlsg  10,000 rows x 1 shot  (cal block 1 FIRST, 8865 rows)  (478s before)
+  job 4: daej1ljdd5gc73d8mltg  10,000 rows x 1 shot  (cal block 2 FIRST, 8865 rows)  (478s before)
+  job 5: daej1me42tqs73auq440  10,000 rows x 1 shot  (cal block 3 FIRST, 8865 rows)  (478s before)
+  job 6: daej1mm42tqs73auq460  5,000 rows x 1 shot  (478s before)
+  job 7: daej1n3dd5gc73d8mm00  5,000 rows x 1 shot  (478s before)
+  job 8: daej1ndnj4cs73af84u0  5,000 rows x 1 shot  (478s before)
+  job 9: daej1ntnj4cs73af84v0  5,000 rows x 1 shot  (478s before)
+  job 10: daej1o51ierc738m7q7g  460 rows x 1 shot  (478s before)
+
+  manifest -> results/doorb_flight_n12_daej1ejdd5gc73d8mllg.json  (no P, no draws)
