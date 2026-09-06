@@ -627,6 +627,11 @@ def main():
                     help="registration freeze digest recorded in the manifest (P1: 9c2eccb0f583d044699f0454)")
     ap.add_argument("--plan", action="store_true",
                     help="print the priced per-rung job plan (weather + k cal blocks + science) and exit; no service call")
+    ap.add_argument("--weather-job", default=None, metavar="JOB_ID",
+                    help="reuse an ALREADY-SUBMITTED weather-gate job (this runner's own 2,000-row "
+                         "calibration job) instead of submitting another: the free queue can hold "
+                         "a job past the 10-minute poll, and every re-submit is a new queue wait plus "
+                         "tank spend. The job must be on EXPECTED_BACKEND and carry exactly CAL_ROWS rows.")
     ap.add_argument("--collect", default=None, metavar="MANIFEST",
                     help="board#353: fetch every job in MANIFEST and PERSIST its raw bitstrings as "
                          "decoder-shaped {n, shots} files beside it (per job, per cal block, science-only); "
@@ -965,10 +970,19 @@ def main():
     # cost instead of spending the full budget into bad weather — and tonight's flight proved
     # the point in the other direction: 109s bought a state that was not the registered family.
     EPS_MIN = 0.128
-    cal_arr = [draw_cal_row() for _ in range(CAL_ROWS)]
-    wjob = SamplerV2(mode=bk).run([(t, cal_arr, 1)])
-    print(f"  [G-WEATHER] calibration-only job {wjob.job_id()} ({CAL_ROWS:,} rows) — reading "
-          f"delivered eps before committing the science budget")
+    if a.weather_job:
+        wjob = svc.job(a.weather_job)
+        _wb = getattr(wjob, "backend", lambda: None)()
+        _wbn = getattr(_wb, "name", _wb)
+        if _wbn != EXPECTED_BACKEND:
+            sys.exit(f"REFUSE G-WEATHER: --weather-job {a.weather_job} ran on {_wbn!r}, not {EXPECTED_BACKEND}")
+        print(f"  [G-WEATHER] REUSING calibration-only job {wjob.job_id()} ({CAL_ROWS:,} rows expected) — "
+              f"submitted by an earlier attempt of this rung; no new weather job")
+    else:
+        cal_arr = [draw_cal_row() for _ in range(CAL_ROWS)]
+        wjob = SamplerV2(mode=bk).run([(t, cal_arr, 1)])
+        print(f"  [G-WEATHER] calibration-only job {wjob.job_id()} ({CAL_ROWS:,} rows) — reading "
+              f"delivered eps before committing the science budget")
     import time as _t
     for _ in range(60):
         if str(wjob.status()) in ("DONE", "ERROR", "CANCELLED"):
@@ -1005,6 +1019,10 @@ def main():
     _dec.init()
     _b = wjob.result()[0].data[list(wjob.result()[0].data.keys())[0]]
     _raws = [_b[i].get_bitstrings()[0] for i in range(_b.array.shape[0])]
+    if len(_raws) != CAL_ROWS or any(len(r) != 2 * a.n for r in _raws[:5]):
+        sys.exit(f"REFUSE G-WEATHER: job {wjob.job_id()} returned {len(_raws)} rows of "
+                 f"{len(_raws[0]) if _raws else 0} bits; this rung expects {CAL_ROWS} rows of {2 * a.n} bits. "
+                 f"Not this rung's weather job.")
     _sq = _dec.estimate(P_cal, [_dec.outcome_to_bells(r, a.n) for r in _raws])
     # delivered |tr(P rho)| = sqrt(tr^2); the ensemble amplitude is alpha = 3 eps, so
     # eps_eff = |tr| / 3. (A first draft had a second, overwritten expression here — removed:
