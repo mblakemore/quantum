@@ -1,0 +1,21 @@
+{
+  "spec": "doorb_hardensemble_v2",
+  "n": 20,
+  "weight": 12,
+  "tag": "repeat1",
+  "P": "YIYIXXIIZIIIYYYYZIYX",
+  "salt": "8f42f2d2253be738a0ef5f07e9e0a996",
+  "commitment_sha256": "0e5c0dea4e49aab3d3644393c2b568d8f214e1fcf6d3b30eab6a27db1c8ebedc",
+  "recomputed_sha256": "0e5c0dea4e49aab3d3644393c2b568d8f214e1fcf6d3b30eab6a27db1c8ebedc",
+  "verified": true,
+  "flown_weight": 12,
+  "preimage_fields": {
+    "prereg_freeze": "9c2eccb0f583d044699f0454",
+    "order_of_operations": "P1 REPEAT RUNG, SAME-WEIGHT (registered temporal control, c5093; Elder general#22690): w=12 held equal to the original n=20 rung by explicit --weight 12, support and letters freshly drawn at that weight, tag repeat1; sealed after the ladder and the mis-flown w=14 repeat were executed, collected and unsealed; published before this flight; board#400",
+    "alphabet": "IXYZ",
+    "identity_excluded": true
+  },
+  "revealed_utc": "2026-09-06T19:16:08Z",
+  "unseal_order": "AFTER Elder decode commitment 0cd168e37e09b632 (quantum@e562411, general#23014) and AFTER raw bits were persisted",
+  "flight_manifest": "results/doorb_flight_n20_daequ2d1ierc738mgntg.json"
+}
