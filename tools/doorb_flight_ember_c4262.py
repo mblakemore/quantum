@@ -628,6 +628,12 @@ def main():
     # to run: `--account OPEN9` was a parse error, and a bare run silently bound ALT4 — the
     # EXHAUSTED tank — because ACCOUNT_CRN/PAID_CRN bind at IMPORT from DEFAULT_ACCOUNT.
     # A dict entry reachable by nothing, with a comment asserting it was reachable.
+    ap.add_argument("--max-2q-error", type=float, default=0.5,
+                    help="APPARATUS (Whisper general#22813, not protocol): couplers whose calibrated 2q error is at or "
+                         "above this are removed from the coupling map before transpilation, fresh at each attempt. "
+                         "Level-1 transpile does not avoid a dead edge by itself; a 40-qubit template routed across "
+                         "one delivers zero contrast (ibm_marrakesh 13:21Z recalibration: 12 gates at error 1.0). "
+                         "Registration fixes copies, cal design and the sealed P, not physical qubits.")
     ap.add_argument("--seal-tag", default="",
                     help="repeat-rung tag: pin the seal against doorb_commitment_v2_n{n}_w{w}_{tag}.json "
                          "(the sealer's --tag) instead of the original rung's file; recorded in the manifest")
@@ -911,7 +917,31 @@ def main():
         qc.cx(i, a.n + i); qc.h(i)
     for i in range(a.n):
         qc.measure(i, i); qc.measure(a.n + i, a.n + i)      # HALVES, registered
-    t = transpile(qc, backend=bk, optimization_level=1)
+    # ---- G-EDGES: prune couplers the live calibration reports as dead, then transpile on what is left.
+    excluded_edges, cmap = [], None
+    try:
+        _props = bk.properties()
+        _bad = {tuple(g.qubits) for g in _props.gates
+                if g.gate in ("cz", "ecr", "cx") and g.parameters and g.parameters[0].value >= a.max_2q_error}
+        if _bad:
+            from qiskit.transpiler import CouplingMap
+            _edges = [tuple(e) for e in bk.coupling_map.get_edges()]
+            _keep = [e for e in _edges if e not in _bad and (e[1], e[0]) not in _bad]
+            excluded_edges = sorted({tuple(sorted(e)) for e in _bad})
+            cmap = CouplingMap(_keep)
+            print(f"  [G-EDGES]  {len(excluded_edges)} coupler(s) at 2q error >= {a.max_2q_error} EXCLUDED from routing: "
+                  f"{excluded_edges} (calibration {_props.last_update_date:%Y-%m-%dT%H:%MZ})")
+        else:
+            print(f"  [G-EDGES]  no coupler at 2q error >= {a.max_2q_error}; full coupling map")
+    except Exception as _e:  # noqa: BLE001 — an unreadable calibration is UNKNOWN, said out loud, never a silent full map
+        print(f"  [G-EDGES]  calibration UNREADABLE ({type(_e).__name__}: {_e}); routing on the full map, UNPRUNED")
+    t = transpile(qc, backend=bk, optimization_level=1, **({"coupling_map": cmap} if cmap is not None else {}))
+    _used = {tuple(sorted(q._index for q in inst.qubits)) for inst in t.data if len(inst.qubits) == 2}
+    _hit = [e for e in excluded_edges if e in _used]
+    if _hit:
+        sys.exit(f"REFUSE G-EDGES: transpiled template still uses excluded coupler(s) {_hit}")
+    if excluded_edges:
+        print(f"  [PASS] G-EDGES   transpiled template touches none of the {len(excluded_edges)} excluded coupler(s)")
     print(f"  template: {t.num_parameters} params, ISA 2q={t.count_ops().get('cz',0)} "
           f"(structure identical for every P — form (a))")
 
@@ -1119,6 +1149,7 @@ def main():
     man = {"experiment": "doorb_unsigned_shadow", "n": a.n, "eps_nominal": a.eps,
            "shots": shots - remaining, "commitment_sha256": sec["sha256"],
            "sealed_weight": _sealed_w, "seal_tag": a.seal_tag or None, "registration_freeze": a.freeze or None,
+           "excluded_edges": excluded_edges, "max_2q_error": a.max_2q_error,
            "account": a.account, "instance_tail": ACCOUNT_CRN[-40:],
            "backend": bk.name, "layout": "halves", "granularity_R": 1, "jobs": jobs,
            "weather_rows": CAL_ROWS, "weather_P_public": P_cal, "weather_job": wjob.job_id(),
