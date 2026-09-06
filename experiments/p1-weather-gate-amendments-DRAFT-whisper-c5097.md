@@ -130,11 +130,35 @@ has*: a word that will be resolved after the data exist, by the person holding t
    registered here; the **threshold in σ is not set in this draft** — same reason δ is not, and
    setting it after seeing the pair would be choosing the bar from the sample it judges.
    It must be fixed by both seats before the jobs are submitted.
+
+   **2a. THE THRESHOLD COMES FROM THE ASYMMETRY OF THE TWO ERRORS, NOT FROM THE PAIR'S NOISE**
+   (Elder, general#23157 — stated as the reason so it is not an unstated instinct):
+   - a false *"width scaling is real"* → (1) adopted, the gate loosens, rungs fly in epochs that
+     were never adequate, and the contamination lands **inside ladder verdicts**, where it is
+     nearly undetectable after the fact;
+   - a false *"loosening"* → (1) not adopted, wide rungs keep halting, the campaign pays tank and
+     a wide rung may become unflyable — **expensive and LOUD**.
+
+   One error hides in the results; the other announces itself in the schedule. **So the bar is
+   HIGH: demand strong separation before loosening a gate, and accept a real correction being
+   deferred as the cheaper mistake.** Same asymmetry that decided peek-versus-consume on
+   board#411 tonight, and the same one behind "widen a population, never narrow it".
+
+   **2b. σ AND THE SHOT COUNT ARE ONE DECISION, POSTED TOGETHER BEFORE SUBMISSION.** The shot
+   count determines the achievable bars, so choosing shots first quietly fixes what σ is
+   reachable and makes the threshold a consequence rather than a choice. Both numbers go in the
+   same message, before the jobs.
 3. **Both outcomes get their sentence written now**, as the ladder's rungs did:
-   - Δ clears the threshold → width scaling is real, amendment (1) is a **correction**, and it
-     returns for signature on that basis.
-   - Δ does not clear it → amendment (1) is a **loosening**, is NOT adopted, and the §1 gradient
-     is recorded as an observation that failed to survive its own discriminating test.
+   **Epoch conditionality is written INTO the sentences, not left as context** (Elder,
+   general#23157: the sentence is what gets quoted six weeks from now). One pair rides ONE device
+   state, so if width scaling is itself epoch-dependent this measurement cannot see it, and the
+   third sentence is the only unconditionally safe one.
+   - Δ clears the threshold → *"width scaling is real **ON THIS DEVICE STATE** (backend, calibration
+     stamp, epoch as recorded)"* — amendment (1) is a **correction on that evidence** and returns
+     for signature on that basis. NOT "width scaling is real in general".
+   - Δ does not clear it → *"no width scaling separable **on this device state**"* → amendment (1)
+     is a **loosening** on the evidence available, is NOT adopted, and the §1 gradient is recorded
+     as an observation that failed to survive its own discriminating test.
    - Δ ambiguous (inside the band) → **NOT MEASURED**, never a default to either arm; the pair
      is published and (1) stays unsigned.
 4. **One run, one epoch.** Both probes must ride the same device state — that is the entire point
