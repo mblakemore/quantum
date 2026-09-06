@@ -29,11 +29,79 @@
     "manifest_commit": "quantum@490a9b1",
     "source": "ember general#22546, #22513"
    },
-   "r": null,
-   "eps_size": null,
-   "eps_del": null,
-   "interval": null,
-   "verdict": "NOT YET \u2014 raw bits not persisted/collected"
+   "r": 1.0215132646686909,
+   "eps_size": 0.1766437141242244,
+   "eps_del": 0.18044389709823938,
+   "interval": [
+    0.9736759934074496,
+    1.069350535929932
+   ],
+   "verdict": "DELIVERS at this rung (r>=0.8)",
+   "se_r": 0.024406771051653686,
+   "grade": {
+    "n": 20,
+    "sealed_w": 12,
+    "revealed_P": "YZIIXIZIYIXIYYZZZIZI",
+    "science_N": 25000,
+    "tr2_science": 0.29304,
+    "se_tr2": 0.0060469084940984515,
+    "eps_del": 0.18044389709823938,
+    "se_del": 0.0018617385579981752,
+    "cal_blocks": [
+     {
+      "file": "doorb_flight_n20_daeisk5nj4cs73af7uu0_cal_block0.json",
+      "P_cal": "ZIYYYYYIZIIZIXIIYZZI",
+      "N": 8865,
+      "tr2": 0.2613649182177101,
+      "se_tr2": 0.010251701904435178,
+      "eps": 0.1704128706073413,
+      "se_eps_shot": 0.0033421125567631143
+     },
+     {
+      "file": "doorb_flight_n20_daeisk5nj4cs73af7uu0_cal_block1.json",
+      "P_cal": "IIXYIXYXXIIZZIIXXIZY",
+      "N": 8865,
+      "tr2": 0.27918781725888325,
+      "se_tr2": 0.010198559792898203,
+      "eps": 0.17612742144345486,
+      "se_eps_shot": 0.0032169133603248265
+     },
+     {
+      "file": "doorb_flight_n20_daeisk5nj4cs73af7uu0_cal_block2.json",
+      "P_cal": "IXZIZZYZXIIIZYYIXIZI",
+      "N": 8865,
+      "tr2": 0.2679075014100395,
+      "se_tr2": 0.010232632904749631,
+      "eps": 0.17253260606816048,
+      "se_eps_shot": 0.0032949111404185316
+     },
+     {
+      "file": "doorb_flight_n20_daeisk5nj4cs73af7uu0_cal_block3.json",
+      "P_cal": "XYIZIZYIXYIIXIIZXYZI",
+      "N": 8865,
+      "tr2": 0.3164128595600677,
+      "se_tr2": 0.010075198938470076,
+      "eps": 0.1875019583779409,
+      "se_eps_shot": 0.002985212950316042
+     }
+    ],
+    "k_live": 4,
+    "eps_size": 0.1766437141242244,
+    "se_size_ksplit": 0.0038067116910585393,
+    "r": 1.0215132646686909,
+    "se_r": 0.024406771051653686,
+    "interval_95": [
+     0.9736759934074496,
+     1.069350535929932
+    ],
+    "z_vs_0.8": 9.075893906649407,
+    "z_vs_1.0": 0.8814465716567297,
+    "verdict": "DELIVERS at this rung (r>=0.8)",
+    "decisions_sha256": "fb2b61d12beaad6ae556ec92d90bd4911aff4f92b6a4072adc735f82066dde76",
+    "science_sha256": "b8ce81887bb477969dc69f654fb724b204ce882900a6344736a2bf30f792bb74",
+    "graded_utc": "2026-09-06T09:19:36.687706+00:00",
+    "rule": "board#400 pre-data declaration; PRIMARY per-rung r<0.8; epoch reported beside, never corrected"
+   }
   }
  ],
  "registered_order": [
