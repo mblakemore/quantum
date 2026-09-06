@@ -1,0 +1,15 @@
+{
+  "spec": "doorb_hardensemble_v2",
+  "n": 16,
+  "commitment_sha256": "a69d98a8776182561fbd81d84ef761fb1a7691b43a6797bb36cda4af2bd20198",
+  "weight": 13,
+  "weight_is_sealed": true,
+  "weight_draw_law": "Binomial(n,3/4) conditioned w>=1 (the IXYZ-uniform draw law's weight marginal), drawn by the sealer",
+  "prereg_freeze": "9c2eccb0f583d044699f0454",
+  "order_of_operations": "P1 ladder (c5093 freeze 9c2eccb0, Creator GO general#22413, board#400): sealed by the chain AFTER the previous rung executed and was collected, BEFORE this rung's flight; weight disclosed at unseal (item 3); rung order 20,16,12,8 registered before any seal",
+  "alphabet": "IXYZ",
+  "identity_excluded": true,
+  "anchored": true,
+  "anchor_problems": null,
+  "note": "P is sealed. Per-shot sign draw and eigenstate bits are randomised at submit from independent streams (F-IND) and are NOT secrets."
+}
