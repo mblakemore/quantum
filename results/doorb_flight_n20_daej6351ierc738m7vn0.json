@@ -197,5 +197,25 @@
   ],
   "priced_rung_cost_s": 131.0,
   "cost_model": "2.667 + 0.00167*rows per job",
-  "utc": "2026-09-06T09:32:38.416367+00:00"
+  "utc": "2026-09-06T09:32:38.416367+00:00",
+  "raw_artifacts": {
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_raw_daej6351ierc738m7vn0.json": "6eff806ecfd6db80d7f76b9d84fdfd6672580a242b26174dcd7b3640a829df5c",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_weather_outcomes.json": "b6802ea3533a344435bda3cbe36b6ad2057e96699ae47cd9ca01cd5fcd60c80f",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_raw_daej6951ierc738m7vsg.json": "d413cf26a6bcd6fd682c5e265e28213ef54443194a4740e56b15e97dabea519b",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_raw_daej69rdd5gc73d8mrf0.json": "8f79bc4fdc553e068b8af5e23291bedd8a100e58b1736f04f4b8c81c8fa9e139",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_raw_daej6al1ierc738m7vv0.json": "e07a45074095cf021b3ab71470577da1b4bca3b3eeac2529399bbb38921b3af2",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_raw_daej6bbdd5gc73d8mrhg.json": "2438bbdf7a88f2bfec0470cb0b04e469e27041f8f6f7654cb20c9fc5f974c1e5",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_raw_daej6brdd5gc73d8mrig.json": "6c81611cd5d837cdbfc21e64040e5da1567bb3097519fa79acab3a66a7812358",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_raw_daej6cdnj4cs73af8ac0.json": "09164f9594d2e9bdba0ae19852768e9d435d11e65905dbd46311ba5003d8bebf",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_raw_daej6cu42tqs73auq9lg.json": "6ead482983943be64cbdebd3602b59323e3f9bf771981572d9bb5a3e8bd837da",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_raw_daej6ddnj4cs73af8adg.json": "af58b0ee06648cb5a0190bed7ff4565287d0bba822f630c7f09f195cc7a0c9fb",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_raw_daej6dl1ierc738m802g.json": "bd2b5f9dc3353a88bb8232551f714bc171d05c777d15dfc2dd0d2df746f5c73b",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_cal_block0.json": "c04cfa26edadf4cd1bf3985457828a132ca7b1736924c71927f1ad236d6c7643",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_cal_block1.json": "04802678fa0910aa4704728afafe5e61300832149db3a522562f9a1023169b82",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_cal_block2.json": "1e44aa1a9367e5352b7f7ae867f996661b477cefaba94105929b19c9ef0e7432",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_cal_block3.json": "c5f5741d5d88b5270f5da6460ea2f60c6b710b66a84c32f1bc4f8a51bd9766f8",
+    "results/doorb_flight_n20_daej6351ierc738m7vn0_science_outcomes.json": "42f786867d30cf56638b9724cd4897853e5e13691376a9e5a77a7dc964913190"
+  },
+  "raw_collected_utc": "2026-09-06T12:09:05.414923+00:00",
+  "science_shots_collected": 25000
 }
