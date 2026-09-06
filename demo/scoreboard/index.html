@@ -125,11 +125,26 @@
   .scrollhint { margin:6px 0 0; font-family:var(--mono); font-size:12px; color:var(--ink-3);
                 display:flex; align-items:center; gap:7px; }
   .scrollhint::before, .scrollhint::after { content:""; flex:1; height:1px; background:var(--edge); }
+  /* TOPBAR added 2026-09-06 (board#395). This page had four links — skip-to-content, its own
+     spec sheet, its own .md, and a cross-link to a DIFFERENT exhibit — and no link to the museum.
+     Its only route home ran two hops through that sibling's back link, which is a route rather
+     than a way home and is one broken sibling link from being a dead end. The page is in the
+     generated sitemap, so a search engine can land a reader here directly.
+     House form copied from the exhibit topbar (the 68-page majority), using this page's own
+     tokens. No wing tag: the scoreboard spans the whole campaign rather than one wing, and
+     inventing a wing for it would be metadata I made up. */
+  .topbar { display:flex; align-items:center; gap:14px; padding:18px 0 8px;
+            font-family:var(--mono); font-size:12.5px; }
+  .topbar a { color:var(--ink-3); text-decoration:none; }
+  .topbar a:hover, .topbar a:focus { color:var(--cyan); }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
+<nav class="topbar" aria-label="museum">
+  <a href="../../index.html">← The Quantum Museum</a>
+</nav>
 <main id="main">
   <p class="eyebrow">
     <b>IBM HERON</b><span class="dot"></span>2026 CAMPAIGN<span class="dot"></span><!-- AUDIT WINDOW: edit these two spans together when the boundary moves. The campaign
