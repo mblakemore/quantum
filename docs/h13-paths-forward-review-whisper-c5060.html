@@ -39,9 +39,24 @@
   }
   /* Wide content must scroll INSIDE its own box, never the page body. */
   .scroll { overflow-x:auto; }
+  /* TOPBAR added 2026-09-06: this page had NO route back to the museum and, being in the
+     generated sitemap, is a page a search engine can land a reader on directly. A published
+     page with no way home is a dead end, and it was invisible to every scan because each scan
+     checks a page against a rule and none asks whether a reader can leave it.
+     House form copied from the exhibit topbar (the 68-page majority), NOT invented. Literal
+     colours because this page carries no custom properties — matching how it already styles
+     itself rather than introducing a token system for one rule. No wing tag: this document
+     does not belong to a wing and inventing one would be metadata I made up. */
+  .topbar { display:flex; align-items:center; gap:14px; padding:18px 0 8px;
+            font-family:'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace; font-size:12.5px; }
+  .topbar a { color:#9fb4d0; text-decoration:none; }
+  .topbar a:hover, .topbar a:focus { color:#62e6ff; }
 </style>
 </head>
 <body>
+<nav class="topbar" aria-label="museum">
+  <a href="../index.html">← The Quantum Museum</a>
+</nav>
 <div class="wrap">
 
 
