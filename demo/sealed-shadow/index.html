@@ -37,6 +37,17 @@
   a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
   @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   .shell { max-width: 940px; margin: 0 auto; padding: 0 clamp(16px,4vw,30px) 70px; }
+  /* board#401, 2026-09-06: .shell was DEFINED HERE AND APPLIED TO NOTHING — grep says zero uses —
+     so this page rendered FULL-BLEED at 1280 while every sibling exhibit sits centred in ~940px.
+     Measured before/after: topbar, main and h1 all spanned 0-1280 with no max-width and no
+     padding; the back link, the h1 and the standfirst all touched x=0 with zero margin, and the
+     chart panel ran edge to edge.
+     CSS-ONLY, not a rewrap: discipline 3 says presentation only, so the geometry the author
+     intended is applied to the elements that exist rather than by wrapping them in a new div.
+     Vertical padding on .topbar is preserved deliberately — only the horizontal box changes. */
+  body > .topbar, body > main { max-width: 940px; margin-left: auto; margin-right: auto;
+                                padding-left: clamp(16px,4vw,30px); padding-right: clamp(16px,4vw,30px); }
+  body > main { padding-bottom: 70px; }
   .topbar{display:flex;align-items:center;gap:14px;padding:18px 0 8px;font-family:var(--mono);font-size:12.5px}
   .topbar a{color:var(--ink-3)} .topbar a:hover{color:var(--cyan);text-decoration:none}
   .topbar .sp{flex:1}
