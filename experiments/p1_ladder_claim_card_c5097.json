@@ -1,0 +1,31 @@
+{
+  "claim": "P1 doorb ladder (freeze 9c2eccb0f583d044699f0454): the two-copy sealed-shadow protocol's delivered copy count vs the PROVEN single-copy lower bound, reported as r(n)=eps_del/eps_size per rung over >=3 rungs with intervals, no slope fit; falsifier r<0.8 at 10.4 sigma. Written by the register seat (Whisper C5097) at Creator GO general#22413; answers cite the F122 court record and the frozen registration, and every 'unknown' is a question for the code owner named beside it.",
+  "answers": {
+    "structure_public": "no",
+    "baseline_is_simulation": "no",
+    "repeated_shots_fixed_randomness": "yes",
+    "hardness_argued_on_ideal": "no",
+    "baseline_shots_assumed": "no",
+    "baseline_denied_speedups": "no",
+    "ratio_against_simulation": "no",
+    "no_problem_specific_search": "no",
+    "arms_billed_in_different_units": "no",
+    "stopping_rules_differ_or_unit_unfrozen": "no",
+    "result_depends_on_enumeration_order": "unknown",
+    "enumeration_order_not_fixed_by_spec": "unknown"
+  },
+  "_rationale": {
+    "structure_public": "Sealed P drawn by the sealer seat under a hiding commitment (sha256(P|128-bit salt)); the WEIGHT is disclosed at unseal only, which narrows P-space to ~20.8% at n=16 (Ember general#19408) and is registered as a disclosure, not a break.",
+    "baseline_is_simulation": "The floor is the proven single-copy sample-complexity lower bound for estimating a sealed Pauli at delivered eps (F122 court, 3 seats) — cost-to-SOLVE by theorem, not cost-to-simulate.",
+    "repeated_shots_fixed_randomness": "YES by design: 25,000 Bell shots per rung on copies of one sealed-P eigenstate. The problem instance IS the fixed state; the single-copy floor is stated over ANY adaptive single-copy strategy on that same state, so the F119 delivered-easy leak (per-qubit determinism within a row leaking a per-copy secret) has no analogue — there is no per-copy secret. F122 survived this exact question at court.",
+    "hardness_argued_on_ideal": "The floor is evaluated at the DELIVERED eps_del measured on the flown rung (not the design eps); r(n) uses measured eps_size and eps_del per rung (registration item 1-4, k=4 position draws).",
+    "baseline_shots_assumed": "Theorem floor; no assumed shot count.",
+    "baseline_denied_speedups": "The bound is over all adaptive single-copy strategies; nothing is denied.",
+    "ratio_against_simulation": "Copies vs copies.",
+    "no_problem_specific_search": "Not applicable to an information-theoretic floor over the whole single-copy class; recorded as 'no' because the floor is the systematic answer, not because a search was skipped.",
+    "arms_billed_in_different_units": "Both arms in COPIES of the state.",
+    "stopping_rules_differ_or_unit_unfrozen": "Registered fixed-copies design (--copies 50000) frozen 08-30 before any P1 rung; floor evaluated at delivered eps by the frozen rule.",
+    "result_depends_on_enumeration_order": "UNKNOWN — question for the code owners: Ember (tools/doorb_flight_ember_c4262.py, seal-v2 8df948c, fly-v2 2ffb419) and Elder (P1 decode/grade, grade-spec 32227ea). Check the BOUNDARY: any argmax/argmin/most_common/first-match over a dict or set with possible ties, in seal selection, weight verification, decode, or grading.",
+    "enumeration_order_not_fixed_by_spec": "UNKNOWN — same owners: is every such order fixed by a JSON array, explicit indices, or a total-order rule in the spec (a content hash binds bytes, not the parse)?"
+  }
+}
