@@ -417,9 +417,10 @@
   "se_inflation_from_adding_w": 2.0995998938277394,
   "corr_n_w": 0.8981462390204985,
   "delta_width_vs_ref_n8_over_ladder": -0.15367668979507354,
-  "falsifier_delta_width_le_minus_0.2": "NOT FIRED (point estimate positive)",
+  "falsifier_delta_width_le_minus_0.2": "NOT FIRED: point estimate -0.154 (> -0.2), but NEGATIVE, not positive as first written; \u00b10.070 (1\u03c3) \u2014 and NOT QUOTED per rule (c)",
   "STATUS": "COMPUTED FOR THE RECORD, NOT QUOTED \u2014 pre-declared rule (c) on board#400: halt counts 2,0,0,0 differ materially across rungs, so the across-rung fit is epoch-confounded; the PRIMARY per-rung verdicts carry the ladder.",
-  "computed_utc": "2026-09-06T09:33:08.311846+00:00"
+  "computed_utc": "2026-09-06T09:33:08.311846+00:00",
+  "fragility": "4 rungs, corr(n,w) 0.898: the width and weight slopes trade off (weight +0.040/w, width -0.013/n); the n=16 rung (r 1.116 at w=13) carries the weight slope; SE inflation 2.1x vs n-only. A 2.2\u03c3 negative width slope on 4 points with a 0.9 collinearity is exactly the estimate the pre-data rule said not to quote."
  },
  "ladder_summary": {
   "rungs_graded": 4,
