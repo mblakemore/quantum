@@ -397,31 +397,31 @@
    "commitment": "0cd168e37e09b632",
    "order_index": 1,
    "epoch": {
-    "submit_et": "2026-09-06 05:11 ET",
-    "weather_job": "daequ2d1ierc738mgntg (weather gate inside the job)",
-    "weather_eps_eff_accepted": 0.1287,
+    "weather_job": "daequ2d1ierc738mgntg",
+    "weather_eps_eff_accepted": 0.1282,
     "weather_floor": 0.128,
-    "halts_before_accept": 2,
+    "halts_before_accept": 3,
     "halt_eps_eff": [
-     0.1206,
-     0.1125
+     0.0183,
+     0.0699,
+     0.096
     ],
-    "tank_live_s_at_submit": 580,
-    "account": "OPEN10 (id10)",
-    "first_science_job": "daeisq3dd5gc73d8mg80",
-    "science_shots": 25000,
-    "cal_blocks_k": 4,
-    "manifest_commit": "quantum@490a9b1",
-    "source": "ember general#22546, #22513",
-    "eps_eff_accepted": 0.1282,
-    "gate": 0.128,
-    "halts_before_accept_post_recalibration": 3,
-    "probe_sequence_post_recalibration": [
+    "probe_sequence_incl_accepted": [
      0.0183,
      0.0699,
      0.096,
      0.1282
     ],
+    "account": "OPEN10",
+    "first_science_job": "daer063dd5gc73d8vneg",
+    "science_shots": 25000,
+    "cal_blocks_k": 4,
+    "manifest_commit": "quantum@251683b",
+    "manifest_utc": "2026-09-06T18:25:45.867376+00:00",
+    "raw_collected_utc": "2026-09-06T19:14:07.617161+00:00",
+    "submit_et": "not recorded in the manifest (manifest utc 2026-09-06T18:25:45Z; raw collected 19:14:07Z) \u2014 written as such, not guessed",
+    "tank_live_s_at_submit": "not recorded in the manifest (ember reported tank 266 s on the bus, general#23011) \u2014 not carried here as a manifest value",
+    "source": "manifest results/doorb_flight_n20_daequ2d1ierc738mgntg.json @ quantum@251683b; probe sequence ember general#23011",
     "ember_note": "fifth probe on this rung per general#23011; the earlier probe(s) pre-date the 13:21Z recalibration",
     "calibration": {
      "repeat": {
@@ -459,7 +459,8 @@
       "last_update_date": "pre-13:21Z calibration epoch (rungs flew 09:11\u201309:31Z); id not recorded",
       "excluded_edges": "none recorded"
      }
-    }
+    },
+    "PROVENANCE_FIX_2026-09-07": "Dawn found (general#23194) that this block carried RUNG 1's values under the CANONICAL names (eps 0.1287, 2 halts, submit 05:11 ET, first_science_job daeisq3dd5gc73d8mg80, manifest quantum@490a9b1, tank 580) with the repeat's correct values beside them under QUALIFIED names \u2014 so the field a reader reaches for was wrong while the record looked complete. Cause: my hand reconstruction after the grader overwrote the rung-1 entry (see record_note) deep-copied the overwritten entry, whose epoch block was rung 1's; I corrected the commitment field and did not re-check the rest. Now rebuilt FIELD-BY-FIELD from the repeat's own manifest, with anything the manifest does not carry written as 'not recorded' rather than inferred. r, se_r, the band evaluation and the verdict are unchanged and were never affected."
    },
    "r": 0.6748578176423822,
    "eps_size": 0.17081737825604904,
