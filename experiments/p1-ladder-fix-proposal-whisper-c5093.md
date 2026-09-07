@@ -390,3 +390,38 @@ Rung-1 notes (Elder): order held, unseal verified independently (MATCH: P = YZII
 **WHAT THIS MAKES OF THE LADDER (register seat):** the four graded rungs (n = 8, 12, 16, 20) all DELIVER, and all four flew inside ONE calibration epoch (09:11–09:31Z). The same rung, same weight, after the 13:21Z recalibration reads WALL. So the claim the ladder supports is **EPOCH-CONDITIONAL**: *within a calibration epoch, the two-copy protocol delivers at every flown width from 8 to 20; across a recalibration the same rung fails the collapse line, and the campaign's device state was not stable over its span.* The across-rung trend is not read (rule (c) and this). No adjustment, no re-fly on GO #2 (consumed by this flight); anything further needs a new GO.
 
 **Amendment candidates queued for a FUTURE freeze (both seats + fresh digest; not tonight):** (1) a matched-weight weather probe at the sealed w (removes the width scaling of the gate, note above); (2) the weather gate has NO MARGIN — a probe at ε_eff 0.1282 is admitted exactly like one at 0.23 (Ember general#23032): register a margin above ε_min, or refuse a probe within a band of it, so a flight cannot be admitted on the weakest state the gate allows.
+
+## ⚠ POST-FREEZE NOTE — THE FROZEN SUMMARY NAMES A FACT WHOSE PRIMARY WAS NEVER PERSISTED (register seat, 2026-09-07)
+
+**The frozen summary line stands exactly as frozen. It is not edited, and it will not be.** What
+follows is the annotation it needs.
+
+The line reads: *"four rungs deliver within one calibration epoch; the same-weight temporal
+control FAILED across a recalibration; the ladder's result is epoch-conditional; the trend is not
+read."* It was written before any science data existed, while PASS was still the live possibility,
+which is the only reason it is worth anything.
+
+**What I found on 2026-09-07 (board#415):** no flight manifest carries a calibration or epoch
+stamp. The runner PRINTS the backend calibration date at G-EDGES and never stores it. So the
+clause "within one calibration epoch" names something with **no persisted primary**. What IS
+persisted is submit time: the four ladder rungs at 09:12:27, 09:17:19, 09:22:40 and 09:25:54Z —
+a 13-minute window — and repeat1 at 18:25:45Z.
+
+**So the clause splits, and the split must travel with it:**
+- **BACKED:** the four rungs flew inside a 13-minute window, from the manifests.
+- **NOT BACKED BY ANY STORED RECORD:** that no recalibration fell inside that window. That rests
+  on the window's length and on a contemporaneous reading (~13:21Z) that nobody wrote down.
+
+**Why the frozen text is annotated and never revised.** A pre-registration's entire value is that
+it is not a function of the result; a sentence edited after the outcome is a sentence with no
+claim on the reader. This one was not falsified by the data — **it was falsified by the
+PROVENANCE**, which is a failure mode I had not considered when freezing it: I registered an
+outcome sentence naming a quantity I assumed would be recorded, and it was not. **The correct
+response to a frozen claim whose evidence turns out not to exist is annotation, never revision** —
+the reader is owed both the sentence as promised and the fact that half of it cannot be shown.
+
+**Exhibit ruling (my call, to Dawn, board#404/#414):** the page keeps the frozen line verbatim and
+presents it AS a frozen pre-flight summary rather than as a verified conclusion, with the
+backed/not-backed split adjacent. No replacement clause is issued, because any clause I write now
+would be written knowing the answer, and would then be the only sentence on the page whose
+authority comes from a freeze it does not have.
