@@ -55,3 +55,40 @@ REGISTER-SEAT RULING on §A's information set + sign-off WITH AMENDMENTS on (2')
 SIGNED OFF TO COMPUTE with amendments 2 and 3. Recorded as a dated post-freeze section on docs/h13-cell2-compass-prereg-FROZEN-whisper-c5058.md (frozen content untouched).
 
 **OUTCOME OF THE RULING (2026-09-06, board#399 → #404; Elder computed at quantum@9266178, Whisper second-derived independently — identical to five decimals):** under §A's max-of-three with the amended (3′) — LDA on the three per-draw magnitudes, leave-one-unit-out over 40 records — s = 0.675 ± 0.074, s_UB 0.8231, d3′ = 0.2585, ceiling 0.8231, and the 75/75 re-fly reads **4.01σ at the ceiling's 2σ upper bound (6.01σ at the point estimate)** — below the 5σ bar; d1 = 0.0354, d2′ ≈ 0.06 do not compete. The physics (75/75 blind calls) is unchanged; the classical ceiling's UPPER BOUND moved, on the 2·SE term of a 40-record interval that §2 bought knowingly. **§F therefore applies as written**: as graded, the deliverable is a well-fenced instrument/demonstration, not a 5σ advantage claim — pending the Creator's ruling on #404 between relabel and extending the pre-run draws to measure the ceiling.
+
+## CREATOR RULING — RELABEL (2026-09-07, board#404; recorded by the register seat, frozen content above untouched)
+
+**The Creator ruled (a): RELABEL. "relabel it as a demonstration".** Option (b) — ~380 s of QPU to
+fly ~7× more pre-run draws and tighten the executed classical arm's upper bound — was NOT taken,
+and no GO was issued. So the ceiling stands as measured and **§F applies as written**.
+
+**THE DELIVERABLE, LABELLED:** Cell 2 (Causal Compass) is a **well-fenced instrument /
+demonstration**. It is **NOT a 5σ advantage claim** and must not be described, cited, exhibited or
+summarised as one.
+
+**What is claimed, and it is not small:** 75/75 blind calls, physics unchanged, the instrument
+does what it was built to do on the information set it was registered against (magnitude-only,
+three per-draw magnitudes). What is *not* claimed is that this beats the best classical
+alternative by the registered bar.
+
+**What moved, stated so nobody re-derives it as a defect:** the physics did not change and no
+result was retracted. The **classical ceiling's UPPER BOUND** moved when the classical arm was
+EXECUTED rather than assumed — LDA, leave-one-unit-out over 40 draw-records — giving s_UB 0.8231
+and a re-fly reading **4.01σ at that upper bound** (6.01σ at the point estimate). The gap is the
+2·SE term of a 40-record interval, which §2 bought knowingly. The honest one-line summary is:
+*the instrument works; the margin over the executed classical arm is not established at 5σ, and
+the interval that decides it was small by design.*
+
+**Standing consequences of this ruling:**
+1. Every downstream artifact — museum exhibit, write-up, bus summary, F-ledger entry — carries the
+   demonstration label. A citation that drops the fence is a defect on this row.
+2. The 4.01σ figure is quoted **at the ceiling's 2σ upper bound**, with the 6.01σ point estimate
+   named beside it. Quoting either alone is the misuse this ruling exists to prevent.
+3. **Reopening requires new evidence, not new wording.** The route back to an advantage claim is
+   option (b) — more pre-run draws tightening the classical arm — under a fresh registration and a
+   fresh GO. Relabelling is not a step toward that claim; it is the closing of this one.
+4. This does not retire the Cell 2 instrument or its data. It fixes what may be *said* about it.
+
+**No seat is owed anything on board#404.** Both derivations were complete and identical to five
+decimals before the ruling; the ruling was a genre call, which was correctly the Creator's and
+not a computation.
