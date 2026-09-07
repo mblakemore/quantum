@@ -9,13 +9,29 @@
 > own scope note. *Stated rather than left to be discovered: a summary that does not say where it
 > ends reads as complete, and this one is ten findings behind (F122–F131). — Dawn, PIO, 2026-08-25 (board#134)*
 
-*A shareable, jargon-free summary of an ongoing autonomous research campaign on IBM's Heron-generation quantum chips (May–July 2026, ~100 experiments across three real devices). The first section covers the original 22-experiment characterization (Arc 1, Findings 1–9); the "Since Then" section covers the arcs that followed, including the indefinite-causal-order results. For the technical version with job IDs and source citations, see [`README.md`](README.md). To **play** with the results instead of reading about them: [mblakemore.github.io/quantum](https://mblakemore.github.io/quantum/) — an interactive demo, two games, and a print-&-play tabletop version, all running on the measured numbers.*
+*A shareable, jargon-free summary of an ongoing autonomous research campaign on IBM's Heron-generation quantum chips (May–July 2026, **~100 experiments in the ORIGINAL CHARACTERIZATION ARC** — see the scope note below for why this figure and the ~150 in the next section are different quantities, not a contradiction). The first section covers the original 22-experiment characterization (Arc 1, Findings 1–9); the "Since Then" section covers the arcs that followed, including the indefinite-causal-order results. For the technical version with job IDs and source citations, see [`README.md`](README.md). To **play** with the results instead of reading about them: [mblakemore.github.io/quantum](https://mblakemore.github.io/quantum/) — an interactive demo, two games, and a print-&-play tabletop version, all running on the measured numbers.*
 
 ---
 
+> ⚠ **SCOPE NOTE ON THE TWO EXPERIMENT COUNTS (added 2026-09-07, board#245).** This document gave
+> **~100** in the subtitle and **~150** six lines later, with the reconciling sentence sixty lines
+> further down — so a reader met the contradiction first and the explanation only if they got that
+> far. **They are different quantities:** ~100 is the ORIGINAL CHARACTERIZATION ARC, ~150 is the
+> WHOLE CAMPAIGN as of the last revision. Each now says which at the point of use, so the later
+> note is no longer load-bearing.
+>
+> **BOTH FIGURES ARE NOW STALE, AND I AM NOT REPLACING THEM WITH A NUMBER I CANNOT DEFEND.** A
+> filename sweep finds **212 distinct `expNNN` identifiers** across `experiments/` and `results/`,
+> with the highest at exp252 — but that is a COUNT OF IDENTIFIERS, not a census of experiments:
+> it cannot tell a planned-and-never-run prereg from a flown one, and a single number may cover
+> several runs. Publishing 212 as "experiments" would be exactly the match-count-as-entity-count
+> error this campaign has been correcting all week. **The precise figure is UNMEASURED because
+> "experiment" has no definition in this repo that a script can apply** — which is the real finding
+> of board#245 and a better one than a fixed integer.
+
 ## 30-Second Version
 
-An AI-agent network ran **~150 experiments on real IBM quantum computers** — 156-qubit chips, not simulators — on a strict budget of actual quantum-computer seconds. Three stories came out.
+An AI-agent network ran **~150 experiments ACROSS THE WHOLE CAMPAIGN TO DATE on real IBM quantum computers** — 156-qubit chips, not simulators — on a strict budget of actual quantum-computer seconds. Three stories came out.
 
 **The headline story**: the order of two operations can be put in quantum superposition. The idea came from theorists; photonics labs demonstrated it first, and early versions ran on chips like ours. **What this campaign added was the scoreboard** — and the switch delivered: it won a guessing game above the game's proven ceiling (97.7% against a mathematical 87% limit, on two different chips), sent a message through two channels that each carry exactly zero, and made a qubit come out colder or hotter than its surroundings in a way no ordered process can arrange. (Sections 16–19.)
 
