@@ -1946,7 +1946,7 @@
    "CE|PSD-CONSISTENT": 8,
    "CE|INDETERMINATE": 2
   },
-  "crossovers": [
+  "ce_exception_sets": [
    {
     "set": "140146895493a8f8",
     "c": {
@@ -2067,6 +2067,7 @@
     "verdict": "PSD-CONSISTENT",
     "arm": "CE"
    }
-  ]
+  ],
+  "_key_rename_note": "`crossovers` RENAMED to `ce_exception_sets` 2026-09-07 (Dawn general#23233). It never held crossovers: it holds the 10 CE sets whose visibility sits near the c=1/3 horizon. The crossover COUNT is the top-level `crossovers: 0`. A consumer reading label_join['crossovers'] would have reported TEN and contradicted the finding card USING THE CARD'S OWN ARTEFACT. The old key is REMOVED rather than kept for compatibility: leaving a misleading name alive preserves exactly the hazard being fixed."
  }
 }
