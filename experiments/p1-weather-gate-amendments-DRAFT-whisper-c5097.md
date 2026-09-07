@@ -182,6 +182,49 @@ stop firing, and the width residual **stays unquotable on collinearity grounds**
 are decorrelated — more rungs, or a draw that breaks the n–w tie. That is a different experiment,
 not a gate amendment.
 
+### §3d POWER, MEASURED BEFORE SPENDING (register seat, 2026-09-07 — supersedes the §4 cost line's "~8 s" as a budget)
+
+The Creator gave a GO for ~8 s (general#23254). **It was not spent, and the ~8 s figure was mine
+and wrong** — an arithmetic guess about cost with no power calculation behind it.
+
+**Estimator error, MEASURED not assumed, at zero cost.** Bootstrapped se(ε_eff) from the stored
+2,000-row weather outcomes of three flown probes (200 resamples each, `results/
+doorb_flight_*_weather_outcomes.json`, decoder `tools/doorb_decoder_elder.py`):
+
+| rung | rows | ε_eff | bootstrap se(ε_eff) |
+|---|---|---|---|
+| n=20 rung 1 | 2000 | 0.1287 | 0.0099 |
+| n=20 repeat1 | 2000 | 0.1282 | 0.0094 |
+| n=8 | 2000 | 0.2317 | 0.0046 |
+
+At n=20 take se = 0.0096 → **σ(Δ) = 0.0136** for the pair → the **3σ bar sits at 0.041**.
+
+**Expected effect** if width scaling is real, from the four-rung accepted-probe gradient
+(−0.0087 per weight unit × 5 units, fixed 3n/4=15 vs full n=20): **0.044**. *Caveat: extrapolated,
+and it carries the n–w confound. It is the only handle on effect size we have; a smaller truth
+makes everything below a floor.*
+
+**So at the registered 2,000 rows the bar sits ON TOP of the expected effect: POWER ≈ 58%.** A
+coin flip — and one that **fails silently**, because a null would read as "no scaling, (1) is a
+loosening" when the honest reading is "we could not have seen it".
+
+| power target | rows/probe | ~s/probe (at measured 4 s / 2,000 rows) | pair |
+|---|---|---|---|
+| 58% (as registered) | 2,000 | 4.0 | **~8 s** |
+| 80% | 2,875 | 5.8 | ~11.5 s |
+| 90% | 3,571 | 7.1 | **~14.3 s** |
+
+**REGISTERED CONSEQUENCE:** the dual-probe run is **NOT to fly at 2,000 rows/probe** unless the
+Creator explicitly elects the underpowered version, in which case the pre-registered reading of a
+null becomes *"no LARGE effect detectable; the measurement cannot separate a small real effect
+from none"* — never "(1) is a loosening". Free tank at the time of writing: 855 s usable across
+four fresh free accounts, largest 266 s, so the powered version is affordable.
+
+**Second blocker, independent of budget:** the runner hard-codes the probe as the full-weight
+pattern (`P_cal = "XYZ" * (n//3) + …`, doorb_flight_ember_c4262.py:978). **The fixed-weight arm
+does not exist in the code.** Flying only the full-weight arm is not a cheaper half of a paired
+comparison; it is nothing. Ember's file, Ember's change.
+
 ## §4 COST, PRICED BEFORE REGISTERING (not after)
 
 A weather probe is 2,000 rows in its own leading job; measured cost of a halt is **~4 s** of tank
