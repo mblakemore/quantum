@@ -1,4 +1,31 @@
-# H13 Cell 2 re-fly — GRADED: 75/75, 7.9σ over the banked §A numerator-(1) ceiling (8.66σ vs a coin) (Elder, C6605; denominator corrected C6651; ⚠️ C6655: §A max-of-three computed — executed classical arm puts the ceiling at 0.823 and the read at 4.0σ, BELOW the 5σ bar; see the C6655 delta block)
+# H13 Cell 2 re-fly — WELL-FENCED INSTRUMENT / DEMONSTRATION (Creator ruling, board#404, 2026-09-06): 75/75 blind calls stand; NOT a 5σ advantage claim
+
+> ⛔ **CREATOR RULING 2026-09-06 — RELABEL (board#404; recorded on the frozen registration at quantum@bcee5fe,
+> post-freeze section, frozen content untouched). READ THIS BEFORE QUOTING ANY NUMBER BELOW.**
+>
+> Cell 2 (Causal Compass) is a **well-fenced instrument / demonstration**. It is **NOT a 5σ advantage claim** and
+> must not be described, cited, exhibited or summarised as one. A citation that drops this fence is a defect.
+>
+> **CLAIMED:** 75/75 blind calls, physics unchanged, the instrument does what it was built to do on the registered
+> magnitude-only information set. **NOT CLAIMED:** that it beats the best classical alternative at the registered bar.
+>
+> **What moved, so nobody re-derives it later as a defect:** no result was retracted and no physics changed. The
+> classical ceiling's UPPER BOUND moved when the classical arm was EXECUTED rather than assumed (LDA,
+> leave-one-unit-out, 40 draw-records, s_UB 0.8231). Against it the re-fly reads **4.01σ at the upper bound and
+> 6.01σ at the point estimate — QUOTE THEM TOGETHER**; quoting either alone is exactly the misuse this fence
+> prevents. The gap is the 2·SE term of a 40-record interval that §2 bought knowingly. Option (b) (~7x more pre-run
+> draws, ~380 s) was NOT taken and no GO was issued.
+>
+> ⚠️ **Every σ figure in the ORIGINAL TITLE and body below — 8.66 (vs a coin), 7.9 / 7.93 / 8.07 (vs the §A ceiling) —
+> PREDATES the executed classical arm and is retained for PROVENANCE ONLY.** None is the headline; none may be quoted
+> as the result. The original title read "GRADED: 75/75, 7.9σ over the banked §A numerator-(1) ceiling (8.66σ vs a
+> coin)" and is preserved here rather than deleted, because the superseded statistic is the evidence for the method
+> change and a reader who meets it elsewhere needs to find it labelled.
+>
+> **One line for any downstream artifact:** *the instrument works; the margin over the executed classical arm is not
+> established at 5σ, and the interval that decides it was small by design.*
+> **Reopening takes NEW EVIDENCE, not new wording:** option (b) under a fresh registration and a fresh GO.
+
 
 **Epoch**: n=1 basis=distinct-submission · dispersion=- · window_retrievable=yes · checked=2026-08-25  *(n DETERMINED C6651: the single window is `d9tg7gntfhrs73dtug20`, 2026-08-11 — see below)*
 
