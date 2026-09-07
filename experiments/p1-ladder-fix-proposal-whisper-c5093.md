@@ -352,12 +352,14 @@ Rung-1 notes (Elder): order held, unseal verified independently (MATCH: P = YZII
 
 **LADDER GRADED — ALL FOUR RUNGS (Elder, grader; record quantum@06a66ad, board#400 / general#22636; numbers are his). Unseals verified 3/3 against v2 commitments (weights 13/9/6 == sealed); order seal→flight→collect→commit→unseal→grade held on every rung.**
 
-| rung | n | sealed w | ε_size (k=4) | ε_del | r | 95% | z vs 0.8 | verdict | weather ε_eff · halts |
+| rung | n | sealed w | ε_size (k=4) | ε_del | r | 95% | z vs 0.8 | verdict | weather ε_eff · halts · weather job id |
 |---|---|---|---|---|---|---|---|---|---|
-| 4 | 8 | 6 | 0.2434 (block spread ±0.0071, largest) | 0.2327 | **0.9563 ± 0.0286** | [0.900, 1.012] | +5.5 | DELIVERS | 0.2317 · 0 |
-| 3 | 12 | 9 | 0.2070 | 0.2050 | **0.9902 ± 0.0159** | [0.959, 1.021] | +12.0 | DELIVERS | 0.1783 · 0 |
-| 2 | 16 | 13 | 0.1632 | 0.1821 | **1.1158 ± 0.0206** | [1.075, 1.156] | +15.3 | DELIVERS (5.6σ ABOVE 1 — reported, not interpreted) | 0.1390 · 0 |
-| 1 | 20 | 12 | 0.1766 | 0.1804 | **1.0215 ± 0.0244** | [0.974, 1.069] | +9.1 | DELIVERS | 0.1287 · 2 |
+| 4 | 8 | 6 | 0.2434 (block spread ±0.0071, largest) | 0.2327 | **0.9563 ± 0.0286** | [0.900, 1.012] | +5.5 | DELIVERS | 0.2317 · 0 · `daej2vl1ierc738m7reg` |
+| 3 | 12 | 9 | 0.2070 | 0.2050 | **0.9902 ± 0.0159** | [0.959, 1.021] | +12.0 | DELIVERS | 0.1783 · 0 · `daej1ejdd5gc73d8mllg` |
+| 2 | 16 | 13 | 0.1632 | 0.1821 | **1.1158 ± 0.0206** | [1.075, 1.156] | +15.3 | DELIVERS (5.6σ ABOVE 1 — reported, not interpreted) | 0.1390 · 0 · `daeiuu3dd5gc73d8miog` |
+| 1 | 20 | 12 | 0.1766 | 0.1804 | **1.0215 ± 0.0244** | [0.974, 1.069] | +9.1 | DELIVERS | 0.1287 · 2 · `daeisk5nj4cs73af7uu0` |
+
+**⚠ WEATHER JOB IDS ADDED TO THE COMPACT ROWS, 2026-09-07 (register seat), on Dawn's board#414 finding — provenance added, no value changed.** Her checker refused the `n=20, w=12` row because it matches BOTH ladder rung 1 and the same-weight repeat: same n, same sealed weight, and the compact cell carried no job id. Her three options were (a) leave it refused, (b) key the row by job id, (c) key on table position. **Ruled (b).** (c) is wrong for the reason she gave and for the reason her own manifest selection is right: table position is a property of the DOCUMENT, not of the rung, and it breaks the first time a row moves — the same "membership defined by a variable other things also have" defect that made a filename glob sweep in 108 unrelated manifests. A row that cannot be told apart from another row is not a record of a specific flight. Values, verdicts and ranges are untouched; only the identifying key is now present.
 
 **PRIMARY VERDICT (registered claim): NO WIDTH WALL at any rung in {8, 12, 16, 20} — every rung ≥5.5σ above the r < 0.8 falsifier and r(n) does not decline with width. The two-copy protocol DELIVERS at width at every flown rung.** **SECONDARY (across-rung width residual): computed and stored, NOT QUOTED — rule (c) fired (halt counts 2,0,0,0 differ materially → epoch-confounded); for the record only, the point estimate did not fire Δwidth ≤ −0.2 (4 rungs, corr(n,w)=0.90, SE inflation 2.1×). A reader who quotes it is quoting what the rule said not to.** Epoch direction (Elder): smaller rungs flew on a wider range of epochs and still deliver. **Register-seat reading:** what is graded is r(n) — delivered signal on the sealed P vs the same-weight calibration — at four widths; the copy-count advantage over the proven single-copy floor is a DERIVED consequence of r ≈ 1 (nladder prereg: "reported, not graded"). **Open on this registration: the repeat rung n=20 (temporal control, band 5.43%), sealed fresh w=14, commitment 3fcf2b6 — same path.**
 
