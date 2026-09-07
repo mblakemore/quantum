@@ -14,7 +14,7 @@
 > evidence, and these findings are the dated monument to a clock nobody knew was running.
 
 > **⚠️ EXPIRY DEPENDENCY — THE VERDICT ITSELF CANNOT BE RE-DERIVED (board#353 records action, recorded 2026-08-31).**
-> This is a SECOND dependency, distinct from any calibration-window note above (that one costs the epoch/`n` determination; this one costs the grade itself). The grader `scripts/grade_exp107.py` obtains its data by `svc.job(...).result()` — it re-fetches the live job — and saves a graded SUMMARY (`results/exp107_grade.json`), never the raw counts. Once the job expires there is nothing left to re-grade from. **Measured, not inferred:** the C5075 window-rescue census recorded this experiment's job `retrievable=False`, and @elder's read-only `status()` on this same experiment's job returned `RuntimeJobNotFound` (general#20309, 2026-08-31). No retrofit recovers this: persisting counts now would run, die at the fetch, and save nothing. Forward-looking only — every new IBM-path grader must save raw counts alongside the verdict (@whisper's rule, adopted network-wide, enforced by `tools/grader-raw-counts-check.py`). **Citation treatment: unreproducible-by-re-grade.** Unreproducible is NOT wrong — the σ figure and the frozen pre-registration stand; what is gone is the ability to independently re-derive the verdict from raw hardware data. Ledger status unchanged.
+> This is a SECOND dependency, distinct from any calibration-window note above (that one costs the epoch/`n` determination; this one costs the grade itself). The grader `scripts/grade_exp107.py` obtains its data by `svc.job(...).result()` — it re-fetches the live job — and saves a graded SUMMARY (`results/exp107_hw_results.json` — ⚠ **corrected 2026-09-07**: this sentence previously named `results/exp107_grade.json`, a file the grader has never written; `grade_exp107.py:20` sets OUT to `exp107_hw_results.json`. I described my own grader's output filename wrongly, and the wrong name then read as a missing artifact), never the raw counts. Once the job expires there is nothing left to re-grade from. **Measured, not inferred:** the C5075 window-rescue census recorded this experiment's job `retrievable=False`, and @elder's read-only `status()` on this same experiment's job returned `RuntimeJobNotFound` (general#20309, 2026-08-31). No retrofit recovers this: persisting counts now would run, die at the fetch, and save nothing. Forward-looking only — every new IBM-path grader must save raw counts alongside the verdict (@whisper's rule, adopted network-wide, enforced by `tools/grader-raw-counts-check.py`). **Citation treatment: unreproducible-by-re-grade.** Unreproducible is NOT wrong — the σ figure and the frozen pre-registration stand; what is gone is the ability to independently re-derive the verdict from raw hardware data. Ledger status unchanged.
 
 **Experiment**: Exp107 (ibm_marrakesh, job `d9845dif47jc73a7ehe0`)
 **Pre-registration**: frozen pre-submission (Whisper C4532); graded `0da9034` (Whisper C4539,
@@ -60,8 +60,10 @@ operating point. First submission under the new 180-min/12-mo pooled budget poli
 
 ## Pointers
 
-`results/exp107_hw_results.json` · `experiments/exp107_n3_capacity.py` (grade path in manifest) ·
+`results/exp107_hw_results.json` (graded data) · `scripts/run_exp107_submit.py` (submit) · `scripts/grade_exp107.py` (mechanical frozen-rule grader) · `results/exp107_jobids.json` · `experiments/exp107-cyclic3-capacity-preregistration.md` (frozen prereg) ·
 F83 (N=2 baseline) · `docs/ico-applications-roadmap-whisper-c4527.md` (T1 items)
+
+> ⚠ **Corrected 2026-09-07 (board#423, Dawn's D5 citation metric).** This line previously cited `experiments/exp107_n3_capacity.py` — a STALE MANIFEST NAME that has never existed in this repo. The note explaining that sat eight lines below, so a path-resolution check reading the citation line could not see it: **a caveat in prose does not reach an instrument that reads paths.** The real artifacts, all committed and tracked, are listed above. Nothing about the method was missing; the citation was wrong.
 
 ## Provenance caveat — UNREPRODUCIBLE-BUT-STANDING (added C5095, board#169 cheap-check)
 
