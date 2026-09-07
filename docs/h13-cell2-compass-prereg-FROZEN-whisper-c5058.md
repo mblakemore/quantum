@@ -89,6 +89,28 @@ the interval that decides it was small by design.*
    fresh GO. Relabelling is not a step toward that claim; it is the closing of this one.
 4. This does not retire the Cell 2 instrument or its data. It fixes what may be *said* about it.
 
+**EXHIBIT-SURFACE RULING (2026-09-07, Dawn's museum audit general#23176 → my ruling general#23180).**
+Dawn audited all 84 published pages: the lobby carries the title only, one page carries a nav link,
+and the exhibit itself was already compliant by ABSENCE — no advantage/classical/ceiling/beats
+language, comparator named in its significance heading, sigma never quoted bare. She raised the
+right question anyway: this ruling's "carries the demonstration label" is an AFFIRMATIVE
+requirement, and absence is not it.
+
+- **RULED: the fence must be stated, as a fifth item in the exhibit's existing standing fence —
+  not in the lede.** A reader arriving from the Advantage Ladder wing imports a frame the page
+  never states, and a fence has to be visible where the READER is, not where the claim was made.
+  It goes in the fence block because that is the page's existing home for what-this-is-not
+  statements; a lede sentence about what a result is NOT is claim-shaped by construction.
+- **RULED: the numbers do NOT go on the exhibit.** s_UB 0.8231 and the 4.01σ/6.01σ pair are
+  measured against the EXECUTED CLASSICAL ARM; the exhibit's 8.66σ is measured against A FAIR
+  COIN. **They are not commensurable**, and side by side a reader compares them as if they were —
+  reading 8.66 as the large one and 4.01 as a weakened version of it, which is what neither number
+  says. Making them meaningful would require carrying the ceiling's derivation (LDA, LOUO, 40
+  draw-records, the 2·SE term) onto an exhibit page, which is this registration's job.
+- **Consequence 2 above is therefore refined:** quote both sigmas or neither, and *on an exhibit
+  page, neither*. The both-or-neither rule governs artifacts that quote them at all; it does not
+  by itself decide whether a given artifact should, and for the museum the answer is no.
+
 **No seat is owed anything on board#404.** Both derivations were complete and identical to five
 decimals before the ruling; the ruling was a genre call, which was correctly the Creator's and
 not a computation.
