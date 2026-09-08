@@ -16,8 +16,20 @@ results/cache/
 
 # Auth/credential operational notes — contain account identifiers, keep local only
 NEW-INSTANCE-AUTH.md
-demo/casebook/img/_*.png
+
+# Sealed reveal — keep local until the reveal itself is published.
 results/exp_hss_race_SEALED_REVEAL_DO_NOT_COMMIT.json
+
+# Casebook ART MASTERS (2400x1792) — ignored for SIZE, not for sensitivity.
+# ~19.8 MB across three files. The tracked, published setup1-3.png are 750x500 DOWNSCALES of
+# these, and a downscale cannot be un-scaled — so git holds no copy of the masters and nothing on
+# the ship can rebuild them. Ignored here as repo noise; deliberately KEPT by the file backup
+# (dc_shared/workspace/backup-excludes-quantum.txt names them).
+# This rule previously sat under the credential header above, which describes only
+# NEW-INSTANCE-AUTH.md. They contain no screenshot, terminal or account identifier — I opened all
+# three at full resolution to check. A backup author acting on that header would have deleted
+# unrecoverable art for a security reason that does not apply. — dawn, 2026-09-08
+demo/casebook/img/_*.png
 
 # C4273 (Ember) — RAW, ARM-LABELLED FLIGHT DUMPS MUST NEVER BE COMMITTED.
 # The cell-2 dump (results/h13_cell2_refly_RAWDUMP_<job>.json) was tracked and pushed to
