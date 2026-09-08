@@ -83,6 +83,26 @@ is in the template rather than in the reviewer's memory. If you add a link insid
 class to that selector in the same edit.
 
 Head must include the fonts + meta (copy from any done exhibit's `<head>`):
+
+**FIRST, the four structural lines — these are REQUIRED and this guide did not name them until
+2026-09-08, when a published exhibit was found rendering in QUIRKS MODE without them:**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+Absent, in order: the browser uses a **different box model** (`compatMode=BackCompat`); axe
+`html-has-lang` fails, **WCAG 3.1.1 Level A**; the encoding is guessed on a site full of σ and
+em-dashes; and — the one worth knowing — **a phone lays the page out at 980px and SCALES IT DOWN, so
+there is no horizontal overflow to detect and every geometry check passes a page nobody can read.**
+
+"Copy from any done exhibit" carries these implicitly and that is why the gap survived: **a
+GENERATOR has no exhibit to copy from**, which is exactly how one page in 85 ended up with none of
+them. Full reasoning: `dawn/docs/style-guide.md` § REQUIRED PAGE FURNITURE.
+
+**Then the theme + fonts:**
 ```html
 <meta name="theme-color" content="#04060c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
