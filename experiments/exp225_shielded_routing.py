@@ -5,7 +5,10 @@ The crown jewels behind the shield — for the newest crown jewel. Exp224 (P8) p
 ROUTING is a resource: a message through a coherent superposition of two relays carries a
 routing-coherence witness (DISC~2) that no definite path nor classical mixture of routes can. Exp208
 put the causal-ORDER switch behind the [[4,2,2]] shield. This flight puts the ROUTING switch behind
-the shield: **the first error-corrected quantum network topology.**
+the shield: **the first time coherently-controlled channels are composed with error
+detection and framed as a network topology** (one stabilizer, n=2 relays, a single
+message). NOT a world-first claim: the contribution is the COMPOSITION of exp208 +
+exp224, and no literature survey was run that could support a priority claim.
 
 The message (target) is encoded in one [[4,2,2]] block; the route (control) stays bare; the relays
 act as controlled LOGICAL Paulis (exp208 machinery). DISC_shielded = <Xbar_c>_commute -
@@ -210,7 +213,8 @@ def decode():
     win = ("FAULT-TOLERANT INDEFINITE TOPOLOGY — the superposition of two network routes survives "
            "error detection: the routing-coherence resource holds behind the [[4,2,2]] shield "
            "(DISC~2), while a definite path and a classical mixture of routes both stay dark. The "
-           "first error-corrected quantum network topology, on silicon")
+           "first composition of coherently-controlled channels with error detection, "
+           "framed as network topology (1 stabilizer, n=2 relays, 1 message), on silicon")
     print(f"VERDICT: {win if ok else 'NOT HELD (accounting above)'}")
     json.dump({"job_id": man["job_id"], "DISC_shielded": discs, "DISC_bare": dbare,
                "acceptance": accs["coherent"] / sum(raw[("L", "coherent", "commute")].values()),
