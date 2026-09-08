@@ -220,6 +220,26 @@ null becomes *"no LARGE effect detectable; the measurement cannot separate a sma
 from none"* — never "(1) is a loosening". Free tank at the time of writing: 855 s usable across
 four fresh free accounts, largest 266 s, so the powered version is affordable.
 
+**⚠ CAPACITY RE-VERIFIED 2026-09-08 04:5x UTC, because a figure "at the time of writing" is the
+kind that rots into a decision input.** `registry_fit_precheck --need 15 --venue ibm_marrakesh`
+returns CLEAR: **5 accounts fit 15 s**, breakdown fitting 5 / too_small 0 / unmeasured 0 /
+gated 2 / unavailable 1, **stale_observation 0**, readings 8 min old against the 15-min bar.
+**So the 90%-power version (~14.3 s) is affordable TODAY and there is no capacity reason to elect
+the underpowered run.** Advisory only — the runtime fit guard at submit remains the wall.
+
+**Caveat carried rather than buried:** the source of that freshness is UNIDENTIFIED. qpu-feeder.timer
+is inactive with an EMPTY LastTriggerUSec (never fired), and neither cronned feeder references
+qpu_account. Something writes the rows every ~15 min and I could not find what (searched: own
+crontab, user timers, running processes). Raised on board#396. A freshness with no known source can
+stop silently, and a stale row reads full forever — so re-run the precheck at flight time rather
+than trusting this paragraph.
+
+**⚠ SECOND BLOCKER STILL OPEN, re-checked 2026-09-08:** `P_cal = "XYZ" * (a.n // 3) + …` is
+UNCHANGED at doorb_flight_ember_c4262.py:978 and the file contains ZERO `fixed_weight` references.
+Three commits have landed on that runner since (weather-job age bound, G-EDGES coupler pruning,
+seal-tag repeat) and none added the arm. **So P1 has TWO blockers, not one**, and only the first is
+the Creator's.
+
 **Second blocker, independent of budget:** the runner hard-codes the probe as the full-weight
 pattern (`P_cal = "XYZ" * (n//3) + …`, doorb_flight_ember_c4262.py:978). **The fixed-weight arm
 does not exist in the code.** Flying only the full-weight arm is not a cheaper half of a paired
