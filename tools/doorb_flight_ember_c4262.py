@@ -475,6 +475,68 @@ def f_mix_selftest(P, alpha, shots=20000, seed=7):
     return out[0], out[1]
 
 
+class _NoThreshold(Exception):
+    """Sentinel: --max-2q-error was not set. Distinguishes a CONFIGURED full map from a full map
+    reached because the calibration could not be read — the two used to print the same message."""
+
+
+def plan_routing(bk, max_2q_error, say=print):
+    """G-EDGES: the calibration stamp and the coupler pruning, as ONE testable unit.
+
+    Returns (excluded_edges, coupling_map_or_None, calibration_stamp).
+
+    ⚠ EXTRACTED FROM THE FLIGHT PATH 2026-09-08 SO IT CAN BE FALSIFIED WITHOUT SPENDING QPU
+    SECONDS. It was inline in the submit function, which means the only way to exercise it was to
+    fly — so the TypeError below lived through three real flights unnoticed. A copy of the logic in
+    a test would have been a fixture testing itself; this is the code the flight actually calls.
+
+    THE CALIBRATION STAMP (board#415) is captured whether or not a threshold is set, because the
+    epoch a flight flew in is a property of the FLIGHT, not of the pruning option. Its absence is
+    what made the P1 epoch confound un-auditable from the manifest alone.
+    NOT bk.calibration_id: that attribute EXISTS and returns None on ibm_marrakesh (checked
+    2026-09-08), so a stamp built on it would record null forever and look like a stamp.
+    UNKNOWN is written explicitly rather than omitted — an absent key and an unreadable
+    calibration must not look identical to a later reader.
+    """
+    excluded_edges, cmap = [], None
+    calibration_stamp = "UNKNOWN — not attempted"
+    try:
+        _props = bk.properties()
+        calibration_stamp = (_props.last_update_date.isoformat() if _props is not None
+                             else "UNKNOWN — properties() returned None")
+    except Exception as _e:  # noqa: BLE001
+        calibration_stamp = f"UNKNOWN — {type(_e).__name__}: {_e}"
+    try:
+        # ⚠ NO THRESHOLD IS A CONFIGURATION CHOICE, NOT AN UNREADABLE CALIBRATION. `value >= None`
+        # raises TypeError, which the handler below caught and reported as "calibration
+        # UNREADABLE" — blaming the device for an unset flag. Both n=20 delivering flights of
+        # 2026-09-06 ran with max_2q_error=None and therefore printed that false diagnostic while
+        # the calibration was read perfectly well. The routing outcome (full map) was right by
+        # accident; the stated REASON was wrong, and the reason is what a reader acts on.
+        if max_2q_error is None:
+            say("  [G-EDGES]  no --max-2q-error set; routing on the FULL coupling map BY "
+                f"CONFIGURATION (calibration {calibration_stamp} read fine, not consulted)")
+            raise _NoThreshold
+        _props = bk.properties()
+        _bad = {tuple(g.qubits) for g in _props.gates
+                if g.gate in ("cz", "ecr", "cx") and g.parameters and g.parameters[0].value >= max_2q_error}
+        if _bad:
+            from qiskit.transpiler import CouplingMap
+            _edges = [tuple(e) for e in bk.coupling_map.get_edges()]
+            _keep = [e for e in _edges if e not in _bad and (e[1], e[0]) not in _bad]
+            excluded_edges = sorted({tuple(sorted(e)) for e in _bad})
+            cmap = CouplingMap(_keep)
+            say(f"  [G-EDGES]  {len(excluded_edges)} coupler(s) at 2q error >= {max_2q_error} EXCLUDED from routing: "
+                f"{excluded_edges} (calibration {calibration_stamp})")
+        else:
+            say(f"  [G-EDGES]  no coupler at 2q error >= {max_2q_error}; full coupling map")
+    except _NoThreshold:
+        pass                                   # already reported above; a choice, not a failure
+    except Exception as _e:  # noqa: BLE001 — an unreadable calibration is UNKNOWN, said out loud, never silent
+        say(f"  [G-EDGES]  calibration UNREADABLE ({type(_e).__name__}: {_e}); routing on the full map, UNPRUNED")
+    return excluded_edges, cmap, calibration_stamp
+
+
 def paid_token():
     # C4262: IBMQ_ALT3 is in MY OWN .env (Creator, general#7459). Reading my own credential
     # rather than a sibling's is the correct default — the DC15W path was inherited from the
@@ -922,23 +984,7 @@ def main():
     for i in range(a.n):
         qc.measure(i, i); qc.measure(a.n + i, a.n + i)      # HALVES, registered
     # ---- G-EDGES: prune couplers the live calibration reports as dead, then transpile on what is left.
-    excluded_edges, cmap = [], None
-    try:
-        _props = bk.properties()
-        _bad = {tuple(g.qubits) for g in _props.gates
-                if g.gate in ("cz", "ecr", "cx") and g.parameters and g.parameters[0].value >= a.max_2q_error}
-        if _bad:
-            from qiskit.transpiler import CouplingMap
-            _edges = [tuple(e) for e in bk.coupling_map.get_edges()]
-            _keep = [e for e in _edges if e not in _bad and (e[1], e[0]) not in _bad]
-            excluded_edges = sorted({tuple(sorted(e)) for e in _bad})
-            cmap = CouplingMap(_keep)
-            print(f"  [G-EDGES]  {len(excluded_edges)} coupler(s) at 2q error >= {a.max_2q_error} EXCLUDED from routing: "
-                  f"{excluded_edges} (calibration {_props.last_update_date:%Y-%m-%dT%H:%MZ})")
-        else:
-            print(f"  [G-EDGES]  no coupler at 2q error >= {a.max_2q_error}; full coupling map")
-    except Exception as _e:  # noqa: BLE001 — an unreadable calibration is UNKNOWN, said out loud, never a silent full map
-        print(f"  [G-EDGES]  calibration UNREADABLE ({type(_e).__name__}: {_e}); routing on the full map, UNPRUNED")
+    excluded_edges, cmap, calibration_stamp = plan_routing(bk, a.max_2q_error)
     t = transpile(qc, backend=bk, optimization_level=1, **({"coupling_map": cmap} if cmap is not None else {}))
     _used = {tuple(sorted(q._index for q in inst.qubits)) for inst in t.data if len(inst.qubits) == 2}
     _hit = [e for e in excluded_edges if e in _used]
@@ -1168,7 +1214,8 @@ def main():
            "excluded_edges": excluded_edges, "max_2q_error": a.max_2q_error,
            "weather_job_reused": weather_reuse,
            "account": a.account, "instance_tail": ACCOUNT_CRN[-40:],
-           "backend": bk.name, "layout": "halves", "granularity_R": 1, "jobs": jobs,
+           "backend": bk.name, "calibration_last_update": calibration_stamp,
+           "layout": "halves", "granularity_R": 1, "jobs": jobs,
            "weather_rows": CAL_ROWS, "weather_P_public": P_cal, "weather_job": wjob.job_id(),
            "cal_scheme": "matched-weight rule (b) k=4 at the sealed w, independent supports, fresh stream "
                          "(c5093 item 1); abs-match ~35,457 shots (item 2); each block rides FIRST in its own job",
