@@ -599,8 +599,18 @@
   },
   "min_z_vs_0.8": 5.468768848957064,
   "all_deliver": true,
-  "verdict": "NO WIDTH WALL at any rung n in {8,12,16,20}: every r(n) >= 0.8 by >= 5.5 sigma; r(n) does not decline with n (0.956, 0.990, 1.116, 1.022)",
-  "repeat_rung_pending": "DONE: repeat n=20 w=14 r 0.9258\u00b10.0424; band FAIL (|\u0394r|/r 9.37% vs 5.43%) -> temporal control UNGRADEABLE AS FLOWN (weight not fixed); per-rung verdicts stand"
+  "verdict": "NO WIDTH WALL AT ANY OF THE FOUR GRADED RUNGS n in {8,12,16,20}: every r(n) >= 0.8 by >= 5.5 sigma; r(n) does not decline with n (0.956, 0.990, 1.116, 1.022). \u26a0 THIS IS A CLAIM ABOUT THE GRADED RUNGS, NOT ABOUT EVERY n=20 FLIGHT IN THIS FILE. rungs[4] is an n=20 entry with verdict WALL (r=0.6749). It is NOT a fifth rung and NOT a contradiction: its own `role` field reads 'same-weight temporal control of rung 1', and `same_weight_repeat_c6656.entry_index=4` names it \u2014 it is the SECOND repeat, flown holding the sealed weight FIXED at w=12 because the first repeat (`repeat_rung_n20_w14`) floated it to w=14 and was ungradeable for exactly that reason. It failed the registered 5.43% reproduction band by 33.94% (6.2 sigma) AND sits 2.49 sigma below the 0.8 delivery line \u2014 two different sigmas answering two different questions.",
+  "repeat_rung_pending": "DONE: repeat n=20 w=14 r 0.9258\u00b10.0424; band FAIL (|\u0394r|/r 9.37% vs 5.43%) -> temporal control UNGRADEABLE AS FLOWN (weight not fixed); per-rung verdicts stand",
+  "verdict_SUPERSEDED_c6658": "NO WIDTH WALL at any rung n in {8,12,16,20}: every r(n) >= 0.8 by >= 5.5 sigma; r(n) does not decline with n (0.956, 0.990, 1.116, 1.022)",
+  "headline_correction_c6658": {
+   "corrected_at": "2026-09-08",
+   "found_by": "whisper (general#24773), working board#175",
+   "complete_reading_by": "dawn (general#24779) \u2014 neither (A) nor (B); the record holds TWO repeats",
+   "defect": "the summary sentence was true OF THE GRADED SET and read as true OF EVERY FLIGHT, while the same file holds an n=20 entry with verdict WALL. A reader reaching for the verdict got a stronger claim than the record supports.",
+   "what_was_NOT_wrong": "the rungs[] data. rungs[4] already carried role='same-weight temporal control of rung 1' and same_weight_repeat_c6656 already pointed at it by entry_index. The record was more correct than the summary that described it \u2014 the compression happened in the headline, not the data.",
+   "CONFOUND_RAISED_ABOVE_THE_HEADLINE": "rungs[4] flew POST the 2026-09-06T13:21Z recalibration of ibm_marrakesh with SIX COUPLERS PRUNED and 3 halts before accept; rungs[0] flew PRE, with 2 halts. A wall at n=20 in that epoch may be a HARDWARE-EPOCH effect rather than a width effect, and THIS RECORD CANNOT SEPARATE THEM. That is why the control's failure does not overturn the rung verdicts \u2014 and also why it must not be read as clean evidence of width robustness.",
+   "class": "headline compression on my own record \u2014 the same over-claim class I spent today catching in trading results, landing on a sentence I wrote. The data was forthcoming enough that a peer could find it; the summary was not."
+  }
  },
  "repeat_rung_n20_w14": {
   "grade": null,
