@@ -289,6 +289,59 @@ def main():
                 r = held.get(i) or {}
                 print(f"    {str(r.get('name'))[:22]:24s} age={r.get('age_s')}s "
                       f"observed_at={str(r.get('observed_at'))[:19]}", flush=True)
+            # ── WRITE THE FINDING, DO NOT ONLY PRINT IT (Elder board#396(b), 2026-09-08) ──────
+            # This block has DETECTED unmaintained rows since board#352 and written the result to
+            # the journal only. Nobody reads the journal. Meanwhile /resources kept serving the
+            # frozen balance as a live number: the deleted ALT2 instance contributed its last
+            # 223 s reading to usable_total_s for 7.7 days, with the derived block able to name it
+            # (usable_total_stalest) but not to exclude it.
+            # DOCUMENTING IS NOT GUARDING — the feeder knew, every pass, and the only artifact was
+            # a log line. So it now writes what it knows.
+            #
+            # NULL, NOT ZERO, AND NOT THE LAST READING. derive() treats a non-numeric balance_s as
+            # UNMEASURED and drops it from usable_total_s — which is the correct state for a
+            # resource nothing can currently observe. The last reading is PRESERVED under
+            # last_known_balance_s so nothing is destroyed, only demoted out of a live total.
+            #
+            # TWO MISSED PASSES, NOT ONE. A single absence can be a transient sensor blip, and
+            # marking on the first would flap. Observed trigger period maxes at ~1005 s (44
+            # samples), so 2 x 1005 + slack = 2200 s is "absent across two consecutive passes".
+            # Stated rather than tuned: a row younger than this is left completely alone.
+            UNMAINTAINED_BAR_S = 2200
+            for i in unmaintained:
+                r = held.get(i) or {}
+                age = r.get("age_s")
+                if not isinstance(age, (int, float)) or age < UNMAINTAINED_BAR_S:
+                    continue
+                meta = dict(r.get("meta") or {})
+                if meta.get("balance_s") is None:
+                    continue                      # already demoted; do not rewrite every pass
+                meta["last_known_balance_s"] = meta.get("balance_s")
+                meta["balance_s"] = None
+                meta["unmaintained_since"] = r.get("observed_at")
+                meta["unmaintained_reason"] = (
+                    "present in the registry, absent from the health sensor for more than two "
+                    f"feeder passes ({int(age)}s). Demoted to UNMEASURED so it stops contributing "
+                    "to usable_total_s; last reading kept in last_known_balance_s.")
+                # BUILD FROM THE HELD ROW, MINUS THE DECLARED FIELDS. Two wrong versions first:
+                #   (1) listing the fields by hand omitted `blind_spots`, so a full-row upsert
+                #       would have wiped the row's own statement of what it cannot see;
+                #   (2) copying EVERYTHING carried `authorization` and `billing`, which the
+                #       sensor path refuses (400 declared_field_on_sensor_path) because those are
+                #       creator-only for a row's whole life — my own gate, working correctly.
+                # Absent PRESERVES on this path, so omitting them leaves them untouched, which is
+                # exactly what a sensor should do to a human's declaration.
+                body = {k: v for k, v in r.items()
+                        if k not in ("id", "age_s", "updated_at", "updated_by",
+                                     "authorization", "billing")}
+                body["meta"] = meta
+                if a.dry_run:
+                    print(f"    [dry-run] would demote {str(r.get('name'))[:20]} "
+                          f"({int(age)}s) to UNMEASURED", flush=True)
+                else:
+                    code, _ = post("/resources", body)
+                    print(f"    demoted {str(r.get('name'))[:20]} ({int(age)}s) to UNMEASURED "
+                          f"-> HTTP {code}", flush=True)
         print(f"[{stamp}] upserted {sent}, failed {failed}, skipped {skipped} "
               f"({len(seen_backends)} backends)", flush=True)
         if a.once:
