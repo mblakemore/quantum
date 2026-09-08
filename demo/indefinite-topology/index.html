@@ -141,7 +141,7 @@
         (F73–F77) — is a control qubit's superposition of <em>when</em> two operations happen a
         resource? Here it's reused to ask the same question of <em>where</em> a message goes. Exp225
         composes that witness with the shield concept from <a href="../shields/">the shields</a> —
-        the first error-corrected quantum network topology.</p></div>
+        the first time coherently-controlled channels are composed with error detection and framed as a network topology (one stabilizer, n=2 relays, a single message).</p></div>
       <div class="receipt"><div class="rt">SCOPE &amp; FENCE</div>
         <p>Bare physical control + target + one eavesdropper ancilla (224); a per-block ZZZZ shield,
         one stabilizer, exp208-style (225). n=2 relays, a single message. Textbook coherently-controlled
@@ -161,7 +161,7 @@ function el(p,n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)
 const STAGES={
  i:{lbl:"224 · the route in superposition",story:"<b>The resource.</b> A message crosses a coherent superposition of two relay stations. The routing-coherence witness DISC = ⟨X̄_c⟩<sub>commute</sub> − ⟨X̄_c⟩<sub>anti</sub> reads <b>+1.942 at 515σ</b> — 97% of the noiseless ceiling of 2, on the shallowest flight of the whole campaign (2 two-qubit gates). A single fixed path carries no signal (0.007), and neither does a classical coin-flip between the two paths (0.060) — an eavesdropper ancilla dephases the route into a mixture <em>before</em> the message travels it, and that mixture is just as dark as a fixed path.",
    verd:[["DISC coherent (superposed route)","+1.942 (515σ)","good"],["DISC definite (single path)","+0.007","bad"],["DISC decohered (mixture of routes)","+0.060","bad"]]},
- ii:{lbl:"225 · the route, shielded",story:"<b>The composition.</b> The same superposed route, now carrying its message inside a [[4,2,2]] error-detecting block. Behind the shield DISC reads <b>+1.866 at 311σ</b> — 96% of the bare +1.937 measured alongside it — while the definite (0.002) and decohered (0.055) arms stay just as dark as before. Error detection preserves the coherent-routing resource specifically; it still can't be faked by a classical mixture of paths. The first error-corrected quantum network topology.",
+ ii:{lbl:"225 · the route, shielded",story:"<b>The composition.</b> The same superposed route, now carrying its message inside a [[4,2,2]] error-detecting block. Behind the shield DISC reads <b>+1.866 at 311σ</b> — 96% of the bare +1.937 measured alongside it — while the definite (0.002) and decohered (0.055) arms stay just as dark as before. Error detection preserves the coherent-routing resource specifically; it still can't be faked by a classical mixture of paths. The first time coherently-controlled channels are composed with error detection and framed as a network topology (one stabilizer, n=2 relays, a single message).",
    verd:[["DISC shielded coherent","+1.866 (311σ)","good"],["DISC shielded definite","+0.002","bad"],["DISC shielded decohered","+0.055","bad"],["vs bare coherent (ref)","1.866 vs 1.937","cy"]]}};
 function draw(key){
   const viz=document.getElementById("viz"); viz.innerHTML="";

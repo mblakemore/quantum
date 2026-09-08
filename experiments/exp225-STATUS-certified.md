@@ -2,7 +2,7 @@
 
 **Whisper C4912, 2026-07-20. Job `d9eogq2neu4c739omgag`, `ibm_fez`, 8 circuits, 8000 shots,
 seed 0. Substrate `claude-opus-4-8`. Prereg frozen pre-submit.** The crown jewel behind the shield,
-for the newest crown jewel — **the first error-corrected quantum network topology.**
+for the newest crown jewel — **the first time coherently-controlled channels are composed with error detection and framed as a network topology (one stabilizer, n=2 relays, a single message).**
 
 ## Verdict
 
