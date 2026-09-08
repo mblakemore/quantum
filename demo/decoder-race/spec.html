@@ -77,6 +77,14 @@
   .scrollhint { margin:6px 0 0; font-family:var(--mono); font-size:12px; color:var(--ink-3);
                 display:flex; align-items:center; gap:7px; }
   .scrollhint::before, .scrollhint::after { content:""; flex:1; height:1px; background:var(--edge); }
+  /* Spec-sheet plain-text link — the CANONICAL form ruled at board#342, 2026-09-07:
+     a rule in the page's own <style>, never an inline style= attribute, because an inline
+     style cannot be overridden by a later house change and repeats per element.
+     MEASURED 2026-09-08: that ruling was implemented on ZERO of the 22 spec pages carrying
+     .md-link — 18 used an inline style, 4 inherited, and the link rendered in THREE
+     different colours across the museum. This page is the first to carry the ruled form.
+     A class beats the bare `a{}` rules above on specificity, so order does not matter. */
+  .md-link{font-family:var(--mono);font-size:12.5px;color:var(--ink-4);text-decoration:underline}
 </style>
 </head>
 <body>
@@ -88,6 +96,7 @@
     <div class="idline"><span>Findings F120 · F121</span><span>Exp-HSS races 1–6 (C4973–C4985)</span><span>ibm_marrakesh · ibm_kingston</span><span>winning job <code>d9gps850k0jc738h6blg</code></span><span>H8 P9 — CLOSED-WON</span></div>
     <div class="verdict">⊘ WON 3-of-3, THEN SUPERSEDED — C4996, own red-team, pre-submission. The 476× priced simulation; the problem's algebra falls in 41 queries / ~0.25 ms. No runtime advantage claimed; F120 instrument result stands; F119 under re-audit.</div>
   </header>
+  <p style="margin:8px 0 0;"><a class="md-link" href="./spec.md">↓ Read this sheet as plain-text Markdown</a></p>
 
   <h2>1 · The idea, in plain language</h2>
   <p>The Roetteler hidden-shift problem plants a secret 40-bit string in a scrambled Boolean function; a quantum circuit can read it out directly, while the best classical solvers pay ~2<sup>αT</sup> in the T-gate count. At useful depths the chip's single most-frequent output decays to uselessness — measured and published as <b>window-closed</b> (C4973), with the number a future machine would need. A re-read of that verdict's own discarded calibration data (C4974) found the deep outputs were the planted answer <b>with a few typos</b>: each shot is answer ⊕ sparse errors, so N shots are N noisy transmissions of one codeword. Per-bit majority across shots reads the answer through noise that destroys every individual shot. <b>F120</b>: per-bit information decays at λ_bit ≈ 0.003/slot — ~30× slower than the modal-answer law.</p>
