@@ -2,15 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/anyon-braid/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/anyon-braid/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/arrow-dial/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/arrow-dial/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/blind-spot/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/blind-spot/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/casebook-pnp/</loc>
@@ -30,15 +42,27 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/causal-compass/</loc>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/causal-compass/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/cloning-replicator/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/cloning-replicator/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/crossover/</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/crossover/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/decoder-race/</loc>
@@ -50,23 +74,43 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/delayed-eraser/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/delayed-eraser/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/distributed-algorithm/</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/distributed-algorithm/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/distributed-computer/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/distributed-computer/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/energy-teleport/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/energy-teleport/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/facts-not-absolute/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/facts-not-absolute/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/federation-computer/</loc>
@@ -90,7 +134,11 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/hardy-event/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/hardy-event/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/hayden-preskill/</loc>
@@ -122,7 +170,11 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/magic-injection/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/magic-injection/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/magic-square/</loc>
@@ -154,7 +206,11 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/past-not-fixed/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/past-not-fixed/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/pocket-dictionary/</loc>
@@ -166,7 +222,11 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/programmable-rotation/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/programmable-rotation/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/quantum-darwinism/</loc>
@@ -178,19 +238,35 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/relay-computer/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/relay-computer/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/relay-key/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/relay-key/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/relay/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/relay/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/remote-gate/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/remote-gate/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/scoreboard/</loc>
@@ -202,7 +278,11 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/sealed-shadow/</loc>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/sealed-shadow/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/self-healing/</loc>
@@ -210,7 +290,11 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/sensor/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/sensor/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/shallow-solver/</loc>
@@ -234,11 +318,19 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/subspace-channel/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/subspace-channel/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/swap/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/swap/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/switch-bench/</loc>
@@ -250,7 +342,11 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/switch-under-oath/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/switch-under-oath/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/switch/</loc>
@@ -262,7 +358,11 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/teleportation/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/teleportation/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/teleported-witness/</loc>
@@ -274,15 +374,27 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/temporal-negativity/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/temporal-negativity/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/time-crystal/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/time-crystal/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/tricorder/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/tricorder/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/trust-ladder/</loc>
@@ -302,7 +414,11 @@
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/vault/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-09-09</lastmod>
+  </url>
+  <url>
+    <loc>https://mblakemore.github.io/quantum/demo/vault/receipts.html</loc>
+    <lastmod>2026-09-09</lastmod>
   </url>
   <url>
     <loc>https://mblakemore.github.io/quantum/demo/weather/</loc>
