@@ -14,59 +14,59 @@
   },
   "arms": {
     "counterflow": {
-      "crossing": 0.2486,
-      "eps": 0.842,
-      "layout_A_crossing": 0.1788,
-      "layout_B_crossing": 0.3185
+      "crossing": 0.25,
+      "eps": 0.8293,
+      "layout_A_crossing": 0.1709,
+      "layout_B_crossing": 0.3292
     },
     "coflow": {
-      "crossing": 0.0697,
-      "eps": 0.5944,
-      "layout_A_crossing": -0.0025,
-      "layout_B_crossing": 0.142
+      "crossing": 0.0799,
+      "eps": 0.6044,
+      "layout_A_crossing": 0.0118,
+      "layout_B_crossing": 0.148
     },
     "null": {
-      "crossing": 0.0727,
-      "eps": 0.5894,
-      "layout_A_crossing": -0.0,
-      "layout_B_crossing": 0.1455
+      "crossing": 0.0761,
+      "eps": 0.5997,
+      "layout_A_crossing": 0.001,
+      "layout_B_crossing": 0.1513
     }
   },
   "single_layout": {
     "counterflow": {
       "A": {
-        "cold_exit": 0.3181,
-        "hot_exit": 0.1392,
-        "crossing": 0.1788
+        "cold_exit": 0.3077,
+        "hot_exit": 0.1368,
+        "crossing": 0.1709
       },
       "B": {
-        "cold_exit": 0.3713,
-        "hot_exit": 0.0528,
-        "crossing": 0.3185
+        "cold_exit": 0.3728,
+        "hot_exit": 0.0436,
+        "crossing": 0.3292
       }
     },
     "coflow": {
       "A": {
-        "cold_exit": 0.2221,
-        "hot_exit": 0.2246,
-        "crossing": -0.0025
+        "cold_exit": 0.2295,
+        "hot_exit": 0.2177,
+        "crossing": 0.0118
       },
       "B": {
-        "cold_exit": 0.294,
-        "hot_exit": 0.152,
-        "crossing": 0.142
+        "cold_exit": 0.2936,
+        "hot_exit": 0.1456,
+        "crossing": 0.148
       }
     },
     "null": {
       "A": {
-        "cold_exit": 0.227,
-        "hot_exit": 0.2271,
-        "crossing": -0.0
+        "cold_exit": 0.2228,
+        "hot_exit": 0.2218,
+        "crossing": 0.001
       },
       "B": {
-        "cold_exit": 0.2856,
-        "hot_exit": 0.1402,
-        "crossing": 0.1455
+        "cold_exit": 0.297,
+        "hot_exit": 0.1457,
+        "crossing": 0.1513
       }
     }
   },

@@ -2,7 +2,7 @@
  "card": "window_rescue",
  "cycle": "C5075",
  "why": "bank epoch windows before a vendor retention clock we have not measured can close them",
- "n_cited": 174,
+ "n_cited": 177,
  "n_fetched_this_run": 0,
  "jobs": {
   "d9ah35eg26ic73demgag": {
@@ -5400,6 +5400,112 @@
    "SET_WARNING": "touched != measured; for any statistic combining specific bits, recover the measured set from the circuit's measure instructions",
    "quietness_vs_device_median": 5.4375,
    "cited_by": "h13-cell2-refly-GRADED-elder-c6605.md"
+  },
+  "da6vtpe0ukec7382kmh0": {
+   "account": "IBMQ_TOKEN",
+   "backend": "ibm_fez",
+   "created": "2026-08-25 20:45:25.629234+00:00",
+   "status": "DONE",
+   "properties_source": "AT CREATION DATE",
+   "properties_last_update": "2026-08-25 19:44:25+00:00",
+   "device_readout": {
+    "median": 0.00958251953125,
+    "mean": 0.01969322791466346,
+    "max": 0.2979736328125
+   },
+   "touched_qubits": [
+    123,
+    136,
+    141,
+    142,
+    143,
+    144
+   ],
+   "touched_readout": {
+    "median": 0.00726318359375,
+    "max": 0.009765625
+   },
+   "used_qubits": [
+    123,
+    136,
+    141,
+    142,
+    143,
+    144
+   ],
+   "used_readout": {
+    "median": 0.00726318359375,
+    "max": 0.009765625
+   },
+   "SET_WARNING": "touched != measured; for any statistic combining specific bits, recover the measured set from the circuit's measure instructions",
+   "quietness_vs_device_median": 1.319327731092437,
+   "cited_by": "counterflow-flight-a-coflow-caveat-whisper-c5082.md"
+  },
+  "d9tb3tgpdb6s73e7082g": {
+   "account": "IBMQ_ALT4",
+   "backend": "ibm_marrakesh",
+   "created": "2026-08-11 05:24:06.859720+00:00",
+   "status": "DONE",
+   "properties_source": "AT CREATION DATE",
+   "properties_last_update": "2026-08-07 03:19:40+00:00",
+   "device_readout": {
+    "median": 0.0106201171875,
+    "mean": 0.031703851161858976,
+    "max": 0.506591796875
+   },
+   "touched_qubits": [
+    54,
+    55,
+    107
+   ],
+   "touched_readout": {
+    "median": 0.001953125,
+    "max": 0.0029296875
+   },
+   "used_qubits": [
+    54,
+    55,
+    107
+   ],
+   "used_readout": {
+    "median": 0.001953125,
+    "max": 0.0029296875
+   },
+   "SET_WARNING": "touched != measured; for any statistic combining specific bits, recover the measured set from the circuit's measure instructions",
+   "quietness_vs_device_median": 5.4375,
+   "cited_by": "h13-cell2-refly-GRADED-elder-c6605.md"
+  },
+  "da7t28k6l22c73do0opg": {
+   "account": "IBMQ_TOKEN",
+   "backend": "ibm_fez",
+   "created": "2026-08-27 05:54:42.863979+00:00",
+   "status": "DONE",
+   "properties_source": "AT CREATION DATE",
+   "properties_last_update": "2026-08-27 03:35:28+00:00",
+   "device_readout": {
+    "median": 0.0106201171875,
+    "mean": 0.021373259715544872,
+    "max": 0.448486328125
+   },
+   "touched_qubits": [
+    142,
+    143
+   ],
+   "touched_readout": {
+    "median": 0.009765625,
+    "max": 0.01318359375
+   },
+   "used_qubits": [
+    142,
+    143
+   ],
+   "used_readout": {
+    "median": 0.009765625,
+    "max": 0.01318359375
+   },
+   "SET_WARNING": "touched != measured; for any statistic combining specific bits, recover the measured set from the circuit's measure instructions",
+   "quietness_vs_device_median": 1.0875,
+   "cited_by": "dihedral-hsp-hardware-result-whisper-c5085.md"
   },
   "d89n5uqs46sc73farg80": {
    "cited_by": "01-chsh-bell-violation.md",
