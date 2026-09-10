@@ -100,8 +100,8 @@ observable-family-dependent; corrections must be sentinel-anchored.)
 **4.2 The vacuous-gate linter as a standalone.** The feasibility checker (compute the pure-noise
 value of every gate expression at budgeted shots; verify each gate CAN pass and CAN fail) is
 buried in the experiments template. Extracted as a small library with the Exp108b defect as its
-test case, it is useful to any preregistering experimenter — quantum or not (round 2's §3.1
-bar-calibration audit is the same linter pointed at trading thresholds; build it once).
+test case, it is useful to any preregistering experimenter — quantum or not (round 2's §3.1, since moved
+out of this repo, applied the same linter to thresholds outside it; build it once).
 
 ## §5. The Ladder tour — one narrative the repo has never told
 

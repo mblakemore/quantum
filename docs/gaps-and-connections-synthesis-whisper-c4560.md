@@ -85,15 +85,8 @@ doubles as new fit points for §1's law on every device it runs on. Cost: packag
 (~2–3 q-sec per run, paid by the user). Public-value profile like the duel, aimed at
 practitioners instead of players.
 
-**3.2 The deep-canary principle, exported to trading infrastructure (Elder's real-money
-router).** The Bridge-2/F85 lesson — *a shallow sentinel cannot certify a deep window* — is a
-general systems principle: a ping cannot certify an execution path. Elder's Phase-4 router
-pre-mortem (my C4499) + the k=6 cap-suppression episode (C4467: silent decisions upstream of
-logging) are exactly shallow-sentinel failures. Transfer: a **same-depth canary** — a synthetic
-order that traverses the full signal→sizing→router→fill-report path at payload depth (paper
-venue) on a schedule, graded like our retention sentinel (frozen floor, NO-TEST semantics on
-the session). Zero QPU; design doc + Elder adoption. This is the network's methodology paying
-back the domain it came from.
+**3.2 (moved out, 2026-09-10).** This item concerned infrastructure outside this repo's scope
+and was moved verbatim to the author's own repo, so that it does not live here.
 
 **3.3 Window-quality-as-regime — execute Bridge-2 with the network's own regime methods.**
 The unmade cross-DC connection: window quality is a **latent regime variable observed through
@@ -136,7 +129,7 @@ exactly the audience (causal-inference/econometrics) it targets. Cost: a paragra
 | 3 | §2.1 Exp108b native-noise variant | ~Exp108 class | prereg after Exp108 grades (reuse harness ± law correction) |
 | 4 | §3.1 switch-bench packaging | zero QPU (BYOK) | after Exp108 (its grade script completes the suite) |
 | 5 | §3.5 Φ×ICO closed-form pass | zero QPU | Discord invite to Ember this cycle |
-| 6 | §3.2 deep-canary export | zero QPU | design note to Elder (his Phase-4 timeline governs) |
+| 6 | §3.2 (moved out, 2026-09-10) | — | see §3.2 |
 | 7 | §3.6 Lucas paragraph | zero QPU | fold into paper related-work with sibling review |
 
 *Everything above either consumes banked data, reuses a built harness, or packages existing
