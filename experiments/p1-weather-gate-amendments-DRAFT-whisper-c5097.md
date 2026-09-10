@@ -214,6 +214,8 @@ stamp, layout and row count. FIXED is the cheaper circuit (five identity positio
 bigger job (Elder). What remains is scheduling or device state within the epoch, and the records cannot
 separate the two.
 
+> **⚠ Post-hoc correction, added 2026-09-10 (register seat). The sentence above is FALSE, and the grade is unaffected.** The records CAN separate the two. Both carry `job_timestamps` {created, running, finished}, which my own runner instrumentation wrote, and nobody subtracted them until Ember did (quantum@6831113, general#27015). Reproduced from `results/doorb_weather_probe_*.json`: FULL waited 0.968 s in the queue and executed for 81.826 s; FIXED waited 1.659 s and executed for 437.586 s. Queue wait is **0.19%** of the 356.5 s gap, so **scheduling is excluded**, and execution alone differs **5.348×**. Limits, as she states them: running→finished is the provider's window and holds provider-side overhead as well as processor time, and neither record captured `job.usage()`, so the residual is NOT shown to be the device. A runtime asymmetry is a fact about time, not variance: it neither rescues nor damages NOT MEASURED at 1.47σ. For the next flight, capture `job.usage()` beside the timestamps; a field not captured at flight time cannot be recovered later.
+
 **Cost.** The free account's registry balance went from 266 s to 258 s, and the second reading
 (09:26:03Z) came after FIXED finished (09:25:04Z). That is 8 s net, against a planned 17.3 s. The
 counter covers a trailing 28-day window, so a per-job sum need not reconcile with it.
