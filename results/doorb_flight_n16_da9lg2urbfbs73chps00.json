@@ -1,0 +1,41 @@
+{
+  "experiment": "doorb_unsigned_shadow",
+  "n": 16,
+  "eps_nominal": 0.3,
+  "shots": 25000,
+  "commitment_sha256": "338343d849a0d48c9e73358cdd6f4749cf093527e45ab579d2c939b47f386769",
+  "backend": "ibm_marrakesh",
+  "layout": "halves",
+  "granularity_R": 1,
+  "jobs": [
+    {
+      "job_id": "da9lg2urbfbs73chps00",
+      "rows": 2000,
+      "role": "calibration+gates"
+    },
+    {
+      "job_id": "da9lg8ke74ec73ajthe0",
+      "rows": 5000
+    },
+    {
+      "job_id": "da9lg94jbipc73ff0gpg",
+      "rows": 5000
+    },
+    {
+      "job_id": "da9lg9hqtnsc73d1nst0",
+      "rows": 5000
+    },
+    {
+      "job_id": "da9lga1qtnsc73d1nsu0",
+      "rows": 5000
+    },
+    {
+      "job_id": "da9lgakjbipc73ff0gqg",
+      "rows": 5000
+    }
+  ],
+  "cal_rows": 2000,
+  "cal_P_public": "XYZXYZXYZXYZXYZX",
+  "cal_position": "first rows of job 1",
+  "utc": "2026-08-29T22:07:38.347879+00:00"
+}
