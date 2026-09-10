@@ -1,0 +1,15 @@
+{
+ "backend": "ibm_marrakesh",
+ "pending_jobs_at_submit": 3,
+ "operational": true,
+ "snapshot_utc": "2026-09-10T09:17:33+00:00",
+ "calibration": {
+  "readout_error_mean": 0.036204020182291664,
+  "readout_error_max": 0.5048828125,
+  "readout_error_min": 0.002197265625,
+  "n_qubits": 156,
+  "last_update_date": "2026-09-10 08:20:05+00:00",
+  "note": "PUBLISHED values; F81 measured the true rate ~3.4x higher. Banked so epoch-dependence stays answerable after the job ages out."
+ },
+ "_label": "flyer-side submit snapshot, information only, not in the digest, not graded (ember general#26060 ruling; leg=FIXED)"
+}
