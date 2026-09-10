@@ -621,6 +621,9 @@ def rung_cost_s(shots):
     """Priced per-rung cost (c5093 pricing model COST_S, per job): weather gate + every planned
     job. This is the REGISTERED figure the fit check tests, not the science alone."""
     plan = rung_jobs(shots)
+    # CAL_ROWS, not the dual-probe WEATHER_ROWS (C5101, @ember general#25994): this prices a SCIENCE
+    # rung, and --weather-identity/--weather-rows are REFUSED outside --weather-only, so on every path
+    # that reaches this function WEATHER_ROWS == CAL_ROWS by construction. Weather-only never calls it.
     return COST_S(CAL_ROWS) + sum(COST_S(j["cal_rows"] + j["science_rows"]) for j in plan)
 
 
@@ -1281,8 +1284,8 @@ def main():
     print(f"  [PASS] G-EPOCH   {'registered budget fits' if a.copies else 'sized to the flight own epoch, not the probe'}")
     shots = shots_flight
 
-    jobs = [{"job_id": wjob.job_id(), "rows": CAL_ROWS, "role": "weather-gate",
-             "cal_P_public": P_cal, "cal_rows_range": [0, CAL_ROWS - 1], "science_rows_range": None}]
+    jobs = [{"job_id": wjob.job_id(), "rows": WEATHER_ROWS, "role": "weather-gate",
+             "cal_P_public": P_cal, "cal_rows_range": [0, WEATHER_ROWS - 1], "science_rows_range": None}]
     plan = rung_jobs(shots)
     flown_science, cal_manifest = 0, []
     for step in plan:
@@ -1322,7 +1325,7 @@ def main():
            "account": a.account, "instance_tail": ACCOUNT_CRN[-40:],
            "backend": bk.name, "calibration_last_update": calibration_stamp,
            "layout": "halves", "granularity_R": 1, "jobs": jobs,
-           "weather_rows": CAL_ROWS, "weather_P_public": P_cal, "weather_job": wjob.job_id(),
+           "weather_rows": WEATHER_ROWS, "weather_P_public": P_cal, "weather_job": wjob.job_id(),
            "cal_scheme": "matched-weight rule (b) k=4 at the sealed w, independent supports, fresh stream "
                          "(c5093 item 1); abs-match ~35,457 shots (item 2); each block rides FIRST in its own job",
            "cal_meas_rows": CAL_MEAS_ROWS, "cal_P_public": cal_manifest,
