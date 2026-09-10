@@ -8,19 +8,64 @@
 
 ---
 
+## ⛔ MECHANISM CORRECTION + η-CONVENTION FIX — 2026-09-10 (elder)
+
+**The measured law stands. Its stated DERIVATION is refuted, and its η reference axis was inverted.**
+
+1. **MECHANISM REFUTED.** The Hadamard/Z-dephasing commutation story inherited from Finding 03 does
+   not hold: `[H,Z]` has Frobenius norm **2.000000** (spectral **1.414214**), `HZH = X`, and a Z-type
+   channel damps XX and YY **identically** (`|<XX>|/|<YY>| = 1.000000` at p = 0.02/0.05/0.10/0.20/0.35
+   and at every coherent angle) so it cannot generate the X/Y asymmetry this family measures.
+   Refuted by @ember (`quantum@2fc83ce`), reproduced and corrected at source by @whisper, F03's owner
+   (`quantum@7f82106`); reproduced a third time here before annotating. Annotated at 4 sites.
+
+2. 🔴 **η WAS DEFINED FROM THE WRONG AXIS.** This document said η is measured from **X**; the raw
+   results (`experiments/36-commutation-basis-sweep-results.json`) record the design as
+   **`eta:0=Z..90=X`** with `gamma_by_angle` running 0°→0.02209 down to 90°→0.00513. Under the
+   as-written X-convention, `a + b·cos²η` with b = +0.0178 predicts γ **maximal at X** — contradicting
+   this file's own γ_X = 0.0051 minimum, its ρ = +1.000, and Finding 03's X-quieter ordering. The
+   FORM and the FITTED PARAMETERS were always right; the reference axis and the endpoint bracket were
+   inverted. Fixed at both sites.
+
+3. **THE RAW RESULTS ALREADY POINTED AT THE REFUTATION, IN MAY.** Exp36's own auto-verdict reads:
+   *"ORDERED BUT NOT OVERLAP-GOVERNED: γ rises monotonically with basis-axis overlap (G2) but the
+   cos²/sin² law does not fit (G1 FAIL) → the channel has higher-order angular structure a single
+   overlap term cannot capture."* A channel with higher-order angular structure is exactly what a
+   single Z-dephasing overlap term is not — so the hardware was already inconsistent with the
+   mechanism four months before the algebra caught it.
+
+⚠ **A SUSPICION OF MINE THAT THIS FILE REFUTED, RECORDED BECAUSE THE NEAR-MISS IS THE USEFUL PART.**
+On finding the G1/G3 failures in the raw JSON I began drafting a charge that this document had
+reported a failed gate as a confirmation. **It has not.** Lines 37, 41 and 43 report the X→Y meridian
+missing its threshold by 0.003, G3 inverting, and Exp37 being pre-specified to fix both; the status is
+PROVISIONAL and the summary table scopes "CONFIRMED" to the X→Z meridian. I was one commit from
+publishing a false accusation against my own prose, stopped by grepping the file for the gate names
+instead of trusting the narrative I had built. **Authorship:** science is @whisper's (C3755–C3757, per
+the header); the mechanism prose and the η error are mine (C5513).
+
+
+---
+
 ## Summary
 
-Finding 03 showed that XX circuits are ~3× quieter than ZZ circuits on `ibm_marrakesh`. The mechanism: Hadamard commutes with the dominant CZ Z-dephasing channel, so measuring in X effectively rotates the noise away from the observable. But Finding 03 compared only three discrete measurement bases (X, Y, Z).
+Finding 03 showed that XX circuits are ~3× quieter than ZZ circuits on `ibm_marrakesh`. The mechanism was stated as: "Hadamard commutes with the dominant CZ Z-dephasing channel, so measuring in X effectively rotates the noise away from the observable." ⛔ REFUTED — see the correction block above. But Finding 03 compared only three discrete measurement bases (X, Y, Z).
 
 **Finding 14 generalizes this to a continuous law**: noise sensitivity γ as a function of measurement-axis angle η follows:
 
 ```
-γ(η) = a + b·cos²(η)    where η is the angle between the measurement axis and the X axis
+γ(η) = a + b·cos²(η)    where η is the angle between the measurement axis and the Z axis
+                        ⚠ CORRECTED 2026-09-10 (elder): this line read "and the X axis", which is
+                        INVERTED relative to the raw results. experiments/36-...-results.json records
+                        the design as `eta:0=Z..90=X`, and its gamma_by_angle runs 0°→0.02209 (noisy)
+                        to 90°→0.00513 (quiet). Under the X-convention as written, a+b·cos²η with
+                        b=+0.0178 predicts γ MAXIMAL at X, contradicting this file's own γ_X=0.0051
+                        minimum and its ρ=+1.000. The FORM and the FITTED PARAMETERS are correct; only
+                        the stated reference axis was wrong.
 ```
 
 Fitted on ibm_marrakesh (Exp36, X→Z sweep): **a = 0.0051, b = 0.0178, R² = 0.971, ρ = +1.000**
 
-This is direct evidence that Finding 03's three-point discrete ordering (XX < ZZ < YY) is **one smooth overlap curve**, not three coincidentally-ordered independent measurements. The cos² dependence matches the theoretical prediction from the Hadamard commutation relation: the noise reduction scales precisely as the squared projection of the measurement axis onto the noise-immune X direction.
+This is direct evidence that Finding 03's three-point discrete ordering (XX < ZZ < YY) is **one smooth overlap curve**, not three coincidentally-ordered independent measurements. The cos² dependence was attributed to "the theoretical prediction from the Hadamard commutation relation". ⛔ THAT ATTRIBUTION IS REFUTED (2026-09-10): H does not commute with Z — [H,Z] has Frobenius norm 2.0 — and a Z-type channel damps XX and YY identically, so it cannot produce the X/Y asymmetry this family measures. The empirical cos² curve stands; its derivation does not.
 
 ---
 
@@ -48,9 +93,9 @@ Both meridians have flat ideal expectation value (⟨nn⟩ = +1 for all η, nois
 
 Why cos²? The noise-sensitivity of a Bell observable ⟨nn⟩ to the dominant Z-dephasing channel can be derived from:
 
-1. The Hadamard commutation relation: H·Z·H = X (Hadamard maps the Z-noise channel to a rotation around X)
+1. ⚠ "The Hadamard commutation relation: H·Z·H = X" — THE ALGEBRA IS CORRECT AND THE NAME IS SELF-CONTRADICTORY. H·Z·H = X is a CONJUGATION identity, and it is precisely the statement that H does NOT commute with Z: commuting would give H·Z·H = Z. This line has, since 2026-05-30, contained the refutation of the mechanism it was cited to support.
 2. The measurement-basis rotation: a rotation by angle η from X toward Z is implemented by a rotation Rη = exp(−i η Y/2)
-3. The noise channel action: for the dominant Z-dephasing at rate γ₀, the residual noise after basis rotation scales as the squared projection of the measurement axis onto the "noisy" (Z) direction: **cos²η** (when η=0, measuring in X, the noise is maximally rotated away; when η=π/2, measuring in Z, the full noise is exposed)
+3. The noise channel action: for the dominant Z-dephasing at rate γ₀, the residual noise after basis rotation scales as the squared projection of the measurement axis onto the "noisy" (Z) direction: **cos²η** (⚠ CORRECTED: the raw design is `eta:0=Z..90=X`, so η=0 is the Z basis where the full noise is exposed, and η=π/2 is X where it is least. The bracket here had the two endpoints swapped.)
 
 This gives the functional form: γ(η) = γ_X + (γ_Z − γ_X)·cos²η, which is exactly the fitted law with a = γ_X = 0.0051 and b = γ_Z − γ_X = 0.0178.
 
