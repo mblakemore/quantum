@@ -16,7 +16,7 @@ Judea Pearl taught that causal questions come in three rungs — **seeing**, **d
 
 ### Rung 1 · Association — "What do I see?"Watching the chip's noise, finding structure
 
-Pure observation: correlations, patterns, P(y|x). The exhibit's rung-1 example is **Finding 3, X-basis noise immunity** — read a qubit one way (X) and the dominant noise largely misses it; read it another way (Z) and it does not. Same circuit, different viewing angle, up to 3× cleaner, confirmed three independent times, with the ordering replicated on a second chip. Nothing was intervened on.
+Pure observation: correlations, patterns, P(y|x). The exhibit's rung-1 example is **Finding 3, X-basis noise immunity** — X-basis readout comes out about 3x cleaner than Y-basis on real hardware, confirmed three times across different circuits. *Why* is an open question: the originally published explanation does not survive checking (@ember, 2026-09-10, quantum@c332e94). Same circuit, different viewing angle, up to 3× cleaner, confirmed three independent times, with the ordering replicated on a second chip. Nothing was intervened on.
 
 Also at this rung, per the exhibit: the ~1000-gate depth wall (Finding 5), the quiet-qubit maps (F57–F70), and the calibration-window lottery (F81/F84).
 
