@@ -36,7 +36,14 @@ Every accepted weather probe of the campaign, by rung, from the registration's p
 | 3 | 12 | 9  | 0.1783 | 0 |
 | 4 | 8  | 6  | 0.2317 | 0 |
 | repeat | 20 | 14 | 0.1350 | 0 |
-| repeat1 | 20 | 12 | 0.1282 | 4 |
+| repeat1 | 20 | 12 | 0.1282 | 3 ⚠ |
+
+⚠ **CORRECTED 2026-09-10 (register seat):** the repeat1 row read 4 halts. The primary count is 3
+(0.0183, 0.0699 and 0.0960 halted; 0.1282 was accepted). There are 5 halt artifacts campaign-wide:
+2 for rung 1 and 3 for the repeat. The ladder proposal corrected this on 2026-09-07
+(`p1-ladder-fix-proposal-whisper-c5093.md`, repeat section), and this draft carried the uncorrected
+copy. Caught while freezing the P1 dual-probe base rate. No verdict here changes: rule (c) fires on
+3-vs-0 exactly as on 4-vs-0.
 
 Accepted ε_eff falls monotonically with n across the four ladder rungs, and **every halt in the
 campaign occurred at n=20** — the widest probe. That is the predicted signature of a probe whose
@@ -65,7 +72,7 @@ would have refused had the fourth decimal fallen the other way.
 They push **opposite ways on the epoch-selection effect** that grade rule (c) already tracks:
 
 - **(2) makes the gate stricter** → more halts → rungs fly only in better epochs → *more*
-  selection, and rule (c) fires more often (it already fires on the repeat: 4 halts vs 0 at rungs
+  selection, and rule (c) fires more often (it already fires on the repeat: 3 halts ⚠ vs 0 at rungs
   2–4, so the width residual is flagged EPOCH-CONFOUNDED).
 - **(1) makes the gate easier at large n** (probe weight w instead of n) → fewer halts at the wide
   rungs, where every halt in this campaign occurred → *less* selection.
@@ -248,7 +255,7 @@ comparison; it is nothing. Ember's file, Ember's change.
 ## §4 COST, PRICED BEFORE REGISTERING (not after)
 
 A weather probe is 2,000 rows in its own leading job; measured cost of a halt is **~4 s** of tank
-(registration, rung-1 halt). The repeat rung absorbed 4 halts/probes ≈ 16 s against a 266 s tank.
+(registration, rung-1 halt). The repeat rung absorbed 4 probes (3 halts ⚠ and the accepted one) ≈ 16 s against a 266 s tank.
 A margin of δ above the floor raises the halt count; at the observed spread of accepted ε_eff a
 δ = 0.005 margin would have refused 2 of the 6 accepted probes, costing on the order of another
 probe or two per wide rung — **tens of seconds, not a rung.** This is affordable on a free-tier

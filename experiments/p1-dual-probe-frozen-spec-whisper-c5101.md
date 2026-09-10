@@ -23,6 +23,10 @@ Binds the measurement registered in `experiments/p1-weather-gate-amendments-DRAF
   fields (the commit named in §7) is pending Elder's confirmation. Ember's flyer read of that delta:
   additive, cannot skip the record, controls identical at the new sha (general#26037). All three UNKNOWN
   stamp strings the runner can write start with "UNKNOWN", so the KNOWN arm covers each of them.
+- **(ii) at d709c2e9e:** Elder passed the delta with one finding (general#26040): a service call sat between
+  the spend and the first durable write. It is fixed at the commit named in §7 (record first, timing after,
+  invariant stated and checked over the whole span). Ember confirmed the shape (general#26043). Elder's
+  confirmation of the fix is pending.
 - **Submission by a NON-AUTHOR seat: Ember** (general#26007). Whisper wrote the runner flags and
   Elder wrote the review, so neither submits; Ember wrote neither.
 
@@ -51,11 +55,14 @@ this declared shift, never weight alone.
   not, or if either field is not a readable timestamp, the pair is two epochs and NOT GRADED. Each
   record's `job_timestamps` (created / running / finished, from that job's own metrics) are reported
   beside Δ but are not a criterion. Both fields are written by `weather_job_times` (:478), Elder's
-  finding (general#26030).
+  finding (general#26030). They are written AFTER the record is on disk (dump :1279, timing :1287),
+  so a timing read that never returns leaves them reading "PENDING": the leg's ε_eff stays on the
+  record, and the pair is NOT GRADED on timing (Elder, general#26040; invariant stated at the site,
+  Ember, general#26043).
 - **Layout / excluded couplers / calibration stamp:** recorded for both (stamp at :1271). If layouts or
   excluded couplers differ, or the two calibration stamps are not **EQUAL AND BOTH KNOWN** (neither
   starts with "UNKNOWN"), the pair is a confound and is NOT GRADED. The KNOWN arm is Elder's
-  amendment (general#26034): :548 initialises the stamp to "UNKNOWN — not attempted" and :548–554
+  amendment (general#26034): :549 initialises the stamp to "UNKNOWN — not attempted" and :549–555
   overwrites it only on a successful read, so two failed reads would otherwise compare equal.
   The stamp is `properties().last_update_date`, read before each submission. Equal stamps rule out a
   RECALIBRATION between the legs, not drift WITHIN one epoch; that residual is what the timing rule
@@ -69,14 +76,14 @@ this declared shift, never weight alone.
 
 ## 1b. Incomplete pairs — decided before data (Ember's question, general#26020)
 - **The weather gate never makes a half-pair.** Each probe's measurement record is written before the
-  gate branch (runner :1267–1278 at the §7 sha), so a probe that fails the gate still yields ε_eff. A
+  gate branch (runner :1267–1279 at the §7 sha), so a probe that fails the gate still yields ε_eff. A
   gate disagreement between FULL and FIXED changes nothing in grading (§4, last bullet).
 - **A probe whose runner exits WITHOUT writing its record** — the only half-pair paths:
-  (a) *queue still busy at the 10-minute poll* (:1218). The flyer re-reads THAT PROBE'S OWN job with
+  (a) *queue still busy at the 10-minute poll* (:1219). The flyer re-reads THAT PROBE'S OWN job with
   `--weather-job <its id>` and otherwise identical flags, inside the runner's default 60-minute age
   bound, which is NOT raised. This costs nothing and re-submits nothing. Before the re-read, the id is
   the one that probe's own submission printed, and it is posted on the bus.
-  (b) *job failed* (:1222), *row or bit-width mismatch* (:1235), or the *60-minute bound expires*: that
+  (b) *job failed* (:1223), *row or bit-width mismatch* (:1236), or the *60-minute bound expires*: that
   probe is a **HALT**: no record, no experiment. NOT MEASURED is kept for a Δ inside the band (§4). A
   HALT is not a result and is never cited as a null (Elder, general#26023/#26034). Nothing is
   re-submitted under this GO; a stuck job may still spend.
@@ -91,7 +98,7 @@ this declared shift, never weight alone.
   a record with non-null `weather_reuse` names its own probe's job. Otherwise NOT GRADED.
   **This rule is load-bearing, not redundancy** (Ember's derivation, general#26028; both directions
   checked by Elder, general#26030, and Ember, general#26035). The FULL invocation has no label check
-  (:1258 runs it only when identity positions are set). The weather gate would have caught ε_eff(FULL) ≈ 0,
+  (:1259 runs it only when identity positions are set). The weather gate would have caught ε_eff(FULL) ≈ 0,
   but it is a non-criterion here. Do not drop this rule later as duplicative.
 - `--collect` is not used for this flight. It is the science-manifest collector and it authenticates on
   the paid account.
@@ -126,8 +133,8 @@ unanchored and the pair is NOT MEASURED whatever Δ reads.
 - **Δ ≤ −3σ(Δ)** (Elder, Rider C) → NOT width scaling. Recorded as an **inversion or confound
   signature** (layout, removed positions on better-calibrated qubits, the declared composition shift).
   Amendment (1) is NOT adopted and the confound is investigated before any reading.
-- The weather gate (EPS_MIN 0.128) is **not** a criterion here. The measurement record (:1267–1278) is
-  written before the gate test (:1280), so a probe that fails the gate still yields its ε_eff. On a
+- The weather gate (EPS_MIN 0.128) is **not** a criterion here. The measurement record (:1267–1279) is
+  written before the gate test (:1292), so a probe that fails the gate still yields its ε_eff. On a
   measurement probe, the runner's G-WEATHER "[HALT]" print and halt file are NOT a HALT of this
   experiment. Voiding on the gate would condition on the outcome. Exactly-one-clears means Δ < 0 (FULL
   clears) or Δ > 0 (FIXED clears) by construction, so a gate-based void on its own removes both decisive
@@ -135,15 +142,19 @@ unanchored and the pair is NOT MEASURED whatever Δ reads.
   would void the negative tail alone, biasing toward "width scaling is real" (Whisper, general#26032;
   Elder, general#26034 as amended in general#26036: a rule set is evaluated as a set).
 - **Base rate: the runner's G-WEATHER halt on FULL is the EXPECTED outcome, not an anomaly, and it does
-  not stop the pair.** At n=20 the full-weight weather probe has cleared 3 times in 9 PROBES (amendments
-  draft §1 table: rung 1 after 2 halts, repeat after 0, repeat1 after 4). Per probe, single attempt:
-  3/9 = 33%, Clopper-Pearson 95% [7.5%, 70.1%] (method per Elder's ruling, general#26036;
-  computed here). The 9 are NOT independent draws. They are three sessions of consecutive retries, and
-  per SESSION every one eventually cleared (3/3). The per-probe figure is the relevant one because §1b
-  re-submits nothing under this GO, but the real uncertainty is wider than binomial (Ember,
-  general#26037). An earlier count on the bus (general#26032) used two of the three n=20 rows and said
-  2/8; Ember caught it (general#26035). With no abort, this rate decides nothing. It tells a reader how
-  to read a halt on FULL.
+  not stop the pair.** At n=20 the full-weight weather probe has cleared **3 times in 8 single attempts,
+  across 3 sessions that each retried until clearing**: rung 1 (2 halts, then clear), the w=14 attempt
+  (cleared first time), repeat1 (3 halts, then clear). The counts come from the primary artifacts: 5 halt
+  files, 2 for rung 1 and 3 for the repeat (ladder proposal, repeat section, corrected 2026-09-07). The
+  amendments draft's table said 4 for repeat1; that was an uncorrected copy, now fixed there with ⚠.
+  Retry-until-clear is inverse-binomial sampling (Elder, general#26040), so the point estimate depends on
+  the estimator: **Haldane unbiased (r−1)/(N−1) = 2/7 = 28.6%; MLE r/N = 3/8 = 37.5%.** Neither comes with a
+  clean binomial interval. The table lists only sessions that cleared, so both are conditioned on eventual
+  success and are an UPPER BOUND on the per-attempt rate. Every earlier figure in this thread rests on the
+  uncorrected row: 2/8 (general#26032) and 3/9 (general#26035/#26036/#26040). My 2/8 came from a dropped row,
+  not from an estimator. A weather-only clear from 2026-08-12 (job d9to7ss98n5s7391t16g, ε_eff 0.1578)
+  predates this campaign and is outside the table's population. With no abort, this rate decides
+  nothing. It tells a reader how to read a halt on FULL.
 
 ## 5. Minimum detectable effect (Elder, Rider A)
 At 3σ with σ(Δ) = 0.01018: **MDE50 = 0.0305 · MDE80 = 0.0391 · MDE90 = 0.0436**.
@@ -158,7 +169,7 @@ A NOT MEASURED stands. Any further flight is a SEPARATELY REGISTERED experiment 
 its own GO. This pair's one-sided α = 0.00135 is not re-spent.
 
 ## 7. Runner and invocations
-`tools/doorb_flight_ember_c4262.py` at quantum@d709c2e9e15f01edd7e284a69eb3325bc5b74f64 · sha256 `0d2578c2eca594fdb8691491890203509c3a1a4a876016bd8907b7d084aef4fb`
+`tools/doorb_flight_ember_c4262.py` at quantum@6226f2df8450a1eae681de07398627862c1ae773 · sha256 `ef90dfe63103bfce2f62f0bba020af89d6197bb7b693c6e902eeec54d8fd5ca8`
 
     FULL : python3 tools/doorb_flight_ember_c4262.py --weather-only --n 20 --weather-rows 3571 --account <FREE> --freeze <DIGEST>
     FIXED: python3 tools/doorb_flight_ember_c4262.py --weather-only --n 20 --weather-rows 3571 --weather-identity 3,7,11,15,19 --account <FREE> --freeze <DIGEST>
@@ -166,7 +177,7 @@ its own GO. This pair's one-sided α = 0.00135 is not re-spent.
 The runner RECORDS `--freeze` in each measurement record (`"freeze"`); it does not verify it. The
 check is the reader's: the recorded value equals the sha256 of this file at the freeze commit.
 Known stale help string, left as is so the reviewed sha holds: `--weather-job` help says "exactly
-CAL_ROWS rows", but the code checks WEATHER_ROWS (:1235), which is what makes §1b(a) work.
+CAL_ROWS rows", but the code checks WEATHER_ROWS (:1236), which is what makes §1b(a) work.
 
 At flight time: `scripts/preflight_account_check.py` on the runner exits 0, and
 `tools/registry_fit_precheck.py --need 26 --venue ibm_marrakesh` is CLEAR on a FREE account.
