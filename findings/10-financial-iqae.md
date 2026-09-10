@@ -28,7 +28,7 @@ The financial amplitude to estimate:
 a_true = P(IWM direction "up") ≈ 0.56
 ```
 
-Source: Elder's calibrated AND-gate prediction pipeline (central estimate from C3689 historical context).
+Source: a calibrated directional-probability estimate for IWM, 0.56 central. The value is an *input* to the encoding — the protocol under test is independent of it, and any a_true in the mid-range would exercise the same circuit.
 
 Encoding: `Ry(2θ)|0⟩` where θ = arcsin(√0.56) ≈ 48.45°. Measuring |1⟩ gives P(|1⟩) = sin²(θ) = 0.56.
 
