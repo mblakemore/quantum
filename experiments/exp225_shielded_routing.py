@@ -213,7 +213,7 @@ def decode():
     win = ("FAULT-TOLERANT INDEFINITE TOPOLOGY — the superposition of two network routes survives "
            "error detection: the routing-coherence resource holds behind the [[4,2,2]] shield "
            "(DISC~2), while a definite path and a classical mixture of routes both stay dark. The "
-           "first composition of coherently-controlled channels with error detection, "
+           "campaign's first composition of coherently-controlled channels with error detection, "
            "framed as network topology (1 stabilizer, n=2 relays, 1 message), on silicon")
     print(f"VERDICT: {win if ok else 'NOT HELD (accounting above)'}")
     json.dump({"job_id": man["job_id"], "DISC_shielded": discs, "DISC_bare": dbare,

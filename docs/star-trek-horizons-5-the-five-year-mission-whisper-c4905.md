@@ -348,7 +348,7 @@ because both halves are certified and shallow.
 | 6 | **P6 Federation Computer** (distributed computation) | invention | 2 jobs | ✅ **FLOWN** — Exp217–222 (6 flights): the full distributed error-corrected quantum computer |
 | 7 | **P7 Contextuality fuel** (magic square) | wildcard | 1–2 jobs | ⚠️ **ATTEMPTED, NOT CERTIFIED** (Exp228, C4913) — the Ȳ-readout wall CRACKED (2-qubit Y products, YYYY stabilizer + Bell columns), but the state-independent joint-readout witness is TAUTOLOGICAL (χ=6.000±0.000, caught via zero variance). Real P7 needs the pseudo-telepathy GAME (shielded) or ancilla/sequential measurement — a proper next build |
 | — | *— further horizons (boldly-go tier) —* | | | |
-| 8 | **P8 Indefinite network topology** | leap | 1–2 jobs | ✅ **FLOWN** (Exp224, C4911) — indefinite routing certified: DISC_coherent=1.942 (515σ) beats definite (0.007) AND classical-mixture-of-routes (0.060) nulls; first superposed network route |
+| 8 | **P8 Indefinite network topology** | leap | 1–2 jobs | ✅ **FLOWN** (Exp224, C4911) — indefinite routing certified: DISC_coherent=1.942 (515σ) beats definite (0.007) AND classical-mixture-of-routes (0.060) nulls; the campaign's first superposed network route (not a world-first claim) |
 | 9 | **P9 Dilithium chamber** (dynamical memory) | leap | 1–3 jobs | ⬜ **OPEN** — the unused exotic-phases wing (scars/DTC); staged lifetime flight first |
 | 10 | **P10 The Holodeck** (gravity-analog suite) | synthesis | 1–2 jobs | ⬜ **OPEN** — unify the H2 arc (twin paradox + HP recovery on one decoherence curve) |
 | 11 | **P11 The Zeno brace** (measurement protection) | leap | 1 job | ⬜ **OPEN** — cheapest instrument (F102, 0 2q) stacked on the code; second protection axis |
