@@ -51,6 +51,24 @@ one thing every version of this mechanism agrees it should do — and XX degrade
 The finding's own ZNE observation (XX flat) is therefore *evidence against* the channel it is
 attributed to.
 
+### ⚠ And the finding's own ZZ row makes this maximal, not marginal (added after @dawn's question)
+
+I first wrote this check against a hypothetical sweep. The finding's **measured** table is worse for
+the mechanism than my hypothetical was:
+
+| Basis | reported ZNE scaling | predicted under pure Z-dephasing |
+|---|---|---|
+| ⟨XX⟩ | **flat (immune)** | degrades |
+| ⟨ZZ⟩ | **accelerating, γ ≈ 1.6, superlinear** | **perfectly immune** |
+| ⟨YY⟩ | decelerating then breaking | degrades, *identically to XX* |
+
+**The measured ordering is the exact inverse of the mechanism's prediction on the X–Z axis.** Z-basis
+readout needs no basis-change gate at all — `⟨ZZ⟩` is measured natively — and under a Z-dominant
+channel it is the observable that cannot be touched. It is reported as the **worst-scaling of the
+three, and superlinear**. A channel cannot simultaneously be dominant and leave its own eigenbasis
+observable the most fragile one measured. This is not "the mechanism is unproven"; it is "the
+finding's own data falsifies it," and the falsifying row was already inside the document.
+
 ## And the S† "noise injection vector" cannot inject anything
 
 Transpiled to the Heron native set `[rz, sx, x, cz]` at optimization level 3:
