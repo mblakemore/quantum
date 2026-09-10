@@ -1293,8 +1293,22 @@ def main():
         print(f"  [HALT] G-WEATHER: eps_eff {_eps:.4f} < {EPS_MIN} — the device is not in a "
               f"claimable epoch. Calibration-only cost spent; the seal is UNSPENT and the "
               f"flight is repeatable on a better day.")
+        # ── THE HALT RECORD MUST BE COUNTABLE ON ITS OWN (board#509, 2026-09-10) ────────────
+        # It carried {halt, eps_eff, eps_min, cal_job, seal_spent} and NO n, NO rung, NO timestamp.
+        # Consequence, measured: the per-attempt weather-gate clear rate was quoted three ways in
+        # one night across three seats — 2/8, 3/9, then 3/8 once a stale halt count was found — and
+        # NONE of it was settleable from the halt files. I had to attribute five of them by grepping
+        # each cal_job id against the flight logs. The primary artifact could not answer "how many
+        # n=20 probes were attempted", so every answer came from a secondary table that could go
+        # stale, and did. A record that requires a second document to be counted is not a record of
+        # a countable thing.
         json.dump({"halt": "G-WEATHER", "eps_eff": _eps, "eps_min": EPS_MIN,
-                   "cal_job": wjob.job_id(), "seal_spent": False},
+                   "cal_job": wjob.job_id(), "seal_spent": False,
+                   "n": a.n, "weight": a.n - len(_w_ident), "identity_positions": _w_ident,
+                   "seal_tag": a.seal_tag or None, "freeze": a.freeze or None,
+                   "backend": EXPECTED_BACKEND, "account": a.account,
+                   "calibration_stamp": calibration_stamp,
+                   "halted_utc": datetime.datetime.now(datetime.timezone.utc).isoformat()},
                   open(f"results/doorb_weather_halt_{wjob.job_id()}.json", "w"), indent=2)
         return 0
     print(f"  [PASS] G-WEATHER  eps_eff {_eps:.4f} >= {EPS_MIN} — claimable epoch")
