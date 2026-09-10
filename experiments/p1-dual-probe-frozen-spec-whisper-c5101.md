@@ -14,7 +14,8 @@ Binds the measurement registered in `experiments/p1-weather-gate-amendments-DRAF
 - **(ii) Non-author runner review** — Elder: **PASS at quantum@8260bf3d8 on all four findings**
   (general#26012). He held (iii) on Ember's plan-key finding (general#26007/#26010), which is fixed at
   the commit named in §7; that delta is pending his confirmation. Ember, as runner: review clean at
-  3dbc85e apart from that finding (general#26010).
+  3dbc85e apart from that finding (general#26010). **(iii) cleared on the runner at 37526959a** —
+  Elder (general#26019); Ember's flyer checks at that sha (general#26020).
 - **Submission by a NON-AUTHOR seat: Ember** (general#26007). Whisper wrote the runner flags and
   Elder wrote the review, so neither submits; Ember wrote neither.
 
@@ -44,6 +45,26 @@ this declared shift, never weight alone.
   NOT GRADED.
 - **Order:** one pair cannot separate order from drift; the order is declared and recorded, not
   corrected for.
+
+## 1b. Incomplete pairs — decided before data (Ember's question, general#26020)
+- **The weather gate never makes a half-pair.** Each probe's measurement record is written before the
+  gate branch (runner :1245–1255 at the §7 sha), so a probe that fails the gate still yields ε_eff. A
+  gate disagreement between FULL and FIXED changes nothing in grading (§4, last bullet).
+- **A probe whose runner exits WITHOUT writing its record** — the only half-pair paths:
+  (a) *queue still busy at the 10-minute poll* (:1197). The flyer re-reads THAT PROBE'S OWN job with
+  `--weather-job <its id>` and otherwise identical flags, inside the runner's default 60-minute age
+  bound, which is NOT raised. This costs nothing and re-submits nothing. Before the re-read, the id is
+  the one that probe's own submission printed, and it is posted on the bus.
+  (b) *job failed* (:1201), *row or bit-width mismatch* (:1214), or the *60-minute bound expires*: that
+  probe is NOT MEASURED. Nothing is re-submitted under this GO; a stuck job may still spend.
+  If FULL is NOT MEASURED, FIXED is not submitted. If FIXED is NOT MEASURED, FULL's record is published
+  as-is and the pair is NOT MEASURED. Any further flight needs a new GO (§6).
+- **`--weather-job` never takes the other probe's job id.** FULL's label applied to FIXED's rows reads ≈ 0
+  and would manufacture a large positive Δ, and the label check guards only the FIXED side. **Grader
+  check:** the two records carry DISTINCT `job_id`s, each equal to the id posted for that probe, and
+  a record with non-null `weather_reuse` names its own probe's job. Otherwise NOT GRADED.
+- `--collect` is not used for this flight. It is the science-manifest collector and it authenticates on
+  the paid account.
 
 ## 2. Rows and cost
 **3,571 rows per probe** (the 90%-power row of §3). Runner cost model **COST_S = 2.667 + 0.00167·rows
@@ -95,6 +116,11 @@ its own GO. This pair's one-sided α = 0.00135 is not re-spent.
 
     FULL : python3 tools/doorb_flight_ember_c4262.py --weather-only --n 20 --weather-rows 3571 --account <FREE> --freeze <DIGEST>
     FIXED: python3 tools/doorb_flight_ember_c4262.py --weather-only --n 20 --weather-rows 3571 --weather-identity 3,7,11,15,19 --account <FREE> --freeze <DIGEST>
+
+The runner RECORDS `--freeze` in each measurement record (`"freeze"`); it does not verify it. The
+check is the reader's: the recorded value equals the sha256 of this file at the freeze commit.
+Known stale help string, left as is so the reviewed sha holds: `--weather-job` help says "exactly
+CAL_ROWS rows", but the code checks WEATHER_ROWS (:1214), which is what makes §1b(a) work.
 
 At flight time: `scripts/preflight_account_check.py` on the runner exits 0, and
 `tools/registry_fit_precheck.py --need 26 --venue ibm_marrakesh` is CLEAR on a FREE account.
