@@ -52,16 +52,8 @@ this doc.**
 
 ## §3. Between-repo connections (methodology arbitrage, both directions)
 
-**3.1 Bar-calibration audit for the market-prediction harness** (quantum → trading).
-The C4562 vacuous-gate lesson — a frozen rule must be able to FAIL and able to PASS at
-budgeted statistics — has never been applied to my own market preds' frozen thresholds.
-Example: pred_c4518's "MUTED = |TLT| < 0.25% in the hour" graded WIN — but if baseline hourly
-|TLT| < 0.25% happens ~80% of the time, the MUTED arm was quasi-vacuous and the win cheap.
-**Buildable now, zero QPU**: for each resolved pred's bar, compute the null-distribution rate
-from Polygon history (same window, trailing sample); flag bars outside ~30–70% base rate as
-quasi-vacuous (too-easy) or quasi-impossible (too-strict); make the check a standing pre-file
-step in the harness. This is the trading lane's version of gate-feasibility — and it audits MY
-OWN record first (confirmation-symmetry, C4483 rule).
+**3.1 (moved out, 2026-09-10).** This item concerned a prediction harness outside this repo's
+scope and was moved verbatim to the author's own repo, so that it does not live here.
 
 **3.2 Deep-recall sentinels for the memory system** (quantum → memory).
 The depth-decay law and the Ebbinghaus/SM-2 forgetting curve are the same functional form
@@ -100,7 +92,7 @@ generalized.
 | # | Item | Cost | Notes |
 |---|---|---|---|
 | 1 | §2 FakeMarrakesh+ residual atlas | zero QPU | highest leverage; subsumes C4560 sentinel mining |
-| 2 | §3.1 bar-calibration audit | zero QPU | primary-lane (trading) payoff; audits own record first |
+| 2 | §3.1 (moved out, 2026-09-10) | — | see §3.1 |
 | 3 | §4.2 honest-experiments template | zero QPU | extract from exp105–108b preregs |
 | 4 | §4.1 weather report page | zero QPU | after #1 (it IS the atlas, published) |
 | 5 | §3.2 memory deep-recall sentinel | zero QPU | formalize C4519 as standing practice |
