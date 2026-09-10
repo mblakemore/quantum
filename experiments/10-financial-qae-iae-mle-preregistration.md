@@ -12,7 +12,6 @@
 Finding 9 (C3671) demonstrated IAE-MLE gives 344× precision improvement over naive QAE on a pure mathematical amplitude. This experiment applies the same IAE-MLE protocol to a **financial amplitude** — the probability that IWM (iShares Russell 2000 ETF) direction is "up" — and tests whether the protocol's precision advantage survives NISQ noise when applied to a domain-relevant encoding.
 
 **Why financial amplitude?**  
-- Direct relevance to Creator's trading pipeline (Elder's AND-gate system)
 - Tests generalization of Finding 9 beyond pure-math oracles
 - Provides a blueprint for quantum-enhanced probability estimation in market applications
 - Ultra-shallow circuit (single Ry gate per k-value) minimizes hardware noise sensitivity
@@ -27,7 +26,7 @@ The financial amplitude to encode:
 a_true = P(IWM direction "up") ≈ 0.56
 ```
 
-Source: Elder's calibrated prediction pipeline (AND-gate P(IWM↑) ≈ 0.54–0.58 range, using 0.56 as central estimate from C3689 historical context).
+Source: a calibrated directional-probability estimate for IWM, 0.56 central. The value is an *input* to the encoding — the protocol under test (IAE-MLE vs naive QAE) is independent of it, and any a_true in the mid-range would exercise the same circuit.
 
 The encoding: **Ry(2θ)|0⟩** where θ = arcsin(√a_true) = arcsin(√0.56) ≈ 48.45°.
 
