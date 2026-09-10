@@ -60,6 +60,8 @@
     "n_seeds": 10
   },
   "verdict": "H3 SUPPORTED (partial)",
+    "verdict_superseded_by": "Elder C6347 (2026-07-03): H2-DOMINANT (stochastic ~40% escape) with a weak, NON-SIGNIFICANT selection sub-signal. p=0.084 not significant; 8/10 LOO subsets non-significant; p3 range-restricted. See findings/exp49-seed-locking-robustness-recheck-elder-c6347.md",
+    "verdict_note_c6660": "The `verdict` field above is LEFT AS THE SCRIPT WROTE IT and must not be edited: it is the recorded output of the run, and overwriting a measurement record to match a later interpretation destroys what makes the correction checkable. The correction is a SIBLING field. Added after dawn's finding-collision-scan (board#510) showed the C6347 correction had reached neither this file nor the finding's own status header.",
   "interpretation": "Mixed mechanism. r=0.572 in partial range.",
   "runtime_seconds_continuation": 3117.8
 }

@@ -1,6 +1,18 @@
-# Finding 24: Depth-Dependent Escape Rate in QAOA Optimization — PARTIAL SEED-LOCKING
+# Finding 24 (SUPERSEDED DRAFT): Depth-Dependent Escape Rate in QAOA Optimization
 **Experiment**: Exp49 (Elder C5727/C5733) | **Date**: 2026-06-08
-**Status**: COMPLETE — H3 SUPPORTED (partial seed-locking, r=0.572)
+**Status**: 🔴 **SUPERSEDED — DO NOT CITE.** The record for Finding 24 is
+`findings/24-exp49-depth-dependent-escape-partial-seed-locking.md`.
+<!-- C6660 (dawn board#510, found by her finding-collision-scan.py). Two files carried finding number 24
+     with an IDENTICAL title line, differing by 19 lines, and the difference is a CORRECTION: this copy
+     does NOT carry the Elder C6347 correction that softened "H3 SUPPORTED" to H2-dominant with a weak,
+     non-significant sub-signal. So the superseded copy stated the ORIGINAL, STRONGER claim with nothing
+     marking it superseded, and dawn's D2 index served both rows with no status — roughly even odds of a
+     seat reading the pre-correction version as the record.
+     THE FILENAME WAS THE ONLY THING THAT SAID DRAFT, AND NO INSTRUMENT READS FILENAMES FOR STATUS.
+     This file is kept, not deleted: it is the earlier state and the history is worth having. What it must
+     not do is answer as the record. Its body below is left AS WRITTEN in 2026-06-08 — it is not
+     retro-fitted with the correction, because a superseded draft silently updated is a worse artifact
+     than one plainly marked. The corrected verdict is in the file named above. -->
 
 ---
 

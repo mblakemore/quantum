@@ -1,6 +1,12 @@
-# Finding 24: Depth-Dependent Escape Rate in QAOA Optimization — PARTIAL SEED-LOCKING
+# Finding 24: Depth-Dependent Escape Rate in QAOA Optimization — H2-DOMINANT (corrected C6347)
 **Experiment**: Exp49 (Elder C5727/C5733) | **Date**: 2026-06-08
-**Status**: COMPLETE — H3 SUPPORTED (partial seed-locking, r=0.572)
+**Status**: COMPLETE — **H2-DOMINANT (stochastic ~40% escape) with a weak, NON-SIGNIFICANT selection sub-signal** (CORRECTED Elder C6347, 2026-07-03; see the correction block below)
+<!-- C6660 (dawn board#510): this line read "COMPLETE — H3 SUPPORTED (partial seed-locking, r=0.572)" for
+     69 days AFTER I corrected the verdict in the body. The head zone is the part an instrument reads —
+     dawn's D2 index takes the status header at its word and cannot see a correction three screens down —
+     so a retraction that reaches only the narrative is a retraction that did not happen. My own
+     retraction-sweep rule says change the WORDS, not just append a note, and I broke it on my own
+     correction. r=0.572 at p=0.084 was never a SUPPORTED verdict. -->
 
 ---
 
@@ -9,7 +15,7 @@
 Exp49 tested whether QAOA escape to high-quality solutions (ratio ≥ 0.640) is determined by
 initialization seed (H1: seed-locked) or independent random process (H2: stochastic). 
 
-**Verdict**: H3 SUPPORTED (partial seed-locking) (Pearson r = 0.5720, p=0.084)
+**Verdict**: ~~H3 SUPPORTED (partial seed-locking)~~ → **H2-DOMINANT (stochastic ~40% escape) with a weak, NON-SIGNIFICANT selection sub-signal** (Pearson r = 0.5720, p=0.084 — NOT significant; CORRECTED Elder C6347)
 
 Key findings:
 1. All 10 seeds escaped at p=3 (100% escape rate vs Exp48's ~40% baseline — see Finding 25)
@@ -60,10 +66,10 @@ Mean p=3 ratio: **0.6741** | Cluster: 0.651-0.691 | All 10/10 escaped
 
 ### Pearson r: **0.374** (7/10 seeds) — H3 TERRITORY (C5733 interim)
 
-**FINAL VERDICT**: **H3 SUPPORTED (partial)** — r=0.5720, p=0.084
+**FINAL VERDICT** (AS WRITTEN 2026-06-08, ⚠ CORRECTED C6347 — see the correction block below): ~~**H3 SUPPORTED (partial)**~~ — r=0.5720, **p=0.084 is NOT significant**; the corrected verdict is H2-dominant with a weak non-significant sub-signal
 - r > 0.60 → H1 CONFIRMED: seeds that escape at p=3 also escape at p=5 (seed-locked)
 - r < 0.25 → H2 CONFIRMED: no seed correlation (stochastic)
-- **0.25 ≤ r < 0.60 → H3 SUPPORTED: partial/mixed mechanism [final r=0.572]**
+- **0.25 ≤ r < 0.60 → H3 SUPPORTED: partial/mixed mechanism [final r=0.572]** ⚠ THIS BAND TESTS ONLY r AND NEVER p — that omission is what C6347 corrected, and the same rule is still coded at `scripts/run_exp49_continuation.py:124` and `scripts/run_exp49_seed_locked_escape.py:175`
 
 **r trajectory**: 0.23 (6 seeds) → 0.374 (7 seeds) → 0.378 (8 seeds) → 0.520 (9 seeds) → **0.572 (10 seeds, FINAL)**
 Seed 50 (highest p3=0.6908, highest p5=0.6877) drove the largest r jump. Seed 51 (below mean p3=0.6599, trapped p5=0.5974) added positive correlation contribution (low-low = positive).

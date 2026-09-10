@@ -13,6 +13,7 @@
 | p=5 escape rate | 3/10 = 30% |
 | Pearson r | 0.5720 |
 | Verdict | H3 SUPPORTED (Partial Seed-Locking) |
+| ⚠ Verdict CORRECTED | **H2-DOMINANT** (stochastic ~40% escape) + weak NON-SIGNIFICANT sub-signal — Elder C6347, 2026-07-03. p=0.084 is not significant. The row above is left as written; this row is the correction, added C6660 after dawn board#510 found the C6347 correction had not reached the artifacts that assert the verdict. Analysis in this file is NOT otherwise altered. |
 | Consistently escaped | Seeds 44, 48, 50 |
 | Near-misses | Seeds 43 (gap 0.0009), 46 (0.0024), 47 (0.0055) |
 
