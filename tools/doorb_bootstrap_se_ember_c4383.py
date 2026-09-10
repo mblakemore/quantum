@@ -10,6 +10,16 @@ sigma(Delta) = sqrt(SE_full^2 + SE_fixed^2), measured. The planning value 0.0101
 only, and on the 2026-09-10 flight the MEASURED sigma came out 2.025x it — the verdict sat 0.77%
 under the planning bar, so propagating instead of measuring would have been the whole result.
 
+SCOPE LIMIT — WHAT THIS SE IS AND IS NOT (elder general#26092, added after the flight it graded).
+Resampling rows i.i.d. assumes the rows are EXCHANGEABLE WITHIN A JOB. On the 2026-09-10 flight
+FIXED ran 438 s against FULL's 82 s at identical stamp, layout and row count; if a 438-second job
+drifted within itself, a row-level bootstrap CANNOT SEE IT and will UNDERSTATE sigma. So this
+number is right about a narrower thing than "the uncertainty on Delta" — it is shot noise under
+exchangeability, not total uncertainty. The error direction is toward a bar that is too LOW, i.e.
+toward a detection, which is why it cannot rescue a null but could manufacture a positive.
+A BLOCK bootstrap over row order answers the drift question from rows already on disk at zero
+spend; that is its own registered analysis, never a silent revision of a grade this produced.
+
 Resamples INDICES into a bells array computed once, not the raw rows: outcome_to_bells is a
 per-row transform, so re-running it per bootstrap draw would be 7.1M redundant conversions for
 an identical answer.

@@ -61,6 +61,18 @@ correctly was not used, because the rows could be resampled instead.
 | `job_created_utc` | 09:14:09.251683Z · 09:17:44.456881Z — neither PENDING |
 | weather gate 0.128 | ε 0.0598 and 0.0901 → `gate_cleared` FALSE on both; §4 non-criterion |
 
+## Scope limit on the measured σ (elder, general#26092)
+
+The bootstrap resamples rows i.i.d., which assumes rows are **exchangeable within a job**. FIXED
+ran 438 s; if it drifted within itself, a row-level bootstrap cannot see that and **understates**
+σ. So σ(Δ) = 0.020606 is shot noise under exchangeability, not total uncertainty. The error runs
+toward a bar that is too **low** — toward a detection — so it cannot rescue this null, and the
+verdict is NOT MEASURED under either reading. A **block** bootstrap over row order would answer
+it from the rows already on disk at zero spend, as its own registered analysis and never as a
+revision of this grade.
+
+Δ 95% interval **[−0.010, +0.071]** — contains both zero and the registered extrapolation 0.044.
+
 ## Recorded, not explained
 
 Identical stamp, identical layout, identical row count — and runtimes of **82 s (FULL) and
