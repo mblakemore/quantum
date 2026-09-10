@@ -207,7 +207,7 @@ logical HLF.
 merged-window architecture (179) already showed how to cure. A natural successor to both the
 network arc and the logical-computer arc.
 
-**What it would mean**: the first distributed error-corrected computation — the network stack
+**What it would mean**: the campaign's first distributed error-corrected computation — the network stack
 and the logical computer fused into a single fault-tolerant distributed machine.
 
 ---
@@ -225,7 +225,7 @@ computer (206), the honesty fence (F113: asymptotic, theorem-carried).
 **First flight**: the **BGKT-2020 shallow instance** — the noisy-shallow-circuit separation that
 runs on the magic-square gadget, at the smallest n, logical vs bare. This is the one advantage
 the campaign flagged as "not yet closed end-to-end" (audit C4715); closing it — even at toy
-size, error-corrected — would be the first on-chip composition of contextuality and computational
+size, error-corrected — would be the campaign's first on-chip composition of contextuality and computational
 separation.
 
 **Why tractable here**: both halves are certified; the composition is the new part. Highest
@@ -265,7 +265,7 @@ information flows* — indefinite causal *structure* at the network level. Nobod
 network topology in superposition on hardware. Tractable because it is shallow (2 relays + a
 control) and pure composition of certified parts.
 
-**What it would mean**: the first indefinite-topology network — a genuinely new kind of
+**What it would mean**: the campaign's first indefinite-topology network — not a world-first claim (the coherently-controlled channels are textbook; the novelty is the composition, per exp225's Scope block) — a kind of
 quantum channel where "which route" is a coherent resource, not a classical choice.
 
 ### P9 — THE DILITHIUM CHAMBER: memory that refuses to forget (protection without a code)

@@ -14,7 +14,7 @@ relay's **two classical bits**, applied as a software Pauli frame at decode (no 
 206/213/214 (the Full Replicator) ran the entire BGK Clifford family *inside one shield*,
 error-corrected, logical-beats-bare. **P6 composes them: a logical two-qubit gate between qubits
 living in two DIFFERENT shielded nodes, executed with only in-block gates + a shared logical
-resource + classical bits — the first distributed error-corrected computation.**
+resource + classical bits — the campaign's first distributed error-corrected computation.**
 
 The organizing question: *can a computation be split across a cut, error-detected end to end,
 and still beat the bare (unshielded) distributed version?* If yes, the network stack (repeater

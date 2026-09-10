@@ -103,8 +103,8 @@ arrow-bender's erasure?
 **Stands on**: 198 (objectivity dial), 200b (arrow-bender), 241 (live correction). **First flight**: run
 the objectivity dial (198) with the record qubit under live bit-flip correction vs bare — does correction
 hold the fact's objectivity higher, longer? **Feasibility**: moderate; conceptually the richest fold in
-the campaign (measurement theory × QEC). **What it means**: the first *error-corrected measurement
-record* — a fact made robust by the same machinery that protects a qubit. Nobody has asked whether QEC
+the campaign (measurement theory × QEC). **What it means**: the campaign's first *error-corrected measurement
+record* — a fact made robust by the same machinery that protects a qubit. We have not seen it asked (no literature survey was run) whether QEC
 changes what counts as "objective."
 
 ### P6 — THE LIVING FEDERATION NODE: fault-tolerant network memory
