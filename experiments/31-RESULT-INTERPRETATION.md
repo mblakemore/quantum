@@ -43,6 +43,8 @@ channel**. That condition held on marrakesh (3 confirmations) but did **not** ho
 kingston run. The architectural-principle claim is neither confirmed nor refuted — the first
 independent test was confounded by an anomalous, gate-independent fidelity floor.
 
+> ⚠ 2026-09-10: this conclusion's condition, "Z-dephasing being the dominant channel", is refuted as the CAUSE (see the correction in Finding 03). Whether the ordering appears on a backend cannot be predicted from that condition.
+
 ## Exp 32 (retest design — disambiguates artifact vs genuine non-replication)
 
 1. **Pin `initial_layout`** to a calibration-verified best CZ pair on kingston (don't trust the

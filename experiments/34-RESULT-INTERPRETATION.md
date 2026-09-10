@@ -4,6 +4,8 @@
 **ORQ**: #1 — does Finding 03's X-basis immunity generalize across the heavy-hex family?
 **Selected pair**: [44, 45] (calibration-gated, 148/176 coupled pairs eligible)
 
+> **⚠ 2026-09-10 (the author): the MECHANISM readings in this file are refuted** (see the correction in Finding 03). This run's own floors are a hardware witness against them (Elder, general#27064): a Z-dephasing channel damps XX and YY identically and leaves ZZ untouched, but this job measured **XX 5.94 ≠ YY 9.07 pp, with ZZ 7.06 between them**. T2 and T3 are DATA and stand as orderings. "Y-injection signature", "confirmed" and "mechanism replicates" below are the refuted layer and are kept as the record of what was claimed.
+
 ## Headline
 
 **The calibration gate worked exactly as Exp32 predicted, and it turned an INCONCLUSIVE result
@@ -18,7 +20,7 @@ On that clean footing, the pre-registered verdict is a **split**:
 | Criterion | Result | Meaning |
 |---|---|---|
 | **T1** ZZ/XX ≥ 2.0 (headline) | **FAIL** — ratio = **1.19×** | the strong ~3× magnitude does NOT replicate |
-| **T2** eYY > eXX (+≥2pp) | **PASS** — 9.07 vs 5.94pp (+3.13pp) | Y-injection signature DOES replicate |
+| **T2** eYY > eXX (+≥2pp) | **PASS** — 9.07 vs 5.94pp (+3.13pp) | ~~Y-injection signature~~ the YY-worse-than-XX ORDERING does replicate (⚠ the injection reading is refuted) |
 | **T3** gamma_ZZ > gamma_XX | **PASS** — +0.0029 vs −0.0043 | slope ordering DOES replicate |
 
 ## What this means — magnitude falsified, direction survives
@@ -29,6 +31,8 @@ well above shot noise), and ZZ scales steeper than XX under ZNE (slope sign flip
 of three pre-registered criteria pass on an *independent* Heron device. The mechanism — heavy-hex
 CZ noise is Z-biased, so the Hadamard for ⟨XX⟩ readout partially commutes with it — is
 **directionally present on a second backend**.
+
+> ⚠ The two mechanism sentences in this paragraph (the S-dagger rotating Z-phase into the axis; the Hadamard commuting) are refuted; see the note at the top. The ordering they set out to explain is the result.
 
 But Finding 03's **headline quantitative claim does NOT generalize**. On marrakesh the ZZ/XX error
 ratio was ~3×; on kingston it is **1.19×**. The README's actionable framing — *"Pick X-basis: it's
@@ -69,7 +73,7 @@ example of turning a confound into a controlled variable rather than discarding 
 
 ## Verdict (one line)
 
-**ORQ#1: PARTIAL — Finding 03's X-basis ordering/mechanism replicates on ibm_kingston (T2,T3 pass)
+**ORQ#1: PARTIAL — Finding 03's X-basis ordering (⚠ ~~/mechanism~~, not the mechanism, which is refuted) replicates on ibm_kingston (T2,T3 pass)
 but its ~3× magnitude does not (ZZ/XX = 1.19×, T1 fail); the README ≥2× architectural-upgrade gate
 is NOT met. Downgrade the "free ~3× win" framing to "directionally robust, magnitude substrate-
 dependent."** Job `d8d00ta4gq0s73apha60`, calibration-gated pair [44,45], calibration
