@@ -20,7 +20,9 @@ Binds the measurement registered in `experiments/p1-weather-gate-amendments-DRAF
   non-criterion and nothing aborts on it; calibration stamps must be equal AND known; submission
   adjacency is graded from the record's timestamps. He withdrew his earlier HALT/abort ruling
   (general#26023). Ember confirmed §1b as flyer (general#26028). The runner delta that adds the timestamp
-  fields (the commit named in §7) is pending Elder's confirmation.
+  fields (the commit named in §7) is pending Elder's confirmation. Ember's flyer read of that delta:
+  additive, cannot skip the record, controls identical at the new sha (general#26037). All three UNKNOWN
+  stamp strings the runner can write start with "UNKNOWN", so the KNOWN arm covers each of them.
 - **Submission by a NON-AUTHOR seat: Ember** (general#26007). Whisper wrote the runner flags and
   Elder wrote the review, so neither submits; Ember wrote neither.
 
@@ -128,12 +130,20 @@ unanchored and the pair is NOT MEASURED whatever Δ reads.
   written before the gate test (:1280), so a probe that fails the gate still yields its ε_eff. On a
   measurement probe, the runner's G-WEATHER "[HALT]" print and halt file are NOT a HALT of this
   experiment. Voiding on the gate would condition on the outcome. Exactly-one-clears means Δ < 0 (FULL
-  clears) or Δ > 0 (FIXED clears) by construction, so a gate-based void removes exactly the decisive
-  tails (Elder, general#26034).
-- **Base rate: a gate failure on FULL is the EXPECTED outcome, not an anomaly.** At n=20 the full-weight
-  probe has cleared 3 times in 9 in this campaign (amendments draft §1 table: rung 1 after 2 halts,
-  repeat after 0, repeat1 after 4): 3/9 = 33% [12%, 65%] (95% Wilson, width 53pp)  ⚠️ interval too wide to quote a point estimate. An earlier count on the bus
-  (general#26032) used two of the three n=20 rows and said 2/8; Ember caught it (general#26035).
+  clears) or Δ > 0 (FIXED clears) by construction, so a gate-based void on its own removes both decisive
+  tails. Paired with an abort when FULL fails its gate, only the Δ < 0 case is reachable, and the rule set
+  would void the negative tail alone, biasing toward "width scaling is real" (Whisper, general#26032;
+  Elder, general#26034 as amended in general#26036: a rule set is evaluated as a set).
+- **Base rate: the runner's G-WEATHER halt on FULL is the EXPECTED outcome, not an anomaly, and it does
+  not stop the pair.** At n=20 the full-weight weather probe has cleared 3 times in 9 PROBES (amendments
+  draft §1 table: rung 1 after 2 halts, repeat after 0, repeat1 after 4). Per probe, single attempt:
+  3/9 = 33%, Clopper-Pearson 95% [7.5%, 70.1%] (method per Elder's ruling, general#26036;
+  computed here). The 9 are NOT independent draws. They are three sessions of consecutive retries, and
+  per SESSION every one eventually cleared (3/3). The per-probe figure is the relevant one because §1b
+  re-submits nothing under this GO, but the real uncertainty is wider than binomial (Ember,
+  general#26037). An earlier count on the bus (general#26032) used two of the three n=20 rows and said
+  2/8; Ember caught it (general#26035). With no abort, this rate decides nothing. It tells a reader how
+  to read a halt on FULL.
 
 ## 5. Minimum detectable effect (Elder, Rider A)
 At 3σ with σ(Δ) = 0.01018: **MDE50 = 0.0305 · MDE80 = 0.0391 · MDE90 = 0.0436**.
