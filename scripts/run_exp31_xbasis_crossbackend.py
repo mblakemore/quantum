@@ -4,7 +4,8 @@ OPEN RESEARCH QUESTION #1 (README): "Does X-basis immunity generalize across the
 family? Replicate Finding 03 on an independent backend. Pre-reg gate: >=2x X/Z fidelity ratio."
 
 Finding 03 (X-basis immunity) has three confirmations ALL on ibm_marrakesh (Bell C3650,
-GHZ-3 C3651, VQE-H2 C3652). The claimed mechanism is architectural: the heavy-hex CZ channel
+GHZ-3 C3651, VQE-H2 C3652). ⚠ 2026-09-10: the mechanism described in the next sentences is REFUTED (Finding 03 correction); the
+measured criteria below stand as orderings. The claimed mechanism is architectural: the heavy-hex CZ channel
 is Z-dephasing-dominated; the Hadamard for <XX> readout COMMUTES with it (transparent), while
 the S-dagger for <YY> readout rotates latent Z-phase noise INTO the measurement axis. If
 architectural, it must reproduce on an INDEPENDENT Heron device. This campaign has never left
@@ -20,7 +21,7 @@ job -> single calibration snapshot (removes the +-7pp cross-day drift of the ori
 PRE-REGISTERED CRITERIA (FIXED before submission, see 31-...-preregistration.md):
   eXX,eYY,eZZ = mean err across lambda per basis; gamma_basis = OLS slope of err vs lambda.
   T1 (X-IMMUNITY REPLICATES, headline): eZZ/eXX >= 2.0 AND eXX < eZZ   [README gate]
-  T2 (Y-INJECTION REPLICATES):          eYY > eXX  with eYY-eXX >= 0.02
+  T2 (YY-WORSE-THAN-XX ORDERING):       eYY > eXX  with eYY-eXX >= 0.02   [was 'Y-INJECTION'; refuted reading]
   T3 (SLOPE ORDERING):                  gamma_ZZ > gamma_XX
   T1 PASS -> Finding 03 = heavy-hex ARCHITECTURAL principle.
   T1 FAIL -> X-basis immunity is marrakesh substrate/calibration-specific, NOT architectural.
@@ -263,7 +264,7 @@ def analyze(schedule_items, all_counts, job_id=None):
     print(f"\n=== PRE-REGISTERED CRITERIA (Exp31, {BACKEND_NAME}) ===")
     print(f"T1 (X-IMMUNITY, headline): ZZ/XX={ratio_zx:.2f}x >= 2.0 AND eXX<eZZ "
           f"-> {'PASS' if t1 else 'FAIL'}")
-    print(f"T2 (Y-INJECTION):          eYY {eYY*100:.2f}pp > eXX {eXX*100:.2f}pp (+>=2pp) "
+    print(f"T2 (YY>XX ORDERING):        eYY {eYY*100:.2f}pp > eXX {eXX*100:.2f}pp (+>=2pp) "
           f"-> {'PASS' if t2 else 'FAIL'}")
     print(f"T3 (SLOPE ORDERING):       gamma_ZZ {gZZ:+.4f} > gamma_XX {gXX:+.4f} "
           f"-> {'PASS' if t3 else 'FAIL'}")
@@ -289,7 +290,7 @@ def analyze(schedule_items, all_counts, job_id=None):
                    "circuits_total": len(schedule_items), "seed_transpiler": SEED_TRANSPILER},
         "preregistered_criteria": {
             "T1": "eZZ/eXX >= 2.0 AND eXX < eZZ  [headline: README >=2x gate]",
-            "T2": "eYY > eXX with eYY-eXX >= 0.02  [S-dagger injection signature]",
+            "T2": "eYY > eXX with eYY-eXX >= 0.02  [X/Y ordering; labelled 'S-dagger injection signature' until 2026-09-10, a reading refuted by the Finding 03 correction]",
             "T3": "gamma_ZZ > gamma_XX  [Z-basis scales steeper under ZNE]",
             "T1_PASS": "Finding 03 = heavy-hex architectural principle",
             "T1_FAIL": "X-basis immunity is marrakesh substrate-specific, not architectural",

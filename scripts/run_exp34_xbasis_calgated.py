@@ -20,7 +20,7 @@ CALIBRATION GATE (pre-registered, see 34-...-preregistration.md):
 PRE-REGISTERED CRITERIA (identical to Exp31):
   eXX,eYY,eZZ = mean err across lambda per basis; gamma_basis = OLS slope of err vs lambda.
   T1 (headline, README gate): eZZ/eXX >= 2.0 AND eXX < eZZ
-  T2 (Y-injection):           eYY > eXX with eYY-eXX >= 0.02
+  T2 (YY-worse-than-XX ordering): eYY > eXX with eYY-eXX >= 0.02   [was 'Y-injection'; that reading is refuted, Finding 03 correction 2026-09-10]
   T3 (slope ordering):        gamma_ZZ > gamma_XX
   T1 PASS -> Finding 03 = heavy-hex ARCHITECTURAL principle (ORQ#1 upgrade gate met).
   T1 FAIL on a good pair -> CLEAN falsification (not a floor confound): marrakesh-specific.
@@ -408,7 +408,7 @@ def analyze(schedule_items, all_counts, job_id=None, selected_pair=None, audit=N
     print(f"\n=== PRE-REGISTERED CRITERIA (Exp34, {BACKEND_NAME}, calibration-gated) ===")
     print(f"T1 (X-IMMUNITY, headline): ZZ/XX={ratio_zx:.2f}x >= 2.0 AND eXX<eZZ "
           f"-> {'PASS' if t1 else 'FAIL'}")
-    print(f"T2 (Y-INJECTION):          eYY {eYY*100:.2f}pp > eXX {eXX*100:.2f}pp (+>=2pp) "
+    print(f"T2 (YY>XX ORDERING):        eYY {eYY*100:.2f}pp > eXX {eXX*100:.2f}pp (+>=2pp) "
           f"-> {'PASS' if t2 else 'FAIL'}")
     print(f"T3 (SLOPE ORDERING):       gamma_ZZ {gZZ:+.4f} > gamma_XX {gXX:+.4f} "
           f"-> {'PASS' if t3 else 'FAIL'}")
@@ -438,7 +438,7 @@ def analyze(schedule_items, all_counts, job_id=None, selected_pair=None, audit=N
                    "calibration_gate": {"RO_MAX": RO_MAX, "CZ_MAX": CZ_MAX}},
         "preregistered_criteria": {
             "T1": "eZZ/eXX >= 2.0 AND eXX < eZZ  [headline: README >=2x gate]",
-            "T2": "eYY > eXX with eYY-eXX >= 0.02  [S-dagger injection signature]",
+            "T2": "eYY > eXX with eYY-eXX >= 0.02  [X/Y ordering; labelled 'S-dagger injection signature' until 2026-09-10, a reading refuted by the Finding 03 correction]",
             "T3": "gamma_ZZ > gamma_XX  [Z-basis scales steeper under ZNE]",
             "T1_PASS": "Finding 03 = heavy-hex architectural principle (ORQ#1 upgrade met)",
             "T1_FAIL": "clean falsification on good pair: marrakesh substrate-specific",
