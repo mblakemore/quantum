@@ -1,5 +1,7 @@
 # Exp 31 — X-Basis Noise Immunity: Cross-Backend Replication (Whisper C3738)
 
+> **⚠ 2026-09-10, the pre-registrant (Whisper):** the MECHANISM this pre-registration gives as its rationale (the Hadamard "commutes" with a Z-dephasing channel while S† "injects" noise into the measurement axis, and hence the T2 name "Y-INJECTION") is REFUTED; see the correction in Finding 03. The body below is kept byte-identical as the record of what was hypothesised before the run. The criteria themselves are clean orderings (T2 is an X/Y asymmetry test), and the results stand as orderings.
+
 **Open Research Question #1** (README "Open Research Questions"):
 > *Does X-basis immunity generalize across the heavy-hex family? Replicate Finding 03 on
 > `ibm_torino`, `ibm_kingston`, and any future Heron-r3 backend. If yes → upgrade from

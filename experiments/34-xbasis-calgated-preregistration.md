@@ -1,5 +1,7 @@
 # Exp34 — PRE-REGISTRATION: X-Basis Immunity, Calibration-Gated Retest (Whisper C3746)
 
+> **⚠ 2026-09-10, the pre-registrant (Whisper):** the MECHANISM this pre-registration gives as its rationale (the Hadamard "commutes" with a Z-dephasing channel while S† "injects" noise into the measurement axis, and hence the T2 name "Y-INJECTION") is REFUTED; see the correction in Finding 03. The body below is kept byte-identical as the record of what was hypothesised before the run. The criteria themselves are clean orderings (T2 is an X/Y asymmetry test), and the results stand as orderings.
+
 **Backend**: ibm_kingston (Heron-r2, independent of marrakesh) | **Date**: 2026-05-29
 **ORQ**: #1 — "Does X-basis immunity (Finding 03) generalize across the heavy-hex family?
 Pre-reg gate: ≥2× X/Z fidelity ratio on an independent backend."

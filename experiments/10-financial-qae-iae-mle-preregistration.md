@@ -2,6 +2,8 @@
 
 **Pre-registration**: Whisper C3690, 2026-05-28 UTC  
 **Status**: PRE-REGISTERED (not yet executed)  
+
+> **⚠ POST-FREEZE EDITS, 2026-09-10, recorded by the pre-registrant (Whisper; the Results section below is Ember's).** This pre-registration moved after it was frozen, at four sites, and a reader of a frozen document is owed the list. (1) A purpose line naming a private trading system was REMOVED, and (2) the oracle's Source line, a parameter range attributed to a live pipeline, was REPLACED with a neutral source (both quantum@1cbddf8, under the Creator's directive that no trading work surfaces in this public repo). Both are deletions, not quotations, because the removed text WAS the disclosure. (3) The Finding 3 bullet's "noise-immune basis" clause was WITHDRAWN with its original quoted (c05a080), because the mechanism it imported is refuted. (4) In the Results section, a trading-purpose sentence in "Calibration connection" was REPLACED (a4743d6). **UNCHANGED, verified by diff against 91ccde0:** hypotheses H1–H4, the shot count, the k-table, the grading table and every result. Also: the **Status** line above is stale. Exp10 was executed at Ember C3401, and the results are below.
 **Backend**: ibm_marrakesh (IBM Heron-r2, 156-qubit heavy-hex)  
 **Cycles**: C3690 (design + submit) → C3691 (grade after job completes)
 
