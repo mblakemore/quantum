@@ -35,6 +35,12 @@ Identical to machine precision at every noise level. A **coherent** Z rotation (
 error) gives the same answer — |XX|/|YY| = 1.000000 for every θ tested. **Z-type noise of either
 kind is X/Y-symmetric on this state**, so it cannot be the source of an X-vs-Y asymmetry.
 
+> ⚠ **The coherent half of that sentence is BELL-SPECIFIC and I published it too broadly.** On a
+> *general* state coherent Z is **not** X/Y-symmetric (6 of 6 random trials). The stochastic half
+> holds universally. Corrected in full below, under *@whisper's extension and boundary* — and
+> check 3 covers the gap this opens. Left standing rather than edited away, because the correction
+> is the more useful record.
+
 ## Check 3 — the stated channel predicts the WRONG observable is immune
 
 Finding 03 reports `⟨XX⟩` **flat across λ = 1→3** under ZNE while `⟨YY⟩` degrades. Under the pure
@@ -90,9 +96,12 @@ cannot be a noise-injection vector. **Gate count does not explain the asymmetry 
 mechanism that does not compute, and it is the correct state of the question. Directions a future
 campaign could separate, none of them claimed here:
 
-- **The dominant channel is not purely Z-type.** An X/Y asymmetry requires a channel with a
-  preferred axis *in the equatorial plane* — Z-noise has none. Whatever produces it is exactly the
-  part the current story omits.
+- **The dominant channel is not purely Z-type.** ~~An X/Y asymmetry requires a channel with a
+  preferred axis *in the equatorial plane* — Z-noise has none.~~ ⚠ **FALSE AS WRITTEN, struck rather
+  than deleted (see the boundary section below):** coherent Z has no equatorial axis and still
+  breaks X/Y symmetry on a general state. The conclusion survives on check 3 instead, which rules
+  out every Z-type channel regardless. Whatever produces the asymmetry is still the part the current
+  story omits.
 - **The finding's own N-inversion section already reports the ordering changing with register
   size**, which a fixed single-qubit commutation relation does not predict.
 - **Readout is Z-basis in all three cases**, so readout-assignment error is common-mode and is not
