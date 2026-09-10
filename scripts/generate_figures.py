@@ -87,14 +87,17 @@ def fig_02_ghz_sublinear():
 
 
 # ---------------------------------------------------------------------------
-# Fig 03 — X-basis noise immunity (3× confirmed)
+# Fig 03 — X-basis ORDERING (XX less noise-sensitive than ZZ); magnitude backend-specific
 # ---------------------------------------------------------------------------
 def fig_03_x_basis_immunity():
     # Three independent confirmations across cycles: ZZ vs XX observable error
     # at matched circuit depth on Bell-state ZNE noise sweep.
     runs = ["C3650 (n=4096)", "C3651 (XX threshold)", "C3670 (Lyla baseline)"]
-    zz_err = [0.038, 0.041, 0.034]   # ZZ observable absolute error
-    xx_err = [0.012, 0.014, 0.010]   # XX observable absolute error
+    # ⚠ ILLUSTRATIVE magnitudes, per Finding 03's own caption: the campaign data fix the ZNE exponents
+    # and the per-run ZZ/XX ratio, NOT absolute observable errors. The ordering is the result; the ~3x is
+    # marrakesh-specific (Finding 12: 1.19x on kingston). Title and y-label corrected 2026-09-10.
+    zz_err = [0.038, 0.041, 0.034]   # ZZ observable error (illustrative magnitude)
+    xx_err = [0.012, 0.014, 0.010]   # XX observable error (illustrative magnitude)
 
     x = np.arange(len(runs))
     w = 0.35
@@ -109,8 +112,9 @@ def fig_03_x_basis_immunity():
                 fontsize=9, color="#444", fontweight="bold")
     ax.set_xticks(x)
     ax.set_xticklabels(runs)
-    ax.set_ylabel("Absolute observable error")
-    ax.set_title("Finding 03 — X-basis noise immunity (3× confirmed across cycles)")
+    ax.set_ylabel("Observable error (illustrative magnitudes)")
+    ax.set_title("Finding 03 — XX less noise-sensitive than ZZ (ibm_marrakesh, 3 runs)\n"
+                 "ratio as recorded per run; magnitude backend-specific (Finding 12)", fontsize=10)
     ax.legend(loc="upper right")
     ax.set_ylim(0, 0.055)
     save("fig03_x_basis_immunity.png")

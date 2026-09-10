@@ -441,7 +441,7 @@ and explicitly not part of the claim.
 
 ![CHSH violation S = 2.74](../images/fig01_chsh.png) ![GHZ sublinear scaling](../images/fig02_ghz_sublinear.png)
 
-![X-basis immunity 3× confirmed](../images/fig03_x_basis_immunity.png) ![Calibration drift ±7pp in 24h](../images/fig10_calibration_drift.png)
+![XX less noise-sensitive than ZZ, 3 runs on ibm_marrakesh (magnitude backend-specific)](../images/fig03_x_basis_immunity.png) ![Calibration drift ±7pp in 24h](../images/fig10_calibration_drift.png)
 
 ![All four mitigation strategies failed](../images/fig07_mitigation_failures.png) ![IAE-MLE 344× better than naive](../images/fig09_qae_iae_mle.png)
 
