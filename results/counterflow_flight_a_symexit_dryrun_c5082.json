@@ -1,0 +1,128 @@
+{
+  "card": "counterflow_flight_a_symexit",
+  "cycle": "C5082",
+  "board": 195,
+  "source": "Aer dry-run (qubit-fixed confound models M1 readout / M2 amp-damping) \u2014 $0",
+  "job_id": null,
+  "dry_run_models": [
+    {
+      "model": "M1",
+      "arms": {
+        "counterflow": {
+          "cold_exit": 0.321,
+          "hot_exit": 0.1359,
+          "crossing": 0.1851,
+          "eps": 0.7743,
+          "direct_crossing": 0.1798,
+          "swapped_crossing": 0.1904
+        },
+        "coflow": {
+          "cold_exit": 0.2273,
+          "hot_exit": 0.219,
+          "crossing": 0.0082,
+          "eps": 0.5065,
+          "direct_crossing": 0.0112,
+          "swapped_crossing": 0.0053
+        },
+        "null": {
+          "cold_exit": 0.2234,
+          "hot_exit": 0.2269,
+          "crossing": -0.0035,
+          "eps": 0.4955,
+          "direct_crossing": -0.0123,
+          "swapped_crossing": 0.0054
+        }
+      },
+      "checks": {
+        "P1_crossing_positive": true,
+        "P2_cf_beats_coflow": true,
+        "P2_eps_cf_above_half": true,
+        "P2_eps_coflow_at_or_below_half": true,
+        "P3_null_clean": true
+      },
+      "verdict": "CONFIRMED"
+    },
+    {
+      "model": "M2",
+      "arms": {
+        "counterflow": {
+          "cold_exit": 0.329,
+          "hot_exit": 0.1431,
+          "crossing": 0.1858,
+          "eps": 0.7971,
+          "direct_crossing": 0.1736,
+          "swapped_crossing": 0.1981
+        },
+        "coflow": {
+          "cold_exit": 0.2368,
+          "hot_exit": 0.2356,
+          "crossing": 0.0013,
+          "eps": 0.5339,
+          "direct_crossing": -0.0168,
+          "swapped_crossing": 0.0193
+        },
+        "null": {
+          "cold_exit": 0.239,
+          "hot_exit": 0.2335,
+          "crossing": 0.0056,
+          "eps": 0.5401,
+          "direct_crossing": -0.0168,
+          "swapped_crossing": 0.028
+        }
+      },
+      "checks": {
+        "P1_crossing_positive": true,
+        "P2_cf_beats_coflow": true,
+        "P2_eps_cf_above_half": true,
+        "P2_eps_coflow_at_or_below_half": true,
+        "P3_null_clean": true
+      },
+      "verdict": "CONFIRMED"
+    },
+    {
+      "model": "M3",
+      "arms": {
+        "counterflow": {
+          "cold_exit": 0.3334,
+          "hot_exit": 0.1409,
+          "crossing": 0.1926,
+          "eps": 0.8097,
+          "direct_crossing": 0.1781,
+          "swapped_crossing": 0.207
+        },
+        "coflow": {
+          "cold_exit": 0.2449,
+          "hot_exit": 0.2456,
+          "crossing": -0.0006,
+          "eps": 0.557,
+          "direct_crossing": -0.025,
+          "swapped_crossing": 0.0237
+        },
+        "null": {
+          "cold_exit": 0.24,
+          "hot_exit": 0.2405,
+          "crossing": -0.0005,
+          "eps": 0.5429,
+          "direct_crossing": -0.0203,
+          "swapped_crossing": 0.0194
+        }
+      },
+      "checks": {
+        "P1_crossing_positive": true,
+        "P2_cf_beats_coflow": true,
+        "P2_eps_cf_above_half": true,
+        "P2_eps_coflow_at_or_below_half": false,
+        "P3_null_clean": true
+      },
+      "verdict": "FALSIFIED"
+    }
+  ],
+  "params": {
+    "N": 3,
+    "tau": 0.5,
+    "T": 2,
+    "p_hot": 0.4,
+    "p_cold": 0.05,
+    "shots": 10000
+  }
+}

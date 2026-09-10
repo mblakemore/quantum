@@ -1,0 +1,426 @@
+{
+  "card": "dihedral_hsp_demo",
+  "cycle": "C5085",
+  "frame": "engineering demonstration, no advantage",
+  "source": "Aer from_backend(ibm_fez) \u2014 $0 dry-run (real noise snapshot + real routing)",
+  "job_id": null,
+  "backend": "ibm_fez",
+  "layout": [
+    141,
+    144
+  ],
+  "shots": 20000,
+  "payload_size": 40,
+  "submit_snapshot": null,
+  "per_bit": [
+    {
+      "N": 8,
+      "s": 0,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0285,
+      "herald_kept": 10147,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 0,
+      "bit": 1,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0284,
+      "herald_kept": 10036,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 0,
+      "bit": 2,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0276,
+      "herald_kept": 10040,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 1,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9691,
+      "herald_kept": 9974,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 1,
+      "bit": 1,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0399,
+      "herald_kept": 10188,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 1,
+      "bit": 2,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0339,
+      "herald_kept": 10035,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 2,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0414,
+      "herald_kept": 10024,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 2,
+      "bit": 1,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.957,
+      "herald_kept": 10048,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 2,
+      "bit": 2,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0398,
+      "herald_kept": 9972,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 3,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.968,
+      "herald_kept": 9923,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 3,
+      "bit": 1,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9646,
+      "herald_kept": 9956,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 3,
+      "bit": 2,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.033,
+      "herald_kept": 9913,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 4,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0299,
+      "herald_kept": 9881,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 4,
+      "bit": 1,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0295,
+      "herald_kept": 9911,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 4,
+      "bit": 2,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9692,
+      "herald_kept": 10029,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 5,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9664,
+      "herald_kept": 9995,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 5,
+      "bit": 1,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0356,
+      "herald_kept": 10015,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 5,
+      "bit": 2,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9645,
+      "herald_kept": 9914,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 6,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0479,
+      "herald_kept": 9920,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 6,
+      "bit": 1,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9577,
+      "herald_kept": 10132,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 6,
+      "bit": 2,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9632,
+      "herald_kept": 10002,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 7,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9666,
+      "herald_kept": 10010,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 7,
+      "bit": 1,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9643,
+      "herald_kept": 9985,
+      "ok": true
+    },
+    {
+      "N": 8,
+      "s": 7,
+      "bit": 2,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9669,
+      "herald_kept": 10025,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 0,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0268,
+      "herald_kept": 9891,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 1,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9693,
+      "herald_kept": 9960,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 2,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0336,
+      "herald_kept": 10184,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 3,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9596,
+      "herald_kept": 10087,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 4,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0395,
+      "herald_kept": 10017,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 5,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9599,
+      "herald_kept": 10050,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 6,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0339,
+      "herald_kept": 9911,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 7,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9732,
+      "herald_kept": 9965,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 8,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0278,
+      "herald_kept": 9921,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 9,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9718,
+      "herald_kept": 10038,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 10,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0339,
+      "herald_kept": 9989,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 11,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9584,
+      "herald_kept": 10006,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 12,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0406,
+      "herald_kept": 9965,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 13,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9608,
+      "herald_kept": 10065,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 14,
+      "bit": 0,
+      "true": 0,
+      "recovered": 0,
+      "vote": 0.0357,
+      "herald_kept": 10043,
+      "ok": true
+    },
+    {
+      "N": 16,
+      "s": 15,
+      "bit": 0,
+      "true": 1,
+      "recovered": 1,
+      "vote": 0.9704,
+      "herald_kept": 10013,
+      "ok": true
+    }
+  ],
+  "checks": {
+    "P1_N8_full_string": "8/8",
+    "P2_N16_lowbit": "16/16",
+    "F1_machinery_survived": true,
+    "F2_sieve_intact": true,
+    "min_herald_kept": 9881
+  },
+  "verdict": "DEMONSTRATED",
+  "prereg": "dihedral-hsp-flight-preregistration-whisper-c5085.md"
+}

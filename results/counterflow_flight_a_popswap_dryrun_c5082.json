@@ -1,0 +1,50 @@
+{
+  "card": "counterflow_flight_a_popswap",
+  "cycle": "C5082",
+  "board": 195,
+  "source": "Aer from_backend(ibm_fez) \u2014 $0 dry-run (real noise snapshot + real routing)",
+  "job_id": null,
+  "params": {
+    "N": 3,
+    "tau": 0.5,
+    "T": 2,
+    "p_hot": 0.4,
+    "p_cold": 0.05,
+    "shots": 10000
+  },
+  "arms": {
+    "counterflow": {
+      "cold_exit": 0.3184,
+      "hot_exit": 0.1518,
+      "crossing": 0.1666,
+      "eps": 0.767,
+      "verA_crossing": 0.1652,
+      "verB_crossing": 0.1681
+    },
+    "coflow": {
+      "cold_exit": 0.2338,
+      "hot_exit": 0.2308,
+      "crossing": 0.003,
+      "eps": 0.5252,
+      "verA_crossing": -0.0059,
+      "verB_crossing": 0.012
+    },
+    "null": {
+      "cold_exit": 0.2347,
+      "hot_exit": 0.2341,
+      "crossing": 0.0006,
+      "eps": 0.5277,
+      "verA_crossing": -0.0037,
+      "verB_crossing": 0.0049
+    }
+  },
+  "checks": {
+    "P1_crossing_positive": true,
+    "P2_cf_beats_coflow": true,
+    "P2_eps_cf_above_half": true,
+    "P2_eps_coflow_at_or_below_half": true,
+    "P3_null_clean": true
+  },
+  "verdict": "CONFIRMED",
+  "prereg": "counterflow-flight-a-preregistration-whisper-c5082.md"
+}
