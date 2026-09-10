@@ -784,10 +784,19 @@ def main():
         # to check against the registration before anything is drawn.
         shots = math.ceil((a.copies or 0) / 2)
         plan = rung_jobs(shots)
-        print(json.dumps({"n": a.n, "copies": a.copies, "science_rows": shots, "weather_rows": CAL_ROWS,
-                          "cal_k": CAL_K, "cal_meas_rows": CAL_MEAS_ROWS, "jobs": plan,
-                          "priced_rung_cost_s": round(rung_cost_s(shots), 1),
-                          "fit_at_1.5x_needs_live_s": round(rung_cost_s(shots) * 1.5, 1)}, indent=1))
+        _plan = {"n": a.n, "copies": a.copies, "science_rows": shots, "weather_rows": WEATHER_ROWS,
+                 "cal_k": CAL_K, "cal_meas_rows": CAL_MEAS_ROWS, "jobs": plan,
+                 "priced_rung_cost_s": round(rung_cost_s(shots), 1),
+                 "fit_at_1.5x_needs_live_s": round(rung_cost_s(shots) * 1.5, 1)}
+        if _measure:
+            # P1 dual-probe (C5101, @elder general#25991): the $0 plan must show the DECLARED rows and
+            # label for each probe, so a non-author checks them before anything is drawn.
+            _plan.update({"measure_weather_P_public": weather_probe_label(a.n, _w_ident),
+                          "measure_weather_weight": a.n - len(_w_ident),
+                          "measure_weather_identity": _w_ident,
+                          "measure_weather_rows": WEATHER_ROWS,
+                          "measure_weather_cost_s": round(COST_S(WEATHER_ROWS), 1)})
+        print(json.dumps(_plan, indent=1))
         return 0
 
     print(f"DOOR (b) FLIGHT — n={a.n}, eps={a.eps}, delta={a.delta}")
@@ -1204,7 +1213,20 @@ def main():
             _layout = list(t.layout.final_index_layout()) if getattr(t, "layout", None) else None
         except Exception as _le:
             _layout = f"UNREADABLE: {type(_le).__name__}"
-        _rec = {"mode": "p1-dual-probe-measurement", "n": a.n, "P_label": P_cal,
+        # CROSS-LABEL CHECK (@ember general#25988): estimate the SAME rows against the full-weight label.
+        # If the declared label reached the draw, rho is (I + alpha P_fixed)/2^n and tr(P_full rho) = 0, so the
+        # cross estimate sits near 0 while the matched one carries the signal. If they do NOT differ, the label
+        # never reached the draw and eps_eff(fixed) is unanchored -> this probe grades NOT MEASURED. Zero spend.
+        _label_check = None
+        if _w_ident:
+            _full_lab = weather_probe_label(a.n)
+            _sq_cross = _dec.estimate(_full_lab, [_dec.outcome_to_bells(r_, a.n) for r_ in _raws])
+            _lc_ok = _sq > 0 and abs(_sq_cross) < 0.5 * abs(_sq)
+            _label_check = {"matched_tr_sq": _sq, "crosslabel_full_weight_tr_sq": _sq_cross,
+                            "rule": "PASS iff matched > 0 and |cross| < 0.5*|matched|", "passed": _lc_ok}
+            print(f"  [{'PASS' if _lc_ok else 'FAIL'}] LABEL-CHECK matched tr^2 {_sq:+.4f} vs full-weight-label "
+                  f"tr^2 {_sq_cross:+.4f}" + ("" if _lc_ok else "  ⚠ LABEL DID NOT REACH THE DRAW -> NOT MEASURED"))
+        _rec = {"mode": "p1-dual-probe-measurement", "n": a.n, "P_label": P_cal, "label_check": _label_check,
                 "weight": a.n - len(_w_ident), "identity_positions": _w_ident, "rows": WEATHER_ROWS,
                 "tr_sq": _sq, "eps_eff": _eps, "eps_min_gate": EPS_MIN, "gate_cleared": _eps >= EPS_MIN,
                 "job_id": wjob.job_id(), "backend": EXPECTED_BACKEND, "account": a.account,
