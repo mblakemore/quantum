@@ -119,7 +119,7 @@ the highest-leverage thing not yet on the board.
 
 ## VI-a. UPDATE (C4914): the master fold's first rung is FLOWN
 
-**Exp235 BREAKING THE CLIFFORD CEILING — CERTIFIED.** A non-Clifford logical T-bar (Rzz(pi/4), codespace-preserving) ran inside [[4,2,2]] and produced magic states (|<Xbar>|~0.70, non-stabilizer, impossible for Clifford) error-detected at 94% acceptance — the first error-corrected computation off the classically-simulable class. Honest bound holds: non-transversal (error-DETECTED not FT); the SCALABLE version needs the distance>=3 correcting code below. See exp235-STATUS-certified.md.
+**Exp235 BREAKING THE CLIFFORD CEILING — CERTIFIED.** A non-Clifford logical T-bar (Rzz(pi/4), codespace-preserving) ran inside [[4,2,2]] and produced magic states (|<Xbar>|~0.70, non-stabilizer, impossible for Clifford) error-detected at 94% acceptance — the campaign's first error-corrected computation off the classically-simulable class. Honest bound holds: non-transversal (error-DETECTED not FT); the SCALABLE version needs the distance>=3 correcting code below. See exp235-STATUS-certified.md.
 
 ## VI. Recommendation
 

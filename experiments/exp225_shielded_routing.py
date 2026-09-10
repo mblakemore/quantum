@@ -177,7 +177,7 @@ def submit(backend_name, shots):
                       "G4_reference": "reported: DISC_shielded vs DISC_bare",
                       "registered_verdict": "G1 and G2 and G3",
                       "scope": "fault-tolerant indefinite routing: exp224 routing + mixture null behind "
-                               "the exp208 [[4,2,2]] shield on the message; first error-corrected topology"}}
+                               "the exp208 [[4,2,2]] shield on the message; the campaign's first error-detected topology (not a world-first claim)"}}
     json.dump(man, open(out, "w"), indent=1)
     print(f"submitted {job.job_id()} ({len(circuits)} circuits, {shots} shots) -> {out}")
 

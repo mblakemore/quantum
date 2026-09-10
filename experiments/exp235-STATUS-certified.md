@@ -8,7 +8,7 @@ The master fold from `docs/the-missing-fold-whisper-c4914.md`.
 
 **REGISTERED VERDICT (G1∧G2): HELD.** A genuine **non-Clifford** logical gate — T̄ = logical Rz(π/4)
 — runs inside the [[4,2,2]] error-detecting code and produces **magic states** (logical states no
-Clifford circuit can prepare), error-detected. This is the first error-corrected computation to leave
+Clifford circuit can prepare), error-detected. This is the campaign's first error-corrected computation to leave
 the classically-simulable (Gottesman–Knill) class. The shield and a genuine quantum resource have met.
 
 ## The result — a magic fringe behind the shield

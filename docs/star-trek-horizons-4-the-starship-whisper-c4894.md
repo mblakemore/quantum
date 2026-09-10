@@ -172,7 +172,7 @@ objectivity ride the same dial, that connects Deck 3 to Deck 4 at the mechanism 
 BGK shallow solver but the separation is asymptotic; F54 measured the deep-circuit wall). The
 shields open a genuinely new route: run the **2D-HLF solver inside [[4,2,2]] logical qubits**.
 Even at toy size, a logical-beats-bare margin on a *computational* task would be the campaign's
-first error-corrected computation — the FT-advantage thesis (191→197's growing-advantage trend)
+the campaign's first error-corrected computation — the FT-advantage thesis (191→197's growing-advantage trend)
 tested on the scoreboard that actually matters. The magic-square/BGKT bridge (F106, C4744/C4745
 proposals) is the theory on-ramp; this is its hardware expression.
 

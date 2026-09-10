@@ -47,7 +47,7 @@ shielded key's quality edge beat its own 15% acceptance toll on both links. 2/4 
 
 ## What is genuinely new, regardless of the registered verdict
 
-1. **First error-corrected QKD stack layer**: a physics-certified E91 key generated between
+1. **The campaign's first error-corrected QKD stack layer** (not a world-first claim; board#457): a physics-certified E91 key generated between
    logical qubits, direct and through an untrusted relay shield, with the relay's two
    classical bits carrying the key's frame.
 2. **The linearity duality worked**: the key and its CHSH certificate were the same four

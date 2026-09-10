@@ -154,7 +154,7 @@ def decode():
     ok = g1 and g2
     win = ("BREAKING THE CLIFFORD CEILING — a non-Clifford logical gate (T-bar) runs inside the [[4,2,2]] "
            "shield and produces MAGIC states no Clifford circuit can prepare (<Xbar> strictly between 0 and 1), "
-           "error-detected. The first error-corrected computation off the classically-simulable class, on silicon")
+           "error-detected. The campaign's first error-corrected computation off the classically-simulable class, on silicon")
     print(f"VERDICT: {win if ok else 'NOT HELD (accounting above)'}")
     json.dump({"job_id": man["job_id"], "xbar": {str(k): xb[k] for k in ks},
                "bare": {str(k): xbare[k] for k in ks}, "acceptance": {str(k): acc[k] for k in ks},

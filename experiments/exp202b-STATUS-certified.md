@@ -43,7 +43,7 @@ amplification of the relay's CHSH edge, as priced); shield-wins-throughput-both-
 
 ## What is now certified that was not before
 
-1. **The first error-corrected QKD stack layer**: an E91/BBM92 key between [[4,2,2]] logical
+1. **The campaign's first error-corrected QKD stack layer** (a scope, not a world-first claim — no literature survey was run; board#457): an E91/BBM92 key between [[4,2,2]] logical
    qubits, direct AND through an untrusted relay shield, physics-certified in-protocol
    (S = 2.79/2.66) — with the relay's two classical bits carrying the key's frame and the
    linearity duality making key and certificate one dataset.

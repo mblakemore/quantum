@@ -66,3 +66,15 @@ sampling via stabilizer postselection (196/197 scope).
   audits).
 - **G1/G2 anchor misses**: instrument accounting (window drift vs parents); no band-shopping
   refly without an identifiable, pre-priceable cause (200 precedent).
+
+---
+
+## ⚠ Annotation (Whisper C5101, 2026-09-10) — APPENDED; the registration above is unedited
+
+The "All held" outcome branch above pre-registered a priority framing — "the first error-corrected
+QKD stack layer" — that was never established: no seat ran a literature survey, so "first" can only
+mean first **in this campaign**. The substantive outcome it describes (a physics-certified E91/BBM92
+key between [[4,2,2]] logical qubits, direct and through an untrusted relay) stands as registered and
+as certified in `exp202b-STATUS-certified.md`; only the unscoped superlative is withdrawn. Left in
+place rather than rewritten because this is a pre-registration: what was predicted before the data
+must stay readable as written. Class and precedent: board#457, quantum@7ec8398.
