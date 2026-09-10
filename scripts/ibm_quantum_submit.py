@@ -105,7 +105,7 @@ def build_grover_circuit(n_qubits: int = 2, k_steps: int = 1):
 def build_bell_state_circuit():
     """Build Bell state |Φ+⟩ = (|00⟩ + |11⟩)/√2.
     
-    DC Network Finding XX Immunity: H-gate commutes with CZ noise; S†-gate opens noise path.
+    DC Network Finding XX Immunity (F03): XX measured least noise-sensitive. The mechanism once stated here (H commutes with CZ noise; S† opens a noise path) is REFUTED, see the F03 correction of 2026-09-10.
     Use X-basis measurements for structural immunity.
     """
     qc = QuantumCircuit(2, 2)
