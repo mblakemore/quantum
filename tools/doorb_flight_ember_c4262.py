@@ -475,6 +475,31 @@ def f_mix_selftest(P, alpha, shots=20000, seed=7):
     return out[0], out[1]
 
 
+def weather_probe_label(n, identity=()):
+    """P1 DUAL-PROBE (Whisper C5101, experiments/p1-weather-gate-amendments-DRAFT-whisper-c5097.md
+    §3b/§3c): the PUBLIC weather-probe label, with identity at DECLARED positions.
+
+    identity=() returns the registered full-weight probe unchanged. Otherwise the SAME public
+    XYZ pattern is kept and the declared positions are set to I, so a fixed-weight probe differs
+    from the full-weight one ONLY in the removed positions — never in Pauli type. Positions are
+    declared explicitly (no seed, no hidden rule) so a reviewer sees exactly what flies.
+    """
+    base = "XYZ" * (n // 3) + "XYZ"[: n % 3]
+    ident = list(identity)
+    if not ident:
+        return base
+    if len(set(ident)) != len(ident):
+        raise ValueError(f"--weather-identity has duplicate positions: {ident}")
+    if any((not isinstance(i, int)) or i < 0 or i >= n for i in ident):
+        raise ValueError(f"--weather-identity positions must be integers in [0, {n}): {ident}")
+    if n - len(ident) < 2:
+        raise ValueError(f"weather probe weight {n - len(ident)} < 2: every marginal would carry P")
+    lab = list(base)
+    for i in ident:
+        lab[i] = "I"
+    return "".join(lab)
+
+
 class _NoThreshold(Exception):
     """Sentinel: --max-2q-error was not set. Distinguishes a CONFIGURED full map from a full map
     reached because the calibration could not be read — the two used to print the same message."""
@@ -719,6 +744,14 @@ def main():
     ap.add_argument("--account", choices=sorted(ACCOUNTS), default=DEFAULT_ACCOUNT,
                     help="which ACCOUNTS entry to fly on; compare its CRN against the registry, "
                          "not against its name (see the C4273 note above ACCOUNTS)")
+    ap.add_argument("--weather-identity", default="", metavar="I,J,...",
+                    help="P1 DUAL-PROBE measurement (Whisper C5101): fly the weather probe with identity at "
+                         "these DECLARED positions (e.g. 3,7,11,15,19 -> w=15 at n=20). WEATHER-ONLY: refused "
+                         "otherwise. Default: the registered full-weight probe, unchanged.")
+    ap.add_argument("--weather-rows", type=int, default=None, metavar="N",
+                    help="P1 DUAL-PROBE measurement: weather-probe rows (default CAL_ROWS=2000, the registered "
+                         "gate). WEATHER-ONLY: a science rung's weather gate is registered at CAL_ROWS and "
+                         "this flag cannot change it.")
     a = ap.parse_args()
 
     # REBIND BOTH, not one. ACCOUNT_ENV selects which token is read out of .env (line ~320) and
@@ -729,6 +762,20 @@ def main():
     ACCOUNT_CRN, ACCOUNT_ENV = ACCOUNTS[a.account]
     PAID_CRN = ACCOUNT_CRN
     print(f"ACCOUNT: {a.account}  env={ACCOUNT_ENV}  instance=…{ACCOUNT_CRN[-40:]}")
+    # ---- P1 DUAL-PROBE flags (C5101): additive, and REFUSED outside --weather-only so a science
+    # rung's registered weather gate (CAL_ROWS rows, full-weight public P) can never be altered.
+    _measure = bool(a.weather_identity) or a.weather_rows is not None
+    if _measure and not a.weather_only:
+        sys.exit("REFUSE MEASURE-FLAGS: --weather-identity / --weather-rows are for the P1 dual-probe "
+                 "MEASUREMENT and require --weather-only; a science rung's weather gate is registered.")
+    try:
+        _w_ident = [int(x) for x in a.weather_identity.split(",") if x.strip()] if a.weather_identity else []
+        _ = weather_probe_label(a.n, _w_ident)
+    except ValueError as _e:
+        sys.exit(f"REFUSE MEASURE-FLAGS: {_e}")
+    if a.weather_rows is not None and a.weather_rows < 100:
+        sys.exit(f"REFUSE MEASURE-FLAGS: --weather-rows {a.weather_rows} < 100")
+    WEATHER_ROWS = a.weather_rows if a.weather_rows is not None else CAL_ROWS
 
     if a.collect:
         return collect(a.collect)
@@ -783,6 +830,21 @@ def main():
         sys.exit("REFUSE F-MIX: every single-qubit marginal must be maximally mixed, and the "
                  "bug arm must reproduce the failure. This is the assert the door (b) "
                  "FAIL-AS-FROZEN paid for — F-IND was real, can-fire, and aimed one axis away.")
+
+    # ---- F-MIX on the DUAL-PROBE label (C5101): the declared fixed-weight probe must prepare its
+    # identity qubits maximally mixed, and the bug arm must fire on it. Runs only when declared.
+    if _w_ident:
+        _lab = weather_probe_label(a.n, _w_ident)
+        _full = weather_probe_label(a.n)
+        _diff = [i for i in range(a.n) if _lab[i] != _full[i]]
+        _lab_ok = _diff == sorted(_w_ident) and all(_lab[i] == "I" for i in _diff)
+        _mb, _mf = f_mix_selftest(_lab, 3 * a.eps)
+        _dp_ok = _lab_ok and _mb > 0.05 and _mf < 0.05
+        print(f"  [{'PASS' if _dp_ok else 'FAIL'}] DUAL-PROBE label {_lab} (w={a.n - len(_w_ident)}): differs from "
+              f"the full-weight probe ONLY at {_diff}; F-MIX BUGGY {_mb:.3f} (>0.05) FIXED {_mf:.3f} (<0.05)")
+        if not _dp_ok:
+            sys.exit("REFUSE DUAL-PROBE: the declared label is not the full-weight probe with exactly the "
+                     "declared positions removed, or its identity qubits are not maximally mixed.")
 
     # ---- G-SEAL SELECTION MATRIX (2026-08-31). The gate that stops a WRONG FLIGHT had no
     # selftest and no bug arm while all three physics asserts above had both. Seven cases: the
@@ -1021,7 +1083,10 @@ def main():
     # ---- in-job calibration: PUBLIC P, rides FIRST, same job (registered delivered-eps clause).
     # The claim EVALUATES at the flight's own delivered eps, not the pilot's — the pilot sized,
     # these rows evaluate. Public P is declared in the manifest so the grader can find them.
-    P_cal = "XYZ" * (a.n // 3) + "XYZ"[: a.n % 3]
+    P_cal = weather_probe_label(a.n, _w_ident)   # = the registered full-weight pattern unless declared (C5101)
+    if _measure:
+        print(f"  [MEASURE] P1 dual-probe weather probe P = {P_cal} (w={a.n - len(_w_ident)}), "
+              f"{WEATHER_ROWS:,} rows, identity at {_w_ident or 'none'}")
 
     # ---- MEASUREMENT calibration, c5093 item 1 rule (b) k=4: matched weight at the SEALED w,
     # each block on an INDEPENDENT uniformly random support from a FRESH stream that never
@@ -1077,13 +1142,13 @@ def main():
                      f"{a.weather_job_max_age_min:g} min bound; the epoch it measured is not this one. Submit a fresh probe.")
         weather_reuse = {"job_id": wjob.job_id(), "created": _created.isoformat(), "age_min_at_reuse": round(_age_min, 1),
                          "max_age_min": a.weather_job_max_age_min}
-        print(f"  [G-WEATHER] REUSING calibration-only job {wjob.job_id()} ({CAL_ROWS:,} rows expected), created "
+        print(f"  [G-WEATHER] REUSING calibration-only job {wjob.job_id()} ({WEATHER_ROWS:,} rows expected), created "
               f"{_age_min:.0f} min ago (bound {a.weather_job_max_age_min:g}) — submitted by an earlier attempt of this rung; no new weather job")
     else:
         weather_reuse = None
-        cal_arr = [draw_cal_row() for _ in range(CAL_ROWS)]
+        cal_arr = [draw_cal_row() for _ in range(WEATHER_ROWS)]
         wjob = SamplerV2(mode=bk).run([(t, cal_arr, 1)])
-        print(f"  [G-WEATHER] calibration-only job {wjob.job_id()} ({CAL_ROWS:,} rows) — reading "
+        print(f"  [G-WEATHER] calibration-only job {wjob.job_id()} ({WEATHER_ROWS:,} rows) — reading "
               f"delivered eps before committing the science budget")
     import time as _t
     for _ in range(60):
@@ -1121,9 +1186,9 @@ def main():
     _dec.init()
     _b = wjob.result()[0].data[list(wjob.result()[0].data.keys())[0]]
     _raws = [_b[i].get_bitstrings()[0] for i in range(_b.array.shape[0])]
-    if len(_raws) != CAL_ROWS or any(len(r) != 2 * a.n for r in _raws[:5]):
+    if len(_raws) != WEATHER_ROWS or any(len(r) != 2 * a.n for r in _raws[:5]):
         sys.exit(f"REFUSE G-WEATHER: job {wjob.job_id()} returned {len(_raws)} rows of "
-                 f"{len(_raws[0]) if _raws else 0} bits; this rung expects {CAL_ROWS} rows of {2 * a.n} bits. "
+                 f"{len(_raws[0]) if _raws else 0} bits; this rung expects {WEATHER_ROWS} rows of {2 * a.n} bits. "
                  f"Not this rung's weather job.")
     _sq = _dec.estimate(P_cal, [_dec.outcome_to_bells(r, a.n) for r in _raws])
     # delivered |tr(P rho)| = sqrt(tr^2); the ensemble amplitude is alpha = 3 eps, so
@@ -1132,6 +1197,25 @@ def main():
     _eps = math.sqrt(max(_sq, 0.0)) / 3.0
     print(f"  [G-WEATHER] delivered tr(P_cal rho)^2 = {_sq:+.4f} -> eps_eff = {_eps:.4f} "
           f"(gate {EPS_MIN})")
+    if _measure:
+        # §3c-1: report the pair WITH its evidence — label, rows, layout, calibration stamp, and the
+        # RAW rows the shot-noise error bar is computed from (save raw counts, never only a verdict).
+        try:
+            _layout = list(t.layout.final_index_layout()) if getattr(t, "layout", None) else None
+        except Exception as _le:
+            _layout = f"UNREADABLE: {type(_le).__name__}"
+        _rec = {"mode": "p1-dual-probe-measurement", "n": a.n, "P_label": P_cal,
+                "weight": a.n - len(_w_ident), "identity_positions": _w_ident, "rows": WEATHER_ROWS,
+                "tr_sq": _sq, "eps_eff": _eps, "eps_min_gate": EPS_MIN, "gate_cleared": _eps >= EPS_MIN,
+                "job_id": wjob.job_id(), "backend": EXPECTED_BACKEND, "account": a.account,
+                "calibration_stamp": calibration_stamp, "layout": _layout,
+                "collected_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                "weather_reuse": weather_reuse, "raws": _raws,
+                "registration": "experiments/p1-weather-gate-amendments-DRAFT-whisper-c5097.md §3b/§3c",
+                "freeze": a.freeze or None}
+        _rp = f"results/doorb_weather_probe_{wjob.job_id()}.json"
+        json.dump(_rec, open(_rp, "w"), indent=1)
+        print(f"  [MEASURE] record + {len(_raws):,} raw rows persisted -> {_rp}")
     if _eps < EPS_MIN:
         print(f"  [HALT] G-WEATHER: eps_eff {_eps:.4f} < {EPS_MIN} — the device is not in a "
               f"claimable epoch. Calibration-only cost spent; the seal is UNSPENT and the "
