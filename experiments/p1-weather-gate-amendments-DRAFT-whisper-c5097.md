@@ -174,6 +174,55 @@ has*: a word that will be resolved after the data exist, by the person holding t
 *This contract binds the measurement only. It does not authorize it: ~8 s of tank is a spend and
 needs a Creator GO of its own.*
 
+### §3d RESULT OF THE DUAL-PROBE RUN — NOT MEASURED at 1.47σ (2026-09-10, graded)
+
+Flown under the frozen spec `experiments/p1-dual-probe-frozen-spec-whisper-c5101.md` (quantum@f3cb45e32,
+digest `ee900bdcdf26c2deb33aa958bcde7d40866f04b8cd759cee591c69736ce70aad`, recorded in both measurement
+records) on runner quantum@6226f2df8. Creator GO 2026-09-10: *"go ahead and fly P1's two-probe follow-up
+at 90% power"*, restated *"go when ready from me!"*. Ember flew it (non-author), Elder graded, Whisper
+held the register seat. One free account (registry id 10) for both legs; the seal was not spent.
+
+| probe | label | w | rows | tr² | ε_eff | SE (bootstrap, B=2000, seed 5101) | job |
+|---|---|---|---|---|---|---|---|
+| FULL  | `XYZXYZXYZXYZXYZXYZXY` | 20 | 3,571 | +0.032204 | 0.059818 | 0.017617 | dah79o8mhr3c73e65va0 |
+| FIXED | `XYZIYZXIZXYIXYZIYZXI` | 15 | 3,571 | +0.073089 | 0.090116 | 0.010689 | dah7bdvi3e6s738neus0 |
+
+Δ = +0.030298; σ(Δ) = 0.020606, measured; 3σ bar = 0.0618; Δ/σ = 1.47 → **NOT MEASURED** (§3c-3).
+Δ measures the weight reduction PLUS the declared composition shift (X −1.7 · Y −1.7 · Z +3.3 pp), never
+the weight alone.
+
+**Power, stated beside the null (Elder's Rider A; frozen spec §5).** At the measured σ, the minimum
+detectable effect is MDE50 0.062, MDE80 0.079 and MDE90 0.088. Power against the registered expected
+effect of 0.044 was **0.19** (it would have been 0.907 at the planning σ). So NOT MEASURED was the likely
+outcome whether or not width scaling is real, and **this result is not evidence against width scaling**.
+The 95% interval for Δ, [−0.010, +0.071], contains both zero and 0.044. Amendment (1) stays unsigned.
+Single look: any further flight is its own registered experiment, with its own bar and its own GO.
+
+**Why the measured σ was twice the planning σ.** The device epoch was weak: ε ≈ 0.06–0.09, against the
+0.128 gate. Because ε = √tr²/3, the estimator is steeper at low signal (Ember). Under the planning bar
+of 0.0305, this Δ would have fallen short by only 0.000236 (0.77%). Grading on the measured σ, fixed
+before any data existed, is what kept a 1.47σ effect from reading as a detection.
+
+**Conditions, read from the records (all met):** distinct job ids; calibration stamp
+2026-09-10T08:20:05+00:00 on both legs, known; layouts byte-equal; label check PASS (cross 0.0244 <
+0.5 × matched 0.0731); submission adjacency 3 min 35 s; freeze digest recorded on both. Both legs fell
+below the weather gate, which is not a criterion here. The flyer's out-of-band snapshots (information
+only) read the same calibration stamp.
+
+**Observation, unresolved.** FULL ran 82 s on the device and FIXED ran 438 s (5.34×), with identical
+stamp, layout and row count. FIXED is the cheaper circuit (five identity positions), which rules out a
+bigger job (Elder). What remains is scheduling or device state within the epoch, and the records cannot
+separate the two.
+
+**Cost.** The free account's registry balance went from 266 s to 258 s, and the second reading
+(09:26:03Z) came after FIXED finished (09:25:04Z). That is 8 s net, against a planned 17.3 s. The
+counter covers a trailing 28-day window, so a per-job sum need not reconcile with it.
+
+Records: `results/doorb_weather_probe_dah79o8mhr3c73e65va0.json` and
+`results/doorb_weather_probe_dah7bdvi3e6s738neus0.json` (raw rows included), the flyer snapshots, and
+Ember's report at quantum@18af528. Report: Ember, general#26084. Register check: Whisper, general#26087.
+Grade: Elder, general#26089.
+
 ### The width residual stays unquotable either way — two independent problems, one amendment
 
 Rule (c) clearing must not be read as making the width residual quotable. It has **two**
