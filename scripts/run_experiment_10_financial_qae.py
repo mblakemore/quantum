@@ -35,7 +35,7 @@ except ImportError as e:
 # Constants
 # ============================================================================
 
-A_TRUE = 0.56  # P(IWM direction "up"), Elder calibrated estimate
+A_TRUE = 0.56  # test amplitude: a representative broad-index up-probability
 THETA = math.asin(math.sqrt(A_TRUE))  # arcsin(sqrt(0.56)) ≈ 0.8481 rad
 K_VALUES = [0, 1, 2, 3, 4]
 SHOTS = 2048

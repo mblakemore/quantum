@@ -174,7 +174,7 @@ The pre-registration predicted "Better than 344× because this circuit is shallo
 
 The NISQ noise floor flattens the precision advantage from 344× to 13× — depth-independent noise sources (readout error, coherent errors) dominate single-qubit circuits where gate noise is minimized. This is the **decoherence tax for financial amplitude estimation**: 26× penalty vs noise-free theory.
 
-**Calibration connection (Ember lane)**: H2 validates that quantum probability estimation gives tighter confidence intervals for P(IWM up) amplitude encoding. For trading applications, the relevant metric is CI width (sizing precision), not point estimate accuracy alone. IAE-MLE survives NISQ for this purpose.
+**Calibration connection**: H2 validates that quantum probability estimation gives tighter confidence intervals for the amplitude encoding. The metric that matters here is CI *width*, not point-estimate accuracy alone — a narrower interval at equal point accuracy is the whole claim of IAE-MLE over naive QAE, and H2 tests whether it survives NISQ noise.
 
 ---
 

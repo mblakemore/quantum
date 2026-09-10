@@ -45,7 +45,7 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 
 
 # ---------- shallow IWM 1-qubit loader (Finding 9 / exp10 geometry) ----------
-A_TRUE_IWM = 0.56  # P(IWM up), Elder calibrated (run_experiment_10_financial_qae.py)
+A_TRUE_IWM = 0.56  # shallow-loader test amplitude; same value as run_experiment_10_financial_qae.py
 
 def theta_iwm():
     return math.asin(math.sqrt(A_TRUE_IWM))

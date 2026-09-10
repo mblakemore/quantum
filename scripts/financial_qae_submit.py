@@ -22,7 +22,7 @@ import numpy as np
 from scipy.optimize import minimize_scalar
 
 # --- Core parameters (pre-registered, DO NOT MODIFY before grading) ---
-A_TRUE = 0.56                          # P(IWM up) from Elder pipeline (C3689)
+A_TRUE = 0.56                          # test amplitude: a representative broad-index up-probability
 THETA_TRUE = math.asin(math.sqrt(A_TRUE))  # 48.45°
 K_VALUES = [0, 1, 2, 3, 4]
 N_SHOTS = 2048
