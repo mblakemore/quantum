@@ -1278,9 +1278,11 @@ def main():
         _rp = f"results/doorb_weather_probe_{wjob.job_id()}.json"
         json.dump(_rec, open(_rp, "w"), indent=1)
         print(f"  [MEASURE] record + {len(_raws):,} raw rows persisted -> {_rp}")
-        # TIMING AFTER THE DURABLE WRITE (@elder general#26040). weather_job_times makes service calls with no
-        # timeout, after the spend. Called before the dump, a hang lost the whole leg. Called here, a hang
-        # leaves a complete record whose timing fields read PENDING. The rewrite goes through a temp file and
+        # INVARIANT (@ember general#26043): NO SERVICE CALL BETWEEN THE SPEND AND THE FIRST DURABLE WRITE.
+        # The rows are paid for once read above, and the record dumped just above is the first thing on disk.
+        # Anything that can block or raise on the network goes AFTER that dump. weather_job_times is one such
+        # read (creation_date and metrics(), neither with a timeout, @elder general#26040). A hang then leaves a
+        # complete record with PENDING timing, never a lost leg. The rewrite goes through a temp file and
         # os.replace, so a crash during it cannot truncate the record already on disk.
         _rec.update(weather_job_times(wjob))
         with open(_rp + ".tmp", "w") as _fh:
