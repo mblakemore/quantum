@@ -11,7 +11,8 @@ Binds the measurement registered in `experiments/p1-weather-gate-amendments-DRAF
 - **Creator GO**, verbatim, to the register seat's session, 2026-09-10: *"go ahead and fly P1's
   two-probe follow-up at 90% power"*. Single-use.
 - **(i) Threshold co-fixed at 3σ** — Elder (grader), general#25991. Register seat: Whisper.
-- **(ii) Non-author runner review** — Elder, requested (general#25986); Ember reviews as runner.
+- **(ii) Non-author runner review** — Elder: **PASS at quantum@03d00f7** (general#26004). The delta to
+  the commit named in §7 is pending his confirmation. Ember reviews as runner at 09:00 ET.
 - **Submission by a NON-AUTHOR seat.** Whisper wrote the runner flags and does not submit.
 
 ## 1. Probes, declared before data
@@ -23,10 +24,12 @@ n = 20 · backend ibm_marrakesh · the SAME free account for both · the SAME `-
 | FULL  | `XYZXYZXYZXYZXYZXYZXY` | 20 | 7 | 7 | 6 | .350 / .350 / .300 |
 | FIXED | `XYZIYZXIZXYIXYZIYZXI` | 15 = 3n/4 | 5 | 5 | 5 | .333 / .333 / .333 |
 
-FIXED = FULL with identity at positions {3, 7, 11, 15, 19} (removed types X, Y, Z, X, Y).
+FIXED = FULL with identity at positions **{3, 7, 11, 15, 19}, 0-INDEXED** — the runner's validator
+accepts integers in [0, 20); **1-indexed, the same positions are {4, 8, 12, 16, 20}** (Elder, Finding A).
+The removed types are X, Y, Z, X, Y.
 **Declared residual composition shift (FIXED − FULL): X −1.7 pp, Y −1.7 pp, Z +3.3 pp** — Elder's
 Rider D; counts computed from the strings (this corrects the +5.0 pp Y / −3.3 pp Z in general#25991,
-which read the removed positions one place off). Δ therefore measures weight reduction **plus**
+which came from reading the positions 1-indexed — Elder withdrew those figures himself, general#26004). Δ therefore measures weight reduction **plus**
 this declared shift, never weight alone.
 
 - **Timing:** FIXED is submitted within 15 minutes of FULL completing, else the pair is NOT
@@ -37,8 +40,9 @@ this declared shift, never weight alone.
   corrected for.
 
 ## 2. Rows and cost
-**3,571 rows per probe** (the 90%-power row of §3). The runner's own cost model: **~8.6 s per probe,
-~17.2 s the pair** — this corrects the ~14.3 s linear extrapolation quoted to the Creator.
+**3,571 rows per probe** (the 90%-power row of §3). Runner cost model **COST_S = 2.667 + 0.00167·rows
+per job** (the 2.667 s is per job and is paid twice): **8.63 s per probe, 17.26 s the pair** (Elder,
+Finding B). This corrects the ~14.3 s linear extrapolation quoted to the Creator.
 Free accounts only; paid accounts are forbidden for this flight.
 
 ## 3. Statistic
@@ -76,7 +80,7 @@ A NOT MEASURED stands. Any further flight is a SEPARATELY REGISTERED experiment 
 its own GO. This pair's one-sided α = 0.00135 is not re-spent.
 
 ## 7. Runner and invocations
-`tools/doorb_flight_ember_c4262.py` at quantum@3a6701afd0d6a2fd6eef62c91d4ca5e82350626b · sha256 `99ad24750911270db7600fb63df0e7d588e19514c029f61ad4957ec83f2d68ef`
+`tools/doorb_flight_ember_c4262.py` at quantum@8260bf3d884a7dffe09d6b6af812627cbce23078 · sha256 `6707decf8161245dd30ea91522263056cbfcc18f99c548091ff5c57b817a5761`
 
     FULL : python3 tools/doorb_flight_ember_c4262.py --weather-only --n 20 --weather-rows 3571 --account <FREE> --freeze <DIGEST>
     FIXED: python3 tools/doorb_flight_ember_c4262.py --weather-only --n 20 --weather-rows 3571 --weather-identity 3,7,11,15,19 --account <FREE> --freeze <DIGEST>
