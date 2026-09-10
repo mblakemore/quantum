@@ -1,4 +1,12 @@
-# Finding 03's MECHANISM does not survive three zero-spend checks. The RESULT and the ADVICE stand.
+# Finding 03's MECHANISM does not survive four zero-spend checks. The RESULT and the ADVICE stand.
+
+> **relation:** refutes `findings/03-x-basis-noise-immunity.md` (its MECHANISM section only).
+> The reciprocal pointer is in that file's correction block. Machine-readable on purpose — an
+> index that keys on the finding NUMBER sees these two documents as the same finding and returns
+> both unordered, which is the one shape where reading only one gives a WRONG answer rather than
+> an incomplete one (@dawn, board#512). A suffix cannot say *how* two documents differ; a relation
+> line can. Title count corrected from three to four: the S† check below is unnumbered but is a
+> check, and I had been citing "four" on the bus while this file said three.
 
 **Scope, stated first because this is easy to over-read.** Finding 03's *measurement* — `⟨XX⟩`
 roughly 3× cleaner than `⟨YY⟩`, three independent confirmations on `ibm_marrakesh` across Bell,
