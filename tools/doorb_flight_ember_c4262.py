@@ -475,6 +475,27 @@ def f_mix_selftest(P, alpha, shots=20000, seed=7):
     return out[0], out[1]
 
 
+def weather_job_times(wjob):
+    """P1 dual-probe (C5101, @elder general#26030): when the job was SUBMITTED and when it RAN, so the
+    pair's adjacency can be graded from the records. collected_utc only says when the flyer READ the
+    job, and §1b allows a re-read up to 60 min later. Both reads go through the job's OWN client (the
+    account that submitted it). This runs AFTER the spend and BEFORE the record is dumped, so it must
+    never cost the record: every failure is written as UNREADABLE (type name only, no message), and
+    the timestamps are forced JSON-safe."""
+    out = {}
+    try:
+        _cd = wjob.creation_date
+        out["job_created_utc"] = (_cd.astimezone(datetime.timezone.utc).isoformat() if _cd is not None
+                                  else "UNKNOWN — creation_date None")
+    except Exception as _e:
+        out["job_created_utc"] = f"UNREADABLE: {type(_e).__name__}"
+    try:
+        out["job_timestamps"] = json.loads(json.dumps((wjob.metrics() or {}).get("timestamps"), default=str))
+    except Exception as _e:
+        out["job_timestamps"] = f"UNREADABLE: {type(_e).__name__}"
+    return out
+
+
 def weather_probe_label(n, identity=()):
     """P1 DUAL-PROBE (Whisper C5101, experiments/p1-weather-gate-amendments-DRAFT-whisper-c5097.md
     §3b/§3c): the PUBLIC weather-probe label, with identity at DECLARED positions.
@@ -1242,12 +1263,14 @@ def main():
                             "rule": "PASS iff matched > 0 and |cross| < 0.5*|matched|", "passed": _lc_ok}
             print(f"  [{'PASS' if _lc_ok else 'FAIL'}] LABEL-CHECK matched tr^2 {_sq:+.4f} vs full-weight-label "
                   f"tr^2 {_sq_cross:+.4f}" + ("" if _lc_ok else "  ⚠ LABEL DID NOT REACH THE DRAW -> NOT MEASURED"))
+        _jt = weather_job_times(wjob)
         _rec = {"mode": "p1-dual-probe-measurement", "n": a.n, "P_label": P_cal, "label_check": _label_check,
                 "weight": a.n - len(_w_ident), "identity_positions": _w_ident, "rows": WEATHER_ROWS,
                 "tr_sq": _sq, "eps_eff": _eps, "eps_min_gate": EPS_MIN, "gate_cleared": _eps >= EPS_MIN,
                 "job_id": wjob.job_id(), "backend": EXPECTED_BACKEND, "account": a.account,
                 "calibration_stamp": calibration_stamp, "layout": _layout,
                 "collected_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                "job_created_utc": _jt["job_created_utc"], "job_timestamps": _jt["job_timestamps"],
                 "weather_reuse": weather_reuse, "raws": _raws,
                 "registration": "experiments/p1-weather-gate-amendments-DRAFT-whisper-c5097.md §3b/§3c",
                 "freeze": a.freeze or None}
