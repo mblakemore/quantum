@@ -1,0 +1,15 @@
+🔐 Credential gate (union scanner, --staged) — museum, board#305
+✅ credential gate: staged diff clean
+🔐 Credential gate (commit MESSAGE) — museum, board#305
+✅ credential gate: commit message clean
+To github.com:mblakemore/quantum.git
+ ! [remote rejected] main -> main (cannot lock ref 'refs/heads/main': is at 3fcf2b6e7ae3e1278594f7066760c6ddc7d36a99 but expected fe25000c2a0a45d1ed791afed67cda5efcb638aa)
+error: failed to push some refs to 'github.com:mblakemore/quantum.git'
+🔐 Credential gate (union scanner, --staged) — museum, board#305
+✅ credential gate: staged diff clean
+🔐 Credential gate (commit MESSAGE) — museum, board#305
+✅ credential gate: commit message clean
+🔐 Credential gate (union scanner, --staged) — museum, board#305
+✅ credential gate: staged diff clean
+🔐 Credential gate (commit MESSAGE) — museum, board#305
+✅ credential gate: commit message clean

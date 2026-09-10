@@ -1,0 +1,43 @@
+ACCOUNT: OPEN10  env=IBMQ_ALT  instance=…3:44cfd6bd-c143-4ed4-8bc0-9d560992006f::
+DOOR (b) FLIGHT — n=20, eps=0.3, delta=0.05
+  [PASS] G-DECODE  decoder vs exact simulation, n=1..3: worst |E[sign] - tr(P rho)^2| = 5.55e-16
+  [PASS] F-BIAS    biased draw <s> = +0.8996 (target +0.90);  UNIFORM-BUG draw <s> = -0.0032 (wash, target 0)
+  [PASS] F-IND     shared-stream identical-draw rate 1.000 (bug fires at ~1.0);  independent 0.127
+  [PASS] F-MIX     identity-qubit |<Z>|: BUGGY-arm 1.000 (must fire >0.05), FIXED-arm 0.015 (must pass <0.05)
+  [PASS] G-SEAL-SEL v1 only            -> v1, weight NOT bound
+  [PASS] G-SEAL-SEL v2 only            -> v2, w parsed from the key
+  [PASS] G-SEAL-SEL two v2 seals       -> REFUSE (cannot choose among commitments)
+  [PASS] G-SEAL-SEL empty store        -> REFUSE (no seal)
+  [PASS] G-SEAL-SEL v1 AND v2 PRESENT  -> REFUSE (the 7th case; old code took v1 SILENTLY)
+  [PASS] G-SEAL-SEL weight match       -> PASS, returns flown weight
+  [PASS] G-SEAL-SEL weight mismatch LO -> REFUSE
+  [PASS] G-SEAL-SEL weight mismatch HI -> REFUSE
+  [PASS] G-SEAL-SEL v1 seal            -> weight gate returns None, i.e. DID NOT RUN
+  [PASS] G-SEAL-SEL v2 weight suffix ':wX' non-integer -> REFUSE, not ValueError
+  [PASS] G-SEAL-SEL v2 key with NO ':w' segment       -> REFUSE, not IndexError
+  [PASS] G-SEAL-SEL v2 weight 0 (identity_excluded is bound) -> REFUSE
+  [PASS] G-SEAL-SEL v2 weight suffix ':w-1' negative  -> REFUSE
+  [PASS] G-SEAL-SEL wrong-length P, right weight, n OMITTED -> PASSES (weaker standalone contract)
+  [PASS] G-SEAL-SEL wrong-length P, right weight, n GIVEN   -> REFUSE
+  [PASS] G-SEAL-SEL right-length P, right weight, n GIVEN   -> PASS
+  [PASS] G-SEAL-SEL selection does NOT mutate the store (refuse, never dedup the stale key)
+  [PASS] G-SEAL-SEL BUG ARM: pre-fix selection DOES take v1 on the v1+v2 store (defect reproduces)
+
+  registered budget T = 4 ln(2*4^n/delta)/eps^4 = 15,513 copies -> 7,757 Bell shots
+  theorem floor (memoryless) 2^n/eps^2 = 11,650,844 copies   ratio 751.0x
+  width: 2n = 40 qubits
+qiskit_runtime_service._discover_account:WARNING:2026-09-06 16:20:20,666: Loading account with the given token. A saved account will not be used.
+  [PASS] G-CRN     ...4ed4-8bc0-9d560992006f::  remaining 321s  flagged=False
+  [PASS] G-BACKEND ibm_marrakesh
+  [PASS] G-FIT     321s remaining, reserve 20s
+  [PASS] G-SEAL    0e5c0dea4e49aab3... matches the pinned commitment doorb_commitment_v2_n20_w12_repeat1.json
+  [PASS] G-SEAL-W  flown weight 12 == sealed w=12
+  [G-EDGES]  6 coupler(s) at 2q error >= 0.5 EXCLUDED from routing: [(81, 82), (82, 83), (113, 114), (113, 119), (129, 130), (130, 131)] (calibration 2026-09-06T15:54Z)
+/home/mike/.local/lib/python3.12/site-packages/qiskit/compiler/transpiler.py:276: UserWarning: Providing `coupling_map` and/or `basis_gates` along with `backend` is not recommended, as this will invalidate the backend's gate durations and error rates.
+  pm = generate_preset_pass_manager(
+  [PASS] G-EDGES   transpiled template touches none of the 6 excluded coupler(s)
+  template: 120 params, ISA 2q=20 (structure identical for every P — form (a))
+  [G-CAL]    k=4 matched-weight cal blocks at sealed w=12, 8,865 rows each (c5093 items 1-2)
+  [G-WEATHER] calibration-only job daep5im42tqs73av1510 (2,000 rows) — reading delivered eps before committing the science budget
+  [G-WEATHER] delivered tr(P_cal rho)^2 = +0.0830 -> eps_eff = 0.0960 (gate 0.128)
+  [HALT] G-WEATHER: eps_eff 0.0960 < 0.128 — the device is not in a claimable epoch. Calibration-only cost spent; the seal is UNSPENT and the flight is repeatable on a better day.
