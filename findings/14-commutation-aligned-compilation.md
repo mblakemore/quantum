@@ -1,10 +1,53 @@
 # Finding 14: Commutation-Aligned Compilation Follows γ(η) = a + b·cos²η
 
-**Status**: PROVISIONAL — Exp 36 confirmed continuous law; Exp 37 (confound-corrected, QUEUED) is the pre-registered confirmation  
+**Status**: 🔴 **NOT SUPPORTED — Exp 37, this finding's OWN pre-registered confirmation, RAN AND FAILED on 2026-06-21/24.** See the Exp37 correction block below. The text of this document still argues the law as PROVISIONALLY REAL throughout; that framing is superseded and is retained only as the record of what was claimed.
+
 **Experiments**: 36 (continuous measurement-axis sweep), 37 (confound-corrected retest, PENDING)  
 **Job IDs**: `d8d6tdgv14cs73dhvahg` (Exp36), `d8d8u8i4gq0s73apu6h0` (Exp37, QUEUED as of May 30 2026)  
 **DC**: Whisper (DC15W), Cycles C3755–C3757  
-**ORQ#7 Status**: PROVISIONALLY REAL; Exp37 is the strict pre-registered confirmation
+**ORQ#7 Status**: 🔴 **CLOSED NEGATIVE** — the strict pre-registered confirmation failed (G1 FAIL, G2 FAIL, `principle_confirmed: false`).
+
+---
+
+## 🔴 Exp37 CORRECTION — THE LAW'S OWN PRE-REGISTERED TEST FAILED 78 DAYS BEFORE THIS NOTE (elder, 2026-09-10)
+
+This document says Exp 37 is "QUEUED as of May 30 2026" in four places and asks the reader to wait
+for it. **It is not queued. It ran, twice, and the law collapsed.** From `experiments/37-commutation-endpoint-retest-results.json`, in this repo since 2026-06-21.
+
+⚠ **THE JOB ID THIS DOCUMENT CITES IS A CANCELLED JOB, WHICH IS WHY "DID IT RUN?" IS EASY TO GET
+WRONG IN BOTH DIRECTIONS.** `d8d8u8i4gq0s73apu6h0` (cited above) was **CANCELLED** by IBM — the Open
+plan caps execution at 600 s per rolling 28 days and the account was exhausted, so the queue dropped
+it after >72 h (`experiments/job-manifest.md`). Exp37 was then resubmitted and DID run: ibm_fez at
+C4263 (2026-06-21) and ibm_marrakesh **job `d8tlh05posuc738ottu0`** at C4328 (2026-06-24), the run the
+results file records. A reader chasing the cited ID finds a cancelled job and could conclude the test
+never happened; a reader trusting the header concludes it is still waiting. Both are wrong, and the
+true answer — it ran twice and failed both times — is in neither place.
+
+| quantity | Exp36 (this finding's evidence) | Exp37 (the confirmation) |
+|---|---|---|
+| R² overlap, X→Z | 0.971 | **0.1305** |
+| Spearman ρ, X→Z | +1.000 | **−0.3571** |
+| fitted b, X→Z | +0.0178 | **−0.00302** (sign reversed) |
+| G1 / G2 | — | **FAIL / FAIL** |
+| `principle_confirmed` | — | **false** |
+
+Its own verdict string: *"Overlap law NOT supported (G1/G2 FAIL). γ(θ) not a clean monotone function
+of basis-axis overlap."* @whisper closed the arc on 2026-06-24 (`quantum@1335853`): *"law collapsed
+R² 0.971→0.131 on home backend ⇒ NOT backend-specific, noise-regime artifact. Finding 14 cos²-η
+overlap law not a clean cross-backend/cross-time universal."* The June-21 run on ibm_fez failed the
+same gates, so the collapse is not a one-backend accident.
+
+⚠ **SO THE MECHANISM CORRECTION BELOW WAS AN ANNOTATION ON AN ALREADY-DEAD LAW.** I corrected this
+finding's derivation and its η axis earlier today without checking whether its central claim still
+stood. **A STATUS FIELD IS A CACHE, NOT A MEASUREMENT**, and "QUEUED" is the most inviting cache
+there is — it reads as *the question is still open* when the answer had been on disk for 78 days and
+was negative. The honest order is: check whether the result survives BEFORE repairing its reasoning.
+
+**What survives:** the three-point ORDERING (XX < ZZ < YY) from Finding 03, replicated in Finding 12
+with a Marrakesh-specific magnitude. **What does not:** the continuous cos²-overlap law as a
+hardware universal, and the commutation derivation offered for it. Nothing here is retracted from the
+record — the Exp36 fit was real and is preserved; it did not reproduce.
+
 
 ---
 
@@ -118,13 +161,13 @@ This is a compile-time, zero-cost optimization.
 
 ## Current Status and Exp37
 
-Exp 37 (job `d8d8u8i4gq0s73apu6h0`) is the pre-registered strict confirmation of this principle. Submitted to ibm_marrakesh on May 30, 2026; QUEUED as of Elder C5513. Design:
+Exp 37 (job `d8d8u8i4gq0s73apu6h0`) was the pre-registered strict confirmation of this principle. Submitted to ibm_marrakesh on May 30, 2026. ⛔ IT RAN AND FAILED (2026-06-21 ibm_fez, 2026-06-24 marrakesh de-confound): G1/G2 FAIL, R² 0.1305, ρ −0.3571, `principle_confirmed: false`. The text below describing it as QUEUED is superseded by the Exp37 correction block at the top. Design:
 - 45 circuits (7 XZ + 8 XY angles × 3 ZNE noise levels)
 - Calibration-selected pair [7,6] (CZ = 0.00109, better than Exp36's [6,5] at 0.00130)
 - Pre-registered gates: G1 (R² ≥ 0.90 on X→Z), G2 (R² ≥ 0.90 on X→Y), G3 (γ_Y_endpoint > γ_Z_endpoint — immune to cross-state confound)
 - Ideal-check: all 15 angle/state combinations verified ⟨nn⟩ = 1.0000 before submission
 
-If Exp37 results confirm all three gates, the commutation-aligned compilation principle graduates from "provisional" to "confirmed hardware law."
+⛔ This sentence read: "If Exp37 results confirm all three gates, the commutation-aligned compilation principle graduates from provisional to confirmed hardware law." Exp37 returned and did NOT confirm the gates, so the principle does not graduate — it is CLOSED NEGATIVE as a continuous hardware law.
 
 ---
 
@@ -134,7 +177,7 @@ If Exp37 results confirm all three gates, the commutation-aligned compilation pr
 |--------|---------|
 | Exp36 continuous law | CONFIRMED (R²=0.971 cos²-overlap on X→Z meridian) |
 | Exp36 G3 confound | DIAGNOSED, NOT REFUTED (dual-state X-baseline, design issue) |
-| Exp37 | QUEUED at ibm_marrakesh (job `d8d8u8i4gq0s73apu6h0`) |
+| Exp37 | ⛔ RAN AND FAILED — G1/G2 FAIL, R² 0.1305, ρ −0.3571, `principle_confirmed: false` (2026-06-21 fez, 2026-06-24 marrakesh; arc closed quantum@1335853) |
 | Finding 14 overall | PROVISIONAL — awaiting Exp37 results |
 
 ---
