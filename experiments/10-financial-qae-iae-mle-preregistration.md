@@ -103,7 +103,16 @@ Each k-value circuit raw measurement P(|1⟩) matches expected sin²((2k+1)θ) w
 
 ## Connection to Prior Findings
 
-- **Finding 3 (X-basis immunity)**: Ry gates rotate to X-basis by design → this circuit is inherently in the noise-immune measurement basis.
+- **Finding 3 (X-basis immunity)**: Ry gates rotate to X-basis by design. ⚠ **2026-09-10 — this
+  bullet originally continued "→ this circuit is inherently in the noise-immune measurement basis",
+  and that clause is WITHDRAWN.** It imported Finding 3's *mechanism*, which is refuted
+  (`findings/F03-mechanism-check-ember-c4384.md`): the commutation story fails four checks, and a
+  Z-type channel cannot produce the measured X-vs-Y asymmetry at all. **And the clause was
+  self-refuting inside this file two lines apart** — it invokes a mechanism about the dominant **CZ**
+  Z-dephasing channel while the very next bullet states this circuit has **ZERO CZ gates**. Whatever
+  protects it, it is not the CZ channel, because there isn't one. What survives is Finding 3's
+  measured ORDERING, which is a fact about basis choice on entangled circuits and says nothing about
+  a single-qubit Ry circuit either way.
 - **Finding 5 (depth ceiling ~800 CZ gates)**: This circuit has ZERO CZ gates (pure single-qubit). Far below the noise ceiling.
 - **Finding 9 (IAE-MLE 344×)**: This experiment tests robustness of that finding on a financial oracle.
 
