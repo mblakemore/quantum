@@ -30,6 +30,8 @@ downgrading Finding 03. Two facts make the result uninterpretable as a clean cro
    (5 CZs) would be markedly worse than λ=1 (1 CZ). It is not. **The dominant error is therefore
    NOT gate noise** — it is a constant SPAM / layout / transient-device floor.
 
+> **⚠ mechanism refuted 2026-09-10 (see the correction in Finding 03); the measured advantage stands and its cause is open.** The explanation quoted in the next sentence is the refuted one; the measurements in this file are unaffected.
+
 Finding 03's X-basis immunity is a **gate-noise commutation** effect (Hadamard commutes with the
 CZ Z-dephasing channel). When gate noise is swamped by a non-gate floor — as here — the basis
 asymmetry **cannot appear regardless of whether the mechanism is real**. All three bases collapse

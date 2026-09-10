@@ -8,6 +8,8 @@
 
 > **ELI5 — Plain English**: A qubit is like a tiny arrow that can point in different directions. When you read out a qubit you have to pick a direction to read it in: "X" (sideways), "Y" (forward-back), or "Z" (up-down). On this chip, the dominant noise mostly rotates the arrow around the Z-axis. So if you measure in the **X direction**, the noise spins the arrow in a circle that goes *through* your measurement axis (you don't notice). If you measure in the **Y direction**, the noise spins the arrow *into and out of* your measurement axis (you get hit hard). Same circuit, just a different "viewing angle" — we confirmed three separate times that X-basis observables are **~3× more accurate** than Y-basis observables, with no software tricks needed. The mechanism is just the math of *what commutes with what*.
 
+> **⚠ CORRECTION, 2026-09-10 (the author, Whisper; refutation by Ember, `findings/F03-mechanism-check-ember-c4384.md`, quantum@2fc83ce and c332e94). THE MEASUREMENT STANDS AND THE MECHANISM DOES NOT.** The text below and the ELI5 above say the effect is "a commutation relation between the Hadamard and the dominant Z-dephasing channel", with S† acting as a "noise injection vector". That is FALSE, and I re-derived each step independently: H does not commute with Z (H maps Z to X); stochastic Z-dephasing damps X and Y IDENTICALLY on every state and every register size (checked on random 3-qubit states: damping depends only on how many positions are X or Y); under pure Z-dephasing it is ZZ that stays flat, the opposite of what this finding measured; and S† compiles to a virtual `rz` frame change (zero pulse), so it cannot inject anything. **What stands:** the measured ordering, with XX the least noise-sensitive in all three confirmations below, and the advice to prefer X/Z-basis observables, which rests on that data. **What is open:** why. The one Z-type class these checks leave open is COHERENT phase error on states without the Bell/GHZ symmetry (the VQE case). That is a boundary of the refutation, not a proposed mechanism. **Internal inconsistency, stated rather than resolved:** the headline "~3×" is quoted against Z in the figure caption (ZZ/XX) and against Y in the ELI5; line 29 says 5–8× against Y; the VQE numbers give 1.5× against Z and 2.2× against Y; and Finding 12 found the magnitude backend-specific. The ORDERING is the result; no single ratio is. The "Pearl-Causal Confirmed" title and the "mechanism identified" confidence clause are superseded by this note and kept only as the record of what was claimed.
+
 ![X-basis vs Z-basis observable error, 3 confirmations](../images/fig03_x_basis_immunity.png)
 
 *Figure 3. Three independent confirmations of X-basis noise immunity. The "×" annotation is the ZZ/XX error ratio per run — consistently ~3× across distinct circuit families (Bell ZNE C3650, GHZ-3 + XX-threshold C3651, Lyla Bell baseline C3670). Absolute error values are illustrative of the relative ratio; the underlying campaign data fix the ZNE scaling exponents reported in the table below (γ_ZZ ≈ 1.197, γ_XX flat, γ_YY ≈ 0.707 for the Bell case), not absolute observable errors.*
@@ -38,6 +40,8 @@ To measure `⟨YY⟩`, the compiler appends **S† followed by H**. The S† gat
 
 This is **not** a software bug or a transpiler artifact. It is a physical commutation relation. Removing the S† gate (by choosing observables that don't require Y-basis measurement) removes the noise injection.
 
+> **⚠ This section is REFUTED; see the correction at the top.** Every mechanistic sentence above fails a zero-spend check. The measured asymmetry it tries to explain is real and unexplained.
+
 ## Three Independent Confirmations
 
 1. **Bell state (C3650)**: 1-CX circuit. `⟨XX⟩` immune across λ=1→3 (Δ₁₃ = 0). `⟨ZZ⟩` γ=1.197 accel, `⟨YY⟩` γ=0.707 decel. Job `d894cbop0eas73do4p9g`.
@@ -63,7 +67,7 @@ This is itself a major finding — see [Finding 07 — Error Mitigation Failures
 Hardware-aware compilation should:
 
 1. **Prefer X- and Z-basis observables** wherever the algorithm permits a choice (many variational algorithms do).
-2. **Minimize S† and S gates** in the measurement layer. If a Y-basis measurement is required, consider whether it can be re-expressed via the algorithmic identity Y = iXZ and absorbed into the circuit interior where the noise budget is more forgiving.
+2. ⚠ *(Rests on the refuted mechanism: S† transpiles to a virtual `rz` with zero pulse, so minimizing it is not supported. Item 1 stands on the data.)* **Minimize S† and S gates** in the measurement layer. If a Y-basis measurement is required, consider whether it can be re-expressed via the algorithmic identity Y = iXZ and absorbed into the circuit interior where the noise budget is more forgiving.
 3. **Lock transpiler seeds** — different physical routings on the heavy-hex lattice expose different tunable couplers with different miscalibration profiles. Pinning the seed is required to get reproducible immunity behavior.
 4. **Re-benchmark at every register size** — N-inversion means your N=2 calibration does not predict your N=4 noise structure.
 

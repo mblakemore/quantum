@@ -65,6 +65,8 @@ The native CZ gate on Heron-r2 is implemented via a **baseband flux pulse** on t
 
 This is the physical reason for the **X-basis structural noise immunity** in [Finding 03](../findings/03-x-basis-noise-immunity.md): the Hadamard gate (needed for X-basis measurement) commutes with Z-type errors, so the dominant noise channel never reaches the measurement axis. Y-basis measurement requires an S† gate, which is a Z-rotation that fails to commute with the Z-noise — actively injecting it into the measurement.
 
+> **⚠ mechanism refuted 2026-09-10 (see the correction in Finding 03); the measured advantage stands and its cause is open.** The commutation account in the paragraph above fails zero-spend checks: H does not commute with Z, and Z-dephasing damps X and Y identically.
+
 ---
 
 ## Two-Level System (TLS) defects: the substrate's weather
