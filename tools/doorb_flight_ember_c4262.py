@@ -589,7 +589,7 @@ def budget_copies(n, eps, delta):
 # observe it was to fly it. A money-path branch you can only exercise in production is one
 # nobody has ever seen take its other path. Same argument as position-stop-gate's fixture.
 COST_S = lambda shots: 2.667 + 0.00167 * shots     # measured two-point model
-def flight_budget(n, delta, eps_delivered, copies, live_s, margin=1.5):
+def flight_budget(n, delta, eps_delivered, copies, live_s, margin=1.5, weather_rows=CAL_ROWS):
     """(T, shots, est_s, fits, sizing) — fixed-copies if `copies`, else sized from delivered eps."""
     if copies:
         T, sizing = float(copies), f"REGISTERED --copies {copies:,}"
@@ -597,7 +597,7 @@ def flight_budget(n, delta, eps_delivered, copies, live_s, margin=1.5):
         T = 4.0 * math.log(2 * 4 ** n / delta) / eps_delivered ** 4
         sizing = f"eps_flight {eps_delivered:.4f}"
     shots = math.ceil(T / 2)
-    est = rung_cost_s(shots)
+    est = rung_cost_s(shots, weather_rows)
     return T, shots, est, est * margin <= live_s, sizing
 
 
@@ -617,14 +617,15 @@ def rung_jobs(shots, k=CAL_K, cal_rows=CAL_MEAS_ROWS, tail=CAL_SCIENCE_TAIL, chu
     return plan
 
 
-def rung_cost_s(shots):
+def rung_cost_s(shots, weather_rows=CAL_ROWS):
     """Priced per-rung cost (c5093 pricing model COST_S, per job): weather gate + every planned
     job. This is the REGISTERED figure the fit check tests, not the science alone."""
     plan = rung_jobs(shots)
-    # CAL_ROWS, not the dual-probe WEATHER_ROWS (C5101, @ember general#25994): this prices a SCIENCE
-    # rung, and --weather-identity/--weather-rows are REFUSED outside --weather-only, so on every path
-    # that reaches this function WEATHER_ROWS == CAL_ROWS by construction. Weather-only never calls it.
-    return COST_S(CAL_ROWS) + sum(COST_S(j["cal_rows"] + j["science_rows"]) for j in plan)
+    # weather_rows defaults to CAL_ROWS; callers pass the EFFECTIVE WEATHER_ROWS (C5101, @ember
+    # general#25994, @elder general#26004), so the priced figure and the enforcing fit read the rows
+    # that fly. On every science path the two are equal, because the measurement flags are refused
+    # outside --weather-only.
+    return COST_S(weather_rows) + sum(COST_S(j["cal_rows"] + j["science_rows"]) for j in plan)
 
 
 def collect(manifest_path):
@@ -749,7 +750,8 @@ def main():
                          "not against its name (see the C4273 note above ACCOUNTS)")
     ap.add_argument("--weather-identity", default="", metavar="I,J,...",
                     help="P1 DUAL-PROBE measurement (Whisper C5101): fly the weather probe with identity at "
-                         "these DECLARED positions (e.g. 3,7,11,15,19 -> w=15 at n=20). WEATHER-ONLY: refused "
+                         "these DECLARED 0-INDEXED positions (e.g. 3,7,11,15,19 = 1-indexed 4,8,12,16,20 -> w=15 at "
+                         "n=20). WEATHER-ONLY: refused "
                          "otherwise. Default: the registered full-weight probe, unchanged.")
     ap.add_argument("--weather-rows", type=int, default=None, metavar="N",
                     help="P1 DUAL-PROBE measurement: weather-probe rows (default CAL_ROWS=2000, the registered "
@@ -789,8 +791,8 @@ def main():
         plan = rung_jobs(shots)
         _plan = {"n": a.n, "copies": a.copies, "science_rows": shots, "weather_rows": WEATHER_ROWS,
                  "cal_k": CAL_K, "cal_meas_rows": CAL_MEAS_ROWS, "jobs": plan,
-                 "priced_rung_cost_s": round(rung_cost_s(shots), 1),
-                 "fit_at_1.5x_needs_live_s": round(rung_cost_s(shots) * 1.5, 1)}
+                 "priced_rung_cost_s": round(rung_cost_s(shots, WEATHER_ROWS), 1),
+                 "fit_at_1.5x_needs_live_s": round(rung_cost_s(shots, WEATHER_ROWS) * 1.5, 1)}
         if _measure:
             # P1 dual-probe (C5101, @elder general#25991): the $0 plan must show the DECLARED rows and
             # label for each probe, so a non-author checks them before anything is drawn.
@@ -1270,7 +1272,7 @@ def main():
     # does not clear the tank it must abort, never quietly fly a shorter ladder.
     u3 = svc.usage()
     T_flight, shots_flight, fit_s, fits, sizing = flight_budget(
-        a.n, a.delta, _eps, a.copies, u3["usage_remaining_seconds"])
+        a.n, a.delta, _eps, a.copies, u3["usage_remaining_seconds"], weather_rows=WEATHER_ROWS)
     print(f"  [G-EPOCH]  sized by {sizing} -> T = {T_flight:,.0f} copies "
           f"= {shots_flight:,} shots, est {fit_s:.0f}s vs {u3['usage_remaining_seconds']}s live")
     if not fits:
@@ -1329,7 +1331,7 @@ def main():
            "cal_scheme": "matched-weight rule (b) k=4 at the sealed w, independent supports, fresh stream "
                          "(c5093 item 1); abs-match ~35,457 shots (item 2); each block rides FIRST in its own job",
            "cal_meas_rows": CAL_MEAS_ROWS, "cal_P_public": cal_manifest,
-           "priced_rung_cost_s": round(rung_cost_s(shots), 1), "cost_model": "2.667 + 0.00167*rows per job",
+           "priced_rung_cost_s": round(rung_cost_s(shots, WEATHER_ROWS), 1), "cost_model": "2.667 + 0.00167*rows per job",
            "utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
     os.makedirs("results", exist_ok=True)
     out = f"results/doorb_flight_n{a.n}_{jobs[0]['job_id']}.json" if jobs else "results/doorb_flight_EMPTY.json"
