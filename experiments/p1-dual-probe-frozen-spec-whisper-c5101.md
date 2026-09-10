@@ -11,9 +11,12 @@ Binds the measurement registered in `experiments/p1-weather-gate-amendments-DRAF
 - **Creator GO**, verbatim, to the register seat's session, 2026-09-10: *"go ahead and fly P1's
   two-probe follow-up at 90% power"*. Single-use.
 - **(i) Threshold co-fixed at 3σ** — Elder (grader), general#25991. Register seat: Whisper.
-- **(ii) Non-author runner review** — Elder: **PASS at quantum@03d00f7** (general#26004). The delta to
-  the commit named in §7 is pending his confirmation. Ember reviews as runner at 09:00 ET.
-- **Submission by a NON-AUTHOR seat.** Whisper wrote the runner flags and does not submit.
+- **(ii) Non-author runner review** — Elder: **PASS at quantum@8260bf3d8 on all four findings**
+  (general#26012). He held (iii) on Ember's plan-key finding (general#26007/#26010), which is fixed at
+  the commit named in §7; that delta is pending his confirmation. Ember, as runner: review clean at
+  3dbc85e apart from that finding (general#26010).
+- **Submission by a NON-AUTHOR seat: Ember** (general#26007). Whisper wrote the runner flags and
+  Elder wrote the review, so neither submits; Ember wrote neither.
 
 ## 1. Probes, declared before data
 n = 20 · backend ibm_marrakesh · the SAME free account for both · the SAME `--max-2q-error`
@@ -26,7 +29,10 @@ n = 20 · backend ibm_marrakesh · the SAME free account for both · the SAME `-
 
 FIXED = FULL with identity at positions **{3, 7, 11, 15, 19}, 0-INDEXED** — the runner's validator
 accepts integers in [0, 20); **1-indexed, the same positions are {4, 8, 12, 16, 20}** (Elder, Finding A).
-The removed types are X, Y, Z, X, Y.
+The removed types are X, Y, Z, X, Y. **The kept set is perfectly balanced (X5 Y5 Z5). The whole
++3.3 pp Z residual comes from the FULL probe being X7 Y7 Z6; FIXED has no skew of its own** (Ember's
+stronger form, general#26007, adopted by Elder, general#26012). Three independent computations agree.
+Ember also reproduced the failure mode: read 1-indexed, {3, 7, 11, 15, 19} removes Z, X, Y, Z, X.
 **Declared residual composition shift (FIXED − FULL): X −1.7 pp, Y −1.7 pp, Z +3.3 pp** — Elder's
 Rider D; counts computed from the strings (this corrects the +5.0 pp Y / −3.3 pp Z in general#25991,
 which came from reading the positions 1-indexed — Elder withdrew those figures himself, general#26004). Δ therefore measures weight reduction **plus**
@@ -42,7 +48,12 @@ this declared shift, never weight alone.
 ## 2. Rows and cost
 **3,571 rows per probe** (the 90%-power row of §3). Runner cost model **COST_S = 2.667 + 0.00167·rows
 per job** (the 2.667 s is per job and is paid twice): **8.63 s per probe, 17.26 s the pair** (Elder,
-Finding B). This corrects the ~14.3 s linear extrapolation quoted to the Creator.
+Finding B). At the runner's 1.5× fit margin: **12.9 s per probe, 25.9 s the pair**. This corrects
+the ~14.3 s linear extrapolation quoted to the Creator.
+Under the measurement flags the $0 `--plan` prints only figures that describe what flies. It
+omits the science-rung keys (`cal_k`, `cal_meas_rows`, `jobs`, `priced_rung_cost_s`,
+`fit_at_1.5x_needs_live_s`) and lists them in `measure_omitted_keys` (Ember, general#26007). Those
+keys had priced four 8,865-row cal blocks at 117.8 s "fit" for a flight that is one 8.6 s job.
 Free accounts only; paid accounts are forbidden for this flight.
 
 ## 3. Statistic
@@ -80,13 +91,17 @@ A NOT MEASURED stands. Any further flight is a SEPARATELY REGISTERED experiment 
 its own GO. This pair's one-sided α = 0.00135 is not re-spent.
 
 ## 7. Runner and invocations
-`tools/doorb_flight_ember_c4262.py` at quantum@8260bf3d884a7dffe09d6b6af812627cbce23078 · sha256 `6707decf8161245dd30ea91522263056cbfcc18f99c548091ff5c57b817a5761`
+`tools/doorb_flight_ember_c4262.py` at quantum@37526959a54d4105e575d491b7363409a347dced · sha256 `10dcfceddb448b86e8dd47f5afe7ddf1c88a29bc70a80115fd75af8024224cfa`
 
     FULL : python3 tools/doorb_flight_ember_c4262.py --weather-only --n 20 --weather-rows 3571 --account <FREE> --freeze <DIGEST>
     FIXED: python3 tools/doorb_flight_ember_c4262.py --weather-only --n 20 --weather-rows 3571 --weather-identity 3,7,11,15,19 --account <FREE> --freeze <DIGEST>
 
 At flight time: `scripts/preflight_account_check.py` on the runner exits 0, and
-`tools/registry_fit_precheck.py --need 20 --venue ibm_marrakesh` is CLEAR on a FREE account.
+`tools/registry_fit_precheck.py --need 26 --venue ibm_marrakesh` is CLEAR on a FREE account.
+`--need` is in seconds (`registry_fit_precheck.py:48`), and both probes fly on one account, so it
+covers the pair at the 1.5× margin (25.9 s). An earlier draft said `--need 20`, which covered the pair
+at only 1.16×. Before submitting, the flyer runs both invocations with `--plan` added and checks label,
+w, rows and cost against §1–§2.
 
 ## 8. Reporting (§3c-1)
 Both ε_eff with SEs, Δ and σ(Δ), both job ids, the calibration stamp, submit and collect epochs,
