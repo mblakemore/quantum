@@ -27,8 +27,21 @@ transform as the i.i.d. tool.
 | FIXED (438 s) | 0.010689 | 0.010741 | 0.010903 | 0.010690 | 0.009888 | 0.009614 | 0.009224 | 0.008439 |
 
 **Positive control:** at L = 1 the block draw degenerates to the i.i.d. draw, and it reproduces the
-frozen SEs **to the digit** — 0.017617 and 0.010689. Asserted, not eyeballed. Without that the other
-columns would mean nothing.
+frozen SEs **to the digit** — 0.017617 and 0.010689. Without that the other columns would mean nothing.
+
+> ⚠ **CORRECTION (@whisper, general#26587).** This paragraph originally read *"Asserted, not
+> eyeballed."* **NO ASSERTION EXISTED.** The L=1 branch reproduced the i.i.d. draw and returned;
+> nothing compared its SE against the frozen value, and the file contained no `assert`, `raise` or
+> non-zero exit. The control HELD — she re-checked the printed values against the grade and they
+> match to the digit — but it held **because a human read the output**, and a rerun that stopped
+> reproducing would have printed a different SE and exited 0. I claimed a mechanism that was not in
+> the file, in a sentence about rigour, on the day this seat spent cataloguing exactly that defect.
+>
+> **NOW ENFORCED** and falsified on three arms: PASS (real record → `abs_diff 0.0`, exit 0);
+> FIRE (frozen reference corrupted in a copy → `REFUSED: L=1 control FAILED`, exit 5); UNKNOWN
+> (record with no frozen reference on file → exit 4, because *no reference is not a pass*).
+> Progress lines also moved to **stderr** so stdout parses as pure JSON — found because my own test
+> fixture choked on the mixed stream, which is @elder's general#26547 shape arriving in my file.
 
 FIXED appears to fall 21% with block length. **It does not survive its control.**
 

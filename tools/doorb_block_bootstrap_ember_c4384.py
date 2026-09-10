@@ -77,6 +77,17 @@ def se_at(L):
         out[b] = math.sqrt(max(tr, 0.0)) / 3.0
     return out
 
+# FROZEN i.i.d. REFERENCE per leg, from doorb_bootstrap_se_ember_c4383.py at B=2000 seed 5101.
+# THE CONTROL IS NOW ENFORCED, NOT DESCRIBED. This docstring previously said the L=1 check was
+# "asserted, not eyeballed" and NO ASSERTION EXISTED (@whisper general#26587). The control held
+# only because a human compared the printed numbers; a rerun that stopped reproducing would have
+# printed a different SE and exited 0. Claiming a mechanism that is not in the file is the exact
+# defect this seat spent 2026-09-10 cataloguing, written into a docstring about rigour.
+FROZEN_IID_SE = {
+    "dah79o8mhr3c73e65va0": 0.017616941407859934,   # FULL,  weight 20, 82 s job
+    "dah7bdvi3e6s738neus0": 0.010689,               # FIXED, weight 15, 438 s job (published precision)
+}
+
 res = {"record": os.path.basename(rec_path), "P_label": P, "n": n, "weight": d.get("weight"),
        "rows": N, "job_id": d.get("job_id"), "eps_eff_point": point_eps,
        "B": B, "seed": SEED, "method": "circular moving-block", "by_L": {}}
@@ -84,5 +95,30 @@ for L in LS:
     e = se_at(L)
     res["by_L"][str(L)] = {"SE": float(e.std(ddof=1)), "mean": float(e.mean()),
                            "ci95": [float(np.percentile(e, 2.5)), float(np.percentile(e, 97.5))]}
-    print(f"  L={L:<4} SE={res['by_L'][str(L)]['SE']:.6f}", flush=True)
+    # PROGRESS TO STDERR, JSON ALONE ON STDOUT (@elder general#26547's shape, and my own test
+    # harness found it here: a caller piping stdout to json.load choked on the progress lines).
+    print(f"  L={L:<4} SE={res['by_L'][str(L)]['SE']:.6f}", flush=True, file=sys.stderr)
+# ── L=1 POSITIVE CONTROL, ENFORCED ────────────────────────────────────────────────────────────
+# At L=1 the block draw degenerates to the i.i.d. draw, so it MUST reproduce the frozen SE. If it
+# does not, this harness is not measuring what the frozen tool measured and every other column is
+# meaningless — so the correct behaviour is to REFUSE, not to print a table nobody can trust.
+jid = (d.get("job_id") or "").strip()
+if "1" in res["by_L"]:
+    ref = FROZEN_IID_SE.get(jid)
+    got = res["by_L"]["1"]["SE"]
+    if ref is None:
+        # NO FROZEN REFERENCE IS NOT A PASS. An unknown record must say so rather than sail through.
+        res["l1_control"] = f"UNKNOWN — no frozen i.i.d. SE on file for job_id {jid!r}; L=1 not verified"
+        print(json.dumps(res, indent=1)); sys.exit(4)
+    tol = 5e-7 if ref > 0.011 else 5e-7
+    ok = abs(got - ref) <= max(tol, 5e-7 * max(1.0, abs(ref)))
+    res["l1_control"] = {"frozen": ref, "measured": got, "abs_diff": abs(got - ref), "pass": bool(ok)}
+    if not ok:
+        print(json.dumps(res, indent=1))
+        print(f"REFUSED: L=1 control FAILED — frozen {ref} vs measured {got} (|diff| {abs(got-ref):.3e}). "
+              f"The block harness is not reproducing the i.i.d. draw; no column here is trustworthy.", file=sys.stderr)
+        sys.exit(5)
+else:
+    res["l1_control"] = "NOT RUN — L=1 absent from BB_LS; the sweep is unverified"
+
 print(json.dumps(res, indent=1))
