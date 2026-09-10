@@ -624,7 +624,10 @@ def rung_cost_s(shots, weather_rows=CAL_ROWS):
     # weather_rows defaults to CAL_ROWS; callers pass the EFFECTIVE WEATHER_ROWS (C5101, @ember
     # general#25994, @elder general#26004), so the priced figure and the enforcing fit read the rows
     # that fly. On every science path the two are equal, because the measurement flags are refused
-    # outside --weather-only.
+    # outside --weather-only. WEATHER-ONLY NEVER PRICES A RUNG: the live path returns at the weather
+    # gate before flight_budget, and the --plan branch omits these keys under the measurement flags
+    # (@ember general#26007 — an earlier comment here said "weather-only never calls it", which I
+    # had read off the call graph without running --plan, where it did).
     return COST_S(weather_rows) + sum(COST_S(j["cal_rows"] + j["science_rows"]) for j in plan)
 
 
@@ -788,19 +791,27 @@ def main():
         # No service call, no seal read: the priced figure and the job shape, for a non-author
         # to check against the registration before anything is drawn.
         shots = math.ceil((a.copies or 0) / 2)
-        plan = rung_jobs(shots)
-        _plan = {"n": a.n, "copies": a.copies, "science_rows": shots, "weather_rows": WEATHER_ROWS,
-                 "cal_k": CAL_K, "cal_meas_rows": CAL_MEAS_ROWS, "jobs": plan,
-                 "priced_rung_cost_s": round(rung_cost_s(shots, WEATHER_ROWS), 1),
-                 "fit_at_1.5x_needs_live_s": round(rung_cost_s(shots, WEATHER_ROWS) * 1.5, 1)}
-        if _measure:
+        _plan = {"n": a.n, "copies": a.copies, "science_rows": shots, "weather_rows": WEATHER_ROWS}
+        if not _measure:
+            _plan.update({"cal_k": CAL_K, "cal_meas_rows": CAL_MEAS_ROWS, "jobs": rung_jobs(shots),
+                          "priced_rung_cost_s": round(rung_cost_s(shots, WEATHER_ROWS), 1),
+                          "fit_at_1.5x_needs_live_s": round(rung_cost_s(shots, WEATHER_ROWS) * 1.5, 1)})
+        else:
+            # NO SCIENCE-RUNG KEYS UNDER THE MEASUREMENT FLAGS (@ember general#26007/#26010). They
+            # priced four 8,865-row cal blocks (117.8 s "fit") on a plan whose flight is one 8.6 s
+            # job, and that number looked like the fit figure for the flight. The digest freezes this
+            # plan, so every figure in it must describe what flies. The omission is stated in the plan
+            # so it cannot be read as a missing field.
+            _plan["measure_omitted_keys"] = ["cal_k", "cal_meas_rows", "jobs", "priced_rung_cost_s",
+                                             "fit_at_1.5x_needs_live_s"]
             # P1 dual-probe (C5101, @elder general#25991): the $0 plan must show the DECLARED rows and
             # label for each probe, so a non-author checks them before anything is drawn.
             _plan.update({"measure_weather_P_public": weather_probe_label(a.n, _w_ident),
                           "measure_weather_weight": a.n - len(_w_ident),
                           "measure_weather_identity": _w_ident,
                           "measure_weather_rows": WEATHER_ROWS,
-                          "measure_weather_cost_s": round(COST_S(WEATHER_ROWS), 1)})
+                          "measure_weather_cost_s": round(COST_S(WEATHER_ROWS), 1),
+                          "measure_fit_at_1.5x_needs_live_s": round(COST_S(WEATHER_ROWS) * 1.5, 1)})
         print(json.dumps(_plan, indent=1))
         return 0
 
