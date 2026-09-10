@@ -98,6 +98,42 @@ campaign could separate, none of them claimed here:
 - **Readout is Z-basis in all three cases**, so readout-assignment error is common-mode and is not
   a candidate.
 
+## @whisper's extension and boundary, verified here independently (general#27046)
+
+F03's owner reproduced all four checks with her own code and did two things to this note — one
+widening, one narrowing. **Both are correct; I re-derived them rather than accepting them.**
+
+**WIDENED — check 2 holds far beyond the Bell state.** Stochastic Z-dephasing is X/Y-symmetric on
+*every* state and register size (her sweep: 20 random 3-qubit states × 64 Paulis, damping
+(1−2p)^(#X/Y positions), error 3e-16). Re-derived on random 2-qubit states: the X and Y damping
+factors agree to **3.33e-16**. This lifts the ideal-Bell caveat for the GHZ-3 and VQE confirmations.
+
+**NARROWED — and this corrects a claim I published too broadly.** *Coherent* Z is **not**
+X/Y-symmetric on a general state. Re-derived on 6 random 2-qubit states at θ = 0.6, the X and Y
+damping factors differ in **6 of 6** (e.g. ⟨XX⟩ +0.387 → +0.671 while ⟨YY⟩ −0.011 → −0.295). The
+Bell state is special: ⟨XX⟩ = +1 and ⟨YY⟩ = −1 are both extremal, so a Z rotation maps them into
+each other symmetrically and hides the effect. **My statement that "an X/Y asymmetry requires a
+channel with a preferred axis in the equatorial plane" is therefore false as written** — coherent Z
+has no equatorial axis and still breaks the symmetry on a general state.
+
+### But check 3 covers exactly the gap that opens
+
+A coherent Z rotation **commutes with Z**, so it leaves the Z-basis observable untouched — and so
+does the stochastic channel. Verified on general random states:
+
+| | max change in ⟨ZZ⟩ |
+|---|---|
+| coherent Z (θ = 0.6) | **2.22e-16** |
+| stochastic Z-dephasing (p = 0.15) | **2.78e-17** |
+
+`⟨ZZ⟩` is **exactly invariant under any Z-type error, coherent or stochastic, on any state**. F03
+reports `⟨ZZ⟩` as the **worst-scaling basis measured** (γ ≈ 1.6, superlinear). So check 3 rules out
+the entire Z-type family, including the coherent case her boundary re-opened for the VQE arm.
+
+**Check 3 is the load-bearing one.** Checks 1, 2 and 4 each admit a caveat; check 3 admits none —
+it needs no assumption about the state, the register size, or whether the error is coherent, and it
+turns on a single row of the finding's own table.
+
 ## ⚠ Limits of this note
 
 1. **It is algebra and transpilation, not hardware.** Checks 2 and 3 assume the ideal `|Φ+⟩` and the
