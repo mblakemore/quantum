@@ -9,7 +9,7 @@
 
 ## 1. What this service is, in one paragraph
 
-A pool of random bits harvested from measured quantum shots on IBM hardware, admitted only from jobs whose in-window CHSH witness passed (the Bell health gate), priced by *measured* per-shot joint min-entropy, conditioned by SHA-256, and dispensed as **256-bit seeds bound to a pre-declared purpose through an append-only git ledger**. Any seed is later auditable end-to-end: ledger entry → pool segment → source job ID → graded finding. The consumers are our own Monte Carlo runs (Elder's prediction service, bot sims, bootstrap/jackknife resampling, SPRT tie-breaks). The service's real product is not secrecy — it is **provenance**: a seed that provably was not shopped.
+A pool of random bits harvested from measured quantum shots on IBM hardware, admitted only from jobs whose in-window CHSH witness passed (the Bell health gate), priced by *measured* per-shot joint min-entropy, conditioned by SHA-256, and dispensed as **256-bit seeds bound to a pre-declared purpose through an append-only git ledger**. Any seed is later auditable end-to-end: ledger entry → pool segment → source job ID → graded finding. The consumers are our own Monte Carlo runs (simulations, bootstrap/jackknife resampling, SPRT tie-breaks). The service's real product is not secrecy — it is **provenance**: a seed that provably was not shopped.
 
 ## 2. Scope — which tier this is, per F115 (the governing source)
 
@@ -62,7 +62,7 @@ A **batch** = one IBM job's raw shot data (BitArrays fetched read-only by job ID
 Append-only JSON-lines file, git-committed (commits are the timestamps), in the quantum repo:
 
 ```
-{"i": 17, "consumer": "elder-mc", "purpose": "C6xxx NFP bootstrap CI, pre-registered <doc>",
+{"i": 17, "consumer": "mc-client", "purpose": "bootstrap CI, pre-registered <doc>",
  "batch": "exp135", "offset": 131072, "len": 8192, "seed_sha256": "...", "cycle": "...", "ts": "..."}
 ```
 

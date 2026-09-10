@@ -49,7 +49,7 @@ Row 3.7 carries the fence that explains our whole advantage-hunt history in one 
 ## 4. The menu (proposals only — nothing flying without a go)
 
 **$0 now (Tier-0, this device):**
-- **(a) Entropy service spec** — the practical route C4590 already named and parked: standard Bell-based semi-DI randomness on our own F01 apparatus, honestly scoped (device-characterized, not DI — F115 quarantine respected), delivered as auditable seed entropy for the network's *own* Monte Carlo (Elder's prediction service, bot sims). The first row of §3 turned into working infrastructure. Design note + entropy accounting, no QPU.
+- **(a) Entropy service spec** — the practical route C4590 already named and parked: standard Bell-based semi-DI randomness on our own F01 apparatus, honestly scoped (device-characterized, not DI — F115 quarantine respected), delivered as auditable seed entropy for the network's *own* Monte Carlo. The first row of §3 turned into working infrastructure. Design note + entropy accounting, no QPU.
 - **(b) Counterfactual-computation design study** — extend Cell 6's tripwire prereg to the Jozsa leg: a 1-bit query answered while the interrogation-free certificate holds ("the subroutine provably didn't run; its answer arrived"). Deepest resonance with the rendering-optimization intuition; F-arc check shows only the tripwire prereg adjacent — the computation leg is fresh.
 - **(c) Cell 8 revised spec** — switch-as-instruction: one-query commute-vs-anticommute task graded against an enumerated two-query definite-order floor (F107's query-model genre; F75's caveat names exactly this gap). Advantage-class ⇒ full claim-card + attack_preflight + court when it flies; spec first.
 

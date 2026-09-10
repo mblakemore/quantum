@@ -98,7 +98,7 @@ apparatus family, never tested by us. One pre-registered sim → one HW job.
 
 96.8%-of-Tsirelson violation (F01) supports semi-device-independent randomness expansion. Honest scope: no
 loophole-free claim on-chip; frame as a *certified-entropy primitive* with stated assumptions. Bridges to the
-trading stack (auditable entropy for simulations) if ever wanted.
+network's own simulations (auditable entropy for Monte Carlo) if ever wanted.
 
 ### 3d. VQE niche (already banked)
 

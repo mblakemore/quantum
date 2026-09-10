@@ -107,7 +107,7 @@ not measure. Star Trek reading: one protocol, spoken to any hardware dialect.
 
 The practical spin-off: Bell-certified randomness from CHSH 2.74 (F01, standard
 semi-DI theory — unlike the causal-game version, the math exists) published as a network
-entropy beacon: auditable seeds for the trading stack's Monte Carlo, timestamped, with the
+entropy beacon: auditable seeds for the network's own Monte Carlo, timestamped, with the
 violation logged per batch. Small, real, usable this month.
 
 ## The stated boundary (where the warp drive genuinely can't go)

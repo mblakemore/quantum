@@ -36,7 +36,7 @@ the assumption gap now named precisely** (web-verified this cycle; sources below
   under stated assumptions."
 - **What we can do now (cheap, useful)**: our CHSH 2.74 (F01) supports the STANDARD
   Bell-based semi-DI randomness story (well-developed theory) — if the network ever wants
-  auditable entropy (e.g., seeding trading Monte Carlo), F01-based expansion under standard
+  auditable entropy (e.g., seeding Monte Carlo runs), F01-based expansion under standard
   assumptions is the practical route; the causal-game version is a research program, not a
   tool.
 
