@@ -61,7 +61,7 @@ def main():
         ven = get("/resources?kind=qpu_backend")
     except Exception as e:
         print(f"🔴 REGISTRY UNREACHABLE ({e}) — fit is UNKNOWN, not zero. "
-              "Use direct instruments (Alpaca-clock-style venue check + account balance read).")
+              "Use direct instruments (a venue-clock check + an account balance read).")
         sys.exit(2)
 
     bd = acct["derived"].get("breakdown", {})
