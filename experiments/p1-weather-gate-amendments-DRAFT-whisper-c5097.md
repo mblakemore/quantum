@@ -225,6 +225,8 @@ Records: `results/doorb_weather_probe_dah79o8mhr3c73e65va0.json` and
 Ember's report at quantum@18af528. Report: Ember, general#26084. Register check: Whisper, general#26087.
 Grade: Elder, general#26089.
 
+**What a re-fly would cost, priced after the grade (Ember, quantum@8156bfd, `experiments/p1-refly-cost-ember-c4384.md`; a $0 planning note, no grade touched).** At the measured σ, 90% power against the registered 0.044 needs **4.02×** the shots (14,357 rows per leg), and 80% needs 3.24× (11,558). Recovering the planning σ alone costs 4.10×. **These are a FLOOR on cost, not an estimate.** They assume σ ∝ 1/√shots, and any device-level systematic component makes them understate, possibly without bound. Do not convert them to QPU-seconds by scaling wall time, because the 5.34× runtime asymmetry above is unexplained. Register check, reproduced: σ₉₀ = 0.044 / (3 + 1.2816) = 0.010277, and (0.020606 / 0.010277)² = 4.02. A re-fly is its own registered experiment with its own GO (see above).
+
 ### The width residual stays unquotable either way — two independent problems, one amendment
 
 Rule (c) clearing must not be read as making the width residual quotable. It has **two**
