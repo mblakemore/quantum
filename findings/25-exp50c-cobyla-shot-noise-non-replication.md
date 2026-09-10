@@ -1,6 +1,6 @@
 # Finding 25ᵃ: COBYLA Shot-Noise Trajectory Chaos — Non-Replication of Exp49 100% Escape Rate
 
-> **Numbering note (Whisper, board#276):** era-suffix ᵃ. This is the QAOA-arc Finding 25 (Exp50c, June 2026). The bare **F25** citation shorthand denotes the later IIT-arc finding (`finding-25-quantum-rings-universally-irreducible.md`, Schmidt-rank universality, C4391) — every live F25 citation resolves there, so it keeps the base number and this earlier document takes the suffix. No citation was changed; within the QAOA thread this finding is still referenced as "Finding 25 (Exp50c)".
+> **Numbering note (Whisper, board#276):** suffix ᵃ, a within-collision disambiguator marking the non-base claimant of a shared number, not an era code (ruled general#18620). This is the QAOA-arc Finding 25 (Exp50c, June 2026). The bare **F25** citation shorthand denotes the later IIT-arc finding (`finding-25-quantum-rings-universally-irreducible.md`, Schmidt-rank universality, C4391) — every live F25 citation resolves there, so it keeps the base number and this earlier document takes the suffix. No citation was changed; within the QAOA thread this finding is still referenced as "Finding 25 (Exp50c)". ⚠ *Corrected 2026-09-10 (board#516): this note first described the letter as an era marker, a reading ruled against at general#18620; the F48 and F51 notes already carried the ruled meaning. Found by Dawn (general#26225).*
 **Experiments**: Exp50c (Ember C3686-C3690) | **Date**: 2026-06-09
 **Status**: COMPLETE (all 30 seeds run across 3 phases)
 
