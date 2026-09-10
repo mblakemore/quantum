@@ -479,9 +479,10 @@ def weather_job_times(wjob):
     """P1 dual-probe (C5101, @elder general#26030): when the job was SUBMITTED and when it RAN, so the
     pair's adjacency can be graded from the records. collected_utc only says when the flyer READ the
     job, and §1b allows a re-read up to 60 min later. Both reads go through the job's OWN client (the
-    account that submitted it). This runs AFTER the spend and BEFORE the record is dumped, so it must
-    never cost the record: every failure is written as UNREADABLE (type name only, no message), and
-    the timestamps are forced JSON-safe."""
+    account that submitted it). The caller writes the record FIRST and calls this afterwards, because
+    these are service calls with no timeout (@elder general#26040): a hang leaves PENDING fields in a
+    complete record, never a lost leg. Every failure is written as UNREADABLE (type name only, no
+    message), and the timestamps are forced JSON-safe."""
     out = {}
     try:
         _cd = wjob.creation_date
@@ -1263,20 +1264,29 @@ def main():
                             "rule": "PASS iff matched > 0 and |cross| < 0.5*|matched|", "passed": _lc_ok}
             print(f"  [{'PASS' if _lc_ok else 'FAIL'}] LABEL-CHECK matched tr^2 {_sq:+.4f} vs full-weight-label "
                   f"tr^2 {_sq_cross:+.4f}" + ("" if _lc_ok else "  ⚠ LABEL DID NOT REACH THE DRAW -> NOT MEASURED"))
-        _jt = weather_job_times(wjob)
         _rec = {"mode": "p1-dual-probe-measurement", "n": a.n, "P_label": P_cal, "label_check": _label_check,
                 "weight": a.n - len(_w_ident), "identity_positions": _w_ident, "rows": WEATHER_ROWS,
                 "tr_sq": _sq, "eps_eff": _eps, "eps_min_gate": EPS_MIN, "gate_cleared": _eps >= EPS_MIN,
                 "job_id": wjob.job_id(), "backend": EXPECTED_BACKEND, "account": a.account,
                 "calibration_stamp": calibration_stamp, "layout": _layout,
                 "collected_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-                "job_created_utc": _jt["job_created_utc"], "job_timestamps": _jt["job_timestamps"],
+                "job_created_utc": "PENDING — timing read not completed",
+                "job_timestamps": "PENDING — timing read not completed",
                 "weather_reuse": weather_reuse, "raws": _raws,
                 "registration": "experiments/p1-weather-gate-amendments-DRAFT-whisper-c5097.md §3b/§3c",
                 "freeze": a.freeze or None}
         _rp = f"results/doorb_weather_probe_{wjob.job_id()}.json"
         json.dump(_rec, open(_rp, "w"), indent=1)
         print(f"  [MEASURE] record + {len(_raws):,} raw rows persisted -> {_rp}")
+        # TIMING AFTER THE DURABLE WRITE (@elder general#26040). weather_job_times makes service calls with no
+        # timeout, after the spend. Called before the dump, a hang lost the whole leg. Called here, a hang
+        # leaves a complete record whose timing fields read PENDING. The rewrite goes through a temp file and
+        # os.replace, so a crash during it cannot truncate the record already on disk.
+        _rec.update(weather_job_times(wjob))
+        with open(_rp + ".tmp", "w") as _fh:
+            json.dump(_rec, _fh, indent=1)
+        os.replace(_rp + ".tmp", _rp)
+        print(f"  [MEASURE] timing added: created {_rec['job_created_utc']} -> {_rp}")
     if _eps < EPS_MIN:
         print(f"  [HALT] G-WEATHER: eps_eff {_eps:.4f} < {EPS_MIN} — the device is not in a "
               f"claimable epoch. Calibration-only cost spent; the seal is UNSPENT and the "
