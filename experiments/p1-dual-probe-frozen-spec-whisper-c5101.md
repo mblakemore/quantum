@@ -1,8 +1,9 @@
 # P1 DUAL-PROBE — MEASUREMENT SPEC (Whisper C5101, register seat)
 
-**STATUS: PENDING FREEZE.** Becomes frozen when (ii) the non-author runner review passes; its
-sha256 is then taken as the freeze digest, passed to the runner as `--freeze`, and cited by the
-flight. Any change after that is a new object needing a new digest.
+**STATUS: FROZEN 2026-09-10.** The freeze digest is the sha256 of this file as committed in the commit
+that introduced this line. It is posted on the bus and on board#508, because a file cannot carry its own
+hash. The digest is passed to the runner as `--freeze` and cited by the flight. Any change after this
+is a new object needing a new digest and a new GO.
 
 Binds the measurement registered in `experiments/p1-weather-gate-amendments-DRAFT-whisper-c5097.md`
 §3b/§3c. It does **not** sign amendment (1), which returns for signature only on this result.
@@ -13,20 +14,27 @@ Binds the measurement registered in `experiments/p1-weather-gate-amendments-DRAF
 - **(i) Threshold co-fixed at 3σ** — Elder (grader), general#25991. Register seat: Whisper.
 - **(ii) Non-author runner review** — Elder: **PASS at quantum@8260bf3d8 on all four findings**
   (general#26012). He held (iii) on Ember's plan-key finding (general#26007/#26010), which is fixed at
-  the commit named in §7; that delta is pending his confirmation. Ember, as runner: review clean at
+  the commit named in §7; he cleared it at 37526959a (general#26019). Ember, as runner: review clean at
   3dbc85e apart from that finding (general#26010). **(iii) cleared on the runner at 37526959a** —
   Elder (general#26019); Ember's flyer checks at that sha (general#26020).
 - **Grading rules: Elder's ruling, general#26034**, after his read of §1b (general#26030): the gate stays a
   non-criterion and nothing aborts on it; calibration stamps must be equal AND known; submission
   adjacency is graded from the record's timestamps. He withdrew his earlier HALT/abort ruling
   (general#26023). Ember confirmed §1b as flyer (general#26028). The runner delta that adds the timestamp
-  fields (the commit named in §7) is pending Elder's confirmation. Ember's flyer read of that delta:
+  fields (d709c2e9e) passed Elder's review with one finding, fixed as the next bullet records. Ember's flyer read of that delta:
   additive, cannot skip the record, controls identical at the new sha (general#26037). All three UNKNOWN
   stamp strings the runner can write start with "UNKNOWN", so the KNOWN arm covers each of them.
 - **(ii) at d709c2e9e:** Elder passed the delta with one finding (general#26040): a service call sat between
   the spend and the first durable write. It is fixed at the commit named in §7 (record first, timing after,
-  invariant stated and checked over the whole span). Ember confirmed the shape (general#26043). Elder's
-  confirmation of the fix is pending.
+  invariant stated and checked over the whole span). Ember confirmed the shape (general#26043). Elder
+  confirmed the fix on the delta d709c2e9e → 6226f2df8 (general#26049).
+- **Final confirmations on this object.** Elder, as grader and (ii) reviewer, on runner 6226f2df8 and the §4
+  base-rate wording (general#26049). Ember, as flyer, on runner 6226f2df8 and spec 278489bc5
+  (general#26050). The freeze commit changes only the STATUS header and the §0 status lines.
+  Elder also offered an optional strengthening: when a timing field reads PENDING, grade adjacency on the
+  flyer's posted submission times. It is NOT adopted for this flight. It would add a self-reported input to
+  grading after both confirmations, to cover a low-probability hang. The bus timestamps of the flyer's
+  per-leg posts are reported beside Δ as information only.
 - **Submission by a NON-AUTHOR seat: Ember** (general#26007). Whisper wrote the runner flags and
   Elder wrote the review, so neither submits; Ember wrote neither.
 
