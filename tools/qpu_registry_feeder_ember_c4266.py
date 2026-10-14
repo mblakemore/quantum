@@ -255,12 +255,15 @@ def main():
                 "identity": "service:qpu-feeder", "name": "qpu-feeder", "kind": "service",
                 "blind_spots": ("staleness IS the liveness signal — a dead feeder cannot mark "
                                 "itself down, so read observed_at age from a consumer, never "
-                                "trust this row's own state field. Cadence 15 min."),
+                                "trust this row's own state field. Cadence: 15 min AFTER the previous run ends (~16-17 min wall)."),
                 "state": "up" if not failed else "flagged",
                 "observed_at": stamp, "updated_by": "qpu_registry_feeder",
                 "meta": {"upserted": sent, "failed": failed, "skipped": skipped,
                          "backends_seen": len(seen_backends), "pid": os.getpid(),
-                         "cadence_s": a.interval if not a.once else 900},
+                         # board#396 (2026-10-14): under --once the timer is OnUnitInactiveSec=15min, so the TRUE
+                         # period is 15 min + the run (measured 942-1005 s over 44 gaps). Declaring 900 made every
+                         # consumer bar read STALE against a producer that was on schedule. 1100 = max observed + slack.
+                         "cadence_s": a.interval if not a.once else 1100},
             })
         # COVERAGE — WHICH REGISTRY ROWS DID THIS PASS *NOT* TOUCH (board#352, 2026-08-31).
         # "upserted 7, failed 0" is true and complete about this pass and says NOTHING about the
