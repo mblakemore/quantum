@@ -57,6 +57,51 @@ def targets():
     return seen
 
 
+def extract_sets(pubs):
+    """board#174: the two extraction paths, as a PURE function of the job's input pubs so it can be tested
+    without a provider. Returns (used, measured).
+
+    The provider's job.inputs["pubs"] holds the circuits that were SUBMITTED, so a locally transpiled
+    circuit is the same object this function reads in production (measured 2026-10-15 on three reachable
+    jobs: every input pub carried layout.final_index_layout and measure instructions).
+
+    PATH 1 -- final_index_layout: the TOUCHED set (routing + idling included).
+    PATH 2 -- MEASURE INSTRUCTIONS: the MEASURED set, the qubits carrying classical bits. Spec READ from the
+    artifacts by Whisper (general#17332): "layout if present, ELSE measure instructions across ALL pubs".
+    A circuit shape that cannot be walked is UNKNOWN, never "no measures".
+    """
+    used, measured = set(), set()
+    try:
+        for pub in pubs:
+            qc = pub[0] if isinstance(pub, (list, tuple)) else pub
+            lay = getattr(getattr(qc, "layout", None), "final_index_layout", None)
+            if callable(lay):
+                used.update(lay())
+            try:
+                for inst in (getattr(qc, "data", None) or []):
+                    op = getattr(inst, "operation", None) or getattr(inst, "op", None)
+                    if getattr(op, "name", None) != "measure":
+                        continue
+                    for q in (getattr(inst, "qubits", None) or []):
+                        if hasattr(qc, "find_bit"):
+                            measured.add(qc.find_bit(q).index)
+            except Exception:
+                pass    # a circuit shape we cannot walk is UNKNOWN, never "no measures"
+    except Exception:
+        pass
+    return used, measured
+
+
+def recoverability(used, measured):
+    """A vs B (board#174): only BOTH-empty is unrecoverable. One path returning nothing is a fact about
+    the path, not about the data."""
+    if not used and not measured:
+        return "UNEVALUABLE — both paths empty across all pubs"
+    if not used:
+        return "RECOVERED via measure instructions (layout absent)"
+    return "layout present"
+
+
 def rescue_one(svc, acct, jid):
     rec = {"account": acct}
     j = svc.job(jid)
@@ -89,47 +134,13 @@ def rescue_one(svc, acct, jid):
     if ro:
         rec["device_readout"] = {"median": st.median(ro), "mean": st.mean(ro), "max": max(ro)}
     # THE FIELD F106 PROVED LOAD-BEARING: the qubits the job actually ran on.
-    used = set()
-    measured = set()
-    try:
-        for pub in (j.inputs.get("pubs") or []):
-            qc = pub[0] if isinstance(pub, (list, tuple)) else pub
-            # PATH 1 — final_index_layout: the TOUCHED set (routing + idling included).
-            lay = getattr(getattr(qc, "layout", None), "final_index_layout", None)
-            if callable(lay):
-                used.update(lay())
-            # PATH 2 — MEASURE INSTRUCTIONS: the MEASURED set, the qubits carrying classical
-            # bits. Built for board#174; spec READ from the artifacts by Whisper (general#17332)
-            # rather than recalled: "layout if present, ELSE measure instructions across ALL pubs".
-            #
-            # Until now this existed only as the SET_WARNING string below, which has been telling
-            # readers to recover the measured set from measure instructions while nothing did it.
-            # A warning that names the work is not the work, and in a census the two look alike.
-            #
-            # WHY IT MATTERS FOR UNEVALUABLE: an absent layout made a window look unrecoverable
-            # while the measured set sat on disk. Declaring a window unrecoverable is only honest
-            # once BOTH paths return empty across ALL pubs — one path returning nothing is a fact
-            # about the path, not about the data.
-            try:
-                for inst in (getattr(qc, "data", None) or []):
-                    op = getattr(inst, "operation", None) or getattr(inst, "op", None)
-                    if getattr(op, "name", None) != "measure":
-                        continue
-                    for q in (getattr(inst, "qubits", None) or []):
-                        if hasattr(qc, "find_bit"):
-                            measured.add(qc.find_bit(q).index)
-            except Exception:
-                pass    # a circuit shape we cannot walk is UNKNOWN, never "no measures"
+    try:                                   # as before the refactor: an unreadable inputs object is an
+        pubs = j.inputs.get("pubs") or []  # empty window, never a crash of the whole rescue
     except Exception:
-        pass
+        pubs = []
+    used, measured = extract_sets(pubs)
     rec["measured_qubits"] = sorted(measured)
-    # A vs B (board#174): only BOTH-empty is unrecoverable.
-    if not used and not measured:
-        rec["window_recoverability"] = "UNEVALUABLE — both paths empty across all pubs"
-    elif not used:
-        rec["window_recoverability"] = "RECOVERED via measure instructions (layout absent)"
-    else:
-        rec["window_recoverability"] = "layout present"
+    rec["window_recoverability"] = recoverability(used, measured)
     if used:
         vals = []
         for q in sorted(used):
@@ -268,5 +279,45 @@ def main():
           flush=True)
 
 
+def selftest():
+    """board#174 fixture: the A/B gate on LOCALLY TRANSPILED circuits. job.inputs["pubs"] holds the submitted
+    circuits, so these are the same objects extract_sets reads in production; no provider call, no QPU time."""
+    from qiskit import QuantumCircuit, transpile
+    from qiskit.providers.fake_provider import GenericBackendV2
+    be = GenericBackendV2(num_qubits=8, seed=1)
+    def bell(meas=True):
+        qc = QuantumCircuit(2, 2); qc.h(0); qc.cx(0, 1)
+        if meas: qc.measure([0, 1], [0, 1])
+        return qc
+    cases, ok = [], 0
+    # A, routed: the layout path decides; the measured set is the two physical qubits chosen.
+    routed = transpile(bell(), be, initial_layout=[5, 7], optimization_level=0, seed_transpiler=1)
+    u, m = extract_sets([routed]); v = recoverability(u, m)
+    cases.append(("A routed: layout present, measured = {5,7}", v == "layout present" and m == {5, 7} and {5, 7} <= u))
+    # A, identity over the FULL WIDTH (the kingston shape: a circuit submitted already full-width, so path 1
+    # returns the whole chip and only path 2 names the qubits that matter). final_index_layout lists the
+    # circuit's own virtual qubits, so the fixture must be full-width; a 2-qubit circuit would return 2.
+    full = QuantumCircuit(8, 2); full.h(0); full.cx(0, 1); full.measure([0, 1], [0, 1])
+    ident = transpile(full, be, initial_layout=list(range(8)), optimization_level=0, seed_transpiler=1)
+    u, m = extract_sets([(ident, None)])           # pub given as a (circuit, params) tuple
+    v = recoverability(u, m)
+    cases.append(("A identity full-width: layout covers all 8, measured = {0,1}", v == "layout present" and u == set(range(8)) and m == {0, 1}))
+    # B: no layout (untranspiled), measures present -> recovered by path 2, NOT unevaluable.
+    u, m = extract_sets([bell()]); v = recoverability(u, m)
+    cases.append(("B no layout + measures: RECOVERED via measure instructions", u == set() and m == {0, 1} and v.startswith("RECOVERED")))
+    # Both empty across ALL pubs -> the only UNEVALUABLE case. Two pubs, so "all" is exercised.
+    u, m = extract_sets([bell(meas=False), (bell(meas=False), None)]); v = recoverability(u, m)
+    cases.append(("neither path, two pubs: UNEVALUABLE", v.startswith("UNEVALUABLE")))
+    # Mixed: one pub with only measures + one empty pub -> recovered (a single empty pub never decides).
+    u, m = extract_sets([bell(meas=False), bell()]); v = recoverability(u, m)
+    cases.append(("mixed pubs, measures in one: RECOVERED", v.startswith("RECOVERED") and m == {0, 1}))
+    for name, cond in cases:
+        print(("PASS " if cond else "FAIL ") + name); ok += bool(cond)
+    print(f"window_rescue selftest: {ok}/{len(cases)} passed")
+    return 0 if ok == len(cases) else 1
+
+
 if __name__ == "__main__":
+    if "--selftest" in sys.argv:
+        sys.exit(selftest())
     main()
